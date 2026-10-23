@@ -7,17 +7,7 @@ import { ThemeService } from './theme-service';
 @Component({
   selector: 'ss-theme-toggle',
   imports: [MatIconButton, MatIcon],
-  template: `
-    <button
-      matIconButton
-      type="button"
-      aria-label="Dark theme"
-      [attr.aria-pressed]="isDark()"
-      (click)="toggle()"
-    >
-      <mat-icon>{{ isDark() ? 'dark_mode' : 'light_mode' }}</mat-icon>
-    </button>
-  `,
+  templateUrl: './theme-toggle.html',
 })
 export class ThemeToggle {
   private readonly themeService = inject(ThemeService);

@@ -1095,7 +1095,7 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
   ```scss
   :root {                                   /* light */
     --ss-accent: #6E062E;                   /* unchanged: buttons, active nav, logo pill */
-    --ss-accent-hover: #8A0B3D;
+    --ss-accent-hover: oklch(from var(--ss-accent) calc(l + 0.06) c h);  /* derived */
     --ss-accent-text: var(--ss-accent);     /* accent as TEXT/underline (12:1 on white) */
     --ss-on-accent: #FFFFFF;
     --ss-text: #111111;  --ss-text-muted: #5F5F5F;
@@ -1111,23 +1111,24 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
     --rank-unwanted:  #FF1A1A;  --rank-unwanted-text:  #C40000;
     --rank-none:      #BDBDBD;  --rank-none-text:      #6B6B6B;
 
-    --budget-ok: #2EE62E;  --budget-warn: #FFB200;  --budget-over: #FF1A1A;  --budget-track: #BDBDBD;
+    --budget-ok: var(--rank-wanted);  --budget-warn: var(--rank-sometimes);  --budget-over: var(--rank-unwanted);  --budget-track: var(--rank-none);
   }
   [data-theme='dark'] {
-    --ss-accent: #6E062E;  --ss-accent-hover: #8A0B3D;
-    --ss-accent-text: #FF7FAF;              /* accent as TEXT/underline on dark, since #6E062E is too dark there */
+    --ss-accent-text: oklch(from var(--ss-accent) 0.76 calc(c * 1.15) h);  /* ≈ #FF83A0: readable on dark, follows the accent hue */
     --ss-text: #F2F2F2;  --ss-text-muted: #A8A8A8;
     --ss-sidebar-bg: #000000;  --ss-app-bg: #2B2B2B;  --ss-card-bg: #3A3A3A;  --ss-divider: #393939;
     /* text shades = vivid fills on dark, lightened where needed to reach 4.5:1 on dark cards */
     --rank-essential-text: #DF7DFF;  --rank-needed-text: #00EAFF;  --rank-wanted-text: #5CFF5C;
-    --rank-uses-text: #FFF000;  --rank-sometimes-text: #FFB200;  --rank-unused-text: #FF8C33;
+    --rank-uses-text: #FFF000;  --rank-sometimes-text: var(--rank-sometimes);  --rank-unused-text: #FF8C33;
     --rank-unwanted-text: #FF7E7E;  --rank-none-text: #A5A5A5;
-    /* --ss-on-accent, the vivid rank fills and the budget colours are inherited from :root on purpose */
+    /* the accent fill, --ss-on-accent, the vivid rank fills and the budget colours are inherited from :root on purpose */
   }
   ```
   **Contrast (checked in M0.4, WCAG 2 ratios).** Body, muted and accent text pass AA on every background in both
   themes, as do white on the accent and the `#111` label on every budget fill. Three dark rank text shades failed
   on dark cards (essential 3.95, unwanted 3.76, none 4.25) and were lightened to the values above (about 4.6:1).
+  The derived accent shades were rechecked when they replaced the hex values: the dark accent text is 4.9:1 on
+  dark cards and 9:1 on the sidebar, and the hover keeps the old value's 9.6:1 on white.
   Usage rules that follow from the check:
   - Light rank **text** shades reach 4.5:1 on white cards but not on the grey app background (4.2–4.5), so put
     rank text on cards.
@@ -1470,6 +1471,7 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 - `resource` / `httpResource` for fetching, and `@defer` for heavy widgets (XLSX export, the year calendar).
 - **Signal Forms** for every form (they're stable in v22).
 - New singleton services in `core/` use the `@Service()` decorator.
+- Templates and styles live in their own `.html` and `.scss` files, never inline, even for small components.
 - Components stay thin: business logic belongs in `packages/core`, as pure functions that take `today` as a parameter.
 
 ### 13.2 Naming & style

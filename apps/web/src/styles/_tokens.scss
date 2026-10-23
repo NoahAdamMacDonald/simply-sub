@@ -1,10 +1,13 @@
 // Design tokens (BLUEPRINT §8.1, PROJECT-PLAN §4.1). Every colour in the app comes from here:
 // this is the only file allowed to contain hex values (Stylelint color-no-hex enforces it).
 // ThemeService sets data-theme="dark" on <html> for dark mode.
+//
+// Base colours are hex values; everything that is "a version of" another colour is derived from it,
+// so changing a base colour updates its family. Contrast was checked for the derived values too.
 
 :root {
   --ss-accent: #6e062e; // buttons, active nav, logo pill
-  --ss-accent-hover: #8a0b3d;
+  --ss-accent-hover: oklch(from var(--ss-accent) calc(l + 0.06) c h);
   --ss-accent-text: var(--ss-accent); // accent used as text or an underline
   --ss-on-accent: #ffffff;
   --ss-text: #111111;
@@ -14,7 +17,8 @@
   --ss-card-bg: #ffffff;
   --ss-divider: #d0d0d0;
 
-  // Each rank has a vivid fill (dots, chips, bars) and a text shade (≥ 4.5:1 on white cards).
+  // Each rank has a vivid fill (dots, chips, bars) and a text shade (≥ 4.5:1 on white cards). The
+  // text shades are tuned one by one for contrast, so they stay hex values rather than a formula.
   --rank-essential: #cc00ff;
   --rank-essential-text: #9b00c2;
   --rank-needed: #00d5ea;
@@ -32,12 +36,11 @@
   --rank-none: #bdbdbd;
   --rank-none-text: #6b6b6b;
 
-  --budget-ok: #2ee62e;
-  --budget-warn: #ffb200;
-  --budget-over: #ff1a1a;
-  --budget-track: #bdbdbd;
-
   // Aliases of the rank tokens, so both themes get them.
+  --budget-ok: var(--rank-wanted);
+  --budget-warn: var(--rank-sometimes);
+  --budget-over: var(--rank-unwanted);
+  --budget-track: var(--rank-none);
   --status-active: var(--rank-wanted-text);
   --status-inactive: var(--rank-sometimes-text);
   --status-none: var(--rank-none-text);
@@ -50,12 +53,12 @@
   --ss-font: 'Inter', system-ui, sans-serif;
 }
 
-// Dark mode inherits --ss-on-accent, the vivid rank fills and the budget colours on purpose:
-// the accent fill doesn't change, and the vivid colours read well on dark backgrounds.
+// Dark mode inherits the accent, --ss-on-accent, the vivid rank fills and the budget colours on
+// purpose: the accent fill doesn't change, and the vivid colours read well on dark backgrounds.
 [data-theme='dark'] {
-  --ss-accent: #6e062e;
-  --ss-accent-hover: #8a0b3d;
-  --ss-accent-text: #ff7faf; // the accent itself is too dark to read on dark backgrounds
+  // The accent itself is too dark to read on dark backgrounds. A fixed lightness keeps this shade
+  // readable whatever the accent's hue (about 4.9:1 on dark cards, 9:1 on the sidebar).
+  --ss-accent-text: oklch(from var(--ss-accent) 0.76 calc(c * 1.15) h);
   --ss-text: #f2f2f2;
   --ss-text-muted: #a8a8a8;
   --ss-sidebar-bg: #000000;
@@ -68,7 +71,7 @@
   --rank-needed-text: #00eaff;
   --rank-wanted-text: #5cff5c;
   --rank-uses-text: #fff000;
-  --rank-sometimes-text: #ffb200;
+  --rank-sometimes-text: var(--rank-sometimes); // the vivid fill already reaches 4.5:1
   --rank-unused-text: #ff8c33;
   --rank-unwanted-text: #ff7e7e;
   --rank-none-text: #a5a5a5;

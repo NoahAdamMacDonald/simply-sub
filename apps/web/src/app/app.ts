@@ -4,6 +4,6 @@ import { Shell } from './layout/shell';
 @Component({
   selector: 'ss-root',
   imports: [Shell],
-  template: '<ss-shell />',
+  templateUrl: './app.html',
 })
 export class App {}

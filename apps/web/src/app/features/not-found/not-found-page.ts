@@ -6,20 +6,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'ss-not-found-page',
   imports: [MatButton, RouterLink],
-  template: `
-    <h1>Page not found</h1>
-    <p>The address may be mistyped, or the page may have moved.</p>
-    <div class="actions">
-      <a matButton="filled" routerLink="/">Home</a>
-      <a matButton="outlined" routerLink="/lists">Lists</a>
-    </div>
-  `,
-  styles: `
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-  `,
+  templateUrl: './not-found-page.html',
+  styleUrl: './not-found-page.scss',
 })
 export class NotFoundPage {}
