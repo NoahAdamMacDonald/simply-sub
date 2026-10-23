@@ -1,8 +1,8 @@
 id: bundle.disney-crave-premium
 name: Disney+ and Crave Premium Bundle
-soldBy: disney-plus
+soldBy: crave
 includes: [disney-plus.premium, crave.premium]
-link: https://www.disneyplus.com/en-ca
+link: https://www.crave.ca/en/disneypluscravebundle
 prices:
   - region: CA
     currency: CAD
@@ -11,4 +11,4 @@ prices:
     intervalCount: 1
     autoRenew: true
     lastVerified: 2026-10-23
-    sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+    sourceUrl: https://www.crave.ca/en/disneypluscravebundle

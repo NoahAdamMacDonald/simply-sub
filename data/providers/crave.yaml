@@ -35,6 +35,7 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://www.crave.ca/en/subscribe
+    addOnIds: [crave.starz]
 
   - id: crave.premium
     name: Premium
@@ -77,4 +78,4 @@ addOns:
         intervalCount: 1
         autoRenew: true
         lastVerified: 2026-10-23
-        sourceUrl: https://www.crave.ca/en/subscribe
+        sourceUrl: https://www.starz.ca

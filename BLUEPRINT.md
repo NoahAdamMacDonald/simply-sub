@@ -517,9 +517,9 @@ rules, in the task that first needs it.
 ```yaml
 id: bundle.disney-crave-premium      # always bundle.<slug>, so it can't clash with a provider or plan id
 name: Disney+ and Crave Premium Bundle
-soldBy: disney-plus                  # the provider id of who sells the bundle
+soldBy: crave                        # the provider id of who sells the bundle
 includes: [disney-plus.premium, crave.premium]   # plan ids, at least two
-link: https://www.disneyplus.com/en-ca
+link: https://www.crave.ca/en/disneypluscravebundle
 prices:
   - region: CA
     currency: CAD
@@ -528,7 +528,7 @@ prices:
     intervalCount: 1
     autoRenew: true
     lastVerified: 2026-10-23
-    sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+    sourceUrl: https://www.crave.ca/en/disneypluscravebundle
 # Features = union of the included plans' features (computed)
 # Savings  = sum of the included plans' prices − bundle price (computed per region/interval)
 ```
@@ -1713,6 +1713,11 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 1. **Workflows free-tier limits**: confirm at setup time (section 7.1).
+2. **Buyer-chosen charge currency** (decide in M9): some providers let the buyer pick the currency they're charged
+   in. Proton sells fixed price lists in USD, CAD, EUR and CHF (stored as `GLOBAL` prices in each currency, with
+   `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
+   about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
+   M9's FX-fee maths has to decide how to treat both cases (section 9.3).
 
 **Resolved (2026-10-23)**
 - All-in-one plans such as Proton Unlimited, Duo and Family are **suite plans**, not bundles. They state their

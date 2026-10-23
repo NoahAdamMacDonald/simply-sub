@@ -11,7 +11,8 @@ notes: >-
   One Proton account holds one paid plan. Every plan keeps the free tier of the Proton apps it doesn't upgrade.
 
 # Unlimited, Duo and Family are suite plans: they state their own features, and includes-subscription lists the
-# plans they replace (BLUEPRINT §4.4). Prices are the regular ones, not first-term offers.
+# plans they replace (BLUEPRINT §4.4). Prices are the regular ones, not first-term offers. Proton sells every paid
+# plan in USD, CAD, EUR and CHF: a buyer pays in the currency they pick, and billingCurrency covers everyone else.
 plans:
   - id: proton.free
     name: Proton Free
@@ -75,7 +76,55 @@ plans:
         intervalCount: 1
         autoRenew: true
         lastVerified: 2026-10-23
-        sourceUrl: https://proton.me/mail/pricing
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 6.24
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 59.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 47.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 47.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
 
   - id: proton.drive-plus
     name: Drive Plus
@@ -102,7 +151,63 @@ plans:
         intervalCount: 1
         autoRenew: true
         lastVerified: 2026-10-23
-        sourceUrl: https://proton.me/drive/pricing
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 47.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 6.24
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 59.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 47.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 47.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
 
   - id: proton.vpn-plus
     name: VPN Plus
@@ -129,7 +234,7 @@ plans:
         intervalCount: 1
         autoRenew: true
         lastVerified: 2026-10-23
-        sourceUrl: https://protonvpn.com/pricing
+        sourceUrl: https://proton.me/pricing
       - region: GLOBAL
         currency: USD
         amount: 83.88
@@ -137,7 +242,55 @@ plans:
         intervalCount: 1
         autoRenew: true
         lastVerified: 2026-10-23
-        sourceUrl: https://protonvpn.com/pricing
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 12.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 104.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 83.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 83.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
 
   - id: proton.pass-plus
     name: Pass Plus
@@ -189,7 +342,7 @@ plans:
         intervalCount: 1
         autoRenew: true
         lastVerified: 2026-10-23
-        sourceUrl: https://proton.me/pass/pricing
+        sourceUrl: https://proton.me/pricing
       - region: GLOBAL
         currency: USD
         amount: 35.88
@@ -197,7 +350,55 @@ plans:
         intervalCount: 1
         autoRenew: true
         lastVerified: 2026-10-23
-        sourceUrl: https://proton.me/pass/pricing
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 6.24
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 44.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 35.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 35.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
 
   - id: proton.unlimited
     name: Proton Unlimited
@@ -253,9 +454,57 @@ plans:
         intervalCount: 1
         autoRenew: true
         lastVerified: 2026-10-23
-        sourceUrl: https://proton.me/drive/pricing
+        sourceUrl: https://proton.me/pricing
       - region: GLOBAL
         currency: USD
+        amount: 119.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 16.24
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 149.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 119.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
         amount: 119.88
         interval: year
         intervalCount: 1
@@ -318,7 +567,7 @@ plans:
         intervalCount: 1
         autoRenew: true
         lastVerified: 2026-10-23
-        sourceUrl: https://proton.me/drive/pricing
+        sourceUrl: https://proton.me/pricing
       - region: GLOBAL
         currency: USD
         amount: 179.88
@@ -326,7 +575,55 @@ plans:
         intervalCount: 1
         autoRenew: true
         lastVerified: 2026-10-23
-        sourceUrl: https://proton.me/family
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 24.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 224.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 179.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 179.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
 
   - id: proton.family
     name: Proton Family
@@ -383,9 +680,57 @@ plans:
         intervalCount: 1
         autoRenew: true
         lastVerified: 2026-10-23
-        sourceUrl: https://proton.me/drive/pricing
+        sourceUrl: https://proton.me/family
       - region: GLOBAL
         currency: USD
+        amount: 287.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/family
+      - region: GLOBAL
+        currency: CAD
+        amount: 37.64
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/family
+      - region: GLOBAL
+        currency: CAD
+        amount: 338.28
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/family
+      - region: GLOBAL
+        currency: EUR
+        amount: 29.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/family
+      - region: GLOBAL
+        currency: EUR
+        amount: 287.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/family
+      - region: GLOBAL
+        currency: CHF
+        amount: 29.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/family
+      - region: GLOBAL
+        currency: CHF
         amount: 287.88
         interval: year
         intervalCount: 1

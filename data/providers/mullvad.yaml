@@ -6,7 +6,9 @@ category: vpn
 spendCategory: software
 billingCurrency: { GLOBAL: EUR }
 sources: { pricing: https://mullvad.net/en/pricing }
-notes: Prepaid only. You top up an account number with time, and nothing renews by itself.
+notes: >-
+  Prepaid only: you add time to an account number, and nothing renews by itself. Cards can pay in many local
+  currencies at a converted amount, and cryptocurrency payments get 10% off.
 
 plans:
   - id: mullvad.vpn
