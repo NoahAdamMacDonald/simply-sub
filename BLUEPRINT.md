@@ -1096,6 +1096,7 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
   :root {                                   /* light */
     --ss-accent: #6E062E;                   /* unchanged: buttons, active nav, logo pill */
     --ss-accent-hover: #8A0B3D;
+    --ss-accent-text: var(--ss-accent);     /* accent as TEXT/underline (12:1 on white) */
     --ss-on-accent: #FFFFFF;
     --ss-text: #111111;  --ss-text-muted: #5F5F5F;
     --ss-sidebar-bg: #FFFFFF;  --ss-app-bg: #E4E4E4;  --ss-card-bg: #FFFFFF;  --ss-divider: #D0D0D0;
@@ -1117,14 +1118,30 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
     --ss-accent-text: #FF7FAF;              /* accent as TEXT/underline on dark, since #6E062E is too dark there */
     --ss-text: #F2F2F2;  --ss-text-muted: #A8A8A8;
     --ss-sidebar-bg: #000000;  --ss-app-bg: #2B2B2B;  --ss-card-bg: #3A3A3A;  --ss-divider: #393939;
-    /* text shades = vivid fills on dark */
-    --rank-essential-text: #D966FF;  --rank-needed-text: #00EAFF;  --rank-wanted-text: #5CFF5C;
+    /* text shades = vivid fills on dark, lightened where needed to reach 4.5:1 on dark cards */
+    --rank-essential-text: #DF7DFF;  --rank-needed-text: #00EAFF;  --rank-wanted-text: #5CFF5C;
     --rank-uses-text: #FFF000;  --rank-sometimes-text: #FFB200;  --rank-unused-text: #FF8C33;
-    --rank-unwanted-text: #FF5C5C;  --rank-none-text: #9E9E9E;
+    --rank-unwanted-text: #FF7E7E;  --rank-none-text: #A5A5A5;
+    /* --ss-on-accent, the vivid rank fills and the budget colours are inherited from :root on purpose */
   }
   ```
-  The contrast values are targets. Check them once with a contrast checker (for example WebAIM's) before treating
-  them as final. Always show the rank **name** next to its colour, for colour-blind users.
+  **Contrast (checked in M0.4, WCAG 2 ratios).** Body, muted and accent text pass AA on every background in both
+  themes, as do white on the accent and the `#111` label on every budget fill. Three dark rank text shades failed
+  on dark cards (essential 3.95, unwanted 3.76, none 4.25) and were lightened to the values above (about 4.6:1).
+  Usage rules that follow from the check:
+  - Light rank **text** shades reach 4.5:1 on white cards but not on the grey app background (4.2–4.5), so put
+    rank text on cards.
+  - Most vivid fills are under 3:1 against white, and budget fills against the track. That is acceptable only
+    because the colour is never the only cue: rank chips always show the name, and budget bars show a label.
+  - In dark mode the accent **fill** barely differs from the app background (1.2:1). Buttons stay identifiable by
+    their white label, but don't use the accent fill alone to mark state there; use `--ss-accent-text`.
+
+  Always show the rank **name** next to its colour, for colour-blind users.
+- **Theme mode:** System (follows `prefers-color-scheme` live), Light or Dark. `ThemeService` sets
+  `data-theme` on `<html>` and `color-scheme` follows it. The mode is saved in `localStorage` (`ss-theme`), which an
+  inline script in `index.html` reads before the first paint. From M4.2, `settings.theme` in Dexie is the source of
+  truth and `localStorage` stays as the startup cache. The production build doesn't inline critical CSS, because
+  the inliner would drop the `[data-theme='dark']` rules and flash the light theme.
 - **Rank chips:** a coloured dot (vivid fill) + the rank name in normal text colour. This is readable in both
   themes and in every rank.
 - **Budget bars:** a vivid fill with a dark label inside (as in the wireframes). Green under 75%, amber at

@@ -1,0 +1,70 @@
+// Angular Material 3 theme mapped to the design tokens (_tokens.scss).
+// The rose palette is only the base for the system colours not mapped here (secondary,
+// containers, error); every mapped colour follows the tokens in both themes.
+@use '@angular/material' as mat;
+
+html {
+  // `color-scheme` switches Material's light-dark() colours and the native controls.
+  color-scheme: light;
+
+  @include mat.theme(
+    (
+      color: mat.$rose-palette,
+      typography: (
+        plain-family: var(--ss-font),
+        brand-family: var(--ss-font),
+      ),
+      density: 0,
+    ),
+    (
+      // Material uses primary mostly as a foreground on surfaces (focus, selection, text
+      // buttons), so it takes the readable accent shade. Filled buttons keep the fill below.
+      primary: var(--ss-accent-text),
+      on-primary: var(--ss-on-accent),
+      background: var(--ss-app-bg),
+      on-background: var(--ss-text),
+      surface: var(--ss-card-bg),
+      surface-container-lowest: var(--ss-card-bg),
+      surface-container-low: var(--ss-card-bg),
+      surface-container: var(--ss-card-bg),
+      surface-container-high: var(--ss-card-bg),
+      surface-container-highest: var(--ss-card-bg),
+      on-surface: var(--ss-text),
+      on-surface-variant: var(--ss-text-muted),
+      outline: var(--ss-text-muted),
+      outline-variant: var(--ss-divider),
+      inverse-surface: var(--ss-text),
+      inverse-on-surface: var(--ss-card-bg)
+    )
+  );
+
+  // Filled buttons use the accent fill with its own label colour in both themes (BLUEPRINT §8.1).
+  @include mat.button-overrides(
+    (
+      filled-container-color: var(--ss-accent),
+      filled-label-text-color: var(--ss-on-accent),
+      filled-state-layer-color: var(--ss-on-accent),
+      filled-ripple-color: color-mix(
+          in srgb,
+          var(--ss-on-accent) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%),
+          transparent
+        ),
+      filled-progress-active-indicator-color: var(--ss-on-accent),
+    )
+  );
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+
+  @include mat.theme-overrides(
+    (
+      // Primary is the light accent shade here, so content drawn on it must be dark.
+      on-primary: var(--ss-app-bg),
+      // Raised surfaces get lighter in dark mode, so menus and dialogs stand out from cards.
+      surface-container: color-mix(in srgb, var(--ss-card-bg), var(--ss-text) 4%),
+      surface-container-high: color-mix(in srgb, var(--ss-card-bg), var(--ss-text) 8%),
+      surface-container-highest: color-mix(in srgb, var(--ss-card-bg), var(--ss-text) 12%)
+    )
+  );
+}

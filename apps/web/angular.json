@@ -34,6 +34,11 @@
           "configurations": {
             "production": {
               "baseHref": "/simply/sub/",
+              "optimization": {
+                "scripts": true,
+                "styles": { "minify": true, "inlineCritical": false },
+                "fonts": true
+              },
               "budgets": [
                 {
                   "type": "initial",
@@ -69,7 +74,10 @@
           "defaultConfiguration": "development"
         },
         "test": {
-          "builder": "@angular/build:unit-test"
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "setupFiles": ["src/test-setup.ts"]
+          }
         }
       }
     }

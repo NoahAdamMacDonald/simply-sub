@@ -138,7 +138,7 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 | ID | Task | Done when |
 |---|---|---|
 | M4.1 | Dexie database (BLUEPRINT §4.6) + repositories that expose signals | CRUD tests pass with `fake-indexeddb` |
-| M4.2 | `SettingsStore` + first-run dialog (P1) | Country and currency are saved, with defaults from the browser locale |
+| M4.2 | `SettingsStore` + first-run dialog (P1); `ThemeService` reads and writes `settings.theme`, keeping `localStorage` `ss-theme` as the startup cache (BLUEPRINT §8.1) | Country and currency are saved, with defaults from the browser locale |
 | M4.3 | `CatalogStore`: cached snapshot → revalidate `data/catalog.json` with ETag → save | The app works offline after the first visit |
 | M4.4 | `FxStore` + `ss-price` with the converted marker | Converted prices show ≈, the icon and the tooltip |
 | M4.5 | Shared components (§4.3) + a `/dev/components` gallery (dev builds only) | Every component renders in both themes in the gallery |

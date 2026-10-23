@@ -1,0 +1,75 @@
+// Design tokens (BLUEPRINT §8.1, PROJECT-PLAN §4.1). Every colour in the app comes from here:
+// this is the only file allowed to contain hex values (Stylelint color-no-hex enforces it).
+// ThemeService sets data-theme="dark" on <html> for dark mode.
+
+:root {
+  --ss-accent: #6e062e; // buttons, active nav, logo pill
+  --ss-accent-hover: #8a0b3d;
+  --ss-accent-text: var(--ss-accent); // accent used as text or an underline
+  --ss-on-accent: #ffffff;
+  --ss-text: #111111;
+  --ss-text-muted: #5f5f5f;
+  --ss-sidebar-bg: #ffffff;
+  --ss-app-bg: #e4e4e4;
+  --ss-card-bg: #ffffff;
+  --ss-divider: #d0d0d0;
+
+  // Each rank has a vivid fill (dots, chips, bars) and a text shade (≥ 4.5:1 on white cards).
+  --rank-essential: #cc00ff;
+  --rank-essential-text: #9b00c2;
+  --rank-needed: #00d5ea;
+  --rank-needed-text: #00737f;
+  --rank-wanted: #2ee62e;
+  --rank-wanted-text: #1b7a1b;
+  --rank-uses: #ffe600;
+  --rank-uses-text: #7a6500;
+  --rank-sometimes: #ffb200;
+  --rank-sometimes-text: #8f5a00;
+  --rank-unused: #ff7700;
+  --rank-unused-text: #b34700;
+  --rank-unwanted: #ff1a1a;
+  --rank-unwanted-text: #c40000;
+  --rank-none: #bdbdbd;
+  --rank-none-text: #6b6b6b;
+
+  --budget-ok: #2ee62e;
+  --budget-warn: #ffb200;
+  --budget-over: #ff1a1a;
+  --budget-track: #bdbdbd;
+
+  // Aliases of the rank tokens, so both themes get them.
+  --status-active: var(--rank-wanted-text);
+  --status-inactive: var(--rank-sometimes-text);
+  --status-none: var(--rank-none-text);
+  --suggest-hard: var(--rank-unwanted);
+  --suggest-normal: var(--rank-unused);
+  --suggest-soft: var(--rank-uses);
+
+  --ss-sidebar-width: 216px;
+  --ss-radius-card: 12px;
+  --ss-font: 'Inter', system-ui, sans-serif;
+}
+
+// Dark mode inherits --ss-on-accent, the vivid rank fills and the budget colours on purpose:
+// the accent fill doesn't change, and the vivid colours read well on dark backgrounds.
+[data-theme='dark'] {
+  --ss-accent: #6e062e;
+  --ss-accent-hover: #8a0b3d;
+  --ss-accent-text: #ff7faf; // the accent itself is too dark to read on dark backgrounds
+  --ss-text: #f2f2f2;
+  --ss-text-muted: #a8a8a8;
+  --ss-sidebar-bg: #000000;
+  --ss-app-bg: #2b2b2b;
+  --ss-card-bg: #3a3a3a;
+  --ss-divider: #393939;
+
+  // Text shades are the vivid fills, lightened where needed to reach 4.5:1 on dark cards.
+  --rank-essential-text: #df7dff;
+  --rank-needed-text: #00eaff;
+  --rank-wanted-text: #5cff5c;
+  --rank-uses-text: #fff000;
+  --rank-sometimes-text: #ffb200;
+  --rank-unused-text: #ff8c33;
+  --rank-unwanted-text: #ff7e7e;
+  --rank-none-text: #a5a5a5;
+}

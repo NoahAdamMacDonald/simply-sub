@@ -5,6 +5,11 @@ import angular from 'angular-eslint';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 
+// Colours come from the tokens in _tokens.scss (BLUEPRINT §8.1). Stylelint checks stylesheets;
+// these selectors catch hex values in inline component styles and template attributes.
+const hexColour = String.raw`/#[0-9a-fA-F]{3,8}\b/`;
+const noHexMessage = 'Use a colour token (var(--ss-…)) from _tokens.scss instead of a hex value.';
+
 export default defineConfig(
   globalIgnores([
     '**/dist/',
@@ -31,10 +36,23 @@ export default defineConfig(
         'error',
         { type: 'element', prefix: 'ss', style: 'kebab-case' },
       ],
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: `Property[key.name='styles'] :matches(Literal[value=${hexColour}], TemplateElement[value.raw=${hexColour}])`,
+          message: noHexMessage,
+        },
+      ],
     },
   },
   {
     files: ['apps/web/**/*.html'],
     extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        { selector: `TextAttribute[name!='href'][value=${hexColour}]`, message: noHexMessage },
+      ],
+    },
   },
 );
