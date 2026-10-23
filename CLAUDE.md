@@ -52,5 +52,8 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 - Colour tokens: a colour that is a version of another (hover, text shade, alias) is derived from it in
   `_tokens.scss` (`var()`, `oklch(from …)`), so changing the base updates the family. Recheck contrast after.
 - Money = amount + ISO currency, formatted only in the UI. Dates are ISO strings.
+- Catalog YAML is validated by the Zod schemas in `packages/core/src/catalog/` (BLUEPRINT §4.5). They're strict,
+  and the types come from `z.infer`, so don't hand-write catalog interfaces. After changing a schema, run
+  `npm run data:schema` and commit `data/schema/`, because CI fails if it's stale.
 - Vitest for unit tests, Playwright for end-to-end tests.
 - Open questions are listed in BLUEPRINT.md section 14. Ask the user rather than guessing.

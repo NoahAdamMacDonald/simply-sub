@@ -1,0 +1,10 @@
+{
+  // Autocomplete, hover docs and validation for the catalog YAML (BLUEPRINT §4.5), through the Red Hat YAML
+  // extension. The schemas are generated from the Zod schemas in packages/core: `npm run data:schema`.
+  "yaml.schemas": {
+    "./data/schema/features.schema.json": "data/features.yaml",
+    "./data/schema/categories.schema.json": "data/categories.yaml",
+    "./data/schema/provider.schema.json": "data/providers/*.yaml",
+    "./data/schema/bundle.schema.json": "data/bundles/*.yaml"
+  }
+}

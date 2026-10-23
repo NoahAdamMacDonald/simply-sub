@@ -1,4 +1,5 @@
 {
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=827846
-  "recommendations": ["angular.ng-template"]
+  // redhat.vscode-yaml: autocomplete and validation for data/**/*.yaml (.vscode/settings.json).
+  "recommendations": ["angular.ng-template", "redhat.vscode-yaml"]
 }

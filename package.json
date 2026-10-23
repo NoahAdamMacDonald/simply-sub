@@ -2,6 +2,7 @@
   "name": "simply-sub",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "packageManager": "npm@12.0.2",
   "workspaces": [
     "packages/*",
@@ -10,19 +11,22 @@
   "scripts": {
     "dev:web": "npm -w apps/web run start",
     "dev:api": "npm -w apps/api run dev",
-    "build": "npm -w packages/core run typecheck && npm -w apps/web run build && npm -w apps/api run build",
+    "build": "npm -w packages/core run typecheck && tsc -p scripts && npm -w apps/web run build && npm -w apps/api run build",
     "test": "npm run test --workspaces --if-present",
     "lint": "eslint . && stylelint \"**/*.{css,scss}\"",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "data:schema": "tsx scripts/generate-json-schema.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@types/node": "24.19.2",
     "angular-eslint": "^22.6.0",
     "eslint": "^10.13.0",
     "postcss-scss": "^4.0.9",
     "prettier": "^3.8.1",
     "stylelint": "^17.16.0",
+    "tsx": "4.23.15",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.72.0"
   },

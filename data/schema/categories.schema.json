@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "service": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+            "description": "Stable category id"
+          },
+          "name": { "type": "string", "minLength": 1, "description": "Display name" },
+          "icon": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$",
+            "patternErrorMessage": "Use a Material Symbols icon name (live_tv)",
+            "description": "The Material Symbols icon shown with the category"
+          }
+        },
+        "required": ["id", "name", "icon"],
+        "additionalProperties": false
+      },
+      "description": "What a provider is, set by its category field"
+    },
+    "feature": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+            "description": "Stable category id"
+          },
+          "name": { "type": "string", "minLength": 1, "description": "Display name" }
+        },
+        "required": ["id", "name"],
+        "additionalProperties": false
+      },
+      "description": "How the Features page groups features, set by a feature's category field"
+    },
+    "spend": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+            "description": "Stable category id"
+          },
+          "name": { "type": "string", "minLength": 1, "description": "Display name" }
+        },
+        "required": ["id", "name"],
+        "additionalProperties": false
+      },
+      "description": "The card-reward category of a purchase, set by a provider's spendCategory field"
+    }
+  },
+  "required": ["service", "feature", "spend"],
+  "additionalProperties": false,
+  "title": "Simply Sub categories",
+  "description": "data/categories.yaml: service, feature and spend categories"
+}

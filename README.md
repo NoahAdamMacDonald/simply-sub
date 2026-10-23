@@ -22,6 +22,10 @@ The Figma wireframes and early drafts (`docs/wireframes/`, `docs/drafts/`) are k
 [Volta](https://volta.sh) 2.0.2. The root `package.json` pins Node 24.19.0 and npm 12.0.2, and Volta switches
 to them automatically inside the repo.
 
+To edit the catalog YAML in VS Code, install the recommended
+[Red Hat YAML extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
+(`redhat.vscode-yaml`). With it, `data/**/*.yaml` gets autocomplete, hover docs and validation as you type.
+
 ## Repository layout
 
 An npm-workspaces monorepo (see [BLUEPRINT.md §3](BLUEPRINT.md#3-repository-structure)):
@@ -30,11 +34,13 @@ An npm-workspaces monorepo (see [BLUEPRINT.md §3](BLUEPRINT.md#3-repository-str
 |---|---|
 | `apps/web` | The Angular 22 app |
 | `apps/api` | The Cloudflare Worker (Hono): serves the app's static files and the API at `/api/sub/v1` |
-| `packages/core` | Business logic as pure TypeScript functions, shared by the app, the Worker and the scripts |
+| `packages/core` | Business logic as pure TypeScript functions, shared by the app, the Worker and the scripts, including the catalog's Zod schemas |
+| `data/` | The catalog source in YAML; `data/schema/` holds the JSON Schema generated from the Zod schemas, for editor autocomplete |
+| `scripts/` | Repo scripts, run with tsx |
 | `tsconfig.base.json` | TypeScript settings shared by every workspace, and the `@simply-sub/core` path alias |
 
 Apps import `packages/core` as TypeScript source through the `@simply-sub/core` alias, so it has no build step.
-The catalog (`data/`) and the scripts are added by later tasks in the project plan.
+The catalog YAML files and the other scripts are added by later tasks in the project plan.
 
 ## Commands
 
@@ -45,15 +51,17 @@ Run these from the repo root.
 | `npm install` | Installs every workspace |
 | `npm run dev:web` | Starts the dev server at http://localhost:4200/, with `/api` proxied to `dev:api` |
 | `npm run dev:api` | Runs the Worker locally (`wrangler dev`): the API at http://localhost:8787/api/sub/v1/health, and the last production build of the app at http://localhost:8787/simply/sub/ |
-| `npm run build` | Type-checks `packages/core`, builds the app for production, copies it into `apps/api/public/simply/sub/`, then type-checks and bundles the Worker (`wrangler deploy --dry-run`: nothing is deployed) |
+| `npm run build` | Type-checks `packages/core` and `scripts/`, builds the app for production, copies it into `apps/api/public/simply/sub/`, then type-checks and bundles the Worker (`wrangler deploy --dry-run`: nothing is deployed) |
 | `npm test` | Unit tests (Vitest) in every workspace, `packages/core` first; the Worker's run inside workerd |
 | `npm -w apps/api run db:migrate:local` / `db:migrate:remote` | Applies new D1 migrations (`apps/api/migrations/`) to the local or the Cloudflare database |
 | `npm run lint` | ESLint and Stylelint |
 | `npm run format` / `npm run format:check` | Formats with / checks against Prettier |
+| `npm run data:schema` | Regenerates `data/schema/*.schema.json` from the catalog's Zod schemas. Run it after changing a schema and commit the result. `npm run data:schema -- --check` only checks that they're up to date (CI) |
 
 ## Contributing
 
-`main` is protected: every change goes through a pull request, and the `ci` check (lint, Prettier, tests and
-the build, from [.github/workflows/ci.yml](.github/workflows/ci.yml)) must pass before it can be squash-merged.
+`main` is protected: every change goes through a pull request, and the `ci` check (lint, Prettier, the
+`data/schema` check, tests and the build, from [.github/workflows/ci.yml](.github/workflows/ci.yml)) must pass
+before it can be squash-merged.
 Merges to `main` deploy to simplely.ca through Cloudflare Workers Builds. See
 [PROJECT-PLAN.md §1.2](PROJECT-PLAN.md#12-day-to-day-workflow) for the branch and commit conventions.

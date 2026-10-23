@@ -1,5 +1,6 @@
-# Required check for every pull request into main (BLUEPRINT §7.6, §7.7): lint, formatting, tests and the
-# production build. Nothing is deployed from here; Workers Builds deploys main. data:validate joins in M1.4.
+# Required check for every pull request into main (BLUEPRINT §7.6, §7.7): lint, formatting, the generated
+# JSON Schema, tests and the production build. Nothing is deployed from here; Workers Builds deploys main.
+# data:validate joins in M1.4.
 name: CI
 
 on:
@@ -41,5 +42,7 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run format:check
+      - name: data/schema matches the Zod schemas
+        run: npm run data:schema -- --check
       - run: npm test
       - run: npm run build
