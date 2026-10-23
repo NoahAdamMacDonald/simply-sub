@@ -122,7 +122,7 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 | M2.5 | `GET /fx`: Frankfurter proxy, cached 12 h, serves the last good value if Frankfurter is down | Matches the example, including the `stale` flag |
 | M2.6 | `GET /icon?domain=`: icon proxy for custom subscriptions, cached 30 days, restricted as in BLUEPRINT §5.4 | Returns an image or the fallback; a non-domain, an IP address or a URL gets `400`, and nothing but the fixed icon services is ever fetched |
 | M2.7 | Contract tests: every example in `docs/api-output-examples.json` is validated against the response schemas, and route tests compare real responses with them | The examples and the code can't drift apart |
-| M2.8 | Error middleware, CORS, caching, security headers and the per-IP rate limit (BLUEPRINT §5.4) | Headers match the examples; going over the limit gets `429 rate_limited` |
+| M2.8 | Error middleware, CORS, caching, security headers and the per-IP rate limit (BLUEPRINT §5.4) | Headers match the examples; going over the limit gets `429 rate_limited`; the CSP still lets Cloudflare Web Analytics load (BLUEPRINT §7.6) |
 
 ### M3 — Discovery pipeline (BLUEPRINT §6.5)
 | ID | Task | Done when |

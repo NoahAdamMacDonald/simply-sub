@@ -1054,23 +1054,31 @@ Settings → Build*). The settings as they are now:
 | Build command | `cd ../.. && npm ci && npm run build` |
 | Deploy command | `npx wrangler deploy` |
 | Preview (non-production branch) command | `npx wrangler versions upload`: a preview link on workers.dev, production untouched |
-| Build variable | `NODE_VERSION` = `24.19.0` (the image defaults to 24.18.0; it can't pick npm, and its npm 10.9.2 installs our lockfile cleanly) |
-| API token | the one Workers Builds creates: Workers scripts, KV, R2 and routes, but **not D1** |
+| Build variable | `NODE_VERSION` = `24.19.0` (the image defaults to 24.18.0). The first build detected Node 24.19.0 and npm 12.0.2 (from `packageManager`); npm 10.9.2 would also install our lockfile cleanly |
+| API token | `simply-sub-builds`, created by Workers Builds: Workers scripts, KV, R2, **D1 (edit)**, routes on the zone, and a few unused products. Cloudflare keeps it; it's never in GitHub |
 
 - **From M1.5** the deploy also reseeds D1. The deploy command becomes
   `npx wrangler d1 migrations apply simply-sub-catalog --remote && npx wrangler d1 execute simply-sub-catalog --remote --file dist/seed.sql && npx wrangler deploy`,
-  and the build command gains `&& npm run data:build`. That needs a custom API token with D1 Edit added
-  (selected under *API token*). Preview builds never touch D1, since they share the production database.
+  and the build command gains `&& npm run data:build`. The build token already has D1 edit. Preview builds never
+  touch D1, since they share the production database.
 - **Routes:** `simplely.ca/simply/sub*` and `simplely.ca/api/sub*`. A route only fires for a proxied hostname, so
   the zone has a placeholder `AAAA @ 100::` record (proxied). Nothing serves the rest of `simplely.ca` yet.
 - `workers_dev: false` and `preview_urls: true`: production is only on simplely.ca, and branch builds still get
-  a (public, unguessable) preview link.
+  a (public, unguessable) preview link. *Protect with Cloudflare Access* is off; turn it on to put a login in
+  front of preview links (needs Zero Trust).
+- Before running the build command, Workers Builds also runs its own `npm clean-install` in `apps/api`. It's
+  redundant (about 7 s) but harmless.
+- **Cloudflare Web Analytics** stays on (decided in M0.9). Cloudflare injects its beacon
+  (`static.cloudflareinsights.com/beacon.min.js`) into HTML pages requested by browsers. It uses no cookies and
+  sends only page views and timings, never anything from IndexedDB. The CSP in M2.8 must allow it
+  (`script-src https://static.cloudflareinsights.com`, `connect-src https://cloudflareinsights.com`). Content
+  blockers stop it, which is harmless.
 - Workers Builds deploys straight from `main`; it doesn't wait for GitHub checks. Branch protection (M0.10) is
   what keeps a failing change off `main`.
 - A small GitHub Actions `ci.yml` still runs lint, tests and `data:validate` as required **PR checks**, because
   that's what blocks merging a bad catalog change. Actions are free for public repos.
-- **Security headers:** add a `_headers` file in `public/` with a strict Content-Security-Policy,
-  `Referrer-Policy` and `X-Content-Type-Options`.
+- **Security headers:** add a `_headers` file in `public/` with a strict Content-Security-Policy (allowing the
+  Web Analytics beacon above), `Referrer-Policy` and `X-Content-Type-Options`.
 
 ### 7.7 Where automation runs: Cloudflare vs GitHub
 | Job | Cloudflare option | GitHub option | **Choice** |
