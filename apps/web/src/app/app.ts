@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ThemeToggle } from './core/theme/theme-toggle';
+import { Shell } from './layout/shell';
 
 @Component({
   selector: 'ss-root',
-  imports: [RouterOutlet, ThemeToggle],
-  templateUrl: './app.html',
-  styleUrl: './app.scss',
+  imports: [Shell],
+  template: '<ss-shell />',
 })
 export class App {}

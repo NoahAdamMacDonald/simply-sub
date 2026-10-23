@@ -1,0 +1,36 @@
+<a class="skip-link" href="#main" (click)="skipToMain($event)">Skip to main content</a>
+
+<mat-sidenav-container class="container" [class.narrow]="narrow()">
+  <mat-sidenav
+    #drawer
+    id="sidebar"
+    fixedInViewport
+    [mode]="narrow() ? 'over' : 'side'"
+    [opened]="!narrow()"
+  >
+    <ss-sidebar (navigate)="closeDrawer()" />
+  </mat-sidenav>
+
+  <mat-sidenav-content class="content">
+    @if (narrow()) {
+      <header class="top-bar">
+        <button
+          #menuButton
+          matIconButton
+          type="button"
+          aria-label="Menu"
+          aria-controls="sidebar"
+          [attr.aria-expanded]="drawer.opened"
+          (click)="drawer.open()"
+        >
+          <mat-icon>menu</mat-icon>
+        </button>
+        <ss-logo />
+      </header>
+    }
+
+    <main #main id="main" tabindex="-1">
+      <router-outlet />
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

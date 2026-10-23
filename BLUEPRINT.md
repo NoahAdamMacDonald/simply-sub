@@ -1135,6 +1135,9 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
     because the colour is never the only cue: rank chips always show the name, and budget bars show a label.
   - In dark mode the accent **fill** barely differs from the app background (1.2:1). Buttons stay identifiable by
     their white label, but don't use the accent fill alone to mark state there; use `--ss-accent-text`.
+  - Keyboard focus is a 2px ring in `--ss-accent-text`: Material's strong focus indicators (in
+    `_material-theme.scss`) and the same outline on custom links. Material's default focus state layer is too
+    faint for the 3:1 contrast that focus indicators need.
 
   Always show the rank **name** next to its colour, for colour-blind users.
 - **Theme mode:** System (follows `prefers-color-scheme` live), Light or Dark. `ThemeService` sets
@@ -1181,7 +1184,7 @@ bars for **all lists combined** (section 8.1.1). The bars appear only if a budge
 
 **Lists overview.** Each card shows the name, a monthly bar (**this list's share** of the monthly budget), a yearly bar, rank
 counts in rank colours (zero counts in grey), a View button and delete (with confirmation). Below the cards is a
-"New Subscription List" tile, which opens `/lists/new/edit` with the default name. The right column shows feature
+"New Subscription List" tile, which opens `/lists/new` with the default name. The right column shows feature
 summaries ("VPN 2/3", "4k 2/5").
 
 **View list.** Contents:

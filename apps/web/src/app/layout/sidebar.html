@@ -1,0 +1,37 @@
+<!-- The logo sits inside the landmark too, so all the sidebar's content belongs to one. -->
+<nav aria-label="Main">
+  <div class="logo"><ss-logo /></div>
+
+  @for (group of groups; track $index) {
+    <ul>
+      @for (link of group; track link.path) {
+        <li>
+          <a
+            class="link"
+            [routerLink]="link.path"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+            ariaCurrentWhenActive="page"
+            (click)="navigate.emit()"
+            >{{ link.label }}</a
+          >
+        </li>
+      }
+    </ul>
+  }
+
+  <div class="footer">
+    <a
+      matIconButton
+      class="settings"
+      routerLink="/settings"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      aria-label="Settings"
+      (click)="navigate.emit()"
+    >
+      <mat-icon>settings</mat-icon>
+    </a>
+    <ss-theme-toggle />
+  </div>
+</nav>

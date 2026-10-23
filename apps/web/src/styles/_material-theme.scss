@@ -52,6 +52,15 @@ html {
       filled-progress-active-indicator-color: var(--ss-on-accent),
     )
   );
+
+  // Keyboard focus gets a solid ring in the readable accent shade, like the sidebar links.
+  // Material's default (a faint state layer) falls short of the 3:1 contrast a focus indicator needs.
+  @include mat.strong-focus-indicators(
+    (
+      border-color: var(--ss-accent-text),
+      border-width: 2px,
+    )
+  );
 }
 
 html[data-theme='dark'] {

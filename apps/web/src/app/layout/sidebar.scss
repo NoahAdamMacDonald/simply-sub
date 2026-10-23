@@ -1,0 +1,85 @@
+@use '@angular/material' as mat;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: 100%;
+  padding: 16px 12px 8px;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  font: var(--mat-sys-headline-medium);
+}
+
+nav {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 48px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+// The last group (Search) sits at the bottom, above the footer.
+ul:last-of-type {
+  margin-top: auto;
+  padding-top: 48px;
+}
+
+// Every link has an underline: divider-coloured, or the accent on the current page. The text
+// shade of the accent keeps it visible in dark mode, where the accent fill is too dark.
+.link {
+  display: block;
+  width: 136px;
+  padding-bottom: 2px;
+  border-bottom: 3px solid var(--ss-divider);
+  color: var(--ss-text);
+  font: var(--mat-sys-headline-medium);
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    border-bottom-color: var(--ss-text-muted);
+  }
+
+  &.active {
+    border-bottom-color: var(--ss-accent-text);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 4px;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
+
+  @include mat.icon-button-overrides(
+    (
+      icon-color: var(--ss-text),
+      state-layer-color: var(--ss-text),
+    )
+  );
+}
+
+.settings.active {
+  @include mat.icon-button-overrides(
+    (
+      icon-color: var(--ss-accent-text),
+      state-layer-color: var(--ss-accent-text),
+    )
+  );
+}

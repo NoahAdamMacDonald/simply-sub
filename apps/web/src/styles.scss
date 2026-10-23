@@ -14,3 +14,9 @@ body {
   color: var(--ss-text);
   font: var(--mat-sys-body-medium);
 }
+
+// Page titles: each page has one <h1>.
+h1 {
+  margin: 0 0 16px;
+  font: var(--mat-sys-headline-medium);
+}

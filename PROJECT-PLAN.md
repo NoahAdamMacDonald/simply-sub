@@ -139,7 +139,7 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 |---|---|---|
 | M4.1 | Dexie database (BLUEPRINT §4.6) + repositories that expose signals | CRUD tests pass with `fake-indexeddb` |
 | M4.2 | `SettingsStore` + first-run dialog (P1); `ThemeService` reads and writes `settings.theme`, keeping `localStorage` `ss-theme` as the startup cache (BLUEPRINT §8.1) | Country and currency are saved, with defaults from the browser locale |
-| M4.3 | `CatalogStore`: cached snapshot → revalidate `data/catalog.json` with ETag → save | The app works offline after the first visit |
+| M4.3 | `CatalogStore`: cached snapshot → revalidate `data/catalog.json` with ETag → save; the offline banner and "Catalog updated" toast (P1) | The app works offline after the first visit, and the banner shows the catalog's date |
 | M4.4 | `FxStore` + `ss-price` with the converted marker | Converted prices show ≈, the icon and the tooltip |
 | M4.5 | Shared components (§4.3) + a `/dev/components` gallery (dev builds only) | Every component renders in both themes in the gallery |
 | M4.6 | `MetricsService` skeleton: resolved items (§3.4) from repos + catalog + FX | Unit tests pass with a fixture list |
@@ -340,10 +340,12 @@ Add these aliases to `_tokens.scss`. They build on the rank tokens in BLUEPRINT 
 └──────────────┴───────────────────────────────────────────────────────┘
 ```
 - Sidebar order and spacing as in the wireframes: Home / Lists, Payment, Features, Calendar / Search, with ⚙ and ☀/☾ at the bottom.
-- The active link gets an accent underline and `aria-current="page"`; the others get a divider-coloured underline. ⚙ turns accent on `/settings`.
+- The logo is text: "Simply" plus an accent pill "Sub" (CSS, no image), so it follows the theme.
+- The active link gets an accent underline and `aria-current="page"`; the others get a divider-coloured underline. ⚙ turns accent on `/settings`. Both use `--ss-accent-text`, which stays visible in dark mode.
 - ☀/☾ toggles light and dark. "System" is chosen in Settings.
-- Under 960 px the sidebar becomes a drawer (`MatSidenav`, mode `over`), opened from a top bar with ☰ and the logo.
-- Global pieces: snackbar host, offline banner ("Offline — catalog from Oct 22"), "Catalog updated" toast, skip-to-content link.
+- Under 960 px the sidebar becomes a drawer (`MatSidenav`, mode `over`), opened from a top bar with ☰ and the logo. Navigating closes it and returns focus to ☰.
+- The window scrolls, not a content pane: the sidebar is fixed in the viewport, and the router scrolls to the top on navigation and restores the position on Back. Pages shouldn't add their own full-height scroll containers.
+- Global pieces: the skip-to-content link and the "Something went wrong" snackbar (P15) arrive in M0.5; the offline banner ("Offline — catalog from Oct 22") and the "Catalog updated" toast arrive with `CatalogStore` in M4.3.
 - Page titles like "Lists · Simply Sub" come from each route's `title`.
 
 **First-run dialog** (shown when Settings has no country):

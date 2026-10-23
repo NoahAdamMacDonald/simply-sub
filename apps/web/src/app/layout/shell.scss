@@ -1,0 +1,77 @@
+@use '@angular/material' as mat;
+
+// Off-screen until it receives focus.
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 2; // above the sidenav container
+  padding: 8px 16px;
+  border-radius: 4px;
+  background-color: var(--ss-accent);
+  color: var(--ss-on-accent);
+  font: var(--mat-sys-label-large);
+  transform: translateY(calc(-100% - 16px));
+
+  &:focus {
+    transform: none;
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 2px;
+  }
+}
+
+// The window scrolls rather than the content area, so phones can hide their address bar and the
+// router can restore scroll positions. The sidebar stays in place (fixedInViewport).
+.container {
+  min-height: 100dvh;
+  overflow: visible;
+
+  @include mat.sidenav-overrides(
+    (
+      container-background-color: var(--ss-sidebar-bg),
+      container-text-color: var(--ss-text),
+      container-shape: 0,
+      container-width: var(--ss-sidebar-width),
+      content-background-color: var(--ss-app-bg),
+      content-text-color: var(--ss-text),
+    )
+  );
+}
+
+.content {
+  overflow: visible;
+}
+
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 56px;
+  padding: 0 16px 0 4px;
+  border-bottom: 1px solid var(--ss-divider);
+  background-color: var(--ss-sidebar-bg);
+  font: var(--mat-sys-title-large);
+
+  @include mat.icon-button-overrides(
+    (
+      icon-color: var(--ss-text),
+      state-layer-color: var(--ss-text),
+    )
+  );
+}
+
+main {
+  padding: 24px;
+
+  // Only the skip link focuses <main>; it isn't a control, so it needs no focus ring.
+  &:focus {
+    outline: none;
+  }
+}
+
+.narrow main {
+  padding: 16px;
+}
