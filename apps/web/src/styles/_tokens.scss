@@ -21,6 +21,8 @@
   // text shades are tuned one by one for contrast, so they stay hex values rather than a formula.
   --rank-essential: #cc00ff;
   --rank-essential-text: #9b00c2;
+  --rank-critical: #4d6bff;
+  --rank-critical-text: #2e4bd9;
   --rank-needed: #00d5ea;
   --rank-needed-text: #00737f;
   --rank-wanted: #2ee62e;
@@ -68,6 +70,7 @@
 
   // Text shades are the vivid fills, lightened where needed to reach 4.5:1 on dark cards.
   --rank-essential-text: #df7dff;
+  --rank-critical-text: #93a6ff;
   --rank-needed-text: #00eaff;
   --rank-wanted-text: #5cff5c;
   --rank-uses-text: #fff000;

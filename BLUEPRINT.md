@@ -726,8 +726,10 @@ Every record has `id` (UUID v7), `createdAt`, `updatedAt` and `deletedAt?` (a so
 
 ```ts
 export type Rank =
-  | 'essential' | 'needed' | 'wanted' | 'uses'
+  | 'essential' | 'critical' | 'needed' | 'wanted' | 'uses'
   | 'sometimes' | 'not-ranked' | 'unused' | 'unwanted';
+// essential and critical are subscription-level only (section 10.2): essential keeps this exact plan,
+// critical keeps this provider (any of its plans that still provides the feature).
 
 export interface SubscriptionList {
   id: string; name: string;          // default "Subscription List"
@@ -755,8 +757,8 @@ export interface ListItem {
   createdAt: string; updatedAt: string; deletedAt?: string;
 }
 
-export interface ProfileRanking {     // global ranks; 'essential' isn't allowed; 'not-ranked' is never stored
-  rankKey: RankKey; rank: Exclude<Rank, 'essential' | 'not-ranked'>; updatedAt: string;
+export interface ProfileRanking {     // global ranks; 'essential' and 'critical' aren't allowed; 'not-ranked' is never stored
+  rankKey: RankKey; rank: Exclude<Rank, 'essential' | 'critical' | 'not-ranked'>; updatedAt: string;
 }
 
 export interface CustomSubscription {
@@ -1293,6 +1295,7 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
 
     /*            vivid fill (dots/chips/bars)    text shade (≥4.5:1 on white)  */
     --rank-essential: #CC00FF;  --rank-essential-text: #9B00C2;
+    --rank-critical:  #4D6BFF;  --rank-critical-text:  #2E4BD9;
     --rank-needed:    #00D5EA;  --rank-needed-text:    #00737F;
     --rank-wanted:    #2EE62E;  --rank-wanted-text:    #1B7A1B;
     --rank-uses:      #FFE600;  --rank-uses-text:      #7A6500;
@@ -1308,7 +1311,7 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
     --ss-text: #F2F2F2;  --ss-text-muted: #A8A8A8;
     --ss-sidebar-bg: #000000;  --ss-app-bg: #2B2B2B;  --ss-card-bg: #3A3A3A;  --ss-divider: #393939;
     /* text shades = vivid fills on dark, lightened where needed to reach 4.5:1 on dark cards */
-    --rank-essential-text: #DF7DFF;  --rank-needed-text: #00EAFF;  --rank-wanted-text: #5CFF5C;
+    --rank-essential-text: #DF7DFF;  --rank-critical-text: #93A6FF;  --rank-needed-text: #00EAFF;  --rank-wanted-text: #5CFF5C;
     --rank-uses-text: #FFF000;  --rank-sometimes-text: var(--rank-sometimes);  --rank-unused-text: #FF8C33;
     --rank-unwanted-text: #FF7E7E;  --rank-none-text: #A5A5A5;
     /* the accent fill, --ss-on-accent, the vivid rank fills and the budget colours are inherited from :root on purpose */
@@ -1317,6 +1320,7 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
   **Contrast (checked in M0.4, WCAG 2 ratios).** Body, muted and accent text pass AA on every background in both
   themes, as do white on the accent and the `#111` label on every budget fill. Three dark rank text shades failed
   on dark cards (essential 3.95, unwanted 3.76, none 4.25) and were lightened to the values above (about 4.6:1).
+  Critical was added later (2026-10-23): its text shades are 6.7:1 on white and 4.95:1 on dark cards.
   The derived accent shades were rechecked when they replaced the hex values: the dark accent text is 4.9:1 on
   dark cards and 9:1 on the sidebar, and the hover keeps the old value's 9.6:1 on white.
   Usage rules that follow from the check:
@@ -1391,7 +1395,7 @@ summaries ("VPN 2/3", "4k 2/5").
 opens a dialog (not a separate page) with:
 - a plan switcher (same provider)
 - tags (with inline create)
-- feature rank overrides: the same single dropdown, with Essential added and a first option
+- feature rank overrides: the same single dropdown, with Essential and Critical added and a first option
   **"Profile default (Wanted)"** that shows the inherited rank. Picking it removes the override.
 - billing mode: recurring (interval, anchor date picker, auto-renew checkbox shown only if supported) or
   limited (date windows, repeat yearly)
@@ -1410,7 +1414,8 @@ or create one), as noted on the wireframe, which then opens that list's edit dia
 
 **Features (profile ranking).** All registry features grouped by category and parent group (collapsible),
 each with **one dropdown**. The dropdown lists **Not ranked** (the default) first, then Needed, Wanted, Uses,
-Sometimes, Unused and Unwanted. Essential is only available per subscription. Resetting means choosing
+Sometimes, Unused and Unwanted. Essential and Critical are only available per subscription, because they tie
+the feature to that subscription's plan or provider. Resetting means choosing
 "Not ranked", so the separate × button is gone.
 - Each option shows its colour dot.
 - Ranked rows get a coloured left border, so you can see your choices at a glance.
@@ -1529,8 +1534,11 @@ Lives in `packages/core/src/optimizer/`. It's a **pure function**:
    each month. Limited-timeframe items count only in the months they're active.
 
 ### 10.2 Hard constraints
-- **Essential:** an item with any Essential feature can't be removed, and can only move to a plan of the same
-  provider that keeps that feature at the same or a higher level.
+- **Essential** (this plan): an item with any Essential feature keeps its exact plan. It can't be removed,
+  downgraded or switched. Only changes that keep the plan apply: annual instead of monthly billing, a better card,
+  or a bundle that contains this same plan.
+- **Critical** (this provider): an item with any Critical feature can't be removed, and can only move to another
+  plan of the same provider that keeps that feature at the same or a higher level.
 - **Needed:** after any change, every Needed feature must still be provided by at least one item **in every
   month it was provided before**.
 
@@ -1561,7 +1569,8 @@ Lives in `packages/core/src/optimizer/`. It's a **pure function**:
 
 ### 10.5 Testing
 Fixture-based Vitest tests, for example: "2 VPNs, VPN ranked Needed → suggest removing the cheaper one",
-"Essential feature blocks removal" and "a limited Sep–Oct window keeps a Needed feature covered".
+"Essential feature blocks a downgrade", "Critical feature allows a same-provider downgrade that keeps it but
+blocks removal" and "a limited Sep–Oct window keeps a Needed feature covered".
 
 ---
 
@@ -1694,7 +1703,7 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 | Add-on | An extra purchasable on top of a plan (extra member) |
 | Bundle | Several plans sold together for one price |
 | List / item | A user's subscription list / one subscription in it |
-| Rank | How much the user cares about a feature: Essential > Needed > Wanted > Uses > Sometimes > Not ranked > Unused > Unwanted |
+| Rank | How much the user cares about a feature: Essential > Critical > Needed > Wanted > Uses > Sometimes > Not ranked > Unused > Unwanted. Essential (this plan) and Critical (this provider) are subscription-level only |
 | Spend category | The category used for card rewards (streaming, software…) |
 | Snapshot | The full catalog JSON for one region, served by `/catalog` |
 
@@ -1717,7 +1726,8 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 - Automation: Cloudflare-first, Git stays the source of truth (section 7.7).
 - Regions: every region a service supports, defaulting to the user's own; non-native prices are converted and marked (section 4.7).
 - Ranks: one dropdown with Not ranked as the default and no × button. Profile level: Not ranked, Needed, Wanted,
-  Uses, Sometimes, Unused, Unwanted. Subscription level adds Essential plus "Profile default" (sections 8.3, 4.6).
+  Uses, Sometimes, Unused, Unwanted. Subscription level adds Essential, Critical (added 2026-10-23) and
+  "Profile default" (sections 8.3, 4.6, 10.2).
 - Budget bars: defined per location (section 8.1.1).
 - Feature depth: detailed canonical taxonomy with aliases and groups. Password-manager item types are a
   shared `set` (section 4.2).
