@@ -249,15 +249,18 @@ Users rank **rank keys**. Each one points to one rankable option of a feature:
   group itself ("I want a password manager"). Children start as Not ranked, and ranks never cascade (BLUEPRINT §4.2
   explains why). The Features page offers "Set all in this group" for bulk ranking.
 - **Resolution order** for an item: the item's override for the key → the profile rank for the key → `not-ranked`.
+- **Subscription-only ranks:** Essential (keep this exact plan) and Critical (keep this provider, any plan that
+  still provides the feature) exist only as item overrides, never as profile ranks. The optimizer rules are in
+  BLUEPRINT §10.2.
 - "Not ranked" is never stored. Removing a rank deletes its record.
 - Features with `rankable: false` (e.g. `includes-subscription`) never appear in ranking UIs.
 
 **Counts and summaries**
 - **Rank counts** (list cards): for each item, and each key its plan provides, count the key's effective rank.
-  Show all seven ranks from Essential to Unwanted, with zero counts in grey. Not ranked isn't shown.
+  Show all eight ranks from Essential to Unwanted, with zero counts in grey. Not ranked isn't shown.
 - **Feature summary** ("VPN 2 / 3"): for each summary key, *active items that provide it* / *all items that provide it*.
   The summary keys are the keys marked `headline: true` in the registry, plus any key the user ranked Essential,
-  Needed or Wanted. Only keys with a total of at least 1 are shown, sorted by rank and then by name.
+  Critical, Needed or Wanted. Only keys with a total of at least 1 are shown, sorted by rank and then by name.
 
 ### 3.3 Statuses
 | Status | Rule | Shown as |
@@ -380,7 +383,7 @@ The country defaults from `navigator.language` (`en-CA` → Canada), and the cur
 | `ss-price` | Price + interval; ≈ and the `currency_exchange` icon when converted; tooltip with the source price | `price: PickedPrice`, `clickable` → `select` |
 | `ss-provider-icon` | Icon, with a letter fallback | `src?`, `name`, `size` |
 | `ss-status-badge` | Active / Inactive / Not listed, plus a date | `status` |
-| `ss-rank-select` | The single rank dropdown | `value`, `allowEssential`, `inherited?` (shows "Profile default (Wanted)") → `valueChange` |
+| `ss-rank-select` | The single rank dropdown | `value`, `subscriptionLevel` (adds Essential and Critical), `inherited?` (shows "Profile default (Wanted)") → `valueChange` |
 | `ss-rank-dot`, `ss-rank-chip` | Colour dot (with or without a label) | `rank` |
 | `ss-rank-counts` | Two-column rank counts, as on the Lists wireframe | `counts` |
 | `ss-feature-summary` | "VPN 2 / 3" list | `rows` |
@@ -627,7 +630,7 @@ In Specific dates mode, the renewal fields are replaced by:
 - **Free plans:** when the picked price is 0, Billed, Next renewal, Auto-renews and the price override are hidden. The item is saved as Ongoing, with today as the anchor date.
 - **Specific dates:** at least one window; each end must be after its start; windows can't overlap.
 - **Price override:** an amount above 0, with a currency.
-- **Feature ranks:** the plan's provided keys (§3.2), grouped. The dropdown starts with "Profile default (X)" and includes Essential.
+- **Feature ranks:** the plan's provided keys (§3.2), grouped. The dropdown starts with "Profile default (X)" and includes Essential ("keep this plan") and Critical ("keep this provider"), each with a one-line hint.
 - **Tags:** autocomplete from the Settings tags, with "Create tag" inline (name + colour).
 - **Bundles:** bundle items show the bundle's included plans read-only, and their combined features for ranking.
 - **Duplicates:** adding a plan that's already in the list shows "Already in this list — add another?" (duplicates are allowed).
@@ -748,7 +751,7 @@ Your feature ranks               [🔍 Find a feature]   [ ] Ranked only   [Rese
 **Data:** the feature registry (from the catalog), the `rankings` repo, and items (to know which categories you use).
 **Behaviour**
 - Groups follow the registry's feature categories and parent features, and each group can be collapsed. Groups used by your lists start expanded.
-- Each rank key has one dropdown: **Not ranked** (the default, muted), Needed, Wanted, Uses, Sometimes, Unused, Unwanted, each with its colour dot. Essential isn't offered here.
+- Each rank key has one dropdown: **Not ranked** (the default, muted), Needed, Wanted, Uses, Sometimes, Unused, Unwanted, each with its colour dot. Essential and Critical aren't offered here: they're set per subscription in the item dialog (P6).
 - A ranked row gets a coloured left border.
 - A group row's rank applies to the group only ("I want a password manager"). [Set all ▾] ranks every child in one step. Ranks never cascade on their own (§3.2).
 - Changes save immediately; there's no Save button. Choosing Not ranked deletes the record.
@@ -945,7 +948,7 @@ FREE SAVINGS — nothing you rank is lost
   - an "estimated" tag when converted prices are involved
 - [Apply] opens `/lists/:listId/edit` with that change applied to a draft, so you review it and press Save.
 - [Dismiss] stores the suggestion's fingerprint in `dismissedSuggestions`. It comes back if the list changes, and "Show dismissed" reveals it.
-- An info tooltip explains the Essential and Needed rules.
+- An info tooltip explains the Essential, Critical and Needed rules.
 
 **Acceptance**
 - [ ] The optimizer fixtures produce the expected cards and colours
