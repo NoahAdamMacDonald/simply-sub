@@ -5,9 +5,12 @@ website: https://www.disneyplus.com
 category: streaming
 spendCategory: streaming
 acceptedNetworks: [visa, mastercard, amex, jcb]
-billingCurrency: { CA: CAD }
+billingCurrency: { CA: CAD, US: USD }
 sources: { pricing: https://help.disneyplus.com/article/disneyplus-en-ca-price }
 
+# Canada sells Standard With Ads, Standard and Premium. The US sells With Ads (4K, unlike Canada's 1080p) and
+# Premium, so a plan sold in one country only has prices there. The US prices are on
+# help.disneyplus.com/article/disneyplus-price with the help centre's country set to United States.
 plans:
   - id: disney-plus.standard-ads
     name: Standard With Ads
@@ -28,6 +31,27 @@ plans:
         lastVerified: 2026-10-23
         sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
     addOnIds: [disney-plus.extra-member-ads]
+    addOnLimit: 1
+
+  - id: disney-plus.with-ads
+    name: With Ads
+    link: https://www.disneyplus.com
+    features:
+      video.quality: 4k
+      video.hdr: true
+      streaming.ad-free: false
+      streaming.concurrent-streams: 4
+      streaming.kids-profiles: true
+    prices:
+      - region: US
+        currency: USD
+        amount: 12.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-price
+    addOnIds: [disney-plus.extra-member-with-ads]
     addOnLimit: 1
 
   - id: disney-plus.standard
@@ -62,7 +86,7 @@ plans:
 
   - id: disney-plus.premium
     name: Premium
-    link: https://www.disneyplus.com/en-ca
+    link: https://www.disneyplus.com
     features:
       video.quality: 4k
       video.hdr: true
@@ -89,6 +113,22 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+      - region: US
+        currency: USD
+        amount: 21.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-price
+      - region: US
+        currency: USD
+        amount: 214.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-price
     addOnIds: [disney-plus.extra-member-premium]
     addOnLimit: 1
 
@@ -106,6 +146,18 @@ addOns:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+  - id: disney-plus.extra-member-with-ads
+    name: Extra Member (With Ads)
+    grantsPlan: disney-plus.with-ads
+    prices:
+      - region: US
+        currency: USD
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-price
   - id: disney-plus.extra-member-standard
     name: Extra Member (Standard)
     grantsPlan: disney-plus.standard
@@ -130,3 +182,11 @@ addOns:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+      - region: US
+        currency: USD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-price
