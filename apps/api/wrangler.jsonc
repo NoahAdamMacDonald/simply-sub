@@ -1,6 +1,5 @@
 // The "simply-sub" Worker: the app's static files plus the catalog API (BLUEPRINT §2, §7.4).
-// The D1 binding (M0.8) and the simplely.ca routes (M0.9) are added by their own tasks, so until
-// then this file refers to nothing in the Cloudflare account.
+// The simplely.ca routes arrive with M0.9.
 {
   "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "simply-sub",
@@ -15,5 +14,15 @@
     // Only API paths invoke the Worker. Everything else is a static file, which costs no quota.
     "run_worker_first": ["/api/*"],
   },
+  // The catalog cache (BLUEPRINT §5.3), in Eastern North America. The id isn't a secret: using it
+  // needs your Cloudflare login. Apply migrations with `npm run db:migrate:local` / `:remote`.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "simply-sub-catalog",
+      "database_id": "bddf9622-ec55-4c38-8fb7-350a16f98fb2",
+      "migrations_dir": "migrations",
+    },
+  ],
   "observability": { "enabled": true },
 }

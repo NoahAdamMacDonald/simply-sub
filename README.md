@@ -47,5 +47,6 @@ Run these from the repo root.
 | `npm run dev:api` | Runs the Worker locally (`wrangler dev`): the API at http://localhost:8787/api/sub/v1/health, and the last production build of the app at http://localhost:8787/simply/sub/ |
 | `npm run build` | Type-checks `packages/core`, builds the app for production, copies it into `apps/api/public/simply/sub/`, then type-checks and bundles the Worker (`wrangler deploy --dry-run`: nothing is deployed) |
 | `npm test` | Unit tests (Vitest) in every workspace, `packages/core` first; the Worker's run inside workerd |
+| `npm -w apps/api run db:migrate:local` / `db:migrate:remote` | Applies new D1 migrations (`apps/api/migrations/`) to the local or the Cloudflare database |
 | `npm run lint` | ESLint |
 | `npm run format` / `npm run format:check` | Formats with / checks against Prettier |

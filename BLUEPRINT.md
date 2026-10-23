@@ -747,24 +747,51 @@ Example requests and responses for every endpoint are in [docs/api-output-exampl
 Successful responses use `{ "data": …, "meta": … }`, and errors use `{ "error": { "code": "not_found", "message": "…" } }`.
 Responses are JSON and versioned through the `/v1` path. Breaking changes go under `/v2`.
 
-### 5.3 D1 schema (`apps/api/migrations/0001_init.sql`, simplified)
+### 5.3 D1 schema (`apps/api/migrations/0001_init.sql`)
+The database `simply-sub-catalog` (binding `DB`) lives in Eastern North America (`enam`). Columns, condensed
+(the migration file has the full SQL); every table is `STRICT`, so SQLite enforces the column types:
 ```sql
-CREATE TABLE providers (id TEXT PRIMARY KEY, name TEXT NOT NULL, category TEXT, spend_category TEXT, json TEXT NOT NULL);
-CREATE TABLE plans     (id TEXT PRIMARY KEY, provider_id TEXT NOT NULL REFERENCES providers(id), name TEXT NOT NULL, json TEXT NOT NULL);
-CREATE TABLE prices    (plan_id TEXT NOT NULL, region TEXT NOT NULL, currency TEXT NOT NULL, amount REAL NOT NULL,
-                        interval TEXT NOT NULL, interval_count INTEGER NOT NULL, monthly_equiv REAL NOT NULL);
-CREATE TABLE plan_features (plan_id TEXT NOT NULL, feature_id TEXT NOT NULL, value TEXT NOT NULL, rank_value REAL);
-CREATE TABLE features  (id TEXT PRIMARY KEY, category TEXT, json TEXT NOT NULL);
-CREATE TABLE bundles   (id TEXT PRIMARY KEY, json TEXT NOT NULL);
-CREATE TABLE bundle_plans (bundle_id TEXT NOT NULL, plan_id TEXT NOT NULL);
-CREATE TABLE snapshots (region TEXT PRIMARY KEY, sha TEXT NOT NULL, json TEXT NOT NULL);  -- prebuilt /catalog payloads
-CREATE INDEX idx_prices_region ON prices(region, monthly_equiv);
-CREATE INDEX idx_pf_feature ON plan_features(feature_id, rank_value);
+providers     (id PK, name, category, spend_category, json)
+plans         (id PK, provider_id → providers, name, json)
+prices        (plan_id → plans, region, currency, amount, interval, interval_count, monthly_equiv,
+               PK (plan_id, region, currency, interval, interval_count))
+features      (id PK, category, json)
+plan_features (plan_id → plans, feature_id → features, value, rank_value, PK (plan_id, feature_id, value))
+bundles       (id PK, json)
+bundle_plans  (bundle_id → bundles, plan_id → plans, PK (bundle_id, plan_id))
+snapshots     (region PK, sha, built_at, json)        -- prebuilt /catalog payloads
+indexes: prices (region, monthly_equiv) · plan_features (feature_id, rank_value) · plans (provider_id)
+         · bundle_plans (plan_id)
 ```
-`rank_value` stores an enum's position (1080p = 2, 4k = 3) or the number itself, so rank-key filters like
-`feature=video.quality=1080p` ("1080p or better") become plain numeric comparisons.
+- Every `→` is a foreign key with `ON DELETE CASCADE`, so the full reseed (M1.5) can empty the parent tables and
+  leave no orphans. D1 always enforces foreign keys.
+- `rank_value` stores an enum's position (1080p = 2, 4k = 3) or the number itself, so rank-key filters like
+  `feature=video.quality=1080p` ("1080p or better") become plain numeric comparisons. A `set` feature has one
+  row per member.
+- `snapshots.sha` and `built_at` are what `/health` reports as `catalogVersion` and `catalogUpdatedAt`.
+- Add-ons stay inside each provider's `json`; they get their own table only if an endpoint needs to filter on them.
+- Schema changes are new numbered migrations, never edits to an applied one: `npm -w apps/api run
+  db:migrate:local`, then `db:migrate:remote` (or the deploy command, section 7.6). The API tests apply every
+  migration to a local D1 first (`apps/api/test/apply-migrations.ts`).
 
-### 5.4 Minimal Worker entry (sketch)
+### 5.4 Abuse protection
+The API is public and read-only on purpose: it serves public catalog data, and no user data ever reaches the
+server (section 1.3), so there is nothing to log in to. A key in the app wouldn't help either, since everything
+shipped to the browser is visible. The risks are abuse, and M2 builds these defences:
+- **Rate limit:** a per-IP limit on `/api/sub/*` using the Workers Rate Limiting binding, answering
+  `429` with the `rate_limited` error. On the free plan, going over the daily Worker quota makes requests fail;
+  it can't run up a bill. The app's own pages and catalog file are static assets and don't count.
+- **Caching:** every GET is edge-cached (section 5.1), so repeated requests rarely run the Worker or touch D1.
+- **Icon proxy (`/icon`):** accepts only a valid public domain name, only ever asks the fixed icon services
+  (DuckDuckGo, then Google) for that domain, never fetches a URL from the request, and caches results for 30
+  days. That keeps it from becoming an open proxy or reaching internal addresses.
+- **Validation:** every query parameter goes through Zod, and anything unknown or invalid gets `400`.
+- **CORS** limits browser calls from other sites to `https://simplely.ca`. It's an extra layer, not authentication.
+- **Writes** arrive only in Phase 5 (`POST /reports`), with Turnstile and a stricter rate limit.
+- **Secrets** (the bot's GitHub token, AI keys) are Worker secrets (`wrangler secret put`) or a gitignored `.env`,
+  never tracked files. The D1 `database_id` in `wrangler.jsonc` isn't a secret: using it needs a Cloudflare login.
+
+### 5.5 Worker entry (sketch)
 ```ts
 // apps/api/src/index.ts
 import { Hono } from 'hono';
@@ -955,8 +982,8 @@ the Wikidata queue:
    ```
 5. **D1:**
    ```bash
-   npx wrangler d1 create simply-sub-catalog      # copy the database_id into wrangler.jsonc
-   npx wrangler d1 migrations create simply-sub-catalog init
+   npx wrangler d1 create simply-sub-catalog --location enam   # ✅ done in M0.8; the id is in wrangler.jsonc
+   npx wrangler d1 migrations apply simply-sub-catalog --remote   # ✅ M0.8: applies migrations/0001_init.sql
    ```
 6. **API token for CI:** in the Cloudflare dashboard go to *My Profile → API Tokens*. Create a token with
    *Workers Scripts: Edit*, *D1: Edit* and *Workers Routes: Edit* permissions. In GitHub, save it as the repo
