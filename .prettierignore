@@ -1,0 +1,7 @@
+# Prettier also skips everything in .gitignore.
+package-lock.json
+apps/api/public/simply/
+
+# Hand-written docs: keep them exactly as written.
+*.md
+docs/
