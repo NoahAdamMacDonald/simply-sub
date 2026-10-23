@@ -13,7 +13,8 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 ## Stack (pinned)
 - Angular 22.2.3 (CLI/build 22.2.4), exact versions with no `^` · TypeScript · Angular Material 3 (material/cdk 22.2.4) · standalone + signals + zoneless
 - The root `package.json` `overrides` pins `vite` to 8.3.5 because `@angular/build` 22.2.4 ships a vulnerable vite 8.3.0. Remove the override once a newer `@angular/build` is out.
-- Node 24.19.0 / npm 12.0.2 via Volta 2.0.2 (`"volta"` field in root package.json)
+- Node 24.19.0 / npm 12.0.2 via Volta 2.0.2 (`"volta"` field in root package.json). Workers Builds pins Node
+  with its `NODE_VERSION` build variable (BLUEPRINT §7.6), so change both together.
 - Cloudflare Worker (Hono) + D1 for the read-only catalog API; the same Worker serves the SPA as static assets
 - npm workspaces: `apps/web`, `apps/api`, `packages/core`, plus `data/` (YAML catalog) and `scripts/`
 

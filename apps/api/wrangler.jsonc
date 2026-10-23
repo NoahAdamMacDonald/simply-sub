@@ -1,5 +1,5 @@
 // The "simply-sub" Worker: the app's static files plus the catalog API (BLUEPRINT §2, §7.4).
-// The simplely.ca routes arrive with M0.9.
+// Workers Builds deploys it on every push to main (BLUEPRINT §7.6).
 {
   "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "simply-sub",
@@ -24,5 +24,15 @@
       "migrations_dir": "migrations",
     },
   ],
+  // Only these two paths of simplely.ca belong to this Worker; the rest of the domain stays free for
+  // other projects. A route needs a proxied DNS record for the hostname (the AAAA 100:: placeholder).
+  "routes": [
+    { "pattern": "simplely.ca/simply/sub*", "zone_name": "simplely.ca" },
+    { "pattern": "simplely.ca/api/sub*", "zone_name": "simplely.ca" },
+  ],
+  // Production lives only on simplely.ca. Non-main branch builds still get a preview link on
+  // workers.dev (public but unguessable; Cloudflare Access can lock them).
+  "workers_dev": false,
+  "preview_urls": true,
   "observability": { "enabled": true },
 }

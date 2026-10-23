@@ -1029,7 +1029,8 @@ URL. The rest of `simplely.ca` (root page, other future apps) stays free for oth
 since these routes only claim `/simply/sub*` and `/api/sub*`.
 
 The real file grows with the tasks: M0.7 has `assets` and `observability` only, M0.8 adds `d1_databases`, and
-M0.9 adds `routes`, so the config never names an account resource before it exists. `npm -w apps/api run build`
+M0.9 adds `routes` with `workers_dev: false` and `preview_urls: true` (section 7.6), so the config never names an
+account resource before it exists. `apps/api/wrangler.jsonc` is the current version. `npm -w apps/api run build`
 ends with `wrangler deploy --dry-run`, which bundles the Worker without logging in or deploying.
 
 ### 7.5 Local development
@@ -1042,11 +1043,30 @@ ends with `wrangler deploy --dry-run`, which bundles the Worker without logging 
   ```
 
 ### 7.6 CI/CD (Workers Builds)
-Connect the GitHub repo in *Workers & Pages → simply-sub → Settings → Builds*:
-- **Build command:** `npm ci && npm run build && npm run data:build`
-- **Deploy command:** `npx wrangler d1 migrations apply simply-sub-catalog --remote && npx wrangler d1 execute simply-sub-catalog --remote --file dist/seed.sql && npx wrangler deploy`
-- **Root directory:** `apps/api`, or the repo root with `--config apps/api/wrangler.jsonc`
-- Non-`main` branches get **preview builds** (`wrangler versions upload`) with their own preview URL.
+Connected in M0.9 (*Workers & Pages → Create → Import a repository*; later changes go in *simply-sub →
+Settings → Build*). The settings as they are now:
+
+| Setting | Value |
+|---|---|
+| Worker name | `simply-sub` (must match `name` in `wrangler.jsonc`) |
+| Production branch | `main` |
+| Root directory | `apps/api` |
+| Build command | `cd ../.. && npm ci && npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Preview (non-production branch) command | `npx wrangler versions upload`: a preview link on workers.dev, production untouched |
+| Build variable | `NODE_VERSION` = `24.19.0` (the image defaults to 24.18.0; it can't pick npm, and its npm 10.9.2 installs our lockfile cleanly) |
+| API token | the one Workers Builds creates: Workers scripts, KV, R2 and routes, but **not D1** |
+
+- **From M1.5** the deploy also reseeds D1. The deploy command becomes
+  `npx wrangler d1 migrations apply simply-sub-catalog --remote && npx wrangler d1 execute simply-sub-catalog --remote --file dist/seed.sql && npx wrangler deploy`,
+  and the build command gains `&& npm run data:build`. That needs a custom API token with D1 Edit added
+  (selected under *API token*). Preview builds never touch D1, since they share the production database.
+- **Routes:** `simplely.ca/simply/sub*` and `simplely.ca/api/sub*`. A route only fires for a proxied hostname, so
+  the zone has a placeholder `AAAA @ 100::` record (proxied). Nothing serves the rest of `simplely.ca` yet.
+- `workers_dev: false` and `preview_urls: true`: production is only on simplely.ca, and branch builds still get
+  a (public, unguessable) preview link.
+- Workers Builds deploys straight from `main`; it doesn't wait for GitHub checks. Branch protection (M0.10) is
+  what keeps a failing change off `main`.
 - A small GitHub Actions `ci.yml` still runs lint, tests and `data:validate` as required **PR checks**, because
   that's what blocks merging a bad catalog change. Actions are free for public repos.
 - **Security headers:** add a `_headers` file in `public/` with a strict Content-Security-Policy,
