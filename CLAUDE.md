@@ -37,6 +37,9 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 
 ## Conventions
 - `inject()`, signals, `@if`/`@for`, lazy feature routes, thin components.
+- Import shared logic as `@simply-sub/core` (TypeScript source via the `tsconfig.base.json` path alias; no build
+  step). Vitest configs that import it set `resolve.tsconfigPaths: true`. Get `today` from `ClockService`
+  (`apps/web/src/app/core/clock/`).
 - Components keep their template and styles in separate `.html` and `.scss` files (`templateUrl`, `styleUrl`),
   even small ones. This overrides "prefer inline templates" in angular-best-practices.md.
 - Colour tokens: a colour that is a version of another (hover, text shade, alias) is derived from it in

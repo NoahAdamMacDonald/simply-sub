@@ -1,0 +1,21 @@
+{
+  "name": "@simply-sub/core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "vitest": "4.1.12"
+  },
+  "volta": {
+    "extends": "../../package.json"
+  }
+}

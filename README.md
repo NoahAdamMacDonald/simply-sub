@@ -29,10 +29,12 @@ An npm-workspaces monorepo (see [BLUEPRINT.md §3](BLUEPRINT.md#3-repository-str
 | Path | What |
 |---|---|
 | `apps/web` | The Angular 22 app |
-| `tsconfig.base.json` | TypeScript settings shared by every workspace |
+| `packages/core` | Business logic as pure TypeScript functions, shared by the app, the Worker and the scripts |
+| `tsconfig.base.json` | TypeScript settings shared by every workspace, and the `@simply-sub/core` path alias |
 
-The Cloudflare Worker (`apps/api`), shared logic (`packages/core`), the catalog (`data/`) and the scripts are
-added by later tasks in the project plan.
+Apps import `packages/core` as TypeScript source through the `@simply-sub/core` alias, so it has no build step.
+The Cloudflare Worker (`apps/api`), the catalog (`data/`) and the scripts are added by later tasks in the
+project plan.
 
 ## Commands
 
@@ -42,7 +44,7 @@ Run these from the repo root.
 |---|---|
 | `npm install` | Installs every workspace |
 | `npm run dev:web` | Starts the dev server at http://localhost:4200/ |
-| `npm run build` | Production build to `apps/web/dist/web/browser` |
-| `npm test` | Unit tests (Vitest) |
+| `npm run build` | Type-checks `packages/core`, then builds the app for production to `apps/web/dist/web/browser` |
+| `npm test` | Unit tests (Vitest) in every workspace, `packages/core` first |
 | `npm run lint` | ESLint |
 | `npm run format` / `npm run format:check` | Formats with / checks against Prettier |

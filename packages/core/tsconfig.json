@@ -1,0 +1,12 @@
+/* packages/core is plain TypeScript shared by the app, the Worker and the scripts (BLUEPRINT §3). */
+/* Only the ES library and no ambient types, so DOM and Node APIs don't type-check here. */
+/* Apps import it as source through the @simply-sub/core path alias, so nothing is emitted. */
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "types": [],
+    "noEmit": true
+  },
+  "include": ["src", "test"]
+}

@@ -10,6 +10,11 @@
     "skipLibCheck": true,
     "isolatedModules": true,
     "target": "ES2022",
-    "module": "preserve"
+    "module": "preserve",
+    /* Shared packages are imported as TypeScript source, with no build step. Without baseUrl */
+    /* (deprecated in TS 6), these paths are relative to this file. */
+    "paths": {
+      "@simply-sub/core": ["./packages/core/src/index.ts"]
+    }
   }
 }

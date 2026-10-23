@@ -24,6 +24,35 @@ export default defineConfig(
     extends: [eslint.configs.recommended, tseslint.configs.recommended, tseslint.configs.stylistic],
   },
   {
+    // packages/core is plain TypeScript shared by the app, the Worker and the scripts (BLUEPRINT §3),
+    // and it never reads the clock: the app passes `today` in from ClockService (CLAUDE.md).
+    files: ['packages/core/**/*.ts'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['@angular/*', 'dexie', 'hono', 'hono/*', 'cloudflare:*', 'node:*'],
+              message: 'packages/core is pure TypeScript: no framework, storage or runtime APIs.',
+            },
+          ],
+        },
+      ],
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: "NewExpression[callee.name='Date'][arguments.length=0]",
+          message: 'Take `today` as a parameter instead of reading the clock.',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
+          message: 'Take `today` as a parameter instead of reading the clock.',
+        },
+      ],
+    },
+  },
+  {
     files: ['apps/web/**/*.ts'],
     extends: [angular.configs.tsRecommended],
     processor: angular.processInlineTemplates,

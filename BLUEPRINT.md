@@ -153,6 +153,7 @@ simply-sub/
 │  │  │  │  ├─ storage/      # Dexie database, repositories, migrations
 │  │  │  │  ├─ catalog/      # CatalogService: fetch, cache, search
 │  │  │  │  ├─ theme/        # light/dark, CSS tokens
+│  │  │  │  ├─ clock/        # ClockService: the only reader of the device clock (`today`)
 │  │  │  │  ├─ currency/     # Intl formatting, FX conversion
 │  │  │  │  └─ settings/
 │  │  │  ├─ features/        # one folder per page (lazy-loaded routes)
@@ -183,14 +184,16 @@ simply-sub/
 ├─ packages/
 │  └─ core/                  # pure TypeScript with no Angular or Worker dependencies
 │     ├─ src/
+│     │  ├─ index.ts         # the public API, imported as `@simply-sub/core`
 │     │  ├─ catalog/         # catalog types + Zod schemas (shared by web, api, scripts)
 │     │  ├─ user/            # user-data types (lists, items, cards…)
+│     │  ├─ dates/           # ISO calendar dates: IsoDate, toIsoDate, addDays
 │     │  ├─ schedule/        # recurrence: next payment dates, monthly/annual totals
 │     │  ├─ ranking/         # rank resolution (item override > profile > not ranked)
 │     │  ├─ optimizer/       # suggestion engine (section 10)
 │     │  ├─ rewards/         # card reward maths (section 9)
 │     │  └─ export/          # csv, json, txt, xlsx, ics serializers
-│     └─ test/
+│     └─ test/               # Vitest specs, mirroring src/ (run in the America/Vancouver time zone)
 │
 ├─ data/                     # catalog source of truth (human-edited)
 │  ├─ features.yaml          # feature registry
@@ -220,6 +223,11 @@ simply-sub/
 **Why this layout**
 - `packages/core` holds the business logic (optimizer, schedules, rewards, exporters) as plain functions. It can be
   unit-tested without Angular and reused by the API and scripts.
+- Apps import core as TypeScript source through the `@simply-sub/core` path alias in `tsconfig.base.json`, so core
+  has no build step. Angular's build, Wrangler and tsx read the alias themselves. A Vitest config that imports core
+  sets `resolve.tsconfigPaths: true`. Core's `package.json` `exports` points at the same file, so the npm workspace
+  link resolves it too. Workspace tsconfigs extend the base with a relative path, because Vite can't follow an
+  absolute Windows `extends`.
 - `data/` makes catalog edits plain Git diffs: easy to review, revert and automate.
 - One Worker serves both the app and the API: one deploy, one domain, no CORS problems in production.
 
@@ -228,11 +236,13 @@ simply-sub/
 {
   "name": "simply-sub",
   "private": true,
-  "workspaces": ["apps/*", "packages/*"],
+  // packages/* first, so `npm test` runs core's tests before `ng test` (which watches in a terminal)
+  "workspaces": ["packages/*", "apps/*"],
   "scripts": {
     "dev:web": "npm -w apps/web run start",
     "dev:api": "npm -w apps/api run dev",
-    "build": "npm -w packages/core run build && npm -w apps/web run build && npm -w apps/api run build",
+    // core has nothing to emit; its tsc check runs first because Vitest strips types without checking them
+    "build": "npm -w packages/core run typecheck && npm -w apps/web run build && npm -w apps/api run build",
     "test": "npm run test --workspaces --if-present",
     "data:validate": "tsx scripts/validate-data.ts",
     "data:build": "tsx scripts/build-catalog.ts"
