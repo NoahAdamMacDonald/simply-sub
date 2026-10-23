@@ -48,5 +48,12 @@ Run these from the repo root.
 | `npm run build` | Type-checks `packages/core`, builds the app for production, copies it into `apps/api/public/simply/sub/`, then type-checks and bundles the Worker (`wrangler deploy --dry-run`: nothing is deployed) |
 | `npm test` | Unit tests (Vitest) in every workspace, `packages/core` first; the Worker's run inside workerd |
 | `npm -w apps/api run db:migrate:local` / `db:migrate:remote` | Applies new D1 migrations (`apps/api/migrations/`) to the local or the Cloudflare database |
-| `npm run lint` | ESLint |
+| `npm run lint` | ESLint and Stylelint |
 | `npm run format` / `npm run format:check` | Formats with / checks against Prettier |
+
+## Contributing
+
+`main` is protected: every change goes through a pull request, and the `ci` check (lint, Prettier, tests and
+the build, from [.github/workflows/ci.yml](.github/workflows/ci.yml)) must pass before it can be squash-merged.
+Merges to `main` deploy to simplely.ca through Cloudflare Workers Builds. See
+[PROJECT-PLAN.md §1.2](PROJECT-PLAN.md#12-day-to-day-workflow) for the branch and commit conventions.

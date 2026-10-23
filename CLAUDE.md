@@ -36,6 +36,12 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 - `packages/core` functions never read the clock. They take `today` as a parameter, and the app passes it in from a single `ClockService`, so tests can fix the date.
 - The app reads the catalog from the static `data/catalog.json` and icons from static files. It only calls the Worker for `/fx` and custom-subscription icons.
 
+## Git workflow
+- `main` is protected (no bypass): never push to it. Work on a task branch (`feat/m5-3-search-filters`), push it,
+  open a PR with `gh pr create`, and wait for the required check `ci` to pass. Squash-merge
+  (`gh pr merge --squash`) only when the user asks.
+- Every push to `main` deploys to simplely.ca (Workers Builds); branch pushes get a preview link.
+
 ## Conventions
 - `inject()`, signals, `@if`/`@for`, lazy feature routes, thin components.
 - Import shared logic as `@simply-sub/core` (TypeScript source via the `tsconfig.base.json` path alias; no build
