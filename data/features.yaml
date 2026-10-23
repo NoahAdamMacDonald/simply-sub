@@ -128,8 +128,8 @@
   unit: aliases
   tiers:
     - { id: 1+, name: Any email aliases, min: 1 }
-    - { id: 10+, name: 10 or more aliases, min: 10 }
-  aliases: [masked email, disposable email]
+    - { id: 11+, name: More than 10 aliases, min: 11 }
+  aliases: [hide-my-email, masked email, disposable email]
 
 # ── Security & passwords ───────────────────────────────────────────────────────
 # `password-manager` is a group: ranking it means "I want a password manager at all". Its children start
@@ -212,8 +212,22 @@
   type: boolean
   aliases: [online calendar]
 
+# ── Accounts & sharing ─────────────────────────────────────────────────────────
+# A plan that doesn't list account.users is for one person, so there's no "just you" tier: a tier is provided
+# by every plan whose value is at least its min.
+- id: account.users
+  name: People included
+  category: account
+  type: number
+  unit: people
+  tiers:
+    - { id: 2-5, name: 2 to 5 people, min: 2, max: 5 }
+    - { id: 6+, name: 6 or more people, min: 6 }
+  aliases: [family plan, duo plan, users, members]
+
 # ── Services that include other services (overlap detection) ───────────────────
-# Values are plan ids (proton.pass-plus), never shown in ranking UIs.
+# Values are provider or plan ids (proton.pass-plus). A plan that lists plans here is a suite, and inclusion
+# is transitive (BLUEPRINT §4.4). Never shown in ranking UIs.
 - id: includes-subscription
   name: Includes another subscription
   category: bundle

@@ -25,6 +25,7 @@ feature:
   - { id: ai, name: AI }
   - { id: bundle, name: Included services }
   - { id: productivity, name: Productivity & calendar }
+  - { id: account, name: Accounts & sharing }
 
 # The card-reward category of a purchase: a provider's `spendCategory`.
 spend:

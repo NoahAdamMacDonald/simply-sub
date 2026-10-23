@@ -110,7 +110,7 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 |---|---|---|
 | M1.1 | Zod schemas + types for the catalog (features with tiers and headline flags, providers, plans, prices, add-ons, bundles); generate JSON Schema for YAML autocomplete | VS Code autocompletes and validates `data/**/*.yaml` |
 | M1.2 | `data/features.yaml` and `data/categories.yaml` (service, feature and spend categories) | Every feature used by the first providers exists |
-| M1.3 | Hand-write `netflix`, `disney-plus`, `crave`, `mullvad`, `proton` and one bundle | All pass validation, and their shapes match `docs/api-output-examples.json` |
+| M1.3 | Hand-write `netflix`, `disney-plus`, `crave`, `mullvad`, `proton` and one bundle. Proton: Free, the Plus plans, and the Unlimited, Duo and Family suites; no business plans (BLUEPRINT §4.4) | All pass validation, and their shapes match `docs/api-output-examples.json` |
 | M1.4 | `scripts/validate-data.ts` (BLUEPRINT §6.2) in CI | A broken file fails CI with a readable message |
 | M1.5 | `scripts/build-catalog.ts` → static `catalog.json` + `seed.sql` | The output matches the `GET /catalog` example |
 | M1.6 | `scripts/fetch-icons.ts`: catalog favicons → `public/simply/sub/icons/<id>.png` (manual overrides in `data/logos/`) | Every provider has an icon or the fallback |
@@ -224,6 +224,8 @@ These live in `packages/core` as pure functions, so every page computes them the
     "this year".
   - `autoRenew: false` doesn't stop charges. It marks them `manual`, and the calendar shows "Renew manually".
     Only `endDate` stops them.
+- **Free plans:** a $0 price creates no charges, so a free item never appears on the calendar and adds nothing to
+  totals. A price of 0 shows as "Free", never with ≈.
 - **Specific dates (limited windows):** a charge at each window's start, then one every interval until the window
   ends. `repeatYearly` copies the window into every year. Example: Sep 2 – Nov 1, monthly → charges on Sep 2 and Oct 2.
 - **Currency:** everything is totalled in the user's currency. A total that includes a converted amount shows "≈".
@@ -622,6 +624,7 @@ In Specific dates mode, the renewal fields are replaced by:
 - **Billed:** only intervals the plan has prices for (custom plans: any interval and count).
 - **Next renewal** (= `anchorDate`): required for Ongoing. Defaults to one interval from today, with the hint "Check your account page for the exact date".
 - **Auto-renews:** shown only when the price's `autoRenew` is true. Otherwise a note says "This plan renews manually — we'll remind you".
+- **Free plans:** when the picked price is 0, Billed, Next renewal, Auto-renews and the price override are hidden. The item is saved as Ongoing, with today as the anchor date.
 - **Specific dates:** at least one window; each end must be after its start; windows can't overlap.
 - **Price override:** an amount above 0, with a currency.
 - **Feature ranks:** the plan's provided keys (§3.2), grouped. The dropdown starts with "Profile default (X)" and includes Essential.
@@ -695,12 +698,13 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
 - **One card per provider.** It shows the plan you already have if that matches the filters, otherwise the cheapest plan that matches every filter. Plan chips switch between the provider's matching plans.
 - **Matching:** text matches provider names and aliases, plan names, feature names and aliases, and category names, in this order: exact or prefix name → substring → alias → feature or category. 150 ms debounce.
 - **Sort:** Best match (default when there's text), Price low→high (default otherwise), Price high→low, Name A–Z, Most features. Price sorts use the lowest monthly equivalent of the plan shown.
-- **Prices:** every interval price is a button → flow F1 (or F2 in pick mode). Converted prices show ≈, the icon and a tooltip.
+- **Prices:** every interval price is a button → flow F1 (or F2 in pick mode). Converted prices show ≈, the icon and a tooltip. A $0 price shows as "Free".
 - **Links:** Plan ↗ and Cancel ↗ open in a new tab (`rel="noopener"`).
 - **Status:** follows §3.3, at provider level.
 - **Expanded section:**
   - The plan's features grouped by registry parent, with the user's rank dot next to each.
   - Add-ons with prices, and bundles containing the plan with their savings (a bundle price click → F4).
+  - For a suite plan (BLUEPRINT §4.4): the plans it includes, and its savings against buying them separately when there are any.
   - Perks, and accepted cards (Phase 4).
   - "Price checked Oct 14, 2026", with a "may be out of date" badge when it's older than 90 days.
 - **Filter panel** (on the right; becomes a drawer opened by ☰ under 960 px):
@@ -935,7 +939,7 @@ FREE SAVINGS — nothing you rank is lost
 - Runs the optimizer for this list, in a Web Worker if it takes longer than about 50 ms.
 - Sections, in this order: Free savings, Red, Orange, Yellow.
 - Each card shows:
-  - the changes (keep / downgrade / switch / remove / convert to extra member / bundle / interval / card)
+  - the changes (keep / downgrade / switch / remove / convert to extra member / bundle or suite / interval / card)
   - savings over the next 12 months
   - features lost or gained, with rank dots
   - an "estimated" tag when converted prices are involved
