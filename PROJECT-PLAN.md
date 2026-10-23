@@ -50,8 +50,11 @@ Last updated: 2026-10-23
 1. Turn each task ID in section 2 into a GitHub issue (e.g. "M5.3 Search filter panel"), and track them on a
    GitHub Project board: Todo → Doing → Review → Done.
 2. Use one branch per task: `feat/m5-3-search-filters`.
-3. Open a PR early. CI runs lint, tests and data validation (BLUEPRINT §7.6).
-4. Squash-merge to `main`. Workers Builds then deploys to simplely.ca automatically.
+3. Open a PR early. CI (the required check `ci`) runs lint, the Prettier check, tests and the build, plus data
+   validation from M1.4 (BLUEPRINT §7.6). Each branch also gets a Workers Builds preview link.
+4. Squash-merge to `main` once `ci` is green; that's the only merge method, and the branch is deleted after.
+   `main` is protected with no bypass, so nothing reaches it without a PR. Workers Builds then deploys to
+   simplely.ca automatically.
 5. Commit messages: `feat(search): add price range filter`, `fix(calendar): month-end dates`.
 
 ### 1.3 Working with an AI assistant

@@ -220,7 +220,7 @@ simply-sub/
 ├─ apps/bot/                # Cron Worker: nightly price check (Workflows + Workers AI) → GitHub PRs
 │
 └─ .github/workflows/
-   └─ ci.yml                 # required PR checks: lint, test, validate data, build
+   └─ ci.yml                 # the required PR check `ci`: lint, format, test, build (+ data:validate from M1.4)
                              # (deploys run on Cloudflare Workers Builds, section 7.6)
 ```
 
@@ -985,9 +985,9 @@ the Wikidata queue:
    npx wrangler d1 create simply-sub-catalog --location enam   # ✅ done in M0.8; the id is in wrangler.jsonc
    npx wrangler d1 migrations apply simply-sub-catalog --remote   # ✅ M0.8: applies migrations/0001_init.sql
    ```
-6. **API token for CI:** in the Cloudflare dashboard go to *My Profile → API Tokens*. Create a token with
-   *Workers Scripts: Edit*, *D1: Edit* and *Workers Routes: Edit* permissions. In GitHub, save it as the repo
-   secret `CLOUDFLARE_API_TOKEN`, and save your account id as `CLOUDFLARE_ACCOUNT_ID`.
+6. **No Cloudflare token in GitHub.** Workers Builds deploys with a token Cloudflare keeps (section 7.6), and
+   GitHub's CI only checks code, so the repo has no Cloudflare secrets. The bot's GitHub token (M8.3) is a
+   Worker secret on the Cloudflare side.
 
 ### 7.3 Serving the app under `/simply/sub/`
 Static assets are matched by **path**, so the build must sit at `public/simply/sub/` inside the Worker's asset folder:
@@ -1075,8 +1075,14 @@ Settings → Build*). The settings as they are now:
   blockers stop it, which is harmless.
 - Workers Builds deploys straight from `main`; it doesn't wait for GitHub checks. Branch protection (M0.10) is
   what keeps a failing change off `main`.
-- A small GitHub Actions `ci.yml` still runs lint, tests and `data:validate` as required **PR checks**, because
-  that's what blocks merging a bad catalog change. Actions are free for public repos.
+- A small GitHub Actions `.github/workflows/ci.yml` (M0.10) runs lint, the Prettier check, tests and the build
+  (`data:validate` joins in M1.4) as the required **PR check** `ci`, because that's what blocks merging a bad
+  change. Actions are free for public repos. It has a read-only token and no secrets, runs on `pull_request`
+  (fork PRs get nothing), and pins its actions to commit SHAs.
+- **`main` is protected** by a GitHub ruleset with no bypass, not even for the admin: changes arrive only through
+  a pull request, `ci` must pass on a branch that's up to date with `main`, and force pushes and deletion are
+  blocked. No approval is required (one developer). The repo allows only squash merges and deletes merged
+  branches.
 - **Security headers:** add a `_headers` file in `public/` with a strict Content-Security-Policy (allowing the
   Web Analytics beacon above), `Referrer-Policy` and `X-Content-Type-Options`.
 
