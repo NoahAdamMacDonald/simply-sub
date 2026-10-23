@@ -1,0 +1,739 @@
+id: proton
+name: Proton
+aliases: [proton mail, protonmail, proton vpn, proton pass, proton drive]
+website: https://proton.me
+category: privacy-suite
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+cancelUrl: https://account.proton.me/dashboard
+sources: { pricing: https://proton.me/pricing }
+notes: >-
+  One Proton account holds one paid plan. Every plan keeps the free tier of the Proton apps it doesn't upgrade.
+
+# Unlimited, Duo and Family are suite plans: they state their own features, and includes-subscription lists the
+# plans they replace (BLUEPRINT §4.4). Prices are the regular ones, not first-term offers. Proton sells every paid
+# plan in USD, CAD, EUR and CHF: a buyer pays in the currency they pick, and billingCurrency covers everyone else.
+plans:
+  - id: proton.free
+    name: Proton Free
+    link: https://proton.me/pricing
+    features:
+      storage.cloud: 5
+      email.addresses: 1
+      email.aliases: 10
+      calendar.included: true
+      vpn.included: true
+      vpn.devices: 1
+      vpn.unlimited-traffic: true
+      password-manager: true
+      password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
+      password-manager.health: [weak, reused]
+      password-manager.sharing: [share-vault]
+    featureLabels:
+      email.aliases: Hide-my-email aliases
+    notes: Up to 5 GB of Drive storage and 1 GB of Mail storage.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+
+  - id: proton.mail-plus
+    name: Mail Plus
+    link: https://proton.me/mail/pricing
+    features:
+      storage.cloud: 15
+      email.addresses: 10
+      email.custom-domains: 1
+      email.aliases: 10
+      calendar.included: true
+      vpn.included: true
+      vpn.devices: 1
+      vpn.unlimited-traffic: true
+      password-manager: true
+      password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
+      password-manager.health: [weak, reused]
+      password-manager.sharing: [share-vault]
+    featureLabels:
+      email.aliases: Hide-my-email aliases
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 47.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 6.24
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 59.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 47.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 47.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+
+  - id: proton.drive-plus
+    name: Drive Plus
+    link: https://proton.me/drive/pricing
+    features:
+      storage.cloud: 200
+      email.addresses: 1
+      email.aliases: 10
+      calendar.included: true
+      vpn.included: true
+      vpn.devices: 1
+      vpn.unlimited-traffic: true
+      password-manager: true
+      password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
+      password-manager.health: [weak, reused]
+      password-manager.sharing: [share-vault]
+    featureLabels:
+      email.aliases: Hide-my-email aliases
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 47.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 6.24
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 59.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 47.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 47.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+
+  - id: proton.vpn-plus
+    name: VPN Plus
+    link: https://protonvpn.com/pricing
+    features:
+      storage.cloud: 5
+      email.addresses: 1
+      email.aliases: 10
+      calendar.included: true
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      password-manager: true
+      password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
+      password-manager.health: [weak, reused]
+      password-manager.sharing: [share-vault]
+    featureLabels:
+      email.aliases: Hide-my-email aliases
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 83.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 12.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 104.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 83.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 83.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+
+  - id: proton.pass-plus
+    name: Pass Plus
+    link: https://proton.me/pass/pricing
+    features:
+      storage.cloud: 5
+      email.addresses: 1
+      email.aliases: unlimited
+      calendar.included: true
+      vpn.included: true
+      vpn.devices: 1
+      vpn.unlimited-traffic: true
+      password-manager: true
+      password-manager.item-types:
+        [
+          login,
+          totp,
+          passkey,
+          credit-card,
+          identity,
+          secure-note,
+          email-alias,
+          bank-account,
+          crypto-wallet,
+          api-credential,
+          ssh-key,
+          wifi,
+          database,
+          server,
+          software-license,
+          drivers-license,
+          passport,
+          medical-record,
+          membership,
+          reward-program,
+          government-id,
+          custom,
+        ]
+      password-manager.health: [breached, weak, reused]
+      password-manager.sharing: [share-to-user, share-vault, share-link, link-expiry]
+      security.dark-web-monitoring: true
+    featureLabels:
+      email.aliases: Hide-my-email aliases
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 35.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 6.24
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 44.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 35.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 35.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+
+  - id: proton.unlimited
+    name: Proton Unlimited
+    link: https://proton.me/pricing
+    features:
+      storage.cloud: 500
+      email.addresses: 15
+      email.custom-domains: 3
+      email.aliases: unlimited
+      calendar.included: true
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      password-manager: true
+      password-manager.item-types:
+        [
+          login,
+          totp,
+          passkey,
+          credit-card,
+          identity,
+          secure-note,
+          email-alias,
+          bank-account,
+          crypto-wallet,
+          api-credential,
+          ssh-key,
+          wifi,
+          database,
+          server,
+          software-license,
+          drivers-license,
+          passport,
+          medical-record,
+          membership,
+          reward-program,
+          government-id,
+          custom,
+        ]
+      password-manager.health: [breached, weak, reused]
+      password-manager.sharing: [share-to-user, share-vault, share-link, link-expiry]
+      security.dark-web-monitoring: true
+      includes-subscription:
+        [proton.mail-plus, proton.drive-plus, proton.vpn-plus, proton.pass-plus]
+    featureLabels:
+      email.aliases: Hide-my-email aliases
+    notes: Storage is shared across Proton apps.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 119.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 16.24
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 149.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 119.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 119.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+
+  - id: proton.duo
+    name: Proton Duo
+    link: https://proton.me/family
+    features:
+      account.users: 2
+      storage.cloud: 2000
+      email.addresses: 30
+      email.custom-domains: 3
+      email.aliases: unlimited
+      calendar.included: true
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      password-manager: true
+      password-manager.item-types:
+        [
+          login,
+          totp,
+          passkey,
+          credit-card,
+          identity,
+          secure-note,
+          email-alias,
+          bank-account,
+          crypto-wallet,
+          api-credential,
+          ssh-key,
+          wifi,
+          database,
+          server,
+          software-license,
+          drivers-license,
+          passport,
+          medical-record,
+          membership,
+          reward-program,
+          government-id,
+          custom,
+        ]
+      password-manager.health: [breached, weak, reused]
+      password-manager.sharing: [share-to-user, share-vault, share-link, link-expiry]
+      security.dark-web-monitoring: true
+      includes-subscription: [proton.unlimited]
+    featureLabels:
+      email.aliases: Hide-my-email aliases
+    perks: [Proton Scribe writing assistant]
+    notes: Storage is shared between the 2 users. Each user gets 10 VPN devices.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 179.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 24.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 224.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 179.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 179.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/pricing
+
+  - id: proton.family
+    name: Proton Family
+    link: https://proton.me/family
+    features:
+      account.users: 6
+      storage.cloud: 3000
+      email.addresses: 90
+      email.custom-domains: 3
+      email.aliases: unlimited
+      calendar.included: true
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      password-manager: true
+      password-manager.item-types:
+        [
+          login,
+          totp,
+          passkey,
+          credit-card,
+          identity,
+          secure-note,
+          email-alias,
+          bank-account,
+          crypto-wallet,
+          api-credential,
+          ssh-key,
+          wifi,
+          database,
+          server,
+          software-license,
+          drivers-license,
+          passport,
+          medical-record,
+          membership,
+          reward-program,
+          government-id,
+          custom,
+        ]
+      password-manager.health: [breached, weak, reused]
+      password-manager.sharing: [share-to-user, share-vault, share-link, link-expiry]
+      security.dark-web-monitoring: true
+      includes-subscription: [proton.unlimited]
+    featureLabels:
+      email.aliases: Hide-my-email aliases
+    perks: [Proton Scribe writing assistant]
+    notes: Storage is shared between up to 6 users. Each user gets 10 VPN devices.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 29.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/family
+      - region: GLOBAL
+        currency: USD
+        amount: 287.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/family
+      - region: GLOBAL
+        currency: CAD
+        amount: 37.64
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/family
+      - region: GLOBAL
+        currency: CAD
+        amount: 338.28
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/family
+      - region: GLOBAL
+        currency: EUR
+        amount: 29.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/family
+      - region: GLOBAL
+        currency: EUR
+        amount: 287.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/family
+      - region: GLOBAL
+        currency: CHF
+        amount: 29.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/family
+      - region: GLOBAL
+        currency: CHF
+        amount: 287.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://proton.me/family

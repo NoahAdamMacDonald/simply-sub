@@ -499,7 +499,8 @@ compared) and `notes`. The Proton example in `docs/api-output-examples.json` use
 **Free plans** have one price with `amount: 0` (Proton Free, Bitdefender's free plan). A $0 price creates no
 charges, shows as "Free" (never with ≈), and lets the optimizer suggest moving down to the free tier
 (section 10.3). When one free account covers several products, as Proton Free covers Mail, Drive, VPN and Pass,
-it's one plan, not one per product.
+it's one plan, not one per product. A paid plan that upgrades one product keeps the free tier of the others, so
+its `features` list those too (Proton Mail Plus still has Proton Free's VPN and Pass).
 
 **Money-back features** (for example a savings-account plan paying 3.5% interest, or Xbox Rewards) will use a
 `returns` block on the plan. It's **not in the schema yet**, so the strict schema rejects it: add it, with its
@@ -515,13 +516,19 @@ rules, in the task that first needs it.
 ### 4.4 Bundle file (`data/bundles/disney-crave-premium.yaml`)
 ```yaml
 id: bundle.disney-crave-premium      # always bundle.<slug>, so it can't clash with a provider or plan id
-name: Disney+ Premium & Crave Premium
+name: Disney+ and Crave Premium Bundle
 soldBy: crave                        # the provider id of who sells the bundle
 includes: [disney-plus.premium, crave.premium]   # plan ids, at least two
-link: https://www.crave.ca/en/bundles
-cancelUrl: https://www.crave.ca/en/account
+link: https://www.crave.ca/en/disneypluscravebundle
 prices:
-  - { region: CA, currency: CAD, amount: 29.99, interval: month, intervalCount: 1, autoRenew: true, lastVerified: 2026-10-21 }
+  - region: CA
+    currency: CAD
+    amount: 29.25
+    interval: month
+    intervalCount: 1
+    autoRenew: true
+    lastVerified: 2026-10-23
+    sourceUrl: https://www.crave.ca/en/disneypluscravebundle
 # Features = union of the included plans' features (computed)
 # Savings  = sum of the included plans' prices − bundle price (computed per region/interval)
 ```
@@ -1706,6 +1713,11 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 1. **Workflows free-tier limits**: confirm at setup time (section 7.1).
+2. **Buyer-chosen charge currency** (decide in M9): some providers let the buyer pick the currency they're charged
+   in. Proton sells fixed price lists in USD, CAD, EUR and CHF (stored as `GLOBAL` prices in each currency, with
+   `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
+   about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
+   M9's FX-fee maths has to decide how to treat both cases (section 9.3).
 
 **Resolved (2026-10-23)**
 - All-in-one plans such as Proton Unlimited, Duo and Family are **suite plans**, not bundles. They state their

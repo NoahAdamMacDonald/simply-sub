@@ -422,6 +422,10 @@ Oct 22, 2026, and use the illustrative prices from `docs/api-output-examples.jso
 | P15 | Not found & errors | `**` | **new** | M0.5 |
 
 ### P2 — Home `/`
+**Before starting:** Home has a temporary catalog preview (added in M1.3 to check the catalog data). Delete
+`apps/web/src/app/features/home/catalog-preview/`, its use in `home-page`, the `yaml` dependency of apps/web and
+the `".yaml": "text"` loader in `apps/web/angular.json`.
+
 **Wireframe:** `01-home.png` (light), `02-home-dark.png` (dark shell).
 **Purpose:** budget status at a glance, and the way into your lists.
 ```

@@ -1,0 +1,36 @@
+id: mullvad
+name: Mullvad VPN
+aliases: [mullvad]
+website: https://mullvad.net
+category: vpn
+spendCategory: software
+billingCurrency: { GLOBAL: EUR }
+sources: { pricing: https://mullvad.net/en/pricing }
+notes: >-
+  Prepaid only: you add time to an account number, and nothing renews by itself. Cards can pay in many local
+  currencies at a converted amount, and cryptocurrency payments get 10% off.
+
+plans:
+  - id: mullvad.vpn
+    name: Mullvad VPN
+    link: https://mullvad.net/en/pricing
+    features:
+      vpn.included: true
+      vpn.devices: 5
+    prices:
+      - region: GLOBAL
+        currency: EUR
+        amount: 5
+        interval: month
+        intervalCount: 1
+        autoRenew: false
+        lastVerified: 2026-10-23
+        sourceUrl: https://mullvad.net/en/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 60
+        interval: year
+        intervalCount: 1
+        autoRenew: false
+        lastVerified: 2026-10-23
+        sourceUrl: https://mullvad.net/en/pricing
