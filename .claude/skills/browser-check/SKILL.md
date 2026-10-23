@@ -57,3 +57,5 @@ script doesn't prove the layout looks right.
 - Inject axe with `page.addScriptTag({ path: '<deps>/node_modules/axe-core/axe.min.js' })`, then
   `axe.run(document)`. A page-level `region` violation means content outside every landmark.
 - Trigger the error snackbar with `page.evaluate(() => setTimeout(() => { throw new Error('x'); }))`.
+- Run axe on the snackbar only once it has opened. While opening, it fades in (contrast fails) and keeps its
+  content in an `aria-hidden` wrapper (`aria-hidden-focus` fails on the Dismiss button).

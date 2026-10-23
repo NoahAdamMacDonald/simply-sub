@@ -78,13 +78,16 @@ async function focused(page) {
   });
 }
 
+// ☰'s aria-expanded follows the drawer one render later (about 15 ms), so wait for that too.
 async function drawerSettled(page, open) {
   await page.waitForFunction((wantOpen) => {
     const drawer = document.querySelector('mat-sidenav');
+    const menu = document.querySelector('button[aria-label="Menu"]');
     return (
       drawer &&
       drawer.classList.contains('mat-drawer-opened') === wantOpen &&
-      !drawer.classList.contains('mat-drawer-animating')
+      !drawer.classList.contains('mat-drawer-animating') &&
+      (!menu || menu.getAttribute('aria-expanded') === String(wantOpen))
     );
   }, open);
 }
@@ -413,6 +416,16 @@ async function errorSnackbar(browser) {
     const message = page.getByText('Something went wrong');
     await message.waitFor();
     check(`${scheme}: an uncaught error shows "Something went wrong"`, await message.isVisible());
+    // While opening, the snackbar fades in and keeps its content (the Dismiss button too) in an
+    // aria-hidden wrapper until it moves it into the live region. axe flags both, so scan after.
+    await page.waitForFunction(() => {
+      const button = document.querySelector('.mat-mdc-snack-bar-container button');
+      if (!button || button.closest('[aria-hidden="true"]')) return false;
+      for (let el = button; el && el !== document.body; el = el.parentElement) {
+        if (getComputedStyle(el).opacity !== '1') return false;
+      }
+      return true;
+    });
     await shot(page, `${scheme}-error-snackbar`);
     await axe(page, `${scheme} 1280 with error snackbar`);
     await context.close();
