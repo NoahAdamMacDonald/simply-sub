@@ -59,8 +59,8 @@
           },
           "amount": {
             "type": "number",
-            "exclusiveMinimum": 0,
-            "description": "In the currency's major unit: 18.99 means $18.99"
+            "minimum": 0,
+            "description": "In the currency's major unit: 18.99 means $18.99. 0 means a free plan"
           },
           "interval": {
             "type": "string",

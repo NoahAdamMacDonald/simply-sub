@@ -1,0 +1,39 @@
+# The category lists (BLUEPRINT §4.5). Shapes: packages/core/src/catalog/category.ts.
+# Add a category here, in its own commit, before a feature or provider uses it (BLUEPRINT §13.4).
+
+# What a provider is: a provider's `category`.
+service:
+  - { id: streaming, name: Streaming video, icon: live_tv }
+  - { id: music, name: Music & audio, icon: music_note }
+  - { id: vpn, name: VPN, icon: vpn_lock }
+  - { id: privacy-suite, name: Privacy & security suites, icon: shield }
+  - { id: storage, name: Cloud storage, icon: cloud }
+  - { id: ai, name: AI assistants, icon: smart_toy }
+  - { id: gaming, name: Gaming, icon: sports_esports }
+  - { id: software, name: Software & apps, icon: apps }
+  - { id: news, name: News & magazines, icon: newspaper }
+  - { id: fitness, name: Fitness & wellness, icon: fitness_center }
+  - { id: education, name: Learning & education, icon: school }
+
+# How the Features page groups features: a feature's `category`.
+feature:
+  - { id: streaming, name: Streaming }
+  - { id: vpn, name: VPN }
+  - { id: storage, name: Storage }
+  - { id: email, name: Email }
+  - { id: security, name: Security & passwords }
+  - { id: ai, name: AI }
+  - { id: bundle, name: Included services }
+  - { id: productivity, name: Productivity & calendar }
+  - { id: account, name: Accounts & sharing }
+
+# The card-reward category of a purchase: a provider's `spendCategory`.
+spend:
+  - { id: streaming, name: Streaming & digital media }
+  - { id: software, name: Software & online services }
+  - { id: gaming, name: Gaming }
+  - { id: telecom, name: Phone & internet }
+  - { id: news, name: News & magazines }
+  - { id: other, name: Other }
+  - { id: health, name: Health & fitness }
+  - { id: education, name: Education & learning }

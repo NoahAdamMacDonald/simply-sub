@@ -66,6 +66,7 @@ added as a custom entry. Users rank how much they care about each feature. The a
 | User data | **Local-first**: IndexedDB through Dexie. No accounts in v1 |
 | Catalog API | Our own read-only API on a **Cloudflare Worker (Hono) + D1**, because no free API exists (section 5) |
 | Catalog source of truth | **YAML files in Git**, validated in CI and seeded into D1 automatically |
+| Catalog scope | **Personal and family plans**, free tiers included (a $0 price). Business and per-seat plans aren't in the v1 catalog. A provider's all-in-one plans (Proton Unlimited, Duo, Family) are **suite plans**, not bundles (section 4.4) |
 | Domain & URLs | **simplely.ca**: app at `https://simplely.ca/simply/sub/`, API at `https://simplely.ca/api/sub/v1/` |
 | Regions | **Every region a service supports** is stored. The user's own region and currency are the default. Prices without a native price in the user's currency are converted and marked with a "converted" icon (section 4.7). Canadian data is filled first |
 | Payment cards | **Kept**, manual entry: network, flat cash-back %, FX fee %, optional monthly limit (section 9). Built in Phase 4 |
@@ -291,11 +292,11 @@ one canonical feature describes the same capability across every provider, whate
    and Proton's "Identity" both map to the value `identity`. Aliases are used by search, by the AI drafting
    pipeline (section 6.5) and for the plan-level display label.
 2. **Groups.** Features are organised in a tree through `parent` (`password-manager` → `password-manager.item-types`,
-   `password-manager.sharing` …). A group's own rank means "I want this kind of thing at all" (for example *any*
-   password manager). Children start as Not ranked, so detailed options only matter once you rank them, and a
-   "Set all in this group" action makes bulk ranking quick. Ranks deliberately **don't cascade**. Otherwise
-   ranking "Password manager: Needed" would make all 22 item types Needed, and the optimizer could never suggest a
-   simpler password manager.
+   `password-manager.sharing` …; `vpn.included` → `vpn.devices`). A group's own rank means "I want this kind of
+   thing at all" (for example *any* password manager). Children start as Not ranked, so detailed options only
+   matter once you rank them, and a "Set all in this group" action makes bulk ranking quick. Ranks deliberately
+   **don't cascade**. Otherwise ranking "Password manager: Needed" would make all 22 item types Needed, and the
+   optimizer could never suggest a simpler password manager.
 3. **Reusable or nothing.** A feature goes in the registry if it is comparable and either exists at **two or more
    providers** or matters for ranking. Anything else that is truly provider-specific (the Fortnite Crew passes in
    Game Pass Ultimate) goes in a plan's `perks` list (free text, shown but not compared).
@@ -308,72 +309,66 @@ one canonical feature describes the same capability across every provider, whate
    names stay deliberate ("480p (SD)", not "480p").
 
 ```yaml
-# data/features.yaml
+# data/features.yaml (an excerpt: the file is the registry)
 - id: video.quality
   name: Video quality
   category: streaming
   type: enum
-  values:                             # ordered low → high, so "at least 1080p" queries work
+  values: # ordered low → high, so "at least 1080p" queries work
     - { id: 480p, name: 480p (SD) }
     - { id: 720p, name: 720p (HD) }
     - { id: 1080p, name: 1080p (Full HD), headline: true }
     - { id: 4k, name: 4K (Ultra HD), aliases: [uhd, 2160p], headline: true }
-- id: video.hdr
-  name: HDR
-  category: streaming
-  type: boolean
+  aliases: [resolution, picture quality]
 - id: streaming.ad-free
   name: Ad free
   category: streaming
   type: boolean
+  aliases: [no ads, ad-free]
 - id: streaming.concurrent-streams
   name: Simultaneous streams
   category: streaming
   type: number
   unit: devices
-  tiers:                         # rankable buckets (the Features page rows); "provided" when value ≥ min
-    - { id: "1", name: Single device, min: 1, max: 1 }
-    - { id: "2-4", name: 2 to 4 devices, min: 2, max: 4 }
-    - { id: "5+", name: More than 4 devices, min: 5 }
-- id: streaming.download-devices
-  name: Download devices
+  tiers: # rankable buckets (the Features page rows); a plan provides one when its value is at least min
+    - { id: '1', name: Single device, min: 1, max: 1 }
+    - { id: 2-4, name: 2 to 4 devices, min: 2, max: 4 }
+    - { id: 5+, name: More than 4 devices, min: 5 }
+  aliases: [screens, streams, devices at once]
+- id: streaming.live
+  name: Live TV and sports
   category: streaming
-  type: number
-  unit: devices
+  type: set
+  values:
+    - { id: tv-channels, name: Live TV channels, aliases: [live tv, linear tv] }
+    - { id: sports, name: Live sports, aliases: [sports streaming, live games] }
+  aliases: [live broadcasts]
 - id: vpn.included
   name: VPN
   category: vpn
   type: boolean
+  aliases: [vpn, virtual private network]
+  headline: true
 - id: vpn.devices
+  parent: vpn.included
   name: VPN devices
   category: vpn
   type: number
   unit: devices
-- id: vpn.unlimited-traffic
-  name: Unlimited VPN traffic
-  category: vpn
-  type: boolean
+  tiers:
+    - { id: 1-5, name: 1 to 5 devices, min: 1, max: 5 }
+    - { id: 6-10, name: 6 to 10 devices, min: 6, max: 10 }
+    - { id: 11+, name: More than 10 devices, min: 11 }
 - id: storage.cloud
   name: Cloud storage
   category: storage
   type: number
   unit: GB
-- id: password-manager.included
-  name: Password manager
-  category: security
-  type: boolean
-- id: security.dark-web-monitoring
-  name: Dark web monitoring
-  category: security
-  type: boolean
-- id: email.custom-domains
-  name: Custom email domains
-  category: email
-  type: number
-- id: ai.assistant
-  name: AI assistant
-  category: ai
-  type: boolean
+  tiers:
+    - { id: 1+, name: Any cloud storage, min: 1 }
+    - { id: 200+, name: 200 GB or more, min: 200 }
+    - { id: 1000+, name: 1 TB or more, min: 1000 }
+  aliases: [drive, online storage]
 
 # ── Detailed, shared password-manager taxonomy ─────────────────────────────
 - id: password-manager
@@ -381,6 +376,7 @@ one canonical feature describes the same capability across every provider, whate
   category: security
   type: boolean
   aliases: [password vault, pass]
+  headline: true
 - id: password-manager.item-types
   parent: password-manager
   name: Storable item types
@@ -393,68 +389,20 @@ one canonical feature describes the same capability across every provider, whate
     - { id: credit-card, name: Credit cards, aliases: [payment cards] }
     - { id: identity, name: Identity, aliases: [personal information, personal info, identities] }
     - { id: secure-note, name: Secure notes, aliases: [notes] }
-    - { id: email-alias, name: Email aliases, aliases: [hide-my-email, forwarding addresses] }
-    - { id: bank-account, name: Bank accounts }
-    - { id: crypto-wallet, name: Crypto wallets }
-    - { id: api-credential, name: API credentials }
-    - { id: ssh-key, name: SSH keys }
-    - { id: wifi, name: Wi-Fi networks, aliases: [wifi network] }
-    - { id: database, name: Database credentials }
-    - { id: server, name: Server credentials }
-    - { id: software-license, name: Software licenses }
-    - { id: drivers-license, name: Driver's licenses }
-    - { id: passport, name: Passports }
-    - { id: medical-record, name: Medical records }
-    - { id: membership, name: Memberships }
-    - { id: reward-program, name: Reward programs }
-    - { id: government-id, name: Government IDs, aliases: [social security, SIN] }
-    - { id: custom, name: Custom item types }
-- id: password-manager.health
-  parent: password-manager
-  name: Password health monitoring
-  category: security
-  type: set
-  values:
-    - { id: breached, name: Breached passwords, aliases: [compromised] }
-    - { id: weak, name: Weak passwords }
-    - { id: reused, name: Reused passwords, aliases: [duplicate] }
-    - { id: old, name: Old passwords }
-    - { id: suspicious, name: Suspicious logins }
-- id: password-manager.sharing
-  parent: password-manager
-  name: Password sharing
-  category: security
-  type: set
-  values:
-    - { id: share-to-user, name: Share with other users }
-    - { id: share-vault, name: Share folders/vaults, aliases: [share folders] }
-    - { id: share-link, name: Share by link }
-    - { id: link-expiry, name: Expiring links }
-    - { id: link-view-limit, name: Link view limits, aliases: [usage limits] }
-    - { id: role-permissions, name: Access roles, aliases: [viewer/editor/admin, read/write/admin] }
-- id: password-manager.generator.max-length
-  parent: password-manager
-  name: Max generated password length
-  category: security
-  type: number
-  unit: characters
-- id: password-manager.generator.passphrase
-  parent: password-manager
-  name: Memorable passphrases
-  category: security
-  type: boolean
+    # … 16 more values in data/features.yaml
 
 # ── Services that include other services (overlap detection) ───────────────
 - id: includes-subscription
   name: Includes another subscription
   category: bundle
   type: set
-  valuesFrom: providers        # values are provider/plan ids, e.g. ea-play, ubisoft-plus.classics
+  valuesFrom: providers # provider or plan ids (proton.pass-plus); listing plans makes a suite (section 4.4)
   rankable: false
 ```
 
 `number` features support `unlimited` as a value. Booleans that aren't listed on a plan are treated as `false`,
-and `set` features that aren't listed are treated as empty. Other categories (VPN, storage, email, gaming,
+and `set` features that aren't listed are treated as empty. Plans for several people (Duo, Family) list
+`account.users`, and a plan without it is for one person. Other categories (VPN, storage, email, gaming,
 security, AI) get the same detailed treatment as their providers are added. Grow the registry as you go
 instead of trying to finish it up front.
 
@@ -548,6 +496,11 @@ addOns:
 Plans can also have `featureLabels` (rule 5 in section 4.2), `perks` (provider-specific extras, shown but not
 compared) and `notes`. The Proton example in `docs/api-output-examples.json` uses all three.
 
+**Free plans** have one price with `amount: 0` (Proton Free, Bitdefender's free plan). A $0 price creates no
+charges, shows as "Free" (never with ≈), and lets the optimizer suggest moving down to the free tier
+(section 10.3). When one free account covers several products, as Proton Free covers Mail, Drive, VPN and Pass,
+it's one plan, not one per product.
+
 **Money-back features** (for example a savings-account plan paying 3.5% interest, or Xbox Rewards) will use a
 `returns` block on the plan. It's **not in the schema yet**, so the strict schema rejects it: add it, with its
 rules, in the task that first needs it.
@@ -573,6 +526,42 @@ prices:
 # Savings  = sum of the included plans' prices − bundle price (computed per region/interval)
 ```
 
+**Bundle or suite?** Use a bundle file only when the deal is exactly its parts: plans that are also sold on
+their own, whose features add up to the bundle's (Disney+ Premium & Crave Premium). A provider's own
+all-in-one plan with its own limits is a **suite plan** instead. Proton Unlimited has 500 GB where Drive Plus
+has 200 GB, and Duo and Family add people, so a computed union would get them wrong. Proton also allows only
+one paid plan per account, so its Plus plans are never held together on one account.
+- A suite is a normal plan in the provider file. It states its own `features`, and `includes-subscription`
+  lists the plans it replaces. Any plan that lists plans there is a suite, and inclusion is transitive (Duo
+  includes Unlimited, which includes the Plus plans).
+- Suites get the bundle treatment where it matters, all computed in `packages/core`:
+  - **Overlap:** a list with a suite and a plan it includes gets an overlap warning.
+  - **Savings:** the directly included plans' picked prices minus the suite's price, for the same interval,
+    shown only when positive. The API doesn't return suite savings in v1.
+  - **Optimizer:** a suite can replace the items whose plans it includes (section 10.3). With
+    `account.users: n`, it can replace up to n copies of each included plan in one list.
+
+```yaml
+# data/providers/proton.yaml (excerpt)
+  - id: proton.unlimited
+    name: Proton Unlimited
+    features:
+      storage.cloud: 500                # its own value, above Drive Plus's 200
+      email.addresses: 15
+      vpn.included: true
+      vpn.devices: 10
+      includes-subscription: [proton.mail-plus, proton.drive-plus, proton.vpn-plus, proton.pass-plus]
+    prices: [ … ]
+  - id: proton.duo
+    name: Proton Duo
+    features:
+      account.users: 2
+      storage.cloud: 2000
+      # … plus the rest of Unlimited's features
+      includes-subscription: [proton.unlimited]   # transitive: the Plus plans too
+    prices: [ … ]
+```
+
 ### 4.5 Catalog schemas and types (`packages/core/src/catalog/`)
 The **Zod schemas** are the single validation source. They're used by `validate-data.ts`, by the API, and by
 the app when it parses cached snapshots. The TypeScript types are inferred from them (`z.infer`), so the two
@@ -596,7 +585,7 @@ type Interval = 'day' | 'week' | 'month' | 'year';
 interface Price {
   region: string;            // ISO 3166-1 alpha-2 in capitals ('CA'), or 'GLOBAL'
   currency: string;          // ISO 4217 ('CAD')
-  amount: number;            // > 0, in the major unit (18.99)
+  amount: number;            // ≥ 0 (0 = a free plan), in the major unit (18.99)
   interval: Interval;
   intervalCount: number;     // whole number ≥ 1 (3 + month = quarterly)
   autoRenew: boolean;
@@ -693,7 +682,8 @@ from the file a plan is in, and flattened views add it.
     for bundles, `1` / `2-4` / `5+` for tiers;
   - regions are ISO 3166-1 alpha-2 in capitals, or `GLOBAL`; currencies are three capital letters;
   - dates are real `YYYY-MM-DD` dates; URLs are `https://` on a domain name;
-  - amounts are above 0, and `intervalCount` and `addOnLimit` are whole numbers of at least 1;
+  - amounts are 0 or more (0 is a free plan), and `intervalCount` and `addOnLimit` are whole numbers of at
+    least 1;
   - icons are Material Symbols names; text isn't empty; optional lists are left out rather than empty.
 - **Within one file:**
   - plan and add-on ids start with the provider id and are unique in the file;
@@ -929,8 +919,8 @@ rebuilds D1 from scratch. This gives you:
 
 ### 6.2 Validation (`scripts/validate-data.ts`, runs in CI on every PR)
 Validation fails if:
-- a file doesn't match its Zod schema (section 4.5), which already covers unknown keys, formats, amounts ≤ 0 and
-  the checks within one file
+- a file doesn't match its Zod schema (section 4.5), which already covers unknown keys, formats, negative amounts
+  and the checks within one file
 - a plan uses a feature id that isn't in `features.yaml`, a value of the wrong type for the feature, or an enum
   or set value that isn't listed (for `valuesFrom: providers`, an id that isn't a provider or plan)
 - a feature's `parent`, a provider's `category` or `spendCategory`, or a feature's `category` isn't defined
@@ -1013,7 +1003,8 @@ to render, clicks visible "Monthly/Annual" toggles, and saves the visible text p
 **④ AI extraction:** `scripts/extract-plans.ts` sends the cleaned page text to an LLM with **structured
 output** constrained to the provider schema. The prompt includes the feature registry, so the model can only
 use canonical ids, and it maps provider wording through `aliases`. The output contains:
-- plans, prices (amount, currency, interval), add-ons, perks
+- plans, prices (amount, currency, interval), add-ons, perks. Personal and family plans only, free tiers
+  included as $0 prices; business and per-seat plans are skipped (section 1.3)
 - **accepted card networks** (from the checkout or help page, for example "We accept Visa, Mastercard, Amex")
   and the billing currency
 - an **evidence quote** for every price and feature (shown in the PR, so review is fast)
@@ -1042,7 +1033,7 @@ or a manual override, not scraped images.
 Run the pipeline on your own services first (`subscriptions.txt`), all in CAD, to tune the prompts. Then add
 the Wikidata queue:
 - Bitdefender (Premium Security, Family, Digital Identity Protection, the free plan)
-- Proton (Free, Mail Plus, Pass Plus, VPN Plus, Unlimited, Family)
+- Proton (Free, Mail Plus, Drive Plus, VPN Plus, Pass Plus, and the Unlimited, Duo and Family suites)
 - Xbox Game Pass (PC, Standard, Ultimate)
 - Crunchyroll (Fan, Mega Fan, Ultimate Fan)
 - Claude (Free, Pro, Max)
@@ -1545,9 +1536,9 @@ Lives in `packages/core/src/optimizer/`. It's a **pure function**:
 ### 10.3 Candidate actions per item
 1. Keep.
 2. Change interval (monthly → annual if cheaper over 12 months and the item renews automatically).
-3. Downgrade or switch plans within the same provider.
+3. Downgrade or switch plans within the same provider, including down to its free plan.
 4. Convert to an **add-on** of another item's plan (for example a second Netflix account becomes an extra member).
-5. Replace with a **bundle** that covers two or more items.
+5. Replace with a **bundle** or a **suite plan** (section 4.4) that covers two or more items.
 6. Remove.
 7. (Phase 4) Move to a better card (an eligible network, within limits; section 9.3).
 
@@ -1701,7 +1692,9 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 | Plan | A purchasable tier (Netflix Standard) |
 | Price | A plan's cost for one region and interval |
 | Add-on | An extra purchasable on top of a plan (extra member) |
-| Bundle | Several plans sold together for one price |
+| Bundle | Several plans sold together for one price, with exactly their features |
+| Suite plan | A provider's all-in-one plan that includes its other plans and states its own features (Proton Unlimited) |
+| Free plan | A plan with a $0 price (Proton Free) |
 | List / item | A user's subscription list / one subscription in it |
 | Rank | How much the user cares about a feature: Essential > Critical > Needed > Wanted > Uses > Sometimes > Not ranked > Unused > Unwanted. Essential (this plan) and Critical (this provider) are subscription-level only |
 | Spend category | The category used for card rewards (streaming, software…) |
@@ -1713,6 +1706,13 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 1. **Workflows free-tier limits**: confirm at setup time (section 7.1).
+
+**Resolved (2026-10-23)**
+- All-in-one plans such as Proton Unlimited, Duo and Family are **suite plans**, not bundles. They state their
+  own features, and `includes-subscription` drives overlap warnings, savings and the optimizer (section 4.4).
+- **Free plans** are plans with a $0 price (section 4.3).
+- **Plans for several people** list the `account.users` feature (section 4.2).
+- **Business and per-seat plans** are out of scope for v1 (section 1.3).
 
 **Resolved (2026-10-22, later)**
 - Network FX: **no network API**. Stick with ECB rate + the user's FX fee %, labelled "estimated" (section 9.3).

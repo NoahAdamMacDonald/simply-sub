@@ -4,7 +4,10 @@ import { currencySchema, httpsUrlSchema, isoDateSchema, regionSchema } from './f
 export const intervalSchema = z.enum(['day', 'week', 'month', 'year']);
 export type Interval = z.infer<typeof intervalSchema>;
 
-/** One stored price: a plan, add-on or bundle's cost in one region for one billing period. */
+/**
+ * One stored price: a plan, add-on or bundle's cost in one region for one billing period. A free plan has one
+ * price of 0 (BLUEPRINT §4.3).
+ */
 export const priceSchema = z.strictObject({
   region: regionSchema.describe(
     'Where this price applies: an ISO 3166-1 alpha-2 region, or GLOBAL',
@@ -12,8 +15,8 @@ export const priceSchema = z.strictObject({
   currency: currencySchema.describe('The ISO 4217 currency of amount'),
   amount: z
     .number()
-    .positive('Must be more than 0')
-    .describe("In the currency's major unit: 18.99 means $18.99"),
+    .nonnegative('Must be 0 or more')
+    .describe("In the currency's major unit: 18.99 means $18.99. 0 means a free plan"),
   interval: intervalSchema.describe('The billing period unit'),
   intervalCount: z
     .int()

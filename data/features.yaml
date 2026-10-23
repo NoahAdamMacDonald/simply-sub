@@ -1,0 +1,236 @@
+# The feature registry (BLUEPRINT §4.2). Plans list only ids from this file.
+# Shapes: packages/core/src/catalog/feature.ts. Add a feature here, in its own commit, before a provider
+# uses it (BLUEPRINT §13.4).
+
+# ── Streaming ──────────────────────────────────────────────────────────────────
+- id: video.quality
+  name: Video quality
+  category: streaming
+  type: enum
+  values:
+    - { id: 480p, name: 480p (SD) }
+    - { id: 720p, name: 720p (HD) }
+    - { id: 1080p, name: 1080p (Full HD), headline: true }
+    - { id: 4k, name: 4K (Ultra HD), aliases: [uhd, 2160p], headline: true }
+  aliases: [resolution, picture quality]
+- id: video.hdr
+  name: HDR
+  category: streaming
+  type: boolean
+  aliases: [dolby vision, hdr10]
+- id: audio.dolby-atmos
+  name: Dolby Atmos
+  category: streaming
+  type: boolean
+  aliases: [spatial audio]
+- id: streaming.ad-free
+  name: Ad free
+  category: streaming
+  type: boolean
+  aliases: [no ads, ad-free]
+- id: streaming.concurrent-streams
+  name: Simultaneous streams
+  category: streaming
+  type: number
+  unit: devices
+  tiers:
+    - { id: '1', name: Single device, min: 1, max: 1 }
+    - { id: 2-4, name: 2 to 4 devices, min: 2, max: 4 }
+    - { id: 5+, name: More than 4 devices, min: 5 }
+  aliases: [screens, streams, devices at once]
+- id: streaming.download-devices
+  name: Download devices
+  category: streaming
+  type: number
+  unit: devices
+  tiers:
+    - { id: 1+, name: Offline downloads, min: 1 }
+    - { id: 6+, name: Downloads on 6+ devices, min: 6 }
+  aliases: [offline viewing, downloads]
+- id: streaming.kids-profiles
+  name: Kids profiles
+  category: streaming
+  type: boolean
+  aliases: [kids mode, children's profiles]
+- id: streaming.french-content
+  name: French-language content
+  category: streaming
+  type: boolean
+  aliases: [french, french audio, french dubs]
+- id: streaming.live
+  name: Live TV and sports
+  category: streaming
+  type: set
+  values:
+    - { id: tv-channels, name: Live TV channels, aliases: [live tv, linear tv] }
+    - { id: sports, name: Live sports, aliases: [sports streaming, live games] }
+  aliases: [live broadcasts]
+
+# ── VPN ────────────────────────────────────────────────────────────────────────
+- id: vpn.included
+  name: VPN
+  category: vpn
+  type: boolean
+  aliases: [vpn, virtual private network]
+  headline: true
+- id: vpn.devices
+  parent: vpn.included
+  name: VPN devices
+  category: vpn
+  type: number
+  unit: devices
+  tiers:
+    - { id: 1-5, name: 1 to 5 devices, min: 1, max: 5 }
+    - { id: 6-10, name: 6 to 10 devices, min: 6, max: 10 }
+    - { id: 11+, name: More than 10 devices, min: 11 }
+- id: vpn.unlimited-traffic
+  parent: vpn.included
+  name: Unlimited VPN traffic
+  category: vpn
+  type: boolean
+  aliases: [unlimited data, unlimited bandwidth]
+
+# ── Storage ────────────────────────────────────────────────────────────────────
+- id: storage.cloud
+  name: Cloud storage
+  category: storage
+  type: number
+  unit: GB
+  tiers:
+    - { id: 1+, name: Any cloud storage, min: 1 }
+    - { id: 200+, name: 200 GB or more, min: 200 }
+    - { id: 1000+, name: 1 TB or more, min: 1000 }
+  aliases: [drive, online storage]
+
+# ── Email ──────────────────────────────────────────────────────────────────────
+- id: email.addresses
+  name: Email addresses
+  category: email
+  type: number
+  unit: addresses
+  tiers:
+    - { id: '1', name: 1 address, min: 1, max: 1 }
+    - { id: 2-10, name: 2 to 10 addresses, min: 2, max: 10 }
+    - { id: 11+, name: More than 10 addresses, min: 11 }
+- id: email.custom-domains
+  name: Custom email domains
+  category: email
+  type: number
+  unit: domains
+  tiers:
+    - { id: 1+, name: At least 1 custom domain, min: 1 }
+    - { id: 3+, name: 3 or more custom domains, min: 3 }
+  aliases: [own domain]
+- id: email.aliases
+  name: Email aliases
+  category: email
+  type: number
+  unit: aliases
+  tiers:
+    - { id: 1+, name: Any email aliases, min: 1 }
+    - { id: 11+, name: More than 10 aliases, min: 11 }
+  aliases: [hide-my-email, masked email, disposable email]
+
+# ── Security & passwords ───────────────────────────────────────────────────────
+# `password-manager` is a group: ranking it means "I want a password manager at all". Its children start
+# unranked, and ranks never cascade (BLUEPRINT §4.2).
+- id: password-manager
+  name: Password manager
+  category: security
+  type: boolean
+  aliases: [password vault, pass]
+  headline: true
+- id: password-manager.item-types
+  parent: password-manager
+  name: Storable item types
+  category: security
+  type: set
+  values:
+    - { id: login, name: Logins, aliases: [account logins, passwords] }
+    - { id: totp, name: 2FA codes, aliases: [authenticator, one-time codes, otp] }
+    - { id: passkey, name: Passkeys }
+    - { id: credit-card, name: Credit cards, aliases: [payment cards] }
+    - { id: identity, name: Identity, aliases: [personal information, personal info, identities] }
+    - { id: secure-note, name: Secure notes, aliases: [notes] }
+    - { id: email-alias, name: Email aliases, aliases: [hide-my-email, forwarding addresses] }
+    - { id: bank-account, name: Bank accounts }
+    - { id: crypto-wallet, name: Crypto wallets }
+    - { id: api-credential, name: API credentials }
+    - { id: ssh-key, name: SSH keys }
+    - { id: wifi, name: Wi-Fi networks, aliases: [wifi network] }
+    - { id: database, name: Database credentials }
+    - { id: server, name: Server credentials }
+    - { id: software-license, name: Software licenses }
+    - { id: drivers-license, name: Driver's licenses }
+    - { id: passport, name: Passports }
+    - { id: medical-record, name: Medical records }
+    - { id: membership, name: Memberships }
+    - { id: reward-program, name: Reward programs }
+    - { id: government-id, name: Government IDs, aliases: [social security, SIN] }
+    - { id: custom, name: Custom item types }
+- id: password-manager.health
+  parent: password-manager
+  name: Password health monitoring
+  category: security
+  type: set
+  values:
+    - { id: breached, name: Breached passwords, aliases: [compromised] }
+    - { id: weak, name: Weak passwords }
+    - { id: reused, name: Reused passwords, aliases: [duplicate] }
+    - { id: old, name: Old passwords }
+    - { id: suspicious, name: Suspicious logins }
+- id: password-manager.sharing
+  parent: password-manager
+  name: Password sharing
+  category: security
+  type: set
+  values:
+    - { id: share-to-user, name: Share with other users }
+    - { id: share-vault, name: Share folders or vaults, aliases: [share folders] }
+    - { id: share-link, name: Share by link }
+    - { id: link-expiry, name: Expiring links }
+    - { id: link-view-limit, name: Link view limits, aliases: [usage limits] }
+    - { id: role-permissions, name: Access roles, aliases: [viewer/editor/admin, read/write/admin] }
+- id: security.dark-web-monitoring
+  name: Dark web monitoring
+  category: security
+  type: boolean
+  aliases: [breach monitoring, identity monitoring]
+
+# ── AI ─────────────────────────────────────────────────────────────────────────
+- id: ai.assistant
+  name: AI assistant
+  category: ai
+  type: boolean
+  aliases: [ai, chatbot]
+  headline: true
+
+# ── Productivity ───────────────────────────────────────────────────────────────
+- id: calendar.included
+  name: Calendar
+  category: productivity
+  type: boolean
+  aliases: [online calendar]
+
+# ── Accounts & sharing ─────────────────────────────────────────────────────────
+# A plan that doesn't list account.users is for one person, so there's no "just you" tier: a tier is provided
+# by every plan whose value is at least its min.
+- id: account.users
+  name: People included
+  category: account
+  type: number
+  unit: people
+  tiers:
+    - { id: 2-5, name: 2 to 5 people, min: 2, max: 5 }
+    - { id: 6+, name: 6 or more people, min: 6 }
+  aliases: [family plan, duo plan, users, members]
+
+# ── Services that include other services (overlap detection) ───────────────────
+# Values are provider or plan ids (proton.pass-plus). A plan that lists plans here is a suite, and inclusion
+# is transitive (BLUEPRINT §4.4). Never shown in ranking UIs.
+- id: includes-subscription
+  name: Includes another subscription
+  category: bundle
+  type: set
+  valuesFrom: providers
+  rankable: false

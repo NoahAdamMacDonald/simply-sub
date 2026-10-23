@@ -37,6 +37,11 @@ describe('providerSchema', () => {
     expect(issues(providerSchema, minimal)).toEqual([]);
   });
 
+  it('accepts a free plan, whose price is 0', () => {
+    const free = withValue(provider, ['plans', 0, 'prices', 0, 'amount'], 0);
+    expect(issues(providerSchema, free)).toEqual([]);
+  });
+
   describe('unknown keys', () => {
     it.each([
       ['on the provider', ['cancelURL'], ': Unrecognized key: "cancelURL"'],
@@ -113,8 +118,7 @@ describe('providerSchema', () => {
         'monthly',
         'Invalid option: expected one of "day"|"week"|"month"|"year"',
       ],
-      [['plans', 0, 'prices', 0, 'amount'], 0, 'Must be more than 0'],
-      [['plans', 0, 'prices', 0, 'amount'], -7.99, 'Must be more than 0'],
+      [['plans', 0, 'prices', 0, 'amount'], -7.99, 'Must be 0 or more'],
       [['plans', 0, 'prices', 0, 'intervalCount'], 0, 'Must be a whole number of at least 1'],
       [['plans', 1, 'addOnLimit'], 0, 'Must be a whole number of at least 1'],
       [['plans', 0, 'prices'], [], 'List at least one price'],

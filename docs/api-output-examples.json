@@ -10,7 +10,7 @@
       "optionalFields": "Optional fields are omitted when empty or unknown. For example, a provider without acceptedNetworks means 'unknown', so every card is allowed.",
       "ids": "Stable slugs: provider 'netflix', plan 'netflix.standard', add-on 'netflix.extra-member', bundle 'bundle.disney-crave-premium', feature 'video.quality'.",
       "rankKeys": "Boolean feature: '<featureId>'. Enum or set value: '<featureId>=<valueId>'. Number tier: '<featureId>=<tierId>'. A plan provides an enum key when its value is at least that value, and a tier key when its number is at least the tier's min (PROJECT-PLAN.md §3.2).",
-      "money": "Amounts are decimals in the currency's major unit (18.99 = $18.99). Currencies are ISO 4217. Regions are ISO 3166-1 alpha-2, or 'GLOBAL' for a single worldwide price.",
+      "money": "Amounts are decimals in the currency's major unit (18.99 = $18.99). Currencies are ISO 4217. Regions are ISO 3166-1 alpha-2, or 'GLOBAL' for a single worldwide price. A free plan has one price with amount 0: it creates no charges and the app shows it as Free (PROJECT-PLAN.md §3.1).",
       "pricing": "'prices' lists every stored price for every region. When a request includes region and currency, a 'pricing' array is added with one picked price per interval (BLUEPRINT §4.7). 'native: false' means the amount was converted, and the app shows ≈ and the exchange icon.",
       "monthlyEquivalent": "Price per month: year ÷ 12, week × 52 ÷ 12, day × 365 ÷ 12, each divided by intervalCount. Computed from the unrounded amount, then rounded to 2 decimals.",
       "dates": "Dates are YYYY-MM-DD. Timestamps are ISO 8601 in UTC.",
@@ -419,6 +419,31 @@
                   "aliases": ["offline viewing", "downloads"]
                 },
                 {
+                  "id": "streaming.kids-profiles",
+                  "name": "Kids profiles",
+                  "category": "streaming",
+                  "type": "boolean",
+                  "aliases": ["kids mode", "children's profiles"]
+                },
+                {
+                  "id": "streaming.french-content",
+                  "name": "French-language content",
+                  "category": "streaming",
+                  "type": "boolean",
+                  "aliases": ["french", "french audio", "french dubs"]
+                },
+                {
+                  "id": "streaming.live",
+                  "name": "Live TV and sports",
+                  "category": "streaming",
+                  "type": "set",
+                  "values": [
+                    { "id": "tv-channels", "name": "Live TV channels", "aliases": ["live tv", "linear tv"] },
+                    { "id": "sports", "name": "Live sports", "aliases": ["sports streaming", "live games"] }
+                  ],
+                  "aliases": ["live broadcasts"]
+                },
+                {
                   "id": "vpn.included",
                   "name": "VPN",
                   "category": "vpn",
@@ -483,6 +508,18 @@
                     { "id": "3+", "name": "3 or more custom domains", "min": 3 }
                   ],
                   "aliases": ["own domain"]
+                },
+                {
+                  "id": "email.aliases",
+                  "name": "Email aliases",
+                  "category": "email",
+                  "type": "number",
+                  "unit": "aliases",
+                  "tiers": [
+                    { "id": "1+", "name": "Any email aliases", "min": 1 },
+                    { "id": "11+", "name": "More than 10 aliases", "min": 11 }
+                  ],
+                  "aliases": ["hide-my-email", "masked email", "disposable email"]
                 },
                 {
                   "id": "password-manager",
@@ -568,18 +605,38 @@
                   "aliases": ["ai", "chatbot"]
                 },
                 {
+                  "id": "calendar.included",
+                  "name": "Calendar",
+                  "category": "productivity",
+                  "type": "boolean",
+                  "aliases": ["online calendar"]
+                },
+                {
+                  "id": "account.users",
+                  "name": "People included",
+                  "category": "account",
+                  "type": "number",
+                  "unit": "people",
+                  "tiers": [
+                    { "id": "2-5", "name": "2 to 5 people", "min": 2, "max": 5 },
+                    { "id": "6+", "name": "6 or more people", "min": 6 }
+                  ],
+                  "aliases": ["family plan", "duo plan", "users", "members"],
+                  "_note": "A plan that doesn't list it is for one person, so there's no single-person tier."
+                },
+                {
                   "id": "includes-subscription",
                   "name": "Includes another subscription",
                   "category": "bundle",
                   "type": "set",
                   "valuesFrom": "providers",
                   "rankable": false,
-                  "_note": "Values are plan ids (e.g. proton.pass-plus). Used for overlap detection, never shown in ranking UIs."
+                  "_note": "Values are provider or plan ids (e.g. proton.pass-plus). A plan that lists plans here is a suite, and inclusion is transitive (BLUEPRINT §4.4): overlap warnings, savings and the optimizer use it. Never shown in ranking UIs."
                 }
               ],
               "meta": {
                 "catalogVersion": "c4f9a21",
-                "count": 19
+                "count": 25
               }
             }
           }
@@ -612,7 +669,10 @@
                   { "id": "storage", "name": "Cloud storage", "icon": "cloud" },
                   { "id": "ai", "name": "AI assistants", "icon": "smart_toy" },
                   { "id": "gaming", "name": "Gaming", "icon": "sports_esports" },
-                  { "id": "software", "name": "Software & apps", "icon": "apps" }
+                  { "id": "software", "name": "Software & apps", "icon": "apps" },
+                  { "id": "news", "name": "News & magazines", "icon": "newspaper" },
+                  { "id": "fitness", "name": "Fitness & wellness", "icon": "fitness_center" },
+                  { "id": "education", "name": "Learning & education", "icon": "school" }
                 ],
                 "feature": [
                   { "id": "streaming", "name": "Streaming" },
@@ -621,7 +681,9 @@
                   { "id": "email", "name": "Email" },
                   { "id": "security", "name": "Security & passwords" },
                   { "id": "ai", "name": "AI" },
-                  { "id": "bundle", "name": "Included services" }
+                  { "id": "bundle", "name": "Included services" },
+                  { "id": "productivity", "name": "Productivity & calendar" },
+                  { "id": "account", "name": "Accounts & sharing" }
                 ],
                 "spend": [
                   { "id": "streaming", "name": "Streaming & digital media" },
@@ -629,7 +691,9 @@
                   { "id": "gaming", "name": "Gaming" },
                   { "id": "telecom", "name": "Phone & internet" },
                   { "id": "news", "name": "News & magazines" },
-                  { "id": "other", "name": "Other" }
+                  { "id": "other", "name": "Other" },
+                  { "id": "health", "name": "Health & fitness" },
+                  { "id": "education", "name": "Education & learning" }
                 ]
               },
               "meta": {
@@ -807,6 +871,17 @@
                   },
                   "matchedPlans": [
                     {
+                      "id": "proton.free",
+                      "name": "Proton Free",
+                      "matchedKeys": ["vpn.included"],
+                      "pricing": [
+                        { "interval": "month", "intervalCount": 1, "amount": 0, "currency": "CAD", "monthlyEquivalent": 0, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 0, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                      ],
+                      "bestMonthlyEquivalent": 0,
+                      "lastVerified": "2026-10-12",
+                      "stale": false
+                    },
+                    {
                       "id": "proton.vpn-plus",
                       "name": "VPN Plus",
                       "matchedKeys": ["vpn.included"],
@@ -829,10 +904,23 @@
                       "bestMonthlyEquivalent": 13.79,
                       "lastVerified": "2026-10-12",
                       "stale": false
+                    },
+                    {
+                      "id": "proton.duo",
+                      "name": "Proton Duo",
+                      "matchedKeys": ["vpn.included"],
+                      "pricing": [
+                        { "interval": "month", "intervalCount": 1, "amount": 27.60, "currency": "CAD", "monthlyEquivalent": 27.60, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 19.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } },
+                        { "interval": "year", "intervalCount": 1, "amount": 248.34, "currency": "CAD", "monthlyEquivalent": 20.70, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 179.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                      ],
+                      "bestMonthlyEquivalent": 20.70,
+                      "lastVerified": "2026-10-12",
+                      "stale": false
                     }
                   ],
-                  "bestPlanId": "proton.vpn-plus",
-                  "matchedOn": ["alias:proton vpn", "feature:vpn.included"]
+                  "bestPlanId": "proton.free",
+                  "matchedOn": ["alias:proton vpn", "feature:vpn.included"],
+                  "_note": "bestPlanId is the cheapest matching plan, here the free one."
                 }
               ],
               "meta": {
@@ -1005,7 +1093,7 @@
           }
         },
         {
-          "title": "Proton, priced for Canada (converted from USD; detailed password-manager features, perks and an overlap hint)",
+          "title": "Proton, priced for Canada (converted from USD; a free plan, suite plans, detailed password-manager features and perks)",
           "request": {
             "method": "GET",
             "url": "https://simplely.ca/api/sub/v1/providers/proton?region=CA&currency=CAD"
@@ -1033,10 +1121,33 @@
                 "sources": { "pricing": "https://proton.me/pricing" },
                 "plans": [
                   {
+                    "id": "proton.free",
+                    "name": "Proton Free",
+                    "link": "https://proton.me/pricing",
+                    "features": {
+                      "storage.cloud": 1,
+                      "email.addresses": 1,
+                      "email.aliases": 10,
+                      "calendar.included": true,
+                      "vpn.included": true,
+                      "vpn.devices": 1,
+                      "password-manager": true,
+                      "password-manager.item-types": ["login", "passkey", "credit-card", "identity", "secure-note", "email-alias"]
+                    },
+                    "prices": [
+                      { "region": "GLOBAL", "currency": "USD", "amount": 0, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-12", "sourceUrl": "https://proton.me/pricing" }
+                    ],
+                    "pricing": [
+                      { "interval": "month", "intervalCount": 1, "amount": 0, "currency": "CAD", "monthlyEquivalent": 0, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 0, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                    ],
+                    "_note": "A free plan: one price of 0. It creates no charges and shows as Free, never with ≈ (PROJECT-PLAN.md §3.1). One free account covers every Proton app, so it's one plan."
+                  },
+                  {
                     "id": "proton.pass-plus",
                     "name": "Pass Plus",
                     "link": "https://proton.me/pass/pricing",
                     "features": {
+                      "email.aliases": "unlimited",
                       "password-manager": true,
                       "password-manager.item-types": ["login", "totp", "passkey", "credit-card", "identity", "secure-note", "email-alias", "bank-account", "crypto-wallet", "api-credential", "ssh-key", "wifi", "database", "server", "software-license", "drivers-license", "passport", "medical-record", "membership", "reward-program", "government-id", "custom"],
                       "password-manager.health": ["breached", "weak", "reused"],
@@ -1081,6 +1192,8 @@
                       "storage.cloud": 500,
                       "email.addresses": 15,
                       "email.custom-domains": 3,
+                      "email.aliases": "unlimited",
+                      "calendar.included": true,
                       "vpn.included": true,
                       "vpn.devices": 10,
                       "vpn.unlimited-traffic": true,
@@ -1101,7 +1214,39 @@
                       { "interval": "month", "intervalCount": 1, "amount": 17.93, "currency": "CAD", "monthlyEquivalent": 17.93, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 12.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } },
                       { "interval": "year", "intervalCount": 1, "amount": 165.51, "currency": "CAD", "monthlyEquivalent": 13.79, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 119.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
                     ],
-                    "_note": "includes-subscription tells the optimizer that Unlimited already covers Pass Plus and VPN Plus, so having both is an overlap."
+                    "_note": "A suite plan (BLUEPRINT §4.4): it states its own features (500 GB, more than any single plan), and includes-subscription lists the plans it replaces. That drives overlap warnings, savings against buying them separately and the optimizer. Trimmed: the real file also lists proton.mail-plus and proton.drive-plus."
+                  },
+                  {
+                    "id": "proton.duo",
+                    "name": "Proton Duo",
+                    "link": "https://proton.me/family",
+                    "features": {
+                      "account.users": 2,
+                      "storage.cloud": 2000,
+                      "email.addresses": 15,
+                      "email.custom-domains": 3,
+                      "email.aliases": "unlimited",
+                      "calendar.included": true,
+                      "vpn.included": true,
+                      "vpn.devices": 10,
+                      "vpn.unlimited-traffic": true,
+                      "password-manager": true,
+                      "password-manager.item-types": ["login", "totp", "passkey", "credit-card", "identity", "secure-note", "email-alias", "bank-account", "crypto-wallet", "api-credential", "ssh-key", "wifi", "database", "server", "software-license", "drivers-license", "passport", "medical-record", "membership", "reward-program", "government-id", "custom"],
+                      "password-manager.health": ["breached", "weak", "reused"],
+                      "password-manager.sharing": ["share-to-user", "share-vault", "share-link", "link-expiry", "link-view-limit", "role-permissions"],
+                      "security.dark-web-monitoring": true,
+                      "includes-subscription": ["proton.unlimited"]
+                    },
+                    "notes": "Storage is shared between the two users.",
+                    "prices": [
+                      { "region": "GLOBAL", "currency": "USD", "amount": 19.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-12", "sourceUrl": "https://proton.me/family" },
+                      { "region": "GLOBAL", "currency": "USD", "amount": 179.88, "interval": "year", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-12", "sourceUrl": "https://proton.me/family" }
+                    ],
+                    "pricing": [
+                      { "interval": "month", "intervalCount": 1, "amount": 27.60, "currency": "CAD", "monthlyEquivalent": 27.60, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 19.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } },
+                      { "interval": "year", "intervalCount": 1, "amount": 248.34, "currency": "CAD", "monthlyEquivalent": 20.70, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 179.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                    ],
+                    "_note": "A suite for two people (account.users: 2). It includes Unlimited, and inclusion is transitive, so it also covers the plans Unlimited includes. It costs more than one Unlimited, so no savings line is shown; the optimizer can still use it to replace two people's Unlimited plans in one list."
                   }
                 ]
               },

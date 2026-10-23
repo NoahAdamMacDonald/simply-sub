@@ -29,6 +29,11 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 - Payment page (Phase 4): manual cards with network, credit/debit, flat cash-back %, FX fee %, optional monthly limit. Never store card numbers. Cards are filtered by the provider's `acceptedNetworks`.
 - Automation is Cloudflare-first (Workers Builds, a Cron Worker bot, Workflows, Workers AI). The catalog stays in Git and the bot only opens PRs.
 - Every list item counts toward totals, including duplicate plans (lists can be per family member).
+- Catalog scope: personal and family plans. A free plan has one price with amount 0 and creates no charges.
+  Business and per-seat plans are out of scope for v1.
+- A provider's all-in-one plans (Proton Unlimited, Duo, Family) are suite plans: normal plans with their own
+  features and `includes-subscription`, not bundles. Bundle files are only for deals whose features are exactly
+  the sum of their plans (BLUEPRINT §4.4).
 - All colours are CSS custom properties. Never hard-code hex values in components.
 - Ranking uses rank keys (`video.quality=4k`, `streaming.concurrent-streams=2-4`), and group ranks never cascade (PROJECT-PLAN.md §3.2).
 - Money and time terms ("this month", "this year", "next 12 months", monthly equivalent) are defined in PROJECT-PLAN.md §3.1. Compute them only in `packages/core`.
