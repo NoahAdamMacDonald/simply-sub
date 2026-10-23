@@ -1,0 +1,80 @@
+id: crave
+name: Crave
+website: https://www.crave.ca
+category: streaming
+spendCategory: streaming
+billingCurrency: { CA: CAD }
+sources: { pricing: https://www.crave.ca/en/subscribe }
+notes: Live events, sports and news include ads on every plan.
+
+plans:
+  - id: crave.standard-ads
+    name: Standard With Ads
+    link: https://www.crave.ca/en/subscribe
+    features:
+      video.quality: 1080p
+      streaming.ad-free: false
+      streaming.concurrent-streams: 2
+      streaming.kids-profiles: true
+      streaming.french-content: true
+      streaming.live: [sports]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://www.crave.ca/en/subscribe
+      - region: CA
+        currency: CAD
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://www.crave.ca/en/subscribe
+
+  - id: crave.premium
+    name: Premium
+    link: https://www.crave.ca/en/subscribe
+    features:
+      video.quality: 4k
+      streaming.ad-free: true
+      streaming.concurrent-streams: 4
+      streaming.download-devices: 5
+      streaming.kids-profiles: true
+      streaming.french-content: true
+      streaming.live: [sports]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 22
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://www.crave.ca/en/subscribe
+      - region: CA
+        currency: CAD
+        amount: 220
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://www.crave.ca/en/subscribe
+    addOnIds: [crave.starz]
+
+addOns:
+  - id: crave.starz
+    name: STARZ
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://www.crave.ca/en/subscribe

@@ -1,0 +1,132 @@
+id: disney-plus
+name: Disney+
+aliases: [disney plus, disneyplus]
+website: https://www.disneyplus.com
+category: streaming
+spendCategory: streaming
+acceptedNetworks: [visa, mastercard, amex, jcb]
+billingCurrency: { CA: CAD }
+sources: { pricing: https://help.disneyplus.com/article/disneyplus-en-ca-price }
+
+plans:
+  - id: disney-plus.standard-ads
+    name: Standard With Ads
+    link: https://www.disneyplus.com/en-ca
+    features:
+      video.quality: 1080p
+      streaming.ad-free: false
+      streaming.concurrent-streams: 2
+      streaming.kids-profiles: true
+      streaming.french-content: true
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+    addOnIds: [disney-plus.extra-member-ads]
+    addOnLimit: 1
+
+  - id: disney-plus.standard
+    name: Standard
+    link: https://www.disneyplus.com/en-ca
+    features:
+      video.quality: 1080p
+      streaming.ad-free: true
+      streaming.concurrent-streams: 2
+      streaming.download-devices: 10
+      streaming.kids-profiles: true
+      streaming.french-content: true
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+      - region: CA
+        currency: CAD
+        amount: 159.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+    addOnIds: [disney-plus.extra-member-standard]
+    addOnLimit: 1
+
+  - id: disney-plus.premium
+    name: Premium
+    link: https://www.disneyplus.com/en-ca
+    features:
+      video.quality: 4k
+      video.hdr: true
+      audio.dolby-atmos: true
+      streaming.ad-free: true
+      streaming.concurrent-streams: 4
+      streaming.download-devices: 10
+      streaming.kids-profiles: true
+      streaming.french-content: true
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 16.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+      - region: CA
+        currency: CAD
+        amount: 169.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+    addOnIds: [disney-plus.extra-member-premium]
+    addOnLimit: 1
+
+# One Extra Member per subscription, priced by the account holder's plan. They watch on one device at a time.
+addOns:
+  - id: disney-plus.extra-member-ads
+    name: Extra Member (Standard With Ads)
+    grantsPlan: disney-plus.standard-ads
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+  - id: disney-plus.extra-member-standard
+    name: Extra Member (Standard)
+    grantsPlan: disney-plus.standard
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+  - id: disney-plus.extra-member-premium
+    name: Extra Member (Premium)
+    grantsPlan: disney-plus.premium
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price

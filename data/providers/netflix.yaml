@@ -1,0 +1,143 @@
+id: netflix
+name: Netflix
+website: https://www.netflix.com
+category: streaming
+spendCategory: streaming
+billingCurrency: { CA: CAD, US: USD }
+cancelUrl: https://www.netflix.com/cancelplan
+sources: { pricing: https://help.netflix.com/en/node/24926 }
+
+plans:
+  - id: netflix.standard-ads
+    name: Standard with ads
+    link: https://www.netflix.com/signup
+    features:
+      video.quality: 1080p
+      streaming.ad-free: false
+      streaming.concurrent-streams: 2
+      streaming.download-devices: 2
+      streaming.kids-profiles: true
+      streaming.french-content: true
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.netflix.com/en/node/24926/ca
+      - region: US
+        currency: USD
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.netflix.com/en/node/24926/us
+
+  - id: netflix.standard
+    name: Standard
+    link: https://www.netflix.com/signup
+    features:
+      video.quality: 1080p
+      streaming.ad-free: true
+      streaming.concurrent-streams: 2
+      streaming.download-devices: 2
+      streaming.kids-profiles: true
+      streaming.french-content: true
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 18.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.netflix.com/en/node/24926/ca
+      - region: US
+        currency: USD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.netflix.com/en/node/24926/us
+    addOnIds: [netflix.extra-member-ads, netflix.extra-member]
+    addOnLimit: 1
+
+  - id: netflix.premium
+    name: Premium
+    link: https://www.netflix.com/signup
+    features:
+      video.quality: 4k
+      video.hdr: true
+      audio.dolby-atmos: true
+      streaming.ad-free: true
+      streaming.concurrent-streams: 4
+      streaming.download-devices: 6
+      streaming.kids-profiles: true
+      streaming.french-content: true
+    featureLabels:
+      audio.dolby-atmos: Netflix spatial audio
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 23.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.netflix.com/en/node/24926/ca
+      - region: US
+        currency: USD
+        amount: 26.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.netflix.com/en/node/24926/us
+    addOnIds: [netflix.extra-member-ads, netflix.extra-member]
+    addOnLimit: 2
+
+addOns:
+  - id: netflix.extra-member-ads
+    name: Extra member (with ads)
+    grantsPlan: netflix.standard-ads
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.netflix.com/en/node/24926/ca
+      - region: US
+        currency: USD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.netflix.com/en/node/24926/us
+  - id: netflix.extra-member
+    name: Extra member
+    grantsPlan: netflix.standard
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.netflix.com/en/node/24926/ca
+      - region: US
+        currency: USD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.netflix.com/en/node/24926/us
