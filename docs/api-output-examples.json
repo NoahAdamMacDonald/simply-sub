@@ -1,0 +1,1705 @@
+{
+  "_about": {
+    "title": "Simply Sub catalog API: example requests and responses",
+    "baseUrl": "https://simplely.ca/api/sub/v1",
+    "purpose": "The API contract for milestone M2. Every example body is validated against the API's Zod response schemas in tests (PROJECT-PLAN.md task M2.7).",
+    "dataDisclaimer": "All prices, dates and URLs are illustrative. Never seed the catalog from this file.",
+    "conventions": {
+      "envelope": "Success: { data, meta }. Failure: { error: { code, message, details? } }.",
+      "docKeys": "Keys starting with '_' are documentation notes and never appear in real responses.",
+      "optionalFields": "Optional fields are omitted when empty or unknown. For example, a provider without acceptedNetworks means 'unknown', so every card is allowed.",
+      "ids": "Stable slugs: provider 'netflix', plan 'netflix.standard', add-on 'netflix.extra-member', bundle 'bundle.disney-crave-premium', feature 'video.quality'.",
+      "rankKeys": "Boolean feature: '<featureId>'. Enum or set value: '<featureId>=<valueId>'. Number tier: '<featureId>=<tierId>'. A plan provides an enum key when its value is at least that value, and a tier key when its number is at least the tier's min (PROJECT-PLAN.md §3.2).",
+      "money": "Amounts are decimals in the currency's major unit (18.99 = $18.99). Currencies are ISO 4217. Regions are ISO 3166-1 alpha-2, or 'GLOBAL' for a single worldwide price.",
+      "pricing": "'prices' lists every stored price for every region. When a request includes region and currency, a 'pricing' array is added with one picked price per interval (BLUEPRINT §4.7). 'native: false' means the amount was converted, and the app shows ≈ and the exchange icon.",
+      "monthlyEquivalent": "Price per month: year ÷ 12, week × 52 ÷ 12, day × 365 ÷ 12, each divided by intervalCount. Computed from the unrounded amount, then rounded to 2 decimals.",
+      "dates": "Dates are YYYY-MM-DD. Timestamps are ISO 8601 in UTC.",
+      "caching": "GET responses carry an ETag based on the catalog version. Send If-None-Match to get 304 Not Modified."
+    },
+    "appUsage": "The web app reads the catalog from the static file https://simplely.ca/simply/sub/data/catalog.json (the same JSON as GET /catalog), and catalog icons from https://simplely.ca/simply/sub/icons/<providerId>.png. The only Worker endpoints it calls are GET /fx and GET /icon (for custom subscriptions). The other endpoints serve deep links, future features and other API consumers.",
+    "exchangeRatesUsed": "Every converted price below uses the GET /fx example: 1 USD = 1.3806 CAD and 1 EUR = 1.5060 CAD (ECB rates for 2026-10-21, illustrative)."
+  },
+  "endpoints": {
+    "GET /health": {
+      "description": "Liveness and version information.",
+      "examples": [
+        {
+          "title": "Healthy",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/health"
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "data": {
+                "status": "ok",
+                "apiVersion": "1.0.0",
+                "catalogVersion": "c4f9a21",
+                "catalogUpdatedAt": "2026-10-22T03:12:45Z",
+                "counts": {
+                  "providers": 5,
+                  "plans": 10,
+                  "addOns": 3,
+                  "bundles": 1,
+                  "features": 19
+                }
+              },
+              "meta": {
+                "generatedAt": "2026-10-22T18:04:11Z"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "GET /catalog": {
+      "description": "The full catalog snapshot: features, categories, providers (with plans, add-ons and every region's prices) and bundles. Also published, byte for byte, as the static file /simply/sub/data/catalog.json, which is what the app fetches.",
+      "query": {
+        "region": "Optional. Keeps only the prices pickPrice could use for this region (its own prices, GLOBAL prices and the fallback regions)."
+      },
+      "examples": [
+        {
+          "title": "Full snapshot (trimmed to 2 providers for this example)",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/catalog",
+            "headers": {
+              "Accept": "application/json",
+              "Accept-Encoding": "br, gzip"
+            }
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Content-Encoding": "br",
+              "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+              "ETag": "\"c4f9a21\"",
+              "Access-Control-Allow-Origin": "https://simplely.ca"
+            },
+            "body": {
+              "data": {
+                "schemaVersion": 1,
+                "features": [
+                  {
+                    "id": "video.quality",
+                    "name": "Video quality",
+                    "category": "streaming",
+                    "type": "enum",
+                    "values": [
+                      { "id": "480p", "name": "480p (SD)" },
+                      { "id": "720p", "name": "720p (HD)" },
+                      { "id": "1080p", "name": "1080p (Full HD)", "headline": true },
+                      { "id": "4k", "name": "4K (Ultra HD)", "aliases": ["uhd", "2160p"], "headline": true }
+                    ],
+                    "aliases": ["resolution", "picture quality"]
+                  },
+                  {
+                    "id": "video.hdr",
+                    "name": "HDR",
+                    "category": "streaming",
+                    "type": "boolean",
+                    "aliases": ["dolby vision", "hdr10"]
+                  },
+                  {
+                    "id": "audio.dolby-atmos",
+                    "name": "Dolby Atmos",
+                    "category": "streaming",
+                    "type": "boolean",
+                    "aliases": ["spatial audio"]
+                  },
+                  {
+                    "id": "streaming.ad-free",
+                    "name": "Ad free",
+                    "category": "streaming",
+                    "type": "boolean",
+                    "aliases": ["no ads", "ad-free"]
+                  },
+                  {
+                    "id": "streaming.concurrent-streams",
+                    "name": "Simultaneous streams",
+                    "category": "streaming",
+                    "type": "number",
+                    "unit": "devices",
+                    "tiers": [
+                      { "id": "1", "name": "Single device", "min": 1, "max": 1 },
+                      { "id": "2-4", "name": "2 to 4 devices", "min": 2, "max": 4 },
+                      { "id": "5+", "name": "More than 4 devices", "min": 5 }
+                    ],
+                    "aliases": ["screens", "streams", "devices at once"]
+                  },
+                  {
+                    "id": "streaming.download-devices",
+                    "name": "Download devices",
+                    "category": "streaming",
+                    "type": "number",
+                    "unit": "devices",
+                    "tiers": [
+                      { "id": "1+", "name": "Offline downloads", "min": 1 },
+                      { "id": "6+", "name": "Downloads on 6+ devices", "min": 6 }
+                    ],
+                    "aliases": ["offline viewing", "downloads"]
+                  },
+                  {
+                    "id": "vpn.included",
+                    "name": "VPN",
+                    "category": "vpn",
+                    "type": "boolean",
+                    "headline": true,
+                    "aliases": ["vpn", "virtual private network"]
+                  },
+                  {
+                    "id": "vpn.devices",
+                    "parent": "vpn.included",
+                    "name": "VPN devices",
+                    "category": "vpn",
+                    "type": "number",
+                    "unit": "devices",
+                    "tiers": [
+                      { "id": "1-5", "name": "1 to 5 devices", "min": 1, "max": 5 },
+                      { "id": "6-10", "name": "6 to 10 devices", "min": 6, "max": 10 },
+                      { "id": "11+", "name": "More than 10 devices", "min": 11 }
+                    ]
+                  },
+                  {
+                    "id": "vpn.unlimited-traffic",
+                    "parent": "vpn.included",
+                    "name": "Unlimited VPN traffic",
+                    "category": "vpn",
+                    "type": "boolean",
+                    "aliases": ["unlimited data", "unlimited bandwidth"]
+                  }
+                ],
+                "categories": {
+                  "service": [
+                    { "id": "streaming", "name": "Streaming video", "icon": "live_tv" },
+                    { "id": "vpn", "name": "VPN", "icon": "vpn_lock" }
+                  ],
+                  "feature": [
+                    { "id": "streaming", "name": "Streaming" },
+                    { "id": "vpn", "name": "VPN" }
+                  ],
+                  "spend": [
+                    { "id": "streaming", "name": "Streaming & digital media" },
+                    { "id": "software", "name": "Software & online services" }
+                  ]
+                },
+                "providers": [
+                  {
+                    "id": "netflix",
+                    "name": "Netflix",
+                    "website": "https://www.netflix.com",
+                    "iconUrl": "https://simplely.ca/simply/sub/icons/netflix.png",
+                    "category": "streaming",
+                    "spendCategory": "streaming",
+                    "acceptedNetworks": ["visa", "mastercard", "amex"],
+                    "billingCurrency": { "CA": "CAD", "US": "USD" },
+                    "cancelUrl": "https://www.netflix.com/cancelplan",
+                    "sources": { "pricing": "https://help.netflix.com/en/node/24926" },
+                    "plans": [
+                      {
+                        "id": "netflix.standard-ads",
+                        "name": "Standard with ads",
+                        "link": "https://www.netflix.com/signup",
+                        "features": {
+                          "video.quality": "1080p",
+                          "video.hdr": false,
+                          "streaming.ad-free": false,
+                          "streaming.concurrent-streams": 2,
+                          "streaming.download-devices": 2
+                        },
+                        "prices": [
+                          { "region": "CA", "currency": "CAD", "amount": 7.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14", "sourceUrl": "https://help.netflix.com/en/node/24926" },
+                          { "region": "US", "currency": "USD", "amount": 7.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14", "sourceUrl": "https://help.netflix.com/en/node/24926" }
+                        ]
+                      },
+                      {
+                        "id": "netflix.standard",
+                        "name": "Standard",
+                        "link": "https://www.netflix.com/signup",
+                        "features": {
+                          "video.quality": "1080p",
+                          "video.hdr": false,
+                          "streaming.ad-free": true,
+                          "streaming.concurrent-streams": 2,
+                          "streaming.download-devices": 2
+                        },
+                        "prices": [
+                          { "region": "CA", "currency": "CAD", "amount": 18.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14", "sourceUrl": "https://help.netflix.com/en/node/24926" },
+                          { "region": "US", "currency": "USD", "amount": 17.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14", "sourceUrl": "https://help.netflix.com/en/node/24926" }
+                        ],
+                        "addOnIds": ["netflix.extra-member-ads", "netflix.extra-member"],
+                        "addOnLimit": 1
+                      },
+                      {
+                        "id": "netflix.premium",
+                        "name": "Premium",
+                        "link": "https://www.netflix.com/signup",
+                        "features": {
+                          "video.quality": "4k",
+                          "video.hdr": true,
+                          "audio.dolby-atmos": true,
+                          "streaming.ad-free": true,
+                          "streaming.concurrent-streams": 4,
+                          "streaming.download-devices": 6
+                        },
+                        "prices": [
+                          { "region": "CA", "currency": "CAD", "amount": 23.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14", "sourceUrl": "https://help.netflix.com/en/node/24926" },
+                          { "region": "US", "currency": "USD", "amount": 24.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14", "sourceUrl": "https://help.netflix.com/en/node/24926" }
+                        ],
+                        "addOnIds": ["netflix.extra-member-ads", "netflix.extra-member"],
+                        "addOnLimit": 2
+                      }
+                    ],
+                    "addOns": [
+                      {
+                        "id": "netflix.extra-member-ads",
+                        "name": "Extra member (with ads)",
+                        "grantsPlan": "netflix.standard-ads",
+                        "prices": [
+                          { "region": "CA", "currency": "CAD", "amount": 5.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14" },
+                          { "region": "US", "currency": "USD", "amount": 6.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14" }
+                        ]
+                      },
+                      {
+                        "id": "netflix.extra-member",
+                        "name": "Extra member",
+                        "grantsPlan": "netflix.standard",
+                        "prices": [
+                          { "region": "CA", "currency": "CAD", "amount": 7.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14" },
+                          { "region": "US", "currency": "USD", "amount": 8.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14" }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "_note": "No acceptedNetworks: unknown, so the app allows every card with an 'acceptance not confirmed' hint. Only a GLOBAL EUR price exists, so Canadian users see a converted price.",
+                    "id": "mullvad",
+                    "name": "Mullvad VPN",
+                    "aliases": ["mullvad"],
+                    "website": "https://mullvad.net",
+                    "iconUrl": "https://simplely.ca/simply/sub/icons/mullvad.png",
+                    "category": "vpn",
+                    "spendCategory": "software",
+                    "billingCurrency": { "GLOBAL": "EUR" },
+                    "cancelUrl": "https://mullvad.net/en/account",
+                    "sources": { "pricing": "https://mullvad.net/en/pricing" },
+                    "notes": "Flat price worldwide. Accounts are prepaid and topped up manually.",
+                    "plans": [
+                      {
+                        "id": "mullvad.vpn",
+                        "name": "Mullvad VPN",
+                        "link": "https://mullvad.net/en/account/create",
+                        "features": {
+                          "vpn.included": true,
+                          "vpn.devices": 5,
+                          "vpn.unlimited-traffic": true
+                        },
+                        "prices": [
+                          { "region": "GLOBAL", "currency": "EUR", "amount": 5.00, "interval": "month", "intervalCount": 1, "autoRenew": false, "lastVerified": "2026-10-10", "sourceUrl": "https://mullvad.net/en/pricing" }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "bundles": []
+              },
+              "meta": {
+                "catalogVersion": "c4f9a21",
+                "generatedAt": "2026-10-22T03:12:45Z",
+                "regions": ["CA", "GLOBAL", "US"],
+                "counts": { "providers": 2, "plans": 4, "addOns": 2, "bundles": 0, "features": 9 },
+                "_note": "Trimmed for readability. The real snapshot contains everything returned by /features, /categories, /providers/:id and /bundles."
+              }
+            }
+          }
+        },
+        {
+          "title": "Nothing changed since the last download",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/catalog",
+            "headers": {
+              "If-None-Match": "\"c4f9a21\""
+            }
+          },
+          "response": {
+            "status": 304,
+            "headers": {
+              "ETag": "\"c4f9a21\"",
+              "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400"
+            },
+            "body": null
+          }
+        }
+      ]
+    },
+    "GET /features": {
+      "description": "The feature registry: every feature, its type, its values or tiers (the rankable options), aliases and headline flags.",
+      "examples": [
+        {
+          "title": "All features",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/features"
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+              "ETag": "\"c4f9a21\"",
+              "Access-Control-Allow-Origin": "https://simplely.ca"
+            },
+            "body": {
+              "data": [
+                {
+                  "id": "video.quality",
+                  "name": "Video quality",
+                  "category": "streaming",
+                  "type": "enum",
+                  "values": [
+                    { "id": "480p", "name": "480p (SD)" },
+                    { "id": "720p", "name": "720p (HD)" },
+                    { "id": "1080p", "name": "1080p (Full HD)", "headline": true },
+                    { "id": "4k", "name": "4K (Ultra HD)", "aliases": ["uhd", "2160p"], "headline": true }
+                  ],
+                  "aliases": ["resolution", "picture quality"]
+                },
+                {
+                  "id": "video.hdr",
+                  "name": "HDR",
+                  "category": "streaming",
+                  "type": "boolean",
+                  "aliases": ["dolby vision", "hdr10"]
+                },
+                {
+                  "id": "audio.dolby-atmos",
+                  "name": "Dolby Atmos",
+                  "category": "streaming",
+                  "type": "boolean",
+                  "aliases": ["spatial audio"]
+                },
+                {
+                  "id": "streaming.ad-free",
+                  "name": "Ad free",
+                  "category": "streaming",
+                  "type": "boolean",
+                  "aliases": ["no ads", "ad-free"]
+                },
+                {
+                  "id": "streaming.concurrent-streams",
+                  "name": "Simultaneous streams",
+                  "category": "streaming",
+                  "type": "number",
+                  "unit": "devices",
+                  "tiers": [
+                    { "id": "1", "name": "Single device", "min": 1, "max": 1 },
+                    { "id": "2-4", "name": "2 to 4 devices", "min": 2, "max": 4 },
+                    { "id": "5+", "name": "More than 4 devices", "min": 5 }
+                  ],
+                  "aliases": ["screens", "streams", "devices at once"]
+                },
+                {
+                  "id": "streaming.download-devices",
+                  "name": "Download devices",
+                  "category": "streaming",
+                  "type": "number",
+                  "unit": "devices",
+                  "tiers": [
+                    { "id": "1+", "name": "Offline downloads", "min": 1 },
+                    { "id": "6+", "name": "Downloads on 6+ devices", "min": 6 }
+                  ],
+                  "aliases": ["offline viewing", "downloads"]
+                },
+                {
+                  "id": "vpn.included",
+                  "name": "VPN",
+                  "category": "vpn",
+                  "type": "boolean",
+                  "headline": true,
+                  "aliases": ["vpn", "virtual private network"]
+                },
+                {
+                  "id": "vpn.devices",
+                  "parent": "vpn.included",
+                  "name": "VPN devices",
+                  "category": "vpn",
+                  "type": "number",
+                  "unit": "devices",
+                  "tiers": [
+                    { "id": "1-5", "name": "1 to 5 devices", "min": 1, "max": 5 },
+                    { "id": "6-10", "name": "6 to 10 devices", "min": 6, "max": 10 },
+                    { "id": "11+", "name": "More than 10 devices", "min": 11 }
+                  ]
+                },
+                {
+                  "id": "vpn.unlimited-traffic",
+                  "parent": "vpn.included",
+                  "name": "Unlimited VPN traffic",
+                  "category": "vpn",
+                  "type": "boolean",
+                  "aliases": ["unlimited data", "unlimited bandwidth"]
+                },
+                {
+                  "id": "storage.cloud",
+                  "name": "Cloud storage",
+                  "category": "storage",
+                  "type": "number",
+                  "unit": "GB",
+                  "tiers": [
+                    { "id": "1+", "name": "Any cloud storage", "min": 1 },
+                    { "id": "200+", "name": "200 GB or more", "min": 200 },
+                    { "id": "1000+", "name": "1 TB or more", "min": 1000 }
+                  ],
+                  "aliases": ["drive", "online storage"]
+                },
+                {
+                  "id": "email.addresses",
+                  "name": "Email addresses",
+                  "category": "email",
+                  "type": "number",
+                  "unit": "addresses",
+                  "tiers": [
+                    { "id": "1", "name": "1 address", "min": 1, "max": 1 },
+                    { "id": "2-10", "name": "2 to 10 addresses", "min": 2, "max": 10 },
+                    { "id": "11+", "name": "More than 10 addresses", "min": 11 }
+                  ]
+                },
+                {
+                  "id": "email.custom-domains",
+                  "name": "Custom email domains",
+                  "category": "email",
+                  "type": "number",
+                  "unit": "domains",
+                  "tiers": [
+                    { "id": "1+", "name": "At least 1 custom domain", "min": 1 },
+                    { "id": "3+", "name": "3 or more custom domains", "min": 3 }
+                  ],
+                  "aliases": ["own domain"]
+                },
+                {
+                  "id": "password-manager",
+                  "name": "Password manager",
+                  "category": "security",
+                  "type": "boolean",
+                  "headline": true,
+                  "aliases": ["password vault", "pass"]
+                },
+                {
+                  "id": "password-manager.item-types",
+                  "parent": "password-manager",
+                  "name": "Storable item types",
+                  "category": "security",
+                  "type": "set",
+                  "values": [
+                    { "id": "login", "name": "Logins", "aliases": ["account logins", "passwords"] },
+                    { "id": "totp", "name": "2FA codes", "aliases": ["authenticator", "one-time codes", "otp"] },
+                    { "id": "passkey", "name": "Passkeys" },
+                    { "id": "credit-card", "name": "Credit cards", "aliases": ["payment cards"] },
+                    { "id": "identity", "name": "Identity", "aliases": ["personal information", "personal info", "identities"] },
+                    { "id": "secure-note", "name": "Secure notes", "aliases": ["notes"] },
+                    { "id": "email-alias", "name": "Email aliases", "aliases": ["hide-my-email", "forwarding addresses"] },
+                    { "id": "bank-account", "name": "Bank accounts" },
+                    { "id": "crypto-wallet", "name": "Crypto wallets" },
+                    { "id": "api-credential", "name": "API credentials" },
+                    { "id": "ssh-key", "name": "SSH keys" },
+                    { "id": "wifi", "name": "Wi-Fi networks", "aliases": ["wifi network"] },
+                    { "id": "database", "name": "Database credentials" },
+                    { "id": "server", "name": "Server credentials" },
+                    { "id": "software-license", "name": "Software licenses" },
+                    { "id": "drivers-license", "name": "Driver's licenses" },
+                    { "id": "passport", "name": "Passports" },
+                    { "id": "medical-record", "name": "Medical records" },
+                    { "id": "membership", "name": "Memberships" },
+                    { "id": "reward-program", "name": "Reward programs" },
+                    { "id": "government-id", "name": "Government IDs", "aliases": ["social security", "SIN"] },
+                    { "id": "custom", "name": "Custom item types" }
+                  ]
+                },
+                {
+                  "id": "password-manager.health",
+                  "parent": "password-manager",
+                  "name": "Password health monitoring",
+                  "category": "security",
+                  "type": "set",
+                  "values": [
+                    { "id": "breached", "name": "Breached passwords", "aliases": ["compromised"] },
+                    { "id": "weak", "name": "Weak passwords" },
+                    { "id": "reused", "name": "Reused passwords", "aliases": ["duplicate"] },
+                    { "id": "old", "name": "Old passwords" },
+                    { "id": "suspicious", "name": "Suspicious logins" }
+                  ]
+                },
+                {
+                  "id": "password-manager.sharing",
+                  "parent": "password-manager",
+                  "name": "Password sharing",
+                  "category": "security",
+                  "type": "set",
+                  "values": [
+                    { "id": "share-to-user", "name": "Share with other users" },
+                    { "id": "share-vault", "name": "Share folders or vaults", "aliases": ["share folders"] },
+                    { "id": "share-link", "name": "Share by link" },
+                    { "id": "link-expiry", "name": "Expiring links" },
+                    { "id": "link-view-limit", "name": "Link view limits", "aliases": ["usage limits"] },
+                    { "id": "role-permissions", "name": "Access roles", "aliases": ["viewer/editor/admin", "read/write/admin"] }
+                  ]
+                },
+                {
+                  "id": "security.dark-web-monitoring",
+                  "name": "Dark web monitoring",
+                  "category": "security",
+                  "type": "boolean",
+                  "aliases": ["breach monitoring", "identity monitoring"]
+                },
+                {
+                  "id": "ai.assistant",
+                  "name": "AI assistant",
+                  "category": "ai",
+                  "type": "boolean",
+                  "headline": true,
+                  "aliases": ["ai", "chatbot"]
+                },
+                {
+                  "id": "includes-subscription",
+                  "name": "Includes another subscription",
+                  "category": "bundle",
+                  "type": "set",
+                  "valuesFrom": "providers",
+                  "rankable": false,
+                  "_note": "Values are plan ids (e.g. proton.pass-plus). Used for overlap detection, never shown in ranking UIs."
+                }
+              ],
+              "meta": {
+                "catalogVersion": "c4f9a21",
+                "count": 19
+              }
+            }
+          }
+        }
+      ]
+    },
+    "GET /categories": {
+      "description": "Service categories (what a provider is), feature categories (how the Features page groups features) and spend categories (used for card rewards).",
+      "examples": [
+        {
+          "title": "All categories",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/categories"
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+              "ETag": "\"c4f9a21\""
+            },
+            "body": {
+              "data": {
+                "service": [
+                  { "id": "streaming", "name": "Streaming video", "icon": "live_tv" },
+                  { "id": "music", "name": "Music & audio", "icon": "music_note" },
+                  { "id": "vpn", "name": "VPN", "icon": "vpn_lock" },
+                  { "id": "privacy-suite", "name": "Privacy & security suites", "icon": "shield" },
+                  { "id": "storage", "name": "Cloud storage", "icon": "cloud" },
+                  { "id": "ai", "name": "AI assistants", "icon": "smart_toy" },
+                  { "id": "gaming", "name": "Gaming", "icon": "sports_esports" },
+                  { "id": "software", "name": "Software & apps", "icon": "apps" }
+                ],
+                "feature": [
+                  { "id": "streaming", "name": "Streaming" },
+                  { "id": "vpn", "name": "VPN" },
+                  { "id": "storage", "name": "Storage" },
+                  { "id": "email", "name": "Email" },
+                  { "id": "security", "name": "Security & passwords" },
+                  { "id": "ai", "name": "AI" },
+                  { "id": "bundle", "name": "Included services" }
+                ],
+                "spend": [
+                  { "id": "streaming", "name": "Streaming & digital media" },
+                  { "id": "software", "name": "Software & online services" },
+                  { "id": "gaming", "name": "Gaming" },
+                  { "id": "telecom", "name": "Phone & internet" },
+                  { "id": "news", "name": "News & magazines" },
+                  { "id": "other", "name": "Other" }
+                ]
+              },
+              "meta": {
+                "catalogVersion": "c4f9a21"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "GET /providers": {
+      "description": "Search and filter providers. Each result lists the provider's plans that match every filter, with picked prices for the requested region and currency.",
+      "query": {
+        "q": "Free text matched against provider and plan names, aliases, feature names and category names.",
+        "category": "Service category id, e.g. 'streaming'.",
+        "feature": "Comma-separated rank keys. A plan must provide all of them. Example: video.quality=4k,streaming.ad-free",
+        "minPrice": "Minimum monthly equivalent, in 'currency'.",
+        "maxPrice": "Maximum monthly equivalent, in 'currency'.",
+        "interval": "Only plans that offer this interval: day | week | month | year.",
+        "region": "Region used to pick prices, e.g. CA. Required for price filters and price sorting.",
+        "currency": "Display currency, e.g. CAD. Defaults to the region's main currency.",
+        "nativeOnly": "true = skip plans whose picked price would be converted.",
+        "sort": "relevance (default with q) | price_asc (default without q) | price_desc | name | features",
+        "cursor": "Opaque value from meta.nextCursor.",
+        "limit": "1–50, default 20."
+      },
+      "examples": [
+        {
+          "title": "4K streaming services in Canada, cheapest first",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/providers?feature=video.quality%3D4k&region=CA&currency=CAD&sort=price_asc&limit=3"
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+              "ETag": "\"c4f9a21-5e1b\"",
+              "Access-Control-Allow-Origin": "https://simplely.ca"
+            },
+            "body": {
+              "data": [
+                {
+                  "provider": {
+                    "id": "disney-plus",
+                    "name": "Disney+",
+                    "category": "streaming",
+                    "website": "https://www.disneyplus.com",
+                    "iconUrl": "https://simplely.ca/simply/sub/icons/disney-plus.png"
+                  },
+                  "matchedPlans": [
+                    {
+                      "id": "disney-plus.premium",
+                      "name": "Premium",
+                      "matchedKeys": ["video.quality=4k"],
+                      "pricing": [
+                        { "interval": "month", "intervalCount": 1, "amount": 16.99, "currency": "CAD", "monthlyEquivalent": 16.99, "autoRenew": true, "native": true, "source": { "region": "CA", "amount": 16.99, "currency": "CAD" } },
+                        { "interval": "year", "intervalCount": 1, "amount": 169.99, "currency": "CAD", "monthlyEquivalent": 14.17, "autoRenew": true, "native": true, "source": { "region": "CA", "amount": 169.99, "currency": "CAD" } }
+                      ],
+                      "bestMonthlyEquivalent": 14.17,
+                      "lastVerified": "2026-10-14",
+                      "stale": false
+                    }
+                  ],
+                  "bestPlanId": "disney-plus.premium",
+                  "matchedOn": ["feature:video.quality=4k"]
+                },
+                {
+                  "provider": {
+                    "id": "crave",
+                    "name": "Crave",
+                    "category": "streaming",
+                    "website": "https://www.crave.ca",
+                    "iconUrl": "https://simplely.ca/simply/sub/icons/crave.png"
+                  },
+                  "matchedPlans": [
+                    {
+                      "id": "crave.premium",
+                      "name": "Premium Ad-Free",
+                      "matchedKeys": ["video.quality=4k"],
+                      "pricing": [
+                        { "interval": "month", "intervalCount": 1, "amount": 22.00, "currency": "CAD", "monthlyEquivalent": 22.00, "autoRenew": true, "native": true, "source": { "region": "CA", "amount": 22.00, "currency": "CAD" } }
+                      ],
+                      "bestMonthlyEquivalent": 22.00,
+                      "lastVerified": "2026-10-14",
+                      "stale": false
+                    }
+                  ],
+                  "bestPlanId": "crave.premium",
+                  "matchedOn": ["feature:video.quality=4k"]
+                },
+                {
+                  "provider": {
+                    "id": "netflix",
+                    "name": "Netflix",
+                    "category": "streaming",
+                    "website": "https://www.netflix.com",
+                    "iconUrl": "https://simplely.ca/simply/sub/icons/netflix.png"
+                  },
+                  "matchedPlans": [
+                    {
+                      "id": "netflix.premium",
+                      "name": "Premium",
+                      "matchedKeys": ["video.quality=4k"],
+                      "pricing": [
+                        { "interval": "month", "intervalCount": 1, "amount": 23.99, "currency": "CAD", "monthlyEquivalent": 23.99, "autoRenew": true, "native": true, "source": { "region": "CA", "amount": 23.99, "currency": "CAD" } }
+                      ],
+                      "bestMonthlyEquivalent": 23.99,
+                      "lastVerified": "2026-10-14",
+                      "stale": false
+                    }
+                  ],
+                  "bestPlanId": "netflix.premium",
+                  "matchedOn": ["feature:video.quality=4k"]
+                }
+              ],
+              "meta": {
+                "catalogVersion": "c4f9a21",
+                "query": { "feature": ["video.quality=4k"], "region": "CA", "currency": "CAD", "sort": "price_asc", "limit": 3 },
+                "total": 3,
+                "nextCursor": null,
+                "fxDate": "2026-10-21"
+              }
+            }
+          }
+        },
+        {
+          "title": "Text search 'vpn': includes prices converted from EUR and USD",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/providers?q=vpn&region=CA&currency=CAD"
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+              "ETag": "\"c4f9a21-a90c\"",
+              "Access-Control-Allow-Origin": "https://simplely.ca"
+            },
+            "body": {
+              "data": [
+                {
+                  "provider": {
+                    "id": "mullvad",
+                    "name": "Mullvad VPN",
+                    "category": "vpn",
+                    "website": "https://mullvad.net",
+                    "iconUrl": "https://simplely.ca/simply/sub/icons/mullvad.png"
+                  },
+                  "matchedPlans": [
+                    {
+                      "id": "mullvad.vpn",
+                      "name": "Mullvad VPN",
+                      "matchedKeys": ["vpn.included"],
+                      "pricing": [
+                        { "interval": "month", "intervalCount": 1, "amount": 7.53, "currency": "CAD", "monthlyEquivalent": 7.53, "autoRenew": false, "native": false, "source": { "region": "GLOBAL", "amount": 5.00, "currency": "EUR" }, "fx": { "rate": 1.5060, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                      ],
+                      "bestMonthlyEquivalent": 7.53,
+                      "lastVerified": "2026-10-10",
+                      "stale": false
+                    }
+                  ],
+                  "bestPlanId": "mullvad.vpn",
+                  "matchedOn": ["name", "category:vpn", "feature:vpn.included"]
+                },
+                {
+                  "provider": {
+                    "id": "proton",
+                    "name": "Proton",
+                    "category": "privacy-suite",
+                    "website": "https://proton.me",
+                    "iconUrl": "https://simplely.ca/simply/sub/icons/proton.png"
+                  },
+                  "matchedPlans": [
+                    {
+                      "id": "proton.vpn-plus",
+                      "name": "VPN Plus",
+                      "matchedKeys": ["vpn.included"],
+                      "pricing": [
+                        { "interval": "month", "intervalCount": 1, "amount": 13.79, "currency": "CAD", "monthlyEquivalent": 13.79, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 9.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } },
+                        { "interval": "year", "intervalCount": 1, "amount": 82.67, "currency": "CAD", "monthlyEquivalent": 6.89, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 59.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                      ],
+                      "bestMonthlyEquivalent": 6.89,
+                      "lastVerified": "2026-10-12",
+                      "stale": false
+                    },
+                    {
+                      "id": "proton.unlimited",
+                      "name": "Proton Unlimited",
+                      "matchedKeys": ["vpn.included"],
+                      "pricing": [
+                        { "interval": "month", "intervalCount": 1, "amount": 17.93, "currency": "CAD", "monthlyEquivalent": 17.93, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 12.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } },
+                        { "interval": "year", "intervalCount": 1, "amount": 165.51, "currency": "CAD", "monthlyEquivalent": 13.79, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 119.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                      ],
+                      "bestMonthlyEquivalent": 13.79,
+                      "lastVerified": "2026-10-12",
+                      "stale": false
+                    }
+                  ],
+                  "bestPlanId": "proton.vpn-plus",
+                  "matchedOn": ["alias:proton vpn", "feature:vpn.included"]
+                }
+              ],
+              "meta": {
+                "catalogVersion": "c4f9a21",
+                "query": { "q": "vpn", "region": "CA", "currency": "CAD", "sort": "relevance", "limit": 20 },
+                "total": 2,
+                "nextCursor": null,
+                "fxDate": "2026-10-21"
+              }
+            }
+          }
+        },
+        {
+          "title": "Invalid parameters",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/providers?sort=cheapest&limit=500"
+          },
+          "response": {
+            "status": 400,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "bad_request",
+                "message": "2 query parameters are invalid.",
+                "details": [
+                  { "param": "sort", "issue": "Expected one of: relevance, price_asc, price_desc, name, features." },
+                  { "param": "limit", "issue": "Must be between 1 and 50." }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "GET /providers/:id": {
+      "description": "One provider with all its plans, add-ons and every region's prices. With region and currency, picked 'pricing' is added to each plan and add-on.",
+      "query": {
+        "region": "Optional, e.g. CA.",
+        "currency": "Optional, e.g. CAD. Defaults to the region's main currency."
+      },
+      "examples": [
+        {
+          "title": "Netflix, priced for Canada (all prices native)",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/providers/netflix?region=CA&currency=CAD"
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+              "ETag": "\"c4f9a21-1c7d\"",
+              "Access-Control-Allow-Origin": "https://simplely.ca"
+            },
+            "body": {
+              "data": {
+                "id": "netflix",
+                "name": "Netflix",
+                "website": "https://www.netflix.com",
+                "iconUrl": "https://simplely.ca/simply/sub/icons/netflix.png",
+                "category": "streaming",
+                "spendCategory": "streaming",
+                "acceptedNetworks": ["visa", "mastercard", "amex"],
+                "billingCurrency": { "CA": "CAD", "US": "USD" },
+                "cancelUrl": "https://www.netflix.com/cancelplan",
+                "sources": { "pricing": "https://help.netflix.com/en/node/24926" },
+                "plans": [
+                  {
+                    "id": "netflix.standard-ads",
+                    "name": "Standard with ads",
+                    "link": "https://www.netflix.com/signup",
+                    "features": {
+                      "video.quality": "1080p",
+                      "video.hdr": false,
+                      "streaming.ad-free": false,
+                      "streaming.concurrent-streams": 2,
+                      "streaming.download-devices": 2
+                    },
+                    "prices": [
+                      { "region": "CA", "currency": "CAD", "amount": 7.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14", "sourceUrl": "https://help.netflix.com/en/node/24926" },
+                      { "region": "US", "currency": "USD", "amount": 7.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14", "sourceUrl": "https://help.netflix.com/en/node/24926" }
+                    ],
+                    "pricing": [
+                      { "interval": "month", "intervalCount": 1, "amount": 7.99, "currency": "CAD", "monthlyEquivalent": 7.99, "autoRenew": true, "native": true, "source": { "region": "CA", "amount": 7.99, "currency": "CAD" } }
+                    ]
+                  },
+                  {
+                    "id": "netflix.standard",
+                    "name": "Standard",
+                    "link": "https://www.netflix.com/signup",
+                    "features": {
+                      "video.quality": "1080p",
+                      "video.hdr": false,
+                      "streaming.ad-free": true,
+                      "streaming.concurrent-streams": 2,
+                      "streaming.download-devices": 2
+                    },
+                    "prices": [
+                      { "region": "CA", "currency": "CAD", "amount": 18.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14", "sourceUrl": "https://help.netflix.com/en/node/24926" },
+                      { "region": "US", "currency": "USD", "amount": 17.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14", "sourceUrl": "https://help.netflix.com/en/node/24926" }
+                    ],
+                    "pricing": [
+                      { "interval": "month", "intervalCount": 1, "amount": 18.99, "currency": "CAD", "monthlyEquivalent": 18.99, "autoRenew": true, "native": true, "source": { "region": "CA", "amount": 18.99, "currency": "CAD" } }
+                    ],
+                    "addOnIds": ["netflix.extra-member-ads", "netflix.extra-member"],
+                    "addOnLimit": 1
+                  },
+                  {
+                    "id": "netflix.premium",
+                    "name": "Premium",
+                    "link": "https://www.netflix.com/signup",
+                    "features": {
+                      "video.quality": "4k",
+                      "video.hdr": true,
+                      "audio.dolby-atmos": true,
+                      "streaming.ad-free": true,
+                      "streaming.concurrent-streams": 4,
+                      "streaming.download-devices": 6
+                    },
+                    "prices": [
+                      { "region": "CA", "currency": "CAD", "amount": 23.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14", "sourceUrl": "https://help.netflix.com/en/node/24926" },
+                      { "region": "US", "currency": "USD", "amount": 24.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14", "sourceUrl": "https://help.netflix.com/en/node/24926" }
+                    ],
+                    "pricing": [
+                      { "interval": "month", "intervalCount": 1, "amount": 23.99, "currency": "CAD", "monthlyEquivalent": 23.99, "autoRenew": true, "native": true, "source": { "region": "CA", "amount": 23.99, "currency": "CAD" } }
+                    ],
+                    "addOnIds": ["netflix.extra-member-ads", "netflix.extra-member"],
+                    "addOnLimit": 2
+                  }
+                ],
+                "addOns": [
+                  {
+                    "id": "netflix.extra-member-ads",
+                    "name": "Extra member (with ads)",
+                    "grantsPlan": "netflix.standard-ads",
+                    "prices": [
+                      { "region": "CA", "currency": "CAD", "amount": 5.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14" },
+                      { "region": "US", "currency": "USD", "amount": 6.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14" }
+                    ],
+                    "pricing": [
+                      { "interval": "month", "intervalCount": 1, "amount": 5.99, "currency": "CAD", "monthlyEquivalent": 5.99, "autoRenew": true, "native": true, "source": { "region": "CA", "amount": 5.99, "currency": "CAD" } }
+                    ]
+                  },
+                  {
+                    "id": "netflix.extra-member",
+                    "name": "Extra member",
+                    "grantsPlan": "netflix.standard",
+                    "prices": [
+                      { "region": "CA", "currency": "CAD", "amount": 7.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14" },
+                      { "region": "US", "currency": "USD", "amount": 8.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14" }
+                    ],
+                    "pricing": [
+                      { "interval": "month", "intervalCount": 1, "amount": 7.99, "currency": "CAD", "monthlyEquivalent": 7.99, "autoRenew": true, "native": true, "source": { "region": "CA", "amount": 7.99, "currency": "CAD" } }
+                    ]
+                  }
+                ]
+              },
+              "meta": {
+                "catalogVersion": "c4f9a21",
+                "region": "CA",
+                "currency": "CAD",
+                "fxDate": "2026-10-21"
+              }
+            }
+          }
+        },
+        {
+          "title": "Proton, priced for Canada (converted from USD; detailed password-manager features, perks and an overlap hint)",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/providers/proton?region=CA&currency=CAD"
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+              "ETag": "\"c4f9a21-77e2\"",
+              "Access-Control-Allow-Origin": "https://simplely.ca"
+            },
+            "body": {
+              "data": {
+                "id": "proton",
+                "name": "Proton",
+                "aliases": ["proton mail", "protonmail", "proton vpn", "proton pass", "proton drive"],
+                "website": "https://proton.me",
+                "iconUrl": "https://simplely.ca/simply/sub/icons/proton.png",
+                "category": "privacy-suite",
+                "spendCategory": "software",
+                "acceptedNetworks": ["visa", "mastercard", "amex", "discover"],
+                "billingCurrency": { "GLOBAL": "USD" },
+                "cancelUrl": "https://account.proton.me/dashboard",
+                "sources": { "pricing": "https://proton.me/pricing" },
+                "plans": [
+                  {
+                    "id": "proton.pass-plus",
+                    "name": "Pass Plus",
+                    "link": "https://proton.me/pass/pricing",
+                    "features": {
+                      "password-manager": true,
+                      "password-manager.item-types": ["login", "totp", "passkey", "credit-card", "identity", "secure-note", "email-alias", "bank-account", "crypto-wallet", "api-credential", "ssh-key", "wifi", "database", "server", "software-license", "drivers-license", "passport", "medical-record", "membership", "reward-program", "government-id", "custom"],
+                      "password-manager.health": ["breached", "weak", "reused"],
+                      "password-manager.sharing": ["share-to-user", "share-vault", "share-link", "link-expiry", "link-view-limit", "role-permissions"],
+                      "security.dark-web-monitoring": true
+                    },
+                    "featureLabels": {
+                      "password-manager.item-types=email-alias": "Hide-my-email aliases"
+                    },
+                    "prices": [
+                      { "region": "GLOBAL", "currency": "USD", "amount": 4.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-12", "sourceUrl": "https://proton.me/pass/pricing" },
+                      { "region": "GLOBAL", "currency": "USD", "amount": 35.88, "interval": "year", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-12", "sourceUrl": "https://proton.me/pass/pricing" }
+                    ],
+                    "pricing": [
+                      { "interval": "month", "intervalCount": 1, "amount": 6.89, "currency": "CAD", "monthlyEquivalent": 6.89, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 4.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } },
+                      { "interval": "year", "intervalCount": 1, "amount": 49.54, "currency": "CAD", "monthlyEquivalent": 4.13, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 35.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                    ]
+                  },
+                  {
+                    "id": "proton.vpn-plus",
+                    "name": "VPN Plus",
+                    "link": "https://protonvpn.com/pricing",
+                    "features": {
+                      "vpn.included": true,
+                      "vpn.devices": 10,
+                      "vpn.unlimited-traffic": true
+                    },
+                    "prices": [
+                      { "region": "GLOBAL", "currency": "USD", "amount": 9.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-12", "sourceUrl": "https://protonvpn.com/pricing" },
+                      { "region": "GLOBAL", "currency": "USD", "amount": 59.88, "interval": "year", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-12", "sourceUrl": "https://protonvpn.com/pricing" }
+                    ],
+                    "pricing": [
+                      { "interval": "month", "intervalCount": 1, "amount": 13.79, "currency": "CAD", "monthlyEquivalent": 13.79, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 9.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } },
+                      { "interval": "year", "intervalCount": 1, "amount": 82.67, "currency": "CAD", "monthlyEquivalent": 6.89, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 59.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                    ]
+                  },
+                  {
+                    "id": "proton.unlimited",
+                    "name": "Proton Unlimited",
+                    "link": "https://proton.me/pricing",
+                    "features": {
+                      "storage.cloud": 500,
+                      "email.addresses": 15,
+                      "email.custom-domains": 3,
+                      "vpn.included": true,
+                      "vpn.devices": 10,
+                      "vpn.unlimited-traffic": true,
+                      "password-manager": true,
+                      "password-manager.item-types": ["login", "totp", "passkey", "credit-card", "identity", "secure-note", "email-alias", "bank-account", "crypto-wallet", "api-credential", "ssh-key", "wifi", "database", "server", "software-license", "drivers-license", "passport", "medical-record", "membership", "reward-program", "government-id", "custom"],
+                      "password-manager.health": ["breached", "weak", "reused"],
+                      "password-manager.sharing": ["share-to-user", "share-vault", "share-link", "link-expiry", "link-view-limit", "role-permissions"],
+                      "security.dark-web-monitoring": true,
+                      "includes-subscription": ["proton.pass-plus", "proton.vpn-plus"]
+                    },
+                    "perks": ["Proton Sentinel account protection", "Proton Docs and Sheets"],
+                    "notes": "Storage is shared across Proton services.",
+                    "prices": [
+                      { "region": "GLOBAL", "currency": "USD", "amount": 12.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-12", "sourceUrl": "https://proton.me/pricing" },
+                      { "region": "GLOBAL", "currency": "USD", "amount": 119.88, "interval": "year", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-12", "sourceUrl": "https://proton.me/pricing" }
+                    ],
+                    "pricing": [
+                      { "interval": "month", "intervalCount": 1, "amount": 17.93, "currency": "CAD", "monthlyEquivalent": 17.93, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 12.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } },
+                      { "interval": "year", "intervalCount": 1, "amount": 165.51, "currency": "CAD", "monthlyEquivalent": 13.79, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 119.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                    ],
+                    "_note": "includes-subscription tells the optimizer that Unlimited already covers Pass Plus and VPN Plus, so having both is an overlap."
+                  }
+                ]
+              },
+              "meta": {
+                "catalogVersion": "c4f9a21",
+                "region": "CA",
+                "currency": "CAD",
+                "fxDate": "2026-10-21"
+              }
+            }
+          }
+        },
+        {
+          "title": "Unknown provider (with a suggestion)",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/providers/netflx"
+          },
+          "response": {
+            "status": 404,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "not_found",
+                "message": "No provider with id 'netflx'.",
+                "details": [
+                  { "suggestion": "netflix" }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "GET /plans/:id": {
+      "description": "One plan with a provider summary, its add-ons (expanded), the bundles that include it and the rank keys it provides.",
+      "query": {
+        "region": "Optional, e.g. CA.",
+        "currency": "Optional, e.g. CAD."
+      },
+      "examples": [
+        {
+          "title": "Disney+ Premium, priced for Canada",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/plans/disney-plus.premium?region=CA&currency=CAD"
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+              "ETag": "\"c4f9a21-3b90\"",
+              "Access-Control-Allow-Origin": "https://simplely.ca"
+            },
+            "body": {
+              "data": {
+                "id": "disney-plus.premium",
+                "name": "Premium",
+                "provider": {
+                  "id": "disney-plus",
+                  "name": "Disney+",
+                  "website": "https://www.disneyplus.com",
+                  "iconUrl": "https://simplely.ca/simply/sub/icons/disney-plus.png",
+                  "category": "streaming",
+                  "spendCategory": "streaming",
+                  "acceptedNetworks": ["visa", "mastercard", "amex"],
+                  "cancelUrl": "https://www.disneyplus.com/account/subscription"
+                },
+                "link": "https://www.disneyplus.com/en-ca/sign-up",
+                "features": {
+                  "video.quality": "4k",
+                  "video.hdr": true,
+                  "audio.dolby-atmos": true,
+                  "streaming.ad-free": true,
+                  "streaming.concurrent-streams": 4,
+                  "streaming.download-devices": 10
+                },
+                "providedRankKeys": [
+                  "video.quality=480p",
+                  "video.quality=720p",
+                  "video.quality=1080p",
+                  "video.quality=4k",
+                  "video.hdr",
+                  "audio.dolby-atmos",
+                  "streaming.ad-free",
+                  "streaming.concurrent-streams=1",
+                  "streaming.concurrent-streams=2-4",
+                  "streaming.download-devices=1+",
+                  "streaming.download-devices=6+"
+                ],
+                "prices": [
+                  { "region": "CA", "currency": "CAD", "amount": 16.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14", "sourceUrl": "https://www.disneyplus.com/en-ca" },
+                  { "region": "CA", "currency": "CAD", "amount": 169.99, "interval": "year", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14", "sourceUrl": "https://www.disneyplus.com/en-ca" }
+                ],
+                "pricing": [
+                  { "interval": "month", "intervalCount": 1, "amount": 16.99, "currency": "CAD", "monthlyEquivalent": 16.99, "autoRenew": true, "native": true, "source": { "region": "CA", "amount": 16.99, "currency": "CAD" } },
+                  { "interval": "year", "intervalCount": 1, "amount": 169.99, "currency": "CAD", "monthlyEquivalent": 14.17, "autoRenew": true, "native": true, "source": { "region": "CA", "amount": 169.99, "currency": "CAD" } }
+                ],
+                "addOns": [
+                  {
+                    "id": "disney-plus.extra-member",
+                    "name": "Extra member",
+                    "grantsPlan": "disney-plus.standard",
+                    "prices": [
+                      { "region": "CA", "currency": "CAD", "amount": 7.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14" }
+                    ],
+                    "pricing": [
+                      { "interval": "month", "intervalCount": 1, "amount": 7.99, "currency": "CAD", "monthlyEquivalent": 7.99, "autoRenew": true, "native": true, "source": { "region": "CA", "amount": 7.99, "currency": "CAD" } }
+                    ]
+                  }
+                ],
+                "addOnLimit": 1,
+                "bundleIds": ["bundle.disney-crave-premium"]
+              },
+              "meta": {
+                "catalogVersion": "c4f9a21",
+                "region": "CA",
+                "currency": "CAD",
+                "fxDate": "2026-10-21"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "GET /bundles": {
+      "description": "Bundles that include any of the given plans, with computed savings against buying the plans separately and the union of their features.",
+      "query": {
+        "plans": "Comma-separated plan ids. Returns bundles containing at least one of them.",
+        "region": "Optional, e.g. CA.",
+        "currency": "Optional, e.g. CAD."
+      },
+      "examples": [
+        {
+          "title": "Bundles that include Disney+ Premium",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/bundles?plans=disney-plus.premium&region=CA&currency=CAD"
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+              "ETag": "\"c4f9a21-d4a8\"",
+              "Access-Control-Allow-Origin": "https://simplely.ca"
+            },
+            "body": {
+              "data": [
+                {
+                  "id": "bundle.disney-crave-premium",
+                  "name": "Disney+ Premium & Crave Premium (example bundle)",
+                  "soldBy": "crave",
+                  "includes": [
+                    {
+                      "planId": "disney-plus.premium",
+                      "providerId": "disney-plus",
+                      "providerName": "Disney+",
+                      "planName": "Premium",
+                      "iconUrl": "https://simplely.ca/simply/sub/icons/disney-plus.png",
+                      "standalone": { "amount": 16.99, "currency": "CAD", "interval": "month" }
+                    },
+                    {
+                      "planId": "crave.premium",
+                      "providerId": "crave",
+                      "providerName": "Crave",
+                      "planName": "Premium Ad-Free",
+                      "iconUrl": "https://simplely.ca/simply/sub/icons/crave.png",
+                      "standalone": { "amount": 22.00, "currency": "CAD", "interval": "month" }
+                    }
+                  ],
+                  "link": "https://www.crave.ca/en/bundles",
+                  "cancelUrl": "https://www.crave.ca/en/account",
+                  "prices": [
+                    { "region": "CA", "currency": "CAD", "amount": 29.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14" }
+                  ],
+                  "pricing": [
+                    { "interval": "month", "intervalCount": 1, "amount": 29.99, "currency": "CAD", "monthlyEquivalent": 29.99, "autoRenew": true, "native": true, "source": { "region": "CA", "amount": 29.99, "currency": "CAD" } }
+                  ],
+                  "savings": [
+                    { "interval": "month", "standaloneTotal": 38.99, "bundlePrice": 29.99, "amount": 9.00, "currency": "CAD", "percent": 23.1 }
+                  ],
+                  "features": {
+                    "video.quality": "4k",
+                    "video.hdr": true,
+                    "audio.dolby-atmos": true,
+                    "streaming.ad-free": true,
+                    "streaming.concurrent-streams": 4,
+                    "streaming.download-devices": 10
+                  },
+                  "_note": "features is the union of the included plans: booleans OR'd, numbers and enums take the highest value, sets are merged."
+                }
+              ],
+              "meta": {
+                "catalogVersion": "c4f9a21",
+                "region": "CA",
+                "currency": "CAD",
+                "total": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "GET /fx": {
+      "description": "Daily ECB exchange rates (Frankfurter), cached at the edge for 12 hours. If Frankfurter is down, the last good rates are returned with meta.stale = true.",
+      "query": {
+        "base": "Required. The user's currency, e.g. CAD."
+      },
+      "examples": [
+        {
+          "title": "Rates for a Canadian user",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/fx?base=CAD"
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "public, max-age=43200",
+              "ETag": "\"fx-CAD-2026-10-21\"",
+              "Access-Control-Allow-Origin": "https://simplely.ca"
+            },
+            "body": {
+              "data": {
+                "base": "CAD",
+                "date": "2026-10-21",
+                "source": "European Central Bank via Frankfurter",
+                "rates": {
+                  "AUD": 1.0980,
+                  "CHF": 0.5810,
+                  "EUR": 0.6640,
+                  "GBP": 0.5571,
+                  "JPY": 108.42,
+                  "USD": 0.7243
+                }
+              },
+              "meta": {
+                "fetchedAt": "2026-10-22T06:00:02Z",
+                "stale": false,
+                "_note": "1 CAD = rate × target currency. To convert 5.00 EUR to CAD: 5.00 ÷ 0.6640 = 7.53 (an EUR → CAD rate of 1.5060)."
+              }
+            }
+          }
+        },
+        {
+          "title": "Frankfurter is down: last good rates are served",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/fx?base=CAD"
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "public, max-age=900"
+            },
+            "body": {
+              "data": {
+                "base": "CAD",
+                "date": "2026-10-20",
+                "source": "European Central Bank via Frankfurter",
+                "rates": {
+                  "AUD": 1.0975,
+                  "CHF": 0.5806,
+                  "EUR": 0.6637,
+                  "GBP": 0.5569,
+                  "JPY": 108.30,
+                  "USD": 0.7239
+                }
+              },
+              "meta": {
+                "fetchedAt": "2026-10-21T06:00:01Z",
+                "stale": true
+              }
+            }
+          }
+        },
+        {
+          "title": "Frankfurter is down and nothing is cached yet",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/fx?base=CAD"
+          },
+          "response": {
+            "status": 502,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "upstream_unavailable",
+                "message": "Exchange rates are temporarily unavailable. Converted prices can't be shown right now."
+              }
+            }
+          }
+        }
+      ]
+    },
+    "GET /icon": {
+      "description": "Favicon proxy for custom subscriptions (a website the user typed). Tries DuckDuckGo, then Google, then returns the Simply Sub fallback icon. Catalog providers don't use it: their icons are static files at /simply/sub/icons/<providerId>.png.",
+      "query": {
+        "domain": "Required. A bare hostname such as localgym.example (no scheme or path).",
+        "size": "Optional: 32 or 64 (default 64)."
+      },
+      "examples": [
+        {
+          "title": "Icon for a custom subscription",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/icon?domain=localgym.example&size=64"
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "image/png",
+              "Cache-Control": "public, max-age=2592000, immutable",
+              "X-Icon-Source": "duckduckgo"
+            },
+            "body": null,
+            "_note": "The real body is the PNG image bytes. X-Icon-Source is duckduckgo, google or fallback."
+          }
+        },
+        {
+          "title": "Not a bare hostname",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/icon?domain=https%3A%2F%2Flocalgym.example%2Fjoin"
+          },
+          "response": {
+            "status": 400,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "bad_request",
+                "message": "Invalid query parameter 'domain'.",
+                "details": [
+                  { "param": "domain", "issue": "Expected a bare hostname like 'example.com' (no scheme or path)." }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "POST /reports": {
+      "phase": 5,
+      "description": "A user reports that a catalog price looks wrong. Protected by Cloudflare Turnstile and rate limiting. Reports are stored in D1 and triaged into GitHub issues.",
+      "examples": [
+        {
+          "title": "Report accepted",
+          "request": {
+            "method": "POST",
+            "url": "https://simplely.ca/api/sub/v1/reports",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "planId": "netflix.standard",
+              "region": "CA",
+              "reported": { "amount": 20.99, "currency": "CAD", "interval": "month" },
+              "comment": "My bill went up this month.",
+              "turnstileToken": "0.zXc9Vb8Nm7As6Df5Gh4Jk3Lq"
+            }
+          },
+          "response": {
+            "status": 202,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "data": {
+                "id": "0192f1c6-3d4e-7f5a-9b6c-7d8e9f0a1b2c",
+                "status": "received"
+              },
+              "meta": {
+                "receivedAt": "2026-10-22T18:20:00Z"
+              }
+            }
+          }
+        },
+        {
+          "title": "Too many reports from this visitor",
+          "request": {
+            "method": "POST",
+            "url": "https://simplely.ca/api/sub/v1/reports",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "_note": "Same shape as the example above."
+            }
+          },
+          "response": {
+            "status": 429,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Retry-After": "60",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "rate_limited",
+                "message": "Too many requests. Try again in 60 seconds."
+              }
+            }
+          }
+        }
+      ]
+    },
+    "POST /cal": {
+      "phase": 5,
+      "description": "Creates an opt-in live calendar feed. The app uploads a minimal schedule (titles and dates only) and gets an unguessable feed URL to subscribe to in Google, Apple or Proton Calendar. The server stores nothing else.",
+      "examples": [
+        {
+          "title": "Create a feed",
+          "request": {
+            "method": "POST",
+            "url": "https://simplely.ca/api/sub/v1/cal",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "name": "Simply Sub payments",
+              "events": [
+                { "uid": "0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d", "title": "Netflix — $18.99", "start": "2026-11-12", "rrule": "FREQ=MONTHLY;INTERVAL=1" },
+                { "uid": "0192f1c5-0a11-7e42-8b7c-1f2e3d4c5b6a", "title": "Renew Mullvad VPN — ≈ $7.53", "start": "2026-11-03", "rrule": "FREQ=MONTHLY;INTERVAL=1" }
+              ]
+            }
+          },
+          "response": {
+            "status": 201,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store",
+              "Location": "https://simplely.ca/api/sub/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics"
+            },
+            "body": {
+              "data": {
+                "token": "k7Qm2Zp9XvT4bN8cR1sW0a",
+                "url": "https://simplely.ca/api/sub/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
+                "webcalUrl": "webcal://simplely.ca/api/sub/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
+                "manageKey": "Jd8f2LqP0zXn5Vt7Bc3HyA",
+                "eventCount": 2
+              },
+              "meta": {
+                "_note": "The app stores token and manageKey locally. manageKey is required to update (PUT) or revoke (DELETE) the feed, and is never shown again."
+              }
+            }
+          }
+        }
+      ]
+    },
+    "GET /cal/:token.ics": {
+      "phase": 5,
+      "description": "The iCalendar feed that calendar apps subscribe to.",
+      "examples": [
+        {
+          "title": "Feed contents",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics"
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "text/calendar; charset=utf-8",
+              "Cache-Control": "public, max-age=3600"
+            },
+            "body": "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Simply Sub//simplely.ca//EN\r\nCALSCALE:GREGORIAN\r\nX-WR-CALNAME:Simply Sub payments\r\nBEGIN:VEVENT\r\nUID:0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d@simplely.ca\r\nDTSTAMP:20261022T182000Z\r\nDTSTART;VALUE=DATE:20261112\r\nRRULE:FREQ=MONTHLY;INTERVAL=1\r\nSUMMARY:Netflix — $18.99\r\nEND:VEVENT\r\nBEGIN:VEVENT\r\nUID:0192f1c5-0a11-7e42-8b7c-1f2e3d4c5b6a@simplely.ca\r\nDTSTAMP:20261022T182000Z\r\nDTSTART;VALUE=DATE:20261103\r\nRRULE:FREQ=MONTHLY;INTERVAL=1\r\nSUMMARY:Renew Mullvad VPN — ≈ $7.53\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n"
+          }
+        },
+        {
+          "title": "Revoked or unknown token",
+          "request": {
+            "method": "GET",
+            "url": "https://simplely.ca/api/sub/v1/cal/doesNotExist000000000a.ics"
+          },
+          "response": {
+            "status": 404,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "not_found",
+                "message": "This calendar feed doesn't exist or was revoked."
+              }
+            }
+          }
+        }
+      ]
+    },
+    "PUT /cal/:token": {
+      "phase": 5,
+      "description": "Replaces the feed's events after the user changes their lists. Requires the manage key.",
+      "examples": [
+        {
+          "title": "Update events",
+          "request": {
+            "method": "PUT",
+            "url": "https://simplely.ca/api/sub/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a",
+            "headers": {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer Jd8f2LqP0zXn5Vt7Bc3HyA"
+            },
+            "body": {
+              "name": "Simply Sub payments",
+              "events": [
+                { "uid": "0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d", "title": "Netflix — $18.99", "start": "2026-11-12", "rrule": "FREQ=MONTHLY;INTERVAL=1" }
+              ]
+            }
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "data": {
+                "token": "k7Qm2Zp9XvT4bN8cR1sW0a",
+                "eventCount": 1,
+                "updatedAt": "2026-10-23T09:00:00Z"
+              },
+              "meta": {}
+            }
+          }
+        },
+        {
+          "title": "Wrong manage key",
+          "request": {
+            "method": "PUT",
+            "url": "https://simplely.ca/api/sub/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a",
+            "headers": {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer wrongKey000000000000000"
+            },
+            "body": {
+              "_note": "Same shape as the example above."
+            }
+          },
+          "response": {
+            "status": 403,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "forbidden",
+                "message": "The manage key doesn't match this calendar feed."
+              }
+            }
+          }
+        }
+      ]
+    },
+    "DELETE /cal/:token": {
+      "phase": 5,
+      "description": "Revokes the feed. Calendar apps stop receiving updates. Requires the manage key.",
+      "examples": [
+        {
+          "title": "Revoke a feed",
+          "request": {
+            "method": "DELETE",
+            "url": "https://simplely.ca/api/sub/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a",
+            "headers": {
+              "Authorization": "Bearer Jd8f2LqP0zXn5Vt7Bc3HyA"
+            }
+          },
+          "response": {
+            "status": 204,
+            "headers": {
+              "Cache-Control": "no-store"
+            },
+            "body": null
+          }
+        }
+      ]
+    }
+  },
+  "errorCodes": [
+    { "code": "bad_request", "status": 400, "meaning": "A query parameter or body field is missing or invalid. 'details' lists each problem." },
+    { "code": "forbidden", "status": 403, "meaning": "Missing or wrong manage key (calendar feeds)." },
+    { "code": "not_found", "status": 404, "meaning": "Unknown id, path or calendar token." },
+    { "code": "rate_limited", "status": 429, "meaning": "Too many requests. Respect the Retry-After header." },
+    { "code": "upstream_unavailable", "status": 502, "meaning": "A third-party source (such as Frankfurter) failed and no cached copy exists." },
+    { "code": "internal", "status": 500, "meaning": "Unexpected error. Safe to retry later." }
+  ]
+}
