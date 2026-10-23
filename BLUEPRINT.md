@@ -59,7 +59,7 @@ added as a custom entry. Users rank how much they care about each feature. The a
 ### 1.3 Decisions already made
 | Area | Decision |
 |---|---|
-| Frontend | **Angular 22.1.4**, TypeScript, standalone components, signals, zoneless change detection |
+| Frontend | **Angular 22.2.3** (CLI and build tools 22.2.4, pinned exactly), TypeScript, standalone components, signals, zoneless change detection |
 | UI kit | **Angular Material 3** + CDK (matches the search, chip and select styles in the wireframes) |
 | Toolchain | **Volta 2.0.2** pins **Node 24.19.0** and **npm 12.0.2** through the root `package.json` |
 | Repo layout | npm-workspaces monorepo (section 3) |
@@ -177,7 +177,7 @@ simply-sub/
 │     │  ├─ routes/          # providers.ts, plans.ts, features.ts, bundles.ts, catalog.ts, icons.ts
 │     │  └─ db/              # SQL queries (D1)
 │     ├─ migrations/         # D1 schema migrations (0001_init.sql …)
-│     ├─ public/             # ← Angular build is copied here at build time (gitignored)
+│     ├─ public/             # ← Angular build is copied here at build time (gitignored; `_headers` stays tracked)
 │     └─ wrangler.jsonc
 │
 ├─ packages/
@@ -241,6 +241,8 @@ simply-sub/
 }
 ```
 Set this up with `volta pin node@24.19.0 npm@12.0.2` in the repo root. That command writes the `volta` block.
+Each workspace's own `package.json` adds `"volta": { "extends": "../../package.json" }`. Volta reads the nearest
+`package.json`, so without this the pin wouldn't apply inside `apps/web` and the other workspaces.
 
 ---
 
@@ -925,7 +927,7 @@ the Wikidata queue:
 3. **Tooling:**
    ```bash
    volta install node@24.19.0 npm@12.0.2
-   npm i -g @angular/cli@22.1.4        # or use npx
+   npm i -g @angular/cli@22.2.4        # or use npx
    npm i -D wrangler -w apps/api       # Wrangler stays per-project
    npx wrangler login
    ```
@@ -933,7 +935,7 @@ the Wikidata queue:
    ```bash
    mkdir simply-sub && cd simply-sub && npm init -y
    volta pin node@24.19.0 npm@12.0.2
-   npx @angular/cli@22.1.4 new web --directory apps/web --style=scss --routing --ssr=false
+   npx @angular/cli@22.2.4 new web --directory apps/web --style=scss --routing --ssr=false
    npm create cloudflare@latest apps/api -- --type=hello-world --lang=ts   # then add hono
    mkdir -p packages/core/src data/providers data/bundles scripts
    ```

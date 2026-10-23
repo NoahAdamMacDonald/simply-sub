@@ -92,7 +92,7 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 |---|---|---|
 | M0.1 | Create the GitHub repo `simply-sub`, clone it to `C:\dev\simply-sub`, move the planning files in (§1.1) | The repo has the docs, and the README links to them |
 | M0.2 | Root workspace: `package.json` workspaces, `volta pin node@24.19.0 npm@12.0.2`, `tsconfig.base.json`, ESLint, Prettier, `.editorconfig`, `.gitignore` | `npm install` from the root works; `node -v` inside the repo prints 24.19.0 |
-| M0.3 | Scaffold `apps/web` (Angular 22.1.4, SCSS, routing, no SSR); add Angular Material; production `baseHref: /simply/sub/` | `ng build` outputs `dist/web/browser` with `<base href="/simply/sub/">` |
+| M0.3 | Scaffold `apps/web` (Angular 22.2.3, SCSS, routing, no SSR); add Angular Material; production `baseHref: /simply/sub/` | `ng build` outputs `dist/web/browser` with `<base href="/simply/sub/">` |
 | M0.4 | Theme: `styles/_tokens.scss` (BLUEPRINT §8.1 + §4.1 below), Material theme mapped to the tokens, Inter self-hosted (`@fontsource/inter`), `ThemeService` (system/light/dark, saved) | The theme toggle works; no hex values exist outside `_tokens.scss` |
 | M0.5 | App shell (P1): sidebar, a lazy placeholder route for every page, responsive drawer, not-found page (P15) | Every nav link works; the layout is fine at 360 px |
 | M0.6 | `packages/core` with Vitest; path alias `@simply-sub/core` | A sample test passes in CI; the web app imports from core |

@@ -1,0 +1,15 @@
+/* Shared TypeScript settings for every workspace (apps/*, packages/*, scripts). */
+/* Each workspace's tsconfig.json extends this file and adds only what it needs (lib, types, framework options). */
+{
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "target": "ES2022",
+    "module": "preserve"
+  }
+}

@@ -1,15 +1,39 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# Patterns without a leading slash match in every workspace (apps/*, packages/*).
 
-# Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+# Dependencies
+node_modules/
 
-# Node
-/node_modules
-npm-debug.log
-yarn-error.log
+# Build output
+dist/
+tmp/
+out-tsc/
+*.tsbuildinfo
+.angular/
+
+# Cloudflare Worker: local state, secrets and the web build copied in at build time.
+# apps/api/public/_headers stays tracked (BLUEPRINT §7.6).
+.wrangler/
+.dev.vars*
+!.dev.vars.example
+apps/api/public/simply/
+apps/api/public/index.html
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Tests
+coverage/
+test-results/
+playwright-report/
+__screenshots__/
+
+# Logs and caches
+*.log
+.eslintcache
+.sass-cache/
 
 # IDEs and editors
 .idea/
@@ -19,6 +43,7 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+.history/
 
 # Visual Studio Code
 .vscode/*
@@ -27,22 +52,14 @@ yarn-error.log
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/mcp.json
-.history/*
 
-# Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-__screenshots__/
-
-# System files
-.DS_Store
-Thumbs.db
+# Claude Code personal settings
+.claude/settings.local.json
 
 # Local-only planning material (kept out of the public repo)
 docs/drafts/
 docs/wireframes/
+
+# System files
+.DS_Store
+Thumbs.db

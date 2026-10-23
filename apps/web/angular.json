@@ -1,12 +1,12 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "$schema": "../../node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
     "packageManager": "npm"
   },
   "newProjectRoot": "projects",
   "projects": {
-    "simply-sub": {
+    "web": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -15,7 +15,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "ss",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "simply-sub:build:production"
+              "buildTarget": "web:build:production"
             },
             "development": {
-              "buildTarget": "simply-sub:build:development"
+              "buildTarget": "web:build:development"
             }
           },
           "defaultConfiguration": "development"
