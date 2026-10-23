@@ -75,7 +75,7 @@ describe('catalogJsonSchemas', () => {
       'Use a three-letter ISO 4217 currency code in capitals (CAD)',
     );
     expect(at(price, 'amount', 'description')).toBe(
-      "In the currency's major unit: 18.99 means $18.99",
+      "In the currency's major unit: 18.99 means $18.99. 0 means a free plan",
     );
     expect(at(price, 'sourceUrl', 'pattern')).toBe('^https://');
     expect(at(price, 'interval', 'enum')).toEqual(['day', 'week', 'month', 'year']);
