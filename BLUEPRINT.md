@@ -291,7 +291,7 @@ one canonical feature describes the same capability across every provider, whate
    and Proton's "Identity" both map to the value `identity`. Aliases are used by search, by the AI drafting
    pipeline (section 6.5) and for the plan-level display label.
 2. **Groups.** Features are organised in a tree through `parent` (`password-manager` → `password-manager.item-types`,
-   `password-manager.sharing` …). A group's own rank means "I want this kind of thing at all" (for example *any*
+   `password-manager.sharing` …; `vpn.included` → `vpn.devices`). A group's own rank means "I want this kind of thing at all" (for example *any*
    password manager). Children start as Not ranked, so detailed options only matter once you rank them, and a
    "Set all in this group" action makes bulk ranking quick. Ranks deliberately **don't cascade**. Otherwise
    ranking "Password manager: Needed" would make all 22 item types Needed, and the optimizer could never suggest a
@@ -308,72 +308,66 @@ one canonical feature describes the same capability across every provider, whate
    names stay deliberate ("480p (SD)", not "480p").
 
 ```yaml
-# data/features.yaml
+# data/features.yaml (an excerpt: the file is the registry)
 - id: video.quality
   name: Video quality
   category: streaming
   type: enum
-  values:                             # ordered low → high, so "at least 1080p" queries work
+  values: # ordered low → high, so "at least 1080p" queries work
     - { id: 480p, name: 480p (SD) }
     - { id: 720p, name: 720p (HD) }
     - { id: 1080p, name: 1080p (Full HD), headline: true }
     - { id: 4k, name: 4K (Ultra HD), aliases: [uhd, 2160p], headline: true }
-- id: video.hdr
-  name: HDR
-  category: streaming
-  type: boolean
+  aliases: [resolution, picture quality]
 - id: streaming.ad-free
   name: Ad free
   category: streaming
   type: boolean
+  aliases: [no ads, ad-free]
 - id: streaming.concurrent-streams
   name: Simultaneous streams
   category: streaming
   type: number
   unit: devices
-  tiers:                         # rankable buckets (the Features page rows); "provided" when value ≥ min
-    - { id: "1", name: Single device, min: 1, max: 1 }
-    - { id: "2-4", name: 2 to 4 devices, min: 2, max: 4 }
-    - { id: "5+", name: More than 4 devices, min: 5 }
-- id: streaming.download-devices
-  name: Download devices
+  tiers: # rankable buckets (the Features page rows); a plan provides one when its value is at least min
+    - { id: '1', name: Single device, min: 1, max: 1 }
+    - { id: 2-4, name: 2 to 4 devices, min: 2, max: 4 }
+    - { id: 5+, name: More than 4 devices, min: 5 }
+  aliases: [screens, streams, devices at once]
+- id: streaming.live
+  name: Live TV and sports
   category: streaming
-  type: number
-  unit: devices
+  type: set
+  values:
+    - { id: tv-channels, name: Live TV channels, aliases: [live tv, linear tv] }
+    - { id: sports, name: Live sports, aliases: [sports streaming, live games] }
+  aliases: [live broadcasts]
 - id: vpn.included
   name: VPN
   category: vpn
   type: boolean
+  aliases: [vpn, virtual private network]
+  headline: true
 - id: vpn.devices
+  parent: vpn.included
   name: VPN devices
   category: vpn
   type: number
   unit: devices
-- id: vpn.unlimited-traffic
-  name: Unlimited VPN traffic
-  category: vpn
-  type: boolean
+  tiers:
+    - { id: 1-5, name: 1 to 5 devices, min: 1, max: 5 }
+    - { id: 6-10, name: 6 to 10 devices, min: 6, max: 10 }
+    - { id: 11+, name: More than 10 devices, min: 11 }
 - id: storage.cloud
   name: Cloud storage
   category: storage
   type: number
   unit: GB
-- id: password-manager.included
-  name: Password manager
-  category: security
-  type: boolean
-- id: security.dark-web-monitoring
-  name: Dark web monitoring
-  category: security
-  type: boolean
-- id: email.custom-domains
-  name: Custom email domains
-  category: email
-  type: number
-- id: ai.assistant
-  name: AI assistant
-  category: ai
-  type: boolean
+  tiers:
+    - { id: 1+, name: Any cloud storage, min: 1 }
+    - { id: 200+, name: 200 GB or more, min: 200 }
+    - { id: 1000+, name: 1 TB or more, min: 1000 }
+  aliases: [drive, online storage]
 
 # ── Detailed, shared password-manager taxonomy ─────────────────────────────
 - id: password-manager
@@ -381,6 +375,7 @@ one canonical feature describes the same capability across every provider, whate
   category: security
   type: boolean
   aliases: [password vault, pass]
+  headline: true
 - id: password-manager.item-types
   parent: password-manager
   name: Storable item types
@@ -393,63 +388,14 @@ one canonical feature describes the same capability across every provider, whate
     - { id: credit-card, name: Credit cards, aliases: [payment cards] }
     - { id: identity, name: Identity, aliases: [personal information, personal info, identities] }
     - { id: secure-note, name: Secure notes, aliases: [notes] }
-    - { id: email-alias, name: Email aliases, aliases: [hide-my-email, forwarding addresses] }
-    - { id: bank-account, name: Bank accounts }
-    - { id: crypto-wallet, name: Crypto wallets }
-    - { id: api-credential, name: API credentials }
-    - { id: ssh-key, name: SSH keys }
-    - { id: wifi, name: Wi-Fi networks, aliases: [wifi network] }
-    - { id: database, name: Database credentials }
-    - { id: server, name: Server credentials }
-    - { id: software-license, name: Software licenses }
-    - { id: drivers-license, name: Driver's licenses }
-    - { id: passport, name: Passports }
-    - { id: medical-record, name: Medical records }
-    - { id: membership, name: Memberships }
-    - { id: reward-program, name: Reward programs }
-    - { id: government-id, name: Government IDs, aliases: [social security, SIN] }
-    - { id: custom, name: Custom item types }
-- id: password-manager.health
-  parent: password-manager
-  name: Password health monitoring
-  category: security
-  type: set
-  values:
-    - { id: breached, name: Breached passwords, aliases: [compromised] }
-    - { id: weak, name: Weak passwords }
-    - { id: reused, name: Reused passwords, aliases: [duplicate] }
-    - { id: old, name: Old passwords }
-    - { id: suspicious, name: Suspicious logins }
-- id: password-manager.sharing
-  parent: password-manager
-  name: Password sharing
-  category: security
-  type: set
-  values:
-    - { id: share-to-user, name: Share with other users }
-    - { id: share-vault, name: Share folders/vaults, aliases: [share folders] }
-    - { id: share-link, name: Share by link }
-    - { id: link-expiry, name: Expiring links }
-    - { id: link-view-limit, name: Link view limits, aliases: [usage limits] }
-    - { id: role-permissions, name: Access roles, aliases: [viewer/editor/admin, read/write/admin] }
-- id: password-manager.generator.max-length
-  parent: password-manager
-  name: Max generated password length
-  category: security
-  type: number
-  unit: characters
-- id: password-manager.generator.passphrase
-  parent: password-manager
-  name: Memorable passphrases
-  category: security
-  type: boolean
+    # … 16 more values in data/features.yaml
 
 # ── Services that include other services (overlap detection) ───────────────
 - id: includes-subscription
   name: Includes another subscription
   category: bundle
   type: set
-  valuesFrom: providers        # values are provider/plan ids, e.g. ea-play, ubisoft-plus.classics
+  valuesFrom: providers # values are plan ids (proton.pass-plus), never shown in ranking UIs
   rankable: false
 ```
 
