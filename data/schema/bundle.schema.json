@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^bundle\\.[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "patternErrorMessage": "Use bundle.<slug> (bundle.disney-crave-premium)",
+      "description": "bundle.<slug> (bundle.disney-crave-premium)"
+    },
+    "name": { "type": "string", "minLength": 1, "description": "Display name" },
+    "soldBy": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+      "description": "The id of the provider that sells the bundle"
+    },
+    "includes": {
+      "minItems": 2,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)+$",
+        "patternErrorMessage": "Use <provider id>.<slug> (netflix.standard)"
+      },
+      "description": "Ids of the plans sold together"
+    },
+    "link": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "patternErrorMessage": "Use a full https:// URL",
+      "description": "Where to sign up for the bundle"
+    },
+    "cancelUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "patternErrorMessage": "Use a full https:// URL",
+      "description": "Where to cancel"
+    },
+    "prices": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "region": {
+            "type": "string",
+            "pattern": "^(?:[A-Z]{2}|GLOBAL)$",
+            "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL",
+            "description": "Where this price applies: an ISO 3166-1 alpha-2 region, or GLOBAL"
+          },
+          "currency": {
+            "type": "string",
+            "pattern": "^[A-Z]{3}$",
+            "patternErrorMessage": "Use a three-letter ISO 4217 currency code in capitals (CAD)",
+            "description": "The ISO 4217 currency of amount"
+          },
+          "amount": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "In the currency's major unit: 18.99 means $18.99"
+          },
+          "interval": {
+            "type": "string",
+            "enum": ["day", "week", "month", "year"],
+            "description": "The billing period unit"
+          },
+          "intervalCount": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "description": "How many intervals one payment covers: 3 with month means quarterly"
+          },
+          "autoRenew": {
+            "type": "boolean",
+            "description": "false for prepaid plans that have to be renewed by hand"
+          },
+          "lastVerified": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+            "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+            "description": "The date someone last checked this price on the provider's site"
+          },
+          "sourceUrl": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://",
+            "patternErrorMessage": "Use a full https:// URL",
+            "description": "The page the price was read from"
+          }
+        },
+        "required": [
+          "region",
+          "currency",
+          "amount",
+          "interval",
+          "intervalCount",
+          "autoRenew",
+          "lastVerified"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["id", "name", "soldBy", "includes", "prices"],
+  "additionalProperties": false,
+  "title": "Simply Sub bundle",
+  "description": "data/bundles/<slug>.yaml: several plans sold together for one price (BLUEPRINT §4.4)"
+}

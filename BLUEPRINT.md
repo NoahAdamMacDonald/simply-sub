@@ -189,7 +189,7 @@ simply-sub/
 │  └─ core/                  # pure TypeScript with no Angular or Worker dependencies
 │     ├─ src/
 │     │  ├─ index.ts         # the public API, imported as `@simply-sub/core`
-│     │  ├─ catalog/         # catalog types + Zod schemas (shared by web, api, scripts)
+│     │  ├─ catalog/         # Zod schemas + inferred types for the catalog files, JSON Schema export (section 4.5)
 │     │  ├─ user/            # user-data types (lists, items, cards…)
 │     │  ├─ dates/           # ISO calendar dates: IsoDate, toIsoDate, addDays
 │     │  ├─ schedule/        # recurrence: next payment dates, monthly/annual totals
@@ -201,17 +201,19 @@ simply-sub/
 │
 ├─ data/                     # catalog source of truth (human-edited)
 │  ├─ features.yaml          # feature registry
-│  ├─ categories.yaml        # service categories + spend categories
+│  ├─ categories.yaml        # service, feature and spend categories
 │  ├─ providers/
 │  │  ├─ netflix.yaml
 │  │  ├─ proton.yaml
 │  │  └─ …
 │  ├─ bundles/
-│  │  └─ crave-disney.yaml
+│  │  └─ disney-crave-premium.yaml
+│  ├─ schema/                # JSON Schema for the YAML above, generated from core's Zod schemas (committed)
 │  └─ logos/                 # optional manual logo overrides (svg/png)
 │
-├─ scripts/
-│  ├─ validate-data.ts       # Zod/JSON-schema validation + cross-reference checks
+├─ scripts/                  # run by tsx; type-checked by `npm run build` (scripts/tsconfig.json)
+│  ├─ generate-json-schema.ts  # core's Zod schemas → data/schema/*.schema.json (`--check` in CI)
+│  ├─ validate-data.ts       # Zod validation + cross-reference checks
 │  ├─ build-catalog.ts       # YAML → catalog.json + seed.sql
 │  ├─ fetch-icons.ts         # catalog favicons → static icon files at build time
 │  ├─ price-check.ts         # nightly price monitor (section 6.4)
@@ -220,7 +222,8 @@ simply-sub/
 ├─ apps/bot/                # Cron Worker: nightly price check (Workflows + Workers AI) → GitHub PRs
 │
 └─ .github/workflows/
-   └─ ci.yml                 # the required PR check `ci`: lint, format, test, build (+ data:validate from M1.4)
+   └─ ci.yml                 # the required PR check `ci`: lint, format, data:schema --check, test, build
+                             # (+ data:validate from M1.4)
                              # (deploys run on Cloudflare Workers Builds, section 7.6)
 ```
 
@@ -228,10 +231,12 @@ simply-sub/
 - `packages/core` holds the business logic (optimizer, schedules, rewards, exporters) as plain functions. It can be
   unit-tested without Angular and reused by the API and scripts.
 - Apps import core as TypeScript source through the `@simply-sub/core` path alias in `tsconfig.base.json`, so core
-  has no build step. Angular's build, Wrangler and tsx read the alias themselves. A Vitest config that imports core
+  has no build step. Angular's build and Wrangler read the alias themselves. A Vitest config that imports core
   sets `resolve.tsconfigPaths: true`. Core's `package.json` `exports` points at the same file, so the npm workspace
-  link resolves it too. Workspace tsconfigs extend the base with a relative path, because Vite can't follow an
-  absolute Windows `extends`.
+  link resolves it too; that's how tsx finds it for `scripts/`, which run from the root (no root `tsconfig.json`).
+  Workspace tsconfigs extend the base with a relative path, because Vite can't follow an absolute Windows `extends`.
+- The root `package.json` has `"type": "module"`, so `scripts/*.ts` run as ES modules (top-level `await`,
+  `import.meta.url`). tsx strips types without checking them, so `npm run build` type-checks `scripts/` too.
 - `data/` makes catalog edits plain Git diffs: easy to review, revert and automate.
 - One Worker serves both the app and the API: one deploy, one domain, no CORS problems in production.
 
@@ -240,14 +245,17 @@ simply-sub/
 {
   "name": "simply-sub",
   "private": true,
+  "type": "module",
   // packages/* first, so `npm test` runs core's tests before `ng test` (which watches in a terminal)
   "workspaces": ["packages/*", "apps/*"],
   "scripts": {
     "dev:web": "npm -w apps/web run start",
     "dev:api": "npm -w apps/api run dev",
-    // core has nothing to emit; its tsc check runs first because Vitest strips types without checking them
-    "build": "npm -w packages/core run typecheck && npm -w apps/web run build && npm -w apps/api run build",
+    // core and scripts have nothing to emit; their tsc checks run first because Vitest and tsx strip types
+    // without checking them
+    "build": "npm -w packages/core run typecheck && tsc -p scripts && npm -w apps/web run build && npm -w apps/api run build",
     "test": "npm run test --workspaces --if-present",
+    "data:schema": "tsx scripts/generate-json-schema.ts",   // add -- --check to only verify (CI)
     "data:validate": "tsx scripts/validate-data.ts",
     "data:build": "tsx scripts/build-catalog.ts"
   },
@@ -293,8 +301,11 @@ one canonical feature describes the same capability across every provider, whate
    Game Pass Ultimate) goes in a plan's `perks` list (free text, shown but not compared).
 4. **Prefer structured types:** `boolean`, `number` (with `unlimited`), `enum` (ordered) and `set` (a
    multi-select of canonical values, for example the item types a password manager can store).
-5. **Plans can show provider wording.** `featureLabels: { password-manager.item-types.identity: "Personal info" }`
-   on a plan overrides the displayed name without breaking comparison.
+5. **Plans can show provider wording.** `featureLabels: { password-manager.item-types=identity: "Personal info" }`
+   on a plan overrides the displayed name without breaking comparison. The key is a feature id or a rank key.
+6. **Every value is an object** with an `id` and a `name` (plus optional `aliases` and `headline`), and every
+   feature has a `category`, children included. There's no shorthand, so the file reads one way and the display
+   names stay deliberate ("480p (SD)", not "480p").
 
 ```yaml
 # data/features.yaml
@@ -302,7 +313,11 @@ one canonical feature describes the same capability across every provider, whate
   name: Video quality
   category: streaming
   type: enum
-  values: [480p, 720p, 1080p, 4k]     # ordered low → high, so "at least 1080p" queries work
+  values:                             # ordered low → high, so "at least 1080p" queries work
+    - { id: 480p, name: 480p (SD) }
+    - { id: 720p, name: 720p (HD) }
+    - { id: 1080p, name: 1080p (Full HD), headline: true }
+    - { id: 4k, name: 4K (Ultra HD), aliases: [uhd, 2160p], headline: true }
 - id: video.hdr
   name: HDR
   category: streaming
@@ -369,6 +384,7 @@ one canonical feature describes the same capability across every provider, whate
 - id: password-manager.item-types
   parent: password-manager
   name: Storable item types
+  category: security
   type: set
   values:
     - { id: login, name: Logins, aliases: [account logins, passwords] }
@@ -396,11 +412,18 @@ one canonical feature describes the same capability across every provider, whate
 - id: password-manager.health
   parent: password-manager
   name: Password health monitoring
+  category: security
   type: set
-  values: [breached, weak, reused, old, suspicious]
+  values:
+    - { id: breached, name: Breached passwords, aliases: [compromised] }
+    - { id: weak, name: Weak passwords }
+    - { id: reused, name: Reused passwords, aliases: [duplicate] }
+    - { id: old, name: Old passwords }
+    - { id: suspicious, name: Suspicious logins }
 - id: password-manager.sharing
   parent: password-manager
   name: Password sharing
+  category: security
   type: set
   values:
     - { id: share-to-user, name: Share with other users }
@@ -412,11 +435,13 @@ one canonical feature describes the same capability across every provider, whate
 - id: password-manager.generator.max-length
   parent: password-manager
   name: Max generated password length
+  category: security
   type: number
   unit: characters
 - id: password-manager.generator.passphrase
   parent: password-manager
   name: Memorable passphrases
+  category: security
   type: boolean
 
 # ── Services that include other services (overlap detection) ───────────────
@@ -425,6 +450,7 @@ one canonical feature describes the same capability across every provider, whate
   category: bundle
   type: set
   valuesFrom: providers        # values are provider/plan ids, e.g. ea-play, ubisoft-plus.classics
+  rankable: false
 ```
 
 `number` features support `unlimited` as a value. Booleans that aren't listed on a plan are treated as `false`,
@@ -454,8 +480,8 @@ spendCategory: streaming            # used for card-reward maths (section 9)
 acceptedNetworks: [visa, mastercard, amex, discover]   # omit = unknown → all cards allowed, with a warning
 billingCurrency: { CA: CAD }        # currency actually charged per region (drives FX-fee maths)
 cancelUrl: https://www.netflix.com/cancelplan
-cancelFee: null
-notes: ""
+sources: { pricing: https://help.netflix.com/en/node/24926 }
+# Optional and left out here: aliases, cancelFee (text), notes. Optional fields are omitted, never empty or null.
 
 plans:
   - id: netflix.standard-ads
@@ -488,7 +514,7 @@ plans:
       streaming.download-devices: 2
     prices:
       - { region: CA, currency: CAD, amount: 18.99, interval: month, intervalCount: 1, autoRenew: true, lastVerified: 2026-10-21, sourceUrl: https://help.netflix.com/en/node/24926 }
-    addOns: [netflix.extra-member-ads, netflix.extra-member]
+    addOnIds: [netflix.extra-member-ads, netflix.extra-member]   # ids from addOns below
     addOnLimit: 1                 # max extra members on this plan
 
   - id: netflix.premium
@@ -502,7 +528,7 @@ plans:
       streaming.download-devices: 6
     prices:
       - { region: CA, currency: CAD, amount: 23.99, interval: month, intervalCount: 1, autoRenew: true, lastVerified: 2026-10-21, sourceUrl: https://help.netflix.com/en/node/24926 }
-    addOns: [netflix.extra-member-ads, netflix.extra-member]
+    addOnIds: [netflix.extra-member-ads, netflix.extra-member]
     addOnLimit: 2
 
 addOns:
@@ -519,7 +545,12 @@ addOns:
 ```
 > These prices come from the draft JSON. Verify them before seeding.
 
-**Money-back features** (for example a savings-account plan paying 3.5% interest, or Xbox Rewards) use a `returns` block on the plan:
+Plans can also have `featureLabels` (rule 5 in section 4.2), `perks` (provider-specific extras, shown but not
+compared) and `notes`. The Proton example in `docs/api-output-examples.json` uses all three.
+
+**Money-back features** (for example a savings-account plan paying 3.5% interest, or Xbox Rewards) will use a
+`returns` block on the plan. It's **not in the schema yet**, so the strict schema rejects it: add it, with its
+rules, in the task that first needs it.
 ```yaml
     returns:
       - type: interest           # interest | cashback | store-credit | points
@@ -528,94 +559,167 @@ addOns:
         estimate: user-input     # the user enters a balance to estimate value
 ```
 
-### 4.4 Bundle file (`data/bundles/crave-disney.yaml`)
+### 4.4 Bundle file (`data/bundles/disney-crave-premium.yaml`)
 ```yaml
-id: crave-disney-premium
-name: Crave + Disney+ Premium
-provider: bell                       # who sells the bundle
-includes: [crave.premium, disney-plus.premium]
-link: https://example.com/bundle
-cancelUrl: https://example.com/cancel
+id: bundle.disney-crave-premium      # always bundle.<slug>, so it can't clash with a provider or plan id
+name: Disney+ Premium & Crave Premium
+soldBy: crave                        # the provider id of who sells the bundle
+includes: [disney-plus.premium, crave.premium]   # plan ids, at least two
+link: https://www.crave.ca/en/bundles
+cancelUrl: https://www.crave.ca/en/account
 prices:
   - { region: CA, currency: CAD, amount: 29.99, interval: month, intervalCount: 1, autoRenew: true, lastVerified: 2026-10-21 }
 # Features = union of the included plans' features (computed)
 # Savings  = sum of the included plans' prices − bundle price (computed per region/interval)
 ```
 
-### 4.5 Catalog TypeScript types (`packages/core/src/catalog/types.ts`)
-```ts
-export type Interval = 'day' | 'week' | 'month' | 'year';
-export type FeatureValue = boolean | number | 'unlimited' | string;
+### 4.5 Catalog schemas and types (`packages/core/src/catalog/`)
+The **Zod schemas** are the single validation source. They're used by `validate-data.ts`, by the API, and by
+the app when it parses cached snapshots. The TypeScript types are inferred from them (`z.infer`), so the two
+can't drift. Everything is exported from `@simply-sub/core`.
 
-export interface Price {
-  region: string;            // ISO 3166-1 alpha-2, e.g. 'CA'
-  currency: string;          // ISO 4217, e.g. 'CAD'
-  amount: number;
+| File | Schemas (and inferred types) |
+|---|---|
+| `formats.ts` | `slugSchema`, `dottedSlugSchema`, `planIdSchema`, `bundleIdSchema`, `tierIdSchema`, `rankKeySchema`, `regionSchema`, `currencySchema`, `isoDateSchema`, `httpsUrlSchema`, `iconNameSchema`, `textSchema`, `aliasesSchema` |
+| `price.ts` | `intervalSchema` (`Interval`), `priceSchema` (`Price`) |
+| `feature.ts` | `featuresFileSchema`, `featureSchema` (`Feature`), `featureValueDefSchema`, `featureTierSchema`, `featureValueSchema` (`FeatureValue`) |
+| `category.ts` | `categoriesFileSchema` (`Categories`), `categorySchema`, `serviceCategorySchema` |
+| `provider.ts` | `providerSchema` (`Provider`), `planSchema` (`Plan`), `addOnSchema` (`AddOn`), `cardNetworkSchema` (`CardNetwork`) |
+| `bundle.ts` | `bundleSchema` (`Bundle`) |
+| `json-schema.ts` | `catalogJsonSchemas()`: the JSON Schema of each kind of file |
+
+The shapes in short (the Zod source is authoritative). `?` marks an optional field, which is left out when
+empty, never `null` or `""`:
+```ts
+type Interval = 'day' | 'week' | 'month' | 'year';
+
+interface Price {
+  region: string;            // ISO 3166-1 alpha-2 in capitals ('CA'), or 'GLOBAL'
+  currency: string;          // ISO 4217 ('CAD')
+  amount: number;            // > 0, in the major unit (18.99)
   interval: Interval;
-  intervalCount: number;
+  intervalCount: number;     // whole number ≥ 1 (3 + month = quarterly)
   autoRenew: boolean;
-  lastVerified: string;      // ISO date
-  sourceUrl?: string;
+  lastVerified: string;      // YYYY-MM-DD
+  sourceUrl?: string;        // https
 }
 
-export interface FeatureValueDef { id: string; name: string; aliases?: string[]; headline?: boolean }
-export interface FeatureTier { id: string; name: string; min: number; max?: number; headline?: boolean }
+interface FeatureValueDef { id: string; name: string; aliases?: string[]; headline?: boolean }
+interface FeatureTier { id: string; name: string; min: number; max?: number; headline?: boolean } // id: '1', '2-4', '5+'
 
-export interface FeatureDef {
-  id: string;
+// A discriminated union on `type`: each type accepts only its own keys.
+type Feature = {
+  id: string;                // 'video.quality'
   parent?: string;           // group feature id
   name: string;
-  category: string;          // feature category (how the Features page groups features)
-  type: 'boolean' | 'number' | 'enum' | 'set';
-  values?: FeatureValueDef[];  // enum: ordered low → high; set: canonical options
-  tiers?: FeatureTier[];       // number features: rankable buckets
-  valuesFrom?: 'providers';
+  category: string;          // feature category, required on child features too
   aliases?: string[];
-  unit?: string;
   headline?: boolean;        // show in feature summaries
   rankable?: boolean;        // default true
-}
-// Plan.features values: boolean | number | 'unlimited' | enum value id | string[] (set)
-export type RankKey = string;  // 'streaming.ad-free' | 'video.quality=4k' | 'streaming.concurrent-streams=2-4' …
+} & (
+  | { type: 'boolean' }
+  | { type: 'number'; unit?: string; tiers?: FeatureTier[] }    // tiers: the rankable buckets
+  | { type: 'enum'; values: FeatureValueDef[] }                 // ordered low → high
+  | { type: 'set'; values: FeatureValueDef[] }                  // a set has values …
+  | { type: 'set'; valuesFrom: 'providers' }                    // … or valuesFrom, never both
+);
 
-export interface Plan {
-  id: string;
-  providerId: string;
+// A plan's value: boolean | number | 'unlimited' | enum value id | set value ids (plan or provider ids for valuesFrom)
+type FeatureValue = boolean | number | string | string[];
+type RankKey = string;       // 'streaming.ad-free' | 'video.quality=4k' | 'streaming.concurrent-streams=2-4' …
+
+interface Plan {
+  id: string;                // '<provider id>.<slug>' (netflix.standard)
   name: string;
   link?: string;
-  features: Record<string, FeatureValue>;
-  prices: Price[];
-  addOns?: string[];
-  addOnLimit?: number;
-  returns?: PlanReturn[];
+  features: Record<string, FeatureValue>;    // feature id → value
+  featureLabels?: Record<RankKey, string>;   // feature id or rank key → the provider's wording
+  perks?: string[];          // provider-specific extras, shown but never compared
   notes?: string;
+  prices: Price[];           // at least one
+  addOnIds?: string[];       // ids from the provider's addOns
+  addOnLimit?: number;       // needs addOnIds
 }
 
-export interface Provider {
-  id: string;
+interface AddOn { id: string; name: string; grantsPlan?: string; prices: Price[] }  // id: '<provider id>.<slug>'
+
+type CardNetwork = 'visa' | 'mastercard' | 'amex' | 'discover' | 'interac' | 'unionpay' | 'jcb' | 'other';
+
+interface Provider {
+  id: string;                // kebab-case, the same as the file name
   name: string;
+  aliases?: string[];
   website: string;
-  category: string;
+  category: string;          // service category
   spendCategory: string;
-  acceptedNetworks?: CardNetwork[];  // undefined = unknown
+  acceptedNetworks?: CardNetwork[];          // left out = unknown
+  billingCurrency?: Record<string, string>;  // region → the currency charged there
   cancelUrl?: string;
-  cancelFee?: string | null;
-  plans: Plan[];
-  addOns: AddOn[];
+  cancelFee?: string;
+  sources?: { pricing?: string };
+  notes?: string;
+  plans: Plan[];             // at least one
+  addOns?: AddOn[];
 }
 
-export interface Bundle {
-  id: string;
+interface Bundle {
+  id: string;                // 'bundle.<slug>'
   name: string;
-  includes: string[];        // plan ids
-  prices: Price[];
+  soldBy: string;            // provider id
+  includes: string[];        // plan ids, at least two
   link?: string;
   cancelUrl?: string;
+  prices: Price[];
+}
+
+interface Categories {
+  service: { id: string; name: string; icon: string }[];  // icon: a Material Symbols name
+  feature: { id: string; name: string }[];
+  spend: { id: string; name: string }[];
 }
 ```
-The **Zod schemas** next to these types are the single validation source. They are used by `validate-data.ts`,
-by the API, and by the app when it parses cached snapshots. JSON Schema is generated from Zod so YAML files get
-editor autocomplete through the VS Code YAML extension.
+These are the **source** shapes: what the YAML files hold. They match the catalog objects in
+`docs/api-output-examples.json` minus what the build and the API add (`iconUrl`, `schemaVersion`, picked
+`pricing`, `providedRankKeys`, and a bundle's expanded `includes`, `savings` and feature union). A core test
+parses every catalog object in the contract, minus those fields, so the two stay compatible. The output schemas
+come with M1.5 (`catalog.json`) and M2.7 (API responses), built on these. Plans have no `providerId`: it comes
+from the file a plan is in, and flattened views add it.
+
+**What the schemas check**
+- **Strict objects:** an unknown key is an error at every level, whether it's a typo or an old name (a plan's
+  `addOns`, a bundle's `provider`).
+- **Formats:**
+  - ids are kebab-case slugs: dotted for features, `<provider id>.<slug>` for plans and add-ons, `bundle.<slug>`
+    for bundles, `1` / `2-4` / `5+` for tiers;
+  - regions are ISO 3166-1 alpha-2 in capitals, or `GLOBAL`; currencies are three capital letters;
+  - dates are real `YYYY-MM-DD` dates; URLs are `https://` on a domain name;
+  - amounts are above 0, and `intervalCount` and `addOnLimit` are whole numbers of at least 1;
+  - icons are Material Symbols names; text isn't empty; optional lists are left out rather than empty.
+- **Within one file:**
+  - plan and add-on ids start with the provider id and are unique in the file;
+  - value and tier ids are unique within a feature, and a tier's `max` is at least its `min`;
+  - a set feature has `values` or `valuesFrom: providers`, not both;
+  - `addOnLimit` needs `addOnIds`, and a plan or bundle doesn't list the same id twice.
+- **Readable errors:** each one names the exact path and says what to write, for example
+  `plans.0.prices.0.currency: Use a three-letter ISO 4217 currency code in capitals (CAD)`.
+- **Left to `validate-data.ts`** (section 6.2, M1.4): anything that needs another file or the date. That covers
+  feature ids and values against the registry, category ids, add-on, `grantsPlan` and bundle references,
+  duplicate ids across files, and a `lastVerified` in the future.
+- Parse the YAML as YAML 1.2 (the default in the `yaml` package and in the editor), so dates such as
+  `2026-10-21` stay strings. Quote ids that look like numbers (`id: "1"`).
+
+**Editor autocomplete**
+- `npm run data:schema` (`scripts/generate-json-schema.ts`) writes
+  `data/schema/{features,categories,provider,bundle}.schema.json`. They're JSON Schema 2020-12, made with
+  `z.toJSONSchema` from the input side of each schema.
+- The files are committed. CI runs `npm run data:schema -- --check`, which fails when they're out of date, so run
+  `npm run data:schema` after changing a schema.
+- `.vscode/settings.json` maps them to `data/features.yaml`, `data/categories.yaml`, `data/providers/*.yaml` and
+  `data/bundles/*.yaml` for the Red Hat YAML extension (`redhat.vscode-yaml`, recommended in
+  `.vscode/extensions.json`).
+- The extension autocompletes keys and enum values, shows each field's description on hover, and flags mistakes
+  as you type. It uses the same messages as Zod (through `patternErrorMessage`).
+- The within-file checks above run only in Zod, so the editor doesn't show them.
 
 ### 4.6 User data model (IndexedDB, `packages/core/src/user/types.ts`)
 Every record has `id` (UUID v7), `createdAt`, `updatedAt` and `deletedAt?` (a soft delete, so future sync can merge changes).
@@ -823,10 +927,13 @@ rebuilds D1 from scratch. This gives you:
 
 ### 6.2 Validation (`scripts/validate-data.ts`, runs in CI on every PR)
 Validation fails if:
-- a file doesn't match the Zod schema
-- a plan uses a feature id that isn't in `features.yaml`, or an enum value that isn't listed
-- ids are duplicated, or a bundle or add-on references a plan that doesn't exist
-- a currency isn't ISO 4217, or an amount is ≤ 0
+- a file doesn't match its Zod schema (section 4.5), which already covers unknown keys, formats, amounts ≤ 0 and
+  the checks within one file
+- a plan uses a feature id that isn't in `features.yaml`, a value of the wrong type for the feature, or an enum
+  or set value that isn't listed (for `valuesFrom: providers`, an id that isn't a provider or plan)
+- a feature's `parent`, a provider's `category` or `spendCategory`, or a feature's `category` isn't defined
+- ids are duplicated across files, or a bundle, `addOnIds` or `grantsPlan` references something that doesn't exist
+- a currency isn't a real ISO 4217 code (the schema only checks that it's three capital letters)
 - `lastVerified` is in the future
 
 Validation warns (but passes) when `lastVerified` is older than 90 days.
@@ -1075,8 +1182,9 @@ Settings → Build*). The settings as they are now:
   blockers stop it, which is harmless.
 - Workers Builds deploys straight from `main`; it doesn't wait for GitHub checks. Branch protection (M0.10) is
   what keeps a failing change off `main`.
-- A small GitHub Actions `.github/workflows/ci.yml` (M0.10) runs lint, the Prettier check, tests and the build
-  (`data:validate` joins in M1.4) as the required **PR check** `ci`, because that's what blocks merging a bad
+- A small GitHub Actions `.github/workflows/ci.yml` (M0.10) runs lint, the Prettier check, the generated JSON
+  Schema check (`data:schema -- --check`, M1.1), tests and the build (`data:validate` joins in M1.4) as the
+  required **PR check** `ci`, because that's what blocks merging a bad
   change. Actions are free for public repos. It has a read-only token and no secrets, runs on `pull_request`
   (fork PRs get nothing), and pins its actions to commit SHAs.
 - **`main` is protected** by a GitHub ruleset with no bypass, not even for the admin: changes arrive only through
@@ -1340,6 +1448,7 @@ The favicon comes from the link through `/icon`, and falls back to the Simply Su
 
 ### 9.2 Model (stored locally only)
 ```ts
+// Inferred from cardNetworkSchema (packages/core/src/catalog/provider.ts), which providers' acceptedNetworks also use
 export type CardNetwork = 'visa' | 'mastercard' | 'amex' | 'discover' | 'interac' | 'unionpay' | 'jcb' | 'other';
 
 export interface PaymentCard {
@@ -1570,7 +1679,8 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
   (create list → add from search → see totals).
 
 ### 13.4 How to add a provider (checklist)
-1. Create `data/providers/<id>.yaml` (copy `netflix.yaml`, or run `npm run data:draft -- <pricing-url>`).
+1. Create `data/providers/<id>.yaml` (copy `netflix.yaml`, or run `npm run data:draft -- <pricing-url>`). With
+   the recommended Red Hat YAML extension, VS Code autocompletes and checks the file as you type (section 4.5).
 2. Use only feature ids from `features.yaml`. Add new features there first, in a separate commit.
 3. Fill in `lastVerified` and `sourceUrl` for every price.
 4. Run `npm run data:validate`, then open a PR.

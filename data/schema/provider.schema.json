@@ -1,0 +1,338 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+      "description": "Stable provider id, the same as the file name (netflix)"
+    },
+    "name": { "type": "string", "minLength": 1, "description": "Display name" },
+    "aliases": {
+      "minItems": 1,
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Other names people or providers use for this, matched by search"
+    },
+    "website": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "patternErrorMessage": "Use a full https:// URL",
+      "description": "The home page"
+    },
+    "category": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+      "description": "A service category id from categories.yaml"
+    },
+    "spendCategory": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+      "description": "A spend category id from categories.yaml, for card rewards"
+    },
+    "acceptedNetworks": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["visa", "mastercard", "amex", "discover", "interac", "unionpay", "jcb", "other"]
+      },
+      "description": "Card networks the provider accepts. Leave it out when unknown, and every card is allowed"
+    },
+    "billingCurrency": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^(?:[A-Z]{2}|GLOBAL)$",
+        "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[A-Z]{3}$",
+        "patternErrorMessage": "Use a three-letter ISO 4217 currency code in capitals (CAD)"
+      },
+      "description": "Region → the currency actually charged there, for FX-fee maths"
+    },
+    "cancelUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "patternErrorMessage": "Use a full https:// URL",
+      "description": "Where to cancel"
+    },
+    "cancelFee": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Any cancellation fee. Leave it out when there is none"
+    },
+    "sources": {
+      "type": "object",
+      "properties": {
+        "pricing": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "patternErrorMessage": "Use a full https:// URL",
+          "description": "The pricing page the prices were read from"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Pages the catalog data was taken from"
+    },
+    "notes": { "type": "string", "minLength": 1, "description": "Shown on the provider" },
+    "plans": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)+$",
+            "patternErrorMessage": "Use <provider id>.<slug> (netflix.standard)",
+            "description": "<provider id>.<slug> (netflix.standard)"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The plan name, without the provider name (Standard)"
+          },
+          "link": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://",
+            "patternErrorMessage": "Use a full https:// URL",
+            "description": "Where to sign up for this plan"
+          },
+          "features": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
+              "patternErrorMessage": "Use kebab-case segments joined by dots (video.quality, password-manager.item-types)"
+            },
+            "additionalProperties": {
+              "anyOf": [
+                { "type": "boolean" },
+                { "type": "number", "minimum": 0 },
+                { "type": "string", "const": "unlimited" },
+                {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
+                    "patternErrorMessage": "Use kebab-case segments joined by dots (video.quality, password-manager.item-types)"
+                  }
+                }
+              ]
+            },
+            "description": "Feature id → value, using ids from features.yaml. Unlisted booleans count as false and unlisted sets as empty"
+          },
+          "featureLabels": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*(?:=[a-z0-9]+(?:-[a-z0-9]+)*\\+?)?$",
+              "patternErrorMessage": "Use a feature id or <feature id>=<value or tier id> (video.quality=4k)"
+            },
+            "additionalProperties": { "type": "string", "minLength": 1 },
+            "description": "Feature id or rank key → the provider's own wording, shown instead of the registry name"
+          },
+          "perks": {
+            "minItems": 1,
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "description": "Provider-specific extras, shown but never compared"
+          },
+          "notes": { "type": "string", "minLength": 1, "description": "Shown on the plan" },
+          "prices": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "region": {
+                  "type": "string",
+                  "pattern": "^(?:[A-Z]{2}|GLOBAL)$",
+                  "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL",
+                  "description": "Where this price applies: an ISO 3166-1 alpha-2 region, or GLOBAL"
+                },
+                "currency": {
+                  "type": "string",
+                  "pattern": "^[A-Z]{3}$",
+                  "patternErrorMessage": "Use a three-letter ISO 4217 currency code in capitals (CAD)",
+                  "description": "The ISO 4217 currency of amount"
+                },
+                "amount": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "description": "In the currency's major unit: 18.99 means $18.99"
+                },
+                "interval": {
+                  "type": "string",
+                  "enum": ["day", "week", "month", "year"],
+                  "description": "The billing period unit"
+                },
+                "intervalCount": {
+                  "type": "integer",
+                  "exclusiveMinimum": 0,
+                  "maximum": 9007199254740991,
+                  "description": "How many intervals one payment covers: 3 with month means quarterly"
+                },
+                "autoRenew": {
+                  "type": "boolean",
+                  "description": "false for prepaid plans that have to be renewed by hand"
+                },
+                "lastVerified": {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+                  "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+                  "description": "The date someone last checked this price on the provider's site"
+                },
+                "sourceUrl": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https://",
+                  "patternErrorMessage": "Use a full https:// URL",
+                  "description": "The page the price was read from"
+                }
+              },
+              "required": [
+                "region",
+                "currency",
+                "amount",
+                "interval",
+                "intervalCount",
+                "autoRenew",
+                "lastVerified"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "addOnIds": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)+$",
+              "patternErrorMessage": "Use <provider id>.<slug> (netflix.standard)"
+            },
+            "description": "Ids of this provider's add-ons that can be bought with this plan"
+          },
+          "addOnLimit": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "description": "The most add-ons this plan allows in total (extra members)"
+          }
+        },
+        "required": ["id", "name", "features", "prices"],
+        "additionalProperties": false
+      }
+    },
+    "addOns": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)+$",
+            "patternErrorMessage": "Use <provider id>.<slug> (netflix.standard)",
+            "description": "<provider id>.<slug> (netflix.extra-member)"
+          },
+          "name": { "type": "string", "minLength": 1, "description": "Display name" },
+          "grantsPlan": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)+$",
+            "patternErrorMessage": "Use <provider id>.<slug> (netflix.standard)",
+            "description": "The plan whose features the add-on gives (an extra member's plan)"
+          },
+          "prices": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "region": {
+                  "type": "string",
+                  "pattern": "^(?:[A-Z]{2}|GLOBAL)$",
+                  "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL",
+                  "description": "Where this price applies: an ISO 3166-1 alpha-2 region, or GLOBAL"
+                },
+                "currency": {
+                  "type": "string",
+                  "pattern": "^[A-Z]{3}$",
+                  "patternErrorMessage": "Use a three-letter ISO 4217 currency code in capitals (CAD)",
+                  "description": "The ISO 4217 currency of amount"
+                },
+                "amount": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "description": "In the currency's major unit: 18.99 means $18.99"
+                },
+                "interval": {
+                  "type": "string",
+                  "enum": ["day", "week", "month", "year"],
+                  "description": "The billing period unit"
+                },
+                "intervalCount": {
+                  "type": "integer",
+                  "exclusiveMinimum": 0,
+                  "maximum": 9007199254740991,
+                  "description": "How many intervals one payment covers: 3 with month means quarterly"
+                },
+                "autoRenew": {
+                  "type": "boolean",
+                  "description": "false for prepaid plans that have to be renewed by hand"
+                },
+                "lastVerified": {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+                  "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+                  "description": "The date someone last checked this price on the provider's site"
+                },
+                "sourceUrl": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https://",
+                  "patternErrorMessage": "Use a full https:// URL",
+                  "description": "The page the price was read from"
+                }
+              },
+              "required": [
+                "region",
+                "currency",
+                "amount",
+                "interval",
+                "intervalCount",
+                "autoRenew",
+                "lastVerified"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["id", "name", "prices"],
+        "additionalProperties": false
+      },
+      "description": "Extras bought on top of a plan; plans list the ones they allow in addOnIds"
+    }
+  },
+  "required": ["id", "name", "website", "category", "spendCategory", "plans"],
+  "additionalProperties": false,
+  "title": "Simply Sub provider",
+  "description": "data/providers/<id>.yaml: one provider with its plans and add-ons (BLUEPRINT §4.3)"
+}

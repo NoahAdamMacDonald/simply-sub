@@ -1,0 +1,275 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "oneOf": [
+      {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
+            "patternErrorMessage": "Use kebab-case segments joined by dots (video.quality, password-manager.item-types)",
+            "description": "Stable feature id (video.quality)"
+          },
+          "parent": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
+            "patternErrorMessage": "Use kebab-case segments joined by dots (video.quality, password-manager.item-types)",
+            "description": "The group feature this one belongs to (password-manager)"
+          },
+          "name": { "type": "string", "minLength": 1, "description": "Display name" },
+          "category": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+            "description": "A feature category id from categories.yaml"
+          },
+          "type": { "type": "string", "const": "boolean" },
+          "aliases": {
+            "minItems": 1,
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "description": "Other names people or providers use for this, matched by search"
+          },
+          "headline": {
+            "type": "boolean",
+            "description": "Show it in feature summaries (\"VPN 2 / 3\")"
+          },
+          "rankable": {
+            "type": "boolean",
+            "description": "false hides a helper feature from ranking UIs (default true)"
+          }
+        },
+        "required": ["id", "name", "category", "type"],
+        "additionalProperties": false
+      },
+      {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
+            "patternErrorMessage": "Use kebab-case segments joined by dots (video.quality, password-manager.item-types)",
+            "description": "Stable feature id (video.quality)"
+          },
+          "parent": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
+            "patternErrorMessage": "Use kebab-case segments joined by dots (video.quality, password-manager.item-types)",
+            "description": "The group feature this one belongs to (password-manager)"
+          },
+          "name": { "type": "string", "minLength": 1, "description": "Display name" },
+          "category": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+            "description": "A feature category id from categories.yaml"
+          },
+          "type": { "type": "string", "const": "number" },
+          "unit": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Shown after the value (devices, GB)"
+          },
+          "tiers": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*\\+?$",
+                  "patternErrorMessage": "Use a tier id such as 1, 2-4 or 5+ (in YAML, quote ids that are plain numbers: \"1\")",
+                  "description": "Used in rank keys (streaming.concurrent-streams=2-4)"
+                },
+                "name": { "type": "string", "minLength": 1, "description": "Display name" },
+                "min": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "A plan provides the tier when its value is at least min, or unlimited"
+                },
+                "max": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "The tier's upper end, for its label. Plans above it still provide the tier"
+                },
+                "headline": {
+                  "type": "boolean",
+                  "description": "Show it in feature summaries (\"VPN 2 / 3\")"
+                }
+              },
+              "required": ["id", "name", "min"],
+              "additionalProperties": false
+            },
+            "description": "Rankable buckets: the rows the Features page shows for this feature"
+          },
+          "aliases": {
+            "minItems": 1,
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "description": "Other names people or providers use for this, matched by search"
+          },
+          "headline": {
+            "type": "boolean",
+            "description": "Show it in feature summaries (\"VPN 2 / 3\")"
+          },
+          "rankable": {
+            "type": "boolean",
+            "description": "false hides a helper feature from ranking UIs (default true)"
+          }
+        },
+        "required": ["id", "name", "category", "type"],
+        "additionalProperties": false
+      },
+      {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
+            "patternErrorMessage": "Use kebab-case segments joined by dots (video.quality, password-manager.item-types)",
+            "description": "Stable feature id (video.quality)"
+          },
+          "parent": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
+            "patternErrorMessage": "Use kebab-case segments joined by dots (video.quality, password-manager.item-types)",
+            "description": "The group feature this one belongs to (password-manager)"
+          },
+          "name": { "type": "string", "minLength": 1, "description": "Display name" },
+          "category": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+            "description": "A feature category id from categories.yaml"
+          },
+          "type": { "type": "string", "const": "enum" },
+          "values": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+                  "description": "The canonical value id, used in plan files and rank keys (video.quality=4k)"
+                },
+                "name": { "type": "string", "minLength": 1, "description": "Display name" },
+                "aliases": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": { "type": "string", "minLength": 1 },
+                  "description": "Other names people or providers use for this, matched by search"
+                },
+                "headline": {
+                  "type": "boolean",
+                  "description": "Show it in feature summaries (\"VPN 2 / 3\")"
+                }
+              },
+              "required": ["id", "name"],
+              "additionalProperties": false
+            },
+            "description": "Ordered low to high, so \"at least 1080p\" works"
+          },
+          "aliases": {
+            "minItems": 1,
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "description": "Other names people or providers use for this, matched by search"
+          },
+          "headline": {
+            "type": "boolean",
+            "description": "Show it in feature summaries (\"VPN 2 / 3\")"
+          },
+          "rankable": {
+            "type": "boolean",
+            "description": "false hides a helper feature from ranking UIs (default true)"
+          }
+        },
+        "required": ["id", "name", "category", "type", "values"],
+        "additionalProperties": false
+      },
+      {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
+            "patternErrorMessage": "Use kebab-case segments joined by dots (video.quality, password-manager.item-types)",
+            "description": "Stable feature id (video.quality)"
+          },
+          "parent": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
+            "patternErrorMessage": "Use kebab-case segments joined by dots (video.quality, password-manager.item-types)",
+            "description": "The group feature this one belongs to (password-manager)"
+          },
+          "name": { "type": "string", "minLength": 1, "description": "Display name" },
+          "category": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+            "description": "A feature category id from categories.yaml"
+          },
+          "type": { "type": "string", "const": "set" },
+          "values": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                  "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+                  "description": "The canonical value id, used in plan files and rank keys (video.quality=4k)"
+                },
+                "name": { "type": "string", "minLength": 1, "description": "Display name" },
+                "aliases": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": { "type": "string", "minLength": 1 },
+                  "description": "Other names people or providers use for this, matched by search"
+                },
+                "headline": {
+                  "type": "boolean",
+                  "description": "Show it in feature summaries (\"VPN 2 / 3\")"
+                }
+              },
+              "required": ["id", "name"],
+              "additionalProperties": false
+            },
+            "description": "The canonical options a plan can list"
+          },
+          "valuesFrom": {
+            "type": "string",
+            "const": "providers",
+            "description": "The values are provider or plan ids instead of listed options"
+          },
+          "aliases": {
+            "minItems": 1,
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "description": "Other names people or providers use for this, matched by search"
+          },
+          "headline": {
+            "type": "boolean",
+            "description": "Show it in feature summaries (\"VPN 2 / 3\")"
+          },
+          "rankable": {
+            "type": "boolean",
+            "description": "false hides a helper feature from ranking UIs (default true)"
+          }
+        },
+        "required": ["id", "name", "category", "type"],
+        "additionalProperties": false
+      }
+    ]
+  },
+  "title": "Simply Sub feature registry",
+  "description": "data/features.yaml: every feature plans can list and users can rank (BLUEPRINT §4.2)"
+}
