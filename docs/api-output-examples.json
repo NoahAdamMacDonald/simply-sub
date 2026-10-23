@@ -22,6 +22,7 @@
   "endpoints": {
     "GET /health": {
       "description": "Liveness and version information.",
+      "_note": "catalogVersion, catalogUpdatedAt and counts are omitted until D1 holds a seeded catalog (M0.8, M1.5).",
       "examples": [
         {
           "title": "Healthy",

@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "dev:web": "npm -w apps/web run start",
-    "build": "npm -w packages/core run typecheck && npm -w apps/web run build",
+    "dev:api": "npm -w apps/api run dev",
+    "build": "npm -w packages/core run typecheck && npm -w apps/web run build && npm -w apps/api run build",
     "test": "npm run test --workspaces --if-present",
     "lint": "eslint . && stylelint \"**/*.{css,scss}\"",
     "format": "prettier --write .",

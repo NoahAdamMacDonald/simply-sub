@@ -1,0 +1,19 @@
+// The "simply-sub" Worker: the app's static files plus the catalog API (BLUEPRINT §2, §7.4).
+// The D1 binding (M0.8) and the simplely.ca routes (M0.9) are added by their own tasks, so until
+// then this file refers to nothing in the Cloudflare account.
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "simply-sub",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    // Filled by scripts/copy-web-build.mjs: the app under simply/sub/, plus a root index.html for
+    // the SPA fallback (BLUEPRINT §7.3).
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    // Only API paths invoke the Worker. Everything else is a static file, which costs no quota.
+    "run_worker_first": ["/api/*"],
+  },
+  "observability": { "enabled": true },
+}

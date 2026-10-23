@@ -982,7 +982,7 @@ FREE SAVINGS — nothing you rank is lost
 - Statuses, rank resolution and ladders, rank counts, feature summaries
 - Budget checks, optimizer fixtures, reward maths
 
-**API:** route tests with `@cloudflare/vitest-pool-workers`, plus contract tests against the examples file.
+**API:** route tests with `@cloudflare/vitest-plugin` (runs them in workerd), plus contract tests against the examples file.
 
 **Components:** `ss-rank-select`, `ss-budget-bar` (aria values, colours), `ss-price` (converted marker),
 item dialog validation, filter panel ↔ URL sync.

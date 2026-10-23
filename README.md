@@ -29,12 +29,12 @@ An npm-workspaces monorepo (see [BLUEPRINT.md §3](BLUEPRINT.md#3-repository-str
 | Path | What |
 |---|---|
 | `apps/web` | The Angular 22 app |
+| `apps/api` | The Cloudflare Worker (Hono): serves the app's static files and the API at `/api/sub/v1` |
 | `packages/core` | Business logic as pure TypeScript functions, shared by the app, the Worker and the scripts |
 | `tsconfig.base.json` | TypeScript settings shared by every workspace, and the `@simply-sub/core` path alias |
 
 Apps import `packages/core` as TypeScript source through the `@simply-sub/core` alias, so it has no build step.
-The Cloudflare Worker (`apps/api`), the catalog (`data/`) and the scripts are added by later tasks in the
-project plan.
+The catalog (`data/`) and the scripts are added by later tasks in the project plan.
 
 ## Commands
 
@@ -43,8 +43,9 @@ Run these from the repo root.
 | Command | What it does |
 |---|---|
 | `npm install` | Installs every workspace |
-| `npm run dev:web` | Starts the dev server at http://localhost:4200/ |
-| `npm run build` | Type-checks `packages/core`, then builds the app for production to `apps/web/dist/web/browser` |
-| `npm test` | Unit tests (Vitest) in every workspace, `packages/core` first |
+| `npm run dev:web` | Starts the dev server at http://localhost:4200/, with `/api` proxied to `dev:api` |
+| `npm run dev:api` | Runs the Worker locally (`wrangler dev`): the API at http://localhost:8787/api/sub/v1/health, and the last production build of the app at http://localhost:8787/simply/sub/ |
+| `npm run build` | Type-checks `packages/core`, builds the app for production, copies it into `apps/api/public/simply/sub/`, then type-checks and bundles the Worker (`wrangler deploy --dry-run`: nothing is deployed) |
+| `npm test` | Unit tests (Vitest) in every workspace, `packages/core` first; the Worker's run inside workerd |
 | `npm run lint` | ESLint |
 | `npm run format` / `npm run format:check` | Formats with / checks against Prettier |

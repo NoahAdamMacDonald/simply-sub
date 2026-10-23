@@ -1,0 +1,11 @@
+/* The Worker runs in workerd, so its globals come from the generated worker-configuration.d.ts */
+/* (`npm run types` after changing wrangler.jsonc), not from the DOM or Node libraries. */
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2024"],
+    "types": ["@cloudflare/vitest-plugin/types"],
+    "noEmit": true
+  },
+  "include": ["src", "test", "worker-configuration.d.ts"]
+}
