@@ -1,7 +1,14 @@
 import { currencySchema, ecbCurrencies, rebaseRates } from '@simply-sub/core';
 import { Hono } from 'hono';
 import { ecbRates } from '../fx';
-import { badQuery, jsonType, notModified, type ParamProblem } from '../http';
+import {
+  badQuery,
+  jsonType,
+  noExchangeRates,
+  notModified,
+  utcTimestamp,
+  type ParamProblem,
+} from '../http';
 
 /** How long a browser may keep the last good rates while Frankfurter is down: 15 minutes, then it asks again. */
 const staleMaxAge = 900;
@@ -19,20 +26,9 @@ export const fx = new Hono<{ Bindings: Env }>().get('/', async (c) => {
   }
   const base = c.req.query('base') ?? '';
 
-  // Timestamps are ISO 8601 in UTC, to the second, as in the examples.
-  const rates = await ecbRates(c.env, new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'));
+  const rates = await ecbRates(c.env, utcTimestamp(new Date()));
   if (!rates) {
-    return c.json(
-      {
-        error: {
-          code: 'upstream_unavailable',
-          message:
-            "Exchange rates are temporarily unavailable. Converted prices can't be shown right now.",
-        },
-      },
-      502,
-      { 'Content-Type': jsonType, 'Cache-Control': 'no-store' },
-    );
+    return noExchangeRates(c);
   }
   const data = rebaseRates(rates.ecb, base);
   if (!data) {
