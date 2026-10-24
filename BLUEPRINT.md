@@ -67,7 +67,8 @@ added as a custom entry. Users rank how much they care about each feature. The a
 | Catalog API | Our own read-only API on a **Cloudflare Worker (Hono) + D1**, because no free API exists (section 5) |
 | Catalog source of truth | **YAML files in Git**, validated in CI and seeded into D1 automatically |
 | Catalog scope | **Personal and family plans**, free tiers included (a $0 price). Business and per-seat plans aren't in the v1 catalog. A provider's all-in-one plans (Proton Unlimited, Duo, Family) are **suite plans**, not bundles (section 4.4) |
-| Domain & URLs | **simplely.ca**: app at `https://simplely.ca/simply/sub/`, API at `https://simplely.ca/api/sub/v1/` |
+| Domain & URLs | **sub.simplely.ca**, a subdomain of its own (an origin no other app shares, section 7.3): app at `https://sub.simplely.ca/`, API at `https://sub.simplely.ca/api/v1/` |
+| Security of user data | Local only, with defences against injected script (strict CSP, Trusted Types), validated imports, optional encrypted backups and an optional passphrase lock that encrypts the data at rest (section 11.5) |
 | Regions | **Every region a service supports** is stored. The user's own region and currency are the default. Prices without a native price in the user's currency are converted and marked with a "converted" icon (section 4.7). Canadian data is filled first |
 | Sales tax | Added for buyers in **Canada and the US**, where listed prices exclude it: a built-in rate per Canadian province, the user's own rate otherwise. Totals include it; price tags show "+ tax" (section 4.8) |
 | Payment cards | **Kept**, manual entry: network, flat cash-back %, FX fee %, optional monthly limit (section 9). Built in Phase 4 |
@@ -98,14 +99,14 @@ served from a cache, it is cheap and easy to maintain.
 ## 2. Architecture
 
 ```
-                        https://simplely.ca
+                      https://sub.simplely.ca
                                │
                      ┌─────────┴──────────────────────────┐
                      │      Cloudflare Worker "simply-sub" │
                      │                                     │
-   /simply/sub/*  ──►│  Static assets (Angular build)      │  free, no request cap
+              /*  ──►│  Static assets (Angular build)      │  free, no request cap
                      │                                     │
-   /api/sub/v1/*  ──►│  Hono router  ──►  D1 (catalog)     │  counts against Worker quota
+       /api/v1/*  ──►│  Hono router  ──►  D1 (catalog)     │  counts against Worker quota
                      │       │                             │
                      │       └──► Cache API (edge cache)   │
                      └─────────────────────────────────────┘
@@ -127,8 +128,8 @@ served from a cache, it is cheap and easy to maintain.
 
 **Key ideas**
 1. **The server only knows public catalog data.** Every user-specific record lives in IndexedDB.
-2. **The app downloads a catalog snapshot** (a static file: from M2.1 its region's `/simply/sub/data/catalog/<region>.json`,
-   the same JSON as `GET /api/sub/v1/catalog?region=`; before that the full `catalog.json`), caches it, and does
+2. **The app downloads a catalog snapshot** (a static file: from M2.1 its region's `/data/catalog/<region>.json`,
+   the same JSON as `GET /api/v1/catalog?region=`; before that the full `catalog.json`), caches it, and does
    search, filtering and optimization locally. This makes the UI fast, lets it work offline, and keeps API calls far below the free limit.
    Per-item endpoints still exist for deep links and for other consumers of the API.
 3. **Everything is static or cached.** The Worker runs only for `/api/*` requests, and those responses are edge-cached.
@@ -153,7 +154,7 @@ simply-sub/
 │  ├─ web/                   # Angular 22 app
 │  │  ├─ src/app/
 │  │  │  ├─ core/            # app-wide services (singletons)
-│  │  │  │  ├─ storage/      # Dexie database, repositories, migrations
+│  │  │  │  ├─ storage/      # Dexie database, repositories, migrations, the crypto module (section 11.5)
 │  │  │  │  ├─ catalog/      # CatalogService: fetch, cache, search
 │  │  │  │  ├─ theme/        # light/dark, CSS tokens
 │  │  │  │  ├─ clock/        # ClockService: the only reader of the device clock (`today`)
@@ -178,13 +179,13 @@ simply-sub/
 │  │
 │  └─ api/                   # Cloudflare Worker
 │     ├─ src/
-│     │  ├─ index.ts         # Hono app, routes mounted at /api/sub/v1
+│     │  ├─ index.ts         # Hono app, routes mounted at /api/v1
 │     │  ├─ routes/          # health.ts, providers.ts, plans.ts, features.ts, bundles.ts, catalog.ts, icons.ts
 │     │  └─ db/              # SQL queries (D1)
 │     ├─ test/               # route tests, run in workerd (@cloudflare/vitest-plugin)
 │     ├─ migrations/         # D1 schema migrations (0001_init.sql …)
 │     ├─ scripts/
-│     │  └─ copy-web-build.mjs  # web build → public/simply/sub/, plus public/index.html (section 7.3)
+│     │  └─ copy-web-build.mjs  # web build → public/ (section 7.3)
 │     ├─ public/             # ← Angular build is copied here at build time (gitignored, except `_headers`, M2.8)
 │     ├─ worker-configuration.d.ts  # generated by `wrangler types` (`npm run types` after config changes)
 │     └─ wrangler.jsonc
@@ -230,7 +231,7 @@ simply-sub/
 ├─ apps/bot/                # Cron Worker: nightly price check (Workflows + Workers AI) → GitHub PRs
 │
 └─ .github/workflows/
-   └─ ci.yml                 # the required PR check `ci`: lint, format, data:schema --check, data:validate,
+   └─ ci.yml                 # the required PR check `ci`: npm audit, lint, format, data:schema --check, data:validate,
                              # test, build (deploys run on Cloudflare Workers Builds, section 7.6)
 ```
 
@@ -814,6 +815,8 @@ export interface Settings {
   salesTaxPercent?: number;                     // the user's own rate, in place of the built-in one (4.8)
   monthlyBudget?: number; annualBudget?: number;
   theme: 'light' | 'dark' | 'system';
+  appLock?: { salt: string; iterations: number;   // the optional passphrase lock (11.5): no secret is stored,
+              check: string; idleMinutes: number }; // only the salt and an encrypted check value
 }
 ```
 
@@ -891,7 +894,7 @@ item is sold in the region; `availability` does, and the app asks it first. `con
 `fxRatesSchema` (the `/fx` data: rates per unit of the user's currency).
 
 **Converted prices**
-- Converted using daily ECB rates (Frankfurter, through `/api/sub/v1/fx`, cached in the browser with the rate date).
+- Converted using daily ECB rates (Frankfurter, through `/api/v1/fx`, cached in the browser with the rate date).
 - Shown with a **≈ prefix plus a small currency-exchange icon** (Material Symbols `currency_exchange`). The tooltip
   reads "Converted from 9.99 USD at 1.38 on 2026-10-22. You'll be charged in USD."
 - Native prices show no icon. The search filters offer a **"Native pricing only"** toggle.
@@ -942,7 +945,7 @@ The rules live in `packages/core/src/tax/` and run in M7.1:
   carry a `catalogVersion` as the ETag: the first 7 hex digits of a SHA-256 of the snapshot's `data`, so it
   changes only when the catalog does, never on a code-only deploy (decided in M1.5; it was the Git commit SHA).
 
-### 5.2 Endpoints (all under `/api/sub/v1`)
+### 5.2 Endpoints (all under `https://sub.simplely.ca/api/v1`)
 | Method & path | Purpose |
 |---|---|
 | `GET /catalog` | Full snapshot (providers, plans, add-ons, bundles, features, **all regions' prices**), ETag-cached. `?region=CA` trims it to the prices `pick-price` could use for that region. Both are static files built by `data:build` (section 6.3), which the Worker reads through its `ASSETS` binding, not D1 rows. The app fetches its region's static file directly, which uses no Worker quota |
@@ -952,7 +955,7 @@ The rules live in `packages/core/src/tax/` and run in M7.1:
 | `GET /features` | Feature registry |
 | `GET /categories` | Service and spend categories |
 | `GET /bundles?plans=netflix.standard,crave.premium` | Bundles that include any of the given plans |
-| `GET /icon?domain=example.com` | Favicon proxy for **custom subscriptions** (Google, then DuckDuckGo, as core's `iconServiceUrls` orders them → the best square PNG, or the fallback), cached for 30 days in KV. Catalog icons are fetched once by `scripts/fetch-icons.ts` into `data/logos/` (committed, so builds never fetch) and served as static files at `/simply/sub/icons/<id>.png` |
+| `GET /icon?domain=example.com` | Favicon proxy for **custom subscriptions** (Google, then DuckDuckGo, as core's `iconServiceUrls` orders them → the best square PNG, or the fallback), cached for 30 days in KV. Catalog icons are fetched once by `scripts/fetch-icons.ts` into `data/logos/` (committed, so builds never fetch) and served as static files at `/icons/<id>.png` |
 | `GET /fx?base=CAD` | Proxied and cached Frankfurter rates (daily) |
 | `GET /health` | Returns the API version, and from M2.1 the catalog version, its build time and counts |
 | *(Phase 5)* `POST /reports` | "This price looks wrong" reports (Turnstile-protected, rate-limited) |
@@ -1023,7 +1026,7 @@ So M2.1:
 The API is public and read-only on purpose: it serves public catalog data, and no user data ever reaches the
 server (section 1.3), so there is nothing to log in to. A key in the app wouldn't help either, since everything
 shipped to the browser is visible. The risks are abuse, and M2 builds these defences:
-- **Rate limit:** a per-IP limit on `/api/sub/*` using the Workers Rate Limiting binding, answering
+- **Rate limit:** a per-IP limit on `/api/*` using the Workers Rate Limiting binding, answering
   `429` with the `rate_limited` error. On the free plan, going over the daily Worker quota makes requests fail;
   it can't run up a bill. The app's own pages and catalog file are static assets and don't count.
 - **Caching:** every GET is edge-cached (section 5.1), so repeated requests rarely run the Worker or touch D1.
@@ -1037,7 +1040,9 @@ shipped to the browser is visible. The risks are abuse, and M2 builds these defe
   (`observability.logs.invocation_logs: false`, M2.8), the Worker logs errors without query strings, and the app
   asks for an icon only when a custom subscription with a website is saved.
 - **Validation:** every query parameter goes through Zod, and anything unknown or invalid gets `400`.
-- **CORS** limits browser calls from other sites to `https://simplely.ca`. It's an extra layer, not authentication.
+- **CORS:** the app and the API share an origin, so the app needs no CORS at all. The API's CORS header names only
+  `https://sub.simplely.ca`, so other sites' pages can't read its responses from a browser. It's an extra layer,
+  not authentication.
 - **Writes** arrive only in Phase 5 (`POST /reports`), with Turnstile and a stricter rate limit.
 - **Secrets** (the bot's GitHub token, AI keys) are Worker secrets (`wrangler secret put`) or a gitignored `.env`,
   never tracked files. The D1 `database_id` in `wrangler.jsonc` isn't a secret: using it needs a Cloudflare login.
@@ -1052,7 +1057,7 @@ import { catalog } from './routes/catalog';
 
 type Env = { Bindings: { DB: D1Database; ASSETS: Fetcher; APP_ORIGIN: string } };
 
-const api = new Hono<Env>().basePath('/api/sub/v1');
+const api = new Hono<Env>().basePath('/api/v1');
 api.use('*', (c, next) => cors({ origin: c.env.APP_ORIGIN })(c, next));
 api.route('/catalog', catalog);
 api.route('/providers', providers);
@@ -1138,7 +1143,7 @@ the files.
      counts.
 3. Write `apps/web/public/data/catalog.json` (gitignored), the exact JSON of the snapshot, and copy each logo
    from `data/logos/` to `apps/web/public/icons/<id>.png`. The Angular build publishes them as
-   `/simply/sub/data/catalog.json` and `/simply/sub/icons/<id>.png`, and `ng serve` serves them too. The build
+   `/data/catalog.json` and `/icons/<id>.png`, and `ng serve` serves them too. The build
    never fetches icons: `npm run data:icons` does that once per provider (section 13.4).
 4. Write `apps/api/dist/seed.sql`, one statement per line: `DELETE FROM` every table, then insert every row with
    the derived columns (`monthly_equiv`, `rank_value`, section 5.3), then the snapshot row `ALL`.
@@ -1328,16 +1333,22 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
    GitHub's CI only checks code, so the repo has no Cloudflare secrets. The bot's GitHub token (M8.3) is a
    Worker secret on the Cloudflare side.
 
-### 7.3 Serving the app under `/simply/sub/`
-Static assets are matched by **path**, so the build must sit at `public/simply/sub/` inside the Worker's asset folder:
-- Build Angular with `ng build --base-href /simply/sub/`.
-- A post-build step copies `apps/web/dist/web/browser/*` to `apps/api/public/simply/sub/`.
-- It also copies `index.html` to `apps/api/public/index.html`, because SPA fallback serves the root
-  `index.html` for unknown routes. Thanks to `<base href="/simply/sub/">`, that copy still loads the right files.
-- **Chosen (M0.7):** the root `index.html` copy. Tested with `wrangler dev`: `/simply/sub/` serves the app,
-  `/simply/sub` redirects there, and deep links such as `/simply/sub/lists/abc` render and survive a reload, all
-  without invoking the Worker. `npm -w apps/api run build` runs the copy (`scripts/copy-web-build.mjs`), and it
-  refuses a development build (no `/simply/sub/` base href).
+### 7.3 Serving the app from `sub.simplely.ca`
+The app and the API have the subdomain to themselves: **https://sub.simplely.ca/** for the app, and
+**https://sub.simplely.ca/api/v1/** for the API, both from the one Worker.
+- **Why a subdomain:** browser storage (IndexedDB, localStorage) belongs to an origin (scheme, host and port), never
+  to a path. When the app lived at `simplely.ca/simply/sub/` (M0.3 to the pre-M2 review), any other app on
+  `simplely.ca`, or a script-injection bug in one, could read every user's lists. OWASP's advice is one application
+  per origin (section 11.5). Moving cost nothing then, since nobody had data saved; moving after launch would
+  strand every user's data on the old origin.
+- **How it's served:** the Angular build uses the default `<base href="/">`, and `npm -w apps/api run build`
+  (`scripts/copy-web-build.mjs`) copies `apps/web/dist/web/browser/*` into `apps/api/public/`, keeping the tracked
+  `_headers`. It refuses a development build: only a production build names its bundle with a hash
+  (`main-6XMYCLII.js`).
+- Unknown paths get `public/index.html` (`not_found_handling: single-page-application`), so deep links such as
+  `/lists/abc` render and survive a reload without invoking the Worker. Checked with `wrangler dev`: `/`, a deep
+  link, `/data/catalog.json`, `/icons/netflix.png` and `/api/v1/health` all answer, and the old `/api/sub/v1/`
+  path is a 404.
 
 ### 7.4 `apps/api/wrangler.jsonc` (sketch)
 ```jsonc
@@ -1355,28 +1366,25 @@ Static assets are matched by **path**, so the build must sit at `public/simply/s
     { "binding": "DB", "database_name": "simply-sub-catalog", "database_id": "<from step 5>",
       "migrations_dir": "migrations" }
   ],
-  "routes": [
-    { "pattern": "simplely.ca/simply/sub*", "zone_name": "simplely.ca" },
-    { "pattern": "simplely.ca/api/sub*",   "zone_name": "simplely.ca" }
-  ],
-  "vars": { "APP_ORIGIN": "https://simplely.ca" },
+  "routes": [{ "pattern": "sub.simplely.ca", "custom_domain": true }],
   "observability": { "enabled": true }
 }
 ```
-Until `simplely.ca` is active in Cloudflare, delete `routes` and use the free `simply-sub.<account>.workers.dev`
-URL. The rest of `simplely.ca` (root page, other future apps) stays free for other Workers or Pages projects,
-since these routes only claim `/simply/sub*` and `/api/sub*`.
+A **custom domain** sends every path on `sub.simplely.ca` to this Worker, and the deploy creates the DNS record and
+the certificate. The rest of `simplely.ca` (the root and other future apps, each on its own subdomain) stays free
+for other Workers or Pages projects.
 
 The real file grows with the tasks: M0.7 has `assets` and `observability` only, M0.8 adds `d1_databases`, and
 M0.9 adds `routes` with `workers_dev: false` and `preview_urls: true` (section 7.6), so the config never names an
-account resource before it exists. `apps/api/wrangler.jsonc` is the current version. `npm -w apps/api run build`
+account resource before it exists. The pre-M2 review replaced M0.9's two `simplely.ca` path routes with the custom
+domain. `apps/api/wrangler.jsonc` is the current version. `npm -w apps/api run build`
 ends with `wrangler deploy --dry-run`, which bundles the Worker without logging in or deploying.
 
 ### 7.5 Local development
 - Terminal 1: `npm run dev:api` (`wrangler dev`, port 8787, with a local D1). Seed it with `npm run data:build`,
   then, in `apps/api`, `npm run db:migrate:local` and `npx wrangler d1 execute simply-sub-catalog --local --file
-  dist/seed.sql`. It also serves the last production build of the app at http://localhost:8787/simply/sub/ (run
-  `npm run build` first to refresh it).
+  dist/seed.sql`. It also serves the last production build of the app at http://localhost:8787/ (run
+  `npm run build` first to refresh it), and the API at http://localhost:8787/api/v1/.
 - Terminal 2: `npm run dev:web` (`ng serve` with `apps/web/proxy.conf.json`):
   ```json
   { "/api": { "target": "http://localhost:8787", "secure": false } }
@@ -1401,9 +1409,12 @@ Settings → Build*). The settings as they are now:
   `dist/seed.sql` that `npm run build` wrote (section 6.3), and only then deploys, so a failing seed stops the
   deploy. The build command needs no change, because `npm run build` runs `data:build`. The build token already
   has D1 edit. Preview builds never touch D1, since they share the production database.
-- **Routes:** `simplely.ca/simply/sub*` and `simplely.ca/api/sub*`. A route only fires for a proxied hostname, so
-  the zone has a placeholder `AAAA @ 100::` record (proxied). Nothing serves the rest of `simplely.ca` yet.
-- `workers_dev: false` and `preview_urls: true`: production is only on simplely.ca, and branch builds still get
+- **Domain:** the custom domain `sub.simplely.ca` (section 7.3), whose DNS record and certificate the deploy
+  creates. From M0.9 until the pre-M2 review the Worker had two path routes on `simplely.ca` instead, which is why
+  the zone still has a placeholder `AAAA @ 100::` record (proxied): routes only fire for a proxied hostname. Nothing
+  serves the rest of `simplely.ca`. If a deploy can't create the custom domain (the token lacks a permission), add
+  it by hand: *simply-sub → Settings → Domains & Routes → Add → Custom domain*.
+- `workers_dev: false` and `preview_urls: true`: production is only on sub.simplely.ca, and branch builds still get
   a (public, unguessable) preview link. *Protect with Cloudflare Access* is off; turn it on to put a login in
   front of preview links (needs Zero Trust).
 - Before running the build command, Workers Builds also runs its own `npm clean-install` in `apps/api`. It's
@@ -1415,7 +1426,7 @@ Settings → Build*). The settings as they are now:
   blockers stop it, which is harmless.
 - Workers Builds deploys straight from `main`; it doesn't wait for GitHub checks. Branch protection (M0.10) is
   what keeps a failing change off `main`.
-- A small GitHub Actions `.github/workflows/ci.yml` (M0.10) runs lint, the Prettier check, the generated JSON
+- A small GitHub Actions `.github/workflows/ci.yml` (M0.10) runs `npm audit --audit-level=high`, lint, the Prettier check, the generated JSON
   Schema check (`data:schema -- --check`, M1.1), the catalog checks (`data:validate`, M1.4), tests and the build
   as the required **PR check** `ci`, because that's what blocks merging a bad
   change. Actions are free for public repos. It has a read-only token and no secrets, runs on `pull_request`
@@ -1424,9 +1435,16 @@ Settings → Build*). The settings as they are now:
   a pull request, `ci` must pass on a branch that's up to date with `main`, and force pushes and deletion are
   blocked. No approval is required (one developer). The repo allows only squash merges and deletes merged
   branches.
-- **`_headers` (M2.8):** a tracked `apps/api/public/_headers` file for the static files: a strict
-  Content-Security-Policy (allowing the Web Analytics beacon above), `Referrer-Policy` and `X-Content-Type-Options`,
-  and caching. The app's hashed JS and CSS are immutable. Icons (`/simply/sub/icons/*`) get one day and are then
+- **`_headers` (M2.8):** a tracked `apps/api/public/_headers` file for the static files, with these headers:
+  - a strict Content-Security-Policy:
+    - `script-src 'self'` plus the Web Analytics beacon above;
+    - `object-src 'none'`, `base-uri 'self'`, `form-action 'self'` and `frame-ancestors 'none'`;
+    - **Trusted Types**: `require-trusted-types-for 'script'` with Angular's policies
+      (`trusted-types angular angular#bundler`), so no string can reach a script sink;
+    - the small inline theme script in `index.html` either gets its SHA-256 hash in `script-src` (Angular's
+      `autoCsp` build option can add it) or moves to a file of its own;
+  - `Referrer-Policy` and `X-Content-Type-Options`;
+  - caching. The app's hashed JS and CSS are immutable. Icons (`/icons/*`) get one day and are then
   revalidated, because their URLs carry no version and a replaced logo must show up. The catalog files keep the
   default, revalidated on every visit.
 
@@ -1461,7 +1479,7 @@ question is "which platform runs the API", and each platform gets the jobs it's 
 | What it is | Serverless functions at the edge + SQLite DB | Your app in a Docker container on a small VM | Git hosting, Pages (static), Actions (CI/cron) |
 | Can run a live API? | ✅ | ✅ | ❌ (static JSON on Pages only) |
 | Cost for this project | **$0** (free tier is far above our needs) | ~**$2–5/mo** minimum. No free tier for new accounts since 2024; trial only | $0 (public repo) |
-| Domain fit | ✅ `simplely.ca` is already on Cloudflare; path routes `/api/sub*` are one config line | Needs DNS records + certificate on Fly, and can't share `simplely.ca` paths with the app without a proxy | Pages wants its own (sub)domain; path sharing needs a Cloudflare proxy anyway |
+| Domain fit | ✅ `simplely.ca` is already on Cloudflare; a custom domain (`sub.simplely.ca`) is one config line | Needs DNS records + certificate on Fly, and can't share `simplely.ca` paths with the app without a proxy | Pages wants its own (sub)domain; path sharing needs a Cloudflare proxy anyway |
 | Server upkeep | None: no OS, no memory sizing, no restarts | You own the container: Node updates, memory limits, health checks, auto-stop/cold starts | None |
 | Global speed | Runs in 300+ cities, close to every user | One region unless you pay for more machines | CDN for static files |
 | Runtime | Workers runtime (web-standard APIs + `nodejs_compat`). Most npm packages work, but not everything Node can do; short CPU time per request (~10 ms free) | **Full Node.js**: any package, long-running processes, websockets, Playwright, background jobs | Actions: full Linux VM for jobs up to 6 h |
@@ -1494,7 +1512,7 @@ websockets, a heavy headless-browser farm, or a large relational database with c
 small Fly app *for that piece only* and keep the rest on Cloudflare. Hono code moves over with almost no changes.
 
 **Cost tip:** the `/catalog` snapshot is prebuilt during deploy. It can be served as a **static asset**
-(for example `/simply/sub/data/catalog.json`, which is free and has no request cap) instead of going through the
+(for example `/data/catalog.json`, which is free and has no request cap) instead of going through the
 Worker. The Worker quota is then spent only on search and detail endpoints.
 
 ---
@@ -1814,11 +1832,17 @@ blocks removal" and "a limited Sep–Oct window keeps a Needed feature covered".
 IndexedDB through Dexie, with repositories exposed as Angular services that return signals or observables.
 Request persistent storage with `navigator.storage.persist()`, and remind users to back up (they can be
 prompted after each big change, or weekly).
+- **Repositories are the only way in.** Nothing else touches Dexie, so the app lock (section 11.5) can wrap them
+  later without changing a page.
+- **Only non-sensitive fields are indexed:** ids, `listId`, `updatedAt` and keys, as in the Dexie schema in section
+  4.6. Everything else can then be stored encrypted.
+- **Records are validated on the way in and out** with the same Zod schemas as backups. Treat stored data as
+  untrusted: script on the origin, or a bad import, could have written it.
 
 ### 11.2 Export & import
 | Format | Library | Notes |
 |---|---|---|
-| JSON | native | **Full backup**: all tables plus `schemaVersion`. The only format that can be re-imported |
+| JSON | native | **Full backup**: all tables plus `schemaVersion`. The only format that can be re-imported. An optional passphrase encrypts it (section 11.5), since backups sit in Downloads unencrypted. Imports are validated with Zod before anything is written |
 | CSV | papaparse | One row per item (list, service, plan, cost, interval, next date, tags) |
 | XLSX | exceljs (lazy-loaded) | One sheet per list plus a summary sheet |
 | TXT | native | A readable summary |
@@ -1830,17 +1854,61 @@ prompted after each big change, or weekly).
 - **Phase 5, live subscription URL:** Google, Apple and **Proton Calendar ("Add calendar from URL")** all
   support subscribing to an `.ics` URL. This needs the payment schedule stored on the server, so it's
   **opt-in**: the app uploads a **minimal schedule** (titles and amounts only, or event titles alone if
-  the user prefers) under a random 128-bit token. The Worker then serves `/api/sub/v1/cal/<token>.ics`. Users can
+  the user prefers) under a random 128-bit token. The Worker then serves `/api/v1/cal/<token>.ics`. Users can
   revoke the token at any time. Subscribed calendars are read-only in Proton, which is fine for this.
 
 ### 11.4 Device sync and future accounts
 - **Phase 5, encrypted sync ("sync chain", like Brave's):** generate a sync code (a passphrase). The browser
-  encrypts the whole user database with a key derived from the code (WebCrypto: PBKDF2/Argon2 → AES-GCM) and
-  stores the blob in D1 or R2, keyed by a hash of the code. Other devices enter the code to pull and merge.
+  encrypts the whole user database with a key derived from the code (the same crypto module as encrypted backups
+  and the app lock, section 11.5) and stores the blob in R2 (section 7.1), keyed by a hash of the code. Other devices enter the code to pull and merge.
   The server can't read the data. Merging works per record using `updatedAt` and `deletedAt`
   (last write wins), which is why every record has those fields.
 - **Accounts later:** add Cloudflare Access or an auth library on top. An account just owns sync blobs, so
   the data model doesn't change.
+
+### 11.5 Security of data on the device
+**What's stored:** lists, prices, dates, budgets, rankings, tags, settings and card *metadata* (name, network,
+cash-back %, FX fee, limit). It's personal and financial, but it holds no passwords, card numbers or account
+logins. Card numbers are never stored, and card fields reject 12+ digit numbers (P11).
+
+**The threat model**, and what actually protects against each threat:
+
+| Threat | Does encrypting the data help? | The defence |
+|---|---|---|
+| Another website | Not needed | The browser keeps each origin's storage apart |
+| Another app on the same origin, or a bug in one | No | An origin of its own: `sub.simplely.ca` (section 7.3). Future apps on `simplely.ca` get their own subdomains too |
+| Script injected into Simply Sub (XSS) | No: it runs inside the unlocked app | Strict CSP and Trusted Types (section 7.6, M2.8); Angular's escaping, with no `innerHTML` of user or catalog text; `https://` links only, for users' links as for the catalog's |
+| Malicious data: a crafted backup, tampered storage | No | Zod validation on import and on read (section 11.1); stored text is only ever shown as text |
+| Someone else using the same browser profile | **Yes, with a passphrase the user types** | The optional app lock (below) |
+| A lost or stolen device | Partly | Full-disk encryption (BitLocker, FileVault) and an OS password, which the privacy note recommends. Browsers store IndexedDB unencrypted |
+| Malware on the device | No | Outside what a web app can defend |
+| A compromised dependency | No | Pinned versions, CI's `npm audit --audit-level=high`, and Dependabot alerts |
+
+**A key the app stores itself protects nothing**: whoever can read the data can read the key beside it.
+Encryption at rest needs a secret the user supplies, and with no server, a forgotten passphrase means the data is
+gone. That's why it's opt-in.
+
+**Encrypted backups** (M6.9): the export dialog offers an optional passphrase.
+- The file is then `{ app, schemaVersion, encrypted: { kdf, iterations, salt, iv, ciphertext } }`: AES-256-GCM,
+  with a key derived by PBKDF2-HMAC-SHA256 at 600,000 iterations (OWASP's figure) from the passphrase and a random
+  16-byte salt.
+- The import asks for the passphrase; a wrong one fails the GCM check, and nothing is written.
+
+**The app lock** (M6.10, opt-in from Settings): one passphrase encrypts the user tables at rest.
+- **Key:** derived like the backup key, then held in memory only, as a non-extractable WebCrypto `CryptoKey`.
+  Nothing secret is stored: only the salt and an encrypted check value, which tells a wrong passphrase.
+- **What's encrypted:** each record of `lists`, `items`, `customSubs`, `rankings`, `cards`, `tags`, `drafts` and
+  `dismissedSuggestions` keeps its indexed fields in plain text and stores the rest as one encrypted value. The
+  settings needed before unlocking (theme, whether the lock is on) and the catalog cache stay plain, since they're
+  public or harmless.
+- **Locking:** the lock screen asks for the passphrase on each visit. The app locks again after a chosen idle time
+  (15 minutes by default) and when the tab closes.
+- **Turning it on** encrypts everything in one transaction; turning it off decrypts it.
+- **A forgotten passphrase** leaves two ways out: restore a backup, or delete all data. The dialog that turns the
+  lock on says so, and offers an encrypted backup first.
+
+**One crypto module** serves encrypted backups, the app lock and Phase 5's sync (section 11.4), so the maths is
+written and tested once. It uses WebCrypto (`crypto.subtle`), available in every supported browser.
 
 ---
 
@@ -1853,7 +1921,7 @@ prompted after each big change, or weekly).
 - [x] Monorepo scaffold, Volta pin, workspaces, `tsconfig.base.json`
 - [x] Angular app with Material 3, theme tokens, sidebar shell, empty routes
 - [x] Worker with Hono, D1 created, `/health`
-- [x] Asset copy step + `wrangler.jsonc`; first deploy works on `simplely.ca/simply/sub/`
+- [x] Asset copy step + `wrangler.jsonc`; first deploy works (on `simplely.ca/simply/sub/` then; `sub.simplely.ca` since the pre-M2 review)
 - [x] Workers Builds connected to the repo; GitHub `ci.yml` as required PR checks
 
 ### Phase 1: Catalog
@@ -1963,6 +2031,14 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3).
 
+**Resolved (2026-10-23, security review)**
+- **Domain:** the app and the API moved to `sub.simplely.ca`, an origin of their own, because browser storage is
+  shared by everything on one origin (sections 7.3, 11.5).
+- **Device data:** strict CSP with Trusted Types (M2.8), Zod validation of imports and stored records, optional
+  encrypted backups (M6.9) and an optional passphrase lock that encrypts data at rest (M6.10). A key the app keeps
+  itself would protect nothing (section 11.5).
+- **Dependencies:** CI fails on high or critical `npm audit` advisories, and Dependabot alerts are on.
+
 **Resolved (2026-10-23, pre-M2 review)**
 - **Sales tax:** added for buyers in Canada and the US, by the buyer's province or state (a menu of the chosen
   country's subdivisions). Canada has a built-in rate table; US users enter their own rate. Typed amounts include
@@ -1995,7 +2071,8 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 - Hosting platform: Cloudflare for the app, API and bot. GitHub for the repo and PR checks. Fly.io not used (section 7.8).
 
 **Resolved (2026-10-22)**
-- Domain: **simplely.ca** (bought through Cloudflare Registrar) → `/simply/sub/` and `/api/sub/v1/`.
+- Domain: **simplely.ca** (bought through Cloudflare Registrar) → `/simply/sub/` and `/api/sub/v1/`. Replaced on
+  2026-10-23 by `sub.simplely.ca`, so the app has an origin of its own (section 7.3).
 - Colours: go with the suggested palette (section 8.1), all as CSS variables so changes are easy.
 - Payment page: kept, manual entry, flat cash-back, FX fee, network, optional monthly limit (section 9).
 - Duplicates: every item counts, so lists can be per family member (section 8.1.1).

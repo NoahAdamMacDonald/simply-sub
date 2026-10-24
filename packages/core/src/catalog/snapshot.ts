@@ -15,7 +15,7 @@ export const catalogSchemaVersion = 1;
 export const snapshotProviderSchema = providerSchema.safeExtend({
   iconUrl: httpsUrlSchema
     .describe(
-      "The provider's icon, a static file under /simply/sub/icons/. Left out when there's no logo: the app shows a letter",
+      "The provider's icon, a static file under /icons/. Left out when there's no logo: the app shows a letter",
     )
     .optional(),
 });

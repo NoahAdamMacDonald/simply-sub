@@ -3,7 +3,7 @@
 /** @type {import('stylelint').Config} */
 export default {
   customSyntax: 'postcss-scss',
-  ignoreFiles: ['**/dist/**', '**/.angular/**', '**/coverage/**', 'apps/api/public/simply/**'],
+  ignoreFiles: ['**/dist/**', '**/.angular/**', '**/coverage/**', 'apps/api/public/**'],
   rules: {
     'color-no-hex': true,
   },

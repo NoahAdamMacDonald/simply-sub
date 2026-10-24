@@ -50,12 +50,12 @@ Last updated: 2026-10-23
 1. Turn each task ID in section 2 into a GitHub issue (e.g. "M5.3 Search filter panel"), and track them on a
    GitHub Project board: Todo → Doing → Review → Done.
 2. Use one branch per task: `feat/m5-3-search-filters`.
-3. Open a PR early. CI (the required check `ci`) runs lint, the Prettier check, a check that `data/schema/` matches
+3. Open a PR early. CI (the required check `ci`) runs `npm audit --audit-level=high`, lint, the Prettier check, a check that `data/schema/` matches
    the Zod schemas, the catalog checks (`data:validate`), tests and the build (BLUEPRINT §7.6). Each branch also
    gets a Workers Builds preview link.
 4. Squash-merge to `main` once `ci` is green; that's the only merge method, and the branch is deleted after.
    `main` is protected with no bypass, so nothing reaches it without a PR. Workers Builds then deploys to
-   simplely.ca automatically.
+   sub.simplely.ca automatically.
 5. Commit messages: `feat(search): add price range filter`, `fix(calendar): month-end dates`.
 
 ### 1.3 Working with an AI assistant
@@ -92,6 +92,9 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 - Mapping to BLUEPRINT phases: M0–M3 = Phases 0–1, M4–M6 = Phase 2, M7–M8 = Phase 3, M9 = Phase 4, M10 = Phase 5.
 
 ### M0 — Setup
+These rows describe the setup as built, at `simplely.ca/simply/sub/`. The security review (2026-10-23) moved the
+app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
+
 | ID | Task | Done when |
 |---|---|---|
 | M0.1 | Create the GitHub repo `simply-sub`, clone it to `C:\dev\simply-sub`, move the planning files in (§1.1) | The repo has the docs, and the README links to them |
@@ -113,7 +116,7 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 | M1.3 | Hand-write `netflix`, `disney-plus`, `crave`, `mullvad`, `proton` and one bundle. Proton: Free, the Plus plans, and the Unlimited, Duo and Family suites; no business plans (BLUEPRINT §4.4) | All pass validation, and their shapes match `docs/api-output-examples.json` |
 | M1.4 | `scripts/validate-data.ts` (BLUEPRINT §6.2) in CI | A broken file fails CI with a readable message |
 | M1.5 | `scripts/build-catalog.ts` → static `catalog.json` + `seed.sql` | The output matches the `GET /catalog` example |
-| M1.6 | `scripts/fetch-icons.ts` (`npm run data:icons`): any website's best icon → `data/logos/<id>.png` (committed, hand-made logos too), published as `/simply/sub/icons/<id>.png`; no logo → no `iconUrl`, and the app shows a letter | Every provider has an icon or the fallback |
+| M1.6 | `scripts/fetch-icons.ts` (`npm run data:icons`): any website's best icon → `data/logos/<id>.png` (committed, hand-made logos too), published as `/icons/<id>.png`; no logo → no `iconUrl`, and the app shows a letter | Every provider has an icon or the fallback |
 | M1.7 | core: `pickPrice`, `convert` (§3.1; `monthlyEquivalent` arrived in M1.5 for the seed) | Tests cover a native price, the same currency from another region, a GLOBAL price and a fallback region |
 
 ### M2 — API
@@ -126,7 +129,7 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 | M2.5 | `GET /fx`: Frankfurter proxy, cached 12 h, serves the last good value if Frankfurter is down, kept in KV (binding `KV`; you create the namespace in the dashboard and its id goes in `wrangler.jsonc`: BLUEPRINT §7.1) | Matches the example, including the `stale` flag |
 | M2.6 | `GET /icon?domain=`: icon proxy for custom subscriptions, cached 30 days in KV, restricted as in BLUEPRINT §5.4, using core's icon functions (M1.6) | Returns an image or the fallback; a non-domain, an IP address or a URL gets `400`, nothing but the fixed icon services is ever fetched, and the domain never reaches the logs |
 | M2.7 | Contract tests: every example in `docs/api-output-examples.json` is validated against the response schemas, and route tests compare real responses with them | The examples and the code can't drift apart |
-| M2.8 | Error middleware, CORS, caching, security headers and the per-IP rate limit (BLUEPRINT §5.4); the static files' `_headers` (CSP, immutable hashed files, icons for a day: BLUEPRINT §7.6); request logs off (`invocation_logs: false`) | Headers match the examples; going over the limit gets `429 rate_limited`; the CSP still lets Cloudflare Web Analytics load (BLUEPRINT §7.6) |
+| M2.8 | Error middleware, CORS, caching, security headers and the per-IP rate limit (BLUEPRINT §5.4); the static files' `_headers` (a strict CSP with Trusted Types, the theme script's hash, immutable hashed files, icons for a day: BLUEPRINT §7.6); request logs off (`invocation_logs: false`) | Headers match the examples; going over the limit gets `429 rate_limited`; the CSP still lets Cloudflare Web Analytics load (BLUEPRINT §7.6); the app runs with no CSP or Trusted Types violations in the console |
 
 ### M3 — Discovery pipeline (BLUEPRINT §6.5)
 | ID | Task | Done when |
@@ -141,7 +144,7 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 ### M4 — App foundations
 | ID | Task | Done when |
 |---|---|---|
-| M4.1 | Dexie database (BLUEPRINT §4.6, including `region`, add-on quantities, bundle items, `billingDay` and `priceOverride.until`) + repositories that expose signals | CRUD tests pass with `fake-indexeddb` |
+| M4.1 | Dexie database (BLUEPRINT §4.6, including `region`, add-on quantities, bundle items, `billingDay` and `priceOverride.until`) + repositories that expose signals. Repositories are the only way into Dexie, only non-sensitive fields are indexed, and records are Zod-validated on the way in and out (BLUEPRINT §11.1) | CRUD tests pass with `fake-indexeddb`, and a malformed stored record is rejected rather than shown |
 | M4.2 | `SettingsStore` + first-run dialog (P1), with the province/state menu and the sales-tax rate (BLUEPRINT §4.8); `ThemeService` reads and writes `settings.theme`, keeping `localStorage` `ss-theme` as the startup cache (BLUEPRINT §8.1) | Country, province or state, and currency are saved, with defaults from the browser locale; the menu lists only the chosen country's subdivisions |
 | M4.3 | `CatalogStore`: cached snapshot → revalidate the region's `data/catalog/<region>.json` (plus any region a list item uses) with ETag → save; the offline banner and "Catalog updated" toast (P1) | The app works offline after the first visit, and the banner shows the catalog's date |
 | M4.4 | `FxStore` + `ss-price` with the converted marker and "+ tax" in tax-added regions | Converted prices show ≈, the icon and the tooltip; a Canadian sees "+ tax" |
@@ -168,7 +171,8 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 | M6.6 | Custom subscriptions page + editor (P12) | P12 criteria met |
 | M6.7 | Lists overview (P3) | P3 criteria met (the bars can wait for M7.2) |
 | M6.8 | List view (P4), without the money parts | Cards, pinning, search/filter and the edit button work |
-| M6.9 | Backup export/import (the "Your data" section of P13) | Export → delete all → import restores everything |
+| M6.9 | Backup export/import (the "Your data" section of P13), with an optional passphrase that encrypts the file, and the crypto module it uses (BLUEPRINT §11.5) | Export → delete all → import restores everything, encrypted or not; a wrong passphrase or a tampered file imports nothing |
+| M6.10 | Optional app lock: a passphrase encrypts the user tables at rest, with a lock screen and an idle lock (P13, P15; BLUEPRINT §11.5) | Locked data on disk is unreadable without the passphrase; turning the lock on and off round-trips every table; a wrong passphrase unlocks nothing |
 
 ### M7 — Money, schedule & calendar
 | ID | Task | Done when |
@@ -424,8 +428,8 @@ is added (Canada, the US), and sets the tax rate (BLUEPRINT §4.8). A US user's 
 ## 5. Page specs
 
 Each page lists its **wireframe**, **purpose**, **layout**, **data**, **behaviour**, **states** and **acceptance** criteria.
-Routes are relative to `https://simplely.ca/simply/sub/`. The example amounts in the sketches assume today is
-Oct 22, 2026, and use the illustrative prices from `docs/api-output-examples.json`.
+Routes are relative to `https://sub.simplely.ca/`. The example amounts in the sketches assume today is
+Oct 22, 2026, and use the illustrative prices from `docs/api-output-examples.json`, before sales tax.
 
 | ID | Page | Route | Wireframe | Milestone |
 |---|---|---|---|---|
@@ -895,7 +899,8 @@ Editor dialog:
 **Behaviour**
 - Features come from a registry search; enum and number features ask for a value.
 - The cost is what you pay, tax included, unless "plus tax" is ticked (BLUEPRINT §4.8).
-- The icon comes from `/api/sub/v1/icon?domain=<website>`, or falls back to the app logo.
+- Website and cancel links accept only `https://` URLs (BLUEPRINT §11.5).
+- The icon comes from `/api/v1/icon?domain=<website>` (asked only when the subscription is saved, BLUEPRINT §5.4), or falls back to the app logo.
 - Editing a plan updates every item that uses it, after a warning that shows the count.
 - Deleting a custom subscription that's in use asks to confirm: "Also remove it from 1 list".
 - Reachable from the P3 header, from P5, and from the Search empty state.
@@ -914,6 +919,7 @@ Editor dialog:
                                                                         ⊕
    Appearance   (•) System  ( ) Light  ( ) Dark
    Your data    [Export backup] [Import backup] [Delete all data]
+   Security     [ ] Lock with a passphrase   Lock after [15 minutes ▾]
    Catalog      Updated Oct 22, 2026 · version c4f9a21 · [Check for updates]
 📍 Ontario, Canada (CAD)
 ```
@@ -940,14 +946,20 @@ Editor dialog:
     }
   }
   ```
-- **Import backup:** pick a file → preview the counts → **Merge** (by id; the newest `updatedAt` wins) or **Replace** (with confirmation). Backups with an older `schemaVersion` are migrated.
+- **Encrypt the backup** (M6.9): the export dialog offers "Protect with a passphrase" (entered twice). The file then holds `{ "app", "schemaVersion", "encrypted": { "kdf", "iterations", "salt", "iv", "ciphertext" } }` instead of `data` (BLUEPRINT §11.5). The dialog says a forgotten passphrase can't be recovered.
+- **Import backup:** pick a file → (passphrase, if it's encrypted) → the whole file is validated with Zod before anything is written → preview the counts → **Merge** (by id; the newest `updatedAt` wins) or **Replace** (with confirmation). Backups with an older `schemaVersion` are migrated. A wrong passphrase, a tampered file or one that fails validation imports nothing and says why.
 - **Delete all data:** type DELETE to confirm. Every table is cleared, then the first-run dialog appears.
+- **Lock with a passphrase** (M6.10, off by default; BLUEPRINT §11.5):
+  - Turning it on asks for a passphrase twice, explains that nobody can recover a forgotten one, offers an encrypted backup first, then encrypts every user table in one transaction.
+  - "Lock after" sets the idle time (5, 15 or 60 minutes, or only when the tab closes).
+  - Turning it off asks for the passphrase and decrypts everything.
 - Create local sync stays disabled until Phase 5.
 
 **Acceptance**
 - [ ] Budgets and tags persist and update every page live
-- [ ] Export → Delete all → Import (Replace) restores identical data
+- [ ] Export → Delete all → Import (Replace) restores identical data, with and without a passphrase
 - [ ] Changing the currency re-prices everything (the converted markers update)
+- [ ] With the lock on, the IndexedDB records hold no readable names or amounts
 
 ### P14 — Optimizations `/lists/:listId/optimize` (new)
 **Purpose:** show how to pay less without losing what matters (BLUEPRINT §10).
@@ -990,6 +1002,9 @@ FREE SAVINGS — nothing you rank is lost
 - Unexpected error → snackbar "Something went wrong". Details go to the console; nothing is sent anywhere.
 - IndexedDB blocked (some private browsing modes) → a full-page notice, "Your browser is blocking local storage,
   so nothing will be saved", with [Continue anyway] (in-memory mode).
+- **Lock screen** (M6.10, when the app lock is on): a full-page passphrase prompt before anything else loads, and
+  again after the idle time. A wrong passphrase says so and changes nothing. "Forgot it?" explains the two ways out:
+  import a backup, or delete all data (with the DELETE confirmation).
 
 ---
 
@@ -1004,10 +1019,10 @@ FREE SAVINGS — nothing you rank is lost
 
   | Request | Served by | Caching | Uses Worker quota? |
   |---|---|---|---|
-  | `/simply/sub/data/catalog/<region>.json` (M2.1; `catalog.json` before) | static asset | ETag; the browser revalidates on each visit | No |
-  | `/simply/sub/icons/<id>.png` | static asset | 1 day, then revalidated (the URL has no version, so a new logo must show up) | No |
-  | `/api/sub/v1/fx?base=CAD` | Worker → Frankfurter | 12 h at the edge + browser cache (about once a day per user) | Yes (tiny) |
-  | `/api/sub/v1/icon?domain=` | Worker → DuckDuckGo/Google | 30 days | Yes (custom subscriptions only) |
+  | `/data/catalog/<region>.json` (M2.1; `catalog.json` before) | static asset | ETag; the browser revalidates on each visit | No |
+  | `/icons/<id>.png` | static asset | 1 day, then revalidated (the URL has no version, so a new logo must show up) | No |
+  | `/api/v1/fx?base=CAD` | Worker → Frankfurter | 12 h at the edge + browser cache (about once a day per user) | Yes (tiny) |
+  | `/api/v1/icon?domain=` | Worker → Google/DuckDuckGo | 30 days (KV) | Yes (custom subscriptions only) |
 - The other endpoints (`/providers`, `/plans`, `/bundles`, `/features`, `/categories`, `/catalog`) serve deep links,
   future features and anyone else using the API. They're edge-cached for an hour, keyed by URL.
 - **Versioning:** everything is under `/v1`, changes are additive only, and `/health` reports `apiVersion`.
@@ -1026,6 +1041,8 @@ FREE SAVINGS — nothing you rank is lost
   item bought in another region
 - Statuses, rank resolution and ladders, rank counts, feature summaries
 - Budget checks, optimizer fixtures, reward maths
+- The crypto module: a round trip, a wrong passphrase, a tampered ciphertext, and the KDF parameters stored with
+  each file (BLUEPRINT §11.5)
 
 **API:** route tests with `@cloudflare/vitest-plugin` (runs them in workerd), plus contract tests against the examples file.
 
@@ -1041,7 +1058,8 @@ item dialog validation, filter panel ↔ URL sync.
 | 4 | Edit list → change a plan → Cancel → nothing has changed after a reload |
 | 5 | Rank 4k as Unwanted on Features → the list card counts change → Optimizations offers a downgrade |
 | 6 | The calendar shows Netflix on its renewal day, and the exported .ics validates and has a charge in every month for a plan billed on the 31st |
-| 7 | Export backup → Delete all data → Import (Replace) → identical data |
+| 7 | Export backup → Delete all data → Import (Replace) → identical data, plain and with a passphrase |
+| 10 | Turn on the app lock → reload → the lock screen → unlock → the lists are back; the stored records are unreadable |
 | 8 | Offline after the first load → Search and lists still work from the cache |
 | 9 | Dark mode screenshots of Home, Lists, Search and Calendar (visual check) |
 

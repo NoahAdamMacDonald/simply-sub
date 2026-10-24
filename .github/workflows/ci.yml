@@ -1,6 +1,6 @@
-# Required check for every pull request into main (BLUEPRINT §7.6, §7.7): lint, formatting, the generated
-# JSON Schema, the catalog checks, tests and the production build. Nothing is deployed from here; Workers Builds
-# deploys main.
+# Required check for every pull request into main (BLUEPRINT §7.6, §7.7): known vulnerabilities, lint,
+# formatting, the generated JSON Schema, the catalog checks, tests and the production build. Nothing is deployed
+# from here; Workers Builds deploys main.
 name: CI
 
 on:
@@ -40,6 +40,9 @@ jobs:
         run: npm install --global npm@12.0.2
 
       - run: npm ci
+      # Fails on a high or critical advisory in any dependency, dev tools included, since they build what ships
+      # (BLUEPRINT §11.5).
+      - run: npm audit --audit-level=high
       - run: npm run lint
       - run: npm run format:check
       - name: data/schema matches the Zod schemas

@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 
 // The API is read-only (BLUEPRINT §5.4): no route accepts a write, so there is nothing for an
 // unauthenticated PUT or DELETE to change. Phase 5's POST /reports will be the first exception.
-const BASE = 'https://simplely.ca/api/sub/v1';
+const BASE = 'https://sub.simplely.ca/api/v1';
 
 describe('write methods', () => {
   it.each(['POST', 'PUT', 'PATCH', 'DELETE'])('%s is refused on every route', async (method) => {

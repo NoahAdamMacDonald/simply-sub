@@ -12,7 +12,7 @@ import { catalog, catalogWith } from './catalog-files';
 const netflix = 'data/providers/netflix.yaml';
 
 function snapshotOf(files: readonly CatalogSourceFile[] = catalog()): CatalogSnapshot {
-  const data = buildCatalogData(readCatalogSource(files), 'https://simplely.ca/simply/sub/icons/');
+  const data = buildCatalogData(readCatalogSource(files), 'https://sub.simplely.ca/icons/');
   const meta = buildCatalogMeta(data, {
     catalogVersion: 'abc1234',
     generatedAt: '2026-10-23T12:00:00Z',

@@ -33,7 +33,6 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "/simply/sub/",
               "optimization": {
                 "scripts": true,
                 "styles": { "minify": true, "inlineCritical": false },
