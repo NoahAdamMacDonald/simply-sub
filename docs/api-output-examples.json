@@ -151,8 +151,8 @@
                     "name": "VPN",
                     "category": "vpn",
                     "type": "boolean",
-                    "headline": true,
-                    "aliases": ["vpn", "virtual private network"]
+                    "aliases": ["vpn", "virtual private network"],
+                    "headline": true
                   },
                   {
                     "id": "vpn.devices",
@@ -407,8 +407,8 @@
                     "name": "VPN",
                     "category": "vpn",
                     "type": "boolean",
-                    "headline": true,
-                    "aliases": ["vpn", "virtual private network"]
+                    "aliases": ["vpn", "virtual private network"],
+                    "headline": true
                   },
                   {
                     "id": "vpn.devices",
@@ -614,7 +614,7 @@
       ]
     },
     "GET /features": {
-      "description": "The feature registry: every feature, its type, its values or tiers (the rankable options), aliases and headline flags.",
+      "description": "The feature registry: every feature, its type, its values or tiers (the rankable options), aliases and headline flags, in data/features.yaml order, which lists each group before its features. Served from the static file the build writes, /data/catalog/features.json, byte for byte, so each feature keeps its key order. The ETag is the catalog version. Takes no query parameters: any parameter gets 400 bad_request.",
       "examples": [
         {
           "title": "All features",
@@ -721,8 +721,8 @@
                   "name": "VPN",
                   "category": "vpn",
                   "type": "boolean",
-                  "headline": true,
-                  "aliases": ["vpn", "virtual private network"]
+                  "aliases": ["vpn", "virtual private network"],
+                  "headline": true
                 },
                 {
                   "id": "vpn.devices",
@@ -799,8 +799,8 @@
                   "name": "Password manager",
                   "category": "security",
                   "type": "boolean",
-                  "headline": true,
-                  "aliases": ["password vault", "pass"]
+                  "aliases": ["password vault", "pass"],
+                  "headline": true
                 },
                 {
                   "id": "password-manager.item-types",
@@ -874,8 +874,8 @@
                   "name": "AI assistant",
                   "category": "ai",
                   "type": "boolean",
-                  "headline": true,
-                  "aliases": ["ai", "chatbot"]
+                  "aliases": ["ai", "chatbot"],
+                  "headline": true
                 },
                 {
                   "id": "calendar.included",
@@ -917,7 +917,7 @@
       ]
     },
     "GET /categories": {
-      "description": "Service categories (what a provider is), feature categories (how the Features page groups features) and spend categories (used for card rewards).",
+      "description": "Service categories (what a provider is), feature categories (how the Features page groups features) and spend categories (used for card rewards), in data/categories.yaml order. Served from the static file the build writes, /data/catalog/categories.json, byte for byte. The ETag is the catalog version. Takes no query parameters: any parameter gets 400 bad_request.",
       "examples": [
         {
           "title": "All categories",

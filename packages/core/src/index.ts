@@ -13,6 +13,7 @@ export * from './catalog/price';
 export * from './catalog/provider';
 export * from './catalog/region-files';
 export * from './catalog/regions';
+export * from './catalog/registry-files';
 export * from './catalog/seed-sql';
 export * from './catalog/snapshot';
 export {

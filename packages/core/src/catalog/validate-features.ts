@@ -27,8 +27,9 @@ export interface FeatureRegistry {
 
 /**
  * The features in data/features.yaml that match the schema, after checking that ids are unique and that each
- * feature's category and parent exist. Undefined when the file isn't a list at all. The caller has already
- * reported the schema errors, and leaves out category checks when `categories` couldn't be read.
+ * feature's category and parent exist, with the parent listed first. Undefined when the file isn't a list at all.
+ * The caller has already reported the schema errors, and leaves out category checks when `categories` couldn't be
+ * read.
  */
 export function readFeatureRegistry(
   data: unknown,
@@ -57,6 +58,7 @@ export function readFeatureRegistry(
   });
 
   const categoryIds = categories?.feature.map((category) => category.id);
+  const indexes = new Map(valid.map(({ feature, index }) => [feature.id, index]));
   for (const { feature, index } of valid) {
     if (categoryIds && !categoryIds.includes(feature.category)) {
       report(
@@ -64,7 +66,7 @@ export function readFeatureRegistry(
         `"${feature.category}" isn't a feature category in data/categories.yaml${choices(feature.category, categoryIds)}`,
       );
     }
-    const problem = parentProblem(feature, features, unchecked);
+    const problem = parentProblem(feature, index, features, indexes, unchecked);
     if (problem) {
       report([index, 'parent'], problem);
     }
@@ -77,9 +79,15 @@ function isGroup(feature: Feature | undefined): boolean {
   return feature?.type === 'boolean' && feature.parent === undefined;
 }
 
+/**
+ * A parent is a group listed before the feature: GET /features keeps the file's order, and the Features page shows
+ * each group above its features (PROJECT-PLAN P9).
+ */
 function parentProblem(
   feature: Feature,
+  index: number,
   features: ReadonlyMap<string, Feature>,
+  indexes: ReadonlyMap<string, number>,
   unchecked: ReadonlySet<string>,
 ): string | undefined {
   const parentId = feature.parent;
@@ -98,6 +106,9 @@ function parentProblem(
   }
   if (parent.parent !== undefined) {
     return `"${parentId}" is in the group ${parent.parent}, and groups are one level deep: use ${parent.parent}`;
+  }
+  if ((indexes.get(parentId) ?? -1) > index) {
+    return `"${parentId}" is listed after this feature: move the group above its features`;
   }
   return undefined;
 }

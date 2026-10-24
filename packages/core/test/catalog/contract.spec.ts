@@ -3,7 +3,9 @@ import contract from '../../../../docs/api-output-examples.json';
 import {
   bundleSchema,
   catalogSnapshotSchema,
+  categoriesBodySchema,
   categoriesFileSchema,
+  featuresBodySchema,
   featuresFileSchema,
   pickPrice,
   providerSchema,
@@ -106,6 +108,21 @@ describe('the GET /catalog examples', () => {
 
   it("?region=CA is the full snapshot's region file for Canada", () => {
     expect(canada).toEqual(regionSnapshot(full, 'CA'));
+  });
+});
+
+describe('the GET /features and GET /categories examples', () => {
+  const features = toSource(contract.endpoints['GET /features'].examples[0].response.body, []);
+  const categories = toSource(contract.endpoints['GET /categories'].examples[0].response.body, []);
+
+  it('GET /features is a features body that counts its features', () => {
+    expect(issues(featuresBodySchema, features)).toEqual([]);
+    const { data, meta } = featuresBodySchema.parse(features);
+    expect(meta.count).toBe(data.length);
+  });
+
+  it('GET /categories is a categories body', () => {
+    expect(issues(categoriesBodySchema, categories)).toEqual([]);
   });
 });
 
