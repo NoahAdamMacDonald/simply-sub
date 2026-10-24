@@ -1,5 +1,5 @@
 import type { Bundle, CatalogSourceFile, Categories, Feature, Price, Provider } from '../../src';
-import { withValue } from './helpers';
+import { pngBytes, withValue } from './helpers';
 
 // A small catalog that passes validateCatalog, with the data patterns of the real one: GLOBAL prices in several
 // currencies, a plan sold in one region only, a free plan, a prepaid service, an add-on without grantsPlan and
@@ -282,12 +282,18 @@ const files: Record<string, unknown> = {
   'data/providers/proton.yaml': proton,
 };
 
-/** A fresh copy of the valid catalog. */
+/** A fresh copy of the valid catalog, with a 64-pixel logo for every provider. */
 export function catalog(): CatalogSourceFile[] {
-  return Object.entries(files).map(([file, data]) => ({
-    file,
-    data: JSON.parse(JSON.stringify(data)) as unknown,
-  }));
+  return [
+    ...Object.entries(files).map(([file, data]) => ({
+      file,
+      data: JSON.parse(JSON.stringify(data)) as unknown,
+    })),
+    ...['crave', 'mullvad', 'netflix', 'proton'].map((id) => ({
+      file: `data/logos/${id}.png`,
+      bytes: pngBytes(64, 64),
+    })),
+  ];
 }
 
 /** `files` with the value at `path` in one file set, or removed when `value` is undefined. */

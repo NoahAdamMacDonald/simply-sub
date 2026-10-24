@@ -170,7 +170,7 @@ simply-sub/
 │  │  │  ├─ layout/          # sidebar, shell
 │  │  │  ├─ app.routes.ts
 │  │  │  └─ app.config.ts
-│  │  ├─ public/             # favicon, logo; data/catalog.json is written here by `npm run data:build` (gitignored)
+│  │  ├─ public/             # favicon, logo; `npm run data:build` writes data/catalog.json and icons/ here (gitignored)
 │  │  └─ proxy.conf.json     # dev: /api → wrangler dev
 │  │
 │  └─ api/                   # Cloudflare Worker
@@ -194,6 +194,7 @@ simply-sub/
 │     │  │                   # validateCatalog (section 6.2)
 │     │  ├─ user/            # user-data types (lists, items, cards…)
 │     │  ├─ dates/           # ISO calendar dates: IsoDate, toIsoDate, addDays
+│     │  ├─ icons/           # PNG and ICO reading, a page's icon links, the icon services, picking the best icon
 │     │  ├─ schedule/        # recurrence: next payment dates, monthly/annual totals
 │     │  ├─ ranking/         # rank resolution (item override > profile > not ranked)
 │     │  ├─ optimizer/       # suggestion engine (section 10)
@@ -211,14 +212,14 @@ simply-sub/
 │  ├─ bundles/
 │  │  └─ disney-crave-premium.yaml
 │  ├─ schema/                # JSON Schema for the YAML above, generated from core's Zod schemas (committed)
-│  └─ logos/                 # optional manual logo overrides (svg/png)
+│  └─ logos/                 # provider logos, <id>.png: fetched by `npm run data:icons` or added by hand (committed)
 │
 ├─ scripts/                  # run by tsx; type-checked by `npm run build` (scripts/tsconfig.json)
 │  ├─ generate-json-schema.ts  # core's Zod schemas → data/schema/*.schema.json (`--check` in CI)
 │  ├─ validate-data.ts       # data/**/*.yaml → core's validateCatalog → file:line messages (section 6.2)
 │  ├─ build-catalog.ts       # data/ → apps/web/public/data/catalog.json + apps/api/dist/seed.sql (section 6.3)
 │  ├─ lib/catalog-files.ts   # reads, parses and checks data/ for the two scripts above
-│  ├─ fetch-icons.ts         # catalog favicons → static icon files at build time
+│  ├─ fetch-icons.ts         # any website's best icon → data/logos/<id>.png (`npm run data:icons`)
 │  ├─ price-check.ts         # nightly price monitor (section 6.4)
 │  └─ draft-provider.ts      # AI-assisted: pricing page URL → draft YAML
 │
@@ -850,7 +851,7 @@ from Settings:
 | `GET /features` | Feature registry |
 | `GET /categories` | Service and spend categories |
 | `GET /bundles?plans=netflix.standard,crave.premium` | Bundles that include any of the given plans |
-| `GET /icon?domain=example.com` | Favicon proxy for **custom subscriptions** (DuckDuckGo → Google → fallback), cached for 30 days. Catalog icons are downloaded at build time (`scripts/fetch-icons.ts`) and served as static files at `/simply/sub/icons/<id>.png` |
+| `GET /icon?domain=example.com` | Favicon proxy for **custom subscriptions** (DuckDuckGo → Google → fallback), cached for 30 days. Catalog icons are fetched once by `scripts/fetch-icons.ts` into `data/logos/` (committed, so builds never fetch) and served as static files at `/simply/sub/icons/<id>.png` |
 | `GET /fx?base=CAD` | Proxied and cached Frankfurter rates (daily) |
 | `GET /health` | Returns the version and catalog SHA |
 | *(Phase 5)* `POST /reports` | "This price looks wrong" reports (Turnstile-protected, rate-limited) |
@@ -902,7 +903,9 @@ shipped to the browser is visible. The risks are abuse, and M2 builds these defe
 - **Caching:** every GET is edge-cached (section 5.1), so repeated requests rarely run the Worker or touch D1.
 - **Icon proxy (`/icon`):** accepts only a valid public domain name, only ever asks the fixed icon services
   (DuckDuckGo, then Google) for that domain, never fetches a URL from the request, and caches results for 30
-  days. That keeps it from becoming an open proxy or reaching internal addresses.
+  days. That keeps it from becoming an open proxy or reaching internal addresses. It reuses core's icon functions
+  (`packages/core/src/icons/`: `iconServiceUrls`, `readIconImage`, `pickIcon`), but never the site's own pages,
+  which only the catalog's `fetch-icons.ts` reads.
 - **Validation:** every query parameter goes through Zod, and anything unknown or invalid gets `400`.
 - **CORS** limits browser calls from other sites to `https://simplely.ca`. It's an extra layer, not authentication.
 - **Writes** arrive only in Phase 5 (`POST /reports`), with Turnstile and a stricter rate limit.
@@ -964,6 +967,8 @@ Validation fails if:
 - a reference doesn't exist: a bundle's `soldBy` (a provider) and `includes` (plans), a plan's `addOnIds`
   (add-ons in the same file), an add-on's `grantsPlan` (a plan in the same file)
 - an add-on isn't listed in any plan's `addOnIds`
+- a file in `data/logos/` isn't a PNG named after a provider id (`netflix.png`), or the image isn't square, is under
+  32 pixels or is over 100 KB
 - `includes-subscription` lists the plan itself or its own provider, or makes a loop (Duo → Unlimited → Duo)
 - a provider has `billingCurrency`, and a plan or add-on is priced in a region that isn't in it, or has no price
   in the charged currency for that region
@@ -973,7 +978,7 @@ Validation fails if:
 - `lastVerified` is after today
 
 Validation warns (but passes) when `lastVerified` is older than 90 days: one warning per file, with the count and
-the oldest price.
+the oldest price. It also warns about a provider without a logo in `data/logos/`, which the app shows as a letter.
 
 A broken file gets its own errors, and the checks that would only repeat them are skipped: a provider that fails
 its schema isn't checked against the registry, references to it aren't flagged, and a broken feature definition
@@ -992,13 +997,15 @@ the files.
 1. Load and validate all YAML the way `data:validate` does (section 6.2). Any error stops the build; warnings are
    only counted.
 2. Build the snapshot `{ data, meta }`:
-   - `data` is `schemaVersion` plus the source files: features, categories, providers sorted by id (each with its
-     `iconUrl`) and bundles sorted by id. Bundles stay in their source shape: the app computes feature unions and
+   - `data` is `schemaVersion` plus the source files: features, categories, providers sorted by id (with an
+     `iconUrl` when the provider has a logo; without one, the app shows its first letter) and bundles sorted by id. Bundles stay in their source shape: the app computes feature unions and
      savings in core for the user's region, and `GET /bundles` adds them per request (M2.4).
    - `meta` is `catalogVersion` (section 5.1), `generatedAt` (the build time, UTC), every priced region, and
      counts.
-3. Write `apps/web/public/data/catalog.json` (gitignored), the exact JSON of the snapshot. The Angular build
-   publishes it as `/simply/sub/data/catalog.json`, and `ng serve` serves it too.
+3. Write `apps/web/public/data/catalog.json` (gitignored), the exact JSON of the snapshot, and copy each logo
+   from `data/logos/` to `apps/web/public/icons/<id>.png`. The Angular build publishes them as
+   `/simply/sub/data/catalog.json` and `/simply/sub/icons/<id>.png`, and `ng serve` serves them too. The build
+   never fetches icons: `npm run data:icons` does that once per provider (section 13.4).
 4. Write `apps/api/dist/seed.sql`, one statement per line: `DELETE FROM` every table, then insert every row with
    the derived columns (`monthly_equiv`, `rank_value`, section 5.3), then the snapshot row `ALL`.
 5. The deploy runs `wrangler d1 migrations apply simply-sub-catalog --remote`, then
@@ -1753,7 +1760,11 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    the recommended Red Hat YAML extension, VS Code autocompletes and checks the file as you type (section 4.5).
 2. Use only feature ids from `features.yaml`. Add new features there first, in a separate commit.
 3. Fill in `lastVerified` and `sourceUrl` for every price.
-4. Run `npm run data:validate`, then open a PR.
+4. Run `npm run data:icons` to fetch its logo into `data/logos/<id>.png`, and look at it. It takes the largest
+   square PNG (at least 32 px) from the site's own icon links, `/apple-touch-icon.png`, `/favicon.ico`, Google's
+   favicon service and DuckDuckGo's. If none is good enough, add a PNG by hand, or leave it out and the app shows
+   a letter. `npm run data:icons -- <id>` fetches again; `-- <id>=<website>` works for any site.
+5. Run `npm run data:validate`, then open a PR.
 
 ### 13.5 Glossary
 | Term | Meaning |

@@ -18,3 +18,5 @@ export {
   type CatalogSourceFile,
 } from './catalog/validate-catalog';
 export * from './dates/iso-date';
+export * from './icons/icon-image';
+export * from './icons/icon-sources';

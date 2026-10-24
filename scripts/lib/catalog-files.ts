@@ -1,5 +1,6 @@
-// Reads and checks data/ for the catalog scripts (validate-data.ts, build-catalog.ts): parses every .yaml and .yml
-// file as YAML 1.2, runs validateCatalog from @simply-sub/core with today's date, and finds each issue's line.
+// Reads and checks data/ for the catalog scripts (validate-data.ts, build-catalog.ts, fetch-icons.ts): parses
+// every .yaml and .yml file as YAML 1.2, reads the logos in data/logos/, runs validateCatalog from
+// @simply-sub/core with today's date, and finds each issue's line.
 import {
   formatCatalogIssue,
   toIsoDate,
@@ -8,7 +9,7 @@ import {
   type CatalogIssuePath,
   type CatalogSourceFile,
 } from '@simply-sub/core';
-import { readdir, readFile } from 'node:fs/promises';
+import { readdir, readFile, stat } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { isMap, isScalar, isSeq, LineCounter, parseAllDocuments, type Document } from 'yaml';
 
@@ -19,8 +20,16 @@ export interface LocatedIssue {
   line?: number;
 }
 
+export interface LoadedCatalog {
+  /** Every .yaml and .yml file under data/ and every file in data/logos/, from the repo root, sorted. */
+  files: string[];
+  sources: CatalogSourceFile[];
+  /** YAML syntax errors and warnings. */
+  yamlIssues: LocatedIssue[];
+  documents: Map<string, ParsedDocument>;
+}
+
 export interface CheckedCatalog {
-  /** Every .yaml and .yml file under data/, from the repo root, sorted. */
   files: string[];
   sources: CatalogSourceFile[];
   /** YAML errors and validateCatalog's issues, sorted by file and line. */
@@ -32,17 +41,47 @@ interface ParsedDocument {
   lineCounter: LineCounter;
 }
 
+/** Reads data/ and runs validateCatalog on it. */
 export async function checkCatalog(): Promise<CheckedCatalog> {
-  const files = (await readdir(new URL('data/', repoRoot), { recursive: true }))
-    .map((name) => `data/${name.replaceAll('\\', '/')}`)
-    .filter((file) => /\.ya?ml$/.test(file))
-    .sort();
+  const { files, sources, yamlIssues, documents } = await loadCatalogFiles();
+  const issues: LocatedIssue[] = [
+    ...yamlIssues,
+    ...validateCatalog(sources, toIsoDate(new Date())).map((issue) => ({
+      issue,
+      line: lineOf(documents.get(issue.file), issue.path),
+    })),
+  ].sort(
+    (a, b) =>
+      Number(a.issue.file > b.issue.file) - Number(a.issue.file < b.issue.file) ||
+      (a.line ?? 0) - (b.line ?? 0),
+  );
+  return { files, sources, issues };
+}
+
+/** Reads data/: parses the YAML files and reads the logos, without checking them. */
+export async function loadCatalogFiles(): Promise<LoadedCatalog> {
+  const isYaml = (file: string) => /\.ya?ml$/.test(file);
+  const files: string[] = [];
+  for (const name of (await readdir(new URL('data/', repoRoot), { recursive: true })).sort()) {
+    const file = `data/${name.replaceAll('\\', '/')}`;
+    if (
+      isYaml(file) ||
+      (file.startsWith('data/logos/') && (await stat(new URL(file, repoRoot))).isFile())
+    ) {
+      files.push(file);
+    }
+  }
 
   const sources: CatalogSourceFile[] = [];
   const yamlIssues: LocatedIssue[] = [];
   const documents = new Map<string, ParsedDocument>();
   for (const file of files) {
-    const text = await readFile(fileURLToPath(new URL(file, repoRoot)), 'utf8');
+    const path = fileURLToPath(new URL(file, repoRoot));
+    if (!isYaml(file)) {
+      sources.push({ file, bytes: new Uint8Array(await readFile(path)) });
+      continue;
+    }
+    const text = await readFile(path, 'utf8');
     const lineCounter = new LineCounter();
     // YAML 1.2 is the package's default, so dates such as 2026-10-21 stay strings.
     const parsed = parseAllDocuments(text, { lineCounter, prettyErrors: false });
@@ -72,19 +111,7 @@ export async function checkCatalog(): Promise<CheckedCatalog> {
       sources.push({ file, data: null }); // an empty file
     }
   }
-
-  const issues: LocatedIssue[] = [
-    ...yamlIssues,
-    ...validateCatalog(sources, toIsoDate(new Date())).map((issue) => ({
-      issue,
-      line: lineOf(documents.get(issue.file), issue.path),
-    })),
-  ].sort(
-    (a, b) =>
-      Number(a.issue.file > b.issue.file) - Number(a.issue.file < b.issue.file) ||
-      (a.line ?? 0) - (b.line ?? 0),
-  );
-  return { files, sources, issues };
+  return { files, sources, yamlIssues, documents };
 }
 
 /** Prints each issue as `Error: file:line path: message`, or in GitHub Actions as an annotation. */

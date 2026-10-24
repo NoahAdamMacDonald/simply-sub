@@ -113,7 +113,7 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 | M1.3 | Hand-write `netflix`, `disney-plus`, `crave`, `mullvad`, `proton` and one bundle. Proton: Free, the Plus plans, and the Unlimited, Duo and Family suites; no business plans (BLUEPRINT §4.4) | All pass validation, and their shapes match `docs/api-output-examples.json` |
 | M1.4 | `scripts/validate-data.ts` (BLUEPRINT §6.2) in CI | A broken file fails CI with a readable message |
 | M1.5 | `scripts/build-catalog.ts` → static `catalog.json` + `seed.sql` | The output matches the `GET /catalog` example |
-| M1.6 | `scripts/fetch-icons.ts`: catalog favicons → `public/simply/sub/icons/<id>.png` (manual overrides in `data/logos/`) | Every provider has an icon or the fallback |
+| M1.6 | `scripts/fetch-icons.ts` (`npm run data:icons`): any website's best icon → `data/logos/<id>.png` (committed, hand-made logos too), published as `/simply/sub/icons/<id>.png`; no logo → no `iconUrl`, and the app shows a letter | Every provider has an icon or the fallback |
 | M1.7 | core: `pickPrice`, `convert` (§3.1; `monthlyEquivalent` arrived in M1.5 for the seed) | Tests cover a native price, the same currency from another region, a GLOBAL price and a fallback region |
 
 ### M2 — API
@@ -124,7 +124,7 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 | M2.3 | `GET /providers`: search, filters, sort, cursor pagination | Every query parameter in the examples works |
 | M2.4 | `GET /providers/:id`, `GET /plans/:id`, `GET /bundles`, plus the 404 shape | Match the examples |
 | M2.5 | `GET /fx`: Frankfurter proxy, cached 12 h, serves the last good value if Frankfurter is down | Matches the example, including the `stale` flag |
-| M2.6 | `GET /icon?domain=`: icon proxy for custom subscriptions, cached 30 days, restricted as in BLUEPRINT §5.4 | Returns an image or the fallback; a non-domain, an IP address or a URL gets `400`, and nothing but the fixed icon services is ever fetched |
+| M2.6 | `GET /icon?domain=`: icon proxy for custom subscriptions, cached 30 days, restricted as in BLUEPRINT §5.4, using core's icon functions (M1.6) | Returns an image or the fallback; a non-domain, an IP address or a URL gets `400`, and nothing but the fixed icon services is ever fetched |
 | M2.7 | Contract tests: every example in `docs/api-output-examples.json` is validated against the response schemas, and route tests compare real responses with them | The examples and the code can't drift apart |
 | M2.8 | Error middleware, CORS, caching, security headers and the per-IP rate limit (BLUEPRINT §5.4) | Headers match the examples; going over the limit gets `429 rate_limited`; the CSP still lets Cloudflare Web Analytics load (BLUEPRINT §7.6) |
 
@@ -282,7 +282,7 @@ export interface ResolvedItem {
   providerId?: string; planId?: string; bundleId?: string; customSubId?: string;
   name: string;            // "Netflix"
   planName: string;        // "Standard"
-  iconUrl: string;         // static catalog icon, /icon?domain= for custom subs, or the app logo
+  iconUrl?: string;        // static catalog icon or /icon?domain= for custom subs; none → ss-provider-icon shows a letter
   price: PickedPrice;      // amount, currency, interval, native/converted, FX info
   monthlyEquivalent: number;
   status: { kind: 'active' | 'inactive'; activeFrom?: string; endsOn?: string; manual: boolean };

@@ -13,7 +13,11 @@ import { locateCatalogFile, type CatalogSourceFile } from './validate-catalog';
 export const catalogSchemaVersion = 1;
 
 export const snapshotProviderSchema = providerSchema.safeExtend({
-  iconUrl: httpsUrlSchema.describe("The provider's icon, a static file under /simply/sub/icons/"),
+  iconUrl: httpsUrlSchema
+    .describe(
+      "The provider's icon, a static file under /simply/sub/icons/. Left out when there's no logo: the app shows a letter",
+    )
+    .optional(),
 });
 export type SnapshotProvider = z.infer<typeof snapshotProviderSchema>;
 
@@ -57,6 +61,8 @@ export interface CatalogSource {
   categories: Categories;
   providers: Provider[];
   bundles: Bundle[];
+  /** Provider id → its logo, a PNG from data/logos/. */
+  logos: ReadonlyMap<string, Uint8Array>;
 }
 
 /**
@@ -68,8 +74,15 @@ export function readCatalogSource(files: readonly CatalogSourceFile[]): CatalogS
   let categories: Categories | undefined;
   const providers: Provider[] = [];
   const bundles: Bundle[] = [];
+  const logos = new Map<string, Uint8Array>();
   for (const source of files) {
-    switch (locateCatalogFile(source.file)?.kind) {
+    const where = locateCatalogFile(source.file);
+    switch (where?.kind) {
+      case 'logo':
+        if ('bytes' in source) {
+          logos.set(where.name, source.bytes);
+        }
+        break;
       case 'features':
         features = parsed(featuresFileSchema, source);
         break;
@@ -88,7 +101,13 @@ export function readCatalogSource(files: readonly CatalogSourceFile[]): CatalogS
     throw new Error('data/features.yaml and data/categories.yaml are both needed');
   }
   const byId = (a: { id: string }, b: { id: string }) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
-  return { features, categories, providers: providers.sort(byId), bundles: bundles.sort(byId) };
+  return {
+    features,
+    categories,
+    providers: providers.sort(byId),
+    bundles: bundles.sort(byId),
+    logos,
+  };
 }
 
 function parsed<T>(schema: z.ZodType<T>, source: CatalogSourceFile): T {
@@ -99,7 +118,10 @@ function parsed<T>(schema: z.ZodType<T>, source: CatalogSourceFile): T {
   return result.data;
 }
 
-/** The snapshot's data: the source files, in a fixed order, with each provider's icon URL. */
+/**
+ * The snapshot's data: the source files, in a fixed order. A provider with a logo gets its icon URL; one without
+ * has none, and the app shows its first letter.
+ */
 export function buildCatalogData(source: CatalogSource, iconBaseUrl: string): CatalogData {
   return {
     schemaVersion: catalogSchemaVersion,
@@ -111,7 +133,7 @@ export function buildCatalogData(source: CatalogSource, iconBaseUrl: string): Ca
       name,
       ...(aliases && { aliases }),
       website,
-      iconUrl: `${iconBaseUrl}${id}.png`,
+      ...(source.logos.has(id) && { iconUrl: `${iconBaseUrl}${id}.png` }),
       ...rest,
     })),
     bundles: source.bundles,
