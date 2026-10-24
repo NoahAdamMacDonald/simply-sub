@@ -16,7 +16,16 @@ API contract's prices are illustrative and never a source. This skill is how to 
   leave the field out rather than guess.
 - **Regular prices, not offers.** Store the price a subscription renews at. "Billed at $53.88 for the first 12
   months, then renews at $83.88 every 12 months" means `amount: 83.88`. Struck-through prices are usually the
-  monthly price, shown next to the yearly per-month rate (see Proton).
+  monthly price, shown next to the yearly per-month rate (see Proton). A first-term offer can go in `notes`; users
+  who got it enter it as their own price (BLUEPRINT §4.3).
+- **The billing period as the provider states it.** "Monthly" is `interval: month`, but "every 30 days" is
+  `interval: day, intervalCount: 30` and "every 4 weeks" is `interval: week, intervalCount: 4`. Prepaid phone plans
+  and gyms often bill by days, so read the terms or the checkout, not just the "/mo" on the price card.
+- **Region codes:** ISO 3166-1 alpha-2 (`GB` for the United Kingdom, never `UK`), `EU` when one price covers the
+  whole EU, and `GLOBAL` for one price wherever the provider sells.
+- **`availableIn` only from an official list.** When the provider says where it sells ("only in the US", a country
+  list in its help centre), set `availableIn` to that full list. Otherwise leave it out: a region without prices is
+  then shown as unknown, not as "not offered" (BLUEPRINT §4.7).
 - **Every interval and every price list the provider sells.** That means monthly and yearly (other periods only when the user
   asks), every region in scope (ask: usually CA and US, or GLOBAL), and every currency the buyer can pick.
 - **Read the features from the same pages:** quality, streams, downloads, devices, users, storage and limits. Map them
@@ -76,7 +85,7 @@ node .claude/skills/price-research/read-page.cjs "$DEPS" "$OUT" https://proton.m
 | Pattern (example) | How to read it | How it goes in the YAML |
 |---|---|---|
 | **Price set by your location** (Netflix, Disney+, most streamers) | This machine is in Canada. Find the per-country URL or picker. Netflix help: append the country code, `help.netflix.com/en/node/24926/us` (and `/ca`). | One price per region (`region: US, currency: USD`). `billingCurrency: { CA: CAD, US: USD }`. `sourceUrl` is the country URL. |
-| **Language/country picker** (Disney+) | `disneyplus.com` and the help centre redirect by IP. Open `help.disneyplus.com/article/disneyplus-price?redirect=false`, then `click?:Reject All` and `country:United States (English)`. Check each language too (US English and Español, Canada English and Français): prices follow the country, not the language. | Plans can differ by country. A plan sold in one country only has prices there. If the same name means different features (US With Ads is 4K, Canada's Standard With Ads is 1080p), make separate plans (`disney-plus.with-ads`, US only). Say in a file comment where the other country's prices come from. |
+| **Language/country picker** (Disney+) | `disneyplus.com` and the help centre redirect by IP. Open `help.disneyplus.com/article/disneyplus-price?redirect=false`, then `click?:Reject All` and `country:United States (English)`. Check each language too (US English and Español, Canada English and Français): prices follow the country, not the language. | Plans can differ by country. A plan sold in one country only has prices there, and the app hides it in the other countries the provider is priced in. If the same name means different features (US With Ads is 4K, Canada's Standard With Ads is 1080p), make separate plans (`disney-plus.with-ads`, US only). Say in a file comment where the other country's prices come from. |
 | **Buyer picks the currency** (Proton: USD, CAD, EUR, CHF) | Use the currency `<select>` (`select:Change currency=CAD`), and check every product tab and both Monthly and Yearly. The Yearly view shows the monthly price struck through, a lower per-month rate and "Billed at X every 12 months": store X as the yearly price and the struck price as the monthly one. Family and Duo plans can sit on another page (`proton.me/family`). | A `GLOBAL` price in each currency. BLUEPRINT §4.7 shows a price in the user's own currency as native. `billingCurrency: { GLOBAL: USD }` covers everyone else. A free plan keeps one `$0` price. |
 | **Prepaid time** (Mullvad) | A flat €5/month for any period. The card checkout offers about 20 currencies at a converted "≈" amount, which isn't a fixed price. Crypto is 10% off, and there are no subscriptions. | `autoRenew: false`, month and year in the one fixed currency (`GLOBAL EUR`). The local-currency payment options and discounts go in `notes`. BLUEPRINT §14 has the open question on FX fees for this. |
 | **Bundles on the seller's or partner's pages** (Crave × Disney+) | The bundle can be on the provider's subscribe page (a carousel: page through it), on a partner landing page (`crave.ca/en/disneypluscravebundle`, where the card labels are images, so read the screenshot), on the other partner's help centre, and in an FAQ listing every bundle (`plus.crave.ca/en/faq/...`). Check them all before deciding who sells it. | A bundle file only when its features are exactly the sum of its plans. `soldBy` is the provider whose own site sells it. Every included plan must exist in the catalog. Bundles with services not in the catalog wait until they are. |

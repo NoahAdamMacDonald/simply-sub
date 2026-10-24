@@ -8,7 +8,8 @@ import { featuresFileSchema } from './feature';
 import { slugSchema } from './formats';
 import type { CatalogFileKind } from './json-schema';
 import type { Price } from './price';
-import { providerSchema, type Provider } from './provider';
+import { providerSchema, type AddOn, type Plan, type Provider } from './provider';
+import { globalRegion, groupsOf, isCatalogRegion, membersOf, regionProblem } from './regions';
 import {
   checkInclusionLoops,
   checkPlanFeatures,
@@ -363,6 +364,9 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
     }
   }
   for (const [region, currency] of Object.entries(provider.billingCurrency ?? {})) {
+    if (!isCatalogRegion(region)) {
+      report(['billingCurrency', region], regionProblem(region));
+    }
     if (!context.currencies.has(currency)) {
       report(['billingCurrency', region], `"${currency}" isn't a real ISO 4217 currency code`);
     }
@@ -413,13 +417,34 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
   if (provider.billingCurrency) {
     checkBillingCurrency(provider, provider.billingCurrency, context.currencies, report);
   }
+  if (provider.availableIn) {
+    checkAvailableIn(provider, provider.availableIn, report);
+  }
   prices.warnIfStale();
+}
+
+/** A provider's plans and add-ons, each with its path in the file. */
+function pricedItems(
+  provider: Provider,
+): { item: Plan | AddOn; path: CatalogIssuePath; kind: 'plan' | 'add-on' }[] {
+  return [
+    ...provider.plans.map((item, index) => ({
+      item,
+      path: ['plans', index],
+      kind: 'plan' as const,
+    })),
+    ...(provider.addOns ?? []).map((item, index) => ({
+      item,
+      path: ['addOns', index],
+      kind: 'add-on' as const,
+    })),
+  ];
 }
 
 /**
  * When a provider says which currency it charges in each region, every region a plan or add-on is priced in has
  * an entry, and the item has a price there in that currency. A missing region is reported once per file, and a
- * currency that isn't real only once, by checkProvider.
+ * currency or region that isn't real only once, by checkProvider and PriceChecks.
  */
 function checkBillingCurrency(
   provider: Provider,
@@ -427,19 +452,11 @@ function checkBillingCurrency(
   currencies: ReadonlySet<string>,
   report: Report,
 ): void {
-  const items = [
-    ...provider.plans.map((item, index) => ({ item, path: ['plans', index], kind: 'plan' })),
-    ...(provider.addOns ?? []).map((item, index) => ({
-      item,
-      path: ['addOns', index],
-      kind: 'add-on',
-    })),
-  ];
   const reported = new Set<string>();
-  for (const { item, path, kind } of items) {
+  for (const { item, path, kind } of pricedItems(provider)) {
     const firstInRegion = new Map<string, number>();
     item.prices.forEach((price, index) => {
-      if (!firstInRegion.has(price.region)) {
+      if (isCatalogRegion(price.region) && !firstInRegion.has(price.region)) {
         firstInRegion.set(price.region, index);
       }
     });
@@ -466,6 +483,47 @@ function checkBillingCurrency(
         );
       }
     }
+  }
+}
+
+/**
+ * availableIn is the full list of regions a provider sells in, so it covers every region a plan or add-on is
+ * priced in: a member state through its group too, and a group through itself or one of its members. A missing
+ * region is reported once per file.
+ */
+function checkAvailableIn(
+  provider: Provider,
+  availableIn: readonly string[],
+  report: Report,
+): void {
+  availableIn.forEach((region, index) => {
+    if (region === globalRegion) {
+      report(
+        ['availableIn', index],
+        'GLOBAL means everywhere: list regions here, or leave availableIn out',
+      );
+    } else if (!isCatalogRegion(region)) {
+      report(['availableIn', index], regionProblem(region));
+    }
+  });
+  const listed = (region: string) =>
+    [region, ...groupsOf(region), ...membersOf(region)].some((covered) =>
+      availableIn.includes(covered),
+    );
+  const reported = new Set<string>();
+  for (const { item, path, kind } of pricedItems(provider)) {
+    item.prices.forEach(({ region }, index) => {
+      if (region === globalRegion || !isCatalogRegion(region) || reported.has(region)) {
+        return;
+      }
+      if (!listed(region)) {
+        reported.add(region);
+        report(
+          [...path, 'prices', index, 'region'],
+          `availableIn has no ${region}, but this ${kind} is priced there: add ${region} to it`,
+        );
+      }
+    });
   }
 }
 
@@ -533,8 +591,8 @@ interface StalePrice {
 }
 
 /**
- * The price checks for one file: real currencies, no repeats within an item and no lastVerified after today.
- * It counts the prices last verified more than 90 days ago, for one warning per file.
+ * The price checks for one file: real regions and currencies, no repeats within an item and no lastVerified after
+ * today. It counts the prices last verified more than 90 days ago, for one warning per file.
  */
 class PriceChecks {
   private readonly context: CheckContext;
@@ -555,6 +613,9 @@ class PriceChecks {
     const first = new Map<string, number>();
     prices.forEach((price, index) => {
       const at = [...path, index];
+      if (!isCatalogRegion(price.region)) {
+        this.report([...at, 'region'], regionProblem(price.region));
+      }
       if (!currencies.has(price.currency)) {
         this.report([...at, 'currency'], `"${price.currency}" isn't a real ISO 4217 currency code`);
       }

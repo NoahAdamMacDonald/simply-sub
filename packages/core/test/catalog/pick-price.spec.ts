@@ -76,6 +76,19 @@ describe('pickPrice', () => {
       expect(summary(pickPrice(prices, canada))).toEqual(['CA CAD → 16.99 CAD per 1 month']);
     });
 
+    it('then takes the price of a group the region belongs to', () => {
+      // A Swede is charged the EU price, not the US one, even though it's in another currency.
+      const prices = [price('US', 'USD', 9.99), price('EU', 'EUR', 8.99)];
+      expect(summary(pickPrice(prices, { region: 'SE', currency: 'SEK', fx: undefined }))).toEqual([
+        'EU EUR → 8.99 EUR per 1 month (converted)',
+      ]);
+      // The country's own price still comes first.
+      const withGermany = [...prices, price('DE', 'EUR', 7.99)];
+      expect(summary(pickPrice(withGermany, { region: 'DE', currency: 'EUR' }))).toEqual([
+        'DE EUR → 7.99 EUR per 1 month',
+      ]);
+    });
+
     it('prefers the user’s currency in a region with several, then the one billingCurrency names', () => {
       const prices = [price('CA', 'USD', 13.99), price('CA', 'CAD', 18.99)];
       expect(summary(pickPrice(prices, canada))).toEqual(['CA CAD → 18.99 CAD per 1 month']);
@@ -187,9 +200,22 @@ describe('pickPrice', () => {
     }
   });
 
-  it('converts a free plan to 0', () => {
-    const [free] = pickPrice([price('GLOBAL', 'USD', 0)], canada);
-    expect(free).toMatchObject({ amount: 0, currency: 'CAD', monthlyEquivalent: 0, native: false });
+  it('shows a free plan as a native 0 in the user’s currency, with or without rates', () => {
+    // So the app shows Free, never ≈ (PROJECT-PLAN §3.1).
+    for (const context of [canada, { ...canada, fx: undefined }]) {
+      expect(pickPrice([price('GLOBAL', 'USD', 0)], context)).toEqual([
+        {
+          interval: 'month',
+          intervalCount: 1,
+          amount: 0,
+          currency: 'CAD',
+          monthlyEquivalent: 0,
+          autoRenew: true,
+          native: true,
+          source: { region: 'GLOBAL', amount: 0, currency: 'USD' },
+        },
+      ]);
+    }
   });
 
   it('gives nothing for no prices', () => {

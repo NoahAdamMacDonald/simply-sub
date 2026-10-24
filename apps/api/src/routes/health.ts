@@ -5,7 +5,7 @@ export const API_VERSION = '1.0.0';
 
 /**
  * GET /health: liveness and version (docs/api-output-examples.json). catalogVersion,
- * catalogUpdatedAt and counts are added once D1 holds a seeded catalog (M0.8, M1.5).
+ * catalogUpdatedAt and counts come with M2.1, which records them in D1 when it seeds.
  */
 export const health = new Hono<{ Bindings: Env }>().get('/', (c) =>
   c.json(

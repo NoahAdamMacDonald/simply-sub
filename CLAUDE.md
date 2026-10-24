@@ -23,6 +23,10 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 - The catalog source of truth is `data/**/*.yaml` in Git. CI validates it and reseeds D1. Price updates arrive as PRs, never auto-merged.
 - Domain **simplely.ca**: app `https://simplely.ca/simply/sub/`, API `https://simplely.ca/api/sub/v1/`.
 - Multi-region prices; the user's region is the default; non-native prices are FX-converted and marked with an icon.
+  Regions are ISO 3166-1 codes (`GB`, not `UK`), the `EU` group or `GLOBAL`. Whether something is sold in a region
+  is `availability` in core: offered, not offered or unknown (BLUEPRINT §4.7).
+- Catalog prices are the regular (renewal) price, never a first-term offer, with the billing period the provider
+  states ("every 30 days" is `interval: day, intervalCount: 30`).
 - Catalog growth is automated (discover → find URLs → AI extract → validate → PR). Humans only review PRs.
 - Business logic (optimizer, schedules, rewards, exporters) lives in `packages/core` as pure, tested functions.
 - Feature ids come from `data/features.yaml`. Never invent feature keys inline.
@@ -39,7 +43,11 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 - Money and time terms ("this month", "this year", "next 12 months", monthly equivalent) are defined in PROJECT-PLAN.md §3.1. Compute them only in `packages/core`.
 - List editing works on a draft saved in Dexie: Save commits atomically, Cancel discards.
 - `packages/core` functions never read the clock. They take `today` as a parameter, and the app passes it in from a single `ClockService`, so tests can fix the date.
-- The app reads the catalog from the static `data/catalog.json` (built by `npm run data:build`, BLUEPRINT §6.3) and icons from static files. It only calls the Worker for `/fx` and custom-subscription icons.
+  Date maths uses core's UTC helpers in `dates/`; no date library.
+- The app reads the catalog from static files built by `npm run data:build` (`data/catalog.json`; its region's
+  `data/catalog/<region>.json` from M2.1, BLUEPRINT §6.3) and icons from static files. It only calls the Worker for
+  `/fx` and custom-subscription icons. D1 serves only the public API, and a deploy should write only what changed
+  (free plan: 100k rows written a day, BLUEPRINT §5.3).
 
 ## Git workflow
 - `main` is protected (no bypass): never push to it. Work on a task branch (`feat/m5-3-search-filters`), push it,

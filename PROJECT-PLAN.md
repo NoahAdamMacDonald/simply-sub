@@ -119,14 +119,14 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 ### M2 — API
 | ID | Task | Done when |
 |---|---|---|
-| M2.1 | `GET /catalog` (+ ETag / 304), and `?region=` with per-region `snapshots` rows built by `data:build` (BLUEPRINT §6.3) | Matches the example |
+| M2.1 | `GET /catalog` (+ ETag / 304) and `?region=`, served from static snapshot files: `data:build` also writes `data/catalog/<region>.json` and `other.json` (BLUEPRINT §6.3). D1: migration 0002 (`WITHOUT ROWID`, a `catalog` row in place of `snapshots`, a provider `hash`), and a seed that writes only what changed (BLUEPRINT §5.3). `/health` reports the catalog version, build time and counts | Matches the examples; a code-only deploy writes no D1 rows, and a one-provider change writes only that provider's |
 | M2.2 | `GET /features`, `GET /categories` | Match the examples |
 | M2.3 | `GET /providers`: search, filters, sort, cursor pagination | Every query parameter in the examples works |
 | M2.4 | `GET /providers/:id`, `GET /plans/:id`, `GET /bundles`, plus the 404 shape | Match the examples |
-| M2.5 | `GET /fx`: Frankfurter proxy, cached 12 h, serves the last good value if Frankfurter is down | Matches the example, including the `stale` flag |
-| M2.6 | `GET /icon?domain=`: icon proxy for custom subscriptions, cached 30 days, restricted as in BLUEPRINT §5.4, using core's icon functions (M1.6) | Returns an image or the fallback; a non-domain, an IP address or a URL gets `400`, and nothing but the fixed icon services is ever fetched |
+| M2.5 | `GET /fx`: Frankfurter proxy, cached 12 h, serves the last good value if Frankfurter is down (kept somewhere durable, such as KV: the Cache API can evict it; BLUEPRINT §7.1) | Matches the example, including the `stale` flag |
+| M2.6 | `GET /icon?domain=`: icon proxy for custom subscriptions, cached 30 days, restricted as in BLUEPRINT §5.4, using core's icon functions (M1.6) | Returns an image or the fallback; a non-domain, an IP address or a URL gets `400`, nothing but the fixed icon services is ever fetched, and the domain never reaches the logs |
 | M2.7 | Contract tests: every example in `docs/api-output-examples.json` is validated against the response schemas, and route tests compare real responses with them | The examples and the code can't drift apart |
-| M2.8 | Error middleware, CORS, caching, security headers and the per-IP rate limit (BLUEPRINT §5.4) | Headers match the examples; going over the limit gets `429 rate_limited`; the CSP still lets Cloudflare Web Analytics load (BLUEPRINT §7.6) |
+| M2.8 | Error middleware, CORS, caching, security headers and the per-IP rate limit (BLUEPRINT §5.4); the static files' `_headers` (CSP, immutable hashed files, icons for a day: BLUEPRINT §7.6); request logs off (`invocation_logs: false`) | Headers match the examples; going over the limit gets `429 rate_limited`; the CSP still lets Cloudflare Web Analytics load (BLUEPRINT §7.6) |
 
 ### M3 — Discovery pipeline (BLUEPRINT §6.5)
 | ID | Task | Done when |
@@ -134,16 +134,16 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 | M3.1 | `discover-services.ts` (Wikidata) → `data/queue.yaml` | The queue has services with websites and categories |
 | M3.2 | `find-urls.ts` (common paths → sitemap → nav links → search API) | At least 80% of a 20-service sample get a correct pricing URL |
 | M3.3 | Playwright renderer, run locally so prices come back in CAD | Text and a screenshot are saved for each page |
-| M3.4 | `extract-plans.ts` (LLM structured output, evidence quotes, proposed features) | Draft YAML passes validation for most services |
+| M3.4 | `extract-plans.ts` (LLM structured output, evidence quotes, proposed features; regular prices, the billing period as stated, `availableIn` from the provider's own country list: BLUEPRINT §6.5) | Draft YAML passes validation for most services |
 | M3.5 | Batch PR script (`gh pr create`, about 10 providers per PR) | One command turns a batch into a reviewable PR |
 | M3.6 | Run it on your own services (BLUEPRINT §6.6) and tune the prompts | Your subscriptions are in the catalog with CAD prices |
 
 ### M4 — App foundations
 | ID | Task | Done when |
 |---|---|---|
-| M4.1 | Dexie database (BLUEPRINT §4.6) + repositories that expose signals | CRUD tests pass with `fake-indexeddb` |
+| M4.1 | Dexie database (BLUEPRINT §4.6, including `region`, add-on quantities, bundle items, `billingDay` and `priceOverride.until`) + repositories that expose signals | CRUD tests pass with `fake-indexeddb` |
 | M4.2 | `SettingsStore` + first-run dialog (P1); `ThemeService` reads and writes `settings.theme`, keeping `localStorage` `ss-theme` as the startup cache (BLUEPRINT §8.1) | Country and currency are saved, with defaults from the browser locale |
-| M4.3 | `CatalogStore`: cached snapshot → revalidate `data/catalog.json` with ETag → save; the offline banner and "Catalog updated" toast (P1) | The app works offline after the first visit, and the banner shows the catalog's date |
+| M4.3 | `CatalogStore`: cached snapshot → revalidate the region's `data/catalog/<region>.json` (plus any region a list item uses) with ETag → save; the offline banner and "Catalog updated" toast (P1) | The app works offline after the first visit, and the banner shows the catalog's date |
 | M4.4 | `FxStore` + `ss-price` with the converted marker | Converted prices show ≈, the icon and the tooltip |
 | M4.5 | Shared components (§4.3) + a `/dev/components` gallery (dev builds only) | Every component renders in both themes in the gallery |
 | M4.6 | `MetricsService` skeleton: resolved items (§3.4) from repos + catalog + FX | Unit tests pass with a fixture list |
@@ -151,7 +151,7 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 ### M5 — Search & add
 | ID | Task | Done when |
 |---|---|---|
-| M5.1 | core: search index, matching and filters (`searchCatalog`) | Name, plan, alias and feature matches are ranked as described in P8 |
+| M5.1 | core: search index, matching and filters (`searchCatalog`), using `availability` (BLUEPRINT §4.7) | Name, plan, alias and feature matches are ranked as described in P8, and plans not offered in the user's region never appear |
 | M5.2 | Search page layout, results and the search sub-card with expand (P8) | P8 layout criteria met |
 | M5.3 | Filter panel + URL state (P8) | Filters survive a reload and back/forward |
 | M5.4 | Add-to-list menu → edit page with `?add=` (flow F1) | F1 works end to end (needs M6.3–M6.5; stub it until then) |
@@ -173,11 +173,11 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 ### M7 — Money, schedule & calendar
 | ID | Task | Done when |
 |---|---|---|
-| M7.1 | core: schedule engine for charges, statuses, totals and budget checks (§3.1, §3.3) | Tests cover month-end, leap years, windows, yearly repeats and start/end dates |
+| M7.1 | core: schedule engine for charges, statuses, totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/` | Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
 | M7.2 | Totals and budget bars on Home, Lists and List view | The numbers match the §3.1 definitions |
 | M7.3 | Home (P2) | P2 criteria met |
 | M7.4 | Calendar (P10): grid, day panel, list filter, upcoming list, agenda layout on mobile | P10 criteria met |
-| M7.5 | Exports: ICS, CSV, XLSX, TXT (lazy-loaded) | The files open in Google Calendar and Excel |
+| M7.5 | Exports: ICS (one all-day event per charge, no `RRULE`s: BLUEPRINT §11.2), CSV, XLSX, TXT (lazy-loaded) | The files open in Google Calendar and Excel, and a plan billed on the 31st shows in every month |
 | M7.6 | Budget warning banners | A warning appears for a projected over-budget month |
 
 ### M8 — Optimizer & bot
@@ -209,25 +209,42 @@ These live in `packages/core` as pure functions, so every page computes them the
 | Term | Definition | Used by |
 |---|---|---|
 | **Picked price** | The price `pickPrice` chooses for the user's region and currency: one source region and currency per plan, add-on or bundle, with every interval priced there, converted if it isn't in the user's currency. Native means no conversion was needed (BLUEPRINT §4.7) | Everywhere a price appears |
-| **Item price** | The price override if one is set; otherwise the picked plan price plus picked add-on prices × quantity. Bundle items use the bundle price | Charges |
+| **Item price** | The price override if one is set and the charge is dated before its `until` (if any); otherwise the picked plan price plus each picked add-on price × its quantity. Bundle items use the bundle price | Charges |
 | **Monthly equivalent** | Price per month: year ÷ 12, week × 52 ÷ 12, day × 365 ÷ 12, each ÷ `intervalCount` | Sorting, the price filter, "≈ $x/mo" hints |
 | **Charge** | One scheduled payment: `{ date, amount, currency, itemId, listId, converted, manual }` | Calendar and all totals |
 | **This month** | Sum of the charges dated in the current calendar month | Monthly budget bars, list cards |
 | **This year** | Sum of the charges dated in the current calendar year (Jan 1 – Dec 31) | Annual budget bars, list cards |
-| **Next 12 months** | Sum of the charges from today through the same day next year | An item's "% of list", optimizer savings |
+| **Next 12 months** | Sum of the charges from today up to, but not including, the same day next year (so a yearly plan renewing today counts once) | An item's "% of list", optimizer savings |
 
 **Charge rules**
 - **Ongoing billing:** charges fall on `anchorDate` plus or minus whole intervals. Each date is computed from the
-  anchor (`addMonths(anchor, n)`), not from the previous charge, so Jan 31 → Feb 28 → Mar 31 doesn't drift.
+  anchor (for months, `addMonths(anchor, n × intervalCount)`), never from the previous charge, so dates don't
+  drift.
+  - **Months and years:** the charge falls on the anchor's day, or on the month's last day when it's shorter: an
+    anchor of Jan 31 gives Feb 28 (29 in a leap year), Mar 31, Apr 30. This is how Netflix and Stripe-billed
+    services work. A yearly anchor of Feb 29 gives Feb 28 in other years.
+  - **`billingDay`** (29–31) is the day when the anchor is a shorter month's last day: anchor Feb 28 with
+    `billingDay: 31` gives Mar 31, Apr 30. The item dialog asks for it only when the date entered is the last day of
+    a month shorter than 31 days.
+  - **Days and weeks** are plain counts: `day` × 30 from Jan 31 gives Mar 2, Apr 1, May 1. A 30-day plan can
+    charge twice in one month, and that month's total and budget check include both.
   - Only dates on or after `startDate` (if set) and before `endDate` (if set) count.
   - No `startDate` means it's assumed to have been active already, so earlier charges this year count toward
     "this year".
   - `autoRenew: false` doesn't stop charges. It marks them `manual`, and the calendar shows "Renew manually".
     Only `endDate` stops them.
+- **Dates are expected dates.** Charges are calendar dates with no time. A provider's time zone can put the real
+  charge a day either side, and some events move the date for good: a failed payment that goes through later
+  (Netflix bills from that day on), a plan change, a pause, or app-store billing that keeps the earlier day after a
+  short month. So **changing an item's next renewal date makes it the new `anchorDate`**, and every later date
+  follows it. The list view and the calendar day panel offer this directly ("Wrong date?"), saved straight to the
+  item like pinning.
 - **Free plans:** a $0 price creates no charges, so a free item never appears on the calendar and adds nothing to
-  totals. A price of 0 shows as "Free", never with ≈.
-- **Specific dates (limited windows):** a charge at each window's start, then one every interval until the window
-  ends. `repeatYearly` copies the window into every year. Example: Sep 2 – Nov 1, monthly → charges on Sep 2 and Oct 2.
+  totals. A price of 0 shows as "Free", never with ≈ (pickPrice marks it native).
+- **Specific dates (limited windows):** a charge at each window's start, then one every interval while the date is
+  before the window's end. The item is active from `start` through `end`, both included. `repeatYearly` copies the
+  window into every year. Example: Sep 2 – Nov 1, monthly → charges on Sep 2 and Oct 2, active until Nov 1; a window
+  of Sep 2 – Nov 2 gives the same charges, since none falls on the end date.
 - **Currency:** everything is totalled in the user's currency. A total that includes a converted amount shows "≈".
 - **Rounding:** keep full precision internally and round to 2 decimals only for display.
 
@@ -265,7 +282,7 @@ Users rank **rank keys**. Each one points to one rankable option of a feature:
 ### 3.3 Statuses
 | Status | Rule | Shown as |
 |---|---|---|
-| Active | Today is inside a paid period (ongoing: on or after `startDate` and before `endDate`; limited: inside a window) | Green dot, "Active" |
+| Active | Today is inside a paid period (ongoing: on or after `startDate` and before `endDate`; limited: from a window's start through its end) | Green dot, "Active" |
 | Inactive | In a list but not active today | Amber dot, "Inactive", plus "Active from Sep 10, 2026" when a future window or start date exists |
 | Not listed | (Search only) The provider isn't in any list | Grey dot, "Not listed" |
 | Ending | `endDate` is within the next 30 days | Small "Ends Nov 3" badge |
@@ -282,7 +299,9 @@ export interface ResolvedItem {
   providerId?: string; planId?: string; bundleId?: string; customSubId?: string;
   name: string;            // "Netflix"
   planName: string;        // "Standard"
-  iconUrl?: string;        // static catalog icon or /icon?domain= for custom subs; none → ss-provider-icon shows a letter
+  iconUrl?: string;        // catalog: the relative icons/<id>.png when the provider has an iconUrl (the absolute URL
+                           // points at production, so a preview would miss a new logo); custom subs: /icon?domain=;
+                           // none → ss-provider-icon shows a letter
   price: PickedPrice;      // amount, currency, interval, native/converted, FX info
   monthlyEquivalent: number;
   status: { kind: 'active' | 'inactive'; activeFrom?: string; endsOn?: string; manual: boolean };
@@ -525,6 +544,7 @@ Subscription Lists                          [Custom subscriptions]           Fea
 - **Card (list variant):**
   - Collapsed: icon, name · plan, pin, `ss-price` (≈ when converted), % of the list's next-12-months total, status (§3.3), tags.
   - Expanded (⌄): features with rank dots, billing details (next charge, interval, auto/manual renewal, end date), Plan ↗ and Cancel ↗ links, and [Edit] → `/lists/:listId/edit?item=<itemId>`.
+  - "Wrong date?" next to the next charge opens a date picker. The date becomes the item's new `anchorDate` (§3.1), saved straight to the item like pinning, without a draft.
 - **Right column:**
   - Budget bars for **this list only** (hidden without budgets).
   - Mini calendar with this list's charges.
@@ -625,11 +645,12 @@ In Specific dates mode, the renewal fields are replaced by:
 - **Plan:** plans of the same provider (or of the custom subscription), with their prices. Changing the plan keeps the interval if the new plan offers it; otherwise the first available interval is picked.
 - **Extra members:** add-ons of the selected plan, with quantity up to `addOnLimit`.
 - **Billed:** only intervals the plan has prices for (custom plans: any interval and count).
-- **Next renewal** (= `anchorDate`): required for Ongoing. Defaults to one interval from today, with the hint "Check your account page for the exact date".
+- **Next renewal** (= `anchorDate`): required for Ongoing. Defaults to one interval from today, with the hint "Check your account page for the exact date". For month and year intervals, when the date is the last day of a month shorter than 31 days, a choice appears: "Billed on the 28th" or "the 29th / 30th / 31st (the last day in shorter months)", which sets `billingDay` (§3.1). The default from today keeps today's day (added on Jan 31 → Feb 28 with `billingDay: 31`).
 - **Auto-renews:** shown only when the price's `autoRenew` is true. Otherwise a note says "This plan renews manually — we'll remind you".
 - **Free plans:** when the picked price is 0, Billed, Next renewal, Auto-renews and the price override are hidden. The item is saved as Ongoing, with today as the anchor date.
 - **Specific dates:** at least one window; each end must be after its start; windows can't overlap.
-- **Price override:** an amount above 0, with a currency.
+- **Price override:** an amount above 0, with a currency, and an optional "until" date for an offer that ends (first-term discounts): charges from that date on use the catalog price.
+- **Bought in region** (Advanced): any country; it sets `region`, which picks the item's price and availability. Defaults to Settings' country.
 - **Feature ranks:** the plan's provided keys (§3.2), grouped. The dropdown starts with "Profile default (X)" and includes Essential ("keep this plan") and Critical ("keep this provider"), each with a one-line hint.
 - **Tags:** autocomplete from the Settings tags, with "Create tag" inline (name + colour).
 - **Bundles:** bundle items show the bundle's included plans read-only, and their combined features for ranking.
@@ -702,6 +723,7 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
 - **Matching:** text matches provider names and aliases, plan names, feature names and aliases, and category names, in this order: exact or prefix name → substring → alias → feature or category. 150 ms debounce.
 - **Sort:** Best match (default when there's text), Price low→high (default otherwise), Price high→low, Name A–Z, Most features. Price sorts use the lowest monthly equivalent of the plan shown.
 - **Prices:** every interval price is a button → flow F1 (or F2 in pick mode). Converted prices show ≈, the icon and a tooltip. A $0 price shows as "Free".
+- **Availability** (`availability` in core, BLUEPRINT §4.7): plans and bundles not offered in the user's region are left out. A provider with nothing offered there shows "Not offered in Canada" instead of prices, and only when the search text names it. An unknown item shows its fallback price with "No Canadian price yet".
 - **Links:** Plan ↗ and Cancel ↗ open in a new tab (`rel="noopener"`).
 - **Status:** follows §3.3, at provider level.
 - **Expanded section:**
@@ -728,6 +750,7 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
 **Acceptance**
 - [ ] Filtering for 4k shows each provider's cheapest 4k plan
 - [ ] Converted prices are marked, and "Native pricing only" hides them
+- [ ] A Canadian never sees a US-only plan (Disney+ With Ads), and a provider without Canadian prices or `availableIn` shows "No Canadian price yet"
 - [ ] A reload and back/forward restore the query, filters and sort
 - [ ] A price click opens the add menu (F1), or adds directly in pick mode (F2)
 
@@ -794,11 +817,11 @@ Upcoming   Oct 28 Crave $22.00 · Nov 3 Mullvad ≈ $7.53 ↻ · Nov 12 Netflix 
   - Fills the available space.
   - Each day shows its date, up to 3 charge chips (icon + amount, plus the name when there's room), "+2 more" and a muted day total.
   - Today is outlined, and days from other months are muted.
-- Clicking a day or a chip opens a side panel (a bottom sheet on mobile) with the name, plan, list, amount (≈ if converted), auto/manual renewal, card (Phase 4) and a link to the list.
+- Clicking a day or a chip opens a side panel (a bottom sheet on mobile) with the name, plan, list, amount (≈ if converted), auto/manual renewal, card (Phase 4), a link to the list, and "Wrong date?" (as on P4: the new date becomes the anchor).
 - ↻ marks manual renewals. "Ends" marks the last charge before an `endDate`.
 - Month and year selects, arrows and [Today]; URL `?month=2026-10&lists=<id>,<id>`.
 - Under 600 px the grid becomes an agenda list grouped by date.
-- **Export to file ▾:** Calendar (.ics) as the main action, plus a CSV payment schedule and Excel. Covers the shown lists for the next 12 months.
+- **Export to file ▾:** Calendar (.ics) as the main action, plus a CSV payment schedule and Excel. Covers the shown lists for the next 12 months. The .ics has one all-day event per charge, not repeat rules (BLUEPRINT §11.2).
 - **Sync calendar ▾:**
   - Phase 3: Google / Apple / Proton each download the .ics and show that app's import steps.
   - Phase 5: "Live calendar link" → opt-in dialog → `POST /cal` → shows the URL, subscribe steps for each app and a Revoke button.
@@ -975,8 +998,8 @@ FREE SAVINGS — nothing you rank is lost
 
   | Request | Served by | Caching | Uses Worker quota? |
   |---|---|---|---|
-  | `/simply/sub/data/catalog.json` | static asset | ETag; the browser revalidates on each visit | No |
-  | `/simply/sub/icons/<id>.png` | static asset | 30 days | No |
+  | `/simply/sub/data/catalog/<region>.json` (M2.1; `catalog.json` before) | static asset | ETag; the browser revalidates on each visit | No |
+  | `/simply/sub/icons/<id>.png` | static asset | 1 day, then revalidated (the URL has no version, so a new logo must show up) | No |
   | `/api/sub/v1/fx?base=CAD` | Worker → Frankfurter | 12 h at the edge + browser cache (about once a day per user) | Yes (tiny) |
   | `/api/sub/v1/icon?domain=` | Worker → DuckDuckGo/Google | 30 days | Yes (custom subscriptions only) |
 - The other endpoints (`/providers`, `/plans`, `/bundles`, `/features`, `/categories`, `/catalog`) serve deep links,
@@ -988,8 +1011,11 @@ FREE SAVINGS — nothing you rank is lost
 
 ## 7. Testing plan
 **Unit tests (packages/core):**
-- `pickPrice` (all four fallback steps) and `monthlyEquivalent`
-- Charges: month-end, leap years, `intervalCount`, windows, yearly repeats, start/end dates, manual renewals
+- `pickPrice` (all four fallback steps, region groups, free prices), `monthlyEquivalent`, region codes and
+  `availability`
+- Charges: month-end with and without `billingDay`, leap years, `intervalCount`, 30-day and 2-week cycles,
+  windows (no charge on the end date), yearly repeats, start/end dates, manual renewals, re-anchoring, a price
+  override's `until`, and "next 12 months" counting a yearly charge once
 - Statuses, rank resolution and ladders, rank counts, feature summaries
 - Budget checks, optimizer fixtures, reward maths
 
@@ -1006,7 +1032,7 @@ item dialog validation, filter panel ↔ URL sync.
 | 3 | Edit list → Add from catalog (pick mode) → add Mullvad (≈ marker) → Save |
 | 4 | Edit list → change a plan → Cancel → nothing has changed after a reload |
 | 5 | Rank 4k as Unwanted on Features → the list card counts change → Optimizations offers a downgrade |
-| 6 | The calendar shows Netflix on its renewal day, and the exported .ics validates |
+| 6 | The calendar shows Netflix on its renewal day, and the exported .ics validates and has a charge in every month for a plan billed on the 31st |
 | 7 | Export backup → Delete all data → Import (Replace) → identical data |
 | 8 | Offline after the first load → Search and lists still work from the cache |
 | 9 | Dark mode screenshots of Home, Lists, Search and Calendar (visual check) |
