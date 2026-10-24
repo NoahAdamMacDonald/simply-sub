@@ -124,7 +124,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 |---|---|---|
 | M2.1 | `GET /catalog` (+ ETag / 304) and `?region=`, served from static snapshot files: `data:build` also writes `data/catalog/<region>.json` for each priced country and group, and `data/catalog/index.json`; a region without a file gets the full snapshot (BLUEPRINT §6.3). D1: migration 0002 (`WITHOUT ROWID`, a `catalog` row in place of `snapshots`, a provider `hash`), and a seed that writes only what changed, run by `npm run deploy` (BLUEPRINT §5.3, §7.6). `/health` reports the catalog version, build time and counts | Matches the examples; a code-only deploy writes no D1 rows, and a one-provider change writes only that provider's |
 | M2.2 | `GET /features`, `GET /categories`, served from static files: `data:build` also writes `data/catalog/features.json` and `categories.json`, streamed like `/catalog` with the same ETag and 304 (BLUEPRINT §5.2, §6.3). No query parameters; `features.yaml` lists each group before its features | Match the examples (body, meta, status, Content-Type, Cache-Control, ETag); neither route reads D1 |
-| M2.3 | `GET /providers`: search, filters, sort, cursor pagination, with queries that use the indexes (D1 counts every scanned row as read: BLUEPRINT §7.1) | Every query parameter in the examples works |
+| M2.3 | `GET /providers`: search, filters, sort, cursor pagination, with queries that use the indexes (D1 counts every scanned row as read: BLUEPRINT §7.1). Built after M2.5, whose rates it converts with. The logic is core's `searchProviders`, `readProvidersQuery` and `providersBody`, with `rankKeyOptions`/`providesKey` (§3.2) and `regionCurrency`; D1 narrows by rank key through `plan_features`' index, with no migration | Every query parameter in the examples works |
 | M2.4 | `GET /providers/:id`, `GET /plans/:id`, `GET /bundles`, plus the 404 shape | Match the examples |
 | M2.5 | `GET /fx`: Frankfurter proxy, cached 12 h, serves the last good value if Frankfurter is down, kept in KV (binding `KV`: the namespace `simply-sub-kv`, made with `wrangler kv namespace create`, and its id is in `wrangler.jsonc`: BLUEPRINT §7.1, §7.2). Built before M2.3, which converts prices with the same rates: one copy in euros from Frankfurter's ECB-only route, rebased to any base in core (BLUEPRINT §5.2) | Matches the example, including the `stale` flag |
 | M2.6 | `GET /icon?domain=`: icon proxy for custom subscriptions, cached 30 days in KV, restricted as in BLUEPRINT §5.4, using core's icon functions (M1.6) | Returns an image or the fallback; a non-domain, an IP address or a URL gets `400`, nothing but the fixed icon services is ever fetched, and the domain never reaches the logs |
@@ -154,7 +154,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 ### M5 — Search & add
 | ID | Task | Done when |
 |---|---|---|
-| M5.1 | core: search index, matching and filters (`searchCatalog`), using `availability` (BLUEPRINT §4.7) | Name, plan, alias and feature matches are ranked as described in P8, and plans not offered in the user's region never appear |
+| M5.1 | core: search index, matching and filters (`searchCatalog`), using `availability` (BLUEPRINT §4.7). Starts from M2.3's `searchProviders`, which already has P8's matching, filters and sorts | Name, plan, alias and feature matches are ranked as described in P8, and plans not offered in the user's region never appear |
 | M5.2 | Search page layout, results and the search sub-card with expand (P8) | P8 layout criteria met |
 | M5.3 | Filter panel + URL state (P8) | Filters survive a reload and back/forward |
 | M5.4 | Add-to-list menu → edit page with `?add=` (flow F1) | F1 works end to end (needs M6.3–M6.5; stub it until then) |
@@ -163,7 +163,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 ### M6 — Lists & ranking
 | ID | Task | Done when |
 |---|---|---|
-| M6.1 | core: rank keys, `providedKeys`, `resolveRank`, `rankCounts`, `featureSummary` (§3.2) | Tests cover enum and tier ladders and the resolution order |
+| M6.1 | core: rank keys, `providedKeys`, `resolveRank`, `rankCounts`, `featureSummary` (§3.2). M2.3 added `rankKeyOptions` and `providesKey` (`ranking/rank-keys.ts`) | Tests cover enum and tier ladders and the resolution order |
 | M6.2 | Features page (P9) | P9 criteria met |
 | M6.3 | `ListDraftService`, with drafts saved in Dexie | A draft survives navigation and a reload |
 | M6.4 | List edit page (P5) | P5 criteria met |

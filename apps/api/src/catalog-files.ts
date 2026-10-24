@@ -1,15 +1,12 @@
 import { catalogIndexSchema, type CatalogIndex } from '@simply-sub/core';
 import type { Context } from 'hono';
-import { jsonType, notModified } from './http';
+import { catalogCacheControl, jsonType, notModified } from './http';
 
 // The routes that answer with a static file `npm run data:build` writes (BLUEPRINT §6.3): GET /catalog, GET /features
 // and GET /categories. The files are streamed without being parsed, since the Worker has 10 ms of CPU per request,
 // and they never touch D1. The ETag is the catalog version from data/catalog/index.json, which is deployed with the
 // files, so it always describes the body it's sent with: D1's catalog row can't, since the seed runs before the new
 // files go live.
-
-/** The contract's caching for catalog responses (BLUEPRINT §5.1). */
-const cacheControl = 'public, max-age=3600, stale-while-revalidate=86400';
 
 type CatalogContext = Context<{ Bindings: Env }>;
 
@@ -29,7 +26,7 @@ export async function catalogFile(
   const index = catalogIndexSchema.parse(await new Response(indexFile).json());
   const etag = `"${index.catalogVersion}"`;
   if (notModified(c, etag)) {
-    return c.body(null, 304, { ETag: etag, 'Cache-Control': cacheControl });
+    return c.body(null, 304, { ETag: etag, 'Cache-Control': catalogCacheControl });
   }
   const file = await staticJson(c, pathFor(index));
   if (!file) {
@@ -37,9 +34,15 @@ export async function catalogFile(
   }
   return c.body(file, 200, {
     'Content-Type': jsonType,
-    'Cache-Control': cacheControl,
+    'Cache-Control': catalogCacheControl,
     ETag: etag,
   });
+}
+
+/** A small static JSON file (features.json, categories.json), parsed, or undefined when it's missing. */
+export async function catalogJson(c: CatalogContext, path: string): Promise<unknown> {
+  const body = await staticJson(c, path);
+  return body ? new Response(body).json() : undefined;
 }
 
 /** A static JSON file's body, or undefined when it's missing and the assets answer with the app instead. */
@@ -53,7 +56,7 @@ async function staticJson(c: CatalogContext, path: string): Promise<ReadableStre
   return undefined;
 }
 
-function missingFiles(c: CatalogContext): Response {
+export function missingFiles(c: CatalogContext): Response {
   return c.json(
     { error: { code: 'internal', message: 'The catalog files are missing from this deploy.' } },
     500,

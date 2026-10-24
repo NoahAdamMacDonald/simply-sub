@@ -182,10 +182,12 @@ simply-sub/
 │  └─ api/                   # Cloudflare Worker
 │     ├─ src/
 │     │  ├─ index.ts         # Hono app, routes mounted at /api/v1
-│     │  ├─ catalog-files.ts # the routes that stream a static catalog file: ETag, 304, 400 (section 5.1)
+│     │  ├─ catalog-files.ts # the routes that stream a static catalog file: ETag and 304 (section 5.1)
+│     │  ├─ http.ts          # what every route answers alike: 400 bad_request, 502, If-None-Match
+│     │  ├─ fx.ts            # the ECB's rates, kept in KV (section 5.2)
 │     │  ├─ routes/          # health.ts, providers.ts, plans.ts, features.ts, categories.ts, bundles.ts,
 │     │  │                   # catalog.ts, icons.ts
-│     │  └─ db/              # SQL queries (D1)
+│     │  └─ db/              # SQL queries (D1): providers.ts for GET /providers (section 5.3)
 │     ├─ test/               # route tests, run in workerd (@cloudflare/vitest-plugin)
 │     ├─ migrations/         # D1 schema migrations (0001_init.sql …)
 │     ├─ scripts/
@@ -205,7 +207,8 @@ simply-sub/
 │     │  ├─ icons/           # PNG and ICO reading, a page's icon links, the icon services, picking the best icon
 │     │  ├─ schedule/        # recurrence: next payment dates, monthly/annual totals
 │     │  ├─ tax/             # sales tax: tax-added regions, the Canadian rate table, subdivisions (section 4.8)
-│     │  ├─ ranking/         # rank resolution (item override > profile > not ranked)
+│     │  ├─ ranking/         # rank keys and providesKey (M2.3); rank resolution (item override > profile > not ranked)
+│     │  ├─ search/          # searchProviders, readProvidersQuery, providersBody: GET /providers now, Search (P8) in M5
 │     │  ├─ optimizer/       # suggestion engine (section 10)
 │     │  ├─ rewards/         # card reward maths (section 9)
 │     │  └─ export/          # csv, json, txt, xlsx, ics serializers
@@ -614,6 +617,7 @@ can't drift. Everything is exported from `@simply-sub/core`.
 | `seed-sql.ts` | `buildSeedSql(snapshot, { providerHashes, current })`, `seedStateQueries`, `readSeedState` (`SeedState`), `seedFormat`: the D1 seed, which writes only what changed (sections 5.3, 6.3) |
 | `monthly-equivalent.ts` | `monthlyEquivalent(price)` (PROJECT-PLAN §3.1) |
 | `regions.ts` | `isoRegions`, `regionGroups` (EU), `groupsOf`, `membersOf`, `isCatalogRegion`, `regionProblem`: the region codes a catalog file can use (section 4.7) |
+| `region-currency.ts` | `regionCurrency(region)`: the currency each region pays in (EU: EUR, GLOBAL: USD), the default `currency` of `GET /providers` and the first-run dialog |
 | `availability.ts` | `providerAvailability(provider, region)`, `availability(prices, provider, region)` (`Availability`): whether something is sold in a region (section 4.7) |
 | `pick-price.ts` | `pickPrice(prices, context)` (`PickedPrice`, `PriceContext`): the prices a user sees (section 4.7) |
 | `registry-files.ts` | `featuresBody`, `categoriesBody` (`featuresBodySchema`, `categoriesBodySchema`): the `GET /features` and `GET /categories` files (section 6.3) |
@@ -962,7 +966,7 @@ The rules live in `packages/core/src/tax/` and run in M7.1:
 | Method & path | Purpose |
 |---|---|
 | `GET /catalog` | Full snapshot (providers, plans, add-ons, bundles, features, **all regions' prices**), ETag-cached. `?region=CA` keeps only the prices pickPrice can pick for a buyer there (section 6.3). Both are static files built by `data:build`, which the Worker streams through its `ASSETS` binding without parsing them, not D1 rows. The app fetches its region's static file directly, which uses no Worker quota |
-| `GET /providers?q=&category=&feature=<rankKey,…>&minPrice=&maxPrice=&interval=&region=&currency=&nativeOnly=&sort=&cursor=&limit=` | Search and filter (for deep links and other consumers) |
+| `GET /providers?q=&category=&feature=<rankKey,…>&minPrice=&maxPrice=&interval=&region=&currency=&nativeOnly=&sort=&cursor=&limit=` | Search and filter (for deep links and other consumers). Core's `searchProviders` does the matching, filters, prices and sorting (the rules are in the examples file), on the providers D1 narrows down to: rank keys through the `plan_features` index, then providers by primary key. The registry and the categories come from the static `features.json` and `categories.json`. With a region, prices are picked with `/fx`'s rates. The ETag is D1's catalog version plus a hash of the query, the rates' date and the static files' version |
 | `GET /providers/:id` | One provider with its plans and add-ons |
 | `GET /plans/:id` | One plan |
 | `GET /features` | Feature registry, in `features.yaml` order (each group before its features). The static file `data/catalog/features.json`, built by `data:build` and streamed like `/catalog`, so it reads no D1 rows. No query parameters |
@@ -1342,8 +1346,15 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
   - The full `catalog.json` nearing the 25 MiB static-file cap: about 4,000 providers at today's ~6 KB each,
     sooner with many regions. The per-region files the app loads stay far smaller.
   - Static files nearing 20,000 per deploy: icons are one file per provider, so about 19,000 providers.
-- **D1 rows read** count every row a query scans, not just the rows returned (5M a day). The search queries (M2.3)
-  must use the indexes, and the edge cache absorbs repeated searches.
+- **D1 rows read** count every row a query scans, not just the rows returned (5M a day). `GET /providers` (M2.3)
+  reads the `catalog` row, then the providers that can match in one batch: every one when nothing narrows them, or
+  through the `plan_features (feature_id, rank_value)` index for each rank key (EXPLAIN QUERY PLAN shows no table
+  scan, `apps/api/test/providers.spec.ts`). Measured at 5 providers: 6 rows with no filter or a category, 17 for
+  `feature=video.quality=4k`, 31 for two keys. A key costs about twice the rows of the plans that have its feature,
+  so it grows with them, not with the catalog. A text search reads every provider, which core matches in the
+  Worker: at about 200 providers that nears 10 ms of CPU and 200 rows a request, the trigger for an FTS5 table, a
+  category index and per-region price rows (a migration and a `seedFormat` bump). The edge cache (M2.8) absorbs
+  repeated searches.
 | GitHub Actions | Free for public repos, 2,000 min/month for private | CI plus a nightly check, around 300 min/month |
 | Domain | **simplely.ca**, already bought through Cloudflare Registrar, which renews at cost | The only real expense |
 | Workers Builds | ~3,000 build minutes/month, 1 concurrent build | A few minutes per deploy |
@@ -2091,6 +2102,17 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3).
+
+**Resolved (2026-10-24, M2.3)**
+- **`GET /providers`** runs core's `searchProviders` (`packages/core/src/search/`), so the app's Search page (M5.1)
+  can use the same matching. Text matches provider names and aliases, plan names, service category names and
+  rank-key names; relevance goes provider name (starts with, then contains), alias, plan name, then feature or
+  category. The full rules, defaults and 400s are the query descriptions in the examples file.
+- **No migration:** D1 narrows by rank key through the existing index, and by provider id. The registry and the
+  categories come from the static files (M2.2), which keep `features.yaml`'s order, so a request reads only the
+  `catalog` row and the providers that can match (section 7.1 has the numbers and the ~200-provider trigger).
+- **Without a region** there are no prices: the default sort is then `name`, and the price parameters get 400.
+  The default `currency` is the region's own (`regionCurrency` in core), or USD when the ECB has no rate for it.
 
 **Resolved (2026-10-24, M2.5)**
 - **Order:** M2.5 comes before M2.3, because `GET /providers` converts prices with the same rates and reports their
