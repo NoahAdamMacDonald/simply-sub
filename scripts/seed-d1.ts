@@ -114,9 +114,14 @@ function wranglerJson(executeArgs: string[]): unknown[] {
   return output;
 }
 
+/**
+ * wrangler's JSON, from the first line that starts it: a remote --file run prints its upload progress to stdout
+ * first, even with --json.
+ */
 function parsedJson(text: string): unknown {
+  const start = text.search(/^[[{]/m);
   try {
-    return JSON.parse(text);
+    return start < 0 ? undefined : JSON.parse(text.slice(start));
   } catch {
     return undefined;
   }
