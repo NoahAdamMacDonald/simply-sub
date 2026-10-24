@@ -208,7 +208,7 @@ These live in `packages/core` as pure functions, so every page computes them the
 ### 3.1 Money and time
 | Term | Definition | Used by |
 |---|---|---|
-| **Picked price** | The price `pickPrice` chooses for the user's region and currency, converted if needed (BLUEPRINT §4.7) | Everywhere a price appears |
+| **Picked price** | The price `pickPrice` chooses for the user's region and currency: one source region and currency per plan, add-on or bundle, with every interval priced there, converted if it isn't in the user's currency. Native means no conversion was needed (BLUEPRINT §4.7) | Everywhere a price appears |
 | **Item price** | The price override if one is set; otherwise the picked plan price plus picked add-on prices × quantity. Bundle items use the bundle price | Charges |
 | **Monthly equivalent** | Price per month: year ÷ 12, week × 52 ÷ 12, day × 365 ÷ 12, each ÷ `intervalCount` | Sorting, the price filter, "≈ $x/mo" hints |
 | **Charge** | One scheduled payment: `{ date, amount, currency, itemId, listId, converted, manual }` | Calendar and all totals |

@@ -191,7 +191,7 @@ simply-sub/
 │     ├─ src/
 │     │  ├─ index.ts         # the public API, imported as `@simply-sub/core`
 │     │  ├─ catalog/         # Zod schemas + inferred types for the catalog files, JSON Schema export (section 4.5),
-│     │  │                   # validateCatalog (section 6.2)
+│     │  │                   # validateCatalog (section 6.2), pickPrice and convert (section 4.7)
 │     │  ├─ user/            # user-data types (lists, items, cards…)
 │     │  ├─ dates/           # ISO calendar dates: IsoDate, toIsoDate, addDays
 │     │  ├─ icons/           # PNG and ICO reading, a page's icon links, the icon services, picking the best icon
@@ -590,6 +590,8 @@ can't drift. Everything is exported from `@simply-sub/core`.
 | `snapshot.ts` | Output: `catalogSnapshotSchema` (`CatalogSnapshot`), `catalogDataSchema`, `catalogMetaSchema`, `snapshotProviderSchema`; `readCatalogSource`, `buildCatalogData`, `buildCatalogMeta` (section 6.3) |
 | `seed-sql.ts` | `buildSeedSql(snapshot)`: the D1 seed (sections 5.3, 6.3) |
 | `monthly-equivalent.ts` | `monthlyEquivalent(price)` (PROJECT-PLAN §3.1) |
+| `pick-price.ts` | `pickPrice(prices, context)` (`PickedPrice`, `PriceContext`): the prices a user sees (section 4.7) |
+| `convert.ts` | `fxRatesSchema` (`FxRates`, the `/fx` data), `exchangeRate`, `convert` (section 4.7) |
 
 The shapes in short (the Zod source is authoritative). `?` marks an optional field, which is left out when
 empty, never `null` or `""`:
@@ -811,12 +813,25 @@ Every price row carries its `region` and `currency`. A service priced in a singl
 A provider's **availability** is the set of regions it has prices for, plus an optional `availableIn` list for
 services that sell in a region without publishing a local price.
 
-**Choosing which price to show** (`packages/core/src/catalog/pick-price.ts`), given the user's region and currency
-from Settings:
-1. A price for the user's **region**: shown as native.
-2. A price in the user's **currency** from another region (for example CAD from `GLOBAL`): shown as native.
+**Choosing which price to show** (`pickPrice` in `packages/core/src/catalog/pick-price.ts`, M1.7), given the
+user's region and currency from Settings (or a list item's own region). It works on any price list: a plan's, an
+add-on's or a bundle's. It picks one **source**, a region and a currency, then returns every interval priced there,
+shortest first, so a plan never mixes one region's monthly price with another region's yearly one. The source is
+the first that fits:
+1. The user's **region**: what they're charged there. It's native when it's in the user's currency, and
+   converted when it isn't (a Canadian who shows USD sees Netflix's CAD price converted, not the US price).
+2. A price in the user's **currency** from elsewhere: `GLOBAL` first (Proton's CAD prices for a Canadian), then
+   US, GB, EU and the regions listed. Shown as native.
 3. A `GLOBAL` price in another currency, converted.
-4. A price for the closest fallback region (US → GB → EU → first available), converted.
+4. A fallback region, US → GB → EU, then the first region listed, converted.
+
+In a region priced in several currencies, the user's currency wins, then the one the provider's `billingCurrency`
+names for that region, then the first listed. A picked price has the shape of the API's `pricing` entries
+(`PickedPrice`): `amount` and `currency`, `monthlyEquivalent`, `autoRenew`, `native`, the `source` price, and `fx`
+(rate, date, source) when it was converted. Amounts keep full precision; the UI rounds to 2 decimals, and the API
+also rounds rates to 4. Without a rate (offline on the first visit, or `/fx` down), the price stays in its own
+currency with `native: false` and no `fx`. `convert(amount, from, to, fx)` and `exchangeRate` do the maths, from
+`fxRatesSchema` (the `/fx` data: rates per unit of the user's currency).
 
 **Converted prices**
 - Converted using daily ECB rates (Frankfurter, through `/api/sub/v1/fx`, cached in the browser with the rate date).
