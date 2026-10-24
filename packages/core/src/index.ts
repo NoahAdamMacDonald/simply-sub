@@ -4,6 +4,7 @@ export * from './catalog/availability';
 export * from './catalog/bundle';
 export * from './catalog/category';
 export * from './catalog/convert';
+export * from './catalog/ecb-rates';
 export * from './catalog/feature';
 export * from './catalog/formats';
 export * from './catalog/json-schema';

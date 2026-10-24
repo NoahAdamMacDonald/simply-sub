@@ -1,6 +1,7 @@
 import { isCatalogRegion, regionFileFor, regionProblem } from '@simply-sub/core';
 import { Hono } from 'hono';
-import { badQuery, catalogFile, type ParamProblem } from '../catalog-files';
+import { catalogFile } from '../catalog-files';
+import { badQuery, type ParamProblem } from '../http';
 
 /**
  * GET /catalog and GET /catalog?region=CA (docs/api-output-examples.json): the snapshot files that
