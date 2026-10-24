@@ -25,7 +25,7 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 
 ## Decisions already made (don't re-litigate)
 - Local-first: all user data lives in IndexedDB (Dexie). No accounts or server-side user data in v1.
-- The catalog source of truth is `data/**/*.yaml` in Git. CI validates it and reseeds D1. Price updates arrive as PRs, never auto-merged.
+- The catalog source of truth is `data/**/*.yaml` in Git. CI validates it, and each deploy writes what changed to D1. Price updates arrive as PRs, never auto-merged.
 - Domain **sub.simplely.ca**, an origin of its own: app `https://sub.simplely.ca/`, API `https://sub.simplely.ca/api/v1/`.
   Browser storage is shared per origin, so no other app may live on it (BLUEPRINT §7.3, §11.5).
 - Securing data on the device (BLUEPRINT §11.5):
@@ -61,10 +61,11 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 - List editing works on a draft saved in Dexie: Save commits atomically, Cancel discards.
 - `packages/core` functions never read the clock. They take `today` as a parameter, and the app passes it in from a single `ClockService`, so tests can fix the date.
   Date maths uses core's UTC helpers in `dates/`; no date library.
-- The app reads the catalog from static files built by `npm run data:build` (`data/catalog.json`; its region's
-  `data/catalog/<region>.json` from M2.1, BLUEPRINT §6.3) and icons from static files. It only calls the Worker for
-  `/fx` and custom-subscription icons. D1 serves only the public API, and a deploy should write only what changed
-  (free plan: 100k rows written a day, BLUEPRINT §5.3).
+- The app reads the catalog from static files built by `npm run data:build` (`data/catalog/index.json`, then its
+  region's `data/catalog/<region>.json` or the full `data/catalog.json`, BLUEPRINT §6.3) and icons from static
+  files. It only calls the Worker for `/fx` and custom-subscription icons. D1 serves only the public API, and a
+  deploy writes only what changed (free plan: 100k rows written a day, BLUEPRINT §5.3). A change to the catalog
+  tables or the derived columns bumps `seedFormat` in core, which makes the next deploy reseed in full.
 
 ## Git workflow
 - `main` is protected (no bypass): never push to it. Work on a task branch (`feat/m5-3-search-filters`), push it,

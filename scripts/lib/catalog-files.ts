@@ -15,6 +15,9 @@ import { isMap, isScalar, isSeq, LineCounter, parseAllDocuments, type Document }
 
 export const repoRoot = new URL('../../', import.meta.url);
 
+/** The full catalog snapshot that build-catalog.ts writes and seed-d1.ts seeds D1 from, from the repo root. */
+export const catalogFile = 'apps/web/public/data/catalog.json';
+
 export interface LocatedIssue {
   issue: CatalogIssue;
   line?: number;

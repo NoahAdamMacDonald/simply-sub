@@ -54,11 +54,13 @@ Run these from the repo root.
 | `npm run build` | Type-checks `packages/core` and `scripts/`, builds the catalog (`data:build`), builds the app for production, copies it into `apps/api/public/`, then type-checks and bundles the Worker (`wrangler deploy --dry-run`: nothing is deployed) |
 | `npm test` | Unit tests (Vitest) in every workspace, `packages/core` first; the Worker's run inside workerd |
 | `npm -w apps/api run db:migrate:local` / `db:migrate:remote` | Applies new D1 migrations (`apps/api/migrations/`) to the local or the Cloudflare database |
+| `npm -w apps/api run db:seed:local` / `db:seed:remote` | Applies the migrations, then writes what changed in the catalog (since `npm run data:build`) to the local or the Cloudflare D1. `-- --full` replaces everything |
+| `npm -w apps/api run deploy` | What Workers Builds runs on every push to `main`: `db:seed:remote`, then `wrangler deploy` |
 | `npm run lint` | ESLint and Stylelint |
 | `npm run format` / `npm run format:check` | Formats with / checks against Prettier |
 | `npm run data:schema` | Regenerates `data/schema/*.schema.json` from the catalog's Zod schemas. Run it after changing a schema and commit the result. `npm run data:schema -- --check` only checks that they're up to date (CI) |
 | `npm run data:validate` | Checks every catalog file: the schemas, then the cross-file rules (feature ids, references, regions, prices, logos), as `file:line` messages |
-| `npm run data:build` | Builds the catalog snapshot (`apps/web/public/data/catalog.json`), copies the logos to `apps/web/public/icons/`, and writes the D1 seed (`apps/api/dist/seed.sql`). `npm run build` runs it first |
+| `npm run data:build` | Builds the catalog snapshot (`apps/web/public/data/catalog.json`), one file per priced region with `index.json` (`apps/web/public/data/catalog/`), and copies the logos to `apps/web/public/icons/`. `npm run build` runs it first |
 | `npm run data:icons` | Fetches the best icon of every provider without a logo into `data/logos/<id>.png`. `-- netflix` fetches one again; `-- hulu=https://hulu.com` works for any site |
 
 ## Contributing

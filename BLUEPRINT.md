@@ -128,8 +128,9 @@ served from a cache, it is cheap and easy to maintain.
 
 **Key ideas**
 1. **The server only knows public catalog data.** Every user-specific record lives in IndexedDB.
-2. **The app downloads a catalog snapshot** (a static file: from M2.1 its region's `/data/catalog/<region>.json`,
-   the same JSON as `GET /api/v1/catalog?region=`; before that the full `catalog.json`), caches it, and does
+2. **The app downloads a catalog snapshot** (static files: `/data/catalog/index.json` lists the regions with a
+   file, then its region's `/data/catalog/<region>.json`, the same JSON as `GET /api/v1/catalog?region=`, or the
+   full `catalog.json` for a region without one; section 6.3), caches it, and does
    search, filtering and optimization locally. This makes the UI fast, lets it work offline, and keeps API calls far below the free limit.
    Per-item endpoints still exist for deep links and for other consumers of the API.
 3. **Everything is static or cached.** The Worker runs only for `/api/*` requests, and those responses are edge-cached.
@@ -174,7 +175,7 @@ simply-sub/
 │  │  │  ├─ app.routes.ts
 │  │  │  └─ app.config.ts
 │  │  ├─ public/             # favicon, logo; `npm run data:build` writes data/catalog.json, the per-region
-│  │  │                      # data/catalog/<region>.json (M2.1) and icons/ here (gitignored)
+│  │  │                      # data/catalog/<region>.json and index.json, and icons/ here (gitignored)
 │  │  └─ proxy.conf.json     # dev: /api → wrangler dev
 │  │
 │  └─ api/                   # Cloudflare Worker
@@ -222,8 +223,9 @@ simply-sub/
 ├─ scripts/                  # run by tsx; type-checked by `npm run build` (scripts/tsconfig.json)
 │  ├─ generate-json-schema.ts  # core's Zod schemas → data/schema/*.schema.json (`--check` in CI)
 │  ├─ validate-data.ts       # data/**/*.yaml → core's validateCatalog → file:line messages (section 6.2)
-│  ├─ build-catalog.ts       # data/ → apps/web/public/data/catalog.json + apps/api/dist/seed.sql (section 6.3)
-│  ├─ lib/catalog-files.ts   # reads, parses and checks data/ for the two scripts above
+│  ├─ build-catalog.ts       # data/ → apps/web/public/data/catalog.json, catalog/<region>.json, index.json (6.3)
+│  ├─ seed-d1.ts             # catalog.json + what D1 holds → apps/api/dist/seed.sql, run on D1 (sections 5.3, 7.6)
+│  ├─ lib/catalog-files.ts   # reads, parses and checks data/ for the catalog scripts
 │  ├─ fetch-icons.ts         # any website's best icon → data/logos/<id>.png (`npm run data:icons`)
 │  ├─ price-check.ts         # nightly price monitor (section 6.4)
 │  └─ draft-provider.ts      # AI-assisted: pricing page URL → draft YAML
@@ -604,7 +606,8 @@ can't drift. Everything is exported from `@simply-sub/core`.
 | `json-schema.ts` | `catalogJsonSchemas()`: the JSON Schema of each kind of file |
 | `validate-catalog.ts`, `validate-features.ts` | `validateCatalog(files, today)` (`CatalogIssue`), `formatCatalogIssue`: the cross-file checks (section 6.2) |
 | `snapshot.ts` | Output: `catalogSnapshotSchema` (`CatalogSnapshot`), `catalogDataSchema`, `catalogMetaSchema`, `snapshotProviderSchema`; `readCatalogSource`, `buildCatalogData`, `buildCatalogMeta` (section 6.3) |
-| `seed-sql.ts` | `buildSeedSql(snapshot)`: the D1 seed (sections 5.3, 6.3) |
+| `region-files.ts` | `regionPrices`, `regionSnapshot`, `catalogIndexSchema` (`CatalogIndex`), `buildCatalogIndex`, `regionFileFor`: the per-region catalog files (section 6.3) |
+| `seed-sql.ts` | `buildSeedSql(snapshot, { providerHashes, current })`, `seedStateQueries`, `readSeedState` (`SeedState`), `seedFormat`: the D1 seed, which writes only what changed (sections 5.3, 6.3) |
 | `monthly-equivalent.ts` | `monthlyEquivalent(price)` (PROJECT-PLAN §3.1) |
 | `regions.ts` | `isoRegions`, `regionGroups` (EU), `groupsOf`, `membersOf`, `isCatalogRegion`, `regionProblem`: the region codes a catalog file can use (section 4.7) |
 | `availability.ts` | `providerAvailability(provider, region)`, `availability(prices, provider, region)` (`Availability`): whether something is sold in a region (section 4.7) |
@@ -944,11 +947,14 @@ The rules live in `packages/core/src/tax/` and run in M7.1:
 - **Cache API** with `Cache-Control: public, max-age=3600, stale-while-revalidate=86400`. Catalog responses
   carry a `catalogVersion` as the ETag: the first 7 hex digits of a SHA-256 of the snapshot's `data`, so it
   changes only when the catalog does, never on a code-only deploy (decided in M1.5; it was the Git commit SHA).
+  `GET /catalog` reads it from the static `data/catalog/index.json`, deployed with the catalog files, so it always
+  describes the body it's sent with. The `catalog` row in D1 can't be the source: the seed runs before the new
+  files are deployed, so clients would cache the old body under the new version (M2.1).
 
 ### 5.2 Endpoints (all under `https://sub.simplely.ca/api/v1`)
 | Method & path | Purpose |
 |---|---|
-| `GET /catalog` | Full snapshot (providers, plans, add-ons, bundles, features, **all regions' prices**), ETag-cached. `?region=CA` trims it to the prices `pick-price` could use for that region. Both are static files built by `data:build` (section 6.3), which the Worker reads through its `ASSETS` binding, not D1 rows. The app fetches its region's static file directly, which uses no Worker quota |
+| `GET /catalog` | Full snapshot (providers, plans, add-ons, bundles, features, **all regions' prices**), ETag-cached. `?region=CA` keeps only the prices pickPrice can pick for a buyer there (section 6.3). Both are static files built by `data:build`, which the Worker streams through its `ASSETS` binding without parsing them, not D1 rows. The app fetches its region's static file directly, which uses no Worker quota |
 | `GET /providers?q=&category=&feature=<rankKey,…>&minPrice=&maxPrice=&interval=&region=&currency=&nativeOnly=&sort=&cursor=&limit=` | Search and filter (for deep links and other consumers) |
 | `GET /providers/:id` | One provider with its plans and add-ons |
 | `GET /plans/:id` | One plan |
@@ -957,7 +963,7 @@ The rules live in `packages/core/src/tax/` and run in M7.1:
 | `GET /bundles?plans=netflix.standard,crave.premium` | Bundles that include any of the given plans |
 | `GET /icon?domain=example.com` | Favicon proxy for **custom subscriptions** (Google, then DuckDuckGo, as core's `iconServiceUrls` orders them → the best square PNG, or the fallback), cached for 30 days in KV. Catalog icons are fetched once by `scripts/fetch-icons.ts` into `data/logos/` (committed, so builds never fetch) and served as static files at `/icons/<id>.png` |
 | `GET /fx?base=CAD` | Proxied and cached Frankfurter rates (daily) |
-| `GET /health` | Returns the API version, and from M2.1 the catalog version, its build time and counts |
+| `GET /health` | Returns the API version, and the catalog version, build time and counts that D1 holds (the `catalog` row, section 5.3) |
 | *(Phase 5)* `POST /reports` | "This price looks wrong" reports (Turnstile-protected, rate-limited) |
 | *(Phase 5)* `GET /cal/:token.ics` | Opt-in live calendar feed (section 11.3) |
 
@@ -965,11 +971,12 @@ Example requests and responses for every endpoint are in [docs/api-output-exampl
 Successful responses use `{ "data": …, "meta": … }`, and errors use `{ "error": { "code": "not_found", "message": "…" } }`.
 Responses are JSON and versioned through the `/v1` path. Breaking changes go under `/v2`.
 
-### 5.3 D1 schema (`apps/api/migrations/0001_init.sql`)
+### 5.3 D1 schema (`apps/api/migrations/`)
 The database `simply-sub-catalog` (binding `DB`) lives in Eastern North America (`enam`). Columns, condensed
-(the migration file has the full SQL); every table is `STRICT`, so SQLite enforces the column types:
+(`0002_seed_what_changed.sql` has the full SQL). Every table is `STRICT`, so SQLite enforces the column types, and
+`WITHOUT ROWID` (since M2.1), so its primary key is the table itself rather than a second index next to a rowid:
 ```sql
-providers     (id PK, name, category, spend_category, json)
+providers     (id PK, name, category, spend_category, hash, json)
 plans         (id PK, provider_id → providers, name, json)
 prices        (plan_id → plans, region, currency, amount, interval, interval_count, monthly_equiv,
                PK (plan_id, region, currency, interval, interval_count))
@@ -977,50 +984,71 @@ features      (id PK, category, json)
 plan_features (plan_id → plans, feature_id → features, value, rank_value, PK (plan_id, feature_id, value))
 bundles       (id PK, json)
 bundle_plans  (bundle_id → bundles, plan_id → plans, PK (bundle_id, plan_id))
-snapshots     (region PK, sha, built_at, json)        -- prebuilt /catalog payloads
+catalog       (id PK = 1, version, built_at, seed_format, counts)   -- the one row: what D1 holds
 indexes: prices (region, monthly_equiv) · plan_features (feature_id, rank_value) · plans (provider_id)
          · bundle_plans (plan_id)
 ```
-- Every `→` is a foreign key with `ON DELETE CASCADE`, so the full reseed (M1.5) can empty the parent tables and
-  leave no orphans. D1 always enforces foreign keys.
+- Every `→` is a foreign key with `ON DELETE CASCADE`, so deleting a provider removes its plans, prices, plan
+  features and bundle links, and emptying the parent tables leaves no orphans. D1 always enforces foreign keys.
 - `rank_value` stores an enum's position (1080p = 2, 4k = 3) or the number itself, so rank-key filters like
   `feature=video.quality=1080p` ("1080p or better") become plain numeric comparisons. `unlimited` stores 1e308
   (above any number, and still a finite number in JSON) with `value` `unlimited`. A boolean stores 1 or 0, with
   `value` `true` or `false`. A `set` feature has one row per member, with no `rank_value`.
-- `snapshots.sha` and `built_at` are the catalog version and build time (the migration's comment still says "Git
-  commit", from before M1.5). The row with region `ALL` holds the full snapshot, the same text as `catalog.json`.
-  The seed writes it in pieces (`UPDATE … SET json = json || …`) because D1 rejects a statement over 100 KB. M2.1
-  replaces this table (below).
+- The `catalog` row is the catalog D1 holds: `version` and `built_at` are the snapshot's `catalogVersion` and
+  `generatedAt`, `counts` is its `meta.counts` as JSON, and `seed_format` is the `seedFormat` in core that it was
+  written with. `/health` reports it. `providers.hash` is a SHA-256 of the provider's `json`. Until M2.1 a
+  `snapshots` table held the full snapshot in D1 as well.
+- D1 rejects a statement over 100 KB, so the seed checks every statement's size.
 - Only plan prices go in `prices`. Add-on prices stay in the provider's `json`, and bundle prices in the bundle's.
 - Add-ons stay inside each provider's `json`; they get their own table only if an endpoint needs to filter on them.
 - Schema changes are new numbered migrations, never edits to an applied one: `npm -w apps/api run
   db:migrate:local`, then `db:migrate:remote` (or the deploy command, section 7.6). The API tests apply every
   migration to a local D1 first (`apps/api/test/apply-migrations.ts`).
 
-**Free-plan limits, and what M2.1 changes.** D1's free plan allows 5 GB of storage per account (500 MB per
-database), 5 million rows read and **100,000 rows written per day**, and no row over 2 MB. Each index entry counts
-as another row written, and so does each deleted row. Measured on the current seed (5 providers, run in workerd):
-- A full reseed writes **1,633 rows** (1,217 into empty tables, the 1.22k the dashboard showed), about 330 per
-  provider. `plan_features` is 70% of it. At about 300 providers one full reseed would use a whole day's writes,
-  and every deploy reseeds, even a code-only one. Going over makes the seed fail, which stops the deploy until
-  00:00 UTC (the app itself keeps working: it reads static files, never D1).
-- Storage isn't the constraint: 106.5 KB now, about 21 KB per provider, so a 500 MB database holds about 20,000.
-- The `ALL` snapshot row is a constraint too: at about 6 KB per provider, it passes the 2 MB row limit at around
-  300 providers.
+**Free-plan limits, and what M2.1 changed.** D1's free plan allows 5 GB of storage per account (500 MB per
+database), 5 million rows read and **100,000 rows written per day**, and no row over 2 MB. Going over makes the
+seed fail, which stops the deploy until 00:00 UTC (the app itself keeps working: it reads static files, never D1).
+Before M2.1 every deploy reseeded in full, even a code-only one: 1,633 rows at 5 providers, about 330 each, so at
+about 300 providers one deploy would have used a whole day's writes. The full snapshot's row in `snapshots` would
+also have passed 2 MB at about 300 providers. Storage isn't the constraint: about 21 KB per provider, so a 500 MB
+database holds about 20,000.
 
-So M2.1:
-1. **Moves the snapshots out of D1.** `data:build` writes the full snapshot and one per region as static files
-   (section 6.3), and `GET /catalog` serves them through the `ASSETS` binding. Static files are free, have no
-   request cap and allow 25 MiB each.
-2. **Replaces `snapshots`** with a one-row `catalog` table (version, build time, counts) for `/health` and step 3.
-3. **Writes only what changed.** The seed step reads the version in D1 and does nothing when it matches the
-   build's, so code-only deploys write no rows. Otherwise it compares each provider's hash (a new `hash` column)
-   and replaces only the changed providers (deleting one cascades to its plans, prices and plan features). Features
-   are upserted, never deleted and re-inserted, because a deleted feature would cascade to every plan's rows for
-   it. A full reseed runs only after a migration that changes these tables, or by hand. A typical price PR then
-   writes a few hundred rows.
-4. **Rebuilds the tables `WITHOUT ROWID`** in migration 0002. Every table has a text or composite primary key, so
-   SQLite otherwise keeps a second index for it; measured, this cuts a full reseed from 1,633 rows to 1,217.
+M2.1 changed four things:
+1. **The snapshots are static files** (section 6.3), which `GET /catalog` streams through the `ASSETS` binding.
+   Static files are free, have no request cap and allow 25 MiB each.
+2. **A one-row `catalog` table** replaces `snapshots`: the version, build time and counts, for `/health` and the
+   seed.
+3. **The seed writes only what changed** (`buildSeedSql` in core; `scripts/seed-d1.ts` reads what D1 holds with
+   `seedStateQueries` and runs the result, section 7.6):
+   - nothing at all when nothing differs, which is every code-only deploy;
+   - a provider whose `hash` changed, or a new one, is deleted (the cascade takes its rows) and inserted again,
+     and unchanged bundles that include its plans are linked to them again. A removed provider is deleted;
+   - features are upserted (`INSERT … ON CONFLICT DO UPDATE`), never deleted and inserted again, which would
+     cascade to every plan's rows for them. A removed feature is deleted. `rank_value` depends on an enum's value
+     order, so when values move (1440p added before 4k), one `UPDATE` per moved value fixes the rows of unchanged
+     providers, writing only those whose rank changed;
+   - bundles are compared by their `json`, and a changed one is replaced;
+   - the `catalog` row is written when the version changes, so a `categories.yaml` edit writes 1 row (D1 has no
+     categories table).
+
+   A full reseed (empty every table, insert everything) runs only when D1 has no `catalog` row (a new database, or
+   the first deploy after a migration that rebuilds the tables, like 0002), when the row's `seed_format` differs
+   from core's `seedFormat` (bumped when a migration or a derived column's rule changes), or by hand with `--full`.
+4. **The tables are `WITHOUT ROWID`** (migration 0002).
+
+Measured in workerd at 5 providers (`apps/api/test/seed.spec.ts` checks the rules; these numbers are from one
+run). An insert writes its row plus one per index entry, and a delete writes one per row:
+
+| Deploy | Rows written |
+|---|---|
+| Code only (the same catalog) | 0 |
+| One provider's price changed | 18 (Mullvad), 63 (Crave), 90 (Netflix), 114 (Disney+), 882 (Proton) |
+| Full seed into empty tables (the first deploy after 0002) | 800 |
+| Full reseed by hand | 1,216 |
+
+Proton is the outlier: its suite plans each list many features, and `plan_features` holds most of every
+provider's rows. If price PRs for providers that size ever matter, a hash per plan would replace one plan instead
+of the whole provider.
 
 ### 5.4 Abuse protection
 The API is public and read-only on purpose: it serves public catalog data, and no user data ever reaches the
@@ -1072,7 +1100,7 @@ export default api;   // non-API paths never reach the Worker (see run_worker_fi
 
 ### 6.1 Principle: Git is the database, D1 is a cache
 People (and bots) edit `data/**/*.yaml` through pull requests. CI validates every change. Merging to `main`
-rebuilds D1 from scratch. This gives you:
+rebuilds the static catalog files and updates D1 with what changed (section 5.3). This gives you:
 - full history and easy rollback (`git revert`)
 - reviewable diffs ("Netflix Premium 23.99 → 24.99")
 - no admin UI to build or secure
@@ -1129,10 +1157,10 @@ Each message is `file:line path: what's wrong and what to write`, for example
 an annotation on the PR's Files tab. GitHub shows up to 10 errors and 10 warnings per step that way; the log
 has all of them.
 
-### 6.3 Build & seed (`scripts/build-catalog.ts`, `npm run data:build`)
-`npm run build` runs it before the web build, so CI builds the catalog on every PR and Workers Builds on every
-deploy (section 7.6). The logic is in `packages/core` (`snapshot.ts`, `seed-sql.ts`); the script reads and writes
-the files.
+### 6.3 Build & seed (`scripts/build-catalog.ts` and `scripts/seed-d1.ts`)
+`npm run build` runs `npm run data:build` (`build-catalog.ts`) before the web build, so CI builds the catalog on
+every PR and Workers Builds on every deploy (section 7.6). The deploy then seeds D1 with `seed-d1.ts`. The logic is
+in `packages/core` (`snapshot.ts`, `region-files.ts`, `seed-sql.ts`); the scripts read and write the files.
 1. Load and validate all YAML the way `data:validate` does (section 6.2). Any error stops the build; warnings are
    only counted.
 2. Build the snapshot `{ data, meta }`:
@@ -1141,29 +1169,40 @@ the files.
      savings in core for the user's region, and `GET /bundles` adds them per request (M2.4).
    - `meta` is `catalogVersion` (section 5.1), `generatedAt` (the build time, UTC), every priced region, and
      counts.
-3. Write `apps/web/public/data/catalog.json` (gitignored), the exact JSON of the snapshot, and copy each logo
-   from `data/logos/` to `apps/web/public/icons/<id>.png`. The Angular build publishes them as
-   `/data/catalog.json` and `/icons/<id>.png`, and `ng serve` serves them too. The build
+3. Write the snapshot files into `apps/web/public/data/` (gitignored), which the Angular build publishes under
+   `/data/` and `ng serve` serves too:
+   - `catalog.json`, the exact JSON of the snapshot;
+   - `catalog/<region>.json` for every priced region except `GLOBAL`: each country, and each group (`EU`), with
+     `meta.region` set. These are the `GET /catalog?region=` bodies;
+   - `catalog/index.json`: the `catalogVersion`, `generatedAt` and the regions that have a file.
+4. Copy each logo from `data/logos/` to `apps/web/public/icons/<id>.png`, published as `/icons/<id>.png`. The build
    never fetches icons: `npm run data:icons` does that once per provider (section 13.4).
-4. Write `apps/api/dist/seed.sql`, one statement per line: `DELETE FROM` every table, then insert every row with
-   the derived columns (`monthly_equiv`, `rank_value`, section 5.3), then the snapshot row `ALL`.
-5. The deploy runs `wrangler d1 migrations apply simply-sub-catalog --remote`, then
-   `wrangler d1 execute simply-sub-catalog --remote --file dist/seed.sql` (section 7.6).
+5. The deploy applies the migrations, then runs `seed-d1.ts` (section 7.6). It reads what D1 holds with
+   `wrangler d1 execute --json`, writes the statements for what changed to `apps/api/dist/seed.sql` (one per line,
+   with the derived columns `monthly_equiv` and `rank_value`, section 5.3) and runs them with
+   `wrangler d1 execute --file`, which leaves D1 as it was if a statement fails. It writes nothing when D1 already
+   holds the build's catalog.
 
-**M2.1 changes steps 3–5** (section 5.3 has the numbers behind it):
-- Step 3 also writes `data/catalog/<region>.json` for each country in `meta.regions`, and
-  `data/catalog/other.json` for every other country. Each keeps the prices pickPrice can pick there: the
-  country's own, its group's (`EU`), `GLOBAL` and the fallback regions (US, GB, EU). Those are the
-  `GET /catalog?region=` bodies. The app loads its country's file, plus the file of any other region a list item
-  was bought in (`ListItem.region`), so it never downloads every region's prices. `catalog.json` stays the full
-  snapshot.
-- Steps 4–5 write only what changed in D1, and nothing when the version in D1 matches. The snapshot rows leave
-  D1.
+**A region's file** (`regionSnapshot` in core) keeps every provider, plan, add-on and bundle, each with only the
+prices pickPrice can pick for a buyer in that region, whatever their currency: the region's own prices, or else its
+group's (`EU` for a Swede), since pickPrice's first rule then always wins. An item priced in neither keeps every
+price: rules 2 to 4 can pick any region, depending on the buyer's currency (a Canadian who shows EUR gets a German
+EUR price before a US one). A test checks that pickPrice and availability give the same answers from each region's
+file as from the full catalog, for every region and currency. The version, build time, `regions` and counts are
+the full snapshot's. With today's catalog, `CA.json` drops the US prices of every item that has a Canadian price.
+
+**Which file a buyer gets** (`regionFileFor`): their country's, else their group's (a Swede gets `EU.json` when
+Sweden has no prices of its own), else the full `catalog.json`. A country with no prices and no group needs every
+price, since any region's can be its fallback, so there is no separate file for "other" countries. A missing
+static file is answered with the app's `index.html` (the SPA fallback), so the Worker and the app look the region
+up in `index.json` instead of trying a file. The app loads its country's file, plus the file of any other region a
+list item was bought in (`ListItem.region`), so it never downloads every region's prices.
 
 The cheapest price per feature (what `api-all-example.json` tried to store) is computed on demand with today's
 exchange rates instead, so it's never stale.
 
-The catalog will be small (hundreds of plans), so a full reseed takes seconds and stays far inside D1's free write limits.
+The catalog will be small (hundreds of plans), so even a full reseed takes seconds. What limits deploys is D1's
+100,000 rows written a day, which is why the seed writes only what changed (section 5.3).
 
 ### 6.4 Automated price monitoring (nightly)
 Runs on the Cloudflare Cron Worker by default, with GitHub Actions as a fallback (section 7.7). The steps are the same either way:
@@ -1382,8 +1421,8 @@ ends with `wrangler deploy --dry-run`, which bundles the Worker without logging 
 
 ### 7.5 Local development
 - Terminal 1: `npm run dev:api` (`wrangler dev`, port 8787, with a local D1). Seed it with `npm run data:build`,
-  then, in `apps/api`, `npm run db:migrate:local` and `npx wrangler d1 execute simply-sub-catalog --local --file
-  dist/seed.sql`. It also serves the last production build of the app at http://localhost:8787/ (run
+  then `npm -w apps/api run db:seed:local` (the migrations, then `seed-d1.ts --local`; add `-- --full` to replace
+  everything). It also serves the last production build of the app at http://localhost:8787/ (run
   `npm run build` first to refresh it), and the API at http://localhost:8787/api/v1/.
 - Terminal 2: `npm run dev:web` (`ng serve` with `apps/web/proxy.conf.json`):
   ```json
@@ -1400,15 +1439,21 @@ Settings → Build*). The settings as they are now:
 | Production branch | `main` |
 | Root directory | `apps/api` |
 | Build command | `cd ../.. && npm ci && npm run build` |
-| Deploy command | `npx wrangler d1 migrations apply simply-sub-catalog --remote && npx wrangler d1 execute simply-sub-catalog --remote --file dist/seed.sql && npx wrangler deploy` (since M1.5; before, `npx wrangler deploy`) |
+| Deploy command | `npm run deploy` (since M2.1): `apps/api/package.json` runs `db:seed:remote` (the migrations, then `seed-d1.ts --remote`) and then `wrangler deploy`. From M1.5 it was `npx wrangler d1 migrations apply simply-sub-catalog --remote && npx wrangler d1 execute simply-sub-catalog --remote --file dist/seed.sql && npx wrangler deploy`, and before that `npx wrangler deploy` |
 | Preview (non-production branch) command | `npx wrangler versions upload`: a preview link on workers.dev, production untouched |
 | Build variable | `NODE_VERSION` = `24.19.0` (the image defaults to 24.18.0). The first build detected Node 24.19.0 and npm 12.0.2 (from `packageManager`); npm 10.9.2 would also install our lockfile cleanly |
 | API token | `simply-sub-builds`, created by Workers Builds: Workers scripts, KV, R2, **D1 (edit)**, routes on the zone, and a few unused products. Cloudflare keeps it; it's never in GitHub |
 
-- **Since M1.5** the deploy also reseeds D1: the deploy command above applies any new migrations, runs the
-  `dist/seed.sql` that `npm run build` wrote (section 6.3), and only then deploys, so a failing seed stops the
-  deploy. The build command needs no change, because `npm run build` runs `data:build`. The build token already
-  has D1 edit. Preview builds never touch D1, since they share the production database.
+- **The deploy seeds D1 first:** `npm run deploy` applies any new migrations, writes only what changed to D1
+  (section 6.3) and only then deploys, so a failing seed stops the deploy. Its steps live in `apps/api/package.json`,
+  so a change to them is reviewed in a PR and never has to be made in the dashboard at the moment of a merge. The
+  build command needs no change, because `npm run build` runs `data:build`. The build token already has D1 edit.
+  Preview builds never touch D1, since they share the production database; a preview of a change that needs a new
+  migration can fail on D1 queries until it's merged.
+- **Rolling out M2.1:** with the PR green, change the deploy command to `npm run deploy` and merge straight away
+  (a push to `main` in between would fail on the missing script before touching D1 or the Worker). The merge's
+  deploy applies 0002, which empties D1, finds no `catalog` row and seeds in full, then deploys. A second deploy of
+  the same commit (*Retry build*) should log `already holds catalog …: nothing to write`.
 - **Domain:** the custom domain `sub.simplely.ca` (section 7.3), whose DNS record and certificate the deploy
   creates. From M0.9 until the pre-M2 review the Worker had two path routes on `simplely.ca` instead, which is why
   the zone still has a placeholder `AAAA @ 100::` record (proxied): routes only fire for a proxied hostname. Nothing
@@ -2030,6 +2075,21 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3).
+
+**Resolved (2026-10-24, M2.1)**
+- **Region files** keep the prices pickPrice can pick there in any currency: the region's own, else its group's,
+  else every price. They agree with pickPrice exactly, which the documented "own + group + GLOBAL + US/GB/EU" rule
+  didn't. `other.json` was dropped: a country without prices needs every price, so it gets `catalog.json`
+  (section 6.3).
+- **The ETag** comes from the static `data/catalog/index.json`, never from D1, which is seeded before the files
+  are deployed (section 5.1).
+- **The seed** reads what D1 holds in the deploy step (`scripts/seed-d1.ts`) and writes only what changed. A full
+  reseed happens only without a `catalog` row, on a new `seedFormat`, or by hand. An enum's moved values update
+  `rank_value` in place (section 5.3).
+- **The deploy command** is `npm run deploy`, so its steps live in Git (section 7.6).
+- **Left as it is:** the files' `generatedAt` is the build time, so a code-only deploy changes their bytes, and it
+  is then newer than `/health`'s `catalogUpdatedAt`. The app (M4.3) checks `index.json`'s version before
+  downloading a region file.
 
 **Resolved (2026-10-23, security review)**
 - **Domain:** the app and the API moved to `sub.simplely.ca`, an origin of their own, because browser storage is

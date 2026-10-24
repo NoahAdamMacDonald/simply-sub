@@ -16,13 +16,13 @@
       "dates": "Dates are YYYY-MM-DD. Timestamps are ISO 8601 in UTC.",
       "caching": "GET responses carry an ETag based on the catalog version. Send If-None-Match to get 304 Not Modified."
     },
-    "appUsage": "The web app reads the catalog from the static file https://sub.simplely.ca/data/catalog.json (the same JSON as GET /catalog), and catalog icons from https://sub.simplely.ca/icons/<providerId>.png. The only Worker endpoints it calls are GET /fx and GET /icon (for custom subscriptions). The other endpoints serve deep links, future features and other API consumers.",
+    "appUsage": "The web app reads the catalog from static files: https://sub.simplely.ca/data/catalog/index.json (the catalog version and the regions with a file of their own), then its region's https://sub.simplely.ca/data/catalog/<region>.json, or /data/catalog.json for a region without one (the same JSON as GET /catalog?region=). Catalog icons are static files too, at https://sub.simplely.ca/icons/<providerId>.png. The only Worker endpoints it calls are GET /fx and GET /icon (for custom subscriptions). The other endpoints serve deep links, future features and other API consumers.",
     "exchangeRatesUsed": "Every converted price below uses the GET /fx example: 1 USD = 1.3806 CAD and 1 EUR = 1.5060 CAD (ECB rates for 2026-10-21, illustrative)."
   },
   "endpoints": {
     "GET /health": {
       "description": "Liveness and version information.",
-      "_note": "catalogVersion, catalogUpdatedAt and counts come with M2.1, which records them in D1 when it seeds. Until then /health returns only status and apiVersion.",
+      "_note": "catalogVersion, catalogUpdatedAt and counts describe the catalog D1 holds: the seed writes them when the catalog version changes (BLUEPRINT §5.3), so catalogUpdatedAt is the build time of the first deploy with that version. A D1 that hasn't been seeded yet has none of them, and /health returns only status and apiVersion.",
       "examples": [
         {
           "title": "Healthy",
@@ -59,9 +59,9 @@
       ]
     },
     "GET /catalog": {
-      "description": "The full catalog snapshot: features, categories, providers (with plans, add-ons and every region's prices) and bundles. Also published, byte for byte, as the static file /data/catalog.json, which is what the app fetches.",
+      "description": "The full catalog snapshot: features, categories, providers (with plans, add-ons and every region's prices) and bundles. Served from the static files the build writes, byte for byte: /data/catalog.json, or a region's /data/catalog/<region>.json. The ETag is the catalog version, the same for every region.",
       "query": {
-        "region": "Optional. Keeps only the prices pickPrice could use for this region (its own prices, its group's such as EU, GLOBAL prices and the fallback regions): the same text as the static file the app loads for that region (BLUEPRINT §6.3)."
+        "region": "Optional. An ISO 3166-1 region code, a group (EU) or GLOBAL. Keeps only the prices pickPrice can pick for a buyer there, whatever their currency: for each plan, add-on and bundle, the region's own prices, or else its group's (EU for a Swede). An item priced in neither keeps every price, since any of them can be the fallback. Every item stays, and meta.region names the region. The response is the static file /data/catalog/<region>.json, or the group's file for a country without one of its own; a region with neither gets the full snapshot, without meta.region (BLUEPRINT §6.3)."
       },
       "examples": [
         {
@@ -321,6 +321,257 @@
           }
         },
         {
+          "title": "One region's prices (trimmed to 2 providers for this example)",
+          "request": {
+            "method": "GET",
+            "url": "https://sub.simplely.ca/api/v1/catalog?region=CA",
+            "headers": {
+              "Accept": "application/json",
+              "Accept-Encoding": "br, gzip"
+            }
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Content-Encoding": "br",
+              "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+              "ETag": "\"c4f9a21\"",
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
+            },
+            "body": {
+              "data": {
+                "schemaVersion": 1,
+                "features": [
+                  {
+                    "id": "video.quality",
+                    "name": "Video quality",
+                    "category": "streaming",
+                    "type": "enum",
+                    "values": [
+                      { "id": "480p", "name": "480p (SD)" },
+                      { "id": "720p", "name": "720p (HD)" },
+                      { "id": "1080p", "name": "1080p (Full HD)", "headline": true },
+                      { "id": "4k", "name": "4K (Ultra HD)", "aliases": ["uhd", "2160p"], "headline": true }
+                    ],
+                    "aliases": ["resolution", "picture quality"]
+                  },
+                  {
+                    "id": "video.hdr",
+                    "name": "HDR",
+                    "category": "streaming",
+                    "type": "boolean",
+                    "aliases": ["dolby vision", "hdr10"]
+                  },
+                  {
+                    "id": "audio.dolby-atmos",
+                    "name": "Dolby Atmos",
+                    "category": "streaming",
+                    "type": "boolean",
+                    "aliases": ["spatial audio"]
+                  },
+                  {
+                    "id": "streaming.ad-free",
+                    "name": "Ad free",
+                    "category": "streaming",
+                    "type": "boolean",
+                    "aliases": ["no ads", "ad-free"]
+                  },
+                  {
+                    "id": "streaming.concurrent-streams",
+                    "name": "Simultaneous streams",
+                    "category": "streaming",
+                    "type": "number",
+                    "unit": "devices",
+                    "tiers": [
+                      { "id": "1", "name": "Single device", "min": 1, "max": 1 },
+                      { "id": "2-4", "name": "2 to 4 devices", "min": 2, "max": 4 },
+                      { "id": "5+", "name": "More than 4 devices", "min": 5 }
+                    ],
+                    "aliases": ["screens", "streams", "devices at once"]
+                  },
+                  {
+                    "id": "streaming.download-devices",
+                    "name": "Download devices",
+                    "category": "streaming",
+                    "type": "number",
+                    "unit": "devices",
+                    "tiers": [
+                      { "id": "1+", "name": "Offline downloads", "min": 1 },
+                      { "id": "6+", "name": "Downloads on 6+ devices", "min": 6 }
+                    ],
+                    "aliases": ["offline viewing", "downloads"]
+                  },
+                  {
+                    "id": "vpn.included",
+                    "name": "VPN",
+                    "category": "vpn",
+                    "type": "boolean",
+                    "headline": true,
+                    "aliases": ["vpn", "virtual private network"]
+                  },
+                  {
+                    "id": "vpn.devices",
+                    "parent": "vpn.included",
+                    "name": "VPN devices",
+                    "category": "vpn",
+                    "type": "number",
+                    "unit": "devices",
+                    "tiers": [
+                      { "id": "1-5", "name": "1 to 5 devices", "min": 1, "max": 5 },
+                      { "id": "6-10", "name": "6 to 10 devices", "min": 6, "max": 10 },
+                      { "id": "11+", "name": "More than 10 devices", "min": 11 }
+                    ]
+                  },
+                  {
+                    "id": "vpn.unlimited-traffic",
+                    "parent": "vpn.included",
+                    "name": "Unlimited VPN traffic",
+                    "category": "vpn",
+                    "type": "boolean",
+                    "aliases": ["unlimited data", "unlimited bandwidth"]
+                  }
+                ],
+                "categories": {
+                  "service": [
+                    { "id": "streaming", "name": "Streaming video", "icon": "live_tv" },
+                    { "id": "vpn", "name": "VPN", "icon": "vpn_lock" }
+                  ],
+                  "feature": [
+                    { "id": "streaming", "name": "Streaming" },
+                    { "id": "vpn", "name": "VPN" }
+                  ],
+                  "spend": [
+                    { "id": "streaming", "name": "Streaming & digital media" },
+                    { "id": "software", "name": "Software & online services" }
+                  ]
+                },
+                "providers": [
+                  {
+                    "id": "netflix",
+                    "name": "Netflix",
+                    "website": "https://www.netflix.com",
+                    "iconUrl": "https://sub.simplely.ca/icons/netflix.png",
+                    "category": "streaming",
+                    "spendCategory": "streaming",
+                    "acceptedNetworks": ["visa", "mastercard", "amex"],
+                    "billingCurrency": { "CA": "CAD", "US": "USD" },
+                    "cancelUrl": "https://www.netflix.com/cancelplan",
+                    "sources": { "pricing": "https://help.netflix.com/en/node/24926" },
+                    "plans": [
+                      {
+                        "id": "netflix.standard-ads",
+                        "name": "Standard with ads",
+                        "link": "https://www.netflix.com/signup",
+                        "features": {
+                          "video.quality": "1080p",
+                          "video.hdr": false,
+                          "streaming.ad-free": false,
+                          "streaming.concurrent-streams": 2,
+                          "streaming.download-devices": 2
+                        },
+                        "prices": [
+                          { "region": "CA", "currency": "CAD", "amount": 7.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14", "sourceUrl": "https://help.netflix.com/en/node/24926" }
+                        ]
+                      },
+                      {
+                        "id": "netflix.standard",
+                        "name": "Standard",
+                        "link": "https://www.netflix.com/signup",
+                        "features": {
+                          "video.quality": "1080p",
+                          "video.hdr": false,
+                          "streaming.ad-free": true,
+                          "streaming.concurrent-streams": 2,
+                          "streaming.download-devices": 2
+                        },
+                        "prices": [
+                          { "region": "CA", "currency": "CAD", "amount": 18.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14", "sourceUrl": "https://help.netflix.com/en/node/24926" }
+                        ],
+                        "addOnIds": ["netflix.extra-member-ads", "netflix.extra-member"],
+                        "addOnLimit": 1
+                      },
+                      {
+                        "id": "netflix.premium",
+                        "name": "Premium",
+                        "link": "https://www.netflix.com/signup",
+                        "features": {
+                          "video.quality": "4k",
+                          "video.hdr": true,
+                          "audio.dolby-atmos": true,
+                          "streaming.ad-free": true,
+                          "streaming.concurrent-streams": 4,
+                          "streaming.download-devices": 6
+                        },
+                        "prices": [
+                          { "region": "CA", "currency": "CAD", "amount": 23.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14", "sourceUrl": "https://help.netflix.com/en/node/24926" }
+                        ],
+                        "addOnIds": ["netflix.extra-member-ads", "netflix.extra-member"],
+                        "addOnLimit": 2
+                      }
+                    ],
+                    "addOns": [
+                      {
+                        "id": "netflix.extra-member-ads",
+                        "name": "Extra member (with ads)",
+                        "grantsPlan": "netflix.standard-ads",
+                        "prices": [
+                          { "region": "CA", "currency": "CAD", "amount": 5.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14" }
+                        ]
+                      },
+                      {
+                        "id": "netflix.extra-member",
+                        "name": "Extra member",
+                        "grantsPlan": "netflix.standard",
+                        "prices": [
+                          { "region": "CA", "currency": "CAD", "amount": 7.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14" }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                                        "id": "mullvad",
+                    "name": "Mullvad VPN",
+                    "aliases": ["mullvad"],
+                    "website": "https://mullvad.net",
+                    "iconUrl": "https://sub.simplely.ca/icons/mullvad.png",
+                    "category": "vpn",
+                    "spendCategory": "software",
+                    "billingCurrency": { "GLOBAL": "EUR" },
+                    "cancelUrl": "https://mullvad.net/en/account",
+                    "sources": { "pricing": "https://mullvad.net/en/pricing" },
+                    "notes": "Flat price worldwide. Accounts are prepaid and topped up manually.",
+                    "plans": [
+                      {
+                        "id": "mullvad.vpn",
+                        "name": "Mullvad VPN",
+                        "link": "https://mullvad.net/en/account/create",
+                        "features": {
+                          "vpn.included": true,
+                          "vpn.devices": 5,
+                          "vpn.unlimited-traffic": true
+                        },
+                        "prices": [
+                          { "region": "GLOBAL", "currency": "EUR", "amount": 5.00, "interval": "month", "intervalCount": 1, "autoRenew": false, "lastVerified": "2026-10-10", "sourceUrl": "https://mullvad.net/en/pricing" }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "bundles": []
+              },
+              "meta": {
+                "catalogVersion": "c4f9a21",
+                "generatedAt": "2026-10-22T03:12:45Z",
+                "region": "CA",
+                "regions": ["CA", "GLOBAL", "US"],
+                "counts": { "providers": 2, "plans": 4, "addOns": 2, "bundles": 0, "features": 9 },
+                "_note": "The full snapshot's example with only the prices pickPrice can pick in Canada: Netflix keeps its CA prices, and Mullvad, priced only GLOBAL, keeps them all. Version, build time, regions and counts are the full snapshot's."
+              }
+            }
+          }
+        },
+        {
           "title": "Nothing changed since the last download",
           "request": {
             "method": "GET",
@@ -336,6 +587,28 @@
               "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400"
             },
             "body": null
+          }
+        },
+        {
+          "title": "A region code that isn't one",
+          "request": {
+            "method": "GET",
+            "url": "https://sub.simplely.ca/api/v1/catalog?region=UK"
+          },
+          "response": {
+            "status": 400,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8"
+            },
+            "body": {
+              "error": {
+                "code": "bad_request",
+                "message": "Invalid query parameter 'region'.",
+                "details": [
+                  { "param": "region", "issue": "\"UK\" isn't an ISO 3166-1 region code: use GB for the United Kingdom." }
+                ]
+              }
+            }
           }
         }
       ]

@@ -11,6 +11,7 @@ export * from './catalog/monthly-equivalent';
 export * from './catalog/pick-price';
 export * from './catalog/price';
 export * from './catalog/provider';
+export * from './catalog/region-files';
 export * from './catalog/regions';
 export * from './catalog/seed-sql';
 export * from './catalog/snapshot';

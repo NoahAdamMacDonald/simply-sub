@@ -1,5 +1,7 @@
 import { cloudflareTest, readD1Migrations } from '@cloudflare/vitest-plugin';
+import { readdir, readFile } from 'node:fs/promises';
 import { defineConfig } from 'vitest/config';
+import { parse } from 'yaml';
 
 // Route tests run inside workerd with the bindings from wrangler.jsonc (BLUEPRINT §13.3). Each test
 // file gets a local D1 with the migrations applied (test/apply-migrations.ts).
@@ -9,7 +11,12 @@ export default defineConfig(async () => {
     plugins: [
       cloudflareTest({
         wrangler: { configPath: './wrangler.jsonc' },
-        miniflare: { bindings: { TEST_MIGRATIONS: migrations } },
+        miniflare: {
+          bindings: { TEST_MIGRATIONS: migrations, TEST_CATALOG: await readCatalog() },
+          // public/ holds the web build only after `npm run build`, which CI runs after the tests.
+          // These stand in for the files data:build writes: the Worker passes them on unread.
+          assets: { directory: './test/fixtures/assets' },
+        },
       }),
     ],
     // So the Worker can import @simply-sub/core through the tsconfig.base.json alias.
@@ -17,3 +24,25 @@ export default defineConfig(async () => {
     test: { setupFiles: ['./test/apply-migrations.ts'] },
   };
 });
+
+/**
+ * The real catalog for the seed tests (test/seed.spec.ts): data/'s YAML files, parsed as YAML 1.2,
+ * and the logos' file names. workerd can't read files, and a binding has to be JSON.
+ */
+async function readCatalog() {
+  const root = new URL('../../data/', import.meta.url);
+  const names = (await readdir(root, { recursive: true }))
+    .map((name) => name.replaceAll('\\', '/'))
+    .sort();
+  return {
+    files: await Promise.all(
+      names
+        .filter((name) => /\.ya?ml$/.test(name))
+        .map(async (name) => ({
+          file: `data/${name}`,
+          data: parse(await readFile(new URL(name, root), 'utf8')) as unknown,
+        })),
+    ),
+    logos: names.filter((name) => /^logos\/.+\.png$/.test(name)).map((name) => `data/${name}`),
+  };
+}

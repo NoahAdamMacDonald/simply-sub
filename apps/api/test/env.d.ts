@@ -5,6 +5,8 @@ declare global {
   namespace Cloudflare {
     interface Env {
       TEST_MIGRATIONS: D1Migration[];
+      /** data/'s YAML files, parsed, and the logos' file names. */
+      TEST_CATALOG: { files: { file: string; data: unknown }[]; logos: string[] };
     }
   }
 }

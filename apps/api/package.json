@@ -10,6 +10,9 @@
     "types": "wrangler types",
     "db:migrate:local": "wrangler d1 migrations apply simply-sub-catalog --local",
     "db:migrate:remote": "wrangler d1 migrations apply simply-sub-catalog --remote",
+    "db:seed:local": "wrangler d1 migrations apply simply-sub-catalog --local && tsx ../../scripts/seed-d1.ts --local",
+    "db:seed:remote": "wrangler d1 migrations apply simply-sub-catalog --remote && tsx ../../scripts/seed-d1.ts --remote",
+    "deploy": "npm run db:seed:remote && wrangler deploy",
     "test": "vitest run"
   },
   "dependencies": {
@@ -19,7 +22,8 @@
     "@cloudflare/vitest-plugin": "1.4.7",
     "typescript": "6.0.3",
     "vitest": "4.1.12",
-    "wrangler": "4.152.0"
+    "wrangler": "4.152.0",
+    "yaml": "2.9.1"
   },
   "volta": {
     "extends": "../../package.json"

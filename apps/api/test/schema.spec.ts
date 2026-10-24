@@ -1,17 +1,20 @@
 import { env } from 'cloudflare:workers';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-// migrations/0001_init.sql (BLUEPRINT §5.3): the keys and cascades a full reseed relies on (M1.5).
+// The catalog tables as migrations/0002_seed_what_changed.sql leaves them (BLUEPRINT §5.3): the keys
+// and cascades the seed relies on (M2.1).
 const db = env.DB;
 
 /** Empties the catalog the way a full reseed does (the cascades clear the rest), then adds one plan. */
 async function seedNetflix() {
   await db.batch([
+    db.prepare('DELETE FROM catalog'),
     db.prepare('DELETE FROM providers'),
     db.prepare('DELETE FROM features'),
     db.prepare('DELETE FROM bundles'),
-    db.prepare('DELETE FROM snapshots'),
-    db.prepare(`INSERT INTO providers (id, name, json) VALUES ('netflix', 'Netflix', '{}')`),
+    db.prepare(
+      `INSERT INTO providers (id, name, hash, json) VALUES ('netflix', 'Netflix', 'f00', '{}')`,
+    ),
     db.prepare(
       `INSERT INTO plans (id, provider_id, name, json)
        VALUES ('netflix.standard', 'netflix', 'Standard', '{}')`,
@@ -42,9 +45,32 @@ describe('catalog schema', () => {
     await seedNetflix();
   });
 
-  it('records the migration as applied', async () => {
+  it('records the migrations as applied', async () => {
     const { results } = await db.prepare('SELECT name FROM d1_migrations').all<{ name: string }>();
-    expect(results.map((r) => r.name)).toEqual(['0001_init.sql']);
+    expect(results.map((r) => r.name)).toEqual(['0001_init.sql', '0002_seed_what_changed.sql']);
+  });
+
+  it('has no snapshots table, and keeps every table WITHOUT ROWID and STRICT', async () => {
+    const { results } = await db
+      .prepare(
+        `SELECT name, wr, strict FROM pragma_table_list
+         WHERE schema = 'main' AND type = 'table' AND name NOT LIKE '\\_%' ESCAPE '\\'
+           AND name NOT LIKE 'sqlite%' AND name <> 'd1_migrations'
+         ORDER BY name`,
+      )
+      .all<{ name: string; wr: number; strict: number }>();
+    expect(results).toEqual(
+      [
+        'bundle_plans',
+        'bundles',
+        'catalog',
+        'features',
+        'plan_features',
+        'plans',
+        'prices',
+        'providers',
+      ].map((name) => ({ name, wr: 1, strict: 1 })),
+    );
   });
 
   it('removes plans, prices, features and bundle links with their provider', async () => {
@@ -77,5 +103,26 @@ describe('catalog schema', () => {
        VALUES ('netflix.standard', 'US', 'USD', 'cheap', 'month', 1, 0)`,
     );
     await expect(insert.run()).rejects.toThrow(/cannot store TEXT value in REAL column/);
+  });
+
+  it('needs a hash for every provider', async () => {
+    const insert = db.prepare(
+      `INSERT INTO providers (id, name, json) VALUES ('crave', 'Crave', '{}')`,
+    );
+    await expect(insert.run()).rejects.toThrow(/NOT NULL/);
+  });
+
+  it('keeps one catalog row', async () => {
+    const insert = (id: number) =>
+      db
+        .prepare(
+          `INSERT INTO catalog (id, version, built_at, seed_format, counts)
+           VALUES (?, 'abc1234', '2026-10-23T12:00:00Z', 1, '{}')`,
+        )
+        .bind(id)
+        .run();
+    await insert(1);
+    await expect(insert(2)).rejects.toThrow(/CHECK/);
+    await expect(insert(1)).rejects.toThrow(/UNIQUE/);
   });
 });
