@@ -51,8 +51,8 @@ Last updated: 2026-10-23
    GitHub Project board: Todo → Doing → Review → Done.
 2. Use one branch per task: `feat/m5-3-search-filters`.
 3. Open a PR early. CI (the required check `ci`) runs lint, the Prettier check, a check that `data/schema/` matches
-   the Zod schemas, tests and the build, plus data validation from M1.4 (BLUEPRINT §7.6). Each branch also gets a
-   Workers Builds preview link.
+   the Zod schemas, the catalog checks (`data:validate`), tests and the build (BLUEPRINT §7.6). Each branch also
+   gets a Workers Builds preview link.
 4. Squash-merge to `main` once `ci` is green; that's the only merge method, and the branch is deleted after.
    `main` is protected with no bypass, so nothing reaches it without a PR. Workers Builds then deploys to
    simplely.ca automatically.

@@ -86,7 +86,7 @@ node .claude/skills/price-research/read-page.cjs "$DEPS" "$OUT" https://proton.m
 
 ## After writing the files
 
-1. `npx prettier --write data/providers data/bundles`, then `npm run data:validate` (M1.4) and `npm test`.
+1. `npx prettier --write data/providers data/bundles`, then `npm run data:validate` and `npm test`.
 2. List the sources and everything unverified in the PR.
 
 ## Gotchas

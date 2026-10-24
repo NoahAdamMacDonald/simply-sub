@@ -16,7 +16,7 @@ import { pricesSchema } from './price';
 
 // One provider file, data/providers/<id>.yaml (BLUEPRINT §4.3). The schema checks each file on its own. Feature
 // ids and values against the registry, category ids, and add-on and plan references are checked by
-// scripts/validate-data.ts (M1.4).
+// validateCatalog (validate-catalog.ts).
 
 /** BLUEPRINT §9.2. A provider lists the networks it accepts; leaving the list out means unknown. */
 export const cardNetworkSchema = z.enum([

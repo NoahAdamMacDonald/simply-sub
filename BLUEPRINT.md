@@ -190,7 +190,8 @@ simply-sub/
 │  └─ core/                  # pure TypeScript with no Angular or Worker dependencies
 │     ├─ src/
 │     │  ├─ index.ts         # the public API, imported as `@simply-sub/core`
-│     │  ├─ catalog/         # Zod schemas + inferred types for the catalog files, JSON Schema export (section 4.5)
+│     │  ├─ catalog/         # Zod schemas + inferred types for the catalog files, JSON Schema export (section 4.5),
+│     │  │                   # validateCatalog (section 6.2)
 │     │  ├─ user/            # user-data types (lists, items, cards…)
 │     │  ├─ dates/           # ISO calendar dates: IsoDate, toIsoDate, addDays
 │     │  ├─ schedule/        # recurrence: next payment dates, monthly/annual totals
@@ -214,7 +215,7 @@ simply-sub/
 │
 ├─ scripts/                  # run by tsx; type-checked by `npm run build` (scripts/tsconfig.json)
 │  ├─ generate-json-schema.ts  # core's Zod schemas → data/schema/*.schema.json (`--check` in CI)
-│  ├─ validate-data.ts       # Zod validation + cross-reference checks
+│  ├─ validate-data.ts       # data/**/*.yaml → core's validateCatalog → file:line messages (section 6.2)
 │  ├─ build-catalog.ts       # YAML → catalog.json + seed.sql
 │  ├─ fetch-icons.ts         # catalog favicons → static icon files at build time
 │  ├─ price-check.ts         # nightly price monitor (section 6.4)
@@ -223,9 +224,8 @@ simply-sub/
 ├─ apps/bot/                # Cron Worker: nightly price check (Workflows + Workers AI) → GitHub PRs
 │
 └─ .github/workflows/
-   └─ ci.yml                 # the required PR check `ci`: lint, format, data:schema --check, test, build
-                             # (+ data:validate from M1.4)
-                             # (deploys run on Cloudflare Workers Builds, section 7.6)
+   └─ ci.yml                 # the required PR check `ci`: lint, format, data:schema --check, data:validate,
+                             # test, build (deploys run on Cloudflare Workers Builds, section 7.6)
 ```
 
 **Why this layout**
@@ -570,8 +570,8 @@ one paid plan per account, so its Plus plans are never held together on one acco
 ```
 
 ### 4.5 Catalog schemas and types (`packages/core/src/catalog/`)
-The **Zod schemas** are the single validation source. They're used by `validate-data.ts`, by the API, and by
-the app when it parses cached snapshots. The TypeScript types are inferred from them (`z.infer`), so the two
+The **Zod schemas** are the single validation source. They're used by `validateCatalog` (section 6.2), by the
+API, and by the app when it parses cached snapshots. The TypeScript types are inferred from them (`z.infer`), so the two
 can't drift. Everything is exported from `@simply-sub/core`.
 
 | File | Schemas (and inferred types) |
@@ -583,6 +583,7 @@ can't drift. Everything is exported from `@simply-sub/core`.
 | `provider.ts` | `providerSchema` (`Provider`), `planSchema` (`Plan`), `addOnSchema` (`AddOn`), `cardNetworkSchema` (`CardNetwork`) |
 | `bundle.ts` | `bundleSchema` (`Bundle`) |
 | `json-schema.ts` | `catalogJsonSchemas()`: the JSON Schema of each kind of file |
+| `validate-catalog.ts`, `validate-features.ts` | `validateCatalog(files, today)` (`CatalogIssue`), `formatCatalogIssue`: the cross-file checks (section 6.2) |
 
 The shapes in short (the Zod source is authoritative). `?` marks an optional field, which is left out when
 empty, never `null` or `""`:
@@ -699,9 +700,10 @@ from the file a plan is in, and flattened views add it.
   - `addOnLimit` needs `addOnIds`, and a plan or bundle doesn't list the same id twice.
 - **Readable errors:** each one names the exact path and says what to write, for example
   `plans.0.prices.0.currency: Use a three-letter ISO 4217 currency code in capitals (CAD)`.
-- **Left to `validate-data.ts`** (section 6.2, M1.4): anything that needs another file or the date. That covers
-  feature ids and values against the registry, category ids, add-on, `grantsPlan` and bundle references,
-  duplicate ids across files, and a `lastVerified` in the future.
+- **Left to `validateCatalog`** (section 6.2): anything that needs another file or the date, such as feature ids
+  and values against the registry, category ids, add-on, `grantsPlan` and bundle references, duplicate ids across
+  files, and a `lastVerified` in the future. It also holds the add-on, price and `billingCurrency` rules listed
+  there, which could run on one file but are kept with the other catalog rules.
 - Parse the YAML as YAML 1.2 (the default in the `yaml` package and in the editor), so dates such as
   `2026-10-21` stay strings. Quote ids that look like numbers (`id: "1"`).
 
@@ -925,17 +927,50 @@ rebuilds D1 from scratch. This gives you:
 - no admin UI to build or secure
 
 ### 6.2 Validation (`scripts/validate-data.ts`, runs in CI on every PR)
+`npm run data:validate` parses every `.yaml` and `.yml` file under `data/` as YAML 1.2 and runs
+`validateCatalog(files, today)` from `packages/core` (`catalog/validate-catalog.ts`), which never reads the clock
+or the disk. Today is the date where the script runs, which is UTC in CI.
+
 Validation fails if:
+- a file isn't valid YAML (a duplicate key, more than one document), isn't one of `data/features.yaml`,
+  `data/categories.yaml`, `data/providers/<id>.yaml` or `data/bundles/<slug>.yaml` (always `.yaml`), or
+  `features.yaml` or `categories.yaml` is missing
 - a file doesn't match its Zod schema (section 4.5), which already covers unknown keys, formats, negative amounts
   and the checks within one file
-- a plan uses a feature id that isn't in `features.yaml`, a value of the wrong type for the feature, or an enum
-  or set value that isn't listed (for `valuesFrom: providers`, an id that isn't a provider or plan)
-- a feature's `parent`, a provider's `category` or `spendCategory`, or a feature's `category` isn't defined
-- ids are duplicated across files, or a bundle, `addOnIds` or `grantsPlan` references something that doesn't exist
-- a currency isn't a real ISO 4217 code (the schema only checks that it's three capital letters)
-- `lastVerified` is in the future
+- a provider's `id` isn't its file name, or a bundle's `id` isn't `bundle.<file name>`
+- a plan uses a feature id that isn't in `features.yaml`, a value of the wrong type for the feature, an enum or
+  set value that isn't listed (for `valuesFrom: providers`, an id that isn't a provider or plan), or the same set
+  value twice
+- a plan lists a child feature (`vpn.devices`) without its group set to `true` (`vpn.included: true`)
+- a `featureLabels` key isn't a feature id, or a rank key whose value or tier exists (`video.quality=4k`; a
+  boolean feature takes no `=value`)
+- a feature's `parent` isn't a top-level boolean feature (groups are one level deep), or a feature's `category`,
+  or a provider's `category` or `spendCategory`, isn't defined
+- ids are duplicated: across files (provider, plan, add-on and bundle ids share one namespace), in
+  `features.yaml`, or within one category list
+- a reference doesn't exist: a bundle's `soldBy` (a provider) and `includes` (plans), a plan's `addOnIds`
+  (add-ons in the same file), an add-on's `grantsPlan` (a plan in the same file)
+- an add-on isn't listed in any plan's `addOnIds`
+- `includes-subscription` lists the plan itself or its own provider, or makes a loop (Duo → Unlimited → Duo)
+- a provider has `billingCurrency`, and a plan or add-on is priced in a region that isn't in it, or has no price
+  in the charged currency for that region
+- a plan, add-on or bundle repeats a price (the same region, currency, interval and intervalCount)
+- a currency in a price or in `billingCurrency` isn't a real ISO 4217 code (`Intl.supportedValuesOf('currency')`;
+  the schema only checks that it's three capital letters)
+- `lastVerified` is after today
 
-Validation warns (but passes) when `lastVerified` is older than 90 days.
+Validation warns (but passes) when `lastVerified` is older than 90 days: one warning per file, with the count and
+the oldest price.
+
+A broken file gets its own errors, and the checks that would only repeat them are skipped: a provider that fails
+its schema isn't checked against the registry, references to it aren't flagged, and a broken feature definition
+isn't used to check plans.
+
+Each message is `file:line path: what's wrong and what to write`, for example
+`data/providers/netflix.yaml:73 plans.2.features.video.quality: "8k" isn't a video.quality value (480p, 720p,
+1080p, 4k)`. In GitHub Actions each one is also a workflow command (`::error file=…,line=…::`), so it shows as
+an annotation on the PR's Files tab. GitHub shows up to 10 errors and 10 warnings per step that way; the log
+has all of them.
 
 ### 6.3 Build & seed (`scripts/build-catalog.ts`, runs in `deploy.yml`)
 1. Load and validate all YAML.
@@ -1183,8 +1218,8 @@ Settings → Build*). The settings as they are now:
 - Workers Builds deploys straight from `main`; it doesn't wait for GitHub checks. Branch protection (M0.10) is
   what keeps a failing change off `main`.
 - A small GitHub Actions `.github/workflows/ci.yml` (M0.10) runs lint, the Prettier check, the generated JSON
-  Schema check (`data:schema -- --check`, M1.1), tests and the build (`data:validate` joins in M1.4) as the
-  required **PR check** `ci`, because that's what blocks merging a bad
+  Schema check (`data:schema -- --check`, M1.1), the catalog checks (`data:validate`, M1.4), tests and the build
+  as the required **PR check** `ci`, because that's what blocks merging a bad
   change. Actions are free for public repos. It has a read-only token and no secrets, runs on `pull_request`
   (fork PRs get nothing), and pins its actions to commit SHAs.
 - **`main` is protected** by a GitHub ruleset with no bypass, not even for the admin: changes arrive only through

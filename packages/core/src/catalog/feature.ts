@@ -3,7 +3,7 @@ import { addDuplicateIssues } from './checks';
 import { aliasesSchema, dottedSlugSchema, slugSchema, textSchema, tierIdSchema } from './formats';
 
 // The feature registry, data/features.yaml (BLUEPRINT §4.2). Whether ids are unique across the file, a parent
-// exists and plan values match the registry is checked by scripts/validate-data.ts (M1.4).
+// exists and plan values match the registry is checked by validateCatalog (validate-features.ts).
 
 const headlineSchema = z.boolean().describe('Show it in feature summaries ("VPN 2 / 3")');
 
