@@ -170,7 +170,7 @@ simply-sub/
 │  │  │  ├─ layout/          # sidebar, shell
 │  │  │  ├─ app.routes.ts
 │  │  │  └─ app.config.ts
-│  │  ├─ public/             # favicon, logo
+│  │  ├─ public/             # favicon, logo; data/catalog.json is written here by `npm run data:build` (gitignored)
 │  │  └─ proxy.conf.json     # dev: /api → wrangler dev
 │  │
 │  └─ api/                   # Cloudflare Worker
@@ -216,7 +216,8 @@ simply-sub/
 ├─ scripts/                  # run by tsx; type-checked by `npm run build` (scripts/tsconfig.json)
 │  ├─ generate-json-schema.ts  # core's Zod schemas → data/schema/*.schema.json (`--check` in CI)
 │  ├─ validate-data.ts       # data/**/*.yaml → core's validateCatalog → file:line messages (section 6.2)
-│  ├─ build-catalog.ts       # YAML → catalog.json + seed.sql
+│  ├─ build-catalog.ts       # data/ → apps/web/public/data/catalog.json + apps/api/dist/seed.sql (section 6.3)
+│  ├─ lib/catalog-files.ts   # reads, parses and checks data/ for the two scripts above
 │  ├─ fetch-icons.ts         # catalog favicons → static icon files at build time
 │  ├─ price-check.ts         # nightly price monitor (section 6.4)
 │  └─ draft-provider.ts      # AI-assisted: pricing page URL → draft YAML
@@ -254,7 +255,8 @@ simply-sub/
     "dev:api": "npm -w apps/api run dev",
     // core and scripts have nothing to emit; their tsc checks run first because Vitest and tsx strip types
     // without checking them
-    "build": "npm -w packages/core run typecheck && tsc -p scripts && npm -w apps/web run build && npm -w apps/api run build",
+    // data:build writes the catalog snapshot into apps/web/public before the web build picks it up
+    "build": "npm -w packages/core run typecheck && tsc -p scripts && npm run data:build && npm -w apps/web run build && npm -w apps/api run build",
     "test": "npm run test --workspaces --if-present",
     "data:schema": "tsx scripts/generate-json-schema.ts",   // add -- --check to only verify (CI)
     "data:validate": "tsx scripts/validate-data.ts",
@@ -584,6 +586,9 @@ can't drift. Everything is exported from `@simply-sub/core`.
 | `bundle.ts` | `bundleSchema` (`Bundle`) |
 | `json-schema.ts` | `catalogJsonSchemas()`: the JSON Schema of each kind of file |
 | `validate-catalog.ts`, `validate-features.ts` | `validateCatalog(files, today)` (`CatalogIssue`), `formatCatalogIssue`: the cross-file checks (section 6.2) |
+| `snapshot.ts` | Output: `catalogSnapshotSchema` (`CatalogSnapshot`), `catalogDataSchema`, `catalogMetaSchema`, `snapshotProviderSchema`; `readCatalogSource`, `buildCatalogData`, `buildCatalogMeta` (section 6.3) |
+| `seed-sql.ts` | `buildSeedSql(snapshot)`: the D1 seed (sections 5.3, 6.3) |
+| `monthly-equivalent.ts` | `monthlyEquivalent(price)` (PROJECT-PLAN §3.1) |
 
 The shapes in short (the Zod source is authoritative). `?` marks an optional field, which is left out when
 empty, never `null` or `""`:
@@ -679,7 +684,9 @@ These are the **source** shapes: what the YAML files hold. They match the catalo
 `docs/api-output-examples.json` minus what the build and the API add (`iconUrl`, `schemaVersion`, picked
 `pricing`, `providedRankKeys`, and a bundle's expanded `includes`, `savings` and feature union). A core test
 parses every catalog object in the contract, minus those fields, so the two stay compatible. The output schemas
-come with M1.5 (`catalog.json`) and M2.7 (API responses), built on these. Plans have no `providerId`: it comes
+are built on these: `catalogSnapshotSchema` (`snapshot.ts`, M1.5) is the `GET /catalog` body and `catalog.json`,
+and another core test parses the `GET /catalog` example with it. The other API responses get theirs in M2.7.
+Plans have no `providerId`: it comes
 from the file a plan is in, and flattened views add it.
 
 **What the schemas check**
@@ -830,7 +837,8 @@ from Settings:
 - **Hono**: a tiny router built for Workers, with typed routes and middleware for CORS, caching and ETags.
 - **D1**: Cloudflare's SQLite database. Normalized tables, plus each provider's full JSON stored for fast reads.
 - **Cache API** with `Cache-Control: public, max-age=3600, stale-while-revalidate=86400`. Catalog responses
-  carry a `catalogVersion` (the Git commit SHA) as the ETag.
+  carry a `catalogVersion` as the ETag: the first 7 hex digits of a SHA-256 of the snapshot's `data`, so it
+  changes only when the catalog does, never on a code-only deploy (decided in M1.5; it was the Git commit SHA).
 
 ### 5.2 Endpoints (all under `/api/sub/v1`)
 | Method & path | Purpose |
@@ -871,9 +879,14 @@ indexes: prices (region, monthly_equiv) · plan_features (feature_id, rank_value
 - Every `→` is a foreign key with `ON DELETE CASCADE`, so the full reseed (M1.5) can empty the parent tables and
   leave no orphans. D1 always enforces foreign keys.
 - `rank_value` stores an enum's position (1080p = 2, 4k = 3) or the number itself, so rank-key filters like
-  `feature=video.quality=1080p` ("1080p or better") become plain numeric comparisons. A `set` feature has one
-  row per member.
-- `snapshots.sha` and `built_at` are what `/health` reports as `catalogVersion` and `catalogUpdatedAt`.
+  `feature=video.quality=1080p` ("1080p or better") become plain numeric comparisons. `unlimited` stores 1e308
+  (above any number, and still a finite number in JSON) with `value` `unlimited`. A boolean stores 1 or 0, with
+  `value` `true` or `false`. A `set` feature has one row per member, with no `rank_value`.
+- `snapshots.sha` and `built_at` are what `/health` reports as `catalogVersion` and `catalogUpdatedAt`. The row
+  with region `ALL` holds the full snapshot, the same text as `catalog.json`. The seed writes it in pieces
+  (`UPDATE … SET json = json || …`) because D1 rejects a statement over 100 KB. Rows for `?region=` come with
+  M2.1.
+- Only plan prices go in `prices`. Add-on prices stay in the provider's `json`, and bundle prices in the bundle's.
 - Add-ons stay inside each provider's `json`; they get their own table only if an endpoint needs to filter on them.
 - Schema changes are new numbered migrations, never edits to an applied one: `npm -w apps/api run
   db:migrate:local`, then `db:migrate:remote` (or the deploy command, section 7.6). The API tests apply every
@@ -972,14 +985,28 @@ Each message is `file:line path: what's wrong and what to write`, for example
 an annotation on the PR's Files tab. GitHub shows up to 10 errors and 10 warnings per step that way; the log
 has all of them.
 
-### 6.3 Build & seed (`scripts/build-catalog.ts`, runs in `deploy.yml`)
-1. Load and validate all YAML.
-2. Compute the derived data: `monthly_equiv` (native currency), enum `rank_value`, bundle feature unions and
-   native-currency savings. The cheapest price per feature (what `api-all-example.json` tried to store) is computed
-   on demand with today's exchange rates instead, so it's never stale.
-3. Write `catalog.<region>.json` snapshots and `seed.sql`. The seed starts with `DELETE FROM` for every table,
-   then inserts everything.
-4. `wrangler d1 migrations apply simply-sub-catalog --remote`, then `wrangler d1 execute simply-sub-catalog --remote --file seed.sql`.
+### 6.3 Build & seed (`scripts/build-catalog.ts`, `npm run data:build`)
+`npm run build` runs it before the web build, so CI builds the catalog on every PR and Workers Builds on every
+deploy (section 7.6). The logic is in `packages/core` (`snapshot.ts`, `seed-sql.ts`); the script reads and writes
+the files.
+1. Load and validate all YAML the way `data:validate` does (section 6.2). Any error stops the build; warnings are
+   only counted.
+2. Build the snapshot `{ data, meta }`:
+   - `data` is `schemaVersion` plus the source files: features, categories, providers sorted by id (each with its
+     `iconUrl`) and bundles sorted by id. Bundles stay in their source shape: the app computes feature unions and
+     savings in core for the user's region, and `GET /bundles` adds them per request (M2.4).
+   - `meta` is `catalogVersion` (section 5.1), `generatedAt` (the build time, UTC), every priced region, and
+     counts.
+3. Write `apps/web/public/data/catalog.json` (gitignored), the exact JSON of the snapshot. The Angular build
+   publishes it as `/simply/sub/data/catalog.json`, and `ng serve` serves it too.
+4. Write `apps/api/dist/seed.sql`, one statement per line: `DELETE FROM` every table, then insert every row with
+   the derived columns (`monthly_equiv`, `rank_value`, section 5.3), then the snapshot row `ALL`.
+5. The deploy runs `wrangler d1 migrations apply simply-sub-catalog --remote`, then
+   `wrangler d1 execute simply-sub-catalog --remote --file dist/seed.sql` (section 7.6).
+
+The cheapest price per feature (what `api-all-example.json` tried to store) is computed on demand with today's
+exchange rates instead, so it's never stale. Per-region snapshots for `GET /catalog?region=` come with M2.1,
+since trimming them uses `pickPrice` (M1.7).
 
 The catalog will be small (hundreds of plans), so a full reseed takes seconds and stays far inside D1's free write limits.
 
@@ -1176,9 +1203,10 @@ account resource before it exists. `apps/api/wrangler.jsonc` is the current vers
 ends with `wrangler deploy --dry-run`, which bundles the Worker without logging in or deploying.
 
 ### 7.5 Local development
-- Terminal 1: `npm run dev:api` (`wrangler dev`, port 8787, with a local D1). Seed it with
-  `wrangler d1 execute simply-sub-catalog --local --file seed.sql`. It also serves the last production build of
-  the app at http://localhost:8787/simply/sub/ (run `npm run build` first to refresh it).
+- Terminal 1: `npm run dev:api` (`wrangler dev`, port 8787, with a local D1). Seed it with `npm run data:build`,
+  then, in `apps/api`, `npm run db:migrate:local` and `npx wrangler d1 execute simply-sub-catalog --local --file
+  dist/seed.sql`. It also serves the last production build of the app at http://localhost:8787/simply/sub/ (run
+  `npm run build` first to refresh it).
 - Terminal 2: `npm run dev:web` (`ng serve` with `apps/web/proxy.conf.json`):
   ```json
   { "/api": { "target": "http://localhost:8787", "secure": false } }
@@ -1194,15 +1222,15 @@ Settings → Build*). The settings as they are now:
 | Production branch | `main` |
 | Root directory | `apps/api` |
 | Build command | `cd ../.. && npm ci && npm run build` |
-| Deploy command | `npx wrangler deploy` |
+| Deploy command | `npx wrangler d1 migrations apply simply-sub-catalog --remote && npx wrangler d1 execute simply-sub-catalog --remote --file dist/seed.sql && npx wrangler deploy` (since M1.5; before, `npx wrangler deploy`) |
 | Preview (non-production branch) command | `npx wrangler versions upload`: a preview link on workers.dev, production untouched |
 | Build variable | `NODE_VERSION` = `24.19.0` (the image defaults to 24.18.0). The first build detected Node 24.19.0 and npm 12.0.2 (from `packageManager`); npm 10.9.2 would also install our lockfile cleanly |
 | API token | `simply-sub-builds`, created by Workers Builds: Workers scripts, KV, R2, **D1 (edit)**, routes on the zone, and a few unused products. Cloudflare keeps it; it's never in GitHub |
 
-- **From M1.5** the deploy also reseeds D1. The deploy command becomes
-  `npx wrangler d1 migrations apply simply-sub-catalog --remote && npx wrangler d1 execute simply-sub-catalog --remote --file dist/seed.sql && npx wrangler deploy`,
-  and the build command gains `&& npm run data:build`. The build token already has D1 edit. Preview builds never
-  touch D1, since they share the production database.
+- **Since M1.5** the deploy also reseeds D1: the deploy command above applies any new migrations, runs the
+  `dist/seed.sql` that `npm run build` wrote (section 6.3), and only then deploys, so a failing seed stops the
+  deploy. The build command needs no change, because `npm run build` runs `data:build`. The build token already
+  has D1 edit. Preview builds never touch D1, since they share the production database.
 - **Routes:** `simplely.ca/simply/sub*` and `simplely.ca/api/sub*`. A route only fires for a proxied hostname, so
   the zone has a placeholder `AAAA @ 100::` record (proxied). Nothing serves the rest of `simplely.ca` yet.
 - `workers_dev: false` and `preview_urls: true`: production is only on simplely.ca, and branch builds still get

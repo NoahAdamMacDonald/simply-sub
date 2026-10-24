@@ -19,6 +19,9 @@ out-tsc/
 apps/api/public/simply/
 apps/api/public/index.html
 
+# The catalog snapshot, built from data/ by `npm run data:build` (BLUEPRINT §6.3).
+apps/web/public/data/
+
 # Environment
 .env
 .env.*

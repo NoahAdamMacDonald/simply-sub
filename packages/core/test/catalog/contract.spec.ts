@@ -1,11 +1,18 @@
 import { describe, expect, it } from 'vitest';
 import contract from '../../../../docs/api-output-examples.json';
-import { bundleSchema, categoriesFileSchema, featuresFileSchema, providerSchema } from '../../src';
+import {
+  bundleSchema,
+  catalogSnapshotSchema,
+  categoriesFileSchema,
+  featuresFileSchema,
+  providerSchema,
+} from '../../src';
 import { issues } from './helpers';
 
 // The YAML source files must stay compatible with the API contract: each catalog object in the examples, minus
 // what the build and the API add (icon URLs, picked pricing, expanded bundle plans, savings, feature unions),
-// is a valid source file. The response schemas themselves come in M2.7.
+// is a valid source file. The GET /catalog body is the snapshot that scripts/build-catalog.ts writes (M1.5);
+// the other response schemas come in M2.7.
 
 function toSource(value: unknown, added: readonly string[] = ['iconUrl', 'pricing']): unknown {
   if (Array.isArray(value)) {
@@ -65,5 +72,12 @@ describe('the contract examples, as source files', () => {
       includes: bundle.includes.map((included) => included.planId),
     };
     expect(issues(bundleSchema, source)).toEqual([]);
+  });
+});
+
+describe('the GET /catalog example', () => {
+  it('is a catalog snapshot, once the documentation notes are gone', () => {
+    const body = contract.endpoints['GET /catalog'].examples[0].response.body;
+    expect(issues(catalogSnapshotSchema, toSource(body, []))).toEqual([]);
   });
 });

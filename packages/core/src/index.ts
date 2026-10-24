@@ -5,8 +5,11 @@ export * from './catalog/category';
 export * from './catalog/feature';
 export * from './catalog/formats';
 export * from './catalog/json-schema';
+export * from './catalog/monthly-equivalent';
 export * from './catalog/price';
 export * from './catalog/provider';
+export * from './catalog/seed-sql';
+export * from './catalog/snapshot';
 export {
   formatCatalogIssue,
   validateCatalog,

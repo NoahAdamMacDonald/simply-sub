@@ -114,12 +114,12 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 | M1.4 | `scripts/validate-data.ts` (BLUEPRINT §6.2) in CI | A broken file fails CI with a readable message |
 | M1.5 | `scripts/build-catalog.ts` → static `catalog.json` + `seed.sql` | The output matches the `GET /catalog` example |
 | M1.6 | `scripts/fetch-icons.ts`: catalog favicons → `public/simply/sub/icons/<id>.png` (manual overrides in `data/logos/`) | Every provider has an icon or the fallback |
-| M1.7 | core: `pickPrice`, `monthlyEquivalent`, `convert` (§3.1) | Tests cover a native price, the same currency from another region, a GLOBAL price and a fallback region |
+| M1.7 | core: `pickPrice`, `convert` (§3.1; `monthlyEquivalent` arrived in M1.5 for the seed) | Tests cover a native price, the same currency from another region, a GLOBAL price and a fallback region |
 
 ### M2 — API
 | ID | Task | Done when |
 |---|---|---|
-| M2.1 | `GET /catalog` (+ ETag / 304) | Matches the example |
+| M2.1 | `GET /catalog` (+ ETag / 304), and `?region=` with per-region `snapshots` rows built by `data:build` (BLUEPRINT §6.3) | Matches the example |
 | M2.2 | `GET /features`, `GET /categories` | Match the examples |
 | M2.3 | `GET /providers`: search, filters, sort, cursor pagination | Every query parameter in the examples works |
 | M2.4 | `GET /providers/:id`, `GET /plans/:id`, `GET /bundles`, plus the 404 shape | Match the examples |
