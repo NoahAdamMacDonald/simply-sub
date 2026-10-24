@@ -121,10 +121,10 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 |---|---|---|
 | M2.1 | `GET /catalog` (+ ETag / 304) and `?region=`, served from static snapshot files: `data:build` also writes `data/catalog/<region>.json` and `other.json` (BLUEPRINT §6.3). D1: migration 0002 (`WITHOUT ROWID`, a `catalog` row in place of `snapshots`, a provider `hash`), and a seed that writes only what changed (BLUEPRINT §5.3). `/health` reports the catalog version, build time and counts | Matches the examples; a code-only deploy writes no D1 rows, and a one-provider change writes only that provider's |
 | M2.2 | `GET /features`, `GET /categories` | Match the examples |
-| M2.3 | `GET /providers`: search, filters, sort, cursor pagination | Every query parameter in the examples works |
+| M2.3 | `GET /providers`: search, filters, sort, cursor pagination, with queries that use the indexes (D1 counts every scanned row as read: BLUEPRINT §7.1) | Every query parameter in the examples works |
 | M2.4 | `GET /providers/:id`, `GET /plans/:id`, `GET /bundles`, plus the 404 shape | Match the examples |
-| M2.5 | `GET /fx`: Frankfurter proxy, cached 12 h, serves the last good value if Frankfurter is down (kept somewhere durable, such as KV: the Cache API can evict it; BLUEPRINT §7.1) | Matches the example, including the `stale` flag |
-| M2.6 | `GET /icon?domain=`: icon proxy for custom subscriptions, cached 30 days, restricted as in BLUEPRINT §5.4, using core's icon functions (M1.6) | Returns an image or the fallback; a non-domain, an IP address or a URL gets `400`, nothing but the fixed icon services is ever fetched, and the domain never reaches the logs |
+| M2.5 | `GET /fx`: Frankfurter proxy, cached 12 h, serves the last good value if Frankfurter is down, kept in KV (binding `KV`; you create the namespace in the dashboard and its id goes in `wrangler.jsonc`: BLUEPRINT §7.1) | Matches the example, including the `stale` flag |
+| M2.6 | `GET /icon?domain=`: icon proxy for custom subscriptions, cached 30 days in KV, restricted as in BLUEPRINT §5.4, using core's icon functions (M1.6) | Returns an image or the fallback; a non-domain, an IP address or a URL gets `400`, nothing but the fixed icon services is ever fetched, and the domain never reaches the logs |
 | M2.7 | Contract tests: every example in `docs/api-output-examples.json` is validated against the response schemas, and route tests compare real responses with them | The examples and the code can't drift apart |
 | M2.8 | Error middleware, CORS, caching, security headers and the per-IP rate limit (BLUEPRINT §5.4); the static files' `_headers` (CSP, immutable hashed files, icons for a day: BLUEPRINT §7.6); request logs off (`invocation_logs: false`) | Headers match the examples; going over the limit gets `429 rate_limited`; the CSP still lets Cloudflare Web Analytics load (BLUEPRINT §7.6) |
 
@@ -142,9 +142,9 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 | ID | Task | Done when |
 |---|---|---|
 | M4.1 | Dexie database (BLUEPRINT §4.6, including `region`, add-on quantities, bundle items, `billingDay` and `priceOverride.until`) + repositories that expose signals | CRUD tests pass with `fake-indexeddb` |
-| M4.2 | `SettingsStore` + first-run dialog (P1); `ThemeService` reads and writes `settings.theme`, keeping `localStorage` `ss-theme` as the startup cache (BLUEPRINT §8.1) | Country and currency are saved, with defaults from the browser locale |
+| M4.2 | `SettingsStore` + first-run dialog (P1), with the province/state menu and the sales-tax rate (BLUEPRINT §4.8); `ThemeService` reads and writes `settings.theme`, keeping `localStorage` `ss-theme` as the startup cache (BLUEPRINT §8.1) | Country, province or state, and currency are saved, with defaults from the browser locale; the menu lists only the chosen country's subdivisions |
 | M4.3 | `CatalogStore`: cached snapshot → revalidate the region's `data/catalog/<region>.json` (plus any region a list item uses) with ETag → save; the offline banner and "Catalog updated" toast (P1) | The app works offline after the first visit, and the banner shows the catalog's date |
-| M4.4 | `FxStore` + `ss-price` with the converted marker | Converted prices show ≈, the icon and the tooltip |
+| M4.4 | `FxStore` + `ss-price` with the converted marker and "+ tax" in tax-added regions | Converted prices show ≈, the icon and the tooltip; a Canadian sees "+ tax" |
 | M4.5 | Shared components (§4.3) + a `/dev/components` gallery (dev builds only) | Every component renders in both themes in the gallery |
 | M4.6 | `MetricsService` skeleton: resolved items (§3.4) from repos + catalog + FX | Unit tests pass with a fixture list |
 
@@ -173,7 +173,7 @@ M0 Setup ──► M1 Catalog data ──► M2 API
 ### M7 — Money, schedule & calendar
 | ID | Task | Done when |
 |---|---|---|
-| M7.1 | core: schedule engine for charges, statuses, totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/` | Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
+| M7.1 | core: schedule engine for charges, statuses, totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/`; sales tax in `tax/` with the Canadian rate table checked against official sources (BLUEPRINT §4.8) | Charges include tax by province and "plus tax" amounts. Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
 | M7.2 | Totals and budget bars on Home, Lists and List view | The numbers match the §3.1 definitions |
 | M7.3 | Home (P2) | P2 criteria met |
 | M7.4 | Calendar (P10): grid, day panel, list filter, upcoming list, agenda layout on mobile | P10 criteria met |
@@ -210,8 +210,9 @@ These live in `packages/core` as pure functions, so every page computes them the
 |---|---|---|
 | **Picked price** | The price `pickPrice` chooses for the user's region and currency: one source region and currency per plan, add-on or bundle, with every interval priced there, converted if it isn't in the user's currency. Native means no conversion was needed (BLUEPRINT §4.7) | Everywhere a price appears |
 | **Item price** | The price override if one is set and the charge is dated before its `until` (if any); otherwise the picked plan price plus each picked add-on price × its quantity. Bundle items use the bundle price | Charges |
-| **Monthly equivalent** | Price per month: year ÷ 12, week × 52 ÷ 12, day × 365 ÷ 12, each ÷ `intervalCount` | Sorting, the price filter, "≈ $x/mo" hints |
-| **Charge** | One scheduled payment: `{ date, amount, currency, itemId, listId, converted, manual }` | Calendar and all totals |
+| **Sales tax** | Added to the item price for a buyer in a tax-added region (Canada, US) at their rate: the built-in rate for their province, or their own `salesTaxPercent`. Typed amounts (a custom plan, a price override) already include it unless marked `plusTax` (BLUEPRINT §4.8) | Charges |
+| **Monthly equivalent** | Price per month: year ÷ 12, week × 52 ÷ 12, day × 365 ÷ 12, each ÷ `intervalCount`. Before tax, like the price tags | Sorting, the price filter, "≈ $x/mo" hints |
+| **Charge** | One scheduled payment: `{ date, amount, tax, currency, itemId, listId, converted, manual }`. `amount` includes `tax`, the sales tax part | Calendar and all totals |
 | **This month** | Sum of the charges dated in the current calendar month | Monthly budget bars, list cards |
 | **This year** | Sum of the charges dated in the current calendar year (Jan 1 – Dec 31) | Annual budget bars, list cards |
 | **Next 12 months** | Sum of the charges from today up to, but not including, the same day next year (so a yearly plan renewing today counts once) | An item's "% of list", optimizer savings |
@@ -380,13 +381,17 @@ Add these aliases to `_tokens.scss`. They build on the rank tokens in BLUEPRINT 
 ```
 ┌ Welcome to Simply Sub ──────────────────────────────┐
 │ Where are you?  [ Canada                 ▾ ]        │
+│ Province        [ Ontario                ▾ ]        │
 │ Currency        [ CAD — Canadian dollar  ▾ ]        │
 │ Monthly budget  [ optional ]  Annual [ optional ]   │
 │ Your data stays in this browser. No account needed. │
 │ [Import a backup instead]             [Get started] │
 └─────────────────────────────────────────────────────┘
 ```
-The country defaults from `navigator.language` (`en-CA` → Canada), and the currency follows the country.
+The country defaults from `navigator.language` (`en-CA` → Canada), and the currency follows the country. The
+Province (or State) menu lists only the chosen country's subdivisions, appears only for countries where sales tax
+is added (Canada, the US), and sets the tax rate (BLUEPRINT §4.8). A US user's rate field starts empty, with the hint
+"Your state and city sales tax on subscriptions, if any".
 
 **Acceptance**
 - [ ] Navigation works with the keyboard
@@ -543,7 +548,7 @@ Subscription Lists                          [Custom subscriptions]           Fea
 - Pinned cards come first. 📌 toggles pinning immediately (saved straight to the item, outside edit mode).
 - **Card (list variant):**
   - Collapsed: icon, name · plan, pin, `ss-price` (≈ when converted), % of the list's next-12-months total, status (§3.3), tags.
-  - Expanded (⌄): features with rank dots, billing details (next charge, interval, auto/manual renewal, end date), Plan ↗ and Cancel ↗ links, and [Edit] → `/lists/:listId/edit?item=<itemId>`.
+  - Expanded (⌄): features with rank dots, billing details (next charge as charged, tax included; interval, auto/manual renewal, end date), Plan ↗ and Cancel ↗ links, and [Edit] → `/lists/:listId/edit?item=<itemId>`.
   - "Wrong date?" next to the next charge opens a date picker. The date becomes the item's new `anchorDate` (§3.1), saved straight to the item like pinning, without a draft.
 - **Right column:**
   - Budget bars for **this list only** (hidden without budgets).
@@ -649,7 +654,7 @@ In Specific dates mode, the renewal fields are replaced by:
 - **Auto-renews:** shown only when the price's `autoRenew` is true. Otherwise a note says "This plan renews manually — we'll remind you".
 - **Free plans:** when the picked price is 0, Billed, Next renewal, Auto-renews and the price override are hidden. The item is saved as Ongoing, with today as the anchor date.
 - **Specific dates:** at least one window; each end must be after its start; windows can't overlap.
-- **Price override:** an amount above 0, with a currency, and an optional "until" date for an offer that ends (first-term discounts): charges from that date on use the catalog price.
+- **Price override:** an amount above 0, with a currency, and an optional "until" date for an offer that ends (first-term discounts): charges from that date on use the catalog price. The amount is taken as charged, tax included, unless "plus tax" is ticked (BLUEPRINT §4.8).
 - **Bought in region** (Advanced): any country; it sets `region`, which picks the item's price and availability. Defaults to Settings' country.
 - **Feature ranks:** the plan's provided keys (§3.2), grouped. The dropdown starts with "Profile default (X)" and includes Essential ("keep this plan") and Critical ("keep this provider"), each with a one-line hint.
 - **Tags:** autocomplete from the Settings tags, with "Create tag" inline (name + colour).
@@ -722,7 +727,7 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
 - **One card per provider.** It shows the plan you already have if that matches the filters, otherwise the cheapest plan that matches every filter. Plan chips switch between the provider's matching plans.
 - **Matching:** text matches provider names and aliases, plan names, feature names and aliases, and category names, in this order: exact or prefix name → substring → alias → feature or category. 150 ms debounce.
 - **Sort:** Best match (default when there's text), Price low→high (default otherwise), Price high→low, Name A–Z, Most features. Price sorts use the lowest monthly equivalent of the plan shown.
-- **Prices:** every interval price is a button → flow F1 (or F2 in pick mode). Converted prices show ≈, the icon and a tooltip. A $0 price shows as "Free".
+- **Prices:** every interval price is a button → flow F1 (or F2 in pick mode). Converted prices show ≈, the icon and a tooltip. A $0 price shows as "Free". In Canada and the US prices are shown before tax, with "+ tax" (BLUEPRINT §4.8).
 - **Availability** (`availability` in core, BLUEPRINT §4.7): plans and bundles not offered in the user's region are left out. A provider with nothing offered there shows "Not offered in Canada" instead of prices, and only when the search text names it. An unknown item shows its fallback price with "No Canadian price yet".
 - **Links:** Plan ↗ and Cancel ↗ open in a new tab (`rel="noopener"`).
 - **Status:** follows §3.3, at provider level.
@@ -889,6 +894,7 @@ Editor dialog:
 ```
 **Behaviour**
 - Features come from a registry search; enum and number features ask for a value.
+- The cost is what you pay, tax included, unless "plus tax" is ticked (BLUEPRINT §4.8).
 - The icon comes from `/api/sub/v1/icon?domain=<website>`, or falls back to the app logo.
 - Editing a plan updates every item that uses it, after a warning that shows the count.
 - Deleting a custom subscription that's in use asks to confirm: "Also remove it from 1 list".
@@ -909,7 +915,7 @@ Editor dialog:
    Appearance   (•) System  ( ) Light  ( ) Dark
    Your data    [Export backup] [Import backup] [Delete all data]
    Catalog      Updated Oct 22, 2026 · version c4f9a21 · [Check for updates]
-📍 Canada (CAD)
+📍 Ontario, Canada (CAD)
 ```
 **Behaviour**
 - ← goes back (to Home if there's no history).
@@ -919,7 +925,7 @@ Editor dialog:
   - The colour swatch opens a palette (12 presets plus a hex field).
   - ✕ deletes, asking for confirmation if the tag is in use: "Used by 5 subscriptions".
   - ⊕ adds a new tag in edit mode.
-- 📍 opens a dialog for country and currency (the currency follows the country unless you change it).
+- 📍 opens a dialog for country, province or state, and currency (the currency follows the country unless you change it), with the sales tax that follows: "Sales tax 13% (Ontario)" and [Use my own rate] (BLUEPRINT §4.8).
 - **Export backup** downloads `simply-sub-backup-YYYY-MM-DD.json`:
   ```json
   {
@@ -928,7 +934,7 @@ Editor dialog:
     "exportedAt": "2026-10-22T18:30:00Z",
     "catalogVersion": "c4f9a21",
     "data": {
-      "settings": { "country": "CA", "currency": "CAD", "monthlyBudget": 200, "annualBudget": 1000, "theme": "system" },
+      "settings": { "country": "CA", "subdivision": "CA-ON", "currency": "CAD", "monthlyBudget": 200, "annualBudget": 1000, "theme": "system" },
       "lists": [{ "id": "0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d", "name": "Work Related", "createdAt": "2026-10-01T12:00:00Z", "updatedAt": "2026-10-20T09:15:00Z" }],
       "items": [], "customSubs": [], "rankings": [], "cards": [], "tags": []
     }
@@ -1016,6 +1022,8 @@ FREE SAVINGS — nothing you rank is lost
 - Charges: month-end with and without `billingDay`, leap years, `intervalCount`, 30-day and 2-week cycles,
   windows (no charge on the end date), yearly repeats, start/end dates, manual renewals, re-anchoring, a price
   override's `until`, and "next 12 months" counting a yearly charge once
+- Sales tax: each Canadian province's rate, a user's own rate, tax-included regions, `plusTax` amounts, and an
+  item bought in another region
 - Statuses, rank resolution and ladders, rank counts, feature summaries
 - Budget checks, optimizer fixtures, reward maths
 

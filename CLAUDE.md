@@ -27,6 +27,10 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
   is `availability` in core: offered, not offered or unknown (BLUEPRINT §4.7).
 - Catalog prices are the regular (renewal) price, never a first-term offer, with the billing period the provider
   states ("every 30 days" is `interval: day, intervalCount: 30`).
+- Sales tax is added for buyers in Canada and the US (built-in Canadian rates by province, the user's own rate
+  otherwise). Totals include it; price tags show the listed price with "+ tax" (BLUEPRINT §4.8).
+- Storage, all on Cloudflare: static files for the catalog and icons, D1 for the API's searches, KV for small values
+  that must survive (M2.5), R2 only when a trigger in BLUEPRINT §7.1 is reached.
 - Catalog growth is automated (discover → find URLs → AI extract → validate → PR). Humans only review PRs.
 - Business logic (optimizer, schedules, rewards, exporters) lives in `packages/core` as pure, tested functions.
 - Feature ids come from `data/features.yaml`. Never invent feature keys inline.

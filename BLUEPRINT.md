@@ -69,6 +69,7 @@ added as a custom entry. Users rank how much they care about each feature. The a
 | Catalog scope | **Personal and family plans**, free tiers included (a $0 price). Business and per-seat plans aren't in the v1 catalog. A provider's all-in-one plans (Proton Unlimited, Duo, Family) are **suite plans**, not bundles (section 4.4) |
 | Domain & URLs | **simplely.ca**: app at `https://simplely.ca/simply/sub/`, API at `https://simplely.ca/api/sub/v1/` |
 | Regions | **Every region a service supports** is stored. The user's own region and currency are the default. Prices without a native price in the user's currency are converted and marked with a "converted" icon (section 4.7). Canadian data is filled first |
+| Sales tax | Added for buyers in **Canada and the US**, where listed prices exclude it: a built-in rate per Canadian province, the user's own rate otherwise. Totals include it; price tags show "+ tax" (section 4.8) |
 | Payment cards | **Kept**, manual entry: network, flat cash-back %, FX fee %, optional monthly limit (section 9). Built in Phase 4 |
 | Automation | Cloudflare-first: Workers Builds deploys, Cron Worker + Workflows run price checks, Workers AI extracts. GitHub hosts the repo and PRs. Large discovery batches run locally (section 7.7) |
 | Theming | All colours, tints and states are CSS custom properties, so the palette can change in one place |
@@ -198,6 +199,7 @@ simply-sub/
 │     │  ├─ dates/           # ISO calendar dates in UTC: IsoDate, toIsoDate, addDays, addMonths (M7.1)
 │     │  ├─ icons/           # PNG and ICO reading, a page's icon links, the icon services, picking the best icon
 │     │  ├─ schedule/        # recurrence: next payment dates, monthly/annual totals
+│     │  ├─ tax/             # sales tax: tax-added regions, the Canadian rate table, subdivisions (section 4.8)
 │     │  ├─ ranking/         # rank resolution (item override > profile > not ranked)
 │     │  ├─ optimizer/       # suggestion engine (section 10)
 │     │  ├─ rewards/         # card reward maths (section 9)
@@ -780,7 +782,8 @@ export interface ListItem {
     | { mode: 'limited'; windows: { start: string; end: string; repeatYearly: boolean }[];
         interval: Interval; intervalCount: number };  // e.g. Netflix Premium every Sep–Oct
   priceOverride?: { amount: number; currency: string;   // promos, first-term offers, grandfathered prices
-                    until?: string };                   // the date the catalog price applies again
+                    until?: string;                     // the date the catalog price applies again
+                    plusTax?: boolean };                // the amount is before sales tax (default: tax included, 4.8)
   cardId?: string;
   tagIds: string[];
   rankOverrides: Record<RankKey, Rank>;  // subscription-level ranks (PROJECT-PLAN.md §3.2)
@@ -795,7 +798,8 @@ export interface ProfileRanking {     // global ranks; 'essential' and 'critical
 export interface CustomSubscription {
   id: string; name: string; link?: string; cancelUrl?: string;
   plans: { id: string; name: string; features: Record<string, FeatureValue>;
-           price: { amount: number; currency: string; interval: Interval; intervalCount: number };
+           price: { amount: number; currency: string; interval: Interval; intervalCount: number;
+                    plusTax?: boolean };     // the amount is before sales tax (default: tax included, 4.8)
            autoRenewAvailable: boolean }[];
   createdAt: string; updatedAt: string; deletedAt?: string;
 }
@@ -806,6 +810,8 @@ export interface Tag { id: string; name: string; color: string; }
 
 export interface Settings {
   country: string; currency: string;            // e.g. 'CA', 'CAD'; country is the region for pickPrice
+  subdivision?: string;                         // ISO 3166-2 province or state ('CA-ON'), where tax is added (4.8)
+  salesTaxPercent?: number;                     // the user's own rate, in place of the built-in one (4.8)
   monthlyBudget?: number; annualBudget?: number;
   theme: 'light' | 'dark' | 'system';
 }
@@ -895,6 +901,36 @@ item is sold in the region; `availability` does, and the app asks it first. `con
 - Users can view prices for any region by changing the region in Settings, or pick a region per list item
   (useful for services bought abroad).
 
+### 4.8 Sales tax
+Catalog prices are what providers list, and whether that includes sales tax depends on the buyer's region.
+Canadian and US prices exclude it (Netflix Canada adds GST/HST, so $18.99 is $21.46 in Ontario), while EU, UK,
+Australian and most other prices include VAT or GST. Without tax, a Canadian's totals would come out 5–15% low.
+The rules live in `packages/core/src/tax/` and run in M7.1:
+- **The buyer's location decides**, not where the price came from: Settings' `country` and `subdivision`. In a
+  **tax-added region** (`taxAddedRegions` in core: CA and US), tax is added to every catalog price, converted ones
+  included, since foreign services such as Proton must collect GST/HST from Canadians. Elsewhere prices already
+  include it, and nothing is added. An item bought in another region (`ListItem.region`) follows that region's
+  rule, but gets a rate only in the user's own country, the only one whose rate the app knows.
+- **Rates:**
+  - A built-in table for Canada's 13 provinces and territories: each one's combined rate on digital
+    subscriptions, GST/HST plus the provincial tax where it covers digital services. It's checked against official
+    sources when it's built (M7.1) and records the date checked.
+  - No built-in US rates. Whether streaming and software are taxed varies by state and city, so a table would
+    often be wrong. US users enter their own percentage.
+  - `salesTaxPercent` replaces the built-in rate anywhere.
+- **Amounts the user types** (a custom plan's price, a price override) are what they pay, tax included. A "plus
+  tax" checkbox (`plusTax`) marks an amount copied from an ad, and tax is then added like on catalog prices.
+- **Where it shows:**
+  - Charges, totals, budgets, the calendar and exports include tax, because that's what leaves the account. Each
+    charge keeps its tax part (`Charge.tax`, PROJECT-PLAN §3.1).
+  - Price tags (`ss-price`: Search, plan pickers, cards) show the listed price, with a small "+ tax" in tax-added
+    regions, the way Canadian prices are normally shown. The monthly equivalent is before tax too.
+  - An item's billing details show the amount charged, tax included.
+- **Payment cards** (section 9.3): cash back and FX fees apply to the amount charged, tax included.
+- **Settings:** the first-run dialog and the 📍 dialog ask for the province or state, in a menu that lists the
+  chosen country's subdivisions (ISO 3166-2, kept in core), shown only for tax-added countries. Changing it
+  re-prices every total.
+
 ---
 
 ## 5. Catalog API
@@ -916,7 +952,7 @@ item is sold in the region; `availability` does, and the app asks it first. `con
 | `GET /features` | Feature registry |
 | `GET /categories` | Service and spend categories |
 | `GET /bundles?plans=netflix.standard,crave.premium` | Bundles that include any of the given plans |
-| `GET /icon?domain=example.com` | Favicon proxy for **custom subscriptions** (Google, then DuckDuckGo, as core's `iconServiceUrls` orders them → the best square PNG, or the fallback), cached for 30 days. Catalog icons are fetched once by `scripts/fetch-icons.ts` into `data/logos/` (committed, so builds never fetch) and served as static files at `/simply/sub/icons/<id>.png` |
+| `GET /icon?domain=example.com` | Favicon proxy for **custom subscriptions** (Google, then DuckDuckGo, as core's `iconServiceUrls` orders them → the best square PNG, or the fallback), cached for 30 days in KV. Catalog icons are fetched once by `scripts/fetch-icons.ts` into `data/logos/` (committed, so builds never fetch) and served as static files at `/simply/sub/icons/<id>.png` |
 | `GET /fx?base=CAD` | Proxied and cached Frankfurter rates (daily) |
 | `GET /health` | Returns the API version, and from M2.1 the catalog version, its build time and counts |
 | *(Phase 5)* `POST /reports` | "This price looks wrong" reports (Turnstile-protected, rate-limited) |
@@ -992,8 +1028,8 @@ shipped to the browser is visible. The risks are abuse, and M2 builds these defe
   it can't run up a bill. The app's own pages and catalog file are static assets and don't count.
 - **Caching:** every GET is edge-cached (section 5.1), so repeated requests rarely run the Worker or touch D1.
 - **Icon proxy (`/icon`):** accepts only a valid public domain name, only ever asks the fixed icon services
-  (Google, then DuckDuckGo) for that domain, never fetches a URL from the request, and caches results for 30
-  days. That keeps it from becoming an open proxy or reaching internal addresses. It reuses core's icon functions
+  (Google, then DuckDuckGo) for that domain, never fetches a URL from the request, and caches results in KV for
+  30 days. That keeps it from becoming an open proxy or reaching internal addresses. It reuses core's icon functions
   (`packages/core/src/icons/`: `iconServiceUrls`, `readIconImage`, `pickIcon`), but never the site's own pages,
   which only the catalog's `fetch-icons.ts` reads.
 - **No user data in logs:** the domain a user typed for a custom subscription says what they subscribe to, and
@@ -1235,8 +1271,23 @@ the Wikidata queue:
 | Workers requests | ~100,000 per day | API calls only: a few hundred per day at first |
 | Static assets | Free and unlimited. Up to 20,000 files per version, 25 MiB per file | The Angular build has well under 100 files |
 | D1 | 5 GB storage per account (500 MB per database), 5M rows read and 100k rows written per day (index entries count), 2 MB per row | Under 25 MB even at 1,000 providers. **Rows written** is the one to watch: from M2.1 a deploy writes only what changed (section 5.3) |
-| KV | 1 GB, 100k reads and 1k writes per day, 25 MiB per value | Durable small values, such as the last good exchange rates for `/fx` (M2.5), which the Cache API can evict |
-| R2 | 10 GB-month storage, 1M writes and 10M reads per month, no egress fees. Activating R2 asks for a payment method, even within the free tier | Not used yet. The natural home for Phase 5's encrypted sync blobs and calendar feeds |
+| KV | 1 GB, 100k reads and 1k writes per day, 25 MiB per value | One namespace (binding `KV`, M2.5) for small values that must survive: the last good `/fx` rates (M2.5) and the `/icon` cache (M2.6). The Cache API is per data centre and can evict them. A few dozen writes a day |
+| R2 | 10 GB-month storage, 1M writes and 10M reads per month, no egress fees. Activating R2 asks for a payment method, even within the free tier | Not used yet: see the triggers below |
+
+**Each store has one job:** static files serve the catalog and icons, D1 answers the API's searches, KV keeps
+small values that must survive, and R2 will hold large files. Using a store outside its job gains nothing: KV
+values and static files have the same 25 MiB cap, and KV allows far fewer writes.
+- **Setting one up:** create the KV namespace (or the R2 bucket) in the dashboard, and its id goes in
+  `wrangler.jsonc`, like D1's. Wrangler can create resources on deploy (an open beta), but an id in the config is
+  reviewable, and a branch preview can't create one by accident. The Workers Builds token already has KV and R2
+  permissions (section 7.6). Tests need no account: miniflare simulates KV and R2.
+- **When R2 starts to pay off** (none of these is close):
+  - Phase 5's encrypted sync blobs and calendar feeds.
+  - The full `catalog.json` nearing the 25 MiB static-file cap: about 4,000 providers at today's ~6 KB each,
+    sooner with many regions. The per-region files the app loads stay far smaller.
+  - Static files nearing 20,000 per deploy: icons are one file per provider, so about 19,000 providers.
+- **D1 rows read** count every row a query scans, not just the rows returned (5M a day). The search queries (M2.3)
+  must use the indexes, and the edge cache absorbs repeated searches.
 | GitHub Actions | Free for public repos, 2,000 min/month for private | CI plus a nightly check, around 300 min/month |
 | Domain | **simplely.ca**, already bought through Cloudflare Registrar, which renews at cost | The only real expense |
 | Workers Builds | ~3,000 build minutes/month, 1 concurrent build | A few minutes per deploy |
@@ -1662,7 +1713,7 @@ export interface PaymentCard {
 
 **Effective monthly cost of an item on a card:**
 ```
-charged        = price in the provider's billing currency for the user's region
+charged        = price in the provider's billing currency for the user's region, plus sales tax (section 4.8)
 inCardCurrency = charged × networkRate(chargedCurrency → cardCurrency)     (1 if same currency)
 fxFee          = chargedCurrency ≠ cardCurrency ? inCardCurrency × fxFeePercent / 100 : 0
 cashback       = (inCardCurrency + fxFee) × cashbackPercent / 100          (most cards pay on the full posted amount)
@@ -1912,13 +1963,12 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3).
 
-3. **Sales tax** (decide before M7.1): catalog prices are what the provider lists, and that differs by region.
-   Canadian and US prices exclude sales tax (Netflix Canada adds GST/HST on top: 13% in Ontario turns $18.99 into
-   $21.46), while EU, UK and Australian prices include VAT or GST. Totals for a Canadian would come out 5–15% low.
-   Suggested: a `salesTaxPercent` in Settings (defaulting from the province or state when known), applied to
-   charges from tax-exclusive regions, with the inclusive/exclusive rule per region kept in core.
-
 **Resolved (2026-10-23, pre-M2 review)**
+- **Sales tax:** added for buyers in Canada and the US, by the buyer's province or state (a menu of the chosen
+  country's subdivisions). Canada has a built-in rate table; US users enter their own rate. Typed amounts include
+  tax unless marked "plus tax". Totals include tax; price tags show the listed price with "+ tax" (section 4.8).
+- **Storage roles:** static files for the catalog and icons, D1 for the search API, KV for small values that must
+  survive (M2.5, M2.6), and R2 only when one of its triggers is reached (section 7.1).
 - **Regions:** ISO 3166-1 codes only (`GB`, not `UK`), checked by `validateCatalog`; `EU` is a group priced once for
   its 27 members, which pickPrice tries right after the user's own region (section 4.7).
 - **Availability:** offered, not offered or unknown, with an optional `availableIn` taken from the provider's own
