@@ -11,13 +11,14 @@
   "scripts": {
     "dev:web": "npm -w apps/web run start",
     "dev:api": "npm -w apps/api run dev",
-    "build": "npm -w packages/core run typecheck && tsc -p scripts && npm -w apps/web run build && npm -w apps/api run build",
+    "build": "npm -w packages/core run typecheck && tsc -p scripts && npm run data:build && npm -w apps/web run build && npm -w apps/api run build",
     "test": "npm run test --workspaces --if-present",
     "lint": "eslint . && stylelint \"**/*.{css,scss}\"",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "data:schema": "tsx scripts/generate-json-schema.ts",
-    "data:validate": "tsx scripts/validate-data.ts"
+    "data:validate": "tsx scripts/validate-data.ts",
+    "data:build": "tsx scripts/build-catalog.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

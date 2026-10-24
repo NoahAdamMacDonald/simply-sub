@@ -39,7 +39,7 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 - Money and time terms ("this month", "this year", "next 12 months", monthly equivalent) are defined in PROJECT-PLAN.md §3.1. Compute them only in `packages/core`.
 - List editing works on a draft saved in Dexie: Save commits atomically, Cancel discards.
 - `packages/core` functions never read the clock. They take `today` as a parameter, and the app passes it in from a single `ClockService`, so tests can fix the date.
-- The app reads the catalog from the static `data/catalog.json` and icons from static files. It only calls the Worker for `/fx` and custom-subscription icons.
+- The app reads the catalog from the static `data/catalog.json` (built by `npm run data:build`, BLUEPRINT §6.3) and icons from static files. It only calls the Worker for `/fx` and custom-subscription icons.
 
 ## Git workflow
 - `main` is protected (no bypass): never push to it. Work on a task branch (`feat/m5-3-search-filters`), push it,

@@ -5,6 +5,7 @@ import { categoriesFileSchema, type Categories } from './category';
 import { choices, didYouMean, idOf, listedMoreThanOnce, repeatedIndexes } from './checks';
 import { featuresFileSchema } from './feature';
 import { slugSchema } from './formats';
+import type { CatalogFileKind } from './json-schema';
 import type { Price } from './price';
 import { providerSchema, type Provider } from './provider';
 import {
@@ -161,6 +162,25 @@ interface LocatedFiles {
   bundles: NamedFile[];
 }
 
+/**
+ * What a file under data/ is, from its path: the registry, the categories, or a provider or bundle file and its
+ * name without .yaml. Undefined for anything else.
+ */
+export function locateCatalogFile(
+  file: string,
+): { kind: CatalogFileKind; name: string } | undefined {
+  if (file === featuresFile) {
+    return { kind: 'features', name: 'features' };
+  }
+  if (file === categoriesFile) {
+    return { kind: 'categories', name: 'categories' };
+  }
+  const named = /^data\/(providers|bundles)\/([^/]+)\.yaml$/.exec(file);
+  return named
+    ? { kind: named[1] === 'providers' ? 'provider' : 'bundle', name: named[2] }
+    : undefined;
+}
+
 function locateFiles(
   files: readonly CatalogSourceFile[],
   reportIn: (file: string) => Report,
@@ -168,13 +188,16 @@ function locateFiles(
   const located: LocatedFiles = { providers: [], bundles: [] };
   for (const source of files) {
     const { file } = source;
-    const named = /^data\/(providers|bundles)\/([^/]+)\.yaml$/.exec(file);
-    if (file === featuresFile) {
+    const where = locateCatalogFile(file);
+    if (where?.kind === 'features') {
       located.features = source;
-    } else if (file === categoriesFile) {
+    } else if (where?.kind === 'categories') {
       located.categories = source;
-    } else if (named) {
-      located[named[1] === 'providers' ? 'providers' : 'bundles'].push({ source, name: named[2] });
+    } else if (where) {
+      located[where.kind === 'provider' ? 'providers' : 'bundles'].push({
+        source,
+        name: where.name,
+      });
     } else if (file.endsWith('.yml')) {
       const name = file.slice(file.lastIndexOf('/') + 1, -'.yml'.length);
       reportIn(file)([], `Rename it to ${name}.yaml: catalog files end in .yaml`);
