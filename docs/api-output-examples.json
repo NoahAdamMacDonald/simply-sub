@@ -11,7 +11,7 @@
       "ids": "Stable slugs: provider 'netflix', plan 'netflix.standard', add-on 'netflix.extra-member', bundle 'bundle.disney-crave-premium', feature 'video.quality'.",
       "rankKeys": "Boolean feature: '<featureId>'. Enum or set value: '<featureId>=<valueId>'. Number tier: '<featureId>=<tierId>'. A plan provides an enum key when its value is at least that value, and a tier key when its number is at least the tier's min (PROJECT-PLAN.md §3.2).",
       "money": "Amounts are decimals in the currency's major unit (18.99 = $18.99). Currencies are ISO 4217. Regions are ISO 3166-1 alpha-2, or 'GLOBAL' for a single worldwide price. A free plan has one price with amount 0: it creates no charges and the app shows it as Free (PROJECT-PLAN.md §3.1).",
-      "pricing": "'prices' lists every stored price for every region. When a request includes region and currency, a 'pricing' array is added with one picked price per interval (BLUEPRINT §4.7). 'native: false' means the amount was converted, and the app shows ≈ and the exchange icon.",
+      "pricing": "'prices' lists every stored price for every region. When a request includes region and currency, a 'pricing' array is added with one picked price per interval, all from one source region and currency (pickPrice, BLUEPRINT §4.7). 'native: false' means the amount was converted, and the app shows ≈ and the exchange icon. Amounts and monthlyEquivalent are rounded to 2 decimals and fx.rate to 4, from the unrounded conversion.",
       "monthlyEquivalent": "Price per month: year ÷ 12, week × 52 ÷ 12, day × 365 ÷ 12, each divided by intervalCount. Computed from the unrounded amount, then rounded to 2 decimals.",
       "dates": "Dates are YYYY-MM-DD. Timestamps are ISO 8601 in UTC.",
       "caching": "GET responses carry an ETag based on the catalog version. Send If-None-Match to get 304 Not Modified."
@@ -851,7 +851,7 @@
                       "name": "Mullvad VPN",
                       "matchedKeys": ["vpn.included"],
                       "pricing": [
-                        { "interval": "month", "intervalCount": 1, "amount": 7.53, "currency": "CAD", "monthlyEquivalent": 7.53, "autoRenew": false, "native": false, "source": { "region": "GLOBAL", "amount": 5.00, "currency": "EUR" }, "fx": { "rate": 1.5060, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                        { "interval": "month", "intervalCount": 1, "amount": 7.53, "currency": "CAD", "monthlyEquivalent": 7.53, "autoRenew": false, "native": false, "source": { "region": "GLOBAL", "amount": 5.00, "currency": "EUR" }, "fx": { "rate": 1.5060, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } }
                       ],
                       "bestMonthlyEquivalent": 7.53,
                       "lastVerified": "2026-10-10",
@@ -875,7 +875,7 @@
                       "name": "Proton Free",
                       "matchedKeys": ["vpn.included"],
                       "pricing": [
-                        { "interval": "month", "intervalCount": 1, "amount": 0, "currency": "CAD", "monthlyEquivalent": 0, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 0, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                        { "interval": "month", "intervalCount": 1, "amount": 0, "currency": "CAD", "monthlyEquivalent": 0, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 0, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } }
                       ],
                       "bestMonthlyEquivalent": 0,
                       "lastVerified": "2026-10-12",
@@ -886,8 +886,8 @@
                       "name": "VPN Plus",
                       "matchedKeys": ["vpn.included"],
                       "pricing": [
-                        { "interval": "month", "intervalCount": 1, "amount": 13.79, "currency": "CAD", "monthlyEquivalent": 13.79, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 9.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } },
-                        { "interval": "year", "intervalCount": 1, "amount": 82.67, "currency": "CAD", "monthlyEquivalent": 6.89, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 59.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                        { "interval": "month", "intervalCount": 1, "amount": 13.79, "currency": "CAD", "monthlyEquivalent": 13.79, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 9.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } },
+                        { "interval": "year", "intervalCount": 1, "amount": 82.67, "currency": "CAD", "monthlyEquivalent": 6.89, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 59.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } }
                       ],
                       "bestMonthlyEquivalent": 6.89,
                       "lastVerified": "2026-10-12",
@@ -898,8 +898,8 @@
                       "name": "Proton Unlimited",
                       "matchedKeys": ["vpn.included"],
                       "pricing": [
-                        { "interval": "month", "intervalCount": 1, "amount": 17.93, "currency": "CAD", "monthlyEquivalent": 17.93, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 12.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } },
-                        { "interval": "year", "intervalCount": 1, "amount": 165.51, "currency": "CAD", "monthlyEquivalent": 13.79, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 119.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                        { "interval": "month", "intervalCount": 1, "amount": 17.93, "currency": "CAD", "monthlyEquivalent": 17.93, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 12.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } },
+                        { "interval": "year", "intervalCount": 1, "amount": 165.51, "currency": "CAD", "monthlyEquivalent": 13.79, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 119.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } }
                       ],
                       "bestMonthlyEquivalent": 13.79,
                       "lastVerified": "2026-10-12",
@@ -910,8 +910,8 @@
                       "name": "Proton Duo",
                       "matchedKeys": ["vpn.included"],
                       "pricing": [
-                        { "interval": "month", "intervalCount": 1, "amount": 27.60, "currency": "CAD", "monthlyEquivalent": 27.60, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 19.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } },
-                        { "interval": "year", "intervalCount": 1, "amount": 248.34, "currency": "CAD", "monthlyEquivalent": 20.70, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 179.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                        { "interval": "month", "intervalCount": 1, "amount": 27.60, "currency": "CAD", "monthlyEquivalent": 27.60, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 19.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } },
+                        { "interval": "year", "intervalCount": 1, "amount": 248.35, "currency": "CAD", "monthlyEquivalent": 20.70, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 179.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } }
                       ],
                       "bestMonthlyEquivalent": 20.70,
                       "lastVerified": "2026-10-12",
@@ -1138,7 +1138,7 @@
                       { "region": "GLOBAL", "currency": "USD", "amount": 0, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-12", "sourceUrl": "https://proton.me/pricing" }
                     ],
                     "pricing": [
-                      { "interval": "month", "intervalCount": 1, "amount": 0, "currency": "CAD", "monthlyEquivalent": 0, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 0, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                      { "interval": "month", "intervalCount": 1, "amount": 0, "currency": "CAD", "monthlyEquivalent": 0, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 0, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } }
                     ],
                     "_note": "A free plan: one price of 0. It creates no charges and shows as Free, never with ≈ (PROJECT-PLAN.md §3.1). One free account covers every Proton app, so it's one plan."
                   },
@@ -1162,8 +1162,8 @@
                       { "region": "GLOBAL", "currency": "USD", "amount": 35.88, "interval": "year", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-12", "sourceUrl": "https://proton.me/pass/pricing" }
                     ],
                     "pricing": [
-                      { "interval": "month", "intervalCount": 1, "amount": 6.89, "currency": "CAD", "monthlyEquivalent": 6.89, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 4.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } },
-                      { "interval": "year", "intervalCount": 1, "amount": 49.54, "currency": "CAD", "monthlyEquivalent": 4.13, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 35.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                      { "interval": "month", "intervalCount": 1, "amount": 6.89, "currency": "CAD", "monthlyEquivalent": 6.89, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 4.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } },
+                      { "interval": "year", "intervalCount": 1, "amount": 49.54, "currency": "CAD", "monthlyEquivalent": 4.13, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 35.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } }
                     ]
                   },
                   {
@@ -1180,8 +1180,8 @@
                       { "region": "GLOBAL", "currency": "USD", "amount": 59.88, "interval": "year", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-12", "sourceUrl": "https://protonvpn.com/pricing" }
                     ],
                     "pricing": [
-                      { "interval": "month", "intervalCount": 1, "amount": 13.79, "currency": "CAD", "monthlyEquivalent": 13.79, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 9.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } },
-                      { "interval": "year", "intervalCount": 1, "amount": 82.67, "currency": "CAD", "monthlyEquivalent": 6.89, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 59.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                      { "interval": "month", "intervalCount": 1, "amount": 13.79, "currency": "CAD", "monthlyEquivalent": 13.79, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 9.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } },
+                      { "interval": "year", "intervalCount": 1, "amount": 82.67, "currency": "CAD", "monthlyEquivalent": 6.89, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 59.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } }
                     ]
                   },
                   {
@@ -1211,8 +1211,8 @@
                       { "region": "GLOBAL", "currency": "USD", "amount": 119.88, "interval": "year", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-12", "sourceUrl": "https://proton.me/pricing" }
                     ],
                     "pricing": [
-                      { "interval": "month", "intervalCount": 1, "amount": 17.93, "currency": "CAD", "monthlyEquivalent": 17.93, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 12.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } },
-                      { "interval": "year", "intervalCount": 1, "amount": 165.51, "currency": "CAD", "monthlyEquivalent": 13.79, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 119.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                      { "interval": "month", "intervalCount": 1, "amount": 17.93, "currency": "CAD", "monthlyEquivalent": 17.93, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 12.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } },
+                      { "interval": "year", "intervalCount": 1, "amount": 165.51, "currency": "CAD", "monthlyEquivalent": 13.79, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 119.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } }
                     ],
                     "_note": "A suite plan (BLUEPRINT §4.4): it states its own features (500 GB, more than any single plan), and includes-subscription lists the plans it replaces. That drives overlap warnings, savings against buying them separately and the optimizer. Trimmed: the real file also lists proton.mail-plus and proton.drive-plus."
                   },
@@ -1243,8 +1243,8 @@
                       { "region": "GLOBAL", "currency": "USD", "amount": 179.88, "interval": "year", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-12", "sourceUrl": "https://proton.me/family" }
                     ],
                     "pricing": [
-                      { "interval": "month", "intervalCount": 1, "amount": 27.60, "currency": "CAD", "monthlyEquivalent": 27.60, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 19.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } },
-                      { "interval": "year", "intervalCount": 1, "amount": 248.34, "currency": "CAD", "monthlyEquivalent": 20.70, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 179.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "ECB via Frankfurter" } }
+                      { "interval": "month", "intervalCount": 1, "amount": 27.60, "currency": "CAD", "monthlyEquivalent": 27.60, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 19.99, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } },
+                      { "interval": "year", "intervalCount": 1, "amount": 248.35, "currency": "CAD", "monthlyEquivalent": 20.70, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 179.88, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } }
                     ],
                     "_note": "A suite for two people (account.users: 2). It includes Unlimited, and inclusion is transitive, so it also covers the plans Unlimited includes. It costs more than one Unlimited, so no savings line is shown; the optimizer can still use it to replace two people's Unlimited plans in one list."
                   }

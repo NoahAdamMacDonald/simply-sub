@@ -5,7 +5,11 @@ import {
   catalogSnapshotSchema,
   categoriesFileSchema,
   featuresFileSchema,
+  pickPrice,
   providerSchema,
+  type FxRates,
+  type PickedPrice,
+  type Price,
 } from '../../src';
 import { issues } from './helpers';
 
@@ -79,5 +83,87 @@ describe('the GET /catalog example', () => {
   it('is a catalog snapshot, once the documentation notes are gone', () => {
     const body = contract.endpoints['GET /catalog'].examples[0].response.body;
     expect(issues(catalogSnapshotSchema, toSource(body, []))).toEqual([]);
+  });
+});
+
+/**
+ * Every object in `value` with a picked `pricing`, and its stored `prices`. Search results leave the stored prices
+ * out, so theirs are rebuilt from each picked price's source: that still checks the conversion.
+ */
+function pricedIn(value: unknown): { prices: Price[]; pricing: PickedPrice[] }[] {
+  if (Array.isArray(value)) {
+    return value.flatMap(pricedIn);
+  }
+  if (typeof value !== 'object' || value === null) {
+    return [];
+  }
+  const record = value as Record<string, unknown>;
+  const pricing = Array.isArray(record['pricing'])
+    ? (record['pricing'] as PickedPrice[])
+    : undefined;
+  const prices =
+    (record['prices'] as Price[] | undefined) ??
+    pricing?.map(({ source, interval, intervalCount, autoRenew }) => ({
+      ...source,
+      interval,
+      intervalCount,
+      autoRenew,
+      lastVerified: '2026-10-21',
+    }));
+  return [
+    ...(pricing && prices ? [{ prices, pricing }] : []),
+    ...Object.values(record).flatMap(pricedIn),
+  ];
+}
+
+/** A picked price the way the API writes it: amounts to 2 decimals and the rate to 4 (PROJECT-PLAN §3.1). */
+function asApiWritesIt(picked: PickedPrice): PickedPrice {
+  const round = (value: number, decimals: number) =>
+    Math.round(value * 10 ** decimals) / 10 ** decimals;
+  return {
+    ...picked,
+    amount: round(picked.amount, 2),
+    monthlyEquivalent: round(picked.monthlyEquivalent, 2),
+    ...(picked.fx && { fx: { ...picked.fx, rate: round(picked.fx.rate, 4) } }),
+  };
+}
+
+describe('the picked pricing in the examples', () => {
+  const fx = contract.endpoints['GET /fx'].examples[0].response.body.data as FxRates;
+  const examples = Object.entries(
+    contract.endpoints as unknown as Record<
+      string,
+      { examples: { title: string; response: { body: unknown } }[] }
+    >,
+  ).flatMap(([endpoint, { examples }]) =>
+    examples.flatMap(({ title, response }) => {
+      const meta = (response.body as { meta?: Record<string, unknown> } | null)?.meta ?? {};
+      const query = (meta['query'] ?? {}) as Record<string, unknown>;
+      const region = meta['region'] ?? query['region'];
+      const currency = meta['currency'] ?? query['currency'];
+      return typeof region === 'string' && typeof currency === 'string'
+        ? pricedIn(response.body).map(
+            ({ prices, pricing }, index): [string, string, string, Price[], PickedPrice[]] => [
+              `${endpoint} "${title}" #${index}`,
+              region,
+              currency,
+              prices,
+              pricing,
+            ],
+          )
+        : [];
+    }),
+  );
+
+  it('covers every endpoint that picks prices', () => {
+    expect(new Set(examples.map(([name]) => name.split(' "')[0]))).toEqual(
+      new Set(['GET /providers', 'GET /providers/:id', 'GET /plans/:id', 'GET /bundles']),
+    );
+  });
+
+  it.each(examples)('%s is what pickPrice gives', (_name, region, currency, prices, pricing) => {
+    expect(toSource(pricing, [])).toEqual(
+      pickPrice(prices, { region, currency, fx }).map(asApiWritesIt),
+    );
   });
 });
