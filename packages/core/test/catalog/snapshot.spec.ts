@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   buildCatalogData,
   buildCatalogMeta,
+  catalogDataSchema,
   catalogMetaSchema,
   catalogSnapshotSchema,
   readCatalogSource,
@@ -20,6 +21,7 @@ function dataOf(files = catalog()): CatalogData {
 describe('readCatalogSource', () => {
   it('reads every file, with providers and bundles sorted by id', () => {
     const source = readCatalogSource(catalog());
+    expect([...source.logos.keys()]).toEqual(['crave', 'mullvad', 'netflix', 'proton']);
     expect(source.providers.map((provider) => provider.id)).toEqual([
       'crave',
       'mullvad',
@@ -73,6 +75,14 @@ describe('buildCatalogData', () => {
     expect(data.providers).toEqual(
       source.providers.map((provider) => ({ ...provider, iconUrl: expect.any(String) })),
     );
+  });
+
+  it('leaves out the icon URL of a provider without a logo', () => {
+    const files = catalog().filter(({ file }) => file !== 'data/logos/crave.png');
+    const [crave, mullvad] = dataOf(files).providers;
+    expect('iconUrl' in crave).toBe(false);
+    expect(mullvad.iconUrl).toBe('https://simplely.ca/simply/sub/icons/mullvad.png');
+    expect(issues(catalogDataSchema, dataOf(files))).toEqual([]);
   });
 
   it("adds each provider's icon URL after website, where the API examples have it", () => {

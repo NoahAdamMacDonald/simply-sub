@@ -18,7 +18,8 @@
     "format:check": "prettier --check .",
     "data:schema": "tsx scripts/generate-json-schema.ts",
     "data:validate": "tsx scripts/validate-data.ts",
-    "data:build": "tsx scripts/build-catalog.ts"
+    "data:build": "tsx scripts/build-catalog.ts",
+    "data:icons": "tsx scripts/fetch-icons.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

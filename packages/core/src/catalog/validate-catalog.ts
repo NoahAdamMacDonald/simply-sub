@@ -1,5 +1,6 @@
 import type { z } from 'zod';
 import { addDays, type IsoDate } from '../dates/iso-date';
+import { iconProblem, readPngImage } from '../icons/icon-image';
 import { bundleSchema, type Bundle } from './bundle';
 import { categoriesFileSchema, type Categories } from './category';
 import { choices, didYouMean, idOf, listedMoreThanOnce, repeatedIndexes } from './checks';
@@ -31,11 +32,15 @@ export interface CatalogIssue {
   message: string;
 }
 
-/** A file under data/ as the caller read it: its parsed YAML, or a note that it isn't valid YAML. */
+/**
+ * A file under data/ as the caller read it: a YAML file's parsed data, or a note that it isn't valid YAML, or the
+ * bytes of a file in data/logos/.
+ */
 export type CatalogSourceFile =
   | { file: string; data: unknown }
   // The caller reports why. Checks that need the file's contents skip it, so nothing is reported twice.
-  | { file: string; invalidYaml: true };
+  | { file: string; invalidYaml: true }
+  | { file: string; bytes: Uint8Array };
 
 /** What an id names. Provider, plan, add-on and bundle ids share one namespace. */
 export type CatalogIdKind = 'provider' | 'plan' | 'add-on' | 'bundle';
@@ -59,9 +64,10 @@ const categoriesFile = 'data/categories.yaml';
 const staleAfterDays = 90;
 
 /**
- * Every problem in the catalog, file by file. `files` are all the .yaml and .yml files under data/, with paths
- * from the repo root. A broken file gets its own errors, and the checks that would only repeat them are left
- * out: a provider that fails its schema isn't checked against the registry, and references to it aren't flagged.
+ * Every problem in the catalog, file by file. `files` are all the .yaml and .yml files under data/ and every file
+ * in data/logos/, with paths from the repo root. A broken file gets its own errors, and the checks that would only
+ * repeat them are left out: a provider that fails its schema isn't checked against the registry, and references
+ * to it aren't flagged.
  */
 export function validateCatalog(
   files: readonly CatalogSourceFile[],
@@ -138,6 +144,7 @@ export function validateCatalog(
       value.plans.map((plan, index) => ({ plan, path: ['plans', index], report })),
     ),
   );
+  checkLogos(located.logos, providers, ids, reportIn);
   return issues;
 }
 
@@ -160,15 +167,16 @@ interface LocatedFiles {
   categories?: CatalogSourceFile;
   providers: NamedFile[];
   bundles: NamedFile[];
+  logos: NamedFile[];
 }
 
 /**
- * What a file under data/ is, from its path: the registry, the categories, or a provider or bundle file and its
- * name without .yaml. Undefined for anything else.
+ * What a file under data/ is, from its path: the registry, the categories, a provider or bundle file and its name
+ * without .yaml, or a provider's logo (data/logos/<provider id>.png). Undefined for anything else.
  */
 export function locateCatalogFile(
   file: string,
-): { kind: CatalogFileKind; name: string } | undefined {
+): { kind: CatalogFileKind | 'logo'; name: string } | undefined {
   if (file === featuresFile) {
     return { kind: 'features', name: 'features' };
   }
@@ -176,16 +184,18 @@ export function locateCatalogFile(
     return { kind: 'categories', name: 'categories' };
   }
   const named = /^data\/(providers|bundles)\/([^/]+)\.yaml$/.exec(file);
-  return named
-    ? { kind: named[1] === 'providers' ? 'provider' : 'bundle', name: named[2] }
-    : undefined;
+  if (named) {
+    return { kind: named[1] === 'providers' ? 'provider' : 'bundle', name: named[2] };
+  }
+  const logo = /^data\/logos\/([^/]+)\.png$/.exec(file);
+  return logo ? { kind: 'logo', name: logo[1] } : undefined;
 }
 
 function locateFiles(
   files: readonly CatalogSourceFile[],
   reportIn: (file: string) => Report,
 ): LocatedFiles {
-  const located: LocatedFiles = { providers: [], bundles: [] };
+  const located: LocatedFiles = { providers: [], bundles: [], logos: [] };
   for (const source of files) {
     const { file } = source;
     const where = locateCatalogFile(file);
@@ -194,10 +204,10 @@ function locateFiles(
     } else if (where?.kind === 'categories') {
       located.categories = source;
     } else if (where) {
-      located[where.kind === 'provider' ? 'providers' : 'bundles'].push({
-        source,
-        name: where.name,
-      });
+      const list = { provider: 'providers', bundle: 'bundles', logo: 'logos' } as const;
+      located[list[where.kind]].push({ source, name: where.name });
+    } else if (file.startsWith('data/logos/')) {
+      reportIn(file)([], 'Logos are PNG files named after the provider id (disney-plus.png)');
     } else if (file.endsWith('.yml')) {
       const name = file.slice(file.lastIndexOf('/') + 1, -'.yml'.length);
       reportIn(file)([], `Rename it to ${name}.yaml: catalog files end in .yaml`);
@@ -455,6 +465,42 @@ function checkBillingCurrency(
           `billingCurrency charges ${charged} in ${region}, so this ${kind} needs a ${region} price in ${charged}`,
         );
       }
+    }
+  }
+}
+
+/**
+ * Each logo is a PNG the app can show, named after a provider. A provider without one gets a warning, since the
+ * app shows its first letter instead; `npm run data:icons` fetches one.
+ */
+function checkLogos(
+  logos: readonly NamedFile[],
+  providers: readonly ReadFile<Provider>[],
+  ids: CatalogIds,
+  reportIn: (file: string) => Report,
+): void {
+  for (const { source, name } of logos) {
+    const report = reportIn(source.file);
+    const kind = ids.kindOf(name);
+    if (kind !== 'provider' && kind !== 'unchecked') {
+      report(
+        [],
+        `"${name}" isn't a provider id: name the logo after one${didYouMean(name, ids.all('provider'))}`,
+      );
+    }
+    const problem = iconProblem('bytes' in source ? readPngImage(source.bytes) : undefined);
+    if (problem) {
+      report([], problem);
+    }
+  }
+  const named = new Set(logos.map(({ name }) => name));
+  for (const { value, report } of providers) {
+    if (!named.has(value.id)) {
+      report(
+        [],
+        `No logo, so the app shows a letter: run npm run data:icons to fetch data/logos/${value.id}.png`,
+        'warning',
+      );
     }
   }
 }

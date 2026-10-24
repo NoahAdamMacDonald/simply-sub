@@ -60,6 +60,7 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 - Catalog YAML is validated by the Zod schemas in `packages/core/src/catalog/` (BLUEPRINT §4.5). They're strict,
   and the types come from `z.infer`, so don't hand-write catalog interfaces. After changing a schema, run
   `npm run data:schema` and commit `data/schema/`, because CI fails if it's stale. After editing `data/`, run
-  `npm run data:validate`: the schemas plus the cross-file checks of `validateCatalog` (BLUEPRINT §6.2).
+  `npm run data:validate`: the schemas plus the cross-file checks of `validateCatalog` (BLUEPRINT §6.2). A new
+  provider's logo comes from `npm run data:icons` into `data/logos/<id>.png` (committed); builds never fetch icons.
 - Vitest for unit tests, Playwright for end-to-end tests.
 - Open questions are listed in BLUEPRINT.md section 14. Ask the user rather than guessing.

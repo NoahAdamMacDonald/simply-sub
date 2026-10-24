@@ -102,6 +102,7 @@ const source: CatalogSource = {
       prices: [price(35)],
     },
   ],
+  logos: new Map(),
 };
 
 function snapshotOf(catalog: CatalogSource): CatalogSnapshot {

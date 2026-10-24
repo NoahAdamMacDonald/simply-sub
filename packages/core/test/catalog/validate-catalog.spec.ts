@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { formatCatalogIssue, validateCatalog, type CatalogSourceFile } from '../../src';
 import { catalog, catalogWith, edited, today } from './catalog-files';
+import { asciiBytes, pngBytes } from './helpers';
 
 const bundleFile = 'data/bundles/netflix-crave.yaml';
 const categoriesFile = 'data/categories.yaml';
@@ -172,6 +173,7 @@ describe('validateCatalog', () => {
         messages([...catalog(), { file: 'data/providers/bundle.yaml', data: provider }]),
       ).toEqual([
         'data/providers/bundle.yaml plans.0.id: "bundle.netflix-crave" is already the id of a bundle in data/bundles/netflix-crave.yaml',
+        'warning: data/providers/bundle.yaml: No logo, so the app shows a letter: run npm run data:icons to fetch data/logos/bundle.png',
       ]);
     });
 
@@ -458,6 +460,57 @@ describe('validateCatalog', () => {
     ])('needs includes to be plans, not %s', (id, expected) => {
       expect(messagesWith(bundleFile, ['includes', 1], id)).toEqual([
         `data/bundles/netflix-crave.yaml includes.1: ${expected}`,
+      ]);
+    });
+  });
+
+  describe('logos', () => {
+    const logo = (file: string, bytes: Uint8Array) => withFile(catalog(), { file, bytes });
+
+    it('warns about a provider without a logo', () => {
+      const files = catalog().filter(({ file }) => file !== 'data/logos/mullvad.png');
+      expect(messages(files)).toEqual([
+        'warning: data/providers/mullvad.yaml: No logo, so the app shows a letter: run npm run data:icons to fetch data/logos/mullvad.png',
+      ]);
+    });
+
+    it.each([
+      [
+        'data/logos/netflx.png',
+        'data/logos/netflx.png: "netflx" isn\'t a provider id: name the logo after one (did you mean netflix?)',
+      ],
+      [
+        'data/logos/netflix.standard.png',
+        'data/logos/netflix.standard.png: "netflix.standard" isn\'t a provider id: name the logo after one',
+      ],
+      [
+        'data/logos/netflix.svg',
+        'data/logos/netflix.svg: Logos are PNG files named after the provider id (disney-plus.png)',
+      ],
+    ])('rejects %s', (file, expected) => {
+      expect(messages(logo(file, pngBytes(64, 64)))).toEqual([expected]);
+    });
+
+    it.each([
+      ['an HTML page', asciiBytes('<!doctype html><html></html>'), 'Not a PNG image'],
+      [
+        'a picture that is not square',
+        pngBytes(64, 48),
+        'Use a square image of at least 32×32 pixels (this one is 64×48)',
+      ],
+      [
+        'a picture under 32 pixels',
+        pngBytes(16, 16),
+        'Use a square image of at least 32×32 pixels (this one is 16×16)',
+      ],
+      [
+        'a file over 100 KB',
+        pngBytes(64, 64, 100_001),
+        'Use an image of at most 100 KB (this one is 101 KB)',
+      ],
+    ])('rejects %s', (_case, bytes, expected) => {
+      expect(messages(logo('data/logos/netflix.png', bytes))).toEqual([
+        `data/logos/netflix.png: ${expected}`,
       ]);
     });
   });

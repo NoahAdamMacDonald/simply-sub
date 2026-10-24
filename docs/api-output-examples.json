@@ -7,7 +7,7 @@
     "conventions": {
       "envelope": "Success: { data, meta }. Failure: { error: { code, message, details? } }.",
       "docKeys": "Keys starting with '_' are documentation notes and never appear in real responses.",
-      "optionalFields": "Optional fields are omitted when empty or unknown. For example, a provider without acceptedNetworks means 'unknown', so every card is allowed.",
+      "optionalFields": "Optional fields are omitted when empty or unknown. For example, a provider without acceptedNetworks means 'unknown', so every card is allowed, and a provider without iconUrl has no logo, so the app shows its first letter.",
       "ids": "Stable slugs: provider 'netflix', plan 'netflix.standard', add-on 'netflix.extra-member', bundle 'bundle.disney-crave-premium', feature 'video.quality'.",
       "rankKeys": "Boolean feature: '<featureId>'. Enum or set value: '<featureId>=<valueId>'. Number tier: '<featureId>=<tierId>'. A plan provides an enum key when its value is at least that value, and a tier key when its number is at least the tier's min (PROJECT-PLAN.md §3.2).",
       "money": "Amounts are decimals in the currency's major unit (18.99 = $18.99). Currencies are ISO 4217. Regions are ISO 3166-1 alpha-2, or 'GLOBAL' for a single worldwide price. A free plan has one price with amount 0: it creates no charges and the app shows it as Free (PROJECT-PLAN.md §3.1).",
