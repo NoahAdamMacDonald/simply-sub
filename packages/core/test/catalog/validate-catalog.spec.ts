@@ -540,6 +540,81 @@ describe('validateCatalog', () => {
     });
   });
 
+  describe('regions', () => {
+    it('needs a real ISO 3166-1 code, and says the United Kingdom is GB', () => {
+      // Only the region's own error: billingCurrency isn't also asked to list "UK".
+      expect(messagesWith(netflix, ['plans', 0, 'prices', 1, 'region'], 'UK')).toEqual([
+        'data/providers/netflix.yaml plans.0.prices.1.region: "UK" isn\'t an ISO 3166-1 region code: use GB for the United Kingdom',
+      ]);
+    });
+
+    it('checks bundle prices and billingCurrency too', () => {
+      const unknown = `isn't an ISO 3166-1 alpha-2 region code (CA, US, GB), a group (EU) or GLOBAL`;
+      expect(messagesWith(bundleFile, ['prices', 0, 'region'], 'XX')).toEqual([
+        `data/bundles/netflix-crave.yaml prices.0.region: "XX" ${unknown}`,
+      ]);
+      expect(messagesWith(netflix, ['billingCurrency', 'XX'], 'USD')).toEqual([
+        `data/providers/netflix.yaml billingCurrency.XX: "XX" ${unknown}`,
+      ]);
+    });
+
+    it('accepts a group such as EU', () => {
+      const eu = edited(
+        catalogWith(netflix, ['plans', 2, 'prices', 0], {
+          ...(dataOf(catalog(), netflix) as { plans: { prices: object[] }[] }).plans[2].prices[0],
+          region: 'EU',
+          currency: 'EUR',
+        }),
+        netflix,
+        ['billingCurrency', 'EU'],
+        'EUR',
+      );
+      expect(messages(eu)).toEqual([]);
+    });
+  });
+
+  describe('availableIn', () => {
+    it('accepts the full list of regions a provider sells in', () => {
+      expect(messagesWith(netflix, ['availableIn'], ['CA', 'US', 'MX'])).toEqual([]);
+    });
+
+    it('needs every region a plan or add-on is priced in, reported once per file', () => {
+      expect(messagesWith(netflix, ['availableIn'], ['CA'])).toEqual([
+        'data/providers/netflix.yaml plans.0.prices.1.region: availableIn has no US, but this plan is priced there: add US to it',
+      ]);
+    });
+
+    it('covers members through their group, and a group through a member', () => {
+      const priced = (region: string, currency: string) =>
+        edited(
+          catalogWith(mullvad, ['plans', 0, 'prices', 1], {
+            region,
+            currency,
+            amount: 60,
+            interval: 'year',
+            intervalCount: 1,
+            autoRenew: false,
+            lastVerified: '2026-10-20',
+          }),
+          mullvad,
+          ['billingCurrency'],
+          undefined,
+        );
+      expect(messages(edited(priced('DE', 'EUR'), mullvad, ['availableIn'], ['EU']))).toEqual([]);
+      expect(messages(edited(priced('EU', 'EUR'), mullvad, ['availableIn'], ['DE']))).toEqual([]);
+      expect(messages(edited(priced('EU', 'EUR'), mullvad, ['availableIn'], ['CA']))).toEqual([
+        'data/providers/mullvad.yaml plans.0.prices.1.region: availableIn has no EU, but this plan is priced there: add EU to it',
+      ]);
+    });
+
+    it('rejects GLOBAL and codes that aren’t regions', () => {
+      expect(messagesWith(mullvad, ['availableIn'], ['GLOBAL', 'UK'])).toEqual([
+        'data/providers/mullvad.yaml availableIn.0: GLOBAL means everywhere: list regions here, or leave availableIn out',
+        'data/providers/mullvad.yaml availableIn.1: "UK" isn\'t an ISO 3166-1 region code: use GB for the United Kingdom',
+      ]);
+    });
+  });
+
   describe('prices', () => {
     const craveMonthly = () =>
       (dataOf(catalog(), crave) as { plans: { prices: object[] }[] }).plans[0].prices[0];

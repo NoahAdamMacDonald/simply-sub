@@ -2,6 +2,7 @@ import type { IsoDate } from '../dates/iso-date';
 import { exchangeRate, type FxRates } from './convert';
 import { monthlyEquivalent } from './monthly-equivalent';
 import type { Interval, Price } from './price';
+import { globalRegion, groupsOf } from './regions';
 
 // pickPrice (BLUEPRINT §4.7): which of a plan's, add-on's or bundle's stored prices a user sees, and in which
 // currency. Everything is shown and totalled in the user's currency, converted when the price isn't in it.
@@ -27,7 +28,7 @@ export interface PickedPrice {
   currency: string;
   monthlyEquivalent: number;
   autoRenew: boolean;
-  /** True when no conversion was needed: the source price is in the user's currency. */
+  /** True when no conversion was needed: the source price is in the user's currency, or free (0 is 0 anywhere). */
   native: boolean;
   /** The stored price it comes from. */
   source: { region: string; amount: number; currency: string };
@@ -43,12 +44,14 @@ const periodOrder: Record<Interval, number> = { day: 0, week: 1, month: 2, year:
 /**
  * The prices to show, one per interval and shortest first, all from one source region and currency, so a plan
  * never mixes a region's monthly price with another region's yearly one. The source is the first that fits:
- * 1. The user's region: what they're charged there, converted if it isn't in their currency.
+ * 1. The user's region, then a group it belongs to (EU for Sweden): what they're charged there, converted if it
+ *    isn't in their currency.
  * 2. A price in the user's currency from elsewhere: GLOBAL first, then US, GB, EU and the regions listed.
  * 3. A GLOBAL price in another currency, converted.
  * 4. US, GB or EU, then the first region listed, converted.
  * In a region with several currencies, the user's wins, then the one billingCurrency names, then the first listed.
- * No prices give an empty list.
+ * A free price is native whatever its currency, since 0 needs no rate. No prices give an empty list. Whether the
+ * item is sold in the user's region at all is availability's question (availability.ts).
  */
 export function pickPrice(prices: readonly Price[], context: PriceContext): PickedPrice[] {
   const source = pickSource(prices, context);
@@ -77,20 +80,20 @@ function pickSource(
     return chosen === undefined ? undefined : { region: where, currency: chosen };
   };
   const elsewhere = [
-    ...new Set(['GLOBAL', ...fallbackRegions, ...prices.map((price) => price.region)]),
+    ...new Set([globalRegion, ...fallbackRegions, ...prices.map((price) => price.region)]),
   ];
   const sameCurrency = elsewhere.find((where) =>
     prices.some((price) => price.region === where && price.currency === currency),
   );
   return (
-    inRegion(region) ??
+    [region, ...groupsOf(region)].map(inRegion).find((found) => found !== undefined) ??
     (sameCurrency === undefined ? undefined : { region: sameCurrency, currency }) ??
     elsewhere.map(inRegion).find((found) => found !== undefined)
   );
 }
 
 function toPicked(price: Price, { currency, fx }: PriceContext): PickedPrice {
-  const native = price.currency === currency;
+  const native = price.currency === currency || price.amount === 0;
   const rate = native || !fx ? undefined : exchangeRate(price.currency, currency, fx);
   const amount = rate === undefined ? price.amount : price.amount * rate;
   return {

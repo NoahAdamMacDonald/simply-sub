@@ -129,6 +129,7 @@ describe('providerSchema', () => {
         'Invalid option: expected one of "visa"|"mastercard"|"amex"|"discover"|"interac"|"unionpay"|"jcb"|"other"',
       ],
       [['acceptedNetworks'], [], 'Leave acceptedNetworks out when they are unknown'],
+      [['availableIn'], [], 'Leave availableIn out when the regions are unknown'],
       [
         ['billingCurrency', 'CA'],
         'cad',
@@ -193,6 +194,18 @@ describe('providerSchema', () => {
       expect(issues(providerSchema, twice)).toEqual([
         'plans.1.addOnIds.1: "netflix.extra-member" is listed more than once',
       ]);
+    });
+
+    it('rejects a region in availableIn that isn’t written as one', () => {
+      expect(issues(providerSchema, withValue(provider, ['availableIn'], ['CA', 'us']))).toEqual([
+        'availableIn.1: Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL',
+      ]);
+    });
+
+    it('rejects a region listed twice in availableIn', () => {
+      expect(
+        issues(providerSchema, withValue(provider, ['availableIn'], ['CA', 'US', 'CA'])),
+      ).toEqual(['availableIn.2: "CA" is listed more than once']);
     });
 
     it('rejects addOnLimit without addOnIds', () => {

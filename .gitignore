@@ -12,7 +12,7 @@ out-tsc/
 .angular/
 
 # Cloudflare Worker: local state, secrets and the web build copied in at build time.
-# apps/api/public/_headers stays tracked (BLUEPRINT §7.6).
+# apps/api/public/_headers will be tracked (M2.8, BLUEPRINT §7.6).
 .wrangler/
 .dev.vars*
 !.dev.vars.example

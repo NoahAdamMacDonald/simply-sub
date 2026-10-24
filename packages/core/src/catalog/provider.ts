@@ -104,6 +104,13 @@ export const providerSchema = z
       .record(regionSchema, currencySchema)
       .describe('Region → the currency actually charged there, for FX-fee maths')
       .optional(),
+    availableIn: z
+      .array(regionSchema)
+      .min(1, 'Leave availableIn out when the regions are unknown')
+      .describe(
+        "Every region the provider sells in, when known (BLUEPRINT §4.7): elsewhere the app shows Not offered. Left out, it's sold where it has prices and unknown elsewhere",
+      )
+      .optional(),
     cancelUrl: httpsUrlSchema.describe('Where to cancel').optional(),
     cancelFee: textSchema
       .describe('Any cancellation fee. Leave it out when there is none')
@@ -145,6 +152,7 @@ export const providerSchema = z
       ids.map(({ id }) => id),
       (index) => ids[index].path,
     );
+    addDuplicateIssues(ctx, provider.availableIn ?? [], (index) => ['availableIn', index]);
   })
   .meta({
     title: 'Simply Sub provider',

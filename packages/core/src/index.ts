@@ -1,5 +1,6 @@
 // The public API of @simply-sub/core: pure functions shared by the app, the Worker and the scripts.
 // Nothing here reads the clock; functions that need the date take `today` as a parameter.
+export * from './catalog/availability';
 export * from './catalog/bundle';
 export * from './catalog/category';
 export * from './catalog/convert';
@@ -10,6 +11,7 @@ export * from './catalog/monthly-equivalent';
 export * from './catalog/pick-price';
 export * from './catalog/price';
 export * from './catalog/provider';
+export * from './catalog/regions';
 export * from './catalog/seed-sql';
 export * from './catalog/snapshot';
 export {

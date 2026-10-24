@@ -57,6 +57,16 @@
       },
       "description": "Region → the currency actually charged there, for FX-fee maths"
     },
+    "availableIn": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(?:[A-Z]{2}|GLOBAL)$",
+        "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL"
+      },
+      "description": "Every region the provider sells in, when known (BLUEPRINT §4.7): elsewhere the app shows Not offered. Left out, it's sold where it has prices and unknown elsewhere"
+    },
     "cancelUrl": {
       "type": "string",
       "format": "uri",

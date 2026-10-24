@@ -7,11 +7,11 @@
     "conventions": {
       "envelope": "Success: { data, meta }. Failure: { error: { code, message, details? } }.",
       "docKeys": "Keys starting with '_' are documentation notes and never appear in real responses.",
-      "optionalFields": "Optional fields are omitted when empty or unknown. For example, a provider without acceptedNetworks means 'unknown', so every card is allowed, and a provider without iconUrl has no logo, so the app shows its first letter.",
+      "optionalFields": "Optional fields are omitted when empty or unknown. For example, a provider without acceptedNetworks means 'unknown', so every card is allowed; a provider without availableIn sells where it has prices, and elsewhere it's unknown whether it sells; and a provider without iconUrl has no logo, so the app shows its first letter.",
       "ids": "Stable slugs: provider 'netflix', plan 'netflix.standard', add-on 'netflix.extra-member', bundle 'bundle.disney-crave-premium', feature 'video.quality'.",
       "rankKeys": "Boolean feature: '<featureId>'. Enum or set value: '<featureId>=<valueId>'. Number tier: '<featureId>=<tierId>'. A plan provides an enum key when its value is at least that value, and a tier key when its number is at least the tier's min (PROJECT-PLAN.md §3.2).",
-      "money": "Amounts are decimals in the currency's major unit (18.99 = $18.99). Currencies are ISO 4217. Regions are ISO 3166-1 alpha-2, or 'GLOBAL' for a single worldwide price. A free plan has one price with amount 0: it creates no charges and the app shows it as Free (PROJECT-PLAN.md §3.1).",
-      "pricing": "'prices' lists every stored price for every region. When a request includes region and currency, a 'pricing' array is added with one picked price per interval, all from one source region and currency (pickPrice, BLUEPRINT §4.7). 'native: false' means the amount was converted, and the app shows ≈ and the exchange icon. Amounts and monthlyEquivalent are rounded to 2 decimals and fx.rate to 4, from the unrounded conversion.",
+      "money": "Amounts are decimals in the currency's major unit (18.99 = $18.99). Currencies are ISO 4217. Regions are ISO 3166-1 alpha-2 ('GB', never 'UK'), a group priced once for all its members ('EU'), or 'GLOBAL' for one price wherever the provider sells. A free plan has one price with amount 0: it creates no charges and the app shows it as Free (PROJECT-PLAN.md §3.1).",
+      "pricing": "'prices' lists every stored price for every region. When a request includes region and currency, a 'pricing' array is added with one picked price per interval, all from one source region and currency (pickPrice, BLUEPRINT §4.7). 'native: false' means the amount was converted, and the app shows ≈ and the exchange icon. A free price (0) is always native, with no fx. Whether the item is sold in that region at all is a separate check (availability, BLUEPRINT §4.7). Amounts and monthlyEquivalent are rounded to 2 decimals and fx.rate to 4, from the unrounded conversion.",
       "monthlyEquivalent": "Price per month: year ÷ 12, week × 52 ÷ 12, day × 365 ÷ 12, each divided by intervalCount. Computed from the unrounded amount, then rounded to 2 decimals.",
       "dates": "Dates are YYYY-MM-DD. Timestamps are ISO 8601 in UTC.",
       "caching": "GET responses carry an ETag based on the catalog version. Send If-None-Match to get 304 Not Modified."
@@ -22,7 +22,7 @@
   "endpoints": {
     "GET /health": {
       "description": "Liveness and version information.",
-      "_note": "catalogVersion, catalogUpdatedAt and counts are omitted until D1 holds a seeded catalog (M0.8, M1.5).",
+      "_note": "catalogVersion, catalogUpdatedAt and counts come with M2.1, which records them in D1 when it seeds. Until then /health returns only status and apiVersion.",
       "examples": [
         {
           "title": "Healthy",
@@ -61,7 +61,7 @@
     "GET /catalog": {
       "description": "The full catalog snapshot: features, categories, providers (with plans, add-ons and every region's prices) and bundles. Also published, byte for byte, as the static file /simply/sub/data/catalog.json, which is what the app fetches.",
       "query": {
-        "region": "Optional. Keeps only the prices pickPrice could use for this region (its own prices, GLOBAL prices and the fallback regions)."
+        "region": "Optional. Keeps only the prices pickPrice could use for this region (its own prices, its group's such as EU, GLOBAL prices and the fallback regions): the same text as the static file the app loads for that region (BLUEPRINT §6.3)."
       },
       "examples": [
         {
@@ -875,7 +875,7 @@
                       "name": "Proton Free",
                       "matchedKeys": ["vpn.included"],
                       "pricing": [
-                        { "interval": "month", "intervalCount": 1, "amount": 0, "currency": "CAD", "monthlyEquivalent": 0, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 0, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } }
+                        { "interval": "month", "intervalCount": 1, "amount": 0, "currency": "CAD", "monthlyEquivalent": 0, "autoRenew": true, "native": true, "source": { "region": "GLOBAL", "amount": 0, "currency": "USD" } }
                       ],
                       "bestMonthlyEquivalent": 0,
                       "lastVerified": "2026-10-12",
@@ -1138,9 +1138,9 @@
                       { "region": "GLOBAL", "currency": "USD", "amount": 0, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-12", "sourceUrl": "https://proton.me/pricing" }
                     ],
                     "pricing": [
-                      { "interval": "month", "intervalCount": 1, "amount": 0, "currency": "CAD", "monthlyEquivalent": 0, "autoRenew": true, "native": false, "source": { "region": "GLOBAL", "amount": 0, "currency": "USD" }, "fx": { "rate": 1.3806, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } }
+                      { "interval": "month", "intervalCount": 1, "amount": 0, "currency": "CAD", "monthlyEquivalent": 0, "autoRenew": true, "native": true, "source": { "region": "GLOBAL", "amount": 0, "currency": "USD" } }
                     ],
-                    "_note": "A free plan: one price of 0. It creates no charges and shows as Free, never with ≈ (PROJECT-PLAN.md §3.1). One free account covers every Proton app, so it's one plan."
+                    "_note": "A free plan: one price of 0. Its picked price is native, since 0 needs no conversion. It creates no charges and shows as Free, never with ≈ (PROJECT-PLAN.md §3.1). One free account covers every Proton app, so it's one plan."
                   },
                   {
                     "id": "proton.pass-plus",
@@ -1553,7 +1553,7 @@
       ]
     },
     "GET /icon": {
-      "description": "Favicon proxy for custom subscriptions (a website the user typed). Tries DuckDuckGo, then Google, then returns the Simply Sub fallback icon. Catalog providers don't use it: their icons are static files at /simply/sub/icons/<providerId>.png.",
+      "description": "Favicon proxy for custom subscriptions (a website the user typed). Asks Google's favicon service, then DuckDuckGo's (core's iconServiceUrls), and returns the best square PNG they give, or the Simply Sub fallback icon. Catalog providers don't use it: their icons are static files at /simply/sub/icons/<providerId>.png.",
       "query": {
         "domain": "Required. A bare hostname such as localgym.example (no scheme or path).",
         "size": "Optional: 32 or 64 (default 64)."
