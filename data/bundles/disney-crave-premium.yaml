@@ -1,7 +1,7 @@
 id: bundle.disney-crave-premium
 name: Disney+ and Crave Premium Bundle
 soldBy: crave
-includes: [disney-plus.premium, crave.premum]
+includes: [disney-plus.premium, crave.premium]
 link: https://www.crave.ca/en/disneypluscravebundle
 prices:
   - region: CA

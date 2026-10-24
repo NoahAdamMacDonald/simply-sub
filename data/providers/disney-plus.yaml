@@ -17,7 +17,7 @@ plans:
     link: https://www.disneyplus.com/en-ca
     features:
       video.quality: 1080p
-      streaming.ad-fre: false
+      streaming.ad-free: false
       streaming.concurrent-streams: 2
       streaming.kids-profiles: true
       streaming.french-content: true

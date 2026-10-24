@@ -70,7 +70,7 @@ plans:
     name: Premium
     link: https://www.netflix.com/signup
     features:
-      video.quality: 8k
+      video.quality: 4k
       video.hdr: true
       audio.dolby-atmos: true
       streaming.ad-free: true
