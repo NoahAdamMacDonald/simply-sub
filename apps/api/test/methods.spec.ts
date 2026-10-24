@@ -6,13 +6,19 @@ import { describe, expect, it } from 'vitest';
 const BASE = 'https://sub.simplely.ca/api/v1';
 
 describe('write methods', () => {
-  it.each(['POST', 'PUT', 'PATCH', 'DELETE'])('%s is refused on every route', async (method) => {
-    const response = await exports.default.fetch(`${BASE}/health`, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status: 'hacked' }),
-    });
+  const routes = ['/health', '/catalog'];
+  const methods = ['POST', 'PUT', 'PATCH', 'DELETE'];
 
-    expect([404, 405]).toContain(response.status);
-  });
+  it.each(methods.flatMap((method) => routes.map((route) => [method, route])))(
+    '%s is refused on %s',
+    async (method, route) => {
+      const response = await exports.default.fetch(`${BASE}${route}`, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: 'hacked' }),
+      });
+
+      expect([404, 405]).toContain(response.status);
+    },
+  );
 });

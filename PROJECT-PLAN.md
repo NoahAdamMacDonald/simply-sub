@@ -122,7 +122,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 ### M2 — API
 | ID | Task | Done when |
 |---|---|---|
-| M2.1 | `GET /catalog` (+ ETag / 304) and `?region=`, served from static snapshot files: `data:build` also writes `data/catalog/<region>.json` and `other.json` (BLUEPRINT §6.3). D1: migration 0002 (`WITHOUT ROWID`, a `catalog` row in place of `snapshots`, a provider `hash`), and a seed that writes only what changed (BLUEPRINT §5.3). `/health` reports the catalog version, build time and counts | Matches the examples; a code-only deploy writes no D1 rows, and a one-provider change writes only that provider's |
+| M2.1 | `GET /catalog` (+ ETag / 304) and `?region=`, served from static snapshot files: `data:build` also writes `data/catalog/<region>.json` for each priced country and group, and `data/catalog/index.json`; a region without a file gets the full snapshot (BLUEPRINT §6.3). D1: migration 0002 (`WITHOUT ROWID`, a `catalog` row in place of `snapshots`, a provider `hash`), and a seed that writes only what changed, run by `npm run deploy` (BLUEPRINT §5.3, §7.6). `/health` reports the catalog version, build time and counts | Matches the examples; a code-only deploy writes no D1 rows, and a one-provider change writes only that provider's |
 | M2.2 | `GET /features`, `GET /categories` | Match the examples |
 | M2.3 | `GET /providers`: search, filters, sort, cursor pagination, with queries that use the indexes (D1 counts every scanned row as read: BLUEPRINT §7.1) | Every query parameter in the examples works |
 | M2.4 | `GET /providers/:id`, `GET /plans/:id`, `GET /bundles`, plus the 404 shape | Match the examples |
@@ -146,7 +146,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 |---|---|---|
 | M4.1 | Dexie database (BLUEPRINT §4.6, including `region`, add-on quantities, bundle items, `billingDay` and `priceOverride.until`) + repositories that expose signals. Repositories are the only way into Dexie, only non-sensitive fields are indexed, and records are Zod-validated on the way in and out (BLUEPRINT §11.1) | CRUD tests pass with `fake-indexeddb`, and a malformed stored record is rejected rather than shown |
 | M4.2 | `SettingsStore` + first-run dialog (P1), with the province/state menu and the sales-tax rate (BLUEPRINT §4.8); `ThemeService` reads and writes `settings.theme`, keeping `localStorage` `ss-theme` as the startup cache (BLUEPRINT §8.1) | Country, province or state, and currency are saved, with defaults from the browser locale; the menu lists only the chosen country's subdivisions |
-| M4.3 | `CatalogStore`: cached snapshot → revalidate the region's `data/catalog/<region>.json` (plus any region a list item uses) with ETag → save; the offline banner and "Catalog updated" toast (P1) | The app works offline after the first visit, and the banner shows the catalog's date |
+| M4.3 | `CatalogStore`: cached snapshot → revalidate `data/catalog/index.json`, and when its `catalogVersion` changed, fetch the region's file (`regionFileFor`: `data/catalog/<region>.json`, its group's or `catalog.json`; plus any region a list item uses) → save; the offline banner and "Catalog updated" toast (P1) | The app works offline after the first visit, and the banner shows the catalog's date |
 | M4.4 | `FxStore` + `ss-price` with the converted marker and "+ tax" in tax-added regions | Converted prices show ≈, the icon and the tooltip; a Canadian sees "+ tax" |
 | M4.5 | Shared components (§4.3) + a `/dev/components` gallery (dev builds only) | Every component renders in both themes in the gallery |
 | M4.6 | `MetricsService` skeleton: resolved items (§3.4) from repos + catalog + FX | Unit tests pass with a fixture list |
@@ -1019,7 +1019,7 @@ FREE SAVINGS — nothing you rank is lost
 
   | Request | Served by | Caching | Uses Worker quota? |
   |---|---|---|---|
-  | `/data/catalog/<region>.json` (M2.1; `catalog.json` before) | static asset | ETag; the browser revalidates on each visit | No |
+  | `/data/catalog/index.json`, then `/data/catalog/<region>.json` (or `catalog.json` for a region without a file) | static asset | ETag; the browser revalidates the index on each visit, and fetches the region's file when the catalog version changes | No |
   | `/icons/<id>.png` | static asset | 1 day, then revalidated (the URL has no version, so a new logo must show up) | No |
   | `/api/v1/fx?base=CAD` | Worker → Frankfurter | 12 h at the edge + browser cache (about once a day per user) | Yes (tiny) |
   | `/api/v1/icon?domain=` | Worker → Google/DuckDuckGo | 30 days (KV) | Yes (custom subscriptions only) |

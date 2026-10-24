@@ -7,6 +7,8 @@ import {
   featuresFileSchema,
   pickPrice,
   providerSchema,
+  regionSnapshot,
+  type CatalogSnapshot,
   type FxRates,
   type PickedPrice,
   type Price,
@@ -39,7 +41,15 @@ function dataOf<T>(body: { data: T } | null): T {
   return body.data;
 }
 
-const catalog = dataOf(contract.endpoints['GET /catalog'].examples[0].response.body);
+/** A GET /catalog example's body when it's a snapshot, not a 304 or an error. */
+type SnapshotBody = Extract<
+  (typeof contract.endpoints)['GET /catalog']['examples'][number]['response']['body'],
+  { data: unknown }
+>;
+
+const catalog = dataOf(
+  contract.endpoints['GET /catalog'].examples[0].response.body as SnapshotBody,
+);
 const providerExamples = contract.endpoints['GET /providers/:id'].examples;
 const providers: [name: string, provider: unknown][] = [
   ...catalog.providers.map((provider): [string, unknown] => [
@@ -79,10 +89,23 @@ describe('the contract examples, as source files', () => {
   });
 });
 
-describe('the GET /catalog example', () => {
-  it('is a catalog snapshot, once the documentation notes are gone', () => {
-    const body = contract.endpoints['GET /catalog'].examples[0].response.body;
-    expect(issues(catalogSnapshotSchema, toSource(body, []))).toEqual([]);
+describe('the GET /catalog examples', () => {
+  const [full, canada] = contract.endpoints['GET /catalog'].examples.map(
+    (example) => toSource(example.response.body, []) as CatalogSnapshot,
+  );
+
+  it.each([
+    ['full', full],
+    ['?region=CA', canada],
+  ])(
+    'the %s snapshot is a catalog snapshot, once the documentation notes are gone',
+    (_name, body) => {
+      expect(issues(catalogSnapshotSchema, body)).toEqual([]);
+    },
+  );
+
+  it("?region=CA is the full snapshot's region file for Canada", () => {
+    expect(canada).toEqual(regionSnapshot(full, 'CA'));
   });
 });
 

@@ -38,7 +38,16 @@ export const catalogMetaSchema = z.strictObject({
     .regex(/^[0-9a-f]{7}$/, 'Use 7 lowercase hex digits')
     .describe("The start of a SHA-256 of data's JSON: it changes only when the catalog does"),
   generatedAt: z.iso.datetime().describe('When the snapshot was built, in UTC'),
-  regions: z.array(regionSchema).describe('Every region with a price, sorted'),
+  region: regionSchema
+    .describe(
+      'In a region file (data/catalog/<region>.json), the region whose prices it keeps. The full snapshot has none',
+    )
+    .optional(),
+  regions: z
+    .array(regionSchema)
+    .describe(
+      "Every region with a price in the catalog, sorted: the full catalog's, even in a region file",
+    ),
   counts: z.strictObject({
     providers: countSchema,
     plans: countSchema,
