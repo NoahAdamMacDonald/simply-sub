@@ -7,4 +7,11 @@ export * from './catalog/formats';
 export * from './catalog/json-schema';
 export * from './catalog/price';
 export * from './catalog/provider';
+export {
+  formatCatalogIssue,
+  validateCatalog,
+  type CatalogIssue,
+  type CatalogIssuePath,
+  type CatalogSourceFile,
+} from './catalog/validate-catalog';
 export * from './dates/iso-date';

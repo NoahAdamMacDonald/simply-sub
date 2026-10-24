@@ -16,7 +16,8 @@
     "lint": "eslint . && stylelint \"**/*.{css,scss}\"",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "data:schema": "tsx scripts/generate-json-schema.ts"
+    "data:schema": "tsx scripts/generate-json-schema.ts",
+    "data:validate": "tsx scripts/validate-data.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -28,7 +29,8 @@
     "stylelint": "^17.16.0",
     "tsx": "4.23.15",
     "typescript": "~6.0.2",
-    "typescript-eslint": "^8.72.0"
+    "typescript-eslint": "^8.72.0",
+    "yaml": "2.9.1"
   },
   "overrides": {
     "vite": "8.3.5"

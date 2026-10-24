@@ -4,7 +4,7 @@ import { bundleIdSchema, httpsUrlSchema, planIdSchema, slugSchema, textSchema } 
 import { pricesSchema } from './price';
 
 // One bundle file, data/bundles/<slug>.yaml (BLUEPRINT §4.4). Whether soldBy and the included plans exist is
-// checked by scripts/validate-data.ts (M1.4). Features and savings are computed, never stored.
+// checked by validateCatalog (validate-catalog.ts). Features and savings are computed, never stored.
 
 export const bundleSchema = z
   .strictObject({
