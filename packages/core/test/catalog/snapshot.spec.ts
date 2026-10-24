@@ -11,7 +11,7 @@ import {
 import { catalog, catalogWith } from './catalog-files';
 import { issues } from './helpers';
 
-const iconBaseUrl = 'https://simplely.ca/simply/sub/icons/';
+const iconBaseUrl = 'https://sub.simplely.ca/icons/';
 const stamp = { catalogVersion: 'abc1234', generatedAt: '2026-10-23T12:00:00Z' };
 
 function dataOf(files = catalog()): CatalogData {
@@ -81,14 +81,14 @@ describe('buildCatalogData', () => {
     const files = catalog().filter(({ file }) => file !== 'data/logos/crave.png');
     const [crave, mullvad] = dataOf(files).providers;
     expect('iconUrl' in crave).toBe(false);
-    expect(mullvad.iconUrl).toBe('https://simplely.ca/simply/sub/icons/mullvad.png');
+    expect(mullvad.iconUrl).toBe('https://sub.simplely.ca/icons/mullvad.png');
     expect(issues(catalogDataSchema, dataOf(files))).toEqual([]);
   });
 
   it("adds each provider's icon URL after website, where the API examples have it", () => {
     const files = catalogWith('data/providers/mullvad.yaml', ['aliases'], ['mullvad']);
     const mullvad = dataOf(files).providers[1];
-    expect(mullvad.iconUrl).toBe('https://simplely.ca/simply/sub/icons/mullvad.png');
+    expect(mullvad.iconUrl).toBe('https://sub.simplely.ca/icons/mullvad.png');
     expect(Object.keys(mullvad)).toEqual([
       'id',
       'name',

@@ -1,6 +1,6 @@
 // Builds the catalog snapshot, the provider icons and the D1 seed from data/ (BLUEPRINT §6.3):
-//   apps/web/public/data/catalog.json  the snapshot, which the Angular build publishes as /simply/sub/data/catalog.json
-//   apps/web/public/icons/<id>.png     each provider's logo from data/logos/, published as /simply/sub/icons/<id>.png
+//   apps/web/public/data/catalog.json  the snapshot, which the Angular build publishes as /data/catalog.json
+//   apps/web/public/icons/<id>.png     each provider's logo from data/logos/, published as /icons/<id>.png
 //   apps/api/dist/seed.sql             the SQL the deploy runs against D1 (BLUEPRINT §7.6)
 // It refuses to build a catalog with validation errors. The catalog version is a hash of the snapshot's data, so it
 // changes only when the catalog does.
@@ -17,7 +17,7 @@ import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { checkCatalog, countErrors, plural, printIssues, repoRoot } from './lib/catalog-files';
 
-const iconBaseUrl = 'https://simplely.ca/simply/sub/icons/';
+const iconBaseUrl = 'https://sub.simplely.ca/icons/';
 const catalogFile = 'apps/web/public/data/catalog.json';
 const iconsDir = 'apps/web/public/icons/';
 const seedFile = 'apps/api/dist/seed.sql';

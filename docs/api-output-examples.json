@@ -1,7 +1,7 @@
 {
   "_about": {
     "title": "Simply Sub catalog API: example requests and responses",
-    "baseUrl": "https://simplely.ca/api/sub/v1",
+    "baseUrl": "https://sub.simplely.ca/api/v1",
     "purpose": "The API contract for milestone M2. Every example body is validated against the API's Zod response schemas in tests (PROJECT-PLAN.md task M2.7).",
     "dataDisclaimer": "All prices, dates and URLs are illustrative. Never seed the catalog from this file.",
     "conventions": {
@@ -16,7 +16,7 @@
       "dates": "Dates are YYYY-MM-DD. Timestamps are ISO 8601 in UTC.",
       "caching": "GET responses carry an ETag based on the catalog version. Send If-None-Match to get 304 Not Modified."
     },
-    "appUsage": "The web app reads the catalog from the static file https://simplely.ca/simply/sub/data/catalog.json (the same JSON as GET /catalog), and catalog icons from https://simplely.ca/simply/sub/icons/<providerId>.png. The only Worker endpoints it calls are GET /fx and GET /icon (for custom subscriptions). The other endpoints serve deep links, future features and other API consumers.",
+    "appUsage": "The web app reads the catalog from the static file https://sub.simplely.ca/data/catalog.json (the same JSON as GET /catalog), and catalog icons from https://sub.simplely.ca/icons/<providerId>.png. The only Worker endpoints it calls are GET /fx and GET /icon (for custom subscriptions). The other endpoints serve deep links, future features and other API consumers.",
     "exchangeRatesUsed": "Every converted price below uses the GET /fx example: 1 USD = 1.3806 CAD and 1 EUR = 1.5060 CAD (ECB rates for 2026-10-21, illustrative)."
   },
   "endpoints": {
@@ -28,7 +28,7 @@
           "title": "Healthy",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/health"
+            "url": "https://sub.simplely.ca/api/v1/health"
           },
           "response": {
             "status": 200,
@@ -59,7 +59,7 @@
       ]
     },
     "GET /catalog": {
-      "description": "The full catalog snapshot: features, categories, providers (with plans, add-ons and every region's prices) and bundles. Also published, byte for byte, as the static file /simply/sub/data/catalog.json, which is what the app fetches.",
+      "description": "The full catalog snapshot: features, categories, providers (with plans, add-ons and every region's prices) and bundles. Also published, byte for byte, as the static file /data/catalog.json, which is what the app fetches.",
       "query": {
         "region": "Optional. Keeps only the prices pickPrice could use for this region (its own prices, its group's such as EU, GLOBAL prices and the fallback regions): the same text as the static file the app loads for that region (BLUEPRINT §6.3)."
       },
@@ -68,7 +68,7 @@
           "title": "Full snapshot (trimmed to 2 providers for this example)",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/catalog",
+            "url": "https://sub.simplely.ca/api/v1/catalog",
             "headers": {
               "Accept": "application/json",
               "Accept-Encoding": "br, gzip"
@@ -81,7 +81,7 @@
               "Content-Encoding": "br",
               "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
               "ETag": "\"c4f9a21\"",
-              "Access-Control-Allow-Origin": "https://simplely.ca"
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "data": {
@@ -195,7 +195,7 @@
                     "id": "netflix",
                     "name": "Netflix",
                     "website": "https://www.netflix.com",
-                    "iconUrl": "https://simplely.ca/simply/sub/icons/netflix.png",
+                    "iconUrl": "https://sub.simplely.ca/icons/netflix.png",
                     "category": "streaming",
                     "spendCategory": "streaming",
                     "acceptedNetworks": ["visa", "mastercard", "amex"],
@@ -284,7 +284,7 @@
                     "name": "Mullvad VPN",
                     "aliases": ["mullvad"],
                     "website": "https://mullvad.net",
-                    "iconUrl": "https://simplely.ca/simply/sub/icons/mullvad.png",
+                    "iconUrl": "https://sub.simplely.ca/icons/mullvad.png",
                     "category": "vpn",
                     "spendCategory": "software",
                     "billingCurrency": { "GLOBAL": "EUR" },
@@ -324,7 +324,7 @@
           "title": "Nothing changed since the last download",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/catalog",
+            "url": "https://sub.simplely.ca/api/v1/catalog",
             "headers": {
               "If-None-Match": "\"c4f9a21\""
             }
@@ -347,7 +347,7 @@
           "title": "All features",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/features"
+            "url": "https://sub.simplely.ca/api/v1/features"
           },
           "response": {
             "status": 200,
@@ -355,7 +355,7 @@
               "Content-Type": "application/json; charset=utf-8",
               "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
               "ETag": "\"c4f9a21\"",
-              "Access-Control-Allow-Origin": "https://simplely.ca"
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "data": [
@@ -650,7 +650,7 @@
           "title": "All categories",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/categories"
+            "url": "https://sub.simplely.ca/api/v1/categories"
           },
           "response": {
             "status": 200,
@@ -725,7 +725,7 @@
           "title": "4K streaming services in Canada, cheapest first",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/providers?feature=video.quality%3D4k&region=CA&currency=CAD&sort=price_asc&limit=3"
+            "url": "https://sub.simplely.ca/api/v1/providers?feature=video.quality%3D4k&region=CA&currency=CAD&sort=price_asc&limit=3"
           },
           "response": {
             "status": 200,
@@ -733,7 +733,7 @@
               "Content-Type": "application/json; charset=utf-8",
               "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
               "ETag": "\"c4f9a21-5e1b\"",
-              "Access-Control-Allow-Origin": "https://simplely.ca"
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "data": [
@@ -743,7 +743,7 @@
                     "name": "Disney+",
                     "category": "streaming",
                     "website": "https://www.disneyplus.com",
-                    "iconUrl": "https://simplely.ca/simply/sub/icons/disney-plus.png"
+                    "iconUrl": "https://sub.simplely.ca/icons/disney-plus.png"
                   },
                   "matchedPlans": [
                     {
@@ -768,7 +768,7 @@
                     "name": "Crave",
                     "category": "streaming",
                     "website": "https://www.crave.ca",
-                    "iconUrl": "https://simplely.ca/simply/sub/icons/crave.png"
+                    "iconUrl": "https://sub.simplely.ca/icons/crave.png"
                   },
                   "matchedPlans": [
                     {
@@ -792,7 +792,7 @@
                     "name": "Netflix",
                     "category": "streaming",
                     "website": "https://www.netflix.com",
-                    "iconUrl": "https://simplely.ca/simply/sub/icons/netflix.png"
+                    "iconUrl": "https://sub.simplely.ca/icons/netflix.png"
                   },
                   "matchedPlans": [
                     {
@@ -825,7 +825,7 @@
           "title": "Text search 'vpn': includes prices converted from EUR and USD",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/providers?q=vpn&region=CA&currency=CAD"
+            "url": "https://sub.simplely.ca/api/v1/providers?q=vpn&region=CA&currency=CAD"
           },
           "response": {
             "status": 200,
@@ -833,7 +833,7 @@
               "Content-Type": "application/json; charset=utf-8",
               "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
               "ETag": "\"c4f9a21-a90c\"",
-              "Access-Control-Allow-Origin": "https://simplely.ca"
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "data": [
@@ -843,7 +843,7 @@
                     "name": "Mullvad VPN",
                     "category": "vpn",
                     "website": "https://mullvad.net",
-                    "iconUrl": "https://simplely.ca/simply/sub/icons/mullvad.png"
+                    "iconUrl": "https://sub.simplely.ca/icons/mullvad.png"
                   },
                   "matchedPlans": [
                     {
@@ -867,7 +867,7 @@
                     "name": "Proton",
                     "category": "privacy-suite",
                     "website": "https://proton.me",
-                    "iconUrl": "https://simplely.ca/simply/sub/icons/proton.png"
+                    "iconUrl": "https://sub.simplely.ca/icons/proton.png"
                   },
                   "matchedPlans": [
                     {
@@ -937,7 +937,7 @@
           "title": "Invalid parameters",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/providers?sort=cheapest&limit=500"
+            "url": "https://sub.simplely.ca/api/v1/providers?sort=cheapest&limit=500"
           },
           "response": {
             "status": 400,
@@ -970,7 +970,7 @@
           "title": "Netflix, priced for Canada (all prices native)",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/providers/netflix?region=CA&currency=CAD"
+            "url": "https://sub.simplely.ca/api/v1/providers/netflix?region=CA&currency=CAD"
           },
           "response": {
             "status": 200,
@@ -978,14 +978,14 @@
               "Content-Type": "application/json; charset=utf-8",
               "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
               "ETag": "\"c4f9a21-1c7d\"",
-              "Access-Control-Allow-Origin": "https://simplely.ca"
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "data": {
                 "id": "netflix",
                 "name": "Netflix",
                 "website": "https://www.netflix.com",
-                "iconUrl": "https://simplely.ca/simply/sub/icons/netflix.png",
+                "iconUrl": "https://sub.simplely.ca/icons/netflix.png",
                 "category": "streaming",
                 "spendCategory": "streaming",
                 "acceptedNetworks": ["visa", "mastercard", "amex"],
@@ -1096,7 +1096,7 @@
           "title": "Proton, priced for Canada (converted from USD; a free plan, suite plans, detailed password-manager features and perks)",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/providers/proton?region=CA&currency=CAD"
+            "url": "https://sub.simplely.ca/api/v1/providers/proton?region=CA&currency=CAD"
           },
           "response": {
             "status": 200,
@@ -1104,7 +1104,7 @@
               "Content-Type": "application/json; charset=utf-8",
               "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
               "ETag": "\"c4f9a21-77e2\"",
-              "Access-Control-Allow-Origin": "https://simplely.ca"
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "data": {
@@ -1112,7 +1112,7 @@
                 "name": "Proton",
                 "aliases": ["proton mail", "protonmail", "proton vpn", "proton pass", "proton drive"],
                 "website": "https://proton.me",
-                "iconUrl": "https://simplely.ca/simply/sub/icons/proton.png",
+                "iconUrl": "https://sub.simplely.ca/icons/proton.png",
                 "category": "privacy-suite",
                 "spendCategory": "software",
                 "acceptedNetworks": ["visa", "mastercard", "amex", "discover"],
@@ -1263,7 +1263,7 @@
           "title": "Unknown provider (with a suggestion)",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/providers/netflx"
+            "url": "https://sub.simplely.ca/api/v1/providers/netflx"
           },
           "response": {
             "status": 404,
@@ -1295,7 +1295,7 @@
           "title": "Disney+ Premium, priced for Canada",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/plans/disney-plus.premium?region=CA&currency=CAD"
+            "url": "https://sub.simplely.ca/api/v1/plans/disney-plus.premium?region=CA&currency=CAD"
           },
           "response": {
             "status": 200,
@@ -1303,7 +1303,7 @@
               "Content-Type": "application/json; charset=utf-8",
               "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
               "ETag": "\"c4f9a21-3b90\"",
-              "Access-Control-Allow-Origin": "https://simplely.ca"
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "data": {
@@ -1313,7 +1313,7 @@
                   "id": "disney-plus",
                   "name": "Disney+",
                   "website": "https://www.disneyplus.com",
-                  "iconUrl": "https://simplely.ca/simply/sub/icons/disney-plus.png",
+                  "iconUrl": "https://sub.simplely.ca/icons/disney-plus.png",
                   "category": "streaming",
                   "spendCategory": "streaming",
                   "acceptedNetworks": ["visa", "mastercard", "amex"],
@@ -1388,7 +1388,7 @@
           "title": "Bundles that include Disney+ Premium",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/bundles?plans=disney-plus.premium&region=CA&currency=CAD"
+            "url": "https://sub.simplely.ca/api/v1/bundles?plans=disney-plus.premium&region=CA&currency=CAD"
           },
           "response": {
             "status": 200,
@@ -1396,7 +1396,7 @@
               "Content-Type": "application/json; charset=utf-8",
               "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
               "ETag": "\"c4f9a21-d4a8\"",
-              "Access-Control-Allow-Origin": "https://simplely.ca"
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "data": [
@@ -1410,7 +1410,7 @@
                       "providerId": "disney-plus",
                       "providerName": "Disney+",
                       "planName": "Premium",
-                      "iconUrl": "https://simplely.ca/simply/sub/icons/disney-plus.png",
+                      "iconUrl": "https://sub.simplely.ca/icons/disney-plus.png",
                       "standalone": { "amount": 16.99, "currency": "CAD", "interval": "month" }
                     },
                     {
@@ -1418,7 +1418,7 @@
                       "providerId": "crave",
                       "providerName": "Crave",
                       "planName": "Premium Ad-Free",
-                      "iconUrl": "https://simplely.ca/simply/sub/icons/crave.png",
+                      "iconUrl": "https://sub.simplely.ca/icons/crave.png",
                       "standalone": { "amount": 22.00, "currency": "CAD", "interval": "month" }
                     }
                   ],
@@ -1465,7 +1465,7 @@
           "title": "Rates for a Canadian user",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/fx?base=CAD"
+            "url": "https://sub.simplely.ca/api/v1/fx?base=CAD"
           },
           "response": {
             "status": 200,
@@ -1473,7 +1473,7 @@
               "Content-Type": "application/json; charset=utf-8",
               "Cache-Control": "public, max-age=43200",
               "ETag": "\"fx-CAD-2026-10-21\"",
-              "Access-Control-Allow-Origin": "https://simplely.ca"
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "data": {
@@ -1501,7 +1501,7 @@
           "title": "Frankfurter is down: last good rates are served",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/fx?base=CAD"
+            "url": "https://sub.simplely.ca/api/v1/fx?base=CAD"
           },
           "response": {
             "status": 200,
@@ -1534,7 +1534,7 @@
           "title": "Frankfurter is down and nothing is cached yet",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/fx?base=CAD"
+            "url": "https://sub.simplely.ca/api/v1/fx?base=CAD"
           },
           "response": {
             "status": 502,
@@ -1553,7 +1553,7 @@
       ]
     },
     "GET /icon": {
-      "description": "Favicon proxy for custom subscriptions (a website the user typed). Asks Google's favicon service, then DuckDuckGo's (core's iconServiceUrls), and returns the best square PNG they give, or the Simply Sub fallback icon. Catalog providers don't use it: their icons are static files at /simply/sub/icons/<providerId>.png.",
+      "description": "Favicon proxy for custom subscriptions (a website the user typed). Asks Google's favicon service, then DuckDuckGo's (core's iconServiceUrls), and returns the best square PNG they give, or the Simply Sub fallback icon. Catalog providers don't use it: their icons are static files at /icons/<providerId>.png.",
       "query": {
         "domain": "Required. A bare hostname such as localgym.example (no scheme or path).",
         "size": "Optional: 32 or 64 (default 64)."
@@ -1563,7 +1563,7 @@
           "title": "Icon for a custom subscription",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/icon?domain=localgym.example&size=64"
+            "url": "https://sub.simplely.ca/api/v1/icon?domain=localgym.example&size=64"
           },
           "response": {
             "status": 200,
@@ -1580,7 +1580,7 @@
           "title": "Not a bare hostname",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/icon?domain=https%3A%2F%2Flocalgym.example%2Fjoin"
+            "url": "https://sub.simplely.ca/api/v1/icon?domain=https%3A%2F%2Flocalgym.example%2Fjoin"
           },
           "response": {
             "status": 400,
@@ -1609,7 +1609,7 @@
           "title": "Report accepted",
           "request": {
             "method": "POST",
-            "url": "https://simplely.ca/api/sub/v1/reports",
+            "url": "https://sub.simplely.ca/api/v1/reports",
             "headers": {
               "Content-Type": "application/json"
             },
@@ -1642,7 +1642,7 @@
           "title": "Too many reports from this visitor",
           "request": {
             "method": "POST",
-            "url": "https://simplely.ca/api/sub/v1/reports",
+            "url": "https://sub.simplely.ca/api/v1/reports",
             "headers": {
               "Content-Type": "application/json"
             },
@@ -1675,7 +1675,7 @@
           "title": "Create a feed",
           "request": {
             "method": "POST",
-            "url": "https://simplely.ca/api/sub/v1/cal",
+            "url": "https://sub.simplely.ca/api/v1/cal",
             "headers": {
               "Content-Type": "application/json"
             },
@@ -1692,13 +1692,13 @@
             "headers": {
               "Content-Type": "application/json; charset=utf-8",
               "Cache-Control": "no-store",
-              "Location": "https://simplely.ca/api/sub/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics"
+              "Location": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics"
             },
             "body": {
               "data": {
                 "token": "k7Qm2Zp9XvT4bN8cR1sW0a",
-                "url": "https://simplely.ca/api/sub/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
-                "webcalUrl": "webcal://simplely.ca/api/sub/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
+                "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
+                "webcalUrl": "webcal://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
                 "manageKey": "Jd8f2LqP0zXn5Vt7Bc3HyA",
                 "eventCount": 2
               },
@@ -1718,7 +1718,7 @@
           "title": "Feed contents",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics"
+            "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics"
           },
           "response": {
             "status": 200,
@@ -1726,14 +1726,15 @@
               "Content-Type": "text/calendar; charset=utf-8",
               "Cache-Control": "public, max-age=3600"
             },
-            "body": "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Simply Sub//simplely.ca//EN\r\nCALSCALE:GREGORIAN\r\nX-WR-CALNAME:Simply Sub payments\r\nBEGIN:VEVENT\r\nUID:0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d@simplely.ca\r\nDTSTAMP:20261022T182000Z\r\nDTSTART;VALUE=DATE:20261112\r\nRRULE:FREQ=MONTHLY;INTERVAL=1\r\nSUMMARY:Netflix — $18.99\r\nEND:VEVENT\r\nBEGIN:VEVENT\r\nUID:0192f1c5-0a11-7e42-8b7c-1f2e3d4c5b6a@simplely.ca\r\nDTSTAMP:20261022T182000Z\r\nDTSTART;VALUE=DATE:20261103\r\nRRULE:FREQ=MONTHLY;INTERVAL=1\r\nSUMMARY:Renew Mullvad VPN — ≈ $7.53\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n"
+            "body": "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Simply Sub//sub.simplely.ca//EN\r\nCALSCALE:GREGORIAN\r\nX-WR-CALNAME:Simply Sub payments\r\nBEGIN:VEVENT\r\nUID:0192f1c5-0a11-7e42-8b7c-1f2e3d4c5b6a-20261103@sub.simplely.ca\r\nDTSTAMP:20261022T182000Z\r\nDTSTART;VALUE=DATE:20261103\r\nSUMMARY:Renew Mullvad VPN — ≈ $8.51\r\nEND:VEVENT\r\nBEGIN:VEVENT\r\nUID:0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d-20261112@sub.simplely.ca\r\nDTSTAMP:20261022T182000Z\r\nDTSTART;VALUE=DATE:20261112\r\nSUMMARY:Netflix — $21.46\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n",
+            "_note": "One all-day event per charge for the next 12 months, never repeat rules (BLUEPRINT §11.2): the first two are shown. Each UID is the item id plus the charge date. Amounts are what's charged, here with Ontario's 13% HST (BLUEPRINT §4.8)."
           }
         },
         {
           "title": "Revoked or unknown token",
           "request": {
             "method": "GET",
-            "url": "https://simplely.ca/api/sub/v1/cal/doesNotExist000000000a.ics"
+            "url": "https://sub.simplely.ca/api/v1/cal/doesNotExist000000000a.ics"
           },
           "response": {
             "status": 404,
@@ -1759,7 +1760,7 @@
           "title": "Update events",
           "request": {
             "method": "PUT",
-            "url": "https://simplely.ca/api/sub/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a",
+            "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a",
             "headers": {
               "Content-Type": "application/json",
               "Authorization": "Bearer Jd8f2LqP0zXn5Vt7Bc3HyA"
@@ -1791,7 +1792,7 @@
           "title": "Wrong manage key",
           "request": {
             "method": "PUT",
-            "url": "https://simplely.ca/api/sub/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a",
+            "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a",
             "headers": {
               "Content-Type": "application/json",
               "Authorization": "Bearer wrongKey000000000000000"
@@ -1824,7 +1825,7 @@
           "title": "Revoke a feed",
           "request": {
             "method": "DELETE",
-            "url": "https://simplely.ca/api/sub/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a",
+            "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a",
             "headers": {
               "Authorization": "Bearer Jd8f2LqP0zXn5Vt7Bc3HyA"
             }

@@ -106,7 +106,7 @@ const source: CatalogSource = {
 };
 
 function snapshotOf(catalog: CatalogSource): CatalogSnapshot {
-  const data = buildCatalogData(catalog, 'https://simplely.ca/simply/sub/icons/');
+  const data = buildCatalogData(catalog, 'https://sub.simplely.ca/icons/');
   return {
     data,
     meta: buildCatalogMeta(data, {

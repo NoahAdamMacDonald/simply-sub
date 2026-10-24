@@ -21,7 +21,7 @@ import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadCatalogFiles, plural, repoRoot } from './lib/catalog-files';
 
-const userAgent = 'SimplySubBot/1.0 (+https://simplely.ca/simply/sub/)';
+const userAgent = 'SimplySubBot/1.0 (+https://sub.simplely.ca/)';
 const timeoutMs = 15_000;
 const maxPageBytes = 2_000_000;
 /** An ICO holding several BMP sizes can be large. The PNG kept from it is held to core's 100 KB limit. */

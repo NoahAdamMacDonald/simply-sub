@@ -6,8 +6,8 @@
   "main": "src/index.ts",
   "compatibility_date": "2026-10-01",
   "assets": {
-    // Filled by scripts/copy-web-build.mjs: the app under simply/sub/, plus a root index.html for
-    // the SPA fallback (BLUEPRINT §7.3).
+    // Filled by scripts/copy-web-build.mjs with the app's production build, served from the root of
+    // sub.simplely.ca; unknown paths get index.html (the SPA fallback, BLUEPRINT §7.3).
     "directory": "./public",
     "binding": "ASSETS",
     "not_found_handling": "single-page-application",
@@ -24,13 +24,12 @@
       "migrations_dir": "migrations",
     },
   ],
-  // Only these two paths of simplely.ca belong to this Worker; the rest of the domain stays free for
-  // other projects. A route needs a proxied DNS record for the hostname (the AAAA 100:: placeholder).
-  "routes": [
-    { "pattern": "simplely.ca/simply/sub*", "zone_name": "simplely.ca" },
-    { "pattern": "simplely.ca/api/sub*", "zone_name": "simplely.ca" },
-  ],
-  // Production lives only on simplely.ca. Non-main branch builds still get a preview link on
+  // The app and the API have the subdomain to themselves: browser storage is shared by everything on
+  // one origin, so another app on simplely.ca could read Simply Sub's data (BLUEPRINT §11.5). A
+  // custom domain sends every path to this Worker, and the deploy creates its DNS record and
+  // certificate.
+  "routes": [{ "pattern": "sub.simplely.ca", "custom_domain": true }],
+  // Production lives only on sub.simplely.ca. Non-main branch builds still get a preview link on
   // workers.dev (public but unguessable; Cloudflare Access can lock them).
   "workers_dev": false,
   "preview_urls": true,

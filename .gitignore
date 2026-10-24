@@ -11,13 +11,14 @@ out-tsc/
 *.tsbuildinfo
 .angular/
 
-# Cloudflare Worker: local state, secrets and the web build copied in at build time.
-# apps/api/public/_headers will be tracked (M2.8, BLUEPRINT §7.6).
+# Cloudflare Worker: local state, secrets and the web build copied into public/ at build time. Only the
+# hand-written files there are tracked: _headers (M2.8, BLUEPRINT §7.6) and _redirects.
 .wrangler/
 .dev.vars*
 !.dev.vars.example
-apps/api/public/simply/
-apps/api/public/index.html
+apps/api/public/*
+!apps/api/public/_headers
+!apps/api/public/_redirects
 
 # The catalog snapshot and the provider icons, built from data/ by `npm run data:build` (BLUEPRINT §6.3).
 apps/web/public/data/

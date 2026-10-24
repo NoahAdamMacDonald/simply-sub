@@ -12,7 +12,12 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 
 ## Stack (pinned)
 - Angular 22.2.3 (CLI/build 22.2.4), exact versions with no `^` · TypeScript · Angular Material 3 (material/cdk 22.2.4) · standalone + signals + zoneless
-- The root `package.json` `overrides` pins `vite` to 8.3.5 because `@angular/build` 22.2.4 ships a vulnerable vite 8.3.0. Remove the override once a newer `@angular/build` is out.
+- The root `package.json` `overrides` pins patched versions of three dependencies with known advisories:
+  - `vite` 8.3.5: `@angular/build` 22.2.4 ships a vulnerable vite 8.3.0.
+  - `undici` 7.30.1: wrangler's and the vitest plugin's miniflare pin 7.29.1.
+  - `zod` 4.6.6: the vitest plugin pins 4.6.5.
+  Remove each one once the package that pulls it in ships a fixed version. CI runs `npm audit --audit-level=high`,
+  so a new advisory with no fix gets an override like these.
 - Node 24.19.0 / npm 12.0.2 via Volta 2.0.2 (`"volta"` field in root package.json). Workers Builds pins Node
   with its `NODE_VERSION` build variable (BLUEPRINT §7.6), so change both together.
 - Cloudflare Worker (Hono) + D1 for the read-only catalog API; the same Worker serves the SPA as static assets
@@ -21,7 +26,15 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 ## Decisions already made (don't re-litigate)
 - Local-first: all user data lives in IndexedDB (Dexie). No accounts or server-side user data in v1.
 - The catalog source of truth is `data/**/*.yaml` in Git. CI validates it and reseeds D1. Price updates arrive as PRs, never auto-merged.
-- Domain **simplely.ca**: app `https://simplely.ca/simply/sub/`, API `https://simplely.ca/api/sub/v1/`.
+- Domain **sub.simplely.ca**, an origin of its own: app `https://sub.simplely.ca/`, API `https://sub.simplely.ca/api/v1/`.
+  Browser storage is shared per origin, so no other app may live on it (BLUEPRINT §7.3, §11.5).
+- Securing data on the device (BLUEPRINT §11.5):
+  - a strict CSP with Trusted Types, and no `innerHTML` of user or catalog text;
+  - repositories are the only way into Dexie, with only non-sensitive fields indexed;
+  - imports and stored records are validated with Zod;
+  - backups can be encrypted, and an optional passphrase lock encrypts data at rest (PBKDF2-SHA256 600k →
+    AES-256-GCM).
+  Never encrypt with a key the app stores itself.
 - Multi-region prices; the user's region is the default; non-native prices are FX-converted and marked with an icon.
   Regions are ISO 3166-1 codes (`GB`, not `UK`), the `EU` group or `GLOBAL`. Whether something is sold in a region
   is `availability` in core: offered, not offered or unknown (BLUEPRINT §4.7).
@@ -57,7 +70,7 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 - `main` is protected (no bypass): never push to it. Work on a task branch (`feat/m5-3-search-filters`), push it,
   open a PR with `gh pr create`, and wait for the required check `ci` to pass. Squash-merge
   (`gh pr merge --squash`) only when the user asks.
-- Every push to `main` deploys to simplely.ca (Workers Builds); branch pushes get a preview link.
+- Every push to `main` deploys to sub.simplely.ca (Workers Builds); branch pushes get a preview link.
 
 ## Conventions
 - `inject()`, signals, `@if`/`@for`, lazy feature routes, thin components.

@@ -4,7 +4,7 @@ Track, budget and optimize your subscriptions. Simply Sub is a local-first Angul
 and settings stay in your browser (IndexedDB). A small read-only catalog API on Cloudflare supplies plan prices
 and features.
 
-It runs at **https://simplely.ca/simply/sub/** (the app is still being built; see the project plan).
+It runs at **https://sub.simplely.ca/** (the app is still being built; see the project plan).
 
 ## Docs
 
@@ -33,7 +33,7 @@ An npm-workspaces monorepo (see [BLUEPRINT.md §3](BLUEPRINT.md#3-repository-str
 | Path | What |
 |---|---|
 | `apps/web` | The Angular 22 app |
-| `apps/api` | The Cloudflare Worker (Hono): serves the app's static files and the API at `/api/sub/v1` |
+| `apps/api` | The Cloudflare Worker (Hono): serves the app's static files and the API at `/api/v1` |
 | `packages/core` | Business logic as pure TypeScript functions, shared by the app, the Worker and the scripts, including the catalog's Zod schemas |
 | `data/` | The catalog source: `features.yaml`, `categories.yaml`, `providers/` and `bundles/` in YAML, provider logos in `logos/`, and in `schema/` the JSON Schema generated from the Zod schemas, for editor autocomplete |
 | `scripts/` | Repo scripts, run with tsx: catalog validation, the catalog build, icon fetching and the JSON Schema generator |
@@ -50,8 +50,8 @@ Run these from the repo root.
 |---|---|
 | `npm install` | Installs every workspace |
 | `npm run dev:web` | Starts the dev server at http://localhost:4200/, with `/api` proxied to `dev:api` |
-| `npm run dev:api` | Runs the Worker locally (`wrangler dev`): the API at http://localhost:8787/api/sub/v1/health, and the last production build of the app at http://localhost:8787/simply/sub/ |
-| `npm run build` | Type-checks `packages/core` and `scripts/`, builds the catalog (`data:build`), builds the app for production, copies it into `apps/api/public/simply/sub/`, then type-checks and bundles the Worker (`wrangler deploy --dry-run`: nothing is deployed) |
+| `npm run dev:api` | Runs the Worker locally (`wrangler dev`): the API at http://localhost:8787/api/v1/health, and the last production build of the app at http://localhost:8787/ |
+| `npm run build` | Type-checks `packages/core` and `scripts/`, builds the catalog (`data:build`), builds the app for production, copies it into `apps/api/public/`, then type-checks and bundles the Worker (`wrangler deploy --dry-run`: nothing is deployed) |
 | `npm test` | Unit tests (Vitest) in every workspace, `packages/core` first; the Worker's run inside workerd |
 | `npm -w apps/api run db:migrate:local` / `db:migrate:remote` | Applies new D1 migrations (`apps/api/migrations/`) to the local or the Cloudflare database |
 | `npm run lint` | ESLint and Stylelint |
@@ -63,8 +63,11 @@ Run these from the repo root.
 
 ## Contributing
 
-`main` is protected: every change goes through a pull request, and the `ci` check (lint, Prettier, the
-`data/schema` check, the catalog checks, tests and the build, from
+`main` is protected: every change goes through a pull request, and the `ci` check (a dependency audit, lint,
+Prettier, the `data/schema` check, the catalog checks, tests and the build, from
 [.github/workflows/ci.yml](.github/workflows/ci.yml)) must pass before it can be squash-merged.
-Merges to `main` deploy to simplely.ca through Cloudflare Workers Builds. See
+
+Your data never leaves your browser. [BLUEPRINT.md §11.5](BLUEPRINT.md#115-security-of-data-on-the-device)
+describes how it's protected there, including the optional encrypted backups and passphrase lock.
+Merges to `main` deploy to sub.simplely.ca through Cloudflare Workers Builds. See
 [PROJECT-PLAN.md §1.2](PROJECT-PLAN.md#12-day-to-day-workflow) for the branch and commit conventions.
