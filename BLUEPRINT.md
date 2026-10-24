@@ -175,13 +175,16 @@ simply-sub/
 │  │  │  ├─ app.routes.ts
 │  │  │  └─ app.config.ts
 │  │  ├─ public/             # favicon, logo; `npm run data:build` writes data/catalog.json, the per-region
-│  │  │                      # data/catalog/<region>.json and index.json, and icons/ here (gitignored)
+│  │  │                      # data/catalog/<region>.json, index.json, features.json and categories.json, and
+│  │  │                      # icons/ here (gitignored)
 │  │  └─ proxy.conf.json     # dev: /api → wrangler dev
 │  │
 │  └─ api/                   # Cloudflare Worker
 │     ├─ src/
 │     │  ├─ index.ts         # Hono app, routes mounted at /api/v1
-│     │  ├─ routes/          # health.ts, providers.ts, plans.ts, features.ts, bundles.ts, catalog.ts, icons.ts
+│     │  ├─ catalog-files.ts # the routes that stream a static catalog file: ETag, 304, 400 (section 5.1)
+│     │  ├─ routes/          # health.ts, providers.ts, plans.ts, features.ts, categories.ts, bundles.ts,
+│     │  │                   # catalog.ts, icons.ts
 │     │  └─ db/              # SQL queries (D1)
 │     ├─ test/               # route tests, run in workerd (@cloudflare/vitest-plugin)
 │     ├─ migrations/         # D1 schema migrations (0001_init.sql …)
@@ -223,7 +226,8 @@ simply-sub/
 ├─ scripts/                  # run by tsx; type-checked by `npm run build` (scripts/tsconfig.json)
 │  ├─ generate-json-schema.ts  # core's Zod schemas → data/schema/*.schema.json (`--check` in CI)
 │  ├─ validate-data.ts       # data/**/*.yaml → core's validateCatalog → file:line messages (section 6.2)
-│  ├─ build-catalog.ts       # data/ → apps/web/public/data/catalog.json, catalog/<region>.json, index.json (6.3)
+│  ├─ build-catalog.ts       # data/ → apps/web/public/data/catalog.json, catalog/<region>.json, index.json,
+│  │                         # features.json and categories.json (section 6.3)
 │  ├─ seed-d1.ts             # catalog.json + what D1 holds → apps/api/dist/seed.sql, run on D1 (sections 5.3, 7.6)
 │  ├─ lib/catalog-files.ts   # reads, parses and checks data/ for the catalog scripts
 │  ├─ fetch-icons.ts         # any website's best icon → data/logos/<id>.png (`npm run data:icons`)
@@ -947,9 +951,10 @@ The rules live in `packages/core/src/tax/` and run in M7.1:
 - **Cache API** with `Cache-Control: public, max-age=3600, stale-while-revalidate=86400`. Catalog responses
   carry a `catalogVersion` as the ETag: the first 7 hex digits of a SHA-256 of the snapshot's `data`, so it
   changes only when the catalog does, never on a code-only deploy (decided in M1.5; it was the Git commit SHA).
-  `GET /catalog` reads it from the static `data/catalog/index.json`, deployed with the catalog files, so it always
-  describes the body it's sent with. The `catalog` row in D1 can't be the source: the seed runs before the new
-  files are deployed, so clients would cache the old body under the new version (M2.1).
+  `GET /catalog`, `GET /features` and `GET /categories` read it from the static `data/catalog/index.json`, deployed
+  with the catalog files, so it always describes the body it's sent with: their bodies are static files too
+  (section 6.3). The `catalog` row in D1 can't be the source: the seed runs before the new files are deployed, so
+  clients would cache the old body under the new version (M2.1).
 
 ### 5.2 Endpoints (all under `https://sub.simplely.ca/api/v1`)
 | Method & path | Purpose |
@@ -958,8 +963,8 @@ The rules live in `packages/core/src/tax/` and run in M7.1:
 | `GET /providers?q=&category=&feature=<rankKey,…>&minPrice=&maxPrice=&interval=&region=&currency=&nativeOnly=&sort=&cursor=&limit=` | Search and filter (for deep links and other consumers) |
 | `GET /providers/:id` | One provider with its plans and add-ons |
 | `GET /plans/:id` | One plan |
-| `GET /features` | Feature registry |
-| `GET /categories` | Service and spend categories |
+| `GET /features` | Feature registry, in `features.yaml` order (each group before its features). The static file `data/catalog/features.json`, built by `data:build` and streamed like `/catalog`, so it reads no D1 rows. No query parameters |
+| `GET /categories` | Service, feature and spend categories: the static file `data/catalog/categories.json`, streamed the same way. No query parameters |
 | `GET /bundles?plans=netflix.standard,crave.premium` | Bundles that include any of the given plans |
 | `GET /icon?domain=example.com` | Favicon proxy for **custom subscriptions** (Google, then DuckDuckGo, as core's `iconServiceUrls` orders them → the best square PNG, or the fallback), cached for 30 days in KV. Catalog icons are fetched once by `scripts/fetch-icons.ts` into `data/logos/` (committed, so builds never fetch) and served as static files at `/icons/<id>.png` |
 | `GET /fx?base=CAD` | Proxied and cached Frankfurter rates (daily) |
@@ -1123,8 +1128,9 @@ Validation fails if:
 - a plan lists a child feature (`vpn.devices`) without its group set to `true` (`vpn.included: true`)
 - a `featureLabels` key isn't a feature id, or a rank key whose value or tier exists (`video.quality=4k`; a
   boolean feature takes no `=value`)
-- a feature's `parent` isn't a top-level boolean feature (groups are one level deep), or a feature's `category`,
-  or a provider's `category` or `spendCategory`, isn't defined
+- a feature's `parent` isn't a top-level boolean feature (groups are one level deep), or is listed after the
+  feature (`GET /features` keeps the file's order)
+- a feature's `category`, or a provider's `category` or `spendCategory`, isn't defined
 - ids are duplicated: across files (provider, plan, add-on and bundle ids share one namespace), in
   `features.yaml`, or within one category list
 - a reference doesn't exist: a bundle's `soldBy` (a provider) and `includes` (plans), a plan's `addOnIds`
@@ -1160,7 +1166,8 @@ has all of them.
 ### 6.3 Build & seed (`scripts/build-catalog.ts` and `scripts/seed-d1.ts`)
 `npm run build` runs `npm run data:build` (`build-catalog.ts`) before the web build, so CI builds the catalog on
 every PR and Workers Builds on every deploy (section 7.6). The deploy then seeds D1 with `seed-d1.ts`. The logic is
-in `packages/core` (`snapshot.ts`, `region-files.ts`, `seed-sql.ts`); the scripts read and write the files.
+in `packages/core` (`snapshot.ts`, `region-files.ts`, `registry-files.ts`, `seed-sql.ts`); the scripts read and
+write the files.
 1. Load and validate all YAML the way `data:validate` does (section 6.2). Any error stops the build; warnings are
    only counted.
 2. Build the snapshot `{ data, meta }`:
@@ -1174,7 +1181,10 @@ in `packages/core` (`snapshot.ts`, `region-files.ts`, `seed-sql.ts`); the script
    - `catalog.json`, the exact JSON of the snapshot;
    - `catalog/<region>.json` for every priced region except `GLOBAL`: each country, and each group (`EU`), with
      `meta.region` set. These are the `GET /catalog?region=` bodies;
-   - `catalog/index.json`: the `catalogVersion`, `generatedAt` and the regions that have a file.
+   - `catalog/index.json`: the `catalogVersion`, `generatedAt` and the regions that have a file;
+   - `catalog/features.json` and `catalog/categories.json`: the `GET /features` and `GET /categories` bodies
+     (`featuresBody` and `categoriesBody`), the snapshot's features and categories in file order with the
+     `catalogVersion`. The Worker streams them like the snapshots, so neither route reads D1 (M2.2).
 4. Copy each logo from `data/logos/` to `apps/web/public/icons/<id>.png`, published as `/icons/<id>.png`. The build
    never fetches icons: `npm run data:icons` does that once per provider (section 13.4).
 5. The deploy applies the migrations, then runs `seed-d1.ts` (section 7.6). It reads what D1 holds with
@@ -2075,6 +2085,15 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3).
+
+**Resolved (2026-10-24, M2.2)**
+- **`GET /features` and `GET /categories`** are static files that `data:build` writes
+  (`data/catalog/features.json` and `categories.json`), streamed like `/catalog` with `index.json`'s version as the
+  ETag. D1 doesn't change: no position column, no categories table, no reseed, and neither route reads a D1 row
+  (sections 5.2, 6.3).
+- **Order:** `/features` keeps `features.yaml`'s order, and validation requires each group to be listed before its
+  features (section 6.2).
+- **No query parameters** on either route: any parameter gets `400 bad_request` (section 5.4).
 
 **Resolved (2026-10-24, M2.1)**
 - **Region files** keep the prices pickPrice can pick there in any currency: the region's own, else its group's,

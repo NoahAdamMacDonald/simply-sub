@@ -226,6 +226,22 @@ describe('validateCatalog', () => {
     ])('needs a parent to be %s', (_rule, index, parent, expected) => {
       expect(messagesWith(featuresFile, [index, 'parent'], parent)).toEqual([expected]);
     });
+
+    it('needs a group listed before its features, since GET /features keeps the order', () => {
+      const features = dataOf(catalog(), featuresFile) as unknown[];
+      const vpn = features[4];
+      expect(
+        messages(
+          withFile(catalog(), {
+            file: featuresFile,
+            data: [...features.filter((feature) => feature !== vpn), vpn],
+          }),
+        ),
+      ).toEqual([
+        'data/features.yaml 4.parent: "vpn.included" is listed after this feature: move the group above its features',
+        'data/features.yaml 5.parent: "vpn.included" is listed after this feature: move the group above its features',
+      ]);
+    });
   });
 
   describe('provider categories', () => {

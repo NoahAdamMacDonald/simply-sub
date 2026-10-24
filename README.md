@@ -60,7 +60,7 @@ Run these from the repo root.
 | `npm run format` / `npm run format:check` | Formats with / checks against Prettier |
 | `npm run data:schema` | Regenerates `data/schema/*.schema.json` from the catalog's Zod schemas. Run it after changing a schema and commit the result. `npm run data:schema -- --check` only checks that they're up to date (CI) |
 | `npm run data:validate` | Checks every catalog file: the schemas, then the cross-file rules (feature ids, references, regions, prices, logos), as `file:line` messages |
-| `npm run data:build` | Builds the catalog snapshot (`apps/web/public/data/catalog.json`), one file per priced region with `index.json` (`apps/web/public/data/catalog/`), and copies the logos to `apps/web/public/icons/`. `npm run build` runs it first |
+| `npm run data:build` | Builds the catalog snapshot (`apps/web/public/data/catalog.json`), one file per priced region with `index.json`, and the `GET /features` and `GET /categories` bodies (`apps/web/public/data/catalog/`), and copies the logos to `apps/web/public/icons/`. `npm run build` runs it first |
 | `npm run data:icons` | Fetches the best icon of every provider without a logo into `data/logos/<id>.png`. `-- netflix` fetches one again; `-- hulu=https://hulu.com` works for any site |
 
 ## Contributing
