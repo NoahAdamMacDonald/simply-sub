@@ -87,10 +87,7 @@ node .claude/skills/price-research/read-page.cjs "$DEPS" "$OUT" https://proton.m
 ## After writing the files
 
 1. `npx prettier --write data/providers data/bundles`, then `npm run data:validate` (M1.4) and `npm test`.
-2. Check the files in the running app: the temporary catalog preview on Home (`npx ng serve --port 4300` in
-   `apps/web`; it's there until Home is built in M7.3) has a price-list switch per provider. New files have to be
-   added to its import list in `catalog-preview-data.ts`.
-3. List the sources and everything unverified in the PR.
+2. List the sources and everything unverified in the PR.
 
 ## Gotchas
 
