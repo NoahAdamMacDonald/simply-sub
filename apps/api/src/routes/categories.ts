@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
-import { badQuery, catalogFile, noParams } from '../catalog-files';
+import { catalogFile } from '../catalog-files';
+import { badQuery, noParams } from '../http';
 
 /**
  * GET /categories (docs/api-output-examples.json): the service, feature and spend categories in

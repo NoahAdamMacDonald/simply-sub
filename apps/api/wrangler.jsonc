@@ -24,6 +24,9 @@
       "migrations_dir": "migrations",
     },
   ],
+  // Small values that must survive (BLUEPRINT §7.1): the last good exchange rates (key fx:ecb, M2.5), and from
+  // M2.6 the /icon cache. Like D1's, the id isn't a secret.
+  "kv_namespaces": [{ "binding": "KV", "id": "a1507dd46d40411d8af62a85614db96c" }],
   // The app and the API have the subdomain to themselves: browser storage is shared by everything on
   // one origin, so another app on simplely.ca could read Simply Sub's data (BLUEPRINT §11.5). A
   // custom domain sends every path to this Worker, and the deploy creates its DNS record and

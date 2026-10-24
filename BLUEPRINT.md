@@ -616,7 +616,9 @@ can't drift. Everything is exported from `@simply-sub/core`.
 | `regions.ts` | `isoRegions`, `regionGroups` (EU), `groupsOf`, `membersOf`, `isCatalogRegion`, `regionProblem`: the region codes a catalog file can use (section 4.7) |
 | `availability.ts` | `providerAvailability(provider, region)`, `availability(prices, provider, region)` (`Availability`): whether something is sold in a region (section 4.7) |
 | `pick-price.ts` | `pickPrice(prices, context)` (`PickedPrice`, `PriceContext`): the prices a user sees (section 4.7) |
+| `registry-files.ts` | `featuresBody`, `categoriesBody` (`featuresBodySchema`, `categoriesBodySchema`): the `GET /features` and `GET /categories` files (section 6.3) |
 | `convert.ts` | `fxRatesSchema` (`FxRates`, the `/fx` data), `exchangeRate`, `convert` (section 4.7) |
+| `ecb-rates.ts` | `readEcbRates` (Frankfurter's answer → `EcbRates`, in euros), `rebaseRates(ecb, base)` (→ `FxRates`), `ecbCurrencies`, `fxFreshFor`, `keptEcbRatesSchema`: the rates `/fx` serves (section 5.2) |
 
 The shapes in short (the Zod source is authoritative). `?` marks an optional field, which is left out when
 empty, never `null` or `""`:
@@ -967,7 +969,7 @@ The rules live in `packages/core/src/tax/` and run in M7.1:
 | `GET /categories` | Service, feature and spend categories: the static file `data/catalog/categories.json`, streamed the same way. No query parameters |
 | `GET /bundles?plans=netflix.standard,crave.premium` | Bundles that include any of the given plans |
 | `GET /icon?domain=example.com` | Favicon proxy for **custom subscriptions** (Google, then DuckDuckGo, as core's `iconServiceUrls` orders them → the best square PNG, or the fallback), cached for 30 days in KV. Catalog icons are fetched once by `scripts/fetch-icons.ts` into `data/logos/` (committed, so builds never fetch) and served as static files at `/icons/<id>.png` |
-| `GET /fx?base=CAD` | Proxied and cached Frankfurter rates (daily) |
+| `GET /fx?base=CAD` | The ECB's daily rates in the user's currency. The Worker fetches them in euros from Frankfurter's ECB-only route (`/v2/providers/ecb/rates?base=EUR`; v1 is deprecated, and v2's default blends in other central banks), keeps them in KV under `fx:ecb` for 12 hours, and rebases them to any currency the ECB publishes (core's `rebaseRates`), so one fetch serves every base. When Frankfurter fails after that, the last good rates are sent with `meta.stale: true`; with none kept, `502 upstream_unavailable`. `GET /providers` uses the same rates (M2.3) |
 | `GET /health` | Returns the API version, and the catalog version, build time and counts that D1 holds (the `catalog` row, section 5.3) |
 | *(Phase 5)* `POST /reports` | "This price looks wrong" reports (Turnstile-protected, rate-limited) |
 | *(Phase 5)* `GET /cal/:token.ics` | Opt-in live calendar feed (section 11.3) |
@@ -1325,14 +1327,14 @@ the Wikidata queue:
 | Workers requests | ~100,000 per day | API calls only: a few hundred per day at first |
 | Static assets | Free and unlimited. Up to 20,000 files per version, 25 MiB per file | The Angular build has well under 100 files |
 | D1 | 5 GB storage per account (500 MB per database), 5M rows read and 100k rows written per day (index entries count), 2 MB per row | Under 25 MB even at 1,000 providers. **Rows written** is the one to watch: from M2.1 a deploy writes only what changed (section 5.3) |
-| KV | 1 GB, 100k reads and 1k writes per day, 25 MiB per value | One namespace (binding `KV`, M2.5) for small values that must survive: the last good `/fx` rates (M2.5) and the `/icon` cache (M2.6). The Cache API is per data centre and can evict them. A few dozen writes a day |
+| KV | 1 GB, 100k reads and 1k writes per day, 25 MiB per value | One namespace, `simply-sub-kv` (binding `KV`, M2.5), for small values that must survive: the last good `/fx` rates (M2.5: one key, `fx:ecb`, written when the rates are fetched, about twice a day) and the `/icon` cache (M2.6). The Cache API is per data centre and can evict them. A few dozen writes a day |
 | R2 | 10 GB-month storage, 1M writes and 10M reads per month, no egress fees. Activating R2 asks for a payment method, even within the free tier | Not used yet: see the triggers below |
 
 **Each store has one job:** static files serve the catalog and icons, D1 answers the API's searches, KV keeps
 small values that must survive, and R2 will hold large files. Using a store outside its job gains nothing: KV
 values and static files have the same 25 MiB cap, and KV allows far fewer writes.
-- **Setting one up:** create the KV namespace (or the R2 bucket) in the dashboard, and its id goes in
-  `wrangler.jsonc`, like D1's. Wrangler can create resources on deploy (an open beta), but an id in the config is
+- **Setting one up:** create the KV namespace (or the R2 bucket) in the dashboard or with `wrangler` (section 7.2;
+  `simply-sub-kv` was made with `wrangler kv namespace create`), and its id goes in `wrangler.jsonc`, like D1's. Wrangler can create resources on deploy (an open beta), but an id in the config is
   reviewable, and a branch preview can't create one by accident. The Workers Builds token already has KV and R2
   permissions (section 7.6). Tests need no account: miniflare simulates KV and R2.
 - **When R2 starts to pay off** (none of these is close):
@@ -1378,7 +1380,11 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
    npx wrangler d1 create simply-sub-catalog --location enam   # ✅ done in M0.8; the id is in wrangler.jsonc
    npx wrangler d1 migrations apply simply-sub-catalog --remote   # ✅ M0.8: applies migrations/0001_init.sql
    ```
-6. **No Cloudflare token in GitHub.** Workers Builds deploys with a token Cloudflare keeps (section 7.6), and
+6. **KV:**
+   ```bash
+   npx wrangler kv namespace create simply-sub-kv   # ✅ done in M2.5; the id is in wrangler.jsonc (binding KV)
+   ```
+7. **No Cloudflare token in GitHub.** Workers Builds deploys with a token Cloudflare keeps (section 7.6), and
    GitHub's CI only checks code, so the repo has no Cloudflare secrets. The bot's GitHub token (M8.3) is a
    Worker secret on the Cloudflare side.
 
@@ -2085,6 +2091,16 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3).
+
+**Resolved (2026-10-24, M2.5)**
+- **Order:** M2.5 comes before M2.3, because `GET /providers` converts prices with the same rates and reports their
+  date (`meta.fxDate`).
+- **Exchange rates** come from Frankfurter's ECB-only v2 route, in euros: v1 is deprecated, and v2's default blends
+  in other sources. KV keeps one copy under `fx:ecb`, fresh for 12 hours, and core rebases it to the requested
+  currency, rounded to 6 significant digits, which never drops a digit Frankfurter's own rebased rates show
+  (section 5.2).
+- **Caching:** fresh rates have an ETag of the base and the ECB's date, and a `max-age` of the time left until
+  they're due again (43,200 seconds right after a fetch). Stale rates have no ETag and `max-age=900`.
 
 **Resolved (2026-10-24, M2.2)**
 - **`GET /features` and `GET /categories`** are static files that `data:build` writes

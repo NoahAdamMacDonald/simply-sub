@@ -1729,9 +1729,9 @@
       ]
     },
     "GET /fx": {
-      "description": "Daily ECB exchange rates (Frankfurter), cached at the edge for 12 hours. If Frankfurter is down, the last good rates are returned with meta.stale = true.",
+      "description": "Daily ECB exchange rates (Frankfurter) in the base currency. The Worker keeps one copy in euros for 12 hours (KV) and rebases it to the requested currency, rounded to 6 significant digits. Fresh rates have an ETag of the base and the ECB's date and a max-age of the time left until they're fetched again (43200 right after a fetch), and If-None-Match gets 304. If Frankfurter is down, the last good rates are returned with meta.stale = true, for 15 minutes and without an ETag. meta.fetchedAt is when Frankfurter answered.",
       "query": {
-        "base": "Required. The user's currency, e.g. CAD."
+        "base": "Required. The user's currency, e.g. CAD: the euro or a currency the ECB publishes a rate for. Any other gets 400 bad_request, listing the ones it can be."
       },
       "examples": [
         {

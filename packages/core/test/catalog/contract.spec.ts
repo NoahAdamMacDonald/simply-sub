@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { z } from 'zod';
 import contract from '../../../../docs/api-output-examples.json';
 import {
   bundleSchema,
@@ -7,6 +8,8 @@ import {
   categoriesFileSchema,
   featuresBodySchema,
   featuresFileSchema,
+  fxRatesSchema,
+  fxSource,
   pickPrice,
   providerSchema,
   regionSnapshot,
@@ -124,6 +127,20 @@ describe('the GET /features and GET /categories examples', () => {
   it('GET /categories is a categories body', () => {
     expect(issues(categoriesBodySchema, categories)).toEqual([]);
   });
+});
+
+describe('the GET /fx examples', () => {
+  const bodies = contract.endpoints['GET /fx'].examples
+    .map((example) => toSource(example.response.body, []))
+    .filter((body): body is { data: unknown; meta: unknown } => 'data' in (body as object));
+
+  it.each(bodies.map((body, index) => [index, body]))(
+    'example %i is rates in the base currency, with when they were fetched and whether they are stale',
+    (_index, body) => {
+      expect(issues(fxRatesSchema.extend({ source: z.literal(fxSource) }), body.data)).toEqual([]);
+      expect(body.meta).toEqual({ fetchedAt: expect.any(String), stale: expect.any(Boolean) });
+    },
+  );
 });
 
 /**

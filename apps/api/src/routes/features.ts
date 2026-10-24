@@ -1,5 +1,6 @@
 import { Hono } from 'hono';
-import { badQuery, catalogFile, noParams } from '../catalog-files';
+import { catalogFile } from '../catalog-files';
+import { badQuery, noParams } from '../http';
 
 /**
  * GET /features (docs/api-output-examples.json): the feature registry in data/features.yaml order, each group
