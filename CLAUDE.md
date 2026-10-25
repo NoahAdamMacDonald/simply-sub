@@ -42,6 +42,8 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
   states ("every 30 days" is `interval: day, intervalCount: 30`).
 - Sales tax is added for buyers in Canada and the US (built-in Canadian rates by province, the user's own rate
   otherwise). Totals include it; price tags show the listed price with "+ tax" (BLUEPRINT §4.8).
+- Catalog icons are static files: fetched once from each provider's site and committed, never fetched per view
+  (cost, privacy, offline). Only custom subscriptions use `GET /icon` (BLUEPRINT §14).
 - Storage, all on Cloudflare: static files for the catalog and icons, D1 for the API's searches, KV for small values
   that must survive (M2.5), R2 only when a trigger in BLUEPRINT §7.1 is reached.
 - Catalog growth is automated (discover → find URLs → AI extract → validate → PR). Humans only review PRs.
@@ -87,6 +89,7 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
   and the types come from `z.infer`, so don't hand-write catalog interfaces. After changing a schema, run
   `npm run data:schema` and commit `data/schema/`, because CI fails if it's stale. After editing `data/`, run
   `npm run data:validate`: the schemas plus the cross-file checks of `validateCatalog` (BLUEPRINT §6.2). A new
-  provider's logo comes from `npm run data:icons` into `data/logos/<id>.png` (committed); builds never fetch icons.
+  provider's logo comes from `npm run data:icons` into `data/logos/<id>.png` (committed), and `data:build`
+  publishes it as a 96 px WebP at `/icons/<id>.webp`; builds never fetch icons.
 - Vitest for unit tests, Playwright for end-to-end tests.
 - Open questions are listed in BLUEPRINT.md section 14. Ask the user rather than guessing.

@@ -345,7 +345,7 @@ describe('GET /plans/:id', () => {
       id: 'disney-plus',
       name: 'Disney+',
       website: disney.website,
-      iconUrl: 'https://sub.simplely.ca/icons/disney-plus.png',
+      iconUrl: 'https://sub.simplely.ca/icons/disney-plus.webp',
       category: 'streaming',
       spendCategory: 'streaming',
       acceptedNetworks: disney.acceptedNetworks,
@@ -437,7 +437,7 @@ describe('GET /bundles', () => {
         providerId: 'disney-plus',
         providerName: 'Disney+',
         planName: 'Premium',
-        iconUrl: 'https://sub.simplely.ca/icons/disney-plus.png',
+        iconUrl: 'https://sub.simplely.ca/icons/disney-plus.webp',
         standalone: { amount: 16.99, currency: 'CAD', interval: 'month', intervalCount: 1 },
       },
       {
@@ -445,7 +445,7 @@ describe('GET /bundles', () => {
         providerId: 'crave',
         providerName: 'Crave',
         planName: 'Premium',
-        iconUrl: 'https://sub.simplely.ca/icons/crave.png',
+        iconUrl: 'https://sub.simplely.ca/icons/crave.webp',
         standalone: { amount: 22, currency: 'CAD', interval: 'month', intervalCount: 1 },
       },
     ]);

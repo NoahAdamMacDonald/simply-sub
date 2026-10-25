@@ -3,6 +3,8 @@ import {
   buildCatalogData,
   buildCatalogMeta,
   catalogDataSchema,
+  catalogIconFile,
+  catalogIconSize,
   catalogMetaSchema,
   catalogSnapshotSchema,
   readCatalogSource,
@@ -77,18 +79,26 @@ describe('buildCatalogData', () => {
     );
   });
 
+  it("points each icon URL at the WebP data:build makes from the provider's logo", () => {
+    expect(catalogIconFile('disney-plus')).toBe('disney-plus.webp');
+    expect(catalogIconSize).toBe(96);
+    expect(dataOf().providers.map((provider) => provider.iconUrl)).toEqual(
+      ['crave', 'mullvad', 'netflix', 'proton'].map((id) => `${iconBaseUrl}${id}.webp`),
+    );
+  });
+
   it('leaves out the icon URL of a provider without a logo', () => {
     const files = catalog().filter(({ file }) => file !== 'data/logos/crave.png');
     const [crave, mullvad] = dataOf(files).providers;
     expect('iconUrl' in crave).toBe(false);
-    expect(mullvad.iconUrl).toBe('https://sub.simplely.ca/icons/mullvad.png');
+    expect(mullvad.iconUrl).toBe('https://sub.simplely.ca/icons/mullvad.webp');
     expect(issues(catalogDataSchema, dataOf(files))).toEqual([]);
   });
 
   it("adds each provider's icon URL after website, where the API examples have it", () => {
     const files = catalogWith('data/providers/mullvad.yaml', ['aliases'], ['mullvad']);
     const mullvad = dataOf(files).providers[1];
-    expect(mullvad.iconUrl).toBe('https://sub.simplely.ca/icons/mullvad.png');
+    expect(mullvad.iconUrl).toBe('https://sub.simplely.ca/icons/mullvad.webp');
     expect(Object.keys(mullvad)).toEqual([
       'id',
       'name',

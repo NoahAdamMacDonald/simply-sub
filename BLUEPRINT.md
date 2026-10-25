@@ -176,7 +176,7 @@ simply-sub/
 │  │  │  └─ app.config.ts
 │  │  ├─ public/             # favicon, logo; `npm run data:build` writes data/catalog.json, the per-region
 │  │  │                      # data/catalog/<region>.json, index.json, features.json, categories.json and
-│  │  │                      # ids.json, and icons/ here (gitignored)
+│  │  │                      # ids.json, and icons/<id>.webp here (gitignored)
 │  │  └─ proxy.conf.json     # dev: /api → wrangler dev
 │  │
 │  └─ api/                   # Cloudflare Worker
@@ -231,13 +231,14 @@ simply-sub/
 │  ├─ bundles/
 │  │  └─ disney-crave-premium.yaml
 │  ├─ schema/                # JSON Schema for the YAML above, generated from core's Zod schemas (committed)
-│  └─ logos/                 # provider logos, <id>.png: fetched by `npm run data:icons` or added by hand (committed)
+│  └─ logos/                 # provider logos, <id>.png: fetched by `npm run data:icons` or added by hand (committed);
+│                            # data:build publishes each as a WebP of at most 96 px (section 6.3)
 │
 ├─ scripts/                  # run by tsx; type-checked by `npm run build` (scripts/tsconfig.json)
 │  ├─ generate-json-schema.ts  # core's Zod schemas → data/schema/*.schema.json (`--check` in CI)
 │  ├─ validate-data.ts       # data/**/*.yaml → core's validateCatalog → file:line messages (section 6.2)
 │  ├─ build-catalog.ts       # data/ → apps/web/public/data/catalog.json, catalog/<region>.json, index.json,
-│  │                         # features.json, categories.json and ids.json (section 6.3)
+│  │                         # features.json, categories.json and ids.json, and icons/<id>.webp (section 6.3)
 │  ├─ seed-d1.ts             # catalog.json + what D1 holds → apps/api/dist/seed.sql, run on D1 (sections 5.3, 7.6)
 │  ├─ lib/catalog-files.ts   # reads, parses and checks data/ for the catalog scripts
 │  ├─ fetch-icons.ts         # any website's best icon → data/logos/<id>.png (`npm run data:icons`)
@@ -991,7 +992,7 @@ The rules live in `packages/core/src/tax/` and run in M7.1:
 | `GET /features` | Feature registry, in `features.yaml` order (each group before its features). The static file `data/catalog/features.json`, built by `data:build` and streamed like `/catalog`, so it reads no D1 rows. No query parameters |
 | `GET /categories` | Service, feature and spend categories: the static file `data/catalog/categories.json`, streamed the same way. No query parameters |
 | `GET /bundles?plans=netflix.standard,crave.premium` | Bundles that include any of the given plans (1 to 20), with their plans expanded, the union of their features and, with a region, savings (section 4.4, `bundlesBody`). One batch reads the `catalog` row, each plan asked for by primary key (an unknown one gets 400 with a suggestion from `ids.json`), the bundles through the `bundle_plans (plan_id)` index with their sellers, and the providers of their plans: 11 rows for one plan in today's catalog |
-| `GET /icon?domain=example.com` | Icon proxy for **custom subscriptions**: asks Google's and DuckDuckGo's icon services (core's `iconServices`) and returns the best square PNG of at least 32 pixels (`pickIcon`, Google's on a tie), or `404` when neither has one, and the app shows the subscription's first letter. KV keeps an icon for 30 days and "no icon" for a day (section 5.4). No `size`: the Worker can't resize, so the app scales the icon. Catalog icons are fetched once by `scripts/fetch-icons.ts` into `data/logos/` (committed, so builds never fetch) and served as static files at `/icons/<id>.png` |
+| `GET /icon?domain=example.com` | Icon proxy for **custom subscriptions**: asks Google's and DuckDuckGo's icon services (core's `iconServices`) and returns the best square PNG of at least 32 pixels (`pickIcon`, Google's on a tie), or `404` when neither has one, and the app shows the subscription's first letter. KV keeps an icon for 30 days and "no icon" for a day (section 5.4). No `size`: the Worker can't resize, so the app scales the icon. Catalog icons are fetched once by `scripts/fetch-icons.ts` into `data/logos/` (committed, so builds never fetch) and served as static WebP files at `/icons/<id>.webp` (section 6.3) |
 | `GET /fx?base=CAD` | The ECB's daily rates in the user's currency. The Worker fetches them in euros from Frankfurter's ECB-only route (`/v2/providers/ecb/rates?base=EUR`; v1 is deprecated, and v2's default blends in other central banks), keeps them in KV under `fx:ecb` for 12 hours, and rebases them to any currency the ECB publishes (core's `rebaseRates`), so one fetch serves every base. When Frankfurter fails after that, the last good rates are sent with `meta.stale: true`; with none kept, `502 upstream_unavailable`. `GET /providers` uses the same rates (M2.3) |
 | `GET /health` | Returns the API version, and the catalog version, build time and counts that D1 holds (the `catalog` row, section 5.3) |
 | *(Phase 5)* `POST /reports` | "This price looks wrong" reports (Turnstile-protected, rate-limited) |
@@ -1218,8 +1219,12 @@ write the files.
      `catalogVersion`. The Worker streams them like the snapshots, so neither route reads D1 (M2.2);
    - `catalog/ids.json`: every provider id with its plan ids (`catalogIds`). The Worker reads it only to suggest an
      id after a 404 or 400 (M2.4), so a typo costs no D1 rows.
-4. Copy each logo from `data/logos/` to `apps/web/public/icons/<id>.png`, published as `/icons/<id>.png`. The build
-   never fetches icons: `npm run data:icons` does that once per provider (section 13.4).
+4. Convert each logo in `data/logos/` to `apps/web/public/icons/<id>.webp`, published as `/icons/<id>.webp`: at
+   most 96 pixels wide (`catalogIconSize` in core, twice the 48 px the app shows icons at, for high-density
+   screens; a smaller logo isn't enlarged), lossy at quality 90 with exact transparency, by `sharp`. At icon sizes
+   it looks the same as the PNG: today's five logos went from 54 KB to 10 KB. The PNGs stay the source, held to
+   validation's rules. The build never fetches icons: `npm run data:icons` does that once per provider (section
+   13.4).
 5. The deploy applies the migrations, then runs `seed-d1.ts` (section 7.6). It reads what D1 holds with
    `wrangler d1 execute --json`, writes the statements for what changed to `apps/api/dist/seed.sql` (one per line,
    with the derived columns `monthly_equiv` and `rank_value`, section 5.3) and runs them with
@@ -1262,6 +1267,9 @@ Cron trigger (03:00 UTC) → Workflow (one step per provider, automatic retries)
      on no change → bump lastVerified (batched into the same PR, or skipped to avoid noise)
      on failure  → list it in the PR body as "needs manual check"
 ```
+**Logos** ride along (M8.3): the run fetches each provider's best icon the way `npm run data:icons` does, and when
+it differs from the committed `data/logos/<id>.png` (a rebrand), the same PR proposes the new one.
+
 **Guardrails**
 - **Never auto-merge.** You review the PR, which takes a minute a day at most.
 - Flag changes larger than ±30% as suspicious.
@@ -1326,8 +1334,9 @@ cents per provider. Check current pricing. One run fills hundreds of providers.
 **⑤ Validate:** the same `validate-data.ts` rules (section 6.2), plus checks for missing prices, implausible
 amounts and duplicate plans.
 
-**⑥ Review:** a PR per batch with a table (provider, plans, prices, evidence links, screenshots, warnings).
-You merge, fix or close. Rejected items are marked in `queue.yaml` so they aren't retried every night.
+**⑥ Review:** a PR per batch with a table (provider, plans, prices, evidence links, screenshots, warnings), and
+each new provider's logo, fetched into `data/logos/<id>.png` the way `npm run data:icons` does (M3.5). You merge,
+fix or close. Rejected items are marked in `queue.yaml` so they aren't retried every night.
 
 **Ongoing:** the nightly price check (section 6.4) reuses the saved `sources:` URLs. A weekly job takes the next
 N services from the queue, so the catalog grows on its own while you only review.
@@ -1444,7 +1453,7 @@ The app and the API have the subdomain to themselves: **https://sub.simplely.ca/
   (`main-6XMYCLII.js`).
 - Unknown paths get `public/index.html` (`not_found_handling: single-page-application`), so deep links such as
   `/lists/abc` render and survive a reload without invoking the Worker. Checked with `wrangler dev`: `/`, a deep
-  link, `/data/catalog.json`, `/icons/netflix.png` and `/api/v1/health` all answer, and the old `/api/sub/v1/`
+  link, `/data/catalog.json`, `/icons/netflix.webp` and `/api/v1/health` all answer, and the old `/api/sub/v1/`
   path is a 404.
 
 ### 7.4 `apps/api/wrangler.jsonc` (sketch)
@@ -2105,7 +2114,8 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 4. Run `npm run data:icons` to fetch its logo into `data/logos/<id>.png`, and look at it. It takes the largest
    square PNG (at least 32 px) from the site's own icon links, `/apple-touch-icon.png`, `/favicon.ico`, Google's
    favicon service and DuckDuckGo's. If none is good enough, add a PNG by hand, or leave it out and the app shows
-   a letter. `npm run data:icons -- <id>` fetches again; `-- <id>=<website>` works for any site.
+   a letter. `npm run data:icons -- <id>` fetches again; `-- <id>=<website>` works for any site. The build
+   publishes it as a 96 px WebP (section 6.3).
 5. Run `npm run data:validate`, then open a PR.
 
 ### 13.5 Glossary
@@ -2134,6 +2144,17 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3).
+
+**Resolved (2026-10-25, catalog icons)**
+- **Catalog icons stay static files.** `npm run data:icons` fetches each one once from the provider's own site
+  (its declared icons, then `/favicon.ico`, then the icon services: what a password manager uses) and the logo is
+  committed. Static files are free, don't count against the Worker's quota and allow about 19,000 providers per
+  deploy (section 7.1). Fetching icons per view would use Worker requests and KV, or tell Google or each provider
+  what a user looks at, and wouldn't work offline. Only custom subscriptions, an open-ended list, use `GET /icon`.
+- **Published as WebP:** `data:build` turns each logo into a WebP of at most 96 px (section 6.3), with `sharp`,
+  which miniflare already depended on. `GET /icon` stays PNG: the Worker can't encode WebP within its CPU limit.
+- **Logo fetching gets automated:** the discovery pipeline's PRs include each new provider's logo (M3.5), and the
+  nightly bot proposes a new one after a rebrand (M8.3), so nobody needs to run `data:icons` by hand.
 
 **Resolved (2026-10-25, M2.6)**
 - **No usable icon** (a square PNG of at least 32 pixels, core's rule for catalog logos too) gets `404 not_found`,

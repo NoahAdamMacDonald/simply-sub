@@ -12,10 +12,21 @@ import { locateCatalogFile, type CatalogSourceFile } from './validate-catalog';
 
 export const catalogSchemaVersion = 1;
 
+/**
+ * The most pixels a published provider icon is wide: the app shows icons at up to 48 px, so this covers screens
+ * with twice the pixel density. data:build converts each logo in data/logos/ to a WebP this size (BLUEPRINT §6.3).
+ */
+export const catalogIconSize = 96;
+
+/** The file a provider's icon is published as, under /icons/. */
+export function catalogIconFile(providerId: string): string {
+  return `${providerId}.webp`;
+}
+
 export const snapshotProviderSchema = providerSchema.safeExtend({
   iconUrl: httpsUrlSchema
     .describe(
-      "The provider's icon, a static file under /icons/. Left out when there's no logo: the app shows a letter",
+      "The provider's icon, a WebP of at most 96 pixels under /icons/. Left out when there's no logo: the app shows a letter",
     )
     .optional(),
 });
@@ -142,7 +153,7 @@ export function buildCatalogData(source: CatalogSource, iconBaseUrl: string): Ca
       name,
       ...(aliases && { aliases }),
       website,
-      ...(source.logos.has(id) && { iconUrl: `${iconBaseUrl}${id}.png` }),
+      ...(source.logos.has(id) && { iconUrl: `${iconBaseUrl}${catalogIconFile(id)}` }),
       ...rest,
     })),
     bundles: source.bundles,
