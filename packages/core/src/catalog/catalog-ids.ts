@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { closestMatch } from './checks';
 import { planIdSchema, slugSchema } from './formats';
 import { catalogMetaSchema, type CatalogSnapshot } from './snapshot';

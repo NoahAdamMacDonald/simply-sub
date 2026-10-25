@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { fxRatesSchema, type FxRates } from './convert';
 import { currencySchema, isoDateSchema } from './formats';
 

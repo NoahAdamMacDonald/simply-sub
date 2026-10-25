@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { categoriesFileSchema } from './category';
 import { featuresFileSchema } from './feature';
 import { catalogMetaSchema, type CatalogSnapshot } from './snapshot';

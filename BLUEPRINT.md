@@ -788,8 +788,19 @@ from the file a plan is in, and flattened views add it.
   as you type. It uses the same messages as Zod (through `patternErrorMessage`).
 - The within-file checks above run only in Zod, so the editor doesn't show them.
 
-### 4.6 User data model (IndexedDB, `packages/core/src/user/types.ts`)
-Every record has `id` (UUID v7), `createdAt`, `updatedAt` and `deletedAt?` (a soft delete, so future sync can merge changes).
+### 4.6 User data model (IndexedDB, `packages/core/src/user/`)
+Every record has `id` (UUID v7), `createdAt`, `updatedAt` and `deletedAt?` (a soft delete, so future sync can merge
+changes). Rankings and settings are keyed by `rankKey` and `key` instead of an id.
+- **Schemas, not interfaces:** each record is a strict Zod schema in `packages/core/src/user/`, one file per record
+  (`list-item.ts`, `settings.ts`, …), and its type comes from `z.infer`, as for the catalog. `userRecordSchemas`
+  (`records.ts`) maps each Dexie table to its schema, for the repositories and for backups (M6.9). The interfaces
+  below are what the schemas infer.
+- **Timestamps** are `toISOString()`'s UTC form with milliseconds (`2026-10-22T18:30:00.000Z`), and nothing else, so
+  they sort as strings, which is how the `updatedAt` index orders them. `updatedAt` only moves forward: a change made
+  after the device clock went back gets a millisecond after the last one (`nextUpdatedAt` in `stamps.ts`).
+- **Structure only:** the schemas check a record on its own, never its links to the catalog or to other records. An
+  item whose plan has left the catalog is still the user's data, and resolving it (M4.6) says the plan is gone. The
+  item dialog's catalog rules (windows that overlap, an add-on the plan doesn't offer) are form checks (P6).
 
 ```ts
 export type Rank =
@@ -831,7 +842,9 @@ export interface ListItem {
 }
 
 export interface ProfileRanking {     // global ranks; 'essential' and 'critical' aren't allowed; 'not-ranked' is never stored
-  rankKey: RankKey; rank: Exclude<Rank, 'essential' | 'critical' | 'not-ranked'>; updatedAt: string;
+  rankKey: RankKey;                   // the key, not a UUID: the same key ranked on two devices is one record
+  rank: Exclude<Rank, 'essential' | 'critical' | 'not-ranked'>;
+  createdAt: string; updatedAt: string; deletedAt?: string;   // clearing a rank soft-deletes it, so sync passes it on
 }
 
 export interface CustomSubscription {
@@ -845,18 +858,27 @@ export interface CustomSubscription {
 
 export interface PaymentCard { /* see section 9 */ }
 
-export interface Tag { id: string; name: string; color: string; }
+export interface Tag {
+  id: string; name: string;
+  color: string;                      // '#rrggbb' only, so it's safe to bind as a style
+  createdAt: string; updatedAt: string; deletedAt?: string;
+}
 
-export interface Settings {
+export interface Settings {             // one record, under the key 'settings'
+  key: 'settings';
   country: string; currency: string;            // e.g. 'CA', 'CAD'; country is the region for pickPrice
   subdivision?: string;                         // ISO 3166-2 province or state ('CA-ON'), where tax is added (4.8)
   salesTaxPercent?: number;                     // the user's own rate, in place of the built-in one (4.8)
   monthlyBudget?: number; annualBudget?: number;
   theme: 'light' | 'dark' | 'system';
-  appLock?: { salt: string; iterations: number;   // the optional passphrase lock (11.5): no secret is stored,
-              check: string; idleMinutes: number }; // only the salt and an encrypted check value
+  updatedAt: string;
+  // M6.10 adds appLock?: { salt; iterations; check; idleMinutes }: the optional passphrase lock (11.5). No secret
+  // is stored, only the salt and an encrypted check value. Per-device preferences (PROJECT-PLAN §3.5) come with
+  // their tasks too. Optional fields added later need no migration: stored records without them still pass.
 }
 ```
+`Settings.country` and `ListItem.region` are countries (ISO 3166-1 alpha-2), never `EU` or `GLOBAL`, and a
+subdivision must belong to the country.
 
 **Rank resolution:** `item.rankOverrides[key]` → `profileRanking[key]` → `'not-ranked'`. Group ranks never cascade to children.
 
@@ -869,8 +891,15 @@ export interface Settings {
 - `bundle` as its own kind: a bundle covers several plans, so it has no single `planId`.
 - `priceOverride.until`: a first-term offer ends (section 4.3); charges dated before `until` use the override.
 
-**Dexie schema** (`apps/web/src/app/core/storage/db.ts`). Bump the version number and add an upgrade function
-whenever the shape changes. Export files carry a `schemaVersion` so old backups can still be imported.
+**Dexie schema** (`apps/web/src/app/core/storage/db.ts`, a plain `Dexie`: TypeScript gives up on Dexie's
+transaction types for a subclass). Dexie keeps only keys and indexes, not the records' shapes:
+- A **new table or index** needs only a new version number.
+- A **change to stored records' shape** (a field renamed, a new required field) needs a new version with an upgrade
+  function. Export files carry a `schemaVersion` so old backups can still be imported, migrated the same way.
+
+v1 declares every table, so it's the full list the app lock (M6.10) encrypts. `catalogCache`, `drafts` and
+`dismissedSuggestions` get their record schemas with M4.3, M6.3 and M8.2, and `cards` its repository with M9.1 (its
+schema is in core already, since backups carry cards).
 ```ts
 db.version(1).stores({
   lists: 'id, updatedAt',
@@ -1869,7 +1898,9 @@ export interface PaymentCard {
   createdAt: string; updatedAt: string; deletedAt?: string;
 }
 ```
-**Never** store card numbers, expiry dates or CVVs. The add-card dialog says so.
+The type comes from `paymentCardSchema` (`packages/core/src/user/payment-card.ts`, section 4.6).
+**Never** store card numbers, expiry dates or CVVs. The add-card dialog says so, and the schema itself rejects a name
+or nickname with 12 or more digits in a row (spaces and dashes between them included), so no import can store one.
 
 ### 9.3 Calculations (`packages/core/src/rewards/`)
 **Which cards can pay for a subscription:**
@@ -1986,6 +2017,32 @@ prompted after each big change, or weekly).
   4.6. Everything else can then be stored encrypted.
 - **Records are validated on the way in and out** with the same Zod schemas as backups. Treat stored data as
   untrusted: script on the origin, or a bad import, could have written it.
+
+**As built (M4.1)**, in `apps/web/src/app/core/storage/`:
+- **Repositories** (`ListsRepository`, `ItemsRepository`, `CustomSubsRepository`, `TagsRepository`,
+  `RankingsRepository`, `SettingsRepository`; cards come with M9.1) are `@Service()`s. Each streams a Dexie
+  `liveQuery` of its whole table through `rxResource`, so every write, in any tab, updates every signal. They expose
+  the valid, non-deleted records, a `status` (`loading`, `ready` or `error`) and computed lookups (`byId`,
+  `byList`). A user has a few hundred records at most, so pages filter them with `computed()` instead of querying.
+- **Writes:** `create` adds a UUID v7 id and the time, `update` changes a record in a transaction, and `remove`
+  soft-deletes it. Ids come from the `uuid` package, with the time from `ClockService.now()` (the only clock read),
+  and count up within a millisecond, so they sort in the order they were made. A record that fails its schema on
+  the way in throws an `InvalidRecordError` and nothing is written.
+- **A stored record that fails its schema** is never shown, and stays in IndexedDB as it is: deleting it would let
+  a schema bug destroy data. The console gets its table, key and each issue's path and code, never a value (Zod's
+  messages can quote the data), and the user sees one snackbar per session: "Some saved data couldn't be read, so
+  it's hidden. The rest is fine." It can't be changed either, except settings and a ranking, which the user's next
+  save replaces whole.
+- **Only the repositories import Dexie:** ESLint rejects a `dexie` import anywhere else in the app. The app lock
+  (M6.10) wraps `StorageEngine`, the one class that reads and writes rows.
+- **Loaded on first use:** Dexie, Zod and the record schemas (216 kB minified, 60 kB compressed) load as a chunk of
+  their own when a repository first needs them. The repositories themselves add 14 kB to the initial bundle (440 kB
+  of its 500 kB budget). Core imports Zod as `import * as z from 'zod'`, which ESLint enforces: `import { z }`
+  brings all of Zod, every locale's messages included, and made the chunk 541 kB.
+- **Persistent storage** is requested after the first write, not on load: Firefox asks the user, and the question
+  only makes sense once there's something to keep.
+- **Tests** run on `fake-indexeddb`, loaded in `test-setup.ts` (Dexie's live queries never run without a global
+  IndexedDB), with a fresh database for each test (`storage.testing.ts`).
 
 ### 11.2 Export & import
 | Format | Library | Notes |
@@ -2188,6 +2245,18 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3).
+
+**Resolved (2026-10-25, M4.1)**
+- **User records** are strict Zod schemas in `packages/core/src/user/`, one file per record, with types from `z.infer`
+  (section 4.6). Tags gained `createdAt`, `updatedAt` and `deletedAt`; rankings stay keyed by rank key and gained
+  `createdAt` and `deletedAt`, and clearing one soft-deletes it; settings are one record under the key `settings`,
+  with `updatedAt`. Timestamps are `toISOString()`'s form with milliseconds, so they sort as strings.
+- **Ids:** UUID v7 from the `uuid` package, with the time from `ClockService.now()`, counting up within a millisecond.
+- **Repositories** stream Dexie `liveQuery` through `rxResource`; a stored record that fails its schema is skipped,
+  logged without its values and announced once per session, never deleted (section 11.1).
+- **Dexie v1** declares all ten tables; the record schemas of `catalogCache`, `drafts` and `dismissedSuggestions` come
+  with their tasks, which needs no new version. Card names reject 12+ digits in the schema (section 9.2).
+- **Persistent storage** is requested after the first write. The P15 notice for blocked IndexedDB moved to M4.2.
 
 **Resolved (2026-10-25, after M2)**
 - **VPN features** (#25): twelve under `vpn.included` (server countries, protocols, kill switch, split tunneling,

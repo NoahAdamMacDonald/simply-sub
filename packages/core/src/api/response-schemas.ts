@@ -1,4 +1,4 @@
-import type { z } from 'zod';
+import type * as z from 'zod';
 import { fxBodySchema } from '../catalog/ecb-rates';
 import { categoriesBodySchema, featuresBodySchema } from '../catalog/registry-files';
 import { catalogSnapshotSchema } from '../catalog/snapshot';

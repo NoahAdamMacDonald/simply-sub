@@ -145,7 +145,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | ID | Task | Done when |
 |---|---|---|
 | M4.1 | Dexie database (BLUEPRINT §4.6, including `region`, add-on quantities, bundle items, `billingDay` and `priceOverride.until`) + repositories that expose signals. Repositories are the only way into Dexie, only non-sensitive fields are indexed, and records are Zod-validated on the way in and out (BLUEPRINT §11.1) | CRUD tests pass with `fake-indexeddb`, and a malformed stored record is rejected rather than shown |
-| M4.2 | `SettingsStore` + first-run dialog (P1), with the province/state menu and the sales-tax rate (BLUEPRINT §4.8); `ThemeService` reads and writes `settings.theme`, keeping `localStorage` `ss-theme` as the startup cache (BLUEPRINT §8.1) | Country, province or state, and currency are saved, with defaults from the browser locale; the menu lists only the chosen country's subdivisions |
+| M4.2 | `SettingsStore` (on M4.1's `SettingsRepository`) + first-run dialog (P1), with the province/state menu and the sales-tax rate (BLUEPRINT §4.8); `ThemeService` reads and writes `settings.theme`, keeping `localStorage` `ss-theme` as the startup cache (BLUEPRINT §8.1); the "IndexedDB blocked" notice (P15), from the repositories' `error` status | Country, province or state, and currency are saved, with defaults from the browser locale; the menu lists only the chosen country's subdivisions; with IndexedDB blocked, the notice appears |
 | M4.3 | `CatalogStore`: cached snapshot → revalidate `data/catalog/index.json`, and when its `catalogVersion` changed, fetch the region's file (`regionFileFor`: `data/catalog/<region>.json`, its group's or `catalog.json`; plus any region a list item uses) → save; the offline banner and "Catalog updated" toast (P1) | The app works offline after the first visit, and the banner shows the catalog's date |
 | M4.4 | `FxStore` + `ss-price` with the converted marker and "+ tax" in tax-added regions | Converted prices show ≈, the icon and the tooltip; a Canadian sees "+ tax" |
 | M4.5 | Shared components (§4.3) + a `/dev/components` gallery (dev builds only) | Every component renders in both themes in the gallery |
@@ -274,7 +274,8 @@ Users rank **rank keys**. Each one points to one rankable option of a feature:
 - **Subscription-only ranks:** Essential (keep this exact plan) and Critical (keep this provider, any plan that
   still provides the feature) exist only as item overrides, never as profile ranks. The optimizer rules are in
   BLUEPRINT §10.2.
-- "Not ranked" is never stored. Removing a rank deletes its record.
+- "Not ranked" is never stored. Removing a rank soft-deletes its record (`deletedAt`), so a sync can pass the removal
+  on (BLUEPRINT §4.6).
 - Features with `rankable: false` (e.g. `includes-subscription`) never appear in ranking UIs.
 
 **Counts and summaries**
@@ -940,8 +941,8 @@ Editor dialog:
     "exportedAt": "2026-10-22T18:30:00Z",
     "catalogVersion": "c4f9a21",
     "data": {
-      "settings": { "country": "CA", "subdivision": "CA-ON", "currency": "CAD", "monthlyBudget": 200, "annualBudget": 1000, "theme": "system" },
-      "lists": [{ "id": "0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d", "name": "Work Related", "createdAt": "2026-10-01T12:00:00Z", "updatedAt": "2026-10-20T09:15:00Z" }],
+      "settings": { "key": "settings", "country": "CA", "subdivision": "CA-ON", "currency": "CAD", "monthlyBudget": 200, "annualBudget": 1000, "theme": "system", "updatedAt": "2026-10-20T09:15:00.000Z" },
+      "lists": [{ "id": "0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d", "name": "Work Related", "createdAt": "2026-10-01T12:00:00.000Z", "updatedAt": "2026-10-20T09:15:00.000Z" }],
       "items": [], "customSubs": [], "rankings": [], "cards": [], "tags": []
     }
   }
@@ -1001,7 +1002,10 @@ FREE SAVINGS — nothing you rank is lost
 - Unknown list → "This list doesn't exist (it may have been deleted)" with [Back to lists].
 - Unexpected error → snackbar "Something went wrong". Details go to the console; nothing is sent anywhere.
 - IndexedDB blocked (some private browsing modes) → a full-page notice, "Your browser is blocking local storage,
-  so nothing will be saved", with [Continue anyway] (in-memory mode).
+  so nothing will be saved", with [Continue anyway] (in-memory mode). M4.2, from the repositories' `error` status.
+- A saved record that can't be read (it fails its schema) → hidden, and a snackbar once per session: "Some saved
+  data couldn't be read, so it's hidden. The rest is fine." The console names its table, key and issues, never its
+  values (M4.1, BLUEPRINT §11.1).
 - **Lock screen** (M6.10, when the app lock is on): a full-page passphrase prompt before anything else loads, and
   again after the idle time. A wrong passphrase says so and changes nothing. "Forgot it?" explains the two ways out:
   import a backup, or delete all data (with the DELETE confirmation).

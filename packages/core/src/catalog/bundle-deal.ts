@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import type { Feature, FeatureValue } from './feature';
 import { currencySchema } from './formats';
 import type { PickedPrice } from './pick-price';

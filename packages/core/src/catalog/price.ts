@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { currencySchema, httpsUrlSchema, isoDateSchema, regionSchema } from './formats';
 
 export const intervalSchema = z.enum(['day', 'week', 'month', 'year']);

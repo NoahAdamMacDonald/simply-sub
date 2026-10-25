@@ -50,6 +50,12 @@ export default defineConfig(
           selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
           message: 'Take `today` as a parameter instead of reading the clock.',
         },
+        {
+          // `{ z }` is an object holding all of Zod, every locale's messages included (about 450 kB minified in the
+          // app's storage chunk); a namespace import lets the bundler keep only what's used (under 100 kB).
+          selector: "ImportDeclaration[source.value='zod'] > ImportSpecifier[imported.name='z']",
+          message: "Use `import * as z from 'zod'`, which bundlers can tree-shake.",
+        },
       ],
     },
   },
@@ -71,6 +77,25 @@ export default defineConfig(
         {
           selector: `Property[key.name='styles'] :matches(Literal[value=${hexColour}], TemplateElement[value.raw=${hexColour}])`,
           message: noHexMessage,
+        },
+      ],
+    },
+  },
+  {
+    // The repositories in core/storage/ are the only way into IndexedDB (BLUEPRINT §11.1), so the app lock (M6.10)
+    // can wrap them without changing a page.
+    files: ['apps/web/**/*.ts'],
+    ignores: ['apps/web/src/app/core/storage/**'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['dexie', 'dexie/*'],
+              message: 'Only the repositories in core/storage/ use Dexie (BLUEPRINT §11.1).',
+            },
+          ],
         },
       ],
     },

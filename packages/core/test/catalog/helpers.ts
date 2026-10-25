@@ -1,4 +1,4 @@
-import type { z } from 'zod';
+import type * as z from 'zod';
 
 /** Each issue as `path: message`, for example `plans.0.prices.0.currency: Use a three-letter …`. */
 export function issues(schema: z.ZodType, value: unknown): string[] {

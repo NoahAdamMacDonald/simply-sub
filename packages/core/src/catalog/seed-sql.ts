@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import type { Bundle } from './bundle';
 import type { Feature, FeatureValue } from './feature';
 import { monthlyEquivalent } from './monthly-equivalent';

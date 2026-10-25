@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 // The API's error envelope (docs/api-output-examples.json, PROJECT-PLAN §6): { error: { code, message, details? } }.
 // Every error the Worker answers with has this shape, and the contract tests (M2.7) hold the examples and the routes

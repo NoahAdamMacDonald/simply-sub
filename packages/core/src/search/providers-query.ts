@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import type { QueryProblem } from '../api/error-body';
 import type { Categories } from '../catalog/category';
 import { choices, didYouMean } from '../catalog/checks';

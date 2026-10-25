@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { exchangeRate, type FxRates } from './convert';
 import { currencySchema, isoDateSchema, regionSchema, textSchema } from './formats';
 import { monthlyEquivalent } from './monthly-equivalent';

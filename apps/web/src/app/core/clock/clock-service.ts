@@ -1,5 +1,5 @@
 import { Service, signal } from '@angular/core';
-import { IsoDate, toIsoDate } from '@simply-sub/core';
+import { IsoDate, Timestamp, toIsoDate } from '@simply-sub/core';
 
 /**
  * The only place the app reads the device clock (CLAUDE.md). Code that needs the date gets
@@ -12,4 +12,9 @@ export class ClockService {
    * first page that stays open across days (Calendar, M7.4).
    */
   readonly today = signal<IsoDate>(toIsoDate(new Date())).asReadonly();
+
+  /** This moment, as stored records' timestamps write it (`2026-10-22T18:30:00.000Z`). */
+  now(): Timestamp {
+    return new Date().toISOString();
+  }
 }

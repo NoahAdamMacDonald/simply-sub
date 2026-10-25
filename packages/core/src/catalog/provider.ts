@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { addDuplicateIssues } from './checks';
 import { featureValueSchema } from './feature';
 import {
