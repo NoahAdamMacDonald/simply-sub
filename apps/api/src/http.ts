@@ -2,10 +2,10 @@ import type { ErrorBody } from '@simply-sub/core';
 import type { Context } from 'hono';
 
 // What every route answers the same way: the JSON content type, the catalog's caching, the 400 bad_request,
-// 404 not_found, 500 and 502 shapes (core's ErrorBody, the contract's error envelope), timestamps, If-None-Match and
-// the ETag's hash.
+// 404 not_found, 429 rate_limited, 500 internal and 502 shapes (core's ErrorBody, the contract's error envelope),
+// timestamps, If-None-Match and the ETag's hash. No error may be cached.
 
-// Hono's default is plain application/json; M2.8 sets the contract's type for every route.
+// Hono's default is plain application/json, so every JSON answer sets the contract's type.
 export const jsonType = 'application/json; charset=utf-8';
 
 /** The contract's caching for catalog responses (BLUEPRINT §5.1). */
@@ -54,6 +54,17 @@ export function notFound(c: Context, message: string, suggestion?: string): Resp
   );
 }
 
+/** 429 rate_limited: the client is over a per-IP limit (middleware.ts), whose window is a minute. */
+export function rateLimited(c: Context): Response {
+  return c.json(
+    {
+      error: { code: 'rate_limited', message: 'Too many requests. Try again in 60 seconds.' },
+    } satisfies ErrorBody,
+    429,
+    { 'Content-Type': jsonType, 'Cache-Control': 'no-store', 'Retry-After': '60' },
+  );
+}
+
 /** 500 internal: D1 has no catalog row, so a route that reads it has nothing to answer with. */
 export function notSeeded(c: Context): Response {
   return c.json(
@@ -64,7 +75,18 @@ export function notSeeded(c: Context): Response {
       },
     } satisfies ErrorBody,
     500,
-    { 'Content-Type': jsonType },
+    { 'Content-Type': jsonType, 'Cache-Control': 'no-store' },
+  );
+}
+
+/** 500 internal: a route threw something it didn't expect (the error middleware, middleware.ts). */
+export function internalError(c: Context): Response {
+  return c.json(
+    {
+      error: { code: 'internal', message: 'Something went wrong on our side. Try again later.' },
+    } satisfies ErrorBody,
+    500,
+    { 'Content-Type': jsonType, 'Cache-Control': 'no-store' },
   );
 }
 

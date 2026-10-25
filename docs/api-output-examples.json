@@ -14,7 +14,10 @@
       "pricing": "'prices' lists every stored price for every region. When a request includes region and currency, a 'pricing' array is added with one picked price per interval, all from one source region and currency (pickPrice, BLUEPRINT §4.7). 'native: false' means the amount was converted, and the app shows ≈ and the exchange icon. A free price (0) is always native, with no fx. Whether the item is sold in that region at all is a separate check (availability, BLUEPRINT §4.7). Amounts and monthlyEquivalent are rounded to 2 decimals and fx.rate to 4, from the unrounded conversion.",
       "monthlyEquivalent": "Price per month: year ÷ 12, week × 52 ÷ 12, day × 365 ÷ 12, each divided by intervalCount. Computed from the unrounded amount, then rounded to 2 decimals.",
       "dates": "Dates are YYYY-MM-DD. Timestamps are ISO 8601 in UTC.",
-      "caching": "GET responses carry an ETag based on the catalog version. Send If-None-Match to get 304 Not Modified."
+      "caching": "GET responses carry an ETag based on the catalog version. Send If-None-Match to get 304 Not Modified. The endpoints that read D1 or KV (providers, plans, bundles, fx, icon) also keep each public answer in Cloudflare's edge cache, keyed by its URL, for its max-age.",
+      "headers": "Every API response carries Access-Control-Allow-Origin: https://sub.simplely.ca (no other site's page can read the answers), X-Content-Type-Options: nosniff, Cross-Origin-Resource-Policy: same-origin and Content-Security-Policy: default-src 'none'; frame-ancestors 'none'. The examples show only the first.",
+      "rateLimits": "Per IP address, counted in each Cloudflare location: 60 requests a minute to the API, and 10 a minute to GET /icon. Over a limit: 429 rate_limited with Retry-After: 60 and Cache-Control: no-store, and the message 'Too many requests. Try again in 60 seconds.'",
+      "errors": "A path or method no endpoint answers gets 404 not_found, and anything unexpected 500 internal. No error may be cached: Cache-Control: no-store, except GET /icon's 404 for a site without an icon."
     },
     "appUsage": "The web app reads the catalog from static files: https://sub.simplely.ca/data/catalog/index.json (the catalog version and the regions with a file of their own), then its region's https://sub.simplely.ca/data/catalog/<region>.json, or /data/catalog.json for a region without one (the same JSON as GET /catalog?region=). Catalog icons are static files too, at https://sub.simplely.ca/icons/<providerId>.webp. The only Worker endpoints it calls are GET /fx and GET /icon (for custom subscriptions). The other endpoints serve deep links, future features and other API consumers.",
     "exchangeRatesUsed": "Every converted price below uses the GET /fx example: 1 USD = 1.3806 CAD and 1 EUR = 1.5060 CAD (ECB rates for 2026-10-21, illustrative)."
@@ -34,7 +37,8 @@
             "status": 200,
             "headers": {
               "Content-Type": "application/json; charset=utf-8",
-              "Cache-Control": "no-store"
+              "Cache-Control": "no-store",
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "data": {
@@ -584,7 +588,8 @@
             "status": 304,
             "headers": {
               "ETag": "\"c4f9a21\"",
-              "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400"
+              "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": null
           }
@@ -599,7 +604,8 @@
             "status": 400,
             "headers": {
               "Content-Type": "application/json; charset=utf-8",
-              "Cache-Control": "no-store"
+              "Cache-Control": "no-store",
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "error": {
@@ -1218,7 +1224,8 @@
             "status": 400,
             "headers": {
               "Content-Type": "application/json; charset=utf-8",
-              "Cache-Control": "no-store"
+              "Cache-Control": "no-store",
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "error": {
@@ -1544,7 +1551,8 @@
             "status": 404,
             "headers": {
               "Content-Type": "application/json; charset=utf-8",
-              "Cache-Control": "no-store"
+              "Cache-Control": "no-store",
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "error": {
@@ -1659,7 +1667,8 @@
             "status": 404,
             "headers": {
               "Content-Type": "application/json; charset=utf-8",
-              "Cache-Control": "no-store"
+              "Cache-Control": "no-store",
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "error": {
@@ -1762,7 +1771,8 @@
             "status": 400,
             "headers": {
               "Content-Type": "application/json; charset=utf-8",
-              "Cache-Control": "no-store"
+              "Cache-Control": "no-store",
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "error": {
@@ -1829,7 +1839,8 @@
             "status": 200,
             "headers": {
               "Content-Type": "application/json; charset=utf-8",
-              "Cache-Control": "public, max-age=900"
+              "Cache-Control": "public, max-age=900",
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "data": {
@@ -1862,7 +1873,8 @@
             "status": 502,
             "headers": {
               "Content-Type": "application/json; charset=utf-8",
-              "Cache-Control": "no-store"
+              "Cache-Control": "no-store",
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "error": {
@@ -1891,7 +1903,8 @@
             "headers": {
               "Content-Type": "image/png",
               "Cache-Control": "public, max-age=2592000, immutable",
-              "X-Icon-Source": "duckduckgo"
+              "X-Icon-Source": "duckduckgo",
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": null,
             "_note": "The real body is the PNG image bytes. X-Icon-Source is google or duckduckgo."
@@ -1907,7 +1920,8 @@
             "status": 404,
             "headers": {
               "Content-Type": "application/json; charset=utf-8",
-              "Cache-Control": "public, max-age=86400"
+              "Cache-Control": "public, max-age=86400",
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "error": {
@@ -1928,7 +1942,8 @@
             "status": 400,
             "headers": {
               "Content-Type": "application/json; charset=utf-8",
-              "Cache-Control": "no-store"
+              "Cache-Control": "no-store",
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
             },
             "body": {
               "error": {
