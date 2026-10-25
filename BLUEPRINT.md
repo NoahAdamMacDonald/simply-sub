@@ -1099,7 +1099,9 @@ server (section 1.3), so there is nothing to log in to. A key in the app wouldn'
 shipped to the browser is visible. The risks are abuse, and M2 builds these defences:
 - **Rate limit** (M2.8): per IP, with the Workers Rate Limiting binding (`ratelimits` in `wrangler.jsonc`, no extra
   cost): 60 requests a minute on `/api/*`, and 10 a minute on `/icon`, whose misses cost KV writes. Cloudflare
-  counts them in each location, roughly. Over a limit: `429 rate_limited` with `Retry-After: 60` and `no-store`. The
+  counts them in each location, and only roughly: its machines share counts asynchronously, so a burst overshoots
+  (on the M2.8 preview, the first 429 came about 100 requests into a minute, then mixed with 200s). It's a brake on
+  abuse, not an exact quota. Over a limit: `429 rate_limited` with `Retry-After: 60` and `no-store`. The
   key is `CF-Connecting-IP`, which Cloudflare's edge sets on every request; it's never stored or logged, and a
   request without it (a test calling the Worker directly) isn't limited. People who share an IP share its limit,
   which is why it's generous. On the free plan, going over the daily Worker quota makes requests fail; it can't run
