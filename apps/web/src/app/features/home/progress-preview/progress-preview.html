@@ -1,0 +1,195 @@
+<section class="preview" aria-labelledby="preview-title">
+  <h2 id="preview-title">Progress preview <span class="tag">temporary</span></h2>
+  <p class="muted">
+    What's built so far (M0–M2): the catalog the app downloads, priced in the browser by core, and
+    the live API.
+  </p>
+
+  <div class="controls">
+    <label>
+      Region
+      <select [value]="region()" (change)="region.set(text($event))">
+        @for (code of regions; track code) {
+          <option [value]="code">{{ code }}</option>
+        }
+      </select>
+    </label>
+    <label>
+      Currency
+      <select [value]="currency()" (change)="currency.set(text($event))">
+        @for (code of currencies; track code) {
+          <option [value]="code">{{ code }}</option>
+        }
+      </select>
+    </label>
+  </div>
+
+  <h3>Status</h3>
+  <ul class="status">
+    <li>
+      API:
+      @if (health.hasValue() && health.value(); as body) {
+        {{ body.data.status }}, version {{ body.data.apiVersion }}, D1 holds catalog
+        {{ body.data.catalogVersion ?? 'none' }}
+      } @else if (health.error()) {
+        unavailable ({{ health.error()?.message }})
+      } @else {
+        checking…
+      }
+    </li>
+    <li>
+      Catalog file:
+      @if (catalog.hasValue() && catalog.value(); as file) {
+        <code>{{ file.path }}</code
+        >, version {{ file.snapshot.meta.catalogVersion }}, built
+        {{ file.snapshot.meta.generatedAt }}: {{ file.snapshot.meta.counts.providers }} providers,
+        {{ file.snapshot.meta.counts.plans }} plans, {{ file.snapshot.meta.counts.addOns }} add-ons,
+        {{ file.snapshot.meta.counts.bundles }} bundles,
+        {{ file.snapshot.meta.counts.features }} features
+      } @else if (catalog.error()) {
+        missing ({{ catalog.error()?.message }}). Run <code>npm run data:build</code>.
+      } @else {
+        loading…
+      }
+    </li>
+    <li>
+      Exchange rates:
+      @if (fx.hasValue() && fx.value(); as rates) {
+        ECB rates of {{ rates.data.date }} in {{ rates.data.base
+        }}{{ rates.meta.stale ? ' (stale)' : '' }}
+      } @else if (fx.error()) {
+        unavailable ({{ fx.error()?.message }}): converted prices stay in their own currency
+      } @else {
+        loading…
+      }
+    </li>
+  </ul>
+
+  <h3>Catalog, priced for {{ region() }} in {{ currency() }}</h3>
+  <p class="muted">≈ marks a converted price; hover a price for its source.</p>
+  <div class="cards">
+    @for (provider of cards(); track provider.id) {
+      <article class="card">
+        <header>
+          @if (provider.icon) {
+            <img [src]="provider.icon" alt="" width="32" height="32" />
+          } @else {
+            <span class="letter" aria-hidden="true">{{ provider.name[0] }}</span>
+          }
+          <div>
+            <h4>{{ provider.name }}</h4>
+            <span class="muted">{{ provider.category }}</span>
+          </div>
+        </header>
+        <ul class="plans">
+          @for (plan of provider.plans; track plan.id) {
+            <li [class.unavailable]="plan.availability === 'not-offered'">
+              <strong>{{ plan.name }}</strong>
+              @if (plan.availability === 'not-offered') {
+                <span class="muted">not offered in {{ region() }}</span>
+              } @else {
+                @if (plan.availability === 'unknown') {
+                  <span class="muted">no {{ region() }} price yet</span>
+                }
+                @for (price of plan.prices; track $index) {
+                  <span class="price" [title]="price.title">{{ price.text }}</span>
+                }
+              }
+              <details>
+                <summary>{{ plan.features.length }} features</summary>
+                <ul class="features">
+                  @for (feature of plan.features; track feature) {
+                    <li>{{ feature }}</li>
+                  }
+                </ul>
+              </details>
+            </li>
+          }
+        </ul>
+      </article>
+    }
+  </div>
+
+  <h3>Bundles (GET /api/v1/bundles)</h3>
+  @if (bundles.hasValue() && bundles.value(); as body) {
+    @for (bundle of body.data; track bundle.id) {
+      <article class="card">
+        <h4>{{ bundle.name }}</h4>
+        <p class="muted">
+          {{ bundle.includes.length }} plans:
+          @for (included of bundle.includes; track included.planId; let last = $last) {
+            {{ included.providerName }} {{ included.planName }}{{ last ? '' : ' +' }}
+          }
+        </p>
+        @for (price of bundle.pricing ?? []; track $index) {
+          <span class="price"
+            >{{ money(price.amount, price.currency) }} / {{ price.interval }}</span
+          >
+        }
+        @for (saving of bundle.savings ?? []; track $index) {
+          <p>
+            Saves {{ money(saving.amount, saving.currency) }} a {{ saving.interval }} ({{
+              saving.percent
+            }}%) against {{ money(saving.standaloneTotal, saving.currency) }} bought separately.
+          </p>
+        } @empty {
+          <p class="muted">No savings to compare in {{ region() }}.</p>
+        }
+      </article>
+    } @empty {
+      <p class="muted">No bundles offered in {{ region() }}.</p>
+    }
+  } @else if (bundles.error()) {
+    <p class="muted">Unavailable: {{ bundles.error()?.message }}</p>
+  }
+
+  <h3>Search (GET /api/v1/providers)</h3>
+  <label class="field">
+    Text
+    <input type="search" [value]="search()" (input)="search.set(text($event))" />
+  </label>
+  @if (results.hasValue() && results.value(); as body) {
+    <p class="muted">{{ body.meta.total }} matching, sorted by {{ body.meta.query.sort }}.</p>
+    <ul>
+      @for (result of body.data; track result.provider.id) {
+        <li>
+          <strong>{{ result.provider.name }}</strong
+          >: {{ result.matchedPlans.length }} plans, from
+          {{
+            result.matchedPlans[0].bestMonthlyEquivalent !== undefined
+              ? money(result.matchedPlans[0].bestMonthlyEquivalent, currency()) + ' a month'
+              : 'no price'
+          }}
+          <span class="muted">(matched on {{ result.matchedOn.join(', ') }})</span>
+        </li>
+      }
+    </ul>
+  } @else if (results.error()) {
+    <p class="muted">Unavailable: {{ results.error()?.message }}</p>
+  }
+
+  <h3>Custom subscription icon (GET /api/v1/icon)</h3>
+  <label class="field">
+    Website domain
+    <input
+      #domain
+      type="text"
+      placeholder="example.com"
+      (keydown.enter)="iconDomain.set(domain.value.trim())"
+    />
+  </label>
+  <button type="button" (click)="iconDomain.set(domain.value.trim())">Get icon</button>
+  @if (iconDomain()) {
+    <p class="icon-result">
+      <img
+        [src]="'/api/v1/icon?domain=' + iconDomain()"
+        alt="Icon for {{ iconDomain() }}"
+        width="48"
+        height="48"
+      />
+      <span class="muted"
+        >A broken image means no usable icon (404): the app will show a letter.</span
+      >
+    </p>
+  }
+</section>
