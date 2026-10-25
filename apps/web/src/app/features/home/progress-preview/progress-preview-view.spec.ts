@@ -17,6 +17,9 @@ function price(region: string, currency: string, amount: number): Price {
 
 const catalog = {
   data: {
+    features: [
+      { id: 'streaming.ad-free', name: 'Ad free', category: 'streaming', type: 'boolean' },
+    ],
     providers: [
       {
         id: 'netflix',
@@ -59,7 +62,7 @@ describe('providerCards', () => {
     expect(netflix.plans[0]).toMatchObject({
       availability: 'offered',
       prices: [{ text: `${money(18.99, 'CAD')} / month` }],
-      features: ['streaming.ad-free: true'],
+      features: ['Ad free: yes'],
     });
     expect(netflix.plans[1].availability).toBe('not-offered');
   });

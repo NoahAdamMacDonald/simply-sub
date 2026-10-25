@@ -3,6 +3,7 @@ import {
   pickPrice,
   type Availability,
   type CatalogSnapshot,
+  type Feature,
   type FxRates,
   type PickedPrice,
   type SnapshotProvider,
@@ -64,9 +65,25 @@ function priceLine(price: PickedPrice): PriceLine {
   return { text, title };
 }
 
-function featureText([id, value]: [string, unknown]): string {
-  const shown = Array.isArray(value) ? value.join(', ') : String(value);
-  return `${id}: ${shown}`;
+/** A plan's feature as the registry names it: "VPN devices: 5 devices", "Ad free: yes", "Live TV and sports: Live sports". */
+function featureText(registry: readonly Feature[], [id, value]: [string, unknown]): string {
+  const feature = registry.find((candidate) => candidate.id === id);
+  if (!feature) {
+    return `${id}: ${String(value)}`;
+  }
+  const valueName = (item: unknown) =>
+    feature.type === 'enum' || feature.type === 'set'
+      ? (feature.values?.find((candidate) => candidate.id === item)?.name ?? String(item))
+      : String(item);
+  const shown =
+    typeof value === 'boolean'
+      ? value
+        ? 'yes'
+        : 'no'
+      : Array.isArray(value)
+        ? value.map(valueName).join(', ')
+        : `${valueName(value)}${feature.type === 'number' && feature.unit ? ` ${feature.unit}` : ''}`;
+  return `${feature.name}: ${shown}`;
 }
 
 /** One card per provider, each plan priced for `region` in `currency`. */
@@ -91,7 +108,9 @@ export function providerCards(
         billingCurrency: provider.billingCurrency,
         fx,
       }).map(priceLine),
-      features: Object.entries(plan.features).map(featureText),
+      features: Object.entries(plan.features).map((entry) =>
+        featureText(catalog.data.features, entry),
+      ),
     })),
   }));
 }
