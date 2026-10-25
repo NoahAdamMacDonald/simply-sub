@@ -328,7 +328,8 @@ one canonical feature describes the same capability across every provider, whate
    optimizer could never suggest a simpler password manager.
 3. **Reusable or nothing.** A feature goes in the registry if it is comparable and either exists at **two or more
    providers** or matters for ranking. Anything else that is truly provider-specific (the Fortnite Crew passes in
-   Game Pass Ultimate) goes in a plan's `perks` list (free text, shown but not compared).
+   Game Pass Ultimate) goes in a plan's `perks` list (free text, shown but not compared). How to find, model and add
+   features from providers' pages: `.claude/skills/feature-discovery/SKILL.md`.
 4. **Prefer structured types:** `boolean`, `number` (with `unlimited`), `enum` (ordered) and `set` (a
    multi-select of canonical values, for example the item types a password manager can store).
 5. **Plans can show provider wording.** `featureLabels: { password-manager.item-types=identity: "Personal info" }`
@@ -2187,6 +2188,15 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3).
+
+**Resolved (2026-10-25, after M2)**
+- **VPN features** (#25): twelve under `vpn.included` (server countries, protocols, kill switch, split tunneling,
+  multi-hop, DNS content blocking, P2P, port forwarding, Tor over VPN, no-logs policy, independent audits, anonymous
+  signup), filled in for Mullvad and Proton from their own pages. A stated no-logs policy and an audit of it are
+  separate features. New features follow `.claude/skills/feature-discovery/SKILL.md`.
+- **Temporary previews stay off `main`:** the progress preview lived on its own branch with a Workers Builds link
+  (`.claude/skills/progress-preview/SKILL.md`) and was removed after M2. What it turned up that's permanent, the Zod
+  `jitless` setting (section 7.6), went to `main` on its own (#26).
 
 **Resolved (2026-10-25, M2.8)**
 - **Rate limits:** 60 requests a minute per IP on `/api/*` and 10 on `/icon`, keyed by `CF-Connecting-IP` (section

@@ -49,7 +49,9 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
   that must survive (M2.5), R2 only when a trigger in BLUEPRINT §7.1 is reached.
 - Catalog growth is automated (discover → find URLs → AI extract → validate → PR). Humans only review PRs.
 - Business logic (optimizer, schedules, rewards, exporters) lives in `packages/core` as pure, tested functions.
-- Feature ids come from `data/features.yaml`. Never invent feature keys inline.
+- Feature ids come from `data/features.yaml`. Never invent feature keys inline: new ones follow the feature-discovery
+  skill (propose first, registry in its own commit, every provider's value sourced).
+- Temporary previews (the progress-preview skill) live on their own branch with a Workers Builds link, never on main.
 - Payment page (Phase 4): manual cards with network, credit/debit, flat cash-back %, FX fee %, optional monthly limit. Never store card numbers. Cards are filtered by the provider's `acceptedNetworks`.
 - Automation is Cloudflare-first (Workers Builds, a Cron Worker bot, Workflows, Workers AI). The catalog stays in Git and the bot only opens PRs.
 - Every list item counts toward totals, including duplicate plans (lists can be per family member).
