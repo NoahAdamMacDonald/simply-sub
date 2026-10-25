@@ -16,7 +16,7 @@
       "dates": "Dates are YYYY-MM-DD. Timestamps are ISO 8601 in UTC.",
       "caching": "GET responses carry an ETag based on the catalog version. Send If-None-Match to get 304 Not Modified."
     },
-    "appUsage": "The web app reads the catalog from static files: https://sub.simplely.ca/data/catalog/index.json (the catalog version and the regions with a file of their own), then its region's https://sub.simplely.ca/data/catalog/<region>.json, or /data/catalog.json for a region without one (the same JSON as GET /catalog?region=). Catalog icons are static files too, at https://sub.simplely.ca/icons/<providerId>.png. The only Worker endpoints it calls are GET /fx and GET /icon (for custom subscriptions). The other endpoints serve deep links, future features and other API consumers.",
+    "appUsage": "The web app reads the catalog from static files: https://sub.simplely.ca/data/catalog/index.json (the catalog version and the regions with a file of their own), then its region's https://sub.simplely.ca/data/catalog/<region>.json, or /data/catalog.json for a region without one (the same JSON as GET /catalog?region=). Catalog icons are static files too, at https://sub.simplely.ca/icons/<providerId>.webp. The only Worker endpoints it calls are GET /fx and GET /icon (for custom subscriptions). The other endpoints serve deep links, future features and other API consumers.",
     "exchangeRatesUsed": "Every converted price below uses the GET /fx example: 1 USD = 1.3806 CAD and 1 EUR = 1.5060 CAD (ECB rates for 2026-10-21, illustrative)."
   },
   "endpoints": {
@@ -195,7 +195,7 @@
                     "id": "netflix",
                     "name": "Netflix",
                     "website": "https://www.netflix.com",
-                    "iconUrl": "https://sub.simplely.ca/icons/netflix.png",
+                    "iconUrl": "https://sub.simplely.ca/icons/netflix.webp",
                     "category": "streaming",
                     "spendCategory": "streaming",
                     "acceptedNetworks": ["visa", "mastercard", "amex"],
@@ -284,7 +284,7 @@
                     "name": "Mullvad VPN",
                     "aliases": ["mullvad"],
                     "website": "https://mullvad.net",
-                    "iconUrl": "https://sub.simplely.ca/icons/mullvad.png",
+                    "iconUrl": "https://sub.simplely.ca/icons/mullvad.webp",
                     "category": "vpn",
                     "spendCategory": "software",
                     "billingCurrency": { "GLOBAL": "EUR" },
@@ -451,7 +451,7 @@
                     "id": "netflix",
                     "name": "Netflix",
                     "website": "https://www.netflix.com",
-                    "iconUrl": "https://sub.simplely.ca/icons/netflix.png",
+                    "iconUrl": "https://sub.simplely.ca/icons/netflix.webp",
                     "category": "streaming",
                     "spendCategory": "streaming",
                     "acceptedNetworks": ["visa", "mastercard", "amex"],
@@ -534,7 +534,7 @@
                     "name": "Mullvad VPN",
                     "aliases": ["mullvad"],
                     "website": "https://mullvad.net",
-                    "iconUrl": "https://sub.simplely.ca/icons/mullvad.png",
+                    "iconUrl": "https://sub.simplely.ca/icons/mullvad.webp",
                     "category": "vpn",
                     "spendCategory": "software",
                     "billingCurrency": { "GLOBAL": "EUR" },
@@ -1016,7 +1016,7 @@
                     "name": "Disney+",
                     "category": "streaming",
                     "website": "https://www.disneyplus.com",
-                    "iconUrl": "https://sub.simplely.ca/icons/disney-plus.png"
+                    "iconUrl": "https://sub.simplely.ca/icons/disney-plus.webp"
                   },
                   "matchedPlans": [
                     {
@@ -1041,7 +1041,7 @@
                     "name": "Crave",
                     "category": "streaming",
                     "website": "https://www.crave.ca",
-                    "iconUrl": "https://sub.simplely.ca/icons/crave.png"
+                    "iconUrl": "https://sub.simplely.ca/icons/crave.webp"
                   },
                   "matchedPlans": [
                     {
@@ -1065,7 +1065,7 @@
                     "name": "Netflix",
                     "category": "streaming",
                     "website": "https://www.netflix.com",
-                    "iconUrl": "https://sub.simplely.ca/icons/netflix.png"
+                    "iconUrl": "https://sub.simplely.ca/icons/netflix.webp"
                   },
                   "matchedPlans": [
                     {
@@ -1116,7 +1116,7 @@
                     "name": "Mullvad VPN",
                     "category": "vpn",
                     "website": "https://mullvad.net",
-                    "iconUrl": "https://sub.simplely.ca/icons/mullvad.png"
+                    "iconUrl": "https://sub.simplely.ca/icons/mullvad.webp"
                   },
                   "matchedPlans": [
                     {
@@ -1140,7 +1140,7 @@
                     "name": "Proton",
                     "category": "privacy-suite",
                     "website": "https://proton.me",
-                    "iconUrl": "https://sub.simplely.ca/icons/proton.png"
+                    "iconUrl": "https://sub.simplely.ca/icons/proton.webp"
                   },
                   "matchedPlans": [
                     {
@@ -1258,7 +1258,7 @@
                 "id": "netflix",
                 "name": "Netflix",
                 "website": "https://www.netflix.com",
-                "iconUrl": "https://sub.simplely.ca/icons/netflix.png",
+                "iconUrl": "https://sub.simplely.ca/icons/netflix.webp",
                 "category": "streaming",
                 "spendCategory": "streaming",
                 "acceptedNetworks": ["visa", "mastercard", "amex"],
@@ -1385,7 +1385,7 @@
                 "name": "Proton",
                 "aliases": ["proton mail", "protonmail", "proton vpn", "proton pass", "proton drive"],
                 "website": "https://proton.me",
-                "iconUrl": "https://sub.simplely.ca/icons/proton.png",
+                "iconUrl": "https://sub.simplely.ca/icons/proton.webp",
                 "category": "privacy-suite",
                 "spendCategory": "software",
                 "acceptedNetworks": ["visa", "mastercard", "amex", "discover"],
@@ -1586,7 +1586,7 @@
                   "id": "disney-plus",
                   "name": "Disney+",
                   "website": "https://www.disneyplus.com",
-                  "iconUrl": "https://sub.simplely.ca/icons/disney-plus.png",
+                  "iconUrl": "https://sub.simplely.ca/icons/disney-plus.webp",
                   "category": "streaming",
                   "spendCategory": "streaming",
                   "acceptedNetworks": ["visa", "mastercard", "amex"],
@@ -1706,7 +1706,7 @@
                       "providerId": "disney-plus",
                       "providerName": "Disney+",
                       "planName": "Premium",
-                      "iconUrl": "https://sub.simplely.ca/icons/disney-plus.png",
+                      "iconUrl": "https://sub.simplely.ca/icons/disney-plus.webp",
                       "standalone": { "amount": 16.99, "currency": "CAD", "interval": "month", "intervalCount": 1 }
                     },
                     {
@@ -1714,7 +1714,7 @@
                       "providerId": "crave",
                       "providerName": "Crave",
                       "planName": "Premium Ad-Free",
-                      "iconUrl": "https://sub.simplely.ca/icons/crave.png",
+                      "iconUrl": "https://sub.simplely.ca/icons/crave.webp",
                       "standalone": { "amount": 22.00, "currency": "CAD", "interval": "month", "intervalCount": 1 }
                     }
                   ],
@@ -1873,7 +1873,7 @@
       ]
     },
     "GET /icon": {
-      "description": "Icon proxy for custom subscriptions (a website the user typed). Asks Google's favicon service and DuckDuckGo's (core's iconServices) and returns the best icon they give: the largest square PNG of at least 32 pixels and at most 100 KB, usually 64 to 128 pixels, which the app scales down. Google's wins a tie. Nothing else is ever fetched: not the site, and no redirect except to the services' own hosts. Without a usable icon it answers 404, and the app shows the subscription's first letter, as for a catalog provider without a logo. KV keeps each answer under a SHA-256 of the domain, an icon for 30 days and 'no icon' for a day, and both may be cached as long. Neither the domain nor the URL is logged. Catalog providers don't use it: their icons are static files at /icons/<providerId>.png.",
+      "description": "Icon proxy for custom subscriptions (a website the user typed). Asks Google's favicon service and DuckDuckGo's (core's iconServices) and returns the best icon they give: the largest square PNG of at least 32 pixels and at most 100 KB, usually 64 to 128 pixels, which the app scales down. Google's wins a tie. Nothing else is ever fetched: not the site, and no redirect except to the services' own hosts. Without a usable icon it answers 404, and the app shows the subscription's first letter, as for a catalog provider without a logo. KV keeps each answer under a SHA-256 of the domain, an icon for 30 days and 'no icon' for a day, and both may be cached as long. Neither the domain nor the URL is logged. Catalog providers don't use it: their icons are static files at /icons/<providerId>.webp.",
       "query": {
         "domain": "Required. A bare hostname such as localgym.example (no scheme, port or path), read in lower case without a trailing dot; an international name is used in its xn-- form. An IP address, a single label such as localhost, or any other parameter gets 400."
       },

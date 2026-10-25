@@ -28,6 +28,7 @@
     "eslint": "^10.13.0",
     "postcss-scss": "^4.0.9",
     "prettier": "^3.8.1",
+    "sharp": "0.35.5",
     "stylelint": "^17.16.0",
     "tsx": "4.23.15",
     "typescript": "~6.0.2",

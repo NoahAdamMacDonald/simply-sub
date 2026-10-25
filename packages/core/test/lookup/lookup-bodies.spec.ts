@@ -134,7 +134,7 @@ describe('planBody', () => {
       id: 'netflix',
       name: 'Netflix',
       website: 'https://example.com',
-      iconUrl: 'https://sub.simplely.ca/icons/netflix.png',
+      iconUrl: 'https://sub.simplely.ca/icons/netflix.webp',
       category: 'streaming',
       spendCategory: 'streaming',
     });
@@ -202,7 +202,7 @@ describe('bundlesBody', () => {
         providerId: 'netflix',
         providerName: 'Netflix',
         planName: 'Standard',
-        iconUrl: 'https://sub.simplely.ca/icons/netflix.png',
+        iconUrl: 'https://sub.simplely.ca/icons/netflix.webp',
         standalone: { amount: 18.99, currency: 'CAD', interval: 'month', intervalCount: 1 },
       },
       {
@@ -210,7 +210,7 @@ describe('bundlesBody', () => {
         providerId: 'crave',
         providerName: 'Crave',
         planName: 'Premium',
-        iconUrl: 'https://sub.simplely.ca/icons/crave.png',
+        iconUrl: 'https://sub.simplely.ca/icons/crave.webp',
         standalone: { amount: 22, currency: 'CAD', interval: 'month', intervalCount: 1 },
       },
     ]);

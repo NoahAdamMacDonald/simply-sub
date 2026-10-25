@@ -7,13 +7,16 @@
 //   apps/web/public/data/catalog/features.json     the GET /features body
 //   apps/web/public/data/catalog/categories.json   the GET /categories body
 //   apps/web/public/data/catalog/ids.json          every provider id with its plan ids, for the API's suggestions
-//   apps/web/public/icons/<id>.png                 each provider's logo from data/logos/, published as /icons/<id>.png
+//   apps/web/public/icons/<id>.webp                each provider's logo from data/logos/, as a WebP of at most 96 px,
+//                                                  published as /icons/<id>.webp
 // It refuses to build a catalog with validation errors. The catalog version is a hash of the snapshot's data, so it
 // changes only when the catalog does. The deploy seeds D1 from catalog.json (scripts/seed-d1.ts).
 import {
   buildCatalogData,
   buildCatalogIndex,
   buildCatalogMeta,
+  catalogIconFile,
+  catalogIconSize,
   catalogIds,
   categoriesBody,
   featuresBody,
@@ -25,6 +28,7 @@ import { createHash } from 'node:crypto';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import sharp from 'sharp';
 import {
   catalogFile,
   checkCatalog,
@@ -76,10 +80,13 @@ if (errors > 0) {
 
   await clear(iconsDir);
   const icons = data.providers.filter((provider) => provider.iconUrl);
+  let iconBytes = 0;
   for (const { id } of icons) {
     const png = source.logos.get(id);
     if (png) {
-      await write(`${iconsDir}${id}.png`, png);
+      const webp = await webpIcon(png);
+      await write(`${iconsDir}${catalogIconFile(id)}`, webp);
+      iconBytes += webp.length;
     }
   }
 
@@ -89,10 +96,21 @@ if (errors > 0) {
       `Catalog ${catalogVersion}: wrote ${catalogFile} (${kilobytes(json)}),`,
       ` ${plural(index.regions.length, 'region file')} in ${catalogDir} (${sizes.join(', ')}),`,
       ' features.json, categories.json, ids.json',
-      ` and ${plural(icons.length, 'icon')}.`,
+      ` and ${plural(icons.length, 'WebP icon')} (${Math.ceil(iconBytes / 1024)} KB in all).`,
       warnings > 0 ? ` ${plural(warnings, 'warning')}: run npm run data:validate.` : '',
     ].join(''),
   );
+}
+
+/**
+ * A logo as the app gets it: at most catalogIconSize pixels wide (a smaller one isn't enlarged), as a lossy WebP whose
+ * transparency stays exact. At icon sizes, quality 90 looks the same as the PNG, at about a fifth of the bytes.
+ */
+async function webpIcon(png: Uint8Array): Promise<Buffer> {
+  return sharp(png)
+    .resize(catalogIconSize, catalogIconSize, { withoutEnlargement: true })
+    .webp({ quality: 90, alphaQuality: 100, effort: 6 })
+    .toBuffer();
 }
 
 async function write(file: string, contents: string | Uint8Array): Promise<void> {

@@ -116,7 +116,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M1.3 | Hand-write `netflix`, `disney-plus`, `crave`, `mullvad`, `proton` and one bundle. Proton: Free, the Plus plans, and the Unlimited, Duo and Family suites; no business plans (BLUEPRINT §4.4) | All pass validation, and their shapes match `docs/api-output-examples.json` |
 | M1.4 | `scripts/validate-data.ts` (BLUEPRINT §6.2) in CI | A broken file fails CI with a readable message |
 | M1.5 | `scripts/build-catalog.ts` → static `catalog.json` + `seed.sql` | The output matches the `GET /catalog` example |
-| M1.6 | `scripts/fetch-icons.ts` (`npm run data:icons`): any website's best icon → `data/logos/<id>.png` (committed, hand-made logos too), published as `/icons/<id>.png`; no logo → no `iconUrl`, and the app shows a letter | Every provider has an icon or the fallback |
+| M1.6 | `scripts/fetch-icons.ts` (`npm run data:icons`): any website's best icon → `data/logos/<id>.png` (committed, hand-made logos too), published as `/icons/<id>.webp`, a WebP of at most 96 px (a PNG copy until 2026-10-25); no logo → no `iconUrl`, and the app shows a letter | Every provider has an icon or the fallback |
 | M1.7 | core: `pickPrice`, `convert` (§3.1; `monthlyEquivalent` arrived in M1.5 for the seed) | Tests cover a native price, the same currency from another region, a GLOBAL price and a fallback region |
 
 ### M2 — API
@@ -138,7 +138,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M3.2 | `find-urls.ts` (common paths → sitemap → nav links → search API) | At least 80% of a 20-service sample get a correct pricing URL |
 | M3.3 | Playwright renderer, run locally so prices come back in CAD | Text and a screenshot are saved for each page |
 | M3.4 | `extract-plans.ts` (LLM structured output, evidence quotes, proposed features; regular prices, the billing period as stated, `availableIn` from the provider's own country list: BLUEPRINT §6.5) | Draft YAML passes validation for most services |
-| M3.5 | Batch PR script (`gh pr create`, about 10 providers per PR) | One command turns a batch into a reviewable PR |
+| M3.5 | Batch PR script (`gh pr create`, about 10 providers per PR), with each new provider's logo fetched into `data/logos/` the way `npm run data:icons` does | One command turns a batch into a reviewable PR, logos included |
 | M3.6 | Run it on your own services (BLUEPRINT §6.6) and tune the prompts | Your subscriptions are in the catalog with CAD prices |
 
 ### M4 — App foundations
@@ -189,7 +189,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 |---|---|---|
 | M8.1 | core: optimizer (BLUEPRINT §10) with fixtures | All fixture cases pass |
 | M8.2 | Optimizations page (P14) + "Apply" to a draft | P14 criteria met |
-| M8.3 | `apps/bot` nightly price check → GitHub PR (BLUEPRINT §6.4, §7.7) | A changed price produces a PR |
+| M8.3 | `apps/bot` nightly price check → GitHub PR (BLUEPRINT §6.4, §7.7); the same run proposes a new logo when a provider's icon changed (a rebrand) | A changed price produces a PR, and so does a changed logo |
 
 ### M9 — Payment (Phase 4)
 | ID | Task | Done when |
@@ -304,7 +304,7 @@ export interface ResolvedItem {
   providerId?: string; planId?: string; bundleId?: string; customSubId?: string;
   name: string;            // "Netflix"
   planName: string;        // "Standard"
-  iconUrl?: string;        // catalog: the relative icons/<id>.png when the provider has an iconUrl (the absolute URL
+  iconUrl?: string;        // catalog: the relative icons/<id>.webp when the provider has an iconUrl (the absolute URL
                            // points at production, so a preview would miss a new logo); custom subs: /icon?domain=;
                            // none → ss-provider-icon shows a letter
   price: PickedPrice;      // amount, currency, interval, native/converted, FX info
@@ -409,7 +409,7 @@ is added (Canada, the US), and sets the tax rate (BLUEPRINT §4.8). A US user's 
 | `ss-page-header` | Title, back link, action slot | `title`, `backLink?` |
 | `ss-budget-bar` | Pill progress bar (wireframe style) with the label inside the fill | `value`, `max?`, `labelMode: 'percent' \| 'amount'`, `marker?` → colour ok/warn/over; `role="progressbar"` |
 | `ss-price` | Price + interval; ≈ and the `currency_exchange` icon when converted; tooltip with the source price | `price: PickedPrice`, `clickable` → `select` |
-| `ss-provider-icon` | Icon, with a letter fallback | `src?`, `name`, `size` |
+| `ss-provider-icon` | Icon, with a letter fallback; at most 48 px, since catalog icons are 96 px files (BLUEPRINT §6.3) | `src?`, `name`, `size` (px) |
 | `ss-status-badge` | Active / Inactive / Not listed, plus a date | `status` |
 | `ss-rank-select` | The single rank dropdown | `value`, `subscriptionLevel` (adds Essential and Critical), `inherited?` (shows "Profile default (Wanted)") → `valueChange` |
 | `ss-rank-dot`, `ss-rank-chip` | Colour dot (with or without a label) | `rank` |
@@ -1020,7 +1020,7 @@ FREE SAVINGS — nothing you rank is lost
   | Request | Served by | Caching | Uses Worker quota? |
   |---|---|---|---|
   | `/data/catalog/index.json`, then `/data/catalog/<region>.json` (or `catalog.json` for a region without a file) | static asset | ETag; the browser revalidates the index on each visit, and fetches the region's file when the catalog version changes | No |
-  | `/icons/<id>.png` | static asset | 1 day, then revalidated (the URL has no version, so a new logo must show up) | No |
+  | `/icons/<id>.webp` | static asset | 1 day, then revalidated (the URL has no version, so a new logo must show up) | No |
   | `/api/v1/fx?base=CAD` | Worker → Frankfurter | 12 h at the edge + browser cache (about once a day per user) | Yes (tiny) |
   | `/api/v1/icon?domain=` | Worker → Google/DuckDuckGo | 30 days (KV) | Yes (custom subscriptions only) |
 - The other endpoints (`/providers`, `/plans`, `/bundles`, `/features`, `/categories`, `/catalog`) serve deep links,

@@ -79,7 +79,7 @@ describe('providersBody', () => {
         name: 'Mullvad VPN',
         category: 'vpn',
         website: 'https://mullvad.net',
-        iconUrl: 'https://sub.simplely.ca/icons/mullvad.png',
+        iconUrl: 'https://sub.simplely.ca/icons/mullvad.webp',
       },
       matchedPlans: [
         {
