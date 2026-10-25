@@ -181,7 +181,14 @@ describe('GET /providers', () => {
     });
     const [mullvad, proton] = body.data;
     expect(mullvad.provider.id).toBe('mullvad');
-    expect(mullvad.matchedOn).toEqual(['name', 'category:vpn', 'feature:vpn.included']);
+    // Every rank key whose name or alias says VPN: Unlimited VPN traffic, and Multi-hop as "double vpn".
+    expect(mullvad.matchedOn).toEqual([
+      'name',
+      'category:vpn',
+      'feature:vpn.included',
+      'feature:vpn.unlimited-traffic',
+      'feature:vpn.multi-hop',
+    ]);
     expect(mullvad.matchedPlans[0].pricing?.[0]).toMatchObject({
       currency: 'CAD',
       native: false,
