@@ -1,3 +1,4 @@
+import type { HealthBody } from '@simply-sub/core';
 import { Hono } from 'hono';
 
 /** The version /health reports. Changes under /v1 are additive only (PROJECT-PLAN §6). */
@@ -26,12 +27,13 @@ export const health = new Hono<{ Bindings: Env }>().get('/', async (c) => {
         ...(catalog && {
           catalogVersion: catalog.version,
           catalogUpdatedAt: catalog.built_at,
-          counts: JSON.parse(catalog.counts) as unknown,
+          // The seed wrote it from the snapshot's meta.counts.
+          counts: JSON.parse(catalog.counts) as HealthBody['data']['counts'],
         }),
       },
       // Timestamps are ISO 8601 in UTC, to the second, as in the examples.
       meta: { generatedAt: new Date().toISOString().replace(/\.\d{3}Z$/, 'Z') },
-    },
+    } satisfies HealthBody,
     200,
     // The contract's headers. Hono's default is plain application/json; M2.8 sets it for every route.
     { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' },

@@ -1,11 +1,11 @@
 import { suggestedPlanId, type CatalogIds } from '../catalog/catalog-ids';
 import { planIdSchema } from '../catalog/formats';
+import type { QueryProblem } from '../api/error-body';
 import {
   currencyIssue,
   defaultCurrency,
   needsRegion,
   regionIssue,
-  type QueryProblem,
 } from '../search/providers-query';
 
 // The query strings of GET /providers/:id, GET /plans/:id and GET /bundles (docs/api-output-examples.json). Region and

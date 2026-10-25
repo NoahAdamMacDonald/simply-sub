@@ -1,7 +1,8 @@
-import type { IsoDate } from '../dates/iso-date';
+import { z } from 'zod';
 import { exchangeRate, type FxRates } from './convert';
+import { currencySchema, isoDateSchema, regionSchema, textSchema } from './formats';
 import { monthlyEquivalent } from './monthly-equivalent';
-import type { Interval, Price } from './price';
+import { intervalSchema, type Interval, type Price } from './price';
 import { globalRegion, groupsOf } from './regions';
 
 // pickPrice (BLUEPRINT §4.7): which of a plan's, add-on's or bundle's stored prices a user sees, and in which
@@ -18,23 +19,44 @@ export interface PriceContext {
   fx?: FxRates;
 }
 
-/** A price as the user sees it. The key order matches the API's `pricing` (docs/api-output-examples.json). */
-export interface PickedPrice {
-  interval: Interval;
-  intervalCount: number;
-  /** In `currency`, at full precision. */
-  amount: number;
-  /** The user's currency, or the source's own when there was no rate to convert it. */
-  currency: string;
-  monthlyEquivalent: number;
-  autoRenew: boolean;
-  /** True when no conversion was needed: the source price is in the user's currency, or free (0 is 0 anywhere). */
-  native: boolean;
-  /** The stored price it comes from. */
-  source: { region: string; amount: number; currency: string };
-  /** The conversion, when there was one. `rate` is how much of `currency` one unit of the source's is worth. */
-  fx?: { rate: number; date: IsoDate; source: string };
-}
+/** A price as the user sees it: the API's `pricing` entries (docs/api-output-examples.json), in their key order. */
+export const pickedPriceSchema = z.strictObject({
+  interval: intervalSchema,
+  intervalCount: z.int().positive(),
+  amount: z
+    .number()
+    .nonnegative()
+    .describe('In currency, at full precision (the API rounds it to 2 decimals)'),
+  currency: currencySchema.describe(
+    "The user's currency, or the source's own when there was no rate to convert it",
+  ),
+  monthlyEquivalent: z.number().nonnegative(),
+  autoRenew: z.boolean(),
+  native: z
+    .boolean()
+    .describe(
+      "True when no conversion was needed: the source price is in the user's currency, or free (0 is 0 anywhere)",
+    ),
+  source: z
+    .strictObject({
+      region: regionSchema,
+      amount: z.number().nonnegative(),
+      currency: currencySchema,
+    })
+    .describe('The stored price it comes from'),
+  fx: z
+    .strictObject({
+      rate: z
+        .number()
+        .positive()
+        .describe("How much of currency one unit of the source's is worth"),
+      date: isoDateSchema,
+      source: textSchema,
+    })
+    .describe('The conversion, when there was one')
+    .optional(),
+});
+export type PickedPrice = z.infer<typeof pickedPriceSchema>;
 
 /** The regions to fall back to, in order, when nothing else fits (rule 4). */
 const fallbackRegions = ['US', 'GB', 'EU'];

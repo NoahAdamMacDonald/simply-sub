@@ -3,6 +3,7 @@ import {
   catalogIndexSchema,
   type CatalogIds,
   type CatalogIndex,
+  type ErrorBody,
 } from '@simply-sub/core';
 import type { Context } from 'hono';
 import { catalogCacheControl, jsonType, notModified } from './http';
@@ -71,7 +72,9 @@ async function staticJson(c: CatalogContext, path: string): Promise<ReadableStre
 
 export function missingFiles(c: CatalogContext): Response {
   return c.json(
-    { error: { code: 'internal', message: 'The catalog files are missing from this deploy.' } },
+    {
+      error: { code: 'internal', message: 'The catalog files are missing from this deploy.' },
+    } satisfies ErrorBody,
     500,
     { 'Content-Type': jsonType },
   );

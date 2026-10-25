@@ -1,37 +1,19 @@
+import { z } from 'zod';
+import type { QueryProblem } from '../api/error-body';
 import type { Categories } from '../catalog/category';
 import { choices, didYouMean } from '../catalog/checks';
 import type { Feature } from '../catalog/feature';
-import { currencySchema } from '../catalog/formats';
-import { intervalSchema, type Interval } from '../catalog/price';
+import { currencySchema, rankKeySchema, regionSchema, slugSchema } from '../catalog/formats';
+import { intervalSchema } from '../catalog/price';
 import { regionCurrency } from '../catalog/region-currency';
 import { isCatalogRegion, regionProblem } from '../catalog/regions';
-import { rankKeyOptions, type RankKey } from '../ranking/rank-keys';
+import { rankKeyOptions } from '../ranking/rank-keys';
 
 // GET /providers' query string (docs/api-output-examples.json): each parameter checked, and the defaults filled
 // in. Anything unknown or invalid is a problem, which the API answers with 400 bad_request (BLUEPRINT §5.4).
 
 export const providerSorts = ['relevance', 'price_asc', 'price_desc', 'name', 'features'] as const;
 export type ProviderSort = (typeof providerSorts)[number];
-
-/** The query as searchProviders reads it, and meta.query shows it: given values plus the defaults used. */
-export interface ProvidersQuery {
-  q?: string;
-  category?: string;
-  feature?: RankKey[];
-  minPrice?: number;
-  maxPrice?: number;
-  interval?: Interval;
-  region?: string;
-  currency?: string;
-  nativeOnly?: boolean;
-  sort: ProviderSort;
-  limit: number;
-}
-
-export interface QueryProblem {
-  param: string;
-  issue: string;
-}
 
 export interface QueryContext {
   features: readonly Feature[];
@@ -60,6 +42,22 @@ const maxTextLength = 100;
 const maxKeys = 10;
 const defaultLimit = 20;
 const maxLimit = 50;
+
+/** The query as searchProviders reads it, and meta.query shows it: given values plus the defaults used. */
+export const providersQuerySchema = z.strictObject({
+  q: z.string().min(1).max(maxTextLength).optional(),
+  category: slugSchema.optional(),
+  feature: z.array(rankKeySchema).min(1).max(maxKeys).optional(),
+  minPrice: z.number().nonnegative().optional(),
+  maxPrice: z.number().nonnegative().optional(),
+  interval: intervalSchema.optional(),
+  region: regionSchema.optional(),
+  currency: currencySchema.optional(),
+  nativeOnly: z.boolean().optional(),
+  sort: z.enum(providerSorts),
+  limit: z.int().min(1).max(maxLimit),
+});
+export type ProvidersQuery = z.infer<typeof providersQuerySchema>;
 
 /**
  * The query, with the offset its cursor points at, or each problem with it, in the order the parameters came.

@@ -1,4 +1,4 @@
-import { readIconQuery } from '@simply-sub/core';
+import { readIconQuery, type ErrorBody } from '@simply-sub/core';
 import { Hono } from 'hono';
 import { badQuery, jsonType } from '../http';
 import { iconSeconds, keptIcon, noIconSeconds } from '../icons';
@@ -19,7 +19,10 @@ export const icon = new Hono<{ Bindings: Env }>().get('/', async (c) => {
   const { domain } = read.query;
   const found = await keptIcon(c.env, domain);
   if (!found) {
-    return c.json({ error: { code: 'not_found', message: `No icon found for ${domain}.` } }, 404, {
+    const body = {
+      error: { code: 'not_found', message: `No icon found for ${domain}.` },
+    } satisfies ErrorBody;
+    return c.json(body, 404, {
       'Content-Type': jsonType,
       'Cache-Control': `public, max-age=${noIconSeconds}`,
     });
