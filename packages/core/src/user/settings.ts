@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { currencySchema } from '../catalog/formats';
 import { countrySchema, timestampSchema } from './record';
 

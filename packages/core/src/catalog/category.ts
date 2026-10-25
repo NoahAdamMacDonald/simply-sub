@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { iconNameSchema, slugSchema, textSchema } from './formats';
 
 // data/categories.yaml: what a provider is (service), how the Features page groups features (feature) and the

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { addDuplicateIssues } from '../catalog/checks';
 import { featureValueSchema } from '../catalog/feature';
 import { currencySchema, dottedSlugSchema, httpsUrlSchema, textSchema } from '../catalog/formats';

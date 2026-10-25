@@ -1,4 +1,4 @@
-import type { z } from 'zod';
+import type * as z from 'zod';
 import { rankKeySchema } from '../catalog/formats';
 import { customSubscriptionSchema } from './custom-subscription';
 import { listItemSchema } from './list-item';

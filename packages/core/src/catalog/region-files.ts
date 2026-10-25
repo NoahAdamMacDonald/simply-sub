@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { regionSchema } from './formats';
 import type { Price } from './price';
 import { globalRegion, groupsOf } from './regions';

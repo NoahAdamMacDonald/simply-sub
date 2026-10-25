@@ -1,4 +1,4 @@
-import type { z } from 'zod';
+import type * as z from 'zod';
 import { addDays, type IsoDate } from '../dates/iso-date';
 import { iconProblem, readPngImage } from '../icons/icon-image';
 import { bundleSchema, type Bundle } from './bundle';

@@ -13,8 +13,8 @@ export const INDEXED_DB = new InjectionToken<{
 }>('INDEXED_DB');
 
 /**
- * Opens the user database on first use, for the repositories, which are the only code that use it. Dexie and the
- * record schemas then load as a chunk of their own (about 190 kB), which keeps them out of the initial bundle.
+ * Opens the user database on first use, for the repositories, which are the only code that use it. Dexie, Zod and
+ * the record schemas then load as a chunk of their own (216 kB), which keeps them out of the initial bundle.
  */
 @Service()
 export class StorageService {

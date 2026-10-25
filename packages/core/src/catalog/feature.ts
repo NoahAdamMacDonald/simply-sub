@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { addDuplicateIssues } from './checks';
 import { aliasesSchema, dottedSlugSchema, slugSchema, textSchema, tierIdSchema } from './formats';
 

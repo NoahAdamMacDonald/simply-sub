@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { addDuplicateIssues } from './checks';
 import { bundleIdSchema, httpsUrlSchema, planIdSchema, slugSchema, textSchema } from './formats';
 import { pricesSchema } from './price';

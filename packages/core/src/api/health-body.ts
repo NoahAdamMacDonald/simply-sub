@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { catalogMetaSchema } from '../catalog/snapshot';
 
 // GET /health's body (docs/api-output-examples.json): liveness, the API's version, and the catalog D1 holds, from the

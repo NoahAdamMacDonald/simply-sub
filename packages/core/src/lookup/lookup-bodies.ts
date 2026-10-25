@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { availability, type Availability } from '../catalog/availability';
 import { bundleSchema, type Bundle } from '../catalog/bundle';
 import {

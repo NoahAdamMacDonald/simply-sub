@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { currencySchema, isoDateSchema, textSchema } from './formats';
 
 // Exchange rates and currency conversion (BLUEPRINT §4.7). The rates are GET /fx's data: the ECB's daily rates

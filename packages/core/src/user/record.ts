@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { isoRegions } from '../catalog/regions';
 
 // What the stored user records share (BLUEPRINT §4.6, §11.1). The schemas check a record's own structure, never its

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { bundleSchema, type Bundle } from './bundle';
 import { categoriesFileSchema, type Categories } from './category';
 import { featuresFileSchema, type Feature } from './feature';

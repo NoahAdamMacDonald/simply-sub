@@ -50,6 +50,12 @@ export default defineConfig(
           selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
           message: 'Take `today` as a parameter instead of reading the clock.',
         },
+        {
+          // `{ z }` is an object holding all of Zod, every locale's messages included (about 450 kB minified in the
+          // app's storage chunk); a namespace import lets the bundler keep only what's used (under 100 kB).
+          selector: "ImportDeclaration[source.value='zod'] > ImportSpecifier[imported.name='z']",
+          message: "Use `import * as z from 'zod'`, which bundlers can tree-shake.",
+        },
       ],
     },
   },

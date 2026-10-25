@@ -2035,8 +2035,10 @@ prompted after each big change, or weekly).
   save replaces whole.
 - **Only the repositories import Dexie:** ESLint rejects a `dexie` import anywhere else in the app. The app lock
   (M6.10) wraps `StorageEngine`, the one class that reads and writes rows.
-- **Loaded on first use:** Dexie and the record schemas (about 190 kB minified) load as a chunk of their own when a
-  repository first needs them, which keeps the initial bundle under its 500 kB budget.
+- **Loaded on first use:** Dexie, Zod and the record schemas (216 kB minified, 60 kB compressed) load as a chunk of
+  their own when a repository first needs them. The repositories themselves add 14 kB to the initial bundle (440 kB
+  of its 500 kB budget). Core imports Zod as `import * as z from 'zod'`, which ESLint enforces: `import { z }`
+  brings all of Zod, every locale's messages included, and made the chunk 541 kB.
 - **Persistent storage** is requested after the first write, not on load: Firefox asks the user, and the question
   only makes sense once there's something to keep.
 - **Tests** run on `fake-indexeddb`, loaded in `test-setup.ts` (Dexie's live queries never run without a global

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 // String formats shared by every catalog file. Zod reports `message` when data is validated, and the generated
 // JSON Schema carries the same text as `patternErrorMessage`, which the VS Code YAML extension shows in place of

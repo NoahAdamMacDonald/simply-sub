@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { rankKeySchema } from '../catalog/formats';
 import { profileRankSchema } from './rank';
 import { timestampSchema } from './record';

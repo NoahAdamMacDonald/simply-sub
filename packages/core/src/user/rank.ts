@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
 /**
  * How much a user cares about a rank key (PROJECT-PLAN §3.2), from most to least wanted. Essential and critical are

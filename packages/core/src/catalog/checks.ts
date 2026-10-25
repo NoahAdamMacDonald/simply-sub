@@ -1,4 +1,4 @@
-import type { z } from 'zod';
+import type * as z from 'zod';
 
 // Small helpers shared by the schemas and validateCatalog.
 

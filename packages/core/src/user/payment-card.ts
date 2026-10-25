@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import * as z from 'zod';
 import { currencySchema, textSchema } from '../catalog/formats';
 import { cardNetworkSchema } from '../catalog/provider';
 import { recordMetaShape } from './record';
