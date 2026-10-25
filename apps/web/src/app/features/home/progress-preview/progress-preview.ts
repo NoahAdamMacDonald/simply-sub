@@ -28,6 +28,8 @@ export class ProgressPreview {
   protected readonly currency = signal('CAD');
   protected readonly search = signal('vpn');
   protected readonly iconDomain = signal('');
+  /** Whether /icon answered 404 for iconDomain: the app then shows the first letter. */
+  protected readonly iconMissing = signal(false);
 
   /** The catalog version and region files, then the region's file (or the full catalog), as the app will load it. */
   protected readonly catalog = resource({
@@ -94,6 +96,11 @@ export class ProgressPreview {
   });
 
   protected readonly money = money;
+
+  protected showIcon(domain: string): void {
+    this.iconMissing.set(false);
+    this.iconDomain.set(domain.trim());
+  }
 
   protected text(event: Event): string {
     return (event.target as HTMLInputElement | HTMLSelectElement).value;

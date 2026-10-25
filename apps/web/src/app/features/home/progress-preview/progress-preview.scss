@@ -57,6 +57,12 @@
   color: var(--ss-on-accent);
 }
 
+.big {
+  inline-size: 48px;
+  block-size: 48px;
+  font-size: 1.5rem;
+}
+
 .plans {
   list-style: none;
   padding: 0;
@@ -91,6 +97,6 @@
   align-items: center;
 }
 
-.plans strong + span {
+.plans strong + .muted {
   margin-inline-start: 0.5rem;
 }

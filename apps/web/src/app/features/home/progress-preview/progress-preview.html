@@ -171,25 +171,26 @@
   <h3>Custom subscription icon (GET /api/v1/icon)</h3>
   <label class="field">
     Website domain
-    <input
-      #domain
-      type="text"
-      placeholder="example.com"
-      (keydown.enter)="iconDomain.set(domain.value.trim())"
-    />
+    <input #domain type="text" placeholder="example.com" (keydown.enter)="showIcon(domain.value)" />
   </label>
-  <button type="button" (click)="iconDomain.set(domain.value.trim())">Get icon</button>
+  <button type="button" (click)="showIcon(domain.value)">Get icon</button>
   @if (iconDomain()) {
     <p class="icon-result">
-      <img
-        [src]="'/api/v1/icon?domain=' + iconDomain()"
-        alt="Icon for {{ iconDomain() }}"
-        width="48"
-        height="48"
-      />
-      <span class="muted"
-        >A broken image means no usable icon (404): the app will show a letter.</span
-      >
+      @if (iconMissing()) {
+        <span class="letter big" aria-hidden="true">{{ iconDomain()[0].toUpperCase() }}</span>
+        <span class="muted"
+          >No usable icon for {{ iconDomain() }} (404), so the app shows its first letter.</span
+        >
+      } @else {
+        <img
+          [src]="'/api/v1/icon?domain=' + iconDomain()"
+          alt="Icon for {{ iconDomain() }}"
+          width="48"
+          height="48"
+          (error)="iconMissing.set(true)"
+        />
+        <span class="muted">The icon from Google's or DuckDuckGo's icon service.</span>
+      }
     </p>
   }
 </section>
