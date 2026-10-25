@@ -29,6 +29,7 @@ export {
 } from './catalog/validate-catalog';
 export * from './dates/iso-date';
 export * from './icons/icon-image';
+export * from './icons/icon-query';
 export * from './icons/icon-sources';
 export * from './lookup/lookup-bodies';
 export * from './lookup/lookup-query';

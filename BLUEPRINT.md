@@ -185,9 +185,10 @@ simply-sub/
 │     │  ├─ catalog-files.ts # the routes that stream a static catalog file: ETag and 304 (section 5.1)
 │     │  ├─ http.ts          # what every route answers alike: 400 bad_request, 404 not_found, 502, If-None-Match
 │     │  ├─ fx.ts            # the ECB's rates, kept in KV (section 5.2)
+│     │  ├─ icons.ts         # custom subscriptions' icons from the icon services, kept in KV (section 5.4)
 │     │  ├─ lookup.ts        # what GET /providers/:id, /plans/:id and /bundles share: rates, ETag, 304
 │     │  ├─ routes/          # health.ts, providers.ts, provider.ts, plans.ts, features.ts, categories.ts,
-│     │  │                   # bundles.ts, catalog.ts, icons.ts
+│     │  │                   # bundles.ts, catalog.ts, fx.ts, icon.ts
 │     │  └─ db/              # SQL queries (D1): providers.ts for GET /providers, lookups.ts for the M2.4 routes
 │     │                      # (section 5.3)
 │     ├─ test/               # route tests, run in workerd (@cloudflare/vitest-plugin)
@@ -206,7 +207,8 @@ simply-sub/
 │     │  │                   # validateCatalog (section 6.2), regions, availability, pickPrice and convert (section 4.7)
 │     │  ├─ user/            # user-data types (lists, items, cards…)
 │     │  ├─ dates/           # ISO calendar dates in UTC: IsoDate, toIsoDate, addDays, addMonths (M7.1)
-│     │  ├─ icons/           # PNG and ICO reading, a page's icon links, the icon services, picking the best icon
+│     │  ├─ icons/           # PNG and ICO reading, a page's icon links, the icon services, picking the best icon,
+│     │  │                   # GET /icon's query (M2.6)
 │     │  ├─ schedule/        # recurrence: next payment dates, monthly/annual totals
 │     │  ├─ tax/             # sales tax: tax-added regions, the Canadian rate table, subdivisions (section 4.8)
 │     │  ├─ ranking/         # rank keys, providesKey (M2.3) and providedKeys (M2.4); rank resolution (item override >
@@ -989,7 +991,7 @@ The rules live in `packages/core/src/tax/` and run in M7.1:
 | `GET /features` | Feature registry, in `features.yaml` order (each group before its features). The static file `data/catalog/features.json`, built by `data:build` and streamed like `/catalog`, so it reads no D1 rows. No query parameters |
 | `GET /categories` | Service, feature and spend categories: the static file `data/catalog/categories.json`, streamed the same way. No query parameters |
 | `GET /bundles?plans=netflix.standard,crave.premium` | Bundles that include any of the given plans (1 to 20), with their plans expanded, the union of their features and, with a region, savings (section 4.4, `bundlesBody`). One batch reads the `catalog` row, each plan asked for by primary key (an unknown one gets 400 with a suggestion from `ids.json`), the bundles through the `bundle_plans (plan_id)` index with their sellers, and the providers of their plans: 11 rows for one plan in today's catalog |
-| `GET /icon?domain=example.com` | Favicon proxy for **custom subscriptions** (Google, then DuckDuckGo, as core's `iconServiceUrls` orders them → the best square PNG, or the fallback), cached for 30 days in KV. Catalog icons are fetched once by `scripts/fetch-icons.ts` into `data/logos/` (committed, so builds never fetch) and served as static files at `/icons/<id>.png` |
+| `GET /icon?domain=example.com` | Icon proxy for **custom subscriptions**: asks Google's and DuckDuckGo's icon services (core's `iconServices`) and returns the best square PNG of at least 32 pixels (`pickIcon`, Google's on a tie), or `404` when neither has one, and the app shows the subscription's first letter. KV keeps an icon for 30 days and "no icon" for a day (section 5.4). No `size`: the Worker can't resize, so the app scales the icon. Catalog icons are fetched once by `scripts/fetch-icons.ts` into `data/logos/` (committed, so builds never fetch) and served as static files at `/icons/<id>.png` |
 | `GET /fx?base=CAD` | The ECB's daily rates in the user's currency. The Worker fetches them in euros from Frankfurter's ECB-only route (`/v2/providers/ecb/rates?base=EUR`; v1 is deprecated, and v2's default blends in other central banks), keeps them in KV under `fx:ecb` for 12 hours, and rebases them to any currency the ECB publishes (core's `rebaseRates`), so one fetch serves every base. When Frankfurter fails after that, the last good rates are sent with `meta.stale: true`; with none kept, `502 upstream_unavailable`. `GET /providers` uses the same rates (M2.3) |
 | `GET /health` | Returns the API version, and the catalog version, build time and counts that D1 holds (the `catalog` row, section 5.3) |
 | *(Phase 5)* `POST /reports` | "This price looks wrong" reports (Turnstile-protected, rate-limited) |
@@ -1086,14 +1088,20 @@ shipped to the browser is visible. The risks are abuse, and M2 builds these defe
   `429` with the `rate_limited` error. On the free plan, going over the daily Worker quota makes requests fail;
   it can't run up a bill. The app's own pages and catalog file are static assets and don't count.
 - **Caching:** every GET is edge-cached (section 5.1), so repeated requests rarely run the Worker or touch D1.
-- **Icon proxy (`/icon`):** accepts only a valid public domain name, only ever asks the fixed icon services
-  (Google, then DuckDuckGo) for that domain, never fetches a URL from the request, and caches results in KV for
-  30 days. That keeps it from becoming an open proxy or reaching internal addresses. It reuses core's icon functions
-  (`packages/core/src/icons/`: `iconServiceUrls`, `readIconImage`, `pickIcon`), but never the site's own pages,
-  which only the catalog's `fetch-icons.ts` reads.
+- **Icon proxy (`/icon`, M2.6):** accepts only a well-formed public domain name (`readIconQuery`: no scheme, port,
+  path, IP address or single label; an international name in its `xn--` form), only ever asks the fixed icon
+  services (Google, DuckDuckGo) for that domain, never fetches a URL from the request, and follows a redirect only
+  to the services' own hosts (`isIconServiceUrl`: Google's answers from gstatic.com). That keeps it from becoming an
+  open proxy or reaching internal addresses. It reuses core's icon functions (`packages/core/src/icons/`:
+  `iconServices`, `readIconImage`, `pickIcon`), but never the site's own pages, which only the catalog's
+  `fetch-icons.ts` reads. KV keeps each answer under `icon:<SHA-256 of the domain>`, so its key list doesn't show
+  what people subscribe to: an icon for 30 days, "no icon" for a day so a site that adds one shows up soon. A miss
+  costs two subrequests and one KV write (1,000 a day on the free plan); when KV refuses the write, the icon is
+  still answered. Until the rate limit (M2.8), that write budget is what a flood of new domains would use up.
 - **No user data in logs:** the domain a user typed for a custom subscription says what they subscribe to, and
   Workers Logs record every request's URL. So `wrangler.jsonc` turns off automatic request logs
-  (`observability.logs.invocation_logs: false`, M2.8), the Worker logs errors without query strings, and the app
+  (`observability.logs.invocation_logs: false`, since M2.6), the Worker logs errors without the domain or a URL
+  that contains it, and the app
   asks for an icon only when a custom subscription with a website is saved.
 - **Validation:** every query parameter goes through Zod, and anything unknown or invalid gets `400`.
 - **CORS:** the app and the API share an origin, so the app needs no CORS at all. The API's CORS header names only
@@ -1350,7 +1358,7 @@ the Wikidata queue:
 | Workers requests | ~100,000 per day | API calls only: a few hundred per day at first |
 | Static assets | Free and unlimited. Up to 20,000 files per version, 25 MiB per file | The Angular build has well under 100 files |
 | D1 | 5 GB storage per account (500 MB per database), 5M rows read and 100k rows written per day (index entries count), 2 MB per row | Under 25 MB even at 1,000 providers. **Rows written** is the one to watch: from M2.1 a deploy writes only what changed (section 5.3) |
-| KV | 1 GB, 100k reads and 1k writes per day, 25 MiB per value | One namespace, `simply-sub-kv` (binding `KV`, M2.5), for small values that must survive: the last good `/fx` rates (M2.5: one key, `fx:ecb`, written when the rates are fetched, about twice a day) and the `/icon` cache (M2.6). The Cache API is per data centre and can evict them. A few dozen writes a day |
+| KV | 1 GB, 100k reads and 1k writes per day, 25 MiB per value | One namespace, `simply-sub-kv` (binding `KV`, M2.5), for small values that must survive: the last good `/fx` rates (M2.5: one key, `fx:ecb`, written when the rates are fetched, about twice a day) and the `/icon` cache (M2.6: one key per domain asked for, written on a miss and kept 30 days, or a day for "no icon"). The Cache API is per data centre and can evict them. A few dozen writes a day |
 | R2 | 10 GB-month storage, 1M writes and 10M reads per month, no egress fees. Activating R2 asks for a payment method, even within the free tier | Not used yet: see the triggers below |
 
 **Each store has one job:** static files serve the catalog and icons, D1 answers the API's searches, KV keeps
@@ -1785,7 +1793,8 @@ import instructions for Google, Apple and Proton.
 
 **Custom subscriptions.** Cards for user-created services. The edit dialog has name, plans (name, cost, currency,
 interval, auto-renew available), features (search the registry and add, or × to remove), link and cancel link.
-The favicon comes from the link through `/icon`, and falls back to the Simply Sub logo.
+The favicon comes from the link through `/icon`, and without one the card shows the subscription's first letter,
+as it does for a catalog provider without a logo.
 
 ---
 
@@ -2125,6 +2134,14 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3).
+
+**Resolved (2026-10-25, M2.6)**
+- **No usable icon** (a square PNG of at least 32 pixels, core's rule for catalog logos too) gets `404 not_found`,
+  cacheable for a day, and the app shows the subscription's first letter. There's no Simply Sub fallback image.
+- **No `size` parameter:** the Worker has no image library to resize with, so it returns the best icon (usually 64
+  to 128 pixels) and the app scales it. One KV entry per domain keeps writes to one per new domain.
+- **Privacy:** automatic request logs are off from M2.6 rather than M2.8, since `?domain=` names what a user
+  subscribes to, and KV keys are a SHA-256 of the domain (section 5.4).
 
 **Resolved (2026-10-24, M2.4)**
 - **404 suggestions** come from a static `data/catalog/ids.json` that `data:build` writes (every provider id with its

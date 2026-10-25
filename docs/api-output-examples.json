@@ -1873,17 +1873,16 @@
       ]
     },
     "GET /icon": {
-      "description": "Favicon proxy for custom subscriptions (a website the user typed). Asks Google's favicon service, then DuckDuckGo's (core's iconServiceUrls), and returns the best square PNG they give, or the Simply Sub fallback icon. Catalog providers don't use it: their icons are static files at /icons/<providerId>.png.",
+      "description": "Icon proxy for custom subscriptions (a website the user typed). Asks Google's favicon service and DuckDuckGo's (core's iconServices) and returns the best icon they give: the largest square PNG of at least 32 pixels and at most 100 KB, usually 64 to 128 pixels, which the app scales down. Google's wins a tie. Nothing else is ever fetched: not the site, and no redirect except to the services' own hosts. Without a usable icon it answers 404, and the app shows the subscription's first letter, as for a catalog provider without a logo. KV keeps each answer under a SHA-256 of the domain, an icon for 30 days and 'no icon' for a day, and both may be cached as long. Neither the domain nor the URL is logged. Catalog providers don't use it: their icons are static files at /icons/<providerId>.png.",
       "query": {
-        "domain": "Required. A bare hostname such as localgym.example (no scheme or path).",
-        "size": "Optional: 32 or 64 (default 64)."
+        "domain": "Required. A bare hostname such as localgym.example (no scheme, port or path), read in lower case without a trailing dot; an international name is used in its xn-- form. An IP address, a single label such as localhost, or any other parameter gets 400."
       },
       "examples": [
         {
           "title": "Icon for a custom subscription",
           "request": {
             "method": "GET",
-            "url": "https://sub.simplely.ca/api/v1/icon?domain=localgym.example&size=64"
+            "url": "https://sub.simplely.ca/api/v1/icon?domain=localgym.example"
           },
           "response": {
             "status": 200,
@@ -1893,7 +1892,28 @@
               "X-Icon-Source": "duckduckgo"
             },
             "body": null,
-            "_note": "The real body is the PNG image bytes. X-Icon-Source is duckduckgo, google or fallback."
+            "_note": "The real body is the PNG image bytes. X-Icon-Source is google or duckduckgo."
+          }
+        },
+        {
+          "title": "No usable icon",
+          "request": {
+            "method": "GET",
+            "url": "https://sub.simplely.ca/api/v1/icon?domain=nosuchsite.example"
+          },
+          "response": {
+            "status": 404,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "public, max-age=86400"
+            },
+            "body": {
+              "error": {
+                "code": "not_found",
+                "message": "No icon found for nosuchsite.example."
+              }
+            },
+            "_note": "Neither service has a square PNG of at least 32 pixels for the site. The app shows the subscription's first letter."
           }
         },
         {

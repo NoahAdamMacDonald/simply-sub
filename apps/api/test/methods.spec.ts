@@ -12,6 +12,7 @@ describe('write methods', () => {
     '/features',
     '/categories',
     '/fx',
+    '/icon',
     '/providers',
     '/providers/netflix',
     '/plans/netflix.standard',
