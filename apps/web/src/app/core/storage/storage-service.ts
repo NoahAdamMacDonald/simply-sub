@@ -4,13 +4,10 @@ import { from, switchMap, type Observable } from 'rxjs';
 import { v7 } from 'uuid';
 import { ClockService } from '../clock/clock-service';
 import { RejectedRecords } from './rejected-records';
-import type { StorageEngine } from './storage-engine';
+import type { IndexedDbDependencies, StorageEngine } from './storage-engine';
 
 /** Where IndexedDB comes from, when it isn't the browser's: tests provide a fresh fake-indexeddb for each test. */
-export const INDEXED_DB = new InjectionToken<{
-  indexedDB: IDBFactory;
-  IDBKeyRange: typeof IDBKeyRange;
-}>('INDEXED_DB');
+export const INDEXED_DB = new InjectionToken<IndexedDbDependencies>('INDEXED_DB');
 
 /**
  * Opens the user database on first use, for the repositories, which are the only code that use it. Dexie, Zod and
@@ -32,15 +29,23 @@ export class StorageService {
     });
   }
 
-  /** The storage engine, loaded and opened the first time it's asked for. */
+  /**
+   * The storage engine, loaded and opened the first time it's asked for. If that fails (IndexedDB blocked), the
+   * reason goes to the console once, and the repositories' status is `error`.
+   */
   engine(): Promise<StorageEngine> {
-    this.opening ??= import('./storage-engine').then(({ openStorageEngine }) =>
-      openStorageEngine({
-        ...this.indexedDB,
-        onRejected: (rejected) => this.rejectedRecords.report(rejected),
-        onWrite: () => this.askForPersistence(),
-      }),
-    );
+    this.opening ??= import('./storage-engine')
+      .then(({ openStorageEngine }) =>
+        openStorageEngine({
+          dependencies: this.indexedDB ?? undefined,
+          onRejected: (rejected) => this.rejectedRecords.report(rejected),
+          onWrite: () => this.askForPersistence(),
+        }),
+      )
+      .catch((error: unknown) => {
+        console.error('The saved data could not be opened:', error);
+        throw error;
+      });
     return this.opening;
   }
 

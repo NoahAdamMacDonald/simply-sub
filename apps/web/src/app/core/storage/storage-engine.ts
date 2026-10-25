@@ -14,10 +14,15 @@ import { createUserDatabase } from './db';
 // Loaded on first use (StorageService), as a chunk of its own with Dexie and the record schemas, which keeps them
 // out of the initial bundle.
 
+/** Where IndexedDB comes from, when it isn't the browser's: fake-indexeddb, in tests. */
+export interface IndexedDbDependencies {
+  indexedDB: IDBFactory;
+  IDBKeyRange: typeof IDBKeyRange;
+}
+
 export interface StorageEngineOptions {
-  /** fake-indexeddb's, in tests. The browser's by default. */
-  indexedDB?: IDBFactory;
-  IDBKeyRange?: typeof IDBKeyRange;
+  /** Left out, Dexie uses the browser's. */
+  dependencies?: IndexedDbDependencies;
   /** Told about stored records that fail their schema. They're left out, and left as they are. */
   onRejected(rejected: readonly RejectedRecord[]): void;
   /** Told after each write. */
@@ -107,7 +112,8 @@ export class StorageEngine {
 
 /** Opens the user database. Fails where IndexedDB is blocked (some private browsing modes). */
 export async function openStorageEngine(options: StorageEngineOptions): Promise<StorageEngine> {
-  const db = createUserDatabase({ indexedDB: options.indexedDB, IDBKeyRange: options.IDBKeyRange });
+  // Only when given: an `indexedDB: undefined` would replace Dexie's default, the browser's, and nothing opens.
+  const db = createUserDatabase(options.dependencies);
   await db.open();
   return new StorageEngine(db, options);
 }

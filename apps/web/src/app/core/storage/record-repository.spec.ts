@@ -234,13 +234,18 @@ describe('RecordRepository', () => {
       TestBed.overrideProvider(INDEXED_DB, { useValue: { indexedDB: blocked, IDBKeyRange } });
     });
 
-    it('has an error status and no records', async () => {
+    it('has an error status and no records, and logs why once', async () => {
+      const error = vi.spyOn(console, 'error').mockImplementation(() => undefined);
       const lists = TestBed.inject(ListsRepository);
+      TestBed.inject(ItemsRepository);
       await until(() => lists.status() === 'error');
       expect(lists.records()).toEqual([]);
+      expect(error).toHaveBeenCalledTimes(1);
+      expect(error).toHaveBeenCalledWith('The saved data could not be opened:', expect.anything());
     });
 
     it('fails a write', async () => {
+      vi.spyOn(console, 'error').mockImplementation(() => undefined);
       await expect(TestBed.inject(ListsRepository).create({ name: 'Work' })).rejects.toThrow();
     });
   });

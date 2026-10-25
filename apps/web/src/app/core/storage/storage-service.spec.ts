@@ -1,7 +1,30 @@
 import { TestBed } from '@angular/core/testing';
+import { ClockService } from '../clock/clock-service';
+import { databaseName } from './db';
 import { ListsRepository } from './lists-repository';
 import { StorageService } from './storage-service';
-import { testStorage, until } from './storage.testing';
+import { FakeClock, testStorage, until } from './storage.testing';
+
+describe('StorageService with the global IndexedDB', () => {
+  afterEach(async () => {
+    TestBed.resetTestingModule();
+    await new Promise((resolve) => {
+      const request = indexedDB.deleteDatabase(databaseName);
+      request.onsuccess = request.onerror = request.onblocked = resolve;
+    });
+  });
+
+  it('opens the IndexedDB the browser has when none is provided', async () => {
+    // What the app does: no INDEXED_DB, so Dexie uses the global one (fake-indexeddb's here, test-setup.ts).
+    TestBed.configureTestingModule({
+      providers: [{ provide: ClockService, useValue: new FakeClock() }],
+    });
+    const lists = TestBed.inject(ListsRepository);
+    await until(() => lists.status() === 'ready');
+    await lists.create({ name: 'Work' });
+    await until(() => lists.records().length === 1);
+  });
+});
 
 describe('StorageService', () => {
   let persisted: ReturnType<typeof vi.fn>;
