@@ -7,7 +7,7 @@ import {
   rebaseRates,
   searchProviders,
 } from '@simply-sub/core';
-import { Hono, type Context } from 'hono';
+import { Hono } from 'hono';
 import { catalogJson, missingFiles } from '../catalog-files';
 import { catalogVersion, loadProviders } from '../db/providers';
 import { ecbRates } from '../fx';
@@ -17,6 +17,8 @@ import {
   jsonType,
   noExchangeRates,
   notModified,
+  notSeeded,
+  shortHash,
   utcTimestamp,
 } from '../http';
 
@@ -96,24 +98,3 @@ export const providers = new Hono<{ Bindings: Env }>().get('/', async (c) => {
     ETag: `"${version}-${inputs}"`,
   });
 });
-
-/** The first 4 hex digits of a SHA-256 of `text`. */
-async function shortHash(text: string): Promise<string> {
-  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-  return [...new Uint8Array(digest).slice(0, 2)]
-    .map((byte) => byte.toString(16).padStart(2, '0'))
-    .join('');
-}
-
-function notSeeded(c: Context): Response {
-  return c.json(
-    {
-      error: {
-        code: 'internal',
-        message: "The catalog isn't in D1 yet: the deploy's seed hasn't run.",
-      },
-    },
-    500,
-    { 'Content-Type': jsonType },
-  );
-}

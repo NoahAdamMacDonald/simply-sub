@@ -3,8 +3,8 @@ import type { Plan } from '../catalog/provider';
 
 // Rank keys (PROJECT-PLAN §3.2): one per rankable option of a feature. A boolean feature's key is its id
 // (streaming.ad-free); an enum value, a number tier or a set value adds its id (video.quality=4k,
-// streaming.concurrent-streams=2-4, password-manager.item-types=passkey). GET /providers filters on them (M2.3), and
-// M6.1 builds rank resolution and counts on top.
+// streaming.concurrent-streams=2-4, password-manager.item-types=passkey). GET /providers filters on them (M2.3),
+// GET /plans/:id lists the ones a plan provides (M2.4), and M6.1 builds rank resolution and counts on top.
 
 export type RankKey = string;
 
@@ -75,4 +75,12 @@ export function providesKey(
     case 'set':
       return Array.isArray(value) && option !== undefined && value.includes(option);
   }
+}
+
+/** Every rank key a plan's features provide, in registry order: a 4k plan provides each video.quality up to 4k. */
+export function providedKeys(features: Plan['features'], registry: readonly Feature[]): RankKey[] {
+  return registry
+    .flatMap(rankKeyOptions)
+    .filter((option) => providesKey(features, option))
+    .map((option) => option.key);
 }

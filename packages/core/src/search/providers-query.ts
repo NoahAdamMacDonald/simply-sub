@@ -137,17 +137,10 @@ export function readProvidersQuery(
         }
         case 'region':
           read.region = value;
-          return isCatalogRegion(value) ? undefined : `${regionProblem(value)}.`;
-        case 'currency': {
-          const checked = currencySchema.safeParse(value);
+          return regionIssue(value);
+        case 'currency':
           read.currency = value;
-          if (!checked.success) {
-            return `${checked.error.issues[0].message}.`;
-          }
-          return currencies && !currencies.includes(value)
-            ? `The ECB has no rate for ${value}: use one of ${currencies.join(', ')}.`
-            : undefined;
-        }
+          return currencyIssue(value, currencies);
         case 'nativeOnly':
           read.nativeOnly = value === 'true';
           return value === 'true' || value === 'false' ? undefined : 'Use true or false.';
@@ -179,7 +172,7 @@ export function readProvidersQuery(
 
   if (read.region === undefined) {
     for (const param of pricedParams.filter((name) => Object.hasOwn(queries, name))) {
-      problems.push({ param, issue: 'Needs region: prices are picked for a region, such as CA.' });
+      problems.push({ param, issue: needsRegion });
     }
     if (read.sort === 'price_asc' || read.sort === 'price_desc') {
       problems.push({
@@ -199,12 +192,8 @@ export function readProvidersQuery(
   }
 
   const { q, category, feature, minPrice, maxPrice, interval, region, nativeOnly } = read;
-  const own = region === undefined ? undefined : regionCurrency(region);
   const currency =
-    region === undefined
-      ? undefined
-      : (read.currency ??
-        (own !== undefined && (!currencies || currencies.includes(own)) ? own : 'USD'));
+    region === undefined ? undefined : (read.currency ?? defaultCurrency(region, currencies));
   const sort =
     read.sort ?? (q !== undefined ? 'relevance' : region !== undefined ? 'price_asc' : 'name');
   // In the contract's order, leaving out what wasn't given.
@@ -222,6 +211,34 @@ export function readProvidersQuery(
     limit: read.limit ?? defaultLimit,
   };
   return { query, offset };
+}
+
+// The region and currency rules every priced route shares: GET /providers, and from M2.4 GET /providers/:id,
+// GET /plans/:id and GET /bundles.
+
+/** The issue with every price parameter given without a region. */
+export const needsRegion = 'Needs region: prices are picked for a region, such as CA.';
+
+/** Why `value` isn't a catalog region, or undefined when it is one. */
+export function regionIssue(value: string): string | undefined {
+  return isCatalogRegion(value) ? undefined : `${regionProblem(value)}.`;
+}
+
+/** Why `value` can't be the display currency, or undefined: an ISO 4217 code the rates (ecbCurrencies) cover. */
+export function currencyIssue(value: string, currencies?: readonly string[]): string | undefined {
+  const checked = currencySchema.safeParse(value);
+  if (!checked.success) {
+    return `${checked.error.issues[0].message}.`;
+  }
+  return currencies && !currencies.includes(value)
+    ? `The ECB has no rate for ${value}: use one of ${currencies.join(', ')}.`
+    : undefined;
+}
+
+/** The currency to show `region`'s prices in when none is given: its own when there are rates for it, else USD. */
+export function defaultCurrency(region: string, currencies?: readonly string[]): string {
+  const own = regionCurrency(region);
+  return own !== undefined && (!currencies || currencies.includes(own)) ? own : 'USD';
 }
 
 /** Why `key` isn't a rank key of the registry, with the fix, or undefined when it is one. */

@@ -2,6 +2,8 @@
 // Nothing here reads the clock; functions that need the date take `today` as a parameter.
 export * from './catalog/availability';
 export * from './catalog/bundle';
+export * from './catalog/bundle-deal';
+export * from './catalog/catalog-ids';
 export * from './catalog/category';
 export * from './catalog/convert';
 export * from './catalog/ecb-rates';
@@ -28,6 +30,8 @@ export {
 export * from './dates/iso-date';
 export * from './icons/icon-image';
 export * from './icons/icon-sources';
+export * from './lookup/lookup-bodies';
+export * from './lookup/lookup-query';
 export * from './ranking/rank-keys';
 export * from './search/providers-body';
 export * from './search/providers-query';

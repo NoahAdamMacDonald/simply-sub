@@ -175,19 +175,21 @@ simply-sub/
 │  │  │  ├─ app.routes.ts
 │  │  │  └─ app.config.ts
 │  │  ├─ public/             # favicon, logo; `npm run data:build` writes data/catalog.json, the per-region
-│  │  │                      # data/catalog/<region>.json, index.json, features.json and categories.json, and
-│  │  │                      # icons/ here (gitignored)
+│  │  │                      # data/catalog/<region>.json, index.json, features.json, categories.json and
+│  │  │                      # ids.json, and icons/ here (gitignored)
 │  │  └─ proxy.conf.json     # dev: /api → wrangler dev
 │  │
 │  └─ api/                   # Cloudflare Worker
 │     ├─ src/
 │     │  ├─ index.ts         # Hono app, routes mounted at /api/v1
 │     │  ├─ catalog-files.ts # the routes that stream a static catalog file: ETag and 304 (section 5.1)
-│     │  ├─ http.ts          # what every route answers alike: 400 bad_request, 502, If-None-Match
+│     │  ├─ http.ts          # what every route answers alike: 400 bad_request, 404 not_found, 502, If-None-Match
 │     │  ├─ fx.ts            # the ECB's rates, kept in KV (section 5.2)
-│     │  ├─ routes/          # health.ts, providers.ts, plans.ts, features.ts, categories.ts, bundles.ts,
-│     │  │                   # catalog.ts, icons.ts
-│     │  └─ db/              # SQL queries (D1): providers.ts for GET /providers (section 5.3)
+│     │  ├─ lookup.ts        # what GET /providers/:id, /plans/:id and /bundles share: rates, ETag, 304
+│     │  ├─ routes/          # health.ts, providers.ts, provider.ts, plans.ts, features.ts, categories.ts,
+│     │  │                   # bundles.ts, catalog.ts, icons.ts
+│     │  └─ db/              # SQL queries (D1): providers.ts for GET /providers, lookups.ts for the M2.4 routes
+│     │                      # (section 5.3)
 │     ├─ test/               # route tests, run in workerd (@cloudflare/vitest-plugin)
 │     ├─ migrations/         # D1 schema migrations (0001_init.sql …)
 │     ├─ scripts/
@@ -207,8 +209,11 @@ simply-sub/
 │     │  ├─ icons/           # PNG and ICO reading, a page's icon links, the icon services, picking the best icon
 │     │  ├─ schedule/        # recurrence: next payment dates, monthly/annual totals
 │     │  ├─ tax/             # sales tax: tax-added regions, the Canadian rate table, subdivisions (section 4.8)
-│     │  ├─ ranking/         # rank keys and providesKey (M2.3); rank resolution (item override > profile > not ranked)
+│     │  ├─ ranking/         # rank keys, providesKey (M2.3) and providedKeys (M2.4); rank resolution (item override >
+│     │  │                   # profile > not ranked)
 │     │  ├─ search/          # searchProviders, readProvidersQuery, providersBody: GET /providers now, Search (P8) in M5
+│     │  ├─ lookup/          # readPricingQuery, readBundlesQuery and the GET /providers/:id, /plans/:id and /bundles
+│     │  │                   # bodies (M2.4)
 │     │  ├─ optimizer/       # suggestion engine (section 10)
 │     │  ├─ rewards/         # card reward maths (section 9)
 │     │  └─ export/          # csv, json, txt, xlsx, ics serializers
@@ -230,7 +235,7 @@ simply-sub/
 │  ├─ generate-json-schema.ts  # core's Zod schemas → data/schema/*.schema.json (`--check` in CI)
 │  ├─ validate-data.ts       # data/**/*.yaml → core's validateCatalog → file:line messages (section 6.2)
 │  ├─ build-catalog.ts       # data/ → apps/web/public/data/catalog.json, catalog/<region>.json, index.json,
-│  │                         # features.json and categories.json (section 6.3)
+│  │                         # features.json, categories.json and ids.json (section 6.3)
 │  ├─ seed-d1.ts             # catalog.json + what D1 holds → apps/api/dist/seed.sql, run on D1 (sections 5.3, 7.6)
 │  ├─ lib/catalog-files.ts   # reads, parses and checks data/ for the catalog scripts
 │  ├─ fetch-icons.ts         # any website's best icon → data/logos/<id>.png (`npm run data:icons`)
@@ -561,6 +566,16 @@ prices:
 # Savings  = sum of the included plans' prices − bundle price (computed per region/interval)
 ```
 
+**Features and savings are computed**, never stored, by core's `bundleFeatures` and `bundleSavings`
+(`bundle-deal.ts`, M2.4). `GET /bundles` adds them per request, and the app will compute them the same way.
+- **Features:** the union of the included plans' features, each in the order it first appears. Booleans are OR'd,
+  numbers and enums take the highest value (`unlimited` above any number, an enum's in registry order), and sets
+  are merged.
+- **Savings:** for each interval of the bundle's picked price (section 4.7), the included plans' picked prices for
+  the same `interval` and `intervalCount`, added up, minus the bundle's. An interval counts only when the bundle and
+  every plan are offered in the region (a fallback price from another region isn't comparable) and every price is
+  in the same currency. An interval where the bundle costs as much or more is left out, as a suite's would be.
+
 **Bundle or suite?** Use a bundle file only when the deal is exactly its parts: plans that are also sold on
 their own, whose features add up to the bundle's (Disney+ Premium & Crave Premium). A provider's own
 all-in-one plan with its own limits is a **suite plan** instead. Proton Unlimited has 500 GB where Drive Plus
@@ -610,6 +625,8 @@ can't drift. Everything is exported from `@simply-sub/core`.
 | `category.ts` | `categoriesFileSchema` (`Categories`), `categorySchema`, `serviceCategorySchema` |
 | `provider.ts` | `providerSchema` (`Provider`), `planSchema` (`Plan`), `addOnSchema` (`AddOn`), `cardNetworkSchema` (`CardNetwork`) |
 | `bundle.ts` | `bundleSchema` (`Bundle`) |
+| `bundle-deal.ts` | `bundleFeatures`, `bundleSavings` (`BundleSaving`, `PricedPart`): a bundle's computed features and savings (section 4.4) |
+| `catalog-ids.ts` | `catalogIdsSchema` (`CatalogIds`), `catalogIds`, `suggestedProviderId`, `suggestedPlanId`: the static ids file behind the API's suggestions (section 6.3) |
 | `json-schema.ts` | `catalogJsonSchemas()`: the JSON Schema of each kind of file |
 | `validate-catalog.ts`, `validate-features.ts` | `validateCatalog(files, today)` (`CatalogIssue`), `formatCatalogIssue`: the cross-file checks (section 6.2) |
 | `snapshot.ts` | Output: `catalogSnapshotSchema` (`CatalogSnapshot`), `catalogDataSchema`, `catalogMetaSchema`, `snapshotProviderSchema`; `readCatalogSource`, `buildCatalogData`, `buildCatalogMeta` (section 6.3) |
@@ -967,11 +984,11 @@ The rules live in `packages/core/src/tax/` and run in M7.1:
 |---|---|
 | `GET /catalog` | Full snapshot (providers, plans, add-ons, bundles, features, **all regions' prices**), ETag-cached. `?region=CA` keeps only the prices pickPrice can pick for a buyer there (section 6.3). Both are static files built by `data:build`, which the Worker streams through its `ASSETS` binding without parsing them, not D1 rows. The app fetches its region's static file directly, which uses no Worker quota |
 | `GET /providers?q=&category=&feature=<rankKey,…>&minPrice=&maxPrice=&interval=&region=&currency=&nativeOnly=&sort=&cursor=&limit=` | Search and filter (for deep links and other consumers). Core's `searchProviders` does the matching, filters, prices and sorting (the rules are in the examples file), on the providers D1 narrows down to: rank keys through the `plan_features` index, then providers by primary key. The registry and the categories come from the static `features.json` and `categories.json`. With a region, prices are picked with `/fx`'s rates. The ETag is D1's catalog version plus a hash of the query, the rates' date and the static files' version |
-| `GET /providers/:id` | One provider with its plans and add-ons |
-| `GET /plans/:id` | One plan |
+| `GET /providers/:id` | One provider as written, with its plans and add-ons, and with a region the picked prices of each one sold there (core's `providerBody`). It reads 2 D1 rows: the `catalog` row and the provider's, by primary key. An unknown id gets `404 not_found` with a suggestion from the static `data/catalog/ids.json`, so a typo reads no more rows. Region and currency follow `GET /providers`' rules, and so does the ETag: D1's catalog version plus a hash of the id, the query and the rates' date |
+| `GET /plans/:id` | One plan, with its provider in short, its add-ons, the rank keys it provides (`providedKeys`, with the static `features.json`) and the bundles that include it (`planBody`). Its provider's row holds it, so it reads the `catalog` row, that row and one `bundle_plans (plan_id)` index entry per bundle: 3 rows for Disney+ Premium. 404s and ETags work as for `/providers/:id` |
 | `GET /features` | Feature registry, in `features.yaml` order (each group before its features). The static file `data/catalog/features.json`, built by `data:build` and streamed like `/catalog`, so it reads no D1 rows. No query parameters |
 | `GET /categories` | Service, feature and spend categories: the static file `data/catalog/categories.json`, streamed the same way. No query parameters |
-| `GET /bundles?plans=netflix.standard,crave.premium` | Bundles that include any of the given plans |
+| `GET /bundles?plans=netflix.standard,crave.premium` | Bundles that include any of the given plans (1 to 20), with their plans expanded, the union of their features and, with a region, savings (section 4.4, `bundlesBody`). One batch reads the `catalog` row, each plan asked for by primary key (an unknown one gets 400 with a suggestion from `ids.json`), the bundles through the `bundle_plans (plan_id)` index with their sellers, and the providers of their plans: 11 rows for one plan in today's catalog |
 | `GET /icon?domain=example.com` | Favicon proxy for **custom subscriptions** (Google, then DuckDuckGo, as core's `iconServiceUrls` orders them → the best square PNG, or the fallback), cached for 30 days in KV. Catalog icons are fetched once by `scripts/fetch-icons.ts` into `data/logos/` (committed, so builds never fetch) and served as static files at `/icons/<id>.png` |
 | `GET /fx?base=CAD` | The ECB's daily rates in the user's currency. The Worker fetches them in euros from Frankfurter's ECB-only route (`/v2/providers/ecb/rates?base=EUR`; v1 is deprecated, and v2's default blends in other central banks), keeps them in KV under `fx:ecb` for 12 hours, and rebases them to any currency the ECB publishes (core's `rebaseRates`), so one fetch serves every base. When Frankfurter fails after that, the last good rates are sent with `meta.stale: true`; with none kept, `502 upstream_unavailable`. `GET /providers` uses the same rates (M2.3) |
 | `GET /health` | Returns the API version, and the catalog version, build time and counts that D1 holds (the `catalog` row, section 5.3) |
@@ -1190,7 +1207,9 @@ write the files.
    - `catalog/index.json`: the `catalogVersion`, `generatedAt` and the regions that have a file;
    - `catalog/features.json` and `catalog/categories.json`: the `GET /features` and `GET /categories` bodies
      (`featuresBody` and `categoriesBody`), the snapshot's features and categories in file order with the
-     `catalogVersion`. The Worker streams them like the snapshots, so neither route reads D1 (M2.2).
+     `catalogVersion`. The Worker streams them like the snapshots, so neither route reads D1 (M2.2);
+   - `catalog/ids.json`: every provider id with its plan ids (`catalogIds`). The Worker reads it only to suggest an
+     id after a 404 or 400 (M2.4), so a typo costs no D1 rows.
 4. Copy each logo from `data/logos/` to `apps/web/public/icons/<id>.png`, published as `/icons/<id>.png`. The build
    never fetches icons: `npm run data:icons` does that once per provider (section 13.4).
 5. The deploy applies the migrations, then runs `seed-d1.ts` (section 7.6). It reads what D1 holds with
@@ -1354,7 +1373,11 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
   so it grows with them, not with the catalog. A text search reads every provider, which core matches in the
   Worker: at about 200 providers that nears 10 ms of CPU and 200 rows a request, the trigger for an FTS5 table, a
   category index and per-region price rows (a migration and a `seedFormat` bump). The edge cache (M2.8) absorbs
-  repeated searches.
+  repeated searches. `GET /providers/:id`, `GET /plans/:id` and `GET /bundles` (M2.4) look up only by primary key and
+  the `bundle_plans (plan_id)` index, so their cost doesn't grow with the catalog: 2 rows for a provider, 3 for
+  Disney+ Premium's plan, 11 for the bundles of one plan (D1 counts about two rows per lookup,
+  `apps/api/test/lookups.spec.ts`). A 304 reads the `catalog` row alone, and a typo's suggestion comes from the
+  static `ids.json`.
 | GitHub Actions | Free for public repos, 2,000 min/month for private | CI plus a nightly check, around 300 min/month |
 | Domain | **simplely.ca**, already bought through Cloudflare Registrar, which renews at cost | The only real expense |
 | Workers Builds | ~3,000 build minutes/month, 1 concurrent build | A few minutes per deploy |
@@ -2102,6 +2125,20 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3).
+
+**Resolved (2026-10-24, M2.4)**
+- **404 suggestions** come from a static `data/catalog/ids.json` that `data:build` writes (every provider id with its
+  plan ids), so a typo reads no D1 rows; `SELECT id FROM providers` would read every provider's row on each 404.
+  `features.json` and `categories.json` hold no provider ids (section 6.3).
+- **Region and currency** follow `GET /providers`' rules on all three routes: the same 400s, defaults and 502. The
+  detail routes keep every plan and add-on, but one not offered in the region gets no `pricing`; `GET /bundles`
+  leaves out a bundle not offered there.
+- **`GET /bundles?plans=`** takes 1 to 20 plan ids, and a malformed or unknown one gets 400 with a suggestion (one
+  primary-key lookup per id). Region is optional: without it there are no prices or savings. Savings follow the
+  rules in section 4.4. The contract gained `intervalCount` on `standalone` and `savings` entries, and `fxDate` in
+  the meta.
+- **`GET /plans/:id`** reads `bundleIds` from the `bundle_plans (plan_id)` index, in any region, and
+  `providedRankKeys` from core's `providedKeys` (registry order), which M6.1 builds on.
 
 **Resolved (2026-10-24, M2.3)**
 - **`GET /providers`** runs core's `searchProviders` (`packages/core/src/search/`), so the app's Search page (M5.1)

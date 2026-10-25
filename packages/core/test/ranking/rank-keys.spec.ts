@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { providesKey, rankKeyOptions, type Feature, type RankKeyOption } from '../../src';
+import {
+  providedKeys,
+  providesKey,
+  rankKeyOptions,
+  type Feature,
+  type RankKeyOption,
+} from '../../src';
 
 const quality = {
   id: 'video.quality',
@@ -137,5 +143,29 @@ describe('providesKey', () => {
     expect(providesKey({ 'streaming.live': ['tv-channels', 'sports'] }, sports)).toBe(true);
     expect(providesKey({ 'streaming.live': ['tv-channels'] }, sports)).toBe(false);
     expect(providesKey({}, sports)).toBe(false);
+  });
+});
+
+describe('providedKeys', () => {
+  it('lists every key the features provide, in registry order, whatever order the plan lists them in', () => {
+    const features = {
+      'streaming.live': ['sports'],
+      'streaming.concurrent-streams': 4,
+      'streaming.ad-free': true,
+      'video.quality': '4k',
+    };
+
+    expect(providedKeys(features, [quality, streams, adFree, live])).toEqual([
+      'video.quality=1080p',
+      'video.quality=4k',
+      'streaming.concurrent-streams=1',
+      'streaming.concurrent-streams=2-4',
+      'streaming.ad-free',
+      'streaming.live=sports',
+    ]);
+  });
+
+  it('lists none for features that provide nothing', () => {
+    expect(providedKeys({ 'streaming.ad-free': false }, [quality, adFree])).toEqual([]);
   });
 });

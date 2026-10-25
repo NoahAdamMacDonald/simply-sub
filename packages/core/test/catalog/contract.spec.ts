@@ -85,7 +85,11 @@ describe('the contract examples, as source files', () => {
   });
 
   it('GET /bundles is a valid bundle file once its plans are ids again', () => {
-    const [bundle] = contract.endpoints['GET /bundles'].examples[0].response.body.data;
+    const { data } = contract.endpoints['GET /bundles'].examples[0].response.body;
+    if (!data) {
+      throw new Error('The first GET /bundles example has no bundles');
+    }
+    const [bundle] = data;
     const source = {
       ...(toSource(bundle, ['pricing', 'savings', 'features', 'includes']) as object),
       includes: bundle.includes.map((included) => included.planId),
