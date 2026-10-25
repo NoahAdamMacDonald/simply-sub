@@ -1576,7 +1576,10 @@ Settings → Build*). The settings as they are now:
       host; `connect-src 'self' https://cloudflareinsights.com` for its reports;
     - `object-src 'none'`, `base-uri 'self'`, `form-action 'self'` and `frame-ancestors 'none'`;
     - **Trusted Types**: `require-trusted-types-for 'script'` with Angular's policies
-      (`trusted-types angular angular#bundler`), so no string can reach a script sink;
+      (`trusted-types angular angular#bundler`), so no string can reach a script sink. Zod would otherwise test
+      for `new Function` (a sink) to compile its parsers, so `apps/web/src/zod-setup.ts`, the app's first import,
+      turns that off (`jitless`) through the global Zod reads, keeping Zod out of the first bundle; a test checks
+      Zod still reads it;
     - the inline theme script in `apps/web/src/index.html` stays inline (no extra request before the first paint):
       the build keeps it byte for byte, and the test recomputes its hash, so changing the script without updating
       `_headers` fails with the new hash. Angular's `autoCsp` was ruled out: its `strict-dynamic` would block the
