@@ -11,7 +11,9 @@ names from the registry), the API's health, `GET /bundles` with savings, `GET /p
 the letter fallback.
 
 It lives only on the branch **`chore/progress-preview`**, which is never merged into `main` (its PR #24 was closed on
-purpose). Workers Builds deploys every push to a branch as a preview, so the branch is the live link:
+purpose). **Status: removed** (2026-10-25, after M2): the branch was deleted. Its last version is commit `6c45e2d`,
+which GitHub keeps as the closed PR's head: recreate it with "Add the preview" below. Workers Builds deploys every
+push to a branch as a preview, so the branch, when it exists, is the live link:
 
 **https://chore-progress-preview-simply-sub.nmacdonald2113.workers.dev**
 
@@ -42,14 +44,14 @@ The code: `apps/web/src/app/features/home/progress-preview/` (component, view lo
 Recreate the branch from the last version of the preview, then refresh it as above:
 
 ```bash
-git fetch origin
+git fetch origin pull/24/head:preview-source   # the closed PR #24's head, 6c45e2d
 git checkout -b chore/progress-preview origin/main
-git checkout <last preview commit> -- apps/web/src/app/features/home/progress-preview \
+git checkout preview-source -- apps/web/src/app/features/home/progress-preview \
   apps/web/src/app/features/home/home-page.ts apps/web/src/app/features/home/home-page.html
+git branch -D preview-source
 ```
 
-Find the last preview commit with `git log --all --oneline -- apps/web/src/app/features/home/progress-preview`
-(the closed PR #24's branch keeps it while it exists). Push the branch; don't open a PR to `main`. A draft PR is fine
+Only the preview's own files come from the old commit; everything else is today's `main`. Push the branch; don't open a PR to `main`. A draft PR is fine
 for the bot's link comment, marked "do not merge".
 
 ## Remove the preview

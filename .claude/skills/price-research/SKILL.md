@@ -29,7 +29,7 @@ API contract's prices are illustrative and never a source. This skill is how to 
 - **Every interval and every price list the provider sells.** That means monthly and yearly (other periods only when the user
   asks), every region in scope (ask: usually CA and US, or GLOBAL), and every currency the buyer can pick.
 - **Read the features from the same pages:** quality, streams, downloads, devices, users, storage and limits. Map them
-  to `data/features.yaml` ids; anything else goes in `perks`. If the registry needs a new feature, stop and ask.
+  to `data/features.yaml` ids; anything else goes in `perks`. If the registry needs a new feature, stop and ask, then follow the feature-discovery skill.
 - **Report what you couldn't verify**, each with the reason (geo-blocked, not stated, conflicting).
 
 ## Which tool
