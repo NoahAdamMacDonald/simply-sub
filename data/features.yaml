@@ -160,6 +160,12 @@
   category: vpn
   type: boolean
   aliases: [onion over vpn]
+- id: vpn.no-logs-policy
+  parent: vpn.included
+  name: No-logs policy
+  category: vpn
+  type: boolean
+  aliases: [no logs, zero logs, no-logging]
 - id: vpn.independent-audits
   parent: vpn.included
   name: Independent audits
