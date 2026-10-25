@@ -1,26 +1,11 @@
-import {
-  buildCatalogData,
-  buildCatalogIndex,
-  buildCatalogMeta,
-  buildSeedSql,
-  catalogIds,
-  categoriesBody,
-  ecbRatesUrl,
-  errorBodySchema,
-  featuresBody,
-  pngBody,
-  readCatalogSource,
-  regionSnapshot,
-  successBodySchemas,
-  type CatalogSnapshot,
-  type CatalogSourceFile,
-} from '@simply-sub/core';
+import { ecbRatesUrl, errorBodySchema, pngBody, successBodySchemas } from '@simply-sub/core';
 import { env } from 'cloudflare:workers';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { z } from 'zod';
 import contract from '../../../docs/api-output-examples.json';
 import app from '../src/index';
 import { ico, png } from './icon-images';
+import { catalogAssets, catalogSnapshot, seedCatalog } from './seeded-catalog';
 
 // The contract tests (PROJECT-PLAN M2.7): every example in docs/api-output-examples.json for an endpoint that's
 // built is sent to the Worker as its request says, and the answer must match it: the status, the headers the
@@ -54,8 +39,8 @@ const built = endpoints
 
 /** The examples' catalog version, so ETags and If-None-Match can be compared as they are. */
 const catalogVersion = 'c4f9a21';
-/** Headers the Worker doesn't send: CORS arrives with M2.8, and Cloudflare's edge compresses. */
-const notTheWorkers = ['access-control-allow-origin', 'content-encoding'];
+/** A header the Worker doesn't send: Cloudflare's edge compresses. */
+const notTheWorkers = ['content-encoding'];
 
 /** ECB rates per euro on the examples' date: 1 EUR = 1.5060 CAD and 1 USD = 1.3806 CAD. */
 const perEuro = { CAD: 1.506, CHF: 0.92, GBP: 0.84, USD: 1.506 / 1.3806 };
@@ -76,43 +61,8 @@ const setups: Record<string, Setup> = {
   'Icon for a custom subscription': { duckduckgo: ico(png(64)) },
 };
 
-function snapshotOf(): CatalogSnapshot {
-  const files: CatalogSourceFile[] = [
-    ...structuredClone(env.TEST_CATALOG.files),
-    ...env.TEST_CATALOG.logos.map((file) => ({ file, bytes: new Uint8Array() })),
-  ];
-  const data = buildCatalogData(readCatalogSource(files), 'https://sub.simplely.ca/icons/');
-  return {
-    data,
-    meta: buildCatalogMeta(data, { catalogVersion, generatedAt: '2026-10-22T03:12:45Z' }),
-  };
-}
-
-const snapshot = snapshotOf();
-const index = buildCatalogIndex(snapshot.meta);
-
-/** The static files, as data:build writes them; anything else is missing, which the app's index.html stands for. */
-const files: Record<string, unknown> = {
-  '/data/catalog.json': snapshot,
-  '/data/catalog/index.json': index,
-  '/data/catalog/features.json': featuresBody(snapshot),
-  '/data/catalog/categories.json': categoriesBody(snapshot),
-  '/data/catalog/ids.json': catalogIds(snapshot),
-  ...Object.fromEntries(
-    index.regions.map((region) => [
-      `/data/catalog/${region}.json`,
-      regionSnapshot(snapshot, region),
-    ]),
-  ),
-};
-const assets = {
-  fetch: async (input: RequestInfo | URL) => {
-    const path = new URL(input instanceof Request ? input.url : String(input)).pathname;
-    return Object.hasOwn(files, path)
-      ? Response.json(files[path])
-      : new Response('<!doctype html>', { headers: { 'Content-Type': 'text/html' } });
-  },
-} as unknown as Fetcher;
+const snapshot = catalogSnapshot(catalogVersion);
+const assets = catalogAssets(snapshot);
 
 const upstream = vi.spyOn(globalThis, 'fetch');
 vi.spyOn(console, 'warn').mockImplementation(() => undefined);
@@ -152,17 +102,7 @@ function serve(setup: Setup) {
   });
 }
 
-beforeAll(async () => {
-  const sql = buildSeedSql(snapshot, {
-    providerHashes: new Map(snapshot.data.providers.map((provider) => [provider.id, 'hash'])),
-  });
-  await env.DB.batch(
-    sql
-      .trimEnd()
-      .split('\n')
-      .map((statement) => env.DB.prepare(statement)),
-  );
-});
+beforeAll(() => seedCatalog(snapshot));
 
 beforeEach(async () => {
   upstream.mockReset();

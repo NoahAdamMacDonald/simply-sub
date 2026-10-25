@@ -35,7 +35,7 @@ export const health = new Hono<{ Bindings: Env }>().get('/', async (c) => {
       meta: { generatedAt: new Date().toISOString().replace(/\.\d{3}Z$/, 'Z') },
     } satisfies HealthBody,
     200,
-    // The contract's headers. Hono's default is plain application/json; M2.8 sets it for every route.
+    // The contract's headers: Hono's default is plain application/json.
     { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' },
   );
 });

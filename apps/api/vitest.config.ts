@@ -12,7 +12,15 @@ export default defineConfig(async () => {
       cloudflareTest({
         wrangler: { configPath: './wrangler.jsonc' },
         miniflare: {
-          bindings: { TEST_MIGRATIONS: migrations, TEST_CATALOG: await readCatalog() },
+          bindings: {
+            TEST_MIGRATIONS: migrations,
+            TEST_CATALOG: await readCatalog(),
+            // For test/static-headers.spec.ts: the CSP must hash index.html's inline script.
+            TEST_STATIC: {
+              headers: await readFile(new URL('public/_headers', import.meta.url), 'utf8'),
+              indexHtml: await readFile(new URL('../web/src/index.html', import.meta.url), 'utf8'),
+            },
+          },
           // public/ holds the web build only after `npm run build`, which CI runs after the tests.
           // These stand in for the files data:build writes: the Worker passes them on unread.
           assets: { directory: './test/fixtures/assets' },

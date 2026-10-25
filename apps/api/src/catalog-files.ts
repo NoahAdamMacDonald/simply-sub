@@ -76,6 +76,6 @@ export function missingFiles(c: CatalogContext): Response {
       error: { code: 'internal', message: 'The catalog files are missing from this deploy.' },
     } satisfies ErrorBody,
     500,
-    { 'Content-Type': jsonType },
+    { 'Content-Type': jsonType, 'Cache-Control': 'no-store' },
   );
 }

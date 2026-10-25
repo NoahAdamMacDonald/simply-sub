@@ -83,6 +83,9 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
   (`apps/web/src/app/core/clock/`).
 - Components keep their template and styles in separate `.html` and `.scss` files (`templateUrl`, `styleUrl`),
   even small ones. This overrides "prefer inline templates" in angular-best-practices.md.
+- The static files' CSP (`apps/api/public/_headers`) hashes `apps/web/src/index.html`'s inline theme script: change
+  the script and put the new hash in `_headers` (`apps/api/test/static-headers.spec.ts` prints it). The API's own
+  headers, rate limits and JSON errors live in `apps/api/src/middleware.ts`.
 - Colour tokens: a colour that is a version of another (hover, text shade, alias) is derived from it in
   `_tokens.scss` (`var()`, `oklch(from …)`), so changing the base updates the family. Recheck contrast after.
 - Money = amount + ISO currency, formatted only in the UI. Dates are ISO strings.

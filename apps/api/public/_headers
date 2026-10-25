@@ -1,0 +1,27 @@
+# Headers for the static files: the app, the catalog files and the icons (BLUEPRINT §7.6, M2.8). The Worker's own
+# answers under /api/* set theirs in code (apps/api/src/middleware.ts). test/static-headers.spec.ts checks this file.
+#
+# The CSP lets scripts come only from this origin, the inline theme script in apps/web/src/index.html (its SHA-256:
+# change the script and the test gives the new hash) and Cloudflare Web Analytics' beacon, which reports to
+# cloudflareinsights.com. Trusted Types allow only Angular's policies. Angular and Material add component styles at
+# run time, which a static index.html can't give a nonce, so styles may be inline.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-k6tnDd09dEnSr4UDpzL0xBkNXeb/VPIr1uiIwQYCjyM=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; require-trusted-types-for 'script'; trusted-types angular angular#bundler
+  Referrer-Policy: no-referrer
+  X-Content-Type-Options: nosniff
+  Cross-Origin-Opener-Policy: same-origin
+
+# The build names these after their content, so they never change under their URL.
+/main-*.js
+  Cache-Control: public, max-age=31536000, immutable
+/chunk-*.js
+  Cache-Control: public, max-age=31536000, immutable
+/styles-*.css
+  Cache-Control: public, max-age=31536000, immutable
+/media/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Icon URLs carry no version, and a replaced logo must show up: a day, then revalidated. index.html and the catalog
+# files keep the default and are revalidated on every visit.
+/icons/*
+  Cache-Control: public, max-age=86400

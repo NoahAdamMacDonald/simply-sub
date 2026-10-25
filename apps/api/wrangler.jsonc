@@ -27,6 +27,12 @@
   // Small values that must survive (BLUEPRINT §7.1): the last good exchange rates (key fx:ecb, M2.5) and the
   // /icon cache (keys icon:<SHA-256 of the domain>, M2.6). Like D1's, the id isn't a secret.
   "kv_namespaces": [{ "binding": "KV", "id": "a1507dd46d40411d8af62a85614db96c" }],
+  // Per-IP limits on /api/* (BLUEPRINT §5.4, M2.8), counted in each Cloudflare location: 60 requests a minute, and
+  // 10 a minute on /icon, whose misses cost KV writes. The namespace ids only need to be unique in the account.
+  "ratelimits": [
+    { "name": "API_RATE_LIMIT", "namespace_id": "1001", "simple": { "limit": 60, "period": 60 } },
+    { "name": "ICON_RATE_LIMIT", "namespace_id": "1002", "simple": { "limit": 10, "period": 60 } },
+  ],
   // The app and the API have the subdomain to themselves: browser storage is shared by everything on
   // one origin, so another app on simplely.ca could read Simply Sub's data (BLUEPRINT §11.5). A
   // custom domain sends every path to this Worker, and the deploy creates its DNS record and
