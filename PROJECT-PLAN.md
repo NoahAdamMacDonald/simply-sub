@@ -142,10 +142,6 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M3.6 | Run it on your own services (BLUEPRINT §6.6) and tune the prompts | Your subscriptions are in the catalog with CAD prices |
 
 ### M4 — App foundations
-**Before starting:** Home has a temporary progress preview (added after M2.8 to see the catalog and the API in the
-running app). Delete `apps/web/src/app/features/home/progress-preview/` and its two lines in `home-page.ts` and
-`home-page.html`. Keep `apps/web/src/zod-setup.ts`: it isn't part of the preview.
-
 | ID | Task | Done when |
 |---|---|---|
 | M4.1 | Dexie database (BLUEPRINT §4.6, including `region`, add-on quantities, bundle items, `billingDay` and `priceOverride.until`) + repositories that expose signals. Repositories are the only way into Dexie, only non-sensitive fields are indexed, and records are Zod-validated on the way in and out (BLUEPRINT §11.1) | CRUD tests pass with `fake-indexeddb`, and a malformed stored record is rejected rather than shown |

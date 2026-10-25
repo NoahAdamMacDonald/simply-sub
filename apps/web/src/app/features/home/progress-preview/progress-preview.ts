@@ -13,8 +13,8 @@ import { money, providerCards } from './progress-preview-view';
 /**
  * TEMPORARY progress preview, so what's built so far can be seen in the running app: the catalog the app downloads
  * (M1, M2.1), priced with core's pickPrice and the live /fx rates, and the live API (M2.2–M2.8): health, search,
- * bundles with savings and custom-subscription icons. Remove it before M4 starts: delete this folder and its two
- * lines in home-page.ts and home-page.html (PROJECT-PLAN M4).
+ * bundles with savings and custom-subscription icons. It lives only on the preview branch and never goes to main
+ * (.claude/skills/progress-preview/SKILL.md).
  */
 @Component({
   selector: 'ss-progress-preview',
