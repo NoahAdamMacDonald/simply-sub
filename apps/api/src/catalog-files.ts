@@ -1,4 +1,9 @@
-import { catalogIndexSchema, type CatalogIndex } from '@simply-sub/core';
+import {
+  catalogIdsSchema,
+  catalogIndexSchema,
+  type CatalogIds,
+  type CatalogIndex,
+} from '@simply-sub/core';
 import type { Context } from 'hono';
 import { catalogCacheControl, jsonType, notModified } from './http';
 
@@ -43,6 +48,14 @@ export async function catalogFile(
 export async function catalogJson(c: CatalogContext, path: string): Promise<unknown> {
   const body = await staticJson(c, path);
   return body ? new Response(body).json() : undefined;
+}
+
+/**
+ * data/catalog/ids.json, every provider id with its plan ids, or undefined when it's missing or isn't one. It only
+ * suggests an id when a request names an unknown one, so a 404 or 400 can do without it.
+ */
+export async function catalogIdsFile(c: CatalogContext): Promise<CatalogIds | undefined> {
+  return catalogIdsSchema.safeParse(await catalogJson(c, '/data/catalog/ids.json')).data;
 }
 
 /** A static JSON file's body, or undefined when it's missing and the assets answer with the app instead. */

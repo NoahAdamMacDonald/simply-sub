@@ -6,6 +6,7 @@
 //   apps/web/public/data/catalog/index.json        the catalog version and the regions with a file
 //   apps/web/public/data/catalog/features.json     the GET /features body
 //   apps/web/public/data/catalog/categories.json   the GET /categories body
+//   apps/web/public/data/catalog/ids.json          every provider id with its plan ids, for the API's suggestions
 //   apps/web/public/icons/<id>.png                 each provider's logo from data/logos/, published as /icons/<id>.png
 // It refuses to build a catalog with validation errors. The catalog version is a hash of the snapshot's data, so it
 // changes only when the catalog does. The deploy seeds D1 from catalog.json (scripts/seed-d1.ts).
@@ -13,6 +14,7 @@ import {
   buildCatalogData,
   buildCatalogIndex,
   buildCatalogMeta,
+  catalogIds,
   categoriesBody,
   featuresBody,
   readCatalogSource,
@@ -58,7 +60,7 @@ if (errors > 0) {
   await write(catalogFile, json);
 
   // Only the current regions' files and providers' icons: an old build's go first. The folder also holds
-  // the index and the GET /features and GET /categories bodies.
+  // the index, the GET /features and GET /categories bodies and the ids file.
   await clear(catalogDir);
   const index = buildCatalogIndex(snapshot.meta);
   const sizes: string[] = [];
@@ -70,6 +72,7 @@ if (errors > 0) {
   await write(`${catalogDir}index.json`, JSON.stringify(index));
   await write(`${catalogDir}features.json`, JSON.stringify(featuresBody(snapshot)));
   await write(`${catalogDir}categories.json`, JSON.stringify(categoriesBody(snapshot)));
+  await write(`${catalogDir}ids.json`, JSON.stringify(catalogIds(snapshot)));
 
   await clear(iconsDir);
   const icons = data.providers.filter((provider) => provider.iconUrl);
@@ -85,7 +88,7 @@ if (errors > 0) {
     [
       `Catalog ${catalogVersion}: wrote ${catalogFile} (${kilobytes(json)}),`,
       ` ${plural(index.regions.length, 'region file')} in ${catalogDir} (${sizes.join(', ')}),`,
-      ' features.json, categories.json',
+      ' features.json, categories.json, ids.json',
       ` and ${plural(icons.length, 'icon')}.`,
       warnings > 0 ? ` ${plural(warnings, 'warning')}: run npm run data:validate.` : '',
     ].join(''),

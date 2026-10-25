@@ -6,7 +6,17 @@ import { describe, expect, it } from 'vitest';
 const BASE = 'https://sub.simplely.ca/api/v1';
 
 describe('write methods', () => {
-  const routes = ['/health', '/catalog', '/features', '/categories', '/fx', '/providers'];
+  const routes = [
+    '/health',
+    '/catalog',
+    '/features',
+    '/categories',
+    '/fx',
+    '/providers',
+    '/providers/netflix',
+    '/plans/netflix.standard',
+    '/bundles',
+  ];
   const methods = ['POST', 'PUT', 'PATCH', 'DELETE'];
 
   it.each(methods.flatMap((method) => routes.map((route) => [method, route])))(

@@ -1233,10 +1233,10 @@
       ]
     },
     "GET /providers/:id": {
-      "description": "One provider with all its plans, add-ons and every region's prices. With region and currency, picked 'pricing' is added to each plan and add-on.",
+      "description": "One provider as written, with all its plans, add-ons and every region's prices. With a region, picked 'pricing' is added after the prices of each plan and add-on that isn't not-offered there (availability, BLUEPRINT §4.7): one not sold there gets none, and an unknown one gets its fallback price. It reads 2 D1 rows: the catalog row and the provider's. The ETag is D1's catalog version and a hash of the id, the query as read and the exchange rates' date, and If-None-Match gets 304. An unknown id gets 404 not_found, with details[].suggestion when an id looks like a typo of it (from the static data/catalog/ids.json, so it reads no more rows).",
       "query": {
-        "region": "Optional, e.g. CA.",
-        "currency": "Optional, e.g. CAD. Defaults to the region's main currency."
+        "region": "Optional, e.g. CA: the region to pick prices for, as on GET /providers. Without it there are no prices, and currency gets 400.",
+        "currency": "Optional, e.g. CAD: the euro or a currency the ECB publishes a rate for. Defaults to the region's main currency, or USD when the ECB has no rate for it. Needs region. Any other parameter gets 400, and a region with no exchange rates at all gets 502, as on GET /providers."
       },
       "examples": [
         {
@@ -1558,10 +1558,10 @@
       ]
     },
     "GET /plans/:id": {
-      "description": "One plan with a provider summary, its add-ons (expanded), the bundles that include it and the rank keys it provides.",
+      "description": "One plan as written, with a summary of its provider after its name, providedRankKeys after its features (every rank key of the registry it provides, in registry order, PROJECT-PLAN.md §3.2), its add-ons in place of addOnIds (expanded, in that order, each with its own pricing), and bundleIds last: every bundle that includes it, in any region. Lists that would be empty are left out. It reads the catalog row, its provider's row (which holds the plan and its add-ons) and one index entry per bundle that includes it. Region, currency, the 400s, the 404 and its suggestion work as on GET /providers/:id, and the ETag also hashes the registry's version.",
       "query": {
-        "region": "Optional, e.g. CA.",
-        "currency": "Optional, e.g. CAD."
+        "region": "Optional, e.g. CA, as on GET /providers/:id.",
+        "currency": "Optional, e.g. CAD, as on GET /providers/:id."
       },
       "examples": [
         {
@@ -1646,15 +1646,38 @@
               }
             }
           }
+        },
+        {
+          "title": "Unknown plan (with a suggestion)",
+          "request": {
+            "method": "GET",
+            "url": "https://sub.simplely.ca/api/v1/plans/netflix.premum"
+          },
+          "response": {
+            "status": 404,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "not_found",
+                "message": "No plan with id 'netflix.premum'.",
+                "details": [
+                  { "suggestion": "netflix.premium" }
+                ]
+              }
+            }
+          }
         }
       ]
     },
     "GET /bundles": {
-      "description": "Bundles that include any of the given plans, with computed savings against buying the plans separately and the union of their features.",
+      "description": "Bundles that include any of the given plans, sorted by id. Each is the bundle as written, with includes expanded in place (provider and plan names, the provider's icon, and with a region the plan's own picked price on the bundle's first interval as standalone, left out when the plan has none there or isn't sold there), and the union of its plans' features last. With a region, a bundle not offered there is left out (an unknown one stays, with its fallback price), and pricing and savings come after its prices. savings compares the bundle with buying its plans separately: one entry per interval of the bundle's pricing, when the bundle and every plan are offered in the region and every plan has a picked price for the same interval and intervalCount in the same currency, and the bundle costs less. Any other interval has no entry, and savings is left out when no interval has one. Amounts are rounded to 2 decimals and percent to 1, each from the unrounded values. One D1 batch reads the catalog row, each plan asked for (by primary key), the bundles through bundle_plans' (plan_id) index with their sellers, and the providers of their plans: 11 rows for the example. The ETag is D1's catalog version and a hash of the query as read, the exchange rates' date and the registry's version, and If-None-Match gets 304.",
       "query": {
-        "plans": "Comma-separated plan ids. Returns bundles containing at least one of them.",
-        "region": "Optional, e.g. CA.",
-        "currency": "Optional, e.g. CAD."
+        "plans": "Required: 1 to 20 comma-separated plan ids, in one parameter. Returns the bundles that include at least one of them. A malformed id, or one the catalog doesn't have, gets 400, with the plan id it looks like a typo of, if any.",
+        "region": "Optional, e.g. CA, as on GET /providers/:id. Without it there are no prices, standalone prices or savings.",
+        "currency": "Optional, e.g. CAD, as on GET /providers/:id."
       },
       "examples": [
         {
@@ -1684,7 +1707,7 @@
                       "providerName": "Disney+",
                       "planName": "Premium",
                       "iconUrl": "https://sub.simplely.ca/icons/disney-plus.png",
-                      "standalone": { "amount": 16.99, "currency": "CAD", "interval": "month" }
+                      "standalone": { "amount": 16.99, "currency": "CAD", "interval": "month", "intervalCount": 1 }
                     },
                     {
                       "planId": "crave.premium",
@@ -1692,7 +1715,7 @@
                       "providerName": "Crave",
                       "planName": "Premium Ad-Free",
                       "iconUrl": "https://sub.simplely.ca/icons/crave.png",
-                      "standalone": { "amount": 22.00, "currency": "CAD", "interval": "month" }
+                      "standalone": { "amount": 22.00, "currency": "CAD", "interval": "month", "intervalCount": 1 }
                     }
                   ],
                   "link": "https://www.crave.ca/en/bundles",
@@ -1704,7 +1727,7 @@
                     { "interval": "month", "intervalCount": 1, "amount": 29.99, "currency": "CAD", "monthlyEquivalent": 29.99, "autoRenew": true, "native": true, "source": { "region": "CA", "amount": 29.99, "currency": "CAD" } }
                   ],
                   "savings": [
-                    { "interval": "month", "standaloneTotal": 38.99, "bundlePrice": 29.99, "amount": 9.00, "currency": "CAD", "percent": 23.1 }
+                    { "interval": "month", "intervalCount": 1, "standaloneTotal": 38.99, "bundlePrice": 29.99, "amount": 9.00, "currency": "CAD", "percent": 23.1 }
                   ],
                   "features": {
                     "video.quality": "4k",
@@ -1721,7 +1744,31 @@
                 "catalogVersion": "c4f9a21",
                 "region": "CA",
                 "currency": "CAD",
-                "total": 1
+                "total": 1,
+                "fxDate": "2026-10-21"
+              }
+            }
+          }
+        },
+        {
+          "title": "A plan the catalog doesn't have",
+          "request": {
+            "method": "GET",
+            "url": "https://sub.simplely.ca/api/v1/bundles?plans=disney-plus.premum,crave.premium"
+          },
+          "response": {
+            "status": 400,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "bad_request",
+                "message": "Invalid query parameter 'plans'.",
+                "details": [
+                  { "param": "plans", "issue": "\"disney-plus.premum\" isn't a plan (did you mean disney-plus.premium?)." }
+                ]
               }
             }
           }

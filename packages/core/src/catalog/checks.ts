@@ -55,21 +55,33 @@ export function didYouMean(
   candidates: readonly string[],
   otherwise?: string,
 ): string {
-  // A typo is a few edits away: at most a third of the value's length, and at least one.
+  const closest = closestMatch(value, candidates);
+  if (closest !== undefined) {
+    return ` (did you mean ${closest}?)`;
+  }
+  return otherwise === undefined ? '' : ` (${otherwise})`;
+}
+
+/**
+ * The candidate that looks like a typo of `value`, or undefined when none does. A typo is a few edits away: at most
+ * a third of the value's length, and at least one. The first of equally close candidates wins.
+ */
+export function closestMatch(value: string, candidates: readonly string[]): string | undefined {
   const limit = Math.max(1, Math.floor(value.length / 3));
   let closest: string | undefined;
   let closestDistance = limit + 1;
   for (const candidate of candidates) {
+    // The lengths alone put it this many edits away, so most candidates skip the full comparison.
+    if (Math.abs(candidate.length - value.length) >= closestDistance) {
+      continue;
+    }
     const distance = editDistance(value, candidate);
     if (distance < closestDistance) {
       closest = candidate;
       closestDistance = distance;
     }
   }
-  if (closest !== undefined) {
-    return ` (did you mean ${closest}?)`;
-  }
-  return otherwise === undefined ? '' : ` (${otherwise})`;
+  return closest;
 }
 
 /** The Levenshtein distance: the fewest insertions, deletions and substitutions that turn `a` into `b`. */
