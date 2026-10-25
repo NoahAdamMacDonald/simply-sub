@@ -89,6 +89,93 @@
   category: vpn
   type: boolean
   aliases: [unlimited data, unlimited bandwidth]
+- id: vpn.server-countries
+  parent: vpn.included
+  name: VPN server countries
+  category: vpn
+  type: number
+  unit: countries
+  tiers:
+    - { id: 1-10, name: 1 to 10 countries, min: 1, max: 10 }
+    - { id: 11-50, name: 11 to 50 countries, min: 11, max: 50 }
+    - { id: 51+, name: More than 50 countries, min: 51 }
+  aliases: [server locations, vpn locations]
+- id: vpn.protocols
+  parent: vpn.included
+  name: VPN protocols
+  category: vpn
+  type: set
+  values:
+    - { id: wireguard, name: WireGuard }
+    - { id: openvpn, name: OpenVPN }
+    - { id: ikev2, name: IKEv2 }
+    - id: stealth
+      name: Obfuscated connections
+      aliases: [stealth, obfuscation, censorship circumvention, udp-over-tcp, shadowsocks]
+- id: vpn.kill-switch
+  parent: vpn.included
+  name: Kill switch
+  category: vpn
+  type: boolean
+  aliases: [network lock, lockdown mode]
+- id: vpn.split-tunneling
+  parent: vpn.included
+  name: Split tunneling
+  category: vpn
+  type: boolean
+  aliases: [split tunnel, app exclusions, bypass apps]
+- id: vpn.multi-hop
+  parent: vpn.included
+  name: Multi-hop
+  category: vpn
+  type: boolean
+  aliases: [multihop, double vpn, secure core]
+- id: vpn.content-blocking
+  parent: vpn.included
+  name: DNS content blocking
+  category: vpn
+  type: set
+  values:
+    - { id: ads, name: Ads, aliases: [ad blocker] }
+    - { id: trackers, name: Trackers }
+    - { id: malware, name: Malware }
+    - { id: adult-content, name: Adult content }
+    - { id: gambling, name: Gambling }
+    - { id: social-media, name: Social media }
+  aliases: [netshield, dns filtering]
+- id: vpn.p2p
+  parent: vpn.included
+  name: P2P and torrenting
+  category: vpn
+  type: boolean
+  aliases: [torrenting, bittorrent, file sharing]
+- id: vpn.port-forwarding
+  parent: vpn.included
+  name: Port forwarding
+  category: vpn
+  type: boolean
+- id: vpn.tor
+  parent: vpn.included
+  name: Tor over VPN
+  category: vpn
+  type: boolean
+  aliases: [onion over vpn]
+- id: vpn.independent-audits
+  parent: vpn.included
+  name: Independent audits
+  category: vpn
+  type: set
+  values:
+    - { id: no-logs, name: No-logs policy, aliases: [no-logs audit] }
+    - { id: servers, name: Server infrastructure }
+    - { id: apps, name: Apps }
+  aliases: [audited vpn]
+- id: vpn.anonymous-signup
+  parent: vpn.included
+  name: Anonymous signup
+  category: vpn
+  type: boolean
+  aliases: [no email signup, account number]
 
 # ── Storage ────────────────────────────────────────────────────────────────────
 - id: storage.cloud
