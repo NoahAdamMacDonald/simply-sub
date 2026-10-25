@@ -1,5 +1,5 @@
 // Reading downloaded icon files without an image library: a PNG's size from its header, and the PNG images inside
-// an ICO. scripts/fetch-icons.ts uses it for catalog logos, and GET /icon will for custom subscriptions (M2.6).
+// an ICO. scripts/fetch-icons.ts uses it for catalog logos, and GET /icon for custom subscriptions (M2.6).
 
 export interface IconImage {
   png: Uint8Array;

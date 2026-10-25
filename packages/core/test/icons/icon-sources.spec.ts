@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { iconLinksIn, iconServiceUrls, wellKnownIconPaths } from '../../src';
+import {
+  iconLinksIn,
+  iconServices,
+  iconServiceUrls,
+  isIconServiceUrl,
+  wellKnownIconPaths,
+} from '../../src';
 
 describe('iconLinksIn', () => {
   it('lists the icons a page declares, the largest first, without SVG or mask icons', () => {
@@ -61,6 +67,37 @@ describe('iconServiceUrls', () => {
       'https://www.google.com/s2/favicons?domain=www.example-shop.co.uk&sz=128',
       'https://icons.duckduckgo.com/ip3/www.example-shop.co.uk.ico',
     ]);
+  });
+});
+
+describe('iconServices', () => {
+  it('names each service, as GET /icon reports where an icon came from', () => {
+    expect(iconServices('localgym.example')).toEqual([
+      { name: 'google', url: 'https://www.google.com/s2/favicons?domain=localgym.example&sz=128' },
+      { name: 'duckduckgo', url: 'https://icons.duckduckgo.com/ip3/localgym.example.ico' },
+    ]);
+  });
+});
+
+describe('isIconServiceUrl', () => {
+  it("accepts the services' own hosts, including the gstatic.com servers Google redirects to", () => {
+    expect(isIconServiceUrl('https://www.google.com/s2/favicons?domain=netflix.com&sz=128')).toBe(
+      true,
+    );
+    expect(
+      isIconServiceUrl(
+        'https://t0.gstatic.com/faviconV2?client=SOCIAL&url=http://netflix.com&size=128',
+      ),
+    ).toBe(true);
+    expect(isIconServiceUrl('https://icons.duckduckgo.com/ip3/netflix.com.ico')).toBe(true);
+  });
+
+  it('refuses any other host, plain HTTP, and hosts that only start like a service', () => {
+    expect(isIconServiceUrl('https://netflix.com/favicon.ico')).toBe(false);
+    expect(isIconServiceUrl('http://www.google.com/s2/favicons')).toBe(false);
+    expect(isIconServiceUrl('https://www.google.com.evil.example/')).toBe(false);
+    expect(isIconServiceUrl('https://t0.gstatic.com@evil.example/')).toBe(false);
+    expect(isIconServiceUrl('https://169.254.169.254/')).toBe(false);
   });
 });
 

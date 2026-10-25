@@ -38,16 +38,32 @@ export function iconLinksIn(html: string): IconLink[] {
   return links.sort((a, b) => b.size - a.size).map(({ link }) => link);
 }
 
+/** An icon service, by the name GET /icon's X-Icon-Source header gives it. */
+export type IconServiceName = 'google' | 'duckduckgo';
+
 /**
- * The icon services' URLs for a host name: Google's favicon service (a PNG of up to 128 pixels), then
+ * The icon services for a host name, in order: Google's favicon service (a PNG of up to 128 pixels), then
  * DuckDuckGo's (the site's favicon). Both answer 404 with a placeholder image for a site they don't know.
  */
-export function iconServiceUrls(host: string): string[] {
+export function iconServices(host: string): { name: IconServiceName; url: string }[] {
   const domain = encodeURIComponent(host.toLowerCase());
   return [
-    `https://www.google.com/s2/favicons?domain=${domain}&sz=128`,
-    `https://icons.duckduckgo.com/ip3/${domain}.ico`,
+    { name: 'google', url: `https://www.google.com/s2/favicons?domain=${domain}&sz=128` },
+    { name: 'duckduckgo', url: `https://icons.duckduckgo.com/ip3/${domain}.ico` },
   ];
+}
+
+/** The icon services' URLs for a host name, in iconServices' order. */
+export function iconServiceUrls(host: string): string[] {
+  return iconServices(host).map((service) => service.url);
+}
+
+/**
+ * Whether `url` is on an icon service's own hosts, the only ones GET /icon may fetch. Google's favicon service
+ * redirects to its gstatic.com servers (t0 to t3).
+ */
+export function isIconServiceUrl(url: string): boolean {
+  return /^https:\/\/(?:www\.google\.com|t\d\.gstatic\.com|icons\.duckduckgo\.com)\//.test(url);
 }
 
 /** A tag's attributes, names in lower case and values with their HTML entities decoded. */

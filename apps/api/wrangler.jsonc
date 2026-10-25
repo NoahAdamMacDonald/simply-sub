@@ -24,8 +24,8 @@
       "migrations_dir": "migrations",
     },
   ],
-  // Small values that must survive (BLUEPRINT §7.1): the last good exchange rates (key fx:ecb, M2.5), and from
-  // M2.6 the /icon cache. Like D1's, the id isn't a secret.
+  // Small values that must survive (BLUEPRINT §7.1): the last good exchange rates (key fx:ecb, M2.5) and the
+  // /icon cache (keys icon:<SHA-256 of the domain>, M2.6). Like D1's, the id isn't a secret.
   "kv_namespaces": [{ "binding": "KV", "id": "a1507dd46d40411d8af62a85614db96c" }],
   // The app and the API have the subdomain to themselves: browser storage is shared by everything on
   // one origin, so another app on simplely.ca could read Simply Sub's data (BLUEPRINT §11.5). A
@@ -36,5 +36,7 @@
   // workers.dev (public but unguessable; Cloudflare Access can lock them).
   "workers_dev": false,
   "preview_urls": true,
-  "observability": { "enabled": true },
+  // Workers Logs keep what the Worker logs, but not an entry per request: a request's URL can name a website a user
+  // subscribes to (GET /icon?domain=), which must never reach the logs (BLUEPRINT §5.4, M2.6).
+  "observability": { "enabled": true, "logs": { "invocation_logs": false } },
 }
