@@ -4,6 +4,10 @@ import contract from '../../../../docs/api-output-examples.json';
 import {
   bundleSchema,
   catalogSnapshotSchema,
+  errorBodySchema,
+  errorStatuses,
+  pngBody,
+  successBodySchemas,
   categoriesBodySchema,
   categoriesFileSchema,
   featuresBodySchema,
@@ -14,6 +18,7 @@ import {
   providerSchema,
   regionSnapshot,
   type CatalogSnapshot,
+  type ErrorBody,
   type FxRates,
   type PickedPrice,
   type Price,
@@ -22,8 +27,10 @@ import { issues } from './helpers';
 
 // The YAML source files must stay compatible with the API contract: each catalog object in the examples, minus
 // what the build and the API add (icon URLs, picked pricing, expanded bundle plans, savings, feature unions),
-// is a valid source file. The GET /catalog body is the snapshot that scripts/build-catalog.ts writes (M1.5);
-// the other response schemas come in M2.7.
+// is a valid source file. The GET /catalog body is the snapshot that scripts/build-catalog.ts writes (M1.5).
+// Every example also matches the contract's response schemas (M2.7): an error, whatever its endpoint, the error
+// envelope; a built endpoint's success body, its schema. The Worker's own answers are held to the same schemas
+// in apps/api/test/contract.spec.ts.
 
 function toSource(value: unknown, added: readonly string[] = ['iconUrl', 'pricing']): unknown {
   if (Array.isArray(value)) {
@@ -225,6 +232,64 @@ describe('the picked pricing in the examples', () => {
   it.each(examples)('%s is what pickPrice gives', (_name, region, currency, prices, pricing) => {
     expect(toSource(pricing, [])).toEqual(
       pickPrice(prices, { region, currency, fx }).map(asApiWritesIt),
+    );
+  });
+});
+
+interface ExampleFile {
+  endpoints: Record<
+    string,
+    { phase?: number; examples: { title: string; response: { status: number; body: unknown } }[] }
+  >;
+  errorCodes: { code: string; status: number }[];
+}
+
+describe('every example, against the response schemas', () => {
+  const file = contract as unknown as ExampleFile;
+  const responses = Object.entries(file.endpoints).flatMap(([endpoint, { phase, examples }]) =>
+    examples.map(({ title, response }) => ({
+      name: `${endpoint} "${title}"`,
+      endpoint,
+      built: phase === undefined,
+      status: response.status,
+      body: toSource(response.body, []),
+    })),
+  );
+  const errors = responses.filter((response) => response.status >= 400);
+  const successes = responses.filter((response) => response.built && response.status < 400);
+
+  it.each(errors.map((response) => [response.name, response] as const))(
+    "%s is the error envelope, with its code's status",
+    (_name, { status, body }) => {
+      expect(issues(errorBodySchema, body)).toEqual([]);
+      expect(errorStatuses[(body as ErrorBody).error.code]).toBe(status);
+    },
+  );
+
+  it.each(successes.map((response) => [response.name, response] as const))(
+    "%s is its endpoint's success body",
+    (_name, { endpoint, status, body }) => {
+      const schema = successBodySchemas[endpoint as keyof typeof successBodySchemas];
+      if (status === 304 || schema === pngBody) {
+        expect(body).toBeNull();
+      } else {
+        expect(issues(schema, body)).toEqual([]);
+      }
+    },
+  );
+
+  it('has a schema for every built endpoint, and none yet for the Phase 5 ones', () => {
+    const built = Object.entries(file.endpoints)
+      .filter(([, { phase }]) => phase === undefined)
+      .map(([endpoint]) => endpoint);
+
+    expect(Object.keys(successBodySchemas).sort()).toEqual(built.sort());
+    expect(successes.length).toBeGreaterThan(built.length);
+  });
+
+  it("knows the same error codes and statuses as the examples' errorCodes", () => {
+    expect(Object.fromEntries(file.errorCodes.map(({ code, status }) => [code, status]))).toEqual(
+      errorStatuses,
     );
   });
 });

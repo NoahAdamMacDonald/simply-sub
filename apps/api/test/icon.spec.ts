@@ -3,36 +3,13 @@ import { env } from 'cloudflare:workers';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import contract from '../../../docs/api-output-examples.json';
 import app from '../src/index';
+import { ico, png } from './icon-images';
 
 // GET /icon (docs/api-output-examples.json). Google's and DuckDuckGo's icon services are stand-ins that answer as the
 // real ones do (2026-10-25): Google redirects to its gstatic.com servers, and both answer 404 with a small
 // placeholder for a site they don't know. KV is miniflare's.
 const BASE = 'https://sub.simplely.ca/api/v1';
 const examples = contract.endpoints['GET /icon'].examples;
-
-/** A PNG's signature and IHDR chunk: all core's readPngSize reads. */
-function png(size: number): Uint8Array<ArrayBuffer> {
-  const bytes = new Uint8Array(33);
-  const view = new DataView(bytes.buffer);
-  bytes.set([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
-  view.setUint32(8, 13);
-  bytes.set([0x49, 0x48, 0x44, 0x52], 12);
-  view.setUint32(16, size);
-  view.setUint32(20, size);
-  return bytes;
-}
-
-/** An ICO holding one PNG, as DuckDuckGo serves a site's favicon. */
-function ico(image: Uint8Array): Uint8Array<ArrayBuffer> {
-  const bytes = new Uint8Array(22 + image.length);
-  const view = new DataView(bytes.buffer);
-  view.setUint16(2, 1, true);
-  view.setUint16(4, 1, true);
-  view.setUint32(6 + 8, image.length, true);
-  view.setUint32(6 + 12, 22, true);
-  bytes.set(image, 22);
-  return bytes;
-}
 
 interface Services {
   /** What Google's gstatic.com server answers after the redirect: an icon, or 404 with its placeholder. */

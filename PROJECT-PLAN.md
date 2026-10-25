@@ -128,7 +128,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M2.4 | `GET /providers/:id`, `GET /plans/:id`, `GET /bundles`, plus the 404 shape. The logic is core's `providerBody`, `planBody` and `bundlesBody`, `readPricingQuery` and `readBundlesQuery` (GET /providers' region and currency rules), `bundleFeatures` and `bundleSavings` (BLUEPRINT §4.4) and `providedKeys`; D1 reads by primary key and the `bundle_plans (plan_id)` index, with no migration; 404 and 400 suggestions come from a static `data/catalog/ids.json` | Match the examples, including the 404 for an unknown provider with its suggestion |
 | M2.5 | `GET /fx`: Frankfurter proxy, cached 12 h, serves the last good value if Frankfurter is down, kept in KV (binding `KV`: the namespace `simply-sub-kv`, made with `wrangler kv namespace create`, and its id is in `wrangler.jsonc`: BLUEPRINT §7.1, §7.2). Built before M2.3, which converts prices with the same rates: one copy in euros from Frankfurter's ECB-only route, rebased to any base in core (BLUEPRINT §5.2) | Matches the example, including the `stale` flag |
 | M2.6 | `GET /icon?domain=`: icon proxy for custom subscriptions, cached 30 days in KV (a day for "no icon", keys hashed), restricted as in BLUEPRINT §5.4, using core's icon functions (M1.6) and `readIconQuery`; no `size`; request logs off (`invocation_logs: false`) | Returns an image, or 404 when there's no usable icon; a non-domain, an IP address or a URL gets `400`, nothing but the fixed icon services is ever fetched, and the domain never reaches the logs |
-| M2.7 | Contract tests: every example in `docs/api-output-examples.json` is validated against the response schemas, and route tests compare real responses with them | The examples and the code can't drift apart |
+| M2.7 | Contract tests: every example in `docs/api-output-examples.json` is validated against the response schemas (core's `successBodySchemas` and `errorBodySchema`, which type the bodies), and `apps/api/test/contract.spec.ts` sends every built endpoint's example to the Worker and compares the answer (BLUEPRINT §13.3) | The examples and the code can't drift apart |
 | M2.8 | Error middleware, CORS, caching, security headers and the per-IP rate limit (BLUEPRINT §5.4); the static files' `_headers` (a strict CSP with Trusted Types, the theme script's hash, immutable hashed files, icons for a day: BLUEPRINT §7.6). Request logs went off in M2.6 | Headers match the examples; going over the limit gets `429 rate_limited`; the CSP still lets Cloudflare Web Analytics load (BLUEPRINT §7.6); the app runs with no CSP or Trusted Types violations in the console |
 
 ### M3 — Discovery pipeline (BLUEPRINT §6.5)
@@ -1013,7 +1013,7 @@ FREE SAVINGS — nothing you rank is lost
   Implement the endpoints in M2 order; task M2.7 makes the examples part of the test suite.
 - **Envelope:** `{ "data": …, "meta": … }` on success, `{ "error": { "code", "message", "details?" } }` on failure.
 - **Error codes:** `bad_request` (400), `forbidden` (403), `not_found` (404), `rate_limited` (429), `upstream_unavailable` (502), `internal` (500).
-- **Validation:** Zod schemas for query params (`@hono/zod-validator`). Unknown or invalid params → 400, listing each problem.
+- **Validation:** core's query readers (`readProvidersQuery`, `readPricingQuery`, `readBundlesQuery`, `readIconQuery`) check every parameter. Unknown or invalid params → 400, listing each problem.
 - **Pagination:** `limit` (1–50, default 20) plus an opaque `cursor`. `meta.nextCursor` is `null` on the last page.
 - **What the app actually calls:**
 
@@ -1044,7 +1044,7 @@ FREE SAVINGS — nothing you rank is lost
 - The crypto module: a round trip, a wrong passphrase, a tampered ciphertext, and the KDF parameters stored with
   each file (BLUEPRINT §11.5)
 
-**API:** route tests with `@cloudflare/vitest-plugin` (runs them in workerd), plus contract tests against the examples file.
+**API:** route tests with `@cloudflare/vitest-plugin` (runs them in workerd), plus contract tests: every example is checked against core's response schemas, and every built endpoint's examples are sent to the Worker (M2.7, BLUEPRINT §13.3).
 
 **Components:** `ss-rank-select`, `ss-budget-bar` (aria values, colours), `ss-price` (converted marker),
 item dialog validation, filter panel ↔ URL sync.

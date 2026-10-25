@@ -191,7 +191,8 @@ simply-sub/
 │     │  │                   # bundles.ts, catalog.ts, fx.ts, icon.ts
 │     │  └─ db/              # SQL queries (D1): providers.ts for GET /providers, lookups.ts for the M2.4 routes
 │     │                      # (section 5.3)
-│     ├─ test/               # route tests, run in workerd (@cloudflare/vitest-plugin)
+│     ├─ test/               # route tests, run in workerd (@cloudflare/vitest-plugin); contract.spec.ts sends
+│     │                      # every example to the Worker (M2.7)
 │     ├─ migrations/         # D1 schema migrations (0001_init.sql …)
 │     ├─ scripts/
 │     │  └─ copy-web-build.mjs  # web build → public/ (section 7.3)
@@ -203,6 +204,7 @@ simply-sub/
 │  └─ core/                  # pure TypeScript with no Angular or Worker dependencies
 │     ├─ src/
 │     │  ├─ index.ts         # the public API, imported as `@simply-sub/core`
+│     │  ├─ api/             # the error envelope, GET /health's body and every endpoint's response schema (M2.7)
 │     │  ├─ catalog/         # Zod schemas + inferred types for the catalog files, JSON Schema export (section 4.5),
 │     │  │                   # validateCatalog (section 6.2), regions, availability, pickPrice and convert (section 4.7)
 │     │  ├─ user/            # user-data types (lists, items, cards…)
@@ -999,6 +1001,9 @@ The rules live in `packages/core/src/tax/` and run in M7.1:
 | *(Phase 5)* `GET /cal/:token.ics` | Opt-in live calendar feed (section 11.3) |
 
 Example requests and responses for every endpoint are in [docs/api-output-examples.json](docs/api-output-examples.json).
+Core holds the contract's response schemas (M2.7): `successBodySchemas` names each built endpoint's (the bodies'
+types come from them), and `errorBodySchema` is every error's. The contract tests hold both the examples and the
+Worker's answers to them (section 13.3).
 Successful responses use `{ "data": …, "meta": … }`, and errors use `{ "error": { "code": "not_found", "message": "…" } }`.
 Responses are JSON and versioned through the `/v1` path. Breaking changes go under `/v2`.
 
@@ -2101,6 +2106,15 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 - `packages/core`: high unit-test coverage, especially schedule, ranking, optimizer and rewards.
 - `apps/api`: route tests with Vitest + `@cloudflare/vitest-plugin` (the renamed `@cloudflare/vitest-pool-workers`),
   run inside workerd.
+- **Contract tests** (M2.7), so `docs/api-output-examples.json` and the code can't drift apart:
+  - core checks every example: an error, on any endpoint (Phase 5's too), against `errorBodySchema` and its
+    code's status; a built endpoint's success body against its schema. It also checks that every built endpoint
+    has a schema and that the error codes match the examples' list.
+  - `apps/api/test/contract.spec.ts` sends every example of a built endpoint to the Worker as its request says, on
+    the real catalog seeded under the examples' version, and checks the status, the headers the Worker sends
+    (`Access-Control-Allow-Origin` waits for M2.8, and `Content-Encoding` is Cloudflare's edge's), and the body:
+    errors exactly, success bodies against their schema and their meta's keys, since the examples' values are
+    illustrative. A new example is tested with no new test.
 - `apps/web`: component tests for key dialogs, plus a few Playwright end-to-end flows
   (create list → add from search → see totals).
 
@@ -2144,6 +2158,18 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3).
+
+**Resolved (2026-10-25, M2.7)**
+- **Response schemas** live in core next to each body builder, strict, and the builders' types come from them, so
+  TypeScript catches the code drifting and the contract tests catch the examples drifting (section 13.3).
+  `PickedPrice`, `ProvidersQuery` and `BundleSaving` became schemas too. The Worker never parses its own answers.
+- **Phase 5's examples** (reports, calendar feeds): their errors are checked against the envelope now, and their
+  success bodies get schemas when they're built (M10).
+- **One table-driven test** replays every example; a few need a state (Frankfurter down, rates kept, an icon
+  service's answer), set up by the example's title.
+- **Headers:** compared as the examples show them, except the CORS header (M2.8) and `Content-Encoding`. The
+  GET /catalog 400 example gained the `no-store` every 400 has had since M2.3, and GET /categories the CORS header
+  the other catalog responses show.
 
 **Resolved (2026-10-25, catalog icons)**
 - **Catalog icons stay static files.** `npm run data:icons` fetches each one once from the provider's own site

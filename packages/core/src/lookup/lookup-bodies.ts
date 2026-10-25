@@ -1,14 +1,34 @@
+import { z } from 'zod';
 import { availability, type Availability } from '../catalog/availability';
-import type { Bundle } from '../catalog/bundle';
-import { bundleFeatures, bundleSavings, type BundleSaving } from '../catalog/bundle-deal';
+import { bundleSchema, type Bundle } from '../catalog/bundle';
+import {
+  bundleFeatures,
+  bundleSavings,
+  bundleSavingSchema,
+  type BundleSaving,
+} from '../catalog/bundle-deal';
 import type { FxRates } from '../catalog/convert';
 import type { Feature } from '../catalog/feature';
-import { pickPrice, type PickedPrice } from '../catalog/pick-price';
-import type { Interval, Price } from '../catalog/price';
-import type { AddOn, Plan } from '../catalog/provider';
-import type { SnapshotProvider } from '../catalog/snapshot';
-import type { IsoDate } from '../dates/iso-date';
-import { providedKeys, type RankKey } from '../ranking/rank-keys';
+import {
+  bundleIdSchema,
+  currencySchema,
+  httpsUrlSchema,
+  isoDateSchema,
+  planIdSchema,
+  rankKeySchema,
+  regionSchema,
+  slugSchema,
+  textSchema,
+} from '../catalog/formats';
+import { pickedPriceSchema, pickPrice, type PickedPrice } from '../catalog/pick-price';
+import { intervalSchema, type Price } from '../catalog/price';
+import { addOnSchema, planSchema, type Plan } from '../catalog/provider';
+import {
+  catalogMetaSchema,
+  snapshotProviderSchema,
+  type SnapshotProvider,
+} from '../catalog/snapshot';
+import { providedKeys } from '../ranking/rank-keys';
 import { apiPickedPrice } from '../search/providers-body';
 import type { PricingQuery } from './lookup-query';
 
@@ -20,6 +40,9 @@ import type { PricingQuery } from './lookup-query';
 // With a region, every plan, add-on and bundle that availability doesn't call not-offered there gets its picked
 // prices, rounded the way the API writes money: an unknown one gets pickPrice's fallback price. GET /bundles leaves
 // a not-offered bundle out, as GET /providers does a plan; the detail routes keep every plan and add-on.
+//
+// The schemas are the contract's (M2.7): the builders' types come from them, and the contract tests hold the
+// examples and the routes to them. They're strict, so a field added to plans or bundles must be added here too.
 
 export interface LookupContext {
   /** The query as read: with a region, prices are picked there, in its currency. */
@@ -29,27 +52,35 @@ export interface LookupContext {
   catalogVersion: string;
 }
 
-export interface LookupMeta {
-  catalogVersion: string;
-  region?: string;
-  currency?: string;
-  /** The date of the exchange rates the prices were picked with, when there's a region. */
-  fxDate?: IsoDate;
-}
+export const lookupMetaSchema = z.strictObject({
+  catalogVersion: catalogMetaSchema.shape.catalogVersion,
+  region: regionSchema.optional(),
+  currency: currencySchema.optional(),
+  fxDate: isoDateSchema
+    .describe('The date of the exchange rates the prices were picked with, when there is a region')
+    .optional(),
+});
+export type LookupMeta = z.infer<typeof lookupMetaSchema>;
 
 /** A plan, add-on or bundle, with its picked prices after its stored ones when it has a region's. */
 export type Priced<T> = T & { pricing?: PickedPrice[] };
 
-export type ProviderDetail = Omit<SnapshotProvider, 'plans' | 'addOns'> & {
-  plans: Priced<Plan>[];
-  addOns?: Priced<AddOn>[];
-};
+const pricingSchema = z.array(pickedPriceSchema);
+export const pricedPlanSchema = planSchema.safeExtend({ pricing: pricingSchema.optional() });
+export const pricedAddOnSchema = addOnSchema.extend({ pricing: pricingSchema.optional() });
+
+export const providerBodySchema = z.strictObject({
+  data: snapshotProviderSchema.safeExtend({
+    plans: z.array(pricedPlanSchema).min(1),
+    addOns: z.array(pricedAddOnSchema).min(1).optional(),
+  }),
+  meta: lookupMetaSchema,
+});
+export type ProviderBody = z.infer<typeof providerBodySchema>;
+export type ProviderDetail = ProviderBody['data'];
 
 /** GET /providers/:id: the provider as written, with picked prices on each plan and add-on. */
-export function providerBody(
-  provider: SnapshotProvider,
-  context: LookupContext,
-): { data: ProviderDetail; meta: LookupMeta } {
+export function providerBody(provider: SnapshotProvider, context: LookupContext): ProviderBody {
   return {
     data: {
       // Replacing keys the provider has keeps their place.
@@ -63,29 +94,22 @@ export function providerBody(
   };
 }
 
-/** What GET /plans/:id shows of the plan's provider. */
-export type ProviderSummary = Pick<
-  SnapshotProvider,
-  | 'id'
-  | 'name'
-  | 'website'
-  | 'iconUrl'
-  | 'category'
-  | 'spendCategory'
-  | 'acceptedNetworks'
-  | 'cancelUrl'
->;
+const providerShape = snapshotProviderSchema.shape;
 
-const summaryKeys = [
-  'id',
-  'name',
-  'website',
-  'iconUrl',
-  'category',
-  'spendCategory',
-  'acceptedNetworks',
-  'cancelUrl',
-];
+/** What GET /plans/:id shows of the plan's provider. */
+export const providerSummarySchema = z.strictObject({
+  id: providerShape.id,
+  name: providerShape.name,
+  website: providerShape.website,
+  iconUrl: providerShape.iconUrl,
+  category: providerShape.category,
+  spendCategory: providerShape.spendCategory,
+  acceptedNetworks: providerShape.acceptedNetworks,
+  cancelUrl: providerShape.cancelUrl,
+});
+export type ProviderSummary = z.infer<typeof providerSummarySchema>;
+
+const summaryKeys = Object.keys(providerSummarySchema.shape);
 
 /** The provider's summary fields, in its own key order. */
 function providerSummary(provider: SnapshotProvider): ProviderSummary {
@@ -94,13 +118,41 @@ function providerSummary(provider: SnapshotProvider): ProviderSummary {
   ) as ProviderSummary;
 }
 
-export type PlanDetail = Omit<Priced<Plan>, 'addOnIds'> & {
-  provider: ProviderSummary;
-  providedRankKeys?: RankKey[];
-  /** The add-ons addOnIds names, in its order, in its place. */
-  addOns?: Priced<AddOn>[];
-  bundleIds?: string[];
-};
+const planShape = planSchema.shape;
+
+export const planBodySchema = z.strictObject({
+  data: z.strictObject({
+    id: planShape.id,
+    name: planShape.name,
+    provider: providerSummarySchema,
+    link: planShape.link,
+    features: planShape.features,
+    providedRankKeys: z
+      .array(rankKeySchema)
+      .min(1)
+      .describe('Every rank key the plan provides, in registry order')
+      .optional(),
+    featureLabels: planShape.featureLabels,
+    perks: planShape.perks,
+    notes: planShape.notes,
+    prices: planShape.prices,
+    pricing: pricingSchema.optional(),
+    addOns: z
+      .array(pricedAddOnSchema)
+      .min(1)
+      .describe('The add-ons addOnIds names, in its order and in its place')
+      .optional(),
+    addOnLimit: planShape.addOnLimit,
+    bundleIds: z
+      .array(bundleIdSchema)
+      .min(1)
+      .describe('The bundles that include the plan, in any region')
+      .optional(),
+  }),
+  meta: lookupMetaSchema,
+});
+export type PlanBody = z.infer<typeof planBodySchema>;
+export type PlanDetail = PlanBody['data'];
 
 export interface PlanContext extends LookupContext {
   registry: readonly Feature[];
@@ -117,7 +169,7 @@ export function planBody(
   provider: SnapshotProvider,
   plan: Plan,
   { registry, bundleIds, ...context }: PlanContext,
-): { data: PlanDetail; meta: LookupMeta } {
+): PlanBody {
   const keys = providedKeys(plan.features, registry);
   const addOns = (plan.addOnIds ?? [])
     .flatMap((id) => provider.addOns?.find((addOn) => addOn.id === id) ?? [])
@@ -147,31 +199,40 @@ export function planBody(
 }
 
 /** One of a bundle's plans, in short, with its own price on the bundle's first interval. */
-export interface BundlePlan {
-  planId: string;
-  providerId: string;
-  providerName: string;
-  planName: string;
-  iconUrl?: string;
-  standalone?: { amount: number; currency: string; interval: Interval; intervalCount: number };
-}
+export const bundlePlanSchema = z.strictObject({
+  planId: planIdSchema,
+  providerId: slugSchema,
+  providerName: textSchema,
+  planName: textSchema,
+  iconUrl: httpsUrlSchema.optional(),
+  standalone: z
+    .strictObject({
+      amount: z.number().nonnegative(),
+      currency: currencySchema,
+      interval: intervalSchema,
+      intervalCount: z.int().positive(),
+    })
+    .optional(),
+});
+export type BundlePlan = z.infer<typeof bundlePlanSchema>;
 
-export type BundleResult = Omit<Priced<Bundle>, 'includes'> & {
-  includes: BundlePlan[];
-  savings?: BundleSaving[];
-  features: Plan['features'];
-};
+export const bundleResultSchema = z.strictObject({
+  ...bundleSchema.shape,
+  includes: z.array(bundlePlanSchema).min(2),
+  pricing: pricingSchema.optional(),
+  savings: z.array(bundleSavingSchema).min(1).optional(),
+  features: planShape.features.describe("The union of its plans' features (bundleFeatures)"),
+});
+export type BundleResult = z.infer<typeof bundleResultSchema>;
+
+export const bundlesBodySchema = z.strictObject({
+  data: z.array(bundleResultSchema),
+  meta: lookupMetaSchema.extend({ total: z.int().nonnegative() }),
+});
+export type BundlesBody = z.infer<typeof bundlesBodySchema>;
 
 export interface BundlesContext extends LookupContext {
   registry: readonly Feature[];
-}
-
-export interface BundlesMeta {
-  catalogVersion: string;
-  region?: string;
-  currency?: string;
-  total: number;
-  fxDate?: IsoDate;
 }
 
 /**
@@ -184,7 +245,7 @@ export function bundlesBody(
   bundles: readonly Bundle[],
   providers: readonly SnapshotProvider[],
   { registry, ...context }: BundlesContext,
-): { data: BundleResult[]; meta: BundlesMeta } {
+): BundlesBody {
   const byId = new Map(providers.map((provider) => [provider.id, provider]));
   const providerOf = (id: string) => {
     const provider = byId.get(id);

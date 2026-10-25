@@ -2,14 +2,18 @@ import { describe, expect, it } from 'vitest';
 import {
   buildCatalogData,
   bundlesBody,
+  bundlesBodySchema,
   planBody,
+  planBodySchema,
   providerBody,
+  providerBodySchema,
   readCatalogSource,
   type CatalogSourceFile,
   type FxRates,
   type SnapshotProvider,
 } from '../../src';
 import { catalog, catalogWith } from '../catalog/catalog-files';
+import { issues } from '../catalog/helpers';
 
 const fx: FxRates = {
   base: 'CAD',
@@ -325,5 +329,29 @@ describe('bundlesBody', () => {
     expect(() => bundlesBody(bundles, [netflix], { ...canada, registry })).toThrow(
       'Provider crave is missing',
     );
+  });
+});
+
+describe('the bodies, against the contract schemas', () => {
+  const contexts = [
+    ['priced for Canada', canada],
+    ['without a region', { query: {}, catalogVersion: 'abc1234' }],
+  ] as const;
+
+  it.each(contexts)('are valid %s', (_name, context) => {
+    for (const provider of providers) {
+      expect(issues(providerBodySchema, providerBody(provider, context))).toEqual([]);
+      for (const plan of provider.plans) {
+        const body = planBody(provider, plan, {
+          ...context,
+          registry,
+          bundleIds: ['bundle.netflix-crave'],
+        });
+        expect(issues(planBodySchema, body)).toEqual([]);
+      }
+    }
+    expect(
+      issues(bundlesBodySchema, bundlesBody(bundles, providers, { ...context, registry })),
+    ).toEqual([]);
   });
 });

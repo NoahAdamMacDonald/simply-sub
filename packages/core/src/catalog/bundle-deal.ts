@@ -1,6 +1,8 @@
+import { z } from 'zod';
 import type { Feature, FeatureValue } from './feature';
+import { currencySchema } from './formats';
 import type { PickedPrice } from './pick-price';
-import type { Interval } from './price';
+import { intervalSchema } from './price';
 import type { Plan } from './provider';
 
 // What a bundle gives and saves (BLUEPRINT §4.4): computed from its plans, never stored. GET /bundles adds both per
@@ -59,19 +61,17 @@ export interface PricedPart {
   offered: boolean;
 }
 
-/** What the bundle saves on one interval, at full precision in `currency`. */
-export interface BundleSaving {
-  interval: Interval;
-  intervalCount: number;
-  /** The plans' prices added up. */
-  standaloneTotal: number;
-  bundlePrice: number;
-  /** standaloneTotal − bundlePrice: always above 0. */
-  amount: number;
-  currency: string;
-  /** amount as a percentage of standaloneTotal. */
-  percent: number;
-}
+/** What the bundle saves on one interval, in `currency`: GET /bundles' `savings` entries, in their key order. */
+export const bundleSavingSchema = z.strictObject({
+  interval: intervalSchema,
+  intervalCount: z.int().positive(),
+  standaloneTotal: z.number().positive().describe("The plans' prices added up"),
+  bundlePrice: z.number().nonnegative(),
+  amount: z.number().positive().describe('standaloneTotal − bundlePrice: always above 0'),
+  currency: currencySchema,
+  percent: z.number().positive().max(100).describe('amount as a percentage of standaloneTotal'),
+});
+export type BundleSaving = z.infer<typeof bundleSavingSchema>;
 
 /**
  * What the bundle saves against buying its plans separately, for each interval of its picked prices. An interval

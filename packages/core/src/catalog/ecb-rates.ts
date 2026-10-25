@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { FxRates } from './convert';
+import { fxRatesSchema, type FxRates } from './convert';
 import { currencySchema, isoDateSchema } from './formats';
 
 // The ECB's daily reference rates (BLUEPRINT §5.2), which GET /fx serves and GET /providers converts prices with.
@@ -27,6 +27,19 @@ export const keptEcbRatesSchema = ecbRatesSchema.safeExtend({
   fetchedAt: z.iso.datetime().describe('When Frankfurter answered, in UTC'),
 });
 export type KeptEcbRates = z.infer<typeof keptEcbRatesSchema>;
+
+/**
+ * GET /fx's body (docs/api-output-examples.json): the rates in the requested base, when Frankfurter gave them, and
+ * whether they're the last good ones, kept while it's down.
+ */
+export const fxBodySchema = z.strictObject({
+  data: fxRatesSchema.extend({ source: z.literal(fxSource) }),
+  meta: z.strictObject({
+    fetchedAt: keptEcbRatesSchema.shape.fetchedAt,
+    stale: z.boolean().describe('True when Frankfurter failed and these are the last good rates'),
+  }),
+});
+export type FxBody = z.infer<typeof fxBodySchema>;
 
 /** One row of Frankfurter's answer. Other fields it may add are ignored. */
 const frankfurterRowsSchema = z.array(

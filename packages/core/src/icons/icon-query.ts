@@ -1,4 +1,4 @@
-import type { QueryProblem } from '../search/providers-query';
+import type { QueryProblem } from '../api/error-body';
 
 // GET /icon's query string (docs/api-output-examples.json): the domain of a website a user typed for a custom
 // subscription (BLUEPRINT §5.4). The domain only ever goes into the icon services' URLs (iconServices), never into a

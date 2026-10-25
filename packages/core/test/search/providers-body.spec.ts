@@ -3,6 +3,7 @@ import {
   apiPickedPrice,
   buildCatalogData,
   providersBody,
+  providersBodySchema,
   providersCursor,
   readCatalogSource,
   searchProviders,
@@ -11,6 +12,7 @@ import {
   type ProvidersQuery,
 } from '../../src';
 import { catalog } from '../catalog/catalog-files';
+import { issues } from '../catalog/helpers';
 
 const fx: FxRates = {
   base: 'CAD',
@@ -145,5 +147,22 @@ describe('providersBody', () => {
     expect(
       providersBody(matchesFor(paged), { query: paged, offset: 30, catalogVersion: 'abc1234' }),
     ).toMatchObject({ data: [], meta: { total: 4, nextCursor: null } });
+  });
+});
+
+describe('providersBody, against the contract schema', () => {
+  it.each([
+    { q: 'vpn', region: 'CA', currency: 'CAD', sort: 'relevance', limit: 20 },
+    { sort: 'name', limit: 2 },
+  ] satisfies ProvidersQuery[])('is valid for %o', (query) => {
+    const body = providersBody(matchesFor(query), {
+      query,
+      offset: 0,
+      catalogVersion: 'abc1234',
+      ...(query.region !== undefined && { fxDate: fx.date }),
+    });
+
+    expect(body.data.length).toBeGreaterThan(0);
+    expect(issues(providersBodySchema, body)).toEqual([]);
   });
 });

@@ -1,10 +1,67 @@
-import type { PickedPrice } from '../catalog/pick-price';
+import { z } from 'zod';
+import {
+  httpsUrlSchema,
+  isoDateSchema,
+  planIdSchema,
+  rankKeySchema,
+  slugSchema,
+  textSchema,
+} from '../catalog/formats';
+import { pickedPriceSchema, type PickedPrice } from '../catalog/pick-price';
+import { catalogMetaSchema } from '../catalog/snapshot';
 import type { IsoDate } from '../dates/iso-date';
-import { providersCursor, type ProvidersQuery } from './providers-query';
+import { providersCursor, providersQuerySchema, type ProvidersQuery } from './providers-query';
 import type { ProviderMatch } from './search-providers';
 
 // The GET /providers body (docs/api-output-examples.json): one page of searchProviders' matches, rounded the way the
-// API writes money, with the meta that describes it.
+// API writes money, with the meta that describes it. The schemas are the contract's (M2.7): the builders' types
+// come from them, and the contract tests hold the examples and the route to them.
+
+/** One search result: the provider in short, its matching plans with their prices, and why it matched. */
+export const providerResultSchema = z.strictObject({
+  provider: z.strictObject({
+    id: slugSchema,
+    name: textSchema,
+    category: slugSchema,
+    website: httpsUrlSchema,
+    iconUrl: httpsUrlSchema.optional(),
+  }),
+  matchedPlans: z
+    .array(
+      z.strictObject({
+        id: planIdSchema,
+        name: textSchema,
+        matchedKeys: z.array(rankKeySchema),
+        pricing: z.array(pickedPriceSchema).optional(),
+        bestMonthlyEquivalent: z.number().nonnegative().optional(),
+        lastVerified: isoDateSchema,
+        stale: z.boolean(),
+      }),
+    )
+    .min(1),
+  bestPlanId: planIdSchema,
+  matchedOn: z.array(
+    z
+      .string()
+      .regex(
+        /^(?:name|(?:alias|plan|category|feature):.+)$/,
+        'Use name, alias:, plan:, category: or feature:',
+      ),
+  ),
+});
+export type ProviderResult = z.infer<typeof providerResultSchema>;
+
+export const providersBodySchema = z.strictObject({
+  data: z.array(providerResultSchema),
+  meta: z.strictObject({
+    catalogVersion: catalogMetaSchema.shape.catalogVersion,
+    query: providersQuerySchema,
+    total: z.int().nonnegative(),
+    nextCursor: z.string().min(1).nullable(),
+    fxDate: isoDateSchema.optional(),
+  }),
+});
+export type ProvidersBody = z.infer<typeof providersBodySchema>;
 
 /** A picked price as the API writes it: amounts to 2 decimals and the rate to 4, from the unrounded values. */
 export function apiPickedPrice(picked: PickedPrice): PickedPrice {
@@ -17,7 +74,7 @@ export function apiPickedPrice(picked: PickedPrice): PickedPrice {
 }
 
 /** One result: the provider in short, its matching plans with their prices, and why it matched. */
-export function providerResult({ provider, plans, matchedOn }: ProviderMatch) {
+export function providerResult({ provider, plans, matchedOn }: ProviderMatch): ProviderResult {
   const { id, name, category, website, iconUrl } = provider;
   return {
     provider: { id, name, category, website, ...(iconUrl !== undefined && { iconUrl }) },
@@ -36,7 +93,6 @@ export function providerResult({ provider, plans, matchedOn }: ProviderMatch) {
     matchedOn,
   };
 }
-export type ProviderResult = ReturnType<typeof providerResult>;
 
 export interface ProvidersBodyOptions {
   query: ProvidersQuery;
@@ -51,7 +107,7 @@ export interface ProvidersBodyOptions {
 export function providersBody(
   matches: readonly ProviderMatch[],
   { query, offset, catalogVersion, fxDate }: ProvidersBodyOptions,
-) {
+): ProvidersBody {
   const end = offset + query.limit;
   return {
     data: matches.slice(offset, end).map(providerResult),

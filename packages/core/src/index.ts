@@ -1,5 +1,8 @@
 // The public API of @simply-sub/core: pure functions shared by the app, the Worker and the scripts.
 // Nothing here reads the clock; functions that need the date take `today` as a parameter.
+export * from './api/error-body';
+export * from './api/health-body';
+export * from './api/response-schemas';
 export * from './catalog/availability';
 export * from './catalog/bundle';
 export * from './catalog/bundle-deal';

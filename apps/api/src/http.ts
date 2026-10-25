@@ -1,7 +1,9 @@
+import type { ErrorBody } from '@simply-sub/core';
 import type { Context } from 'hono';
 
 // What every route answers the same way: the JSON content type, the catalog's caching, the 400 bad_request,
-// 404 not_found, 500 and 502 shapes, timestamps, If-None-Match and the ETag's hash.
+// 404 not_found, 500 and 502 shapes (core's ErrorBody, the contract's error envelope), timestamps, If-None-Match and
+// the ETag's hash.
 
 // Hono's default is plain application/json; M2.8 sets the contract's type for every route.
 export const jsonType = 'application/json; charset=utf-8';
@@ -20,10 +22,10 @@ export function badQuery(c: Context, problems: readonly ParamProblem[]): Respons
     problems.length === 1
       ? `Invalid query parameter '${problems[0].param}'.`
       : `${problems.length} query parameters are invalid.`;
-  return c.json({ error: { code: 'bad_request', message, details: problems } }, 400, {
-    'Content-Type': jsonType,
-    'Cache-Control': 'no-store',
-  });
+  const body = {
+    error: { code: 'bad_request', message, details: [...problems] },
+  } satisfies ErrorBody;
+  return c.json(body, 400, { 'Content-Type': jsonType, 'Cache-Control': 'no-store' });
 }
 
 /** A problem for each query parameter, on a route that takes none. */
@@ -46,7 +48,7 @@ export function notFound(c: Context, message: string, suggestion?: string): Resp
         message,
         ...(suggestion !== undefined && { details: [{ suggestion }] }),
       },
-    },
+    } satisfies ErrorBody,
     404,
     { 'Content-Type': jsonType, 'Cache-Control': 'no-store' },
   );
@@ -60,7 +62,7 @@ export function notSeeded(c: Context): Response {
         code: 'internal',
         message: "The catalog isn't in D1 yet: the deploy's seed hasn't run.",
       },
-    },
+    } satisfies ErrorBody,
     500,
     { 'Content-Type': jsonType },
   );
@@ -75,7 +77,7 @@ export function noExchangeRates(c: Context): Response {
         message:
           "Exchange rates are temporarily unavailable. Converted prices can't be shown right now.",
       },
-    },
+    } satisfies ErrorBody,
     502,
     { 'Content-Type': jsonType, 'Cache-Control': 'no-store' },
   );

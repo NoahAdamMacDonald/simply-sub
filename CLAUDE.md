@@ -2,7 +2,8 @@
 
 **Read [BLUEPRINT.md](BLUEPRINT.md) before planning or writing code.** It is the source of truth for architecture and decisions.
 - **[PROJECT-PLAN.md](PROJECT-PLAN.md)** has the build order (task IDs M0.1 …) and a spec with acceptance criteria for every page. Work one task ID at a time.
-- **[docs/api-output-examples.json](docs/api-output-examples.json)** is the API contract. Don't change response shapes without updating it.
+- **[docs/api-output-examples.json](docs/api-output-examples.json)** is the API contract. Don't change response shapes without updating it:
+  the contract tests hold the examples and the Worker to core's response schemas (`successBodySchemas`, `errorBodySchema`).
 - **[docs/wireframes/](docs/wireframes/)** has the Figma screenshots (local only, not in git; may be missing in a fresh clone). PROJECT-PLAN.md §8 lists where the spec intentionally differs from them.
 
 The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.json`) are superseded drafts.
