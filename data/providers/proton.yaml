@@ -16,7 +16,7 @@ notes: >-
 # protocols), and the kill switch and Stealth on Free (/free-vpn). Paid only: split tunneling
 # (/support/protonvpn-split-tunneling), Tor over VPN (/support/tor-vpn), port forwarding (/support/port-forwarding),
 # P2P, Secure Core and the NetShield blocker of ads, trackers and malware (/pricing, /free-vpn/free-vs-paid).
-# Yearly no-logs audits and app audits (/blog/no-logs-audit, /blog/is-protonvpn-trustworthy). Signup may ask for an
+# A no-logs policy on every plan (/pricing). Yearly no-logs audits and app audits (/blog/no-logs-audit, /blog/is-protonvpn-trustworthy). Signup may ask for an
 # email or phone number (proton.me/support/human-verification), so it isn't anonymous.
 #
 # Unlimited, Duo and Family are suite plans: they state their own features, and includes-subscription lists the
@@ -37,6 +37,7 @@ plans:
       vpn.server-countries: 10
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
       vpn.kill-switch: true
+      vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, apps]
       password-manager: true
       password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
@@ -70,6 +71,7 @@ plans:
       vpn.server-countries: 10
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
       vpn.kill-switch: true
+      vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, apps]
       password-manager: true
       password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
@@ -157,6 +159,7 @@ plans:
       vpn.server-countries: 10
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
       vpn.kill-switch: true
+      vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, apps]
       password-manager: true
       password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
@@ -250,6 +253,7 @@ plans:
       vpn.p2p: true
       vpn.port-forwarding: true
       vpn.tor: true
+      vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, apps]
       password-manager: true
       password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
@@ -337,6 +341,7 @@ plans:
       vpn.server-countries: 10
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
       vpn.kill-switch: true
+      vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, apps]
       password-manager: true
       password-manager.item-types:
@@ -456,6 +461,7 @@ plans:
       vpn.p2p: true
       vpn.port-forwarding: true
       vpn.tor: true
+      vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, apps]
       password-manager: true
       password-manager.item-types:
@@ -579,6 +585,7 @@ plans:
       vpn.p2p: true
       vpn.port-forwarding: true
       vpn.tor: true
+      vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, apps]
       password-manager: true
       password-manager.item-types:
@@ -702,6 +709,7 @@ plans:
       vpn.p2p: true
       vpn.port-forwarding: true
       vpn.tor: true
+      vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, apps]
       password-manager: true
       password-manager.item-types:

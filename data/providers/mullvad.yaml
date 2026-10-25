@@ -16,7 +16,8 @@ notes: >-
 # kill switch is always on and split tunneling is on every platform but iOS (/en/help/using-mullvad-vpn-app,
 # /en/help/split-tunneling-with-the-mullvad-app); multihop (/en/help/multihop-wireguard); the DNS content blockers
 # (/en/help/how-use-mullvad-cli); no new forwarded ports since 2023 (/en/vpn FAQ); infrastructure and app audits
-# (/en/blog/tag/audits); unlimited traffic (/en/blog/unlimited-traffic-volume). No page states a P2P policy: P2P is
+# (/en/blog/tag/audits, whose summaries don't say they tested the no-logging claim); a no-logging policy
+# (/en/help/no-logging-data-policy); unlimited traffic (/en/blog/unlimited-traffic-volume). No page states a P2P policy: P2P is
 # marked allowed because the terms block only ports 25 and 137-139/445 and change no traffic (/en/help/terms-service).
 plans:
   - id: mullvad.vpn
@@ -33,6 +34,7 @@ plans:
       vpn.multi-hop: true
       vpn.content-blocking: [ads, trackers, malware, adult-content, gambling, social-media]
       vpn.p2p: true
+      vpn.no-logs-policy: true
       vpn.independent-audits: [servers, apps]
       vpn.anonymous-signup: true
     prices:
