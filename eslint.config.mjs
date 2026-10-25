@@ -76,6 +76,25 @@ export default defineConfig(
     },
   },
   {
+    // The repositories in core/storage/ are the only way into IndexedDB (BLUEPRINT §11.1), so the app lock (M6.10)
+    // can wrap them without changing a page.
+    files: ['apps/web/**/*.ts'],
+    ignores: ['apps/web/src/app/core/storage/**'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['dexie', 'dexie/*'],
+              message: 'Only the repositories in core/storage/ use Dexie (BLUEPRINT §11.1).',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
     files: ['apps/web/**/*.html'],
     extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility],
     rules: {

@@ -97,5 +97,10 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
   `npm run data:validate`: the schemas plus the cross-file checks of `validateCatalog` (BLUEPRINT §6.2). A new
   provider's logo comes from `npm run data:icons` into `data/logos/<id>.png` (committed), and `data:build`
   publishes it as a 96 px WebP at `/icons/<id>.webp`; builds never fetch icons.
+- User records (lists, items, settings…) are strict Zod schemas in `packages/core/src/user/`, with `z.infer` types
+  too (BLUEPRINT §4.6). The repositories in `apps/web/src/app/core/storage/` are the only code that imports `dexie`
+  (ESLint enforces it). They load Dexie lazily, outside the initial bundle, and check every record on the way in and
+  out (§11.1). A change to a stored record's shape needs a new Dexie version with an upgrade function. Specs that
+  use storage take `testStorage()` from `storage.testing.ts`: a fresh fake IndexedDB and a clock the test sets.
 - Vitest for unit tests, Playwright for end-to-end tests.
 - Open questions are listed in BLUEPRINT.md section 14. Ask the user rather than guessing.
