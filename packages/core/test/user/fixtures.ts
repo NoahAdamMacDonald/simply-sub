@@ -1,3 +1,12 @@
+import {
+  buildCatalogData,
+  buildCatalogMeta,
+  readCatalogSource,
+  regionSnapshot,
+  type CatalogSnapshot,
+} from '../../src';
+import { catalog } from '../catalog/catalog-files';
+
 // One valid record of each user table, with every optional field set. Specs change one field at a time with
 // withValue (../catalog/helpers).
 
@@ -91,4 +100,29 @@ export const settings = {
   annualBudget: 1000,
   theme: 'system',
   updatedAt: '2026-10-20T09:15:00.000Z',
+};
+
+const fullCatalog: CatalogSnapshot = (() => {
+  const data = buildCatalogData(readCatalogSource(catalog()), 'https://sub.simplely.ca/icons/');
+  return {
+    data,
+    meta: buildCatalogMeta(data, {
+      catalogVersion: 'abc1234',
+      generatedAt: '2026-10-23T12:00:00Z',
+    }),
+  };
+})();
+
+/** The test catalog's Canadian file, data/catalog/CA.json, as the app caches it. */
+export const catalogCache = {
+  key: 'CA',
+  snapshot: regionSnapshot(fullCatalog, 'CA'),
+  fetchedAt: '2026-10-23T12:30:00.000Z',
+};
+
+/** The full data/catalog.json, cached for a buyer whose region has no file of its own. */
+export const fullCatalogCache = {
+  key: 'catalog',
+  snapshot: fullCatalog,
+  fetchedAt: '2026-10-23T12:30:00.000Z',
 };

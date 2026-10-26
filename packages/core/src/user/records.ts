@@ -1,5 +1,6 @@
 import type * as z from 'zod';
 import { rankKeySchema } from '../catalog/formats';
+import { catalogCacheSchema } from './catalog-cache';
 import { customSubscriptionSchema } from './custom-subscription';
 import { listItemSchema } from './list-item';
 import { paymentCardSchema } from './payment-card';
@@ -10,9 +11,9 @@ import { subscriptionListSchema } from './subscription-list';
 import { tagSchema } from './tag';
 
 /**
- * The user tables' record schemas, by Dexie table name (BLUEPRINT §4.6). The repositories check every record against
- * them on the way in and out (§11.1), and backups (M6.9) use the same ones. catalogCache, drafts and
- * dismissedSuggestions get theirs with M4.3, M6.3 and M8.2.
+ * The record schemas of the database's tables, by Dexie table name (BLUEPRINT §4.6). The repositories check every
+ * record against them on the way in and out (§11.1), and backups (M6.9) use the same ones, except catalogCache's: a
+ * cache of the catalog files, not the user's data. drafts and dismissedSuggestions get theirs with M6.3 and M8.2.
  */
 export const userRecordSchemas = {
   lists: subscriptionListSchema,
@@ -22,6 +23,7 @@ export const userRecordSchemas = {
   cards: paymentCardSchema,
   tags: tagSchema,
   settings: settingsSchema,
+  catalogCache: catalogCacheSchema,
 };
 export type UserTable = keyof typeof userRecordSchemas;
 export type UserRecords = { [T in UserTable]: z.infer<(typeof userRecordSchemas)[T]> };
@@ -35,14 +37,25 @@ export const userRecordKeys = {
   cards: 'id',
   tags: 'id',
   settings: 'key',
+  catalogCache: 'key',
 } as const satisfies Record<UserTable, string>;
 
-const keySchemas = { id: recordIdSchema, rankKey: rankKeySchema, key: settingsSchema.shape.key };
+/** What each table's well-formed keys look like. */
+const keySchemas: Record<UserTable, z.ZodType<string>> = {
+  lists: recordIdSchema,
+  items: recordIdSchema,
+  customSubs: recordIdSchema,
+  rankings: rankKeySchema,
+  cards: recordIdSchema,
+  tags: recordIdSchema,
+  settings: settingsSchema.shape.key,
+  catalogCache: catalogCacheSchema.shape.key,
+};
 
 /** A stored record that failed its schema, described without any of its values. */
 export interface RejectedRecord {
   table: UserTable;
-  /** Its primary key, when that's well formed: a UUID, a rank key or `settings`. */
+  /** Its primary key, when that's well formed: a UUID, a rank key, `settings` or a catalog file's key. */
   key?: string;
   /** Each issue as `path: code` (`billing.anchorDate: invalid_format`). */
   issues: string[];
@@ -97,7 +110,7 @@ function describeRejected(
     typeof row === 'object' && row !== null ? (row as Record<string, unknown>)[field] : undefined;
   return {
     table,
-    ...(keySchemas[field].safeParse(key).success && { key: key as string }),
+    ...(keySchemas[table].safeParse(key).success && { key: key as string }),
     issues: issues.map(
       (issue) => `${issue.path.map(pathSegment).join('.') || '(record)'}: ${issue.code}`,
     ),

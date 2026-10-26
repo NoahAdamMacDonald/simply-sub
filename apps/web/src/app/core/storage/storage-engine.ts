@@ -29,6 +29,12 @@ export interface StorageEngineOptions {
   onWrite(): void;
 }
 
+/**
+ * The tables that cache what can be downloaded again, whose records are replaced and deleted outright. The user's
+ * own records are soft-deleted instead (BLUEPRINT §4.6).
+ */
+export type CacheTable = 'catalogCache';
+
 export interface ModifyOptions {
   /**
    * What to do when the stored record fails its schema: by default the change is refused (an InvalidRecordError),
@@ -54,6 +60,13 @@ export class StorageEngine {
         return records;
       }),
     );
+  }
+
+  /** Every valid record in `table` as stored now, read once: what another tab just wrote is there too. */
+  async read<T extends UserTable>(table: T): Promise<UserRecords[T][]> {
+    const { records, rejected } = readRecords(table, await this.db.table<unknown>(table).toArray());
+    if (rejected.length > 0) this.options.onRejected(rejected);
+    return records;
   }
 
   /** Stores a new record. Fails if a record with its key exists. */
@@ -91,6 +104,24 @@ export class StorageEngine {
     });
     if (written) this.options.onWrite();
     return stored;
+  }
+
+  /**
+   * Stores `records` in a cache table, in place of any with the same keys, and deletes the records keyed `remove`,
+   * in one transaction. Nothing is written if a record fails its schema.
+   */
+  async replace<T extends CacheTable>(
+    table: T,
+    records: readonly UserRecords[T][],
+    remove: readonly string[],
+  ): Promise<void> {
+    const checked = records.map((record) => checkRecord(table, record));
+    const rows = this.db.table<unknown, string>(table);
+    await this.db.transaction('rw', rows, async () => {
+      await rows.bulkDelete([...remove]);
+      await rows.bulkPut(checked);
+    });
+    this.options.onWrite();
   }
 
   close(): void {

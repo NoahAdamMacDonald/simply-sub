@@ -10,18 +10,29 @@ import type { RejectedRecord } from '@simply-sub/core';
 export class RejectedRecords {
   private readonly injector = inject(Injector);
   private readonly reported = new Set<string>();
+  private readonly cacheReported = new Set<string>();
   private readonly reportedCount = signal(0);
   private noticeShown = false;
 
   /** How many different records have been rejected this session. */
   readonly count = this.reportedCount.asReadonly();
 
-  /** Called with every read's rejected records, so the same record can come back many times. */
+  /**
+   * Called with every read's rejected records, so the same record can come back many times. A cached catalog file
+   * isn't the user's data: it's logged, downloaded again in its place (CatalogStore), and needs no message.
+   */
   report(rejected: readonly RejectedRecord[]): void {
     const before = this.reported.size;
     for (const { table, key, issues } of rejected) {
       const description = `${table} record ${key ?? '(malformed key)'}: ${issues.join('; ')}`;
-      if (this.reported.has(description)) continue;
+      if (this.reported.has(description) || this.cacheReported.has(description)) continue;
+      if (table === 'catalogCache') {
+        this.cacheReported.add(description);
+        console.warn(
+          `A cached catalog file couldn't be read, so it's downloaded again. ${description}`,
+        );
+        continue;
+      }
       this.reported.add(description);
       console.warn(`A saved record couldn't be read, so it's hidden. ${description}`);
     }

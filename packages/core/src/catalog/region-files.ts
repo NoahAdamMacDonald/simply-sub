@@ -8,7 +8,7 @@ import { catalogMetaSchema, type CatalogMeta, type CatalogSnapshot } from './sna
 // pickPrice can pick for a buyer in that region, whatever their currency, so the app doesn't download every
 // region's prices. data/catalog/index.json lists the files and the catalog version, which GET /catalog sends as its
 // ETag. A missing static file is answered with the app's index.html (the SPA fallback), so the Worker and the app
-// look a region up in the index instead of trying its file.
+// look a region up in the index instead of trying its file (regionFileFor, in catalog-sync.ts).
 
 /**
  * The prices pickPrice can pick for a buyer in `region`, in any currency: those of the region, or else of the
@@ -74,16 +74,4 @@ export function buildCatalogIndex(meta: CatalogMeta): CatalogIndex {
     generatedAt: meta.generatedAt,
     regions: meta.regions.filter((region) => region !== globalRegion),
   };
-}
-
-/**
- * The region whose file serves a buyer in `region`: its own, else its group's (EU for a Swede without Swedish
- * prices), or undefined for the full catalog.json, which every other country needs, since any region's price can
- * be the one pickPrice falls back to.
- */
-export function regionFileFor(
-  region: string,
-  { regions }: Pick<CatalogIndex, 'regions'>,
-): string | undefined {
-  return [region, ...groupsOf(region)].find((code) => regions.includes(code));
 }

@@ -1,5 +1,6 @@
 import type { ComponentHarnessConstructor, HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { signal } from '@angular/core';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatCheckboxHarness } from '@angular/material/checkbox/testing';
@@ -11,6 +12,7 @@ import { MatRadioGroupHarness } from '@angular/material/radio/testing';
 import { MatSelectHarness } from '@angular/material/select/testing';
 import { Router, provideRouter } from '@angular/router';
 import type { Settings } from '@simply-sub/core';
+import { CatalogStore, type CatalogCheckOutcome } from '../../core/catalog/catalog-store';
 import { SettingsStore } from '../../core/settings/settings-store';
 import {
   plantRows,
@@ -32,17 +34,27 @@ const ontario: Settings = {
   updatedAt: '2026-10-25T12:00:00.000Z',
 };
 
+/** The parts of CatalogStore the Catalog line uses, with no downloads. */
+class FakeCatalogStore {
+  readonly version = signal<string | undefined>('37f6573');
+  readonly generatedAt = signal<string | undefined>('2026-10-22T12:00:00Z');
+  readonly check = vi.fn(async (): Promise<CatalogCheckOutcome> => 'current');
+}
+
 describe('SettingsPage', () => {
+  let catalog: FakeCatalogStore;
   let storage: TestStorage;
   let fixture: ComponentFixture<SettingsPage>;
   let loader: HarnessLoader;
 
   beforeEach(async () => {
     storage = testStorage();
+    catalog = new FakeCatalogStore();
     await plantRows(storage.indexedDB, 'settings', [ontario]);
     TestBed.configureTestingModule({
       providers: [
         storage.providers,
+        { provide: CatalogStore, useValue: catalog },
         provideRouter([]),
         { provide: MATERIAL_ANIMATIONS, useValue: { animationsDisabled: true } },
       ],
@@ -184,6 +196,36 @@ describe('SettingsPage', () => {
         expect(await loader.getAllHarnesses(MatDialogHarness)).toHaveLength(0),
       );
       expect(await saved()).toEqual(ontario);
+    });
+  });
+
+  describe('the Catalog line', () => {
+    const message = () =>
+      (fixture.nativeElement as HTMLElement).querySelector('.check-message[role="status"]');
+
+    it("gives the catalog's date and version", () => {
+      expect(text()).toContain('Updated Oct 22, 2026 · version 37f6573');
+    });
+
+    it('says when no catalog has been downloaded', async () => {
+      catalog.version.set(undefined);
+      catalog.generatedAt.set(undefined);
+      await fixture.whenStable();
+      expect(text()).toContain('Not downloaded yet');
+    });
+
+    it.each([
+      ['current', 'You have the latest catalog.'],
+      ['updated', 'Downloaded the latest catalog.'],
+      ['offline', "You're offline. Try again when you're back online."],
+      ['failed', "Couldn't check for updates. Try again later."],
+    ] as const)('checks for updates and says what it found: %s', async (outcome, expected) => {
+      expect(message()?.textContent).toBe('');
+      catalog.check.mockResolvedValue(outcome);
+      await (await loader.getHarness(MatButtonHarness.with({ text: 'Check for updates' }))).click();
+      await fixture.whenStable();
+      expect(catalog.check).toHaveBeenCalledTimes(1);
+      expect(message()?.textContent).toBe(expected);
     });
   });
 

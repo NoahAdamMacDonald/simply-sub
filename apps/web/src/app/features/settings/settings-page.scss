@@ -26,3 +26,24 @@ mat-radio-group {
   margin: 8px 0 0;
   color: var(--ss-text-muted);
 }
+
+.catalog {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+
+  p {
+    margin: 0;
+  }
+}
+
+// A live region, so it stays in the page while empty, when it takes no room.
+.check-message {
+  margin: 0;
+  color: var(--ss-text-muted);
+
+  &:not(:empty) {
+    margin-top: 8px;
+  }
+}

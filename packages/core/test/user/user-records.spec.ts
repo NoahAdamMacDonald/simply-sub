@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  catalogCacheSchema,
   customSubscriptionSchema,
   paymentCardSchema,
   profileRankingSchema,
@@ -8,7 +9,17 @@ import {
   tagSchema,
 } from '../../src';
 import { issues, withValue } from '../catalog/helpers';
-import { card, customPlanId, customSub, list, ranking, settings, tag } from './fixtures';
+import {
+  card,
+  catalogCache,
+  customPlanId,
+  customSub,
+  fullCatalogCache,
+  list,
+  ranking,
+  settings,
+  tag,
+} from './fixtures';
 
 describe('subscriptionListSchema', () => {
   it('accepts a list and returns it unchanged', () => {
@@ -178,5 +189,45 @@ describe('settingsSchema', () => {
     ['salesTaxPercent', 101],
   ])('rejects a %s of %j', (field, value) => {
     expect(issues(settingsSchema, { ...settings, [field]: value })).toHaveLength(1);
+  });
+});
+
+describe('catalogCacheSchema', () => {
+  it('accepts a region file under its region, and the full catalog under catalog', () => {
+    expect(catalogCacheSchema.parse(catalogCache)).toEqual(catalogCache);
+    expect(catalogCacheSchema.parse(fullCatalogCache)).toEqual(fullCatalogCache);
+  });
+
+  it.each([
+    ['a region file under another region', { ...catalogCache, key: 'US' }],
+    ['a region file as the full catalog', { ...catalogCache, key: 'catalog' }],
+    ['the full catalog under a region', { ...fullCatalogCache, key: 'CA' }],
+  ])('rejects %s', (_name, record) => {
+    expect(issues(catalogCacheSchema, record)).toEqual([
+      "key: Use the file's meta.region, or catalog for the full catalog",
+    ]);
+  });
+
+  it('rejects a key that is neither a region nor catalog', () => {
+    expect(issues(catalogCacheSchema, { ...catalogCache, key: 'ca' })).toContain(
+      'key: Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL',
+    );
+  });
+
+  it("checks the file with the catalog's own schemas", () => {
+    const tampered = withValue(
+      catalogCache,
+      ['snapshot', 'data', 'providers', 0, 'website'],
+      'javascript:alert(1)',
+    );
+    expect(new Set(issues(catalogCacheSchema, tampered))).toEqual(
+      new Set(['snapshot.data.providers.0.website: Use a full https:// URL']),
+    );
+  });
+
+  it('rejects a fetchedAt that toISOString would not write', () => {
+    expect(
+      issues(catalogCacheSchema, { ...catalogCache, fetchedAt: '2026-10-23T12:30:00Z' }),
+    ).toHaveLength(1);
   });
 });

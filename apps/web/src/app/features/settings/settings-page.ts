@@ -1,20 +1,30 @@
 import { Location } from '@angular/common';
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { Router } from '@angular/router';
 import { subdivisionName, taxAddedRegions, type Settings } from '@simply-sub/core';
+import { catalogDate } from '../../core/catalog/catalog-dates';
+import { CatalogStore, type CatalogCheckOutcome } from '../../core/catalog/catalog-store';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { ThemeService, type ThemeMode } from '../../core/theme/theme-service';
 import { BudgetSetting } from './budget-setting';
 import { LocationDialog } from './location-dialog';
 import { percentText, placeSummary } from './place-names';
 
+/** What [Check for updates] found. */
+const checkMessages: Record<CatalogCheckOutcome, string> = {
+  current: 'You have the latest catalog.',
+  updated: 'Downloaded the latest catalog.',
+  offline: "You're offline. Try again when you're back online.",
+  failed: "Couldn't check for updates. Try again later.",
+};
+
 /**
- * Settings (PROJECT-PLAN P13): budgets, appearance, and where the user is (📍). Tags, backups (M6.9), the app lock
- * (M6.10) and the catalog's version come with their tasks.
+ * Settings (PROJECT-PLAN P13): budgets, appearance, where the user is (📍) and the catalog's version. Tags, backups
+ * (M6.9) and the app lock (M6.10) come with their tasks.
  */
 @Component({
   selector: 'ss-settings-page',
@@ -24,6 +34,7 @@ import { percentText, placeSummary } from './place-names';
 })
 export class SettingsPage {
   private readonly settings = inject(SettingsStore);
+  private readonly catalog = inject(CatalogStore);
   private readonly theme = inject(ThemeService);
   private readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
@@ -54,6 +65,18 @@ export class SettingsPage {
     return `Sales tax ${percentText(tax.percent)} (${where})`;
   });
 
+  /** The Catalog line: "Updated Oct 22, 2026 · version 37f6573". */
+  protected readonly catalogLine = computed(() => {
+    const version = this.catalog.version();
+    const generatedAt = this.catalog.generatedAt();
+    return version === undefined || generatedAt === undefined
+      ? 'Not downloaded yet'
+      : `Updated ${catalogDate(generatedAt)} · version ${version}`;
+  });
+
+  /** What the last [Check for updates] found: only the user's own checks, not the automatic ones. */
+  protected readonly checkMessage = signal('');
+
   /** ←: back where the user came from, or Home when Settings was the first page opened. */
   protected back(): void {
     if (this.router.lastSuccessfulNavigation()?.previousNavigation) {
@@ -65,6 +88,11 @@ export class SettingsPage {
 
   protected setMode(mode: ThemeMode): void {
     this.theme.setMode(mode);
+  }
+
+  protected async checkForUpdates(): Promise<void> {
+    this.checkMessage.set('Checking for updates…');
+    this.checkMessage.set(checkMessages[await this.catalog.check()]);
   }
 
   protected editLocation(saved: Settings): void {
