@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  // Room for the first field's floating label: a dialog's content scrolls, and would clip it.
+  padding-top: 8px;
+}
+
+// Fields whose hint can wrap take the room it needs (subscriptSizing="dynamic"), with space before what follows.
+mat-form-field[subscriptSizing='dynamic'] {
+  margin-bottom: 12px;
+}
+
+.tax-note,
+.tax-rate {
+  margin: 0 0 4px;
+}
+
+.tax-note {
+  color: var(--ss-text-muted);
+}
+
+mat-checkbox {
+  margin: -8px 0 8px -10px;
+}

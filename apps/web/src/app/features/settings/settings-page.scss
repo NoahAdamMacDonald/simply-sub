@@ -1,0 +1,28 @@
+.back {
+  margin: -8px 0 8px -8px;
+}
+
+section {
+  max-width: 640px;
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+}
+
+h2 {
+  margin: 0 0 8px;
+  font: var(--mat-sys-title-medium);
+}
+
+mat-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-left: -10px;
+}
+
+.tax {
+  margin: 8px 0 0;
+  color: var(--ss-text-muted);
+}

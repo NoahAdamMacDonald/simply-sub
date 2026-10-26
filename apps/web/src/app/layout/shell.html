@@ -30,6 +30,13 @@
     }
 
     <main #main id="main" tabindex="-1">
+      @if (inMemory()) {
+        <p class="memory-notice">
+          <mat-icon>cloud_off</mat-icon>
+          Nothing is being saved: your browser is blocking local storage. What you enter lasts until
+          you close this tab.
+        </p>
+      }
       <router-outlet />
     </main>
   </mat-sidenav-content>

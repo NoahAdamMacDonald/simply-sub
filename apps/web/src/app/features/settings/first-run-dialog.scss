@@ -1,0 +1,19 @@
+// The form wraps the dialog's title, content and actions, which the dialog lays out as its own children.
+form {
+  display: contents;
+}
+
+.budgets {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 16px;
+
+  mat-form-field {
+    flex: 1 1 160px;
+  }
+}
+
+.privacy {
+  margin: 8px 0 0;
+  color: var(--ss-text-muted);
+}

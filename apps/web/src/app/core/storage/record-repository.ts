@@ -41,7 +41,10 @@ export abstract class RecordRepository<T extends IdTable> {
   readonly status: Signal<StorageStatus>;
 
   protected constructor(private readonly table: T) {
-    this.stored = rxResource({ stream: () => this.storage.watch(table) });
+    this.stored = rxResource({
+      params: () => this.storage.mode(),
+      stream: () => this.storage.watch(table),
+    });
     this.records = computed(() =>
       this.stored.hasValue()
         ? this.stored.value().filter((record) => record.deletedAt === undefined)

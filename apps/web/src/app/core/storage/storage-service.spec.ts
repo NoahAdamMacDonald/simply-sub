@@ -81,6 +81,23 @@ describe('StorageService', () => {
     expect(list.name).toBe('Work');
   });
 
+  it("doesn't ask for persistent storage in memory", async () => {
+    stubStorageManager();
+    const storage = TestBed.inject(StorageService);
+    storage.useMemory();
+    expect(storage.mode()).toBe('memory');
+    await TestBed.inject(ListsRepository).create({ name: 'Work' });
+    expect(persisted).not.toHaveBeenCalled();
+  });
+
+  it('keeps nothing of the browser database in memory', async () => {
+    const lists = TestBed.inject(ListsRepository);
+    await lists.create({ name: 'Work' });
+    await until(() => lists.records().length === 1);
+    TestBed.inject(StorageService).useMemory();
+    await until(() => lists.status() === 'ready' && lists.records().length === 0);
+  });
+
   it('makes UUID v7 ids that carry the time they were made', () => {
     const storage = TestBed.inject(StorageService);
     const id = storage.newId('2026-10-25T12:00:00.000Z');

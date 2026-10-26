@@ -179,3 +179,19 @@ const otherRegions: Readonly<Record<string, string>> = { [globalRegion]: 'USD', 
 export function regionCurrency(region: string): string | undefined {
   return Object.hasOwn(otherRegions, region) ? otherRegions[region] : currencyOfRegion.get(region);
 }
+
+/** The currency to show `region`'s prices in when none is given: its own when there are rates for it, else USD. */
+export function defaultCurrency(region: string, currencies?: readonly string[]): string {
+  const own = regionCurrency(region);
+  return own !== undefined && (!currencies || currencies.includes(own)) ? own : 'USD';
+}
+
+/**
+ * The currencies the ECB publishes reference rates for, the euro included: the ones a price can be converted into,
+ * so the ones Settings offers before the app has fetched rates (ecbCurrencies gives the live list). Checked against
+ * GET /fx on 2026-10-26; the Bulgarian lev left when Bulgaria joined the euro in 2026.
+ */
+export const displayCurrencies: readonly string[] = [
+  'AUD BRL CAD CHF CNY CZK DKK EUR GBP HKD HUF IDR ILS INR ISK',
+  'JPY KRW MXN MYR NOK NZD PHP PLN RON SEK SGD THB TRY USD ZAR',
+].flatMap((row) => row.split(' '));

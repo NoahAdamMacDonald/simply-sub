@@ -1,4 +1,4 @@
-import { DestroyRef, InjectionToken, Service, inject } from '@angular/core';
+import { DestroyRef, InjectionToken, Service, inject, signal } from '@angular/core';
 import type { Timestamp, UserRecords, UserTable } from '@simply-sub/core';
 import { from, switchMap, type Observable } from 'rxjs';
 import { v7 } from 'uuid';
@@ -10,6 +10,12 @@ import type { IndexedDbDependencies, StorageEngine } from './storage-engine';
 export const INDEXED_DB = new InjectionToken<IndexedDbDependencies>('INDEXED_DB');
 
 /**
+ * Where the user's data is kept: the browser's IndexedDB, or memory when that's blocked and the user carries on anyway
+ * (PROJECT-PLAN P15). Kept in memory, it's gone when the tab closes.
+ */
+export type StorageMode = 'browser' | 'memory';
+
+/**
  * Opens the user database on first use, for the repositories, which are the only code that use it. Dexie, Zod and
  * the record schemas then load as a chunk of their own (216 kB), which keeps them out of the initial bundle.
  */
@@ -18,6 +24,7 @@ export class StorageService {
   private readonly clock = inject(ClockService);
   private readonly rejectedRecords = inject(RejectedRecords);
   private readonly indexedDB = inject(INDEXED_DB, { optional: true });
+  private readonly currentMode = signal<StorageMode>('browser');
   private opening?: Promise<StorageEngine>;
   private persistenceAsked = false;
   private lastIdTime = 0;
@@ -29,24 +36,27 @@ export class StorageService {
     });
   }
 
+  /** Where the data is kept. The repositories load their records again when it changes. */
+  readonly mode = this.currentMode.asReadonly();
+
   /**
    * The storage engine, loaded and opened the first time it's asked for. If that fails (IndexedDB blocked), the
    * reason goes to the console once, and the repositories' status is `error`.
    */
   engine(): Promise<StorageEngine> {
-    this.opening ??= import('./storage-engine')
-      .then(({ openStorageEngine }) =>
-        openStorageEngine({
-          dependencies: this.indexedDB ?? undefined,
-          onRejected: (rejected) => this.rejectedRecords.report(rejected),
-          onWrite: () => this.askForPersistence(),
-        }),
-      )
-      .catch((error: unknown) => {
-        console.error('The saved data could not be opened:', error);
-        throw error;
-      });
+    this.opening ??= this.open(this.currentMode());
     return this.opening;
+  }
+
+  /**
+   * Keeps the data in memory from now on: IndexedDB is blocked, and the user chose [Continue anyway] (P15). It starts
+   * empty, and every repository reloads from it. Nothing is saved, so the first-run dialog asks again on each visit.
+   */
+  useMemory(): void {
+    if (this.currentMode() === 'memory') return;
+    this.opening?.then((engine) => engine.close()).catch(() => undefined);
+    this.opening = undefined;
+    this.currentMode.set('memory');
   }
 
   /** Every valid record in `table`, live (StorageEngine.watch). */
@@ -74,6 +84,28 @@ export class StorageService {
       this.idCounter++;
     }
     return v7({ msecs: this.lastIdTime, seq: this.idCounter });
+  }
+
+  private async open(mode: StorageMode): Promise<StorageEngine> {
+    try {
+      // The in-memory IndexedDB (fake-indexeddb, 57 kB) loads only for that mode, as a chunk of its own.
+      const [{ openStorageEngine }, dependencies] = await Promise.all([
+        import('./storage-engine'),
+        mode === 'memory'
+          ? import('./memory-indexed-db').then(({ memoryIndexedDb }) => memoryIndexedDb())
+          : (this.indexedDB ?? undefined),
+      ]);
+      return await openStorageEngine({
+        dependencies,
+        onRejected: (rejected) => this.rejectedRecords.report(rejected),
+        onWrite: () => {
+          if (mode === 'browser') this.askForPersistence();
+        },
+      });
+    } catch (error) {
+      console.error('The saved data could not be opened:', error);
+      throw error;
+    }
   }
 
   /**

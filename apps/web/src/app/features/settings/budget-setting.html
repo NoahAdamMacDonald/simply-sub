@@ -1,0 +1,35 @@
+@if (editing()) {
+  <form [formRoot]="form" class="editing">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ label() }}</mat-label>
+      <input
+        #amountInput
+        matInput
+        type="number"
+        step="any"
+        [formField]="form.amount"
+        (keydown.escape)="cancel()"
+      />
+      <span matTextSuffix>{{ currency() }}</span>
+      <mat-hint>Empty means no budget</mat-hint>
+      <mat-error>{{ error() }}</mat-error>
+    </mat-form-field>
+    <div class="actions">
+      <button matButton="filled" type="submit">Save</button>
+      <button matButton type="button" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+} @else {
+  <p class="shown">
+    <span>{{ label() }}: {{ amountText() }}</span>
+    <button
+      #editButton
+      matIconButton
+      type="button"
+      [attr.aria-label]="'Edit ' + label()"
+      (click)="edit()"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+  </p>
+}

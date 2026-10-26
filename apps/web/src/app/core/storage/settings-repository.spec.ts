@@ -80,4 +80,42 @@ describe('SettingsRepository', () => {
       { ...fields, key: 'settings', updatedAt: '2026-10-25T12:00:00.000Z' },
     ]);
   });
+
+  describe('update', () => {
+    it('changes some settings, keeps the rest, and clears one set to undefined', async () => {
+      await repository.save(fields);
+      storage.clock.time = '2026-10-26T08:00:00.000Z';
+      const updated = await repository.update({ theme: 'dark', monthlyBudget: undefined });
+      expect(updated).toEqual({
+        country: 'CA',
+        subdivision: 'CA-ON',
+        currency: 'CAD',
+        theme: 'dark',
+        key: 'settings',
+        updatedAt: '2026-10-26T08:00:00.000Z',
+      });
+      expect(await storedRows(storage.indexedDB, 'settings')).toEqual([updated]);
+    });
+
+    it('writes nothing before the first run', async () => {
+      expect(await repository.update({ theme: 'dark' })).toBeUndefined();
+      expect(await storedRows(storage.indexedDB, 'settings')).toEqual([]);
+    });
+
+    it('writes nothing over settings it cannot read, and leaves them for the first run', async () => {
+      vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+      const unreadable = { key: 'settings', country: 'Canada' };
+      await plantRows(storage.indexedDB, 'settings', [unreadable]);
+      expect(await repository.update({ theme: 'dark' })).toBeUndefined();
+      expect(await storedRows(storage.indexedDB, 'settings')).toEqual([unreadable]);
+    });
+
+    it('refuses a change that makes the settings invalid', async () => {
+      const saved = await repository.save(fields);
+      await expect(repository.update({ subdivision: 'US-NY' })).rejects.toThrow(
+        'Invalid settings record settings: subdivision: custom',
+      );
+      expect(await storedRows(storage.indexedDB, 'settings')).toEqual([saved]);
+    });
+  });
 });

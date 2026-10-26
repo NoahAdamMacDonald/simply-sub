@@ -1,1 +1,34 @@
+<button matIconButton type="button" class="back" aria-label="Back" (click)="back()">
+  <mat-icon>arrow_back</mat-icon>
+</button>
 <h1>Settings</h1>
+
+@if (saved(); as saved) {
+  <section aria-labelledby="budgets-heading">
+    <h2 id="budgets-heading">Budgets</h2>
+    <ss-budget-setting budget="monthlyBudget" label="Monthly budget" />
+    <ss-budget-setting budget="annualBudget" label="Annual budget" />
+  </section>
+
+  <section aria-labelledby="appearance-heading">
+    <h2 id="appearance-heading">Appearance</h2>
+    <mat-radio-group
+      aria-labelledby="appearance-heading"
+      [value]="mode()"
+      (change)="setMode($event.value)"
+    >
+      @for (choice of modes; track choice.value) {
+        <mat-radio-button [value]="choice.value">{{ choice.label }}</mat-radio-button>
+      }
+    </mat-radio-group>
+  </section>
+
+  <section aria-labelledby="location-heading">
+    <h2 id="location-heading">Location and currency</h2>
+    <button matButton="outlined" type="button" (click)="editLocation(saved)">
+      <mat-icon>location_on</mat-icon>
+      {{ place() }}
+    </button>
+    <p class="tax">{{ salesTax() }}</p>
+  </section>
+}

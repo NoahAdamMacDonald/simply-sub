@@ -1,8 +1,9 @@
 // CSP and Trusted Types check of the production build (wrangler dev serves it with public/_headers).
 // Usage: node csp-check.cjs <deps dir> <output dir> <base url>
 // Records every securitypolicyviolation event and console error while visiting every page, navigating in the app,
-// toggling the theme, opening the drawer and the error snackbar. Cloudflare Web Analytics' beacon tag, as the live site
-// gets it, is added to each HTML page the way Cloudflare's edge does, and its reports are aborted (never sent).
+// toggling the theme, opening the drawer and the error snackbar, the first-run and 📍 dialogs, and in-memory mode with
+// IndexedDB blocked (M4.2). Cloudflare Web Analytics' beacon tag, as the live site gets it, is added to each HTML page
+// the way Cloudflare's edge does, and its reports are aborted (never sent).
 const path = require('path');
 
 const [depsDir, outDir, baseUrl] = process.argv.slice(2);
@@ -28,7 +29,39 @@ function check(name, ok, detail = '') {
   console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? `  -- ${detail}` : ''}`);
 }
 
+/** A new context has no settings: the first-run dialog (M4.2) asks first. */
+async function completeFirstRun(page) {
+  const dialog = page.locator('mat-dialog-container');
+  await dialog.waitFor({ timeout: 10000 });
+  // A select's menu, under the CSP: Canada's provinces.
+  await page
+    .locator('mat-form-field', { has: page.locator('mat-label', { hasText: 'Country' }) })
+    .locator('.mat-mdc-text-field-wrapper')
+    .click();
+  await page.getByRole('option', { name: 'Canada', exact: true }).click();
+  await page
+    .locator('mat-form-field', { has: page.locator('mat-label', { hasText: 'Province' }) })
+    .locator('.mat-mdc-text-field-wrapper')
+    .click();
+  await page.getByRole('option', { name: 'Ontario', exact: true }).click();
+  await page.getByRole('button', { name: 'Get started' }).click();
+  await dialog.waitFor({ state: 'detached' });
+}
+
+async function waitForServer() {
+  for (let i = 0; i < 120; i++) {
+    try {
+      if ((await fetch(baseUrl)).ok) return;
+    } catch {
+      // not up yet
+    }
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+  }
+  throw new Error(`No server at ${baseUrl}`);
+}
+
 (async () => {
+  await waitForServer();
   const live = await (
     await fetch('https://sub.simplely.ca/', { headers: { 'User-Agent': UA, Accept: 'text/html' } })
   ).text();
@@ -41,8 +74,23 @@ function check(name, ok, detail = '') {
   const rumReports = [];
   const beaconLoads = [];
 
-  async function newPage(viewport, colorScheme) {
-    const context = await browser.newContext({ viewport, colorScheme, userAgent: UA });
+  async function newPage(viewport, colorScheme, { blocked = false } = {}) {
+    const context = await browser.newContext({
+      viewport,
+      colorScheme,
+      userAgent: UA,
+      locale: 'en-CA',
+    });
+    if (blocked) {
+      await context.addInitScript(() => {
+        IDBFactory.prototype.open = function () {
+          throw new DOMException(
+            'The user denied permission to access the database.',
+            'SecurityError',
+          );
+        };
+      });
+    }
     await context.exposeBinding('__reportViolation', (_source, text) => violations.push(text));
     await context.addInitScript(() => {
       document.addEventListener('securitypolicyviolation', (event) => {
@@ -97,6 +145,7 @@ function check(name, ok, detail = '') {
     for (const url of PAGES) {
       await page.goto(baseUrl + url);
       await page.locator('main h1').waitFor();
+      if (url === '/') await completeFirstRun(page);
     }
     await page.waitForTimeout(1500);
     await page.screenshot({ path: path.join(outDir, `csp-${colorScheme}.png`) });
@@ -108,6 +157,7 @@ function check(name, ok, detail = '') {
     const { context, page } = await newPage({ width: 1280, height: 800 }, 'light');
     await page.goto(baseUrl + '/');
     await page.locator('main h1').waitFor();
+    await completeFirstRun(page);
     for (const name of SIDEBAR) {
       await page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name }).click();
       await page.waitForFunction(
@@ -135,16 +185,58 @@ function check(name, ok, detail = '') {
     const { context, page } = await newPage({ width: 360, height: 740 }, 'light');
     await page.goto(baseUrl + '/settings');
     await page.locator('main h1').waitFor();
+    await completeFirstRun(page);
     await page.getByRole('button', { name: 'Menu' }).click();
     await page.waitForTimeout(600);
     await page.screenshot({ path: path.join(outDir, 'csp-drawer.png') });
     await context.close();
   }
 
+  // Settings: a budget edited in place, Appearance, and the 📍 dialog.
+  {
+    const { context, page } = await newPage({ width: 1280, height: 800 }, 'dark');
+    await page.goto(baseUrl + '/settings');
+    await page.locator('main h1').waitFor();
+    await completeFirstRun(page);
+    await page.getByRole('button', { name: 'Edit Monthly budget' }).click();
+    await page.getByLabel('Monthly budget', { exact: true }).fill('120');
+    await page.keyboard.press('Enter');
+    await page.getByText('Monthly budget: $120').waitFor();
+    await page.getByRole('radio', { name: 'Light' }).check();
+    await page.getByRole('button', { name: /Ontario, Canada/ }).click();
+    await page.locator('mat-dialog-container').waitFor();
+    await page.getByText('Use my own rate').click();
+    await page.getByLabel('Sales tax rate').fill('5');
+    await page.getByRole('button', { name: 'Save' }).click();
+    await page.getByText('Sales tax 5% (your rate)').waitFor();
+    await page.screenshot({ path: path.join(outDir, 'csp-settings.png') });
+    check('Settings work under the CSP: budget, appearance, 📍', true);
+    await context.close();
+  }
+
+  // IndexedDB blocked: the notice, then in-memory mode (fake-indexeddb's chunk) and the first run.
+  {
+    const { context, page } = await newPage({ width: 1280, height: 800 }, 'light', {
+      blocked: true,
+    });
+    await page.goto(baseUrl + '/settings');
+    await page.getByRole('heading', { name: 'Nothing will be saved' }).waitFor();
+    await page.getByRole('button', { name: 'Continue anyway' }).click();
+    await completeFirstRun(page);
+    await page.getByText('Ontario, Canada (CAD)').waitFor();
+    await page.getByText('Nothing is being saved').waitFor();
+    await page.screenshot({ path: path.join(outDir, 'csp-memory.png') });
+    check('in-memory mode works under the CSP', true);
+    await context.close();
+  }
+
   await browser.close();
 
   // The deliberate snackbar error is the only console error expected.
-  const unexpected = problems.filter((line) => !line.includes('csp check'));
+  // So is the blocked-IndexedDB log line.
+  const unexpected = problems.filter(
+    (line) => !line.includes('csp check') && !line.includes('The saved data could not be opened'),
+  );
   check('no CSP or Trusted Types violations', violations.length === 0, violations.join(' | '));
   check(
     'no unexpected console errors or warnings',

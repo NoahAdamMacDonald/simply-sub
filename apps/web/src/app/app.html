@@ -1,1 +1,5 @@
-<ss-shell />
+@if (storageBlocked()) {
+  <ss-storage-blocked />
+} @else {
+  <ss-shell />
+}

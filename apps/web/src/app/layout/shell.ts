@@ -1,11 +1,12 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, ElementRef, inject, viewChild } from '@angular/core';
+import { Component, ElementRef, computed, inject, viewChild } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, map } from 'rxjs';
+import { StorageService } from '../core/storage/storage-service';
 import { Logo } from './logo';
 import { Sidebar } from './sidebar';
 
@@ -34,6 +35,11 @@ export class Shell {
   private readonly drawer = viewChild.required(MatSidenav);
   private readonly menuButton = viewChild<MatIconButton>('menuButton');
   private readonly main = viewChild.required<ElementRef<HTMLElement>>('main');
+
+  private readonly storage = inject(StorageService);
+
+  /** IndexedDB is blocked and the user chose to carry on, so nothing is saved (P15). */
+  protected readonly inMemory = computed(() => this.storage.mode() === 'memory');
 
   protected readonly narrow = toSignal(
     inject(BreakpointObserver)

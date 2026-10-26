@@ -1,0 +1,53 @@
+<mat-form-field appearance="outline">
+  <mat-label>Country</mat-label>
+  <mat-select [formField]="fields().country" (selectionChange)="countryChanged()">
+    @for (choice of countries; track choice.value) {
+      <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
+@if (taxAdded()) {
+  <mat-form-field appearance="outline">
+    <mat-label>{{ subdivisionLabel() }}</mat-label>
+    <mat-select [formField]="fields().subdivision">
+      @if (country() !== 'CA') {
+        <mat-option value="">Not given</mat-option>
+      }
+      @for (subdivision of subdivisions(); track subdivision.code) {
+        <mat-option [value]="subdivision.code">{{ subdivision.name }}</mat-option>
+      }
+    </mat-select>
+    <mat-error>{{ firstError(fields().subdivision) }}</mat-error>
+  </mat-form-field>
+}
+
+<mat-form-field appearance="outline" subscriptSizing="dynamic">
+  <mat-label>Currency</mat-label>
+  <mat-select [formField]="fields().currency" (selectionChange)="currencyChanged()">
+    @for (choice of currencies; track choice.value) {
+      <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
+    }
+  </mat-select>
+  <mat-hint>Prices in other currencies are converted</mat-hint>
+</mat-form-field>
+
+@if (!taxAdded()) {
+  <p class="tax-note">Prices for {{ countryName() }} already include sales tax.</p>
+} @else {
+  @if (builtInRate(); as rate) {
+    <p class="tax-rate">Sales tax {{ rate }}</p>
+    <mat-checkbox [formField]="fields().ownRate">Use my own rate</mat-checkbox>
+  }
+  @if (fields().ownRate().value()) {
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Sales tax rate</mat-label>
+      <input matInput type="number" step="any" [formField]="fields().salesTaxPercent" />
+      <span matTextSuffix>%</span>
+      @if (country() === 'US') {
+        <mat-hint>Your state and city sales tax on subscriptions, if any</mat-hint>
+      }
+      <mat-error>{{ firstError(fields().salesTaxPercent) }}</mat-error>
+    </mat-form-field>
+  }
+}

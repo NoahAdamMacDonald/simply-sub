@@ -962,6 +962,7 @@ item is sold in the region; `availability` does, and the app asks it first. `con
 
 **Converted prices**
 - Converted using daily ECB rates (Frankfurter, through `/api/v1/fx`, cached in the browser with the rate date).
+  Settings offers only the currencies the ECB has rates for (`displayCurrencies` in core, M4.2).
 - Shown with a **≈ prefix plus a small currency-exchange icon** (Material Symbols `currency_exchange`). The tooltip
   reads "Converted from 9.99 USD at 1.38 on 2026-10-22. You'll be charged in USD."
 - Native prices show no icon. The search filters offer a **"Native pricing only"** toggle.
@@ -975,19 +976,24 @@ item is sold in the region; `availability` does, and the app asks it first. `con
 Catalog prices are what providers list, and whether that includes sales tax depends on the buyer's region.
 Canadian and US prices exclude it (Netflix Canada adds GST/HST, so $18.99 is $21.46 in Ontario), while EU, UK,
 Australian and most other prices include VAT or GST. Without tax, a Canadian's totals would come out 5–15% low.
-The rules live in `packages/core/src/tax/` and run in M7.1:
+The rules live in `packages/core/src/tax/`: the rates and subdivision lists since M4.2 (`salesTaxRate`,
+`subdivisionsOf`), and the maths on charges in M7.1:
 - **The buyer's location decides**, not where the price came from: Settings' `country` and `subdivision`. In a
   **tax-added region** (`taxAddedRegions` in core: CA and US), tax is added to every catalog price, converted ones
   included, since foreign services such as Proton must collect GST/HST from Canadians. Elsewhere prices already
   include it, and nothing is added. An item bought in another region (`ListItem.region`) follows that region's
   rule, but gets a rate only in the user's own country, the only one whose rate the app knows.
 - **Rates:**
-  - A built-in table for Canada's 13 provinces and territories: each one's combined rate on digital
-    subscriptions, GST/HST plus the provincial tax where it covers digital services. It's checked against official
-    sources when it's built (M7.1) and records the date checked.
+  - A built-in table for Canada's 13 provinces and territories (`canadianSalesTax`): each one's combined rate on
+    digital subscriptions, GST/HST plus the provincial tax where it covers digital services (BC's PST, Manitoba's
+    RST, Saskatchewan's PST and Quebec's QST, each charged on the price before GST, so the rates add up). Built in
+    M4.2 and checked on 2026-10-26 against the CRA's GST/HST rate table and each province's own pages
+    (`canadianSalesTaxCheckedOn`): AB, NT, NU and YT 5%, SK 11%, BC and MB 12%, ON 13%, NS 14% (since 2025-04-01),
+    QC 14.975%, NB, NL and PE 15%.
   - No built-in US rates. Whether streaming and software are taxed varies by state and city, so a table would
     often be wrong. US users enter their own percentage.
-  - `salesTaxPercent` replaces the built-in rate anywhere.
+  - `salesTaxPercent` replaces the built-in rate anywhere tax is added. Outside CA and US it's ignored, and the
+    Settings forms clear it when the country changes.
 - **Amounts the user types** (a custom plan's price, a price override) are what they pay, tax included. A "plus
   tax" checkbox (`plusTax`) marks an amount copied from an ad, and tax is then added like on catalog prices.
 - **Where it shows:**
@@ -998,8 +1004,11 @@ The rules live in `packages/core/src/tax/` and run in M7.1:
   - An item's billing details show the amount charged, tax included.
 - **Payment cards** (section 9.3): cash back and FX fees apply to the amount charged, tax included.
 - **Settings:** the first-run dialog and the 📍 dialog ask for the province or state, in a menu that lists the
-  chosen country's subdivisions (ISO 3166-2, kept in core), shown only for tax-added countries. Changing it
-  re-prices every total.
+  chosen country's subdivisions (ISO 3166-2 codes with English names, kept in core for CA and US only: the 13
+  provinces and territories, the 50 states and DC; Puerto Rico and the other territories are countries of their
+  own), shown only for tax-added countries. A Canadian province is required, since it sets the rate; a US state is
+  optional. Under it the form shows "Sales tax 13% (Ontario)" and a "Use my own rate" checkbox (a US user always
+  gives their own rate). Changing it re-prices every total.
 
 ---
 
@@ -1761,13 +1770,25 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
   - Keyboard focus is a 2px ring in `--ss-accent-text`: Material's strong focus indicators (in
     `_material-theme.scss`) and the same outline on custom links. Material's default focus state layer is too
     faint for the 3:1 contrast that focus indicators need.
+  - Form fields are outlined (`<mat-form-field appearance="outline">`, M4.2), so labels, hints and suffixes sit on
+    the card colour, where the token contrasts above hold. The filled appearance sits on Material's
+    `surface-variant`, an unmapped palette colour, and its labels fail contrast on it in dark mode. It's set on each
+    field: providing `MAT_FORM_FIELD_DEFAULT_OPTIONS` in `app.config.ts` puts Material's form field in the initial
+    bundle (600 kB).
 
   Always show the rank **name** next to its colour, for colour-blind users.
 - **Theme mode:** System (follows `prefers-color-scheme` live), Light or Dark. `ThemeService` sets
-  `data-theme` on `<html>` and `color-scheme` follows it. The mode is saved in `localStorage` (`ss-theme`), which an
-  inline script in `index.html` reads before the first paint. From M4.2, `settings.theme` in Dexie is the source of
-  truth and `localStorage` stays as the startup cache. The production build doesn't inline critical CSS, because
+  `data-theme` on `<html>` and `color-scheme` follows it. The production build doesn't inline critical CSS, because
   the inliner would drop the `[data-theme='dark']` rules and flash the light theme.
+  - **Saved:** `settings.theme` in Dexie is the source of truth (M4.2). `localStorage` (`ss-theme`) is the startup
+    cache, which an inline script in `index.html` reads before the first paint, since IndexedDB can't be read that
+    early. The script and its CSP hash didn't change: same key, same values.
+  - **When they disagree, Dexie wins.** `ThemeService` starts from the cache, then follows the saved settings through
+    the live query once they load and whenever they change: a toggle in another tab or an import updates every tab,
+    and each rewrites the cache. A toggle writes both. While its writes are on their way, saved settings older than
+    the last one it wrote are ignored, so quick toggles never flash back.
+  - **Before the first run** there's no settings record to save it in (country and currency are required), so the
+    choice is only cached, and the first-run dialog saves the theme on screen.
 - **Rank chips:** a coloured dot (vivid fill) + the rank name in normal text colour. This is readable in both
   themes and in every rank.
 - **Budget bars:** a vivid fill with a dark label inside (as in the wireframes). Green under 75%, amber at
@@ -2036,11 +2057,17 @@ prompted after each big change, or weekly).
 - **Only the repositories import Dexie:** ESLint rejects a `dexie` import anywhere else in the app. The app lock
   (M6.10) wraps `StorageEngine`, the one class that reads and writes rows.
 - **Loaded on first use:** Dexie, Zod and the record schemas (216 kB minified, 60 kB compressed) load as a chunk of
-  their own when a repository first needs them. The repositories themselves add 14 kB to the initial bundle (440 kB
-  of its 500 kB budget). Core imports Zod as `import * as z from 'zod'`, which ESLint enforces: `import { z }`
+  their own when a repository first needs them. Since M4.2 the settings load at startup (the theme and the first-run
+  check need them), which brought `rxResource`, the storage service and the settings store into the initial bundle:
+  466 kB of its 500 kB budget, from 426 kB. The first-run dialog, its form and the locale defaults stay lazy. Core imports Zod as `import * as z from 'zod'`, which ESLint enforces: `import { z }`
   brings all of Zod, every locale's messages included, and made the chunk 541 kB.
 - **Persistent storage** is requested after the first write, not on load: Firefox asks the user, and the question
   only makes sense once there's something to keep.
+- **IndexedDB blocked** (some private browsing modes, or site data blocked): the repositories' status is `error`, and
+  the app shows the P15 notice in place of the shell. [Continue anyway] calls `StorageService.useMemory()`: the same
+  Dexie database opens on `fake-indexeddb` (57 kB, a chunk loaded only then), and every repository reloads from it
+  through its `mode` parameter, so everything works and nothing is saved. A line at the top of every page says so,
+  the first-run dialog asks again on each visit, and persistent storage isn't requested.
 - **Tests** run on `fake-indexeddb`, loaded in `test-setup.ts` (Dexie's live queries never run without a global
   IndexedDB), with a fresh database for each test (`storage.testing.ts`).
 
@@ -2245,6 +2272,24 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3).
+
+**Resolved (2026-10-26, M4.2)**
+- **Canadian sales-tax rates** are built now, not in M7.1: the first-run and 📍 dialogs show "Sales tax 13%
+  (Ontario)". Checked on 2026-10-26 against the CRA and the provinces' own pages (section 4.8). M7.1 builds the tax
+  on charges. Subdivision lists live in core for CA and US only.
+- **Theme:** `settings.theme` wins over the `localStorage` cache, live across tabs and imports; the inline script
+  and its hash are unchanged (section 8.1).
+- **First run:** the dialog opens only once the settings have loaded and none are saved, so it never flashes, and it
+  can't be dismissed without saving: everything is prefilled from the browser's languages except a Canadian's
+  province, which no locale or time zone can tell (Ontario and Quebec share America/Toronto). "Import a backup
+  instead" comes with M6.9. The defaults: the first country a language names (`en-CA`), else the one it implies
+  (`fr` → France), else the US; the currency follows `GET /providers`' rule.
+- **Currencies offered** are the ones the ECB has rates for (`displayCurrencies`, 30 of them), since a price can
+  only be converted into those. A country whose own currency isn't one of them defaults to US dollars.
+- **IndexedDB blocked:** [Continue anyway] runs every repository in memory, on `fake-indexeddb` loaded only then
+  (section 11.1), so later tasks have nothing to add for it.
+- **Settings page (P13) in M4.2:** budgets, Appearance and the 📍 dialog. Tags have no task yet; backups (M6.9), the
+  app lock (M6.10) and the catalog line come with their tasks.
 
 **Resolved (2026-10-25, M4.1)**
 - **User records** are strict Zod schemas in `packages/core/src/user/`, one file per record, with types from `z.infer`
