@@ -124,6 +124,7 @@ const source: CatalogSource = {
       prices: [price(35)],
     },
   ],
+  resellers: [],
   logos: new Map(),
 };
 

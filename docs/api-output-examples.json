@@ -309,10 +309,28 @@
                           { "region": "GLOBAL", "currency": "EUR", "amount": 5.00, "interval": "month", "intervalCount": 1, "autoRenew": false, "taxIncluded": { "quote": "Including VAT." }, "lastVerified": "2026-10-10", "sourceUrl": "https://mullvad.net/en/pricing" }
                         ]
                       }
+                    ],
+                    "resellers": [
+                      {
+                        "reseller": "amazon",
+                        "approvedBy": { "url": "https://mullvad.net/en/help/partnerships-and-resellers", "quotes": ["Amazon - CA"] },
+                        "offers": [
+                          {
+                            "plan": "mullvad.vpn",
+                            "prices": [
+                              { "region": "CA", "currency": "CAD", "amount": 87.00, "interval": "month", "intervalCount": 12, "autoRenew": false, "lastVerified": "2026-10-26", "sourceUrl": "https://www.amazon.ca/Mullvad-VPN-Devices-Protect-Security/dp/B092M5G1G7/" }
+                            ],
+                            "notes": "A scratch card in the post, sold by Mullvad VPN on Amazon"
+                          }
+                        ]
+                      }
                     ]
                   }
                 ],
-                "bundles": []
+                "bundles": [],
+                "resellers": [
+                  { "id": "amazon", "name": "Amazon", "website": "https://www.amazon.com", "iconUrl": "https://sub.simplely.ca/icons/amazon.webp", "domains": ["amazon.ca"] }
+                ]
               },
               "meta": {
                 "catalogVersion": "c4f9a21",
@@ -559,10 +577,28 @@
                           { "region": "GLOBAL", "currency": "EUR", "amount": 5.00, "interval": "month", "intervalCount": 1, "autoRenew": false, "taxIncluded": { "quote": "Including VAT." }, "lastVerified": "2026-10-10", "sourceUrl": "https://mullvad.net/en/pricing" }
                         ]
                       }
+                    ],
+                    "resellers": [
+                      {
+                        "reseller": "amazon",
+                        "approvedBy": { "url": "https://mullvad.net/en/help/partnerships-and-resellers", "quotes": ["Amazon - CA"] },
+                        "offers": [
+                          {
+                            "plan": "mullvad.vpn",
+                            "prices": [
+                              { "region": "CA", "currency": "CAD", "amount": 87.00, "interval": "month", "intervalCount": 12, "autoRenew": false, "lastVerified": "2026-10-26", "sourceUrl": "https://www.amazon.ca/Mullvad-VPN-Devices-Protect-Security/dp/B092M5G1G7/" }
+                            ],
+                            "notes": "A scratch card in the post, sold by Mullvad VPN on Amazon"
+                          }
+                        ]
+                      }
                     ]
                   }
                 ],
-                "bundles": []
+                "bundles": [],
+                "resellers": [
+                  { "id": "amazon", "name": "Amazon", "website": "https://www.amazon.com", "iconUrl": "https://sub.simplely.ca/icons/amazon.webp", "domains": ["amazon.ca"] }
+                ]
               },
               "meta": {
                 "catalogVersion": "c4f9a21",

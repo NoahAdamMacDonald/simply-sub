@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import { addDuplicateIssues } from './checks';
+import { addDuplicateIssues, choices } from './checks';
 import { featureValueSchema } from './feature';
 import {
   aliasesSchema,
@@ -13,6 +13,7 @@ import {
   textSchema,
 } from './formats';
 import { pricesSchema } from './price';
+import { resellerListingSchema } from './reseller';
 
 // One provider file, data/providers/<id>.yaml (BLUEPRINT §4.3). The schema checks each file on its own. Feature
 // ids and values against the registry, category ids, and add-on and plan references are checked by
@@ -128,6 +129,13 @@ export const providerSchema = z
       .min(1, 'Leave addOns out instead of listing none')
       .describe('Extras bought on top of a plan; plans list the ones they allow in addOnIds')
       .optional(),
+    resellers: z
+      .array(resellerListingSchema)
+      .min(1, 'Leave resellers out instead of listing none')
+      .describe(
+        "Shops the provider's own site names as official resellers of its plans, with their regular prices (BLUEPRINT §4.9)",
+      )
+      .optional(),
   })
   .superRefine((provider, ctx) => {
     // Plan and add-on ids live under the provider's id, so they're unique across the catalog. A badly formed
@@ -153,6 +161,30 @@ export const providerSchema = z
       (index) => ids[index].path,
     );
     addDuplicateIssues(ctx, provider.availableIn ?? [], (index) => ['availableIn', index]);
+    const resellers = provider.resellers ?? [];
+    addDuplicateIssues(
+      ctx,
+      resellers.map((listing) => listing.reseller),
+      (index) => ['resellers', index, 'reseller'],
+    );
+    const planIds = provider.plans.map((plan) => plan.id);
+    resellers.forEach((listing, index) => {
+      listing.offers.forEach((offer, offerIndex) => {
+        if (!planIds.includes(offer.plan)) {
+          ctx.addIssue({
+            code: 'custom',
+            message: `"${offer.plan}" isn't a plan in this file${choices(offer.plan, planIds)}`,
+            path: ['resellers', index, 'offers', offerIndex, 'plan'],
+          });
+        }
+      });
+      // One offer per plan: a plan sold in several stores has all their prices, each with its region.
+      addDuplicateIssues(
+        ctx,
+        listing.offers.map((offer) => offer.plan),
+        (offerIndex) => ['resellers', index, 'offers', offerIndex, 'plan'],
+      );
+    });
   })
   .meta({
     title: 'Simply Sub provider',

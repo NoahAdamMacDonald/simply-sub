@@ -9,7 +9,8 @@
   <div class="table-scroll" role="region" aria-labelledby="cases-caption" tabindex="0">
     <table>
       <caption id="cases-caption">
-        Fixed cases, converted with GET /fx's example rates
+        Fixed cases, converted with GET /fx's example rates of 2026-10-21 (1 CAD = 0.664 EUR), not
+        today's
       </caption>
       <thead>
         <tr>
@@ -38,6 +39,7 @@
   </div>
 
   <h3>Your catalog, with today's rates</h3>
+  <p class="note">{{ ratesNote() }}</p>
   @for (plan of plans(); track plan.id) {
     <div class="plan">
       <span class="plan-name">{{ plan.name }}</span>

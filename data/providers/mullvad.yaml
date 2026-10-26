@@ -13,7 +13,9 @@ notes: >-
 
 # Prices read 2026-10-26 on /en/pricing: "€5" a month for 1 month, 1 year or 1 decade ("the exact same rate"), and
 # "It's one flat monthly rate for ultimate flexibility. Including VAT." The CA$7.84 shown there is "€5 is
-# equivalent to", not a CAD price: CAD is taken for cash only.
+# equivalent to", not a CAD price: CAD is taken for cash only. The ECB's rates of 2026-10-26 convert €5 to CA$7.85
+# and US$5.59, as the page's own figures do. The checkout also sells 2, 3 and 6 months (seen by the project owner on
+# 2026-10-26; it needs an account), at the same €5 a month.
 
 # VPN features, read 2026-10-25 on mullvad.net: devices and anonymous signup on /en/vpn; 50 server countries on
 # /en/servers; WireGuard only since OpenVPN's removal on 2026-01-15 (/en/blog/removing-openvpn-15th-january-2026),
@@ -54,6 +56,33 @@ plans:
         sourceUrl: https://mullvad.net/en/pricing
       - region: GLOBAL
         currency: EUR
+        amount: 10
+        interval: month
+        intervalCount: 2
+        autoRenew: false
+        taxIncluded: { quote: Including VAT. }
+        lastVerified: 2026-10-26
+        sourceUrl: https://mullvad.net/en/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 15
+        interval: month
+        intervalCount: 3
+        autoRenew: false
+        taxIncluded: { quote: Including VAT. }
+        lastVerified: 2026-10-26
+        sourceUrl: https://mullvad.net/en/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 30
+        interval: month
+        intervalCount: 6
+        autoRenew: false
+        taxIncluded: { quote: Including VAT. }
+        lastVerified: 2026-10-26
+        sourceUrl: https://mullvad.net/en/pricing
+      - region: GLOBAL
+        currency: EUR
         amount: 60
         interval: year
         intervalCount: 1
@@ -61,3 +90,156 @@ plans:
         taxIncluded: { quote: Including VAT. }
         lastVerified: 2026-10-26
         sourceUrl: https://mullvad.net/en/pricing
+
+# Resellers, read 2026-10-26 (BLUEPRINT §4.9). /en/help/partnerships-and-resellers names Mullvad's official resellers
+# ("With our official resellers, you can purchase Mullvad VPN scratch cards"). Its partners (Mozilla, Tailscale,
+# Obscura) run their own products on Mullvad's servers and don't sell Mullvad, so they aren't here. Not listed yet:
+# Amazon's 12 other stores, whose prices depend on the delivery address (amazon.com shows none for delivery to Canada,
+# and the EU stores' VAT changes with it), and Laptop with Linux, whose price changes with the delivery country's VAT
+# and its currency menu. SerialCart's sale of the day (20-26% off, no end date) isn't stored: prices are regular ones.
+resellers:
+  - reseller: amazon
+    approvedBy:
+      url: https://mullvad.net/en/help/partnerships-and-resellers
+      quotes: [Amazon - CA]
+    offers:
+      - plan: mullvad.vpn
+        notes: Scratch cards in the post, sold by Mullvad VPN and shipped by Amazon.
+        prices:
+          - region: CA
+            currency: CAD
+            amount: 44
+            interval: month
+            intervalCount: 6
+            autoRenew: false
+            lastVerified: 2026-10-26
+            sourceUrl: https://www.amazon.ca/Mullvad-VPN-Devices-Protect-Security/dp/B092M5G1G7/
+          - region: CA
+            currency: CAD
+            amount: 87
+            interval: month
+            intervalCount: 12
+            autoRenew: false
+            lastVerified: 2026-10-26
+            sourceUrl: https://www.amazon.ca/Mullvad-VPN-Devices-Protect-Security/dp/B092M5G1G7/
+  - reseller: inet
+    approvedBy:
+      url: https://mullvad.net/en/help/partnerships-and-resellers
+      quotes: ['Since March 2020, we’ve partnered with Inet, a Swedish-based electronics retailer']
+    offers:
+      - plan: mullvad.vpn
+        notes: Scratch cards, online and in Inet's shops in Sweden.
+        prices:
+          - region: SE
+            currency: SEK
+            amount: 325
+            interval: month
+            intervalCount: 6
+            autoRenew: false
+            lastVerified: 2026-10-26
+            sourceUrl: https://www.inet.se/produkt/9123506/mullvad-vpn-6-manader-5-enheter
+          - region: SE
+            currency: SEK
+            amount: 649
+            interval: month
+            intervalCount: 12
+            autoRenew: false
+            lastVerified: 2026-10-26
+            sourceUrl: https://www.inet.se/produkt/9123505/mullvad-vpn-12-manader-5-enheter
+  - reseller: proxystore
+    approvedBy:
+      url: https://mullvad.net/en/help/partnerships-and-resellers
+      quotes: ['Since April 2021, we’ve partnered with ProxyStore']
+    offers:
+      - plan: mullvad.vpn
+        notes: >-
+          Voucher codes, paid with Monero, Bitcoin, cash or a SEPA transfer. Listed as "(10% discount)" on Mullvad's
+          price, as its standing price rather than a sale.
+        prices:
+          - region: GLOBAL
+            currency: EUR
+            amount: 27
+            interval: month
+            intervalCount: 6
+            autoRenew: false
+            taxIncluded: { quote: It does not affect the price or the goods. }
+            lastVerified: 2026-10-26
+            sourceUrl: https://digitalgoods.proxystore.de/en
+          - region: GLOBAL
+            currency: EUR
+            amount: 54
+            interval: month
+            intervalCount: 12
+            autoRenew: false
+            taxIncluded: { quote: It does not affect the price or the goods. }
+            lastVerified: 2026-10-26
+            sourceUrl: https://digitalgoods.proxystore.de/en
+  - reseller: serialcart
+    approvedBy:
+      url: https://mullvad.net/en/help/partnerships-and-resellers
+      quotes: ['we’ve a distribution partnership with SerialCart® (MySecure Space GmbH)']
+    offers:
+      - plan: mullvad.vpn
+        notes: Voucher codes by email. Two and three years come as 1-year codes.
+        prices:
+          - region: GLOBAL
+            currency: USD
+            amount: 35.63
+            interval: month
+            intervalCount: 6
+            autoRenew: false
+            taxExcluded: { quote: excl. VAT }
+            lastVerified: 2026-10-26
+            sourceUrl: https://serialcart.com/purchase/mullvad-vpn
+          - region: GLOBAL
+            currency: USD
+            amount: 71.26
+            interval: year
+            intervalCount: 1
+            autoRenew: false
+            taxExcluded: { quote: excl. VAT }
+            lastVerified: 2026-10-26
+            sourceUrl: https://serialcart.com/purchase/mullvad-vpn
+          - region: GLOBAL
+            currency: USD
+            amount: 142.51
+            interval: year
+            intervalCount: 2
+            autoRenew: false
+            taxExcluded: { quote: excl. VAT }
+            lastVerified: 2026-10-26
+            sourceUrl: https://serialcart.com/purchase/mullvad-vpn
+          - region: GLOBAL
+            currency: USD
+            amount: 213.77
+            interval: year
+            intervalCount: 3
+            autoRenew: false
+            taxExcluded: { quote: excl. VAT }
+            lastVerified: 2026-10-26
+            sourceUrl: https://serialcart.com/purchase/mullvad-vpn
+  - reseller: webhallen
+    approvedBy:
+      url: https://mullvad.net/en/help/partnerships-and-resellers
+      quotes:
+        ['Since March 2020, we’ve partnered with Webhallen, a Swedish-based electronics retailer']
+    offers:
+      - plan: mullvad.vpn
+        notes: Scratch cards, online and in Webhallen's shops in Sweden.
+        prices:
+          - region: SE
+            currency: SEK
+            amount: 299
+            interval: month
+            intervalCount: 6
+            autoRenew: false
+            lastVerified: 2026-10-26
+            sourceUrl: https://www.webhallen.com/se/product/267703-Mullvad-VPN-6-manader-5-anvandare
+          - region: SE
+            currency: SEK
+            amount: 549
+            interval: month
+            intervalCount: 12
+            autoRenew: false
+            lastVerified: 2026-10-26
+            sourceUrl: https://www.webhallen.com/se/product/267706-Mullvad-VPN-12-manader-5-anvandare

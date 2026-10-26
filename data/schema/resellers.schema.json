@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+        "description": "Stable reseller id (serialcart), also the name of its logo: data/logos/<id>.png"
+      },
+      "name": { "type": "string", "minLength": 1, "description": "Display name" },
+      "website": {
+        "type": "string",
+        "format": "uri",
+        "pattern": "^https://",
+        "patternErrorMessage": "Use a full https:// URL",
+        "description": "Its home page, where its logo comes from"
+      },
+      "domains": {
+        "minItems": 1,
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z]{2,63}$"
+        },
+        "description": "Other domains its prices' pages are on, besides its website's (Amazon's stores: amazon.ca)"
+      }
+    },
+    "required": ["id", "name", "website"],
+    "additionalProperties": false
+  },
+  "title": "Simply Sub resellers",
+  "description": "data/resellers.yaml: shops that sell providers' subscriptions, each named as official on a provider's own site (BLUEPRINT §4.9)"
+}

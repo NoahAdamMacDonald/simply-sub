@@ -250,6 +250,14 @@ export class ComponentsPage {
     );
   });
 
+  /** Which rates the catalog's prices were converted with: the gallery's fixed cases use the example ones. */
+  protected readonly ratesNote = computed(() => {
+    const rates = this.fx.rates();
+    return rates
+      ? `Converted with the rates of ${rates.date} (${rates.source}).`
+      : 'No exchange rates yet, so prices in other currencies stay in their own. On ng serve, start the API too (npm run dev:api).';
+  });
+
   protected pick(price: PickedPrice): void {
     const amount = amountText(price.amount, price.currency, this.saved()?.country);
     this.picked.set(`Picked ${amount} ${intervalText(price.interval, price.intervalCount)}`);

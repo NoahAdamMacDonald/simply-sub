@@ -236,6 +236,8 @@ function setItemProblem(
       return `"${id}" is an add-on: list provider or plan ids`;
     case 'bundle':
       return `"${id}" is a bundle: list provider or plan ids`;
+    case 'reseller':
+      return `"${id}" is a reseller: list provider or plan ids`;
     case undefined:
       return `"${id}" isn't a provider or plan id${didYouMean(id, ids.all('provider', 'plan'))}`;
   }

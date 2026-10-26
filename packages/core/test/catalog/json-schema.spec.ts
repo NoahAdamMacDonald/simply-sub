@@ -6,7 +6,13 @@ const schemas = catalogJsonSchemas();
 
 describe('catalogJsonSchemas', () => {
   it('describes every kind of catalog file', () => {
-    expect(Object.keys(schemas)).toEqual(['features', 'categories', 'provider', 'bundle']);
+    expect(Object.keys(schemas)).toEqual([
+      'features',
+      'categories',
+      'provider',
+      'bundle',
+      'resellers',
+    ]);
     for (const schema of Object.values(schemas)) {
       expect(schema.$schema).toBe('https://json-schema.org/draft/2020-12/schema');
       expect(schema.title).toMatch(/^Simply Sub /);

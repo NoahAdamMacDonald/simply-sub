@@ -365,6 +365,160 @@
         "additionalProperties": false
       },
       "description": "Extras bought on top of a plan; plans list the ones they allow in addOnIds"
+    },
+    "resellers": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "reseller": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+            "description": "A reseller id from data/resellers.yaml"
+          },
+          "approvedBy": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://",
+                "patternErrorMessage": "Use a full https:// URL",
+                "description": "The provider's own page that names it as an official reseller, on the provider's domain"
+              },
+              "quotes": {
+                "minItems": 1,
+                "type": "array",
+                "items": { "type": "string", "minLength": 1 },
+                "description": "Where that page names it (\"Amazon - CA\"), word for word, which the nightly check looks for"
+              }
+            },
+            "required": ["url", "quotes"],
+            "additionalProperties": false,
+            "description": "Partners that only use the service in their own are never resellers"
+          },
+          "offers": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "plan": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)+$",
+                  "patternErrorMessage": "Use <provider id>.<slug> (netflix.standard)",
+                  "description": "The plan it sells, from this file"
+                },
+                "prices": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "region": {
+                        "type": "string",
+                        "pattern": "^(?:[A-Z]{2}|GLOBAL)$",
+                        "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL",
+                        "description": "Where this price applies: an ISO 3166-1 alpha-2 region, or GLOBAL"
+                      },
+                      "currency": {
+                        "type": "string",
+                        "pattern": "^[A-Z]{3}$",
+                        "patternErrorMessage": "Use a three-letter ISO 4217 currency code in capitals (CAD)",
+                        "description": "The ISO 4217 currency of amount"
+                      },
+                      "amount": {
+                        "type": "number",
+                        "minimum": 0,
+                        "description": "In the currency's major unit: 18.99 means $18.99. 0 means a free plan"
+                      },
+                      "interval": {
+                        "type": "string",
+                        "enum": ["day", "week", "month", "year"],
+                        "description": "The billing period unit"
+                      },
+                      "intervalCount": {
+                        "type": "integer",
+                        "exclusiveMinimum": 0,
+                        "maximum": 9007199254740991,
+                        "description": "How many intervals one payment covers: 3 with month means quarterly"
+                      },
+                      "autoRenew": {
+                        "type": "boolean",
+                        "description": "false for prepaid plans that have to be renewed by hand"
+                      },
+                      "taxIncluded": {
+                        "type": "object",
+                        "properties": {
+                          "quote": {
+                            "type": "string",
+                            "minLength": 1,
+                            "description": "The source page's own words that say so (Mullvad's \"Including VAT.\"), which the nightly check looks for"
+                          }
+                        },
+                        "required": ["quote"],
+                        "additionalProperties": false,
+                        "description": "The amount already includes sales tax wherever the buyer is, so none is added in Canada or the US. Left out, the buyer's region decides (BLUEPRINT §4.8)"
+                      },
+                      "lastVerified": {
+                        "type": "string",
+                        "format": "date",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+                        "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+                        "description": "The date someone last checked this price on the provider's site"
+                      },
+                      "sourceUrl": {
+                        "type": "string",
+                        "format": "uri",
+                        "pattern": "^https://",
+                        "patternErrorMessage": "Use a full https:// URL",
+                        "description": "The reseller's page for it, which the app links to: on its website or one of its domains"
+                      },
+                      "taxExcluded": {
+                        "type": "object",
+                        "properties": {
+                          "quote": {
+                            "type": "string",
+                            "minLength": 1,
+                            "description": "The source page's own words that say so, which the nightly check looks for"
+                          }
+                        },
+                        "required": ["quote"],
+                        "additionalProperties": false,
+                        "description": "The amount leaves VAT or sales tax to be added wherever the buyer is (\"excl. VAT\"). The app then compares it only where it knows the tax: Canada and the US (BLUEPRINT §4.8)"
+                      }
+                    },
+                    "required": [
+                      "region",
+                      "currency",
+                      "amount",
+                      "interval",
+                      "intervalCount",
+                      "autoRenew",
+                      "lastVerified",
+                      "sourceUrl"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "What it normally charges where it sells, for each period: never a sale price"
+                },
+                "notes": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "What the buyer gets: a scratch card in the post, a code by email"
+                }
+              },
+              "required": ["plan", "prices"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["reseller", "approvedBy", "offers"],
+        "additionalProperties": false
+      },
+      "description": "Shops the provider's own site names as official resellers of its plans, with their regular prices (BLUEPRINT §4.9)"
     }
   },
   "required": ["id", "name", "website", "category", "spendCategory", "plans"],

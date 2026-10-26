@@ -23,6 +23,8 @@ export * from './catalog/region-files';
 export * from './catalog/region-currency';
 export * from './catalog/regions';
 export * from './catalog/registry-files';
+export * from './catalog/reseller';
+export * from './catalog/reseller-deals';
 export * from './catalog/seed-sql';
 export * from './catalog/snapshot';
 export {

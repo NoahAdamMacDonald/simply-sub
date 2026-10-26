@@ -459,7 +459,8 @@ acceptedNetworks: [visa, mastercard, amex, discover]   # omit = unknown → all 
 billingCurrency: { CA: CAD }        # currency actually charged per region (drives FX-fee maths)
 cancelUrl: https://www.netflix.com/cancelplan
 sources: { pricing: https://help.netflix.com/en/node/24926 }
-# Optional and left out here: aliases, availableIn (section 4.7), cancelFee (text), notes. Optional fields are
+# Optional and left out here: aliases, availableIn (section 4.7), cancelFee (text), notes, resellers (section 4.9).
+# Optional fields are
 # omitted, never empty or null.
 
 plans:
@@ -1031,6 +1032,8 @@ The rules live in `packages/core/src/tax/`: the rates and subdivision lists sinc
     Settings forms clear it when the country changes.
 - **Amounts the user types** (a custom plan's price, a price override) are what they pay, tax included. A "plus
   tax" checkbox (`plusTax`) marks an amount copied from an ad, and tax is then added like on catalog prices.
+- **A reseller's price** can say it leaves VAT to be added everywhere (`taxExcluded`, section 4.9), and is then
+  compared only in Canada and the US.
 - **Where it shows:**
   - Charges, totals, budgets, the calendar and exports include tax, because that's what leaves the account. Each
     charge keeps its tax part (`Charge.tax`, PROJECT-PLAN §3.1).
@@ -1048,6 +1051,45 @@ The rules live in `packages/core/src/tax/`: the rates and subdivision lists sinc
   own), shown only for tax-added countries. A Canadian province is required, since it sets the rate; a US state is
   optional. Under it the form shows "Sales tax 13% (Ontario)" and a "Use my own rate" checkbox (a US user always
   gives their own rate). Changing it re-prices every total.
+
+### 4.9 Resellers
+Some providers sell their subscription through other shops too: Mullvad's scratch cards are on Amazon and at
+Swedish and German retailers, sometimes for less than Mullvad's own price. The catalog lists these **resellers**,
+and Search shows one next to a plan's prices when it's cheaper for the buyer (M5.2).
+- **Only official resellers:** a shop is listed only when the provider's own site names it as one, and its listing
+  quotes that page (`approvedBy: { url, quotes }`, on the provider's domain, which validation checks). Partners that
+  run their own product on the provider's service (Mozilla VPN, Tailscale and Obscura on Mullvad's servers) don't
+  sell the provider's subscription, so they're never listed. The same goes for every other provider.
+- **`data/resellers.yaml`** lists each shop once: `id`, `name`, `website`, and any other `domains` its pages are on
+  (Amazon's country stores). Its logo is `data/logos/<id>.png`, fetched by `npm run data:icons` and published as
+  `/icons/<id>.webp` like a provider's, so reseller and provider ids share one namespace. A shop can sell many
+  providers' plans.
+- **A provider's `resellers`** say which shops sell its plans: for each, the approval and one offer per plan with the
+  shop's **regular** prices, each read from the shop's own page for it (`sourceUrl`, required, on its website or
+  domains), which the app links to. Sales aren't stored, as for every catalog price (SerialCart's 20–26% off of the
+  day is left out). A price applies only where it's set (its region, a group the buyer is in, or `GLOBAL`): a
+  reseller price never stands in for another region's, unlike pickPrice's fallbacks.
+- **Tax:** like any price, a reseller's has sales tax added in Canada and the US unless it has `taxIncluded`.
+  `taxExcluded: { quote }` marks a price that leaves VAT to be added everywhere ("excl. VAT"), which the app can only
+  work out in Canada and the US (section 4.8), so it's compared nowhere else.
+- **Cheaper** (`resellerDeals` in core) means less per month **after the buyer's sales tax**, since that's what
+  leaves the account. Mullvad's €5 includes tax everywhere and Amazon.ca adds HST, so Amazon's CA$87 for 12 months
+  (CA$98.31 in Ontario, CA$91.35 in Alberta) is cheaper than Mullvad's CA$94.17 in Alberta only. Each shop is shown at
+  its cheapest price per month; of two that cost the same per month, the shorter one. Nothing is compared without
+  an exchange rate.
+- **In the files:** the snapshot gains the `resellers` list (each with its `iconUrl`), and `GET /providers/:id`
+  shows a provider's resellers as written. A region's file keeps the reseller prices a buyer there can use, and a
+  group's file (`EU.json`) its members' too, since a member without a file of its own gets the group's (section 6.3).
+  The D1 tables don't change: resellers travel in each provider's JSON.
+- **Bought from a reseller:** a list item records the plan, and its price override says what was paid (P6), until an
+  item can name its shop.
+- **Kept up to date:** the discovery pipeline finds each provider's official reseller page (section 6.5, M3.7), and
+  the nightly check rereads reseller prices and the approval quotes (section 6.4, M8.3).
+
+As first read (2026-10-26, M1.8), Mullvad's official resellers are Amazon (13 country stores), Inet, Webhallen,
+ProxyStore, SerialCart and Laptop with Linux. The catalog has Amazon.ca, Inet, Webhallen, ProxyStore and SerialCart.
+Amazon's other stores wait because their prices depend on the delivery address, and Laptop with Linux because its
+price follows the delivery country's VAT and its currency menu.
 
 ---
 
@@ -1249,8 +1291,8 @@ or the disk. Today is the date where the script runs, which is UTC in CI.
 
 Validation fails if:
 - a file isn't valid YAML (a duplicate key, more than one document), isn't one of `data/features.yaml`,
-  `data/categories.yaml`, `data/providers/<id>.yaml` or `data/bundles/<slug>.yaml` (always `.yaml`), or
-  `features.yaml` or `categories.yaml` is missing
+  `data/categories.yaml`, `data/resellers.yaml` (optional), `data/providers/<id>.yaml` or `data/bundles/<slug>.yaml`
+  (always `.yaml`), or `features.yaml` or `categories.yaml` is missing
 - a file doesn't match its Zod schema (section 4.5), which already covers unknown keys, formats, negative amounts
   and the checks within one file
 - a provider's `id` isn't its file name, or a bundle's `id` isn't `bundle.<file name>`
@@ -1263,13 +1305,15 @@ Validation fails if:
 - a feature's `parent` isn't a top-level boolean feature (groups are one level deep), or is listed after the
   feature (`GET /features` keeps the file's order)
 - a feature's `category`, or a provider's `category` or `spendCategory`, isn't defined
-- ids are duplicated: across files (provider, plan, add-on and bundle ids share one namespace), in
+- ids are duplicated: across files (provider, plan, add-on, bundle and reseller ids share one namespace), in
   `features.yaml`, or within one category list
 - a reference doesn't exist: a bundle's `soldBy` (a provider) and `includes` (plans), a plan's `addOnIds`
   (add-ons in the same file), an add-on's `grantsPlan` (a plan in the same file)
 - an add-on isn't listed in any plan's `addOnIds`
-- a file in `data/logos/` isn't a PNG named after a provider id (`netflix.png`), or the image isn't square, is under
-  32 pixels or is over 100 KB
+- a file in `data/logos/` isn't a PNG named after a provider or reseller id (`netflix.png`), or the image isn't
+  square, is under 32 pixels or is over 100 KB
+- a provider's `resellers` name a shop that isn't in `data/resellers.yaml`, quote an approval page off the
+  provider's own domain, or give a price whose `sourceUrl` isn't on the shop's website or `domains` (section 4.9)
 - `includes-subscription` lists the plan itself or its own provider, or makes a loop (Duo → Unlimited → Duo)
 - a provider has `billingCurrency`, and a plan or add-on is priced in a region that isn't in it, or has no price
   in the charged currency for that region
@@ -1283,7 +1327,8 @@ Validation fails if:
 - `lastVerified` is after today
 
 Validation warns (but passes) when `lastVerified` is older than 90 days: one warning per file, with the count and
-the oldest price. It also warns about a provider without a logo in `data/logos/`, which the app shows as a letter.
+the oldest price. It also warns about a provider or reseller without a logo in `data/logos/`, which the app shows as
+a letter, and about a reseller no provider lists.
 
 A broken file gets its own errors, and the checks that would only repeat them are skipped: a provider that fails
 its schema isn't checked against the registry, references to it aren't flagged, and a broken feature definition
@@ -1304,7 +1349,8 @@ write the files.
    only counted.
 2. Build the snapshot `{ data, meta }`:
    - `data` is `schemaVersion` plus the source files: features, categories, providers sorted by id (with an
-     `iconUrl` when the provider has a logo; without one, the app shows its first letter) and bundles sorted by id. Bundles stay in their source shape: the app computes feature unions and
+     `iconUrl` when the provider has a logo; without one, the app shows its first letter), bundles sorted by id,
+     and `data/resellers.yaml`'s resellers sorted by id, each with an `iconUrl` the same way (section 4.9). Bundles stay in their source shape: the app computes feature unions and
      savings in core for the user's region, and `GET /bundles` adds them per request (M2.4).
    - `meta` is `catalogVersion` (section 5.1), `generatedAt` (the build time, UTC), every priced region, and
      counts.
@@ -1319,7 +1365,8 @@ write the files.
      `catalogVersion`. The Worker streams them like the snapshots, so neither route reads D1 (M2.2);
    - `catalog/ids.json`: every provider id with its plan ids (`catalogIds`). The Worker reads it only to suggest an
      id after a 404 or 400 (M2.4), so a typo costs no D1 rows.
-4. Convert each logo in `data/logos/` to `apps/web/public/icons/<id>.webp`, published as `/icons/<id>.webp`: at
+4. Convert each provider's and reseller's logo in `data/logos/` to `apps/web/public/icons/<id>.webp`, published as
+   `/icons/<id>.webp`: at
    most 96 pixels wide (`catalogIconSize` in core, twice the 48 px the app shows icons at, for high-density
    screens; a smaller logo isn't enlarged), lossy at quality 90 with exact transparency, by `sharp`. At icon sizes
    it looks the same as the PNG: today's five logos went from 54 KB to 10 KB. The PNGs stay the source, held to
@@ -1338,6 +1385,9 @@ price: rules 2 to 4 can pick any region, depending on the buyer's currency (a Ca
 EUR price before a US one). A test checks that pickPrice and availability give the same answers from each region's
 file as from the full catalog, for every region and currency. The version, build time, `regions` and counts are
 the full snapshot's. With today's catalog, `CA.json` drops the US prices of every item that has a Canadian price.
+A provider's resellers keep only the prices for that region, a group it belongs to and `GLOBAL`, plus, in a group's
+file, its members' (`regionResellers`): `CA.json` has Amazon.ca, ProxyStore and SerialCart, and not the Swedish
+shops (section 4.9).
 
 **Which file a buyer gets** (`regionFileFor`): their country's, else their group's (a Swede gets `EU.json` when
 Sweden has no prices of its own), else the full `catalog.json`. A country with no prices and no group needs every
@@ -1390,6 +1440,8 @@ Cron trigger (03:00 UTC) → Workflow (one step per provider, automatic retries)
             with a table of the changes and links to the sources (peter-evans/create-pull-request)
      ├─ for a price with taxIncluded: check its quote is still on the page, and look for wording that says the
      │    opposite ("+ tax", "excl. VAT", "taxes calculated at checkout"); either is a change for review
+     ├─ reseller prices too (section 4.9), and each reseller's approval: its quotes still on the provider's page;
+     │    a reseller no longer named there is a change for review, and a sale price is never taken
      on no change → bump lastVerified (batched into the same PR, or skipped to avoid noise)
      on failure  → list it in the PR body as "needs manual check"
 ```
@@ -1432,6 +1484,11 @@ the first strong match:
 The cancel page comes from the same steps, using help-centre paths and searches. Each URL is scored by an LLM
 check ("is this a pricing page for X?"). The discovered URLs are saved in the provider YAML (`sources:`), so the
 nightly price check reuses them. **You never type them.**
+
+The provider's **official reseller page** comes from the same steps (paths and links such as `resellers`,
+`partners`, "Where to buy"; Mullvad's is `/en/help/partnerships-and-resellers`). Only the shops it names as selling
+the provider's own subscription become resellers (section 4.9); partners that run their own product on the
+provider's service don't. Each shop's product pages are then read like a pricing page, for regular prices only (M3.7).
 
 **③ Render:** Playwright (free on GitHub Actions) loads each page with `en-CA` locale headers, waits for prices
 to render, clicks visible "Monthly/Annual" toggles, and saves the visible text plus a screenshot as evidence.
@@ -2365,7 +2422,33 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    in. Proton sells fixed price lists in USD, CAD, EUR and CHF (stored as `GLOBAL` prices in each currency, with
    `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
-   M9's FX-fee maths has to decide how to treat both cases (section 9.3).
+   M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
+   CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-26, M1.8 resellers and Mullvad's prices)**
+- **Mullvad's conversion was right.** With the ECB's rates of 2026-10-26, €5 is CA$7.85 and US$5.59, as Mullvad's
+  own "€5 is equivalent to" figures say (CA$7.84, $5.59). The CA$7.53 and US$5.45 seen in the component gallery were
+  its fixed cases, converted with the API contract's example rates on purpose; the gallery now says so, and which
+  rates its catalog section used. The CA$98.04 a year seen at Mullvad's checkout is about 4% above the ECB conversion
+  (CA$94.17), most likely the card processor's conversion, which paying in euros trades for the card's FX fee: M9's
+  open question (below).
+- **Mullvad's periods:** 2, 3 and 6 months join 1 month and 1 year, at the same €5 a month. Its pricing page lists
+  only 1 month and 1 year; the others are its checkout's, which needs an account (seen by the project owner).
+- **Resellers** (section 4.9): `data/resellers.yaml` lists each shop once, and a provider's `resellers` list the
+  shops its own site names as official, quoting that page, with one offer per plan and the shops' regular prices.
+  Partners that use a provider's service in their own product are never listed. Search shows a reseller next to a
+  plan's prices when it's cheaper per month after the buyer's sales tax (`resellerDeals`, M5.2). A list item bought
+  from one uses its price override until an item can name its shop. The pipeline finds resellers (M3.7) and the
+  nightly check rereads them (M8.3).
+- **Regular prices only,** as for every catalog price: a reseller's sale isn't stored. SerialCart's regular prices
+  are above Mullvad's own, so it shows nowhere today; ProxyStore's standing "(10% discount)" is its regular price.
+- **Tax:** a reseller price can leave VAT to be added everywhere (`taxExcluded`, SerialCart's "excl. VAT"); it's
+  compared only in Canada and the US, where the app knows the tax.
+- **The contract:** `GET /catalog`'s data gains the `resellers` list, and `GET /providers/:id` shows a provider's
+  resellers as written; the examples show Amazon.ca's offer. The D1 tables don't change, so `seedFormat` stays.
+- **Still open:** Amazon's other 12 stores (prices depend on the delivery address) and Laptop with Linux (price follows
+  the delivery country's VAT); logos on transparent backgrounds (ProxyStore's is black) are faint on dark cards, for
+  M5.2 to settle when it shows reseller icons.
 
 **Resolved (2026-10-26, M4.5)**
 - **Shared components before their data:** every PROJECT-PLAN §4.3 component but `ss-sub-card` was built in M4.5, as

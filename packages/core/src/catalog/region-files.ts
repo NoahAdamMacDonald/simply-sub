@@ -1,7 +1,8 @@
 import * as z from 'zod';
 import { regionSchema } from './formats';
 import type { Price } from './price';
-import { globalRegion, groupsOf } from './regions';
+import { globalRegion, groupsOf, membersOf } from './regions';
+import type { ResellerListing } from './reseller';
 import { catalogMetaSchema, type CatalogMeta, type CatalogSnapshot } from './snapshot';
 
 // The per-region catalog files (BLUEPRINT §6.3). data/catalog/<region>.json is the snapshot with only the prices
@@ -26,9 +27,29 @@ export function regionPrices<T extends Price>(prices: readonly T[], region: stri
 }
 
 /**
- * The region file for `region`: every provider, plan, add-on and bundle, each with only its regionPrices, and
- * meta.region set. Nothing else changes, so the version, build time, region list and counts are the full
- * snapshot's.
+ * A provider's resellers as a buyer in `region` can use them: the prices for the region, a group it belongs to or
+ * GLOBAL, and in a group's file its members' too, since a member without a file of its own gets its group's (a Swede
+ * gets EU.json, with Sweden's shops). A reseller price never stands in for another region's, so offers and resellers
+ * left with none are left out.
+ */
+export function regionResellers(
+  resellers: readonly ResellerListing[],
+  region: string,
+): ResellerListing[] {
+  const usable = new Set([region, ...groupsOf(region), ...membersOf(region), globalRegion]);
+  return resellers.flatMap((listing) => {
+    const offers = listing.offers.flatMap((offer) => {
+      const prices = offer.prices.filter((price) => usable.has(price.region));
+      return prices.length > 0 ? [{ ...offer, prices }] : [];
+    });
+    return offers.length > 0 ? [{ ...listing, offers }] : [];
+  });
+}
+
+/**
+ * The region file for `region`: every provider, plan, add-on and bundle, each with only its regionPrices, the
+ * resellers a buyer there can use, and meta.region set. Nothing else changes, so the version, build time, region list
+ * and counts are the full snapshot's.
  */
 export function regionSnapshot(snapshot: CatalogSnapshot, region: string): CatalogSnapshot {
   const trimmed = <T extends { prices: Price[] }>(item: T): T => ({
@@ -39,11 +60,15 @@ export function regionSnapshot(snapshot: CatalogSnapshot, region: string): Catal
   return {
     data: {
       ...data,
-      providers: data.providers.map((provider) => ({
-        ...provider,
-        plans: provider.plans.map(trimmed),
-        ...(provider.addOns && { addOns: provider.addOns.map(trimmed) }),
-      })),
+      providers: data.providers.map(({ resellers, ...provider }) => {
+        const usable = resellers && regionResellers(resellers, region);
+        return {
+          ...provider,
+          plans: provider.plans.map(trimmed),
+          ...(provider.addOns && { addOns: provider.addOns.map(trimmed) }),
+          ...(usable && usable.length > 0 && { resellers: usable }),
+        };
+      }),
       bundles: data.bundles.map(trimmed),
     },
     meta: {
