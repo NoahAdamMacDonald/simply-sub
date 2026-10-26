@@ -19,7 +19,7 @@ The Figma wireframes and early drafts (`docs/wireframes/`, `docs/drafts/`) are k
 
 ## Requirements
 
-[Volta](https://volta.sh) 2.0.2. The root `package.json` pins Node 24.19.0 and npm 12.0.2, and Volta switches
+[Volta](https://volta.sh) 2.0.2. The root `package.json` pins Node 24.22.1 and npm 12.0.2, and Volta switches
 to them automatically inside the repo.
 
 To edit the catalog YAML in VS Code, install the recommended

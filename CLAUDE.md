@@ -19,7 +19,7 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
   - `zod` 4.6.6: the vitest plugin pins 4.6.5.
   Remove each one once the package that pulls it in ships a fixed version. CI runs `npm audit --audit-level=high`,
   so a new advisory with no fix gets an override like these.
-- Node 24.19.0 / npm 12.0.2 via Volta 2.0.2 (`"volta"` field in root package.json). Workers Builds pins Node
+- Node 24.22.1 / npm 12.0.2 via Volta 2.0.2 (`"volta"` field in root package.json). Workers Builds pins Node
   with its `NODE_VERSION` build variable (BLUEPRINT §7.6), so change both together.
 - Cloudflare Worker (Hono) + D1 for the read-only catalog API; the same Worker serves the SPA as static assets
 - npm workspaces: `apps/web`, `apps/api`, `packages/core`, plus `data/` (YAML catalog) and `scripts/`

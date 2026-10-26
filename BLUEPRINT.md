@@ -61,7 +61,7 @@ added as a custom entry. Users rank how much they care about each feature. The a
 |---|---|
 | Frontend | **Angular 22.2.3** (CLI and build tools 22.2.4, pinned exactly), TypeScript, standalone components, signals, zoneless change detection |
 | UI kit | **Angular Material 3** + CDK (matches the search, chip and select styles in the wireframes) |
-| Toolchain | **Volta 2.0.2** pins **Node 24.19.0** and **npm 12.0.2** through the root `package.json` |
+| Toolchain | **Volta 2.0.2** pins **Node 24.22.1** and **npm 12.0.2** through the root `package.json` |
 | Repo layout | npm-workspaces monorepo (section 3) |
 | User data | **Local-first**: IndexedDB through Dexie. No accounts in v1 |
 | Catalog API | Our own read-only API on a **Cloudflare Worker (Hono) + D1**, because no free API exists (section 5) |
@@ -289,10 +289,10 @@ simply-sub/
     "data:validate": "tsx scripts/validate-data.ts",
     "data:build": "tsx scripts/build-catalog.ts"
   },
-  "volta": { "node": "24.19.0", "npm": "12.0.2" }
+  "volta": { "node": "24.22.1", "npm": "12.0.2" }
 }
 ```
-Set this up with `volta pin node@24.19.0 npm@12.0.2` in the repo root. That command writes the `volta` block.
+Set this up with `volta pin node@24.22.1 npm@12.0.2` in the repo root. That command writes the `volta` block.
 Each workspace's own `package.json` adds `"volta": { "extends": "../../package.json" }`. Volta reads the nearest
 `package.json`, so without this the pin wouldn't apply inside `apps/web` and the other workspaces.
 
@@ -1465,7 +1465,7 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
    DNSSEC if it isn't on already.
 3. **Tooling:**
    ```bash
-   volta install node@24.19.0 npm@12.0.2
+   volta install node@24.22.1 npm@12.0.2
    npm i -g @angular/cli@22.2.4        # or use npx
    npm i -D wrangler -w apps/api       # Wrangler stays per-project
    npx wrangler login
@@ -1473,7 +1473,7 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
 4. **Scaffold:**
    ```bash
    mkdir simply-sub && cd simply-sub && npm init -y
-   volta pin node@24.19.0 npm@12.0.2
+   volta pin node@24.22.1 npm@12.0.2
    npx @angular/cli@22.2.4 new web --directory apps/web --style=scss --routing --ssr=false
    npm create cloudflare@latest apps/api -- --type=hello-world --lang=ts   # then add hono
    mkdir -p packages/core/src data/providers data/bundles scripts
@@ -1560,7 +1560,7 @@ Settings → Build*). The settings as they are now:
 | Build command | `cd ../.. && npm ci && npm run build` |
 | Deploy command | `npm run deploy` (since M2.1): `apps/api/package.json` runs `db:seed:remote` (the migrations, then `seed-d1.ts --remote`) and then `wrangler deploy`. From M1.5 it was `npx wrangler d1 migrations apply simply-sub-catalog --remote && npx wrangler d1 execute simply-sub-catalog --remote --file dist/seed.sql && npx wrangler deploy`, and before that `npx wrangler deploy` |
 | Preview (non-production branch) command | `npx wrangler versions upload`: a preview link on workers.dev, production untouched |
-| Build variable | `NODE_VERSION` = `24.19.0` (the image defaults to 24.18.0). The first build detected Node 24.19.0 and npm 12.0.2 (from `packageManager`); npm 10.9.2 would also install our lockfile cleanly |
+| Build variable | `NODE_VERSION` = `24.22.1` (since 2026-10-26; it was 24.19.0, and the image defaults to 24.18.0). It must match the root `package.json`'s `volta` pin, which CI reads too. The first build detected Node 24.19.0 and npm 12.0.2 (from `packageManager`); npm 10.9.2 would also install our lockfile cleanly |
 | API token | `simply-sub-builds`, created by Workers Builds: Workers scripts, KV, R2, **D1 (edit)**, routes on the zone, and a few unused products. Cloudflare keeps it; it's never in GitHub |
 
 - **The deploy seeds D1 first:** `npm run deploy` applies any new migrations, writes only what changed to D1
