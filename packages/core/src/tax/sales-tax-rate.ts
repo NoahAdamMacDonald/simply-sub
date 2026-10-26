@@ -1,5 +1,7 @@
 // Which sales-tax rate applies to a buyer (BLUEPRINT §4.8). Canadian and US prices are listed before tax, so tax is
-// added there; elsewhere prices include VAT or GST already. M7.1 adds the tax to charges and totals.
+// added there; elsewhere prices include VAT or GST already. A provider can list prices that include tax everywhere
+// (Mullvad's flat €5 "Including VAT"), which its catalog prices mark with `taxIncluded`. M7.1 adds the tax to
+// charges and totals.
 
 /** The countries where tax is added to listed prices, and where Settings asks for the province or state. */
 export const taxAddedRegions: ReadonlySet<string> = new Set(['CA', 'US']);
@@ -64,4 +66,15 @@ export function salesTaxRate({
       ? canadianSalesTax[subdivision]
       : undefined;
   return builtIn === undefined ? undefined : { percent: builtIn, source: 'built-in' };
+}
+
+/**
+ * The sales tax added to `price` for a buyer at `place`: none when the price includes it already (a catalog price's
+ * or a PickedPrice's `taxIncluded`), else the buyer's rate. Price tags show "+ tax" only when there's one.
+ */
+export function addedSalesTax(
+  price: { taxIncluded?: unknown },
+  place: TaxPlace,
+): SalesTaxRate | undefined {
+  return price.taxIncluded ? undefined : salesTaxRate(place);
 }

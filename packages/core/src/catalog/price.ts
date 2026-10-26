@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import { currencySchema, httpsUrlSchema, isoDateSchema, regionSchema } from './formats';
+import { currencySchema, httpsUrlSchema, isoDateSchema, regionSchema, textSchema } from './formats';
 
 export const intervalSchema = z.enum(['day', 'week', 'month', 'year']);
 export type Interval = z.infer<typeof intervalSchema>;
@@ -23,6 +23,16 @@ export const priceSchema = z.strictObject({
     .positive('Must be a whole number of at least 1')
     .describe('How many intervals one payment covers: 3 with month means quarterly'),
   autoRenew: z.boolean().describe('false for prepaid plans that have to be renewed by hand'),
+  taxIncluded: z
+    .strictObject({
+      quote: textSchema.describe(
+        'The source page\'s own words that say so (Mullvad\'s "Including VAT."), which the nightly check looks for',
+      ),
+    })
+    .describe(
+      "The amount already includes sales tax wherever the buyer is, so none is added in Canada or the US. Left out, the buyer's region decides (BLUEPRINT §4.8)",
+    )
+    .optional(),
   lastVerified: isoDateSchema.describe(
     "The date someone last checked this price on the provider's site",
   ),

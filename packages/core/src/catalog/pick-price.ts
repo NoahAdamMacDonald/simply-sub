@@ -37,6 +37,12 @@ export const pickedPriceSchema = z.strictObject({
     .describe(
       "True when no conversion was needed: the source price is in the user's currency, or free (0 is 0 anywhere)",
     ),
+  taxIncluded: z
+    .literal(true)
+    .describe(
+      "The source price includes sales tax wherever the buyer is (its catalog price's taxIncluded)",
+    )
+    .optional(),
   source: z
     .strictObject({
       region: regionSchema,
@@ -126,6 +132,7 @@ function toPicked(price: Price, { currency, fx }: PriceContext): PickedPrice {
     monthlyEquivalent: monthlyEquivalent({ ...price, amount }),
     autoRenew: price.autoRenew,
     native,
+    ...(price.taxIncluded && { taxIncluded: true as const }),
     source: { region: price.region, amount: price.amount, currency: price.currency },
     ...(fx && rate !== undefined && { fx: { rate, date: fx.date, source: fx.source } }),
   };

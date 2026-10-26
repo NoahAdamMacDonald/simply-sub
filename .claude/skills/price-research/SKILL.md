@@ -21,6 +21,11 @@ API contract's prices are illustrative and never a source. This skill is how to 
 - **The billing period as the provider states it.** "Monthly" is `interval: month`, but "every 30 days" is
   `interval: day, intervalCount: 30` and "every 4 weeks" is `interval: week, intervalCount: 4`. Prepaid phone plans
   and gyms often bill by days, so read the terms or the checkout, not just the "/mo" on the price card.
+- **Does the price include tax?** Canadian and US prices are taken as before tax, and the app adds sales tax. When
+  the provider says its price includes tax for every buyer ("Including VAT.", "taxes included", one flat price
+  everywhere), add `taxIncluded: { quote: <its exact words> }` to each such price, quoted from `sourceUrl`'s page so
+  the nightly check can find it. Wording like "+ tax", "excl. VAT" or "taxes calculated at checkout" means leave it
+  out. A converted figure on the page ("€5 is equivalent to CA$7.84") is not a price in that currency.
 - **Region codes:** ISO 3166-1 alpha-2 (`GB` for the United Kingdom, never `UK`), `EU` when one price covers the
   whole EU, and `GLOBAL` for one price wherever the provider sells.
 - **`availableIn` only from an official list.** When the provider says where it sells ("only in the US", a country

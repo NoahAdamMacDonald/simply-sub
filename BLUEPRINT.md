@@ -661,6 +661,7 @@ interface Price {
   interval: Interval;
   intervalCount: number;     // whole number ≥ 1 (3 + month = quarterly)
   autoRenew: boolean;
+  taxIncluded?: { quote: string };  // the amount includes sales tax wherever the buyer is, as the page says (4.8)
   lastVerified: string;      // YYYY-MM-DD
   sourceUrl?: string;        // https
 }
@@ -983,6 +984,12 @@ The rules live in `packages/core/src/tax/`: the rates and subdivision lists sinc
   included, since foreign services such as Proton must collect GST/HST from Canadians. Elsewhere prices already
   include it, and nothing is added. An item bought in another region (`ListItem.region`) follows that region's
   rule, but gets a rate only in the user's own country, the only one whose rate the app knows.
+- **Unless the price includes tax everywhere.** Some providers list one price that includes tax wherever the buyer
+  is: Mullvad's flat €5 a month says "Including VAT.", and that's all a Canadian pays. Such a catalog price has
+  `taxIncluded: { quote }`, the source page's own words, and nothing is added to it anywhere (`addedSalesTax` in
+  core). It's per price, since a provider can include tax in one price list and not another. pickPrice passes it on
+  as `taxIncluded: true` in the API's `pricing` entries. Price research, the extraction (section 6.5) and the
+  nightly check (section 6.4) all record or recheck the wording.
 - **Rates:**
   - A built-in table for Canada's 13 provinces and territories (`canadianSalesTax`): each one's combined rate on
     digital subscriptions, GST/HST plus the provincial tax where it covers digital services (BC's PST, Manitoba's
@@ -1000,7 +1007,8 @@ The rules live in `packages/core/src/tax/`: the rates and subdivision lists sinc
   - Charges, totals, budgets, the calendar and exports include tax, because that's what leaves the account. Each
     charge keeps its tax part (`Charge.tax`, PROJECT-PLAN §3.1).
   - Price tags (`ss-price`: Search, plan pickers, cards) show the listed price, with a small "+ tax" in tax-added
-    regions, the way Canadian prices are normally shown. The monthly equivalent is before tax too.
+    regions, the way Canadian prices are normally shown, or "incl. tax" for a price that includes it. The monthly
+    equivalent is before tax too.
   - An item's billing details show the amount charged, tax included.
 - **Payment cards** (section 9.3): cash back and FX fees apply to the amount charged, tax included.
 - **Settings:** the first-run dialog and the 📍 dialog ask for the province or state, in a menu that lists the
@@ -1325,6 +1333,8 @@ Cron trigger (03:00 UTC) → Workflow (one step per provider, automatic retries)
        ├─ compare with the YAML value
        └─ on change → update the YAML + lastVerified, then open/refresh ONE PR "Price updates YYYY-MM-DD"
             with a table of the changes and links to the sources (peter-evans/create-pull-request)
+     ├─ for a price with taxIncluded: check its quote is still on the page, and look for wording that says the
+     │    opposite ("+ tax", "excl. VAT", "taxes calculated at checkout"); either is a change for review
      on no change → bump lastVerified (batched into the same PR, or skipped to avoid noise)
      on failure  → list it in the PR body as "needs manual check"
 ```
@@ -1386,6 +1396,8 @@ use canonical ids, and it maps provider wording through `aliases`. The output co
 - **accepted card networks** (from the checkout or help page, for example "We accept Visa, Mastercard, Amex")
   and the billing currency
 - an **evidence quote** for every price and feature (shown in the PR, so review is fast)
+- whether the prices **include tax** for every buyer ("Including VAT", "taxes included"), as `taxIncluded` with
+  the page's words as its quote; without such wording, Canadian and US prices are taken as before tax (section 4.8)
 - `proposedFeatures`: capabilities that don't match the registry, for you to approve. Once approved they're
   added to `features.yaml` and reused for every later provider.
 
@@ -2272,6 +2284,15 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3).
+
+**Resolved (2026-10-26, prices that include tax)**
+- **Mullvad's €5 includes VAT for everyone** ("Including VAT." on its pricing page), so adding Canadian sales tax
+  overstated it by up to 15%. Its CA$7.84 is only "€5 is equivalent to", which the ECB conversion matches.
+- **Per price:** `taxIncluded: { quote }` on a catalog price, with the source page's words, and `taxIncluded: true`
+  on the API's picked prices. Left out, the buyer's region decides as before (section 4.8). The D1 tables don't
+  change (it travels in each provider's JSON), so `seedFormat` stays.
+- **Checked automatically:** price research and the extraction record the wording (section 6.5), and the nightly
+  check confirms the quote is still there and flags contrary wording (section 6.4).
 
 **Resolved (2026-10-26, M4.2)**
 - **Canadian sales-tax rates** are built now, not in M7.1: the first-run and 📍 dialogs show "Sales tax 13%

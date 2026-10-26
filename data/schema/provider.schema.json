@@ -202,6 +202,19 @@
                   "type": "boolean",
                   "description": "false for prepaid plans that have to be renewed by hand"
                 },
+                "taxIncluded": {
+                  "type": "object",
+                  "properties": {
+                    "quote": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "The source page's own words that say so (Mullvad's \"Including VAT.\"), which the nightly check looks for"
+                    }
+                  },
+                  "required": ["quote"],
+                  "additionalProperties": false,
+                  "description": "The amount already includes sales tax wherever the buyer is, so none is added in Canada or the US. Left out, the buyer's region decides (BLUEPRINT §4.8)"
+                },
                 "lastVerified": {
                   "type": "string",
                   "format": "date",
@@ -306,6 +319,19 @@
                 "autoRenew": {
                   "type": "boolean",
                   "description": "false for prepaid plans that have to be renewed by hand"
+                },
+                "taxIncluded": {
+                  "type": "object",
+                  "properties": {
+                    "quote": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "The source page's own words that say so (Mullvad's \"Including VAT.\"), which the nightly check looks for"
+                    }
+                  },
+                  "required": ["quote"],
+                  "additionalProperties": false,
+                  "description": "The amount already includes sales tax wherever the buyer is, so none is added in Canada or the US. Left out, the buyer's region decides (BLUEPRINT §4.8)"
                 },
                 "lastVerified": {
                   "type": "string",

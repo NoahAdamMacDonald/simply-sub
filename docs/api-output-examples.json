@@ -11,7 +11,7 @@
       "ids": "Stable slugs: provider 'netflix', plan 'netflix.standard', add-on 'netflix.extra-member', bundle 'bundle.disney-crave-premium', feature 'video.quality'.",
       "rankKeys": "Boolean feature: '<featureId>'. Enum or set value: '<featureId>=<valueId>'. Number tier: '<featureId>=<tierId>'. A plan provides an enum key when its value is at least that value, and a tier key when its number is at least the tier's min (PROJECT-PLAN.md §3.2).",
       "money": "Amounts are decimals in the currency's major unit (18.99 = $18.99). Currencies are ISO 4217. Regions are ISO 3166-1 alpha-2 ('GB', never 'UK'), a group priced once for all its members ('EU'), or 'GLOBAL' for one price wherever the provider sells. A free plan has one price with amount 0: it creates no charges and the app shows it as Free (PROJECT-PLAN.md §3.1).",
-      "pricing": "'prices' lists every stored price for every region. When a request includes region and currency, a 'pricing' array is added with one picked price per interval, all from one source region and currency (pickPrice, BLUEPRINT §4.7). 'native: false' means the amount was converted, and the app shows ≈ and the exchange icon. A free price (0) is always native, with no fx. Whether the item is sold in that region at all is a separate check (availability, BLUEPRINT §4.7). Amounts and monthlyEquivalent are rounded to 2 decimals and fx.rate to 4, from the unrounded conversion.",
+      "pricing": "'prices' lists every stored price for every region. When a request includes region and currency, a 'pricing' array is added with one picked price per interval, all from one source region and currency (pickPrice, BLUEPRINT §4.7). 'native: false' means the amount was converted, and the app shows ≈ and the exchange icon. A free price (0) is always native, with no fx. 'taxIncluded: true' means the stored price includes sales tax wherever the buyer is (its price's taxIncluded, with the source page's words), so none is added in Canada or the US (BLUEPRINT §4.8). Whether the item is sold in that region at all is a separate check (availability, BLUEPRINT §4.7). Amounts and monthlyEquivalent are rounded to 2 decimals and fx.rate to 4, from the unrounded conversion.",
       "monthlyEquivalent": "Price per month: year ÷ 12, week × 52 ÷ 12, day × 365 ÷ 12, each divided by intervalCount. Computed from the unrounded amount, then rounded to 2 decimals.",
       "dates": "Dates are YYYY-MM-DD. Timestamps are ISO 8601 in UTC.",
       "caching": "GET responses carry an ETag based on the catalog version. Send If-None-Match to get 304 Not Modified. The endpoints that read D1 or KV (providers, plans, bundles, fx, icon) also keep each public answer in Cloudflare's edge cache, keyed by its URL, for its max-age.",
@@ -283,7 +283,7 @@
                     ]
                   },
                   {
-                    "_note": "No acceptedNetworks: unknown, so the app allows every card with an 'acceptance not confirmed' hint. Only a GLOBAL EUR price exists, so Canadian users see a converted price.",
+                    "_note": "No acceptedNetworks: unknown, so the app allows every card with an 'acceptance not confirmed' hint. Only a GLOBAL EUR price exists, so Canadian users see a converted price. It includes VAT (taxIncluded), so no sales tax is added in Canada or the US.",
                     "id": "mullvad",
                     "name": "Mullvad VPN",
                     "aliases": ["mullvad"],
@@ -306,7 +306,7 @@
                           "vpn.unlimited-traffic": true
                         },
                         "prices": [
-                          { "region": "GLOBAL", "currency": "EUR", "amount": 5.00, "interval": "month", "intervalCount": 1, "autoRenew": false, "lastVerified": "2026-10-10", "sourceUrl": "https://mullvad.net/en/pricing" }
+                          { "region": "GLOBAL", "currency": "EUR", "amount": 5.00, "interval": "month", "intervalCount": 1, "autoRenew": false, "taxIncluded": { "quote": "Including VAT." }, "lastVerified": "2026-10-10", "sourceUrl": "https://mullvad.net/en/pricing" }
                         ]
                       }
                     ]
@@ -556,7 +556,7 @@
                           "vpn.unlimited-traffic": true
                         },
                         "prices": [
-                          { "region": "GLOBAL", "currency": "EUR", "amount": 5.00, "interval": "month", "intervalCount": 1, "autoRenew": false, "lastVerified": "2026-10-10", "sourceUrl": "https://mullvad.net/en/pricing" }
+                          { "region": "GLOBAL", "currency": "EUR", "amount": 5.00, "interval": "month", "intervalCount": 1, "autoRenew": false, "taxIncluded": { "quote": "Including VAT." }, "lastVerified": "2026-10-10", "sourceUrl": "https://mullvad.net/en/pricing" }
                         ]
                       }
                     ]
@@ -1132,7 +1132,7 @@
                       "name": "Mullvad VPN",
                       "matchedKeys": ["vpn.included"],
                       "pricing": [
-                        { "interval": "month", "intervalCount": 1, "amount": 7.53, "currency": "CAD", "monthlyEquivalent": 7.53, "autoRenew": false, "native": false, "source": { "region": "GLOBAL", "amount": 5.00, "currency": "EUR" }, "fx": { "rate": 1.5060, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } }
+                        { "interval": "month", "intervalCount": 1, "amount": 7.53, "currency": "CAD", "monthlyEquivalent": 7.53, "autoRenew": false, "native": false, "taxIncluded": true, "source": { "region": "GLOBAL", "amount": 5.00, "currency": "EUR" }, "fx": { "rate": 1.5060, "date": "2026-10-21", "source": "European Central Bank via Frankfurter" } }
                       ],
                       "bestMonthlyEquivalent": 7.53,
                       "lastVerified": "2026-10-10",

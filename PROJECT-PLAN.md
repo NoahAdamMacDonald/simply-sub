@@ -98,7 +98,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | ID | Task | Done when |
 |---|---|---|
 | M0.1 | Create the GitHub repo `simply-sub`, clone it to `C:\dev\simply-sub`, move the planning files in (§1.1) | The repo has the docs, and the README links to them |
-| M0.2 | Root workspace: `package.json` workspaces, `volta pin node@24.19.0 npm@12.0.2`, `tsconfig.base.json`, ESLint, Prettier, `.editorconfig`, `.gitignore` | `npm install` from the root works; `node -v` inside the repo prints 24.19.0 |
+| M0.2 | Root workspace: `package.json` workspaces, `volta pin node@24.19.0 npm@12.0.2`, `tsconfig.base.json`, ESLint, Prettier, `.editorconfig`, `.gitignore` | `npm install` from the root works; `node -v` inside the repo prints 24.19.0 (24.22.1 since 2026-10-26, #32) |
 | M0.3 | Scaffold `apps/web` (Angular 22.2.3, SCSS, routing, no SSR); add Angular Material; production `baseHref: /simply/sub/` | `ng build` outputs `dist/web/browser` with `<base href="/simply/sub/">` |
 | M0.4 | Theme: `styles/_tokens.scss` (BLUEPRINT §8.1 + §4.1 below), Material theme mapped to the tokens, Inter and Material Symbols self-hosted (`@fontsource/inter`; no Google Fonts requests), `ThemeService` (system/light/dark, saved) | The theme toggle works; no hex values exist outside `_tokens.scss` |
 | M0.5 | App shell (P1): sidebar, a lazy placeholder route for every page, responsive drawer, not-found page (P15) | Every nav link works; the layout is fine at 360 px |
@@ -137,7 +137,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M3.1 | `discover-services.ts` (Wikidata) → `data/queue.yaml` | The queue has services with websites and categories |
 | M3.2 | `find-urls.ts` (common paths → sitemap → nav links → search API) | At least 80% of a 20-service sample get a correct pricing URL |
 | M3.3 | Playwright renderer, run locally so prices come back in CAD | Text and a screenshot are saved for each page |
-| M3.4 | `extract-plans.ts` (LLM structured output, evidence quotes, proposed features; regular prices, the billing period as stated, `availableIn` from the provider's own country list: BLUEPRINT §6.5) | Draft YAML passes validation for most services |
+| M3.4 | `extract-plans.ts` (LLM structured output, evidence quotes, proposed features; regular prices, the billing period as stated, `availableIn` from the provider's own country list, `taxIncluded` with the page's words when prices include tax everywhere: BLUEPRINT §6.5) | Draft YAML passes validation for most services |
 | M3.5 | Batch PR script (`gh pr create`, about 10 providers per PR), with each new provider's logo fetched into `data/logos/` the way `npm run data:icons` does | One command turns a batch into a reviewable PR, logos included |
 | M3.6 | Run it on your own services (BLUEPRINT §6.6) and tune the prompts | Your subscriptions are in the catalog with CAD prices |
 
@@ -147,7 +147,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M4.1 | Dexie database (BLUEPRINT §4.6, including `region`, add-on quantities, bundle items, `billingDay` and `priceOverride.until`) + repositories that expose signals. Repositories are the only way into Dexie, only non-sensitive fields are indexed, and records are Zod-validated on the way in and out (BLUEPRINT §11.1) | CRUD tests pass with `fake-indexeddb`, and a malformed stored record is rejected rather than shown |
 | M4.2 | `SettingsStore` (on M4.1's `SettingsRepository`) + first-run dialog (P1), with the province/state menu and the sales-tax rate (BLUEPRINT §4.8): core's `settingsDefaults`, `subdivisionsOf` and `salesTaxRate`, with the Canadian rate table checked against official sources; Settings (P13) gets the budgets, Appearance and the 📍 dialog; `ThemeService` reads and writes `settings.theme`, keeping `localStorage` `ss-theme` as the startup cache (BLUEPRINT §8.1); the "IndexedDB blocked" notice (P15), from the repositories' `error` status, with [Continue anyway] running every repository in memory | Country, province or state, and currency are saved, with defaults from the browser locale; the menu lists only the chosen country's subdivisions; with IndexedDB blocked, the notice appears |
 | M4.3 | `CatalogStore`: cached snapshot → revalidate `data/catalog/index.json`, and when its `catalogVersion` changed, fetch the region's file (`regionFileFor`: `data/catalog/<region>.json`, its group's or `catalog.json`; plus any region a list item uses) → save; the offline banner and "Catalog updated" toast (P1) | The app works offline after the first visit, and the banner shows the catalog's date |
-| M4.4 | `FxStore` + `ss-price` with the converted marker and "+ tax" in tax-added regions | Converted prices show ≈, the icon and the tooltip; a Canadian sees "+ tax" |
+| M4.4 | `FxStore` + `ss-price` with the converted marker and "+ tax" in tax-added regions ("incl. tax" for a price with `taxIncluded`, from core's `addedSalesTax`) | Converted prices show ≈, the icon and the tooltip; a Canadian sees "+ tax", and "incl. tax" on Mullvad |
 | M4.5 | Shared components (§4.3) + a `/dev/components` gallery (dev builds only) | Every component renders in both themes in the gallery |
 | M4.6 | `MetricsService` skeleton: resolved items (§3.4) from repos + catalog + FX | Unit tests pass with a fixture list |
 
@@ -177,7 +177,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 ### M7 — Money, schedule & calendar
 | ID | Task | Done when |
 |---|---|---|
-| M7.1 | core: schedule engine for charges, statuses, totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/`; sales tax on charges in `tax/`, from M4.2's `salesTaxRate` and Canadian rate table (BLUEPRINT §4.8; recheck the rates if `canadianSalesTaxCheckedOn` is old) | Charges include tax by province and "plus tax" amounts. Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
+| M7.1 | core: schedule engine for charges, statuses, totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/`; sales tax on charges in `tax/`, from `addedSalesTax` (M4.2's rates, none on a price with `taxIncluded`) (BLUEPRINT §4.8; recheck the rates if `canadianSalesTaxCheckedOn` is old) | Charges include tax by province and "plus tax" amounts, and none on a price that includes it (Mullvad). Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
 | M7.2 | Totals and budget bars on Home, Lists and List view | The numbers match the §3.1 definitions |
 | M7.3 | Home (P2) | P2 criteria met |
 | M7.4 | Calendar (P10): grid, day panel, list filter, upcoming list, agenda layout on mobile | P10 criteria met |
@@ -189,7 +189,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 |---|---|---|
 | M8.1 | core: optimizer (BLUEPRINT §10) with fixtures | All fixture cases pass |
 | M8.2 | Optimizations page (P14) + "Apply" to a draft | P14 criteria met |
-| M8.3 | `apps/bot` nightly price check → GitHub PR (BLUEPRINT §6.4, §7.7); the same run proposes a new logo when a provider's icon changed (a rebrand) | A changed price produces a PR, and so does a changed logo |
+| M8.3 | `apps/bot` nightly price check → GitHub PR (BLUEPRINT §6.4, §7.7), which also checks each `taxIncluded` quote is still on its page; the same run proposes a new logo when a provider's icon changed (a rebrand) | A changed price produces a PR, and so does a changed logo or a `taxIncluded` quote gone from its page |
 
 ### M9 — Payment (Phase 4)
 | ID | Task | Done when |

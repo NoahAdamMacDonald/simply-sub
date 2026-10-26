@@ -171,11 +171,12 @@ function pricedIn(value: unknown): { prices: Price[]; pricing: PickedPrice[] }[]
     : undefined;
   const prices =
     (record['prices'] as Price[] | undefined) ??
-    pricing?.map(({ source, interval, intervalCount, autoRenew }) => ({
+    pricing?.map(({ source, interval, intervalCount, autoRenew, taxIncluded }) => ({
       ...source,
       interval,
       intervalCount,
       autoRenew,
+      ...(taxIncluded && { taxIncluded: { quote: 'Rebuilt from the picked price' } }),
       lastVerified: '2026-10-21',
     }));
   return [
