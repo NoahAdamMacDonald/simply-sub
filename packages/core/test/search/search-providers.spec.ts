@@ -219,6 +219,7 @@ describe('searchProviders', () => {
           ['proton', 4, ['plan:proton.vpn-plus', 'feature:vpn.included']],
         ],
       );
+      // "VPN devices" is named too, but "vpn" names rank keys, which come first.
       expect(matches[1].plans.map((plan) => plan.matchedKeys)).toEqual([
         ['vpn.included'],
         ['vpn.included'],
@@ -300,6 +301,91 @@ describe('searchProviders', () => {
 
     it('finds nothing for text nothing matches', () => {
       expect(search({ q: 'gym', sort: 'relevance' })).toEqual([]);
+    });
+
+    it('matches every term: a provider’s name with a rank key or a plan’s name', () => {
+      const fourK = search({ q: 'netflix 4k', sort: 'relevance' });
+
+      expect(planIds(fourK)).toEqual([['netflix', ['netflix.premium']]]);
+      // The best term's relevance: the name starts with "netflix".
+      expect([fourK[0].relevance, fourK[0].matchedOn]).toEqual([
+        1,
+        ['name', 'feature:video.quality=4k'],
+      ]);
+      const premium = search({ q: 'crave premium', sort: 'relevance' });
+      expect(planIds(premium)).toEqual([['crave', ['crave.premium']]]);
+      expect(premium[0].matchedOn).toEqual(['name', 'plan:crave.premium']);
+      // No provider is both.
+      expect(search({ q: 'netflix crave', sort: 'relevance' })).toEqual([]);
+    });
+
+    it('matches a plan name word by word', () => {
+      expect(planIds(search({ q: 'Standard with ads', sort: 'relevance' }))).toEqual([
+        ['crave', ['crave.standard']],
+        ['netflix', ['netflix.standard-ads']],
+      ]);
+    });
+
+    it('names a feature by its own name, with the highest key each plan provides of it', () => {
+      const matches = search({ q: 'video quality', sort: 'relevance' });
+
+      // Crave's Standard has no video quality.
+      expect(planIds(matches)).toEqual([
+        ['crave', ['crave.premium']],
+        ['netflix', ['netflix.standard-ads', 'netflix.standard', 'netflix.premium']],
+      ]);
+      expect(matches[1].plans.map((plan) => plan.matchedKeys)).toEqual([
+        ['video.quality=1080p'],
+        ['video.quality=1080p'],
+        ['video.quality=4k'],
+      ]);
+      expect([matches[1].relevance, matches[1].matchedOn]).toEqual([
+        5,
+        ['feature:video.quality=1080p', 'feature:video.quality=4k'],
+      ]);
+    });
+
+    it('matches a plural as its singular, but not a word that only ends in s', () => {
+      expect(search({ q: 'VPNs', sort: 'relevance' })).toEqual(
+        search({ q: 'vpn', sort: 'relevance' }),
+      );
+      // "plu" would match more than plus does.
+      expect(search({ q: 'plus', sort: 'relevance' }).map((match) => match.provider.id)).toEqual([
+        'proton',
+      ]);
+    });
+
+    it('brings every plan of a category the text names, else the plans with a feature it names', () => {
+      const files = edited(catalog(), 'data/providers/proton.yaml', ['plans', 0, 'features'], {
+        'storage.cloud': 5,
+      });
+
+      // Proton Free has no VPN.
+      expect(planIds(search({ q: 'vpn', category: 'privacy-suite' }, files))).toEqual([
+        ['proton', ['proton.vpn-plus', 'proton.unlimited', 'proton.duo']],
+      ]);
+      const vpnCategory = edited(files, 'data/providers/proton.yaml', ['category'], 'vpn');
+      expect(planIds(search({ q: 'vpn', category: 'vpn' }, vpnCategory))).toEqual([
+        ['mullvad', ['mullvad.vpn']],
+        ['proton', ['proton.free', 'proton.vpn-plus', 'proton.unlimited', 'proton.duo']],
+      ]);
+    });
+
+    it('brings every plan of a provider the text names when none provides the key it names', () => {
+      const files = edited(catalog(), 'data/providers/mullvad.yaml', ['name'], 'Mullvad Ultra');
+
+      // "Ultra" is in 4K (Ultra HD), which Mullvad doesn't have.
+      expect(
+        search({ q: 'ultra', sort: 'relevance' }, files).map((match) => [
+          match.provider.id,
+          match.relevance,
+          match.plans.map((plan) => plan.plan.id),
+        ]),
+      ).toEqual([
+        ['mullvad', 2, ['mullvad.vpn']],
+        ['crave', 5, ['crave.premium']],
+        ['netflix', 5, ['netflix.premium']],
+      ]);
     });
   });
 

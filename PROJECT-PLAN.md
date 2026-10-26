@@ -156,8 +156,8 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 ### M5 — Search & add
 | ID | Task | Done when |
 |---|---|---|
-| M5.1 | core: search index, matching and filters (`searchCatalog`), using `availability` (BLUEPRINT §4.7). Starts from M2.3's `searchProviders`, which already has P8's matching, filters and sorts | Name, plan, alias and feature matches are ranked as described in P8, and plans not offered in the user's region never appear |
-| M5.2 | Search page layout, results and the search sub-card with expand (P8): `ss-sub-card`'s search variant (§4.3, moved from M4.5), with "Cheaper at" resellers from `resellerDeals` (BLUEPRINT §4.9) | P8 layout criteria met |
+| M5.1 | core: matching and filters (`searchCatalog`), using `availability` (BLUEPRINT §4.7), on M2.3's `searchProviders`, the engine GET /providers shares: text matched term by term, with plurals and features' own names (P8); one result per provider with its matching plans priced, the plan shown (the user's own when it matches), each plan's reseller deals (`resellerDeals`) and "not offered" results for providers the text names; the Activity filter and status line from core's `itemActivity` (§3.3's active and inactive, moved from M7.1) and `providerActivity`. Add-ons, bundles and a suite's savings are M5.2's (BLUEPRINT §14) | Name, plan, alias and feature matches are ranked as described in P8, and plans not offered in the user's region never appear; filtering for 4k gives each provider's cheapest 4k plan; "Native pricing only" hides converted prices |
+| M5.2 | Search page layout, results and the search sub-card with expand (P8): `ss-sub-card`'s search variant (§4.3, moved from M4.5), with "Cheaper at" resellers from each plan's `deals` (`searchCatalog`, BLUEPRINT §4.9), and the expanded card's add-ons, bundles with savings and suite savings worked out in core for the plan shown | P8 layout criteria met |
 | M5.3 | Filter panel + URL state (P8) | Filters survive a reload and back/forward |
 | M5.4 | Add-to-list menu → edit page with `?add=` (flow F1) | F1 works end to end (needs M6.3–M6.5; stub it until then) |
 | M5.5 | Pick mode `?addTo=` (flow F2) | F2 works end to end |
@@ -179,7 +179,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 ### M7 — Money, schedule & calendar
 | ID | Task | Done when |
 |---|---|---|
-| M7.1 | core: schedule engine for charges, statuses, totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/` (built in M4.5 for the mini calendar), on M4.6's resolved items (`ResolvedItem.status` and `nextCharge`, `ListMetrics`; unresolved items left out of totals and counted; an add-on billed on its own period); sales tax on charges in `tax/`, from `addedSalesTax` (M4.2's rates, none on a price with `taxIncluded`) (BLUEPRINT §4.8; recheck the rates if `canadianSalesTaxCheckedOn` is old) | Charges include tax by province and "plus tax" amounts, and none on a price that includes it (Mullvad). Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
+| M7.1 | core: schedule engine for charges, statuses (`ItemStatus` on M5.1's `itemActivity`, adding the end date and manual renewal), totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/` (built in M4.5 for the mini calendar), on M4.6's resolved items (`ResolvedItem.status` and `nextCharge`, `ListMetrics`; unresolved items left out of totals and counted; an add-on billed on its own period); sales tax on charges in `tax/`, from `addedSalesTax` (M4.2's rates, none on a price with `taxIncluded`) (BLUEPRINT §4.8; recheck the rates if `canadianSalesTaxCheckedOn` is old) | Charges include tax by province and "plus tax" amounts, and none on a price that includes it (Mullvad). Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
 | M7.2 | Totals and budget bars on Home, Lists and List view | The numbers match the §3.1 definitions |
 | M7.3 | Home (P2) | P2 criteria met |
 | M7.4 | Calendar (P10): grid, day panel, list filter, upcoming list, agenda layout on mobile | P10 criteria met |
@@ -302,6 +302,10 @@ Users rank **rank keys**. Each one points to one rankable option of a feature:
 | Manual renewal | The next charge is `manual` | Small ↻ "Renew by Nov 3" badge |
 
 In Search the status is per provider, across all lists ("Active · 2 lists").
+
+Active and Inactive, with "Active from", come from the billing dates alone (core's `itemActivity`, M5.1); a window
+that repeats yearly is copied into each later year, never earlier ones. Ending and Manual renewal need the charges
+(M7.1).
 
 ### 3.4 View models
 ```ts
@@ -769,7 +773,7 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
 **Data:** the `CatalogStore` snapshot, `FxStore`, user lists (for status), profile ranks (for the dots). Everything runs locally (`searchCatalog` in core).
 **Behaviour**
 - **One card per provider.** It shows the plan you already have if that matches the filters, otherwise the cheapest plan that matches every filter. Plan chips switch between the provider's matching plans.
-- **Matching:** text matches provider names and aliases, plan names, feature names and aliases, and category names, in this order: exact or prefix name → substring → alias → feature or category. 150 ms debounce.
+- **Matching:** text matches provider names and aliases, plan names, feature names and aliases, and category names, in this order: exact or prefix name → substring → alias → plan name → feature or category. It's matched term by term, and every term must match ("netflix 4k"): a term is the longest run of words a feature's or category's name contains ("ultra hd"), else a word, and a plural matches its singular ("vpns"). As built in M5.1 (`searchProviders`' rules, BLUEPRINT §14). 150 ms debounce.
 - **Sort:** Best match (default when there's text), Price low→high (default otherwise), Price high→low, Name A–Z, Most features. Price sorts use the lowest monthly equivalent of the plan shown.
 - **Prices:** every interval price is a button → flow F1 (or F2 in pick mode). Converted prices show ≈, the icon and a tooltip. A $0 price shows as "Free". In Canada and the US prices are shown before tax, with "+ tax" (BLUEPRINT §4.8).
 - **Resellers** (BLUEPRINT §4.9): under a plan's prices, each official reseller that sells it for less per month after the user's sales tax (`resellerDeals`), cheapest first: "Cheaper at [icon] Amazon.ca: $87.00 / 12 mo ↗", a link to the shop's page that opens in a new tab (`rel="noopener"`). Only shops that sell where the user is; none without exchange rates.
