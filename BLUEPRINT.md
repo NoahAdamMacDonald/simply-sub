@@ -1818,7 +1818,7 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
   [data-theme='dark'] {
     --ss-accent-text: oklch(from var(--ss-accent) 0.76 calc(c * 1.15) h);  /* ≈ #FF83A0: readable on dark, follows the accent hue */
     --ss-text: #F2F2F2;  --ss-text-muted: #A8A8A8;
-    --ss-sidebar-bg: #000000;  --ss-app-bg: #2B2B2B;  --ss-card-bg: #3A3A3A;  --ss-divider: #393939;
+    --ss-sidebar-bg: #000000;  --ss-app-bg: #2B2B2B;  --ss-card-bg: #3A3A3A;  --ss-divider: #555555;
     /* text shades = vivid fills on dark, lightened where needed to reach 4.5:1 on dark cards */
     --rank-essential-text: #DF7DFF;  --rank-critical-text: #93A6FF;  --rank-needed-text: #00EAFF;  --rank-wanted-text: #5CFF5C;
     --rank-uses-text: #FFF000;  --rank-sometimes-text: var(--rank-sometimes);  --rank-unused-text: #FF8C33;
@@ -1836,6 +1836,8 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
   M4.5 checked the budget label (`#111`): 11.2:1 on the ok fill, 10.5:1 on warn, 4.87:1 on over and 10.1:1 on the
   track. The danger button's label is 6.3:1 (white on `#C40000`) and 5.8:1 in dark mode (the app background on
   `#FF7E7E`).
+  The dark divider was `#393939`, the dark card's own colour, so borders on cards vanished; `#555555` is 1.5:1 on dark
+  cards, as the light divider is on white (2026-10-26).
   Usage rules that follow from the check:
   - Light rank **text** shades reach 4.5:1 on white cards but not on the grey app background (4.2–4.5), so put
     rank text on cards.

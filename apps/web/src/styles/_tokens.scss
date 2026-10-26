@@ -74,7 +74,8 @@
   --ss-sidebar-bg: #000000;
   --ss-app-bg: #2b2b2b;
   --ss-card-bg: #3a3a3a;
-  --ss-divider: #393939;
+  // 1.5:1 on dark cards, as the light divider is on white: #393939 was the card's own colour.
+  --ss-divider: #555555;
 
   // Text shades are the vivid fills, lightened where needed to reach 4.5:1 on dark cards.
   --rank-essential-text: #df7dff;
