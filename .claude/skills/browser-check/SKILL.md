@@ -53,6 +53,13 @@ Settings (budgets edited in place, Appearance, the 📍 dialog), the theme saved
 lost cache), and the "IndexedDB blocked" notice with in-memory mode. Run it the same way. For the production build
 under `wrangler dev`, with the CSP, see the progress-preview skill's `csp-check.cjs`.
 
+`check-catalog.cjs` (M4.3) checks the catalog downloads (which `/data/` files each step asks for, and what's cached in
+IndexedDB), the offline banner (`context.setOffline`, and an aborted `index.json`), Settings' Catalog line by
+keyboard, the "Catalog updated" toast in two tabs (a new version served with `context.route`), two tabs that reload
+together downloading once, a country with no file of its own, and a first visit with no catalog, with axe in both
+themes at both widths. Its base URL ends in `/`. It works on `ng serve` and under `wrangler dev`, where a CSP
+violation fails its console check.
+
 ## Gotchas
 
 - Every new browser context starts with no settings, so the first-run dialog (M4.2) covers the page until it's
@@ -74,5 +81,9 @@ under `wrangler dev`, with the CSP, see the progress-preview skill's `csp-check.
   `axe.run(document)`. Against the production build (`wrangler dev`, whose CSP has Trusted Types), `addScriptTag`
   throws; use `page.evaluate(fs.readFileSync(axePath, 'utf8'))` instead. A page-level `region` violation means content outside every landmark.
 - Trigger the error snackbar with `page.evaluate(() => setTimeout(() => { throw new Error('x'); }))`.
+- Run axe about 600 ms after clicking a Material button: its ripple and state layer fade out, and mid-fade the
+  dark theme's accent label on them measures 4:1, a contrast failure that isn't there once they settle.
+- Offline, a lazy page that hasn't been opened in the session can't load its chunk, and the error snackbar shows.
+  That's expected until M10's service worker: navigate offline only to pages already opened.
 - Run axe on the snackbar only once it has opened. While opening, it fades in (contrast fails) and keeps its
   content in an `aria-hidden` wrapper (`aria-hidden-focus` fails on the Dismiss button).

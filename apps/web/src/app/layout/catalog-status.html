@@ -1,0 +1,9 @@
+<!-- Always there, so screen readers announce the line when it appears. -->
+<div role="status">
+  @if (notice(); as notice) {
+    <p class="offline-notice">
+      <mat-icon>wifi_off</mat-icon>
+      {{ notice }}
+    </p>
+  }
+</div>

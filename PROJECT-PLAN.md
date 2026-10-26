@@ -146,7 +146,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 |---|---|---|
 | M4.1 | Dexie database (BLUEPRINT §4.6, including `region`, add-on quantities, bundle items, `billingDay` and `priceOverride.until`) + repositories that expose signals. Repositories are the only way into Dexie, only non-sensitive fields are indexed, and records are Zod-validated on the way in and out (BLUEPRINT §11.1) | CRUD tests pass with `fake-indexeddb`, and a malformed stored record is rejected rather than shown |
 | M4.2 | `SettingsStore` (on M4.1's `SettingsRepository`) + first-run dialog (P1), with the province/state menu and the sales-tax rate (BLUEPRINT §4.8): core's `settingsDefaults`, `subdivisionsOf` and `salesTaxRate`, with the Canadian rate table checked against official sources; Settings (P13) gets the budgets, Appearance and the 📍 dialog; `ThemeService` reads and writes `settings.theme`, keeping `localStorage` `ss-theme` as the startup cache (BLUEPRINT §8.1); the "IndexedDB blocked" notice (P15), from the repositories' `error` status, with [Continue anyway] running every repository in memory | Country, province or state, and currency are saved, with defaults from the browser locale; the menu lists only the chosen country's subdivisions; with IndexedDB blocked, the notice appears |
-| M4.3 | `CatalogStore`: cached snapshot → revalidate `data/catalog/index.json`, and when its `catalogVersion` changed, fetch the region's file (`regionFileFor`: `data/catalog/<region>.json`, its group's or `catalog.json`; plus any region a list item uses) → save; the offline banner and "Catalog updated" toast (P1) | The app works offline after the first visit, and the banner shows the catalog's date |
+| M4.3 | `CatalogStore`: cached snapshot → revalidate `data/catalog/index.json`, and when its `catalogVersion` changed, fetch the region's file (`regionFileFor`: `data/catalog/<region>.json`, its group's or `catalog.json`; plus any region a list item uses) → save; the offline banner and "Catalog updated" toast (P1); P13's Catalog line. One `catalogCache` record per file, never merged; core's `planCatalogSync` chooses what to download (BLUEPRINT §6.3) | After the first visit the catalog shows at once from the cache; with the network down while the app is open it keeps working, and the banner shows the catalog's date; a new version is downloaded once and announced; a region with no file of its own gets its group's or the full catalog. Starting the app with no network comes with M10's service worker (narrowed on 2026-10-26: BLUEPRINT §14) |
 | M4.4 | `FxStore` + `ss-price` with the converted marker and "+ tax" in tax-added regions ("incl. tax" for a price with `taxIncluded`, from core's `addedSalesTax`) | Converted prices show ≈, the icon and the tooltip; a Canadian sees "+ tax", and "incl. tax" on Mullvad |
 | M4.5 | Shared components (§4.3) + a `/dev/components` gallery (dev builds only) | Every component renders in both themes in the gallery |
 | M4.6 | `MetricsService` skeleton: resolved items (§3.4) from repos + catalog + FX | Unit tests pass with a fixture list |
@@ -202,6 +202,11 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 ### M10 — Extras (Phase 5)
 Live calendar feed (`POST /cal`), encrypted device sync, "report a wrong price", PWA install and offline mode,
 calendar year view, broader regional price coverage.
+
+Offline mode means a service worker for the app's own files, so the app starts with no network; the catalog is
+already kept offline by M4.3. Angular's `provideServiceWorker` is blocked by our Trusted Types CSP, so the app
+registers the worker itself through a policy of its own in `_headers`; `navigationRequestStrategy: 'freshness'`
+keeps Web Analytics counting repeat visits; and a new version needs an update prompt (BLUEPRINT §14, M4.3).
 
 ---
 
@@ -379,7 +384,9 @@ Add these aliases to `_tokens.scss`. They build on the rank tokens in BLUEPRINT 
 - ☀/☾ toggles light and dark. "System" is chosen in Settings.
 - Under 960 px the sidebar becomes a drawer (`MatSidenav`, mode `over`), opened from a top bar with ☰ and the logo. Navigating closes it and returns focus to ☰.
 - The window scrolls, not a content pane: the sidebar is fixed in the viewport, and the router scrolls to the top on navigation and restores the position on Back. Pages shouldn't add their own full-height scroll containers.
-- Global pieces: the skip-to-content link and the "Something went wrong" snackbar (P15) arrive in M0.5; the offline banner ("Offline — catalog from Oct 22") and the "Catalog updated" toast arrive with `CatalogStore` in M4.3.
+- Global pieces: the skip-to-content link and the "Something went wrong" snackbar (P15) arrive in M0.5; the offline banner and the "Catalog updated" toast arrive with `CatalogStore` in M4.3:
+  - The banner is a line at the top of every page while the browser is offline or the last check couldn't reach the server: "Offline — catalog from Oct 22" (the cached catalog's build date), or "Offline — the catalog will load when you're back online" when nothing is cached yet. It's a polite live region.
+  - The toast shows "Catalog updated" for 5 seconds when a new version replaces the one on screen, in every open tab. A first download, or a new country's file at the same version, isn't announced.
 - Page titles like "Lists · Simply Sub" come from each route's `title`.
 
 **First-run dialog** (shown when no settings are saved, M4.2):
@@ -933,9 +940,9 @@ Editor dialog:
    Catalog      Updated Oct 22, 2026 · version c4f9a21 · [Check for updates]
 📍 Ontario, Canada (CAD)
 ```
-**Built so far (M4.2):** the budgets, Appearance and 📍, each a card ("Location and currency" holds 📍 and the tax
-line under it). Custom tags have no task yet. Your data (M6.9), Security (M6.10), the Catalog line and local sync
-(Phase 5) come with their tasks.
+**Built so far:** the budgets, Appearance and 📍 (M4.2), each a card ("Location and currency" holds 📍 and the tax
+line under it), and the Catalog line (M4.3). Custom tags have no task yet. Your data (M6.9), Security (M6.10) and
+local sync (Phase 5) come with their tasks.
 
 **Behaviour**
 - ← goes back (to Home if there's no history).
@@ -947,6 +954,7 @@ line under it). Custom tags have no task yet. Your data (M6.9), Security (M6.10)
   - ⊕ adds a new tag in edit mode.
 - 📍 opens a dialog for country, province or state, and currency (the currency follows the country unless you change it), with the sales tax that follows: "Sales tax 13% (Ontario)" and a "Use my own rate" checkbox (BLUEPRINT §4.8). It shares the first-run dialog's fields (P1). Cancel or Escape changes nothing.
 - **Appearance** (M4.2): System, Light or Dark, saved in `settings.theme` (BLUEPRINT §8.1).
+- **Catalog** (M4.3): "Updated Oct 22, 2026 · version c4f9a21" (the build date and version of the user's region's file), or "Not downloaded yet". [Check for updates] checks now and says what it found in a live region under it: "You have the latest catalog.", "Downloaded the latest catalog.", "You're offline. Try again when you're back online." or "Couldn't check for updates. Try again later."
 - **Export backup** downloads `simply-sub-backup-YYYY-MM-DD.json`:
   ```json
   {

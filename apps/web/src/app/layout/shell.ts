@@ -7,13 +7,14 @@ import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/mat
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, map } from 'rxjs';
 import { StorageService } from '../core/storage/storage-service';
+import { CatalogStatus } from './catalog-status';
 import { Logo } from './logo';
 import { Sidebar } from './sidebar';
 
 /** Under 960 px the sidebar becomes a drawer, opened from a top bar (PROJECT-PLAN P1). */
 export const DRAWER_BREAKPOINT = '(max-width: 959.98px)';
 
-/** The app frame: skip link, sidebar (or drawer and top bar), and the <main> landmark. */
+/** The app frame: skip link, sidebar (or drawer and top bar), and the <main> landmark with the global notices. */
 @Component({
   selector: 'ss-shell',
   imports: [
@@ -23,6 +24,7 @@ export const DRAWER_BREAKPOINT = '(max-width: 959.98px)';
     MatSidenavContainer,
     MatSidenavContent,
     RouterOutlet,
+    CatalogStatus,
     Logo,
     Sidebar,
   ],

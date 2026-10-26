@@ -62,6 +62,25 @@ describe('RejectedRecords', () => {
     expect(container?.textContent).toContain('Dismiss');
   });
 
+  it("logs a cached catalog file once, and doesn't tell the user: it's downloaded again", async () => {
+    const open = vi.spyOn(TestBed.inject(MatSnackBar), 'open');
+    const file: RejectedRecord = {
+      table: 'catalogCache',
+      key: 'CA',
+      issues: ['fetchedAt: invalid_format'],
+    };
+    rejected.report([file]);
+    rejected.report([file]);
+    await settle();
+    expect(warn.mock.calls).toEqual([
+      [
+        "A cached catalog file couldn't be read, so it's downloaded again. catalogCache record CA: fetchedAt: invalid_format",
+      ],
+    ]);
+    expect(rejected.count()).toBe(0);
+    expect(open).not.toHaveBeenCalled();
+  });
+
   it('says nothing when there is nothing new', async () => {
     const open = vi.spyOn(TestBed.inject(MatSnackBar), 'open');
     rejected.report([]);

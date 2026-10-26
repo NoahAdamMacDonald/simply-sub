@@ -1,6 +1,16 @@
 import { describe, expect, it } from 'vitest';
 import { InvalidRecordError, checkRecord, readRecords, userRecordSchemas } from '../../src';
-import { card, customSub, item, list, listId, ranking, settings, tag } from './fixtures';
+import {
+  card,
+  catalogCache,
+  customSub,
+  item,
+  list,
+  listId,
+  ranking,
+  settings,
+  tag,
+} from './fixtures';
 
 describe('userRecordSchemas', () => {
   it.each([
@@ -11,6 +21,7 @@ describe('userRecordSchemas', () => {
     ['cards', card],
     ['tags', tag],
     ['settings', settings],
+    ['catalogCache', catalogCache],
   ] as const)('checks the %s table with its record schema', (table, record) => {
     expect(userRecordSchemas[table].safeParse(record).success).toBe(true);
   });
@@ -67,6 +78,17 @@ describe('readRecords', () => {
     expect(rankings.rejected[0].key).toBe(ranking.rankKey);
     const stored = readRecords('settings', [{ ...settings, theme: 'auto' }]);
     expect(stored.rejected[0].key).toBe('settings');
+  });
+
+  it("keys a cached catalog file by its region, and checks the key against the table's own keys", () => {
+    const cache = readRecords('catalogCache', [{ ...catalogCache, fetchedAt: 'yesterday' }]);
+    expect(cache.rejected).toEqual([
+      { table: 'catalogCache', key: 'CA', issues: ['fetchedAt: invalid_format'] },
+    ]);
+    const settingsKey = readRecords('catalogCache', [{ ...catalogCache, key: 'settings' }]);
+    expect(settingsKey.rejected[0]).not.toHaveProperty('key');
+    const regionKey = readRecords('settings', [{ ...settings, key: 'CA' }]);
+    expect(regionKey.rejected[0]).not.toHaveProperty('key');
   });
 
   it.each([null, 'a list', 42, []])('rejects %j, which is not a record', (row) => {

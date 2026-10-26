@@ -31,4 +31,15 @@
     </button>
     <p class="tax">{{ salesTax() }}</p>
   </section>
+
+  <section aria-labelledby="catalog-heading">
+    <h2 id="catalog-heading">Catalog</h2>
+    <div class="catalog">
+      <p>{{ catalogLine() }}</p>
+      <button matButton="outlined" type="button" (click)="checkForUpdates()">
+        Check for updates
+      </button>
+    </div>
+    <p class="check-message" role="status">{{ checkMessage() }}</p>
+  </section>
 }

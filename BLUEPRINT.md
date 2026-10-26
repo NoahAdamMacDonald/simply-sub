@@ -877,6 +877,12 @@ export interface Settings {             // one record, under the key 'settings'
   // is stored, only the salt and an encrypted check value. Per-device preferences (PROJECT-PLAN §3.5) come with
   // their tasks too. Optional fields added later need no migration: stored records without them still pass.
 }
+
+export interface CatalogCache {         // a downloaded catalog file (M4.3, section 6.3): a cache, not the user's data
+  key: string;                          // the region it serves (CA for CA.json, EU), or 'catalog' for catalog.json
+  snapshot: CatalogSnapshot;            // the file as downloaded: its meta has catalogVersion, generatedAt and region
+  fetchedAt: string;
+}
 ```
 `Settings.country` and `ListItem.region` are countries (ISO 3166-1 alpha-2), never `EU` or `GLOBAL`, and a
 subdivision must belong to the country.
@@ -898,9 +904,10 @@ transaction types for a subclass). Dexie keeps only keys and indexes, not the re
 - A **change to stored records' shape** (a field renamed, a new required field) needs a new version with an upgrade
   function. Export files carry a `schemaVersion` so old backups can still be imported, migrated the same way.
 
-v1 declares every table, so it's the full list the app lock (M6.10) encrypts. `catalogCache`, `drafts` and
-`dismissedSuggestions` get their record schemas with M4.3, M6.3 and M8.2, and `cards` its repository with M9.1 (its
-schema is in core already, since backups carry cards).
+v1 declares every table, so it's the full list the app lock (M6.10) encrypts. `catalogCache` got its record schema
+with M4.3; `drafts` and `dismissedSuggestions` get theirs with M6.3 and M8.2, and `cards` its repository with M9.1
+(its schema is in core already, since backups carry cards). Backups leave `catalogCache` out, and the app lock leaves
+it plain.
 ```ts
 db.version(1).stores({
   lists: 'id, updatedAt',
@@ -910,7 +917,7 @@ db.version(1).stores({
   cards: 'id',
   tags: 'id',
   settings: 'key',
-  catalogCache: 'key',         // last catalog snapshot + ETag
+  catalogCache: 'key',         // one record per downloaded catalog file (M4.3)
   drafts: 'listId',            // unsaved list edits (PROJECT-PLAN.md P5)
   dismissedSuggestions: 'fingerprint'
 });
@@ -1315,6 +1322,30 @@ static file is answered with the app's `index.html` (the SPA fallback), so the W
 up in `index.json` instead of trying a file. The app loads its country's file, plus the file of any other region a
 list item was bought in (`ListItem.region`), so it never downloads every region's prices.
 
+**In the app** (`CatalogStore`, M4.3; the choices are core's `catalog-sync.ts`):
+- **Kept per file, never merged:** each downloaded file is a `catalogCache` record (section 4.6), and an item's
+  prices come from the file that serves its own region (`catalogFor(region)`). The test above already proves that
+  file gives the full catalog's answers; a merge would need its own proof, and a simple one changes pickPrice's
+  "first region listed" fallback. The files have the same plans, names and features; only the prices differ.
+- **On start** the cached files show at once. Then the store fetches `index.json` (revalidated with its ETag, so an
+  unchanged catalog costs a 304, section 7.6) and downloads only the files that are missing or of another version
+  (`planCatalogSync`), all at the index's version, saved in one transaction that also drops the files no region
+  needs any more. A file of another version (a deploy between the two requests), one that fails its schema, or the
+  SPA fallback in its place isn't kept, and the cached files stay.
+- **Checks again** when the regions change (the first run, 📍, an item bought elsewhere), on the browser's `online`
+  event, when a tab is shown again after an hour (`catalogCheckDue`), and from Settings' [Check for updates] (P13).
+  A Web Lock (`navigator.locks`) lets one tab check at a time, so tabs that open together download a new version
+  once. There's no timer: the catalog changes at most daily.
+- **Before the first run** there's no region, so only `index.json` is fetched; the country's file follows as soon as
+  the first-run dialog saves.
+- **Offline:** when a request can't reach the server (or takes 30 s), the cached files stay in use and the shell
+  shows "Offline — catalog from Oct 22" (the cached file's `generatedAt`), or "Offline — the catalog will load when
+  you're back online" on a first visit. A new version replacing the one on screen shows "Catalog updated" in every
+  open tab; a first download doesn't. A file that can't be saved (a full disk) is still used in that tab.
+- **Not offline on start yet:** without a service worker the browser revalidates `index.html` on every visit, so the
+  app keeps working only when the network drops while it's open. M10's service worker makes it start offline
+  (section 14).
+
 The cheapest price per feature (what `api-all-example.json` tried to store) is computed on demand with today's
 exchange rates instead, so it's never stale.
 
@@ -1640,7 +1671,9 @@ Settings → Build*). The settings as they are now:
   - `Referrer-Policy: no-referrer`, `X-Content-Type-Options: nosniff` and `Cross-Origin-Opener-Policy: same-origin`;
   - caching. The app's hashed files (`main-*.js`, `chunk-*.js`, `styles-*.css`, `media/*`) are immutable for a year.
     Icons (`/icons/*`) get one day and are then revalidated, because their URLs carry no version and a replaced logo
-    must show up. `index.html` and the catalog files keep the default, revalidated on every visit.
+    must show up. `index.html` and the catalog files keep the default, revalidated on every visit: Cloudflare sends
+    `Cache-Control: public, max-age=0, must-revalidate` with an ETag and answers `If-None-Match` with a 304 (checked
+    on 2026-10-26), which is what makes the app's catalog check cheap (section 6.3).
   - Checked in Edge on the production build under `wrangler dev` (which applies `_headers`): every page, in-app
     navigation, both themes, the drawer and the error snackbar run with no CSP or Trusted Types violations, and
     the beacon, inserted the way Cloudflare does, loads and sends its report.
@@ -2075,6 +2108,14 @@ prompted after each big change, or weekly).
   brings all of Zod, every locale's messages included, and made the chunk 541 kB.
 - **Persistent storage** is requested after the first write, not on load: Firefox asks the user, and the question
   only makes sense once there's something to keep.
+- **The catalog cache (M4.3):** `CatalogCacheRepository` keeps the downloaded catalog files (section 6.3). It's a
+  cache, so the storage engine replaces and deletes its records outright (`replace`, for cache tables only) where
+  user records are soft-deleted. A cached file that fails its schema is only logged ("A cached catalog file couldn't
+  be read, so it's downloaded again"), with no snackbar, and the next check downloads it again. The files are checked
+  against core's catalog schemas on every read too (about 0.7 ms for a 40 kB file). The catalog schemas share the
+  Zod chunk the settings load at startup, which went from 216 kB to 218 kB minified (61 kB compressed); the store,
+  the banner and the region list brought the initial bundle to 474 kB of its 500 kB budget. The download code is a
+  chunk of its own (1 kB).
 - **IndexedDB blocked** (some private browsing modes, or site data blocked): the repositories' status is `error`, and
   the app shows the P15 notice in place of the shell. [Continue anyway] calls `StorageService.useMemory()`: the same
   Dexie database opens on `fake-indexeddb` (57 kB, a chunk loaded only then), and every repository reloads from it
@@ -2284,6 +2325,19 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3).
+
+**Resolved (2026-10-26, M4.3)**
+- **Offline:** M4.3 keeps the catalog working when the network drops while the app is open; starting the app with no
+  network moves to M10, with a service worker. Without one the browser revalidates `index.html` on every visit
+  (section 7.6). Found while deciding: Angular 22.2.3's `provideServiceWorker` registers with a plain string, which
+  our Trusted Types CSP blocks (`register` needs a `TrustedScriptURL`; tried in Edge), so M10 registers the worker
+  itself through a policy of its own added to `_headers`. Cloudflare adds the Web Analytics beacon only to browser
+  page loads, not to a worker's fetch of `index.html`, so M10 uses `navigationRequestStrategy: 'freshness'`, or
+  repeat visits served from the worker's copy would go uncounted. An update prompt comes with it.
+- **The cache:** one `catalogCache` record per downloaded file, never merged, with no ETag of its own (the browser's
+  HTTP cache revalidates), checked against core's schemas on every read (sections 6.3, 11.1).
+- **Checks:** index.json's version on start, on `online`, when a tab is shown after an hour and from Settings, with a
+  Web Lock across tabs; no timer. Before the first run, only index.json. Settings gained the Catalog line (P13).
 
 **Resolved (2026-10-26, prices that include tax)**
 - **Mullvad's €5 includes VAT for everyone** ("Including VAT." on its pricing page), so adding Canadian sales tax
