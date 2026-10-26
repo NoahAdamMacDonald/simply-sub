@@ -151,7 +151,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M4.3 | `CatalogStore`: cached snapshot → revalidate `data/catalog/index.json`, and when its `catalogVersion` changed, fetch the region's file (`regionFileFor`: `data/catalog/<region>.json`, its group's or `catalog.json`; plus any region a list item uses) → save; the offline banner and "Catalog updated" toast (P1); P13's Catalog line. One `catalogCache` record per file, never merged; core's `planCatalogSync` chooses what to download (BLUEPRINT §6.3) | After the first visit the catalog shows at once from the cache; with the network down while the app is open it keeps working, and the banner shows the catalog's date; a new version is downloaded once and announced; a region with no file of its own gets its group's or the full catalog. Starting the app with no network comes with M10's service worker (narrowed on 2026-10-26: BLUEPRINT §14) |
 | M4.4 | `FxStore` + `ss-price` with the converted marker and "+ tax" in tax-added regions ("incl. tax" for a price with `taxIncluded`, from core's `addedSalesTax`). The rates are kept in Dexie v2's `fxRates` table; core's `priceTaxNote` and `buyerTaxPlace` decide the note; the `/dev/components` gallery starts with `ss-price` (BLUEPRINT §4.7, §4.8, §14) | Converted prices show ≈, the icon and the tooltip; a Canadian sees "+ tax", and "incl. tax" on Mullvad |
 | M4.5 | Shared components (§4.3) + a `/dev/components` gallery (dev builds only; started in M4.4 with `ss-price`), with hand-made inputs where the data comes later (charges M7.1, counts M6.1, view models M4.6); `ss-sub-card` moved to M5.2 and M6.8 (2026-10-26). Core: `budgetBar`, `rankChoices` and `countedRanks`, `planFeatureRows`, `monthWeeks` and `addMonths`, `tagColorPresets`, and the view-model parts the components take (`ItemStatus`, `RankCounts`, `FeatureSummaryRow`) (BLUEPRINT §14) | Every component renders in both themes in the gallery; each is keyboard-usable and passes axe; no hex colours outside `_tokens.scss` |
-| M4.6 | `MetricsService` skeleton: resolved items (§3.4) from repos + catalog + FX | Unit tests pass with a fixture list |
+| M4.6 | `MetricsService` skeleton: resolved items (§3.4) from repos + catalog + FX. Core's `resolveItem` (and `typedPrice` for custom plans and price overrides); items it can't resolve come back with a reason. Status, the next charge and `ListMetrics` come with M7.1, effective ranks with M6.1 (BLUEPRINT §14) | Unit tests pass with a fixture list |
 
 ### M5 — Search & add
 | ID | Task | Done when |
@@ -165,7 +165,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 ### M6 — Lists & ranking
 | ID | Task | Done when |
 |---|---|---|
-| M6.1 | core: rank keys, `providedKeys`, `resolveRank`, `rankCounts`, `featureSummary` (§3.2). M2.3 added `rankKeyOptions` and `providesKey`, and M2.4 `providedKeys` (`ranking/rank-keys.ts`) | Tests cover enum and tier ladders and the resolution order |
+| M6.1 | core: rank keys, `providedKeys`, `resolveRank` (and `ResolvedItem.effectiveRanks`, §3.4), `rankCounts`, `featureSummary` (§3.2). M2.3 added `rankKeyOptions` and `providesKey`, and M2.4 `providedKeys` (`ranking/rank-keys.ts`) | Tests cover enum and tier ladders and the resolution order |
 | M6.2 | Features page (P9) | P9 criteria met |
 | M6.3 | `ListDraftService`, with drafts saved in Dexie | A draft survives navigation and a reload |
 | M6.4 | List edit page (P5) | P5 criteria met |
@@ -179,7 +179,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 ### M7 — Money, schedule & calendar
 | ID | Task | Done when |
 |---|---|---|
-| M7.1 | core: schedule engine for charges, statuses, totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/` (built in M4.5 for the mini calendar); sales tax on charges in `tax/`, from `addedSalesTax` (M4.2's rates, none on a price with `taxIncluded`) (BLUEPRINT §4.8; recheck the rates if `canadianSalesTaxCheckedOn` is old) | Charges include tax by province and "plus tax" amounts, and none on a price that includes it (Mullvad). Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
+| M7.1 | core: schedule engine for charges, statuses, totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/` (built in M4.5 for the mini calendar), on M4.6's resolved items (`ResolvedItem.status` and `nextCharge`, `ListMetrics`; unresolved items left out of totals and counted; an add-on billed on its own period); sales tax on charges in `tax/`, from `addedSalesTax` (M4.2's rates, none on a price with `taxIncluded`) (BLUEPRINT §4.8; recheck the rates if `canadianSalesTaxCheckedOn` is old) | Charges include tax by province and "plus tax" amounts, and none on a price that includes it (Mullvad). Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
 | M7.2 | Totals and budget bars on Home, Lists and List view | The numbers match the §3.1 definitions |
 | M7.3 | Home (P2) | P2 criteria met |
 | M7.4 | Calendar (P10): grid, day panel, list filter, upcoming list, agenda layout on mobile | P10 criteria met |
@@ -220,7 +220,7 @@ These live in `packages/core` as pure functions, so every page computes them the
 | Term | Definition | Used by |
 |---|---|---|
 | **Picked price** | The price `pickPrice` chooses for the user's region and currency: one source region and currency per plan, add-on or bundle, with every interval priced there, converted if it isn't in the user's currency. Native means no conversion was needed (BLUEPRINT §4.7) | Everywhere a price appears |
-| **Item price** | The price override if one is set and the charge is dated before its `until` (if any); otherwise the picked plan price plus each picked add-on price × its quantity. Bundle items use the bundle price | Charges |
+| **Item price** | The price override if one is set and the charge is dated before its `until` (if any); otherwise the picked plan price plus each picked add-on price × its quantity. Bundle items use the bundle price. An add-on not sold for the item's billing period is billed on its own (M4.6: Disney+'s monthly extra member on a yearly plan), so its charges follow its period | Charges |
 | **Sales tax** | Added to the item price for a buyer in a tax-added region (Canada, US) at their rate: the built-in rate for their province, or their own `salesTaxPercent`. Typed amounts (a custom plan, a price override) already include it unless marked `plusTax` (BLUEPRINT §4.8) | Charges |
 | **Monthly equivalent** | Price per month: year ÷ 12, week × 52 ÷ 12, day × 365 ÷ 12, each ÷ `intervalCount`. Before tax, like the price tags | Sorting, the price filter, "≈ $x/mo" hints |
 | **Charge** | One scheduled payment: `{ date, amount, tax, currency, itemId, listId, converted, manual }`. `amount` includes `tax`, the sales tax part | Calendar and all totals |
@@ -305,23 +305,37 @@ In Search the status is per provider, across all lists ("Active · 2 lists").
 
 ### 3.4 View models
 ```ts
-// packages/core/src/user/resolved.ts
-export interface ResolvedItem {
+// packages/core/src/user/resolved.ts: resolveItem(item, context) → { ok: true, resolved } | { ok: false, unresolved }
+export interface ResolvedItem {        // as built in M4.6; the fields marked "M6.1" and "M7.1" come with those tasks
   item: ListItem;
   listId: string;
   providerId?: string; planId?: string; bundleId?: string; customSubId?: string;
-  name: string;            // "Netflix"
-  planName: string;        // "Standard"
+  name: string;            // "Netflix"; a bundle's or custom subscription's own name
+  planName: string;        // "Standard"; a bundle's plans: "Netflix Standard + Crave Premium"
   iconUrl?: string;        // catalog: the relative icons/<id>.webp when the provider has an iconUrl (the absolute URL
-                           // points at production, so a preview would miss a new logo); custom subs: /icon?domain=;
-                           // none → ss-provider-icon shows a letter
-  price: PickedPrice;      // amount, currency, interval, native/converted, FX info
-  monthlyEquivalent: number;
-  status: { kind: 'active' | 'inactive'; activeFrom?: string; endsOn?: string; manual: boolean };
-  nextCharge?: Charge;
+                           // points at production, so a preview would miss a new logo); custom subs:
+                           // api/v1/icon?domain=<its link's domain>; none → ss-provider-icon shows a letter
+  link?: string; cancelUrl?: string;   // a catalog plan's link, else the provider's website
+  region: string;          // where it's priced: the item's region, else Settings' country
+  price: PickedPrice;      // the plan's, bundle's or custom plan's price for the item's billing period
+  addOns: { id: string; name: string; quantity: number; price: PickedPrice }[];
+                           // each priced for the item's period when sold that way, else its shortest (Disney+ bills
+                           // extra members monthly, even on a yearly plan)
+  override?: PickedPrice;  // the price override with the item's period, while it applies (before its `until`)
+  monthlyEquivalent: number; // today: the override, else price + add-ons × quantity; before tax, except typed amounts
+  features: Plan['features']; // the plan's, a bundle's plans' together (bundleFeatures), or the custom plan's
   providedKeys: RankKey[];
-  effectiveRanks: Record<RankKey, Rank>;
-  cardId?: string;         // Phase 4
+  status: ItemStatus;      // M7.1: { kind: 'active' | 'inactive'; activeFrom?; endsOn?; manual }
+  nextCharge?: Charge;     // M7.1
+  effectiveRanks: Record<RankKey, Rank>; // M6.1
+  // cardId is the item's own (item.cardId), Phase 4
+}
+
+export interface UnresolvedItem {     // pages say why; totals leave it out and report how many (M7.1)
+  item: ListItem; listId: string;
+  reason: 'pending'                   // the catalog file for its region, or the custom subscriptions, haven't loaded
+    | 'plan-gone' | 'bundle-gone' | 'custom-gone' | 'add-on-gone'
+    | 'no-price';                     // no price for the item's billing period where it's bought
 }
 
 export interface ListMetrics {
@@ -333,7 +347,10 @@ export interface ListMetrics {
 }
 ```
 `MetricsService` (Angular) builds these as `computed()` signals from the repositories, `CatalogStore`,
-`FxStore` and `SettingsStore`. Components never recompute money or ranks themselves.
+`FxStore` and `SettingsStore`. Components never recompute money or ranks themselves. As built in M4.6:
+`resolutions` (every item's, by id), `byList` and `list(listId)` (`{ resolved, unresolved }`, in the order the
+items were added), and `status` (the items' loading status). Each item is priced with the catalog file of the region
+it was bought in (`CatalogStore.catalogFor`).
 
 ### 3.5 State and URL conventions
 - **Saved data** (lists, items, rankings, tags, cards, settings, drafts) → Dexie.

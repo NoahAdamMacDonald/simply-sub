@@ -120,7 +120,39 @@ function pickSource(
   );
 }
 
-function toPicked(price: Price, { currency, fx }: PriceContext): PickedPrice {
+/** What the user typed for a price: a custom plan's, or a price override with its item's billing period. */
+export interface TypedPrice {
+  amount: number;
+  currency: string;
+  interval: Interval;
+  intervalCount: number;
+  /** The amount is before sales tax; without it, the amount includes tax (BLUEPRINT §4.8). */
+  plusTax?: boolean;
+}
+
+/**
+ * A typed price as a picked one, as if sold in `context.region`: converted into the user's currency when there's a
+ * rate. It includes tax (`taxIncluded`) unless it's marked `plusTax`, since what the user types is what they pay.
+ */
+export function typedPrice(
+  price: TypedPrice,
+  autoRenew: boolean,
+  context: PriceContext,
+): PickedPrice {
+  const { plusTax, ...amount } = price;
+  return toPicked(
+    { ...amount, region: context.region, autoRenew, ...(!plusTax && { taxIncluded: true }) },
+    context,
+  );
+}
+
+/** The parts of a price that picking it uses: a stored one, or a typed one with the region it's bought in. */
+type PriceToPick = Pick<
+  Price,
+  'region' | 'currency' | 'amount' | 'interval' | 'intervalCount' | 'autoRenew'
+> & { taxIncluded?: object | true };
+
+function toPicked(price: PriceToPick, { currency, fx }: PriceContext): PickedPrice {
   const native = price.currency === currency || price.amount === 0;
   const rate = native || !fx ? undefined : exchangeRate(price.currency, currency, fx);
   const amount = rate === undefined ? price.amount : price.amount * rate;

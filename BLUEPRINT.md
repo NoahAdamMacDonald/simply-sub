@@ -2450,6 +2450,23 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
   the delivery country's VAT); logos on transparent backgrounds (ProxyStore's is black) are faint on dark cards, for
   M5.2 to settle when it shows reseller icons.
 
+**Resolved (2026-10-26, M4.6)**
+- **A skeleton of what exists:** core's `resolveItem` joins an item to its catalog plan, bundle or custom plan, prices
+  it and lists the keys it provides; `MetricsService` keeps every item's resolution as signals, grouped by list.
+  Status and the next charge come with the schedule engine (M7.1), effective ranks with `resolveRank` (M6.1), and
+  `ListMetrics` with both (PROJECT-PLAN §3.4).
+- **Items that can't be resolved** come back apart, with a reason: a plan, bundle, add-on or custom subscription no
+  longer there, or no price for the item's billing period. While the catalog file for the item's region or the custom
+  subscriptions haven't loaded, the reason is `pending`, not gone. Items store no names, so a page names a gone plan by
+  its id. Totals (M7.1) leave them out and say how many.
+- **Prices in parts:** `price` is the plan's picked price for the item's period, as price tags show it; each add-on is
+  priced on its own, for the item's period when it's sold that way and else its shortest (Disney+ sells extra members
+  monthly only); `override` is the price override while it applies. `monthlyEquivalent` is today's cost: the override,
+  else the plan and add-ons. A custom plan's price and an override become picked prices (`typedPrice`), converted like
+  any other, and marked tax-included unless typed "plus tax" (section 4.8).
+- **Priced where bought:** each item uses the catalog file of its own region, and a plan no longer sold there is still
+  priced (pickPrice's fallbacks): the user has it.
+
 **Resolved (2026-10-26, M4.5)**
 - **Shared components before their data:** every PROJECT-PLAN §4.3 component but `ss-sub-card` was built in M4.5, as
   display components shown in the gallery with hand-made inputs. Their inputs are §3.4's shapes, typed in core now
