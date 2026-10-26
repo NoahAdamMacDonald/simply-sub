@@ -51,7 +51,7 @@ export interface PlanMatch {
   pricing?: PickedPrice[];
   /** With a region: the lowest monthly equivalent of the picked prices (of the interval asked for, if any). */
   bestMonthlyEquivalent?: number;
-  /** With a region: whether it's sold there. An unknown one shows its fallback price, "No <country> price yet". */
+  /** With a region: whether it's sold there. An unknown one shows its fallback price, "No price for <country> yet". */
   availability?: Exclude<Availability, 'not-offered'>;
   /** The oldest lastVerified of the prices shown: the picked ones, or all of them without a region. */
   lastVerified: IsoDate;

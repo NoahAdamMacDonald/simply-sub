@@ -157,9 +157,9 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | ID | Task | Done when |
 |---|---|---|
 | M5.1 | core: matching and filters (`searchCatalog`), using `availability` (BLUEPRINT §4.7), on M2.3's `searchProviders`, the engine GET /providers shares: text matched term by term, with plurals and features' own names (P8); one result per provider with its matching plans priced, the plan shown (the user's own when it matches), each plan's reseller deals (`resellerDeals`) and "not offered" results for providers the text names; the Activity filter and status line from core's `itemActivity` (§3.3's active and inactive, moved from M7.1) and `providerActivity`. Add-ons, bundles and a suite's savings are M5.2's (BLUEPRINT §14) | Name, plan, alias and feature matches are ranked as described in P8, and plans not offered in the user's region never appear; filtering for 4k gives each provider's cheapest 4k plan; "Native pricing only" hides converted prices |
-| M5.2 | Search page layout, results and the search sub-card with expand (P8): `ss-sub-card`'s search variant (§4.3, moved from M4.5), with "Cheaper at" resellers from each plan's `deals` (`searchCatalog`, BLUEPRINT §4.9), and the expanded card's add-ons, bundles with savings and suite savings worked out in core for the plan shown | P8 layout criteria met |
+| M5.2 | Search page layout, results and the search sub-card with expand (P8): the search box (150 ms pause) and Sort, `ss-sub-card`'s search variant (§4.3, moved from M4.5) with plan chips, "Cheaper at" resellers from each plan's `deals` (`searchCatalog`, BLUEPRINT §4.9), and the expanded card (`ss-plan-details`): features with the user's ranks, add-ons, bundles with savings, a suite's plans and savings (core's `planExtras`), perks, notes and the price's date; loading, no-match and not-offered states; logos on a white tile in both themes (BLUEPRINT §14) | P8 layout criteria met |
 | M5.3 | Filter panel + URL state (P8) | Filters survive a reload and back/forward |
-| M5.4 | Add-to-list menu → edit page with `?add=` (flow F1) | F1 works end to end (needs M6.3–M6.5; stub it until then) |
+| M5.4 | Add-to-list menu → edit page with `?add=` (flow F1); `ss-sub-card`'s prices and bundle prices become buttons (`priceClick`), plain text until then | F1 works end to end (needs M6.3–M6.5; stub it until then) |
 | M5.5 | Pick mode `?addTo=` (flow F2) | F2 works end to end |
 
 ### M6 — Lists & ranking
@@ -457,7 +457,7 @@ Add these aliases to `_tokens.scss`. They build on the rank tokens in BLUEPRINT 
 | `ss-feature-summary` | "VPN: 2 / 3" list, read as "2 of 3 active" | `rows` (core's `FeatureSummaryRow[]`) |
 | `ss-feature-list` | A plan's features under their parent groups, with the user's rank for each ranked key it provides; core's `planFeatureRows`, on the catalog's registry | `plan`, `ranks` |
 | `ss-mini-calendar` | Month grid with dots on payment days and the payments in each day's tooltip; ‹ › change the month; one tab stop, moved with the arrow keys, Home/End and Page Up/Down | `month` (`model`), `charges` (`CalendarCharge`: date, name, amount, currency, converted, manual; M7.1's charges map to it) → `dayClick`, `monthClick` |
-| `ss-sub-card` | Subscription card (`variant: 'search' \| 'list'`), built with its pages: the search variant in M5.2, the list variant in M6.8 | view model → `priceClick`, `pinToggle`, `edit` |
+| `ss-sub-card` | Subscription card (`variant: 'search' \| 'list'`), built with its pages: the search variant in M5.2, the list variant in M6.8. As built (M5.2): the search variant takes a `searchCatalog` result; its plan chips are radio buttons (one tab stop, arrow keys, never none chosen); the expanded section is `ss-plan-details` | `result`, `ranks` (M5.2); M5.4 adds `priceClick`, M6.8 `pinToggle` and `edit` |
 | `ss-tag-chip`, `ss-tag-picker` | A tag as a dot in its colour and its name; the picker is chips with an autocomplete, and "Create tag “…”" asks for a name and one of core's 12 `tagColorPresets`, saved through `TagsRepository` | `tag`; `tagIds` (`model`) → `tagIdsChange` |
 | `ss-split-button` | Main action + dropdown (the Calendar buttons): the main button does the first item, and the menu lists them all | `label`, `items` → `action` (the item's id) |
 | `ss-empty-state` | Icon, heading, projected text and an element marked `actions` | `icon`, `heading` |
@@ -777,7 +777,7 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
 - **Sort:** Best match (default when there's text), Price low→high (default otherwise), Price high→low, Name A–Z, Most features. Price sorts use the lowest monthly equivalent of the plan shown.
 - **Prices:** every interval price is a button → flow F1 (or F2 in pick mode). Converted prices show ≈, the icon and a tooltip. A $0 price shows as "Free". In Canada and the US prices are shown before tax, with "+ tax" (BLUEPRINT §4.8).
 - **Resellers** (BLUEPRINT §4.9): under a plan's prices, each official reseller that sells it for less per month after the user's sales tax (`resellerDeals`), cheapest first: "Cheaper at [icon] Amazon.ca: $87.00 / 12 mo ↗", a link to the shop's page that opens in a new tab (`rel="noopener"`). Only shops that sell where the user is; none without exchange rates.
-- **Availability** (`availability` in core, BLUEPRINT §4.7): plans and bundles not offered in the user's region are left out. A provider with nothing offered there shows "Not offered in Canada" instead of prices, and only when the search text names it. An unknown item shows its fallback price with "No Canadian price yet".
+- **Availability** (`availability` in core, BLUEPRINT §4.7): plans and bundles not offered in the user's region are left out. A provider with nothing offered there shows "Not offered in Canada" instead of prices, and only when the search text names it. An unknown item shows its fallback price with "No price for Canada yet" (a country's name, since English has no table of demonyms).
 - **Links:** Plan ↗ and Cancel ↗ open in a new tab (`rel="noopener"`).
 - **Status:** follows §3.3, at provider level.
 - **Expanded section:**
@@ -804,7 +804,7 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
 **Acceptance**
 - [ ] Filtering for 4k shows each provider's cheapest 4k plan
 - [ ] Converted prices are marked, and "Native pricing only" hides them
-- [ ] A Canadian never sees a US-only plan (Disney+ With Ads), and a provider without Canadian prices or `availableIn` shows "No Canadian price yet"
+- [ ] A Canadian never sees a US-only plan (Disney+ With Ads), and a provider without Canadian prices or `availableIn` shows "No price for Canada yet"
 - [ ] A reload and back/forward restore the query, filters and sort
 - [ ] A price click opens the add menu (F1), or adds directly in pick mode (F2)
 

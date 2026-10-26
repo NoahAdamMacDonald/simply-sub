@@ -1,0 +1,191 @@
+// The card lays itself out by its own width, so it fits a page with or without the filter panel beside it.
+:host {
+  display: block;
+  container-type: inline-size;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 16px 4px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+}
+
+// Narrow: the icon and names, then the links, then the prices. Wide: one row, prices on the right.
+.head {
+  display: grid;
+  grid-template-areas:
+    'icon title'
+    'links links'
+    'prices prices';
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 8px 16px;
+  align-items: start;
+}
+
+@container (min-width: 600px) {
+  .head {
+    grid-template-areas: 'icon title links prices';
+    grid-template-columns: 48px minmax(0, 1fr) auto auto;
+  }
+
+  .links {
+    flex-direction: column;
+  }
+
+  .prices {
+    align-items: flex-end;
+    text-align: end;
+  }
+}
+
+.icon {
+  grid-area: icon;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  grid-area: title;
+  min-width: 0;
+}
+
+.name {
+  margin: 0;
+  font: var(--mat-sys-title-large);
+  overflow-wrap: anywhere;
+}
+
+.plan-name {
+  margin: 0;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-title-medium);
+}
+
+.status {
+  margin-top: 4px;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  grid-area: links;
+}
+
+a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  color: var(--ss-accent-text);
+  font: var(--mat-sys-label-large);
+
+  mat-icon {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 2px;
+  }
+}
+
+.prices {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  grid-area: prices;
+}
+
+.note {
+  margin: 0;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}
+
+.deals {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+  }
+}
+
+// Plan chips: radio buttons, so the group is one tab stop and the arrow keys move the choice.
+.plans {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--ss-divider);
+  border-radius: 8px;
+  font: var(--mat-sys-label-large);
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    opacity: 0;
+  }
+
+  .check {
+    display: none;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+  }
+
+  &:has(input:checked) {
+    border-color: var(--ss-accent-text);
+    color: var(--ss-accent-text);
+
+    .check {
+      display: inline-block;
+    }
+  }
+
+  &:has(input:focus-visible) {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 2px;
+  }
+}
+
+.expand {
+  align-self: center;
+  color: var(--ss-text);
+}
+
+.details {
+  padding: 12px 0 16px;
+  border-top: 1px solid var(--ss-divider);
+}

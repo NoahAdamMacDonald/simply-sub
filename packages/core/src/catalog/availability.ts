@@ -9,7 +9,7 @@ import { globalRegion, groupsOf } from './regions';
 /**
  * - `offered`: sold in the region. pickPrice gives its price, converted when it isn't in the user's currency.
  * - `not-offered`: the app shows "Not offered in <country>" instead of a price.
- * - `unknown`: the catalog doesn't know. The app shows pickPrice's fallback price with "No <country> price yet".
+ * - `unknown`: the catalog doesn't know. The app shows pickPrice's fallback price with "No price for <country> yet".
  */
 export type Availability = 'offered' | 'not-offered' | 'unknown';
 

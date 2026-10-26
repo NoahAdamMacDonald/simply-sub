@@ -199,6 +199,21 @@
   }
 </section>
 
+<section aria-labelledby="sub-card-heading">
+  <h2 id="sub-card-heading">ss-sub-card</h2>
+  <p class="note">
+    Search's variant: your catalog as Search shows it with no text, then its first provider as if it
+    weren't sold in your country. The ranks beside the features are the example ones.
+  </p>
+  <div class="cards">
+    @for (result of subCards(); track $index) {
+      <ss-sub-card [result]="result" [ranks]="exampleRanks" />
+    } @empty {
+      <p>No catalog yet.</p>
+    }
+  </div>
+</section>
+
 <section aria-labelledby="calendar-heading">
   <h2 id="calendar-heading">ss-mini-calendar</h2>
   <p role="status" class="picked">{{ calendarEvent() }}</p>

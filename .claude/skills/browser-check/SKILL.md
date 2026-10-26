@@ -75,6 +75,14 @@ its menu, and ss-confirm (focus on Cancel, Escape, Enter), with axe in both them
 popups open. The gallery's "File missing" icon is a deliberate 404, which both gallery scripts leave out of their
 console check.
 
+`check-search.cjs` (M5.2) checks the Search page on the real catalog (data:build's files, so it works on `ng serve`
+and under `wrangler dev`): one card per provider and the count, no US-only plan for a Canadian, Mullvad's "Cheaper at"
+resellers in Alberta and their links, the Tab order (box, Sort, a card's links, its chips as one tab stop, the details
+button), a chip picked with an arrow key, Enter on the details button, "netflix 4k" after the typing pause, the empty
+state and Clear search, a listed provider's status (an item written to IndexedDB, then a reload), and for a US user a
+provider not sold there (the US file served with Crave limited to Canada) and one with no US price, with axe in both
+themes at both widths with cards expanded and with no match. It answers `GET /fx` itself.
+
 ## Gotchas
 
 - Every new browser context starts with no settings, so the first-run dialog (M4.2) covers the page until it's
