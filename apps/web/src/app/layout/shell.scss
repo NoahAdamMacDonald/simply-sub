@@ -75,3 +75,14 @@ main {
 .narrow main {
   padding: 16px;
 }
+
+.memory-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 8px 12px;
+  border: 1px solid var(--ss-divider);
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+}

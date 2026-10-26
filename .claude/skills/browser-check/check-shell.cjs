@@ -1,4 +1,5 @@
-// Drives the M0.5 app shell in the system Edge: screenshots, navigation, keyboard, scrolling, axe.
+// Drives the M0.5 app shell in the system Edge: screenshots, navigation, keyboard, scrolling, axe. Each new context
+// completes the first-run dialog (M4.2) first.
 // See SKILL.md. Usage: node check-shell.cjs <deps dir with playwright-core + axe-core> <output dir> <base url>
 const fs = require('fs');
 const path = require('path');
@@ -52,7 +53,17 @@ async function open(browser, viewport, colorScheme, url = '/') {
   page.on('pageerror', (error) => consoleProblems.push(`[${label}] pageerror: ${error.message}`));
   await page.goto(baseUrl + url);
   await page.locator('main h1').waitFor();
+  await completeFirstRun(page);
   return { context, page };
+}
+
+// A new context has no settings, so the first-run dialog (M4.2) asks first. Playwright's default locale is en-US,
+// where nothing is required.
+async function completeFirstRun(page) {
+  const dialog = page.locator('mat-dialog-container');
+  await dialog.waitFor({ timeout: 10000 });
+  await page.getByRole('button', { name: 'Get started' }).click();
+  await dialog.waitFor({ state: 'detached' });
 }
 
 const shot = (page, name) => page.screenshot({ path: path.join(outDir, `${name}.png`) });

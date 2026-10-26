@@ -5,7 +5,7 @@ import { choices, didYouMean } from '../catalog/checks';
 import type { Feature } from '../catalog/feature';
 import { currencySchema, rankKeySchema, regionSchema, slugSchema } from '../catalog/formats';
 import { intervalSchema } from '../catalog/price';
-import { regionCurrency } from '../catalog/region-currency';
+import { defaultCurrency } from '../catalog/region-currency';
 import { isCatalogRegion, regionProblem } from '../catalog/regions';
 import { rankKeyOptions } from '../ranking/rank-keys';
 
@@ -231,12 +231,6 @@ export function currencyIssue(value: string, currencies?: readonly string[]): st
   return currencies && !currencies.includes(value)
     ? `The ECB has no rate for ${value}: use one of ${currencies.join(', ')}.`
     : undefined;
-}
-
-/** The currency to show `region`'s prices in when none is given: its own when there are rates for it, else USD. */
-export function defaultCurrency(region: string, currencies?: readonly string[]): string {
-  const own = regionCurrency(region);
-  return own !== undefined && (!currencies || currencies.includes(own)) ? own : 'USD';
 }
 
 /** Why `key` isn't a rank key of the registry, with the fix, or undefined when it is one. */

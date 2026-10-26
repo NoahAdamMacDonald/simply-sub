@@ -90,6 +90,8 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
   headers, rate limits and JSON errors live in `apps/api/src/middleware.ts`.
 - Colour tokens: a colour that is a version of another (hover, text shade, alias) is derived from it in
   `_tokens.scss` (`var()`, `oklch(from …)`), so changing the base updates the family. Recheck contrast after.
+- Form fields are `<mat-form-field appearance="outline">`, set on each one: filled fields fail contrast in dark mode,
+  and a global default in `app.config.ts` would put Material's form field in the initial bundle (BLUEPRINT §8.1).
 - Money = amount + ISO currency, formatted only in the UI. Dates are ISO strings.
 - Catalog YAML is validated by the Zod schemas in `packages/core/src/catalog/` (BLUEPRINT §4.5). They're strict,
   and the types come from `z.infer`, so don't hand-write catalog interfaces. Import Zod as

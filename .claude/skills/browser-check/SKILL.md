@@ -48,7 +48,23 @@ node check-shell.cjs "<scratchpad>/browser-deps" "<scratchpad>/shots" http://loc
 It prints PASS/FAIL lines, exits non-zero on failure, and saves screenshots. **Look at the screenshots**; a passing
 script doesn't prove the layout looks right.
 
+`check-settings.cjs` (M4.2) checks the first-run dialog (defaults per browser locale, keyboard, validation, axe),
+Settings (budgets edited in place, Appearance, the 📍 dialog), the theme saved in Dexie (reloads, a second tab, a
+lost cache), and the "IndexedDB blocked" notice with in-memory mode. Run it the same way. For the production build
+under `wrangler dev`, with the CSP, see the progress-preview skill's `csp-check.cjs`.
+
 ## Gotchas
+
+- Every new browser context starts with no settings, so the first-run dialog (M4.2) covers the page until it's
+  completed. The scripts complete it first. The context's `locale` sets its defaults (Playwright uses the system's
+  unless given): `en-CA` needs a province, `en-US` and `en-GB` need nothing.
+- An empty outlined field's label lies over its `mat-select`, so Playwright won't click the select: click the
+  field's `.mat-mdc-text-field-wrapper`, as a user does.
+- A `mat-select`'s typeahead moves to a match after a 200 ms pause: wait before pressing Enter.
+- `getByLabel` matches substrings: "Monthly budget" also finds the "Edit Monthly budget" button. Pass `exact: true`.
+- A focused element's name: inputs get theirs from `<label for>` (`el.labels`), not `aria-label`.
+- Block IndexedDB with an init script that makes `IDBFactory.prototype.open` throw a `SecurityError`, as Edge does
+  with site data blocked.
 
 - Light/dark: create the browser context with `colorScheme`; ThemeService follows the OS when nothing is saved.
 - `data-theme` updates on the next tick after a toggle; wait for it rather than checking right away.

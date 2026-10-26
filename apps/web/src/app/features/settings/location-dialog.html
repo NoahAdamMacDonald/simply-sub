@@ -1,0 +1,10 @@
+<form [formRoot]="form">
+  <h2 mat-dialog-title>Location and currency</h2>
+  <mat-dialog-content>
+    <ss-location-fields [fields]="form" />
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button matButton type="button" mat-dialog-close>Cancel</button>
+    <button matButton="filled" type="submit">Save</button>
+  </mat-dialog-actions>
+</form>

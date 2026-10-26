@@ -145,7 +145,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | ID | Task | Done when |
 |---|---|---|
 | M4.1 | Dexie database (BLUEPRINT §4.6, including `region`, add-on quantities, bundle items, `billingDay` and `priceOverride.until`) + repositories that expose signals. Repositories are the only way into Dexie, only non-sensitive fields are indexed, and records are Zod-validated on the way in and out (BLUEPRINT §11.1) | CRUD tests pass with `fake-indexeddb`, and a malformed stored record is rejected rather than shown |
-| M4.2 | `SettingsStore` (on M4.1's `SettingsRepository`) + first-run dialog (P1), with the province/state menu and the sales-tax rate (BLUEPRINT §4.8); `ThemeService` reads and writes `settings.theme`, keeping `localStorage` `ss-theme` as the startup cache (BLUEPRINT §8.1); the "IndexedDB blocked" notice (P15), from the repositories' `error` status | Country, province or state, and currency are saved, with defaults from the browser locale; the menu lists only the chosen country's subdivisions; with IndexedDB blocked, the notice appears |
+| M4.2 | `SettingsStore` (on M4.1's `SettingsRepository`) + first-run dialog (P1), with the province/state menu and the sales-tax rate (BLUEPRINT §4.8): core's `settingsDefaults`, `subdivisionsOf` and `salesTaxRate`, with the Canadian rate table checked against official sources; Settings (P13) gets the budgets, Appearance and the 📍 dialog; `ThemeService` reads and writes `settings.theme`, keeping `localStorage` `ss-theme` as the startup cache (BLUEPRINT §8.1); the "IndexedDB blocked" notice (P15), from the repositories' `error` status, with [Continue anyway] running every repository in memory | Country, province or state, and currency are saved, with defaults from the browser locale; the menu lists only the chosen country's subdivisions; with IndexedDB blocked, the notice appears |
 | M4.3 | `CatalogStore`: cached snapshot → revalidate `data/catalog/index.json`, and when its `catalogVersion` changed, fetch the region's file (`regionFileFor`: `data/catalog/<region>.json`, its group's or `catalog.json`; plus any region a list item uses) → save; the offline banner and "Catalog updated" toast (P1) | The app works offline after the first visit, and the banner shows the catalog's date |
 | M4.4 | `FxStore` + `ss-price` with the converted marker and "+ tax" in tax-added regions | Converted prices show ≈, the icon and the tooltip; a Canadian sees "+ tax" |
 | M4.5 | Shared components (§4.3) + a `/dev/components` gallery (dev builds only) | Every component renders in both themes in the gallery |
@@ -171,13 +171,13 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M6.6 | Custom subscriptions page + editor (P12) | P12 criteria met |
 | M6.7 | Lists overview (P3) | P3 criteria met (the bars can wait for M7.2) |
 | M6.8 | List view (P4), without the money parts | Cards, pinning, search/filter and the edit button work |
-| M6.9 | Backup export/import (the "Your data" section of P13), with an optional passphrase that encrypts the file, and the crypto module it uses (BLUEPRINT §11.5) | Export → delete all → import restores everything, encrypted or not; a wrong passphrase or a tampered file imports nothing |
+| M6.9 | Backup export/import (the "Your data" section of P13, and the first-run dialog's "Import a backup instead"), with an optional passphrase that encrypts the file, and the crypto module it uses (BLUEPRINT §11.5) | Export → delete all → import restores everything, encrypted or not; a wrong passphrase or a tampered file imports nothing |
 | M6.10 | Optional app lock: a passphrase encrypts the user tables at rest, with a lock screen and an idle lock (P13, P15; BLUEPRINT §11.5) | Locked data on disk is unreadable without the passphrase; turning the lock on and off round-trips every table; a wrong passphrase unlocks nothing |
 
 ### M7 — Money, schedule & calendar
 | ID | Task | Done when |
 |---|---|---|
-| M7.1 | core: schedule engine for charges, statuses, totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/`; sales tax in `tax/` with the Canadian rate table checked against official sources (BLUEPRINT §4.8) | Charges include tax by province and "plus tax" amounts. Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
+| M7.1 | core: schedule engine for charges, statuses, totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/`; sales tax on charges in `tax/`, from M4.2's `salesTaxRate` and Canadian rate table (BLUEPRINT §4.8; recheck the rates if `canadianSalesTaxCheckedOn` is old) | Charges include tax by province and "plus tax" amounts. Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
 | M7.2 | Totals and budget bars on Home, Lists and List view | The numbers match the §3.1 definitions |
 | M7.3 | Home (P2) | P2 criteria met |
 | M7.4 | Calendar (P10): grid, day panel, list filter, upcoming list, agenda layout on mobile | P10 criteria met |
@@ -382,21 +382,30 @@ Add these aliases to `_tokens.scss`. They build on the rank tokens in BLUEPRINT 
 - Global pieces: the skip-to-content link and the "Something went wrong" snackbar (P15) arrive in M0.5; the offline banner ("Offline — catalog from Oct 22") and the "Catalog updated" toast arrive with `CatalogStore` in M4.3.
 - Page titles like "Lists · Simply Sub" come from each route's `title`.
 
-**First-run dialog** (shown when Settings has no country):
+**First-run dialog** (shown when no settings are saved, M4.2):
 ```
 ┌ Welcome to Simply Sub ──────────────────────────────┐
-│ Where are you?  [ Canada                 ▾ ]        │
-│ Province        [ Ontario                ▾ ]        │
-│ Currency        [ CAD — Canadian dollar  ▾ ]        │
+│ Country                [ Canada                 ▾ ] │
+│ Province or territory  [ Ontario                ▾ ] │
+│ Currency               [ CAD — Canadian Dollar  ▾ ] │
+│ Sales tax 13% (Ontario)   [ ] Use my own rate       │
 │ Monthly budget  [ optional ]  Annual [ optional ]   │
 │ Your data stays in this browser. No account needed. │
 │ [Import a backup instead]             [Get started] │
 └─────────────────────────────────────────────────────┘
 ```
-The country defaults from `navigator.language` (`en-CA` → Canada), and the currency follows the country. The
-Province (or State) menu lists only the chosen country's subdivisions, appears only for countries where sales tax
-is added (Canada, the US), and sets the tax rate (BLUEPRINT §4.8). A US user's rate field starts empty, with the hint
-"Your state and city sales tax on subscriptions, if any".
+- **When:** only once the settings have loaded and none are saved, so it never flashes up while they load. It can't
+  be dismissed without saving (Escape and the backdrop do nothing). It comes back whenever no settings are saved:
+  on each visit in in-memory mode (P15), and after Delete all data (M6.9).
+- **Defaults** come from the browser's languages (`navigator.languages`): the first country one names (`en-CA` →
+  Canada), else the one a language implies (`fr` → France), else the US. The currency follows the country (its own
+  where the ECB has rates for it, else USD) until the user picks one. The theme on screen is saved with them.
+- **Province or State** lists only the chosen country's subdivisions and appears only where sales tax is added
+  (Canada, the US). A Canadian province is required, with no default (a time zone can't tell Ontario from Quebec),
+  and shows its built-in rate, "Sales tax 13% (Ontario)", with a "Use my own rate" checkbox (BLUEPRINT §4.8). A US
+  state is optional ("Not given"), and the rate field starts empty, with the hint "Your state and city sales tax on
+  subscriptions, if any". Elsewhere: "Prices for United Kingdom already include sales tax."
+- **[Import a backup instead]** arrives with backups (M6.9); until then the dialog has only [Get started].
 
 **Acceptance**
 - [ ] Navigation works with the keyboard
@@ -924,6 +933,10 @@ Editor dialog:
    Catalog      Updated Oct 22, 2026 · version c4f9a21 · [Check for updates]
 📍 Ontario, Canada (CAD)
 ```
+**Built so far (M4.2):** the budgets, Appearance and 📍, each a card ("Location and currency" holds 📍 and the tax
+line under it). Custom tags have no task yet. Your data (M6.9), Security (M6.10), the Catalog line and local sync
+(Phase 5) come with their tasks.
+
 **Behaviour**
 - ← goes back (to Home if there's no history).
 - **Budgets:** click to edit inline. Enter saves; an empty value means no budget.
@@ -932,7 +945,8 @@ Editor dialog:
   - The colour swatch opens a palette (12 presets plus a hex field).
   - ✕ deletes, asking for confirmation if the tag is in use: "Used by 5 subscriptions".
   - ⊕ adds a new tag in edit mode.
-- 📍 opens a dialog for country, province or state, and currency (the currency follows the country unless you change it), with the sales tax that follows: "Sales tax 13% (Ontario)" and [Use my own rate] (BLUEPRINT §4.8).
+- 📍 opens a dialog for country, province or state, and currency (the currency follows the country unless you change it), with the sales tax that follows: "Sales tax 13% (Ontario)" and a "Use my own rate" checkbox (BLUEPRINT §4.8). It shares the first-run dialog's fields (P1). Cancel or Escape changes nothing.
+- **Appearance** (M4.2): System, Light or Dark, saved in `settings.theme` (BLUEPRINT §8.1).
 - **Export backup** downloads `simply-sub-backup-YYYY-MM-DD.json`:
   ```json
   {
@@ -1001,8 +1015,12 @@ FREE SAVINGS — nothing you rank is lost
 - Unknown route → "Page not found", with links to Home and Lists.
 - Unknown list → "This list doesn't exist (it may have been deleted)" with [Back to lists].
 - Unexpected error → snackbar "Something went wrong". Details go to the console; nothing is sent anywhere.
-- IndexedDB blocked (some private browsing modes) → a full-page notice, "Your browser is blocking local storage,
-  so nothing will be saved", with [Continue anyway] (in-memory mode). M4.2, from the repositories' `error` status.
+- IndexedDB blocked (some private browsing modes, or site data blocked) → a full-page notice in place of the app,
+  "Your browser is blocking local storage, so nothing will be saved", with [Continue anyway] (M4.2, from the
+  repositories' `error` status). Continuing runs every repository in memory (BLUEPRINT §11.1): the first-run dialog
+  asks next, and a line at the top of every page says "Nothing is being saved: your browser is blocking local
+  storage. What you enter lasts until you close this tab." The choice isn't remembered (nothing can be), so the
+  notice comes back on the next visit.
 - A saved record that can't be read (it fails its schema) → hidden, and a snackbar once per session: "Some saved
   data couldn't be read, so it's hidden. The rest is fine." The console names its table, key and issues, never its
   values (M4.1, BLUEPRINT §11.1).

@@ -1,6 +1,6 @@
 import { Service, computed, inject } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { nextUpdatedAt, type Settings } from '@simply-sub/core';
+import { nextUpdatedAt, withChanges, type Settings } from '@simply-sub/core';
 import { storageStatus } from './record-repository';
 import { StorageService } from './storage-service';
 
@@ -8,7 +8,10 @@ import { StorageService } from './storage-service';
 @Service()
 export class SettingsRepository {
   private readonly storage = inject(StorageService);
-  private readonly stored = rxResource({ stream: () => this.storage.watch('settings') });
+  private readonly stored = rxResource({
+    params: () => this.storage.mode(),
+    stream: () => this.storage.watch('settings'),
+  });
 
   /** The saved settings. Undefined until the first-run dialog (P1) saves them, or when they can't be read. */
   readonly settings = computed<Settings | undefined>(() =>
@@ -31,5 +34,22 @@ export class SettingsRepository {
       { invalid: 'replace' },
     );
     return saved as Settings;
+  }
+
+  /**
+   * Changes some of the saved settings; a field set to undefined is cleared. Nothing is written when none are saved, or
+   * the saved ones can't be read: the first-run dialog then asks for them. Returns what's saved afterwards.
+   */
+  async update(
+    changes: Partial<Omit<Settings, 'key' | 'updatedAt'>>,
+  ): Promise<Settings | undefined> {
+    const now = this.storage.now();
+    const engine = await this.storage.engine();
+    return engine.modify(
+      'settings',
+      'settings',
+      (current) => current && withChanges<Settings>(current, changes, now),
+      { invalid: 'replace' },
+    );
   }
 }

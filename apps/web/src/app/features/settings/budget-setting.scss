@@ -1,0 +1,25 @@
+:host {
+  display: block;
+}
+
+.shown {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  font: var(--mat-sys-body-large);
+}
+
+.editing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  column-gap: 8px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  // Level with the input, not the hint below it.
+  padding-top: 8px;
+}

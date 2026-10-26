@@ -5,7 +5,7 @@ import { IDBKeyRange } from 'fake-indexeddb';
 import { ItemsRepository } from './items-repository';
 import { ListsRepository } from './lists-repository';
 import { RejectedRecords } from './rejected-records';
-import { INDEXED_DB } from './storage-service';
+import { INDEXED_DB, StorageService } from './storage-service';
 import { plantRows, storedRows, testStorage, until, type TestStorage } from './storage.testing';
 
 const uuidV7 = /^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
@@ -247,6 +247,21 @@ describe('RecordRepository', () => {
     it('fails a write', async () => {
       vi.spyOn(console, 'error').mockImplementation(() => undefined);
       await expect(TestBed.inject(ListsRepository).create({ name: 'Work' })).rejects.toThrow();
+    });
+
+    it('works in memory once the user carries on anyway, starting empty', async () => {
+      vi.spyOn(console, 'error').mockImplementation(() => undefined);
+      const lists = TestBed.inject(ListsRepository);
+      const items = TestBed.inject(ItemsRepository);
+      await until(() => lists.status() === 'error');
+
+      TestBed.inject(StorageService).useMemory();
+      await until(() => lists.status() === 'ready' && items.status() === 'ready');
+      expect(lists.records()).toEqual([]);
+
+      const list = await lists.create({ name: 'Work' });
+      await items.create(newItem(list.id));
+      await until(() => lists.records().length === 1 && items.byList().get(list.id)?.length === 1);
     });
   });
 });
