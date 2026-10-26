@@ -1,0 +1,21 @@
+@use 'rank-colours';
+
+:host {
+  display: inline-flex;
+  flex: none;
+}
+
+.dot {
+  @include rank-colours.by-data-rank;
+
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--rank-fill);
+  box-shadow: 0 0 0 1px var(--ss-dot-ring);
+
+  // Forced colours drop backgrounds: keep the dot as a shape.
+  @media (forced-colors: active) {
+    border: 1px solid CanvasText;
+  }
+}

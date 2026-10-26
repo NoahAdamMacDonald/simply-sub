@@ -1,0 +1,36 @@
+<mat-form-field appearance="outline" subscriptSizing="dynamic">
+  <mat-select
+    [value]="selected()"
+    (valueChange)="choose($event)"
+    [aria-labelledby]="labelledBy() ?? ''"
+    [aria-label]="label() ?? ''"
+    hideSingleSelectionIndicator
+    panelClass="ss-rank-select-panel"
+  >
+    <mat-select-trigger>
+      <span class="choice" [class.muted]="muted()">
+        <ss-rank-dot [rank]="shown()" />
+        <span class="name">{{ triggerText() }}</span>
+      </span>
+    </mat-select-trigger>
+    @if (inherited(); as profileRank) {
+      <mat-option [value]="profileDefault">
+        <span class="choice muted">
+          <ss-rank-dot [rank]="profileRank" />
+          <span>Profile default ({{ names[profileRank] }})</span>
+        </span>
+      </mat-option>
+    }
+    @for (choice of choices(); track choice.rank) {
+      <mat-option [value]="choice.rank">
+        <span class="choice" [class.muted]="choice.rank === 'not-ranked' && !subscriptionLevel()">
+          <ss-rank-dot [rank]="choice.rank" />
+          <span>{{ choice.name }}</span>
+        </span>
+        @if (choice.hint) {
+          <span class="hint"> {{ choice.hint }}</span>
+        }
+      </mat-option>
+    }
+  </mat-select>
+</mat-form-field>

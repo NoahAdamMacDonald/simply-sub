@@ -1,0 +1,21 @@
+@use 'rank-colours';
+
+ul {
+  display: grid;
+  grid-template-rows: repeat(4, auto);
+  grid-auto-flow: column;
+  gap: 2px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  @include rank-colours.by-data-rank;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--rank-shade);
+  white-space: nowrap;
+}

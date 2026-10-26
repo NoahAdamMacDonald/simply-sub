@@ -1,0 +1,90 @@
+<mat-form-field appearance="outline" subscriptSizing="dynamic">
+  <mat-label>{{ label() }}</mat-label>
+  <mat-chip-grid #grid [attr.aria-label]="label()">
+    @for (tag of chosen(); track tag.id) {
+      <mat-chip-row (removed)="remove(tag.id)">
+        <span class="tag-dot" aria-hidden="true" [style.--tag-color]="tag.color"></span>
+        {{ tag.name }}
+        <button matChipRemove type="button" [attr.aria-label]="'Remove ' + tag.name">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+    }
+    <input
+      #chipInput
+      placeholder="Add a tag"
+      [matChipInputFor]="grid"
+      [matChipInputSeparatorKeyCodes]="[]"
+      [matAutocomplete]="auto"
+      (input)="query.set(chipInput.value)"
+    />
+  </mat-chip-grid>
+  <mat-autocomplete #auto autoActiveFirstOption (optionSelected)="pick($event.option.value)">
+    @for (tag of matches(); track tag.id) {
+      <mat-option [value]="tag.id">
+        <span class="option">
+          <span class="tag-dot" aria-hidden="true" [style.--tag-color]="tag.color"></span>
+          {{ tag.name }}
+        </span>
+      </mat-option>
+    }
+    @if (newName(); as name) {
+      <mat-option [value]="createChoice">
+        <span class="option"><mat-icon>add</mat-icon>Create tag “{{ name }}”</span>
+      </mat-option>
+    }
+  </mat-autocomplete>
+</mat-form-field>
+
+@if (draft(); as draft) {
+  <!-- Escape closes this row only, not a dialog it's in. -->
+  <div
+    class="create"
+    role="group"
+    [attr.aria-labelledby]="headingId"
+    (keydown.escape)="$event.stopPropagation(); closeCreate()"
+  >
+    <p class="create-heading" [id]="headingId">New tag</p>
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Name</mat-label>
+      <input
+        #nameInput
+        matInput
+        [value]="draft.name"
+        (input)="rename(nameInput.value)"
+        (keydown.enter)="$event.preventDefault(); create()"
+      />
+    </mat-form-field>
+    <fieldset class="colours">
+      <legend>Colour</legend>
+      @for (preset of presets; track preset.color) {
+        <label class="swatch">
+          <input
+            type="radio"
+            class="visually-hidden"
+            [name]="colourName"
+            [value]="preset.color"
+            [checked]="draft.color === preset.color"
+            (change)="recolour(preset.color)"
+          />
+          <span class="tag-dot" aria-hidden="true" [style.--tag-color]="preset.color"></span>
+          <span class="visually-hidden">{{ preset.name }}</span>
+        </label>
+      }
+    </fieldset>
+    @if (failed()) {
+      <p class="error" role="alert">Couldn't save the tag. Try again.</p>
+    }
+    <div class="create-actions">
+      <button
+        matButton="filled"
+        type="button"
+        [disabled]="!draft.name.trim() || saving()"
+        (click)="create()"
+      >
+        Create tag
+      </button>
+      <button matButton type="button" (click)="closeCreate()">Cancel</button>
+    </div>
+  </div>
+}

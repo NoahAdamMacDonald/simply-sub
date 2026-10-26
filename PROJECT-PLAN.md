@@ -148,14 +148,14 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M4.2 | `SettingsStore` (on M4.1's `SettingsRepository`) + first-run dialog (P1), with the province/state menu and the sales-tax rate (BLUEPRINT §4.8): core's `settingsDefaults`, `subdivisionsOf` and `salesTaxRate`, with the Canadian rate table checked against official sources; Settings (P13) gets the budgets, Appearance and the 📍 dialog; `ThemeService` reads and writes `settings.theme`, keeping `localStorage` `ss-theme` as the startup cache (BLUEPRINT §8.1); the "IndexedDB blocked" notice (P15), from the repositories' `error` status, with [Continue anyway] running every repository in memory | Country, province or state, and currency are saved, with defaults from the browser locale; the menu lists only the chosen country's subdivisions; with IndexedDB blocked, the notice appears |
 | M4.3 | `CatalogStore`: cached snapshot → revalidate `data/catalog/index.json`, and when its `catalogVersion` changed, fetch the region's file (`regionFileFor`: `data/catalog/<region>.json`, its group's or `catalog.json`; plus any region a list item uses) → save; the offline banner and "Catalog updated" toast (P1); P13's Catalog line. One `catalogCache` record per file, never merged; core's `planCatalogSync` chooses what to download (BLUEPRINT §6.3) | After the first visit the catalog shows at once from the cache; with the network down while the app is open it keeps working, and the banner shows the catalog's date; a new version is downloaded once and announced; a region with no file of its own gets its group's or the full catalog. Starting the app with no network comes with M10's service worker (narrowed on 2026-10-26: BLUEPRINT §14) |
 | M4.4 | `FxStore` + `ss-price` with the converted marker and "+ tax" in tax-added regions ("incl. tax" for a price with `taxIncluded`, from core's `addedSalesTax`). The rates are kept in Dexie v2's `fxRates` table; core's `priceTaxNote` and `buyerTaxPlace` decide the note; the `/dev/components` gallery starts with `ss-price` (BLUEPRINT §4.7, §4.8, §14) | Converted prices show ≈, the icon and the tooltip; a Canadian sees "+ tax", and "incl. tax" on Mullvad |
-| M4.5 | Shared components (§4.3) + a `/dev/components` gallery (dev builds only; started in M4.4 with `ss-price`) | Every component renders in both themes in the gallery |
+| M4.5 | Shared components (§4.3) + a `/dev/components` gallery (dev builds only; started in M4.4 with `ss-price`), with hand-made inputs where the data comes later (charges M7.1, counts M6.1, view models M4.6); `ss-sub-card` moved to M5.2 and M6.8 (2026-10-26). Core: `budgetBar`, `rankChoices` and `countedRanks`, `planFeatureRows`, `monthWeeks` and `addMonths`, `tagColorPresets`, and the view-model parts the components take (`ItemStatus`, `RankCounts`, `FeatureSummaryRow`) (BLUEPRINT §14) | Every component renders in both themes in the gallery; each is keyboard-usable and passes axe; no hex colours outside `_tokens.scss` |
 | M4.6 | `MetricsService` skeleton: resolved items (§3.4) from repos + catalog + FX | Unit tests pass with a fixture list |
 
 ### M5 — Search & add
 | ID | Task | Done when |
 |---|---|---|
 | M5.1 | core: search index, matching and filters (`searchCatalog`), using `availability` (BLUEPRINT §4.7). Starts from M2.3's `searchProviders`, which already has P8's matching, filters and sorts | Name, plan, alias and feature matches are ranked as described in P8, and plans not offered in the user's region never appear |
-| M5.2 | Search page layout, results and the search sub-card with expand (P8) | P8 layout criteria met |
+| M5.2 | Search page layout, results and the search sub-card with expand (P8): `ss-sub-card`'s search variant (§4.3, moved from M4.5) | P8 layout criteria met |
 | M5.3 | Filter panel + URL state (P8) | Filters survive a reload and back/forward |
 | M5.4 | Add-to-list menu → edit page with `?add=` (flow F1) | F1 works end to end (needs M6.3–M6.5; stub it until then) |
 | M5.5 | Pick mode `?addTo=` (flow F2) | F2 works end to end |
@@ -170,14 +170,14 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M6.5 | Item dialog (P6) | P6 criteria met |
 | M6.6 | Custom subscriptions page + editor (P12) | P12 criteria met |
 | M6.7 | Lists overview (P3) | P3 criteria met (the bars can wait for M7.2) |
-| M6.8 | List view (P4), without the money parts | Cards, pinning, search/filter and the edit button work |
+| M6.8 | List view (P4), without the money parts, with `ss-sub-card`'s list variant (§4.3, moved from M4.5) | Cards, pinning, search/filter and the edit button work |
 | M6.9 | Backup export/import (the "Your data" section of P13, and the first-run dialog's "Import a backup instead"), with an optional passphrase that encrypts the file, and the crypto module it uses (BLUEPRINT §11.5) | Export → delete all → import restores everything, encrypted or not; a wrong passphrase or a tampered file imports nothing |
 | M6.10 | Optional app lock: a passphrase encrypts the user tables at rest, with a lock screen and an idle lock (P13, P15; BLUEPRINT §11.5) | Locked data on disk is unreadable without the passphrase; turning the lock on and off round-trips every table; a wrong passphrase unlocks nothing |
 
 ### M7 — Money, schedule & calendar
 | ID | Task | Done when |
 |---|---|---|
-| M7.1 | core: schedule engine for charges, statuses, totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/`; sales tax on charges in `tax/`, from `addedSalesTax` (M4.2's rates, none on a price with `taxIncluded`) (BLUEPRINT §4.8; recheck the rates if `canadianSalesTaxCheckedOn` is old) | Charges include tax by province and "plus tax" amounts, and none on a price that includes it (Mullvad). Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
+| M7.1 | core: schedule engine for charges, statuses, totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/` (built in M4.5 for the mini calendar); sales tax on charges in `tax/`, from `addedSalesTax` (M4.2's rates, none on a price with `taxIncluded`) (BLUEPRINT §4.8; recheck the rates if `canadianSalesTaxCheckedOn` is old) | Charges include tax by province and "plus tax" amounts, and none on a price that includes it (Mullvad). Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
 | M7.2 | Totals and budget bars on Home, Lists and List view | The numbers match the §3.1 definitions |
 | M7.3 | Home (P2) | P2 criteria met |
 | M7.4 | Calendar (P10): grid, day panel, list filter, upcoming list, agenda layout on mobile | P10 criteria met |
@@ -423,22 +423,26 @@ Add these aliases to `_tokens.scss`. They build on the rank tokens in BLUEPRINT 
 ### 4.3 Shared components
 | Component | Purpose | Key inputs → outputs |
 |---|---|---|
-| `ss-page-header` | Title, back link, action slot | `title`, `backLink?` |
-| `ss-budget-bar` | Pill progress bar (wireframe style) with the label inside the fill | `value`, `max?`, `labelMode: 'percent' \| 'amount'`, `marker?` → colour ok/warn/over; `role="progressbar"` |
+| `ss-page-header` | Title (`<h1>`), back link ("‹ Lists"), projected actions, and a line under it in an element marked `subtitle` | `heading` (not `title`: the attribute would be the element's tooltip), `backLink?`, `backLabel?` |
+| `ss-budget-bar` | Pill progress bar (wireframe style) with the label inside the fill; core's `budgetBar` gives the colour and percent (BLUEPRINT §8.1). The element is the `progressbar`: name it with `aria-label` or `aria-labelledby` | `value`, `max`, `labelMode: 'percent' \| 'amount'`, `marker?` (the Calendar's budget: the colour then compares `max` to it), `currency?` |
 | `ss-price` | Price + interval; ≈ and the `currency_exchange` icon when converted; tooltip with the source price; "+ tax" or "incl. tax" in Canada and the US (M4.4) | `price: PickedPrice`, `clickable`, `region?` (an item bought elsewhere) → `priceSelect` |
-| `ss-provider-icon` | Icon, with a letter fallback; at most 48 px, since catalog icons are 96 px files (BLUEPRINT §6.3) | `src?`, `name`, `size` (px) |
-| `ss-status-badge` | Active / Inactive / Not listed, plus a date | `status` |
-| `ss-rank-select` | The single rank dropdown | `value`, `subscriptionLevel` (adds Essential and Critical), `inherited?` (shows "Profile default (Wanted)") → `valueChange` |
-| `ss-rank-dot`, `ss-rank-chip` | Colour dot (with or without a label) | `rank` |
-| `ss-rank-counts` | Two-column rank counts, as on the Lists wireframe | `counts` |
-| `ss-feature-summary` | "VPN 2 / 3" list | `rows` |
-| `ss-feature-list` | A plan's features, grouped, with the user's rank dots | `plan`, `ranks` |
-| `ss-mini-calendar` | Month grid with dots on charge days | `month`, `charges` → `dayClick`, `monthClick` |
-| `ss-sub-card` | Subscription card (`variant: 'search' \| 'list'`) | view model → `priceClick`, `pinToggle`, `edit` |
-| `ss-tag-chip`, `ss-tag-picker` | Coloured tags; the picker can create tags inline | `tags` → `tagsChange` |
-| `ss-split-button` | Main action + dropdown (the Calendar buttons) | `label`, `items` → `action` |
-| `ss-empty-state` | Icon, title, text and actions | — |
-| `ss-confirm` (service) | `confirm({ title, message, confirmText, danger })` → `Promise<boolean>` | — |
+| `ss-provider-icon` | Icon, with a letter fallback when there's none or it fails to load; at most 48 px, since catalog icons are 96 px files (BLUEPRINT §6.3). Decorative: the name is beside it | `src?`, `name`, `size` (px) |
+| `ss-status-badge` | Active / Inactive / Not listed with its dot, "active from Sep 10, 2026", and "Ends Nov 3" and ↻ "Renew by Nov 3" badges (§3.3); Search's " · 2 lists" is projected | `status` (core's `ItemStatus`, or `{ kind: 'not-listed' }`), `nextCharge?` |
+| `ss-rank-select` | The single rank dropdown: a Material select with each rank's dot (BLUEPRINT §14). "Profile default (Wanted)" is muted and clears the override | `value` (`model`), `subscriptionLevel` (adds Essential and Critical, with hints), `inherited?` (shows "Profile default (Wanted)"), `labelledBy` or `label` → `valueChange` |
+| `ss-rank-dot`, `ss-rank-chip` | Colour dot (decorative), and dot + name | `rank` |
+| `ss-rank-counts` | Two-column rank counts, as on the Lists wireframe | `counts` (core's `RankCounts`) |
+| `ss-feature-summary` | "VPN: 2 / 3" list, read as "2 of 3 active" | `rows` (core's `FeatureSummaryRow[]`) |
+| `ss-feature-list` | A plan's features under their parent groups, with the user's rank for each ranked key it provides; core's `planFeatureRows`, on the catalog's registry | `plan`, `ranks` |
+| `ss-mini-calendar` | Month grid with dots on payment days and the payments in each day's tooltip; ‹ › change the month; one tab stop, moved with the arrow keys, Home/End and Page Up/Down | `month` (`model`), `charges` (`CalendarCharge`: date, name, amount, currency, converted, manual; M7.1's charges map to it) → `dayClick`, `monthClick` |
+| `ss-sub-card` | Subscription card (`variant: 'search' \| 'list'`), built with its pages: the search variant in M5.2, the list variant in M6.8 | view model → `priceClick`, `pinToggle`, `edit` |
+| `ss-tag-chip`, `ss-tag-picker` | A tag as a dot in its colour and its name; the picker is chips with an autocomplete, and "Create tag “…”" asks for a name and one of core's 12 `tagColorPresets`, saved through `TagsRepository` | `tag`; `tagIds` (`model`) → `tagIdsChange` |
+| `ss-split-button` | Main action + dropdown (the Calendar buttons): the main button does the first item, and the menu lists them all | `label`, `items` → `action` (the item's id) |
+| `ss-empty-state` | Icon, heading, projected text and an element marked `actions` | `icon`, `heading` |
+| `ss-confirm` (service) | `confirm({ title, message, confirmText, danger })` → `Promise<boolean>`: true only from the confirm button. An alert dialog described by its message; with `danger`, the button is red and focus starts on Cancel. Material's dialog loads with the first question | — |
+
+Every component is in the `/dev/components` gallery (M4.5), with hand-made inputs where its data comes later. Pages
+are lazy, so the components and the Material modules they use (select, menu, chips, autocomplete, dialog, tooltip)
+stay out of the initial bundle.
 
 ---
 
@@ -835,7 +839,8 @@ Upcoming   Oct 28 Crave $22.00 · Nov 3 Mullvad ≈ $7.53 ↻ · Nov 12 Netflix 
 **Behaviour**
 - **Top bar** (the displayed month only):
   - The fill is the amount spent so far (charges up to today), shown inside it; the month's total is on the right.
-  - A tick marks the monthly budget, if one is set.
+  - A tick marks the monthly budget, if one is set and the month's total reaches it (a budget past the bar's end
+    has no tick; the colour says the month is under it).
   - Past months show full; future months show $0 of the total.
   - The colour reflects the month's total against the budget.
 - **Showing:** a multi-select of lists. All are selected by default, and the choice is remembered on this device.

@@ -1,0 +1,54 @@
+:host {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 50%;
+  background-color: var(--dot);
+
+  @media (forced-colors: active) {
+    border: 1px solid CanvasText;
+  }
+}
+
+[data-kind='active'] {
+  --dot: var(--status-active);
+}
+
+[data-kind='inactive'] {
+  --dot: var(--status-inactive);
+}
+
+[data-kind='not-listed'] {
+  --dot: var(--status-none);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 6px;
+  border: 1px solid var(--ss-divider);
+  border-radius: 10px;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-label-small);
+  white-space: nowrap;
+
+  mat-icon {
+    width: 14px;
+    height: 14px;
+    font-size: 14px;
+  }
+}

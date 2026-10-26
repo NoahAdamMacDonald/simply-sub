@@ -43,12 +43,20 @@
   --budget-warn: var(--rank-sometimes);
   --budget-over: var(--rank-unwanted);
   --budget-track: var(--rank-none);
+  // The label on a budget bar, in both themes: 4.9:1 on the over fill, 10:1 or more on the others and on the track,
+  // so it reads wherever the fill ends (BLUEPRINT §8.1). The marker's tick takes it too.
+  --budget-label: #111111;
   --status-active: var(--rank-wanted-text);
   --status-inactive: var(--rank-sometimes-text);
   --status-none: var(--rank-none-text);
   --suggest-hard: var(--rank-unwanted);
   --suggest-normal: var(--rank-unused);
   --suggest-soft: var(--rank-uses);
+  // Destructive actions (ss-confirm's danger button): white on it is 6.3:1.
+  --ss-danger: var(--rank-unwanted-text);
+  --ss-on-danger: var(--ss-on-accent);
+  // A faint ring around colour dots, so pale fills (Uses' yellow on white) keep their shape.
+  --ss-dot-ring: oklch(from var(--ss-text) l c h / 0.3);
 
   --ss-sidebar-width: 216px;
   --ss-radius-card: 12px;
@@ -78,4 +86,7 @@
   --rank-unused-text: #ff8c33;
   --rank-unwanted-text: #ff7e7e;
   --rank-none-text: #a5a5a5;
+
+  // The danger fill is the lighter unwanted text shade here, so its label is dark (5.8:1), as on primary buttons.
+  --ss-on-danger: var(--ss-app-bg);
 }

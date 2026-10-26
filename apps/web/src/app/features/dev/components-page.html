@@ -1,5 +1,5 @@
 <h1>Components</h1>
-<p class="note">Development builds only. Prices follow your settings.</p>
+<p class="note">Development builds only. Prices and amounts follow your settings.</p>
 
 <section aria-labelledby="price-heading">
   <h2 id="price-heading">ss-price</h2>
@@ -50,4 +50,218 @@
   } @empty {
     <p>No catalog yet.</p>
   }
+</section>
+
+<section aria-labelledby="header-heading">
+  <h2 id="header-heading">ss-page-header</h2>
+  <div class="frame">
+    <ss-page-header heading="Work Related" backLink="/lists" backLabel="Lists">
+      <button matButton="outlined" type="button">Export</button>
+      <p subtitle class="subtitle">≈ $62 / mo average · 12 subscriptions</p>
+    </ss-page-header>
+  </div>
+  <div class="frame">
+    <ss-page-header heading="Custom subscriptions" />
+  </div>
+</section>
+
+<section aria-labelledby="budget-heading">
+  <h2 id="budget-heading">ss-budget-bar</h2>
+  <div class="bars">
+    @for (bar of barCases; track bar.name) {
+      <div class="bar">
+        <span class="bar-name" [id]="'bar-' + $index">{{ bar.name }}</span>
+        <ss-budget-bar
+          [attr.aria-labelledby]="'bar-' + $index"
+          [value]="bar.value"
+          [max]="bar.max"
+          [marker]="bar.marker"
+          [labelMode]="bar.labelMode"
+        />
+      </div>
+    }
+  </div>
+</section>
+
+<section aria-labelledby="icon-heading">
+  <h2 id="icon-heading">ss-provider-icon</h2>
+  <div class="row">
+    @for (provider of providers(); track provider.id) {
+      <span class="icon-case">
+        <ss-provider-icon [src]="provider.src" [name]="provider.name" size="32" />
+        {{ provider.name }}
+      </span>
+    }
+    <span class="icon-case"><ss-provider-icon name="Local Gym" size="32" /> No icon</span>
+    <span class="icon-case">
+      <ss-provider-icon src="icons/missing.webp" name="Substack" size="32" /> File missing
+    </span>
+  </div>
+  <div class="row">
+    @for (size of [24, 32, 48, 64]; track size) {
+      <span class="icon-case">
+        <ss-provider-icon src="icons/netflix.webp" name="Netflix" [size]="size" />
+        <ss-provider-icon name="Netflix" [size]="size" />
+        {{ size > 48 ? size + ' px asked, 48 shown' : size + ' px' }}
+      </span>
+    }
+  </div>
+</section>
+
+<section aria-labelledby="status-heading">
+  <h2 id="status-heading">ss-status-badge</h2>
+  <ul class="cases">
+    @for (example of statusCases; track example.name) {
+      <li>
+        <span class="case-name">{{ example.name }}</span>
+        <ss-status-badge [status]="example.status" [nextCharge]="example.nextCharge">
+          @if (example.lists) {
+            · {{ example.lists }} lists
+          }
+        </ss-status-badge>
+      </li>
+    }
+  </ul>
+</section>
+
+<section aria-labelledby="rank-heading">
+  <h2 id="rank-heading">ss-rank-dot, ss-rank-chip</h2>
+  <div class="row">
+    @for (rank of ranks; track rank) {
+      <ss-rank-chip [rank]="rank" />
+    }
+  </div>
+  <div class="row" aria-hidden="true">
+    @for (rank of ranks; track rank) {
+      <ss-rank-dot [rank]="rank" />
+    }
+  </div>
+</section>
+
+<section aria-labelledby="select-heading">
+  <h2 id="select-heading">ss-rank-select</h2>
+  <div class="rank-rows">
+    <span id="adfree-name">Ad free <span class="where">(profile)</span></span>
+    <ss-rank-select labelledBy="adfree-name" [(value)]="adFreeRank" />
+    <span class="value">{{ rankValue(adFreeRank()) }}</span>
+
+    <span id="quality-name"
+      >Video quality · 1080p <span class="where">(item, profile Wanted)</span></span
+    >
+    <ss-rank-select
+      labelledBy="quality-name"
+      subscriptionLevel
+      inherited="wanted"
+      [(value)]="qualityOverride"
+    />
+    <span class="value">{{ rankValue(qualityOverride()) }}</span>
+
+    <span id="streams-name"
+      >Simultaneous streams · 2–4 <span class="where">(item, profile Not ranked)</span></span
+    >
+    <ss-rank-select
+      labelledBy="streams-name"
+      subscriptionLevel
+      inherited="not-ranked"
+      [(value)]="streamsOverride"
+    />
+    <span class="value">{{ rankValue(streamsOverride()) }}</span>
+  </div>
+</section>
+
+<section aria-labelledby="counts-heading">
+  <h2 id="counts-heading">ss-rank-counts, ss-feature-summary</h2>
+  <div class="row top">
+    <ss-rank-counts [counts]="rankCounts" />
+    <ss-rank-counts [counts]="noCounts" />
+    <ss-feature-summary [rows]="summaryRows" />
+  </div>
+</section>
+
+<section aria-labelledby="features-heading">
+  <h2 id="features-heading">ss-feature-list</h2>
+  @if (plans().length) {
+    <mat-form-field appearance="outline" class="plan-select">
+      <mat-label>Plan</mat-label>
+      <mat-select [value]="featurePlanId()" (valueChange)="featurePlanId.set($event)">
+        @for (plan of plans(); track plan.id) {
+          <mat-option [value]="plan.id">{{ plan.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  }
+  @if (featurePlan(); as plan) {
+    <ss-feature-list [plan]="plan" [ranks]="exampleRanks" />
+  } @else {
+    <p>No catalog yet.</p>
+  }
+</section>
+
+<section aria-labelledby="calendar-heading">
+  <h2 id="calendar-heading">ss-mini-calendar</h2>
+  <p role="status" class="picked">{{ calendarEvent() }}</p>
+  <ss-mini-calendar
+    [(month)]="calendarMonth"
+    [charges]="calendarCharges()"
+    (dayClick)="calendarEvent.set('Day ' + $event)"
+    (monthClick)="calendarEvent.set('Month ' + $event)"
+  />
+</section>
+
+<section aria-labelledby="tags-heading">
+  <h2 id="tags-heading">ss-tag-chip, ss-tag-picker</h2>
+  <div class="row">
+    @for (tag of presetTags; track tag.id) {
+      <ss-tag-chip [tag]="tag" />
+    }
+  </div>
+  <h3>Your tags</h3>
+  <div class="row">
+    @for (tag of tags(); track tag.id) {
+      <ss-tag-chip [tag]="tag" />
+    } @empty {
+      <span class="none">None yet: create one below.</span>
+    }
+  </div>
+  <div class="picker">
+    <ss-tag-picker [(tagIds)]="tagIds" />
+    <p class="value">Chosen: {{ chosenTags() }}</p>
+  </div>
+</section>
+
+<section aria-labelledby="split-heading">
+  <h2 id="split-heading">ss-split-button</h2>
+  <p role="status" class="picked">{{ splitAction() }}</p>
+  <div class="row">
+    <ss-split-button
+      label="Sync calendar"
+      [items]="syncItems"
+      (action)="splitAction.set('Sync: ' + $event)"
+    />
+    <ss-split-button
+      label="Export to file"
+      [items]="exportItems"
+      (action)="splitAction.set('Export: ' + $event)"
+    />
+  </div>
+</section>
+
+<section aria-labelledby="empty-heading">
+  <h2 id="empty-heading">ss-empty-state</h2>
+  <ss-empty-state icon="playlist_add" heading="No lists yet">
+    Make a list of the subscriptions you pay for, or browse the catalog first.
+    <div actions>
+      <button matButton="filled" type="button">Create a list</button>
+      <button matButton="outlined" type="button">Browse services</button>
+    </div>
+  </ss-empty-state>
+</section>
+
+<section aria-labelledby="confirm-heading">
+  <h2 id="confirm-heading">ss-confirm</h2>
+  <p role="status" class="picked">{{ confirmResult() }}</p>
+  <div class="row">
+    <button matButton="outlined" type="button" (click)="confirm(false)">Ask</button>
+    <button matButton="outlined" type="button" (click)="confirm(true)">Ask before deleting</button>
+  </div>
 </section>

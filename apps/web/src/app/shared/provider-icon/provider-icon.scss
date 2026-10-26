@@ -1,0 +1,28 @@
+:host {
+  display: inline-flex;
+  flex: none;
+  width: var(--size);
+  height: var(--size);
+}
+
+img,
+.letter {
+  width: 100%;
+  height: 100%;
+  border-radius: 20%;
+}
+
+img {
+  object-fit: contain;
+}
+
+.letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--ss-app-bg);
+  color: var(--ss-text);
+  font-size: calc(var(--size) * 0.5);
+  font-weight: 600;
+  line-height: 1;
+}

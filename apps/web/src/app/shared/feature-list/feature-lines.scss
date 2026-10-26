@@ -1,0 +1,43 @@
+:host {
+  display: block;
+}
+
+// A group's features, indented under it.
+:host(.children) {
+  margin: 2px 0 4px;
+  padding-left: 16px;
+  border-left: 1px solid var(--ss-divider);
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  padding: 2px 0;
+}
+
+.feature {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 8px;
+}
+
+.value {
+  color: var(--ss-text-muted);
+}
+
+.rank {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 4px;
+  font: var(--mat-sys-body-small);
+}
+
+.option {
+  color: var(--ss-text-muted);
+}

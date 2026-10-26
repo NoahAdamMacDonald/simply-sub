@@ -1,0 +1,8 @@
+<ul>
+  @for (row of rows(); track row.rank) {
+    <li [attr.data-rank]="row.shown">
+      <ss-rank-dot [rank]="row.shown" />
+      <span>{{ row.count }} {{ row.name }}</span>
+    </li>
+  }
+</ul>

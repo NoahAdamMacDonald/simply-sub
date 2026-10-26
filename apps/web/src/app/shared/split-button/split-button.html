@@ -1,0 +1,29 @@
+<!-- The main button's name says what it does, and starts with its visible label. -->
+<button
+  matButton="filled"
+  type="button"
+  class="main"
+  [attr.aria-label]="label() + ': ' + main().label"
+  (click)="action.emit(main().id)"
+>
+  {{ label() }}
+</button>
+<button
+  matButton="filled"
+  type="button"
+  class="more"
+  [attr.aria-label]="label() + ', more options'"
+  [matMenuTriggerFor]="menu"
+>
+  <mat-icon class="arrow">arrow_drop_down</mat-icon>
+</button>
+<mat-menu #menu>
+  @for (item of items(); track item.id) {
+    <button mat-menu-item type="button" (click)="action.emit(item.id)">
+      @if (item.icon) {
+        <mat-icon aria-hidden="true">{{ item.icon }}</mat-icon>
+      }
+      <span>{{ item.label }}</span>
+    </button>
+  }
+</mat-menu>

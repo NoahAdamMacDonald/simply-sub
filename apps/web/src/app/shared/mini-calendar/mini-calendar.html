@@ -1,0 +1,56 @@
+<div class="header">
+  <button matIconButton type="button" aria-label="Previous month" (click)="step(-1)">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <button type="button" class="title" [id]="titleId" (click)="monthClick.emit(month())">
+    {{ title() }}
+  </button>
+  <button matIconButton type="button" aria-label="Next month" (click)="step(1)">
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+</div>
+<table role="grid" [attr.aria-labelledby]="titleId">
+  <thead>
+    <tr>
+      @for (weekday of weekdays; track weekday[0]) {
+        <th scope="col">
+          <span aria-hidden="true">{{ weekday[0] }}</span>
+          <span class="visually-hidden">{{ weekday[1] }}</span>
+        </th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (week of weeks(); track $index) {
+      <tr>
+        <!-- Each day's button is its own, so a focused button never turns into another month's day. -->
+        @for (day of week; track day?.date ?? $index) {
+          <td>
+            @if (day) {
+              <button
+                type="button"
+                class="day"
+                [class.today]="day.date === today()"
+                [class.paid]="day.paid"
+                [attr.data-date]="day.date"
+                [attr.aria-current]="day.date === today() ? 'date' : null"
+                [attr.aria-label]="day.label"
+                [tabindex]="day.date === focusDay() ? 0 : -1"
+                [matTooltip]="day.tooltip"
+                [matTooltipDisabled]="!day.paid"
+                (click)="dayClick.emit(day.date)"
+                (focus)="focusDay.set(day.date)"
+                (keydown)="moveFocus($event)"
+              >
+                {{ day.day }}
+                @if (day.paid) {
+                  <span class="dot" aria-hidden="true"></span>
+                }
+              </button>
+            }
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>

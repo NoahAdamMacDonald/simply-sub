@@ -1,0 +1,13 @@
+// A tag's colour dot. The colour is the tag's own (#rrggbb, checked by core's tagColorSchema), in --tag-color.
+@mixin dot($size: 10px) {
+  width: $size;
+  height: $size;
+  flex: none;
+  border-radius: 50%;
+  background-color: var(--tag-color);
+  box-shadow: 0 0 0 1px var(--ss-dot-ring);
+
+  @media (forced-colors: active) {
+    border: 1px solid CanvasText;
+  }
+}

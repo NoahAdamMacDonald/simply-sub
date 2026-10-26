@@ -1,0 +1,24 @@
+<!-- Spaces go inside the spans: Angular drops the whitespace between them, and screen readers need it. -->
+<ul>
+  @for (line of lines(); track line.id) {
+    <li>
+      <span class="feature">
+        <span>{{ line.value ? line.name + ':' : line.name }}</span>
+        @if (line.value) {
+          <span class="value"> {{ line.value }}</span>
+        }
+        @for (ranked of line.ranks; track ranked.key) {
+          <span class="rank">
+            <ss-rank-chip [rank]="ranked.rank" />
+            @if (ranked.option) {
+              <span class="option"> · {{ ranked.option }}</span>
+            }
+          </span>
+        }
+      </span>
+      @if (line.children.length) {
+        <ss-feature-lines class="children" [lines]="line.children" />
+      }
+    </li>
+  }
+</ul>

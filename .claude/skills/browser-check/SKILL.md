@@ -64,7 +64,16 @@ violation fails its console check.
 builds have no gallery): every fixed case's text for a Canadian, a US user with no rate and a UK user, the catalog's
 own prices, the tooltip on hover and on keyboard focus, the accessible name, and picking a price by click and Enter,
 with axe in both themes at both widths. It answers `GET /fx` itself with the API contract's example rates, so no
-Worker is needed behind the dev proxy.
+Worker is needed behind the dev proxy. Its selectors stay inside the gallery's ss-price section.
+
+`check-components.cjs` (M4.5) checks the rest of the gallery on `ng serve`: the budget bars (labels, colours,
+`aria-valuetext`, the label inside its bar, the Calendar tick), provider icons and their letter fallback, status
+badges, rank chips and counts, the rank selects by keyboard (options per level, an override set and cleared), the
+feature summary and list, the mini calendar by keyboard (one tab stop, arrows, Home, Page Up/Down, the payment
+tooltip), creating a tag (name, colour by arrow keys, saved in IndexedDB) and removing its chip, the split button and
+its menu, and ss-confirm (focus on Cancel, Escape, Enter), with axe in both themes at both widths and with the
+popups open. The gallery's "File missing" icon is a deliberate 404, which both gallery scripts leave out of their
+console check.
 
 ## Gotchas
 
@@ -78,6 +87,15 @@ Worker is needed behind the dev proxy.
 - A focused element's name: inputs get theirs from `<label for>` (`el.labels`), not `aria-label`.
 - Block IndexedDB with an init script that makes `IDBFactory.prototype.open` throw a `SecurityError`, as Edge does
   with site data blocked.
+- Playwright presses keys faster than Angular renders. After a key that changes what's on screen (a new month in
+  the mini calendar, a row that opens), wait for the focus or text it should produce before the next key.
+- Material shows a tooltip on keyboard focus only. Once the last keypress is old, `locator.focus()` counts as
+  programmatic and no tooltip opens: reach the element with a key instead (Tab, or an arrow in a grid).
+- Material renders menus and select panels in an overlay container on `<body>`, outside the page's landmarks, so
+  axe's best-practice `region` rule flags their text. `check-components.cjs` sets aside `region` hits inside
+  `.cdk-overlay-container` and keeps every other rule.
+- A screenshot taken just after a popup opens catches it mid-animation (half transparent): wait about 500 ms
+  before judging how it looks.
 
 - Light/dark: create the browser context with `colorScheme`; ThemeService follows the OS when nothing is saved.
 - `data-theme` updates on the next tick after a toggle; wait for it rather than checking right away.

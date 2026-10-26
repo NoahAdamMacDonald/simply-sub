@@ -1,0 +1,16 @@
+@use 'tag-dot';
+
+:host {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px;
+  border: 1px solid var(--ss-divider);
+  border-radius: 12px;
+  font: var(--mat-sys-label-large);
+  white-space: nowrap;
+}
+
+.tag-dot {
+  @include tag-dot.dot;
+}

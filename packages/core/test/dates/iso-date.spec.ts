@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { addDays, toIsoDate } from '../../src/dates/iso-date';
+import { addDays, addMonths, toIsoDate, weekdayOf } from '../../src/dates/iso-date';
 
 // Core never reads the clock, so its tests use a fixed `today`. vitest.config.ts runs them in
 // America/Vancouver: UTC−7 in October, UTC−8 after the clocks go back on Nov 1, 2026.
@@ -45,5 +45,41 @@ describe('addDays', () => {
     '',
   ])("rejects '%s'", (date) => {
     expect(() => addDays(date, 1)).toThrow(RangeError);
+  });
+});
+
+describe('addMonths', () => {
+  it.each([
+    { what: 'a month', date: today, months: 1, expected: '2026-11-23' },
+    { what: 'into the next year', date: '2026-12-15', months: 1, expected: '2027-01-15' },
+    { what: 'back a month', date: '2026-01-15', months: -1, expected: '2025-12-15' },
+    { what: 'onto a shorter month', date: '2026-01-31', months: 1, expected: '2026-02-28' },
+    { what: 'onto a leap February', date: '2028-01-31', months: 1, expected: '2028-02-29' },
+    { what: 'onto a 30-day month', date: '2026-03-31', months: 1, expected: '2026-04-30' },
+    {
+      what: 'from the anchor, not the last result',
+      date: '2026-01-31',
+      months: 2,
+      expected: '2026-03-31',
+    },
+    { what: 'a leap day a year on', date: '2028-02-29', months: 12, expected: '2029-02-28' },
+    { what: 'no months', date: today, months: 0, expected: today },
+  ])('$what: $date + $months = $expected', ({ date, months, expected }) => {
+    expect(addMonths(date, months)).toBe(expected);
+  });
+
+  it("rejects a date that isn't real", () => {
+    expect(() => addMonths('2026-02-30', 1)).toThrow(RangeError);
+  });
+});
+
+describe('weekdayOf', () => {
+  it.each([
+    { date: '2026-10-25', weekday: 0 },
+    { date: '2026-10-26', weekday: 1 },
+    { date: '2026-10-31', weekday: 6 },
+    { date: '2028-02-29', weekday: 2 },
+  ])('$date is day $weekday', ({ date, weekday }) => {
+    expect(weekdayOf(date)).toBe(weekday);
   });
 });

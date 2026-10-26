@@ -1,0 +1,42 @@
+@use '@angular/material' as mat;
+
+:host {
+  display: inline-block;
+  // Wide enough for "Profile default (Not ranked)".
+  width: 16rem;
+  max-width: 100%;
+
+  @include mat.form-field-overrides(
+    (
+      container-height: 40px,
+      container-vertical-padding: 8px,
+    )
+  );
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.muted {
+  color: var(--ss-text-muted);
+}
+
+.hint {
+  display: block;
+  margin-left: 18px;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}

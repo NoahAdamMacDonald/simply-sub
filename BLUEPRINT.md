@@ -1811,6 +1811,9 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
     --rank-none:      #BDBDBD;  --rank-none-text:      #6B6B6B;
 
     --budget-ok: var(--rank-wanted);  --budget-warn: var(--rank-sometimes);  --budget-over: var(--rank-unwanted);  --budget-track: var(--rank-none);
+    --budget-label: #111111;                 /* the label on every fill and on the track, in both themes (M4.5) */
+    --ss-danger: var(--rank-unwanted-text);  --ss-on-danger: var(--ss-on-accent);  /* ss-confirm's danger button */
+    --ss-dot-ring: oklch(from var(--ss-text) l c h / 0.3);  /* a faint ring that keeps pale dots visible */
   }
   [data-theme='dark'] {
     --ss-accent-text: oklch(from var(--ss-accent) 0.76 calc(c * 1.15) h);  /* ≈ #FF83A0: readable on dark, follows the accent hue */
@@ -1820,6 +1823,7 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
     --rank-essential-text: #DF7DFF;  --rank-critical-text: #93A6FF;  --rank-needed-text: #00EAFF;  --rank-wanted-text: #5CFF5C;
     --rank-uses-text: #FFF000;  --rank-sometimes-text: var(--rank-sometimes);  --rank-unused-text: #FF8C33;
     --rank-unwanted-text: #FF7E7E;  --rank-none-text: #A5A5A5;
+    --ss-on-danger: var(--ss-app-bg);  /* the danger fill is the light unwanted shade here, so its label is dark */
     /* the accent fill, --ss-on-accent, the vivid rank fills and the budget colours are inherited from :root on purpose */
   }
   ```
@@ -1829,6 +1833,9 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
   Critical was added later (2026-10-23): its text shades are 6.7:1 on white and 4.95:1 on dark cards.
   The derived accent shades were rechecked when they replaced the hex values: the dark accent text is 4.9:1 on
   dark cards and 9:1 on the sidebar, and the hover keeps the old value's 9.6:1 on white.
+  M4.5 checked the budget label (`#111`): 11.2:1 on the ok fill, 10.5:1 on warn, 4.87:1 on over and 10.1:1 on the
+  track. The danger button's label is 6.3:1 (white on `#C40000`) and 5.8:1 in dark mode (the app background on
+  `#FF7E7E`).
   Usage rules that follow from the check:
   - Light rank **text** shades reach 4.5:1 on white cards but not on the grey app background (4.2–4.5), so put
     rank text on cards.
@@ -1861,7 +1868,11 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
 - **Rank chips:** a coloured dot (vivid fill) + the rank name in normal text colour. This is readable in both
   themes and in every rank.
 - **Budget bars:** a vivid fill with a dark label inside (as in the wireframes). Green under 75%, amber at
-  75–100%, red over 100%.
+  75–100%, red over 100%. Core's `budgetBar` decides: a bar over its max is full with the real percent, which rounds
+  down up to 100 and up past it, so the label never contradicts the colour (100.4% shows 101%, red). The label is
+  `--budget-label` in both themes and reads on every fill and on the track, so it sits at the end of the fill and,
+  when the fill is too short to hold it, starts at the bar's left edge and runs onto the track, with nothing measured
+  (M4.5).
 
 ### 8.1.1 What each budget bar measures
 | Where | Bar shows |
@@ -1869,7 +1880,7 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
 | **Home** | **All lists combined** against the monthly and annual budgets |
 | **Lists overview: each list card** | **That list's share** of the total budget (its own cost ÷ budget) |
 | **View list** | Only **that list's** cost against the budgets |
-| **Calendar** | **The displayed month only**: spent so far (payments dated up to today) against the month's total, for the lists currently shown, with a tick mark at the monthly budget |
+| **Calendar** | **The displayed month only**: spent so far (payments dated up to today) against the month's total, for the lists currently shown, with a tick mark at the monthly budget (none when the budget is past the month's total). Its colour compares the month's total with the budget |
 
 **Every item counts, including duplicates.** The same plan can legitimately appear several times: a family
 might have several Netflix plans, and lists can be used **per family member** to track each person's costs.
@@ -2353,6 +2364,26 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3).
+
+**Resolved (2026-10-26, M4.5)**
+- **Shared components before their data:** every PROJECT-PLAN §4.3 component but `ss-sub-card` was built in M4.5, as
+  display components shown in the gallery with hand-made inputs. Their inputs are §3.4's shapes, typed in core now
+  (`ItemStatus`, `RankCounts`, `FeatureSummaryRow`) for M4.6, M6.1 and M7.1 to fill; the mini calendar takes a
+  display shape of its own that M7.1's charges map to. `ss-sub-card` is built with its pages (M5.2, M6.8), where its
+  two view models exist.
+- **Rank dropdown:** a Material select (keyboard, typeahead and ARIA come with it) with each rank's dot and name.
+  Core's `rankChoices` orders it: a profile offers Not ranked first, an item Essential and Critical (with their hints)
+  and Not ranked in its place. "Profile default (Wanted)" comes first when there's a rank to inherit, muted, and
+  choosing it clears the override; Not ranked is an override of its own.
+- **Budget bars:** the thresholds stay as in section 8.1, in core's `budgetBar`, and one label colour reads on every
+  fill and on the track, so a short fill needs no measuring (section 8.1). The Calendar's bar is coloured by the
+  month's total against the budget, and has no tick when the budget is past the month's total (section 8.1.1).
+- **ss-confirm** is a service that resolves to true only from its confirm button; Escape and the backdrop are false.
+  It's an alert dialog described by its message, and a destructive question starts on Cancel.
+- **Tags:** the picker creates tags inline through `TagsRepository`, from a name and one of 12 preset colours. The
+  presets live in core (`tagColorPresets`) as stored values rather than theme colours: a tag chip shows the colour as
+  a dot beside the name, so the name's contrast never depends on it. Settings' tag section (renaming, any hex colour,
+  deleting) still has no task.
 
 **Resolved (2026-10-26, M4.4)**
 - **Exchange rates are kept in Dexie,** in a new `fxRates` table (Dexie v2), so converted prices show at once and
