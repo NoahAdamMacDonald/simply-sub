@@ -86,3 +86,8 @@ Cloudflare's beacon (inserted as the edge does, its reports aborted) loading. Ag
 - Paths in the preview are root-relative (`/data/...`, `/api/v1/...`) so they work from any route and on `ng serve`
   (whose proxy sends `/api` to `wrangler dev` on 8787).
 - The preview's own spec (`progress-preview-view.spec.ts`) runs with the web tests on the branch only.
+- `csp-check.cjs`'s three beacon checks fail with `ERR_NAME_NOT_RESOLVED` when the machine's DNS filter blocks
+  `static.cloudflareinsights.com` (as NextDNS does on the user's machine). That's the network, not the app: the
+  violations check still runs, and visitors without such a filter load the beacon (BLUEPRINT §7.6).
+- To check code that only runs when something uses it (M4.1's storage, before any page did), add a temporary
+  consumer, build, check, and drop it with `git checkout --` before committing. It never needs this branch.
