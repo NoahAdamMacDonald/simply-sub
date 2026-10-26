@@ -951,7 +951,7 @@ that a service isn't sold somewhere. Each check gives `offered`, `not-offered` o
   but this item has none, it's `not-offered`: Canada's Disney+ plans are known, and the US-only With Ads plan isn't
   one of them. Elsewhere it follows the provider.
 - The app hides `not-offered` plans, shows "Not offered in Canada" on a provider with none offered (it can still be
-  added as a custom subscription), and shows an `unknown` item's fallback price with "No Canadian price yet".
+  added as a custom subscription), and shows an `unknown` item's fallback price with "No price for Canada yet".
 - `validateCatalog` checks that every region code is real, that `availableIn` lists every region the provider is
   priced in (a member through its group counts), and that it doesn't list `GLOBAL`.
 
@@ -1872,6 +1872,7 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
     --budget-label: #111111;                 /* the label on every fill and on the track, in both themes (M4.5) */
     --ss-danger: var(--rank-unwanted-text);  --ss-on-danger: var(--ss-on-accent);  /* ss-confirm's danger button */
     --ss-dot-ring: oklch(from var(--ss-text) l c h / 0.3);  /* a faint ring that keeps pale dots visible */
+    --ss-icon-tile: #FFFFFF;                 /* behind logos in both themes: sites draw icons for white (M5.2) */
   }
   [data-theme='dark'] {
     --ss-accent-text: oklch(from var(--ss-accent) 0.76 calc(c * 1.15) h);  /* ≈ #FF83A0: readable on dark, follows the accent hue */
@@ -2427,6 +2428,28 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
+**Resolved (2026-10-26, M5.2)**
+- **The Search page:** a search box (results follow a 150 ms pause), Sort (Best match only with text), a polite count
+  line, and one `ss-sub-card` per `searchCatalog` result. The text and the sort live in the page until M5.3 puts them
+  in the URL with the filter panel; prices are plain text until M5.4 makes them buttons for the add menu.
+- **The card:** the provider's icon, name, the plan shown and its status across lists ("Active · 2 lists"), Plan ↗ and
+  Cancel ↗ (a not-offered provider's Website ↗), every interval's price, then "Cheaper at" each reseller's page. Plan
+  chips are native radio buttons styled as chips: one tab stop, arrow keys, and never none chosen, which Material's
+  chip listbox allows. A picked chip stays while it still matches a new search. The head lays out by the card's own
+  width (a container query), so it fits beside M5.3's filter panel.
+- **Expanded** (`ss-plan-details`, priced by core's `planExtras`): the features with the user's profile ranks, add-ons,
+  bundles that include the plan with their savings, a suite's plans with its savings against them, perks, the plan's
+  and provider's notes, and "Price checked …" with "May be out of date" after 90 days. Nothing availability calls not
+  offered is listed.
+- **Wording:** "No price for Canada yet" and "Not offered in Canada" use the country's name: English has no demonym
+  table to say "Canadian" for every country.
+- **Logos on a white tile** (`--ss-icon-tile`) in both themes, since sites draw their icons for white: ProxyStore's
+  black logo vanished on dark cards. The letter fallback keeps the app background.
+- **The initial bundle grew by 10 kB** (476 to 487 kB, 5.6 kB gzipped; the warning budget is 500 kB). esbuild places code
+  by file, and `@angular/common` and the CDK's a11y files are already loaded at start, so `NgOptimizedImage` and
+  `NgTemplateOutlet`, used in production for the first time by Search's cards (`ss-provider-icon`, `ss-price`), load
+  with them. No search code is in the initial chunks.
+
 **Resolved (2026-10-26, M5.1)**
 - **One search engine:** the app's `searchCatalog` runs M2.3's `searchProviders` on the catalog file for the user's
   country, so Search and `GET /providers` match, filter and sort alike. D1 never narrows by text, so a change to
@@ -2471,8 +2494,8 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 - **The contract:** `GET /catalog`'s data gains the `resellers` list, and `GET /providers/:id` shows a provider's
   resellers as written; the examples show Amazon.ca's offer. The D1 tables don't change, so `seedFormat` stays.
 - **Still open:** Amazon's other 12 stores (prices depend on the delivery address) and Laptop with Linux (price follows
-  the delivery country's VAT); logos on transparent backgrounds (ProxyStore's is black) are faint on dark cards, for
-  M5.2 to settle when it shows reseller icons.
+  the delivery country's VAT). Logos on transparent backgrounds (ProxyStore's is black) were faint on dark cards:
+  settled in M5.2 with a white tile behind every logo.
 
 **Resolved (2026-10-26, M4.6)**
 - **A skeleton of what exists:** core's `resolveItem` joins an item to its catalog plan, bundle or custom plan, prices

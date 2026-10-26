@@ -43,6 +43,7 @@ export * from './lookup/lookup-bodies';
 export * from './lookup/lookup-query';
 export * from './ranking/plan-features';
 export * from './ranking/rank-keys';
+export * from './search/plan-extras';
 export * from './search/provider-activity';
 export * from './search/providers-body';
 export * from './search/providers-query';

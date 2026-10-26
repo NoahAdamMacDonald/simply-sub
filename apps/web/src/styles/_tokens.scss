@@ -57,6 +57,8 @@
   --ss-on-danger: var(--ss-on-accent);
   // A faint ring around colour dots, so pale fills (Uses' yellow on white) keep their shape.
   --ss-dot-ring: oklch(from var(--ss-text) l c h / 0.3);
+  // Behind logos, in both themes: sites draw their icons for white, and some are dark on transparent (ProxyStore's).
+  --ss-icon-tile: #ffffff;
 
   --ss-sidebar-width: 216px;
   --ss-radius-card: 12px;

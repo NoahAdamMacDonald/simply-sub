@@ -6,7 +6,9 @@ import {
   catalogIconFile,
   monthOf,
   pickPrice,
+  searchCatalog,
   tagColorPresets,
+  type CatalogResult,
   type FeatureSummaryRow,
   type FxRates,
   type Interval,
@@ -22,6 +24,7 @@ import { CatalogStore } from '../../core/catalog/catalog-store';
 import { ClockService } from '../../core/clock/clock-service';
 import { FxStore } from '../../core/fx/fx-store';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { ItemsRepository } from '../../core/storage/items-repository';
 import { TagsRepository } from '../../core/storage/tags-repository';
 import { BudgetBar } from '../../shared/budget-bar/budget-bar';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
@@ -40,6 +43,7 @@ import { RankSelect } from '../../shared/rank/rank-select';
 import { rankNames } from '../../shared/rank/rank-text';
 import { SplitButton, type SplitButtonItem } from '../../shared/split-button/split-button';
 import { StatusBadge, type BadgeStatus } from '../../shared/status-badge/status-badge';
+import { SubCard } from '../../shared/sub-card/sub-card';
 import { TagChip } from '../../shared/tags/tag-chip';
 import { TagPicker } from '../../shared/tags/tag-picker';
 
@@ -181,6 +185,7 @@ const presetTags: Tag[] = tagColorPresets.map(({ name, color }, index) => ({
     RankSelect,
     SplitButton,
     StatusBadge,
+    SubCard,
     TagChip,
     TagPicker,
   ],
@@ -192,6 +197,7 @@ export class ComponentsPage {
   private readonly catalog = inject(CatalogStore);
   private readonly fx = inject(FxStore);
   private readonly confirmService = inject(ConfirmService);
+  private readonly items = inject(ItemsRepository);
   private readonly today = inject(ClockService).today;
 
   protected readonly saved = this.settings.saved;
@@ -303,6 +309,29 @@ export class ComponentsPage {
   protected readonly featurePlan = computed(
     () => this.plans().find((entry) => entry.id === this.featurePlanId())?.plan,
   );
+
+  // ss-sub-card: the catalog as Search shows it with no text, then its first provider as if it weren't sold here.
+  protected readonly subCards = computed<CatalogResult[]>(() => {
+    const saved = this.saved();
+    const data = this.catalog.catalog();
+    if (!saved || !data) return [];
+    const fx = this.fx.rates();
+    const results = searchCatalog(
+      {},
+      {
+        catalog: data,
+        settings: saved,
+        ...(fx && { fx }),
+        items: this.items.records(),
+        today: this.today(),
+      },
+    );
+    const [first] = data.providers;
+    const notOffered: CatalogResult[] = first
+      ? [{ kind: 'not-offered', provider: first, matchedOn: ['name'], relevance: 1 }]
+      : [];
+    return [...results, ...notOffered];
+  });
 
   // ss-mini-calendar: payments made up for whichever month is shown.
   protected readonly calendarMonth = linkedSignal(() => monthOf(this.today()));

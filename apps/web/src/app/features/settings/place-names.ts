@@ -1,18 +1,15 @@
 import { displayCurrencies, isoRegions, subdivisionName } from '@simply-sub/core';
+import { countryName } from '../../shared/country-name';
 
 // English names for the Settings menus and the 📍 summary. The app's text is English, so the names are too.
 
-const regionNames = new Intl.DisplayNames(['en'], { type: 'region', fallback: 'code' });
 const currencyNames = new Intl.DisplayNames(['en'], { type: 'currency', fallback: 'code' });
+
+export { countryName };
 
 export interface Choice {
   value: string;
   label: string;
-}
-
-/** A country's name (CA → Canada). */
-export function countryName(code: string): string {
-  return regionNames.of(code) ?? code;
 }
 
 /** Every country, by name. */

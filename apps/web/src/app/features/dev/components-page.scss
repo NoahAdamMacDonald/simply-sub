@@ -174,3 +174,16 @@ th[scope='row'] {
 .picker {
   max-width: 480px;
 }
+
+// The cards are white on white here: a border shows where each ends.
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+
+  ss-sub-card {
+    border: 1px solid var(--ss-divider);
+    border-radius: var(--ss-radius-card);
+  }
+}

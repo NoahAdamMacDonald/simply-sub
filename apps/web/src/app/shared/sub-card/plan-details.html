@@ -1,0 +1,121 @@
+<!-- Spaces go inside the spans: Angular drops the whitespace between them, and screen readers need it. -->
+<ng-template #saved let-text>
+  <span class="saving">
+    Save
+    @if (text.approx) {
+      <span aria-hidden="true"> ≈</span><span class="visually-hidden"> about</span>
+    }
+    <span> {{ text.amount }}</span>
+    <span aria-hidden="true"> {{ text.interval }}</span>
+    <span class="visually-hidden"> {{ text.spoken }}</span>
+  </span>
+</ng-template>
+
+@if (hasFeatures()) {
+  <div class="group">
+    <h3>Features</h3>
+    <ss-feature-list [plan]="plan()" [ranks]="ranks()" />
+  </div>
+}
+
+@if (extras(); as extras) {
+  @if (extras.addOns.length) {
+    <div class="group">
+      <h3>Add-ons</h3>
+      <ul class="rows">
+        @for (entry of extras.addOns; track entry.addOn.id) {
+          <li>
+            <span class="row-name">{{ entry.addOn.name }}</span>
+            @for (price of entry.pricing; track $index) {
+              <ss-price [price]="price" />
+            }
+            @if (entry.availability === 'unknown') {
+              <span class="note">No price for {{ country() }} yet</span>
+            }
+          </li>
+        }
+      </ul>
+    </div>
+  }
+
+  @if (extras.bundles.length) {
+    <div class="group">
+      <h3>Bundles</h3>
+      <ul class="rows">
+        @for (offer of extras.bundles; track offer.bundle.id) {
+          <li>
+            <span class="row-name">
+              <span class="icons">
+                @for (part of offer.plans; track part.plan.id) {
+                  <ss-provider-icon
+                    [src]="icon(part.provider)"
+                    [name]="part.provider.name"
+                    size="24"
+                  />
+                }
+              </span>
+              {{ offer.bundle.name }}
+            </span>
+            @for (price of offer.pricing; track $index) {
+              <ss-price [price]="price" />
+            }
+            @for (saving of offer.savings; track $index) {
+              <ng-container
+                [ngTemplateOutlet]="saved"
+                [ngTemplateOutletContext]="{ $implicit: savingParts(saving, offer.pricing) }"
+              />
+            }
+            @if (offer.availability === 'unknown') {
+              <span class="note">No price for {{ country() }} yet</span>
+            }
+          </li>
+        }
+      </ul>
+    </div>
+  }
+
+  @if (extras.suite; as suite) {
+    <div class="group">
+      <h3>Includes</h3>
+      <ul class="bullets">
+        @for (entry of suite.includes; track $index) {
+          <li>{{ includedName(entry) }}</li>
+        }
+      </ul>
+      @for (saving of suite.savings; track $index) {
+        <p class="suite-saving">
+          <ng-container
+            [ngTemplateOutlet]="saved"
+            [ngTemplateOutletContext]="{ $implicit: savingParts(saving, match().pricing ?? []) }"
+          />
+          <span> against buying them separately</span>
+        </p>
+      }
+    </div>
+  }
+}
+
+@if (plan().perks?.length) {
+  <div class="group">
+    <h3>Perks</h3>
+    <ul class="bullets">
+      @for (perk of plan().perks; track $index) {
+        <li>{{ perk }}</li>
+      }
+    </ul>
+  </div>
+}
+
+@if (plan().notes; as notes) {
+  <p class="notes">{{ notes }}</p>
+}
+@if (provider().notes; as notes) {
+  <p class="notes">{{ notes }}</p>
+}
+
+<p class="checked">
+  <span>Price checked {{ checked() }}</span>
+  @if (match().stale) {
+    <span class="badge"> May be out of date</span>
+  }
+</p>

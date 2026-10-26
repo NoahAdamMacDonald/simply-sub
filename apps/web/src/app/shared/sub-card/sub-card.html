@@ -1,0 +1,99 @@
+<!-- Spaces go inside the spans: Angular drops the whitespace between them, and screen readers need it. -->
+<article class="card" [attr.aria-labelledby]="id + '-name'">
+  <div class="head">
+    <ss-provider-icon class="icon" [src]="icon(provider())" [name]="provider().name" size="48" />
+
+    <div class="title">
+      <h2 class="name" [id]="id + '-name'">{{ provider().name }}</h2>
+      @if (plan(); as plan) {
+        <p class="plan-name">{{ plan.plan.name }}</p>
+      }
+      <ss-status-badge class="status" [status]="status()">{{ lists() }}</ss-status-badge>
+    </div>
+
+    <div class="links">
+      <a [href]="link()" target="_blank" rel="noopener">
+        <span>{{ plan() ? 'Plan' : 'Website' }}</span>
+        <span class="visually-hidden">: {{ title() }}, opens in a new tab</span>
+        <mat-icon aria-hidden="true">open_in_new</mat-icon>
+      </a>
+      @if (provider().cancelUrl; as cancelUrl) {
+        <a [href]="cancelUrl" target="_blank" rel="noopener">
+          <span>Cancel</span>
+          <span class="visually-hidden"> {{ provider().name }}, opens in a new tab</span>
+          <mat-icon aria-hidden="true">open_in_new</mat-icon>
+        </a>
+      }
+    </div>
+
+    <div class="prices">
+      @if (plan(); as plan) {
+        @for (price of plan.pricing; track $index) {
+          <ss-price [price]="price" />
+        }
+        @if (plan.availability === 'unknown') {
+          <p class="note">No price for {{ country() }} yet</p>
+        }
+      } @else {
+        <p class="note">Not offered in {{ country() }}</p>
+      }
+    </div>
+  </div>
+
+  @if (plan()?.deals; as deals) {
+    @if (deals.length) {
+      <ul class="deals">
+        @for (deal of deals; track deal.reseller.id) {
+          <li>
+            <span>Cheaper at </span>
+            <a [href]="deal.link" target="_blank" rel="noopener">
+              <ss-provider-icon [src]="icon(deal.reseller)" [name]="deal.reseller.name" size="20" />
+              <span>{{ deal.reseller.name }}</span>
+              <span class="visually-hidden">, opens in a new tab</span>
+              <mat-icon aria-hidden="true">open_in_new</mat-icon>
+            </a>
+            <ss-price [price]="deal.price" />
+          </li>
+        }
+      </ul>
+    }
+  }
+
+  @if (plans().length > 1) {
+    <fieldset class="plans">
+      <legend class="visually-hidden">{{ provider().name }} plans</legend>
+      @for (option of plans(); track option.plan.id) {
+        <label class="chip">
+          <input
+            type="radio"
+            [name]="id + '-plan'"
+            [value]="option.plan.id"
+            [checked]="option.plan.id === selectedId()"
+            (change)="selectedId.set(option.plan.id)"
+          />
+          <mat-icon class="check" aria-hidden="true">check</mat-icon>
+          <span>{{ option.plan.name }}</span>
+        </label>
+      }
+    </fieldset>
+  }
+
+  @if (plan(); as plan) {
+    <button
+      matIconButton
+      type="button"
+      class="expand"
+      [attr.aria-expanded]="expanded()"
+      [attr.aria-controls]="id + '-details'"
+      [attr.aria-label]="'Details: ' + title()"
+      (click)="expanded.set(!expanded())"
+    >
+      <mat-icon>{{ expanded() ? 'expand_less' : 'expand_more' }}</mat-icon>
+    </button>
+    <div class="details" [id]="id + '-details'" [hidden]="!expanded()">
+      @if (expanded()) {
+        <ss-plan-details [provider]="provider()" [match]="plan" [ranks]="ranks()" />
+      }
+    </div>
+  }
+</article>
