@@ -1,0 +1,70 @@
+section {
+  max-width: 900px;
+  padding: 16px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+}
+
+h2 {
+  margin: 0 0 8px;
+  font: var(--mat-sys-title-large);
+}
+
+h3 {
+  margin: 24px 0 8px;
+  font: var(--mat-sys-title-medium);
+}
+
+.note,
+.none {
+  color: var(--ss-text-muted);
+}
+
+.picked {
+  min-height: 1.5em;
+}
+
+.table-scroll {
+  overflow-x: auto;
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 2px;
+  }
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+caption {
+  margin-bottom: 8px;
+  color: var(--ss-text-muted);
+  text-align: start;
+}
+
+th,
+td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--ss-divider);
+  text-align: start;
+  vertical-align: middle;
+}
+
+th[scope='row'] {
+  font-weight: normal;
+}
+
+.plan {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--ss-divider);
+}
+
+.plan-name {
+  min-width: 220px;
+}

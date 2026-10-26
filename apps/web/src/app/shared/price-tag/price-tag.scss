@@ -1,0 +1,76 @@
+:host {
+  position: relative;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 6px;
+}
+
+// The price and its period stay on one line; the icon and the tax note can wrap under it.
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.amount {
+  font: var(--mat-sys-title-medium);
+}
+
+.interval {
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}
+
+button.tag {
+  margin: 0;
+  padding: 2px 4px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: var(--ss-accent-text);
+  font: inherit;
+  cursor: pointer;
+
+  &:hover .amount {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 2px;
+  }
+}
+
+.fx {
+  width: 16px;
+  height: 16px;
+  color: var(--ss-text-muted);
+  font-size: 16px;
+}
+
+.fx-details {
+  display: inline-flex;
+  border-radius: 4px;
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 2px;
+  }
+}
+
+.tax {
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-label-small);
+}
+
+// Read by screen readers, not shown: "about" for ≈, and the billing period in words.
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

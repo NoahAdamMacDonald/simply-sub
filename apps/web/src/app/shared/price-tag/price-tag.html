@@ -1,0 +1,44 @@
+<!-- Spaces go inside the spans: Angular drops the whitespace between them, and the flex gaps space them on screen. -->
+<ng-template #tag>
+  @if (free()) {
+    Free
+  } @else {
+    @if (converted()) {
+      <span aria-hidden="true">≈ </span><span class="visually-hidden">about </span>
+    }
+    <span class="amount">{{ amount() }}</span>
+    <span class="interval" aria-hidden="true"> {{ interval() }}</span>
+    <span class="visually-hidden"> {{ spokenInterval() }}</span>
+  }
+</ng-template>
+
+@if (clickable()) {
+  <button
+    type="button"
+    class="tag"
+    [matTooltip]="tooltip()"
+    [matTooltipDisabled]="!tooltip()"
+    (click)="priceSelect.emit(price())"
+  >
+    <ng-container [ngTemplateOutlet]="tag" />
+    @if (foreign()) {
+      <mat-icon class="fx">currency_exchange</mat-icon>
+    }
+  </button>
+} @else {
+  <span class="tag"><ng-container [ngTemplateOutlet]="tag" /></span>
+  @if (foreign()) {
+    <!-- Focusable, so keyboard users get the tooltip, which screen readers read as its description. -->
+    <span class="fx-details" tabindex="0" role="img" aria-label="Currency" [matTooltip]="tooltip()">
+      <mat-icon class="fx">currency_exchange</mat-icon>
+    </span>
+  }
+}
+@switch (taxNote()) {
+  @case ('plus-tax') {
+    <span class="tax"> + tax</span>
+  }
+  @case ('incl-tax') {
+    <span class="tax"> incl. tax</span>
+  }
+}

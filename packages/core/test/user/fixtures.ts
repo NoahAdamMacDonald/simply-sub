@@ -126,3 +126,15 @@ export const fullCatalogCache = {
   snapshot: fullCatalog,
   fetchedAt: '2026-10-23T12:30:00.000Z',
 };
+
+/** The last exchange rates fetched, for a Canadian (GET /fx's example). */
+export const fxCache = {
+  key: 'fx',
+  rates: {
+    base: 'CAD',
+    date: '2026-10-21',
+    source: 'European Central Bank via Frankfurter',
+    rates: { EUR: 0.664, USD: 0.7243 },
+  },
+  fetchedAt: '2026-10-22T06:00:02.000Z',
+};

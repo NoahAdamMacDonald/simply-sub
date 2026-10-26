@@ -1,0 +1,53 @@
+<h1>Components</h1>
+<p class="note">Development builds only. Prices follow your settings.</p>
+
+<section aria-labelledby="price-heading">
+  <h2 id="price-heading">ss-price</h2>
+  <p role="status" class="picked">{{ picked() }}</p>
+
+  <!-- Wider than a phone: it scrolls on its own, and can be focused to scroll by keyboard. -->
+  <div class="table-scroll" role="region" aria-labelledby="cases-caption" tabindex="0">
+    <table>
+      <caption id="cases-caption">
+        Fixed cases, converted with GET /fx's example rates
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Case</th>
+          <th scope="col">Clickable</th>
+          <th scope="col">Not clickable</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (example of cases(); track example.name) {
+          <tr>
+            <th scope="row">{{ example.name }}</th>
+            <td>
+              <ss-price
+                [price]="example.price"
+                [region]="example.region"
+                clickable
+                (priceSelect)="pick($event)"
+              />
+            </td>
+            <td><ss-price [price]="example.price" [region]="example.region" /></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Your catalog, with today's rates</h3>
+  @for (plan of plans(); track plan.id) {
+    <div class="plan">
+      <span class="plan-name">{{ plan.name }}</span>
+      @for (price of plan.prices; track $index) {
+        <ss-price [price]="price" clickable (priceSelect)="pick($event)" />
+      } @empty {
+        <span class="none">No price here</span>
+      }
+    </div>
+  } @empty {
+    <p>No catalog yet.</p>
+  }
+</section>

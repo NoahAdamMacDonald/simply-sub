@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { addedSalesTax, canadianSalesTax, salesTaxRate, subdivisionsOf } from '../../src';
+import {
+  addedSalesTax,
+  buyerTaxPlace,
+  canadianSalesTax,
+  priceTaxNote,
+  salesTaxRate,
+  subdivisionsOf,
+} from '../../src';
 
 describe('canadianSalesTax', () => {
   it('has a rate for every province and territory, and nothing else', () => {
@@ -85,5 +92,41 @@ describe('addedSalesTax', () => {
 
   it('adds nothing where prices include tax anyway', () => {
     expect(addedSalesTax({}, { country: 'GB' })).toBeUndefined();
+  });
+});
+
+describe('buyerTaxPlace', () => {
+  const ontario = { country: 'CA', subdivision: 'CA-ON', salesTaxPercent: 12 };
+
+  it("is the user's own place for an item bought in their country", () => {
+    expect(buyerTaxPlace(ontario)).toBe(ontario);
+    expect(buyerTaxPlace(ontario, 'CA')).toBe(ontario);
+  });
+
+  it("follows another region's rule, without the user's rate", () => {
+    expect(buyerTaxPlace(ontario, 'US')).toEqual({ country: 'US' });
+    expect(buyerTaxPlace(ontario, 'GB')).toEqual({ country: 'GB' });
+  });
+});
+
+describe('priceTaxNote', () => {
+  const listed = {};
+  const included = { taxIncluded: true };
+
+  it('says "+ tax" where a rate is added, and "incl. tax" for a price that includes it', () => {
+    const ontario = { country: 'CA', subdivision: 'CA-ON' };
+    expect(priceTaxNote(listed, ontario)).toBe('plus-tax');
+    expect(priceTaxNote(included, ontario)).toBe('incl-tax');
+  });
+
+  it('says nothing about a listed price where no rate is known, as totals add none', () => {
+    expect(priceTaxNote(listed, { country: 'US', subdivision: 'US-NY' })).toBeUndefined();
+    expect(priceTaxNote(listed, { country: 'US', salesTaxPercent: 8.875 })).toBe('plus-tax');
+    expect(priceTaxNote(included, { country: 'US' })).toBe('incl-tax');
+  });
+
+  it('says nothing outside the tax-added countries, where every price includes tax', () => {
+    expect(priceTaxNote(listed, { country: 'GB' })).toBeUndefined();
+    expect(priceTaxNote(included, { country: 'GB' })).toBeUndefined();
   });
 });

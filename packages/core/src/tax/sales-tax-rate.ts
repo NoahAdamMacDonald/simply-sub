@@ -78,3 +78,28 @@ export function addedSalesTax(
 ): SalesTaxRate | undefined {
   return price.taxIncluded ? undefined : salesTaxRate(place);
 }
+
+/**
+ * Where a buyer pays tax on an item bought in `region` (ListItem.region): that region's rule, but with a rate only in
+ * the user's own country, the only one whose rate the app knows (BLUEPRINT §4.8).
+ */
+export function buyerTaxPlace(user: TaxPlace, region?: string): TaxPlace {
+  return region === undefined || region === user.country ? user : { country: region };
+}
+
+/** What a price tag says about sales tax (BLUEPRINT §4.8). */
+export type PriceTaxNote = 'plus-tax' | 'incl-tax';
+
+/**
+ * A price tag's tax note for a buyer at `place`, only in a tax-added country, since elsewhere every price includes
+ * tax: "incl. tax" for a price that includes it, else "+ tax" when a rate is added (none for a US user who gave no
+ * rate, whose totals add nothing either).
+ */
+export function priceTaxNote(
+  price: { taxIncluded?: unknown },
+  place: TaxPlace,
+): PriceTaxNote | undefined {
+  if (!taxAddedRegions.has(place.country)) return undefined;
+  if (price.taxIncluded) return 'incl-tax';
+  return salesTaxRate(place) === undefined ? undefined : 'plus-tax';
+}

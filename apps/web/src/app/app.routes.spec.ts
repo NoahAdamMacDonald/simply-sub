@@ -31,6 +31,12 @@ describe('routes', () => {
     expect(document.title).toBe(title);
   });
 
+  it('has the component gallery in development builds (dev-routes.ts)', async () => {
+    const harness = await RouterTestingHarness.create('/dev/components');
+    expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toBe('Components');
+    expect(document.title).toBe('Components · Simply Sub');
+  });
+
   it('shows "Page not found" for an unknown URL, with working links to Home and Lists', async () => {
     const harness = await RouterTestingHarness.create('/no/such/page');
     const page = harness.routeNativeElement!;

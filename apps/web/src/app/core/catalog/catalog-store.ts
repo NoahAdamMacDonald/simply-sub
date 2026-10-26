@@ -7,6 +7,7 @@ import {
   type Timestamp,
 } from '@simply-sub/core';
 import { ClockService } from '../clock/clock-service';
+import { oneAtATime } from '../one-at-a-time';
 import { SettingsStore } from '../settings/settings-store';
 import { CatalogCacheRepository } from '../storage/catalog-cache-repository';
 import { ItemsRepository } from '../storage/items-repository';
@@ -41,8 +42,6 @@ export class CatalogStore {
   private readonly checkingNow = signal(false);
   private readonly lastOutcome = signal<CatalogCheckOutcome | undefined>(undefined);
   private lastCheckedAt?: Timestamp;
-  private running?: Promise<CatalogCheckOutcome>;
-  private queued?: Promise<CatalogCheckOutcome>;
 
   /** The cached files by key: the stored ones, or this tab's later downloads. */
   private readonly files = computed(() => {
@@ -91,6 +90,12 @@ export class CatalogStore {
   readonly checking = this.checkingNow.asReadonly();
   readonly lastCheck = this.lastOutcome.asReadonly();
 
+  /**
+   * Checks for a new catalog version now, and downloads what changed. A call while a check runs gets the check that
+   * follows it, which sees any change that came in meanwhile.
+   */
+  readonly check = oneAtATime(() => this.run());
+
   constructor() {
     // A check once the settings and items have loaded, and again when the regions change: the first run, a new
     // country (📍), an item bought elsewhere, or storage moving to memory (whose repositories load again).
@@ -124,22 +129,6 @@ export class CatalogStore {
   /** The catalog for a list item bought in `region`: the file that serves that region, if it's been downloaded. */
   catalogFor(region: string): CatalogData | undefined {
     return this.fileFor(region)?.snapshot.data;
-  }
-
-  /**
-   * Checks for a new catalog version now, and downloads what changed. A call while a check runs gets the check that
-   * follows it, which sees any change that came in meanwhile.
-   */
-  check(): Promise<CatalogCheckOutcome> {
-    if (!this.running) {
-      this.running = this.run().finally(() => (this.running = undefined));
-      return this.running;
-    }
-    this.queued ??= this.running.then(() => {
-      this.queued = undefined;
-      return this.check();
-    });
-    return this.queued;
   }
 
   /** The file that serves `region`, found with the regions of the latest file, which are the current catalog's. */

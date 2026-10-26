@@ -883,6 +883,12 @@ export interface CatalogCache {         // a downloaded catalog file (M4.3, sect
   snapshot: CatalogSnapshot;            // the file as downloaded: its meta has catalogVersion, generatedAt and region
   fetchedAt: string;
 }
+
+export interface FxCache {              // the last exchange rates fetched (M4.4, section 4.7): a cache too
+  key: 'fx';                            // one record
+  rates: FxRates;                       // GET /fx's data: base, date, source and rates
+  fetchedAt: string;
+}
 ```
 `Settings.country` and `ListItem.region` are countries (ISO 3166-1 alpha-2), never `EU` or `GLOBAL`, and a
 subdivision must belong to the country.
@@ -906,8 +912,9 @@ transaction types for a subclass). Dexie keeps only keys and indexes, not the re
 
 v1 declares every table, so it's the full list the app lock (M6.10) encrypts. `catalogCache` got its record schema
 with M4.3; `drafts` and `dismissedSuggestions` get theirs with M6.3 and M8.2, and `cards` its repository with M9.1
-(its schema is in core already, since backups carry cards). Backups leave `catalogCache` out, and the app lock leaves
-it plain.
+(its schema is in core already, since backups carry cards). v2 (M4.4) adds `fxRates`. The cache tables
+(`cacheTables` in core: `catalogCache` and `fxRates`) are left out of backups and left plain by the app lock, and their
+records are replaced and deleted outright.
 ```ts
 db.version(1).stores({
   lists: 'id, updatedAt',
@@ -921,6 +928,7 @@ db.version(1).stores({
   drafts: 'listId',            // unsaved list edits (PROJECT-PLAN.md P5)
   dismissedSuggestions: 'fingerprint'
 });
+db.version(2).stores({ fxRates: 'key' });   // the last exchange rates fetched (M4.4); a new table needs no upgrade
 ```
 
 ### 4.7 Regions & currency conversion
@@ -971,8 +979,21 @@ item is sold in the region; `availability` does, and the app asks it first. `con
 **Converted prices**
 - Converted using daily ECB rates (Frankfurter, through `/api/v1/fx`, cached in the browser with the rate date).
   Settings offers only the currencies the ECB has rates for (`displayCurrencies` in core, M4.2).
+- **`FxStore`** (M4.4) fetches `/api/v1/fx?base=<currency>` once the settings have a currency, again when it changes,
+  on the browser's `online` event and when a tab is shown again. The browser's HTTP cache answers until `/fx`'s
+  `max-age` runs out (up to 12 hours), so most of these send nothing and the Worker sees about one request a day per
+  user. The last rates are kept in Dexie (`fxRates`, section 4.6), so converted prices show at once on start and with
+  no network; offline or a 502 keeps them. Rates in any base convert between any two currencies they list
+  (`exchangeRate`), so stored rates keep converting after a change of currency until the new currency's arrive. The
+  fetch and its schema load as a chunk of their own (1 kB).
 - Shown with a **≈ prefix plus a small currency-exchange icon** (Material Symbols `currency_exchange`). The tooltip
-  reads "Converted from 9.99 USD at 1.38 on 2026-10-22. You'll be charged in USD."
+  reads "Converted from 9.99 USD at 1.3806 on 2026-10-22. You'll be charged in USD.": the source in its currency's
+  own decimals, the rate to at most 4. A price with no rate to convert it (a first visit with `/fx` down) shows in
+  its own currency, with the icon but no ≈, and the tooltip says "There's no exchange rate yet, so this is the
+  price in USD."
+- **Amounts** are written the way English is in the user's country, as Settings' budgets are: a Canadian sees $7.53,
+  US$9.99 and €5.00; an American sees $9.99 and CA$18.99. Periods read "/ mo", "/ 3 mo", "/ year", "/ 30 days", and
+  screen readers hear "about $7.53 a month".
 - Native prices show no icon. The search filters offer a **"Native pricing only"** toggle.
 - **Not available in your region:** see "Where something is sold" above.
 - The optimizer uses converted amounts but labels the resulting savings "estimated". In Phase 4, card **FX fees**
@@ -1015,7 +1036,10 @@ The rules live in `packages/core/src/tax/`: the rates and subdivision lists sinc
     charge keeps its tax part (`Charge.tax`, PROJECT-PLAN §3.1).
   - Price tags (`ss-price`: Search, plan pickers, cards) show the listed price, with a small "+ tax" in tax-added
     regions, the way Canadian prices are normally shown, or "incl. tax" for a price that includes it. The monthly
-    equivalent is before tax too.
+    equivalent is before tax too. As built (M4.4, core's `priceTaxNote`): the notes show only in Canada and the US,
+    since everywhere else every price includes tax; "+ tax" only where a rate is added, so a US user who gave no
+    rate sees none, as their totals add none; nothing on a free price. An item bought in another region
+    (`ListItem.region`) follows that region's rule without the user's own rate (`buyerTaxPlace`).
   - An item's billing details show the amount charged, tax included.
 - **Payment cards** (section 9.3): cash back and FX fees apply to the amount charged, tax included.
 - **Settings:** the first-run dialog and the 📍 dialog ask for the province or state, in a menu that lists the
@@ -1866,6 +1890,7 @@ turning a second Netflix plan into an extra-member add-on.)
 | `/payment` | Payment cards | (Phase 4, section 9) |
 | `/custom` | Custom subscriptions | cards and an edit dialog |
 | `/settings` | Settings | local sync (later), monthly and annual budget, custom tags with colours, country/currency |
+| `/dev/components` | Component gallery, **development builds only** (M4.4, M4.5): `dev-routes.ts`, which the production build replaces with an empty `dev-routes.prod.ts` (`fileReplacements`) | — |
 
 ### 8.3 Page notes
 **Home.** Shows the current-month mini calendar with payment days highlighted, plus the monthly and annual budget
@@ -2116,6 +2141,9 @@ prompted after each big change, or weekly).
   Zod chunk the settings load at startup, which went from 216 kB to 218 kB minified (61 kB compressed); the store,
   the banner and the region list brought the initial bundle to 474 kB of its 500 kB budget. The download code is a
   chunk of its own (1 kB).
+- **The exchange rates (M4.4):** `FxRatesRepository` keeps the last rates fetched, one record (section 4.7). Like
+  the catalog cache, a record that fails its schema is only logged and fetched again. `FxStore` brought the initial
+  bundle to 475.7 kB.
 - **IndexedDB blocked** (some private browsing modes, or site data blocked): the repositories' status is `error`, and
   the app shows the P15 notice in place of the shell. [Continue anyway] calls `StorageService.useMemory()`: the same
   Dexie database opens on `fake-indexeddb` (57 kB, a chunk loaded only then), and every repository reloads from it
@@ -2325,6 +2353,16 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3).
+
+**Resolved (2026-10-26, M4.4)**
+- **Exchange rates are kept in Dexie,** in a new `fxRates` table (Dexie v2), so converted prices show at once and
+  offline. They're fetched like the catalog is checked: on start, a change of currency, `online` and a tab shown
+  again, with the browser's cache answering until `/fx`'s max-age runs out (section 4.7).
+- **Price tags:** amounts in the user's country's English format; "+ tax" only where a rate is added; "incl. tax"
+  only in Canada and the US; the tooltip on the price's button when it's clickable, otherwise on a focusable icon
+  (sections 4.7, 4.8).
+- **The `/dev/components` gallery** started with `ss-price`, in development builds only, so the price tag could be
+  checked in a browser before any page shows prices (section 8.2). M4.5 adds the other components.
 
 **Resolved (2026-10-26, M4.3)**
 - **Offline:** M4.3 keeps the catalog working when the network drops while the app is open; starting the app with no
