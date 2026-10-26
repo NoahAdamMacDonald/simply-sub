@@ -1,0 +1,9 @@
+<ul>
+  @for (row of rows(); track row.key) {
+    <li>
+      <span class="label">{{ row.label }}:</span>
+      <span aria-hidden="true">{{ row.active }} / {{ row.total }}</span>
+      <span class="visually-hidden">{{ row.active }} of {{ row.total }} active</span>
+    </li>
+  }
+</ul>

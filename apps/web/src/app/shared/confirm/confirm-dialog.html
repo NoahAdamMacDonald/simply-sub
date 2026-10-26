@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<mat-dialog-content>
+  <p [id]="data.messageId">{{ data.message }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <!-- Focus starts on Cancel before a destructive action, so a stray Enter does no harm. -->
+  @if (data.danger) {
+    <button matButton type="button" mat-dialog-close cdkFocusInitial>Cancel</button>
+    <button matButton="filled" type="button" class="danger" [mat-dialog-close]="true">
+      {{ data.confirmText }}
+    </button>
+  } @else {
+    <button matButton type="button" mat-dialog-close>Cancel</button>
+    <button matButton="filled" type="button" [mat-dialog-close]="true" cdkFocusInitial>
+      {{ data.confirmText }}
+    </button>
+  }
+</mat-dialog-actions>

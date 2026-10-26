@@ -1,0 +1,94 @@
+:host {
+  display: block;
+  max-width: 320px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.title {
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: var(--ss-text);
+  font: var(--mat-sys-title-small);
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 2px;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th {
+  padding: 4px 0;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-label-small);
+}
+
+td {
+  padding: 1px;
+  text-align: center;
+}
+
+.day {
+  position: relative;
+  width: 100%;
+  max-width: 40px;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: none;
+  color: var(--ss-text);
+  font: var(--mat-sys-body-medium);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--ss-app-bg);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 1px;
+  }
+
+  &.today {
+    border-color: var(--ss-text-muted);
+  }
+
+  &.paid {
+    font-weight: 600;
+  }
+}
+
+// A payment day's dot, under the number.
+.dot {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--ss-accent-text);
+  translate: -50% 0;
+
+  @media (forced-colors: active) {
+    background-color: CanvasText;
+  }
+}

@@ -1,0 +1,17 @@
+// The rank colours (BLUEPRINT §8.1) on an element with data-rank: --rank-fill is the vivid fill for dots, and
+// --rank-shade the text shade, which reaches 4.5:1 on cards. Not ranked takes the grey of "none".
+$ranks: essential, critical, needed, wanted, uses, sometimes, unused, unwanted;
+
+@mixin by-data-rank {
+  @each $rank in $ranks {
+    &[data-rank='#{$rank}'] {
+      --rank-fill: var(--rank-#{$rank});
+      --rank-shade: var(--rank-#{$rank}-text);
+    }
+  }
+
+  &[data-rank='not-ranked'] {
+    --rank-fill: var(--rank-none);
+    --rank-shade: var(--rank-none-text);
+  }
+}

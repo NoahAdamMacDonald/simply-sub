@@ -1,0 +1,11 @@
+<div class="row">
+  @if (backLink(); as link) {
+    <a class="back" [routerLink]="link">
+      <mat-icon aria-hidden="true">chevron_left</mat-icon>
+      <span>{{ backLabel() }}</span>
+    </a>
+  }
+  <h1>{{ heading() }}</h1>
+  <div class="actions"><ng-content /></div>
+</div>
+<ng-content select="[subtitle]" />

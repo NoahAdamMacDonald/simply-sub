@@ -1,0 +1,20 @@
+@use '@angular/material' as mat;
+
+p {
+  margin: 0;
+}
+
+.danger {
+  @include mat.button-overrides(
+    (
+      filled-container-color: var(--ss-danger),
+      filled-label-text-color: var(--ss-on-danger),
+      filled-state-layer-color: var(--ss-on-danger),
+      filled-ripple-color: color-mix(
+          in srgb,
+          var(--ss-on-danger) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%),
+          transparent
+        ),
+    )
+  );
+}

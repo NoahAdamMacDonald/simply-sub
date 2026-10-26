@@ -1,0 +1,57 @@
+// The label is the same dark colour on every fill and on the track (BLUEPRINT §8.1), so it can start at the bar's
+// left edge and run past a short fill without measuring anything.
+:host {
+  --fill-color: var(--budget-ok);
+
+  position: relative;
+  display: block;
+  min-width: 96px;
+  height: 28px;
+  overflow: hidden;
+  border-radius: 14px;
+  background-color: var(--budget-track);
+  color: var(--budget-label);
+  // The bar's own width, for placing the label (cqi).
+  container-type: inline-size;
+  // The fill colours and the label already contrast; forced colours would drop the fill.
+  forced-color-adjust: none;
+}
+
+:host([data-level='warn']) {
+  --fill-color: var(--budget-warn);
+}
+
+:host([data-level='over']) {
+  --fill-color: var(--budget-over);
+}
+
+.fill {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: calc(var(--fill) * 100%);
+  border-radius: inherit;
+  background-color: var(--fill-color);
+}
+
+// The tick at the monthly budget, kept inside the bar at either end.
+.marker {
+  position: absolute;
+  inset-block: 0;
+  left: calc(var(--marker) * 100%);
+  width: 2px;
+  translate: calc(var(--marker) * -100%) 0;
+  background-color: var(--budget-label);
+}
+
+// Right-aligned to the fill's end, as on the wireframes, but never past the bar's left edge: it moves left by its
+// own width (-100%) or by the fill's width, whichever is less.
+.label {
+  position: absolute;
+  top: 50%;
+  left: calc(var(--fill) * 100cqi);
+  padding-inline: 10px;
+  translate: max(-100%, calc(var(--fill) * -100cqi)) -50%;
+  font: var(--mat-sys-label-large);
+  white-space: nowrap;
+}

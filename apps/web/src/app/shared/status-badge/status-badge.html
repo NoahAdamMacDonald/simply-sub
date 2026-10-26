@@ -1,0 +1,11 @@
+<!-- Spaces go inside the spans: Angular drops the whitespace between them, and screen readers need it. -->
+<span class="status" [attr.data-kind]="status().kind">
+  <span class="dot" aria-hidden="true"></span>
+  <span>{{ text() }}<ng-content /></span>
+</span>
+@if (endsOn(); as date) {
+  <span class="badge"> Ends {{ date }}</span>
+}
+@if (renewBy(); as date) {
+  <span class="badge"><mat-icon aria-hidden="true">autorenew</mat-icon> Renew by {{ date }}</span>
+}

@@ -1,0 +1,93 @@
+@use 'tag-dot';
+
+:host {
+  display: block;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.tag-dot {
+  @include tag-dot.dot;
+}
+
+mat-chip-row .tag-dot {
+  margin-right: 6px;
+}
+
+.option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.create {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid var(--ss-divider);
+  border-radius: 8px;
+}
+
+.create-heading {
+  margin: 0;
+  font: var(--mat-sys-title-small);
+}
+
+.colours {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  legend {
+    margin-bottom: 4px;
+    padding: 0;
+    color: var(--ss-text-muted);
+    font: var(--mat-sys-body-small);
+  }
+}
+
+// Each colour is a radio button, so the arrow keys move between them. The target is 32px, past WCAG's 24px minimum.
+.swatch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  .tag-dot {
+    @include tag-dot.dot(20px);
+  }
+
+  // The chosen colour gets a ring in the text colour, which contrasts with the card in both themes.
+  input:checked + .tag-dot {
+    box-shadow:
+      0 0 0 2px var(--ss-card-bg),
+      0 0 0 4px var(--ss-text);
+  }
+
+  input:focus-visible + .tag-dot {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 5px;
+  }
+}
+
+.error {
+  margin: 0;
+  color: var(--rank-unwanted-text);
+}
+
+.create-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

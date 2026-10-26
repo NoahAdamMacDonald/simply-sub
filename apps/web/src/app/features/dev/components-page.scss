@@ -1,3 +1,13 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+h1 {
+  margin: 0;
+}
+
 section {
   max-width: 900px;
   padding: 16px;
@@ -16,12 +26,21 @@ h3 {
 }
 
 .note,
-.none {
+.none,
+.where,
+.value,
+.subtitle {
   color: var(--ss-text-muted);
+}
+
+.note,
+.subtitle {
+  margin: 0;
 }
 
 .picked {
   min-height: 1.5em;
+  margin: 0 0 8px;
 }
 
 .table-scroll {
@@ -67,4 +86,91 @@ th[scope='row'] {
 
 .plan-name {
   min-width: 220px;
+}
+
+// A demo of a component that a page would show on its own.
+.frame {
+  margin-bottom: 8px;
+  padding: 12px;
+  border: 1px dashed var(--ss-divider);
+  border-radius: 8px;
+
+  ss-page-header {
+    margin: 0;
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+  margin-bottom: 12px;
+
+  &.top {
+    align-items: flex-start;
+    gap: 24px 48px;
+  }
+}
+
+.bars {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px 24px;
+}
+
+.bar {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.icon-case {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cases {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 16px;
+  }
+}
+
+.case-name {
+  min-width: 180px;
+  color: var(--ss-text-muted);
+}
+
+.rank-rows {
+  display: grid;
+  grid-template-columns: minmax(0, auto) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px 16px;
+
+  @media (width < 700px) {
+    grid-template-columns: minmax(0, 1fr);
+
+    .value {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+.plan-select {
+  width: min(100%, 360px);
+}
+
+.picker {
+  max-width: 480px;
 }

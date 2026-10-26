@@ -71,10 +71,16 @@ async function newContext(browser, { locale, colorScheme = 'light', viewport = W
   return { context, fxRequests };
 }
 
+/** The gallery's ss-price section: other sections (M4.5) have tables and status lines of their own. */
+const prices = (page) => page.locator('section[aria-labelledby="price-heading"]');
+
+/** The gallery's "File missing" icon (M4.5) is a deliberate 404. */
+const expected404 = (msg) => msg.location().url.endsWith('/icons/missing.webp');
+
 async function newPage(context, label) {
   const page = await context.newPage();
   page.on('console', (msg) => {
-    if (msg.type() === 'error' || msg.type() === 'warning') {
+    if ((msg.type() === 'error' || msg.type() === 'warning') && !expected404(msg)) {
       consoleProblems.push(`[${label}] ${msg.type()}: ${msg.text()}`);
     }
   });
@@ -109,8 +115,8 @@ async function shownIn(locator) {
 
 /** The fixed cases' "Not clickable" column, by case name. */
 async function caseTexts(page) {
-  await page.locator('tbody tr').first().waitFor();
-  const rows = page.locator('tbody tr');
+  await prices(page).locator('tbody tr').first().waitFor();
+  const rows = prices(page).locator('tbody tr');
   const result = {};
   for (let i = 0; i < (await rows.count()); i++) {
     const row = rows.nth(i);
@@ -233,7 +239,7 @@ async function canadian(browser) {
   );
 
   // A converted clickable price: its tooltip on hover, and a click picks it.
-  const convertedRow = page.locator('tbody tr', {
+  const convertedRow = prices(page).locator('tbody tr', {
     has: page.locator('th', { hasText: /^Converted$/ }),
   });
   await convertedRow.locator('button').hover();
@@ -246,12 +252,12 @@ async function canadian(browser) {
   );
   await convertedRow.locator('button').click();
   await until('picked', async () =>
-    (await page.locator('.picked').textContent()).includes('Picked'),
+    (await prices(page).locator('.picked').textContent()).includes('Picked'),
   );
   check(
     'a click picks the price',
-    (await page.locator('.picked').textContent()).trim() === 'Picked $7.53 / mo',
-    await page.locator('.picked').textContent(),
+    (await prices(page).locator('.picked').textContent()).trim() === 'Picked $7.53 / mo',
+    await prices(page).locator('.picked').textContent(),
   );
   await page.mouse.move(0, 0);
 
@@ -283,17 +289,17 @@ async function canadian(browser) {
     describedBy?.includes('Converted from 5.00 EUR'),
     describedBy,
   );
-  const ownRow = page.locator('tbody tr', {
+  const ownRow = prices(page).locator('tbody tr', {
     has: page.locator('th', { hasText: 'In your currency' }),
   });
   await ownRow.locator('button').focus();
   await page.keyboard.press('Enter');
   await until('picked by keyboard', async () =>
-    (await page.locator('.picked').textContent()).includes('18.99'),
+    (await prices(page).locator('.picked').textContent()).includes('18.99'),
   );
   check(
     'keyboard: Enter on a price picks it',
-    (await page.locator('.picked').textContent()).trim() === 'Picked $18.99 / mo',
+    (await prices(page).locator('.picked').textContent()).trim() === 'Picked $18.99 / mo',
   );
 
   // Screen-reader text of a price button.
@@ -323,7 +329,7 @@ async function looks(browser) {
       await axe(page, `gallery, ${label}`);
       await noHorizontalScroll(page, `gallery, ${label}`);
       // A tooltip open, for its look and contrast.
-      const convertedRow = page.locator('tbody tr', {
+      const convertedRow = prices(page).locator('tbody tr', {
         has: page.locator('th', { hasText: /^Converted$/ }),
       });
       await convertedRow.locator('button').hover();
