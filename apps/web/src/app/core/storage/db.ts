@@ -29,5 +29,7 @@ export function createUserDatabase(options?: DexieOptions): Dexie {
     drafts: 'listId',
     dismissedSuggestions: 'fingerprint',
   });
+  // The last exchange rates fetched (M4.4). A new table needs no upgrade function.
+  db.version(2).stores({ fxRates: 'key' });
   return db;
 }

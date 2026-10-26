@@ -60,6 +60,12 @@ together downloading once, a country with no file of its own, and a first visit 
 themes at both widths. Its base URL ends in `/`. It works on `ng serve` and under `wrangler dev`, where a CSP
 violation fails its console check.
 
+`check-prices.cjs` (M4.4) checks `ss-price` on the `/dev/components` gallery, so it needs `ng serve` (production
+builds have no gallery): every fixed case's text for a Canadian, a US user with no rate and a UK user, the catalog's
+own prices, the tooltip on hover and on keyboard focus, the accessible name, and picking a price by click and Enter,
+with axe in both themes at both widths. It answers `GET /fx` itself with the API contract's example rates, so no
+Worker is needed behind the dev proxy.
+
 ## Gotchas
 
 - Every new browser context starts with no settings, so the first-run dialog (M4.2) covers the page until it's
@@ -85,5 +91,8 @@ violation fails its console check.
   dark theme's accent label on them measures 4:1, a contrast failure that isn't there once they settle.
 - Offline, a lazy page that hasn't been opened in the session can't load its chunk, and the error snackbar shows.
   That's expected until M10's service worker: navigate offline only to pages already opened.
+- A Material tooltip opens on hover and on keyboard focus (Tab), not on a script's `locator.focus()`.
+- Read a control's accessible name with `locator.ariaSnapshot()` (`- button "about $7.53 a month"`), not its
+  `textContent`, which keeps `aria-hidden` text and icon ligatures.
 - Run axe on the snackbar only once it has opened. While opening, it fades in (contrast fails) and keeps its
   content in an `aria-hidden` wrapper (`aria-hidden-focus` fails on the Dismiss button).

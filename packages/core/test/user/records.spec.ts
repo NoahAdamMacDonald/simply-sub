@@ -1,9 +1,17 @@
 import { describe, expect, it } from 'vitest';
-import { InvalidRecordError, checkRecord, readRecords, userRecordSchemas } from '../../src';
+import {
+  InvalidRecordError,
+  cacheTables,
+  checkRecord,
+  readRecords,
+  userRecordKeys,
+  userRecordSchemas,
+} from '../../src';
 import {
   card,
   catalogCache,
   customSub,
+  fxCache,
   item,
   list,
   listId,
@@ -22,8 +30,16 @@ describe('userRecordSchemas', () => {
     ['tags', tag],
     ['settings', settings],
     ['catalogCache', catalogCache],
+    ['fxRates', fxCache],
   ] as const)('checks the %s table with its record schema', (table, record) => {
     expect(userRecordSchemas[table].safeParse(record).success).toBe(true);
+  });
+});
+
+describe('cacheTables', () => {
+  it('are the tables of what the app downloads, keyed by key', () => {
+    expect(cacheTables).toEqual(['catalogCache', 'fxRates']);
+    for (const table of cacheTables) expect(userRecordKeys[table]).toBe('key');
   });
 });
 

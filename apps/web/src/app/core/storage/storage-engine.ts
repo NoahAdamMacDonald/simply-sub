@@ -1,6 +1,7 @@
 import {
   InvalidRecordError,
   checkRecord,
+  type CacheTable,
   readRecords,
   userRecordKeys,
   type RejectedRecord,
@@ -28,12 +29,6 @@ export interface StorageEngineOptions {
   /** Told after each write. */
   onWrite(): void;
 }
-
-/**
- * The tables that cache what can be downloaded again, whose records are replaced and deleted outright. The user's
- * own records are soft-deleted instead (BLUEPRINT §4.6).
- */
-export type CacheTable = 'catalogCache';
 
 export interface ModifyOptions {
   /**

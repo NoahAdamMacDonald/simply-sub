@@ -2,6 +2,7 @@ import type * as z from 'zod';
 import { rankKeySchema } from '../catalog/formats';
 import { catalogCacheSchema } from './catalog-cache';
 import { customSubscriptionSchema } from './custom-subscription';
+import { fxCacheSchema } from './fx-cache';
 import { listItemSchema } from './list-item';
 import { paymentCardSchema } from './payment-card';
 import { profileRankingSchema } from './profile-ranking';
@@ -12,8 +13,8 @@ import { tagSchema } from './tag';
 
 /**
  * The record schemas of the database's tables, by Dexie table name (BLUEPRINT §4.6). The repositories check every
- * record against them on the way in and out (§11.1), and backups (M6.9) use the same ones, except catalogCache's: a
- * cache of the catalog files, not the user's data. drafts and dismissedSuggestions get theirs with M6.3 and M8.2.
+ * record against them on the way in and out (§11.1), and backups (M6.9) use the same ones, except the cacheTables'.
+ * drafts and dismissedSuggestions get theirs with M6.3 and M8.2.
  */
 export const userRecordSchemas = {
   lists: subscriptionListSchema,
@@ -24,9 +25,17 @@ export const userRecordSchemas = {
   tags: tagSchema,
   settings: settingsSchema,
   catalogCache: catalogCacheSchema,
+  fxRates: fxCacheSchema,
 };
 export type UserTable = keyof typeof userRecordSchemas;
 export type UserRecords = { [T in UserTable]: z.infer<(typeof userRecordSchemas)[T]> };
+
+/**
+ * The tables that cache what the app downloads, not the user's data: backups leave them out, the app lock leaves
+ * them plain, and their records are replaced and deleted outright rather than soft-deleted.
+ */
+export const cacheTables = ['catalogCache', 'fxRates'] as const satisfies readonly UserTable[];
+export type CacheTable = (typeof cacheTables)[number];
 
 /** Each table's primary key, as in the Dexie schema. */
 export const userRecordKeys = {
@@ -38,6 +47,7 @@ export const userRecordKeys = {
   tags: 'id',
   settings: 'key',
   catalogCache: 'key',
+  fxRates: 'key',
 } as const satisfies Record<UserTable, string>;
 
 /** What each table's well-formed keys look like. */
@@ -50,6 +60,7 @@ const keySchemas: Record<UserTable, z.ZodType<string>> = {
   tags: recordIdSchema,
   settings: settingsSchema.shape.key,
   catalogCache: catalogCacheSchema.shape.key,
+  fxRates: fxCacheSchema.shape.key,
 };
 
 /** A stored record that failed its schema, described without any of its values. */

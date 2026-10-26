@@ -33,6 +33,9 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                { "replace": "src/app/dev-routes.ts", "with": "src/app/dev-routes.prod.ts" }
+              ],
               "optimization": {
                 "scripts": true,
                 "styles": { "minify": true, "inlineCritical": false },

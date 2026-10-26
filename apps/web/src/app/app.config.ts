@@ -10,6 +10,7 @@ import { provideRouter, withInMemoryScrolling } from '@angular/router';
 
 import { routes } from './app.routes';
 import { CatalogStore } from './core/catalog/catalog-store';
+import { FxStore } from './core/fx/fx-store';
 import { GlobalErrorHandler } from './core/errors/global-error-handler';
 import { FirstRun } from './core/settings/first-run';
 import { ThemeService } from './core/theme/theme-service';
@@ -22,11 +23,13 @@ export const appConfig: ApplicationConfig = {
     // top on navigation and restore the position on back/forward.
     provideRouter(routes, withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })),
     // Start the theme at boot, so 'system' follows the OS even before a toggle is on screen, the first-run check,
-    // which opens the settings on the way, and the catalog, which shows its cached files and checks for a new version.
+    // which opens the settings on the way, the catalog, which shows its cached files and checks for a new version, and
+    // the exchange rates.
     provideAppInitializer(() => {
       inject(ThemeService);
       inject(FirstRun);
       inject(CatalogStore);
+      inject(FxStore);
     }),
     {
       provide: MAT_ICON_DEFAULT_OPTIONS,

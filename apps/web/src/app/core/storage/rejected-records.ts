@@ -1,5 +1,11 @@
 import { Injector, Service, inject, signal } from '@angular/core';
-import type { RejectedRecord } from '@simply-sub/core';
+import type { CacheTable, RejectedRecord } from '@simply-sub/core';
+
+/** What the console says about a cache record that can't be read: the app downloads it again in its place. */
+const cacheMessages: Record<CacheTable, string> = {
+  catalogCache: "A cached catalog file couldn't be read, so it's downloaded again.",
+  fxRates: "The cached exchange rates couldn't be read, so they're fetched again.",
+};
 
 /**
  * Stored records that fail their schema (BLUEPRINT §11.1). They're never shown, and they stay in IndexedDB as they
@@ -18,19 +24,18 @@ export class RejectedRecords {
   readonly count = this.reportedCount.asReadonly();
 
   /**
-   * Called with every read's rejected records, so the same record can come back many times. A cached catalog file
-   * isn't the user's data: it's logged, downloaded again in its place (CatalogStore), and needs no message.
+   * Called with every read's rejected records, so the same record can come back many times. A cache record (a
+   * catalog file, the exchange rates) isn't the user's data: it's logged, downloaded again in its place, and needs
+   * no message.
    */
   report(rejected: readonly RejectedRecord[]): void {
     const before = this.reported.size;
     for (const { table, key, issues } of rejected) {
       const description = `${table} record ${key ?? '(malformed key)'}: ${issues.join('; ')}`;
       if (this.reported.has(description) || this.cacheReported.has(description)) continue;
-      if (table === 'catalogCache') {
+      if (Object.hasOwn(cacheMessages, table)) {
         this.cacheReported.add(description);
-        console.warn(
-          `A cached catalog file couldn't be read, so it's downloaded again. ${description}`,
-        );
+        console.warn(`${cacheMessages[table as CacheTable]} ${description}`);
         continue;
       }
       this.reported.add(description);

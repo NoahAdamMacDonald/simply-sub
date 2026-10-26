@@ -81,6 +81,16 @@ describe('RejectedRecords', () => {
     expect(open).not.toHaveBeenCalled();
   });
 
+  it('logs cached exchange rates in their own words', () => {
+    rejected.report([{ table: 'fxRates', key: 'fx', issues: ['rates.date: invalid_format'] }]);
+    expect(warn.mock.calls).toEqual([
+      [
+        "The cached exchange rates couldn't be read, so they're fetched again. fxRates record fx: rates.date: invalid_format",
+      ],
+    ]);
+    expect(rejected.count()).toBe(0);
+  });
+
   it('says nothing when there is nothing new', async () => {
     const open = vi.spyOn(TestBed.inject(MatSnackBar), 'open');
     rejected.report([]);

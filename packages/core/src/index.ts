@@ -45,6 +45,7 @@ export * from './tax/sales-tax-rate';
 export * from './tax/subdivisions';
 export * from './user/catalog-cache';
 export * from './user/custom-subscription';
+export * from './user/fx-cache';
 export * from './user/list-item';
 export * from './user/payment-card';
 export * from './user/profile-ranking';

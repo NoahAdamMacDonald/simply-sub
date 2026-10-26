@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   catalogCacheSchema,
   customSubscriptionSchema,
+  fxCacheSchema,
   paymentCardSchema,
   profileRankingSchema,
   settingsSchema,
@@ -15,6 +16,7 @@ import {
   customPlanId,
   customSub,
   fullCatalogCache,
+  fxCache,
   list,
   ranking,
   settings,
@@ -229,5 +231,20 @@ describe('catalogCacheSchema', () => {
     expect(
       issues(catalogCacheSchema, { ...catalogCache, fetchedAt: '2026-10-23T12:30:00Z' }),
     ).toHaveLength(1);
+  });
+});
+
+describe('fxCacheSchema', () => {
+  it('accepts the rates fetched and returns them unchanged', () => {
+    expect(fxCacheSchema.parse(fxCache)).toEqual(fxCache);
+  });
+
+  it.each([
+    ['another key', ['key'], 'rates'],
+    ['a rate that is not positive', ['rates', 'rates', 'USD'], 0],
+    ['a base that is not a currency code', ['rates', 'base'], 'cad'],
+    ['a fetchedAt without milliseconds', ['fetchedAt'], '2026-10-22T06:00:02Z'],
+  ])('rejects %s', (_name, path, value) => {
+    expect(issues(fxCacheSchema, withValue(fxCache, path, value))).toHaveLength(1);
   });
 });

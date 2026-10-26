@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
+import { devRoutes } from './dev-routes';
 
-// The routes in BLUEPRINT §8.2. Every page is lazy-loaded.
+// The routes in BLUEPRINT §8.2, and in development builds the dev pages (dev-routes.ts). Every page is lazy-loaded.
 export const routes: Routes = [
   {
     path: '',
@@ -74,6 +75,7 @@ export const routes: Routes = [
     title: 'Settings · Simply Sub',
     loadComponent: () => import('./features/settings/settings-page').then((m) => m.SettingsPage),
   },
+  ...devRoutes,
   {
     path: '**',
     title: 'Page not found · Simply Sub',
