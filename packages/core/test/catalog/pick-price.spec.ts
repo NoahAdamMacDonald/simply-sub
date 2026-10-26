@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { pickPrice, type FxRates, type Interval, type PickedPrice, type Price } from '../../src';
+import {
+  pickPrice,
+  typedPrice,
+  type FxRates,
+  type Interval,
+  type PickedPrice,
+  type Price,
+} from '../../src';
 
 // The GET /fx example in docs/api-output-examples.json: 1 CAD = 0.7243 USD = 0.664 EUR.
 const fx: FxRates = {
@@ -243,5 +250,41 @@ describe('pickPrice', () => {
 
   it('gives nothing for no prices', () => {
     expect(pickPrice([], canada)).toEqual([]);
+  });
+});
+
+describe('typedPrice', () => {
+  const typed = { amount: 29.99, currency: 'CAD', interval: 'month' as const, intervalCount: 1 };
+
+  it('is native in the user’s currency, sold in their region, and includes tax', () => {
+    expect(typedPrice(typed, true, canada)).toEqual({
+      interval: 'month',
+      intervalCount: 1,
+      amount: 29.99,
+      currency: 'CAD',
+      monthlyEquivalent: 29.99,
+      autoRenew: true,
+      native: true,
+      taxIncluded: true,
+      source: { region: 'CA', amount: 29.99, currency: 'CAD' },
+    });
+  });
+
+  it('converts another currency, and stays in it without a rate', () => {
+    const usd = { ...typed, currency: 'USD', amount: 10, interval: 'year' as const };
+    const converted = typedPrice(usd, false, canada);
+    expect(converted).toMatchObject({ currency: 'CAD', native: false, autoRenew: false });
+    expect(converted.amount).toBeCloseTo(10 / 0.7243);
+    expect(converted.monthlyEquivalent).toBeCloseTo(10 / 0.7243 / 12);
+    expect(converted.fx?.rate).toBeCloseTo(1 / 0.7243);
+    expect(typedPrice(usd, false, { region: 'CA', currency: 'CAD' })).toMatchObject({
+      amount: 10,
+      currency: 'USD',
+      native: false,
+    });
+  });
+
+  it('leaves tax to be added when it’s marked plus tax', () => {
+    expect(typedPrice({ ...typed, plusTax: true }, true, canada)).not.toHaveProperty('taxIncluded');
   });
 });
