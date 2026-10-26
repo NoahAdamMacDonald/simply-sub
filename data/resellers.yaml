@@ -1,0 +1,21 @@
+# Resellers (BLUEPRINT §4.9): shops that sell a provider's own subscription. One goes here only when a provider's
+# own site names it as an official reseller, and its offers go in that provider's file, under resellers, with the
+# provider's page quoted. Partners that only use a provider's service in their own (Mozilla VPN on Mullvad's
+# servers) are never resellers. Shapes: packages/core/src/catalog/reseller.ts. Each one's logo is
+# data/logos/<id>.png, from npm run data:icons; its id mustn't be a provider's.
+- id: amazon
+  name: Amazon
+  website: https://www.amazon.com
+  domains: [amazon.ca]
+- id: inet
+  name: Inet
+  website: https://www.inet.se
+- id: proxystore
+  name: ProxyStore
+  website: https://proxystore.de
+- id: serialcart
+  name: SerialCart
+  website: https://serialcart.com
+- id: webhallen
+  name: Webhallen
+  website: https://www.webhallen.com

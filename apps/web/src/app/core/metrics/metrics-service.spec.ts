@@ -78,6 +78,7 @@ const catalog: CatalogData = {
     },
   ],
   bundles: [],
+  resellers: [],
 };
 
 /** GET /fx's example rates: per Canadian dollar. */

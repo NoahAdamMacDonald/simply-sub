@@ -118,6 +118,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M1.5 | `scripts/build-catalog.ts` → static `catalog.json` + `seed.sql` | The output matches the `GET /catalog` example |
 | M1.6 | `scripts/fetch-icons.ts` (`npm run data:icons`): any website's best icon → `data/logos/<id>.png` (committed, hand-made logos too), published as `/icons/<id>.webp`, a WebP of at most 96 px (a PNG copy until 2026-10-25); no logo → no `iconUrl`, and the app shows a letter | Every provider has an icon or the fallback |
 | M1.7 | core: `pickPrice`, `convert` (§3.1; `monthlyEquivalent` arrived in M1.5 for the seed) | Tests cover a native price, the same currency from another region, a GLOBAL price and a fallback region |
+| M1.8 | Resellers (BLUEPRINT §4.9, added 2026-10-26): `data/resellers.yaml` and a provider's `resellers` (core's schemas, the JSON Schemas, `validateCatalog`'s checks), reseller logos and icons (`data:icons`, `data:build`), region files that keep the reseller prices a buyer can use, core's `resellerDeals`, and Mullvad's official resellers researched one by one; Mullvad's 2-, 3- and 6-month prices | Validation rejects a reseller the provider's own site doesn't approve or a price page off the shop's domains; Amazon.ca shows as cheaper in Alberta and not in Ontario |
 
 ### M2 — API
 | ID | Task | Done when |
@@ -140,6 +141,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M3.4 | `extract-plans.ts` (LLM structured output, evidence quotes, proposed features; regular prices, the billing period as stated, `availableIn` from the provider's own country list, `taxIncluded` with the page's words when prices include tax everywhere: BLUEPRINT §6.5) | Draft YAML passes validation for most services |
 | M3.5 | Batch PR script (`gh pr create`, about 10 providers per PR), with each new provider's logo fetched into `data/logos/` the way `npm run data:icons` does | One command turns a batch into a reviewable PR, logos included |
 | M3.6 | Run it on your own services (BLUEPRINT §6.6) and tune the prompts | Your subscriptions are in the catalog with CAD prices |
+| M3.7 | Resellers in the pipeline (BLUEPRINT §4.9, §6.5): find each provider's official reseller page, keep the shops it names as selling the provider's subscription (never partners that use the service in their own product), and read their regular prices from their own pages | A provider with a reseller page gets its resellers in its PR, with the approval quotes |
 
 ### M4 — App foundations
 | ID | Task | Done when |
@@ -155,7 +157,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | ID | Task | Done when |
 |---|---|---|
 | M5.1 | core: search index, matching and filters (`searchCatalog`), using `availability` (BLUEPRINT §4.7). Starts from M2.3's `searchProviders`, which already has P8's matching, filters and sorts | Name, plan, alias and feature matches are ranked as described in P8, and plans not offered in the user's region never appear |
-| M5.2 | Search page layout, results and the search sub-card with expand (P8): `ss-sub-card`'s search variant (§4.3, moved from M4.5) | P8 layout criteria met |
+| M5.2 | Search page layout, results and the search sub-card with expand (P8): `ss-sub-card`'s search variant (§4.3, moved from M4.5), with "Cheaper at" resellers from `resellerDeals` (BLUEPRINT §4.9) | P8 layout criteria met |
 | M5.3 | Filter panel + URL state (P8) | Filters survive a reload and back/forward |
 | M5.4 | Add-to-list menu → edit page with `?add=` (flow F1) | F1 works end to end (needs M6.3–M6.5; stub it until then) |
 | M5.5 | Pick mode `?addTo=` (flow F2) | F2 works end to end |
@@ -189,7 +191,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 |---|---|---|
 | M8.1 | core: optimizer (BLUEPRINT §10) with fixtures | All fixture cases pass |
 | M8.2 | Optimizations page (P14) + "Apply" to a draft | P14 criteria met |
-| M8.3 | `apps/bot` nightly price check → GitHub PR (BLUEPRINT §6.4, §7.7), which also checks each `taxIncluded` quote is still on its page; the same run proposes a new logo when a provider's icon changed (a rebrand) | A changed price produces a PR, and so does a changed logo or a `taxIncluded` quote gone from its page |
+| M8.3 | `apps/bot` nightly price check → GitHub PR (BLUEPRINT §6.4, §7.7), which also checks each `taxIncluded` quote is still on its page, rereads reseller prices and checks each reseller's approval quotes on the provider's page (BLUEPRINT §4.9); the same run proposes a new logo when a provider's or reseller's icon changed (a rebrand) | A changed price produces a PR, and so does a changed logo, a `taxIncluded` quote gone from its page or a reseller the provider no longer names |
 
 ### M9 — Payment (Phase 4)
 | ID | Task | Done when |
@@ -696,7 +698,7 @@ In Specific dates mode, the renewal fields are replaced by:
 - **Auto-renews:** shown only when the price's `autoRenew` is true. Otherwise a note says "This plan renews manually — we'll remind you".
 - **Free plans:** when the picked price is 0, Billed, Next renewal, Auto-renews and the price override are hidden. The item is saved as Ongoing, with today as the anchor date.
 - **Specific dates:** at least one window; each end must be after its start; windows can't overlap.
-- **Price override:** an amount above 0, with a currency, and an optional "until" date for an offer that ends (first-term discounts): charges from that date on use the catalog price. The amount is taken as charged, tax included, unless "plus tax" is ticked (BLUEPRINT §4.8).
+- **Price override:** an amount above 0, with a currency, and an optional "until" date for an offer that ends (first-term discounts): charges from that date on use the catalog price. The amount is taken as charged, tax included, unless "plus tax" is ticked (BLUEPRINT §4.8). It's also how an item bought from a reseller records what it cost, until an item can name its shop (BLUEPRINT §4.9).
 - **Bought in region** (Advanced): any country; it sets `region`, which picks the item's price and availability. Defaults to Settings' country.
 - **Feature ranks:** the plan's provided keys (§3.2), grouped. The dropdown starts with "Profile default (X)" and includes Essential ("keep this plan") and Critical ("keep this provider"), each with a one-line hint.
 - **Tags:** autocomplete from the Settings tags, with "Create tag" inline (name + colour).
@@ -770,6 +772,7 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
 - **Matching:** text matches provider names and aliases, plan names, feature names and aliases, and category names, in this order: exact or prefix name → substring → alias → feature or category. 150 ms debounce.
 - **Sort:** Best match (default when there's text), Price low→high (default otherwise), Price high→low, Name A–Z, Most features. Price sorts use the lowest monthly equivalent of the plan shown.
 - **Prices:** every interval price is a button → flow F1 (or F2 in pick mode). Converted prices show ≈, the icon and a tooltip. A $0 price shows as "Free". In Canada and the US prices are shown before tax, with "+ tax" (BLUEPRINT §4.8).
+- **Resellers** (BLUEPRINT §4.9): under a plan's prices, each official reseller that sells it for less per month after the user's sales tax (`resellerDeals`), cheapest first: "Cheaper at [icon] Amazon.ca: $87.00 / 12 mo ↗", a link to the shop's page that opens in a new tab (`rel="noopener"`). Only shops that sell where the user is; none without exchange rates.
 - **Availability** (`availability` in core, BLUEPRINT §4.7): plans and bundles not offered in the user's region are left out. A provider with nothing offered there shows "Not offered in Canada" instead of prices, and only when the search text names it. An unknown item shows its fallback price with "No Canadian price yet".
 - **Links:** Plan ↗ and Cancel ↗ open in a new tab (`rel="noopener"`).
 - **Status:** follows §3.3, at provider level.

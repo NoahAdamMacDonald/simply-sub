@@ -53,6 +53,7 @@ export function catalogFile(
         },
       ],
       bundles: [],
+      resellers: [],
     },
     meta: {
       catalogVersion,

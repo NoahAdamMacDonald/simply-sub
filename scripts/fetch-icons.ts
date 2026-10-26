@@ -1,11 +1,12 @@
-// Fetches provider icons into data/logos/<id>.png, where they're committed and reviewed; a build only copies them
-// (BLUEPRINT §6.3). It works for any website: it collects the icons the home page declares, the well-known paths
+// Fetches provider and reseller icons into data/logos/<id>.png, where they're committed and reviewed; a build only
+// copies them
+// (BLUEPRINT §6.3, §4.9). It works for any website: it collects the icons the home page declares, the well-known paths
 // (/apple-touch-icon.png, /favicon.ico) and the icon services (Google, DuckDuckGo), downloads each, and keeps the
 // largest square PNG of at least 32 pixels, using @simply-sub/core's icon functions. A site without one keeps no
 // logo, and the app shows its first letter.
 //
-//   npm run data:icons                            every provider that has no logo yet
-//   npm run data:icons -- netflix proton          these providers, replacing their logos
+//   npm run data:icons                            every provider and reseller that has no logo yet
+//   npm run data:icons -- netflix serialcart      these providers or resellers, replacing their logos
 //   npm run data:icons -- hulu=https://hulu.com   any website, listed or not, saved as data/logos/hulu.png
 import {
   iconLinksIn,
@@ -57,11 +58,11 @@ for (const { id, website } of targets) {
 }
 console.log(
   targets.length === 0
-    ? 'Every provider has a logo. Name providers to replace theirs: npm run data:icons -- netflix'
+    ? 'Every provider and reseller has a logo. Name them to replace theirs: npm run data:icons -- netflix'
     : `Wrote ${plural(written, 'logo')}. Check them, then run npm run data:validate.`,
 );
 
-/** The sites to fetch icons for: the named ones, or every provider that has no logo yet. */
+/** The sites to fetch icons for: the named ones, or every provider and reseller that has no logo yet. */
 async function targetsFrom(args: string[]): Promise<Target[]> {
   const { files, sources } = await loadCatalogFiles();
   const websites = new Map<string, string>();
@@ -70,6 +71,14 @@ async function targetsFrom(args: string[]): Promise<Target[]> {
     const website = 'data' in source ? (source.data as { website?: unknown } | null)?.website : '';
     if (id && typeof website === 'string') {
       websites.set(id, website);
+    }
+    // data/resellers.yaml lists each reseller with its website.
+    if (source.file === 'data/resellers.yaml' && 'data' in source && Array.isArray(source.data)) {
+      for (const reseller of source.data as { id?: unknown; website?: unknown }[]) {
+        if (typeof reseller?.id === 'string' && typeof reseller.website === 'string') {
+          websites.set(reseller.id, reseller.website);
+        }
+      }
     }
   }
   if (args.length === 0) {
@@ -80,10 +89,14 @@ async function targetsFrom(args: string[]): Promise<Target[]> {
   return args.map((arg) => {
     const [id, website = websites.get(id)] = arg.split(/=(.*)/s);
     if (!slugSchema.safeParse(id).success) {
-      fail(`"${id}" isn't a kebab-case id. Use a provider id, or <id>=<website> for another site.`);
+      fail(
+        `"${id}" isn't a kebab-case id. Use a provider or reseller id, or <id>=<website> for another site.`,
+      );
     }
     if (website === undefined) {
-      fail(`"${id}" isn't in data/providers/. For another site, use ${id}=<website>.`);
+      fail(
+        `"${id}" isn't in data/providers/ or data/resellers.yaml. For another site, use ${id}=<website>.`,
+      );
     }
     if (!/^https?:\/\/[^/]+/i.test(website)) {
       fail(`"${website}" isn't a website. Write it as https://example.com.`);

@@ -11,6 +11,13 @@ import type { Price } from './price';
 import { providerSchema, type AddOn, type Plan, type Provider } from './provider';
 import { globalRegion, groupsOf, isCatalogRegion, membersOf, regionProblem } from './regions';
 import {
+  isOnDomain,
+  resellerDomains,
+  resellersFileSchema,
+  siteDomain,
+  type Reseller,
+} from './reseller';
+import {
   checkInclusionLoops,
   checkPlanFeatures,
   readFeatureRegistry,
@@ -43,8 +50,11 @@ export type CatalogSourceFile =
   | { file: string; invalidYaml: true }
   | { file: string; bytes: Uint8Array };
 
-/** What an id names. Provider, plan, add-on and bundle ids share one namespace. */
-export type CatalogIdKind = 'provider' | 'plan' | 'add-on' | 'bundle';
+/**
+ * What an id names. Provider, plan, add-on, bundle and reseller ids share one namespace: provider and reseller logos
+ * share data/logos/ and /icons/.
+ */
+export type CatalogIdKind = 'provider' | 'plan' | 'add-on' | 'bundle' | 'reseller';
 
 export interface CatalogIds {
   /** 'unchecked' for a provider whose file is broken, or an id under it: those can't be looked up. */
@@ -62,6 +72,7 @@ export type Report = (
 
 const featuresFile = 'data/features.yaml';
 const categoriesFile = 'data/categories.yaml';
+const resellersFile = 'data/resellers.yaml';
 const staleAfterDays = 90;
 
 /**
@@ -126,16 +137,31 @@ export function validateCatalog(
     return read ? [read] : [];
   });
 
-  const ids = indexIds(providers, bundles, unchecked);
+  // The resellers file is optional: no provider has to list resellers. A broken one leaves references to it unchecked.
+  const reportResellers = reportIn(resellersFile);
+  const resellers =
+    located.resellers && parseFile(resellersFileSchema, located.resellers, reportResellers);
+  const resellersRead = resellers && {
+    value: resellers,
+    file: resellersFile,
+    report: reportResellers,
+  };
+
+  const ids = indexIds(providers, bundles, unchecked, resellersRead);
   const context: CheckContext = {
     today,
     currencies: new Set(Intl.supportedValuesOf('currency')),
     categories,
     registry,
     ids,
+    resellers: new Map(resellers?.map((reseller) => [reseller.id, reseller])),
+    resellersUnchecked: located.resellers !== undefined && resellers === undefined,
   };
   for (const { value, report } of providers) {
     checkProvider(value, context, report);
+  }
+  if (resellersRead && unchecked.size === 0) {
+    warnUnlisted(resellersRead, providers);
   }
   for (const { value, report } of bundles) {
     checkBundle(value, context, report);
@@ -145,7 +171,7 @@ export function validateCatalog(
       value.plans.map((plan, index) => ({ plan, path: ['plans', index], report })),
     ),
   );
-  checkLogos(located.logos, providers, ids, reportIn);
+  checkLogos(located.logos, providers, resellersRead, context, reportIn);
   return issues;
 }
 
@@ -166,14 +192,15 @@ interface NamedFile {
 interface LocatedFiles {
   features?: CatalogSourceFile;
   categories?: CatalogSourceFile;
+  resellers?: CatalogSourceFile;
   providers: NamedFile[];
   bundles: NamedFile[];
   logos: NamedFile[];
 }
 
 /**
- * What a file under data/ is, from its path: the registry, the categories, a provider or bundle file and its name
- * without .yaml, or a provider's logo (data/logos/<provider id>.png). Undefined for anything else.
+ * What a file under data/ is, from its path: the registry, the categories, the resellers, a provider or bundle file
+ * and its name without .yaml, or a provider's or reseller's logo (data/logos/<id>.png). Undefined for anything else.
  */
 export function locateCatalogFile(
   file: string,
@@ -183,6 +210,9 @@ export function locateCatalogFile(
   }
   if (file === categoriesFile) {
     return { kind: 'categories', name: 'categories' };
+  }
+  if (file === resellersFile) {
+    return { kind: 'resellers', name: 'resellers' };
   }
   const named = /^data\/(providers|bundles)\/([^/]+)\.yaml$/.exec(file);
   if (named) {
@@ -204,18 +234,23 @@ function locateFiles(
       located.features = source;
     } else if (where?.kind === 'categories') {
       located.categories = source;
+    } else if (where?.kind === 'resellers') {
+      located.resellers = source;
     } else if (where) {
       const list = { provider: 'providers', bundle: 'bundles', logo: 'logos' } as const;
       located[list[where.kind]].push({ source, name: where.name });
     } else if (file.startsWith('data/logos/')) {
-      reportIn(file)([], 'Logos are PNG files named after the provider id (disney-plus.png)');
+      reportIn(file)(
+        [],
+        'Logos are PNG files named after the provider or reseller id (disney-plus.png)',
+      );
     } else if (file.endsWith('.yml')) {
       const name = file.slice(file.lastIndexOf('/') + 1, -'.yml'.length);
       reportIn(file)([], `Rename it to ${name}.yaml: catalog files end in .yaml`);
     } else {
       reportIn(file)(
         [],
-        'Not a catalog file: use data/features.yaml, data/categories.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
+        'Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
       );
     }
   }
@@ -296,6 +331,7 @@ function indexIds(
   providers: readonly ReadFile<Provider>[],
   bundles: readonly ReadFile<Bundle>[],
   unchecked: ReadonlySet<string>,
+  resellers: ReadFile<readonly Reseller[]> | undefined,
 ): CatalogIds {
   const defined = new Map<string, { kind: CatalogIdKind; file: string }>();
   const define = (
@@ -327,6 +363,10 @@ function indexIds(
       define(addOn.id, 'add-on', read, ['addOns', index, 'id']),
     );
   }
+  // After the providers: a reseller named like one is the resellers file's to fix.
+  resellers?.value.forEach((reseller, index) =>
+    define(reseller.id, 'reseller', resellers, [index, 'id']),
+  );
   return {
     kindOf: (id) =>
       defined.get(id)?.kind ?? (unchecked.has(id.split('.')[0]) ? 'unchecked' : undefined),
@@ -345,6 +385,10 @@ interface CheckContext {
   categories: Categories | undefined;
   registry: FeatureRegistry | undefined;
   ids: CatalogIds;
+  /** data/resellers.yaml's, by id. */
+  resellers: ReadonlyMap<string, Reseller>;
+  /** The resellers file is there but broken, so a reseller missing from it may only be unreadable. */
+  resellersUnchecked: boolean;
 }
 
 function checkProvider(provider: Provider, context: CheckContext, report: Report): void {
@@ -420,7 +464,71 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
   if (provider.availableIn) {
     checkAvailableIn(provider, provider.availableIn, report);
   }
+  provider.resellers?.forEach((listing, index) =>
+    checkResellerListing(provider, listing, ['resellers', index], context, prices, report),
+  );
   prices.warnIfStale();
+}
+
+/**
+ * A provider's reseller: one data/resellers.yaml lists, approved on the provider's own site (only the shops a provider
+ * names are listed, BLUEPRINT §4.9), with its prices on the reseller's own pages.
+ */
+function checkResellerListing(
+  provider: Provider,
+  listing: NonNullable<Provider['resellers']>[number],
+  path: CatalogIssuePath,
+  context: CheckContext,
+  prices: PriceChecks,
+  report: Report,
+): void {
+  const reseller = context.resellers.get(listing.reseller);
+  if (!reseller && !context.resellersUnchecked) {
+    report(
+      [...path, 'reseller'],
+      `"${listing.reseller}" isn't in ${resellersFile}${didYouMean(listing.reseller, [...context.resellers.keys()], 'add it there')}`,
+    );
+  }
+  const domain = siteDomain(provider.website);
+  if (!isOnDomain(listing.approvedBy.url, [domain])) {
+    report(
+      [...path, 'approvedBy', 'url'],
+      `Must be a page of ${provider.name}'s own site, on ${domain}: only the resellers it names are listed`,
+    );
+  }
+  listing.offers.forEach((offer, offerIndex) => {
+    const pricesPath = [...path, 'offers', offerIndex, 'prices'];
+    prices.check(offer.prices, pricesPath);
+    if (!reseller) return;
+    const domains = resellerDomains(reseller);
+    offer.prices.forEach((price, priceIndex) => {
+      if (!isOnDomain(price.sourceUrl, domains)) {
+        report(
+          [...pricesPath, priceIndex, 'sourceUrl'],
+          `Must be ${reseller.name}'s page, on ${domains.join(' or ')}: if the domain is theirs, add it to their domains in ${resellersFile}`,
+        );
+      }
+    });
+  });
+}
+
+/** A reseller no provider lists gets a warning: it's either missing from a provider file or no longer needed. */
+function warnUnlisted(
+  resellers: ReadFile<readonly Reseller[]>,
+  providers: readonly ReadFile<Provider>[],
+): void {
+  const listed = new Set(
+    providers.flatMap(({ value }) => value.resellers?.map((listing) => listing.reseller) ?? []),
+  );
+  resellers.value.forEach((reseller, index) => {
+    if (!listed.has(reseller.id)) {
+      resellers.report(
+        [index, 'id'],
+        'No provider lists this reseller: add it to the resellers of the providers whose plans it sells, or remove it',
+        'warning',
+      );
+    }
+  });
 }
 
 /** A provider's plans and add-ons, each with its path in the file. */
@@ -528,22 +636,25 @@ function checkAvailableIn(
 }
 
 /**
- * Each logo is a PNG the app can show, named after a provider. A provider without one gets a warning, since the
+ * Each logo is a PNG the app can show, named after a provider or reseller. One without gets a warning, since the
  * app shows its first letter instead; `npm run data:icons` fetches one.
  */
 function checkLogos(
   logos: readonly NamedFile[],
   providers: readonly ReadFile<Provider>[],
-  ids: CatalogIds,
+  resellers: ReadFile<readonly Reseller[]> | undefined,
+  { ids, resellersUnchecked }: CheckContext,
   reportIn: (file: string) => Report,
 ): void {
   for (const { source, name } of logos) {
     const report = reportIn(source.file);
     const kind = ids.kindOf(name);
-    if (kind !== 'provider' && kind !== 'unchecked') {
+    // With the resellers file broken, an unknown name may be one of its resellers.
+    const known = kind === 'provider' || kind === 'reseller' || kind === 'unchecked';
+    if (!known && !(kind === undefined && resellersUnchecked)) {
       report(
         [],
-        `"${name}" isn't a provider id: name the logo after one${didYouMean(name, ids.all('provider'))}`,
+        `"${name}" isn't a provider or reseller id: name the logo after one${didYouMean(name, ids.all('provider', 'reseller'))}`,
       );
     }
     const problem = iconProblem('bytes' in source ? readPngImage(source.bytes) : undefined);
@@ -552,15 +663,18 @@ function checkLogos(
     }
   }
   const named = new Set(logos.map(({ name }) => name));
+  const noLogo = (id: string) =>
+    `No logo, so the app shows a letter: run npm run data:icons to fetch data/logos/${id}.png`;
   for (const { value, report } of providers) {
     if (!named.has(value.id)) {
-      report(
-        [],
-        `No logo, so the app shows a letter: run npm run data:icons to fetch data/logos/${value.id}.png`,
-        'warning',
-      );
+      report([], noLogo(value.id), 'warning');
     }
   }
+  resellers?.value.forEach((reseller, index) => {
+    if (!named.has(reseller.id)) {
+      resellers.report([index, 'id'], noLogo(reseller.id), 'warning');
+    }
+  });
 }
 
 function checkBundle(bundle: Bundle, context: CheckContext, report: Report): void {

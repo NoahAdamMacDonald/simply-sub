@@ -4,6 +4,7 @@ import { categoriesFileSchema, type Categories } from './category';
 import { featuresFileSchema, type Feature } from './feature';
 import { httpsUrlSchema, regionSchema } from './formats';
 import { providerSchema, type Provider } from './provider';
+import { resellerSchema, resellersFileSchema, type Reseller } from './reseller';
 import { locateCatalogFile, type CatalogSourceFile } from './validate-catalog';
 
 // The catalog snapshot (BLUEPRINT §5.2, §6.3): the body of GET /catalog, which is also published byte for byte
@@ -18,19 +19,23 @@ export const catalogSchemaVersion = 1;
  */
 export const catalogIconSize = 96;
 
-/** The file a provider's icon is published as, under /icons/. */
-export function catalogIconFile(providerId: string): string {
-  return `${providerId}.webp`;
+/** The file a provider's or reseller's icon is published as, under /icons/. Their ids never clash. */
+export function catalogIconFile(id: string): string {
+  return `${id}.webp`;
 }
 
-export const snapshotProviderSchema = providerSchema.safeExtend({
-  iconUrl: httpsUrlSchema
-    .describe(
-      "The provider's icon, a WebP of at most 96 pixels under /icons/. Left out when there's no logo: the app shows a letter",
-    )
-    .optional(),
-});
+/** A published icon's URL, as the snapshot gives it. */
+const iconUrlSchema = httpsUrlSchema
+  .describe(
+    "Its icon, a WebP of at most 96 pixels under /icons/. Left out when there's no logo: the app shows a letter",
+  )
+  .optional();
+
+export const snapshotProviderSchema = providerSchema.safeExtend({ iconUrl: iconUrlSchema });
 export type SnapshotProvider = z.infer<typeof snapshotProviderSchema>;
+
+export const snapshotResellerSchema = resellerSchema.safeExtend({ iconUrl: iconUrlSchema });
+export type SnapshotReseller = z.infer<typeof snapshotResellerSchema>;
 
 export const catalogDataSchema = z.strictObject({
   schemaVersion: z.literal(catalogSchemaVersion),
@@ -38,6 +43,11 @@ export const catalogDataSchema = z.strictObject({
   categories: categoriesFileSchema,
   providers: z.array(snapshotProviderSchema),
   bundles: z.array(bundleSchema),
+  resellers: z
+    .array(snapshotResellerSchema)
+    .describe(
+      "data/resellers.yaml: the shops that providers' resellers sections name (BLUEPRINT §4.9)",
+    ),
 });
 export type CatalogData = z.infer<typeof catalogDataSchema>;
 
@@ -81,7 +91,9 @@ export interface CatalogSource {
   categories: Categories;
   providers: Provider[];
   bundles: Bundle[];
-  /** Provider id → its logo, a PNG from data/logos/. */
+  /** data/resellers.yaml's, or none without the file. */
+  resellers: Reseller[];
+  /** Provider or reseller id → its logo, a PNG from data/logos/. */
   logos: ReadonlyMap<string, Uint8Array>;
 }
 
@@ -94,6 +106,7 @@ export function readCatalogSource(files: readonly CatalogSourceFile[]): CatalogS
   let categories: Categories | undefined;
   const providers: Provider[] = [];
   const bundles: Bundle[] = [];
+  let resellers: Reseller[] = [];
   const logos = new Map<string, Uint8Array>();
   for (const source of files) {
     const where = locateCatalogFile(source.file);
@@ -115,6 +128,9 @@ export function readCatalogSource(files: readonly CatalogSourceFile[]): CatalogS
       case 'bundle':
         bundles.push(parsed(bundleSchema, source));
         break;
+      case 'resellers':
+        resellers = parsed(resellersFileSchema, source);
+        break;
     }
   }
   if (!features || !categories) {
@@ -126,6 +142,7 @@ export function readCatalogSource(files: readonly CatalogSourceFile[]): CatalogS
     categories,
     providers: providers.sort(byId),
     bundles: bundles.sort(byId),
+    resellers: resellers.sort(byId),
     logos,
   };
 }
@@ -139,8 +156,8 @@ function parsed<T>(schema: z.ZodType<T>, source: CatalogSourceFile): T {
 }
 
 /**
- * The snapshot's data: the source files, in a fixed order. A provider with a logo gets its icon URL; one without
- * has none, and the app shows its first letter.
+ * The snapshot's data: the source files, in a fixed order. A provider or reseller with a logo gets its icon URL; one
+ * without has none, and the app shows its first letter.
  */
 export function buildCatalogData(source: CatalogSource, iconBaseUrl: string): CatalogData {
   return {
@@ -157,6 +174,13 @@ export function buildCatalogData(source: CatalogSource, iconBaseUrl: string): Ca
       ...rest,
     })),
     bundles: source.bundles,
+    resellers: source.resellers.map(({ id, name, website, ...rest }) => ({
+      id,
+      name,
+      website,
+      ...(source.logos.has(id) && { iconUrl: `${iconBaseUrl}${catalogIconFile(id)}` }),
+      ...rest,
+    })),
   };
 }
 

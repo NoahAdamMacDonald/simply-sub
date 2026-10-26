@@ -3,6 +3,7 @@ import { bundleSchema } from './bundle';
 import { categoriesFileSchema } from './category';
 import { featuresFileSchema } from './feature';
 import { providerSchema } from './provider';
+import { resellersFileSchema } from './reseller';
 
 function toJsonSchema(schema: z.ZodType) {
   // The input side, since that's what people type into the YAML files.
@@ -20,6 +21,7 @@ export function catalogJsonSchemas() {
     categories: toJsonSchema(categoriesFileSchema),
     provider: toJsonSchema(providerSchema),
     bundle: toJsonSchema(bundleSchema),
+    resellers: toJsonSchema(resellersFileSchema),
   };
 }
 export type CatalogFileKind = keyof ReturnType<typeof catalogJsonSchemas>;

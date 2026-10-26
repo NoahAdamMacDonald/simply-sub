@@ -63,7 +63,7 @@ if (errors > 0) {
   const json = JSON.stringify(snapshot);
   await write(catalogFile, json);
 
-  // Only the current regions' files and providers' icons: an old build's go first. The folder also holds
+  // Only the current regions' files and providers' and resellers' icons: an old build's go first. The folder also holds
   // the index, the GET /features and GET /categories bodies and the ids file.
   await clear(catalogDir);
   const index = buildCatalogIndex(snapshot.meta);
@@ -79,7 +79,7 @@ if (errors > 0) {
   await write(`${catalogDir}ids.json`, JSON.stringify(catalogIds(snapshot)));
 
   await clear(iconsDir);
-  const icons = data.providers.filter((provider) => provider.iconUrl);
+  const icons = [...data.providers, ...data.resellers].filter(({ iconUrl }) => iconUrl);
   let iconBytes = 0;
   for (const { id } of icons) {
     const png = source.logos.get(id);

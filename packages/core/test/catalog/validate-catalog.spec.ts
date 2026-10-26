@@ -45,11 +45,11 @@ describe('validateCatalog', () => {
     it.each([
       [
         'data/notes.yaml',
-        'data/notes.yaml: Not a catalog file: use data/features.yaml, data/categories.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
+        'data/notes.yaml: Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
       ],
       [
         'data/providers/old/netflix.yaml',
-        'data/providers/old/netflix.yaml: Not a catalog file: use data/features.yaml, data/categories.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
+        'data/providers/old/netflix.yaml: Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
       ],
       [
         'data/providers/hulu.yml',
@@ -493,15 +493,15 @@ describe('validateCatalog', () => {
     it.each([
       [
         'data/logos/netflx.png',
-        'data/logos/netflx.png: "netflx" isn\'t a provider id: name the logo after one (did you mean netflix?)',
+        'data/logos/netflx.png: "netflx" isn\'t a provider or reseller id: name the logo after one (did you mean netflix?)',
       ],
       [
         'data/logos/netflix.standard.png',
-        'data/logos/netflix.standard.png: "netflix.standard" isn\'t a provider id: name the logo after one',
+        'data/logos/netflix.standard.png: "netflix.standard" isn\'t a provider or reseller id: name the logo after one',
       ],
       [
         'data/logos/netflix.svg',
-        'data/logos/netflix.svg: Logos are PNG files named after the provider id (disney-plus.png)',
+        'data/logos/netflix.svg: Logos are PNG files named after the provider or reseller id (disney-plus.png)',
       ],
     ])('rejects %s', (file, expected) => {
       expect(messages(logo(file, pngBytes(64, 64)))).toEqual([expected]);

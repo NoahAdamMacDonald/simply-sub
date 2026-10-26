@@ -41,6 +41,9 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
   is `availability` in core: offered, not offered or unknown (BLUEPRINT §4.7).
 - Catalog prices are the regular (renewal) price, never a first-term offer, with the billing period the provider
   states ("every 30 days" is `interval: day, intervalCount: 30`).
+- Resellers (BLUEPRINT §4.9): only shops a provider's own site names as official resellers, quoted from that page,
+  never partners that use its service in their own product. They're listed once in `data/resellers.yaml`, with
+  offers in the provider's file at regular prices only. They're shown when cheaper per month after the buyer's sales tax.
 - Sales tax is added for buyers in Canada and the US (built-in Canadian rates by province, the user's own rate
   otherwise). Totals include it; price tags show the listed price with "+ tax" (BLUEPRINT §4.8).
 - Catalog icons are static files: fetched once from each provider's site and committed, never fetched per view
