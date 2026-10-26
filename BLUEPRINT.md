@@ -209,7 +209,7 @@ simply-sub/
 │     │  ├─ api/             # the error envelope, GET /health's body and every endpoint's response schema (M2.7)
 │     │  ├─ catalog/         # Zod schemas + inferred types for the catalog files, JSON Schema export (section 4.5),
 │     │  │                   # validateCatalog (section 6.2), regions, availability, pickPrice and convert (section 4.7)
-│     │  ├─ user/            # user-data types (lists, items, cards…)
+│     │  ├─ user/            # user-data types (lists, items, cards…), resolveItem (M4.6), itemActivity (M5.1)
 │     │  ├─ dates/           # ISO calendar dates in UTC: IsoDate, toIsoDate, addDays, addMonths (M7.1)
 │     │  ├─ icons/           # PNG and ICO reading, a page's icon links, the icon services, picking the best icon,
 │     │  │                   # GET /icon's query (M2.6)
@@ -217,7 +217,8 @@ simply-sub/
 │     │  ├─ tax/             # sales tax: tax-added regions, the Canadian rate table, subdivisions (section 4.8)
 │     │  ├─ ranking/         # rank keys, providesKey (M2.3) and providedKeys (M2.4); rank resolution (item override >
 │     │  │                   # profile > not ranked)
-│     │  ├─ search/          # searchProviders, readProvidersQuery, providersBody: GET /providers now, Search (P8) in M5
+│     │  ├─ search/          # searchProviders, readProvidersQuery, providersBody (GET /providers); searchCatalog
+│     │  │                   # and providerActivity (Search, P8, M5.1)
 │     │  ├─ lookup/          # readPricingQuery, readBundlesQuery and the GET /providers/:id, /plans/:id and /bundles
 │     │  │                   # bodies (M2.4)
 │     │  ├─ optimizer/       # suggestion engine (section 10)
@@ -1991,7 +1992,8 @@ opens a dialog (not a separate page) with:
 - payment card (Phase 4)
 - price override
 
-**Search.** Free text matches provider names, plan names and feature names. Filters:
+**Search.** Free text matches provider names, plan names and feature names, term by term ("netflix 4k", PROJECT-PLAN
+P8). Filters:
 - price range (monthly equivalent)
 - features (autocomplete from the registry, with a minimum value for numbers and enums)
 - active chips
@@ -2424,6 +2426,28 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-26, M5.1)**
+- **One search engine:** the app's `searchCatalog` runs M2.3's `searchProviders` on the catalog file for the user's
+  country, so Search and `GET /providers` match, filter and sort alike. D1 never narrows by text, so a change to
+  matching reaches both; the API's answers keep their shape.
+- **Matching** (P8): term by term, and every term must match ("netflix 4k" is Netflix's 4k plans). A term is the
+  longest run of words that a rank key's, feature's or category's name or alias contains ("ultra hd"), so the
+  registry alone decides and a provider matches the same whatever is searched with it. A plural also matches its
+  singular ("vpns"; not words in -ss, -us or -is, like plus). A feature's own name and aliases match ("video
+  quality", "streams") when the term names no rank key, with the highest value or tier each plan provides: every VPN
+  feature is named "VPN …", and "vpn" means `vpn.included`. A category the text names brings all its providers'
+  plans; a name or alias brings every plan unless a key the term names narrows them to the plans that provide it
+  (when any does). Relevance is the best term's. Case, accents and spaces were already folded (M2.3).
+- **Results:** one per provider, with its matching plans priced (every interval; offered, or unknown with the
+  fallback price), the plan shown (the user's own when it matches, an active one first, else the cheapest; price
+  sorts use it) and each plan's reseller deals. A provider that sells nothing in the user's country gets a "not
+  offered" result only when the text names it (its name or an alias), and not with a price filter or Native pricing
+  only, since it has no price. Add-ons, bundles and a suite's savings are worked out for the plan on screen (M5.2).
+- **Activity now, not in M7.1:** core's `itemActivity` gives PROJECT-PLAN §3.3's Active or Inactive, and "Active
+  from", from the billing dates alone; `providerActivity` groups the items by provider across lists, a bundle counting
+  for each provider whose plan it includes. A window that repeats yearly is copied into each later year, never earlier
+  ones. M7.1 builds `ItemStatus` on it, adding what needs the charges (ending soon, manual renewal).
 
 **Resolved (2026-10-26, M1.8 resellers and Mullvad's prices)**
 - **Mullvad's conversion was right.** With the ECB's rates of 2026-10-26, €5 is CA$7.85 and US$5.59, as Mullvad's
