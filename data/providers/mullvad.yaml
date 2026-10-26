@@ -8,7 +8,12 @@ billingCurrency: { GLOBAL: EUR }
 sources: { pricing: https://mullvad.net/en/pricing }
 notes: >-
   Prepaid only: you add time to an account number, and nothing renews by itself. Cards can pay in many local
-  currencies at a converted amount, and cryptocurrency payments get 10% off.
+  currencies at a converted amount, and cryptocurrency payments get 10% off. One flat price everywhere, VAT
+  included, so no sales tax is added in Canada or the US.
+
+# Prices read 2026-10-26 on /en/pricing: "€5" a month for 1 month, 1 year or 1 decade ("the exact same rate"), and
+# "It's one flat monthly rate for ultimate flexibility. Including VAT." The CA$7.84 shown there is "€5 is
+# equivalent to", not a CAD price: CAD is taken for cash only.
 
 # VPN features, read 2026-10-25 on mullvad.net: devices and anonymous signup on /en/vpn; 50 server countries on
 # /en/servers; WireGuard only since OpenVPN's removal on 2026-01-15 (/en/blog/removing-openvpn-15th-january-2026),
@@ -44,7 +49,8 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: false
-        lastVerified: 2026-10-23
+        taxIncluded: { quote: Including VAT. }
+        lastVerified: 2026-10-26
         sourceUrl: https://mullvad.net/en/pricing
       - region: GLOBAL
         currency: EUR
@@ -52,5 +58,6 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: false
-        lastVerified: 2026-10-23
+        taxIncluded: { quote: Including VAT. }
+        lastVerified: 2026-10-26
         sourceUrl: https://mullvad.net/en/pricing

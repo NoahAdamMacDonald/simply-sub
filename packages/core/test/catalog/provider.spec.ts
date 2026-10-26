@@ -42,6 +42,25 @@ describe('providerSchema', () => {
     expect(issues(providerSchema, free)).toEqual([]);
   });
 
+  describe('a price that includes tax', () => {
+    const path = ['plans', 0, 'prices', 0, 'taxIncluded'];
+
+    it('is accepted with the source page’s words', () => {
+      const included = withValue(provider, path, { quote: 'Including VAT.' });
+      expect(issues(providerSchema, included)).toEqual([]);
+    });
+
+    it.each([
+      [true, 'Invalid input: expected object, received boolean'],
+      [{}, 'Invalid input: expected string, received undefined'],
+      [{ quote: ' ' }, 'Must not be empty'],
+    ])('needs the words that say so: %j is rejected', (value, message) => {
+      const [issue] = issues(providerSchema, withValue(provider, path, value));
+      expect(issue).toMatch(/^plans\.0\.prices\.0\.taxIncluded/);
+      expect(issue).toContain(message);
+    });
+  });
+
   describe('unknown keys', () => {
     it.each([
       ['on the provider', ['cancelURL'], ': Unrecognized key: "cancelURL"'],

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { canadianSalesTax, salesTaxRate, subdivisionsOf } from '../../src';
+import { addedSalesTax, canadianSalesTax, salesTaxRate, subdivisionsOf } from '../../src';
 
 describe('canadianSalesTax', () => {
   it('has a rate for every province and territory, and nothing else', () => {
@@ -61,5 +61,29 @@ describe('salesTaxRate', () => {
   it('adds nothing where prices include tax, whatever rate is saved', () => {
     expect(salesTaxRate({ country: 'GB' })).toBeUndefined();
     expect(salesTaxRate({ country: 'DE', salesTaxPercent: 19 })).toBeUndefined();
+  });
+});
+
+describe('addedSalesTax', () => {
+  const ontario = { country: 'CA', subdivision: 'CA-ON' };
+
+  it('adds the buyer’s rate to a price listed before tax', () => {
+    expect(addedSalesTax({}, ontario)).toEqual({ percent: 13, source: 'built-in' });
+    expect(addedSalesTax({ taxIncluded: undefined }, ontario)).toEqual({
+      percent: 13,
+      source: 'built-in',
+    });
+  });
+
+  it('adds nothing to a price that includes tax, a catalog price’s or a picked one’s', () => {
+    expect(addedSalesTax({ taxIncluded: { quote: 'Including VAT.' } }, ontario)).toBeUndefined();
+    expect(addedSalesTax({ taxIncluded: true }, ontario)).toBeUndefined();
+    expect(
+      addedSalesTax({ taxIncluded: true }, { country: 'US', salesTaxPercent: 8 }),
+    ).toBeUndefined();
+  });
+
+  it('adds nothing where prices include tax anyway', () => {
+    expect(addedSalesTax({}, { country: 'GB' })).toBeUndefined();
   });
 });

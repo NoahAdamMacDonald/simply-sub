@@ -218,6 +218,29 @@ describe('pickPrice', () => {
     }
   });
 
+  it('says when the source price includes tax, and only then', () => {
+    const included: Price = {
+      ...price('GLOBAL', 'EUR', 5),
+      taxIncluded: { quote: 'Including VAT.' },
+    };
+    const [picked] = pickPrice([included], canada);
+    expect(picked.taxIncluded).toBe(true);
+    // Between native and source, as the API's pricing entries show it.
+    expect(Object.keys(picked)).toEqual([
+      'interval',
+      'intervalCount',
+      'amount',
+      'currency',
+      'monthlyEquivalent',
+      'autoRenew',
+      'native',
+      'taxIncluded',
+      'source',
+      'fx',
+    ]);
+    expect(pickPrice([price('GLOBAL', 'EUR', 5)], canada)[0]).not.toHaveProperty('taxIncluded');
+  });
+
   it('gives nothing for no prices', () => {
     expect(pickPrice([], canada)).toEqual([]);
   });
