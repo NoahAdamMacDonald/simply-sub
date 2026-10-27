@@ -131,22 +131,11 @@
       <ul class="policies">
         @for (policy of group.policies; track policy.topic.id) {
           <li>
-            <!-- The grade is the dot's name, and its tooltip on hover, focus or a tap (touch gestures are off, so a
-                 tap is a click). show() keeps it open when a click lands while hovering. -->
-            <button
-              #grade="matTooltip"
-              type="button"
-              class="grade"
-              [attr.data-tier]="policy.tier"
-              [attr.aria-label]="tierNames[policy.tier]"
-              [matTooltip]="tierNames[policy.tier]"
-              matTooltipTouchGestures="off"
-              (click)="grade.show()"
-            >
-              <span class="dot"></span>
-            </button>
+            <!-- The dot is decorative: the grade is in words beside the topic (M5.9). -->
+            <span class="dot" aria-hidden="true" [attr.data-tier]="policy.tier"></span>
             <p class="rated">
-              <span class="topic">{{ policy.topic.name }}: </span>
+              <span class="topic">{{ policy.topic.name }}</span>
+              <span class="grade"> ({{ tierNames[policy.tier] }}): </span>
               <!-- The space before the citations is the reason's: Angular drops a span of only a space. -->
               <span>{{ policy.reason }} </span>
               @for (citation of policy.citations; track $index) {

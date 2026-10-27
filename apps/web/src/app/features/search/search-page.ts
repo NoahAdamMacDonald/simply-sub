@@ -1,5 +1,4 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { CdkScrollable } from '@angular/cdk/scrolling';
 import { Location, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
@@ -82,9 +81,11 @@ const priceState = 'ssSearchPrice';
  */
 @Component({
   selector: 'ss-search-page',
-  host: { '[style.--ss-pinned-height]': "pinnedHeight() + 'px'" },
+  host: {
+    '[style.--ss-pinned-height]': "pinnedHeight() + 'px'",
+    '[style.--ss-panel-height]': "panelHeight() + 'px'",
+  },
   imports: [
-    CdkScrollable,
     EmptyState,
     MatButton,
     MatDialogActions,
@@ -122,11 +123,14 @@ export class SearchPage {
 
   private readonly drawerTemplate = viewChild.required<TemplateRef<unknown>>('drawer');
   private readonly pinned = viewChild.required<ElementRef<HTMLElement>>('pinned');
+  private readonly panelSection = viewChild<ElementRef<HTMLElement>>('panelSection');
   private drawer?: MatDialogRef<unknown>;
   private timer?: ReturnType<typeof setTimeout>;
 
   /** The pinned bar's height, for the panel pinned below it and the cards that scroll into view under it. */
   protected readonly pinnedHeight = signal(0);
+  /** The filter panel's height (from 960 px), so a panel taller than the window pins by its foot. */
+  protected readonly panelHeight = signal(0);
 
   private readonly params = toSignal(this.route.queryParams, { requireSync: true });
   /** Under 960 px the filters are in a drawer, as the sidebar is (P1). */
@@ -224,6 +228,16 @@ export class SearchPage {
       );
       observer.observe(this.pinned().nativeElement);
       destroyRef.onDestroy(() => observer.disconnect());
+    });
+    // The panel comes and goes with the width, and grows with the Features chosen.
+    effect((onCleanup) => {
+      const panel = this.panelSection()?.nativeElement;
+      if (!panel || typeof ResizeObserver === 'undefined') return;
+      const observer = new ResizeObserver(([entry]) =>
+        this.panelHeight.set(Math.ceil(entry.target.getBoundingClientRect().height)),
+      );
+      observer.observe(panel);
+      onCleanup(() => observer.disconnect());
     });
     // Back or forward overrides text still waiting for the typing pause.
     this.router.events

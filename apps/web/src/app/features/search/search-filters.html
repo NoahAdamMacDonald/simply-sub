@@ -37,7 +37,8 @@
   <mat-label>Features</mat-label>
   <mat-chip-grid #chips aria-label="Chosen features" class="ss-wrapping-chips">
     @for (option of picked(); track option.key) {
-      <mat-chip-row (removed)="removeFeature(option)">
+      <!-- A click anywhere on the chip removes it, as its X does (M5.9); the X stops its own click from reaching here. -->
+      <mat-chip-row (removed)="removeFeature(option)" (click)="removeFeature(option)">
         {{ label(option) }}
         <button matChipRemove type="button" [attr.aria-label]="'Remove ' + label(option)">
           <mat-icon>cancel</mat-icon>
@@ -93,7 +94,7 @@
   >
     Native pricing only
   </mat-checkbox>
-  <p class="hint" [id]="id + '-native'">Hides prices converted from another currency</p>
+  <p class="hint" [id]="id + '-native'">Hides prices in other currencies</p>
 </div>
 
 <div class="sold">
@@ -104,7 +105,7 @@
   >
     Sold in {{ countryName() }}
   </mat-checkbox>
-  <p class="hint" [id]="id + '-sold'">Hides plans with no price for {{ countryName() }} yet</p>
+  <p class="hint" [id]="id + '-sold'">Only plans priced for {{ countryName() }}</p>
 </div>
 
 <button

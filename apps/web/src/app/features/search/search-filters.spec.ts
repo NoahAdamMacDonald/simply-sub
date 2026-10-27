@@ -172,6 +172,14 @@ describe('SearchFilters', () => {
       expect(changes).toEqual([{ features: ['streaming.ad-free'] }]);
     });
 
+    it('removes a chip clicked anywhere, once, as its X does (M5.9)', async () => {
+      await setup({ features: ['video.quality=4k', 'streaming.ad-free'] });
+      const chip = element().querySelectorAll<HTMLElement>('mat-chip-row')[1];
+
+      chip.querySelector<HTMLElement>('.mdc-evolution-chip__text-label')?.click();
+      expect(changes).toEqual([{ features: ['video.quality=4k'] }]);
+    });
+
     it('says that plans need every feature chosen', async () => {
       await setup();
       expect(element().querySelector('.features mat-hint')?.textContent?.trim()).toBe(
@@ -215,7 +223,7 @@ describe('SearchFilters', () => {
       const input = element().querySelector('.native input');
       expect(
         element().querySelector(`#${input?.getAttribute('aria-describedby')}`)?.textContent,
-      ).toBe('Hides prices converted from another currency');
+      ).toBe('Hides prices in other currencies');
       await native.check();
       expect(changes).toEqual([{ nativeOnly: true }]);
 
@@ -233,7 +241,7 @@ describe('SearchFilters', () => {
       const input = element().querySelector('.sold input');
       expect(
         element().querySelector(`#${input?.getAttribute('aria-describedby')}`)?.textContent,
-      ).toBe('Hides plans with no price for Canada yet');
+      ).toBe('Only plans priced for Canada');
       await sold.check();
       expect(changes).toEqual([{ soldOnly: true }]);
 

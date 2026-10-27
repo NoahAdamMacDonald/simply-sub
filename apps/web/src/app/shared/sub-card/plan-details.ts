@@ -28,7 +28,7 @@ import { PriceTag } from '../price-tag/price-tag';
 import { ProviderIcon } from '../provider-icon/provider-icon';
 import { catalogIcon, planTitle, savingText, type SavingText } from './card-text';
 
-/** The grades' names: each rating's dot is named by its grade, and shows it on hover, focus or a tap (BLUEPRINT §4.10). */
+/** The grades' names, in muted text beside each rating's topic (BLUEPRINT §4.10). */
 const tierNames: Record<PolicyTier, string> = {
   great: 'Great',
   good: 'Good',

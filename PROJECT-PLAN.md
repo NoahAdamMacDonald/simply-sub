@@ -171,6 +171,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M5.6 | "Sold in <country>" filter (added 2026-10-26): `CatalogQuery.soldOnly` in core's `searchCatalog`, `sold=1`/`sold=0` against the user's default (`SearchDefaults` in `readSearchParams`, `writeSearchParams` and `filterCount`), the panel's checkbox, and Settings' Search option `searchSoldOnly` (P8, P13; BLUEPRINT §14) | A UK user with Sold in on sees no fallback prices, a provider not sold there doesn't show even when named, and the Settings default holds across reloads with `sold=0` turning it off |
 | M5.7 | Search fixes (added 2026-10-27, P8): nothing paints over the top bar; the search bar and the filter panel stay pinned while the results scroll (under 960 px one row, the box and a Filters icon button with a badge, Sort in the drawer); plan chips stay in place when switching plans, a lone plan shows its chip, and plans go cheapest first by their shortest billing period's price (core's `searchProviders`); the expanded section slides open and shut, closes from a "Hide details" bar at its foot, and keeps the card in view (BLUEPRINT §14) | Scrolled down, the bar and panel stay put at 360 and 1280 px; picking plans moves no chip; TSN lists Standard before Premium; Hide details closes the section and keeps the card on screen |
 | M5.8 | Features chips that fit (added 2026-10-27, P8): a long chip ("Download devices: Downloads on 6+ devices") wraps inside its field instead of scrolling the panel or drawer sideways (a global `.ss-wrapping-chips`, since Material keeps a chip's label on one line), and its remove button is centred (BLUEPRINT §14) | No sideways scroll in the panel at 1280 px or the drawer at 360 px with the longest chip; its remove button is centred on it |
+| M5.9 | Grades in words and a calmer panel (added 2026-10-27, P8): each rating's grade in muted text beside its topic ("Disputes (Good):"), the dot decorative again; a click on a Features chip removes it, as its X does; the filter panel has no scrollbar of its own, pinned by its foot when it's taller than the window (`--ss-panel-height`), with one-line hints (BLUEPRINT §14) | No rating needs a hover to show its grade; a click on a chip removes it once; at 560, 720 and 900 px high the panel never scrolls on its own and Clear all comes into view |
 
 ### M6 — Lists & ranking
 | ID | Task | Done when |
@@ -813,9 +814,9 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
   - "Price checked Oct 14, 2026", with a "may be out of date" badge when it's older than 90 days.
   - Terms and policies (M1.13, BLUEPRINT §4.10): the provider's ratings on `data/policy-topics.yaml`'s topics for
     the plan and the user's country, by group (Privacy, Billing, Legal, Service), each a dot in its grade's colour
-    (Great to Bad, green to red) whose tooltip names the grade on hover, focus or a tap (M1.14), with the topic in
-    bold and a reason in plain words, muted, citing each page it quotes ("[2]", linked to the quote), then the
-    numbered pages.
+    (Great to Bad, green to red), with the topic in bold, its grade in words, muted ("Disputes (Good):", M5.9),
+    and a reason in plain words, muted, citing each page it quotes ("[2]", linked to the quote), then the numbered
+    pages.
   - It slides open and shut (none with reduced motion), and a "Hide details" bar at its foot closes it too, putting
     focus back on the details button. When opening or closing leaves part of the card off screen, the page scrolls
     it back into view below the pinned bar (M5.7).
@@ -831,13 +832,15 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
   - Features: autocomplete over the rank keys some plan sold there provides. Typing "Video quality" offers its
     values (480p to 4K), then the rest of its feature category, such as HDR and Ad free ("More in Streaming"). Each
     pick adds a chip named by the registry ("Video quality: 4K (Ultra HD)", a boolean by its own name), and chips
-    combine with AND.
+    combine with AND. A click on a chip, or on its X, removes it (M5.9).
   - Activity: Active / Inactive / Not listed (multi-select, checkboxes drawn as chips).
-  - Native pricing only.
-  - Sold in Canada (the user's country, M5.6): only plans priced where the user is, so none with only a fallback
+  - Native pricing only ("Hides prices in other currencies").
+  - Sold in Canada (the user's country, M5.6; "Only plans priced for Canada"): only plans priced where the user is, so none with only a fallback
     price ("No price for Canada yet"), and no card for a provider that isn't sold there even when the text names
     it. It starts as Settings' Search option says (P13), off unless the user turns it on there.
   - Clear all (keeps the text and the sort, and puts Sold in back to the user's default).
+  - The panel has no scrollbar of its own (M5.9): pinned below the search bar while it fits the window, and when it's
+    taller, it scrolls with the page until its foot is in view, then stays.
 - **URL state:** `?q=&sort=&min=&max=&cat=&f=video.quality%3D4k,streaming.ad-free&act=active,none&native=1&sold=1`,
   in that order, leaving defaults out: `sold` appears only when it differs from the user's default (`sold=1` on,
   `sold=0` off), and the Filters count doesn't count a default. Typing replaces the current history entry once it pauses; a run of price changes (a

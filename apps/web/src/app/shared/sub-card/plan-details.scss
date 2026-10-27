@@ -80,9 +80,9 @@ ul {
   font: var(--mat-sys-label-small);
 }
 
-// Terms and policies (M1.13, M1.14): each rating's grade as a dot in its colour, green to red, like the rank dots; the
-// grade's name is the dot's label and its tooltip. Then the topic in bold and why, muted, with a citation of each page
-// it quotes, and the pages, numbered.
+// Terms and policies (M1.13, M1.14, M5.9): each rating's grade as a dot in its colour, green to red, like the rank
+// dots, and in words beside the topic, muted. Then why, muted, with a citation of each page it quotes, and the pages,
+// numbered.
 h4 {
   margin: 8px 0 4px;
   color: var(--ss-text-muted);
@@ -98,33 +98,19 @@ h4 {
   li {
     display: flex;
     align-items: flex-start;
-    gap: 4px;
+    gap: 10px;
   }
 }
 
-// A 24 px target (WCAG 2.5.8) around the dot, centred on the first line of text (20 px).
-.grade {
-  display: inline-flex;
+// Centred on the first line of text (20 px).
+.dot {
   flex: none;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  margin: -2px 0 0 -6px;
-  padding: 0;
-  border: 0;
+  width: 12px;
+  height: 12px;
+  margin-top: 4px;
   border-radius: 50%;
-  background: none;
-  cursor: pointer;
-
-  &:hover {
-    background-color: var(--ss-state-hover);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--ss-accent-text);
-    outline-offset: 0;
-  }
+  background-color: var(--policy-fill);
+  box-shadow: 0 0 0 1px var(--ss-dot-ring);
 
   &[data-tier='great'] {
     --policy-fill: var(--policy-great);
@@ -145,14 +131,6 @@ h4 {
   &[data-tier='bad'] {
     --policy-fill: var(--policy-bad);
   }
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: var(--policy-fill);
-  box-shadow: 0 0 0 1px var(--ss-dot-ring);
 
   // Forced colours drop backgrounds: keep the dot as a shape.
   @media (forced-colors: active) {
@@ -168,6 +146,10 @@ h4 {
 .topic {
   color: var(--ss-text);
   font-weight: 600;
+}
+
+.grade {
+  font: var(--mat-sys-label-large);
 }
 
 // Underlined, so the link stands out from the text around it by more than its colour (WCAG 1.4.1).

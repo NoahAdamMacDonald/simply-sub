@@ -1117,13 +1117,11 @@ M1.14), so a buyer can see what signing up means beyond the price.
   some categories applies only to a provider with a plan in one (`validateCatalog`).
 - **On the card:** core's `planPolicies` picks, for the plan shown and the user's country, each topic's rating, by
   group in the registry's order, and the pages those ratings quote, numbered from 1. Each rating is a dot in its
-  grade's colour, green to red (`--policy-*`, section 8.1), like the rank dots: a 24 px button named by its grade,
-  which a tooltip shows on hover, keyboard focus or a tap (Material's long press is off, so a tap is a click). Then
-  the topic in bold and the reason, muted, with an inline citation of each page it quotes ("[2]", once however many
+  grade's colour, green to red (`--policy-*`, section 8.1), like the rank dots and as decorative, then the topic in
+  bold, its grade in words, muted ("Disputes (Good):", M5.9), and the reason, muted, with an inline citation of each page it quotes ("[2]", once however many
   quotes it takes from it): a link to the page with a text fragment (`#:~:text=`, core's `quoteLink`) that scrolls
   to its first quote and highlights each, and the quotes as its tooltip. The numbered pages follow, under Sources.
-  The grade's name isn't on screen until asked for, as the user chose (M1.14): screen readers read it as the dot's
-  name, and the reason says the same in words. A topic with no rating isn't shown, and a provider with none has no
+  A topic with no rating isn't shown, and a provider with none has no
   section.
 - **Read like prices:** the policy-research skill, from the provider's own pages; a page behind a bot check stays
   unread. The quotes are in the catalog files, and the card shows them in its citations' tooltips and links (about
@@ -1938,7 +1936,7 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
     --ss-danger: var(--rank-unwanted-text);  --ss-on-danger: var(--ss-on-accent);  /* ss-confirm's danger button */
     --ss-dot-ring: oklch(from var(--ss-text) l c h / 0.3);  /* a faint ring that keeps pale dots visible */
     --ss-state-tint: oklch(from var(--ss-text) l c h / 0.05);  --ss-state-hover: oklch(from var(--ss-text) l c h / 0.1);  /* a plain control drawn as a bar, at rest and hovered: a card's Hide details (M5.7) */
-    --policy-great: var(--rank-wanted);  --policy-good: #B5E61D;  --policy-neutral: var(--rank-uses);  --policy-poor: var(--rank-unused);  --policy-bad: var(--rank-unwanted);  /* Terms and policies' grade dots, green to red, with --ss-dot-ring round them; the grade's name is each dot's label and tooltip (M1.13, M1.14) */
+    --policy-great: var(--rank-wanted);  --policy-good: #B5E61D;  --policy-neutral: var(--rank-uses);  --policy-poor: var(--rank-unused);  --policy-bad: var(--rank-unwanted);  /* Terms and policies' grade dots, green to red, with --ss-dot-ring round them and the grade's name beside the topic (M1.13, M1.14, M5.9) */
     --ss-icon-tile: #FFFFFF;                 /* behind logos in both themes: sites draw icons for white (M5.2) */
   }
   [data-theme='dark'] {
@@ -2501,6 +2499,18 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
+**Resolved (2026-10-27, M5.9)**
+- **The grade in words:** each rating reads "Disputes (Good): …", the grade muted beside the bold topic, so it's on
+  screen without a hover (WCAG 1.4.1: colour isn't the only sign). The dot is decorative again, as the rank dots
+  are, and M1.14's tooltip button is gone.
+- **A click on a Features chip removes it,** as its X does (the X stays, as the sign that it can be removed). The
+  X's own click doesn't reach the chip (MatChipRemove stops it), so a click on the X removes it once.
+- **The filter panel has no scrollbar of its own:** it's pinned below the bar while it fits the window. Taller (a
+  short window, or long Features chips), it scrolls with the page until its foot is in view and stays there: its
+  `top` is the smaller of the bar's foot and the window's height less its own, which the page measures
+  (`--ss-panel-height`). Its hints are one line each ("Hides prices in other currencies", "Only plans priced for
+  Canada").
+
 **Resolved (2026-10-27, M1.15)**
 - **Proton has official resellers,** named only in Proton VPN's blog: its post on its spring and summer 2025 updates
   says "We’ve also partnered with ProxyStore … and CoinGate" and "We’re using resellers to handle these
@@ -2593,7 +2603,7 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
   scroller (phones hide their address bar, the router restores positions). The bar is outside the results' grid,
   since a sticky grid item can't leave its row, so it spans the panel's column too; the panel sticks below it
   (the page measures the bar, `--ss-pinned-height`) and scrolls on its own when it's taller than the window
-  (`cdkScrollable`, so its Features and Category popups follow it). Under 960 px the bar sticks below the top bar
+  (`cdkScrollable`, so its Features and Category popups follow it; M5.9 replaced this with no scroll of its own). Under 960 px the bar sticks below the top bar
   (`--ss-top-bar-height`, set by the shell) and is one row: the box ("Search services") and a Filters icon button
   with a badge, named "Filters, 2 applied". Sort moves to the top of the drawer, since three rows would pin about a
   third of a phone screen.
