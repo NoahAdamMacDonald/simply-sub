@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "minItems": 1,
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
+        "patternErrorMessage": "Use kebab-case segments joined by dots (video.quality, password-manager.item-types)",
+        "description": "Stable topic id (privacy.data-collection)"
+      },
+      "name": { "type": "string", "minLength": 1, "description": "Display name" },
+      "group": {
+        "type": "string",
+        "enum": ["privacy", "billing", "legal", "service"],
+        "description": "Where the card lists it"
+      },
+      "question": { "type": "string", "minLength": 1, "description": "What it rates" },
+      "tiers": {
+        "type": "object",
+        "properties": {
+          "good": { "type": "string", "minLength": 1 },
+          "leaning-good": { "type": "string", "minLength": 1 },
+          "neutral": { "type": "string", "minLength": 1 },
+          "leaning-bad": { "type": "string", "minLength": 1 },
+          "bad": { "type": "string", "minLength": 1 }
+        },
+        "required": ["good", "leaning-good", "neutral", "leaning-bad", "bad"],
+        "additionalProperties": false,
+        "description": "The rubric: what each tier means for this topic. A rating names the tier its quotes fit"
+      },
+      "categories": {
+        "minItems": 1,
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)"
+        },
+        "description": "Service categories from categories.yaml: the topic applies only to providers with a plan in one"
+      }
+    },
+    "required": ["id", "name", "group", "question", "tiers"],
+    "additionalProperties": false
+  },
+  "title": "Simply Sub policy topics",
+  "description": "data/policy-topics.yaml: what providers’ terms and policies are rated on (BLUEPRINT §4.10)"
+}

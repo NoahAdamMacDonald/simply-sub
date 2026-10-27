@@ -2,6 +2,7 @@ import * as z from 'zod';
 import { bundleSchema } from './bundle';
 import { categoriesFileSchema } from './category';
 import { featuresFileSchema } from './feature';
+import { policyTopicsFileSchema } from './policy-topic';
 import { providerSchema } from './provider';
 import { resellersFileSchema } from './reseller';
 
@@ -22,6 +23,7 @@ export function catalogJsonSchemas() {
     provider: toJsonSchema(providerSchema),
     bundle: toJsonSchema(bundleSchema),
     resellers: toJsonSchema(resellersFileSchema),
+    'policy-topics': toJsonSchema(policyTopicsFileSchema),
   };
 }
 export type CatalogFileKind = keyof ReturnType<typeof catalogJsonSchemas>;
