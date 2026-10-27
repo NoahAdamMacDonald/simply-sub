@@ -6,7 +6,7 @@
 // each filter by keyboard, the URL after each one (typing replaces its entry, a run of price changes makes one,
 // anything else adds one), a reload, Back and Forward, a URL with values the catalog doesn't have, no scroll on a
 // filter change, and under 960 px the drawer (focus, its trap, Escape, Show results, Back), a price's Add to list
-// menu by keyboard (M5.4), and M5.7's pinned bar and panel, chips that stay put, the plans' order, a lone plan's
+// menu by keyboard (M5.4), pick mode's banner, its ✕ and a price that adds at once (M5.5), and M5.7's pinned bar and panel, chips that stay put, the plans' order, a lone plan's
 // chip and the details' slide and foot, and M1.13's Terms and policies with M1.14's grade dots, their tooltips (hover,
 // keyboard and a phone's tap) and citations, with axe. GET /fx is answered with fixed rates (1 EUR ≈ CA$1.5694), so
 // Amazon.ca's Mullvad cards are cheaper in Alberta.
@@ -236,6 +236,10 @@ async function putRecord(page, table, record) {
   await page.reload();
   await page.locator('ss-sub-card').first().waitFor({ timeout: 20000 });
 }
+
+/** A list with a name of 60 characters, the most allowed, for pick mode's banner at 360 px (M5.5). */
+const LONG_LIST_ID = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4e';
+const LONG_LIST_NAME = 'Family subscriptions for Sam, Alex, Jo and the grandparents!';
 
 /** A list, Work Related, for the Add to list menu (M5.4). */
 async function addList(page) {
@@ -896,6 +900,224 @@ async function addItem(page, planId) {
       search(page) === '?addBundle=bundle.disney-crave-ads&interval=month',
       page.url(),
     );
+    await context.close();
+  }
+
+  // ── M5.5: pick mode keeps its list in the URL, and drops one that isn't (Alberta, light, 1280 px) ──────
+  {
+    const context = await newContext(browser, { locale: 'en-CA' });
+    const page = await newPage(context, 'CA pick URL');
+    await openSearch(page, 'Alberta');
+    await addList(page);
+    const banner = page.locator('.pinned .pick');
+
+    const before = await entries(page);
+    await page.goto(`${baseUrl}search?q=vpn&addTo=nope`);
+    await page.locator('ss-sub-card').first().waitFor({ timeout: 20000 });
+    await until('the URL rewritten', () => search(page) === '?q=vpn');
+    check(
+      'an addTo that names no list is dropped from the URL in place (one entry, the visit), with no banner',
+      (await entries(page)) === before + 1 && (await banner.count()) === 0,
+      `${search(page)}, ${(await entries(page)) - before} new entries`,
+    );
+
+    await page.goto(`${baseUrl}search?addTo=${LIST_ID}`);
+    await banner.waitFor({ timeout: 20000 });
+    const steps = [];
+    await type(page, 'vpn');
+    await until('the text', () => search(page) === `?q=vpn&addTo=${LIST_ID}`);
+    steps.push(search(page));
+    await page.getByRole('checkbox', { name: 'Native pricing only' }).focus();
+    await page.keyboard.press('Space');
+    await until('Native', () => search(page) === `?q=vpn&native=1&addTo=${LIST_ID}`);
+    steps.push(search(page));
+    await page.getByRole('button', { name: 'Clear all' }).focus();
+    await page.keyboard.press('Enter');
+    await until('Clear all', () => search(page) === `?q=vpn&addTo=${LIST_ID}`);
+    steps.push(search(page));
+    await page.reload();
+    await banner.waitFor({ timeout: 20000 });
+    steps.push(`reload ${search(page)}`);
+    await go(page, 'back');
+    await banner.waitFor();
+    steps.push(`back ${search(page)}`);
+    await go(page, 'forward');
+    await banner.waitFor();
+    steps.push(`forward ${search(page)}`);
+    check(
+      'addTo stays in the URL through typing, a filter, Clear all, a reload, Back and Forward, with the banner',
+      steps.join(' | ') ===
+        [
+          `?q=vpn&addTo=${LIST_ID}`,
+          `?q=vpn&native=1&addTo=${LIST_ID}`,
+          `?q=vpn&addTo=${LIST_ID}`,
+          `reload ?q=vpn&addTo=${LIST_ID}`,
+          `back ?q=vpn&native=1&addTo=${LIST_ID}`,
+          `forward ?q=vpn&addTo=${LIST_ID}`,
+        ].join(' | ') && (await shown(banner)) === 'Adding to Work Related',
+      steps.join(' | '),
+    );
+
+    // A bundle's price, in Crave's details, goes straight to the list as the bundle.
+    await page.goto(`${baseUrl}search?addTo=${LIST_ID}`);
+    await banner.waitFor({ timeout: 20000 });
+    await card(page, 'Crave').locator('button.expand').click();
+    const bundlePrice = card(page, 'Crave').locator('ss-plan-details ss-price button').first();
+    await bundlePrice.waitFor();
+    const bundleName = (await bundlePrice.ariaSnapshot()).split('\n')[0];
+    const bundlePopup = await bundlePrice.getAttribute('aria-haspopup');
+    await bundlePrice.click();
+    await until('the editor', () => page.url().includes('/lists/'));
+    check(
+      "a bundle's price adds the bundle to the list at once, with no menu",
+      new URL(page.url()).pathname.endsWith(`/lists/${LIST_ID}/edit`) &&
+        search(page) === '?addBundle=bundle.disney-crave-ads&interval=month' &&
+        /, add to Work Related"$/.test(bundleName) &&
+        bundlePopup === null,
+      `${page.url()} / ${bundleName}`,
+    );
+    await context.close();
+  }
+
+  // ── M5.5: pick mode by keyboard, with axe, both themes at both widths ───────────────────────────
+  for (const colorScheme of ['light', 'dark']) {
+    for (const viewport of [WIDE, NARROW]) {
+      const label = `${colorScheme} ${viewport.width}`;
+      const context = await newContext(browser, { locale: 'en-CA', colorScheme, viewport });
+      const page = await newPage(context, `pick ${label}`);
+      await openSearch(page, 'Alberta');
+      await addList(page);
+      await page.goto(`${baseUrl}search?addTo=${LIST_ID}`);
+      const banner = page.locator('.pinned .pick');
+      await banner.waitFor({ timeout: 20000 });
+      await page.locator('ss-sub-card').first().waitFor();
+      check(
+        `${label}: the banner names the list in the pinned bar, above the search bar`,
+        (await shown(banner)) === 'Adding to Work Related' &&
+          (await banner.evaluate((element) => element.nextElementSibling?.matches('.bar'))),
+        await shown(banner),
+      );
+      const width = await page.evaluate(() => document.documentElement.scrollWidth);
+      check(`no horizontal scroll in pick mode: ${label}`, width <= viewport.width, `${width}px`);
+      await page.screenshot({
+        path: path.join(outDir, `pick-${colorScheme}-${viewport.width}.png`),
+      });
+      await axeCheck(page, `${label}, pick mode's banner`);
+
+      // Keyboard only: Tab from the top of the page to the banner's ✕, the stop before the search box.
+      // A link's snapshot line ends in a colon: its /url follows on the next line.
+      const close = 'link "Stop adding to Work Related":';
+      const ariaLabel = () =>
+        page.evaluate(() => document.activeElement?.getAttribute('aria-label'));
+      let presses = 0;
+      while (presses < 40 && (await ariaLabel()) !== 'Stop adding to Work Related') {
+        await page.keyboard.press('Tab');
+        presses++;
+      }
+      const atClose = await stop(page);
+      await page.keyboard.press('Tab');
+      const next = await focused(page);
+      await page.keyboard.press('Shift+Tab');
+      await sleep(300);
+      await banner.screenshot({
+        path: path.join(outDir, `pick-close-focus-${colorScheme}-${viewport.width}.png`),
+      });
+      check(
+        `${label}: Tab reaches the banner's ✕ (${presses} presses), and the search box comes next`,
+        atClose === close && next.type === 'search' && (await stop(page)) === close,
+        `${atClose}, then ${next.tag} ${next.type}`,
+      );
+      await page.keyboard.press('Enter');
+      await until('the editor', () => page.url().includes('/lists/'));
+      check(
+        `${label}: Enter on the ✕ goes back to the list's editor, adding nothing`,
+        new URL(page.url()).pathname.endsWith(`/lists/${LIST_ID}/edit`) &&
+          search(page) === '' &&
+          (await page.locator('.adding').count()) === 0,
+        page.url(),
+      );
+
+      // The editor's [+ Add from catalog], by keyboard, opens Search in pick mode again.
+      const fromCatalog = page.getByRole('link', { name: 'Add from catalog' });
+      await fromCatalog.waitFor();
+      presses = 0;
+      while (
+        presses < 40 &&
+        !(await fromCatalog.evaluate((link) => link === document.activeElement))
+      ) {
+        await page.keyboard.press('Tab');
+        presses++;
+      }
+      await page.keyboard.press('Enter');
+      await banner.waitFor({ timeout: 20000 });
+      await page.locator('ss-sub-card').first().waitFor();
+      check(
+        `${label}: [+ Add from catalog] opens Search in pick mode for the list`,
+        new URL(page.url()).pathname.endsWith('/search') && search(page) === `?addTo=${LIST_ID}`,
+        page.url(),
+      );
+
+      // Tab on to the first card's first price: a plain button that says where it adds.
+      presses = 0;
+      while (
+        presses < 60 &&
+        !(await page.evaluate(() => !!document.activeElement?.closest('ss-sub-card ss-price')))
+      ) {
+        await page.keyboard.press('Tab');
+        presses++;
+      }
+      const price = await stop(page);
+      const popup = await page.evaluate(() => document.activeElement.getAttribute('aria-haspopup'));
+      await page.keyboard.press('Enter');
+      await until('the editor', () => page.url().includes('/lists/'));
+      await page.locator('.adding').waitFor();
+      const adding = (await page.locator('.adding').textContent()).replace(/\s+/g, ' ').trim();
+      check(
+        `${label}: Enter on a price adds its plan and period to the list at once, with no menu`,
+        /^button ".*, add to Work Related"$/.test(price) &&
+          popup === null &&
+          new URL(page.url()).pathname.endsWith(`/lists/${LIST_ID}/edit`) &&
+          /^\?add=[a-z0-9.-]+&interval=(day|week|month|year)(&count=\d+)?$/.test(search(page)) &&
+          /, billed .+, will be added here once the list editor is ready\.$/.test(adding),
+        `${price} → ${search(page)} / ${adding}`,
+      );
+      if (viewport === WIDE && colorScheme === 'light') {
+        await page.screenshot({ path: path.join(outDir, 'pick-editor-1280.png') });
+      }
+      await axeCheck(page, `${label}, the editor after a pick`);
+      await context.close();
+    }
+  }
+
+  // ── M5.5: a list name of 60 characters wraps in the banner at 360 px (dark) ───────────────────────
+  {
+    const context = await newContext(browser, {
+      locale: 'en-CA',
+      colorScheme: 'dark',
+      viewport: NARROW,
+    });
+    const page = await newPage(context, 'pick long name');
+    await openSearch(page, 'Alberta');
+    await putRecord(page, 'lists', {
+      id: LONG_LIST_ID,
+      name: LONG_LIST_NAME,
+      createdAt: '2026-10-21T12:00:00.000Z',
+      updatedAt: '2026-10-21T12:00:00.000Z',
+    });
+    await page.goto(`${baseUrl}search?addTo=${LONG_LIST_ID}`);
+    const banner = page.locator('.pinned .pick');
+    await banner.waitFor({ timeout: 20000 });
+    const width = await page.evaluate(() => document.documentElement.scrollWidth);
+    const box = await banner.getByRole('link').boundingBox();
+    check(
+      'a 60-character list name wraps in the banner at 360 px, its ✕ on screen, no horizontal scroll',
+      (await shown(banner)) === `Adding to ${LONG_LIST_NAME}` &&
+        width <= NARROW.width &&
+        box.x + box.width <= NARROW.width,
+      `${width}px, ✕ ends at ${box.x + box.width}px`,
+    );
+    await page.screenshot({ path: path.join(outDir, 'pick-long-name-dark-360.png') });
+    await axeCheck(page, 'dark 360, a long list name in the banner');
     await context.close();
   }
 

@@ -59,10 +59,10 @@
         @for (price of plan.pricing; track $index) {
           <ss-price
             clickable
-            action="add to a list"
+            [action]="addMenu.action()"
             [price]="price"
-            [menu]="addMenu.menu()"
-            (priceSelect)="addMenu.prepare(planRequest(plan.plan.id, $event))"
+            [menu]="addMenu.panel()"
+            (priceSelect)="addMenu.add(planRequest(plan.plan.id, $event))"
           />
         }
         @if (plan.availability === 'unknown') {
@@ -129,5 +129,5 @@
   }
 </article>
 
-<!-- One menu for every price on the card: each says what it adds before it opens it. -->
-<ss-add-to-list-menu #addMenu />
+<!-- One menu for every price on the card: each says what it adds before it opens it. In pick mode, none opens. -->
+<ss-add-to-list-menu #addMenu [list]="pickList()" />

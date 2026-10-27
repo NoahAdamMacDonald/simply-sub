@@ -1,4 +1,4 @@
-import { signal, type WritableSignal } from '@angular/core';
+import { Component, signal, type WritableSignal } from '@angular/core';
 import { Location } from '@angular/common';
 import { provideLocationMocks, SpyLocation } from '@angular/common/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
@@ -10,12 +10,21 @@ import { MatSelectHarness } from '@angular/material/select/testing';
 import { MatSliderHarness } from '@angular/material/slider/testing';
 import { Router, provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import type { CatalogData, ListItem, ProfileRank, RankKey, Settings } from '@simply-sub/core';
+import type {
+  CatalogData,
+  ListItem,
+  ProfileRank,
+  RankKey,
+  Settings,
+  SubscriptionList,
+} from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { ClockService } from '../../core/clock/clock-service';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { ItemsRepository } from '../../core/storage/items-repository';
+import { ListsRepository } from '../../core/storage/lists-repository';
 import { RankingsRepository } from '../../core/storage/rankings-repository';
+import type { StorageStatus } from '../../core/storage/record-repository';
 import { DRAWER_BREAKPOINT } from '../../layout/shell';
 import {
   alberta,
@@ -28,20 +37,37 @@ import { SearchPage, searchDelayMs } from './search-page';
 // Search's small catalog for an Albertan (search.testing.ts): Mullvad (one EUR price, converted), Netflix (Premium
 // in the US only), Proton, Crave (Premium in 4K) and Hulu (US only).
 
+/** Where a price or the pick-mode banner's ✕ goes: the list editor, a placeholder until M6.4. */
+@Component({ template: '' })
+class ListEditStub {}
+
 describe('SearchPage', () => {
   let harness: RouterTestingHarness;
   let catalog: WritableSignal<CatalogData | undefined>;
   let settings: WritableSignal<Settings | undefined>;
+  let lists: WritableSignal<readonly SubscriptionList[]>;
+  let listsStatus: WritableSignal<StorageStatus>;
   let location: SpyLocation;
 
-  /** Opens Search at `url`, as a reload or a link does, on a wide screen unless `narrow`, for an Albertan unless `as`. */
+  /**
+   * Opens Search at `url`, as a reload or a link does, on a wide screen unless `narrow`, for an Albertan unless `as`,
+   * with no lists unless `withLists`.
+   */
   async function open(
     url = '/search',
     {
       narrow = false,
       loaded = true,
       as = alberta,
-    }: { narrow?: boolean; loaded?: boolean; as?: Settings } = {},
+      withLists = [],
+      listsLoaded = true,
+    }: {
+      narrow?: boolean;
+      loaded?: boolean;
+      as?: Settings;
+      withLists?: readonly SubscriptionList[];
+      listsLoaded?: boolean;
+    } = {},
   ): Promise<void> {
     vi.stubGlobal('matchMedia', (query: string) => ({
       matches: narrow && query === DRAWER_BREAKPOINT,
@@ -56,11 +82,21 @@ describe('SearchPage', () => {
         ...searchStores(),
         { provide: ItemsRepository, useValue: { records: signal<readonly ListItem[]>([]) } },
         {
+          provide: ListsRepository,
+          useValue: {
+            records: (lists = signal(withLists)),
+            status: (listsStatus = signal<StorageStatus>(listsLoaded ? 'ready' : 'loading')),
+          },
+        },
+        {
           provide: RankingsRepository,
           useValue: { ranks: signal<ReadonlyMap<RankKey, ProfileRank>>(new Map()) },
         },
         { provide: ClockService, useValue: { today: signal(today) } },
-        provideRouter([{ path: 'search', component: SearchPage }]),
+        provideRouter([
+          { path: 'search', component: SearchPage },
+          { path: 'lists/:listId/edit', component: ListEditStub },
+        ]),
         provideLocationMocks(),
         { provide: MATERIAL_ANIMATIONS, useValue: { animationsDisabled: true } },
       ],
@@ -452,6 +488,131 @@ describe('SearchPage', () => {
         await settle();
         expect(document.querySelector('mat-dialog-container')).toBeNull();
       });
+    });
+  });
+
+  describe('pick mode (M5.5)', () => {
+    const work = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d';
+    const workRelated: SubscriptionList = {
+      id: work,
+      name: 'Work Related',
+      createdAt: '2026-10-20T12:00:00.000Z',
+      updatedAt: '2026-10-20T12:00:00.000Z',
+    };
+    const banner = () => element().querySelector('.pinned .pick');
+    const close = () => banner()?.querySelector<HTMLAnchorElement>('a');
+    const prices = (provider: string) =>
+      Array.from(element().querySelectorAll('ss-sub-card'))
+        .find((card) => card.querySelector('h2')?.textContent === provider)
+        ?.querySelectorAll<HTMLButtonElement>('ss-price button') ?? [];
+
+    it.each([
+      ['on a wide screen', false],
+      ['under 960 px', true],
+    ])('names the list in a banner above the search bar, %s', async (_, narrow) => {
+      await open(`/search?addTo=${work}`, { narrow, withLists: [workRelated] });
+
+      expect(banner()?.querySelector('p')?.textContent?.trim()).toBe('Adding to Work Related');
+      expect(banner()?.nextElementSibling?.classList).toContain('bar');
+      expect(close()?.getAttribute('aria-label')).toBe('Stop adding to Work Related');
+      expect(close()?.getAttribute('href')).toBe(`/lists/${work}/edit`);
+      // Every price says where it adds, and opens no menu.
+      const price = prices('Netflix')[0];
+      expect(price.textContent).toContain(', add to Work Related');
+      expect(price.hasAttribute('aria-haspopup')).toBe(false);
+    });
+
+    it('goes back to the list’s editor from the ✕, adding nothing', async () => {
+      await open(`/search?q=netflix&addTo=${work}`, { withLists: [workRelated] });
+      close()?.click();
+      await settle();
+
+      expect(location.path()).toBe(`/lists/${work}/edit`);
+    });
+
+    it('takes a price straight to the list’s editor, and a bundle’s price as the bundle', async () => {
+      await open(`/search?addTo=${work}`, { withLists: [workRelated] });
+      prices('Netflix')[0].click();
+      await settle();
+      expect(location.path()).toBe(`/lists/${work}/edit?add=netflix.standard-ads&interval=month`);
+      expect(document.querySelector('.mat-mdc-menu-panel')).toBeNull();
+
+      await go('back');
+      const crave = () =>
+        Array.from(element().querySelectorAll('ss-sub-card')).find(
+          (card) => card.querySelector('h2')?.textContent === 'Crave',
+        );
+      crave()?.querySelectorAll<HTMLInputElement>('input[type=radio]')[1].click();
+      await settle();
+      crave()?.querySelector<HTMLButtonElement>('button.expand')?.click();
+      await settle();
+      // Crave Premium's own price, then the Netflix and Crave bundle's.
+      prices('Crave')[1].click();
+      await settle();
+      expect(location.path()).toBe(
+        `/lists/${work}/edit?addBundle=bundle.netflix-crave&interval=month`,
+      );
+    });
+
+    it('keeps the list through typing, filters, Clear all, Back and Forward', async () => {
+      await open(`/search?addTo=${work}`, { withLists: [workRelated] });
+      type('vpn');
+      await pause();
+      expect(location.path()).toBe(`/search?q=vpn&addTo=${work}`);
+
+      element().querySelectorAll<HTMLInputElement>('.activity input')[2].click();
+      await settle();
+      expect(location.path()).toBe(`/search?q=vpn&act=none&addTo=${work}`);
+
+      button('Clear all')?.click();
+      await settle();
+      expect(location.path()).toBe(`/search?q=vpn&addTo=${work}`);
+
+      await go('back');
+      expect(location.path()).toBe(`/search?q=vpn&act=none&addTo=${work}`);
+      expect(banner()).not.toBeNull();
+      await go('forward');
+      expect(location.path()).toBe(`/search?q=vpn&addTo=${work}`);
+      expect(banner()).not.toBeNull();
+    });
+
+    it('keeps it when the empty state clears the filters, and doesn’t count it as one', async () => {
+      await open(`/search?q=gym&native=1&addTo=${work}`, {
+        narrow: true,
+        withLists: [workRelated],
+      });
+      expect(element().querySelector('.open-filters')?.getAttribute('aria-label')).toBe(
+        'Filters, 1 applied',
+      );
+
+      button('Clear filters')?.click();
+      await settle();
+      expect(location.path()).toBe(`/search?q=gym&addTo=${work}`);
+      expect(element().querySelector('.open-filters')?.getAttribute('aria-label')).toBe('Filters');
+    });
+
+    it('drops a list that isn’t one from the URL in place, once the lists have loaded', async () => {
+      await open(`/search?q=vpn&addTo=${work}`, { listsLoaded: false });
+      expect(location.path()).toBe(`/search?q=vpn&addTo=${work}`);
+
+      const from = location.urlChanges.length;
+      listsStatus.set('ready');
+      await settle();
+      expect(urlChanges(from)).toEqual(['replace: /search?q=vpn']);
+      expect(banner()).toBeNull();
+      expect(prices('Mullvad VPN')[0].getAttribute('aria-haspopup')).toBe('menu');
+    });
+
+    it('drops a list deleted while it’s open', async () => {
+      await open(`/search?q=vpn&addTo=${work}`, { withLists: [workRelated] });
+      expect(banner()).not.toBeNull();
+
+      const from = location.urlChanges.length;
+      // A deleted list leaves the repository's records.
+      lists.set([]);
+      await settle();
+      expect(urlChanges(from)).toEqual(['replace: /search?q=vpn']);
+      expect(banner()).toBeNull();
     });
   });
 });

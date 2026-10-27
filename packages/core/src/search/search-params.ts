@@ -1,5 +1,6 @@
 import type { CatalogData } from '../catalog/snapshot';
 import { rankKeyOptions } from '../ranking/rank-keys';
+import type { SubscriptionList } from '../user/subscription-list';
 import { providerSorts } from './providers-query';
 import type { ActivityFilter, CatalogQuery } from './search-catalog';
 
@@ -8,7 +9,9 @@ import type { ActivityFilter, CatalogQuery } from './search-catalog';
 // the page rewrites a URL that had anything else: an unknown parameter, sort, category, rank key or activity, an
 // amount that isn't one, a minimum above the maximum, Best match without text. Writing leaves out what's empty or the
 // default and lists Activity in a fixed order, so the query a URL reads to writes that URL again. Sold in starts as
-// the user's setting says (M5.6), so the URL has `sold` only when it differs: sold=1 turns it on, sold=0 off.
+// the user's setting says (M5.6), so the URL has `sold` only when it differs: sold=1 turns it on, sold=0 off. Pick
+// mode's addTo=<list id> (P7, flow F2, M5.5) comes last and isn't a filter: it's kept while it names one of the
+// user's lists.
 
 export const searchParamNames = [
   'q',
@@ -20,6 +23,7 @@ export const searchParamNames = [
   'act',
   'native',
   'sold',
+  'addTo',
 ] as const;
 export type SearchParamName = (typeof searchParamNames)[number];
 /** The URL's query parameters, in P8's order. */
@@ -27,6 +31,12 @@ export type SearchParams = Partial<Record<SearchParamName, string>>;
 
 /** A query string's parameters as a router gives them: a repeated one as a list. */
 export type QueryParams = Readonly<Record<string, string | readonly string[] | undefined>>;
+
+/** Search's state in its URL: the catalog query, and in pick mode the list a price adds to. */
+export interface SearchQuery extends CatalogQuery {
+  /** Pick mode (P7, flow F2, M5.5): the id of the list a price click adds to, with no menu. Not a filter. */
+  addTo?: string;
+}
 
 /** What a filter is when the URL doesn't say: Settings' choice for Sold in (searchSoldOnly). */
 export interface SearchDefaults {
@@ -48,13 +58,15 @@ export function searchText(text: string): string {
 /**
  * The query in `params`, keeping what's valid in `catalog`: its service categories and rank keys. A repeated list
  * (f, act) keeps every value, and any other repeated parameter its first. A minimum of 0 is no minimum, and a minimum
- * above the maximum drops both. Sold in is on with sold=1, off with sold=0, and else as `defaults` say.
+ * above the maximum drops both. Sold in is on with sold=1, off with sold=0, and else as `defaults` say. An addTo is
+ * kept only when it names one of `lists`, the user's lists that aren't deleted.
  */
 export function readSearchParams(
   params: QueryParams,
   catalog: Pick<CatalogData, 'features' | 'categories'>,
   defaults: SearchDefaults = {},
-): CatalogQuery {
+  lists: readonly Pick<SubscriptionList, 'id'>[] = [],
+): SearchQuery {
   const one = (name: SearchParamName) => {
     const value = params[name];
     return typeof value === 'string' ? value : value?.[0];
@@ -84,6 +96,7 @@ export function readSearchParams(
   }
   const sold = one('sold');
   const soldOnly = sold === '1' || (sold !== '0' && defaults.soldOnly === true);
+  const addTo = lists.find((list) => list.id === one('addTo'))?.id;
 
   return {
     ...(q !== undefined && { q }),
@@ -95,17 +108,16 @@ export function readSearchParams(
     ...(activity.length > 0 && { activity }),
     ...(one('native') === '1' && { nativeOnly: true }),
     ...(soldOnly && { soldOnly: true }),
+    ...(addTo !== undefined && { addTo }),
   };
 }
 
 /**
  * The URL's parameters for `query`, leaving out empty text and lists, Native pricing only when it's off, Sold in
- * when it's as `defaults` say, a minimum of 0 and Best match without text. Amounts are written to the cent.
+ * when it's as `defaults` say, a minimum of 0 and Best match without text. Amounts are written to the cent, and pick
+ * mode's list comes last.
  */
-export function writeSearchParams(
-  query: CatalogQuery,
-  defaults: SearchDefaults = {},
-): SearchParams {
+export function writeSearchParams(query: SearchQuery, defaults: SearchDefaults = {}): SearchParams {
   const q = searchText(query.q ?? '');
   const { sort, category, features = [], activity = [], minPrice, maxPrice } = query;
   const params: SearchParams = {
@@ -125,6 +137,9 @@ export function writeSearchParams(
   }
   if ((query.soldOnly === true) !== (defaults.soldOnly === true)) {
     params.sold = query.soldOnly ? '1' : '0';
+  }
+  if (query.addTo !== undefined) {
+    params.addTo = query.addTo;
   }
   return params;
 }

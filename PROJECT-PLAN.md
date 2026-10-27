@@ -167,7 +167,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M5.2 | Search page layout, results and the search sub-card with expand (P8): the search box (150 ms pause) and Sort, `ss-sub-card`'s search variant (§4.3, moved from M4.5) with plan chips, "Cheaper at" resellers from each plan's `deals` (`searchCatalog`, BLUEPRINT §4.9), and the expanded card (`ss-plan-details`): features with the user's ranks, add-ons, bundles with savings, a suite's plans and savings (core's `planExtras`), perks, notes and the price's date; loading, no-match and not-offered states; logos on a white tile in both themes (BLUEPRINT §14) | P8 layout criteria met |
 | M5.3 | Filter panel + URL state (P8): `ss-search-filters` (the price per month up to the catalog's priciest plan, Category, Features over rank keys with chips, Activity, Native pricing only, Clear all) beside the results, and in a drawer opened by a Filters button under 960 px; core's `readSearchParams` and `writeSearchParams` (values the catalog doesn't have are dropped and the URL rewritten), `searchFilterOptions`, `featureSuggestions`, `filterCount` and `rankKeyLabel`; typing replaces its history entry, a run of price changes makes one, anything else adds one (BLUEPRINT §14) | Filters survive a reload and back/forward; filtering for 4k shows each provider's cheapest 4k plan; "Native pricing only" hides converted prices |
 | M5.4 | Add-to-list menu → edit page with `?add=` (flows F1 and F4): `ss-add-to-list-menu`, one per Search card, opened by its prices and its bundles' prices (`ss-price`'s `menu` and `action`); core's `addRequestParams` and `readAddRequest` (`add` or `addBundle`, `interval`, and `count` above 1); until M6.3–M6.5 the editor says what it will add (BLUEPRINT §14) | F1 works end to end (needs M6.3–M6.5; stub it until then) |
-| M5.5 | Pick mode `?addTo=` (flow F2) | F2 works end to end |
+| M5.5 | Pick mode `?addTo=` (flow F2, P7, P8): a banner "Adding to <list> ✕" in the pinned bar at both widths, its ✕ back to `/lists/<id>/edit`; in pick mode a price, or a bundle's price, goes straight to the editor with core's `addRequestParams`, with no menu (add-on and reseller prices as before); core's `readSearchParams` and `writeSearchParams` keep `addTo` (last, not a filter) while it names one of the user's lists, and drop it otherwise; the placeholder editor's [+ Add from catalog] (BLUEPRINT §14) | F2 works end to end, ending on the placeholder's message until M6.3–M6.5; `addTo` survives filter changes, typing, Clear all, a reload and Back/Forward; an unknown or deleted list is dropped from the URL in place, with no banner |
 | M5.6 | "Sold in <country>" filter (added 2026-10-26): `CatalogQuery.soldOnly` in core's `searchCatalog`, `sold=1`/`sold=0` against the user's default (`SearchDefaults` in `readSearchParams`, `writeSearchParams` and `filterCount`), the panel's checkbox, and Settings' Search option `searchSoldOnly` (P8, P13; BLUEPRINT §14) | A UK user with Sold in on sees no fallback prices, a provider not sold there doesn't show even when named, and the Settings default holds across reloads with `sold=0` turning it off |
 | M5.7 | Search fixes (added 2026-10-27, P8): nothing paints over the top bar; the search bar and the filter panel stay pinned while the results scroll (under 960 px one row, the box and a Filters icon button with a badge, Sort in the drawer); plan chips stay in place when switching plans, a lone plan shows its chip, and plans go cheapest first by their shortest billing period's price (core's `searchProviders`); the expanded section slides open and shut, closes from a "Hide details" bar at its foot, and keeps the card in view (BLUEPRINT §14) | Scrolled down, the bar and panel stay put at 360 and 1280 px; picking plans moves no chip; TSN lists Standard before Premium; Hide details closes the section and keeps the card on screen |
 | M5.8 | Features chips that fit (added 2026-10-27, P8): a long chip ("Download devices: Downloads on 6+ devices") wraps inside its field instead of scrolling the panel or drawer sideways (a global `.ss-wrapping-chips`, since Material keeps a chip's label on one line), and its remove button is centred (BLUEPRINT §14) | No sideways scroll in the panel at 1280 px or the drawer at 360 px with the longest chip; its remove button is centred on it |
@@ -657,7 +657,8 @@ Unsaved changes · This month $26.52 · ≈ $26.52 / mo average
   - Then replaces the URL with `/lists/<newId>/edit`.
   - Nothing is saved to the lists table until Save.
 - The name is required, with a maximum of 60 characters.
-- [+ Add from catalog] → `/search?addTo=<listId>` (flow F2).
+- [+ Add from catalog] → `/search?addTo=<listId>` (flow F2). On a new list it needs the draft's id (M6.3), and Search
+  has to count the draft's list as one it can add to, since it isn't in the lists table until Save (BLUEPRINT §14).
 - [+ Add custom subscription] → a menu of existing custom subscriptions plus "Create new…" (the P12 editor) → item dialog.
 - ✎ opens the item dialog (P6) for that item. 🗑 removes it from the draft, with Undo in a snackbar.
 - ⋮ → Delete list (confirm) → soft delete → `/lists`.
@@ -847,7 +848,12 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
   drag, or arrow keys) makes one entry; every other change adds one, so Back undoes the last filter. A value the
   catalog doesn't have (an unknown sort, category, rank key or parameter, a bad amount, a minimum above the maximum,
   Best match without text) is dropped and the URL rewritten in place. A filter change doesn't scroll the page.
-- **Pick mode:** `?addTo=<listId>` shows a banner "Adding to Work Related ✕", and price clicks go straight to F2.
+- **Pick mode** (M5.5): `?addTo=<listId>` shows a banner "Adding to Work Related ✕" at the top of the pinned bar,
+  above the search box at both widths, and price clicks, a bundle's too, go straight to F2 with no menu (add-on and
+  reseller prices stay text). The ✕ goes back to `/lists/<id>/edit` without adding anything. `addTo` comes last in
+  the URL and isn't a filter (the Filters count leaves it out, and Clear all keeps it); it survives every filter
+  change, typing, a reload and Back/Forward. One that names no list, or a deleted one, is dropped and the URL
+  rewritten in place.
 
 **States:**
 - First load → skeleton cards.

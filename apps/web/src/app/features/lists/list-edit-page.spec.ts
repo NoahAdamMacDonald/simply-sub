@@ -41,4 +41,16 @@ describe('ListEditPage', () => {
   it('says nothing without a request, or with one that isn’t', async () => {
     expect(adding(await open('/lists/list-1/edit'))).toBeUndefined();
   });
+
+  it('opens Search in pick mode for the list from [+ Add from catalog] (M5.5)', async () => {
+    const link = (await open('/lists/list-1/edit?add=netflix.standard')).querySelector('a');
+
+    expect(link?.textContent?.replace('add', '').trim()).toBe('Add from catalog');
+    expect(link?.querySelector('mat-icon')?.getAttribute('aria-hidden')).toBe('true');
+    expect(link?.getAttribute('href')).toBe('/search?addTo=list-1');
+  });
+
+  it('has no [+ Add from catalog] on a new list, which has no id yet', async () => {
+    expect((await open('/lists/new')).querySelector('a')).toBeNull();
+  });
 });
