@@ -39,6 +39,31 @@ export interface ModifyOptions {
   invalid?: 'refuse' | 'replace';
 }
 
+/**
+ * The tables whose records are deleted outright rather than soft-deleted: the caches, and drafts, which are edits not
+ * saved yet, so a sync has no deletion to pass on.
+ */
+export type TransientTable = CacheTable | 'drafts';
+
+/** What a StorageEngine.transaction reads and writes, every record checked on the way in and out. */
+export interface StorageTransaction {
+  /**
+   * The record stored under `key`, if there's one. One that fails its schema is refused (an InvalidRecordError), or
+   * read as undefined with `invalid: 'replace'`, for a record that's then replaced whole.
+   */
+  get<T extends UserTable>(
+    table: T,
+    key: string,
+    options?: ModifyOptions,
+  ): Promise<UserRecords[T] | undefined>;
+  /** Every valid record in `table`, soft-deleted ones included. */
+  getAll<T extends UserTable>(table: T): Promise<UserRecords[T][]>;
+  /** Stores `record` in place of any with its key. Throws an InvalidRecordError if it fails its schema. */
+  put<T extends UserTable>(table: T, record: UserRecords[T]): Promise<void>;
+  /** Deletes a record outright. */
+  delete(table: TransientTable, key: string): Promise<void>;
+}
+
 /** The repositories' way into Dexie. Every record is checked against its schema on the way in and out. */
 export class StorageEngine {
   constructor(
@@ -136,6 +161,40 @@ export class StorageEngine {
       await rows.bulkPut(checked);
     });
     this.options.onWrite();
+  }
+
+  /**
+   * Runs `work` in one transaction on `tables`: everything it writes is stored together, or nothing is if it throws.
+   * Watchers see the changes together. `work` may only await the transaction's own reads and writes, since IndexedDB
+   * commits a transaction once nothing more is asked of it.
+   */
+  async transaction<R>(
+    tables: readonly UserTable[],
+    work: (transaction: StorageTransaction) => Promise<R>,
+  ): Promise<R> {
+    let written = false;
+    const result = await this.db.transaction(
+      'rw',
+      tables.map((table) => this.db.table(table)),
+      () =>
+        work({
+          get: async (table, key, { invalid = 'refuse' } = {}) => {
+            const row = await this.db.table<unknown, string>(table).get(key);
+            return row === undefined ? undefined : this.readOne(table, row, invalid);
+          },
+          getAll: (table) => this.read(table),
+          put: async (table, record) => {
+            await this.db.table(table).put(checkRecord(table, record));
+            written = true;
+          },
+          delete: async (table, key) => {
+            await this.db.table(table).delete(key);
+            written = true;
+          },
+        }),
+    );
+    if (written) this.options.onWrite();
+    return result;
   }
 
   close(): void {

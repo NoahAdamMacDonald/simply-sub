@@ -10,17 +10,21 @@ import { MatSelectHarness } from '@angular/material/select/testing';
 import { MatSliderHarness } from '@angular/material/slider/testing';
 import { Router, provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import type {
-  CatalogData,
-  ListItem,
-  ProfileRank,
-  RankKey,
-  Settings,
-  SubscriptionList,
+import {
+  newListDraft,
+  startDraft,
+  type CatalogData,
+  type ListDraft,
+  type ListItem,
+  type ProfileRank,
+  type RankKey,
+  type Settings,
+  type SubscriptionList,
 } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { ClockService } from '../../core/clock/clock-service';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { DraftsRepository } from '../../core/storage/drafts-repository';
 import { ItemsRepository } from '../../core/storage/items-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
 import { RankingsRepository } from '../../core/storage/rankings-repository';
@@ -47,11 +51,13 @@ describe('SearchPage', () => {
   let settings: WritableSignal<Settings | undefined>;
   let lists: WritableSignal<readonly SubscriptionList[]>;
   let listsStatus: WritableSignal<StorageStatus>;
+  let drafts: WritableSignal<readonly ListDraft[]>;
+  let draftsStatus: WritableSignal<StorageStatus>;
   let location: SpyLocation;
 
   /**
    * Opens Search at `url`, as a reload or a link does, on a wide screen unless `narrow`, for an Albertan unless `as`,
-   * with no lists unless `withLists`.
+   * with no lists unless `withLists`, and no lists' drafts unless `withDrafts`.
    */
   async function open(
     url = '/search',
@@ -61,12 +67,16 @@ describe('SearchPage', () => {
       as = alberta,
       withLists = [],
       listsLoaded = true,
+      withDrafts = [],
+      draftsLoaded = true,
     }: {
       narrow?: boolean;
       loaded?: boolean;
       as?: Settings;
       withLists?: readonly SubscriptionList[];
       listsLoaded?: boolean;
+      withDrafts?: readonly ListDraft[];
+      draftsLoaded?: boolean;
     } = {},
   ): Promise<void> {
     vi.stubGlobal('matchMedia', (query: string) => ({
@@ -86,6 +96,13 @@ describe('SearchPage', () => {
           useValue: {
             records: (lists = signal(withLists)),
             status: (listsStatus = signal<StorageStatus>(listsLoaded ? 'ready' : 'loading')),
+          },
+        },
+        {
+          provide: DraftsRepository,
+          useValue: {
+            drafts: (drafts = signal(withDrafts)),
+            status: (draftsStatus = signal<StorageStatus>(draftsLoaded ? 'ready' : 'loading')),
           },
         },
         {
@@ -601,6 +618,52 @@ describe('SearchPage', () => {
       expect(urlChanges(from)).toEqual(['replace: /search?q=vpn']);
       expect(banner()).toBeNull();
       expect(prices('Mullvad VPN')[0].getAttribute('aria-haspopup')).toBe('menu');
+    });
+
+    describe('with drafts (M6.3)', () => {
+      const fresh = newListDraft(
+        '0192f1c9-5061-7273-8e8f-9a0b1c2d3e4f',
+        'Subscription List',
+        '2026-10-26T08:00:00.000Z',
+      );
+
+      it('adds to a new list, which has only its draft until Save', async () => {
+        await open(`/search?q=vpn&addTo=${fresh.listId}`, { withDrafts: [fresh] });
+
+        expect(location.path()).toBe(`/search?q=vpn&addTo=${fresh.listId}`);
+        expect(banner()?.querySelector('p')?.textContent?.trim()).toBe(
+          'Adding to Subscription List',
+        );
+        expect(close()?.getAttribute('href')).toBe(`/lists/${fresh.listId}/edit`);
+        expect(prices('Mullvad VPN')[0].textContent).toContain('add to Subscription List');
+      });
+
+      it('names a list as its draft does', async () => {
+        const renamed = { ...startDraft(workRelated, [], fresh.startedAt), name: 'Work' };
+        await open(`/search?addTo=${work}`, { withLists: [workRelated], withDrafts: [renamed] });
+        expect(banner()?.querySelector('p')?.textContent?.trim()).toBe('Adding to Work');
+      });
+
+      it('waits for the drafts before it drops a list it can’t find', async () => {
+        await open(`/search?q=vpn&addTo=${fresh.listId}`, { draftsLoaded: false });
+        expect(location.path()).toBe(`/search?q=vpn&addTo=${fresh.listId}`);
+
+        drafts.set([fresh]);
+        draftsStatus.set('ready');
+        await settle();
+        expect(location.path()).toBe(`/search?q=vpn&addTo=${fresh.listId}`);
+        expect(banner()).not.toBeNull();
+      });
+
+      it('drops a new list whose draft is cancelled while it’s open', async () => {
+        await open(`/search?q=vpn&addTo=${fresh.listId}`, { withDrafts: [fresh] });
+
+        const from = location.urlChanges.length;
+        drafts.set([]);
+        await settle();
+        expect(urlChanges(from)).toEqual(['replace: /search?q=vpn']);
+        expect(banner()).toBeNull();
+      });
     });
 
     it('drops a list deleted while it’s open', async () => {

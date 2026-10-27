@@ -11,6 +11,7 @@ import {
   card,
   catalogCache,
   customSub,
+  draft,
   fxCache,
   item,
   list,
@@ -30,6 +31,7 @@ describe('userRecordSchemas', () => {
     ['tags', tag],
     ['settings', settings],
     ['catalogCache', catalogCache],
+    ['drafts', draft],
     ['fxRates', fxCache],
   ] as const)('checks the %s table with its record schema', (table, record) => {
     expect(userRecordSchemas[table].safeParse(record).success).toBe(true);
@@ -105,6 +107,13 @@ describe('readRecords', () => {
     expect(settingsKey.rejected[0]).not.toHaveProperty('key');
     const regionKey = readRecords('settings', [{ ...settings, key: 'CA' }]);
     expect(regionKey.rejected[0]).not.toHaveProperty('key');
+  });
+
+  it("keys a draft by its list's id", () => {
+    const { rejected } = readRecords('drafts', [{ ...draft, startedAt: 'yesterday' }]);
+    expect(rejected).toEqual([
+      { table: 'drafts', key: listId, issues: ['startedAt: invalid_format'] },
+    ]);
   });
 
   it.each([null, 'a list', 42, []])('rejects %j, which is not a record', (row) => {

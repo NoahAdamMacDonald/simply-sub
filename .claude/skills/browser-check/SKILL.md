@@ -121,6 +121,14 @@ all through its confirmation by keyboard (focus on Cancel); with Mullvad listed,
 subscription"; and in both themes at both widths, axe with ranked rows and with no match, and no horizontal scroll
 (an open set's rows at 360 px too), with axe on an open dropdown, the Set all menu and the confirmation at 1280 px.
 
+`check-drafts.cjs` (M6.3) checks list drafts on `ng serve` for a Canadian in Alberta: `/lists/new` making a new
+list's draft (read from IndexedDB, with nothing in the lists table) and replacing its URL with `/lists/<id>/edit`, so
+Back skips it; the editor's [+ Add from catalog] by keyboard opening pick mode with the banner "Adding to Subscription
+List"; a price by keyboard back to the editor; a reload keeping the same draft and `/search?addTo=<new id>` keeping
+its banner; Search's New list… landing on the new list's editor with one history entry; and with a saved
+"Subscription List", the next new list named "Subscription List 2". Both themes at both widths, with axe and no
+horizontal scroll. Its base URL ends in `/`.
+
 ## Gotchas
 
 - Every new browser context starts with no settings, so the first-run dialog (M4.2) covers the page until it's

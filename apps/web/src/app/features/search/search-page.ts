@@ -30,6 +30,7 @@ import { MatOption, MatSelect } from '@angular/material/select';
 import { ActivatedRoute, NavigationStart, Router, RouterLink } from '@angular/router';
 import {
   filterCount,
+  listsWithDrafts,
   readSearchParams,
   sameSearchParams,
   searchCatalog,
@@ -45,6 +46,7 @@ import { CatalogStore } from '../../core/catalog/catalog-store';
 import { ClockService } from '../../core/clock/clock-service';
 import { FxStore } from '../../core/fx/fx-store';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { DraftsRepository } from '../../core/storage/drafts-repository';
 import { ItemsRepository } from '../../core/storage/items-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
 import { RankingsRepository } from '../../core/storage/rankings-repository';
@@ -121,6 +123,7 @@ export class SearchPage {
   private readonly fx = inject(FxStore);
   private readonly items = inject(ItemsRepository);
   private readonly lists = inject(ListsRepository);
+  private readonly drafts = inject(DraftsRepository);
   private readonly rankings = inject(RankingsRepository);
   private readonly today = inject(ClockService).today;
 
@@ -160,19 +163,31 @@ export class SearchPage {
   }));
 
   /**
+   * The lists pick mode adds to: the user's, as their drafts name them, and new lists, which have only a draft until
+   * the editor saves them (M6.3).
+   */
+  private readonly editableLists = computed(() =>
+    listsWithDrafts(this.lists.records(), this.drafts.drafts()),
+  );
+
+  /**
    * The URL's text, filters and sort, as far as the catalog has them, and pick mode's list while it's one of the
-   * user's; undefined until the catalog, the settings, whose defaults the URL leaves out, and the lists have loaded.
+   * user's; undefined until the catalog, the settings, whose defaults the URL leaves out, the lists and the drafts
+   * have loaded.
    */
   protected readonly query = computed(() => {
     const data = this.catalog.catalog();
-    return data && this.settings.saved() && this.lists.status() !== 'loading'
-      ? readSearchParams(this.params(), data, this.defaults(), this.lists.records())
+    return data &&
+      this.settings.saved() &&
+      this.lists.status() !== 'loading' &&
+      this.drafts.status() !== 'loading'
+      ? readSearchParams(this.params(), data, this.defaults(), this.editableLists())
       : undefined;
   });
   /** Pick mode's list (P7, flow F2): the banner names it, and a price adds to it with no menu. */
   protected readonly pickList = computed(() => {
     const id = this.query()?.addTo;
-    return id === undefined ? undefined : this.lists.records().find((list) => list.id === id);
+    return id === undefined ? undefined : this.editableLists().find((list) => list.id === id);
   });
   private readonly hasText = computed(() => this.query()?.q !== undefined);
   /** Best match needs text: without it, the default is the cheapest first. */

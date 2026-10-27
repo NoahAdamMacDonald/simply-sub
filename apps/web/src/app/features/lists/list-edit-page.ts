@@ -1,17 +1,19 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, DestroyRef, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { readAddRequest, type Interval } from '@simply-sub/core';
 import { map } from 'rxjs';
 import { CatalogStore } from '../../core/catalog/catalog-store';
+import { ListDraftService } from '../../core/lists/list-draft-service';
 import { planTitle } from '../../shared/sub-card/card-text';
 
 /**
  * Placeholder: list edit (PROJECT-PLAN P5), for both new and existing lists, is built in M6.4. Until then it says what
  * a price click from Search asked it to add (?add= or ?addBundle=, flows F1, F2 and F4, M5.4), which the item dialog
- * will open with (M6.5), and an existing list's [+ Add from catalog] opens Search in pick mode for it (F2, M5.5).
+ * will open with (M6.5), and [+ Add from catalog] opens Search in pick mode for the list (F2, M5.5). /lists/new makes
+ * the new list's draft and opens its editor in its place (M6.3), so a new list has an id to add to as well.
  */
 @Component({
   selector: 'ss-list-edit-page',
@@ -20,10 +22,13 @@ import { planTitle } from '../../shared/sub-card/card-text';
 })
 export class ListEditPage {
   private readonly catalog = inject(CatalogStore);
+  private readonly drafts = inject(ListDraftService);
+  private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly destroyRef = inject(DestroyRef);
   private readonly params = toSignal(this.route.queryParams, { requireSync: true });
 
-  /** The list's id: none on /lists/new until the editor gives its draft one (M6.3). */
+  /** The list's id: none on /lists/new, which makes the new list's draft and moves to its editor. */
   protected readonly listId = toSignal(
     this.route.paramMap.pipe(map((params) => params.get('listId') ?? undefined)),
     { requireSync: true },
@@ -47,6 +52,23 @@ export class ListEditPage {
     }
     return { name, period: periodText(request.interval, request.intervalCount) };
   });
+
+  constructor() {
+    if (this.listId() === undefined) void this.startNewList();
+  }
+
+  /**
+   * /lists/new (P5): a new list's draft, then its editor's URL in place of this one, keeping what Search asked to add
+   * (New list…, flow F1). Nothing is saved to the lists table until Save.
+   */
+  private async startNewList(): Promise<void> {
+    const draft = await this.drafts.startNew();
+    if (this.destroyRef.destroyed) return;
+    await this.router.navigate(['/lists', draft.listId, 'edit'], {
+      queryParamsHandling: 'preserve',
+      replaceUrl: true,
+    });
+  }
 }
 
 /** How often a period bills, in words: monthly, every 3 months, every 30 days. */

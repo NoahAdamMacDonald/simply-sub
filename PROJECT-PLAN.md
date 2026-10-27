@@ -179,7 +179,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 |---|---|---|
 | M6.1 | core: rank keys, `providedKeys`, `resolveRank` (and `ResolvedItem.effectiveRanks`, §3.4), `rankCounts`, `featureSummary` (§3.2). M2.3 added `rankKeyOptions` and `providesKey`, and M2.4 `providedKeys` (`ranking/rank-keys.ts`); M6.1 added `ranking/resolve-rank.ts` and `ranking/rank-summaries.ts`, with `MetricsService` passing the profile's ranks to `resolveItem` (BLUEPRINT §14) | Tests cover enum and tier ladders and the resolution order |
 | M6.2 | Features page (P9): a card per feature category with a parent's children under it (core's `rankingSections`), Find a feature (`nameMatcher`, shared with Search's Features box) and Ranked only (`filterRanking`), Set all and Reset all in one write (`RankingsRepository.setMany`), and "in 3 subscriptions" per row (`keyUsage`) (BLUEPRINT §14) | P9 criteria met |
-| M6.3 | `ListDraftService`, with drafts saved in Dexie | A draft survives navigation and a reload |
+| M6.3 | `ListDraftService`, with drafts saved in Dexie: core's draft record (`user/list-draft.ts`), `DraftsRepository`, Save in one transaction (`StorageEngine.transaction`), Search's pick mode adding to a new list's draft (`listsWithDrafts`), and `/lists/new` making the draft and replacing its URL (BLUEPRINT §14) | A draft survives navigation and a reload |
 | M6.4 | List edit page (P5) | P5 criteria met |
 | M6.5 | Item dialog (P6) | P6 criteria met |
 | M6.6 | Custom subscriptions page + editor (P12) | P12 criteria met |
@@ -653,17 +653,18 @@ Unsaved changes · This month $26.52 · ≈ $26.52 / mo average
   Search (pick mode) or a reload keeps the changes. An existing draft is resumed ("Resumed unsaved changes").
 - **Save:**
   - One Dexie transaction writes the list and its items (add / update / soft delete), deletes the draft, then goes to `/lists/:listId`.
-  - Fields that are edited elsewhere (`pinned`, and the Phase 4 `cardId` assignment) keep their saved values unless they were changed in the draft.
+  - A field the draft didn't change keeps its saved value, so what was edited elsewhere since stays: `pinned` and "Wrong date?" (P4), and the Phase 4 `cardId` assignment. An item deleted since stays deleted, and a list deleted since can't be saved.
 - **Cancel:** confirm if anything changed → delete the draft → back to the list view (or `/lists` for a new list).
 - **`/lists/new`:**
-  - Creates a draft with a new id, named "Subscription List" (or "Subscription List 2" if that's taken).
+  - Creates a draft with a new id, named "Subscription List" (or "Subscription List 2", 3… while a saved list has it).
   - Then replaces the URL with `/lists/<newId>/edit`.
   - Nothing is saved to the lists table until Save.
 - The name is required, with a maximum of 60 characters.
-- [+ Add from catalog] → `/search?addTo=<listId>` (flow F2). On a new list it needs the draft's id (M6.3), and Search
-  has to count the draft's list as one it can add to, since it isn't in the lists table until Save (BLUEPRINT §14).
+- [+ Add from catalog] → `/search?addTo=<listId>` (flow F2). On a new list it uses the draft's id, and Search counts
+  the draft's list as one it can add to, though it isn't in the lists table until Save (M6.3).
 - [+ Add custom subscription] → a menu of existing custom subscriptions plus "Create new…" (the P12 editor) → item dialog.
-- ✎ opens the item dialog (P6) for that item. 🗑 removes it from the draft, with Undo in a snackbar.
+- ✎ opens the item dialog (P6) for that item. 🗑 removes it from the draft (it stays there, marked), with Undo in a
+  snackbar.
 - ⋮ → Delete list (confirm) → soft delete → `/lists`.
 - On load, these query params open the item dialog and are then removed from the URL:
   `?add=<planId>&interval=<day|week|month|year>` · `?addBundle=<bundleId>&interval=…` · `?addCustom=<customSubId>` ·
