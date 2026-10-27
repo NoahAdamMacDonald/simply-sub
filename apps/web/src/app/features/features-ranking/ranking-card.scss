@@ -1,0 +1,170 @@
+@use '../../shared/rank/rank-colours' as colours;
+
+:host {
+  display: block;
+}
+
+.card {
+  padding: 8px 16px 16px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+}
+
+h2 {
+  margin: 0 -8px;
+  font: var(--mat-sys-title-medium);
+
+  > .title {
+    display: block;
+    padding: 8px;
+  }
+}
+
+// The card's fold: the whole heading line is the button.
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--ss-text);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--ss-state-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 0;
+  }
+
+  .title {
+    flex: 1 1 auto;
+  }
+
+  mat-icon {
+    flex: none;
+  }
+}
+
+.count {
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-medium);
+}
+
+.entry {
+  margin-top: 8px;
+
+  &.child {
+    margin-left: 12px;
+    padding-left: 12px;
+    border-left: 1px solid var(--ss-divider);
+  }
+}
+
+// A parent's own row, then Set all on a line of its own above the children it ranks: beside the row, it squeezed the
+// row's name above its dropdown.
+.line {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .row {
+    align-self: stretch;
+  }
+
+  .set-all {
+    margin-top: 4px;
+  }
+}
+
+.heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  min-height: 40px;
+  font: var(--mat-sys-title-small);
+}
+
+.heading-text {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+}
+
+.fold {
+  display: inline-flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 4px;
+  margin-left: -4px;
+  padding: 4px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--ss-text);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--ss-state-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 0;
+  }
+}
+
+// A rank key: its name and count, then its dropdown, which drops below the name when they don't fit. A ranked row
+// has its rank's colour down its left edge; the dropdown names the rank, so colour isn't the only sign.
+.row {
+  @include colours.by-data-rank;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+  margin-top: 4px;
+  padding: 2px 0 2px 8px;
+  border-left: 4px solid transparent;
+
+  &.ranked {
+    border-left-color: var(--rank-fill);
+  }
+}
+
+.label {
+  display: flex;
+  flex: 1 1 10rem;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.name {
+  overflow-wrap: anywhere;
+}
+
+.usage {
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}
+
+.set-all {
+  flex: none;
+}
+
+.choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}

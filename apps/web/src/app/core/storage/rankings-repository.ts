@@ -52,4 +52,29 @@ export class RankingsRepository {
         : undefined,
     );
   }
+
+  /**
+   * Ranks several keys in one write, as set and clear each do: a rank, or undefined for not ranked. The Features
+   * page's Set all and Reset all (P9), so they're all saved or none is, and lists recount once.
+   */
+  async setMany(ranks: ReadonlyMap<RankKey, ProfileRank | undefined>): Promise<void> {
+    const now = this.storage.now();
+    const engine = await this.storage.engine();
+    await engine.modifyMany(
+      'rankings',
+      [...ranks.keys()],
+      (rankKey, current) => {
+        const rank = ranks.get(rankKey);
+        if (rank === undefined) {
+          return current !== undefined && current.deletedAt === undefined
+            ? softDeleted(current, now)
+            : undefined;
+        }
+        return current
+          ? withChanges(current, { rank, deletedAt: undefined }, now)
+          : { rankKey, rank, createdAt: now, updatedAt: now };
+      },
+      { invalid: 'replace' },
+    );
+  }
 }

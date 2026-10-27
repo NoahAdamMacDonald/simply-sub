@@ -12,7 +12,7 @@ const PAGES = [
   { url: '/lists/abc/edit', heading: 'Edit list', title: 'Edit list · Simply Sub' },
   { url: '/lists/abc/optimize', heading: 'Optimizations', title: 'Optimizations · Simply Sub' },
   { url: '/search', heading: 'Search', title: 'Search · Simply Sub' },
-  { url: '/features', heading: 'Features', title: 'Features · Simply Sub' },
+  { url: '/features', heading: 'Your feature ranks', title: 'Features · Simply Sub' },
   { url: '/calendar', heading: 'Calendar', title: 'Calendar · Simply Sub' },
   { url: '/payment', heading: 'Payment', title: 'Payment · Simply Sub' },
   { url: '/custom', heading: 'Custom subscriptions', title: 'Custom subscriptions · Simply Sub' },

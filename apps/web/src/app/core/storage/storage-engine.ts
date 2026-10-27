@@ -85,20 +85,39 @@ export class StorageEngine {
     const rows = this.db.table<unknown, string>(table);
     let written = false;
     const stored = await this.db.transaction('rw', rows, async () => {
-      const row = await rows.get(key);
-      const current = row === undefined ? undefined : this.readOne(table, row, invalid);
-      const next = change(current);
-      if (next === undefined) return current;
-      const checked = checkRecord(table, next);
-      if ((checked as Record<string, unknown>)[userRecordKeys[table]] !== key) {
-        throw new Error(`A ${table} change can't change the record's key`);
-      }
-      await rows.put(checked);
-      written = true;
-      return checked;
+      const { stored: result, written: put } = await this.change(table, key, change, invalid);
+      written = put;
+      return result;
     });
     if (written) this.options.onWrite();
     return stored;
+  }
+
+  /**
+   * Changes several records of one table in one transaction, each as `modify` changes one: `change` gets each key's
+   * stored record and returns the record to store, or undefined to leave it. If any change fails, none is stored.
+   * Watchers see the changes together.
+   */
+  async modifyMany<T extends UserTable>(
+    table: T,
+    keys: readonly string[],
+    change: (key: string, current: UserRecords[T] | undefined) => UserRecords[T] | undefined,
+    { invalid = 'refuse' }: ModifyOptions = {},
+  ): Promise<void> {
+    const rows = this.db.table<unknown, string>(table);
+    let written = false;
+    await this.db.transaction('rw', rows, async () => {
+      for (const key of keys) {
+        const { written: put } = await this.change(
+          table,
+          key,
+          (current) => change(key, current),
+          invalid,
+        );
+        written ||= put;
+      }
+    });
+    if (written) this.options.onWrite();
   }
 
   /**
@@ -121,6 +140,26 @@ export class StorageEngine {
 
   close(): void {
     this.db.close();
+  }
+
+  /** One record's change, inside a transaction on its table: what's stored afterwards, and whether it was written. */
+  private async change<T extends UserTable>(
+    table: T,
+    key: string,
+    change: (current: UserRecords[T] | undefined) => UserRecords[T] | undefined,
+    invalid: ModifyOptions['invalid'],
+  ): Promise<{ stored: UserRecords[T] | undefined; written: boolean }> {
+    const rows = this.db.table<unknown, string>(table);
+    const row = await rows.get(key);
+    const current = row === undefined ? undefined : this.readOne(table, row, invalid);
+    const next = change(current);
+    if (next === undefined) return { stored: current, written: false };
+    const checked = checkRecord(table, next);
+    if ((checked as Record<string, unknown>)[userRecordKeys[table]] !== key) {
+      throw new Error(`A ${table} change can't change the record's key`);
+    }
+    await rows.put(checked);
+    return { stored: checked, written: true };
   }
 
   private readOne<T extends UserTable>(

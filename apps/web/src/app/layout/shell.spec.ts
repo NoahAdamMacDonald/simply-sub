@@ -12,7 +12,7 @@ const SIDEBAR_LINKS = [
   { name: 'Home', url: '/', heading: 'Home' },
   { name: 'Lists', url: '/lists', heading: 'Lists' },
   { name: 'Payment', url: '/payment', heading: 'Payment' },
-  { name: 'Features', url: '/features', heading: 'Features' },
+  { name: 'Features', url: '/features', heading: 'Your feature ranks' },
   { name: 'Calendar', url: '/calendar', heading: 'Calendar' },
   { name: 'Search', url: '/search', heading: 'Search' },
   { name: 'Settings', url: '/settings', heading: 'Settings' },

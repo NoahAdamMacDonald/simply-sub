@@ -1,1 +1,75 @@
-<h1>Features</h1>
+<ss-page-header heading="Your feature ranks">
+  <button matButton="outlined" type="button" [disabled]="ranks().size === 0" (click)="resetAll()">
+    Reset all
+  </button>
+</ss-page-header>
+
+<div class="toolbar" role="search">
+  <mat-form-field appearance="outline" class="find" subscriptSizing="dynamic">
+    <mat-icon matPrefix aria-hidden="true">search</mat-icon>
+    <mat-label>Find a feature</mat-label>
+    <input
+      #box
+      matInput
+      type="search"
+      autocomplete="off"
+      [value]="text()"
+      (input)="text.set(box.value)"
+    />
+    @if (text()) {
+      <button
+        matIconButton
+        matSuffix
+        type="button"
+        aria-label="Clear the search"
+        (click)="clearText(box)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+  </mat-form-field>
+  <mat-checkbox [checked]="rankedOnly()" (change)="rankedOnly.set($event.checked)">
+    Ranked only
+  </mat-checkbox>
+</div>
+
+<!-- Off screen: how many features a filter shows, and what Set all or Reset all just did. -->
+<p class="visually-hidden matches" role="status">{{ matches() }}</p>
+<p class="visually-hidden announcement" role="status">{{ announcement() }}</p>
+
+@if (shown(); as sections) {
+  @if (sections.length > 0) {
+    <div class="cards">
+      @for (section of sections; track section.category.id) {
+        <ss-ranking-card
+          [section]="section"
+          [ranks]="ranks()"
+          [usage]="usage()"
+          [startOpen]="startOpen(section.keys)"
+          [filtering]="filtering()"
+          (rankChange)="change($event)"
+        />
+      }
+    </div>
+  } @else {
+    <ss-empty-state icon="search_off" heading="No features match">
+      @if (rankedOnly() && !text().trim()) {
+        Nothing is ranked yet.
+      } @else {
+        Try other words, or show every feature.
+      }
+      <div actions>
+        @if (text()) {
+          <button matButton="outlined" type="button" (click)="clearText(box)">Clear search</button>
+        }
+        @if (rankedOnly()) {
+          <button matButton="outlined" type="button" (click)="rankedOnly.set(false)">
+            Show all features
+          </button>
+        }
+      </div>
+    </ss-empty-state>
+  }
+} @else {
+  <p class="loading">Loading the features…</p>
+}

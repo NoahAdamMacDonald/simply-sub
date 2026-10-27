@@ -1,0 +1,143 @@
+<!-- Spaces go inside the spans: Angular drops the whitespace between them, and names would run together. -->
+<section class="card" [attr.aria-labelledby]="id + '-title'">
+  <h2 [id]="id + '-title'">
+    @if (filtering()) {
+      <span class="title">{{ section().category.name }}</span>
+    } @else {
+      <button
+        type="button"
+        class="toggle"
+        [attr.aria-expanded]="open()"
+        [attr.aria-controls]="id + '-body'"
+        (click)="toggle()"
+      >
+        <span class="title">{{ section().category.name }}</span>
+        <span class="count"> {{ ranked() }} of {{ section().keys.length }} ranked</span>
+        <mat-icon aria-hidden="true">{{ open() ? 'expand_less' : 'expand_more' }}</mat-icon>
+      </button>
+    }
+  </h2>
+  <!-- Always in the page, so the toggle's aria-controls names something while it's folded. -->
+  <div class="body" [id]="id + '-body'">
+    @if (open()) {
+      @for (entry of section().entries; track entry.id) {
+        <ng-container
+          [ngTemplateOutlet]="entryTemplate"
+          [ngTemplateOutletContext]="{ $implicit: entry, depth: 0 }"
+        />
+      }
+    }
+  </div>
+</section>
+
+<!-- A feature: a boolean's one row, or a heading and a row per value or tier; then a parent's children. -->
+<ng-template #entryTemplate let-entry let-depth="depth">
+  <div class="entry" [class.child]="depth > 0">
+    @if (entry.single && entry.rows.length > 0) {
+      <div class="line">
+        <ng-container
+          [ngTemplateOutlet]="rowTemplate"
+          [ngTemplateOutletContext]="{ $implicit: entry.rows[0] }"
+        />
+        @if (entry.children.length > 0) {
+          <ng-container
+            [ngTemplateOutlet]="setAllTemplate"
+            [ngTemplateOutletContext]="{ $implicit: entry }"
+          />
+        }
+      </div>
+    } @else {
+      <!--
+        Set all sits beside the heading, not in it, so the heading reads as the feature's name. Every feature's heading
+        is level 3, a child's too: a parent's own line is a row, not a heading, so a level 4 would skip one.
+      -->
+      <div class="heading">
+        <div class="heading-text" role="heading" aria-level="3">
+          @if (foldable(entry) && !filtering()) {
+            <button
+              type="button"
+              class="fold"
+              [attr.aria-expanded]="unfolded(entry)"
+              [attr.aria-controls]="id + '-' + entry.id"
+              (click)="toggleFold(entry)"
+            >
+              <mat-icon aria-hidden="true">{{
+                unfolded(entry) ? 'expand_more' : 'chevron_right'
+              }}</mat-icon>
+              <span> {{ entry.name }} ({{ entry.rows.length }})</span>
+            </button>
+          } @else {
+            <span>{{ entry.name }}</span>
+          }
+        </div>
+        @if (entry.children.length > 0) {
+          <ng-container
+            [ngTemplateOutlet]="setAllTemplate"
+            [ngTemplateOutletContext]="{ $implicit: entry }"
+          />
+        }
+      </div>
+      <div class="rows" [id]="id + '-' + entry.id">
+        @if (unfolded(entry)) {
+          @for (row of entry.rows; track row.key) {
+            <ng-container
+              [ngTemplateOutlet]="rowTemplate"
+              [ngTemplateOutletContext]="{ $implicit: row }"
+            />
+          }
+        }
+      </div>
+    }
+    @for (child of entry.children; track child.id) {
+      <ng-container
+        [ngTemplateOutlet]="entryTemplate"
+        [ngTemplateOutletContext]="{ $implicit: child, depth: depth + 1 }"
+      />
+    }
+  </div>
+</ng-template>
+
+<!-- A rank key: its name, how many list items provide it, and its dropdown, named alone ("Video quality: 4K"). -->
+<ng-template #rowTemplate let-row>
+  <div class="row" [class.ranked]="ranks().has(row.key)" [attr.data-rank]="rank(row.key)">
+    <div class="label">
+      <span class="name">{{ row.name }}</span>
+      @if (usageText(row.key); as usage) {
+        <span class="usage"> {{ usage }}</span>
+      }
+    </div>
+    <ss-rank-select
+      [value]="rank(row.key)"
+      (valueChange)="choose(row.key, $event)"
+      [label]="row.label"
+    />
+  </div>
+</ng-template>
+
+<!-- A parent's Set all: ranks every child key at once. The words after "Set all" are for screen readers. -->
+<ng-template #setAllTemplate let-entry>
+  <button
+    matButton
+    type="button"
+    class="set-all"
+    [matMenuTriggerFor]="setAllMenu"
+    [matMenuTriggerData]="{ entry }"
+  >
+    <span>Set all</span>
+    <span class="visually-hidden"> in {{ entry.name }}</span>
+    <mat-icon iconPositionEnd aria-hidden="true">arrow_drop_down</mat-icon>
+  </button>
+</ng-template>
+
+<mat-menu #setAllMenu="matMenu" aria-label="Set all to">
+  <ng-template matMenuContent let-entry="entry">
+    @for (choice of choices; track choice) {
+      <button mat-menu-item type="button" (click)="setAll(entry, choice)">
+        <span class="choice">
+          <ss-rank-dot [rank]="choice" />
+          <span>{{ names[choice] }}</span>
+        </span>
+      </button>
+    }
+  </ng-template>
+</mat-menu>
