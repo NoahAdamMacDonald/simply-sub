@@ -2520,6 +2520,61 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
+**Resolved (2026-10-27, M6.8)**
+- **List view** (PROJECT-PLAN P4, `/lists/:listId`): "‹ Lists", the list's name, and "≈ $48.84 / mo average · 3
+  subscriptions" (the overview's `averageText`, until M7.2's bars). Then the search box with Sort beside it, the cards
+  (pinned ones first, under Pinned and All, or a hidden "Subscriptions" heading when none is pinned), and Edit list at
+  the foot. The list's feature summary is on the right from 960 px. Below that it goes under the cards, as on the Lists
+  overview, where P4 puts it above: what goes above the cards there is M7.2's bars. When the list editor has changes
+  not saved, a note says so with a link back to them. A draft with no changes, which opening the editor leaves, isn't
+  one (`ListDraftService.hasChanges`).
+- **The card is `ss-item-card`** (`shared/sub-card/`), the list variant of PROJECT-PLAN §4.3's `ss-sub-card`, as a
+  component of its own. It shows a resolved item, not a search result, so it shares with Search's card only:
+  - its look (`_card.scss`);
+  - its details, which slide open and shut (`SlidingDetails`, moved out of `SubCard`).
+
+  Collapsed, it has the icon, the name and plan (a plan named after its provider alone, as in the editor), the status
+  (today's `itemActivity` until M7.1), its tags, 📌 and the price (the override while it applies). Its details list:
+  - how it's billed, since when, its add-ons, its own price and where it was bought;
+  - its features with this item's ranks (`ss-feature-list` now takes a plan's features rather than the plan);
+  - Plan ↗, Cancel ↗ and Edit, which opens the editor's item dialog (`/lists/<id>/edit?item=<item id>`).
+
+  M7.1 adds its next charge and "Wrong date?", and M7.2 its share of the list.
+- **📌** is a toggle button (`aria-pressed`), saved to the item at once (`ItemsRepository.update`), with no draft. A
+  draft saved later keeps it, since Save writes only the fields the draft changed (`savedItem`). The card moves between
+  Pinned and All, and focus follows its 📌.
+- **Search and Sort** are core's `listView`, `listFilterOptions`, `listFilterCount` and `listPriceRange`
+  (`user/list-view.ts`):
+  - **Text** matches a word of the item's name, plan, a tag or a provided key's name (`nameMatcher`).
+  - **Sort** opens a panel under the search box. It sorts by Highest price first (the default), Name, A to Z, Active
+    first or Shortest period first, with ties A–Z.
+  - **Filters:** Status (Active only, Inactive only), Lowest and Highest price per month, Features (an item needs every
+    one) and Tags (one of them). Each offers only what the list's items have. The prices compare monthly equivalents in
+    the user's currency, before tax, as the average does (`monthlyIn`, split out of `monthlyAverage`). An item priced
+    in another currency, for want of a rate, is left out by a price filter and sorted last by price.
+  - **Clear all** keeps the sort.
+  - **What it says:** the button's name says how many filters are on ("Sort and filter, 2 on"), with the count beside
+    it, and "2 of 12 shown" says what's hidden.
+  - The choices live in the page, not the URL, so a reload drops them.
+- **An item it can't price or name** gets a row after the cards, saying why, with Edit, while no text or filter is set:
+  it has nothing to match on.
+- **An empty list** says "No subscriptions yet", with two ways to add:
+  - Add from catalog opens Search's pick mode for the list.
+  - Add custom subscription opens the editor's menu: a custom subscription opens the editor with `?addCustom=`, and
+    Create new… opens the custom subscription editor first.
+
+  A list there isn't says P15's "This list doesn't exist".
+- **Not yet:**
+  - Export (M7.5);
+  - the bars and each card's share (M7.2);
+  - the mini calendar (M7.4);
+  - View optimizations (M8).
+- **Browser checks:** a Material select's panel is in the browser's top layer, next to its field in the page, not in
+  `.cdk-overlay-container`. axe measured a field label hidden under the open panel against the panel's colour, so
+  `check-list-view.cjs` sets aside contrast hits on text under a `.cdk-overlay-pane`.
+- **Bundles:** the initial bundle didn't change (492.6 kB). The page's chunk is 30 kB. Search's is 6 kB smaller: the
+  parts its card shares with List view's load in a chunk both pages use.
+
 **Resolved (2026-10-27, feedback after M6.7)**
 Reported from the running app, with screenshots, and fixed before M6.8:
 - **The item dialog's renewal hint ran into Auto-renews** (360 and 1280 px): "Check your account page for the exact

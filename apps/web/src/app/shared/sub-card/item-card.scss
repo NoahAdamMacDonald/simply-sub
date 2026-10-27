@@ -1,0 +1,84 @@
+@use 'card';
+
+@include card.base;
+
+// Narrow: the icon, names, status and tags, with 📌 beside them, then the price. Wide: one row, the price on the right.
+.head {
+  display: grid;
+  grid-template-areas:
+    'icon title pin'
+    'price price price';
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  gap: 12px 16px;
+  align-items: start;
+}
+
+@container (min-width: 600px) {
+  .head {
+    grid-template-areas: 'icon title pin price';
+    grid-template-columns: 48px minmax(0, 1fr) auto auto;
+  }
+
+  .price {
+    padding-top: 8px;
+    text-align: end;
+  }
+}
+
+.pin {
+  grid-area: pin;
+  color: var(--ss-text-muted);
+
+  // Pinned: the pin in the accent colour on its tint, as the button says (aria-pressed).
+  &.pinned {
+    background-color: var(--ss-state-tint);
+    color: var(--ss-accent-text);
+  }
+}
+
+.price {
+  grid-area: price;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+// Padding inside the clipped part, which can shrink to nothing.
+.details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 12px;
+}
+
+.facts {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: var(--mat-sys-body-medium);
+}
+
+h4 {
+  margin: 0 0 4px;
+  font: var(--mat-sys-title-small);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.edit {
+  margin-inline-start: auto;
+}

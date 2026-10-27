@@ -23,7 +23,8 @@ import { FeatureLines, type FeatureLine } from './feature-lines';
 export class FeatureList {
   private readonly catalog = inject(CatalogStore);
 
-  readonly plan = input.required<Plan>();
+  /** A plan's features, or an item's (ResolvedItem.features). */
+  readonly features = input.required<Plan['features']>();
   readonly ranks = input<Readonly<Partial<Record<RankKey, Rank>>>>({});
 
   protected readonly lines = computed(() => {
@@ -40,6 +41,6 @@ export class FeatureList {
       }),
       children: row.children.map(line),
     });
-    return planFeatureRows(this.plan().features, this.catalog.catalog()?.features ?? []).map(line);
+    return planFeatureRows(this.features(), this.catalog.catalog()?.features ?? []).map(line);
   });
 }

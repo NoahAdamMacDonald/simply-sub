@@ -49,7 +49,7 @@ describe('FeatureList', () => {
       ],
     });
     fixture = TestBed.createComponent(FeatureList);
-    fixture.componentRef.setInput('plan', plan);
+    fixture.componentRef.setInput('features', plan.features);
     fixture.componentRef.setInput('ranks', {
       'streaming.ad-free': 'essential',
       'video.quality=1080p': 'wanted',

@@ -1,0 +1,577 @@
+// M6.8 in the system Edge: List view (P4) on `ng serve`, for a Canadian in Alberta, with Work Related (Netflix Standard
+// tagged Family, Mullvad VPN and Crave Premium from Dec 1) and an empty list written to IndexedDB. In both themes at
+// 1280 and 360 px, keyboard only: the header's average and count, the cards by price (pinned first), each card's
+// status and tags, the feature summary, the Tab order, 📌 by keyboard (saved to the item, no draft, the card moving to
+// Pinned with focus on its 📌, and still there after a reload), the search box finding a tag and Clear search, the
+// Sort menu (a sort and Inactive only by keyboard, the count on its button, Clear all keeping the sort), a card's
+// details and Edit opening the item dialog in the list editor, and Edit list. Then at 1280 px: an empty list's Add
+// from catalog, a list there isn't, and the note about changes not saved. With axe on the page, the open Sort menu
+// (and an open select at 1280 px), the details and the empty states, and no horizontal scroll.
+// Usage: node check-list-view.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
+const fs = require('fs');
+const path = require('path');
+
+const [depsDir, outDir, baseUrl] = process.argv.slice(2);
+const { chromium } = require(path.join(depsDir, 'node_modules', 'playwright-core'));
+const axeSource = fs.readFileSync(
+  path.join(depsDir, 'node_modules', 'axe-core', 'axe.min.js'),
+  'utf8',
+);
+fs.mkdirSync(outDir, { recursive: true });
+
+const WIDE = { width: 1280, height: 900 };
+const NARROW = { width: 360, height: 740 };
+const checks = [];
+const consoleProblems = [];
+function check(name, ok, detail = '') {
+  checks.push(ok);
+  console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? `  -- ${detail}` : ''}`);
+}
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+async function waitForServer() {
+  for (let i = 0; i < 180; i++) {
+    try {
+      if ((await fetch(baseUrl)).ok) return;
+    } catch {
+      // not up yet
+    }
+    await sleep(1000);
+  }
+  throw new Error(`No server at ${baseUrl}`);
+}
+
+async function until(what, condition, timeout = 15000) {
+  const start = Date.now();
+  while (Date.now() - start < timeout) {
+    const value = await condition();
+    if (value) return value;
+    await sleep(100);
+  }
+  throw new Error(`Timed out waiting for ${what}`);
+}
+
+async function newPage(browser, label, { colorScheme = 'light', viewport = WIDE } = {}) {
+  const context = await browser.newContext({ locale: 'en-CA', colorScheme, viewport });
+  // GET /fx, answered with fixed rates, so no Worker is needed behind the dev proxy.
+  await context.route('**/api/v1/fx?**', (route) =>
+    route.fulfill({
+      json: {
+        data: {
+          base: 'CAD',
+          date: '2026-10-26',
+          source: 'European Central Bank via Frankfurter',
+          rates: { CHF: 0.581, EUR: 0.6372, GBP: 0.5571, SEK: 7.097, USD: 0.7243 },
+        },
+        meta: { fetchedAt: '2026-10-26T06:00:02Z', stale: false },
+      },
+    }),
+  );
+  const page = await context.newPage();
+  page.on('console', (msg) => {
+    if (msg.type() === 'error' || msg.type() === 'warning') {
+      consoleProblems.push(`[${label}] ${msg.type()}: ${msg.text()}`);
+    }
+  });
+  page.on('pageerror', (error) => consoleProblems.push(`[${label}] pageerror: ${error.message}`));
+  return { context, page };
+}
+
+/** Opens Home and completes the first-run dialog for Alberta. */
+async function firstRun(page) {
+  await page.goto(baseUrl);
+  const dialog = page.locator('mat-dialog-container');
+  await dialog.waitFor({ timeout: 20000 });
+  await page
+    .locator('mat-form-field', { has: page.locator('mat-label', { hasText: 'Province' }) })
+    .locator('.mat-mdc-text-field-wrapper')
+    .click();
+  await page.getByRole('option', { name: 'Alberta', exact: true }).click();
+  await page.locator('.cdk-overlay-pane mat-option').first().waitFor({ state: 'detached' });
+  await page.getByRole('button', { name: 'Get started' }).click();
+  await dialog.waitFor({ state: 'detached' });
+}
+
+/** Every row of an IndexedDB table, as stored. */
+function readTable(page, table) {
+  return page.evaluate(
+    (store) =>
+      new Promise((resolve, reject) => {
+        const request = indexedDB.open('simply-sub');
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => {
+          const db = request.result;
+          const rows = db.transaction(store).objectStore(store).getAll();
+          rows.onsuccess = () => {
+            db.close();
+            resolve(rows.result);
+          };
+          rows.onerror = () => reject(rows.error);
+        };
+      }),
+    table,
+  );
+}
+
+/** Writes a record straight to an IndexedDB table. */
+function putRecord(page, table, record) {
+  return page.evaluate(
+    ([store, value]) =>
+      new Promise((resolve, reject) => {
+        const request = indexedDB.open('simply-sub');
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => {
+          const db = request.result;
+          const transaction = db.transaction(store, 'readwrite');
+          transaction.objectStore(store).put(value);
+          transaction.oncomplete = () => {
+            db.close();
+            resolve();
+          };
+          transaction.onerror = () => reject(transaction.error);
+        };
+      }),
+    [table, record],
+  );
+}
+
+async function axeCheck(page, label) {
+  await sleep(600);
+  await page.evaluate(axeSource);
+  const result = await page.evaluate(() => axe.run(document));
+  // Material renders menus, selects and dialogs outside the page's landmarks (the skill's gotchas): set aside
+  // `region` hits that are all inside its overlay container. An open select's panel covers the fields under it, whose
+  // labels axe then measures against the panel: set aside contrast hits on text under a popup.
+  const hidden = await page.evaluate(
+    (targets) =>
+      targets.map((target) => {
+        const element = document.querySelector(target);
+        if (!element) return false;
+        const box = element.getBoundingClientRect();
+        const top = document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2);
+        // The panel is in the browser's top layer, next to its field in the page, not in the overlay container.
+        return (
+          (top?.closest('.cdk-overlay-pane') ?? null) !== null &&
+          !element.closest('.cdk-overlay-pane')
+        );
+      }),
+    (result.violations.find((violation) => violation.id === 'color-contrast')?.nodes ?? []).map(
+      (node) => node.target.join(' '),
+    ),
+  );
+  const violations = result.violations
+    .map((violation) =>
+      violation.id === 'color-contrast'
+        ? { ...violation, nodes: violation.nodes.filter((_, index) => !hidden[index]) }
+        : violation,
+    )
+    .filter(
+      (violation) =>
+        violation.nodes.length > 0 &&
+        (violation.id !== 'region' ||
+          !violation.nodes.every((node) => node.target.join(' ').includes('cdk-overlay'))),
+    );
+  const problems = violations.map(
+    (violation) =>
+      `${violation.id}: ${violation.nodes
+        .slice(0, 3)
+        .map((node) => node.target.join(' '))
+        .join(' | ')}`,
+  );
+  check(`axe: ${label}`, problems.length === 0, problems.join('; '));
+}
+
+/** The focused element's role and name, as its accessibility snapshot's first line gives them. */
+async function stop(page) {
+  const snapshot = await page.locator(':focus').ariaSnapshot();
+  return snapshot.split('\n')[0].replace(/^- /, '');
+}
+
+async function noSideScroll(page, viewport, label) {
+  const width = await page.evaluate(() => document.documentElement.scrollWidth);
+  check(`no horizontal scroll: ${label}`, width <= viewport.width, `${width}px`);
+}
+
+/** The focused element's accessible name, as its accessibility snapshot gives it; none when nothing has focus. */
+async function focusedName(page) {
+  const focused = await page.evaluate(
+    () => document.activeElement !== null && document.activeElement !== document.body,
+  );
+  if (!focused) return undefined;
+  return /"([^"]*)"/.exec(await stop(page))?.[1];
+}
+
+/** Presses `key` until the element named `name` has focus. */
+async function keyToName(page, name, key = 'Tab', limit = 80) {
+  for (let presses = 0; presses < limit; presses++) {
+    if ((await focusedName(page)) === name) return;
+    await page.keyboard.press(key);
+  }
+  throw new Error(`Couldn't reach ${name} (focus on ${await focusedName(page)})`);
+}
+
+const LIST = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d';
+const EMPTY = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4e';
+const NETFLIX = '0192f1c5-1c2d-7e3f-8a4b-5c6d7e8f9a0b';
+const MULLVAD = '0192f1c5-1c2d-7e3f-8a4b-5c6d7e8f9a0c';
+const CRAVE = '0192f1c5-1c2d-7e3f-8a4b-5c6d7e8f9a0d';
+const TAG = '0192f1c7-3e4f-7051-ac6d-7e8f9a0b1c2d';
+const stamps = { createdAt: '2026-10-20T12:00:00.000Z', updatedAt: '2026-10-20T12:00:00.000Z' };
+const viewUrl = (listId = LIST) => `${baseUrl}lists/${listId}`;
+const pathOf = (page) => new URL(page.url()).pathname;
+
+/** Work Related: Netflix Standard (tagged Family), Mullvad VPN and Crave Premium from Dec 1; and Empty, with nothing. */
+async function plant(page) {
+  const billing = {
+    mode: 'recurring',
+    interval: 'month',
+    intervalCount: 1,
+    anchorDate: '2026-11-12',
+    autoRenew: true,
+  };
+  await putRecord(page, 'tags', { id: TAG, name: 'Family', color: '#1e88e5', ...stamps });
+  await putRecord(page, 'lists', { id: LIST, name: 'Work Related', ...stamps });
+  await putRecord(page, 'lists', {
+    id: EMPTY,
+    name: 'Empty',
+    ...stamps,
+    createdAt: '2026-10-21T12:00:00.000Z',
+  });
+  for (const [id, planId, extra] of [
+    [NETFLIX, 'netflix.standard', { tagIds: [TAG] }],
+    [MULLVAD, 'mullvad.vpn', { billing: { ...billing, autoRenew: false } }],
+    [
+      CRAVE,
+      'crave.premium',
+      { billing: { ...billing, anchorDate: '2026-12-01', startDate: '2026-12-01' } },
+    ],
+  ]) {
+    await putRecord(page, 'items', {
+      id,
+      listId: LIST,
+      source: { kind: 'catalog', planId },
+      billing,
+      tagIds: [],
+      rankOverrides: {},
+      pinned: false,
+      ...stamps,
+      ...extra,
+    });
+  }
+}
+
+const view = (page) => page.locator('ss-list-view-page');
+/** The page's group headings ("# Pinned") and its cards' titles, in order. */
+const layout = (page) =>
+  view(page)
+    .locator('.items h2, ss-item-card h3')
+    .evaluateAll((elements) =>
+      elements.map((element) => {
+        const text = element.textContent.replace(/\s+/g, ' ').trim();
+        if (element.matches('h2')) return `# ${text}`;
+        const plan = element.parentElement.querySelector('.plan-name');
+        return plan ? `${text} ${plan.textContent.trim()}` : text;
+      }),
+    );
+const cards = async (page) => (await layout(page)).filter((entry) => !entry.startsWith('#'));
+/** The header's line as it shows, without the words only screen readers get. */
+const summary = (page) =>
+  view(page)
+    .locator('.summary')
+    .evaluate((line) => {
+      const copy = line.cloneNode(true);
+      copy.querySelectorAll('.visually-hidden').forEach((hidden) => hidden.remove());
+      return copy.textContent.replace(/\s+/g, ' ').trim();
+    });
+
+async function openView(page, listId = LIST) {
+  await page.goto(viewUrl(listId));
+  await view(page).locator('h1').waitFor({ timeout: 20000 });
+}
+
+(async () => {
+  await waitForServer();
+  const browser = await chromium.launch({ channel: 'msedge' });
+
+  for (const colorScheme of ['light', 'dark']) {
+    for (const viewport of [WIDE, NARROW]) {
+      const label = `${colorScheme} ${viewport.width}`;
+      const shot = (name) => path.join(outDir, `${name}-${colorScheme}-${viewport.width}.png`);
+      const { context, page } = await newPage(browser, label, { colorScheme, viewport });
+      await firstRun(page);
+      await plant(page);
+
+      // ── The list: header, cards by price, statuses, tags and the summary ───────────────────────
+      await openView(page);
+      await until('three cards', async () => (await cards(page)).length === 3);
+      await until('the average', async () => (await summary(page)).includes('mo average'));
+      check(
+        `${label}: the header names the list, with its average a month and its count`,
+        (await view(page).locator('h1').textContent()).trim() === 'Work Related' &&
+          /^≈ \$\d+\.\d\d \/ mo average · 3 subscriptions$/.test(await summary(page)),
+        await summary(page),
+      );
+      check(
+        `${label}: the cards go by price per month, highest first, under a hidden heading`,
+        (await layout(page)).join(' | ') ===
+          '# Subscriptions | Crave Premium | Netflix Standard | Mullvad VPN',
+        (await layout(page)).join(' | '),
+      );
+      const statuses = await view(page)
+        .locator('ss-item-card ss-status-badge')
+        .evaluateAll((badges) => badges.map((badge) => badge.textContent.trim()));
+      check(
+        `${label}: each card's status, and Netflix's tag`,
+        statuses.join(' | ') === 'Inactive · active from Dec 1, 2026 | Active | Active' &&
+          (
+            await view(page).locator(`[data-item="${NETFLIX}"] ss-tag-chip`).textContent()
+          ).trim() === 'Family',
+        statuses.join(' | '),
+      );
+      const features = await view(page)
+        .locator('ss-feature-summary li .label')
+        .evaluateAll((rows) => rows.map((row) => row.textContent.trim()));
+      check(
+        `${label}: the list's feature summary`,
+        features.includes('VPN:'),
+        features.join(' | '),
+      );
+      await noSideScroll(page, viewport, `${label}, the list`);
+      await page.screenshot({ path: shot('view'), fullPage: true });
+      await axeCheck(page, `${label}, the list`);
+
+      // The Tab order: the search box, Sort, then each card's 📌 and details button.
+      await view(page).locator('h1').click();
+      const stops = [];
+      for (let i = 0; i < 8; i++) {
+        await page.keyboard.press('Tab');
+        // A name with a colon comes back quoted, and a link's line ends in a colon.
+        stops.push((await stop(page)).replace(/^'(.*)'$/, '$1').replace(/:$/, ''));
+      }
+      const order = stops.slice(stops.indexOf('textbox "Search this list"'), -1).slice(0, 6);
+      check(
+        `${label}: Tab goes to the search box, Sort, then each card's 📌 and details`,
+        order.join(' | ') ===
+          [
+            'textbox "Search this list"',
+            'button "Sort and filter"',
+            'button "Pin Crave Premium"',
+            'button "Details: Crave Premium"',
+            'button "Pin Netflix Standard"',
+            'button "Details: Netflix Standard"',
+          ].join(' | '),
+        stops.join(' | '),
+      );
+
+      // ── 📌 by keyboard ──────────────────────────────────────────────────────────────────────
+      await keyToName(page, 'Pin Mullvad VPN');
+      await page.keyboard.press('Space');
+      await until('Pinned', async () => (await layout(page))[0] === '# Pinned');
+      await until('focus on its 📌', async () => (await focusedName(page)) === 'Pin Mullvad VPN');
+      const pinned = (await readTable(page, 'items')).find((item) => item.id === MULLVAD);
+      check(
+        `${label}: 📌 saves the pin to the item with no draft, moves the card to Pinned, and keeps focus on it`,
+        (await layout(page)).join(' | ') ===
+          '# Pinned | Mullvad VPN | # All | Crave Premium | Netflix Standard' &&
+          pinned?.pinned === true &&
+          (await readTable(page, 'drafts')).length === 0 &&
+          (await page.evaluate(() => document.activeElement?.getAttribute('aria-pressed'))) ===
+            'true',
+        (await layout(page)).join(' | '),
+      );
+      await page.screenshot({ path: shot('view-pinned') });
+      await axeCheck(page, `${label}, a card pinned`);
+      await page.reload();
+      await until('the cards again', async () => (await cards(page)).length === 3);
+      check(
+        `${label}: a pin survives a reload`,
+        (await layout(page)).slice(0, 2).join(' | ') === '# Pinned | Mullvad VPN',
+      );
+
+      // ── The search box ──────────────────────────────────────────────────────────────────────
+      await view(page).locator('h1').click();
+      await keyToName(page, 'Search this list');
+      await page.keyboard.type('fam');
+      await until('one card', async () => (await cards(page)).length === 1);
+      check(
+        `${label}: the search box finds a card by its tag, and says how many are shown`,
+        (await cards(page))[0] === 'Netflix Standard' &&
+          (await view(page).locator('.shown').textContent()).trim() === '1 of 3 shown',
+      );
+      await page.keyboard.press('Tab');
+      check(`${label}: Clear search follows the box`, (await focusedName(page)) === 'Clear search');
+      await page.keyboard.press('Enter');
+      await until('three cards', async () => (await cards(page)).length === 3);
+      check(
+        `${label}: Clear search shows every card again, with focus back in the box`,
+        (await page.evaluate(() => document.activeElement?.closest('.search') !== null)) &&
+          (await view(page).locator('.search input').inputValue()) === '',
+      );
+
+      // ── The Sort menu, by keyboard ──────────────────────────────────────────────────────────
+      await keyToName(page, 'Sort and filter');
+      await page.keyboard.press('Enter');
+      await view(page).locator('ss-list-filters').waitFor();
+      check(
+        `${label}: Sort opens the menu below it`,
+        (await view(page).locator('.filters-toggle').getAttribute('aria-expanded')) === 'true',
+      );
+      // Sort by: Name, A to Z (the option after Price).
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Enter');
+      await page.locator('.cdk-overlay-pane mat-option').first().waitFor();
+      await page.keyboard.press('ArrowDown');
+      await page.keyboard.press('Enter');
+      await until('A to Z', async () => (await cards(page))[1] === 'Crave Premium');
+      check(
+        `${label}: Name, A to Z sorts the cards, the pinned one first`,
+        (await layout(page)).join(' | ') ===
+          '# Pinned | Mullvad VPN | # All | Crave Premium | Netflix Standard',
+        (await layout(page)).join(' | '),
+      );
+      // Status: Inactive only (two options down from All).
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Enter');
+      await page.locator('.cdk-overlay-pane mat-option').first().waitFor();
+      if (viewport === WIDE) {
+        await page.screenshot({ path: shot('view-select') });
+        await axeCheck(page, `${label}, the Status select open`);
+      }
+      await page.keyboard.press('ArrowDown');
+      await page.keyboard.press('ArrowDown');
+      await page.keyboard.press('Enter');
+      await until('one card', async () => (await cards(page)).length === 1);
+      const toggleName = await view(page).locator('.filters-toggle').ariaSnapshot();
+      check(
+        `${label}: Inactive only leaves Crave, and Sort says one filter is on`,
+        (await cards(page))[0] === 'Crave Premium' &&
+          toggleName.includes('Sort and filter, 1 on') &&
+          (await view(page).locator('.filters-toggle .badge').textContent()).trim() === '1',
+        toggleName,
+      );
+      await noSideScroll(page, viewport, `${label}, the Sort menu`);
+      await page.screenshot({ path: shot('view-filters'), fullPage: true });
+      await axeCheck(page, `${label}, the Sort menu`);
+      await keyToName(page, 'Clear all');
+      await page.keyboard.press('Enter');
+      await until('three cards', async () => (await cards(page)).length === 3);
+      check(
+        `${label}: Clear all shows every card again and keeps the sort`,
+        (await layout(page)).join(' | ') ===
+          '# Pinned | Mullvad VPN | # All | Crave Premium | Netflix Standard' &&
+          (await view(page).locator('.filters-toggle .badge').count()) === 0,
+      );
+      await keyToName(page, 'Sort and filter', 'Shift+Tab');
+      await page.keyboard.press('Enter');
+      await view(page).locator('ss-list-filters').waitFor({ state: 'detached' });
+
+      // ── A card's details, and Edit ──────────────────────────────────────────────────────────
+      await keyToName(page, 'Details: Netflix Standard');
+      await page.keyboard.press('Enter');
+      const details = view(page).locator(`[data-item="${NETFLIX}"] .details-content`);
+      await details.waitFor();
+      await sleep(400);
+      const facts = await details
+        .locator('.facts li')
+        .evaluateAll((items) => items.map((item) => item.textContent.trim()));
+      const links = await details
+        .locator('.actions a')
+        .evaluateAll((anchors) => anchors.map((anchor) => anchor.getAttribute('href')));
+      check(
+        `${label}: the details say how it's billed, list its features, and link to its plan, cancel page and Edit`,
+        facts.join(' | ') === 'Monthly · auto-renews' &&
+          (await details.locator('ss-feature-list li').count()) > 0 &&
+          links.length === 3 &&
+          links[2] === `/lists/${LIST}/edit?item=${NETFLIX}`,
+        `${facts.join(' | ')} / ${links.join(' | ')}`,
+      );
+      await noSideScroll(page, viewport, `${label}, the details`);
+      await page.screenshot({ path: shot('view-details'), fullPage: true });
+      await axeCheck(page, `${label}, a card's details`);
+      await keyToName(page, 'Edit Netflix Standard');
+      await page.keyboard.press('Enter');
+      const dialog = page.locator('ss-item-dialog');
+      await dialog.waitFor({ timeout: 20000 });
+      await until('the URL without ?item=', () => !page.url().includes('item='));
+      check(
+        `${label}: Edit opens the item dialog for it in the list editor`,
+        pathOf(page) === `/lists/${LIST}/edit` &&
+          (await dialog.locator('h2').first().textContent()).trim() === 'Edit subscription',
+      );
+      await page.keyboard.press('Escape');
+      await dialog.waitFor({ state: 'detached' });
+
+      // ── Edit list ───────────────────────────────────────────────────────────────────────────
+      await openView(page);
+      await until('the cards', async () => (await cards(page)).length === 3);
+      check(
+        `${label}: opening the editor without changing anything leaves no note about changes`,
+        (await view(page).locator('.unsaved').count()) === 0,
+      );
+      await view(page).locator('h1').click();
+      await keyToName(page, 'Edit list');
+      await page.keyboard.press('Enter');
+      await until('the editor', () => pathOf(page) === `/lists/${LIST}/edit`);
+      check(`${label}: Edit list opens the list editor`, true);
+
+      if (viewport === WIDE) {
+        // ── Changes not saved ─────────────────────────────────────────────────────────────────
+        await page.locator('ss-list-edit-page .toolbar input').waitFor();
+        await page.locator('ss-list-edit-page .toolbar input').fill('Work');
+        await until('the draft', async () =>
+          (await readTable(page, 'drafts')).some((draft) => draft.name === 'Work'),
+        );
+        await openView(page);
+        await view(page).locator('.unsaved').waitFor();
+        check(
+          `${label}: the list's changes in the editor, not saved, get a note with a way back`,
+          (await view(page).locator('.unsaved a').getAttribute('href')) === `/lists/${LIST}/edit`,
+        );
+        await axeCheck(page, `${label}, the note about changes`);
+
+        // ── An empty list, and one there isn't ────────────────────────────────────────────────
+        await openView(page, EMPTY);
+        await view(page).locator('ss-empty-state').waitFor();
+        check(
+          `${label}: an empty list offers Add from catalog and Add custom subscription`,
+          (await view(page).locator('ss-empty-state h2').textContent()).trim() ===
+            'No subscriptions yet' &&
+            (await view(page).locator('ss-empty-state a').getAttribute('href')) ===
+              `/search?addTo=${EMPTY}`,
+        );
+        await page.screenshot({ path: shot('view-empty') });
+        await axeCheck(page, `${label}, an empty list`);
+        await view(page).locator('h1').click();
+        await keyToName(page, 'Add custom subscription');
+        await page.keyboard.press('Enter');
+        await page.locator('.cdk-overlay-pane [mat-menu-item]').first().waitFor();
+        await axeCheck(page, `${label}, the custom subscription menu`);
+        await page.keyboard.press('Escape');
+        await keyToName(page, 'Add from catalog', 'Shift+Tab');
+        await page.keyboard.press('Enter');
+        await until('pick mode', () => page.url().includes(`addTo=${EMPTY}`));
+        check(`${label}: Add from catalog opens Search in pick mode for the list`, true);
+
+        await openView(page, '0192f1c4-7b2e-7c3a-9d41-000000000000');
+        await view(page).locator('ss-empty-state').waitFor();
+        check(
+          `${label}: a list there isn't says so`,
+          (await view(page).locator('ss-empty-state h2').textContent()).trim() ===
+            "This list doesn't exist",
+        );
+        await axeCheck(page, `${label}, a list there isn't`);
+      }
+      await context.close();
+    }
+  }
+
+  await browser.close();
+  check('no console errors or warnings', consoleProblems.length === 0, consoleProblems.join(' | '));
+  const failed = checks.filter((ok) => !ok).length;
+  console.log(`\n${checks.length - failed} passed, ${failed} failed`);
+  process.exit(failed > 0 ? 1 : 0);
+})().catch((error) => {
+  console.error(error);
+  if (consoleProblems.length > 0) console.error(consoleProblems.join(' | '));
+  process.exit(1);
+});

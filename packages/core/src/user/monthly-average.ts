@@ -21,15 +21,28 @@ export function monthlyAverage(items: readonly ResolvedItem[], currency: string)
   let approx = false;
   let leftOut = 0;
   for (const item of items) {
-    const prices = item.override
-      ? [item.override]
-      : [item.price, ...item.addOns.map((addOn) => addOn.price)];
-    if (prices.some((price) => price.currency !== currency)) {
+    const monthly = monthlyIn(item, currency);
+    if (monthly === undefined) {
       leftOut++;
       continue;
     }
-    amount += item.monthlyEquivalent;
-    approx ||= prices.some((price) => !price.native);
+    amount += monthly;
+    approx ||= pricesToday(item).some((price) => !price.native);
   }
   return { amount, currency, approx, leftOut };
+}
+
+/**
+ * What the item costs per month today in `currency` (its monthly equivalent), or undefined when its override, price or
+ * an add-on is in another currency, for want of an exchange rate.
+ */
+export function monthlyIn(item: ResolvedItem, currency: string): number | undefined {
+  return pricesToday(item).every((price) => price.currency === currency)
+    ? item.monthlyEquivalent
+    : undefined;
+}
+
+/** The prices that make up its monthly equivalent: the override while it applies, else its price and add-ons. */
+function pricesToday(item: ResolvedItem) {
+  return item.override ? [item.override] : [item.price, ...item.addOns.map((addOn) => addOn.price)];
 }

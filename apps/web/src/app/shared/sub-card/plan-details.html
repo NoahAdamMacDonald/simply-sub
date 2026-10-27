@@ -14,7 +14,7 @@
 @if (hasFeatures()) {
   <div class="group">
     <h3>Features</h3>
-    <ss-feature-list [plan]="plan()" [ranks]="ranks()" />
+    <ss-feature-list [features]="plan().features" [ranks]="ranks()" />
   </div>
 }
 

@@ -1,0 +1,127 @@
+// What Search's and List view's cards share (ss-sub-card, ss-item-card): the card, its icon and names, its links, the
+// details button, and the details that slide open and shut (SlidingDetails), with Hide details at their foot.
+@mixin base {
+  // The card lays itself out by its own width, so it fits a page with or without a column beside it.
+  :host {
+    display: block;
+    container-type: inline-size;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 16px 4px;
+    border-radius: var(--ss-radius-card);
+    background-color: var(--ss-card-bg);
+  }
+
+  .icon {
+    grid-area: icon;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    grid-area: title;
+    min-width: 0;
+  }
+
+  .name {
+    margin: 0;
+    font: var(--mat-sys-title-large);
+    overflow-wrap: anywhere;
+  }
+
+  .plan-name {
+    margin: 0;
+    color: var(--ss-text-muted);
+    font: var(--mat-sys-title-medium);
+  }
+
+  .status {
+    margin-top: 4px;
+  }
+
+  // Text links (Plan ↗, Cancel ↗), not a link styled as a Material button.
+  a:not(.mat-mdc-button-base) {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 4px;
+    color: var(--ss-accent-text);
+    font: var(--mat-sys-label-large);
+
+    mat-icon {
+      width: 16px;
+      height: 16px;
+      font-size: 16px;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--ss-accent-text);
+      outline-offset: 2px;
+    }
+  }
+
+  .note {
+    margin: 0;
+    color: var(--ss-text-muted);
+    font: var(--mat-sys-body-small);
+  }
+
+  .expand {
+    align-self: center;
+    color: var(--ss-text);
+  }
+
+  // The details slide between no height and all of it: the card animates this grid row from 0fr to 1fr
+  // (SlidingDetails), and clips the content only while it moves, so focus rings aren't.
+  .details-body {
+    display: grid;
+    grid-template-rows: 1fr;
+    border-top: 1px solid var(--ss-divider);
+  }
+
+  .details-clip {
+    min-height: 0;
+  }
+
+  .moving .details-clip {
+    overflow: hidden;
+  }
+
+  // Closed, the details are empty: no gap in the card for them.
+  .details:empty {
+    display: none;
+  }
+
+  // Hide details: the open section's foot closes it too.
+  .collapse {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+    min-height: 40px;
+    margin: 12px 0 4px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 8px;
+    background-color: var(--ss-state-tint);
+    color: var(--ss-text);
+    font: var(--mat-sys-label-large);
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--ss-state-hover);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--ss-accent-text);
+      outline-offset: 2px;
+    }
+  }
+}

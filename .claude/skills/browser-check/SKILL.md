@@ -172,6 +172,29 @@ registry), the Tab order, View, and 🗑 asking first (focus on Cancel), deletin
 moving focus on, and Undo putting them back. With axe on the page, the question and the snackbar, and no horizontal
 scroll. A link's line in an accessibility snapshot ends in a colon, before its URL.
 
+`check-list-view.cjs` (M6.8) checks List view on `ng serve` for a Canadian in Alberta. It writes to IndexedDB Work
+Related (Netflix Standard tagged Family, Mullvad VPN, and Crave Premium from Dec 1) and an empty list.
+
+In both themes at both widths, keyboard only, it checks:
+- the header's average and count;
+- the cards by price, with their statuses, tags and the feature summary;
+- the Tab order (the search box, Sort, then each card's 📌 and details);
+- 📌 by Space: saved to the item with no draft, the card moving to Pinned with focus on its 📌, and still there after a
+  reload;
+- the search box finding a tag, and Clear search;
+- the Sort menu: Name, A to Z and Inactive only by keyboard, the count on its button, and Clear all keeping the sort;
+- a card's details, with Edit opening the item dialog in the list editor;
+- Edit list.
+
+Then at 1280 px:
+- the note about the editor's changes not saved;
+- an empty list's Add custom subscription menu and Add from catalog;
+- a list there isn't.
+
+It runs axe on the page, the open Sort menu (and an open select at 1280 px), the details and the empty states, and
+checks for horizontal scroll. Its `focusedName` reads the accessibility snapshot, so an icon's ligature ("tune") and
+an input's `<label>` come out right.
+
 ## Gotchas
 
 - Dates are Material datepickers since the feedback after M6.7: select what's there (Control+A) and type
@@ -204,6 +227,9 @@ scroll. A link's line in an accessibility snapshot ends in a colon, before its U
 - Material renders menus and select panels in an overlay container on `<body>`, outside the page's landmarks, so
   axe's best-practice `region` rule flags their text. `check-components.cjs` sets aside `region` hits inside
   `.cdk-overlay-container` and keeps every other rule.
+- A select's open panel is in the browser's top layer, next to its field in the page (inside `.cdk-overlay-pane`, not
+  `.cdk-overlay-container`). axe's `color-contrast` measures a field label hidden under it against the panel's colour
+  and fails it. `check-list-view.cjs` sets aside contrast hits on text whose middle is under a `.cdk-overlay-pane`.
 - A screenshot taken just after a popup opens catches it mid-animation (half transparent): wait about 500 ms
   before judging how it looks.
 

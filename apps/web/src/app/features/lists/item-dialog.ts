@@ -86,6 +86,7 @@ import { CustomSubsRepository } from '../../core/storage/custom-subs-repository'
 import { RankingsRepository } from '../../core/storage/rankings-repository';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
 import { CalendarHeader } from '../../shared/calendar-header';
+import { periodText } from '../../shared/billing-text';
 import { focusFirstError } from '../../shared/focus-first-error';
 import { isoDateProviders } from '../../shared/iso-date-adapter';
 import { issueErrors } from '../../shared/form-issues';
@@ -97,7 +98,6 @@ import { RankSelect } from '../../shared/rank/rank-select';
 import { catalogIcon, planTitle } from '../../shared/sub-card/card-text';
 import { TagPicker } from '../../shared/tags/tag-picker';
 import { fillScreenWhenNarrow } from '../../shared/wide-dialog';
-import { periodText } from './edit-rows';
 
 /** What the dialog opens on: a plan, bundle or custom subscription to add, at a period, or an item to change. */
 export type ItemDialogRequest =

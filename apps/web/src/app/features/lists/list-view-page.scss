@@ -1,0 +1,145 @@
+:host {
+  display: block;
+  max-width: 1200px;
+}
+
+.summary {
+  margin: 4px 0 0;
+  font: var(--mat-sys-body-large);
+}
+
+.note {
+  margin: 0 0 12px;
+  color: var(--ss-text-muted);
+}
+
+.unsaved a,
+.features a {
+  color: var(--ss-accent-text);
+}
+
+// The cards, and the feature summary on their right from 960 px; under it the summary comes after them, as on the
+// Lists overview.
+.layout {
+  display: grid;
+  gap: 24px;
+
+  &.with-features {
+    @media (min-width: 960px) {
+      grid-template-columns: minmax(0, 1fr) minmax(200px, 280px);
+      align-items: start;
+    }
+  }
+}
+
+.items {
+  min-width: 0;
+}
+
+// The search box, with Sort on its right.
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search {
+  flex: 1;
+  min-width: 0;
+}
+
+.filters-toggle {
+  flex: none;
+}
+
+// How many filters are on, beside Sort.
+.badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  margin-inline-start: 6px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background-color: var(--ss-accent);
+  color: var(--ss-on-accent);
+  font: var(--mat-sys-label-small);
+}
+
+.filters {
+  margin-top: 16px;
+}
+
+// Room under the toolbar, which says how many are shown when some are hidden.
+.shown {
+  min-height: 1.25rem;
+  margin: 8px 0;
+}
+
+.group {
+  margin: 8px 0 12px;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-title-small);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
+
+// One it can't price or name: its name, why, and Edit.
+.unresolved {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  padding: 16px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+
+  .title {
+    flex: 1 1 200px;
+    margin: 0;
+    font: var(--mat-sys-title-medium);
+    overflow-wrap: anywhere;
+  }
+
+  .note {
+    flex: 1 1 100%;
+    order: 1;
+    margin: 0;
+  }
+}
+
+// An empty list's two ways to add, side by side, wrapping on a phone.
+.add {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 12px;
+}
+
+.no-match {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-bottom: 16px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.features {
+  h2 {
+    margin: 0 0 4px;
+    font: var(--mat-sys-title-large);
+  }
+}
