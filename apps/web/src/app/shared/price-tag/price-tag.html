@@ -1,24 +1,31 @@
-<!-- Spaces go inside the spans: Angular drops the whitespace between them, and the flex gaps space them on screen. -->
-<ng-template #tag>
+<!--
+  Spaces go inside the spans: Angular drops the whitespace between them, and the flex gaps space them on screen.
+  A button's action (", add to a list") ends the last hidden span rather than taking one of its own: a browser puts a
+  space before a separate hidden box, which made "a month , add to a list". Free has no hidden words to end, so a
+  button's Free is read from a hidden copy. Not an aria-label: the name has to contain what the price shows (WCAG
+  2.5.3), and "/ mo" is read "a month".
+-->
+<ng-template #tag let-action>
   @if (free()) {
-    <span>Free</span>
+    @if (action) {
+      <span aria-hidden="true">Free</span><span class="visually-hidden">Free, {{ action }}</span>
+    } @else {
+      <span>Free</span>
+    }
   } @else {
     @if (converted()) {
       <span aria-hidden="true">≈ </span><span class="visually-hidden">about </span>
     }
     <span class="amount">{{ amount() }}</span>
     <span class="interval" aria-hidden="true"> {{ interval() }}</span>
-    <span class="visually-hidden"> {{ spokenInterval() }}</span>
+    <span class="visually-hidden"> {{ spokenInterval() }}{{ action ? ', ' + action : '' }}</span>
   }
 </ng-template>
 
 <ng-template #button>
-  <ng-container [ngTemplateOutlet]="tag" />
+  <ng-container [ngTemplateOutlet]="tag" [ngTemplateOutletContext]="{ $implicit: action() }" />
   @if (foreign()) {
     <mat-icon class="fx">currency_exchange</mat-icon>
-  }
-  @if (action(); as action) {
-    <span class="visually-hidden">, {{ action }}</span>
   }
 </ng-template>
 

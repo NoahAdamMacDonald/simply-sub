@@ -123,7 +123,7 @@ describe('PlanDetails', () => {
         '_blank',
         'noopener',
       ]);
-      expect(link?.querySelector('.visually-hidden')?.textContent).toBe(', opens in a new tab');
+      expect(link?.getAttribute('aria-label')).toMatch(/^\[1\] .+, opens in a new tab$/);
     });
 
     it('cites each page a rating quotes, linked to the words, with the quote as its tooltip', async () => {
