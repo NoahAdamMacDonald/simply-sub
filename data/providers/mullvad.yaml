@@ -7,7 +7,7 @@ spendCategory: software
 billingCurrency: { GLOBAL: EUR }
 # Nothing renews, so there's nothing to cancel: Mullvad ended subscriptions in 2022
 # (/en/blog/were-removing-the-option-to-create-new-subscriptions), and the terms say they "expire at the end of
-# the period purchased". The refunds guide is how to get unused time back (read 2026-10-27).
+# the period purchased". The refunds guide is how to get unused time back (read 2026-10-26).
 cancelUrl: https://mullvad.net/en/help/refunds
 sources: { pricing: https://mullvad.net/en/pricing }
 notes: >-

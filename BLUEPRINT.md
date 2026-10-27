@@ -2436,7 +2436,7 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
-**Resolved (2026-10-27, M1.9)**
+**Resolved (2026-10-26, M1.9)**
 - **Every plan and bundle has a sign-up `link`, and every provider a `cancelUrl`:** the schema requires them, so a
   provider without them fails validation, the pipeline's drafts included (section 6.5). Search's cards always
   show Plan ↗ and Cancel ↗; a provider not sold in the user's country still shows only Website ↗. A list item gets
