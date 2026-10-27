@@ -78,3 +78,62 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-26
         sourceUrl: https://ici.tou.tv/abonnement
+
+# Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: ICI TOU.TV's subscription conditions and CBC/Radio-
+# Canada's privacy notice, in French (the notice's sections didn't render, only its cookie notice). Not rated: the
+# other privacy topics, free trials (none), account sharing and device limits (not stated).
+policies:
+  links:
+    - name: "Conditions d'utilisation (in French)"
+      url: https://ici.tou.tv/abonnement/condition
+    - name: 'Avis de confidentialité (in French)'
+      url: https://cbc.radio-canada.ca/fr/transparence-et-engagement/vie-privee/avis-de-confidentialite
+  ratings:
+    - topic: privacy.ads-tracking
+      tier: neutral
+      reason: 'It and a few ad partners use cookies for personalized ads; your settings can block them.'
+      sources:
+        - url: https://cbc.radio-canada.ca/fr/transparence-et-engagement/vie-privee/avis-de-confidentialite
+          quote: 'Nous et un nombre restreint de nos partenaires publicitaires utilisons des témoins pour recueillir certaines de vos données et les utilisons afin d’améliorer votre expérience et de vous présenter des contenus et des publicités personnalisés.'
+        - url: https://cbc.radio-canada.ca/fr/transparence-et-engagement/vie-privee/avis-de-confidentialite
+          quote: "Si vous n'êtes pas à l'aise avec l'utilisation de ces informations, veuillez revoir les paramètres de confidentialité de votre appareil et de votre navigateur avant de poursuivre votre visite."
+      lastVerified: 2026-10-27
+    - topic: billing.cancel-refunds
+      tier: neutral
+      reason: "Renews until you end it on your account page; its conditions don't mention refunds."
+      sources:
+        - url: https://ici.tou.tv/abonnement/condition
+          quote: "Votre abonnement à un Forfait est renouvelé automatiquement à moins que vous ne décidiez d'y mettre fin."
+      lastVerified: 2026-10-27
+    - topic: billing.price-changes
+      tier: leaning-good
+      reason: "30 days' notice of a new price, and you can refuse it by cancelling."
+      sources:
+        - url: https://ici.tou.tv/abonnement/condition
+          quote: 'Une telle modification entrera en vigueur automatiquement, sous réserve d’un préavis de 30 jours aux abonnés concernés'
+        - url: https://ici.tou.tv/abonnement/condition
+          quote: 'vous pourrez refuser cette modification en annulant votre abonnement.'
+      lastVerified: 2026-10-27
+    - topic: legal.disputes
+      tier: leaning-good
+      reason: "Quebec law and Montreal's courts, with no arbitration."
+      sources:
+        - url: https://ici.tou.tv/abonnement/condition
+          quote: 'Les parties conviennent de reconnaître la compétence exclusive des tribunaux du Québec du district judiciaire de Montréal'
+      lastVerified: 2026-10-27
+    - topic: legal.terms-changes
+      tier: leaning-good
+      reason: "30 days' notice of a change, and you can refuse it by cancelling."
+      sources:
+        - url: https://ici.tou.tv/abonnement/condition
+          quote: 'Une telle modification entrera en vigueur automatiquement, sous réserve d’un préavis de 30 jours aux abonnés concernés'
+        - url: https://ici.tou.tv/abonnement/condition
+          quote: 'vous pourrez refuser cette modification en annulant votre abonnement.'
+      lastVerified: 2026-10-27
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'For breaking its conditions, at once and without notice.'
+      sources:
+        - url: https://ici.tou.tv/abonnement/condition
+          quote: 'En cas de non-respect des Conditions d’utilisation, CBC/Radio-Canada se réserve le droit de suspendre votre accès ou de mettre fin à votre abonnement immédiatement sans aucun autre avis ou délai.'
+      lastVerified: 2026-10-27

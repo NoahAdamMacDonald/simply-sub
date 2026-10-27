@@ -132,6 +132,7 @@ const source: CatalogSource = {
     },
   ],
   resellers: [],
+  policyTopics: [],
   logos: new Map(),
 };
 

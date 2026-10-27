@@ -820,3 +820,110 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://proton.me/family
+
+# Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: Proton's privacy policy and terms of service,
+# Proton VPN's privacy policy, its no-logs audit post and its page on usage statistics. Not rated: free trials (only
+# business plans have one).
+policies:
+  links:
+    - name: 'Privacy policy'
+      url: https://proton.me/legal/privacy
+    - name: 'Terms of service'
+      url: https://proton.me/legal/terms
+    - name: 'Proton VPN privacy policy'
+      url: https://protonvpn.com/privacy-policy
+    - name: 'No-logs audit'
+      url: https://protonvpn.com/blog/no-logs-audit
+    - name: 'Usage statistics'
+      url: https://protonvpn.com/support/share-usage-statistics
+  ratings:
+    - topic: privacy.data-collection
+      tier: neutral
+      reason: 'Collects as little as it can, but app usage statistics are on until you turn them off.'
+      sources:
+        - url: https://proton.me/legal/privacy
+          quote: 'Our overriding policy is to collect as little user information (personal data included) as possible to ensure a private user experience when using the Services.'
+        - url: https://protonvpn.com/support/share-usage-statistics
+          quote: 'Usage statistic sharing is enabled by default, but you can disable it at any time (as described below).'
+      lastVerified: 2026-10-27
+    - topic: privacy.data-sharing
+      tier: good
+      reason: 'Only the processors that run its services, such as payments, get any, for that alone.'
+      sources:
+        - url: https://proton.me/legal/privacy
+          quote: 'Processors never store data outside of the scope of their specific purpose.'
+      lastVerified: 2026-10-27
+    - topic: privacy.ads-tracking
+      tier: good
+      reason: 'No ads, and its website analytics are its own, run on its own servers.'
+      sources:
+        - url: https://protonvpn.com/blog/no-logs-audit
+          quote: 'No logs, no ads, open-source and independently audited.'
+        - url: https://proton.me/legal/privacy
+          quote: 'We employ a local installation of self-developed analytics tools.'
+      lastVerified: 2026-10-27
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete or export your data yourself, from your account.'
+      sources:
+        - url: https://proton.me/legal/privacy
+          quote: 'Through your Account interface, you can directly access, edit, delete, or export personal data processed by the Company in your use of the Services.'
+      lastVerified: 2026-10-27
+    - topic: billing.cancel-refunds
+      tier: leaning-good
+      reason: 'Cancel from your dashboard, with a full refund within 30 days of first buying.'
+      sources:
+        - url: https://proton.me/legal/terms
+          quote: 'You may cancel your subscription within 30 days of the initial purchase and receive a full refund for the Service.'
+        - url: https://proton.me/legal/terms
+          quote: 'you must cancel your subscription before its renewal date by visiting your Account dashboard and following the cancel subscription steps'
+      lastVerified: 2026-10-27
+    - topic: billing.price-changes
+      tier: leaning-bad
+      reason: 'A renewal costs whatever the price is then, with no notice promised.'
+      sources:
+        - url: https://proton.me/legal/terms
+          quote: 'If the renewal price has changed, you will be charged the then-current price valid at the time of the renewal of your subscription.'
+      lastVerified: 2026-10-27
+    - topic: legal.disputes
+      tier: leaning-good
+      reason: 'The courts of Geneva under Swiss law, with no arbitration.'
+      sources:
+        - url: https://proton.me/legal/terms
+          quote: 'shall be subject to the jurisdiction of the competent courts of the Canton of Geneva'
+      lastVerified: 2026-10-27
+    - topic: legal.disputes
+      tier: leaning-bad
+      reason: 'In the US, arbitration and no class actions, unless you opt out by post within 30 days.'
+      regions: [US]
+      sources:
+        - url: https://proton.me/legal/terms
+          quote: 'These Terms of Service contain a class action waiver as well as an arbitration provision'
+        - url: https://proton.me/legal/terms
+          quote: 'The opt-out notice must be sent to the foregoing address within 30 calendar days of your first agreeing to these Terms.'
+      lastVerified: 2026-10-27
+    - topic: legal.terms-changes
+      tier: leaning-bad
+      reason: 'It can change them at any time, and using it afterwards counts as agreeing.'
+      sources:
+        - url: https://proton.me/legal/terms
+          quote: 'Within the limits of applicable law, the Company reserves the right to review and change these Terms at any time.'
+        - url: https://proton.me/legal/terms
+          quote: 'Continued use of your Account or the Services, including non-deletion of your Account after such changes are performed shall constitute your consent to them.'
+      lastVerified: 2026-10-27
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'Closed for breaking its terms, with what you paid lost.'
+      sources:
+        - url: https://proton.me/legal/terms
+          quote: 'Paid Accounts which are terminated due to a violation of these Terms will incur the loss of all payments and credits and are not eligible for refund.'
+      lastVerified: 2026-10-27
+    - topic: service.vpn-logging
+      tier: good
+      reason: "No VPN session logs, and Securitum's yearly audits found none."
+      sources:
+        - url: https://protonvpn.com/privacy-policy
+          quote: 'All Proton VPN servers are encrypted and we do not log VPN session data.'
+        - url: https://protonvpn.com/blog/no-logs-audit
+          quote: 'For 5th year running, Proton VPN passes external no-logs audit'
+      lastVerified: 2026-10-27

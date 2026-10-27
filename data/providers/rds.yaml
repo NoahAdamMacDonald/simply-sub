@@ -51,3 +51,46 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-26
         sourceUrl: https://www.rds.ca/abonnement/
+
+# Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: RDS's conditions, in French, and Bell's page on how
+# it collects and uses data. Not rated: price and terms changes and closing accounts (its conditions don't say),
+# data collection and deletion, free trials, account sharing and device limits.
+policies:
+  links:
+    - name: 'Conditions (in French)'
+      url: https://www.rds.ca/conditions
+    - name: "Bell's use of data"
+      url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+  ratings:
+    - topic: privacy.data-sharing
+      tier: leaning-good
+      reason: 'Shared within Bell, and outside it only when the law requires or you agree.'
+      sources:
+        - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+          quote: 'To get a better idea of your needs and how we can fulfill them, we sometimes share information between our companies.'
+        - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+          quote: 'We only disclose personal information with parties outside our family of companies and suppliers when we are required to or when you have given express consent for us to do so.'
+      lastVerified: 2026-10-27
+    - topic: privacy.ads-tracking
+      tier: neutral
+      reason: 'Tailored ads by default; you can change your ad preferences or block cookies.'
+      sources:
+        - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+          quote: 'You can manage the types of ads you receive or opt out of communications by updating your preferences.'
+      lastVerified: 2026-10-27
+    - topic: billing.cancel-refunds
+      tier: neutral
+      reason: 'Cancel and keep it to the end of the period, with no refunds.'
+      sources:
+        - url: https://www.rds.ca/conditions
+          quote: 'Les frais d’abonnement ne sont pas remboursables. Suite à toute annulation, vous conserverez l’accès au service jusqu’à la fin de votre période de facturation en cours, après quoi votre abonnement prendra fin.'
+      lastVerified: 2026-10-27
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Binding arbitration in your city, giving up courts and trials.'
+      sources:
+        - url: https://www.rds.ca/conditions
+          quote: 'par voie d’arbitrage exécutoire dans votre ville de résidence'
+        - url: https://www.rds.ca/conditions
+          quote: 'Vous renoncez expressément au droit de règlement d’un différend par quelque autre moyen, y compris, notamment par un procès.'
+      lastVerified: 2026-10-27

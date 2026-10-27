@@ -85,7 +85,7 @@
   question: Whether you can take a dispute to court or join a class action.
   tiers:
     good: Disputes go to the courts or a consumer board where you live, and class actions are allowed.
-    leaning-good: Disputes go to a court or board of its choosing, with no arbitration.
+    leaning-good: Disputes go to a court or board, with no arbitration, but one of its choosing or with no class actions.
     neutral: Arbitration is required, but you can opt out of it or use small-claims court.
     leaning-bad: Arbitration is required with a class-action waiver, and opting out is narrow.
     bad: Arbitration is required with a class-action waiver, and you can't opt out.

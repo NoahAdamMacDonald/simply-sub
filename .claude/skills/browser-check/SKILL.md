@@ -98,7 +98,9 @@ scrolling 900 px (`elementFromPoint` across the bar and the top bar, so nothing 
 under 960 px with Sort first in the drawer, the details' slide (their `moving` class) and the details button saying
 closed at once, Hide details from the foot of a long card (focus back on the details button, the card back in
 view), and with `reducedMotion: 'reduce'` no animation; with axe while scrolled. The first card's Tab order is now
-its chips, then its links, prices and details button.
+its chips, then its links, prices and details button. M1.13 added Terms and policies: Mullvad's groups, each rating's
+tier in words, topic and reason, and its four linked pages; Netflix's ad-plan ratings and its Canadian terms; for a
+US user, Proton's US disputes rating and none of Netflix's Canadian ones; axe with the section open.
 
 ## Gotchas
 

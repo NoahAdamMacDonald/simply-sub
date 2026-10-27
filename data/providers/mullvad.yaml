@@ -268,3 +268,93 @@ resellers:
             autoRenew: false
             lastVerified: 2026-10-26
             sourceUrl: https://www.webhallen.com/se/product/267706-Mullvad-VPN-12-manader-5-anvandare
+
+# Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: Mullvad's terms of service, privacy policy and
+# no-logging policy, and its post on Cure53's infrastructure audit. Not rated: free trials (it has none) and
+# closing accounts (its terms don't say).
+policies:
+  links:
+    - name: 'Terms of service'
+      url: https://mullvad.net/en/help/terms-service
+    - name: 'Privacy policy'
+      url: https://mullvad.net/en/help/privacy-policy
+    - name: 'No-logging policy'
+      url: https://mullvad.net/en/help/no-logging-data-policy
+    - name: "Cure53's audit"
+      url: https://mullvad.net/en/blog/no-pii-or-privacy-leaks-found-cure53s-infrastructure-audit
+  ratings:
+    - topic: privacy.data-collection
+      tier: good
+      reason: 'No personal details to sign up, and no activity or connection logs.'
+      sources:
+        - url: https://mullvad.net/en/help/no-logging-data-policy
+          quote: 'When you sign up for Mullvad, we do not ask for any personal information – no username, no password, no email address.'
+      lastVerified: 2026-10-27
+    - topic: privacy.data-sharing
+      tier: good
+      reason: 'Shared only with the email and payment suppliers that work for it.'
+      sources:
+        - url: https://mullvad.net/en/help/privacy-policy
+          quote: 'Your personal data will only be shared with third party suppliers who are performing services on our behalf and for the purposes stated above.'
+      lastVerified: 2026-10-27
+    - topic: privacy.ads-tracking
+      tier: good
+      reason: 'No ads, and no usage statistics sent to the likes of Google Analytics.'
+      sources:
+        - url: https://mullvad.net/en/help/no-logging-data-policy
+          quote: 'We refrain from sending usage statistics to external parties such as Google Analytics.'
+      lastVerified: 2026-10-27
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'Keeps almost nothing: support emails go after 70 days, payment IDs after 20.'
+      sources:
+        - url: https://mullvad.net/en/help/privacy-policy
+          quote: 'After 70 days, all emails/problem reports sent to our support address are automatically, permanently erased'
+        - url: https://mullvad.net/en/help/no-logging-data-policy
+          quote: '*transaction_id is deleted 20 days after payment'
+      lastVerified: 2026-10-27
+    - topic: billing.cancel-refunds
+      tier: leaning-good
+      reason: 'Prepaid, so nothing renews, with a 14-day money-back guarantee (not for cash or crypto).'
+      sources:
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'These terms will expire at the end of the period purchased.'
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'We offer users a 14-day money-back guarantee.'
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'We do not offer refunds for cash and crypto payments.'
+      lastVerified: 2026-10-27
+    - topic: billing.price-changes
+      tier: good
+      reason: 'Prepaid time is never repriced, and changes to its terms come a month after notice.'
+      sources:
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'These terms will expire at the end of the period purchased.'
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'Any material changes to these terms will be notified via a prominent notice on mullvad.net/blog at least one month before the changes are applied.'
+      lastVerified: 2026-10-27
+    - topic: legal.disputes
+      tier: leaning-good
+      reason: "Sweden's consumer disputes board or its courts, with no arbitration."
+      sources:
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'Any dispute, controversy, or claim arising out of or in connection with the terms shall be handled by the National Board for Consumer Disputes (ARN) or the Swedish courts'
+      lastVerified: 2026-10-27
+    - topic: legal.terms-changes
+      tier: good
+      reason: "A month's notice on its blog, and you can stop and ask for a refund."
+      sources:
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'Any material changes to these terms will be notified via a prominent notice on mullvad.net/blog at least one month before the changes are applied.'
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'If you wish to exercise your right to reject such changes, you should stop using the service (for refunds, see below).'
+      lastVerified: 2026-10-27
+    - topic: service.vpn-logging
+      tier: good
+      reason: "No connection, IP or bandwidth logs, and Cure53's audit found no personal data."
+      sources:
+        - url: https://mullvad.net/en/help/no-logging-data-policy
+          quote: 'no logging of connections, including when one is made, when it disconnects, for how long, or any kind of timestamp'
+        - url: https://mullvad.net/en/blog/no-pii-or-privacy-leaks-found-cure53s-infrastructure-audit
+          quote: 'Cure53 did not find any Personally Identifiable Information (PII) or potentially privacy-compromising information.'
+      lastVerified: 2026-10-27

@@ -1092,10 +1092,33 @@ and Search shows one next to a plan's prices when it's cheaper for the buyer (M5
 - **Kept up to date:** the discovery pipeline finds each provider's official reseller page (section 6.5, M3.7), and
   the nightly check rereads reseller prices and the approval quotes (section 6.4, M8.3).
 
-As first read (2026-10-26, M1.8), Mullvad's official resellers are Amazon (13 country stores), Inet, Webhallen,
-ProxyStore, SerialCart and Laptop with Linux. The catalog has Amazon.ca, Inet, Webhallen, ProxyStore and SerialCart.
-Amazon's other stores wait because their prices depend on the delivery address, and Laptop with Linux because its
-price follows the delivery country's VAT and its currency menu.
+As read on 2026-10-26 (M1.8) and 2026-10-27 (M1.12), Mullvad's official resellers are Amazon (13 country stores),
+Inet, Webhallen, ProxyStore, SerialCart and Laptop with Linux. The catalog has all but Amazon's 12 stores outside
+Canada, which show Mullvad's price only in the basket. Laptop with Linux's price with VAT follows the buyer's country,
+so its price before VAT is stored, as SerialCart's is.
+
+### 4.10 Terms and policies
+A card's expanded section rates the provider's terms of service, privacy policy and other policies (M1.13), so a
+buyer can see what signing up means beyond the price.
+- **Topics** come from `data/policy-topics.yaml`, in four groups: privacy (data collection, selling or sharing data,
+  ads and tracking, deleting your data), billing (cancelling and refunds, price changes, free trials), legal
+  (disputes, changes to the terms, closing your account) and service (VPN logging for VPNs; account sharing and
+  device limits for streaming services). Each has a rubric for five tiers, good, leaning good, neutral, leaning bad
+  and bad, so a tier means the same for every provider. Data collection's is the model: collecting only what the
+  service needs is good, asking first leaning good, an opt-out neutral, a partial opt-out leaning bad and none bad.
+- **A provider's `policies`:** its ratings and the pages they quote (`links`). A rating is a topic, a tier, a reason
+  of one line (100 characters at most), one to three sources (a URL and the page's words, word for word) and the
+  date they were read, optionally for some plans (an ad tier's tracking) or regions (a country's own terms), which
+  sit over a rating for every plan or everywhere. Every quoted page is linked and every link is quoted; a topic for
+  some categories applies only to a provider with a plan in one (`validateCatalog`).
+- **On the card:** core's `planPolicies` picks, for the plan shown and the user's country, each topic's rating, by
+  group in the registry's order, and the pages those ratings quote. Each rating is a pill in its tier's colour,
+  green to red (`--policy-*`, section 8.1), named in words too ("Leaning bad, Disputes: …"), then the topic and the
+  reason; the pages follow, linked. A topic with no rating isn't shown, and a provider with none has no section.
+- **Read like prices:** the policy-research skill, from the provider's own pages; a page behind a bot check stays
+  unread. The quotes stay in the catalog files for review, though the card doesn't show them (about 7 kB more
+  to download, compressed, for ten providers). Nothing rereads them nightly yet: validation warns once a rating is
+  a year old.
 
 ---
 
@@ -1302,8 +1325,9 @@ or the disk. Today is the date where the script runs, which is UTC in CI.
 
 Validation fails if:
 - a file isn't valid YAML (a duplicate key, more than one document), isn't one of `data/features.yaml`,
-  `data/categories.yaml`, `data/resellers.yaml` (optional), `data/providers/<id>.yaml` or `data/bundles/<slug>.yaml`
-  (always `.yaml`), or `features.yaml` or `categories.yaml` is missing
+  `data/categories.yaml`, `data/resellers.yaml` (optional), `data/policy-topics.yaml` (optional until a provider
+  rates its policies), `data/providers/<id>.yaml` or `data/bundles/<slug>.yaml` (always `.yaml`), or
+  `features.yaml` or `categories.yaml` is missing
 - a file doesn't match its Zod schema (section 4.5), which already covers unknown keys, formats, negative amounts
   and the checks within one file
 - a provider's `id` isn't its file name, or a bundle's `id` isn't `bundle.<file name>`
@@ -1325,6 +1349,10 @@ Validation fails if:
   square, is under 32 pixels or is over 100 KB
 - a provider's `resellers` name a shop that isn't in `data/resellers.yaml`, quote an approval page off the
   provider's own domain, or give a price whose `sourceUrl` isn't on the shop's website or `domains` (section 4.9)
+- a provider's `policies` rate a topic that isn't in `data/policy-topics.yaml`, or one for categories none of its
+  plans is in, quote a page its `links` don't list or list one no rating quotes, rate a topic twice for the same
+  plans and regions, name a plan that isn't its own, or were read after today (section 4.10); a warning once a
+  rating is over a year old
 - `includes-subscription` lists the plan itself or its own provider, or makes a loop (Duo → Unlimited → Duo)
 - a provider has `billingCurrency`, and a plan or add-on is priced in a region that isn't in it, or has no price
   in the charged currency for that region
@@ -1361,7 +1389,8 @@ write the files.
 2. Build the snapshot `{ data, meta }`:
    - `data` is `schemaVersion` plus the source files: features, categories, providers sorted by id (with an
      `iconUrl` when the provider has a logo; without one, the app shows its first letter), bundles sorted by id,
-     and `data/resellers.yaml`'s resellers sorted by id, each with an `iconUrl` the same way (section 4.9). Bundles stay in their source shape: the app computes feature unions and
+     `data/resellers.yaml`'s resellers sorted by id, each with an `iconUrl` the same way (section 4.9), and
+     `data/policy-topics.yaml`'s topics in its order (`policyTopics`, section 4.10). Bundles stay in their source shape: the app computes feature unions and
      savings in core for the user's region, and `GET /bundles` adds them per request (M2.4).
    - `meta` is `catalogVersion` (section 5.1), `generatedAt` (the build time, UTC), every priced region, and
      counts.
@@ -1897,6 +1926,7 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
     --ss-danger: var(--rank-unwanted-text);  --ss-on-danger: var(--ss-on-accent);  /* ss-confirm's danger button */
     --ss-dot-ring: oklch(from var(--ss-text) l c h / 0.3);  /* a faint ring that keeps pale dots visible */
     --ss-state-tint: oklch(from var(--ss-text) l c h / 0.05);  --ss-state-hover: oklch(from var(--ss-text) l c h / 0.1);  /* a plain control drawn as a bar, at rest and hovered: a card's Hide details (M5.7) */
+    --policy-good: var(--rank-wanted);  --policy-leaning-good: #B5E61D;  --policy-neutral: var(--rank-uses);  --policy-leaning-bad: var(--rank-unused);  --policy-bad: var(--rank-unwanted);  --policy-label: var(--budget-label);  /* Terms and policies' tier pills, green to red, behind dark text in both themes: 4.9:1 on the red, 7:1 or more on the rest (M1.13) */
     --ss-icon-tile: #FFFFFF;                 /* behind logos in both themes: sites draw icons for white (M5.2) */
   }
   [data-theme='dark'] {
@@ -2458,6 +2488,31 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-27, M1.13)**
+- **Terms and policies on every card** (section 4.10): 13 topics in four groups (privacy, billing, legal, service),
+  each with a five-tier rubric in `data/policy-topics.yaml`, its own commit. Data collection's rubric is the one asked
+  for; the others follow it. Every rating has a one-line reason and the provider's words, and the card links the
+  pages they come from.
+- **Ten providers rated, 111 quotes,** each checked against the page's saved text word for word (the
+  policy-research skill's `quote-check.cjs`), read 2026-10-27:
+  - Mullvad (9 ratings) and Proton (11) from their terms, privacy policies, no-logs policies and audit posts.
+    Proton's US disputes rating (arbitration, a class-action waiver, a 30-day postal opt-out) sits over its general
+    one (Geneva's courts).
+  - Netflix (13) from Canada's terms of use (so those ratings are for Canada only), its privacy statement and its
+    household and download help; its ad plan has its own ratings for tracking, sharing (no extra members) and
+    downloads (15 a month).
+  - ICI TOU.TV (6) from its subscription conditions and CBC/Radio-Canada's cookie notice, in French.
+  - Crave (7), TSN (4) and RDS (4) from the Bell Media terms, TSN's and RDS's own conditions and Bell's page on how
+    it uses data. Bell Media's terms allow closing an account "for any reason" without notice and require
+    arbitration in Toronto with no class actions: both bad.
+  - Disney+, Hulu and ESPN (4 each), only the privacy topics, from The Walt Disney Company's privacy policy.
+- **Left unrated, and why:** Disney+'s subscriber agreement renders only its footer here, hulu.com sends this
+  machine to Disney+, and plus.espn.com is Access Denied, so their billing and legal topics wait. CBC/Radio-Canada's
+  privacy notice shows only its contents and cookie notice. TSN's and RDS's conditions say nothing on price or terms
+  changes or closing accounts. No provider here offers a free trial on its personal plans.
+- **The catalog files grew** from 61 to 104 kB a region (18 kB compressed), mostly quotes, which the card doesn't
+  show but reviewers need. The initial bundle grew by 0.2 kB (the tokens, 488.1 kB) and the Search chunk by 3 kB.
 
 **Resolved (2026-10-27, M1.12)**
 - **Every provider's research checks bundles, official resellers and its terms, every time**, not only when they're

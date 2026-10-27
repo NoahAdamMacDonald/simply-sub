@@ -84,3 +84,71 @@ addOns:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://www.starz.ca
+
+# Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: the Bell Media terms and Bell's page on how it
+# collects and uses data, which Crave's FAQ links. Not rated: data collection and deletion (that page doesn't
+# say), free trials, account sharing and device limits.
+policies:
+  links:
+    - name: 'Bell Media terms'
+      url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
+    - name: "Bell's use of data"
+      url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+  ratings:
+    - topic: privacy.data-sharing
+      tier: leaning-good
+      reason: 'Shared within Bell, and outside it only when the law requires or you agree.'
+      sources:
+        - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+          quote: 'To get a better idea of your needs and how we can fulfill them, we sometimes share information between our companies.'
+        - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+          quote: 'We only disclose personal information with parties outside our family of companies and suppliers when we are required to or when you have given express consent for us to do so.'
+      lastVerified: 2026-10-27
+    - topic: privacy.ads-tracking
+      tier: neutral
+      reason: 'Tailored ads by default; you can change your ad preferences or block cookies.'
+      sources:
+        - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+          quote: 'You can manage the types of ads you receive or opt out of communications by updating your preferences.'
+      lastVerified: 2026-10-27
+    - topic: billing.cancel-refunds
+      tier: neutral
+      reason: "Cancel at any time to stop at the end of the period; fees aren't refunded."
+      sources:
+        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
+          quote: 'You may terminate your subscription at any time, which termination will only be effective at the end of your subscription period.'
+        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
+          quote: 'All Fees are non-refundable.'
+      lastVerified: 2026-10-27
+    - topic: billing.price-changes
+      tier: leaning-bad
+      reason: 'Fees can change at any time on notice, which can be a post on its site.'
+      sources:
+        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
+          quote: 'Bell Media reserves the right to change the amount of, or basis for determining, any Fees for a Pay Service, and to institute new Fees or terms at any time effective upon notice to you, which notice may for certainty include the posting of any such changes on the relevant pages related to the use of the Pay Service.'
+      lastVerified: 2026-10-27
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Private arbitration in Toronto with no class actions, wherever the law allows it.'
+      sources:
+        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
+          quote: 'will be referred to and finally settled (to the exclusion of the courts) by private and confidential binding arbitration before a single arbitrator held in Toronto, Ontario'
+        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
+          quote: 'You agree to waive any right you may have to commence or participate in any class action against us related to any Claim'
+      lastVerified: 2026-10-27
+    - topic: legal.terms-changes
+      tier: leaning-bad
+      reason: 'It can change them at any time, and using its sites afterwards means you accept.'
+      sources:
+        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
+          quote: 'Your continued use of a Bell Media Site following the posting of any changes to these Terms and Conditions will mean you accept those changes.'
+      lastVerified: 2026-10-27
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can close your account at any time, for any reason, without notice or a refund.'
+      sources:
+        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
+          quote: 'Bell Media, in its sole and absolute discretion, may, without notice to you, suspend or terminate your account or your use of, or access to, a Bell Media Site or any of the Services'
+        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
+          quote: 'All Fees are non-refundable.'
+      lastVerified: 2026-10-27

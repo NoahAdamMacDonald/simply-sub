@@ -50,7 +50,7 @@ API contract's prices are illustrative and never a source. This skill is how to 
   - **Terms of service, privacy policy and the other policies** (refunds, cookies, household or sharing rules): they
     hold what pricing pages leave out, such as where it's sold (`availableIn`), the billing period and auto-renewal,
     refunds, notice of price changes, limits on streams, devices and downloads, bundles and partner billing. Use
-    them for those fields, and list the pages read in the provider file's header comment.
+    them for those fields, and rate them on the policy topics with the policy-research skill (M1.13).
 - **Report what you couldn't verify**, each with the reason (geo-blocked, not stated, conflicting).
 
 ## Which tool

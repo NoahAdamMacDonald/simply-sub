@@ -54,3 +54,48 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-26
         sourceUrl: https://help.hulu.com/article/hulu-how-much-does-hulu-cost
+
+# Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: The Walt Disney Company's privacy policy, which
+# covers Hulu. Not rated: the billing and legal topics (hulu.com sends this machine to Disney+), account sharing
+# and device limits.
+policies:
+  links:
+    - name: 'Privacy policy'
+      url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+  ratings:
+    - topic: privacy.data-collection
+      tier: leaning-bad
+      reason: 'Tracks you with cookies, pixels and SDKs by default; only ads and cookies can be turned off.'
+      sources:
+        - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+          quote: 'We collect information through a variety of technologies, such as cookies, Flash cookies, pixels, tags, software development kits'
+        - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+          quote: 'Click on “Do Not Sell or Share My Personal Information”, “Your Privacy Controls”, “Manage Your Cookies Settings”, “Modify Your Cookie Preferences” or “Manage (Privacy) Preferences” in our website footers'
+      lastVerified: 2026-10-27
+    - topic: privacy.data-sharing
+      tier: neutral
+      reason: 'Shares identifiers with ad companies, unless you opt out in its privacy controls.'
+      sources:
+        - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+          quote: 'When we provide you with relevant advertising on third-party sites and applications, we may share limited personal information about you, such as certain identifiers or hashed email address, with third parties.'
+        - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+          quote: 'When you use the Hulu service, Hulu may share information with its business partners that help offer the Hulu service, including for example, its content programmers, distributors and device partners, and corporate owners'
+        - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+          quote: 'Click on “Do Not Sell or Share My Personal Information”, “Your Privacy Controls”, “Manage Your Cookies Settings”, “Modify Your Cookie Preferences” or “Manage (Privacy) Preferences” in our website footers'
+      lastVerified: 2026-10-27
+    - topic: privacy.ads-tracking
+      tier: neutral
+      reason: 'Targets ads from what you do on its sites and others, unless you opt out.'
+      sources:
+        - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+          quote: 'Provide you with targeted advertising based on your activity on our sites and applications and on third-party sites and applications;'
+        - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+          quote: 'Click on “Do Not Sell or Share My Personal Information”, “Your Privacy Controls”, “Manage Your Cookies Settings”, “Modify Your Cookie Preferences” or “Manage (Privacy) Preferences” in our website footers'
+      lastVerified: 2026-10-27
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: "You can delete your account; how long it keeps your data afterwards isn't stated."
+      sources:
+        - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+          quote: 'Updating or correcting the contact information you gave us, resetting your password, or deleting your registration account'
+      lastVerified: 2026-10-27
