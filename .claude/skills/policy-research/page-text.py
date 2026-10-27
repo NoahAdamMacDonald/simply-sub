@@ -8,7 +8,7 @@ source = re.sub(r'<(script|style|noscript|svg)[^>]*>.*?</\1>', ' ', source, flag
 # Block elements end a line.
 source = re.sub(r'</?(p|div|li|h[1-6]|br|tr|section|article|ul|ol|table|header|footer|dd|dt)[^>]*>', '\n', source, flags=re.I)
 text = html.unescape(re.sub(r'<[^>]+>', ' ', source))
-lines = [re.sub(r'[ \t ]+', ' ', line).strip() for line in text.split('\n')]
+lines = [re.sub(r'[ \t\u00a0]+', ' ', line).strip() for line in text.split('\n')]
 lines = [line for line in lines if line]
 open(sys.argv[2], 'w', encoding='utf-8', newline='\n').write('\n'.join(lines) + '\n')
 print(f'{sys.argv[2]}: {len(lines)} lines, {sum(len(line) for line in lines)} chars')
