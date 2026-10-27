@@ -48,6 +48,15 @@ function price(
 
 const streaming = { category: 'streaming', spendCategory: 'streaming' };
 
+/** One rubric for every test topic: the card shows a tier's name, not its rubric. */
+const policyTiersText = {
+  good: 'Good.',
+  'leaning-good': 'Leaning good.',
+  neutral: 'Neutral.',
+  'leaning-bad': 'Leaning bad.',
+  bad: 'Bad.',
+};
+
 export const searchCatalogData: CatalogData = {
   schemaVersion: 1,
   features: [
@@ -169,6 +178,47 @@ export const searchCatalogData: CatalogData = {
           ],
         },
       ],
+      policies: {
+        links: [
+          { name: 'Terms of service', url: 'https://mullvad.net/en/help/terms-service' },
+          { name: 'No-logging policy', url: 'https://mullvad.net/en/help/no-logging-data-policy' },
+        ],
+        ratings: [
+          {
+            topic: 'service.vpn-logging',
+            tier: 'good',
+            reason: 'No connection logs, and an audit found none.',
+            sources: [
+              {
+                url: 'https://mullvad.net/en/help/no-logging-data-policy',
+                quote: 'We do not keep activity logs of any kind.',
+              },
+            ],
+            lastVerified: '2026-10-22',
+          },
+          {
+            topic: 'legal.disputes',
+            tier: 'good',
+            reason: 'Swedish courts or the consumer disputes board.',
+            sources: [
+              {
+                url: 'https://mullvad.net/en/help/terms-service',
+                quote:
+                  'shall be handled by the National Board for Consumer Disputes (ARN) or the Swedish courts',
+              },
+            ],
+            lastVerified: '2026-10-22',
+          },
+          {
+            topic: 'legal.disputes',
+            tier: 'bad',
+            reason: 'A made-up US rule, for the test.',
+            regions: ['US'],
+            sources: [{ url: 'https://mullvad.net/en/help/terms-service', quote: 'Any dispute' }],
+            lastVerified: '2026-10-22',
+          },
+        ],
+      },
     },
     {
       id: 'netflix',
@@ -249,6 +299,30 @@ export const searchCatalogData: CatalogData = {
       website: 'https://www.amazon.com',
       domains: ['amazon.ca'],
       iconUrl: 'https://sub.simplely.ca/icons/amazon.webp',
+    },
+  ],
+  policyTopics: [
+    {
+      id: 'privacy.data-collection',
+      name: 'Data collection',
+      group: 'privacy',
+      question: 'What it collects beyond what the service needs to work.',
+      tiers: policyTiersText,
+    },
+    {
+      id: 'legal.disputes',
+      name: 'Disputes',
+      group: 'legal',
+      question: 'Whether you can take a dispute to court.',
+      tiers: policyTiersText,
+    },
+    {
+      id: 'service.vpn-logging',
+      name: 'VPN logging',
+      group: 'service',
+      question: 'Whether the VPN keeps logs.',
+      tiers: policyTiersText,
+      categories: ['vpn'],
     },
   ],
 };

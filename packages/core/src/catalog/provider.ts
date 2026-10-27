@@ -12,6 +12,7 @@ import {
   slugSchema,
   textSchema,
 } from './formats';
+import { policiesSchema } from './policy';
 import { pricesSchema } from './price';
 import { resellerListingSchema } from './reseller';
 
@@ -146,6 +147,11 @@ export const providerSchema = z
         "Shops the provider's own site names as official resellers of its plans, with their regular prices (BLUEPRINT §4.9)",
       )
       .optional(),
+    policies: policiesSchema
+      .describe(
+        "Its terms and policies rated on policy-topics.yaml's topics, quoting its own pages (BLUEPRINT §4.10)",
+      )
+      .optional(),
   })
   .superRefine((provider, ctx) => {
     // Plan and add-on ids live under the provider's id, so they're unique across the catalog. A badly formed
@@ -194,6 +200,17 @@ export const providerSchema = z
         listing.offers.map((offer) => offer.plan),
         (offerIndex) => ['resellers', index, 'offers', offerIndex, 'plan'],
       );
+    });
+    provider.policies?.ratings.forEach((rating, index) => {
+      (rating.plans ?? []).forEach((plan, planIndex) => {
+        if (!planIds.includes(plan)) {
+          ctx.addIssue({
+            code: 'custom',
+            message: `"${plan}" isn't a plan in this file${choices(plan, planIds)}`,
+            path: ['policies', 'ratings', index, 'plans', planIndex],
+          });
+        }
+      });
     });
   })
   .meta({

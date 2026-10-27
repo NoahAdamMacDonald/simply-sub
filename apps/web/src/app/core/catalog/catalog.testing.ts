@@ -56,6 +56,7 @@ export function catalogFile(
       ],
       bundles: [],
       resellers: [],
+      policyTopics: [],
     },
     meta: {
       catalogVersion,

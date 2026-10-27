@@ -1,11 +1,15 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 import {
   planExtras,
+  planPolicies,
   type AddRequest,
   type BundleSaving,
   type PickedPrice,
   type PlanMatch,
+  type PolicyGroup,
+  type PolicyTier,
   type Rank,
   type RankKey,
   type SnapshotProvider,
@@ -22,14 +26,31 @@ import { PriceTag } from '../price-tag/price-tag';
 import { ProviderIcon } from '../provider-icon/provider-icon';
 import { catalogIcon, planTitle, savingText, type SavingText } from './card-text';
 
+/** The tiers' names, as each rating's pill shows them (BLUEPRINT §4.10). */
+const tierNames: Record<PolicyTier, string> = {
+  good: 'Good',
+  'leaning-good': 'Leaning good',
+  neutral: 'Neutral',
+  'leaning-bad': 'Leaning bad',
+  bad: 'Bad',
+};
+
+const groupNames: Record<PolicyGroup, string> = {
+  privacy: 'Privacy',
+  billing: 'Billing',
+  legal: 'Legal',
+  service: 'Service',
+};
+
 /**
  * A Search card's expanded section (PROJECT-PLAN P8): the plan's features with the user's ranks, its add-ons, the
- * bundles that include it and what they save, what a suite includes and saves, its perks and notes, and when its
- * price was checked. Core's planExtras prices them for the user from the catalog file for their country.
+ * bundles that include it and what they save, what a suite includes and saves, its perks and notes, its terms and
+ * policies rated with a line on why and links to the pages (M1.13), and when its price was checked. Core's
+ * planExtras prices them for the user from the catalog file for their country.
  */
 @Component({
   selector: 'ss-plan-details',
-  imports: [FeatureList, NgTemplateOutlet, PriceTag, ProviderIcon],
+  imports: [FeatureList, MatIcon, NgTemplateOutlet, PriceTag, ProviderIcon],
   templateUrl: './plan-details.html',
   styleUrl: './plan-details.scss',
 })
@@ -67,6 +88,15 @@ export class PlanDetails {
       ...(fx && { fx }),
     });
   });
+  /** Its terms and policies for this plan, as they apply where the user lives (core's planPolicies). */
+  protected readonly policies = computed(() => {
+    const saved = this.settings.saved();
+    const data = this.catalog.catalog();
+    if (!saved || !data) return undefined;
+    return planPolicies(this.provider(), this.plan().id, saved.country, data.policyTopics);
+  });
+  protected readonly tierNames = tierNames;
+  protected readonly groupNames = groupNames;
   protected readonly country = computed(() => {
     const code = this.settings.saved()?.country;
     return code && countryName(code);

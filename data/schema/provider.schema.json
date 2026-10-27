@@ -529,6 +529,117 @@
         "additionalProperties": false
       },
       "description": "Shops the provider's own site names as official resellers of its plans, with their regular prices (BLUEPRINT §4.9)"
+    },
+    "policies": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "As the card links it (Terms of use)"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://",
+                "patternErrorMessage": "Use a full https:// URL"
+              }
+            },
+            "required": ["name", "url"],
+            "additionalProperties": false
+          },
+          "description": "The terms, privacy policy and other pages the ratings quote, as the card links them"
+        },
+        "ratings": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "topic": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
+                "patternErrorMessage": "Use kebab-case segments joined by dots (video.quality, password-manager.item-types)",
+                "description": "A topic id from policy-topics.yaml"
+              },
+              "tier": {
+                "type": "string",
+                "enum": ["good", "leaning-good", "neutral", "leaning-bad", "bad"],
+                "description": "The rubric's tier its quotes fit"
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100,
+                "description": "Why, in one short line, shown beside the tier"
+              },
+              "sources": {
+                "minItems": 1,
+                "maxItems": 3,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "format": "uri",
+                      "pattern": "^https://",
+                      "patternErrorMessage": "Use a full https:// URL",
+                      "description": "The page the quote is on: one of the links"
+                    },
+                    "quote": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "The provider's own words there, word for word"
+                    }
+                  },
+                  "required": ["url", "quote"],
+                  "additionalProperties": false
+                },
+                "description": "Where it says so"
+              },
+              "plans": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)+$",
+                  "patternErrorMessage": "Use <provider id>.<slug> (netflix.standard)"
+                },
+                "description": "Only these plans (an ad tier's tracking), over a rating for every plan"
+              },
+              "regions": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:[A-Z]{2}|GLOBAL)$",
+                  "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL"
+                },
+                "description": "Only buyers here (a country's own terms), over a rating for everywhere"
+              },
+              "lastVerified": {
+                "type": "string",
+                "format": "date",
+                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+                "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+                "description": "When the quotes were read"
+              }
+            },
+            "required": ["topic", "tier", "reason", "sources", "lastVerified"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["links", "ratings"],
+      "additionalProperties": false,
+      "description": "Its terms and policies rated on policy-topics.yaml's topics, quoting its own pages (BLUEPRINT §4.10)"
     }
   },
   "required": ["id", "name", "website", "category", "spendCategory", "cancelUrl", "plans"],

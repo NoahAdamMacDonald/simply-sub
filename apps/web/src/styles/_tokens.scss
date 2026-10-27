@@ -52,6 +52,15 @@
   --suggest-hard: var(--rank-unwanted);
   --suggest-normal: var(--rank-unused);
   --suggest-soft: var(--rank-uses);
+  // Terms and policies' five tiers (M1.13), green to red: the rank fills, and a yellow-green between Wanted's green
+  // and Uses' yellow for leaning good. In both themes they're pills behind --policy-label, which is 4.9:1 on the red
+  // and 7:1 or more on the others.
+  --policy-good: var(--rank-wanted);
+  --policy-leaning-good: #b5e61d;
+  --policy-neutral: var(--rank-uses);
+  --policy-leaning-bad: var(--rank-unused);
+  --policy-bad: var(--rank-unwanted);
+  --policy-label: var(--budget-label);
   // Destructive actions (ss-confirm's danger button): white on it is 6.3:1.
   --ss-danger: var(--rank-unwanted-text);
   --ss-on-danger: var(--ss-on-accent);
