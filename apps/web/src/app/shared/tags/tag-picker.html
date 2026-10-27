@@ -23,6 +23,7 @@
           [matChipInputSeparatorKeyCodes]="[]"
           [matAutocomplete]="auto"
           (input)="query.set(chipInput.value)"
+          (blur)="leave($event)"
         />
       </span>
     </span>

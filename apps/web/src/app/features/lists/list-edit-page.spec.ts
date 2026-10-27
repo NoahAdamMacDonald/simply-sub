@@ -854,6 +854,86 @@ describe('ListEditPage', () => {
         addOns: [{ id: 'netflix.extra-member', quantity: 1 }],
       });
     });
+
+    describe('[+ Add custom subscription] (flow F3)', () => {
+      const planId = '0192f1c6-2d3e-7f40-9b5c-6d7e8f9a0b1d';
+      const menuItems = () =>
+        Array.from(document.querySelectorAll('.mat-mdc-menu-panel [mat-menu-item]')).map((item) =>
+          item.textContent?.replace(/^add/, '').trim(),
+        );
+
+      async function openMenu(): Promise<void> {
+        await click('Add custom subscription');
+        await until(() => menuItems().length > 0);
+      }
+
+      async function pick(name: string): Promise<void> {
+        const item = Array.from(
+          document.querySelectorAll<HTMLElement>('.mat-mdc-menu-panel [mat-menu-item]'),
+        ).find((candidate) => candidate.textContent?.includes(name));
+        item?.click();
+        await harness.fixture.whenStable();
+      }
+
+      it('adds one of the user’s custom subscriptions through the item dialog', async () => {
+        const gym = await TestBed.inject(CustomSubsRepository).create({
+          name: 'Local Gym',
+          plans: [
+            {
+              id: planId,
+              name: 'Basic',
+              features: { 'streaming.ad-free': true },
+              price: { amount: 29.99, currency: 'CAD', interval: 'month', intervalCount: 1 },
+              autoRenewAvailable: true,
+            },
+          ],
+        });
+        await open(editor());
+        await openMenu();
+        expect(menuItems()).toEqual(['Local Gym', 'Create new…']);
+        await pick('Local Gym');
+
+        const loader = await dialogLoader();
+        expect(inDialog('.subject .name')).toBe('Local Gym');
+        expect(inDialog('.ranks h4')).toBe('Streaming');
+        await press(loader, 'Add to list');
+        await until(() => dialog() === null);
+        expect((await addedItems())[0].source).toEqual({
+          kind: 'custom',
+          customSubId: gym.id,
+          customPlanId: planId,
+        });
+        await until(() => rows().some((row) => row.title === 'Local Gym · Basic'));
+      });
+
+      it('Create new… opens the custom subscription editor, then the item dialog for what it made', async () => {
+        await open(editor());
+        await openMenu();
+        expect(menuItems()).toEqual(['Create new…']);
+        await pick('Create new…');
+
+        await until(() => document.querySelector('ss-custom-sub-dialog') !== null);
+        await harness.fixture.whenStable();
+        const editorLoader = await TestbedHarnessEnvironment.documentRootLoader(
+          harness.fixture,
+        ).getChildLoader('ss-custom-sub-dialog');
+        await (await control(editorLoader, 'Name', MatInputHarness)).setValue('Local Gym');
+        await (await control(editorLoader, 'Plan name', MatInputHarness)).setValue('Basic');
+        await (await control(editorLoader, 'Cost', MatInputHarness)).setValue('29.99');
+        await press(editorLoader, 'Save');
+
+        const loader = await dialogLoader();
+        expect(document.querySelector('ss-custom-sub-dialog')).toBeNull();
+        expect(inDialog('.subject .name')).toBe('Local Gym');
+        await press(loader, 'Add to list');
+        await until(() => dialog() === null);
+        const [sub] = (await storedRows(storage.indexedDB, 'customSubs')) as { id: string }[];
+        expect((await addedItems())[0].source).toMatchObject({
+          kind: 'custom',
+          customSubId: sub.id,
+        });
+      });
+    });
   });
 
   it.each([
@@ -897,7 +977,9 @@ describe('ListEditPage', () => {
       expect(text('h1')).toBe('New list');
       expect(nameInput().value).toBe('Subscription List');
       expect(button('More actions')).toBeUndefined();
-      expect(text('.empty')).toBe('No subscriptions yet. Add one from the catalog.');
+      expect(text('.empty')).toBe(
+        'No subscriptions yet. Add one from the catalog, or one of your own.',
+      );
       expect(button('Add from catalog')?.getAttribute('href')).toBe(
         `/search?addTo=${draft.listId}`,
       );

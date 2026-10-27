@@ -1,0 +1,67 @@
+:host {
+  display: block;
+}
+
+// Each feature as a chip-like pill with its ✕.
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding-inline-start: 12px;
+    border: 1px solid var(--ss-divider);
+    border-radius: 16px;
+    color: var(--ss-text);
+  }
+}
+
+.add {
+  width: min(100%, 320px);
+}
+
+// The value a picked feature needs, in a box under the field.
+.value {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid var(--ss-divider);
+  border-radius: 8px;
+}
+
+.value-heading {
+  margin: 0;
+  font: var(--mat-sys-title-small);
+}
+
+.number {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.set {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 16px;
+}
+
+.error {
+  margin: 0;
+  color: var(--ss-danger);
+}
+
+.value-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

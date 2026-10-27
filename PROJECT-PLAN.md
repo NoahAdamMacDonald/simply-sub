@@ -182,7 +182,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M6.3 | `ListDraftService`, with drafts saved in Dexie: core's draft record (`user/list-draft.ts`), `DraftsRepository`, Save in one transaction (`StorageEngine.transaction`), Search's pick mode adding to a new list's draft (`listsWithDrafts`), and `/lists/new` making the draft and replacing its URL (BLUEPRINT §14) | A draft survives navigation and a reload |
 | M6.4 | List edit page (P5): the name, Cancel, Save and ⋮ Delete list (`DraftsRepository.deleteList`), a row per draft item (`MetricsService.resolve`) with 🗑 and Undo, the footer's average (core's `monthlyAverage`), and "Discard changes?" on leaving (`leaveGuard`). The item dialog opens from the query params in M6.5, [+ Add custom subscription] comes with M6.6, and the renewal dates and "This month" with M7.1–M7.2 (BLUEPRINT §14) | P5 criteria met, the item dialog's with M6.5 |
 | M6.5 | Item dialog (P6): core's rules in `user/item-form.ts` (the periods a plan offers, the suggested renewal and its billing day, Specific dates' windows, the form's issues and the item it saves, duplicates), Signal Forms through one `validateTree`, full screen under 600 px, `?add=`, `?addBundle=`, `?addCustom=` and `?item=` opened once and dropped from the URL, ✎ opening it directly, and `CatalogStore.need` for an unsaved item's region. "Next charge" comes with M7.1 (BLUEPRINT §14) | P6 criteria met, the calendar's with M7.4 |
-| M6.6 | Custom subscriptions page + editor (P12) | P12 criteria met |
+| M6.6 | Custom subscriptions page + editor (P12): core's rules in `user/custom-sub-form.ts` (the editor's issues, the record it saves, usage and what a change reaches, the features a plan can list), `CustomSubsRepository.save` and `removeWithItems` (each one transaction with the items), `ss-feature-picker`, and the list editor's [+ Add custom subscription] menu with Create new… (flow F3) (BLUEPRINT §14) | P12 criteria met, the calendar's and exports' with M7 |
 | M6.7 | Lists overview (P3) | P3 criteria met (the bars can wait for M7.2) |
 | M6.8 | List view (P4), without the money parts, with `ss-sub-card`'s list variant (§4.3, moved from M4.5) | Cards, pinning, search/filter and the edit button work |
 | M6.9 | Backup export/import (the "Your data" section of P13, and the first-run dialog's "Import a backup instead"), with an optional passphrase that encrypts the file, and the crypto module it uses (BLUEPRINT §11.5) | Export → delete all → import restores everything, encrypted or not; a wrong passphrase or a tampered file imports nothing |
@@ -1024,13 +1024,17 @@ Editor dialog:
 │ [+ New plan]                                               [Cancel] [Save]  │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
+**As built (M6.6):** rows rather than cards, as the list editor has them, and each plan in the editor is a box of its
+own. A set feature asks for one or more of its values, as enum and number features ask for theirs.
+
 **Behaviour**
 - Features come from a registry search; enum and number features ask for a value.
 - The cost is what you pay, tax included, unless "plus tax" is ticked (BLUEPRINT §4.8).
 - Website and cancel links accept only `https://` URLs (BLUEPRINT §11.5).
 - The icon comes from `/api/v1/icon?domain=<website>` (asked only when the subscription is saved, BLUEPRINT §5.4). When it answers 404, the card shows the subscription's first letter, as for a catalog provider without a logo.
-- Editing a plan updates every item that uses it, after a warning that shows the count.
-- Deleting a custom subscription that's in use asks to confirm: "Also remove it from 1 list".
+- Editing a plan updates every item that uses it, after a warning that shows the count. Removing a plan that items
+  use removes them from their lists too, after the same warning (M6.6).
+- Deleting a custom subscription asks to confirm, saying "Also remove it from 1 list" when it's in use.
 - Reachable from the P3 header, from P5, and from the Search empty state.
 
 **Acceptance**

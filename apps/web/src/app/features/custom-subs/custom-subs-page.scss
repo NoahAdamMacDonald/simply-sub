@@ -1,0 +1,53 @@
+:host {
+  display: block;
+  max-width: 960px;
+}
+
+.note {
+  margin: 0;
+  color: var(--ss-text-muted);
+}
+
+.subs {
+  margin: 0;
+  padding: 8px 16px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+  list-style: none;
+}
+
+// Icon, name and details, then ✎ and 🗑.
+.sub {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+
+  & + & {
+    border-top: 1px solid var(--ss-divider);
+  }
+}
+
+.what {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+
+  p {
+    margin: 0;
+  }
+}
+
+.name {
+  font: var(--mat-sys-title-small);
+  font-weight: 600;
+}
+
+.details {
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}
+
+.buttons {
+  display: flex;
+}

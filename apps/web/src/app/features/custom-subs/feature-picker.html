@@ -1,0 +1,102 @@
+@if (listed().length > 0) {
+  <ul class="features" [attr.aria-label]="'Features of ' + (planName() || 'this plan')">
+    @for (row of listed(); track row.id) {
+      <li>
+        <span class="feature-text">{{ row.text }}</span>
+        <button
+          matIconButton
+          type="button"
+          class="remove"
+          [attr.aria-label]="'Remove ' + row.text"
+          (click)="remove(row.id)"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </li>
+    }
+  </ul>
+}
+
+<mat-form-field appearance="outline" class="add" subscriptSizing="dynamic">
+  <mat-label>Add a feature</mat-label>
+  <input
+    #box
+    matInput
+    autocomplete="off"
+    [matAutocomplete]="auto"
+    (input)="query.set(box.value)"
+    (blur)="leave($event)"
+  />
+  <mat-autocomplete #auto autoActiveFirstOption (optionSelected)="pick($event.option.value)">
+    @for (feature of matches(); track feature.id) {
+      <mat-option [value]="feature.id">{{ feature.name }}</mat-option>
+    }
+  </mat-autocomplete>
+</mat-form-field>
+
+@if (pending(); as feature) {
+  <!-- Escape closes this row only, not the dialog it's in. -->
+  <div
+    class="value"
+    role="group"
+    [attr.aria-labelledby]="ids + '-value'"
+    (keydown.escape)="$event.stopPropagation(); cancel()"
+  >
+    <p class="value-heading" [id]="ids + '-value'">{{ feature.name }}</p>
+    @switch (feature.type) {
+      @case ('enum') {
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <mat-label>Value</mat-label>
+          <mat-select [value]="enumValue()" (valueChange)="enumValue.set($event)">
+            @for (option of feature.values; track option.id) {
+              <mat-option [value]="option.id">{{ option.name }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      }
+      @case ('number') {
+        <div class="number">
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>How many</mat-label>
+            <input
+              #amountInput
+              matInput
+              type="number"
+              min="0"
+              step="any"
+              [disabled]="unlimited()"
+              [value]="amount() ?? ''"
+              (input)="amount.set(amountInput.value === '' ? null : amountInput.valueAsNumber)"
+              (keydown.enter)="$event.preventDefault(); confirm()"
+            />
+            @if (feature.unit) {
+              <span matTextSuffix>{{ feature.unit }}</span>
+            }
+          </mat-form-field>
+          <mat-checkbox [checked]="unlimited()" (change)="unlimited.set($event.checked)">
+            Unlimited
+          </mat-checkbox>
+        </div>
+      }
+      @case ('set') {
+        <div class="set" role="group" [attr.aria-labelledby]="ids + '-value'">
+          @for (option of feature.values; track option.id) {
+            <mat-checkbox
+              [checked]="setValues().includes(option.id)"
+              (change)="toggleSetValue(option.id, $event.checked)"
+            >
+              {{ option.name }}
+            </mat-checkbox>
+          }
+        </div>
+      }
+    }
+    @if (valueError(); as error) {
+      <p class="error" role="alert">{{ error }}</p>
+    }
+    <div class="value-actions">
+      <button matButton="filled" type="button" (click)="confirm()">Add feature</button>
+      <button matButton type="button" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+}

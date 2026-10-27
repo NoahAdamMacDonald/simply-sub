@@ -1,1 +1,55 @@
-<h1>Custom subscriptions</h1>
+<ss-page-header heading="Custom subscriptions">
+  <button matButton="filled" type="button" class="new" (click)="create()">
+    <mat-icon>add</mat-icon>
+    New custom subscription
+  </button>
+</ss-page-header>
+
+@switch (state()) {
+  @case ('loading') {
+    <p class="note">Loading your custom subscriptions…</p>
+  }
+  @case ('error') {
+    <p class="note">Your custom subscriptions couldn't be read.</p>
+  }
+  @case ('ready') {
+    @if (rows().length > 0) {
+      <ul class="subs">
+        @for (row of rows(); track row.sub.id) {
+          <li class="sub" [attr.data-sub]="row.sub.id">
+            <ss-provider-icon [src]="row.iconUrl" [name]="row.sub.name" size="40" />
+            <div class="what">
+              <p class="name">{{ row.sub.name }}</p>
+              <p class="details">{{ row.details }}</p>
+            </div>
+            <div class="buttons">
+              <button
+                matIconButton
+                type="button"
+                class="edit"
+                [attr.aria-label]="'Edit ' + row.sub.name"
+                (click)="edit(row.sub)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                matIconButton
+                type="button"
+                class="remove"
+                [attr.aria-label]="'Delete ' + row.sub.name"
+                (click)="remove(row)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </li>
+        }
+      </ul>
+    } @else {
+      <ss-empty-state icon="add_business" heading="No custom subscriptions yet">
+        A service that isn't in the catalog can be added here, with its own plans and prices, and
+        then put in your lists like any other.
+      </ss-empty-state>
+    }
+  }
+}

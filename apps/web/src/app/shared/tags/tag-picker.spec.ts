@@ -92,6 +92,27 @@ describe('TagPicker', () => {
     expect(roles()).toEqual(['grid', 'row', 'gridcell']);
   });
 
+  it('closes its suggestions when focus moves on to another control, but not to what holds it', async () => {
+    await addTag('Family', tagColorPresets[0].color);
+    const input = await loader.getHarness(MatAutocompleteHarness);
+    const box = element().querySelector<HTMLInputElement>('mat-chip-grid input')!;
+    const leave = async (next: HTMLElement) => {
+      box.dispatchEvent(new FocusEvent('blur', { relatedTarget: next }));
+      await fixture.whenStable();
+    };
+
+    // A click on a suggestion moves focus to the dialog around the field: Material handles that.
+    await input.enterText('f');
+    await leave(element());
+    expect(await input.isOpen()).toBe(true);
+
+    const next = document.createElement('button');
+    document.body.append(next);
+    await leave(next);
+    expect(await input.isOpen()).toBe(false);
+    next.remove();
+  });
+
   it("doesn't offer to create a tag that exists, whatever its case", async () => {
     await addTag('Family', tagColorPresets[0].color);
     const input = await loader.getHarness(MatAutocompleteHarness);

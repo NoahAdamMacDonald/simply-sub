@@ -64,10 +64,10 @@ h1 {
   );
 }
 
-// The item dialog (features/lists/item-dialog.ts): up to 720 px wide, past Material's 560, for its fields side by
-// side. Under 600 px it's the whole screen, with square corners, and its content scrolls between the title and the
-// actions.
-.ss-item-dialog {
+// Wide dialogs (shared/wide-dialog.ts: the item dialog and the custom subscription editor): up to 720 px wide, past
+// Material's 560, for their fields side by side. Under 600 px each is the whole screen, with square corners, and its
+// content scrolls between the title and the actions.
+.ss-wide-dialog {
   @include mat.dialog-overrides(
     (
       container-max-width: 720px,

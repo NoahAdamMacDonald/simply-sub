@@ -1,0 +1,116 @@
+<form [formRoot]="form">
+  <div class="title-bar">
+    <h2 mat-dialog-title>{{ heading }}</h2>
+    <button matIconButton type="button" mat-dialog-close aria-label="Close">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-dialog-content>
+    <div class="row">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="name">
+        <mat-label>Name</mat-label>
+        <input matInput autocomplete="off" [formField]="form.name" />
+        <mat-error>{{ firstError(form.name) }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>Website</mat-label>
+        <input matInput type="url" autocomplete="off" [formField]="form.link" />
+        <mat-hint>Optional, https:// only. Its icon comes from there</mat-hint>
+        <mat-error>{{ firstError(form.link) }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>Cancel link</mat-label>
+        <input matInput type="url" autocomplete="off" [formField]="form.cancelUrl" />
+        <mat-hint>Optional: where you cancel it</mat-hint>
+        <mat-error>{{ firstError(form.cancelUrl) }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <h3>Plans</h3>
+    @for (plan of model().plans; track plan.id; let index = $index) {
+      <fieldset class="plan">
+        <legend>{{ plan.name.trim() || 'Plan ' + (index + 1) }}</legend>
+        <div class="row">
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="plan-name">
+            <mat-label>Plan name</mat-label>
+            <input matInput autocomplete="off" [formField]="form.plans[index].name" />
+            <mat-error>{{ firstError(form.plans[index].name) }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="amount">
+            <mat-label>Cost</mat-label>
+            <!-- Text, not a number field: see CustomPlanForm.amount. The keypad is still a number one. -->
+            <input
+              matInput
+              inputmode="decimal"
+              autocomplete="off"
+              [formField]="form.plans[index].amount"
+            />
+            <mat-error>{{ firstError(form.plans[index].amount) }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Currency</mat-label>
+            <mat-select [formField]="form.plans[index].currency">
+              @for (choice of currencies; track choice.value) {
+                <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
+              }
+            </mat-select>
+            <mat-error>{{ firstError(form.plans[index].currency) }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="count">
+            <mat-label>Billed every</mat-label>
+            <input matInput type="number" step="1" [formField]="form.plans[index].intervalCount" />
+            <mat-error>{{ firstError(form.plans[index].intervalCount) }}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="unit">
+            <mat-label>Unit</mat-label>
+            <mat-select [formField]="form.plans[index].interval">
+              @for (choice of intervals; track choice.interval) {
+                <mat-option [value]="choice.interval">{{ choice.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="checks">
+          @if (taxAdded()) {
+            <mat-checkbox [formField]="form.plans[index].plusTax">
+              Plus tax (the cost is before sales tax)
+            </mat-checkbox>
+          }
+          <mat-checkbox [formField]="form.plans[index].autoRenewAvailable">
+            Auto-renew available
+          </mat-checkbox>
+        </div>
+        <ss-feature-picker
+          [registry]="registry()"
+          [planName]="plan.name.trim() || 'Plan ' + (index + 1)"
+          [features]="plan.features"
+          (featuresChange)="setFeatures(index, $event)"
+        />
+        @if (model().plans.length > 1) {
+          <button
+            matButton
+            type="button"
+            class="remove-plan"
+            [attr.aria-label]="'Remove plan ' + (plan.name.trim() || index + 1)"
+            (click)="removePlan(index)"
+          >
+            <mat-icon>delete</mat-icon>
+            Remove plan
+          </button>
+        }
+      </fieldset>
+    }
+    <button #newPlan matButton="outlined" type="button" (click)="addPlan()">
+      <mat-icon>add</mat-icon>
+      New plan
+    </button>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button matButton type="button" mat-dialog-close>Cancel</button>
+    <button matButton="filled" type="submit">Save</button>
+  </mat-dialog-actions>
+</form>

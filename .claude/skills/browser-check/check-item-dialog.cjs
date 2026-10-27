@@ -281,7 +281,7 @@ async function toField(page, label, key = 'Tab') {
 
 /** The dialog's panel's size. */
 async function panelSize(page) {
-  const box = await page.locator('.cdk-overlay-pane.ss-item-dialog').boundingBox();
+  const box = await page.locator('.cdk-overlay-pane.ss-wide-dialog').boundingBox();
   return { width: Math.round(box.width), height: Math.round(box.height) };
 }
 
@@ -459,8 +459,27 @@ async function shownValue(page, selector) {
       await noSideScroll(page, viewport, `${label}, the dialog's errors`);
       await page.screenshot({ path: shot('dialog-errors'), fullPage: true });
       await axeCheck(page, `${label}, the dialog's errors`);
+      const beforeEscape = await page.evaluate(() => {
+        const focused = document.activeElement;
+        const panes = [...document.querySelectorAll('.cdk-overlay-pane')].map(
+          (pane) => pane.className,
+        );
+        return `focus on ${focused?.tagName} ${focused?.getAttribute('type') ?? ''}; panes: ${panes.join(' / ')}`;
+      });
       await page.keyboard.press('Escape');
-      await itemDialog(page).waitFor({ state: 'detached' });
+      const closed = await itemDialog(page)
+        .waitFor({ state: 'detached', timeout: 5000 })
+        .then(() => true)
+        .catch(() => false);
+      check(
+        `${label}: Escape closes the dialog, adding nothing`,
+        closed,
+        closed ? '' : beforeEscape,
+      );
+      if (!closed) {
+        await itemDialog(page).getByRole('button', { name: 'Cancel' }).click();
+        await itemDialog(page).waitFor({ state: 'detached' });
+      }
 
       // ── ✎ Netflix: another plan, an extra member, a billing day, no auto-renewal → Save → reload ──────
       await openEditor(page);
