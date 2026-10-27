@@ -1,13 +1,14 @@
 ---
 name: policy-research
-description: Rate a subscription provider's terms of service, privacy policy and other policies on the topics in data/policy-topics.yaml (five tiers, good to bad), quoting its own pages word for word, for a card's Terms and policies (data/providers/<id>.yaml, policies). Use when adding a provider, re-reading its terms, or when the price-research skill reads its policies.
+description: Rate a subscription provider's terms of service, privacy policy and other policies on the topics in data/policy-topics.yaml (five grades, great to bad), quoting its own pages word for word, for a card's Terms and policies (data/providers/<id>.yaml, policies). Use when adding a provider, re-reading its terms, or when the price-research skill reads its policies.
 ---
 
 # Policy research (official pages, quoted word for word)
 
-A card's Terms and policies (BLUEPRINT §4.10) rates a provider on the topics in `data/policy-topics.yaml`. Each
-rating is a tier, a one-line reason, and the provider's own words with the page they're on. The rubric decides the
-tier; the quotes have to support it on their own.
+A card's Terms and policies (BLUEPRINT §4.10) grades a provider on the topics in `data/policy-topics.yaml`. Each
+rating is a grade (Great, Good, Neutral, Poor or Bad: its `tier`), a reason in plain words, and the provider's own
+words with the page they're on, which the card cites. The rubric decides the grade; the quotes have to support it on
+their own.
 
 ## Rules
 
@@ -15,14 +16,18 @@ tier; the quotes have to support it on their own.
   refund or cancellation help, household or sharing rules, download limits, and its own posts on audits. Search and
   third-party summaries only to *find* a page. A page behind a bot check is left out and reported: never try to get
   past one.
-- **The tier the quotes fit,** reading the topic's rubric in `data/policy-topics.yaml`. When a page doesn't settle
+- **The grade the quotes fit,** reading the topic's rubric in `data/policy-topics.yaml`. When a page doesn't settle
   it (a privacy policy that collects analytics but doesn't say whether you can turn it off), look for the
   provider's page that does (Proton's usage-statistics help) before rating; otherwise leave the topic out. Never
   rate from what you believe the provider does.
 - **Quotes word for word,** from the page as it reads: curly quotes, dashes and accents included. Up to three per
   rating. Quote sentences, not pop-up definitions that a page's text runs into (Disney's policy).
-- **The reason is one short line** (100 characters at most): what a reader needs to know, in plain English, even for
-  a page in French.
+- **The reason is in plain words anyone can follow** (a sentence or two, 240 characters at most): what signing up
+  means, as you'd explain it to a child. "If you cancel, you can keep watching until the end of the time you paid
+  for, but you get no money back." Use everyday words, explain a term a reader may not know (an arbitrator is "a
+  private referee"), and say only what the quotes say. In English, even for a page in French.
+- **The quotes are its citations:** the card cites each page a rating quotes ("[2]") and links it to the quotes
+  with a text fragment, which finds them by their words, so quote the page exactly as it reads.
 - **Plans and regions:** a rating for some plans (`plans: [netflix.standard-ads]`, an ad tier's tracking) sits over
   the provider-wide one for those plans. Terms read from this machine are often a country's own (Netflix's mention
   Quebec's Consumer Protection Act): give those ratings `regions: [CA]`, and a rating from another country's terms

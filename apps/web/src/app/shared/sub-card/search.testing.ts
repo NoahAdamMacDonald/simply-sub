@@ -50,10 +50,10 @@ const streaming = { category: 'streaming', spendCategory: 'streaming' };
 
 /** One rubric for every test topic: the card shows a tier's name, not its rubric. */
 const policyTiersText = {
+  great: 'Great.',
   good: 'Good.',
-  'leaning-good': 'Leaning good.',
   neutral: 'Neutral.',
-  'leaning-bad': 'Leaning bad.',
+  poor: 'Poor.',
   bad: 'Bad.',
 };
 
@@ -186,7 +186,7 @@ export const searchCatalogData: CatalogData = {
         ratings: [
           {
             topic: 'service.vpn-logging',
-            tier: 'good',
+            tier: 'great',
             reason: 'No connection logs, and an audit found none.',
             sources: [
               {
@@ -198,7 +198,7 @@ export const searchCatalogData: CatalogData = {
           },
           {
             topic: 'legal.disputes',
-            tier: 'good',
+            tier: 'great',
             reason: 'Swedish courts or the consumer disputes board.',
             sources: [
               {

@@ -157,8 +157,8 @@ policies:
       url: https://help.netflix.com/en/node/54816
   ratings:
     - topic: privacy.data-collection
-      tier: leaning-bad
-      reason: 'Viewing, device and ad data by default; only its use for ads can be turned off.'
+      tier: poor
+      reason: 'It records the ads you see, details about your devices and your IP address, and makes guesses about you and your household. You can only stop it using this to pick ads.'
       sources:
         - url: https://help.netflix.com/legal/privacy
           quote: 'We collect information about the advertisements on the Netflix service that you view or interact with, device information (such as resettable device identifiers), IP addresses, inferences we make about you or your household based on data we collect from or about you'
@@ -167,7 +167,7 @@ policies:
       lastVerified: 2026-10-27
     - topic: privacy.data-sharing
       tier: neutral
-      reason: 'Shares data with its own companies, partners and ad companies; ads targeting can be turned off.'
+      reason: 'It shares some of your information with advertising companies to choose the ads you see. You can turn that off with its "Behavioral Advertising" setting.'
       sources:
         - url: https://help.netflix.com/legal/privacy
           quote: 'We may disclose certain personal information to Advertising Companies (see definition above) in order to select advertisements shown on Netflix'
@@ -176,7 +176,7 @@ policies:
       lastVerified: 2026-10-27
     - topic: privacy.ads-tracking
       tier: neutral
-      reason: 'Ads are picked from your activity unless you turn that setting off.'
+      reason: "On this plan, it can pick ads from what you do, unless you turn off its Behavioral Advertising setting. You'll still see ads, just not ones picked for you."
       plans: [netflix.standard-ads]
       sources:
         - url: https://help.netflix.com/legal/privacy
@@ -186,14 +186,14 @@ policies:
       lastVerified: 2026-10-27
     - topic: privacy.data-deletion
       tier: neutral
-      reason: 'Deletes your data when you ask, keeping some for a time it states elsewhere.'
+      reason: 'You can ask it to correct your information or delete what it holds about you, but you have to ask.'
       sources:
         - url: https://help.netflix.com/legal/privacy
           quote: 'You may also correct or update out-of-date or inaccurate personal information or request that we delete personal information that we hold about you.'
       lastVerified: 2026-10-27
     - topic: billing.cancel-refunds
       tier: neutral
-      reason: 'Cancel online at any time; it runs to the end of the period, with no refunds.'
+      reason: "You can cancel online whenever you like, and you keep watching until the end of the time you paid for. There is no money back for days you didn't use."
       regions: [CA]
       sources:
         - url: https://help.netflix.com/legal/termsofuse
@@ -204,16 +204,16 @@ policies:
           quote: 'To the extent permitted by the applicable law, payments are non-refundable and we do not provide refunds or credits for any partial subscription periods or unused Netflix content.'
       lastVerified: 2026-10-27
     - topic: billing.price-changes
-      tier: leaning-good
-      reason: "At least a month's notice of a new price, and you can cancel first."
+      tier: good
+      reason: "It tells you at least a month before the price goes up, so you have time to cancel if you don't want to pay more."
       regions: [CA]
       sources:
         - url: https://help.netflix.com/legal/termsofuse
           quote: 'We will notify you at least one month before any price changes or changes to your subscription plan will become effective.'
       lastVerified: 2026-10-27
     - topic: legal.disputes
-      tier: leaning-good
-      reason: 'Canadian law and courts, but no class actions outside Quebec.'
+      tier: good
+      reason: "Disagreements are handled under Canada's laws, but you can't join a group lawsuit against it unless you live in Quebec."
       regions: [CA]
       sources:
         - url: https://help.netflix.com/legal/termsofuse
@@ -222,8 +222,8 @@ policies:
           quote: 'EXCEPT FOR CONSUMERS THAT ARE SUBJECT TO THE QUEBEC CONSUMER PROTECTION ACT AND ONLY WHERE PERMITTED UNDER THE APPLICABLE LAW, YOU AND NETFLIX AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY'
       lastVerified: 2026-10-27
     - topic: legal.terms-changes
-      tier: leaning-good
-      reason: "A month's notice of material changes, and you can cancel at any time."
+      tier: good
+      reason: 'If it makes a big change to its terms, it tells you at least a month before the change starts.'
       regions: [CA]
       sources:
         - url: https://help.netflix.com/legal/termsofuse
@@ -231,7 +231,7 @@ policies:
       lastVerified: 2026-10-27
     - topic: legal.account-closure
       tier: neutral
-      reason: 'It can end or limit your account for breaking its terms, with no refund.'
+      reason: "It can shut down or limit your account if you break its rules or use it for fraud, and it won't give your money back."
       regions: [CA]
       sources:
         - url: https://help.netflix.com/legal/termsofuse
@@ -241,7 +241,7 @@ policies:
       lastVerified: 2026-10-27
     - topic: service.account-sharing
       tier: neutral
-      reason: 'Your household only, with device checks; others can be paid extra members.'
+      reason: 'Only people who live with you can use your account, and it checks devices to make sure. To share with someone who lives elsewhere, you pay for an extra member.'
       sources:
         - url: https://help.netflix.com/en/node/123277
           quote: 'You may not share your Netflix account outside of your household.'
@@ -251,8 +251,8 @@ policies:
           quote: 'This also includes determining whether a particular device is permitted to use the account consistent with the Netflix Terms of Use.'
       lastVerified: 2026-10-27
     - topic: service.account-sharing
-      tier: leaning-bad
-      reason: 'Your household only, with device checks, and no extra members on this plan.'
+      tier: poor
+      reason: "Only people who live with you can use your account, and on this plan you can't pay to add someone who lives elsewhere."
       plans: [netflix.standard-ads]
       sources:
         - url: https://help.netflix.com/en/node/123277
@@ -262,7 +262,7 @@ policies:
       lastVerified: 2026-10-27
     - topic: service.device-limits
       tier: neutral
-      reason: 'Up to 100 downloads per device on as many devices as the plan has, and they expire.'
+      reason: 'You can download up to 100 shows or movies on each device, on as many devices as your plan allows, but downloads stop working after a while.'
       sources:
         - url: https://help.netflix.com/en/node/54816
           quote: 'Ad-free plans can have up to 100 active downloads at a time per device based on the number of devices included in your Netflix plan'
@@ -270,8 +270,8 @@ policies:
           quote: 'Downloads will expire after a period of time'
       lastVerified: 2026-10-27
     - topic: service.device-limits
-      tier: leaning-bad
-      reason: '15 downloads per device a month, and they expire.'
+      tier: poor
+      reason: 'You can only download 15 shows or movies per device each month, and they stop working after a while.'
       plans: [netflix.standard-ads]
       sources:
         - url: https://help.netflix.com/en/node/54816

@@ -1,6 +1,7 @@
 # The policy topics (BLUEPRINT §4.10): what a card's "Terms and policies" rates a provider on, from its own terms of
-# service, privacy policy and other policies. Each topic has a five-tier rubric, so ratings mean the same thing across
-# providers: a provider's rating names the tier whose description fits what its documents say, and quotes them.
+# service, privacy policy and other policies. Each topic has a rubric for five grades (great, good, neutral, poor and
+# bad), so ratings mean the same thing across providers: a provider's rating names the grade whose description fits
+# what its documents say, and quotes them.
 # Shapes: packages/core/src/catalog/policy-topic.ts. Add a topic here, in its own commit, before a provider uses it.
 # A topic with categories applies only to providers with a plan in one of them.
 
@@ -10,40 +11,40 @@
   group: privacy
   question: What it collects beyond what the service needs to work, and whether you can say no.
   tiers:
-    good: Collects only what the service needs to work.
-    leaning-good: Asks before collecting anything more.
+    great: Collects only what the service needs to work.
+    good: Asks before collecting anything more.
     neutral: Collects more by default, and you can opt out.
-    leaning-bad: Collects more by default, and opting out is partial or only on request.
+    poor: Collects more by default, and opting out is partial or only on request.
     bad: Collects more by default, with no way to opt out.
 - id: privacy.data-sharing
   name: Selling or sharing data
   group: privacy
   question: Whether it sells your data, or shares it with other companies for their own use.
   tiers:
-    good: Shares it only with companies that run the service for it.
-    leaning-good: Also shares it within its own group, never to sell or for others' advertising.
+    great: Shares it only with companies that run the service for it.
+    good: Also shares it within its own group, never to sell or for others' advertising.
     neutral: Shares it for advertising or marketing, and you can opt out.
-    leaning-bad: Shares it for advertising or marketing, and opting out is partial or only in some places.
+    poor: Shares it for advertising or marketing, and opting out is partial or only in some places.
     bad: Sells it, or shares it for others' advertising with no way to opt out.
 - id: privacy.ads-tracking
   name: Ads and tracking
   group: privacy
   question: Whether it tracks what you do to target ads, in its apps or across other sites.
   tiers:
-    good: No ads, and no tracking for advertising.
-    leaning-good: Ads or tracking only if you agree to them.
+    great: No ads, and no tracking for advertising.
+    good: Ads or tracking only if you agree to them.
     neutral: Ads or tracking by default, and you can turn them off.
-    leaning-bad: Ads or tracking by default, and turning them off is partial.
+    poor: Ads or tracking by default, and turning them off is partial.
     bad: Ads or tracking by default, with no way to turn them off.
 - id: privacy.data-deletion
   name: Deleting your data
   group: privacy
   question: Whether you can have your data deleted, and how long it keeps it afterwards.
   tiers:
-    good: Keeps almost nothing, or deletes it when you ask, keeping only what the law requires.
-    leaning-good: Deletes it when you ask, within a stated time.
+    great: Keeps almost nothing, or deletes it when you ask, keeping only what the law requires.
+    good: Deletes it when you ask, within a stated time.
     neutral: Deletes it when you ask, but keeps some for a long or unstated time.
-    leaning-bad: Deletes only some of it, or only through a hard process.
+    poor: Deletes only some of it, or only through a hard process.
     bad: Gives no way to have it deleted.
 
 # ── Billing ────────────────────────────────────────────────────────────────────
@@ -52,30 +53,30 @@
   group: billing
   question: How easy it is to cancel, and whether you get money back.
   tiers:
-    good: Cancel online at any time, and get back what you haven't used.
-    leaning-good: Cancel online at any time, with refunds in a stated window or nothing that renews.
+    great: Cancel online at any time, and get back what you haven't used.
+    good: Cancel online at any time, with refunds in a stated window or nothing that renews.
     neutral: Cancel online at any time and keep it to the end of the period, with no refunds.
-    leaning-bad: Cancelling takes contacting someone, or there's a minimum term.
+    poor: Cancelling takes contacting someone, or there's a minimum term.
     bad: Hard to cancel, or a fee to leave.
 - id: billing.price-changes
   name: Price changes
   group: billing
   question: Whether it tells you before raising the price, and lets you leave first.
   tiers:
-    good: A new price never applies to time you've paid for, and comes with notice you can act on.
-    leaning-good: Tells you ahead of time, with a stated lead, and you can cancel first.
+    great: A new price never applies to time you've paid for, and comes with notice you can act on.
+    good: Tells you ahead of time, with a stated lead, and you can cancel first.
     neutral: Tells you ahead of time, with no stated lead.
-    leaning-bad: Changes with little notice, or only posts the new price.
+    poor: Changes with little notice, or only posts the new price.
     bad: Changes at any time without notice.
 - id: billing.free-trials
   name: Free trials
   group: billing
   question: Whether a free trial turns into a paid plan on its own, and whether you're warned first.
   tiers:
-    good: Its trial never turns into a paid plan without asking.
-    leaning-good: Its trial turns into a paid plan, with a reminder before it does.
+    great: Its trial never turns into a paid plan without asking.
+    good: Its trial turns into a paid plan, with a reminder before it does.
     neutral: Its trial turns into a paid plan unless you cancel, which you can do at any time during it.
-    leaning-bad: Its trial turns into a paid plan, needs a card up front, and gives no reminder.
+    poor: Its trial turns into a paid plan, needs a card up front, and gives no reminder.
     bad: Its trial is hard to cancel, or charges before it ends.
 
 # ── Legal ──────────────────────────────────────────────────────────────────────
@@ -84,30 +85,30 @@
   group: legal
   question: Whether you can take a dispute to court or join a class action.
   tiers:
-    good: Disputes go to the courts or a consumer board where you live, and class actions are allowed.
-    leaning-good: Disputes go to a court or board, with no arbitration, but one of its choosing or with no class actions.
+    great: Disputes go to the courts or a consumer board where you live, and class actions are allowed.
+    good: Disputes go to a court or board, with no arbitration, but one of its choosing or with no class actions.
     neutral: Arbitration is required, but you can opt out of it or use small-claims court.
-    leaning-bad: Arbitration is required with a class-action waiver, and opting out is narrow.
+    poor: Arbitration is required with a class-action waiver, and opting out is narrow.
     bad: Arbitration is required with a class-action waiver, and you can't opt out.
 - id: legal.terms-changes
   name: Changes to the terms
   group: legal
   question: Whether it tells you before changing its terms, and whether you can leave.
   tiers:
-    good: Tells you well ahead (a month or more), and lets you leave with a refund.
-    leaning-good: Tells you well ahead, and you can leave.
+    great: Tells you well ahead (a month or more), and lets you leave with a refund.
+    good: Tells you well ahead, and you can leave.
     neutral: Tells you about material changes, with no stated lead.
-    leaning-bad: Only posts the new terms, and using the service means you accept them.
+    poor: Only posts the new terms, and using the service means you accept them.
     bad: Changes them at any time, without notice.
 - id: legal.account-closure
   name: Closing your account
   group: legal
   question: Whether it can close or suspend your account, and whether you'd get a refund.
   tiers:
-    good: Only for a clear breach of its terms, with notice and a refund of time you've paid for.
-    leaning-good: Only for a breach, with notice or a refund.
+    great: Only for a clear breach of its terms, with notice and a refund of time you've paid for.
+    good: Only for a breach, with notice or a refund.
     neutral: For a breach, with no refund.
-    leaning-bad: At its discretion, with notice but no refund.
+    poor: At its discretion, with notice but no refund.
     bad: At any time and for any reason, without notice or a refund.
 
 # ── Service ────────────────────────────────────────────────────────────────────
@@ -117,10 +118,10 @@
   question: Whether the VPN keeps logs of what you do or when you connect, and whether anyone has checked.
   categories: [vpn]
   tiers:
-    good: No activity or connection logs, and an independent audit found none.
-    leaning-good: No activity or connection logs, as it states, without an independent audit.
+    great: No activity or connection logs, and an independent audit found none.
+    good: No activity or connection logs, as it states, without an independent audit.
     neutral: Keeps some connection data for a short time to run the service.
-    leaning-bad: Keeps connection logs (IP addresses, times) for a set time.
+    poor: Keeps connection logs (IP addresses, times) for a set time.
     bad: Logs activity, or shares its logs.
 - id: service.account-sharing
   name: Account sharing
@@ -128,10 +129,10 @@
   question: Who you can share your account with.
   categories: [streaming]
   tiers:
-    good: Share it with anyone, up to the plan's limits.
-    leaning-good: Share it within your household, with no checks.
+    great: Share it with anyone, up to the plan's limits.
+    good: Share it within your household, with no checks.
     neutral: Share it within your household, with checks, and paid extra members for others.
-    leaning-bad: Share it within your household only, with checks that can lock you out.
+    poor: Share it within your household only, with checks that can lock you out.
     bad: No sharing at all.
 - id: service.device-limits
   name: Device and download limits
@@ -139,8 +140,8 @@
   question: Limits on devices and downloads, beyond how many screens can play at once.
   categories: [streaming]
   tiers:
-    good: No limits beyond the number of screens.
-    leaning-good: Generous, clearly stated limits.
+    great: No limits beyond the number of screens.
+    good: Generous, clearly stated limits.
     neutral: Limits on registered devices or downloads, clearly stated.
-    leaning-bad: Tight limits, or downloads that expire quickly.
+    poor: Tight limits, or downloads that expire quickly.
     bad: Unstated limits that can lock you out.

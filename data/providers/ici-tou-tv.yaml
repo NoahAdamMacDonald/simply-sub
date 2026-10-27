@@ -91,7 +91,7 @@ policies:
   ratings:
     - topic: privacy.ads-tracking
       tier: neutral
-      reason: 'It and a few ad partners use cookies for personalized ads; your settings can block them.'
+      reason: "It and a few ad partners use cookies to learn about you and show you ads picked for you. To avoid that, you have to change your device's or browser's privacy settings."
       sources:
         - url: https://cbc.radio-canada.ca/fr/transparence-et-engagement/vie-privee/avis-de-confidentialite
           quote: 'Nous et un nombre restreint de nos partenaires publicitaires utilisons des témoins pour recueillir certaines de vos données et les utilisons afin d’améliorer votre expérience et de vous présenter des contenus et des publicités personnalisés.'
@@ -100,14 +100,14 @@ policies:
       lastVerified: 2026-10-27
     - topic: billing.cancel-refunds
       tier: neutral
-      reason: "Renews until you end it on your account page; its conditions don't mention refunds."
+      reason: "It keeps renewing until you decide to end it. Its conditions don't say anything about getting money back."
       sources:
         - url: https://ici.tou.tv/abonnement/condition
           quote: "Votre abonnement à un Forfait est renouvelé automatiquement à moins que vous ne décidiez d'y mettre fin."
       lastVerified: 2026-10-27
     - topic: billing.price-changes
-      tier: leaning-good
-      reason: "30 days' notice of a new price, and you can refuse it by cancelling."
+      tier: good
+      reason: 'It warns you 30 days before a price change, and you can say no by cancelling.'
       sources:
         - url: https://ici.tou.tv/abonnement/condition
           quote: 'Une telle modification entrera en vigueur automatiquement, sous réserve d’un préavis de 30 jours aux abonnés concernés'
@@ -115,15 +115,15 @@ policies:
           quote: 'vous pourrez refuser cette modification en annulant votre abonnement.'
       lastVerified: 2026-10-27
     - topic: legal.disputes
-      tier: leaning-good
-      reason: "Quebec law and Montreal's courts, with no arbitration."
+      tier: good
+      reason: "Disagreements go to Quebec's regular courts in Montreal, not to a private arbitrator."
       sources:
         - url: https://ici.tou.tv/abonnement/condition
           quote: 'Les parties conviennent de reconnaître la compétence exclusive des tribunaux du Québec du district judiciaire de Montréal'
       lastVerified: 2026-10-27
     - topic: legal.terms-changes
-      tier: leaning-good
-      reason: "30 days' notice of a change, and you can refuse it by cancelling."
+      tier: good
+      reason: 'It warns you 30 days before its conditions change, and you can say no by cancelling.'
       sources:
         - url: https://ici.tou.tv/abonnement/condition
           quote: 'Une telle modification entrera en vigueur automatiquement, sous réserve d’un préavis de 30 jours aux abonnés concernés'
@@ -132,7 +132,7 @@ policies:
       lastVerified: 2026-10-27
     - topic: legal.account-closure
       tier: neutral
-      reason: 'For breaking its conditions, at once and without notice.'
+      reason: 'If you break its rules, it can cut off your access or end your subscription right away, without warning.'
       sources:
         - url: https://ici.tou.tv/abonnement/condition
           quote: 'En cas de non-respect des Conditions d’utilisation, CBC/Radio-Canada se réserve le droit de suspendre votre accès ou de mettre fin à votre abonnement immédiatement sans aucun autre avis ou délai.'

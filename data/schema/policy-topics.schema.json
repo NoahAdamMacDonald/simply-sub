@@ -21,13 +21,13 @@
       "tiers": {
         "type": "object",
         "properties": {
+          "great": { "type": "string", "minLength": 1 },
           "good": { "type": "string", "minLength": 1 },
-          "leaning-good": { "type": "string", "minLength": 1 },
           "neutral": { "type": "string", "minLength": 1 },
-          "leaning-bad": { "type": "string", "minLength": 1 },
+          "poor": { "type": "string", "minLength": 1 },
           "bad": { "type": "string", "minLength": 1 }
         },
-        "required": ["good", "leaning-good", "neutral", "leaning-bad", "bad"],
+        "required": ["great", "good", "neutral", "poor", "bad"],
         "additionalProperties": false,
         "description": "The rubric: what each tier means for this topic. A rating names the tier its quotes fit"
       },

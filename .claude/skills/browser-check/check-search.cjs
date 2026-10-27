@@ -7,8 +7,9 @@
 // anything else adds one), a reload, Back and Forward, a URL with values the catalog doesn't have, no scroll on a
 // filter change, and under 960 px the drawer (focus, its trap, Escape, Show results, Back), a price's Add to list
 // menu by keyboard (M5.4), and M5.7's pinned bar and panel, chips that stay put, the plans' order, a lone plan's
-// chip and the details' slide and foot, and M1.13's Terms and policies, with axe. GET /fx is answered with fixed
-// rates (1 EUR ≈ CA$1.5694), so Amazon.ca's Mullvad cards are cheaper in Alberta.
+// chip and the details' slide and foot, and M1.13's Terms and policies with M1.14's grade dots, their tooltips (hover,
+// keyboard and a phone's tap) and citations, with axe. GET /fx is answered with fixed rates (1 EUR ≈ CA$1.5694), so
+// Amazon.ca's Mullvad cards are cheaper in Alberta.
 // Usage: node check-search.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
 const fs = require('fs');
 const path = require('path');
@@ -110,6 +111,18 @@ async function openSearch(page, province) {
   await page.goto(`${baseUrl}search`);
   await firstRun(page, province);
   await page.locator('ss-sub-card').first().waitFor({ timeout: 20000 });
+}
+
+/** A details section's ratings: each dot's grade, then its topic, why and citations, as they show. */
+async function policyRows(scope) {
+  return scope.locator('.policies li').evaluateAll((items) =>
+    items.map((item) => {
+      const copy = item.querySelector('.rated').cloneNode(true);
+      copy.querySelectorAll('.visually-hidden').forEach((node) => node.remove());
+      const grade = item.querySelector('.grade').getAttribute('aria-label');
+      return `${grade} | ${copy.textContent.replace(/\s+/g, ' ').trim()}`;
+    }),
+  );
 }
 
 const card = (page, name) =>
@@ -1174,7 +1187,7 @@ async function addItem(page, planId) {
     }
   }
 
-  // ── M1.13: Terms and policies in a card's details (Alberta, light, 1280 px) ─────────────────────
+  // ── M1.13, M1.14: Terms and policies in a card's details (Alberta, light, 1280 px) ──────────────
   {
     const context = await newContext(browser, { locale: 'en-CA' });
     const page = await newPage(context, 'CA policies');
@@ -1185,9 +1198,9 @@ async function addItem(page, planId) {
       has: page.getByRole('heading', { name: 'Terms and policies' }),
     });
     await section.waitFor();
-    const rows = await section
-      .locator('.policies li')
-      .evaluateAll((items) => items.map((item) => item.textContent.replace(/\s+/g, ' ').trim()));
+    // The details finish sliding open: a dot that moves under the pointer fires mouseleave.
+    await sleep(1000);
+    const rows = await policyRows(section);
     const groups = await section.locator('h4').allTextContents();
     const links = await section
       .locator('.policy-links a')
@@ -1199,36 +1212,188 @@ async function addItem(page, planId) {
         ]),
       );
     check(
-      'Mullvad’s details rate its terms by group, each with its tier in words and why, and link its pages',
+      'Mullvad’s details grade its terms by group, each a dot named by its grade, with why and citations, and number its pages',
       groups.join() === 'Privacy,Billing,Legal,Service' &&
         rows[0] ===
-          'Good, Data collection: No personal details to sign up, and no activity or connection logs.' &&
-        rows.some((row) => row.startsWith('Leaning good, Cancelling and refunds:')) &&
+          "Great | Data collection: To sign up you don't give your name, an email address or even a password, so it knows very little about you. [3]" &&
+        rows.some((row) => row.startsWith('Good | Cancelling and refunds:')) &&
         links.length === 4 &&
+        links[0][0].startsWith('[1] Terms of service') &&
         links.every(
           ([text, target, rel]) =>
             /opens in a new tab/.test(text) && target === '_blank' && rel === 'noopener',
         ),
-      `${groups.join(', ')} | ${rows.length} ratings | ${links.map(([text]) => text).join(', ')}`,
+      `${groups.join(', ')} | ${rows[0]} | ${links.map(([text]) => text).join(', ')}`,
     );
+    const citations = await section
+      .locator('.cite')
+      .evaluateAll((anchors) =>
+        anchors.map((anchor) => [
+          anchor.textContent.replace(/\s+/g, ' ').trim(),
+          anchor.href,
+          anchor.target,
+        ]),
+      );
+    check(
+      'each citation links its page, scrolled to the words it quotes, in a new tab',
+      citations.length >= 9 &&
+        citations.every(
+          ([text, href, target]) =>
+            /^\[[1-4]\] .+, opens in a new tab$/.test(text) &&
+            href.includes('#:~:text=') &&
+            target === '_blank',
+        ),
+      `${citations.length}: ${citations[0]?.join(' ')}`,
+    );
+    // Mullvad's refunds quote its terms three times: one citation, highlighting all three.
+    const refunds = section.locator('.policies li', { hasText: 'Cancelling and refunds' });
+    const refundCites = await refunds
+      .locator('.cite')
+      .evaluateAll((anchors) => anchors.map((anchor) => anchor.href));
+    const repeats = await section.locator('.policies li').evaluateAll(
+      (items) =>
+        items.filter((item) => {
+          const numbers = [...item.querySelectorAll('.cite')].map(
+            (cite) => cite.href.split('#')[0],
+          );
+          return new Set(numbers).size !== numbers.length;
+        }).length,
+    );
+    check(
+      'a rating cites each page once, its link highlighting every quote from it',
+      refundCites.length === 1 && refundCites[0].split('text=').length === 4 && repeats === 0,
+      `${refundCites.join(' ')} / ${repeats} with a page twice`,
+    );
+    const looks = await section.evaluate((group) => {
+      const style = (selector) => getComputedStyle(group.querySelector(selector));
+      const resolved = (property, name) => {
+        const probe = document.createElement('span');
+        probe.style[property] = `var(${name})`;
+        group.append(probe);
+        const value = getComputedStyle(probe)[property];
+        probe.remove();
+        return value;
+      };
+      const grade = group.querySelector('.grade').getBoundingClientRect();
+      const dot = group.querySelector('.grade .dot').getBoundingClientRect();
+      return {
+        muted: style('.rated').color === resolved('color', '--ss-text-muted'),
+        bold:
+          style('.topic').color === resolved('color', '--ss-text') &&
+          style('.topic').fontWeight === '600',
+        target: `${grade.width}x${grade.height}`,
+        dot: `${dot.width}x${dot.height}`,
+        fill:
+          style('.grade .dot').backgroundColor === resolved('backgroundColor', '--policy-great'),
+      };
+    });
+    check(
+      'the reason is muted, its topic bold in the text colour, and the dot 12 px in a 24 px target, in its colour',
+      looks.muted && looks.bold && looks.target === '24x24' && looks.dot === '12x12' && looks.fill,
+      JSON.stringify(looks),
+    );
+    // Hover shows the grade, a click keeps it, and leaving hides it.
+    const firstDot = section.locator('.grade').first();
+    // The one showing: another may still be fading out.
+    const tooltip = page.locator('.mat-mdc-tooltip-show');
+    await firstDot.hover();
+    await tooltip.waitFor();
+    const hovered = (await tooltip.textContent()).trim();
+    await firstDot.click();
+    await sleep(400);
+    const afterClick = await tooltip.isVisible();
+    // The viewport: an element's screenshot scrolls, and a scroll closes a tooltip.
+    await page.screenshot({ path: path.join(outDir, 'policies-tooltip-1280.png') });
+    await page.mouse.move(5, 5);
+    await tooltip.waitFor({ state: 'detached' });
     await section.screenshot({ path: path.join(outDir, 'policies-mullvad-1280.png') });
+    check(
+      'hovering a dot shows its grade, a click keeps it, and moving away hides it',
+      hovered === 'Great' && afterClick,
+      `${hovered} / ${afterClick}`,
+    );
+    // A citation's tooltip is the words it quotes.
+    await section.locator('.cite').first().hover();
+    await tooltip.waitFor();
+    const quoteTip = (await tooltip.textContent()).trim();
+    check(
+      "a citation's tooltip quotes its page",
+      quoteTip.startsWith('“When you sign up for Mullvad,') &&
+        quoteTip.endsWith('(No-logging policy)'),
+      quoteTip,
+    );
+    await axeCheck(page, 'light 1280, Terms and policies open, a citation’s tooltip shown');
+    await page.mouse.move(5, 5);
+    await tooltip.waitFor({ state: 'detached' });
+    // By keyboard: Tab to a dot shows its grade, and Escape hides it.
+    await firstDot.focus();
+    await page.keyboard.press('Shift+Tab');
+    await page.keyboard.press('Tab');
+    await tooltip.waitFor();
+    const keyed = (await tooltip.textContent()).trim();
+    await page.keyboard.press('Escape');
+    await tooltip.waitFor({ state: 'detached' });
+    check('Tab to a dot shows its grade, and Escape hides it', keyed === 'Great', keyed);
     // Netflix's ratings from its Canadian terms show here, and its ad plan's own ratings on that plan.
     const netflix = card(page, 'Netflix');
     await netflix.locator('button.expand').click();
     await netflix.locator('.policies li').first().waitFor();
-    const netflixRows = await netflix
-      .locator('.policies li')
-      .evaluateAll((items) => items.map((item) => item.textContent.replace(/\s+/g, ' ').trim()));
+    const netflixRows = await policyRows(netflix);
     check(
       "Netflix's ad plan shows its own sharing and download limits, and its Canadian terms",
-      netflixRows.some((row) => row.startsWith('Leaning bad, Account sharing:')) &&
+      netflixRows.some((row) => row.startsWith('Poor | Account sharing:')) &&
         netflixRows.some((row) =>
-          row.startsWith('Leaning bad, Device and download limits: 15 downloads'),
+          row.startsWith('Poor | Device and download limits: You can only download 15'),
         ) &&
-        netflixRows.some((row) => row.startsWith('Leaning good, Price changes:')),
+        netflixRows.some((row) => row.startsWith('Good | Price changes:')),
       netflixRows.join(' | '),
     );
     await axeCheck(page, 'light 1280, Terms and policies open');
+    await context.close();
+  }
+
+  // ── M1.14: on a phone, a tap on a dot shows its grade and a tap elsewhere hides it (dark, 360 px) ──
+  {
+    const context = await browser.newContext({
+      locale: 'en-CA',
+      colorScheme: 'dark',
+      viewport: NARROW,
+      isMobile: true,
+      hasTouch: true,
+      userAgent:
+        'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36',
+    });
+    await context.route('**/api/v1/fx?**', (route) =>
+      route.fulfill({ json: fxBody(new URL(route.request().url()).searchParams.get('base')) }),
+    );
+    const page = await newPage(context, 'CA policies, a phone');
+    await openSearch(page, 'Alberta');
+    const mullvad = card(page, 'Mullvad VPN');
+    await mullvad.locator('button.expand').tap();
+    const section = mullvad.locator('.group', {
+      has: page.getByRole('heading', { name: 'Terms and policies' }),
+    });
+    await section.waitFor();
+    // The one showing: another may still be fading out.
+    const tooltip = page.locator('.mat-mdc-tooltip-show');
+    // Mullvad's fifth rating, Cancelling and refunds, is Good.
+    const dot = section.locator('.grade').nth(4);
+    await dot.scrollIntoViewIfNeeded();
+    await dot.tap();
+    await tooltip.waitFor();
+    const tapped = (await tooltip.textContent()).trim();
+    await sleep(400);
+    await page.screenshot({ path: path.join(outDir, 'policies-tooltip-dark-360.png') });
+    await axeCheck(page, 'dark 360 phone, a grade shown');
+    await section.locator('h3').tap();
+    await tooltip.waitFor({ state: 'detached' });
+    await section.screenshot({ path: path.join(outDir, 'policies-mullvad-dark-360.png') });
+    const width = await page.evaluate(() => document.documentElement.scrollWidth);
+    check(
+      'a tap on a dot shows its grade, a tap elsewhere hides it, and nothing scrolls sideways',
+      tapped === 'Good' && width <= NARROW.width,
+      `${tapped} / ${width}px`,
+    );
     await context.close();
   }
 
@@ -1243,14 +1408,12 @@ async function addItem(page, planId) {
     await card(page, 'Proton').locator('button.expand').click();
     await card(page, 'Netflix').locator('button.expand').click();
     await card(page, 'Netflix').locator('.policies li').first().waitFor();
-    const disputes = (
-      await card(page, 'Proton').locator('.policies li', { hasText: 'Disputes' }).textContent()
-    )
-      .replace(/\s+/g, ' ')
-      .trim();
+    const disputes = (await policyRows(card(page, 'Proton'))).find((row) =>
+      row.includes('| Disputes:'),
+    );
     check(
       "a US user sees Proton's US disputes rating, and none from Netflix's Canadian terms",
-      disputes.startsWith('Leaning bad, Disputes: In the US, arbitration') &&
+      disputes.startsWith('Poor | Disputes: In the US, a private arbitrator') &&
         (await card(page, 'Netflix')
           .locator('.policies li', { hasText: 'Price changes' })
           .count()) === 0,

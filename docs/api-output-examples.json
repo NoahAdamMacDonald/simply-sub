@@ -338,10 +338,10 @@
                     "group": "privacy",
                     "question": "What it collects beyond what the service needs to work, and whether you can say no.",
                     "tiers": {
-                      "good": "Collects only what the service needs to work.",
-                      "leaning-good": "Asks before collecting anything more.",
+                      "great": "Collects only what the service needs to work.",
+                      "good": "Asks before collecting anything more.",
                       "neutral": "Collects more by default, and you can opt out.",
-                      "leaning-bad": "Collects more by default, and opting out is partial or only on request.",
+                      "poor": "Collects more by default, and opting out is partial or only on request.",
                       "bad": "Collects more by default, with no way to opt out."
                     }
                   }
@@ -621,10 +621,10 @@
                     "group": "privacy",
                     "question": "What it collects beyond what the service needs to work, and whether you can say no.",
                     "tiers": {
-                      "good": "Collects only what the service needs to work.",
-                      "leaning-good": "Asks before collecting anything more.",
+                      "great": "Collects only what the service needs to work.",
+                      "good": "Asks before collecting anything more.",
                       "neutral": "Collects more by default, and you can opt out.",
-                      "leaning-bad": "Collects more by default, and opting out is partial or only on request.",
+                      "poor": "Collects more by default, and opting out is partial or only on request.",
                       "bad": "Collects more by default, with no way to opt out."
                     }
                   }

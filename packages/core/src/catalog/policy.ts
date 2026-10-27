@@ -14,8 +14,8 @@ import { policyTierSchema } from './policy-topic';
 // and its own words, and the pages they quote, which the card links. Topic ids and the plans a rating names are
 // checked against the catalog by validateCatalog and the provider schema.
 
-/** Shown beside the tier, so it fits on one line. */
-export const policyReasonMax = 100;
+/** Shown beside the grade's dot: a sentence or two in plain words (M1.14; M1.13 kept it to one line). */
+export const policyReasonMax = 240;
 
 export const policySourceSchema = z.strictObject({
   url: httpsUrlSchema.describe('The page the quote is on: one of the links'),
@@ -25,10 +25,10 @@ export type PolicySource = z.infer<typeof policySourceSchema>;
 
 export const policyRatingSchema = z.strictObject({
   topic: dottedSlugSchema.describe('A topic id from policy-topics.yaml'),
-  tier: policyTierSchema.describe("The rubric's tier its quotes fit"),
+  tier: policyTierSchema.describe("The rubric's grade its quotes fit"),
   reason: textSchema
-    .max(policyReasonMax, `Keep it to one short line (${policyReasonMax} characters at most)`)
-    .describe('Why, in one short line, shown beside the tier'),
+    .max(policyReasonMax, `Keep it to a sentence or two (${policyReasonMax} characters at most)`)
+    .describe('Why, in plain words anyone can follow, shown beside the grade'),
   sources: z
     .array(policySourceSchema)
     .min(1, 'Quote where it says so')

@@ -131,26 +131,54 @@
       <ul class="policies">
         @for (policy of group.policies; track policy.topic.id) {
           <li>
-            <span class="tier" [attr.data-tier]="policy.tier">{{ tierNames[policy.tier] }}</span>
-            <span class="visually-hidden">, </span>
-            <span class="rated">
+            <!-- The grade is the dot's name, and its tooltip on hover, focus or a tap (touch gestures are off, so a
+                 tap is a click). show() keeps it open when a click lands while hovering. -->
+            <button
+              #grade="matTooltip"
+              type="button"
+              class="grade"
+              [attr.data-tier]="policy.tier"
+              [attr.aria-label]="tierNames[policy.tier]"
+              [matTooltip]="tierNames[policy.tier]"
+              matTooltipTouchGestures="off"
+              (click)="grade.show()"
+            >
+              <span class="dot"></span>
+            </button>
+            <p class="rated">
               <span class="topic">{{ policy.topic.name }}: </span>
-              <span>{{ policy.reason }}</span>
-            </span>
+              <!-- The space before the citations is the reason's: Angular drops a span of only a space. -->
+              <span>{{ policy.reason }} </span>
+              @for (citation of policy.citations; track $index) {
+                <a
+                  class="cite"
+                  [href]="citation.href"
+                  target="_blank"
+                  rel="noopener"
+                  [matTooltip]="quoteText(citation)"
+                  matTooltipTouchGestures="off"
+                >
+                  <span>[{{ citation.number }}]</span>
+                  <span class="visually-hidden"> {{ citation.name }}, opens in a new tab</span>
+                </a>
+              }
+            </p>
           </li>
         }
       </ul>
     }
-    <p class="policy-links">
-      <span>From </span>
+    <p class="sources-label">Sources</p>
+    <ol class="policy-links">
       @for (link of policies.links; track link.url) {
-        <a [href]="link.url" target="_blank" rel="noopener">
-          <span>{{ link.name }}</span>
-          <span class="visually-hidden">, opens in a new tab</span>
-          <mat-icon aria-hidden="true">open_in_new</mat-icon>
-        </a>
+        <li>
+          <a [href]="link.url" target="_blank" rel="noopener">
+            <span>[{{ $index + 1 }}] {{ link.name }}</span>
+            <span class="visually-hidden">, opens in a new tab</span>
+            <mat-icon aria-hidden="true">open_in_new</mat-icon>
+          </a>
+        </li>
       }
-    </p>
+    </ol>
   </div>
 }
 

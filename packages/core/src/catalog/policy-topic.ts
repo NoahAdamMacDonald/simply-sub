@@ -5,8 +5,8 @@ import { dottedSlugSchema, slugSchema, textSchema } from './formats';
 // data/policy-topics.yaml (BLUEPRINT §4.10): what a card's Terms and policies rates a provider on, each topic with a
 // five-tier rubric, so a rating means the same thing for every provider.
 
-/** The five tiers, best first. */
-export const policyTiers = ['good', 'leaning-good', 'neutral', 'leaning-bad', 'bad'] as const;
+/** The five grades, best first: Great, Good, Neutral, Poor and Bad (M1.14; M1.13 had good to bad with "leaning"). */
+export const policyTiers = ['great', 'good', 'neutral', 'poor', 'bad'] as const;
 export const policyTierSchema = z.enum(policyTiers);
 export type PolicyTier = z.infer<typeof policyTierSchema>;
 
@@ -22,10 +22,10 @@ export const policyTopicSchema = z.strictObject({
   question: textSchema.describe('What it rates'),
   tiers: z
     .strictObject({
+      great: textSchema,
       good: textSchema,
-      'leaning-good': textSchema,
       neutral: textSchema,
-      'leaning-bad': textSchema,
+      poor: textSchema,
       bad: textSchema,
     })
     .describe(
