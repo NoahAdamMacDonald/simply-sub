@@ -46,6 +46,7 @@ import { ClockService } from '../../core/clock/clock-service';
 import { FxStore } from '../../core/fx/fx-store';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { ItemsRepository } from '../../core/storage/items-repository';
+import { ListsRepository } from '../../core/storage/lists-repository';
 import { RankingsRepository } from '../../core/storage/rankings-repository';
 import { DRAWER_BREAKPOINT } from '../../layout/shell';
 import { EmptyState } from '../../shared/empty-state/empty-state';
@@ -77,7 +78,8 @@ const priceState = 'ssSearchPrice';
  * card per provider (ss-sub-card), with the filter panel (ss-search-filters) beside the results, or in a drawer under
  * 960 px. The URL holds the text, the filters and the sort (M5.3), so a reload and back/forward restore them, and the
  * page rewrites a URL with anything the catalog doesn't have. The search bar and the panel stay in place while the
- * results scroll (M5.7).
+ * results scroll (M5.7). In pick mode, ?addTo=<list id> (P7, flow F2, M5.5), a banner above the search bar names the
+ * list, and a price adds to it at once; the URL keeps it through every change, until its ✕ goes back to the list.
  */
 @Component({
   selector: 'ss-search-page',
@@ -118,6 +120,7 @@ export class SearchPage {
   private readonly settings = inject(SettingsStore);
   private readonly fx = inject(FxStore);
   private readonly items = inject(ItemsRepository);
+  private readonly lists = inject(ListsRepository);
   private readonly rankings = inject(RankingsRepository);
   private readonly today = inject(ClockService).today;
 
@@ -157,14 +160,19 @@ export class SearchPage {
   }));
 
   /**
-   * The URL's text, filters and sort, as far as the catalog has them; undefined until it and the settings, whose
-   * defaults the URL leaves out, have loaded.
+   * The URL's text, filters and sort, as far as the catalog has them, and pick mode's list while it's one of the
+   * user's; undefined until the catalog, the settings, whose defaults the URL leaves out, and the lists have loaded.
    */
   protected readonly query = computed(() => {
     const data = this.catalog.catalog();
-    return data && this.settings.saved()
-      ? readSearchParams(this.params(), data, this.defaults())
+    return data && this.settings.saved() && this.lists.status() !== 'loading'
+      ? readSearchParams(this.params(), data, this.defaults(), this.lists.records())
       : undefined;
+  });
+  /** Pick mode's list (P7, flow F2): the banner names it, and a price adds to it with no menu. */
+  protected readonly pickList = computed(() => {
+    const id = this.query()?.addTo;
+    return id === undefined ? undefined : this.lists.records().find((list) => list.id === id);
   });
   private readonly hasText = computed(() => this.query()?.q !== undefined);
   /** Best match needs text: without it, the default is the cheapest first. */
@@ -326,9 +334,16 @@ export class SearchPage {
     });
   }
 
-  /** Puts `query` in the URL, without scrolling: a price change after another one replaces its entry. */
+  /**
+   * Puts `query` in the URL, without scrolling, with pick mode's list, which only its ✕ leaves: a price change after
+   * another one replaces its entry.
+   */
   private navigate(query: CatalogQuery, entry: HistoryEntry): void {
-    const queryParams = writeSearchParams(query, this.defaults());
+    const addTo = this.query()?.addTo;
+    const queryParams = writeSearchParams(
+      { ...query, ...(addTo !== undefined && { addTo }) },
+      this.defaults(),
+    );
     if (sameSearchParams(this.params(), queryParams)) return;
     const state = this.location.getState() as Record<string, unknown> | null;
     const priceRun = entry === 'price' && state?.[priceState] === true;

@@ -92,7 +92,12 @@ Show results, Back), with axe on the open suggestions at 1280 px and the open dr
 added a price's Add to list menu: the price as a menu button ("…, add to a list"), Enter opening it with a list
 (written to IndexedDB) and its count, then New list…, Escape back on the price, a list opening its editor with the
 plan and period in the URL and the placeholder's text, and a bundle's price with New list…, with axe on the open menu
-in both themes at both widths. M5.7 added, at both widths: TSN's plans in order (Standard first), a lone plan's chip
+in both themes at both widths. M5.5 added pick mode (`?addTo=`): an `addTo` that names no list dropped in place,
+the list kept through typing, Native, Clear all, a reload, Back and Forward, a bundle's price adding the bundle at
+once, and in both themes at both widths, keyboard only, Tab from the top to the banner's ✕ (the stop before the
+search box), Enter on it back to the editor, the editor's [+ Add from catalog] by keyboard, then Enter on the first
+price adding its plan with no menu, with no horizontal scroll and axe with the banner shown; a 60-character list name
+wrapping at 360 px in dark. M5.7 added, at both widths: TSN's plans in order (Standard first), a lone plan's chip
 (RDS), every chip's place in its card unchanged across plan switches (Proton, TSN), the pinned bar and panel after
 scrolling 900 px (`elementFromPoint` across the bar and the top bar, so nothing paints over them), the one-row bar
 under 960 px with Sort first in the drawer, the details' slide (their `moving` class) and the details button saying

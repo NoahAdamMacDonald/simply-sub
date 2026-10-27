@@ -13,7 +13,14 @@ import {
 } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import type { AddRequest, CatalogResult, PickedPrice, Rank, RankKey } from '@simply-sub/core';
+import type {
+  AddRequest,
+  CatalogResult,
+  PickedPrice,
+  Rank,
+  RankKey,
+  SubscriptionList,
+} from '@simply-sub/core';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { AddToListMenu } from '../add-to-list/add-to-list-menu';
 import { countryName } from '../country-name';
@@ -28,11 +35,11 @@ let nextId = 0;
 /**
  * A subscription card (PROJECT-PLAN §4.3), the search variant (P8, M5.2): one provider, showing one of the plans
  * that matched, with its prices, the resellers that sell it for less, links to sign up and cancel, and the
- * provider's place in the user's lists. A price opens the Add to list menu (P7, M5.4). Chips switch between the
- * matching plans, and the expanded section adds the plan's features, add-ons, bundles and the rest (ss-plan-details),
- * whose bundle prices open the same menu. It slides open and shut, closes from its foot too, and keeps the card on
- * screen (M5.7). A provider that isn't sold in the user's country says so instead. The list variant comes with List
- * view (M6.8).
+ * provider's place in the user's lists. A price opens the Add to list menu (P7, M5.4), or in Search's pick mode adds
+ * to that mode's list at once (F2, M5.5). Chips switch between the matching plans, and the expanded section adds the
+ * plan's features, add-ons, bundles and the rest (ss-plan-details), whose bundle prices do the same. It slides open
+ * and shut, closes from its foot too, and keeps the card on screen (M5.7). A provider that isn't sold in the user's
+ * country says so instead. The list variant comes with List view (M6.8).
  */
 @Component({
   selector: 'ss-sub-card',
@@ -62,6 +69,8 @@ export class SubCard {
   readonly result = input.required<CatalogResult>();
   /** The user's ranks, beside the features the expanded card lists. */
   readonly ranks = input<Readonly<Partial<Record<RankKey, Rank>>>>({});
+  /** Pick mode's list (P7, flow F2): its prices, and its bundles', add to it with no menu. */
+  readonly pickList = input<Pick<SubscriptionList, 'id' | 'name'>>();
 
   protected readonly id = `ss-sub-card-${nextId++}`;
   protected readonly provider = computed(() => this.result().provider);

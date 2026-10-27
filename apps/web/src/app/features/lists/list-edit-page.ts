@@ -1,22 +1,33 @@
 import { Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { readAddRequest, type Interval } from '@simply-sub/core';
+import { map } from 'rxjs';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { planTitle } from '../../shared/sub-card/card-text';
 
 /**
  * Placeholder: list edit (PROJECT-PLAN P5), for both new and existing lists, is built in M6.4. Until then it says what
- * a price click from Search asked it to add (?add= or ?addBundle=, flows F1 and F4, M5.4), which the item dialog will
- * open with (M6.5).
+ * a price click from Search asked it to add (?add= or ?addBundle=, flows F1, F2 and F4, M5.4), which the item dialog
+ * will open with (M6.5), and an existing list's [+ Add from catalog] opens Search in pick mode for it (F2, M5.5).
  */
 @Component({
   selector: 'ss-list-edit-page',
+  imports: [MatButton, MatIcon, RouterLink],
   templateUrl: './list-edit-page.html',
 })
 export class ListEditPage {
   private readonly catalog = inject(CatalogStore);
-  private readonly params = toSignal(inject(ActivatedRoute).queryParams, { requireSync: true });
+  private readonly route = inject(ActivatedRoute);
+  private readonly params = toSignal(this.route.queryParams, { requireSync: true });
+
+  /** The list's id: none on /lists/new until the editor gives its draft one (M6.3). */
+  protected readonly listId = toSignal(
+    this.route.paramMap.pipe(map((params) => params.get('listId') ?? undefined)),
+    { requireSync: true },
+  );
 
   /** The plan or bundle waiting to be added, by name (its id while the catalog loads), and how often it's billed. */
   protected readonly adding = computed(() => {

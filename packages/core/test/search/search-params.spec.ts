@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  filterCount,
   readCatalogSource,
   readSearchParams,
   sameSearchParams,
@@ -129,6 +130,44 @@ describe('Sold in', () => {
         );
       }
     }
+  });
+});
+
+describe('pick mode (addTo)', () => {
+  const work = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d';
+  const lists = [{ id: work }, { id: '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4e' }];
+
+  it('keeps an addTo that names one of the lists, and writes it last', () => {
+    const query = readSearchParams({ addTo: work, q: 'vpn', sold: '1' }, registry, {}, lists);
+
+    expect(query).toEqual({ q: 'vpn', soldOnly: true, addTo: work });
+    expect(Object.keys(writeSearchParams(query))).toEqual(['q', 'sold', 'addTo']);
+    expect(readSearchParams(writeSearchParams(query), registry, {}, lists)).toEqual(query);
+    expect(writeSearchParams({ addTo: work })).toEqual({ addTo: work });
+    // A repeated one keeps its first, as the other parameters do.
+    expect(readSearchParams({ addTo: [work, 'other'] }, registry, {}, lists)).toEqual({
+      addTo: work,
+    });
+  });
+
+  it('drops one that names no list, which a deleted one doesn’t', () => {
+    expect(readSearchParams({ addTo: 'nope', q: 'vpn' }, registry, {}, lists)).toEqual({
+      q: 'vpn',
+    });
+    expect(readSearchParams({ addTo: '' }, registry, {}, lists)).toEqual({});
+    // With no lists given, or none left, there's nothing to add to.
+    expect(read({ addTo: work })).toEqual({});
+    expect(readSearchParams({ addTo: work }, registry, {}, [])).toEqual({});
+    expect(writeSearchParams(read({ addTo: work, native: '1' }))).toEqual({ native: '1' });
+  });
+
+  it('isn’t a filter, so the Filters count leaves it out', () => {
+    expect(filterCount(readSearchParams({ addTo: work }, registry, {}, lists))).toBe(0);
+    expect(
+      filterCount(
+        readSearchParams({ addTo: work, native: '1', f: 'vpn.included' }, registry, {}, lists),
+      ),
+    ).toBe(2);
   });
 });
 

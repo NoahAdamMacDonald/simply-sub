@@ -32,6 +32,36 @@
   }
 }
 
+// Pick mode's banner (P7, flow F2, M5.5), above the search bar: an accent edge marks the mode, and its ✕ leaves it.
+// A long list name wraps.
+.pick {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding: 4px 4px 4px 12px;
+  border-left: 4px solid var(--ss-accent-text);
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+
+  > mat-icon {
+    flex: none;
+    color: var(--ss-accent-text);
+  }
+
+  p {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  a {
+    flex: none;
+    color: var(--ss-text);
+  }
+}
+
 // On the card colour, where the outlined fields' labels keep their contrast (BLUEPRINT §8.1).
 .bar,
 .panel {

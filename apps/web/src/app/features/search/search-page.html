@@ -2,6 +2,23 @@
 
 <!-- Pinned while the results scroll under it, below the top bar under 960 px (M5.7). -->
 <div #pinned class="pinned" [class.narrow]="narrow()">
+  <!-- Pick mode (P7, flow F2, M5.5): a price adds to this list at once, and the ✕ goes back to it. -->
+  @if (pickList(); as list) {
+    <div class="pick">
+      <mat-icon aria-hidden="true">playlist_add</mat-icon>
+      <p>
+        Adding to <strong>{{ list.name }}</strong>
+      </p>
+      <a
+        matIconButton
+        [routerLink]="['/lists', list.id, 'edit']"
+        [attr.aria-label]="'Stop adding to ' + list.name"
+      >
+        <mat-icon>close</mat-icon>
+      </a>
+    </div>
+  }
+
   <div class="bar" role="search">
     <mat-form-field appearance="outline" class="search" subscriptSizing="dynamic">
       <mat-icon matPrefix aria-hidden="true">search</mat-icon>
@@ -66,7 +83,7 @@
   @if (results(); as results) {
     <div class="results">
       @for (result of results; track result.provider.id) {
-        <ss-sub-card [result]="result" [ranks]="ranks()" />
+        <ss-sub-card [result]="result" [ranks]="ranks()" [pickList]="pickList()" />
       } @empty {
         <ss-empty-state icon="search_off" heading="No services match">
           Try other words or fewer filters, or add the service yourself.

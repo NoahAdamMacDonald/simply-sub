@@ -2499,6 +2499,28 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
+**Resolved (2026-10-27, M5.5)**
+- **Pick mode** (PROJECT-PLAN P7's flow F2, P8): `/search?addTo=<list id>` shows "Adding to Work Related" and a ✕ at
+  the top of the pinned bar, above the search box at both widths, so it stays on screen while the results scroll and
+  comes before the box in the Tab order. The ✕ is a link back to `/lists/<id>/edit`, named "Stop adding to Work
+  Related", and adds nothing. A long list name wraps.
+- **A price adds at once:** in pick mode a card's prices, and its bundles' prices in the details, are plain buttons
+  named "…, add to Work Related", with no menu. A click opens the list's editor with core's `addRequestParams`
+  (`add` or `addBundle`, `interval`, and `count` above 1), as picking a list in the menu does in F1. The card's
+  `ss-add-to-list-menu` takes the list (`list`), so the card's prices and its details' switch together. Add-on and
+  reseller prices stay text.
+- **The URL keeps it** (core's `SearchQuery`): `readSearchParams` keeps an `addTo` that names one of the user's lists,
+  which it's given, and `writeSearchParams` writes it last, after `sold`. It isn't a filter: `filterCount` leaves it
+  out, and Clear all keeps it. Every URL the page writes carries it, so it survives typing, filters, Clear all, a
+  reload and Back/Forward; only the ✕ leaves pick mode. Search reads its URL once the lists have loaded too, so an
+  `addTo` isn't dropped before they're read. One that names no list, or a deleted one (in this tab or another), is
+  dropped and the URL rewritten in place, with no banner.
+- **Until the editor exists,** F2 ends on the placeholder's "… will be added here once the list editor is ready.", as
+  F1 does, and an existing list's placeholder has [+ Add from catalog]. `/lists/new` has none yet: its list gets an id
+  with its draft (M6.3) and isn't in the lists table until Save, so M6.3 has to give Search a draft's list among the
+  lists an `addTo` can name.
+- **The initial bundle didn't grow** (488.2 kB; 488.4 kB before). The Search chunk grew by 1.5 kB (267.6 kB).
+
 **Resolved (2026-10-27, M5.9)**
 - **The grade in words:** each rating reads "Disputes (Good): …", the grade muted beside the bold topic, so it's on
   screen without a hover (WCAG 1.4.1: colour isn't the only sign). The dot is decorative again, as the rank dots

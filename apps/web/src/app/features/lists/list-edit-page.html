@@ -4,3 +4,10 @@
     {{ adding.name }}, billed {{ adding.period }}, will be added here once the list editor is ready.
   </p>
 }
+@if (listId(); as listId) {
+  <!-- Search in pick mode for this list (P7, flow F2): a price there comes back here to be added. -->
+  <a matButton="outlined" routerLink="/search" [queryParams]="{ addTo: listId }">
+    <mat-icon>add</mat-icon>
+    Add from catalog
+  </a>
+}

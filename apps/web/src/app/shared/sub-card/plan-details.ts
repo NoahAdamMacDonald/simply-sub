@@ -64,7 +64,10 @@ export class PlanDetails {
   readonly provider = input.required<SnapshotProvider>();
   readonly match = input.required<Pick<PlanMatch, 'plan' | 'pricing' | 'lastVerified' | 'stale'>>();
   readonly ranks = input<Readonly<Partial<Record<RankKey, Rank>>>>({});
-  /** The card's Add to list menu, which a bundle's price opens (P7, F4). Without it, prices are text. */
+  /**
+   * The card's Add to list menu, which a bundle's price opens (P7, F4), or adds through at once in pick mode (F2).
+   * Without it, prices are text.
+   */
   readonly addMenu = input<AddToListMenu>();
 
   /** What a bundle's price adds to a list: the bundle, at that price's period. */

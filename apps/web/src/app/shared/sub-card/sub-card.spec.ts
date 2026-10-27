@@ -189,6 +189,51 @@ describe('SubCard', () => {
     });
   });
 
+  describe('in pick mode (M5.5)', () => {
+    beforeEach(() => fixture.componentRef.setInput('pickList', list(work, 'Work Related')));
+
+    const prices = () =>
+      Array.from(element().querySelectorAll<HTMLButtonElement>('ss-price button'));
+
+    it('adds a price’s plan and period to the list at once, with no menu', async () => {
+      const navigate = vi.spyOn(TestBed.inject(Router), 'navigate').mockResolvedValue(true);
+      await show(resultFor('netflix'));
+      radios()[1].click();
+      await fixture.whenStable();
+      // Standard's second price is yearly.
+      const price = prices()[1];
+
+      expect(price.hasAttribute('aria-haspopup')).toBe(false);
+      expect(price.textContent).toContain(', add to Work Related');
+      price.click();
+      await fixture.whenStable();
+      expect(document.querySelector('.mat-mdc-menu-panel')).toBeNull();
+      expect(navigate).toHaveBeenCalledWith(['/lists', work, 'edit'], {
+        queryParams: { add: 'netflix.standard', interval: 'year' },
+      });
+    });
+
+    it('adds a bundle’s price in the details as the bundle', async () => {
+      const navigate = vi.spyOn(TestBed.inject(Router), 'navigate').mockResolvedValue(true);
+      await show(resultFor('crave'));
+      radios()[1].click();
+      await fixture.whenStable();
+      query<HTMLButtonElement>('button.expand')?.click();
+      await fixture.whenStable();
+      // Crave Premium's own price, then the Netflix and Crave bundle's.
+      const price = prices()[1];
+      expect(price.closest('ss-plan-details')).not.toBeNull();
+      expect(price.hasAttribute('aria-haspopup')).toBe(false);
+      price.click();
+      await fixture.whenStable();
+
+      expect(document.querySelector('.mat-mdc-menu-panel')).toBeNull();
+      expect(navigate).toHaveBeenCalledWith(['/lists', work, 'edit'], {
+        queryParams: { addBundle: 'bundle.netflix-crave', interval: 'month' },
+      });
+    });
+  });
+
   it('switches between the matching plans with radio chips', async () => {
     await show(resultFor('netflix'));
 

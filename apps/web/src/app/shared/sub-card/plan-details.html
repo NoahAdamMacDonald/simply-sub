@@ -60,10 +60,10 @@
               @if (addMenu(); as menu) {
                 <ss-price
                   clickable
-                  action="add to a list"
+                  [action]="menu.action()"
                   [price]="price"
-                  [menu]="menu.menu()"
-                  (priceSelect)="menu.prepare(bundleRequest(offer.bundle.id, $event))"
+                  [menu]="menu.panel()"
+                  (priceSelect)="menu.add(bundleRequest(offer.bundle.id, $event))"
                 />
               } @else {
                 <ss-price [price]="price" />
