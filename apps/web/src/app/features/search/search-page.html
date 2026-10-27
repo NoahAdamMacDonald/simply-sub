@@ -1,65 +1,131 @@
 <h1 class="visually-hidden">Search</h1>
 
-<div class="bar" role="search">
-  <mat-form-field appearance="outline" class="search" subscriptSizing="dynamic">
-    <mat-icon matPrefix aria-hidden="true">search</mat-icon>
-    <mat-label>Search services, plans or features</mat-label>
-    <input
-      #box
-      matInput
-      type="search"
-      autocomplete="off"
-      [value]="text()"
-      (input)="typed(box.value)"
-    />
-    @if (text()) {
+<div class="layout" [class.narrow]="narrow()">
+  <div class="bar" role="search">
+    <mat-form-field appearance="outline" class="search" subscriptSizing="dynamic">
+      <mat-icon matPrefix aria-hidden="true">search</mat-icon>
+      <mat-label>Search services, plans or features</mat-label>
+      <input
+        #box
+        matInput
+        type="search"
+        autocomplete="off"
+        [value]="text()"
+        (input)="typed(box.value)"
+      />
+      @if (text()) {
+        <button
+          matIconButton
+          matSuffix
+          type="button"
+          aria-label="Clear the search"
+          (click)="clear(); box.focus()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="sort" subscriptSizing="dynamic">
+      <mat-label>Sort</mat-label>
+      <mat-select [value]="sort()" (valueChange)="chooseSort($event)">
+        @for (choice of sorts(); track choice.value) {
+          <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    @if (narrow()) {
       <button
-        matIconButton
-        matSuffix
+        matButton="outlined"
         type="button"
-        aria-label="Clear the search"
-        (click)="clear(); box.focus()"
+        class="open-filters"
+        aria-haspopup="dialog"
+        [attr.aria-label]="filters() > 0 ? 'Filters, ' + filters() + ' applied' : null"
+        (click)="openFilters()"
       >
-        <mat-icon>close</mat-icon>
+        <mat-icon aria-hidden="true">tune</mat-icon>
+        Filters
+        @if (filters() > 0) {
+          · {{ filters() }}
+        }
       </button>
     }
-  </mat-form-field>
+  </div>
 
-  <mat-form-field appearance="outline" class="sort" subscriptSizing="dynamic">
-    <mat-label>Sort</mat-label>
-    <mat-select [value]="sort()" (valueChange)="chosenSort.set($event)">
-      @for (choice of sorts(); track choice.value) {
-        <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
+  @if (!narrow()) {
+    <section class="panel" aria-labelledby="ss-filters-title">
+      <h2 id="ss-filters-title">Filters</h2>
+      <ng-container [ngTemplateOutlet]="panel" />
+    </section>
+  }
+
+  <!-- Announced, and shown unless the empty state below says it already. -->
+  <p class="count" role="status" [class.visually-hidden]="results()?.length === 0">
+    {{ count() }}
+  </p>
+
+  @if (results(); as results) {
+    <div class="results">
+      @for (result of results; track result.provider.id) {
+        <ss-sub-card [result]="result" [ranks]="ranks()" />
+      } @empty {
+        <ss-empty-state icon="search_off" heading="No services match">
+          Try other words or fewer filters, or add the service yourself.
+          <div actions>
+            @if (text()) {
+              <button matButton="outlined" type="button" (click)="clear(); box.focus()">
+                Clear search
+              </button>
+            }
+            @if (filters() > 0) {
+              <button matButton="outlined" type="button" (click)="clearFilters()">
+                Clear filters
+              </button>
+            }
+            <a matButton="filled" routerLink="/custom">Add a custom subscription</a>
+          </div>
+        </ss-empty-state>
       }
-    </mat-select>
-  </mat-form-field>
+    </div>
+  } @else {
+    <div class="results" aria-hidden="true">
+      @for (placeholder of [1, 2, 3]; track placeholder) {
+        <div class="skeleton"></div>
+      }
+    </div>
+  }
 </div>
 
-<!-- Announced, and shown unless the empty state below says it already. -->
-<p class="count" role="status" [class.visually-hidden]="results()?.length === 0">{{ count() }}</p>
+<!-- The panel's controls, beside the results or in the drawer. -->
+<ng-template #panel>
+  @if (filterPanel(); as panel) {
+    <ss-search-filters
+      [query]="panel.query"
+      [options]="panel.options"
+      [catalog]="panel.catalog"
+      [currency]="panel.settings.currency"
+      [country]="panel.settings.country"
+      (queryChange)="filtered($event, 'push')"
+      (priceChange)="filtered($event, 'price')"
+    />
+  }
+</ng-template>
 
-@if (results(); as results) {
-  <div class="results">
-    @for (result of results; track result.provider.id) {
-      <ss-sub-card [result]="result" [ranks]="ranks()" />
-    } @empty {
-      <ss-empty-state icon="search_off" heading="No services match">
-        Try other words, or add the service yourself.
-        <div actions>
-          @if (text()) {
-            <button matButton="outlined" type="button" (click)="clear(); box.focus()">
-              Clear search
-            </button>
-          }
-          <a matButton="filled" routerLink="/custom">Add a custom subscription</a>
-        </div>
-      </ss-empty-state>
-    }
+<!-- Under 960 px: a modal drawer on the right. Escape and the backdrop close it, and focus goes back to Filters. -->
+<ng-template #drawer>
+  <div class="drawer-head">
+    <h2 mat-dialog-title id="ss-filters-drawer-title">Filters</h2>
+    <button matIconButton mat-dialog-close type="button" aria-label="Close filters">
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
-} @else {
-  <div class="results" aria-hidden="true">
-    @for (placeholder of [1, 2, 3]; track placeholder) {
-      <div class="skeleton"></div>
-    }
-  </div>
-}
+  <mat-dialog-content>
+    <ng-container [ngTemplateOutlet]="panel" />
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <!-- The page's count is hidden behind the modal drawer, so the drawer announces its own. -->
+    <p class="visually-hidden" role="status">{{ count() }}</p>
+    <button matButton="filled" type="button" mat-dialog-close>Show results</button>
+  </mat-dialog-actions>
+</ng-template>

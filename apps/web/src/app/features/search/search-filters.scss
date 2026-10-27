@@ -1,0 +1,62 @@
+@use '../../shared/sub-card/choice-chip';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+}
+
+.label {
+  font: var(--mat-sys-title-small);
+}
+
+.price-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+
+.range {
+  color: var(--ss-text-muted);
+}
+
+// The slider spans the panel; its own margin keeps the thumbs inside.
+mat-slider {
+  display: block;
+}
+
+.activity {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  legend {
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 0;
+  }
+}
+
+.chip {
+  @include choice-chip.chip;
+}
+
+.native {
+  display: flex;
+  flex-direction: column;
+}
+
+.hint {
+  margin: 0 0 0 40px;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}
+
+button {
+  align-self: flex-start;
+}

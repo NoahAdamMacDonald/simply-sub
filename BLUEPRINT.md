@@ -218,7 +218,8 @@ simply-sub/
 │     │  ├─ ranking/         # rank keys, providesKey (M2.3) and providedKeys (M2.4); rank resolution (item override >
 │     │  │                   # profile > not ranked)
 │     │  ├─ search/          # searchProviders, readProvidersQuery, providersBody (GET /providers); searchCatalog
-│     │  │                   # and providerActivity (Search, P8, M5.1)
+│     │  │                   # and providerActivity (Search, P8, M5.1); its URL, filter options and Features
+│     │  │                   # suggestions (M5.3)
 │     │  ├─ lookup/          # readPricingQuery, readBundlesQuery and the GET /providers/:id, /plans/:id and /bundles
 │     │  │                   # bodies (M2.4)
 │     │  ├─ optimizer/       # suggestion engine (section 10)
@@ -1912,6 +1913,8 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
     `surface-variant`, an unmapped palette colour, and its labels fail contrast on it in dark mode. It's set on each
     field: providing `MAT_FORM_FIELD_DEFAULT_OPTIONS` in `app.config.ts` puts Material's form field in the initial
     bundle (600 kB).
+  - Option group labels (Material's `mat-optgroup`) take `--ss-text`, not the muted shade, which is 4.3:1 on dark
+    mode's raised overlay surface (M5.3).
 
   Always show the rank **name** next to its colour, for colour-blind users.
 - **Theme mode:** System (follows `prefers-color-scheme` live), Light or Dark. `ThemeService` sets
@@ -2427,6 +2430,45 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-26, M5.3)**
+- **The URL is Search's state** (PROJECT-PLAN P8): core's `readSearchParams` and `writeSearchParams` read and write
+  `?q=&sort=&min=&max=&cat=&f=&act=&native=1`, in that order, leaving defaults out. Only the search box keeps text of
+  its own, while typing. Reading keeps what the catalog file has: a sort, a service category, rank keys,
+  Active/Inactive/Not listed (`act=none`), amounts of 0 or more with the minimum at most the maximum, and Best match
+  only with text. The page rewrites a URL with anything else once the catalog has loaded, replacing its entry.
+- **History:** typing replaces the current entry once it pauses; a run of price changes (a drag, or arrow keys) makes
+  one entry, marked in the history state; anything else adds one, so Back undoes the last filter. Search's URL writes
+  don't scroll (the router's per-navigation `scroll: 'manual'`).
+- **The price slider** goes from 0 to the highest lowest-monthly-equivalent of the plans sold in the user's country,
+  rounded up to five steps of 1, 2 or 5 × 10ⁿ, about 40 steps in all (`searchFilterOptions`: CA$28.19 is $0 to $30 by
+  $1; ¥3,600 is ¥0 to ¥4,000 by ¥100). A fixed $50 would be almost nothing in yen or forints. The right end is
+  Unlimited, with no `max` in the URL, and a `max` past the top shows as Unlimited, since it keeps every plan. The
+  amounts are in Settings' currency with no code: after a change of currency, or in a link shared across currencies,
+  they're read in the reader's currency.
+- **Features box** (`featureSuggestions`): only keys some plan sold there provides, matched from the start of a word
+  in their names and aliases or their feature's ("ad" isn't "download"), a plural matching its singular (the rule
+  search uses, now shared in `search/plurals.ts`); then the rest of their feature category, "More in Streaming".
+  Streaming features have no parent in the registry, so grouping by parent would offer nothing related to Video
+  quality. With no text it lists every key by category. Chips are named by `rankKeyLabel`, "Video quality: 4K (Ultra
+  HD)" and a boolean by its own name: `featureLabels` are one plan's wording, so they can't name a filter across
+  providers. Category lists the service categories something sold in the user's country is in, and the chosen one.
+- **Under 960 px** a "Filters" button (Material's tune icon) in the search bar, "Filters · 2" with the count (named
+  "Filters, 2 applied"), opens a MatDialog on the right as a drawer. Not ☰, which the top bar uses for the navigation.
+  The CDK traps focus and hides the page from screen readers; Escape and the backdrop close it, focus goes back to the
+  button, Back closes it, and it announces the count itself, since the page's is hidden behind it. "Show results"
+  closes it too.
+- **The panel follows the search bar in the Tab order**, before the results it changes. Activity is three native
+  checkboxes drawn as chips, like the card's plan chips (a shared mixin), because Material's chip listbox draws its
+  selection in an unmapped palette colour.
+- **The Features suggestions are kept out of the Tab order:** Chromium makes a scrolling element a tab stop when
+  nothing in it is, and Material renders the list just after the box, so Tab landed on the list and left it open, and
+  the drawer's Escape closed the list before the drawer. The list gets `tabindex="-1"` when it opens; the arrow keys
+  move through it from the box.
+- **Option group labels** take the body text colour app-wide (section 8.1): Material draws them in the muted shade,
+  which is 4.3:1 on dark mode's raised overlay surface.
+- **The initial bundle didn't change** (487.7 kB). Material's slider, autocomplete, chips, checkbox and dialog load with
+  the Search page.
 
 **Resolved (2026-10-26, M5.2)**
 - **The Search page:** a search box (results follow a 150 ms pause), Sort (Best match only with text), a polite count

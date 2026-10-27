@@ -158,7 +158,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 |---|---|---|
 | M5.1 | core: matching and filters (`searchCatalog`), using `availability` (BLUEPRINT §4.7), on M2.3's `searchProviders`, the engine GET /providers shares: text matched term by term, with plurals and features' own names (P8); one result per provider with its matching plans priced, the plan shown (the user's own when it matches), each plan's reseller deals (`resellerDeals`) and "not offered" results for providers the text names; the Activity filter and status line from core's `itemActivity` (§3.3's active and inactive, moved from M7.1) and `providerActivity`. Add-ons, bundles and a suite's savings are M5.2's (BLUEPRINT §14) | Name, plan, alias and feature matches are ranked as described in P8, and plans not offered in the user's region never appear; filtering for 4k gives each provider's cheapest 4k plan; "Native pricing only" hides converted prices |
 | M5.2 | Search page layout, results and the search sub-card with expand (P8): the search box (150 ms pause) and Sort, `ss-sub-card`'s search variant (§4.3, moved from M4.5) with plan chips, "Cheaper at" resellers from each plan's `deals` (`searchCatalog`, BLUEPRINT §4.9), and the expanded card (`ss-plan-details`): features with the user's ranks, add-ons, bundles with savings, a suite's plans and savings (core's `planExtras`), perks, notes and the price's date; loading, no-match and not-offered states; logos on a white tile in both themes (BLUEPRINT §14) | P8 layout criteria met |
-| M5.3 | Filter panel + URL state (P8) | Filters survive a reload and back/forward |
+| M5.3 | Filter panel + URL state (P8): `ss-search-filters` (the price per month up to the catalog's priciest plan, Category, Features over rank keys with chips, Activity, Native pricing only, Clear all) beside the results, and in a drawer opened by a Filters button under 960 px; core's `readSearchParams` and `writeSearchParams` (values the catalog doesn't have are dropped and the URL rewritten), `searchFilterOptions`, `featureSuggestions`, `filterCount` and `rankKeyLabel`; typing replaces its history entry, a run of price changes makes one, anything else adds one (BLUEPRINT §14) | Filters survive a reload and back/forward; filtering for 4k shows each provider's cheapest 4k plan; "Native pricing only" hides converted prices |
 | M5.4 | Add-to-list menu → edit page with `?add=` (flow F1); `ss-sub-card`'s prices and bundle prices become buttons (`priceClick`), plain text until then | F1 works end to end (needs M6.3–M6.5; stub it until then) |
 | M5.5 | Pick mode `?addTo=` (flow F2) | F2 works end to end |
 
@@ -786,14 +786,25 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
   - For a suite plan (BLUEPRINT §4.4): the plans it includes, and its savings against buying them separately when there are any.
   - Perks, and accepted cards (Phase 4).
   - "Price checked Oct 14, 2026", with a "may be out of date" badge when it's older than 90 days.
-- **Filter panel** (on the right; becomes a drawer opened by ☰ under 960 px):
-  - Price per month: dual slider on the monthly equivalent in the user's currency; the right end means "Unlimited".
-  - Category: a select.
-  - Features: autocomplete over rank keys. Typing "Video quality" offers 1080p and 4k, plus related keys such as Ad free and HDR. Each pick adds a chip, and chips combine with AND.
-  - Activity: Active / Inactive / Not listed (multi-select).
+- **Filter panel** (on the right from 960 px, after the search bar in the Tab order; below that a drawer opened by a
+  "Filters" button in the search bar, which counts what's on, "Filters · 2". Not ☰: the top bar's ☰ opens the
+  navigation at that width). As built in M5.3 (BLUEPRINT §14):
+  - Price per month: dual slider on the monthly equivalent in the user's currency, before tax, from $0 to the
+    priciest plan sold in the user's country, rounded up to about 40 round steps (CA$28.19 is $0 to $30 by $1); the
+    right end means "Unlimited". The URL's amounts are in Settings' currency.
+  - Category: a select of the categories something sold in the user's country is in.
+  - Features: autocomplete over the rank keys some plan sold there provides. Typing "Video quality" offers its
+    values (480p to 4K), then the rest of its feature category, such as HDR and Ad free ("More in Streaming"). Each
+    pick adds a chip named by the registry ("Video quality: 4K (Ultra HD)", a boolean by its own name), and chips
+    combine with AND.
+  - Activity: Active / Inactive / Not listed (multi-select, checkboxes drawn as chips).
   - Native pricing only.
-  - Clear all.
-- **URL state:** `?q=&sort=&min=&max=&cat=&f=video.quality%3D4k,streaming.ad-free&act=active,none&native=1`.
+  - Clear all (keeps the text and the sort).
+- **URL state:** `?q=&sort=&min=&max=&cat=&f=video.quality%3D4k,streaming.ad-free&act=active,none&native=1`, in that
+  order, leaving defaults out. Typing replaces the current history entry once it pauses; a run of price changes (a
+  drag, or arrow keys) makes one entry; every other change adds one, so Back undoes the last filter. A value the
+  catalog doesn't have (an unknown sort, category, rank key or parameter, a bad amount, a minimum above the maximum,
+  Best match without text) is dropped and the URL rewritten in place. A filter change doesn't scroll the page.
 - **Pick mode:** `?addTo=<listId>` shows a banner "Adding to Work Related ✕", and price clicks go straight to F2.
 
 **States:**
@@ -1138,6 +1149,7 @@ item dialog validation, filter panel ↔ URL sync.
 | Search | One card per plan | One card per provider (your plan or the cheapest match, plus plan chips) | Less clutter when filtering |
 | Search | "In Active" and "Not Listed" in red | "Inactive" and "Not listed" in grey | Neither is an error |
 | Search | Bundle row with placeholder logos | Bundles that contain the shown plan, with savings | Real data |
+| Search | ☰ in the search bar opens the filters | A "Filters · 2" button, under 960 px only | The top bar's ☰ opens the navigation there |
 | Calendar | Placeholder grid and note | Full-size grid, day panel, upcoming list, mobile agenda | Spec |
 | Calendar | "Sync Calendar ▾" | Phase 3: import help + .ics; Phase 5: live link | A live link needs data on the server (BLUEPRINT §11.3) |
 | Settings | "Create Local Sync" | Disabled until Phase 5 | Sync is Phase 5 |

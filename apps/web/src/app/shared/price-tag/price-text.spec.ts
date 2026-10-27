@@ -1,5 +1,11 @@
 import type { PickedPrice } from '@simply-sub/core';
-import { amountText, intervalSpoken, intervalText, priceTooltip } from './price-text';
+import {
+  amountText,
+  intervalSpoken,
+  intervalText,
+  priceTooltip,
+  wholeAmountText,
+} from './price-text';
 
 /** Mullvad's €5 a month for a Canadian, converted at the GET /fx example's rate. */
 const converted: PickedPrice = {
@@ -25,6 +31,18 @@ describe('amountText', () => {
     [5, 'EUR', undefined, '€5.00'],
   ])('writes %s %s for a buyer in %s as %s', (amount, currency, country, expected) => {
     expect(amountText(amount, currency, country)).toBe(expected);
+  });
+});
+
+describe('wholeAmountText', () => {
+  it.each([
+    [5, 'CAD', 'CA', '$5'],
+    [9.99, 'CAD', 'CA', '$9.99'],
+    [0.5, 'EUR', 'CA', '€0.50'],
+    [30, 'USD', 'CA', 'US$30'],
+    [2300, 'JPY', 'CA', 'JP¥2,300'],
+  ])('writes %s %s for a buyer in %s as %s', (amount, currency, country, expected) => {
+    expect(wholeAmountText(amount, currency, country)).toBe(expected);
   });
 });
 

@@ -12,6 +12,7 @@ import {
   type RankKey,
   type RankKeyOption,
 } from '../ranking/rank-keys';
+import { termForms } from './plurals';
 import type { ProviderSort, ProvidersQuery } from './providers-query';
 
 // Searching the catalog's providers (PROJECT-PLAN P8): GET /providers runs it on the providers D1 narrows down to
@@ -232,23 +233,6 @@ function textTerms(
     });
   }
   return [...terms.values()];
-}
-
-/**
- * A term, and its singular when its last word has four letters or more and looks plural: vpns → vpn, boxes → box,
- * categories → category. Words in -ss, -us and -is aren't plurals (pass, plus, analysis).
- */
-function termForms(term: string): string[] {
-  const word = term.slice(term.lastIndexOf(' ') + 1);
-  if (word.length < 4 || !word.endsWith('s') || /(?:ss|us|is)$/.test(word)) {
-    return [term];
-  }
-  return [
-    term,
-    term.slice(0, -1),
-    ...(/(?:[sxz]|[cs]h)es$/.test(word) ? [term.slice(0, -2)] : []),
-    ...(word.endsWith('ies') ? [`${term.slice(0, -3)}y`] : []),
-  ];
 }
 
 interface TextMatch {

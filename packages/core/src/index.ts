@@ -48,6 +48,8 @@ export * from './search/provider-activity';
 export * from './search/providers-body';
 export * from './search/providers-query';
 export * from './search/search-catalog';
+export * from './search/search-filters';
+export * from './search/search-params';
 export * from './search/search-providers';
 export * from './tax/sales-tax-rate';
 export * from './tax/subdivisions';

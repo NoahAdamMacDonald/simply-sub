@@ -1,19 +1,52 @@
-import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Location, NgTemplateOutlet } from '@angular/common';
+import {
+  Component,
+  DestroyRef,
+  TemplateRef,
+  computed,
+  effect,
+  inject,
+  linkedSignal,
+  viewChild,
+} from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { MatButton, MatIconButton } from '@angular/material/button';
+import {
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogTitle,
+  type MatDialogRef,
+} from '@angular/material/dialog';
 import { MatFormField, MatLabel, MatPrefix, MatSuffix } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatOption, MatSelect } from '@angular/material/select';
-import { RouterLink } from '@angular/router';
-import { searchCatalog, type ProviderSort } from '@simply-sub/core';
+import { ActivatedRoute, NavigationStart, Router, RouterLink } from '@angular/router';
+import {
+  filterCount,
+  readSearchParams,
+  sameSearchParams,
+  searchCatalog,
+  searchFilterOptions,
+  searchText,
+  writeSearchParams,
+  type CatalogQuery,
+  type ProviderSort,
+} from '@simply-sub/core';
+import { filter, map } from 'rxjs';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { ClockService } from '../../core/clock/clock-service';
 import { FxStore } from '../../core/fx/fx-store';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { ItemsRepository } from '../../core/storage/items-repository';
 import { RankingsRepository } from '../../core/storage/rankings-repository';
+import { DRAWER_BREAKPOINT } from '../../layout/shell';
 import { EmptyState } from '../../shared/empty-state/empty-state';
 import { SubCard } from '../../shared/sub-card/sub-card';
+import { SearchFilters } from './search-filters';
 
 /** How long typing pauses before the results follow it (P8). */
 export const searchDelayMs = 150;
@@ -27,15 +60,29 @@ const sortChoices: readonly { value: ProviderSort; label: string }[] = [
 ];
 
 /**
+ * How a change goes into the browser's history: typing replaces the current entry, a run of price changes makes one
+ * entry, and anything else adds one, so Back undoes the last filter.
+ */
+type HistoryEntry = 'replace' | 'price' | 'push';
+
+/** The history state that marks an entry a price change made. */
+const priceState = 'ssSearchPrice';
+
+/**
  * Search (PROJECT-PLAN P8): the catalog for the user's country, searched on the device by core's searchCatalog, one
- * card per provider (ss-sub-card). The text and the sort live in the page for now: the filter panel and the URL
- * state come with M5.3, and clicking a price to add it to a list with M5.4.
+ * card per provider (ss-sub-card), with the filter panel (ss-search-filters) beside the results, or in a drawer under
+ * 960 px. The URL holds the text, the filters and the sort (M5.3), so a reload and back/forward restore them, and the
+ * page rewrites a URL with anything the catalog doesn't have. Clicking a price to add it to a list comes with M5.4.
  */
 @Component({
   selector: 'ss-search-page',
   imports: [
     EmptyState,
     MatButton,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogContent,
+    MatDialogTitle,
     MatFormField,
     MatIcon,
     MatIconButton,
@@ -45,13 +92,19 @@ const sortChoices: readonly { value: ProviderSort; label: string }[] = [
     MatPrefix,
     MatSelect,
     MatSuffix,
+    NgTemplateOutlet,
     RouterLink,
+    SearchFilters,
     SubCard,
   ],
   templateUrl: './search-page.html',
   styleUrl: './search-page.scss',
 })
 export class SearchPage {
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+  private readonly location = inject(Location);
+  private readonly dialog = inject(MatDialog);
   private readonly catalog = inject(CatalogStore);
   private readonly settings = inject(SettingsStore);
   private readonly fx = inject(FxStore);
@@ -59,41 +112,74 @@ export class SearchPage {
   private readonly rankings = inject(RankingsRepository);
   private readonly today = inject(ClockService).today;
 
-  /** What's in the search box. */
-  protected readonly text = signal('');
-  /** The text searched for: the box's, once typing pauses. */
-  private readonly query = signal('');
-  /** The sort the user picked, if any. */
-  protected readonly chosenSort = signal<ProviderSort | undefined>(undefined);
+  private readonly drawerTemplate = viewChild.required<TemplateRef<unknown>>('drawer');
+  private drawer?: MatDialogRef<unknown>;
   private timer?: ReturnType<typeof setTimeout>;
 
-  private readonly hasText = computed(() => this.query().trim() !== '');
-  /** Best match needs text: without it, the default is the cheapest first. */
-  protected readonly sort = computed<ProviderSort>(() => {
-    const chosen = this.chosenSort();
-    if (chosen !== undefined && (chosen !== 'relevance' || this.hasText())) return chosen;
-    return this.hasText() ? 'relevance' : 'price_asc';
+  private readonly params = toSignal(this.route.queryParams, { requireSync: true });
+  /** Under 960 px the filters are in a drawer, as the sidebar is (P1). */
+  protected readonly narrow = toSignal(
+    inject(BreakpointObserver)
+      .observe(DRAWER_BREAKPOINT)
+      .pipe(map((state) => state.matches)),
+    { requireSync: true },
+  );
+
+  /** What's in the search box: the URL's text, unless what's typed differs from it only in spaces. */
+  protected readonly text = linkedSignal<string, string>({
+    source: () => {
+      const q = this.params()['q'];
+      return (Array.isArray(q) ? q[0] : q) ?? '';
+    },
+    computation: (q, previous) =>
+      previous !== undefined && searchText(previous.value) === searchText(q) ? previous.value : q,
   });
+
+  /** The URL's text, filters and sort, as far as the catalog has them; undefined until it has loaded. */
+  protected readonly query = computed(() => {
+    const data = this.catalog.catalog();
+    return data && readSearchParams(this.params(), data);
+  });
+  private readonly hasText = computed(() => this.query()?.q !== undefined);
+  /** Best match needs text: without it, the default is the cheapest first. */
+  protected readonly sort = computed<ProviderSort>(
+    () => this.query()?.sort ?? (this.hasText() ? 'relevance' : 'price_asc'),
+  );
   protected readonly sorts = computed(() =>
     sortChoices.filter((choice) => choice.value !== 'relevance' || this.hasText()),
   );
+
+  /** What the filter panel shows, once the settings and the catalog have loaded. */
+  protected readonly filterPanel = computed(() => {
+    const settings = this.settings.saved();
+    const catalog = this.catalog.catalog();
+    const query = this.query();
+    if (!settings || !catalog || !query) return undefined;
+    const fx = this.fx.rates();
+    const options = searchFilterOptions({
+      catalog,
+      settings,
+      ...(fx && { fx }),
+      today: this.today(),
+    });
+    return { query, options, catalog, settings };
+  });
+  protected readonly filters = computed(() => filterCount(this.query() ?? {}));
 
   /** The results, or undefined until the settings and the catalog have loaded. */
   protected readonly results = computed(() => {
     const saved = this.settings.saved();
     const data = this.catalog.catalog();
-    if (!saved || !data) return undefined;
+    const query = this.query();
+    if (!saved || !data || !query) return undefined;
     const fx = this.fx.rates();
-    return searchCatalog(
-      { q: this.query(), sort: this.sort() },
-      {
-        catalog: data,
-        settings: saved,
-        ...(fx && { fx }),
-        items: this.items.records(),
-        today: this.today(),
-      },
-    );
+    return searchCatalog(query, {
+      catalog: data,
+      settings: saved,
+      ...(fx && { fx }),
+      items: this.items.records(),
+      today: this.today(),
+    });
   });
   protected readonly ranks = computed(() => Object.fromEntries(this.rankings.ranks()));
   protected readonly count = computed(() => {
@@ -104,18 +190,101 @@ export class SearchPage {
   });
 
   constructor() {
-    inject(DestroyRef).onDestroy(() => clearTimeout(this.timer));
+    inject(DestroyRef).onDestroy(() => {
+      clearTimeout(this.timer);
+      this.drawer?.close();
+    });
+    // Back or forward overrides text still waiting for the typing pause.
+    this.router.events
+      .pipe(
+        filter(
+          (event) => event instanceof NavigationStart && event.navigationTrigger === 'popstate',
+        ),
+        takeUntilDestroyed(),
+      )
+      .subscribe(() => clearTimeout(this.timer));
+    // The URL shows only what's applied: anything the catalog doesn't have is dropped from it.
+    effect(() => {
+      const query = this.query();
+      if (query && !sameSearchParams(this.params(), writeSearchParams(query))) {
+        this.navigate(query, 'replace');
+      }
+    });
+    effect(() => {
+      if (!this.narrow()) this.drawer?.close();
+    });
   }
 
   protected typed(value: string): void {
     this.text.set(value);
     clearTimeout(this.timer);
-    this.timer = setTimeout(() => this.query.set(value), searchDelayMs);
+    this.timer = setTimeout(() => this.change({ q: value }, 'replace'), searchDelayMs);
   }
 
   protected clear(): void {
     clearTimeout(this.timer);
     this.text.set('');
-    this.query.set('');
+    this.change({ q: undefined }, 'push');
+  }
+
+  protected chooseSort(sort: ProviderSort): void {
+    this.change({ sort }, 'push');
+  }
+
+  protected clearFilters(): void {
+    const { q, sort } = this.query() ?? {};
+    this.navigate({ ...(q !== undefined && { q }), ...(sort !== undefined && { sort }) }, 'push');
+  }
+
+  protected filtered(query: CatalogQuery, entry: HistoryEntry): void {
+    this.navigate(query, entry);
+  }
+
+  protected openFilters(): void {
+    this.drawer = this.dialog.open(this.drawerTemplate(), {
+      panelClass: 'ss-filter-drawer',
+      position: { top: '0', right: '0' },
+      width: 'min(360px, 100vw)',
+      maxWidth: '100vw',
+      height: '100%',
+      maxHeight: '100%',
+      ariaLabelledBy: 'ss-filters-drawer-title',
+    });
+    this.drawer.afterClosed().subscribe(() => (this.drawer = undefined));
+  }
+
+  /**
+   * Changes the text or the sort. Before the catalog has loaded there's no query to change, so the text joins the
+   * URL as it is.
+   */
+  private change(patch: Pick<CatalogQuery, 'q' | 'sort'>, entry: HistoryEntry): void {
+    const query = this.query();
+    if (query) {
+      this.navigate({ ...query, ...patch }, entry);
+      return;
+    }
+    const q = searchText(patch.q ?? '');
+    void this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { q: q === '' ? null : q },
+      queryParamsHandling: 'merge',
+      replaceUrl: entry === 'replace',
+      scroll: 'manual',
+    });
+  }
+
+  /** Puts `query` in the URL, without scrolling: a price change after another one replaces its entry. */
+  private navigate(query: CatalogQuery, entry: HistoryEntry): void {
+    const queryParams = writeSearchParams(query);
+    if (sameSearchParams(this.params(), queryParams)) return;
+    const state = this.location.getState() as Record<string, unknown> | null;
+    const priceRun = entry === 'price' && state?.[priceState] === true;
+    void this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams,
+      replaceUrl: entry === 'replace' || priceRun,
+      scroll: 'manual',
+      ...(entry === 'price' && { state: { [priceState]: true } }),
+    });
   }
 }

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   providedKeys,
   providesKey,
+  rankKeyLabel,
   rankKeyOptions,
   type Feature,
   type RankKeyOption,
@@ -104,6 +105,19 @@ describe('rankKeyOptions', () => {
         valuesFrom: 'providers',
       }),
     ).toEqual([]);
+  });
+});
+
+describe('rankKeyLabel', () => {
+  it("names a boolean by itself, and any other key with its feature's name", () => {
+    expect(rankKeyLabel(option(adFree, 'streaming.ad-free'))).toBe('Ad free');
+    expect(rankKeyLabel(option(quality, 'video.quality=4k'))).toBe('Video quality: 4K (Ultra HD)');
+    expect(rankKeyLabel(option(streams, 'streaming.concurrent-streams=2-4'))).toBe(
+      'Simultaneous streams: 2 to 4 devices',
+    );
+    expect(rankKeyLabel(option(live, 'streaming.live=sports'))).toBe(
+      'Live TV and sports: Live sports',
+    );
   });
 });
 
