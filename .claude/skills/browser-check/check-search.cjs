@@ -1046,6 +1046,50 @@ async function addItem(page, planId) {
     await context.close();
   }
 
+  // ── M5.8: a long Features chip wraps inside its field, with its remove button centred ──────────────
+  for (const viewport of [WIDE, NARROW]) {
+    const label = `${viewport.width}`;
+    const context = await newContext(browser, { locale: 'en-CA', viewport });
+    const page = await newPage(context, `CA chips ${label}`);
+    await page.goto(`${baseUrl}search?f=streaming.download-devices%3D6%2B`);
+    await firstRun(page, 'Alberta');
+    await page.locator('ss-sub-card').first().waitFor({ timeout: 20000 });
+    if (viewport === NARROW) {
+      await page.locator('.open-filters').click();
+      await page.locator('mat-dialog-container').waitFor();
+      await sleep(600);
+    }
+    const chip = await page.evaluate(() => {
+      const row = document.querySelector('mat-chip-row');
+      const box = (element) => element.getBoundingClientRect();
+      const [chipBox, fieldBox, iconBox] = [
+        box(row),
+        box(row.closest('mat-form-field')),
+        box(row.querySelector('mat-icon')),
+      ];
+      const scroller =
+        document.querySelector('mat-dialog-content') ?? document.querySelector('section.panel');
+      return {
+        text: row.textContent.replace('cancel', '').trim(),
+        inField: chipBox.left >= fieldBox.left && chipBox.right <= fieldBox.right,
+        iconInChip: iconBox.right <= chipBox.right,
+        centred:
+          Math.abs((iconBox.top + iconBox.bottom) / 2 - (chipBox.top + chipBox.bottom) / 2) <= 1,
+        sideways: scroller.scrollWidth - scroller.clientWidth,
+      };
+    });
+    check(
+      `${label}: a long Features chip wraps inside its field, its remove button centred, with no sideways scroll`,
+      chip.text === 'Download devices: Downloads on 6+ devices' &&
+        chip.inField &&
+        chip.iconInChip &&
+        chip.centred &&
+        chip.sideways === 0,
+      JSON.stringify(chip),
+    );
+    await context.close();
+  }
+
   // With reduced motion the details appear and go at once.
   {
     const context = await newContext(browser, { locale: 'en-CA', reducedMotion: 'reduce' });

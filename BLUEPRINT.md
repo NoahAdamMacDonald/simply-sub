@@ -2489,6 +2489,14 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
+**Resolved (2026-10-27, M5.8)**
+- **A long Features chip wraps inside its field:** Material keeps a chip one line high and its label on one line,
+  and its label didn't shrink with its chip, so "Download devices: Downloads on 6+ devices" ran past the field and
+  scrolled the filter panel (which scrolls on its own since M5.7) and the drawer sideways. A global
+  `.ss-wrapping-chips` (styles.scss, since the parts are Material's) lets the label wrap and the chip grow taller.
+- **Its remove button is centred:** a rule for every button in the panel (meant for Clear all) lifted it to the top
+  of its chip. The rule is Clear all's alone now.
+
 **Resolved (2026-10-27, M1.13)**
 - **Terms and policies on every card** (section 4.10): 13 topics in four groups (privacy, billing, legal, service),
   each with a five-tier rubric in `data/policy-topics.yaml`, its own commit. Data collection's rubric is the one asked

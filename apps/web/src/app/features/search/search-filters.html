@@ -35,7 +35,7 @@
 
 <mat-form-field appearance="outline" class="features" subscriptSizing="dynamic">
   <mat-label>Features</mat-label>
-  <mat-chip-grid #chips aria-label="Chosen features">
+  <mat-chip-grid #chips aria-label="Chosen features" class="ss-wrapping-chips">
     @for (option of picked(); track option.key) {
       <mat-chip-row (removed)="removeFeature(option)">
         {{ label(option) }}
@@ -110,6 +110,7 @@
 <button
   matButton="outlined"
   type="button"
+  class="clear"
   disabledInteractive
   [disabled]="!active()"
   (click)="clearAll()"
