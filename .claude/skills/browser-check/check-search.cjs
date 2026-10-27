@@ -113,13 +113,13 @@ async function openSearch(page, province) {
   await page.locator('ss-sub-card').first().waitFor({ timeout: 20000 });
 }
 
-/** A details section's ratings: each dot's grade, then its topic, why and citations, as they show. */
+/** A details section's ratings: each dot's grade id, then its topic, grade, why and citations, as they show. */
 async function policyRows(scope) {
   return scope.locator('.policies li').evaluateAll((items) =>
     items.map((item) => {
       const copy = item.querySelector('.rated').cloneNode(true);
       copy.querySelectorAll('.visually-hidden').forEach((node) => node.remove());
-      const grade = item.querySelector('.grade').getAttribute('aria-label');
+      const grade = item.querySelector('.dot').dataset.tier;
       return `${grade} | ${copy.textContent.replace(/\s+/g, ' ').trim()}`;
     }),
   );
@@ -1100,6 +1100,62 @@ async function addItem(page, planId) {
         chip.sideways === 0,
       JSON.stringify(chip),
     );
+    // M5.9: a click on the chip itself, not its X, removes it.
+    await page.locator('mat-chip-row .mdc-evolution-chip__text-label').first().click();
+    await until('the chip removed', async () => (await page.locator('mat-chip-row').count()) === 0);
+    check(
+      `${label}: a click on a Features chip removes it, as its X does`,
+      !new URL(page.url()).searchParams.has('f'),
+      page.url(),
+    );
+    await context.close();
+  }
+
+  // ── M5.9: the filter panel has no scrollbar of its own: pinned below the bar while it fits, by its foot when not ──
+  for (const height of [900, 720, 560]) {
+    const viewport = { width: 1280, height };
+    const context = await newContext(browser, { locale: 'en-CA', viewport });
+    const page = await newPage(context, `CA panel ${height}`);
+    // Two long features chosen where the window is short, so the panel is at its tallest; none at 900 px, so
+    // there are enough results to scroll the page.
+    await page.goto(
+      height === 900
+        ? `${baseUrl}search`
+        : `${baseUrl}search?f=streaming.download-devices%3D6%2B&f=video.quality%3D4k`,
+    );
+    await firstRun(page, 'Alberta');
+    await page.locator('ss-sub-card').first().waitFor({ timeout: 20000 });
+    await page.evaluate(() => scrollTo(0, document.documentElement.scrollHeight));
+    await sleep(600);
+    const panel = await page.evaluate(() => {
+      const section = document.querySelector('section.panel');
+      const box = section.getBoundingClientRect();
+      const pinned = document.querySelector('.pinned').getBoundingClientRect();
+      const clear = document.querySelector('section.panel .clear').getBoundingClientRect();
+      return {
+        inner: section.scrollHeight - section.clientHeight,
+        overflow: getComputedStyle(section).overflowY,
+        fits: box.height <= innerHeight - pinned.bottom - 16,
+        top: Math.round(box.top),
+        under: Math.round(pinned.bottom),
+        foot: Math.round(innerHeight - box.bottom),
+        clearShown: clear.bottom <= innerHeight && clear.top >= 0,
+        scrolled: scrollY > 0,
+      };
+    });
+    check(
+      `${height} px high: the panel has no scroll of its own, and after scrolling the page it's pinned ${panel.fits ? 'below the bar' : 'by its foot'} with Clear all in view`,
+      panel.inner === 0 &&
+        panel.overflow === 'visible' &&
+        panel.scrolled &&
+        panel.clearShown &&
+        // At the page's end the panel stops at the grid's foot, above main's padding.
+        (panel.fits ? panel.top === panel.under : panel.top < panel.under && panel.foot >= 16),
+      JSON.stringify(panel),
+    );
+    if (height === 560) {
+      await page.screenshot({ path: path.join(outDir, 'panel-short-560.png') });
+    }
     await context.close();
   }
 
@@ -1215,8 +1271,8 @@ async function addItem(page, planId) {
       'Mullvad’s details grade its terms by group, each a dot named by its grade, with why and citations, and number its pages',
       groups.join() === 'Privacy,Billing,Legal,Service' &&
         rows[0] ===
-          "Great | Data collection: To sign up you don't give your name, an email address or even a password, so it knows very little about you. [3]" &&
-        rows.some((row) => row.startsWith('Good | Cancelling and refunds:')) &&
+          "great | Data collection (Great): To sign up you don't give your name, an email address or even a password, so it knows very little about you. [3]" &&
+        rows.some((row) => row.startsWith('good | Cancelling and refunds (Good):')) &&
         links.length === 4 &&
         links[0][0].startsWith('[1] Terms of service') &&
         links.every(
@@ -1274,44 +1330,28 @@ async function addItem(page, planId) {
         probe.remove();
         return value;
       };
-      const grade = group.querySelector('.grade').getBoundingClientRect();
-      const dot = group.querySelector('.grade .dot').getBoundingClientRect();
+      const dot = group.querySelector('.policies .dot');
+      const box = dot.getBoundingClientRect();
       return {
-        muted: style('.rated').color === resolved('color', '--ss-text-muted'),
+        muted:
+          style('.rated').color === resolved('color', '--ss-text-muted') &&
+          style('.rated .grade').color === resolved('color', '--ss-text-muted'),
         bold:
           style('.topic').color === resolved('color', '--ss-text') &&
           style('.topic').fontWeight === '600',
-        target: `${grade.width}x${grade.height}`,
-        dot: `${dot.width}x${dot.height}`,
+        dot: `${box.width}x${box.height}`,
+        hidden: dot.getAttribute('aria-hidden') === 'true',
         fill:
-          style('.grade .dot').backgroundColor === resolved('backgroundColor', '--policy-great'),
+          getComputedStyle(dot).backgroundColor === resolved('backgroundColor', '--policy-great'),
       };
     });
     check(
-      'the reason is muted, its topic bold in the text colour, and the dot 12 px in a 24 px target, in its colour',
-      looks.muted && looks.bold && looks.target === '24x24' && looks.dot === '12x12' && looks.fill,
+      'the grade is in words beside the topic and the reason muted, the topic bold, the dot 12 px in its colour and hidden from screen readers',
+      looks.muted && looks.bold && looks.dot === '12x12' && looks.hidden && looks.fill,
       JSON.stringify(looks),
     );
-    // Hover shows the grade, a click keeps it, and leaving hides it.
-    const firstDot = section.locator('.grade').first();
-    // The one showing: another may still be fading out.
-    const tooltip = page.locator('.mat-mdc-tooltip-show');
-    await firstDot.hover();
-    await tooltip.waitFor();
-    const hovered = (await tooltip.textContent()).trim();
-    await firstDot.click();
-    await sleep(400);
-    const afterClick = await tooltip.isVisible();
-    // The viewport: an element's screenshot scrolls, and a scroll closes a tooltip.
-    await page.screenshot({ path: path.join(outDir, 'policies-tooltip-1280.png') });
-    await page.mouse.move(5, 5);
-    await tooltip.waitFor({ state: 'detached' });
     await section.screenshot({ path: path.join(outDir, 'policies-mullvad-1280.png') });
-    check(
-      'hovering a dot shows its grade, a click keeps it, and moving away hides it',
-      hovered === 'Great' && afterClick,
-      `${hovered} / ${afterClick}`,
-    );
+    const tooltip = page.locator('.mat-mdc-tooltip-show');
     // A citation's tooltip is the words it quotes.
     await section.locator('.cite').first().hover();
     await tooltip.waitFor();
@@ -1325,15 +1365,6 @@ async function addItem(page, planId) {
     await axeCheck(page, 'light 1280, Terms and policies open, a citation’s tooltip shown');
     await page.mouse.move(5, 5);
     await tooltip.waitFor({ state: 'detached' });
-    // By keyboard: Tab to a dot shows its grade, and Escape hides it.
-    await firstDot.focus();
-    await page.keyboard.press('Shift+Tab');
-    await page.keyboard.press('Tab');
-    await tooltip.waitFor();
-    const keyed = (await tooltip.textContent()).trim();
-    await page.keyboard.press('Escape');
-    await tooltip.waitFor({ state: 'detached' });
-    check('Tab to a dot shows its grade, and Escape hides it', keyed === 'Great', keyed);
     // Netflix's ratings from its Canadian terms show here, and its ad plan's own ratings on that plan.
     const netflix = card(page, 'Netflix');
     await netflix.locator('button.expand').click();
@@ -1341,58 +1372,41 @@ async function addItem(page, planId) {
     const netflixRows = await policyRows(netflix);
     check(
       "Netflix's ad plan shows its own sharing and download limits, and its Canadian terms",
-      netflixRows.some((row) => row.startsWith('Poor | Account sharing:')) &&
+      netflixRows.some((row) => row.startsWith('poor | Account sharing (Poor):')) &&
         netflixRows.some((row) =>
-          row.startsWith('Poor | Device and download limits: You can only download 15'),
+          row.startsWith('poor | Device and download limits (Poor): You can only download 15'),
         ) &&
-        netflixRows.some((row) => row.startsWith('Good | Price changes:')),
+        netflixRows.some((row) => row.startsWith('good | Price changes (Good):')),
       netflixRows.join(' | '),
     );
     await axeCheck(page, 'light 1280, Terms and policies open');
     await context.close();
   }
 
-  // ── M1.14: on a phone, a tap on a dot shows its grade and a tap elsewhere hides it (dark, 360 px) ──
+  // ── M5.9: on a phone, dark, 360 px: the grades in words, with nothing scrolling sideways ────────────
   {
-    const context = await browser.newContext({
+    const context = await newContext(browser, {
       locale: 'en-CA',
       colorScheme: 'dark',
       viewport: NARROW,
-      isMobile: true,
-      hasTouch: true,
-      userAgent:
-        'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36',
     });
-    await context.route('**/api/v1/fx?**', (route) =>
-      route.fulfill({ json: fxBody(new URL(route.request().url()).searchParams.get('base')) }),
-    );
-    const page = await newPage(context, 'CA policies, a phone');
+    const page = await newPage(context, 'CA policies 360');
     await openSearch(page, 'Alberta');
     const mullvad = card(page, 'Mullvad VPN');
-    await mullvad.locator('button.expand').tap();
+    await mullvad.locator('button.expand').click();
     const section = mullvad.locator('.group', {
       has: page.getByRole('heading', { name: 'Terms and policies' }),
     });
     await section.waitFor();
-    // The one showing: another may still be fading out.
-    const tooltip = page.locator('.mat-mdc-tooltip-show');
-    // Mullvad's fifth rating, Cancelling and refunds, is Good.
-    const dot = section.locator('.grade').nth(4);
-    await dot.scrollIntoViewIfNeeded();
-    await dot.tap();
-    await tooltip.waitFor();
-    const tapped = (await tooltip.textContent()).trim();
-    await sleep(400);
-    await page.screenshot({ path: path.join(outDir, 'policies-tooltip-dark-360.png') });
-    await axeCheck(page, 'dark 360 phone, a grade shown');
-    await section.locator('h3').tap();
-    await tooltip.waitFor({ state: 'detached' });
+    await sleep(1000);
     await section.screenshot({ path: path.join(outDir, 'policies-mullvad-dark-360.png') });
+    await axeCheck(page, 'dark 360, Terms and policies open');
     const width = await page.evaluate(() => document.documentElement.scrollWidth);
     check(
-      'a tap on a dot shows its grade, a tap elsewhere hides it, and nothing scrolls sideways',
-      tapped === 'Good' && width <= NARROW.width,
-      `${tapped} / ${width}px`,
+      'at 360 px the grades read in words and nothing scrolls sideways',
+      (await section.locator('.grade').first().textContent()).trim() === '(Great):' &&
+        width <= NARROW.width,
+      `${width}px`,
     );
     await context.close();
   }
@@ -1409,11 +1423,11 @@ async function addItem(page, planId) {
     await card(page, 'Netflix').locator('button.expand').click();
     await card(page, 'Netflix').locator('.policies li').first().waitFor();
     const disputes = (await policyRows(card(page, 'Proton'))).find((row) =>
-      row.includes('| Disputes:'),
+      row.includes('| Disputes ('),
     );
     check(
       "a US user sees Proton's US disputes rating, and none from Netflix's Canadian terms",
-      disputes.startsWith('Poor | Disputes: In the US, a private arbitrator') &&
+      disputes.startsWith('poor | Disputes (Poor): In the US, a private arbitrator') &&
         (await card(page, 'Netflix')
           .locator('.policies li', { hasText: 'Price changes' })
           .count()) === 0,

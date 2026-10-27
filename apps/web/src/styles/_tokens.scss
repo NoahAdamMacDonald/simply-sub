@@ -52,9 +52,9 @@
   --suggest-hard: var(--rank-unwanted);
   --suggest-normal: var(--rank-unused);
   --suggest-soft: var(--rank-uses);
-  // Terms and policies' five grades (M1.13, M1.14), green to red: the rank fills, and a yellow-green between Wanted's
-  // green and Uses' yellow for Good. Dots, like the rank dots, with --ss-dot-ring around them for the pale ones; the
-  // grade's name shows on hover, focus or a tap, and screen readers read it.
+  // Terms and policies' five grades (M1.13, M1.14, M5.9), green to red: the rank fills, and a yellow-green between Wanted's
+  // green and Uses' yellow for Good. Dots, like the rank dots, with --ss-dot-ring around them for the pale ones, and
+  // the grade's name beside the topic (M5.9).
   --policy-great: var(--rank-wanted);
   --policy-good: #b5e61d;
   --policy-neutral: var(--rank-uses);

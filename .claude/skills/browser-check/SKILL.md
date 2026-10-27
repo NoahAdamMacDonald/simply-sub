@@ -99,9 +99,10 @@ under 960 px with Sort first in the drawer, the details' slide (their `moving` c
 closed at once, Hide details from the foot of a long card (focus back on the details button, the card back in
 view), and with `reducedMotion: 'reduce'` no animation; with axe while scrolled. The first card's Tab order is now
 its chips, then its links, prices and details button. M1.13 added Terms and policies: Mullvad's groups, each rating's
-grade, topic and reason, and its four linked pages; M1.14 its dots (12 px in a 24 px target, the grade on hover, a
-click, Tab and Escape, and a phone's tap in a mobile Android context), the muted reasons, and the citations (one per
-page, each linked to its quotes, with the quotes as a tooltip); Netflix's ad-plan ratings and its Canadian terms; for a
+grade, topic and reason, and its four linked pages; M1.14 its dots and the muted reasons and citations (one per
+page, each linked to its quotes, with the quotes as a tooltip), and M5.9 the grade in words beside the topic at
+1280 px and at 360 px in dark; M5.9 also a click on a Features chip removing it, and the filter panel with no
+scroll of its own at 560, 720 and 900 px high; Netflix's ad-plan ratings and its Canadian terms; for a
 US user, Proton's US disputes rating and none of Netflix's Canadian ones; axe with the section open.
 
 ## Gotchas

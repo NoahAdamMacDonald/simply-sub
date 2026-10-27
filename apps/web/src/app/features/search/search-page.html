@@ -52,7 +52,7 @@
 
 <div class="layout" [class.narrow]="narrow()">
   @if (!narrow()) {
-    <section class="panel" aria-labelledby="ss-filters-title" cdkScrollable>
+    <section #panelSection class="panel" aria-labelledby="ss-filters-title">
       <h2 id="ss-filters-title">Filters</h2>
       <ng-container [ngTemplateOutlet]="panel" />
     </section>

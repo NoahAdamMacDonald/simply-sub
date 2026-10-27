@@ -58,6 +58,11 @@ mat-slider {
   font: var(--mat-sys-body-small);
 }
 
+// A chosen feature is a button as a whole: a click removes it (M5.9).
+.features mat-chip-row {
+  cursor: pointer;
+}
+
 // Clear all only: a rule for every button also lifted the Features chips' remove buttons off centre (M5.8).
 .clear {
   align-self: flex-start;

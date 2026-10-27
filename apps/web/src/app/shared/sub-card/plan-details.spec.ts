@@ -103,19 +103,19 @@ describe('PlanDetails', () => {
     expect(element().querySelector('.badge')).toBeNull();
   });
 
-  describe('Terms and policies (M1.13, M1.14)', () => {
-    it('grades each topic with a dot, says why with citations, by group, and numbers the pages', async () => {
+  describe('Terms and policies (M1.13, M1.14, M5.9)', () => {
+    it('grades each topic with a dot and in words, says why with citations, by group, and numbers the pages', async () => {
       await show('mullvad.vpn');
 
       expect(groups().at(-1)).toBe(
-        'Terms and policies Legal Disputes: Swedish courts or the consumer disputes board. [1] ' +
-          'Service VPN logging: No connection logs, and an audit found none. [2] ' +
+        'Terms and policies Legal Disputes (Great): Swedish courts or the consumer disputes board. [1] ' +
+          'Service VPN logging (Great): No connection logs, and an audit found none. [2] ' +
           'Sources [1] Terms of service [2] No-logging policy',
       );
-      const grades = Array.from(element().querySelectorAll('.grade'));
-      expect(grades.map((grade) => [grade.getAttribute('data-tier'), grade.ariaLabel])).toEqual([
-        ['great', 'Great'],
-        ['great', 'Great'],
+      const dots = Array.from(element().querySelectorAll('.policies .dot'));
+      expect(dots.map((dot) => [dot.getAttribute('data-tier'), dot.ariaHidden])).toEqual([
+        ['great', 'true'],
+        ['great', 'true'],
       ]);
       const link = element().querySelector<HTMLAnchorElement>('.policy-links a');
       expect([link?.href, link?.target, link?.rel]).toEqual([
@@ -140,27 +140,11 @@ describe('PlanDetails', () => {
       );
       const tooltips =
         await TestbedHarnessEnvironment.loader(fixture).getAllHarnesses(MatTooltipHarness);
-      await tooltips[1].show();
-      expect(await tooltips[1].getTooltipText()).toBe(
+      await tooltips[0].show();
+      expect(await tooltips[0].getTooltipText()).toBe(
         '“shall be handled by the National Board for Consumer Disputes (ARN) or the Swedish courts” ' +
           '(Terms of service)',
       );
-    });
-
-    it('shows the grade when the dot is clicked or tapped, and keeps it there', async () => {
-      await show('mullvad.vpn');
-      const tooltip = await TestbedHarnessEnvironment.loader(fixture).getHarness(MatTooltipHarness);
-      const dot = element().querySelector<HTMLButtonElement>('.grade');
-
-      dot?.click();
-      await fixture.whenStable();
-      expect(await tooltip.isOpen()).toBe(true);
-      expect(await tooltip.getTooltipText()).toBe('Great');
-      // A click on the trigger is outside the tooltip, which hides it after 0 ms unless show() cancels that.
-      dot?.click();
-      await new Promise((resolve) => setTimeout(resolve, 20));
-      await fixture.whenStable();
-      expect(await tooltip.isOpen()).toBe(true);
     });
 
     it('shows a rating for the user’s country over the one for everywhere', async () => {
@@ -168,10 +152,9 @@ describe('PlanDetails', () => {
       saved.set({ ...alberta, country: 'US', subdivision: undefined, currency: 'USD' });
       await show('mullvad.vpn');
 
-      expect(element().querySelector('.grade')?.ariaLabel).toBe('Bad');
       expect(groups().at(-1)).toBe(
-        'Terms and policies Legal Disputes: A made-up US rule, for the test. [1] ' +
-          'Service VPN logging: No connection logs, and an audit found none. [2] ' +
+        'Terms and policies Legal Disputes (Bad): A made-up US rule, for the test. [1] ' +
+          'Service VPN logging (Great): No connection logs, and an audit found none. [2] ' +
           'Sources [1] Terms of service [2] No-logging policy',
       );
     });

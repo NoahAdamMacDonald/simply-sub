@@ -96,12 +96,15 @@ input[type='search']::-webkit-search-cancel-button {
   appearance: none;
 }
 
-// Below the pinned bar, which the page measures (--ss-pinned-height); taller than the window, it scrolls on its own.
+// Pinned below the bar, which the page measures (--ss-pinned-height), with no scrollbar of its own (M5.9). Taller than
+// the room below the bar (its height is --ss-panel-height), it scrolls with the page until its foot is in view, and
+// stays there: a negative top.
 .panel {
   position: sticky;
-  top: calc(var(--ss-top-bar-height, 0px) + var(--ss-pinned-height, 0px));
-  max-height: calc(100dvh - var(--ss-top-bar-height, 0px) - var(--ss-pinned-height, 0px) - 16px);
-  overflow-y: auto;
+  top: min(
+    calc(var(--ss-top-bar-height, 0px) + var(--ss-pinned-height, 0px)),
+    calc(100dvh - var(--ss-panel-height, 0px) - 16px)
+  );
   isolation: isolate;
   grid-area: panel;
   padding: 16px;
