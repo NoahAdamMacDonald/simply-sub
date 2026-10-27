@@ -32,6 +32,28 @@ h1 {
   white-space: nowrap;
 }
 
+// Chips whose labels can be long (Search's Features filter, "Download devices: Downloads on 6+ devices"): a label
+// wraps inside its chip, and its chip inside its field, rather than running past them and scrolling the panel
+// sideways (M5.8). Material keeps a chip one line high and its label on one line; its parts are its own, so they're
+// styled here.
+.ss-wrapping-chips {
+  .mat-mdc-standard-chip {
+    height: auto;
+    min-height: 32px;
+  }
+
+  .mdc-evolution-chip__cell--primary,
+  .mdc-evolution-chip__action--primary {
+    min-width: 0;
+  }
+
+  .mdc-evolution-chip__text-label {
+    padding-block: 6px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
 // Search's filter drawer under 960 px (search-page.ts): a dialog on the right, as tall as the window, with square
 // corners. Dialogs render outside the page, so its frame is styled here.
 .ss-filter-drawer {

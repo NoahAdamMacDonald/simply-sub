@@ -58,6 +58,7 @@ mat-slider {
   font: var(--mat-sys-body-small);
 }
 
-button {
+// Clear all only: a rule for every button also lifted the Features chips' remove buttons off centre (M5.8).
+.clear {
   align-self: flex-start;
 }
