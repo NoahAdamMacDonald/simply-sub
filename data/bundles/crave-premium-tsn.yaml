@@ -1,0 +1,15 @@
+# TSN sells it (tsn.ca/subscribe, Bundles); Crave's bundle FAQ lists it with no price.
+id: bundle.crave-premium-tsn
+name: Crave Premium and TSN Premium
+soldBy: tsn
+includes: [crave.premium, tsn.premium]
+link: https://www.tsn.ca/subscribe/
+prices:
+  - region: CA
+    currency: CAD
+    amount: 37.99
+    interval: month
+    intervalCount: 1
+    autoRenew: true
+    lastVerified: 2026-10-26
+    sourceUrl: https://www.tsn.ca/subscribe/

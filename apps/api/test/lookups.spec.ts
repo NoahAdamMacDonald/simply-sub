@@ -365,7 +365,12 @@ describe('GET /plans/:id', () => {
         pricing: example.data.addOns?.[0].pricing,
       },
     ]);
-    expect(body.data['bundleIds']).toEqual(example.data.bundleIds);
+    // The example shows one bundle; the catalog's Disney+ Premium is in several.
+    expect(body.data['bundleIds']).toEqual(
+      snapshot.data.bundles
+        .filter((bundle) => bundle.includes.includes('disney-plus.premium'))
+        .map((bundle) => bundle.id),
+    );
   });
 
   it('leaves out the add-ons and bundles a plan has none of, and prices without a region', async () => {
@@ -405,7 +410,14 @@ describe('GET /plans/:id', () => {
 });
 
 describe('GET /bundles', () => {
-  const bundle = snapshot.data.bundles[0];
+  const bundle = snapshot.data.bundles.find((found) => found.id === 'bundle.disney-crave-premium')!;
+  /** The bundles that include one of `plans` and are sold in Canada (priced there). */
+  const inCanada = (...plans: string[]) =>
+    snapshot.data.bundles.filter(
+      (found) =>
+        found.includes.some((id) => plans.includes(id)) &&
+        found.prices.some((price) => price.region === 'CA'),
+    );
 
   it("answers the example's query: the bundles with Disney+ Premium, priced for Canada with savings", async () => {
     const response = await get(`/bundles${new URL(bundlesExamples[0].request.url).search}`);
@@ -417,9 +429,10 @@ describe('GET /bundles', () => {
     expect(body.meta).toEqual({
       ...example.meta,
       catalogVersion: 'abc1234',
-      total: 1,
+      total: inCanada('disney-plus.premium').length,
     });
-    const [result] = body.data;
+    // The example's bundle, among the others with Disney+ Premium sold in Canada.
+    const result = body.data.find((found) => found['id'] === bundle.id)!;
     expect(Object.keys(result)).toEqual([
       'id',
       'name',
@@ -494,7 +507,13 @@ describe('GET /bundles', () => {
       await get('/bundles?plans=crave.premium,netflix.standard')
     ).json<{ data: Json[]; meta: Json }>();
 
-    expect(body.meta).toEqual({ catalogVersion: 'abc1234', total: 1 });
+    // Every bundle with either plan, wherever it's sold: no region.
+    expect(body.meta).toEqual({
+      catalogVersion: 'abc1234',
+      total: snapshot.data.bundles.filter((found) =>
+        found.includes.some((id) => ['crave.premium', 'netflix.standard'].includes(id)),
+      ).length,
+    });
     expect(Object.keys(body.data[0])).toEqual([
       'id',
       'name',
@@ -509,15 +528,24 @@ describe('GET /bundles', () => {
     ).toBe(true);
   });
 
-  it('leaves out a bundle whose seller isn’t sold in the region', async () => {
-    // Crave sells the Disney+ bundle, and is sold in Canada only. Core's bundlesBody tests price a bundle with only a
-    // fallback price, where it's unknown whether it's sold.
+  it('lists only the bundles sold in the region', async () => {
+    // Crave sells the Disney+ and Crave bundle, and is sold in Canada only; Disney+ sells its Hulu bundles in the US
+    // only. Core's bundlesBody tests price a bundle with only a fallback price, where it's unknown whether it's sold.
     const body = await (
       await get('/bundles?plans=disney-plus.premium&region=US')
     ).json<{ data: Json[]; meta: Json }>();
 
-    expect(body.meta).toMatchObject({ region: 'US', currency: 'USD', total: 0 });
-    expect(body.data).toEqual([]);
+    const inTheUs = snapshot.data.bundles.filter(
+      (found) =>
+        found.includes.includes('disney-plus.premium') &&
+        found.prices.some((price) => price.region === 'US'),
+    );
+    expect(inTheUs.map((found) => found.id)).toContain('bundle.disney-hulu-premium');
+    expect(body.meta).toMatchObject({ region: 'US', currency: 'USD', total: inTheUs.length });
+    expect(body.data.map((found) => found['id']).sort()).toEqual(
+      inTheUs.map((found) => found.id).sort(),
+    );
+    expect(body.data.map((found) => found['soldBy'])).not.toContain('crave');
   });
 
   it('finds nothing for a plan that no bundle includes', async () => {
@@ -608,34 +636,39 @@ describe('the D1 reads', () => {
   });
 
   it("read a plan's provider and one index entry per bundle that includes it", async () => {
-    const rows = await loadPlan(env.DB, 'disney-plus.premium');
+    // Disney+ Standard is in one bundle, with TSN Premium.
+    const rows = await loadPlan(env.DB, 'disney-plus.standard');
 
     expect(rows).toMatchObject({
       version: 'abc1234',
       provider: providerOf('disney-plus'),
-      bundleIds: ['bundle.disney-crave-premium'],
-      rowsRead: 3,
+      bundleIds: ['bundle.disney-standard-tsn'],
+      // The catalog row, the provider and the bundle's index entry, as D1 counts them for this catalog: the count
+      // depends on the keys next to the plan's in the index, so it moves a little as the catalog grows.
+      rowsRead: 4,
     });
   });
 
   it('read the bundles and the providers they need through primary keys and indexes, never a table scan', async () => {
-    const one = await loadBundles(env.DB, ['disney-plus.premium']);
-    const rows = await loadBundles(env.DB, ['disney-plus.premium', 'netflix.premium']);
+    // Disney+ Standard is in one bundle, with TSN Premium; Netflix Premium is in none.
+    const one = await loadBundles(env.DB, ['disney-plus.standard']);
+    const rows = await loadBundles(env.DB, ['disney-plus.standard', 'netflix.premium']);
     const statements = bundlesStatements(2);
     const plans = await Promise.all(
       Object.values(statements).map((sql) =>
         env.DB.prepare(`EXPLAIN QUERY PLAN ${sql}`)
-          .bind('disney-plus.premium', 'netflix.premium')
+          .bind('disney-plus.standard', 'netflix.premium')
           .all<{ detail: string }>(),
       ),
     );
     const details = plans.flatMap((plan) => plan.results.map((row) => row.detail));
 
-    expect(rows.plans.sort()).toEqual(['disney-plus.premium', 'netflix.premium']);
-    expect(rows.bundles.map((found) => found.id)).toEqual(['bundle.disney-crave-premium']);
-    expect(rows.providers.map((provider) => provider.id).sort()).toEqual(['crave', 'disney-plus']);
-    // D1 counts about two rows for each primary-key or index lookup.
-    expect([one.rowsRead, rows.rowsRead]).toEqual([11, 18]);
+    expect(rows.plans.sort()).toEqual(['disney-plus.standard', 'netflix.premium']);
+    expect(rows.bundles.map((found) => found.id)).toEqual(['bundle.disney-standard-tsn']);
+    expect(rows.providers.map((provider) => provider.id).sort()).toEqual(['disney-plus', 'tsn']);
+    // D1 counts about two rows for each primary-key or index lookup (measured on this catalog; the query plans below
+    // are what keeps it from growing with the tables).
+    expect([one.rowsRead, rows.rowsRead]).toEqual([14, 21]);
     expect(details).toEqual(
       expect.arrayContaining([
         'SEARCH plans USING PRIMARY KEY (id=?)',

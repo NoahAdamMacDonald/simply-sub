@@ -1,0 +1,80 @@
+id: ici-tou-tv
+name: ICI TOU.TV
+aliases: [tou.tv, toutv, tou tv, ici toutv, extra]
+website: https://ici.tou.tv
+category: streaming
+spendCategory: streaming
+billingCurrency: { CA: CAD }
+# ici.tou.tv/abonnement, read 2026-10-26: "Les contenus d’ICI TOU.TV ne sont pas accessibles à l’extérieur du
+# Canada."
+availableIn: [CA]
+# The subscription terms' Annulation section: "Pour annuler votre abonnement, rendez-vous sur la page de votre
+# compte". Radio-Canada's help centre has an article too, behind a bot check this machine doesn't pass.
+cancelUrl: https://ici.tou.tv/abonnement/condition
+sources: { pricing: https://ici.tou.tv/abonnement }
+
+# Read 2026-10-26 on ici.tou.tv/abonnement: EXTRA, ICI RDI and the two together, monthly only, each "3 diffusions en
+# continu à la fois". EXTRA's 1080p is from ici.tou.tv/abonnement-extra-crave and crave.ca/en/subscribe; that ICI
+# TOU.TV page gives EXTRA 2 streams in the Crave bundle, against 3 on its own page and on Crave's, so this uses 3.
+# The free ICI TOU.TV catalogue with ads has no plan page, so it isn't a plan here. The Crave bundles are in
+# data/bundles.
+plans:
+  - id: ici-tou-tv.extra
+    name: EXTRA
+    link: https://ici.tou.tv/abonnement-extra
+    features:
+      video.quality: 1080p
+      streaming.ad-free: true
+      streaming.concurrent-streams: 3
+      streaming.french-content: true
+    perks: [Exclusive premieres every month]
+    notes: Ads play in some live and linear content.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://ici.tou.tv/abonnement
+
+  - id: ici-tou-tv.rdi
+    name: ICI RDI
+    link: https://ici.tou.tv/abonnement
+    features:
+      streaming.live: [tv-channels]
+      streaming.concurrent-streams: 3
+      streaming.french-content: true
+    perks: [The ICI RDI live news channel]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://ici.tou.tv/abonnement
+
+  # A suite: EXTRA and ICI RDI in one plan (BLUEPRINT §4.4).
+  - id: ici-tou-tv.extra-rdi
+    name: EXTRA and ICI RDI
+    link: https://ici.tou.tv/abonnement
+    features:
+      video.quality: 1080p
+      streaming.ad-free: true
+      streaming.live: [tv-channels]
+      streaming.concurrent-streams: 3
+      streaming.french-content: true
+      includes-subscription: [ici-tou-tv.extra, ici-tou-tv.rdi]
+    notes: ICI RDI's live channel has ads.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://ici.tou.tv/abonnement

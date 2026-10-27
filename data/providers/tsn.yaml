@@ -1,0 +1,77 @@
+id: tsn
+name: TSN
+aliases: [the sports network]
+website: https://www.tsn.ca
+category: streaming
+spendCategory: streaming
+billingCurrency: { CA: CAD }
+# tsn.ca/help/faq/#not-canada, read 2026-10-26: "TSN is only available for subscription and use within Canada due to
+# licensing agreements."
+availableIn: [CA]
+# The FAQ's cancellation steps: Account > Manage Subscription > Subscriptions > Cancel Subscription.
+cancelUrl: https://www.tsn.ca/help/faq/#cancellations
+sources: { pricing: https://www.tsn.ca/subscribe/ }
+notes: >-
+  Plans renew for the period chosen, except in Quebec, where they renew monthly. Select NHL regular-season games
+  only, with regional blackouts.
+
+# Read 2026-10-26 on tsn.ca/subscribe: Standard is sold monthly only (the 3 Months and Annual tabs show Premium
+# alone), and "Everything in TSN Standard, plus" Premium's extras. Two streams at a time on every plan
+# (tsn.ca/help/faq/#concurrency). TSN's bundles with Crave and RDS are in data/bundles.
+plans:
+  - id: tsn.standard
+    name: Standard
+    link: https://www.tsn.ca/subscribe/
+    features:
+      streaming.live: [tv-channels, sports]
+      streaming.concurrent-streams: 2
+    perks: [TSN 1–5 live channels, Multiviewing up to 6 games at once]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 24.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://www.tsn.ca/subscribe/
+
+  - id: tsn.premium
+    name: Premium
+    link: https://www.tsn.ca/subscribe/
+    features:
+      streaming.live: [tv-channels, sports]
+      streaming.concurrent-streams: 2
+    perks:
+      - TSN 1–5 live channels
+      - Multiviewing up to 6 games at once
+      - NFL RedZone
+      - 24 more NFL and 75 more NBA games
+      - PGA Tour Live
+      - Every LaLiga match
+      - Award-winning sports docs
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 29.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://www.tsn.ca/subscribe/
+      - region: CA
+        currency: CAD
+        amount: 74.99
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://www.tsn.ca/subscribe/
+      - region: CA
+        currency: CAD
+        amount: 249.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://www.tsn.ca/subscribe/

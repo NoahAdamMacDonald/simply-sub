@@ -241,9 +241,10 @@ async function addItem(page, planId) {
     await openSearch(page, 'Alberta');
 
     const all = await names(page);
+    // M1.11: Hulu is sold in the US only; ESPN has no price for Canada and no country list, so it's unknown.
     check(
       'one card per provider, and the count',
-      all.length === 5 && (await count(page)) === '5 services',
+      all.length === 9 && (await count(page)) === '9 services' && !all.includes('Hulu'),
       `${all.join(', ')} / ${await count(page)}`,
     );
     const cancels = Object.fromEntries(
@@ -265,6 +266,10 @@ async function addItem(page, planId) {
       'Disney+': 'https://help.disneyplus.com/article/disneyplus-cancel',
       Crave:
         'https://plus.crave.ca/en/faq/plans-billing-bundles/canceling-or-pausing-my-crave-subscription/',
+      TSN: 'https://www.tsn.ca/help/faq/#cancellations',
+      RDS: 'https://www.rds.ca/aide/faq/#annuler-abonnement',
+      'ICI TOU.TV': 'https://ici.tou.tv/abonnement/condition',
+      ESPN: 'https://support.espn.com/hc/en-us/articles/40377550796308-Cancelling-Your-ESPN-Select-or-Unlimited-Subscription',
     };
     check(
       'every card links to its provider’s cancel page',
@@ -363,7 +368,7 @@ async function addItem(page, planId) {
     check('no match shows the empty state', (await count(page)) === 'No services match');
     await page.getByRole('button', { name: 'Clear search' }).focus();
     await page.keyboard.press('Enter');
-    await until('the cards again', async () => (await names(page)).length === 5);
+    await until('the cards again', async () => (await names(page)).length === 9);
     check(
       'Clear search empties the box and focuses it',
       (await focused(page)).type === 'search' &&
@@ -413,9 +418,10 @@ async function addItem(page, planId) {
     const start = panel.locator('input[type=range]').first();
     const end = panel.locator('input[type=range]').last();
     check(
-      'the price runs from $0 to Unlimited at $30, the catalog’s priciest rounded up, by $1',
+      // ESPN Unlimited's US$319.99 a year is about CA$36.80 a month, rounded up to $40.
+      'the price runs from $0 to Unlimited at $40, the catalog’s priciest rounded up, by $1',
       (await panel.locator('.range').textContent()).trim() === '$0 – Unlimited' &&
-        (await end.getAttribute('max')) === '30' &&
+        (await end.getAttribute('max')) === '40' &&
         (await end.getAttribute('step')) === '1' &&
         (await end.getAttribute('aria-valuetext')) === 'Unlimited' &&
         (await start.getAttribute('aria-valuetext')) === '$0',
@@ -481,7 +487,7 @@ async function addItem(page, planId) {
     await until('Mullvad to go', async () => !(await names(page)).includes('Mullvad VPN'));
     check(
       '"Native pricing only" hides converted prices, in the URL as native=1',
-      (await names(page)).join() === 'Proton,Netflix,Disney+,Crave' &&
+      (await names(page)).join() === 'Proton,ICI TOU.TV,Netflix,Disney+,Crave,RDS,TSN' &&
         (await entries(page)) === base + 1,
       `${(await names(page)).join(', ')} / ${search(page)}`,
     );
@@ -535,7 +541,7 @@ async function addItem(page, planId) {
     await until('no chips', async () => (await chipNames()).length === 0);
     check(
       'Back undoes the last filter',
-      search(page) === '?native=1' && (await names(page)).length === 4,
+      search(page) === '?native=1' && (await names(page)).length === 7,
       `${search(page)} / ${(await names(page)).join(', ')}`,
     );
     await go(page, 'forward');
@@ -554,14 +560,15 @@ async function addItem(page, planId) {
 
     // The price, by arrow keys: a run of changes is one entry. Netflix Premium is CA$23.99.
     const priceFrom = await entries(page);
+    const presses = Number(await end.getAttribute('max')) - 24;
     await end.focus();
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < presses; i++) {
       await page.keyboard.press('ArrowLeft');
       await sleep(150);
     }
     await until('max=24', () => search(page).includes('max=24'));
     check(
-      'six arrow presses on the top thumb make one history entry, at $24',
+      `${presses} arrow presses on the top thumb make one history entry, at $24`,
       (await entries(page)) === priceFrom + 1 &&
         (await names(page)).join() === 'Netflix' &&
         (await panel.locator('.range').textContent()).trim() === '$0 – $24',
@@ -707,7 +714,7 @@ async function addItem(page, planId) {
     await until('native=1', () => search(page) === '?native=1');
     await until(
       'the drawer’s count',
-      async () => (await drawer.locator('[role=status]').textContent()) === '4 services',
+      async () => (await drawer.locator('[role=status]').textContent()) === '7 services',
     );
     check('a filter in the drawer applies at once, and the drawer announces the count', true);
     await page.screenshot({ path: path.join(outDir, 'drawer-native-360.png') });

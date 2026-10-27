@@ -1,0 +1,65 @@
+id: espn
+name: ESPN
+aliases: [espn+, espn plus]
+website: https://www.espn.com
+category: streaming
+spendCategory: streaming
+billingCurrency: { US: USD }
+# No availableIn: plus.espn.com, whose plans page says who can subscribe, answers this machine (in Canada) with Access
+# Denied, and the support centre states no country list. Disney+'s bundles with ESPN are for "U.S. residents, 18+
+# only" (help.disneyplus.com/article/disneyplus-price, set to the US).
+cancelUrl: https://support.espn.com/hc/en-us/articles/40377550796308-Cancelling-Your-ESPN-Select-or-Unlimited-Subscription
+sources:
+  {
+    pricing: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices,
+  }
+
+# Read 2026-10-26 on ESPN's plans and prices article. Select is ESPN+'s content; Unlimited is every ESPN network,
+# live. Both have ads ("ESPN Select (With Ads)", "ESPN Unlimited (With Ads)" on Disney+'s bundle table).
+plans:
+  - id: espn.select
+    name: Select
+    link: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices
+    features:
+      streaming.live: [sports]
+    prices:
+      - region: US
+        currency: USD
+        amount: 13.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices
+      - region: US
+        currency: USD
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices
+
+  - id: espn.unlimited
+    name: Unlimited
+    link: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices
+    features:
+      streaming.live: [tv-channels, sports]
+    perks: [Every ESPN network, ESPN+ included]
+    prices:
+      - region: US
+        currency: USD
+        amount: 31.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices
+      - region: US
+        currency: USD
+        amount: 319.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices

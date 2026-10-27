@@ -1,0 +1,15 @@
+# Crave sells it on its French subscribe page (crave.ca/fr/subscribe, Forfaits); RDS advertises it at the same price.
+id: bundle.crave-ads-rds
+name: Crave Standard With Ads and RDS
+soldBy: crave
+includes: [crave.standard-ads, rds.standard]
+link: https://www.crave.ca/fr/subscribe
+prices:
+  - region: CA
+    currency: CAD
+    amount: 26.99
+    interval: month
+    intervalCount: 1
+    autoRenew: true
+    lastVerified: 2026-10-26
+    sourceUrl: https://www.crave.ca/fr/subscribe

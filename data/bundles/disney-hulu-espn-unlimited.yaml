@@ -1,0 +1,15 @@
+# Disney+'s US price article (help centre set to the US), and Hulu's plans and prices article.
+id: bundle.disney-hulu-espn-unlimited
+name: 'Disney+, Hulu, ESPN Unlimited Bundle'
+soldBy: disney-plus
+includes: [disney-plus.with-ads, hulu.with-ads, espn.unlimited]
+link: https://help.disneyplus.com/article/disneyplus-price
+prices:
+  - region: US
+    currency: USD
+    amount: 35.99
+    interval: month
+    intervalCount: 1
+    autoRenew: true
+    lastVerified: 2026-10-26
+    sourceUrl: https://help.disneyplus.com/article/disneyplus-price

@@ -312,7 +312,11 @@ describe('GET /providers', () => {
       cursor = body.meta.nextCursor;
     }
 
-    expect(pages.map((page) => page.length)).toEqual([2, 2, 1]);
+    // Two a page, and what's left on the last.
+    const count = snapshot.data.providers.length;
+    expect(pages.map((page) => page.length)).toEqual(
+      Array.from({ length: Math.ceil(count / 2) }, (_, page) => Math.min(2, count - page * 2)),
+    );
     expect(pages.flat()).toEqual(
       (await (await get('')).json<Body>()).data.map((result) => result.provider.id),
     );
@@ -397,6 +401,7 @@ describe('the D1 reads', () => {
     expect(uhd.providers.map((provider) => provider.id).sort()).toEqual([
       'crave',
       'disney-plus',
+      'hulu',
       'netflix',
     ]);
     expect(plan.results.map((row) => row.detail)).toEqual(

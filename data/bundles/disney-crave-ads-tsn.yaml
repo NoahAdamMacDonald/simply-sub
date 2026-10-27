@@ -1,0 +1,15 @@
+# Disney+'s Canadian price article, with the help centre set to Canada (English and French alike).
+id: bundle.disney-crave-ads-tsn
+name: 'Disney+ and Crave With Ads, TSN Premium Bundle'
+soldBy: disney-plus
+includes: [disney-plus.standard-ads, crave.standard-ads, tsn.premium]
+link: https://help.disneyplus.com/article/disneyplus-en-ca-price
+prices:
+  - region: CA
+    currency: CAD
+    amount: 31.99
+    interval: month
+    intervalCount: 1
+    autoRenew: true
+    lastVerified: 2026-10-26
+    sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
