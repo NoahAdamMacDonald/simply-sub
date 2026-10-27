@@ -2527,6 +2527,25 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
   checkbox and form field, which it and Search both use, moved into shared chunks, so Search's own fell from 268 kB
   to 235 kB.
 
+**Resolved (2026-10-27, M5.10)**
+- **A stray space in names:** a browser names a button or link from its content by joining its parts, and puts a
+  space around a part that's out of the flow, as `.visually-hidden` is. So a price was named "$7.99 a month , add to
+  a list", a list in the Add to list menu "Work Related , 12 subscriptions" and a card's link "Plan : Netflix
+  Standard". Checked in Edge: a hidden box that's inline-block, or absolute with `display: inline`, does the same;
+  only plain inline text doesn't, and hiding text with `font-size: 0` isn't reliable with every screen reader.
+- **One `aria-label` instead** for each list in the menu ("Work Related, 12 subscriptions"), a card's Plan or
+  Website link, its resellers' links, Hide details and the Terms and policies page links. Each name starts with its
+  visible words, so speech input still finds it (WCAG 2.5.3, axe's `label-content-name-mismatch`).
+- **A price can't take one:** it shows "$7.99 / mo" and is read "$7.99 a month", so an `aria-label` wouldn't contain
+  what it shows, and axe failed it. Its action ends the hidden words it already had (" a month, add to a list") rather
+  than taking a box of its own, so its name still comes from its content. Free has no hidden words to end, so a
+  button's Free is read from a hidden copy, "Free, add to a list", with the visible word `aria-hidden`.
+- **What stays:** hidden words that start with a space ("Cancel Netflix", a citation's "[2] Terms of service") read
+  the same with the browser's space, so they're unchanged.
+- **Tests read names:** the specs read `aria-label`, and `check-search.cjs` reads names from the accessibility tree,
+  with a sweep for a space before a comma or colon across Search with cards expanded, in both themes at both widths.
+  The specs had read `textContent`, which joins the parts without the space, so they couldn't see it.
+
 **Resolved (2026-10-27, M6.1)**
 - **Rank resolution** (`ranking/resolve-rank.ts`): `resolveRank` takes an item's override, then the profile's rank,
   then Not ranked. An override of Not ranked counts as one and hides the profile's rank for that item (the item

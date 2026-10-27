@@ -40,9 +40,8 @@
     }
 
     <div class="links">
-      <a [href]="link()" target="_blank" rel="noopener">
+      <a [href]="link()" target="_blank" rel="noopener" [attr.aria-label]="linkName()">
         <span>{{ plan() ? 'Plan' : 'Website' }}</span>
-        <span class="visually-hidden">: {{ title() }}, opens in a new tab</span>
         <mat-icon aria-hidden="true">open_in_new</mat-icon>
       </a>
       @if (plan()) {
@@ -80,10 +79,14 @@
         @for (deal of deals; track deal.reseller.id) {
           <li>
             <span>Cheaper at </span>
-            <a [href]="deal.link" target="_blank" rel="noopener">
+            <a
+              [href]="deal.link"
+              target="_blank"
+              rel="noopener"
+              [attr.aria-label]="deal.reseller.name + ', opens in a new tab'"
+            >
               <ss-provider-icon [src]="icon(deal.reseller)" [name]="deal.reseller.name" size="20" />
               <span>{{ deal.reseller.name }}</span>
-              <span class="visually-hidden">, opens in a new tab</span>
               <mat-icon aria-hidden="true">open_in_new</mat-icon>
             </a>
             <ss-price [price]="deal.price" />
@@ -117,10 +120,14 @@
               [ranks]="ranks()"
               [addMenu]="addMenu"
             />
-            <button type="button" class="collapse" (click)="collapse()">
+            <button
+              type="button"
+              class="collapse"
+              [attr.aria-label]="'Hide details: ' + title()"
+              (click)="collapse()"
+            >
               <mat-icon aria-hidden="true">expand_less</mat-icon>
               <span>Hide details</span>
-              <span class="visually-hidden">: {{ title() }}</span>
             </button>
           </div>
         </div>

@@ -96,7 +96,9 @@ describe('SubCard', () => {
     Array.from(element().querySelectorAll<HTMLInputElement>('input[type=radio]'));
   const links = () =>
     Array.from(element().querySelectorAll<HTMLAnchorElement>('.links a')).map((link) => ({
-      text: link.textContent?.replace('open_in_new', '').replace(/\s+/g, ' ').trim(),
+      text:
+        link.getAttribute('aria-label') ??
+        link.textContent?.replace('open_in_new', '').replace(/\s+/g, ' ').trim(),
       href: link.href,
       target: link.target,
       rel: link.rel,
@@ -139,10 +141,16 @@ describe('SubCard', () => {
       const menu = await openMenu();
 
       expect(await Promise.all((await menu.getItems()).map((item) => item.getText()))).toEqual([
-        'Work Related (1), 1 subscription',
-        'Family – Sam (0), 0 subscriptions',
+        'Work Related (1)',
+        'Family – Sam (0)',
         'addNew list…',
       ]);
+      // Each list's name is one string, with no stray space before its comma.
+      expect(
+        Array.from(document.querySelectorAll('.mat-mdc-menu-item')).map((item) =>
+          item.getAttribute('aria-label'),
+        ),
+      ).toEqual(['Work Related, 1 subscription', 'Family – Sam, 0 subscriptions', null]);
       expect(document.querySelector('.mat-mdc-menu-panel')?.getAttribute('aria-label')).toBe(
         'Add to list',
       );
@@ -204,7 +212,7 @@ describe('SubCard', () => {
       const price = prices()[1];
 
       expect(price.hasAttribute('aria-haspopup')).toBe(false);
-      expect(price.textContent).toContain(', add to Work Related');
+      expect(price.textContent).toContain('$189.99 / year a year, add to Work Related');
       price.click();
       await fixture.whenStable();
       expect(document.querySelector('.mat-mdc-menu-panel')).toBeNull();
@@ -359,9 +367,8 @@ describe('SubCard', () => {
       await fixture.whenStable();
       const hide = query<HTMLButtonElement>('button.collapse');
 
-      expect(hide?.textContent?.replace('expand_less', '').trim()).toBe(
-        'Hide details: Netflix Standard with ads',
-      );
+      expect(hide?.textContent?.replace('expand_less', '').trim()).toBe('Hide details');
+      expect(hide?.getAttribute('aria-label')).toBe('Hide details: Netflix Standard with ads');
       hide?.click();
       await fixture.whenStable();
 

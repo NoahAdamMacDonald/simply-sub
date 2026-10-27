@@ -1,10 +1,9 @@
 <mat-menu aria-label="Add to list" class="ss-add-to-list">
   <p class="title" aria-hidden="true">Add to list</p>
   @for (list of lists(); track list.id) {
-    <button mat-menu-item type="button" (click)="addTo(list.id)">
+    <button mat-menu-item type="button" [attr.aria-label]="list.label" (click)="addTo(list.id)">
       <span>{{ list.name }}</span>
-      <span aria-hidden="true"> ({{ list.count }})</span>
-      <span class="visually-hidden">, {{ list.spoken }}</span>
+      <span> ({{ list.count }})</span>
     </button>
   }
   @if (lists().length) {

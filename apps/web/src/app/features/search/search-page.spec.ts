@@ -518,7 +518,7 @@ describe('SearchPage', () => {
       expect(close()?.getAttribute('href')).toBe(`/lists/${work}/edit`);
       // Every price says where it adds, and opens no menu.
       const price = prices('Netflix')[0];
-      expect(price.textContent).toContain(', add to Work Related');
+      expect(price.textContent).toContain(' a month, add to Work Related');
       expect(price.hasAttribute('aria-haspopup')).toBe(false);
     });
 

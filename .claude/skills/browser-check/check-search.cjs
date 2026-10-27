@@ -169,6 +169,22 @@ async function stop(page) {
   return snapshot.split('\n')[0].replace(/^- /, '');
 }
 
+/** A control's role and accessible name, as its accessibility snapshot's first line gives them. */
+async function accessibleName(locator) {
+  return (await locator.ariaSnapshot()).split('\n')[0].replace(/^- /, '').replace(/:$/, '');
+}
+
+/**
+ * The accessible names in `locator` with a space before a comma or colon: a name a browser built from visible text
+ * and a separate hidden box ("a month , add to a list"), which the price and links name with one aria-label instead.
+ */
+async function spacedNames(locator) {
+  return (await locator.ariaSnapshot())
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => /"[^"]* [,:][^"]*"/.test(line));
+}
+
 /** The URL's query, decoded. */
 const search = (page) => decodeURIComponent(new URL(page.url()).search);
 const entries = (page) => page.evaluate(() => history.length);
@@ -842,22 +858,28 @@ async function addItem(page, planId) {
     const menu = page.locator('.mat-mdc-menu-panel');
     const price = card(page, 'Netflix').locator('.prices ss-price button').first();
 
+    const priceName = await accessibleName(price);
     check(
-      'a price is a button that opens a menu, and says it adds to a list',
+      'a price is a button that opens a menu, named by its price and "add to a list", with no stray space',
       (await price.getAttribute('aria-haspopup')) === 'menu' &&
-        /add to a list/.test(await price.evaluate((button) => button.textContent)),
-      await price.evaluate((button) => button.textContent.replace(/\s+/g, ' ').trim()),
+        /^button "\$[\d.]+ a month, add to a list"$/.test(priceName),
+      priceName,
     );
     await price.focus();
     await page.keyboard.press('Enter');
     await menu.waitFor();
     await sleep(500);
-    const items = (await menu.getByRole('menuitem').allTextContents()).map((text) =>
+    const items = (await menu.ariaSnapshot())
+      .split('\n')
+      .map((line) => /^\s*- menuitem "(.*)"/.exec(line)?.[1])
+      .filter(Boolean);
+    const shownItems = (await menu.getByRole('menuitem').allTextContents()).map((text) =>
       text.replace(/\s+/g, ' ').trim(),
     );
     check(
       'Enter opens Add to list: each list with its count, then New list…, with focus in the menu',
-      items.join() === 'Work Related (0), 0 subscriptions,addNew list…' &&
+      items.join(' | ') === 'Work Related, 0 subscriptions | New list…' &&
+        shownItems.join(' | ') === 'Work Related (0) | addNew list…' &&
         (await menu.getAttribute('aria-label')) === 'Add to list' &&
         (await page.evaluate(() => !!document.activeElement?.closest('.mat-mdc-menu-panel'))),
       items.join(' | '),
@@ -1425,6 +1447,12 @@ async function addItem(page, planId) {
       );
       const width = await page.evaluate(() => document.documentElement.scrollWidth);
       check(`no horizontal scroll: ${label}`, width <= viewport.width, `${width}px`);
+      const spaced = await spacedNames(page.locator('main'));
+      check(
+        `${label}: no name on the page, cards expanded, has a space before a comma or colon`,
+        spaced.length === 0,
+        spaced.slice(0, 3).join(' | '),
+      );
       await page.screenshot({
         path: path.join(outDir, `expanded-${colorScheme}-${viewport.width}.png`),
         fullPage: true,
@@ -1484,7 +1512,7 @@ async function addItem(page, planId) {
       .locator('.policy-links a')
       .evaluateAll((anchors) =>
         anchors.map((anchor) => [
-          anchor.textContent.replace(/\s+/g, ' ').trim(),
+          anchor.getAttribute('aria-label') ?? anchor.textContent.replace(/\s+/g, ' ').trim(),
           anchor.target,
           anchor.rel,
         ]),
