@@ -160,10 +160,12 @@ describe('validateCatalog', () => {
         website: 'https://example.com',
         category: 'streaming',
         spendCategory: 'streaming',
+        cancelUrl: 'https://example.com/cancel',
         plans: [
           {
             id: 'bundle.netflix-crave',
             name: 'Netflix and Crave',
+            link: 'https://example.com/signup',
             features: {},
             prices: (dataOf(catalog(), bundleFile) as { prices: unknown }).prices,
           },

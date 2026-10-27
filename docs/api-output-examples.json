@@ -292,7 +292,7 @@
                     "category": "vpn",
                     "spendCategory": "software",
                     "billingCurrency": { "GLOBAL": "EUR" },
-                    "cancelUrl": "https://mullvad.net/en/account",
+                    "cancelUrl": "https://mullvad.net/en/help/refunds",
                     "sources": { "pricing": "https://mullvad.net/en/pricing" },
                     "notes": "Flat price worldwide. Accounts are prepaid and topped up manually.",
                     "plans": [
@@ -560,7 +560,7 @@
                     "category": "vpn",
                     "spendCategory": "software",
                     "billingCurrency": { "GLOBAL": "EUR" },
-                    "cancelUrl": "https://mullvad.net/en/account",
+                    "cancelUrl": "https://mullvad.net/en/help/refunds",
                     "sources": { "pricing": "https://mullvad.net/en/pricing" },
                     "notes": "Flat price worldwide. Accounts are prepaid and topped up manually.",
                     "plans": [
@@ -1636,7 +1636,7 @@
                   "category": "streaming",
                   "spendCategory": "streaming",
                   "acceptedNetworks": ["visa", "mastercard", "amex"],
-                  "cancelUrl": "https://www.disneyplus.com/account/subscription"
+                  "cancelUrl": "https://help.disneyplus.com/article/disneyplus-cancel"
                 },
                 "link": "https://www.disneyplus.com/en-ca/sign-up",
                 "features": {
@@ -1766,7 +1766,7 @@
                     }
                   ],
                   "link": "https://www.crave.ca/en/bundles",
-                  "cancelUrl": "https://www.crave.ca/en/account",
+                  "cancelUrl": "https://plus.crave.ca/en/faq/plans-billing-bundles/canceling-or-pausing-my-crave-subscription/",
                   "prices": [
                     { "region": "CA", "currency": "CAD", "amount": 29.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14" }
                   ],

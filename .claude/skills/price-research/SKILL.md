@@ -29,8 +29,13 @@ API contract's prices are illustrative and never a source. This skill is how to 
 - **Region codes:** ISO 3166-1 alpha-2 (`GB` for the United Kingdom, never `UK`), `EU` when one price covers the
   whole EU, and `GLOBAL` for one price wherever the provider sells.
 - **`availableIn` only from an official list.** When the provider says where it sells ("only in the US", a country
-  list in its help centre), set `availableIn` to that full list. Otherwise leave it out: a region without prices is
-  then shown as unknown, not as "not offered" (BLUEPRINT §4.7).
+  list in its help centre, terms that say the service "is intended for use in Canada"), set `availableIn` to that
+  full list and quote it in a comment. Every provider sold in certain countries only gets one. Otherwise leave it
+  out: a region without prices is then shown as unknown, not as "not offered" (BLUEPRINT §4.7).
+- **Links are required.** Every plan and bundle needs its sign-up `link` on the provider's own site, and every
+  provider a `cancelUrl`: its cancel page, or its help article on cancelling (Disney+'s help centre has one for
+  every country), or for a prepaid service with nothing to cancel, its page on getting unused time back
+  (Mullvad's refunds guide). Say in a comment where it came from.
 - **Every interval and every price list the provider sells.** That means monthly and yearly (other periods only when the user
   asks), every region in scope (ask: usually CA and US, or GLOBAL), and every currency the buyer can pick.
 - **Read the features from the same pages:** quality, streams, downloads, devices, users, storage and limits. Map them

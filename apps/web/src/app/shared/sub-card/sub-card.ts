@@ -66,7 +66,7 @@ export class SubCard {
     const plan = this.plan();
     return plan ? planTitle(this.provider().name, plan.plan.name) : this.provider().name;
   });
-  /** Where to sign up: the plan's page, else the provider's site. */
+  /** Where to sign up: the plan's page, or the site of a provider not sold here, which has no plan to show. */
   protected readonly link = computed(() => this.plan()?.plan.link ?? this.provider().website);
   protected readonly status = computed<BadgeStatus>(() => {
     const activity = this.result().activity;

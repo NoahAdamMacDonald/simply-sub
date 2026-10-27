@@ -15,10 +15,12 @@ describe('providerSchema', () => {
       website: 'https://mullvad.net',
       category: 'vpn',
       spendCategory: 'software',
+      cancelUrl: 'https://mullvad.net/en/help/refunds',
       plans: [
         {
           id: 'mullvad.vpn',
           name: 'Mullvad VPN',
+          link: 'https://mullvad.net/en/pricing',
           features: {},
           prices: [
             {

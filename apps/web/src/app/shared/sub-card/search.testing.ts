@@ -89,17 +89,20 @@ export const searchCatalogData: CatalogData = {
       id: 'crave',
       name: 'Crave',
       website: 'https://www.crave.ca',
+      cancelUrl: 'https://www.crave.ca/cancel',
       ...streaming,
       plans: [
         {
           id: 'crave.basic',
           name: 'Basic',
+          link: 'https://example.com/crave.basic',
           features: { 'video.quality': '1080p' },
           prices: [price('CA', 'CAD', 11.99)],
         },
         {
           id: 'crave.premium',
           name: 'Premium',
+          link: 'https://example.com/crave.premium',
           features: { 'video.quality': '4k', 'streaming.ad-free': true },
           perks: ['HBO Max originals'],
           prices: [price('CA', 'CAD', 22)],
@@ -110,12 +113,14 @@ export const searchCatalogData: CatalogData = {
       id: 'hulu',
       name: 'Hulu',
       website: 'https://www.hulu.com',
+      cancelUrl: 'https://www.hulu.com/cancel',
       ...streaming,
       availableIn: ['US'],
       plans: [
         {
           id: 'hulu.basic',
           name: 'Basic',
+          link: 'https://example.com/hulu.basic',
           features: { 'video.quality': '4k' },
           prices: [price('US', 'USD', 9.99)],
         },
@@ -125,6 +130,7 @@ export const searchCatalogData: CatalogData = {
       id: 'mullvad',
       name: 'Mullvad VPN',
       website: 'https://mullvad.net',
+      cancelUrl: 'https://mullvad.net/cancel',
       iconUrl: 'https://sub.simplely.ca/icons/mullvad.webp',
       category: 'vpn',
       spendCategory: 'software',
@@ -132,6 +138,7 @@ export const searchCatalogData: CatalogData = {
         {
           id: 'mullvad.vpn',
           name: 'Mullvad VPN',
+          link: 'https://example.com/mullvad.vpn',
           features: { 'vpn.included': true },
           prices: [
             price('GLOBAL', 'EUR', 60, {
@@ -174,6 +181,7 @@ export const searchCatalogData: CatalogData = {
         {
           id: 'netflix.standard-ads',
           name: 'Standard with ads',
+          link: 'https://example.com/netflix.standard-ads',
           features: { 'video.quality': '1080p' },
           prices: [price('CA', 'CAD', 7.99)],
         },
@@ -188,6 +196,7 @@ export const searchCatalogData: CatalogData = {
         {
           id: 'netflix.premium',
           name: 'Premium',
+          link: 'https://example.com/netflix.premium',
           features: { 'video.quality': '4k', 'streaming.ad-free': true },
           prices: [price('US', 'USD', 26.99)],
         },
@@ -200,6 +209,7 @@ export const searchCatalogData: CatalogData = {
       id: 'proton',
       name: 'Proton',
       website: 'https://proton.me',
+      cancelUrl: 'https://proton.me/cancel',
       category: 'vpn',
       spendCategory: 'software',
       notes: 'One Proton account holds one paid plan.',
@@ -207,12 +217,14 @@ export const searchCatalogData: CatalogData = {
         {
           id: 'proton.vpn-plus',
           name: 'VPN Plus',
+          link: 'https://example.com/proton.vpn-plus',
           features: { 'vpn.included': true },
           prices: [price('GLOBAL', 'CAD', 12.49)],
         },
         {
           id: 'proton.unlimited',
           name: 'Proton Unlimited',
+          link: 'https://example.com/proton.unlimited',
           features: { 'vpn.included': true, 'includes-subscription': ['proton.vpn-plus'] },
           notes: 'Every Proton app, at its paid tier.',
           prices: [price('GLOBAL', 'CAD', 10, { lastVerified: '2026-06-01' })],
@@ -226,6 +238,7 @@ export const searchCatalogData: CatalogData = {
       name: 'Netflix and Crave',
       soldBy: 'crave',
       includes: ['netflix.standard', 'crave.premium'],
+      link: 'https://example.com/bundle',
       prices: [price('CA', 'CAD', 35)],
     },
   ],

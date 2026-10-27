@@ -111,6 +111,7 @@ export const provider = {
     {
       id: 'netflix.premium',
       name: 'Premium',
+      link: 'https://www.netflix.com/signup',
       features: {
         'video.quality': '4k',
         'streaming.ad-free': true,

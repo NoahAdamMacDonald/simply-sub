@@ -30,14 +30,14 @@
       "format": "uri",
       "pattern": "^https://",
       "patternErrorMessage": "Use a full https:// URL",
-      "description": "Where to sign up for the bundle"
+      "description": "Where to sign up for the bundle, on the seller's own site"
     },
     "cancelUrl": {
       "type": "string",
       "format": "uri",
       "pattern": "^https://",
       "patternErrorMessage": "Use a full https:// URL",
-      "description": "Where to cancel"
+      "description": "Where to cancel the bundle, when it isn't the seller's cancelUrl"
     },
     "prices": {
       "minItems": 1,
@@ -118,7 +118,7 @@
       }
     }
   },
-  "required": ["id", "name", "soldBy", "includes", "prices"],
+  "required": ["id", "name", "soldBy", "includes", "link", "prices"],
   "additionalProperties": false,
   "title": "Simply Sub bundle",
   "description": "data/bundles/<slug>.yaml: several plans sold together for one price (BLUEPRINT §4.4)"

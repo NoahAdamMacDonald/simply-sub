@@ -1,8 +1,8 @@
 // M5.2 and M5.3 in the system Edge: the Search page on the real catalog (data:build's files), for a Canadian in
 // Alberta and a US user, in both themes at 1280 and 360 px: the cards, plan chips by keyboard, the expanded details,
-// the "Cheaper at" resellers, typing with its pause, the empty state, a listed provider's status, a plan sold in the US
-// only, a provider not sold in the user's country (the US file served with Crave limited to Canada), and the filter
-// panel (M5.3): its Tab order, each filter by keyboard, the URL after each one (typing replaces its entry, a run of
+// the "Cheaper at" resellers, typing with its pause, the empty state, a listed provider's status, every card's cancel
+// page (M1.9), a plan sold in the US only, a provider not sold in the user's country (Crave, sold in Canada only), a
+// UK user's fallback price, and the filter panel (M5.3): its Tab order, each filter by keyboard, the URL after each one (typing replaces its entry, a run of
 // price changes makes one, anything else adds one), a reload, Back and Forward, a URL with values the catalog doesn't
 // have, no scroll on a filter change, and under 960 px the drawer (focus, its trap, Escape, Show results, Back), with
 // axe. GET /fx is answered with fixed rates (1 EUR ≈ CA$1.5694), so Amazon.ca's Mullvad cards are cheaper in Alberta.
@@ -65,22 +65,11 @@ async function until(what, condition, timeout = 10000) {
   throw new Error(`Timed out waiting for ${what}`);
 }
 
-async function newContext(
-  browser,
-  { locale, colorScheme = 'light', viewport = WIDE, craveInCanadaOnly },
-) {
+async function newContext(browser, { locale, colorScheme = 'light', viewport = WIDE }) {
   const context = await browser.newContext({ locale, colorScheme, viewport });
   await context.route('**/api/v1/fx?**', (route) =>
     route.fulfill({ json: fxBody(new URL(route.request().url()).searchParams.get('base')) }),
   );
-  if (craveInCanadaOnly) {
-    await context.route('**/data/catalog/US.json', async (route) => {
-      const response = await route.fetch();
-      const body = await response.json();
-      body.data.providers.find((provider) => provider.id === 'crave').availableIn = ['CA'];
-      return route.fulfill({ response, json: body });
-    });
-  }
   return context;
 }
 
@@ -256,6 +245,31 @@ async function addItem(page, planId) {
       'one card per provider, and the count',
       all.length === 5 && (await count(page)) === '5 services',
       `${all.join(', ')} / ${await count(page)}`,
+    );
+    const cancels = Object.fromEntries(
+      await page
+        .locator('ss-sub-card')
+        .evaluateAll((cards) =>
+          cards.map((element) => [
+            element.querySelector('h2')?.textContent,
+            [...element.querySelectorAll('.links a')].find((link) =>
+              link.textContent.includes('Cancel'),
+            )?.href,
+          ]),
+        ),
+    );
+    const cancelPages = {
+      Proton: 'https://account.proton.me/dashboard',
+      'Mullvad VPN': 'https://mullvad.net/en/help/refunds',
+      Netflix: 'https://www.netflix.com/cancelplan',
+      'Disney+': 'https://help.disneyplus.com/article/disneyplus-cancel',
+      Crave:
+        'https://plus.crave.ca/en/faq/plans-billing-bundles/canceling-or-pausing-my-crave-subscription/',
+    };
+    check(
+      'every card links to its provider’s cancel page',
+      Object.entries(cancelPages).every(([name, href]) => cancels[name] === href),
+      JSON.stringify(cancels),
     );
     const disney = await chips(page, 'Disney+');
     check(
@@ -768,9 +782,9 @@ async function addItem(page, planId) {
     }
   }
 
-  // ── A US user: the US-only plan, a provider not sold there, and one with no US price ─────────────
+  // ── A US user: the US-only plan and a provider not sold there; a UK user's fallback price ─────────
   {
-    const context = await newContext(browser, { locale: 'en-US', craveInCanadaOnly: true });
+    const context = await newContext(browser, { locale: 'en-US' });
     const page = await newPage(context, 'US');
     await openSearch(page);
     const disney = await chips(page, 'Disney+');
@@ -789,17 +803,17 @@ async function addItem(page, planId) {
     await axeCheck(page, 'US, not offered');
     await context.close();
 
-    const plain = await newContext(browser, { locale: 'en-US' });
-    const second = await newPage(plain, 'US plain');
+    // Netflix has no UK price and no availableIn, so it's unknown there.
+    const british = await newContext(browser, { locale: 'en-GB' });
+    const second = await newPage(british, 'GB');
     await openSearch(second);
-    await type(second, 'crave');
-    const prices = await shown(card(second, 'Crave').locator('.prices'));
+    const prices = await shown(card(second, 'Netflix').locator('.prices'));
     check(
-      'with no US price and no availableIn, the fallback price shows "No price for United States yet"',
-      /^≈ \$\d+\.\d\d \/ mo .*No price for United States yet$/.test(prices),
+      'with no UK price and no availableIn, the fallback price shows "No price for United Kingdom yet"',
+      /^≈ £\d+\.\d\d \/ mo .*No price for United Kingdom yet$/.test(prices),
       prices,
     );
-    await plain.close();
+    await british.close();
   }
 
   await browser.close();

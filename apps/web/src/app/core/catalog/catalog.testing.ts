@@ -40,12 +40,14 @@ export function catalogFile(
           id: 'mullvad',
           name: 'Mullvad VPN',
           website: 'https://mullvad.net',
+          cancelUrl: 'https://mullvad.net/cancel',
           category: 'vpn',
           spendCategory: 'software',
           plans: [
             {
               id: 'mullvad.vpn',
               name: 'Mullvad VPN',
+              link: 'https://example.com/mullvad.vpn',
               features: {},
               prices: (region === undefined ? catalogRegions : [region]).map(price),
             },

@@ -63,7 +63,10 @@ export interface ResolvedItem {
    * production, so a preview would miss a new logo). Custom: api/v1/icon?domain= from its link. None: a letter.
    */
   iconUrl?: string;
-  /** Where to sign up, and where to cancel. */
+  /**
+   * Where to sign up, and where to cancel: a catalog plan's link and its provider's cancel page; a bundle's link and
+   * its own cancel page, else its seller's; a custom subscription's, when it has them.
+   */
   link?: string;
   cancelUrl?: string;
   /** The region it's priced for: where the item was bought, else the user's country. */
@@ -159,7 +162,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         planId: plan.id,
         name: provider.name,
         planName: plan.name,
-        ...providerLinks(provider, plan.link),
+        ...providerLinks(provider, plan),
         price,
         addOns,
         features: plan.features,
@@ -185,8 +188,8 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         name: bundle.name,
         planName: plans.map(({ provider, plan }) => `${provider.name} ${plan.name}`).join(' + '),
         ...(seller.iconUrl && { iconUrl: `icons/${catalogIconFile(seller.id)}` }),
-        ...(bundle.link && { link: bundle.link }),
-        ...(bundle.cancelUrl && { cancelUrl: bundle.cancelUrl }),
+        link: bundle.link,
+        cancelUrl: bundle.cancelUrl ?? seller.cancelUrl,
         price,
         addOns: [],
         features: bundleFeatures(
@@ -264,13 +267,12 @@ function samePeriod(price: PickedPrice, { billing }: ListItem): boolean {
 
 function providerLinks(
   provider: SnapshotProvider,
-  planLink: string | undefined,
+  plan: Plan,
 ): Pick<ResolvedItem, 'iconUrl' | 'link' | 'cancelUrl'> {
-  const link = planLink ?? provider.website;
   return {
     ...(provider.iconUrl && { iconUrl: `icons/${catalogIconFile(provider.id)}` }),
-    link,
-    ...(provider.cancelUrl && { cancelUrl: provider.cancelUrl }),
+    link: plan.link,
+    cancelUrl: provider.cancelUrl,
   };
 }
 

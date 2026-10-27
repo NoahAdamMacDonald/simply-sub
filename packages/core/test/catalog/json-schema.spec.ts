@@ -38,7 +38,23 @@ describe('catalogJsonSchemas', () => {
       'website',
       'category',
       'spendCategory',
+      'cancelUrl',
       'plans',
+    ]);
+    expect(at(schemas.provider, 'properties', 'plans', 'items', 'required')).toEqual([
+      'id',
+      'name',
+      'link',
+      'features',
+      'prices',
+    ]);
+    expect(at(schemas.bundle, 'required')).toEqual([
+      'id',
+      'name',
+      'soldBy',
+      'includes',
+      'link',
+      'prices',
     ]);
     expect(
       at(

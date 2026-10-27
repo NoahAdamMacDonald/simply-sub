@@ -127,17 +127,20 @@ const netflix = {
   id: 'netflix',
   name: 'Netflix',
   ...streaming,
+  cancelUrl: 'https://www.netflix.com/cancelplan',
   billingCurrency: { CA: 'CAD', US: 'USD' },
   plans: [
     {
       id: 'netflix.standard-ads',
       name: 'Standard with ads',
+      link: 'https://www.netflix.com/signup',
       features: { 'video.quality': '1080p', 'streaming.concurrent-streams': 2 },
       prices: [price('CA', 'CAD', 7.99), price('US', 'USD', 8.99)],
     },
     {
       id: 'netflix.standard',
       name: 'Standard',
+      link: 'https://www.netflix.com/signup',
       features: {
         'video.quality': '1080p',
         'streaming.ad-free': true,
@@ -152,6 +155,7 @@ const netflix = {
       // Sold in the US only.
       id: 'netflix.premium',
       name: 'Premium',
+      link: 'https://www.netflix.com/signup',
       features: { 'video.quality': '4k', 'streaming.ad-free': true },
       prices: [price('US', 'USD', 26.99)],
     },
@@ -170,11 +174,13 @@ const crave = {
   id: 'crave',
   name: 'Crave',
   ...streaming,
+  cancelUrl: 'https://www.crave.ca/en/account',
   billingCurrency: { CA: 'CAD' },
   plans: [
     {
       id: 'crave.standard',
       name: 'Standard With Ads',
+      link: 'https://www.crave.ca/en/subscribe',
       features: { 'streaming.live': ['sports'] },
       prices: [price('CA', 'CAD', 11.99), price('CA', 'CAD', 119.99, 'year')],
       addOnIds: ['crave.starz'],
@@ -182,6 +188,7 @@ const crave = {
     {
       id: 'crave.premium',
       name: 'Premium',
+      link: 'https://www.crave.ca/en/subscribe',
       features: { 'video.quality': '4k', 'streaming.live': ['tv-channels', 'sports'] },
       prices: [price('CA', 'CAD', 22)],
       addOnIds: ['crave.starz'],
@@ -195,6 +202,7 @@ const mullvad = {
   id: 'mullvad',
   name: 'Mullvad VPN',
   website: 'https://mullvad.net',
+  cancelUrl: 'https://mullvad.net/en/help/refunds',
   category: 'vpn',
   spendCategory: 'software',
   billingCurrency: { GLOBAL: 'EUR' },
@@ -202,6 +210,7 @@ const mullvad = {
     {
       id: 'mullvad.vpn',
       name: 'Mullvad VPN',
+      link: 'https://mullvad.net/en/pricing',
       features: { 'vpn.included': true, 'vpn.devices': 5, 'vpn.unlimited-traffic': true },
       prices: [
         { ...price('GLOBAL', 'EUR', 5), autoRenew: false },
@@ -217,6 +226,7 @@ const proton = {
   id: 'proton',
   name: 'Proton',
   website: 'https://proton.me',
+  cancelUrl: 'https://account.proton.me/dashboard',
   category: 'privacy-suite',
   spendCategory: 'software',
   billingCurrency: { GLOBAL: 'USD' },
@@ -224,12 +234,14 @@ const proton = {
     {
       id: 'proton.free',
       name: 'Proton Free',
+      link: 'https://proton.me/pricing',
       features: { 'storage.cloud': 5, 'vpn.included': true, 'vpn.devices': 1 },
       prices: [price('GLOBAL', 'USD', 0)],
     },
     {
       id: 'proton.vpn-plus',
       name: 'VPN Plus',
+      link: 'https://proton.me/pricing',
       features: { 'storage.cloud': 5, ...vpnPlus },
       featureLabels: { 'vpn.devices=6-10': '10 devices' },
       prices: [
@@ -242,6 +254,7 @@ const proton = {
     {
       id: 'proton.unlimited',
       name: 'Proton Unlimited',
+      link: 'https://proton.me/pricing',
       features: {
         'storage.cloud': 500,
         ...vpnPlus,
@@ -253,6 +266,7 @@ const proton = {
       // Includes Unlimited, and through it VPN Plus.
       id: 'proton.duo',
       name: 'Proton Duo',
+      link: 'https://proton.me/pricing',
       features: {
         'account.users': 2,
         'storage.cloud': 2000,
@@ -269,6 +283,7 @@ const bundle = {
   name: 'Netflix and Crave',
   soldBy: 'crave',
   includes: ['netflix.standard', 'crave.premium'],
+  link: 'https://www.crave.ca/en/subscribe',
   prices: [price('CA', 'CAD', 35)],
 } satisfies Bundle;
 

@@ -17,8 +17,8 @@
         <span class="visually-hidden">: {{ title() }}, opens in a new tab</span>
         <mat-icon aria-hidden="true">open_in_new</mat-icon>
       </a>
-      @if (provider().cancelUrl; as cancelUrl) {
-        <a [href]="cancelUrl" target="_blank" rel="noopener">
+      @if (plan()) {
+        <a [href]="provider().cancelUrl" target="_blank" rel="noopener">
           <span>Cancel</span>
           <span class="visually-hidden"> {{ provider().name }}, opens in a new tab</span>
           <mat-icon aria-hidden="true">open_in_new</mat-icon>

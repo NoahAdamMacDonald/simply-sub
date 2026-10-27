@@ -36,7 +36,7 @@ export const planSchema = z
   .strictObject({
     id: planIdSchema.describe('<provider id>.<slug> (netflix.standard)'),
     name: textSchema.describe('The plan name, without the provider name (Standard)'),
-    link: httpsUrlSchema.describe('Where to sign up for this plan').optional(),
+    link: httpsUrlSchema.describe("Where to sign up for this plan, on the provider's own site"),
     features: z
       .record(dottedSlugSchema, featureValueSchema)
       .describe(
@@ -112,7 +112,9 @@ export const providerSchema = z
         "Every region the provider sells in, when known (BLUEPRINT §4.7): elsewhere the app shows Not offered. Left out, it's sold where it has prices and unknown elsewhere",
       )
       .optional(),
-    cancelUrl: httpsUrlSchema.describe('Where to cancel').optional(),
+    cancelUrl: httpsUrlSchema.describe(
+      "Where to cancel: the provider's cancel page, or its help article on cancelling (for a prepaid service, on getting unused time back)",
+    ),
     cancelFee: textSchema
       .describe('Any cancellation fee. Leave it out when there is none')
       .optional(),

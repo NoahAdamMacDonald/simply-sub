@@ -348,6 +348,7 @@ describe('GET /plans/:id', () => {
       iconUrl: 'https://sub.simplely.ca/icons/disney-plus.webp',
       category: 'streaming',
       spendCategory: 'streaming',
+      cancelUrl: disney.cancelUrl,
       acceptedNetworks: disney.acceptedNetworks,
     });
     expectSameOrder(body.data['provider'] as Json, example.data.provider);
@@ -508,30 +509,15 @@ describe('GET /bundles', () => {
     ).toBe(true);
   });
 
-  it('prices a bundle where it has only a fallback price, but shows no savings there', async () => {
+  it('leaves out a bundle whose seller isn’t sold in the region', async () => {
+    // Crave sells the Disney+ bundle, and is sold in Canada only. Core's bundlesBody tests price a bundle with only a
+    // fallback price, where it's unknown whether it's sold.
     const body = await (
       await get('/bundles?plans=disney-plus.premium&region=US')
-    ).json<{ data: (Json & { includes: Json[]; pricing: Picked[] })[]; meta: Json }>();
+    ).json<{ data: Json[]; meta: Json }>();
 
-    expect(body.meta).toMatchObject({
-      region: 'US',
-      currency: 'USD',
-      total: 1,
-      fxDate: '2026-10-21',
-    });
-    const [result] = body.data;
-    expect(result.pricing[0]).toMatchObject({
-      currency: 'USD',
-      native: false,
-      source: { region: 'CA' },
-    });
-    expect(result).not.toHaveProperty('savings');
-    expect(result.includes[0]['standalone']).toEqual({
-      amount: 21.49,
-      currency: 'USD',
-      interval: 'month',
-      intervalCount: 1,
-    });
+    expect(body.meta).toMatchObject({ region: 'US', currency: 'USD', total: 0 });
+    expect(body.data).toEqual([]);
   });
 
   it('finds nothing for a plan that no bundle includes', async () => {
