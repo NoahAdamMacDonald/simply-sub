@@ -1,7 +1,20 @@
+import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import type { Settings } from '@simply-sub/core';
+import { SettingsStore } from '../settings/settings-store';
 import { ThemeToggle } from './theme-toggle';
 
 describe('ThemeToggle', () => {
+  beforeEach(() => {
+    // Before the first run: no saved settings. The real store's load could land after the click and put the saved
+    // theme back, as it should in the app, which made this test flaky.
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: SettingsStore, useValue: { saved: signal<Settings | undefined>(undefined) } },
+      ],
+    });
+  });
+
   afterEach(() => {
     localStorage.clear();
     document.documentElement.removeAttribute('data-theme');
