@@ -54,6 +54,7 @@ export * from './search/search-params';
 export * from './search/search-providers';
 export * from './tax/sales-tax-rate';
 export * from './tax/subdivisions';
+export * from './user/add-request';
 export * from './user/catalog-cache';
 export * from './user/custom-subscription';
 export * from './user/fx-cache';

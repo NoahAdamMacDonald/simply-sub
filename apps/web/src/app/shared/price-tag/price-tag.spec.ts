@@ -1,7 +1,9 @@
-import { signal } from '@angular/core';
+import { Component, signal, viewChild } from '@angular/core';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { MATERIAL_ANIMATIONS } from '@angular/material/core';
+import { MatMenu, MatMenuItem } from '@angular/material/menu';
+import { MatMenuHarness } from '@angular/material/menu/testing';
 import { MatTooltipHarness } from '@angular/material/tooltip/testing';
 import {
   pickPrice,
@@ -160,6 +162,37 @@ describe('PriceTag', () => {
     });
   });
 
+  it('opens the menu it’s given, and says what clicking does', async () => {
+    // The price first: waiting for the host runs change detection on every fixture.
+    fixture.componentRef.setInput('price', netflix);
+    fixture.componentRef.setInput('clickable', true);
+    const host = TestBed.createComponent(MenuHost);
+    await host.whenStable();
+    fixture.componentRef.setInput('menu', host.componentInstance.menu());
+    fixture.componentRef.setInput('action', 'add to a list');
+    await fixture.whenStable();
+
+    const button = element().querySelector('button')!;
+    expect(button.getAttribute('aria-haspopup')).toBe('menu');
+    expect(spoken()).toBe('$18.99 a month, add to a list + tax');
+    const menu = await TestbedHarnessEnvironment.loader(fixture).getHarness(MatMenuHarness);
+    await menu.open();
+    expect(await Promise.all((await menu.getItems()).map((item) => item.getText()))).toEqual([
+      'Somewhere',
+    ]);
+  });
+
+  it('says what clicking a free price does right after "Free"', async () => {
+    fixture.componentRef.setInput('action', 'add to a list');
+    await show(picked(listed('CA', 'CAD', 0)), { clickable: true });
+    expect(spoken()).toBe('Free, add to a list');
+  });
+
+  it('has no menu unless it’s given one', async () => {
+    await show(netflix, { clickable: true });
+    expect(element().querySelector('button')?.hasAttribute('aria-haspopup')).toBe(false);
+  });
+
   it('puts the tooltip on a focusable icon when the price is not clickable', async () => {
     await show(picked(listed('GLOBAL', 'USD', 9.99), null));
     expect(element().querySelector('button')).toBeNull();
@@ -173,3 +206,13 @@ describe('PriceTag', () => {
     );
   });
 });
+
+/** A menu for a price to open. */
+@Component({
+  selector: 'ss-menu-host',
+  imports: [MatMenu, MatMenuItem],
+  template: '<mat-menu><button mat-menu-item type="button">Somewhere</button></mat-menu>',
+})
+class MenuHost {
+  readonly menu = viewChild.required(MatMenu);
+}

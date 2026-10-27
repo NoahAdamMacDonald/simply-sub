@@ -5,7 +5,9 @@
 // UK user's fallback price, with Sold in and its Settings default (M5.6), and the filter panel (M5.3): its Tab order,
 // each filter by keyboard, the URL after each one (typing replaces its entry, a run of price changes makes one,
 // anything else adds one), a reload, Back and Forward, a URL with values the catalog doesn't have, no scroll on a
-// filter change, and under 960 px the drawer (focus, its trap, Escape, Show results, Back), with axe. GET /fx is answered with fixed rates (1 EUR ≈ CA$1.5694), so Amazon.ca's Mullvad cards are cheaper in Alberta.
+// filter change, and under 960 px the drawer (focus, its trap, Escape, Show results, Back), and a price's Add to
+// list menu by keyboard (M5.4), with axe. GET /fx is answered with fixed rates (1 EUR ≈ CA$1.5694), so Amazon.ca's
+// Mullvad cards are cheaper in Alberta.
 // Usage: node check-search.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
 const fs = require('fs');
 const path = require('path');
@@ -191,16 +193,20 @@ async function axeCheck(page, label) {
 }
 
 /** Writes a list item to IndexedDB, as the item dialog will (M6.5), and reloads so the repositories read it. */
-async function addItem(page, planId) {
+/** The list addItem's items are in. */
+const LIST_ID = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d';
+
+/** Writes `record` to an IndexedDB table, as the repositories would, and reloads so they read it. */
+async function putRecord(page, table, record) {
   await page.evaluate(
-    (item) =>
+    ([store, value]) =>
       new Promise((resolve, reject) => {
         const request = indexedDB.open('simply-sub');
         request.onerror = () => reject(request.error);
         request.onsuccess = () => {
           const db = request.result;
-          const transaction = db.transaction('items', 'readwrite');
-          transaction.objectStore('items').put(item);
+          const transaction = db.transaction(store, 'readwrite');
+          transaction.objectStore(store).put(value);
           transaction.oncomplete = () => {
             db.close();
             resolve();
@@ -208,26 +214,41 @@ async function addItem(page, planId) {
           transaction.onerror = () => reject(transaction.error);
         };
       }),
-    {
-      id: '0192f1c5-1c2d-7e3f-8a4b-5c6d7e8f9a0b',
-      listId: '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d',
-      source: { kind: 'catalog', planId },
-      billing: {
-        mode: 'recurring',
-        interval: 'month',
-        intervalCount: 1,
-        anchorDate: '2026-09-10',
-        autoRenew: true,
-      },
-      tagIds: [],
-      rankOverrides: {},
-      pinned: false,
-      createdAt: '2026-10-20T12:00:00.000Z',
-      updatedAt: '2026-10-20T12:00:00.000Z',
-    },
+    [table, record],
   );
   await page.reload();
   await page.locator('ss-sub-card').first().waitFor({ timeout: 20000 });
+}
+
+/** A list, Work Related, for the Add to list menu (M5.4). */
+async function addList(page) {
+  await putRecord(page, 'lists', {
+    id: LIST_ID,
+    name: 'Work Related',
+    createdAt: '2026-10-20T12:00:00.000Z',
+    updatedAt: '2026-10-20T12:00:00.000Z',
+  });
+}
+
+/** Writes a list item to IndexedDB, as the item dialog will (M6.5), and reloads so the repositories read it. */
+async function addItem(page, planId) {
+  await putRecord(page, 'items', {
+    id: '0192f1c5-1c2d-7e3f-8a4b-5c6d7e8f9a0b',
+    listId: LIST_ID,
+    source: { kind: 'catalog', planId },
+    billing: {
+      mode: 'recurring',
+      interval: 'month',
+      intervalCount: 1,
+      anchorDate: '2026-09-10',
+      autoRenew: true,
+    },
+    tagIds: [],
+    rankOverrides: {},
+    pinned: false,
+    createdAt: '2026-10-20T12:00:00.000Z',
+    updatedAt: '2026-10-20T12:00:00.000Z',
+  });
 }
 
 (async () => {
@@ -751,6 +772,76 @@ async function addItem(page, planId) {
     await context.close();
   }
 
+  // ── M5.4: a price opens Add to list, by keyboard (Alberta, light, 1280 px) ─────────────────────
+  {
+    const context = await newContext(browser, { locale: 'en-CA' });
+    const page = await newPage(context, 'CA add');
+    await openSearch(page, 'Alberta');
+    await addList(page);
+    const menu = page.locator('.mat-mdc-menu-panel');
+    const price = card(page, 'Netflix').locator('.prices ss-price button').first();
+
+    check(
+      'a price is a button that opens a menu, and says it adds to a list',
+      (await price.getAttribute('aria-haspopup')) === 'menu' &&
+        /add to a list/.test(await price.evaluate((button) => button.textContent)),
+      await price.evaluate((button) => button.textContent.replace(/\s+/g, ' ').trim()),
+    );
+    await price.focus();
+    await page.keyboard.press('Enter');
+    await menu.waitFor();
+    await sleep(500);
+    const items = (await menu.getByRole('menuitem').allTextContents()).map((text) =>
+      text.replace(/\s+/g, ' ').trim(),
+    );
+    check(
+      'Enter opens Add to list: each list with its count, then New list…, with focus in the menu',
+      items.join() === 'Work Related (0), 0 subscriptions,addNew list…' &&
+        (await menu.getAttribute('aria-label')) === 'Add to list' &&
+        (await page.evaluate(() => !!document.activeElement?.closest('.mat-mdc-menu-panel'))),
+      items.join(' | '),
+    );
+    await page.screenshot({ path: path.join(outDir, 'add-menu-1280.png') });
+    await axeCheck(page, 'light 1280, the Add to list menu open');
+    await page.keyboard.press('Escape');
+    await menu.waitFor({ state: 'detached' });
+    check(
+      'Escape closes it and puts focus back on the price',
+      await price.evaluate((button) => button === document.activeElement),
+    );
+
+    await page.keyboard.press('Enter');
+    await menu.waitFor();
+    await sleep(300);
+    await page.keyboard.press('Enter');
+    await until('the editor', () => page.url().includes('/lists/'));
+    await page.locator('.adding').waitFor();
+    check(
+      "picking a list opens its editor with the plan and the period clicked, which says what it'll add",
+      new URL(page.url()).pathname.endsWith(`/lists/${LIST_ID}/edit`) &&
+        search(page) === '?add=netflix.standard-ads&interval=month' &&
+        (await page.locator('.adding').textContent()).trim() ===
+          'Netflix Standard with ads, billed monthly, will be added here once the list editor is ready.',
+      `${page.url()} / ${await page.locator('.adding').textContent()}`,
+    );
+
+    // A bundle's price, in Crave's details, and New list….
+    await go(page, 'back');
+    await card(page, 'Crave').locator('button.expand').click();
+    const bundlePrice = card(page, 'Crave').locator('ss-plan-details ss-price button').first();
+    await bundlePrice.waitFor();
+    await bundlePrice.click();
+    await menu.waitFor();
+    await menu.getByRole('menuitem', { name: /New list/ }).click();
+    await until('the new list', () => page.url().includes('/lists/new'));
+    check(
+      "a bundle's price opens a new list's editor with the bundle",
+      search(page) === '?addBundle=bundle.disney-crave-ads&interval=month',
+      page.url(),
+    );
+    await context.close();
+  }
+
   // ── Both themes at both widths: cards expanded (a bundle, a suite, resellers), and the empty state ─────
   for (const colorScheme of ['light', 'dark']) {
     for (const viewport of [WIDE, NARROW]) {
@@ -796,6 +887,15 @@ async function addItem(page, planId) {
         await page.keyboard.press('Escape');
         await page.locator('mat-dialog-container').waitFor({ state: 'detached' });
       }
+      await card(page, 'Netflix').locator('.prices ss-price button').first().click();
+      await page.locator('.mat-mdc-menu-panel').waitFor();
+      await sleep(500);
+      await axeCheck(page, `${label}, the Add to list menu open`);
+      if (viewport === NARROW) {
+        await page.screenshot({ path: path.join(outDir, `add-menu-${colorScheme}-360.png`) });
+      }
+      await page.keyboard.press('Escape');
+      await page.locator('.mat-mdc-menu-panel').waitFor({ state: 'detached' });
       await type(page, 'zzzz');
       await axeCheck(page, `${label}, no match`);
       if (viewport === NARROW) {

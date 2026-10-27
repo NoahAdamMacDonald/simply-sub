@@ -162,7 +162,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M5.1 | core: matching and filters (`searchCatalog`), using `availability` (BLUEPRINT §4.7), on M2.3's `searchProviders`, the engine GET /providers shares: text matched term by term, with plurals and features' own names (P8); one result per provider with its matching plans priced, the plan shown (the user's own when it matches), each plan's reseller deals (`resellerDeals`) and "not offered" results for providers the text names; the Activity filter and status line from core's `itemActivity` (§3.3's active and inactive, moved from M7.1) and `providerActivity`. Add-ons, bundles and a suite's savings are M5.2's (BLUEPRINT §14) | Name, plan, alias and feature matches are ranked as described in P8, and plans not offered in the user's region never appear; filtering for 4k gives each provider's cheapest 4k plan; "Native pricing only" hides converted prices |
 | M5.2 | Search page layout, results and the search sub-card with expand (P8): the search box (150 ms pause) and Sort, `ss-sub-card`'s search variant (§4.3, moved from M4.5) with plan chips, "Cheaper at" resellers from each plan's `deals` (`searchCatalog`, BLUEPRINT §4.9), and the expanded card (`ss-plan-details`): features with the user's ranks, add-ons, bundles with savings, a suite's plans and savings (core's `planExtras`), perks, notes and the price's date; loading, no-match and not-offered states; logos on a white tile in both themes (BLUEPRINT §14) | P8 layout criteria met |
 | M5.3 | Filter panel + URL state (P8): `ss-search-filters` (the price per month up to the catalog's priciest plan, Category, Features over rank keys with chips, Activity, Native pricing only, Clear all) beside the results, and in a drawer opened by a Filters button under 960 px; core's `readSearchParams` and `writeSearchParams` (values the catalog doesn't have are dropped and the URL rewritten), `searchFilterOptions`, `featureSuggestions`, `filterCount` and `rankKeyLabel`; typing replaces its history entry, a run of price changes makes one, anything else adds one (BLUEPRINT §14) | Filters survive a reload and back/forward; filtering for 4k shows each provider's cheapest 4k plan; "Native pricing only" hides converted prices |
-| M5.4 | Add-to-list menu → edit page with `?add=` (flow F1); `ss-sub-card`'s prices and bundle prices become buttons (`priceClick`), plain text until then | F1 works end to end (needs M6.3–M6.5; stub it until then) |
+| M5.4 | Add-to-list menu → edit page with `?add=` (flows F1 and F4): `ss-add-to-list-menu`, one per Search card, opened by its prices and its bundles' prices (`ss-price`'s `menu` and `action`); core's `addRequestParams` and `readAddRequest` (`add` or `addBundle`, `interval`, and `count` above 1); until M6.3–M6.5 the editor says what it will add (BLUEPRINT §14) | F1 works end to end (needs M6.3–M6.5; stub it until then) |
 | M5.5 | Pick mode `?addTo=` (flow F2) | F2 works end to end |
 | M5.6 | "Sold in <country>" filter (added 2026-10-26): `CatalogQuery.soldOnly` in core's `searchCatalog`, `sold=1`/`sold=0` against the user's default (`SearchDefaults` in `readSearchParams`, `writeSearchParams` and `filterCount`), the panel's checkbox, and Settings' Search option `searchSoldOnly` (P8, P13; BLUEPRINT §14) | A UK user with Sold in on sees no fallback prices, a provider not sold there doesn't show even when named, and the Settings default holds across reloads with `sold=0` turning it off |
 
@@ -452,7 +452,7 @@ Add these aliases to `_tokens.scss`. They build on the rank tokens in BLUEPRINT 
 |---|---|---|
 | `ss-page-header` | Title (`<h1>`), back link ("‹ Lists"), projected actions, and a line under it in an element marked `subtitle` | `heading` (not `title`: the attribute would be the element's tooltip), `backLink?`, `backLabel?` |
 | `ss-budget-bar` | Pill progress bar (wireframe style) with the label inside the fill; core's `budgetBar` gives the colour and percent (BLUEPRINT §8.1). The element is the `progressbar`: name it with `aria-label` or `aria-labelledby` | `value`, `max`, `labelMode: 'percent' \| 'amount'`, `marker?` (the Calendar's budget: the colour then compares `max` to it), `currency?` |
-| `ss-price` | Price + interval; ≈ and the `currency_exchange` icon when converted; tooltip with the source price; "+ tax" or "incl. tax" in Canada and the US (M4.4) | `price: PickedPrice`, `clickable`, `region?` (an item bought elsewhere) → `priceSelect` |
+| `ss-price` | Price + interval; ≈ and the `currency_exchange` icon when converted; tooltip with the source price; "+ tax" or "incl. tax" in Canada and the US (M4.4) | `price: PickedPrice`, `clickable`, `region?` (an item bought elsewhere), `menu?` (a menu the clickable price opens, M5.4), `action?` (what clicking does, read after the price: "add to a list") → `priceSelect` |
 | `ss-provider-icon` | Icon, with a letter fallback when there's none or it fails to load; at most 48 px, since catalog icons are 96 px files (BLUEPRINT §6.3). Decorative: the name is beside it | `src?`, `name`, `size` (px) |
 | `ss-status-badge` | Active / Inactive / Not listed with its dot, "active from Sep 10, 2026", and "Ends Nov 3" and ↻ "Renew by Nov 3" badges (§3.3); Search's " · 2 lists" is projected | `status` (core's `ItemStatus`, or `{ kind: 'not-listed' }`), `nextCharge?` |
 | `ss-rank-select` | The single rank dropdown: a Material select with each rank's dot (BLUEPRINT §14). "Profile default (Wanted)" is muted and clears the override | `value` (`model`), `subscriptionLevel` (adds Essential and Critical, with hints), `inherited?` (shows "Profile default (Wanted)"), `labelledBy` or `label` → `valueChange` |
@@ -461,7 +461,8 @@ Add these aliases to `_tokens.scss`. They build on the rank tokens in BLUEPRINT 
 | `ss-feature-summary` | "VPN: 2 / 3" list, read as "2 of 3 active" | `rows` (core's `FeatureSummaryRow[]`) |
 | `ss-feature-list` | A plan's features under their parent groups, with the user's rank for each ranked key it provides; core's `planFeatureRows`, on the catalog's registry | `plan`, `ranks` |
 | `ss-mini-calendar` | Month grid with dots on payment days and the payments in each day's tooltip; ‹ › change the month; one tab stop, moved with the arrow keys, Home/End and Page Up/Down | `month` (`model`), `charges` (`CalendarCharge`: date, name, amount, currency, converted, manual; M7.1's charges map to it) → `dayClick`, `monthClick` |
-| `ss-sub-card` | Subscription card (`variant: 'search' \| 'list'`), built with its pages: the search variant in M5.2, the list variant in M6.8. As built (M5.2): the search variant takes a `searchCatalog` result; its plan chips are radio buttons (one tab stop, arrow keys, never none chosen); the expanded section is `ss-plan-details` | `result`, `ranks` (M5.2); M5.4 adds `priceClick`, M6.8 `pinToggle` and `edit` |
+| `ss-sub-card` | Subscription card (`variant: 'search' \| 'list'`), built with its pages: the search variant in M5.2, the list variant in M6.8. As built (M5.2): the search variant takes a `searchCatalog` result; its plan chips are radio buttons (one tab stop, arrow keys, never none chosen); the expanded section is `ss-plan-details`. M5.4: its prices and its bundles' prices open the card's `ss-add-to-list-menu` | `result`, `ranks` (M5.2); M6.8 adds `pinToggle` and `edit` |
+| `ss-add-to-list-menu` | P7's Add to list menu (M5.4): the user's lists in the order they were made, each with its number of subscriptions, then New list…; picking one opens that list's editor, or `/lists/new`, with core's `addRequestParams` | `prepare(request)` (the price that opens it says what it adds); `menu` for `ss-price` |
 | `ss-tag-chip`, `ss-tag-picker` | A tag as a dot in its colour and its name; the picker is chips with an autocomplete, and "Create tag “…”" asks for a name and one of core's 12 `tagColorPresets`, saved through `TagsRepository` | `tag`; `tagIds` (`model`) → `tagIdsChange` |
 | `ss-split-button` | Main action + dropdown (the Calendar buttons): the main button does the first item, and the menu lists them all | `label`, `items` → `action` (the item's id) |
 | `ss-empty-state` | Icon, heading, projected text and an element marked `actions` | `icon`, `heading` |
@@ -654,7 +655,9 @@ Unsaved changes · This month $26.52 · ≈ $26.52 / mo average
 - ✎ opens the item dialog (P6) for that item. 🗑 removes it from the draft, with Undo in a snackbar.
 - ⋮ → Delete list (confirm) → soft delete → `/lists`.
 - On load, these query params open the item dialog and are then removed from the URL:
-  `?add=<planId>&interval=<month|year>` · `?addBundle=<bundleId>` · `?addCustom=<customSubId>` · `?item=<itemId>`.
+  `?add=<planId>&interval=<day|week|month|year>` · `?addBundle=<bundleId>&interval=…` · `?addCustom=<customSubId>` ·
+  `?item=<itemId>`. `add` and `addBundle` take `&count=<n>` for a period of n intervals ("every 3 months"); core's
+  `readAddRequest` reads them (M5.4).
 - Leaving with unsaved changes asks "Discard changes?", except when going to Search in pick mode for this list.
 - The footer shows live totals for the draft.
 
@@ -744,7 +747,10 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
 
 **Rules**
 - "New list…" creates a draft list first, then continues as F1.
-- The clicked interval is preselected.
+- The clicked interval is preselected: the URL carries it as `interval`, and `count` when the period is more than one
+  interval (`interval=month&count=3`).
+- Add-on and reseller prices don't open the menu: an add-on is added with its plan, in the item dialog, and a
+  reseller's price is recorded as a price override (P6).
 - An existing draft for that list is resumed.
 - The ✕ on the pick-mode banner returns to the edit page without adding anything.
 

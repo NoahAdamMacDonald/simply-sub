@@ -1,19 +1,29 @@
-import type { WritableSignal } from '@angular/core';
+import { signal, type WritableSignal } from '@angular/core';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { MATERIAL_ANIMATIONS } from '@angular/material/core';
+import { MatMenuHarness } from '@angular/material/menu/testing';
+import { Router, provideRouter } from '@angular/router';
 import {
   searchCatalog,
   type CatalogQuery,
   type CatalogResult,
   type ListItem,
   type Settings,
+  type SubscriptionList,
 } from '@simply-sub/core';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { ItemsRepository } from '../../core/storage/items-repository';
+import { ListsRepository } from '../../core/storage/lists-repository';
 import { alberta, fx, listItem, searchCatalogData, searchStores, today } from './search.testing';
 import { SubCard } from './sub-card';
 
 const work = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d';
 const family = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4e';
+
+function list(id: string, name: string): SubscriptionList {
+  return { id, name, createdAt: '2026-10-20T12:00:00.000Z', updatedAt: '2026-10-20T12:00:00.000Z' };
+}
 
 /** The provider's result as Search would give it. */
 function resultFor(
@@ -40,6 +50,20 @@ describe('SubCard', () => {
     TestBed.configureTestingModule({
       providers: [
         ...searchStores(),
+        {
+          provide: ListsRepository,
+          useValue: {
+            records: signal<readonly SubscriptionList[]>([
+              list(work, 'Work Related'),
+              list(family, 'Family – Sam'),
+            ]),
+          },
+        },
+        {
+          provide: ItemsRepository,
+          useValue: { records: signal<readonly ListItem[]>([listItem('crave.basic', work)]) },
+        },
+        provideRouter([]),
         { provide: MATERIAL_ANIMATIONS, useValue: { animationsDisabled: true } },
       ],
     });
@@ -99,6 +123,70 @@ describe('SubCard', () => {
         rel: 'noopener',
       },
     ]);
+  });
+
+  describe('the Add to list menu', () => {
+    /** Opens the menu of the card's price at `index`, among its triggers. */
+    async function openMenu(index = 0): Promise<MatMenuHarness> {
+      const menus =
+        await TestbedHarnessEnvironment.documentRootLoader(fixture).getAllHarnesses(MatMenuHarness);
+      await menus[index].open();
+      return menus[index];
+    }
+
+    it('opens from a price, with each list and its count, then New list…', async () => {
+      await show(resultFor('netflix'));
+      const menu = await openMenu();
+
+      expect(await Promise.all((await menu.getItems()).map((item) => item.getText()))).toEqual([
+        'Work Related (1), 1 subscription',
+        'Family – Sam (0), 0 subscriptions',
+        'addNew list…',
+      ]);
+      expect(document.querySelector('.mat-mdc-menu-panel')?.getAttribute('aria-label')).toBe(
+        'Add to list',
+      );
+    });
+
+    it('opens the list’s editor with the plan and the period clicked', async () => {
+      const navigate = vi.spyOn(TestBed.inject(Router), 'navigate').mockResolvedValue(true);
+      await show(resultFor('netflix'));
+      radios()[1].click();
+      await fixture.whenStable();
+      // Standard's second price is yearly.
+      const menu = await openMenu(1);
+      await menu.clickItem({ text: /^Family/ });
+
+      expect(navigate).toHaveBeenCalledWith(['/lists', family, 'edit'], {
+        queryParams: { add: 'netflix.standard', interval: 'year' },
+      });
+    });
+
+    it('opens a new list’s editor from New list…', async () => {
+      const navigate = vi.spyOn(TestBed.inject(Router), 'navigate').mockResolvedValue(true);
+      await show(resultFor('netflix'));
+      await (await openMenu()).clickItem({ text: /New list/ });
+
+      expect(navigate).toHaveBeenCalledWith(['/lists', 'new'], {
+        queryParams: { add: 'netflix.standard-ads', interval: 'month' },
+      });
+    });
+
+    it('opens from a bundle’s price in the details, with the bundle', async () => {
+      const navigate = vi.spyOn(TestBed.inject(Router), 'navigate').mockResolvedValue(true);
+      await show(resultFor('crave'));
+      radios()[1].click();
+      await fixture.whenStable();
+      query<HTMLButtonElement>('button.expand')?.click();
+      await fixture.whenStable();
+      // Crave Premium's own price, then the Netflix and Crave bundle's.
+      const menu = await openMenu(1);
+      await menu.clickItem({ text: /^Work/ });
+
+      expect(navigate).toHaveBeenCalledWith(['/lists', work, 'edit'], {
+        queryParams: { addBundle: 'bundle.netflix-crave', interval: 'month' },
+      });
+    });
   });
 
   it('switches between the matching plans with radio chips', async () => {
