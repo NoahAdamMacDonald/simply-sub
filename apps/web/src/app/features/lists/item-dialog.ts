@@ -26,7 +26,12 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { MatError, MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
+import {
+  MatDatepicker,
+  MatDatepickerInput,
+  MatDatepickerToggle,
+} from '@angular/material/datepicker';
+import { MatError, MatFormField, MatHint, MatLabel, MatSuffix } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
@@ -68,6 +73,7 @@ import {
   type RankKey,
   type RankingEntry,
   type RankingRow,
+  type RequestedPrice,
   type SnapshotProvider,
 } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
@@ -79,7 +85,9 @@ import { SettingsStore } from '../../core/settings/settings-store';
 import { CustomSubsRepository } from '../../core/storage/custom-subs-repository';
 import { RankingsRepository } from '../../core/storage/rankings-repository';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
+import { CalendarHeader } from '../../shared/calendar-header';
 import { focusFirstError } from '../../shared/focus-first-error';
+import { isoDateProviders } from '../../shared/iso-date-adapter';
 import { issueErrors } from '../../shared/form-issues';
 import { countryChoices, currencyChoices } from '../../shared/place-choices';
 import { PriceTag } from '../../shared/price-tag/price-tag';
@@ -93,7 +101,7 @@ import { periodText } from './edit-rows';
 
 /** What the dialog opens on: a plan, bundle or custom subscription to add, at a period, or an item to change. */
 export type ItemDialogRequest =
-  | { kind: 'plan'; planId: string; period: Period }
+  | { kind: 'plan'; planId: string; period: Period; ownPrice?: RequestedPrice }
   | { kind: 'bundle'; bundleId: string; period: Period }
   | { kind: 'custom'; customSubId: string }
   | { kind: 'item'; item: ListItem };
@@ -141,6 +149,9 @@ let nextId = 0;
     FormRoot,
     MatButton,
     MatCheckbox,
+    MatDatepicker,
+    MatDatepickerInput,
+    MatDatepickerToggle,
     MatDialogActions,
     MatDialogClose,
     MatDialogContent,
@@ -157,6 +168,7 @@ let nextId = 0;
     MatRadioGroup,
     MatSelect,
     MatSelectTrigger,
+    MatSuffix,
     PriceTag,
     ProviderIcon,
     RankSelect,
@@ -164,6 +176,7 @@ let nextId = 0;
   ],
   templateUrl: './item-dialog.html',
   styleUrl: './item-dialog.scss',
+  providers: isoDateProviders,
 })
 export class ItemDialog {
   private readonly data = inject<ItemDialogData>(MAT_DIALOG_DATA);
@@ -187,6 +200,8 @@ export class ItemDialog {
     this.data.request.kind === 'item' ? this.data.request.item : undefined;
   protected readonly heading = this.editing ? 'Edit subscription' : 'Add subscription';
   protected readonly ids = `ss-item-dialog-${nextId++}`;
+  /** The datepickers' header, whose month and year button is named by what it shows. */
+  protected readonly calendarHeader = CalendarHeader;
   protected readonly countries = countryChoices;
   protected readonly currencies = currencyChoices;
   protected readonly intervals = intervalSchema.options.map((interval) => ({
@@ -198,6 +213,10 @@ export class ItemDialog {
   private readonly currency = computed(() => this.settings.saved()?.currency ?? '');
 
   protected readonly model = signal<ItemForm>(this.initialForm());
+  /** The keys this subscription ranked when the dialog opened, whose groups start open. */
+  private readonly rankedAtStart = new Set(Object.keys(this.model().rankOverrides));
+  /** Groups opened or closed since, by their category id. */
+  private readonly toggledGroups = signal<ReadonlyMap<string, boolean>>(new Map());
   /** The period the suggested renewal was last worked out for (followPeriod). */
   private renewalPeriod: Period = periodOf(this.model());
 
@@ -388,13 +407,13 @@ export class ItemDialog {
 
   /** Ongoing: the days later in the month it can be billed on, when the date is a shorter month's last day. */
   protected readonly billingDays = computed(() => {
-    const { anchorDate } = this.model();
-    return anchorDate === '' ? [] : billingDayChoices(anchorDate, this.model());
+    return billingDayChoices(this.model().anchorDate, this.model());
   });
   protected readonly billingDayChoices = computed(() => {
     const days = this.billingDays();
     if (days.length === 0) return [];
-    const own = Number(this.model().anchorDate.slice(8));
+    // billingDayChoices offers days only for a real date.
+    const own = Number(this.model().anchorDate?.slice(8));
     return [
       { value: 0, text: `the ${ordinal(own)}` },
       ...days.map((day) => ({
@@ -467,17 +486,25 @@ export class ItemDialog {
       keys: new Set(keys),
     });
     const overrides = this.model().rankOverrides;
-    return sections.map((section) => ({
-      id: section.category.id,
-      name: section.category.name,
-      rows: section.entries.flatMap(entryRows).map((row) => ({
+    const toggled = this.toggledGroups();
+    return sections.map((section) => {
+      const rows = section.entries.flatMap(entryRows).map((row) => ({
         key: row.key,
         label: row.label,
         labelId: `${this.ids}-rank-${row.key}`,
         override: Object.hasOwn(overrides, row.key) ? overrides[row.key] : undefined,
         inherited: ranks.get(row.key) ?? ('not-ranked' as const),
-      })),
-    }));
+      }));
+      const id = section.category.id;
+      return {
+        id,
+        name: section.category.name,
+        rows,
+        /** How many of its keys this subscription ranks itself. */
+        ranked: rows.filter((row) => row.override !== undefined).length,
+        open: toggled.get(id) ?? rows.some((row) => this.rankedAtStart.has(row.key)),
+      };
+    });
   });
 
   protected readonly form = form(
@@ -575,6 +602,11 @@ export class ItemDialog {
     afterNextRender(() => this.addWindowButton()?.nativeElement.focus(), {
       injector: this.injector,
     });
+  }
+
+  /** Opens or closes a group of feature ranks. */
+  protected toggleGroup(id: string, open: boolean): void {
+    this.toggledGroups.update((toggled) => new Map(toggled).set(id, !open));
   }
 
   /** A rank for this subscription; the profile default (undefined) removes its override. */
@@ -720,6 +752,7 @@ export class ItemDialog {
         return newItemForm({
           source: { kind: 'catalog', planId: request.planId },
           period: request.period,
+          ...(request.ownPrice && { ownPrice: request.ownPrice }),
           addOnIds: addOnIdsOf(request.planId, country),
           today,
           country,

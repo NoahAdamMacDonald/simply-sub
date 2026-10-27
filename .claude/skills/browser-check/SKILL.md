@@ -148,9 +148,10 @@ Search → a price → New list… → the dialog, preselected (the card's provi
 focus on its heading, with the URL's request dropped in place (one history entry after Search) → Add → the row, the
 snackbar and focus on its ✎ → Save → the list view; the dialog 720 px wide, or the whole screen at 360 px; Specific
 dates with no end and an own price of 0 refused at their fields, with focus on the first; and ✎ on Netflix changing
-its plan to Premium, an extra member with a quantity of 2, Feb 28 typed with its billing day chosen by arrow keys, and
-Auto-renews, then Save, a reload and the item read from IndexedDB (its id, tags and ranks kept). With axe on the
-dialog, its errors and the billing day choice, and no horizontal scroll. The first card on Search is Proton, whose
+its plan to Premium, an extra member with a quantity of 2, Feb 28 typed with its billing day chosen by arrow keys, the
+renewal hint ending above Auto-renews, Ends on picked from the calendar by keyboard (its button, an arrow, Enter, focus
+back on the button), and Auto-renews, then Save, a reload and the item read from IndexedDB (its id, tags and ranks
+kept). With axe on the dialog, its errors, the billing day choice and the open calendar, and no horizontal scroll. The first card on Search is Proton, whose
 first price is Proton Free.
 
 `check-custom-subs.cjs` (M6.6) checks custom subscriptions on `ng serve` for a Canadian in Alberta, with Work Related
@@ -173,9 +174,9 @@ scroll. A link's line in an accessibility snapshot ends in a colon, before its U
 
 ## Gotchas
 
-- A date input is typed a part at a time: Edge's year takes up to 6 digits, so type the year, press ArrowRight, then
-  the month and day (each moves on by itself). Tab into the field first, so focus is on the year. While the year is
-  typed the value passes through years like 0002, which `packages/core/src/dates/` handles since M6.5.
+- Dates are Material datepickers since the feedback after M6.7: select what's there (Control+A) and type
+  2027-02-28. The calendar opens from the field's button (named "Ends on: choose a date"), arrow keys move a day and
+  Enter picks it. (The browser's own date field, before, took a year of up to 6 digits and needed ArrowRight.)
 - Type decimals into fields as a user does, key by key: `check-custom-subs.cjs` found a number field in a list of
   plans turning a quickly typed "49.99" into 9949 (M6.6). `fill()` sets the value at once and wouldn't have.
 - A Material autocomplete Tabbed past quickly could stay open, empty and unseen, and take a dialog's next Escape (fixed

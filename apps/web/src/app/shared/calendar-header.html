@@ -1,0 +1,29 @@
+<div class="header">
+  <!-- The name starts with what the button shows; what it does is hidden after it. -->
+  <button matButton type="button" class="period" (click)="currentPeriodClicked()">
+    <span>{{ periodButtonText }}</span>
+    <span class="visually-hidden"> ({{ periodButtonLabel.toLocaleLowerCase('en') }})</span>
+    <mat-icon iconPositionEnd aria-hidden="true">{{
+      calendar.currentView === 'month' ? 'arrow_drop_down' : 'arrow_drop_up'
+    }}</mat-icon>
+  </button>
+  <span class="spacer"></span>
+  <button
+    matIconButton
+    type="button"
+    [disabled]="!previousEnabled()"
+    [attr.aria-label]="prevButtonLabel"
+    (click)="previousClicked()"
+  >
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <button
+    matIconButton
+    type="button"
+    [disabled]="!nextEnabled()"
+    [attr.aria-label]="nextButtonLabel"
+    (click)="nextClicked()"
+  >
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+</div>

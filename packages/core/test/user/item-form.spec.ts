@@ -54,7 +54,11 @@ const context: ItemFormContext = {
   today,
 };
 
-const window = (start: string, end: string, repeatYearly = false): WindowForm => ({
+const window = (
+  start: string,
+  end: string,
+  repeatYearly = false,
+): WindowForm & { start: string; end: string } => ({
   start,
   end,
   repeatYearly,
@@ -90,6 +94,16 @@ describe('periodChoices', () => {
 describe('periodAfterPlanChange', () => {
   it('keeps the period when the new plan is priced for it, else takes its first', () => {
     expect(periodAfterPlanChange(yearly, [monthly, yearly])).toEqual(yearly);
+    // Every 12 months is a year, which bills on the same dates.
+    expect(
+      periodAfterPlanChange({ interval: 'month', intervalCount: 12 }, [monthly, yearly]),
+    ).toEqual(yearly);
+    expect(
+      periodAfterPlanChange({ interval: 'year', intervalCount: 2 }, [
+        monthly,
+        { interval: 'month', intervalCount: 24 },
+      ]),
+    ).toEqual({ interval: 'month', intervalCount: 24 });
     expect(periodAfterPlanChange(yearly, [monthly])).toEqual(monthly);
     expect(periodAfterPlanChange({ interval: 'month', intervalCount: 3 }, [monthly])).toEqual(
       monthly,
@@ -308,6 +322,28 @@ describe('itemFormIssues', () => {
     expect(itemFormIssues(standardForm({ anchorDate: '' }), context)).toEqual([
       { path: ['anchorDate'], message: 'Enter the next renewal date' },
     ]);
+  });
+
+  it('takes a date the picker couldn’t read (null) as none', () => {
+    expect(itemFormIssues(standardForm({ anchorDate: null }), context)).toEqual([
+      { path: ['anchorDate'], message: 'Enter the next renewal date' },
+    ]);
+    expect(
+      itemFormIssues(
+        standardForm({
+          mode: 'limited',
+          windows: [{ start: null, end: '2026-12-01', repeatYearly: false }],
+        }),
+        context,
+      ),
+    ).toEqual([{ path: ['windows', 0, 'start'], message: 'Enter the start date' }]);
+    expect(billingDayChoices(null, monthly)).toEqual([]);
+    const fields = itemFromForm(
+      standardForm({ startDate: null, endDate: null, priceUntil: null }),
+      context,
+    );
+    expect(fields.billing).not.toHaveProperty('startDate');
+    expect(fields.billing).not.toHaveProperty('endDate');
   });
 
   it('needs an end after the date it was subscribed since', () => {
@@ -556,6 +592,31 @@ describe('itemFromForm', () => {
     const fields = itemFromForm(custom, { ...context, periods: undefined });
     expect(fields.source).toEqual(source);
     expect(fields.billing).toMatchObject({ interval: 'week', intervalCount: 2 });
+  });
+});
+
+describe('newItemForm', () => {
+  it('starts “I pay a different price” with a reseller’s price', () => {
+    const form = newItemForm({
+      source: { kind: 'catalog', planId: 'mullvad.vpn' },
+      period: yearly,
+      ownPrice: { amount: 87, currency: 'CAD', plusTax: true },
+      addOnIds: [],
+      today,
+      country: 'CA',
+      currency: 'CAD',
+    });
+    expect(form).toMatchObject({
+      ownPrice: true,
+      priceAmount: 87,
+      priceCurrency: 'CAD',
+      plusTax: true,
+    });
+    expect(itemFromForm(form, { ...context, periods: [yearly] }).priceOverride).toEqual({
+      amount: 87,
+      currency: 'CAD',
+      plusTax: true,
+    });
   });
 });
 

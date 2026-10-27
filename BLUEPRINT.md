@@ -1103,7 +1103,7 @@ and Search shows one next to a plan's prices when it's cheaper for the buyer (M5
   group's file (`EU.json`) its members' too, since a member without a file of its own gets the group's (section 6.3).
   The D1 tables don't change: resellers travel in each provider's JSON.
 - **Bought from a reseller:** a list item records the plan, and its price override says what was paid (P6), until an
-  item can name its shop.
+  item can name its shop. A reseller's price in Search adds the plan with that override filled in (section 14).
 - **Kept up to date:** the discovery pipeline finds each provider's official reseller page (section 6.5, M3.7), and
   the nightly check rereads reseller prices and the approval quotes (section 6.4, M8.3).
 
@@ -2519,6 +2519,41 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-27, feedback after M6.7)**
+Reported from the running app, with screenshots, and fixed before M6.8:
+- **The item dialog's renewal hint ran into Auto-renews** (360 and 1280 px): "Check your account page for the exact
+  date" wrapped to two lines under Next renewal and over the checkbox. The dialog's fields now take the room their
+  hint or error needs (`subscriptSizing="dynamic"`), as the custom subscription editor's do, and the browser check
+  measures that the hint ends above the checkbox.
+- **Feature ranks were a long list to scroll past to Tags.** Each group now folds, as the Features page's cards do: the
+  heading line is the button ("Streaming 1 of 3 ranked here"), and a group starts open only when this subscription
+  ranked a key in it when the dialog opened.
+- **Tag chips:** a click anywhere on a chip removes it, as Search's Features chips do (M5.9), and the ✕ sits in the
+  middle. The chip's colour dot showed as a thin bar: the dot is an inline span, whose size a chip's label ignored, so
+  `_tag-dot.scss` makes it an inline block (every tag dot gets it).
+- **Dates had no calendar, and typing one was awkward** (the browser's date field, whose year took 6 digits before
+  moving on, and whose picker button was dark on dark). The dialog's six dates are Material's datepicker now: a text
+  field that takes 2027-02-28 (also 2027/2/28 and 20270228), shows YYYY-MM-DD, and has a calendar button whose pop-up
+  works by keyboard. `IsoDateAdapter` (`shared/`) keeps dates as ISO strings with core's `dates/` helpers and
+  ClockService's today, so no Date object or time zone touches them. A date it can't read is null in the form, which
+  core takes as none (`ItemForm`'s dates are `string | null`). Its header (`CalendarHeader`) names the month and year
+  button by what it shows, "Oct 2026 (choose month and year)": Material's failed axe's
+  `label-content-name-mismatch`, and its text failed contrast in dark mode.
+- **Search's prices were small to tap on a phone.** Under 600 px (the card's container) a price is a pill at least
+  36 px high, growing to 44 px as the screen widens (`clamp`), and a plan's prices wrap side by side, so Mullvad's five
+  don't make the card longer. `ss-price` takes `--ss-price-target`, `--ss-price-padding`, `--ss-price-radius` and
+  `--ss-price-border` for this: an outline, since a tinted pill took the dark theme's price text below 4.5:1. From 600 px nothing changed.
+- **A reseller's price adds the plan at that price** (asked in the same feedback): "Cheaper at Amazon $87.00 / 12 mo"
+  opens Add to list like a plan's price, named "…, add to a list at Amazon's price". The editor's URL carries it
+  (`&price=87&currency=CAD&plusTax=1`, core's `addRequestParams` and `readAddRequest`), and the item dialog opens
+  with "I pay a different price" filled in: the shop's price in its own currency, plus tax unless it includes it. A
+  period the plan isn't priced for but is as long as one it is opens on that one (`sameLength`: Amazon's 12 months
+  is Mullvad's year).
+- **Bundles:** the initial bundle grew by 2.2 kB (492.6 kB), with no new code of ours in it: the datepicker uses
+  more of the CDK's focus code (`_a11y-module`, `_focus-monitor`), whose files the shell already loads, so esbuild
+  keeps it there. The item dialog's chunk grew from 46 to 145 kB (12.5 to 30.4 kB to transfer): 110 kB of it is
+  Material's datepicker, which loads only with the dialog.
 
 **Resolved (2026-10-27, M6.7)**
 - **The Lists overview** (PROJECT-PLAN P3, `/lists`): "Subscription Lists" with [Custom subscriptions] beside it, a

@@ -23,11 +23,13 @@
   font: var(--mat-sys-body-small);
 }
 
+// A page can make a clickable price a bigger target with these (Search's cards at phone width, P8).
 button.tag {
+  min-height: var(--ss-price-target, auto);
   margin: 0;
-  padding: 2px 4px;
-  border: 0;
-  border-radius: 4px;
+  padding: var(--ss-price-padding, 2px 4px);
+  border: var(--ss-price-border, 0);
+  border-radius: var(--ss-price-radius, 4px);
   background: none;
   color: var(--ss-accent-text);
   font: inherit;

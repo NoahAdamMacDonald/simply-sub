@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 8px 8px 0;
+}
+
+.period {
+  color: var(--ss-text);
+  font: var(--mat-sys-title-small);
+}
+
+.spacer {
+  flex: 1;
+}

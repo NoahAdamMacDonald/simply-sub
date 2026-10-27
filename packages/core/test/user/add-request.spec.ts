@@ -62,3 +62,54 @@ describe('readAddRequest', () => {
     }
   });
 });
+
+describe('a reseller’s price in the request', () => {
+  const amazon: AddRequest = {
+    kind: 'plan',
+    planId: 'mullvad.vpn',
+    interval: 'month',
+    intervalCount: 12,
+    price: { amount: 87, currency: 'CAD', plusTax: true },
+  };
+
+  it('is written after the period, with plusTax only when tax is added to it', () => {
+    expect(addRequestParams(amazon)).toEqual({
+      add: 'mullvad.vpn',
+      interval: 'month',
+      count: '12',
+      price: '87',
+      currency: 'CAD',
+      plusTax: '1',
+    });
+    const included = { ...amazon, price: { amount: 27.5, currency: 'EUR', plusTax: false } };
+    expect(addRequestParams(included)).toEqual({
+      add: 'mullvad.vpn',
+      interval: 'month',
+      count: '12',
+      price: '27.5',
+      currency: 'EUR',
+    });
+  });
+
+  it('reads back as it was written', () => {
+    expect(readAddRequest(addRequestParams(amazon))).toEqual(amazon);
+    const included = { ...amazon, price: { amount: 27.5, currency: 'EUR', plusTax: false } };
+    expect(readAddRequest(addRequestParams(included))).toEqual(included);
+  });
+
+  it('rejects a price that isn’t above 0, one without a currency, and one on a bundle', () => {
+    const params = addRequestParams(amazon);
+    for (const broken of [
+      { ...params, price: '0' },
+      { ...params, price: '-5' },
+      { ...params, price: '8,7' },
+      { ...params, price: 'free' },
+      { ...params, currency: 'cad' },
+      { add: 'mullvad.vpn', price: '87' },
+      { add: 'mullvad.vpn', currency: 'CAD' },
+      { addBundle: 'bundle.disney-hulu', price: '87', currency: 'CAD' },
+    ]) {
+      expect(readAddRequest(broken)).toBeUndefined();
+    }
+  });
+});

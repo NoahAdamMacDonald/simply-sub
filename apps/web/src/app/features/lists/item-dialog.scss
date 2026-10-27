@@ -27,9 +27,46 @@ h3 {
 }
 
 h4 {
-  margin: 16px 0 4px;
-  color: var(--ss-text-muted);
+  margin: 8px -8px 0;
   font: var(--mat-sys-title-small);
+}
+
+// A group of feature ranks folds: the whole heading line is its button, as on the Features page.
+.group-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--ss-text);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--ss-state-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 0;
+  }
+
+  .group-name {
+    flex: 1 1 auto;
+  }
+
+  .count {
+    color: var(--ss-text-muted);
+    font: var(--mat-sys-body-medium);
+  }
+
+  mat-icon {
+    flex: none;
+  }
 }
 
 p {

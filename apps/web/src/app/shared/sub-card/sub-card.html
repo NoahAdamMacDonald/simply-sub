@@ -89,7 +89,14 @@
               <span>{{ deal.reseller.name }}</span>
               <mat-icon aria-hidden="true">open_in_new</mat-icon>
             </a>
-            <ss-price [price]="deal.price" />
+            <!-- The shop's price adds the plan with what it charges as the item's own price (BLUEPRINT §4.9). -->
+            <ss-price
+              clickable
+              [action]="addMenu.action() + ' at ' + deal.reseller.name + '’s price'"
+              [price]="deal.price"
+              [menu]="addMenu.panel()"
+              (priceSelect)="addMenu.add(resellerRequest(deal))"
+            />
           </li>
         }
       </ul>

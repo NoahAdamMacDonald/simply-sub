@@ -484,6 +484,36 @@ describe('ListEditPage', () => {
         expect(await addedItems()).toEqual([]);
       });
 
+      it('a reseller’s price: the plan at the same length of period, with the price paid as its own', async () => {
+        const loader = await openDialog(
+          `${editor()}?add=mullvad.vpn&interval=month&count=12&price=87&currency=CAD&plusTax=1`,
+        );
+        // Amazon sells 12 months, which Mullvad prices as a year.
+        expect(await (await control(loader, 'Billed', MatSelectHarness)).getValueText()).toContain(
+          'Yearly',
+        );
+        expect(
+          await (
+            await loader.getHarness(MatCheckboxHarness.with({ label: 'I pay a different price' }))
+          ).isChecked(),
+        ).toBe(true);
+        expect(await (await control(loader, 'Amount', MatInputHarness)).getValue()).toBe('87');
+        expect(
+          await (
+            await loader.getHarness(MatCheckboxHarness.with({ label: /^Plus tax/ }))
+          ).isChecked(),
+        ).toBe(true);
+        await until(() => location.path() === editor());
+        await press(loader, 'Add to list');
+
+        await until(() => dialog() === null);
+        expect((await addedItems())[0]).toMatchObject({
+          source: { kind: 'catalog', planId: 'mullvad.vpn' },
+          billing: { interval: 'year', intervalCount: 1 },
+          priceOverride: { amount: 87, currency: 'CAD', plusTax: true },
+        });
+      });
+
       it('?addBundle=, showing its plans, on its own period when it isn’t sold for the one asked', async () => {
         const loader = await openDialog(
           `${editor()}?addBundle=bundle.netflix-crave&interval=month&count=3`,
@@ -760,7 +790,9 @@ describe('ListEditPage', () => {
       await click('Edit Netflix Standard');
       const loader = await dialogLoader();
 
-      expect(inDialog('.ranks h4')).toBe('Streaming');
+      // A group this subscription ranks something in starts open.
+      expect(inDialog('.ranks .group-name')).toBe('Streaming');
+      expect(inDialog('.ranks .count')).toBe('1 of 2 ranked here');
       const quality = await rankSelect(loader, 'Video quality: 1080p (Full HD)');
       const adFree = await rankSelect(loader, 'Ad free');
       expect(await quality.getValueText()).toBe('Profile default (Wanted)');
@@ -774,6 +806,19 @@ describe('ListEditPage', () => {
       expect((await draftItem(netflix.id))?.rankOverrides).toEqual({
         'video.quality=1080p': 'critical',
       });
+    });
+
+    it('folds each group of feature ranks, closed to start when nothing in it is ranked here', async () => {
+      await openDialog(`${editor()}?add=crave.premium&interval=month`);
+      const toggle = () => dialog()?.querySelector<HTMLButtonElement>('.group-toggle');
+      expect(toggle()?.getAttribute('aria-expanded')).toBe('false');
+      expect(dialog()?.querySelector('.rank-rows')).toBeNull();
+      expect(inDialog('.ranks .count')).toBe('0 of 3 ranked here');
+
+      toggle()?.click();
+      await harness.fixture.whenStable();
+      expect(toggle()?.getAttribute('aria-expanded')).toBe('true');
+      expect(dialog()?.querySelectorAll('.rank-rows li')).toHaveLength(3);
     });
 
     it('asks before adding a plan that’s in the list already', async () => {
@@ -895,7 +940,7 @@ describe('ListEditPage', () => {
 
         const loader = await dialogLoader();
         expect(inDialog('.subject .name')).toBe('Local Gym');
-        expect(inDialog('.ranks h4')).toBe('Streaming');
+        expect(inDialog('.ranks .group-name')).toBe('Streaming');
         await press(loader, 'Add to list');
         await until(() => dialog() === null);
         expect((await addedItems())[0].source).toEqual({

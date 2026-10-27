@@ -221,6 +221,29 @@ describe('SubCard', () => {
       });
     });
 
+    it('adds a reseller’s price as the plan, with the shop’s price as the item’s own', async () => {
+      const navigate = vi.spyOn(TestBed.inject(Router), 'navigate').mockResolvedValue(true);
+      await show(resultFor('mullvad'));
+      const price = query<HTMLButtonElement>('.deals ss-price button');
+
+      expect(price?.textContent).toContain(
+        '$87.00 / 12 mo every 12 months, add to Work Related at Amazon’s price',
+      );
+      price?.click();
+      await fixture.whenStable();
+      // Amazon.ca's price leaves tax to be added in Canada.
+      expect(navigate).toHaveBeenCalledWith(['/lists', work, 'edit'], {
+        queryParams: {
+          add: 'mullvad.vpn',
+          interval: 'month',
+          count: '12',
+          price: '87',
+          currency: 'CAD',
+          plusTax: '1',
+        },
+      });
+    });
+
     it('adds a bundle’s price in the details as the bundle', async () => {
       const navigate = vi.spyOn(TestBed.inject(Router), 'navigate').mockResolvedValue(true);
       await show(resultFor('crave'));

@@ -174,4 +174,19 @@ describe('TagPicker', () => {
     await row.remove();
     expect(fixture.componentInstance.tagIds()).toEqual([]);
   });
+
+  it('removes a tag with a click anywhere on its chip, once', async () => {
+    const family = await addTag('Family', tagColorPresets[0].color);
+    const work = await addTag('Work', tagColorPresets[1].color);
+    fixture.componentInstance.tagIds.set([family.id, work.id]);
+    await fixture.whenStable();
+    element().querySelector<HTMLElement>('mat-chip-row')?.click();
+    await fixture.whenStable();
+    expect(fixture.componentInstance.tagIds()).toEqual([work.id]);
+
+    // The X's own click removes it once, not twice.
+    element().querySelector<HTMLElement>('mat-chip-row [matChipRemove]')?.click();
+    await fixture.whenStable();
+    expect(fixture.componentInstance.tagIds()).toEqual([]);
+  });
 });

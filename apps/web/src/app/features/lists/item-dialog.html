@@ -98,7 +98,7 @@
         @if (model().kind === 'custom') {
           <!-- A custom plan can be billed any way (P6). -->
           <div class="row">
-            <mat-form-field appearance="outline" class="count">
+            <mat-form-field appearance="outline" class="count" subscriptSizing="dynamic">
               <mat-label>Billed every</mat-label>
               <input
                 matInput
@@ -157,23 +157,59 @@
       @if (free() || model().mode === 'recurring') {
         <div class="row">
           @if (!free()) {
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
               <mat-label>Next renewal</mat-label>
-              <input matInput type="date" [formField]="form.anchorDate" />
+              <input
+                matInput
+                autocomplete="off"
+                placeholder="YYYY-MM-DD"
+                [matDatepicker]="renewalPicker"
+                [formField]="form.anchorDate"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="renewalPicker"
+                [aria-label]="'Next renewal: choose a date'"
+              />
+              <mat-datepicker #renewalPicker [calendarHeaderComponent]="calendarHeader" />
               @if (renewalSuggested()) {
                 <mat-hint>Check your account page for the exact date</mat-hint>
               }
               <mat-error>{{ firstError(form.anchorDate) }}</mat-error>
             </mat-form-field>
           }
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
             <mat-label>Subscribed since</mat-label>
-            <input matInput type="date" [formField]="form.startDate" />
+            <input
+              matInput
+              autocomplete="off"
+              placeholder="YYYY-MM-DD"
+              [matDatepicker]="sincePicker"
+              [formField]="form.startDate"
+            />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="sincePicker"
+              [aria-label]="'Subscribed since: choose a date'"
+            />
+            <mat-datepicker #sincePicker [calendarHeaderComponent]="calendarHeader" />
             <mat-hint>Optional</mat-hint>
           </mat-form-field>
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
             <mat-label>Ends on</mat-label>
-            <input matInput type="date" [formField]="form.endDate" />
+            <input
+              matInput
+              autocomplete="off"
+              placeholder="YYYY-MM-DD"
+              [matDatepicker]="endPicker"
+              [formField]="form.endDate"
+            />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="endPicker"
+              [aria-label]="'Ends on: choose a date'"
+            />
+            <mat-datepicker #endPicker [calendarHeaderComponent]="calendarHeader" />
             <mat-hint>Optional</mat-hint>
             <mat-error>{{ firstError(form.endDate) }}</mat-error>
           </mat-form-field>
@@ -207,19 +243,40 @@
           @for (window of model().windows; track $index; let index = $index) {
             <div class="window" role="group" [attr.aria-label]="'Window ' + (index + 1)">
               <p class="window-name" aria-hidden="true">Window {{ index + 1 }}</p>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="outline" subscriptSizing="dynamic">
                 <mat-label>Start</mat-label>
                 <input
                   matInput
-                  type="date"
                   class="window-start"
+                  autocomplete="off"
+                  placeholder="YYYY-MM-DD"
+                  [matDatepicker]="startPicker"
                   [formField]="form.windows[index].start"
                 />
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="startPicker"
+                  [aria-label]="'Window ' + (index + 1) + ' start: choose a date'"
+                />
+                <mat-datepicker #startPicker [calendarHeaderComponent]="calendarHeader" />
                 <mat-error>{{ firstError(form.windows[index].start) }}</mat-error>
               </mat-form-field>
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="outline" subscriptSizing="dynamic">
                 <mat-label>End</mat-label>
-                <input matInput type="date" [formField]="form.windows[index].end" />
+                <input
+                  matInput
+                  class="window-end"
+                  autocomplete="off"
+                  placeholder="YYYY-MM-DD"
+                  [matDatepicker]="endWindowPicker"
+                  [formField]="form.windows[index].end"
+                />
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="endWindowPicker"
+                  [aria-label]="'Window ' + (index + 1) + ' end: choose a date'"
+                />
+                <mat-datepicker #endWindowPicker [calendarHeaderComponent]="calendarHeader" />
                 <mat-error>{{ firstError(form.windows[index].end) }}</mat-error>
               </mat-form-field>
               <mat-checkbox [formField]="form.windows[index].repeatYearly">Every year</mat-checkbox>
@@ -248,12 +305,12 @@
         <mat-checkbox [formField]="form.ownPrice">I pay a different price</mat-checkbox>
         @if (model().ownPrice) {
           <div class="row">
-            <mat-form-field appearance="outline" class="amount">
+            <mat-form-field appearance="outline" class="amount" subscriptSizing="dynamic">
               <mat-label>Amount</mat-label>
               <input matInput type="number" step="any" [formField]="form.priceAmount" />
               <mat-error>{{ firstError(form.priceAmount) }}</mat-error>
             </mat-form-field>
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
               <mat-label>Currency</mat-label>
               <mat-select [formField]="form.priceCurrency">
                 @for (choice of currencies; track choice.value) {
@@ -262,9 +319,21 @@
               </mat-select>
               <mat-error>{{ firstError(form.priceCurrency) }}</mat-error>
             </mat-form-field>
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
               <mat-label>Until</mat-label>
-              <input matInput type="date" [formField]="form.priceUntil" />
+              <input
+                matInput
+                autocomplete="off"
+                placeholder="YYYY-MM-DD"
+                [matDatepicker]="untilPicker"
+                [formField]="form.priceUntil"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="untilPicker"
+                [aria-label]="'Until: choose a date'"
+              />
+              <mat-datepicker #untilPicker [calendarHeaderComponent]="calendarHeader" />
               <mat-hint>When the regular price starts again (optional)</mat-hint>
             </mat-form-field>
           </div>
@@ -293,22 +362,39 @@
     <section class="ranks" [attr.aria-labelledby]="ids + '-ranks'">
       <h3 [id]="ids + '-ranks'">Feature ranks</h3>
       <p class="note">Only for this subscription</p>
+      <!-- Each group folds, as the Features page's cards do; it starts open when this subscription ranks a key in it. -->
       @for (group of rankGroups(); track group.id) {
-        <h4>{{ group.name }}</h4>
-        <ul class="rank-rows">
-          @for (row of group.rows; track row.key) {
-            <li>
-              <span class="rank-name" [id]="row.labelId">{{ row.label }}</span>
-              <ss-rank-select
-                subscriptionLevel
-                [value]="row.override"
-                (valueChange)="setRank(row.key, $event)"
-                [inherited]="row.inherited"
-                [labelledBy]="row.labelId"
-              />
-            </li>
+        <h4>
+          <button
+            type="button"
+            class="group-toggle"
+            [attr.aria-expanded]="group.open"
+            [attr.aria-controls]="ids + '-group-' + group.id"
+            (click)="toggleGroup(group.id, group.open)"
+          >
+            <span class="group-name">{{ group.name }}</span>
+            <span class="count"> {{ group.ranked }} of {{ group.rows.length }} ranked here</span>
+            <mat-icon aria-hidden="true">{{ group.open ? 'expand_less' : 'expand_more' }}</mat-icon>
+          </button>
+        </h4>
+        <div [id]="ids + '-group-' + group.id">
+          @if (group.open) {
+            <ul class="rank-rows">
+              @for (row of group.rows; track row.key) {
+                <li>
+                  <span class="rank-name" [id]="row.labelId">{{ row.label }}</span>
+                  <ss-rank-select
+                    subscriptionLevel
+                    [value]="row.override"
+                    (valueChange)="setRank(row.key, $event)"
+                    [inherited]="row.inherited"
+                    [labelledBy]="row.labelId"
+                  />
+                </li>
+              }
+            </ul>
           }
-        </ul>
+        </div>
       } @empty {
         <p class="note">It has no features to rank.</p>
       }

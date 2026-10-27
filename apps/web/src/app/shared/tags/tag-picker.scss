@@ -12,8 +12,13 @@ mat-form-field {
   @include tag-dot.dot;
 }
 
-mat-chip-row .tag-dot {
-  margin-right: 6px;
+// A chosen tag is a button as a whole: a click removes it.
+mat-chip-row {
+  cursor: pointer;
+
+  .tag-dot {
+    margin-right: 6px;
+  }
 }
 
 // The input's row takes the rest of the line after the chips, as Material's input does on its own.

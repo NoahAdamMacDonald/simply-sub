@@ -680,7 +680,8 @@ date, and until M7.2 the footer has only the average.
   `?add=<planId>&interval=<day|week|month|year>` · `?addBundle=<bundleId>&interval=…` · `?addCustom=<customSubId>` ·
   `?item=<itemId>`. `add` and `addBundle` take `&count=<n>` for a period of n intervals ("every 3 months"); core's
   `readAddRequest` reads them (M5.4). Each opens it once; one that names a plan, bundle, custom subscription or item
-  there isn't says so, and opens nothing (M6.5).
+  there isn't says so, and opens nothing (M6.5). `add` also takes a reseller's `&price=…&currency=…&plusTax=1`, which
+  fills in the dialog's own price.
 - Leaving with unsaved changes asks "Discard changes?", except when going to Search in pick mode for this list.
   Leaving drops the draft, after asking if there's anything to lose, so a new list nobody changed isn't kept; a
   reload or a closed tab keeps it.
@@ -726,6 +727,9 @@ In Specific dates mode, the renewal fields are replaced by:
 │ Window 1  [ 2026-09-02 ] → [ 2026-11-01 ]  [x] Every year           [🗑]  │
 │ [+ Add window]                                                            │
 ```
+**Since the feedback after M6.7:** dates are datepickers (typed YYYY-MM-DD, or picked from a calendar), feature rank
+groups fold, a click on a tag chip removes it, and a reseller's price arrives with "I pay a different price" filled in.
+
 **As built (M6.5):** the sections run Plan, Add-ons (P6's "Extra members": an add-on can be a channel), Billing, "I
 pay a different price", Advanced, Feature ranks and Tags, and Plus tax shows only where tax is added. The billing day
 is a "Billed on" choice. The footer's ≈ marks a converted price only, and "next charge" comes with M7.1. Payment comes
@@ -779,8 +783,9 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
 - "New list…" creates a draft list first, then continues as F1.
 - The clicked interval is preselected: the URL carries it as `interval`, and `count` when the period is more than one
   interval (`interval=month&count=3`).
-- Add-on and reseller prices don't open the menu: an add-on is added with its plan, in the item dialog, and a
-  reseller's price is recorded as a price override (P6).
+- Add-on prices don't open the menu: an add-on is added with its plan, in the item dialog. A reseller's price does:
+  it adds the plan with the shop's price as the item's own (P6's price override, filled in), carried in the URL as
+  `&price=87&currency=CAD&plusTax=1`.
 - An existing draft for that list is resumed.
 - The ✕ on the pick-mode banner returns to the edit page without adding anything.
 
@@ -824,8 +829,8 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
   Filters icon button with a badge counting what's on, and Sort moves to the top of the drawer.
 - **Matching:** text matches provider names and aliases, plan names, feature names and aliases, and category names, in this order: exact or prefix name → substring → alias → plan name → feature or category. It's matched term by term, and every term must match ("netflix 4k"): a term is the longest run of words a feature's or category's name contains ("ultra hd"), else a word, and a plural matches its singular ("vpns"). As built in M5.1 (`searchProviders`' rules, BLUEPRINT §14). 150 ms debounce.
 - **Sort:** Best match (default when there's text), Price low→high (default otherwise), Price high→low, Name A–Z, Most features. Price sorts use the lowest monthly equivalent of the plan shown.
-- **Prices:** every interval price is a button → flow F1 (or F2 in pick mode). Converted prices show ≈, the icon and a tooltip. A $0 price shows as "Free". In Canada and the US prices are shown before tax, with "+ tax" (BLUEPRINT §4.8).
-- **Resellers** (BLUEPRINT §4.9): under a plan's prices, each official reseller that sells it for less per month after the user's sales tax (`resellerDeals`), cheapest first: "Cheaper at [icon] Amazon.ca: $87.00 / 12 mo ↗", a link to the shop's page that opens in a new tab (`rel="noopener"`). Only shops that sell where the user is; none without exchange rates.
+- **Prices:** every interval price is a button → flow F1 (or F2 in pick mode). Converted prices show ≈, the icon and a tooltip. A $0 price shows as "Free". In Canada and the US prices are shown before tax, with "+ tax" (BLUEPRINT §4.8). On a phone (a card under 600 px) each is a pill at least 36 px high, up to 44, and they wrap side by side.
+- **Resellers** (BLUEPRINT §4.9): under a plan's prices, each official reseller that sells it for less per month after the user's sales tax (`resellerDeals`), cheapest first: "Cheaper at [icon] Amazon.ca: $87.00 / 12 mo ↗", a link to the shop's page that opens in a new tab (`rel="noopener"`). Only shops that sell where the user is; none without exchange rates. The shop's price is a button too, which adds the plan with that price as the item's own (P7).
 - **Availability** (`availability` in core, BLUEPRINT §4.7): plans and bundles not offered in the user's region are left out. A provider with nothing offered there shows "Not offered in Canada" instead of prices, and only when the search text names it. An unknown item shows its fallback price with "No price for Canada yet" (a country's name, since English has no table of demonyms).
 - **Links:** Plan ↗ and Cancel ↗ open in a new tab (`rel="noopener"`).
 - **Status:** follows §3.3, at provider level.
