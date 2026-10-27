@@ -95,12 +95,14 @@ plans:
         lastVerified: 2026-10-26
         sourceUrl: https://mullvad.net/en/pricing
 
-# Resellers, read 2026-10-26 (BLUEPRINT §4.9). /en/help/partnerships-and-resellers names Mullvad's official resellers
-# ("With our official resellers, you can purchase Mullvad VPN scratch cards"). Its partners (Mozilla, Tailscale,
-# Obscura) run their own products on Mullvad's servers and don't sell Mullvad, so they aren't here. Not listed yet:
-# Amazon's 12 other stores, whose prices depend on the delivery address (amazon.com shows none for delivery to Canada,
-# and the EU stores' VAT changes with it), and Laptop with Linux, whose price changes with the delivery country's VAT
-# and its currency menu. SerialCart's sale of the day (20-26% off, no end date) isn't stored: prices are regular ones.
+# Resellers, read 2026-10-26 and again 2026-10-27 (BLUEPRINT §4.9, M1.12). /en/help/partnerships-and-resellers names
+# Mullvad's official resellers ("With our official resellers, you can purchase Mullvad VPN scratch cards"): Amazon's
+# stores in 13 countries, Inet, Webhallen, ProxyStore, SerialCart and Laptop with Linux. Its partners (Mozilla,
+# Tailscale, Obscura) run their own products on Mullvad's servers and don't sell Mullvad, so they aren't here. Amazon's
+# 12 other stores aren't listed: each shows the price only in the basket ("To see the product details, add this item
+# to your basket", amazon.com and amazon.co.uk among them), and amazon.de answered with an error. Laptop with Linux's
+# price with VAT follows the buyer's country, so its price before VAT is stored. SerialCart's sale of the day (20-26%
+# off, no end date) isn't stored: prices are regular ones. Bundles: none on mullvad.net.
 resellers:
   - reseller: amazon
     approvedBy:
@@ -150,6 +152,25 @@ resellers:
             autoRenew: false
             lastVerified: 2026-10-26
             sourceUrl: https://www.inet.se/produkt/9123505/mullvad-vpn-12-manader-5-enheter
+  - reseller: laptopwithlinux
+    approvedBy:
+      url: https://mullvad.net/en/help/partnerships-and-resellers
+      quotes: ['Since October 2022, we’ve partnered with Laptop with Linux']
+    offers:
+      - plan: mullvad.vpn
+        notes: >-
+          Activation codes on a scratch card, posted free anywhere ("They offer physical Mullvad VPN activation codes
+          with free delivery world-wide."). The price with VAT follows the buyer's country.
+        prices:
+          - region: GLOBAL
+            currency: EUR
+            amount: 48.76
+            interval: month
+            intervalCount: 12
+            autoRenew: false
+            taxExcluded: { quote: Excl. VAT }
+            lastVerified: 2026-10-27
+            sourceUrl: https://laptopwithlinux.com/buy-mullvad-vpn/
   - reseller: proxystore
     approvedBy:
       url: https://mullvad.net/en/help/partnerships-and-resellers
