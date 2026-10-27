@@ -11,6 +11,8 @@ const axePath = path.join(depsDir, 'node_modules', 'axe-core', 'axe.min.js');
 const WIDE = { width: 1280, height: 800 };
 const NARROW = { width: 360, height: 740 };
 const SIDEBAR = ['Home', 'Lists', 'Payment', 'Features', 'Calendar', 'Search', 'Settings'];
+/** The pages whose heading isn't their link's name (M6.2, M6.7). */
+const HEADINGS = { Lists: 'Subscription Lists', Features: 'Your feature ranks' };
 const URLS = {
   Home: '/',
   Lists: '/lists',
@@ -43,6 +45,21 @@ async function waitForServer() {
 
 async function open(browser, viewport, colorScheme, url = '/') {
   const context = await browser.newContext({ viewport, colorScheme });
+  // GET /fx (M4.4), answered here: there's no Worker behind the dev proxy, and the settings' currency asks for it.
+  await context.route('**/api/v1/fx?**', (route) => {
+    const base = new URL(route.request().url()).searchParams.get('base') ?? 'CAD';
+    return route.fulfill({
+      json: {
+        data: {
+          base,
+          date: '2026-10-26',
+          source: 'European Central Bank via Frankfurter',
+          rates: { CAD: 1, EUR: 0.6372, GBP: 0.5571, USD: 0.7243 },
+        },
+        meta: { fetchedAt: '2026-10-26T06:00:02Z', stale: false },
+      },
+    });
+  });
   const page = await context.newPage();
   const label = `${colorScheme} ${viewport.width}px`;
   page.on('console', (msg) => {
@@ -190,7 +207,9 @@ async function navigation(browser) {
     const current = await currentLinks(page);
     check(
       `wide: ${name} link opens ${URLS[name]}`,
-      (await heading(page)) === name && current.length === 1 && current[0] === name,
+      (await heading(page)) === (HEADINGS[name] ?? name) &&
+        current.length === 1 &&
+        current[0] === name,
       `h1="${await heading(page)}" current=${JSON.stringify(current)} title="${title}"`,
     );
   }

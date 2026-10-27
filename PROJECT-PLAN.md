@@ -183,7 +183,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M6.4 | List edit page (P5): the name, Cancel, Save and ⋮ Delete list (`DraftsRepository.deleteList`), a row per draft item (`MetricsService.resolve`) with 🗑 and Undo, the footer's average (core's `monthlyAverage`), and "Discard changes?" on leaving (`leaveGuard`). The item dialog opens from the query params in M6.5, [+ Add custom subscription] comes with M6.6, and the renewal dates and "This month" with M7.1–M7.2 (BLUEPRINT §14) | P5 criteria met, the item dialog's with M6.5 |
 | M6.5 | Item dialog (P6): core's rules in `user/item-form.ts` (the periods a plan offers, the suggested renewal and its billing day, Specific dates' windows, the form's issues and the item it saves, duplicates), Signal Forms through one `validateTree`, full screen under 600 px, `?add=`, `?addBundle=`, `?addCustom=` and `?item=` opened once and dropped from the URL, ✎ opening it directly, and `CatalogStore.need` for an unsaved item's region. "Next charge" comes with M7.1 (BLUEPRINT §14) | P6 criteria met, the calendar's with M7.4 |
 | M6.6 | Custom subscriptions page + editor (P12): core's rules in `user/custom-sub-form.ts` (the editor's issues, the record it saves, usage and what a change reaches, the features a plan can list), `CustomSubsRepository.save` and `removeWithItems` (each one transaction with the items), `ss-feature-picker`, and the list editor's [+ Add custom subscription] menu with Create new… (flow F3) (BLUEPRINT §14) | P12 criteria met, the calendar's and exports' with M7 |
-| M6.7 | Lists overview (P3) | P3 criteria met (the bars can wait for M7.2) |
+| M6.7 | Lists overview (P3): a card per list with its average a month until the bars, its rank counts (`rankCounts`), View and 🗑 with Undo (`DraftsRepository.deleteList` and `restoreList`), the New Subscription List tile, and every list's feature summary (`featureSummary`) (BLUEPRINT §14) | P3 criteria met (the bars can wait for M7.2) |
 | M6.8 | List view (P4), without the money parts, with `ss-sub-card`'s list variant (§4.3, moved from M4.5) | Cards, pinning, search/filter and the edit button work |
 | M6.9 | Backup export/import (the "Your data" section of P13, and the first-run dialog's "Import a backup instead"), with an optional passphrase that encrypts the file, and the crypto module it uses (BLUEPRINT §11.5) | Export → delete all → import restores everything, encrypted or not; a wrong passphrase or a tampered file imports nothing |
 | M6.10 | Optional app lock: a passphrase encrypts the user tables at rest, with a lock screen and an idle lock (P13, P15; BLUEPRINT §11.5) | Locked data on disk is unreadable without the passphrase; turning the lock on and off round-trips every table; a wrong passphrase unlocks nothing |
@@ -563,6 +563,10 @@ Subscription Lists                          [Custom subscriptions]           Fea
 │                   New Subscription List  ⊕                        │
 └──────────────────────────────────────────────────────────────────┘
 ```
+**As built (M6.7):** until the bars (M7.2), a card says what the list costs a month on average and how many
+subscriptions it has, "≈ $26.84 / mo average · 2 subscriptions". Under 960 px the Features column comes after the
+cards.
+
 **Data:** lists, `ListMetrics` for each list, the global feature summary.
 **Behaviour**
 - One card per list, in creation order. The name and [View] open `/lists/:listId`.

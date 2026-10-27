@@ -263,6 +263,27 @@ describe('DraftsRepository', () => {
     expect(await stored()).toEqual([]);
   });
 
+  it('puts back a deleted list and the items it deleted, and no others', async () => {
+    const before = await storedItems();
+    const deleted = await drafts.deleteList(work.id);
+    expect(deleted).toEqual({
+      listId: work.id,
+      itemIds: before
+        .filter((item) => item.listId === work.id && item.deletedAt === undefined)
+        .map((item) => item.id),
+    });
+
+    storage.clock.time = '2026-10-27T09:00:05.000Z';
+    await drafts.restoreList(deleted);
+    const now = '2026-10-27T09:00:05.000Z';
+    expect(await storedList(work.id)).toEqual({ ...work, updatedAt: now });
+    expect(await storedItems()).toEqual(
+      before.map((item) =>
+        deleted.itemIds.includes(item.id) ? { ...item, updatedAt: now } : item,
+      ),
+    );
+  });
+
   it('deletes a draft outright', async () => {
     await drafts.start(work.id);
     await drafts.remove(work.id);

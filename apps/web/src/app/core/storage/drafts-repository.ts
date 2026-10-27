@@ -3,6 +3,7 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import {
   newListDraft,
   newListName,
+  restored,
   savedItem,
   savedList,
   softDeleted,
@@ -13,6 +14,12 @@ import {
 } from '@simply-sub/core';
 import { storageStatus, type NewRecord } from './record-repository';
 import { StorageService } from './storage-service';
+
+/** What a Delete list deleted: the list, and the items that were in it then. Undo puts back just these. */
+export interface DeletedList {
+  listId: string;
+  itemIds: readonly string[];
+}
 
 /** A list's draft, and whether it was there already rather than started now. */
 export interface StartedDraft {
@@ -128,23 +135,43 @@ export class DraftsRepository {
   }
 
   /**
-   * Delete list (P5's ⋮): soft-deletes the list and its items, so totals drop them, and deletes its draft, in one
-   * transaction.
+   * Delete list (P5's ⋮, P3's 🗑): soft-deletes the list and its items, so totals drop them, and deletes its draft, in
+   * one transaction. Says which items it deleted, for Undo (restoreList).
    */
-  async deleteList(listId: string): Promise<void> {
+  async deleteList(listId: string): Promise<DeletedList> {
     const now = this.storage.now();
     const engine = await this.storage.engine();
-    await engine.transaction(['lists', 'items', 'drafts'], async (transaction) => {
+    return engine.transaction(['lists', 'items', 'drafts'], async (transaction) => {
       const list = await transaction.get('lists', listId);
       if (list && list.deletedAt === undefined) {
         await transaction.put('lists', softDeleted(list, now));
       }
+      const itemIds: string[] = [];
       for (const item of await transaction.getAll('items')) {
         if (item.listId === listId && item.deletedAt === undefined) {
           await transaction.put('items', softDeleted(item, now));
+          itemIds.push(item.id);
         }
       }
       await transaction.delete('drafts', listId);
+      return { listId, itemIds };
+    });
+  }
+
+  /**
+   * Undo of a Delete list (P3): the list and the items it deleted, back in one transaction. Items deleted before it
+   * stay deleted. Its draft, which the deletion dropped, doesn't come back.
+   */
+  async restoreList({ listId, itemIds }: DeletedList): Promise<void> {
+    const now = this.storage.now();
+    const engine = await this.storage.engine();
+    await engine.transaction(['lists', 'items'], async (transaction) => {
+      const list = await transaction.get('lists', listId);
+      if (list?.deletedAt !== undefined) await transaction.put('lists', restored(list, now));
+      for (const id of itemIds) {
+        const item = await transaction.get('items', id);
+        if (item?.deletedAt !== undefined) await transaction.put('items', restored(item, now));
+      }
     });
   }
 

@@ -163,6 +163,14 @@ from IndexedDB) with its row, the icon asked for its domain, the snackbar and fo
 list items it reaches; and 🗑 asking "Also remove it from 1 list." and deleting it with its item. With axe on the
 page, the editor, its errors, a feature's value, the menu and both questions, and no horizontal scroll.
 
+`check-lists.cjs` (M6.7) checks the Lists overview on `ng serve` for a Canadian in Alberta. In both themes at both
+widths, keyboard only: with no lists, the hint and New Subscription List (Enter opens a new list's editor); then Work
+Related (Netflix Standard with Ad free ranked Essential, and Mullvad VPN) and Family (empty), with 1080p ranked Wanted,
+written to IndexedDB: each card's cost, count and rank counts, the feature summary (VPN is a headline in the real
+registry), the Tab order, View, and 🗑 asking first (focus on Cancel), deleting the list with its subscriptions,
+moving focus on, and Undo putting them back. With axe on the page, the question and the snackbar, and no horizontal
+scroll. A link's line in an accessibility snapshot ends in a colon, before its URL.
+
 ## Gotchas
 
 - A date input is typed a part at a time: Edge's year takes up to 6 digits, so type the year, press ArrowRight, then
@@ -172,6 +180,8 @@ page, the editor, its errors, a feature's value, the menu and both questions, an
   plans turning a quickly typed "49.99" into 9949 (M6.6). `fill()` sets the value at once and wouldn't have.
 - A Material autocomplete Tabbed past quickly could stay open, empty and unseen, and take a dialog's next Escape (fixed
   in M6.6 by closing on focus leaving). `check-item-dialog.cjs` names the overlays open when an Escape closes nothing.
+- `check-shell.cjs` answers `GET /fx` itself since M6.7, as the other scripts do, and knows the pages whose heading
+  isn't their link's name (Subscription Lists, Your feature ranks).
 - An error in dev mode (ExpressionChangedAfterItHasBeenChecked included) opens the error snackbar, an overlay above a
   dialog, which then gets Escape: a dialog Escape won't close often means a console error. The scripts print the
   console problems on a crash.

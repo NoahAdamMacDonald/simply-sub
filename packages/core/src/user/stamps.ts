@@ -35,3 +35,13 @@ export function softDeleted<T extends Stamped>(record: T, now: Timestamp): T {
   const at = nextUpdatedAt(record.updatedAt, now);
   return { ...record, updatedAt: at, deletedAt: at };
 }
+
+/**
+ * `record` back from a soft delete at `now`, as Undo does (P3): no `deletedAt`, and an `updatedAt` that moves on, so a
+ * sync passes the change on as it did the deletion.
+ */
+export function restored<T extends Stamped>(record: T, now: Timestamp): T {
+  const back: T = { ...record, updatedAt: nextUpdatedAt(record.updatedAt, now) };
+  delete back.deletedAt;
+  return back;
+}

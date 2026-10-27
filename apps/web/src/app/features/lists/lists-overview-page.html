@@ -1,1 +1,86 @@
-<h1>Lists</h1>
+<ss-page-header heading="Subscription Lists">
+  <a matButton="outlined" routerLink="/custom">Custom subscriptions</a>
+</ss-page-header>
+
+@switch (state()) {
+  @case ('loading') {
+    <p class="note">Loading your lists…</p>
+  }
+  @case ('error') {
+    <p class="note">Your lists couldn't be read.</p>
+  }
+  @case ('ready') {
+    <div class="layout" [class.with-features]="cards().length > 0">
+      <div class="lists">
+        @if (cards().length > 0) {
+          <ul class="cards">
+            @for (card of cards(); track card.id) {
+              <li class="card" [attr.data-list]="card.id">
+                <div class="head">
+                  <h2 class="name">
+                    <a [routerLink]="['/lists', card.id]">{{ card.name }}</a>
+                  </h2>
+                  <button
+                    matIconButton
+                    type="button"
+                    class="remove"
+                    [attr.aria-label]="'Delete ' + card.name"
+                    (click)="remove(card)"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+                <div class="body">
+                  <!-- "/ mo" and ≈ are read as words, as ss-price's are. -->
+                  <p class="cost">
+                    @if (card.average; as average) {
+                      <span aria-hidden="true">{{ average.shown }}</span>
+                      <span class="visually-hidden">{{ average.spoken }}, </span>
+                      <span aria-hidden="true"> · </span>
+                    }
+                    <span>{{ card.countText }}</span>
+                  </p>
+                  <div class="ranks" role="group" [attr.aria-label]="'Ranks in ' + card.name">
+                    <ss-rank-counts [counts]="card.ranks" />
+                  </div>
+                </div>
+                <a
+                  matButton="filled"
+                  class="view"
+                  [routerLink]="['/lists', card.id]"
+                  [attr.aria-label]="'View ' + card.name"
+                >
+                  View
+                </a>
+              </li>
+            }
+          </ul>
+        } @else {
+          <p class="hint">
+            A list holds the subscriptions you pay for, or the ones you're weighing up. Make your
+            first one.
+          </p>
+        }
+        <a class="new-list" routerLink="/lists/new">
+          <span>New Subscription List</span>
+          <mat-icon aria-hidden="true">add_circle_outline</mat-icon>
+        </a>
+      </div>
+
+      @if (cards().length > 0) {
+        <section class="features" aria-labelledby="features-heading">
+          <h2 id="features-heading">Features</h2>
+          @if (features().length > 0) {
+            <p class="note">Active out of all the subscriptions that have each, in every list</p>
+            <ss-feature-summary [rows]="features()" />
+          } @else {
+            <p class="note">
+              Nothing to sum up yet. Rank the features you care about on the
+              <a routerLink="/features">Features</a> page.
+            </p>
+          }
+        </section>
+      }
+    </div>
+  }
+}

@@ -10,7 +10,7 @@ import { testStorage, until } from './core/storage/storage.testing';
  */
 const PAGES = [
   { url: '/', heading: 'Home', title: 'Home · Simply Sub' },
-  { url: '/lists', heading: 'Lists', title: 'Lists · Simply Sub' },
+  { url: '/lists', heading: 'Subscription Lists', title: 'Lists · Simply Sub' },
   { url: '/lists/abc', heading: 'List', title: 'List · Simply Sub' },
   { url: '/lists/abc/edit', heading: 'Edit list', title: 'Edit list · Simply Sub' },
   { url: '/lists/abc/optimize', heading: 'Optimizations', title: 'Optimizations · Simply Sub' },

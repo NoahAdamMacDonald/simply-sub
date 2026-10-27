@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { nextUpdatedAt, softDeleted, withChanges } from '../../src';
+import { nextUpdatedAt, restored, softDeleted, withChanges } from '../../src';
 
 const previous = '2026-10-20T09:15:00.000Z';
 
@@ -51,6 +51,20 @@ describe('softDeleted', () => {
       name: 'Work',
       updatedAt: now,
       deletedAt: now,
+    });
+  });
+});
+
+describe('restored', () => {
+  it('drops deletedAt and moves updatedAt on, even when the clock has gone back', () => {
+    const deleted = softDeleted({ name: 'Work', updatedAt: previous }, '2026-10-21T08:00:00.000Z');
+    expect(restored(deleted, '2026-10-21T08:00:05.000Z')).toEqual({
+      name: 'Work',
+      updatedAt: '2026-10-21T08:00:05.000Z',
+    });
+    expect(restored(deleted, '2026-10-21T07:00:00.000Z')).toEqual({
+      name: 'Work',
+      updatedAt: '2026-10-21T08:00:00.001Z',
     });
   });
 });

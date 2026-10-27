@@ -2052,7 +2052,8 @@ turning a second Netflix plan into an extra-member add-on.)
 bars for **all lists combined** (section 8.1.1). The bars appear only if a budget is set. The big CTA opens `/lists`.
 
 **Lists overview.** Each card shows the name, a monthly bar (**this list's share** of the monthly budget), a yearly bar, rank
-counts in rank colours (zero counts in grey), a View button and delete (with confirmation). Below the cards is a
+counts in rank colours (zero counts in grey), a View button and delete (with confirmation and Undo). Until the bars
+(M7.2), a card shows what the list costs a month on average (section 14, M6.7). Below the cards is a
 "New Subscription List" tile, which opens `/lists/new` with the default name. The right column shows feature
 summaries ("VPN 2/3", "4k 2/5").
 
@@ -2518,6 +2519,33 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-27, M6.7)**
+- **The Lists overview** (PROJECT-PLAN P3, `/lists`): "Subscription Lists" with [Custom subscriptions] beside it, a
+  card for each list in the order they were made, then the New Subscription List tile, and the Features column on the
+  right from 960 px (under the cards below that). With no lists there's a one-line hint and the tile, and no Features
+  column.
+- **A card:** the name (a link to the list), 🗑, then what it costs and how many subscriptions it has, "≈ $26.84 / mo
+  average · 2 subscriptions", read "about $26.84 a month on average", and its rank counts (`ss-rank-counts`, core's
+  `rankCounts` over the list's resolved items), then View. An empty list says "No subscriptions yet". The average is
+  the list editor's footer's (`averageText`, now shared), until M7.2's bars show this month and this year; the bars
+  replace it there, as the wireframe has them.
+- **The Features column** is core's `featureSummary` over every list's items, "VPN: 2 / 3" read "2 of 3 active", with
+  a line saying what the numbers are. A list whose items provide no summary key points to the Features page.
+- **🗑** asks "Delete “Work Related”? Its 12 subscriptions will be removed." ("It has no subscriptions." when empty),
+  then deletes the list, its items and its draft in one transaction (`DraftsRepository.deleteList`, which now says
+  which items it deleted). "Deleted Work Related" stays for 10 s with Undo, which brings back the list and just
+  those items in one transaction (`restoreList`, core's `restored`); items deleted before stay deleted, and the
+  draft doesn't come back. Focus moves to the next card's 🗑 (else the previous one's, else the tile), and Undo puts
+  it on the list's own.
+- **Names:** each View link is "View Work Related" and each 🗑 "Delete Work Related", since every card has one; the
+  card's name is a link to the same page, as P3 has it.
+- **The heading** is P3's and the wireframe's "Subscription Lists"; the tab and the sidebar still say Lists, as the
+  Features page's do (M6.2).
+- **The gallery** keeps its hand-made feature summary and rank counts: they show every rank's colour, which a real
+  list rarely does.
+- **Bundles:** the initial bundle grew by 0.1 kB (490.4 kB), for `DraftsRepository`'s Undo. The page's chunk
+  is 13 kB.
 
 **Resolved (2026-10-27, M6.6)**
 - **The page** (PROJECT-PLAN P12, `/custom`): "Custom subscriptions" with [+ New custom subscription], and a row for

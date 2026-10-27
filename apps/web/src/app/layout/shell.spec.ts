@@ -10,7 +10,7 @@ import { DRAWER_BREAKPOINT, Shell } from './shell';
 /** The sidebar links in wireframe order (PROJECT-PLAN P1), with the page each one opens. */
 const SIDEBAR_LINKS = [
   { name: 'Home', url: '/', heading: 'Home' },
-  { name: 'Lists', url: '/lists', heading: 'Lists' },
+  { name: 'Lists', url: '/lists', heading: 'Subscription Lists' },
   { name: 'Payment', url: '/payment', heading: 'Payment' },
   { name: 'Features', url: '/features', heading: 'Your feature ranks' },
   { name: 'Calendar', url: '/calendar', heading: 'Calendar' },
