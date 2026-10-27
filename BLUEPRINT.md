@@ -2500,6 +2500,33 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
+**Resolved (2026-10-27, M6.2)**
+- **The Features page** (PROJECT-PLAN P9), "Your feature ranks": a card per feature category in `categories.yaml`'s
+  order (core's `rankingSections`), its features in registry order with a parent's children under it (VPN, Password
+  manager), and a row per rank key: a boolean's one row, and a row for each value of an enum or a set and each tier
+  of a number. Decided 2026-10-27: the categories the lists use start open, and all of them while no list has
+  anything in it, and each row says how many list items provide its key ("in 3 subscriptions", `keyUsage` over
+  `MetricsService`'s items). A feature with more than four rows folds ("Storable item types (22)") until one of them
+  is ranked.
+- **Ranking:** a change saves at once, and Not ranked deletes the record. A ranked row has its rank's colour down its
+  left edge, beside the dropdown that names it. A parent's Set all ranks all its children's keys, whatever a filter
+  shows, and Reset all (after asking, with focus on Cancel) clears every profile rank; subscriptions' own ranks stay.
+  Both write once, all or nothing: `RankingsRepository.setMany` on a new `StorageEngine.modifyMany`, one transaction
+  for several records, so lists recount once. Both say what they did to screen readers.
+- **Find a feature** matches as Search's Features box does: core's `nameMatcher`, moved out of `featureSuggestions`
+  (a word that starts with the text, a plural its singular). Text that names a feature keeps all of it, a parent's
+  children too ("vpn" keeps the kill switch), and a child that matches keeps its parent as a heading. Ranked only
+  keeps the ranked keys. While either is on, every card is open with its title as plain text, and a status line
+  counts the features shown.
+- **Names and headings:** each card's toggle is "Streaming 1 of 16 ranked" (a space inside the count's span: Angular
+  drops the whitespace between spans); each dropdown is named alone, "Video quality: 4K (Ultra HD)"; Set all is
+  "Set all in VPN", beside a heading rather than in it. Every feature heading is level 3, a child's too: a parent's
+  own line is a row, so level 4 would skip one (axe's heading-order).
+- **The heading** is P9's "Your feature ranks"; the tab and the sidebar still say Features.
+- **Bundles:** the initial bundle grew by 0.65 kB (488.8 kB). The Features page's chunk is 27 kB: Material's menu,
+  checkbox and form field, which it and Search both use, moved into shared chunks, so Search's own fell from 268 kB
+  to 235 kB.
+
 **Resolved (2026-10-27, M6.1)**
 - **Rank resolution** (`ranking/resolve-rank.ts`): `resolveRank` takes an item's override, then the profile's rank,
   then Not ranked. An override of Not ranked counts as one and hides the profile's rank for that item (the item

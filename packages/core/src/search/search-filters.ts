@@ -6,7 +6,7 @@ import {
   type RankKey,
   type RankKeyOption,
 } from '../ranking/rank-keys';
-import { termForms } from './plurals';
+import { nameMatcher } from './name-match';
 import { searchCatalog, type CatalogQuery, type CatalogSearchContext } from './search-catalog';
 import type { SearchDefaults } from './search-params';
 
@@ -105,22 +105,17 @@ export function featureSuggestions(
       return inCategory.length > 0 ? [{ label: label(category.name), keys: inCategory }] : [];
     });
 
-  const typed = words(text);
-  if (typed === '') {
+  const matcher = nameMatcher(text);
+  if (!matcher) {
     return byCategory(open, (name) => name);
   }
-  const forms = termForms(typed);
-  const names = (option: RankKeyOption) => [
-    option.name,
-    ...option.aliases,
-    option.feature.name,
-    ...(option.feature.aliases ?? []),
-  ];
   const matches = open.filter((option) =>
-    names(option).some((name) => {
-      const spaced = ` ${words(name)}`;
-      return forms.some((form) => spaced.includes(` ${form}`));
-    }),
+    matcher([
+      option.name,
+      ...option.aliases,
+      option.feature.name,
+      ...(option.feature.aliases ?? []),
+    ]),
   );
   if (matches.length === 0) {
     return [];
@@ -147,14 +142,4 @@ export function filterCount(query: CatalogQuery, defaults: SearchDefaults = {}):
       query.soldOnly === true && defaults.soldOnly !== true,
     ].filter(Boolean).length
   );
-}
-
-/** Lower case words without accents or punctuation: "4K (Ultra HD)" is "4k ultra hd", "Ad-free" is "ad free". */
-function words(text: string): string {
-  return text
-    .normalize('NFKD')
-    .replace(/\p{M}/gu, '')
-    .toLowerCase()
-    .replace(/[^\p{L}\p{N}]+/gu, ' ')
-    .trim();
 }

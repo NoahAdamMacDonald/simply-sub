@@ -177,7 +177,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | ID | Task | Done when |
 |---|---|---|
 | M6.1 | core: rank keys, `providedKeys`, `resolveRank` (and `ResolvedItem.effectiveRanks`, §3.4), `rankCounts`, `featureSummary` (§3.2). M2.3 added `rankKeyOptions` and `providesKey`, and M2.4 `providedKeys` (`ranking/rank-keys.ts`); M6.1 added `ranking/resolve-rank.ts` and `ranking/rank-summaries.ts`, with `MetricsService` passing the profile's ranks to `resolveItem` (BLUEPRINT §14) | Tests cover enum and tier ladders and the resolution order |
-| M6.2 | Features page (P9) | P9 criteria met |
+| M6.2 | Features page (P9): a card per feature category with a parent's children under it (core's `rankingSections`), Find a feature (`nameMatcher`, shared with Search's Features box) and Ranked only (`filterRanking`), Set all and Reset all in one write (`RankingsRepository.setMany`), and "in 3 subscriptions" per row (`keyUsage`) (BLUEPRINT §14) | P9 criteria met |
 | M6.3 | `ListDraftService`, with drafts saved in Dexie | A draft survives navigation and a reload |
 | M6.4 | List edit page (P5) | P5 criteria met |
 | M6.5 | Item dialog (P6) | P6 criteria met |
@@ -889,12 +889,17 @@ Your feature ranks               [🔍 Find a feature]   [ ] Ranked only   [Rese
 **Data:** the feature registry (from the catalog), the `rankings` repo, and items (to know which categories you use).
 **Behaviour**
 - Groups follow the registry's feature categories and parent features, and each group can be collapsed. Groups used by your lists start expanded.
+  As built in M6.2: a card per feature category, in `categories.yaml`'s order, with a parent's children under it;
+  the categories your lists use start open, and all of them while no list has anything in it; a feature with more
+  than four rows ("Storable item types (22)") folds until one of them is ranked. The heading is "Your feature ranks".
 - Each rank key has one dropdown: **Not ranked** (the default, muted), Needed, Wanted, Uses, Sometimes, Unused, Unwanted, each with its colour dot. Essential and Critical aren't offered here: they're set per subscription in the item dialog (P6).
 - A ranked row gets a coloured left border.
 - A group row's rank applies to the group only ("I want a password manager"). [Set all ▾] ranks every child in one step. Ranks never cascade on their own (§3.2).
 - Changes save immediately; there's no Save button. Choosing Not ranked deletes the record.
 - Search filters rows by name or alias. "Ranked only" hides unranked rows. [Reset all] (with confirmation) deletes every profile rank.
-- Optional: a muted counter per row, e.g. "in 3 subscriptions".
+  As built in M6.2: text matches as Search's Features box does, and text that names a feature keeps all of it, a
+  parent's children too; while a filter is on, every card is open.
+- A muted counter per row, "in 3 subscriptions": how many list items provide the key (M6.2).
 
 **Acceptance**
 - [ ] Ranks persist, and immediately change the rank counts on P3

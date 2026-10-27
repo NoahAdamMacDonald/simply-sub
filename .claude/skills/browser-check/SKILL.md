@@ -110,6 +110,15 @@ page, each linked to its quotes, with the quotes as a tooltip), and M5.9 the gra
 scroll of its own at 560, 720 and 900 px high; Netflix's ad-plan ratings and its Canadian terms; for a
 US user, Proton's US disputes rating and none of Netflix's Canadian ones; axe with the section open.
 
+`check-features.cjs` (M6.2) checks the Features page on the real catalog: a card per feature category in order, all
+open before anything is listed; the Tab order (Find a feature, Ranked only, the first card's toggle with its count);
+a rank chosen by keyboard (Enter, an arrow, Enter), saved to IndexedDB at once, marked in its colour and still there
+after a reload; Set all in VPN by keyboard (every child Wanted, not VPN itself, and the count it announces); a long
+set folded until Enter opens it; "kill" finding the kill switch under its VPN heading; Ranked only by Space; Reset
+all through its confirmation by keyboard (focus on Cancel); with Mullvad listed, only VPN open, with "in 1
+subscription"; and in both themes at both widths, axe with ranked rows and with no match, and no horizontal scroll
+(an open set's rows at 360 px too), with axe on an open dropdown, the Set all menu and the confirmation at 1280 px.
+
 ## Gotchas
 
 - Every new browser context starts with no settings, so the first-run dialog (M4.2) covers the page until it's

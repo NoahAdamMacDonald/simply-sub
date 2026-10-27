@@ -81,6 +81,44 @@ describe('RankingsRepository', () => {
     });
   });
 
+  it('ranks and clears several keys in one write (M6.2)', async () => {
+    await rankings.set('streaming.ad-free', 'wanted');
+    await rankings.set('vpn.included', 'needed');
+    await until(() => rankings.ranks().size === 2);
+
+    await rankings.setMany(
+      new Map([
+        ['vpn.included', undefined],
+        ['vpn.kill-switch', 'unused'],
+        ['streaming.ad-free', 'needed'],
+        // Already not ranked: nothing to write.
+        ['vpn.multi-hop', undefined],
+      ]),
+    );
+    await until(() => rankings.ranks().has('vpn.kill-switch'));
+    expect([...rankings.ranks()]).toEqual([
+      ['streaming.ad-free', 'needed'],
+      ['vpn.kill-switch', 'unused'],
+    ]);
+    expect(await storedRows(storage.indexedDB, 'rankings')).toEqual([
+      expect.objectContaining({ rankKey: 'streaming.ad-free', rank: 'needed' }),
+      expect.objectContaining({ rankKey: 'vpn.included', deletedAt: expect.any(String) }),
+      expect.objectContaining({ rankKey: 'vpn.kill-switch', rank: 'unused' }),
+    ]);
+  });
+
+  it('writes none of several ranks when one is invalid', async () => {
+    await expect(
+      rankings.setMany(
+        new Map([
+          ['vpn.included', 'needed'],
+          ['streaming.ad-free', 'essential' as never],
+        ]),
+      ),
+    ).rejects.toThrow('Invalid rankings record streaming.ad-free');
+    expect(await storedRows(storage.indexedDB, 'rankings')).toEqual([]);
+  });
+
   it('refuses a rank that only an item can have', async () => {
     await expect(rankings.set('streaming.ad-free', 'essential' as never)).rejects.toThrow(
       'Invalid rankings record streaming.ad-free: rank: invalid_value',
