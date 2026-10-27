@@ -2447,6 +2447,28 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
+**Resolved (2026-10-26, M1.11)**
+- **Disney+'s and Crave's bundles, and the providers they need:** TSN, RDS and ICI TOU.TV (Canada), Hulu and ESPN
+  (the US), each from its own pages: plans, prices, features, cancel page and, for the ones sold in one country,
+  `availableIn` with its words quoted. 20 new bundle files: Crave's ten with Disney+, TSN, RDS and EXTRA but
+  one, Disney+'s Canadian five with TSN and Crave, TSN's with RDS, and Disney+'s US six with Hulu and ESPN. A
+  bundle's `soldBy` is the provider whose page sells it at that price: TSN and RDS sell some Crave bundles
+  that crave.ca lists without a price.
+- **Left out, and why:** HBO Max and NFL+ (and Disney+'s four US bundles with them): hbomax.com answers this
+  machine, in Canada, with Access Denied, and nfl.com/plus redirects to DAZN's international NFL Game Pass, so
+  their US prices can't be read here. Crave Standard With Ads, TSN and RDS: Crave's FAQ lists it, but no page
+  gives its price. Disney+'s "Legacy" bundle: it can't be bought any more. Hulu's Live TV plans (suites with
+  Disney+ and ESPN) and add-ons wait for a task of their own; bundles have no add-ons in the schema, so Disney+'s
+  Extra Member on a bundle and ESPN Unlimited on the HBO Max bundle aren't here either.
+- **ESPN has no `availableIn`:** plus.espn.com, which says who can subscribe, is Access Denied from here, and the
+  support centre names no countries. Outside the US it's unknown, "No price for Canada yet", which Sold in hides.
+- **Other countries, surveyed on Disney+'s price article:** no bundles in the UK, Ireland, France, Germany, Italy,
+  Spain, Australia, New Zealand, Japan, Hong Kong, Singapore, Brazil, Mexico or Argentina. South Korea sells
+  Disney+ with TVING (18,000 KRW a month with Disney+ Standard and TVING Standard), and with TVING and Wavve:
+  those need TVING, Wavve and Korean prices, so they're a follow-up.
+- **Bundle prices follow the country, not the language:** Disney+'s Canadian article in English and French, and
+  Crave's subscribe page in each, list the same bundles at the same prices.
+
 **Resolved (2026-10-26, M5.6)**
 - **"Sold in <country>" filter** (below Native pricing only, named after Settings' country): core's
   `CatalogQuery.soldOnly` keeps only plans whose availability is `offered` there. It hides the plans with only a

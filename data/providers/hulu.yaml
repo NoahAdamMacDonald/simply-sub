@@ -1,0 +1,56 @@
+id: hulu
+name: Hulu
+website: https://www.hulu.com
+category: streaming
+spendCategory: streaming
+billingCurrency: { US: USD }
+# help.hulu.com/article/hulu-how-much-does-hulu-cost, read 2026-10-26: "To subscribe to Hulu, you'll need: To be
+# located within the U.S."
+availableIn: [US]
+cancelUrl: https://help.hulu.com/article/hulu-cancel-hulu-subscription
+sources: { pricing: https://help.hulu.com/article/hulu-how-much-does-hulu-cost }
+
+# Read 2026-10-26 on the plans and prices article, for new subscriptions from September 23, 2026: the standalone plans,
+# both up to 4K. The article doesn't number the streams or downloads. Not here yet: the Hulu + Live TV plans (which
+# include Disney+ and ESPN, so they'd be suites) and the add-ons. The Disney+ bundles are in data/bundles.
+plans:
+  - id: hulu.with-ads
+    name: With Ads
+    link: https://help.hulu.com/article/hulu-how-much-does-hulu-cost
+    features:
+      video.quality: 4k
+    prices:
+      - region: US
+        currency: USD
+        amount: 12.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://help.hulu.com/article/hulu-how-much-does-hulu-cost
+      - region: US
+        currency: USD
+        amount: 124.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://help.hulu.com/article/hulu-how-much-does-hulu-cost
+
+  - id: hulu.premium
+    name: Premium
+    link: https://help.hulu.com/article/hulu-how-much-does-hulu-cost
+    features:
+      video.quality: 4k
+      streaming.ad-free: true
+    perks: [Download select shows and movies, Hulu Watch Party]
+    notes: A few shows play with ads before and after the video.
+    prices:
+      - region: US
+        currency: USD
+        amount: 21.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://help.hulu.com/article/hulu-how-much-does-hulu-cost

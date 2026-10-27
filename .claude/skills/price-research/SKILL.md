@@ -112,6 +112,15 @@ node .claude/skills/price-research/read-page.cjs "$DEPS" "$OUT" https://proton.m
 
 ## Gotchas
 
+- **Some US sites block this machine (in Canada):** hbomax.com and plus.espn.com answer Access Denied, and
+  nfl.com/plus redirects to DAZN's international NFL Game Pass. Their US prices can't be read here: report them,
+  and read what their help centres show (support.espn.com does). help.hulu.com works.
+- **Bot checks:** support.nfl.com and assistance.radio-canada.ca show a Cloudflare check the driver doesn't pass.
+  Use the provider's other official pages (ICI TOU.TV's subscription terms have its cancel steps, and its pages'
+  footer says where it's sold).
+- **Plan tabs** (TSN, RDS): Monthly, 3 Months, Annual and Bundles are tabs (`click:3 Months`); a plan missing
+  from a tab isn't sold for that period. Their terms renew every period except in Quebec, monthly there: a note.
+
 - **Element-screenshot overlap:** sticky headers and skip links can overlap an element screenshot. Trust the
   full-page snap.
 - **Tab names:** Proton's tab buttons have accessible names that don't match their text. `tab:` matches the

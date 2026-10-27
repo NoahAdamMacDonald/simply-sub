@@ -1,0 +1,53 @@
+id: rds
+name: RDS
+aliases: [réseau des sports, rds direct]
+website: https://www.rds.ca
+category: streaming
+spendCategory: streaming
+billingCurrency: { CA: CAD }
+# rds.ca/aide/faq/#hors-canada-abonnement, read 2026-10-26: "En raison de droits de diffusion stricts, RDS n'est pas
+# disponible pour abonnement ou visionnement à l'extérieur du Canada."
+availableIn: [CA]
+# The FAQ's steps for a direct subscription: sign in, then cancel from the account's subscriptions.
+cancelUrl: https://www.rds.ca/aide/faq/#annuler-abonnement
+sources: { pricing: https://www.rds.ca/abonnement/ }
+notes: >-
+  Plans renew for the period chosen, except in Quebec, where they renew monthly. Select Montreal Canadiens
+  regular-season games only, with regional blackouts.
+
+# Read 2026-10-26 on rds.ca/abonnement (Mensuel, 3 mois and Annuel tabs): one plan, French-language sports. Two
+# streams at a time (rds.ca/aide/faq/#plusieurs-appareils). RDS's bundles with Crave and TSN are in data/bundles.
+plans:
+  - id: rds.standard
+    name: RDS
+    link: https://www.rds.ca/abonnement/
+    features:
+      streaming.live: [tv-channels, sports]
+      streaming.concurrent-streams: 2
+      streaming.french-content: true
+    perks: ['Over 4,000 hours of live sport a year']
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 24.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://www.rds.ca/abonnement/
+      - region: CA
+        currency: CAD
+        amount: 64.99
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://www.rds.ca/abonnement/
+      - region: CA
+        currency: CAD
+        amount: 199.90
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://www.rds.ca/abonnement/
