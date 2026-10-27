@@ -5,9 +5,10 @@
 // UK user's fallback price, with Sold in and its Settings default (M5.6), and the filter panel (M5.3): its Tab order,
 // each filter by keyboard, the URL after each one (typing replaces its entry, a run of price changes makes one,
 // anything else adds one), a reload, Back and Forward, a URL with values the catalog doesn't have, no scroll on a
-// filter change, and under 960 px the drawer (focus, its trap, Escape, Show results, Back), and a price's Add to
-// list menu by keyboard (M5.4), with axe. GET /fx is answered with fixed rates (1 EUR ≈ CA$1.5694), so Amazon.ca's
-// Mullvad cards are cheaper in Alberta.
+// filter change, and under 960 px the drawer (focus, its trap, Escape, Show results, Back), a price's Add to list
+// menu by keyboard (M5.4), and M5.7's pinned bar and panel, chips that stay put, the plans' order, a lone plan's
+// chip and the details' slide and foot, with axe. GET /fx is answered with fixed rates (1 EUR ≈ CA$1.5694), so
+// Amazon.ca's Mullvad cards are cheaper in Alberta.
 // Usage: node check-search.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
 const fs = require('fs');
 const path = require('path');
@@ -67,8 +68,11 @@ async function until(what, condition, timeout = 10000) {
   throw new Error(`Timed out waiting for ${what}`);
 }
 
-async function newContext(browser, { locale, colorScheme = 'light', viewport = WIDE }) {
-  const context = await browser.newContext({ locale, colorScheme, viewport });
+async function newContext(
+  browser,
+  { locale, colorScheme = 'light', viewport = WIDE, reducedMotion = 'no-preference' },
+) {
+  const context = await browser.newContext({ locale, colorScheme, viewport, reducedMotion });
   await context.route('**/api/v1/fx?**', (route) =>
     route.fulfill({ json: fxBody(new URL(route.request().url()).searchParams.get('base')) }),
   );
@@ -318,8 +322,8 @@ async function addItem(page, planId) {
     );
     await page.screenshot({ path: path.join(outDir, 'ca-light-1280.png'), fullPage: true });
 
-    // Keyboard: the box, the sort, then the filter panel (M5.3, below), then the first card's links, its chips (one
-    // tab stop) and its details button.
+    // Keyboard: the box, the sort, then the filter panel (M5.3, below), then the first card's chips (one tab stop,
+    // right below its names since M5.7), its links, its prices and its details button.
     await page.getByRole('searchbox').focus();
     await page.keyboard.press('Tab');
     check(
@@ -330,18 +334,12 @@ async function addItem(page, planId) {
     const firstName = all[0];
     const first = card(page, firstName);
     const firstPlan = (await first.locator('.plan-name').textContent()).trim();
-    const stops = [];
-    for (let i = 0; i < 8; i++) {
-      await page.keyboard.press('Tab');
-      const now = await focused(page);
-      stops.push(now);
-      if (now.tag === 'input' && now.type === 'radio') break;
-    }
-    const radio = stops.at(-1);
+    await page.keyboard.press('Tab');
+    const radio = await focused(page);
     check(
-      `Tab reaches ${firstName}'s links, then its checked chip`,
-      stops[0].tag === 'a' && radio.type === 'radio',
-      stops.map((stop) => `${stop.tag}:${stop.name ?? stop.value}`).join(' → '),
+      `Tab reaches ${firstName}'s checked chip first`,
+      radio.tag === 'input' && radio.type === 'radio',
+      `${radio.tag}:${radio.value}`,
     );
     await page.keyboard.press('ArrowRight');
     await until(
@@ -353,25 +351,61 @@ async function addItem(page, planId) {
       true,
       `${firstPlan} → ${(await first.locator('.plan-name').textContent()).trim()}`,
     );
-    await page.keyboard.press('Tab');
-    const expand = await focused(page);
+    const stops = [];
+    for (let i = 0; i < 10; i++) {
+      await page.keyboard.press('Tab');
+      const now = await focused(page);
+      stops.push(now);
+      if (now.name?.startsWith('Details: ')) break;
+    }
     check(
-      'Tab leaves the chips for the details button',
-      expand.name?.startsWith('Details: '),
-      expand.name,
+      'Tab leaves the chips for the plan’s links, its prices, then the details button',
+      stops[0].tag === 'a' &&
+        stops.some((stop) => /add to a list/.test(stop.name)) &&
+        stops.at(-1).name?.startsWith('Details: '),
+      stops.map((stop) => `${stop.tag}:${stop.name ?? stop.value}`).join(' → '),
     );
+    // The details' classes as they come and go: `moving` while they slide (M5.7).
+    await first.evaluate((element) => {
+      window.ssSeen = [];
+      new MutationObserver((records) => {
+        for (const record of records) {
+          for (const node of [record.target, ...record.addedNodes]) {
+            if (node instanceof Element && node.classList.contains('details-body')) {
+              window.ssSeen.push(node.className);
+            }
+          }
+        }
+      }).observe(element, { subtree: true, childList: true, attributes: true });
+    });
     await page.keyboard.press('Enter');
     await until('the details', () => first.locator('ss-plan-details').isVisible());
+    await sleep(400);
     check(
-      'Enter expands the card',
-      (await first.locator('button.expand').getAttribute('aria-expanded')) === 'true',
+      'Enter expands the card, sliding the details open',
+      (await first.locator('button.expand').getAttribute('aria-expanded')) === 'true' &&
+        (await page.evaluate(() => window.ssSeen.some((name) => name.includes('moving')))) &&
+        !(await first
+          .locator('.details-body')
+          .evaluate((body) => body.className.includes('moving'))),
+      await page.evaluate(() => window.ssSeen.join(' | ')),
     );
+    await page.evaluate(() => (window.ssSeen = []));
     await page.keyboard.press('Enter');
+    check(
+      'the details button says closed at once, while they slide shut',
+      (await first.locator('button.expand').getAttribute('aria-expanded')) === 'false' &&
+        (await first.locator('ss-plan-details').count()) === 1,
+    );
     await until(
       'the details to close',
       async () => (await first.locator('ss-plan-details').count()) === 0,
     );
-    check('Enter again collapses it', true);
+    check(
+      'Enter again collapses it, sliding them shut',
+      await page.evaluate(() => window.ssSeen.some((name) => name.includes('moving'))),
+      await page.evaluate(() => window.ssSeen.join(' | ')),
+    );
 
     // Typing, with its pause.
     await type(page, 'netflix 4k');
@@ -469,7 +503,8 @@ async function addItem(page, planId) {
       /^checkbox "Native pricing only"/,
       /^checkbox "Sold in Canada"/,
       /^button "Clear all" \[disabled\]/,
-      /^'?link /,
+      // The first card's chips, right below its names (M5.7).
+      /^radio "Proton Free" \[checked\]/,
     ];
     check(
       'Tab goes Sort → the price’s two thumbs → Category → Features → Activity → Native → Sold in → Clear all → the results',
@@ -689,12 +724,13 @@ async function addItem(page, planId) {
       'under 960 px a Filters button replaces the panel',
       (await opener.isVisible()) && (await page.locator('section.panel').count()) === 0,
     );
+    // One pinned row (M5.7): the box, then Filters; Sort is in the drawer.
     await page.getByRole('searchbox').focus();
     await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
     check(
-      'Tab goes from Sort to Filters',
-      /^button "Filters"/.test(await stop(page)),
+      'Tab goes from the search box to Filters',
+      /^button "Filters"/.test(await stop(page)) &&
+        (await page.locator('.pinned .sort').count()) === 0,
       await stop(page),
     );
     await page.keyboard.press('Enter');
@@ -709,6 +745,12 @@ async function addItem(page, planId) {
         (await page.locator('ss-root').getAttribute('aria-hidden')) === 'true' &&
         firstStop === 'button "Close filters"',
       firstStop,
+    );
+    await page.keyboard.press('Tab');
+    check(
+      'Sort is the drawer’s first control under 960 px',
+      /^combobox "Sort"/.test(await stop(page)),
+      await stop(page),
     );
     let trapped = true;
     let onList = false;
@@ -743,9 +785,8 @@ async function addItem(page, planId) {
     await drawer.waitFor({ state: 'detached' });
     await until('focus on Filters', async () => /^button "Filters/.test(await stop(page)));
     check(
-      'Escape closes the drawer and puts focus back on Filters, which counts one filter',
-      (await stop(page)).startsWith('button "Filters, 1 applied"') &&
-        (await shown(opener)) === 'Filters · 1',
+      'Escape closes the drawer and puts focus back on Filters, whose badge counts one filter',
+      (await stop(page)).startsWith('button "Filters, 1 applied"') && (await shown(opener)) === '1',
       `${await stop(page)} / ${await shown(opener)}`,
     );
 
@@ -838,6 +879,187 @@ async function addItem(page, planId) {
       "a bundle's price opens a new list's editor with the bundle",
       search(page) === '?addBundle=bundle.disney-crave-ads&interval=month',
       page.url(),
+    );
+    await context.close();
+  }
+
+  // ── M5.7: the pinned bar, chips that stay put, the plans' order, a lone plan's chip, the details' foot ─────
+  for (const viewport of [WIDE, NARROW]) {
+    const label = `${viewport.width}`;
+    const context = await newContext(browser, { locale: 'en-CA', viewport });
+    const page = await newPage(context, `CA M5.7 ${label}`);
+    await openSearch(page, 'Alberta');
+
+    const tsn = await chips(page, 'TSN');
+    check(
+      `${label}: TSN lists Standard before Premium, though Premium's yearly price is less a month`,
+      tsn.join() === 'Standard,Premium' &&
+        (await card(page, 'TSN').locator('.plan-name').textContent()).trim() === 'Standard',
+      tsn.join(', '),
+    );
+    const lone = await card(page, 'RDS')
+      .locator('.plans')
+      .evaluate((element) => ({
+        text: element.textContent.replace('check', '').trim(),
+        hidden: element.getAttribute('aria-hidden'),
+        inputs: element.querySelectorAll('input').length,
+      }));
+    check(
+      `${label}: a lone plan shows its chip, which isn't a control`,
+      lone.text === 'RDS' && lone.hidden === 'true' && lone.inputs === 0,
+      JSON.stringify(lone),
+    );
+
+    // Every chip's place in its card, before and after picking other plans (Proton's 1 or 2 prices, TSN's 1 or 3).
+    const places = (name) =>
+      card(page, name)
+        .locator('label.chip')
+        .evaluateAll((labels) =>
+          labels.map((chip) => {
+            const box = chip.getBoundingClientRect();
+            const home = chip.closest('ss-sub-card').getBoundingClientRect();
+            return [box.left - home.left, box.top - home.top, box.width].map(Math.round).join();
+          }),
+        );
+    const moved = [];
+    for (const [name, plans] of [
+      ['Proton', ['Proton Duo', 'Mail Plus', 'Proton Family', 'VPN Plus', 'Proton Free']],
+      ['TSN', ['Premium', 'Standard']],
+    ]) {
+      const before = (await places(name)).join(' ');
+      for (const plan of plans) {
+        await card(page, name).locator('label.chip', { hasText: plan }).click();
+        await until(
+          plan,
+          async () => (await card(page, name).locator('.plan-name').textContent()).trim() === plan,
+        );
+        if ((await places(name)).join(' ') !== before) moved.push(`${name} ${plan}`);
+      }
+    }
+    check(`${label}: picking other plans moves no chip`, moved.length === 0, moved.join(', '));
+
+    // Scrolled well down: the bar stays at the top (under the top bar under 960 px), the panel below it from 960 px,
+    // and the results pass under both without painting over them.
+    await page.evaluate(() => window.scrollTo(0, 900));
+    await sleep(400);
+    const pinned = await page.evaluate(() => {
+      const bar = document.querySelector('.pinned').getBoundingClientRect();
+      const top = document.querySelector('.top-bar')?.getBoundingClientRect();
+      const panel = document.querySelector('section.panel')?.getBoundingClientRect();
+      const across = (rect, inside) =>
+        [0.1, 0.3, 0.5, 0.7, 0.9].every(
+          (at) =>
+            document
+              .elementFromPoint(rect.left + rect.width * at, rect.top + rect.height / 2)
+              ?.closest(inside) !== null,
+        );
+      return {
+        scrollY: Math.round(window.scrollY),
+        barTop: Math.round(bar.top),
+        barBottom: Math.round(bar.bottom),
+        topBottom: top ? Math.round(top.bottom) : 0,
+        panelTop: panel ? Math.round(panel.top) : undefined,
+        barOnTop: across(bar, '.pinned'),
+        topBarOnTop: top ? across(top, '.top-bar') : true,
+      };
+    });
+    check(
+      `${label}: scrolled down, the search bar stays pinned, and nothing paints over it or the top bar`,
+      pinned.scrollY >= 900 &&
+        Math.abs(pinned.barTop - pinned.topBottom) <= 1 &&
+        pinned.barOnTop &&
+        pinned.topBarOnTop &&
+        (viewport === NARROW || Math.abs(pinned.panelTop - pinned.barBottom) <= 1),
+      JSON.stringify(pinned),
+    );
+    if (viewport === NARROW) {
+      const bar = await page.locator('.pinned .bar').evaluate((element) => ({
+        height: Math.round(element.getBoundingClientRect().height),
+        sort: element.querySelector('.sort') !== null,
+        filters: element.querySelector('.open-filters')?.getAttribute('aria-label'),
+      }));
+      check(
+        `${label}: the pinned bar is one row, the box and Filters`,
+        bar.height <= 72 && !bar.sort && bar.filters === 'Filters',
+        JSON.stringify(bar),
+      );
+    }
+    await page.screenshot({ path: path.join(outDir, `pinned-${label}.png`) });
+    await axeCheck(page, `light ${label}, scrolled with the bar pinned`);
+
+    // Opening Proton's details keeps the card in view; Hide details, from their foot with the card's top scrolled
+    // past, closes them, puts focus on the details button, and brings the card back below the bar.
+    const proton = card(page, 'Proton');
+    await proton.locator('label.chip', { hasText: 'Proton Unlimited' }).click();
+    await proton.locator('button.expand').click();
+    await proton.locator('ss-plan-details').waitFor();
+    await sleep(900);
+    const where = () =>
+      proton.evaluate((element) => {
+        const box = element.getBoundingClientRect();
+        return {
+          top: Math.round(box.top),
+          bottom: Math.round(box.bottom),
+          barBottom: Math.round(document.querySelector('.pinned').getBoundingClientRect().bottom),
+          window: window.innerHeight,
+          focus: document.activeElement?.getAttribute('aria-label'),
+        };
+      });
+    const opened = await where();
+    check(
+      `${label}: open details keep the card in view below the bar`,
+      opened.top >= opened.barBottom &&
+        (opened.bottom <= opened.window || opened.top <= opened.barBottom + 9),
+      JSON.stringify(opened),
+    );
+    const hide = proton.locator('button.collapse');
+    await hide.evaluate((button) =>
+      window.scrollBy(
+        0,
+        button.getBoundingClientRect().top -
+          document.querySelector('.pinned').getBoundingClientRect().bottom -
+          40,
+      ),
+    );
+    await sleep(300);
+    const scrolledPast = await where();
+    const past = scrolledPast.top < scrolledPast.barBottom;
+    await hide.focus();
+    await page.keyboard.press('Enter');
+    await until(
+      'the details to close',
+      async () => (await proton.locator('ss-plan-details').count()) === 0,
+    );
+    await sleep(900);
+    const closed = await where();
+    check(
+      `${label}: Hide details closes them, focus goes back to the details button, and the card comes back into view`,
+      past &&
+        closed.focus === 'Details: Proton Unlimited' &&
+        closed.top >= closed.barBottom &&
+        closed.bottom <= closed.window,
+      JSON.stringify({ past, ...closed }),
+    );
+    await context.close();
+  }
+
+  // With reduced motion the details appear and go at once.
+  {
+    const context = await newContext(browser, { locale: 'en-CA', reducedMotion: 'reduce' });
+    const page = await newPage(context, 'CA reduced motion');
+    await openSearch(page, 'Alberta');
+    const netflix = card(page, 'Netflix');
+    await netflix.locator('button.expand').click();
+    await netflix.locator('ss-plan-details').waitFor();
+    const running = await netflix
+      .locator('.details-body')
+      .evaluate((body) => body.getAnimations().length);
+    await netflix.locator('button.expand').click();
+    await sleep(50);
+    check(
+      'with reduced motion the details open and close at once',
+      running === 0 && (await netflix.locator('ss-plan-details').count()) === 0,
+      `${running} animations`,
     );
     await context.close();
   }

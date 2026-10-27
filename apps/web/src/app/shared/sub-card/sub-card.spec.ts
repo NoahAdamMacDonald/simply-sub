@@ -285,14 +285,81 @@ describe('SubCard', () => {
 
     expect(button?.getAttribute('aria-label')).toBe('Details: Netflix Standard with ads');
     expect(button?.getAttribute('aria-expanded')).toBe('false');
-    expect(details?.hidden).toBe(true);
+    expect(details?.children.length).toBe(0);
     expect(query('ss-plan-details')).toBeNull();
 
     button?.click();
     await fixture.whenStable();
 
     expect(button?.getAttribute('aria-expanded')).toBe('true');
-    expect(details?.hidden).toBe(false);
-    expect(query('ss-plan-details')).not.toBeNull();
+    expect(details?.querySelector('ss-plan-details')).not.toBeNull();
+  });
+
+  describe('the open details (M5.7)', () => {
+    let scrolled: ReturnType<typeof vi.fn<HTMLElement['scrollIntoView']>>;
+
+    beforeEach(() => {
+      // The test DOM has no scrolling.
+      scrolled = vi.fn<HTMLElement['scrollIntoView']>();
+      HTMLElement.prototype.scrollIntoView = scrolled;
+    });
+
+    afterEach(() => {
+      delete (HTMLElement.prototype as Partial<HTMLElement>).scrollIntoView;
+    });
+
+    it('close from their foot, and focus goes back to the details button', async () => {
+      await show(resultFor('netflix'));
+      query<HTMLButtonElement>('button.expand')?.click();
+      await fixture.whenStable();
+      const hide = query<HTMLButtonElement>('button.collapse');
+
+      expect(hide?.textContent?.replace('expand_less', '').trim()).toBe(
+        'Hide details: Netflix Standard with ads',
+      );
+      hide?.click();
+      await fixture.whenStable();
+
+      expect(query('ss-plan-details')).toBeNull();
+      expect(query<HTMLButtonElement>('button.expand')?.getAttribute('aria-expanded')).toBe(
+        'false',
+      );
+      expect(document.activeElement).toBe(query('button.expand'));
+    });
+
+    it('keep the card on screen as they open and close', async () => {
+      // Each scroll waits for its slide, which the test DOM doesn't run.
+      const slid = async () => {
+        await fixture.whenStable();
+        await new Promise((resolve) => setTimeout(resolve));
+        await fixture.whenStable();
+      };
+      await show(resultFor('netflix'));
+      query<HTMLButtonElement>('button.expand')?.click();
+      await slid();
+      expect(scrolled).toHaveBeenCalledWith({ block: 'nearest', behavior: 'smooth' });
+
+      query<HTMLButtonElement>('button.collapse')?.click();
+      await slid();
+      expect(query('ss-plan-details')).toBeNull();
+      expect(scrolled).toHaveBeenCalledTimes(2);
+      expect(scrolled.mock.contexts.every((card) => card === fixture.nativeElement)).toBe(true);
+    });
+  });
+
+  it('puts the plan chips right below the names, before the links and prices', async () => {
+    await show(resultFor('netflix'));
+    const parts = Array.from(query('.head')?.children ?? []).map((child) => child.classList[0]);
+
+    expect(parts).toEqual(['icon', 'title', 'plans', 'links', 'prices']);
+  });
+
+  it('shows a lone plan’s chip too, which isn’t a control', async () => {
+    await show(resultFor('mullvad'));
+    const plans = query('.plans');
+
+    expect(plans?.textContent?.replace('check', '').trim()).toBe('Mullvad VPN');
+    expect(plans?.getAttribute('aria-hidden')).toBe('true');
+    expect(plans?.querySelector('input')).toBeNull();
   });
 });

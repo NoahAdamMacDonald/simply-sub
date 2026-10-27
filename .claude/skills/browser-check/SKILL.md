@@ -92,7 +92,13 @@ Show results, Back), with axe on the open suggestions at 1280 px and the open dr
 added a price's Add to list menu: the price as a menu button ("…, add to a list"), Enter opening it with a list
 (written to IndexedDB) and its count, then New list…, Escape back on the price, a list opening its editor with the
 plan and period in the URL and the placeholder's text, and a bundle's price with New list…, with axe on the open menu
-in both themes at both widths.
+in both themes at both widths. M5.7 added, at both widths: TSN's plans in order (Standard first), a lone plan's chip
+(RDS), every chip's place in its card unchanged across plan switches (Proton, TSN), the pinned bar and panel after
+scrolling 900 px (`elementFromPoint` across the bar and the top bar, so nothing paints over them), the one-row bar
+under 960 px with Sort first in the drawer, the details' slide (their `moving` class) and the details button saying
+closed at once, Hide details from the foot of a long card (focus back on the details button, the card back in
+view), and with `reducedMotion: 'reduce'` no animation; with axe while scrolled. The first card's Tab order is now
+its chips, then its links, prices and details button.
 
 ## Gotchas
 

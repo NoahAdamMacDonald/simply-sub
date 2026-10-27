@@ -1885,6 +1885,7 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
     --budget-label: #111111;                 /* the label on every fill and on the track, in both themes (M4.5) */
     --ss-danger: var(--rank-unwanted-text);  --ss-on-danger: var(--ss-on-accent);  /* ss-confirm's danger button */
     --ss-dot-ring: oklch(from var(--ss-text) l c h / 0.3);  /* a faint ring that keeps pale dots visible */
+    --ss-state-tint: oklch(from var(--ss-text) l c h / 0.05);  --ss-state-hover: oklch(from var(--ss-text) l c h / 0.1);  /* a plain control drawn as a bar, at rest and hovered: a card's Hide details (M5.7) */
     --ss-icon-tile: #FFFFFF;                 /* behind logos in both themes: sites draw icons for white (M5.2) */
   }
   [data-theme='dark'] {
@@ -2446,6 +2447,37 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-27, M5.7)**
+- **Nothing paints over the top bar:** Material raises its buttons' labels and icons (`z-index: 1`, as high as the
+  sticky top bar), so under 960 px Search's Filters label drew over the bar as it scrolled beneath. `<main>` is now
+  a stacking context of its own (`isolation: isolate`), below the bar, and Search's results are one too, below its
+  pinned bar.
+- **The search bar and the filter panel stay pinned** while only the results scroll, with the window still the
+  scroller (phones hide their address bar, the router restores positions). The bar is outside the results' grid,
+  since a sticky grid item can't leave its row, so it spans the panel's column too; the panel sticks below it
+  (the page measures the bar, `--ss-pinned-height`) and scrolls on its own when it's taller than the window
+  (`cdkScrollable`, so its Features and Category popups follow it). Under 960 px the bar sticks below the top bar
+  (`--ss-top-bar-height`, set by the shell) and is one row: the box ("Search services") and a Filters icon button
+  with a badge, named "Filters, 2 applied". Sort moves to the top of the drawer, since three rows would pin about a
+  third of a phone screen.
+- **Plan chips stay put when switching plans:** a chip is as wide checked as not (unchecked, the check's room is
+  padding), the chips sit right below the names, above everything that changes with the plan, and from 600 px the
+  card keeps room for its plans' longest list of prices (`--price-rows`). The chips come before the links and prices
+  in the Tab order too: pick a plan, then act on it. A card with one plan (RDS, Mullvad) shows its chip as well, as
+  text (`aria-hidden`, since its name is read above, and no extra tab stop).
+- **Plans are ordered by their shortest billing period's price per month** (`searchProviders`, so GET /providers
+  too), then by their lowest monthly equivalent. TSN Premium's $249.99 a year is less per month than Standard's
+  $24.99 a month, which put Premium first and showed it; now Standard comes first, as the prices read. Provider
+  sorts still compare the shown plan's lowest monthly equivalent (P8).
+- **The expanded section slides open and shut:** its grid row animates from 0fr to 1fr and fades, with the
+  browser's Web Animations; Angular's `animate.enter` and `animate.leave` would have added 8.7 kB to the initial
+  bundle (488 to 497 kB of the 500 kB warning budget). Nothing moves with reduced motion. The details button says
+  closed at once while the section slides shut. "Hide details", a tinted bar at its foot, closes it too and puts
+  focus back on the details button. Once it has opened or closed, the card scrolls into view if part of it went off
+  screen (`scrollIntoView` with `block: 'nearest'`, below the pinned bar by `scroll-margin`): as much of the open
+  section as fits, or the top of a card closed from its foot.
+- **The initial bundle didn't change** (487.9 kB). The Search chunk grew by 5 kB (260.6 kB).
 
 **Resolved (2026-10-26, M5.4)**
 - **A price opens Add to list** (PROJECT-PLAN P7, flows F1 and F4): each Search card has one

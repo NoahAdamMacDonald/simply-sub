@@ -42,6 +42,11 @@
   overflow: visible;
 }
 
+// What pages pin below the top bar (Search's bar, M5.7) sticks this far down.
+.narrow {
+  --ss-top-bar-height: 56px;
+}
+
 .top-bar {
   position: sticky;
   top: 0;
@@ -49,7 +54,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  height: 56px;
+  height: var(--ss-top-bar-height);
   padding: 0 16px 0 4px;
   border-bottom: 1px solid var(--ss-divider);
   background-color: var(--ss-sidebar-bg);
@@ -63,7 +68,10 @@
   );
 }
 
+// A stacking context of its own, so nothing on a page paints over the top bar: Material raises its buttons' labels
+// and icons (z-index 1), which drew Search's Filters label over the bar as it scrolled under it.
 main {
+  isolation: isolate;
   padding: 24px;
 
   // Only the skip link focuses <main>; it isn't a control, so it needs no focus ring.

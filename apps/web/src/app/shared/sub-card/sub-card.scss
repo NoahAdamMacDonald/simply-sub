@@ -15,21 +15,27 @@
   background-color: var(--ss-card-bg);
 }
 
-// Narrow: the icon and names, then the links, then the prices. Wide: one row, prices on the right.
+// Narrow: the icon and names, the plan chips, then the links, then the prices. Wide: one row, prices on the right, and
+// the chips under it. Switching plans moves no chip (M5.7): narrow, nothing above them changes with the plan; wide,
+// the row keeps room for the most prices any of the card's plans has (--price-rows), and the chips have the whole
+// width, whatever width the prices take.
 .head {
   display: grid;
   grid-template-areas:
     'icon title'
+    'plans plans'
     'links links'
     'prices prices';
   grid-template-columns: 48px minmax(0, 1fr);
-  gap: 8px 16px;
+  gap: 12px 16px;
   align-items: start;
 }
 
 @container (min-width: 600px) {
   .head {
-    grid-template-areas: 'icon title links prices';
+    grid-template-areas:
+      'icon title links prices'
+      'plans plans plans plans';
     grid-template-columns: 48px minmax(0, 1fr) auto auto;
   }
 
@@ -37,8 +43,10 @@
     flex-direction: column;
   }
 
+  // Room for the card's longest list of prices: each is 1.5rem high with 4px of padding, and 2px apart.
   .prices {
     align-items: flex-end;
+    min-height: calc(var(--price-rows) * (1.5rem + 4px) + (var(--price-rows) - 1) * 2px);
     text-align: end;
   }
 }
@@ -134,6 +142,7 @@ a {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  grid-area: plans;
   min-width: 0;
   margin: 0;
   padding: 0;
@@ -144,12 +153,65 @@ a {
   @include choice-chip.chip;
 }
 
+// A lone plan's chip is just its name: there's nothing to pick.
+.chip.selected {
+  cursor: default;
+}
+
 .expand {
   align-self: center;
   color: var(--ss-text);
 }
 
-.details {
-  padding: 12px 0 16px;
+// The details slide between no height and all of it: the card animates this grid row from 0fr to 1fr (SubCard's
+// slide), and clips the content only while it moves, so focus rings aren't.
+.details-body {
+  display: grid;
+  grid-template-rows: 1fr;
   border-top: 1px solid var(--ss-divider);
+}
+
+.details-clip {
+  min-height: 0;
+}
+
+.moving .details-clip {
+  overflow: hidden;
+}
+
+// Padding inside the clipped part, which can shrink to nothing.
+ss-plan-details {
+  padding-top: 12px;
+}
+
+// Closed, the details are empty: no gap in the card for them.
+.details:empty {
+  display: none;
+}
+
+// Hide details: the open section's foot closes it too.
+.collapse {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  min-height: 40px;
+  margin: 12px 0 4px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  background-color: var(--ss-state-tint);
+  color: var(--ss-text);
+  font: var(--mat-sys-label-large);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--ss-state-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 2px;
+  }
 }

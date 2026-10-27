@@ -11,6 +11,34 @@
       <ss-status-badge class="status" [status]="status()">{{ lists() }}</ss-status-badge>
     </div>
 
+    <!-- Right below the names, above what changes with the plan, so switching plans moves no chip (M5.7). -->
+    @if (plans().length > 1) {
+      <fieldset class="plans">
+        <legend class="visually-hidden">{{ provider().name }} plans</legend>
+        @for (option of plans(); track option.plan.id) {
+          <label class="chip">
+            <input
+              type="radio"
+              [name]="id + '-plan'"
+              [value]="option.plan.id"
+              [checked]="option.plan.id === selectedId()"
+              (change)="selectedId.set(option.plan.id)"
+            />
+            <mat-icon class="check" aria-hidden="true">check</mat-icon>
+            <span>{{ option.plan.name }}</span>
+          </label>
+        }
+      </fieldset>
+    } @else if (plan(); as plan) {
+      <!-- A card with one plan shows its chip too, like the others. Its name is read above. -->
+      <div class="plans" aria-hidden="true">
+        <span class="chip selected">
+          <mat-icon class="check">check</mat-icon>
+          <span>{{ plan.plan.name }}</span>
+        </span>
+      </div>
+    }
+
     <div class="links">
       <a [href]="link()" target="_blank" rel="noopener">
         <span>{{ plan() ? 'Plan' : 'Website' }}</span>
@@ -65,45 +93,37 @@
     }
   }
 
-  @if (plans().length > 1) {
-    <fieldset class="plans">
-      <legend class="visually-hidden">{{ provider().name }} plans</legend>
-      @for (option of plans(); track option.plan.id) {
-        <label class="chip">
-          <input
-            type="radio"
-            [name]="id + '-plan'"
-            [value]="option.plan.id"
-            [checked]="option.plan.id === selectedId()"
-            (change)="selectedId.set(option.plan.id)"
-          />
-          <mat-icon class="check" aria-hidden="true">check</mat-icon>
-          <span>{{ option.plan.name }}</span>
-        </label>
-      }
-    </fieldset>
-  }
-
   @if (plan(); as plan) {
     <button
+      #expandButton
       matIconButton
       type="button"
       class="expand"
       [attr.aria-expanded]="expanded()"
       [attr.aria-controls]="id + '-details'"
       [attr.aria-label]="'Details: ' + title()"
-      (click)="expanded.set(!expanded())"
+      (click)="toggle()"
     >
       <mat-icon>{{ expanded() ? 'expand_less' : 'expand_more' }}</mat-icon>
     </button>
-    <div class="details" [id]="id + '-details'" [hidden]="!expanded()">
-      @if (expanded()) {
-        <ss-plan-details
-          [provider]="provider()"
-          [match]="plan"
-          [ranks]="ranks()"
-          [addMenu]="addMenu"
-        />
+    <!-- In the page while open, and while sliding shut. -->
+    <div class="details" [id]="id + '-details'">
+      @if (rendered()) {
+        <div #body class="details-body" [class.moving]="moving()">
+          <div class="details-clip">
+            <ss-plan-details
+              [provider]="provider()"
+              [match]="plan"
+              [ranks]="ranks()"
+              [addMenu]="addMenu"
+            />
+            <button type="button" class="collapse" (click)="collapse()">
+              <mat-icon aria-hidden="true">expand_less</mat-icon>
+              <span>Hide details</span>
+              <span class="visually-hidden">: {{ title() }}</span>
+            </button>
+          </div>
+        </div>
       }
     </div>
   }
