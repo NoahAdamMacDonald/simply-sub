@@ -80,6 +80,8 @@ export class TagPicker {
       .records()
       .filter((tag) => !chosen.has(tag.id) && tag.name.toLocaleLowerCase('en').includes(typed));
   });
+  /** The chips make a grid, as Material has it: there are some, or text is typed. */
+  protected readonly isGrid = computed(() => this.chosen().length > 0 || this.query() !== '');
   /** The typed name, when no tag has it yet. */
   protected readonly newName = computed(() => {
     const name = this.query().trim();

@@ -898,14 +898,23 @@ async function addItem(page, planId) {
     await sleep(300);
     await page.keyboard.press('Enter');
     await until('the editor', () => page.url().includes('/lists/'));
-    await page.locator('.waiting').waitFor();
+    // The editor opens the item dialog (M6.5) on the plan and the period clicked, and drops them from the URL.
+    const itemDialog = page.locator('ss-item-dialog');
+    await itemDialog.waitFor({ timeout: 20000 });
+    const shownIn = (selector) =>
+      itemDialog
+        .locator(`${selector} .mat-mdc-select-value [aria-hidden]`)
+        .evaluate((value) => value.textContent.replace(/\s+/g, ' ').trim());
+    const plan = await shownIn('.plan');
+    const billed = await shownIn('.billed');
     check(
-      "picking a list opens its editor with the plan and the period clicked, which says what it'll add",
+      'picking a list opens its editor and the item dialog, on the plan and the period clicked',
       new URL(page.url()).pathname.endsWith(`/lists/${LIST_ID}/edit`) &&
-        search(page) === '?add=netflix.standard-ads&interval=month' &&
-        (await page.locator('.waiting').textContent()).trim() ===
-          'Netflix Standard with ads, billed monthly, will be added here once the item dialog is ready.',
-      `${page.url()} / ${await page.locator('.waiting').textContent()}`,
+        search(page) === '' &&
+        (await itemDialog.locator('.subject .name').textContent()).trim() === 'Netflix' &&
+        plan === 'Standard with ads — $7.99 / mo' &&
+        billed === 'Monthly — $7.99',
+      `${page.url()} / ${plan} / ${billed}`,
     );
 
     // A bundle's price, in Crave's details, and New list….
@@ -916,12 +925,18 @@ async function addItem(page, planId) {
     await bundlePrice.click();
     await menu.waitFor();
     await menu.getByRole('menuitem', { name: /New list/ }).click();
-    // /lists/new makes the new list's draft and replaces its URL with the list's editor (M6.3).
-    await until('the new list', () => /\/lists\/[0-9a-f-]{36}\/edit\?/.test(page.url()));
+    // /lists/new makes the new list's draft and replaces its URL with the list's editor (M6.3), which opens the item
+    // dialog on the bundle and drops it from the URL (M6.5).
+    await until('the new list', () => /\/lists\/[0-9a-f-]{36}\/edit$/.test(page.url()));
+    await itemDialog.waitFor({ timeout: 20000 });
+    const bundle = (await itemDialog.locator('.subject .name').textContent()).trim();
+    const billedBundle = await shownIn('.billed');
     check(
-      "a bundle's price opens a new list's editor with the bundle",
-      search(page) === '?addBundle=bundle.disney-crave-ads&interval=month',
-      page.url(),
+      "a bundle's price opens a new list's editor with the item dialog on the bundle",
+      bundle === 'Disney+ and Crave With Ads Bundle' &&
+        billedBundle.startsWith('Monthly — ') &&
+        (await itemDialog.locator('.includes li').count()) > 1,
+      `${page.url()} / ${bundle} / ${billedBundle}`,
     );
     await context.close();
   }
@@ -991,13 +1006,18 @@ async function addItem(page, planId) {
     const bundlePopup = await bundlePrice.getAttribute('aria-haspopup');
     await bundlePrice.click();
     await until('the editor', () => page.url().includes('/lists/'));
+    // The editor opens the item dialog on the bundle, and drops it from the URL (M6.5).
+    const bundleDialog = page.locator('ss-item-dialog');
+    await bundleDialog.waitFor({ timeout: 20000 });
+    const addingBundle = (await bundleDialog.locator('.subject .name').textContent()).trim();
     check(
       "a bundle's price adds the bundle to the list at once, with no menu",
       new URL(page.url()).pathname.endsWith(`/lists/${LIST_ID}/edit`) &&
-        search(page) === '?addBundle=bundle.disney-crave-ads&interval=month' &&
+        search(page) === '' &&
+        addingBundle === 'Disney+ and Crave With Ads Bundle' &&
         /, add to Work Related"$/.test(bundleName) &&
         bundlePopup === null,
-      `${page.url()} / ${bundleName}`,
+      `${page.url()} / ${bundleName} / ${addingBundle}`,
     );
     await context.close();
   }
@@ -1056,7 +1076,7 @@ async function addItem(page, planId) {
         `${label}: Enter on the ✕ goes back to the list's editor, adding nothing`,
         new URL(page.url()).pathname.endsWith(`/lists/${LIST_ID}/edit`) &&
           search(page) === '' &&
-          (await page.locator('.waiting').count()) === 0,
+          (await page.locator('ss-item-dialog').count()) === 0,
         page.url(),
       );
 
@@ -1093,16 +1113,20 @@ async function addItem(page, planId) {
       const popup = await page.evaluate(() => document.activeElement.getAttribute('aria-haspopup'));
       await page.keyboard.press('Enter');
       await until('the editor', () => page.url().includes('/lists/'));
-      await page.locator('.waiting').waitFor();
-      const adding = (await page.locator('.waiting').textContent()).replace(/\s+/g, ' ').trim();
+      // The editor opens the item dialog for it (M6.5), and drops the request from the URL.
+      const itemDialog = page.locator('ss-item-dialog');
+      await itemDialog.waitFor({ timeout: 20000 });
+      await sleep(500);
+      const adding = (await itemDialog.locator('.subject .name').textContent()).trim();
       check(
-        `${label}: Enter on a price adds its plan and period to the list at once, with no menu`,
+        `${label}: Enter on a price opens the list's editor with the item dialog for it at once, with no menu`,
         /^button ".*, add to Work Related"$/.test(price) &&
           popup === null &&
           new URL(page.url()).pathname.endsWith(`/lists/${LIST_ID}/edit`) &&
-          /^\?add=[a-z0-9.-]+&interval=(day|week|month|year)(&count=\d+)?$/.test(search(page)) &&
-          /, billed .+, will be added here once the item dialog is ready\.$/.test(adding),
-        `${price} → ${search(page)} / ${adding}`,
+          search(page) === '' &&
+          (await itemDialog.locator('h2').textContent()).trim() === 'Add subscription' &&
+          adding.length > 0,
+        `${price} → ${adding}`,
       );
       if (viewport === WIDE && colorScheme === 'light') {
         await page.screenshot({ path: path.join(outDir, 'pick-editor-1280.png') });

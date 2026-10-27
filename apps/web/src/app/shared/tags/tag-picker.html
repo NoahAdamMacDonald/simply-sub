@@ -10,14 +10,22 @@
         </button>
       </mat-chip-row>
     }
-    <input
-      #chipInput
-      placeholder="Add a tag"
-      [matChipInputFor]="grid"
-      [matChipInputSeparatorKeyCodes]="[]"
-      [matAutocomplete]="auto"
-      (input)="query.set(chipInput.value)"
-    />
+    <!--
+      A grid holds rows only (axe's aria-required-children), so the input has a row and cell of its own while the chips
+      make a grid: Material drops the grid's role when it has no chips and nothing is typed.
+    -->
+    <span class="input-row" [attr.role]="isGrid() ? 'row' : null">
+      <span class="input-cell" [attr.role]="isGrid() ? 'gridcell' : null">
+        <input
+          #chipInput
+          placeholder="Add a tag"
+          [matChipInputFor]="grid"
+          [matChipInputSeparatorKeyCodes]="[]"
+          [matAutocomplete]="auto"
+          (input)="query.set(chipInput.value)"
+        />
+      </span>
+    </span>
   </mat-chip-grid>
   <mat-autocomplete #auto autoActiveFirstOption (optionSelected)="pick($event.option.value)">
     @for (tag of matches(); track tag.id) {

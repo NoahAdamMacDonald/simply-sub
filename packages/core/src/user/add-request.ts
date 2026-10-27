@@ -10,8 +10,8 @@ export type AddRequest =
   | { kind: 'plan'; planId: string; interval: Interval; intervalCount: number }
   | { kind: 'bundle'; bundleId: string; interval: Interval; intervalCount: number };
 
-/** The most periods a count can say: ten years of months, far past any period sold. */
-const maxCount = 120;
+/** The most intervals a period can have: ten years of months, far past any period sold. */
+export const maxIntervalCount = 120;
 
 /** The editor's query parameters for `request`: count only for a period of more than one (3 months: count=3). */
 export function addRequestParams(request: AddRequest): Record<string, string> {
@@ -43,7 +43,7 @@ export function readAddRequest(params: QueryParams): AddRequest | undefined {
     !interval.success ||
     !Number.isInteger(intervalCount) ||
     intervalCount < 1 ||
-    intervalCount > maxCount ||
+    intervalCount > maxIntervalCount ||
     (count !== undefined && !/^\d+$/.test(count))
   ) {
     return undefined;

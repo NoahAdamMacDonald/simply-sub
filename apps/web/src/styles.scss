@@ -63,3 +63,28 @@ h1 {
     )
   );
 }
+
+// The item dialog (features/lists/item-dialog.ts): up to 720 px wide, past Material's 560, for its fields side by
+// side. Under 600 px it's the whole screen, with square corners, and its content scrolls between the title and the
+// actions.
+.ss-item-dialog {
+  @include mat.dialog-overrides(
+    (
+      container-max-width: 720px,
+    )
+  );
+
+  &.ss-dialog-full-screen {
+    @include mat.dialog-overrides(
+      (
+        container-max-width: 100vw,
+        container-small-max-width: 100vw,
+        container-shape: 0,
+      )
+    );
+
+    .mat-mdc-dialog-content {
+      max-height: none;
+    }
+  }
+}

@@ -55,8 +55,8 @@
       @if (resumed()) {
         <p class="note" role="status">Resumed unsaved changes</p>
       }
-      @if (waiting(); as waiting) {
-        <p class="note waiting">{{ waiting }}</p>
+      @if (notice(); as notice) {
+        <p class="note notice" role="status">{{ notice }}</p>
       }
 
       <section class="items" aria-labelledby="items-heading">
@@ -103,15 +103,15 @@
                   <ss-price class="price" [price]="price" [region]="row.region" />
                 }
                 <div class="buttons">
-                  <!-- The item dialog opens from ?item= (M6.5), as from the list view's [Edit] (P4). -->
-                  <a
+                  <button
                     matIconButton
-                    routerLink="."
-                    [queryParams]="{ item: row.id }"
+                    type="button"
+                    class="edit"
                     [attr.aria-label]="'Edit ' + row.title"
+                    (click)="edit(row)"
                   >
                     <mat-icon>edit</mat-icon>
-                  </a>
+                  </button>
                   <button
                     matIconButton
                     type="button"

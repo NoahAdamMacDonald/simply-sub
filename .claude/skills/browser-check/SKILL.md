@@ -133,15 +133,34 @@ horizontal scroll. Its base URL ends in `/`.
 (Work Related: Netflix Standard tagged Family, and Mullvad VPN) written to IndexedDB. In both themes at both widths,
 keyboard only: the name, the rows and the footer's average; a new name kept in the draft as it's typed; 🗑 moving
 focus to the next row, with Undo in a snackbar putting it back; [+ Add from catalog] to pick mode with no question,
-its banner naming the draft's name; a price back to the editor, "Resumed unsaved changes" and a reload; Lists in the
+its banner naming the draft's name; a price back to the editor, which opens the item dialog (M6.5; Escape closes it),
+"Resumed unsaved changes" and a reload; Lists in the
 sidebar asking "Discard changes?" (focus on Cancel, Escape stays); and Save landing on the list view. Then at 1280 px:
 Cancel after a reload discarding everything, a refused Back keeping the history (the editor opened from Search's Add
 to list menu, since a `page.goto` starts a new document, whose Back leaves the app), an empty name, ⋮ Delete list, a
 list there isn't, and a new list's Cancel. With axe on the snackbar, the dialogs and the error. Scope selectors to
-`ss-list-edit-page`: the shell has a `.footer` too, and `ss-page-header` a `.row`. Since M6.4, `check-search.cjs` and
-`check-drafts.cjs` read the editor's `.waiting` note.
+`ss-list-edit-page`: the shell has a `.footer` too, and `ss-page-header` a `.row`. Since M6.5, `check-search.cjs` and
+`check-drafts.cjs` check the item dialog a price opens, and that the editor dropped the request from the URL.
+
+`check-item-dialog.cjs` (M6.5) checks the item dialog on `ng serve` for a Canadian in Alberta, with Work Related
+(Netflix Standard tagged Family, and Mullvad VPN) written to IndexedDB. In both themes at both widths, keyboard only:
+Search → a price → New list… → the dialog, preselected (the card's provider, plan and period, or a free plan's note),
+focus on its heading, with the URL's request dropped in place (one history entry after Search) → Add → the row, the
+snackbar and focus on its ✎ → Save → the list view; the dialog 720 px wide, or the whole screen at 360 px; Specific
+dates with no end and an own price of 0 refused at their fields, with focus on the first; and ✎ on Netflix changing
+its plan to Premium, an extra member with a quantity of 2, Feb 28 typed with its billing day chosen by arrow keys, and
+Auto-renews, then Save, a reload and the item read from IndexedDB (its id, tags and ranks kept). With axe on the
+dialog, its errors and the billing day choice, and no horizontal scroll. The first card on Search is Proton, whose
+first price is Proton Free.
 
 ## Gotchas
+
+- A date input is typed a part at a time: Edge's year takes up to 6 digits, so type the year, press ArrowRight, then
+  the month and day (each moves on by itself). Tab into the field first, so focus is on the year. While the year is
+  typed the value passes through years like 0002, which `packages/core/src/dates/` handles since M6.5.
+- An error in dev mode (ExpressionChangedAfterItHasBeenChecked included) opens the error snackbar, an overlay above a
+  dialog, which then gets Escape: a dialog Escape won't close often means a console error. The scripts print the
+  console problems on a crash.
 
 - Every new browser context starts with no settings, so the first-run dialog (M4.2) covers the page until it's
   completed. The scripts complete it first. The context's `locale` sets its defaults (Playwright uses the system's

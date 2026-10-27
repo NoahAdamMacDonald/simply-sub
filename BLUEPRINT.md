@@ -1454,7 +1454,8 @@ Sweden has no prices of its own), else the full `catalog.json`. A country with n
 price, since any region's can be its fallback, so there is no separate file for "other" countries. A missing
 static file is answered with the app's `index.html` (the SPA fallback), so the Worker and the app look the region
 up in `index.json` instead of trying a file. The app loads its country's file, plus the file of any other region a
-list item was bought in (`ListItem.region`), so it never downloads every region's prices.
+list item was bought in (`ListItem.region`), saved or not yet (a draft's, or the item dialog's Bought in: M6.5), so it
+never downloads every region's prices.
 
 **In the app** (`CatalogStore`, M4.3; the choices are core's `catalog-sync.ts`):
 - **Kept per file, never merged:** each downloaded file is a `catalogCache` record (section 4.6), and an item's
@@ -1466,6 +1467,9 @@ list item was bought in (`ListItem.region`), so it never downloads every region'
   (`planCatalogSync`), all at the index's version, saved in one transaction that also drops the files no region
   needs any more. A file of another version (a deploy between the two requests), one that fails its schema, or the
   SPA fallback in its place isn't kept, and the cached files stay.
+- **Unsaved items' regions:** a page asks for the files its items not saved yet need with `need(regions)`, for as long
+  as the page lives (its `DestroyRef`): the list editor for its draft's items, and the item dialog for its Bought in
+  (M6.5). Without it a region chosen in the dialog would have no prices until Save, and a check would drop its file.
 - **Checks again** when the regions change (the first run, 📍, an item bought elsewhere), on the browser's `online`
   event, when a tab is shown again after an hour (`catalogCheckDue`), and from Settings' [Check for updates] (P13).
   A Web Lock (`navigator.locks`) lets one tab check at a time, so tabs that open together download a new version
@@ -2514,6 +2518,72 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
+**Resolved (2026-10-27, M6.5)**
+- **The item dialog** (PROJECT-PLAN P6, `features/lists/item-dialog.ts`): "Add subscription" or "Edit subscription"
+  with ✕, the provider's icon and name, then Plan, Add-ons, Billing, "I pay a different price", Advanced's Bought in,
+  Feature ranks and Tags, and in its foot the monthly price, Cancel and Add to list (Save when changing). Each plan in
+  the menu shows its price for the period chosen ("Standard — $18.99 / mo", read "Standard, $18.99 a month"); the menu
+  has the provider's plans sold where it's bought, and the one chosen. It's a MatDialog up to 720 px wide, since
+  Material's 560 px is too narrow for fields side by side, and under 600 px it fills the screen
+  (`ss-dialog-full-screen`, set through BreakpointObserver). Focus starts on its heading. It loads with the first one,
+  with Material's dialog, outside the editor's chunk.
+- **Its rules are core's** (`user/item-form.ts`): `periodChoices`, and `afterPlanChange` with `periodAfterPlanChange`
+  (a change of plan, or of Bought in, keeps the period if the plan is priced for it, else takes its first);
+  `defaultRenewal` (one period from today, keeping today's day: Jan 31 gives Feb 28 with billingDay 31) and
+  `renewalAfterPeriodChange` (the suggested date follows the period, and one the user entered stays);
+  `billingDayChoices`; `windowIssues` and `sortedWindows`; `itemFormIssues`; `itemFromForm`, `newItemForm` and
+  `itemFormFor`; and `isDuplicate`. The dialog's Signal Form takes core's issues through one `validateTree`, each at
+  the field it names, and `filterRanking` gained `keys`, the keys an item provides.
+- **Decided while building it:**
+  - **Dates** are the browser's date inputs in outline fields: they give ISO dates with no DateAdapter and work from the
+    keyboard. No Material datepicker.
+  - **The billing day** is asked as "Billed on: the 28th / the 31st (the last day in shorter months)", only for the
+    days a later charge's month has (Feb 28 billed yearly offers the 29th, once a leap year comes round; every two
+    years from 2027 never does). A date that no longer allows the day chosen drops it.
+  - **Windows** that share a day overlap, since a window is active through its end (§3.1), and one that repeats yearly
+    must be shorter than a year. An overlap is reported at the later window's start, and windows are saved in date
+    order. The only window has no 🗑, so there's always one.
+  - **A free plan** hides the Ongoing / Specific dates choice too, as it's saved as Ongoing; Subscribed since and Ends
+    on stay. Its anchor is today, or for an item being changed the one it had, so opening and saving it changes
+    nothing.
+  - **Add-ons** rather than P6's "Extra members", since Crave's Starz is one too. One takes a Quantity menu when the
+    plan's `addOnLimit` is 2 or more; the limit counts them all, and going past it is reported at the last one ticked.
+  - **Ranks** are saved only for the keys the item provides, so a change of plan drops the others. Profile default
+    removes the override.
+  - **The footer** has ≈ only for a converted price, as the editor's average does (P6's sketch put it on Netflix's
+    native price). Its "next charge Nov 12" comes with the charges (M7.1).
+  - **Plus tax** shows only where tax is added (Canada, the US). An own price's currencies are the ones prices can be
+    shown in (`displayCurrencies`).
+  - **"Already in this list — add another?"** asks on Add when another item has the same plan (whatever its add-ons),
+    bundle or custom plan, and on Save when an item's plan is changed to one; not for an item whose plan was in the
+    list twice already.
+  - **A period the plan isn't priced for** (a bundle sold monthly asked for with `count=3`) opens on its first period.
+  - **A custom plan** can be billed any way ("Billed every [2] [Weeks]"), starting on its own price's period.
+  - **An item whose plan has left the catalog** can still be changed: there are no periods to check it against.
+- **Bought in** another country needs that country's prices, which weren't downloaded until an item bought there was
+  saved. `CatalogStore.need(regions)` now keeps the files a page's unsaved items need while the page lives: the
+  dialog's Bought in and the editor's draft (section 6.3). Settings' country and currency menus moved to
+  `shared/place-choices.ts` for the dialog.
+- **The editor (P5):** `?add=`, `?addBundle=`, `?addCustom=` and `?item=` open the dialog once, when the catalog (and
+  for a custom subscription, the custom subscriptions) have loaded, and then drop out of the URL, replacing its history
+  entry. One that names nothing there is says so in a status line ("There's no plan netflix.basic in the catalog.", "That subscription isn't in
+  this list."), opening nothing. ✎ is now a button that opens the dialog itself, so Back has no entry to undo. After
+  Add or Save a snackbar says "Added Netflix Standard" or "Saved Netflix Standard" for 5 s, and focus moves to the
+  item's ✎. M6.4's "will open here" notes are gone; [+ Add custom subscription] still comes with M6.6.
+- **Found by the browser check:**
+  - Core's date helpers took the years 0 to 99 for 1900 to 1999 (`Date.UTC` does), and a date input passes through
+    them while a year is typed (0002, 0020), so `addDays` threw. `iso-date.ts` sets the year itself now, and
+    `billingDayChoices` has none for a value that isn't a date (a 6-digit year).
+  - `ss-tag-picker`'s input sat in its chip grid, which may hold only rows: axe's `aria-required-children` failed once a
+    tag was chosen. The input has a row and cell of its own while the chips make a grid (Material drops the grid's role
+    when it has no chips and nothing is typed).
+  - At 360 px a field's hint or error met the next field's label in a wrapped row, so rows have a gap. The heading
+    focus starts on has no ring: it isn't a control.
+- **Not yet:** P6's acceptance "Limited windows produce the expected charges (checked on the calendar)" waits for the
+  charges (M7.1) and the Calendar (M7.4), and Payment's card select for M9.4.
+- **Bundles:** the initial bundle grew by 0.5 kB (489.6 kB), for `CatalogStore.need` and the dialog's panel styles.
+  The item dialog's chunk is 46 kB, and the editor's 20 kB.
+
 **Resolved (2026-10-27, M6.4)**
 - **The editor** (PROJECT-PLAN P5): the heading "Edit list" ("New list" for a new list, and its tab title), the List
   name field with Cancel, Save and ⋮ (Delete list, for a saved list only) beside it, then a card with [+ Add from
@@ -2551,7 +2621,8 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
   [Back to lists], under the "Edit list" heading.
 - **Until M6.5,** `?add=`, `?addBundle=` and `?item=` (✎ links to it, as P4's [Edit] will) say what the item dialog
   will open: "Netflix Standard will open here once the item dialog is ready." [+ Add custom subscription] comes with
-  M6.6, where P12's editor gives its "Create new…" somewhere to go (flow F3).
+  M6.6, where P12's editor gives its "Create new…" somewhere to go (flow F3). (Done in M6.5: they open the dialog, and
+  ✎ opens it without the URL.)
 - **Bundles:** the initial bundle grew by 0.18 kB (489.1 kB), for the guard and the router option. The editor's chunk
   is 18 kB, with Material's menu and snackbar in shared chunks.
 

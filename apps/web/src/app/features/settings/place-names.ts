@@ -1,27 +1,10 @@
-import { displayCurrencies, isoRegions, subdivisionName } from '@simply-sub/core';
+import { subdivisionName } from '@simply-sub/core';
 import { countryName } from '../../shared/country-name';
 
 // English names for the Settings menus and the 📍 summary. The app's text is English, so the names are too.
 
-const currencyNames = new Intl.DisplayNames(['en'], { type: 'currency', fallback: 'code' });
-
 export { countryName };
-
-export interface Choice {
-  value: string;
-  label: string;
-}
-
-/** Every country, by name. */
-export const countryChoices: readonly Choice[] = [...isoRegions]
-  .map((code) => ({ value: code, label: countryName(code) }))
-  .sort((a, b) => a.label.localeCompare(b.label, 'en'));
-
-/** The currencies prices can be shown in, as "CAD — Canadian Dollar". */
-export const currencyChoices: readonly Choice[] = displayCurrencies.map((code) => ({
-  value: code,
-  label: `${code} — ${currencyNames.of(code) ?? code}`,
-}));
+export { countryChoices, currencyChoices, type Choice } from '../../shared/place-choices';
 
 /** Where the user is, as the 📍 button shows it: "Ontario, Canada (CAD)". */
 export function placeSummary(values: {

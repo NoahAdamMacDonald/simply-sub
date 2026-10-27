@@ -21,21 +21,24 @@ import { MatInput } from '@angular/material/input';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { MatSnackBar, type MatSnackBarRef } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, type Params } from '@angular/router';
 import {
   draftChanged,
   draftItems,
   monthlyAverage,
   readAddRequest,
+  recordIdSchema,
+  type AddRequest,
   type ListDraft,
   type ResolvedItem,
 } from '@simply-sub/core';
-import { map } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import type { AsksBeforeLeaving } from '../../core/leave-guard';
 import { ListDraftService } from '../../core/lists/list-draft-service';
 import { MetricsService } from '../../core/metrics/metrics-service';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { CustomSubsRepository } from '../../core/storage/custom-subs-repository';
 import { TagsRepository } from '../../core/storage/tags-repository';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
 import { EmptyState } from '../../shared/empty-state/empty-state';
@@ -43,10 +46,15 @@ import { PageHeader } from '../../shared/page-header/page-header';
 import { PriceTag } from '../../shared/price-tag/price-tag';
 import { amountText } from '../../shared/price-tag/price-text';
 import { ProviderIcon } from '../../shared/provider-icon/provider-icon';
-import { planTitle } from '../../shared/sub-card/card-text';
 import { TagChip } from '../../shared/tags/tag-chip';
 import { focusFirstError } from '../../shared/focus-first-error';
-import { editRow, periodText, type EditRow } from './edit-rows';
+import { editRow, type EditRow } from './edit-rows';
+import type {
+  ItemDialog,
+  ItemDialogData,
+  ItemDialogRequest,
+  ItemDialogResult,
+} from './item-dialog';
 
 /** Where focus goes once the rows have caught up with a change: the row after a removed one, or a restored one. */
 interface PendingFocus {
@@ -55,11 +63,21 @@ interface PendingFocus {
 }
 
 /**
+ * What the URL asks the item dialog to open (P5): Search's ?add= or ?addBundle= at a period (flows F1, F2 and F4), a
+ * custom subscription's ?addCustom= (F3), or an item's ?item= (P4's [Edit]).
+ */
+type AskedFor =
+  AddRequest | { kind: 'custom'; customSubId: string } | { kind: 'item'; itemId: string };
+
+/** The query parameters that ask for the item dialog, which leave the URL once the editor has answered them. */
+const dialogParams = ['add', 'addBundle', 'addCustom', 'item', 'interval', 'count'];
+
+/**
  * List edit (PROJECT-PLAN P5), for new and existing lists, on the list's draft (ListDraftService, M6.3): every change
  * is kept in Dexie, so a trip to Search in pick mode or a reload keeps it, and Save writes it all at once. /lists/new
  * makes a new list's draft and opens its editor in its place. Leaving with unsaved changes asks first (leaveGuard),
- * except for Search in pick mode for this list. The item dialog (M6.5) opens from ?add=, ?addBundle= and ?item=;
- * until then the page says what it will open.
+ * except for Search in pick mode for this list. The item dialog (P6) opens from ✎, and once for ?add=, ?addBundle=,
+ * ?addCustom= and ?item=, which then leave the URL.
  */
 @Component({
   selector: 'ss-list-edit-page',
@@ -91,6 +109,7 @@ export class ListEditPage implements AsksBeforeLeaving {
   private readonly catalog = inject(CatalogStore);
   private readonly settings = inject(SettingsStore);
   private readonly tags = inject(TagsRepository);
+  private readonly customSubs = inject(CustomSubsRepository);
   private readonly confirmer = inject(ConfirmService);
   private readonly snackBar = inject(MatSnackBar);
   private readonly router = inject(Router);
@@ -107,6 +126,9 @@ export class ListEditPage implements AsksBeforeLeaving {
   private stored = false;
   private undo?: MatSnackBarRef<unknown>;
   private readonly pendingFocus = signal<PendingFocus | undefined>(undefined);
+  /** The query parameters the item dialog was last answered for, so it opens once for them. */
+  private answered?: Params;
+  private itemDialog?: { close(): void };
 
   /** The list's id: none on /lists/new, which makes the new list's draft and moves to its editor. */
   protected readonly listId = toSignal(
@@ -201,38 +223,28 @@ export class ListEditPage implements AsksBeforeLeaving {
     };
   });
 
-  /**
-   * What the item dialog (M6.5) will open with: an item to add (?add=, ?addBundle=: Search's Add to list, flows F1,
-   * F2 and F4), or one to change (?item=). Until it exists, the page says so.
-   */
-  protected readonly waiting = computed(() => {
-    const params = this.params();
-    const itemId = params['item'];
-    if (typeof itemId === 'string') {
-      const row = this.rows().find((candidate) => candidate.id === itemId);
-      return row && `${row.title} will open here once the item dialog is ready.`;
-    }
-    const request = readAddRequest(params);
-    if (!request) return undefined;
-    const data = this.catalog.catalog();
-    let name: string;
-    if (request.kind === 'plan') {
-      const provider = data?.providers.find((candidate) =>
-        candidate.plans.some((plan) => plan.id === request.planId),
-      );
-      const plan = provider?.plans.find((candidate) => candidate.id === request.planId);
-      name = provider && plan ? planTitle(provider.name, plan.name) : request.planId;
-    } else {
-      name =
-        data?.bundles.find((bundle) => bundle.id === request.bundleId)?.name ?? request.bundleId;
-    }
-    const period = periodText(request.interval, request.intervalCount);
-    return `${name}, billed ${period}, will be added here once the item dialog is ready.`;
-  });
+  /** What the item dialog couldn't open: a plan, bundle, custom subscription or item there isn't. */
+  protected readonly notice = signal<string | undefined>(undefined);
+
+  /** What the URL asks the item dialog to open, if anything. */
+  private readonly asked = computed(() => askedFor(this.params()));
 
   constructor() {
     if (this.listId() === undefined) void this.startNewList();
-    this.destroyRef.onDestroy(() => this.undo?.dismiss());
+    this.destroyRef.onDestroy(() => {
+      this.undo?.dismiss();
+      this.itemDialog?.close();
+    });
+
+    // The prices of the regions its items were bought in, which items not saved yet need until Save.
+    this.catalog.need(
+      computed(() => {
+        const draft = this.draft();
+        return (draft ? draftItems(draft) : []).flatMap(({ region, source }) =>
+          region !== undefined && source.kind !== 'custom' ? [region] : [],
+        );
+      }),
+    );
 
     // A new list's tab says so; the route's title is the editor's.
     effect(() => {
@@ -249,6 +261,27 @@ export class ListEditPage implements AsksBeforeLeaving {
         this.stored = false;
         this.started.reload();
       }
+    });
+
+    // The item dialog opens once for what the URL asks, when what it needs has loaded, and the URL then drops it.
+    effect(() => {
+      const params = this.params();
+      const asked = this.asked();
+      const draft = this.draft();
+      if (!asked || !draft || params === this.answered) return;
+      const answer = this.answer(asked, draft);
+      if (answer === undefined) return;
+      this.answered = params;
+      untracked(() => {
+        this.notice.set(typeof answer === 'string' ? answer : undefined);
+        void this.router.navigate([], {
+          relativeTo: this.route,
+          queryParams: Object.fromEntries(dialogParams.map((name) => [name, null])),
+          queryParamsHandling: 'merge',
+          replaceUrl: true,
+        });
+        if (typeof answer !== 'string') void this.openItemDialog(answer);
+      });
     });
 
     // Focus moves once the rows show the change it waited for.
@@ -318,6 +351,13 @@ export class ListEditPage implements AsksBeforeLeaving {
     this.undo.onAction().subscribe(() => void this.restore(draft.listId, row.id));
   }
 
+  /** ✎: the item dialog, for the row's item. */
+  protected edit(row: EditRow): void {
+    const draft = this.draft();
+    const item = draft && draftItems(draft).find((candidate) => candidate.id === row.id);
+    if (item) void this.openItemDialog({ kind: 'item', item });
+  }
+
   /**
    * Whether the router may leave for `url` (leaveGuard). Search in pick mode for this list keeps the draft for the
    * way back (P7, flow F2). Anywhere else the draft is dropped, after asking when there's anything to lose: a new
@@ -367,6 +407,78 @@ export class ListEditPage implements AsksBeforeLeaving {
     });
   }
 
+  /**
+   * What answers what the URL asks: the dialog's request, or why there's nothing to open. Undefined while what it
+   * needs is loading: the catalog, and for a custom subscription the custom subscriptions.
+   */
+  private answer(asked: AskedFor, draft: ListDraft): ItemDialogRequest | string | undefined {
+    const catalog = this.catalog.catalog();
+    if (!catalog) return undefined;
+    switch (asked.kind) {
+      case 'plan': {
+        const { planId, interval, intervalCount } = asked;
+        return catalog.providers.some((provider) =>
+          provider.plans.some((plan) => plan.id === planId),
+        )
+          ? { kind: 'plan', planId, period: { interval, intervalCount } }
+          : `There’s no plan ${planId} in the catalog.`;
+      }
+      case 'bundle': {
+        const { bundleId, interval, intervalCount } = asked;
+        return catalog.bundles.some((bundle) => bundle.id === bundleId)
+          ? { kind: 'bundle', bundleId, period: { interval, intervalCount } }
+          : `There’s no bundle ${bundleId} in the catalog.`;
+      }
+      case 'custom':
+        if (this.customSubs.status() !== 'ready') return undefined;
+        return this.customSubs.byId().has(asked.customSubId)
+          ? { kind: 'custom', customSubId: asked.customSubId }
+          : 'That custom subscription doesn’t exist. It may have been deleted.';
+      case 'item': {
+        const item = draftItems(draft).find((candidate) => candidate.id === asked.itemId);
+        return item ? { kind: 'item', item } : 'That subscription isn’t in this list.';
+      }
+    }
+  }
+
+  /**
+   * Opens the item dialog (P6), which saves to the draft. Once it has, the snackbar says so and focus moves to the
+   * item's ✎. Material's dialog and the item dialog load with the first one, outside the editor's chunk.
+   */
+  private async openItemDialog(request: ItemDialogRequest): Promise<void> {
+    const draft = this.draft();
+    if (!draft) return;
+    const [{ MatDialog }, { ItemDialog }] = await Promise.all([
+      import('@angular/material/dialog'),
+      import('./item-dialog'),
+    ]);
+    if (this.destroyRef.destroyed) return;
+    const dialog = this.injector
+      .get(MatDialog)
+      .open<ItemDialog, ItemDialogData, ItemDialogResult>(ItemDialog, {
+        data: { listId: draft.listId, listName: draft.name, request },
+        panelClass: 'ss-item-dialog',
+        width: 'min(720px, calc(100vw - 32px))',
+        maxWidth: '100vw',
+        autoFocus: 'first-heading',
+      });
+    this.itemDialog = dialog;
+    const result = await firstValueFrom(dialog.afterClosed());
+    this.itemDialog = undefined;
+    if (!result) return;
+    this.snackBar.open(`${result.added ? 'Added' : 'Saved'} ${result.title}`, undefined, {
+      duration: 5000,
+    });
+    this.pendingFocus.set({
+      ready: (shown) => shown.some((candidate) => candidate.id === result.itemId),
+      target: () => this.editButton(result.itemId),
+    });
+  }
+
+  private editButton(itemId: string): HTMLElement | null {
+    return this.host.nativeElement.querySelector(`[data-item="${itemId}"] .edit`);
+  }
+
   private removeButton(itemId: string): HTMLElement | null {
     // Item ids are UUIDs, which need no escaping.
     return this.host.nativeElement.querySelector(`[data-item="${itemId}"] .remove`);
@@ -388,4 +500,24 @@ export class ListEditPage implements AsksBeforeLeaving {
       replaceUrl: true,
     });
   }
+}
+
+/** What the URL asks the item dialog to open, or nothing for a malformed request. */
+function askedFor(params: Params): AskedFor | undefined {
+  const one = (name: string): string | undefined => {
+    const value: unknown = params[name];
+    if (Array.isArray(value)) return typeof value[0] === 'string' ? value[0] : undefined;
+    return typeof value === 'string' ? value : undefined;
+  };
+  const itemId = one('item');
+  if (itemId !== undefined) {
+    return recordIdSchema.safeParse(itemId).success ? { kind: 'item', itemId } : undefined;
+  }
+  const customSubId = one('addCustom');
+  if (customSubId !== undefined) {
+    return recordIdSchema.safeParse(customSubId).success
+      ? { kind: 'custom', customSubId }
+      : undefined;
+  }
+  return readAddRequest(params);
 }

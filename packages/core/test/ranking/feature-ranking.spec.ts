@@ -220,6 +220,15 @@ describe('filterRanking', () => {
     expect(filtered('vpn', ranks, true)).toEqual(['VPN | VPN:  |   Kill switch: Kill switch']);
   });
 
+  it('keeps only the keys an item provides, for the item dialog', () => {
+    const keys = new Set(['vpn.included', 'video.quality=1080p', 'streaming.ad-free']);
+    expect(
+      filterRanking(sections, { ranks: new Map(), keys }).map(
+        (section) => `${section.category.name} | ${outline(section).join(' | ')}`,
+      ),
+    ).toEqual(['VPN | VPN: VPN', 'Streaming | Video quality: 1080p (Full HD) | Ad free: Ad free']);
+  });
+
   it('leaves Set all’s keys and a section’s keys whole', () => {
     const [vpn] = filterRanking(sections, { text: 'kill', ranks: new Map() });
     expect(vpn.entries[0].childKeys).toEqual(sections[0].entries[0].childKeys);

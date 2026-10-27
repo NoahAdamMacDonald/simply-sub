@@ -1,0 +1,224 @@
+// The form wraps the dialog's title, content and actions, which the dialog lays out as its own children.
+form {
+  display: contents;
+}
+
+// The title, with ✕ on its right.
+.title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline-end: 12px;
+
+  h2 {
+    flex: 1;
+    min-width: 0;
+
+    // Focus starts here so a screen reader begins at the title; it isn't a control, so it has no ring.
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+h3 {
+  margin: 0 0 8px;
+  font: var(--mat-sys-title-medium);
+}
+
+h4 {
+  margin: 16px 0 4px;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-title-small);
+}
+
+p {
+  margin: 0;
+}
+
+.subject {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  font: var(--mat-sys-title-medium);
+}
+
+.plan,
+.billed {
+  width: min(100%, 420px);
+}
+
+.includes {
+  margin-bottom: 16px;
+
+  ul {
+    margin: 4px 0 0;
+    padding-inline-start: 20px;
+  }
+}
+
+.note {
+  margin-bottom: 8px;
+  color: var(--ss-text-muted);
+}
+
+.error {
+  color: var(--ss-danger);
+  font: var(--mat-sys-body-small);
+
+  &:empty {
+    display: none;
+  }
+}
+
+.hint-error {
+  color: var(--ss-danger);
+}
+
+// Fields side by side, wrapping onto the next line when the dialog is narrow, with room for a hint or an error under
+// a field before the next one's label.
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+
+  mat-form-field {
+    flex: 1 1 180px;
+  }
+
+  .count {
+    flex: 0 1 140px;
+  }
+}
+
+.add-ons {
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
+
+  legend {
+    margin-bottom: 4px;
+    padding: 0;
+    font: var(--mat-sys-title-small);
+  }
+}
+
+// The box with its name, its price, and how many when the plan allows several.
+.add-on {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+
+  .quantity {
+    width: 120px;
+  }
+
+  .error {
+    flex-basis: 100%;
+  }
+}
+
+.billing,
+.own-price,
+.ranks {
+  margin-bottom: 16px;
+}
+
+.mode {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 16px;
+  margin-bottom: 12px;
+}
+
+.billing-day {
+  margin-bottom: 8px;
+
+  mat-radio-group {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.windows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+// A window's dates, Every year and 🗑 on one line, wrapping when the dialog is narrow.
+.window {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+
+  .window-name {
+    flex-basis: 100%;
+    color: var(--ss-text-muted);
+    font: var(--mat-sys-label-large);
+  }
+
+  mat-form-field {
+    flex: 1 1 160px;
+  }
+}
+
+.add-window {
+  margin-top: 4px;
+}
+
+.advanced {
+  margin-bottom: 16px;
+
+  summary {
+    margin-bottom: 8px;
+    cursor: pointer;
+    font: var(--mat-sys-title-small);
+  }
+
+  mat-form-field {
+    width: min(100%, 320px);
+  }
+}
+
+.rank-rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  // The key's name, then its dropdown on its right, under it when the dialog is narrow.
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px 16px;
+    padding: 4px 0;
+  }
+
+  .rank-name {
+    flex: 1 1 200px;
+  }
+
+  ss-rank-select {
+    flex: 0 1 280px;
+    min-width: 0;
+  }
+}
+
+.tags {
+  display: block;
+}
+
+// The monthly price on the left, Cancel and Add on the right.
+mat-dialog-actions {
+  gap: 8px;
+}
+
+.monthly {
+  margin-inline-end: auto;
+  font: var(--mat-sys-title-small);
+}
