@@ -1,6 +1,8 @@
 import type { WritableSignal } from '@angular/core';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { MATERIAL_ANIMATIONS } from '@angular/material/core';
+import { MatTooltipHarness } from '@angular/material/tooltip/testing';
 import { searchCatalog, type CatalogPlan, type Settings } from '@simply-sub/core';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { PlanDetails } from './plan-details';
@@ -101,20 +103,20 @@ describe('PlanDetails', () => {
     expect(element().querySelector('.badge')).toBeNull();
   });
 
-  describe('Terms and policies (M1.13)', () => {
-    it('rates each topic with its tier and why, by group, and links the pages they quote', async () => {
+  describe('Terms and policies (M1.13, M1.14)', () => {
+    it('grades each topic with a dot, says why with citations, by group, and numbers the pages', async () => {
       await show('mullvad.vpn');
 
       expect(groups().at(-1)).toBe(
-        'Terms and policies Legal Good Disputes: Swedish courts or the consumer disputes board. ' +
-          'Service Good VPN logging: No connection logs, and an audit found none. ' +
-          'From Terms of service No-logging policy',
+        'Terms and policies Legal Disputes: Swedish courts or the consumer disputes board. [1] ' +
+          'Service VPN logging: No connection logs, and an audit found none. [2] ' +
+          'Sources [1] Terms of service [2] No-logging policy',
       );
-      expect(
-        Array.from(element().querySelectorAll('.tier')).map((tier) =>
-          tier.getAttribute('data-tier'),
-        ),
-      ).toEqual(['good', 'good']);
+      const grades = Array.from(element().querySelectorAll('.grade'));
+      expect(grades.map((grade) => [grade.getAttribute('data-tier'), grade.ariaLabel])).toEqual([
+        ['great', 'Great'],
+        ['great', 'Great'],
+      ]);
       const link = element().querySelector<HTMLAnchorElement>('.policy-links a');
       expect([link?.href, link?.target, link?.rel]).toEqual([
         'https://mullvad.net/en/help/terms-service',
@@ -124,12 +126,54 @@ describe('PlanDetails', () => {
       expect(link?.querySelector('.visually-hidden')?.textContent).toBe(', opens in a new tab');
     });
 
+    it('cites each page a rating quotes, linked to the words, with the quote as its tooltip', async () => {
+      await show('mullvad.vpn');
+      const cite = element().querySelector<HTMLAnchorElement>('.cite');
+
+      expect([cite?.href, cite?.target, cite?.rel]).toEqual([
+        'https://mullvad.net/en/help/terms-service#:~:text=shall%20be%20handled%20by,or%20the%20Swedish%20courts',
+        '_blank',
+        'noopener',
+      ]);
+      expect(cite?.querySelector('.visually-hidden')?.textContent).toBe(
+        ' Terms of service, opens in a new tab',
+      );
+      const tooltips =
+        await TestbedHarnessEnvironment.loader(fixture).getAllHarnesses(MatTooltipHarness);
+      await tooltips[1].show();
+      expect(await tooltips[1].getTooltipText()).toBe(
+        '“shall be handled by the National Board for Consumer Disputes (ARN) or the Swedish courts” ' +
+          '(Terms of service)',
+      );
+    });
+
+    it('shows the grade when the dot is clicked or tapped, and keeps it there', async () => {
+      await show('mullvad.vpn');
+      const tooltip = await TestbedHarnessEnvironment.loader(fixture).getHarness(MatTooltipHarness);
+      const dot = element().querySelector<HTMLButtonElement>('.grade');
+
+      dot?.click();
+      await fixture.whenStable();
+      expect(await tooltip.isOpen()).toBe(true);
+      expect(await tooltip.getTooltipText()).toBe('Great');
+      // A click on the trigger is outside the tooltip, which hides it after 0 ms unless show() cancels that.
+      dot?.click();
+      await new Promise((resolve) => setTimeout(resolve, 20));
+      await fixture.whenStable();
+      expect(await tooltip.isOpen()).toBe(true);
+    });
+
     it('shows a rating for the user’s country over the one for everywhere', async () => {
       const saved = TestBed.inject(SettingsStore).saved as WritableSignal<Settings | undefined>;
       saved.set({ ...alberta, country: 'US', subdivision: undefined, currency: 'USD' });
       await show('mullvad.vpn');
 
-      expect(text('.policies li')).toBe('Bad, Disputes: A made-up US rule, for the test.');
+      expect(element().querySelector('.grade')?.ariaLabel).toBe('Bad');
+      expect(groups().at(-1)).toBe(
+        'Terms and policies Legal Disputes: A made-up US rule, for the test. [1] ' +
+          'Service VPN logging: No connection logs, and an audit found none. [2] ' +
+          'Sources [1] Terms of service [2] No-logging policy',
+      );
     });
 
     it('has no such group for a provider with no ratings', async () => {

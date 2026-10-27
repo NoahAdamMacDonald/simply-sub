@@ -3,6 +3,7 @@ import {
   formatCatalogIssue,
   planPolicies,
   policiesSchema,
+  quoteLink,
   policyTopicsFileSchema,
   validateCatalog,
   type CatalogSourceFile,
@@ -11,14 +12,14 @@ import {
 } from '../../src';
 import { catalog, edited, today } from './catalog-files';
 
-// Terms and policies (BLUEPRINT §4.10, M1.13): the topics registry, a provider's ratings, the checks across files,
-// and what a card shows for a plan.
+// Terms and policies (BLUEPRINT §4.10, M1.13, M1.14): the topics registry, a provider's ratings, the checks across
+// files, and what a card shows for a plan, with its citations.
 
 const tiers = {
-  good: 'Collects only what the service needs to work.',
-  'leaning-good': 'Asks before collecting anything more.',
+  great: 'Collects only what the service needs to work.',
+  good: 'Asks before collecting anything more.',
   neutral: 'Collects more by default, and you can opt out.',
-  'leaning-bad': 'Opting out is partial.',
+  poor: 'Opting out is partial.',
   bad: 'No way to opt out.',
 };
 
@@ -60,7 +61,7 @@ const privacy = 'https://mullvad.net/en/help/privacy-policy';
 function rating(topic: string, extra: Record<string, unknown> = {}) {
   return {
     topic,
-    tier: 'good',
+    tier: 'great',
     reason: 'Keeps almost nothing.',
     sources: [{ url: privacy, quote: 'to have as minimal data retention as possible' }],
     lastVerified: '2026-10-22',
@@ -79,7 +80,7 @@ const mullvadPolicies = {
   ratings: [
     rating('privacy.data-collection'),
     rating('billing.cancel-refunds', {
-      tier: 'leaning-good',
+      tier: 'good',
       reason: 'Prepaid, with a 14-day money-back guarantee.',
       sources: [{ url: terms, quote: 'We offer users a 14-day money-back guarantee.' }],
     }),
@@ -142,13 +143,13 @@ describe('a provider’s policies', () => {
     ).toEqual(['No rating quotes this page: leave it out']);
   });
 
-  it('keeps the reason to one short line', () => {
+  it('keeps the reason to a sentence or two', () => {
     expect(
       issues({
         links: privacyOnly,
-        ratings: [rating('privacy.data-collection', { reason: 'x'.repeat(101) })],
+        ratings: [rating('privacy.data-collection', { reason: 'x'.repeat(241) })],
       }),
-    ).toEqual(['Keep it to one short line (100 characters at most)']);
+    ).toEqual(['Keep it to a sentence or two (240 characters at most)']);
   });
 
   it('lets a rating for some plans or regions sit over one for all, but not two of the same scope', () => {
@@ -258,6 +259,40 @@ describe('planPolicies', () => {
     ).toEqual(['Privacy policy']);
   });
 
+  it('cites each page a rating quotes once, by its number in the links, linked to its words', () => {
+    const ratings = [
+      ...mullvadPolicies.ratings,
+      rating('privacy.ads-tracking', {
+        sources: [
+          { url: privacy, quote: 'Deleted after 70 days.' },
+          { url: terms, quote: 'Refunds - within 14 days' },
+          { url: privacy, quote: 'Payment IDs, after 20.' },
+        ],
+      }),
+    ];
+    const shown = planPolicies(provider(ratings), 'mullvad.vpn', 'CA', topics);
+
+    expect(
+      shown?.groups.flatMap(({ policies }) =>
+        policies.map(({ topic, citations }) => [
+          topic.id,
+          citations.map(({ number, name }) => `${number} ${name}`),
+        ]),
+      ),
+    ).toEqual([
+      ['privacy.data-collection', ['2 Privacy policy']],
+      ['privacy.ads-tracking', ['1 Terms of service', '2 Privacy policy']],
+      ['billing.cancel-refunds', ['1 Terms of service']],
+      ['service.vpn-logging', ['2 Privacy policy']],
+    ]);
+    expect(shown?.groups[0].policies[1].citations[1]).toEqual({
+      number: 2,
+      name: 'Privacy policy',
+      quotes: ['Deleted after 70 days.', 'Payment IDs, after 20.'],
+      href: `${privacy}#:~:text=Deleted%20after%2070%20days.&text=Payment%20IDs%2C%20after%2020.`,
+    });
+  });
+
   it('prefers a rating for the plan, then for the region (or its group), over one for everything', () => {
     const ratings = [
       rating('privacy.ads-tracking', { reason: 'Everywhere.' }),
@@ -286,5 +321,31 @@ describe('planPolicies', () => {
         topics,
       ),
     ).toBeUndefined();
+  });
+});
+
+describe('quoteLink', () => {
+  it('links a short quote word for word, encoding what a text fragment reserves', () => {
+    expect(quoteLink(privacy, ['No logs, ever - at all & never'])).toBe(
+      `${privacy}#:~:text=No%20logs%2C%20ever%20%2D%20at%20all%20%26%20never`,
+    );
+  });
+
+  it('matches a long quote by its first and last words, whatever spaces it has', () => {
+    expect(
+      quoteLink(terms, [
+        'shall be handled by the National Board for Consumer\u00a0Disputes (ARN) or the  Swedish courts',
+      ]),
+    ).toBe(`${terms}#:~:text=shall%20be%20handled%20by,or%20the%20Swedish%20courts`);
+  });
+
+  it('adds the directive after a fragment the page already has', () => {
+    expect(quoteLink(`${terms}#refunds`, ['Refunds'])).toBe(`${terms}#refunds:~:text=Refunds`);
+  });
+
+  it('highlights several quotes on one page, each a directive of its own', () => {
+    expect(quoteLink(terms, ['Refunds', 'Within 14 days.'])).toBe(
+      `${terms}#:~:text=Refunds&text=Within%2014%20days.`,
+    );
   });
 });

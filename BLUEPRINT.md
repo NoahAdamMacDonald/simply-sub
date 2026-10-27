@@ -1098,26 +1098,33 @@ Canada, which show Mullvad's price only in the basket. Laptop with Linux's price
 so its price before VAT is stored, as SerialCart's is.
 
 ### 4.10 Terms and policies
-A card's expanded section rates the provider's terms of service, privacy policy and other policies (M1.13), so a
-buyer can see what signing up means beyond the price.
+A card's expanded section grades the provider's terms of service, privacy policy and other policies (M1.13,
+M1.14), so a buyer can see what signing up means beyond the price.
 - **Topics** come from `data/policy-topics.yaml`, in four groups: privacy (data collection, selling or sharing data,
   ads and tracking, deleting your data), billing (cancelling and refunds, price changes, free trials), legal
   (disputes, changes to the terms, closing your account) and service (VPN logging for VPNs; account sharing and
-  device limits for streaming services). Each has a rubric for five tiers, good, leaning good, neutral, leaning bad
-  and bad, so a tier means the same for every provider. Data collection's is the model: collecting only what the
-  service needs is good, asking first leaning good, an opt-out neutral, a partial opt-out leaning bad and none bad.
-- **A provider's `policies`:** its ratings and the pages they quote (`links`). A rating is a topic, a tier, a reason
-  of one line (100 characters at most), one to three sources (a URL and the page's words, word for word) and the
-  date they were read, optionally for some plans (an ad tier's tracking) or regions (a country's own terms), which
+  device limits for streaming services). Each has a rubric for five grades, great, good, neutral, poor and bad
+  (M1.14; M1.13 called them good, leaning good, neutral, leaning bad and bad), so a grade means the same for every
+  provider. Data collection's is the model: collecting only what the service needs is great, asking first good, an
+  opt-out neutral, a partial opt-out poor and none bad.
+- **A provider's `policies`:** its ratings and the pages they quote (`links`). A rating is a topic, a grade
+  (`tier`), a reason of a sentence or two in plain words anyone can follow (240 characters at most; M1.13 kept it to
+  one line of 100), one to three sources (a URL and the page's words, word for word) and the date they were read, optionally for some plans (an ad tier's tracking) or regions (a country's own terms), which
   sit over a rating for every plan or everywhere. Every quoted page is linked and every link is quoted; a topic for
   some categories applies only to a provider with a plan in one (`validateCatalog`).
 - **On the card:** core's `planPolicies` picks, for the plan shown and the user's country, each topic's rating, by
-  group in the registry's order, and the pages those ratings quote. Each rating is a pill in its tier's colour,
-  green to red (`--policy-*`, section 8.1), named in words too ("Leaning bad, Disputes: …"), then the topic and the
-  reason; the pages follow, linked. A topic with no rating isn't shown, and a provider with none has no section.
+  group in the registry's order, and the pages those ratings quote, numbered from 1. Each rating is a dot in its
+  grade's colour, green to red (`--policy-*`, section 8.1), like the rank dots: a 24 px button named by its grade,
+  which a tooltip shows on hover, keyboard focus or a tap (Material's long press is off, so a tap is a click). Then
+  the topic in bold and the reason, muted, with an inline citation of each page it quotes ("[2]", once however many
+  quotes it takes from it): a link to the page with a text fragment (`#:~:text=`, core's `quoteLink`) that scrolls
+  to its first quote and highlights each, and the quotes as its tooltip. The numbered pages follow, under Sources.
+  The grade's name isn't on screen until asked for, as the user chose (M1.14): screen readers read it as the dot's
+  name, and the reason says the same in words. A topic with no rating isn't shown, and a provider with none has no
+  section.
 - **Read like prices:** the policy-research skill, from the provider's own pages; a page behind a bot check stays
-  unread. The quotes stay in the catalog files for review, though the card doesn't show them (about 7 kB more
-  to download, compressed, for ten providers). Nothing rereads them nightly yet: validation warns once a rating is
+  unread. The quotes are in the catalog files, and the card shows them in its citations' tooltips and links (about
+  7 kB more to download, compressed, for ten providers). Nothing rereads them nightly yet: validation warns once a rating is
   a year old.
 
 ---
@@ -1926,7 +1933,7 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
     --ss-danger: var(--rank-unwanted-text);  --ss-on-danger: var(--ss-on-accent);  /* ss-confirm's danger button */
     --ss-dot-ring: oklch(from var(--ss-text) l c h / 0.3);  /* a faint ring that keeps pale dots visible */
     --ss-state-tint: oklch(from var(--ss-text) l c h / 0.05);  --ss-state-hover: oklch(from var(--ss-text) l c h / 0.1);  /* a plain control drawn as a bar, at rest and hovered: a card's Hide details (M5.7) */
-    --policy-good: var(--rank-wanted);  --policy-leaning-good: #B5E61D;  --policy-neutral: var(--rank-uses);  --policy-leaning-bad: var(--rank-unused);  --policy-bad: var(--rank-unwanted);  --policy-label: var(--budget-label);  /* Terms and policies' tier pills, green to red, behind dark text in both themes: 4.9:1 on the red, 7:1 or more on the rest (M1.13) */
+    --policy-great: var(--rank-wanted);  --policy-good: #B5E61D;  --policy-neutral: var(--rank-uses);  --policy-poor: var(--rank-unused);  --policy-bad: var(--rank-unwanted);  /* Terms and policies' grade dots, green to red, with --ss-dot-ring round them; the grade's name is each dot's label and tooltip (M1.13, M1.14) */
     --ss-icon-tile: #FFFFFF;                 /* behind logos in both themes: sites draw icons for white (M5.2) */
   }
   [data-theme='dark'] {
@@ -2488,6 +2495,18 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-27, M1.14)**
+- **The grades are Great, Good, Neutral, Poor and Bad** (they were good, leaning good, neutral, leaning bad and
+  bad), in core's `policyTiers`, every rubric and every rating.
+- **A dot, not a pill** (section 4.10): each rating's grade is a dot in its colour, like the rank dots, whose
+  tooltip names it on hover, keyboard focus or a tap. A click while hovering keeps it open (`show()`, not
+  `toggle()`), and a tap elsewhere closes it.
+- **Reasons in plain words,** a sentence or two (240 characters at most, from 100): all 66 rewritten for someone who
+  has never read a contract ("a private referee called an arbitrator decides … instead of a court"), saying only
+  what their quotes say. The reason is muted and its topic bold.
+- **Inline citations:** each reason ends with a numbered link to each page it quotes, opening it at the quote where
+  the browser supports text fragments, with the quotes as its tooltip; the numbered pages follow under Sources.
 
 **Resolved (2026-10-27, M5.8)**
 - **A long Features chip wraps inside its field:** Material keeps a chip one line high and its label on one line,

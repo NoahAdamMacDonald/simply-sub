@@ -52,15 +52,14 @@
   --suggest-hard: var(--rank-unwanted);
   --suggest-normal: var(--rank-unused);
   --suggest-soft: var(--rank-uses);
-  // Terms and policies' five tiers (M1.13), green to red: the rank fills, and a yellow-green between Wanted's green
-  // and Uses' yellow for leaning good. In both themes they're pills behind --policy-label, which is 4.9:1 on the red
-  // and 7:1 or more on the others.
-  --policy-good: var(--rank-wanted);
-  --policy-leaning-good: #b5e61d;
+  // Terms and policies' five grades (M1.13, M1.14), green to red: the rank fills, and a yellow-green between Wanted's
+  // green and Uses' yellow for Good. Dots, like the rank dots, with --ss-dot-ring around them for the pale ones; the
+  // grade's name shows on hover, focus or a tap, and screen readers read it.
+  --policy-great: var(--rank-wanted);
+  --policy-good: #b5e61d;
   --policy-neutral: var(--rank-uses);
-  --policy-leaning-bad: var(--rank-unused);
+  --policy-poor: var(--rank-unused);
   --policy-bad: var(--rank-unwanted);
-  --policy-label: var(--budget-label);
   // Destructive actions (ss-confirm's danger button): white on it is 6.3:1.
   --ss-danger: var(--rank-unwanted-text);
   --ss-on-danger: var(--ss-on-accent);

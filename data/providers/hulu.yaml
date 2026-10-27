@@ -64,8 +64,8 @@ policies:
       url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
   ratings:
     - topic: privacy.data-collection
-      tier: leaning-bad
-      reason: 'Tracks you with cookies, pixels and SDKs by default; only ads and cookies can be turned off.'
+      tier: poor
+      reason: 'It follows what you do with cookies, tracking pixels and other hidden tools from the start. You can switch some of it off, like cookies and selling your data, but not all of it.'
       sources:
         - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
           quote: 'We collect information through a variety of technologies, such as cookies, Flash cookies, pixels, tags, software development kits'
@@ -74,7 +74,7 @@ policies:
       lastVerified: 2026-10-27
     - topic: privacy.data-sharing
       tier: neutral
-      reason: 'Shares identifiers with ad companies, unless you opt out in its privacy controls.'
+      reason: 'It gives some details about you, like ID codes or a scrambled email address, to ad companies, and Hulu shares data with partners such as its device makers. You can say no to the ad sharing in its privacy settings.'
       sources:
         - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
           quote: 'When we provide you with relevant advertising on third-party sites and applications, we may share limited personal information about you, such as certain identifiers or hashed email address, with third parties.'
@@ -85,7 +85,7 @@ policies:
       lastVerified: 2026-10-27
     - topic: privacy.ads-tracking
       tier: neutral
-      reason: 'Targets ads from what you do on its sites and others, unless you opt out.'
+      reason: "It picks the ads you see from what you do on its sites and apps, and on other companies' too, unless you turn that off in its privacy settings."
       sources:
         - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
           quote: 'Provide you with targeted advertising based on your activity on our sites and applications and on third-party sites and applications;'
@@ -94,7 +94,7 @@ policies:
       lastVerified: 2026-10-27
     - topic: privacy.data-deletion
       tier: neutral
-      reason: "You can delete your account; how long it keeps your data afterwards isn't stated."
+      reason: "You can delete your account, but it doesn't say how long it keeps your information after that."
       sources:
         - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
           quote: 'Updating or correcting the contact information you gave us, resetting your password, or deleting your registration account'

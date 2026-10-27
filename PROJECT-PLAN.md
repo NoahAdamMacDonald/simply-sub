@@ -124,6 +124,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M1.11 | Disney+'s and Crave's bundles and their providers (added 2026-10-26): TSN, RDS, ICI TOU.TV, Hulu and ESPN from their own pages, with `availableIn` for the ones sold in one country; 20 bundle files for Canada and the US; Disney+'s other countries surveyed; HBO Max, NFL+ and the bundles with them left out, as geo-blocked here (BLUEPRINT §14) | Crave's Standard With Ads card lists its bundles with Disney+, TSN, RDS and EXTRA; a US user sees the Disney+ and Hulu bundles; a Canadian never sees Hulu |
 | M1.12 | Research covers bundles, official resellers and the terms (added 2026-10-27): the price-research skill and the pipeline (BLUEPRINT §6.5) check every provider's bundles, official resellers, terms of service and privacy policy each time, and the provider file says what each found; Mullvad's missing reseller, Laptop with Linux, added (its price before VAT), and Amazon's other 12 stores recorded as unreadable (price only in the basket) (BLUEPRINT §14) | An Albertan's Mullvad card lists Laptop with Linux first among its cheaper resellers; the skill and §6.5 list the three checks |
 | M1.13 | Terms and policies (added 2026-10-27): `data/policy-topics.yaml` (13 topics in privacy, billing, legal and service, each with a five-tier rubric), a provider's `policies` (ratings with a one-line reason and quoted sources, for some plans or regions, and the pages they quote), `validateCatalog`'s checks, core's `planPolicies`, the card's Terms and policies section (tier pills green to red, `--policy-*`), the policy-research skill with its quote checker, and ratings for all ten providers (BLUEPRINT §4.10, §14) | Every card whose provider has ratings shows them by group with a tier in words and colour, a reason and its pages; every quote matches its page; a US user sees Proton's US disputes rating |
+| M1.14 | Policy grades (added 2026-10-27, P8): the grades renamed Great, Good, Neutral, Poor and Bad; a dot per rating, like the rank dots, whose tooltip names its grade on hover, focus or a tap; reasons in plain words, muted, up to 240 characters (all 66 rewritten); an inline citation of each page a reason quotes, linked to the words (core's `quoteLink`), and the pages numbered (BLUEPRINT §4.10, §14) | Each rating's dot shows its grade on hover, keyboard focus and a phone's tap; each reason cites every page it quotes, once; all 111 quotes still match their pages |
 
 ### M2 — API
 | ID | Task | Done when |
@@ -810,8 +811,10 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
   - Perks, and accepted cards (Phase 4).
   - "Price checked Oct 14, 2026", with a "may be out of date" badge when it's older than 90 days.
   - Terms and policies (M1.13, BLUEPRINT §4.10): the provider's ratings on `data/policy-topics.yaml`'s topics for
-    the plan and the user's country, by group (Privacy, Billing, Legal, Service), each a pill in its tier's colour
-    and named in words, with the topic and a one-line reason, then links to the pages they quote.
+    the plan and the user's country, by group (Privacy, Billing, Legal, Service), each a dot in its grade's colour
+    (Great to Bad, green to red) whose tooltip names the grade on hover, focus or a tap (M1.14), with the topic in
+    bold and a reason in plain words, muted, citing each page it quotes ("[2]", linked to the quote), then the
+    numbered pages.
   - It slides open and shut (none with reduced motion), and a "Hide details" bar at its foot closes it too, putting
     focus back on the details button. When opening or closing leaves part of the card off screen, the page scrolls
     it back into view below the pinned bar (M5.7).

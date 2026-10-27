@@ -96,8 +96,8 @@ policies:
       url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
   ratings:
     - topic: privacy.data-sharing
-      tier: leaning-good
-      reason: 'Shared within Bell, and outside it only when the law requires or you agree.'
+      tier: good
+      reason: "It shares your information among Bell's own companies and its suppliers. Anyone else gets it only when the law says so or you agree."
       sources:
         - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
           quote: 'To get a better idea of your needs and how we can fulfill them, we sometimes share information between our companies.'
@@ -106,14 +106,14 @@ policies:
       lastVerified: 2026-10-27
     - topic: privacy.ads-tracking
       tier: neutral
-      reason: 'Tailored ads by default; you can change your ad preferences or block cookies.'
+      reason: 'It picks ads for you, and you can change what kinds of ads you get in your preferences.'
       sources:
         - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
           quote: 'You can manage the types of ads you receive or opt out of communications by updating your preferences.'
       lastVerified: 2026-10-27
     - topic: billing.cancel-refunds
       tier: neutral
-      reason: "Cancel at any time to stop at the end of the period; fees aren't refunded."
+      reason: 'You can cancel whenever you like, and it stops at the end of the time you paid for. You get no money back.'
       sources:
         - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
           quote: 'You may terminate your subscription at any time, which termination will only be effective at the end of your subscription period.'
@@ -121,15 +121,15 @@ policies:
           quote: 'All Fees are non-refundable.'
       lastVerified: 2026-10-27
     - topic: billing.price-changes
-      tier: leaning-bad
-      reason: 'Fees can change at any time on notice, which can be a post on its site.'
+      tier: poor
+      reason: 'It can raise the price whenever it wants, and just posting the new price on its website can count as telling you.'
       sources:
         - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
           quote: 'Bell Media reserves the right to change the amount of, or basis for determining, any Fees for a Pay Service, and to institute new Fees or terms at any time effective upon notice to you, which notice may for certainty include the posting of any such changes on the relevant pages related to the use of the Pay Service.'
       lastVerified: 2026-10-27
     - topic: legal.disputes
       tier: bad
-      reason: 'Private arbitration in Toronto with no class actions, wherever the law allows it.'
+      reason: "If you have a problem with it, you can't go to court: a private referee called an arbitrator decides, in Toronto and behind closed doors, and you can't join a group lawsuit."
       sources:
         - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
           quote: 'will be referred to and finally settled (to the exclusion of the courts) by private and confidential binding arbitration before a single arbitrator held in Toronto, Ontario'
@@ -137,15 +137,15 @@ policies:
           quote: 'You agree to waive any right you may have to commence or participate in any class action against us related to any Claim'
       lastVerified: 2026-10-27
     - topic: legal.terms-changes
-      tier: leaning-bad
-      reason: 'It can change them at any time, and using its sites afterwards means you accept.'
+      tier: poor
+      reason: 'It can change its terms at any time, and if you keep using its sites afterwards, that means you agree.'
       sources:
         - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
           quote: 'Your continued use of a Bell Media Site following the posting of any changes to these Terms and Conditions will mean you accept those changes.'
       lastVerified: 2026-10-27
     - topic: legal.account-closure
       tier: bad
-      reason: 'It can close your account at any time, for any reason, without notice or a refund.'
+      reason: "It can close your account whenever it decides, without warning you, and you don't get your money back."
       sources:
         - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
           quote: 'Bell Media, in its sole and absolute discretion, may, without notice to you, suspend or terminate your account or your use of, or access to, a Bell Media Site or any of the Services'

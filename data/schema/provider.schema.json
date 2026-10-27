@@ -570,14 +570,14 @@
               },
               "tier": {
                 "type": "string",
-                "enum": ["good", "leaning-good", "neutral", "leaning-bad", "bad"],
-                "description": "The rubric's tier its quotes fit"
+                "enum": ["great", "good", "neutral", "poor", "bad"],
+                "description": "The rubric's grade its quotes fit"
               },
               "reason": {
                 "type": "string",
                 "minLength": 1,
-                "maxLength": 100,
-                "description": "Why, in one short line, shown beside the tier"
+                "maxLength": 240,
+                "description": "Why, in plain words anyone can follow, shown beside the grade"
               },
               "sources": {
                 "minItems": 1,

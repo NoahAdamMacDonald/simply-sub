@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
 import {
   planExtras,
   planPolicies,
@@ -8,6 +9,7 @@ import {
   type BundleSaving,
   type PickedPrice,
   type PlanMatch,
+  type PolicyCitation,
   type PolicyGroup,
   type PolicyTier,
   type Rank,
@@ -26,12 +28,12 @@ import { PriceTag } from '../price-tag/price-tag';
 import { ProviderIcon } from '../provider-icon/provider-icon';
 import { catalogIcon, planTitle, savingText, type SavingText } from './card-text';
 
-/** The tiers' names, as each rating's pill shows them (BLUEPRINT §4.10). */
+/** The grades' names: each rating's dot is named by its grade, and shows it on hover, focus or a tap (BLUEPRINT §4.10). */
 const tierNames: Record<PolicyTier, string> = {
+  great: 'Great',
   good: 'Good',
-  'leaning-good': 'Leaning good',
   neutral: 'Neutral',
-  'leaning-bad': 'Leaning bad',
+  poor: 'Poor',
   bad: 'Bad',
 };
 
@@ -45,12 +47,12 @@ const groupNames: Record<PolicyGroup, string> = {
 /**
  * A Search card's expanded section (PROJECT-PLAN P8): the plan's features with the user's ranks, its add-ons, the
  * bundles that include it and what they save, what a suite includes and saves, its perks and notes, its terms and
- * policies rated with a line on why and links to the pages (M1.13), and when its price was checked. Core's
- * planExtras prices them for the user from the catalog file for their country.
+ * policies graded with why in plain words and a citation of each page it quotes (M1.13, M1.14), and when its price
+ * was checked. Core's planExtras prices them for the user from the catalog file for their country.
  */
 @Component({
   selector: 'ss-plan-details',
-  imports: [FeatureList, MatIcon, NgTemplateOutlet, PriceTag, ProviderIcon],
+  imports: [FeatureList, MatIcon, MatTooltip, NgTemplateOutlet, PriceTag, ProviderIcon],
   templateUrl: './plan-details.html',
   styleUrl: './plan-details.scss',
 })
@@ -106,6 +108,11 @@ export class PlanDetails {
 
   protected savingParts(saving: BundleSaving, pricing: readonly PickedPrice[]): SavingText {
     return savingText(saving, pricing, this.settings.saved()?.country);
+  }
+
+  /** A citation's tooltip: the words it quotes, and the page. */
+  protected quoteText({ quotes, name }: PolicyCitation): string {
+    return `${quotes.map((quote) => `“${quote}”`).join(' ')} (${name})`;
   }
 
   protected includedName({ provider, plan }: SuiteContents['includes'][number]): string {

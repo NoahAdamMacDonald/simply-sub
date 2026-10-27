@@ -63,8 +63,8 @@ policies:
       url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
   ratings:
     - topic: privacy.data-sharing
-      tier: leaning-good
-      reason: 'Shared within Bell, and outside it only when the law requires or you agree.'
+      tier: good
+      reason: "It shares your information among Bell's own companies and its suppliers. Anyone else gets it only when the law says so or you agree."
       sources:
         - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
           quote: 'To get a better idea of your needs and how we can fulfill them, we sometimes share information between our companies.'
@@ -73,21 +73,21 @@ policies:
       lastVerified: 2026-10-27
     - topic: privacy.ads-tracking
       tier: neutral
-      reason: 'Tailored ads by default; you can change your ad preferences or block cookies.'
+      reason: 'It picks ads for you, and you can change what kinds of ads you get in your preferences.'
       sources:
         - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
           quote: 'You can manage the types of ads you receive or opt out of communications by updating your preferences.'
       lastVerified: 2026-10-27
     - topic: billing.cancel-refunds
       tier: neutral
-      reason: 'Cancel and keep it to the end of the period, with no refunds.'
+      reason: 'If you cancel, you can keep watching until the end of the time you paid for, but you get no money back.'
       sources:
         - url: https://www.rds.ca/conditions
           quote: 'Les frais d’abonnement ne sont pas remboursables. Suite à toute annulation, vous conserverez l’accès au service jusqu’à la fin de votre période de facturation en cours, après quoi votre abonnement prendra fin.'
       lastVerified: 2026-10-27
     - topic: legal.disputes
       tier: bad
-      reason: 'Binding arbitration in your city, giving up courts and trials.'
+      reason: 'If you have a problem with it, a private referee called an arbitrator decides, in your city, instead of a court. You give up your right to a trial.'
       sources:
         - url: https://www.rds.ca/conditions
           quote: 'par voie d’arbitrage exécutoire dans votre ville de résidence'
