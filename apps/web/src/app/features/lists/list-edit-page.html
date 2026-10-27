@@ -1,1 +1,6 @@
 <h1>Edit list</h1>
+@if (adding(); as adding) {
+  <p class="adding">
+    {{ adding.name }}, billed {{ adding.period }}, will be added here once the list editor is ready.
+  </p>
+}

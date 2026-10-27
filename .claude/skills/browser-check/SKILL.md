@@ -81,14 +81,18 @@ resellers in Alberta and their links, the Tab order (box, Sort, a card's links, 
 button), a chip picked with an arrow key, Enter on the details button, "netflix 4k" after the typing pause, the empty
 state and Clear search, a listed provider's status (an item written to IndexedDB, then a reload), every card's cancel
 page (M1.9), for a US user a provider not sold there (Crave, sold in Canada only), and for a UK user a fallback price
-("No price for United Kingdom yet"), with axe in both
-themes at both widths with cards expanded and with no match. It answers `GET /fx` itself. M5.3 added the filter panel:
+("No price for United Kingdom yet") and Sold in with its Settings default (M5.6), with axe in both themes at both
+widths with cards expanded and with no match. It answers `GET /fx` itself. M5.3 added the filter panel:
 its Tab order (after Sort, before the results), each filter by keyboard (Native by Space, 4K from the Features
 suggestions by arrow keys, the price's top thumb by arrow keys, Category, an Activity chip, Clear all), the URL and
 `history.length` after each (typing replaces its entry, a run of price changes makes one, anything else adds one), a
 reload, Back and Forward, a URL with values the catalog doesn't have (rewritten in place), no scroll on a filter
 change, and at 360 px the drawer by keyboard (focus on its close button, the trap, the count it announces, Escape,
-Show results, Back), with axe on the open suggestions at 1280 px and the open drawer at 360 px in both themes.
+Show results, Back), with axe on the open suggestions at 1280 px and the open drawer at 360 px in both themes. M5.4
+added a price's Add to list menu: the price as a menu button ("…, add to a list"), Enter opening it with a list
+(written to IndexedDB) and its count, then New list…, Escape back on the price, a list opening its editor with the
+plan and period in the URL and the placeholder's text, and a bundle's price with New list…, with axe on the open menu
+in both themes at both widths.
 
 ## Gotchas
 

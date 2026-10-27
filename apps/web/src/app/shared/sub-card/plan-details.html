@@ -57,7 +57,17 @@
               {{ offer.bundle.name }}
             </span>
             @for (price of offer.pricing; track $index) {
-              <ss-price [price]="price" />
+              @if (addMenu(); as menu) {
+                <ss-price
+                  clickable
+                  action="add to a list"
+                  [price]="price"
+                  [menu]="menu.menu()"
+                  (priceSelect)="menu.prepare(bundleRequest(offer.bundle.id, $event))"
+                />
+              } @else {
+                <ss-price [price]="price" />
+              }
             }
             @for (saving of offer.savings; track $index) {
               <ng-container

@@ -2447,6 +2447,26 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
+**Resolved (2026-10-26, M5.4)**
+- **A price opens Add to list** (PROJECT-PLAN P7, flows F1 and F4): each Search card has one
+  `ss-add-to-list-menu`, which its plan's prices and, in the details, its bundles' prices open after saying what
+  they add. Each is a menu button named by its words and ", add to a list". Add-on and reseller prices stay text: an
+  add-on is added with its plan in the item dialog, and a reseller's price is a price override (section 4.9).
+- **The menu** lists the user's lists in the order they were made, each with its number of subscriptions, "Work
+  Related (12)" ("12 subscriptions" to a screen reader), then New list…. Its title and counts use the body text
+  colour: the muted shade is 4.3:1 on dark mode's menu surface.
+- **The request is in the URL** (core's `addRequestParams` and `readAddRequest`):
+  `/lists/<id>/edit?add=<plan id>&interval=month`, or `addBundle=<bundle id>`, with `count` only for a period of
+  more than one interval (`interval=month&count=3`), so the item dialog (M6.5) can preselect any price's period,
+  not only monthly and yearly. Reading takes the first of a repeated parameter and rejects both `add` and
+  `addBundle`, neither, an unknown interval, a count outside 1–120 and a malformed id; a missing interval is
+  monthly. New list… opens `/lists/new` with the same parameters, where the editor makes the draft list first
+  (M6.3, M6.4).
+- **Until the editor exists**, the placeholder says what it will add: "Netflix Standard with ads, billed monthly,
+  will be added here once the list editor is ready.", named from the catalog (the id while it loads).
+- **The initial bundle didn't change** (487.7 kB). Material's menu loads with the Search page, whose chunk grew by
+  30 kB to 255 kB.
+
 **Resolved (2026-10-26, M1.11)**
 - **Disney+'s and Crave's bundles, and the providers they need:** TSN, RDS and ICI TOU.TV (Canada), Hulu and ESPN
   (the US), each from its own pages: plans, prices, features, cancel page and, for the ones sold in one country,

@@ -1,8 +1,9 @@
 import { Component, computed, inject, input, linkedSignal, signal } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import type { CatalogResult, Rank, RankKey } from '@simply-sub/core';
+import type { AddRequest, CatalogResult, PickedPrice, Rank, RankKey } from '@simply-sub/core';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { AddToListMenu } from '../add-to-list/add-to-list-menu';
 import { countryName } from '../country-name';
 import { PriceTag } from '../price-tag/price-tag';
 import { ProviderIcon } from '../provider-icon/provider-icon';
@@ -15,13 +16,22 @@ let nextId = 0;
 /**
  * A subscription card (PROJECT-PLAN §4.3), the search variant (P8, M5.2): one provider, showing one of the plans
  * that matched, with its prices, the resellers that sell it for less, links to sign up and cancel, and the
- * provider's place in the user's lists. Chips switch between the matching plans, and the expanded section adds the
- * plan's features, add-ons, bundles and the rest (ss-plan-details). A provider that isn't sold in the user's country
- * says so instead. The list variant comes with List view (M6.8).
+ * provider's place in the user's lists. A price opens the Add to list menu (P7, M5.4). Chips switch between the
+ * matching plans, and the expanded section adds the plan's features, add-ons, bundles and the rest (ss-plan-details),
+ * whose bundle prices open the same menu. A provider that isn't sold in the user's country says so instead. The list
+ * variant comes with List view (M6.8).
  */
 @Component({
   selector: 'ss-sub-card',
-  imports: [MatIcon, MatIconButton, PlanDetails, PriceTag, ProviderIcon, StatusBadge],
+  imports: [
+    AddToListMenu,
+    MatIcon,
+    MatIconButton,
+    PlanDetails,
+    PriceTag,
+    ProviderIcon,
+    StatusBadge,
+  ],
   templateUrl: './sub-card.html',
   styleUrl: './sub-card.scss',
 })
@@ -59,6 +69,11 @@ export class SubCard {
     this.plans().find(({ plan }) => plan.id === this.selectedId()),
   );
   protected readonly expanded = signal(false);
+
+  /** What a plan's price adds to a list: the plan, at that price's period (P7, F1). */
+  protected planRequest(planId: string, price: PickedPrice): AddRequest {
+    return { kind: 'plan', planId, interval: price.interval, intervalCount: price.intervalCount };
+  }
 
   protected readonly icon = catalogIcon;
   /** "Netflix Standard", for the links' and the details button's names. */

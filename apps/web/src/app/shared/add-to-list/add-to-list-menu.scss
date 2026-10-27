@@ -1,0 +1,8 @@
+// The menu renders in an overlay, outside this component's view: its parts are styled by their own classes, which
+// the emulated encapsulation still reaches because the menu's template is declared here. The title is body text, not
+// the muted shade: on dark mode's raised menu surface that's 4.3:1 (BLUEPRINT §8.1).
+.title {
+  margin: 0;
+  padding: 8px 16px 4px;
+  font: var(--mat-sys-title-small);
+}

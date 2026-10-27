@@ -2,6 +2,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
 import {
   planExtras,
+  type AddRequest,
   type BundleSaving,
   type PickedPrice,
   type PlanMatch,
@@ -13,6 +14,7 @@ import {
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { FxStore } from '../../core/fx/fx-store';
 import { SettingsStore } from '../../core/settings/settings-store';
+import type { AddToListMenu } from '../add-to-list/add-to-list-menu';
 import { countryName } from '../country-name';
 import { dateText } from '../date-text';
 import { FeatureList } from '../feature-list/feature-list';
@@ -39,6 +41,18 @@ export class PlanDetails {
   readonly provider = input.required<SnapshotProvider>();
   readonly match = input.required<Pick<PlanMatch, 'plan' | 'pricing' | 'lastVerified' | 'stale'>>();
   readonly ranks = input<Readonly<Partial<Record<RankKey, Rank>>>>({});
+  /** The card's Add to list menu, which a bundle's price opens (P7, F4). Without it, prices are text. */
+  readonly addMenu = input<AddToListMenu>();
+
+  /** What a bundle's price adds to a list: the bundle, at that price's period. */
+  protected bundleRequest(bundleId: string, price: PickedPrice): AddRequest {
+    return {
+      kind: 'bundle',
+      bundleId,
+      interval: price.interval,
+      intervalCount: price.intervalCount,
+    };
+  }
 
   protected readonly plan = computed(() => this.match().plan);
   protected readonly hasFeatures = computed(() => Object.keys(this.plan().features).length > 0);

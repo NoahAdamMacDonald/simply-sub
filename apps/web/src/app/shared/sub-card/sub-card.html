@@ -29,7 +29,13 @@
     <div class="prices">
       @if (plan(); as plan) {
         @for (price of plan.pricing; track $index) {
-          <ss-price [price]="price" />
+          <ss-price
+            clickable
+            action="add to a list"
+            [price]="price"
+            [menu]="addMenu.menu()"
+            (priceSelect)="addMenu.prepare(planRequest(plan.plan.id, $event))"
+          />
         }
         @if (plan.availability === 'unknown') {
           <p class="note">No price for {{ country() }} yet</p>
@@ -92,8 +98,16 @@
     </button>
     <div class="details" [id]="id + '-details'" [hidden]="!expanded()">
       @if (expanded()) {
-        <ss-plan-details [provider]="provider()" [match]="plan" [ranks]="ranks()" />
+        <ss-plan-details
+          [provider]="provider()"
+          [match]="plan"
+          [ranks]="ranks()"
+          [addMenu]="addMenu"
+        />
       }
     </div>
   }
 </article>
+
+<!-- One menu for every price on the card: each says what it adds before it opens it. -->
+<ss-add-to-list-menu #addMenu />

@@ -1,7 +1,7 @@
 <!-- Spaces go inside the spans: Angular drops the whitespace between them, and the flex gaps space them on screen. -->
 <ng-template #tag>
   @if (free()) {
-    Free
+    <span>Free</span>
   } @else {
     @if (converted()) {
       <span aria-hidden="true">≈ </span><span class="visually-hidden">about </span>
@@ -12,19 +12,39 @@
   }
 </ng-template>
 
+<ng-template #button>
+  <ng-container [ngTemplateOutlet]="tag" />
+  @if (foreign()) {
+    <mat-icon class="fx">currency_exchange</mat-icon>
+  }
+  @if (action(); as action) {
+    <span class="visually-hidden">, {{ action }}</span>
+  }
+</ng-template>
+
 @if (clickable()) {
-  <button
-    type="button"
-    class="tag"
-    [matTooltip]="tooltip()"
-    [matTooltipDisabled]="!tooltip()"
-    (click)="priceSelect.emit(price())"
-  >
-    <ng-container [ngTemplateOutlet]="tag" />
-    @if (foreign()) {
-      <mat-icon class="fx">currency_exchange</mat-icon>
-    }
-  </button>
+  @if (menu(); as menu) {
+    <button
+      type="button"
+      class="tag"
+      [matMenuTriggerFor]="menu"
+      [matTooltip]="tooltip()"
+      [matTooltipDisabled]="!tooltip()"
+      (click)="priceSelect.emit(price())"
+    >
+      <ng-container [ngTemplateOutlet]="button" />
+    </button>
+  } @else {
+    <button
+      type="button"
+      class="tag"
+      [matTooltip]="tooltip()"
+      [matTooltipDisabled]="!tooltip()"
+      (click)="priceSelect.emit(price())"
+    >
+      <ng-container [ngTemplateOutlet]="button" />
+    </button>
+  }
 } @else {
   <span class="tag"><ng-container [ngTemplateOutlet]="tag" /></span>
   @if (foreign()) {

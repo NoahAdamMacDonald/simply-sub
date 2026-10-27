@@ -1,6 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, booleanAttribute, computed, inject, input, output } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
+import { MatMenuTrigger, type MatMenuPanel } from '@angular/material/menu';
 import { MatTooltip } from '@angular/material/tooltip';
 import { buyerTaxPlace, priceTaxNote, type PickedPrice } from '@simply-sub/core';
 import { SettingsStore } from '../../core/settings/settings-store';
@@ -10,11 +11,12 @@ import { amountText, intervalSpoken, intervalText, priceTooltip } from './price-
  * A price tag (PROJECT-PLAN §4.3): a picked price and its billing period, with ≈ and the currency_exchange icon when
  * it's converted, and a tooltip that says from what. In Canada and the US it adds "+ tax" where sales tax is added, or
  * "incl. tax" on a price that includes it (BLUEPRINT §4.8). A $0 price is "Free". When `clickable`, the price is a
- * button that emits `priceSelect` and carries the tooltip; otherwise the icon does, and it can be focused.
+ * button that emits `priceSelect` and carries the tooltip, and opens `menu` when it has one (Search's Add to list,
+ * M5.4); otherwise the icon carries it, and it can be focused.
  */
 @Component({
   selector: 'ss-price',
-  imports: [MatIcon, MatTooltip, NgTemplateOutlet],
+  imports: [MatIcon, MatMenuTrigger, MatTooltip, NgTemplateOutlet],
   templateUrl: './price-tag.html',
   styleUrl: './price-tag.scss',
 })
@@ -26,6 +28,10 @@ export class PriceTag {
   readonly clickable = input(false, { transform: booleanAttribute });
   /** Where the item was bought, when that's not the user's country (ListItem.region): its tax rule applies. */
   readonly region = input<string>();
+  /** The menu a clickable price opens, which then returns focus to it. */
+  readonly menu = input<MatMenuPanel>();
+  /** What clicking does, for screen readers: "add to a list". */
+  readonly action = input<string>();
   readonly priceSelect = output<PickedPrice>();
 
   protected readonly free = computed(() => this.price().amount === 0);
