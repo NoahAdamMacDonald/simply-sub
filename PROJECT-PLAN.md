@@ -120,6 +120,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M1.7 | core: `pickPrice`, `convert` (§3.1; `monthlyEquivalent` arrived in M1.5 for the seed) | Tests cover a native price, the same currency from another region, a GLOBAL price and a fallback region |
 | M1.8 | Resellers (BLUEPRINT §4.9, added 2026-10-26): `data/resellers.yaml` and a provider's `resellers` (core's schemas, the JSON Schemas, `validateCatalog`'s checks), reseller logos and icons (`data:icons`, `data:build`), region files that keep the reseller prices a buyer can use, core's `resellerDeals`, and Mullvad's official resellers researched one by one; Mullvad's 2-, 3- and 6-month prices | Validation rejects a reseller the provider's own site doesn't approve or a price page off the shop's domains; Amazon.ca shows as cheaper in Alberta and not in Ontario |
 | M1.9 | Required links and country lists (added 2026-10-27): every plan and bundle has a sign-up `link` and every provider a `cancelUrl` (the schema requires them; Disney+'s, Crave's and Mullvad's read from their sites); `availableIn` for providers sold in certain countries only, from their own words (Crave: Canada) (BLUEPRINT §14) | Validation rejects a provider without a cancel page or a plan without a link; every Search card links to its plan and its cancel page; a US user doesn't see Crave until the text names it |
+| M1.10 | Plan categories (added 2026-10-27): a plan's optional `categories` (core's `planCategories`, `providerCategories`, `validateCatalog`), Search's Category filter and category terms keeping the plans in a category, the panel's categories from the plans sold here, and GET /providers' category filter through D1's `provider_categories` (migration 0003, `seedFormat` 2) (BLUEPRINT §14) | Under VPN, Search and GET /providers show Proton with its VPN plans only, and Mail Plus stays out |
 
 ### M2 — API
 | ID | Task | Done when |
@@ -793,7 +794,8 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
   - Price per month: dual slider on the monthly equivalent in the user's currency, before tax, from $0 to the
     priciest plan sold in the user's country, rounded up to about 40 round steps (CA$28.19 is $0 to $30 by $1); the
     right end means "Unlimited". The URL's amounts are in Settings' currency.
-  - Category: a select of the categories something sold in the user's country is in.
+  - Category: a select of the categories a plan sold in the user's country is in. A plan is in its own
+    `categories`, else its provider's (M1.10), so under VPN Proton shows its VPN plans.
   - Features: autocomplete over the rank keys some plan sold there provides. Typing "Video quality" offers its
     values (480p to 4K), then the rest of its feature category, such as HDR and Ad free ("More in Streaming"). Each
     pick adds a chip named by the registry ("Video quality: 4K (Ultra HD)", a boolean by its own name), and chips

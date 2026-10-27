@@ -605,16 +605,26 @@ async function addItem(page, planId) {
     await sleep(300);
     await page.keyboard.press('Enter');
     await until('cat=vpn', () => search(page) === '?cat=vpn');
-    await until('Mullvad alone', async () => (await names(page)).join() === 'Mullvad VPN');
+    await until(
+      'Mullvad and Proton',
+      async () => (await names(page)).join() === 'Proton,Mullvad VPN',
+    );
     check(
-      'Category offers All and the categories sold here, and VPN keeps Mullvad',
-      categoryOptions.join() === 'All,Streaming video,VPN,Privacy & security suites',
+      'Category offers All and the categories a plan sold here is in',
+      categoryOptions.join() === 'All,Streaming video,VPN,Privacy & security suites,Cloud storage',
       categoryOptions.join(', '),
+    );
+    // M1.10: Proton is a privacy suite, and its VPN Plus, Free and suites are VPNs too.
+    const protonVpn = await chips(page, 'Proton');
+    check(
+      'VPN keeps Mullvad and Proton, with only Proton’s VPN plans',
+      protonVpn.join() === 'Proton Free,VPN Plus,Proton Unlimited,Proton Duo,Proton Family',
+      protonVpn.join(', '),
     );
     await panel.getByRole('checkbox', { name: 'Not listed' }).focus();
     await page.keyboard.press('Space');
     await until('act=none', () => search(page) === '?cat=vpn&act=none');
-    check('Space on Not listed adds act=none', (await names(page)).join() === 'Mullvad VPN');
+    check('Space on Not listed adds act=none', (await names(page)).join() === 'Proton,Mullvad VPN');
     await page.screenshot({ path: path.join(outDir, 'filters-1280.png'), fullPage: true });
 
     // A URL with values the catalog doesn't have is rewritten in place.

@@ -1024,8 +1024,8 @@
     "GET /providers": {
       "description": "Search and filter providers. Each result lists the provider's plans that match every filter, cheapest first, with picked prices for the requested region and currency, and bestPlanId is the cheapest. lastVerified is the oldest date of the prices shown, and stale means it's more than 90 days old. matchedKeys are the rank keys from feature and from q that the plan provides. matchedOn says why the provider matched: name, alias:<alias>, plan:<plan id> (only when its name and aliases didn't), category:<id> and feature:<rank key>, filters included. meta.query is the query as read, with the defaults it used; total counts every matching provider. The ETag is D1's catalog version and a hash of the query, the exchange rates' date and the static registry's version, and If-None-Match gets 304.",
       "query": {
-        "q": "Free text, 1 to 100 characters, matched term by term regardless of case, accents and extra spaces, and every term must match ('netflix 4k' is Netflix's 4k plans). A term is the longest run of words that a rank key's, feature's or service category's name or alias contains ('ultra hd'), else one word, and one whose last word looks plural also matches its singular ('vpns'). A term matches provider names and aliases, plan names, service category names, and rank-key names and aliases: a boolean feature's own name, else an enum value's, tier's or set value's ('4k' and 'uhd' mean video.quality=4k). One that names no rank key also matches a feature's own name and aliases ('video quality'), and counts with the highest value or tier each plan provides of it. Relevance, best first, is the best term's: a provider name that starts with it, one that contains it, an alias, a plan name, then a feature or category. Each term picks plans: a category it names brings every plan; rank keys it names bring the plans that provide one, when any does, and the plans it names; otherwise a provider matched by name or alias brings every plan, and plan names those plans. The plans every term picks are listed.",
-        "category": "Service category id, e.g. 'streaming'. Another id gets 400.",
+        "q": "Free text, 1 to 100 characters, matched term by term regardless of case, accents and extra spaces, and every term must match ('netflix 4k' is Netflix's 4k plans). A term is the longest run of words that a rank key's, feature's or service category's name or alias contains ('ultra hd'), else one word, and one whose last word looks plural also matches its singular ('vpns'). A term matches provider names and aliases, plan names, service category names, and rank-key names and aliases: a boolean feature's own name, else an enum value's, tier's or set value's ('4k' and 'uhd' mean video.quality=4k). One that names no rank key also matches a feature's own name and aliases ('video quality'), and counts with the highest value or tier each plan provides of it. Relevance, best first, is the best term's: a provider name that starts with it, one that contains it, an alias, a plan name, then a feature or category. Each term picks plans: a category it names brings the plans in it; rank keys it names bring the plans that provide one, when any does, and the plans it names; otherwise a provider matched by name or alias brings every plan, and plan names those plans. The plans every term picks are listed.",
+        "category": "Service category id, e.g. 'vpn'. A plan must be in it: its own categories, else its provider's category (Proton VPN Plus is a VPN, though Proton is a privacy suite), and the provider is found by any of its plans' categories. Another id gets 400.",
         "feature": "Comma-separated rank keys, at most 10, in one parameter. A plan must provide all of them (PROJECT-PLAN.md §3.2). Example: video.quality=4k,streaming.ad-free. A key that isn't in the registry gets 400.",
         "minPrice": "Minimum monthly equivalent, in 'currency': the plan's lowest picked price (of 'interval', when given), compared to the cent. Needs region.",
         "maxPrice": "Maximum monthly equivalent, in 'currency', compared the same way. Needs region, and minPrice above it gets 400.",
@@ -1442,6 +1442,7 @@
                     "id": "proton.free",
                     "name": "Proton Free",
                     "link": "https://proton.me/pricing",
+                    "categories": ["privacy-suite", "vpn", "storage"],
                     "features": {
                       "storage.cloud": 1,
                       "email.addresses": 1,
@@ -1488,6 +1489,7 @@
                     "id": "proton.vpn-plus",
                     "name": "VPN Plus",
                     "link": "https://protonvpn.com/pricing",
+                    "categories": ["vpn"],
                     "features": {
                       "vpn.included": true,
                       "vpn.devices": 10,
@@ -1506,6 +1508,7 @@
                     "id": "proton.unlimited",
                     "name": "Proton Unlimited",
                     "link": "https://proton.me/pricing",
+                    "categories": ["privacy-suite", "vpn", "storage"],
                     "features": {
                       "storage.cloud": 500,
                       "email.addresses": 15,
@@ -1538,6 +1541,7 @@
                     "id": "proton.duo",
                     "name": "Proton Duo",
                     "link": "https://proton.me/family",
+                    "categories": ["privacy-suite", "vpn", "storage"],
                     "features": {
                       "account.users": 2,
                       "storage.cloud": 2000,

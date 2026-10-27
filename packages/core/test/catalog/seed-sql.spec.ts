@@ -91,7 +91,7 @@ const catalogRow = (version = 'abc1234') =>
 
 describe('buildSeedSql, without what D1 holds', () => {
   it('empties every table first', () => {
-    expect(linesOf().slice(0, 8)).toEqual([
+    expect(linesOf().slice(0, 9)).toEqual([
       'DELETE FROM catalog;',
       'DELETE FROM bundle_plans;',
       'DELETE FROM bundles;',
@@ -99,6 +99,7 @@ describe('buildSeedSql, without what D1 holds', () => {
       'DELETE FROM features;',
       'DELETE FROM prices;',
       'DELETE FROM plans;',
+      'DELETE FROM provider_categories;',
       'DELETE FROM providers;',
     ]);
   });
@@ -121,12 +122,34 @@ describe('buildSeedSql, without what D1 holds', () => {
   it('inserts the features before the plan features that refer to them, and the catalog row last', () => {
     const lines = summary(linesOf());
     const lastFeature = lines.lastIndexOf('insert features includes-subscription');
-    expect(lines.indexOf('insert features video.quality')).toBe(8);
+    expect(lines.indexOf('insert features video.quality')).toBe(9);
     expect(lastFeature).toBeLessThan(
       lines.findIndex((line) => line.startsWith('insert plan_features')),
     );
     expect(lines.at(-1)).toBe('insert catalog 1');
     expect(linesOf().at(-1)).toBe(catalogRow());
+  });
+
+  it('writes each category a provider’s plans are in, once, after the provider', () => {
+    const lines = linesOf();
+    const categories = (id: string) =>
+      lines
+        .filter(
+          (line) => line.startsWith('INSERT INTO provider_categories') && line.includes(`'${id}')`),
+        )
+        .map((line) => /VALUES \('([^']*)'/.exec(line)?.[1]);
+
+    // Proton is a privacy suite, and its plans are VPNs too; Netflix's plans are in its own category.
+    expect(categories('proton')).toEqual(['privacy-suite', 'vpn']);
+    expect(categories('netflix')).toEqual(['streaming']);
+    expect(lines).toContain(
+      "INSERT INTO provider_categories (category, provider_id) VALUES ('vpn', 'proton');",
+    );
+    const proton = summary(lines).indexOf('insert providers proton');
+    expect(summary(lines).slice(proton + 1, proton + 3)).toEqual([
+      'insert provider_categories privacy-suite',
+      'insert provider_categories vpn',
+    ]);
   });
 
   it('inserts providers with their hash, and plans, with their JSON as in the snapshot', () => {
@@ -243,6 +266,7 @@ describe('buildSeedSql, given what D1 holds', () => {
     expect(summary(changesFrom(snapshotOf(), after))).toEqual([
       "delete providers where id IN ('mullvad')",
       'insert providers mullvad',
+      'insert provider_categories vpn',
       'insert plans mullvad.vpn',
       'insert prices mullvad.vpn',
       'insert prices mullvad.vpn',

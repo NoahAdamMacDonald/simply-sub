@@ -126,6 +126,7 @@ export const planBodySchema = z.strictObject({
     name: planShape.name,
     provider: providerSummarySchema,
     link: planShape.link,
+    categories: planShape.categories,
     features: planShape.features,
     providedRankKeys: z
       .array(rankKeySchema)

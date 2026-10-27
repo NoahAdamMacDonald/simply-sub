@@ -469,6 +469,8 @@ plans:
   - id: netflix.standard-ads
     name: Standard with ads
     link: https://www.netflix.com/signup   # required: where to sign up for this plan
+    # categories: [vpn]   # optional: the service categories it's in when they aren't just the provider's
+    #                     # (Proton VPN Plus; Proton Unlimited is [privacy-suite, vpn, storage]). M1.10
     features:
       video.quality: 1080p
       video.hdr: false
@@ -1138,10 +1140,13 @@ Responses are JSON and versioned through the `/v1` path. Breaking changes go und
 
 ### 5.3 D1 schema (`apps/api/migrations/`)
 The database `simply-sub-catalog` (binding `DB`) lives in Eastern North America (`enam`). Columns, condensed
-(`0002_seed_what_changed.sql` has the full SQL). Every table is `STRICT`, so SQLite enforces the column types, and
+(`0002_seed_what_changed.sql` and `0003_provider_categories.sql` have the full SQL). Every table is `STRICT`, so
+SQLite enforces the column types, and
 `WITHOUT ROWID` (since M2.1), so its primary key is the table itself rather than a second index next to a rowid:
 ```sql
-providers     (id PK, name, category, spend_category, hash, json)
+providers     (id PK, name, category, spend_category, hash, json)   -- category: its main one
+provider_categories (category, provider_id → providers, PK (category, provider_id))   -- every one its plans
+              are in (M1.10), which GET /providers?category= reads by
 plans         (id PK, provider_id → providers, name, json)
 prices        (plan_id → plans, region, currency, amount, interval, interval_count, monthly_equiv,
                PK (plan_id, region, currency, interval, interval_count))
@@ -1153,8 +1158,10 @@ catalog       (id PK = 1, version, built_at, seed_format, counts)   -- the one r
 indexes: prices (region, monthly_equiv) · plan_features (feature_id, rank_value) · plans (provider_id)
          · bundle_plans (plan_id)
 ```
-- Every `→` is a foreign key with `ON DELETE CASCADE`, so deleting a provider removes its plans, prices, plan
-  features and bundle links, and emptying the parent tables leaves no orphans. D1 always enforces foreign keys.
+- Every `→` is a foreign key with `ON DELETE CASCADE`, so deleting a provider removes its categories, plans,
+  prices, plan features and bundle links, and emptying the parent tables leaves no orphans. D1 always enforces
+  foreign keys. `provider_categories` has no index by provider: each index entry is a row written, and the
+  cascade that would use one runs only when a provider changes.
 - `rank_value` stores an enum's position (1080p = 2, 4k = 3) or the number itself, so rank-key filters like
   `feature=video.quality=1080p` ("1080p or better") become plain numeric comparisons. `unlimited` stores 1e308
   (above any number, and still a finite number in JSON) with `value` `unlimited`. A boolean stores 1 or 0, with
@@ -1509,6 +1516,7 @@ use canonical ids, and it maps provider wording through `aliases`. The output co
 - `availableIn`, only when the provider publishes the countries it sells in (section 4.7)
 - each plan's sign-up `link` and the provider's `cancelUrl` (its cancel page or help article), which the schema
   requires
+- a plan's `categories` when it's in other service categories than its provider's (a suite's VPN plan)
 - **accepted card networks** (from the checkout or help page, for example "We accept Visa, Mastercard, Amex")
   and the billing currency
 - an **evidence quote** for every price and feature (shown in the PR, so review is fast)
@@ -2394,7 +2402,8 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 ### 13.4 How to add a provider (checklist)
 1. Create `data/providers/<id>.yaml` (copy `netflix.yaml`, or run `npm run data:draft -- <pricing-url>`). With
    the recommended Red Hat YAML extension, VS Code autocompletes and checks the file as you type (section 4.5).
-2. Use only feature ids from `features.yaml`. Add new features there first, in a separate commit.
+2. Use only feature ids from `features.yaml`. Add new features there first, in a separate commit. Give a plan
+   `categories` when it's in other service categories than the provider's (Proton VPN Plus is `[vpn]`).
 3. Fill in `lastVerified` and `sourceUrl` for every price. Store regular prices, not first-term offers, and the
    billing period the provider states (`day` × 30 for "every 30 days"), with ISO region codes (`GB`, not `UK`). Add
    `availableIn` only when the provider lists the countries it sells in (sections 4.3, 4.7): every provider sold
@@ -2435,6 +2444,24 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-27, M1.10)**
+- **A plan can be in several service categories:** an optional `categories` list on a plan, else its provider's
+  `category`, which stays the provider's main one (`planCategories`, `providerCategories` in core). Proton is a
+  privacy suite; VPN Plus is `[vpn]`, Drive Plus `[storage]`, and Free, Unlimited, Duo and Family
+  `[privacy-suite, vpn, storage]`. Mail Plus and Pass Plus stay `privacy-suite` until there are Email and
+  Password-manager categories. A list of the provider's category alone is reported: leave it out.
+- **Search's Category filter keeps the plans in the category:** under VPN, Proton shows Free, VPN Plus and the
+  suites as chips, and its `matchedOn` says `category:vpn`. The panel offers a category when a plan sold in the
+  user's country is in it. A category the text names brings the plans in it too, ahead of the plans with a key
+  it names, so "vpn" brings Proton's VPN plans, not Mail Plus, which only comes with Proton VPN Free.
+- **GET /providers?category=** finds a provider by any category its plans are in, through D1's new
+  `provider_categories` table (migration 0003), read by its key, and keeps only those plans. `seedFormat` is 2,
+  so the next deploy reseeds in full and fills the table: 7 more rows at 5 providers. `GET /plans/:id` shows a
+  plan's `categories`, and the contract examples show Proton's.
+- **Over a provider-level list:** a provider-level `categories` would put all of Proton's plans under VPN, Mail
+  Plus included. Deriving categories from features (VPN from `vpn.included`) would do the same, since every
+  Proton plan includes Proton VPN Free, and would only repeat the Features filter.
 
 **Resolved (2026-10-27, M1.9)**
 - **Every plan and bundle has a sign-up `link`, and every provider a `cancelUrl`:** the schema requires them, so a

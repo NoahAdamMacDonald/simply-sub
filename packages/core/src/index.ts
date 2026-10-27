@@ -17,6 +17,7 @@ export * from './catalog/formats';
 export * from './catalog/json-schema';
 export * from './catalog/monthly-equivalent';
 export * from './catalog/pick-price';
+export * from './catalog/plan-categories';
 export * from './catalog/price';
 export * from './catalog/provider';
 export * from './catalog/region-files';

@@ -235,6 +235,7 @@ const proton = {
       id: 'proton.free',
       name: 'Proton Free',
       link: 'https://proton.me/pricing',
+      categories: ['privacy-suite', 'vpn'],
       features: { 'storage.cloud': 5, 'vpn.included': true, 'vpn.devices': 1 },
       prices: [price('GLOBAL', 'USD', 0)],
     },
@@ -242,6 +243,7 @@ const proton = {
       id: 'proton.vpn-plus',
       name: 'VPN Plus',
       link: 'https://proton.me/pricing',
+      categories: ['vpn'],
       features: { 'storage.cloud': 5, ...vpnPlus },
       featureLabels: { 'vpn.devices=6-10': '10 devices' },
       prices: [
@@ -255,6 +257,7 @@ const proton = {
       id: 'proton.unlimited',
       name: 'Proton Unlimited',
       link: 'https://proton.me/pricing',
+      categories: ['privacy-suite', 'vpn'],
       features: {
         'storage.cloud': 500,
         ...vpnPlus,
@@ -267,6 +270,7 @@ const proton = {
       id: 'proton.duo',
       name: 'Proton Duo',
       link: 'https://proton.me/pricing',
+      categories: ['privacy-suite', 'vpn'],
       features: {
         'account.users': 2,
         'storage.cloud': 2000,

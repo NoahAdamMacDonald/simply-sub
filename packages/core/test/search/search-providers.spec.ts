@@ -197,10 +197,29 @@ describe('searchProviders', () => {
     });
 
     it('keeps a category, and says so', () => {
-      const matches = search({ category: 'vpn' });
+      const matches = search({ category: 'streaming' });
 
-      expect(planIds(matches)).toEqual([['mullvad', ['mullvad.vpn']]]);
-      expect(matches[0].matchedOn).toEqual(['category:vpn']);
+      expect(planIds(matches)).toEqual([
+        ['crave', ['crave.standard', 'crave.premium']],
+        ['netflix', ['netflix.standard-ads', 'netflix.standard', 'netflix.premium']],
+      ]);
+      expect(matches.map((match) => match.matchedOn)).toEqual([
+        ['category:streaming'],
+        ['category:streaming'],
+      ]);
+    });
+
+    it('keeps a provider with plans in the category, and only those plans', () => {
+      // Proton is a privacy suite; its plans are VPNs too, VPN Plus only a VPN.
+      const vpn = search({ category: 'vpn', sort: 'name' });
+      expect(planIds(vpn)).toEqual([
+        ['mullvad', ['mullvad.vpn']],
+        ['proton', ['proton.free', 'proton.vpn-plus', 'proton.unlimited', 'proton.duo']],
+      ]);
+      expect(vpn[1].matchedOn).toEqual(['category:vpn']);
+      expect(planIds(search({ category: 'privacy-suite' }))).toEqual([
+        ['proton', ['proton.free', 'proton.unlimited', 'proton.duo']],
+      ]);
     });
   });
 
@@ -215,8 +234,8 @@ describe('searchProviders', () => {
             2,
             ['name', 'category:vpn', 'feature:vpn.included', 'feature:vpn.unlimited-traffic'],
           ],
-          // Its VPN Plus plan's name matches, and every plan has a VPN.
-          ['proton', 4, ['plan:proton.vpn-plus', 'feature:vpn.included']],
+          // Its VPN Plus plan's name matches, and every plan is in the VPN category, with a VPN.
+          ['proton', 4, ['plan:proton.vpn-plus', 'category:vpn', 'feature:vpn.included']],
         ],
       );
       // "VPN devices" is named too, but "vpn" names rank keys, which come first.
@@ -355,19 +374,24 @@ describe('searchProviders', () => {
       ]);
     });
 
-    it('brings every plan of a category the text names, else the plans with a feature it names', () => {
+    it('brings the plans in a category the text names, else the plans with a feature it names', () => {
+      // Proton Free has no VPN here, but is still in the VPN category.
       const files = edited(catalog(), 'data/providers/proton.yaml', ['plans', 0, 'features'], {
         'storage.cloud': 5,
       });
 
-      // Proton Free has no VPN.
+      // "vpn" names the category, which VPN Plus is in, but not the privacy-suite filter's.
       expect(planIds(search({ q: 'vpn', category: 'privacy-suite' }, files))).toEqual([
-        ['proton', ['proton.vpn-plus', 'proton.unlimited', 'proton.duo']],
+        ['proton', ['proton.free', 'proton.unlimited', 'proton.duo']],
       ]);
-      const vpnCategory = edited(files, 'data/providers/proton.yaml', ['category'], 'vpn');
-      expect(planIds(search({ q: 'vpn', category: 'vpn' }, vpnCategory))).toEqual([
-        ['mullvad', ['mullvad.vpn']],
-        ['proton', ['proton.free', 'proton.vpn-plus', 'proton.unlimited', 'proton.duo']],
+      // With no plan in it, the plans with a VPN.
+      const uncategorized = [0, 1, 2, 3].reduce(
+        (edits, index) =>
+          edited(edits, 'data/providers/proton.yaml', ['plans', index, 'categories'], undefined),
+        files,
+      );
+      expect(planIds(search({ q: 'vpn', category: 'privacy-suite' }, uncategorized))).toEqual([
+        ['proton', ['proton.vpn-plus', 'proton.unlimited', 'proton.duo']],
       ]);
     });
 

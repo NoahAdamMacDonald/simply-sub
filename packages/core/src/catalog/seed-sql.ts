@@ -2,6 +2,7 @@ import * as z from 'zod';
 import type { Bundle } from './bundle';
 import type { Feature, FeatureValue } from './feature';
 import { monthlyEquivalent } from './monthly-equivalent';
+import { providerCategories } from './plan-categories';
 import type { CatalogSnapshot, SnapshotProvider } from './snapshot';
 
 // seed.sql for the D1 catalog cache (BLUEPRINT §5.3, §6.3): the statements that bring D1 from what it holds to the
@@ -15,9 +16,9 @@ const maxStatementBytes = 100_000;
 /**
  * The version of the rules that turn a snapshot into rows. Bump it when a migration changes the catalog tables, or
  * when a derived column (monthly_equiv, rank_value) is computed differently: rows written under another format are
- * replaced by a full reseed.
+ * replaced by a full reseed. 2: provider_categories (migration 0003, M1.10).
  */
-export const seedFormat = 1;
+export const seedFormat = 2;
 
 /** rank_value for `unlimited`: above any real number, and still a finite number in JSON. */
 export const unlimitedRankValue = 1e308;
@@ -31,6 +32,7 @@ const tables = [
   'features',
   'prices',
   'plans',
+  'provider_categories',
   'providers',
 ];
 
@@ -85,8 +87,9 @@ type SqlValue = string | number | null;
  * The SQL that makes D1's catalog match `snapshot`, one statement per line, or '' when it already does. With no
  * `current` state, no catalog row, or one written under another seedFormat, it replaces everything. Otherwise it
  * writes only what changed:
- * - A new provider, or one whose hash changed, is deleted (the cascade takes its plans, prices, plan features and
- *   bundle links) and inserted again, and unchanged bundles are linked to its plans again. A removed one is deleted.
+ * - A new provider, or one whose hash changed, is deleted (the cascade takes its categories, plans, prices, plan
+ *   features and bundle links) and inserted again, and unchanged bundles are linked to its plans again. A removed one
+ *   is deleted.
  * - A feature whose JSON changed is upserted, never deleted and inserted, which would cascade to every plan's rows
  *   for it. When an enum's values move, the rows whose rank_value moved are updated. A removed feature is deleted.
  * - A bundle whose JSON changed is replaced, and a removed one deleted.
@@ -139,6 +142,10 @@ export function buildSeedSql(
       hash: hashOf(provider),
       json: JSON.stringify(provider),
     });
+    // Every category its plans are in, so GET /providers?category= finds it by any of them.
+    for (const category of providerCategories(provider)) {
+      insert('provider_categories', { category, provider_id: provider.id });
+    }
     for (const plan of provider.plans) {
       insert('plans', {
         id: plan.id,

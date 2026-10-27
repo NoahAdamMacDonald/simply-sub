@@ -70,7 +70,7 @@ function get(query: string, headers: Record<string, string> = {}, bindings: Part
 
 interface Body {
   data: {
-    provider: { id: string };
+    provider: { id: string; category: string };
     matchedPlans: {
       id: string;
       matchedKeys: string[];
@@ -249,6 +249,23 @@ describe('GET /providers', () => {
     expect(await plans('US')).toContain('disney-plus.with-ads');
   });
 
+  it('finds a provider by any category its plans are in, with the plans in it', async () => {
+    const body = await (await get('?category=vpn&region=CA&sort=name')).json<Body>();
+
+    // Proton is a privacy suite; its VPN Plus, Free and suites are VPNs too, but Mail, Drive and Pass Plus aren't.
+    expect(body.data.map((result) => result.provider.id)).toEqual(['mullvad', 'proton']);
+    const [, proton] = body.data;
+    expect(proton.provider.category).toBe('privacy-suite');
+    expect(proton.matchedOn).toEqual(['category:vpn']);
+    expect(proton.matchedPlans.map((plan) => plan.id)).toEqual([
+      'proton.free',
+      'proton.vpn-plus',
+      'proton.unlimited',
+      'proton.duo',
+      'proton.family',
+    ]);
+  });
+
   it('lists every provider by name without a region, with no prices and no exchange rates', async () => {
     await env.KV.delete('fx:ecb');
 
@@ -338,6 +355,24 @@ describe('the D1 reads', () => {
       snapshot.data.providers.map((provider) => provider.id).sort(),
     );
     expect(rows.rowsRead).toBe(1 + snapshot.data.providers.length);
+  });
+
+  it('read only the providers with a plan in the category, through provider_categories', async () => {
+    const query = { category: 'vpn', sort: 'name', limit: 20 } as const;
+    const vpn = await loadProviders(env.DB, query, features);
+    const { sql, bindings } = providersStatement(query, features);
+    const plan = await env.DB.prepare(`EXPLAIN QUERY PLAN ${sql}`)
+      .bind(...bindings)
+      .all<{ detail: string }>();
+
+    expect(vpn.providers.map((provider) => provider.id).sort()).toEqual(['mullvad', 'proton']);
+    expect(plan.results.map((row) => row.detail)).toEqual(
+      expect.arrayContaining([
+        'SEARCH providers USING PRIMARY KEY (id=?)',
+        'SEARCH provider_categories USING PRIMARY KEY (category=?)',
+      ]),
+    );
+    expect(plan.results.some((row) => /^SCAN/.test(row.detail))).toBe(false);
   });
 
   it('read only the providers with a plan that has every rank key, through the indexes', async () => {

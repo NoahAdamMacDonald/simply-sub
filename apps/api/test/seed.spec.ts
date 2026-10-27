@@ -21,6 +21,7 @@ const db = env.DB;
 
 const tables = [
   'providers',
+  'provider_categories',
   'plans',
   'prices',
   'features',
@@ -231,6 +232,7 @@ describe('a full seed', () => {
     );
     expect(counts).toEqual({
       providers: 2,
+      provider_categories: 2,
       plans: 3,
       prices: 4,
       features: 3,

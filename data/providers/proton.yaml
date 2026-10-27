@@ -22,10 +22,15 @@ notes: >-
 # Unlimited, Duo and Family are suite plans: they state their own features, and includes-subscription lists the
 # plans they replace (BLUEPRINT §4.4). Prices are the regular ones, not first-term offers. Proton sells every paid
 # plan in USD, CAD, EUR and CHF: a buyer pays in the currency they pick, and billingCurrency covers everyone else.
+#
+# Categories (M1.10): VPN Plus is a VPN and Drive Plus cloud storage; Free and the suites have both, as Proton VPN
+# and Proton Drive. Mail Plus and Pass Plus stay privacy-suite, Proton's own, until there are Email and Password
+# manager categories.
 plans:
   - id: proton.free
     name: Proton Free
     link: https://proton.me/pricing
+    categories: [privacy-suite, vpn, storage]
     features:
       storage.cloud: 5
       email.addresses: 1
@@ -148,6 +153,7 @@ plans:
   - id: proton.drive-plus
     name: Drive Plus
     link: https://proton.me/drive/pricing
+    categories: [storage]
     features:
       storage.cloud: 200
       email.addresses: 1
@@ -236,6 +242,7 @@ plans:
   - id: proton.vpn-plus
     name: VPN Plus
     link: https://protonvpn.com/pricing
+    categories: [vpn]
     features:
       storage.cloud: 5
       email.addresses: 1
@@ -443,6 +450,7 @@ plans:
   - id: proton.unlimited
     name: Proton Unlimited
     link: https://proton.me/pricing
+    categories: [privacy-suite, vpn, storage]
     features:
       storage.cloud: 500
       email.addresses: 15
@@ -566,6 +574,7 @@ plans:
   - id: proton.duo
     name: Proton Duo
     link: https://proton.me/family
+    categories: [privacy-suite, vpn, storage]
     features:
       account.users: 2
       storage.cloud: 2000
@@ -690,6 +699,7 @@ plans:
   - id: proton.family
     name: Proton Family
     link: https://proton.me/family
+    categories: [privacy-suite, vpn, storage]
     features:
       account.users: 6
       storage.cloud: 3000
