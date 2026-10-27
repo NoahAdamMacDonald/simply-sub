@@ -6,7 +6,7 @@ import {
   provideBrowserGlobalErrorListeners,
 } from '@angular/core';
 import { MAT_ICON_DEFAULT_OPTIONS, MatIconDefaultOptions } from '@angular/material/icon';
-import { provideRouter, withInMemoryScrolling } from '@angular/router';
+import { provideRouter, withInMemoryScrolling, withRouterConfig } from '@angular/router';
 
 import { routes } from './app.routes';
 import { CatalogStore } from './core/catalog/catalog-store';
@@ -21,7 +21,13 @@ export const appConfig: ApplicationConfig = {
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
     // The window is the scroll container (layout/shell.scss), so the router can scroll to the
     // top on navigation and restore the position on back/forward.
-    provideRouter(routes, withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })),
+    // A navigation a page refuses (the list editor's "Discard changes?", P5) puts the history back as it was, Back
+    // included: 'computed' goes forward again where the default would replace the entry Back went to.
+    provideRouter(
+      routes,
+      withInMemoryScrolling({ scrollPositionRestoration: 'enabled' }),
+      withRouterConfig({ canceledNavigationResolution: 'computed' }),
+    ),
     // Start the theme at boot, so 'system' follows the OS even before a toggle is on screen, the first-run check,
     // which opens the settings on the way, the catalog, which shows its cached files and checks for a new version, and
     // the exchange rates.

@@ -11,7 +11,7 @@ import {
 } from '@angular/material/dialog';
 import type { Settings } from '@simply-sub/core';
 import { SettingsStore } from '../../core/settings/settings-store';
-import { focusFirstError } from './focus-first-error';
+import { focusFirstError } from '../../shared/focus-first-error';
 import { LocationFields } from './location-fields';
 import { locationModel, locationSchema, locationValues } from './settings-form';
 

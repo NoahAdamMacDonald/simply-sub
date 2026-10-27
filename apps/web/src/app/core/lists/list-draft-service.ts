@@ -94,6 +94,11 @@ export class ListDraftService {
   cancel(listId: string): Promise<void> {
     return this.drafts.remove(listId);
   }
+
+  /** Delete list: the list and its items are soft-deleted, and the draft dropped, together. */
+  deleteList(listId: string): Promise<void> {
+    return this.drafts.deleteList(listId);
+  }
 }
 
 /** `draft` with one item changed. Throws when it has no such item. */

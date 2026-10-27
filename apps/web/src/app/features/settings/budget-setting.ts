@@ -15,7 +15,7 @@ import { MatError, MatFormField, MatHint, MatLabel, MatSuffix } from '@angular/m
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { SettingsStore } from '../../core/settings/settings-store';
-import { focusFirstError } from './focus-first-error';
+import { focusFirstError } from '../../shared/focus-first-error';
 import { moneyText } from './place-names';
 import { budgetSchema } from './settings-form';
 

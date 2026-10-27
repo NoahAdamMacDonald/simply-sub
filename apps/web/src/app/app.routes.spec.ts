@@ -42,8 +42,8 @@ describe('routes', () => {
     await until(() => /^\/lists\/[0-9a-f-]{36}\/edit$/.test(router.url));
     await harness.fixture.whenStable();
 
-    expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toBe('Edit list');
-    expect(document.title).toBe('Edit list · Simply Sub');
+    await until(() => harness.routeNativeElement?.querySelector('h1')?.textContent === 'New list');
+    expect(document.title).toBe('New list · Simply Sub');
   });
 
   it('has the component gallery in development builds (dev-routes.ts)', async () => {

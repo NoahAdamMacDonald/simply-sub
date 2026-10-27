@@ -1,4 +1,4 @@
-import { signal } from '@angular/core';
+import { computed, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import type {
   CatalogData,
@@ -235,6 +235,20 @@ describe('MetricsService', () => {
 
     await rankings.clear('vpn.included');
     await until(() => mullvad().effectiveRanks['vpn.included'] === 'not-ranked');
+  });
+
+  it('resolves items that aren’t saved, a draft’s, in their order, and follows the rates (M6.4)', () => {
+    const unsaved = metrics.list(family).resolved.map(({ item }) => ({ ...item, id: travel }));
+    const resolved = computed(() => metrics.resolve([...unsaved].reverse()));
+    expect(
+      resolved().map((result) => (result.ok ? result.resolved.name : result.unresolved.reason)),
+    ).toEqual(['Local Gym', 'Mullvad VPN', 'Netflix']);
+
+    rates.set(undefined);
+    const mullvad = resolved()[1];
+    expect(mullvad.ok && mullvad.resolved.price.currency).toBe('EUR');
+    saved.set(undefined);
+    expect(resolved()).toEqual([]);
   });
 
   it('has nothing for a list without items', () => {

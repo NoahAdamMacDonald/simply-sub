@@ -129,6 +129,18 @@ its banner; Search's New list… landing on the new list's editor with one histo
 "Subscription List", the next new list named "Subscription List 2". Both themes at both widths, with axe and no
 horizontal scroll. Its base URL ends in `/`.
 
+`check-list-edit.cjs` (M6.4) checks the list editor on `ng serve` for a Canadian in Alberta, with a saved list
+(Work Related: Netflix Standard tagged Family, and Mullvad VPN) written to IndexedDB. In both themes at both widths,
+keyboard only: the name, the rows and the footer's average; a new name kept in the draft as it's typed; 🗑 moving
+focus to the next row, with Undo in a snackbar putting it back; [+ Add from catalog] to pick mode with no question,
+its banner naming the draft's name; a price back to the editor, "Resumed unsaved changes" and a reload; Lists in the
+sidebar asking "Discard changes?" (focus on Cancel, Escape stays); and Save landing on the list view. Then at 1280 px:
+Cancel after a reload discarding everything, a refused Back keeping the history (the editor opened from Search's Add
+to list menu, since a `page.goto` starts a new document, whose Back leaves the app), an empty name, ⋮ Delete list, a
+list there isn't, and a new list's Cancel. With axe on the snackbar, the dialogs and the error. Scope selectors to
+`ss-list-edit-page`: the shell has a `.footer` too, and `ss-page-header` a `.row`. Since M6.4, `check-search.cjs` and
+`check-drafts.cjs` read the editor's `.waiting` note.
+
 ## Gotchas
 
 - Every new browser context starts with no settings, so the first-run dialog (M4.2) covers the page until it's

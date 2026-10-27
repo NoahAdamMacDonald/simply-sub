@@ -237,7 +237,7 @@ async function noSideScroll(page, viewport, label) {
       const price = await stop(page);
       await page.keyboard.press('Enter');
       await until('the editor', () => editorId(page) === id);
-      await page.locator('.adding').waitFor();
+      await page.locator('.waiting').waitFor();
       const query = search(page);
       check(
         `${label}: Enter on a price says it adds to Subscription List, and opens its editor with the plan`,
@@ -248,7 +248,7 @@ async function noSideScroll(page, viewport, label) {
 
       // A reload keeps the draft, read from IndexedDB, and pick mode's banner.
       await page.reload();
-      await page.locator('.adding').waitFor({ timeout: 20000 });
+      await page.locator('.waiting').waitFor({ timeout: 20000 });
       const drafts = await readTable(page, 'drafts');
       check(
         `${label}: after a reload the draft is still there, the same one, and the lists table is still empty`,
@@ -286,7 +286,7 @@ async function noSideScroll(page, viewport, label) {
     await price.click();
     await page.getByRole('menuitem', { name: /New list/ }).click();
     await until('the new list’s editor', () => editorId(page));
-    await page.locator('.adding').waitFor();
+    await page.locator('.waiting').waitFor();
     const after = await entries(page);
     check(
       'New list… lands on the new list’s editor with the plan, one history entry after Search',

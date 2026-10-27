@@ -2,6 +2,7 @@ import { Service, computed, inject } from '@angular/core';
 import {
   resolveItem,
   type ItemResolution,
+  type ListItem,
   type ResolvedItem,
   type UnresolvedItem,
 } from '@simply-sub/core';
@@ -41,28 +42,9 @@ export class MetricsService {
   readonly status = this.items.status;
 
   /** Every item's resolution, by item id. None before the first run has saved the settings. */
-  readonly resolutions = computed<ReadonlyMap<string, ItemResolution>>(() => {
-    const saved = this.settings.saved();
-    if (!saved) return new Map();
-    const fx = this.fx.rates();
-    const context = {
-      customSubs: this.customSubs.status() === 'ready' ? this.customSubs.byId() : undefined,
-      country: saved.country,
-      currency: saved.currency,
-      ...(fx && { fx }),
-      today: this.clock.today(),
-      profileRanks: this.rankings.ranks(),
-    };
-    return new Map(
-      this.items.records().map((item) => [
-        item.id,
-        resolveItem(item, {
-          ...context,
-          catalog: this.catalog.catalogFor(item.region ?? saved.country),
-        }),
-      ]),
-    );
-  });
+  readonly resolutions = computed<ReadonlyMap<string, ItemResolution>>(
+    () => new Map(this.resolve(this.items.records()).map((result) => [itemOf(result).id, result])),
+  );
 
   /** Each list's items, by list id, in the order they were added. A list with no items isn't there. */
   readonly byList = computed<ReadonlyMap<string, ListItems>>(() => {
@@ -81,4 +63,32 @@ export class MetricsService {
   list(listId: string): ListItems {
     return this.byList().get(listId) ?? noItems;
   }
+
+  /**
+   * Resolves `items` as the saved ones are, in their order: a list's draft's (P5), which aren't saved yet. Called in a
+   * computed(), it follows the catalog, the rates, the settings and the ranks. None before the first run.
+   */
+  resolve(items: readonly ListItem[]): ItemResolution[] {
+    const saved = this.settings.saved();
+    if (!saved) return [];
+    const fx = this.fx.rates();
+    const context = {
+      customSubs: this.customSubs.status() === 'ready' ? this.customSubs.byId() : undefined,
+      country: saved.country,
+      currency: saved.currency,
+      ...(fx && { fx }),
+      today: this.clock.today(),
+      profileRanks: this.rankings.ranks(),
+    };
+    return items.map((item) =>
+      resolveItem(item, {
+        ...context,
+        catalog: this.catalog.catalogFor(item.region ?? saved.country),
+      }),
+    );
+  }
+}
+
+function itemOf(result: ItemResolution): ListItem {
+  return result.ok ? result.resolved.item : result.unresolved.item;
 }

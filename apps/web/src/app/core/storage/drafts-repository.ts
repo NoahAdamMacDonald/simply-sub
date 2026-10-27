@@ -5,6 +5,7 @@ import {
   newListName,
   savedItem,
   savedList,
+  softDeleted,
   startDraft,
   type ListDraft,
   type ListItem,
@@ -121,6 +122,27 @@ export class DraftsRepository {
       for (const entry of draft.items) {
         const item = savedItem(entry, await transaction.get('items', entry.item.id), now);
         if (item) await transaction.put('items', item);
+      }
+      await transaction.delete('drafts', listId);
+    });
+  }
+
+  /**
+   * Delete list (P5's ⋮): soft-deletes the list and its items, so totals drop them, and deletes its draft, in one
+   * transaction.
+   */
+  async deleteList(listId: string): Promise<void> {
+    const now = this.storage.now();
+    const engine = await this.storage.engine();
+    await engine.transaction(['lists', 'items', 'drafts'], async (transaction) => {
+      const list = await transaction.get('lists', listId);
+      if (list && list.deletedAt === undefined) {
+        await transaction.put('lists', softDeleted(list, now));
+      }
+      for (const item of await transaction.getAll('items')) {
+        if (item.listId === listId && item.deletedAt === undefined) {
+          await transaction.put('items', softDeleted(item, now));
+        }
       }
       await transaction.delete('drafts', listId);
     });

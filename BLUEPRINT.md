@@ -2514,6 +2514,47 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
+**Resolved (2026-10-27, M6.4)**
+- **The editor** (PROJECT-PLAN P5): the heading "Edit list" ("New list" for a new list, and its tab title), the List
+  name field with Cancel, Save and ⋮ (Delete list, for a saved list only) beside it, then a card with [+ Add from
+  catalog] and a row per item, and the footer. P5's sketch had "Editing [name]" as one line; a heading of its own
+  says what the page is.
+- **The name** is stored in the draft as it's typed, once it's one a list can have (not empty once trimmed, at most
+  60 characters). Save checks it with Signal Forms: "Give the list a name" at the field, with focus on it.
+  `focusFirstError` moved to `shared/`, since Settings and the editor both use it.
+- **A row:** the icon, "Netflix · Standard" (a plan named after its provider alone: "Mullvad VPN"), how it's billed
+  ("Monthly · auto-renews", "ends Nov 3, 2027", "Specific dates, billed monthly"), its add-ons, "Your own price",
+  its custom ranks, its tags, its price (the override while it applies), ✎ and 🗑. The draft's items are priced as
+  saved ones are, through `MetricsService.resolve`. One that can't be priced says why ("This plan is no longer in the
+  catalog"). "Renews Nov 12" comes with the charges (M7.1).
+- **🗑** removes the item from the draft (it stays there, marked) and says "Removed Netflix Standard" with Undo in a
+  snackbar, which stays until it's dismissed, the next removal replaces it, or the page closes. Focus moves to the
+  next row's 🗑 (else the previous one's, else [+ Add from catalog]), and Undo puts it back on the row's own.
+- **The footer** says "Unsaved changes" or "No unsaved changes", then "≈ $26.84 / mo average", read "about $26.84 a
+  month on average". Core's new `monthlyAverage` adds the items' monthly equivalents, before tax as §3.1 defines
+  them, with ≈ when a price was converted. An item it can't price, or one priced in another currency for want of a
+  rate, is "not counted". "This month" comes with M7.2.
+- **Changes** are the draft's (`draftChanged`) or a name typed and not stored yet. The editor says "Resumed unsaved
+  changes" when it opens on a draft that has some.
+- **Save** stores the name, saves the draft in one transaction and opens the list view in the editor's place, so
+  Back doesn't open the editor again. **Cancel** asks "Discard changes?" (focus on Cancel) when there's anything to
+  lose, drops the draft, and goes to the list view, or `/lists` for a new list, in place too. **Delete list** asks
+  "Delete Work Related?", then `DraftsRepository.deleteList` soft-deletes the list and its items and deletes the
+  draft in one transaction, so totals drop the items.
+- **Leaving:** `leaveGuard` (the routes' canDeactivate, which knows the page only by its type, so its code stays
+  lazy) asks "Discard changes?" before going anywhere but Search in pick mode for this list. Leaving drops the draft,
+  so a new list nobody changed isn't kept (M6.3's follow-up). A refused Back keeps the history as it was: the router
+  now uses `canceledNavigationResolution: 'computed'`, since the default replaced the entry Back had gone to. A reload
+  or a closed tab keeps the draft, so there's no `beforeunload` question.
+- **Another tab's Save or Cancel** removes the draft under the editor, which starts again from what's stored.
+- **A list there isn't**, or a deleted one with no new list's draft, shows P15's "This list doesn't exist" with
+  [Back to lists], under the "Edit list" heading.
+- **Until M6.5,** `?add=`, `?addBundle=` and `?item=` (✎ links to it, as P4's [Edit] will) say what the item dialog
+  will open: "Netflix Standard will open here once the item dialog is ready." [+ Add custom subscription] comes with
+  M6.6, where P12's editor gives its "Create new…" somewhere to go (flow F3).
+- **Bundles:** the initial bundle grew by 0.18 kB (489.1 kB), for the guard and the router option. The editor's chunk
+  is 18 kB, with Material's menu and snackbar in shared chunks.
+
 **Resolved (2026-10-27, M6.3)**
 - **The draft record** (`user/list-draft.ts`, section 4.6): one per list, keyed by `listId`, with `isNew`, the name now
   and when it started (`startName`), `startedAt`, and its items, each as edited (`item`), as saved when the draft
@@ -2550,7 +2591,7 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
   chunk in two now that the drafts share it. The storage engine's chunk grew by 0.4 kB (99.2 kB) and Search's by
   0.2 kB (235.7 kB).
 - **Next (M6.4):** the editor builds on the service. Leaving a new list with no changes should drop its draft, which
-  nothing else would.
+  nothing else would (done in M6.4: leaving drops the draft).
 
 **Resolved (2026-10-27, M6.2)**
 - **The Features page** (PROJECT-PLAN P9), "Your feature ranks": a card per feature category in `categories.yaml`'s
