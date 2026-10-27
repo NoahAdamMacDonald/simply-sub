@@ -12,12 +12,13 @@ import {
   signal,
   untracked,
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormField, form, maxLength, submit, validate } from '@angular/forms/signals';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
+import { MatDivider } from '@angular/material/divider';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { MatSnackBar, type MatSnackBarRef } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
@@ -32,7 +33,7 @@ import {
   type ListDraft,
   type ResolvedItem,
 } from '@simply-sub/core';
-import { firstValueFrom, map } from 'rxjs';
+import { filter, firstValueFrom, map } from 'rxjs';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import type { AsksBeforeLeaving } from '../../core/leave-guard';
 import { ListDraftService } from '../../core/lists/list-draft-service';
@@ -41,6 +42,7 @@ import { SettingsStore } from '../../core/settings/settings-store';
 import { CustomSubsRepository } from '../../core/storage/custom-subs-repository';
 import { TagsRepository } from '../../core/storage/tags-repository';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
+import { CustomSubEditor } from '../custom-subs/custom-sub-editor';
 import { EmptyState } from '../../shared/empty-state/empty-state';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { PriceTag } from '../../shared/price-tag/price-tag';
@@ -48,6 +50,7 @@ import { amountText } from '../../shared/price-tag/price-text';
 import { ProviderIcon } from '../../shared/provider-icon/provider-icon';
 import { TagChip } from '../../shared/tags/tag-chip';
 import { focusFirstError } from '../../shared/focus-first-error';
+import { wideDialogConfig } from '../../shared/wide-dialog';
 import { editRow, type EditRow } from './edit-rows';
 import type {
   ItemDialog,
@@ -85,6 +88,7 @@ const dialogParams = ['add', 'addBundle', 'addCustom', 'item', 'interval', 'coun
     EmptyState,
     FormField,
     MatButton,
+    MatDivider,
     MatError,
     MatFormField,
     MatIcon,
@@ -109,7 +113,8 @@ export class ListEditPage implements AsksBeforeLeaving {
   private readonly catalog = inject(CatalogStore);
   private readonly settings = inject(SettingsStore);
   private readonly tags = inject(TagsRepository);
-  private readonly customSubs = inject(CustomSubsRepository);
+  protected readonly customSubs = inject(CustomSubsRepository);
+  private readonly customSubEditor = inject(CustomSubEditor);
   private readonly confirmer = inject(ConfirmService);
   private readonly snackBar = inject(MatSnackBar);
   private readonly router = inject(Router);
@@ -351,6 +356,24 @@ export class ListEditPage implements AsksBeforeLeaving {
     this.undo.onAction().subscribe(() => void this.restore(draft.listId, row.id));
   }
 
+  /** [+ Add custom subscription]'s menu: the item dialog for one of the user's custom subscriptions (flow F3). */
+  protected addCustom(customSubId: string): void {
+    void this.openItemDialog({ kind: 'custom', customSubId });
+  }
+
+  /** Create new…: the custom subscription editor (P12), then the item dialog for what it made. */
+  protected async createCustom(): Promise<void> {
+    const created = await this.customSubEditor.open();
+    if (!created || this.destroyRef.destroyed) return;
+    // The item dialog reads it from the repository, whose live query has it a moment after the save.
+    await firstValueFrom(
+      toObservable(this.customSubs.byId, { injector: this.injector }).pipe(
+        filter((byId) => byId.has(created.id)),
+      ),
+    );
+    await this.openItemDialog({ kind: 'custom', customSubId: created.id });
+  }
+
   /** ✎: the item dialog, for the row's item. */
   protected edit(row: EditRow): void {
     const draft = this.draft();
@@ -456,11 +479,8 @@ export class ListEditPage implements AsksBeforeLeaving {
     const dialog = this.injector
       .get(MatDialog)
       .open<ItemDialog, ItemDialogData, ItemDialogResult>(ItemDialog, {
+        ...wideDialogConfig,
         data: { listId: draft.listId, listName: draft.name, request },
-        panelClass: 'ss-item-dialog',
-        width: 'min(720px, calc(100vw - 32px))',
-        maxWidth: '100vw',
-        autoFocus: 'first-heading',
       });
     this.itemDialog = dialog;
     const result = await firstValueFrom(dialog.afterClosed());

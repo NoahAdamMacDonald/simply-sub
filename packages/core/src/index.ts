@@ -63,6 +63,7 @@ export * from './tax/sales-tax-rate';
 export * from './tax/subdivisions';
 export * from './user/add-request';
 export * from './user/catalog-cache';
+export * from './user/custom-sub-form';
 export * from './user/custom-subscription';
 export * from './user/fx-cache';
 export * from './user/item-activity';

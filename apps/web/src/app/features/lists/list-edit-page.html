@@ -72,6 +72,30 @@
             <mat-icon>add</mat-icon>
             Add from catalog
           </a>
+          <!-- A custom subscription (P7, flow F3): one there is, or a new one from its editor (P12). -->
+          <button
+            matButton="outlined"
+            type="button"
+            class="add-custom"
+            [matMenuTriggerFor]="customMenu"
+          >
+            <mat-icon>add</mat-icon>
+            Add custom subscription
+          </button>
+          <mat-menu #customMenu="matMenu" aria-label="Add custom subscription">
+            @for (sub of customSubs.records(); track sub.id) {
+              <button mat-menu-item type="button" (click)="addCustom(sub.id)">
+                <span>{{ sub.name }}</span>
+              </button>
+            }
+            @if (customSubs.records().length > 0) {
+              <mat-divider />
+            }
+            <button mat-menu-item type="button" (click)="createCustom()">
+              <mat-icon aria-hidden="true">add</mat-icon>
+              <span>Create new…</span>
+            </button>
+          </mat-menu>
         </div>
         @if (rows().length > 0) {
           <ul class="rows">
@@ -126,7 +150,7 @@
             }
           </ul>
         } @else {
-          <p class="empty">No subscriptions yet. Add one from the catalog.</p>
+          <p class="empty">No subscriptions yet. Add one from the catalog, or one of your own.</p>
         }
       </section>
 

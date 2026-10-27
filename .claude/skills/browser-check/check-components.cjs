@@ -229,6 +229,20 @@ async function budgetBars(page) {
 }
 
 async function icons(page) {
+  // Icons load lazily (NgOptimizedImage), so each is brought into view first: the catalog's are a long column now.
+  for (const icon of await section(page, 'icon').locator('.icon-case img').all()) {
+    await icon.scrollIntoViewIfNeeded();
+  }
+  // Every icon but the deliberately missing file, which falls back to its letter.
+  await page
+    .waitForFunction(() =>
+      Array.from(document.querySelectorAll('.icon-case img')).every(
+        (img) =>
+          img.getAttribute('src')?.endsWith('missing.webp') ||
+          (img.complete && img.naturalWidth > 0),
+      ),
+    )
+    .catch(() => undefined);
   const results = await section(page, 'icon').evaluate((element) =>
     Array.from(element.querySelectorAll('.icon-case')).map((icon) => ({
       text: icon.textContent.replace(/\s+/g, ' ').trim(),
@@ -365,6 +379,8 @@ async function ranks(page) {
     (await quality.textContent()).replace(/\s+/g, ' ').trim() === 'Profile default (Wanted)',
     await quality.textContent(),
   );
+  // The profile select's panel fades out after its pick: wait for it to go, so only this one's options are read.
+  await page.locator('.ss-rank-select-panel').waitFor({ state: 'detached' });
   await quality.focus();
   await page.keyboard.press('Enter');
   await page.locator('.ss-rank-select-panel mat-option').first().waitFor();

@@ -7,6 +7,7 @@ import { catalogIconFile, type CatalogData, type SnapshotProvider } from '../cat
 import type { IsoDate } from '../dates/iso-date';
 import { providedKeys, type RankKey } from '../ranking/rank-keys';
 import { effectiveRanks, type ProfileRanks } from '../ranking/resolve-rank';
+import { customIconUrl } from './custom-sub-form';
 import type { CustomSubscription } from './custom-subscription';
 import type { ListItem } from './list-item';
 import type { Rank } from './rank';
@@ -216,11 +217,12 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
       const sub = context.customSubs.get(source.customSubId);
       const plan = sub?.plans.find((candidate) => candidate.id === source.customPlanId);
       if (!sub || !plan) return unresolved('custom-gone');
+      const iconUrl = customIconUrl(sub.link);
       parts = {
         customSubId: sub.id,
         name: sub.name,
         planName: plan.name,
-        ...(sub.link && { iconUrl: `api/v1/icon?domain=${linkDomain(sub.link)}` }),
+        ...(iconUrl !== undefined && { iconUrl }),
         ...(sub.link && { link: sub.link }),
         ...(sub.cancelUrl && { cancelUrl: sub.cancelUrl }),
         // A custom plan has one price, with its own period, which the item dialog bills it by (P6).
@@ -288,14 +290,6 @@ function providerLinks(
     link: plan.link,
     cancelUrl: provider.cancelUrl,
   };
-}
-
-/**
- * The domain of a custom subscription's link, which customSubscriptionSchema checked is an https URL with a domain
- * name. GET /icon checks it again (BLUEPRINT §5.4).
- */
-function linkDomain(link: string): string {
-  return (/^https:\/\/(?:[^@/?#]*@)?([^/:?#]+)/i.exec(link)?.[1] ?? '').toLowerCase();
 }
 
 /** The item's price override as a price for its billing period, when it applies today (before its `until`). */

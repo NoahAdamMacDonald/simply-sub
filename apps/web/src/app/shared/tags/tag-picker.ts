@@ -53,6 +53,8 @@ export class TagPicker {
   private readonly injector = inject(Injector);
   private readonly chipInput = viewChild.required<ElementRef<HTMLInputElement>>('chipInput');
   private readonly nameInput = viewChild<ElementRef<HTMLInputElement>>('nameInput');
+  private readonly trigger = viewChild.required(MatAutocompleteTrigger);
+  private readonly autocomplete = viewChild.required(MatAutocomplete);
 
   /** The chosen tags' ids, in the order they were added (ListItem.tagIds). */
   readonly tagIds = model<readonly string[]>([]);
@@ -93,6 +95,25 @@ export class TagPicker {
     else this.add(choice);
     this.chipInput().nativeElement.value = '';
     this.query.set('');
+  }
+
+  /**
+   * Closes the suggestions when focus moves on to another control, as Tab does. Material closes them on Tab only once
+   * their panel has rendered, which in a zoneless app can come after the Tab, and an empty panel left open then takes
+   * the dialog's next Escape. A click on a suggestion moves focus to the dialog, which holds the field, so that's left
+   * to Material, as are clicks elsewhere.
+   */
+  protected leave(event: FocusEvent): void {
+    const next = event.relatedTarget;
+    const panel = this.autocomplete().panel?.nativeElement as HTMLElement | undefined;
+    if (
+      next instanceof Node &&
+      event.target instanceof Node &&
+      !next.contains(event.target) &&
+      !panel?.contains(next)
+    ) {
+      this.trigger().closePanel();
+    }
   }
 
   protected remove(id: string): void {

@@ -1,7 +1,5 @@
-import { BreakpointObserver } from '@angular/cdk/layout';
 import {
   Component,
-  DestroyRef,
   ElementRef,
   Injector,
   afterNextRender,
@@ -82,6 +80,7 @@ import { CustomSubsRepository } from '../../core/storage/custom-subs-repository'
 import { RankingsRepository } from '../../core/storage/rankings-repository';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
 import { focusFirstError } from '../../shared/focus-first-error';
+import { issueErrors } from '../../shared/form-issues';
 import { countryChoices, currencyChoices } from '../../shared/place-choices';
 import { PriceTag } from '../../shared/price-tag/price-tag';
 import { amountText, intervalSpoken, intervalText } from '../../shared/price-tag/price-text';
@@ -89,6 +88,7 @@ import { ProviderIcon } from '../../shared/provider-icon/provider-icon';
 import { RankSelect } from '../../shared/rank/rank-select';
 import { catalogIcon, planTitle } from '../../shared/sub-card/card-text';
 import { TagPicker } from '../../shared/tags/tag-picker';
+import { fillScreenWhenNarrow } from '../../shared/wide-dialog';
 import { periodText } from './edit-rows';
 
 /** What the dialog opens on: a plan, bundle or custom subscription to add, at a period, or an item to change. */
@@ -117,12 +117,6 @@ interface ChoiceText {
   shown: string;
   spoken: string;
 }
-
-/** Under 600 px the dialog fills the screen (P6). */
-const fullScreen = '(max-width: 599.98px)';
-
-/** The kind of error the dialog's rules give (core's itemFormIssues). */
-const issueKind = 'item-form';
 
 const intervalNames: Record<Interval, string> = {
   day: 'Days',
@@ -490,11 +484,7 @@ export class ItemDialog {
     this.model,
     (path) => {
       validateTree(path, ({ value, fieldTree }) =>
-        itemFormIssues(value(), this.rules()).map((issue) => ({
-          kind: issueKind,
-          message: issue.message,
-          fieldTree: fieldAt(fieldTree, issue.path),
-        })),
+        issueErrors(fieldTree, itemFormIssues(value(), this.rules())),
       );
     },
     { submission: { action: () => this.save(), onInvalid: (tree) => this.focusError(tree) } },
@@ -515,19 +505,7 @@ export class ItemDialog {
       computed(() => (this.model().kind === 'custom' ? [] : [this.model().region])),
     );
 
-    // Under 600 px the dialog fills the screen.
-    const small = inject(BreakpointObserver)
-      .observe(fullScreen)
-      .subscribe(({ matches }) => {
-        if (matches) {
-          this.dialogRef.addPanelClass('ss-dialog-full-screen');
-          this.dialogRef.updateSize('100vw', '100%');
-        } else {
-          this.dialogRef.removePanelClass('ss-dialog-full-screen');
-          this.dialogRef.updateSize('min(720px, calc(100vw - 32px))', '');
-        }
-      });
-    inject(DestroyRef).onDestroy(() => small.unsubscribe());
+    fillScreenWhenNarrow(this.dialogRef);
   }
 
   /**
@@ -783,16 +761,6 @@ const previewTime = '1970-01-01T00:00:00.000Z';
 /** The rank rows of an entry and its children's, in order. */
 function entryRows(entry: RankingEntry): RankingRow[] {
   return [...entry.rows, ...entry.children.flatMap(entryRows)];
-}
-
-/** The field of the form at `path`, as core's issues name it: ['windows', 0, 'end']. */
-function fieldAt(
-  root: ReadonlyFieldTree<ItemForm>,
-  path: readonly (string | number)[],
-): ReadonlyFieldTree<unknown> {
-  let field: unknown = root;
-  for (const key of path) field = (field as Record<string | number, unknown>)[key];
-  return field as ReadonlyFieldTree<unknown>;
 }
 
 function periodKey({ interval, intervalCount }: Period): string {

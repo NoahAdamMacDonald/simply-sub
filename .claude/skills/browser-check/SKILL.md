@@ -153,11 +153,25 @@ Auto-renews, then Save, a reload and the item read from IndexedDB (its id, tags 
 dialog, its errors and the billing day choice, and no horizontal scroll. The first card on Search is Proton, whose
 first price is Proton Free.
 
+`check-custom-subs.cjs` (M6.6) checks custom subscriptions on `ng serve` for a Canadian in Alberta, with Work Related
+written to IndexedDB and `GET /icon` answered with a catalog logo (there's no Worker behind the dev proxy). In both
+themes at both widths, keyboard only: the page with none; New opening the editor (focus on its heading, 720 px wide or
+the whole screen); Save with nothing filled in, each field's error and focus on the name; a name, a website, two plans
+(the second billed every 3 months), Ad free added at once and Video quality after its value; Save storing it (read
+from IndexedDB) with its row, the icon asked for its domain, the snackbar and focus on its ✎; the list editor's
+[+ Add custom subscription] menu adding it through the item dialog (flow F3); ✎ with a cost changed, asking how many
+list items it reaches; and 🗑 asking "Also remove it from 1 list." and deleting it with its item. With axe on the
+page, the editor, its errors, a feature's value, the menu and both questions, and no horizontal scroll.
+
 ## Gotchas
 
 - A date input is typed a part at a time: Edge's year takes up to 6 digits, so type the year, press ArrowRight, then
   the month and day (each moves on by itself). Tab into the field first, so focus is on the year. While the year is
   typed the value passes through years like 0002, which `packages/core/src/dates/` handles since M6.5.
+- Type decimals into fields as a user does, key by key: `check-custom-subs.cjs` found a number field in a list of
+  plans turning a quickly typed "49.99" into 9949 (M6.6). `fill()` sets the value at once and wouldn't have.
+- A Material autocomplete Tabbed past quickly could stay open, empty and unseen, and take a dialog's next Escape (fixed
+  in M6.6 by closing on focus leaving). `check-item-dialog.cjs` names the overlays open when an Escape closes nothing.
 - An error in dev mode (ExpressionChangedAfterItHasBeenChecked included) opens the error snackbar, an overlay above a
   dialog, which then gets Escape: a dialog Escape won't close often means a console error. The scripts print the
   console problems on a crash.

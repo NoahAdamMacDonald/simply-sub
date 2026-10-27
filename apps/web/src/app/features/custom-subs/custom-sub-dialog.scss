@@ -1,0 +1,76 @@
+// The form wraps the dialog's title, content and actions, which the dialog lays out as its own children.
+form {
+  display: contents;
+}
+
+// The title, with ✕ on its right.
+.title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline-end: 12px;
+
+  h2 {
+    flex: 1;
+    min-width: 0;
+
+    // Focus starts here so a screen reader begins at the title; it isn't a control, so it has no ring.
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+h3 {
+  margin: 8px 0;
+  font: var(--mat-sys-title-medium);
+}
+
+// Fields side by side, wrapping onto the next line when the dialog is narrow. Each field's hint or error takes the
+// room it needs (subscriptSizing="dynamic"), and the gap keeps it from the next field's label.
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px 16px;
+  margin-bottom: 12px;
+
+  mat-form-field {
+    flex: 1 1 180px;
+  }
+
+  // Short values, which widen when they're alone on a line, so an error fits under them.
+  .amount,
+  .count {
+    flex: 1 1 140px;
+    max-width: 240px;
+  }
+
+  .unit {
+    flex: 0 1 180px;
+  }
+}
+
+// Each plan in a box of its own, its name as the box's title.
+.plan {
+  margin: 0 0 16px;
+  padding: 8px 16px 16px;
+  border: 1px solid var(--ss-divider);
+  border-radius: 8px;
+
+  legend {
+    padding: 0 4px;
+    font: var(--mat-sys-title-small);
+  }
+}
+
+.checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 16px;
+  margin-bottom: 8px;
+}
+
+.remove-plan {
+  margin-top: 8px;
+}

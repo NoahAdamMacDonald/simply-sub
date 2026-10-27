@@ -2114,7 +2114,8 @@ import instructions for Google, Apple and Proton.
 **Custom subscriptions.** Cards for user-created services. The edit dialog has name, plans (name, cost, currency,
 interval, auto-renew available), features (search the registry and add, or × to remove), link and cancel link.
 The favicon comes from the link through `/icon`, and without one the card shows the subscription's first letter,
-as it does for a catalog provider without a logo.
+as it does for a catalog provider without a logo. As built in M6.6, the page is a list of rows rather than cards
+(section 14).
 
 ---
 
@@ -2517,6 +2518,52 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-27, M6.6)**
+- **The page** (PROJECT-PLAN P12, `/custom`): "Custom subscriptions" with [+ New custom subscription], and a row for
+  each, as the list editor has them: its icon (GET /icon for its website's domain through core's `customIconUrl`, now
+  shared with `resolveItem`; else its first letter), its name, "2 plans · used in 1 list" (or "not used"), ✎ and 🗑.
+  With none, an empty state says what they're for. Search's empty state already links here; P3's header link comes
+  with the Lists overview (M6.7).
+- **The editor** (`features/custom-subs/custom-sub-dialog.ts`) is a wide dialog like the item dialog: 720 px, the whole
+  screen under 600 px. Both now open through `shared/wide-dialog.ts`, and the panel class is `ss-wide-dialog`. It has
+  Name, Website and Cancel link, then each plan in a box of its own: Plan name, Cost, Currency, Billed every and Unit,
+  Plus tax (where tax is added), Auto-renew available and its features, with Remove plan when there's more than one,
+  and [New plan] under them. Fields take the room their hint or error needs (`subscriptSizing="dynamic"`).
+- **Its rules are core's** (`user/custom-sub-form.ts`): `customSubFormIssues` (a name, links that are full https://
+  addresses, at least one plan, each with a name of its own, a cost of 0 or more, a currency and 1 to 120 intervals),
+  `customSubFromForm` (trimmed, a link left out when empty), `customSubFormFor`, `newCustomSubForm` and
+  `parseAmount`. Signal Forms takes the issues through `issueErrors` (`shared/form-issues.ts`), which the item dialog
+  uses too.
+- **Features** (`ss-feature-picker`): the plan's features as pills with ✕, then "Add a feature", which finds the
+  registry's rankable features as Search's Features box does (`customFeatureChoices`, `featureMatches`;
+  `includes-subscription`, a set of provider ids, isn't one). A yes-or-no feature is added at once; any other asks for
+  its value in a box under the field: one of an enum's, a number with its unit or Unlimited, or one or more of a set's
+  (`isFeatureValue`). Escape closes the box, not the dialog.
+- **A change that reaches lists asks first** (P12), counting the items it reaches (`customSubChange`): "Save changes to
+  Local Gym? 1 subscription in your lists uses a plan you changed, and changes with it." Items follow a changed plan
+  (its name, price, renewal or features) by its id. Decided here: a removed plan's items are removed from their lists
+  with it, as a deleted subscription's are, in the save's own transaction (`CustomSubsRepository.save`), so no item is
+  left naming a plan that's gone; that question has the danger button.
+- **Delete** soft-deletes the subscription and its items together (`removeWithItems`). It asks every time: "Also remove
+  it from 1 list.", or "It isn't in any of your lists." (P12 asked only when it's in use). List drafts aren't changed:
+  a draft's item of a deleted subscription shows "Its custom subscription was deleted".
+- **The list editor (P5, flow F3):** [+ Add custom subscription] is a menu of the user's custom subscriptions, then
+  Create new…, which opens the editor, then the item dialog for what it made.
+- **Typed costs are text fields** (`inputmode="decimal"`, so phones show a number pad), found by the browser check: in
+  the list of plans a number field lost a decimal point typed quickly, and "49.99" became 9949. Signal Forms binds the
+  field again whenever its plan changes, and writing the number back drops a trailing "." and moves the caret to the
+  start. Number fields outside a list (budgets, an own price, a feature's count) keep what's typed.
+- **Autocompletes close when focus moves on**, also found by the browser check (the item dialog's Escape, now and
+  then, closed nothing): Material starts closing its suggestions on Tab only after their panel's first render, which in
+  a zoneless app may not come until later, so Tabbing quickly past the tag picker left its empty panel open, and it took
+  the dialog's next Escape. `ss-tag-picker` and `ss-feature-picker` close theirs when focus moves to another control;
+  a click on a suggestion moves focus to the dialog around the field, and stays Material's to handle.
+- **Not yet:** custom plans in the calendar and exports come with M7. In lists and ranks they behave like catalog
+  plans already (`resolveItem` since M4.6).
+- **Bundles:** the initial bundle grew by 0.7 kB (490.3 kB), for `CustomSubsRepository`'s save and
+  `removeWithItems` and core's `customIconUrl`. The page's chunk is 5 kB, the editor's with the feature picker 18 kB,
+  and the list editor's grew to 22 kB with its menu.
 
 **Resolved (2026-10-27, M6.5)**
 - **The item dialog** (PROJECT-PLAN P6, `features/lists/item-dialog.ts`): "Add subscription" or "Edit subscription"
