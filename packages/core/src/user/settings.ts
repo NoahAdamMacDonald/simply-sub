@@ -24,6 +24,8 @@ export const settingsSchema = z
     monthlyBudget: z.number().positive('Must be more than 0').optional(),
     annualBudget: z.number().positive('Must be more than 0').optional(),
     theme: z.enum(['system', 'light', 'dark']),
+    /** Search starts with "Sold in <country>" on (PROJECT-PLAN P8, P13, M5.6). Left out, it starts off. */
+    searchSoldOnly: z.literal(true).optional(),
     updatedAt: timestampSchema,
   })
   .superRefine(({ country, subdivision }, ctx) => {

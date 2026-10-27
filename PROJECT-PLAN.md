@@ -163,6 +163,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M5.3 | Filter panel + URL state (P8): `ss-search-filters` (the price per month up to the catalog's priciest plan, Category, Features over rank keys with chips, Activity, Native pricing only, Clear all) beside the results, and in a drawer opened by a Filters button under 960 px; core's `readSearchParams` and `writeSearchParams` (values the catalog doesn't have are dropped and the URL rewritten), `searchFilterOptions`, `featureSuggestions`, `filterCount` and `rankKeyLabel`; typing replaces its history entry, a run of price changes makes one, anything else adds one (BLUEPRINT §14) | Filters survive a reload and back/forward; filtering for 4k shows each provider's cheapest 4k plan; "Native pricing only" hides converted prices |
 | M5.4 | Add-to-list menu → edit page with `?add=` (flow F1); `ss-sub-card`'s prices and bundle prices become buttons (`priceClick`), plain text until then | F1 works end to end (needs M6.3–M6.5; stub it until then) |
 | M5.5 | Pick mode `?addTo=` (flow F2) | F2 works end to end |
+| M5.6 | "Sold in <country>" filter (added 2026-10-26): `CatalogQuery.soldOnly` in core's `searchCatalog`, `sold=1`/`sold=0` against the user's default (`SearchDefaults` in `readSearchParams`, `writeSearchParams` and `filterCount`), the panel's checkbox, and Settings' Search option `searchSoldOnly` (P8, P13; BLUEPRINT §14) | A UK user with Sold in on sees no fallback prices, a provider not sold there doesn't show even when named, and the Settings default holds across reloads with `sold=0` turning it off |
 
 ### M6 — Lists & ranking
 | ID | Task | Done when |
@@ -802,9 +803,13 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
     combine with AND.
   - Activity: Active / Inactive / Not listed (multi-select, checkboxes drawn as chips).
   - Native pricing only.
-  - Clear all (keeps the text and the sort).
-- **URL state:** `?q=&sort=&min=&max=&cat=&f=video.quality%3D4k,streaming.ad-free&act=active,none&native=1`, in that
-  order, leaving defaults out. Typing replaces the current history entry once it pauses; a run of price changes (a
+  - Sold in Canada (the user's country, M5.6): only plans priced where the user is, so none with only a fallback
+    price ("No price for Canada yet"), and no card for a provider that isn't sold there even when the text names
+    it. It starts as Settings' Search option says (P13), off unless the user turns it on there.
+  - Clear all (keeps the text and the sort, and puts Sold in back to the user's default).
+- **URL state:** `?q=&sort=&min=&max=&cat=&f=video.quality%3D4k,streaming.ad-free&act=active,none&native=1&sold=1`,
+  in that order, leaving defaults out: `sold` appears only when it differs from the user's default (`sold=1` on,
+  `sold=0` off), and the Filters count doesn't count a default. Typing replaces the current history entry once it pauses; a run of price changes (a
   drag, or arrow keys) makes one entry; every other change adds one, so Back undoes the last filter. A value the
   catalog doesn't have (an unknown sort, category, rank key or parameter, a bad amount, a minimum above the maximum,
   Best match without text) is dropped and the URL rewritten in place. A filter change doesn't scroll the page.
@@ -986,6 +991,9 @@ Editor dialog:
 **Built so far:** the budgets, Appearance and 📍 (M4.2), each a card ("Location and currency" holds 📍 and the tax
 line under it), and the Catalog line (M4.3). Custom tags have no task yet. Your data (M6.9), Security (M6.10) and
 local sync (Phase 5) come with their tasks.
+- **Search** (M5.6): "Show only what's sold in Canada", which makes Search start with its Sold in filter on
+  (`settings.searchSoldOnly`, kept only when it's on). Search's own checkbox still turns it off for one search
+  (`sold=0`).
 
 **Behaviour**
 - ← goes back (to Home if there's no history).

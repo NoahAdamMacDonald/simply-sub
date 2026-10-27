@@ -46,7 +46,8 @@ mat-slider {
   @include choice-chip.chip;
 }
 
-.native {
+.native,
+.sold {
   display: flex;
   flex-direction: column;
 }

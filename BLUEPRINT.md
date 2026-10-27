@@ -877,6 +877,7 @@ export interface Settings {             // one record, under the key 'settings'
   salesTaxPercent?: number;                     // the user's own rate, in place of the built-in one (4.8)
   monthlyBudget?: number; annualBudget?: number;
   theme: 'light' | 'dark' | 'system';
+  searchSoldOnly?: true;                        // Search starts with Sold in on (M5.6); left out when off
   updatedAt: string;
   // M6.10 adds appLock?: { salt; iterations; check; idleMinutes }: the optional passphrase lock (11.5). No secret
   // is stored, only the salt and an encrypted check value. Per-device preferences (PROJECT-PLAN §3.5) come with
@@ -999,7 +1000,8 @@ item is sold in the region; `availability` does, and the app asks it first. `con
 - **Amounts** are written the way English is in the user's country, as Settings' budgets are: a Canadian sees $7.53,
   US$9.99 and €5.00; an American sees $9.99 and CA$18.99. Periods read "/ mo", "/ 3 mo", "/ year", "/ 30 days", and
   screen readers hear "about $7.53 a month".
-- Native prices show no icon. The search filters offer a **"Native pricing only"** toggle.
+- Native prices show no icon. The search filters offer a **"Native pricing only"** toggle, and **"Sold in
+  Canada"** (M5.6), which hides fallback prices and providers not sold in the user's country.
 - **Not available in your region:** see "Where something is sold" above.
 - The optimizer uses converted amounts but labels the resulting savings "estimated". In Phase 4, card **FX fees**
   apply automatically when the charged currency differs from the card's currency.
@@ -2444,6 +2446,22 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-26, M5.6)**
+- **"Sold in <country>" filter** (below Native pricing only, named after Settings' country): core's
+  `CatalogQuery.soldOnly` keeps only plans whose availability is `offered` there. It hides the plans with only a
+  fallback price ("No price for Canada yet"), and a provider not sold there, even when the text names it, as a
+  price filter does. A provider priced in a country has no unknown plans there (a plan it doesn't price is not
+  offered), so in practice it hides providers with no price there at all: for a UK user today, Netflix and
+  Disney+.
+- **A Settings default:** Settings' new Search card, "Show only what's sold in Canada", saves
+  `settings.searchSoldOnly` (kept only when it's on; an optional field needs no migration). The URL carries
+  `sold` only when it differs from that default: `sold=1` on, `sold=0` off. Core's `SearchDefaults` goes to
+  `readSearchParams`, `writeSearchParams` and `filterCount`, so the Filters count leaves a default out, and Clear
+  all puts it back. Search reads the URL once the settings have loaded, so a `sold=0` isn't read against the
+  wrong default.
+- **`availableIn` follows from M1.9:** providers sold in certain countries only (Crave) are not offered
+  elsewhere, with or without the filter; the filter is for the multi-country ones with no price there yet.
 
 **Resolved (2026-10-26, M1.10)**
 - **A plan can be in several service categories:** an optional `categories` list on a plan, else its provider's

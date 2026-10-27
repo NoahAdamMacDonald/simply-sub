@@ -35,6 +35,7 @@ import {
   writeSearchParams,
   type CatalogQuery,
   type ProviderSort,
+  type SearchDefaults,
 } from '@simply-sub/core';
 import { filter, map } from 'rxjs';
 import { CatalogStore } from '../../core/catalog/catalog-store';
@@ -135,10 +136,20 @@ export class SearchPage {
       previous !== undefined && searchText(previous.value) === searchText(q) ? previous.value : q,
   });
 
-  /** The URL's text, filters and sort, as far as the catalog has them; undefined until it has loaded. */
+  /** What a filter is when the URL doesn't say: Sold in as Settings has it (M5.6). */
+  private readonly defaults = computed<SearchDefaults>(() => ({
+    soldOnly: this.settings.saved()?.searchSoldOnly === true,
+  }));
+
+  /**
+   * The URL's text, filters and sort, as far as the catalog has them; undefined until it and the settings, whose
+   * defaults the URL leaves out, have loaded.
+   */
   protected readonly query = computed(() => {
     const data = this.catalog.catalog();
-    return data && readSearchParams(this.params(), data);
+    return data && this.settings.saved()
+      ? readSearchParams(this.params(), data, this.defaults())
+      : undefined;
   });
   private readonly hasText = computed(() => this.query()?.q !== undefined);
   /** Best match needs text: without it, the default is the cheapest first. */
@@ -164,7 +175,7 @@ export class SearchPage {
     });
     return { query, options, catalog, settings };
   });
-  protected readonly filters = computed(() => filterCount(this.query() ?? {}));
+  protected readonly filters = computed(() => filterCount(this.query() ?? {}, this.defaults()));
 
   /** The results, or undefined until the settings and the catalog have loaded. */
   protected readonly results = computed(() => {
@@ -206,7 +217,7 @@ export class SearchPage {
     // The URL shows only what's applied: anything the catalog doesn't have is dropped from it.
     effect(() => {
       const query = this.query();
-      if (query && !sameSearchParams(this.params(), writeSearchParams(query))) {
+      if (query && !sameSearchParams(this.params(), writeSearchParams(query, this.defaults()))) {
         this.navigate(query, 'replace');
       }
     });
@@ -231,9 +242,17 @@ export class SearchPage {
     this.change({ sort }, 'push');
   }
 
+  /** Every filter back as the user's defaults have it; the text and the sort stay. */
   protected clearFilters(): void {
     const { q, sort } = this.query() ?? {};
-    this.navigate({ ...(q !== undefined && { q }), ...(sort !== undefined && { sort }) }, 'push');
+    this.navigate(
+      {
+        ...(q !== undefined && { q }),
+        ...(sort !== undefined && { sort }),
+        ...(this.defaults().soldOnly && { soldOnly: true }),
+      },
+      'push',
+    );
   }
 
   protected filtered(query: CatalogQuery, entry: HistoryEntry): void {
@@ -275,7 +294,7 @@ export class SearchPage {
 
   /** Puts `query` in the URL, without scrolling: a price change after another one replaces its entry. */
   private navigate(query: CatalogQuery, entry: HistoryEntry): void {
-    const queryParams = writeSearchParams(query);
+    const queryParams = writeSearchParams(query, this.defaults());
     if (sameSearchParams(this.params(), queryParams)) return;
     const state = this.location.getState() as Record<string, unknown> | null;
     const priceRun = entry === 'price' && state?.[priceState] === true;

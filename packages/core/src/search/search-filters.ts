@@ -8,6 +8,7 @@ import {
 } from '../ranking/rank-keys';
 import { termForms } from './plurals';
 import { searchCatalog, type CatalogQuery, type CatalogSearchContext } from './search-catalog';
+import type { SearchDefaults } from './search-params';
 
 // What Search's filter panel offers (PROJECT-PLAN P8, M5.3), from the catalog file for the user's country: the
 // service categories and rank keys of what's sold there, so no choice on its own empties the results, the price
@@ -131,8 +132,11 @@ export function featureSuggestions(
   return [{ label: 'Matches', keys: matches }, ...byCategory(related, (name) => `More in ${name}`)];
 }
 
-/** How many filters the query sets, as the Filters button counts them: each feature, and one for each other filter. */
-export function filterCount(query: CatalogQuery): number {
+/**
+ * How many filters the query sets, as the Filters button counts them: each feature, and one for each other filter.
+ * Sold in counts when it's on and the user's default is off (`defaults`): Clear all goes back to the default.
+ */
+export function filterCount(query: CatalogQuery, defaults: SearchDefaults = {}): number {
   return (
     (query.features?.length ?? 0) +
     [
@@ -140,6 +144,7 @@ export function filterCount(query: CatalogQuery): number {
       query.category !== undefined,
       (query.activity?.length ?? 0) > 0,
       query.nativeOnly === true,
+      query.soldOnly === true && defaults.soldOnly !== true,
     ].filter(Boolean).length
   );
 }

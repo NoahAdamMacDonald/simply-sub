@@ -96,6 +96,17 @@
   <p class="hint" [id]="id + '-native'">Hides prices converted from another currency</p>
 </div>
 
+<div class="sold">
+  <mat-checkbox
+    [checked]="query().soldOnly ?? false"
+    [aria-describedby]="id + '-sold'"
+    (change)="chooseSold($event.checked)"
+  >
+    Sold in {{ countryName() }}
+  </mat-checkbox>
+  <p class="hint" [id]="id + '-sold'">Hides plans with no price for {{ countryName() }} yet</p>
+</div>
+
 <button
   matButton="outlined"
   type="button"

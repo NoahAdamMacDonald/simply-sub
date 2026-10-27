@@ -97,6 +97,41 @@ describe('readSearchParams', () => {
   });
 });
 
+describe('Sold in', () => {
+  it('reads sold=1 and sold=0, else the user’s default', () => {
+    expect(read({ sold: '1' })).toEqual({ soldOnly: true });
+    expect(read({ sold: '0' })).toEqual({});
+    expect(read({ sold: 'yes' })).toEqual({});
+    expect(readSearchParams({}, registry, { soldOnly: true })).toEqual({ soldOnly: true });
+    expect(readSearchParams({ sold: '0' }, registry, { soldOnly: true })).toEqual({});
+    expect(readSearchParams({ sold: 'yes' }, registry, { soldOnly: true })).toEqual({
+      soldOnly: true,
+    });
+  });
+
+  it('writes sold only when it differs from the default, last', () => {
+    expect(writeSearchParams({ soldOnly: true })).toEqual({ sold: '1' });
+    expect(writeSearchParams({})).toEqual({});
+    expect(writeSearchParams({ soldOnly: true }, { soldOnly: true })).toEqual({});
+    expect(writeSearchParams({}, { soldOnly: true })).toEqual({ sold: '0' });
+    expect(Object.keys(writeSearchParams({ q: 'vpn', nativeOnly: true, soldOnly: true }))).toEqual([
+      'q',
+      'native',
+      'sold',
+    ]);
+  });
+
+  it('reads back what it writes, for either default', () => {
+    for (const defaults of [{}, { soldOnly: true }]) {
+      for (const query of [{ q: 'vpn' }, { q: 'vpn', soldOnly: true }]) {
+        expect(readSearchParams(writeSearchParams(query, defaults), registry, defaults)).toEqual(
+          query,
+        );
+      }
+    }
+  });
+});
+
 describe('writeSearchParams', () => {
   it("writes P8's parameters in its order", () => {
     const params = writeSearchParams({

@@ -10,13 +10,19 @@ import { MatSelectHarness } from '@angular/material/select/testing';
 import { MatSliderHarness } from '@angular/material/slider/testing';
 import { Router, provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import type { CatalogData, ListItem, ProfileRank, RankKey } from '@simply-sub/core';
+import type { CatalogData, ListItem, ProfileRank, RankKey, Settings } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { ClockService } from '../../core/clock/clock-service';
+import { SettingsStore } from '../../core/settings/settings-store';
 import { ItemsRepository } from '../../core/storage/items-repository';
 import { RankingsRepository } from '../../core/storage/rankings-repository';
 import { DRAWER_BREAKPOINT } from '../../layout/shell';
-import { searchCatalogData, searchStores, today } from '../../shared/sub-card/search.testing';
+import {
+  alberta,
+  searchCatalogData,
+  searchStores,
+  today,
+} from '../../shared/sub-card/search.testing';
 import { SearchPage, searchDelayMs } from './search-page';
 
 // Search's small catalog for an Albertan (search.testing.ts): Mullvad (one EUR price, converted), Netflix (Premium
@@ -25,10 +31,18 @@ import { SearchPage, searchDelayMs } from './search-page';
 describe('SearchPage', () => {
   let harness: RouterTestingHarness;
   let catalog: WritableSignal<CatalogData | undefined>;
+  let settings: WritableSignal<Settings | undefined>;
   let location: SpyLocation;
 
-  /** Opens Search at `url`, as a reload or a link does, on a wide screen unless `narrow`. */
-  async function open(url = '/search', { narrow = false, loaded = true } = {}): Promise<void> {
+  /** Opens Search at `url`, as a reload or a link does, on a wide screen unless `narrow`, for an Albertan unless `as`. */
+  async function open(
+    url = '/search',
+    {
+      narrow = false,
+      loaded = true,
+      as = alberta,
+    }: { narrow?: boolean; loaded?: boolean; as?: Settings } = {},
+  ): Promise<void> {
     vi.stubGlobal('matchMedia', (query: string) => ({
       matches: narrow && query === DRAWER_BREAKPOINT,
       media: query,
@@ -53,6 +67,8 @@ describe('SearchPage', () => {
     });
     catalog = TestBed.inject(CatalogStore).catalog as WritableSignal<CatalogData | undefined>;
     if (!loaded) catalog.set(undefined);
+    settings = TestBed.inject(SettingsStore).saved as WritableSignal<Settings | undefined>;
+    settings.set(as);
     location = TestBed.inject(Location) as SpyLocation;
     harness = await RouterTestingHarness.create(url);
     // An app's bootstrap does this: without it, the router doesn't follow back and forward.
@@ -222,6 +238,40 @@ describe('SearchPage', () => {
       // Netflix Premium is sold in the US only.
       expect(names()).toEqual(['Crave']);
       expect(element().querySelector('ss-sub-card .plan-name')?.textContent).toBe('Premium');
+    });
+
+    describe('Sold in', () => {
+      // Crave is priced in Canada only, so in the US it shows its fallback price.
+      const american: Settings = {
+        ...alberta,
+        country: 'US',
+        subdivision: undefined,
+        currency: 'USD',
+      };
+
+      it('hides what has no price where the user is, with sold=1', async () => {
+        await open('/search', { as: american });
+        expect(names()).toContain('Crave');
+
+        await harness.navigateByUrl('/search?sold=1');
+        await settle();
+        expect(names()).not.toContain('Crave');
+        expect(location.path()).toBe('/search?sold=1');
+      });
+
+      it('starts on as Settings says, and sold=0 turns it off', async () => {
+        const always: Settings = { ...american, searchSoldOnly: true };
+        await open('/search', { as: always });
+        expect(names()).not.toContain('Crave');
+        expect(location.path()).toBe('/search');
+        // On by default, it isn't a filter the empty state or the Filters count clears.
+        expect(element().querySelector<HTMLInputElement>('.sold input')?.checked).toBe(true);
+
+        element().querySelector<HTMLInputElement>('.sold input')?.click();
+        await settle();
+        expect(location.path()).toBe('/search?sold=0');
+        expect(names()).toContain('Crave');
+      });
     });
 
     it('hides converted prices with Native pricing only', async () => {

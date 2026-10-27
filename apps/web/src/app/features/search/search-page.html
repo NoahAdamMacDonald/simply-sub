@@ -106,6 +106,7 @@
       [catalog]="panel.catalog"
       [currency]="panel.settings.currency"
       [country]="panel.settings.country"
+      [soldByDefault]="panel.settings.searchSoldOnly === true"
       (queryChange)="filtered($event, 'push')"
       (priceChange)="filtered($event, 'price')"
     />

@@ -32,6 +32,20 @@
     <p class="tax">{{ salesTax() }}</p>
   </section>
 
+  <section aria-labelledby="search-heading">
+    <h2 id="search-heading">Search</h2>
+    <mat-checkbox
+      [checked]="saved.searchSoldOnly === true"
+      aria-describedby="search-sold-hint"
+      (change)="setSoldOnly($event.checked)"
+    >
+      Show only what's sold in {{ country() }}
+    </mat-checkbox>
+    <p id="search-sold-hint" class="hint">
+      Search starts with its “Sold in {{ country() }}” filter on. You can still turn it off there.
+    </p>
+  </section>
+
   <section aria-labelledby="catalog-heading">
     <h2 id="catalog-heading">Catalog</h2>
     <div class="catalog">

@@ -40,6 +40,11 @@ export interface CatalogQuery {
   activity?: readonly ActivityFilter[];
   /** Only prices that weren't converted. */
   nativeOnly?: boolean;
+  /**
+   * Only what's sold in the user's country (M5.6): plans priced there, so none with only a fallback price ("No
+   * price for Canada yet"), and no card for a provider that isn't sold there.
+   */
+  soldOnly?: boolean;
 }
 
 /** P8's Activity filter: Active, Inactive or Not listed (PROJECT-PLAN §3.3). */
@@ -98,8 +103,9 @@ const namedRelevance = 3;
 /**
  * Search's results, in the query's order. Plans aren't shown where availability says they aren't sold. A provider
  * that sells nothing in the user's country gets a not-offered card only when the text names it, and passes the
- * category, feature and activity filters; a price filter or Native pricing only leaves it out, since it has no price.
- * Price sorts compare the shown plan's lowest monthly equivalent, and put not-offered cards last.
+ * category, feature and activity filters; a price filter, Native pricing only or Sold in leaves it out, since it has no
+ * price. Sold in also leaves out the plans with only a fallback price, and a provider with no other plan. Price sorts
+ * compare the shown plan's lowest monthly equivalent, and put not-offered cards last.
  */
 export function searchCatalog(query: CatalogQuery, context: CatalogSearchContext): CatalogResult[] {
   const { catalog, settings, fx, items, today } = context;
@@ -150,32 +156,39 @@ export function searchCatalog(query: CatalogQuery, context: CatalogSearchContext
       sort,
     },
     searching,
-  ).map(({ provider, plans, matchedOn, relevance }): PricedResult => {
-    const [first, ...rest] = plans.map((match) =>
+  ).flatMap(({ provider, plans, matchedOn, relevance }): PricedResult[] => {
+    const sold = query.soldOnly ? plans.filter((match) => match.availability === 'offered') : plans;
+    const [first, ...rest] = sold.map((match) =>
       catalogPlan(match, resellerDeals(provider, match.plan.id, catalog.resellers, buyer)),
     );
+    if (!first) {
+      return [];
+    }
     const chips: PricedResult['plans'] = [first, ...rest];
     const own = activity.get(provider.id)?.plans ?? [];
     const owned = (kind?: ProviderActivity['kind']) =>
       chips.find((plan) =>
         own.some((mine) => mine.planId === plan.plan.id && (!kind || mine.kind === kind)),
       );
-    return {
-      kind: 'priced',
-      provider,
-      plans: chips,
-      shownPlanId: (owned('active') ?? owned() ?? first).plan.id,
-      matchedOn,
-      ...(relevance !== undefined && { relevance }),
-      ...listed(provider),
-    };
+    return [
+      {
+        kind: 'priced',
+        provider,
+        plans: chips,
+        shownPlanId: (owned('active') ?? owned() ?? first).plan.id,
+        matchedOn,
+        ...(relevance !== undefined && { relevance }),
+        ...listed(provider),
+      },
+    ];
   });
 
   const unpriced =
     q === undefined ||
     query.minPrice !== undefined ||
     query.maxPrice !== undefined ||
-    query.nativeOnly === true;
+    query.nativeOnly === true ||
+    query.soldOnly === true;
   const notOffered = unpriced
     ? []
     : searchProviders(

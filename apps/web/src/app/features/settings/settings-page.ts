@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
@@ -10,6 +11,7 @@ import { catalogDate } from '../../core/catalog/catalog-dates';
 import { CatalogStore, type CatalogCheckOutcome } from '../../core/catalog/catalog-store';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { ThemeService, type ThemeMode } from '../../core/theme/theme-service';
+import { countryName } from '../../shared/country-name';
 import { BudgetSetting } from './budget-setting';
 import { LocationDialog } from './location-dialog';
 import { percentText, placeSummary } from './place-names';
@@ -28,7 +30,15 @@ const checkMessages: Record<CatalogCheckOutcome, string> = {
  */
 @Component({
   selector: 'ss-settings-page',
-  imports: [BudgetSetting, MatButton, MatIcon, MatIconButton, MatRadioButton, MatRadioGroup],
+  imports: [
+    BudgetSetting,
+    MatButton,
+    MatCheckbox,
+    MatIcon,
+    MatIconButton,
+    MatRadioButton,
+    MatRadioGroup,
+  ],
   templateUrl: './settings-page.html',
   styleUrl: './settings-page.scss',
 })
@@ -84,6 +94,17 @@ export class SettingsPage {
     } else {
       void this.router.navigateByUrl('/');
     }
+  }
+
+  /** The user's country, by name, for Search's Sold in. */
+  protected readonly country = computed(() => {
+    const saved = this.saved();
+    return saved && countryName(saved.country);
+  });
+
+  /** Whether Search starts with Sold in on (P8, M5.6); kept only when it's on. */
+  protected setSoldOnly(on: boolean): void {
+    void this.settings.update({ searchSoldOnly: on ? true : undefined });
   }
 
   protected setMode(mode: ThemeMode): void {

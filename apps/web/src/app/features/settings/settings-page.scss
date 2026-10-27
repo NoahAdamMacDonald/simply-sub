@@ -27,6 +27,17 @@ mat-radio-group {
   color: var(--ss-text-muted);
 }
 
+// The checkbox's own padding lines its box up with the radio buttons above.
+mat-checkbox {
+  margin-left: -10px;
+}
+
+.hint {
+  margin: 0;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}
+
 .catalog {
   display: flex;
   flex-wrap: wrap;

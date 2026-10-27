@@ -2,10 +2,10 @@
 // Alberta and a US user, in both themes at 1280 and 360 px: the cards, plan chips by keyboard, the expanded details,
 // the "Cheaper at" resellers, typing with its pause, the empty state, a listed provider's status, every card's cancel
 // page (M1.9), a plan sold in the US only, a provider not sold in the user's country (Crave, sold in Canada only), a
-// UK user's fallback price, and the filter panel (M5.3): its Tab order, each filter by keyboard, the URL after each one (typing replaces its entry, a run of
-// price changes makes one, anything else adds one), a reload, Back and Forward, a URL with values the catalog doesn't
-// have, no scroll on a filter change, and under 960 px the drawer (focus, its trap, Escape, Show results, Back), with
-// axe. GET /fx is answered with fixed rates (1 EUR ≈ CA$1.5694), so Amazon.ca's Mullvad cards are cheaper in Alberta.
+// UK user's fallback price, with Sold in and its Settings default (M5.6), and the filter panel (M5.3): its Tab order,
+// each filter by keyboard, the URL after each one (typing replaces its entry, a run of price changes makes one,
+// anything else adds one), a reload, Back and Forward, a URL with values the catalog doesn't have, no scroll on a
+// filter change, and under 960 px the drawer (focus, its trap, Escape, Show results, Back), with axe. GET /fx is answered with fixed rates (1 EUR ≈ CA$1.5694), so Amazon.ca's Mullvad cards are cheaper in Alberta.
 // Usage: node check-search.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
 const fs = require('fs');
 const path = require('path');
@@ -425,7 +425,7 @@ async function addItem(page, planId) {
     // The Tab order: the bar, then the panel's controls, then the results.
     await page.getByRole('searchbox').focus();
     const order = [];
-    for (let i = 0; i < 11; i++) {
+    for (let i = 0; i < 12; i++) {
       await page.keyboard.press('Tab');
       await sleep(200);
       order.push(await stop(page));
@@ -440,11 +440,12 @@ async function addItem(page, planId) {
       /^checkbox "Inactive"/,
       /^checkbox "Not listed"/,
       /^checkbox "Native pricing only"/,
+      /^checkbox "Sold in Canada"/,
       /^button "Clear all" \[disabled\]/,
       /^'?link /,
     ];
     check(
-      'Tab goes Sort → the price’s two thumbs → Category → Features → Activity → Native → Clear all → the results',
+      'Tab goes Sort → the price’s two thumbs → Category → Features → Activity → Native → Sold in → Clear all → the results',
       expected.every((pattern, i) => pattern.test(order[i] ?? '')),
       order.join(' → '),
     );
@@ -691,6 +692,11 @@ async function addItem(page, planId) {
         () => !!document.activeElement?.closest('.mat-mdc-autocomplete-panel'),
       );
     }
+    // The Features box opens its suggestions on focus: leave it, and they close.
+    if (/^combobox "Features/.test(await stop(page))) {
+      await page.keyboard.press('Tab');
+      await sleep(200);
+    }
     check(
       'Tab stays inside the drawer, never stops on the Features suggestions, and leaves them closed',
       trapped && !onList && (await page.locator('.mat-mdc-autocomplete-panel').count()) === 0,
@@ -823,6 +829,43 @@ async function addItem(page, planId) {
       /^≈ £\d+\.\d\d \/ mo .*No price for United Kingdom yet$/.test(prices),
       prices,
     );
+    // M5.6: Sold in United Kingdom hides what has no UK price, and Settings can make it the default.
+    const sold = second.getByRole('checkbox', { name: 'Sold in United Kingdom' });
+    await sold.focus();
+    await second.keyboard.press('Space');
+    await until('sold=1', () => search(second) === '?sold=1');
+    await until('Netflix to go', async () => !(await names(second)).includes('Netflix'));
+    check(
+      '"Sold in United Kingdom" hides the providers with no UK price, in the URL as sold=1',
+      (await names(second)).join() === 'Proton,Mullvad VPN',
+      (await names(second)).join(', '),
+    );
+    await second.goto(`${baseUrl}settings`);
+    const option = second.getByRole('checkbox', {
+      name: "Show only what's sold in United Kingdom",
+    });
+    await option.waitFor();
+    await option.focus();
+    await second.keyboard.press('Space');
+    await until('the option saved', () => option.isChecked());
+    // Material's check mark animates in: a screenshot at once catches it still empty.
+    await sleep(600);
+    await second.screenshot({ path: path.join(outDir, 'settings-search-gb.png'), fullPage: true });
+    await axeCheck(second, 'GB, Settings with the Search option');
+    await second.goto(`${baseUrl}search`);
+    await second.locator('ss-sub-card').first().waitFor({ timeout: 20000 });
+    await until('the default', async () => !(await names(second)).includes('Netflix'));
+    check(
+      "Settings' option starts Search with Sold in on, and no sold in the URL",
+      search(second) === '' && (await sold.isChecked()),
+      search(second),
+    );
+    await sold.focus();
+    await second.keyboard.press('Space');
+    await until('sold=0', () => search(second) === '?sold=0');
+    await until('Netflix back', async () => (await names(second)).includes('Netflix'));
+    check('turning it off against the default writes sold=0', true);
+    await axeCheck(second, 'GB, Sold in off against the default');
     await british.close();
   }
 

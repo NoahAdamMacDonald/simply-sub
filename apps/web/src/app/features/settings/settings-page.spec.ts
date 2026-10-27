@@ -153,6 +153,19 @@ describe('SettingsPage', () => {
     await vi.waitFor(async () => expect((await saved()).theme).toBe('dark'));
   });
 
+  it('keeps Search’s Sold in default, on or left out', async () => {
+    const sold = await loader.getHarness(
+      MatCheckboxHarness.with({ label: "Show only what's sold in Canada" }),
+    );
+    expect(await sold.isChecked()).toBe(false);
+    expect(text()).toContain('Search starts with its “Sold in Canada” filter on.');
+
+    await sold.check();
+    await vi.waitFor(async () => expect((await saved()).searchSoldOnly).toBe(true));
+    await sold.uncheck();
+    await vi.waitFor(async () => expect(await saved()).not.toHaveProperty('searchSoldOnly'));
+  });
+
   describe('the 📍 dialog', () => {
     async function open(): Promise<HarnessLoader> {
       await (await loader.getHarness(MatButtonHarness.with({ text: /Ontario, Canada/ }))).click();
