@@ -11,7 +11,7 @@ import type { ActivityFilter, CatalogQuery } from './search-catalog';
 // default and lists Activity in a fixed order, so the query a URL reads to writes that URL again. Sold in starts as
 // the user's setting says (M5.6), so the URL has `sold` only when it differs: sold=1 turns it on, sold=0 off. Pick
 // mode's addTo=<list id> (P7, flow F2, M5.5) comes last and isn't a filter: it's kept while it names one of the
-// user's lists.
+// user's lists, a new list's draft included (M6.3).
 
 export const searchParamNames = [
   'q',
@@ -59,7 +59,8 @@ export function searchText(text: string): string {
  * The query in `params`, keeping what's valid in `catalog`: its service categories and rank keys. A repeated list
  * (f, act) keeps every value, and any other repeated parameter its first. A minimum of 0 is no minimum, and a minimum
  * above the maximum drops both. Sold in is on with sold=1, off with sold=0, and else as `defaults` say. An addTo is
- * kept only when it names one of `lists`, the user's lists that aren't deleted.
+ * kept only when it names one of `lists`: the user's lists that aren't deleted, and new lists' drafts
+ * (listsWithDrafts).
  */
 export function readSearchParams(
   params: QueryParams,

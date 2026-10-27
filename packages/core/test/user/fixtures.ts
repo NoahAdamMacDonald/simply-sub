@@ -6,6 +6,7 @@ import {
   type CatalogSnapshot,
 } from '../../src';
 import { catalog } from '../catalog/catalog-files';
+import { withValue } from '../catalog/helpers';
 
 // One valid record of each user table, with every optional field set. Specs change one field at a time with
 // withValue (../catalog/helpers).
@@ -47,6 +48,18 @@ export const item = {
   pinned: true,
   ...stamps,
   deletedAt: '2026-10-20T09:15:00.000Z',
+};
+
+const savedItem = withValue(item, ['deletedAt'], undefined) as Omit<typeof item, 'deletedAt'>;
+
+/** Work Related's draft: renamed, with its item unpinned (a list's items aren't deleted). */
+export const draft = {
+  listId,
+  isNew: false,
+  name: 'Work',
+  startName: 'Work Related',
+  items: [{ item: { ...savedItem, pinned: false }, saved: savedItem }],
+  startedAt: '2026-10-21T08:00:00.000Z',
 };
 
 export const limitedBilling = {

@@ -898,6 +898,16 @@ export interface FxCache {              // the last exchange rates fetched (M4.4
   rates: FxRates;                       // GET /fx's data: base, date, source and rates
   fetchedAt: string;
 }
+
+export interface ListDraft {            // a list's unsaved edits (PROJECT-PLAN P5, M6.3), one per list
+  listId: string;                       // the key
+  isNew: boolean;                       // made on /lists/new: the list is only in its draft until Save
+  name: string; startName: string;      // the name now, and when the draft started
+  items: { item: ListItem;              // as edited
+           saved?: ListItem;            // as saved when the draft started; absent for an item the draft added
+           removed?: true }[];          // removed in the draft, kept for Undo; Save soft-deletes a saved one
+  startedAt: string;
+}
 ```
 `Settings.country` and `ListItem.region` are countries (ISO 3166-1 alpha-2), never `EU` or `GLOBAL`, and a
 subdivision must belong to the country.
@@ -920,10 +930,11 @@ transaction types for a subclass). Dexie keeps only keys and indexes, not the re
   function. Export files carry a `schemaVersion` so old backups can still be imported, migrated the same way.
 
 v1 declares every table, so it's the full list the app lock (M6.10) encrypts. `catalogCache` got its record schema
-with M4.3; `drafts` and `dismissedSuggestions` get theirs with M6.3 and M8.2, and `cards` its repository with M9.1
-(its schema is in core already, since backups carry cards). v2 (M4.4) adds `fxRates`. The cache tables
-(`cacheTables` in core: `catalogCache` and `fxRates`) are left out of backups and left plain by the app lock, and their
-records are replaced and deleted outright.
+with M4.3 and `drafts` with M6.3, which needed no new version since nothing had written to them; `dismissedSuggestions`
+gets its with M8.2, and `cards` its repository with M9.1 (its schema is in core already, since backups carry cards).
+v2 (M4.4) adds `fxRates`. The cache tables (`cacheTables` in core: `catalogCache` and `fxRates`) are left out of
+backups and left plain by the app lock, and their records are replaced and deleted outright. Drafts are deleted
+outright too, on Save or Cancel: they're edits not saved yet, with no deletion for a sync to pass on.
 ```ts
 db.version(1).stores({
   lists: 'id, updatedAt',
@@ -2285,6 +2296,9 @@ prompted after each big change, or weekly).
 - **The exchange rates (M4.4):** `FxRatesRepository` keeps the last rates fetched, one record (section 4.7). Like
   the catalog cache, a record that fails its schema is only logged and fetched again. `FxStore` brought the initial
   bundle to 475.7 kB.
+- **List drafts (M6.3):** `DraftsRepository` is the only way into the `drafts` table, and `ListDraftService`
+  (`core/lists/`) edits the drafts through it (section 14). Starting a draft and Save read and write the lists and
+  items too, each in one transaction (`StorageEngine.transaction`, whose reads and writes are checked like the others).
 - **IndexedDB blocked** (some private browsing modes, or site data blocked): the repositories' status is `error`, and
   the app shows the P15 notice in place of the shell. [Continue anyway] calls `StorageService.useMemory()`: the same
   Dexie database opens on `fake-indexeddb` (57 kB, a chunk loaded only then), and every repository reloads from it
@@ -2499,6 +2513,44 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-27, M6.3)**
+- **The draft record** (`user/list-draft.ts`, section 4.6): one per list, keyed by `listId`, with `isNew`, the name now
+  and when it started (`startName`), `startedAt`, and its items, each as edited (`item`), as saved when the draft
+  started (`saved`, absent for one the draft added) and `removed` (kept in the draft, so Undo puts it back). Items are
+  whole `ListItem`s, so the editor can resolve them as it does saved ones. The schema checks that every item belongs
+  to the list, none is listed twice or has `deletedAt`, a saved copy is the same item, and a new list has none.
+- **No new Dexie version:** `drafts` was declared in v1 with its key, and nothing wrote to it before, so its schema
+  needs no upgrade; v2 stays the latest. Drafts are deleted outright on Save or Cancel, not soft-deleted: they're
+  edits not saved yet, with no deletion for a sync to pass on.
+- **`DraftsRepository`** (`core/storage/`) is the only way into the table. `start` resumes a list's draft (`resumed`),
+  or copies the list and its items that aren't deleted into a new one, in one transaction; there's none for an unknown
+  or deleted list (P15). A draft that fails its schema is replaced by a fresh copy, as settings and rankings are. Each
+  edit is a transaction on the draft, so two tabs don't overwrite each other, and every tab's signals follow it.
+- **`ListDraftService`** (`core/lists/`): `start`, `startNew`, `rename`, `addItem`, `updateItem`, `removeItem`,
+  `restoreItem`, `hasChanges`, `save` and `cancel`. `resumed` is true whenever a draft was there; the editor (M6.4)
+  says "Resumed unsaved changes" when it also has changes. Changes are counted against the start (core's
+  `draftChanged`): a new name, an item added, removed, or with a field that differs from its saved copy, in any key
+  order and leaving out timestamps. An item added and removed again is no change.
+- **A new list's name** is "Subscription List", then "Subscription List 2", 3… while a saved list has it (any case).
+  Deleted lists don't count, nor do other new lists' drafts, which nothing shows until they're saved.
+- **Save** writes the list, its items and the draft's deletion in one transaction (`StorageEngine.transaction`), or
+  nothing: a failure part way rolls back what was written, and the draft stays. P5's rule for `pinned` and `cardId`
+  holds for every field: a changed item gets only the top-level fields the draft changed (core's `savedItem`), so
+  what was changed elsewhere since stays, P4's "Wrong date?" too (it's in `billing`, which the draft replaces whole
+  only when it changed it). Added items are created with Save's time, removed ones soft-deleted, and one deleted
+  since stays deleted. A list deleted since can't be saved; a new list is created.
+- **Search's pick mode** adds to `listsWithDrafts`: the saved lists, named as their drafts name them, and the new
+  lists, which have only a draft until Save. Search waits for the drafts as it does for the lists, so a reload keeps
+  `/search?addTo=<new id>` and its banner, and a draft cancelled in another tab drops it in place.
+- **`/lists/new`:** the placeholder editor makes the draft, then replaces its URL with `/lists/<id>/edit`, keeping
+  the query (Search's New list…), so Back skips it and [+ Add from catalog] has an id. It's done in the lazy page,
+  not a route guard, which would put the storage code in the initial bundle.
+- **Bundles:** the initial bundle grew by 0.12 kB (488.9 kB), with no new code in it: esbuild split a shared storage
+  chunk in two now that the drafts share it. The storage engine's chunk grew by 0.4 kB (99.2 kB) and Search's by
+  0.2 kB (235.7 kB).
+- **Next (M6.4):** the editor builds on the service. Leaving a new list with no changes should drop its draft, which
+  nothing else would.
 
 **Resolved (2026-10-27, M6.2)**
 - **The Features page** (PROJECT-PLAN P9), "Your feature ranks": a card per feature category in `categories.yaml`'s

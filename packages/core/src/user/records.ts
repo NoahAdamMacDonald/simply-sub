@@ -3,6 +3,7 @@ import { rankKeySchema } from '../catalog/formats';
 import { catalogCacheSchema } from './catalog-cache';
 import { customSubscriptionSchema } from './custom-subscription';
 import { fxCacheSchema } from './fx-cache';
+import { listDraftSchema } from './list-draft';
 import { listItemSchema } from './list-item';
 import { paymentCardSchema } from './payment-card';
 import { profileRankingSchema } from './profile-ranking';
@@ -14,7 +15,7 @@ import { tagSchema } from './tag';
 /**
  * The record schemas of the database's tables, by Dexie table name (BLUEPRINT §4.6). The repositories check every
  * record against them on the way in and out (§11.1), and backups (M6.9) use the same ones, except the cacheTables'.
- * drafts and dismissedSuggestions get theirs with M6.3 and M8.2.
+ * dismissedSuggestions gets its with M8.2.
  */
 export const userRecordSchemas = {
   lists: subscriptionListSchema,
@@ -25,6 +26,7 @@ export const userRecordSchemas = {
   tags: tagSchema,
   settings: settingsSchema,
   catalogCache: catalogCacheSchema,
+  drafts: listDraftSchema,
   fxRates: fxCacheSchema,
 };
 export type UserTable = keyof typeof userRecordSchemas;
@@ -47,6 +49,7 @@ export const userRecordKeys = {
   tags: 'id',
   settings: 'key',
   catalogCache: 'key',
+  drafts: 'listId',
   fxRates: 'key',
 } as const satisfies Record<UserTable, string>;
 
@@ -60,6 +63,7 @@ const keySchemas: Record<UserTable, z.ZodType<string>> = {
   tags: recordIdSchema,
   settings: settingsSchema.shape.key,
   catalogCache: catalogCacheSchema.shape.key,
+  drafts: recordIdSchema,
   fxRates: fxCacheSchema.shape.key,
 };
 

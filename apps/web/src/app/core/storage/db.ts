@@ -23,8 +23,8 @@ export function createUserDatabase(options?: DexieOptions): Dexie {
     cards: 'id',
     tags: 'id',
     settings: 'key',
-    // Their schemas come with their tasks: the catalog snapshot and its ETag (M4.3), unsaved list edits (P5,
-    // M6.3) and dismissed optimizer suggestions (P14, M8.2).
+    // Their record schemas come with their tasks: the catalog snapshot (M4.3), unsaved list edits (P5, M6.3) and
+    // dismissed optimizer suggestions (P14, M8.2). A schema for a table nothing has written to needs no new version.
     catalogCache: 'key',
     drafts: 'listId',
     dismissedSuggestions: 'fingerprint',

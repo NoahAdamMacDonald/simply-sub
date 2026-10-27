@@ -916,7 +916,8 @@ async function addItem(page, planId) {
     await bundlePrice.click();
     await menu.waitFor();
     await menu.getByRole('menuitem', { name: /New list/ }).click();
-    await until('the new list', () => page.url().includes('/lists/new'));
+    // /lists/new makes the new list's draft and replaces its URL with the list's editor (M6.3).
+    await until('the new list', () => /\/lists\/[0-9a-f-]{36}\/edit\?/.test(page.url()));
     check(
       "a bundle's price opens a new list's editor with the bundle",
       search(page) === '?addBundle=bundle.disney-crave-ads&interval=month',
