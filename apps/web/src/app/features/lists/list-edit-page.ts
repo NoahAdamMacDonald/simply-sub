@@ -26,12 +26,10 @@ import { ActivatedRoute, Router, RouterLink, type Params } from '@angular/router
 import {
   draftChanged,
   draftItems,
-  monthlyAverage,
   readAddRequest,
   recordIdSchema,
   type AddRequest,
   type ListDraft,
-  type ResolvedItem,
 } from '@simply-sub/core';
 import { filter, firstValueFrom, map } from 'rxjs';
 import { CatalogStore } from '../../core/catalog/catalog-store';
@@ -46,11 +44,11 @@ import { CustomSubEditor } from '../custom-subs/custom-sub-editor';
 import { EmptyState } from '../../shared/empty-state/empty-state';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { PriceTag } from '../../shared/price-tag/price-tag';
-import { amountText } from '../../shared/price-tag/price-text';
 import { ProviderIcon } from '../../shared/provider-icon/provider-icon';
 import { TagChip } from '../../shared/tags/tag-chip';
 import { focusFirstError } from '../../shared/focus-first-error';
 import { wideDialogConfig } from '../../shared/wide-dialog';
+import { averageText } from './average-text';
 import { editRow, type EditRow } from './edit-rows';
 import type {
   ItemDialog,
@@ -209,23 +207,15 @@ export class ListEditPage implements AsksBeforeLeaving {
     const status = this.changed() ? 'Unsaved changes' : 'No unsaved changes';
     const saved = this.settings.saved();
     if (!saved) return { shown: status, spoken: status };
-    const resolved: ResolvedItem[] = [];
-    let unpriced = 0;
-    for (const result of this.resolutions()) {
-      if (result.ok) resolved.push(result.resolved);
-      else unpriced++;
-    }
-    const average = monthlyAverage(resolved, saved.currency);
-    const amount = amountText(average.amount, saved.currency, saved.country);
-    const notCounted = unpriced + average.leftOut;
-    return {
-      shown:
-        `${status} · ${average.approx ? '≈ ' : ''}${amount} / mo average` +
-        (notCounted > 0 ? ` (${notCounted} not counted)` : ''),
-      spoken:
-        `${status}, ${average.approx ? 'about ' : ''}${amount} a month on average` +
-        (notCounted > 0 ? `, ${notCounted} not counted` : ''),
-    };
+    const results = this.resolutions();
+    const average = averageText(
+      {
+        resolved: results.flatMap((result) => (result.ok ? [result.resolved] : [])),
+        unresolved: results.filter((result) => !result.ok),
+      },
+      saved,
+    );
+    return { shown: `${status} · ${average.shown}`, spoken: `${status}, ${average.spoken}` };
   });
 
   /** What the item dialog couldn't open: a plan, bundle, custom subscription or item there isn't. */

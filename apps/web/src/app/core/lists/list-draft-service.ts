@@ -6,7 +6,11 @@ import {
   type ListDraft,
   type ListItem,
 } from '@simply-sub/core';
-import { DraftsRepository, type StartedDraft } from '../storage/drafts-repository';
+import {
+  DraftsRepository,
+  type DeletedList,
+  type StartedDraft,
+} from '../storage/drafts-repository';
 import type { NewRecord, RecordChanges } from '../storage/record-repository';
 
 /** An item's own fields, as the item dialog fills them: the draft gives it an id, its list and the time. */
@@ -96,8 +100,13 @@ export class ListDraftService {
   }
 
   /** Delete list: the list and its items are soft-deleted, and the draft dropped, together. */
-  deleteList(listId: string): Promise<void> {
+  deleteList(listId: string): Promise<DeletedList> {
     return this.drafts.deleteList(listId);
+  }
+
+  /** Undo of a Delete list: the list and the items it deleted come back, together. */
+  restoreList(deleted: DeletedList): Promise<void> {
+    return this.drafts.restoreList(deleted);
   }
 }
 
