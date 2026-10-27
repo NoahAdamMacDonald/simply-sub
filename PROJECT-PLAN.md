@@ -184,7 +184,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M6.5 | Item dialog (P6): core's rules in `user/item-form.ts` (the periods a plan offers, the suggested renewal and its billing day, Specific dates' windows, the form's issues and the item it saves, duplicates), Signal Forms through one `validateTree`, full screen under 600 px, `?add=`, `?addBundle=`, `?addCustom=` and `?item=` opened once and dropped from the URL, ✎ opening it directly, and `CatalogStore.need` for an unsaved item's region. "Next charge" comes with M7.1 (BLUEPRINT §14) | P6 criteria met, the calendar's with M7.4 |
 | M6.6 | Custom subscriptions page + editor (P12): core's rules in `user/custom-sub-form.ts` (the editor's issues, the record it saves, usage and what a change reaches, the features a plan can list), `CustomSubsRepository.save` and `removeWithItems` (each one transaction with the items), `ss-feature-picker`, and the list editor's [+ Add custom subscription] menu with Create new… (flow F3) (BLUEPRINT §14) | P12 criteria met, the calendar's and exports' with M7 |
 | M6.7 | Lists overview (P3): a card per list with its average a month until the bars, its rank counts (`rankCounts`), View and 🗑 with Undo (`DraftsRepository.deleteList` and `restoreList`), the New Subscription List tile, and every list's feature summary (`featureSummary`) (BLUEPRINT §14) | P3 criteria met (the bars can wait for M7.2) |
-| M6.8 | List view (P4), without the money parts, with `ss-sub-card`'s list variant (§4.3, moved from M4.5) | Cards, pinning, search/filter and the edit button work |
+| M6.8 | List view (P4), without the money parts, with `ss-sub-card`'s list variant (§4.3, moved from M4.5), built as `ss-item-card`; core's `listView` (search, sorts and filters, pinned first) in `user/list-view.ts` (BLUEPRINT §14) | Cards, pinning, search/filter and the edit button work |
 | M6.9 | Backup export/import (the "Your data" section of P13, and the first-run dialog's "Import a backup instead"), with an optional passphrase that encrypts the file, and the crypto module it uses (BLUEPRINT §11.5) | Export → delete all → import restores everything, encrypted or not; a wrong passphrase or a tampered file imports nothing |
 | M6.10 | Optional app lock: a passphrase encrypts the user tables at rest, with a lock screen and an idle lock (P13, P15; BLUEPRINT §11.5) | Locked data on disk is unreadable without the passphrase; turning the lock on and off round-trips every table; a wrong passphrase unlocks nothing |
 
@@ -471,7 +471,7 @@ Add these aliases to `_tokens.scss`. They build on the rank tokens in BLUEPRINT 
 | `ss-feature-summary` | "VPN: 2 / 3" list, read as "2 of 3 active" | `rows` (core's `FeatureSummaryRow[]`) |
 | `ss-feature-list` | A plan's features under their parent groups, with the user's rank for each ranked key it provides; core's `planFeatureRows`, on the catalog's registry | `plan`, `ranks` |
 | `ss-mini-calendar` | Month grid with dots on payment days and the payments in each day's tooltip; ‹ › change the month; one tab stop, moved with the arrow keys, Home/End and Page Up/Down | `month` (`model`), `charges` (`CalendarCharge`: date, name, amount, currency, converted, manual; M7.1's charges map to it) → `dayClick`, `monthClick` |
-| `ss-sub-card` | Subscription card (`variant: 'search' \| 'list'`), built with its pages: the search variant in M5.2, the list variant in M6.8. As built (M5.2): the search variant takes a `searchCatalog` result; its plan chips are radio buttons (one tab stop, arrow keys, never none chosen); the expanded section is `ss-plan-details`. M5.4: its prices and its bundles' prices open the card's `ss-add-to-list-menu`. M5.7: its chips sit right below its names and never move, a lone plan gets a chip too, and its details slide open and shut, with Hide details at their foot | `result`, `ranks` (M5.2); M6.8 adds `pinToggle` and `edit` |
+| `ss-sub-card` | Subscription card (`variant: 'search' \| 'list'`), built with its pages: the search variant in M5.2, the list variant in M6.8. As built (M5.2): the search variant takes a `searchCatalog` result; its plan chips are radio buttons (one tab stop, arrow keys, never none chosen); the expanded section is `ss-plan-details`. M5.4: its prices and its bundles' prices open the card's `ss-add-to-list-menu`. M5.7: its chips sit right below its names and never move, a lone plan gets a chip too, and its details slide open and shut, with Hide details at their foot. M6.8: the list variant is a component of its own, `ss-item-card`, which takes a resolved item and shares the card's look (`_card.scss`) and sliding details (`SlidingDetails`); Edit is a link in its details | `result`, `ranks` (M5.2); `ss-item-card`: `resolved`, `tags` and `pinToggle` (M6.8) |
 | `ss-add-to-list-menu` | P7's Add to list menu (M5.4): the user's lists in the order they were made, each with its number of subscriptions, then New list…; picking one opens that list's editor, or `/lists/new`, with core's `addRequestParams` | `prepare(request)` (the price that opens it says what it adds); `menu` for `ss-price` |
 | `ss-tag-chip`, `ss-tag-picker` | A tag as a dot in its colour and its name; the picker is chips with an autocomplete, and "Create tag “…”" asks for a name and one of core's 12 `tagColorPresets`, saved through `TagsRepository` | `tag`; `tagIds` (`model`) → `tagIdsChange` |
 | `ss-split-button` | Main action + dropdown (the Calendar buttons): the main button does the first item, and the menu lists them all | `label`, `items` → `action` (the item's id) |
@@ -629,6 +629,16 @@ cards.
 **States:**
 - Unknown id → P15 "This list doesn't exist".
 - Empty list → [Add from catalog] [Add custom subscription] (both open edit mode).
+
+**As built (M6.8):**
+- **Header:** the average a month and the count, until M7.2's bars.
+- **Sort:** opens a panel under the search box with the sorts and the filters, and Clear all. The default sort is
+  Highest price first.
+- **Feature summary:** under the cards below 960 px, as on the Lists overview, until the bars take the place above them.
+- **Cards** are `ss-item-card`, whose details have Edit. "Wrong date?" comes with the next charge (M7.1).
+- **Unsaved changes:** a note links back to the editor when it has changes not saved.
+
+BLUEPRINT §14 has the details.
 
 **Acceptance**
 - [ ] Totals and % shares match §3.1

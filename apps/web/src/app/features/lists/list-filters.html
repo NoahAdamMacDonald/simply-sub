@@ -1,0 +1,65 @@
+<mat-form-field appearance="outline" subscriptSizing="dynamic">
+  <mat-label>Sort by</mat-label>
+  <mat-select [formField]="form.sort">
+    @for (sort of sorts; track sort.value) {
+      <mat-option [value]="sort.value">{{ sort.label }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="outline" subscriptSizing="dynamic">
+  <mat-label>Status</mat-label>
+  <mat-select [formField]="form.activity">
+    <mat-option value="">All</mat-option>
+    <mat-option value="active">Active only</mat-option>
+    <mat-option value="inactive">Inactive only</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="outline" subscriptSizing="dynamic">
+  <mat-label>Lowest price per month</mat-label>
+  <input matInput inputmode="decimal" autocomplete="off" [formField]="form.min" />
+  <mat-error>{{ firstError(form.min) }}</mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="outline" subscriptSizing="dynamic">
+  <mat-label>Highest price per month</mat-label>
+  <input matInput inputmode="decimal" autocomplete="off" [formField]="form.max" />
+  <mat-error>{{ firstError(form.max) }}</mat-error>
+</mat-form-field>
+
+@if (options().features.length > 0) {
+  <mat-form-field appearance="outline" subscriptSizing="dynamic">
+    <mat-label>Features</mat-label>
+    <mat-select multiple [formField]="form.features">
+      @for (feature of options().features; track feature.key) {
+        <mat-option [value]="feature.key">{{ feature.label }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+}
+
+@if (options().tags.length > 0) {
+  <mat-form-field appearance="outline" subscriptSizing="dynamic">
+    <mat-label>Tags</mat-label>
+    <mat-select multiple [formField]="form.tags">
+      @for (tag of options().tags; track tag.id) {
+        <mat-option [value]="tag.id">
+          <span class="tag-dot" aria-hidden="true" [style.--tag-color]="tag.color"></span>
+          {{ tag.name }}
+        </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+}
+
+<button
+  matButton="outlined"
+  type="button"
+  class="clear"
+  disabledInteractive
+  [disabled]="count() === 0"
+  (click)="clearAll()"
+>
+  Clear all
+</button>

@@ -1,19 +1,7 @@
+@use 'card';
 @use 'choice-chip';
 
-// The card lays itself out by its own width, so it fits a page with or without the filter panel beside it.
-:host {
-  display: block;
-  container-type: inline-size;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 16px 16px 4px;
-  border-radius: var(--ss-radius-card);
-  background-color: var(--ss-card-bg);
-}
+@include card.base;
 
 // Narrow: the icon and names, the plan chips, then the links, then the prices. Wide: one row, prices on the right, and
 // the chips under it. Switching plans moves no chip (M5.7): narrow, nothing above them changes with the plan; wide,
@@ -51,60 +39,11 @@
   }
 }
 
-.icon {
-  grid-area: icon;
-}
-
-.title {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-  grid-area: title;
-  min-width: 0;
-}
-
-.name {
-  margin: 0;
-  font: var(--mat-sys-title-large);
-  overflow-wrap: anywhere;
-}
-
-.plan-name {
-  margin: 0;
-  color: var(--ss-text-muted);
-  font: var(--mat-sys-title-medium);
-}
-
-.status {
-  margin-top: 4px;
-}
-
 .links {
   display: flex;
   flex-wrap: wrap;
   gap: 4px 16px;
   grid-area: links;
-}
-
-a {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  border-radius: 4px;
-  color: var(--ss-accent-text);
-  font: var(--mat-sys-label-large);
-
-  mat-icon {
-    width: 16px;
-    height: 16px;
-    font-size: 16px;
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--ss-accent-text);
-    outline-offset: 2px;
-  }
 }
 
 // At phone width a price is a bigger target to tap (P8): an outlined pill at least 36 px high, 44 at most as the screen
@@ -141,12 +80,6 @@ a {
     align-items: flex-end;
     gap: 2px;
   }
-}
-
-.note {
-  margin: 0;
-  color: var(--ss-text-muted);
-  font: var(--mat-sys-body-small);
 }
 
 .deals {
@@ -186,60 +119,7 @@ a {
   cursor: default;
 }
 
-.expand {
-  align-self: center;
-  color: var(--ss-text);
-}
-
-// The details slide between no height and all of it: the card animates this grid row from 0fr to 1fr (SubCard's
-// slide), and clips the content only while it moves, so focus rings aren't.
-.details-body {
-  display: grid;
-  grid-template-rows: 1fr;
-  border-top: 1px solid var(--ss-divider);
-}
-
-.details-clip {
-  min-height: 0;
-}
-
-.moving .details-clip {
-  overflow: hidden;
-}
-
 // Padding inside the clipped part, which can shrink to nothing.
 ss-plan-details {
   padding-top: 12px;
-}
-
-// Closed, the details are empty: no gap in the card for them.
-.details:empty {
-  display: none;
-}
-
-// Hide details: the open section's foot closes it too.
-.collapse {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  width: 100%;
-  min-height: 40px;
-  margin: 12px 0 4px;
-  padding: 0 12px;
-  border: 0;
-  border-radius: 8px;
-  background-color: var(--ss-state-tint);
-  color: var(--ss-text);
-  font: var(--mat-sys-label-large);
-  cursor: pointer;
-
-  &:hover {
-    background-color: var(--ss-state-hover);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--ss-accent-text);
-    outline-offset: 2px;
-  }
 }

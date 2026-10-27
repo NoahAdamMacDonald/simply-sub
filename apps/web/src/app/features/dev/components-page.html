@@ -193,7 +193,7 @@
     </mat-form-field>
   }
   @if (featurePlan(); as plan) {
-    <ss-feature-list [plan]="plan" [ranks]="exampleRanks" />
+    <ss-feature-list [features]="plan.features" [ranks]="exampleRanks" />
   } @else {
     <p>No catalog yet.</p>
   }

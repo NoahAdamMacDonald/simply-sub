@@ -1,1 +1,210 @@
-<h1>List</h1>
+<ss-page-header [heading]="list()?.name ?? 'List'" backLink="/lists" backLabel="Lists">
+  @if (state() === 'ready') {
+    <!-- "/ mo" and ≈ are read as words, as ss-price's are. -->
+    <p subtitle class="summary">
+      @if (summary().average; as average) {
+        <span aria-hidden="true">{{ average.shown }}</span>
+        <span class="visually-hidden">{{ average.spoken }}, </span>
+        <span aria-hidden="true"> · </span>
+      }
+      <span>{{ summary().count }}</span>
+    </p>
+  }
+</ss-page-header>
+
+@switch (state()) {
+  @case ('loading') {
+    <p class="note">Loading the list…</p>
+  }
+  @case ('error') {
+    <p class="note">This list couldn't be read.</p>
+  }
+  @case ('missing') {
+    <!-- P15: an id that names no list. -->
+    <ss-empty-state icon="playlist_remove" heading="This list doesn't exist">
+      It may have been deleted.
+      <div actions>
+        <a matButton="filled" routerLink="/lists">Back to lists</a>
+      </div>
+    </ss-empty-state>
+  }
+  @case ('ready') {
+    @if (unsaved()) {
+      <p class="note unsaved">
+        This list has changes you haven't saved.
+        <a [routerLink]="['/lists', listId(), 'edit']">Go back to editing</a>
+      </p>
+    }
+
+    <div class="layout" [class.with-features]="total() > 0">
+      <div class="items">
+        @if (total() === 0) {
+          <ss-empty-state icon="playlist_add" heading="No subscriptions yet">
+            Add the ones you pay for, or the ones you're weighing up.
+            <div actions class="add">
+              <!-- Search in pick mode for this list (P7, flow F2): a price there opens the list editor with it. -->
+              <a matButton="filled" routerLink="/search" [queryParams]="{ addTo: listId() }">
+                <mat-icon>add</mat-icon>
+                Add from catalog
+              </a>
+              <button matButton="outlined" type="button" [matMenuTriggerFor]="customMenu">
+                <mat-icon>add</mat-icon>
+                Add custom subscription
+              </button>
+              <mat-menu #customMenu="matMenu" aria-label="Add custom subscription">
+                @for (sub of customSubs.records(); track sub.id) {
+                  <button mat-menu-item type="button" (click)="addCustom(sub.id)">
+                    <span>{{ sub.name }}</span>
+                  </button>
+                }
+                @if (customSubs.records().length > 0) {
+                  <mat-divider />
+                }
+                <button mat-menu-item type="button" (click)="createCustom()">
+                  <mat-icon aria-hidden="true">add</mat-icon>
+                  <span>Create new…</span>
+                </button>
+              </mat-menu>
+            </div>
+          </ss-empty-state>
+        } @else {
+          <div class="toolbar">
+            <mat-form-field appearance="outline" class="search" subscriptSizing="dynamic">
+              <mat-icon matPrefix aria-hidden="true">search</mat-icon>
+              <mat-label>Search this list</mat-label>
+              <input
+                #box
+                matInput
+                autocomplete="off"
+                [value]="text()"
+                (input)="text.set(box.value)"
+              />
+              @if (text() !== '') {
+                <button
+                  matIconButton
+                  matSuffix
+                  type="button"
+                  aria-label="Clear search"
+                  (click)="clearSearch(box)"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+              }
+            </mat-form-field>
+            <!-- Its name says how many filters are on; the count beside it is the same, shown. -->
+            <button
+              matButton="outlined"
+              type="button"
+              class="filters-toggle"
+              aria-controls="list-filters"
+              [attr.aria-expanded]="filtersOpen()"
+              (click)="filtersOpen.set(!filtersOpen())"
+            >
+              <mat-icon>tune</mat-icon>
+              <span>Sort</span>
+              <span class="visually-hidden">
+                and filter{{ filterCount() > 0 ? ', ' + filterCount() + ' on' : '' }}</span
+              >
+              @if (filterCount() > 0) {
+                <span class="badge" aria-hidden="true">{{ filterCount() }}</span>
+              }
+            </button>
+          </div>
+
+          <div id="list-filters">
+            @if (filtersOpen()) {
+              <ss-list-filters
+                class="filters"
+                [(state)]="filters"
+                [options]="options()"
+                [count]="filterCount()"
+              />
+            }
+          </div>
+
+          <p class="note shown" role="status">{{ shownText() }}</p>
+
+          <!-- Cards' names are h3s: under Pinned and All when something is pinned, else under a hidden heading. -->
+          @if (view().pinned.length > 0) {
+            <h2 class="group">Pinned</h2>
+            <ul class="cards">
+              @for (resolved of view().pinned; track resolved.item.id) {
+                <li [attr.data-item]="resolved.item.id">
+                  <ss-item-card
+                    [resolved]="resolved"
+                    [tags]="tagsOf(resolved)"
+                    (pinToggle)="pin(resolved, $event)"
+                  />
+                </li>
+              }
+            </ul>
+          }
+          @if (view().others.length > 0 || view().unresolved.length > 0) {
+            @if (view().pinned.length > 0) {
+              <h2 class="group">All</h2>
+            } @else {
+              <h2 class="visually-hidden">Subscriptions</h2>
+            }
+            <ul class="cards">
+              @for (resolved of view().others; track resolved.item.id) {
+                <li [attr.data-item]="resolved.item.id">
+                  <ss-item-card
+                    [resolved]="resolved"
+                    [tags]="tagsOf(resolved)"
+                    (pinToggle)="pin(resolved, $event)"
+                  />
+                </li>
+              }
+              <!-- One it can't price or name says why, with Edit to fix it. -->
+              @for (row of unresolvedRows(); track row.id) {
+                <li class="unresolved" [attr.data-item]="row.id">
+                  <p class="title">{{ row.title }}</p>
+                  @if (row.problem) {
+                    <p class="note">{{ row.problem }}</p>
+                  }
+                  <a
+                    matButton="outlined"
+                    [routerLink]="['/lists', listId(), 'edit']"
+                    [queryParams]="{ item: row.id }"
+                    [attr.aria-label]="'Edit ' + row.title"
+                  >
+                    <mat-icon aria-hidden="true">edit</mat-icon>
+                    Edit
+                  </a>
+                </li>
+              }
+            </ul>
+          }
+          @if (view().shown === 0) {
+            <div class="no-match">
+              <p>No subscriptions match.</p>
+              <button matButton="outlined" type="button" (click)="clearAll()">
+                Clear search and filters
+              </button>
+            </div>
+          }
+        }
+
+        <a matButton="outlined" class="edit-list" [routerLink]="['/lists', listId(), 'edit']">
+          <mat-icon>edit</mat-icon>
+          Edit list
+        </a>
+      </div>
+
+      @if (total() > 0) {
+        <section class="features" aria-labelledby="features-heading">
+          <h2 id="features-heading">Features</h2>
+          @if (features().length > 0) {
+            <p class="note">Active out of all the subscriptions in this list that have each</p>
+            <ss-feature-summary [rows]="features()" />
+          } @else {
+            <p class="note">
+              Nothing to sum up yet. Rank the features you care about on the
+              <a routerLink="/features">Features</a> page.
+            </p>
+          }
+        </section>
+      }
+    </div>
+  }
+}

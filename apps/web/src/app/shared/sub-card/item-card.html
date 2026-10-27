@@ -1,0 +1,113 @@
+<!-- Spaces go inside the spans: Angular drops the whitespace between them, and screen readers need it. -->
+<article class="card" [attr.aria-labelledby]="id + '-name'">
+  <div class="head">
+    <ss-provider-icon class="icon" [src]="resolved().iconUrl" [name]="resolved().name" size="48" />
+
+    <div class="title">
+      <h3 class="name" [id]="id + '-name'">{{ names().name }}</h3>
+      @if (names().planName; as planName) {
+        <p class="plan-name">{{ planName }}</p>
+      }
+      <ss-status-badge class="status" [status]="status()" />
+      @if (tags().length > 0) {
+        <ul class="tags" aria-label="Tags">
+          @for (tag of tags(); track tag.id) {
+            <li><ss-tag-chip [tag]="tag" /></li>
+          }
+        </ul>
+      }
+    </div>
+
+    <!-- Saved to the item at once, outside the list editor (P4). -->
+    <button
+      matIconButton
+      type="button"
+      class="pin"
+      [class.pinned]="item().pinned"
+      [attr.aria-pressed]="item().pinned"
+      [attr.aria-label]="'Pin ' + title()"
+      (click)="pinToggle.emit(!item().pinned)"
+    >
+      <mat-icon>push_pin</mat-icon>
+    </button>
+
+    <ss-price class="price" [price]="price()" [region]="item().region" />
+  </div>
+
+  <button
+    #expandButton
+    matIconButton
+    type="button"
+    class="expand"
+    [attr.aria-expanded]="details.expanded()"
+    [attr.aria-controls]="id + '-details'"
+    [attr.aria-label]="'Details: ' + title()"
+    (click)="details.toggle()"
+  >
+    <mat-icon>{{ details.expanded() ? 'expand_less' : 'expand_more' }}</mat-icon>
+  </button>
+  <!-- In the page while open, and while sliding shut. -->
+  <div class="details" [id]="id + '-details'">
+    @if (details.rendered()) {
+      <div #body class="details-body" [class.moving]="details.moving()">
+        <div class="details-clip">
+          <div class="details-content">
+            @if (facts().length > 0) {
+              <ul class="facts">
+                @for (fact of facts(); track fact) {
+                  <li>{{ fact }}</li>
+                }
+              </ul>
+            }
+
+            <!-- Not a section: the page's feature summary is the Features region. -->
+            <div>
+              <h4>Features</h4>
+              <ss-feature-list
+                [features]="resolved().features"
+                [ranks]="resolved().effectiveRanks"
+              />
+            </div>
+
+            <div class="actions">
+              @if (resolved().link; as link) {
+                <a [href]="link" target="_blank" rel="noopener">
+                  <span>Plan</span>
+                  <span class="visually-hidden"> {{ title() }}, opens in a new tab</span>
+                  <mat-icon aria-hidden="true">open_in_new</mat-icon>
+                </a>
+              }
+              @if (resolved().cancelUrl; as cancelUrl) {
+                <a [href]="cancelUrl" target="_blank" rel="noopener">
+                  <span>Cancel</span>
+                  <span class="visually-hidden"> {{ title() }}, opens in a new tab</span>
+                  <mat-icon aria-hidden="true">open_in_new</mat-icon>
+                </a>
+              }
+              <!-- The list editor opens the item dialog for it (P5, ?item=). -->
+              <a
+                matButton="outlined"
+                class="edit"
+                [routerLink]="['/lists', item().listId, 'edit']"
+                [queryParams]="{ item: item().id }"
+                [attr.aria-label]="'Edit ' + title()"
+              >
+                <mat-icon aria-hidden="true">edit</mat-icon>
+                Edit
+              </a>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="collapse"
+            [attr.aria-label]="'Hide details: ' + title()"
+            (click)="details.collapse()"
+          >
+            <mat-icon aria-hidden="true">expand_less</mat-icon>
+            <span>Hide details</span>
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+</article>

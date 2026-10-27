@@ -1,14 +1,10 @@
-import { DOCUMENT } from '@angular/common';
 import {
   Component,
   ElementRef,
-  Injector,
-  afterNextRender,
   computed,
   inject,
   input,
   linkedSignal,
-  signal,
   viewChild,
 } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
@@ -30,6 +26,7 @@ import { ProviderIcon } from '../provider-icon/provider-icon';
 import { StatusBadge, type BadgeStatus } from '../status-badge/status-badge';
 import { catalogIcon, planTitle } from './card-text';
 import { PlanDetails } from './plan-details';
+import { slidingDetails } from './sliding-details';
 
 let nextId = 0;
 
@@ -40,7 +37,7 @@ let nextId = 0;
  * to that mode's list at once (F2, M5.5). Chips switch between the matching plans, and the expanded section adds the
  * plan's features, add-ons, bundles and the rest (ss-plan-details), whose bundle prices do the same. It slides open
  * and shut, closes from its foot too, and keeps the card on screen (M5.7). A provider that isn't sold in the user's
- * country says so instead. The list variant comes with List view (M6.8).
+ * country says so instead. The list variant, for List view, is ss-item-card (M6.8).
  */
 @Component({
   selector: 'ss-sub-card',
@@ -59,9 +56,6 @@ let nextId = 0;
 })
 export class SubCard {
   private readonly settings = inject(SettingsStore);
-  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
-  private readonly injector = inject(Injector);
-  private readonly window = inject(DOCUMENT).defaultView;
   private readonly expandButton = viewChild<string, ElementRef<HTMLElement>>('expandButton', {
     read: ElementRef,
   });
@@ -102,89 +96,12 @@ export class SubCard {
   protected readonly priceRows = computed(() =>
     Math.max(1, ...this.plans().map(({ pricing }) => pricing.length)),
   );
-  /** Whether the details are open, as the details button says. */
-  protected readonly expanded = signal(false);
-  /** Whether they're in the page: open, or sliding shut. */
-  protected readonly rendered = signal(false);
-  /** While they slide: their content is clipped only then, so focus rings aren't. */
-  protected readonly moving = signal(false);
   private readonly body = viewChild<ElementRef<HTMLElement>>('body');
-  private slideAnimation?: Animation;
-
-  protected toggle(): void {
-    if (this.expanded()) {
-      this.close();
-    } else {
-      this.open();
-    }
-  }
-
-  /** Hide details, at the details' foot: closes them and puts focus back on the details button above. */
-  protected collapse(): void {
-    this.expandButton()?.nativeElement.focus({ preventScroll: true });
-    this.close();
-  }
-
-  private open(): void {
-    this.expanded.set(true);
-    this.rendered.set(true);
-    afterNextRender(() => void this.slide('open').then((done) => done && this.keepInView()), {
-      injector: this.injector,
-    });
-  }
-
-  private close(): void {
-    this.expanded.set(false);
-    void this.slide('shut').then((done) => {
-      if (!done) return;
-      this.rendered.set(false);
-      afterNextRender(() => this.keepInView(), { injector: this.injector });
-    });
-  }
-
-  /**
-   * Slides the details open or shut (M5.7): their grid row from 0fr to 1fr, fading in, or back. With the browser's
-   * own Web Animations, since Angular's animate.enter and animate.leave would add 9 kB to the first download. None
-   * with reduced motion. False when another click cut it short, which takes over.
-   */
-  private async slide(way: 'open' | 'shut'): Promise<boolean> {
-    const body = this.body()?.nativeElement;
-    this.slideAnimation?.cancel();
-    if (!body?.animate || this.window?.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
-      return true;
-    }
-    const closed = { gridTemplateRows: '0fr', opacity: 0 };
-    const open = { gridTemplateRows: '1fr', opacity: 1 };
-    const animation = body.animate(way === 'open' ? [closed, open] : [open, closed], {
-      duration: way === 'open' ? 200 : 150,
-      easing: way === 'open' ? 'ease-out' : 'ease-in',
-      // Shut, they stay shut until they leave the page.
-      fill: way === 'open' ? 'none' : 'forwards',
-    });
-    this.slideAnimation = animation;
-    this.moving.set(true);
-    try {
-      await animation.finished;
-      return true;
-    } catch {
-      return false;
-    } finally {
-      if (this.slideAnimation === animation) this.moving.set(false);
-    }
-  }
-
-  /**
-   * Once the details have opened or closed, scrolls the card back into view if that left part of it off screen:
-   * open, as much of them as fits below the page's pinned bar (the card's scroll-margin); closed from their foot, the
-   * card's top, which was scrolled past.
-   */
-  private keepInView(): void {
-    const reduce = this.window?.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    this.host.nativeElement.scrollIntoView?.({
-      block: 'nearest',
-      behavior: reduce ? 'auto' : 'smooth',
-    });
-  }
+  /** The details, which slide open and shut, and close from their foot too (M5.7). */
+  protected readonly details = slidingDetails(
+    () => this.body()?.nativeElement,
+    () => this.expandButton()?.nativeElement,
+  );
 
   /** What a plan's price adds to a list: the plan, at that price's period (P7, F1). */
   protected planRequest(planId: string, price: PickedPrice): AddRequest {

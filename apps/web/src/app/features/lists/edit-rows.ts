@@ -1,18 +1,16 @@
 import type {
-  Billing,
-  Interval,
   ItemResolution,
   ItemSource,
   PickedPrice,
-  ResolvedAddOn,
   Tag,
   UnresolvedReason,
 } from '@simply-sub/core';
+import { addOnText, billingText } from '../../shared/billing-text';
 import { dateText } from '../../shared/date-text';
 import { planTitle } from '../../shared/sub-card/card-text';
 
 // What the list editor (P5) says about each item of its draft. Its renewal date and status ("Renews Nov 12") come
-// with the charges (M7.1); until then a row says how it's billed.
+// with the charges (M7.1); until then a row says how it's billed (shared/billing-text.ts).
 
 /** One item of the draft, as its row shows it. */
 export interface EditRow {
@@ -82,25 +80,6 @@ export function editRow(result: ItemResolution, tags: ReadonlyMap<string, Tag>):
   };
 }
 
-/** How often a period bills, in words: monthly, every 3 months, every 30 days. */
-export function periodText(interval: Interval, count: number): string {
-  if (count === 1) {
-    return { day: 'daily', week: 'weekly', month: 'monthly', year: 'yearly' }[interval];
-  }
-  return `every ${count} ${interval}s`;
-}
-
-/** "Monthly · auto-renews", "Yearly · renews manually · ends Nov 3, 2027", "Specific dates, billed monthly". */
-export function billingText(billing: Billing): string {
-  const period = periodText(billing.interval, billing.intervalCount);
-  if (billing.mode === 'limited') return `Specific dates, billed ${period}`;
-  return [
-    period[0].toUpperCase() + period.slice(1),
-    billing.autoRenew ? 'auto-renews' : 'renews manually',
-    ...(billing.endDate === undefined ? [] : [`ends ${dateText(billing.endDate)}`]),
-  ].join(' · ');
-}
-
 /** What an item is when it can't be resolved: its plan's or bundle's id, or that it's a custom subscription. */
 function sourceText(source: ItemSource): string {
   switch (source.kind) {
@@ -122,11 +101,6 @@ function unresolvedText(reason: UnresolvedReason): string {
     'add-on-gone': 'One of its add-ons is no longer in the catalog',
     'no-price': 'There’s no price for how it’s billed',
   }[reason];
-}
-
-/** "Extra member", or "Extra member × 2". */
-function addOnText({ name, quantity }: ResolvedAddOn): string {
-  return quantity === 1 ? name : `${name} × ${quantity}`;
 }
 
 function customRanksText(count: number): string[] {

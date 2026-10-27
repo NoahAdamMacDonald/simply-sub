@@ -109,17 +109,17 @@
       matIconButton
       type="button"
       class="expand"
-      [attr.aria-expanded]="expanded()"
+      [attr.aria-expanded]="details.expanded()"
       [attr.aria-controls]="id + '-details'"
       [attr.aria-label]="'Details: ' + title()"
-      (click)="toggle()"
+      (click)="details.toggle()"
     >
-      <mat-icon>{{ expanded() ? 'expand_less' : 'expand_more' }}</mat-icon>
+      <mat-icon>{{ details.expanded() ? 'expand_less' : 'expand_more' }}</mat-icon>
     </button>
     <!-- In the page while open, and while sliding shut. -->
     <div class="details" [id]="id + '-details'">
-      @if (rendered()) {
-        <div #body class="details-body" [class.moving]="moving()">
+      @if (details.rendered()) {
+        <div #body class="details-body" [class.moving]="details.moving()">
           <div class="details-clip">
             <ss-plan-details
               [provider]="provider()"
@@ -131,7 +131,7 @@
               type="button"
               class="collapse"
               [attr.aria-label]="'Hide details: ' + title()"
-              (click)="collapse()"
+              (click)="details.collapse()"
             >
               <mat-icon aria-hidden="true">expand_less</mat-icon>
               <span>Hide details</span>

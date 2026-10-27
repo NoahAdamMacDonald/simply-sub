@@ -70,6 +70,7 @@ export * from './user/item-activity';
 export * from './user/item-form';
 export * from './user/list-draft';
 export * from './user/list-item';
+export * from './user/list-view';
 export * from './user/monthly-average';
 export * from './user/payment-card';
 export * from './user/profile-ranking';
