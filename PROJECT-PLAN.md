@@ -176,7 +176,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 ### M6 — Lists & ranking
 | ID | Task | Done when |
 |---|---|---|
-| M6.1 | core: rank keys, `providedKeys`, `resolveRank` (and `ResolvedItem.effectiveRanks`, §3.4), `rankCounts`, `featureSummary` (§3.2). M2.3 added `rankKeyOptions` and `providesKey`, and M2.4 `providedKeys` (`ranking/rank-keys.ts`) | Tests cover enum and tier ladders and the resolution order |
+| M6.1 | core: rank keys, `providedKeys`, `resolveRank` (and `ResolvedItem.effectiveRanks`, §3.4), `rankCounts`, `featureSummary` (§3.2). M2.3 added `rankKeyOptions` and `providesKey`, and M2.4 `providedKeys` (`ranking/rank-keys.ts`); M6.1 added `ranking/resolve-rank.ts` and `ranking/rank-summaries.ts`, with `MetricsService` passing the profile's ranks to `resolveItem` (BLUEPRINT §14) | Tests cover enum and tier ladders and the resolution order |
 | M6.2 | Features page (P9) | P9 criteria met |
 | M6.3 | `ListDraftService`, with drafts saved in Dexie | A draft survives navigation and a reload |
 | M6.4 | List edit page (P5) | P5 criteria met |
@@ -301,7 +301,9 @@ Users rank **rank keys**. Each one points to one rankable option of a feature:
   Show all eight ranks from Essential to Unwanted, with zero counts in grey. Not ranked isn't shown.
 - **Feature summary** ("VPN 2 / 3"): for each summary key, *active items that provide it* / *all items that provide it*.
   The summary keys are the keys marked `headline: true` in the registry, plus any key the user ranked Essential,
-  Critical, Needed or Wanted. Only keys with a total of at least 1 are shown, sorted by rank and then by name.
+  Critical, Needed or Wanted. Only keys with a total of at least 1 are shown, sorted by rank and then by name. A
+  key's rank there is its highest among the items that provide it (each item's override, else the profile's), and a
+  row is named as Search's Features chips are, "Video quality: 4K (Ultra HD)" (M6.1).
 
 ### 3.3 Statuses
 | Status | Rule | Shown as |
@@ -342,7 +344,7 @@ export interface ResolvedItem {        // as built in M4.6; the fields marked "M
   providedKeys: RankKey[];
   status: ItemStatus;      // M7.1: { kind: 'active' | 'inactive'; activeFrom?; endsOn?; manual }
   nextCharge?: Charge;     // M7.1
-  effectiveRanks: Record<RankKey, Rank>; // M6.1
+  effectiveRanks: Record<RankKey, Rank>; // M6.1: each provided key's rank, override > profile > not-ranked
   // cardId is the item's own (item.cardId), Phase 4
 }
 

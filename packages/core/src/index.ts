@@ -47,6 +47,8 @@ export * from './lookup/lookup-bodies';
 export * from './lookup/lookup-query';
 export * from './ranking/plan-features';
 export * from './ranking/rank-keys';
+export * from './ranking/rank-summaries';
+export * from './ranking/resolve-rank';
 export * from './search/plan-extras';
 export * from './search/provider-activity';
 export * from './search/providers-body';
