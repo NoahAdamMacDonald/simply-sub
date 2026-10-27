@@ -2447,7 +2447,7 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
-**Resolved (2026-10-27, M5.6)**
+**Resolved (2026-10-26, M5.6)**
 - **"Sold in <country>" filter** (below Native pricing only, named after Settings' country): core's
   `CatalogQuery.soldOnly` keeps only plans whose availability is `offered` there. It hides the plans with only a
   fallback price ("No price for Canada yet"), and a provider not sold there, even when the text names it, as a
@@ -2463,7 +2463,7 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 - **`availableIn` follows from M1.9:** providers sold in certain countries only (Crave) are not offered
   elsewhere, with or without the filter; the filter is for the multi-country ones with no price there yet.
 
-**Resolved (2026-10-27, M1.10)**
+**Resolved (2026-10-26, M1.10)**
 - **A plan can be in several service categories:** an optional `categories` list on a plan, else its provider's
   `category`, which stays the provider's main one (`planCategories`, `providerCategories` in core). Proton is a
   privacy suite; VPN Plus is `[vpn]`, Drive Plus `[storage]`, and Free, Unlimited, Duo and Family
@@ -2481,7 +2481,7 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
   Plus included. Deriving categories from features (VPN from `vpn.included`) would do the same, since every
   Proton plan includes Proton VPN Free, and would only repeat the Features filter.
 
-**Resolved (2026-10-27, M1.9)**
+**Resolved (2026-10-26, M1.9)**
 - **Every plan and bundle has a sign-up `link`, and every provider a `cancelUrl`:** the schema requires them, so a
   provider without them fails validation, the pipeline's drafts included (section 6.5). Search's cards always
   show Plan ↗ and Cancel ↗; a provider not sold in the user's country still shows only Website ↗. A list item gets
