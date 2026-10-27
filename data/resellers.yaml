@@ -10,6 +10,9 @@
 - id: inet
   name: Inet
   website: https://www.inet.se
+- id: laptopwithlinux
+  name: Laptop with Linux
+  website: https://laptopwithlinux.com
 - id: proxystore
   name: ProxyStore
   website: https://proxystore.de

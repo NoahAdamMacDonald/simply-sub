@@ -1501,6 +1501,17 @@ The provider's **official reseller page** comes from the same steps (paths and l
 the provider's own subscription become resellers (section 4.9); partners that run their own product on the
 provider's service don't. Each shop's product pages are then read like a pricing page, for regular prices only (M3.7).
 
+Every run also collects, for every provider (M1.12), whether or not it's new or only being re-checked:
+- its **bundle pages**: the subscribe page's bundle cards, the help centre's bundle articles, partners' landing pages
+  and a search for "`<name>` bundle";
+- its **terms of service, privacy policy** and the other policies the footer links (refunds, cookies, household or
+  sharing rules), from footer links whose text matches "Terms", "Privacy" and "Legal", and `/terms`, `/privacy`,
+  `/legal`. Extraction reads them for what pricing pages leave out: where it's sold, billing periods,
+  auto-renewal, refunds, notice of price changes, and limits on streams, devices and downloads.
+
+A provider file's header comment says what each check found, "none" included, so a PR's reviewer can tell a check
+that found nothing from one that wasn't done.
+
 **③ Render:** Playwright (free on GitHub Actions) loads each page with `en-CA` locale headers, waits for prices
 to render, clicks visible "Monthly/Annual" toggles, and saves the visible text plus a screenshot as evidence.
 - **Region gotcha:** many sites price by IP address, and GitHub runners are in the US. For Canadian prices,
@@ -2447,6 +2458,26 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-27, M1.12)**
+- **Every provider's research checks bundles, official resellers and its terms, every time**, not only when they're
+  the task: the price-research skill's rules and the pipeline's URL step (section 6.5). The terms of service, privacy
+  policy and other policies hold what pricing pages leave out (where it's sold, billing periods, auto-renewal,
+  refunds, price-change notice, limits). A provider file's header comment says what each check found, "none"
+  included, so a reviewer can tell a check that found nothing from one that wasn't done.
+- **Mullvad was missing a reseller:** its page names Laptop with Linux ("Since October 2022, we’ve partnered with
+  Laptop with Linux"), left out in M1.8 because its price with VAT follows the buyer's country. Its €48.76 a year
+  before VAT is stored (`taxExcluded`, as SerialCart's are), with free delivery anywhere. For an Albertan it's the
+  cheapest way to buy Mullvad, about CA$6.70 a month with GST, ahead of ProxyStore's and Amazon.ca's.
+- **Amazon's other 12 stores can't be read:** each shows Mullvad's price only in the basket ("To see the product
+  details, add this item to your basket"), on amazon.com and amazon.co.uk among them, and amazon.de answered with an
+  error. They stay out until a page shows the price.
+- **The other providers name no resellers:** Proton sells its gift cards in its own store only. The streaming
+  services are also billed through app stores and phone or TV providers (Netflix's partner billing, Disney+ through
+  Apple, Google, Amazon, Roku and carriers, ICI TOU.TV EXTRA in some TELUS and Koodo plans, Crave and TSN as TV
+  channels), which are partners under section 4.9, not shops selling the subscription.
+- **No getting past bot checks:** the skill's tip that a Cloudflare check passes in a visible Edge window is gone. A
+  page behind one is left out and reported.
 
 **Resolved (2026-10-27, M5.7)**
 - **Nothing paints over the top bar:** Material raises its buttons' labels and icons (`z-index: 1`, as high as the

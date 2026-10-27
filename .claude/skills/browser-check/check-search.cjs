@@ -309,8 +309,11 @@ async function addItem(page, planId) {
     );
     const deals = await shown(card(page, 'Mullvad VPN').locator('.deals'));
     check(
-      'Mullvad is cheaper at Amazon.ca and ProxyStore in Alberta',
-      /Cheaper at ProxyStore .* Cheaper at Amazon \$87\.00 \/ 12 mo \+ tax/.test(deals),
+      // €48.76 before VAT is CA$76.52, plus GST (M1.12).
+      'Mullvad is cheaper at Laptop with Linux, ProxyStore and Amazon.ca in Alberta, cheapest first',
+      /^Cheaper at Laptop with Linux ≈ \$76\.52 \/ 12 mo \+ tax Cheaper at ProxyStore .* Cheaper at Amazon \$87\.00 \/ 12 mo \+ tax$/.test(
+        deals,
+      ),
       deals,
     );
     const amazon = card(page, 'Mullvad VPN').locator('.deals a', { hasText: 'Amazon' });
