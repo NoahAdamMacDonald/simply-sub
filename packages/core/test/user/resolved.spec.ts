@@ -52,6 +52,7 @@ const canadian: ResolveContext = {
   currency: 'CAD',
   fx,
   today: '2026-10-26',
+  profileRanks: new Map(),
 };
 
 function item(source: ListItem['source'], extra: Partial<ListItem> = {}): ListItem {
@@ -255,6 +256,57 @@ describe('resolveItem', () => {
       expect(bundle).not.toHaveProperty('planId');
       expect(bundle.providedKeys).toContain('video.quality=4k');
       expect(bundle.providedKeys).toContain('streaming.live=tv-channels');
+    });
+  });
+
+  describe('its ranks (M6.1)', () => {
+    it('ranks each key it provides by its override, else the profile’s rank, else not ranked', () => {
+      const netflix = resolved(
+        resolveItem(
+          item(
+            { kind: 'catalog', planId: 'netflix.standard' },
+            {
+              rankOverrides: {
+                'streaming.ad-free': 'essential',
+                // Not ranked overrides the profile's Wanted.
+                'video.quality=1080p': 'not-ranked',
+                // A key the plan doesn't provide has no effect.
+                'video.quality=4k': 'critical',
+              },
+            },
+          ),
+          {
+            ...canadian,
+            profileRanks: new Map([
+              ['video.quality=1080p', 'wanted'],
+              ['video.quality=720p', 'needed'],
+              ['streaming.ad-free', 'unwanted'],
+              ['vpn.included', 'needed'],
+            ]),
+          },
+        ),
+      );
+
+      // Every provided key, in providedKeys' order: the quality ladder up to 1080p, the stream tiers up to 2-4.
+      expect(Object.entries(netflix.effectiveRanks)).toEqual([
+        ['video.quality=480p', 'not-ranked'],
+        ['video.quality=720p', 'needed'],
+        ['video.quality=1080p', 'not-ranked'],
+        ['streaming.ad-free', 'essential'],
+        ['streaming.concurrent-streams=1', 'not-ranked'],
+        ['streaming.concurrent-streams=2-4', 'not-ranked'],
+      ]);
+    });
+
+    it('ranks a bundle’s keys, from its plans together', () => {
+      const bundle = resolved(
+        resolveItem(item({ kind: 'bundle', bundleId: 'bundle.netflix-crave' }), {
+          ...canadian,
+          profileRanks: new Map([['streaming.live=sports', 'uses']]),
+        }),
+      );
+      expect(bundle.effectiveRanks['streaming.live=sports']).toBe('uses');
+      expect(bundle.effectiveRanks['video.quality=4k']).toBe('not-ranked');
     });
   });
 

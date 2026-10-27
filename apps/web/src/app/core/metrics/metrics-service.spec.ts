@@ -13,6 +13,7 @@ import { FxStore } from '../fx/fx-store';
 import { SettingsStore } from '../settings/settings-store';
 import { CustomSubsRepository } from '../storage/custom-subs-repository';
 import { ItemsRepository } from '../storage/items-repository';
+import { RankingsRepository } from '../storage/rankings-repository';
 import { testStorage, until } from '../storage/storage.testing';
 import { MetricsService } from './metrics-service';
 
@@ -211,6 +212,29 @@ describe('MetricsService', () => {
     // Bought in the US: the US price, converted.
     expect(shown(travel)).toEqual(['Netflix Standard: 27.60 CAD']);
     expect(metrics.list(travel).resolved[0].region).toBe('US');
+  });
+
+  it('ranks what each item provides by its overrides over the profile, and follows the profile (M6.1)', async () => {
+    const rankings = TestBed.inject(RankingsRepository);
+    await add(
+      travel,
+      { kind: 'catalog', planId: 'mullvad.vpn' },
+      {
+        rankOverrides: { 'vpn.included': 'essential' },
+      },
+    );
+    const mullvad = () => metrics.list(family).resolved[1];
+    expect(mullvad().effectiveRanks).toEqual({ 'vpn.included': 'not-ranked' });
+
+    await rankings.set('vpn.included', 'needed');
+    await until(() => mullvad().effectiveRanks['vpn.included'] === 'needed');
+    // The travel list's Mullvad keeps its own rank.
+    expect(metrics.list(travel).resolved[1].effectiveRanks).toEqual({
+      'vpn.included': 'essential',
+    });
+
+    await rankings.clear('vpn.included');
+    await until(() => mullvad().effectiveRanks['vpn.included'] === 'not-ranked');
   });
 
   it('has nothing for a list without items', () => {

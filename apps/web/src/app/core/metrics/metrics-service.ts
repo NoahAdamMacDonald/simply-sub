@@ -11,6 +11,7 @@ import { FxStore } from '../fx/fx-store';
 import { SettingsStore } from '../settings/settings-store';
 import { CustomSubsRepository } from '../storage/custom-subs-repository';
 import { ItemsRepository } from '../storage/items-repository';
+import { RankingsRepository } from '../storage/rankings-repository';
 
 /** A list's items: the resolved ones pages show, and the ones they can't show yet or any more, with why. */
 export interface ListItems {
@@ -22,14 +23,15 @@ const noItems: ListItems = { resolved: [], unresolved: [] };
 
 /**
  * The view models pages show (PROJECT-PLAN §3.4), as signals built from the repositories, CatalogStore, FxStore and
- * SettingsStore with core's resolveItem, so components never price or join anything themselves. Each item is
- * priced with the catalog file of the region it was bought in. M4.6 resolves items; M7.1 adds their status, next
- * charge and the totals (ListMetrics), and M6.1 their effective ranks.
+ * SettingsStore with core's resolveItem, so components never price, join or rank anything themselves. Each item is
+ * priced with the catalog file of the region it was bought in, and its keys ranked by its overrides over the
+ * profile's ranks (M6.1). M7.1 adds their status, next charge and the totals (ListMetrics).
  */
 @Service()
 export class MetricsService {
   private readonly items = inject(ItemsRepository);
   private readonly customSubs = inject(CustomSubsRepository);
+  private readonly rankings = inject(RankingsRepository);
   private readonly catalog = inject(CatalogStore);
   private readonly fx = inject(FxStore);
   private readonly settings = inject(SettingsStore);
@@ -49,6 +51,7 @@ export class MetricsService {
       currency: saved.currency,
       ...(fx && { fx }),
       today: this.clock.today(),
+      profileRanks: this.rankings.ranks(),
     };
     return new Map(
       this.items.records().map((item) => [

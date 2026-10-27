@@ -4,7 +4,8 @@ import type { Plan } from '../catalog/provider';
 // Rank keys (PROJECT-PLAN §3.2): one per rankable option of a feature. A boolean feature's key is its id
 // (streaming.ad-free); an enum value, a number tier or a set value adds its id (video.quality=4k,
 // streaming.concurrent-streams=2-4, password-manager.item-types=passkey). GET /providers filters on them (M2.3),
-// GET /plans/:id lists the ones a plan provides (M2.4), and M6.1 builds rank resolution and counts on top.
+// GET /plans/:id lists the ones a plan provides (M2.4), and M6.1 builds rank resolution (resolve-rank.ts) and the
+// rank counts and feature summary (rank-summaries.ts) on top.
 
 export type RankKey = string;
 

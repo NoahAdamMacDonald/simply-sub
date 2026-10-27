@@ -216,7 +216,7 @@ simply-sub/
 │     │  ├─ schedule/        # recurrence: next payment dates, monthly/annual totals
 │     │  ├─ tax/             # sales tax: tax-added regions, the Canadian rate table, subdivisions (section 4.8)
 │     │  ├─ ranking/         # rank keys, providesKey (M2.3) and providedKeys (M2.4); rank resolution (item override >
-│     │  │                   # profile > not ranked)
+│     │  │                   # profile > not ranked), rank counts and the feature summary (M6.1)
 │     │  ├─ search/          # searchProviders, readProvidersQuery, providersBody (GET /providers); searchCatalog
 │     │  │                   # and providerActivity (Search, P8, M5.1); its URL, filter options and Features
 │     │  │                   # suggestions (M5.3)
@@ -444,7 +444,8 @@ instead of trying to finish it up front.
 - `streaming.concurrent-streams=2-4` (number tier; provided if the value is at least the tier's min)
 - `password-manager.item-types=passkey` (set value)
 
-`headline: true` on a feature, value or tier puts it in feature summaries ("VPN 2 / 3", "4k 2 / 5").
+`headline: true` on a feature, value or tier puts it in feature summaries ("VPN 2 / 3", "4k 2 / 5"); on an enum,
+number or set feature, it puts all its values or tiers in.
 `rankable: false` hides helper features such as `includes-subscription`. Full rules: PROJECT-PLAN.md §3.2.
 
 **Feature summaries** such as "VPN: 2/3" (Lists page) are produced from the feature categories:
@@ -2498,6 +2499,30 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-27, M6.1)**
+- **Rank resolution** (`ranking/resolve-rank.ts`): `resolveRank` takes an item's override, then the profile's rank,
+  then Not ranked. An override of Not ranked counts as one and hides the profile's rank for that item (the item
+  dialog's Not ranked choice, M4.5). Nothing cascades from a group to its children. `effectiveRanks` ranks each key an
+  item provides, Not ranked ones included, so the item dialog can list them all (P6).
+- **`ResolvedItem.effectiveRanks`:** `resolveItem` takes the profile's ranks (`ResolveContext.profileRanks`), and
+  `MetricsService` passes `RankingsRepository.ranks`, so a rank changed on the Features page re-ranks every item. Only
+  the keys an item provides are ranked: an override left on a key its plan no longer provides changes nothing.
+- **Rank counts** (`rankCounts`): each item counts each key it provides at its effective rank there, so the enum and
+  tier ladders count every rung a plan reaches (a 4K plan counts its 1080p rank too; 6 streams count both the 2 to 4
+  tier and More than 4), and a plan listed twice counts twice. All eight ranks are there, zeros included; Not ranked
+  isn't counted.
+- **Feature summary** (`featureSummary`): the summary keys are the registry's headlines and any key an item ranks
+  Essential, Critical, Needed or Wanted, by its override or the profile, so a profile's Wanted that every item
+  providing the key overrides lower drops out. Active is today's `itemActivity` (PROJECT-PLAN §3.3), which M7.1's
+  status builds on, and a key no item provides isn't shown.
+- **Its order and names:** a key can have a different rank on each item, so rows go by its highest rank among the
+  items that provide it, in `Rank`'s order (Not ranked after Sometimes), then by name. Rows are named as Search's
+  Features chips are (`rankKeyLabel`), "Video quality: 4K (Ultra HD)" rather than the wireframe's "4k": a value's or
+  tier's name alone ("2 to 4 devices") doesn't say what it's of. The gallery keeps its hand-made rows until a page
+  shows real ones (M6.7).
+- **Next:** the Lists pages show them (M6.7, M6.8), and M7.1 puts them in `ListMetrics`. No UI changed here, and the
+  bundles didn't change.
 
 **Resolved (2026-10-27, M5.5)**
 - **Pick mode** (PROJECT-PLAN P7's flow F2, P8): `/search?addTo=<list id>` shows "Adding to Work Related" and a ✕ at

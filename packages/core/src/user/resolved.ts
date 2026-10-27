@@ -6,12 +6,14 @@ import type { Plan } from '../catalog/provider';
 import { catalogIconFile, type CatalogData, type SnapshotProvider } from '../catalog/snapshot';
 import type { IsoDate } from '../dates/iso-date';
 import { providedKeys, type RankKey } from '../ranking/rank-keys';
+import { effectiveRanks, type ProfileRanks } from '../ranking/resolve-rank';
 import type { CustomSubscription } from './custom-subscription';
 import type { ListItem } from './list-item';
+import type { Rank } from './rank';
 
 // The view models pages show (PROJECT-PLAN §3.4). resolveItem joins a list item to the catalog or its custom
-// subscription, prices it for the user and lists what it provides (M4.6). Later tasks add what they compute: status
-// and the next charge (M7.1), the effective ranks (M6.1), and ListMetrics around them.
+// subscription, prices it for the user and lists what it provides (M4.6), with each key's rank for the item (M6.1).
+// M7.1 adds the status and the next charge, and ListMetrics around them.
 
 /** Whether an item is active today (PROJECT-PLAN §3.3). */
 export interface ItemStatus {
@@ -85,6 +87,8 @@ export interface ResolvedItem {
   /** What it gives: the plan's features, a bundle's plans' together, or the custom plan's. */
   features: Plan['features'];
   providedKeys: RankKey[];
+  /** Each provided key's rank for this item, in providedKeys' order: its override, else the profile's (M6.1). */
+  effectiveRanks: Record<RankKey, Rank>;
 }
 
 /**
@@ -117,6 +121,8 @@ export interface ResolveContext {
   currency: string;
   fx?: FxRates;
   today: IsoDate;
+  /** The profile's ranks, under the items' overrides. */
+  profileRanks: ProfileRanks;
 }
 
 /**
@@ -136,7 +142,13 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
   const { source } = item;
   let parts: Omit<
     ResolvedItem,
-    'item' | 'listId' | 'region' | 'override' | 'monthlyEquivalent' | 'providedKeys'
+    | 'item'
+    | 'listId'
+    | 'region'
+    | 'override'
+    | 'monthlyEquivalent'
+    | 'providedKeys'
+    | 'effectiveRanks'
   >;
   switch (source.kind) {
     case 'catalog': {
@@ -220,6 +232,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
     }
   }
   const override = activeOverride(item, parts.price, priceContext(context, region), context.today);
+  const keys = providedKeys(parts.features, catalog.features);
   return {
     ok: true,
     resolved: {
@@ -234,7 +247,8 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
           (total, addOn) => total + addOn.price.monthlyEquivalent * addOn.quantity,
           parts.price.monthlyEquivalent,
         ),
-      providedKeys: providedKeys(parts.features, catalog.features),
+      providedKeys: keys,
+      effectiveRanks: effectiveRanks(keys, item.rankOverrides, context.profileRanks),
     },
   };
 }
