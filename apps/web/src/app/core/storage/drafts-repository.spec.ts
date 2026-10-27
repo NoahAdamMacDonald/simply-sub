@@ -245,6 +245,24 @@ describe('DraftsRepository', () => {
     });
   });
 
+  it('deletes a list with its items and its draft, and leaves other lists’ items', async () => {
+    await drafts.start(work.id);
+    const before = await storedItems();
+    storage.clock.time = '2026-10-27T09:00:00.000Z';
+    await drafts.deleteList(work.id);
+
+    const now = '2026-10-27T09:00:00.000Z';
+    expect(await storedList(work.id)).toEqual({ ...work, updatedAt: now, deletedAt: now });
+    expect(await storedItems()).toEqual(
+      before.map((item) =>
+        item.listId === work.id && item.deletedAt === undefined
+          ? { ...item, updatedAt: now, deletedAt: now }
+          : item,
+      ),
+    );
+    expect(await stored()).toEqual([]);
+  });
+
   it('deletes a draft outright', async () => {
     await drafts.start(work.id);
     await drafts.remove(work.id);

@@ -180,7 +180,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M6.1 | core: rank keys, `providedKeys`, `resolveRank` (and `ResolvedItem.effectiveRanks`, §3.4), `rankCounts`, `featureSummary` (§3.2). M2.3 added `rankKeyOptions` and `providesKey`, and M2.4 `providedKeys` (`ranking/rank-keys.ts`); M6.1 added `ranking/resolve-rank.ts` and `ranking/rank-summaries.ts`, with `MetricsService` passing the profile's ranks to `resolveItem` (BLUEPRINT §14) | Tests cover enum and tier ladders and the resolution order |
 | M6.2 | Features page (P9): a card per feature category with a parent's children under it (core's `rankingSections`), Find a feature (`nameMatcher`, shared with Search's Features box) and Ranked only (`filterRanking`), Set all and Reset all in one write (`RankingsRepository.setMany`), and "in 3 subscriptions" per row (`keyUsage`) (BLUEPRINT §14) | P9 criteria met |
 | M6.3 | `ListDraftService`, with drafts saved in Dexie: core's draft record (`user/list-draft.ts`), `DraftsRepository`, Save in one transaction (`StorageEngine.transaction`), Search's pick mode adding to a new list's draft (`listsWithDrafts`), and `/lists/new` making the draft and replacing its URL (BLUEPRINT §14) | A draft survives navigation and a reload |
-| M6.4 | List edit page (P5) | P5 criteria met |
+| M6.4 | List edit page (P5): the name, Cancel, Save and ⋮ Delete list (`DraftsRepository.deleteList`), a row per draft item (`MetricsService.resolve`) with 🗑 and Undo, the footer's average (core's `monthlyAverage`), and "Discard changes?" on leaving (`leaveGuard`). The item dialog opens from the query params in M6.5, [+ Add custom subscription] comes with M6.6, and the renewal dates and "This month" with M7.1–M7.2 (BLUEPRINT §14) | P5 criteria met, the item dialog's with M6.5 |
 | M6.5 | Item dialog (P6) | P6 criteria met |
 | M6.6 | Custom subscriptions page + editor (P12) | P12 criteria met |
 | M6.7 | Lists overview (P3) | P3 criteria met (the bars can wait for M7.2) |
@@ -647,6 +647,10 @@ Editing  [ Work Related______________ ]                        [Cancel] [Save]  
 └────────────────────────────────────────────────────────────────────────────┘
 Unsaved changes · This month $26.52 · ≈ $26.52 / mo average
 ```
+**As built (M6.4):** the heading is "Edit list" ("New list" for a new list), with the List name field beside
+Cancel, Save and ⋮ under it. Until M7.1 a row says how it's billed ("Monthly · auto-renews") rather than its renewal
+date, and until M7.2 the footer has only the average.
+
 **Data:** `ListDraftService` (the draft lives in the Dexie `drafts` table), catalog, custom subscriptions.
 **Behaviour**
 - **Draft model:** opening edit mode copies the list and its items into a draft saved in Dexie, so a trip to
@@ -655,6 +659,7 @@ Unsaved changes · This month $26.52 · ≈ $26.52 / mo average
   - One Dexie transaction writes the list and its items (add / update / soft delete), deletes the draft, then goes to `/lists/:listId`.
   - A field the draft didn't change keeps its saved value, so what was edited elsewhere since stays: `pinned` and "Wrong date?" (P4), and the Phase 4 `cardId` assignment. An item deleted since stays deleted, and a list deleted since can't be saved.
 - **Cancel:** confirm if anything changed → delete the draft → back to the list view (or `/lists` for a new list).
+- Save, Cancel and Delete list replace the editor's history entry, so Back doesn't open it again.
 - **`/lists/new`:**
   - Creates a draft with a new id, named "Subscription List" (or "Subscription List 2", 3… while a saved list has it).
   - Then replaces the URL with `/lists/<newId>/edit`.
@@ -665,12 +670,15 @@ Unsaved changes · This month $26.52 · ≈ $26.52 / mo average
 - [+ Add custom subscription] → a menu of existing custom subscriptions plus "Create new…" (the P12 editor) → item dialog.
 - ✎ opens the item dialog (P6) for that item. 🗑 removes it from the draft (it stays there, marked), with Undo in a
   snackbar.
-- ⋮ → Delete list (confirm) → soft delete → `/lists`.
+- ⋮ → Delete list (confirm) → soft-delete the list and its items, and delete the draft → `/lists`. Only a saved
+  list has ⋮: a new one has Cancel.
 - On load, these query params open the item dialog and are then removed from the URL:
   `?add=<planId>&interval=<day|week|month|year>` · `?addBundle=<bundleId>&interval=…` · `?addCustom=<customSubId>` ·
   `?item=<itemId>`. `add` and `addBundle` take `&count=<n>` for a period of n intervals ("every 3 months"); core's
   `readAddRequest` reads them (M5.4).
 - Leaving with unsaved changes asks "Discard changes?", except when going to Search in pick mode for this list.
+  Leaving drops the draft, after asking if there's anything to lose, so a new list nobody changed isn't kept; a
+  reload or a closed tab keeps it.
 - The footer shows live totals for the draft.
 
 **States:** an unknown id with no draft → P15.

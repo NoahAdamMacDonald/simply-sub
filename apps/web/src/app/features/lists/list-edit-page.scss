@@ -1,0 +1,132 @@
+:host {
+  display: block;
+  max-width: 960px;
+}
+
+// The name, then Cancel, Save and ⋮ on its right, under it when the row is narrow.
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-bottom: 16px;
+}
+
+.name {
+  flex: 1 1 320px;
+  min-width: 0;
+  max-width: 480px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-inline-start: auto;
+}
+
+.note {
+  margin: 0 0 16px;
+  color: var(--ss-text-muted);
+}
+
+.items {
+  padding: 8px 16px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+}
+
+.add {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 0 16px;
+  border-bottom: 1px solid var(--ss-divider);
+}
+
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// Icon, what it is, its price and its buttons; under 600 px the price goes under what it is.
+.item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  grid-template-areas: 'icon what price buttons';
+  align-items: center;
+  gap: 4px 12px;
+  padding: 12px 0;
+
+  & + & {
+    border-top: 1px solid var(--ss-divider);
+  }
+
+  @media (max-width: 599.98px) {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'icon what buttons'
+      'icon price buttons';
+  }
+}
+
+ss-provider-icon {
+  grid-area: icon;
+  align-self: start;
+}
+
+.what {
+  grid-area: what;
+  overflow-wrap: anywhere;
+
+  p {
+    margin: 0;
+  }
+}
+
+.title {
+  font: var(--mat-sys-title-small);
+
+  .name {
+    font-weight: 600;
+  }
+}
+
+.details,
+.problem {
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}
+
+.what .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.price {
+  grid-area: price;
+  justify-self: end;
+
+  @media (max-width: 599.98px) {
+    justify-self: start;
+  }
+}
+
+.buttons {
+  grid-area: buttons;
+  display: flex;
+}
+
+.empty {
+  margin: 0;
+  padding: 16px 0 8px;
+  color: var(--ss-text-muted);
+}
+
+.footer {
+  margin: 12px 0 0;
+  color: var(--ss-text-muted);
+}

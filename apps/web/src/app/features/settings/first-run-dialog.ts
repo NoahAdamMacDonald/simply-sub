@@ -13,7 +13,7 @@ import { settingsDefaults } from '@simply-sub/core';
 import { BROWSER_LANGUAGES } from '../../core/settings/browser-languages';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { ThemeService } from '../../core/theme/theme-service';
-import { focusFirstError } from './focus-first-error';
+import { focusFirstError } from '../../shared/focus-first-error';
 import { LocationFields } from './location-fields';
 import {
   budgetSchema,

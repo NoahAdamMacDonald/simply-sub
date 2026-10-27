@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { leaveGuard } from './core/leave-guard';
 import { devRoutes } from './dev-routes';
 
 // The routes in BLUEPRINT §8.2, and in development builds the dev pages (dev-routes.ts). Every page is lazy-loaded.
@@ -22,6 +23,7 @@ export const routes: Routes = [
         path: 'new',
         title: 'New list · Simply Sub',
         loadComponent: () => import('./features/lists/list-edit-page').then((m) => m.ListEditPage),
+        canDeactivate: [leaveGuard],
       },
       {
         path: ':listId',
@@ -32,6 +34,8 @@ export const routes: Routes = [
         path: ':listId/edit',
         title: 'Edit list · Simply Sub',
         loadComponent: () => import('./features/lists/list-edit-page').then((m) => m.ListEditPage),
+        // "Discard changes?" when leaving with unsaved changes (P5).
+        canDeactivate: [leaveGuard],
       },
       {
         path: ':listId/optimize',

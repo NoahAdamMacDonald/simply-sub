@@ -898,14 +898,14 @@ async function addItem(page, planId) {
     await sleep(300);
     await page.keyboard.press('Enter');
     await until('the editor', () => page.url().includes('/lists/'));
-    await page.locator('.adding').waitFor();
+    await page.locator('.waiting').waitFor();
     check(
       "picking a list opens its editor with the plan and the period clicked, which says what it'll add",
       new URL(page.url()).pathname.endsWith(`/lists/${LIST_ID}/edit`) &&
         search(page) === '?add=netflix.standard-ads&interval=month' &&
-        (await page.locator('.adding').textContent()).trim() ===
-          'Netflix Standard with ads, billed monthly, will be added here once the list editor is ready.',
-      `${page.url()} / ${await page.locator('.adding').textContent()}`,
+        (await page.locator('.waiting').textContent()).trim() ===
+          'Netflix Standard with ads, billed monthly, will be added here once the item dialog is ready.',
+      `${page.url()} / ${await page.locator('.waiting').textContent()}`,
     );
 
     // A bundle's price, in Crave's details, and New list….
@@ -1056,7 +1056,7 @@ async function addItem(page, planId) {
         `${label}: Enter on the ✕ goes back to the list's editor, adding nothing`,
         new URL(page.url()).pathname.endsWith(`/lists/${LIST_ID}/edit`) &&
           search(page) === '' &&
-          (await page.locator('.adding').count()) === 0,
+          (await page.locator('.waiting').count()) === 0,
         page.url(),
       );
 
@@ -1093,15 +1093,15 @@ async function addItem(page, planId) {
       const popup = await page.evaluate(() => document.activeElement.getAttribute('aria-haspopup'));
       await page.keyboard.press('Enter');
       await until('the editor', () => page.url().includes('/lists/'));
-      await page.locator('.adding').waitFor();
-      const adding = (await page.locator('.adding').textContent()).replace(/\s+/g, ' ').trim();
+      await page.locator('.waiting').waitFor();
+      const adding = (await page.locator('.waiting').textContent()).replace(/\s+/g, ' ').trim();
       check(
         `${label}: Enter on a price adds its plan and period to the list at once, with no menu`,
         /^button ".*, add to Work Related"$/.test(price) &&
           popup === null &&
           new URL(page.url()).pathname.endsWith(`/lists/${LIST_ID}/edit`) &&
           /^\?add=[a-z0-9.-]+&interval=(day|week|month|year)(&count=\d+)?$/.test(search(page)) &&
-          /, billed .+, will be added here once the list editor is ready\.$/.test(adding),
+          /, billed .+, will be added here once the item dialog is ready\.$/.test(adding),
         `${price} → ${search(page)} / ${adding}`,
       );
       if (viewport === WIDE && colorScheme === 'light') {

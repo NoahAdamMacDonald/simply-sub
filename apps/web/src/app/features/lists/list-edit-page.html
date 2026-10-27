@@ -1,13 +1,140 @@
-<h1>Edit list</h1>
-@if (adding(); as adding) {
-  <p class="adding">
-    {{ adding.name }}, billed {{ adding.period }}, will be added here once the list editor is ready.
-  </p>
-}
-@if (listId(); as listId) {
-  <!-- Search in pick mode for this list (P7, flow F2): a price there comes back here to be added. -->
-  <a matButton="outlined" routerLink="/search" [queryParams]="{ addTo: listId }">
-    <mat-icon>add</mat-icon>
-    Add from catalog
-  </a>
+<ss-page-header [heading]="heading()" />
+
+@switch (state()) {
+  @case ('loading') {
+    <p class="note">Loading the list…</p>
+  }
+  @case ('error') {
+    <p class="note">This list couldn't be opened.</p>
+  }
+  @case ('missing') {
+    <!-- P15: an id that names no list, and no new list's draft. -->
+    <ss-empty-state icon="playlist_remove" heading="This list doesn't exist">
+      It may have been deleted.
+      <div actions>
+        <a matButton="filled" routerLink="/lists">Back to lists</a>
+      </div>
+    </ss-empty-state>
+  }
+  @case ('ready') {
+    @if (draft(); as draft) {
+      <div class="toolbar">
+        <mat-form-field appearance="outline" class="name" subscriptSizing="dynamic">
+          <mat-label>List name</mat-label>
+          <input
+            #nameInput
+            matInput
+            autocomplete="off"
+            [formField]="nameForm.name"
+            (input)="rename(nameInput.value)"
+          />
+          <mat-error>{{ nameError() }}</mat-error>
+        </mat-form-field>
+        <div class="actions">
+          <button matButton="outlined" type="button" (click)="cancel()">Cancel</button>
+          <button matButton="filled" type="button" (click)="requestSave()">Save</button>
+          @if (!draft.isNew) {
+            <button
+              matIconButton
+              type="button"
+              aria-label="More actions"
+              [matMenuTriggerFor]="more"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #more="matMenu">
+              <button mat-menu-item type="button" (click)="deleteList()">
+                <mat-icon>delete</mat-icon>
+                <span>Delete list</span>
+              </button>
+            </mat-menu>
+          }
+        </div>
+      </div>
+
+      @if (resumed()) {
+        <p class="note" role="status">Resumed unsaved changes</p>
+      }
+      @if (waiting(); as waiting) {
+        <p class="note waiting">{{ waiting }}</p>
+      }
+
+      <section class="items" aria-labelledby="items-heading">
+        <h2 id="items-heading" class="visually-hidden">Subscriptions</h2>
+        <div class="add">
+          <!-- Search in pick mode for this list (P7, flow F2): a price there comes back here to be added. -->
+          <a
+            matButton="outlined"
+            class="add-from-catalog"
+            routerLink="/search"
+            [queryParams]="{ addTo: draft.listId }"
+          >
+            <mat-icon>add</mat-icon>
+            Add from catalog
+          </a>
+        </div>
+        @if (rows().length > 0) {
+          <ul class="rows">
+            @for (row of rows(); track row.id) {
+              <li class="item" [attr.data-item]="row.id">
+                <ss-provider-icon [src]="row.iconUrl" [name]="row.name" size="40" />
+                <div class="what">
+                  <p class="title">
+                    <span class="name">{{ row.name }}</span>
+                    @if (row.planName) {
+                      <span class="plan"> · {{ row.planName }}</span>
+                    }
+                  </p>
+                  @if (row.problem) {
+                    <p class="problem">{{ row.problem }}</p>
+                  }
+                  @if (row.details.length > 0) {
+                    <p class="details">{{ row.details.join(' · ') }}</p>
+                  }
+                  @if (row.tags.length > 0) {
+                    <p class="tags">
+                      @for (tag of row.tags; track tag.id) {
+                        <ss-tag-chip [tag]="tag" />
+                      }
+                    </p>
+                  }
+                </div>
+                @if (row.price; as price) {
+                  <ss-price class="price" [price]="price" [region]="row.region" />
+                }
+                <div class="buttons">
+                  <!-- The item dialog opens from ?item= (M6.5), as from the list view's [Edit] (P4). -->
+                  <a
+                    matIconButton
+                    routerLink="."
+                    [queryParams]="{ item: row.id }"
+                    [attr.aria-label]="'Edit ' + row.title"
+                  >
+                    <mat-icon>edit</mat-icon>
+                  </a>
+                  <button
+                    matIconButton
+                    type="button"
+                    class="remove"
+                    [attr.aria-label]="'Remove ' + row.title"
+                    (click)="remove(row)"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </li>
+            }
+          </ul>
+        } @else {
+          <p class="empty">No subscriptions yet. Add one from the catalog.</p>
+        }
+      </section>
+
+      <!-- "/ mo" and ≈ are read as words, as ss-price's are. -->
+      <p class="footer">
+        <span aria-hidden="true">{{ footer().shown }}</span>
+        <span class="visually-hidden">{{ footer().spoken }}</span>
+      </p>
+    }
+  }
 }

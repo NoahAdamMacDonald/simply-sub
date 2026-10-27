@@ -68,6 +68,7 @@ export * from './user/fx-cache';
 export * from './user/item-activity';
 export * from './user/list-draft';
 export * from './user/list-item';
+export * from './user/monthly-average';
 export * from './user/payment-card';
 export * from './user/profile-ranking';
 export * from './user/rank';
