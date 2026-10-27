@@ -40,6 +40,17 @@ function search(query: Partial<ProvidersQuery>, files?: CatalogSourceFile[]): Pr
 
 const canada = { region: 'CA', currency: 'CAD' };
 
+/** A monthly Canadian price, as the test catalog's Crave has. */
+const cravePrice = {
+  region: 'CA',
+  currency: 'CAD',
+  amount: 11.99,
+  interval: 'month',
+  intervalCount: 1,
+  autoRenew: true,
+  lastVerified: '2026-10-20',
+};
+
 /** Each match as provider id → its plans' ids. */
 function planIds(matches: readonly ProviderMatch[]): [string, string[]][] {
   return matches.map((match) => [match.provider.id, match.plans.map((plan) => plan.plan.id)]);
@@ -97,6 +108,26 @@ describe('searchProviders', () => {
       ]);
       // 60 EUR a year is cheaper per month than 5 EUR a month.
       expect(mullvad.plans[0].bestMonthlyEquivalent).toBeCloseTo(60 / 0.664 / 12, 10);
+    });
+
+    it('orders plans by their shortest billing period’s price, not a yearly discount', () => {
+      // TSN's case: Premium costs more a month than Standard With Ads, but less per month by the year.
+      const premium = (monthly: number) =>
+        edited(
+          catalog(),
+          'data/providers/crave.yaml',
+          ['plans', 1, 'prices'],
+          [
+            { ...cravePrice, amount: monthly },
+            { ...cravePrice, amount: 99.99, interval: 'year' },
+          ],
+        );
+      const crave = (files: CatalogSourceFile[]) =>
+        search({ ...canada, q: 'crave' }, files)[0].plans.map((plan) => plan.plan.id);
+
+      expect(crave(premium(13.99))).toEqual(['crave.standard', 'crave.premium']);
+      // The same monthly price: the cheaper one by the year comes first.
+      expect(crave(premium(11.99))).toEqual(['crave.premium', 'crave.standard']);
     });
 
     it('keeps a plan whose availability is unknown there, with its fallback price', () => {

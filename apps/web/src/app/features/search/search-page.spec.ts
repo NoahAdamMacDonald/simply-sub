@@ -372,12 +372,15 @@ describe('SearchPage', () => {
       expect(panel?.getAttribute('aria-labelledby')).toBe(panel?.querySelector('h2')?.id);
       expect(panel?.querySelector('h2')?.textContent).toBe('Filters');
       expect(panel?.querySelector('ss-search-filters')).not.toBeNull();
+      // The pinned bar comes first, outside the grid it stays above (M5.7).
+      expect(element().querySelector('.pinned .bar .sort')).not.toBeNull();
       expect(
         Array.from(element().querySelector('.layout')?.children ?? []).map(
           (child) => child.classList[0],
         ),
-      ).toEqual(['bar', 'panel', 'count', 'results']);
-      expect(button('Filters')).toBeUndefined();
+      ).toEqual(['panel', 'count', 'results']);
+      expect(element().querySelector('.pinned')?.nextElementSibling?.classList).toContain('layout');
+      expect(element().querySelector('.open-filters')).toBeNull();
     });
 
     it('clears the filters from the empty state', async () => {
@@ -394,11 +397,11 @@ describe('SearchPage', () => {
         const filters = element().querySelector<HTMLButtonElement>('.open-filters');
 
         expect(element().querySelector('section.panel')).toBeNull();
-        // It shows "Filters · 2", and screen readers hear "Filters, 2 applied".
-        expect(filters?.querySelector('mat-icon')?.getAttribute('aria-hidden')).toBe('true');
-        expect(filters?.textContent?.replace('tune', '').replace(/\s+/g, ' ').trim()).toBe(
-          'Filters · 2',
-        );
+        // One pinned row, the box and an icon button: Sort is in the drawer (M5.7).
+        expect(element().querySelector('.pinned .sort')).toBeNull();
+        // Its badge shows 2, and screen readers hear "Filters, 2 applied".
+        expect(filters?.querySelector('.badge')?.textContent?.trim()).toBe('2');
+        expect(filters?.querySelector('.badge')?.getAttribute('aria-hidden')).toBe('true');
         expect(filters?.getAttribute('aria-label')).toBe('Filters, 2 applied');
         expect(filters?.getAttribute('aria-haspopup')).toBe('dialog');
 
@@ -412,6 +415,12 @@ describe('SearchPage', () => {
         expect(await dialog.getAriaLabelledby()).toBe('ss-filters-drawer-title');
         const host = document.querySelector('mat-dialog-container');
         expect(host?.querySelector('ss-search-filters')).not.toBeNull();
+        // Sort first, then the filters.
+        expect(
+          host
+            ?.querySelector('.sort')
+            ?.compareDocumentPosition(host.querySelector('ss-search-filters')!),
+        ).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
         expect(host?.querySelector('[role=status]')?.textContent).toBe('1 service');
         expect(host?.contains(document.activeElement)).toBe(true);
 
@@ -423,8 +432,11 @@ describe('SearchPage', () => {
 
       it('applies a filter from the drawer at once, and Show results closes it', async () => {
         await open('/search', { narrow: true });
-        // With no filter on, its name is its text.
-        expect(element().querySelector('.open-filters')?.hasAttribute('aria-label')).toBe(false);
+        // With no filter on, it's just Filters, with no badge.
+        expect(element().querySelector('.open-filters')?.getAttribute('aria-label')).toBe(
+          'Filters',
+        );
+        expect(element().querySelector('.open-filters .badge')).toBeNull();
         element().querySelector<HTMLButtonElement>('.open-filters')?.click();
         await settle();
 

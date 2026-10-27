@@ -1,10 +1,13 @@
 <h1 class="visually-hidden">Search</h1>
 
-<div class="layout" [class.narrow]="narrow()">
+<!-- Pinned while the results scroll under it, below the top bar under 960 px (M5.7). -->
+<div #pinned class="pinned" [class.narrow]="narrow()">
   <div class="bar" role="search">
     <mat-form-field appearance="outline" class="search" subscriptSizing="dynamic">
       <mat-icon matPrefix aria-hidden="true">search</mat-icon>
-      <mat-label>Search services, plans or features</mat-label>
+      <mat-label>{{
+        narrow() ? 'Search services' : 'Search services, plans or features'
+      }}</mat-label>
       <input
         #box
         matInput
@@ -26,35 +29,30 @@
       }
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="sort" subscriptSizing="dynamic">
-      <mat-label>Sort</mat-label>
-      <mat-select [value]="sort()" (valueChange)="chooseSort($event)">
-        @for (choice of sorts(); track choice.value) {
-          <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
-
+    <!-- Under 960 px Sort is in the drawer, so the pinned bar is one row (M5.7). -->
     @if (narrow()) {
       <button
-        matButton="outlined"
+        matIconButton
         type="button"
         class="open-filters"
         aria-haspopup="dialog"
-        [attr.aria-label]="filters() > 0 ? 'Filters, ' + filters() + ' applied' : null"
+        [attr.aria-label]="filters() > 0 ? 'Filters, ' + filters() + ' applied' : 'Filters'"
         (click)="openFilters()"
       >
-        <mat-icon aria-hidden="true">tune</mat-icon>
-        Filters
+        <mat-icon>tune</mat-icon>
         @if (filters() > 0) {
-          · {{ filters() }}
+          <span class="badge" aria-hidden="true">{{ filters() }}</span>
         }
       </button>
+    } @else {
+      <ng-container [ngTemplateOutlet]="sortField" />
     }
   </div>
+</div>
 
+<div class="layout" [class.narrow]="narrow()">
   @if (!narrow()) {
-    <section class="panel" aria-labelledby="ss-filters-title">
+    <section class="panel" aria-labelledby="ss-filters-title" cdkScrollable>
       <h2 id="ss-filters-title">Filters</h2>
       <ng-container [ngTemplateOutlet]="panel" />
     </section>
@@ -97,6 +95,18 @@
   }
 </div>
 
+<!-- Sort: in the bar, or at the top of the drawer under 960 px. -->
+<ng-template #sortField>
+  <mat-form-field appearance="outline" class="sort" subscriptSizing="dynamic">
+    <mat-label>Sort</mat-label>
+    <mat-select [value]="sort()" (valueChange)="chooseSort($event)">
+      @for (choice of sorts(); track choice.value) {
+        <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</ng-template>
+
 <!-- The panel's controls, beside the results or in the drawer. -->
 <ng-template #panel>
   @if (filterPanel(); as panel) {
@@ -122,6 +132,7 @@
     </button>
   </div>
   <mat-dialog-content>
+    <ng-container [ngTemplateOutlet]="sortField" />
     <ng-container [ngTemplateOutlet]="panel" />
   </mat-dialog-content>
   <mat-dialog-actions>

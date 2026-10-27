@@ -1,13 +1,17 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 import { Location, NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   DestroyRef,
+  ElementRef,
   TemplateRef,
+  afterNextRender,
   computed,
   effect,
   inject,
   linkedSignal,
+  signal,
   viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
@@ -73,11 +77,14 @@ const priceState = 'ssSearchPrice';
  * Search (PROJECT-PLAN P8): the catalog for the user's country, searched on the device by core's searchCatalog, one
  * card per provider (ss-sub-card), with the filter panel (ss-search-filters) beside the results, or in a drawer under
  * 960 px. The URL holds the text, the filters and the sort (M5.3), so a reload and back/forward restore them, and the
- * page rewrites a URL with anything the catalog doesn't have. Clicking a price to add it to a list comes with M5.4.
+ * page rewrites a URL with anything the catalog doesn't have. The search bar and the panel stay in place while the
+ * results scroll (M5.7).
  */
 @Component({
   selector: 'ss-search-page',
+  host: { '[style.--ss-pinned-height]': "pinnedHeight() + 'px'" },
   imports: [
+    CdkScrollable,
     EmptyState,
     MatButton,
     MatDialogActions,
@@ -114,8 +121,12 @@ export class SearchPage {
   private readonly today = inject(ClockService).today;
 
   private readonly drawerTemplate = viewChild.required<TemplateRef<unknown>>('drawer');
+  private readonly pinned = viewChild.required<ElementRef<HTMLElement>>('pinned');
   private drawer?: MatDialogRef<unknown>;
   private timer?: ReturnType<typeof setTimeout>;
+
+  /** The pinned bar's height, for the panel pinned below it and the cards that scroll into view under it. */
+  protected readonly pinnedHeight = signal(0);
 
   private readonly params = toSignal(this.route.queryParams, { requireSync: true });
   /** Under 960 px the filters are in a drawer, as the sidebar is (P1). */
@@ -201,9 +212,18 @@ export class SearchPage {
   });
 
   constructor() {
-    inject(DestroyRef).onDestroy(() => {
+    const destroyRef = inject(DestroyRef);
+    destroyRef.onDestroy(() => {
       clearTimeout(this.timer);
       this.drawer?.close();
+    });
+    afterNextRender(() => {
+      if (typeof ResizeObserver === 'undefined') return;
+      const observer = new ResizeObserver(([entry]) =>
+        this.pinnedHeight.set(Math.ceil(entry.target.getBoundingClientRect().height)),
+      );
+      observer.observe(this.pinned().nativeElement);
+      destroyRef.onDestroy(() => observer.disconnect());
     });
     // Back or forward overrides text still waiting for the typing pause.
     this.router.events

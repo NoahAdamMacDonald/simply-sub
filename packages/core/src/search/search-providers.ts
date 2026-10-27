@@ -4,6 +4,7 @@ import type { FxRates } from '../catalog/convert';
 import type { Feature } from '../catalog/feature';
 import { pickPrice, type PickedPrice } from '../catalog/pick-price';
 import { planCategories } from '../catalog/plan-categories';
+import type { Interval } from '../catalog/price';
 import type { Plan } from '../catalog/provider';
 import type { SnapshotProvider } from '../catalog/snapshot';
 import { addDays, type IsoDate } from '../dates/iso-date';
@@ -62,7 +63,10 @@ export interface PlanMatch {
 
 export interface ProviderMatch {
   provider: SnapshotProvider;
-  /** Its matching plans, cheapest first with a region, else in file order. The first is the one to show. */
+  /**
+   * Its matching plans, with a region cheapest first by their shortest billing period's price per month, then their
+   * lowest monthly equivalent; else in file order. The first is the one to show.
+   */
   plans: [PlanMatch, ...PlanMatch[]];
   /** Why it's in the results: name, plan:<id>, alias:<alias>, category:<id> and feature:<rank key>. */
   matchedOn: string[];
@@ -97,7 +101,11 @@ export function searchProviders(
       .flatMap((plan) => planMatch(plan, provider, query, context, required, terms, options) ?? []);
     if (query.region !== undefined) {
       // Stable, so plans that cost the same keep their file order.
-      plans.sort((a, b) => (a.bestMonthlyEquivalent ?? 0) - (b.bestMonthlyEquivalent ?? 0));
+      plans.sort(
+        (a, b) =>
+          periodPrice(a, query.interval) - periodPrice(b, query.interval) ||
+          (a.bestMonthlyEquivalent ?? 0) - (b.bestMonthlyEquivalent ?? 0),
+      );
     }
     const [first, ...rest] = plans;
     if (!first) {
@@ -347,6 +355,19 @@ function termKeys(features: Plan['features'], term: TextTerm): RankKeyOption[] {
       return provided.slice(-1);
     }),
   ];
+}
+
+/**
+ * What a priced plan costs per month at its shortest billing period (of `interval`, when one is asked for): its
+ * monthly price, for most plans. Plans are compared on it, so a tier with a cheap yearly price doesn't come before a
+ * cheaper tier (TSN Premium at $249.99 a year is less per month than Standard at $24.99 a month).
+ */
+function periodPrice(match: PlanMatch, interval: Interval | undefined): number {
+  // pickPrice lists the shortest period first.
+  const shortest = match.pricing?.find(
+    (price) => interval === undefined || price.interval === interval,
+  );
+  return shortest?.monthlyEquivalent ?? 0;
 }
 
 /** `plan` as a match when it passes every filter, else undefined. */

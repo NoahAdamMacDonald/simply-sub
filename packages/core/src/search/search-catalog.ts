@@ -84,9 +84,9 @@ interface ResultBase {
 /** A provider with plans that match: a card with a chip per plan. */
 export interface PricedResult extends ResultBase {
   kind: 'priced';
-  /** Cheapest first. */
+  /** Cheapest first, by their shortest billing period's price per month (searchProviders). */
   plans: [CatalogPlan, ...CatalogPlan[]];
-  /** The plan the card shows: the user's own when it matches (an active one first), else the cheapest. */
+  /** The plan the card shows: the user's own when it matches (an active one first), else the first. */
   shownPlanId: string;
 }
 

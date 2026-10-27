@@ -165,6 +165,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M5.4 | Add-to-list menu → edit page with `?add=` (flows F1 and F4): `ss-add-to-list-menu`, one per Search card, opened by its prices and its bundles' prices (`ss-price`'s `menu` and `action`); core's `addRequestParams` and `readAddRequest` (`add` or `addBundle`, `interval`, and `count` above 1); until M6.3–M6.5 the editor says what it will add (BLUEPRINT §14) | F1 works end to end (needs M6.3–M6.5; stub it until then) |
 | M5.5 | Pick mode `?addTo=` (flow F2) | F2 works end to end |
 | M5.6 | "Sold in <country>" filter (added 2026-10-26): `CatalogQuery.soldOnly` in core's `searchCatalog`, `sold=1`/`sold=0` against the user's default (`SearchDefaults` in `readSearchParams`, `writeSearchParams` and `filterCount`), the panel's checkbox, and Settings' Search option `searchSoldOnly` (P8, P13; BLUEPRINT §14) | A UK user with Sold in on sees no fallback prices, a provider not sold there doesn't show even when named, and the Settings default holds across reloads with `sold=0` turning it off |
+| M5.7 | Search fixes (added 2026-10-27, P8): nothing paints over the top bar; the search bar and the filter panel stay pinned while the results scroll (under 960 px one row, the box and a Filters icon button with a badge, Sort in the drawer); plan chips stay in place when switching plans, a lone plan shows its chip, and plans go cheapest first by their shortest billing period's price (core's `searchProviders`); the expanded section slides open and shut, closes from a "Hide details" bar at its foot, and keeps the card in view (BLUEPRINT §14) | Scrolled down, the bar and panel stay put at 360 and 1280 px; picking plans moves no chip; TSN lists Standard before Premium; Hide details closes the section and keeps the card on screen |
 
 ### M6 — Lists & ranking
 | ID | Task | Done when |
@@ -461,7 +462,7 @@ Add these aliases to `_tokens.scss`. They build on the rank tokens in BLUEPRINT 
 | `ss-feature-summary` | "VPN: 2 / 3" list, read as "2 of 3 active" | `rows` (core's `FeatureSummaryRow[]`) |
 | `ss-feature-list` | A plan's features under their parent groups, with the user's rank for each ranked key it provides; core's `planFeatureRows`, on the catalog's registry | `plan`, `ranks` |
 | `ss-mini-calendar` | Month grid with dots on payment days and the payments in each day's tooltip; ‹ › change the month; one tab stop, moved with the arrow keys, Home/End and Page Up/Down | `month` (`model`), `charges` (`CalendarCharge`: date, name, amount, currency, converted, manual; M7.1's charges map to it) → `dayClick`, `monthClick` |
-| `ss-sub-card` | Subscription card (`variant: 'search' \| 'list'`), built with its pages: the search variant in M5.2, the list variant in M6.8. As built (M5.2): the search variant takes a `searchCatalog` result; its plan chips are radio buttons (one tab stop, arrow keys, never none chosen); the expanded section is `ss-plan-details`. M5.4: its prices and its bundles' prices open the card's `ss-add-to-list-menu` | `result`, `ranks` (M5.2); M6.8 adds `pinToggle` and `edit` |
+| `ss-sub-card` | Subscription card (`variant: 'search' \| 'list'`), built with its pages: the search variant in M5.2, the list variant in M6.8. As built (M5.2): the search variant takes a `searchCatalog` result; its plan chips are radio buttons (one tab stop, arrow keys, never none chosen); the expanded section is `ss-plan-details`. M5.4: its prices and its bundles' prices open the card's `ss-add-to-list-menu`. M5.7: its chips sit right below its names and never move, a lone plan gets a chip too, and its details slide open and shut, with Hide details at their foot | `result`, `ranks` (M5.2); M6.8 adds `pinToggle` and `edit` |
 | `ss-add-to-list-menu` | P7's Add to list menu (M5.4): the user's lists in the order they were made, each with its number of subscriptions, then New list…; picking one opens that list's editor, or `/lists/new`, with core's `addRequestParams` | `prepare(request)` (the price that opens it says what it adds); `menu` for `ss-price` |
 | `ss-tag-chip`, `ss-tag-picker` | A tag as a dot in its colour and its name; the picker is chips with an autocomplete, and "Create tag “…”" asks for a name and one of core's 12 `tagColorPresets`, saved through `TagsRepository` | `tag`; `tagIds` (`model`) → `tagIdsChange` |
 | `ss-split-button` | Main action + dropdown (the Calendar buttons): the main button does the first item, and the menu lists them all | `label`, `items` → `action` (the item's id) |
@@ -783,6 +784,15 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
 **Data:** the `CatalogStore` snapshot, `FxStore`, user lists (for status), profile ranks (for the dots). Everything runs locally (`searchCatalog` in core).
 **Behaviour**
 - **One card per provider.** It shows the plan you already have if that matches the filters, otherwise the cheapest plan that matches every filter. Plan chips switch between the provider's matching plans.
+- **Plan chips** (M5.7): cheapest first by each plan's price for its shortest billing period, per month (its monthly
+  price, usually), then by its lowest monthly equivalent, so TSN lists Standard ($24.99 a month) before Premium,
+  whose yearly price is less a month. They sit right below the names, and switching plans moves none of them: a
+  chip is as wide checked as not, and from 600 px the card keeps room for its plans' longest list of prices. A card
+  with one plan shows that plan's chip too, which isn't a control.
+- **Layout while scrolling** (M5.7): the search bar stays pinned at the top (below the top bar under 960 px), and the
+  filter panel stays pinned below it from 960 px, scrolling on its own when it's taller than the window; only the
+  results scroll under them. Under 960 px the pinned bar is one row, the search box ("Search services") and a
+  Filters icon button with a badge counting what's on, and Sort moves to the top of the drawer.
 - **Matching:** text matches provider names and aliases, plan names, feature names and aliases, and category names, in this order: exact or prefix name → substring → alias → plan name → feature or category. It's matched term by term, and every term must match ("netflix 4k"): a term is the longest run of words a feature's or category's name contains ("ultra hd"), else a word, and a plural matches its singular ("vpns"). As built in M5.1 (`searchProviders`' rules, BLUEPRINT §14). 150 ms debounce.
 - **Sort:** Best match (default when there's text), Price low→high (default otherwise), Price high→low, Name A–Z, Most features. Price sorts use the lowest monthly equivalent of the plan shown.
 - **Prices:** every interval price is a button → flow F1 (or F2 in pick mode). Converted prices show ≈, the icon and a tooltip. A $0 price shows as "Free". In Canada and the US prices are shown before tax, with "+ tax" (BLUEPRINT §4.8).
@@ -796,9 +806,13 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
   - For a suite plan (BLUEPRINT §4.4): the plans it includes, and its savings against buying them separately when there are any.
   - Perks, and accepted cards (Phase 4).
   - "Price checked Oct 14, 2026", with a "may be out of date" badge when it's older than 90 days.
+  - It slides open and shut (none with reduced motion), and a "Hide details" bar at its foot closes it too, putting
+    focus back on the details button. When opening or closing leaves part of the card off screen, the page scrolls
+    it back into view below the pinned bar (M5.7).
 - **Filter panel** (on the right from 960 px, after the search bar in the Tab order; below that a drawer opened by a
-  "Filters" button in the search bar, which counts what's on, "Filters · 2". Not ☰: the top bar's ☰ opens the
-  navigation at that width). As built in M5.3 (BLUEPRINT §14):
+  Filters button in the search bar, with the tune icon and a badge counting what's on (named "Filters, 2 applied"),
+  whose first control is Sort since M5.7. Not ☰: the top bar's ☰ opens the navigation at that width). As built in
+  M5.3 (BLUEPRINT §14):
   - Price per month: dual slider on the monthly equivalent in the user's currency, before tax, from $0 to the
     priciest plan sold in the user's country, rounded up to about 40 round steps (CA$28.19 is $0 to $30 by $1); the
     right end means "Unlimited". The URL's amounts are in Settings' currency.
