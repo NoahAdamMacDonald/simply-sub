@@ -51,7 +51,8 @@ export class AddToListMenu {
         id: list.id,
         name: list.name,
         count,
-        spoken: count === 1 ? '1 subscription' : `${count} subscriptions`,
+        // One name, not the visible text and hidden words, which a browser would join with a stray space.
+        label: `${list.name}, ${count === 1 ? '1 subscription' : `${count} subscriptions`}`,
       };
     });
   });

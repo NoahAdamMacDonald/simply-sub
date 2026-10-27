@@ -160,9 +160,13 @@
     <ol class="policy-links">
       @for (link of policies.links; track link.url) {
         <li>
-          <a [href]="link.url" target="_blank" rel="noopener">
+          <a
+            [href]="link.url"
+            target="_blank"
+            rel="noopener"
+            [attr.aria-label]="'[' + ($index + 1) + '] ' + link.name + ', opens in a new tab'"
+          >
             <span>[{{ $index + 1 }}] {{ link.name }}</span>
-            <span class="visually-hidden">, opens in a new tab</span>
             <mat-icon aria-hidden="true">open_in_new</mat-icon>
           </a>
         </li>

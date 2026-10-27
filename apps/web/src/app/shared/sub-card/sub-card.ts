@@ -198,6 +198,13 @@ export class SubCard {
   });
   /** Where to sign up: the plan's page, or the site of a provider not sold here, which has no plan to show. */
   protected readonly link = computed(() => this.plan()?.plan.link ?? this.provider().website);
+  /**
+   * The sign-up link's name, "Plan: Netflix Standard, opens in a new tab". One string: a browser puts a space before
+   * words in a separate hidden box, which made "Plan : Netflix Standard".
+   */
+  protected readonly linkName = computed(
+    () => `${this.plan() ? 'Plan' : 'Website'}: ${this.title()}, opens in a new tab`,
+  );
   protected readonly status = computed<BadgeStatus>(() => {
     const activity = this.result().activity;
     return activity

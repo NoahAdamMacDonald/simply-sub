@@ -108,7 +108,9 @@ grade, topic and reason, and its four linked pages; M1.14 its dots and the muted
 page, each linked to its quotes, with the quotes as a tooltip), and M5.9 the grade in words beside the topic at
 1280 px and at 360 px in dark; M5.9 also a click on a Features chip removing it, and the filter panel with no
 scroll of its own at 560, 720 and 900 px high; Netflix's ad-plan ratings and its Canadian terms; for a
-US user, Proton's US disputes rating and none of Netflix's Canadian ones; axe with the section open.
+US user, Proton's US disputes rating and none of Netflix's Canadian ones; axe with the section open. M5.10 reads
+the price's and the menu's names from the accessibility tree, and checks that no name on Search, cards expanded, has
+a space before a comma or colon, in both themes at both widths.
 
 ## Gotchas
 
@@ -146,9 +148,14 @@ US user, Proton's US disputes rating and none of Netflix's Canadian ones; axe wi
   That's expected until M10's service worker: navigate offline only to pages already opened.
 - A Material tooltip opens on hover and on keyboard focus (Tab), not on a script's `locator.focus()`.
 - Read a control's accessible name with `locator.ariaSnapshot()` (`- button "about $7.53 a month"`), not its
-  `textContent`, which keeps `aria-hidden` text and icon ligatures.
+  `textContent`, which keeps `aria-hidden` text and icon ligatures, and which joins a `.visually-hidden` span without
+  the space a browser puts before it: `.visually-hidden` is out of the flow, so Chromium names a button "a month , add
+  to a list" whose text reads "a month, add to a list". Hidden words that start with a comma or colon go in one
+  `aria-label` when the name starts with the visible words, or end the hidden words before them (a price, whose "/ mo"
+  is read "a month": axe's `label-content-name-mismatch` fails an `aria-label` that doesn't contain what's shown).
+  `check-search.cjs`'s `spacedNames` looks for them.
 - Read the focused element's role and name with `page.locator(':focus').ariaSnapshot()`'s first line
-  (`slider "Lowest price per month": "0"`). A name with a colon comes back quoted (`'link "Plan : …"'`), and a button
+  (`slider "Lowest price per month": "0"`). A name with a colon comes back quoted (`'link "Plan: …"'`), and a button
   whose aria-label differs from its text adds the text after a colon.
 - Chromium makes a scrolling element a tab stop when nothing in it is focusable. Material renders an autocomplete's
   list just after its input, so Tab can land on the list: check that focus never reaches `.mat-mdc-autocomplete-panel`.

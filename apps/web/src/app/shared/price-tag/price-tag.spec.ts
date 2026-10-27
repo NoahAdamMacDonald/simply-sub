@@ -175,6 +175,11 @@ describe('PriceTag', () => {
     const button = element().querySelector('button')!;
     expect(button.getAttribute('aria-haspopup')).toBe('menu');
     expect(spoken()).toBe('$18.99 a month, add to a list + tax');
+    // The action ends the hidden words, with no box of its own for a browser to put a space before (M5.10).
+    expect(Array.from(button.querySelectorAll('.visually-hidden')).at(-1)?.textContent).toBe(
+      ' a month, add to a list',
+    );
+    expect(button.hasAttribute('aria-label')).toBe(false);
     const menu = await TestbedHarnessEnvironment.loader(fixture).getHarness(MatMenuHarness);
     await menu.open();
     expect(await Promise.all((await menu.getItems()).map((item) => item.getText()))).toEqual([
@@ -186,6 +191,11 @@ describe('PriceTag', () => {
     fixture.componentRef.setInput('action', 'add to a list');
     await show(picked(listed('CA', 'CAD', 0)), { clickable: true });
     expect(spoken()).toBe('Free, add to a list');
+    // Read from one hidden copy, so nothing comes between "Free" and its comma (M5.10).
+    expect(element().querySelector('button .visually-hidden')?.textContent).toBe(
+      'Free, add to a list',
+    );
+    expect(shown()).toBe('Free');
   });
 
   it('has no menu unless it’s given one', async () => {
