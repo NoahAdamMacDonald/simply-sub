@@ -217,6 +217,15 @@ describe('providerSchema', () => {
       ]);
     });
 
+    it('rejects a category listed twice on a plan, or an empty list', () => {
+      expect(
+        issues(providerSchema, withValue(provider, ['plans', 1, 'categories'], ['vpn', 'vpn'])),
+      ).toEqual(['plans.1.categories.1: "vpn" is listed more than once']);
+      expect(issues(providerSchema, withValue(provider, ['plans', 1, 'categories'], []))).toEqual([
+        "plans.1.categories: Leave categories out when the plan is in its provider's category only",
+      ]);
+    });
+
     it('rejects a region in availableIn that isn’t written as one', () => {
       expect(issues(providerSchema, withValue(provider, ['availableIn'], ['CA', 'us']))).toEqual([
         'availableIn.1: Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL',

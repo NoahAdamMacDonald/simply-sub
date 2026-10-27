@@ -37,6 +37,13 @@ export const planSchema = z
     id: planIdSchema.describe('<provider id>.<slug> (netflix.standard)'),
     name: textSchema.describe('The plan name, without the provider name (Standard)'),
     link: httpsUrlSchema.describe("Where to sign up for this plan, on the provider's own site"),
+    categories: z
+      .array(slugSchema)
+      .min(1, "Leave categories out when the plan is in its provider's category only")
+      .describe(
+        "The service categories the plan is in, from categories.yaml, when they aren't just the provider's: Proton VPN Plus is [vpn], and Proton Unlimited is [privacy-suite, vpn, storage]",
+      )
+      .optional(),
     features: z
       .record(dottedSlugSchema, featureValueSchema)
       .describe(
@@ -67,6 +74,7 @@ export const planSchema = z
       .optional(),
   })
   .superRefine((plan, ctx) => {
+    addDuplicateIssues(ctx, plan.categories ?? [], (index) => ['categories', index]);
     addDuplicateIssues(ctx, plan.addOnIds ?? [], (index) => ['addOnIds', index]);
     if (plan.addOnLimit !== undefined && plan.addOnIds === undefined) {
       ctx.addIssue({ code: 'custom', message: 'addOnLimit needs addOnIds', path: ['addOnLimit'] });

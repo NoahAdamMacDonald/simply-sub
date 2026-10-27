@@ -1,4 +1,5 @@
 import type { Category } from '../catalog/category';
+import { planCategories } from '../catalog/plan-categories';
 import {
   providesKey,
   rankKeyOptions,
@@ -19,7 +20,7 @@ export interface PriceRange {
 }
 
 export interface SearchFilterOptions {
-  /** The service categories something sold in the user's country is in. */
+  /** The service categories a plan sold in the user's country is in (planCategories). */
   categories: ReadonlySet<string>;
   /** The rank keys some plan sold there provides, in registry order. */
   keys: RankKeyOption[];
@@ -41,7 +42,13 @@ export function searchFilterOptions(
   const plans = results.flatMap((result) => (result.kind === 'priced' ? result.plans : []));
   const highest = Math.max(0, ...plans.map((plan) => plan.bestMonthlyEquivalent));
   return {
-    categories: new Set(results.map((result) => result.provider.category)),
+    categories: new Set(
+      results.flatMap((result) =>
+        result.kind === 'priced'
+          ? result.plans.flatMap((plan) => planCategories(plan.plan, result.provider))
+          : [],
+      ),
+    ),
     keys: context.catalog.features
       .flatMap(rankKeyOptions)
       .filter((option) => plans.some((plan) => providesKey(plan.plan.features, option))),

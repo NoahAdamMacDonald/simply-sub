@@ -118,6 +118,16 @@
             "patternErrorMessage": "Use a full https:// URL",
             "description": "Where to sign up for this plan, on the provider's own site"
           },
+          "categories": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)"
+            },
+            "description": "The service categories the plan is in, from categories.yaml, when they aren't just the provider's: Proton VPN Plus is [vpn], and Proton Unlimited is [privacy-suite, vpn, storage]"
+          },
           "features": {
             "type": "object",
             "propertyNames": {

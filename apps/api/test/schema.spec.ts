@@ -1,8 +1,8 @@
 import { env } from 'cloudflare:workers';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-// The catalog tables as migrations/0002_seed_what_changed.sql leaves them (BLUEPRINT §5.3): the keys
-// and cascades the seed relies on (M2.1).
+// The catalog tables as the migrations leave them (BLUEPRINT §5.3): the keys and cascades the seed relies on
+// (M2.1), and provider_categories (0003, M1.10).
 const db = env.DB;
 
 /** Empties the catalog the way a full reseed does (the cascades clear the rest), then adds one plan. */
@@ -14,6 +14,9 @@ async function seedNetflix() {
     db.prepare('DELETE FROM bundles'),
     db.prepare(
       `INSERT INTO providers (id, name, hash, json) VALUES ('netflix', 'Netflix', 'f00', '{}')`,
+    ),
+    db.prepare(
+      `INSERT INTO provider_categories (category, provider_id) VALUES ('streaming', 'netflix')`,
     ),
     db.prepare(
       `INSERT INTO plans (id, provider_id, name, json)
@@ -47,7 +50,11 @@ describe('catalog schema', () => {
 
   it('records the migrations as applied', async () => {
     const { results } = await db.prepare('SELECT name FROM d1_migrations').all<{ name: string }>();
-    expect(results.map((r) => r.name)).toEqual(['0001_init.sql', '0002_seed_what_changed.sql']);
+    expect(results.map((r) => r.name)).toEqual([
+      '0001_init.sql',
+      '0002_seed_what_changed.sql',
+      '0003_provider_categories.sql',
+    ]);
   });
 
   it('has no snapshots table, and keeps every table WITHOUT ROWID and STRICT', async () => {
@@ -68,15 +75,22 @@ describe('catalog schema', () => {
         'plan_features',
         'plans',
         'prices',
+        'provider_categories',
         'providers',
       ].map((name) => ({ name, wr: 1, strict: 1 })),
     );
   });
 
-  it('removes plans, prices, features and bundle links with their provider', async () => {
+  it('removes categories, plans, prices, features and bundle links with their provider', async () => {
     await db.prepare(`DELETE FROM providers WHERE id = 'netflix'`).run();
 
-    for (const table of ['plans', 'prices', 'plan_features', 'bundle_plans']) {
+    for (const table of [
+      'provider_categories',
+      'plans',
+      'prices',
+      'plan_features',
+      'bundle_plans',
+    ]) {
       expect(await count(table), table).toBe(0);
     }
     expect(await count('bundles')).toBe(1);

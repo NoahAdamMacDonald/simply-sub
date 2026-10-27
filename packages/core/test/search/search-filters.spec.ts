@@ -100,6 +100,14 @@ describe('searchFilterOptions', () => {
     expect([...states.categories]).toContain('privacy-suite');
   });
 
+  it('offers a category that only a plan is in', () => {
+    // Mullvad becomes a privacy suite, but Proton's plans are VPNs too.
+    const files = edited(catalog(), 'data/providers/mullvad.yaml', ['category'], 'privacy-suite');
+    const options = searchFilterOptions({ ...ontario, catalog: regionData('CA', files) });
+
+    expect([...options.categories].sort()).toEqual(['privacy-suite', 'streaming', 'vpn']);
+  });
+
   it('tops the price slider just above the priciest plan’s monthly equivalent, in the user’s currency', () => {
     // Proton Duo's US$19.99 is CA$27.60 a month.
     expect(searchFilterOptions(ontario).price).toEqual({ top: 30, step: 1 });

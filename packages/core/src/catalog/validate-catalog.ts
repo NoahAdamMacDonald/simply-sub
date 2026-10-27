@@ -419,10 +419,25 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
   const planIds = provider.plans.map((plan) => plan.id);
   const addOnIds = (provider.addOns ?? []).map((addOn) => addOn.id);
   const prices = new PriceChecks(context, report);
+  const serviceIds = categories?.service.map((category) => category.id);
   provider.plans.forEach((plan, index) => {
     const path = ['plans', index];
     if (registry) {
       checkPlanFeatures(plan, path, { registry, ids, providerId: provider.id, report });
+    }
+    plan.categories?.forEach((id, categoryIndex) => {
+      if (serviceIds && !serviceIds.includes(id)) {
+        report(
+          [...path, 'categories', categoryIndex],
+          `"${id}" isn't a service category in data/categories.yaml${choices(id, serviceIds)}`,
+        );
+      }
+    });
+    if (plan.categories?.length === 1 && plan.categories[0] === provider.category) {
+      report(
+        [...path, 'categories'],
+        `${provider.category} is the provider's category already: leave categories out`,
+      );
     }
     plan.addOnIds?.forEach((id, addOnIndex) => {
       if (!addOnIds.includes(id)) {

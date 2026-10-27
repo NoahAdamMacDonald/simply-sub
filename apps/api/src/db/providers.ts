@@ -72,7 +72,8 @@ export function providersStatement(
     );
   }
   if (query.category !== undefined) {
-    conditions.push('category = ?');
+    // Any category its plans are in (provider_categories, M1.10), through the table's key.
+    conditions.push('id IN (SELECT provider_id FROM provider_categories WHERE category = ?)');
     bindings.push(query.category);
   }
   const where = conditions.length > 0 ? ` WHERE ${conditions.join(' AND ')}` : '';

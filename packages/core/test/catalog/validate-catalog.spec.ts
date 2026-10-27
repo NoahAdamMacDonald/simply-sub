@@ -261,6 +261,16 @@ describe('validateCatalog', () => {
     ])('need a real %s', (key, value, expected) => {
       expect(messagesWith(netflix, [key], value)).toEqual([expected]);
     });
+
+    it('need real categories on a plan, other than the provider’s alone', () => {
+      expect(messagesWith(netflix, ['plans', 0, 'categories'], ['streaming', 'vpns'])).toEqual([
+        'data/providers/netflix.yaml plans.0.categories.1: "vpns" isn\'t a service category in data/categories.yaml (streaming, vpn, privacy-suite)',
+      ]);
+      expect(messagesWith(netflix, ['plans', 0, 'categories'], ['streaming'])).toEqual([
+        "data/providers/netflix.yaml plans.0.categories: streaming is the provider's category already: leave categories out",
+      ]);
+      expect(messagesWith(netflix, ['plans', 0, 'categories'], ['streaming', 'vpn'])).toEqual([]);
+    });
   });
 
   describe('plan features', () => {

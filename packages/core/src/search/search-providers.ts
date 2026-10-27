@@ -3,6 +3,7 @@ import type { Categories } from '../catalog/category';
 import type { FxRates } from '../catalog/convert';
 import type { Feature } from '../catalog/feature';
 import { pickPrice, type PickedPrice } from '../catalog/pick-price';
+import { planCategories } from '../catalog/plan-categories';
 import type { Plan } from '../catalog/provider';
 import type { SnapshotProvider } from '../catalog/snapshot';
 import { addDays, type IsoDate } from '../dates/iso-date';
@@ -82,16 +83,18 @@ export function searchProviders(
   const terms = query.q === undefined ? [] : textTerms(query.q, options, context);
 
   const matches = providers.flatMap((provider): ProviderMatch[] => {
-    if (query.category !== undefined && provider.category !== query.category) {
+    const inCategory = (plan: Plan) =>
+      query.category === undefined || planCategories(plan, provider).includes(query.category);
+    if (!provider.plans.some(inCategory)) {
       return [];
     }
     const found = terms.length === 0 ? undefined : textMatch(provider, terms);
     if (terms.length > 0 && !found) {
       return [];
     }
-    const plans = (found?.plans ?? provider.plans).flatMap(
-      (plan) => planMatch(plan, provider, query, context, required, terms, options) ?? [],
-    );
+    const plans = (found?.plans ?? provider.plans)
+      .filter(inCategory)
+      .flatMap((plan) => planMatch(plan, provider, query, context, required, terms, options) ?? []);
     if (query.region !== undefined) {
       // Stable, so plans that cost the same keep their file order.
       plans.sort((a, b) => (a.bestMonthlyEquivalent ?? 0) - (b.bestMonthlyEquivalent ?? 0));
@@ -107,14 +110,18 @@ export function searchProviders(
         .filter((option) => plans.some((plan) => plan.matchedKeys.includes(option.key)))
         .map((option) => option.key),
     ]);
-    const category = query.category !== undefined || found?.category === true;
+    // The filter's category, then those the text names.
+    const categories = new Set([
+      ...(query.category !== undefined ? [query.category] : []),
+      ...(found?.categories ?? []),
+    ]);
     return [
       {
         provider,
         plans: [first, ...rest],
         matchedOn: [
           ...(found?.matchedOn ?? []),
-          ...(category ? [`category:${provider.category}`] : []),
+          ...[...categories].map((category) => `category:${category}`),
           ...[...keys].map((key) => `feature:${key}`),
         ],
         ...(found && { relevance: found.relevance }),
@@ -239,21 +246,22 @@ interface TextMatch {
   /** The plans the text points at, before the filters. */
   plans: readonly Plan[];
   matchedOn: string[];
-  category: boolean;
+  /** The service categories the text names that some of those plans are in. */
+  categories: string[];
   relevance: number;
 }
 
 /**
  * How `provider` matches the text, or undefined when a term doesn't match it. Each term picks plans: a service
- * category it names brings every plan; otherwise the rank keys and features it names bring the plans that provide
- * one, when any does, with the plans it names; otherwise a name or alias brings every plan, and plan names those
- * plans. The match is the plans every term picks. Plan names are a reason only for a term the provider's name and
+ * category it names brings the plans in it (planCategories: "vpn" is Proton's VPN plans, not every plan that comes
+ * with Proton VPN Free); otherwise the rank keys and features it names bring the plans that provide one, when any
+ * does, with the plans it names; otherwise a name or alias brings every plan, and plan names those plans. The match is the plans every term picks. Plan names are a reason only for a term the provider's name and
  * aliases don't match, and the relevance is the best any term reaches.
  */
 function textMatch(provider: SnapshotProvider, terms: readonly TextTerm[]): TextMatch | undefined {
   let plans: readonly Plan[] = provider.plans;
   let name = false;
-  let category = false;
+  const categories = new Set<string>();
   let relevance = 5;
   const aliases = new Set<string>();
   const planReasons = new Set<Plan>();
@@ -264,21 +272,27 @@ function textMatch(provider: SnapshotProvider, terms: readonly TextTerm[]): Text
     );
     const named = nameHit !== undefined || aliasHits.length > 0;
     const planNames = provider.plans.filter((plan) => contains(normalized(plan.name), term.forms));
-    const inCategory = term.categories.includes(provider.category);
+    const namedCategories = term.categories.filter((id) =>
+      provider.plans.some((plan) => planCategories(plan, provider).includes(id)),
+    );
+    const inCategory = provider.plans.filter((plan) =>
+      planCategories(plan, provider).some((id) => namedCategories.includes(id)),
+    );
     const providing = provider.plans.filter((plan) => termKeys(plan.features, term).length > 0);
-    const picked = inCategory
-      ? provider.plans
-      : providing.length > 0
-        ? provider.plans.filter((plan) => providing.includes(plan) || planNames.includes(plan))
-        : named
-          ? provider.plans
-          : planNames;
+    const picked =
+      inCategory.length > 0
+        ? inCategory
+        : providing.length > 0
+          ? provider.plans.filter((plan) => providing.includes(plan) || planNames.includes(plan))
+          : named
+            ? provider.plans
+            : planNames;
     if (picked.length === 0) {
       return undefined;
     }
     plans = plans.filter((plan) => picked.includes(plan));
     name ||= nameHit !== undefined;
-    category ||= inCategory;
+    namedCategories.forEach((id) => categories.add(id));
     aliasHits.forEach((alias) => aliases.add(alias));
     if (!named) {
       planNames.forEach((plan) => planReasons.add(plan));
@@ -306,7 +320,7 @@ function textMatch(provider: SnapshotProvider, terms: readonly TextTerm[]): Text
       ...[...aliases].map((alias) => `alias:${alias}`),
       ...plans.filter((plan) => planReasons.has(plan)).map((plan) => `plan:${plan.id}`),
     ],
-    category,
+    categories: [...categories],
     relevance,
   };
 }
