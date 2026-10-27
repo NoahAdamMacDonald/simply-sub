@@ -272,6 +272,23 @@ describe('searchCatalog', () => {
       expect(searchCatalog({ q: 'crave', features: ['vpn.included'] }, context)).toEqual([]);
     });
 
+    it('keeps only what’s sold there with Sold in: no fallback price, and no provider that isn’t sold', () => {
+      // Crave has Canadian prices only, so its availability in the US is unknown.
+      expect(searchCatalog({}, american).map((result) => result.provider.id)).toContain('crave');
+      expect(
+        searchCatalog({ soldOnly: true }, american).map((result) => result.provider.id),
+      ).not.toContain('crave');
+      expect(searchCatalog({ q: 'crave', soldOnly: true }, american)).toEqual([]);
+
+      const context = { ...american, catalog: regionData('US', craveInCanada) };
+      expect(searchCatalog({ q: 'crave', soldOnly: true }, context)).toEqual([]);
+
+      // Every plan Netflix shows is priced in the US.
+      const [netflix] = searchCatalog({ q: 'netflix', soldOnly: true }, american);
+      if (netflix.kind !== 'priced') throw new Error('Netflix is sold in the US');
+      expect(netflix.plans.every((plan) => plan.availability === 'offered')).toBe(true);
+    });
+
     it('puts a provider that isn’t sold there after the priced ones in the price sorts', () => {
       const context = { ...american, catalog: regionData('US', craveInCanada) };
       // "v" is in Crave's and Mullvad VPN's names.

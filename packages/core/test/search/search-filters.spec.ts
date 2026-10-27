@@ -251,4 +251,10 @@ describe('filterCount', () => {
     ).toBe(6);
     expect(filterCount({ activity: [], features: [], nativeOnly: false })).toBe(0);
   });
+
+  it('counts Sold in only when the user’s default is off', () => {
+    expect(filterCount({ soldOnly: true })).toBe(1);
+    expect(filterCount({ soldOnly: true }, { soldOnly: true })).toBe(0);
+    expect(filterCount({}, { soldOnly: true })).toBe(0);
+  });
 });

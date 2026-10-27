@@ -31,6 +31,7 @@ import {
   type RankKeyOption,
   type SearchFilterOptions,
 } from '@simply-sub/core';
+import { countryName } from '../../shared/country-name';
 import { wholeAmountText } from '../../shared/price-tag/price-text';
 
 let nextId = 0;
@@ -49,7 +50,8 @@ interface Dragged {
 
 /**
  * Search's filter panel (PROJECT-PLAN P8, M5.3): the price per month, Category, Features (rank keys, each a chip;
- * a plan needs them all), Activity, Native pricing only and Clear all. It shows the query it's given and emits the
+ * a plan needs them all), Activity, Native pricing only, Sold in (M5.6) and Clear all, which goes back to the
+ * user's defaults. It shows the query it's given and emits the
  * next one, which the page puts in the URL: a price once the slider is let go (priceChange, so a run of them makes
  * one history entry), anything else at once (queryChange). Search's page shows it beside the results, or in a drawer
  * under 960 px.
@@ -88,6 +90,8 @@ export class SearchFilters {
   /** The user's currency and country, which write the amounts. */
   readonly currency = input.required<string>();
   readonly country = input<string>();
+  /** Whether Sold in starts on: Settings' searchSoldOnly. */
+  readonly soldByDefault = input(false);
 
   /** Any filter but a price, at once. */
   readonly queryChange = output<CatalogQuery>();
@@ -150,7 +154,11 @@ export class SearchFilters {
   );
   protected readonly label = rankKeyLabel;
 
-  protected readonly active = computed(() => filterCount(this.query()) > 0);
+  protected readonly active = computed(
+    () => filterCount(this.query(), { soldOnly: this.soldByDefault() }) > 0,
+  );
+  /** The user's country, by name: Sold in Canada. */
+  protected readonly countryName = computed(() => countryName(this.country() ?? ''));
 
   protected dragging(thumb: keyof Dragged, value: number): void {
     this.dragged.update((dragged) => ({ ...dragged, [thumb]: value }));
@@ -205,11 +213,19 @@ export class SearchFilters {
     this.change({ nativeOnly: on || undefined });
   }
 
-  /** Every filter off; the text and the sort stay. */
+  protected chooseSold(on: boolean): void {
+    this.change({ soldOnly: on || undefined });
+  }
+
+  /** Every filter back as the user's defaults have it; the text and the sort stay. */
   protected clearAll(): void {
     if (!this.active()) return;
     const { q, sort } = this.query();
-    this.queryChange.emit({ ...(q !== undefined && { q }), ...(sort !== undefined && { sort }) });
+    this.queryChange.emit({
+      ...(q !== undefined && { q }),
+      ...(sort !== undefined && { sort }),
+      ...(this.soldByDefault() && { soldOnly: true }),
+    });
   }
 
   private change(patch: Partial<CatalogQuery>): void {

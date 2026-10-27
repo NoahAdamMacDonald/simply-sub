@@ -207,7 +207,9 @@ describe('SearchFilters', () => {
   describe('native pricing only', () => {
     it('is a checkbox with a hint, turned on and off', async () => {
       await setup();
-      const native = await loader.getHarness(MatCheckboxHarness);
+      const native = await loader.getHarness(
+        MatCheckboxHarness.with({ label: 'Native pricing only' }),
+      );
 
       expect(await native.getLabelText()).toBe('Native pricing only');
       const input = element().querySelector('.native input');
@@ -220,6 +222,36 @@ describe('SearchFilters', () => {
       await show({ nativeOnly: true });
       await native.uncheck();
       expect(changes[1]).toEqual({ nativeOnly: undefined });
+    });
+  });
+
+  describe('sold in', () => {
+    it('is a checkbox named after the user’s country, with a hint', async () => {
+      await setup();
+      const sold = await loader.getHarness(MatCheckboxHarness.with({ label: 'Sold in Canada' }));
+
+      const input = element().querySelector('.sold input');
+      expect(
+        element().querySelector(`#${input?.getAttribute('aria-describedby')}`)?.textContent,
+      ).toBe('Hides plans with no price for Canada yet');
+      await sold.check();
+      expect(changes).toEqual([{ soldOnly: true }]);
+
+      await show({ soldOnly: true });
+      await sold.uncheck();
+      expect(changes[1]).toEqual({ soldOnly: undefined });
+    });
+
+    it('isn’t a filter to clear when it’s on by default, and Clear all leaves it on', async () => {
+      await setup({ q: 'vpn', soldOnly: true });
+      fixture.componentRef.setInput('soldByDefault', true);
+      await fixture.whenStable();
+      const clear = await loader.getHarness(MatButtonHarness.with({ text: 'Clear all' }));
+      expect(await clear.isDisabled()).toBe(true);
+
+      await show({ q: 'vpn', soldOnly: true, nativeOnly: true });
+      await clear.click();
+      expect(changes).toEqual([{ q: 'vpn', soldOnly: true }]);
     });
   });
 

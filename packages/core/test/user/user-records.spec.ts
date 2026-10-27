@@ -171,6 +171,10 @@ describe('settingsSchema', () => {
     expect(issues(settingsSchema, minimal)).toEqual([]);
   });
 
+  it('keeps Search’s Sold in default when it’s on', () => {
+    expect(issues(settingsSchema, { ...settings, searchSoldOnly: true })).toEqual([]);
+  });
+
   it('rejects a subdivision of another country', () => {
     expect(issues(settingsSchema, { ...settings, subdivision: 'US-NY' })).toEqual([
       'subdivision: Use a subdivision of the chosen country',
@@ -189,6 +193,8 @@ describe('settingsSchema', () => {
     ['theme', 'auto'],
     ['monthlyBudget', 0],
     ['salesTaxPercent', 101],
+    // Search's Sold in default is kept only when it's on.
+    ['searchSoldOnly', false],
   ])('rejects a %s of %j', (field, value) => {
     expect(issues(settingsSchema, { ...settings, [field]: value })).toHaveLength(1);
   });
