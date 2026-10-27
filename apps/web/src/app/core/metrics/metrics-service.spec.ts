@@ -45,6 +45,7 @@ const catalog: CatalogData = {
       id: 'netflix',
       name: 'Netflix',
       website: 'https://www.netflix.com',
+      cancelUrl: 'https://www.netflix.com/cancel',
       iconUrl: 'https://sub.simplely.ca/icons/netflix.webp',
       category: 'vpn',
       spendCategory: 'software',
@@ -52,6 +53,7 @@ const catalog: CatalogData = {
         {
           id: 'netflix.standard',
           name: 'Standard',
+          link: 'https://example.com/netflix.standard',
           features: { 'streaming.ad-free': true },
           prices: [price('CA', 'CAD', 18.99), price('US', 'USD', 19.99)],
           addOnIds: ['netflix.extra-member'],
@@ -65,12 +67,14 @@ const catalog: CatalogData = {
       id: 'mullvad',
       name: 'Mullvad VPN',
       website: 'https://mullvad.net',
+      cancelUrl: 'https://mullvad.net/cancel',
       category: 'vpn',
       spendCategory: 'software',
       plans: [
         {
           id: 'mullvad.vpn',
           name: 'Mullvad VPN',
+          link: 'https://example.com/mullvad.vpn',
           features: { 'vpn.included': true },
           prices: [price('GLOBAL', 'EUR', 5)],
         },

@@ -72,7 +72,7 @@
       "format": "uri",
       "pattern": "^https://",
       "patternErrorMessage": "Use a full https:// URL",
-      "description": "Where to cancel"
+      "description": "Where to cancel: the provider's cancel page, or its help article on cancelling (for a prepaid service, on getting unused time back)"
     },
     "cancelFee": {
       "type": "string",
@@ -116,7 +116,7 @@
             "format": "uri",
             "pattern": "^https://",
             "patternErrorMessage": "Use a full https:// URL",
-            "description": "Where to sign up for this plan"
+            "description": "Where to sign up for this plan, on the provider's own site"
           },
           "features": {
             "type": "object",
@@ -259,7 +259,7 @@
             "description": "The most add-ons this plan allows in total (extra members)"
           }
         },
-        "required": ["id", "name", "features", "prices"],
+        "required": ["id", "name", "link", "features", "prices"],
         "additionalProperties": false
       }
     },
@@ -521,7 +521,7 @@
       "description": "Shops the provider's own site names as official resellers of its plans, with their regular prices (BLUEPRINT §4.9)"
     }
   },
-  "required": ["id", "name", "website", "category", "spendCategory", "plans"],
+  "required": ["id", "name", "website", "category", "spendCategory", "cancelUrl", "plans"],
   "additionalProperties": false,
   "title": "Simply Sub provider",
   "description": "data/providers/<id>.yaml: one provider with its plans and add-ons (BLUEPRINT §4.3)"

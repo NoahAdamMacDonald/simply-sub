@@ -459,7 +459,7 @@ category: streaming                 # from categories.yaml
 spendCategory: streaming            # used for card-reward maths (section 9)
 acceptedNetworks: [visa, mastercard, amex, discover]   # omit = unknown → all cards allowed, with a warning
 billingCurrency: { CA: CAD }        # currency actually charged per region (drives FX-fee maths)
-cancelUrl: https://www.netflix.com/cancelplan
+cancelUrl: https://www.netflix.com/cancelplan   # required: its cancel page, or its help article on cancelling
 sources: { pricing: https://help.netflix.com/en/node/24926 }
 # Optional and left out here: aliases, availableIn (section 4.7), cancelFee (text), notes, resellers (section 4.9).
 # Optional fields are
@@ -468,7 +468,7 @@ sources: { pricing: https://help.netflix.com/en/node/24926 }
 plans:
   - id: netflix.standard-ads
     name: Standard with ads
-    link: https://www.netflix.com/signup
+    link: https://www.netflix.com/signup   # required: where to sign up for this plan
     features:
       video.quality: 1080p
       video.hdr: false
@@ -1507,6 +1507,8 @@ use canonical ids, and it maps provider wording through `aliases`. The output co
 - the **regular** price, not a first-term offer, and the billing period as stated ("every 30 days" is `day` × 30,
   not `month`), both from the terms or checkout wording (section 4.3)
 - `availableIn`, only when the provider publishes the countries it sells in (section 4.7)
+- each plan's sign-up `link` and the provider's `cancelUrl` (its cancel page or help article), which the schema
+  requires
 - **accepted card networks** (from the checkout or help page, for example "We accept Visa, Mastercard, Amex")
   and the billing currency
 - an **evidence quote** for every price and feature (shown in the PR, so review is fast)
@@ -2395,7 +2397,10 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 2. Use only feature ids from `features.yaml`. Add new features there first, in a separate commit.
 3. Fill in `lastVerified` and `sourceUrl` for every price. Store regular prices, not first-term offers, and the
    billing period the provider states (`day` × 30 for "every 30 days"), with ISO region codes (`GB`, not `UK`). Add
-   `availableIn` only when the provider lists the countries it sells in (sections 4.3, 4.7).
+   `availableIn` only when the provider lists the countries it sells in (sections 4.3, 4.7): every provider sold
+   in certain countries only gets one, quoted in a comment.
+   Every plan and bundle needs its sign-up `link`, and every provider a `cancelUrl`: its cancel page, or its help
+   article on cancelling (for a prepaid service, on getting unused time back). The schema requires them (M1.9).
 4. Run `npm run data:icons` to fetch its logo into `data/logos/<id>.png`, and look at it. It takes the largest
    square PNG (at least 32 px) from the site's own icon links, `/apple-touch-icon.png`, `/favicon.ico`, Google's
    favicon service and DuckDuckGo's. If none is good enough, add a PNG by hand, or leave it out and the app shows
@@ -2430,6 +2435,21 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-26, M1.9)**
+- **Every plan and bundle has a sign-up `link`, and every provider a `cancelUrl`:** the schema requires them, so a
+  provider without them fails validation, the pipeline's drafts included (section 6.5). Search's cards always
+  show Plan ↗ and Cancel ↗; a provider not sold in the user's country still shows only Website ↗. A list item gets
+  its plan's link and its provider's cancel page; a bundle item its bundle's cancel page, else its seller's. A
+  bundle's own `cancelUrl` stays optional.
+- **The cancel pages:** Disney+'s help article (`help.disneyplus.com/article/disneyplus-cancel`, the same steps in
+  Canada and the US), Crave's FAQ article, and Mullvad's refunds guide: Mullvad ended subscriptions in 2022 and
+  its terms "expire at the end of the period purchased", so there's nothing to cancel, only unused time to get
+  back. The API examples' made-up cancel URLs became the real ones.
+- **`availableIn` for providers sold in certain countries only:** Crave is `[CA]` (its terms: "The Service is
+  intended for use in Canada."), so outside Canada it's not offered and its bundle with Disney+ isn't listed. The
+  multi-country providers (Netflix, Disney+, Proton, Mullvad) don't get one: a country with no price stays unknown
+  and shows "No price for … yet". Providers added later follow the same rule (section 13.4).
 
 **Resolved (2026-10-26, M5.3)**
 - **The URL is Search's state** (PROJECT-PLAN P8): core's `readSearchParams` and `writeSearchParams` read and write

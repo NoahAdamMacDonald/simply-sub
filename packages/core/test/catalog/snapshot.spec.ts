@@ -108,6 +108,7 @@ describe('buildCatalogData', () => {
       'category',
       'spendCategory',
       'billingCurrency',
+      'cancelUrl',
       'plans',
     ]);
   });

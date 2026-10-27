@@ -20,6 +20,7 @@ function seller(plans: Price[][], availableIn?: string[]): Seller {
     plans: plans.map((prices, index) => ({
       id: `example.plan-${index}`,
       name: `Plan ${index}`,
+      link: 'https://example.com/plans',
       features: {},
       prices,
     })),

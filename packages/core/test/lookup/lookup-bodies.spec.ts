@@ -55,6 +55,7 @@ describe('providerBody', () => {
     expect(Object.keys(body.data.plans[1])).toEqual([
       'id',
       'name',
+      'link',
       'features',
       'featureLabels',
       'prices',
@@ -125,6 +126,7 @@ describe('planBody', () => {
       'id',
       'name',
       'provider',
+      'link',
       'features',
       'providedRankKeys',
       'featureLabels',
@@ -141,6 +143,7 @@ describe('planBody', () => {
       iconUrl: 'https://sub.simplely.ca/icons/netflix.webp',
       category: 'streaming',
       spendCategory: 'streaming',
+      cancelUrl: 'https://www.netflix.com/cancelplan',
     });
     expect(body.data.providedRankKeys).toEqual([
       'video.quality=480p',
@@ -167,7 +170,14 @@ describe('planBody', () => {
       { query: {}, catalogVersion: 'abc1234', registry, bundleIds: [] },
     );
 
-    expect(Object.keys(body.data)).toEqual(['id', 'name', 'provider', 'features', 'prices']);
+    expect(Object.keys(body.data)).toEqual([
+      'id',
+      'name',
+      'provider',
+      'link',
+      'features',
+      'prices',
+    ]);
     expect(body.meta).toEqual({ catalogVersion: 'abc1234' });
   });
 
@@ -195,6 +205,7 @@ describe('bundlesBody', () => {
       'name',
       'soldBy',
       'includes',
+      'link',
       'prices',
       'pricing',
       'savings',
@@ -258,6 +269,7 @@ describe('bundlesBody', () => {
       'name',
       'soldBy',
       'includes',
+      'link',
       'prices',
       'features',
     ]);

@@ -76,6 +76,7 @@ const source: CatalogSource = {
       id: 'crave',
       name: 'Crave',
       website: 'https://www.crave.ca',
+      cancelUrl: 'https://www.crave.ca/cancel',
       category: 'streaming',
       spendCategory: 'streaming',
       // A quote and a line break, which SQL literals can't hold as they are.
@@ -84,6 +85,7 @@ const source: CatalogSource = {
         {
           id: 'crave.premium',
           name: 'Premium',
+          link: 'https://example.com/crave.premium',
           features: {
             'video.quality': '4k',
             'streaming.concurrent-streams': 'unlimited',
@@ -97,18 +99,21 @@ const source: CatalogSource = {
       id: 'netflix',
       name: 'Netflix',
       website: 'https://www.netflix.com',
+      cancelUrl: 'https://www.netflix.com/cancel',
       category: 'streaming',
       spendCategory: 'streaming',
       plans: [
         {
           id: 'netflix.standard',
           name: 'Standard',
+          link: 'https://example.com/netflix.standard',
           features: { 'video.quality': '1080p', 'streaming.concurrent-streams': 2 },
           prices: [price(18.99)],
         },
         {
           id: 'netflix.premium',
           name: 'Premium',
+          link: 'https://example.com/netflix.premium',
           features: { 'video.quality': '4k', 'streaming.concurrent-streams': 4 },
           prices: [price(23.99)],
         },
@@ -121,6 +126,7 @@ const source: CatalogSource = {
       name: 'Netflix and Crave',
       soldBy: 'crave',
       includes: ['netflix.standard', 'crave.premium'],
+      link: 'https://example.com/bundle',
       prices: [price(35)],
     },
   ],

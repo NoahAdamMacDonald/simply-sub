@@ -79,8 +79,9 @@ console check.
 and under `wrangler dev`): one card per provider and the count, no US-only plan for a Canadian, Mullvad's "Cheaper at"
 resellers in Alberta and their links, the Tab order (box, Sort, a card's links, its chips as one tab stop, the details
 button), a chip picked with an arrow key, Enter on the details button, "netflix 4k" after the typing pause, the empty
-state and Clear search, a listed provider's status (an item written to IndexedDB, then a reload), and for a US user a
-provider not sold there (the US file served with Crave limited to Canada) and one with no US price, with axe in both
+state and Clear search, a listed provider's status (an item written to IndexedDB, then a reload), every card's cancel
+page (M1.9), for a US user a provider not sold there (Crave, sold in Canada only), and for a UK user a fallback price
+("No price for United Kingdom yet"), with axe in both
 themes at both widths with cards expanded and with no match. It answers `GET /fx` itself. M5.3 added the filter panel:
 its Tab order (after Sort, before the results), each filter by keyboard (Native by Space, 4K from the Features
 suggestions by arrow keys, the price's top thumb by arrow keys, Category, an Activity chip, Clear all), the URL and

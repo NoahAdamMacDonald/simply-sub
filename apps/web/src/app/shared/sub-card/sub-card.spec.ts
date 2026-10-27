@@ -88,7 +88,7 @@ describe('SubCard', () => {
     expect(links()).toEqual([
       {
         text: 'Plan: Netflix Standard with ads, opens in a new tab',
-        href: 'https://www.netflix.com/',
+        href: 'https://example.com/netflix.standard-ads',
         target: '_blank',
         rel: 'noopener',
       },

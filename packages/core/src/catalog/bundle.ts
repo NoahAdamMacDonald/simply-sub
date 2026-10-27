@@ -15,8 +15,10 @@ export const bundleSchema = z
       .array(planIdSchema)
       .min(2, 'A bundle includes at least two plans')
       .describe('Ids of the plans sold together'),
-    link: httpsUrlSchema.describe('Where to sign up for the bundle').optional(),
-    cancelUrl: httpsUrlSchema.describe('Where to cancel').optional(),
+    link: httpsUrlSchema.describe("Where to sign up for the bundle, on the seller's own site"),
+    cancelUrl: httpsUrlSchema
+      .describe("Where to cancel the bundle, when it isn't the seller's cancelUrl")
+      .optional(),
     prices: pricesSchema,
   })
   .superRefine((bundle, ctx) =>

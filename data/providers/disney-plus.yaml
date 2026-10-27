@@ -6,6 +6,9 @@ category: streaming
 spendCategory: streaming
 acceptedNetworks: [visa, mastercard, amex, jcb]
 billingCurrency: { CA: CAD, US: USD }
+# The help centre's one cancel article: the same steps in Canada and the US (Account > Subscription > Cancel
+# Subscription), read 2026-10-26 with the help centre set to each country.
+cancelUrl: https://help.disneyplus.com/article/disneyplus-cancel
 sources: { pricing: https://help.disneyplus.com/article/disneyplus-en-ca-price }
 
 # Canada sells Standard With Ads, Standard and Premium. The US sells With Ads (4K, unlike Canada's 1080p) and
