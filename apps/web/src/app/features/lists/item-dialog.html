@@ -1,0 +1,331 @@
+<form [formRoot]="form">
+  <div class="title-bar">
+    <h2 mat-dialog-title>{{ heading }}</h2>
+    <button matIconButton type="button" mat-dialog-close aria-label="Close">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-dialog-content>
+    <p class="subject">
+      <ss-provider-icon [src]="subject().iconUrl" [name]="subject().name" size="32" />
+      <span class="name">{{ subject().name }}</span>
+    </p>
+
+    @if (bundle()) {
+      <!-- A bundle's plans come with it (P6): shown, not chosen. -->
+      <div class="includes">
+        <p [id]="ids + '-includes'">Includes</p>
+        <ul [attr.aria-labelledby]="ids + '-includes'">
+          @for (name of bundlePlans(); track $index) {
+            <li>{{ name }}</li>
+          }
+        </ul>
+      </div>
+    } @else {
+      <mat-form-field appearance="outline" class="plan">
+        <mat-label>Plan</mat-label>
+        <mat-select [formField]="form.planId" (selectionChange)="planChanged()">
+          <mat-select-trigger>
+            @if (chosenPlanText(); as text) {
+              <span aria-hidden="true">{{ text.shown }}</span>
+              <span class="visually-hidden">{{ text.spoken }}</span>
+            }
+          </mat-select-trigger>
+          @for (choice of planChoices(); track choice.id) {
+            <mat-option [value]="choice.id">
+              <span aria-hidden="true">{{ choice.text.shown }}</span>
+              <span class="visually-hidden">{{ choice.text.spoken }}</span>
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    }
+
+    @if (addOns().length > 0) {
+      <fieldset class="add-ons">
+        <legend>Add-ons</legend>
+        @for (addOn of addOns(); track addOn.id) {
+          <div class="add-on" role="group" [attr.aria-label]="addOn.name">
+            <!-- The price describes the box rather than being in its label, as its currency icon can be focused. -->
+            <mat-checkbox
+              [formField]="form.addOns[addOn.index].chosen"
+              [aria-describedby]="
+                ids + '-add-on-' + addOn.index + ' ' + ids + '-add-on-error-' + addOn.index
+              "
+            >
+              {{ addOn.name }}
+            </mat-checkbox>
+            @if (addOn.price; as price) {
+              <ss-price
+                [id]="ids + '-add-on-' + addOn.index"
+                [price]="price"
+                [region]="model().region"
+              />
+            }
+            @if (model().addOns[addOn.index].chosen && addOn.quantities.length > 0) {
+              <mat-form-field appearance="outline" class="quantity" subscriptSizing="dynamic">
+                <mat-label>Quantity</mat-label>
+                <mat-select [formField]="form.addOns[addOn.index].quantity">
+                  @for (quantity of addOn.quantities; track quantity) {
+                    <mat-option [value]="quantity">{{ quantity }}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            }
+            <p class="error" [id]="ids + '-add-on-error-' + addOn.index">
+              {{ shownError(form.addOns[addOn.index].chosen) }}
+            </p>
+          </div>
+        }
+      </fieldset>
+    }
+
+    <section class="billing" [attr.aria-labelledby]="ids + '-billing'">
+      <h3 [id]="ids + '-billing'">Billing</h3>
+      @if (free()) {
+        <p class="note">It’s free, so there’s nothing to bill.</p>
+      } @else {
+        <mat-radio-group
+          class="mode"
+          [formField]="form.mode"
+          [attr.aria-labelledby]="ids + '-billing'"
+        >
+          <mat-radio-button value="recurring">Ongoing</mat-radio-button>
+          <mat-radio-button value="limited">Specific dates</mat-radio-button>
+        </mat-radio-group>
+
+        @if (model().kind === 'custom') {
+          <!-- A custom plan can be billed any way (P6). -->
+          <div class="row">
+            <mat-form-field appearance="outline" class="count">
+              <mat-label>Billed every</mat-label>
+              <input
+                matInput
+                type="number"
+                step="1"
+                [formField]="form.intervalCount"
+                (change)="countChanged()"
+              />
+              <mat-error>{{ firstError(form.intervalCount) }}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Unit</mat-label>
+              <mat-select
+                [value]="model().interval"
+                (selectionChange)="chooseInterval($event.value)"
+              >
+                @for (choice of intervals; track choice.interval) {
+                  <mat-option [value]="choice.interval">{{ choice.name }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        } @else {
+          <mat-form-field appearance="outline" class="billed">
+            <mat-label>{{
+              model().mode === 'limited' ? 'Billed during each window' : 'Billed'
+            }}</mat-label>
+            <!-- Not a field of the form: each choice is a period and its price. -->
+            <mat-select
+              #billed
+              [value]="chosenPeriodKey()"
+              (selectionChange)="choosePeriod($event.value)"
+            >
+              <mat-select-trigger>
+                @if (chosenPeriodText(); as text) {
+                  <span aria-hidden="true">{{ text.shown }}</span>
+                  <span class="visually-hidden">{{ text.spoken }}</span>
+                }
+              </mat-select-trigger>
+              @for (choice of periodChoices(); track choice.key) {
+                <mat-option [value]="choice.key">
+                  <span aria-hidden="true">{{ choice.text.shown }}</span>
+                  <span class="visually-hidden">{{ choice.text.spoken }}</span>
+                </mat-option>
+              }
+            </mat-select>
+            @if (periodError(); as error) {
+              <mat-hint class="hint-error">{{ error }}</mat-hint>
+            } @else if (pricesPending()) {
+              <mat-hint>Getting the prices where it’s bought…</mat-hint>
+            }
+          </mat-form-field>
+        }
+      }
+
+      @if (free() || model().mode === 'recurring') {
+        <div class="row">
+          @if (!free()) {
+            <mat-form-field appearance="outline">
+              <mat-label>Next renewal</mat-label>
+              <input matInput type="date" [formField]="form.anchorDate" />
+              @if (renewalSuggested()) {
+                <mat-hint>Check your account page for the exact date</mat-hint>
+              }
+              <mat-error>{{ firstError(form.anchorDate) }}</mat-error>
+            </mat-form-field>
+          }
+          <mat-form-field appearance="outline">
+            <mat-label>Subscribed since</mat-label>
+            <input matInput type="date" [formField]="form.startDate" />
+            <mat-hint>Optional</mat-hint>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Ends on</mat-label>
+            <input matInput type="date" [formField]="form.endDate" />
+            <mat-hint>Optional</mat-hint>
+            <mat-error>{{ firstError(form.endDate) }}</mat-error>
+          </mat-form-field>
+        </div>
+
+        @if (!free() && billingDayChoices().length > 0) {
+          <!-- A shorter month's last day: billed on that day, or on a later one in longer months (§3.1). -->
+          <div class="billing-day">
+            <p [id]="ids + '-billing-day'">Billed on</p>
+            <mat-radio-group
+              [attr.aria-labelledby]="ids + '-billing-day'"
+              [value]="billingDay()"
+              (change)="chooseBillingDay($event.value)"
+            >
+              @for (choice of billingDayChoices(); track choice.value) {
+                <mat-radio-button [value]="choice.value">{{ choice.text }}</mat-radio-button>
+              }
+            </mat-radio-group>
+          </div>
+        }
+
+        @if (!free()) {
+          @if (autoRenewAvailable()) {
+            <mat-checkbox [formField]="form.autoRenew">Auto-renews</mat-checkbox>
+          } @else {
+            <p class="note">This plan renews manually — we’ll remind you</p>
+          }
+        }
+      } @else {
+        <div class="windows">
+          @for (window of model().windows; track $index; let index = $index) {
+            <div class="window" role="group" [attr.aria-label]="'Window ' + (index + 1)">
+              <p class="window-name" aria-hidden="true">Window {{ index + 1 }}</p>
+              <mat-form-field appearance="outline">
+                <mat-label>Start</mat-label>
+                <input
+                  matInput
+                  type="date"
+                  class="window-start"
+                  [formField]="form.windows[index].start"
+                />
+                <mat-error>{{ firstError(form.windows[index].start) }}</mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>End</mat-label>
+                <input matInput type="date" [formField]="form.windows[index].end" />
+                <mat-error>{{ firstError(form.windows[index].end) }}</mat-error>
+              </mat-form-field>
+              <mat-checkbox [formField]="form.windows[index].repeatYearly">Every year</mat-checkbox>
+              @if (model().windows.length > 1) {
+                <button
+                  matIconButton
+                  type="button"
+                  [attr.aria-label]="'Remove window ' + (index + 1)"
+                  (click)="removeWindow(index)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              }
+            </div>
+          }
+        </div>
+        <button #addWindowButton matButton type="button" class="add-window" (click)="addWindow()">
+          <mat-icon>add</mat-icon>
+          Add window
+        </button>
+      }
+    </section>
+
+    @if (!free()) {
+      <div class="own-price">
+        <mat-checkbox [formField]="form.ownPrice">I pay a different price</mat-checkbox>
+        @if (model().ownPrice) {
+          <div class="row">
+            <mat-form-field appearance="outline" class="amount">
+              <mat-label>Amount</mat-label>
+              <input matInput type="number" step="any" [formField]="form.priceAmount" />
+              <mat-error>{{ firstError(form.priceAmount) }}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Currency</mat-label>
+              <mat-select [formField]="form.priceCurrency">
+                @for (choice of currencies; track choice.value) {
+                  <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
+                }
+              </mat-select>
+              <mat-error>{{ firstError(form.priceCurrency) }}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Until</mat-label>
+              <input matInput type="date" [formField]="form.priceUntil" />
+              <mat-hint>When the regular price starts again (optional)</mat-hint>
+            </mat-form-field>
+          </div>
+          @if (taxAdded()) {
+            <mat-checkbox [formField]="form.plusTax"
+              >Plus tax (the amount is before sales tax)</mat-checkbox
+            >
+          }
+        }
+      </div>
+    }
+
+    <details class="advanced" [open]="model().region !== country()">
+      <summary>Advanced</summary>
+      <mat-form-field appearance="outline">
+        <mat-label>Bought in</mat-label>
+        <mat-select [formField]="form.region" (selectionChange)="regionChanged()">
+          @for (choice of countries; track choice.value) {
+            <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
+          }
+        </mat-select>
+        <mat-hint>Its price and sales tax are that country’s</mat-hint>
+      </mat-form-field>
+    </details>
+
+    <section class="ranks" [attr.aria-labelledby]="ids + '-ranks'">
+      <h3 [id]="ids + '-ranks'">Feature ranks</h3>
+      <p class="note">Only for this subscription</p>
+      @for (group of rankGroups(); track group.id) {
+        <h4>{{ group.name }}</h4>
+        <ul class="rank-rows">
+          @for (row of group.rows; track row.key) {
+            <li>
+              <span class="rank-name" [id]="row.labelId">{{ row.label }}</span>
+              <ss-rank-select
+                subscriptionLevel
+                [value]="row.override"
+                (valueChange)="setRank(row.key, $event)"
+                [inherited]="row.inherited"
+                [labelledBy]="row.labelId"
+              />
+            </li>
+          }
+        </ul>
+      } @empty {
+        <p class="note">It has no features to rank.</p>
+      }
+    </section>
+
+    <ss-tag-picker class="tags" [tagIds]="model().tagIds" (tagIdsChange)="setTags($event)" />
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <!-- "/ mo" and ≈ are read as words, as ss-price's are. -->
+    @if (monthly(); as monthly) {
+      <p class="monthly">
+        <span aria-hidden="true">{{ monthly.shown }}</span>
+        <span class="visually-hidden">{{ monthly.spoken }}</span>
+      </p>
+    }
+    <button matButton type="button" mat-dialog-close>Cancel</button>
+    <button matButton="filled" type="submit">{{ editing ? 'Save' : 'Add to list' }}</button>
+  </mat-dialog-actions>
+</form>

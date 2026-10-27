@@ -71,6 +71,13 @@ describe('addMonths', () => {
   it("rejects a date that isn't real", () => {
     expect(() => addMonths('2026-02-30', 1)).toThrow(RangeError);
   });
+
+  it('takes the years 0 to 99 as they are, as a date input passes through them while a year is typed', () => {
+    expect(addMonths('0002-11-12', 1)).toBe('0002-12-12');
+    expect(addMonths('0099-12-31', 2)).toBe('0100-02-28');
+    expect(addDays('0020-02-28', 1)).toBe('0020-02-29');
+    expect(weekdayOf('0002-11-12')).toBe(new Date('0002-11-12T00:00:00Z').getUTCDay());
+  });
 });
 
 describe('weekdayOf', () => {

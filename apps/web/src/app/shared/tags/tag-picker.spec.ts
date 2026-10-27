@@ -73,6 +73,25 @@ describe('TagPicker', () => {
     expect(await suggestions(input)).toEqual(['Create tag “a”']);
   });
 
+  it('gives its input a row of the grid while the chips make one, as a grid holds only rows', async () => {
+    const family = await addTag('Family', tagColorPresets[0].color);
+    const roles = () => {
+      const grid = element().querySelector('mat-chip-grid');
+      const row = element().querySelector('.input-row');
+      return [
+        grid?.getAttribute('role'),
+        row?.getAttribute('role'),
+        row?.firstElementChild?.getAttribute('role'),
+      ];
+    };
+    // Material's grid has no role with no chips and nothing typed.
+    expect(roles()).toEqual([null, null, null]);
+
+    fixture.componentInstance.tagIds.set([family.id]);
+    await fixture.whenStable();
+    expect(roles()).toEqual(['grid', 'row', 'gridcell']);
+  });
+
   it("doesn't offer to create a tag that exists, whatever its case", async () => {
     await addTag('Family', tagColorPresets[0].color);
     const input = await loader.getHarness(MatAutocompleteHarness);

@@ -6,15 +6,15 @@ export type IsoDate = string;
  * which gives the UTC date: on a Canadian evening that's already tomorrow.
  */
 export function toIsoDate(date: Date): IsoDate {
-  return formatUtc(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  return formatUtc(utc(date.getFullYear(), date.getMonth(), date.getDate()));
 }
 
 /** `date` plus `days`; negative `days` go back. Throws a RangeError if `date` isn't a real date. */
 export function addDays(date: IsoDate, days: number): IsoDate {
   const { year, month, day } = parse(date);
-  // Date.UTC carries an overflowing day into the next month or year, and UTC has no daylight
-  // saving, so every day is exactly one day long.
-  return formatUtc(Date.UTC(year, month - 1, day + days));
+  // An overflowing day carries into the next month or year, and UTC has no daylight saving, so
+  // every day is exactly one day long.
+  return formatUtc(utc(year, month - 1, day + days));
 }
 
 /**
@@ -23,24 +23,34 @@ export function addDays(date: IsoDate, days: number): IsoDate {
  */
 export function addMonths(date: IsoDate, months: number): IsoDate {
   const { year, month, day } = parse(date);
-  const lastDay = new Date(Date.UTC(year, month - 1 + months + 1, 0)).getUTCDate();
-  return formatUtc(Date.UTC(year, month - 1 + months, Math.min(day, lastDay)));
+  const lastDay = new Date(utc(year, month - 1 + months + 1, 0)).getUTCDate();
+  return formatUtc(utc(year, month - 1 + months, Math.min(day, lastDay)));
 }
 
 /** The day of the week, from 0 for Sunday to 6 for Saturday. */
 export function weekdayOf(date: IsoDate): number {
   const { year, month, day } = parse(date);
-  return new Date(Date.UTC(year, month - 1, day)).getUTCDay();
+  return new Date(utc(year, month - 1, day)).getUTCDay();
 }
 
 function parse(date: IsoDate): { year: number; month: number; day: number } {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(date);
   if (match) {
     const [year, month, day] = match.slice(1).map(Number);
-    // Date.UTC rolls Feb 30 over into March, so a real date is one that formats back unchanged.
-    if (formatUtc(Date.UTC(year, month - 1, day)) === date) return { year, month, day };
+    // Feb 30 rolls over into March, so a real date is one that formats back unchanged.
+    if (formatUtc(utc(year, month - 1, day)) === date) return { year, month, day };
   }
   throw new RangeError(`Not a calendar date in YYYY-MM-DD form: '${date}'`);
+}
+
+/**
+ * Date.UTC, except that the years 0 to 99 are those years: Date.UTC takes them for 1900 to 1999. A date input passes
+ * through them while a year is typed (0002, 0020, 0202, 2027).
+ */
+function utc(year: number, monthIndex: number, day: number): number {
+  const date = new Date(0);
+  date.setUTCFullYear(year, monthIndex, day);
+  return date.getTime();
 }
 
 /** The date part of a UTC timestamp. */

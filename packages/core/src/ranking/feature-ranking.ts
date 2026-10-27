@@ -90,23 +90,28 @@ export interface RankingFilter {
   /** Only the keys the profile ranks. */
   rankedOnly?: boolean;
   ranks: ProfileRanks;
+  /** Only these keys: the ones an item provides, which the item dialog ranks (P6). */
+  keys?: ReadonlySet<RankKey>;
 }
 
 /**
  * The sections with the rows `filter` keeps. Text that names a feature keeps all of it, a parent's children too
- * ("vpn" keeps the kill switch), while Ranked only still applies. An entry stays while it or one of its children has
- * a row, and a section while it has an entry.
+ * ("vpn" keeps the kill switch), while Ranked only and `keys` still apply. An entry stays while it or one of its
+ * children has a row, and a section while it has an entry.
  */
 export function filterRanking(
   sections: readonly RankingSection[],
-  { text = '', rankedOnly = false, ranks }: RankingFilter,
+  { text = '', rankedOnly = false, ranks, keys }: RankingFilter,
 ): RankingSection[] {
   const matcher = nameMatcher(text);
-  if (!matcher && !rankedOnly) return [...sections];
+  if (!matcher && !rankedOnly && !keys) return [...sections];
   const filtered = (entry: RankingEntry, named: boolean): RankingEntry | undefined => {
     const whole = named || (matcher?.(entry.names) ?? true);
     const rows = entry.rows.filter(
-      (row) => (!rankedOnly || ranks.has(row.key)) && (whole || (matcher?.(row.names) ?? true)),
+      (row) =>
+        (!rankedOnly || ranks.has(row.key)) &&
+        (!keys || keys.has(row.key)) &&
+        (whole || (matcher?.(row.names) ?? true)),
     );
     const children = entry.children.flatMap((child) => filtered(child, whole) ?? []);
     return rows.length > 0 || children.length > 0 ? { ...entry, rows, children } : undefined;

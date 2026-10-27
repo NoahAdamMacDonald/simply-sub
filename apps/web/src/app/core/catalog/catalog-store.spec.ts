@@ -1,3 +1,9 @@
+import {
+  EnvironmentInjector,
+  createEnvironmentInjector,
+  runInInjectionContext,
+  signal,
+} from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import type { CatalogCache, Settings } from '@simply-sub/core';
 import { SettingsStore } from '../settings/settings-store';
@@ -200,6 +206,23 @@ describe('CatalogStore', () => {
         'data/catalog/US.json',
       ]);
       expect(await storedKeys()).toEqual([`CA ${v1}`, `US ${v1}`]);
+    });
+
+    it('downloads a region a page needs for an item not saved yet, while the page is there', async () => {
+      const store = await started({ settings: settingsIn('CA'), files: [cached('CA')] });
+      const page = TestBed.inject(EnvironmentInjector);
+      const child = createEnvironmentInjector([], page);
+      const region = signal<readonly string[]>(['US']);
+      runInInjectionContext(child, () => store.need(region));
+
+      await until(() => store.catalogFor('US') !== undefined);
+      region.set(['SE']);
+      await until(() => store.catalogFor('SE') !== undefined);
+      expect(await storedKeys()).toEqual([`CA ${v1}`, `EU ${v1}`]);
+
+      // Once the page has gone, the next check drops what only it needed.
+      child.destroy();
+      await vi.waitFor(async () => expect(await storedKeys()).toEqual([`CA ${v1}`]));
     });
 
     it('drops the files no region needs after the country changes', async () => {

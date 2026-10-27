@@ -181,7 +181,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M6.2 | Features page (P9): a card per feature category with a parent's children under it (core's `rankingSections`), Find a feature (`nameMatcher`, shared with Search's Features box) and Ranked only (`filterRanking`), Set all and Reset all in one write (`RankingsRepository.setMany`), and "in 3 subscriptions" per row (`keyUsage`) (BLUEPRINT §14) | P9 criteria met |
 | M6.3 | `ListDraftService`, with drafts saved in Dexie: core's draft record (`user/list-draft.ts`), `DraftsRepository`, Save in one transaction (`StorageEngine.transaction`), Search's pick mode adding to a new list's draft (`listsWithDrafts`), and `/lists/new` making the draft and replacing its URL (BLUEPRINT §14) | A draft survives navigation and a reload |
 | M6.4 | List edit page (P5): the name, Cancel, Save and ⋮ Delete list (`DraftsRepository.deleteList`), a row per draft item (`MetricsService.resolve`) with 🗑 and Undo, the footer's average (core's `monthlyAverage`), and "Discard changes?" on leaving (`leaveGuard`). The item dialog opens from the query params in M6.5, [+ Add custom subscription] comes with M6.6, and the renewal dates and "This month" with M7.1–M7.2 (BLUEPRINT §14) | P5 criteria met, the item dialog's with M6.5 |
-| M6.5 | Item dialog (P6) | P6 criteria met |
+| M6.5 | Item dialog (P6): core's rules in `user/item-form.ts` (the periods a plan offers, the suggested renewal and its billing day, Specific dates' windows, the form's issues and the item it saves, duplicates), Signal Forms through one `validateTree`, full screen under 600 px, `?add=`, `?addBundle=`, `?addCustom=` and `?item=` opened once and dropped from the URL, ✎ opening it directly, and `CatalogStore.need` for an unsaved item's region. "Next charge" comes with M7.1 (BLUEPRINT §14) | P6 criteria met, the calendar's with M7.4 |
 | M6.6 | Custom subscriptions page + editor (P12) | P12 criteria met |
 | M6.7 | Lists overview (P3) | P3 criteria met (the bars can wait for M7.2) |
 | M6.8 | List view (P4), without the money parts, with `ss-sub-card`'s list variant (§4.3, moved from M4.5) | Cards, pinning, search/filter and the edit button work |
@@ -675,7 +675,8 @@ date, and until M7.2 the footer has only the average.
 - On load, these query params open the item dialog and are then removed from the URL:
   `?add=<planId>&interval=<day|week|month|year>` · `?addBundle=<bundleId>&interval=…` · `?addCustom=<customSubId>` ·
   `?item=<itemId>`. `add` and `addBundle` take `&count=<n>` for a period of n intervals ("every 3 months"); core's
-  `readAddRequest` reads them (M5.4).
+  `readAddRequest` reads them (M5.4). Each opens it once; one that names a plan, bundle, custom subscription or item
+  there isn't says so, and opens nothing (M6.5).
 - Leaving with unsaved changes asks "Discard changes?", except when going to Search in pick mode for this list.
   Leaving drops the draft, after asking if there's anything to lose, so a new list nobody changed isn't kept; a
   reload or a closed tab keeps it.
@@ -721,20 +722,25 @@ In Specific dates mode, the renewal fields are replaced by:
 │ Window 1  [ 2026-09-02 ] → [ 2026-11-01 ]  [x] Every year           [🗑]  │
 │ [+ Add window]                                                            │
 ```
+**As built (M6.5):** the sections run Plan, Add-ons (P6's "Extra members": an add-on can be a channel), Billing, "I
+pay a different price", Advanced, Feature ranks and Tags, and Plus tax shows only where tax is added. The billing day
+is a "Billed on" choice. The footer's ≈ marks a converted price only, and "next charge" comes with M7.1. Payment comes
+with M9.4. BLUEPRINT §14 has the rest.
 **Rules**
 - **Plan:** plans of the same provider (or of the custom subscription), with their prices. Changing the plan keeps the interval if the new plan offers it; otherwise the first available interval is picked.
 - **Extra members:** add-ons of the selected plan, with quantity up to `addOnLimit`.
 - **Billed:** only intervals the plan has prices for (custom plans: any interval and count).
 - **Next renewal** (= `anchorDate`): required for Ongoing. Defaults to one interval from today, with the hint "Check your account page for the exact date". For month and year intervals, when the date is the last day of a month shorter than 31 days, a choice appears: "Billed on the 28th" or "the 29th / 30th / 31st (the last day in shorter months)", which sets `billingDay` (§3.1). The default from today keeps today's day (added on Jan 31 → Feb 28 with `billingDay: 31`).
 - **Auto-renews:** shown only when the price's `autoRenew` is true. Otherwise a note says "This plan renews manually — we'll remind you".
-- **Free plans:** when the picked price is 0, Billed, Next renewal, Auto-renews and the price override are hidden. The item is saved as Ongoing, with today as the anchor date.
-- **Specific dates:** at least one window; each end must be after its start; windows can't overlap.
+- **Free plans:** when the picked price is 0, Billed, Next renewal, Auto-renews and the price override are hidden, and so is the Ongoing / Specific dates choice. The item is saved as Ongoing, with today as the anchor date (an item being changed keeps its own).
+- **Specific dates:** at least one window; each end must be after its start; windows can't overlap. Two that share a
+  day overlap (a window is active through its end), and one that repeats every year must be shorter than a year.
 - **Price override:** an amount above 0, with a currency, and an optional "until" date for an offer that ends (first-term discounts): charges from that date on use the catalog price. The amount is taken as charged, tax included, unless "plus tax" is ticked (BLUEPRINT §4.8). It's also how an item bought from a reseller records what it cost, until an item can name its shop (BLUEPRINT §4.9).
 - **Bought in region** (Advanced): any country; it sets `region`, which picks the item's price and availability. Defaults to Settings' country.
-- **Feature ranks:** the plan's provided keys (§3.2), grouped. The dropdown starts with "Profile default (X)" and includes Essential ("keep this plan") and Critical ("keep this provider"), each with a one-line hint.
+- **Feature ranks:** the plan's provided keys (§3.2), grouped. The dropdown starts with "Profile default (X)" and includes Essential ("keep this plan") and Critical ("keep this provider"), each with a one-line hint. Only the provided keys' ranks are saved.
 - **Tags:** autocomplete from the Settings tags, with "Create tag" inline (name + colour).
 - **Bundles:** bundle items show the bundle's included plans read-only, and their combined features for ranking.
-- **Duplicates:** adding a plan that's already in the list shows "Already in this list — add another?" (duplicates are allowed).
+- **Duplicates:** adding a plan that's already in the list shows "Already in this list — add another?" (duplicates are allowed), and so does changing an item to another item's plan.
 - **Save** writes to the **draft** (P5), closes the dialog and shows "Added Netflix Standard".
 
 **Acceptance**

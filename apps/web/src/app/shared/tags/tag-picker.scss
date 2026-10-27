@@ -16,6 +16,24 @@ mat-chip-row .tag-dot {
   margin-right: 6px;
 }
 
+// The input's row takes the rest of the line after the chips, as Material's input does on its own.
+.input-row {
+  display: flex;
+  flex: 1 0 150px;
+  min-width: 0;
+}
+
+.input-cell {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+
+  input {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
 .option {
   display: inline-flex;
   align-items: center;

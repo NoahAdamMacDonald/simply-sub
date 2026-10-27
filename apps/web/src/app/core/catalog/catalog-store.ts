@@ -1,4 +1,13 @@
-import { DestroyRef, Service, computed, effect, inject, signal, untracked } from '@angular/core';
+import {
+  DestroyRef,
+  Service,
+  computed,
+  effect,
+  inject,
+  signal,
+  untracked,
+  type Signal,
+} from '@angular/core';
 import {
   catalogCheckDue,
   catalogFileKey,
@@ -41,6 +50,8 @@ export class CatalogStore {
   private readonly unreachable = signal(false);
   private readonly checkingNow = signal(false);
   private readonly lastOutcome = signal<CatalogCheckOutcome | undefined>(undefined);
+  /** The regions pages need besides the saved items' (need()). */
+  private readonly needed = signal<ReadonlySet<Signal<readonly string[]>>>(new Set());
   private lastCheckedAt?: Timestamp;
 
   /** The cached files by key: the stored ones, or this tab's later downloads. */
@@ -54,8 +65,9 @@ export class CatalogStore {
   });
 
   /**
-   * The regions whose files are needed: the user's country, and every region a list item was bought in. Undefined
-   * until the settings and items have loaded, and empty before the first run.
+   * The regions whose files are needed: the user's country, every region a list item was bought in, and the ones pages
+   * need for items not saved yet (need()). Undefined until the settings and items have loaded, and empty before the
+   * first run.
    */
   private readonly regions = computed<readonly string[] | undefined>(
     () => {
@@ -65,6 +77,9 @@ export class CatalogStore {
       const regions = new Set([country]);
       for (const { region, source } of this.items.records()) {
         if (region !== undefined && source.kind !== 'custom') regions.add(region);
+      }
+      for (const needed of this.needed()) {
+        for (const region of needed()) regions.add(region);
       }
       return [...regions].sort();
     },
@@ -124,6 +139,18 @@ export class CatalogStore {
       window.removeEventListener('offline', offline);
       document.removeEventListener('visibilitychange', shown);
     });
+  }
+
+  /**
+   * Keeps the files of the regions `regions` gives downloaded while the caller lives: items not saved yet that were
+   * bought elsewhere, a list draft's (P5) and the item dialog's (P6). Call it in an injection context, whose DestroyRef
+   * lets them go.
+   */
+  need(regions: Signal<readonly string[]>): void {
+    this.needed.update((needed) => new Set(needed).add(regions));
+    inject(DestroyRef).onDestroy(() =>
+      this.needed.update((needed) => new Set([...needed].filter((other) => other !== regions))),
+    );
   }
 
   /** The catalog for a list item bought in `region`: the file that serves that region, if it's been downloaded. */

@@ -2,7 +2,8 @@
 // Work Related (Netflix Standard, and Mullvad VPN yearly), written to IndexedDB. In both themes at 1280 and 360 px,
 // keyboard only: the name, the rows and the footer; a rename kept in the draft ("Unsaved changes"); 🗑 with focus
 // moving to the next row and Undo in a snackbar; [+ Add from catalog] to Search in pick mode with no question, its
-// banner naming the draft's name; a price back to the editor, "Resumed unsaved changes" and a reload; leaving
+// banner naming the draft's name; a price back to the editor, which opens the item dialog (M6.5) that Escape closes,
+// "Resumed unsaved changes" and a reload; leaving
 // elsewhere asking "Discard changes?" (focus on Cancel, Escape stays); Save writing the list and landing on it. Then,
 // at 1280 px: Cancel discarding everything (checked after a reload), Back refused and history kept, a name that's
 // empty, Delete list, a list there isn't, and /lists/new's Cancel. With axe and no horizontal scroll.
@@ -352,21 +353,25 @@ async function draftOf(page) {
         await banner.textContent(),
       );
 
-      // A price by keyboard comes back to the editor, which resumes the draft.
+      // A price by keyboard comes back to the editor, which resumes the draft and opens the item dialog for it, then
+      // drops the request from the URL. Escape closes the dialog, adding nothing.
       await keyTo(page, () => !!document.activeElement?.closest('ss-sub-card ss-price'));
       await page.keyboard.press('Enter');
       await until('the editor', () => pathOf(page) === `/lists/${LIST}/edit`);
-      await page.locator('.waiting').waitFor();
+      const itemDialog = page.locator('ss-item-dialog');
+      await itemDialog.waitFor({ timeout: 20000 });
       const resumed = page.locator('[role=status]', { hasText: 'Resumed unsaved changes' });
       await resumed.waitFor();
       check(
-        `${label}: a price comes back to the editor, which says it resumed the changes and what it will add`,
+        `${label}: a price comes back to the editor, which says it resumed the changes and opens the item dialog`,
         (await nameField(page).inputValue()) === 'Work Related Team' &&
-          /will be added here once the item dialog is ready\.$/.test(
-            (await page.locator('.waiting').textContent()).trim(),
-          ),
+          (await itemDialog.locator('h2').textContent()).trim() === 'Add subscription' &&
+          search(page) === '',
         page.url(),
       );
+      await sleep(500);
+      await page.keyboard.press('Escape');
+      await itemDialog.waitFor({ state: 'detached' });
       await page.screenshot({
         path: path.join(outDir, `editor-resumed-${colorScheme}-${viewport.width}.png`),
         fullPage: true,
@@ -471,6 +476,11 @@ async function draftOf(page) {
     await page.getByRole('menuitem', { name: /^Work Related/ }).click();
     await until('the editor', () => pathOf(page) === `/lists/${LIST}/edit`);
     await page.locator('li.item').nth(1).waitFor({ timeout: 20000 });
+    // The price opens the item dialog (M6.5); Escape closes it, adding nothing.
+    await page.locator('ss-item-dialog').waitFor({ timeout: 20000 });
+    await sleep(500);
+    await page.keyboard.press('Escape');
+    await page.locator('ss-item-dialog').waitFor({ state: 'detached' });
     const before = await entries(page);
     await nameField(page).fill('Work');
     await until('the name stored', async () => (await draftOf(page))?.name === 'Work');

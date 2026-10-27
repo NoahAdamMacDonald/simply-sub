@@ -1,8 +1,9 @@
 // M6.3 in the system Edge: list drafts kept in IndexedDB, on the real catalog, for a Canadian in Alberta. /lists/new
 // makes a new list's draft and replaces its URL with /lists/<id>/edit (Back skips it); the editor's [+ Add from
 // catalog] by keyboard opens Search in pick mode for the new list, whose banner names "Subscription List"; a price by
-// keyboard comes back to the editor; a reload keeps the draft (read from IndexedDB, with nothing in the lists table)
-// and pick mode's banner. Search's New list… lands on the new list's editor with one history entry, and a saved
+// keyboard comes back to the editor, which opens the item dialog (M6.5) and drops the request from the URL; a reload
+// keeps the draft (read from IndexedDB, with nothing in the lists table) and pick mode's banner. Search's New list…
+// lands on the new list's editor and its item dialog with one history entry, and a saved
 // "Subscription List" makes the next one "Subscription List 2". Both themes at 1280 and 360 px, with axe.
 // Usage: node check-drafts.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
 const fs = require('fs');
@@ -237,23 +238,28 @@ async function noSideScroll(page, viewport, label) {
       const price = await stop(page);
       await page.keyboard.press('Enter');
       await until('the editor', () => editorId(page) === id);
-      await page.locator('.waiting').waitFor();
-      const query = search(page);
+      const itemDialog = page.locator('ss-item-dialog');
+      await itemDialog.waitFor({ timeout: 20000 });
       check(
-        `${label}: Enter on a price says it adds to Subscription List, and opens its editor with the plan`,
+        `${label}: Enter on a price says it adds to Subscription List, and opens its editor with the item dialog`,
         /^button ".*, add to Subscription List"$/.test(price) &&
-          /^\?add=[a-z0-9.-]+&interval=(day|week|month|year)(&count=\d+)?$/.test(query),
-        `${price} → ${query}`,
+          (await itemDialog.locator('h2').textContent()).trim() === 'Add subscription' &&
+          search(page) === '',
+        `${price} → ${page.url()}`,
       );
+      // Escape closes it, adding nothing.
+      await sleep(500);
+      await page.keyboard.press('Escape');
+      await itemDialog.waitFor({ state: 'detached' });
 
       // A reload keeps the draft, read from IndexedDB, and pick mode's banner.
       await page.reload();
-      await page.locator('.waiting').waitFor({ timeout: 20000 });
+      await page.locator('ss-list-edit-page p.footer').waitFor({ timeout: 20000 });
       const drafts = await readTable(page, 'drafts');
       check(
         `${label}: after a reload the draft is still there, the same one, and the lists table is still empty`,
         editorId(page) === id &&
-          search(page) === query &&
+          search(page) === '' &&
           drafts.length === 1 &&
           JSON.stringify(drafts[0]) === JSON.stringify(draft) &&
           (await readTable(page, 'lists')).length === 0,
@@ -286,12 +292,11 @@ async function noSideScroll(page, viewport, label) {
     await price.click();
     await page.getByRole('menuitem', { name: /New list/ }).click();
     await until('the new list’s editor', () => editorId(page));
-    await page.locator('.waiting').waitFor();
+    await page.locator('ss-item-dialog').waitFor({ timeout: 20000 });
     const after = await entries(page);
     check(
-      'New list… lands on the new list’s editor with the plan, one history entry after Search',
-      /^\?add=[a-z0-9.-]+&interval=(day|week|month|year)(&count=\d+)?$/.test(search(page)) &&
-        after === before + 1,
+      'New list… lands on the new list’s editor and its item dialog, one history entry after Search',
+      search(page) === '' && after === before + 1,
       `${page.url()}, ${before} → ${after} entries`,
     );
     await page.goBack();
