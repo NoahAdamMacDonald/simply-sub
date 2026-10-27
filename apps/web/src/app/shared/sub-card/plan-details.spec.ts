@@ -1,6 +1,8 @@
+import type { WritableSignal } from '@angular/core';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { MATERIAL_ANIMATIONS } from '@angular/material/core';
-import { searchCatalog, type CatalogPlan } from '@simply-sub/core';
+import { searchCatalog, type CatalogPlan, type Settings } from '@simply-sub/core';
+import { SettingsStore } from '../../core/settings/settings-store';
 import { PlanDetails } from './plan-details';
 import { alberta, fx, searchCatalogData, searchStores, today } from './search.testing';
 
@@ -97,5 +99,43 @@ describe('PlanDetails', () => {
 
     expect(groups()).toEqual(['Features Video quality: 1080p (Full HD)']);
     expect(element().querySelector('.badge')).toBeNull();
+  });
+
+  describe('Terms and policies (M1.13)', () => {
+    it('rates each topic with its tier and why, by group, and links the pages they quote', async () => {
+      await show('mullvad.vpn');
+
+      expect(groups().at(-1)).toBe(
+        'Terms and policies Legal Good Disputes: Swedish courts or the consumer disputes board. ' +
+          'Service Good VPN logging: No connection logs, and an audit found none. ' +
+          'From Terms of service No-logging policy',
+      );
+      expect(
+        Array.from(element().querySelectorAll('.tier')).map((tier) =>
+          tier.getAttribute('data-tier'),
+        ),
+      ).toEqual(['good', 'good']);
+      const link = element().querySelector<HTMLAnchorElement>('.policy-links a');
+      expect([link?.href, link?.target, link?.rel]).toEqual([
+        'https://mullvad.net/en/help/terms-service',
+        '_blank',
+        'noopener',
+      ]);
+      expect(link?.querySelector('.visually-hidden')?.textContent).toBe(', opens in a new tab');
+    });
+
+    it('shows a rating for the user’s country over the one for everywhere', async () => {
+      const saved = TestBed.inject(SettingsStore).saved as WritableSignal<Settings | undefined>;
+      saved.set({ ...alberta, country: 'US', subdivision: undefined, currency: 'USD' });
+      await show('mullvad.vpn');
+
+      expect(text('.policies li')).toBe('Bad, Disputes: A made-up US rule, for the test.');
+    });
+
+    it('has no such group for a provider with no ratings', async () => {
+      await show('netflix.standard');
+
+      expect(groups().some((group) => group.startsWith('Terms and policies'))).toBe(false);
+    });
   });
 });

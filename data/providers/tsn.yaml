@@ -75,3 +75,46 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-26
         sourceUrl: https://www.tsn.ca/subscribe/
+
+# Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: TSN's terms and conditions and Bell's page on how
+# it collects and uses data, which tsn.ca links. Not rated: price and terms changes and closing accounts (its terms
+# don't say), data collection and deletion, free trials, account sharing and device limits.
+policies:
+  links:
+    - name: 'Terms and conditions'
+      url: https://www.tsn.ca/terms-and-conditions/
+    - name: "Bell's use of data"
+      url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+  ratings:
+    - topic: privacy.data-sharing
+      tier: leaning-good
+      reason: 'Shared within Bell, and outside it only when the law requires or you agree.'
+      sources:
+        - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+          quote: 'To get a better idea of your needs and how we can fulfill them, we sometimes share information between our companies.'
+        - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+          quote: 'We only disclose personal information with parties outside our family of companies and suppliers when we are required to or when you have given express consent for us to do so.'
+      lastVerified: 2026-10-27
+    - topic: privacy.ads-tracking
+      tier: neutral
+      reason: 'Tailored ads by default; you can change your ad preferences or block cookies.'
+      sources:
+        - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+          quote: 'You can manage the types of ads you receive or opt out of communications by updating your preferences.'
+      lastVerified: 2026-10-27
+    - topic: billing.cancel-refunds
+      tier: neutral
+      reason: 'Cancel and keep it to the end of the period, with no refunds.'
+      sources:
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'All Subscription Fees are non-refundable. Following any cancellation, you will continue to have access to the Service through the end of your current billing period, at which point your subscription will terminate.'
+      lastVerified: 2026-10-27
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Binding arbitration in your city, giving up courts and trials.'
+      sources:
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'shall be settled at the request of either party by binding arbitration in the city in which you reside'
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'You expressly waive the right to resolve any dispute through any other means, including by trial.'
+      lastVerified: 2026-10-27

@@ -3,6 +3,7 @@ import { bundleSchema, type Bundle } from './bundle';
 import { categoriesFileSchema, type Categories } from './category';
 import { featuresFileSchema, type Feature } from './feature';
 import { httpsUrlSchema, regionSchema } from './formats';
+import { policyTopicSchema, policyTopicsFileSchema, type PolicyTopic } from './policy-topic';
 import { providerSchema, type Provider } from './provider';
 import { resellerSchema, resellersFileSchema, type Reseller } from './reseller';
 import { locateCatalogFile, type CatalogSourceFile } from './validate-catalog';
@@ -47,6 +48,11 @@ export const catalogDataSchema = z.strictObject({
     .array(snapshotResellerSchema)
     .describe(
       "data/resellers.yaml: the shops that providers' resellers sections name (BLUEPRINT §4.9)",
+    ),
+  policyTopics: z
+    .array(policyTopicSchema)
+    .describe(
+      "data/policy-topics.yaml: what providers' policies sections rate, in its order (BLUEPRINT §4.10)",
     ),
 });
 export type CatalogData = z.infer<typeof catalogDataSchema>;
@@ -93,6 +99,8 @@ export interface CatalogSource {
   bundles: Bundle[];
   /** data/resellers.yaml's, or none without the file. */
   resellers: Reseller[];
+  /** data/policy-topics.yaml's, in its order, or none without the file. */
+  policyTopics: PolicyTopic[];
   /** Provider or reseller id → its logo, a PNG from data/logos/. */
   logos: ReadonlyMap<string, Uint8Array>;
 }
@@ -107,6 +115,7 @@ export function readCatalogSource(files: readonly CatalogSourceFile[]): CatalogS
   const providers: Provider[] = [];
   const bundles: Bundle[] = [];
   let resellers: Reseller[] = [];
+  let policyTopics: PolicyTopic[] = [];
   const logos = new Map<string, Uint8Array>();
   for (const source of files) {
     const where = locateCatalogFile(source.file);
@@ -131,6 +140,9 @@ export function readCatalogSource(files: readonly CatalogSourceFile[]): CatalogS
       case 'resellers':
         resellers = parsed(resellersFileSchema, source);
         break;
+      case 'policy-topics':
+        policyTopics = parsed(policyTopicsFileSchema, source);
+        break;
     }
   }
   if (!features || !categories) {
@@ -143,6 +155,7 @@ export function readCatalogSource(files: readonly CatalogSourceFile[]): CatalogS
     providers: providers.sort(byId),
     bundles: bundles.sort(byId),
     resellers: resellers.sort(byId),
+    policyTopics,
     logos,
   };
 }
@@ -181,6 +194,7 @@ export function buildCatalogData(source: CatalogSource, iconBaseUrl: string): Ca
       ...(source.logos.has(id) && { iconUrl: `${iconBaseUrl}${catalogIconFile(id)}` }),
       ...rest,
     })),
+    policyTopics: source.policyTopics,
   };
 }
 

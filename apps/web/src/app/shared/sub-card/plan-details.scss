@@ -79,3 +79,88 @@ ul {
   color: var(--status-inactive);
   font: var(--mat-sys-label-small);
 }
+
+// Terms and policies (M1.13): each rating's tier as a pill in its colour, green to red, named in words too, then the
+// topic and why.
+h4 {
+  margin: 8px 0 4px;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-label-large);
+}
+
+.policies {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+}
+
+.tier {
+  flex: none;
+  min-width: 6.75rem;
+  padding: 0 8px;
+  border-radius: 999px;
+  color: var(--policy-label);
+  font: var(--mat-sys-label-medium);
+  text-align: center;
+
+  &[data-tier='good'] {
+    background-color: var(--policy-good);
+  }
+
+  &[data-tier='leaning-good'] {
+    background-color: var(--policy-leaning-good);
+  }
+
+  &[data-tier='neutral'] {
+    background-color: var(--policy-neutral);
+  }
+
+  &[data-tier='leaning-bad'] {
+    background-color: var(--policy-leaning-bad);
+  }
+
+  &[data-tier='bad'] {
+    background-color: var(--policy-bad);
+  }
+}
+
+.topic {
+  font-weight: 600;
+}
+
+.policy-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin: 8px 0 0;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 4px;
+    color: var(--ss-accent-text);
+    font: var(--mat-sys-label-large);
+
+    mat-icon {
+      width: 16px;
+      height: 16px;
+      font-size: 16px;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--ss-accent-text);
+      outline-offset: 2px;
+    }
+  }
+}

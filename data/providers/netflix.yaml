@@ -141,3 +141,141 @@ addOns:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://help.netflix.com/en/node/24926/us
+
+# Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27 from Canada: its terms of use (the Canadian ones,
+# so the ratings from them are for Canada), privacy statement and help articles on households and downloads. Not
+# rated: free trials (none in Canada).
+policies:
+  links:
+    - name: 'Terms of use'
+      url: https://help.netflix.com/legal/termsofuse
+    - name: 'Privacy statement'
+      url: https://help.netflix.com/legal/privacy
+    - name: 'Netflix Household'
+      url: https://help.netflix.com/en/node/123277
+    - name: 'Downloads'
+      url: https://help.netflix.com/en/node/54816
+  ratings:
+    - topic: privacy.data-collection
+      tier: leaning-bad
+      reason: 'Viewing, device and ad data by default; only its use for ads can be turned off.'
+      sources:
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'We collect information about the advertisements on the Netflix service that you view or interact with, device information (such as resettable device identifiers), IP addresses, inferences we make about you or your household based on data we collect from or about you'
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'If your Behavioral Advertisements setting is off, you will still see advertisements, but they will be non-behavioral advertisements.'
+      lastVerified: 2026-10-27
+    - topic: privacy.data-sharing
+      tier: neutral
+      reason: 'Shares data with its own companies, partners and ad companies; ads targeting can be turned off.'
+      sources:
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'We may disclose certain personal information to Advertising Companies (see definition above) in order to select advertisements shown on Netflix'
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'a “Behavioral Advertising” setting will be available to you in the “Privacy and data settings” menu'
+      lastVerified: 2026-10-27
+    - topic: privacy.ads-tracking
+      tier: neutral
+      reason: 'Ads are picked from your activity unless you turn that setting off.'
+      plans: [netflix.standard-ads]
+      sources:
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'We use your personal information to present you with advertisements. Some of our advertisements may be Behavioral Advertisements.'
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'If your Behavioral Advertisements setting is off, you will still see advertisements, but they will be non-behavioral advertisements.'
+      lastVerified: 2026-10-27
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'Deletes your data when you ask, keeping some for a time it states elsewhere.'
+      sources:
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'You may also correct or update out-of-date or inaccurate personal information or request that we delete personal information that we hold about you.'
+      lastVerified: 2026-10-27
+    - topic: billing.cancel-refunds
+      tier: neutral
+      reason: 'Cancel online at any time; it runs to the end of the period, with no refunds.'
+      regions: [CA]
+      sources:
+        - url: https://help.netflix.com/legal/termsofuse
+          quote: 'You can cancel your Netflix subscription at any time.'
+        - url: https://help.netflix.com/legal/termsofuse
+          quote: 'The cancellation will take effect at the end of the billing period.'
+        - url: https://help.netflix.com/legal/termsofuse
+          quote: 'To the extent permitted by the applicable law, payments are non-refundable and we do not provide refunds or credits for any partial subscription periods or unused Netflix content.'
+      lastVerified: 2026-10-27
+    - topic: billing.price-changes
+      tier: leaning-good
+      reason: "At least a month's notice of a new price, and you can cancel first."
+      regions: [CA]
+      sources:
+        - url: https://help.netflix.com/legal/termsofuse
+          quote: 'We will notify you at least one month before any price changes or changes to your subscription plan will become effective.'
+      lastVerified: 2026-10-27
+    - topic: legal.disputes
+      tier: leaning-good
+      reason: 'Canadian law and courts, but no class actions outside Quebec.'
+      regions: [CA]
+      sources:
+        - url: https://help.netflix.com/legal/termsofuse
+          quote: 'These Terms of Use shall be governed by and construed in accordance with the laws of Canada without regard to conflict of laws provisions.'
+        - url: https://help.netflix.com/legal/termsofuse
+          quote: 'EXCEPT FOR CONSUMERS THAT ARE SUBJECT TO THE QUEBEC CONSUMER PROTECTION ACT AND ONLY WHERE PERMITTED UNDER THE APPLICABLE LAW, YOU AND NETFLIX AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY'
+      lastVerified: 2026-10-27
+    - topic: legal.terms-changes
+      tier: leaning-good
+      reason: "A month's notice of material changes, and you can cancel at any time."
+      regions: [CA]
+      sources:
+        - url: https://help.netflix.com/legal/termsofuse
+          quote: 'In case of material changes we will notify you at least one month before such changes apply to you.'
+      lastVerified: 2026-10-27
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can end or limit your account for breaking its terms, with no refund.'
+      regions: [CA]
+      sources:
+        - url: https://help.netflix.com/legal/termsofuse
+          quote: 'We may terminate or restrict your use of our service if you violate these Terms of Use or are engaged in illegal or fraudulent use of the service.'
+        - url: https://help.netflix.com/legal/termsofuse
+          quote: 'To the extent permitted by the applicable law, payments are non-refundable'
+      lastVerified: 2026-10-27
+    - topic: service.account-sharing
+      tier: neutral
+      reason: 'Your household only, with device checks; others can be paid extra members.'
+      sources:
+        - url: https://help.netflix.com/en/node/123277
+          quote: 'You may not share your Netflix account outside of your household.'
+        - url: https://help.netflix.com/en/node/123277
+          quote: "Account owners on a Standard or Premium plan in many countries can share Netflix with someone who doesn't live with them by adding an extra member to their account."
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'This also includes determining whether a particular device is permitted to use the account consistent with the Netflix Terms of Use.'
+      lastVerified: 2026-10-27
+    - topic: service.account-sharing
+      tier: leaning-bad
+      reason: 'Your household only, with device checks, and no extra members on this plan.'
+      plans: [netflix.standard-ads]
+      sources:
+        - url: https://help.netflix.com/en/node/123277
+          quote: 'You may not share your Netflix account outside of your household.'
+        - url: https://help.netflix.com/en/node/123277
+          quote: 'Extra members cannot be added to ad-supported plans.'
+      lastVerified: 2026-10-27
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Up to 100 downloads per device on as many devices as the plan has, and they expire.'
+      sources:
+        - url: https://help.netflix.com/en/node/54816
+          quote: 'Ad-free plans can have up to 100 active downloads at a time per device based on the number of devices included in your Netflix plan'
+        - url: https://help.netflix.com/en/node/54816
+          quote: 'Downloads will expire after a period of time'
+      lastVerified: 2026-10-27
+    - topic: service.device-limits
+      tier: leaning-bad
+      reason: '15 downloads per device a month, and they expire.'
+      plans: [netflix.standard-ads]
+      sources:
+        - url: https://help.netflix.com/en/node/54816
+          quote: 'Ad-supported plans are limited to 15 total downloads per device per calendar month.'
+        - url: https://help.netflix.com/en/node/54816
+          quote: 'Downloads will expire after a period of time'
+      lastVerified: 2026-10-27

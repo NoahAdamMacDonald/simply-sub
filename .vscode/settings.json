@@ -6,6 +6,7 @@
     "./data/schema/categories.schema.json": "data/categories.yaml",
     "./data/schema/provider.schema.json": "data/providers/*.yaml",
     "./data/schema/bundle.schema.json": "data/bundles/*.yaml",
-    "./data/schema/resellers.schema.json": "data/resellers.yaml"
+    "./data/schema/resellers.schema.json": "data/resellers.yaml",
+    "./data/schema/policy-topics.schema.json": "data/policy-topics.yaml"
   }
 }

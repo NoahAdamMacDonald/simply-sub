@@ -7,8 +7,8 @@
 // anything else adds one), a reload, Back and Forward, a URL with values the catalog doesn't have, no scroll on a
 // filter change, and under 960 px the drawer (focus, its trap, Escape, Show results, Back), a price's Add to list
 // menu by keyboard (M5.4), and M5.7's pinned bar and panel, chips that stay put, the plans' order, a lone plan's
-// chip and the details' slide and foot, with axe. GET /fx is answered with fixed rates (1 EUR ≈ CA$1.5694), so
-// Amazon.ca's Mullvad cards are cheaper in Alberta.
+// chip and the details' slide and foot, and M1.13's Terms and policies, with axe. GET /fx is answered with fixed
+// rates (1 EUR ≈ CA$1.5694), so Amazon.ca's Mullvad cards are cheaper in Alberta.
 // Usage: node check-search.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
 const fs = require('fs');
 const path = require('path');
@@ -1130,6 +1130,64 @@ async function addItem(page, planId) {
     }
   }
 
+  // ── M1.13: Terms and policies in a card's details (Alberta, light, 1280 px) ─────────────────────
+  {
+    const context = await newContext(browser, { locale: 'en-CA' });
+    const page = await newPage(context, 'CA policies');
+    await openSearch(page, 'Alberta');
+    const mullvad = card(page, 'Mullvad VPN');
+    await mullvad.locator('button.expand').click();
+    const section = mullvad.locator('.group', {
+      has: page.getByRole('heading', { name: 'Terms and policies' }),
+    });
+    await section.waitFor();
+    const rows = await section
+      .locator('.policies li')
+      .evaluateAll((items) => items.map((item) => item.textContent.replace(/\s+/g, ' ').trim()));
+    const groups = await section.locator('h4').allTextContents();
+    const links = await section
+      .locator('.policy-links a')
+      .evaluateAll((anchors) =>
+        anchors.map((anchor) => [
+          anchor.textContent.replace(/\s+/g, ' ').trim(),
+          anchor.target,
+          anchor.rel,
+        ]),
+      );
+    check(
+      'Mullvad’s details rate its terms by group, each with its tier in words and why, and link its pages',
+      groups.join() === 'Privacy,Billing,Legal,Service' &&
+        rows[0] ===
+          'Good, Data collection: No personal details to sign up, and no activity or connection logs.' &&
+        rows.some((row) => row.startsWith('Leaning good, Cancelling and refunds:')) &&
+        links.length === 4 &&
+        links.every(
+          ([text, target, rel]) =>
+            /opens in a new tab/.test(text) && target === '_blank' && rel === 'noopener',
+        ),
+      `${groups.join(', ')} | ${rows.length} ratings | ${links.map(([text]) => text).join(', ')}`,
+    );
+    await section.screenshot({ path: path.join(outDir, 'policies-mullvad-1280.png') });
+    // Netflix's ratings from its Canadian terms show here, and its ad plan's own ratings on that plan.
+    const netflix = card(page, 'Netflix');
+    await netflix.locator('button.expand').click();
+    await netflix.locator('.policies li').first().waitFor();
+    const netflixRows = await netflix
+      .locator('.policies li')
+      .evaluateAll((items) => items.map((item) => item.textContent.replace(/\s+/g, ' ').trim()));
+    check(
+      "Netflix's ad plan shows its own sharing and download limits, and its Canadian terms",
+      netflixRows.some((row) => row.startsWith('Leaning bad, Account sharing:')) &&
+        netflixRows.some((row) =>
+          row.startsWith('Leaning bad, Device and download limits: 15 downloads'),
+        ) &&
+        netflixRows.some((row) => row.startsWith('Leaning good, Price changes:')),
+      netflixRows.join(' | '),
+    );
+    await axeCheck(page, 'light 1280, Terms and policies open');
+    await context.close();
+  }
+
   // ── A US user: the US-only plan and a provider not sold there; a UK user's fallback price ─────────
   {
     const context = await newContext(browser, { locale: 'en-US' });
@@ -1137,6 +1195,23 @@ async function addItem(page, planId) {
     await openSearch(page);
     const disney = await chips(page, 'Disney+');
     check('a US user sees Disney+ With Ads', disney.includes('With Ads'), disney.join(', '));
+    // M1.13: a rating for the buyer's country over the one for everywhere.
+    await card(page, 'Proton').locator('button.expand').click();
+    await card(page, 'Netflix').locator('button.expand').click();
+    await card(page, 'Netflix').locator('.policies li').first().waitFor();
+    const disputes = (
+      await card(page, 'Proton').locator('.policies li', { hasText: 'Disputes' }).textContent()
+    )
+      .replace(/\s+/g, ' ')
+      .trim();
+    check(
+      "a US user sees Proton's US disputes rating, and none from Netflix's Canadian terms",
+      disputes.startsWith('Leaning bad, Disputes: In the US, arbitration') &&
+        (await card(page, 'Netflix')
+          .locator('.policies li', { hasText: 'Price changes' })
+          .count()) === 0,
+      disputes,
+    );
     check(
       'a provider not sold in the US has no card until the text names it',
       !(await names(page)).includes('Crave'),

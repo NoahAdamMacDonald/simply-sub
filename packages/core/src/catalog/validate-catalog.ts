@@ -7,6 +7,9 @@ import { choices, didYouMean, idOf, listedMoreThanOnce, repeatedIndexes } from '
 import { featuresFileSchema } from './feature';
 import { slugSchema } from './formats';
 import type { CatalogFileKind } from './json-schema';
+import { providerCategories } from './plan-categories';
+import type { Policies } from './policy';
+import { policyTopicsFileSchema, type PolicyTopic } from './policy-topic';
 import type { Price } from './price';
 import { providerSchema, type AddOn, type Plan, type Provider } from './provider';
 import { globalRegion, groupsOf, isCatalogRegion, membersOf, regionProblem } from './regions';
@@ -73,7 +76,10 @@ export type Report = (
 const featuresFile = 'data/features.yaml';
 const categoriesFile = 'data/categories.yaml';
 const resellersFile = 'data/resellers.yaml';
+const policyTopicsFile = 'data/policy-topics.yaml';
 const staleAfterDays = 90;
+/** Terms change less often than prices, and no nightly check reads them. */
+const policyStaleAfterDays = 365;
 
 /**
  * Every problem in the catalog, file by file. `files` are all the .yaml and .yml files under data/ and every file
@@ -147,6 +153,29 @@ export function validateCatalog(
     report: reportResellers,
   };
 
+  // The policy topics file is optional too, until a provider rates its policies.
+  const reportPolicyTopics = reportIn(policyTopicsFile);
+  const policyTopics =
+    located.policyTopics &&
+    parseFile(policyTopicsFileSchema, located.policyTopics, reportPolicyTopics);
+  if (!located.policyTopics && providers.some(({ value }) => value.policies)) {
+    reportPolicyTopics(
+      [],
+      'Missing: the topics that providers rate their policies on go here (BLUEPRINT §4.10)',
+    );
+  }
+  const serviceIds = categories?.service.map((category) => category.id);
+  policyTopics?.forEach((topic, index) =>
+    topic.categories?.forEach((id, categoryIndex) => {
+      if (serviceIds && !serviceIds.includes(id)) {
+        reportPolicyTopics(
+          [index, 'categories', categoryIndex],
+          `"${id}" isn't a service category in ${categoriesFile}${choices(id, serviceIds)}`,
+        );
+      }
+    }),
+  );
+
   const ids = indexIds(providers, bundles, unchecked, resellersRead);
   const context: CheckContext = {
     today,
@@ -156,6 +185,7 @@ export function validateCatalog(
     ids,
     resellers: new Map(resellers?.map((reseller) => [reseller.id, reseller])),
     resellersUnchecked: located.resellers !== undefined && resellers === undefined,
+    policyTopics: policyTopics && new Map(policyTopics.map((topic) => [topic.id, topic])),
   };
   for (const { value, report } of providers) {
     checkProvider(value, context, report);
@@ -193,6 +223,7 @@ interface LocatedFiles {
   features?: CatalogSourceFile;
   categories?: CatalogSourceFile;
   resellers?: CatalogSourceFile;
+  policyTopics?: CatalogSourceFile;
   providers: NamedFile[];
   bundles: NamedFile[];
   logos: NamedFile[];
@@ -213,6 +244,9 @@ export function locateCatalogFile(
   }
   if (file === resellersFile) {
     return { kind: 'resellers', name: 'resellers' };
+  }
+  if (file === policyTopicsFile) {
+    return { kind: 'policy-topics', name: 'policy-topics' };
   }
   const named = /^data\/(providers|bundles)\/([^/]+)\.yaml$/.exec(file);
   if (named) {
@@ -236,6 +270,8 @@ function locateFiles(
       located.categories = source;
     } else if (where?.kind === 'resellers') {
       located.resellers = source;
+    } else if (where?.kind === 'policy-topics') {
+      located.policyTopics = source;
     } else if (where) {
       const list = { provider: 'providers', bundle: 'bundles', logo: 'logos' } as const;
       located[list[where.kind]].push({ source, name: where.name });
@@ -250,7 +286,7 @@ function locateFiles(
     } else {
       reportIn(file)(
         [],
-        'Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
+        'Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
       );
     }
   }
@@ -389,6 +425,8 @@ interface CheckContext {
   resellers: ReadonlyMap<string, Reseller>;
   /** The resellers file is there but broken, so a reseller missing from it may only be unreadable. */
   resellersUnchecked: boolean;
+  /** data/policy-topics.yaml's, by id, or undefined when it's missing or broken: ratings' topics go unchecked. */
+  policyTopics: ReadonlyMap<string, PolicyTopic> | undefined;
 }
 
 function checkProvider(provider: Provider, context: CheckContext, report: Report): void {
@@ -483,6 +521,54 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
     checkResellerListing(provider, listing, ['resellers', index], context, prices, report),
   );
   prices.warnIfStale();
+  if (provider.policies) {
+    checkPolicies(provider, provider.policies, context, report);
+  }
+}
+
+/**
+ * A provider's policy ratings (BLUEPRINT §4.10): each names a topic from data/policy-topics.yaml that applies to it
+ * (a topic for some categories, such as VPN logging, needs a plan in one), read on a date that isn't after today.
+ * Ratings older than a year are worth reading again.
+ */
+function checkPolicies(
+  provider: Provider,
+  policies: Policies,
+  { policyTopics, today }: CheckContext,
+  report: Report,
+): void {
+  const categories = providerCategories(provider);
+  const topicIds = [...(policyTopics?.keys() ?? [])];
+  let oldest: IsoDate | undefined;
+  policies.ratings.forEach((rating, index) => {
+    const path = ['policies', 'ratings', index];
+    const topic = policyTopics?.get(rating.topic);
+    if (policyTopics && !topic) {
+      report(
+        [...path, 'topic'],
+        `"${rating.topic}" isn't a topic in ${policyTopicsFile}${choices(rating.topic, topicIds)}`,
+      );
+    }
+    if (topic?.categories && !topic.categories.some((id) => categories.includes(id))) {
+      report(
+        [...path, 'topic'],
+        `${topic.name} is only for providers with a plan in ${topic.categories.join(' or ')}`,
+      );
+    }
+    if (rating.lastVerified > today) {
+      report([...path, 'lastVerified'], `${rating.lastVerified} is after today (${today})`);
+    }
+    if (oldest === undefined || rating.lastVerified < oldest) {
+      oldest = rating.lastVerified;
+    }
+  });
+  if (oldest !== undefined && addDays(oldest, policyStaleAfterDays) < today) {
+    report(
+      ['policies'],
+      `Some ratings were read on ${oldest}, over a year ago: read the pages again`,
+      'warning',
+    );
+  }
 }
 
 /**

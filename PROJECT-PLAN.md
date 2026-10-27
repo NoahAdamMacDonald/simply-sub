@@ -123,6 +123,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M1.10 | Plan categories (added 2026-10-26): a plan's optional `categories` (core's `planCategories`, `providerCategories`, `validateCatalog`), Search's Category filter and category terms keeping the plans in a category, the panel's categories from the plans sold here, and GET /providers' category filter through D1's `provider_categories` (migration 0003, `seedFormat` 2) (BLUEPRINT §14) | Under VPN, Search and GET /providers show Proton with its VPN plans only, and Mail Plus stays out |
 | M1.11 | Disney+'s and Crave's bundles and their providers (added 2026-10-26): TSN, RDS, ICI TOU.TV, Hulu and ESPN from their own pages, with `availableIn` for the ones sold in one country; 20 bundle files for Canada and the US; Disney+'s other countries surveyed; HBO Max, NFL+ and the bundles with them left out, as geo-blocked here (BLUEPRINT §14) | Crave's Standard With Ads card lists its bundles with Disney+, TSN, RDS and EXTRA; a US user sees the Disney+ and Hulu bundles; a Canadian never sees Hulu |
 | M1.12 | Research covers bundles, official resellers and the terms (added 2026-10-27): the price-research skill and the pipeline (BLUEPRINT §6.5) check every provider's bundles, official resellers, terms of service and privacy policy each time, and the provider file says what each found; Mullvad's missing reseller, Laptop with Linux, added (its price before VAT), and Amazon's other 12 stores recorded as unreadable (price only in the basket) (BLUEPRINT §14) | An Albertan's Mullvad card lists Laptop with Linux first among its cheaper resellers; the skill and §6.5 list the three checks |
+| M1.13 | Terms and policies (added 2026-10-27): `data/policy-topics.yaml` (13 topics in privacy, billing, legal and service, each with a five-tier rubric), a provider's `policies` (ratings with a one-line reason and quoted sources, for some plans or regions, and the pages they quote), `validateCatalog`'s checks, core's `planPolicies`, the card's Terms and policies section (tier pills green to red, `--policy-*`), the policy-research skill with its quote checker, and ratings for all ten providers (BLUEPRINT §4.10, §14) | Every card whose provider has ratings shows them by group with a tier in words and colour, a reason and its pages; every quote matches its page; a US user sees Proton's US disputes rating |
 
 ### M2 — API
 | ID | Task | Done when |
@@ -807,6 +808,9 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
   - For a suite plan (BLUEPRINT §4.4): the plans it includes, and its savings against buying them separately when there are any.
   - Perks, and accepted cards (Phase 4).
   - "Price checked Oct 14, 2026", with a "may be out of date" badge when it's older than 90 days.
+  - Terms and policies (M1.13, BLUEPRINT §4.10): the provider's ratings on `data/policy-topics.yaml`'s topics for
+    the plan and the user's country, by group (Privacy, Billing, Legal, Service), each a pill in its tier's colour
+    and named in words, with the topic and a one-line reason, then links to the pages they quote.
   - It slides open and shut (none with reduced motion), and a "Hide details" bar at its foot closes it too, putting
     focus back on the details button. When opening or closing leaves part of the card off screen, the page scrolls
     it back into view below the pinned bar (M5.7).

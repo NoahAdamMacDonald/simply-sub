@@ -123,6 +123,37 @@
   <p class="notes">{{ notes }}</p>
 }
 
+@if (policies(); as policies) {
+  <div class="group">
+    <h3>Terms and policies</h3>
+    @for (group of policies.groups; track group.group) {
+      <h4>{{ groupNames[group.group] }}</h4>
+      <ul class="policies">
+        @for (policy of group.policies; track policy.topic.id) {
+          <li>
+            <span class="tier" [attr.data-tier]="policy.tier">{{ tierNames[policy.tier] }}</span>
+            <span class="visually-hidden">, </span>
+            <span class="rated">
+              <span class="topic">{{ policy.topic.name }}: </span>
+              <span>{{ policy.reason }}</span>
+            </span>
+          </li>
+        }
+      </ul>
+    }
+    <p class="policy-links">
+      <span>From </span>
+      @for (link of policies.links; track link.url) {
+        <a [href]="link.url" target="_blank" rel="noopener">
+          <span>{{ link.name }}</span>
+          <span class="visually-hidden">, opens in a new tab</span>
+          <mat-icon aria-hidden="true">open_in_new</mat-icon>
+        </a>
+      }
+    </p>
+  </div>
+}
+
 <p class="checked">
   <span>Price checked {{ checked() }}</span>
   @if (match().stale) {
