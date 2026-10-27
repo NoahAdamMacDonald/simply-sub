@@ -2,6 +2,7 @@ id: proton
 name: Proton
 aliases: [proton mail, protonmail, proton vpn, proton pass, proton drive]
 website: https://proton.me
+domains: [protonvpn.com]
 category: privacy-suite
 spendCategory: software
 billingCurrency: { GLOBAL: USD }
@@ -820,6 +821,92 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://proton.me/family
+
+# Official resellers (BLUEPRINT §4.9, M1.15), read 2026-10-27. proton.me's pages name none and sell gift cards in
+# Proton's own shop, but Proton VPN's blog post on its spring and summer 2025 updates names ProxyStore and CoinGate as
+# the resellers that take its crypto payments. ProxyStore's 12-month vouchers cost Proton's own yearly EUR prices, VAT
+# included, so Search doesn't show them yet: Proton's CAD and USD prices cost less even with sales tax, and elsewhere
+# they cost the same (BLUEPRINT §4.9 shows only cheaper ones). dys2p, which runs ProxyStore, wrote on 2026-03-13 that
+# only Pass vouchers were left; on 2026-10-27 all five were in stock.
+# CoinGate's shop page answered Forbidden from its firewall, so it isn't listed yet.
+resellers:
+  - reseller: proxystore
+    approvedBy:
+      url: https://protonvpn.com/blog/spring-summer-recap-2025
+      quotes:
+        - We’ve also partnered with ProxyStore
+        - We’re using resellers to handle these cryptocurrency payments
+    offers:
+      - plan: proton.vpn-plus
+        notes: >-
+          A voucher, a web address that starts an account, upgrades a free one or renews the same plan. Paid with
+          Monero, Bitcoin, cash or a SEPA transfer.
+        prices:
+          - region: GLOBAL
+            currency: EUR
+            amount: 83.88
+            interval: month
+            intervalCount: 12
+            autoRenew: false
+            taxIncluded: { quote: It does not affect the price or the goods. }
+            lastVerified: 2026-10-27
+            sourceUrl: https://digitalgoods.proxystore.de/en/brand/proton
+      - plan: proton.unlimited
+        notes: >-
+          A voucher, a web address that starts an account, upgrades a free one or renews the same plan. Paid with
+          Monero, Bitcoin, cash or a SEPA transfer.
+        prices:
+          - region: GLOBAL
+            currency: EUR
+            amount: 119.88
+            interval: month
+            intervalCount: 12
+            autoRenew: false
+            taxIncluded: { quote: It does not affect the price or the goods. }
+            lastVerified: 2026-10-27
+            sourceUrl: https://digitalgoods.proxystore.de/en/brand/proton
+      - plan: proton.mail-plus
+        notes: >-
+          A voucher, a web address that starts an account, upgrades a free one or renews the same plan. Paid with
+          Monero, Bitcoin, cash or a SEPA transfer.
+        prices:
+          - region: GLOBAL
+            currency: EUR
+            amount: 47.88
+            interval: month
+            intervalCount: 12
+            autoRenew: false
+            taxIncluded: { quote: It does not affect the price or the goods. }
+            lastVerified: 2026-10-27
+            sourceUrl: https://digitalgoods.proxystore.de/en/brand/proton
+      - plan: proton.drive-plus
+        notes: >-
+          A voucher, a web address that starts an account, upgrades a free one or renews the same plan. Paid with
+          Monero, Bitcoin, cash or a SEPA transfer.
+        prices:
+          - region: GLOBAL
+            currency: EUR
+            amount: 47.88
+            interval: month
+            intervalCount: 12
+            autoRenew: false
+            taxIncluded: { quote: It does not affect the price or the goods. }
+            lastVerified: 2026-10-27
+            sourceUrl: https://digitalgoods.proxystore.de/en/brand/proton
+      - plan: proton.pass-plus
+        notes: >-
+          A voucher, a web address that starts an account, upgrades a free one or renews the same plan. Paid with
+          Monero, Bitcoin, cash or a SEPA transfer.
+        prices:
+          - region: GLOBAL
+            currency: EUR
+            amount: 35.88
+            interval: month
+            intervalCount: 12
+            autoRenew: false
+            taxIncluded: { quote: It does not affect the price or the goods. }
+            lastVerified: 2026-10-27
+            sourceUrl: https://digitalgoods.proxystore.de/en/brand/proton
 
 # Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: Proton's privacy policy and terms of service,
 # Proton VPN's privacy policy, its no-logs audit post and its page on usage statistics. Not rated: free trials (only

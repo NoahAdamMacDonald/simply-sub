@@ -102,7 +102,9 @@ plans:
 # 12 other stores aren't listed: each shows the price only in the basket ("To see the product details, add this item
 # to your basket", amazon.com and amazon.co.uk among them), and amazon.de answered with an error. Laptop with Linux's
 # price with VAT follows the buyer's country, so its price before VAT is stored. SerialCart's sale of the day (20-26%
-# off, no end date) isn't stored: prices are regular ones. Bundles: none on mullvad.net.
+# off, no end date) isn't stored: prices are regular ones. Bundles: none on mullvad.net. Its blog, read 2026-10-27
+# (M1.15): a 2021 post names Smartech, in Selfridges in London, as a reseller, but the partnerships page no longer
+# does, so it isn't listed; the others it names are the page's.
 resellers:
   - reseller: amazon
     approvedBy:

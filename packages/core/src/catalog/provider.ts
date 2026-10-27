@@ -4,6 +4,7 @@ import { featureValueSchema } from './feature';
 import {
   aliasesSchema,
   currencySchema,
+  domainSchema,
   dottedSlugSchema,
   httpsUrlSchema,
   planIdSchema,
@@ -99,6 +100,13 @@ export const providerSchema = z
     name: textSchema.describe('Display name'),
     aliases: aliasesSchema.optional(),
     website: httpsUrlSchema.describe('The home page'),
+    domains: z
+      .array(domainSchema)
+      .min(1, 'Leave domains out instead of listing none')
+      .describe(
+        "Its other sites' domains, besides its website's, whose pages can name its official resellers (Proton VPN's protonvpn.com)",
+      )
+      .optional(),
     category: slugSchema.describe('A service category id from categories.yaml'),
     spendCategory: slugSchema.describe(
       'A spend category id from categories.yaml, for card rewards',

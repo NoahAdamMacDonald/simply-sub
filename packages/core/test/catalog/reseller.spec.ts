@@ -230,8 +230,22 @@ describe('validateCatalog with resellers', () => {
       ),
     );
     expect(messages(files)).toEqual([
-      "data/providers/mullvad.yaml resellers.3.approvedBy.url: Must be a page of Mullvad VPN's own site, on mullvad.net: only the resellers it names are listed",
+      "data/providers/mullvad.yaml resellers.3.approvedBy.url: Must be a page of Mullvad VPN's own sites, on mullvad.net: only the resellers it names are listed",
     ]);
+  });
+
+  it('takes it from one of the provider’s other sites too, once its domains name them (M1.15)', () => {
+    const blog = withValue(
+      listings,
+      [3, 'approvedBy', 'url'],
+      'https://mullvadvpn.example/blog/resellers',
+    );
+    expect(messages(withResellers(blog))).toEqual([
+      "data/providers/mullvad.yaml resellers.3.approvedBy.url: Must be a page of Mullvad VPN's own sites, on mullvad.net: only the resellers it names are listed",
+    ]);
+    expect(
+      messages(edited(withResellers(blog), mullvadFile, ['domains'], ['mullvadvpn.example'])),
+    ).toEqual([]);
   });
 
   it('takes prices only from the reseller’s own pages, on its website or its listed domains', () => {

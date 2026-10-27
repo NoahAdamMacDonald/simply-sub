@@ -76,6 +76,14 @@ export const httpsUrlSchema = z
   // JSON Schema's `format: uri` allows any scheme, so the editor also gets the https check as a pattern.
   .meta({ pattern: '^https://', patternErrorMessage: 'Use a full https:// URL' });
 
+/** A domain name in lower case: amazon.ca. */
+export const domainSchema = z
+  .string()
+  .regex(
+    /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/,
+    'Use a domain name in lower case (amazon.ca)',
+  );
+
 /** A Material Symbols icon name (`live_tv`). */
 export const iconNameSchema = pattern(/^[a-z0-9_]+$/, 'Use a Material Symbols icon name (live_tv)');
 
