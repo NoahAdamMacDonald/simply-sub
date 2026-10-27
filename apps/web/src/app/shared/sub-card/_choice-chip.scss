@@ -1,0 +1,43 @@
+// A native radio button or checkbox drawn as a chip: a <label> holding the input, a check icon (.check) and its
+// text. Search's plan chips (ss-sub-card) and its Activity filter (ss-search-filters) look alike.
+@mixin chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--ss-divider);
+  border-radius: 8px;
+  font: var(--mat-sys-label-large);
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    opacity: 0;
+  }
+
+  .check {
+    display: none;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+  }
+
+  &:has(input:checked) {
+    border-color: var(--ss-accent-text);
+    color: var(--ss-accent-text);
+
+    .check {
+      display: inline-block;
+    }
+  }
+
+  &:has(input:focus-visible) {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 2px;
+  }
+}

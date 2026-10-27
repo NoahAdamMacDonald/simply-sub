@@ -81,7 +81,13 @@ resellers in Alberta and their links, the Tab order (box, Sort, a card's links, 
 button), a chip picked with an arrow key, Enter on the details button, "netflix 4k" after the typing pause, the empty
 state and Clear search, a listed provider's status (an item written to IndexedDB, then a reload), and for a US user a
 provider not sold there (the US file served with Crave limited to Canada) and one with no US price, with axe in both
-themes at both widths with cards expanded and with no match. It answers `GET /fx` itself.
+themes at both widths with cards expanded and with no match. It answers `GET /fx` itself. M5.3 added the filter panel:
+its Tab order (after Sort, before the results), each filter by keyboard (Native by Space, 4K from the Features
+suggestions by arrow keys, the price's top thumb by arrow keys, Category, an Activity chip, Clear all), the URL and
+`history.length` after each (typing replaces its entry, a run of price changes makes one, anything else adds one), a
+reload, Back and Forward, a URL with values the catalog doesn't have (rewritten in place), no scroll on a filter
+change, and at 360 px the drawer by keyboard (focus on its close button, the trap, the count it announces, Escape,
+Show results, Back), with axe on the open suggestions at 1280 px and the open drawer at 360 px in both themes.
 
 ## Gotchas
 
@@ -120,5 +126,13 @@ themes at both widths with cards expanded and with no match. It answers `GET /fx
 - A Material tooltip opens on hover and on keyboard focus (Tab), not on a script's `locator.focus()`.
 - Read a control's accessible name with `locator.ariaSnapshot()` (`- button "about $7.53 a month"`), not its
   `textContent`, which keeps `aria-hidden` text and icon ligatures.
+- Read the focused element's role and name with `page.locator(':focus').ariaSnapshot()`'s first line
+  (`slider "Lowest price per month": "0"`). A name with a colon comes back quoted (`'link "Plan : …"'`), and a button
+  whose aria-label differs from its text adds the text after a colon.
+- Chromium makes a scrolling element a tab stop when nothing in it is focusable. Material renders an autocomplete's
+  list just after its input, so Tab can land on the list: check that focus never reaches `.mat-mdc-autocomplete-panel`.
+- A MatDialog sets `aria-modal="false"` and hides the rest of the page instead (`aria-hidden="true"` on `ss-root`).
+- `history.length` counts entries: a `replaceState` leaves it as it was. Go back with `history.back()` and wait for the
+  URL to change; the router follows a popstate after a timeout.
 - Run axe on the snackbar only once it has opened. While opening, it fades in (contrast fails) and keeps its
   content in an `aria-hidden` wrapper (`aria-hidden-focus` fails on the Dismiss button).

@@ -53,6 +53,14 @@ html {
     )
   );
 
+  // Option group labels (Search's Features suggestions, M5.3) are muted text by default, on the raised surface of an
+  // overlay, where the dark muted shade is 4.3:1. They take the body text colour (9.1:1); their weight sets them apart.
+  @include mat.optgroup-overrides(
+    (
+      label-text-color: var(--ss-text),
+    )
+  );
+
   // Keyboard focus gets a solid ring in the readable accent shade, like the sidebar links.
   // Material's default (a faint state layer) falls short of the 3:1 contrast a focus indicator needs.
   @include mat.strong-focus-indicators(

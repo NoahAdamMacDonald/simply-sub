@@ -48,6 +48,14 @@ export function rankKeyOptions(feature: Feature): RankKeyOption[] {
 }
 
 /**
+ * A key's name where it stands alone, as Search's feature chips show it: a boolean's own name ("Ad free"), else its
+ * feature's and its value's or tier's ("Video quality: 4K (Ultra HD)").
+ */
+export function rankKeyLabel({ feature, option, name }: RankKeyOption): string {
+  return option === undefined ? name : `${feature.name}: ${name}`;
+}
+
+/**
  * Whether a plan's features provide the key: a boolean that is true, an enum value at least the key's, a number at
  * least the tier's min (or unlimited), a set that contains the value. A feature the plan doesn't list provides
  * nothing.

@@ -1,19 +1,42 @@
 :host {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 960px;
+  display: block;
+  max-width: 1280px;
+}
+
+// From 960 px the filter panel is a column on the right. It follows the search bar in the tab order, before the
+// results, as controls come before what they change.
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  grid-template-rows: auto auto 1fr;
+  grid-template-areas:
+    'bar panel'
+    'count panel'
+    'results panel';
+  gap: 12px 16px;
+  align-items: start;
+
+  &.narrow {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: 'bar' 'count' 'results';
+  }
 }
 
 // On the card colour, where the outlined fields' labels keep their contrast (BLUEPRINT §8.1).
+.bar,
+.panel {
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+}
+
 .bar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 12px;
+  grid-area: bar;
   padding: 12px 16px;
-  border-radius: var(--ss-radius-card);
-  background-color: var(--ss-card-bg);
 }
 
 .search {
@@ -26,12 +49,27 @@
   min-width: 160px;
 }
 
+.open-filters {
+  flex: none;
+}
+
 // The field has its own clear button.
 input[type='search']::-webkit-search-cancel-button {
   appearance: none;
 }
 
+.panel {
+  grid-area: panel;
+  padding: 16px;
+
+  h2 {
+    margin: 0 0 16px;
+    font: var(--mat-sys-title-large);
+  }
+}
+
 .count {
+  grid-area: count;
   margin: 0;
   color: var(--ss-text-muted);
 }
@@ -40,6 +78,7 @@ input[type='search']::-webkit-search-cancel-button {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  grid-area: results;
 }
 
 .skeleton {
@@ -57,4 +96,26 @@ input[type='search']::-webkit-search-cancel-button {
   to {
     opacity: 0.3;
   }
+}
+
+// The drawer's parts, in the dialog (an embedded view of this component, so these styles reach it).
+.drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 12px;
+
+  h2 {
+    flex: 1;
+  }
+}
+
+mat-dialog-content {
+  // The dialog's own limit is for centred dialogs: the drawer is as tall as the window.
+  max-height: none;
+  flex: 1;
+}
+
+mat-dialog-actions {
+  justify-content: flex-end;
 }

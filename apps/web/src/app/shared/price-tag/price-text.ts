@@ -11,6 +11,19 @@ export function amountText(amount: number, currency: string, country: string | u
   });
 }
 
+/** `amount` without its decimals when it's whole, as the price filter shows a step: $5, $9.99, ¥2,300. */
+export function wholeAmountText(
+  amount: number,
+  currency: string,
+  country: string | undefined,
+): string {
+  return amount.toLocaleString(country === undefined ? 'en' : `en-${country}`, {
+    style: 'currency',
+    currency,
+    ...(Number.isInteger(amount) && { minimumFractionDigits: 0, maximumFractionDigits: 0 }),
+  });
+}
+
 /** The billing period as the tag shows it: "/ mo", "/ 3 mo", "/ year", "/ 30 days". */
 export function intervalText(interval: Interval, count: number): string {
   const [one, many] = shortUnits[interval];
