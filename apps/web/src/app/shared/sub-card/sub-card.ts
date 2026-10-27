@@ -19,6 +19,7 @@ import type {
   PickedPrice,
   Rank,
   RankKey,
+  ResellerDeal,
   SubscriptionList,
 } from '@simply-sub/core';
 import { SettingsStore } from '../../core/settings/settings-store';
@@ -188,6 +189,26 @@ export class SubCard {
   /** What a plan's price adds to a list: the plan, at that price's period (P7, F1). */
   protected planRequest(planId: string, price: PickedPrice): AddRequest {
     return { kind: 'plan', planId, interval: price.interval, intervalCount: price.intervalCount };
+  }
+
+  /**
+   * What a reseller's price adds: the plan at the shop's period, with what the shop charges, in its own currency, as
+   * the item's own price (BLUEPRINT §4.9). Tax is added to it where a catalog price's would be, unless it includes it.
+   */
+  protected resellerRequest(deal: ResellerDeal): AddRequest {
+    const { price } = deal;
+    return {
+      kind: 'plan',
+      // A deal is shown only for the plan chosen.
+      planId: this.plan()?.plan.id ?? '',
+      interval: price.interval,
+      intervalCount: price.intervalCount,
+      price: {
+        amount: price.source.amount,
+        currency: price.source.currency,
+        plusTax: price.taxIncluded !== true,
+      },
+    };
   }
 
   protected readonly icon = catalogIcon;

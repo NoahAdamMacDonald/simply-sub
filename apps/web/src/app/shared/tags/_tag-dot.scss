@@ -1,5 +1,8 @@
 // A tag's colour dot. The colour is the tag's own (#rrggbb, checked by core's tagColorSchema), in --tag-color.
+// A box of its own: in a chip's label, an inline span ignored its size and showed only its ring, a thin bar.
 @mixin dot($size: 10px) {
+  display: inline-block;
+  vertical-align: middle;
   width: $size;
   height: $size;
   flex: none;

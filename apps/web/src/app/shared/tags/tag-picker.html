@@ -2,7 +2,8 @@
   <mat-label>{{ label() }}</mat-label>
   <mat-chip-grid #grid [attr.aria-label]="label()">
     @for (tag of chosen(); track tag.id) {
-      <mat-chip-row (removed)="remove(tag.id)">
+      <!-- A click anywhere on the chip removes it, as its X does and as Search's feature chips do (M5.9). -->
+      <mat-chip-row (removed)="remove(tag.id)" (click)="remove(tag.id)">
         <span class="tag-dot" aria-hidden="true" [style.--tag-color]="tag.color"></span>
         {{ tag.name }}
         <button matChipRemove type="button" [attr.aria-label]="'Remove ' + tag.name">

@@ -25,10 +25,13 @@ export interface Renewal {
   billingDay?: BillingDay;
 }
 
-/** One window of Specific dates, as the form edits it: '' for a date not entered yet. */
+/**
+ * One window of Specific dates, as the form edits it: '' for a date not entered yet, and null for one typed that isn't
+ * a date (the date picker's answer).
+ */
 export interface WindowForm {
-  start: string;
-  end: string;
+  start: string | null;
+  end: string | null;
   repeatYearly: boolean;
 }
 
@@ -40,8 +43,9 @@ export interface AddOnForm {
 }
 
 /**
- * The item dialog's form. Signal Forms models hold no undefined, so a date not entered is '', no billing day is 0 and
- * no amount is null. It keeps both billing modes' fields, so switching between them loses nothing.
+ * The item dialog's form. Signal Forms models hold no undefined, so a date not entered is '' (or null, for text the
+ * date picker can't read), no billing day is 0 and no amount is null. It keeps both billing modes' fields, so
+ * switching between them loses nothing.
  */
 export interface ItemForm {
   kind: ItemSource['kind'];
@@ -57,12 +61,12 @@ export interface ItemForm {
   interval: Interval;
   intervalCount: number;
   /** Ongoing: the next renewal. */
-  anchorDate: string;
+  anchorDate: string | null;
   billingDay: BillingDay | 0;
   /** Ongoing: subscribed since. */
-  startDate: string;
+  startDate: string | null;
   /** Ongoing: ends on. */
-  endDate: string;
+  endDate: string | null;
   autoRenew: boolean;
   /** Specific dates. */
   windows: WindowForm[];
@@ -70,7 +74,7 @@ export interface ItemForm {
   ownPrice: boolean;
   priceAmount: number | null;
   priceCurrency: string;
-  priceUntil: string;
+  priceUntil: string | null;
   plusTax: boolean;
   /** Where it was bought: Settings' country unless it's changed. */
   region: string;
@@ -88,6 +92,8 @@ export interface FormIssue {
 export interface NewItemOptions {
   source: ItemSource;
   period: Period;
+  /** A reseller's price, which starts "I pay a different price" (BLUEPRINT §4.9). */
+  ownPrice?: { amount: number; currency: string; plusTax: boolean };
   /** The plan's add-ons (Plan.addOnIds). */
   addOnIds: readonly string[];
   today: IsoDate;
@@ -99,6 +105,14 @@ export interface NewItemOptions {
 /** Whether two periods are the same: monthly isn't every 2 months. */
 export function samePeriod(a: Period, b: Period): boolean {
   return a.interval === b.interval && a.intervalCount === b.intervalCount;
+}
+
+/**
+ * Whether two periods are as long as each other, whatever their units: every 12 months is a year, and both bill on
+ * the same dates (Amazon sells Mullvad for 12 months, which Mullvad prices as a year).
+ */
+export function sameLength(a: Period, b: Period): boolean {
+  return samePeriod(inYears(a), inYears(b));
 }
 
 /**
@@ -114,9 +128,14 @@ export function periodChoices(prices: readonly Period[]): Period[] {
   return periods;
 }
 
-/** The period once the plan changes: the same one if the new plan is priced for it, else its first (P6). */
+/**
+ * The period once the plan changes: the same one if the new plan is priced for it, or one as long (a year for 12
+ * months), else its first (P6).
+ */
 export function periodAfterPlanChange(current: Period, choices: readonly Period[]): Period {
-  const kept = choices.find((choice) => samePeriod(choice, current));
+  const kept =
+    choices.find((choice) => samePeriod(choice, current)) ??
+    choices.find((choice) => sameLength(choice, current));
   const { interval, intervalCount } = kept ?? choices[0] ?? current;
   return { interval, intervalCount };
 }
@@ -143,7 +162,7 @@ export function addPeriods(date: IsoDate, period: Period, count = 1): IsoDate {
  * the 31st; Feb 28 billed yearly, the 29th once a leap year comes round. A date input's value that isn't a date we
  * take (a year of 6 digits) has none.
  */
-export function billingDayChoices(anchorDate: string, period: Period): BillingDay[] {
+export function billingDayChoices(anchorDate: string | null, period: Period): BillingDay[] {
   if (!isDate(anchorDate) || (period.interval !== 'month' && period.interval !== 'year')) return [];
   const day = dayOf(anchorDate);
   if (!isLastDay(anchorDate) || day >= 31) return [];
@@ -159,7 +178,7 @@ export function billingDayChoices(anchorDate: string, period: Period): BillingDa
 
 /** `billingDay` if it still applies to `anchorDate` billed by `period`, else undefined. */
 export function keptBillingDay(
-  anchorDate: string,
+  anchorDate: string | null,
   period: Period,
   billingDay: number | undefined,
 ): BillingDay | undefined {
@@ -182,7 +201,7 @@ export function defaultRenewal(today: IsoDate, period: Period): Renewal {
  * becomes a year from today); a date the user entered stays, with its billing day while that still applies.
  */
 export function renewalAfterPeriodChange(
-  renewal: { anchorDate: string; billingDay?: number },
+  renewal: { anchorDate: string | null; billingDay?: number },
   from: Period,
   to: Period,
   today: IsoDate,
@@ -203,28 +222,28 @@ export function renewalAfterPeriodChange(
 export function windowIssues(windows: readonly WindowForm[]): FormIssue[] {
   if (windows.length === 0) return [{ path: ['windows'], message: 'Add at least one window' }];
   const issues: FormIssue[] = [];
-  const valid: boolean[] = [];
-  windows.forEach((window, index) => {
+  // Each window with both its dates, in order, or undefined when it breaks a rule of its own.
+  const valid = windows.map((window, index): DatedWindow | undefined => {
     const at = (field: keyof WindowForm, message: string) =>
       issues.push({ path: ['windows', index, field], message });
-    const start = isDate(window.start);
-    const end = isDate(window.end);
-    if (!start) at('start', 'Enter the start date');
-    if (!end) at('end', 'Enter the end date');
-    let ok = start && end;
-    if (ok && window.end <= window.start) {
+    const { start, end, repeatYearly } = window;
+    if (!isDate(start)) at('start', 'Enter the start date');
+    if (!isDate(end)) at('end', 'Enter the end date');
+    if (!isDate(start) || !isDate(end)) return undefined;
+    if (end <= start) {
       at('end', 'Must be after the start date');
-      ok = false;
-    } else if (ok && window.repeatYearly && window.end >= addMonths(window.start, 12)) {
-      at('end', 'A window that repeats every year must be shorter than a year');
-      ok = false;
+      return undefined;
     }
-    valid.push(ok);
+    if (repeatYearly && end >= addMonths(start, 12)) {
+      at('end', 'A window that repeats every year must be shorter than a year');
+      return undefined;
+    }
+    return { start, end, repeatYearly };
   });
-  windows.forEach((window, index) => {
-    if (!valid[index]) return;
-    const earlier = windows.findIndex(
-      (other, otherIndex) => otherIndex < index && valid[otherIndex] && overlap(other, window),
+  valid.forEach((window, index) => {
+    if (!window) return;
+    const earlier = valid.findIndex(
+      (other, otherIndex) => otherIndex < index && other !== undefined && overlap(other, window),
     );
     if (earlier >= 0) {
       issues.push({ path: ['windows', index, 'start'], message: `Overlaps window ${earlier + 1}` });
@@ -233,14 +252,21 @@ export function windowIssues(windows: readonly WindowForm[]): FormIssue[] {
   return issues;
 }
 
-/** Windows in the order they come: by start, then by end. */
+/** Windows in the order they come: by start, then by end. A date that isn't one sorts first. */
 export function sortedWindows<T extends WindowForm>(windows: readonly T[]): T[] {
   return [...windows].sort(
     (a, b) =>
-      compare(a.start, b.start) ||
-      compare(a.end, b.end) ||
+      compare(a.start ?? '', b.start ?? '') ||
+      compare(a.end ?? '', b.end ?? '') ||
       Number(a.repeatYearly) - Number(b.repeatYearly),
   );
+}
+
+/** A window with both its dates. */
+interface DatedWindow {
+  start: IsoDate;
+  end: IsoDate;
+  repeatYearly: boolean;
 }
 
 /** What the form's rules depend on: the chosen plan's prices where it's bought. */
@@ -350,6 +376,7 @@ export function itemFromForm(form: ItemForm, context: ItemFormContext): ItemFiel
 export function newItemForm({
   source,
   period,
+  ownPrice,
   addOnIds,
   today,
   country,
@@ -368,11 +395,11 @@ export function newItemForm({
     endDate: '',
     autoRenew: true,
     windows: [emptyWindow(today)],
-    ownPrice: false,
-    priceAmount: null,
-    priceCurrency: currency,
+    ownPrice: ownPrice !== undefined,
+    priceAmount: ownPrice?.amount ?? null,
+    priceCurrency: ownPrice?.currency ?? currency,
     priceUntil: '',
-    plusTax: false,
+    plusTax: ownPrice?.plusTax ?? false,
     region: country,
     rankOverrides: {},
     tagIds: [],
@@ -510,9 +537,10 @@ function addOnRows(
 
 function billing(form: ItemForm, period: Period, context: ItemFormContext): Billing {
   if (form.mode === 'limited') {
+    // What itemFormIssues passes has both dates.
     const windows = sortedWindows(form.windows).map(({ start, end, repeatYearly }) => ({
-      start,
-      end,
+      start: start ?? '',
+      end: end ?? '',
       repeatYearly,
     }));
     return { mode: 'limited', windows, ...period };
@@ -521,7 +549,7 @@ function billing(form: ItemForm, period: Period, context: ItemFormContext): Bill
   return {
     mode: 'recurring',
     ...period,
-    anchorDate: form.anchorDate,
+    anchorDate: form.anchorDate ?? '',
     ...(billingDay !== undefined && { billingDay }),
     ...ongoingDates(form),
     autoRenew: context.autoRenew && form.autoRenew,
@@ -561,6 +589,13 @@ function priceOverride(form: ItemForm): { priceOverride?: PriceOverride } {
   };
 }
 
+/** A period in years when it's a whole number of them: every 24 months is every 2 years. */
+function inYears({ interval, intervalCount }: Period): Period {
+  return interval === 'month' && intervalCount % 12 === 0
+    ? { interval: 'year', intervalCount: intervalCount / 12 }
+    : { interval, intervalCount };
+}
+
 /** Just the period of a form or price. */
 export function periodOf({ interval, intervalCount }: Period): Period {
   return { interval, intervalCount };
@@ -570,13 +605,13 @@ export function periodOf({ interval, intervalCount }: Period): Period {
  * Whether two windows share a day, in any year: a window that repeats yearly is copied into every later year, as far
  * as a year past the later of their ends, where every overlap has shown.
  */
-function overlap(a: WindowForm, b: WindowForm): boolean {
+function overlap(a: DatedWindow, b: DatedWindow): boolean {
   const lastYear = Math.max(yearOf(a.end), yearOf(b.end)) + 1;
   const others = copies(b, lastYear);
   return copies(a, lastYear).some((x) => others.some((y) => x.start <= y.end && y.start <= x.end));
 }
 
-function copies(window: WindowForm, lastYear: number): { start: IsoDate; end: IsoDate }[] {
+function copies(window: DatedWindow, lastYear: number): { start: IsoDate; end: IsoDate }[] {
   if (!window.repeatYearly) return [window];
   const found = [];
   for (let years = 0; yearOf(window.start) + years <= lastYear; years++) {
@@ -588,7 +623,7 @@ function copies(window: WindowForm, lastYear: number): { start: IsoDate; end: Is
   return found;
 }
 
-function isDate(value: string): boolean {
+function isDate(value: string | null): value is string {
   return isoDateSchema.safeParse(value).success;
 }
 

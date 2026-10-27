@@ -285,16 +285,10 @@ async function panelSize(page) {
   return { width: Math.round(box.width), height: Math.round(box.height) };
 }
 
-/**
- * Types a date into the focused date input, reached by Tab, as a keyboard user does in an en-CA browser: the year
- * takes up to 6 digits, so ArrowRight moves on to the month, and the month moves on to the day by itself.
- */
+/** Types a date into the focused date field, over what's there, as a keyboard user does (2027-02-28). */
 async function typeDate(page, date) {
-  const [year, month, day] = date.split('-');
-  await page.keyboard.type(year);
-  await page.keyboard.press('ArrowRight');
-  await page.keyboard.type(month);
-  await page.keyboard.type(day);
+  await page.keyboard.press('Control+A');
+  await page.keyboard.type(date);
   await sleep(200);
 }
 
@@ -418,6 +412,18 @@ async function shownValue(page, selector) {
       await page.goto(`${editorUrl()}?add=netflix.standard-ads&interval=month`);
       await itemDialog(page).waitFor({ timeout: 20000 });
       await sleep(500);
+      // The suggested renewal's hint takes the room it needs: it ends before Auto-renews starts.
+      const hintBottom = await itemDialog(page)
+        .locator('mat-hint', { hasText: 'Check your account page' })
+        .evaluate((hint) => hint.getBoundingClientRect().bottom);
+      const autoRenewTop = await itemDialog(page)
+        .locator('mat-checkbox', { hasText: 'Auto-renews' })
+        .evaluate((box) => box.getBoundingClientRect().top);
+      check(
+        `${label}: the next renewal's hint clears Auto-renews`,
+        hintBottom <= autoRenewTop,
+        `${hintBottom} / ${autoRenewTop}`,
+      );
       await keyTo(page, () => !!document.activeElement?.closest('ss-item-dialog .mode'), 'Tab', 60);
       await page.keyboard.press('ArrowRight');
       await itemDialog(page).locator('.window').waitFor();
@@ -491,7 +497,7 @@ async function shownValue(page, selector) {
       await page.keyboard.press('Enter');
       await itemDialog(page).waitFor();
       await sleep(500);
-      const renewal = itemDialog(page).locator('input[type=date]').first();
+      const renewal = itemDialog(page).locator('input.mat-datepicker-input').first();
       check(
         `${label}: ✎ opens the dialog for its item as it is`,
         (await itemDialog(page).locator('h2').textContent()).trim() === 'Edit subscription' &&
@@ -561,6 +567,38 @@ async function shownValue(page, selector) {
       await page.screenshot({ path: shot('dialog-billing-day') });
       await axeCheck(page, `${label}, the billing day choice`);
 
+      // Ends on from the calendar, by keyboard: its button, an arrow key to the next day, Enter.
+      await keyTo(
+        page,
+        () =>
+          document.activeElement
+            ?.closest('mat-datepicker-toggle')
+            ?.querySelector('button')
+            ?.getAttribute('aria-label') === 'Ends on: choose a date' ||
+          document.activeElement?.getAttribute('aria-label') === 'Ends on: choose a date',
+        'Shift+Tab',
+        20,
+      );
+      await page.keyboard.press('Enter');
+      const calendar = page.locator('mat-datepicker-content');
+      await calendar.waitFor();
+      await sleep(600);
+      await page.screenshot({ path: shot('dialog-calendar') });
+      await axeCheck(page, `${label}, the calendar`);
+      await page.keyboard.press('ArrowRight');
+      await page.keyboard.press('Enter');
+      await calendar.waitFor({ state: 'detached' });
+      const endsOn = await itemDialog(page)
+        .locator('mat-form-field', { hasText: 'Ends on' })
+        .locator('input')
+        .inputValue();
+      check(
+        `${label}: the calendar opens from its button and picks a date by keyboard, with focus back on the button`,
+        /^\d{4}-\d{2}-\d{2}$/.test(endsOn) &&
+          (await focusedName(page)) === 'Ends on: choose a date',
+        `${endsOn} / ${await focusedName(page)}`,
+      );
+
       await keyTo(
         page,
         () => document.activeElement?.closest('mat-checkbox')?.textContent.trim() === 'Auto-renews',
@@ -570,6 +608,9 @@ async function shownValue(page, selector) {
       await page.keyboard.press('Space');
       await noSideScroll(page, viewport, `${label}, the dialog editing`);
       await page.screenshot({ path: shot('dialog-edit'), fullPage: true });
+      await itemDialog(page).locator('ss-tag-picker').scrollIntoViewIfNeeded();
+      await sleep(300);
+      await page.screenshot({ path: shot('dialog-tags') });
       await axeCheck(page, `${label}, the dialog editing`);
       await keyTo(page, onButton('Save'), 'Tab', 150);
       await page.keyboard.press('Enter');
@@ -603,6 +644,7 @@ async function shownValue(page, selector) {
           intervalCount: 1,
           anchorDate: '2027-02-28',
           billingDay: 31,
+          endDate: endsOn,
           autoRenew: false,
         },
         tagIds: [TAG],

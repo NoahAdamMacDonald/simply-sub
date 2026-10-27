@@ -71,7 +71,17 @@ type AskedFor =
   AddRequest | { kind: 'custom'; customSubId: string } | { kind: 'item'; itemId: string };
 
 /** The query parameters that ask for the item dialog, which leave the URL once the editor has answered them. */
-const dialogParams = ['add', 'addBundle', 'addCustom', 'item', 'interval', 'count'];
+const dialogParams = [
+  'add',
+  'addBundle',
+  'addCustom',
+  'item',
+  'interval',
+  'count',
+  'price',
+  'currency',
+  'plusTax',
+];
 
 /**
  * List edit (PROJECT-PLAN P5), for new and existing lists, on the list's draft (ListDraftService, M6.3): every change
@@ -429,11 +439,16 @@ export class ListEditPage implements AsksBeforeLeaving {
     if (!catalog) return undefined;
     switch (asked.kind) {
       case 'plan': {
-        const { planId, interval, intervalCount } = asked;
+        const { planId, interval, intervalCount, price } = asked;
         return catalog.providers.some((provider) =>
           provider.plans.some((plan) => plan.id === planId),
         )
-          ? { kind: 'plan', planId, period: { interval, intervalCount } }
+          ? {
+              kind: 'plan',
+              planId,
+              period: { interval, intervalCount },
+              ...(price && { ownPrice: price }),
+            }
           : `There’s no plan ${planId} in the catalog.`;
       }
       case 'bundle': {
