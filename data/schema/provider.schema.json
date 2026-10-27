@@ -22,6 +22,15 @@
       "patternErrorMessage": "Use a full https:// URL",
       "description": "The home page"
     },
+    "domains": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z]{2,63}$"
+      },
+      "description": "Its other sites' domains, besides its website's, whose pages can name its official resellers (Proton VPN's protonvpn.com)"
+    },
     "category": {
       "type": "string",
       "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
@@ -396,7 +405,7 @@
                 "format": "uri",
                 "pattern": "^https://",
                 "patternErrorMessage": "Use a full https:// URL",
-                "description": "The provider's own page that names it as an official reseller, on the provider's domain"
+                "description": "The provider's own page that names it as an official reseller, on its website's domain or one of its domains"
               },
               "quotes": {
                 "minItems": 1,

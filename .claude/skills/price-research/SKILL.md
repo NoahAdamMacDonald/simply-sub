@@ -45,7 +45,10 @@ API contract's prices are illustrative and never a source. This skill is how to 
   - **Bundles:** the subscribe and pricing pages (page through carousels), the help centre's bundle articles, the
     partners' landing pages, and a search for "<provider> bundle". Each one the provider or a partner sells.
   - **Official resellers:** the provider's own "resellers", "partners", "where to buy", "retail" and "gift cards"
-    pages. Only shops it names as selling its subscription count (BLUEPRINT §4.9). App stores, phone and TV
+    pages, and its blog and news posts on every site it runs (a search such as `site:protonvpn.com/blog reseller`,
+    and "partnered", "voucher"): Proton names its resellers only in a Proton VPN blog post. A post can be out of
+    date, so a reseller page that no longer names a shop wins (Mullvad's 2021 post on Smartech). A provider's
+    other site goes in its `domains` (`domains: [protonvpn.com]`), so its approval page validates. Only shops it names as selling its subscription count (BLUEPRINT §4.9). App stores, phone and TV
     providers that bill its plans or bundle them into their own packages are partners: note them, don't list them.
   - **Terms of service, privacy policy and the other policies** (refunds, cookies, household or sharing rules): they
     hold what pricing pages leave out, such as where it's sold (`availableIn`), the billing period and auto-renewal,

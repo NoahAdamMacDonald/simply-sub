@@ -590,11 +590,11 @@ function checkResellerListing(
       `"${listing.reseller}" isn't in ${resellersFile}${didYouMean(listing.reseller, [...context.resellers.keys()], 'add it there')}`,
     );
   }
-  const domain = siteDomain(provider.website);
-  if (!isOnDomain(listing.approvedBy.url, [domain])) {
+  const own = [siteDomain(provider.website), ...(provider.domains ?? [])];
+  if (!isOnDomain(listing.approvedBy.url, own)) {
     report(
       [...path, 'approvedBy', 'url'],
-      `Must be a page of ${provider.name}'s own site, on ${domain}: only the resellers it names are listed`,
+      `Must be a page of ${provider.name}'s own sites, on ${own.join(' or ')}: only the resellers it names are listed`,
     );
   }
   listing.offers.forEach((offer, offerIndex) => {

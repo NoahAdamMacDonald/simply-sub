@@ -1,20 +1,12 @@
 import * as z from 'zod';
 import { addDuplicateIssues } from './checks';
-import { httpsUrlSchema, planIdSchema, slugSchema, textSchema } from './formats';
+import { domainSchema, httpsUrlSchema, planIdSchema, slugSchema, textSchema } from './formats';
 import { priceSchema } from './price';
 
 // Resellers (BLUEPRINT §4.9): shops that sell a provider's own subscription, such as Amazon's and retailers'
 // vouchers for Mullvad VPN. data/resellers.yaml lists each one once; a provider file says which of them sell its
 // plans, quoting the provider's own page that names them as official resellers. Partners that only use a provider's
 // service in their own (Mozilla VPN runs on Mullvad's servers but sells Mozilla VPN) are never resellers.
-
-/** A domain name in lower case: amazon.ca. */
-const domainSchema = z
-  .string()
-  .regex(
-    /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/,
-    'Use a domain name in lower case (amazon.ca)',
-  );
 
 export const resellerSchema = z.strictObject({
   id: slugSchema.describe(
@@ -90,7 +82,7 @@ export const resellerListingSchema = z.strictObject({
   approvedBy: z
     .strictObject({
       url: httpsUrlSchema.describe(
-        "The provider's own page that names it as an official reseller, on the provider's domain",
+        "The provider's own page that names it as an official reseller, on its website's domain or one of its domains",
       ),
       quotes: z
         .array(textSchema)

@@ -461,7 +461,8 @@ acceptedNetworks: [visa, mastercard, amex, discover]   # omit = unknown → all 
 billingCurrency: { CA: CAD }        # currency actually charged per region (drives FX-fee maths)
 cancelUrl: https://www.netflix.com/cancelplan   # required: its cancel page, or its help article on cancelling
 sources: { pricing: https://help.netflix.com/en/node/24926 }
-# Optional and left out here: aliases, availableIn (section 4.7), cancelFee (text), notes, resellers (section 4.9).
+# Optional and left out here: aliases, domains (its other sites, section 4.9), availableIn (section 4.7), cancelFee
+# (text), notes, resellers (section 4.9).
 # Optional fields are
 # omitted, never empty or null.
 
@@ -632,7 +633,7 @@ can't drift. Everything is exported from `@simply-sub/core`.
 
 | File | Schemas (and inferred types) |
 |---|---|
-| `formats.ts` | `slugSchema`, `dottedSlugSchema`, `planIdSchema`, `bundleIdSchema`, `tierIdSchema`, `rankKeySchema`, `regionSchema`, `currencySchema`, `isoDateSchema`, `httpsUrlSchema`, `iconNameSchema`, `textSchema`, `aliasesSchema` |
+| `formats.ts` | `slugSchema`, `dottedSlugSchema`, `planIdSchema`, `bundleIdSchema`, `tierIdSchema`, `rankKeySchema`, `regionSchema`, `currencySchema`, `isoDateSchema`, `httpsUrlSchema`, `domainSchema`, `iconNameSchema`, `textSchema`, `aliasesSchema` |
 | `price.ts` | `intervalSchema` (`Interval`), `priceSchema` (`Price`) |
 | `feature.ts` | `featuresFileSchema`, `featureSchema` (`Feature`), `featureValueDefSchema`, `featureTierSchema`, `featureValueSchema` (`FeatureValue`) |
 | `category.ts` | `categoriesFileSchema` (`Categories`), `categorySchema`, `serviceCategorySchema` |
@@ -717,6 +718,7 @@ interface Provider {
   name: string;
   aliases?: string[];
   website: string;
+  domains?: string[];        // its other sites, whose pages can name its resellers (protonvpn.com)
   category: string;          // service category
   spendCategory: string;
   acceptedNetworks?: CardNetwork[];          // left out = unknown
@@ -1063,7 +1065,8 @@ Some providers sell their subscription through other shops too: Mullvad's scratc
 Swedish and German retailers, sometimes for less than Mullvad's own price. The catalog lists these **resellers**,
 and Search shows one next to a plan's prices when it's cheaper for the buyer (M5.2).
 - **Only official resellers:** a shop is listed only when the provider's own site names it as one, and its listing
-  quotes that page (`approvedBy: { url, quotes }`, on the provider's domain, which validation checks). Partners that
+  quotes that page (`approvedBy: { url, quotes }`, on the provider's website's domain or one of its other sites'
+  `domains`, such as Proton VPN's protonvpn.com, which validation checks). Partners that
   run their own product on the provider's service (Mozilla VPN, Tailscale and Obscura on Mullvad's servers) don't
   sell the provider's subscription, so they're never listed. The same goes for every other provider.
 - **`data/resellers.yaml`** lists each shop once: `id`, `name`, `website`, and any other `domains` its pages are on
@@ -1533,7 +1536,9 @@ check ("is this a pricing page for X?"). The discovered URLs are saved in the pr
 nightly price check reuses them. **You never type them.**
 
 The provider's **official reseller page** comes from the same steps (paths and links such as `resellers`,
-`partners`, "Where to buy"; Mullvad's is `/en/help/partnerships-and-resellers`). Only the shops it names as selling
+`partners`, "Where to buy"; Mullvad's is `/en/help/partnerships-and-resellers`), and so do its **blog and news
+posts** on every site it runs, searched for "reseller", "partnered" and "voucher": Proton names its resellers only
+in a Proton VPN blog post (M1.15). Only the shops it names as selling
 the provider's own subscription become resellers (section 4.9); partners that run their own product on the
 provider's service don't. Each shop's product pages are then read like a pricing page, for regular prices only (M3.7).
 
@@ -2496,6 +2501,23 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
+**Resolved (2026-10-27, M1.15)**
+- **Proton has official resellers,** named only in Proton VPN's blog: its post on its spring and summer 2025 updates
+  says "We’ve also partnered with ProxyStore … and CoinGate" and "We’re using resellers to handle these
+  cryptocurrency payments". M1.12 read proton.me's pages, not protonvpn.com's blog, and missed them.
+- **A provider's `domains`:** the post is on protonvpn.com, not proton.me, so a provider can list its other sites,
+  and an approval page may be on any of them (section 4.9).
+- **ProxyStore's Proton vouchers** (12 months of VPN Plus, Unlimited, Mail Plus, Drive Plus and Pass Plus) cost
+  Proton's own yearly EUR prices, VAT included. Proton's CAD and USD prices cost less even with sales tax, so Search
+  doesn't show them: core's `resellerDeals` finds none in Alberta, Nova Scotia, Germany or the US at 10%, and only a
+  US user who sets their own rate to 15% would see them. dys2p, which runs ProxyStore, wrote in March 2026 that only
+  Pass vouchers were left; all five were in stock on 2026-10-27.
+- **CoinGate isn't listed:** its shop page answered Forbidden from its firewall, and a page behind a bot check stays
+  unread.
+- **Research reads blogs too:** the price-research skill and section 6.5 search every site's blog and news for
+  resellers. Mullvad's blog has one more, Smartech in Selfridges (2021), which its partnerships page no longer
+  names, so it isn't listed.
+
 **Resolved (2026-10-27, M1.14)**
 - **The grades are Great, Good, Neutral, Poor and Bad** (they were good, leaning good, neutral, leaning bad and
   bad), in core's `policyTiers`, every rubric and every rating.
@@ -2554,7 +2576,8 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 - **Amazon's other 12 stores can't be read:** each shows Mullvad's price only in the basket ("To see the product
   details, add this item to your basket"), on amazon.com and amazon.co.uk among them, and amazon.de answered with an
   error. They stay out until a page shows the price.
-- **The other providers name no resellers:** Proton sells its gift cards in its own store only. The streaming
+- **The other providers name no resellers:** Proton sells its gift cards in its own store only (wrong: a Proton VPN
+  blog post names two, found in M1.15). The streaming
   services are also billed through app stores and phone or TV providers (Netflix's partner billing, Disney+ through
   Apple, Google, Amazon, Roku and carriers, ICI TOU.TV EXTRA in some TELUS and Koodo plans, Crave and TSN as TV
   channels), which are partners under section 4.9, not shops selling the subscription.
