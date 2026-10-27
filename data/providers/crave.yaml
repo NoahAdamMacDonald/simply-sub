@@ -4,10 +4,10 @@ website: https://www.crave.ca
 category: streaming
 spendCategory: streaming
 billingCurrency: { CA: CAD }
-# Crave's terms (plus.crave.ca/en/faq/account-profiles/terms-and-conditions, read 2026-10-27): "The Service is
+# Crave's terms (plus.crave.ca/en/faq/account-profiles/terms-and-conditions, read 2026-10-26): "The Service is
 # intended for use in Canada."
 availableIn: [CA]
-# Sign in, then Account > Subscriptions > Cancel Plan (read 2026-10-27).
+# Sign in, then Account > Subscriptions > Cancel Plan (read 2026-10-26).
 cancelUrl: https://plus.crave.ca/en/faq/plans-billing-bundles/canceling-or-pausing-my-crave-subscription/
 sources: { pricing: https://www.crave.ca/en/subscribe }
 notes: Live events, sports and news include ads on every plan.
