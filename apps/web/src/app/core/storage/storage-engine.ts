@@ -62,6 +62,11 @@ export interface StorageTransaction {
   put<T extends UserTable>(table: T, record: UserRecords[T]): Promise<void>;
   /** Deletes a record outright. */
   delete(table: TransientTable, key: string): Promise<void>;
+  /**
+   * Deletes every record in `table` outright, any that fail their schema too: a backup's Replace and Delete all data
+   * (P13), which leave nothing behind for a sync to pass on.
+   */
+  clear(table: UserTable): Promise<void>;
 }
 
 /** The repositories' way into Dexie. Every record is checked against its schema on the way in and out. */
@@ -189,6 +194,10 @@ export class StorageEngine {
           },
           delete: async (table, key) => {
             await this.db.table(table).delete(key);
+            written = true;
+          },
+          clear: async (table) => {
+            await this.db.table(table).clear();
             written = true;
           },
         }),

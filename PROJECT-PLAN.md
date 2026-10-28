@@ -185,7 +185,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M6.6 | Custom subscriptions page + editor (P12): core's rules in `user/custom-sub-form.ts` (the editor's issues, the record it saves, usage and what a change reaches, the features a plan can list), `CustomSubsRepository.save` and `removeWithItems` (each one transaction with the items), `ss-feature-picker`, and the list editor's [+ Add custom subscription] menu with Create new… (flow F3) (BLUEPRINT §14) | P12 criteria met, the calendar's and exports' with M7 |
 | M6.7 | Lists overview (P3): a card per list with its average a month until the bars, its rank counts (`rankCounts`), View and 🗑 with Undo (`DraftsRepository.deleteList` and `restoreList`), the New Subscription List tile, and every list's feature summary (`featureSummary`) (BLUEPRINT §14) | P3 criteria met (the bars can wait for M7.2) |
 | M6.8 | List view (P4), without the money parts, with `ss-sub-card`'s list variant (§4.3, moved from M4.5), built as `ss-item-card`; core's `listView` (search, sorts and filters, pinned first) in `user/list-view.ts` (BLUEPRINT §14) | Cards, pinning, search/filter and the edit button work |
-| M6.9 | Backup export/import (the "Your data" section of P13, and the first-run dialog's "Import a backup instead"), with an optional passphrase that encrypts the file, and the crypto module it uses (BLUEPRINT §11.5) | Export → delete all → import restores everything, encrypted or not; a wrong passphrase or a tampered file imports nothing |
+| M6.9 | Backup export/import (the "Your data" section of P13, and the first-run dialog's "Import a backup instead"), with an optional passphrase that encrypts the file, and the crypto module it uses (BLUEPRINT §11.5). As built: core's `user/backup.ts` (the file, its checks, Merge), the app's `core/crypto/passphrase-crypto.ts` and `BackupRepository` (BLUEPRINT §14) | Export → delete all → import restores everything, encrypted or not; a wrong passphrase or a tampered file imports nothing |
 | M6.10 | Optional app lock: a passphrase encrypts the user tables at rest, with a lock screen and an idle lock (P13, P15; BLUEPRINT §11.5) | Locked data on disk is unreadable without the passphrase; turning the lock on and off round-trips every table; a wrong passphrase unlocks nothing |
 
 ### M7 — Money, schedule & calendar
@@ -455,7 +455,8 @@ Add these aliases to `_tokens.scss`. They build on the rank tokens in BLUEPRINT 
   and shows its built-in rate, "Sales tax 13% (Ontario)", with a "Use my own rate" checkbox (BLUEPRINT §4.8). A US
   state is optional ("Not given"), and the rate field starts empty, with the hint "Your state and city sales tax on
   subscriptions, if any". Elsewhere: "Prices for United Kingdom already include sales tax."
-- **[Import a backup instead]** arrives with backups (M6.9); until then the dialog has only [Get started].
+- **[Import a backup instead]** (M6.9) opens Import backup (P13) as one Import, with no question, since there's
+  nothing here yet. The backup's settings end the first run.
 
 **Acceptance**
 - [ ] Navigation works with the keyboard
@@ -1091,8 +1092,16 @@ own. A set feature asks for one or more of its values, as enum and number featur
 📍 Ontario, Canada (CAD)
 ```
 **Built so far:** the budgets, Appearance and 📍 (M4.2), each a card ("Location and currency" holds 📍 and the tax
-line under it), and the Catalog line (M4.3). Custom tags have no task yet. Your data (M6.9), Security (M6.10) and
+line under it), the Catalog line (M4.3), and Your data (M6.9). Custom tags have no task yet. Security (M6.10) and
 local sync (Phase 5) come with their tasks.
+- **Your data** (M6.9):
+  - **Export backup:** a dialog with "Protect with a passphrase" (at least 8 characters, typed twice). It downloads
+    the file.
+  - **Import backup:** choose a file → its passphrase if it's encrypted → what it has → Merge, or Replace after
+    asking.
+  - **Delete all data:** typing DELETE, then Home with the first-run dialog.
+
+  The file and the rules are in BLUEPRINT §14.
 - **Search** (M5.6): "Show only what's sold in Canada", which makes Search start with its Sold in filter on
   (`settings.searchSoldOnly`, kept only when it's on). Search's own checkbox still turns it off for one search
   (`sold=0`).

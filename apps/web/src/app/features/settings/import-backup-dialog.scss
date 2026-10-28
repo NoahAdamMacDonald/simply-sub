@@ -1,0 +1,74 @@
+p {
+  margin: 0 0 12px;
+}
+
+h3 {
+  margin: 0 0 8px;
+  font: var(--mat-sys-title-medium);
+  overflow-wrap: anywhere;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+// The file picker is the control, out of sight but focusable; its label looks like an outlined button.
+.file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.choose {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 24px 0 16px;
+  border: 1px solid var(--ss-divider);
+  border-radius: 20px;
+  color: var(--ss-accent-text);
+  font: var(--mat-sys-label-large);
+  cursor: pointer;
+
+  mat-icon {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+  }
+
+  &:hover {
+    background-color: var(--ss-state-hover);
+  }
+}
+
+.file-input:focus-visible + .choose {
+  outline: 2px solid var(--ss-accent-text);
+  outline-offset: 2px;
+}
+
+.file-input:disabled + .choose {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.refusal {
+  margin: 12px 0 0;
+  color: var(--ss-danger);
+  overflow-wrap: anywhere;
+}
+
+.counts {
+  margin: 0 0 12px;
+  padding-left: 20px;
+}
+
+.hint {
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}

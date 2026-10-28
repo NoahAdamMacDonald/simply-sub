@@ -38,6 +38,14 @@ mat-checkbox {
   font: var(--mat-sys-body-small);
 }
 
+// Export, Import and Delete all data, wrapping on a phone.
+.data-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
 .catalog {
   display: flex;
   flex-wrap: wrap;

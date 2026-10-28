@@ -1,0 +1,41 @@
+<form [formRoot]="form">
+  <h2 mat-dialog-title>Export a backup</h2>
+  <mat-dialog-content>
+    <p>
+      A file with your lists, subscriptions, custom subscriptions, feature ranks, tags and settings.
+      Keep it somewhere safe: import it to bring them back here or on another device.
+    </p>
+    <mat-checkbox [checked]="protect()" (change)="protect.set($event.checked)">
+      Protect with a passphrase
+    </mat-checkbox>
+    @if (protect()) {
+      <div class="passphrase">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <mat-label>Passphrase</mat-label>
+          <input
+            matInput
+            type="password"
+            autocomplete="new-password"
+            [formField]="form.passphrase"
+          />
+          <mat-hint>At least {{ minLength }} characters</mat-hint>
+          <mat-error>{{ firstError(form.passphrase) }}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <mat-label>Type it again</mat-label>
+          <input matInput type="password" autocomplete="new-password" [formField]="form.confirm" />
+          <mat-error>{{ firstError(form.confirm) }}</mat-error>
+        </mat-form-field>
+        <p class="warning">
+          Nobody can recover a forgotten passphrase: without it, this backup can’t be opened.
+        </p>
+      </div>
+    }
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button matButton type="button" mat-dialog-close>Cancel</button>
+    <button matButton="filled" type="submit" disabledInteractive [disabled]="busy()">
+      {{ busy() ? (protect() ? 'Encrypting…' : 'Exporting…') : 'Export' }}
+    </button>
+  </mat-dialog-actions>
+</form>

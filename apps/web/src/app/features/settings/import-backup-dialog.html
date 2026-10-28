@@ -1,0 +1,116 @@
+<h2 mat-dialog-title>Import a backup</h2>
+<mat-dialog-content>
+  @switch (step()) {
+    @case ('choose') {
+      <p>Choose a backup file you exported from Simply Sub: simply-sub-backup-….json.</p>
+      <!--
+        The browser's own file picker is the control: keyboard users reach it and open it with Enter or Space, and a
+        click on its label (the button they see) opens it too, with no script in between.
+      -->
+      <input
+        #fileInput
+        id="backup-file"
+        class="file-input"
+        type="file"
+        accept=".json,application/json"
+        cdkFocusInitial
+        [disabled]="busy()"
+        (change)="pick(fileInput)"
+      />
+      <label for="backup-file" class="choose">
+        <mat-icon aria-hidden="true">upload_file</mat-icon>
+        <span>Choose a backup file</span>
+      </label>
+      @if (refusal(); as refusal) {
+        <p class="refusal" role="alert">{{ fileName() }}: {{ refusal }}</p>
+      }
+    }
+    @case ('passphrase') {
+      <form [formRoot]="form" id="passphrase-form">
+        <p>{{ fileName() }} is protected with a passphrase.</p>
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <mat-label>Passphrase</mat-label>
+          <input
+            #passphraseInput
+            matInput
+            type="password"
+            autocomplete="current-password"
+            [formField]="form.passphrase"
+          />
+          <mat-error>{{ firstError(form.passphrase) }}</mat-error>
+        </mat-form-field>
+        @if (refusal(); as refusal) {
+          <p class="refusal" role="alert">{{ refusal }}</p>
+        }
+      </form>
+    }
+    @case ('preview') {
+      <h3 #previewHeading tabindex="-1">{{ fileName() }}</h3>
+      <p>Exported {{ exported() }}. It has:</p>
+      <ul class="counts">
+        @for (line of lines(); track line) {
+          <li>{{ line }}</li>
+        }
+        <li>your settings</li>
+      </ul>
+      @if (!firstRun) {
+        <p class="hint">
+          Merge keeps what’s here and takes what’s newer in the backup. Replace swaps everything
+          here for the backup.
+        </p>
+      }
+    }
+  }
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  @switch (step()) {
+    @case ('choose') {
+      <button matButton type="button" mat-dialog-close>Cancel</button>
+    }
+    @case ('passphrase') {
+      <button matButton type="button" (click)="chooseAgain()">Back</button>
+      <button
+        matButton="filled"
+        type="submit"
+        form="passphrase-form"
+        disabledInteractive
+        [disabled]="busy()"
+      >
+        {{ busy() ? 'Opening…' : 'Open' }}
+      </button>
+    }
+    @case ('preview') {
+      <button matButton type="button" mat-dialog-close>Cancel</button>
+      @if (firstRun) {
+        <button
+          matButton="filled"
+          type="button"
+          disabledInteractive
+          [disabled]="busy()"
+          (click)="replace()"
+        >
+          Import
+        </button>
+      } @else {
+        <button
+          matButton="outlined"
+          type="button"
+          disabledInteractive
+          [disabled]="busy()"
+          (click)="merge()"
+        >
+          Merge
+        </button>
+        <button
+          matButton="filled"
+          type="button"
+          disabledInteractive
+          [disabled]="busy()"
+          (click)="replace()"
+        >
+          Replace
+        </button>
+      }
+    }
+  }
+</mat-dialog-actions>

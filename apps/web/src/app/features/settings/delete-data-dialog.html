@@ -1,0 +1,26 @@
+<form [formRoot]="form">
+  <h2 mat-dialog-title>Delete all data?</h2>
+  <mat-dialog-content>
+    <p id="delete-data-message">
+      Your lists, subscriptions, custom subscriptions, feature ranks, tags and settings are deleted
+      from this browser. This can’t be undone: export a backup first if you might want them back.
+    </p>
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Type {{ word }} to confirm</mat-label>
+      <input
+        matInput
+        autocomplete="off"
+        aria-describedby="delete-data-message"
+        cdkFocusInitial
+        [formField]="form.confirm"
+      />
+      <mat-error>{{ firstError(form.confirm) }}</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button matButton type="button" mat-dialog-close>Cancel</button>
+    <button matButton="filled" type="submit" class="danger" disabledInteractive [disabled]="busy()">
+      Delete all data
+    </button>
+  </mat-dialog-actions>
+</form>
