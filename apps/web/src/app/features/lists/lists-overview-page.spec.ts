@@ -132,10 +132,10 @@ describe('ListsOverviewPage', () => {
   const cards = () =>
     Array.from(page().querySelectorAll('li.card')).map((card) => ({
       name: text(card.querySelector('.name')),
-      cost: text(
-        card.querySelector('.cost')?.querySelectorAll('[aria-hidden], span:last-child')[0],
+      totals: Array.from(card.querySelectorAll('ss-budget-totals .total [aria-hidden]')).map(
+        (total) => text(total),
       ),
-      count: text(card.querySelector('.cost span:last-child')),
+      count: text(card.querySelector('.count')),
       ranks: Array.from(card.querySelectorAll('ss-rank-counts li'))
         .map((rank) => text(rank))
         .filter((rank) => !rank?.startsWith('0 ')),
@@ -158,16 +158,20 @@ describe('ListsOverviewPage', () => {
     expect(cards()).toEqual([
       {
         name: 'Work Related',
-        // €60 a year is about $7.85 a month.
-        cost: '≈ $26.84 / mo average',
+        // Netflix's $18.99 a month with Alberta's 5%, from Jan 12; Mullvad's €60 on Jan 20, which includes tax.
+        totals: ['$19.94 this month', '≈ $333.44 this year'],
         count: '2 subscriptions',
         ranks: ['1 Essential', '1 Wanted'],
       },
-      { name: 'Family', cost: 'No subscriptions yet', count: 'No subscriptions yet', ranks: [] },
+      { name: 'Family', totals: [], count: 'No subscriptions yet', ranks: [] },
     ]);
-    expect(text(page().querySelector('li.card .cost .visually-hidden'))).toBe(
-      'about $26.84 a month on average,',
-    );
+    // Without budgets, the amounts alone: no bars.
+    expect(page().querySelector('ss-budget-bar')).toBeNull();
+    expect(
+      Array.from(page().querySelectorAll('li.card ss-budget-totals .visually-hidden')).map(
+        (spoken) => text(spoken),
+      ),
+    ).toEqual(['$19.94 this month', 'about $333.44 this year']);
     // Every rank's count is there, zeros included, in grey.
     expect(
       page().querySelectorAll('li.card')[1].querySelectorAll('ss-rank-counts li'),

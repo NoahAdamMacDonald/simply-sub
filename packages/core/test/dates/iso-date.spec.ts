@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { addDays, addMonths, toIsoDate, weekdayOf } from '../../src/dates/iso-date';
+import { addDays, addMonths, daysBetween, toIsoDate, weekdayOf } from '../../src/dates/iso-date';
 
 // Core never reads the clock, so its tests use a fixed `today`. vitest.config.ts runs them in
 // America/Vancouver: UTC−7 in October, UTC−8 after the clocks go back on Nov 1, 2026.
@@ -72,6 +72,38 @@ describe('addMonths', () => {
     expect(() => addMonths('2026-02-30', 1)).toThrow(RangeError);
   });
 
+  it.each([
+    {
+      what: 'a short month’s end onto a long one',
+      date: '2026-02-28',
+      months: 1,
+      day: 31,
+      expected: '2026-03-31',
+    },
+    { what: 'onto a 30-day month', date: '2026-02-28', months: 2, day: 31, expected: '2026-04-30' },
+    {
+      what: 'itself, no months on',
+      date: '2026-02-28',
+      months: 0,
+      day: 31,
+      expected: '2026-02-28',
+    },
+    { what: 'back a month', date: '2026-02-28', months: -1, day: 31, expected: '2026-01-31' },
+    {
+      what: 'onto a leap February',
+      date: '2027-02-28',
+      months: 12,
+      day: 29,
+      expected: '2028-02-29',
+    },
+    { what: 'an earlier day', date: '2026-10-23', months: 1, day: 5, expected: '2026-11-05' },
+  ])(
+    'on a day of its own, $what: $date + $months on the $day = $expected',
+    ({ date, months, day, expected }) => {
+      expect(addMonths(date, months, day)).toBe(expected);
+    },
+  );
+
   it('takes the years 0 to 99 as they are, as a date input passes through them while a year is typed', () => {
     expect(addMonths('0002-11-12', 1)).toBe('0002-12-12');
     expect(addMonths('0099-12-31', 2)).toBe('0100-02-28');
@@ -88,5 +120,22 @@ describe('weekdayOf', () => {
     { date: '2028-02-29', weekday: 2 },
   ])('$date is day $weekday', ({ date, weekday }) => {
     expect(weekdayOf(date)).toBe(weekday);
+  });
+});
+
+describe('daysBetween', () => {
+  it.each([
+    { from: today, to: today, days: 0 },
+    { from: today, to: '2026-11-02', days: 10 },
+    { from: '2026-11-02', to: today, days: -10 },
+    { from: '2026-10-31', to: '2026-11-02', days: 2 },
+    { from: '2028-02-28', to: '2028-03-01', days: 2 },
+    { from: '2026-01-01', to: '2027-01-01', days: 365 },
+  ])('$from to $to is $days days, whatever the time zone', ({ from, to, days }) => {
+    expect(daysBetween(from, to)).toBe(days);
+  });
+
+  it("rejects a date that isn't real", () => {
+    expect(() => daysBetween('2026-02-30', today)).toThrow(RangeError);
   });
 });

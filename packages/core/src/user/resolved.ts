@@ -1,4 +1,5 @@
 import { bundleFeatures } from '../catalog/bundle-deal';
+import { isoDateSchema } from '../catalog/formats';
 import type { FxRates } from '../catalog/convert';
 import { pickPrice, typedPrice, type PickedPrice, type PriceContext } from '../catalog/pick-price';
 import { planCategories } from '../catalog/plan-categories';
@@ -8,14 +9,17 @@ import { catalogIconFile, type CatalogData, type SnapshotProvider } from '../cat
 import type { IsoDate } from '../dates/iso-date';
 import { providedKeys, type RankKey } from '../ranking/rank-keys';
 import { effectiveRanks, type ProfileRanks } from '../ranking/resolve-rank';
+import { nextCharge, type Charge } from '../schedule/charges';
+import { itemStatus } from '../schedule/item-status';
+import type { TaxPlace } from '../tax/sales-tax-rate';
 import { customIconUrl } from './custom-sub-form';
 import type { CustomSubscription } from './custom-subscription';
 import type { ListItem } from './list-item';
 import type { Rank } from './rank';
 
 // The view models pages show (PROJECT-PLAN §3.4). resolveItem joins a list item to the catalog or its custom
-// subscription, prices it for the user and lists what it provides (M4.6), with each key's rank for the item (M6.1).
-// M7.1 adds the status and the next charge, and ListMetrics around them.
+// subscription, prices it for the user and lists what it provides (M4.6), with each key's rank for the item (M6.1),
+// its status and its next charge (M7.1). ListMetrics adds up a list's (schedule/list-metrics.ts).
 
 /** Whether an item is active today (PROJECT-PLAN §3.3). */
 export interface ItemStatus {
@@ -81,6 +85,11 @@ export interface ResolvedItem {
   /** The price override, with the item's billing period, while it applies (dates before its `until`). */
   override?: PickedPrice;
   /**
+   * The price override as a price for the item's billing period, whatever the date: charges dated before its `until`
+   * cost it (§3.1). `override` is the same while it applies today.
+   */
+  overridePrice?: PickedPrice;
+  /**
    * What the item costs per month today, in the user's currency: the override while it applies, else the price
    * plus each add-on's × its quantity. Before sales tax, like the price tags, except an override or custom price
    * typed with tax included.
@@ -96,6 +105,10 @@ export interface ResolvedItem {
   providedKeys: RankKey[];
   /** Each provided key's rank for this item, in providedKeys' order: its override, else the profile's (M6.1). */
   effectiveRanks: Record<RankKey, Rank>;
+  /** Active or Inactive today, ending soon, and whether its next charge is a manual renewal (M7.1, §3.3). */
+  status: ItemStatus;
+  /** Its first charge on or after today, sales tax included; none when it has none to come (M7.1). */
+  nextCharge?: Charge;
 }
 
 /**
@@ -130,6 +143,8 @@ export interface ResolveContext {
   today: IsoDate;
   /** The profile's ranks, under the items' overrides. */
   profileRanks: ProfileRanks;
+  /** Where the user pays sales tax, for the next charge: Settings' country, province and rate. Left out, no tax. */
+  taxPlace?: TaxPlace;
 }
 
 /**
@@ -153,9 +168,12 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
     | 'listId'
     | 'region'
     | 'override'
+    | 'overridePrice'
     | 'monthlyEquivalent'
     | 'providedKeys'
     | 'effectiveRanks'
+    | 'status'
+    | 'nextCharge'
   >;
   switch (source.kind) {
     case 'catalog': {
@@ -244,8 +262,22 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
       break;
     }
   }
-  const override = activeOverride(item, parts.price, priceContext(context, region), context.today);
+  const overridePrice = typedOverride(item, parts.price, priceContext(context, region));
+  const { until } = item.priceOverride ?? {};
+  const override = until === undefined || context.today < until ? overridePrice : undefined;
   const keys = providedKeys(parts.features, catalog.features);
+  const charged = {
+    item,
+    listId: item.listId,
+    price: parts.price,
+    addOns: parts.addOns,
+    overridePrice,
+  };
+  // The item dialog resolves its form's item while a date is still being typed: that has no charges, and no status.
+  const dated = hasDates(item.billing);
+  const next = dated
+    ? nextCharge(charged, context.today, context.taxPlace ?? { country: context.country })
+    : undefined;
   return {
     ok: true,
     resolved: {
@@ -254,6 +286,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
       ...parts,
       region,
       ...(override && { override }),
+      ...(overridePrice && { overridePrice }),
       monthlyEquivalent:
         override?.monthlyEquivalent ??
         parts.addOns.reduce(
@@ -262,8 +295,24 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         ),
       providedKeys: keys,
       effectiveRanks: effectiveRanks(keys, item.rankOverrides, context.profileRanks),
+      status: dated ? itemStatus(item, context.today, next) : { kind: 'inactive', manual: false },
+      ...(next && { nextCharge: next }),
     },
   };
+}
+
+/**
+ * Whether every date of `billing` is one: a stored item's always are (its schema checks them), the item dialog's form
+ * while a date is typed may not be.
+ */
+function hasDates(billing: ListItem['billing']): boolean {
+  const dates =
+    billing.mode === 'recurring'
+      ? [billing.anchorDate, billing.startDate, billing.endDate].filter(
+          (date) => date !== undefined,
+        )
+      : billing.windows.flatMap(({ start, end }) => [start, end]);
+  return dates.every((date) => isoDateSchema.safeParse(date).success);
 }
 
 function priceContext(
@@ -303,16 +352,13 @@ function providerLinks(
   };
 }
 
-/** The item's price override as a price for its billing period, when it applies today (before its `until`). */
-function activeOverride(
+/** The item's price override as a price for its billing period, whatever the date. */
+function typedOverride(
   { priceOverride, billing }: ListItem,
   price: PickedPrice,
   context: PriceContext,
-  today: IsoDate,
 ): PickedPrice | undefined {
-  if (!priceOverride || (priceOverride.until !== undefined && today >= priceOverride.until)) {
-    return undefined;
-  }
+  if (!priceOverride) return undefined;
   return typedPrice(
     {
       amount: priceOverride.amount,

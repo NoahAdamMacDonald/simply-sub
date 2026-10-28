@@ -312,6 +312,65 @@ async function openView(page, listId = LIST) {
           /^≈ \$\d+\.\d\d \/ mo average · 3 subscriptions$/.test(await summary(page)),
         await summary(page),
       );
+      // This month and this year (M7.2): Netflix's $18.99 with Alberta's 5% and Mullvad's €5 (tax included) on the
+      // 12th of each month, and Crave's $22 from Dec 1. Without budgets, the amounts alone.
+      const money = view(page).locator('.money');
+      const totals = () =>
+        money
+          .locator('.total [aria-hidden]')
+          .evaluateAll((spans) => spans.map((span) => span.textContent.trim()));
+      check(
+        `${label}: the side gives this month's and this year's totals, with no bars without budgets`,
+        (await totals()).join(' | ') === '≈ $27.79 this month | ≈ $356.54 in 2026' &&
+          (await money.locator('ss-budget-bar').count()) === 0,
+        (await totals()).join(' | '),
+      );
+      const shares = await view(page)
+        .locator('ss-item-card .share')
+        .evaluateAll((elements) => elements.map((element) => element.textContent.trim()));
+      check(
+        `${label}: each card gives its share of the next 12 months`,
+        shares.length === 3 &&
+          shares.every((share) => /^\d+% of list over the next 12 months$/.test(share)),
+        shares.join(' | '),
+      );
+      // Under 960 px the totals come above the cards; from it, on their right.
+      const moneyBox = await money.boundingBox();
+      const cardBox = await view(page).locator('ss-item-card').first().boundingBox();
+      check(
+        `${label}: the totals are ${viewport.width < 960 ? 'above' : 'beside'} the cards`,
+        viewport.width < 960
+          ? moneyBox.y + moneyBox.height <= cardBox.y
+          : moneyBox.x >= cardBox.x + cardBox.width,
+      );
+      // With budgets, a bar for each, named by its heading, and the totals of them.
+      const [settings] = await readTable(page, 'settings');
+      await putRecord(page, 'settings', { ...settings, monthlyBudget: 200, annualBudget: 1000 });
+      await page.reload();
+      await until('the bars', async () => (await money.locator('ss-budget-bar').count()) === 2);
+      const named = await money
+        .locator('ss-budget-bar')
+        .evaluateAll((bars) =>
+          bars.map(
+            (bar) =>
+              `${document.getElementById(bar.getAttribute('aria-labelledby')).textContent.trim()}: ${bar.getAttribute('aria-valuetext')}`,
+          ),
+        );
+      check(
+        `${label}: with budgets, the side has a bar for each, named by its heading, with the totals of the budgets`,
+        named.join(' | ') ===
+          'Monthly budget: 13%, $27.79 of $200.00 | Annual budget: 35%, $356.54 of $1,000.00' &&
+          (await totals()).join(' | ') ===
+            '≈ $27.79 of $200.00 this month | ≈ $356.54 of $1,000.00 in 2026',
+        `${named.join(' | ')} / ${(await totals()).join(' | ')}`,
+      );
+      await noSideScroll(page, viewport, `${label}, with budgets`);
+      await page.screenshot({ path: shot('view-budgets'), fullPage: true });
+      await axeCheck(page, `${label}, with budgets`);
+      await putRecord(page, 'settings', settings);
+      await page.reload();
+      await until('no bars', async () => (await money.locator('ss-budget-bar').count()) === 0);
+      await until('three cards', async () => (await cards(page)).length === 3);
       check(
         `${label}: the cards go by price per month, highest first, under a hidden heading`,
         (await layout(page)).join(' | ') ===
@@ -321,9 +380,11 @@ async function openView(page, listId = LIST) {
       const statuses = await view(page)
         .locator('ss-item-card ss-status-badge')
         .evaluateAll((badges) => badges.map((badge) => badge.textContent.trim()));
+      // Mullvad renews by hand (M7.1): its badge says when, after its icon's ligature.
       check(
-        `${label}: each card's status, and Netflix's tag`,
-        statuses.join(' | ') === 'Inactive · active from Dec 1, 2026 | Active | Active' &&
+        `${label}: each card's status, Mullvad's "Renew by", and Netflix's tag`,
+        statuses.join(' | ') ===
+          'Inactive · active from Dec 1, 2026 | Active | Activeautorenew Renew by Nov 12' &&
           (
             await view(page).locator(`[data-item="${NETFLIX}"] ss-tag-chip`).textContent()
           ).trim() === 'Family',
@@ -354,9 +415,10 @@ async function openView(page, listId = LIST) {
       await page.screenshot({ path: shot('view'), fullPage: true });
       await axeCheck(page, `${label}, the list`);
 
-      // The Tab order: the header's ← Lists and Edit list (the feedback after M6.9), the search box, Sort, then each
-      // card's 📌 and details button. A click on the title focuses <main> (the skip link's target), so Tab starts
-      // from its top.
+      // The Tab order: the header's ← Lists, Edit list and Export (the feedback after M6.9, M7.5), at 360 px the
+      // folded mini calendar's button above the cards, the search box, Sort, then each card's 📌 and details button.
+      // From 960 px the mini calendar is in the side column, after the cards. A click on the title focuses <main> (the
+      // skip link's target), so Tab starts from its top.
       await view(page).locator('h1').click();
       const stops = [];
       for (let i = 0; i < 10; i++) {
@@ -364,20 +426,21 @@ async function openView(page, listId = LIST) {
         // A name with a colon comes back quoted, and a link's line ends in a colon.
         stops.push((await stop(page)).replace(/^'(.*)'$/, '$1').replace(/:$/, ''));
       }
-      const order = stops.slice(stops.indexOf('link "Lists"')).slice(0, 8);
+      const expected = [
+        'link "Lists"',
+        'link "Edit list"',
+        'button "Export"',
+        ...(viewport === NARROW ? ['button "Calendar"'] : []),
+        'textbox "Search this list"',
+        'button "Sort and filter"',
+        'button "Pin Crave Premium"',
+        'button "Details: Crave Premium"',
+        'button "Pin Netflix Standard"',
+      ];
+      const order = stops.slice(stops.indexOf('link "Lists"')).slice(0, expected.length);
       check(
-        `${label}: Tab goes ← Lists, Edit list, the search box, Sort, then each card's 📌 and details`,
-        order.join(' | ') ===
-          [
-            'link "Lists"',
-            'link "Edit list"',
-            'textbox "Search this list"',
-            'button "Sort and filter"',
-            'button "Pin Crave Premium"',
-            'button "Details: Crave Premium"',
-            'button "Pin Netflix Standard"',
-            'button "Details: Netflix Standard"',
-          ].join(' | '),
+        `${label}: Tab goes ← Lists, Edit list, Export, the search box, Sort, then each card's 📌 and details`,
+        order.join(' | ') === expected.join(' | '),
         stops.join(' | '),
       );
 
@@ -544,6 +607,62 @@ async function openView(page, listId = LIST) {
       await noSideScroll(page, viewport, `${label}, the details`);
       await page.screenshot({ path: shot('view-details'), fullPage: true });
       await axeCheck(page, `${label}, a card's details`);
+
+      // Its next charge as charged, with Alberta's 5% (M7.1), and Wrong date? by keyboard.
+      const nextCharge = async () =>
+        (await details.locator('.next-charge > span').textContent()).replace(/\s+/g, ' ').trim();
+      check(
+        `${label}: the details give the next charge as charged, tax included`,
+        (await nextCharge()).startsWith('Next charge Nov 12, 2026: $19.94, with $0.95 tax'),
+        await nextCharge(),
+      );
+      await keyToName(page, 'Wrong date? Netflix Standard');
+      await page.keyboard.press('Enter');
+      const wrongDate = page.locator('ss-wrong-date-dialog');
+      await wrongDate.waitFor();
+      await until('focus in its field', () =>
+        page.evaluate(() => !!document.activeElement?.closest('ss-wrong-date-dialog input')),
+      );
+      check(
+        `${label}: Wrong date? asks for the next charge, filled in, with focus in the field`,
+        (await wrongDate.locator('input').inputValue()) === '2026-11-12',
+      );
+      await page.screenshot({ path: shot('view-wrong-date') });
+      await axeCheck(page, `${label}, Wrong date?`);
+      await page.keyboard.press('Control+A');
+      await page.keyboard.type('2026-11-14');
+      await page.keyboard.press('Enter');
+      await wrongDate.waitFor({ state: 'detached' });
+      await until('the new anchor stored', async () =>
+        (await readTable(page, 'items')).some(
+          (item) => item.id === NETFLIX && item.billing.anchorDate === '2026-11-14',
+        ),
+      );
+      await until('the card following it', async () =>
+        (await nextCharge()).includes('Nov 14, 2026'),
+      );
+      check(
+        `${label}: the date becomes the item's anchor, saved at once with no draft, and focus goes back`,
+        (await readTable(page, 'drafts')).length === 0 &&
+          (await page.evaluate(() => document.activeElement?.classList.contains('wrong-date'))),
+      );
+      // Back as it was, for what follows. The Enter that saves mustn't open it again once focus is back on its button.
+      await page.keyboard.press('Enter');
+      await wrongDate.waitFor();
+      await until('focus in its field', () =>
+        page.evaluate(() => !!document.activeElement?.closest('ss-wrong-date-dialog input')),
+      );
+      await page.keyboard.press('Control+A');
+      await page.keyboard.type('2026-11-12');
+      await page.keyboard.press('Enter');
+      await until('the anchor back', async () => (await nextCharge()).includes('Nov 12, 2026'));
+      await sleep(1000);
+      check(
+        `${label}: Enter saves and closes it, and doesn't open it again`,
+        (await wrongDate.count()) === 0,
+        `${await wrongDate.count()} open`,
+      );
+
       await keyToName(page, 'Edit Netflix Standard');
       await page.keyboard.press('Enter');
       const dialog = page.locator('ss-item-dialog');

@@ -1,6 +1,6 @@
 import type { ComponentHarnessConstructor, HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { Component, signal } from '@angular/core';
+import { Component, signal, type WritableSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { MATERIAL_ANIMATIONS } from '@angular/material/core';
 import { MatFormFieldHarness } from '@angular/material/form-field/testing';
@@ -25,6 +25,7 @@ import {
   until,
   type TestStorage,
 } from '../../core/storage/storage.testing';
+import { captureDownloads, csvText } from '../../shared/export/downloads.testing';
 import { alberta, fx, searchCatalogData } from '../../shared/sub-card/search.testing';
 import { CustomSubEditor } from '../custom-subs/custom-sub-editor';
 import { ListViewPage } from './list-view-page';
@@ -90,6 +91,7 @@ describe('ListViewPage', () => {
   });
 
   afterEach(() => {
+    vi.restoreAllMocks();
     document.querySelectorAll('.cdk-overlay-container').forEach((overlay) => overlay.remove());
   });
 
@@ -228,6 +230,25 @@ describe('ListViewPage', () => {
       `/lists/${work.id}/edit`,
     );
     expect(text(page().querySelector('.shown'))).toBe('');
+  });
+
+  it('shows this month and this year, and each card’s share of the next 12 months (M7.2)', async () => {
+    await plant();
+    await open(work.id);
+    await until(() => groups().length === 4);
+    // Today is Oct 25. Netflix's $18.99 with Alberta's 5% on the 12th of each month; Mullvad's €60 on Jan 20, which
+    // includes tax; Crave's $22 from Dec 1.
+    expect(
+      Array.from(page().querySelectorAll('.money .total [aria-hidden]')).map((total) =>
+        text(total),
+      ),
+    ).toEqual(['$19.94 this month', '≈ $356.54 in 2026']);
+    // No budgets: no bars, and no prompt off Home.
+    expect(page().querySelector('.money ss-budget-bar')).toBeNull();
+    expect(page().querySelector('.money a.prompt')).toBeNull();
+    const share = (itemId: string) => text(card(itemId)?.querySelector('.share'));
+    expect(share(netflix.id)).toBe('41% of list over the next 12 months');
+    expect(share(mullvad.id)).toBe('16% of list over the next 12 months');
   });
 
   it('opens a card’s details, with how it’s billed, its links and Edit for the item', async () => {
@@ -439,6 +460,59 @@ describe('ListViewPage', () => {
     expect(page().querySelector('.unsaved a')?.getAttribute('href')).toBe(`/lists/${work.id}/edit`);
   });
 
+  it('exports the list from Export, in each format, and says what it saved (M7.5)', async () => {
+    const downloads = captureDownloads();
+    await plant();
+    await open(work.id);
+    await until(() => groups().length === 4);
+    page().querySelector<HTMLElement>('.export')?.click();
+    await harness.fixture.whenStable();
+    const choices = Array.from(
+      document.querySelectorAll<HTMLElement>('.mat-mdc-menu-panel [mat-menu-item]'),
+    );
+    expect(choices.map(spoken)).toEqual([
+      'CSV (.csv)',
+      'Excel (.xlsx)',
+      'JSON (.json)',
+      'Text (.txt)',
+      'Calendar (.ics)',
+    ]);
+
+    choices[0].click();
+    // papaparse loads with the first CSV: give it time when every spec runs at once.
+    await until(() => downloads.length === 1, 5000);
+    expect(downloads[0].name).toBe('simply-sub-work-related-2026-10-25.csv');
+    // Only this list's items, in the order they were added.
+    const rows = (await csvText(downloads[0])).split('\r\n');
+    expect(rows.map((row) => row.split(',').slice(0, 3).join(' · '))).toEqual([
+      'List · Service · Plan',
+      'Work Related · Netflix · Standard',
+      'Work Related · Mullvad VPN · Mullvad VPN',
+      'Work Related · Crave · Premium',
+    ]);
+    await until(
+      () =>
+        document.querySelector('.mat-mdc-snack-bar-label')?.textContent?.trim() ===
+        'Saved simply-sub-work-related-2026-10-25.csv',
+    );
+  });
+
+  it('warns when the list alone goes over the monthly budget, with its month in the Calendar (M7.6)', async () => {
+    const saved = TestBed.inject(SettingsStore).saved as WritableSignal<Settings | undefined>;
+    saved.set({ ...alberta, monthlyBudget: 50 });
+    await plant();
+    await open(work.id);
+    await until(() => page().querySelector('ss-budget-warnings .warning') !== null);
+    const warning = page().querySelector('ss-budget-warnings .warning');
+    // January: Netflix, Crave (from Dec 1) and Mullvad's ≈ $94.16.
+    expect(text(warning?.querySelector('.text [aria-hidden="true"]'))).toBe(
+      'This list’s payments in January 2027 add up to ≈ $137.20, over your $50.00 monthly budget.',
+    );
+    expect(warning?.querySelector('a')?.getAttribute('href')).toBe(
+      `/calendar?month=2027-01&lists=${work.id}`,
+    );
+  });
+
   it('offers to add from the catalog or a custom subscription to an empty list', async () => {
     const empty = await TestBed.inject(ListsRepository).create({ name: 'Empty' });
     await open(empty.id);
@@ -453,6 +527,8 @@ describe('ListViewPage', () => {
     expect(spoken(page().querySelector('ss-empty-state button'))).toBe('Add custom subscription');
     expect(page().querySelector('.features')).toBeNull();
     expect(page().querySelector('.search')).toBeNull();
+    // Nothing to export.
+    expect(page().querySelector('.export')).toBeNull();
   });
 
   it('says a list that isn’t there doesn’t exist', async () => {

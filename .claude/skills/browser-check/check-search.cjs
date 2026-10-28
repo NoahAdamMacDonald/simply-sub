@@ -476,6 +476,33 @@ async function addItem(page, planId) {
         (await netflix.locator('.plan-name').textContent()).trim() === 'Standard',
       await shown(netflix.locator('ss-status-badge')),
     );
+    // A provider renewed by hand says when to renew by, from its next charge (M7.1).
+    await putRecord(page, 'items', {
+      id: '0192f1c5-1c2d-7e3f-8a4b-5c6d7e8f9a0c',
+      listId: LIST_ID,
+      source: { kind: 'catalog', planId: 'mullvad.vpn' },
+      billing: {
+        mode: 'recurring',
+        interval: 'year',
+        intervalCount: 1,
+        anchorDate: '2027-01-20',
+        autoRenew: false,
+      },
+      tagIds: [],
+      rankOverrides: {},
+      pinned: false,
+      createdAt: '2026-10-20T12:00:00.000Z',
+      updatedAt: '2026-10-20T12:00:00.000Z',
+    });
+    const mullvad = card(page, 'Mullvad VPN');
+    await until('Mullvad listed', async () =>
+      (await shown(mullvad.locator('ss-status-badge'))).includes('Renew by'),
+    );
+    check(
+      'a provider renewed by hand shows when to renew by',
+      (await shown(mullvad.locator('ss-status-badge'))) === 'Active · 1 list Renew by Jan 20',
+      await shown(mullvad.locator('ss-status-badge')),
+    );
     await page.screenshot({ path: path.join(outDir, 'ca-listed-1280.png'), fullPage: true });
     await context.close();
   }

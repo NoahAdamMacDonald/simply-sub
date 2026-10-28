@@ -1,0 +1,35 @@
+:host {
+  display: block;
+}
+
+// A card with the over colour's stripe down its left side and a warning icon, then the words, and the Calendar link on
+// their right from 600 px, under them below that.
+.warning {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 4px 12px;
+  margin: 0 0 12px;
+  padding: 10px 16px 10px 20px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+  box-shadow: inset 4px 0 0 var(--budget-over);
+
+  mat-icon {
+    color: var(--rank-unwanted-text);
+  }
+
+  a {
+    grid-column: 2;
+    justify-self: start;
+    color: var(--ss-accent-text);
+  }
+
+  @media (min-width: 600px) {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+
+    a {
+      grid-column: 3;
+    }
+  }
+}

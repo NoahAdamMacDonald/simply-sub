@@ -53,7 +53,9 @@ import {
   newItemForm,
   periodChoices,
   periodOf,
+  periodText,
   pickPrice,
+  planTitle,
   rankingSections,
   renewalAfterPeriodChange,
   samePeriod,
@@ -84,9 +86,10 @@ import { MetricsService } from '../../core/metrics/metrics-service';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { CustomSubsRepository } from '../../core/storage/custom-subs-repository';
 import { RankingsRepository } from '../../core/storage/rankings-repository';
+import { TagsRepository } from '../../core/storage/tags-repository';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
 import { CalendarHeader } from '../../shared/calendar-header';
-import { periodText } from '../../shared/billing-text';
+import { nearDateText } from '../../shared/charge-text';
 import { focusFirstError } from '../../shared/focus-first-error';
 import { isoDateProviders } from '../../shared/iso-date-adapter';
 import { issueErrors } from '../../shared/form-issues';
@@ -95,7 +98,7 @@ import { PriceTag } from '../../shared/price-tag/price-tag';
 import { amountText, intervalSpoken, intervalText } from '../../shared/price-tag/price-text';
 import { ProviderIcon } from '../../shared/provider-icon/provider-icon';
 import { RankSelect } from '../../shared/rank/rank-select';
-import { catalogIcon, planTitle } from '../../shared/sub-card/card-text';
+import { catalogIcon } from '../../shared/sub-card/card-text';
 import { TagPicker } from '../../shared/tags/tag-picker';
 import { fillScreenWhenNarrow } from '../../shared/wide-dialog';
 
@@ -186,6 +189,7 @@ export class ItemDialog {
   private readonly fx = inject(FxStore);
   private readonly customSubs = inject(CustomSubsRepository);
   private readonly rankings = inject(RankingsRepository);
+  private readonly tags = inject(TagsRepository);
   private readonly metrics = inject(MetricsService);
   private readonly drafts = inject(ListDraftService);
   private readonly confirmer = inject(ConfirmService);
@@ -461,7 +465,10 @@ export class ItemDialog {
     return result?.ok ? result.resolved : undefined;
   });
 
-  /** The footer's "≈ $18.99 / mo": the monthly equivalent, before tax, with ≈ when it's converted. */
+  /**
+   * The footer's "≈ $18.99 / mo · next charge Nov 12": the monthly equivalent, before tax, with ≈ when it's converted,
+   * and the date of its next charge as the form has it (M7.1).
+   */
   protected readonly monthly = computed<ChoiceText | undefined>(() => {
     const resolved = this.preview();
     if (!resolved) return undefined;
@@ -469,9 +476,11 @@ export class ItemDialog {
     const average = monthlyAverage([resolved], this.currency());
     if (average.leftOut > 0) return undefined;
     const amount = amountText(average.amount, average.currency, this.country());
+    const next = resolved.nextCharge;
+    const nextText = next ? ` next charge ${nearDateText(next.date, this.today())}` : '';
     return {
-      shown: `${average.approx ? '≈ ' : ''}${amount} / mo`,
-      spoken: `${average.approx ? 'about ' : ''}${amount} a month`,
+      shown: `${average.approx ? '≈ ' : ''}${amount} / mo${nextText && ` ·${nextText}`}`,
+      spoken: `${average.approx ? 'about ' : ''}${amount} a month${nextText && `,${nextText}`}`,
     };
   });
 
@@ -682,6 +691,10 @@ export class ItemDialog {
     // Ranks are kept for the keys it provides, or all of them when it can't be priced to know.
     const provided = this.preview()?.providedKeys ?? Object.keys(this.model().rankOverrides);
     const fields = itemFromForm(this.model(), this.context(provided));
+    // A tag deleted since it was picked, in Settings or another tab, isn't saved back onto the item (M6.11).
+    if (this.tags.status() === 'ready') {
+      fields.tagIds = fields.tagIds.filter((id) => this.tags.byId().has(id));
+    }
     const draft = this.drafts.byList().get(listId);
     const title = this.title();
     if (

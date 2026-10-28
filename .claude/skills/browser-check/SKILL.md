@@ -245,6 +245,112 @@ Then at 1280 px, with Playwright's clock installed:
 
 It runs axe on each screen and dialog, and checks for horizontal scroll.
 
+`check-tags.cjs` (M6.11) checks custom tags on `ng serve` for a Canadian in Alberta. It writes to IndexedDB Family and
+Work, and Work Related with Netflix Standard (tagged both) and Mullvad VPN (tagged Family).
+
+In both themes at both widths, keyboard only, it checks:
+- Settings' Custom tags: each row's colour named ("Colour of Family: Blue"), ✎ opening the name in place, another
+  tag's name refused in any case with focus kept in the field, Escape changing nothing, and Enter saving with focus
+  back on ✎;
+- the colour button opening the palette on the colour it has, an arrow key to the next preset, and a hex colour, each
+  saved;
+- ⊕ adding a tag with a colour no tag has, then ✕ deleting it at once, focus moving to the previous row's ✕;
+- ✕ on a tag in use: "Used by 1 subscription" with focus on Cancel, then the tag gone from IndexedDB and the items;
+- the list editor's ✎ on Netflix, the dialog's Delete a tag menu by keyboard, "Used by 2 subscriptions" (the draft's
+  items and the list's counted once each), the chip gone, every item and the draft without the tag, and focus in the
+  field once no tag is left;
+- List view with no tag chips, and its Sort menu's Tags saying there are none.
+
+It runs axe on the card, the editor and its error, the question, the menu and List view, and checks for horizontal
+scroll. Wait for the item dialog to put focus on its heading before tabbing: it moves focus there once it's open,
+which undoes Tab presses made sooner.
+
+`check-home.cjs` (M7.3) checks Home on `ng serve` for a Canadian in Alberta, with no lists, then with Work Related
+(Netflix Standard, monthly on the 12th) and Family (Mullvad VPN, yearly on Jan 20, renewed by hand) written to
+IndexedDB.
+
+In both themes at both widths, keyboard only, it checks:
+- no lists: the empty state's Create a list, Browse services and Import backup, and Enter on the first;
+- the mini calendar's dot on the 12th of this month (it reads the machine's date), reached with the arrow keys from
+  today's tab stop, its tooltip "Netflix $19.94" and Enter opening `/calendar?month=`;
+- every list's totals without budgets, "Set a monthly budget →" to Settings, and with budgets a bar for each, the
+  monthly one over at 133%;
+- Next payments, Subscription Lists by keyboard, and the calendar beside the totals at 1280 px and above them at 360.
+
+Light at 1280 px, it also checks Home's totals against the sum of the Lists overview's cards, to a cent a list (each
+amount is rounded for display). It runs axe on each state, the open tooltip included, and checks for horizontal
+scroll.
+
+`check-calendar.cjs` (M7.4) checks the Calendar on `ng serve` for a Canadian in Alberta with a $60 monthly budget. It
+writes to IndexedDB Work Related (Netflix Standard on the 12th, Crave Premium billed on the 31st) and Family (Mullvad
+VPN, yearly on Jan 20, renewed by hand; Netflix Standard with ads on Specific dates, Sep 2 to Nov 1 every year).
+
+In both themes at both widths, keyboard only, it checks:
+- the days with charges: October's 2nd, 12th and 31st, November's 12th and 30th (the window ended), February's 12th
+  and 28th;
+- the bar: a past month paid in full, a future one at $0.00, this one up to today with the budget's tick;
+- at 1280 px the grid: today's tab stop, arrows to the 12th, Enter opening its panel (focus on its heading, Netflix,
+  its list link, Renews automatically), Escape putting focus back, Page Down to the next month in the URL;
+- at 360 px the agenda, and Enter on a payment opening its day in a bottom sheet with focus on it, which Escape
+  closes;
+- Showing by keyboard (Space unticks Work Related): the URL's `lists`, `settings.calendarHiddenLists`, and the same
+  after a reload; Next month and Today;
+- Home's dots on the Calendar's days this month, and List view's mini calendar, folded under 960 px until its button
+  opens it.
+
+It runs axe on the page, the panel, the open select, the sheet and List view, setting aside contrast hits on text
+under an open panel as `check-list-view.cjs` does, and checks for horizontal scroll. Wait about 600 ms before judging a
+bottom sheet: it slides up.
+
+`check-exports.cjs` (M7.5) checks the exports on `ng serve` for a Canadian in Alberta. It writes to IndexedDB Work
+Related (Netflix Standard on the 12th, tagged Family and with a tag deleted since; Crave Premium billed on the 31st)
+and Family (Mullvad VPN, yearly on Jan 20, renewed by hand), then reads every file it downloads:
+- List view's Export by keyboard: the CSV (its byte order mark, header and rows, live tags only), the workbook
+  (parsed by the repository's exceljs: Summary, the list's sheet, Payments), the JSON, the text, and the .ics (an
+  all-day event per charge, Crave's in every one of 12 months), with "Saved <name>" after each;
+- the Calendar's Export to file (the main button's .ics for both lists, the menu's payment schedule in date order
+  and its workbook) and Sync calendar for each app: the .ics, then its steps with focus on the heading, and Escape
+  back on Sync calendar;
+- offline at 360 px, a library not loaded yet: the snack bar's "The file couldn't be made".
+
+Every format runs light at 1280 px; the other runs open each menu and download one file of each page. It runs axe on
+the open menus and each app's steps, and checks for horizontal scroll. Wait for focus on a menu's first item before
+pressing the arrows: keys sent while it opens land elsewhere. A closing menu stays in the DOM a moment: look for
+`.mat-mdc-menu-panel:not(.mat-menu-panel-exit-animation)`. Material nests two `.mat-mdc-snack-bar-label`s, and the live
+announcer holds the same words: take the first.
+
+`check-budget-banners.cjs` (M7.6) checks the budget warnings on `ng serve` for a Canadian in Alberta with a $50 monthly
+and a $500 annual budget, written into the stored settings. Work Related has Netflix Standard and Crave Premium ($43.04
+a month), and Family Mullvad VPN (about $94.16 on Jan 20). In both themes at both widths, keyboard only:
+- Home: January 2027 (≈ $137.20) and this year (≈ $610.64), above the calendar, in a status region and read with
+  "Warning:"; Tab to the January link, and Enter opens the Calendar on that month;
+- List view: Work Related only this year ($516.47) with no link; Family January 2027 (≈ $94.16), whose link opens the
+  Calendar on it showing Family alone;
+- with the budgets at $200 and $1,000, no warning, and the status region still there.
+
+It runs axe on both pages with their warnings and checks for horizontal scroll.
+
+Since M7.1, the scripts check the charges:
+- `check-list-view.cjs`: Mullvad's "Renew by Nov 12", Netflix's next charge as charged in its details ("Next charge Nov
+  12, 2026: $19.94, with $0.95 tax", Alberta's 5%), and Wrong date? by keyboard: the dialog filled in with focus in
+  its field, a new date saved as the item's anchor with no draft, the card following it, focus back on Wrong date?,
+  and the Enter that saves not opening it again. Wait for focus in the field before typing: the dialog moves it there
+  once it's open.
+- `check-list-edit.cjs`: a row's "Renews Nov 12 · auto".
+- `check-search.cjs`: a provider renewed by hand (Mullvad, yearly, auto-renew off) shows "Renew by Jan 20".
+
+Since M7.2, the totals:
+- `check-lists.cjs`: each card's "≈ $27.79 this month · ≈ $333.44 this year · 2 subscriptions" with no bars, then
+  with budgets written to the settings (and a reload), its bars named "Work Related, monthly budget", the monthly one
+  over its $20 in red at 139%, with axe.
+- `check-list-view.cjs`: the side column's "≈ $27.79 this month | ≈ $356.54 in 2026", each card's "…% of list over the
+  next 12 months", the totals above the cards at 360 px and beside them at 1280, then with budgets a bar for each named
+  by its heading ("Monthly budget: 13%, $27.79 of $200.00"), with axe.
+- `check-list-edit.cjs`: the footer's "This month ≈ $27.79".
+
+A record written straight to IndexedDB isn't seen by Dexie's live queries: reload the page after it, as the planting
+steps do.
+
 Since the feedback after M6.8, the other scripts check more:
 - `check-search.cjs`: at 360 px each shop's price is on its line under one "Cheaper at".
 - `check-item-dialog.cjs`: the three date boxes have the same height.

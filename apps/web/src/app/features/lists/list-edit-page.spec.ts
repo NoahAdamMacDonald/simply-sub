@@ -212,23 +212,24 @@ describe('ListEditPage', () => {
       expect(rows()).toEqual([
         {
           title: 'Netflix · Standard',
-          details: 'Monthly · auto-renews · 1 custom rank',
+          details: 'Renews Nov 12 · auto · 1 custom rank',
           tags: ['Family'],
           price: expect.stringMatching(/^\$18\.99 \/ mo a month \+ tax$/),
           problem: undefined,
         },
         {
           title: 'Mullvad VPN',
-          details: 'Yearly · renews manually',
+          details: 'Renews Jan 20, 2027 · manual',
           tags: [],
           price: expect.stringContaining('$94.16 / year'),
           problem: undefined,
         },
       ]);
       // €60 a year is about $7.85 a month.
-      expect(footer()).toBe('No unsaved changes · ≈ $26.84 / mo average');
+      // This month: Netflix's Oct 12, with Alberta's 5% (M7.2).
+      expect(footer()).toBe('No unsaved changes · This month $19.94 · ≈ $26.84 / mo average');
       expect(text('.footer .visually-hidden')).toBe(
-        'No unsaved changes, about $26.84 a month on average',
+        'No unsaved changes, this month $19.94, about $26.84 a month on average',
       );
       expect((await drafts()).map((draft) => draft.listId)).toEqual([work.id]);
       expect(page().querySelector('[role=status]')).toBeNull();
@@ -377,7 +378,9 @@ describe('ListEditPage', () => {
         problem: 'This plan is no longer in the catalog',
         price: undefined,
       });
-      expect(footer()).toBe('No unsaved changes · ≈ $26.84 / mo average (1 not counted)');
+      expect(footer()).toBe(
+        'No unsaved changes · This month $19.94 · ≈ $26.84 / mo average (1 not counted)',
+      );
     });
 
     it('starts again from the saved list when another tab saves or drops the draft', async () => {
@@ -476,7 +479,7 @@ describe('ListEditPage', () => {
         expect(await (await control(loader, 'Next renewal', MatInputHarness)).getValue()).toBe(
           '2027-10-25',
         );
-        expect(inDialog('.monthly [aria-hidden]')).toBe('$15.83 / mo');
+        expect(inDialog('.monthly [aria-hidden]')).toBe('$15.83 / mo · next charge Oct 25, 2027');
         await until(() => location.path() === editor());
         expect(location.urlChanges.at(-1)).toBe(`replace: ${editor()}`);
 
@@ -624,7 +627,7 @@ describe('ListEditPage', () => {
 
       await until(() => dialog() === null);
       await until(() => rows().length === 3);
-      expect(rows()[2]).toMatchObject({ title: 'Crave · Basic', details: 'Monthly · auto-renews' });
+      expect(rows()[2]).toMatchObject({ title: 'Crave · Basic', details: 'Renews Nov 25 · auto' });
       expect(document.querySelector('.mat-mdc-snack-bar-container')?.textContent).toContain(
         'Added Crave Basic',
       );
@@ -932,7 +935,7 @@ describe('ListEditPage', () => {
       answer = true;
       expect(inDialog('.add-ons legend')).toBe('Add-ons');
       await (await loader.getHarness(MatCheckboxHarness.with({ label: 'Extra member' }))).check();
-      expect(inDialog('.monthly [aria-hidden]')).toBe('$26.98 / mo');
+      expect(inDialog('.monthly [aria-hidden]')).toBe('$26.98 / mo · next charge Nov 25');
       await press(loader, 'Add to list');
 
       await until(() => dialog() === null);

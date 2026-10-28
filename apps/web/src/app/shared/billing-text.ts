@@ -1,16 +1,9 @@
-import type { Billing, Interval, ResolvedAddOn } from '@simply-sub/core';
+import { periodText, type Billing, type Charge, type IsoDate } from '@simply-sub/core';
+import { nearDateText } from './charge-text';
 import { dateText } from './date-text';
 
-// How an item is billed, in words: the list editor's rows (P5), the item dialog's periods (P6) and List view's cards
-// (P4). Its renewal date ("Renews Nov 12") comes with the charges (M7.1).
-
-/** How often a period bills, in words: monthly, every 3 months, every 30 days. */
-export function periodText(interval: Interval, count: number): string {
-  if (count === 1) {
-    return { day: 'daily', week: 'weekly', month: 'monthly', year: 'yearly' }[interval];
-  }
-  return `every ${count} ${interval}s`;
-}
+// How an item is billed, in words: the list editor's rows (P5) and List view's cards (P4), with its renewal date from
+// its next charge (M7.1). The period's words are core's periodText, as the exports write them.
 
 /** "Monthly · auto-renews", "Yearly · renews manually · ends Nov 3, 2027", "Specific dates, billed monthly". */
 export function billingText(billing: Billing): string {
@@ -23,7 +16,25 @@ export function billingText(billing: Billing): string {
   ].join(' · ');
 }
 
-/** "Extra member", or "Extra member × 2". */
-export function addOnText({ name, quantity }: ResolvedAddOn): string {
-  return quantity === 1 ? name : `${name} × ${quantity}`;
+/**
+ * When an item renews, from its next charge (P5's rows): "Renews Nov 12 · auto", "Renews Nov 3 · manual · ends Mar 1,
+ * 2027", or "Specific dates · next charge Sep 2". With no charge to come: "Ended Oct 1, 2026", or "Specific dates ·
+ * none to come".
+ */
+export function renewalText(billing: Billing, next: Charge | undefined, today: IsoDate): string {
+  if (billing.mode === 'limited') {
+    return next
+      ? `Specific dates · next charge ${nearDateText(next.date, today)}`
+      : 'Specific dates · none to come';
+  }
+  if (!next) {
+    return billing.endDate !== undefined && billing.endDate <= today
+      ? `Ended ${dateText(billing.endDate)}`
+      : billingText(billing);
+  }
+  return [
+    `Renews ${nearDateText(next.date, today)}`,
+    next.manual ? 'manual' : 'auto',
+    ...(billing.endDate === undefined ? [] : [`ends ${dateText(billing.endDate)}`]),
+  ].join(' · ');
 }

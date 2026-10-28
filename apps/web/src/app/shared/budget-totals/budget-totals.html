@@ -1,0 +1,35 @@
+<!-- ≈ is read "about", as ss-price's is. -->
+@for (line of lines(); track line.kind) {
+  <div class="budget">
+    @if (line.budget !== undefined) {
+      @if (!compact()) {
+        <h2 class="heading" [id]="id + '-' + line.kind">{{ line.heading }}</h2>
+      }
+      <div class="line">
+        <!-- A card's bars are named for their list; a page's by their headings. -->
+        <ss-budget-bar
+          class="bar"
+          [value]="line.amount"
+          [max]="line.budget"
+          [attr.aria-label]="compact() ? name() + ', ' + line.heading.toLowerCase() : null"
+          [attr.aria-labelledby]="compact() ? null : id + '-' + line.kind"
+        />
+        <span class="total">
+          <span aria-hidden="true">{{ line.shown }}</span>
+          <span class="visually-hidden">{{ line.spoken }}</span>
+        </span>
+      </div>
+    } @else {
+      <p class="total">
+        <span aria-hidden="true">{{ line.shown }}</span>
+        <span class="visually-hidden">{{ line.spoken }}</span>
+      </p>
+      @if (prompt()) {
+        <a class="prompt" routerLink="/settings">{{ line.prompt }} →</a>
+      }
+    }
+  </div>
+}
+@if (notCounted(); as text) {
+  <p class="not-counted">{{ text }}</p>
+}

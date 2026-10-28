@@ -40,6 +40,12 @@
   grid-area: price;
 }
 
+.share {
+  margin: 2px 0 0;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -55,6 +61,16 @@
   flex-direction: column;
   gap: 12px;
   padding-top: 12px;
+}
+
+// The next charge, with Wrong date? beside it, or under it when there's no room.
+.next-charge {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 8px;
+  margin: 0;
+  font: var(--mat-sys-body-medium);
 }
 
 .facts {

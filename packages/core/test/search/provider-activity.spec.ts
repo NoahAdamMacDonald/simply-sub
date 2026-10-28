@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { providerActivity, readCatalogSource, type ListItem } from '../../src';
+import {
+  providerActivity,
+  providerRenewals,
+  readCatalogSource,
+  type Charge,
+  type ItemStatus,
+  type ListItem,
+  type ResolvedItem,
+} from '../../src';
 import { catalog } from '../catalog/catalog-files';
 
 // The fixture catalog's bundle is Netflix Standard with Crave Premium, sold by Crave.
@@ -113,5 +121,88 @@ describe('providerActivity', () => {
       listIds: [family],
       plans: [{ planId: 'crave.premium', kind: 'active' }],
     });
+  });
+});
+
+describe('providerRenewals', () => {
+  /** A resolved item with only what renewals read: its source, status and next charge. */
+  const resolved = (
+    source: ListItem['source'],
+    status: ItemStatus,
+    next?: Pick<Charge, 'date' | 'manual'>,
+  ): ResolvedItem =>
+    ({
+      item: item(work, source),
+      status,
+      ...(next && {
+        nextCharge: { amount: 1, tax: 0, currency: 'CAD', converted: false, ...next },
+      }),
+    }) as unknown as ResolvedItem;
+  const active = (extra: Partial<ItemStatus> = {}): ItemStatus => ({
+    kind: 'active',
+    manual: false,
+    ...extra,
+  });
+
+  it('renews by hand when its soonest next charge across its items does', () => {
+    const renewals = providerRenewals(
+      [
+        resolved(plan('mullvad.vpn'), active({ manual: true }), {
+          date: '2026-11-03',
+          manual: true,
+        }),
+        resolved(plan('netflix.standard'), active(), { date: '2026-11-12', manual: false }),
+        resolved(plan('netflix.standard-ads'), active({ manual: true }), {
+          date: '2026-12-01',
+          manual: true,
+        }),
+      ],
+      bundles,
+    );
+    expect(renewals.get('mullvad')).toEqual({ renewBy: '2026-11-03' });
+    // Netflix's soonest is automatic.
+    expect(renewals.get('netflix')).toEqual({});
+  });
+
+  it('ends only when every item that’s going on ends soon: the latest end', () => {
+    const ending = (endsOn: string) => active({ endsOn });
+    expect(
+      providerRenewals(
+        [
+          resolved(plan('netflix.standard'), ending('2026-11-03')),
+          resolved(plan('netflix.standard-ads'), ending('2026-11-20')),
+          // Ended already: it doesn't keep the others from ending.
+          resolved(plan('netflix.standard'), { kind: 'inactive', manual: false }),
+        ],
+        bundles,
+      ).get('netflix'),
+    ).toEqual({ endsOn: '2026-11-20' });
+    expect(
+      providerRenewals(
+        [
+          resolved(plan('netflix.standard'), ending('2026-11-03')),
+          resolved(plan('netflix.standard'), active()),
+        ],
+        bundles,
+      ).get('netflix'),
+    ).toEqual({});
+  });
+
+  it('counts a bundle for each provider whose plan it includes', () => {
+    const renewals = providerRenewals(
+      [
+        resolved(
+          { kind: 'bundle', bundleId: 'bundle.netflix-crave' },
+          active({ endsOn: '2026-11-10' }),
+          {
+            date: '2026-11-01',
+            manual: true,
+          },
+        ),
+      ],
+      bundles,
+    );
+    expect(renewals.get('netflix')).toEqual({ endsOn: '2026-11-10', renewBy: '2026-11-01' });
+    expect(renewals.get('crave')).toEqual({ endsOn: '2026-11-10', renewBy: '2026-11-01' });
   });
 });

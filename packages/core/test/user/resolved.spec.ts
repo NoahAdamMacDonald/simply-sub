@@ -11,7 +11,7 @@ import {
   type ResolvedItem,
   type UnresolvedReason,
 } from '../../src';
-import { catalog } from '../catalog/catalog-files';
+import { catalog, edited } from '../catalog/catalog-files';
 
 const data = buildCatalogData(readCatalogSource(catalog()), 'https://sub.simplely.ca/icons/');
 
@@ -391,6 +391,132 @@ describe('resolveItem', () => {
       );
       expect(result.override?.amount).toBeCloseTo(10 / 0.7243);
       expect(result.override).not.toHaveProperty('taxIncluded');
+    });
+  });
+
+  describe('its status and next charge (M7.1)', () => {
+    const ontario: ResolveContext = {
+      ...canadian,
+      taxPlace: { country: 'CA', subdivision: 'CA-ON' },
+    };
+
+    it('has its next charge as charged, with the province’s tax, and its status', () => {
+      const netflix = resolved(
+        resolveItem(item({ kind: 'catalog', planId: 'netflix.standard' }), ontario),
+      );
+      expect(netflix.nextCharge).toEqual({
+        date: '2026-11-12',
+        amount: 18.99 + 18.99 * 0.13,
+        tax: 18.99 * 0.13,
+        currency: 'CAD',
+        itemId: netflix.item.id,
+        listId,
+        converted: false,
+        manual: false,
+      });
+      expect(netflix.status).toEqual({ kind: 'active', manual: false });
+      // Without a tax place, nothing is added.
+      expect(resolved(resolveItem(netflix.item, canadian)).nextCharge?.tax).toBe(0);
+    });
+
+    it('adds no tax to a price that includes it everywhere (Mullvad), and renews it by hand', () => {
+      const files = edited(
+        catalog(),
+        'data/providers/mullvad.yaml',
+        ['plans', 0, 'prices', 0, 'taxIncluded'],
+        {
+          quote: 'Including VAT.',
+        },
+      );
+      const withQuote = buildCatalogData(
+        readCatalogSource(files),
+        'https://sub.simplely.ca/icons/',
+      );
+      const mullvad = resolved(
+        resolveItem(
+          item(
+            { kind: 'catalog', planId: 'mullvad.vpn' },
+            {
+              billing: {
+                mode: 'recurring',
+                interval: 'month',
+                intervalCount: 1,
+                anchorDate: '2026-11-03',
+                autoRenew: false,
+              },
+            },
+          ),
+          { ...ontario, catalog: withQuote },
+        ),
+      );
+      expect(mullvad.nextCharge).toMatchObject({
+        date: '2026-11-03',
+        tax: 0,
+        converted: true,
+        manual: true,
+      });
+      expect(mullvad.nextCharge?.amount).toBeCloseTo(5 / 0.664);
+      expect(mullvad.status).toEqual({ kind: 'active', manual: true });
+    });
+
+    it('keeps the override for the charges before its until, though it has ended today', () => {
+      const offer = resolved(
+        resolveItem(
+          item(
+            { kind: 'catalog', planId: 'netflix.standard' },
+            { priceOverride: { amount: 9.99, currency: 'CAD', until: '2026-10-01' } },
+          ),
+          ontario,
+        ),
+      );
+      expect(offer).not.toHaveProperty('override');
+      expect(offer.overridePrice).toMatchObject({ amount: 9.99, taxIncluded: true });
+      expect(offer.nextCharge?.amount).toBeCloseTo(18.99 * 1.13);
+    });
+
+    it('has no charge or status for a form’s item whose date is still being typed', () => {
+      const typing = (billing: ListItem['billing']) =>
+        resolved(
+          resolveItem(item({ kind: 'catalog', planId: 'netflix.standard' }, { billing }), ontario),
+        );
+      for (const billing of [
+        { mode: 'recurring', interval: 'month', intervalCount: 1, anchorDate: '', autoRenew: true },
+        {
+          mode: 'limited',
+          windows: [{ start: '2026-09-02', end: '', repeatYearly: true }],
+          interval: 'month',
+          intervalCount: 1,
+        },
+      ] as ListItem['billing'][]) {
+        const result = typing(billing);
+        expect(result).not.toHaveProperty('nextCharge');
+        expect(result.status).toEqual({ kind: 'inactive', manual: false });
+      }
+    });
+
+    it('is ending soon within 30 days of its end date, with no charge to come once it’s past', () => {
+      const ending = resolved(
+        resolveItem(
+          item(
+            { kind: 'catalog', planId: 'netflix.standard' },
+            {
+              billing: {
+                mode: 'recurring',
+                interval: 'month',
+                intervalCount: 1,
+                anchorDate: '2026-11-12',
+                endDate: '2026-11-20',
+                autoRenew: true,
+              },
+            },
+          ),
+          ontario,
+        ),
+      );
+      expect(ending.status).toEqual({ kind: 'active', endsOn: '2026-11-20', manual: false });
+      expect(ending.nextCharge?.ends).toBe(true);
+      const free = resolved(resolveItem(item({ kind: 'catalog', planId: 'proton.free' }), ontario));
+      expect(free).not.toHaveProperty('nextCharge');
     });
   });
 

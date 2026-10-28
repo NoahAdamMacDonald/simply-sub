@@ -1,14 +1,10 @@
 /**
- * Saves `text` as a file the browser downloads, named `name`: a Blob URL on a link that's clicked, then let go. No
- * markup is written, so the strict CSP and Trusted Types allow it (BLUEPRINT §11.5).
+ * Saves `content` as a file the browser downloads, named `name`: a Blob URL on a link that's clicked, then let go. No
+ * markup is written, so the strict CSP and Trusted Types allow it (BLUEPRINT §11.5). The backup's text, or an
+ * export's text or bytes (M7.5).
  */
-export function saveTextFile(
-  document: Document,
-  name: string,
-  text: string,
-  type = 'application/json',
-): void {
-  const url = URL.createObjectURL(new Blob([text], { type }));
+export function saveFile(document: Document, name: string, content: BlobPart, type: string): void {
+  const url = URL.createObjectURL(new Blob([content], { type }));
   const link = document.createElement('a');
   link.href = url;
   link.download = name;

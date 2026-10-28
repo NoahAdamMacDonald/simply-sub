@@ -1,1 +1,228 @@
-<h1>Calendar</h1>
+<ss-page-header heading="Calendar">
+  <!-- The lists shown, over the next 12 months (P10, M7.5): Sync calendar's steps for each app, and the files. -->
+  @if (state() === 'ready') {
+    <button matButton="outlined" type="button" class="sync" [matMenuTriggerFor]="syncMenu">
+      <mat-icon>calendar_add_on</mat-icon>
+      Sync calendar
+      <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #syncMenu>
+      @for (app of calendarApps; track app.id) {
+        <button mat-menu-item type="button" (click)="sync(app.id)">{{ app.name }}</button>
+      }
+    </mat-menu>
+    <ss-split-button label="Export to file" [items]="exportChoices" (action)="exportFile($event)" />
+  }
+</ss-page-header>
+
+@switch (state()) {
+  @case ('loading') {
+    <p class="note">Loading your lists…</p>
+  }
+  @case ('error') {
+    <p class="note">Your lists couldn't be read.</p>
+  }
+  @case ('ready') {
+    <!-- The month shown: what's been paid so far of its total, against the monthly budget (P10, BLUEPRINT §8.1.1). -->
+    <div class="month-bar">
+      <ss-budget-bar
+        labelMode="amount"
+        [value]="bar().spent"
+        [max]="bar().total"
+        [marker]="bar().budget"
+        [attr.aria-label]="'Paid so far in ' + title()"
+      />
+      <p class="month-total">
+        <span aria-hidden="true">{{ bar().totalText }}</span>
+        <span class="visually-hidden">{{ bar().totalSpoken }} in {{ title() }}</span>
+      </p>
+    </div>
+
+    <div class="controls">
+      <mat-form-field appearance="outline" class="showing" subscriptSizing="dynamic">
+        <mat-label>Showing</mat-label>
+        <mat-select multiple [value]="shownLists()" (selectionChange)="setLists($event.value)">
+          <mat-select-trigger>{{ showingText() }}</mat-select-trigger>
+          @for (list of listChoices(); track list.id) {
+            <mat-option [value]="list.id">{{ list.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <div class="nav">
+        <button matIconButton type="button" aria-label="Previous month" (click)="step(-1)">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <mat-form-field appearance="outline" class="month" subscriptSizing="dynamic">
+          <mat-label>Month</mat-label>
+          <mat-select [value]="monthIndex()" (selectionChange)="setMonth($event.value)">
+            @for (name of monthNames; track name; let index = $index) {
+              <mat-option [value]="index">{{ name }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="year" subscriptSizing="dynamic">
+          <mat-label>Year</mat-label>
+          <mat-select [value]="month().slice(0, 4)" (selectionChange)="setYear($event.value)">
+            @for (year of years(); track year) {
+              <mat-option [value]="year">{{ year }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <button matIconButton type="button" aria-label="Next month" (click)="step(1)">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+        <button matButton="outlined" type="button" class="today" (click)="toToday()">Today</button>
+      </div>
+    </div>
+
+    <p class="note loading" role="status">{{ pricing() ? 'Loading your payments…' : '' }}</p>
+    @if (notShown(); as text) {
+      <p class="note">{{ text }}</p>
+    }
+
+    <h2 id="calendar-title" class="visually-hidden">{{ title() }}</h2>
+    <div class="body" [class.with-panel]="selectedDay() !== undefined">
+      @if (agenda()) {
+        <!-- Under 600 px: the month's payments by date; a payment opens its day in a bottom sheet. -->
+        <div class="agenda">
+          @for (day of agendaDays(); track day.date) {
+            <section class="agenda-day" [attr.aria-labelledby]="'agenda-' + day.date">
+              <h3 [id]="'agenda-' + day.date">{{ day.heading }}</h3>
+              <ul>
+                @for (entry of day.entries; track entry.key) {
+                  <li>
+                    <!-- Spaces go inside the spans: screen readers need them between the parts. -->
+                    <button
+                      type="button"
+                      class="entry"
+                      (click)="openDay(day.date, $event)"
+                      [attr.data-key]="entry.key"
+                    >
+                      <ss-provider-icon [src]="entry.iconUrl" [name]="entry.name" size="24" />
+                      <span class="entry-name">{{ entry.title }} </span>
+                      <span class="entry-amount">
+                        <span aria-hidden="true">{{ entry.amount.shown }}</span>
+                        <span class="visually-hidden">{{ entry.amount.spoken }}</span>
+                      </span>
+                      @if (entry.charge.manual) {
+                        <mat-icon aria-hidden="true">autorenew</mat-icon>
+                        <span class="visually-hidden">, renew manually</span>
+                      }
+                    </button>
+                  </li>
+                }
+              </ul>
+            </section>
+          } @empty {
+            <p class="note">No payments in {{ title() }}.</p>
+          }
+        </div>
+      } @else {
+        <!-- One tab stop, moved with the arrow keys; a day's name says its payments, and Enter opens them. -->
+        <table class="grid" role="grid" aria-labelledby="calendar-title">
+          <thead>
+            <tr>
+              @for (weekday of weekdays; track weekday[0]) {
+                <th scope="col">
+                  <span aria-hidden="true">{{ weekday[0] }}</span>
+                  <span class="visually-hidden">{{ weekday[1] }}</span>
+                </th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for (week of weeks(); track $index) {
+              <tr>
+                @for (day of week; track day.date) {
+                  <td [class.other]="!day.inMonth">
+                    @if (day.inMonth) {
+                      <div
+                        class="cell"
+                        [class.today]="day.date === today()"
+                        [class.selected]="day.date === selectedDay()?.date"
+                      >
+                        <!--
+                          The day's control: its date, named with its payments, over the whole cell, so a click anywhere
+                          opens it. Its name holds all it shows (WCAG 2.5.3), so the chips are beside it, not in it.
+                        -->
+                        <button
+                          type="button"
+                          class="day"
+                          [attr.data-date]="day.date"
+                          [attr.aria-current]="day.date === today() ? 'date' : null"
+                          [attr.aria-label]="day.label"
+                          [tabindex]="day.date === focusDay() ? 0 : -1"
+                          (click)="openDay(day.date, $event)"
+                          (focus)="focusDay.set(day.date)"
+                          (keydown)="moveFocus($event)"
+                        >
+                          {{ day.number }}
+                        </button>
+                        <!-- A chip's click opens the day on its charge; the keys reach it through the day. -->
+                        <div class="content" aria-hidden="true">
+                          @for (chip of day.chips; track chip.key) {
+                            <span
+                              class="chip"
+                              [attr.data-key]="chip.key"
+                              (click)="openDay(day.date, $event)"
+                            >
+                              <ss-provider-icon [src]="chip.iconUrl" [name]="chip.name" size="20" />
+                              <span class="chip-amount">{{ chip.amount }}</span>
+                              <span class="chip-name">{{ chip.name }}</span>
+                              @if (chip.manual) {
+                                <mat-icon class="chip-manual">autorenew</mat-icon>
+                              }
+                            </span>
+                          }
+                          @if (day.more > 0) {
+                            <span class="more">+{{ day.more }} more</span>
+                          }
+                          @if (day.total) {
+                            <span class="day-total">{{ day.total }}</span>
+                          }
+                        </div>
+                      </div>
+                    } @else {
+                      <span class="number" aria-hidden="true">{{ day.number }}</span>
+                    }
+                  </td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
+        @if (selectedDay(); as day) {
+          <ss-day-panel
+            class="side-panel"
+            [day]="day"
+            [focusKey]="selectedKey()"
+            (closed)="closeDay()"
+          />
+        }
+      }
+    </div>
+
+    @if (upcoming().length > 0) {
+      <section class="upcoming" aria-labelledby="upcoming-heading">
+        <h2 id="upcoming-heading">Upcoming</h2>
+        <ul>
+          @for (payment of upcoming(); track payment.key) {
+            <li>
+              <span class="date">{{ payment.date }} </span>
+              <span class="name">{{ payment.name }} </span>
+              <span>
+                <span aria-hidden="true">{{ payment.amount.shown }}</span>
+                <span class="visually-hidden">{{ payment.amount.spoken }}</span>
+              </span>
+              @if (payment.manual) {
+                <mat-icon class="manual" aria-hidden="true">autorenew</mat-icon>
+                <span class="visually-hidden">, renew manually</span>
+              }
+            </li>
+          }
+        </ul>
+      </section>
+    }
+  }
+}

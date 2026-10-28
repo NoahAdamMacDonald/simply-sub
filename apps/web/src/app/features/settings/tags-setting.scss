@@ -1,0 +1,61 @@
+@use '../../shared/tags/tag-dot';
+
+:host {
+  display: block;
+}
+
+.hint {
+  margin: 0 0 8px;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}
+
+.tags {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+// The swatch is a 40px target, as the icon buttons beside it are.
+.swatch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--ss-state-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 0;
+  }
+
+  .tag-dot {
+    @include tag-dot.dot(20px);
+  }
+}
+
+.name {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font: var(--mat-sys-body-large);
+}

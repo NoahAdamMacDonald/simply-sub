@@ -1,0 +1,49 @@
+@use 'tag-dot';
+
+:host {
+  display: block;
+}
+
+.colours {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  legend {
+    margin-bottom: 4px;
+    padding: 0;
+    color: var(--ss-text-muted);
+    font: var(--mat-sys-body-small);
+  }
+}
+
+// Each colour is a radio button, so the arrow keys move between them. The target is 32px, past WCAG's 24px minimum.
+.swatch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  .tag-dot {
+    @include tag-dot.dot(20px);
+  }
+
+  // The chosen colour gets a ring in the text colour, which contrasts with the card in both themes.
+  input:checked + .tag-dot {
+    box-shadow:
+      0 0 0 2px var(--ss-card-bg),
+      0 0 0 4px var(--ss-text);
+  }
+
+  input:focus-visible + .tag-dot {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 5px;
+  }
+}

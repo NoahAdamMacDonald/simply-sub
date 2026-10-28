@@ -1,3 +1,5 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   DestroyRef,
@@ -7,6 +9,7 @@ import {
   computed,
   effect,
   inject,
+  linkedSignal,
   signal,
 } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
@@ -18,11 +21,14 @@ import { MatInput } from '@angular/material/input';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
-  featureSummary,
   listFilterCount,
   listFilterOptions,
   listView,
+  monthOf,
+  monthRange,
   typeCounts,
+  type IsoDate,
+  type IsoMonth,
   type ResolvedItem,
   type Tag,
 } from '@simply-sub/core';
@@ -36,8 +42,12 @@ import { CustomSubsRepository } from '../../core/storage/custom-subs-repository'
 import { ItemsRepository } from '../../core/storage/items-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
 import { TagsRepository } from '../../core/storage/tags-repository';
+import { BudgetTotals } from '../../shared/budget-totals/budget-totals';
+import { BudgetWarnings } from '../../shared/budget-warnings/budget-warnings';
 import { EmptyState } from '../../shared/empty-state/empty-state';
+import { Exporter, type ListExportFormat } from '../../shared/export/exporter';
 import { FeatureSummary } from '../../shared/feature-summary/feature-summary';
+import { MiniCalendar, type CalendarCharge } from '../../shared/mini-calendar/mini-calendar';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { ItemCard } from '../../shared/sub-card/item-card';
 import { TypeCounts } from '../../shared/type-counts/type-counts';
@@ -49,12 +59,16 @@ import { ListFilters, listQuery, noListFilters, type ListFilterState } from './l
 /**
  * List view (PROJECT-PLAN P4, M6.8): one list's subscriptions as cards (ss-item-card), pinned ones first, with what the
  * list costs a month on average and how many it has, a search box and the Sort menu (core's listView), 📌 saved
- * straight to the item, each card's Edit and the list's, and on the side its types and feature summary (§3.2). M7.2 adds the budget
- * bars and each card's share, M7.4 the mini calendar, M7.5 Export and M8 the optimizations button.
+ * straight to the item, each card's Edit and the list's, and on the side this month's and this year's totals against
+ * the budgets, with each card's share of the list (M7.2), its mini calendar (M7.4, collapsed under 960 px), then its
+ * types and feature summary (§3.2), Export (M7.5), and the list's budget warnings (M7.6). M8 adds the optimizations
+ * button.
  */
 @Component({
   selector: 'ss-list-view-page',
   imports: [
+    BudgetTotals,
+    BudgetWarnings,
     EmptyState,
     FeatureSummary,
     ItemCard,
@@ -71,6 +85,8 @@ import { ListFilters, listQuery, noListFilters, type ListFilterState } from './l
     MatMenuTrigger,
     MatPrefix,
     MatSuffix,
+    MiniCalendar,
+    NgTemplateOutlet,
     PageHeader,
     RouterLink,
     TypeCounts,
@@ -89,6 +105,7 @@ export class ListViewPage {
   private readonly catalog = inject(CatalogStore);
   private readonly settings = inject(SettingsStore);
   private readonly customSubEditor = inject(CustomSubEditor);
+  private readonly exporter = inject(Exporter);
   private readonly today = inject(ClockService).today;
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector = inject(Injector);
@@ -136,7 +153,12 @@ export class ListViewPage {
   protected readonly text = signal('');
   protected readonly filters = signal<ListFilterState>(noListFilters);
   protected readonly filtersOpen = signal(false);
-  private readonly query = computed(() => listQuery(this.text(), this.filters()));
+  /** The search box and the Sort menu's choices, leaving out a tag deleted meanwhile (M6.11). */
+  private readonly query = computed(() => {
+    const filters = this.filters();
+    const byId = this.tags.byId();
+    return listQuery(this.text(), { ...filters, tags: filters.tags.filter((id) => byId.has(id)) });
+  });
   protected readonly filterCount = computed(() => listFilterCount(this.query()));
   protected readonly context = computed(() => ({
     tags: this.tags.byId(),
@@ -163,17 +185,69 @@ export class ListViewPage {
   /** The items it can't price or name, as the list editor's rows say why. */
   protected readonly unresolvedRows = computed(() =>
     this.view().unresolved.map((unresolved) =>
-      editRow({ ok: false, unresolved }, this.tags.byId()),
+      editRow({ ok: false, unresolved }, this.tags.byId(), this.today()),
     ),
   );
   /** How many of each type it has: "Streaming video: 3". */
   protected readonly types = computed(() =>
     typeCounts(this.listItems().resolved, this.catalog.catalog()?.categories.service ?? []),
   );
-  /** "VPN: 2 / 3" for this list's items (§3.2). */
-  protected readonly features = computed(() =>
-    featureSummary(this.listItems().resolved, this.context().registry, this.today()),
+  /** This list's totals, its cards' shares and its feature summary (§3.1, §3.2: core's listMetrics). */
+  protected readonly totals = computed(() => {
+    const listId = this.listId();
+    return listId === undefined ? undefined : this.metrics.metrics(listId);
+  });
+  /** The mini calendar's month (P4, M7.4): this one, until ‹ or › moves it, and the new one at midnight into it. */
+  protected readonly calendarMonth = linkedSignal<IsoDate, IsoMonth>({
+    source: this.today,
+    computation: (today) => monthOf(today),
+  });
+  /**
+   * From 960 px, the side column on the right: the mini calendar moves into it, after the cards in the page, so the Tab
+   * order goes from the cards to it, as the columns read.
+   */
+  protected readonly wide = toSignal(
+    inject(BreakpointObserver)
+      .observe('(min-width: 960px)')
+      .pipe(map((state) => state.matches)),
+    { requireSync: true },
   );
+  /** Under 960 px the mini calendar folds (P4); from there it's always shown. */
+  protected readonly calendarOpen = signal(false);
+  /** This list's charges in the mini calendar's month. */
+  protected readonly calendarCharges = computed<CalendarCharge[]>(() => {
+    const listId = this.listId();
+    if (listId === undefined) return [];
+    const names = new Map(
+      this.listItems().resolved.map(({ item, name }) => [item.id, item.nickname ?? name]),
+    );
+    return this.metrics
+      .charges(monthRange(this.calendarMonth()), new Set([listId]))
+      .map((charge) => ({
+        date: charge.date,
+        name: names.get(charge.itemId) ?? '',
+        amount: charge.amount,
+        currency: charge.currency,
+        converted: charge.converted,
+        manual: charge.manual,
+      }));
+  });
+
+  /** Export (P4, M7.5): the list in each format the exports write. */
+  protected readonly exportChoices: readonly {
+    kind: ListExportFormat;
+    label: string;
+    icon: string;
+  }[] = [
+    { kind: 'csv', label: 'CSV (.csv)', icon: 'table_view' },
+    { kind: 'xlsx', label: 'Excel (.xlsx)', icon: 'grid_on' },
+    { kind: 'json', label: 'JSON (.json)', icon: 'data_object' },
+    { kind: 'txt', label: 'Text (.txt)', icon: 'description' },
+    { kind: 'ics', label: 'Calendar (.ics)', icon: 'event' },
+  ];
+
+  /** "VPN: 2 / 3" for this list's items (§3.2). */
+  protected readonly features = computed(() => this.totals()?.featureSummary ?? []);
 
   /** The item whose 📌 was pressed: focus goes back to it once its card has moved. */
   private readonly pinned = signal<{ itemId: string; pinned: boolean } | undefined>(undefined);
@@ -196,6 +270,21 @@ export class ListViewPage {
         { injector: this.injector },
       );
     });
+  }
+
+  /** A day or the month's title in the mini calendar: the Calendar on that month, showing this list. */
+  protected openCalendar(month: IsoMonth): void {
+    void this.router.navigate(['/calendar'], {
+      queryParams: { month, lists: this.listId() },
+    });
+  }
+
+  protected readonly monthOf = monthOf;
+
+  /** One of Export's formats: the file downloads, and a snackbar names it. */
+  protected export(kind: ListExportFormat): void {
+    const listId = this.listId();
+    if (listId !== undefined) void this.exporter.exportList(listId, kind);
   }
 
   protected tagsOf({ item }: ResolvedItem): Tag[] {

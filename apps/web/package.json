@@ -21,7 +21,10 @@
     "@fontsource/inter": "5.3.0",
     "@fontsource/material-symbols-outlined": "5.3.9",
     "dexie": "4.4.6",
+    "exceljs": "4.4.0",
     "fake-indexeddb": "6.2.5",
+    "ics": "3.12.1",
+    "papaparse": "5.7.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "uuid": "14.0.3"
@@ -30,6 +33,7 @@
     "@angular/build": "22.2.4",
     "@angular/cli": "22.2.4",
     "@angular/compiler-cli": "22.2.3",
+    "@types/papaparse": "5.5.2",
     "jsdom": "^28.0.0",
     "typescript": "~6.0.2",
     "vitest": "^4.0.8",

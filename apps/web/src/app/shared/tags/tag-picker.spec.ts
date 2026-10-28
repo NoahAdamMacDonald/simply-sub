@@ -5,9 +5,12 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatAutocompleteHarness } from '@angular/material/autocomplete/testing';
 import { MatChipGridHarness } from '@angular/material/chips/testing';
 import { MATERIAL_ANIMATIONS } from '@angular/material/core';
-import { tagColorPresets } from '@simply-sub/core';
+import { MatMenuHarness } from '@angular/material/menu/testing';
+import { tagColorPresets, type ListItem } from '@simply-sub/core';
+import { ItemsRepository } from '../../core/storage/items-repository';
 import { testStorage, until, type TestStorage } from '../../core/storage/storage.testing';
 import { TagsRepository } from '../../core/storage/tags-repository';
+import { ConfirmService, type ConfirmOptions } from '../confirm/confirm-service';
 import { TagPicker } from './tag-picker';
 
 @Component({
@@ -23,12 +26,23 @@ describe('TagPicker', () => {
   let fixture: ComponentFixture<Host>;
   let loader: HarnessLoader;
   let tags: TagsRepository;
+  let questions: ConfirmOptions[];
 
   beforeEach(async () => {
     storage = testStorage();
+    questions = [];
     TestBed.configureTestingModule({
       providers: [
         storage.providers,
+        {
+          provide: ConfirmService,
+          useValue: {
+            confirm: async (options: ConfirmOptions) => {
+              questions.push(options);
+              return true;
+            },
+          },
+        },
         { provide: MATERIAL_ANIMATIONS, useValue: { animationsDisabled: true } },
       ],
     });
@@ -188,5 +202,73 @@ describe('TagPicker', () => {
     element().querySelector<HTMLElement>('mat-chip-row [matChipRemove]')?.click();
     await fixture.whenStable();
     expect(fixture.componentInstance.tagIds()).toEqual([]);
+  });
+
+  describe('Delete a tag', () => {
+    afterEach(() => {
+      document.querySelectorAll('.cdk-overlay-container').forEach((overlay) => overlay.remove());
+    });
+
+    it('is there only once there are tags', async () => {
+      expect(element().querySelector('.delete-tags')).toBeNull();
+      await addTag('Family', tagColorPresets[0].color);
+      await fixture.whenStable();
+      expect(element().querySelector('.delete-tags')?.getAttribute('aria-label')).toBe(
+        'Delete a tag',
+      );
+    });
+
+    it("deletes one everywhere, asking first when it's in use, and takes it off the chips", async () => {
+      const family = await addTag('Family', tagColorPresets[0].color);
+      const work = await addTag('Work', tagColorPresets[1].color);
+      const items = TestBed.inject(ItemsRepository);
+      const item: Omit<ListItem, 'id' | 'createdAt' | 'updatedAt'> = {
+        listId: '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d',
+        source: { kind: 'catalog', planId: 'netflix.standard' },
+        billing: {
+          mode: 'recurring',
+          interval: 'month',
+          intervalCount: 1,
+          anchorDate: '2026-11-12',
+          autoRenew: true,
+        },
+        tagIds: [family.id],
+        rankOverrides: {},
+        pinned: false,
+      };
+      await items.create(item);
+      fixture.componentInstance.tagIds.set([family.id, work.id]);
+      await fixture.whenStable();
+
+      const menu = await loader.getHarness(MatMenuHarness.with({ selector: '.delete-tags' }));
+      await menu.open();
+      const choices = await menu.getItems();
+      expect(await Promise.all(choices.map(async (choice) => choice.getText()))).toEqual([
+        'Family',
+        'Work',
+      ]);
+      await choices[0].click();
+      await until(() => !tags.byId().has(family.id));
+      await fixture.whenStable();
+
+      expect(questions.map((question) => question.message)).toEqual([
+        'Used by 1 subscription. It comes off them in every list.',
+      ]);
+      expect(fixture.componentInstance.tagIds()).toEqual([work.id]);
+      expect(await chipNames()).toEqual(['Work']);
+      // Nothing suggests it any more.
+      const input = await loader.getHarness(MatAutocompleteHarness);
+      await input.enterText('fam');
+      expect(await suggestions(input)).toEqual(['Create tag “fam”']);
+    });
+
+    it('deletes a tag nothing uses without asking', async () => {
+      await addTag('Family', tagColorPresets[0].color);
+      await fixture.whenStable();
+      const menu = await loader.getHarness(MatMenuHarness.with({ selector: '.delete-tags' }));
+      await menu.clickItem({ text: 'Family' });
+      await until(() => tags.records().length === 0);
+      expect(questions).toEqual([]);
+    });
   });
 });

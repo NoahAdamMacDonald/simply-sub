@@ -31,6 +31,7 @@ import { PageHeader } from '../../shared/page-header/page-header';
 import { BudgetSetting } from './budget-setting';
 import { LocationDialog } from './location-dialog';
 import { percentText, placeSummary } from './place-names';
+import { TagsSetting } from './tags-setting';
 
 /** What [Check for updates] found. */
 const checkMessages: Record<CatalogCheckOutcome, string> = {
@@ -41,8 +42,8 @@ const checkMessages: Record<CatalogCheckOutcome, string> = {
 };
 
 /**
- * Settings (PROJECT-PLAN P13): budgets, appearance, where the user is (📍), Search's start, Your data (backups and
- * Delete all data, M6.9), Security (the app lock, M6.10) and the catalog's version. Tags come with their task.
+ * Settings (PROJECT-PLAN P13): budgets, custom tags (M6.11), appearance, where the user is (📍), Search's start, Your
+ * data (backups and Delete all data, M6.9), Security (the app lock, M6.10) and the catalog's version.
  */
 @Component({
   selector: 'ss-settings-page',
@@ -59,6 +60,7 @@ const checkMessages: Record<CatalogCheckOutcome, string> = {
     MatRadioGroup,
     MatSelect,
     PageHeader,
+    TagsSetting,
   ],
   templateUrl: './settings-page.html',
   styleUrl: './settings-page.scss',

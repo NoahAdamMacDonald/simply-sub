@@ -5,6 +5,22 @@
       <mat-icon>edit</mat-icon>
       Edit list
     </a>
+    <!-- The list in each format the exports write (P4, M7.5): none for a list with nothing in it. -->
+    @if (total() > 0) {
+      <button matButton="outlined" type="button" class="export" [matMenuTriggerFor]="exportMenu">
+        <mat-icon>download</mat-icon>
+        Export
+        <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #exportMenu>
+        @for (choice of exportChoices; track choice.kind) {
+          <button mat-menu-item type="button" (click)="export(choice.kind)">
+            <mat-icon aria-hidden="true">{{ choice.icon }}</mat-icon>
+            <span>{{ choice.label }}</span>
+          </button>
+        }
+      </mat-menu>
+    }
   }
   @if (state() === 'ready') {
     <!-- "/ mo" and ≈ are read as words, as ss-price's are. -->
@@ -36,6 +52,8 @@
     </ss-empty-state>
   }
   @case ('ready') {
+    <!-- This list's own payments against the budgets (§3.1, M7.6, the user's choice). -->
+    <ss-budget-warnings [warnings]="totals()?.warnings" [listId]="listId()" />
     @if (unsaved()) {
       <p class="note unsaved">
         This list has changes you haven't saved.
@@ -43,7 +61,44 @@
       </p>
     }
 
+    <!-- This list's payment days (P4, M7.4): under the totals, folded behind a button, below 960 px; from there at the
+         top of the side column, after the cards, so focus reaches it after them as the eye does. -->
+    <ng-template #listCalendar>
+      <section class="list-calendar" aria-labelledby="list-calendar-heading">
+        <h2 id="list-calendar-heading" class="calendar-heading">Calendar</h2>
+        <button
+          matButton
+          type="button"
+          class="calendar-toggle"
+          aria-controls="list-calendar"
+          [attr.aria-expanded]="calendarOpen()"
+          (click)="calendarOpen.set(!calendarOpen())"
+        >
+          <mat-icon>{{ calendarOpen() ? 'expand_less' : 'expand_more' }}</mat-icon>
+          Calendar
+        </button>
+        <div id="list-calendar" class="calendar-body" [class.open]="calendarOpen()">
+          <ss-mini-calendar
+            [(month)]="calendarMonth"
+            [charges]="calendarCharges()"
+            (dayClick)="openCalendar(monthOf($event))"
+            (monthClick)="openCalendar($event)"
+          />
+        </div>
+      </section>
+    </ng-template>
+
     <div class="layout" [class.with-features]="total() > 0">
+      <!-- This month and this year against the budgets, or alone without them (P4, M7.2): on the right from 960 px,
+           above the cards under it. -->
+      @if (total() > 0 && totals(); as totals) {
+        <div class="money">
+          <ss-budget-totals [metrics]="totals" />
+          @if (!wide()) {
+            <ng-container [ngTemplateOutlet]="listCalendar" />
+          }
+        </div>
+      }
       <div class="items">
         @if (total() === 0) {
           <ss-empty-state icon="playlist_add" heading="No subscriptions yet">
@@ -144,6 +199,7 @@
                   <ss-item-card
                     [resolved]="resolved"
                     [tags]="tagsOf(resolved)"
+                    [share]="totals()?.shares?.get(resolved.item.id)"
                     (pinToggle)="pin(resolved, $event)"
                   />
                 </li>
@@ -162,6 +218,7 @@
                   <ss-item-card
                     [resolved]="resolved"
                     [tags]="tagsOf(resolved)"
+                    [share]="totals()?.shares?.get(resolved.item.id)"
                     (pinToggle)="pin(resolved, $event)"
                   />
                 </li>
@@ -204,6 +261,9 @@
 
       @if (total() > 0) {
         <div class="side">
+          @if (wide()) {
+            <ng-container [ngTemplateOutlet]="listCalendar" />
+          }
           @if (types().length > 0) {
             <section class="types" aria-labelledby="types-heading">
               <h2 id="types-heading">Types</h2>

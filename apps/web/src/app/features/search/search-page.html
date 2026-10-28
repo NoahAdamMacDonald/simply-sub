@@ -88,6 +88,7 @@
           [ranks]="ranks()"
           [listNames]="listNames()"
           [pickList]="pickList()"
+          [renewal]="renewals().get(result.provider.id)"
         />
       } @empty {
         <ss-empty-state icon="search_off" heading="No services match">

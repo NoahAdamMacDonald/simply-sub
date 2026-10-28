@@ -18,16 +18,33 @@
   color: var(--ss-accent-text);
 }
 
-// The cards, and the feature summary on their right from 960 px; under it the summary comes after them, as on the
-// Lists overview.
+// The cards, and on their right from 960 px the totals, then the types and feature summary. Under 960 px the totals
+// come above the cards, and the types and summary after them, as on the Lists overview.
 .layout {
   display: grid;
   gap: 24px;
 
   &.with-features {
     @media (min-width: 960px) {
+      grid-template-areas:
+        'items money'
+        'items side';
+      grid-template-rows: auto 1fr;
       grid-template-columns: minmax(0, 1fr) minmax(200px, 280px);
       align-items: start;
+
+      // Named only here: under 960 px there's no template, and the blocks go in their order.
+      .items {
+        grid-area: items;
+      }
+
+      .money {
+        grid-area: money;
+      }
+
+      .side {
+        grid-area: side;
+      }
     }
   }
 }
@@ -154,4 +171,43 @@
 
 .features h2 {
   margin-bottom: 4px;
+}
+
+// The mini calendar: below 960 px under the totals, folded behind a button; from there at the top of the side column,
+// under its heading (P4).
+.money .list-calendar {
+  margin-top: 16px;
+}
+
+.calendar-heading {
+  display: none;
+  margin: 0 0 8px;
+  font: var(--mat-sys-title-large);
+
+  @media (min-width: 960px) {
+    display: block;
+  }
+}
+
+.calendar-toggle {
+  margin-left: -12px;
+
+  @media (min-width: 960px) {
+    display: none;
+  }
+}
+
+.calendar-body {
+  display: none;
+  padding: 8px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+
+  &.open {
+    display: block;
+  }
+
+  @media (min-width: 960px) {
+    display: block;
+  }
 }

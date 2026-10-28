@@ -170,7 +170,7 @@ simply-sub/
 │  │  │  │  ├─ payment/
 │  │  │  │  ├─ custom-subs/
 │  │  │  │  └─ settings/
-│  │  │  ├─ shared/ui/       # sub-card, rank-select, budget-bar, price-tag, mini-calendar…
+│  │  │  ├─ shared/ui/       # sub-card, rank-select, budget-bar, price-tag, mini-calendar…; export/ (M7.5)
 │  │  │  ├─ layout/          # sidebar, shell
 │  │  │  ├─ app.routes.ts
 │  │  │  └─ app.config.ts
@@ -210,11 +210,14 @@ simply-sub/
 │     │  ├─ catalog/         # Zod schemas + inferred types for the catalog files, JSON Schema export (section 4.5),
 │     │  │                   # validateCatalog (section 6.2), regions, availability, pickPrice and convert (section 4.7)
 │     │  ├─ user/            # user-data types (lists, items, cards…), resolveItem (M4.6), itemActivity (M5.1)
-│     │  ├─ dates/           # ISO calendar dates in UTC: IsoDate, toIsoDate, addDays, addMonths (M7.1)
+│     │  ├─ dates/           # ISO calendar dates in UTC: IsoDate, toIsoDate, addDays, addMonths, daysBetween, and
+│     │  │                   # billing periods (Period, addPeriods)
 │     │  ├─ icons/           # PNG and ICO reading, a page's icon links, the icon services, picking the best icon,
 │     │  │                   # GET /icon's query (M2.6)
-│     │  ├─ schedule/        # recurrence: next payment dates, monthly/annual totals
-│     │  ├─ tax/             # sales tax: tax-added regions, the Canadian rate table, subdivisions (section 4.8)
+│     │  ├─ schedule/        # charge dates, charges with tax, the next charge, statuses, totals and budget checks
+│     │  │                   # (M7.1)
+│     │  ├─ tax/             # sales tax: tax-added regions, the Canadian rate table, subdivisions, the tax on a
+│     │  │                   # charge (section 4.8)
 │     │  ├─ ranking/         # rank keys, providesKey (M2.3) and providedKeys (M2.4); rank resolution (item override >
 │     │  │                   # profile > not ranked), rank counts and the feature summary (M6.1)
 │     │  ├─ search/          # searchProviders, readProvidersQuery, providersBody (GET /providers); searchCatalog
@@ -224,7 +227,8 @@ simply-sub/
 │     │  │                   # bodies (M2.4)
 │     │  ├─ optimizer/       # suggestion engine (section 10)
 │     │  ├─ rewards/         # card reward maths (section 9)
-│     │  └─ export/          # csv, json, txt, xlsx, ics serializers
+│     │  └─ export/          # the exports' tables, calendar events, text and list file, which the app writes
+│     │                      # with papaparse, exceljs and ics (M7.5)
 │     └─ test/               # Vitest specs, mirroring src/ (run in the America/Vancouver time zone)
 │
 ├─ data/                     # catalog source of truth (human-edited)
@@ -881,6 +885,7 @@ export interface Settings {             // one record, under the key 'settings'
   monthlyBudget?: number; annualBudget?: number;
   theme: 'light' | 'dark' | 'system';
   searchSoldOnly?: true;                        // Search starts with Sold in on (M5.6); left out when off
+  calendarHiddenLists?: string[];               // the lists the Calendar leaves out on this device (M7.4)
   appLock?: {                                   // the app lock, when it's on (M6.10, 11.5): no secret, only the salt
     salt: string; iterations: number;           // and a sealed check value. Plain while the rest of the settings are
     check: { iv: string; ciphertext: string };  // sealed, changed only by the lock's own methods, never backed up
@@ -1030,7 +1035,7 @@ Catalog prices are what providers list, and whether that includes sales tax depe
 Canadian and US prices exclude it (Netflix Canada adds GST/HST, so $18.99 is $21.46 in Ontario), while EU, UK,
 Australian and most other prices include VAT or GST. Without tax, a Canadian's totals would come out 5–15% low.
 The rules live in `packages/core/src/tax/`: the rates and subdivision lists since M4.2 (`salesTaxRate`,
-`subdivisionsOf`), and the maths on charges in M7.1:
+`subdivisionsOf`), and the tax on a charge since M7.1 (`salesTaxOn` in `charge-tax.ts`):
 - **The buyer's location decides**, not where the price came from: Settings' `country` and `subdivision`. In a
   **tax-added region** (`taxAddedRegions` in core: CA and US), tax is added to every catalog price, converted ones
   included, since foreign services such as Proton must collect GST/HST from Canadians. Elsewhere prices already
@@ -2052,11 +2057,12 @@ turning a second Netflix plan into an extra-member add-on.)
 
 ### 8.3 Page notes
 **Home.** Shows the current-month mini calendar with payment days highlighted, plus the monthly and annual budget
-bars for **all lists combined** (section 8.1.1). The bars appear only if a budget is set. The big CTA opens `/lists`.
+bars for **all lists combined** (section 8.1.1). The bars appear only if a budget is set; without one, the total and
+"Set a monthly budget →". The big CTA opens `/lists`, and the next three payments follow (M7.3).
 
 **Lists overview.** Each card shows the name, a monthly bar (**this list's share** of the monthly budget), a yearly bar, rank
-counts in rank colours (zero counts in grey), a View button and delete (with confirmation and Undo). Until the bars
-(M7.2), a card shows what the list costs a month on average (section 14, M6.7). Below the cards is a
+counts in rank colours (zero counts in grey), a View button and delete (with confirmation and Undo). Without a budget
+a card shows the amount alone (M7.2; until then it showed what the list costs a month on average, section 14, M6.7). Below the cards is a
 "New Subscription List" tile, which opens `/lists/new` with the default name. The right column shows feature
 summaries ("VPN 2/3", "4k 2/5").
 
@@ -2328,9 +2334,10 @@ prompted after each big change, or weekly).
 | Format | Library | Notes |
 |---|---|---|
 | JSON | native | **Full backup**: all tables plus `schemaVersion`. The only format that can be re-imported. An optional passphrase encrypts it (section 11.5), since backups sit in Downloads unencrypted. Imports are validated with Zod before anything is written |
-| CSV | papaparse | One row per item (list, service, plan, cost, interval, next date, tags) |
-| XLSX | exceljs (lazy-loaded) | One sheet per list plus a summary sheet |
-| TXT | native | A readable summary |
+| CSV | papaparse | List view: one row per item (list, service, plan, cost as charged with tax, interval, next charge, live tags). The Calendar: one row per charge in the next 12 months |
+| XLSX | exceljs (lazy-loaded) | Summary, one sheet per list of its items, then Payments, the next 12 months' charges |
+| TXT | native | A readable summary of one list |
+| JSON (one list) | native | List view's: the list, its items and what they name, as stored. Not a backup, so not importable (M7.5) |
 | ICS | `ics` npm package | One all-day event (`VALUE=DATE`, so no time zone can move it) per charge in the next 12 months, from the schedule engine. Not `RRULE`s: a monthly rule starting on the 31st skips every shorter month (RFC 5545 drops dates that don't exist), and separate events also follow windows, end dates and price changes |
 
 ### 11.3 Calendar integration
@@ -2467,8 +2474,8 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 - Files: `kebab-case.ts`; types and classes in `PascalCase`; ids and slugs in `kebab-case` with dot namespaces (`netflix.standard`).
 - Money: store `amount` with its `currency`. Never format money in the logic layer, only in the UI (`Intl.NumberFormat`).
 - Dates: ISO strings (`YYYY-MM-DD`) everywhere, never `Date` objects in data. Date maths uses core's own
-  `dates/` helpers (`addDays`, and `addMonths` in M7.1), which work in UTC so a time zone or a daylight-saving
-  change can't shift a date. No date library: date-fns works in local time.
+  `dates/` helpers (`addDays`, `addMonths`, `daysBetween`, `addPeriods`), which work in UTC so a time zone or a
+  daylight-saving change can't shift a date. No date library: date-fns works in local time.
 - Lint and format with ESLint (angular-eslint) and Prettier.
 
 ### 13.3 Testing
@@ -2532,6 +2539,257 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-28, M7.6)**
+- **The budget warnings** (PROJECT-PLAN §3.1) are `ss-budget-warnings`, on core's checks (`ListMetrics.warnings`,
+  M7.1):
+  - "Your payments in January 2027 add up to ≈ $137.20, over your $50.00 monthly budget." names the first of the next
+    12 months over the monthly budget ("this month" for this one), with "See January 2027 in the Calendar".
+  - "Your payments this year, past and to come, add up to ≈ $610.64, over your $500.00 annual budget."
+- **Home** checks every list together, above its calendar and totals, once every item is priced. **List view**
+  checks the list alone ("This list's payments…", the user's choice), its link opening the Calendar on that month
+  showing the list.
+- **How it reads:** a card with the over colour's stripe and a warning icon, read "Warning: …" with "about" for ≈. Its
+  status region is there before any warning, so one that appears as prices load is read out. On Home it shares a block
+  with the calendar and totals, so the empty region adds no gap to Home's spaced column.
+- **Bundles:** the initial bundle didn't change (497.3 kB). Home and List view grew 0.9 kB gzipped each.
+
+**Resolved (2026-10-28, M7.5)**
+- **The exports** (section 11.2) are laid out by core's `export/` (tables, calendar events, a list's text and its JSON
+  file) and written by the libraries chosen for them, pinned to exact versions and loaded only for their format:
+  papaparse for CSV, exceljs for the workbook and `ics` for calendars. Text and JSON need none. In the app,
+  `shared/export/`'s `Exporter` reads the lists as their pages show them (MetricsService, live tags) and saves through
+  `save-file` with "Saved <name>"; `export-files.ts` loads with the first export.
+- **What each file holds** (the user's choices):
+  - List view's CSV: a row per item with List, Service, Plan, Nickname, Cost, Tax, Currency, Converted, Billed,
+    Renews, Next charge, Ends, Status and Tags. Cost is one charge of the item's own period today, as charged with tax
+    (core's `periodCost`: the price override while it applies, else the price and the add-ons billed with it; an
+    add-on on a period of its own isn't in it). An item that can't be priced is named by its source, with why in
+    Status.
+  - The Calendar's payment schedule (CSV): a row per charge in the next 12 months for the lists shown, in date order.
+  - The workbook, from either page: Summary (each list's totals as its page shows them, then Total), a sheet per list
+    of its items (the CSV's columns without List), then Payments.
+  - Text (List view): the list's totals, then each item with its cost, renewal, next charge, end date, add-ons, own
+    price, status, tags and note, then the items it can't price.
+  - JSON (List view): the list, its items as stored, and the custom subscriptions and live tags they name. It has no
+    `schemaVersion`, so Import refuses it ("This file isn't a Simply Sub backup").
+  - Calendar (.ics): an all-day event per charge in the next 12 months (`DTSTART;VALUE=DATE`, ending the next day,
+    shown as free), titled "Netflix: $19.94", or "Renew Mullvad VPN: ≈ $94.16" for a manual renewal, with the plan,
+    list, tax, renewal and "Its last charge before it ends". A plan billed on the 31st has an event in every month.
+    Each UID is the item, the date and the currency, the same in every export.
+  - Amounts are numbers rounded to their currency's minor unit, beside its code, and dates are ISO (real dates in the
+    workbook), so spreadsheets add and sort them. Only live tags are named (M6.11).
+- **Spreadsheet safety:** a CSV cell of text that starts like a formula (=, +, -, @) gets a `'` first (papaparse's
+  `escapeFormulae`), and the file starts with a byte order mark, so Excel reads it as UTF-8. exceljs writes text cells
+  as text.
+- **File names:** `simply-sub-work-related-2026-10-28.csv` from List view (the list's name in plain letters and
+  digits) and `simply-sub-payments-2026-10-28.ics` from the Calendar.
+- **List view:** Export ▾ beside Edit list, when the list has something in it: CSV, Excel, JSON, Text and Calendar
+  (.ics).
+- **The Calendar:** for the lists shown, over the next 12 months:
+  - Sync calendar ▾ (Google, Apple and Proton Calendar): the .ics downloads, then a dialog gives that app's import
+    steps (from each one's help pages), with focus on its heading, Download again and Done.
+  - Export to file (`ss-split-button`): Calendar (.ics) as the main button, then Payment schedule (.csv) and Excel.
+- **Under the production CSP with Trusted Types** (`wrangler dev`, csp-check.cjs): no library needed eval or
+  innerHTML, and there were no violations. One fix: the production build's chunk optimizer gives a CommonJS library's
+  dynamic import as `default` only, keeping just what the code reads, so named exports alone were undefined there
+  (the dev server and the tests had them). `export-files.ts` reads `default` when there is one.
+- **Offline,** a library not loaded yet can't load: "The file couldn't be made. Check your connection, then try
+  again." The snack bar loads with the page so it can say so.
+- **npm audit --audit-level=high** passes. exceljs 4.4.0, the latest, brings two moderate advisories (uuid < 11.1.1:
+  a missing bounds check in v3, v5 and v6 when a buffer is given); exceljs only calls v4.
+- **Core:** `planTitle`, `itemTitle`, `periodText`, `addOnText` and the words for an item that can't be resolved moved
+  to `user/item-text.ts`, so the cards, the editor and the exports say the same.
+- **Bundles:** the initial bundle grew 0.9 kB (497.3 kB of 500): the bundler's CommonJS helpers that exceljs and ics
+  need, which it keeps with its other helpers in a chunk the initial bundle loads. Beyond it, gzipped: List view
+  +1.6 kB; the Calendar +11.4 kB, mostly Material's menu (30.7 kB raw) for its two menus, which List view, Lists and
+  Search load too. With the first export: export-files 3.9 kB, papaparse 7.0 kB, ics 23.9 kB (with yup) and exceljs
+  270 kB (Excel only).
+
+**Resolved (2026-10-28, M7.4)**
+- **The Calendar** (PROJECT-PLAN P10) is "Calendar" with the month's bar, Showing, the month's navigation, the grid
+  and Upcoming. Sync calendar and Export to file come with M7.5.
+- **The bar** (section 8.1.1) is `ss-budget-bar` with the amount inside: what's been paid so far (charges up to today;
+  all of a past month, none of a future one) out of the month's total, which is beside it, with the monthly budget's
+  tick when the total reaches it. Its colour compares the total with the budget.
+- **The URL** (core's `user/calendar-params.ts`): `?month=2026-10&lists=<id>,<id>`, with `lists` only when not every
+  list is shown. A month that isn't one, a list that's gone or every list named is rewritten in place, as Search
+  does; a month or list change adds a history entry.
+- **Showing** is remembered on this device, as PROJECT-PLAN §3.5 has it: `settings.calendarHiddenLists` keeps the
+  lists left out (an optional field, so stored settings stay valid with no new Dexie version), so a list made since
+  shows. A URL with `lists` wins.
+- **The grid** (core's `monthGrid`, which fills the weeks from the months on either side, shown muted):
+  - Each day of the month is a button over its cell, named with its payments, "Monday, October 12, 1 payment,
+    $19.94". It's one tab stop, moved like the mini calendar's, Page Down crossing into the next month.
+  - Its chips (the icon and the amount, the name too where the cell is 140 px wide), "+2 more" and the total sit beside
+    the button and are hidden from screen readers: inside it, axe's `label-content-name-mismatch` failed, as its name
+    didn't hold what it showed (WCAG 2.5.3). A chip's own click opens the day on that charge.
+  - Today is outlined; the day the panel shows has a border twice as thick in the accent colour. A tint failed
+    contrast for the muted total in dark mode (4.2:1), and the faded other-month numbers did too, so they're the muted
+    colour alone.
+- **The day's panel** (`ss-day-panel`), on the grid's right from 960 px: the day, then each charge with what it is, its
+  amount as charged, how it renews ("Renew manually" with ↻), "Ends Nov 3" on the last charge before an end date, its
+  list as a link, and Wrong date? (M7.1's dialog) for a charge still to come of an Ongoing item. Focus starts on its
+  heading, or on the charge a chip opened; ✕ and Escape close it, with focus back on the day.
+- **Under 600 px** the month is an agenda: a card per day with payments, each payment a button that opens the day in a
+  bottom sheet (Material's, loaded on first use), whose panel puts focus on that payment.
+- **Upcoming:** the next five charges from today for the lists shown, as charged.
+- **List view's mini calendar** (P4) follows the totals: the list's charges, with a day or the title opening the
+  Calendar on that month, showing that list. Under 960 px it folds behind a Calendar button (`aria-expanded`). From
+  960 px it's at the top of the side column, after the cards in the page too, so the Tab order goes from the cards to
+  it as the columns read (fixed after M7.6: inside the totals' block, it came before the search box).
+- **`ClockService.today` moves on at midnight** (a timer for a second past the next local midnight, so a 25-hour
+  night is fine) and when a hidden tab is shown again, as timers there run late. Home's and List view's mini calendars
+  and the Calendar follow it into a new month when their month isn't set.
+- **Bundles:** the initial bundle grew by 0.8 kB (496.4 kB of 500): ClockService's timer (0.6 kB), and esbuild's names
+  for the CDK code another page now shares. Beyond it, gzipped: the Calendar 124.7 kB, and its bottom sheet 7.4 kB
+  more on a phone; List view 5.7 kB more, for its mini calendar.
+
+**Resolved (2026-10-28, M7.3)**
+- **Home** (PROJECT-PLAN P2) follows the wireframe: the mini calendar on a card, every list's totals beside it (M7.2's
+  `ss-budget-totals`, with "Set a monthly budget →" where a budget isn't set), and the Subscription Lists pill under
+  them, centred. Under 720 px they stack. Its "Home" heading is for screen readers only.
+- **Next payments** (P2's optional strip): the next three charges from today, as charged, with ↻ and "renew manually"
+  for a manual renewal. Its parts keep their spaces inside the spans, so a screen reader doesn't run "Nov 12Netflix"
+  together.
+- **The mini calendar** shows every list's charges in its month (`MetricsService.charges`, as the Calendar does). A day
+  or the month's title opens the Calendar on that month. Its month follows today, so a tab left open past midnight
+  into a new month shows it (M7.4's ClockService).
+- **While prices load** (an item's catalog file not yet downloaded, `pending`), the calendar has no dots, a row of dots
+  under it that pulse (they stay still with reduced motion), and "Loading your payments…" in a live region: P2's
+  skeleton dots.
+- **No lists:** an empty state, "Start with a list", with Create a list, Browse services and Import backup. Import opens
+  Settings' dialog, with Material's dialog and snackbar loaded on the click, since Home rarely needs them.
+- **Totals match:** Home's this month and this year are the sum of every list's at full precision (a unit test). Shown
+  rounded, a list's cents can add up a cent away from Home's, which `check-home.cjs` allows.
+- **Bundles:** the initial bundle didn't change (495.5 kB). Home loads 78.3 kB gzipped beyond it (53.2 kB with M7.2's
+  totals): the mini calendar's tooltip brings the CDK overlay, which Search and List view load too.
+
+**Resolved (2026-10-28, M7.2)**
+- **Totals in `MetricsService`** (§3.4): `metrics(listId)` and `global` (every list's items together, Home's), both
+  core's `listMetrics`, plus `metricsOf(items)` for a draft and `charges(range, listIds?)` for the calendars. They
+  follow the settings' currency, tax place and budgets, the catalog and today.
+- **A conversion flag for each total** (`ListMetrics.converted`): "≈" goes on the total that has a converted amount,
+  not on every total once one has (Mullvad's euros in January put ≈ on this year, not on October).
+- **`ss-budget-totals`** (`shared/budget-totals/`) shows this month and this year:
+  - with a budget, a bar (`ss-budget-bar`, the percent inside) and "$100 of $200 this month" or "… in 2026" beside it,
+    under a heading that names the bar ("Monthly budget");
+  - without one, the amount alone ("$100 this month"), and on Home "Set a monthly budget →" to Settings;
+  - on a Lists card (`compact`), no headings: bars named for their list ("Work Related, monthly budget") and "$50 this
+    month", "$250 this year";
+  - "1 subscription not counted" when one can't be priced or converted.
+- **The Lists overview (P3):** the bars replace the average, as the wireframe has them, then the count. Rank counts and
+  the global feature summary now come from the metrics.
+- **List view (P4):** the header keeps its average, and the side column starts with the totals: bars with budgets,
+  amounts without (the user chose both). From 960 px they're on the right above Types and Features (a grid with named
+  areas, set only at that width: without a template the areas put the blocks in odd places); under it they come above
+  the cards. Each card gives its share of the next 12 months, "31% of list".
+- **The list editor (P5):** its footer says "This month $26.52" before the average, from the draft's charges.
+- **Home (P2):** the totals for every list, with the prompts, until M7.3 builds the rest of the page.
+- **Bundles:** the initial bundle's code didn't change (495.5 kB); esbuild split one of its chunks in two, which costs
+  0.8 kB more gzipped. Beyond it, gzipped: List view 3.6 kB more (192.9 kB), the Lists overview 3.1 (83.5 kB), the
+  list editor 1.7, the item dialog 1.7 and Search 0.7, for `ss-budget-totals`, the bar and `listMetrics`. Home went from
+  a placeholder's 0.3 kB to 53.2 kB, as it now prices every list (MetricsService, the catalog and the schedule).
+
+**Resolved (2026-10-28, M7.1)**
+- **The schedule engine** is core's `schedule/`, on M4.6's resolved items:
+  - **Dates** (`chargeDates`, `nextChargeDate`, `lastChargeDate`): each date is counted from a fixed point, never
+    from the charge before. Ongoing billing is the anchor plus or minus whole periods, on or after `startDate` and
+    before `endDate`. Months and years use `addMonths(anchor, n, billingDay)`, which now takes the day to land on;
+    days and weeks are plain counts. Specific dates charge at each window's start, then every period before its end,
+    with a yearly window copied into each later year.
+  - **Charges** (`itemCharges`): §3.1's `Charge`, plus `ends` on the last charge before an end date (P10's "Ends").
+    A date costs the price override while it's before the override's `until`, else the price plus each add-on ×
+    its quantity. An add-on sold only for another period (Disney+'s monthly extra member on a yearly plan) is charged
+    on that period's dates, from the same anchor. A charge of 0 isn't one, so a free plan has none. A date with a price
+    in another currency, for want of a rate, gets a charge in each currency.
+  - **Status** (`itemStatus`, on `itemActivity`): "Ends" when the end date is after today and within 30 days, and a
+    manual renewal when the next charge is one: an Ongoing item that doesn't auto-renew, or Specific dates on a price
+    renewed by hand.
+  - **Totals** (`listMetrics`): this month, this year and the next 12 months; `approx`; `notCounted` (items that
+    can't be priced, and items with a charge in another currency); each item's share of the next 12 months (a card's
+    "31% of list", M7.2); rank counts and the feature summary; the budget shares; and `warnings`, the budget checks:
+    the first of the next 12 calendar months, this one included, over the monthly budget, and this year's past and
+    projected charges over the annual one.
+- **Tax on charges** (`tax/charge-tax.ts`, `salesTaxOn`): each price in a charge gets the buyer's rate from
+  `addedSalesTax`, where the item was bought (`buyerTaxPlace`). None on a price with `taxIncluded` (Mullvad), and
+  none on a typed amount unless it's marked plus tax. The Canadian rates were checked on 2026-10-26
+  (`canadianSalesTaxCheckedOn`), two days before, so they weren't checked again.
+- **A future anchor is the next renewal:** the item dialog asks for the anchor as "Next renewal", one period from
+  today by default. Counted back, that puts a charge on today, the payment made on subscribing. Decided here: an
+  Ongoing item's next charge is on or after its anchor while that's still to come. Today's charge still counts in the
+  totals, and the calendar shows it.
+- **`ResolvedItem`** gains `overridePrice` (the override whatever the date, for the charges before its `until`),
+  `status` and `nextCharge`. `resolveItem` takes the tax place, Settings' country, province and rate, which
+  `MetricsService` passes. The item dialog resolves its form's item as it's typed: one with a date that isn't one yet
+  has no next charge, rather than throwing.
+- **"Wrong date?"** (P4; the Calendar's day panel comes with M7.4) follows a card's next charge, for an Ongoing item
+  only (Specific dates have no anchor). Its dialog (`shared/wrong-date/`, loaded on first use) asks for the date,
+  filled in, with the datepicker. Core's `reanchorIssue` wants today or later, within the item's start and end dates,
+  and `reanchored` keeps the billing day while the new date allows it (Nov 30 for the 31st). It's saved straight to
+  the item, with no draft. The field has no `[min]`: the datepicker's own check added an error with no message, ahead
+  of core's.
+- **Where it shows:**
+  - **List view's cards:** the status with "Ends Nov 3" and ↻ "Renew by Nov 3", and the details start with "Next
+    charge Nov 12, 2026: $19.94, with $0.95 tax" and Wrong date?.
+  - **The list editor's rows:** "Renews Nov 12 · auto", "Renews Jan 20, 2027 · manual · ends …", "Specific dates · next
+    charge Sep 2", and "Ended Oct 1, 2026" when nothing is left.
+  - **The item dialog's footer:** "$18.99 / mo · next charge Nov 12".
+  - **Search:** a provider's "Ends" and "Renew by" (core's `providerRenewals`; the user chose the rule): "Renew by"
+    when its soonest next charge across its items is a manual renewal, and "Ends" only when every item still going on
+    ends within 30 days, on the latest end.
+- **Period helpers:** `Period`, `samePeriod` and `addPeriods` moved from `user/item-form.ts` to `dates/period.ts`, so
+  the schedule doesn't load the item dialog's rules. That took 2.2 kB gzipped off the Lists overview and the list
+  editor.
+- **Bundles:** the initial bundle grew by 0.1 kB (495.5 kB), for the date helpers the startup code has. Beyond it,
+  gzipped: Search from 192.8 to 198.4 kB, as it now resolves the user's items for its badges (MetricsService and the
+  schedule); List view 5.3 kB more, the list editor 1.6, the Lists overview 1.0 and the item dialog 2.7. Wrong date's
+  dialog is 1.5 kB of its own, on the item dialog's datepicker chunk.
+
+**Resolved (2026-10-28, M6.11)**
+- **Custom tags** (PROJECT-PLAN P13) is a card in Settings, after Budgets, near the top as the wireframe has it.
+  - **A row per tag,** in the order they were made: its colour as a round button ("Colour of Family: Blue"), its name,
+    ✎ ("Rename Family") and ✕ ("Delete Family"). With none, a line says what tags are for.
+  - **✎ and the colour open one editor** in the row's place: Name, the 12 presets as radio buttons, and Hex colour.
+    - The presets are `ss-tag-colours`, shared with the picker's Create tag.
+    - Hex colour takes `#rrggbb` or `rrggbb` in any case, and stores lower case (core's `parseTagColor`). A colour
+      that's no preset leaves none checked.
+    - ✎ starts on the name, the colour button on the colour the tag has. Enter saves, Escape cancels, and focus goes
+      back to what opened it.
+  - **⊕ New tag** opens the same editor as a new row, with the first preset no tag has yet. Once it's saved, focus is
+    on its ✎.
+  - **✕** deletes at once when nothing uses the tag. When something does, it asks first: "Delete “Work”? Used by 5
+    subscriptions. It comes off them in every list.", with focus on Cancel. A snackbar says "Deleted Work", and focus
+    moves to the next row's ✕, else the previous one's, else ⊕. There's no Undo: P13 didn't ask for one.
+- **Names** follow the picker's rules, now core's (`user/tag-rules.ts`, `tagNameIssue`): trimmed, not empty, and no
+  two tags with the same name in any case ("There's a tag called “Work” already"). A tag can change its own name's
+  case.
+- **Deleting** (`TagsRepository.removeWithItems`) is one transaction on tags, items and drafts:
+  - The tag is soft-deleted.
+  - Core's `withoutTag` takes its id off every item that has it, with a new `updatedAt`. Soft-deleted items lose it
+    too, so a list's Undo can't bring it back.
+  - It comes off every draft's items too, as edited and as saved, so a draft doesn't look changed and its Save writes
+    nothing for it. A draft's items keep their timestamps, which Save sets.
+  - With the app lock on, every row it writes is sealed, as any write is. A test checks both.
+- **"Used by 5 subscriptions"** (`tagUsage`) counts the items in lists and in lists' drafts, each once (the user chose
+  this). It's read as stored when ✕ is pressed (`TagsRepository.usage`), so it's right before the repositories have
+  loaded the items.
+- **The item dialog's picker** (P6) has "Delete a tag" beside its field: a menu of the tags that deletes one
+  everywhere through the same flow (`shared/tags/tag-deleter.ts`), then takes it off the item's chips. With no tag
+  left, focus moves to the field. The user chose a menu over an ✕ in each suggestion: a button inside an
+  autocomplete option fails axe's `nested-interactive`, and the arrow keys never reach it.
+- **A deleted tag never shows:**
+  - Chips, suggestions and List view's Tags filter use the repository's live tags.
+  - A List view filter on a tag deleted meanwhile is dropped.
+  - The item dialog saves only live tags, so an item open while its tag is deleted elsewhere doesn't get it back.
+  - Exports list live tags only (M7.5).
+- **Core without Zod:** the presets moved from `user/tag.ts` to `user/tag-rules.ts`, which imports no Zod, so Settings
+  uses them without the record schemas (M6.10's lesson with Lock after).
+- **Bundles:** the initial bundle didn't change (495.4 kB). What a page loads beyond it, gzipped:
+  - **Settings:** from 93.5 to 98.7 kB, for the card, its editor and the delete flow with `ss-confirm`.
+  - **The item dialog:** its chunks counted alone grew 6.7 kB, mostly Material's menu, which the list editor that
+    opens it has loaded already.
+  - **The list editor and List view:** 1.1 kB each, for the repository's delete.
 
 **Resolved (2026-10-28, M6.10)**
 - **Security** (PROJECT-PLAN P13) is a card in Settings, between Your data and Catalog.
@@ -2776,10 +3034,10 @@ Reported from the running app, with screenshots, and fixed before M6.9:
 
 **Resolved (2026-10-27, M6.8)**
 - **List view** (PROJECT-PLAN P4, `/lists/:listId`): "‹ Lists", the list's name, and "≈ $48.84 / mo average · 3
-  subscriptions" (the overview's `averageText`, until M7.2's bars). Then the search box with Sort beside it, the cards
+  subscriptions" (the overview's `averageText`; M7.2 keeps it beside its totals). Then the search box with Sort beside it, the cards
   (pinned ones first, under Pinned and All, or a hidden "Subscriptions" heading when none is pinned), and Edit list at
   the foot. The list's feature summary is on the right from 960 px. Below that it goes under the cards, as on the Lists
-  overview, where P4 puts it above: what goes above the cards there is M7.2's bars. When the list editor has changes
+  overview, where P4 puts it above: what goes above the cards there is M7.2's totals. When the list editor has changes
   not saved, a note says so with a link back to them. A draft with no changes, which opening the editor leaves, isn't
   one (`ListDraftService.hasChanges`).
 - **The card is `ss-item-card`** (`shared/sub-card/`), the list variant of PROJECT-PLAN §4.3's `ss-sub-card`, as a
@@ -3535,7 +3793,7 @@ Reported from the running app, with screenshots, and fixed before M6.8:
 - **Tags:** the picker creates tags inline through `TagsRepository`, from a name and one of 12 preset colours. The
   presets live in core (`tagColorPresets`) as stored values rather than theme colours: a tag chip shows the colour as
   a dot beside the name, so the name's contrast never depends on it. Settings' tag section (renaming, any hex colour,
-  deleting) still has no task.
+  deleting) came with M6.11.
 
 **Resolved (2026-10-26, M4.4)**
 - **Exchange rates are kept in Dexie,** in a new `fxRates` table (Dexie v2), so converted prices show at once and

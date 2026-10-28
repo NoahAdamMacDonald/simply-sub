@@ -1,0 +1,17 @@
+<!-- Always there, so screen readers read a warning out when it appears. -->
+<div role="status">
+  @for (warning of lines(); track warning.kind) {
+    <p class="warning" [attr.data-kind]="warning.kind">
+      <mat-icon aria-hidden="true">warning</mat-icon>
+      <span class="text">
+        <span aria-hidden="true">{{ warning.shown }}</span>
+        <span class="visually-hidden">Warning: {{ warning.spoken }}</span>
+      </span>
+      @if (warning.month; as month) {
+        <a routerLink="/calendar" [queryParams]="calendarParams(month.month)">
+          See {{ month.name }} in the Calendar
+        </a>
+      }
+    </p>
+  }
+</div>

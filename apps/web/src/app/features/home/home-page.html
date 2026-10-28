@@ -1,2 +1,88 @@
-<h1>Home</h1>
-<p>Today: {{ today() }}</p>
+<h1 class="visually-hidden">Home</h1>
+
+@switch (state()) {
+  @case ('loading') {
+    <p class="note">Loading your lists…</p>
+  }
+  @case ('error') {
+    <p class="note">Your lists couldn't be read.</p>
+  }
+  @case ('empty') {
+    <!-- P2: no lists yet. -->
+    <ss-empty-state icon="playlist_add" heading="Start with a list">
+      Add what you pay for, and see your budget and your payment dates here.
+      <div actions class="actions">
+        <a matButton="filled" routerLink="/lists/new">
+          <mat-icon>add</mat-icon>
+          Create a list
+        </a>
+        <a matButton="outlined" routerLink="/search">
+          <mat-icon>search</mat-icon>
+          Browse services
+        </a>
+        <button matButton="outlined" type="button" (click)="importBackup()">
+          <mat-icon>upload</mat-icon>
+          Import backup
+        </button>
+      </div>
+    </ss-empty-state>
+  }
+  @case ('ready') {
+    <!-- The warnings with the calendar and totals, so their region takes no room while there's none. -->
+    <div class="overview">
+      <!-- Every list's payments against the budgets (§3.1, M7.6), once they're all priced. -->
+      <ss-budget-warnings [warnings]="pricing() ? undefined : global()?.warnings" />
+      <div class="top">
+        <section class="calendar" aria-labelledby="calendar-heading">
+          <h2 id="calendar-heading" class="visually-hidden">Payments</h2>
+          <!-- While prices load there are no dots yet: pulsing ones under the grid say so. -->
+          <ss-mini-calendar
+            [(month)]="month"
+            [charges]="pricing() ? [] : charges()"
+            (dayClick)="openCalendar(monthOf($event))"
+            (monthClick)="openCalendar($event)"
+          />
+          @if (pricing()) {
+            <div class="skeleton-dots" aria-hidden="true">
+              @for (dot of [1, 2, 3, 4, 5]; track dot) {
+                <span></span>
+              }
+            </div>
+          }
+          <p class="loading" role="status">{{ pricing() ? 'Loading your payments…' : '' }}</p>
+        </section>
+
+        <div class="budgets">
+          @if (global(); as global) {
+            <ss-budget-totals [metrics]="global" prompt />
+          }
+        </div>
+      </div>
+    </div>
+
+    <a matButton="filled" class="lists-button" routerLink="/lists">Subscription Lists</a>
+
+    @if (next().length > 0) {
+      <!-- Spaces go inside the spans: Angular drops the whitespace between them, and screen readers need it. -->
+      <section class="next" aria-labelledby="next-heading">
+        <h2 id="next-heading">Next payments</h2>
+        <ul>
+          @for (payment of next(); track payment.key) {
+            <li>
+              <span class="date">{{ payment.date }} </span>
+              <span class="name">{{ payment.name }} </span>
+              <span class="amount">
+                <span aria-hidden="true">{{ payment.amount.shown }}</span>
+                <span class="visually-hidden">{{ payment.amount.spoken }}</span>
+              </span>
+              @if (payment.manual) {
+                <mat-icon class="manual" aria-hidden="true">autorenew</mat-icon>
+                <span class="visually-hidden">, renew manually</span>
+              }
+            </li>
+          }
+        </ul>
+      </section>
+    }
+  }
+}

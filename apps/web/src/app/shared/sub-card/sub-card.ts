@@ -11,9 +11,11 @@ import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import {
   countedRanks,
+  planTitle,
   type AddRequest,
   type CatalogResult,
   type PickedPrice,
+  type ProviderRenewal,
   type Rank,
   type RankKey,
   type ResellerDeal,
@@ -26,7 +28,7 @@ import { PriceTag } from '../price-tag/price-tag';
 import { ProviderIcon } from '../provider-icon/provider-icon';
 import { RankCounts } from '../rank/rank-counts';
 import { StatusBadge, type BadgeStatus } from '../status-badge/status-badge';
-import { catalogIcon, planTitle } from './card-text';
+import { catalogIcon } from './card-text';
 import { InLists, type NamedList } from './in-lists';
 import { PlanDetails } from './plan-details';
 import { slidingDetails } from './sliding-details';
@@ -73,6 +75,8 @@ export class SubCard {
   readonly pickList = input<Pick<SubscriptionList, 'id' | 'name'>>();
   /** The user's lists' names, by id, which "· 2 lists" names. */
   readonly listNames = input<ReadonlyMap<string, string>>(new Map());
+  /** Its "Ends" and "Renew by" from the user's items' charges (M7.1). */
+  readonly renewal = input<ProviderRenewal>();
 
   protected readonly id = `ss-sub-card-${nextId++}`;
   protected readonly provider = computed(() => this.result().provider);
@@ -157,8 +161,14 @@ export class SubCard {
   );
   protected readonly status = computed<BadgeStatus>(() => {
     const activity = this.result().activity;
+    const renewal = this.renewal();
     return activity
-      ? { kind: activity.kind, activeFrom: activity.activeFrom, manual: false }
+      ? {
+          kind: activity.kind,
+          activeFrom: activity.activeFrom,
+          ...(renewal?.endsOn !== undefined && { endsOn: renewal.endsOn }),
+          manual: renewal?.renewBy !== undefined,
+        }
       : { kind: 'not-listed' };
   });
   /** The lists that have it, by name, for "· 2 lists" after the status. */

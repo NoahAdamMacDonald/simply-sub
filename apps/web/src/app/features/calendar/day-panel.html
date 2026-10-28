@@ -1,0 +1,52 @@
+<!-- Spaces go inside the spans: Angular drops the whitespace between them, and screen readers need it. -->
+<section class="panel" [attr.aria-labelledby]="headingId">
+  <div class="head">
+    <h2 [id]="headingId" tabindex="-1">{{ heading() }}</h2>
+    <button matIconButton type="button" class="close" aria-label="Close the day" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  @if (entries().length === 0) {
+    <p class="none">No payments on this day.</p>
+  } @else {
+    <ul>
+      @for (entry of entries(); track entry.key) {
+        <li [attr.data-key]="entry.key">
+          <div class="what">
+            <ss-provider-icon [src]="entry.iconUrl" [name]="entry.name" size="32" />
+            <h3 tabindex="-1">{{ entry.title }}</h3>
+          </div>
+          <p class="amount">
+            <span aria-hidden="true">{{ entry.amount.shown }}</span>
+            <span class="visually-hidden">{{ entry.amount.spoken }}</span>
+          </p>
+          <p class="renewal">
+            @if (entry.charge.manual) {
+              <mat-icon aria-hidden="true">autorenew</mat-icon>
+              <span>Renew manually</span>
+            } @else {
+              <span>Renews automatically</span>
+            }
+            @if (entry.endsOn; as endsOn) {
+              <span class="badge"> Ends {{ dateText(endsOn) }}</span>
+            }
+          </p>
+          <p class="list">
+            In <a [routerLink]="['/lists', entry.charge.listId]">{{ entry.listName }}</a>
+          </p>
+          @if (entry.movable) {
+            <button
+              matButton
+              type="button"
+              class="wrong-date"
+              [attr.aria-label]="'Wrong date? ' + entry.title"
+              (click)="wrongDate(entry)"
+            >
+              Wrong date?
+            </button>
+          }
+        </li>
+      }
+    </ul>
+  }
+</section>

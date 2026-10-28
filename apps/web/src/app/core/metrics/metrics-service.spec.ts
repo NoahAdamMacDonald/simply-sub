@@ -151,7 +151,10 @@ describe('MetricsService', () => {
         { provide: FxStore, useValue: { rates } },
         {
           provide: CatalogStore,
-          useValue: { catalogFor: (region: string): CatalogData | undefined => files()[region] },
+          useValue: {
+            catalog: computed(() => files()['CA']),
+            catalogFor: (region: string): CatalogData | undefined => files()[region],
+          },
         },
       ],
     });
@@ -297,6 +300,68 @@ describe('MetricsService', () => {
 
     await items.remove(mullvad.id);
     await until(() => metrics.list(family).resolved.length === 1);
+  });
+
+  describe('totals (M7.2)', () => {
+    // Today is Oct 25 (FakeClock), and every item is charged on the 12th: Oct 12 is this month's.
+    const familyMonth = 26.98 * 1.13 + (5 / 0.664) * 1.13 + 29.99;
+    const travelMonth = 19.99 / 0.7243;
+
+    it('adds up each list’s charges with Ontario’s tax: none on a typed price, or one bought in the US', () => {
+      const totals = metrics.metrics(family);
+      expect(totals?.thisMonth).toBeCloseTo(familyMonth, 6);
+      expect(totals?.thisYear).toBeCloseTo(familyMonth * 12, 6);
+      // Mullvad's euros are converted, and the plan that left the catalog isn't counted.
+      expect(totals?.converted.thisMonth).toBe(true);
+      expect(totals?.notCounted).toBe(1);
+      expect(metrics.metrics(travel)?.thisMonth).toBeCloseTo(travelMonth, 6);
+    });
+
+    it('adds every list together for Home, the sum of each list’s totals (P2)', () => {
+      const global = metrics.global();
+      expect(global?.thisMonth).toBeCloseTo(familyMonth + travelMonth, 6);
+      expect(global?.thisYear).toBeCloseTo(
+        (metrics.metrics(family)?.thisYear ?? 0) + (metrics.metrics(travel)?.thisYear ?? 0),
+        6,
+      );
+      expect(global?.notCounted).toBe(1);
+    });
+
+    it('checks the budgets, and has zeros for a list without items', () => {
+      saved.set({ ...ontario, monthlyBudget: 90, annualBudget: 2000 });
+      const global = metrics.global();
+      expect(global?.warnings.month?.month).toBe('2026-10');
+      expect(global?.monthlyBudgetShare).toBeCloseTo((familyMonth + travelMonth) / 90, 6);
+      expect(metrics.metrics(family)?.warnings).toEqual({});
+      expect(metrics.metrics('0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c99')).toMatchObject({
+        thisMonth: 0,
+        thisYear: 0,
+        next12: 0,
+        notCounted: 0,
+      });
+    });
+
+    it('gives the charges in a range, of the lists asked for or every list, in date order', () => {
+      const october = { from: '2026-10-01', to: '2026-11-01' };
+      const all = metrics.charges(october);
+      expect(all.map((charge) => charge.date)).toEqual([
+        '2026-10-12',
+        '2026-10-12',
+        '2026-10-12',
+        '2026-10-12',
+      ]);
+      expect(metrics.charges(october, new Set([travel])).map((charge) => charge.listId)).toEqual([
+        travel,
+      ]);
+      expect(metrics.charges(october, new Set())).toEqual([]);
+    });
+
+    it('has none before the first run has saved the settings', () => {
+      saved.set(undefined);
+      expect(metrics.global()).toBeUndefined();
+      expect(metrics.metrics(family)).toBeUndefined();
+      expect(metrics.charges({ from: '2026-10-01', to: '2026-11-01' })).toEqual([]);
+    });
   });
 
   it('resolves nothing before the first run has saved the settings', () => {

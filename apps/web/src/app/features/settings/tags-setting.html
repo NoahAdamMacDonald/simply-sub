@@ -1,0 +1,69 @@
+@if (status() === 'ready') {
+  @if (records().length === 0 && editing()?.id !== 'new') {
+    <p class="hint">
+      No tags yet. They label your subscriptions: add them here or in a subscription.
+    </p>
+  }
+  @if (records().length > 0 || editing()?.id === 'new') {
+    <ul class="tags">
+      @for (tag of records(); track tag.id) {
+        <li [attr.data-tag]="tag.id">
+          @if (editing(); as open) {
+            @if (open.id === tag.id) {
+              <ss-tag-editor [tag]="tag" [focus]="open.focus" (closed)="closed(open, $event)" />
+            }
+          }
+          @if (editing()?.id !== tag.id) {
+            <div class="row">
+              <!-- Its colour, and the way to change it (P13's swatch). -->
+              <button
+                type="button"
+                class="swatch"
+                [attr.aria-label]="'Colour of ' + tag.name + ': ' + colourName(tag.color)"
+                (click)="edit(tag.id, 'colour')"
+              >
+                <span class="tag-dot" aria-hidden="true" [style.--tag-color]="tag.color"></span>
+              </button>
+              <span class="name">{{ tag.name }}</span>
+              <button
+                matIconButton
+                type="button"
+                class="rename"
+                [attr.aria-label]="'Rename ' + tag.name"
+                (click)="edit(tag.id, 'name')"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                matIconButton
+                type="button"
+                class="remove"
+                [attr.aria-label]="'Delete ' + tag.name"
+                (click)="remove(tag)"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          }
+        </li>
+      }
+      @if (editing(); as open) {
+        @if (open.id === 'new') {
+          <li>
+            <ss-tag-editor [focus]="open.focus" (closed)="closed(open, $event)" />
+          </li>
+        }
+      }
+    </ul>
+  }
+  @if (editing()?.id !== 'new') {
+    <button matButton="outlined" type="button" class="add" (click)="edit('new', 'name')">
+      <mat-icon>add_circle_outline</mat-icon>
+      New tag
+    </button>
+  }
+} @else if (status() === 'error') {
+  <p class="hint">Your tags couldn't be read.</p>
+} @else {
+  <p class="hint">Loading your tags…</p>
+}

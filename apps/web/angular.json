@@ -29,7 +29,16 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss"]
+            "styles": ["src/styles.scss"],
+            "allowedCommonJsDependencies": [
+              "exceljs",
+              "ics",
+              "papaparse",
+              "property-expr",
+              "runes2",
+              "tiny-case",
+              "toposort"
+            ]
           },
           "configurations": {
             "production": {

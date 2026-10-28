@@ -1,16 +1,18 @@
-import type {
-  ItemResolution,
-  ItemSource,
-  PickedPrice,
-  Tag,
-  UnresolvedReason,
+import {
+  addOnText,
+  planTitle,
+  sourceText,
+  unresolvedText,
+  type IsoDate,
+  type ItemResolution,
+  type PickedPrice,
+  type Tag,
 } from '@simply-sub/core';
-import { addOnText, billingText } from '../../shared/billing-text';
+import { billingText, renewalText } from '../../shared/billing-text';
 import { dateText } from '../../shared/date-text';
-import { planTitle } from '../../shared/sub-card/card-text';
 
-// What the list editor (P5) says about each item of its draft. Its renewal date and status ("Renews Nov 12") come
-// with the charges (M7.1); until then a row says how it's billed (shared/billing-text.ts).
+// What the list editor (P5) says about each item of its draft: when it renews, from its next charge ("Renews Nov 12 ·
+// auto", M7.1), or how it's billed when it can't be priced (shared/billing-text.ts).
 
 /** One item of the draft, as its row shows it. */
 export interface EditRow {
@@ -28,7 +30,7 @@ export interface EditRow {
   price?: PickedPrice;
   /** Where it was bought, when that's not the user's country: its tax rule applies. */
   region?: string;
-  /** Its billing, add-ons, own price and custom ranks, in words. */
+  /** When it renews, its add-ons, own price and custom ranks, in words. */
   details: string[];
   tags: Tag[];
   /** Why it can't be priced or named. */
@@ -36,7 +38,11 @@ export interface EditRow {
 }
 
 /** An item's row. `tags` are the user's, by id; one the item names that's gone is left out. */
-export function editRow(result: ItemResolution, tags: ReadonlyMap<string, Tag>): EditRow {
+export function editRow(
+  result: ItemResolution,
+  tags: ReadonlyMap<string, Tag>,
+  today: IsoDate,
+): EditRow {
   const item = result.ok ? result.resolved.item : result.unresolved.item;
   const shared = {
     id: item.id,
@@ -54,7 +60,7 @@ export function editRow(result: ItemResolution, tags: ReadonlyMap<string, Tag>):
       problem: unresolvedText(result.unresolved.reason),
     };
   }
-  const { name, planName, iconUrl, override, price, addOns } = result.resolved;
+  const { name, planName, iconUrl, override, price, addOns, nextCharge } = result.resolved;
   const shown = override ?? price;
   const priceOverride = item.priceOverride;
   const plan = item.source.kind === 'bundle' ? name : planTitle(name, planName);
@@ -72,7 +78,7 @@ export function editRow(result: ItemResolution, tags: ReadonlyMap<string, Tag>):
     price: shown,
     details: [
       // A free plan has nothing to bill.
-      ...(shown.amount === 0 ? [] : [billingText(item.billing)]),
+      ...(shown.amount === 0 ? [] : [renewalText(item.billing, nextCharge, today)]),
       ...addOns.map(addOnText),
       ...(override && priceOverride
         ? [
@@ -84,29 +90,6 @@ export function editRow(result: ItemResolution, tags: ReadonlyMap<string, Tag>):
       ...ranks,
     ],
   };
-}
-
-/** What an item is when it can't be resolved: its plan's or bundle's id, or that it's a custom subscription. */
-function sourceText(source: ItemSource): string {
-  switch (source.kind) {
-    case 'catalog':
-      return source.planId;
-    case 'bundle':
-      return source.bundleId;
-    case 'custom':
-      return 'Custom subscription';
-  }
-}
-
-function unresolvedText(reason: UnresolvedReason): string {
-  return {
-    pending: 'Loading…',
-    'plan-gone': 'This plan is no longer in the catalog',
-    'bundle-gone': 'This bundle is no longer in the catalog',
-    'custom-gone': 'Its custom subscription was deleted',
-    'add-on-gone': 'One of its add-ons is no longer in the catalog',
-    'no-price': 'There’s no price for how it’s billed',
-  }[reason];
 }
 
 function customRanksText(count: number): string[] {

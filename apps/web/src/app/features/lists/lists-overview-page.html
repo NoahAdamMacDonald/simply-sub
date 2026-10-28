@@ -36,18 +36,18 @@
                   </button>
                 </div>
                 <div class="body">
-                  <!-- "/ mo" and ≈ are read as words, as ss-price's are. -->
-                  <p class="cost">
-                    @if (card.average; as average) {
-                      <span aria-hidden="true">{{ average.shown }}</span>
-                      <span class="visually-hidden">{{ average.spoken }}, </span>
-                      <span aria-hidden="true"> · </span>
+                  <div class="cost">
+                    <!-- This month and this year, against the budgets (P3, M7.2). -->
+                    @if (card.count > 0 && card.metrics; as metrics) {
+                      <ss-budget-totals compact [metrics]="metrics" [name]="card.name" />
                     }
-                    <span>{{ card.countText }}</span>
-                  </p>
-                  <div class="ranks" role="group" [attr.aria-label]="'Ranks in ' + card.name">
-                    <ss-rank-counts [counts]="card.ranks" />
+                    <p class="count">{{ card.countText }}</p>
                   </div>
+                  @if (card.metrics; as metrics) {
+                    <div class="ranks" role="group" [attr.aria-label]="'Ranks in ' + card.name">
+                      <ss-rank-counts [counts]="metrics.rankCounts" />
+                    </div>
+                  }
                 </div>
                 <a
                   matButton="filled"

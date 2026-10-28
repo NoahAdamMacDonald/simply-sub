@@ -1,0 +1,123 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 1040px;
+}
+
+.note {
+  margin: 0;
+  color: var(--ss-text-muted);
+}
+
+// The mini calendar on a card and the budgets beside it, as the wireframe has them; stacked on a phone.
+.top {
+  display: grid;
+  gap: 24px 48px;
+  align-items: start;
+
+  @media (min-width: 720px) {
+    grid-template-columns: minmax(280px, 320px) minmax(0, 1fr);
+  }
+}
+
+.calendar {
+  padding: 16px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+}
+
+// While prices load: a row of pulsing dots under the grid.
+.skeleton-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+
+  span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--ss-text-muted);
+    opacity: 0.6;
+
+    @media (prefers-reduced-motion: no-preference) {
+      animation: pulse 1.5s ease-in-out infinite alternate;
+    }
+  }
+}
+
+@keyframes pulse {
+  to {
+    opacity: 0.2;
+  }
+}
+
+// A live region, so it stays in the page while empty, when it takes no room.
+.loading {
+  margin: 0;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+
+  &:not(:empty) {
+    margin-top: 8px;
+  }
+}
+
+.budgets {
+  max-width: 480px;
+}
+
+// The way into the lists: a wide pill, as the wireframe draws it.
+.lists-button {
+  align-self: center;
+  width: min(100%, 560px);
+  height: 72px;
+  border-radius: 36px;
+  font: var(--mat-sys-headline-small);
+}
+
+.next {
+  h2 {
+    margin: 0 0 8px;
+    font: var(--mat-sys-title-medium);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+.date {
+  color: var(--ss-text-muted);
+}
+
+.name {
+  font-weight: 600;
+}
+
+.manual {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  color: var(--ss-text-muted);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 12px;
+}

@@ -33,6 +33,28 @@ export function monthWeeks(month: IsoMonth): (IsoDate | null)[][] {
   return Array.from({ length: days.length / 7 }, (_, week) => days.slice(week * 7, week * 7 + 7));
 }
 
+/** A day of a month grid: its date, and whether it's in the month shown or a neighbouring one. */
+export interface GridDay {
+  date: IsoDate;
+  inMonth: boolean;
+}
+
+/**
+ * The month as monthWeeks has it, with the days before the 1st and after the last day filled in from the months on
+ * either side: the Calendar shows them muted (P10).
+ */
+export function monthGrid(month: IsoMonth): GridDay[][] {
+  const first = `${month}-01`;
+  const lead = weekdayOf(first);
+  return monthWeeks(month).map((week, row) =>
+    week.map((date, column) =>
+      date === null
+        ? { date: addDays(first, row * 7 + column - lead), inMonth: false }
+        : { date, inMonth: true },
+    ),
+  );
+}
+
 function parseMonth(month: IsoMonth): { year: number; index: number } {
   const match = /^(\d{4})-(0[1-9]|1[0-2])$/.exec(month);
   if (!match) throw new RangeError(`Not a month in YYYY-MM form: '${month}'`);

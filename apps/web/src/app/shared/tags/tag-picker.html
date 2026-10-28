@@ -1,50 +1,74 @@
-<mat-form-field appearance="outline" subscriptSizing="dynamic">
-  <mat-label>{{ label() }}</mat-label>
-  <mat-chip-grid #grid [attr.aria-label]="label()">
-    @for (tag of chosen(); track tag.id) {
-      <!-- A click anywhere on the chip removes it, as its X does and as Search's feature chips do (M5.9). -->
-      <mat-chip-row (removed)="remove(tag.id)" (click)="remove(tag.id)">
-        <span class="tag-dot" aria-hidden="true" [style.--tag-color]="tag.color"></span>
-        {{ tag.name }}
-        <button matChipRemove type="button" [attr.aria-label]="'Remove ' + tag.name">
-          <mat-icon>cancel</mat-icon>
-        </button>
-      </mat-chip-row>
-    }
-    <!--
+<div class="field-row">
+  <mat-form-field appearance="outline" subscriptSizing="dynamic">
+    <mat-label>{{ label() }}</mat-label>
+    <mat-chip-grid #grid [attr.aria-label]="label()">
+      @for (tag of chosen(); track tag.id) {
+        <!-- A click anywhere on the chip removes it, as its X does and as Search's feature chips do (M5.9). -->
+        <mat-chip-row (removed)="remove(tag.id)" (click)="remove(tag.id)">
+          <span class="tag-dot" aria-hidden="true" [style.--tag-color]="tag.color"></span>
+          {{ tag.name }}
+          <button matChipRemove type="button" [attr.aria-label]="'Remove ' + tag.name">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+      }
+      <!--
       A grid holds rows only (axe's aria-required-children), so the input has a row and cell of its own while the chips
       make a grid: Material drops the grid's role when it has no chips and nothing is typed.
     -->
-    <span class="input-row" [attr.role]="isGrid() ? 'row' : null">
-      <span class="input-cell" [attr.role]="isGrid() ? 'gridcell' : null">
-        <input
-          #chipInput
-          placeholder="Add a tag"
-          [matChipInputFor]="grid"
-          [matChipInputSeparatorKeyCodes]="[]"
-          [matAutocomplete]="auto"
-          (input)="query.set(chipInput.value)"
-          (blur)="leave($event)"
-        />
-      </span>
-    </span>
-  </mat-chip-grid>
-  <mat-autocomplete #auto autoActiveFirstOption (optionSelected)="pick($event.option.value)">
-    @for (tag of matches(); track tag.id) {
-      <mat-option [value]="tag.id">
-        <span class="option">
-          <span class="tag-dot" aria-hidden="true" [style.--tag-color]="tag.color"></span>
-          {{ tag.name }}
+      <span class="input-row" [attr.role]="isGrid() ? 'row' : null">
+        <span class="input-cell" [attr.role]="isGrid() ? 'gridcell' : null">
+          <input
+            #chipInput
+            placeholder="Add a tag"
+            [matChipInputFor]="grid"
+            [matChipInputSeparatorKeyCodes]="[]"
+            [matAutocomplete]="auto"
+            (input)="query.set(chipInput.value)"
+            (blur)="leave($event)"
+          />
         </span>
-      </mat-option>
-    }
-    @if (newName(); as name) {
-      <mat-option [value]="createChoice">
-        <span class="option"><mat-icon>add</mat-icon>Create tag “{{ name }}”</span>
-      </mat-option>
-    }
-  </mat-autocomplete>
-</mat-form-field>
+      </span>
+    </mat-chip-grid>
+    <mat-autocomplete #auto autoActiveFirstOption (optionSelected)="pick($event.option.value)">
+      @for (tag of matches(); track tag.id) {
+        <mat-option [value]="tag.id">
+          <span class="option">
+            <span class="tag-dot" aria-hidden="true" [style.--tag-color]="tag.color"></span>
+            {{ tag.name }}
+          </span>
+        </mat-option>
+      }
+      @if (newName(); as name) {
+        <mat-option [value]="createChoice">
+          <span class="option"><mat-icon>add</mat-icon>Create tag “{{ name }}”</span>
+        </mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>
+  @if (records().length > 0) {
+    <!-- Deletes a tag everywhere, not just from this subscription (M6.11). -->
+    <button
+      matIconButton
+      type="button"
+      class="delete-tags"
+      aria-label="Delete a tag"
+      [matMenuTriggerFor]="deleteMenu"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+    <mat-menu #deleteMenu="matMenu" aria-label="Delete a tag">
+      @for (tag of records(); track tag.id) {
+        <button mat-menu-item type="button" (click)="deleteTag(tag)">
+          <span class="option">
+            <span class="tag-dot" aria-hidden="true" [style.--tag-color]="tag.color"></span>
+            {{ tag.name }}
+          </span>
+        </button>
+      }
+    </mat-menu>
+  }
+</div>
 
 @if (draft(); as draft) {
   <!-- Escape closes this row only, not a dialog it's in. -->
@@ -65,23 +89,7 @@
         (keydown.enter)="$event.preventDefault(); create()"
       />
     </mat-form-field>
-    <fieldset class="colours">
-      <legend>Colour</legend>
-      @for (preset of presets; track preset.color) {
-        <label class="swatch">
-          <input
-            type="radio"
-            class="visually-hidden"
-            [name]="colourName"
-            [value]="preset.color"
-            [checked]="draft.color === preset.color"
-            (change)="recolour(preset.color)"
-          />
-          <span class="tag-dot" aria-hidden="true" [style.--tag-color]="preset.color"></span>
-          <span class="visually-hidden">{{ preset.name }}</span>
-        </label>
-      }
-    </fieldset>
+    <ss-tag-colours [color]="draft.color" (colorChange)="recolour($event)" />
     @if (failed()) {
       <p class="error" role="alert">Couldn't save the tag. Try again.</p>
     }

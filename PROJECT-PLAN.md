@@ -187,17 +187,17 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M6.8 | List view (P4), without the money parts, with `ss-sub-card`'s list variant (§4.3, moved from M4.5), built as `ss-item-card`; core's `listView` (search, sorts and filters, pinned first) in `user/list-view.ts` (BLUEPRINT §14) | Cards, pinning, search/filter and the edit button work |
 | M6.9 | Backup export/import (the "Your data" section of P13, and the first-run dialog's "Import a backup instead"), with an optional passphrase that encrypts the file, and the crypto module it uses (BLUEPRINT §11.5). As built: core's `user/backup.ts` (the file, its checks, Merge), the app's `core/crypto/passphrase-crypto.ts` and `BackupRepository` (BLUEPRINT §14) | Export → delete all → import restores everything, encrypted or not; a wrong passphrase or a tampered file imports nothing |
 | M6.10 | Optional app lock: a passphrase encrypts the user tables at rest, with a lock screen and an idle lock (P13, P15; BLUEPRINT §11.5). As built: core's `user/app-lock.ts` (what's sealed, the lock's settings) and `user/lock-idle.ts` (Lock after), `StorageEngine`'s sealing with `RowCipher` and `AppLockRepository`, the lock screen (`layout/lock-screen.ts`) and the idle lock (`core/lock/auto-lock.ts`) (BLUEPRINT §14) | Locked data on disk is unreadable without the passphrase; turning the lock on and off round-trips every table; a wrong passphrase unlocks nothing |
-| M6.11 | Custom tags (the Settings section of P13, added 2026-10-28 so M6 covers all of Settings): each tag renamed inline, recoloured (the 12 presets plus a hex field) and deleted, asking first when it's in use ("Used by 5 subscriptions"), and ⊕ to add one | P13's tag criteria met: tags persist and update every page live |
+| M6.11 | Custom tags (the Settings section of P13, added 2026-10-28 so M6 covers all of Settings): each tag renamed inline, recoloured (the 12 presets plus a hex field) and deleted, asking first when it's in use ("Used by 5 subscriptions"), and ⊕ to add one. As built: core's `user/tag-rules.ts` (names, colours, `tagUsage`, `withoutTag`), `TagsRepository.usage` and `removeWithItems` (one transaction on tags, items and drafts), Settings' `ss-tags-setting` and `ss-tag-editor`, the shared `ss-tag-colours` and `TagDeleter`, and the item dialog's Delete a tag menu (BLUEPRINT §14) | P13's tag criteria met: tags persist and update every page live |
 
 ### M7 — Money, schedule & calendar
 | ID | Task | Done when |
 |---|---|---|
-| M7.1 | core: schedule engine for charges, statuses (`ItemStatus` on M5.1's `itemActivity`, adding the end date and manual renewal), totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/` (built in M4.5 for the mini calendar), on M4.6's resolved items (`ResolvedItem.status` and `nextCharge`, `ListMetrics`; unresolved items left out of totals and counted; an add-on billed on its own period); sales tax on charges in `tax/`, from `addedSalesTax` (M4.2's rates, none on a price with `taxIncluded`) (BLUEPRINT §4.8; recheck the rates if `canadianSalesTaxCheckedOn` is old) | Charges include tax by province and "plus tax" amounts, and none on a price that includes it (Mullvad). Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
-| M7.2 | Totals and budget bars on Home, Lists and List view | The numbers match the §3.1 definitions |
-| M7.3 | Home (P2) | P2 criteria met |
-| M7.4 | Calendar (P10): grid, day panel, list filter, upcoming list, agenda layout on mobile | P10 criteria met |
-| M7.5 | Exports: ICS (one all-day event per charge, no `RRULE`s: BLUEPRINT §11.2), CSV, XLSX, TXT (lazy-loaded) | The files open in Google Calendar and Excel, and a plan billed on the 31st shows in every month |
-| M7.6 | Budget warning banners | A warning appears for a projected over-budget month |
+| M7.1 | core: schedule engine for charges, statuses (`ItemStatus` on M5.1's `itemActivity`, adding the end date and manual renewal), totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/` (built in M4.5 for the mini calendar), on M4.6's resolved items (`ResolvedItem.status` and `nextCharge`, `ListMetrics`; unresolved items left out of totals and counted; an add-on billed on its own period); sales tax on charges in `tax/`, from `addedSalesTax` (M4.2's rates, none on a price with `taxIncluded`) (BLUEPRINT §4.8; recheck the rates if `canadianSalesTaxCheckedOn` is old). As built: core's `schedule/` (`chargeDates`, `itemCharges`, `nextCharge`, `itemStatus`, `listMetrics` with the budget checks), `tax/charge-tax.ts` (`salesTaxOn`), `user/reanchor.ts` and `dates/period.ts`; `ResolvedItem.status`, `nextCharge` and `overridePrice`; and the UI it was waiting for: the cards' next charge and "Wrong date?", the editor's renewal dates, the item dialog's "next charge" and Search's "Ends" and "Renew by" (BLUEPRINT §14) | Charges include tax by province and "plus tax" amounts, and none on a price that includes it (Mullvad). Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
+| M7.2 | Totals and budget bars on Home, Lists and List view. As built: `MetricsService`'s `metrics`, `global`, `metricsOf` and `charges` (core's `listMetrics`, with a conversion flag for each total), `ss-budget-totals` (a bar against each budget that's set, else the total alone, and Home's "Set a monthly budget →"), the Lists cards' bars, List view's side column and each card's "31% of list", and the list editor's "This month" (BLUEPRINT §14) | The numbers match the §3.1 definitions |
+| M7.3 | Home (P2). As built: the mini calendar on a card beside every list's totals (stacked under 720 px), the Subscription Lists pill, Next payments (the next three charges), the empty state's Create a list, Browse services and Import backup, and pulsing dots while prices load (BLUEPRINT §14) | P2 criteria met |
+| M7.4 | Calendar (P10): grid, day panel, list filter, upcoming list, agenda layout on mobile. As built: core's `readCalendarParams`, `writeCalendarParams`, `hiddenLists` (`user/calendar-params.ts`), `monthGrid` and `settings.calendarHiddenLists`; the page, `ss-day-panel` and its bottom sheet; List view's mini calendar; and `ClockService.today` moving on at midnight (BLUEPRINT §14) | P10 criteria met |
+| M7.5 | Exports: ICS (one all-day event per charge, no `RRULE`s: BLUEPRINT §11.2), CSV, XLSX, TXT (lazy-loaded). As built: core's `export/` (`itemTable`, `paymentTable`, `summaryTable`, `exportWorkbook`, `calendarEvents`, `listText`, `listFile`, `exportFileName`) and `periodCost`; the app's `Exporter` and `export-files.ts` with papaparse, exceljs and ics; List view's Export, the Calendar's Sync calendar and Export to file, and a per-list JSON (BLUEPRINT §14) | The files open in Google Calendar and Excel, and a plan billed on the 31st shows in every month |
+| M7.6 | Budget warning banners. As built: `ss-budget-warnings` on Home (every list together) and List view (the list alone), from M7.1's budget checks, with the month's link to the Calendar (BLUEPRINT §14) | A warning appears for a projected over-budget month |
 
 ### M8 — Optimizer & bot
 | ID | Task | Done when |
@@ -266,6 +266,9 @@ These live in `packages/core` as pure functions, so every page computes them the
   item like pinning.
 - **Free plans:** a $0 price creates no charges, so a free item never appears on the calendar and adds nothing to
   totals. A price of 0 shows as "Free", never with ≈ (pickPrice marks it native).
+- **Next charge:** an item's first charge on or after today. An Ongoing item's anchor that's still to come is its next
+  renewal (P6 asks for it so), so its next charge is on or after it: a charge counted back from it onto today is the
+  payment just made, which totals count and the calendar shows (M7.1).
 - **Specific dates (limited windows):** a charge at each window's start, then one every interval while the date is
   before the window's end. The item is active from `start` through `end`, both included. `repeatYearly` copies the
   window into every year. Example: Sep 2 – Nov 1, monthly → charges on Sep 2 and Oct 2, active until Nov 1; a window
@@ -325,13 +328,14 @@ Users rank **rank keys**. Each one points to one rankable option of a feature:
 In Search the status is per provider, across all lists ("Active · 2 lists").
 
 Active and Inactive, with "Active from", come from the billing dates alone (core's `itemActivity`, M5.1); a window
-that repeats yearly is copied into each later year, never earlier ones. Ending and Manual renewal need the charges
-(M7.1).
+that repeats yearly is copied into each later year, never earlier ones. Ending and Manual renewal need the charges:
+core's `itemStatus` (M7.1), and for Search's providers `providerRenewals`, where "Ends" needs every item still going
+on to end within 30 days.
 
 ### 3.4 View models
 ```ts
 // packages/core/src/user/resolved.ts: resolveItem(item, context) → { ok: true, resolved } | { ok: false, unresolved }
-export interface ResolvedItem {        // as built in M4.6; the fields marked "M6.1" and "M7.1" come with those tasks
+export interface ResolvedItem {        // as built in M4.6, M6.1 and M7.1
   item: ListItem;
   listId: string;
   providerId?: string; planId?: string; bundleId?: string; customSubId?: string;
@@ -347,11 +351,12 @@ export interface ResolvedItem {        // as built in M4.6; the fields marked "M
                            // each priced for the item's period when sold that way, else its shortest (Disney+ bills
                            // extra members monthly, even on a yearly plan)
   override?: PickedPrice;  // the price override with the item's period, while it applies (before its `until`)
+  overridePrice?: PickedPrice; // M7.1: the same whatever the date, for the charges dated before its `until`
   monthlyEquivalent: number; // today: the override, else price + add-ons × quantity; before tax, except typed amounts
   features: Plan['features']; // the plan's, a bundle's plans' together (bundleFeatures), or the custom plan's
   providedKeys: RankKey[];
   status: ItemStatus;      // M7.1: { kind: 'active' | 'inactive'; activeFrom?; endsOn?; manual }
-  nextCharge?: Charge;     // M7.1
+  nextCharge?: Charge;     // M7.1: with tax; none for a free plan or once nothing is left
   effectiveRanks: Record<RankKey, Rank>; // M6.1: each provided key's rank, override > profile > not-ranked
   // cardId is the item's own (item.cardId), Phase 4
 }
@@ -363,12 +368,15 @@ export interface UnresolvedItem {     // pages say why; totals leave it out and 
     | 'no-price';                     // no price for the item's billing period where it's bought
 }
 
-export interface ListMetrics {
+export interface ListMetrics {       // as built in M7.1: core's listMetrics (schedule/list-metrics.ts)
   thisMonth: number; thisYear: number; next12: number;
   approx: boolean;                                   // true if converted amounts are included
+  notCounted: number;                                // unresolved items, and ones with a charge it couldn't convert
+  shares: ReadonlyMap<string, number>;               // each item's share of next12: a card's "31% of list"
   rankCounts: Record<Exclude<Rank, 'not-ranked'>, number>;
   featureSummary: { key: RankKey; label: string; active: number; total: number }[];
   monthlyBudgetShare?: number; annualBudgetShare?: number;
+  warnings: BudgetWarnings;                          // §3.1's budget checks: { month?, year? }
 }
 ```
 `MetricsService` (Angular) builds these as `computed()` signals from the repositories, `CatalogStore`,
@@ -380,7 +388,8 @@ it was bought in (`CatalogStore.catalogFor`).
 ### 3.5 State and URL conventions
 - **Saved data** (lists, items, rankings, tags, cards, settings, drafts) → Dexie.
 - **Shareable UI state** (search query and filters, calendar month, selected lists) → URL query parameters.
-- **Small per-device preferences** (the calendar's list filter, collapsed groups) → `settings`.
+- **Small per-device preferences** (the calendar's list filter, collapsed groups) → `settings`. The Calendar keeps
+  the lists it leaves out (`calendarHiddenLists`, M7.4), so a list made since shows.
 - Dialogs that need deep links use query params (`?add=`, `?item=`). All other dialogs are plain `MatDialog`s.
 
 ---
@@ -483,7 +492,7 @@ Add these aliases to `_tokens.scss`. They build on the rank tokens in BLUEPRINT 
 | `ss-sub-card` | Subscription card (`variant: 'search' \| 'list'`), built with its pages: the search variant in M5.2, the list variant in M6.8. As built (M5.2): the search variant takes a `searchCatalog` result; its plan chips are radio buttons (one tab stop, arrow keys, never none chosen); the expanded section is `ss-plan-details`. M5.4: its prices and its bundles' prices open the card's `ss-add-to-list-menu`. M5.7: its chips sit right below its names and never move, a lone plan gets a chip too, and its details slide open and shut, with Hide details at their foot. M6.8: the list variant is a component of its own, `ss-item-card`, which takes a resolved item and shares the card's look (`_card.scss`) and sliding details (`SlidingDetails`); Edit is a link in its details. Since the feedback after M6.9 the search variant counts the user's ranks of its plan's features under the status, and its "· 2 lists" names the lists | `result`, `ranks` (M5.2), `listNames` (the feedback after M6.9); `ss-item-card`: `resolved`, `tags` and `pinToggle` (M6.8) |
 | `ss-in-lists` | "2 lists" after a Search card's status: a button whose tooltip names the lists ("In Work Related and Family") and whose menu links to them; only words without their names | `count`, `lists` (id and name), `provider` (names the menu) |
 | `ss-add-to-list-menu` | P7's Add to list menu (M5.4): the user's lists in the order they were made, each with its number of subscriptions, then New list…; picking one opens that list's editor, or `/lists/new`, with core's `addRequestParams` | `prepare(request)` (the price that opens it says what it adds); `menu` for `ss-price` |
-| `ss-tag-chip`, `ss-tag-picker` | A tag as a dot in its colour and its name; the picker is chips with an autocomplete, and "Create tag “…”" asks for a name and one of core's 12 `tagColorPresets`, saved through `TagsRepository` | `tag`; `tagIds` (`model`) → `tagIdsChange` |
+| `ss-tag-chip`, `ss-tag-picker` | A tag as a dot in its colour and its name; the picker is chips with an autocomplete, and "Create tag “…”" asks for a name and one of core's 12 `tagColorPresets` (`ss-tag-colours`), saved through `TagsRepository`. Since M6.11, "Delete a tag" beside it is a menu that deletes one everywhere, asking first when it's in use | `tag`; `tagIds` (`model`) → `tagIdsChange` |
 | `ss-price-range` | Price per month as a filter (Search's panel, List view's Sort menu): a dual slider from $0 to the range's top, which means "Unlimited" | `range` (core's `PriceRange`), `min?`, `max?`, `currency`, `country?` → `limitsChange` (a limit at its end of the slider is left out) |
 | `ss-feature-filter` | Features as a filter: a chip per rank key chosen, which a click removes, and a box that suggests the rest by what's typed, grouped by feature category (core's `featureSuggestions`). Off with nothing to suggest or chosen | `keys` (what can be suggested), `features`, `categories`, `hint`, `value` (`model`) |
 | `ss-chip-choices` | A labelled group of checkboxes drawn as chips, each with an optional colour dot: Search's Activity, List view's Status and Tags. None chosen is all | `legend`, `choices` (value, label, colour?), `value` (`model`) |
@@ -553,6 +562,21 @@ Oct 22, 2026, and use the illustrative prices from `docs/api-output-examples.jso
 - No lists → empty state with [Create a list] [Browse services] [Import backup].
 - Catalog still loading → skeleton dots.
 
+**As built (M7.3):**
+- **Layout:** the mini calendar on a card, with the totals on its right from 720 px and under it below that; then the
+  Subscription Lists pill, centred; then Next payments ("Nov 12 Netflix $19.94", as charged, ↻ for a manual renewal).
+  The page's heading, "Home", is for screen readers only: the wireframe has none.
+- **Mini calendar:** the shown month's charges for every list, the same as the Calendar's (`MetricsService.charges`); a
+  day or the month's title opens `/calendar?month=YYYY-MM`; it follows today into a new month at midnight.
+- **Catalog loading:** while an item's catalog file hasn't loaded, the calendar has no dots, a row of pulsing dots
+  under it, and "Loading your payments…" in a live region.
+- **No lists:** "Start with a list", with Create a list, Browse services (Search) and Import backup (Settings' dialog,
+  loaded on the click).
+
+**As built (M7.6):** above the calendar, a warning for each budget check that fails, for every list together: "Your
+payments in January 2027 add up to ≈ $137.20, over your $50.00 monthly budget." with "See January 2027 in the
+Calendar", and "Your payments this year, past and to come, add up to ≈ $610.64, over your $500.00 annual budget."
+
 **Acceptance**
 - [ ] The bar totals equal the sum of every list's "this month" / "this year"
 - [ ] Unset budgets show the prompt instead of a bar
@@ -579,6 +603,10 @@ Subscription Lists                          [Custom subscriptions]           Fea
 **As built (M6.7):** until the bars (M7.2), a card says what the list costs a month on average and how many
 subscriptions it has, "≈ $26.84 / mo average · 2 subscriptions". Under 960 px the Features column comes after the
 cards.
+
+**As built (M7.2):** the average gives way to the bars: "[bar] $50 this month" and "[bar] $250 this year", each a bar
+only while its budget is set (named "Work Related, monthly budget"), else the amount alone; then "2 subscriptions",
+and "1 subscription not counted" when one can't be priced or converted.
 
 **Data:** lists, `ListMetrics` for each list, the global feature summary.
 **Behaviour**
@@ -647,15 +675,20 @@ stays.
 - Empty list → [Add from catalog] [Add custom subscription] (both open edit mode).
 
 **As built (M6.8):**
-- **Header:** the average a month and the count, until M7.2's bars.
+- **Header:** the average a month and the count. It stays with M7.2's totals (the user's choice).
 - **Sort:** opens a panel under the search box with the sorts and the filters, and Clear all. The default sort is
   Highest price first.
-- **Feature summary:** under the cards below 960 px, as on the Lists overview, until the bars take the place above them.
-- **Cards** are `ss-item-card`, whose details have Edit. "Wrong date?" comes with the next charge (M7.1).
+- **Feature summary:** under the cards below 960 px, as on the Lists overview. Since M7.2 the totals take the place
+  above them.
+- **Cards** are `ss-item-card`, whose details have Edit. Since M7.1 they start with the next charge as charged, tax
+  included ("Next charge Nov 12, 2026: $19.94, with $0.95 tax"), with "Wrong date?" for an Ongoing item, and the
+  status shows "Ends" and "Renew by".
 - **Unsaved changes:** a note links back to the editor when it has changes not saved.
 
 **Since the feedback after M6.8:**
 - **Side column:** Types ("Streaming video: 2") comes first, then the feature summary, which folds after 8 rows.
+  Since M7.4 the list's mini calendar follows the totals, folded behind a Calendar button under 960 px; a day or its
+  title opens the Calendar on that month, showing this list. From 960 px the Tab order reaches it after the cards.
 - **Cards:** a card shows its nickname over its plan, and its details have its note and View in Search.
 - **Search box:** finds a nickname or a note.
 - **Sort menu:** Features and Tags are always there, turned off when there's nothing to choose.
@@ -666,6 +699,21 @@ stays.
 - **Sort menu:** Search's filter controls. Price per month is a dual slider up to the priciest item's monthly
   equivalent. Features is the chip box with suggestions. Status is Active and Inactive chips (none chosen is both),
   and Tags are chips with their colour dots, or a hint saying how to add them.
+
+**As built (M7.2):**
+- **Side column:** this month's and this year's totals first: "Monthly budget [bar] ≈ $27.79 of $200.00 this month"
+  and the annual one, each bar named by its heading, or without a budget the amount alone ("$27.79 this month"), as
+  the user chose. Under 960 px they come above the cards, and Types and Features stay after them.
+- **Cards:** each gives its share of the list's next 12 months under its price, "31% of list" (read "… over the next
+  12 months"), or "<1% of list"; none with no charge to come.
+
+**As built (M7.6):** the list's own budget warnings come first, as on Home but for this list alone ("This list's
+payments in January 2027 add up to…", the user's choice), the month's link opening the Calendar showing the list.
+
+**As built (M7.5):**
+- **Export ▾** beside Edit list, when the list has something in it: CSV (a row per item: what it costs as charged,
+  how it renews, its next charge and live tags), Excel (Summary, the list's items, Payments), JSON (the list and its
+  items as stored, not importable, as the user chose), Text (a summary) and Calendar (.ics, the next 12 months).
 
 BLUEPRINT §14 has the details.
 
@@ -691,8 +739,8 @@ Editing  [ Work Related______________ ]                        [Cancel] [Save]  
 Unsaved changes · This month $26.52 · ≈ $26.52 / mo average
 ```
 **As built (M6.4):** the heading is "Edit list" ("New list" for a new list), with the List name field beside
-Cancel, Save and ⋮ under it. Until M7.1 a row says how it's billed ("Monthly · auto-renews") rather than its renewal
-date, and until M7.2 the footer has only the average.
+Cancel, Save and ⋮ under it. Since M7.1 a row says when it renews ("Renews Nov 12 · auto", "Renews Jan 20, 2027 ·
+manual"), and since M7.2 the footer says "This month $26.52" before the average.
 
 **Data:** `ListDraftService` (the draft lives in the Dexie `drafts` table), catalog, custom subscriptions.
 **Behaviour**
@@ -775,10 +823,13 @@ groups fold, a click on a tag chip removes it, and a reseller's price arrives wi
 **Since the feedback after M6.8:** an optional Nickname under Plan (at most 60 characters), which tells two of the same
 plan apart, and an optional Note at the end (at most 1000). Fields in a row keep their own heights.
 
+**Since M6.11:** "Delete a tag" beside the Tags field is a menu of the tags, which deletes one everywhere, asking
+first when it's in use, as Settings' ✕ does (P13).
+
 **As built (M6.5):** the sections run Plan, Add-ons (P6's "Extra members": an add-on can be a channel), Billing, "I
 pay a different price", Advanced, Feature ranks and Tags, and Plus tax shows only where tax is added. The billing day
-is a "Billed on" choice. The footer's ≈ marks a converted price only, and "next charge" comes with M7.1. Payment comes
-with M9.4. BLUEPRINT §14 has the rest.
+is a "Billed on" choice. The footer's ≈ marks a converted price only, and "next charge Nov 12" came with M7.1.
+Payment comes with M9.4. BLUEPRINT §14 has the rest.
 **Rules**
 - **Plan:** plans of the same provider (or of the custom subscription), with their prices. Changing the plan keeps the interval if the new plan offers it; otherwise the first available interval is picked.
 - **Extra members:** add-ons of the selected plan, with quantity up to `addOnLimit`.
@@ -1030,6 +1081,28 @@ Upcoming   Oct 28 Crave $22.00 · Nov 3 Mullvad ≈ $7.53 ↻ · Nov 12 Netflix 
   - Phase 5: "Live calendar link" → opt-in dialog → `POST /cal` → shows the URL, subscribe steps for each app and a Revoke button.
 - A year view (12 small months plus monthly totals) comes in M10.
 
+**As built (M7.4):**
+- **Layout:** "Calendar", the month's bar with its total, then Showing (a multi-select of the lists, "All lists" or
+  their names) and ‹ [Month] [Year] › [Today]; the grid with the day's panel on its right from 960 px; then Upcoming,
+  the next five charges. Sync calendar and Export to file come with the exports (M7.5).
+- **The grid:** each day's date is a button over its cell, named with its payments ("Monday, October 12, 1 payment,
+  $19.94"), one tab stop that the arrow keys, Home, End and Page Up/Down move, as the mini calendar's. Its chips
+  (icon, amount, ≈, ↻, and the name where the cell is wide enough), "+2 more" and the day's total sit beside the
+  button, hidden from screen readers; a chip's click opens the day on that charge. Other months' days are muted
+  numbers.
+- **The panel:** the day's heading (focus starts there), then each charge: its name, as charged with tax, how it
+  renews, "Ends" on its last charge, its list as a link, and Wrong date? for a charge still to come of an Ongoing item.
+  ✕ and Escape close it, with focus back on the day.
+- **Under 600 px:** an agenda, a card per day with payments; a payment opens its day in a bottom sheet, with focus on
+  it.
+- **The URL:** `?month=` and `lists=` only when not every list is shown; a month that isn't one, or a list that's
+  gone, is rewritten in place. Without `lists`, the Calendar shows what it last showed on this device.
+
+**As built (M7.5):** beside the heading, for the lists shown, over the next 12 months:
+- **Sync calendar ▾:** Google, Apple and Proton Calendar. Each downloads the .ics, then a dialog gives that app's
+  import steps, with Download again.
+- **Export to file ▾:** Calendar (.ics) as the main button, then Payment schedule (.csv, a row per charge) and Excel.
+
 **Acceptance**
 - [ ] Charges appear on the right days, including month-end dates and limited windows
 - [ ] The spent/total bar matches §3.1 for past, current and future months
@@ -1123,8 +1196,8 @@ own. A set feature asks for one or more of its values, as enum and number featur
 📍 Ontario, Canada (CAD)
 ```
 **Built so far:** the budgets, Appearance and 📍 (M4.2), each a card ("Location and currency" holds 📍 and the tax
-line under it), the Catalog line (M4.3), Your data (M6.9) and Security (M6.10). Custom tags come with M6.11, and
-local sync with Phase 5.
+line under it), the Catalog line (M4.3), Your data (M6.9), Security (M6.10) and Custom tags (M6.11), after Budgets.
+Local sync comes with Phase 5.
 - **Your data** (M6.9):
   - **Export backup:** a dialog with "Protect with a passphrase" (at least 8 characters, typed twice). It downloads
     the file.
@@ -1146,6 +1219,10 @@ local sync with Phase 5.
   - The colour swatch opens a palette (12 presets plus a hex field).
   - ✕ deletes, asking for confirmation if the tag is in use: "Used by 5 subscriptions".
   - ⊕ adds a new tag in edit mode.
+  - As built: a row per tag with its colour button, name, ✎ and ✕. ✎ and the colour open one editor in the row (Name,
+    the presets, Hex colour; Enter saves, Escape cancels). Names are trimmed and unique in any case. Deleting takes the
+    tag off every item and every list's draft in one transaction, and "Used by" counts both. BLUEPRINT §14 has the
+    rest.
 - 📍 opens a dialog for country, province or state, and currency (the currency follows the country unless you change it), with the sales tax that follows: "Sales tax 13% (Ontario)" and a "Use my own rate" checkbox (BLUEPRINT §4.8). It shares the first-run dialog's fields (P1). Cancel or Escape changes nothing.
 - **Appearance** (M4.2): System, Light or Dark, saved in `settings.theme` (BLUEPRINT §8.1).
 - **Catalog** (M4.3): "Updated Oct 22, 2026 · version c4f9a21" (the build date and version of the user's region's file), or "Not downloaded yet". [Check for updates] checks now and says what it found in a live region under it: "You have the latest catalog.", "Downloaded the latest catalog.", "You're offline. Try again when you're back online." or "Couldn't check for updates. Try again later."

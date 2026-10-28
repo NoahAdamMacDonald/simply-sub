@@ -1,0 +1,97 @@
+:host {
+  display: block;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  h2 {
+    margin: 0;
+    font: var(--mat-sys-title-medium);
+
+    // The heading takes focus when the panel opens; it isn't a control, so no ring.
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.none {
+  margin: 8px 0 0;
+  color: var(--ss-text-muted);
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ss-divider);
+}
+
+.what {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  h3 {
+    margin: 0;
+    font: var(--mat-sys-title-small);
+    overflow-wrap: anywhere;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+p {
+  margin: 0;
+  font: var(--mat-sys-body-medium);
+}
+
+.amount {
+  font-weight: 600;
+}
+
+.renewal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  color: var(--ss-text-muted);
+
+  mat-icon {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+  }
+}
+
+.badge {
+  padding: 0 6px;
+  border: 1px solid var(--ss-divider);
+  border-radius: 10px;
+  font: var(--mat-sys-label-small);
+}
+
+.list a {
+  color: var(--ss-accent-text);
+}
+
+.wrong-date {
+  align-self: flex-start;
+  margin-left: -12px;
+}
