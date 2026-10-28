@@ -2520,6 +2520,58 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
+**Resolved (2026-10-27, feedback after M6.8)**
+Reported from the running app, with screenshots, and fixed before M6.9:
+- **Pages scrolled sideways on a phone** (the list editor, Search). This wasn't reproduced. Every page fit at 320,
+  360 and 390 px, in each of these:
+  - Edge, Brave and WebKit, with the browser's scrollbars shown;
+  - an emulated iPhone, including one switched to from a desktop width without a reload;
+  - a window narrowed from 1280 px;
+  - a root font of 20 px.
+
+  The screenshots show only one of the page's 16 px side gutters at a time, so the visible area was about 4% narrower
+  than the page, which is what a slight pinch-zoom leaves (Ctrl+scroll in DevTools' device mode is one). To catch a
+  real overflow, `check-overflow.cjs` now measures every page, with its dialogs and panels open, at those widths with
+  scrollbars shown, since headless Chromium hides them and hid any width that counts on them. It also fails on
+  anything inside the page that scrolls sideways.
+- **The item dialog's boxes weren't the same size.** A field with a two-line hint made its row taller, and the other
+  fields' boxes stretched to match. The dialog's rows now keep each field at its own height (`align-items:
+  flex-start`), and a window row's checkbox and 🗑 sit level with its boxes. The custom subscription editor already
+  did this.
+- **A reseller's price wasn't on its shop's line at phone width**, and several shops stacked into a jumble. Under
+  600 px "Cheaper at" now shows once, then a row per shop: its name on the left (it wraps) and its price pill on the
+  right, with the tax note under it. Screen readers still hear "Cheaper at" in each row. From 600 px nothing changed.
+- **The feature summary left out features a list has** ("doesn't need all, but some are missing"). Its keys now also
+  include what each item has itself (core's `featureSummary`):
+  - every boolean feature it has;
+  - its own rung of a ladder (an enum's value, a number's tier), not the lower rungs that rung provides too. A 4K
+    plan shows 4K, and counts toward 1080p when another item shows that.
+
+  A set's values (DNS blocking's ads, malware and the rest) show only when ranked or marked headline: one set can
+  have many. Within a rank, headlines come first, then names. `ss-feature-summary` takes a `limit`: the Lists
+  overview and List view show 8 rows, then "Show all 28".
+- **Types:** the side column of both Lists pages now starts with the types of subscriptions, "Streaming video: 2",
+  "VPN: 1", with each type's icon (`ss-type-counts`). Core's `typeCounts` counts each item in each of its service
+  categories (`ResolvedItem.categories`, from `planCategories`; a bundle's plans together), and a custom
+  subscription as Custom. Most come first.
+- **A nickname and a note** (both optional) on a list item:
+  - The fields: `ListItem.nickname`, trimmed, at most 60 characters, and `note`, at most 1000. They're optional,
+    so stored items stay valid and Dexie needed no new version.
+  - The item dialog has Nickname under Plan ("to tell two of the same plan apart: Mom's") and Note at its end. Editing
+    an item clears one that's emptied, as it does its own price.
+  - A card shows the nickname as its heading, with "Netflix Standard" under it, and names its buttons "Pin Mom's
+    (Netflix Standard)". The note is in its details, keeping its line breaks. The list editor's rows show the
+    nickname too.
+  - List view's search box finds an item by its nickname or note, and Name, A to Z puts two of the same plan in
+    nickname order.
+- **Tags in the Sort menu:** Features and Tags are always there now. With nothing to choose they're turned off and
+  say why: "No subscription here has a tag yet: add them with ✎ Edit".
+- **View in Search:** a card's details link to its provider in Search (`/search?q=Netflix`, which shows the user's
+  plan), or for a bundle to its seller. A custom subscription isn't in Search, so it has no link. The link is named
+  "View in Search, Netflix Standard".
+- **Bundles:** the initial bundle didn't change (492.6 kB). The item dialog's chunk grew 1.5 kB, Search's 1 kB and
+  List view's 2 kB.
+
 **Resolved (2026-10-27, M6.8)**
 - **List view** (PROJECT-PLAN P4, `/lists/:listId`): "‹ Lists", the list's name, and "≈ $48.84 / mo average · 3
   subscriptions" (the overview's `averageText`, until M7.2's bars). Then the search box with Sort beside it, the cards

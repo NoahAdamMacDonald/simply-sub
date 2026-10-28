@@ -28,30 +28,33 @@
   <mat-error>{{ firstError(form.max) }}</mat-error>
 </mat-form-field>
 
-@if (options().features.length > 0) {
-  <mat-form-field appearance="outline" subscriptSizing="dynamic">
-    <mat-label>Features</mat-label>
-    <mat-select multiple [formField]="form.features">
-      @for (feature of options().features; track feature.key) {
-        <mat-option [value]="feature.key">{{ feature.label }}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
-}
+<mat-form-field appearance="outline" subscriptSizing="dynamic">
+  <mat-label>Features</mat-label>
+  <mat-select multiple [formField]="form.features">
+    @for (feature of options().features; track feature.key) {
+      <mat-option [value]="feature.key">{{ feature.label }}</mat-option>
+    }
+  </mat-select>
+  @if (options().features.length === 0) {
+    <mat-hint>None of these has a feature to filter by</mat-hint>
+  }
+</mat-form-field>
 
-@if (options().tags.length > 0) {
-  <mat-form-field appearance="outline" subscriptSizing="dynamic">
-    <mat-label>Tags</mat-label>
-    <mat-select multiple [formField]="form.tags">
-      @for (tag of options().tags; track tag.id) {
-        <mat-option [value]="tag.id">
-          <span class="tag-dot" aria-hidden="true" [style.--tag-color]="tag.color"></span>
-          {{ tag.name }}
-        </mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
-}
+<!-- There even with no tags in the list, saying where they come from. -->
+<mat-form-field appearance="outline" subscriptSizing="dynamic">
+  <mat-label>Tags</mat-label>
+  <mat-select multiple [formField]="form.tags">
+    @for (tag of options().tags; track tag.id) {
+      <mat-option [value]="tag.id">
+        <span class="tag-dot" aria-hidden="true" [style.--tag-color]="tag.color"></span>
+        {{ tag.name }}
+      </mat-option>
+    }
+  </mat-select>
+  @if (options().tags.length === 0) {
+    <mat-hint>No subscription here has a tag yet: add them with ✎ Edit</mat-hint>
+  }
+</mat-form-field>
 
 <button
   matButton="outlined"

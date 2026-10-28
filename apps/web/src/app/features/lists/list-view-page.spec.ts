@@ -208,7 +208,19 @@ describe('ListViewPage', () => {
       Array.from(page().querySelectorAll('ss-feature-summary li')).map((row) =>
         text(row.querySelector('.label')),
       ),
-    ).toEqual(['VPN:']);
+    ).toEqual([
+      // Ranked, then what the items have themselves.
+      'VPN:',
+      'Ad free:',
+      'Video quality: 1080p (Full HD):',
+      'Video quality: 4K (Ultra HD):',
+    ]);
+    expect(
+      Array.from(page().querySelectorAll('ss-type-counts li')).map(
+        (row) =>
+          `${text(row.querySelector('.label'))} ${text(row.querySelector('span:last-child'))}`,
+      ),
+    ).toEqual(['Streaming video: 2', 'VPN: 1']);
     expect(page().querySelector('.edit-list')?.getAttribute('href')).toBe(`/lists/${work.id}/edit`);
     expect(text(page().querySelector('.shown'))).toBe('');
   });
@@ -233,6 +245,7 @@ describe('ListViewPage', () => {
     ).toEqual([
       ['Plan Mullvad VPN, opens in a new tab', 'https://example.com/mullvad.vpn'],
       ['Cancel Mullvad VPN, opens in a new tab', 'https://mullvad.net/cancel'],
+      ['View in Search', '/search?q=Mullvad%20VPN'],
       ['Edit', `/lists/${work.id}/edit?item=${mullvad.id}`],
     ]);
     expect(button('Details: Mullvad VPN')?.getAttribute('aria-expanded')).toBe('true');
@@ -332,6 +345,31 @@ describe('ListViewPage', () => {
     expect(await lowest.getValue()).toBe('');
     expect(spoken(toggle)).toBe('Sort and filter');
     expect(toggle?.querySelector('.badge')).toBeNull();
+  });
+
+  it('keeps Tags in the Sort menu with no tags in the list, turned off and saying why', async () => {
+    await plant();
+    await TestBed.inject(ItemsRepository).update(netflix.id, { tagIds: [] });
+    await open(work.id);
+    await until(() => groups().length === 4);
+    const loader = await openFilters();
+    const tags = await control(loader, 'Tags', MatSelectHarness);
+    expect(await tags.isDisabled()).toBe(true);
+    expect(
+      await (
+        await loader.getHarness(MatFormFieldHarness.with({ floatingLabelText: 'Tags' }))
+      ).getTextHints(),
+    ).toEqual(['No subscription here has a tag yet: add them with ✎ Edit']);
+    expect(await (await control(loader, 'Features', MatSelectHarness)).isDisabled()).toBe(false);
+  });
+
+  it('finds a card by its nickname, which it shows over the plan', async () => {
+    await plant();
+    await TestBed.inject(ItemsRepository).update(mullvad.id, { nickname: 'Work laptop' });
+    await open(work.id);
+    await until(() => groups().includes('Work laptop · Mullvad VPN'));
+    await search('laptop');
+    expect(groups()).toEqual(['# Subscriptions', 'Work laptop · Mullvad VPN']);
   });
 
   it('lists an item it can’t price, with why and Edit', async () => {

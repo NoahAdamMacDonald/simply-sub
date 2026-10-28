@@ -336,6 +336,19 @@ async function openView(page, listId = LIST) {
         features.includes('VPN:'),
         features.join(' | '),
       );
+      const types = await view(page)
+        .locator('ss-type-counts li')
+        .evaluateAll((rows) =>
+          rows.map(
+            (row) =>
+              `${row.querySelector('.label').textContent.trim()} ${row.querySelector('span:last-child').textContent.trim()}`,
+          ),
+        );
+      check(
+        `${label}: the list's types, most first: two streaming services and a VPN`,
+        types.length === 2 && types[0].endsWith(': 2') && types[1] === 'VPN: 1',
+        types.join(' | '),
+      );
       await noSideScroll(page, viewport, `${label}, the list`);
       await page.screenshot({ path: shot('view'), fullPage: true });
       await axeCheck(page, `${label}, the list`);
@@ -478,11 +491,12 @@ async function openView(page, listId = LIST) {
         .locator('.actions a')
         .evaluateAll((anchors) => anchors.map((anchor) => anchor.getAttribute('href')));
       check(
-        `${label}: the details say how it's billed, list its features, and link to its plan, cancel page and Edit`,
+        `${label}: the details say how it's billed, list its features, and link to its plan, cancel page, Search and Edit`,
         facts.join(' | ') === 'Monthly · auto-renews' &&
           (await details.locator('ss-feature-list li').count()) > 0 &&
-          links.length === 3 &&
-          links[2] === `/lists/${LIST}/edit?item=${NETFLIX}`,
+          links.length === 4 &&
+          links[2] === '/search?q=Netflix' &&
+          links[3] === `/lists/${LIST}/edit?item=${NETFLIX}`,
         `${facts.join(' | ')} / ${links.join(' | ')}`,
       );
       await noSideScroll(page, viewport, `${label}, the details`);
@@ -508,6 +522,25 @@ async function openView(page, listId = LIST) {
         `${label}: opening the editor without changing anything leaves no note about changes`,
         (await view(page).locator('.unsaved').count()) === 0,
       );
+      // View in Search, by keyboard, from a card's details.
+      await view(page).locator('h1').click();
+      await keyToName(page, 'Details: Netflix Standard');
+      await page.keyboard.press('Enter');
+      await view(page).locator(`[data-item="${NETFLIX}"] .details-content`).waitFor();
+      await keyToName(page, 'View in Search, Netflix Standard');
+      await page.keyboard.press('Enter');
+      await until('Search', () => pathOf(page) === '/search');
+      await page.locator('ss-sub-card').first().waitFor({ timeout: 20000 });
+      check(
+        `${label}: View in Search opens Search on the card's provider, showing its plan`,
+        new URL(page.url()).searchParams.get('q') === 'Netflix' &&
+          (await page.locator('ss-sub-card h2').first().textContent()).trim() === 'Netflix' &&
+          (await page.locator('ss-sub-card .plan-name').first().textContent()).trim() ===
+            'Standard',
+      );
+      await openView(page);
+      await until('the cards', async () => (await cards(page)).length === 3);
+
       await view(page).locator('h1').click();
       await keyToName(page, 'Edit list');
       await page.keyboard.press('Enter');

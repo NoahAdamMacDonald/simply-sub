@@ -10,8 +10,8 @@ import { monthlyIn } from './monthly-average';
 import type { ResolvedItem, UnresolvedItem } from './resolved';
 import type { Tag } from './tag';
 
-// List view's search box and its Sort menu (PROJECT-PLAN P4, M6.8): the text finds an item by its name, plan, tags or
-// features; the menu sorts and filters. Pinned items come first, in the same order.
+// List view's search box and its Sort menu (PROJECT-PLAN P4, M6.8): the text finds an item by its name, plan, nickname,
+// note, tags or features; the menu sorts and filters. Pinned items come first, in the same order.
 
 /** P4's sorts: price per month (highest first), A–Z, active first, or billing period (shortest first). */
 export type ListSort = 'price' | 'name' | 'active' | 'interval';
@@ -68,10 +68,10 @@ export interface ListFilterOptions {
 }
 
 /**
- * The list's items that match `query`, sorted, pinned ones first. Text matches a word of the item's name, plan, a
- * tag's name or a provided key's name (nameMatcher). The price filter and sort compare monthly equivalents in the
+ * The list's items that match `query`, sorted, pinned ones first. Text matches a word of the item's name, plan,
+ * nickname, note, a tag's name or a provided key's name (nameMatcher). The price filter and sort compare monthly equivalents in the
  * user's currency: an item priced in another one for want of a rate is left out by a price filter, and sorted last.
- * Ties go A–Z by name and plan.
+ * Ties go A–Z by name, plan and nickname.
  */
 export function listView(
   items: { resolved: readonly ResolvedItem[]; unresolved: readonly UnresolvedItem[] },
@@ -98,6 +98,8 @@ export function listView(
       matches([
         resolved.name,
         resolved.planName,
+        ...(item.nickname === undefined ? [] : [item.nickname]),
+        ...(item.note === undefined ? [] : [item.note]),
         ...item.tagIds.flatMap((id) => context.tags.get(id)?.name ?? []),
         ...resolved.providedKeys.flatMap((key) => labels.get(key) ?? []),
       ])
@@ -193,7 +195,8 @@ function sorter(
 ): (a: ResolvedItem, b: ResolvedItem) => number {
   const byName = (a: ResolvedItem, b: ResolvedItem) =>
     compare(sortName(a.name), sortName(b.name)) ||
-    compare(sortName(a.planName), sortName(b.planName));
+    compare(sortName(a.planName), sortName(b.planName)) ||
+    compare(sortName(a.item.nickname ?? ''), sortName(b.item.nickname ?? ''));
   switch (sort) {
     case 'price':
       return (a, b) => {

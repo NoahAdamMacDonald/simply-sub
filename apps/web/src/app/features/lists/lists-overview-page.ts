@@ -12,7 +12,12 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RouterLink } from '@angular/router';
-import { featureSummary, rankCounts, type RankCounts as Counts } from '@simply-sub/core';
+import {
+  featureSummary,
+  rankCounts,
+  typeCounts,
+  type RankCounts as Counts,
+} from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { ClockService } from '../../core/clock/clock-service';
 import { ListDraftService } from '../../core/lists/list-draft-service';
@@ -24,6 +29,7 @@ import { ConfirmService } from '../../shared/confirm/confirm-service';
 import { FeatureSummary } from '../../shared/feature-summary/feature-summary';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { RankCounts } from '../../shared/rank/rank-counts';
+import { TypeCounts } from '../../shared/type-counts/type-counts';
 import { averageText, type ShownAndSpoken } from './average-text';
 
 /** One list's card (P3). */
@@ -55,7 +61,16 @@ const undoMillis = 10_000;
  */
 @Component({
   selector: 'ss-lists-overview-page',
-  imports: [FeatureSummary, MatButton, MatIcon, MatIconButton, PageHeader, RankCounts, RouterLink],
+  imports: [
+    FeatureSummary,
+    MatButton,
+    MatIcon,
+    MatIconButton,
+    PageHeader,
+    RankCounts,
+    RouterLink,
+    TypeCounts,
+  ],
   templateUrl: './lists-overview-page.html',
   styleUrl: './lists-overview-page.scss',
 })
@@ -94,14 +109,21 @@ export class ListsOverviewPage {
     });
   });
 
-  /** "VPN: 2 / 3" for every list's items together (§3.2). */
-  protected readonly features = computed(() => {
+  /** Every list's resolved items together. */
+  private readonly allItems = computed(() => {
     const ids = new Set(this.lists.records().map((list) => list.id));
-    const items = [...this.metrics.byList()]
+    return [...this.metrics.byList()]
       .filter(([listId]) => ids.has(listId))
       .flatMap(([, list]) => list.resolved);
-    return featureSummary(items, this.catalog.catalog()?.features ?? [], this.today());
   });
+  /** How many of each type every list has together: "Streaming video: 3". */
+  protected readonly types = computed(() =>
+    typeCounts(this.allItems(), this.catalog.catalog()?.categories.service ?? []),
+  );
+  /** "VPN: 2 / 3" for every list's items together (§3.2). */
+  protected readonly features = computed(() =>
+    featureSummary(this.allItems(), this.catalog.catalog()?.features ?? [], this.today()),
+  );
 
   constructor() {
     // Focus moves once the cards show the change it waited for.

@@ -1,9 +1,20 @@
-<ul>
-  @for (row of rows(); track row.key) {
+<ul [id]="id">
+  @for (row of shown(); track row.key) {
     <li>
       <span class="label">{{ row.label }}:</span>
-      <span aria-hidden="true">{{ row.active }} / {{ row.total }}</span>
+      <span class="count" aria-hidden="true">{{ row.active }} / {{ row.total }}</span>
       <span class="visually-hidden">{{ row.active }} of {{ row.total }} active</span>
     </li>
   }
 </ul>
+@if (folds()) {
+  <button
+    type="button"
+    class="more"
+    [attr.aria-expanded]="expanded()"
+    [attr.aria-controls]="id"
+    (click)="expanded.set(!expanded())"
+  >
+    {{ expanded() ? 'Show fewer' : 'Show all ' + rows().length }}
+  </button>
+}

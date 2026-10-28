@@ -459,3 +459,31 @@ describe('resolveItem', () => {
     });
   });
 });
+
+describe('resolveItem: categories', () => {
+  it('gives a catalog plan its own categories, else its provider’s', () => {
+    expect(
+      resolved(resolveItem(item({ kind: 'catalog', planId: 'netflix.standard' }), canadian))
+        .categories,
+    ).toEqual(['streaming']);
+    expect(
+      resolved(resolveItem(item({ kind: 'catalog', planId: 'proton.vpn-plus' }), canadian))
+        .categories,
+    ).toEqual(['vpn']);
+  });
+
+  it('gives a bundle its plans’ categories, each once, and a custom plan none', () => {
+    expect(
+      resolved(resolveItem(item({ kind: 'bundle', bundleId: 'bundle.netflix-crave' }), canadian))
+        .categories,
+    ).toEqual(['streaming']);
+    expect(
+      resolved(
+        resolveItem(
+          item({ kind: 'custom', customSubId: gymId, customPlanId: gymPlanId }),
+          canadian,
+        ),
+      ).categories,
+    ).toEqual([]);
+  });
+});

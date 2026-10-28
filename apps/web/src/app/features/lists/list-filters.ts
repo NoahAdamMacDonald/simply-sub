@@ -1,8 +1,8 @@
 import { Component, input, model } from '@angular/core';
-import { FormField, form, validateTree, type FieldTree } from '@angular/forms/signals';
+import { FormField, disabled, form, validateTree, type FieldTree } from '@angular/forms/signals';
 import { MatButton } from '@angular/material/button';
 import { MatOption } from '@angular/material/core';
-import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatError, MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatSelect } from '@angular/material/select';
 import {
@@ -51,11 +51,22 @@ export function listQuery(q: string, state: ListFilterState): ListViewQuery {
 /**
  * List view's Sort menu (P4): a sort, Active only or Inactive only, a price range per month, features an item must
  * all have and tags it needs one of, and Clear all, which keeps the sort. Its choices are what the list's items have
- * (core's listFilterOptions). The page keeps the state, so it outlives the panel being closed.
+ * (core's listFilterOptions); Features and Tags are there with none, turned off and saying why. The page keeps the
+ * state, so it outlives the panel being closed.
  */
 @Component({
   selector: 'ss-list-filters',
-  imports: [FormField, MatButton, MatError, MatFormField, MatInput, MatLabel, MatOption, MatSelect],
+  imports: [
+    FormField,
+    MatButton,
+    MatError,
+    MatFormField,
+    MatHint,
+    MatInput,
+    MatLabel,
+    MatOption,
+    MatSelect,
+  ],
   templateUrl: './list-filters.html',
   styleUrl: './list-filters.scss',
 })
@@ -65,11 +76,13 @@ export class ListFilters {
   /** How many filters are set: Clear all is off with none. */
   readonly count = input(0);
 
-  protected readonly form = form(this.state, (path) =>
+  protected readonly form = form(this.state, (path) => {
     validateTree(path, ({ value, fieldTree }) =>
       issueErrors(fieldTree, listPriceRange(value()).issues),
-    ),
-  );
+    );
+    disabled(path.features, { when: () => this.options().features.length === 0 });
+    disabled(path.tags, { when: () => this.options().tags.length === 0 });
+  });
 
   protected readonly sorts: readonly { value: ListSort; label: string }[] = [
     { value: 'price', label: 'Highest price first' },

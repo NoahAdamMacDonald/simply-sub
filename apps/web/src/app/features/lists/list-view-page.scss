@@ -137,9 +137,21 @@
   }
 }
 
+// Types, then Features, on the right from 960 px.
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.types,
 .features {
   h2 {
-    margin: 0 0 4px;
+    margin: 0 0 8px;
     font: var(--mat-sys-title-large);
   }
+}
+
+.features h2 {
+  margin-bottom: 4px;
 }

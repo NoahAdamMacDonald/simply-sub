@@ -82,8 +82,19 @@ p {
 }
 
 .plan,
-.billed {
+.billed,
+.nickname {
   width: min(100%, 420px);
+}
+
+// Room under its hint before Billing.
+.nickname {
+  margin-bottom: 16px;
+}
+
+.notes {
+  display: block;
+  margin-top: 16px;
 }
 
 .includes {
@@ -114,10 +125,12 @@ p {
 }
 
 // Fields side by side, wrapping onto the next line when the dialog is narrow, with room for a hint or an error under
-// a field before the next one's label.
+// a field before the next one's label. Each keeps its own height: stretched to the row's, a field beside one with a
+// two-line hint drew a taller box.
 .row {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
   gap: 8px 16px;
 
   mat-form-field {
@@ -185,12 +198,18 @@ p {
   gap: 8px;
 }
 
-// A window's dates, Every year and 🗑 on one line, wrapping when the dialog is narrow.
+// A window's dates, Every year and 🗑 on one line, wrapping when the dialog is narrow. The fields keep their own
+// height, and the checkbox and 🗑 sit level with their boxes (56 px), whatever is under them.
 .window {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px 12px;
+
+  mat-checkbox,
+  button {
+    margin-top: 8px;
+  }
 
   .window-name {
     flex-basis: 100%;

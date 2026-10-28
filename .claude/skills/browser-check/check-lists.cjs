@@ -338,11 +338,30 @@ async function plantLists(page) {
         ) && shown[1] === 'Family | No subscriptions yet | ',
         shown.join(' / '),
       );
+      // Ranked and headline rows first, then what the items have themselves, folded after 8 (the feedback after M6.8).
+      const showAll = page.locator('ss-lists-overview-page ss-feature-summary button.more');
       check(
-        `${label}: the feature summary covers every list (VPN is a headline), read as "1 of 1 active"`,
-        features.join(' | ') ===
-          'Ad free: 1 / 1 (1 of 1 active) | Video quality: 1080p (Full HD): 1 / 1 (1 of 1 active) | VPN: 1 / 1 (1 of 1 active)',
+        `${label}: the feature summary covers every list, ranked rows and the VPN headline first, read as "1 of 1 active", folded after 8`,
+        features.slice(0, 3).join(' | ') ===
+          'Ad free: 1 / 1 (1 of 1 active) | Video quality: 1080p (Full HD): 1 / 1 (1 of 1 active) | VPN: 1 / 1 (1 of 1 active)' &&
+          features.length === 8 &&
+          /^Show all \d+$/.test((await showAll.textContent()).trim()),
         features.join(' | '),
+      );
+      const types = await page
+        .locator('ss-lists-overview-page ss-type-counts li')
+        .evaluateAll((rows) =>
+          rows.map(
+            (row) =>
+              `${row.querySelector('.label').textContent.trim()} ${row.querySelector('span:last-child').textContent.trim()}`,
+          ),
+        );
+      check(
+        `${label}: the types of every list together: a streaming service and a VPN`,
+        types.length === 2 &&
+          types.every((type) => type.endsWith(': 1')) &&
+          types.includes('VPN: 1'),
+        types.join(' | '),
       );
       await noSideScroll(page, viewport, `${label}, two lists`);
       await page.screenshot({ path: shot('lists'), fullPage: true });

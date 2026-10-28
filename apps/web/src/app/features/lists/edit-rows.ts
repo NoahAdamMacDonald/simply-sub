@@ -19,7 +19,7 @@ export interface EditRow {
   title: string;
   /**
    * The provider's, bundle's or custom subscription's name, then its plan: "Netflix", "Standard". A plan named after
-   * its provider is shown alone: "Mullvad VPN", "Proton Unlimited".
+   * its provider is shown alone: "Mullvad VPN", "Proton Unlimited". With a nickname, the nickname, then the plan.
    */
   name: string;
   planName?: string;
@@ -57,11 +57,17 @@ export function editRow(result: ItemResolution, tags: ReadonlyMap<string, Tag>):
   const { name, planName, iconUrl, override, price, addOns } = result.resolved;
   const shown = override ?? price;
   const priceOverride = item.priceOverride;
-  const title = item.source.kind === 'bundle' ? name : planTitle(name, planName);
+  const plan = item.source.kind === 'bundle' ? name : planTitle(name, planName);
+  const { nickname } = item;
   return {
     ...shared,
-    title,
-    ...(title === planName ? { name: planName } : { name, planName }),
+    // A nickname tells two of the same plan apart: "Mom's (Netflix Standard)", shown over the plan.
+    title: nickname === undefined ? plan : `${nickname} (${plan})`,
+    ...(nickname !== undefined
+      ? { name: nickname, planName: plan }
+      : plan === planName
+        ? { name: planName }
+        : { name, planName }),
     ...(iconUrl !== undefined && { iconUrl }),
     price: shown,
     details: [

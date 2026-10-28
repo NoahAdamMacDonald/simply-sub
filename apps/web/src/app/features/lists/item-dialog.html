@@ -42,6 +42,14 @@
       </mat-form-field>
     }
 
+    <!-- The user's own name for it, which tells two of the same plan apart in a list. -->
+    <mat-form-field appearance="outline" class="nickname" subscriptSizing="dynamic">
+      <mat-label>Nickname</mat-label>
+      <input matInput autocomplete="off" [formField]="form.nickname" />
+      <mat-hint>Optional, to tell two of the same plan apart: Mom’s</mat-hint>
+      <mat-error>{{ firstError(form.nickname) }}</mat-error>
+    </mat-form-field>
+
     @if (addOns().length > 0) {
       <fieldset class="add-ons">
         <legend>Add-ons</legend>
@@ -401,6 +409,13 @@
     </section>
 
     <ss-tag-picker class="tags" [tagIds]="model().tagIds" (tagIdsChange)="setTags($event)" />
+
+    <mat-form-field appearance="outline" class="notes" subscriptSizing="dynamic">
+      <mat-label>Note</mat-label>
+      <textarea matInput rows="3" [formField]="form.note"></textarea>
+      <mat-hint>Optional</mat-hint>
+      <mat-error>{{ firstError(form.note) }}</mat-error>
+    </mat-form-field>
   </mat-dialog-content>
 
   <mat-dialog-actions>

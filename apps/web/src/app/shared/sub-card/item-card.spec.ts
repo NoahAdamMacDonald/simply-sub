@@ -1,7 +1,12 @@
 import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { resolveItem, type ListItem, type ResolvedItem } from '@simply-sub/core';
+import {
+  resolveItem,
+  type CustomSubscription,
+  type ListItem,
+  type ResolvedItem,
+} from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { ClockService } from '../../core/clock/clock-service';
 import { ItemCard } from './item-card';
@@ -9,12 +14,30 @@ import { alberta, fx, listItem, searchCatalogData, today } from './search.testin
 
 // List view's card (P4) on Search's small catalog, for an Albertan.
 
+const gymId = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c50';
+const gymPlanId = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c51';
+const gym: CustomSubscription = {
+  id: gymId,
+  name: 'Gym',
+  plans: [
+    {
+      id: gymPlanId,
+      name: 'Monthly',
+      features: {},
+      price: { amount: 40, currency: 'CAD', interval: 'month', intervalCount: 1 },
+      autoRenewAvailable: true,
+    },
+  ],
+  createdAt: '2026-10-20T12:00:00.000Z',
+  updatedAt: '2026-10-20T12:00:00.000Z',
+};
+
 function resolved(planId: string, extra: Partial<ListItem> = {}): ResolvedItem {
   const result = resolveItem(
     { ...listItem(planId, '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d'), ...extra },
     {
       catalog: searchCatalogData,
-      customSubs: new Map(),
+      customSubs: new Map([[gymId, gym]]),
       country: alberta.country,
       currency: alberta.currency,
       fx,
@@ -122,5 +145,50 @@ describe('ItemCard', () => {
     expect(pin?.getAttribute('aria-pressed')).toBe('true');
     pin?.click();
     expect(pins).toEqual([false]);
+  });
+
+  it('shows a nickname over the plan, and names its buttons with both', () => {
+    const element = render(resolved('netflix.standard', { nickname: "Mom's" }))
+      .nativeElement as HTMLElement;
+    expect(text(element.querySelector('h3'))).toBe("Mom's");
+    expect(text(element.querySelector('.plan-name'))).toBe('Netflix Standard');
+    expect(element.querySelector('.pin')?.getAttribute('aria-label')).toBe(
+      "Pin Mom's (Netflix Standard)",
+    );
+    expect(element.querySelector('.expand')?.getAttribute('aria-label')).toBe(
+      "Details: Mom's (Netflix Standard)",
+    );
+  });
+
+  it('shows its note in the details, with the lines it was typed with', async () => {
+    const fixture = render(resolved('netflix.standard', { note: 'Paid by Dad\nShared' }));
+    const element = fixture.nativeElement as HTMLElement;
+    element.querySelector<HTMLElement>('.expand')?.click();
+    await fixture.whenStable();
+    expect(text(element.querySelector('.item-note h4'))).toBe('Note');
+    expect(element.querySelector('.item-note p')?.textContent).toBe('Paid by Dad\nShared');
+  });
+
+  it('links a plan to its provider in Search, a bundle to its seller, and a custom plan nowhere', async () => {
+    const view = async (item: ResolvedItem) => {
+      const fixture = render(item);
+      const element = fixture.nativeElement as HTMLElement;
+      element.querySelector<HTMLElement>('.expand')?.click();
+      await fixture.whenStable();
+      const link = element.querySelector('a.view');
+      return link && [link.getAttribute('href'), link.getAttribute('aria-label')];
+    };
+    expect(await view(resolved('netflix.standard', { nickname: "Mom's" }))).toEqual([
+      '/search?q=Netflix',
+      "View in Search, Mom's (Netflix Standard)",
+    ]);
+    expect(
+      await view(resolved('', { source: { kind: 'bundle', bundleId: 'bundle.netflix-crave' } })),
+    ).toEqual(['/search?q=Crave', 'View in Search, Netflix and Crave']);
+    expect(
+      await view(
+        resolved('', { source: { kind: 'custom', customSubId: gymId, customPlanId: gymPlanId } }),
+      ),
+    ).toBeNull();
   });
 });

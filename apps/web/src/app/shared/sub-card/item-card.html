@@ -25,7 +25,7 @@
       class="pin"
       [class.pinned]="item().pinned"
       [attr.aria-pressed]="item().pinned"
-      [attr.aria-label]="'Pin ' + title()"
+      [attr.aria-label]="'Pin ' + label()"
       (click)="pinToggle.emit(!item().pinned)"
     >
       <mat-icon>push_pin</mat-icon>
@@ -41,7 +41,7 @@
     class="expand"
     [attr.aria-expanded]="details.expanded()"
     [attr.aria-controls]="id + '-details'"
-    [attr.aria-label]="'Details: ' + title()"
+    [attr.aria-label]="'Details: ' + label()"
     (click)="details.toggle()"
   >
     <mat-icon>{{ details.expanded() ? 'expand_less' : 'expand_more' }}</mat-icon>
@@ -58,6 +58,13 @@
                   <li>{{ fact }}</li>
                 }
               </ul>
+            }
+
+            @if (item().note; as note) {
+              <div class="item-note">
+                <h4>Note</h4>
+                <p>{{ note }}</p>
+              </div>
             }
 
             <!-- Not a section: the page's feature summary is the Features region. -->
@@ -84,13 +91,25 @@
                   <mat-icon aria-hidden="true">open_in_new</mat-icon>
                 </a>
               }
+              <!-- Its provider's card in Search, which shows this plan (P8). -->
+              @if (searchText(); as text) {
+                <a
+                  class="view"
+                  routerLink="/search"
+                  [queryParams]="{ q: text }"
+                  [attr.aria-label]="'View in Search, ' + label()"
+                >
+                  <mat-icon aria-hidden="true">search</mat-icon>
+                  <span>View in Search</span>
+                </a>
+              }
               <!-- The list editor opens the item dialog for it (P5, ?item=). -->
               <a
                 matButton="outlined"
                 class="edit"
                 [routerLink]="['/lists', item().listId, 'edit']"
                 [queryParams]="{ item: item().id }"
-                [attr.aria-label]="'Edit ' + title()"
+                [attr.aria-label]="'Edit ' + label()"
               >
                 <mat-icon aria-hidden="true">edit</mat-icon>
                 Edit
@@ -100,7 +119,7 @@
           <button
             type="button"
             class="collapse"
-            [attr.aria-label]="'Hide details: ' + title()"
+            [attr.aria-label]="'Hide details: ' + label()"
             (click)="details.collapse()"
           >
             <mat-icon aria-hidden="true">expand_less</mat-icon>

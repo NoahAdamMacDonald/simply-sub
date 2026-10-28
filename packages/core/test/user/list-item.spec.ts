@@ -232,3 +232,22 @@ describe('listItemSchema', () => {
     });
   });
 });
+
+describe('listItemSchema: nickname and note', () => {
+  it('trims them', () => {
+    const parsed = listItemSchema.parse({ ...item, nickname: "  Mom's ", note: ' For the kids\n' });
+    expect(parsed).toMatchObject({ nickname: "Mom's", note: 'For the kids' });
+  });
+
+  it('refuses one that is empty or too long', () => {
+    expect(issues(listItemSchema, { ...item, nickname: '  ' })).toContain(
+      'nickname: Must not be empty',
+    );
+    expect(issues(listItemSchema, { ...item, nickname: 'x'.repeat(61) })).toContain(
+      'nickname: Use at most 60 characters',
+    );
+    expect(issues(listItemSchema, { ...item, note: 'x'.repeat(1001) })).toContain(
+      'note: Use at most 1000 characters',
+    );
+  });
+});

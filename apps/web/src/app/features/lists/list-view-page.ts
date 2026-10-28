@@ -22,6 +22,7 @@ import {
   listFilterCount,
   listFilterOptions,
   listView,
+  typeCounts,
   type ResolvedItem,
   type Tag,
 } from '@simply-sub/core';
@@ -39,6 +40,7 @@ import { EmptyState } from '../../shared/empty-state/empty-state';
 import { FeatureSummary } from '../../shared/feature-summary/feature-summary';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { ItemCard } from '../../shared/sub-card/item-card';
+import { TypeCounts } from '../../shared/type-counts/type-counts';
 import { CustomSubEditor } from '../custom-subs/custom-sub-editor';
 import { averageText } from './average-text';
 import { editRow } from './edit-rows';
@@ -47,7 +49,7 @@ import { ListFilters, listQuery, noListFilters, type ListFilterState } from './l
 /**
  * List view (PROJECT-PLAN P4, M6.8): one list's subscriptions as cards (ss-item-card), pinned ones first, with what the
  * list costs a month on average and how many it has, a search box and the Sort menu (core's listView), 📌 saved
- * straight to the item, each card's Edit and the list's, and the list's feature summary (§3.2). M7.2 adds the budget
+ * straight to the item, each card's Edit and the list's, and on the side its types and feature summary (§3.2). M7.2 adds the budget
  * bars and each card's share, M7.4 the mini calendar, M7.5 Export and M8 the optimizations button.
  */
 @Component({
@@ -71,6 +73,7 @@ import { ListFilters, listQuery, noListFilters, type ListFilterState } from './l
     MatSuffix,
     PageHeader,
     RouterLink,
+    TypeCounts,
   ],
   templateUrl: './list-view-page.html',
   styleUrl: './list-view-page.scss',
@@ -157,6 +160,10 @@ export class ListViewPage {
     this.view().unresolved.map((unresolved) =>
       editRow({ ok: false, unresolved }, this.tags.byId()),
     ),
+  );
+  /** How many of each type it has: "Streaming video: 3". */
+  protected readonly types = computed(() =>
+    typeCounts(this.listItems().resolved, this.catalog.catalog()?.categories.service ?? []),
   );
   /** "VPN: 2 / 3" for this list's items (§3.2). */
   protected readonly features = computed(() =>

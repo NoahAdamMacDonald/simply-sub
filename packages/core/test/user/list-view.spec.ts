@@ -290,3 +290,23 @@ describe('listPriceRange', () => {
     });
   });
 });
+
+describe('listView: nicknames and notes', () => {
+  const moms = {
+    ...netflix,
+    item: { ...netflix.item, pinned: false, nickname: "Mom's", note: 'Paid by Dad' },
+  };
+  const mine = { ...netflix, item: { ...netflix.item, pinned: false, nickname: 'Mine' } };
+  const both = { resolved: [mine, moms, mullvad], unresolved: [] };
+
+  it('finds an item by its nickname or its note', () => {
+    expect(listView(both, { q: 'mom' }, context).others).toEqual([moms]);
+    expect(listView(both, { q: 'dad' }, context).others).toEqual([moms]);
+  });
+
+  it('sorts two of the same plan by their nicknames', () => {
+    expect(
+      listView(both, { sort: 'name' }, context).others.map(({ item }) => item.nickname),
+    ).toEqual([undefined, 'Mine', "Mom's"]);
+  });
+});

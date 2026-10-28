@@ -746,3 +746,43 @@ describe('isDuplicate', () => {
     expect(isDuplicate(netflix.source, twice, netflix)).toBe(false);
   });
 });
+
+describe('nickname and note', () => {
+  it('start empty, and an item’s are filled in', () => {
+    expect(standardForm()).toMatchObject({ nickname: '', note: '' });
+    const form = itemFormFor(
+      stored(itemFromForm(standardForm(), context), { nickname: "Mom's", note: 'Hers' }),
+      {
+        addOnIds: [],
+        today,
+        country: 'CA',
+        currency: 'CAD',
+      },
+    );
+    expect(form).toMatchObject({ nickname: "Mom's", note: 'Hers' });
+  });
+
+  it('are saved trimmed, and left out when empty', () => {
+    const fields = itemFromForm(standardForm({ nickname: "  Mom's ", note: ' Hers\n' }), context);
+    expect(fields).toMatchObject({ nickname: "Mom's", note: 'Hers' });
+    expect(stored(fields)).toMatchObject({ nickname: "Mom's", note: 'Hers' });
+    const empty = itemFromForm(standardForm({ nickname: '  ', note: '' }), context);
+    expect(empty).not.toHaveProperty('nickname');
+    expect(empty).not.toHaveProperty('note');
+  });
+
+  it('can be at most 60 and 1000 characters', () => {
+    expect(
+      itemFormIssues(standardForm({ nickname: 'x'.repeat(61), note: 'x'.repeat(1001) }), context),
+    ).toEqual([
+      { path: ['nickname'], message: 'Use at most 60 characters' },
+      { path: ['note'], message: 'Use at most 1000 characters' },
+    ]);
+    expect(
+      itemFormIssues(
+        standardForm({ nickname: ` ${'x'.repeat(60)} `, note: 'x'.repeat(1000) }),
+        context,
+      ),
+    ).toEqual([]);
+  });
+});
