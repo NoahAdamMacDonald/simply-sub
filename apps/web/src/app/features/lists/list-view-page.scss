@@ -18,16 +18,33 @@
   color: var(--ss-accent-text);
 }
 
-// The cards, and the feature summary on their right from 960 px; under it the summary comes after them, as on the
-// Lists overview.
+// The cards, and on their right from 960 px the totals, then the types and feature summary. Under 960 px the totals
+// come above the cards, and the types and summary after them, as on the Lists overview.
 .layout {
   display: grid;
   gap: 24px;
 
   &.with-features {
     @media (min-width: 960px) {
+      grid-template-areas:
+        'items money'
+        'items side';
+      grid-template-rows: auto 1fr;
       grid-template-columns: minmax(0, 1fr) minmax(200px, 280px);
       align-items: start;
+
+      // Named only here: under 960 px there's no template, and the blocks go in their order.
+      .items {
+        grid-area: items;
+      }
+
+      .money {
+        grid-area: money;
+      }
+
+      .side {
+        grid-area: side;
+      }
     }
   }
 }

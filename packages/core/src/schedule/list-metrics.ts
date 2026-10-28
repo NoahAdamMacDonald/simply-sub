@@ -90,6 +90,8 @@ export interface ListMetrics {
   next12: number;
   /** A total includes a converted amount. */
   approx: boolean;
+  /** Which totals include a converted amount, each shown with ≈. */
+  converted: { thisMonth: boolean; thisYear: boolean; next12: boolean };
   /**
    * Items the totals leave out: ones that can't be priced (UnresolvedItem), and ones with a charge in another
    * currency, for want of an exchange rate.
@@ -165,6 +167,7 @@ export function listMetrics(
     thisYear: thisYear.amount,
     next12: total12.amount,
     approx: thisMonth.approx || thisYear.approx || total12.approx,
+    converted: { thisMonth: thisMonth.approx, thisYear: thisYear.approx, next12: total12.approx },
     notCounted: unresolved.length + leftOut.size,
     shares,
     rankCounts: rankCounts(resolved),

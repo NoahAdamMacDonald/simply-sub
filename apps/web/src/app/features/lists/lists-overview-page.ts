@@ -12,25 +12,18 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RouterLink } from '@angular/router';
-import {
-  featureSummary,
-  rankCounts,
-  typeCounts,
-  type RankCounts as Counts,
-} from '@simply-sub/core';
+import { typeCounts, type ListMetrics } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
-import { ClockService } from '../../core/clock/clock-service';
 import { ListDraftService } from '../../core/lists/list-draft-service';
 import { MetricsService } from '../../core/metrics/metrics-service';
-import { SettingsStore } from '../../core/settings/settings-store';
 import type { DeletedList } from '../../core/storage/drafts-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
+import { BudgetTotals } from '../../shared/budget-totals/budget-totals';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
 import { FeatureSummary } from '../../shared/feature-summary/feature-summary';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { RankCounts } from '../../shared/rank/rank-counts';
 import { TypeCounts } from '../../shared/type-counts/type-counts';
-import { averageText, type ShownAndSpoken } from './average-text';
 
 /** One list's card (P3). */
 interface ListCard {
@@ -39,9 +32,8 @@ interface ListCard {
   /** How many subscriptions it has, priced or not, and that in words: "12 subscriptions", "No subscriptions yet". */
   count: number;
   countText: string;
-  /** "≈ $26.84 / mo average": what it costs until M7.2's bars say this month's and this year's. None when empty. */
-  average?: ShownAndSpoken;
-  ranks: Counts;
+  /** This month's and this year's totals against the budgets (M7.2), and its rank counts. */
+  metrics?: ListMetrics;
 }
 
 /** Where focus goes once the cards have caught up: the card after a deleted one, or one put back. */
@@ -54,14 +46,15 @@ interface PendingFocus {
 const undoMillis = 10_000;
 
 /**
- * The Lists overview (PROJECT-PLAN P3): a card for each list, in the order they were made, with what it costs a month
- * on average and how many subscriptions it has (M7.2 brings this month's and this year's bars), its rank counts
- * (§3.2), View and 🗑, which asks first and offers Undo; then New Subscription List, and the feature summary of every
- * list (§3.2). Core counts and sums; MetricsService prices.
+ * The Lists overview (PROJECT-PLAN P3): a card for each list, in the order they were made, with this month's and this
+ * year's bars against the budgets, or the amounts alone without them (M7.2), how many subscriptions it has, its rank
+ * counts (§3.2), View and 🗑, which asks first and offers Undo; then New Subscription List, and the feature summary of
+ * every list (§3.2). Core counts and sums (listMetrics); MetricsService prices.
  */
 @Component({
   selector: 'ss-lists-overview-page',
   imports: [
+    BudgetTotals,
     FeatureSummary,
     MatButton,
     MatIcon,
@@ -78,8 +71,6 @@ export class ListsOverviewPage {
   private readonly lists = inject(ListsRepository);
   private readonly metrics = inject(MetricsService);
   private readonly catalog = inject(CatalogStore);
-  private readonly settings = inject(SettingsStore);
-  private readonly today = inject(ClockService).today;
   private readonly drafts = inject(ListDraftService);
   private readonly confirmer = inject(ConfirmService);
   private readonly snackBar = inject(MatSnackBar);
@@ -93,21 +84,20 @@ export class ListsOverviewPage {
     return statuses.every((status) => status === 'ready') ? 'ready' : 'loading';
   });
 
-  protected readonly cards = computed<ListCard[]>(() => {
-    const saved = this.settings.saved();
-    return this.lists.records().map((list) => {
+  protected readonly cards = computed<ListCard[]>(() =>
+    this.lists.records().map((list) => {
       const items = this.metrics.list(list.id);
       const count = items.resolved.length + items.unresolved.length;
+      const metrics = this.metrics.metrics(list.id);
       return {
         id: list.id,
         name: list.name,
         count,
         countText: count === 0 ? 'No subscriptions yet' : subscriptions(count),
-        ...(saved && count > 0 && { average: averageText(items, saved) }),
-        ranks: rankCounts(items.resolved),
+        ...(metrics && { metrics }),
       };
-    });
-  });
+    }),
+  );
 
   /** Every list's resolved items together. */
   private readonly allItems = computed(() => {
@@ -121,9 +111,7 @@ export class ListsOverviewPage {
     typeCounts(this.allItems(), this.catalog.catalog()?.categories.service ?? []),
   );
   /** "VPN: 2 / 3" for every list's items together (§3.2). */
-  protected readonly features = computed(() =>
-    featureSummary(this.allItems(), this.catalog.catalog()?.features ?? [], this.today()),
-  );
+  protected readonly features = computed(() => this.metrics.global()?.featureSummary ?? []);
 
   constructor() {
     // Focus moves once the cards show the change it waited for.

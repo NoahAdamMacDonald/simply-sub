@@ -45,6 +45,7 @@ import { CustomSubEditor } from '../custom-subs/custom-sub-editor';
 import { EmptyState } from '../../shared/empty-state/empty-state';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { PriceTag } from '../../shared/price-tag/price-tag';
+import { amountText } from '../../shared/price-tag/price-text';
 import { ProviderIcon } from '../../shared/provider-icon/provider-icon';
 import { TagChip } from '../../shared/tags/tag-chip';
 import { focusFirstError } from '../../shared/focus-first-error';
@@ -219,22 +220,29 @@ export class ListEditPage implements AsksBeforeLeaving {
   );
 
   /**
-   * P5's footer: whether there are unsaved changes, and what the list costs per month on average as the draft has it,
-   * before tax (§3.1's monthly equivalents), with what it can't count yet. Its "This month" comes with the charges.
+   * P5's footer: whether there are unsaved changes, this month's total as the draft has it, sales tax included (§3.1,
+   * M7.2), and what it costs per month on average, before tax (§3.1's monthly equivalents), with what it can't count
+   * yet.
    */
   protected readonly footer = computed(() => {
     const status = this.changed() ? 'Unsaved changes' : 'No unsaved changes';
     const saved = this.settings.saved();
     if (!saved) return { shown: status, spoken: status };
     const results = this.resolutions();
-    const average = averageText(
-      {
-        resolved: results.flatMap((result) => (result.ok ? [result.resolved] : [])),
-        unresolved: results.filter((result) => !result.ok),
-      },
-      saved,
-    );
-    return { shown: `${status} · ${average.shown}`, spoken: `${status}, ${average.spoken}` };
+    const items = {
+      resolved: results.flatMap((result) => (result.ok ? [result.resolved] : [])),
+      unresolved: results.flatMap((result) => (result.ok ? [] : [result.unresolved])),
+    };
+    const average = averageText(items, saved);
+    const totals = this.metrics.metricsOf(items);
+    if (!totals)
+      return { shown: `${status} · ${average.shown}`, spoken: `${status}, ${average.spoken}` };
+    const month = amountText(totals.thisMonth, saved.currency, saved.country);
+    const approx = totals.converted.thisMonth;
+    return {
+      shown: `${status} · This month ${approx ? '≈ ' : ''}${month} · ${average.shown}`,
+      spoken: `${status}, this month ${approx ? 'about ' : ''}${month}, ${average.spoken}`,
+    };
   });
 
   /** What the item dialog couldn't open: a plan, bundle, custom subscription or item there isn't. */

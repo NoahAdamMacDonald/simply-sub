@@ -267,7 +267,9 @@ const cardsOf = (page) =>
       const ranks = [...card.querySelectorAll('ss-rank-counts li')]
         .map(shown)
         .filter((rank) => !rank.startsWith('0 '));
-      return `${shown(card.querySelector('.name'))} | ${shown(card.querySelector('.cost'))} | ${ranks.join(', ')}`;
+      // This month's and this year's totals (M7.2), then the count.
+      const cost = [...card.querySelectorAll('.cost .total, .cost .count')].map(shown).join(' · ');
+      return `${shown(card.querySelector('.name'))} | ${cost} | ${ranks.join(', ')}`;
     }),
   );
 
@@ -321,7 +323,7 @@ async function plantLists(page) {
       await plantLists(page);
       await page.goto(`${baseUrl}lists`);
       await until('both cards', async () => (await cardsOf(page)).length === 2);
-      await until('the prices', async () => (await cardsOf(page))[0].includes('mo average'));
+      await until('the prices', async () => (await cardsOf(page))[0].includes('this month'));
       const shown = await cardsOf(page);
       const features = await page
         .locator('ss-lists-overview-page ss-feature-summary li')
@@ -332,10 +334,12 @@ async function plantLists(page) {
           ),
         );
       check(
-        `${label}: each list with what it costs, how many it has and its rank counts, in the order made`,
-        /^Work Related \| ≈ \$\d+\.\d\d \/ mo average · 2 subscriptions \| 1 Essential, 1 Wanted$/.test(
-          shown[0],
-        ) && shown[1] === 'Family | No subscriptions yet | ',
+        `${label}: each list with this month's and this year's totals, its count and rank counts, in the order made`,
+        // Netflix's $18.99 and Mullvad's €5 (tax included) on the 12th of every month, with Alberta's 5% on Netflix.
+        shown[0] ===
+          'Work Related | ≈ $27.79 this month · ≈ $333.44 this year · 2 subscriptions | 1 Essential, 1 Wanted' &&
+          shown[1] === 'Family | No subscriptions yet | ' &&
+          (await page.locator('ss-lists-overview-page ss-budget-bar').count()) === 0,
         shown.join(' / '),
       );
       // Ranked and headline rows first, then what the items have themselves, folded after 8 (the feedback after M6.8).
@@ -366,6 +370,39 @@ async function plantLists(page) {
       await noSideScroll(page, viewport, `${label}, two lists`);
       await page.screenshot({ path: shot('lists'), fullPage: true });
       await axeCheck(page, `${label}, two lists`);
+
+      // With budgets, each card's totals are bars against them (P3, M7.2): this month's $27.79 is over $20.
+      const [settings] = await readTable(page, 'settings');
+      await putRecord(page, 'settings', { ...settings, monthlyBudget: 20, annualBudget: 1000 });
+      // A write past Dexie isn't seen by its live queries: a reload reads it.
+      await page.reload();
+      await until(
+        'the bars',
+        async () => (await page.locator('ss-lists-overview-page ss-budget-bar').count()) === 2,
+      );
+      const bars = await page
+        .locator('ss-lists-overview-page ss-budget-bar')
+        .evaluateAll((elements) =>
+          elements.map(
+            (bar) =>
+              `${bar.getAttribute('aria-label')}: ${bar.getAttribute('data-level')} ${bar.querySelector('.label').textContent.trim()}`,
+          ),
+        );
+      check(
+        `${label}: with budgets, a list's totals are bars named for it, over the budget in red with the real percent`,
+        bars.join(' | ') ===
+          'Work Related, monthly budget: over 139% | Work Related, annual budget: ok 33%',
+        bars.join(' | '),
+      );
+      await noSideScroll(page, viewport, `${label}, with budgets`);
+      await page.screenshot({ path: shot('lists-budgets'), fullPage: true });
+      await axeCheck(page, `${label}, with budgets`);
+      await putRecord(page, 'settings', settings);
+      await page.reload();
+      await until(
+        'no bars',
+        async () => (await page.locator('ss-lists-overview-page ss-budget-bar').count()) === 0,
+      );
 
       // The Tab order: Custom subscriptions and New list, then each card's name, 🗑 and View, then the tile.
       await page.locator('ss-lists-overview-page h1').click();

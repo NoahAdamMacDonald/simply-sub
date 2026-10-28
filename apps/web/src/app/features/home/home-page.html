@@ -1,2 +1,4 @@
 <h1>Home</h1>
-<p>Today: {{ today() }}</p>
+@if (global(); as global) {
+  <ss-budget-totals [metrics]="global" prompt />
+}

@@ -74,9 +74,19 @@
   gap: 12px 24px;
 }
 
+// The bars, or the amounts alone without budgets, then the count.
 .cost {
+  display: flex;
+  flex: 1 1 280px;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 480px;
+}
+
+.count {
   margin: 0;
-  font: var(--mat-sys-body-large);
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-medium);
 }
 
 .view {

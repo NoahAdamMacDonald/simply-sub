@@ -2058,8 +2058,8 @@ turning a second Netflix plan into an extra-member add-on.)
 bars for **all lists combined** (section 8.1.1). The bars appear only if a budget is set. The big CTA opens `/lists`.
 
 **Lists overview.** Each card shows the name, a monthly bar (**this list's share** of the monthly budget), a yearly bar, rank
-counts in rank colours (zero counts in grey), a View button and delete (with confirmation and Undo). Until the bars
-(M7.2), a card shows what the list costs a month on average (section 14, M6.7). Below the cards is a
+counts in rank colours (zero counts in grey), a View button and delete (with confirmation and Undo). Without a budget
+a card shows the amount alone (M7.2; until then it showed what the list costs a month on average, section 14, M6.7). Below the cards is a
 "New Subscription List" tile, which opens `/lists/new` with the default name. The right column shows feature
 summaries ("VPN 2/3", "4k 2/5").
 
@@ -2536,6 +2536,32 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
+**Resolved (2026-10-28, M7.2)**
+- **Totals in `MetricsService`** (§3.4): `metrics(listId)` and `global` (every list's items together, Home's), both
+  core's `listMetrics`, plus `metricsOf(items)` for a draft and `charges(range, listIds?)` for the calendars. They
+  follow the settings' currency, tax place and budgets, the catalog and today.
+- **A conversion flag for each total** (`ListMetrics.converted`): "≈" goes on the total that has a converted amount,
+  not on every total once one has (Mullvad's euros in January put ≈ on this year, not on October).
+- **`ss-budget-totals`** (`shared/budget-totals/`) shows this month and this year:
+  - with a budget, a bar (`ss-budget-bar`, the percent inside) and "$100 of $200 this month" or "… in 2026" beside it,
+    under a heading that names the bar ("Monthly budget");
+  - without one, the amount alone ("$100 this month"), and on Home "Set a monthly budget →" to Settings;
+  - on a Lists card (`compact`), no headings: bars named for their list ("Work Related, monthly budget") and "$50 this
+    month", "$250 this year";
+  - "1 subscription not counted" when one can't be priced or converted.
+- **The Lists overview (P3):** the bars replace the average, as the wireframe has them, then the count. Rank counts and
+  the global feature summary now come from the metrics.
+- **List view (P4):** the header keeps its average, and the side column starts with the totals: bars with budgets,
+  amounts without (the user chose both). From 960 px they're on the right above Types and Features (a grid with named
+  areas, set only at that width: without a template the areas put the blocks in odd places); under it they come above
+  the cards. Each card gives its share of the next 12 months, "31% of list".
+- **The list editor (P5):** its footer says "This month $26.52" before the average, from the draft's charges.
+- **Home (P2):** the totals for every list, with the prompts, until M7.3 builds the rest of the page.
+- **Bundles:** the initial bundle's code didn't change (495.5 kB); esbuild split one of its chunks in two, which costs
+  0.8 kB more gzipped. Beyond it, gzipped: List view 3.6 kB more (192.9 kB), the Lists overview 3.1 (83.5 kB), the
+  list editor 1.7, the item dialog 1.7 and Search 0.7, for `ss-budget-totals`, the bar and `listMetrics`. Home went from
+  a placeholder's 0.3 kB to 53.2 kB, as it now prices every list (MetricsService, the catalog and the schedule).
+
 **Resolved (2026-10-28, M7.1)**
 - **The schedule engine** is core's `schedule/`, on M4.6's resolved items:
   - **Dates** (`chargeDates`, `nextChargeDate`, `lastChargeDate`): each date is counted from a fixed point, never
@@ -2879,10 +2905,10 @@ Reported from the running app, with screenshots, and fixed before M6.9:
 
 **Resolved (2026-10-27, M6.8)**
 - **List view** (PROJECT-PLAN P4, `/lists/:listId`): "‹ Lists", the list's name, and "≈ $48.84 / mo average · 3
-  subscriptions" (the overview's `averageText`, until M7.2's bars). Then the search box with Sort beside it, the cards
+  subscriptions" (the overview's `averageText`; M7.2 keeps it beside its totals). Then the search box with Sort beside it, the cards
   (pinned ones first, under Pinned and All, or a hidden "Subscriptions" heading when none is pinned), and Edit list at
   the foot. The list's feature summary is on the right from 960 px. Below that it goes under the cards, as on the Lists
-  overview, where P4 puts it above: what goes above the cards there is M7.2's bars. When the list editor has changes
+  overview, where P4 puts it above: what goes above the cards there is M7.2's totals. When the list editor has changes
   not saved, a note says so with a link back to them. A draft with no changes, which opening the editor leaves, isn't
   one (`ListDraftService.hasChanges`).
 - **The card is `ss-item-card`** (`shared/sub-card/`), the list variant of PROJECT-PLAN §4.3's `ss-sub-card`, as a

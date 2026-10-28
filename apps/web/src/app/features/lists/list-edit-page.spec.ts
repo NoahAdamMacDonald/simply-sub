@@ -226,9 +226,10 @@ describe('ListEditPage', () => {
         },
       ]);
       // €60 a year is about $7.85 a month.
-      expect(footer()).toBe('No unsaved changes · ≈ $26.84 / mo average');
+      // This month: Netflix's Oct 12, with Alberta's 5% (M7.2).
+      expect(footer()).toBe('No unsaved changes · This month $19.94 · ≈ $26.84 / mo average');
       expect(text('.footer .visually-hidden')).toBe(
-        'No unsaved changes, about $26.84 a month on average',
+        'No unsaved changes, this month $19.94, about $26.84 a month on average',
       );
       expect((await drafts()).map((draft) => draft.listId)).toEqual([work.id]);
       expect(page().querySelector('[role=status]')).toBeNull();
@@ -377,7 +378,9 @@ describe('ListEditPage', () => {
         problem: 'This plan is no longer in the catalog',
         price: undefined,
       });
-      expect(footer()).toBe('No unsaved changes · ≈ $26.84 / mo average (1 not counted)');
+      expect(footer()).toBe(
+        'No unsaved changes · This month $19.94 · ≈ $26.84 / mo average (1 not counted)',
+      );
     });
 
     it('starts again from the saved list when another tab saves or drops the draft', async () => {

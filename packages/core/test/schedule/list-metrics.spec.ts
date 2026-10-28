@@ -165,12 +165,27 @@ describe('listMetrics', () => {
     expect(metrics.notCounted).toBe(2);
   });
 
-  it('marks totals with a converted charge as approximate', () => {
+  it('marks totals with a converted charge as approximate, each on its own', () => {
     const converted = resolved(
       {},
       picked(13.79, { native: false, fx: { rate: 1.38, date: today, source: 'ECB' } }),
     );
     expect(listMetrics({ resolved: [converted], unresolved: [] }, context).approx).toBe(true);
+    // Converted, but charged in March only: this month's total is exact.
+    const yearly = resolved(
+      { interval: 'year', anchorDate: '2027-03-01', startDate: '2027-03-01' },
+      picked(50, {
+        interval: 'year',
+        native: false,
+        fx: { rate: 1.38, date: today, source: 'ECB' },
+      }),
+    );
+    const native = resolved({}, picked(10));
+    expect(listMetrics({ resolved: [yearly, native], unresolved: [] }, context).converted).toEqual({
+      thisMonth: false,
+      thisYear: false,
+      next12: true,
+    });
   });
 
   it('gives each item its share of the next 12 months', () => {

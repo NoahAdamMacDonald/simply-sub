@@ -193,7 +193,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | ID | Task | Done when |
 |---|---|---|
 | M7.1 | core: schedule engine for charges, statuses (`ItemStatus` on M5.1's `itemActivity`, adding the end date and manual renewal), totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/` (built in M4.5 for the mini calendar), on M4.6's resolved items (`ResolvedItem.status` and `nextCharge`, `ListMetrics`; unresolved items left out of totals and counted; an add-on billed on its own period); sales tax on charges in `tax/`, from `addedSalesTax` (M4.2's rates, none on a price with `taxIncluded`) (BLUEPRINT §4.8; recheck the rates if `canadianSalesTaxCheckedOn` is old). As built: core's `schedule/` (`chargeDates`, `itemCharges`, `nextCharge`, `itemStatus`, `listMetrics` with the budget checks), `tax/charge-tax.ts` (`salesTaxOn`), `user/reanchor.ts` and `dates/period.ts`; `ResolvedItem.status`, `nextCharge` and `overridePrice`; and the UI it was waiting for: the cards' next charge and "Wrong date?", the editor's renewal dates, the item dialog's "next charge" and Search's "Ends" and "Renew by" (BLUEPRINT §14) | Charges include tax by province and "plus tax" amounts, and none on a price that includes it (Mullvad). Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
-| M7.2 | Totals and budget bars on Home, Lists and List view | The numbers match the §3.1 definitions |
+| M7.2 | Totals and budget bars on Home, Lists and List view. As built: `MetricsService`'s `metrics`, `global`, `metricsOf` and `charges` (core's `listMetrics`, with a conversion flag for each total), `ss-budget-totals` (a bar against each budget that's set, else the total alone, and Home's "Set a monthly budget →"), the Lists cards' bars, List view's side column and each card's "31% of list", and the list editor's "This month" (BLUEPRINT §14) | The numbers match the §3.1 definitions |
 | M7.3 | Home (P2) | P2 criteria met |
 | M7.4 | Calendar (P10): grid, day panel, list filter, upcoming list, agenda layout on mobile | P10 criteria met |
 | M7.5 | Exports: ICS (one all-day event per charge, no `RRULE`s: BLUEPRINT §11.2), CSV, XLSX, TXT (lazy-loaded) | The files open in Google Calendar and Excel, and a plan billed on the 31st shows in every month |
@@ -588,6 +588,10 @@ Subscription Lists                          [Custom subscriptions]           Fea
 subscriptions it has, "≈ $26.84 / mo average · 2 subscriptions". Under 960 px the Features column comes after the
 cards.
 
+**As built (M7.2):** the average gives way to the bars: "[bar] $50 this month" and "[bar] $250 this year", each a bar
+only while its budget is set (named "Work Related, monthly budget"), else the amount alone; then "2 subscriptions",
+and "1 subscription not counted" when one can't be priced or converted.
+
 **Data:** lists, `ListMetrics` for each list, the global feature summary.
 **Behaviour**
 - One card per list, in creation order. The name and [View] open `/lists/:listId`.
@@ -655,10 +659,11 @@ stays.
 - Empty list → [Add from catalog] [Add custom subscription] (both open edit mode).
 
 **As built (M6.8):**
-- **Header:** the average a month and the count, until M7.2's bars.
+- **Header:** the average a month and the count. It stays with M7.2's totals (the user's choice).
 - **Sort:** opens a panel under the search box with the sorts and the filters, and Clear all. The default sort is
   Highest price first.
-- **Feature summary:** under the cards below 960 px, as on the Lists overview, until the bars take the place above them.
+- **Feature summary:** under the cards below 960 px, as on the Lists overview. Since M7.2 the totals take the place
+  above them.
 - **Cards** are `ss-item-card`, whose details have Edit. Since M7.1 they start with the next charge as charged, tax
   included ("Next charge Nov 12, 2026: $19.94, with $0.95 tax"), with "Wrong date?" for an Ongoing item, and the
   status shows "Ends" and "Renew by".
@@ -676,6 +681,13 @@ stays.
 - **Sort menu:** Search's filter controls. Price per month is a dual slider up to the priciest item's monthly
   equivalent. Features is the chip box with suggestions. Status is Active and Inactive chips (none chosen is both),
   and Tags are chips with their colour dots, or a hint saying how to add them.
+
+**As built (M7.2):**
+- **Side column:** this month's and this year's totals first: "Monthly budget [bar] ≈ $27.79 of $200.00 this month"
+  and the annual one, each bar named by its heading, or without a budget the amount alone ("$27.79 this month"), as
+  the user chose. Under 960 px they come above the cards, and Types and Features stay after them.
+- **Cards:** each gives its share of the list's next 12 months under its price, "31% of list" (read "… over the next
+  12 months"), or "<1% of list"; none with no charge to come.
 
 BLUEPRINT §14 has the details.
 
@@ -702,7 +714,7 @@ Unsaved changes · This month $26.52 · ≈ $26.52 / mo average
 ```
 **As built (M6.4):** the heading is "Edit list" ("New list" for a new list), with the List name field beside
 Cancel, Save and ⋮ under it. Since M7.1 a row says when it renews ("Renews Nov 12 · auto", "Renews Jan 20, 2027 ·
-manual"), and until M7.2 the footer has only the average.
+manual"), and since M7.2 the footer says "This month $26.52" before the average.
 
 **Data:** `ListDraftService` (the draft lives in the Dexie `drafts` table), catalog, custom subscriptions.
 **Behaviour**

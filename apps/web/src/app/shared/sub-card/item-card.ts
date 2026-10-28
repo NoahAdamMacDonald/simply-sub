@@ -25,8 +25,8 @@ let nextId = 0;
  * (or its nickname, with the plan under it), status (with "Ends" and "Renew by", M7.1), tags, 📌 and price. Its
  * details, which slide open and shut as Search's do, add its next charge as charged with "Wrong date?" (M7.1), how
  * it's billed, its note, its features with their ranks for this item, its Plan and Cancel links, View in Search for a
- * catalog plan or bundle, and Edit, which opens it in the list editor. The page saves 📌 (pinToggle). M7.2 adds its
- * share of the list's total.
+ * catalog plan or bundle, and Edit, which opens it in the list editor. The page saves 📌 (pinToggle), and gives its
+ * share of the list's next 12 months (M7.2).
  */
 @Component({
   selector: 'ss-item-card',
@@ -56,6 +56,8 @@ export class ItemCard {
   readonly resolved = input.required<ResolvedItem>();
   /** The item's tags, in its order. */
   readonly tags = input<readonly Tag[]>([]);
+  /** Its share of the list's next 12 months, from 0 to 1 (M7.2): "31% of list". */
+  readonly share = input<number>();
   /** 📌: whether the item should now be pinned. */
   readonly pinToggle = output<boolean>();
 
@@ -90,6 +92,13 @@ export class ItemCard {
     if (providerId === undefined) return undefined;
     if (bundleId === undefined) return name;
     return this.catalog.catalog()?.providers.find((provider) => provider.id === providerId)?.name;
+  });
+  /** "31% of list", or "<1% of list" for a sliver; nothing when it has no charge in the next 12 months. */
+  protected readonly shareText = computed(() => {
+    const share = this.share();
+    if (share === undefined || share <= 0) return undefined;
+    const percent = Math.round(share * 100);
+    return percent === 0 ? '<1% of list' : `${percent}% of list`;
   });
   /** What it costs: the price override while it applies, else the plan's price. */
   protected readonly price = computed(() => this.resolved().override ?? this.resolved().price);

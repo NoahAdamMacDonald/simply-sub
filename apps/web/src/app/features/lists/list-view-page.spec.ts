@@ -230,6 +230,25 @@ describe('ListViewPage', () => {
     expect(text(page().querySelector('.shown'))).toBe('');
   });
 
+  it('shows this month and this year, and each card’s share of the next 12 months (M7.2)', async () => {
+    await plant();
+    await open(work.id);
+    await until(() => groups().length === 4);
+    // Today is Oct 25. Netflix's $18.99 with Alberta's 5% on the 12th of each month; Mullvad's €60 on Jan 20, which
+    // includes tax; Crave's $22 from Dec 1.
+    expect(
+      Array.from(page().querySelectorAll('.money .total [aria-hidden]')).map((total) =>
+        text(total),
+      ),
+    ).toEqual(['$19.94 this month', '≈ $356.54 in 2026']);
+    // No budgets: no bars, and no prompt off Home.
+    expect(page().querySelector('.money ss-budget-bar')).toBeNull();
+    expect(page().querySelector('.money a.prompt')).toBeNull();
+    const share = (itemId: string) => text(card(itemId)?.querySelector('.share'));
+    expect(share(netflix.id)).toBe('41% of list over the next 12 months');
+    expect(share(mullvad.id)).toBe('16% of list over the next 12 months');
+  });
+
   it('opens a card’s details, with how it’s billed, its links and Edit for the item', async () => {
     await plant();
     await open(work.id);

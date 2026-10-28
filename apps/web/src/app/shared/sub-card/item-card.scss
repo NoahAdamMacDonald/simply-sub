@@ -40,6 +40,12 @@
   grid-area: price;
 }
 
+.share {
+  margin: 2px 0 0;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;

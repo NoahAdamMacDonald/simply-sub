@@ -208,6 +208,20 @@ describe('ItemCard', () => {
     ).toBeNull();
   });
 
+  it('gives its share of the list’s next 12 months, a sliver as under 1%, and nothing without one (M7.2)', () => {
+    const shareOf = (share: number | undefined) => {
+      const fixture = TestBed.createComponent(ItemCard);
+      fixture.componentRef.setInput('resolved', resolved('netflix.standard'));
+      fixture.componentRef.setInput('share', share);
+      fixture.detectChanges();
+      return text((fixture.nativeElement as HTMLElement).querySelector('.share'));
+    };
+    expect(shareOf(0.3149)).toBe('31% of list over the next 12 months');
+    expect(shareOf(0.003)).toBe('<1% of list over the next 12 months');
+    expect(shareOf(0)).toBeUndefined();
+    expect(shareOf(undefined)).toBeUndefined();
+  });
+
   describe('its next charge (M7.1)', () => {
     it('says when, and what it costs as charged, with tax, and offers Wrong date?', async () => {
       const netflix = resolved('netflix.standard');

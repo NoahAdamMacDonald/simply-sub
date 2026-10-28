@@ -35,7 +35,13 @@
       <mat-icon>push_pin</mat-icon>
     </button>
 
-    <ss-price class="price" [price]="price()" [region]="item().region" />
+    <div class="price">
+      <ss-price [price]="price()" [region]="item().region" />
+      <!-- Its share of what the list costs in the next 12 months (P4). -->
+      @if (shareText(); as text) {
+        <p class="share">{{ text }}<span class="visually-hidden"> over the next 12 months</span></p>
+      }
+    </div>
   </div>
 
   <button

@@ -44,6 +44,13 @@
     }
 
     <div class="layout" [class.with-features]="total() > 0">
+      <!-- This month and this year against the budgets, or alone without them (P4, M7.2): on the right from 960 px,
+           above the cards under it. -->
+      @if (total() > 0 && totals(); as totals) {
+        <div class="money">
+          <ss-budget-totals [metrics]="totals" />
+        </div>
+      }
       <div class="items">
         @if (total() === 0) {
           <ss-empty-state icon="playlist_add" heading="No subscriptions yet">
@@ -144,6 +151,7 @@
                   <ss-item-card
                     [resolved]="resolved"
                     [tags]="tagsOf(resolved)"
+                    [share]="totals()?.shares?.get(resolved.item.id)"
                     (pinToggle)="pin(resolved, $event)"
                   />
                 </li>
@@ -162,6 +170,7 @@
                   <ss-item-card
                     [resolved]="resolved"
                     [tags]="tagsOf(resolved)"
+                    [share]="totals()?.shares?.get(resolved.item.id)"
                     (pinToggle)="pin(resolved, $event)"
                   />
                 </li>

@@ -312,6 +312,65 @@ async function openView(page, listId = LIST) {
           /^≈ \$\d+\.\d\d \/ mo average · 3 subscriptions$/.test(await summary(page)),
         await summary(page),
       );
+      // This month and this year (M7.2): Netflix's $18.99 with Alberta's 5% and Mullvad's €5 (tax included) on the
+      // 12th of each month, and Crave's $22 from Dec 1. Without budgets, the amounts alone.
+      const money = view(page).locator('.money');
+      const totals = () =>
+        money
+          .locator('.total [aria-hidden]')
+          .evaluateAll((spans) => spans.map((span) => span.textContent.trim()));
+      check(
+        `${label}: the side gives this month's and this year's totals, with no bars without budgets`,
+        (await totals()).join(' | ') === '≈ $27.79 this month | ≈ $356.54 in 2026' &&
+          (await money.locator('ss-budget-bar').count()) === 0,
+        (await totals()).join(' | '),
+      );
+      const shares = await view(page)
+        .locator('ss-item-card .share')
+        .evaluateAll((elements) => elements.map((element) => element.textContent.trim()));
+      check(
+        `${label}: each card gives its share of the next 12 months`,
+        shares.length === 3 &&
+          shares.every((share) => /^\d+% of list over the next 12 months$/.test(share)),
+        shares.join(' | '),
+      );
+      // Under 960 px the totals come above the cards; from it, on their right.
+      const moneyBox = await money.boundingBox();
+      const cardBox = await view(page).locator('ss-item-card').first().boundingBox();
+      check(
+        `${label}: the totals are ${viewport.width < 960 ? 'above' : 'beside'} the cards`,
+        viewport.width < 960
+          ? moneyBox.y + moneyBox.height <= cardBox.y
+          : moneyBox.x >= cardBox.x + cardBox.width,
+      );
+      // With budgets, a bar for each, named by its heading, and the totals of them.
+      const [settings] = await readTable(page, 'settings');
+      await putRecord(page, 'settings', { ...settings, monthlyBudget: 200, annualBudget: 1000 });
+      await page.reload();
+      await until('the bars', async () => (await money.locator('ss-budget-bar').count()) === 2);
+      const named = await money
+        .locator('ss-budget-bar')
+        .evaluateAll((bars) =>
+          bars.map(
+            (bar) =>
+              `${document.getElementById(bar.getAttribute('aria-labelledby')).textContent.trim()}: ${bar.getAttribute('aria-valuetext')}`,
+          ),
+        );
+      check(
+        `${label}: with budgets, the side has a bar for each, named by its heading, with the totals of the budgets`,
+        named.join(' | ') ===
+          'Monthly budget: 13%, $27.79 of $200.00 | Annual budget: 35%, $356.54 of $1,000.00' &&
+          (await totals()).join(' | ') ===
+            '≈ $27.79 of $200.00 this month | ≈ $356.54 of $1,000.00 in 2026',
+        `${named.join(' | ')} / ${(await totals()).join(' | ')}`,
+      );
+      await noSideScroll(page, viewport, `${label}, with budgets`);
+      await page.screenshot({ path: shot('view-budgets'), fullPage: true });
+      await axeCheck(page, `${label}, with budgets`);
+      await putRecord(page, 'settings', settings);
+      await page.reload();
+      await until('no bars', async () => (await money.locator('ss-budget-bar').count()) === 0);
+      await until('three cards', async () => (await cards(page)).length === 3);
       check(
         `${label}: the cards go by price per month, highest first, under a hidden heading`,
         (await layout(page)).join(' | ') ===

@@ -274,6 +274,18 @@ Since M7.1, the scripts check the charges:
 - `check-list-edit.cjs`: a row's "Renews Nov 12 · auto".
 - `check-search.cjs`: a provider renewed by hand (Mullvad, yearly, auto-renew off) shows "Renew by Jan 20".
 
+Since M7.2, the totals:
+- `check-lists.cjs`: each card's "≈ $27.79 this month · ≈ $333.44 this year · 2 subscriptions" with no bars, then
+  with budgets written to the settings (and a reload), its bars named "Work Related, monthly budget", the monthly one
+  over its $20 in red at 139%, with axe.
+- `check-list-view.cjs`: the side column's "≈ $27.79 this month | ≈ $356.54 in 2026", each card's "…% of list over the
+  next 12 months", the totals above the cards at 360 px and beside them at 1280, then with budgets a bar for each named
+  by its heading ("Monthly budget: 13%, $27.79 of $200.00"), with axe.
+- `check-list-edit.cjs`: the footer's "This month ≈ $27.79".
+
+A record written straight to IndexedDB isn't seen by Dexie's live queries: reload the page after it, as the planting
+steps do.
+
 Since the feedback after M6.8, the other scripts check more:
 - `check-search.cjs`: at 360 px each shop's price is on its line under one "Cheaper at".
 - `check-item-dialog.cjs`: the three date boxes have the same height.
