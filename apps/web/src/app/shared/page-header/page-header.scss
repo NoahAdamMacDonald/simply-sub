@@ -4,6 +4,11 @@
   color: var(--ss-text-muted);
 }
 
+// The back button on a line of its own, its arrow lined up with the title under it.
+.back {
+  margin: -4px 0 4px -12px;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -15,6 +20,7 @@ h1 {
   flex: 1 1 auto;
   margin: 0;
   color: var(--ss-text);
+  overflow-wrap: anywhere;
 }
 
 .actions {
@@ -24,24 +30,5 @@ h1 {
 
   &:empty {
     display: none;
-  }
-}
-
-.back {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 8px 4px 0;
-  border-radius: 4px;
-  color: var(--ss-accent-text);
-  font: var(--mat-sys-title-small);
-  text-decoration: none;
-
-  &:hover span {
-    text-decoration: underline;
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--ss-accent-text);
-    outline-offset: 2px;
   }
 }

@@ -38,7 +38,7 @@ import {
   searchText,
   writeSearchParams,
   type CatalogQuery,
-  type ProviderSort,
+  type CatalogSort,
   type SearchDefaults,
 } from '@simply-sub/core';
 import { filter, map } from 'rxjs';
@@ -58,12 +58,14 @@ import { SearchFilters } from './search-filters';
 /** How long typing pauses before the results follow it (P8). */
 export const searchDelayMs = 150;
 
-const sortChoices: readonly { value: ProviderSort; label: string }[] = [
+const sortChoices: readonly { value: CatalogSort; label: string }[] = [
   { value: 'relevance', label: 'Best match' },
   { value: 'price_asc', label: 'Price: low to high' },
   { value: 'price_desc', label: 'Price: high to low' },
   { value: 'name', label: 'Name: A to Z' },
   { value: 'features', label: 'Most features' },
+  // The user's ranks: Needed counts most, Unwanted against (core's rankScore).
+  { value: 'ranks', label: 'Best for my ranks' },
 ];
 
 /**
@@ -191,7 +193,7 @@ export class SearchPage {
   });
   private readonly hasText = computed(() => this.query()?.q !== undefined);
   /** Best match needs text: without it, the default is the cheapest first. */
-  protected readonly sort = computed<ProviderSort>(
+  protected readonly sort = computed<CatalogSort>(
     () => this.query()?.sort ?? (this.hasText() ? 'relevance' : 'price_asc'),
   );
   protected readonly sorts = computed(() =>
@@ -228,8 +230,13 @@ export class SearchPage {
       ...(fx && { fx }),
       items: this.items.records(),
       today: this.today(),
+      profileRanks: this.rankings.ranks(),
     });
   });
+  /** The user's lists' names, by id: a card's "· 2 lists" names them. */
+  protected readonly listNames = computed(
+    () => new Map(this.lists.records().map((list) => [list.id, list.name])),
+  );
   protected readonly ranks = computed(() => Object.fromEntries(this.rankings.ranks()));
   protected readonly count = computed(() => {
     const results = this.results();
@@ -295,7 +302,7 @@ export class SearchPage {
     this.change({ q: undefined }, 'push');
   }
 
-  protected chooseSort(sort: ProviderSort): void {
+  protected chooseSort(sort: CatalogSort): void {
     this.change({ sort }, 'push');
   }
 

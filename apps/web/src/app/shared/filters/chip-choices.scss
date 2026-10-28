@@ -1,0 +1,33 @@
+@use '../sub-card/choice-chip';
+@use '../tags/tag-dot';
+
+:host {
+  display: block;
+}
+
+fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+legend {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 0;
+}
+
+.label {
+  font: var(--mat-sys-title-small);
+}
+
+.chip {
+  @include choice-chip.chip;
+}
+
+.tag-dot {
+  @include tag-dot.dot;
+}

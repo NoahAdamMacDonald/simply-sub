@@ -1,0 +1,12 @@
+@if (lists().length > 0) {
+  <button type="button" class="in-lists" [matMenuTriggerFor]="menu" [matTooltip]="names()">
+    {{ text() }}
+  </button>
+  <mat-menu #menu="matMenu" [aria-label]="'Lists with ' + provider()">
+    @for (list of lists(); track list.id) {
+      <a mat-menu-item [routerLink]="['/lists', list.id]">{{ list.name }}</a>
+    }
+  </mat-menu>
+} @else {
+  {{ text() }}
+}

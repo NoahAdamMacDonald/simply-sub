@@ -6,6 +6,7 @@ import { MATERIAL_ANIMATIONS } from '@angular/material/core';
 import { MatFormFieldHarness } from '@angular/material/form-field/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { MatSelectHarness } from '@angular/material/select/testing';
+import { MatSliderHarness } from '@angular/material/slider/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import type { CatalogData, ListItem, Settings, SubscriptionList, Tag } from '@simply-sub/core';
@@ -222,6 +223,10 @@ describe('ListViewPage', () => {
       ),
     ).toEqual(['Streaming video: 2', 'VPN: 1']);
     expect(page().querySelector('.edit-list')?.getAttribute('href')).toBe(`/lists/${work.id}/edit`);
+    // At the top too.
+    expect(page().querySelector('.edit-list-top')?.getAttribute('href')).toBe(
+      `/lists/${work.id}/edit`,
+    );
     expect(text(page().querySelector('.shown'))).toBe('');
   });
 
@@ -297,7 +302,7 @@ describe('ListViewPage', () => {
     expect(document.activeElement).toBe(page().querySelector('.search input'));
   });
 
-  it('sorts and filters from the Sort menu, and Clear all keeps the sort', async () => {
+  it('sorts and filters from the Sort menu, with Search’s controls, and Clear all keeps the sort', async () => {
     await plant();
     await open(work.id);
     await until(() => groups().length === 4);
@@ -305,62 +310,85 @@ describe('ListViewPage', () => {
     expect(toggle?.getAttribute('aria-expanded')).toBe('false');
     const loader = await openFilters();
     expect(toggle?.getAttribute('aria-expanded')).toBe('true');
+    const filters = () => page().querySelector('ss-list-filters') as HTMLElement;
+    const boxes = (selector: string) => [
+      ...filters().querySelectorAll<HTMLInputElement>(`${selector} input[type=checkbox]`),
+    ];
+    const settle = () => harness.fixture.whenStable();
 
     await (
       await control(loader, 'Sort by', MatSelectHarness)
     ).clickOptions({ text: 'Name, A to Z' });
     expect(groups().slice(1)).toEqual(['Crave · Premium', 'Mullvad VPN', 'Netflix · Standard']);
 
-    await (await control(loader, 'Status', MatSelectHarness)).clickOptions({ text: 'Active only' });
+    // Status: chips, as Search's Activity.
+    expect(text(filters().querySelector('.status legend'))).toBe('Status');
+    expect(boxes('.status').map((box) => spoken(box.closest('label')))).toEqual([
+      'Active',
+      'Inactive',
+    ]);
+    boxes('.status')[0].click();
+    await settle();
     expect(groups().slice(1)).toEqual(['Mullvad VPN', 'Netflix · Standard']);
     expect(spoken(toggle)).toBe('Sort and filter, 1 on');
     expect(text(toggle?.querySelector('.badge'))).toBe('1');
 
-    const tags = await control(loader, 'Tags', MatSelectHarness);
-    await tags.open();
-    expect(await Promise.all((await tags.getOptions()).map((option) => option.getText()))).toEqual([
-      'Family',
-    ]);
-    await tags.clickOptions({ text: 'Family' });
-    await tags.close();
+    // Tags: chips with their colours.
+    expect(boxes('.tags').map((box) => spoken(box.closest('label')))).toEqual(['Family']);
+    boxes('.tags')[0].click();
+    await settle();
     expect(groups().slice(1)).toEqual(['Netflix · Standard']);
 
-    const lowest = await control(loader, 'Lowest price per month', MatInputHarness);
-    await lowest.setValue('abc');
-    await lowest.blur();
+    // Features: Search's box.
     expect(
       await (
-        await loader.getHarness(
-          MatFormFieldHarness.with({ floatingLabelText: 'Lowest price per month' }),
-        )
-      ).getTextErrors(),
-    ).toEqual(['Enter an amount, like 9.99']);
-    await lowest.setValue('20');
+        await loader.getHarness(MatFormFieldHarness.with({ floatingLabelText: 'Features' }))
+      ).getTextHints(),
+    ).toEqual(['Subscriptions need every feature chosen']);
+
+    // The price: Search's slider, up to Crave's CA$22 a month, by 1.
+    const slider = await loader.getHarness(MatSliderHarness);
+    expect([await slider.getMaxValue(), await slider.getStep()]).toEqual([25, 1]);
+    await (await slider.getStartThumb()).setValue(20);
+    await settle();
     expect(groups()).toEqual([]);
     expect(text(page().querySelector('.shown'))).toBe('0 of 3 shown');
+    expect(spoken(toggle)).toBe('Sort and filter, 3 on');
 
-    page().querySelector<HTMLElement>('ss-list-filters .clear')?.click();
-    await harness.fixture.whenStable();
+    filters().querySelector<HTMLElement>('.clear')?.click();
+    await settle();
     expect(groups().slice(1)).toEqual(['Crave · Premium', 'Mullvad VPN', 'Netflix · Standard']);
-    expect(await lowest.getValue()).toBe('');
+    expect(await (await slider.getStartThumb()).getValue()).toBe(0);
+    expect(boxes('.status').some((box) => box.checked)).toBe(false);
     expect(spoken(toggle)).toBe('Sort and filter');
     expect(toggle?.querySelector('.badge')).toBeNull();
   });
 
-  it('keeps Tags in the Sort menu with no tags in the list, turned off and saying why', async () => {
+  it('keeps Tags in the Sort menu with no tags in the list, saying how to add them', async () => {
     await plant();
     await TestBed.inject(ItemsRepository).update(netflix.id, { tagIds: [] });
     await open(work.id);
     await until(() => groups().length === 4);
-    const loader = await openFilters();
-    const tags = await control(loader, 'Tags', MatSelectHarness);
-    expect(await tags.isDisabled()).toBe(true);
-    expect(
-      await (
-        await loader.getHarness(MatFormFieldHarness.with({ floatingLabelText: 'Tags' }))
-      ).getTextHints(),
-    ).toEqual(['No subscription here has a tag yet: add them with ✎ Edit']);
-    expect(await (await control(loader, 'Features', MatSelectHarness)).isDisabled()).toBe(false);
+    await openFilters();
+    const tags = page().querySelector('ss-list-filters .tags');
+    expect(text(tags?.querySelector('.label'))).toBe('Tags');
+    expect(text(tags?.querySelector('.hint'))).toBe(
+      'No subscription here has a tag yet: add them with ✎ Edit',
+    );
+    expect(tags?.querySelector('input')).toBeNull();
+  });
+
+  it('turns Features off in the Sort menu when nothing in the list has one, saying so', async () => {
+    const old = await TestBed.inject(ListsRepository).create({ name: 'Old' });
+    await TestBed.inject(ItemsRepository).create({ ...fields('netflix.gone'), listId: old.id });
+    await open(old.id);
+    await until(() => groups().length === 2);
+    await openFilters();
+    const features = page().querySelector('ss-list-filters ss-feature-filter');
+    expect(features?.querySelector('input')?.disabled).toBe(true);
+    expect(text(features?.querySelector('mat-hint'))).toBe(
+      'None of these has a feature to filter by',
+    );
   });
 
   it('finds a card by its nickname, which it shows over the plan', async () => {
@@ -432,5 +460,7 @@ describe('ListViewPage', () => {
     await until(() => page().querySelector('ss-empty-state') !== null);
     expect(text(page().querySelector('ss-empty-state h2'))).toBe("This list doesn't exist");
     expect(text(page().querySelector('h1'))).toBe('List');
+    expect(page().querySelector('.edit-list-top')).toBeNull();
+    expect(page().querySelector('.back')?.getAttribute('href')).toBe('/lists');
   });
 });

@@ -1,0 +1,24 @@
+<div class="price" role="group" [attr.aria-labelledby]="id + '-price'">
+  <div class="price-head">
+    <span class="label" [id]="id + '-price'">Price per month</span>
+    <span class="range" aria-hidden="true">{{ rangeText() }}</span>
+  </div>
+  <mat-slider [min]="0" [max]="range().top" [step]="range().step" [displayWith]="priceText">
+    <input
+      #lowThumb
+      matSliderStartThumb
+      aria-label="Lowest price per month"
+      [value]="low()"
+      (input)="dragging('min', +lowThumb.value)"
+      (change)="letGo('min', +lowThumb.value)"
+    />
+    <input
+      #highThumb
+      matSliderEndThumb
+      aria-label="Highest price per month"
+      [value]="high()"
+      (input)="dragging('max', +highThumb.value)"
+      (change)="letGo('max', +highThumb.value)"
+    />
+  </mat-slider>
+</div>

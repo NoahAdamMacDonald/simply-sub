@@ -194,6 +194,10 @@ describe('CustomSubsPage', () => {
     expect(page().querySelector('ss-empty-state h2')?.textContent).toBe(
       'No custom subscriptions yet',
     );
+    // Back to Lists, which links here.
+    const back = page().querySelector('.back');
+    expect(back?.getAttribute('href')).toBe('/lists');
+    expect(back?.querySelector('.mdc-button__label')?.textContent?.trim()).toBe('Lists');
   });
 
   it('lists each with its icon, its plans and the lists that use it', async () => {

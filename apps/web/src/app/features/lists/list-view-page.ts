@@ -138,12 +138,17 @@ export class ListViewPage {
   protected readonly filtersOpen = signal(false);
   private readonly query = computed(() => listQuery(this.text(), this.filters()));
   protected readonly filterCount = computed(() => listFilterCount(this.query()));
-  private readonly context = computed(() => ({
+  protected readonly context = computed(() => ({
     tags: this.tags.byId(),
     registry: this.catalog.catalog()?.features ?? [],
     currency: this.settings.saved()?.currency ?? '',
     today: this.today(),
   }));
+  /** The feature categories, which group the Features box's suggestions, and the user's country, for the slider. */
+  protected readonly featureCategories = computed(
+    () => this.catalog.catalog()?.categories.feature ?? [],
+  );
+  protected readonly country = computed(() => this.settings.saved()?.country);
   protected readonly view = computed(() =>
     listView(this.listItems(), this.query(), this.context()),
   );

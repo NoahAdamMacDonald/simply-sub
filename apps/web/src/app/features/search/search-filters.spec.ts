@@ -208,7 +208,11 @@ describe('SearchFilters', () => {
 
       boxes[2].click();
       boxes[1].click();
-      expect(changes).toEqual([{ activity: ['inactive', 'not-listed'] }, { activity: [] }]);
+      // The chips keep what's on until the query they make comes back, which the page sends at once.
+      expect(changes).toEqual([
+        { activity: ['inactive', 'not-listed'] },
+        { activity: ['not-listed'] },
+      ]);
     });
   });
 

@@ -1,11 +1,15 @@
 import { monthlyEquivalent } from '../catalog/monthly-equivalent';
 import type { Feature } from '../catalog/feature';
 import type { IsoDate } from '../dates/iso-date';
-import { rankKeyLabel, rankKeyOptions, type RankKey } from '../ranking/rank-keys';
+import {
+  rankKeyLabel,
+  rankKeyOptions,
+  type RankKey,
+  type RankKeyOption,
+} from '../ranking/rank-keys';
 import { nameMatcher } from '../search/name-match';
-import { parseAmount } from './custom-sub-form';
-import { itemActivity } from './item-activity';
-import type { FormIssue } from './item-form';
+import { priceRange, type PriceRange } from '../search/search-filters';
+import { itemActivity, type ItemActivity } from './item-activity';
 import { monthlyIn } from './monthly-average';
 import type { ResolvedItem, UnresolvedItem } from './resolved';
 import type { Tag } from './tag';
@@ -23,8 +27,8 @@ export const defaultListSort: ListSort = 'price';
 export interface ListViewQuery {
   q?: string;
   sort?: ListSort;
-  /** Active only or Inactive only, today (PROJECT-PLAN §3.3). */
-  activity?: 'active' | 'inactive';
+  /** Active, Inactive or both, today (PROJECT-PLAN §3.3), as Search's Activity chips. None keeps every item. */
+  activity?: readonly ItemActivity['kind'][];
   /** The monthly equivalent's range, in the user's currency before tax, both included. */
   minPrice?: number;
   maxPrice?: number;
@@ -61,10 +65,12 @@ export interface ListView {
 
 /** What the Sort menu's filters offer: what the list's items have, so no choice on its own empties the list. */
 export interface ListFilterOptions {
-  /** The keys the items provide, by name: "Video quality: 4K (Ultra HD)". */
-  features: { key: RankKey; label: string }[];
+  /** The keys the items provide, in registry order, which Search's Features box suggests (featureSuggestions). */
+  features: RankKeyOption[];
   /** The tags the items have, by name. */
   tags: Tag[];
+  /** The price slider, from 0 to above the dearest item's monthly equivalent (priceRange), as Search's. */
+  price: PriceRange;
 }
 
 /**
@@ -84,7 +90,12 @@ export function listView(
   const tags = new Set(query.tags ?? []);
   const shown = items.resolved.filter((resolved) => {
     const { item } = resolved;
-    if (query.activity && itemActivity(item, context.today).kind !== query.activity) return false;
+    if (
+      query.activity?.length &&
+      !query.activity.includes(itemActivity(item, context.today).kind)
+    ) {
+      return false;
+    }
     if (query.minPrice !== undefined || query.maxPrice !== undefined) {
       const monthly = monthlyIn(resolved, context.currency);
       if (monthly === undefined) return false;
@@ -116,69 +127,36 @@ export function listView(
   };
 }
 
-/** The Sort menu's price fields, as typed: an amount per month, or nothing for no limit. */
-export interface ListPriceText {
-  min: string;
-  max: string;
-}
-
-/** The price range typed, and what's wrong with it: amounts (parseAmount), and the lowest no higher than the highest. */
-export interface ListPriceRange {
-  minPrice?: number;
-  maxPrice?: number;
-  issues: FormIssue[];
-}
-
-/** The range the price fields give. A field that isn't an amount sets no limit, and says so. */
-export function listPriceRange({ min, max }: ListPriceText): ListPriceRange {
-  const issues: FormIssue[] = [];
-  const read = (text: string, field: keyof ListPriceText) => {
-    if (text.trim() === '') return undefined;
-    const amount = parseAmount(text);
-    if (amount === undefined) issues.push({ path: [field], message: 'Enter an amount, like 9.99' });
-    return amount;
-  };
-  const minPrice = read(min, 'min');
-  const maxPrice = read(max, 'max');
-  if (minPrice !== undefined && maxPrice !== undefined && maxPrice < minPrice) {
-    issues.push({ path: ['max'], message: 'Must be at least the lowest price' });
-    return { minPrice, issues };
-  }
-  return {
-    ...(minPrice !== undefined && { minPrice }),
-    ...(maxPrice !== undefined && { maxPrice }),
-    issues,
-  };
-}
-
 /** How many of the Sort menu's filters are set (not the sort or the text): the menu's button says so. */
 export function listFilterCount(query: ListViewQuery): number {
   return [
-    query.activity !== undefined,
+    (query.activity?.length ?? 0) > 0,
     query.minPrice !== undefined || query.maxPrice !== undefined,
     (query.features?.length ?? 0) > 0,
     (query.tags?.length ?? 0) > 0,
   ].filter(Boolean).length;
 }
 
-/** The Sort menu's feature and tag choices for a list's items. */
+/**
+ * The Sort menu's choices for a list's items: the keys they provide, the tags they have, and a price slider whose top
+ * is at or above every item's monthly equivalent in the user's currency, so a maximum at the top keeps every item.
+ */
 export function listFilterOptions(
   resolved: readonly ResolvedItem[],
-  context: Pick<ListViewContext, 'tags' | 'registry'>,
+  context: Pick<ListViewContext, 'tags' | 'registry' | 'currency'>,
 ): ListFilterOptions {
-  const labels = keyLabels(context.registry);
   const keys = new Set(resolved.flatMap((item) => item.providedKeys));
   const tagIds = new Set(resolved.flatMap(({ item }) => item.tagIds));
+  const highest = Math.max(
+    0,
+    ...resolved.flatMap((item) => monthlyIn(item, context.currency) ?? []),
+  );
   return {
-    features: [...keys]
-      .flatMap((key) => {
-        const label = labels.get(key);
-        return label === undefined ? [] : [{ key, label }];
-      })
-      .sort((a, b) => compare(sortName(a.label), sortName(b.label)) || compare(a.key, b.key)),
+    features: context.registry.flatMap(rankKeyOptions).filter((option) => keys.has(option.key)),
     tags: [...tagIds]
       .flatMap((id) => context.tags.get(id) ?? [])
       .sort((a, b) => compare(sortName(a.name), sortName(b.name)) || compare(a.id, b.id)),
+    price: priceRange(highest),
   };
 }
 

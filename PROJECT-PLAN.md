@@ -467,21 +467,25 @@ Add these aliases to `_tokens.scss`. They build on the rank tokens in BLUEPRINT 
 ### 4.3 Shared components
 | Component | Purpose | Key inputs → outputs |
 |---|---|---|
-| `ss-page-header` | Title (`<h1>`), back link ("‹ Lists"), projected actions, and a line under it in an element marked `subtitle` | `heading` (not `title`: the attribute would be the element's tooltip), `backLink?`, `backLabel?` |
+| `ss-page-header` | Title (`<h1>`), projected actions, and a line under it in an element marked `subtitle`. On every page the sidebar doesn't list, a back button above the title, on a line of its own ("← Lists", the feedback after M6.9) | `heading` (not `title`: the attribute would be the element's tooltip), `backLink?`, `backLabel?` (where it goes, by name), `backInHistory` (Settings: back where the user came from, to `backLink` when it was the first page opened) |
 | `ss-budget-bar` | Pill progress bar (wireframe style) with the label inside the fill; core's `budgetBar` gives the colour and percent (BLUEPRINT §8.1). The element is the `progressbar`: name it with `aria-label` or `aria-labelledby` | `value`, `max`, `labelMode: 'percent' \| 'amount'`, `marker?` (the Calendar's budget: the colour then compares `max` to it), `currency?` |
 | `ss-price` | Price + interval; ≈ and the `currency_exchange` icon when converted; tooltip with the source price; "+ tax" or "incl. tax" in Canada and the US (M4.4) | `price: PickedPrice`, `clickable`, `region?` (an item bought elsewhere), `menu?` (a menu the clickable price opens, M5.4), `action?` (what clicking does, read after the price: "add to a list") → `priceSelect` |
 | `ss-provider-icon` | Icon, with a letter fallback when there's none or it fails to load; at most 48 px, since catalog icons are 96 px files (BLUEPRINT §6.3). Decorative: the name is beside it | `src?`, `name`, `size` (px) |
-| `ss-status-badge` | Active / Inactive / Not listed with its dot, "active from Sep 10, 2026", and "Ends Nov 3" and ↻ "Renew by Nov 3" badges (§3.3); Search's " · 2 lists" is projected | `status` (core's `ItemStatus`, or `{ kind: 'not-listed' }`), `nextCharge?` |
+| `ss-status-badge` | Active / Inactive / Not listed with its dot, "active from Sep 10, 2026", and "Ends Nov 3" and ↻ "Renew by Nov 3" badges (§3.3); Search's " · 2 lists" (`ss-in-lists`) is projected | `status` (core's `ItemStatus`, or `{ kind: 'not-listed' }`), `nextCharge?` |
 | `ss-rank-select` | The single rank dropdown: a Material select with each rank's dot (BLUEPRINT §14). "Profile default (Wanted)" is muted and clears the override | `value` (`model`), `subscriptionLevel` (adds Essential and Critical, with hints), `inherited?` (shows "Profile default (Wanted)"), `labelledBy` or `label` → `valueChange` |
 | `ss-rank-dot`, `ss-rank-chip` | Colour dot (decorative), and dot + name | `rank` |
-| `ss-rank-counts` | Two-column rank counts, as on the Lists wireframe | `counts` (core's `RankCounts`) |
+| `ss-rank-counts` | Two-column rank counts, as on the Lists wireframe. Compact, the ranks counted only, in a row that wraps: a Search card's "1 Needed · 1 Unwanted" (the feedback after M6.9) | `counts` (core's `RankCounts`), `compact` |
 | `ss-feature-summary` | "VPN: 2 / 3" list, read as "2 of 3 active"; with a limit, its first rows and "Show all" | `rows` (core's `FeatureSummaryRow[]`), `limit?` |
 | `ss-type-counts` | "Streaming video: 3", how many subscriptions of each type, with the type's icon (the feedback after M6.8) | `types` (core's `TypeCount[]`) |
 | `ss-feature-list` | A plan's features under their parent groups, with the user's rank for each ranked key it provides; core's `planFeatureRows`, on the catalog's registry | `plan`, `ranks` |
 | `ss-mini-calendar` | Month grid with dots on payment days and the payments in each day's tooltip; ‹ › change the month; one tab stop, moved with the arrow keys, Home/End and Page Up/Down | `month` (`model`), `charges` (`CalendarCharge`: date, name, amount, currency, converted, manual; M7.1's charges map to it) → `dayClick`, `monthClick` |
-| `ss-sub-card` | Subscription card (`variant: 'search' \| 'list'`), built with its pages: the search variant in M5.2, the list variant in M6.8. As built (M5.2): the search variant takes a `searchCatalog` result; its plan chips are radio buttons (one tab stop, arrow keys, never none chosen); the expanded section is `ss-plan-details`. M5.4: its prices and its bundles' prices open the card's `ss-add-to-list-menu`. M5.7: its chips sit right below its names and never move, a lone plan gets a chip too, and its details slide open and shut, with Hide details at their foot. M6.8: the list variant is a component of its own, `ss-item-card`, which takes a resolved item and shares the card's look (`_card.scss`) and sliding details (`SlidingDetails`); Edit is a link in its details | `result`, `ranks` (M5.2); `ss-item-card`: `resolved`, `tags` and `pinToggle` (M6.8) |
+| `ss-sub-card` | Subscription card (`variant: 'search' \| 'list'`), built with its pages: the search variant in M5.2, the list variant in M6.8. As built (M5.2): the search variant takes a `searchCatalog` result; its plan chips are radio buttons (one tab stop, arrow keys, never none chosen); the expanded section is `ss-plan-details`. M5.4: its prices and its bundles' prices open the card's `ss-add-to-list-menu`. M5.7: its chips sit right below its names and never move, a lone plan gets a chip too, and its details slide open and shut, with Hide details at their foot. M6.8: the list variant is a component of its own, `ss-item-card`, which takes a resolved item and shares the card's look (`_card.scss`) and sliding details (`SlidingDetails`); Edit is a link in its details. Since the feedback after M6.9 the search variant counts the user's ranks of its plan's features under the status, and its "· 2 lists" names the lists | `result`, `ranks` (M5.2), `listNames` (the feedback after M6.9); `ss-item-card`: `resolved`, `tags` and `pinToggle` (M6.8) |
+| `ss-in-lists` | "2 lists" after a Search card's status: a button whose tooltip names the lists ("In Work Related and Family") and whose menu links to them; only words without their names | `count`, `lists` (id and name), `provider` (names the menu) |
 | `ss-add-to-list-menu` | P7's Add to list menu (M5.4): the user's lists in the order they were made, each with its number of subscriptions, then New list…; picking one opens that list's editor, or `/lists/new`, with core's `addRequestParams` | `prepare(request)` (the price that opens it says what it adds); `menu` for `ss-price` |
 | `ss-tag-chip`, `ss-tag-picker` | A tag as a dot in its colour and its name; the picker is chips with an autocomplete, and "Create tag “…”" asks for a name and one of core's 12 `tagColorPresets`, saved through `TagsRepository` | `tag`; `tagIds` (`model`) → `tagIdsChange` |
+| `ss-price-range` | Price per month as a filter (Search's panel, List view's Sort menu): a dual slider from $0 to the range's top, which means "Unlimited" | `range` (core's `PriceRange`), `min?`, `max?`, `currency`, `country?` → `limitsChange` (a limit at its end of the slider is left out) |
+| `ss-feature-filter` | Features as a filter: a chip per rank key chosen, which a click removes, and a box that suggests the rest by what's typed, grouped by feature category (core's `featureSuggestions`). Off with nothing to suggest or chosen | `keys` (what can be suggested), `features`, `categories`, `hint`, `value` (`model`) |
+| `ss-chip-choices` | A labelled group of checkboxes drawn as chips, each with an optional colour dot: Search's Activity, List view's Status and Tags. None chosen is all | `legend`, `choices` (value, label, colour?), `value` (`model`) |
 | `ss-split-button` | Main action + dropdown (the Calendar buttons): the main button does the first item, and the menu lists them all | `label`, `items` → `action` (the item's id) |
 | `ss-empty-state` | Icon, heading, projected text and an element marked `actions` | `icon`, `heading` |
 | `ss-confirm` (service) | `confirm({ title, message, confirmText, danger })` → `Promise<boolean>`: true only from the confirm button. An alert dialog described by its message; with `danger`, the button is red and focus starts on Cancel. Material's dialog loads with the first question | — |
@@ -585,6 +589,9 @@ cards.
 - Right column: the feature summary across all lists (§3.2).
 - Header link "Custom subscriptions" → `/custom`.
 
+**Since the feedback after M6.9:** New list is at the top too, after Custom subscriptions. The tile under the cards
+stays.
+
 **States:** no lists → only the New tile and a one-line hint; the feature column is hidden.
 
 **Acceptance**
@@ -652,6 +659,13 @@ cards.
 - **Search box:** finds a nickname or a note.
 - **Sort menu:** Features and Tags are always there, turned off when there's nothing to choose.
 
+**Since the feedback after M6.9:**
+- **Header:** the back button ("← Lists") is above the title, and Edit list is beside it. The one under the cards
+  stays.
+- **Sort menu:** Search's filter controls. Price per month is a dual slider up to the priciest item's monthly
+  equivalent. Features is the chip box with suggestions. Status is Active and Inactive chips (none chosen is both),
+  and Tags are chips with their colour dots, or a hint saying how to add them.
+
 BLUEPRINT §14 has the details.
 
 **Acceptance**
@@ -710,6 +724,9 @@ date, and until M7.2 the footer has only the average.
   Leaving drops the draft, after asking if there's anything to lose, so a new list nobody changed isn't kept; a
   reload or a closed tab keeps it.
 - The footer shows live totals for the draft.
+
+**Since the feedback after M6.9:** a back button above the heading goes to the list, by its saved name, or to Lists
+for a new list. Leaving with changes asks first, as above.
 
 **States:** an unknown id with no draft → P15.
 
@@ -855,7 +872,7 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
   results scroll under them. Under 960 px the pinned bar is one row, the search box ("Search services") and a
   Filters icon button with a badge counting what's on, and Sort moves to the top of the drawer.
 - **Matching:** text matches provider names and aliases, plan names, feature names and aliases, and category names, in this order: exact or prefix name → substring → alias → plan name → feature or category. It's matched term by term, and every term must match ("netflix 4k"): a term is the longest run of words a feature's or category's name contains ("ultra hd"), else a word, and a plural matches its singular ("vpns"). As built in M5.1 (`searchProviders`' rules, BLUEPRINT §14). 150 ms debounce.
-- **Sort:** Best match (default when there's text), Price low→high (default otherwise), Price high→low, Name A–Z, Most features. Price sorts use the lowest monthly equivalent of the plan shown.
+- **Sort:** Best match (default when there's text), Price low→high (default otherwise), Price high→low, Name A–Z, Most features, and Best for my ranks (the feedback after M6.9). Price sorts use the lowest monthly equivalent of the plan shown.
 - **Prices:** every interval price is a button → flow F1 (or F2 in pick mode). Converted prices show ≈, the icon and a tooltip. A $0 price shows as "Free". In Canada and the US prices are shown before tax, with "+ tax" (BLUEPRINT §4.8). On a phone (a card under 600 px) each is a pill at least 36 px high, up to 44, and they wrap side by side.
 - **Resellers** (BLUEPRINT §4.9): under a plan's prices, each official reseller that sells it for less per month after the user's sales tax (`resellerDeals`), cheapest first: "Cheaper at [icon] Amazon.ca: $87.00 / 12 mo ↗", a link to the shop's page that opens in a new tab (`rel="noopener"`). Only shops that sell where the user is; none without exchange rates. The shop's price is a button too, which adds the plan with that price as the item's own (P7). On a phone (a card under 600 px) "Cheaper at" shows once, over a row per shop with its price on the right.
 - **Availability** (`availability` in core, BLUEPRINT §4.7): plans and bundles not offered in the user's region are left out. A provider with nothing offered there shows "Not offered in Canada" instead of prices, and only when the search text names it. An unknown item shows its fallback price with "No price for Canada yet" (a country's name, since English has no table of demonyms).
@@ -908,6 +925,18 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
   the URL and isn't a filter (the Filters count leaves it out, and Clear all keeps it); it survives every filter
   change, typing, a reload and Back/Forward. One that names no list, or a deleted one, is dropped and the URL
   rewritten in place.
+
+**Since the feedback after M6.9:**
+- **Rank counts:** under the status, how many of the plan's features the user ranks each way ("1 Needed · 1
+  Unwanted"), following the chip picked; nothing when no feature of the plan is ranked.
+- **Best for my ranks** (`sort=ranks`): each card shows the user's own plan, else the provider's plan that scores
+  best on the user's ranks (the cheaper of two that score the same). Cards go best first, then by price. The API
+  doesn't have this sort: it can't know the user's ranks.
+- **"· 2 lists"** after the status names the lists on hover or keyboard focus ("In Work Related and Family"), and
+  opens a menu of links to them.
+- **Filter panel:** its price, Features and Activity controls are the ones List view's Sort menu uses (§4.3).
+
+BLUEPRINT §14 has the scores.
 
 **States:**
 - First load → skeleton cards.
@@ -1071,7 +1100,8 @@ own. A set feature asks for one or more of its values, as enum and number featur
 - Editing a plan updates every item that uses it, after a warning that shows the count. Removing a plan that items
   use removes them from their lists too, after the same warning (M6.6).
 - Deleting a custom subscription asks to confirm, saying "Also remove it from 1 list" when it's in use.
-- Reachable from the P3 header, from P5, and from the Search empty state.
+- Reachable from the P3 header, from P5, and from the Search empty state. Its back button goes to Lists (the
+  feedback after M6.9).
 
 **Acceptance**
 - [ ] Custom plans behave like catalog plans in lists, the calendar, ranks and exports
@@ -1107,7 +1137,8 @@ local sync (Phase 5) come with their tasks.
   (`sold=0`).
 
 **Behaviour**
-- ← goes back (to Home if there's no history).
+- ← Back goes back (to Home if there's no history). Since the feedback after M6.9 it's the back button every page
+  off the sidebar has, above the title.
 - **Budgets:** click to edit inline. Enter saves; an empty value means no budget.
 - **Tags:**
   - Names are renamed inline.
@@ -1175,6 +1206,7 @@ FREE SAVINGS — nothing you rank is lost
 - [Apply] opens `/lists/:listId/edit` with that change applied to a draft, so you review it and press Save.
 - [Dismiss] stores the suggestion's fingerprint in `dismissedSuggestions`. It comes back if the list changes, and "Show dismissed" reveals it.
 - An info tooltip explains the Essential, Critical and Needed rules.
+- The back button goes to the list, by its name. The placeholder has it already (the feedback after M6.9).
 
 **Acceptance**
 - [ ] The optimizer fixtures produce the expected cards and colours

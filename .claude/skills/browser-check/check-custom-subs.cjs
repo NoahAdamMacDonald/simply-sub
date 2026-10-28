@@ -326,6 +326,19 @@ const rowsOf = (page) =>
       );
       await noSideScroll(page, viewport, `${label}, no custom subscriptions`);
       await axeCheck(page, `${label}, no custom subscriptions`);
+      // The back button (the feedback after M6.9): the first stop (a click on the title focuses <main>), to Lists.
+      await page.locator('ss-custom-subs-page h1').click();
+      await page.keyboard.press('Tab');
+      check(
+        `${label}: the first stop is the back button, to Lists`,
+        await page.evaluate(
+          () =>
+            document.activeElement?.classList.contains('back') &&
+            document.activeElement.getAttribute('href') === '/lists' &&
+            document.activeElement.querySelector('.mdc-button__label')?.textContent.trim() ===
+              'Lists',
+        ),
+      );
 
       await page.locator('ss-custom-subs-page h1').click();
       await keyTo(page, () => document.activeElement?.classList.contains('new'));

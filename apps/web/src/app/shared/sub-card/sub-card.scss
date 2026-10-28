@@ -19,26 +19,6 @@
   align-items: start;
 }
 
-@container (min-width: 600px) {
-  .head {
-    grid-template-areas:
-      'icon title links prices'
-      'plans plans plans plans';
-    grid-template-columns: 48px minmax(0, 1fr) auto auto;
-  }
-
-  .links {
-    flex-direction: column;
-  }
-
-  // Room for the card's longest list of prices: each is 1.5rem high with 4px of padding, and 2px apart.
-  .prices {
-    align-items: flex-end;
-    min-height: calc(var(--price-rows) * (1.5rem + 4px) + (var(--price-rows) - 1) * 2px);
-    text-align: end;
-  }
-}
-
 .links {
   display: flex;
   flex-wrap: wrap;
@@ -67,6 +47,17 @@
 }
 
 @container (min-width: 600px) {
+  .head {
+    grid-template-areas:
+      'icon title links prices'
+      'plans plans plans plans';
+    grid-template-columns: 48px minmax(0, 1fr) auto auto;
+  }
+
+  .links {
+    flex-direction: column;
+  }
+
   .prices,
   .deals {
     --ss-price-target: auto;
@@ -75,10 +66,13 @@
     --ss-price-border: 0;
   }
 
+  // Room for the card's longest list of prices: each is 1.5rem high with 4px of padding, and 2px apart.
   .prices {
     flex-flow: column nowrap;
     align-items: flex-end;
     gap: 2px;
+    min-height: calc(var(--price-rows) * (1.5rem + 4px) + (var(--price-rows) - 1) * 2px);
+    text-align: end;
   }
 }
 
@@ -106,16 +100,6 @@
     gap: 12px;
   }
 
-  // Read in each row, shown once above them.
-  .cheaper {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-
   a {
     min-width: 0;
     overflow-wrap: anywhere;
@@ -124,6 +108,18 @@
   ss-price {
     flex-direction: column;
     align-items: flex-end;
+  }
+}
+
+// Narrow, "Cheaper at" is read in each row and shown once above them.
+@container (width < 600px) {
+  .deals .cheaper {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 }
 
@@ -138,16 +134,7 @@
     li {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
       gap: 4px 8px;
-    }
-
-    .cheaper {
-      position: static;
-      width: auto;
-      height: auto;
-      overflow: visible;
-      clip-path: none;
     }
 
     ss-price {
@@ -181,4 +168,9 @@
 // Padding inside the clipped part, which can shrink to nothing.
 ss-plan-details {
   padding-top: 12px;
+}
+
+.ranks {
+  margin-top: 4px;
+  font: var(--mat-sys-body-small);
 }

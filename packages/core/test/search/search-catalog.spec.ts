@@ -212,6 +212,7 @@ describe('searchCatalog', () => {
       expect(own.find((result) => result.provider.id === 'netflix')?.activity).toEqual({
         kind: 'active',
         lists: 1,
+        listIds: [expect.any(String)],
         plans: [{ planId: 'netflix.standard', kind: 'active' }],
       });
 
@@ -384,6 +385,65 @@ describe('searchCatalog', () => {
       // €60 a year, tax included, is CA$94.16. Amazon's CA$87 is CA$91.35 in Alberta, CA$98.31 in Ontario.
       expect(deals('CA-AB')).toEqual([['amazon', amazonCa]]);
       expect(deals('CA-ON')).toEqual([]);
+    });
+  });
+
+  describe('the user’s ranks', () => {
+    // VPN Plus's 10 devices Needed, a VPN and 4K Wanted, Ad free Unwanted.
+    const profileRanks = new Map([
+      ['vpn.devices=6-10', 'needed'],
+      ['vpn.included', 'wanted'],
+      ['video.quality=4k', 'wanted'],
+      ['streaming.ad-free', 'unwanted'],
+    ] as const);
+
+    it('counts each plan’s keys by the user’s ranks', () => {
+      const proton = search({}, { profileRanks }).find((result) => result.provider.id === 'proton');
+      const plans = proton?.kind === 'priced' ? proton.plans : [];
+      expect(plans.find((plan) => plan.plan.id === 'proton.vpn-plus')?.rankCounts).toMatchObject({
+        needed: 1,
+        wanted: 1,
+        unwanted: 0,
+      });
+      expect(plans.find((plan) => plan.plan.id === 'proton.free')?.rankCounts).toMatchObject({
+        needed: 0,
+        wanted: 1,
+      });
+      // Without ranks, nothing counts.
+      const counted = search({}).flatMap((result) =>
+        result.kind === 'priced' ? result.plans : [],
+      );
+      expect(
+        counted.every((plan) => Object.values(plan.rankCounts).every((count) => count === 0)),
+      ).toBe(true);
+    });
+
+    it('sorts the best fits first, showing each provider’s best fit, the cheaper of two that fit as well', () => {
+      expect(
+        cards(search({ sort: 'ranks' }, { profileRanks })).map(([id, shown]) => [id, shown]),
+      ).toEqual([
+        // 10 devices and a VPN; Unlimited fits as well, but costs more.
+        ['proton', 'proton.vpn-plus'],
+        // A VPN each, and Mullvad is the cheaper.
+        ['mullvad', 'mullvad.vpn'],
+        ['crave', 'crave.premium'],
+        // Standard's Ad free is Unwanted.
+        ['netflix', 'netflix.standard-ads'],
+      ]);
+    });
+
+    it('still shows the user’s own plan, by its own fit', () => {
+      const results = search(
+        { sort: 'ranks' },
+        { profileRanks, items: [item('netflix.standard')] },
+      );
+      expect(cards(results).at(-1)?.slice(0, 2)).toEqual(['netflix', 'netflix.standard']);
+    });
+
+    it('sorts by price with no ranks', () => {
+      expect(cards(search({ sort: 'ranks' })).map(([id]) => id)).toEqual(
+        cards(search({})).map(([id]) => id),
+      );
     });
   });
 });

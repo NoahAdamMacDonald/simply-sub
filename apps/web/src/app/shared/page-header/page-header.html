@@ -1,10 +1,17 @@
-<div class="row">
-  @if (backLink(); as link) {
-    <a class="back" [routerLink]="link">
-      <mat-icon aria-hidden="true">chevron_left</mat-icon>
-      <span>{{ backLabel() }}</span>
+@if (backLink(); as link) {
+  @if (backInHistory()) {
+    <button matButton type="button" class="back" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+      {{ backLabel() }}
+    </button>
+  } @else {
+    <a matButton class="back" [routerLink]="link">
+      <mat-icon>arrow_back</mat-icon>
+      {{ backLabel() }}
     </a>
   }
+}
+<div class="row">
   <h1>{{ heading() }}</h1>
   <div class="actions"><ng-content /></div>
 </div>

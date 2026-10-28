@@ -1,49 +1,9 @@
-@use '../../shared/sub-card/choice-chip';
-
+// The price, Features and Activity style themselves (shared/filters), as in List view's Sort menu.
 :host {
   display: flex;
   flex-direction: column;
   align-items: stretch;
   gap: 16px;
-}
-
-.label {
-  font: var(--mat-sys-title-small);
-}
-
-.price-head {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 4px 12px;
-}
-
-.range {
-  color: var(--ss-text-muted);
-}
-
-// The slider spans the panel; its own margin keeps the thumbs inside.
-mat-slider {
-  display: block;
-}
-
-.activity {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-
-  legend {
-    width: 100%;
-    margin-bottom: 8px;
-    padding: 0;
-  }
-}
-
-.chip {
-  @include choice-chip.chip;
 }
 
 .native,
@@ -56,11 +16,6 @@ mat-slider {
   margin: 0 0 0 40px;
   color: var(--ss-text-muted);
   font: var(--mat-sys-body-small);
-}
-
-// A chosen feature is a button as a whole: a click removes it (M5.9).
-.features mat-chip-row {
-  cursor: pointer;
 }
 
 // Clear all only: a rule for every button also lifted the Features chips' remove buttons off centre (M5.8).

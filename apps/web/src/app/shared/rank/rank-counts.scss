@@ -10,6 +10,17 @@ ul {
   list-style: none;
 }
 
+// Compact: one row that wraps.
+ul.compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+
+  &:empty {
+    display: none;
+  }
+}
+
 li {
   @include rank-colours.by-data-rank;
 
