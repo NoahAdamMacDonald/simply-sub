@@ -766,7 +766,8 @@ back):
 - **View in Search (M5.11)** opens Search on the item's own plan (`plan=`), not the user's other plan of the provider.
 - **Pinned bar (M6.13):** the search box and Sort stay below the top bar while the cards scroll. From 960 px View
   optimizations, at the side column's foot, stays pinned once the column's other parts have scrolled away; under
-  960 px a compact one (its icon and count, in the strongest's colour) is in the pinned bar.
+  960 px a compact one (its icon and count, in the strongest's colour) is in the pinned bar, before Sort, so Tab goes
+  from Sort into the menu it opens.
 - **Budget warnings (M7.7):** each has ✕ and "Show 1 hidden budget warning", for this list alone; the bars take their
   colour from the scale (P2).
 

@@ -1,5 +1,7 @@
 // M4.2 in the system Edge: the first-run dialog, Settings (budgets, Appearance, 📍), the theme in Dexie, and the
-// "IndexedDB blocked" notice with in-memory mode, in both themes at 1280 and 360 px, by keyboard, with axe.
+// "IndexedDB blocked" notice with in-memory mode, in both themes at 1280 and 360 px, by keyboard, with axe. Country,
+// province or state, and Currency are menus you can type in (M6.16): the dialogs open on their heading, Tab reaches each
+// menu, typing narrows its list and Enter picks the first; a click on the field opens its list for the mouse.
 // See SKILL.md. Usage: node check-settings.cjs <deps dir with playwright-core + axe-core> <output dir> <base url>
 const fs = require('fs');
 const path = require('path');
@@ -132,23 +134,51 @@ async function noHorizontalScroll(page, label) {
   );
 }
 
-/** The value a mat-select shows, by its form field's label. */
-async function selectValue(page, label) {
-  return page
-    .locator('mat-form-field', { has: page.locator('mat-label', { hasText: label }) })
-    .locator('.mat-mdc-select-value')
-    .first()
-    .textContent()
-    .then((text) => text.trim());
+/** The menu you can type in (M6.16) labelled `label`: its text box. */
+const choice = (page, label) => page.locator(`ss-choice-field[data-label="${label}"] input`);
+
+/** What the menu labelled `label` shows: its choice's name. */
+async function choiceValue(page, label) {
+  return choice(page, label).inputValue();
 }
 
+/**
+ * Picks `option` in the menu labelled `label` with the mouse: a click on the field opens its list. Where a user
+ * clicks: the field, as an empty one's label lies over its text box.
+ */
 async function chooseOption(page, label, option) {
-  // Where a user clicks: the field. An empty outlined field's label lies over the menu itself.
-  await page
-    .locator('mat-form-field', { has: page.locator('mat-label', { hasText: label }) })
-    .locator('.mat-mdc-text-field-wrapper')
-    .click();
+  await page.locator(`ss-choice-field[data-label="${label}"] .mat-mdc-text-field-wrapper`).click();
   await page.getByRole('option', { name: option, exact: true }).click();
+  await page.locator('.cdk-overlay-pane mat-option').first().waitFor({ state: 'detached' });
+}
+
+/** Waits for focus on the open dialog's heading, where the first-run and 📍 dialogs start (M6.16). */
+async function headingFocused(page) {
+  await page.waitForFunction(
+    () => document.activeElement?.matches('mat-dialog-container h2') === true,
+  );
+}
+
+/** Presses Tab until focus is in the menu labelled `label`. */
+async function tabToChoice(page, label, limit = 12) {
+  const inIt = () =>
+    page.evaluate(
+      (name) => document.activeElement?.closest(`ss-choice-field[data-label="${name}"]`) !== null,
+      label,
+    );
+  for (let presses = 0; presses < limit && !(await inIt()); presses++) {
+    await page.keyboard.press('Tab');
+  }
+  if (!(await inIt())) throw new Error(`Couldn't reach ${label} (focus on ${await focused(page)})`);
+}
+
+/** Types `text` in the focused menu and presses Enter once its list shows `option`, which is then the first. */
+async function typeAndPick(page, text, option) {
+  await page.keyboard.type(text);
+  await page.locator('.cdk-overlay-pane mat-option', { hasText: option }).waitFor();
+  // The first is made active a moment after the list changes.
+  await page.waitForTimeout(400);
+  await page.keyboard.press('Enter');
   await page.locator('.cdk-overlay-pane mat-option').first().waitFor({ state: 'detached' });
 }
 
@@ -191,16 +221,17 @@ async function firstRunKeyboard(browser) {
   const page = await newPage(context, 'keyboard en-CA');
   await page.goto(baseUrl + '/');
   await dialog(page).waitFor();
-  await page.waitForTimeout(300);
+  await headingFocused(page);
   check(
     'en-CA: Canada and CAD by default, no province yet',
-    (await selectValue(page, 'Country')) === 'Canada' &&
-      (await selectValue(page, 'Currency')) === 'CAD — Canadian Dollar' &&
-      (await selectValue(page, 'Province or territory')) === '',
+    (await choiceValue(page, 'Country')) === 'Canada' &&
+      (await choiceValue(page, 'Currency')) === 'CAD — Canadian Dollar' &&
+      (await choiceValue(page, 'Province or territory')) === '',
   );
   check(
-    'first run: focus starts in the dialog',
-    await page.evaluate(() => !!document.activeElement?.closest('mat-dialog-container')),
+    'first run: focus starts on the dialog’s heading, with no list open over it (M6.16)',
+    (await focused(page)) === 'h2 "Welcome to Simply Sub"' &&
+      (await page.locator('.cdk-overlay-pane mat-option').count()) === 0,
     await focused(page),
   );
 
@@ -208,53 +239,55 @@ async function firstRunKeyboard(browser) {
   await page.waitForTimeout(300);
   check('first run: Escape does not close it', (await dialog(page).count()) === 1);
 
-  const order = [await focused(page)];
+  // From the heading: each menu (whose list opens with focus and closes as it moves on), the budgets, then the buttons.
+  const order = [];
   for (let i = 0; i < 8; i++) {
     await page.keyboard.press('Tab');
     order.push(await focused(page));
   }
   check(
     'first run: Tab order, kept inside the dialog',
-    order.slice(0, 8).join(' > ') ===
+    order.join(' > ') ===
       [
-        'mat-select "Country"',
-        'mat-select "Province or territory"',
-        'mat-select "Currency"',
+        'input "Country"',
+        'input "Province or territory"',
+        'input "Currency"',
         'input "Monthly budget"',
         'input "Annual budget"',
         // M6.9.
         'button "Import a backup instead"',
         'button "Get started"',
-        'mat-select "Country"',
+        'input "Country"',
       ].join(' > '),
     order.join(' > '),
   );
+  check(
+    'first run: only the focused menu’s list is open',
+    (await page.locator('.cdk-overlay-pane .mat-mdc-autocomplete-panel').count()) <= 1,
+  );
 
-  // Get started without a province: the error shows, and focus goes to the menu. Focus is on the province now.
-  for (let i = 0; i < 5; i++) await page.keyboard.press('Tab');
+  // Get started without a province: the error shows, and focus goes to its menu. Focus is on Country now.
+  for (let i = 0; i < 10 && (await focused(page)) !== 'button "Get started"'; i++) {
+    await page.keyboard.press('Tab');
+  }
   check('first run: reached Get started', (await focused(page)) === 'button "Get started"');
   await page.keyboard.press('Enter');
   await page.waitForTimeout(300);
+  // Its list stays closed, so the message under the field shows (M6.16); typing opens it.
   check(
-    'first run: a missing province says so, and gets focus',
+    'first run: a missing province says so, and gets focus with its list closed',
     (await dialogText(page)).includes('Choose your province or territory') &&
-      (await focused(page)) === 'mat-select "Province or territory"',
+      (await focused(page)) === 'input "Province or territory"' &&
+      (await page.locator('.cdk-overlay-pane mat-option').count()) === 0,
     await focused(page),
   );
   await shot(page, 'first-run-province-error');
 
-  // Choose Ontario with the keyboard: open, type, Enter.
-  await page.keyboard.press('Enter');
-  await page.locator('mat-option').first().waitFor();
-  await page.waitForTimeout(300);
-  // The typeahead moves to a match after a 200 ms pause.
-  await page.keyboard.type('Ont');
-  await page.waitForTimeout(400);
-  await page.keyboard.press('Enter');
-  await page.waitForTimeout(300);
+  // Choose Ontario with the keyboard: type to narrow the list, and Enter picks the first (M6.16).
+  await typeAndPick(page, 'Ont', 'Ontario');
   check(
-    'first run: keyboard picks Ontario, and the tax follows',
-    (await selectValue(page, 'Province or territory')) === 'Ontario' &&
+    'first run: typing "Ont" and Enter picks Ontario, and the tax follows',
+    (await choiceValue(page, 'Province or territory')) === 'Ontario' &&
       (await dialogText(page)).includes('Sales tax 13% (Ontario)'),
     await dialogText(page),
   );
@@ -291,8 +324,8 @@ async function otherCountries(browser) {
     const text = await dialogText(page);
     check(
       'en-GB: United Kingdom, GBP, no province, prices include tax',
-      (await selectValue(page, 'Country')) === 'United Kingdom' &&
-        (await selectValue(page, 'Currency')) === 'GBP — British Pound' &&
+      (await choiceValue(page, 'Country')) === 'United Kingdom' &&
+        (await choiceValue(page, 'Currency')) === 'GBP — British Pound' &&
         (await page.locator('mat-label', { hasText: /Province|State/ }).count()) === 0 &&
         text.includes('Prices for United Kingdom already include sales tax.'),
       text,
@@ -311,10 +344,8 @@ async function otherCountries(browser) {
     const page = await newPage(context, 'en-US');
     await page.goto(baseUrl + '/');
     await dialog(page).waitFor();
-    await page
-      .locator('mat-form-field', { has: page.locator('mat-label', { hasText: 'State' }) })
-      .locator('.mat-mdc-text-field-wrapper')
-      .click();
+    await choice(page, 'State').click();
+    await page.getByRole('option').first().waitFor();
     const options = await page.getByRole('option').allTextContents();
     await page.keyboard.press('Escape');
     const names = options.map((option) => option.trim());
@@ -347,13 +378,24 @@ async function otherCountries(browser) {
     await page.goto(baseUrl + '/');
     await dialog(page).waitFor();
     await chooseOption(page, 'Country', 'Germany');
-    const followed = await selectValue(page, 'Currency');
+    // The currency follows a moment after the pick.
+    await page
+      .waitForFunction(
+        () =>
+          document.querySelector('ss-choice-field[data-label="Currency"] input')?.value ===
+          'EUR — Euro',
+        null,
+        { timeout: 3000 },
+      )
+      .catch(() => undefined);
+    const followed = await choiceValue(page, 'Currency');
     await chooseOption(page, 'Currency', 'USD — US Dollar');
     await chooseOption(page, 'Country', 'France');
+    await page.waitForTimeout(500);
     check(
       'the currency follows the country until the user picks one',
-      followed === 'EUR — Euro' && (await selectValue(page, 'Currency')) === 'USD — US Dollar',
-      `${followed}, then ${await selectValue(page, 'Currency')}`,
+      followed === 'EUR — Euro' && (await choiceValue(page, 'Currency')) === 'USD — US Dollar',
+      `${followed}, then ${await choiceValue(page, 'Currency')}`,
     );
     await context.close();
   }
@@ -502,10 +544,11 @@ async function settingsKeyboard(browser) {
   await page.getByRole('button', { name: /Ontario, Canada/ }).focus();
   await page.keyboard.press('Enter');
   await dialog(page).waitFor();
-  await page.waitForTimeout(300);
+  await headingFocused(page);
   check(
-    '📍: focus moves into the dialog',
-    await page.evaluate(() => !!document.activeElement?.closest('mat-dialog-container')),
+    '📍: focus moves to the dialog’s heading, with no list open (M6.16)',
+    (await focused(page)) === 'h2 "Location and currency"' &&
+      (await page.locator('.cdk-overlay-pane mat-option').count()) === 0,
     await focused(page),
   );
   await page.keyboard.press('Escape');
@@ -516,20 +559,18 @@ async function settingsKeyboard(browser) {
     await focused(page),
   );
 
+  // Tab to the province's menu, select what it shows, and type over it (M6.16).
   await page.keyboard.press('Enter');
   await dialog(page).waitFor();
-  await page.waitForTimeout(300);
-  await page.locator('mat-dialog-container mat-select').nth(1).focus();
-  await page.keyboard.press('Enter');
-  await page.locator('mat-option').first().waitFor();
-  await page.waitForTimeout(300);
-  await page.keyboard.type('Que');
-  await page.waitForTimeout(400);
-  await page.keyboard.press('Enter');
-  await page.waitForTimeout(200);
+  await headingFocused(page);
+  await tabToChoice(page, 'Province or territory');
+  await page.keyboard.press('Control+A');
+  await typeAndPick(page, 'Que', 'Quebec');
   check(
-    '📍: the tax follows the province',
-    (await dialogText(page)).includes('Sales tax 14.975% (Quebec)'),
+    '📍: typing "Que" and Enter picks Quebec, and the tax follows',
+    (await choiceValue(page, 'Province or territory')) === 'Quebec' &&
+      (await dialogText(page)).includes('Sales tax 14.975% (Quebec)'),
+    await dialogText(page),
   );
   await page.getByRole('button', { name: 'Save' }).focus();
   await page.keyboard.press('Enter');

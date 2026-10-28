@@ -162,6 +162,13 @@
                 </button>
               }
             </mat-form-field>
+            <!--
+              Under 960 px the side column's at the page's foot, so its View optimizations is here, compact (M6.13): before
+              Sort, so Tab goes from Sort straight into the menu it opens.
+            -->
+            @if (!wide()) {
+              <ss-optimizations-link compact class="optimize" [listId]="listId() ?? ''" />
+            }
             <!-- Its name says how many filters are on; the count beside it is the same, shown. -->
             <button
               matButton="outlined"
@@ -181,10 +188,6 @@
                 <span class="badge" aria-hidden="true">{{ filterCount() }}</span>
               }
             </button>
-            <!-- Under 960 px the side column's at the page's foot, so its View optimizations is here, compact (M6.13). -->
-            @if (!wide()) {
-              <ss-optimizations-link compact class="optimize" [listId]="listId() ?? ''" />
-            }
           </div>
 
           <div id="list-filters">

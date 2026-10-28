@@ -504,7 +504,7 @@ export class ListEditPage implements AsksBeforeLeaving {
       .get(MatDialog)
       .open<ItemDialog, ItemDialogData, ItemDialogResult>(ItemDialog, {
         ...wideDialogConfig,
-        data: { listId: draft.listId, listName: draft.name, request },
+        data: { listId: draft.listId, listName: draft.name, request, draft },
       });
     this.itemDialog = dialog;
     const result = await firstValueFrom(dialog.afterClosed());

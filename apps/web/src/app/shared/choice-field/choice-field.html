@@ -9,6 +9,7 @@
     [matAutocomplete]="list"
     [errorStateMatcher]="errorState"
     (input)="type(box.value)"
+    (keydown)="keydown($event)"
     (blur)="leave($event)"
   />
   <mat-icon matSuffix aria-hidden="true">arrow_drop_down</mat-icon>

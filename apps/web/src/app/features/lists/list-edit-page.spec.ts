@@ -23,6 +23,7 @@ import type {
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { FxStore } from '../../core/fx/fx-store';
 import { leaveGuard } from '../../core/leave-guard';
+import { ListDraftService } from '../../core/lists/list-draft-service';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { CardsRepository } from '../../core/storage/cards-repository';
 import { CustomSubsRepository } from '../../core/storage/custom-subs-repository';
@@ -918,9 +919,8 @@ describe('ListEditPage', () => {
         });
       });
 
-      it('starts a new plan of the provider with their shared ranks', async () => {
-        const loader = await openDialog(`${editor()}?add=netflix.standard&interval=month`);
-        // Its rows come once the plan's features are known: slower when every spec runs at once.
+      /** Waits for the dialog's 1080p row: its group starts open when the plan starts with a rank in it. */
+      async function rowFor1080p(): Promise<void> {
         await until(
           () =>
             Array.from(dialog()?.querySelectorAll('.rank-name') ?? []).some(
@@ -928,6 +928,11 @@ describe('ListEditPage', () => {
             ),
           5000,
         );
+      }
+
+      it('starts a new plan of the provider with their shared ranks', async () => {
+        const loader = await openDialog(`${editor()}?add=netflix.standard&interval=month`);
+        await rowFor1080p();
         // Standard with ads' Wanted; Standard's Essential stays its own.
         expect(
           await (await rankSelect(loader, 'Video quality: 1080p (Full HD)')).getValueText(),
@@ -935,6 +940,17 @@ describe('ListEditPage', () => {
         expect(await (await rankSelect(loader, 'Ad free')).getValueText()).toBe(
           'Profile default (Not ranked)',
         );
+      });
+
+      it('shares them with a new plan before the drafts’ live query has the draft', async () => {
+        // The editor opens the dialog on the draft it started, which the live query can bring a moment later: the
+        // dialog starts from the editor's, or the new plan would start with none of the ranks (found in the full run).
+        vi.spyOn(TestBed.inject(ListDraftService), 'byList').mockReturnValue(new Map());
+        const loader = await openDialog(`${editor()}?add=netflix.standard&interval=month`);
+        await rowFor1080p();
+        expect(
+          await (await rankSelect(loader, 'Video quality: 1080p (Full HD)')).getValueText(),
+        ).toBe('Wanted');
       });
     });
 

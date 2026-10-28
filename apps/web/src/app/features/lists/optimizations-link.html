@@ -17,7 +17,10 @@
     @if (summary(); as summary) {
       @if (summary.count > 0) {
         <span class="dot" aria-hidden="true"></span>{{ summary.count
-        }}<span class="visually-hidden"> suggestions, the strongest: {{ strongest() }}</span>
+        }}<span class="visually-hidden">
+          {{ summary.count === 1 ? 'suggestion' : 'suggestions' }}, the strongest:
+          {{ strongest() }}</span
+        >
       } @else {
         <span class="visually-hidden">no suggestions</span>
       }

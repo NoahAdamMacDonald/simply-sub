@@ -2630,19 +2630,25 @@ The user's sixteen fixes and improvements after M9, as M5.11–M5.12, M6.12–M6
   that renews by itself says when ("Auto-renews Nov 12"), on Search's cards too.
 - **List view's pinned bar (M6.13):** the search box and Sort stay below the top bar; View optimizations stays pinned at
   the side column's foot from 960 px, never over the column's other parts, and under 960 px a compact one (the icon and
-  the count, named by hidden words, not an `aria-label`, which axe faults when the icon's word shows) is in the bar,
-  where Sort is its icon under 600 px.
+  the count, named by hidden words, not an `aria-label`, which axe faults when the icon's word shows) is in the bar
+  before Sort, so Tab goes from Sort straight into the menu it opens; Sort is its icon under 600 px.
 - **Shared ranks (M6.14), the user's choice:** within the list, saved with the list's Save (Cancel undoes them), not a
   provider-wide layer for every list saved at once. Only what changed in the dialog goes; Essential stays on its
   plan and a sibling's Essential stays too; "Ranks for this plan only" (`ListItem.ownRanks`) opts a plan out; a new plan
-  starts with its siblings' ranks.
+  starts with its siblings' ranks. The editor hands the item dialog the draft it has (`ItemDialogData.draft`): the
+  drafts' live query can come a moment after the draft was started, and a new plan read from it then started with
+  none.
 - **Tag colours (M6.15):** the device's own colour picker (`<input type="color">`, on iOS, Android and desktop, no
   library) beside the hex field, each following the other, in Settings and the item dialog's New tag, which gets the
   hex field too.
 - **Menus you can type in (M6.16):** `ss-choice-field`, a Signal Forms control on Material's autocomplete, for Country,
   Province or territory (State) and Currency in the first-run and 📍 dialogs. Both dialogs now start on their heading:
-  focused, the Country menu would open its list over the dialog. A list closes when focus moves on to another control,
-  since Tab pressed right after it opened came before Material's own closing was set up and left it open.
+  focused, the Country menu would open its list over the dialog. Tab closes a list before focus moves on, as
+  Material's own Tab does once the list is set up: pressed right after the list opened, it came first, and left the
+  list open over the next field, or sent focus out of the page. Focus moved to another control some other way closes
+  it too. A choice pressed with a mouse or a finger moves focus to the dialog (CDK draws the list inside it, as a
+  popover), so that's left to Material, as the tag picker does (M6.6). The form sending focus to a field it's missing
+  (`focusFirstError`) leaves its list closed, so the message under the field shows; typing opens it.
 - **Budget bars and warnings (M7.7):** one colour per bar, on a scale from green to yellow exactly at the budget to red
   at 150%, the user's choice over a first try that drew a green-to-red gradient along the fill (section 8.1.1); a
   dismissed warning's key is whose payments, month

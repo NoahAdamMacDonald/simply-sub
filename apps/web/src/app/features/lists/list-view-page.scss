@@ -66,8 +66,8 @@
   min-width: 0;
 }
 
-// The search box, with Sort on its right (and under 960 px View optimizations), pinned below the top bar while the
-// cards scroll under it (M6.13), as Search's bar is. The app background hides what passes beneath.
+// The search box, with Sort on its right (and under 960 px View optimizations between them), pinned below the top bar
+// while the cards scroll under it (M6.13), as Search's bar is. The app background hides what passes beneath.
 .toolbar {
   position: sticky;
   top: var(--ss-top-bar-height, 0px);

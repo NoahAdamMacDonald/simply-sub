@@ -122,8 +122,13 @@ export class ChoiceField implements FormValueControl<string> {
     });
   }
 
+  /**
+   * The form's focus, on a field with an error (`focusFirstError`): its list stays closed, so the message under the
+   * field shows. Typing, a click or the arrow keys open it.
+   */
   focus(options?: FocusOptions): void {
     this.box().nativeElement.focus(options);
+    this.trigger().closePanel();
   }
 
   protected type(text: string): void {
@@ -139,17 +144,31 @@ export class ChoiceField implements FormValueControl<string> {
   }
 
   /**
+   * Tab (or Shift+Tab) closes the list before focus moves on, picking nothing, as Material's own Tab does once the list
+   * is set up. Pressed right after the list opened, Tab came before that: the list was left open over the next field,
+   * or, half drawn, sent focus out of the page.
+   */
+  protected keydown(event: KeyboardEvent): void {
+    if (event.key === 'Tab') this.trigger().closePanel();
+  }
+
+  /**
    * Focus left: touched, and the field shows the chosen name again (a choice clicked in the list, which takes focus
-   * from it first, then shows its own). Focus moving on to another control closes the list: Tab pressed right after
-   * the list opened came before the list could close itself, and left it open over the next field. Focus moving into
-   * the list (a choice pressed with a mouse or a finger) leaves it open, for the click to pick it.
+   * from it first, then shows its own). Focus moved to another control some other way, as the form does to a field
+   * it's missing, closes the list too, as the tag picker's does. A choice pressed with a mouse or a finger moves focus
+   * to the dialog, which holds the field, so that's left to Material, as are clicks elsewhere.
    */
   protected leave(event: FocusEvent): void {
     this.touch.emit();
     this.text.set(this.chosenLabel());
-    const to = event.relatedTarget;
+    const next = event.relatedTarget;
     const list = this.trigger().autocomplete?.panel?.nativeElement as HTMLElement | undefined;
-    if (to instanceof HTMLElement && !list?.contains(to) && !to.closest('.cdk-overlay-pane')) {
+    if (
+      next instanceof Node &&
+      event.target instanceof Node &&
+      !next.contains(event.target) &&
+      !list?.contains(next)
+    ) {
       this.trigger().closePanel();
     }
   }

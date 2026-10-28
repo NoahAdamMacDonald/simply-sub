@@ -581,7 +581,9 @@ describe('ListViewPage', () => {
     }
     const next = suggestionSummary(suggestions, new Set(red.map((card) => card.fingerprint)));
     await until(() => link()?.getAttribute('data-strongest') === next.strongest);
-    expect(link()?.textContent).toContain(`${next.count} suggestions`);
+    expect(link()?.textContent).toContain(
+      `${next.count} ${next.count === 1 ? 'suggestion' : 'suggestions'},`,
+    );
   });
 
   it('offers to add from the catalog or a custom subscription to an empty list', async () => {

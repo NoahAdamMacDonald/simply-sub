@@ -467,12 +467,12 @@ async function addItem(page, planId) {
         (await page.getByRole('searchbox').inputValue()) === '',
     );
 
-    // A listed provider: its status, and its plan shown.
+    // A listed provider: its status, when it renews by itself (M6.12), and its plan shown.
     await addItem(page, 'netflix.standard');
     const netflix = card(page, 'Netflix');
     check(
-      'a listed provider shows its status and the user’s plan',
-      (await shown(netflix.locator('ss-status-badge'))) === 'Active · 1 list' &&
+      'a listed provider shows its status, that it auto-renews, and the user’s plan',
+      (await shown(netflix.locator('ss-status-badge'))) === 'Active · 1 list Auto-renews Nov 10' &&
         (await netflix.locator('.plan-name').textContent()).trim() === 'Standard',
       await shown(netflix.locator('ss-status-badge')),
     );

@@ -81,6 +81,7 @@ import {
   type Interval,
   type ItemForm,
   type ItemFormContext,
+  type ListDraft,
   type ListItem,
   type Period,
   type PickedPrice,
@@ -130,6 +131,11 @@ export interface ItemDialogData {
   /** The list's name, for "Already in this list". */
   listName: string;
   request: ItemDialogRequest;
+  /**
+   * The list's draft as the editor had it when it opened the dialog: the drafts' live query can come a moment after
+   * the draft was started, and the dialog's first ranks need its items then (M6.14).
+   */
+  draft: ListDraft;
 }
 
 /**
@@ -553,8 +559,8 @@ export class ItemDialog {
    */
   private readonly rankSiblings = computed(() => {
     const resolved = this.preview();
-    const draft = this.drafts.byList().get(this.data.listId);
-    if (!resolved || !draft) return [];
+    const draft = this.listDraft();
+    if (!resolved) return [];
     const self = { id: this.editing?.id ?? previewId, source: resolved.item.source };
     const items = this.metrics.resolve(draftItems(draft)).flatMap((result) =>
       result.ok
@@ -869,10 +875,9 @@ export class ItemDialog {
     if (this.tags.status() === 'ready') {
       fields.tagIds = fields.tagIds.filter((id) => this.tags.byId().has(id));
     }
-    const draft = this.drafts.byList().get(listId);
+    const draft = this.listDraft();
     const title = this.title();
     if (
-      draft &&
       isDuplicate(fields.source, draftItems(draft), this.editing) &&
       !(await this.confirmer.confirm({
         title: 'Already in this list — add another?',
@@ -936,19 +941,24 @@ export class ItemDialog {
   private initialForm(): ItemForm {
     const form = this.requestedForm();
     if (this.editing) return form;
-    const draft = this.drafts.byList().get(this.data.listId);
+    const draft = this.listDraft();
     const source =
       form.kind === 'catalog' && form.planId !== ''
         ? { kind: 'catalog' as const, planId: form.planId }
         : form.kind === 'custom'
           ? { kind: 'custom' as const, customSubId: form.customSubId, customPlanId: form.planId }
           : undefined;
-    if (!draft || !source) return form;
+    if (!source) return form;
     const shared = sharedRanksFor(
       { id: previewId, source },
       draftItems(draft).map((item) => ({ item, providedKeys: [] })),
     );
     return { ...form, rankOverrides: { ...shared, ...form.rankOverrides } };
+  }
+
+  /** The list's draft as stored now, or before the drafts' query has it, as the editor had it. */
+  private listDraft(): ListDraft {
+    return this.drafts.byList().get(this.data.listId) ?? this.data.draft;
   }
 
   /** What was asked for, or the item as it is. */

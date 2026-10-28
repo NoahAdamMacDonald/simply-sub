@@ -46,10 +46,14 @@ describe('First run', () => {
 
   /** The dialog, once it has loaded. */
   async function dialog(): Promise<HarnessLoader> {
-    await vi.waitFor(async () => {
-      TestBed.tick();
-      expect(await loader.getAllHarnesses(MatDialogHarness)).toHaveLength(1);
-    });
+    // The dialog is a lazy chunk, which can take more than a second to load when every spec runs at once.
+    await vi.waitFor(
+      async () => {
+        TestBed.tick();
+        expect(await loader.getAllHarnesses(MatDialogHarness)).toHaveLength(1);
+      },
+      { timeout: 5000 },
+    );
     return loader.getChildLoader('mat-dialog-container');
   }
 
@@ -113,7 +117,12 @@ describe('First run', () => {
     TestBed.tick();
     expect(dialogText()).toContain('Choose your province or territory');
     expect(await storedRows(storage.indexedDB, 'settings')).toEqual([]);
+    // Focus goes to the province, with its list closed, so the message under it shows (M6.16).
+    const province = await select(form, 'Province or territory');
+    expect(await province.isFocused()).toBe(true);
+    expect(await province.isOpen()).toBe(false);
 
+    await province.blur();
     await choose(form, 'Province or territory', 'Ontario');
     expect(dialogText()).toContain('Sales tax 13% (Ontario)');
     await (await input(form, 'Monthly budget')).setValue('200');
@@ -224,6 +233,46 @@ describe('First run', () => {
     // Leaving without picking puts back the one chosen.
     await currency.blur();
     await vi.waitFor(async () => expect(await currency.getValue()).toBe('CAD — Canadian Dollar'));
+  });
+
+  it('closes a menu’s list when focus moves on to the next field, though the dialog is an overlay too', async () => {
+    await start(['en-CA']);
+    const form = await dialog();
+    const province = await select(form, 'Province or territory');
+    await province.focus();
+    expect(await province.isOpen()).toBe(true);
+
+    const currency = await select(form, 'Currency');
+    await currency.focus();
+    expect(await province.isOpen()).toBe(false);
+    expect(await currency.isOpen()).toBe(true);
+  });
+
+  it('closes a menu’s list on Tab, though Tab comes before the list is drawn', async () => {
+    await start(['en-CA']);
+    const form = await dialog();
+    // Focused, it opens its list; the Tab key straight after, before anything is drawn.
+    const box = document.querySelector<HTMLInputElement>(
+      'ss-choice-field[data-label="Country"] input',
+    );
+    box?.focus();
+    box?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true }));
+    expect(await (await select(form, 'Country')).isOpen()).toBe(false);
+  });
+
+  it('keeps a menu’s list open when a press on a choice sends focus to the dialog', async () => {
+    await start(['en-CA']);
+    const form = await dialog();
+    const province = await select(form, 'Province or territory');
+    await province.focus();
+    expect(await province.isOpen()).toBe(true);
+
+    // A press on a choice moves focus to the nearest focusable element around it: in a browser, which draws the list
+    // inside the dialog, the dialog. The list stays open for the click that follows.
+    document.querySelector<HTMLElement>('mat-dialog-container')?.focus();
+    expect(await province.isOpen()).toBe(true);
+    await province.selectOption({ text: 'Ontario' });
+    expect(await province.getValue()).toBe('Ontario');
   });
 
   it('asks nothing about tax where prices include it', async () => {

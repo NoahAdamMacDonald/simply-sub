@@ -181,7 +181,8 @@ async function budgetBars(page) {
     'Half the monthly budget': ['50%', 'ok', '50%, $100.00 of $200.00'],
     'A short fill': ['12%', 'ok', '12%, $24.00 of $200.00'],
     'Almost nothing': ['2%', 'ok', '2%, $4.00 of $200.00'],
-    'Amber from 75%': ['80%', 'warn', '80%, $160.00 of $200.00'],
+    // Renamed for the bars' colour scale (M7.7): its level is still warn from 75%.
+    'Most of the budget, nearly yellow': ['80%', 'warn', '80%, $160.00 of $200.00'],
     'Exactly the budget': ['100%', 'warn', '100%, $200.00 of $200.00'],
     'Over the budget': ['112%', 'over', '112%, $224.00 of $200.00'],
     'Calendar: over the budget': ['$44.45', 'over', '$44.45 of $66.45, budget $60.00'],
@@ -506,7 +507,8 @@ async function tags(page) {
   await page.keyboard.type('Family');
   await page.locator('mat-option', { hasText: 'Create tag “Family”' }).waitFor();
   await page.keyboard.press('Enter');
-  const name = tagsSection.locator('.create input[matInput]');
+  // Its Name: the hex field beside the presets is a text box too (M6.15).
+  const name = tagsSection.locator('.create').getByRole('textbox', { name: 'Name', exact: true });
   await name.waitFor();
   check(
     'creating opens the name and colour, focused on the name',
