@@ -173,7 +173,7 @@ describe('featureSummary', () => {
       ({ label, active, total }) => `${label} ${active} / ${total}`,
     );
 
-  it('shows headlines and keys ranked Needed or Wanted, active items out of all that provide them', () => {
+  it('shows headlines, ranked keys and what each item has itself, active items out of all that provide them', () => {
     expect(
       rows(
         owned({ 'video.quality': '4k', 'streaming.concurrent-streams': 4, 'vpn.included': true }),
@@ -182,16 +182,17 @@ describe('featureSummary', () => {
         owned({ 'video.quality': '4k', 'vpn.included': true }, { endDate: '2026-10-01' }),
       ),
     ).toEqual([
-      // Needed, then the Wanted keys by name, then the headline no one ranked.
+      // Needed, then the Wanted keys (the headline first), then Ad free (Uses), then the headline no one ranked.
       'Video quality: 4K (Ultra HD) 1 / 2',
-      'Simultaneous streams: 2 to 4 devices 1 / 1',
       'Video quality: 1080p (Full HD) 2 / 3',
+      'Simultaneous streams: 2 to 4 devices 1 / 1',
+      'Ad free 1 / 1',
       'VPN 1 / 2',
     ]);
   });
 
-  it('leaves out keys ranked lower, unranked keys that aren’t headlines, and keys no item provides', () => {
-    // Ad free is Uses, Live sports Unwanted, 480p and Single device not ranked; nothing here has a VPN.
+  it('shows what an item has itself, whatever its rank: a boolean and its own rung of a ladder, not a set value', () => {
+    // Ad free is Uses, Live sports Unwanted, 480p and Single device not ranked.
     expect(
       rows(
         owned({
@@ -201,7 +202,20 @@ describe('featureSummary', () => {
           'streaming.concurrent-streams': 1,
         }),
       ),
-    ).toEqual([]);
+    ).toEqual([
+      'Ad free 1 / 1',
+      'Simultaneous streams: Single device 1 / 1',
+      'Video quality: 480p (SD) 1 / 1',
+    ]);
+  });
+
+  it('leaves out the lower rungs a higher one provides, unless they’re headlines or ranked, and keys no item provides', () => {
+    // 4 streams provide Single device too, and 4K provides 480p: neither is ranked or a headline. Nothing has a VPN.
+    expect(rows(owned({ 'video.quality': '4k', 'streaming.concurrent-streams': 4 }))).toEqual([
+      'Video quality: 4K (Ultra HD) 1 / 1',
+      'Video quality: 1080p (Full HD) 1 / 1',
+      'Simultaneous streams: 2 to 4 devices 1 / 1',
+    ]);
   });
 
   it('adds keys an item ranks Essential or Critical, ordered by their highest rank across the items', () => {
@@ -219,24 +233,17 @@ describe('featureSummary', () => {
     ]);
   });
 
-  it('keeps a key the profile ranks Wanted when an item ranks it lower, and drops it when none ranks it high', () => {
-    expect(
-      rows(
-        owned({ 'streaming.concurrent-streams': 3 }),
-        owned(
-          { 'streaming.concurrent-streams': 3 },
-          { overrides: { 'streaming.concurrent-streams=2-4': 'unused' } },
-        ),
-      ),
-    ).toEqual(['Simultaneous streams: 2 to 4 devices 2 / 2']);
-    expect(
-      rows(
-        owned(
-          { 'streaming.concurrent-streams': 3 },
-          { overrides: { 'streaming.concurrent-streams=2-4': 'unused' } },
-        ),
-      ),
-    ).toEqual([]);
+  it('orders a key by its highest rank across the items, so one an item ranks lower keeps the profile’s place', () => {
+    const lower = owned(
+      { 'streaming.concurrent-streams': 3, 'streaming.ad-free': true },
+      { overrides: { 'streaming.concurrent-streams=2-4': 'unused' } },
+    );
+    // Ad free is Uses: before the streams an item ranks Unused, after them once another item has them at Wanted.
+    expect(rows(lower)).toEqual(['Ad free 1 / 1', 'Simultaneous streams: 2 to 4 devices 1 / 1']);
+    expect(rows(owned({ 'streaming.concurrent-streams': 3 }), lower)).toEqual([
+      'Simultaneous streams: 2 to 4 devices 2 / 2',
+      'Ad free 1 / 1',
+    ]);
   });
 
   it('gives each row its key, and takes every key of a valued feature marked headline', () => {

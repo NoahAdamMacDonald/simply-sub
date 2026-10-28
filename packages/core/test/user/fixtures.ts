@@ -46,6 +46,8 @@ export const item = {
   tagIds: [tagId],
   rankOverrides: { 'streaming.ad-free': 'essential', 'video.quality=1080p': 'not-ranked' },
   pinned: true,
+  nickname: "Mom's",
+  note: 'Shared with the kids',
   ...stamps,
   deletedAt: '2026-10-20T09:15:00.000Z',
 };

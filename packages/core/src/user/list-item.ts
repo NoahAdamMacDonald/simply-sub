@@ -6,6 +6,7 @@ import {
   isoDateSchema,
   planIdSchema,
   rankKeySchema,
+  textSchema,
 } from '../catalog/formats';
 import { intervalSchema } from '../catalog/price';
 import { addDays } from '../dates/iso-date';
@@ -112,6 +113,10 @@ export const billingSchema = z.discriminatedUnion('mode', [
 ]);
 export type Billing = z.infer<typeof billingSchema>;
 
+/** The longest nickname and note an item can have (P6). */
+export const maxNicknameLength = 60;
+export const maxNoteLength = 1000;
+
 /** What the user pays instead of the catalog price: a promo, a first-term offer or a grandfathered price. */
 export const priceOverrideSchema = z.strictObject({
   amount: z.number().positive('Must be more than 0'),
@@ -137,6 +142,12 @@ export const listItemSchema = z
     /** Subscription-level ranks; a key that isn't here takes the profile rank (PROJECT-PLAN §3.2). */
     rankOverrides: z.record(rankKeySchema, rankSchema),
     pinned: z.boolean(),
+    /** The user's own name for it, which tells two of the same plan apart: "Mom's". */
+    nickname: textSchema
+      .max(maxNicknameLength, `Use at most ${maxNicknameLength} characters`)
+      .optional(),
+    /** A note of the user's own. */
+    note: textSchema.max(maxNoteLength, `Use at most ${maxNoteLength} characters`).optional(),
   })
   .superRefine((item, ctx) => {
     addDuplicateIssues(ctx, item.tagIds, (index) => ['tagIds', index]);

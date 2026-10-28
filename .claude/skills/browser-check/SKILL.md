@@ -195,7 +195,24 @@ It runs axe on the page, the open Sort menu (and an open select at 1280 px), the
 checks for horizontal scroll. Its `focusedName` reads the accessibility snapshot, so an icon's ligature ("tune") and
 an input's `<label>` come out right.
 
+`check-overflow.cjs` (the feedback after M6.8) checks that no page scrolls sideways at 320, 360 and 390 px, with the
+browser's scrollbars shown (`ignoreDefaultArgs: ['--hide-scrollbars']`). It covers Home, Search (filters and
+Mullvad's details open), Lists, List view (Sort and a card's details open), the editor, a new list, the item dialog,
+Features, Custom subscriptions (editor open), Settings, Calendar and Payment. A failure names what sticks out, and
+anything inside a page that scrolls sideways fails too.
+
+Since the feedback after M6.8, the other scripts check more:
+- `check-search.cjs`: at 360 px each shop's price is on its line under one "Cheaper at".
+- `check-item-dialog.cjs`: the three date boxes have the same height.
+- `check-list-view.cjs`: the Types column, and View in Search by keyboard.
+- `check-lists.cjs`: the overview's Types, and its summary folded after 8 rows with "Show all".
+
 ## Gotchas
+
+- Headless Chromium hides scrollbars, so a width that counts on them (`100vw`, a scrollbar's 15 px) never shows up.
+  Launch with `ignoreDefaultArgs: ['--hide-scrollbars']` to measure with them, as `check-overflow.cjs` does. When a
+  reported sideways scroll doesn't reproduce, compare both side gutters in the screenshot: seeing only one at a time
+  means the page was zoomed, not too wide.
 
 - Dates are Material datepickers since the feedback after M6.7: select what's there (Control+A) and type
   2027-02-28. The calendar opens from the field's button (named "Ends on: choose a date"), arrow keys move a day and

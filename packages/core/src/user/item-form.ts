@@ -3,7 +3,14 @@ import type { Interval } from '../catalog/price';
 import { addDays, addMonths, type IsoDate } from '../dates/iso-date';
 import type { RankKey } from '../ranking/rank-keys';
 import { maxIntervalCount } from './add-request';
-import type { Billing, ItemSource, ListItem, PriceOverride } from './list-item';
+import {
+  maxNicknameLength,
+  maxNoteLength,
+  type Billing,
+  type ItemSource,
+  type ListItem,
+  type PriceOverride,
+} from './list-item';
 import type { Rank } from './rank';
 
 // The item dialog's rules (PROJECT-PLAN P6, M6.5): the billing periods a plan offers, when an Ongoing item renews by
@@ -80,6 +87,9 @@ export interface ItemForm {
   region: string;
   rankOverrides: Record<RankKey, Rank>;
   tagIds: string[];
+  /** The user's own name for it and their note, as typed: '' for none. */
+  nickname: string;
+  note: string;
 }
 
 /** A rule the form breaks, at the field it's about: `['windows', 0, 'end']`. */
@@ -329,12 +339,19 @@ export function itemFormIssues(form: ItemForm, rules: ItemFormRules): FormIssue[
     }
     if (form.priceCurrency === '') add(['priceCurrency'], 'Choose a currency');
   }
+
+  if (form.nickname.trim().length > maxNicknameLength) {
+    add(['nickname'], `Use at most ${maxNicknameLength} characters`);
+  }
+  if (form.note.trim().length > maxNoteLength) {
+    add(['note'], `Use at most ${maxNoteLength} characters`);
+  }
   return issues;
 }
 
 /** What the form saves: all of a list item but its id, list, pinning, card and timestamps. */
 export type ItemFields = Pick<ListItem, 'source' | 'billing' | 'tagIds' | 'rankOverrides'> &
-  Partial<Pick<ListItem, 'region' | 'priceOverride'>>;
+  Partial<Pick<ListItem, 'region' | 'priceOverride' | 'nickname' | 'note'>>;
 
 export interface ItemFormContext extends ItemFormRules {
   /** The chosen price's autoRenew: a plan that's renewed by hand never auto-renews. */
@@ -369,7 +386,15 @@ export function itemFromForm(form: ItemForm, context: ItemFormContext): ItemFiel
     ...(!free && form.ownPrice && { ...priceOverride(form) }),
     tagIds,
     rankOverrides,
+    ...trimmed('nickname', form.nickname),
+    ...trimmed('note', form.note),
   };
+}
+
+/** A typed text as a field of its own, trimmed, or nothing when it's empty. */
+function trimmed<K extends 'nickname' | 'note'>(key: K, text: string): Partial<Record<K, string>> {
+  const value = text.trim();
+  return value === '' ? {} : ({ [key]: value } as Record<K, string>);
 }
 
 /** A new item's form: what Search asked for (P7), billed from today with the suggested renewal (defaultRenewal). */
@@ -403,6 +428,8 @@ export function newItemForm({
     region: country,
     rankOverrides: {},
     tagIds: [],
+    nickname: '',
+    note: '',
   };
 }
 
@@ -440,6 +467,8 @@ export function itemFormFor(
     region: item.region ?? options.country,
     rankOverrides: { ...item.rankOverrides },
     tagIds: [...item.tagIds],
+    nickname: item.nickname ?? '',
+    note: item.note ?? '',
   };
 }
 

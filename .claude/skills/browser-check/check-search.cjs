@@ -1168,6 +1168,44 @@ async function addItem(page, planId) {
     await context.close();
   }
 
+  // ── The feedback after M6.8: at 360 px each shop's price is on its line, under one "Cheaper at" ──────
+  for (const colorScheme of ['light', 'dark']) {
+    const context = await newContext(browser, { locale: 'en-CA', colorScheme, viewport: NARROW });
+    const page = await newPage(context, `resellers ${colorScheme} 360`);
+    await openSearch(page, 'Alberta');
+    const mullvad = card(page, 'Mullvad VPN');
+    await mullvad.locator('.deals li').first().waitFor();
+    const rows = await mullvad.locator('.deals li').evaluateAll((items) =>
+      items.map((item) => {
+        const link = item.querySelector('a').getBoundingClientRect();
+        const price = item.querySelector('ss-price button').getBoundingClientRect();
+        return {
+          shop: item.querySelector('a').textContent.replace(/\s+/g, ' ').trim(),
+          sameLine: link.top < price.bottom && price.top < link.bottom,
+          priceRight: Math.round(price.right),
+          cardRight: Math.round(item.closest('.card').getBoundingClientRect().right),
+        };
+      }),
+    );
+    check(
+      `${colorScheme} 360: "Cheaper at" shows once, and each shop's price is on its line, on the right`,
+      (await mullvad.locator('.deals-label').isVisible()) &&
+        rows.length >= 2 &&
+        rows.every((row) => row.sameLine && row.priceRight <= row.cardRight - 16),
+      JSON.stringify(rows),
+    );
+    const width = await page.evaluate(() => document.documentElement.scrollWidth);
+    check(
+      `no horizontal scroll with resellers: ${colorScheme} 360`,
+      width <= NARROW.width,
+      `${width}px`,
+    );
+    await mullvad.locator('.deals').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: path.join(outDir, `resellers-${colorScheme}-360.png`) });
+    await axeCheck(page, `${colorScheme} 360, the resellers' rows`);
+    await context.close();
+  }
+
   // ── M5.7: the pinned bar, chips that stay put, the plans' order, a lone plan's chip, the details' foot ─────
   for (const viewport of [WIDE, NARROW]) {
     const label = `${viewport.width}`;

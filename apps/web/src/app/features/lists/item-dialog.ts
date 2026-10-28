@@ -702,6 +702,8 @@ export class ItemDialog {
       await this.drafts.updateItem(listId, itemId, {
         region: undefined,
         priceOverride: undefined,
+        nickname: undefined,
+        note: undefined,
         ...fields,
       });
     } else {

@@ -178,7 +178,18 @@ describe('ListsOverviewPage', () => {
         .querySelector('ss-rank-counts li')
         ?.getAttribute('data-rank'),
     ).toBe('not-ranked');
-    expect(features()).toEqual(['Ad free: 1 / 1', 'Video quality: 1080p (Full HD): 1 / 1']);
+    // Ranked, then what an item has itself: Mullvad's VPN.
+    expect(features()).toEqual([
+      'Ad free: 1 / 1',
+      'Video quality: 1080p (Full HD): 1 / 1',
+      'VPN: 1 / 1',
+    ]);
+    expect(
+      Array.from(page().querySelectorAll('ss-type-counts li')).map(
+        (row) =>
+          `${text(row.querySelector('.label'))} ${text(row.querySelector('span:last-child'))}`,
+      ),
+    ).toEqual(['Streaming video: 1', 'VPN: 1']);
     expect(button('View Work Related')?.getAttribute('href')).toBe(`/lists/${work.id}`);
     expect(page().querySelector('.name a')?.getAttribute('href')).toBe(`/lists/${work.id}`);
     expect(page().querySelector('.new-list')?.getAttribute('href')).toBe('/lists/new');

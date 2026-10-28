@@ -1,0 +1,9 @@
+<ul>
+  @for (type of types(); track type.id) {
+    <li>
+      <mat-icon aria-hidden="true">{{ type.icon }}</mat-icon>
+      <span class="label">{{ type.name }}:</span>
+      <span>{{ type.count }}</span>
+    </li>
+  }
+</ul>

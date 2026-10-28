@@ -301,10 +301,16 @@ Users rank **rank keys**. Each one points to one rankable option of a feature:
 - **Rank counts** (list cards): for each item, and each key its plan provides, count the key's effective rank.
   Show all eight ranks from Essential to Unwanted, with zero counts in grey. Not ranked isn't shown.
 - **Feature summary** ("VPN 2 / 3"): for each summary key, *active items that provide it* / *all items that provide it*.
-  The summary keys are the keys marked `headline: true` in the registry, plus any key the user ranked Essential,
-  Critical, Needed or Wanted. Only keys with a total of at least 1 are shown, sorted by rank and then by name. A
-  key's rank there is its highest among the items that provide it (each item's override, else the profile's), and a
-  row is named as Search's Features chips are, "Video quality: 4K (Ultra HD)" (M6.1).
+  The summary keys are:
+  - the keys marked `headline: true` in the registry;
+  - any key the user ranked Essential, Critical, Needed or Wanted;
+  - since the feedback after M6.8, what each item has itself: its booleans, and its own rung of a ladder (not the
+    lower rungs that rung provides too). A set's values count only when ranked or headline.
+
+  Only keys with a total of at least 1 are shown, sorted by rank, then headlines first, then by name. A key's rank
+  there is its highest among the items that provide it (each item's override, else the profile's), and a row is
+  named as Search's Features chips are, "Video quality: 4K (Ultra HD)" (M6.1). The Lists pages show 8 rows, then
+  "Show all".
 
 ### 3.3 Statuses
 | Status | Rule | Shown as |
@@ -468,7 +474,8 @@ Add these aliases to `_tokens.scss`. They build on the rank tokens in BLUEPRINT 
 | `ss-rank-select` | The single rank dropdown: a Material select with each rank's dot (BLUEPRINT §14). "Profile default (Wanted)" is muted and clears the override | `value` (`model`), `subscriptionLevel` (adds Essential and Critical, with hints), `inherited?` (shows "Profile default (Wanted)"), `labelledBy` or `label` → `valueChange` |
 | `ss-rank-dot`, `ss-rank-chip` | Colour dot (decorative), and dot + name | `rank` |
 | `ss-rank-counts` | Two-column rank counts, as on the Lists wireframe | `counts` (core's `RankCounts`) |
-| `ss-feature-summary` | "VPN: 2 / 3" list, read as "2 of 3 active" | `rows` (core's `FeatureSummaryRow[]`) |
+| `ss-feature-summary` | "VPN: 2 / 3" list, read as "2 of 3 active"; with a limit, its first rows and "Show all" | `rows` (core's `FeatureSummaryRow[]`), `limit?` |
+| `ss-type-counts` | "Streaming video: 3", how many subscriptions of each type, with the type's icon (the feedback after M6.8) | `types` (core's `TypeCount[]`) |
 | `ss-feature-list` | A plan's features under their parent groups, with the user's rank for each ranked key it provides; core's `planFeatureRows`, on the catalog's registry | `plan`, `ranks` |
 | `ss-mini-calendar` | Month grid with dots on payment days and the payments in each day's tooltip; ‹ › change the month; one tab stop, moved with the arrow keys, Home/End and Page Up/Down | `month` (`model`), `charges` (`CalendarCharge`: date, name, amount, currency, converted, manual; M7.1's charges map to it) → `dayClick`, `monthClick` |
 | `ss-sub-card` | Subscription card (`variant: 'search' \| 'list'`), built with its pages: the search variant in M5.2, the list variant in M6.8. As built (M5.2): the search variant takes a `searchCatalog` result; its plan chips are radio buttons (one tab stop, arrow keys, never none chosen); the expanded section is `ss-plan-details`. M5.4: its prices and its bundles' prices open the card's `ss-add-to-list-menu`. M5.7: its chips sit right below its names and never move, a lone plan gets a chip too, and its details slide open and shut, with Hide details at their foot. M6.8: the list variant is a component of its own, `ss-item-card`, which takes a resolved item and shares the card's look (`_card.scss`) and sliding details (`SlidingDetails`); Edit is a link in its details | `result`, `ranks` (M5.2); `ss-item-card`: `resolved`, `tags` and `pinToggle` (M6.8) |
@@ -638,6 +645,12 @@ cards.
 - **Cards** are `ss-item-card`, whose details have Edit. "Wrong date?" comes with the next charge (M7.1).
 - **Unsaved changes:** a note links back to the editor when it has changes not saved.
 
+**Since the feedback after M6.8:**
+- **Side column:** Types ("Streaming video: 2") comes first, then the feature summary, which folds after 8 rows.
+- **Cards:** a card shows its nickname over its plan, and its details have its note and View in Search.
+- **Search box:** finds a nickname or a note.
+- **Sort menu:** Features and Tags are always there, turned off when there's nothing to choose.
+
 BLUEPRINT §14 has the details.
 
 **Acceptance**
@@ -740,6 +753,9 @@ In Specific dates mode, the renewal fields are replaced by:
 **Since the feedback after M6.7:** dates are datepickers (typed YYYY-MM-DD, or picked from a calendar), feature rank
 groups fold, a click on a tag chip removes it, and a reseller's price arrives with "I pay a different price" filled in.
 
+**Since the feedback after M6.8:** an optional Nickname under Plan (at most 60 characters), which tells two of the same
+plan apart, and an optional Note at the end (at most 1000). Fields in a row keep their own heights.
+
 **As built (M6.5):** the sections run Plan, Add-ons (P6's "Extra members": an add-on can be a channel), Billing, "I
 pay a different price", Advanced, Feature ranks and Tags, and Plus tax shows only where tax is added. The billing day
 is a "Billed on" choice. The footer's ≈ marks a converted price only, and "next charge" comes with M7.1. Payment comes
@@ -840,7 +856,7 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
 - **Matching:** text matches provider names and aliases, plan names, feature names and aliases, and category names, in this order: exact or prefix name → substring → alias → plan name → feature or category. It's matched term by term, and every term must match ("netflix 4k"): a term is the longest run of words a feature's or category's name contains ("ultra hd"), else a word, and a plural matches its singular ("vpns"). As built in M5.1 (`searchProviders`' rules, BLUEPRINT §14). 150 ms debounce.
 - **Sort:** Best match (default when there's text), Price low→high (default otherwise), Price high→low, Name A–Z, Most features. Price sorts use the lowest monthly equivalent of the plan shown.
 - **Prices:** every interval price is a button → flow F1 (or F2 in pick mode). Converted prices show ≈, the icon and a tooltip. A $0 price shows as "Free". In Canada and the US prices are shown before tax, with "+ tax" (BLUEPRINT §4.8). On a phone (a card under 600 px) each is a pill at least 36 px high, up to 44, and they wrap side by side.
-- **Resellers** (BLUEPRINT §4.9): under a plan's prices, each official reseller that sells it for less per month after the user's sales tax (`resellerDeals`), cheapest first: "Cheaper at [icon] Amazon.ca: $87.00 / 12 mo ↗", a link to the shop's page that opens in a new tab (`rel="noopener"`). Only shops that sell where the user is; none without exchange rates. The shop's price is a button too, which adds the plan with that price as the item's own (P7).
+- **Resellers** (BLUEPRINT §4.9): under a plan's prices, each official reseller that sells it for less per month after the user's sales tax (`resellerDeals`), cheapest first: "Cheaper at [icon] Amazon.ca: $87.00 / 12 mo ↗", a link to the shop's page that opens in a new tab (`rel="noopener"`). Only shops that sell where the user is; none without exchange rates. The shop's price is a button too, which adds the plan with that price as the item's own (P7). On a phone (a card under 600 px) "Cheaper at" shows once, over a row per shop with its price on the right.
 - **Availability** (`availability` in core, BLUEPRINT §4.7): plans and bundles not offered in the user's region are left out. A provider with nothing offered there shows "Not offered in Canada" instead of prices, and only when the search text names it. An unknown item shows its fallback price with "No price for Canada yet" (a country's name, since English has no table of demonyms).
 - **Links:** Plan ↗ and Cancel ↗ open in a new tab (`rel="noopener"`).
 - **Status:** follows §3.3, at provider level.

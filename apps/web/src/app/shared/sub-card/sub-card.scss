@@ -82,19 +82,78 @@
   }
 }
 
+// Resellers (P8, BLUEPRINT §4.9). At phone width, "Cheaper at" once, then a row per shop: its name on the left, which
+// wraps, and its price on the right, with the tax note under it, so a shop's price stays on its line. Wide, a line
+// each: "Cheaper at [icon] Amazon ↗ $87.00 / 12 mo".
+.deals-label {
+  margin: 0 0 -4px;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-label-large);
+}
+
 .deals {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
 
   li {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    gap: 4px 8px;
+    gap: 12px;
+  }
+
+  // Read in each row, shown once above them.
+  .cheaper {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  a {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  ss-price {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+
+@container (min-width: 600px) {
+  .deals-label {
+    display: none;
+  }
+
+  .deals {
+    gap: 4px;
+
+    li {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4px 8px;
+    }
+
+    .cheaper {
+      position: static;
+      width: auto;
+      height: auto;
+      overflow: visible;
+      clip-path: none;
+    }
+
+    ss-price {
+      flex-direction: row;
+      align-items: center;
+    }
   }
 }
 

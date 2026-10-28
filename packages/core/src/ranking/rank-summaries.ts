@@ -28,10 +28,18 @@ const summaryRanks: readonly Rank[] = ['essential', 'critical', 'needed', 'wante
 
 /**
  * The feature summary: for each summary key, the items active today that provide it out of all that do. The summary
- * keys are the registry's headlines (a boolean feature, a value or a tier marked headline, or every key of a valued
- * feature marked so) and any key an item ranks Essential, Critical, Needed or Wanted, by its override or the
- * profile. A key no item provides isn't shown. Rows go by the key's highest rank among the items that provide it,
- * in Rank's order (Not ranked after Sometimes), then by name: "Video quality: 4K (Ultra HD)", as Search names it.
+ * keys are:
+ * - the registry's headlines (a boolean feature, a value or a tier marked headline, or every key of a valued feature
+ *   marked so);
+ * - any key an item ranks Essential, Critical, Needed or Wanted, by its override or the profile;
+ * - what each item has itself (its own keys): a boolean it has, and of a ladder (an enum's values, a number's tiers)
+ *   only its own rung, not the lower ones it provides too. A 4K plan shows 4K, not 1080p, though it counts toward
+ *   1080p's row when another item shows that. A set's values (DNS blocking's ads, malware…) show only when ranked
+ *   or marked headline: a set can have many.
+ *
+ * A key no item provides isn't shown. Rows go by the key's highest rank among the items that provide it, in Rank's
+ * order (Not ranked after Sometimes), then headlines first, then by name: "Video quality: 4K (Ultra HD)", as Search
+ * names it.
  */
 export function featureSummary(
   items: readonly Pick<ResolvedItem, 'item' | 'providedKeys' | 'effectiveRanks'>[],
@@ -41,10 +49,11 @@ export function featureSummary(
   const options = new Map(registry.flatMap(rankKeyOptions).map((option) => [option.key, option]));
   const rows = new Map<
     RankKey,
-    { option: RankKeyOption; active: number; total: number; rank: number }
+    { option: RankKeyOption; active: number; total: number; rank: number; own: boolean }
   >();
   for (const { item, providedKeys, effectiveRanks } of items) {
     const active = itemActivity(item, today).kind === 'active';
+    const own = ownKeys(providedKeys, options);
     for (const key of providedKeys) {
       const option = options.get(key);
       if (!option) continue;
@@ -54,22 +63,57 @@ export function featureSummary(
         row.total++;
         if (active) row.active++;
         row.rank = Math.min(row.rank, rank);
+        row.own ||= own.has(key);
       } else {
-        rows.set(key, { option, active: active ? 1 : 0, total: 1, rank });
+        rows.set(key, { option, active: active ? 1 : 0, total: 1, rank, own: own.has(key) });
       }
     }
   }
   const lowestShown = rankOrder(summaryRanks[summaryRanks.length - 1]);
   return [...rows.values()]
-    .filter((row) => row.rank <= lowestShown || isHeadline(row.option))
-    .map((row) => ({ ...row, label: rankKeyLabel(row.option) }))
+    .filter((row) => row.rank <= lowestShown || row.own || isHeadline(row.option))
+    .map((row) => ({ ...row, label: rankKeyLabel(row.option), headline: isHeadline(row.option) }))
     .sort(
       (a, b) =>
         a.rank - b.rank ||
+        Number(b.headline) - Number(a.headline) ||
         compare(sortName(a.label), sortName(b.label)) ||
         compare(a.option.key, b.option.key),
     )
     .map(({ option, label, active, total }) => ({ key: option.key, label, active, total }));
+}
+
+/**
+ * The keys an item has itself, of the keys it provides: its booleans, and the top rung of each ladder (an enum's
+ * values, a number's tiers), not the lower rungs that one provides too. Not a set's values.
+ */
+function ownKeys(
+  providedKeys: readonly RankKey[],
+  options: ReadonlyMap<RankKey, RankKeyOption>,
+): Set<RankKey> {
+  const own = new Set<RankKey>();
+  const top = new Map<string, { key: RankKey; position: number }>();
+  for (const key of providedKeys) {
+    const option = options.get(key);
+    if (!option) continue;
+    const { feature } = option;
+    if (feature.type === 'set') continue;
+    const rungs =
+      feature.type === 'enum'
+        ? feature.values
+        : feature.type === 'number'
+          ? feature.tiers
+          : undefined;
+    if (!rungs) {
+      own.add(key);
+      continue;
+    }
+    const position = rungs.findIndex((rung) => rung.id === option.option);
+    const highest = top.get(feature.id);
+    if (!highest || position > highest.position) top.set(feature.id, { key, position });
+  }
+  for (const { key } of top.values()) own.add(key);
+  return own;
 }
 
 /** Whether a key's feature, value or tier is marked headline in the registry (BLUEPRINT §4.2). */

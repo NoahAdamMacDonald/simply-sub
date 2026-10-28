@@ -884,6 +884,46 @@ describe('ListEditPage', () => {
       await until(() => footer()?.startsWith('Unsaved changes') === true);
     });
 
+    it('gives an item a nickname and a note, which its row shows, and clears them', async () => {
+      await open(editor());
+      await click('Edit Netflix Standard');
+      let loader = await dialogLoader();
+      await (await control(loader, 'Nickname', MatInputHarness)).setValue("  Mom's ");
+      await (await control(loader, 'Note', MatInputHarness)).setValue('Paid by Dad');
+      await press(loader, 'Save');
+
+      await until(() => dialog() === null);
+      expect(await draftItem(netflix.id)).toMatchObject({ nickname: "Mom's", note: 'Paid by Dad' });
+      await until(() => button("Edit Mom's (Netflix Standard)") !== null);
+      expect(text(`[data-item="${netflix.id}"] .title`)).toBe("Mom's · Netflix Standard");
+
+      await click("Edit Mom's (Netflix Standard)");
+      loader = await dialogLoader();
+      expect(await (await control(loader, 'Nickname', MatInputHarness)).getValue()).toBe("Mom's");
+      await (await control(loader, 'Nickname', MatInputHarness)).setValue('');
+      await (await control(loader, 'Note', MatInputHarness)).setValue(' ');
+      await press(loader, 'Save');
+
+      await until(() => dialog() === null);
+      const cleared = await draftItem(netflix.id);
+      expect(cleared).not.toHaveProperty('nickname');
+      expect(cleared).not.toHaveProperty('note');
+    });
+
+    it('refuses a nickname over 60 characters, at its field', async () => {
+      await open(editor());
+      await click('Edit Netflix Standard');
+      const loader = await dialogLoader();
+      await (await control(loader, 'Nickname', MatInputHarness)).setValue('x'.repeat(61));
+      await press(loader, 'Save');
+      expect(dialog()).not.toBeNull();
+      expect(
+        await (
+          await loader.getHarness(MatFormFieldHarness.with({ floatingLabelText: 'Nickname' }))
+        ).getTextErrors(),
+      ).toEqual(['Use at most 60 characters']);
+    });
+
     it('takes an item’s add-ons, up to what the plan allows', async () => {
       const loader = await openDialog(`${editor()}?add=netflix.standard&interval=month`);
       answer = true;

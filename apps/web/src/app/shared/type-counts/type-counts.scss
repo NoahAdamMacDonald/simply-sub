@@ -1,0 +1,25 @@
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+mat-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--ss-text-muted);
+  font-size: 20px;
+}
+
+.label {
+  font-weight: 600;
+}

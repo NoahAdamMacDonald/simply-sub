@@ -1,6 +1,7 @@
 import { bundleFeatures } from '../catalog/bundle-deal';
 import type { FxRates } from '../catalog/convert';
 import { pickPrice, typedPrice, type PickedPrice, type PriceContext } from '../catalog/pick-price';
+import { planCategories } from '../catalog/plan-categories';
 import type { Price } from '../catalog/price';
 import type { Plan } from '../catalog/provider';
 import { catalogIconFile, type CatalogData, type SnapshotProvider } from '../catalog/snapshot';
@@ -87,6 +88,11 @@ export interface ResolvedItem {
   monthlyEquivalent: number;
   /** What it gives: the plan's features, a bundle's plans' together, or the custom plan's. */
   features: Plan['features'];
+  /**
+   * Its service categories (data/categories.yaml): a catalog plan's (planCategories), a bundle's plans' together, and
+   * none for a custom plan.
+   */
+  categories: string[];
   providedKeys: RankKey[];
   /** Each provided key's rank for this item, in providedKeys' order: its override, else the profile's (M6.1). */
   effectiveRanks: Record<RankKey, Rank>;
@@ -179,6 +185,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         price,
         addOns,
         features: plan.features,
+        categories: [...planCategories(plan, provider)],
       };
       break;
     }
@@ -209,6 +216,9 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
           plans.map(({ plan }) => plan),
           catalog.features,
         ),
+        categories: [
+          ...new Set(plans.flatMap(({ provider, plan }) => planCategories(plan, provider))),
+        ],
       };
       break;
     }
@@ -229,6 +239,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         price: typedPrice(plan.price, plan.autoRenewAvailable, priceContext(context, region)),
         addOns: [],
         features: plan.features,
+        categories: [],
       };
       break;
     }

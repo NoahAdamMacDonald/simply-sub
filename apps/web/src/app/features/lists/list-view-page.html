@@ -192,18 +192,26 @@
       </div>
 
       @if (total() > 0) {
-        <section class="features" aria-labelledby="features-heading">
-          <h2 id="features-heading">Features</h2>
-          @if (features().length > 0) {
-            <p class="note">Active out of all the subscriptions in this list that have each</p>
-            <ss-feature-summary [rows]="features()" />
-          } @else {
-            <p class="note">
-              Nothing to sum up yet. Rank the features you care about on the
-              <a routerLink="/features">Features</a> page.
-            </p>
+        <div class="side">
+          @if (types().length > 0) {
+            <section class="types" aria-labelledby="types-heading">
+              <h2 id="types-heading">Types</h2>
+              <ss-type-counts [types]="types()" />
+            </section>
           }
-        </section>
+          <section class="features" aria-labelledby="features-heading">
+            <h2 id="features-heading">Features</h2>
+            @if (features().length > 0) {
+              <p class="note">Active out of all the subscriptions in this list that have each</p>
+              <ss-feature-summary [rows]="features()" [limit]="8" />
+            } @else {
+              <p class="note">
+                Nothing to sum up yet. Rank the features you care about on the
+                <a routerLink="/features">Features</a> page.
+              </p>
+            }
+          </section>
+        </div>
       }
     </div>
   }

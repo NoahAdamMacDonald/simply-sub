@@ -72,6 +72,14 @@ h4 {
   font: var(--mat-sys-title-small);
 }
 
+// The note keeps the lines it was typed with.
+.item-note p {
+  margin: 0;
+  font: var(--mat-sys-body-medium);
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
 .actions {
   display: flex;
   flex-wrap: wrap;

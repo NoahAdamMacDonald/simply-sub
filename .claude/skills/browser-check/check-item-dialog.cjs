@@ -424,6 +424,17 @@ async function shownValue(page, selector) {
         hintBottom <= autoRenewTop,
         `${hintBottom} / ${autoRenewTop}`,
       );
+      // Each date's box keeps its own height beside a field with a longer hint (the feedback after M6.8).
+      const boxHeights = await itemDialog(page)
+        .locator('.billing .row')
+        .last()
+        .locator('.mat-mdc-text-field-wrapper')
+        .evaluateAll((boxes) => boxes.map((box) => Math.round(box.getBoundingClientRect().height)));
+      check(
+        `${label}: Next renewal, Subscribed since and Ends on are boxes of the same height`,
+        boxHeights.length === 3 && new Set(boxHeights).size === 1,
+        boxHeights.join(' / '),
+      );
       await keyTo(page, () => !!document.activeElement?.closest('ss-item-dialog .mode'), 'Tab', 60);
       await page.keyboard.press('ArrowRight');
       await itemDialog(page).locator('.window').waitFor();
