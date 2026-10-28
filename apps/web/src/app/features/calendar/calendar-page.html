@@ -221,7 +221,7 @@
           } @else {
             <p class="note pick-day">Choose a day to see its payments.</p>
           }
-          <ng-container [ngTemplateOutlet]="upcomingList" />
+          <ss-upcoming [payments]="upcoming()" />
         </div>
       } @else {
         @if (selectedDay(); as day) {
@@ -236,31 +236,7 @@
     </div>
 
     @if (!wide()) {
-      <ng-container [ngTemplateOutlet]="upcomingList" />
+      <ss-upcoming [payments]="upcoming()" />
     }
-
-    <ng-template #upcomingList>
-      @if (upcoming().length > 0) {
-        <section class="upcoming" aria-labelledby="upcoming-heading">
-          <h2 id="upcoming-heading">Upcoming</h2>
-          <ul>
-            @for (payment of upcoming(); track payment.key) {
-              <li>
-                <span class="date">{{ payment.date }} </span>
-                <span class="name">{{ payment.name }} </span>
-                <span>
-                  <span aria-hidden="true">{{ payment.amount.shown }}</span>
-                  <span class="visually-hidden">{{ payment.amount.spoken }}</span>
-                </span>
-                @if (payment.manual) {
-                  <mat-icon class="manual" aria-hidden="true">autorenew</mat-icon>
-                  <span class="visually-hidden">, renew manually</span>
-                }
-              </li>
-            }
-          </ul>
-        </section>
-      }
-    </ng-template>
   }
 }

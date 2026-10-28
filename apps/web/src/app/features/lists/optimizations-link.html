@@ -7,8 +7,11 @@
   [class.compact]="compact()"
   [routerLink]="['/lists', listId(), 'optimize']"
 >
+  <!-- On its own in its @if, so the button puts it in its icon's place. -->
   @if (compact()) {
     <mat-icon>savings</mat-icon>
+  }
+  @if (compact()) {
     @if (summary(); as summary) {
       @if (summary.count > 0) {
         <span class="dot" aria-hidden="true"></span>{{ summary.count }}

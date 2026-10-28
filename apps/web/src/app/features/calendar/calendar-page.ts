@@ -1,5 +1,4 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -57,6 +56,7 @@ import { SplitButton, type SplitButtonItem } from '../../shared/split-button/spl
 import { calendarApps, type CalendarApp } from './calendar-apps';
 import type { CalendarDay, CalendarEntry } from './calendar-entries';
 import { DayPanel } from './day-panel';
+import { Upcoming } from './upcoming';
 
 /** Under this width the grid is compact, over an agenda (P10, M7.8). */
 const AGENDA = '(max-width: 599.98px)';
@@ -98,7 +98,6 @@ const monthNames = Array.from({ length: 12 }, (_, index) =>
   imports: [
     BudgetBar,
     DayPanel,
-    NgTemplateOutlet,
     MatButton,
     MatFormField,
     MatIcon,
@@ -113,6 +112,7 @@ const monthNames = Array.from({ length: 12 }, (_, index) =>
     PageHeader,
     ProviderIcon,
     SplitButton,
+    Upcoming,
   ],
   templateUrl: './calendar-page.html',
   styleUrl: './calendar-page.scss',

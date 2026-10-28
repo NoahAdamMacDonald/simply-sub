@@ -1,0 +1,22 @@
+@if (payments().length > 0) {
+  <section class="upcoming" aria-labelledby="upcoming-heading">
+    <h2 id="upcoming-heading">Upcoming</h2>
+    <ul>
+      @for (payment of payments(); track payment.key) {
+        <!-- Spaces go inside the spans: screen readers need them between the parts. -->
+        <li>
+          <span class="date">{{ payment.date }} </span>
+          <span class="name">{{ payment.name }} </span>
+          <span>
+            <span aria-hidden="true">{{ payment.amount.shown }}</span>
+            <span class="visually-hidden">{{ payment.amount.spoken }}</span>
+          </span>
+          @if (payment.manual) {
+            <mat-icon class="manual" aria-hidden="true">autorenew</mat-icon>
+            <span class="visually-hidden">, renew manually</span>
+          }
+        </li>
+      }
+    </ul>
+  </section>
+}

@@ -920,6 +920,14 @@ describe('ListEditPage', () => {
 
       it('starts a new plan of the provider with their shared ranks', async () => {
         const loader = await openDialog(`${editor()}?add=netflix.standard&interval=month`);
+        // Its rows come once the plan's features are known: slower when every spec runs at once.
+        await until(
+          () =>
+            Array.from(dialog()?.querySelectorAll('.rank-name') ?? []).some(
+              (row) => row.textContent?.trim() === 'Video quality: 1080p (Full HD)',
+            ),
+          5000,
+        );
         // Standard with ads' Wanted; Standard's Essential stays its own.
         expect(
           await (await rankSelect(loader, 'Video quality: 1080p (Full HD)')).getValueText(),
