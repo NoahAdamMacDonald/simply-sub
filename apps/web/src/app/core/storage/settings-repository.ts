@@ -9,7 +9,7 @@ import { StorageService } from './storage-service';
 export class SettingsRepository {
   private readonly storage = inject(StorageService);
   private readonly stored = rxResource({
-    params: () => this.storage.mode(),
+    params: () => this.storage.access(),
     stream: () => this.storage.watch('settings'),
   });
 
@@ -19,8 +19,11 @@ export class SettingsRepository {
   );
   readonly status = computed(() => storageStatus(this.stored));
 
-  /** Saves the settings in place of the saved ones, including saved ones that can't be read. */
-  async save(settings: Omit<Settings, 'key' | 'updatedAt'>): Promise<Settings> {
+  /**
+   * Saves the settings in place of the saved ones, including saved ones that can't be read. The app lock stays as it
+   * is: only its own methods change it.
+   */
+  async save(settings: Omit<Settings, 'key' | 'updatedAt' | 'appLock'>): Promise<Settings> {
     const now = this.storage.now();
     const engine = await this.storage.engine();
     const saved = await engine.modify(
@@ -41,7 +44,7 @@ export class SettingsRepository {
    * the saved ones can't be read: the first-run dialog then asks for them. Returns what's saved afterwards.
    */
   async update(
-    changes: Partial<Omit<Settings, 'key' | 'updatedAt'>>,
+    changes: Partial<Omit<Settings, 'key' | 'updatedAt' | 'appLock'>>,
   ): Promise<Settings | undefined> {
     const now = this.storage.now();
     const engine = await this.storage.engine();

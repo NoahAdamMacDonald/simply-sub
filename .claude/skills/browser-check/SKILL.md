@@ -222,6 +222,29 @@ Mullvad's details open), Lists, List view (Sort and a card's details open), the 
 Features, Custom subscriptions (editor open), Settings, Calendar and Payment. A failure names what sticks out, and
 anything inside a page that scrolls sideways fails too.
 
+`check-app-lock.cjs` (M6.10) checks the app lock on `ng serve` for a Canadian in Alberta. It writes to IndexedDB Work
+Related (Netflix Standard nicknamed Mom's, noted "Paid by Dad" and tagged Family), Goodlife Gym at $43.21 and a rank.
+
+In both themes at both widths, keyboard only, it checks:
+- Settings' Lock with a passphrase by Space: the dialog with focus in its field, its warning and Export a backup
+  first, a short and a mismatched passphrase refused, and Lock after picked by typeahead;
+- Turn on the lock, and IndexedDB read raw: every user table sealed, none of those words or amounts in it, the
+  settings keeping only `key`, `theme` and `appLock` plain at 600,000 iterations, and the exchange rates plain;
+- a reload of Lists: the lock screen in place of the app, focus in its field, nothing of the user's in the page;
+- a wrong passphrase said so, focus kept in the field, nothing unlocked; then Unlock, "Forgot it?" (Enter opens it,
+  `aria-expanded`), Import a backup and Delete all data in the Tab order;
+- the right passphrase opening Lists, as the reload left it;
+- Turn off the lock: a wrong passphrase refused, then every table back exactly as it was.
+
+Then at 1280 px, with Playwright's clock installed:
+- Export while the lock is on: the records opened, with no `appLock`;
+- the idle lock: 4 minutes leave it unlocked, a fifth locks it and closes the open Export dialog;
+- the lock screen's Import a backup: no Merge, Replace asking first with focus on Cancel, then the lock off and the
+  backup written plain;
+- the lock screen's Delete all data: everything gone, `ss-lock` removed, and the first-run dialog.
+
+It runs axe on each screen and dialog, and checks for horizontal scroll.
+
 Since the feedback after M6.8, the other scripts check more:
 - `check-search.cjs`: at 360 px each shop's price is on its line under one "Cheaper at".
 - `check-item-dialog.cjs`: the three date boxes have the same height.
@@ -242,7 +265,18 @@ Since the feedback after M6.9:
 - A click on a page's title focuses `<main>`, the skip link's target (`tabindex="-1"`), so Tab goes on from the top of
   the page, not from the title: the back button is the first stop on a page that has one.
 
+Since M6.10, `check-backup.cjs` finds Settings' Your data by its region name: Security's hint says "your data" too, and
+Playwright's `hasText` matches without case.
+
 ## Gotchas
+
+- With the app lock on, every `page.goto` or `reload` is a visit, so the lock screen comes first. `check-app-lock.cjs`
+  goes to the page it wants, then unlocks. PBKDF2 at 600,000 iterations takes about half a second, and turning the lock
+  on or off a little more: give those waits 20 to 30 seconds.
+- The idle lock counts in minutes. Install Playwright's clock before the page loads (`context.clock.install()`, time
+  then flows as usual) and move it on with `page.clock.fastForward('05:00')`, which fires the timers that are due.
+- A closed `mat-select` picks the option its typeahead matches (after the 200 ms pause): Tab to it and type "5" or "N".
+  Read what it shows from `.mat-mdc-select-value-text`.
 
 - Playwright starts catching file pickers only when something first waits for one (`waitForEvent('filechooser')`),
   without waiting for the browser to agree. A key press straight after that first wait sometimes opened a picker it

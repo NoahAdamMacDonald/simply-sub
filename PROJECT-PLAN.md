@@ -186,7 +186,8 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M6.7 | Lists overview (P3): a card per list with its average a month until the bars, its rank counts (`rankCounts`), View and 🗑 with Undo (`DraftsRepository.deleteList` and `restoreList`), the New Subscription List tile, and every list's feature summary (`featureSummary`) (BLUEPRINT §14) | P3 criteria met (the bars can wait for M7.2) |
 | M6.8 | List view (P4), without the money parts, with `ss-sub-card`'s list variant (§4.3, moved from M4.5), built as `ss-item-card`; core's `listView` (search, sorts and filters, pinned first) in `user/list-view.ts` (BLUEPRINT §14) | Cards, pinning, search/filter and the edit button work |
 | M6.9 | Backup export/import (the "Your data" section of P13, and the first-run dialog's "Import a backup instead"), with an optional passphrase that encrypts the file, and the crypto module it uses (BLUEPRINT §11.5). As built: core's `user/backup.ts` (the file, its checks, Merge), the app's `core/crypto/passphrase-crypto.ts` and `BackupRepository` (BLUEPRINT §14) | Export → delete all → import restores everything, encrypted or not; a wrong passphrase or a tampered file imports nothing |
-| M6.10 | Optional app lock: a passphrase encrypts the user tables at rest, with a lock screen and an idle lock (P13, P15; BLUEPRINT §11.5) | Locked data on disk is unreadable without the passphrase; turning the lock on and off round-trips every table; a wrong passphrase unlocks nothing |
+| M6.10 | Optional app lock: a passphrase encrypts the user tables at rest, with a lock screen and an idle lock (P13, P15; BLUEPRINT §11.5). As built: core's `user/app-lock.ts` (what's sealed, the lock's settings) and `user/lock-idle.ts` (Lock after), `StorageEngine`'s sealing with `RowCipher` and `AppLockRepository`, the lock screen (`layout/lock-screen.ts`) and the idle lock (`core/lock/auto-lock.ts`) (BLUEPRINT §14) | Locked data on disk is unreadable without the passphrase; turning the lock on and off round-trips every table; a wrong passphrase unlocks nothing |
+| M6.11 | Custom tags (the Settings section of P13, added 2026-10-28 so M6 covers all of Settings): each tag renamed inline, recoloured (the 12 presets plus a hex field) and deleted, asking first when it's in use ("Used by 5 subscriptions"), and ⊕ to add one | P13's tag criteria met: tags persist and update every page live |
 
 ### M7 — Money, schedule & calendar
 | ID | Task | Done when |
@@ -516,9 +517,9 @@ Oct 22, 2026, and use the illustrative prices from `docs/api-output-examples.jso
 | P10 | Calendar | `/calendar` | 05-calendar | M7.4 |
 | P11 | Payment | `/payment` | 09-payment-placeholder | M9.1 |
 | P12 | Custom subscriptions | `/custom` | **new** | M6.6 |
-| P13 | Settings | `/settings` | 08-settings | M4.2, M6.9 |
+| P13 | Settings | `/settings` | 08-settings | M4.2, M6.9, M6.10, M6.11 |
 | P14 | Optimizations | `/lists/:listId/optimize` | **new** | M8.2 |
-| P15 | Not found & errors | `**` | **new** | M0.5 |
+| P15 | Not found & errors | `**` | **new** | M0.5, M4.2, M6.10 |
 
 ### P2 — Home `/`
 **Wireframe:** `01-home.png` (light), `02-home-dark.png` (dark shell).
@@ -1122,8 +1123,8 @@ own. A set feature asks for one or more of its values, as enum and number featur
 📍 Ontario, Canada (CAD)
 ```
 **Built so far:** the budgets, Appearance and 📍 (M4.2), each a card ("Location and currency" holds 📍 and the tax
-line under it), the Catalog line (M4.3), and Your data (M6.9). Custom tags have no task yet. Security (M6.10) and
-local sync (Phase 5) come with their tasks.
+line under it), the Catalog line (M4.3), Your data (M6.9) and Security (M6.10). Custom tags come with M6.11, and
+local sync with Phase 5.
 - **Your data** (M6.9):
   - **Export backup:** a dialog with "Protect with a passphrase" (at least 8 characters, typed twice). It downloads
     the file.
@@ -1140,7 +1141,7 @@ local sync (Phase 5) come with their tasks.
 - ← Back goes back (to Home if there's no history). Since the feedback after M6.9 it's the back button every page
   off the sidebar has, above the title.
 - **Budgets:** click to edit inline. Enter saves; an empty value means no budget.
-- **Tags:**
+- **Tags** (M6.11):
   - Names are renamed inline.
   - The colour swatch opens a palette (12 presets plus a hex field).
   - ✕ deletes, asking for confirmation if the tag is in use: "Used by 5 subscriptions".
@@ -1166,9 +1167,12 @@ local sync (Phase 5) come with their tasks.
 - **Import backup:** pick a file → (passphrase, if it's encrypted) → the whole file is validated with Zod before anything is written → preview the counts → **Merge** (by id; the newest `updatedAt` wins) or **Replace** (with confirmation). Backups with an older `schemaVersion` are migrated. A wrong passphrase, a tampered file or one that fails validation imports nothing and says why.
 - **Delete all data:** type DELETE to confirm. Every table is cleared, then the first-run dialog appears.
 - **Lock with a passphrase** (M6.10, off by default; BLUEPRINT §11.5):
-  - Turning it on asks for a passphrase twice, explains that nobody can recover a forgotten one, offers an encrypted backup first, then encrypts every user table in one transaction.
-  - "Lock after" sets the idle time (5, 15 or 60 minutes, or only when the tab closes).
-  - Turning it off asks for the passphrase and decrypts everything.
+  - A checkbox that opens a dialog, and shows what's so until the dialog has done it.
+  - Turning it on asks for a passphrase twice (at least 8 characters), explains that nobody can recover a forgotten one, offers an encrypted backup first, then encrypts every user table in one transaction.
+  - "Lock after" sets the idle time: 5, 15 or 30 minutes, 1 hour, or Never, which locks only when the tab closes (15 by default; the task asked for these). It's in the turn-on dialog, and on the card once the lock is on.
+  - Turning it off asks for the passphrase and decrypts everything. A wrong one says so and changes nothing.
+  - With nothing saved (in-memory mode, P15) it's turned off and says why.
+  - As built: BLUEPRINT §14.
 - Create local sync stays disabled until Phase 5.
 
 **Acceptance**
@@ -1227,8 +1231,10 @@ FREE SAVINGS — nothing you rank is lost
   data couldn't be read, so it's hidden. The rest is fine." The console names its table, key and issues, never its
   values (M4.1, BLUEPRINT §11.1).
 - **Lock screen** (M6.10, when the app lock is on): a full-page passphrase prompt before anything else loads, and
-  again after the idle time. A wrong passphrase says so and changes nothing. "Forgot it?" explains the two ways out:
-  import a backup, or delete all data (with the DELETE confirmation).
+  again after the idle time and on coming back to a page that was left (Back). Focus starts in the field. A wrong
+  passphrase says so, keeps focus in the field and changes nothing; the right one opens the page the visit was on.
+  "Forgot it?" explains the two ways out, which both turn the lock off: import a backup, as one Replace after asking,
+  or delete all data (with the DELETE confirmation), then the first-run dialog. As built: BLUEPRINT §14.
 
 ---
 

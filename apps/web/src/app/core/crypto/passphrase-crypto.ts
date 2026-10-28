@@ -1,17 +1,17 @@
+import type { SealedText } from '@simply-sub/core';
+
 // The app's one crypto module (BLUEPRINT §11.5): a key derived from a passphrase the user types, and text encrypted
-// with it. Encrypted backups use it (M6.9), and the app lock (M6.10) and Phase 5's sync will. WebCrypto only: no key
+// with it. Encrypted backups (M6.9) and the app lock (M6.10) use it, and Phase 5's sync will. WebCrypto only: no key
 // is ever stored, and a key derived here can't be read back out (non-extractable).
 
 /** PBKDF2-HMAC-SHA256's iterations for a new key: OWASP's figure. */
 export const kdfIterations = 600_000;
 
 /** What an encrypted text is stored as: how its key was derived, and AES-256-GCM's IV and output, in base64. */
-export interface PassphraseEnvelope {
+export interface PassphraseEnvelope extends SealedText {
   kdf: 'PBKDF2-SHA256';
   iterations: number;
   salt: string;
-  iv: string;
-  ciphertext: string;
 }
 
 /**
@@ -27,6 +27,11 @@ export class WrongPassphraseError extends Error {
 
 const saltBytes = 16;
 const ivBytes = 12;
+
+/** A new random salt for deriveKey. */
+export function newSalt(): Uint8Array<ArrayBuffer> {
+  return crypto.getRandomValues(new Uint8Array(saltBytes));
+}
 
 /** An AES-256-GCM key from `passphrase` and `salt`, by PBKDF2-HMAC-SHA256. It can't be exported. */
 export async function deriveKey(
@@ -61,20 +66,13 @@ export async function encryptText(
   boundTo: string,
   { iterations = kdfIterations }: { iterations?: number } = {},
 ): Promise<PassphraseEnvelope> {
-  const salt = crypto.getRandomValues(new Uint8Array(saltBytes));
-  const iv = crypto.getRandomValues(new Uint8Array(ivBytes));
+  const salt = newSalt();
   const key = await deriveKey(passphrase, salt, iterations);
-  const ciphertext = await crypto.subtle.encrypt(
-    { name: 'AES-GCM', iv, additionalData: new TextEncoder().encode(boundTo) },
-    key,
-    new TextEncoder().encode(plaintext),
-  );
   return {
     kdf: 'PBKDF2-SHA256',
     iterations,
     salt: toBase64(salt),
-    iv: toBase64(iv),
-    ciphertext: toBase64(new Uint8Array(ciphertext)),
+    ...(await sealText(key, plaintext, boundTo)),
   };
 }
 
@@ -85,14 +83,42 @@ export async function decryptText(
   boundTo: string,
 ): Promise<string> {
   const salt = fromBase64(envelope.salt);
-  const iv = fromBase64(envelope.iv);
-  if (salt.length !== saltBytes || iv.length !== ivBytes) throw new WrongPassphraseError();
+  if (salt.length !== saltBytes) throw new WrongPassphraseError();
   const key = await deriveKey(passphrase, salt, envelope.iterations);
+  return openText(key, envelope, boundTo);
+}
+
+/**
+ * Encrypts `plaintext` with a key deriveKey made, under a new random IV, with `boundTo` authenticated alongside: the
+ * app lock seals each row this way with the key it holds while unlocked.
+ */
+export async function sealText(
+  key: CryptoKey,
+  plaintext: string,
+  boundTo: string,
+): Promise<SealedText> {
+  const iv = crypto.getRandomValues(new Uint8Array(ivBytes));
+  const ciphertext = await crypto.subtle.encrypt(
+    { name: 'AES-GCM', iv, additionalData: new TextEncoder().encode(boundTo) },
+    key,
+    new TextEncoder().encode(plaintext),
+  );
+  return { iv: toBase64(iv), ciphertext: toBase64(new Uint8Array(ciphertext)) };
+}
+
+/** The text sealText sealed. Throws a WrongPassphraseError if the key is wrong or something was changed. */
+export async function openText(
+  key: CryptoKey,
+  { iv, ciphertext }: SealedText,
+  boundTo: string,
+): Promise<string> {
+  const ivData = fromBase64(iv);
+  if (ivData.length !== ivBytes) throw new WrongPassphraseError();
   try {
     const plaintext = await crypto.subtle.decrypt(
-      { name: 'AES-GCM', iv, additionalData: new TextEncoder().encode(boundTo) },
+      { name: 'AES-GCM', iv: ivData, additionalData: new TextEncoder().encode(boundTo) },
       key,
-      fromBase64(envelope.ciphertext),
+      fromBase64(ciphertext),
     );
     return new TextDecoder().decode(plaintext);
   } catch {

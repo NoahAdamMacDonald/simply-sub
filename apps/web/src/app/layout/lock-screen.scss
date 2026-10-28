@@ -1,0 +1,74 @@
+// As the "Nothing will be saved" notice: a column in the middle of the page, with the gutters a phone needs.
+.lock {
+  box-sizing: border-box;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 48px 16px;
+  font: var(--mat-sys-body-large);
+}
+
+ss-logo {
+  display: block;
+  margin-bottom: 32px;
+  font: var(--mat-sys-title-large);
+}
+
+h1 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  font: var(--mat-sys-headline-small);
+}
+
+p {
+  margin: 0 0 16px;
+}
+
+// The field takes the row, and the button sits beside it; on a phone it goes under.
+.unlock {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px 12px;
+
+  mat-form-field {
+    flex: 1 1 220px;
+  }
+
+  button {
+    // Level with the outlined field's box, which is 56 px tall.
+    margin-top: 8px;
+  }
+}
+
+.wrong {
+  margin: 8px 0 0;
+  color: var(--ss-danger);
+}
+
+.forgot-toggle {
+  margin: 24px 0 0 -12px;
+}
+
+.forgot {
+  margin-top: 8px;
+  padding: 16px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+
+  h2 {
+    margin: 0 0 8px;
+    font: var(--mat-sys-title-medium);
+  }
+
+  p {
+    font: var(--mat-sys-body-medium);
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

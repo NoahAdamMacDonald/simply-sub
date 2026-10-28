@@ -1,16 +1,29 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
-import { MatCheckbox } from '@angular/material/checkbox';
+import { MatCheckbox, type MatCheckboxChange } from '@angular/material/checkbox';
+import { MatOption } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { MatSelect } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { subdivisionName, taxAddedRegions, type Settings } from '@simply-sub/core';
+import {
+  lockIdleChoice,
+  lockIdleChoices,
+  lockIdleLabel,
+  subdivisionName,
+  taxAddedRegions,
+  type LockIdleChoice,
+  type Settings,
+} from '@simply-sub/core';
 import { firstValueFrom } from 'rxjs';
 import { catalogDate } from '../../core/catalog/catalog-dates';
 import { CatalogStore, type CatalogCheckOutcome } from '../../core/catalog/catalog-store';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { AppLockRepository } from '../../core/storage/app-lock-repository';
+import { StorageService } from '../../core/storage/storage-service';
 import { ThemeService, type ThemeMode } from '../../core/theme/theme-service';
 import { countryName } from '../../shared/country-name';
 import { importedText } from './backup-text';
@@ -29,7 +42,7 @@ const checkMessages: Record<CatalogCheckOutcome, string> = {
 
 /**
  * Settings (PROJECT-PLAN P13): budgets, appearance, where the user is (📍), Search's start, Your data (backups and
- * Delete all data, M6.9) and the catalog's version. Tags and the app lock (M6.10) come with their tasks.
+ * Delete all data, M6.9), Security (the app lock, M6.10) and the catalog's version. Tags come with their task.
  */
 @Component({
   selector: 'ss-settings-page',
@@ -37,9 +50,14 @@ const checkMessages: Record<CatalogCheckOutcome, string> = {
     BudgetSetting,
     MatButton,
     MatCheckbox,
+    MatFormField,
+    MatHint,
     MatIcon,
+    MatLabel,
+    MatOption,
     MatRadioButton,
     MatRadioGroup,
+    MatSelect,
     PageHeader,
   ],
   templateUrl: './settings-page.html',
@@ -52,6 +70,8 @@ export class SettingsPage {
   private readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
   private readonly snackBar = inject(MatSnackBar);
+  private readonly lock = inject(AppLockRepository);
+  private readonly storage = inject(StorageService);
 
   protected readonly saved = this.settings.saved;
   protected readonly mode = this.theme.mode;
@@ -89,6 +109,19 @@ export class SettingsPage {
 
   /** What the last [Check for updates] found: only the user's own checks, not the automatic ones. */
   protected readonly checkMessage = signal('');
+
+  /** Security: whether the app lock is on, and Lock after. */
+  protected readonly lockOn = computed(() => this.saved()?.appLock !== undefined);
+  protected readonly idleChoice = computed(() => {
+    const lock = this.saved()?.appLock;
+    return lock && lockIdleChoice(lock);
+  });
+  protected readonly idleChoices = lockIdleChoices.map((value) => ({
+    value,
+    label: lockIdleLabel(value),
+  }));
+  /** IndexedDB is blocked and nothing is saved (P15), so there's nothing to lock. */
+  protected readonly inMemory = computed(() => this.storage.mode() === 'memory');
 
   /** The user's country, by name, for Search's Sold in. */
   protected readonly country = computed(() => {
@@ -136,6 +169,29 @@ export class SettingsPage {
     if (result) {
       this.snackBar.open(importedText(result.mode, result.counts), undefined, { duration: 5000 });
     }
+  }
+
+  /**
+   * Lock with a passphrase: its dialog turns the lock on, or off with the passphrase. The checkbox shows what's so,
+   * not the click, until the dialog has done it.
+   */
+  protected async toggleLock(change: MatCheckboxChange): Promise<void> {
+    const on = this.lockOn();
+    change.source.checked = on;
+    const dialog = on
+      ? (await import('./lock-off-dialog')).LockOffDialog
+      : (await import('./lock-on-dialog')).LockOnDialog;
+    const done = await firstValueFrom(
+      this.dialog.open<unknown, unknown, boolean>(dialog, backupDialog).afterClosed(),
+    );
+    if (done) {
+      this.snackBar.open(on ? 'The lock is off' : 'The lock is on', undefined, { duration: 5000 });
+    }
+  }
+
+  /** Lock after. */
+  protected setIdle(choice: LockIdleChoice): void {
+    void this.lock.setIdle(choice);
   }
 
   /** Delete all data: after typing DELETE, everything goes, and Home shows the first-run dialog. */

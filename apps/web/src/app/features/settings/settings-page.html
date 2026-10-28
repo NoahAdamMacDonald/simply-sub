@@ -66,6 +66,39 @@
     </div>
   </section>
 
+  <section aria-labelledby="security-heading">
+    <h2 id="security-heading">Security</h2>
+    <mat-checkbox
+      [checked]="lockOn()"
+      [disabled]="inMemory()"
+      aria-describedby="lock-hint"
+      (change)="toggleLock($event)"
+    >
+      Lock with a passphrase
+    </mat-checkbox>
+    <p id="lock-hint" class="hint">
+      @if (inMemory()) {
+        Nothing is saved in this tab, so there’s nothing to lock.
+      } @else if (lockOn()) {
+        Your data in this browser is encrypted. Simply Sub asks for the passphrase each time you
+        open it.
+      } @else {
+        Encrypts your data in this browser, so it opens only with a passphrase you type.
+      }
+    </p>
+    @if (lockOn()) {
+      <mat-form-field appearance="outline" class="lock-after" subscriptSizing="dynamic">
+        <mat-label>Lock after</mat-label>
+        <mat-select [value]="idleChoice()" (selectionChange)="setIdle($event.value)">
+          @for (choice of idleChoices; track choice.value) {
+            <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
+          }
+        </mat-select>
+        <mat-hint>With no key, click, tap or scroll. It always locks when the tab closes.</mat-hint>
+      </mat-form-field>
+    }
+  </section>
+
   <section aria-labelledby="catalog-heading">
     <h2 id="catalog-heading">Catalog</h2>
     <div class="catalog">

@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormField, FormRoot, form, validate, type FieldTree } from '@angular/forms/signals';
 import { MatButton } from '@angular/material/button';
 import {
+  MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
@@ -16,9 +17,15 @@ import { focusFirstError } from '../../shared/focus-first-error';
 /** What the user types to delete everything (P13). */
 const confirmWord = 'DELETE';
 
+/** Where it starts: Settings, or the lock screen (P15), where a backup can't be exported first. */
+export interface DeleteDataData {
+  locked?: boolean;
+}
+
 /**
  * Delete all data (PROJECT-PLAN P13): typing DELETE confirms it, then every table is cleared in one transaction and the
- * dialog closes with true. The first-run dialog then shows, as on a first visit.
+ * dialog closes with true. The first-run dialog then shows, as on a first visit. From the lock screen (P15) it's the way
+ * out of a forgotten passphrase, and the lock goes with the data.
  */
 @Component({
   selector: 'ss-delete-data-dialog',
@@ -43,6 +50,8 @@ export class DeleteDataDialog {
   private readonly dialogRef = inject<MatDialogRef<DeleteDataDialog, boolean>>(MatDialogRef);
 
   protected readonly word = confirmWord;
+  protected readonly locked =
+    inject<DeleteDataData | null>(MAT_DIALOG_DATA, { optional: true })?.locked === true;
   protected readonly busy = signal(false);
   private readonly model = signal({ confirm: '' });
   protected readonly form = form(

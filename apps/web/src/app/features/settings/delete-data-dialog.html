@@ -2,8 +2,14 @@
   <h2 mat-dialog-title>Delete all data?</h2>
   <mat-dialog-content>
     <p id="delete-data-message">
-      Your lists, subscriptions, custom subscriptions, feature ranks, tags and settings are deleted
-      from this browser. This can’t be undone: export a backup first if you might want them back.
+      @if (locked) {
+        Your lists, subscriptions, custom subscriptions, feature ranks, tags and settings are
+        deleted from this browser, and the lock is turned off. This can’t be undone.
+      } @else {
+        Your lists, subscriptions, custom subscriptions, feature ranks, tags and settings are
+        deleted from this browser. This can’t be undone: export a backup first if you might want
+        them back.
+      }
     </p>
     <mat-form-field appearance="outline" subscriptSizing="dynamic">
       <mat-label>Type {{ word }} to confirm</mat-label>

@@ -1,0 +1,59 @@
+<main class="lock">
+  <ss-logo />
+  <h1>
+    <mat-icon aria-hidden="true">lock</mat-icon>
+    Simply Sub is locked
+  </h1>
+  <p id="lock-message">Enter your passphrase to open your lists.</p>
+
+  <form [formRoot]="form" class="unlock">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Passphrase</mat-label>
+      <input
+        #passphraseInput
+        matInput
+        type="password"
+        autocomplete="current-password"
+        aria-describedby="lock-message"
+        [formField]="form.passphrase"
+      />
+      <mat-error>{{ firstError(form.passphrase) }}</mat-error>
+    </mat-form-field>
+    <button matButton="filled" type="submit" disabledInteractive [disabled]="busy()">
+      {{ busy() ? 'Unlocking…' : 'Unlock' }}
+    </button>
+  </form>
+  @if (wrong()) {
+    <p class="wrong" role="alert">That passphrase is wrong, so nothing was unlocked.</p>
+  }
+
+  <button
+    matButton
+    type="button"
+    class="forgot-toggle"
+    aria-controls="forgot"
+    [attr.aria-expanded]="forgotOpen()"
+    (click)="forgotOpen.set(!forgotOpen())"
+  >
+    Forgot it?
+  </button>
+  @if (forgotOpen()) {
+    <section id="forgot" class="forgot" aria-labelledby="forgot-heading">
+      <h2 id="forgot-heading">Forgot your passphrase?</h2>
+      <p>
+        Nobody can recover it, and without it what’s saved here can’t be opened. You can start again
+        from a backup, or with nothing. Either way, the lock is turned off.
+      </p>
+      <div class="actions">
+        <button matButton="outlined" type="button" (click)="importBackup()">
+          <mat-icon>upload</mat-icon>
+          Import a backup
+        </button>
+        <button matButton="outlined" type="button" (click)="deleteAll()">
+          <mat-icon>delete_forever</mat-icon>
+          Delete all data
+        </button>
+      </div>
+    </section>
+  }
+</main>

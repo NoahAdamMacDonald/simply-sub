@@ -1,0 +1,33 @@
+<form [formRoot]="form">
+  <h2 mat-dialog-title>Turn off the lock?</h2>
+  <mat-dialog-content>
+    <p id="lock-off-message">
+      Simply Sub stops asking for the passphrase, and what’s saved in this browser is stored without
+      encryption again.
+    </p>
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Passphrase</mat-label>
+      <input
+        #passphraseInput
+        matInput
+        type="password"
+        autocomplete="current-password"
+        aria-describedby="lock-off-message"
+        cdkFocusInitial
+        [formField]="form.passphrase"
+      />
+      <mat-error>{{ firstError(form.passphrase) }}</mat-error>
+    </mat-form-field>
+    @if (wrong()) {
+      <p class="wrong" role="alert">That passphrase is wrong, so the lock is still on.</p>
+    }
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button matButton type="button" mat-dialog-close disabledInteractive [disabled]="busy()">
+      Cancel
+    </button>
+    <button matButton="filled" type="submit" disabledInteractive [disabled]="busy()">
+      {{ busy() ? 'Decrypting…' : 'Turn off the lock' }}
+    </button>
+  </mat-dialog-actions>
+</form>

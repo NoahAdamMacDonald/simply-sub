@@ -36,7 +36,7 @@ export interface StartedDraft {
 export class DraftsRepository {
   private readonly storage = inject(StorageService);
   private readonly stored = rxResource({
-    params: () => this.storage.mode(),
+    params: () => this.storage.access(),
     stream: () => this.storage.watch('drafts'),
   });
 

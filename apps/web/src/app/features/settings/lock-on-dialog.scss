@@ -1,0 +1,26 @@
+// The form wraps the dialog's title, content and actions, which the dialog lays out as its own children.
+form {
+  display: contents;
+}
+
+p {
+  margin: 0 0 12px;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+// The way back from a forgotten passphrase, set apart from the fields by a rule. On the dialog's own surface: a tint
+// behind it took the dialog's muted text and the accent below 4.5:1 in dark.
+.warning {
+  margin-top: 16px;
+  padding: 4px 0 4px 16px;
+  border-left: 4px solid var(--ss-danger);
+
+  p {
+    font: var(--mat-sys-body-medium);
+  }
+}

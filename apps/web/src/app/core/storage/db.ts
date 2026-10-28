@@ -6,7 +6,7 @@ export const databaseName = 'simply-sub';
 /**
  * The user database (BLUEPRINT §4.6). Dexie keeps only each table's primary key and indexes; the records' shapes are
  * core's schemas (`userRecordSchemas`). Only non-sensitive fields are indexed (§11.1), so the app lock (M6.10) can
- * encrypt everything else with no new version.
+ * seal everything else.
  *
  * A new table or index needs a new version. A change to the shape of stored records needs a new version with an
  * upgrade function, and the backup import (M6.9) has to migrate older files the same way.

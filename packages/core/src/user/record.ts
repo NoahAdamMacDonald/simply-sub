@@ -18,6 +18,9 @@ export const timestampSchema = z.iso.datetime({
 });
 export type Timestamp = z.infer<typeof timestampSchema>;
 
+/** Base64, as the app's crypto module writes it: encrypted backups and the app lock (BLUEPRINT §11.5). */
+export const base64Schema = z.string().regex(/^[A-Za-z0-9+/]+={0,2}$/, 'Use base64');
+
 /**
  * The fields of every record that has an id, spread into its schema. `deletedAt` is a soft delete: the record stays
  * stored, so a future sync can pass the deletion on (BLUEPRINT §11.4).

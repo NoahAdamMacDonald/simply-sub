@@ -33,9 +33,13 @@ import type { ImportCounts } from '../../core/storage/backup-repository';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
 import { countLines } from './backup-text';
 
-/** Where the import starts: Settings, or the first-run dialog, where there's nothing to merge with. */
+/**
+ * Where the import starts: Settings; the first-run dialog, where there's nothing to merge with; or the lock screen
+ * (P15), where what's here can't be opened, so the backup replaces all of it and the lock goes too.
+ */
 export interface ImportBackupData {
   firstRun?: boolean;
+  locked?: boolean;
 }
 
 /** What an import did. */
@@ -48,7 +52,7 @@ export interface ImportBackupResult {
  * Import backup (PROJECT-PLAN P13): a file picked → its passphrase, when it's encrypted → the whole file checked
  * (core's readBackupText) → what it holds → Merge (the newer of each record) or Replace (after asking). A file that
  * can't be used says why, and nothing is written. From the first-run dialog it's one Import, since there's nothing
- * here yet.
+ * here yet. From the lock screen it's one Replace, after asking, which deletes everything here, the app lock too.
  */
 @Component({
   selector: 'ss-import-backup-dialog',
@@ -75,8 +79,9 @@ export class ImportBackupDialog {
   private readonly injector = inject(Injector);
   private readonly dialogRef =
     inject<MatDialogRef<ImportBackupDialog, ImportBackupResult>>(MatDialogRef);
-  protected readonly firstRun =
-    inject<ImportBackupData | null>(MAT_DIALOG_DATA, { optional: true })?.firstRun === true;
+  private readonly data = inject<ImportBackupData | null>(MAT_DIALOG_DATA, { optional: true });
+  protected readonly firstRun = this.data?.firstRun === true;
+  protected readonly locked = this.data?.locked === true;
 
   private readonly passphraseInput = viewChild<ElementRef<HTMLInputElement>>('passphraseInput');
   private readonly previewHeading = viewChild<ElementRef<HTMLElement>>('previewHeading');
@@ -135,7 +140,10 @@ export class ImportBackupDialog {
     this.step.set('choose');
   }
 
-  /** Replace: everything here swapped for the backup's records, after asking (nothing to ask on first run). */
+  /**
+   * Replace: everything here swapped for the backup's records, after asking (nothing to ask on first run). From the
+   * lock screen, everything here is deleted first, the lock with it.
+   */
   protected async replace(): Promise<void> {
     const backup = this.backup();
     if (!backup) return;
@@ -143,8 +151,9 @@ export class ImportBackupDialog {
       !this.firstRun &&
       !(await this.confirmer.confirm({
         title: 'Replace everything here?',
-        message:
-          'Your lists, subscriptions, custom subscriptions, feature ranks, tags and settings here are swapped for the backup’s. This can’t be undone.',
+        message: this.locked
+          ? 'Everything saved in this browser is deleted, the lock is turned off, and the backup’s lists, subscriptions, custom subscriptions, feature ranks, tags and settings take their place. This can’t be undone.'
+          : 'Your lists, subscriptions, custom subscriptions, feature ranks, tags and settings here are swapped for the backup’s. This can’t be undone.',
         confirmText: 'Replace',
         danger: true,
       }))
@@ -153,7 +162,9 @@ export class ImportBackupDialog {
     }
     await this.run(async () => ({
       mode: 'replace',
-      counts: await this.backups.replace(backup.data),
+      counts: await (this.locked
+        ? this.backups.restore(backup.data)
+        : this.backups.replace(backup.data)),
     }));
   }
 

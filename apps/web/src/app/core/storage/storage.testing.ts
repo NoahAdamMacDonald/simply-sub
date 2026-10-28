@@ -4,7 +4,7 @@ import type { IsoDate, Timestamp, UserTable } from '@simply-sub/core';
 import { IDBFactory, IDBKeyRange } from 'fake-indexeddb';
 import { ClockService } from '../clock/clock-service';
 import { createUserDatabase } from './db';
-import { INDEXED_DB } from './storage-service';
+import { INDEXED_DB, LOCK_ITERATIONS } from './storage-service';
 
 // Helpers for specs that use the repositories: an IndexedDB of the test's own, and a clock the test sets.
 // *.testing.ts files are left out of the app build (tsconfig.app.json).
@@ -22,7 +22,7 @@ export class FakeClock implements Pick<ClockService, 'today' | 'now'> {
 export interface TestStorage {
   clock: FakeClock;
   indexedDB: IDBFactory;
-  /** For TestBed: the fake clock, and an empty fake IndexedDB that no other test shares. */
+  /** For TestBed: the fake clock, an empty fake IndexedDB that no other test shares, and a fast app lock. */
   providers: Provider[];
 }
 
@@ -35,6 +35,8 @@ export function testStorage(): TestStorage {
     providers: [
       { provide: ClockService, useValue: clock },
       { provide: INDEXED_DB, useValue: { indexedDB, IDBKeyRange } },
+      // 600,000 take half a second a key.
+      { provide: LOCK_ITERATIONS, useValue: 1_000 },
     ],
   };
 }
@@ -58,10 +60,16 @@ export async function storedRows(indexedDB: IDBFactory, table: UserTable): Promi
   return rows;
 }
 
-/** Runs change detection until `condition` holds, since live queries answer asynchronously. */
-export async function until(condition: () => boolean): Promise<void> {
-  await vi.waitFor(() => {
-    TestBed.tick();
-    if (!condition()) throw new Error('Not yet');
-  });
+/**
+ * Runs change detection until `condition` holds, since live queries answer asynchronously. It waits a second, or
+ * `timeout` ms after work that takes longer when the suite is busy (the app lock's key and transaction).
+ */
+export async function until(condition: () => boolean, timeout = 1000): Promise<void> {
+  await vi.waitFor(
+    () => {
+      TestBed.tick();
+      if (!condition()) throw new Error('Not yet');
+    },
+    { timeout },
+  );
 }

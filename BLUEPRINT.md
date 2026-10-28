@@ -881,10 +881,13 @@ export interface Settings {             // one record, under the key 'settings'
   monthlyBudget?: number; annualBudget?: number;
   theme: 'light' | 'dark' | 'system';
   searchSoldOnly?: true;                        // Search starts with Sold in on (M5.6); left out when off
+  appLock?: {                                   // the app lock, when it's on (M6.10, 11.5): no secret, only the salt
+    salt: string; iterations: number;           // and a sealed check value. Plain while the rest of the settings are
+    check: { iv: string; ciphertext: string };  // sealed, changed only by the lock's own methods, never backed up
+    idleMinutes?: 5 | 15 | 30 | 60 };           // Lock after; left out: Never
   updatedAt: string;
-  // M6.10 adds appLock?: { salt; iterations; check; idleMinutes }: the optional passphrase lock (11.5). No secret
-  // is stored, only the salt and an encrypted check value. Per-device preferences (PROJECT-PLAN §3.5) come with
-  // their tasks too. Optional fields added later need no migration: stored records without them still pass.
+  // Per-device preferences (PROJECT-PLAN §3.5) come with their tasks. Optional fields added later need no migration:
+  // stored records without them still pass.
 }
 
 export interface CatalogCache {         // a downloaded catalog file (M4.3, section 6.3): a cache, not the user's data
@@ -2260,8 +2263,8 @@ blocks removal" and "a limited Sep–Oct window keeps a Needed feature covered".
 IndexedDB through Dexie, with repositories exposed as Angular services that return signals or observables.
 Request persistent storage with `navigator.storage.persist()`, and remind users to back up (they can be
 prompted after each big change, or weekly).
-- **Repositories are the only way in.** Nothing else touches Dexie, so the app lock (section 11.5) can wrap them
-  later without changing a page.
+- **Repositories are the only way in.** Nothing else touches Dexie, so the app lock (section 11.5) works under them
+  without changing a page.
 - **Only non-sensitive fields are indexed:** ids, `listId`, `updatedAt` and keys, as in the Dexie schema in section
   4.6. Everything else can then be stored encrypted.
 - **Records are validated on the way in and out** with the same Zod schemas as backups. Treat stored data as
@@ -2283,7 +2286,8 @@ prompted after each big change, or weekly).
   it's hidden. The rest is fine." It can't be changed either, except settings and a ranking, which the user's next
   save replaces whole.
 - **Only the repositories import Dexie:** ESLint rejects a `dexie` import anywhere else in the app. The app lock
-  (M6.10) wraps `StorageEngine`, the one class that reads and writes rows.
+  (M6.10) is in `StorageEngine`, the one class that reads and writes rows: it seals what it writes and opens what it
+  reads (section 14).
 - **Loaded on first use:** Dexie, Zod and the record schemas (216 kB minified, 60 kB compressed) load as a chunk of
   their own when a repository first needs them. Since M4.2 the settings load at startup (the theme and the first-run
   check need them), which brought `rxResource`, the storage service and the settings store into the initial bundle:
@@ -2305,6 +2309,13 @@ prompted after each big change, or weekly).
 - **List drafts (M6.3):** `DraftsRepository` is the only way into the `drafts` table, and `ListDraftService`
   (`core/lists/`) edits the drafts through it (section 14). Starting a draft and Save read and write the lists and
   items too, each in one transaction (`StorageEngine.transaction`, whose reads and writes are checked like the others).
+- **Transactions (M6.10):** inside `StorageEngine`'s transactions, every table comes from the transaction object
+  (`transaction.table(name)`), and a promise that isn't IndexedDB's (WebCrypto's) goes through the transaction's
+  `waitFor`, as `Dexie.waitFor` does. Dexie's zone, which otherwise finds the transaction, is lost a couple of native
+  `await`s deep, and IndexedDB commits a transaction with nothing to do when a task ends.
+- **The app lock (M6.10):** the database opens as soon as `StorageService` starts. The user's repositories load once
+  it has said whether the lock is on, and drop their records while it's locked (`StorageService.access`); the caches
+  load regardless (section 14).
 - **IndexedDB blocked** (some private browsing modes, or site data blocked): the repositories' status is `error`, and
   the app shows the P15 notice in place of the shell. [Continue anyway] calls `StorageService.useMemory()`: the same
   Dexie database opens on `fake-indexeddb` (57 kB, a chunk loaded only then), and every repository reloads from it
@@ -2371,15 +2382,17 @@ gone. That's why it's opt-in.
 **The app lock** (M6.10, opt-in from Settings): one passphrase encrypts the user tables at rest.
 - **Key:** derived like the backup key, then held in memory only, as a non-extractable WebCrypto `CryptoKey`.
   Nothing secret is stored: only the salt and an encrypted check value, which tells a wrong passphrase.
-- **What's encrypted:** each record of `lists`, `items`, `customSubs`, `rankings`, `cards`, `tags`, `drafts` and
-  `dismissedSuggestions` keeps its indexed fields in plain text and stores the rest as one encrypted value. The
-  settings needed before unlocking (theme, whether the lock is on) and the catalog cache stay plain, since they're
-  public or harmless.
+- **What's encrypted:** each record of `settings`, `lists`, `items`, `customSubs`, `rankings`, `cards`, `tags` and
+  `drafts` (and `dismissedSuggestions` with its schema, M8.2) keeps its key and indexed fields in plain text and
+  stores the whole record as one encrypted value. Of the settings, only what's needed before unlocking stays plain:
+  the theme and the lock itself. The caches (the catalog files, the exchange rates) stay plain, since they're public.
 - **Locking:** the lock screen asks for the passphrase on each visit. The app locks again after a chosen idle time
-  (15 minutes by default) and when the tab closes.
+  (5, 15 or 30 minutes or an hour, 15 by default, or Never), when the page is left and when the tab closes.
 - **Turning it on** encrypts everything in one transaction; turning it off decrypts it.
-- **A forgotten passphrase** leaves two ways out: restore a backup, or delete all data. The dialog that turns the
-  lock on says so, and offers an encrypted backup first.
+- **A forgotten passphrase** leaves two ways out, both on the lock screen: import a backup in place of everything, or
+  delete all data. Either turns the lock off. The dialog that turns the lock on says so, and offers an encrypted
+  backup first.
+- **As built:** section 14 (M6.10).
 
 **One crypto module** serves encrypted backups, the app lock and Phase 5's sync (section 11.4), so the maths is
 written and tested once. It uses WebCrypto (`crypto.subtle`), available in every supported browser.
@@ -2519,6 +2532,93 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-28, M6.10)**
+- **Security** (PROJECT-PLAN P13) is a card in Settings, between Your data and Catalog.
+  - "Lock with a passphrase" is a checkbox that opens a dialog. It shows what's so, not the click, until the dialog
+    has done it.
+  - **Turning on** asks for the passphrase twice (at least 8 characters, never trimmed: core's `passphraseIssues`, as
+    Export's) and Lock after. It says nobody can recover a forgotten passphrase, and offers Export a backup first, in a
+    dialog over it.
+  - **Turning off** asks for the passphrase. A wrong one says so, keeps focus in the field and changes nothing.
+  - **Lock after:** 5, 15 or 30 minutes, 1 hour, or Never, which locks only when the tab closes. The task asked for
+    these; P13 had 5, 15 and 60 minutes. It starts on 15, shows on the card once the lock is on, and changes with no
+    passphrase, since it's stored plain. Core's `user/lock-idle.ts` has the choices. It imports no Zod: taking them
+    from the schema's file brought Zod into Settings, 31 kB gzipped.
+  - In in-memory mode (P15) nothing is saved, so the checkbox is turned off there and says why.
+- **What's stored** (core's `user/app-lock.ts`):
+  - `settings.appLock` is `{ salt, iterations, check, idleMinutes? }`: a 16-byte salt, PBKDF2's iterations (600,000)
+    and `check`, a known text sealed with the key, which tells a wrong passphrase. Nothing stored opens the data
+    without the passphrase. The key is a non-extractable `CryptoKey`, held in memory only while unlocked.
+  - The locked tables are every user table but the caches (`lockedTables`): settings, lists, items, customSubs,
+    rankings, cards, tags and drafts. dismissedSuggestions joins with its schema (M8.2).
+  - A sealed row keeps its key and indexes plain (`lockPlainFields`) and holds the whole record in
+    `sealed: { iv, ciphertext }`. That's AES-256-GCM, bound to the row's table and key
+    (`simply-sub:lock:<table>:<key>`), so a value moved to another row doesn't open.
+  - The settings keep `key`, `theme` and `appLock` plain, so the theme and the lock are known before unlocking. Their
+    budgets, country, province and tax rate are sealed: §11.5 had all the settings plain, but P13's acceptance
+    counts amounts. `appLock` is never in the sealed value, so Lock after changes with no key.
+  - Backups leave `appLock` out. It's this device's, and the file isn't sealed with it.
+- **The storage engine** does the sealing (§11.1):
+  - **Every write reads the lock** stored in the settings, in its own transaction.
+    - It seals with the key in memory when the lock is on, and writes plain when it's off.
+    - It throws an `AppLockedError` when the lock is on and this tab is locked, or holds a key for another salt. So a
+      tab that hasn't yet heard of a change made in another tab never writes plain rows, or rows it can't seal.
+    - A settings write keeps the stored `appLock`: only the lock's own methods change it.
+  - **Reads open sealed rows.** The engine remembers each row's text by its table, key and value, so a table read
+    again after one change decrypts one row. A row that doesn't open is hidden and reported like one that fails its
+    schema (`sealed: unopened`), and left as it is.
+  - **Turning on** seals every locked table in one transaction. **Turning off** opens them all in one and removes
+    `appLock`. Together they give back every row exactly, which a test checks on every table, a deleted record and a
+    draft included.
+  - **WebCrypto in a transaction:** IndexedDB commits a transaction with nothing to do when a task ends, and WebCrypto
+    answers in a later task. Sealing and opening go through the transaction's own `waitFor` (what `Dexie.waitFor`
+    calls). Without it, a transaction committed half its writes (`PrematureCommitError`).
+  - **Dexie's zone** loses the transaction a couple of native `await`s deep, and a write after that starts a
+    transaction of its own. Inside a transaction, the engine takes every table from the transaction object
+    (`transaction.table(name)`), which doesn't depend on the zone.
+  - **Another tab** can turn the lock on or off, or change the passphrase. The engine follows the stored lock with a
+    live query, and locks when it changes to one it has no key for.
+  - **Rows read before the lock went off** can still arrive sealed from a live query. With the lock off, the engine
+    reads them again before reporting any as unreadable: without that, turning the lock off showed "Some saved data
+    couldn't be read".
+- **While locked,** the user's repositories hold nothing:
+  - `StorageService.access` is undefined until the database has said whether the lock is on, and while it's locked.
+    The repositories' resources then go idle and drop their records. The caches load from `mode` and stay.
+  - The database opens as soon as `StorageService` starts, so the lock is known before any repository reads.
+  - A locked table's watch ends when the app locks. Angular's resource doesn't abort a load when its params turn
+    undefined, so the subscription would have kept the last records in memory. A watch begun before the lock was known
+    also held a pending task for good, and the app never became stable.
+- **The lock screen** (P15, `layout/lock-screen.ts`) takes the app's place whenever it's locked:
+  - On a visit, a `localStorage` hint (`ss-lock`) shows it before the database opens, so the shell doesn't flash up
+    first. It's no secret: the stored settings say the same.
+  - Focus starts in the passphrase field. A wrong passphrase says "That passphrase is wrong, so nothing was unlocked."
+    in an alert, selects what was typed and keeps focus in the field. The right one opens the page the visit was on.
+  - **"Forgot it?"** opens a section with Import a backup and Delete all data (the user chose both).
+    - Import is one Replace, after asking. In one transaction it clears every table, the lock with it, and writes the
+      backup plain (`BackupRepository.restore`).
+    - Delete all data says the lock goes too, then the first-run dialog shows.
+  - It's created from a dynamic import, not `@defer`. `@defer`'s runtime added 7.6 kB to the initial bundle and took
+    it to 501.3 kB, over the 500 kB budget.
+- **Locking again** (`core/lock/auto-lock.ts`, started at boot):
+  - After Lock after's time with no key, click, tap or wheel; moving the pointer doesn't count. Timers in a hidden tab
+    run late, so coming back to the tab checks the time too.
+  - On `pagehide`, so the back-forward cache doesn't bring the app back unlocked. Closing the tab drops the key anyway.
+  - It closes the dialogs and the snackbar, which could show the user's data.
+- **Not done:**
+  - **A tab from before M6.10,** still open when the lock is turned on, can't read the sealed records. It hides them
+    and shows the first-run dialog. Completing that dialog there would write plain settings without `appLock`, and the
+    data would no longer open. A new Dexie version doesn't prevent it: Dexie 4 closes the old tab's connection, then
+    reopens it at the newer version and carries on (tried). It can happen only once, since every later version
+    follows the stored lock.
+  - Changing the passphrase means turning the lock off and on again.
+- **Bundles:** the initial bundle went from 492.5 to 495.4 kB: the idle lock (1.6 kB), the lock's state in
+  `StorageService` (1.0 kB) and the lock screen's host (0.5 kB). No crypto code is in it. Gzipped:
+  - **The storage engine's chunk:** from 33.4 to 35.6 kB, with the crypto module, `RowCipher` and the lock.
+  - **The lock screen:** 2.4 kB, and 62.2 kB with what it loads beyond the initial bundle (Material's form field and
+    input, Signal Forms).
+  - **Settings:** from 91.8 to 93.5 kB beyond the initial bundle. Its turn-on dialog is 2.3 kB, and turn-off 1.5 kB.
+
 
 **Resolved (2026-10-27, feedback after M6.9)**
 Asked for after M6.9:
