@@ -92,6 +92,11 @@ export class ListDraftService {
     return this.drafts.applyEdits(listId, edits);
   }
 
+  /** The Undo of applied edits (P14, M8.4): the draft as it was before them. */
+  putBack(listId: string, draft: ListDraft): Promise<ListDraft> {
+    return this.drafts.change(listId, () => draft);
+  }
+
   /**
    * Save: the list and its items are written in one transaction and the draft deleted, or nothing is. A field the
    * draft didn't change keeps its saved value, so pinning and the like done elsewhere since stay (core's savedItem).

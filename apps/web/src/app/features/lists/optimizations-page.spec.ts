@@ -119,25 +119,80 @@ describe('OptimizationsPage', () => {
     expect(button('How suggestions are chosen')?.getAttribute('aria-describedby')).toBeTruthy();
   });
 
-  it('puts a card’s changes on the list’s draft and opens the editor, saving nothing until Save', async () => {
+  it('puts a card’s changes on the list’s draft and stays, for the next, saving nothing until Save (M8.4)', async () => {
+    await plant();
+    // Crave Premium too, whose downgrade has nothing to do with Netflix's.
+    const crave = await TestBed.inject(ItemsRepository).create({
+      ...netflix,
+      source: { kind: 'catalog', planId: 'crave.premium' },
+    });
+    await open(work.id);
+    await until(() => button('Apply: Downgrade Crave Premium') !== null, 5000);
+    const drafts = TestBed.inject(DraftsRepository);
+    const planOf = (id: string) => {
+      const source = drafts
+        .byList()
+        .get(work.id)
+        ?.items.find((entry) => entry.item.id === id)?.item.source;
+      return source?.kind === 'catalog' ? source.planId : undefined;
+    };
+
+    button('Apply: Downgrade Crave Premium')?.click();
+    await until(() => planOf(crave.id) === 'crave.basic', 5000);
+    // The suggestions come again for the draft: Crave's downgrade is in it, so its card is gone.
+    await until(() => !shown().some((card) => card.startsWith('Downgrade Crave Premium')), 5000);
+    // The saved item hasn't changed.
+    const stored = (await storedRows(storage.indexedDB, 'items')) as ListItem[];
+    expect(stored.find((item) => item.id === crave.id)?.source).toEqual(crave.source);
+    const review = () => page().querySelector<HTMLAnchorElement>('.unsaved a.review');
+    await until(() => review() !== null, 5000);
+    expect(text(page().querySelector('.unsaved p'))).toBe(
+      "This list has changes you haven't saved, and the suggestions count them. Apply more, then review and save them in the editor.",
+    );
+    expect(review()?.getAttribute('href')).toBe(`/lists/${work.id}/edit`);
+    const snack = () => document.querySelector('.mat-mdc-snack-bar-container');
+    await until(() => text(snack())?.startsWith('Applied: Downgrade Crave Premium') === true, 5000);
+    // Focus is on a card that's left.
+    await until(() => document.activeElement?.classList.contains('title') === true, 5000);
+
+    // Netflix's downgrade, applied next, joins it on the draft.
+    await until(
+      () => button('Apply: Downgrade Netflix Standard → Standard with ads') !== null,
+      5000,
+    );
+    button('Apply: Downgrade Netflix Standard → Standard with ads')?.click();
+    await until(() => planOf(netflix.id) === 'netflix.standard-ads', 5000);
+    expect(planOf(crave.id)).toBe('crave.basic');
+
+    // Undo puts the draft back as it was before the last one.
+    await until(
+      () => text(snack())?.startsWith('Applied: Downgrade Netflix Standard') === true,
+      5000,
+    );
+    Array.from(snack()?.querySelectorAll('button') ?? [])
+      .find((element) => text(element) === 'Undo')
+      ?.click();
+    await until(() => planOf(netflix.id) === 'netflix.standard', 5000);
+    expect(planOf(crave.id)).toBe('crave.basic');
+
+    review()?.click();
+    await until(() => text(harness.routeNativeElement) === 'Elsewhere', 5000);
+  }, 20000);
+
+  it('drops the draft it made when the first Apply is undone (M8.4)', async () => {
     await plant();
     await open(work.id);
-    await until(() => button('Apply: Switch Netflix Standard') !== null);
-
+    await until(() => button('Apply: Switch Netflix Standard') !== null, 5000);
     button('Apply: Switch Netflix Standard')?.click();
-    await until(() => text(harness.routeNativeElement) === 'Elsewhere');
-
-    const draft = TestBed.inject(DraftsRepository).byList().get(work.id);
-    expect(draft?.items[0].item.billing).toEqual({
-      mode: 'recurring',
-      interval: 'year',
-      intervalCount: 1,
-      anchorDate: '2026-11-12',
-      autoRenew: true,
-    });
-    // The saved item hasn't changed.
-    const [stored] = (await storedRows(storage.indexedDB, 'items')) as ListItem[];
-    expect(stored.billing).toEqual(netflix.billing);
+    const snack = () => document.querySelector('.mat-mdc-snack-bar-container');
+    await until(() => text(snack())?.startsWith('Applied:') === true, 5000);
+    Array.from(snack()?.querySelectorAll('button') ?? [])
+      .find((element) => text(element) === 'Undo')
+      ?.click();
+    const drafts = TestBed.inject(DraftsRepository);
+    await until(() => !drafts.byList().has(work.id), 5000);
+    await until(() => shown().length === 4, 5000);
+    expect(page().querySelector('.unsaved')).toBeNull();
   });
 
   it('hides a dismissed card until the list changes, and Show dismissed brings it back', async () => {

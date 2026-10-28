@@ -1,6 +1,7 @@
 import { Service, inject } from '@angular/core';
 import {
   cardLoads,
+  draftItems,
   itemLedger,
   optimize,
   type CatalogData,
@@ -10,7 +11,8 @@ import {
 import { CatalogStore } from '../catalog/catalog-store';
 import { ClockService } from '../clock/clock-service';
 import { FxStore } from '../fx/fx-store';
-import { MetricsService } from '../metrics/metrics-service';
+import { ListDraftService } from '../lists/list-draft-service';
+import { MetricsService, type ListItems } from '../metrics/metrics-service';
 import { SettingsStore } from '../settings/settings-store';
 import { CardsRepository } from '../storage/cards-repository';
 import { RankingsRepository } from '../storage/rankings-repository';
@@ -42,6 +44,7 @@ export class OptimizerService {
   private readonly settings = inject(SettingsStore);
   private readonly rankings = inject(RankingsRepository);
   private readonly cards = inject(CardsRepository);
+  private readonly drafts = inject(ListDraftService);
   private readonly clock = inject(ClockService);
   /** Undefined until it's needed; null once it's failed. */
   private worker?: Worker | null;
@@ -50,17 +53,23 @@ export class OptimizerService {
 
   /**
    * What the optimizer needs for a list: undefined before the first run, and while any of its items waits for its
-   * catalog file. Items that can't be priced are left out, as totals leave them out. With the user's payment cards,
-   * what the other lists' items post to each one too, so a better card for an item is suggested only with room for it
-   * (M9.3). Called in a computed(), it follows the list, the catalog, the rates, the settings, the ranks, the cards and
-   * the date.
+   * catalog file. Items that can't be priced are left out, as totals leave them out. A list with a draft is optimized
+   * as the draft has it, with the suggestions applied so far (M8.4), since that's what Save would keep. With the
+   * user's payment cards, what the other lists' items post to each one too, so a better card for an item is suggested
+   * only with room for it (M9.3). Called in a computed(), it follows the list and its draft, the catalog, the rates,
+   * the settings, the ranks, the cards and the date.
    */
   input(listId: string): OptimizerInput | undefined {
     const saved = this.settings.saved();
-    if (!saved || this.metrics.status() !== 'ready' || this.cards.status() === 'loading') {
+    if (
+      !saved ||
+      this.metrics.status() !== 'ready' ||
+      this.cards.status() === 'loading' ||
+      this.drafts.status() === 'loading'
+    ) {
       return undefined;
     }
-    const { resolved, unresolved } = this.metrics.list(listId);
+    const { resolved, unresolved } = this.listItems(listId);
     if (unresolved.some((item) => item.reason === 'pending')) return undefined;
     const catalogs = new Map<string, CatalogData>();
     for (const { region } of resolved) {
@@ -97,6 +106,17 @@ export class OptimizerService {
         },
         profileRanks: this.rankings.ranks(),
       },
+    };
+  }
+
+  /** The list's items as its draft has them when it has one, else as saved, priced. */
+  private listItems(listId: string): ListItems {
+    const draft = this.drafts.byList().get(listId);
+    if (!draft) return this.metrics.list(listId);
+    const results = this.metrics.resolve(draftItems(draft));
+    return {
+      resolved: results.flatMap((result) => (result.ok ? [result.resolved] : [])),
+      unresolved: results.flatMap((result) => (result.ok ? [] : [result.unresolved])),
     };
   }
 
