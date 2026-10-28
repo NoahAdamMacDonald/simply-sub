@@ -369,7 +369,18 @@
 
     <section class="ranks" [attr.aria-labelledby]="ids + '-ranks'">
       <h3 [id]="ids + '-ranks'">Feature ranks</h3>
-      <p class="note">Only for this subscription</p>
+      <!-- Shared with the provider's other plans in the list, unless its ranks are its own (M6.14). -->
+      @if (rankSharing(); as sharing) {
+        <p class="note" [id]="ids + '-sharing'">{{ sharing.text }}</p>
+        <mat-checkbox
+          class="own-ranks"
+          [formField]="form.ownRanks"
+          [aria-describedby]="ids + '-sharing'"
+          >Ranks for this plan only</mat-checkbox
+        >
+      } @else {
+        <p class="note">Only for this subscription</p>
+      }
       <!-- Each group folds, as the Features page's cards do; it starts open when this subscription ranks a key in it. -->
       @for (group of rankGroups(); track group.id) {
         <h4>

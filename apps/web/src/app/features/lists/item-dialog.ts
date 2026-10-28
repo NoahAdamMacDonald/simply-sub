@@ -55,18 +55,24 @@ import {
   itemFormFor,
   itemFormIssues,
   itemFromForm,
+  itemTitle,
   monthlyAverage,
   monthlyOnCard,
   monthlyParts,
+  namesText,
   newItemForm,
   periodChoices,
   periodOf,
   periodText,
   pickPrice,
   planTitle,
+  rankChanges,
+  rankSiblings,
   rankingSections,
   renewalAfterPeriodChange,
   samePeriod,
+  sharedRankEdits,
+  sharedRanksFor,
   taxAddedRegions,
   typedPrice,
   type BillingDay,
@@ -126,11 +132,15 @@ export interface ItemDialogData {
   request: ItemDialogRequest;
 }
 
-/** What was saved to the draft: the item's id, what it's called ("Netflix Standard"), and whether it's new. */
+/**
+ * What was saved to the draft: the item's id, what it's called ("Netflix Standard"), whether it's new, and how many of
+ * its provider's other plans in the list took its rank changes (M6.14).
+ */
 export interface ItemDialogResult {
   itemId: string;
   title: string;
   added: boolean;
+  shared: number;
 }
 
 /** A choice in a menu, as it shows ("Standard — $18.99 / mo") and as it's read ("Standard, $18.99 a month"). */
@@ -228,6 +238,8 @@ export class ItemDialog {
   private readonly currency = computed(() => this.settings.saved()?.currency ?? '');
 
   protected readonly model = signal<ItemForm>(this.initialForm());
+  /** Its ranks when the dialog opened: what Save compares them with, to share the changes (M6.14). */
+  private readonly startRanks = this.model().rankOverrides;
   /** The keys this subscription ranked when the dialog opened, whose groups start open. */
   private readonly rankedAtStart = new Set(Object.keys(this.model().rankOverrides));
   /** Groups opened or closed since, by their category id. */
@@ -535,6 +547,42 @@ export class ItemDialog {
     return { today: this.today(), currency: saved.currency, place: saved, ...(fx && { fx }) };
   });
 
+  /**
+   * The list's other plans of its provider, priced, with the keys each provides (M6.14): the ones its ranks are shared
+   * with, unless either has ranks of its own. A plan that can't be priced has no keys to share.
+   */
+  private readonly rankSiblings = computed(() => {
+    const resolved = this.preview();
+    const draft = this.drafts.byList().get(this.data.listId);
+    if (!resolved || !draft) return [];
+    const self = { id: this.editing?.id ?? previewId, source: resolved.item.source };
+    const items = this.metrics.resolve(draftItems(draft)).flatMap((result) =>
+      result.ok
+        ? [
+            {
+              item: result.resolved.item,
+              providedKeys: result.resolved.providedKeys,
+              resolved: result.resolved,
+            },
+          ]
+        : [],
+    );
+    return rankSiblings(self, items);
+  });
+  /** What Feature ranks says about sharing: with whom, or that its ranks are its own (M6.14). */
+  protected readonly rankSharing = computed(() => {
+    const siblings = this.rankSiblings();
+    const own = this.model().ownRanks;
+    if (siblings.length === 0 && !own) return undefined;
+    const names = siblings.map(({ resolved }) => itemTitle(resolved));
+    return {
+      own,
+      text: own
+        ? 'Changes here stay on this plan, and changes to its provider’s other plans don’t reach it.'
+        : `Changes here go to the same features of ${namesText(names)} in this list too. Essential stays on this plan.`,
+    };
+  });
+
   /** Whether there are cards to pay with: else Payment says where to add them. */
   protected readonly hasCards = computed(() => this.cards.records().length > 0);
 
@@ -834,6 +882,8 @@ export class ItemDialog {
     ) {
       return;
     }
+    // The ranks it changed go to its provider's other plans in the list (M6.14).
+    const siblings = this.rankSiblings();
     let itemId: string;
     if (this.editing) {
       itemId = this.editing.id;
@@ -844,12 +894,24 @@ export class ItemDialog {
         nickname: undefined,
         note: undefined,
         cardId: undefined,
+        ownRanks: undefined,
         ...fields,
       });
     } else {
       itemId = (await this.drafts.addItem(listId, { ...fields, pinned: false })).id;
     }
-    this.dialogRef.close({ itemId, title, added: this.editing === undefined });
+    const edits = sharedRankEdits(
+      { id: itemId, source: fields.source, ...(fields.ownRanks && { ownRanks: true }) },
+      rankChanges(this.startRanks, fields.rankOverrides, provided),
+      siblings,
+    );
+    if (edits.length > 0) await this.drafts.applyEdits(listId, edits);
+    this.dialogRef.close({
+      itemId,
+      title,
+      added: this.editing === undefined,
+      shared: edits.length,
+    });
   }
 
   /** "Standard — $18.99 / mo", read "Standard, $18.99 a month"; ≈ and "about" when it's converted. */
@@ -867,8 +929,30 @@ export class ItemDialog {
     };
   }
 
-  /** The form the dialog opens with: what was asked for, or the item as it is. */
+  /**
+   * The form the dialog opens with: the item as it is, or what was asked for, with the ranks the provider's other plans
+   * in the list share (M6.14).
+   */
   private initialForm(): ItemForm {
+    const form = this.requestedForm();
+    if (this.editing) return form;
+    const draft = this.drafts.byList().get(this.data.listId);
+    const source =
+      form.kind === 'catalog' && form.planId !== ''
+        ? { kind: 'catalog' as const, planId: form.planId }
+        : form.kind === 'custom'
+          ? { kind: 'custom' as const, customSubId: form.customSubId, customPlanId: form.planId }
+          : undefined;
+    if (!draft || !source) return form;
+    const shared = sharedRanksFor(
+      { id: previewId, source },
+      draftItems(draft).map((item) => ({ item, providedKeys: [] })),
+    );
+    return { ...form, rankOverrides: { ...shared, ...form.rankOverrides } };
+  }
+
+  /** What was asked for, or the item as it is. */
+  private requestedForm(): ItemForm {
     const country = this.settings.saved()?.country ?? '';
     const currency = this.settings.saved()?.currency ?? '';
     const today = this.today();

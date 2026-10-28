@@ -471,6 +471,7 @@ describe('itemFromForm', () => {
         rankOverrides: { 'streaming.ad-free': 'essential', 'video.quality=4k': 'needed' },
         tagIds: ['0192f1c7-3e4f-7051-ac6d-7e8f9a0b1c2d'],
         cardId: '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d3e',
+        ownRanks: true,
       }),
       context,
     );
@@ -496,6 +497,8 @@ describe('itemFromForm', () => {
       // 4K isn't a key Netflix Standard provides.
       rankOverrides: { 'streaming.ad-free': 'essential' },
       cardId: '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d3e',
+      // Its ranks aren't shared with its provider's other plans (M6.14).
+      ownRanks: true,
     });
     expect(() => stored(fields)).not.toThrow();
   });
@@ -642,6 +645,7 @@ describe('itemFormFor', () => {
           region: 'US',
           rankOverrides: { 'streaming.ad-free': 'critical' },
           cardId: '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d3e',
+          ownRanks: true,
         }),
         context,
       ),
@@ -663,6 +667,7 @@ describe('itemFormFor', () => {
       windows: [window(today, '')],
       region: 'US',
       cardId: '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d3e',
+      ownRanks: true,
     });
     expect(stored(itemFromForm(form, context))).toEqual(item);
 

@@ -72,6 +72,7 @@ export * from './ranking/rank-fit';
 export * from './ranking/rank-keys';
 export * from './ranking/rank-summaries';
 export * from './ranking/resolve-rank';
+export * from './ranking/shared-ranks';
 export * from './rewards/assign-cards';
 export * from './rewards/card-cost';
 export * from './rewards/card-ledger';
