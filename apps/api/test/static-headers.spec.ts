@@ -63,15 +63,16 @@ describe('public/_headers', () => {
     expect(csp['connect-src']).toEqual(["'self'", 'https://cloudflareinsights.com']);
   });
 
-  it('locks everything else down, with Trusted Types for Angular only', () => {
+  it("locks everything else down, with Trusted Types for Angular and the optimizer's worker only", () => {
     expect(csp).toMatchObject({
       'default-src': ["'self'"],
       'object-src': ["'none'"],
       'base-uri': ["'self'"],
       'form-action': ["'self'"],
       'frame-ancestors': ["'none'"],
+      'worker-src': ["'self'"],
       'require-trusted-types-for': ["'script'"],
-      'trusted-types': ['angular', 'angular#bundler'],
+      'trusted-types': ['angular', 'angular#bundler', 'simply-sub#worker'],
     });
     expect(site.get('Referrer-Policy')).toBe('no-referrer');
     expect(site.get('X-Content-Type-Options')).toBe('nosniff');
@@ -91,6 +92,7 @@ describe('public/_headers', () => {
     expect(caching).toEqual({
       '/main-*.js': immutable,
       '/chunk-*.js': immutable,
+      '/worker-*.js': immutable,
       '/styles-*.css': immutable,
       '/media/*': immutable,
       '/icons/*': 'public, max-age=86400',

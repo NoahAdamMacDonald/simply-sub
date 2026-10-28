@@ -10,6 +10,7 @@ import { MatInputHarness } from '@angular/material/input/testing';
 import { Router, provideRouter } from '@angular/router';
 import {
   backupRefusals,
+  backupSchemaVersion,
   encryptedBackup,
   plainBackup,
   type BackupPayload,
@@ -62,6 +63,7 @@ const payload: BackupPayload = {
     rankings: [],
     cards: [],
     tags: [],
+    dismissedSuggestions: [],
   },
 };
 
@@ -237,9 +239,14 @@ describe('Your data', () => {
   });
 
   it('opens an encrypted backup with its passphrase, saying when it’s wrong', async () => {
-    const envelope = await encryptText(JSON.stringify(payload), 'correct horse', 'simply-sub:1', {
-      iterations: 1_000,
-    });
+    const envelope = await encryptText(
+      JSON.stringify(payload),
+      'correct horse',
+      `simply-sub:${backupSchemaVersion}`,
+      {
+        iterations: 1_000,
+      },
+    );
     await press('Import backup');
     await until(() => dialogText()?.startsWith('Import a backup') === true);
     await pickFile(JSON.stringify(encryptedBackup(envelope)));

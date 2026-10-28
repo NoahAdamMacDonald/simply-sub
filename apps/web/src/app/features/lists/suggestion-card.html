@@ -1,0 +1,107 @@
+<article [attr.aria-labelledby]="id() + '-title'">
+  <div class="head">
+    <!-- Focus lands here when the card before it is dismissed. -->
+    <h3 class="title" [id]="id() + '-title'" tabindex="-1">
+      @for (line of lines(); track $index) {
+        <span class="change">{{ line.title }}</span>
+      }
+    </h3>
+    <p class="savings">
+      @if (suggestion().estimated) {
+        <span aria-hidden="true">Save ≈ </span><span class="visually-hidden">Save about </span>
+      } @else {
+        <span>Save </span>
+      }
+      <strong>{{ savings() }}</strong>
+      <span> over the next 12 months</span>
+      @if (suggestion().estimated) {
+        <!-- Focusable, so keyboard users get the tooltip, which screen readers read as its description. -->
+        <span
+          class="estimated"
+          tabindex="0"
+          matTooltip="Some of these prices are converted from another currency at the latest exchange rate, so the saving is an estimate."
+        >
+          <mat-icon aria-hidden="true">currency_exchange</mat-icon>
+          Estimated
+        </span>
+      }
+    </p>
+  </div>
+
+  <ul class="lines">
+    @for (line of lines(); track $index) {
+      <li>
+        <span class="prices">
+          @for (price of line.from; track $index) {
+            @if (!$first) {
+              <span aria-hidden="true">+</span><span class="visually-hidden">plus</span>
+            }
+            <ss-price [price]="price" />
+          }
+          @if (line.to; as to) {
+            <span aria-hidden="true">→</span><span class="visually-hidden">to</span>
+            <ss-price [price]="to" />
+          }
+        </span>
+        <span class="when">{{ line.when }}</span>
+      </li>
+    }
+  </ul>
+
+  @if (suggestion().lostServices.length > 0 || suggestion().lost.length > 0) {
+    <p class="features">
+      <span class="label">You lose:</span>
+      @for (service of suggestion().lostServices; track service.itemId) {
+        <span class="feature">{{ service.title }} itself</span>
+      }
+      @for (change of suggestion().lost; track change.key) {
+        <span class="feature">
+          <ss-rank-dot [rank]="change.rank" />
+          {{ change.label }} ({{ rankNames[change.rank] }})
+        </span>
+      }
+    </p>
+  }
+  @if (suggestion().gained.length > 0) {
+    <p class="features">
+      <span class="label">You gain:</span>
+      @for (change of suggestion().gained; track change.key) {
+        <span class="feature">
+          <ss-rank-dot [rank]="change.rank" />
+          {{ change.label }} ({{ rankNames[change.rank] }})
+        </span>
+      }
+    </p>
+  }
+
+  <div class="actions">
+    @if (dismissed()) {
+      <button
+        matButton="outlined"
+        type="button"
+        [attr.aria-label]="'Show again: ' + title()"
+        (click)="restore.emit()"
+      >
+        Show again
+      </button>
+    } @else {
+      <button
+        matButton="filled"
+        type="button"
+        [disabled]="busy()"
+        [attr.aria-label]="'Apply: ' + title()"
+        (click)="apply.emit()"
+      >
+        Apply
+      </button>
+      <button
+        matButton
+        type="button"
+        [attr.aria-label]="'Dismiss: ' + title()"
+        (click)="dismiss.emit()"
+      >
+        Dismiss
+      </button>
+    }
+  </div>
+</article>

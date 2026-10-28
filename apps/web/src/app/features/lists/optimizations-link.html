@@ -1,0 +1,19 @@
+<!-- The strongest's name goes in the link's own name: hidden words starting with a comma get a space before them. -->
+<a
+  matButton="outlined"
+  class="link"
+  [attr.data-strongest]="summary()?.strongest"
+  [attr.aria-label]="label()"
+  [routerLink]="['/lists', listId(), 'optimize']"
+>
+  @if (summary(); as summary) {
+    @if (summary.count > 0) {
+      <span class="dot" aria-hidden="true"></span>
+      View optimizations ({{ summary.count }})
+    } @else {
+      No suggestions
+    }
+  } @else {
+    View optimizations
+  }
+</a>

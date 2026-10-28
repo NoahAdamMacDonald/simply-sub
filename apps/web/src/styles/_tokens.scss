@@ -49,6 +49,10 @@
   --status-active: var(--rank-wanted-text);
   --status-inactive: var(--rank-sometimes-text);
   --status-none: var(--rank-none-text);
+  // The optimizer's sections (P14) and List view's View optimizations (P4): red, orange and yellow by what a suggestion
+  // gives up, and Wanted's green for free savings, which give up nothing (M8.2, the user's choice). Dots and stripes,
+  // with --ss-dot-ring around the pale ones; the words beside them say the same.
+  --suggest-free: var(--rank-wanted);
   --suggest-hard: var(--rank-unwanted);
   --suggest-normal: var(--rank-unused);
   --suggest-soft: var(--rank-uses);

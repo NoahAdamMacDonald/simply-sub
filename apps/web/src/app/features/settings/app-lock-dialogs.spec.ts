@@ -178,8 +178,12 @@ describe('Security', () => {
 
   it('turns on: every table encrypted, Lock after kept, and the page says so', async () => {
     await turnOn('1 hour');
-    await until(() => snackBar() === 'The lock is on');
-    expect(await (await lockBox()).isChecked()).toBe(true);
+    await until(() => snackBar() === 'The lock is on', 5000);
+    // The box follows the stored settings' live query, which can come a moment after the snackbar when the suite is
+    // busy.
+    await vi.waitFor(async () => expect(await (await lockBox()).isChecked()).toBe(true), {
+      timeout: 5000,
+    });
     expect(text()).toContain('Your data in this browser is encrypted');
     expect(await lockAfter()).toBe('1 hour');
     const settings = await storedSettings();

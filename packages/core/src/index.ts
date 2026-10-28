@@ -51,6 +51,19 @@ export * from './icons/icon-query';
 export * from './icons/icon-sources';
 export * from './lookup/lookup-bodies';
 export * from './lookup/lookup-query';
+export * from './optimizer/apply-suggestion';
+export * from './optimizer/fingerprint';
+export {
+  buildModel,
+  keptAddOns,
+  reperiod,
+  withAddOn,
+  type OptimizerContext,
+  type OptimizerInput,
+} from './optimizer/model';
+export * from './optimizer/optimize';
+export * from './optimizer/suggestion';
+export * from './optimizer/suggestion-text';
 export * from './ranking/feature-ranking';
 export * from './ranking/plan-features';
 export * from './ranking/rank-fit';
@@ -80,6 +93,7 @@ export * from './user/calendar-params';
 export * from './user/catalog-cache';
 export * from './user/custom-sub-form';
 export * from './user/custom-subscription';
+export * from './user/dismissed-suggestion';
 export * from './user/fx-cache';
 export * from './user/item-activity';
 export * from './user/item-form';

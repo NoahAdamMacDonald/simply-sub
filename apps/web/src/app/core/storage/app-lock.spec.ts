@@ -105,6 +105,7 @@ const records: Record<UserTable, readonly unknown[]> = {
       startedAt: '2026-10-24T10:00:00.000Z',
     },
   ],
+  dismissedSuggestions: [{ fingerprint: '3f9a0c1d2e4b5a67', listId: ids.work, ...stamps }],
   catalogCache: [],
   fxRates: [
     {

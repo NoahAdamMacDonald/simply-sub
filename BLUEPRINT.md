@@ -938,9 +938,10 @@ transaction types for a subclass). Dexie keeps only keys and indexes, not the re
   function. Export files carry a `schemaVersion` so old backups can still be imported, migrated the same way.
 
 v1 declares every table, so it's the full list the app lock (M6.10) encrypts. `catalogCache` got its record schema
-with M4.3 and `drafts` with M6.3, which needed no new version since nothing had written to them; `dismissedSuggestions`
-gets its with M8.2, and `cards` its repository with M9.1 (its schema is in core already, since backups carry cards).
-v2 (M4.4) adds `fxRates`. The cache tables (`cacheTables` in core: `catalogCache` and `fxRates`) are left out of
+with M4.3 and `drafts` with M6.3, which needed no new version since nothing had written to them, and `cards` gets its
+repository with M9.1 (its schema is in core already, since backups carry cards). v2 (M4.4) adds `fxRates`. v3 (M8.2)
+gives `dismissedSuggestions` its record schema and an index of its list, with an upgrade that empties it: nothing wrote
+to it before, so a row there wasn't the app's. The cache tables (`cacheTables` in core: `catalogCache` and `fxRates`) are left out of
 backups and left plain by the app lock, and their records are replaced and deleted outright. Drafts are deleted
 outright too, on Save or Cancel: they're edits not saved yet, with no deletion for a sync to pass on.
 ```ts
@@ -957,6 +958,9 @@ db.version(1).stores({
   dismissedSuggestions: 'fingerprint'
 });
 db.version(2).stores({ fxRates: 'key' });   // the last exchange rates fetched (M4.4); a new table needs no upgrade
+db.version(3)                                // dismissed optimizer suggestions get their schema (M8.2)
+  .stores({ dismissedSuggestions: 'fingerprint, listId' })
+  .upgrade((transaction) => transaction.table('dismissedSuggestions').clear());
 ```
 
 ### 4.7 Regions & currency conversion
@@ -1520,6 +1524,11 @@ Cron trigger (03:00 UTC) → Workflow (one step per provider, automatic retries)
 **Logos** ride along (M8.3): the run fetches each provider's best icon the way `npm run data:icons` does, and when
 it differs from the committed `data/logos/<id>.png` (a rebrand), the same PR proposes the new one.
 
+**As built (M8.3)** in `apps/bot`, with section 14 (M8.3) for the details: a step per provider, with the bundles that
+cite its pages; Workers AI only for a price whose stored amount isn't on its page; no per-provider `extract:` selectors
+(the schema has none); the YAML edited line by line, which CI's `data:validate` then checks; `lastVerified` bumped
+for a price confirmed 30 or more days after it was last verified; and a night with nothing to change opens no PR.
+
 **Guardrails**
 - **Never auto-merge.** You review the PR, which takes a minute a day at most.
 - Flag changes larger than ±30% as suspicious.
@@ -1671,9 +1680,9 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
 | GitHub Actions | Free for public repos, 2,000 min/month for private | CI plus a nightly check, around 300 min/month |
 | Domain | **simplely.ca**, already bought through Cloudflare Registrar, which renews at cost | The only real expense |
 | Workers Builds | ~3,000 build minutes/month, 1 concurrent build | A few minutes per deploy |
-| Browser Rendering | ~10 browser-minutes/day, 3 concurrent | Only JS-heavy pricing pages in the nightly check |
-| Workers AI | Daily free allowance | Price extraction when no selector matches |
-| Cron Triggers / Workflows | Included in Workers free (verify Workflows limits) | One nightly run |
+| Browser Rendering | 10 browser-minutes a day, 3 concurrent browsers, a new one every 20 s, 60 s timeout (confirmed 2026-10-28) | Only pages a plain fetch gets nothing from, at most 5 a night (M8.3) |
+| Workers AI | 10,000 Neurons a day, reset at 00:00 UTC (confirmed 2026-10-28) | Prices whose stored amount isn't on their page: Llama 3.3 70B in JSON mode, at most 8,000 Neurons a night (M8.3) |
+| Cron Triggers / Workflows | Included in Workers free. Workflows on the free plan (confirmed 2026-10-28): 10 ms of CPU and 50 requests out per step, 1,024 steps, 100 concurrent instances, 100,000 executions a day shared with Workers, 1 MiB per step result, 3 days' retention | One nightly run, a step per provider (M8.3) |
 | If you outgrow it | Workers Paid at $5/mo for 10M requests | Still under the $10/mo goal |
 
 > **Free-tier gotcha:** requests that invoke the Worker get an HTTP 429 once the daily limit is used up. That's why
@@ -1711,6 +1720,10 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
 7. **No Cloudflare token in GitHub.** Workers Builds deploys with a token Cloudflare keeps (section 7.6), and
    GitHub's CI only checks code, so the repo has no Cloudflare secrets. The bot's GitHub token (M8.3) is a
    Worker secret on the Cloudflare side.
+8. **The bot** (M8.3, not done yet: the owner's to do): a fine-grained GitHub token for this repository only, with
+   Contents and Pull requests read and write, then `cd apps/bot && npx wrangler secret put GITHUB_TOKEN` and
+   `npx wrangler deploy`. Workers Builds doesn't deploy it (it isn't connected to it), so a change to `apps/bot`
+   reaches Cloudflare only by that deploy.
 
 ### 7.3 Serving the app from `sub.simplely.ca`
 The app and the API have the subdomain to themselves: **https://sub.simplely.ca/** for the app, and
@@ -2215,7 +2228,8 @@ noted in a help tooltip.
 
 Lives in `packages/core/src/optimizer/`. It's a **pure function**:
 `optimize(list, catalog, rankings, cards?, settings) → Suggestion[]`, and it runs in the browser
-(in a Web Worker if it's slow).
+(in a Web Worker if it's slow). As built (M8.1): `optimize({ items, catalogs, context, cards? })` →
+`{ suggestions, bestSavings, … }`, with the rules the user chose in section 14 (M8.1).
 
 ### 10.1 Inputs, prepared first
 1. Resolve each item's effective feature ranks (section 4.6).
@@ -2257,9 +2271,10 @@ Lives in `packages/core/src/optimizer/`. It's a **pure function**:
   and the features gained or lost.
 
 ### 10.5 Testing
-Fixture-based Vitest tests, for example: "2 VPNs, VPN ranked Needed → suggest removing the cheaper one",
-"Essential feature blocks a downgrade", "Critical feature allows a same-provider downgrade that keeps it but
-blocks removal" and "a limited Sep–Oct window keeps a Needed feature covered".
+Fixture-based Vitest tests, for example: "2 VPNs, VPN ranked Needed → suggest removing one, never both" (the
+pricier when they're alike, the cheaper when only the pricier has another Needed feature), "Essential feature
+blocks a downgrade", "Critical feature allows a same-provider downgrade that keeps it but blocks removal" and "a
+limited Sep–Oct window keeps a Needed feature covered".
 
 ---
 
@@ -2390,7 +2405,7 @@ gone. That's why it's opt-in.
 - **Key:** derived like the backup key, then held in memory only, as a non-extractable WebCrypto `CryptoKey`.
   Nothing secret is stored: only the salt and an encrypted check value, which tells a wrong passphrase.
 - **What's encrypted:** each record of `settings`, `lists`, `items`, `customSubs`, `rankings`, `cards`, `tags` and
-  `drafts` (and `dismissedSuggestions` with its schema, M8.2) keeps its key and indexed fields in plain text and
+  `drafts` and `dismissedSuggestions` (M8.2) keeps its key and indexed fields in plain text and
   stores the whole record as one encrypted value. Of the settings, only what's needed before unlocking stays plain:
   the theme and the lock itself. The caches (the catalog files, the exchange rates) stay plain, since they're public.
 - **Locking:** the lock screen asks for the passphrase on each visit. The app locks again after a chosen idle time
@@ -2532,13 +2547,208 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 ## 14. Open questions
 
 **Still open**
-1. **Workflows free-tier limits**: confirm at setup time (section 7.1).
-2. **Buyer-chosen charge currency** (decide in M9): some providers let the buyer pick the currency they're charged
+1. **Buyer-chosen charge currency** (decide in M9): some providers let the buyer pick the currency they're charged
    in. Proton sells fixed price lists in USD, CAD, EUR and CHF (stored as `GLOBAL` prices in each currency, with
    `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-28, M8.3)**
+- **The free-tier limits** (the old open question 1), read on Cloudflare's pages on 2026-10-28 and recorded in
+  section 7.1:
+  - Workflows (Workers Free): 10 ms of CPU and 50 requests out (1,000 to Cloudflare's services) per step, 1,024
+    steps, 100 concurrent instances, 100 created a second, 100,000 executions a day shared with Workers, 1 MiB per
+    step result and per event, 100 MB of state, 10,000 retries a step, and 3 days' retention. Cron-triggered
+    `schedules` are Paid only; a cron trigger on the Worker starts the instance instead.
+  - Browser Rendering (Workers Free): 10 browser-minutes a day, 3 concurrent browsers, a new browser every 20 s, a
+    60 s timeout (`keep_alive` up to 20 minutes).
+  - Workers AI: 10,000 Neurons a day, reset at 00:00 UTC. JSON mode is on Llama 3.3 70B (26,668 and 204,805 Neurons
+    a million input and output tokens), Llama 3.1 and 3 8B and a few others.
+- **The bot** is `apps/bot`, a second Worker (`simply-sub-bot`, its own `wrangler.jsonc`): a cron trigger at
+  `0 3 * * *` creates the night's Workflow instance (`price-check-<date>`, so a second trigger starts nothing), with
+  AI and Browser bindings and the catalog D1, which it only reads (every query goes through a SELECT-only helper:
+  D1 has no read-only binding). No public URL. It's built and type-checked by `npm run build` (a dry-run bundle:
+  3.3 MB, 679 KB gzipped, within the free plan's 3 MB) but not deployed: its token and its deploy are the owner's
+  (section 7.2).
+- **A night:** read the catalog's index from D1 (each provider's and bundle's pages, and every host); read the base
+  branch (its commit, its logos' Git blob hashes, `data/resellers.yaml`); read each host's robots.txt once, 40 hosts a
+  step; then a step per provider, with the bundles whose every page it cites, a step per group of the other bundles
+  that share a page, and a step per reseller's logo, each retried twice, a failed one listed and the night going on;
+  then one step for the pull request. A page is read in one step only, so it's requested once a night.
+- **The checks** (`check-pages.ts`):
+  - **Prices:** each page's text (`page-text.ts`: no scripts, styles or comments, inline tags joined, entities
+    decoded). A price whose amount is on the page near its plan's name, in its currency (`amounts.ts`), or a price for
+    several months shown a month at a time (Mullvad's "€5 /month"), is confirmed with no AI. The rest of a page's
+    prices go to Workers AI together, on an excerpt around the plans' names (12,000 characters at most), which
+    answers each plan's regular price, or that only a sale or first-term price shows. A yearly price isn't matched a
+    month at a time: on a page like Proton's ("$3.99/month billed yearly") a changed yearly price could match another
+    plan's.
+  - **Guardrails (§6.4):** a change over ±30% is flagged ⚠️; a sale or first-term price alone, a price not found, a
+    currency other than the stored one (a geo-priced page) and a page that can't be read are "needs manual check",
+    never a change. Requests carry `SimplySubBot/1.0` and `Accept-Language: en-CA`, and follow robots.txt (RFC 9309:
+    the bot's own group, else `*`; a 4xx allows everything, a 5xx or no answer nothing).
+  - **taxIncluded:** its quote must still be on the page (in any quotes and spacing), and no "+ tax", "excl. VAT",
+    "taxes calculated at checkout" and the like near the price; otherwise it's taken out, for review.
+  - **Resellers:** each approval's quotes on the provider's page; a missing one removes the reseller's listing from
+    the provider file, for review (a reseller no provider lists is only a warning in `data:validate`). Their offers'
+    prices are checked like any price.
+  - **Logos:** the provider's or reseller's best icon, found as `data:icons` finds it, compared by Git blob hash with
+    the committed logo, which is read only when they differ. Only an icon at least as big as the committed one is
+    proposed: the smoke run found Disney+'s and Hulu's own icons out of reach and the icon services' 96 px ones in
+    their place, which is no rebrand.
+  - **Browser Rendering** only when a fetch fails (not for robots.txt) or gets no plan name and no price at all, at
+    most 5 pages a night (the user's choice). Workers AI stops at 8,000 estimated Neurons a night.
+- **The pull request** (`proposal.ts`, `github.ts`): the YAML edited line by line (`yaml-edit.ts`: a price's amount
+  and `lastVerified`, `taxIncluded` out, a reseller's listing out), keeping comments and layout; CI's `data:validate`
+  checks the result. A price confirmed 30 or more days after it was last verified gets today's `lastVerified` (the
+  user's choice), so the 90-day badge never shows on a price the bot keeps confirming. The commit goes on
+  `bot/price-updates`, rebuilt from the base branch each night it has changes (force-pushed: the branch is the bot's
+  own), and the open PR gets tonight's title and body, or a new one opens. It never merges. A night with nothing to
+  change opens none, and what needs checking waits for the next PR's body (the user's choice). The body has Price
+  changes (a table with the change in %), For review, Logos, Needs manual check (one line per page and reason) and
+  Confirmed. Pages' words are only ever quoted, escaped and cut to 160 characters.
+- **Libraries:** `@cloudflare/playwright` 1.3.6 for Browser Rendering, which has no dependencies.
+  `@cloudflare/puppeteer` 1.4.0 was tried first: its `@puppeteer/browsers` (a Chrome downloader a Worker never runs)
+  brings 7 high advisories, `extract-zip`'s with no fixed version, so CI's audit would fail. `npm audit
+  --audit-level=high` passes.
+- **The smoke run** (once, from this machine, on 2026-10-28): the real night against the live sites with the local
+  catalog, no Browser Rendering and Workers AI answering nothing, in 42 s and 147 requests, every robots.txt
+  followed. 41 prices were confirmed without AI. It found the fixes above (pages read twice by a provider and its
+  bundles, the smaller icons, `&reg;` undecoded, which likely made SerialCart's quote look gone) and that many pages
+  are rendered by scripts (Proton, Crave, TSN, RDS, Disney+'s help pages): on a real night those go to Workers AI
+  when their text has the plans, or to the 5 browser pages, else they're "needs manual check".
+- **Tests** (`apps/bot/test`, on Node with fakes): the four "done when" cases end to end on the real Netflix and
+  Mullvad files (a changed price, a changed logo, a taxIncluded quote gone and a reseller no longer named each make a
+  PR, with the edited file passing its schema), a quiet night opening none, a failed step, and the parts: page text,
+  amounts, tax wording, robots.txt, the YAML edits on real files, the guardrails, the browser and AI budgets, logos,
+  the step plan, the PR's text and GitHub's calls (one branch, one PR refreshed, never a merge).
+
+**Resolved (2026-10-28, M8.2)**
+- **Optimizations** (PROJECT-PLAN P14) is "Optimizations" under the back button by the list's name, with "Save up to
+  $830.88 a year" (the yellow plan's savings, ≈ when estimated, shown while a card is) and an ⓘ button whose tooltip
+  gives the rules (Needed never lost in a month it's needed, Essential keeps the plan, Critical the provider, savings
+  over the next 12 months with tax, each change on the item's next charge). Then the sections in P14's order, each
+  heading with its colour dot and what it means: Free savings ("nothing is lost", the user's choice in M8.1),
+  Recommended, Suggested and Worth a look. "Show dismissed (n)" comes last, once something is dismissed.
+- **A card** (`ss-suggestion-card`) has its section's colour as a stripe, its changes (core's `actionTitle`, a line
+  each), "Save $138.60 over the next 12 months" with an Estimated tag (focusable, with a tooltip) when converted
+  prices are in it, a line per change with the prices it goes from and to (`ss-price`) and when ("From Nov 20, 2026",
+  "Ends Nov 21, 2026 instead of renewing"), then "You lose:" (each removed item "itself", by its title, then each
+  feature with its rank's dot and name) and "You gain:". Apply and Dismiss are named for the changes ("Apply: Switch
+  Disney+ Premium to annual billing"); a dismissed card shown again has Show again.
+- **Apply** starts or resumes the list's draft, puts the card's edits on it in one write (core's `suggestionEdits` and
+  `withDraftEdits`, `DraftsRepository.applyEdits`) and opens the editor, so nothing is saved until Save. The edits
+  follow the user's choice, at the next renewal: a removed or replaced item gets its next charge as its end date (an
+  item that would only start then, or Specific dates, which have no end date, leaves the draft); a plan or billing
+  change keeps the item, re-anchored on its next charge, without its price override, with the add-ons its new plan
+  allows; an extra member is added to the host; a bundle or suite is a new item from the earliest next charge, with the
+  replaced items' tags and pins, and their own ranks (the more important where two rank a key). When the draft's
+  unsaved changes took out an item the card changes, the snackbar says so and nothing is applied.
+- **Dismiss** stores the card's fingerprint in `dismissedSuggestions` (`DismissedSuggestionsRepository`), says
+  "Dismissed until the list changes" with Undo, and moves focus to the next card's heading (else the one before, else
+  Show dismissed). Show again soft-deletes the record. A change to the list gives new fingerprints, so the card comes
+  back.
+- **`dismissedSuggestions`** (core's `user/dismissed-suggestion.ts`): `{ fingerprint, listId, createdAt, updatedAt,
+  deletedAt? }`, keyed by the fingerprint (16 lowercase hex digits). Dexie v3 indexes `listId` and empties the table
+  (section 4.6). The app lock seals it, with `fingerprint` and `listId` plain. Backups carry it: the file is version 2,
+  and a version 1 file is read with no dismissals.
+- **List view** (P4): `ss-optimizations-link` after the feature summary, "View optimizations (9)" with a dot and the
+  outline in the strongest suggestion's colour (red, then orange, then yellow; green, `--suggest-free` from Wanted's,
+  for free savings alone, the user's choice), named "View optimizations (9), the strongest: Recommended"; "No
+  suggestions" in a neutral outline; "View optimizations" while they're found. Core's `suggestionSummary` counts what
+  isn't dismissed.
+- **Where it runs** (`OptimizerService`): its input from MetricsService's priced items (once none waits for its
+  catalog file), the catalog file of each item's region, the rates, the settings' country, currency and tax place
+  (nothing else of the settings), and the ranks. Up to 12 items run on the page: under 10 ms in Node (M8.1), well under
+  50 ms on a slow phone. A bigger list goes to a Web Worker (`optimizer.worker.ts`, bundled by Angular as
+  `worker-<hash>.js`). If the worker can't start or load, it runs on the page instead.
+- **The worker under the production CSP:** Trusted Types make a Worker's URL a script sink, and Angular bundles a
+  worker only for `new Worker(new URL('./x.worker', import.meta.url))`. `optimizer-worker.ts` shadows `Worker` with a
+  subclass that passes the URL through a policy of its own, `simply-sub#worker`, which takes only this origin's
+  `worker-*.js` files. `_headers` adds `worker-src 'self'`, the policy to `trusted-types`, and a year's immutable cache
+  for `/worker-*.js`. No `blob:` URL and no eval: the worker imports `zod-setup.ts` first, so Zod never tries
+  `new Function`. Checked in Edge under `wrangler dev`: a 14-item list optimized in the worker, with no CSP or Trusted
+  Types violations, and `csp-check.cjs` passes.
+- **Browser checks:** `check-optimizations.cjs` (new) passes 90/90 on `ng serve` and under `wrangler dev`, and the
+  reruns pass: list view 187, list editor 77, backups 81, app lock 159, shell 51, Settings 80.
+- **Bundles:** the initial bundle grew 0.04 kB (497.31 kB of 500). The optimizer, its service and the worker's starter
+  are a chunk List view and the page share (14.2 kB raw, 5.8 kB gzipped); the page is 18.2 kB (6.1 kB); List view went
+  from 38.7 to 41.0 kB raw; the worker is 159 kB raw (44 kB transferred), with Zod and the catalog code it needs.
+
+**Resolved (2026-10-28, M8.1)**
+- **The optimizer** (section 10) is core's `optimizer/`: `optimize({ items, catalogs, context, cards? })`, where
+  `items` are a list's resolved items (MetricsService's), `catalogs` the catalog file of each region they're priced
+  in, `context` today, the user's country, currency, rates, tax place and profile ranks, and `cards` a slot for M9.
+  It returns `{ suggestions, bestSavings, bestEstimated, currency, next12, search }`. Nothing reads the clock.
+- **Money:** every amount is the next 12 months (PROJECT-PLAN §3.1) from the schedule engine, sales tax included:
+  each option's new item is resolved with `resolveItem` and charged with `itemCharges`. An item with a charge in
+  another currency (no rate) stays as it is, and a card with a converted price is `estimated`.
+- **When a change takes effect:** on the item's next charge, so what's paid for is used up first. A bundle or suite
+  starts on the earliest next charge of the items it replaces. A change drops the item's price override (it was for
+  the old plan) and keeps the add-ons the new plan allows, within its limit; `reperiod` keeps a billing day that
+  still applies. Specific dates keep their windows and period: they're never moved to annual billing.
+- **Candidates** (section 10.3), each kept only when it costs less over the 12 months than what it replaces:
+  annual billing (an item that renews by itself, to a yearly price that does too); another plan of the provider,
+  its free plan too (`downgrade` when it gives a subset, else `switch`), on the item's period or yearly; removal;
+  an extra member (an add-on with `grantsPlan` on another item of the same provider, within the host plan's
+  `addOnLimit`, up to 3 at once); a bundle whose plans' providers are the items' (one item per plan, at least two);
+  and a suite plan whose `includes-subscription`, followed through, has the items' plans, with up to
+  `account.users` copies of each. A bundle item the list has can move to annual billing only. The 7th action (a card)
+  is a `card` action kind M9 fills in.
+- **The rules, the user's choices:**
+  - **Coverage is per item:** ranks are an item's own, so a plan change, an extra member, a bundle or a suite is
+    judged on what replaces that item. Only a removed item's features can be kept by other items, of another
+    provider: the overlap that's the reason to remove it. Netflix moving to ads loses Ad free even when Disney+ is
+    ad-free.
+  - **Another item of the same provider never counts:** it's someone's own account (two Netflix accounts for two
+    family members), so a copy is never removed for overlap. It can become an extra member, or both move to a suite
+    with enough users.
+  - **Removing an item loses its service itself**, which no feature describes: yellow, or orange or red when every
+    key it provides is ranked Unused or Unwanted. Removal is suggested **only with a reason**: another provider's
+    item gives one of its keys in every month it would still have been active (two VPNs, never both), or every key
+    it gives is Unused or Unwanted. A service nothing overlaps isn't suggested for removal, so a list with nothing
+    ranked isn't told to cancel everything.
+  - **Free savings lose nothing at all.** Losing a Not-ranked feature is red, as section 10.4 says; P14's "nothing
+    you rank is lost" became "nothing is lost".
+  - **Hard constraints** (section 10.2) are checked month by month: an item's Needed, Critical and Essential keys
+    must be kept for it in every slot it's active in. Essential allows annual billing and a bundle with the same plan
+    only; Critical allows the provider's plans that give its Critical keys, a bundle's or suite's that do, and never
+    removal.
+- **Cards** are per-level plans (the user's choice): for each severity (free, red, orange, yellow) the cheapest valid
+  combination, its plan. A plan's changes are split into cards that can be applied on their own: two changes share a
+  card when an item's key, in some month, is given neither by its own change nor by an item left as it is, and the
+  other change gives it or takes away an item that gave it (removing both of two overlapping services, a bundle that
+  brings what another change takes). Each section lists its own plan's cards of its severity, so a section's cards
+  never conflict and their savings add up; a card in a looser section can be an alternative to one in a stricter
+  section for the same item (Disney+ billed yearly in Free, Standard billed yearly in Red). "Save up to" is the
+  yellow plan's savings.
+- **The coverage map** (section 10.1) is 12 slots, a month each from today, with a bit per slot an item is active
+  in (`optimizer/coverage.ts`): Ongoing from its start date until its end date, a window through its end, copied
+  into each year when it repeats.
+- **Search** (section 10.4): the list splits into parts whose items can't affect each other (no check depends on
+  both, no option has both), each searched alone. A part with up to 10^5 combinations is searched exhaustively,
+  depth first, the costliest items first, pruned by cost (a lower bound: each item's cheapest option, an option of
+  several split evenly) and by checks that fail as soon as the items they depend on are decided. A bigger part gets
+  greedy search, the change that saves the most each time, then pairs of changes that interact (local improvement),
+  within 20,000 judged combinations per severity; a looser severity's plan is never worse than a stricter one's.
+- **Fingerprints** are 16 hex digits, two FNV-1a hashes of the list's items as the optimizer read them (id, source,
+  region, billing, price override and each provided key's rank) and the card's changes. The same list gives the same
+  ones on every run and device; changing an item, re-anchoring it or a rank its keys have gives new ones. The item
+  ids are random, so a fingerprint (the dismissal's key, plain under the app lock) can't be matched to plans by
+  guessing.
+- **Words** (`suggestion-text.ts`): "Switch Disney+ Premium to annual billing", "Downgrade Netflix Premium →
+  Standard", "Remove Mullvad VPN", "Make Sam's (Netflix Standard) an extra member on Mine (Netflix Standard)",
+  "Replace Proton Mail Plus and Proton VPN Plus with Proton Unlimited". Items keep their nicknames (`itemTitle`).
+- **Fixtures** (`test/optimizer/`, a small catalog with fixed prices, Alberta's 5% GST): annual billing (and none
+  for a plan renewed by hand), a bundle, a suite, red, orange and yellow downgrades, the two VPN cases, Essential,
+  Critical, a Sep–Oct window keeping a Needed feature covered, duplicates across family members with extra members,
+  three Netflix accounts onto Premium's two extra members, Mullvad's euros (estimated), a plan billed on the 31st,
+  a window plan changed in place, a payment due today, a 16-item list that needs greedy search, and fingerprints.
+  The cards and their colours are inline snapshots.
+- **Speed** (Node, one run): under 10 ms up to 12 items, 14 ms at 15, 21 ms at 16 and 59 ms at 20 (greedy). M8.2
+  runs it in a Web Worker for bigger lists.
+- **Bundles:** the initial bundle didn't change (497.3 kB): nothing in the app imports the optimizer yet.
 
 **Resolved (2026-10-28, M7.6)**
 - **The budget warnings** (PROJECT-PLAN §3.1) are `ss-budget-warnings`, on core's checks (`ListMetrics.warnings`,

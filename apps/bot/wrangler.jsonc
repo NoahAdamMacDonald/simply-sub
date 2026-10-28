@@ -1,0 +1,38 @@
+// The "simply-sub-bot" Worker: the nightly price check (BLUEPRINT §6.4, §7.7, M8.3). A cron trigger starts a Workflow
+// that checks each provider's pages, step by step, and opens or refreshes one "Price updates YYYY-MM-DD" pull request
+// through the GitHub REST API. It never merges, and it never writes to the catalog: Git is the source of truth.
+// Not deployed by Workers Builds: deploying it, and its GITHUB_TOKEN secret, are the project owner's to do.
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "simply-sub-bot",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  // @cloudflare/playwright, for Browser Rendering, needs Node's APIs.
+  "compatibility_flags": ["nodejs_compat"],
+  // 03:00 UTC every night.
+  "triggers": { "crons": ["0 3 * * *"] },
+  // One instance a night, named for the date: a step per provider and per bundle, each retried, then the pull request.
+  "workflows": [
+    { "name": "simply-sub-price-check", "binding": "PRICE_CHECK", "class_name": "PriceCheck" },
+  ],
+  // Workers AI reads a price off a page when the stored amount isn't on it (10,000 Neurons a day on the free plan).
+  "ai": { "binding": "AI" },
+  // Browser Rendering, only for pages whose text a plain fetch doesn't get (10 browser-minutes a day on the free plan).
+  "browser": { "binding": "BROWSER" },
+  // The catalog as deployed (BLUEPRINT §5.3), for its prices and their sources. The bot only reads it: D1 has no
+  // read-only binding, so every query goes through src/catalog.ts, which runs SELECTs only.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "simply-sub-catalog",
+      "database_id": "bddf9622-ec55-4c38-8fb7-350a16f98fb2",
+    },
+  ],
+  // The repository the pull request goes to. GITHUB_TOKEN is a secret: a fine-grained token for this repository only,
+  // with Contents and Pull requests read and write (`wrangler secret put GITHUB_TOKEN`).
+  "vars": { "GITHUB_REPOSITORY": "NoahAdamMacDonald/simply-sub", "GITHUB_BASE": "main" },
+  // No public URL: it has nothing to serve.
+  "workers_dev": false,
+  "preview_urls": false,
+  "observability": { "enabled": true },
+}

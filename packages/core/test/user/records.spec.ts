@@ -11,6 +11,7 @@ import {
   card,
   catalogCache,
   customSub,
+  dismissedSuggestion,
   draft,
   fxCache,
   item,
@@ -32,6 +33,7 @@ describe('userRecordSchemas', () => {
     ['settings', settings],
     ['catalogCache', catalogCache],
     ['drafts', draft],
+    ['dismissedSuggestions', dismissedSuggestion],
     ['fxRates', fxCache],
   ] as const)('checks the %s table with its record schema', (table, record) => {
     expect(userRecordSchemas[table].safeParse(record).success).toBe(true);

@@ -8,6 +8,8 @@ import {
   savedList,
   softDeleted,
   startDraft,
+  withDraftEdits,
+  type DraftEdit,
   type ListDraft,
   type ListItem,
   type Timestamp,
@@ -112,6 +114,16 @@ export class DraftsRepository {
       items: [...current.items, { item }],
     }));
     return draft.items.find((entry) => entry.item.id === id)?.item ?? item;
+  }
+
+  /**
+   * Makes several edits to a list's draft in one write (P14's Apply): changes, removals, and items added with new ids.
+   * Returns the draft as stored.
+   */
+  async applyEdits(listId: string, edits: readonly DraftEdit[]): Promise<ListDraft> {
+    const now = this.storage.now();
+    const ids = edits.map((edit) => (edit.kind === 'add' ? this.storage.newId(now) : undefined));
+    return this.change(listId, (draft, at) => withDraftEdits(draft, edits, ids, at));
   }
 
   /**

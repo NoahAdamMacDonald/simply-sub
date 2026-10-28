@@ -23,13 +23,18 @@ export function createUserDatabase(options?: DexieOptions): Dexie {
     cards: 'id',
     tags: 'id',
     settings: 'key',
-    // Their record schemas come with their tasks: the catalog snapshot (M4.3), unsaved list edits (P5, M6.3) and
-    // dismissed optimizer suggestions (P14, M8.2). A schema for a table nothing has written to needs no new version.
+    // Their record schemas came with their tasks: the catalog snapshot (M4.3), unsaved list edits (P5, M6.3) and
+    // dismissed optimizer suggestions (P14, M8.2, version 3).
     catalogCache: 'key',
     drafts: 'listId',
     dismissedSuggestions: 'fingerprint',
   });
   // The last exchange rates fetched (M4.4). A new table needs no upgrade function.
   db.version(2).stores({ fxRates: 'key' });
+  // Dismissed optimizer suggestions get their record schema (M8.2), and an index of their list. Until now the table had
+  // no schema and nothing wrote to it, so whatever is there wasn't written by the app: the upgrade empties it.
+  db.version(3)
+    .stores({ dismissedSuggestions: 'fingerprint, listId' })
+    .upgrade((transaction) => transaction.table('dismissedSuggestions').clear());
   return db;
 }

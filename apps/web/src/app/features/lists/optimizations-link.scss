@@ -1,0 +1,39 @@
+:host {
+  display: block;
+}
+
+// The strongest suggestion's colour as the outline and a dot; a neutral outline without suggestions (P4).
+.link {
+  width: 100%;
+  justify-content: start;
+
+  &[data-strongest] {
+    --mat-button-outlined-outline-color: var(--strongest);
+  }
+
+  &[data-strongest='free'] {
+    --strongest: var(--suggest-free);
+  }
+
+  &[data-strongest='red'] {
+    --strongest: var(--suggest-hard);
+  }
+
+  &[data-strongest='orange'] {
+    --strongest: var(--suggest-normal);
+  }
+
+  &[data-strongest='yellow'] {
+    --strongest: var(--suggest-soft);
+  }
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background-color: var(--strongest);
+  box-shadow: 0 0 0 1px var(--ss-dot-ring);
+}

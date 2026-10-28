@@ -29,10 +29,7 @@ export type AppLock = z.infer<typeof appLockSchema>;
 /** What the check value holds, and what it's bound to (GCM's additional data). */
 export const lockCheck = { text: 'simply-sub app lock', boundTo: 'simply-sub:lock:check' } as const;
 
-/**
- * The tables the lock seals: every user table but the caches, which are public (BLUEPRINT §11.5). dismissedSuggestions
- * joins with its schema (M8.2).
- */
+/** The tables the lock seals: every user table but the caches, which are public (BLUEPRINT §11.5). */
 export const lockedTables = [
   'settings',
   'lists',
@@ -42,6 +39,7 @@ export const lockedTables = [
   'cards',
   'tags',
   'drafts',
+  'dismissedSuggestions',
 ] as const satisfies readonly UserTable[];
 export type LockedTable = (typeof lockedTables)[number];
 
@@ -63,6 +61,7 @@ export const lockPlainFields = {
   cards: ['id'],
   tags: ['id'],
   drafts: ['listId'],
+  dismissedSuggestions: ['fingerprint', 'listId'],
 } as const satisfies Record<LockedTable, readonly string[]>;
 
 /** The fields kept in plain text only, never sealed: the lock's own settings, so Lock after changes with no key. */

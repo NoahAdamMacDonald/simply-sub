@@ -319,6 +319,27 @@ pressing the arrows: keys sent while it opens land elsewhere. A closing menu sta
 `.mat-mdc-menu-panel:not(.mat-menu-panel-exit-animation)`. Material nests two `.mat-mdc-snack-bar-label`s, and the live
 announcer holds the same words: take the first.
 
+`check-optimizations.cjs` (M8.2) checks Optimizations (P14) and List view's View optimizations on the real catalog, for
+a Canadian in Alberta. It writes to IndexedDB Family (Netflix Standard twice, Mine and Sam's; Disney+ Premium monthly;
+Mullvad VPN; Proton VPN Plus) with VPN ranked Needed, and prints the cards it finds. In both themes at both widths,
+keyboard only:
+- List view's link: its count, `data-strongest` and its name ("View optimizations (9), the strongest: Recommended"),
+  reached by Tab after the side column, Enter opening the page;
+- the sections in P14's order, every card's saving, as many cards as List view counted, the extra member for the two
+  Netflix accounts in Free savings (a removal of one only in Worth a look), Save up to, the back button by the list's
+  name and first in the Tab order, the rules' tooltip on Tab, Dismiss right after Apply with the same changes;
+- Dismiss by Enter: one card fewer, focus on a card's heading, the snackbar with Undo; Show dismissed by Space and
+  back; a reload keeping it dismissed (one row in `dismissedSuggestions`); List view counting one fewer;
+- Apply by Enter: the editor, the list's draft in IndexedDB with the change, the items table as it was.
+
+Then a 14-item list, which the Web Worker optimizes (`page.on('worker')`). It logs `securitypolicyviolation` events as
+console errors, so under `wrangler dev` (base URL ending in `/`) it checks the production CSP too, the worker included.
+With axe on List view, the page, the tooltip and the snackbar, and no horizontal scroll.
+- A name with a colon comes back single-quoted from `ariaSnapshot()` (`'button "Apply: …"'`), its own quotes doubled:
+  its `focused()` parses the role and name.
+- The dev server serves the worker as `/worker-<hash>.js?worker_file&type=module`: match its path.
+- The real catalog's Proton Free has a VPN, so a Proton VPN Plus moving to it keeps VPN: the cards depend on the data.
+
 `check-budget-banners.cjs` (M7.6) checks the budget warnings on `ng serve` for a Canadian in Alberta with a $50 monthly
 and a $500 annual budget, written into the stored settings. Work Related has Netflix Standard and Crave Premium ($43.04
 a month), and Family Mullvad VPN (about $94.16 on Jan 20). In both themes at both widths, keyboard only:
