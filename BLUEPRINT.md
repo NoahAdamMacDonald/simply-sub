@@ -1720,10 +1720,12 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
 7. **No Cloudflare token in GitHub.** Workers Builds deploys with a token Cloudflare keeps (section 7.6), and
    GitHub's CI only checks code, so the repo has no Cloudflare secrets. The bot's GitHub token (M8.3) is a
    Worker secret on the Cloudflare side.
-8. **The bot** (M8.3, not done yet: the owner's to do): a fine-grained GitHub token for this repository only, with
-   Contents and Pull requests read and write, then `cd apps/bot && npx wrangler secret put GITHUB_TOKEN` and
-   `npx wrangler deploy`. Workers Builds doesn't deploy it (it isn't connected to it), so a change to `apps/bot`
-   reaches Cloudflare only by that deploy.
+8. **The bot** (M8.3): ✅ deployed on 2026-10-28 by the owner, with its `GITHUB_TOKEN` secret, a fine-grained token
+   for this repository only (Contents and Pull requests, read and write). Workers Builds doesn't deploy it (it isn't
+   connected to it), so a change to `apps/bot` reaches Cloudflare only by `npx wrangler deploy` in `apps/bot`, from
+   `main` once the change has merged. When the token expires, a new one replaces it with
+   `npx wrangler secret put GITHUB_TOKEN` (the value typed at its prompt, never on the command line), with no
+   redeploy: the next night uses it.
 
 ### 7.3 Serving the app from `sub.simplely.ca`
 The app and the API have the subdomain to themselves: **https://sub.simplely.ca/** for the app, and
@@ -2569,8 +2571,8 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
   `0 3 * * *` creates the night's Workflow instance (`price-check-<date>`, so a second trigger starts nothing), with
   AI and Browser bindings and the catalog D1, which it only reads (every query goes through a SELECT-only helper:
   D1 has no read-only binding). No public URL. It's built and type-checked by `npm run build` (a dry-run bundle:
-  3.3 MB, 679 KB gzipped, within the free plan's 3 MB) but not deployed: its token and its deploy are the owner's
-  (section 7.2).
+  3.3 MB, 679 KB gzipped, within the free plan's 3 MB), and deployed by hand: the owner deployed it on 2026-10-28
+  with its token (section 7.2).
 - **A night:** read the catalog's index from D1 (each provider's and bundle's pages, and every host); read the base
   branch (its commit, its logos' Git blob hashes, `data/resellers.yaml`); read each host's robots.txt once, 40 hosts a
   step; then a step per provider, with the bundles whose every page it cites, a step per group of the other bundles
