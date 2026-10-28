@@ -2295,7 +2295,7 @@ prompted after each big change, or weekly).
 
 **As built (M4.1)**, in `apps/web/src/app/core/storage/`:
 - **Repositories** (`ListsRepository`, `ItemsRepository`, `CustomSubsRepository`, `TagsRepository`,
-  `RankingsRepository`, `SettingsRepository`; cards come with M9.1) are `@Service()`s. Each streams a Dexie
+  `RankingsRepository`, `SettingsRepository`, and `CardsRepository` since M9.1) are `@Service()`s. Each streams a Dexie
   `liveQuery` of its whole table through `rxResource`, so every write, in any tab, updates every signal. They expose
   the valid, non-deleted records, a `status` (`loading`, `ready` or `error`) and computed lookups (`byId`,
   `byList`). A user has a few hundred records at most, so pages filter them with `computed()` instead of querying.
@@ -2555,6 +2555,34 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-28, M9.1)**
+- **Payment** (PROJECT-PLAN P11) is "Payment cards" with Add card, and under it "We never ask for card numbers, only
+  what's needed to estimate cash back and fees." A tile per card, two side by side where they fit: its nickname with
+  its name under it; the network and Credit or Debit as outlined badges (their names: no brand images); "1.5% cash
+  back · FX fee 2.5%"; "This month" with a budget bar of this month's charges paid with it against its limit ("≈
+  $114.10 of $500.00", in the card's currency at the ECB rate), or "No limit"; then the subscriptions paid with it,
+  from every list, each with what it costs a month today with sales tax (core's `monthlyWithTax`), and their total
+  ("≈ $27.79 / mo with tax"); then ✎ and 🗑. Under the tiles, "1 subscription has no card". With no cards, an empty
+  state. Core's `cardSummary` (`rewards/card-summary.ts`) gives a tile's figures.
+- **Amounts with tax** (the user's choice for P4's net costs, M9): cash back is earned on the amount charged, tax
+  included (section 4.8), so the card figures are with tax, as the totals are, and the price tags stay before tax.
+- **The card dialog** (`ss-card-dialog`, opened by `CardEditor`, so Material's dialog and it load on first use) has
+  section 9.2's fields and no more: Name, Nickname, Type, Network, Card currency (the user's for a new card), Cash
+  back ("Points cards: your own effective %"), FX fee ("Most Canadian cards charge 2.5%") and Monthly limit, in the
+  card's currency, empty for none. It starts with "Never enter a card number. Simply Sub never asks for one, …".
+  Cash back and FX fee left empty are 0. Core's `cardFormIssues` refuses 12 or more digits in a row in every field,
+  the number fields too (typed as text), and the schema now refuses a limit of 12 digits (`maxMonthlyLimit`) as well
+  as a name or nickname with a card number, so no import can store one either.
+- **Deleting** asks "Delete Everyday?" with how many subscriptions it pays for, in lists and drafts (core's
+  `cardUsage`): "2 subscriptions are paid with it, and will have no card." `CardsRepository.removeWithItems`
+  soft-deletes it and takes it off every item and draft in one transaction (core's `withoutCard`), as deleting a tag
+  does. Focus moves to the next tile's 🗑, else Add card.
+- **`CardsRepository`** on the `cards` table: create, update and soft delete through `RecordRepository`, every record
+  checked on the way in and out; the app lock seals its rows and backups carry them, as before.
+- **Bundles:** the initial bundle went from 497.31 to 496.39 kB (esbuild regrouped a shared chunk). The page is 13.1
+  kB raw (4.5 kB gzipped) and the dialog 8.7 kB (2.9 kB), both lazy.
+- **Browser checks:** `check-payment.cjs` (new) passes 89/89 on `ng serve`.
 
 **Resolved (2026-10-28, M8.3)**
 - **The free-tier limits** (the old open question 1), read on Cloudflare's pages on 2026-10-28 and recorded in

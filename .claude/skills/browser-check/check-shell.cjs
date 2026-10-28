@@ -11,8 +11,12 @@ const axePath = path.join(depsDir, 'node_modules', 'axe-core', 'axe.min.js');
 const WIDE = { width: 1280, height: 800 };
 const NARROW = { width: 360, height: 740 };
 const SIDEBAR = ['Home', 'Lists', 'Payment', 'Features', 'Calendar', 'Search', 'Settings'];
-/** The pages whose heading isn't their link's name (M6.2, M6.7). */
-const HEADINGS = { Lists: 'Subscription Lists', Features: 'Your feature ranks' };
+/** The pages whose heading isn't their link's name (M6.2, M6.7, M9.1). */
+const HEADINGS = {
+  Lists: 'Subscription Lists',
+  Payment: 'Payment cards',
+  Features: 'Your feature ranks',
+};
 const URLS = {
   Home: '/',
   Lists: '/lists',

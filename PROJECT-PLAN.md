@@ -209,7 +209,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 ### M9 — Payment (Phase 4)
 | ID | Task | Done when |
 |---|---|---|
-| M9.1 | Cards repo, Payment page and card dialog (P11) | P11 criteria met |
+| M9.1 | Cards repo, Payment page and card dialog (P11). As built: `CardsRepository` (with `usage` and `removeWithItems`), the page's tiles from core's `cardSummary` and `monthlyWithTax`, and the card dialog (`CardEditor`) on core's `cardFormIssues`, with `cardUsage` and `withoutCard` for deleting one (BLUEPRINT §14) | P11 criteria met |
 | M9.2 | `acceptedNetworks` in the data and the extraction pipeline (the schema has validated the field since M1.1) | The pipeline fills it |
 | M9.3 | core: eligibility, FX and cash-back maths, card assignment, limit checks (BLUEPRINT §9.3) | Tests pass |
 | M9.4 | Card select in the item dialog, net-cost displays, over-limit warnings | All visible on P4, P6, P10 and P11 |
@@ -1139,6 +1139,22 @@ We never ask for card numbers, only what's needed to estimate cash back and fees
 - Limit bar: this month's charges assigned to the card ÷ its limit. Going over shows the warning colour and flags that day on the calendar.
 - "Assign best cards" runs the assignment (BLUEPRINT §9.3) and shows a preview for each list. [Apply] writes `cardId` to the saved items, with Undo. Lists with an open draft are skipped, with a note.
 - Deleting a card asks for confirmation; its items become unassigned.
+
+**As built (M9.1):**
+- **Header:** "Payment cards" with Add card, and the line about card numbers under it. No cards: an empty state.
+- **Tiles:** two side by side where they fit, one under 600 px. Each has its nickname over its name, the network and
+  Credit or Debit as outlined badges (their names, not logos), "1.5% cash back · FX fee 2.5%", then "This month" with
+  a bar of this month's charges paid with it against its limit ("≈ $114.10 of $500.00", in the card's currency), or
+  "No limit". Then the subscriptions paid with it, from every list, each with what it costs a month with sales tax,
+  and their total ("≈ $27.79 / mo with tax", the user's choice in M9: the net costs are with tax too), then ✎ and 🗑.
+- **Under the tiles:** "1 subscription has no card". Assign best cards comes with M9.4.
+- **The dialog:** P11's fields in that order, the limit in the card's currency, starting with "Never enter a card
+  number…". Cash back and FX fee left empty are 0. 12 or more digits in a row are refused in every field, the number
+  fields too.
+- **Deleting:** "Delete Everyday?", with how many subscriptions it pays for, in lists and drafts ("…, and will have
+  no card."); focus then moves to the next tile's 🗑, else Add card.
+
+BLUEPRINT §14 has the details.
 
 **Acceptance**
 - [ ] Ineligible cards never appear for a provider whose networks are known

@@ -351,6 +351,26 @@ a month), and Family Mullvad VPN (about $94.16 on Jan 20). In both themes at bot
 
 It runs axe on both pages with their warnings and checks for horizontal scroll.
 
+`check-payment.cjs` (M9.1) checks Payment (P11) on `ng serve` for a Canadian in Alberta. In both themes at both
+widths, keyboard only:
+- no cards: the heading, the line about card numbers and the empty state;
+- Add card by Tab and Enter: the dialog with focus on its heading, 720 px wide or the whole screen, its "Never enter a
+  card number"; Add with nothing filled in, each field's error and focus on the name; a card number refused in the
+  name and in the limit (nothing stored);
+- the card typed in field by field (Type and Network by typeahead), stored as typed (read from IndexedDB), the
+  snackbar and focus on its ✎;
+- Work Related written to IndexedDB (Netflix Standard on the 1st and Mullvad VPN on the 2nd of every month and year,
+  paid with it; Crave Premium with none): the tile's badges, rates, this month's "≈ $114.10 of $500.00", the
+  subscriptions with what they cost a month with tax ("≈ $27.79 / mo with tax"), the bar's name, and "1 subscription
+  has no card";
+- ✎ clearing the limit ("No limit", the field gone from the record), and focus back on ✎;
+- 🗑 asking with the count it pays for (focus on Cancel), then the card soft-deleted, its items with no card and focus
+  on Add card.
+
+It runs axe on the page, the dialog, its errors, the tile and the question, and checks for horizontal scroll. Wait
+about 600 ms before a screenshot of the dialog's errors: they fade in, and the limit's label floats up meanwhile.
+`check-shell.cjs` knows Payment's heading, "Payment cards".
+
 Since M7.1, the scripts check the charges:
 - `check-list-view.cjs`: Mullvad's "Renew by Nov 12", Netflix's next charge as charged in its details ("Next charge Nov
   12, 2026: $19.94, with $0.95 tax", Alberta's 5%), and Wrong date? by keyboard: the dialog filled in with focus in

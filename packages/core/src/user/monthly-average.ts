@@ -1,3 +1,6 @@
+import type { PickedPrice } from '../catalog/pick-price';
+import { salesTaxOn } from '../tax/charge-tax';
+import { buyerTaxPlace, type TaxPlace } from '../tax/sales-tax-rate';
 import type { ResolvedItem } from './resolved';
 
 /** What a list costs per month on average: P5's footer and P4's header ("≈ $62 / mo average"). */
@@ -42,7 +45,45 @@ export function monthlyIn(item: ResolvedItem, currency: string): number | undefi
     : undefined;
 }
 
+/** What an item costs a month with sales tax. */
+export interface MonthlyWithTax {
+  /** In the user's currency, sales tax included. */
+  amount: number;
+  /** It includes a converted price, so it's shown with ≈. */
+  converted: boolean;
+}
+
+/**
+ * What the item costs per month today with sales tax (P4's and P11's payment card figures, M9): its monthly equivalent
+ * and the tax its charges add, at the rate where it's bought (buyerTaxPlace), none on a price that includes it. Undefined
+ * when a price is in another currency, for want of an exchange rate.
+ */
+export function monthlyWithTax(
+  item: ResolvedItem,
+  currency: string,
+  place: TaxPlace,
+): MonthlyWithTax | undefined {
+  if (monthlyIn(item, currency) === undefined) return undefined;
+  const taxPlace = buyerTaxPlace(place, item.region);
+  let amount = 0;
+  for (const { price, count } of partsToday(item)) {
+    const monthly = price.monthlyEquivalent * count;
+    amount += monthly + salesTaxOn(monthly, price, taxPlace);
+  }
+  return { amount, converted: pricesToday(item).some((price) => !price.native) };
+}
+
 /** The prices that make up its monthly equivalent: the override while it applies, else its price and add-ons. */
 function pricesToday(item: ResolvedItem) {
-  return item.override ? [item.override] : [item.price, ...item.addOns.map((addOn) => addOn.price)];
+  return partsToday(item).map(({ price }) => price);
+}
+
+/** The same, each with how many of it the item has. */
+function partsToday(item: ResolvedItem): { price: PickedPrice; count: number }[] {
+  return item.override
+    ? [{ price: item.override, count: 1 }]
+    : [
+        { price: item.price, count: 1 },
+        ...item.addOns.map((addOn) => ({ price: addOn.price, count: addOn.quantity })),
+      ];
 }

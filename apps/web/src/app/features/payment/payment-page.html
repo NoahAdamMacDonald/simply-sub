@@ -1,1 +1,130 @@
-<h1>Payment</h1>
+<ss-page-header heading="Payment cards">
+  <button matButton="filled" type="button" class="add" (click)="create()">
+    <mat-icon>add</mat-icon>
+    Add card
+  </button>
+  <p subtitle class="subtitle">
+    We never ask for card numbers, only what's needed to estimate cash back and fees.
+  </p>
+</ss-page-header>
+
+@switch (state()) {
+  @case ('loading') {
+    <p class="note">Loading your cards…</p>
+  }
+  @case ('error') {
+    <p class="note">Your cards couldn't be read.</p>
+  }
+  @case ('ready') {
+    @if (tiles().length > 0) {
+      <ul class="tiles">
+        @for (tile of tiles(); track tile.card.id) {
+          <li class="tile" [attr.data-card]="tile.card.id">
+            <div class="top">
+              <div class="names">
+                <h2 class="title">{{ tile.title }}</h2>
+                @if (tile.name) {
+                  <p class="name">{{ tile.name }}</p>
+                }
+              </div>
+              <div class="badges">
+                <span class="badge">{{ tile.network }}</span>
+                <span class="badge">{{ tile.type }}</span>
+              </div>
+            </div>
+            <p class="rates">{{ tile.rates }}</p>
+
+            <!-- This month's charges paid with it against its limit (P11), ≈ read "about", as ss-price's is. -->
+            @if (tile.limit; as limit) {
+              <div class="limit">
+                <span class="limit-heading">This month</span>
+                <div class="line">
+                  <ss-budget-bar
+                    class="bar"
+                    [value]="limit.value"
+                    [max]="limit.max"
+                    [currency]="limit.currency"
+                    [attr.aria-label]="tile.title + ', this month against its limit'"
+                  />
+                  <span class="limit-total">
+                    <span aria-hidden="true">{{ limit.text.shown }}</span>
+                    <span class="visually-hidden">{{ limit.text.spoken }}</span>
+                  </span>
+                </div>
+              </div>
+            } @else {
+              <p class="no-limit">No limit</p>
+            }
+
+            <div class="subscriptions">
+              @if (pricesLoading()) {
+                <p class="muted">Loading prices…</p>
+              } @else if (tile.subscriptions.length === 0 && tile.unpriced === 0) {
+                <p class="muted">No subscriptions</p>
+              } @else {
+                <h3 class="visually-hidden">Subscriptions paid with {{ tile.title }}</h3>
+                <ul class="paid">
+                  @for (subscription of tile.subscriptions; track subscription.itemId) {
+                    <li>
+                      <span class="paid-title">{{ subscription.title }}</span>
+                      @if (subscription.amount; as amount) {
+                        <span class="paid-amount">
+                          <span aria-hidden="true">{{ amount.shown }}</span>
+                          <span class="visually-hidden">{{ amount.spoken }}</span>
+                        </span>
+                      }
+                    </li>
+                  }
+                </ul>
+                @if (tile.total; as total) {
+                  <p class="total">
+                    <span aria-hidden="true">{{ total.shown }}</span>
+                    <span class="visually-hidden">{{ total.spoken }}</span>
+                  </p>
+                }
+                @if (tile.unpriced > 0) {
+                  <p class="muted">
+                    {{
+                      tile.unpriced === 1
+                        ? '1 more can’t be priced'
+                        : tile.unpriced + ' more can’t be priced'
+                    }}
+                  </p>
+                }
+              }
+            </div>
+
+            <div class="buttons">
+              <button
+                matIconButton
+                type="button"
+                class="edit"
+                [attr.aria-label]="'Edit ' + tile.title"
+                (click)="edit(tile.card)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                matIconButton
+                type="button"
+                class="remove"
+                [attr.aria-label]="'Delete ' + tile.title"
+                (click)="remove(tile)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </li>
+        }
+      </ul>
+      @if (unassigned(); as text) {
+        <p class="unassigned">{{ text }}</p>
+      }
+    } @else {
+      <ss-empty-state icon="credit_card" heading="No cards yet">
+        Add the cards you pay for your subscriptions with, to see what each one earns back and costs
+        in fees.
+      </ss-empty-state>
+    }
+  }
+}

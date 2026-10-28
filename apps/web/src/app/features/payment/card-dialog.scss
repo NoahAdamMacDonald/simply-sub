@@ -1,0 +1,56 @@
+// The form wraps the dialog's title, content and actions, which the dialog lays out as its own children.
+form {
+  display: contents;
+}
+
+// The title, with ✕ on its right.
+.title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline-end: 12px;
+
+  h2 {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+
+    // Focus starts here so a screen reader begins at the title; it isn't a control, so it has no ring.
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+// What the dialog never asks for, first, before any field.
+.never {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0 0 16px;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-medium);
+
+  mat-icon {
+    flex: none;
+  }
+}
+
+// Fields side by side, wrapping onto the next line when the dialog is narrow. Each field's hint or error takes the
+// room it needs (subscriptSizing="dynamic"), and the gap keeps it from the next field's label.
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px 16px;
+  margin-bottom: 12px;
+
+  mat-form-field {
+    flex: 1 1 220px;
+  }
+
+  // Short values, which widen when they're alone on a line, so a hint or error fits under them.
+  .short {
+    flex: 1 1 160px;
+  }
+}
