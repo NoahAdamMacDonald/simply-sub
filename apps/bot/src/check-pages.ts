@@ -1,4 +1,4 @@
-import { readIconImage } from '@simply-sub/core';
+import { networksNamedIn, readIconImage } from '@simply-sub/core';
 import { pageShows, sameAmount, sameCurrency } from './amounts';
 import {
   extractionRequest,
@@ -8,14 +8,14 @@ import {
   type ExtractedPrice,
 } from './extraction';
 import { findIcon, gitBlobSha, toBase64, type Download } from './icons';
-import { excerpt, nameIndexes } from './page-text';
+import { comparable, excerpt, nameIndexes } from './page-text';
 import { missingQuotes, taxWording } from './tax-wording';
 import { priceText } from './targets';
-import type { ApprovalTarget, Budget, Finding, PriceTarget } from './types';
+import type { ApprovalTarget, Budget, Finding, NetworksTarget, PriceTarget } from './types';
 
 // One provider's (or bundle's, or reseller's) part of the nightly check (BLUEPRINT §6.4), a Workflow step: each of its
-// pages read once, its prices looked for on them, its taxIncluded quotes and resellers' approvals checked, and its
-// logo compared. A price whose stored amount is still on its page is confirmed without Workers AI; for the rest, the
+// pages read once, its prices looked for on them, its taxIncluded quotes, resellers' approvals and accepted card
+// networks checked, and its logo compared. A price whose stored amount is still on its page is confirmed without Workers AI; for the rest, the
 // model reads the page around the plans' names. Anything that can't be checked is for a person, never a guess.
 
 /** A page's text, or why there's none: robots.txt, an error status, a timeout. */
@@ -40,6 +40,8 @@ export interface CheckInput {
   subject: string;
   targets: PriceTarget[];
   approvals: ApprovalTarget[];
+  /** Each region's accepted card networks (BLUEPRINT §9.3). */
+  networks: NetworksTarget[];
   /** The provider's or reseller's website, and its committed logo's Git blob hash (none without one). */
   logo?: { id: string; website: string; committed?: string };
 }
@@ -125,6 +127,28 @@ export async function checkPages(
     if (missing.length > 0) findings.push({ kind: 'reseller', approval, missing });
   }
 
+  // A page of accepted networks that several regions cite (Disney+'s help centre) is judged for them together.
+  const networksByUrl = new Map<string, NetworksTarget[]>();
+  for (const target of input.networks) {
+    networksByUrl.set(target.url, [...(networksByUrl.get(target.url) ?? []), target]);
+  }
+  for (const [url, targets] of networksByUrl) {
+    const page = await read(
+      url,
+      targets.flatMap((target) => target.quotes),
+    );
+    if ('error' in page) {
+      findings.push({
+        kind: 'manual',
+        subject: targets.map(networksSubject).join(', '),
+        url,
+        reason: page.error,
+      });
+      continue;
+    }
+    findings.push(...networksFindings(page.text, targets));
+  }
+
   if (input.logo) {
     const icon = await findIcon(input.logo.website, deps.download);
     if (icon && (await gitBlobSha(icon.png)) !== input.logo.committed) {
@@ -154,6 +178,59 @@ export async function checkPages(
     }
   }
   return { findings, budget };
+}
+
+/** How the pull request names a region's accepted networks: "netflix's cards in CA". */
+function networksSubject(target: NetworksTarget): string {
+  return `${target.provider}'s cards in ${target.region}`;
+}
+
+/**
+ * What a page of accepted card networks says about the regions that cite it: a quote gone takes a region's networks
+ * out, for review, and a network the page names beside its quotes that the catalog doesn't list is for review too. A
+ * page that follows the reader's country shows one region's list at a time: when another region's quotes are all
+ * there, a region's missing ones are another country's list, which a person checks.
+ */
+export function networksFindings(text: string, targets: readonly NetworksTarget[]): Finding[] {
+  const judged = targets.map((target) => ({ target, missing: missingQuotes(text, target.quotes) }));
+  const shown = judged.some(({ missing }) => missing.length === 0);
+  return judged.flatMap(({ target, missing }): Finding[] => {
+    if (missing.length > 0 && shown) {
+      return [
+        {
+          kind: 'manual',
+          subject: networksSubject(target),
+          url: target.url,
+          reason: 'The page shows another country’s list of cards',
+        },
+      ];
+    }
+    const named = missing.length > 0 ? [] : namedBeside(text, target);
+    return missing.length > 0 || named.length > 0
+      ? [{ kind: 'networks', target, missing, named }]
+      : [];
+  });
+}
+
+/**
+ * How far each side of a target's quotes the page is read for networks: far enough for one more item in the list
+ * they're in, and short of the prose around it ("Discover what's new on Netflix").
+ */
+const listReach = 40;
+
+/** The networks the page names within reach of the target's quotes (all on the page) that the target doesn't list. */
+function namedBeside(text: string, target: NetworksTarget): string[] {
+  const page = comparable(text);
+  const spans = target.quotes.map((quote) => {
+    const wanted = comparable(quote);
+    const at = page.indexOf(wanted);
+    return { start: at, end: at + wanted.length };
+  });
+  const from = Math.max(0, Math.min(...spans.map((span) => span.start)) - listReach);
+  const to = Math.max(...spans.map((span) => span.end)) + listReach;
+  return networksNamedIn(page.slice(from, to)).filter(
+    (network) => !target.networks.includes(network),
+  );
 }
 
 /** Whether a fetched page needs the browser: it failed, or names none of its plans and shows no price at all. */

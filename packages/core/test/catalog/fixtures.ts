@@ -88,7 +88,13 @@ export const provider = {
   website: 'https://www.netflix.com',
   category: 'streaming',
   spendCategory: 'streaming',
-  acceptedNetworks: ['visa', 'mastercard', 'amex'],
+  acceptedNetworks: {
+    CA: {
+      networks: ['visa', 'mastercard', 'amex'],
+      url: 'https://help.netflix.com/en/node/116380/ca',
+      quotes: ['Visa', 'MasterCard', 'American Express'],
+    },
+  },
   billingCurrency: { CA: 'CAD', US: 'USD' },
   cancelUrl: 'https://www.netflix.com/cancelplan',
   sources: { pricing: 'https://help.netflix.com/en/node/24926' },

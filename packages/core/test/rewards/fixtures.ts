@@ -67,7 +67,7 @@ export function resolved(
   return result.resolved;
 }
 
-export const yearly: ListItem['billing'] = {
+export const yearly: Extract<ListItem['billing'], { mode: 'recurring' }> = {
   mode: 'recurring',
   interval: 'year',
   intervalCount: 1,

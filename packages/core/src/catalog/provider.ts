@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { cardNetworkNames, namesNetwork } from './card-networks';
 import { addDuplicateIssues, choices } from './checks';
 import { featureValueSchema } from './feature';
 import {
@@ -33,6 +34,41 @@ export const cardNetworkSchema = z.enum([
   'other',
 ]);
 export type CardNetwork = z.infer<typeof cardNetworkSchema>;
+
+/**
+ * The card networks a provider takes in one region, and its own page's words that name them (BLUEPRINT §9.3): what the
+ * nightly check looks for on that page.
+ */
+export const acceptedNetworksSchema = z
+  .strictObject({
+    networks: z
+      .array(cardNetworkSchema)
+      .min(1, 'List at least one network')
+      .describe('The networks it takes there: other for one not listed here'),
+    url: httpsUrlSchema.describe(
+      "The provider's own page that names them (payment methods, a help article, the checkout), on its website's domain or one of its domains",
+    ),
+    quotes: z
+      .array(textSchema)
+      .min(1, 'Quote the words that name them')
+      .describe(
+        'Where that page names the networks ("Visa", "American Express"), word for word, which the nightly check looks for',
+      ),
+  })
+  .superRefine((entry, ctx) => {
+    addDuplicateIssues(ctx, entry.networks, (index) => ['networks', index]);
+    const quoted = entry.quotes.join('\n');
+    entry.networks.forEach((network, index) => {
+      if (entry.quotes.length > 0 && network !== 'other' && !namesNetwork(quoted, network)) {
+        ctx.addIssue({
+          code: 'custom',
+          message: `No quote names ${cardNetworkNames[network]}: quote the page's words for it`,
+          path: ['networks', index],
+        });
+      }
+    });
+  });
+export type AcceptedNetworks = z.infer<typeof acceptedNetworksSchema>;
 
 export const planSchema = z
   .strictObject({
@@ -112,10 +148,13 @@ export const providerSchema = z
       'A spend category id from categories.yaml, for card rewards',
     ),
     acceptedNetworks: z
-      .array(cardNetworkSchema)
-      .min(1, 'Leave acceptedNetworks out when they are unknown')
+      .record(regionSchema, acceptedNetworksSchema)
+      .refine(
+        (byRegion) => Object.keys(byRegion).length > 0,
+        'Leave acceptedNetworks out when they are unknown',
+      )
       .describe(
-        'Card networks the provider accepts. Leave it out when unknown, and every card is allowed',
+        "Region → the card networks the provider takes there, quoted from its own page (GLOBAL: wherever it sells). A region it doesn't cover is unknown, and every card is allowed there",
       )
       .optional(),
     billingCurrency: z

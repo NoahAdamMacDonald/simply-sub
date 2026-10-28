@@ -3,6 +3,26 @@ name: Netflix
 website: https://www.netflix.com
 category: streaming
 spendCategory: streaming
+# Accepted cards, read 2026-10-28 (M9.2) on the help centre's payment options, one page per country: Canada takes
+# Visa, MasterCard and American Express, and the US adds Discover.
+acceptedNetworks:
+  CA:
+    networks: [visa, mastercard, amex]
+    url: https://help.netflix.com/en/node/116380/ca
+    quotes:
+      - We accept the following cards, which must be enabled for recurring e-commerce transactions.
+      - Visa
+      - MasterCard
+      - American Express
+  US:
+    networks: [visa, mastercard, amex, discover]
+    url: https://help.netflix.com/en/node/116380/us
+    quotes:
+      - 'We accept credit, debit, and virtual cards, as well as co-branded cards issued by local banks with the following logos:'
+      - Visa
+      - MasterCard
+      - American Express
+      - Discover
 billingCurrency: { CA: CAD, US: USD }
 cancelUrl: https://www.netflix.com/cancelplan
 sources: { pricing: https://help.netflix.com/en/node/24926 }

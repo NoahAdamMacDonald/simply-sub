@@ -1,4 +1,3 @@
-import type { CardNetwork } from '../catalog/provider';
 import type { ListDraft } from './list-draft';
 import type { ListItem } from './list-item';
 import type { PaymentCard } from './payment-card';
@@ -28,21 +27,6 @@ export const maxMonthlyLimit = 99_999_999_999;
 export function cardTitle(card: Pick<PaymentCard, 'name' | 'nickname'>): string {
   return card.nickname ?? card.name;
 }
-
-/** Each network's name, as a card's badge and the card dialog's menu say it. */
-export const cardNetworkNames: Readonly<Record<CardNetwork, string>> = {
-  visa: 'Visa',
-  mastercard: 'Mastercard',
-  amex: 'American Express',
-  discover: 'Discover',
-  interac: 'Interac',
-  unionpay: 'UnionPay',
-  jcb: 'JCB',
-  other: 'Other',
-};
-
-/** The networks in the card dialog's order: cardNetworkNames', with no schema to load. */
-export const cardNetworks = Object.keys(cardNetworkNames) as CardNetwork[];
 
 /**
  * How many subscriptions are paid with the card `cardId`: the items in lists and the ones in lists' unsaved edits

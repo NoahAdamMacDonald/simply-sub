@@ -2,7 +2,7 @@ import type { Price } from '@simply-sub/core';
 import type { PriceOwner } from './types';
 
 // Changes to the catalog's YAML files (BLUEPRINT §6.4), as the pull request makes them: a price's amount and
-// lastVerified, a taxIncluded quote taken out, a reseller's listing removed. Each finds its lines by their indentation
+// lastVerified, a taxIncluded quote taken out, a reseller's listing or a region's accepted networks removed. Each finds its lines by their indentation
 // and keys and changes only those, so comments and layout stay as people wrote them; Prettier formats every file the
 // same way (two spaces, a list's items under their key). CI's data:validate checks the result.
 
@@ -68,6 +68,22 @@ export function withoutReseller(text: string, reseller: string): string | undefi
   const listing = listings.find((item) => fieldValue(lines, item, 'reseller') === reseller);
   if (!listing) return undefined;
   const removed = listings.length === 1 ? resellers : listing;
+  lines.splice(removed.start, trimmedEnd(lines, removed) - removed.start);
+  return lines.join('\n');
+}
+
+/**
+ * `text` without the provider's accepted networks in `region` (and without `acceptedNetworks` once it's the last), so
+ * its cards there are unknown again.
+ */
+export function withoutAcceptedNetworks(text: string, region: string): string | undefined {
+  const lines = text.split('\n');
+  const accepted = keyBlock(lines, whole(lines), 0, 'acceptedNetworks');
+  if (!accepted) return undefined;
+  const regions = keyBlocks(lines, accepted, 2);
+  const entry = regions.find((block) => block.key === region);
+  if (!entry) return undefined;
+  const removed = regions.length === 1 ? accepted : entry;
   lines.splice(removed.start, trimmedEnd(lines, removed) - removed.start);
   return lines.join('\n');
 }
@@ -170,6 +186,19 @@ function keyBlock(lines: string[], within: Block, indent: number, key: string): 
     }
   }
   return undefined;
+}
+
+/** The blocks of a map's keys written at `indent` within `within` (a key's block runs to the next key). */
+function keyBlocks(lines: string[], within: Block, indent: number): (Block & { key: string })[] {
+  const found: (Block & { key: string })[] = [];
+  for (let index = within.start + 1; index < within.end; index++) {
+    const line = lines[index];
+    const key = /^([^\s#:][^:]*):/.exec(line.trimStart())?.[1];
+    if (indentOf(line) === indent && key !== undefined && !line.trimStart().startsWith('- ')) {
+      found.push({ start: index, end: blockEnd(lines, index, indent, within.end), indent, key });
+    }
+  }
+  return found;
 }
 
 /** The items of a list whose `- ` is at `indent` within `within`. */

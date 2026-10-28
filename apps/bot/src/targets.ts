@@ -1,10 +1,10 @@
 import { planTitle, type Bundle, type Price, type SnapshotProvider } from '@simply-sub/core';
 import type { CatalogIndex } from './run';
-import type { ApprovalTarget, PriceTarget } from './types';
+import type { ApprovalTarget, NetworksTarget, PriceTarget } from './types';
 
 // What the check looks at for each provider and bundle (BLUEPRINT §6.4): every price with a sourceUrl (its plans', its
-// add-ons', its resellers' offers'), and every reseller's approval. A price without one was read from a page that
-// can't be fetched (a checkout), so a person checks it.
+// add-ons', its resellers' offers'), every reseller's approval, and each region's accepted card networks (§9.3). A price
+// without a sourceUrl was read from a page that can't be fetched (a checkout), so a person checks it.
 
 export function providerFile(id: string): string {
   return `data/providers/${id}.yaml`;
@@ -70,6 +70,18 @@ export function approvalTargets(provider: SnapshotProvider): ApprovalTarget[] {
   }));
 }
 
+/** A provider's accepted card networks, a region at a time (BLUEPRINT §9.3). */
+export function networksTargets(provider: SnapshotProvider): NetworksTarget[] {
+  return Object.entries(provider.acceptedNetworks ?? {}).map(([region, accepted]) => ({
+    file: providerFile(provider.id),
+    provider: provider.id,
+    region,
+    networks: [...accepted.networks],
+    url: accepted.url,
+    quotes: [...accepted.quotes],
+  }));
+}
+
 export function bundleTargets(bundle: Bundle): PriceTarget[] {
   return sourced(bundle.prices).map((price) => ({
     file: bundleFile(bundle.id),
@@ -120,6 +132,7 @@ export function catalogIndex(
     index.providers[provider.id] = pagesOf([
       ...providerTargets(provider).map((target) => target.price.sourceUrl),
       ...approvalTargets(provider).map((approval) => approval.url),
+      ...networksTargets(provider).map((target) => target.url),
     ]);
   }
   for (const bundle of bundles) {

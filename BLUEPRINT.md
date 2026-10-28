@@ -462,7 +462,13 @@ name: Netflix
 website: https://www.netflix.com
 category: streaming                 # from categories.yaml
 spendCategory: streaming            # used for card-reward maths (section 9)
-acceptedNetworks: [visa, mastercard, amex, discover]   # omit = unknown → all cards allowed, with a warning
+acceptedNetworks:                   # the cards it takes, per region, quoted from its own page (section 9.3)
+  CA:
+    networks: [visa, mastercard, amex]
+    url: https://help.netflix.com/en/node/116380/ca
+    quotes: [Visa, MasterCard, American Express]   # word for word, which the nightly check looks for
+  US: { networks: [visa, mastercard, amex, discover], url: …, quotes: […] }
+  # a region left out (or the whole field) = unknown → every card allowed, with a hint
 billingCurrency: { CA: CAD }        # currency actually charged per region (drives FX-fee maths)
 cancelUrl: https://www.netflix.com/cancelplan   # required: its cancel page, or its help article on cancelling
 sources: { pricing: https://help.netflix.com/en/node/24926 }
@@ -726,7 +732,8 @@ interface Provider {
   domains?: string[];        // its other sites, whose pages can name its resellers (protonvpn.com)
   category: string;          // service category
   spendCategory: string;
-  acceptedNetworks?: CardNetwork[];          // left out = unknown
+  acceptedNetworks?: Record<string, {        // region (its group, or GLOBAL) → the cards it takes there (M9.2)
+    networks: CardNetwork[]; url: string; quotes: string[] }>;   // left out = unknown
   billingCurrency?: Record<string, string>;  // region → the currency charged there
   availableIn?: string[];    // every region it sells in, when known (section 4.7)
   cancelUrl?: string;
@@ -1518,6 +1525,8 @@ Cron trigger (03:00 UTC) → Workflow (one step per provider, automatic retries)
      │    opposite ("+ tax", "excl. VAT", "taxes calculated at checkout"); either is a change for review
      ├─ reseller prices too (section 4.9), and each reseller's approval: its quotes still on the provider's page;
      │    a reseller no longer named there is a change for review, and a sale price is never taken
+     ├─ each region's accepted card networks (section 9.3): its quotes still on its page, else the region's networks
+     │    are taken out, for review; a network named beside them that isn't listed is for review too
      on no change → bump lastVerified (batched into the same PR, or skipped to avoid noise)
      on failure  → list it in the PR body as "needs manual check"
 ```
@@ -1602,7 +1611,9 @@ use canonical ids, and it maps provider wording through `aliases`. The output co
 - each plan's sign-up `link` and the provider's `cancelUrl` (its cancel page or help article), which the schema
   requires
 - a plan's `categories` when it's in other service categories than its provider's (a suite's VPN plan)
-- **accepted card networks** (from the checkout or help page, for example "We accept Visa, Mastercard, Amex")
+- **accepted card networks** for each region the page covers (from the checkout or help page, for example "We
+  accept Visa, Mastercard, Amex"), with the page's URL on the provider's own site and its words quoted, each network
+  named in them (`acceptedNetworks`, M9.2); none when no page names them ("all major credit cards" names none),
   and the billing currency
 - an **evidence quote** for every price and feature (shown in the PR, so review is fast)
 - whether the prices **include tax** for every buyer ("Including VAT", "taxes included"), as `taxIncluded` with
@@ -2177,8 +2188,11 @@ or nickname with 12 or more digits in a row (spaces and dashes between them incl
 
 ### 9.3 Calculations (`packages/core/src/rewards/`)
 **Which cards can pay for a subscription:**
-- A card is eligible if `provider.acceptedNetworks` includes its network.
-- If the provider's networks are **unknown**, every card is allowed and shown with an "acceptance not confirmed" hint.
+- A card is eligible if the provider's `acceptedNetworks` for the item's region (else its group, else `GLOBAL`)
+  include its network. Since M9.2 they're per region, since a provider can take other cards in another country
+  (Netflix takes Discover in the US, not in Canada), each quoted from its own page (section 4.3).
+- If the provider's networks are **unknown** there, every card is allowed and shown with an "acceptance not
+  confirmed" hint.
 - Ineligible cards are hidden from the item's card dropdown, and the optimizer never assigns them.
 
 **Effective monthly cost of an item on a card:**
@@ -2555,6 +2569,38 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-28, M9.2)**
+- **`acceptedNetworks` is per region, quoted** (the user's choice): a map keyed like `billingCurrency` (a country, a
+  group such as EU, or GLOBAL), each entry `{ networks, url, quotes }`: the networks, the provider's own page that
+  names them, and its words, word for word. Netflix showed why: its Canadian page lists Visa, MasterCard and American
+  Express, and its US page adds Discover. The schema (`acceptedNetworksSchema`) needs each network named in the quotes
+  (core's `card-networks.ts`: `namesNetwork`, `networksNamedIn`, MasterCard or Mastercard, Amex or American Express;
+  `other` needs no name), and `validateCatalog` a real region and a page on the provider's own domains. A region left
+  out is unknown. The API shows the map as written (the contract's examples changed with it), the D1 tables don't
+  change, and a downloaded catalog file with the old list fails its schema in the browser and is downloaded again,
+  as any cached file that doesn't read is (M4.3), so it needs no Dexie version.
+- **The data, read 2026-10-28:**
+  - Netflix: Canada Visa, MasterCard and American Express; the US adds Discover (`help.netflix.com/en/node/116380/ca`
+    and `/us`).
+  - Disney+: Canada JCB, Visa, Mastercard, American Express and Diners Club (`other`); the US Visa (the Disney Visa
+    too), Mastercard, American Express and Discover. One help article, whose list follows the country picked.
+  - Hulu (US): American Express, Visa, Mastercard and Discover, U.S. cards only. ESPN (US): Visa (the Disney Visa too),
+    Mastercard, Amex and Discover.
+  - Proton (GLOBAL): Visa, Mastercard and American Express, in `/pricing`'s FAQ; its support page says only "all
+    major credit and debit cards".
+  - None named, so none stored (each file's comment says what its pages said): Mullvad ("credit card"; the card
+    checkout needs an account), Crave, TSN and RDS (Bell Media's help says "credit card", and the payment details are
+    behind a sign-in), and ICI TOU.TV ("par carte de crédit").
+- **The pipeline:** M3's scripts aren't built, so the price-research skill (its new rule) and section 6.5's extraction
+  (for M3.4) record it, and the nightly bot rechecks it (section 6.4): each region's page is read once a night with
+  the rest; a quote gone takes the region's networks out (`withoutAcceptedNetworks`), for review, so its cards are
+  unknown again; a network named within 40 characters of the quotes that isn't listed is for review, since only the
+  page's words can add one. A page several regions cite (Disney+'s) shows one country's list at a time, so when
+  another region's quotes are all there, a region's missing ones are "needs manual check", never a removal. The bot's
+  bundle is 680.8 KiB gzipped. It needs redeploying from main once this is merged (section 7.2).
+- **The skill's driver:** Disney+'s help centre picker is now a button named "Change country or language", showing a
+  flag and the language; `read-page.cjs`'s `country:` step finds it by that name.
 
 **Resolved (2026-10-28, M9.1)**
 - **Payment** (PROJECT-PLAN P11) is "Payment cards" with Add card, and under it "We never ask for card numbers, only

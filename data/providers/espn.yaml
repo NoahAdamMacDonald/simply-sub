@@ -4,6 +4,19 @@ aliases: [espn+, espn plus]
 website: https://www.espn.com
 category: streaming
 spendCategory: streaming
+# Accepted cards, read 2026-10-28 (M9.2) on ESPN Fan Support's Payment Methods for ESPN Select or Unlimited: Visa
+# (the Disney Visa too), Mastercard, Amex and Discover.
+acceptedNetworks:
+  US:
+    networks: [visa, mastercard, amex, discover]
+    url: https://support.espn.com/hc/en-us/articles/40377318634004-Payment-Methods-for-ESPN-Select-or-Unlimited
+    quotes:
+      - 'You can purchase an ESPN subscription through any of the following payment methods:'
+      - Disney Visa
+      - Visa
+      - Mastercard
+      - Amex
+      - Discover
 billingCurrency: { US: USD }
 # No availableIn: plus.espn.com, whose plans page says who can subscribe, answers this machine (in Canada) with Access
 # Denied, and the support centre states no country list. Disney+'s bundles with ESPN are for "U.S. residents, 18+

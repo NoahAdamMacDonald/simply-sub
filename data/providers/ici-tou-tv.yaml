@@ -4,6 +4,8 @@ aliases: [tou.tv, toutv, tou tv, ici toutv, extra]
 website: https://ici.tou.tv
 category: streaming
 spendCategory: streaming
+# Accepted cards, read 2026-10-28 (M9.2): none named, so no acceptedNetworks. The terms (/abonnement/condition) say
+# only "Vos paiements doivent être effectués par carte de crédit."
 billingCurrency: { CA: CAD }
 # ici.tou.tv/abonnement, read 2026-10-26: "Les contenus d’ICI TOU.TV ne sont pas accessibles à l’extérieur du
 # Canada."

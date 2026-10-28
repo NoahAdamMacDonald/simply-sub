@@ -13,6 +13,8 @@ import { catalogIndex } from '../src/targets';
 import mullvadPricing from './fixtures/mullvad-pricing.html?raw';
 import mullvadResellers from './fixtures/mullvad-resellers.html?raw';
 import netflixCa from './fixtures/netflix-ca.html?raw';
+import netflixPaymentCa from './fixtures/netflix-payment-ca.html?raw';
+import netflixPaymentUs from './fixtures/netflix-payment-us.html?raw';
 
 // A night's world for the tests: the real Netflix and Mullvad files as the catalog has them, their pages as fixtures
 // (a page that isn't here answers 404), their icons, a Workers AI that answers as told, and a GitHub that keeps the
@@ -57,6 +59,8 @@ export function storedWorld(): World {
   return {
     pages: {
       'https://help.netflix.com/en/node/24926/ca': netflixCa,
+      'https://help.netflix.com/en/node/116380/ca': netflixPaymentCa,
+      'https://help.netflix.com/en/node/116380/us': netflixPaymentUs,
       'https://mullvad.net/en/pricing': mullvadPricing,
       'https://mullvad.net/en/help/partnerships-and-resellers': mullvadResellers,
       'https://www.netflix.com/': '<link rel="apple-touch-icon" href="/icon-180.png">',

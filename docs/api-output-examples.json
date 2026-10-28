@@ -7,7 +7,7 @@
     "conventions": {
       "envelope": "Success: { data, meta }. Failure: { error: { code, message, details? } }.",
       "docKeys": "Keys starting with '_' are documentation notes and never appear in real responses.",
-      "optionalFields": "Optional fields are omitted when empty or unknown. For example, a provider without acceptedNetworks means 'unknown', so every card is allowed; a provider without availableIn sells where it has prices, and elsewhere it's unknown whether it sells; and a provider without iconUrl has no logo, so the app shows its first letter.",
+      "optionalFields": "Optional fields are omitted when empty or unknown. For example, a provider without acceptedNetworks, or without the buyer's region (its group, or GLOBAL) in them, takes cards that are 'unknown', so every card is allowed; a provider without availableIn sells where it has prices, and elsewhere it's unknown whether it sells; and a provider without iconUrl has no logo, so the app shows its first letter.",
       "ids": "Stable slugs: provider 'netflix', plan 'netflix.standard', add-on 'netflix.extra-member', bundle 'bundle.disney-crave-premium', feature 'video.quality'.",
       "rankKeys": "Boolean feature: '<featureId>'. Enum or set value: '<featureId>=<valueId>'. Number tier: '<featureId>=<tierId>'. A plan provides an enum key when its value is at least that value, and a tier key when its number is at least the tier's min (PROJECT-PLAN.md §3.2).",
       "money": "Amounts are decimals in the currency's major unit (18.99 = $18.99). Currencies are ISO 4217. Regions are ISO 3166-1 alpha-2 ('GB', never 'UK'), a group priced once for all its members ('EU'), or 'GLOBAL' for one price wherever the provider sells. A free plan has one price with amount 0: it creates no charges and the app shows it as Free (PROJECT-PLAN.md §3.1).",
@@ -202,7 +202,29 @@
                     "iconUrl": "https://sub.simplely.ca/icons/netflix.webp",
                     "category": "streaming",
                     "spendCategory": "streaming",
-                    "acceptedNetworks": ["visa", "mastercard", "amex"],
+                    "acceptedNetworks": {
+                      "CA": {
+                        "networks": ["visa", "mastercard", "amex"],
+                        "url": "https://help.netflix.com/en/node/116380/ca",
+                        "quotes": [
+                          "We accept the following cards, which must be enabled for recurring e-commerce transactions.",
+                          "Visa",
+                          "MasterCard",
+                          "American Express"
+                        ]
+                      },
+                      "US": {
+                        "networks": ["visa", "mastercard", "amex", "discover"],
+                        "url": "https://help.netflix.com/en/node/116380/us",
+                        "quotes": [
+                          "We accept credit, debit, and virtual cards, as well as co-branded cards issued by local banks with the following logos:",
+                          "Visa",
+                          "MasterCard",
+                          "American Express",
+                          "Discover"
+                        ]
+                      }
+                    },
                     "billingCurrency": { "CA": "CAD", "US": "USD" },
                     "cancelUrl": "https://www.netflix.com/cancelplan",
                     "sources": { "pricing": "https://help.netflix.com/en/node/24926" },
@@ -491,7 +513,29 @@
                     "iconUrl": "https://sub.simplely.ca/icons/netflix.webp",
                     "category": "streaming",
                     "spendCategory": "streaming",
-                    "acceptedNetworks": ["visa", "mastercard", "amex"],
+                    "acceptedNetworks": {
+                      "CA": {
+                        "networks": ["visa", "mastercard", "amex"],
+                        "url": "https://help.netflix.com/en/node/116380/ca",
+                        "quotes": [
+                          "We accept the following cards, which must be enabled for recurring e-commerce transactions.",
+                          "Visa",
+                          "MasterCard",
+                          "American Express"
+                        ]
+                      },
+                      "US": {
+                        "networks": ["visa", "mastercard", "amex", "discover"],
+                        "url": "https://help.netflix.com/en/node/116380/us",
+                        "quotes": [
+                          "We accept credit, debit, and virtual cards, as well as co-branded cards issued by local banks with the following logos:",
+                          "Visa",
+                          "MasterCard",
+                          "American Express",
+                          "Discover"
+                        ]
+                      }
+                    },
                     "billingCurrency": { "CA": "CAD", "US": "USD" },
                     "cancelUrl": "https://www.netflix.com/cancelplan",
                     "sources": { "pricing": "https://help.netflix.com/en/node/24926" },
@@ -1336,7 +1380,29 @@
                 "iconUrl": "https://sub.simplely.ca/icons/netflix.webp",
                 "category": "streaming",
                 "spendCategory": "streaming",
-                "acceptedNetworks": ["visa", "mastercard", "amex"],
+                "acceptedNetworks": {
+                  "CA": {
+                    "networks": ["visa", "mastercard", "amex"],
+                    "url": "https://help.netflix.com/en/node/116380/ca",
+                    "quotes": [
+                      "We accept the following cards, which must be enabled for recurring e-commerce transactions.",
+                      "Visa",
+                      "MasterCard",
+                      "American Express"
+                    ]
+                  },
+                  "US": {
+                    "networks": ["visa", "mastercard", "amex", "discover"],
+                    "url": "https://help.netflix.com/en/node/116380/us",
+                    "quotes": [
+                      "We accept credit, debit, and virtual cards, as well as co-branded cards issued by local banks with the following logos:",
+                      "Visa",
+                      "MasterCard",
+                      "American Express",
+                      "Discover"
+                    ]
+                  }
+                },
                 "billingCurrency": { "CA": "CAD", "US": "USD" },
                 "cancelUrl": "https://www.netflix.com/cancelplan",
                 "sources": { "pricing": "https://help.netflix.com/en/node/24926" },
@@ -1463,7 +1529,15 @@
                 "iconUrl": "https://sub.simplely.ca/icons/proton.webp",
                 "category": "privacy-suite",
                 "spendCategory": "software",
-                "acceptedNetworks": ["visa", "mastercard", "amex", "discover"],
+                "acceptedNetworks": {
+                  "GLOBAL": {
+                    "networks": ["visa", "mastercard", "amex"],
+                    "url": "https://proton.me/pricing",
+                    "quotes": [
+                      "You can pay for your subscription using Visa, Mastercard, American Express, and PayPal."
+                    ]
+                  }
+                },
                 "billingCurrency": { "GLOBAL": "USD" },
                 "cancelUrl": "https://account.proton.me/dashboard",
                 "sources": { "pricing": "https://proton.me/pricing" },
@@ -1669,7 +1743,31 @@
                   "iconUrl": "https://sub.simplely.ca/icons/disney-plus.webp",
                   "category": "streaming",
                   "spendCategory": "streaming",
-                  "acceptedNetworks": ["visa", "mastercard", "amex"],
+                  "acceptedNetworks": {
+                    "CA": {
+                      "networks": ["jcb", "visa", "mastercard", "amex", "other"],
+                      "url": "https://help.disneyplus.com/article/disneyplus-payment-methods",
+                      "quotes": [
+                        "We accept the following credit or debit cards*:",
+                        "JCB",
+                        "Visa",
+                        "Mastercard",
+                        "American Express",
+                        "Diners Club"
+                      ]
+                    },
+                    "US": {
+                      "networks": ["visa", "mastercard", "amex", "discover"],
+                      "url": "https://help.disneyplus.com/article/disneyplus-payment-methods",
+                      "quotes": [
+                        "We accept the following credit or debit cards*:",
+                        "Visa, including the Disney Visa",
+                        "Mastercard",
+                        "American Express",
+                        "Discover"
+                      ]
+                    }
+                  },
                   "cancelUrl": "https://help.disneyplus.com/article/disneyplus-cancel"
                 },
                 "link": "https://www.disneyplus.com/en-ca/sign-up",

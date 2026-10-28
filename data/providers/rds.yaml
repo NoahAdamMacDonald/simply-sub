@@ -4,6 +4,8 @@ aliases: [réseau des sports, rds direct]
 website: https://www.rds.ca
 category: streaming
 spendCategory: streaming
+# Accepted cards, read 2026-10-28 (M9.2): none named, so no acceptedNetworks. The FAQ (/aide/faq/) and /abonnement/
+# name none, and payment details are in Bell Media's Account Management portal, behind a sign-in.
 billingCurrency: { CA: CAD }
 # rds.ca/aide/faq/#hors-canada-abonnement, read 2026-10-26: "En raison de droits de diffusion stricts, RDS n'est pas
 # disponible pour abonnement ou visionnement à l'extérieur du Canada."

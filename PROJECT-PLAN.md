@@ -145,7 +145,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M3.1 | `discover-services.ts` (Wikidata) → `data/queue.yaml` | The queue has services with websites and categories |
 | M3.2 | `find-urls.ts` (common paths → sitemap → nav links → search API) | At least 80% of a 20-service sample get a correct pricing URL |
 | M3.3 | Playwright renderer, run locally so prices come back in CAD | Text and a screenshot are saved for each page |
-| M3.4 | `extract-plans.ts` (LLM structured output, evidence quotes, proposed features; regular prices, the billing period as stated, `availableIn` from the provider's own country list, `taxIncluded` with the page's words when prices include tax everywhere: BLUEPRINT §6.5) | Draft YAML passes validation for most services |
+| M3.4 | `extract-plans.ts` (LLM structured output, evidence quotes, proposed features; regular prices, the billing period as stated, `availableIn` from the provider's own country list, `taxIncluded` with the page's words when prices include tax everywhere, `acceptedNetworks` per region with its page's words (M9.2): BLUEPRINT §6.5) | Draft YAML passes validation for most services |
 | M3.5 | Batch PR script (`gh pr create`, about 10 providers per PR), with each new provider's logo fetched into `data/logos/` the way `npm run data:icons` does | One command turns a batch into a reviewable PR, logos included |
 | M3.6 | Run it on your own services (BLUEPRINT §6.6) and tune the prompts | Your subscriptions are in the catalog with CAD prices |
 | M3.7 | Resellers in the pipeline (BLUEPRINT §4.9, §6.5): find each provider's official reseller page, keep the shops it names as selling the provider's subscription (never partners that use the service in their own product), and read their regular prices from their own pages | A provider with a reseller page gets its resellers in its PR, with the approval quotes |
@@ -210,7 +210,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | ID | Task | Done when |
 |---|---|---|
 | M9.1 | Cards repo, Payment page and card dialog (P11). As built: `CardsRepository` (with `usage` and `removeWithItems`), the page's tiles from core's `cardSummary` and `monthlyWithTax`, and the card dialog (`CardEditor`) on core's `cardFormIssues`, with `cardUsage` and `withoutCard` for deleting one (BLUEPRINT §14) | P11 criteria met |
-| M9.2 | `acceptedNetworks` in the data and the extraction pipeline (the schema has validated the field since M1.1) | The pipeline fills it |
+| M9.2 | `acceptedNetworks` in the data and the extraction pipeline (the schema has validated the field since M1.1). As built: per region, each with its page and quotes (the user's choice), core's `networksNamedIn`; read for all ten providers (five name none); the price-research skill and §6.5's extraction record it, and the nightly bot rechecks it (BLUEPRINT §14) | The pipeline fills it |
 | M9.3 | core: eligibility, FX and cash-back maths, card assignment, limit checks (BLUEPRINT §9.3) | Tests pass |
 | M9.4 | Card select in the item dialog, net-cost displays, over-limit warnings | All visible on P4, P6, P10 and P11 |
 

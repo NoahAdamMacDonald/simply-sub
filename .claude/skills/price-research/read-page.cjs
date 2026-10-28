@@ -79,9 +79,11 @@ async function snap(page, name) {
           break;
         }
         case 'country':
+          // The picker's button showed the country's code (2026-10-26); since, its flag and the language, and it's
+          // named "Change country or language. Current country Canada, language EN" (2026-10-28).
           await page
-            .locator('header button')
-            .filter({ hasText: /^\s*[A-Z]{2}\s*$/ })
+            .getByRole('button', { name: /^Change country or language/ })
+            .or(page.locator('header button').filter({ hasText: /^\s*[A-Z]{2}\s*$/ }))
             .first()
             .click();
           await page.waitForTimeout(1000);

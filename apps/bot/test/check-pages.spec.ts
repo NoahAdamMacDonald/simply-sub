@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { checkPages, judged } from '../src/check-pages';
+import { checkPages, judged, networksFindings } from '../src/check-pages';
 import { gitBlobSha } from '../src/icons';
-import { approvalTargets, providerTargets } from '../src/targets';
+import { approvalTargets, networksTargets, providerTargets } from '../src/targets';
 import type { PriceTarget } from '../src/types';
 import { committedLogos, fakeDeps, mullvad, netflix, png, storedWorld, type Calls } from './fakes';
+import netflixPaymentUsChanged from './fixtures/netflix-payment-us-changed.html?raw';
 
 // One provider's checks, and §6.4's guardrails.
 
@@ -19,7 +20,7 @@ describe('checkPages', () => {
   it('confirms prices still on their pages without Workers AI, reading each page once', async () => {
     const calls: Calls = { pages: [], browser: [], ai: [] };
     const { findings } = await checkPages(
-      { subject: 'netflix', targets: providerTargets(netflix), approvals: [] },
+      { subject: 'netflix', targets: providerTargets(netflix), approvals: [], networks: [] },
       fakeDeps(storedWorld(), calls),
       budget,
     );
@@ -42,7 +43,7 @@ describe('checkPages', () => {
     const calls: Calls = { pages: [], browser: [], ai: [] };
     const targets = providerTargets(mullvad).filter((target) => target.owner.kind === 'plan');
     const result = await checkPages(
-      { subject: 'mullvad', targets, approvals: [] },
+      { subject: 'mullvad', targets, approvals: [], networks: [] },
       fakeDeps(world, calls),
       budget,
     );
@@ -52,14 +53,20 @@ describe('checkPages', () => {
     // yearly price isn't matched a month at a time (a per-month figure could be another plan's), so a person checks it.
     expect(
       result.findings.map((finding) =>
-        'target' in finding ? `${finding.kind} ${finding.target.price.amount}` : finding.kind,
+        'target' in finding && 'price' in finding.target
+          ? `${finding.kind} ${finding.target.price.amount}`
+          : finding.kind,
       ),
     ).toEqual(['confirmed 5', 'confirmed 10', 'confirmed 15', 'confirmed 30', 'manual']);
 
-    const none = await checkPages({ subject: 'mullvad', targets, approvals: [] }, fakeDeps(world), {
-      ...budget,
-      browserPages: 0,
-    });
+    const none = await checkPages(
+      { subject: 'mullvad', targets, approvals: [], networks: [] },
+      fakeDeps(world),
+      {
+        ...budget,
+        browserPages: 0,
+      },
+    );
     expect(none.findings.some((finding) => finding.kind === 'confirmed')).toBe(false);
   });
 
@@ -68,7 +75,7 @@ describe('checkPages', () => {
     const deps = fakeDeps(storedWorld(), calls);
     deps.page = async () => ({ error: 'robots.txt doesn’t allow the bot to read it' });
     const { findings } = await checkPages(
-      { subject: 'netflix', targets: [standard], approvals: [] },
+      { subject: 'netflix', targets: [standard], approvals: [], networks: [] },
       deps,
       budget,
     );
@@ -83,7 +90,7 @@ describe('checkPages', () => {
     world.pages['https://help.netflix.com/en/node/24926/ca'] = '<p>Standard: $21.99 a month</p>';
     const calls: Calls = { pages: [], browser: [], ai: [] };
     const low = await checkPages(
-      { subject: 'netflix', targets: [standard], approvals: [] },
+      { subject: 'netflix', targets: [standard], approvals: [], networks: [] },
       fakeDeps(world, calls),
       { ...budget, neurons: 10 },
     );
@@ -97,13 +104,85 @@ describe('checkPages', () => {
     const world = storedWorld();
     world.pages['https://mullvad.net/en/help/partnerships-and-resellers'] = '<p>Amazon - CA</p>';
     const { findings } = await checkPages(
-      { subject: 'mullvad', targets: [], approvals: approvalTargets(mullvad) },
+      { subject: 'mullvad', targets: [], approvals: approvalTargets(mullvad), networks: [] },
       fakeDeps(world),
       budget,
     );
     expect(
       findings.map((finding) => finding.kind === 'reseller' && finding.approval.reseller),
     ).toEqual(['inet', 'laptopwithlinux', 'proxystore', 'serialcart', 'webhallen']);
+  });
+});
+
+describe('accepted card networks', () => {
+  const [canada, unitedStates] = networksTargets(netflix);
+
+  it('are confirmed while every quote is on its page, with no network named beside them', async () => {
+    const { findings } = await checkPages(
+      { subject: 'netflix', targets: [], approvals: [], networks: [canada, unitedStates] },
+      fakeDeps(storedWorld()),
+      budget,
+    );
+    // The Canadian page's "Discover what's new on Netflix" is prose, out of its list's reach.
+    expect(findings).toEqual([]);
+  });
+
+  it('take a region out when a quote is gone, and name a network listed beside them', async () => {
+    const world = storedWorld();
+    world.pages[unitedStates.url] = netflixPaymentUsChanged;
+    world.pages[canada.url] = world.pages[canada.url].replace(
+      '<li>American Express</li>',
+      '<li>American Express</li><li>JCB</li>',
+    );
+    const { findings } = await checkPages(
+      { subject: 'netflix', targets: [], approvals: [], networks: [canada, unitedStates] },
+      fakeDeps(world),
+      budget,
+    );
+    expect(findings).toEqual([
+      { kind: 'networks', target: canada, missing: [], named: ['jcb'] },
+      { kind: 'networks', target: unitedStates, missing: ['Discover'], named: [] },
+    ]);
+  });
+
+  it('leave to a person a region whose list the page doesn’t show: it follows the reader’s country', () => {
+    const shared = 'https://help.disneyplus.com/article/disneyplus-payment-methods';
+    const canadian = { ...canada, url: shared, quotes: ['JCB', 'Visa', 'Diners Club'] };
+    const american = { ...unitedStates, url: shared, quotes: ['Visa', 'Discover'] };
+    // Read from the US: its list, and not Canada's.
+    const findings = networksFindings('We accept: Visa Mastercard Discover', [canadian, american]);
+    expect(findings).toEqual([
+      {
+        kind: 'manual',
+        subject: "netflix's cards in CA",
+        url: shared,
+        reason: 'The page shows another country’s list of cards',
+      },
+    ]);
+    // A page that shows neither list changed for both.
+    expect(
+      networksFindings('We accept: Mastercard', [canadian, american]).map(
+        (finding) => finding.kind,
+      ),
+    ).toEqual(['networks', 'networks']);
+  });
+
+  it('are left to a person when their page can’t be read', async () => {
+    const world = storedWorld();
+    delete world.pages[canada.url];
+    const { findings } = await checkPages(
+      { subject: 'netflix', targets: [], approvals: [], networks: [canada] },
+      fakeDeps(world),
+      budget,
+    );
+    expect(findings).toEqual([
+      {
+        kind: 'manual',
+        subject: "netflix's cards in CA",
+        url: canada.url,
+        reason: 'Browser Rendering couldn’t read the page',
+      },
+    ]);
   });
 });
 
@@ -148,6 +227,7 @@ describe('logos', () => {
     subject: 'netflix',
     targets: [],
     approvals: [],
+    networks: [],
     logo: { id: 'netflix', website: 'https://www.netflix.com', ...(committed && { committed }) },
   });
 

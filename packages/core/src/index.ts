@@ -7,6 +7,7 @@ export * from './budget/budget-bar';
 export * from './catalog/availability';
 export * from './catalog/bundle';
 export * from './catalog/bundle-deal';
+export * from './catalog/card-networks';
 export * from './catalog/catalog-ids';
 export * from './catalog/catalog-sync';
 export * from './catalog/category';

@@ -6,10 +6,12 @@ import { fakeServices, mullvad, png, stepper, storedWorld, today, type World } f
 import mullvadNoInet from './fixtures/mullvad-resellers-no-inet.html?raw';
 import mullvadTaxGone from './fixtures/mullvad-pricing-tax-gone.html?raw';
 import netflixChanged from './fixtures/netflix-ca-changed.html?raw';
+import netflixPaymentUsChanged from './fixtures/netflix-payment-us-changed.html?raw';
 
 // A night of the price check, end to end with fakes (PROJECT-PLAN M8.3's "done when"): a changed price, a changed
 // logo, a taxIncluded quote gone from its page and a reseller the provider no longer names each produce a pull
-// request; a night where nothing changed produces none.
+// request, and so does a region's accepted cards no longer on their page (M9.2); a night where nothing changed
+// produces none.
 
 async function night(world: World) {
   const services = await fakeServices(world);
@@ -140,6 +142,21 @@ describe('a night of the price check', () => {
       'webhallen',
     ]);
     expect(made.body).toContain('**inet** isn’t named as mullvad’s reseller any more');
+  });
+
+  it('proposes taking a region’s accepted cards out when a quote is gone from their page (M9.2)', async () => {
+    const world = storedWorld();
+    world.pages['https://help.netflix.com/en/node/116380/us'] = netflixPaymentUsChanged;
+    const { proposals } = await night(world);
+    const [made] = proposals;
+    const text =
+      made.changes.find((change) => change.path === 'data/providers/netflix.yaml')?.text ?? '';
+    const provider = providerSchema.parse(parse(text));
+    expect(Object.keys(provider.acceptedNetworks ?? {})).toEqual(['CA']);
+    expect(made.body).toContain(
+      '**netflix**’s cards in US: “Discover” isn’t on [help.netflix.com/en/node/116380/us]',
+    );
+    expect(made.body).toContain('every card is allowed there until they’re read again');
   });
 
   it('goes on when a provider’s step fails, saying so in the pull request', async () => {

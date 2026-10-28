@@ -5,6 +5,15 @@ website: https://proton.me
 domains: [protonvpn.com]
 category: privacy-suite
 spendCategory: software
+# Accepted cards, read 2026-10-28 (M9.2) in /pricing's FAQ (What payment methods can I use?), for every buyer:
+# Visa, Mastercard and American Express. /support/payment-options says only "We accept all major credit and debit
+# cards", which names none.
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex]
+    url: https://proton.me/pricing
+    quotes:
+      - You can pay for your subscription using Visa, Mastercard, American Express, and PayPal.
 billingCurrency: { GLOBAL: USD }
 cancelUrl: https://account.proton.me/dashboard
 sources: { pricing: https://proton.me/pricing }
