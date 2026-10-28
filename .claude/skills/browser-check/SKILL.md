@@ -245,6 +245,26 @@ Then at 1280 px, with Playwright's clock installed:
 
 It runs axe on each screen and dialog, and checks for horizontal scroll.
 
+`check-tags.cjs` (M6.11) checks custom tags on `ng serve` for a Canadian in Alberta. It writes to IndexedDB Family and
+Work, and Work Related with Netflix Standard (tagged both) and Mullvad VPN (tagged Family).
+
+In both themes at both widths, keyboard only, it checks:
+- Settings' Custom tags: each row's colour named ("Colour of Family: Blue"), ✎ opening the name in place, another
+  tag's name refused in any case with focus kept in the field, Escape changing nothing, and Enter saving with focus
+  back on ✎;
+- the colour button opening the palette on the colour it has, an arrow key to the next preset, and a hex colour, each
+  saved;
+- ⊕ adding a tag with a colour no tag has, then ✕ deleting it at once, focus moving to the previous row's ✕;
+- ✕ on a tag in use: "Used by 1 subscription" with focus on Cancel, then the tag gone from IndexedDB and the items;
+- the list editor's ✎ on Netflix, the dialog's Delete a tag menu by keyboard, "Used by 2 subscriptions" (the draft's
+  items and the list's counted once each), the chip gone, every item and the draft without the tag, and focus in the
+  field once no tag is left;
+- List view with no tag chips, and its Sort menu's Tags saying there are none.
+
+It runs axe on the card, the editor and its error, the question, the menu and List view, and checks for horizontal
+scroll. Wait for the item dialog to put focus on its heading before tabbing: it moves focus there once it's open,
+which undoes Tab presses made sooner.
+
 Since the feedback after M6.8, the other scripts check more:
 - `check-search.cjs`: at 360 px each shop's price is on its line under one "Cheaper at".
 - `check-item-dialog.cjs`: the three date boxes have the same height.

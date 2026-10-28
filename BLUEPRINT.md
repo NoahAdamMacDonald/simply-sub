@@ -2533,6 +2533,51 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
+**Resolved (2026-10-28, M6.11)**
+- **Custom tags** (PROJECT-PLAN P13) is a card in Settings, after Budgets, near the top as the wireframe has it.
+  - **A row per tag,** in the order they were made: its colour as a round button ("Colour of Family: Blue"), its name,
+    ✎ ("Rename Family") and ✕ ("Delete Family"). With none, a line says what tags are for.
+  - **✎ and the colour open one editor** in the row's place: Name, the 12 presets as radio buttons, and Hex colour.
+    - The presets are `ss-tag-colours`, shared with the picker's Create tag.
+    - Hex colour takes `#rrggbb` or `rrggbb` in any case, and stores lower case (core's `parseTagColor`). A colour
+      that's no preset leaves none checked.
+    - ✎ starts on the name, the colour button on the colour the tag has. Enter saves, Escape cancels, and focus goes
+      back to what opened it.
+  - **⊕ New tag** opens the same editor as a new row, with the first preset no tag has yet. Once it's saved, focus is
+    on its ✎.
+  - **✕** deletes at once when nothing uses the tag. When something does, it asks first: "Delete “Work”? Used by 5
+    subscriptions. It comes off them in every list.", with focus on Cancel. A snackbar says "Deleted Work", and focus
+    moves to the next row's ✕, else the previous one's, else ⊕. There's no Undo: P13 didn't ask for one.
+- **Names** follow the picker's rules, now core's (`user/tag-rules.ts`, `tagNameIssue`): trimmed, not empty, and no
+  two tags with the same name in any case ("There's a tag called “Work” already"). A tag can change its own name's
+  case.
+- **Deleting** (`TagsRepository.removeWithItems`) is one transaction on tags, items and drafts:
+  - The tag is soft-deleted.
+  - Core's `withoutTag` takes its id off every item that has it, with a new `updatedAt`. Soft-deleted items lose it
+    too, so a list's Undo can't bring it back.
+  - It comes off every draft's items too, as edited and as saved, so a draft doesn't look changed and its Save writes
+    nothing for it. A draft's items keep their timestamps, which Save sets.
+  - With the app lock on, every row it writes is sealed, as any write is. A test checks both.
+- **"Used by 5 subscriptions"** (`tagUsage`) counts the items in lists and in lists' drafts, each once (the user chose
+  this). It's read as stored when ✕ is pressed (`TagsRepository.usage`), so it's right before the repositories have
+  loaded the items.
+- **The item dialog's picker** (P6) has "Delete a tag" beside its field: a menu of the tags that deletes one
+  everywhere through the same flow (`shared/tags/tag-deleter.ts`), then takes it off the item's chips. With no tag
+  left, focus moves to the field. The user chose a menu over an ✕ in each suggestion: a button inside an
+  autocomplete option fails axe's `nested-interactive`, and the arrow keys never reach it.
+- **A deleted tag never shows:**
+  - Chips, suggestions and List view's Tags filter use the repository's live tags.
+  - A List view filter on a tag deleted meanwhile is dropped.
+  - The item dialog saves only live tags, so an item open while its tag is deleted elsewhere doesn't get it back.
+  - Exports list live tags only (M7.5).
+- **Core without Zod:** the presets moved from `user/tag.ts` to `user/tag-rules.ts`, which imports no Zod, so Settings
+  uses them without the record schemas (M6.10's lesson with Lock after).
+- **Bundles:** the initial bundle didn't change (495.4 kB). What a page loads beyond it, gzipped:
+  - **Settings:** from 93.5 to 98.7 kB, for the card, its editor and the delete flow with `ss-confirm`.
+  - **The item dialog:** its chunks counted alone grew 6.7 kB, mostly Material's menu, which the list editor that
+    opens it has loaded already.
+  - **The list editor and List view:** 1.1 kB each, for the repository's delete.
+
 **Resolved (2026-10-28, M6.10)**
 - **Security** (PROJECT-PLAN P13) is a card in Settings, between Your data and Catalog.
   - "Lock with a passphrase" is a checkbox that opens a dialog. It shows what's so, not the click, until the dialog
@@ -3535,7 +3580,7 @@ Reported from the running app, with screenshots, and fixed before M6.8:
 - **Tags:** the picker creates tags inline through `TagsRepository`, from a name and one of 12 preset colours. The
   presets live in core (`tagColorPresets`) as stored values rather than theme colours: a tag chip shows the colour as
   a dot beside the name, so the name's contrast never depends on it. Settings' tag section (renaming, any hex colour,
-  deleting) still has no task.
+  deleting) came with M6.11.
 
 **Resolved (2026-10-26, M4.4)**
 - **Exchange rates are kept in Dexie,** in a new `fxRates` table (Dexie v2), so converted prices show at once and

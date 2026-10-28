@@ -87,4 +87,5 @@ export * from './user/settings-defaults';
 export * from './user/stamps';
 export * from './user/subscription-list';
 export * from './user/tag';
+export * from './user/tag-rules';
 export * from './user/type-counts';

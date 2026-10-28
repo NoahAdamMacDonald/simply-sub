@@ -84,6 +84,7 @@ import { MetricsService } from '../../core/metrics/metrics-service';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { CustomSubsRepository } from '../../core/storage/custom-subs-repository';
 import { RankingsRepository } from '../../core/storage/rankings-repository';
+import { TagsRepository } from '../../core/storage/tags-repository';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
 import { CalendarHeader } from '../../shared/calendar-header';
 import { periodText } from '../../shared/billing-text';
@@ -186,6 +187,7 @@ export class ItemDialog {
   private readonly fx = inject(FxStore);
   private readonly customSubs = inject(CustomSubsRepository);
   private readonly rankings = inject(RankingsRepository);
+  private readonly tags = inject(TagsRepository);
   private readonly metrics = inject(MetricsService);
   private readonly drafts = inject(ListDraftService);
   private readonly confirmer = inject(ConfirmService);
@@ -682,6 +684,10 @@ export class ItemDialog {
     // Ranks are kept for the keys it provides, or all of them when it can't be priced to know.
     const provided = this.preview()?.providedKeys ?? Object.keys(this.model().rankOverrides);
     const fields = itemFromForm(this.model(), this.context(provided));
+    // A tag deleted since it was picked, in Settings or another tab, isn't saved back onto the item (M6.11).
+    if (this.tags.status() === 'ready') {
+      fields.tagIds = fields.tagIds.filter((id) => this.tags.byId().has(id));
+    }
     const draft = this.drafts.byList().get(listId);
     const title = this.title();
     if (

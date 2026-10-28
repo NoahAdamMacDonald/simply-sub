@@ -11,13 +11,16 @@ import {
   viewChild,
 } from '@angular/core';
 import { MatAutocomplete, MatAutocompleteTrigger, MatOption } from '@angular/material/autocomplete';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatChipGrid, MatChipInput, MatChipRemove, MatChipRow } from '@angular/material/chips';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
-import { tagColorPresets, type Tag } from '@simply-sub/core';
+import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { freeTagColor, tagNamed, type Tag } from '@simply-sub/core';
 import { TagsRepository } from '../../core/storage/tags-repository';
+import { TagColours } from './tag-colours';
+import { TagDeleter } from './tag-deleter';
 
 /** The autocomplete's "Create tag" choice: never a tag's id, which is a UUID. */
 const createChoice = 'create';
@@ -26,8 +29,10 @@ let nextId = 0;
 
 /**
  * Picks an item's tags (P6): the chosen ones as chips, an autocomplete of the others, and "Create tag “…”", which
- * opens a row for the new tag's name and colour and saves it through TagsRepository. Renaming, any hex colour and
- * deleting tags belong to Settings (P13).
+ * opens a row for the new tag's name and colour and saves it through TagsRepository. "Delete a tag" beside the field
+ * is a menu of the tags, which deletes one everywhere, asking first when it's in use (M6.11): an ✕ inside a
+ * suggestion would be a button in an option, which the arrow keys skip and axe fails. Renaming and any hex colour
+ * belong to Settings (P13).
  */
 @Component({
   selector: 'ss-tag-picker',
@@ -41,15 +46,21 @@ let nextId = 0;
     MatChipRow,
     MatFormField,
     MatIcon,
+    MatIconButton,
     MatInput,
     MatLabel,
+    MatMenu,
+    MatMenuItem,
+    MatMenuTrigger,
     MatOption,
+    TagColours,
   ],
   templateUrl: './tag-picker.html',
   styleUrl: './tag-picker.scss',
 })
 export class TagPicker {
   private readonly tags = inject(TagsRepository);
+  private readonly deleter = inject(TagDeleter);
   private readonly injector = inject(Injector);
   private readonly chipInput = viewChild.required<ElementRef<HTMLInputElement>>('chipInput');
   private readonly nameInput = viewChild<ElementRef<HTMLInputElement>>('nameInput');
@@ -60,11 +71,10 @@ export class TagPicker {
   readonly tagIds = model<readonly string[]>([]);
   readonly label = input('Tags');
 
-  protected readonly presets = tagColorPresets;
+  protected readonly records = this.tags.records;
   protected readonly createChoice = createChoice;
   private readonly id = nextId++;
   protected readonly headingId = `ss-tag-picker-${this.id}-new`;
-  protected readonly colourName = `ss-tag-picker-${this.id}-colour`;
   protected readonly query = signal('');
   /** The tag being created, while its row is open. */
   protected readonly draft = signal<{ name: string; color: string } | undefined>(undefined);
@@ -120,6 +130,18 @@ export class TagPicker {
     this.tagIds.update((ids) => ids.filter((candidate) => candidate !== id));
   }
 
+  /**
+   * "Delete a tag": the tag goes everywhere, after asking when it's in use, and off this item's chips too. Focus goes
+   * back to the menu's button, or to the field once no tag is left.
+   */
+  protected async deleteTag(tag: Tag): Promise<void> {
+    if (!(await this.deleter.delete(tag))) return;
+    this.remove(tag.id);
+    if (this.tags.records().every((candidate) => candidate.id === tag.id)) {
+      this.chipInput().nativeElement.focus();
+    }
+  }
+
   protected rename(name: string): void {
     this.draft.update((draft) => draft && { ...draft, name });
   }
@@ -162,15 +184,11 @@ export class TagPicker {
   }
 
   private named(name: string): Tag | undefined {
-    const wanted = name.toLocaleLowerCase('en');
-    return this.tags.records().find((tag) => tag.name.trim().toLocaleLowerCase('en') === wanted);
+    return tagNamed(this.tags.records(), name);
   }
 
-  /** The first preset no tag has yet, so new tags look different; once all are taken, they go round again. */
+  /** The first preset no tag has yet, so new tags look different. */
   private freeColour(): string {
-    const tags = this.tags.records();
-    const used = new Set(tags.map((tag) => tag.color.toLowerCase()));
-    const free = this.presets.find((preset) => !used.has(preset.color));
-    return (free ?? this.presets[tags.length % this.presets.length]).color;
+    return freeTagColor(this.tags.records());
   }
 }

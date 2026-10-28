@@ -1,0 +1,17 @@
+<fieldset class="colours">
+  <legend>{{ legend() }}</legend>
+  @for (preset of presets; track preset.color) {
+    <label class="swatch">
+      <input
+        type="radio"
+        class="visually-hidden"
+        [name]="name"
+        [value]="preset.color"
+        [checked]="color().toLowerCase() === preset.color"
+        (change)="color.set(preset.color)"
+      />
+      <span class="tag-dot" aria-hidden="true" [style.--tag-color]="preset.color"></span>
+      <span class="visually-hidden">{{ preset.name }}</span>
+    </label>
+  }
+</fieldset>

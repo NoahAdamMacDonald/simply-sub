@@ -187,7 +187,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M6.8 | List view (P4), without the money parts, with `ss-sub-card`'s list variant (§4.3, moved from M4.5), built as `ss-item-card`; core's `listView` (search, sorts and filters, pinned first) in `user/list-view.ts` (BLUEPRINT §14) | Cards, pinning, search/filter and the edit button work |
 | M6.9 | Backup export/import (the "Your data" section of P13, and the first-run dialog's "Import a backup instead"), with an optional passphrase that encrypts the file, and the crypto module it uses (BLUEPRINT §11.5). As built: core's `user/backup.ts` (the file, its checks, Merge), the app's `core/crypto/passphrase-crypto.ts` and `BackupRepository` (BLUEPRINT §14) | Export → delete all → import restores everything, encrypted or not; a wrong passphrase or a tampered file imports nothing |
 | M6.10 | Optional app lock: a passphrase encrypts the user tables at rest, with a lock screen and an idle lock (P13, P15; BLUEPRINT §11.5). As built: core's `user/app-lock.ts` (what's sealed, the lock's settings) and `user/lock-idle.ts` (Lock after), `StorageEngine`'s sealing with `RowCipher` and `AppLockRepository`, the lock screen (`layout/lock-screen.ts`) and the idle lock (`core/lock/auto-lock.ts`) (BLUEPRINT §14) | Locked data on disk is unreadable without the passphrase; turning the lock on and off round-trips every table; a wrong passphrase unlocks nothing |
-| M6.11 | Custom tags (the Settings section of P13, added 2026-10-28 so M6 covers all of Settings): each tag renamed inline, recoloured (the 12 presets plus a hex field) and deleted, asking first when it's in use ("Used by 5 subscriptions"), and ⊕ to add one | P13's tag criteria met: tags persist and update every page live |
+| M6.11 | Custom tags (the Settings section of P13, added 2026-10-28 so M6 covers all of Settings): each tag renamed inline, recoloured (the 12 presets plus a hex field) and deleted, asking first when it's in use ("Used by 5 subscriptions"), and ⊕ to add one. As built: core's `user/tag-rules.ts` (names, colours, `tagUsage`, `withoutTag`), `TagsRepository.usage` and `removeWithItems` (one transaction on tags, items and drafts), Settings' `ss-tags-setting` and `ss-tag-editor`, the shared `ss-tag-colours` and `TagDeleter`, and the item dialog's Delete a tag menu (BLUEPRINT §14) | P13's tag criteria met: tags persist and update every page live |
 
 ### M7 — Money, schedule & calendar
 | ID | Task | Done when |
@@ -483,7 +483,7 @@ Add these aliases to `_tokens.scss`. They build on the rank tokens in BLUEPRINT 
 | `ss-sub-card` | Subscription card (`variant: 'search' \| 'list'`), built with its pages: the search variant in M5.2, the list variant in M6.8. As built (M5.2): the search variant takes a `searchCatalog` result; its plan chips are radio buttons (one tab stop, arrow keys, never none chosen); the expanded section is `ss-plan-details`. M5.4: its prices and its bundles' prices open the card's `ss-add-to-list-menu`. M5.7: its chips sit right below its names and never move, a lone plan gets a chip too, and its details slide open and shut, with Hide details at their foot. M6.8: the list variant is a component of its own, `ss-item-card`, which takes a resolved item and shares the card's look (`_card.scss`) and sliding details (`SlidingDetails`); Edit is a link in its details. Since the feedback after M6.9 the search variant counts the user's ranks of its plan's features under the status, and its "· 2 lists" names the lists | `result`, `ranks` (M5.2), `listNames` (the feedback after M6.9); `ss-item-card`: `resolved`, `tags` and `pinToggle` (M6.8) |
 | `ss-in-lists` | "2 lists" after a Search card's status: a button whose tooltip names the lists ("In Work Related and Family") and whose menu links to them; only words without their names | `count`, `lists` (id and name), `provider` (names the menu) |
 | `ss-add-to-list-menu` | P7's Add to list menu (M5.4): the user's lists in the order they were made, each with its number of subscriptions, then New list…; picking one opens that list's editor, or `/lists/new`, with core's `addRequestParams` | `prepare(request)` (the price that opens it says what it adds); `menu` for `ss-price` |
-| `ss-tag-chip`, `ss-tag-picker` | A tag as a dot in its colour and its name; the picker is chips with an autocomplete, and "Create tag “…”" asks for a name and one of core's 12 `tagColorPresets`, saved through `TagsRepository` | `tag`; `tagIds` (`model`) → `tagIdsChange` |
+| `ss-tag-chip`, `ss-tag-picker` | A tag as a dot in its colour and its name; the picker is chips with an autocomplete, and "Create tag “…”" asks for a name and one of core's 12 `tagColorPresets` (`ss-tag-colours`), saved through `TagsRepository`. Since M6.11, "Delete a tag" beside it is a menu that deletes one everywhere, asking first when it's in use | `tag`; `tagIds` (`model`) → `tagIdsChange` |
 | `ss-price-range` | Price per month as a filter (Search's panel, List view's Sort menu): a dual slider from $0 to the range's top, which means "Unlimited" | `range` (core's `PriceRange`), `min?`, `max?`, `currency`, `country?` → `limitsChange` (a limit at its end of the slider is left out) |
 | `ss-feature-filter` | Features as a filter: a chip per rank key chosen, which a click removes, and a box that suggests the rest by what's typed, grouped by feature category (core's `featureSuggestions`). Off with nothing to suggest or chosen | `keys` (what can be suggested), `features`, `categories`, `hint`, `value` (`model`) |
 | `ss-chip-choices` | A labelled group of checkboxes drawn as chips, each with an optional colour dot: Search's Activity, List view's Status and Tags. None chosen is all | `legend`, `choices` (value, label, colour?), `value` (`model`) |
@@ -774,6 +774,9 @@ groups fold, a click on a tag chip removes it, and a reseller's price arrives wi
 
 **Since the feedback after M6.8:** an optional Nickname under Plan (at most 60 characters), which tells two of the same
 plan apart, and an optional Note at the end (at most 1000). Fields in a row keep their own heights.
+
+**Since M6.11:** "Delete a tag" beside the Tags field is a menu of the tags, which deletes one everywhere, asking
+first when it's in use, as Settings' ✕ does (P13).
 
 **As built (M6.5):** the sections run Plan, Add-ons (P6's "Extra members": an add-on can be a channel), Billing, "I
 pay a different price", Advanced, Feature ranks and Tags, and Plus tax shows only where tax is added. The billing day
@@ -1123,8 +1126,8 @@ own. A set feature asks for one or more of its values, as enum and number featur
 📍 Ontario, Canada (CAD)
 ```
 **Built so far:** the budgets, Appearance and 📍 (M4.2), each a card ("Location and currency" holds 📍 and the tax
-line under it), the Catalog line (M4.3), Your data (M6.9) and Security (M6.10). Custom tags come with M6.11, and
-local sync with Phase 5.
+line under it), the Catalog line (M4.3), Your data (M6.9), Security (M6.10) and Custom tags (M6.11), after Budgets.
+Local sync comes with Phase 5.
 - **Your data** (M6.9):
   - **Export backup:** a dialog with "Protect with a passphrase" (at least 8 characters, typed twice). It downloads
     the file.
@@ -1146,6 +1149,10 @@ local sync with Phase 5.
   - The colour swatch opens a palette (12 presets plus a hex field).
   - ✕ deletes, asking for confirmation if the tag is in use: "Used by 5 subscriptions".
   - ⊕ adds a new tag in edit mode.
+  - As built: a row per tag with its colour button, name, ✎ and ✕. ✎ and the colour open one editor in the row (Name,
+    the presets, Hex colour; Enter saves, Escape cancels). Names are trimmed and unique in any case. Deleting takes the
+    tag off every item and every list's draft in one transaction, and "Used by" counts both. BLUEPRINT §14 has the
+    rest.
 - 📍 opens a dialog for country, province or state, and currency (the currency follows the country unless you change it), with the sales tax that follows: "Sales tax 13% (Ontario)" and a "Use my own rate" checkbox (BLUEPRINT §4.8). It shares the first-run dialog's fields (P1). Cancel or Escape changes nothing.
 - **Appearance** (M4.2): System, Light or Dark, saved in `settings.theme` (BLUEPRINT §8.1).
 - **Catalog** (M4.3): "Updated Oct 22, 2026 · version c4f9a21" (the build date and version of the user's region's file), or "Not downloaded yet". [Check for updates] checks now and says what it found in a live region under it: "You have the latest catalog.", "Downloaded the latest catalog.", "You're offline. Try again when you're back online." or "Couldn't check for updates. Try again later."

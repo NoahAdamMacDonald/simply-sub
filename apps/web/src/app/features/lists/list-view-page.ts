@@ -136,7 +136,12 @@ export class ListViewPage {
   protected readonly text = signal('');
   protected readonly filters = signal<ListFilterState>(noListFilters);
   protected readonly filtersOpen = signal(false);
-  private readonly query = computed(() => listQuery(this.text(), this.filters()));
+  /** The search box and the Sort menu's choices, leaving out a tag deleted meanwhile (M6.11). */
+  private readonly query = computed(() => {
+    const filters = this.filters();
+    const byId = this.tags.byId();
+    return listQuery(this.text(), { ...filters, tags: filters.tags.filter((id) => byId.has(id)) });
+  });
   protected readonly filterCount = computed(() => listFilterCount(this.query()));
   protected readonly context = computed(() => ({
     tags: this.tags.byId(),
