@@ -6,7 +6,7 @@ import { customSubscriptionSchema } from './custom-subscription';
 import { listItemSchema } from './list-item';
 import { paymentCardSchema } from './payment-card';
 import { profileRankingSchema } from './profile-ranking';
-import { timestampSchema, type Timestamp } from './record';
+import { base64Schema, timestampSchema, type Timestamp } from './record';
 import { userRecordKeys, type UserRecords } from './records';
 import { settingsSchema } from './settings';
 import { subscriptionListSchema } from './subscription-list';
@@ -77,9 +77,6 @@ const headerShape = {
 /** A plain backup file. */
 export const plainBackupSchema = z.strictObject({ ...headerShape, ...backupPayloadSchema.shape });
 export type PlainBackup = z.infer<typeof plainBackupSchema>;
-
-/** Base64, as the crypto module writes it. */
-const base64Schema = z.string().regex(/^[A-Za-z0-9+/]+={0,2}$/, 'Use base64');
 
 /**
  * An encrypted backup file (BLUEPRINT §11.5): AES-256-GCM with a key derived by PBKDF2-HMAC-SHA256 from the

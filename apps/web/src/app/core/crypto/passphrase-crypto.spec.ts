@@ -1,9 +1,13 @@
 import {
   WrongPassphraseError,
   decryptText,
+  deriveKey,
   encryptText,
   fromBase64,
   kdfIterations,
+  newSalt,
+  openText,
+  sealText,
   toBase64,
 } from './passphrase-crypto';
 
@@ -57,6 +61,36 @@ describe('passphrase crypto', () => {
     await expect(
       decryptText({ ...envelope, salt: toBase64(new Uint8Array(4)) }, 'pass', 'simply-sub:1'),
     ).rejects.toBeInstanceOf(WrongPassphraseError);
+  });
+
+  it('seals with a key it holds, under a new IV each time, and opens only with that key and binding', async () => {
+    const salt = newSalt();
+    expect(salt).toHaveLength(16);
+    const key = await deriveKey('correct horse', salt, 1_000);
+    const sealed = await sealText(key, '{"name":"Work Related"}', 'simply-sub:lock:lists:1');
+    expect(Object.keys(sealed)).toEqual(['iv', 'ciphertext']);
+    expect(sealed.ciphertext).not.toContain('Work');
+    expect((await sealText(key, '{"name":"Work Related"}', 'x')).iv).not.toBe(sealed.iv);
+    await expect(openText(key, sealed, 'simply-sub:lock:lists:1')).resolves.toBe(
+      '{"name":"Work Related"}',
+    );
+    // A row moved to another key, the same passphrase with another salt, and a short IV don't open.
+    await expect(openText(key, sealed, 'simply-sub:lock:lists:2')).rejects.toBeInstanceOf(
+      WrongPassphraseError,
+    );
+    const other = await deriveKey('correct horse', newSalt(), 1_000);
+    await expect(openText(other, sealed, 'simply-sub:lock:lists:1')).rejects.toBeInstanceOf(
+      WrongPassphraseError,
+    );
+    await expect(
+      openText(key, { ...sealed, iv: toBase64(new Uint8Array(8)) }, 'simply-sub:lock:lists:1'),
+    ).rejects.toBeInstanceOf(WrongPassphraseError);
+  });
+
+  it('derives keys that can’t be read back out', async () => {
+    const key = await deriveKey('correct horse', newSalt(), 1_000);
+    expect(key.extractable).toBe(false);
+    await expect(crypto.subtle.exportKey('raw', key)).rejects.toThrow();
   });
 
   it('derives new keys with 600,000 iterations', () => {

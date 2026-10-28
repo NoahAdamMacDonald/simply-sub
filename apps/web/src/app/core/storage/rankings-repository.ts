@@ -14,7 +14,10 @@ import { StorageService } from './storage-service';
 @Service()
 export class RankingsRepository {
   private readonly storage = inject(StorageService);
-  private readonly stored = rxResource({ stream: () => this.storage.watch('rankings') });
+  private readonly stored = rxResource({
+    params: () => this.storage.access(),
+    stream: () => this.storage.watch('rankings'),
+  });
 
   /** Each ranked key's profile rank. A key that isn't here is not ranked. */
   readonly ranks = computed<ReadonlyMap<RankKey, ProfileRank>>(() => {

@@ -1,5 +1,8 @@
 @if (storageBlocked()) {
   <ss-storage-blocked />
+} @else if (locked()) {
+  <!-- The lock screen (P15), loaded only when the app lock is on. -->
+  <ng-container #lockScreen />
 } @else {
   <ss-shell />
 }

@@ -318,11 +318,11 @@ async function exportBackup(page, label, shot, passphrase) {
 
       // ── Settings' Your data ─────────────────────────────────────────────────────────────────
       await openSettings(page);
-      await page.locator('ss-settings-page section', { hasText: 'Your data' }).waitFor();
+      // By its name: Security's hint says "your data" too.
+      const yourData = page.getByRole('region', { name: 'Your data', exact: true });
+      await yourData.waitFor();
       await noSideScroll(page, viewport, `${label}, Settings`);
-      await page
-        .locator('ss-settings-page section', { hasText: 'Your data' })
-        .screenshot({ path: shot('your-data') });
+      await yourData.screenshot({ path: shot('your-data') });
 
       // ── Export, encrypted ───────────────────────────────────────────────────────────────────
       const encrypted = await exportBackup(page, label, shot, PASSPHRASE);

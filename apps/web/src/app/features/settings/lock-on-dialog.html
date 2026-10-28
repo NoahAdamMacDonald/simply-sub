@@ -1,0 +1,55 @@
+<form [formRoot]="form">
+  <h2 mat-dialog-title>Lock with a passphrase</h2>
+  <mat-dialog-content>
+    <p>
+      Your lists, subscriptions, custom subscriptions, feature ranks, tags and settings are
+      encrypted in this browser, and Simply Sub asks for the passphrase each time you open it.
+    </p>
+    <div class="fields">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>Passphrase</mat-label>
+        <input
+          matInput
+          type="password"
+          autocomplete="new-password"
+          cdkFocusInitial
+          [formField]="form.passphrase"
+        />
+        <mat-hint>At least {{ minLength }} characters</mat-hint>
+        <mat-error>{{ firstError(form.passphrase) }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>Type it again</mat-label>
+        <input matInput type="password" autocomplete="new-password" [formField]="form.confirm" />
+        <mat-error>{{ firstError(form.confirm) }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>Lock after</mat-label>
+        <mat-select [value]="idle()" (selectionChange)="idle.set($event.value)">
+          @for (choice of idleChoices; track choice.value) {
+            <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
+          }
+        </mat-select>
+        <mat-hint>With no key, click, tap or scroll. It always locks when the tab closes.</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="warning">
+      <p>
+        <strong>Nobody can recover a forgotten passphrase.</strong> Without it, the only ways back
+        are a backup or deleting all data.
+      </p>
+      <button matButton="outlined" type="button" (click)="exportFirst()">
+        <mat-icon>download</mat-icon>
+        Export a backup first
+      </button>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button matButton type="button" mat-dialog-close disabledInteractive [disabled]="busy()">
+      Cancel
+    </button>
+    <button matButton="filled" type="submit" disabledInteractive [disabled]="busy()">
+      {{ busy() ? 'Encrypting…' : 'Turn on the lock' }}
+    </button>
+  </mat-dialog-actions>
+</form>

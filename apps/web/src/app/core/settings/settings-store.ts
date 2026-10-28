@@ -2,8 +2,11 @@ import { Service, computed, inject } from '@angular/core';
 import { salesTaxRate, type Settings } from '@simply-sub/core';
 import { SettingsRepository } from '../storage/settings-repository';
 
-/** What the user chooses: the settings without the record's key and timestamp. */
-export type SettingsValues = Omit<Settings, 'key' | 'updatedAt'>;
+/**
+ * What the user chooses: the settings without the record's key and timestamp, and without the app lock, which only its
+ * own dialogs change (AppLockRepository).
+ */
+export type SettingsValues = Omit<Settings, 'key' | 'updatedAt' | 'appLock'>;
 
 /**
  * The user's settings (BLUEPRINT §4.6), on SettingsRepository: the saved ones, whether the first-run dialog has to ask

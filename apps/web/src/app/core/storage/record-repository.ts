@@ -42,7 +42,7 @@ export abstract class RecordRepository<T extends IdTable> {
 
   protected constructor(private readonly table: T) {
     this.stored = rxResource({
-      params: () => this.storage.mode(),
+      params: () => this.storage.access(),
       stream: () => this.storage.watch(table),
     });
     this.records = computed(() =>

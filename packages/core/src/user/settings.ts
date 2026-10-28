@@ -1,5 +1,6 @@
 import * as z from 'zod';
 import { currencySchema } from '../catalog/formats';
+import { appLockSchema } from './app-lock';
 import { countrySchema, timestampSchema } from './record';
 
 const subdivisionSchema = z
@@ -7,9 +8,8 @@ const subdivisionSchema = z
   .regex(/^[A-Z]{2}-[A-Z0-9]{1,3}$/, 'Use an ISO 3166-2 code (CA-ON)');
 
 /**
- * The user's settings: one record, under the key `settings` (BLUEPRINT §4.6). The app lock's settings (M6.10) and
- * per-device preferences (PROJECT-PLAN §3.5) arrive with their tasks as optional fields, which stored records
- * without them still pass.
+ * The user's settings: one record, under the key `settings` (BLUEPRINT §4.6). Per-device preferences (PROJECT-PLAN
+ * §3.5) arrive with their tasks as optional fields, which stored records without them still pass.
  */
 export const settingsSchema = z
   .strictObject({
@@ -26,6 +26,11 @@ export const settingsSchema = z
     theme: z.enum(['system', 'light', 'dark']),
     /** Search starts with "Sold in <country>" on (PROJECT-PLAN P8, P13, M5.6). Left out, it starts off. */
     searchSoldOnly: z.literal(true).optional(),
+    /**
+     * The app lock (P13, M6.10; BLUEPRINT §11.5), when it's on: no secret, only the salt and a sealed check value. It
+     * stays plain while the rest of the settings are sealed, and only the storage engine's lock methods change it.
+     */
+    appLock: appLockSchema.optional(),
     updatedAt: timestampSchema,
   })
   .superRefine(({ country, subdivision }, ctx) => {

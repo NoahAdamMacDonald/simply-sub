@@ -34,8 +34,11 @@ export class BackupRepository {
     return engine.transaction(backupTables, async (transaction) => {
       const settings = await transaction.get('settings', 'settings');
       if (!settings) return undefined;
+      // The app lock is this device's, and the file isn't sealed with it.
+      const backedUp = { ...settings };
+      delete backedUp.appLock;
       return {
-        settings,
+        settings: backedUp,
         lists: await transaction.getAll('lists'),
         items: await transaction.getAll('items'),
         customSubs: await transaction.getAll('customSubs'),
@@ -48,12 +51,27 @@ export class BackupRepository {
 
   /**
    * Replace (P13): the backed-up tables cleared and filled with the backup's records, and the list drafts dropped,
-   * since they're edits of lists that may not be there any more. One transaction.
+   * since they're edits of lists that may not be there any more. One transaction. The settings are replaced rather
+   * than cleared, which keeps the app lock: with it on, the backup's records are sealed as they're written.
    */
   async replace(data: BackupData): Promise<ImportCounts> {
     const engine = await this.storage.engine();
     return engine.transaction([...backupTables, 'drafts'], async (transaction) => {
-      for (const table of [...backupTables, 'drafts'] as const) await transaction.clear(table);
+      for (const table of [...backupTables, 'drafts'] as const) {
+        if (table !== 'settings') await transaction.clear(table);
+      }
+      return writeAll(transaction, data, () => true);
+    });
+  }
+
+  /**
+   * Import from the lock screen (P15), for a forgotten passphrase: every table cleared, which turns the app lock off,
+   * and the backup's records written plain, in one transaction.
+   */
+  async restore(data: BackupData): Promise<ImportCounts> {
+    const engine = await this.storage.engine();
+    return engine.transaction(allTables, async (transaction) => {
+      for (const table of allTables) await transaction.clear(table);
       return writeAll(transaction, data, () => true);
     });
   }
@@ -78,7 +96,10 @@ export class BackupRepository {
     });
   }
 
-  /** Delete all data (P13): every table cleared, in one transaction. The first-run dialog then shows. */
+  /**
+   * Delete all data (P13): every table cleared, in one transaction, the app lock with the settings, so it works from the
+   * lock screen too (P15). The first-run dialog then shows.
+   */
   async deleteAll(): Promise<void> {
     const engine = await this.storage.engine();
     await engine.transaction(allTables, async (transaction) => {

@@ -1,0 +1,17 @@
+// The form wraps the dialog's title, content and actions, which the dialog lays out as its own children.
+form {
+  display: contents;
+}
+
+p {
+  margin: 0 0 12px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.wrong {
+  margin: 12px 0 0;
+  color: var(--ss-danger);
+}

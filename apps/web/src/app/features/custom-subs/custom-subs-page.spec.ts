@@ -324,6 +324,8 @@ describe('CustomSubsPage', () => {
       await items.create(itemFields(gym.id, basicId)),
       await items.create(itemFields(gym.id, basicId, familyId)),
     ];
+    // Both in the same list, so the row's "used in" can't tell one item from two.
+    await until(() => items.records().length === 2);
     await open();
     await until(() => rows()[0]?.details?.includes('used in') === true);
     await click('Edit Local Gym');
@@ -354,6 +356,7 @@ describe('CustomSubsPage', () => {
     const gym = await subs.create(gymFields);
     const premium = await items.create(itemFields(gym.id, premiumId));
     const basic = await items.create(itemFields(gym.id, basicId));
+    await until(() => items.records().length === 2);
     await open();
     await until(() => rows()[0]?.details?.includes('used in') === true);
     await click('Edit Local Gym');

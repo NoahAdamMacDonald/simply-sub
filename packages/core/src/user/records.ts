@@ -112,6 +112,14 @@ export function checkRecord<T extends UserTable>(table: T, record: unknown): Use
 }
 
 /**
+ * A row the app lock sealed whose value doesn't open (BLUEPRINT §11.5): the key is wrong, or it was changed. It's
+ * rejected like a record that fails its schema: hidden, and left as it is.
+ */
+export function unopenedRecord(table: UserTable, row: unknown): RejectedRecord {
+  return { table, ...wellFormedKey(table, row), issues: ['sealed: unopened'] };
+}
+
+/**
  * Describes a record by its key and its issues' paths and codes. Never the messages: Zod's can quote the data
  * ('Unrecognized key: "…"'), and so can a duplicate check's.
  */
@@ -120,16 +128,21 @@ function describeRejected(
   row: unknown,
   issues: readonly z.core.$ZodIssue[],
 ): RejectedRecord {
-  const field = userRecordKeys[table];
-  const key =
-    typeof row === 'object' && row !== null ? (row as Record<string, unknown>)[field] : undefined;
   return {
     table,
-    ...(keySchemas[table].safeParse(key).success && { key: key as string }),
+    ...wellFormedKey(table, row),
     issues: issues.map(
       (issue) => `${issue.path.map(pathSegment).join('.') || '(record)'}: ${issue.code}`,
     ),
   };
+}
+
+/** A row's key, when it's well formed. */
+function wellFormedKey(table: UserTable, row: unknown): { key?: string } {
+  const field = userRecordKeys[table];
+  const key =
+    typeof row === 'object' && row !== null ? (row as Record<string, unknown>)[field] : undefined;
+  return keySchemas[table].safeParse(key).success ? { key: key as string } : {};
 }
 
 /**

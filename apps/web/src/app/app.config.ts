@@ -12,6 +12,7 @@ import { routes } from './app.routes';
 import { CatalogStore } from './core/catalog/catalog-store';
 import { FxStore } from './core/fx/fx-store';
 import { GlobalErrorHandler } from './core/errors/global-error-handler';
+import { AutoLock } from './core/lock/auto-lock';
 import { FirstRun } from './core/settings/first-run';
 import { ThemeService } from './core/theme/theme-service';
 
@@ -29,13 +30,14 @@ export const appConfig: ApplicationConfig = {
       withRouterConfig({ canceledNavigationResolution: 'computed' }),
     ),
     // Start the theme at boot, so 'system' follows the OS even before a toggle is on screen, the first-run check,
-    // which opens the settings on the way, the catalog, which shows its cached files and checks for a new version, and
-    // the exchange rates.
+    // which opens the settings on the way, the catalog, which shows its cached files and checks for a new version, the
+    // exchange rates, and the app lock's idle timer.
     provideAppInitializer(() => {
       inject(ThemeService);
       inject(FirstRun);
       inject(CatalogStore);
       inject(FxStore);
+      inject(AutoLock);
     }),
     {
       provide: MAT_ICON_DEFAULT_OPTIONS,

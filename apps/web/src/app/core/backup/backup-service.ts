@@ -92,6 +92,11 @@ export class BackupService {
     return this.repository.replace(data);
   }
 
+  /** Import from the lock screen: everything here deleted, the lock with it, and the backup's records written. */
+  restore(data: BackupData): Promise<ImportCounts> {
+    return this.repository.restore(data);
+  }
+
   /** Merge: the backup's records that are newer, or aren't here. */
   merge(data: BackupData): Promise<ImportCounts> {
     return this.repository.merge(data);

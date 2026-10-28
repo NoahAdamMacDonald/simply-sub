@@ -53,7 +53,12 @@
         }
         <li>your settings</li>
       </ul>
-      @if (!firstRun) {
+      @if (locked) {
+        <p class="hint">
+          Replace deletes everything saved in this browser, turns the lock off, and brings back what
+          the backup has.
+        </p>
+      } @else if (!firstRun) {
         <p class="hint">
           Merge keeps what’s here and takes what’s newer in the backup. Replace swaps everything
           here for the backup.
@@ -92,15 +97,17 @@
           Import
         </button>
       } @else {
-        <button
-          matButton="outlined"
-          type="button"
-          disabledInteractive
-          [disabled]="busy()"
-          (click)="merge()"
-        >
-          Merge
-        </button>
+        @if (!locked) {
+          <button
+            matButton="outlined"
+            type="button"
+            disabledInteractive
+            [disabled]="busy()"
+            (click)="merge()"
+          >
+            Merge
+          </button>
+        }
         <button
           matButton="filled"
           type="button"
