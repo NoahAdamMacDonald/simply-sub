@@ -63,18 +63,32 @@
   }
 }
 
-// The grid, and the day's panel on its right when one is open.
+// The grid, then the day's panel under 960 px, or the agenda under 600 px. From 960 px the grid has a column of its
+// own on its right, for the day's panel and Upcoming, so opening a day never narrows the grid (M7.8).
 .body {
   display: grid;
   gap: 16px;
   margin-bottom: 24px;
 
-  &.with-panel {
-    @media (min-width: 960px) {
-      grid-template-columns: minmax(0, 1fr) 280px;
-      align-items: start;
-    }
+  &.wide {
+    grid-template-columns: minmax(0, 1fr) 280px;
+    align-items: start;
   }
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+// Where the day's panel goes, until a day is chosen.
+.pick-day {
+  margin: 0;
+  padding: 16px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
 }
 
 .grid {
@@ -228,6 +242,52 @@
   background-color: var(--ss-card-bg);
 }
 
+// Under 600 px the grid is compact (M7.8): the date on top of each day, and a dot under it when it has payments; a
+// tap anywhere on the day opens it.
+.grid.compact {
+  border-spacing: 2px;
+
+  th {
+    font: var(--mat-sys-label-small);
+  }
+
+  td {
+    height: 44px;
+
+    &.other .number {
+      padding: 6px 0;
+      text-align: center;
+    }
+  }
+
+  .cell {
+    align-items: center;
+    min-height: 44px;
+    padding: 0 0 6px;
+  }
+
+  .day {
+    justify-content: center;
+    padding: 4px 0;
+  }
+
+  .content {
+    justify-content: flex-end;
+  }
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--ss-accent-text);
+
+  // A card goes over its limit that day (M9.4).
+  &.over {
+    background-color: var(--ss-danger);
+  }
+}
+
 // The agenda (under 600 px): a card per day with payments.
 .agenda {
   display: flex;
@@ -297,6 +357,7 @@
   font-weight: 600;
 }
 
+// The next payments, one to a line (M7.8): a run of them flowed unevenly on a phone.
 .upcoming {
   h2 {
     margin: 0 0 8px;
@@ -305,8 +366,8 @@
 
   ul {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px 24px;
+    flex-direction: column;
+    gap: 6px;
     margin: 0;
     padding: 0;
     list-style: none;

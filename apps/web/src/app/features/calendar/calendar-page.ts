@@ -1,4 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -18,7 +19,7 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { MatSelect, MatSelectTrigger } from '@angular/material/select';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, type UrlTree } from '@angular/router';
 import {
   addDays,
   addMonths,
@@ -57,8 +58,10 @@ import { calendarApps, type CalendarApp } from './calendar-apps';
 import type { CalendarDay, CalendarEntry } from './calendar-entries';
 import { DayPanel } from './day-panel';
 
-/** Under this width the grid becomes an agenda (P10). */
+/** Under this width the grid is compact, over an agenda (P10, M7.8). */
 const AGENDA = '(max-width: 599.98px)';
+/** From this width the grid has a column of its own beside it, for a day and Upcoming (M7.8). */
+const WIDE = '(min-width: 960px)';
 /** How many charges a day shows as chips before "+2 more" (P10). */
 const chipCount = 3;
 /** How many charges Upcoming lists. */
@@ -85,14 +88,17 @@ const monthNames = Array.from({ length: 12 }, (_, index) =>
  * Its month and lists are in the URL (?month=&lists=; core's readCalendarParams), and the lists left out are
  * remembered on this device (settings.calendarHiddenLists). The bar fills with what's been paid so far against the
  * month's total, with a tick at the monthly budget; the grid has a tab stop that the arrow keys move, chips for each
- * day's charges, and a panel for the day; under 600 px an agenda by date, with the day in a bottom sheet. Upcoming
- * lists the next charges.
+ * day's charges, and a panel for the day; under 600 px it's compact, a dot on each day with payments, over an agenda by
+ * date, with the day in a bottom sheet (M7.8). From 960 px the day's panel and Upcoming are in a column of their own,
+ * so the grid never moves when a day opens (M7.8). Upcoming lists the next charges. Opened from another page, not the
+ * sidebar, it has a back button to it (M7.8).
  */
 @Component({
   selector: 'ss-calendar-page',
   imports: [
     BudgetBar,
     DayPanel,
+    NgTemplateOutlet,
     MatButton,
     MatFormField,
     MatIcon,
@@ -139,6 +145,22 @@ export class CalendarPage {
       .pipe(map((state) => state.matches)),
     { requireSync: true },
   );
+  protected readonly wide = toSignal(
+    inject(BreakpointObserver)
+      .observe(WIDE)
+      .pipe(map((state) => state.matches)),
+    { requireSync: true },
+  );
+  /**
+   * The page the Calendar was opened from (M7.8): List view's mini calendar, a budget warning, Home's calendar. None
+   * when the sidebar opened it or it's the first page opened: someone who chose the Calendar isn't on their way back.
+   */
+  private readonly openedFrom = this.cameFrom();
+  /** Its back button: that page, by name ("Work Related"). */
+  protected readonly back = computed(() => {
+    const opened = this.openedFrom;
+    return opened && { link: opened.url, label: this.pageName(opened.path) };
+  });
 
   private readonly params = toSignal(this.route.queryParams, { requireSync: true });
   protected readonly state = computed<'loading' | 'error' | 'ready'>(() => {
@@ -524,6 +546,35 @@ export class CalendarPage {
 
   private dayButton(date: IsoDate): HTMLElement | null {
     return this.host.nativeElement.querySelector<HTMLElement>(`.day[data-date="${date}"]`);
+  }
+
+  /** Where the navigation that opened the page came from, when that was another page and not the sidebar. */
+  private cameFrom(): { url: UrlTree; path: string[] } | undefined {
+    const navigation = this.router.currentNavigation() ?? this.router.lastSuccessfulNavigation();
+    if (!navigation || navigation.extras.state?.['sidebar'] === true) return undefined;
+    const url = navigation.previousNavigation?.finalUrl;
+    const path = url?.root.children['primary']?.segments.map((segment) => segment.path) ?? [];
+    if (!url || path[0] === 'calendar') return undefined;
+    return { url, path };
+  }
+
+  /** A page's name for the back button: a list's own name, else the page's. */
+  private pageName(path: readonly string[]): string {
+    const [page, id, sub] = path;
+    if (page === 'lists' && id !== undefined) {
+      if (sub === 'optimize') return 'Optimizations';
+      if (sub === 'edit') return 'Edit list';
+      return this.lists.byId().get(id)?.name ?? 'List';
+    }
+    const names: Partial<Record<string, string>> = {
+      lists: 'Lists',
+      search: 'Search',
+      features: 'Features',
+      payment: 'Payment',
+      custom: 'Custom subscriptions',
+      settings: 'Settings',
+    };
+    return page === undefined ? 'Home' : (names[page] ?? 'Back');
   }
 
   /** A phone's day: a bottom sheet with its panel, which follows the page while it's open. */

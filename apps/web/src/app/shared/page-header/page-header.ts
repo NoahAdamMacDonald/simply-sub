@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component, booleanAttribute, inject, input } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, UrlTree } from '@angular/router';
 
 /**
  * A page's title row (PROJECT-PLAN §4.3): a back button above it on every page the sidebar doesn't list ("← Lists",
@@ -20,8 +20,8 @@ export class PageHeader {
   private readonly location = inject(Location);
 
   readonly heading = input.required<string>();
-  /** Where the back button goes, as a routerLink takes it. */
-  readonly backLink = input<string | readonly unknown[]>();
+  /** Where the back button goes, as a routerLink takes it: a URL tree keeps a page's query (the Calendar's, M7.8). */
+  readonly backLink = input<string | readonly unknown[] | UrlTree>();
   /** The back button's text: the page it goes to. */
   readonly backLabel = input('Back');
   /**
@@ -35,7 +35,7 @@ export class PageHeader {
       this.location.back();
     } else {
       const link = this.backLink() ?? '/';
-      void (typeof link === 'string'
+      void (typeof link === 'string' || link instanceof UrlTree
         ? this.router.navigateByUrl(link)
         : this.router.navigate([...link]));
     }
