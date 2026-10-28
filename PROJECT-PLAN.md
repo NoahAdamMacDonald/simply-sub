@@ -202,7 +202,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 ### M8 — Optimizer & bot
 | ID | Task | Done when |
 |---|---|---|
-| M8.1 | core: optimizer (BLUEPRINT §10) with fixtures | All fixture cases pass |
+| M8.1 | core: optimizer (BLUEPRINT §10) with fixtures. As built: core's `optimizer/` (`optimize`, its model, coverage map, search, cards and fingerprints, and `actionTitle`), with per-level plans split into independent cards, per-item coverage, the service itself lost on removal and removal only with a reason, the user's choices (BLUEPRINT §14) | All fixture cases pass |
 | M8.2 | Optimizations page (P14) + "Apply" to a draft | P14 criteria met |
 | M8.3 | `apps/bot` nightly price check → GitHub PR (BLUEPRINT §6.4, §7.7), which also checks each `taxIncluded` quote is still on its page, rereads reseller prices and checks each reseller's approval quotes on the provider's page (BLUEPRINT §4.9); the same run proposes a new logo when a provider's or reseller's icon changed (a rebrand) | A changed price produces a PR, and so does a changed logo, a `taxIncluded` quote gone from its page or a reseller the provider no longer names |
 

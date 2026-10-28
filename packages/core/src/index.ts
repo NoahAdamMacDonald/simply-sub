@@ -51,6 +51,18 @@ export * from './icons/icon-query';
 export * from './icons/icon-sources';
 export * from './lookup/lookup-bodies';
 export * from './lookup/lookup-query';
+export * from './optimizer/fingerprint';
+export {
+  buildModel,
+  keptAddOns,
+  reperiod,
+  withAddOn,
+  type OptimizerContext,
+  type OptimizerInput,
+} from './optimizer/model';
+export * from './optimizer/optimize';
+export * from './optimizer/suggestion';
+export * from './optimizer/suggestion-text';
 export * from './ranking/feature-ranking';
 export * from './ranking/plan-features';
 export * from './ranking/rank-fit';

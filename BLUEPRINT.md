@@ -2215,7 +2215,8 @@ noted in a help tooltip.
 
 Lives in `packages/core/src/optimizer/`. It's a **pure function**:
 `optimize(list, catalog, rankings, cards?, settings) → Suggestion[]`, and it runs in the browser
-(in a Web Worker if it's slow).
+(in a Web Worker if it's slow). As built (M8.1): `optimize({ items, catalogs, context, cards? })` →
+`{ suggestions, bestSavings, … }`, with the rules the user chose in section 14 (M8.1).
 
 ### 10.1 Inputs, prepared first
 1. Resolve each item's effective feature ranks (section 4.6).
@@ -2257,9 +2258,10 @@ Lives in `packages/core/src/optimizer/`. It's a **pure function**:
   and the features gained or lost.
 
 ### 10.5 Testing
-Fixture-based Vitest tests, for example: "2 VPNs, VPN ranked Needed → suggest removing the cheaper one",
-"Essential feature blocks a downgrade", "Critical feature allows a same-provider downgrade that keeps it but
-blocks removal" and "a limited Sep–Oct window keeps a Needed feature covered".
+Fixture-based Vitest tests, for example: "2 VPNs, VPN ranked Needed → suggest removing one, never both" (the
+pricier when they're alike, the cheaper when only the pricier has another Needed feature), "Essential feature
+blocks a downgrade", "Critical feature allows a same-provider downgrade that keeps it but blocks removal" and "a
+limited Sep–Oct window keeps a Needed feature covered".
 
 ---
 
@@ -2539,6 +2541,80 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-28, M8.1)**
+- **The optimizer** (section 10) is core's `optimizer/`: `optimize({ items, catalogs, context, cards? })`, where
+  `items` are a list's resolved items (MetricsService's), `catalogs` the catalog file of each region they're priced
+  in, `context` today, the user's country, currency, rates, tax place and profile ranks, and `cards` a slot for M9.
+  It returns `{ suggestions, bestSavings, bestEstimated, currency, next12, search }`. Nothing reads the clock.
+- **Money:** every amount is the next 12 months (PROJECT-PLAN §3.1) from the schedule engine, sales tax included:
+  each option's new item is resolved with `resolveItem` and charged with `itemCharges`. An item with a charge in
+  another currency (no rate) stays as it is, and a card with a converted price is `estimated`.
+- **When a change takes effect:** on the item's next charge, so what's paid for is used up first. A bundle or suite
+  starts on the earliest next charge of the items it replaces. A change drops the item's price override (it was for
+  the old plan) and keeps the add-ons the new plan allows, within its limit; `reperiod` keeps a billing day that
+  still applies. Specific dates keep their windows and period: they're never moved to annual billing.
+- **Candidates** (section 10.3), each kept only when it costs less over the 12 months than what it replaces:
+  annual billing (an item that renews by itself, to a yearly price that does too); another plan of the provider,
+  its free plan too (`downgrade` when it gives a subset, else `switch`), on the item's period or yearly; removal;
+  an extra member (an add-on with `grantsPlan` on another item of the same provider, within the host plan's
+  `addOnLimit`, up to 3 at once); a bundle whose plans' providers are the items' (one item per plan, at least two);
+  and a suite plan whose `includes-subscription`, followed through, has the items' plans, with up to
+  `account.users` copies of each. A bundle item the list has can move to annual billing only. The 7th action (a card)
+  is a `card` action kind M9 fills in.
+- **The rules, the user's choices:**
+  - **Coverage is per item:** ranks are an item's own, so a plan change, an extra member, a bundle or a suite is
+    judged on what replaces that item. Only a removed item's features can be kept by other items, of another
+    provider: the overlap that's the reason to remove it. Netflix moving to ads loses Ad free even when Disney+ is
+    ad-free.
+  - **Another item of the same provider never counts:** it's someone's own account (two Netflix accounts for two
+    family members), so a copy is never removed for overlap. It can become an extra member, or both move to a suite
+    with enough users.
+  - **Removing an item loses its service itself**, which no feature describes: yellow, or orange or red when every
+    key it provides is ranked Unused or Unwanted. Removal is suggested **only with a reason**: another provider's
+    item gives one of its keys in every month it would still have been active (two VPNs, never both), or every key
+    it gives is Unused or Unwanted. A service nothing overlaps isn't suggested for removal, so a list with nothing
+    ranked isn't told to cancel everything.
+  - **Free savings lose nothing at all.** Losing a Not-ranked feature is red, as section 10.4 says; P14's "nothing
+    you rank is lost" became "nothing is lost".
+  - **Hard constraints** (section 10.2) are checked month by month: an item's Needed, Critical and Essential keys
+    must be kept for it in every slot it's active in. Essential allows annual billing and a bundle with the same plan
+    only; Critical allows the provider's plans that give its Critical keys, a bundle's or suite's that do, and never
+    removal.
+- **Cards** are per-level plans (the user's choice): for each severity (free, red, orange, yellow) the cheapest valid
+  combination, its plan. A plan's changes are split into cards that can be applied on their own: two changes share a
+  card when an item's key, in some month, is given neither by its own change nor by an item left as it is, and the
+  other change gives it or takes away an item that gave it (removing both of two overlapping services, a bundle that
+  brings what another change takes). Each section lists its own plan's cards of its severity, so a section's cards
+  never conflict and their savings add up; a card in a looser section can be an alternative to one in a stricter
+  section for the same item (Disney+ billed yearly in Free, Standard billed yearly in Red). "Save up to" is the
+  yellow plan's savings.
+- **The coverage map** (section 10.1) is 12 slots, a month each from today, with a bit per slot an item is active
+  in (`optimizer/coverage.ts`): Ongoing from its start date until its end date, a window through its end, copied
+  into each year when it repeats.
+- **Search** (section 10.4): the list splits into parts whose items can't affect each other (no check depends on
+  both, no option has both), each searched alone. A part with up to 10^5 combinations is searched exhaustively,
+  depth first, the costliest items first, pruned by cost (a lower bound: each item's cheapest option, an option of
+  several split evenly) and by checks that fail as soon as the items they depend on are decided. A bigger part gets
+  greedy search, the change that saves the most each time, then pairs of changes that interact (local improvement),
+  within 20,000 judged combinations per severity; a looser severity's plan is never worse than a stricter one's.
+- **Fingerprints** are 16 hex digits, two FNV-1a hashes of the list's items as the optimizer read them (id, source,
+  region, billing, price override and each provided key's rank) and the card's changes. The same list gives the same
+  ones on every run and device; changing an item, re-anchoring it or a rank its keys have gives new ones. The item
+  ids are random, so a fingerprint (the dismissal's key, plain under the app lock) can't be matched to plans by
+  guessing.
+- **Words** (`suggestion-text.ts`): "Switch Disney+ Premium to annual billing", "Downgrade Netflix Premium →
+  Standard", "Remove Mullvad VPN", "Make Sam's (Netflix Standard) an extra member on Mine (Netflix Standard)",
+  "Replace Proton Mail Plus and Proton VPN Plus with Proton Unlimited". Items keep their nicknames (`itemTitle`).
+- **Fixtures** (`test/optimizer/`, a small catalog with fixed prices, Alberta's 5% GST): annual billing (and none
+  for a plan renewed by hand), a bundle, a suite, red, orange and yellow downgrades, the two VPN cases, Essential,
+  Critical, a Sep–Oct window keeping a Needed feature covered, duplicates across family members with extra members,
+  three Netflix accounts onto Premium's two extra members, Mullvad's euros (estimated), a plan billed on the 31st,
+  a window plan changed in place, a payment due today, a 16-item list that needs greedy search, and fingerprints.
+  The cards and their colours are inline snapshots.
+- **Speed** (Node, one run): under 10 ms up to 12 items, 14 ms at 15, 21 ms at 16 and 59 ms at 20 (greedy). M8.2
+  runs it in a Web Worker for bigger lists.
+- **Bundles:** the initial bundle didn't change (497.3 kB): nothing in the app imports the optimizer yet.
 
 **Resolved (2026-10-28, M7.6)**
 - **The budget warnings** (PROJECT-PLAN §3.1) are `ss-budget-warnings`, on core's checks (`ListMetrics.warnings`,
