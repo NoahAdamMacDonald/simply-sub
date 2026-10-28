@@ -1,5 +1,12 @@
 <ss-page-header [heading]="list()?.name ?? 'List'" backLink="/lists" backLabel="Lists">
   @if (state() === 'ready') {
+    <!-- At the top as well as at the foot, which a long list takes a while to reach. -->
+    <a matButton="outlined" class="edit-list-top" [routerLink]="['/lists', listId(), 'edit']">
+      <mat-icon>edit</mat-icon>
+      Edit list
+    </a>
+  }
+  @if (state() === 'ready') {
     <!-- "/ mo" and ≈ are read as words, as ss-price's are. -->
     <p subtitle class="summary">
       @if (summary().average; as average) {
@@ -117,6 +124,10 @@
                 class="filters"
                 [(state)]="filters"
                 [options]="options()"
+                [features]="context().registry"
+                [categories]="featureCategories()"
+                [currency]="context().currency"
+                [country]="country()"
                 [count]="filterCount()"
               />
             }

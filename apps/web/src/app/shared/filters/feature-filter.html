@@ -1,0 +1,36 @@
+<mat-form-field appearance="outline" subscriptSizing="dynamic">
+  <mat-label>Features</mat-label>
+  <mat-chip-grid #chips aria-label="Chosen features" class="ss-wrapping-chips" [disabled]="off()">
+    @for (option of picked(); track option.key) {
+      <!-- A click anywhere on the chip removes it, as its X does (M5.9); the X stops its own click from reaching here. -->
+      <mat-chip-row (removed)="remove(option)" (click)="remove(option)">
+        {{ label(option) }}
+        <button matChipRemove type="button" [attr.aria-label]="'Remove ' + label(option)">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+    }
+  </mat-chip-grid>
+  <input
+    #box
+    autocomplete="off"
+    [matChipInputFor]="chips"
+    [matAutocomplete]="suggested"
+    (input)="text.set(box.value)"
+  />
+  <mat-autocomplete
+    #suggested
+    autoActiveFirstOption
+    (opened)="suggestionsOpened()"
+    (optionSelected)="add($event.option.value, box)"
+  >
+    @for (group of suggestions(); track group.label) {
+      <mat-optgroup [label]="group.label">
+        @for (option of group.keys; track option.key) {
+          <mat-option [value]="option.key">{{ label(option) }}</mat-option>
+        }
+      </mat-optgroup>
+    }
+  </mat-autocomplete>
+  <mat-hint>{{ hint() }}</mat-hint>
+</mat-form-field>

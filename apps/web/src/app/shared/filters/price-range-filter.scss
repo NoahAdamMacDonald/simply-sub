@@ -1,0 +1,23 @@
+:host {
+  display: block;
+}
+
+.label {
+  font: var(--mat-sys-title-small);
+}
+
+.price-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+
+.range {
+  color: var(--ss-text-muted);
+}
+
+// The slider spans its space; its own margin keeps the thumbs inside.
+mat-slider {
+  display: block;
+}

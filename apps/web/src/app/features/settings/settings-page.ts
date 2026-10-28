@@ -1,6 +1,5 @@
-import { Location } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
-import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
@@ -15,6 +14,7 @@ import { SettingsStore } from '../../core/settings/settings-store';
 import { ThemeService, type ThemeMode } from '../../core/theme/theme-service';
 import { countryName } from '../../shared/country-name';
 import { importedText } from './backup-text';
+import { PageHeader } from '../../shared/page-header/page-header';
 import { BudgetSetting } from './budget-setting';
 import { LocationDialog } from './location-dialog';
 import { percentText, placeSummary } from './place-names';
@@ -38,9 +38,9 @@ const checkMessages: Record<CatalogCheckOutcome, string> = {
     MatButton,
     MatCheckbox,
     MatIcon,
-    MatIconButton,
     MatRadioButton,
     MatRadioGroup,
+    PageHeader,
   ],
   templateUrl: './settings-page.html',
   styleUrl: './settings-page.scss',
@@ -51,7 +51,6 @@ export class SettingsPage {
   private readonly theme = inject(ThemeService);
   private readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
-  private readonly location = inject(Location);
   private readonly snackBar = inject(MatSnackBar);
 
   protected readonly saved = this.settings.saved;
@@ -90,15 +89,6 @@ export class SettingsPage {
 
   /** What the last [Check for updates] found: only the user's own checks, not the automatic ones. */
   protected readonly checkMessage = signal('');
-
-  /** ←: back where the user came from, or Home when Settings was the first page opened. */
-  protected back(): void {
-    if (this.router.lastSuccessfulNavigation()?.previousNavigation) {
-      this.location.back();
-    } else {
-      void this.router.navigateByUrl('/');
-    }
-  }
 
   /** The user's country, by name, for Search's Sold in. */
   protected readonly country = computed(() => {

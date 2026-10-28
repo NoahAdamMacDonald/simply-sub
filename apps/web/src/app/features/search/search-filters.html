@@ -1,27 +1,11 @@
-<div class="price" role="group" [attr.aria-labelledby]="id + '-price'">
-  <div class="price-head">
-    <span class="label" [id]="id + '-price'">Price per month</span>
-    <span class="range" aria-hidden="true">{{ rangeText() }}</span>
-  </div>
-  <mat-slider [min]="0" [max]="price().top" [step]="price().step" [displayWith]="priceText">
-    <input
-      #lowThumb
-      matSliderStartThumb
-      aria-label="Lowest price per month"
-      [value]="low()"
-      (input)="dragging('min', +lowThumb.value)"
-      (change)="letGo('min', +lowThumb.value)"
-    />
-    <input
-      #highThumb
-      matSliderEndThumb
-      aria-label="Highest price per month"
-      [value]="high()"
-      (input)="dragging('max', +highThumb.value)"
-      (change)="letGo('max', +highThumb.value)"
-    />
-  </mat-slider>
-</div>
+<ss-price-range
+  [range]="options().price"
+  [min]="query().minPrice"
+  [max]="query().maxPrice"
+  [currency]="currency()"
+  [country]="country()"
+  (limitsChange)="choosePrice($event)"
+/>
 
 <mat-form-field appearance="outline" subscriptSizing="dynamic">
   <mat-label>Category</mat-label>
@@ -33,58 +17,23 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="outline" class="features" subscriptSizing="dynamic">
-  <mat-label>Features</mat-label>
-  <mat-chip-grid #chips aria-label="Chosen features" class="ss-wrapping-chips">
-    @for (option of picked(); track option.key) {
-      <!-- A click anywhere on the chip removes it, as its X does (M5.9); the X stops its own click from reaching here. -->
-      <mat-chip-row (removed)="removeFeature(option)" (click)="removeFeature(option)">
-        {{ label(option) }}
-        <button matChipRemove type="button" [attr.aria-label]="'Remove ' + label(option)">
-          <mat-icon>cancel</mat-icon>
-        </button>
-      </mat-chip-row>
-    }
-  </mat-chip-grid>
-  <input
-    #box
-    autocomplete="off"
-    [matChipInputFor]="chips"
-    [matAutocomplete]="suggested"
-    (input)="featureText.set(box.value)"
-  />
-  <mat-autocomplete
-    #suggested
-    autoActiveFirstOption
-    (opened)="suggestionsOpened()"
-    (optionSelected)="addFeature($event.option.value, box)"
-  >
-    @for (group of suggestions(); track group.label) {
-      <mat-optgroup [label]="group.label">
-        @for (option of group.keys; track option.key) {
-          <mat-option [value]="option.key">{{ label(option) }}</mat-option>
-        }
-      </mat-optgroup>
-    }
-  </mat-autocomplete>
-  <mat-hint>Plans need every feature chosen</mat-hint>
-</mat-form-field>
+<ss-feature-filter
+  class="features"
+  hint="Plans need every feature chosen"
+  [keys]="options().keys"
+  [features]="catalog().features"
+  [categories]="catalog().categories.feature"
+  [value]="query().features ?? []"
+  (valueChange)="change({ features: [...$event] })"
+/>
 
-<fieldset class="activity">
-  <legend class="label">Activity</legend>
-  @for (choice of activityChoices; track choice.value) {
-    <label class="chip">
-      <input
-        #toggle
-        type="checkbox"
-        [checked]="query().activity?.includes(choice.value) ?? false"
-        (change)="toggleActivity(choice.value, toggle.checked)"
-      />
-      <mat-icon class="check" aria-hidden="true">check</mat-icon>
-      <span>{{ choice.label }}</span>
-    </label>
-  }
-</fieldset>
+<ss-chip-choices
+  class="activity"
+  legend="Activity"
+  [choices]="activityChoices"
+  [value]="query().activity ?? []"
+  (valueChange)="chooseActivity($event)"
+/>
 
 <div class="native">
   <mat-checkbox

@@ -254,6 +254,7 @@ describe('SearchPage', () => {
       'Price: high to low',
       'Name: A to Z',
       'Most features',
+      'Best for my ranks',
     ]);
     await sort.clickOptions({ text: 'Name: A to Z' });
     await settle();

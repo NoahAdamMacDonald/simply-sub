@@ -56,6 +56,39 @@ function trackRequests(context) {
   return requests;
 }
 
+/** Rates per Canadian dollar, from the API contract's example. */
+const cadRates = { CHF: 0.581, EUR: 0.6372, GBP: 0.5571, SEK: 7.097, USD: 0.7243 };
+
+/** GET /fx's body for `base`, from the rates per Canadian dollar. */
+function fxBody(base) {
+  const perCad = (currency) => (currency === 'CAD' ? 1 : cadRates[currency]);
+  const rates = Object.fromEntries(
+    ['CAD', ...Object.keys(cadRates)]
+      .filter((currency) => currency !== base)
+      .map((currency) => [currency, Number((perCad(currency) / perCad(base)).toPrecision(6))]),
+  );
+  return {
+    data: { base, date: '2026-10-26', source: 'European Central Bank via Frankfurter', rates },
+    meta: { fetchedAt: '2026-10-26T06:00:02Z', stale: false },
+  };
+}
+
+/**
+ * Answers GET /fx with fixed rates, as check-search.cjs does: there's no Worker behind the dev proxy, and its 502 was
+ * a console warning. Again after each `unrouteAll`.
+ */
+async function routeFx(context) {
+  await context.route('**/api/v1/fx?**', (route) =>
+    route.fulfill({ json: fxBody(new URL(route.request().url()).searchParams.get('base')) }),
+  );
+}
+
+async function newContext(browser, options) {
+  const context = await browser.newContext(options);
+  await routeFx(context);
+  return context;
+}
+
 async function newPage(context, label) {
   const page = await context.newPage();
   page.on('console', (msg) => {
@@ -154,6 +187,7 @@ async function firstRun(page) {
 /** Serves `version` in place of the deployed catalog: index.json and US.json with that version. */
 async function deployVersion(context, real, version) {
   await context.unrouteAll({ behavior: 'ignoreErrors' });
+  await routeFx(context);
   const index = { ...real.index, catalogVersion: version };
   const us = { ...real.us, meta: { ...real.us.meta, catalogVersion: version } };
   await context.route('**/data/catalog/index.json', (route) => route.fulfill({ json: index }));
@@ -171,7 +205,7 @@ async function requestsAndTabs(browser, real) {
     day: 'numeric',
     year: 'numeric',
   }).format(new Date(real.index.generatedAt));
-  const context = await browser.newContext({
+  const context = await newContext(browser, {
     viewport: WIDE,
     colorScheme: 'light',
     locale: 'en-US',
@@ -210,9 +244,13 @@ async function requestsAndTabs(browser, real) {
   await page.getByRole('heading', { name: 'Catalog' }).waitFor();
   const line = await catalogText(page);
   check('Settings: the Catalog line', line.includes(`Updated ${day} · version ${v}`), line);
+  // Search's option and Your data's buttons (M5.6, M6.9) come between 📍 and the Catalog line.
   await page.getByRole('button', { name: /United States/ }).focus();
-  await page.keyboard.press('Tab');
-  const focused = await focusedName(page);
+  let focused = '';
+  for (let presses = 0; presses < 8 && !focused.includes('Check for updates'); presses++) {
+    await page.keyboard.press('Tab');
+    focused = await focusedName(page);
+  }
   check(
     'keyboard: Tab from 📍 reaches [Check for updates]',
     focused.includes('Check for updates'),
@@ -275,6 +313,7 @@ async function requestsAndTabs(browser, real) {
     await banner(page),
   );
   await context.unrouteAll({ behavior: 'ignoreErrors' });
+  await routeFx(context);
 
   // A new version, announced in both tabs, downloaded once.
   await page.goto(`${baseUrl}settings`);
@@ -326,6 +365,7 @@ async function requestsAndTabs(browser, real) {
 
   // Sweden has no file of its own, and no EU file today: the full catalog.json, and US.json is dropped.
   await context.unrouteAll({ behavior: 'ignoreErrors' });
+  await routeFx(context);
   await page.goto(`${baseUrl}settings`);
   await page.getByRole('button', { name: /United States/ }).click();
   const dialog = page.locator('mat-dialog-container');
@@ -355,7 +395,7 @@ async function looks(browser, real) {
   for (const colorScheme of ['light', 'dark']) {
     for (const viewport of [WIDE, NARROW]) {
       const label = `${colorScheme} ${viewport.width}`;
-      const context = await browser.newContext({ viewport, colorScheme, locale: 'en-US' });
+      const context = await newContext(browser, { viewport, colorScheme, locale: 'en-US' });
       const page = await newPage(context, label);
       await page.goto(`${baseUrl}settings`);
       await firstRun(page);
@@ -393,7 +433,7 @@ async function firstVisitOffline(browser) {
     ['light', WIDE],
   ]) {
     const label = `${colorScheme} ${viewport.width}`;
-    const context = await browser.newContext({ viewport, colorScheme, locale: 'en-US' });
+    const context = await newContext(browser, { viewport, colorScheme, locale: 'en-US' });
     await context.route('**/data/catalog/**', (route) => route.abort('internetdisconnected'));
     const page = await newPage(context, `first visit offline ${label}`);
     await page.goto(baseUrl);

@@ -8,7 +8,8 @@
 // filter change, and under 960 px the drawer (focus, its trap, Escape, Show results, Back), a price's Add to list
 // menu by keyboard (M5.4), pick mode's banner, its ✕ and a price that adds at once (M5.5), and M5.7's pinned bar and panel, chips that stay put, the plans' order, a lone plan's
 // chip and the details' slide and foot, and M1.13's Terms and policies with M1.14's grade dots, their tooltips (hover,
-// keyboard and a phone's tap) and citations, with axe. GET /fx is answered with fixed rates (1 EUR ≈ CA$1.5694), so
+// keyboard and a phone's tap) and citations, and the feedback after M6.9's "· 1 list" button (its tooltip and menu)
+// and Best for my ranks with each card's rank counts, with axe. GET /fx is answered with fixed rates (1 EUR ≈ CA$1.5694), so
 // Amazon.ca's Mullvad cards are cheaper in Alberta.
 // Usage: node check-search.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
 const fs = require('fs');
@@ -1808,6 +1809,119 @@ async function addItem(page, planId) {
     check('turning it off against the default writes sold=0', true);
     await axeCheck(second, 'GB, Sold in off against the default');
     await british.close();
+  }
+
+  // ── The feedback after M6.9: "· 1 list" names its list, and the user's ranks (both themes at both widths) ──────
+  for (const [colorScheme, viewport] of [
+    ['light', WIDE],
+    ['dark', NARROW],
+  ]) {
+    const label = `ranks ${colorScheme} ${viewport.width}`;
+    const context = await newContext(browser, { locale: 'en-CA', colorScheme, viewport });
+    const page = await newPage(context, label);
+    await openSearch(page, 'Alberta');
+    await putRecord(page, 'rankings', {
+      rankKey: 'video.quality=4k',
+      rank: 'needed',
+      createdAt: '2026-10-20T12:00:00.000Z',
+      updatedAt: '2026-10-20T12:00:00.000Z',
+    });
+    await addList(page);
+    await addItem(page, 'netflix.standard');
+    const netflix = card(page, 'Netflix');
+
+    // "· 1 list" is a button: its tooltip names the list on keyboard focus, and it opens a menu of links to it.
+    // Tab from the stop before it: a tooltip opens on keyboard focus, not a script's focus().
+    await netflix.locator('.in-lists').focus();
+    await page.keyboard.press('Shift+Tab');
+    await page.keyboard.press('Tab');
+    const tooltip = page.locator('.mat-mdc-tooltip');
+    await tooltip.waitFor({ timeout: 5000 });
+    check(
+      `${label}: Tab reaches "1 list", whose tooltip names the list`,
+      (await stop(page)) === 'button "1 list"' &&
+        (await tooltip.textContent()).trim() === 'In Work Related',
+      `${await stop(page)} / ${await tooltip.textContent()}`,
+    );
+    await page.keyboard.press('Enter');
+    const menu = page.getByRole('menu', { name: 'Lists with Netflix' });
+    await menu.waitFor();
+    await sleep(500);
+    check(
+      `${label}: Enter opens a menu of the lists, with focus on the first`,
+      (await stop(page)) === 'menuitem "Work Related"',
+      await stop(page),
+    );
+    await page.screenshot({
+      path: path.join(outDir, `in-lists-${colorScheme}-${viewport.width}.png`),
+    });
+    await axeCheck(page, `${label}, the lists menu open`);
+    await page.keyboard.press('Escape');
+    await menu.waitFor({ state: 'detached' });
+    check(
+      `${label}: Escape closes it, back on "1 list"`,
+      (await stop(page)) === 'button "1 list"',
+      await stop(page),
+    );
+    await page.keyboard.press('Enter');
+    await menu.waitFor();
+    // The menu moves focus to its first item once it has opened: Enter before that would close it again.
+    await until('focus on the list', async () => (await stop(page)) === 'menuitem "Work Related"');
+    await page.keyboard.press('Enter');
+    await until('the list', () => new URL(page.url()).pathname === `/lists/${LIST_ID}`);
+    check(`${label}: a list in the menu opens its page`, true);
+
+    // Best for my ranks: 4K is Needed. The user's own plan still shows: Netflix Standard, which isn't 4K.
+    await page.goto(`${baseUrl}search?sort=ranks`);
+    await page.locator('ss-sub-card').first().waitFor({ timeout: 20000 });
+    const ranked = await page.locator('ss-sub-card').evaluateAll((cards) =>
+      cards.map((card) => ({
+        name: card.querySelector('h2').textContent.trim(),
+        plan: card.querySelector('.plan-name')?.textContent.trim(),
+        ranks: card.querySelector('.ranks')?.textContent.replace(/\s+/g, ' ').trim() ?? '',
+      })),
+    );
+    const needed = ranked.filter((row) => row.ranks === '1 Needed');
+    check(
+      `${label}: Best for my ranks puts the providers with a 4K plan first, showing it, each with "1 Needed"`,
+      needed.length >= 2 &&
+        ranked.slice(0, needed.length).every((row) => row.ranks === '1 Needed') &&
+        ranked.slice(needed.length).every((row) => row.ranks === ''),
+      ranked.map((row) => `${row.name}: ${row.plan} [${row.ranks}]`).join(' | '),
+    );
+    const own = ranked.find((row) => row.name === 'Netflix');
+    check(
+      `${label}: the user's own plan still shows, with no counts when it has nothing ranked`,
+      own?.plan === 'Standard' && own.ranks === '',
+      JSON.stringify(own),
+    );
+    check(
+      `${label}: the ranks group is named for the plan`,
+      (await page.locator('ss-sub-card .ranks').first().getAttribute('aria-label')) ===
+        // As the card names a plan: "Crave Premium", or a plan named after its provider alone.
+        (ranked[0].plan.toLowerCase().startsWith(ranked[0].name.toLowerCase())
+          ? `Your ranks for ${ranked[0].plan}`
+          : `Your ranks for ${ranked[0].name} ${ranked[0].plan}`),
+      await page.locator('ss-sub-card .ranks').first().getAttribute('aria-label'),
+    );
+    if (viewport === WIDE) {
+      check(
+        `${label}: Sort says Best for my ranks`,
+        (await page.getByRole('combobox', { name: 'Sort' }).textContent()).includes(
+          'Best for my ranks',
+        ),
+      );
+    }
+    check(
+      `${label}: nothing scrolls sideways`,
+      (await page.evaluate(() => document.documentElement.scrollWidth)) <= viewport.width,
+    );
+    await page.screenshot({
+      path: path.join(outDir, `ranks-${colorScheme}-${viewport.width}.png`),
+      fullPage: true,
+    });
+    await axeCheck(page, `${label}, sorted by ranks`);
+    await context.close();
   }
 
   await browser.close();

@@ -539,6 +539,25 @@ async function settingsKeyboard(browser) {
     '📍: saved, and Settings shows it',
     (await mainText(page)).includes('Sales tax 14.975% (Quebec)'),
   );
+
+  // ← Back (the feedback after M6.9): the first stop (a click on the title focuses <main>), back where the user came
+  // from, which the sidebar's Settings can be any page.
+  await page.goto(baseUrl + '/lists');
+  await page.locator('ss-lists-overview-page h1').waitFor({ timeout: 20000 });
+  await page.locator('nav[aria-label=Main] a.settings').click();
+  await page.locator('ss-settings-page h1').waitFor();
+  await page.locator('ss-settings-page h1').click();
+  await page.keyboard.press('Tab');
+  const back = await page.evaluate(() =>
+    document.activeElement?.querySelector('.mdc-button__label')?.textContent.trim(),
+  );
+  await page.keyboard.press('Enter');
+  await page.waitForURL(/\/lists$/);
+  check(
+    '← Back: the first stop on Settings, and Enter goes back to the page before',
+    back === 'Back',
+    back,
+  );
   await context.close();
 }
 

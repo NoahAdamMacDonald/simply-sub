@@ -1,4 +1,4 @@
-<ss-page-header [heading]="heading()" />
+<ss-page-header [heading]="heading()" [backLink]="back().link" [backLabel]="back().label" />
 
 @switch (state()) {
   @case ('loading') {

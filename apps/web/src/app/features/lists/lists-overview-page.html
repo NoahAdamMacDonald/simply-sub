@@ -1,5 +1,10 @@
 <ss-page-header heading="Subscription Lists">
   <a matButton="outlined" routerLink="/custom">Custom subscriptions</a>
+  <!-- At the top as well as the tile under the cards, which a long page takes a while to reach. -->
+  <a matButton="filled" class="new-list-top" routerLink="/lists/new">
+    <mat-icon>add</mat-icon>
+    New list
+  </a>
 </ss-page-header>
 
 @switch (state()) {

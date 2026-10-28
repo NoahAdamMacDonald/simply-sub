@@ -1,12 +1,13 @@
 // M6.8 in the system Edge: List view (P4) on `ng serve`, for a Canadian in Alberta, with Work Related (Netflix Standard
 // tagged Family, Mullvad VPN and Crave Premium from Dec 1) and an empty list written to IndexedDB. In both themes at
 // 1280 and 360 px, keyboard only: the header's average and count, the cards by price (pinned first), each card's
-// status and tags, the feature summary, the Tab order, 📌 by keyboard (saved to the item, no draft, the card moving to
-// Pinned with focus on its 📌, and still there after a reload), the search box finding a tag and Clear search, the
-// Sort menu (a sort and Inactive only by keyboard, the count on its button, Clear all keeping the sort), a card's
-// details and Edit opening the item dialog in the list editor, and Edit list. Then at 1280 px: an empty list's Add
-// from catalog, a list there isn't, and the note about changes not saved. With axe on the page, the open Sort menu
-// (and an open select at 1280 px), the details and the empty states, and no horizontal scroll.
+// status and tags, the feature summary, the header's ← Lists and Edit list, the Tab order, 📌 by keyboard (saved to the
+// item, no draft, the card moving to Pinned with focus on its 📌, and still there after a reload), the search box
+// finding a tag and Clear search, the Sort menu (a sort, the price slider's top thumb, the Inactive chip and a Features
+// suggestion by keyboard, the count on its button, Clear all keeping the sort), a card's details and Edit opening the
+// item dialog in the list editor, and Edit list at the top. Then at 1280 px: an empty list's Add from catalog, a list
+// there isn't, and the note about changes not saved. With axe on the page, the open Sort menu (and the open Features
+// suggestions at 1280 px), the details and the empty states, and no horizontal scroll.
 // Usage: node check-list-view.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
 const fs = require('fs');
 const path = require('path');
@@ -353,19 +354,23 @@ async function openView(page, listId = LIST) {
       await page.screenshot({ path: shot('view'), fullPage: true });
       await axeCheck(page, `${label}, the list`);
 
-      // The Tab order: the search box, Sort, then each card's 📌 and details button.
+      // The Tab order: the header's ← Lists and Edit list (the feedback after M6.9), the search box, Sort, then each
+      // card's 📌 and details button. A click on the title focuses <main> (the skip link's target), so Tab starts
+      // from its top.
       await view(page).locator('h1').click();
       const stops = [];
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i < 10; i++) {
         await page.keyboard.press('Tab');
         // A name with a colon comes back quoted, and a link's line ends in a colon.
         stops.push((await stop(page)).replace(/^'(.*)'$/, '$1').replace(/:$/, ''));
       }
-      const order = stops.slice(stops.indexOf('textbox "Search this list"'), -1).slice(0, 6);
+      const order = stops.slice(stops.indexOf('link "Lists"')).slice(0, 8);
       check(
-        `${label}: Tab goes to the search box, Sort, then each card's 📌 and details`,
+        `${label}: Tab goes ← Lists, Edit list, the search box, Sort, then each card's 📌 and details`,
         order.join(' | ') ===
           [
+            'link "Lists"',
+            'link "Edit list"',
             'textbox "Search this list"',
             'button "Sort and filter"',
             'button "Pin Crave Premium"',
@@ -442,25 +447,62 @@ async function openView(page, listId = LIST) {
           '# Pinned | Mullvad VPN | # All | Crave Premium | Netflix Standard',
         (await layout(page)).join(' | '),
       );
-      // Status: Inactive only (two options down from All).
-      await page.keyboard.press('Tab');
-      await page.keyboard.press('Enter');
-      await page.locator('.cdk-overlay-pane mat-option').first().waitFor();
-      if (viewport === WIDE) {
-        await page.screenshot({ path: shot('view-select') });
-        await axeCheck(page, `${label}, the Status select open`);
+      // Price per month (Search's slider since the feedback after M6.9): the top thumb down by arrow keys until the
+      // priciest card goes, then End for Unlimited again.
+      await keyToName(page, 'Highest price per month');
+      for (let presses = 0; presses < 80 && (await cards(page)).length === 3; presses++) {
+        await page.keyboard.press('ArrowLeft');
+        await sleep(30);
       }
-      await page.keyboard.press('ArrowDown');
-      await page.keyboard.press('ArrowDown');
-      await page.keyboard.press('Enter');
+      check(
+        `${label}: the price's top thumb, by arrow keys, leaves out the priciest card first`,
+        (await cards(page)).join(' | ') === 'Mullvad VPN | Netflix Standard',
+        (await cards(page)).join(' | '),
+      );
+      await page.keyboard.press('End');
+      await until('three cards', async () => (await cards(page)).length === 3);
+      // Status: Inactive, a chip that Space ticks.
+      await keyToName(page, 'Inactive');
+      await page.keyboard.press('Space');
       await until('one card', async () => (await cards(page)).length === 1);
       const toggleName = await view(page).locator('.filters-toggle').ariaSnapshot();
       check(
-        `${label}: Inactive only leaves Crave, and Sort says one filter is on`,
+        `${label}: the Inactive chip leaves Crave, and Sort says one filter is on`,
         (await cards(page))[0] === 'Crave Premium' &&
           toggleName.includes('Sort and filter, 1 on') &&
           (await view(page).locator('.filters-toggle .badge').textContent()).trim() === '1',
         toggleName,
+      );
+      await page.keyboard.press('Space');
+      await until('three cards', async () => (await cards(page)).length === 3);
+      // Features: Search's box, suggesting only what the list's items provide.
+      await keyToName(page, 'Features', 'Shift+Tab');
+      await page.keyboard.type('4k');
+      await page.locator('.cdk-overlay-pane mat-option').first().waitFor();
+      // The suggestions open on focus with everything, and follow the typing once it has rendered.
+      let suggested = [];
+      for (let tries = 0; tries < 30; tries++) {
+        suggested = await page
+          .locator('.cdk-overlay-pane mat-option')
+          .evaluateAll((options) => options.map((option) => option.textContent.trim()));
+        if (suggested[0] === 'Video quality: 4K (Ultra HD)') break;
+        await sleep(100);
+      }
+      check(
+        `${label}: the Features box suggests 4K, which a card in the list has`,
+        suggested[0] === 'Video quality: 4K (Ultra HD)',
+        suggested.join(' | '),
+      );
+      if (viewport === WIDE) {
+        await page.screenshot({ path: shot('view-suggestions') });
+        await axeCheck(page, `${label}, the Features suggestions open`);
+      }
+      await page.keyboard.press('Enter');
+      await until('one card', async () => (await cards(page)).length === 1);
+      check(
+        `${label}: picking it adds its chip and leaves only Crave Premium`,
+        (await cards(page))[0] === 'Crave Premium' &&
+          (await view(page).locator('ss-feature-filter mat-chip-row').count()) === 1,
       );
       await noSideScroll(page, viewport, `${label}, the Sort menu`);
       await page.screenshot({ path: shot('view-filters'), fullPage: true });
@@ -541,11 +583,16 @@ async function openView(page, listId = LIST) {
       await openView(page);
       await until('the cards', async () => (await cards(page)).length === 3);
 
+      // Edit list at the top, the first stop after the title, then the one at the foot.
+      check(
+        `${label}: Edit list is at the foot too`,
+        (await view(page).locator('.edit-list').getAttribute('href')) === `/lists/${LIST}/edit`,
+      );
       await view(page).locator('h1').click();
       await keyToName(page, 'Edit list');
       await page.keyboard.press('Enter');
       await until('the editor', () => pathOf(page) === `/lists/${LIST}/edit`);
-      check(`${label}: Edit list opens the list editor`, true);
+      check(`${label}: Edit list at the top opens the list editor`, true);
 
       if (viewport === WIDE) {
         // ── Changes not saved ─────────────────────────────────────────────────────────────────

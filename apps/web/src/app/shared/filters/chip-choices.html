@@ -1,0 +1,18 @@
+<fieldset>
+  <legend class="label">{{ legend() }}</legend>
+  @for (choice of choices(); track choice.value) {
+    <label class="chip">
+      <input
+        #box
+        type="checkbox"
+        [checked]="value().includes(choice.value)"
+        (change)="toggle(choice.value, box.checked)"
+      />
+      <mat-icon class="check" aria-hidden="true">check</mat-icon>
+      @if (choice.color) {
+        <span class="tag-dot" aria-hidden="true" [style.--tag-color]="choice.color"></span>
+      }
+      <span>{{ choice.label }}</span>
+    </label>
+  }
+</fieldset>

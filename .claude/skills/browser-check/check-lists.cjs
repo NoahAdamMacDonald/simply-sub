@@ -367,20 +367,21 @@ async function plantLists(page) {
       await page.screenshot({ path: shot('lists'), fullPage: true });
       await axeCheck(page, `${label}, two lists`);
 
-      // The Tab order: Custom subscriptions, then each card's name, 🗑 and View, then the tile.
+      // The Tab order: Custom subscriptions and New list, then each card's name, 🗑 and View, then the tile.
       await page.locator('ss-lists-overview-page h1').click();
       const stops = [];
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i < 9; i++) {
         await page.keyboard.press('Tab');
         // A link's line ends in a colon, before its URL.
         stops.push((await stop(page)).replace(/:$/, ''));
       }
       const order = stops.slice(stops.indexOf('link "Custom subscriptions"'));
       check(
-        `${label}: Tab goes Custom subscriptions, each card's name, 🗑 and View, then the tile`,
-        order.slice(0, 8).join(' | ') ===
+        `${label}: Tab goes Custom subscriptions, New list, each card's name, 🗑 and View, then the tile`,
+        order.slice(0, 9).join(' | ') ===
           [
             'link "Custom subscriptions"',
+            'link "New list"',
             'link "Work Related"',
             'button "Delete Work Related"',
             'link "View Work Related"',
@@ -402,6 +403,15 @@ async function plantLists(page) {
       await until('the list view', () => pathOf(page) === `/lists/${LIST}`);
       check(`${label}: View opens the list`, true);
       await page.goBack();
+      await until('the lists', async () => (await cardsOf(page)).length === 2);
+
+      // New list at the top too (the feedback after M6.9), by keyboard.
+      await page.locator('ss-lists-overview-page h1').click();
+      await keyTo(page, () => document.activeElement?.classList.contains('new-list-top'));
+      await page.keyboard.press('Enter');
+      await until('a new list’s editor', () => editorId(page));
+      check(`${label}: Enter on New list at the top opens a new list’s editor`, true);
+      await page.goto(`${baseUrl}lists`);
       await until('the lists', async () => (await cardsOf(page)).length === 2);
 
       // 🗑 by keyboard: the question (focus on Cancel), then Delete list, Undo and focus.

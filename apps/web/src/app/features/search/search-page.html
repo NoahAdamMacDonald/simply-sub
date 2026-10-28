@@ -83,7 +83,12 @@
   @if (results(); as results) {
     <div class="results">
       @for (result of results; track result.provider.id) {
-        <ss-sub-card [result]="result" [ranks]="ranks()" [pickList]="pickList()" />
+        <ss-sub-card
+          [result]="result"
+          [ranks]="ranks()"
+          [listNames]="listNames()"
+          [pickList]="pickList()"
+        />
       } @empty {
         <ss-empty-state icon="search_off" heading="No services match">
           Try other words or fewer filters, or add the service yourself.

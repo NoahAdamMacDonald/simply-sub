@@ -13,6 +13,8 @@ export interface ProviderActivity {
   activeFrom?: IsoDate;
   /** How many lists have it. */
   lists: number;
+  /** Which lists have it, in the order their items came: Search's "· 2 lists" names them. */
+  listIds: string[];
   /** The plans of it in the lists, each active when an item with it is, in the order the items came. */
   plans: { planId: string; kind: ItemActivity['kind'] }[];
 }
@@ -68,6 +70,7 @@ export function providerActivity(
         kind: active ? 'active' : 'inactive',
         ...(!active && from !== undefined && { activeFrom: from }),
         lists: lists.size,
+        listIds: [...lists],
         plans: [...plans].map(([planId, kind]) => ({ planId, kind })),
       },
     ]),

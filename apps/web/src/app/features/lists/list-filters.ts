@@ -1,71 +1,66 @@
-import { Component, input, model } from '@angular/core';
-import { FormField, disabled, form, validateTree, type FieldTree } from '@angular/forms/signals';
+import { Component, computed, input, model } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatOption } from '@angular/material/core';
-import { MatError, MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatSelect } from '@angular/material/select';
 import {
   defaultListSort,
-  listPriceRange,
+  type Category,
+  type Feature,
+  type ItemActivity,
   type ListFilterOptions,
   type ListSort,
   type ListViewQuery,
   type RankKey,
 } from '@simply-sub/core';
-import { issueErrors } from '../../shared/form-issues';
+import { ChipChoices, type ChipChoice } from '../../shared/filters/chip-choices';
+import { FeatureFilter } from '../../shared/filters/feature-filter';
+import { PriceRangeFilter, type PriceLimits } from '../../shared/filters/price-range-filter';
 
-/** The Sort menu's choices, as its fields hold them: '' is All, and the prices are as typed. */
+/** The Sort menu's choices: the sort, and each filter as its control holds it. */
 export interface ListFilterState {
   sort: ListSort;
-  activity: '' | 'active' | 'inactive';
-  min: string;
-  max: string;
+  activity: ItemActivity['kind'][];
+  minPrice?: number;
+  maxPrice?: number;
   features: RankKey[];
   tags: string[];
 }
 
 export const noListFilters: ListFilterState = {
   sort: defaultListSort,
-  activity: '',
-  min: '',
-  max: '',
+  activity: [],
   features: [],
   tags: [],
 };
 
-/** List view's query: the search box's text and the Sort menu's choices, with only the prices that read. */
+/** List view's query: the search box's text and the Sort menu's choices. */
 export function listQuery(q: string, state: ListFilterState): ListViewQuery {
-  const { minPrice, maxPrice } = listPriceRange(state);
-  return {
-    q,
-    sort: state.sort,
-    ...(state.activity !== '' && { activity: state.activity }),
-    ...(minPrice !== undefined && { minPrice }),
-    ...(maxPrice !== undefined && { maxPrice }),
-    features: state.features,
-    tags: state.tags,
-  };
+  return { q, ...state };
 }
 
+const statusChoices: readonly ChipChoice[] = [
+  { value: 'active', label: 'Active' },
+  { value: 'inactive', label: 'Inactive' },
+];
+
 /**
- * List view's Sort menu (P4): a sort, Active only or Inactive only, a price range per month, features an item must
- * all have and tags it needs one of, and Clear all, which keeps the sort. Its choices are what the list's items have
- * (core's listFilterOptions); Features and Tags are there with none, turned off and saying why. The page keeps the
- * state, so it outlives the panel being closed.
+ * List view's Sort menu (P4): a sort, then the filters Search's panel has too (shared/filters): the price per month,
+ * Features (an item needs them all) and Status as chips; and Tags, chips with their colours (an item needs one). Clear
+ * all keeps the sort. Its choices are what the list's items have (core's listFilterOptions). The page keeps the state,
+ * so it outlives the panel being closed.
  */
 @Component({
   selector: 'ss-list-filters',
   imports: [
-    FormField,
+    ChipChoices,
+    FeatureFilter,
     MatButton,
-    MatError,
     MatFormField,
-    MatHint,
-    MatInput,
     MatLabel,
     MatOption,
     MatSelect,
+    PriceRangeFilter,
   ],
   templateUrl: './list-filters.html',
   styleUrl: './list-filters.scss',
@@ -73,16 +68,14 @@ export function listQuery(q: string, state: ListFilterState): ListViewQuery {
 export class ListFilters {
   readonly state = model<ListFilterState>(noListFilters);
   readonly options = input.required<ListFilterOptions>();
+  /** The registry, which names the features and groups their suggestions. */
+  readonly features = input.required<readonly Feature[]>();
+  readonly categories = input.required<readonly Category[]>();
+  /** The user's currency and country, which write the slider's amounts. */
+  readonly currency = input.required<string>();
+  readonly country = input<string>();
   /** How many filters are set: Clear all is off with none. */
   readonly count = input(0);
-
-  protected readonly form = form(this.state, (path) => {
-    validateTree(path, ({ value, fieldTree }) =>
-      issueErrors(fieldTree, listPriceRange(value()).issues),
-    );
-    disabled(path.features, { when: () => this.options().features.length === 0 });
-    disabled(path.tags, { when: () => this.options().tags.length === 0 });
-  });
 
   protected readonly sorts: readonly { value: ListSort; label: string }[] = [
     { value: 'price', label: 'Highest price first' },
@@ -90,9 +83,34 @@ export class ListFilters {
     { value: 'active', label: 'Active first' },
     { value: 'interval', label: 'Shortest period first' },
   ];
+  protected readonly statusChoices = statusChoices;
+  /** The Features box's hint, or why it's off: nothing in the list has a feature to filter by. */
+  protected readonly featuresHint = computed(() =>
+    this.options().features.length > 0
+      ? 'Subscriptions need every feature chosen'
+      : 'None of these has a feature to filter by',
+  );
+  protected readonly tagChoices = computed<ChipChoice[]>(() =>
+    this.options().tags.map((tag) => ({ value: tag.id, label: tag.name, color: tag.color })),
+  );
 
-  protected firstError(field: FieldTree<unknown>): string | undefined {
-    return field().errors()[0]?.message;
+  protected set(patch: Partial<ListFilterState>): void {
+    this.state.update((state) => ({ ...state, ...patch }));
+  }
+
+  /** The slider let go: a limit at its end of the slider is none. */
+  protected choosePrice({ min, max }: PriceLimits): void {
+    this.state.update((state) => {
+      const next: ListFilterState = { ...state, ...(min !== undefined && { minPrice: min }) };
+      if (min === undefined) delete next.minPrice;
+      if (max === undefined) delete next.maxPrice;
+      else next.maxPrice = max;
+      return next;
+    });
+  }
+
+  protected chooseStatus(activity: readonly string[]): void {
+    this.set({ activity: activity as ItemActivity['kind'][] });
   }
 
   /** Clear all: every filter off, the sort kept. */

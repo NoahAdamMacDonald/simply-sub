@@ -1,7 +1,5 @@
-<button matIconButton type="button" class="back" aria-label="Back" (click)="back()">
-  <mat-icon>arrow_back</mat-icon>
-</button>
-<h1>Settings</h1>
+<!-- Back where the user came from: the sidebar opens Settings from any page. -->
+<ss-page-header heading="Settings" backLink="/" backInHistory />
 
 @if (saved(); as saved) {
   <section aria-labelledby="budgets-heading">

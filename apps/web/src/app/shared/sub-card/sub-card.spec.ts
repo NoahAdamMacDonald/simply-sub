@@ -3,12 +3,14 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { MATERIAL_ANIMATIONS } from '@angular/material/core';
 import { MatMenuHarness } from '@angular/material/menu/testing';
+import { MatTooltipHarness } from '@angular/material/tooltip/testing';
 import { Router, provideRouter } from '@angular/router';
 import {
   searchCatalog,
   type CatalogQuery,
   type CatalogResult,
   type ListItem,
+  type ProfileRanks,
   type Settings,
   type SubscriptionList,
 } from '@simply-sub/core';
@@ -31,6 +33,7 @@ function resultFor(
   query: CatalogQuery = {},
   items: ListItem[] = [],
   settings: Settings = alberta,
+  profileRanks?: ProfileRanks,
 ): CatalogResult {
   const found = searchCatalog(query, {
     catalog: searchCatalogData,
@@ -38,6 +41,7 @@ function resultFor(
     fx,
     items,
     today,
+    profileRanks,
   }).find(({ provider }) => provider.id === id);
   if (!found) throw new Error(`No result for ${id}`);
   return found;
@@ -305,9 +309,65 @@ describe('SubCard', () => {
 
     expect(shown('.plan-name')).toBe('Standard');
     expect(shown('ss-status-badge')).toBe('Active · 2 lists');
+    // Words, not a button, when it isn't given the lists' names.
+    expect(query('.in-lists')).toBeNull();
 
     await show(resultFor('crave', {}, [listItem('crave.premium', work, true)]));
     expect(shown('ss-status-badge')).toBe('Inactive · 1 list');
+  });
+
+  it('names the lists that have the provider on hover, and opens a menu of them', async () => {
+    fixture.componentRef.setInput(
+      'listNames',
+      new Map([
+        [work, 'Work Related'],
+        [family, 'Family – Sam'],
+      ]),
+    );
+    const items = [listItem('netflix.standard', work), listItem('netflix.standard', family)];
+    await show(resultFor('netflix', {}, items));
+
+    expect(shown('ss-status-badge')).toBe('Active · 2 lists');
+    const loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
+    const tooltip = await loader.getHarness(MatTooltipHarness.with({ selector: '.in-lists' }));
+    await tooltip.show();
+    expect(await tooltip.getTooltipText()).toBe('In Work Related and Family – Sam');
+
+    const menu = await loader.getHarness(MatMenuHarness.with({ selector: '.in-lists' }));
+    await menu.open();
+    const panel = document.querySelector('[role=menu]');
+    expect(panel?.getAttribute('aria-label')).toBe('Lists with Netflix');
+    const lists = Array.from(panel?.querySelectorAll('a') ?? [], (link) => [
+      link.textContent?.trim(),
+      link.getAttribute('href'),
+    ]);
+    expect(lists).toEqual([
+      ['Work Related', `/lists/${work}`],
+      ['Family – Sam', `/lists/${family}`],
+    ]);
+  });
+
+  it('counts the user’s ranks of the plan shown, and shows none when they rank none of its features', async () => {
+    const ranks: ProfileRanks = new Map([
+      ['video.quality=1080p', 'needed'],
+      ['streaming.ad-free', 'unwanted'],
+      ['vpn.included', 'wanted'],
+    ]);
+    await show(resultFor('netflix', {}, [], alberta, ranks));
+
+    // Standard with ads has 1080p, and ads.
+    expect(shown('.ranks')).toBe('1 Needed');
+    expect(query('.ranks')?.getAttribute('aria-label')).toBe(
+      'Your ranks for Netflix Standard with ads',
+    );
+
+    radios()[1].click();
+    await fixture.whenStable();
+    expect(shown('.ranks')).toBe('1 Needed 1 Unwanted');
+
+    // Crave Basic has none of them: 4K isn't ranked.
+    await show(resultFor('crave', {}, [], alberta, new Map([['video.quality=4k', 'needed']])));
+    expect(query('.ranks')).toBeNull();
   });
 
   it('says when a provider isn’t sold in the user’s country, with no prices or plans', async () => {

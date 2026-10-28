@@ -172,6 +172,13 @@ export class ListEditPage implements AsksBeforeLeaving {
     return this.drafts.byList().get(listId) ?? started.draft;
   });
   protected readonly heading = computed(() => (this.draft()?.isNew ? 'New list' : 'Edit list'));
+  /** The back button: to the list, by its saved name, or to Lists for a new list or one there isn't. */
+  protected readonly back = computed(() => {
+    const draft = this.draft();
+    return draft && !draft.isNew
+      ? { link: ['/lists', draft.listId], label: draft.startName }
+      : { link: '/lists', label: 'Lists' };
+  });
   /** It opened on changes that weren't saved: "Resumed unsaved changes" (P5). */
   protected readonly resumed = computed(() => {
     const started = this.startedDraft();

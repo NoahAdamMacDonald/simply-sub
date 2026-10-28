@@ -70,6 +70,8 @@ describe('readSearchParams', () => {
     expect(read({ sort: 'relevance' })).toEqual({});
     expect(read({ q: 'vpn', sort: 'relevance' })).toEqual({ q: 'vpn', sort: 'relevance' });
     expect(read({ sort: 'price_asc' })).toEqual({ sort: 'price_asc' });
+    // The app's own sort, which GET /providers doesn't have.
+    expect(read({ sort: 'ranks' })).toEqual({ sort: 'ranks' });
   });
 
   it('reads a minimum of 0 as none, and drops a range whose minimum is above its maximum', () => {

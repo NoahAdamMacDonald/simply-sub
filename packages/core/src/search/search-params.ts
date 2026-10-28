@@ -1,8 +1,7 @@
 import type { CatalogData } from '../catalog/snapshot';
 import { rankKeyOptions } from '../ranking/rank-keys';
 import type { SubscriptionList } from '../user/subscription-list';
-import { providerSorts } from './providers-query';
-import type { ActivityFilter, CatalogQuery } from './search-catalog';
+import { catalogSorts, type ActivityFilter, type CatalogQuery } from './search-catalog';
 
 // Search's URL (PROJECT-PLAN P8, §3.5, M5.3): ?q=&sort=&min=&max=&cat=&f=&act=&native=1&sold=1, read into
 // searchCatalog's query and written back from it. Reading keeps only what's valid in the catalog file on screen, and
@@ -79,7 +78,7 @@ export function readSearchParams(
   };
 
   const q = searchText(one('q') ?? '') || undefined;
-  const sort = providerSorts.find((candidate) => candidate === one('sort'));
+  const sort = catalogSorts.find((candidate) => candidate === one('sort'));
   const categories = catalog.categories.service.map((category) => category.id);
   const category = categories.find((id) => id === one('cat'));
   const keys = new Set(catalog.features.flatMap(rankKeyOptions).map((option) => option.key));

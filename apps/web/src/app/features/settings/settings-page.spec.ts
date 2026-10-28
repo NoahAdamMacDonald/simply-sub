@@ -246,7 +246,7 @@ describe('SettingsPage', () => {
     const router = TestBed.inject(Router);
     const navigate = vi.spyOn(router, 'navigateByUrl');
     await (
-      await loader.getHarness(MatButtonHarness.with({ selector: '[aria-label="Back"]' }))
+      await loader.getHarness(MatButtonHarness.with({ selector: '.back', text: /Back$/ }))
     ).click();
     expect(navigate).toHaveBeenCalledWith('/');
   });

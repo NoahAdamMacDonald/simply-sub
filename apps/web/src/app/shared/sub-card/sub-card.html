@@ -8,7 +8,18 @@
       @if (plan(); as plan) {
         <p class="plan-name">{{ plan.plan.name }}</p>
       }
-      <ss-status-badge class="status" [status]="status()">{{ lists() }}</ss-status-badge>
+      <ss-status-badge class="status" [status]="status()">
+        @if (result().activity; as activity) {
+          <span aria-hidden="true"> · </span>
+          <ss-in-lists [count]="activity.lists" [lists]="inLists()" [provider]="provider().name" />
+        }
+      </ss-status-badge>
+      @if (rankCounts(); as counts) {
+        <!-- How many of the plan's features the user ranks each way (P8). -->
+        <div class="ranks" role="group" [attr.aria-label]="'Your ranks for ' + title()">
+          <ss-rank-counts compact [counts]="counts" />
+        </div>
+      }
     </div>
 
     <!-- Right below the names, above what changes with the plan, so switching plans moves no chip (M5.7). -->

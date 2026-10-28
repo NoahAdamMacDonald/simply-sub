@@ -193,6 +193,8 @@ describe('ListsOverviewPage', () => {
     expect(button('View Work Related')?.getAttribute('href')).toBe(`/lists/${work.id}`);
     expect(page().querySelector('.name a')?.getAttribute('href')).toBe(`/lists/${work.id}`);
     expect(page().querySelector('.new-list')?.getAttribute('href')).toBe('/lists/new');
+    // At the top too.
+    expect(page().querySelector('.new-list-top')?.getAttribute('href')).toBe('/lists/new');
     expect(
       Array.from(page().querySelectorAll('a'))
         .find((link) => text(link) === 'Custom subscriptions')

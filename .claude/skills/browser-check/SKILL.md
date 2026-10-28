@@ -178,21 +178,22 @@ Related (Netflix Standard tagged Family, Mullvad VPN, and Crave Premium from Dec
 In both themes at both widths, keyboard only, it checks:
 - the header's average and count;
 - the cards by price, with their statuses, tags and the feature summary;
-- the Tab order (the search box, Sort, then each card's 📌 and details);
+- the Tab order (← Lists, Edit list, the search box, Sort, then each card's 📌 and details);
 - 📌 by Space: saved to the item with no draft, the card moving to Pinned with focus on its 📌, and still there after a
   reload;
 - the search box finding a tag, and Clear search;
-- the Sort menu: Name, A to Z and Inactive only by keyboard, the count on its button, and Clear all keeping the sort;
+- the Sort menu: Name, A to Z, the price slider's top thumb by arrow keys, the Inactive chip by Space and 4K from the
+  Features suggestions, the count on its button, and Clear all keeping the sort;
 - a card's details, with Edit opening the item dialog in the list editor;
-- Edit list.
+- Edit list at the top, and the one at the foot.
 
 Then at 1280 px:
 - the note about the editor's changes not saved;
 - an empty list's Add custom subscription menu and Add from catalog;
 - a list there isn't.
 
-It runs axe on the page, the open Sort menu (and an open select at 1280 px), the details and the empty states, and
-checks for horizontal scroll. Its `focusedName` reads the accessibility snapshot, so an icon's ligature ("tune") and
+It runs axe on the page, the open Sort menu (and the open Features suggestions at 1280 px), the details and the empty
+states, and checks for horizontal scroll. Its `focusedName` reads the accessibility snapshot, so an icon's ligature ("tune") and
 an input's `<label>` come out right.
 
 `check-backup.cjs` (M6.9) checks backups on `ng serve` for a Canadian in Alberta. It writes to IndexedDB Work Related
@@ -226,6 +227,20 @@ Since the feedback after M6.8, the other scripts check more:
 - `check-item-dialog.cjs`: the three date boxes have the same height.
 - `check-list-view.cjs`: the Types column, and View in Search by keyboard.
 - `check-lists.cjs`: the overview's Types, and its summary folded after 8 rows with "Show all".
+
+Since the feedback after M6.9:
+- `check-search.cjs`, in light at 1280 px and dark at 360 px: a listed provider's "1 list" by Tab, its tooltip naming
+  the list, Enter opening the menu with focus on the list, Escape back on the button, and the list opening its page;
+  then Best for my ranks with 4K Needed: the providers with a 4K plan first, each showing it with "1 Needed", and the
+  user's own plan still shown, with no counts. With axe on the menu and the sorted cards.
+- `check-lists.cjs`: New list at the top, after Custom subscriptions in the Tab order, and Enter on it.
+- `check-list-view.cjs`: the header and the Sort menu, as above.
+- `check-list-edit.cjs`: the back button is the first stop, named for the list as saved (not the draft's new name),
+  and asks "Discard changes?" too.
+- `check-custom-subs.cjs`: the back button is the first stop, to Lists.
+- `check-settings.cjs`: from Lists, ← Back is Settings' first stop, and Enter goes back to Lists.
+- A click on a page's title focuses `<main>`, the skip link's target (`tabindex="-1"`), so Tab goes on from the top of
+  the page, not from the title: the back button is the first stop on a page that has one.
 
 ## Gotchas
 

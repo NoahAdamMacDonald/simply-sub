@@ -9,22 +9,25 @@ import {
 } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import type {
-  AddRequest,
-  CatalogResult,
-  PickedPrice,
-  Rank,
-  RankKey,
-  ResellerDeal,
-  SubscriptionList,
+import {
+  countedRanks,
+  type AddRequest,
+  type CatalogResult,
+  type PickedPrice,
+  type Rank,
+  type RankKey,
+  type ResellerDeal,
+  type SubscriptionList,
 } from '@simply-sub/core';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { AddToListMenu } from '../add-to-list/add-to-list-menu';
 import { countryName } from '../country-name';
 import { PriceTag } from '../price-tag/price-tag';
 import { ProviderIcon } from '../provider-icon/provider-icon';
+import { RankCounts } from '../rank/rank-counts';
 import { StatusBadge, type BadgeStatus } from '../status-badge/status-badge';
 import { catalogIcon, planTitle } from './card-text';
+import { InLists, type NamedList } from './in-lists';
 import { PlanDetails } from './plan-details';
 import { slidingDetails } from './sliding-details';
 
@@ -44,11 +47,13 @@ let nextId = 0;
   host: { '[style.--price-rows]': 'priceRows()' },
   imports: [
     AddToListMenu,
+    InLists,
     MatIcon,
     MatIconButton,
     PlanDetails,
     PriceTag,
     ProviderIcon,
+    RankCounts,
     StatusBadge,
   ],
   templateUrl: './sub-card.html',
@@ -66,6 +71,8 @@ export class SubCard {
   readonly ranks = input<Readonly<Partial<Record<RankKey, Rank>>>>({});
   /** Pick mode's list (P7, flow F2): its prices, and its bundles', add to it with no menu. */
   readonly pickList = input<Pick<SubscriptionList, 'id' | 'name'>>();
+  /** The user's lists' names, by id, which "· 2 lists" names. */
+  readonly listNames = input<ReadonlyMap<string, string>>(new Map());
 
   protected readonly id = `ss-sub-card-${nextId++}`;
   protected readonly provider = computed(() => this.result().provider);
@@ -92,6 +99,11 @@ export class SubCard {
   protected readonly plan = computed(() =>
     this.plans().find(({ plan }) => plan.id === this.selectedId()),
   );
+  /** How many of the plan's features the user ranks each way, or nothing when they rank none of them. */
+  protected readonly rankCounts = computed(() => {
+    const counts = this.plan()?.rankCounts;
+    return counts && countedRanks.some((rank) => counts[rank] !== 0) ? counts : undefined;
+  });
   /** The most prices any of its plans shows: wide, the card keeps room for them, so switching plans moves no chip. */
   protected readonly priceRows = computed(() =>
     Math.max(1, ...this.plans().map(({ pricing }) => pricing.length)),
@@ -149,11 +161,13 @@ export class SubCard {
       ? { kind: activity.kind, activeFrom: activity.activeFrom, manual: false }
       : { kind: 'not-listed' };
   });
-  /** " · 2 lists", after the status. */
-  protected readonly lists = computed(() => {
-    const count = this.result().activity?.lists;
-    return count === undefined ? '' : ` · ${count} ${count === 1 ? 'list' : 'lists'}`;
-  });
+  /** The lists that have it, by name, for "· 2 lists" after the status. */
+  protected readonly inLists = computed(() =>
+    (this.result().activity?.listIds ?? []).flatMap((id): NamedList[] => {
+      const name = this.listNames().get(id);
+      return name === undefined ? [] : [{ id, name }];
+    }),
+  );
   protected readonly country = computed(() => {
     const code = this.settings.saved()?.country;
     return code && countryName(code);

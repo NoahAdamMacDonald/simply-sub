@@ -2520,6 +2520,58 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
+**Resolved (2026-10-27, feedback after M6.9)**
+Asked for after M6.9:
+- **Back buttons** on every page the sidebar doesn't list. `ss-page-header` puts one above the title, on a line of
+  its own: a text button with an arrow, named for where it goes ("Lists"). It used to be a small "‹ Lists" link
+  beside the title, on List view only.
+  - List view and Custom subscriptions go back to Lists.
+  - The list editor goes to its list, by its saved name, or to Lists for a new list. Leaving with changes still
+    asks "Discard changes?".
+  - Optimizations (a placeholder until M8.2) goes to its list.
+  - Settings goes back where the user came from, since the sidebar opens it from any page, or Home when it was the
+    first page opened (`backInHistory`). It replaces Settings' own ← icon button.
+- **At the top too:** Edit list beside List view's title, and New list beside the Lists overview's Custom
+  subscriptions. The ones further down stay.
+- **Search's status names the lists.** "· 2 lists" is now a button (`ss-in-lists`). Its tooltip names the lists, on
+  hover or keyboard focus ("In Work Related and Family"), and it opens a menu of links to them. Core's
+  `ProviderActivity` gained `listIds`, in the order their items came.
+- **Ranks on Search** (the user chose counts on the cards and a sort):
+  - **Counts:** each card shows how many of its plan's features the user ranks each way, under the status ("1 Needed
+    · 1 Unwanted"). It follows the plan chip picked, and shows nothing when no feature of the plan is ranked. Core's
+    `planRankCounts` counts the rank keys a plan provides that the profile ranks (`rankCounts` with no overrides).
+  - **Sort "Best for my ranks"** (`sort=ranks`) scores a plan by its counts: Essential 16, Critical 12, Needed 8,
+    Wanted 4, Uses 2, Sometimes 1, Unused 0 and Unwanted −8 for each feature (core's `rankScore`).
+    - Each card shows the user's own plan, as with every sort, else the provider's best-scoring plan. Of two that
+      score the same, the cheaper one shows.
+    - Cards go best score first, then by price. A provider that isn't offered goes last.
+    - With nothing ranked, the order is Price: low to high's.
+  - **The sort is the app's only.** Core's `catalogSorts` adds `ranks` to the API's `providerSorts`: GET /providers
+    can't know the user's ranks.
+- **One set of filter controls** (`shared/filters/`) for Search's panel and List view's Sort menu, which looked and
+  behaved differently:
+  - **Price** (`ss-price-range`): Search's dual slider, with "Unlimited" at the top. In List view it replaces the two
+    amount boxes, and runs to the priciest item's monthly equivalent, rounded as Search rounds (core's `priceRange`).
+  - **Features** (`ss-feature-filter`): Search's chip box, with suggestions grouped by feature category. In List view
+    it replaces a multi-select and suggests only what the list's items provide. With nothing to suggest it's turned
+    off and says so, as the select was.
+  - **Chips** (`ss-chip-choices`): checkboxes drawn as chips, for Search's Activity, and List view's Status and Tags.
+    - Status is Active and Inactive, with none chosen meaning both. It replaces a select of "Active only" and
+      "Inactive only".
+    - Tags show their colour dots.
+  - Core's `ListViewQuery.activity` is now a list of kinds, as Search's is, and `listFilterOptions` gives a
+    `PriceRange`.
+- **Style budget:** the Search card's styles had been 58 bytes over Angular's 4 kB warning since the feedback after
+  M6.8, and the rank counts added 53. The lists button's styles are now its own component's, and the card lost what
+  did nothing: a declaration a later rule overrode, one that repeated the narrow layout's, and five that undid a
+  shop's visually hidden "Cheaper at" from 600 px, which is now hidden only below it. Its three blocks for 600 px
+  and up are two.
+- **Bundles:** the initial bundle didn't change (492.5 kB). What a page loads beyond it, gzipped:
+  - **Search:** 193.1 kB, 3.6 kB more, for the rank counts, the lists button and the scores. Its own chunk halved
+    (108.6 to 53.8 kB): the filter controls are in chunks it shares with List view.
+  - **List view:** 183.1 kB, 34.7 kB more, for the Material chips, slider and autocomplete that the shared filters
+    use. They're the chunks Search loads, so after Search, List view adds 20.2 kB (21.1 kB before).
+
 **Resolved (2026-10-27, M6.9)**
 - **Your data** (PROJECT-PLAN P13) is a card in Settings with Export backup, Import backup and Delete all data. The
   first-run dialog has Import a backup instead (P1).

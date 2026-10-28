@@ -59,6 +59,8 @@ describe('providerActivity', () => {
           {
             kind: 'active',
             lists: 2,
+            // In the order their items came.
+            listIds: [family, work],
             plans: [
               { planId: 'netflix.standard', kind: 'active' },
               { planId: 'netflix.standard-ads', kind: 'active' },
@@ -84,6 +86,7 @@ describe('providerActivity', () => {
       kind: 'inactive',
       activeFrom: '2026-12-01',
       lists: 2,
+      listIds: [family, work],
       plans: [{ planId: 'mullvad.vpn', kind: 'inactive' }],
     });
   });
@@ -107,6 +110,7 @@ describe('providerActivity', () => {
     expect(activity.get('crave')).toEqual({
       kind: 'active',
       lists: 1,
+      listIds: [family],
       plans: [{ planId: 'crave.premium', kind: 'active' }],
     });
   });

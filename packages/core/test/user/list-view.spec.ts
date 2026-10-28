@@ -3,7 +3,8 @@ import {
   buildCatalogData,
   listFilterCount,
   listFilterOptions,
-  listPriceRange,
+  priceRange,
+  rankKeyLabel,
   listView,
   readCatalogSource,
   resolveItem,
@@ -141,10 +142,12 @@ describe('listView', () => {
   });
 
   it('filters by Active only and Inactive only, today', () => {
-    const active = listView(items, { activity: 'active', sort: 'name' }, context);
+    const active = listView(items, { activity: ['active'], sort: 'name' }, context);
     expect(both(active)).toEqual(['netflix.standard', 'crave.standard', 'mullvad.vpn']);
-    const inactive = listView(items, { activity: 'inactive' }, context);
+    const inactive = listView(items, { activity: ['inactive'] }, context);
     expect(both(inactive)).toEqual(['crave.premium']);
+    // Both is every resolved item.
+    expect(listView(items, { activity: ['active', 'inactive'] }, context).shown).toBe(4);
     expect(inactive.unresolved).toEqual([]);
   });
 
@@ -233,7 +236,7 @@ describe('listFilterCount', () => {
     expect(listFilterCount({ q: 'netflix', sort: 'name', features: [], tags: [] })).toBe(0);
     expect(
       listFilterCount({
-        activity: 'active',
+        activity: ['active'],
         minPrice: 5,
         maxPrice: 20,
         features: ['vpn.included'],
@@ -245,48 +248,28 @@ describe('listFilterCount', () => {
 });
 
 describe('listFilterOptions', () => {
-  it('offers the keys the items provide and the tags they have, each by name', () => {
+  it('offers the keys the items provide, in registry order, and the tags they have, by name', () => {
     const options = listFilterOptions([netflix, mullvad], context);
-    const labels = options.features.map((option) => option.label);
+    const labels = options.features.map(rankKeyLabel);
     expect(labels).toContain('VPN');
     expect(labels).toContain('Video quality: 1080p (Full HD)');
     expect(labels).not.toContain('Video quality: 4K (Ultra HD)');
-    const sorted = [...labels].sort((a, b) => (a.toLowerCase() < b.toLowerCase() ? -1 : 1));
-    expect(labels).toEqual(sorted);
+    const registry = context.registry.flatMap((feature) => feature.id);
+    const order = options.features.map((option) => registry.indexOf(option.feature.id));
+    expect(order).toEqual([...order].sort((a, b) => a - b));
     expect(options.tags.map((tag) => tag.name)).toEqual(['Family', 'Work']);
   });
 
+  it('offers a price slider that reaches the dearest item a month', () => {
+    // Netflix Standard's CA$18.99 a month: 0 to 20 by 0.5.
+    expect(listFilterOptions([netflix, mullvad], context).price).toEqual({ top: 20, step: 0.5 });
+  });
+
   it('offers nothing for no items', () => {
-    expect(listFilterOptions([], context)).toEqual({ features: [], tags: [] });
-  });
-});
-
-describe('listPriceRange', () => {
-  it('reads amounts, and empty fields as no limit', () => {
-    expect(listPriceRange({ min: '', max: '  ' })).toEqual({ issues: [] });
-    expect(listPriceRange({ min: '5', max: '19.99' })).toEqual({
-      minPrice: 5,
-      maxPrice: 19.99,
-      issues: [],
-    });
-    expect(listPriceRange({ min: '0', max: '0' })).toEqual({
-      minPrice: 0,
-      maxPrice: 0,
-      issues: [],
-    });
-  });
-
-  it('sets no limit for a field that isn’t an amount, and says so there', () => {
-    expect(listPriceRange({ min: '$5', max: '20' })).toEqual({
-      maxPrice: 20,
-      issues: [{ path: ['min'], message: 'Enter an amount, like 9.99' }],
-    });
-  });
-
-  it('keeps the lowest and drops a highest below it', () => {
-    expect(listPriceRange({ min: '20', max: '5' })).toEqual({
-      minPrice: 20,
-      issues: [{ path: ['max'], message: 'Must be at least the lowest price' }],
+    expect(listFilterOptions([], context)).toEqual({
+      features: [],
+      tags: [],
+      price: priceRange(0),
     });
   });
 });

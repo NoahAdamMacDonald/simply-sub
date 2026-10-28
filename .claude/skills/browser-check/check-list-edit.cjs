@@ -419,6 +419,32 @@ async function draftOf(page) {
         await sleep(400);
       }
 
+      // The back button (the feedback after M6.9): the first stop (a click on the title focuses <main>), to the list
+      // by its saved name, and it asks first too.
+      await page.locator('ss-list-edit-page h1').click();
+      await page.keyboard.press('Tab');
+      check(
+        `${label}: the first stop is the back button, to the list by its saved name`,
+        await page.evaluate(
+          (list) =>
+            document.activeElement?.classList.contains('back') &&
+            document.activeElement.getAttribute('href') === `/lists/${list}` &&
+            document.activeElement.querySelector('.mdc-button__label')?.textContent.trim() ===
+              'Work Related',
+          LIST,
+        ),
+      );
+      await page.keyboard.press('Enter');
+      await dialog(page).waitFor();
+      await sleep(600);
+      check(
+        `${label}: the back button asks "Discard changes?" too, and Escape stays`,
+        (await dialog(page).locator('h2').textContent()).trim() === 'Discard changes?',
+      );
+      await page.keyboard.press('Escape');
+      await dialog(page).waitFor({ state: 'detached' });
+      await sleep(400);
+
       // Save by keyboard: the list and its items written, and the list opened in the editor's place.
       await nameField(page).focus();
       await keyTo(page, () => document.activeElement?.textContent?.trim() === 'Save');

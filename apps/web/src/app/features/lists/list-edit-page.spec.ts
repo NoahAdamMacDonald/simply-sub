@@ -205,6 +205,9 @@ describe('ListEditPage', () => {
       await open(editor());
 
       expect(text('h1')).toBe('Edit list');
+      // Back to the list, by its saved name.
+      expect(page().querySelector('.back')?.getAttribute('href')).toBe(`/lists/${work.id}`);
+      expect(text('.back .mdc-button__label')).toBe('Work Related');
       expect(nameInput().value).toBe('Work Related');
       expect(rows()).toEqual([
         {
@@ -1060,6 +1063,9 @@ describe('ListEditPage', () => {
         ),
       ).toEqual([work.id]);
       expect(text('h1')).toBe('New list');
+      // A list that isn't saved has no page: back to Lists.
+      expect(page().querySelector('.back')?.getAttribute('href')).toBe('/lists');
+      expect(text('.back .mdc-button__label')).toBe('Lists');
       expect(nameInput().value).toBe('Subscription List');
       expect(button('More actions')).toBeUndefined();
       expect(text('.empty')).toBe(

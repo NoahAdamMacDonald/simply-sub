@@ -1,0 +1,12 @@
+:host {
+  display: block;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+// A chosen feature is a button as a whole: a click removes it (M5.9).
+mat-chip-row {
+  cursor: pointer;
+}
