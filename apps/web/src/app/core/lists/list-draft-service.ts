@@ -2,6 +2,7 @@ import { Service, inject } from '@angular/core';
 import {
   draftChanged,
   withChanges,
+  type DraftEdit,
   type DraftItem,
   type ListDraft,
   type ListItem,
@@ -84,6 +85,11 @@ export class ListDraftService {
     return this.drafts.change(listId, (draft) =>
       changeItem(draft, itemId, ({ item, saved }) => ({ item, ...(saved && { saved }) })),
     );
+  }
+
+  /** Several edits at once, as one change to the draft: an optimizer suggestion applied (P14). */
+  applyEdits(listId: string, edits: readonly DraftEdit[]): Promise<ListDraft> {
+    return this.drafts.applyEdits(listId, edits);
   }
 
   /**

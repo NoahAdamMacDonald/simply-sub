@@ -197,6 +197,7 @@ describe('LockScreen', () => {
         rankings: [],
         cards: [],
         tags: [],
+        dismissedSuggestions: [],
       },
     });
     Object.defineProperty(picker, 'files', {

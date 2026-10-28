@@ -92,6 +92,8 @@ export const ranking = { rankKey: 'video.quality=4k', rank: 'unwanted', ...stamp
 
 export const tag = { id: tagId, name: 'Family', color: '#1e88e5', ...stamps };
 
+export const dismissedSuggestion = { fingerprint: '3f9a0c1d2e4b5a67', listId, ...stamps };
+
 export const card = {
   id: cardId,
   name: 'Simplii Cashback Mastercard',

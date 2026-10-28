@@ -45,6 +45,7 @@ export class BackupRepository {
         rankings: await transaction.getAll('rankings'),
         cards: await transaction.getAll('cards'),
         tags: await transaction.getAll('tags'),
+        dismissedSuggestions: await transaction.getAll('dismissedSuggestions'),
       };
     });
   }

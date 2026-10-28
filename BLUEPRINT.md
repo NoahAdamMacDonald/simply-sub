@@ -938,9 +938,10 @@ transaction types for a subclass). Dexie keeps only keys and indexes, not the re
   function. Export files carry a `schemaVersion` so old backups can still be imported, migrated the same way.
 
 v1 declares every table, so it's the full list the app lock (M6.10) encrypts. `catalogCache` got its record schema
-with M4.3 and `drafts` with M6.3, which needed no new version since nothing had written to them; `dismissedSuggestions`
-gets its with M8.2, and `cards` its repository with M9.1 (its schema is in core already, since backups carry cards).
-v2 (M4.4) adds `fxRates`. The cache tables (`cacheTables` in core: `catalogCache` and `fxRates`) are left out of
+with M4.3 and `drafts` with M6.3, which needed no new version since nothing had written to them, and `cards` gets its
+repository with M9.1 (its schema is in core already, since backups carry cards). v2 (M4.4) adds `fxRates`. v3 (M8.2)
+gives `dismissedSuggestions` its record schema and an index of its list, with an upgrade that empties it: nothing wrote
+to it before, so a row there wasn't the app's. The cache tables (`cacheTables` in core: `catalogCache` and `fxRates`) are left out of
 backups and left plain by the app lock, and their records are replaced and deleted outright. Drafts are deleted
 outright too, on Save or Cancel: they're edits not saved yet, with no deletion for a sync to pass on.
 ```ts
@@ -957,6 +958,9 @@ db.version(1).stores({
   dismissedSuggestions: 'fingerprint'
 });
 db.version(2).stores({ fxRates: 'key' });   // the last exchange rates fetched (M4.4); a new table needs no upgrade
+db.version(3)                                // dismissed optimizer suggestions get their schema (M8.2)
+  .stores({ dismissedSuggestions: 'fingerprint, listId' })
+  .upgrade((transaction) => transaction.table('dismissedSuggestions').clear());
 ```
 
 ### 4.7 Regions & currency conversion
@@ -2392,7 +2396,7 @@ gone. That's why it's opt-in.
 - **Key:** derived like the backup key, then held in memory only, as a non-extractable WebCrypto `CryptoKey`.
   Nothing secret is stored: only the salt and an encrypted check value, which tells a wrong passphrase.
 - **What's encrypted:** each record of `settings`, `lists`, `items`, `customSubs`, `rankings`, `cards`, `tags` and
-  `drafts` (and `dismissedSuggestions` with its schema, M8.2) keeps its key and indexed fields in plain text and
+  `drafts` and `dismissedSuggestions` (M8.2) keeps its key and indexed fields in plain text and
   stores the whole record as one encrypted value. Of the settings, only what's needed before unlocking stays plain:
   the theme and the lock itself. The caches (the catalog files, the exchange rates) stay plain, since they're public.
 - **Locking:** the lock screen asks for the passphrase on each visit. The app locks again after a chosen idle time
@@ -2541,6 +2545,58 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-28, M8.2)**
+- **Optimizations** (PROJECT-PLAN P14) is "Optimizations" under the back button by the list's name, with "Save up to
+  $830.88 a year" (the yellow plan's savings, ≈ when estimated, shown while a card is) and an ⓘ button whose tooltip
+  gives the rules (Needed never lost in a month it's needed, Essential keeps the plan, Critical the provider, savings
+  over the next 12 months with tax, each change on the item's next charge). Then the sections in P14's order, each
+  heading with its colour dot and what it means: Free savings ("nothing is lost", the user's choice in M8.1),
+  Recommended, Suggested and Worth a look. "Show dismissed (n)" comes last, once something is dismissed.
+- **A card** (`ss-suggestion-card`) has its section's colour as a stripe, its changes (core's `actionTitle`, a line
+  each), "Save $138.60 over the next 12 months" with an Estimated tag (focusable, with a tooltip) when converted
+  prices are in it, a line per change with the prices it goes from and to (`ss-price`) and when ("From Nov 20, 2026",
+  "Ends Nov 21, 2026 instead of renewing"), then "You lose:" (each removed item "itself", by its title, then each
+  feature with its rank's dot and name) and "You gain:". Apply and Dismiss are named for the changes ("Apply: Switch
+  Disney+ Premium to annual billing"); a dismissed card shown again has Show again.
+- **Apply** starts or resumes the list's draft, puts the card's edits on it in one write (core's `suggestionEdits` and
+  `withDraftEdits`, `DraftsRepository.applyEdits`) and opens the editor, so nothing is saved until Save. The edits
+  follow the user's choice, at the next renewal: a removed or replaced item gets its next charge as its end date (an
+  item that would only start then, or Specific dates, which have no end date, leaves the draft); a plan or billing
+  change keeps the item, re-anchored on its next charge, without its price override, with the add-ons its new plan
+  allows; an extra member is added to the host; a bundle or suite is a new item from the earliest next charge, with the
+  replaced items' tags and pins, and their own ranks (the more important where two rank a key). When the draft's
+  unsaved changes took out an item the card changes, the snackbar says so and nothing is applied.
+- **Dismiss** stores the card's fingerprint in `dismissedSuggestions` (`DismissedSuggestionsRepository`), says
+  "Dismissed until the list changes" with Undo, and moves focus to the next card's heading (else the one before, else
+  Show dismissed). Show again soft-deletes the record. A change to the list gives new fingerprints, so the card comes
+  back.
+- **`dismissedSuggestions`** (core's `user/dismissed-suggestion.ts`): `{ fingerprint, listId, createdAt, updatedAt,
+  deletedAt? }`, keyed by the fingerprint (16 lowercase hex digits). Dexie v3 indexes `listId` and empties the table
+  (section 4.6). The app lock seals it, with `fingerprint` and `listId` plain. Backups carry it: the file is version 2,
+  and a version 1 file is read with no dismissals.
+- **List view** (P4): `ss-optimizations-link` after the feature summary, "View optimizations (9)" with a dot and the
+  outline in the strongest suggestion's colour (red, then orange, then yellow; green, `--suggest-free` from Wanted's,
+  for free savings alone, the user's choice), named "View optimizations (9), the strongest: Recommended"; "No
+  suggestions" in a neutral outline; "View optimizations" while they're found. Core's `suggestionSummary` counts what
+  isn't dismissed.
+- **Where it runs** (`OptimizerService`): its input from MetricsService's priced items (once none waits for its
+  catalog file), the catalog file of each item's region, the rates, the settings' country, currency and tax place
+  (nothing else of the settings), and the ranks. Up to 12 items run on the page: under 10 ms in Node (M8.1), well under
+  50 ms on a slow phone. A bigger list goes to a Web Worker (`optimizer.worker.ts`, bundled by Angular as
+  `worker-<hash>.js`). If the worker can't start or load, it runs on the page instead.
+- **The worker under the production CSP:** Trusted Types make a Worker's URL a script sink, and Angular bundles a
+  worker only for `new Worker(new URL('./x.worker', import.meta.url))`. `optimizer-worker.ts` shadows `Worker` with a
+  subclass that passes the URL through a policy of its own, `simply-sub#worker`, which takes only this origin's
+  `worker-*.js` files. `_headers` adds `worker-src 'self'`, the policy to `trusted-types`, and a year's immutable cache
+  for `/worker-*.js`. No `blob:` URL and no eval: the worker imports `zod-setup.ts` first, so Zod never tries
+  `new Function`. Checked in Edge under `wrangler dev`: a 14-item list optimized in the worker, with no CSP or Trusted
+  Types violations, and `csp-check.cjs` passes.
+- **Browser checks:** `check-optimizations.cjs` (new) passes 90/90 on `ng serve` and under `wrangler dev`, and the
+  reruns pass: list view 187, list editor 77, backups 81, app lock 159, shell 51, Settings 80.
+- **Bundles:** the initial bundle grew 0.04 kB (497.31 kB of 500). The optimizer, its service and the worker's starter
+  are a chunk List view and the page share (14.2 kB raw, 5.8 kB gzipped); the page is 18.2 kB (6.1 kB); List view went
+  from 38.7 to 41.0 kB raw; the worker is 159 kB raw (44 kB transferred), with Zod and the catalog code it needs.
 
 **Resolved (2026-10-28, M8.1)**
 - **The optimizer** (section 10) is core's `optimizer/`: `optimize({ items, catalogs, context, cards? })`, where

@@ -178,7 +178,7 @@ function suggestionOf(
     })),
     lostServices: evaluation.lostServices.map((index) => ({
       itemId: model.items[index].resolved.item.id,
-      name: model.items[index].resolved.name,
+      title: model.items[index].suggested.title,
     })),
     gained: [...gained.values()],
   };

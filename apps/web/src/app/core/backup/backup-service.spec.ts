@@ -1,6 +1,11 @@
 import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { backupRefusals, type BackupReading, type UserTable } from '@simply-sub/core';
+import {
+  backupRefusals,
+  backupSchemaVersion,
+  type BackupReading,
+  type UserTable,
+} from '@simply-sub/core';
 import { CatalogStore } from '../catalog/catalog-store';
 import { plantRows, storedRows, testStorage, type TestStorage } from '../storage/storage.testing';
 import { BackupService } from './backup-service';
@@ -83,6 +88,7 @@ const backedUp: readonly UserTable[] = [
   'rankings',
   'cards',
   'tags',
+  'dismissedSuggestions',
 ];
 
 describe('BackupService', () => {
@@ -138,7 +144,7 @@ describe('BackupService', () => {
     const json = JSON.parse(file?.text ?? '');
     expect(json).toMatchObject({
       app: 'simply-sub',
-      schemaVersion: 1,
+      schemaVersion: backupSchemaVersion,
       exportedAt: '2026-10-25T12:00:00.000Z',
       catalogVersion: 'c4f9a21',
       data: { settings: records.settings[0], cards: [] },

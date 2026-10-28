@@ -342,7 +342,7 @@ export function run(
 export function cards(result: OptimizerResult): string[] {
   return result.suggestions.map((suggestion) => {
     const lost = [
-      ...suggestion.lostServices.map((service) => service.name),
+      ...suggestion.lostServices.map((service) => service.title),
       ...suggestion.lost.map((change) => `${change.key} (${change.rank})`),
     ];
     const gained = suggestion.gained.map((change) => change.key);

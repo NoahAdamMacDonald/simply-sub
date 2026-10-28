@@ -1,0 +1,143 @@
+:host {
+  display: block;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+  // The section's colour down the card's left side.
+  box-shadow: inset 4px 0 0 var(--stripe, var(--ss-divider));
+}
+
+:host([data-severity='free']) {
+  --stripe: var(--suggest-free);
+}
+
+:host([data-severity='red']) {
+  --stripe: var(--suggest-hard);
+}
+
+:host([data-severity='orange']) {
+  --stripe: var(--suggest-normal);
+}
+
+:host([data-severity='yellow']) {
+  --stripe: var(--suggest-soft);
+}
+
+article {
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px 12px 20px;
+}
+
+// The changes on the left and the saving on their right from 600 px; the saving under them below that.
+.head {
+  display: grid;
+  gap: 4px 16px;
+
+  @media (min-width: 600px) {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+  }
+}
+
+.title {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  font: var(--mat-sys-title-medium);
+  overflow-wrap: anywhere;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 2px;
+  }
+}
+
+.savings {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+
+  @media (min-width: 600px) {
+    justify-content: end;
+    text-align: end;
+  }
+}
+
+.estimated {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  border: 1px solid var(--ss-divider);
+  border-radius: 999px;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-label-medium);
+
+  mat-icon {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 2px;
+  }
+}
+
+.lines {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 12px;
+  }
+}
+
+.prices {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 6px;
+}
+
+.when {
+  color: var(--ss-text-muted);
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin: 0;
+}
+
+.label {
+  font-weight: 500;
+}
+
+.feature {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: end;
+}

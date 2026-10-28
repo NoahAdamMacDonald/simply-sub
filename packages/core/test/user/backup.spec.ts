@@ -17,7 +17,17 @@ import {
   type ListItem,
 } from '../../src';
 import { withValue } from '../catalog/helpers';
-import { card, customSub, item, list, listId, ranking, settings, tag } from './fixtures';
+import {
+  card,
+  customSub,
+  dismissedSuggestion,
+  item,
+  list,
+  listId,
+  ranking,
+  settings,
+  tag,
+} from './fixtures';
 
 // Backups (P13, BLUEPRINT §11.2): the file Export writes, what Import accepts, and Merge.
 
@@ -29,6 +39,7 @@ const data: BackupData = {
   rankings: [ranking],
   cards: [card],
   tags: [tag],
+  dismissedSuggestions: [dismissedSuggestion],
 } as BackupData;
 
 const payload: BackupPayload = {
@@ -116,8 +127,11 @@ describe('encrypted backups', () => {
   });
 
   it('checks the payload it opens to, as a plain file’s', () => {
-    expect(readBackupPayload(payload, 1)).toEqual({ kind: 'backup', backup: payload });
-    expect(readBackupPayload({ ...payload, data: {} }, 1)).toEqual({
+    expect(readBackupPayload(payload, backupSchemaVersion)).toEqual({
+      kind: 'backup',
+      backup: payload,
+    });
+    expect(readBackupPayload({ ...payload, data: {} }, backupSchemaVersion)).toEqual({
       kind: 'refused',
       reason: backupRefusals.invalid,
     });
@@ -125,13 +139,25 @@ describe('encrypted backups', () => {
   });
 
   it('binds the header to the ciphertext', () => {
-    expect(backupAssociatedData(encryptedBackup(envelope))).toBe('simply-sub:1');
+    expect(backupAssociatedData(encryptedBackup(envelope))).toBe('simply-sub:2');
   });
 });
 
 describe('migrateBackupPayload', () => {
   it('leaves a payload of this version as it is', () => {
     expect(migrateBackupPayload(payload, backupSchemaVersion)).toBe(payload);
+  });
+
+  it('gives a version 1 file, from before M8.2, no dismissed suggestions', () => {
+    const version1: Partial<BackupData> = { ...data };
+    delete version1.dismissedSuggestions;
+    const reading = readBackupPayload({ ...payload, data: version1 }, 1);
+    expect(reading).toEqual({
+      kind: 'backup',
+      backup: { ...payload, data: { ...data, dismissedSuggestions: [] } },
+    });
+    // A version 2 file must have them.
+    expect(readBackupPayload({ ...payload, data: version1 }, 2).kind).toBe('refused');
   });
 });
 

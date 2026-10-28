@@ -34,7 +34,7 @@ describe('optimize: free savings', () => {
     expect(cards(run([item('disney-plus.premium'), item('crave.premium')]))).toMatchInlineSnapshot(`
       [
         "free | Replace Disney+ Premium and Crave Premium with Disney+ and Crave Premium Bundle | save 122.72",
-        "yellow | Downgrade Disney+ Premium → Standard, annual billing + Remove Crave Premium | save 354.78 | lose Crave, video.quality=4k (not-ranked), video.hdr (not-ranked)",
+        "yellow | Downgrade Disney+ Premium → Standard, annual billing + Remove Crave Premium | save 354.78 | lose Crave Premium, video.quality=4k (not-ranked), video.hdr (not-ranked)",
       ]
     `);
     expect(
@@ -89,11 +89,11 @@ describe('optimize: hard constraints (BLUEPRINT §10.2)', () => {
   it('2 VPNs, VPN ranked Needed: removes one, never both, the pricier when they are alike', () => {
     expect(cards(run([item('mullvad.vpn'), item('ivpn.pro')], { 'vpn.included': 'needed' })))
       .toMatchInlineSnapshot(`
-      [
-        "red | Downgrade IVPN Pro → Standard | save 51.66 | lose vpn.multi-hop (not-ranked)",
-        "yellow | Remove IVPN Pro | save 153.72 | lose IVPN, vpn.multi-hop (not-ranked)",
-      ]
-    `);
+        [
+          "red | Downgrade IVPN Pro → Standard | save 51.66 | lose vpn.multi-hop (not-ranked)",
+          "yellow | Remove IVPN Pro | save 153.72 | lose IVPN Pro, vpn.multi-hop (not-ranked)",
+        ]
+      `);
   });
 
   it('2 VPNs, VPN ranked Needed: removes the cheaper one when only the pricier has another Needed feature', () => {
@@ -104,7 +104,7 @@ describe('optimize: hard constraints (BLUEPRINT §10.2)', () => {
     // Mullvad's €5 includes tax everywhere, converted at 1.5625: an estimate.
     expect(cards(result)).toMatchInlineSnapshot(`
       [
-        "yellow | Remove Mullvad VPN | save 93.75 | estimated | lose Mullvad",
+        "yellow | Remove Mullvad VPN | save 93.75 | estimated | lose Mullvad VPN",
       ]
     `);
     expect(result.bestEstimated).toBe(true);
@@ -137,7 +137,7 @@ describe('optimize: hard constraints (BLUEPRINT §10.2)', () => {
       [
         "red | Downgrade Netflix Premium → Standard | save 63.00 | lose video.quality=4k (not-ranked), video.hdr (not-ranked)",
         "red | Downgrade Disney+ Premium → Standard | save 50.40 | lose video.quality=4k (not-ranked), video.hdr (not-ranked)",
-        "yellow | Downgrade Netflix Premium → Standard + Remove Disney+ Premium | save 277.07 | lose Disney+, video.quality=4k (not-ranked), video.hdr (not-ranked)",
+        "yellow | Downgrade Netflix Premium → Standard + Remove Disney+ Premium | save 277.07 | lose Disney+ Premium, video.quality=4k (not-ranked), video.hdr (not-ranked)",
       ]
     `);
     expect(found.join('\n')).not.toMatch(/Remove Netflix|Standard with ads/);
@@ -153,7 +153,7 @@ describe('optimize: hard constraints (BLUEPRINT §10.2)', () => {
     // Disney+ can go, since Netflix gives 4K all year; Netflix can't, since Disney+ gives it in Sep and Oct only.
     expect(found).toMatchInlineSnapshot(`
       [
-        "yellow | Remove Disney+ Premium | save 35.68 | lose Disney+",
+        "yellow | Remove Disney+ Premium | save 35.68 | lose Disney+ Premium",
       ]
     `);
     expect(found.join('\n')).not.toMatch(/Remove Netflix/);
@@ -267,8 +267,8 @@ describe('optimize: a list too big for exhaustive search', () => {
         "red | Downgrade Proton Mail Plus → Free | save 78.62 | lose email.addresses=10-plus (not-ranked)",
         "red | Downgrade IVPN Pro → Standard | save 51.66 | lose vpn.multi-hop (not-ranked)",
         "orange | Make Sam's (Netflix Standard) an extra member on Mine (Netflix Premium) + Make Office (Netflix Premium) an extra member on Mine (Netflix Premium) | save 340.20 | lose video.quality=4k (unused), video.hdr (unwanted)",
-        "yellow | Remove Mine (Netflix Premium) + Remove Sam's (Netflix Standard) + Remove Alex's (Netflix Standard) + Remove Disney+ Premium + Remove Crave Premium + Switch Kids (Disney+ Standard) to annual billing + Remove Den (Netflix Standard with ads) + Remove Office (Netflix Premium) + Remove Cabin (Crave Premium) + Remove Cabin (Disney+ Premium) + Downgrade Jo's (Netflix Standard) → Standard with ads | save 2279.61 | lose Netflix, Netflix, Netflix, Disney+, Crave, Netflix, Netflix, Crave, Disney+, video.quality=4k (unused), video.hdr (unwanted), streaming.ad-free (wanted)",
-        "yellow | Remove Proton VPN Plus + Remove IVPN Pro | save 311.09 | lose Proton, IVPN, vpn.multi-hop (not-ranked)",
+        "yellow | Remove Mine (Netflix Premium) + Remove Sam's (Netflix Standard) + Remove Alex's (Netflix Standard) + Remove Disney+ Premium + Remove Crave Premium + Switch Kids (Disney+ Standard) to annual billing + Remove Den (Netflix Standard with ads) + Remove Office (Netflix Premium) + Remove Cabin (Crave Premium) + Remove Cabin (Disney+ Premium) + Downgrade Jo's (Netflix Standard) → Standard with ads | save 2279.61 | lose Mine (Netflix Premium), Sam's (Netflix Standard), Alex's (Netflix Standard), Disney+ Premium, Crave Premium, Den (Netflix Standard with ads), Office (Netflix Premium), Cabin (Crave Premium), Cabin (Disney+ Premium), video.quality=4k (unused), video.hdr (unwanted), streaming.ad-free (wanted)",
+        "yellow | Remove Proton VPN Plus + Remove IVPN Pro | save 311.09 | lose Proton VPN Plus, IVPN Pro, vpn.multi-hop (not-ranked)",
       ]
     `);
     expect(result.bestSavings).toBeGreaterThan(0);

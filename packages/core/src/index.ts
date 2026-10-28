@@ -51,6 +51,7 @@ export * from './icons/icon-query';
 export * from './icons/icon-sources';
 export * from './lookup/lookup-bodies';
 export * from './lookup/lookup-query';
+export * from './optimizer/apply-suggestion';
 export * from './optimizer/fingerprint';
 export {
   buildModel,
@@ -92,6 +93,7 @@ export * from './user/calendar-params';
 export * from './user/catalog-cache';
 export * from './user/custom-sub-form';
 export * from './user/custom-subscription';
+export * from './user/dismissed-suggestion';
 export * from './user/fx-cache';
 export * from './user/item-activity';
 export * from './user/item-form';

@@ -228,6 +228,7 @@ class ModelBuilder {
         name: resolved.name,
         planName: resolved.planName,
         price: resolved.override ?? resolved.price,
+        ...(next !== undefined && { next }),
       },
     };
   }
@@ -336,6 +337,8 @@ class ModelBuilder {
                     item: item.suggested,
                     planId: plan.id,
                     planName: plan.name,
+                    ...(changed.source.kind === 'catalog' &&
+                      changed.source.addOns && { addOns: changed.source.addOns }),
                     to: resolved.price,
                     on,
                   },

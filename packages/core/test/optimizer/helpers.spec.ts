@@ -6,8 +6,10 @@ import {
   namesText,
   reperiod,
   stableJson,
+  suggestionSummary,
   withAddOn,
   type PickedPrice,
+  type Severity,
   type SuggestedItem,
 } from '../../src';
 import {
@@ -189,5 +191,19 @@ describe('changed items', () => {
     expect(withAddOn(undefined, 'netflix.extra-member', 2)).toEqual([
       { id: 'netflix.extra-member', quantity: 2 },
     ]);
+  });
+});
+
+describe('suggestionSummary', () => {
+  const card = (fingerprint: string, severity: Severity) => ({ fingerprint, severity });
+
+  it('counts what isn’t dismissed, coloured by the strongest, free savings last', () => {
+    const cards = [card('a', 'free'), card('b', 'yellow'), card('c', 'orange')];
+    expect(suggestionSummary(cards, new Set())).toEqual({ count: 3, strongest: 'orange' });
+    expect(suggestionSummary(cards, new Set(['b', 'c']))).toEqual({ count: 1, strongest: 'free' });
+    expect(suggestionSummary([...cards, card('d', 'red')], new Set())).toMatchObject({
+      strongest: 'red',
+    });
+    expect(suggestionSummary(cards, new Set(['a', 'b', 'c']))).toEqual({ count: 0 });
   });
 });

@@ -1,5 +1,117 @@
-<ss-page-header
-  heading="Optimizations"
-  [backLink]="['/lists', listId()]"
-  [backLabel]="listName()"
-/>
+<ss-page-header heading="Optimizations" [backLink]="['/lists', listId()]" [backLabel]="listName()">
+  @if (state() === 'ready') {
+    <!-- The rules the optimizer keeps (BLUEPRINT §10.2): focusable, so keyboard users get the tooltip too. -->
+    <button
+      matIconButton
+      type="button"
+      class="rules"
+      aria-label="How suggestions are chosen"
+      matTooltip="Suggestions never take away a feature you ranked Needed, in any month it's needed. A subscription with an Essential feature keeps its exact plan, and one with a Critical feature keeps its provider. Savings are over the next 12 months, with sales tax, and each change starts on the subscription's next charge."
+    >
+      <mat-icon>info</mat-icon>
+    </button>
+  }
+  @if (saveUpTo(); as save) {
+    <p subtitle class="save-up-to">
+      @if (save.estimated) {
+        <span aria-hidden="true">Save up to ≈ </span
+        ><span class="visually-hidden">Save up to about </span>
+      } @else {
+        <span>Save up to </span>
+      }
+      <strong>{{ save.amount }}</strong> a year
+    </p>
+  }
+</ss-page-header>
+
+@switch (state()) {
+  @case ('loading') {
+    <p class="note">Loading the list…</p>
+  }
+  @case ('error') {
+    <p class="note">This list couldn't be read.</p>
+  }
+  @case ('missing') {
+    <!-- P15: an id that names no list. -->
+    <ss-empty-state icon="playlist_remove" heading="This list doesn't exist">
+      It may have been deleted.
+      <div actions>
+        <a matButton="filled" routerLink="/lists">Back to lists</a>
+      </div>
+    </ss-empty-state>
+  }
+  @case ('ready') {
+    @if (empty()) {
+      <ss-empty-state icon="savings" heading="Nothing to optimize yet">
+        This list has no subscriptions it can price.
+        <div actions>
+          <a matButton="filled" [routerLink]="['/lists', listId(), 'edit']">Edit list</a>
+        </div>
+      </ss-empty-state>
+    } @else {
+      <!-- Says when the suggestions are ready, and when they change. -->
+      <p class="note" role="status">
+        @if (!found()) {
+          Looking for savings…
+        } @else if (sections().length === 0) {
+          No suggestions.
+        }
+      </p>
+      @if (unpriced() > 0) {
+        <p class="note">
+          {{ unpriced() === 1 ? '1 subscription' : unpriced() + ' subscriptions' }} in this list
+          can't be priced, so the suggestions leave {{ unpriced() === 1 ? 'it' : 'them' }} out.
+        </p>
+      }
+
+      @if (found(); as found) {
+        @if (sections().length === 0 && dismissedCount() === 0) {
+          <ss-empty-state icon="savings" heading="No suggestions">
+            Nothing in this list can cost less without losing what you rank. Rank the features you
+            care about, and the ones you don't, on the <a routerLink="/features">Features</a> page.
+          </ss-empty-state>
+        }
+
+        @for (section of sections(); track section.severity) {
+          <section
+            class="section"
+            [attr.data-severity]="section.severity"
+            [attr.aria-labelledby]="'section-' + section.severity"
+          >
+            <h2 [id]="'section-' + section.severity">
+              <span class="dot" aria-hidden="true"></span>
+              {{ section.heading }}
+              <span class="meaning">— {{ section.meaning }}</span>
+            </h2>
+            <ul class="cards">
+              @for (card of section.cards; track card.suggestion.fingerprint) {
+                <li>
+                  <ss-suggestion-card
+                    [suggestion]="card.suggestion"
+                    [currency]="found.currency"
+                    [dismissed]="card.dismissed"
+                    [busy]="applying() !== undefined"
+                    (apply)="apply(card.suggestion)"
+                    (dismiss)="dismiss(card.suggestion)"
+                    (restore)="restore(card.suggestion)"
+                  />
+                </li>
+              }
+            </ul>
+          </section>
+        }
+
+        @if (dismissedCount() > 0 || showDismissed()) {
+          <mat-checkbox
+            id="show-dismissed"
+            class="show-dismissed"
+            [checked]="showDismissed()"
+            (change)="showDismissed.set($event.checked)"
+          >
+            Show dismissed ({{ dismissedCount() }})
+          </mat-checkbox>
+        }
+      }
+    }
+  }
+}

@@ -3,6 +3,7 @@ import { addDuplicateIssues } from '../catalog/checks';
 import type { IsoDate } from '../dates/iso-date';
 import type { FormIssue } from './item-form';
 import { customSubscriptionSchema } from './custom-subscription';
+import { dismissedSuggestionSchema } from './dismissed-suggestion';
 import { listItemSchema } from './list-item';
 import { paymentCardSchema } from './payment-card';
 import { profileRankingSchema } from './profile-ranking';
@@ -20,8 +21,11 @@ import { tagSchema } from './tag';
 /** What every backup file says it is. */
 export const backupApp = 'simply-sub';
 
-/** This version of the file's shape. A file from an older version is migrated as it's read (migrateBackupData). */
-export const backupSchemaVersion = 1;
+/**
+ * This version of the file's shape. A file from an older version is migrated as it's read (migrateBackupPayload).
+ * Version 2 (M8.2) adds the dismissed optimizer suggestions.
+ */
+export const backupSchemaVersion = 2;
 
 /** The tables a backup holds, in the order they're written back. */
 export const backupTables = [
@@ -32,6 +36,7 @@ export const backupTables = [
   'items',
   'rankings',
   'cards',
+  'dismissedSuggestions',
 ] as const;
 export type BackupTable = (typeof backupTables)[number];
 
@@ -45,6 +50,7 @@ export const backupDataSchema = z
     rankings: z.array(profileRankingSchema),
     cards: z.array(paymentCardSchema),
     tags: z.array(tagSchema),
+    dismissedSuggestions: z.array(dismissedSuggestionSchema),
   })
   .superRefine((data, ctx) => {
     for (const table of backupTables) {
@@ -201,8 +207,8 @@ export function readBackupPayload(payload: unknown, schemaVersion: number): Back
 }
 
 /**
- * Brings a payload from an older version of the file up to this one, a step at a time. Version 1 is the first, so
- * there's nothing to do yet; a change to a record's shape adds a step here and bumps backupSchemaVersion.
+ * Brings a payload from an older version of the file up to this one, a step at a time. A change to a record's shape,
+ * or a new table, adds a step here and bumps backupSchemaVersion.
  */
 export function migrateBackupPayload(payload: unknown, schemaVersion: number): unknown {
   let migrated = payload;
@@ -214,7 +220,13 @@ export function migrateBackupPayload(payload: unknown, schemaVersion: number): u
 }
 
 /** From each version to the next. */
-const backupMigrations: Record<number, (payload: unknown) => unknown> = {};
+const backupMigrations: Record<number, (payload: unknown) => unknown> = {
+  // Version 1 had no dismissed suggestions: none were dismissed then.
+  1: (payload) =>
+    isObject(payload) && isObject(payload['data'])
+      ? { ...payload, data: { dismissedSuggestions: [], ...payload['data'] } }
+      : payload,
+};
 
 /** How many of each kind of record a backup has, the deleted ones left out: Import's preview (P13). */
 export interface BackupCounts {

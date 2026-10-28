@@ -55,14 +55,14 @@ import { CustomSubEditor } from '../custom-subs/custom-sub-editor';
 import { averageText } from './average-text';
 import { editRow } from './edit-rows';
 import { ListFilters, listQuery, noListFilters, type ListFilterState } from './list-filters';
+import { OptimizationsLink } from './optimizations-link';
 
 /**
  * List view (PROJECT-PLAN P4, M6.8): one list's subscriptions as cards (ss-item-card), pinned ones first, with what the
  * list costs a month on average and how many it has, a search box and the Sort menu (core's listView), 📌 saved
  * straight to the item, each card's Edit and the list's, and on the side this month's and this year's totals against
  * the budgets, with each card's share of the list (M7.2), its mini calendar (M7.4, collapsed under 960 px), then its
- * types and feature summary (§3.2), Export (M7.5), and the list's budget warnings (M7.6). M8 adds the optimizations
- * button.
+ * types and feature summary (§3.2), Export (M7.5), the list's budget warnings (M7.6) and View optimizations (M8.2).
  */
 @Component({
   selector: 'ss-list-view-page',
@@ -87,6 +87,7 @@ import { ListFilters, listQuery, noListFilters, type ListFilterState } from './l
     MatSuffix,
     MiniCalendar,
     NgTemplateOutlet,
+    OptimizationsLink,
     PageHeader,
     RouterLink,
     TypeCounts,

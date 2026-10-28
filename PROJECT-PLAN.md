@@ -203,7 +203,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | ID | Task | Done when |
 |---|---|---|
 | M8.1 | core: optimizer (BLUEPRINT §10) with fixtures. As built: core's `optimizer/` (`optimize`, its model, coverage map, search, cards and fingerprints, and `actionTitle`), with per-level plans split into independent cards, per-item coverage, the service itself lost on removal and removal only with a reason, the user's choices (BLUEPRINT §14) | All fixture cases pass |
-| M8.2 | Optimizations page (P14) + "Apply" to a draft | P14 criteria met |
+| M8.2 | Optimizations page (P14) + "Apply" to a draft. As built: `ss-suggestion-card` in the sections, Apply through core's `suggestionEdits` onto the draft, Dismiss into `dismissedSuggestions` (its schema, repository, Dexie v3, sealed by the lock and in backups v2), List view's `ss-optimizations-link`, and `OptimizerService` with a Web Worker for lists over 12 items under the production CSP (BLUEPRINT §14) | P14 criteria met |
 | M8.3 | `apps/bot` nightly price check → GitHub PR (BLUEPRINT §6.4, §7.7), which also checks each `taxIncluded` quote is still on its page, rereads reseller prices and checks each reseller's approval quotes on the provider's page (BLUEPRINT §4.9); the same run proposes a new logo when a provider's or reseller's icon changed (a rebrand) | A changed price produces a PR, and so does a changed logo, a `taxIncluded` quote gone from its page or a reseller the provider no longer names |
 
 ### M9 — Payment (Phase 4)
@@ -706,6 +706,10 @@ stays.
   the user chose. Under 960 px they come above the cards, and Types and Features stay after them.
 - **Cards:** each gives its share of the list's next 12 months under its price, "31% of list" (read "… over the next
   12 months"), or "<1% of list"; none with no charge to come.
+
+**As built (M8.2):** View optimizations (`ss-optimizations-link`) comes after the feature summary in the side column:
+"View optimizations (9)", its outline and dot in the strongest suggestion's colour (green for free savings alone), its
+name saying the strongest's section; "No suggestions" in a neutral outline. Dismissed suggestions aren't counted.
 
 **As built (M7.6):** the list's own budget warnings come first, as on Home but for this list alone ("This list's
 payments in January 2027 add up to…", the user's choice), the month's link opening the Calendar showing the list.
@@ -1262,7 +1266,7 @@ Local sync comes with Phase 5.
 **Purpose:** show how to pay less without losing what matters (BLUEPRINT §10).
 ```
 ‹ Work Related   Optimizations                                    Save up to $214 / year
-FREE SAVINGS — nothing you rank is lost
+FREE SAVINGS — nothing is lost
 ┌───────────────────────────────────────────────────────────────────────────────┐
 │ Switch Disney+ Premium to annual billing                      save $33.89 / yr │
 │ $16.99 / mo → $169.99 / year                                  [Apply] [Dismiss]│
@@ -1288,6 +1292,21 @@ FREE SAVINGS — nothing you rank is lost
 - [Dismiss] stores the suggestion's fingerprint in `dismissedSuggestions`. It comes back if the list changes, and "Show dismissed" reveals it.
 - An info tooltip explains the Essential, Critical and Needed rules.
 - The back button goes to the list, by its name. The placeholder has it already (the feedback after M6.9).
+
+**As built (M8.1, M8.2):** the user's choices, which BLUEPRINT §14 has in full:
+- **Sections** are per-level plans: each lists its own plan's cards, which never conflict and can each be applied
+  alone; a card in a looser section can be an alternative for the same item. "Save up to" is the yellow plan's.
+- **Free savings lose nothing at all** (losing a Not-ranked feature is red, as §10.4 says), and List view's button is
+  green when they're all there is.
+- **Removing an item loses its service itself** (yellow, unless everything it gives is Unused or Unwanted), and it's
+  suggested only with a reason: another provider's item gives one of its features all along, or nothing it gives is
+  wanted. Two items of the same provider are two people's accounts: never removed for overlapping each other.
+- **Features are judged per item**: a change keeps what replaces the item; only a removal counts other providers.
+- **Apply** puts the change on the draft at the item's next renewal: a removal is an end date, a plan change a new
+  anchor.
+- **Cards** show each change with its prices from and to and when, the saving with an Estimated tag, the features lost
+  or gained with their ranks, and Apply and Dismiss named for the changes. Dismiss says so with Undo and moves focus to
+  the next card. Show dismissed shows them with Show again.
 
 **Acceptance**
 - [ ] The optimizer fixtures produce the expected cards and colours

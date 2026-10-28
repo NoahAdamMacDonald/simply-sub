@@ -48,6 +48,8 @@ export interface SuggestedItem {
   planName: string;
   /** One charge of its billing period now, before tax: its price override while it applies, else its price. */
   price: PickedPrice;
+  /** Its next charge: when a change to it takes effect, and when it ends if it's replaced or removed. */
+  next?: IsoDate;
 }
 
 /**
@@ -68,6 +70,8 @@ export type SuggestionAction =
       item: SuggestedItem;
       planId: string;
       planName: string;
+      /** The item's add-ons the new plan allows, within its limit. */
+      addOns?: { id: string; quantity: number }[];
       to: PickedPrice;
       on: IsoDate;
     }
@@ -129,8 +133,11 @@ export interface Suggestion {
   /** Converted prices are involved, so the savings are an estimate (BLUEPRINT §4.7). */
   estimated: boolean;
   lost: FeatureChange[];
-  /** The services it gives up: removed items' own (Netflix itself), which no feature describes. */
-  lostServices: { itemId: string; name: string }[];
+  /**
+   * The services it gives up: each removed item's own, which no feature describes, by its title, so two accounts of one
+   * provider are told apart ("Mine (Netflix Standard)", "Sam's (Netflix Standard)").
+   */
+  lostServices: { itemId: string; title: string }[];
   gained: FeatureChange[];
 }
 
@@ -150,4 +157,25 @@ export interface OptimizerResult {
   next12: number;
   /** How the plans were found: every combination (with pruning), or greedy search where there were too many. */
   search: 'exhaustive' | 'greedy';
+}
+
+/** What List view's View optimizations shows (PROJECT-PLAN P4). */
+export interface SuggestionSummary {
+  /** The suggestions not dismissed. */
+  count: number;
+  /** The colour of the strongest: red, then orange, then yellow; free savings when they're all there is. */
+  strongest?: Severity;
+}
+
+const strength: readonly Severity[] = ['red', 'orange', 'yellow', 'free'];
+
+export function suggestionSummary(
+  suggestions: readonly Pick<Suggestion, 'fingerprint' | 'severity'>[],
+  dismissed: ReadonlySet<string>,
+): SuggestionSummary {
+  const shown = suggestions.filter((suggestion) => !dismissed.has(suggestion.fingerprint));
+  const strongest = strength.find((severity) =>
+    shown.some((suggestion) => suggestion.severity === severity),
+  );
+  return { count: shown.length, ...(strongest && { strongest }) };
 }

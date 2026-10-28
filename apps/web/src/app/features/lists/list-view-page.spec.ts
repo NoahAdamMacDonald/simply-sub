@@ -9,10 +9,19 @@ import { MatSelectHarness } from '@angular/material/select/testing';
 import { MatSliderHarness } from '@angular/material/slider/testing';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
-import type { CatalogData, ListItem, Settings, SubscriptionList, Tag } from '@simply-sub/core';
+import {
+  suggestionSummary,
+  type CatalogData,
+  type ListItem,
+  type Settings,
+  type SubscriptionList,
+  type Tag,
+} from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { FxStore } from '../../core/fx/fx-store';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { OptimizerService } from '../../core/optimizer/optimizer-service';
+import { DismissedSuggestionsRepository } from '../../core/storage/dismissed-suggestions-repository';
 import { DraftsRepository } from '../../core/storage/drafts-repository';
 import { ItemsRepository } from '../../core/storage/items-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
@@ -511,6 +520,33 @@ describe('ListViewPage', () => {
     expect(warning?.querySelector('a')?.getAttribute('href')).toBe(
       `/calendar?month=2027-01&lists=${work.id}`,
     );
+  });
+
+  it('links to its optimizations, with how many and coloured by the strongest, which a dismissal changes (M8.2)', async () => {
+    await plant();
+    await open(work.id);
+    const link = () => page().querySelector('ss-optimizations-link a');
+    await until(() => spoken(link())?.startsWith('View optimizations (') === true);
+
+    expect(link()?.getAttribute('href')).toBe(`/lists/${work.id}/optimize`);
+    // Its name says the strongest's section, which the colour shows.
+    expect(link()?.getAttribute('aria-label')).toBe(
+      'View optimizations (4), the strongest: Recommended',
+    );
+    expect(link()?.getAttribute('data-strongest')).toBe('red');
+
+    // With the red ones dismissed, the next strongest colours it.
+    const optimizer = TestBed.inject(OptimizerService);
+    const input = optimizer.input(work.id);
+    if (!input) throw new Error('No input');
+    const { suggestions } = await optimizer.run(input);
+    const red = suggestions.filter((suggestion) => suggestion.severity === 'red');
+    for (const suggestion of red) {
+      await TestBed.inject(DismissedSuggestionsRepository).dismiss(suggestion.fingerprint, work.id);
+    }
+    const next = suggestionSummary(suggestions, new Set(red.map((card) => card.fingerprint)));
+    await until(() => link()?.getAttribute('data-strongest') === next.strongest);
+    expect(spoken(link())).toContain(`View optimizations (${next.count})`);
   });
 
   it('offers to add from the catalog or a custom subscription to an empty list', async () => {
