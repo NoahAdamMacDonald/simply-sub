@@ -43,8 +43,6 @@
   --budget-warn: var(--rank-sometimes);
   --budget-over: var(--rank-unwanted);
   --budget-track: var(--rank-none);
-  // The track past the budget on the Calendar's bar (M7.7): the label on it is 7.4:1.
-  --budget-over-zone: color-mix(in srgb, var(--budget-over) 25%, var(--budget-track));
   // The label on a budget bar, in both themes: 4.9:1 on the over fill, 10:1 or more on the others and on the track,
   // so it reads wherever the fill ends (BLUEPRINT §8.1). The marker's tick takes it too.
   --budget-label: #111111;

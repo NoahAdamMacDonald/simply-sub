@@ -107,6 +107,25 @@ ss-item-card {
 
 .filters-toggle {
   flex: none;
+
+  // Under 600 px Sort is its icon (and its count), so the search box has room; screen readers still hear "Sort".
+  @media (max-width: 599.98px) {
+    min-width: 0;
+    padding-inline: 12px;
+
+    .sort-label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    mat-icon {
+      margin-inline-end: 0;
+    }
+  }
 }
 
 // How many filters are on, beside Sort.

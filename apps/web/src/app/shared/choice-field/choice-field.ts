@@ -76,6 +76,7 @@ export class ChoiceField implements FormValueControl<string> {
   readonly picked = output<string>();
 
   private readonly box = viewChild.required<ElementRef<HTMLInputElement>>('box');
+  private readonly trigger = viewChild.required(MatAutocompleteTrigger);
   private readonly matInput = viewChild(MatInput);
 
   private readonly labels = computed(
@@ -139,11 +140,18 @@ export class ChoiceField implements FormValueControl<string> {
 
   /**
    * Focus left: touched, and the field shows the chosen name again (a choice clicked in the list, which takes focus
-   * from it first, then shows its own).
+   * from it first, then shows its own). Focus moving on to another control closes the list: Tab pressed right after
+   * the list opened came before the list could close itself, and left it open over the next field. Focus moving into
+   * the list (a choice pressed with a mouse or a finger) leaves it open, for the click to pick it.
    */
-  protected leave(): void {
+  protected leave(event: FocusEvent): void {
     this.touch.emit();
     this.text.set(this.chosenLabel());
+    const to = event.relatedTarget;
+    const list = this.trigger().autocomplete?.panel?.nativeElement as HTMLElement | undefined;
+    if (to instanceof HTMLElement && !list?.contains(to) && !to.closest('.cdk-overlay-pane')) {
+      this.trigger().closePanel();
+    }
   }
 
   /** The list closed: it shows them all next time, and the field the chosen name. */

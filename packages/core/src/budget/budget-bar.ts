@@ -8,6 +8,9 @@ export type BudgetLevel = 'ok' | 'warn' | 'over';
 /** The share of a budget where a bar turns amber. */
 export const budgetWarnShare = 0.75;
 
+/** The share of a budget where a bar's colour is all red (M7.7): half again over it. */
+export const budgetRedShare = 1.5;
+
 export interface BudgetBar {
   level: BudgetLevel;
   /** How much of the bar is filled, from 0 to 1: a bar over its max is full. */
@@ -20,11 +23,13 @@ export interface BudgetBar {
   /** Where the marker's tick sits, from 0 to 1; none without a marker, or with one past the bar's end. */
   markerAt?: number;
   /**
-   * Where the budget sits on the bar, as a share of its length, for its gradient (M7.7): green at the start, amber at
-   * 75% of the budget and red from the budget on, so the fill's colour says how far along it is. 1 without a marker,
-   * where the max is the budget; with one, the marker's share of the max, past 1 when the budget is past the bar's end.
+   * The fill's one colour, on a scale (M7.7, the user's choice): green with nothing spent, changing gradually to yellow
+   * exactly at the budget, then to red at half again over it. `towardYellow`, from 0 to 1, is how far it has gone from
+   * green to yellow, and `towardRed` how far from yellow to red. With a marker it's the max (the month's total) against
+   * the marker (its budget), as the level is.
    */
-  budgetAt: number;
+  towardYellow: number;
+  towardRed: number;
 }
 
 /**
@@ -37,6 +42,8 @@ export function budgetBar(value: number, max: number, marker?: number): BudgetBa
   const percent = max > 0 ? wholePercent(value / max) : 0;
   const level =
     marker === undefined ? levelOf(percent) : levelOf(marker > 0 ? wholePercent(max / marker) : 0);
+  // What the colour measures: spending against the budget, or the month's total against its budget.
+  const share = marker === undefined ? (max > 0 ? value / max : 0) : marker > 0 ? max / marker : 0;
   return {
     level,
     fill: max > 0 ? Math.min(Math.max(value / max, 0), 1) : 0,
@@ -45,8 +52,14 @@ export function budgetBar(value: number, max: number, marker?: number): BudgetBa
       max > 0 &&
       marker >= 0 &&
       marker <= max && { markerAt: marker / max }),
-    budgetAt: marker !== undefined && max > 0 ? marker / max : 1,
+    towardYellow: scaled(share),
+    towardRed: scaled((share - 1) / (budgetRedShare - 1)),
   };
+}
+
+/** `share` within 0 and 1, to four places: how far along one half of the colour scale it is. */
+function scaled(share: number): number {
+  return Math.round(Math.min(Math.max(share, 0), 1) * 1e4) / 1e4;
 }
 
 /** The level of a share given as a whole percent, so the colour and the label agree at every edge. */

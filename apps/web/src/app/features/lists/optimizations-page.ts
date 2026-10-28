@@ -212,14 +212,14 @@ export class OptimizationsPage {
    * gone gives way to the first card's heading, else Review and save.
    */
   private focusAfterRender(id: string, applied = false): void {
-    afterNextRender(
-      () => {
-        const fallback = () =>
-          document.querySelector<HTMLElement>('ss-suggestion-card .title') ??
-          document.getElementById('review');
-        (document.getElementById(id) ?? (applied ? fallback() : null))?.focus();
-      },
-      { injector: this.injector },
-    );
+    const focus = () => {
+      const fallback = () =>
+        document.querySelector<HTMLElement>('ss-suggestion-card .title') ??
+        document.getElementById('review');
+      (document.getElementById(id) ?? (applied ? fallback() : null))?.focus();
+    };
+    // After Apply the page has drawn the new cards already, waiting for them: there may be no render to come.
+    if (applied) focus();
+    else afterNextRender(focus, { injector: this.injector });
   }
 }

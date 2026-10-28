@@ -4,12 +4,12 @@ import { SettingsStore } from '../../core/settings/settings-store';
 import { amountText } from '../price-tag/price-text';
 
 /**
- * A pill progress bar with its label inside the fill, as on the wireframes (BLUEPRINT §8.1, §8.1.1). Its level is
- * green under 75%, amber to 100% and red over (data-level), and a bar over its max is full with the real percent
- * ("112%"); core's budgetBar decides. The fill shows a gradient that runs the bar's length, green to amber at 75% of
- * the budget and red from it, so its end's colour says how far along the budget it is (M7.7). With a `marker` (the
- * Calendar's monthly budget) a tick marks it, the gradient follows it, and the track past it is tinted, so a month
- * that goes over shows it before it's paid. The element is the progressbar: name it with `aria-label` or
+ * A pill progress bar with its label inside the fill, as on the wireframes (BLUEPRINT §8.1, §8.1.1). Its level is ok
+ * under 75%, warn to 100% and over past it (data-level), and a bar over its max is full with the real percent
+ * ("112%"); core's budgetBar decides. The fill is one colour, which changes gradually with how far along the budget it
+ * is (M7.7, the user's choice): green with nothing spent, yellow exactly at the budget, red at half again over it. With
+ * a `marker` (the Calendar's monthly budget) a tick marks it, and the colour compares the month's total to it, so a
+ * month that goes over shows it before it's paid. The element is the progressbar: name it with `aria-label` or
  * `aria-labelledby`.
  */
 @Component({
@@ -25,7 +25,8 @@ import { amountText } from '../price-tag/price-text';
     '[attr.data-level]': 'bar().level',
     '[style.--fill]': 'bar().fill',
     '[style.--marker]': 'bar().markerAt ?? null',
-    '[style.--budget-at]': 'bar().budgetAt',
+    '[style.--toward-yellow]': "bar().towardYellow * 100 + '%'",
+    '[style.--toward-red]': "bar().towardRed * 100 + '%'",
   },
 })
 export class BudgetBar {

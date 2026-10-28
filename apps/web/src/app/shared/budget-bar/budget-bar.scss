@@ -1,7 +1,13 @@
 // The label is the same dark colour on every fill and on the track (BLUEPRINT §8.1), so it can start at the bar's
 // left edge and run past a short fill without measuring anything.
 :host {
-  --fill-color: var(--budget-ok);
+  // One colour on a scale (M7.7): green with nothing spent, gradually to yellow exactly at the budget, then to red at
+  // half again over it. The host says how far along each half it is. The label is 4.9:1 or more on all of it.
+  --fill-color: color-mix(
+    in oklab,
+    var(--budget-over) var(--toward-red, 0%),
+    color-mix(in oklab, var(--budget-warn) var(--toward-yellow, 0%), var(--budget-ok))
+  );
 
   position: relative;
   display: block;
@@ -17,16 +23,6 @@
   forced-color-adjust: none;
 }
 
-:host([data-level='warn']) {
-  --fill-color: var(--budget-warn);
-}
-
-:host([data-level='over']) {
-  --fill-color: var(--budget-over);
-}
-
-// The gradient is as long as the bar, so the fill shows as much of it as it covers (M7.7): green at the start, amber
-// at 75% of the budget and red from the budget on. The label is dark enough on all of it (4.9:1 at its reddest).
 .fill {
   position: absolute;
   inset-block: 0;
@@ -34,23 +30,6 @@
   width: calc(var(--fill) * 100%);
   border-radius: inherit;
   background-color: var(--fill-color);
-  background-image: linear-gradient(
-    to right,
-    var(--budget-ok),
-    var(--budget-warn) calc(var(--budget-at) * 75%),
-    var(--budget-over) calc(var(--budget-at) * 100%)
-  );
-  background-repeat: no-repeat;
-  background-size: 100cqi 100%;
-}
-
-// The Calendar's bar past its budget's tick: the part of the month that goes over.
-.over-zone {
-  position: absolute;
-  inset-block: 0;
-  left: calc(var(--marker) * 100%);
-  right: 0;
-  background-color: var(--budget-over-zone);
 }
 
 // The tick at the monthly budget, kept inside the bar at either end.

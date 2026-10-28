@@ -12,9 +12,14 @@
     <mat-icon>savings</mat-icon>
   }
   @if (compact()) {
+    <!-- Named by its words, hidden but its count: an aria-label wouldn't hold the icon's word axe sees. -->
+    <span class="visually-hidden">View optimizations: </span>
     @if (summary(); as summary) {
       @if (summary.count > 0) {
-        <span class="dot" aria-hidden="true"></span>{{ summary.count }}
+        <span class="dot" aria-hidden="true"></span>{{ summary.count
+        }}<span class="visually-hidden"> suggestions, the strongest: {{ strongest() }}</span>
+      } @else {
+        <span class="visually-hidden">no suggestions</span>
       }
     }
   } @else if (summary(); as summary) {

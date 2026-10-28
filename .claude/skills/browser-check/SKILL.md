@@ -391,6 +391,34 @@ With axe on each, and no horizontal scroll.
 - `buttonIn` drops a leading icon's ligature ("auto_fix_high Assign best cards").
 - The card-number check reads the fields typed in, not ids or dates, whose digits run on once dashes are taken out.
 
+`check-after-m9.cjs` (the feedback after M9: M5.11, M5.12, M6.12–M6.16, M7.7–M7.9, M8.4) checks the batch on `ng serve`
+for a Canadian in Alberta with a $50 monthly budget, Work Related planted with eight items (Netflix Standard with an
+extra member, Netflix Standard with ads, Mullvad VPN renewed by hand, Crave, Disney+, Proton and TSN). In both themes
+at both widths, keyboard only, each part on its own, so one failing doesn't stop the rest:
+- first run typed in: the dialog opens on its heading with no list open, Tab to Province, "alb" and Enter;
+- List view: the add-on with its price, "Auto-renews" and "Renew by", the warning's ✕ then Show hidden (the key in the
+  settings, focus moving between them), the bar's one colour (all red, half again over), scrolled to the end with the
+  bar below the top bar and View optimizations on screen (compact in the bar at 360), then View in Search by keyboard
+  with `plan=`;
+- Search: Standard picked over the user's Standard with ads, "Auto-renews", and Netflix's Behavioral Advertising link;
+- the item dialog: the shared-ranks note, French-language content set to Needed by keyboard, Save sharing it with
+  Standard with ads in the draft, then New tag's hex field and colour picker following each other;
+- Optimizations: Apply staying, Review and save, Undo dropping the draft, Apply again and Review and save;
+- the Calendar: "← Work Related" from a budget warning, the grid's width unchanged when a day opens at 1280 and none
+  from the sidebar, the compact grid and its bottom sheet at 360, and the JSON and Text downloads;
+- Settings: the 📍 dialog's province typed ("que" is Quebec alone) and the tag editor's picker;
+- Home: the bars' colour on the scale and the warnings' ✕.
+
+What it taught:
+- A dialog moves focus to its heading (or its first field) once it has opened: wait for that before pressing Tab, or
+  the dialog takes focus back mid-way and what's typed goes nowhere.
+- A menu you can type in opens its list on focus. Tab pressed right after it opened came before Material set up its
+  own closing and left the list open over the next field: the field now closes it when focus moves on.
+- An icon's word is in a button's `textContent` with no space ("checkStandard", "eventCalendar (.ics)"): read the
+  label's own span, or drop `mat-icon` first.
+- Tab into a tag picker stops on its chips first: wait for the chip grid's input (`.mat-mdc-chip-input`).
+- The list editor's Cancel asks "Discard changes?" a moment later: wait for the question or the editor to go.
+
 Since M7.1, the scripts check the charges:
 - `check-list-view.cjs`: Mullvad's "Renew by Nov 12", Netflix's next charge as charged in its details ("Next charge Nov
   12, 2026: $19.94, with $0.95 tax", Alberta's 5%), and Wrong date? by keyboard: the dialog filled in with focus in

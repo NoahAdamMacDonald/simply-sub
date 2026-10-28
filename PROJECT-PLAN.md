@@ -173,6 +173,8 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M5.8 | Features chips that fit (added 2026-10-27, P8): a long chip ("Download devices: Downloads on 6+ devices") wraps inside its field instead of scrolling the panel or drawer sideways (a global `.ss-wrapping-chips`, since Material keeps a chip's label on one line), and its remove button is centred (BLUEPRINT §14) | No sideways scroll in the panel at 1280 px or the drawer at 360 px with the longest chip; its remove button is centred on it |
 | M5.9 | Grades in words and a calmer panel (added 2026-10-27, P8): each rating's grade in muted text beside its topic ("Disputes (Good):"), the dot decorative again; a click on a Features chip removes it, as its X does; the filter panel has no scrollbar of its own, pinned by its foot when it's taller than the window (`--ss-panel-height`), with one-line hints (BLUEPRINT §14) | No rating needs a hover to show its grade; a click on a chip removes it once; at 560, 720 and 900 px high the panel never scrolls on its own and Clear all comes into view |
 | M5.10 | Names without a stray space (added 2026-10-27): a browser puts a space before a `.visually-hidden` box ("$7.99 a month , add to a list"), so an Add to list menu item and the card's Plan, reseller, Hide details and policy-page links are named by one `aria-label`, and a price's action ends its hidden words (an `aria-label` would fail WCAG 2.5.3, since "/ mo" is read "a month") (BLUEPRINT §14) | A price reads "$7.99 a month, add to a list"; with cards expanded, no name on Search has a space before a comma or colon, in both themes at 360 and 1280 px |
+| M5.11 | View in Search shows the item's plan (added 2026-10-28, the feedback after M9): Search's URL takes `plan=<plan id>` (core's `readSearchParams` and `writeSearchParams`, kept while the catalog has it; not a filter), and its provider's card shows that plan over the user's own (`CatalogQuery.plan`); List view's View in Search names the item's plan (BLUEPRINT §14) | From a Netflix Standard card, Search shows Netflix with Standard picked, though the user also has Standard with Ads |
+| M5.12 | Where to change a policy (added 2026-10-28, the feedback after M9): a policy rating's optional `action` (core's `policyActionSchema`: what the link does and the provider's own page for it, which its policy or help pages link), checked by `validateCatalog` to be on the provider's own sites or its quoted policies' site; Search's Terms and policies links it under the reason; read for Netflix, Disney+, Hulu, ESPN, Crave, TSN and RDS; the policy-research skill's rule (BLUEPRINT §4.10, §14) | A rating whose reason says the user has to change something themselves links the provider's page for it, and validation refuses another company's |
 
 ### M6 — Lists & ranking
 | ID | Task | Done when |
@@ -188,6 +190,11 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M6.9 | Backup export/import (the "Your data" section of P13, and the first-run dialog's "Import a backup instead"), with an optional passphrase that encrypts the file, and the crypto module it uses (BLUEPRINT §11.5). As built: core's `user/backup.ts` (the file, its checks, Merge), the app's `core/crypto/passphrase-crypto.ts` and `BackupRepository` (BLUEPRINT §14) | Export → delete all → import restores everything, encrypted or not; a wrong passphrase or a tampered file imports nothing |
 | M6.10 | Optional app lock: a passphrase encrypts the user tables at rest, with a lock screen and an idle lock (P13, P15; BLUEPRINT §11.5). As built: core's `user/app-lock.ts` (what's sealed, the lock's settings) and `user/lock-idle.ts` (Lock after), `StorageEngine`'s sealing with `RowCipher` and `AppLockRepository`, the lock screen (`layout/lock-screen.ts`) and the idle lock (`core/lock/auto-lock.ts`) (BLUEPRINT §14) | Locked data on disk is unreadable without the passphrase; turning the lock on and off round-trips every table; a wrong passphrase unlocks nothing |
 | M6.11 | Custom tags (the Settings section of P13, added 2026-10-28 so M6 covers all of Settings): each tag renamed inline, recoloured (the 12 presets plus a hex field) and deleted, asking first when it's in use ("Used by 5 subscriptions"), and ⊕ to add one. As built: core's `user/tag-rules.ts` (names, colours, `tagUsage`, `withoutTag`), `TagsRepository.usage` and `removeWithItems` (one transaction on tags, items and drafts), Settings' `ss-tags-setting` and `ss-tag-editor`, the shared `ss-tag-colours` and `TagDeleter`, and the item dialog's Delete a tag menu (BLUEPRINT §14) | P13's tag criteria met: tags persist and update every page live |
+| M6.12 | Add-ons and renewals on the cards (added 2026-10-28, the feedback after M9): List view's cards list their add-ons with their prices ("+ Extra member × 2 $15.98 / mo"), the editor's rows say what each adds ("Extra member (with ads) for $7.99 a month"), and the status badge says when an active item renews by itself ("Auto-renews Nov 12"), on Search's cards too (core's `providerRenewals.renews`) (BLUEPRINT §14) | An add-on added, swapped or removed in the item dialog shows on its card; Netflix's card says when it auto-renews |
+| M6.13 | List view's bar stays in reach (added 2026-10-28, the feedback after M9): the search box and Sort pinned below the top bar as the cards scroll; from 960 px View optimizations pinned at the side column's foot once the column's other parts have scrolled away; under 960 px a compact View optimizations in the pinned bar (BLUEPRINT §14) | Scrolled down a long list, the search box, Sort and View optimizations are on screen at 360 and 1280 px, over nothing in the side column |
+| M6.14 | Shared ranks (added 2026-10-28, the feedback after M9): ranks changed in a plan's item dialog go to the same provider's other plans in that list (the user's choice), saved with the list's Save; Essential stays on its plan; "Ranks for this plan only" (`ListItem.ownRanks`) keeps a plan out; a new plan starts with its siblings' ranks. Core's `ranking/shared-ranks.ts` (BLUEPRINT §4.6, §14) | Changing Netflix Standard's 1080p rank changes Standard with Ads' too, in the draft, and not with the box ticked |
+| M6.15 | Any colour for a tag (added 2026-10-28, the feedback after M9): `ss-colour-picker`, the device's own colour picker as a swatch beside the hex field, each following the other, in Settings' tag editor and the item dialog's New tag (which gets the hex field too) (BLUEPRINT §14) | A colour picked on a phone or a desktop fills the hex field, and a hex typed colours the swatch |
+| M6.16 | Menus you can type in (added 2026-10-28, the feedback after M9): `ss-choice-field`, a Signal Forms control on Material's autocomplete, for the first-run and 📍 dialogs' Country, Province or territory (State) and Currency: typing narrows the list (a name's start first, then anywhere, or a code), Enter picks the first, and leaving without a pick puts the choice back (BLUEPRINT §14) | Typing "al" and Enter picks Alberta; "usd" finds US Dollar; leaving the field restores the chosen one |
 
 ### M7 — Money, schedule & calendar
 | ID | Task | Done when |
@@ -198,6 +205,9 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M7.4 | Calendar (P10): grid, day panel, list filter, upcoming list, agenda layout on mobile. As built: core's `readCalendarParams`, `writeCalendarParams`, `hiddenLists` (`user/calendar-params.ts`), `monthGrid` and `settings.calendarHiddenLists`; the page, `ss-day-panel` and its bottom sheet; List view's mini calendar; and `ClockService.today` moving on at midnight (BLUEPRINT §14) | P10 criteria met |
 | M7.5 | Exports: ICS (one all-day event per charge, no `RRULE`s: BLUEPRINT §11.2), CSV, XLSX, TXT (lazy-loaded). As built: core's `export/` (`itemTable`, `paymentTable`, `summaryTable`, `exportWorkbook`, `calendarEvents`, `listText`, `listFile`, `exportFileName`) and `periodCost`; the app's `Exporter` and `export-files.ts` with papaparse, exceljs and ics; List view's Export, the Calendar's Sync calendar and Export to file, and a per-list JSON (BLUEPRINT §14) | The files open in Google Calendar and Excel, and a plan billed on the 31st shows in every month |
 | M7.6 | Budget warning banners. As built: `ss-budget-warnings` on Home (every list together) and List view (the list alone), from M7.1's budget checks, with the month's link to the Calendar (BLUEPRINT §14) | A warning appears for a projected over-budget month |
+| M7.7 | Budget bars' colour scale and warnings you can dismiss (added 2026-10-28, the feedback after M9): every budget bar's fill is one colour, changing gradually from green, to yellow exactly at the budget, to red at 150% (core's `budgetBar.towardYellow` and `towardRed`, the user's choice), the Calendar's by the month's total against the budget; the budget warnings' ✕ hides one until its period or budget changes (`settings.dismissedBudgetWarnings`, core's `budgetWarningKey`), and "Show 1 hidden budget warning" brings them back (BLUEPRINT §8.1.1, §14) | A bar's colour moves gradually from green to yellow at its budget and on to red; a dismissed warning stays hidden after a reload and comes back for a new month or budget |
+| M7.8 | The Calendar, still and reachable (added 2026-10-28, the feedback after M9): from 960 px a column of its own beside the grid, for the day's panel and Upcoming, so opening a day never moves the grid; under 600 px a compact grid (dates and dots) above the agenda, any day opening in the bottom sheet; a back button to the page it was opened from, named by it, but not from the sidebar (BLUEPRINT §14) | The grid keeps its width when a day opens; a phone can open any day from the grid; from List view's mini calendar, "← Work Related" goes back |
+| M7.9 | The Calendar's JSON and Text, and its own calendar (added 2026-10-28, the feedback after M9): Export to file adds JSON (core's `paymentsFile`) and Text (`paymentsText`); each event lists its tags and has them as `CATEGORIES`; Sync calendar's steps make a Simply Sub calendar first in Google, Apple and Proton Calendar, since they colour a calendar and not an event (BLUEPRINT §11.2, §11.3, §14) | Both files download with the lists shown; the steps import into a calendar of its own |
 
 ### M8 — Optimizer & bot
 | ID | Task | Done when |
@@ -205,6 +215,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M8.1 | core: optimizer (BLUEPRINT §10) with fixtures. As built: core's `optimizer/` (`optimize`, its model, coverage map, search, cards and fingerprints, and `actionTitle`), with per-level plans split into independent cards, per-item coverage, the service itself lost on removal and removal only with a reason, the user's choices (BLUEPRINT §14) | All fixture cases pass |
 | M8.2 | Optimizations page (P14) + "Apply" to a draft. As built: `ss-suggestion-card` in the sections, Apply through core's `suggestionEdits` onto the draft, Dismiss into `dismissedSuggestions` (its schema, repository, Dexie v3, sealed by the lock and in backups v2), List view's `ss-optimizations-link`, and `OptimizerService` with a Web Worker for lists over 12 items under the production CSP (BLUEPRINT §14) | P14 criteria met |
 | M8.3 | `apps/bot` nightly price check → GitHub PR (BLUEPRINT §6.4, §7.7), which also checks each `taxIncluded` quote is still on its page, rereads reseller prices and checks each reseller's approval quotes on the provider's page (BLUEPRINT §4.9); the same run proposes a new logo when a provider's or reseller's icon changed (a rebrand). As built: a cron-started Workflow with a step per provider, prices confirmed on their pages before any Workers AI, Browser Rendering as a fallback, YAML edited line by line, and one `Price updates <date>` PR on `bot/price-updates`; deployed by hand on 2026-10-28, with its token (BLUEPRINT §7.2, §14) | A changed price produces a PR, and so does a changed logo, a `taxIncluded` quote gone from its page or a reseller the provider no longer names |
+| M8.4 | Apply several optimizations (added 2026-10-28, the feedback after M9): Apply puts a card's changes on the list's draft and stays, the optimizer running on the list as its draft has it, so the next suggestion counts them; Undo puts the draft back (`ListDraftService.putBack`), and Review and save opens the editor (BLUEPRINT §10, §14) | Two suggestions applied one after the other are both in the editor's draft, and Undo takes back the last |
 
 ### M9 — Payment (Phase 4)
 | ID | Task | Done when |
@@ -217,6 +228,14 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 ### M10 — Extras (Phase 5)
 Live calendar feed (`POST /cal`), encrypted device sync, "report a wrong price", PWA install and offline mode,
 calendar year view, broader regional price coverage.
+
+The live calendar feed (BLUEPRINT §11.3) serves a calendar of its own by nature; since M7.9 found that Google, Apple
+and Proton colour a whole calendar and not each event, it can offer a feed per tag as well as one for everything, so
+each tag subscribes as a calendar with the colour picked for it.
+
+Encrypted device sync follows Brave's sync chain (BLUEPRINT §11.4, researched 2026-10-28): a random 32-byte seed shown
+as a word code (and a QR code), keys derived from it on the device, the encrypted database on Cloudflare where nothing
+can read it, and records merged by `updatedAt` and `deletedAt`.
 
 Offline mode means a service worker for the app's own files, so the app starts with no network; the catalog is
 already kept offline by M4.3. Angular's `provideServiceWorker` is blocked by our Trusted Types CSP, so the app
@@ -469,6 +488,11 @@ Add these aliases to `_tokens.scss`. They build on the rank tokens in BLUEPRINT 
 - **[Import a backup instead]** (M6.9) opens Import backup (P13) as one Import, with no question, since there's
   nothing here yet. The backup's settings end the first run.
 
+**Since the feedback after M9 (M6.16):** Country, Province or territory (State) and Currency are menus you can type
+in (`ss-choice-field`): typing narrows the list to the names that start with it, then those that have it anywhere, or
+whose code starts with it ("al" is Alberta, "usd" US Dollar), and Enter picks the first. With nothing typed it lists
+them all and Enter submits; leaving without a pick puts the chosen one back. Settings' 📍 dialog has the same fields.
+
 **Acceptance**
 - [ ] Navigation works with the keyboard
 - [ ] The drawer works at 360 px
@@ -578,6 +602,10 @@ Oct 22, 2026, and use the illustrative prices from `docs/api-output-examples.jso
 payments in January 2027 add up to ≈ $137.20, over your $50.00 monthly budget." with "See January 2027 in the
 Calendar", and "Your payments this year, past and to come, add up to ≈ $610.64, over your $500.00 annual budget."
 
+**Since the feedback after M9 (M7.7):** each bar is one colour, changing gradually from green to yellow exactly at the
+budget and on to red at 150%, and each budget warning has ✕, which hides it until its period or budget changes, with "Show 1 hidden budget
+warning" to bring it back.
+
 **Acceptance**
 - [ ] The bar totals equal the sum of every list's "this month" / "this year"
 - [ ] Unset budgets show the prompt instead of a bar
@@ -623,6 +651,8 @@ and "1 subscription not counted" when one can't be priced or converted.
 stays.
 
 **States:** no lists → only the New tile and a one-line hint; the feature column is hidden.
+
+**Since the feedback after M9 (M7.7):** each card's bars take their colour from the scale (P2).
 
 **Acceptance**
 - [ ] Rank counts match §3.2 for a fixture list
@@ -729,6 +759,17 @@ back):
 - The card is chosen in the item dialog (P6), not here: the cards change only through the editor, but for pinning and
   Wrong date?.
 
+**Since the feedback after M9:**
+- **Cards (M6.12):** a card lists its add-ons under its names, each with its price for all it has ("+ Extra member × 2
+  $15.98 / mo"); the price tag on the right is the plan's. An active item that renews by itself says when, "Auto-renews
+  Nov 12", beside the manual "Renew by".
+- **View in Search (M5.11)** opens Search on the item's own plan (`plan=`), not the user's other plan of the provider.
+- **Pinned bar (M6.13):** the search box and Sort stay below the top bar while the cards scroll. From 960 px View
+  optimizations, at the side column's foot, stays pinned once the column's other parts have scrolled away; under
+  960 px a compact one (its icon and count, in the strongest's colour) is in the pinned bar.
+- **Budget warnings (M7.7):** each has ✕ and "Show 1 hidden budget warning", for this list alone; the bars take their
+  colour from the scale (P2).
+
 BLUEPRINT §14 has the details.
 
 **Acceptance**
@@ -790,6 +831,10 @@ manual"), and since M7.2 the footer says "This month $26.52" before the average.
 
 **Since the feedback after M6.9:** a back button above the heading goes to the list, by its saved name, or to Lists
 for a new list. Leaving with changes asks first, as above.
+
+**Since the feedback after M9 (M6.12, M6.14):** a row's add-on says what it adds ("Extra member (with ads) for $7.99 a
+month"). After the item dialog shares a rank change, the snackbar says so: "Saved Netflix Standard, and its ranks to 1
+more plan".
 
 **States:** an unknown id with no draft → P15.
 
@@ -858,6 +903,15 @@ BLUEPRINT §14 has the rest.
   naming it.
 - **No cards:** "Add your cards on the Payment page to see what each one pays back here."
 - **A free plan:** no Payment section, and saving drops a card it had, as it drops an own price.
+
+**Since the feedback after M9:**
+- **Shared ranks (M6.14, the user's choice):** ranks changed here go to the same provider's other plans in the list that
+  provide each key, saved with the list's Save; Essential stays on this plan. Feature ranks names them ("Changes here go
+  to the same features of Netflix Standard with ads in this list too. Essential stays on this plan."), and "Ranks for
+  this plan only" keeps this one out both ways. A new plan starts with the ranks its siblings share.
+- **New tag (M6.15):** a hex field under the presets, checked as Settings checks it, and the device's colour picker
+  beside it, each following the other.
+
 **Rules**
 - **Plan:** plans of the same provider (or of the custom subscription), with their prices. Changing the plan keeps the interval if the new plan offers it; otherwise the first available interval is picked.
 - **Extra members:** add-ons of the selected plan, with quantity up to `addOnLimit`.
@@ -1016,6 +1070,13 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
   opens a menu of links to them.
 - **Filter panel:** its price, Features and Activity controls are the ones List view's Sort menu uses (§4.3).
 
+**Since the feedback after M9:**
+- **`plan=` (M5.11):** a plan the URL names is the one its provider's card shows, over the user's own; List view's View
+  in Search sets it. It isn't a filter.
+- **Renewals (M6.12):** a listed provider's status says "Auto-renews Nov 12" when its soonest charge renews by itself.
+- **Where to change it (M5.12):** a policy rating whose reason says the user has to change something themselves links
+  the provider's own page for it under the reason ("How to turn off Behavioral Advertising ↗").
+
 BLUEPRINT §14 has the scores.
 
 **States:**
@@ -1137,6 +1198,19 @@ Upcoming   Oct 28 Crave $22.00 · Nov 3 Mullvad ≈ $7.53 ↻ · Nov 12 Netflix 
   payment itself has it, read ", over its card's limit".
 - **The panel** (and the bottom sheet): each charge's card ("Paid with Everyday"), and on such a day "Everyday goes over
   its $30.00 limit in October 2026: ≈ $116.46", read with "Warning:".
+
+**Since the feedback after M9:**
+- **Layout (M7.8):** from 960 px the grid has a column of its own on its right: the day's panel when one is chosen
+  ("Choose a day to see its payments." until then), then Upcoming, so opening a day never narrows the grid. Upcoming
+  is one payment to a line.
+- **Phones (M7.8):** under 600 px a compact grid (each day's date, a dot on the days with payments) comes above the
+  agenda, with the same tab stop and arrow keys; any day opens in the bottom sheet.
+- **Back (M7.8):** opened from another page (List view's mini calendar, a budget warning, Home's calendar), a back
+  button above the heading goes back to it, by name ("← Work Related"); opened from the sidebar, or first, none.
+- **Exports (M7.9):** Export to file adds JSON (the payments, as data) and Text (each month's total and payments).
+  Each event lists its tags, also as its categories. Sync calendar's steps make a Simply Sub calendar first in each
+  app and import into it, since the apps colour a whole calendar, not each event.
+- **The bar (M7.7):** its one colour is the month's total against the budget, on the scale (P2).
 
 **Acceptance**
 - [ ] Charges appear on the right days, including month-end dates and limited windows
@@ -1314,6 +1388,9 @@ Local sync comes with Phase 5.
   - As built: BLUEPRINT §14.
 - Create local sync stays disabled until Phase 5.
 
+**Since the feedback after M9:** the 📍 dialog's menus can be typed in (M6.16, as P1's), and a tag's colour can also
+come from the device's own colour picker beside Hex colour, each following the other (M6.15).
+
 **Acceptance**
 - [ ] Budgets and tags persist and update every page live
 - [ ] Export → Delete all → Import (Replace) restores identical data, with and without a passphrase
@@ -1365,6 +1442,12 @@ FREE SAVINGS — nothing is lost
 - **Cards** show each change with its prices from and to and when, the saving with an Estimated tag, the features lost
   or gained with their ranks, and Apply and Dismiss named for the changes. Dismiss says so with Undo and moves focus to
   the next card. Show dismissed shows them with Show again.
+
+**Since the feedback after M9 (M8.4):** Apply puts a card's changes on the list's draft and stays on the page, so more
+can follow: the suggestions are for the list as its draft has it, the card applied goes, and focus moves to the next
+card (the first left, else Review and save). "Applied: <change>" has Undo, which puts the draft back as it was. A note
+says the list has changes not saved and that the suggestions count them, with Review and save, which opens the
+editor.
 
 **Acceptance**
 - [ ] The optimizer fixtures produce the expected cards and colours

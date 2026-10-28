@@ -1,7 +1,7 @@
 <!-- Always there, so screen readers read a warning out when it appears. -->
 <div role="status">
   @for (warning of lines(); track warning.key) {
-    <p class="warning" [attr.data-kind]="warning.kind">
+    <p class="warning" [attr.data-kind]="warning.kind" [attr.data-key]="warning.key">
       <mat-icon aria-hidden="true">warning</mat-icon>
       <span class="text">
         <span aria-hidden="true">{{ warning.shown }}</span>

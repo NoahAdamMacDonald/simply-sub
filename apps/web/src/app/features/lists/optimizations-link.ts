@@ -38,15 +38,17 @@ export class OptimizationsLink {
       : undefined,
   );
   /**
-   * With suggestions, its name says the strongest's section too, which its colour shows. The compact one, which shows
-   * no words, is named either way.
+   * With suggestions, its name says the strongest's section too, which its colour shows. The compact one is named by
+   * its own words (M6.13).
    */
   protected readonly label = computed(() => {
     const summary = this.summary();
-    if (summary?.strongest && summary.count > 0) {
-      return `View optimizations (${summary.count}), the strongest: ${severityText[summary.strongest].heading}`;
-    }
-    if (!this.compact()) return null;
-    return summary ? 'View optimizations: no suggestions' : 'View optimizations';
+    if (this.compact() || !summary?.strongest || summary.count === 0) return null;
+    return `View optimizations (${summary.count}), the strongest: ${severityText[summary.strongest].heading}`;
+  });
+  /** The strongest suggestion's section, which the compact one's hidden words name. */
+  protected readonly strongest = computed(() => {
+    const strongest = this.summary()?.strongest;
+    return strongest ? severityText[strongest].heading : '';
   });
 }

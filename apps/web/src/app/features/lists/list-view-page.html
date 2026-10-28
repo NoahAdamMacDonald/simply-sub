@@ -172,7 +172,8 @@
               (click)="filtersOpen.set(!filtersOpen())"
             >
               <mat-icon>tune</mat-icon>
-              <span>Sort</span>
+              <!-- Read but not shown under 600 px, where the search box needs the room (M6.13). -->
+              <span class="sort-label">Sort</span>
               <span class="visually-hidden">
                 and filter{{ filterCount() > 0 ? ', ' + filterCount() + ' on' : '' }}</span
               >

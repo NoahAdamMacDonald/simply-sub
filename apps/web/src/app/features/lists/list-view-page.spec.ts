@@ -559,18 +559,15 @@ describe('ListViewPage', () => {
     await plant();
     await open(work.id);
     const link = () => page().querySelector('ss-optimizations-link a');
-    await until(
-      () => link()?.getAttribute('aria-label')?.startsWith('View optimizations (') === true,
-    );
+    await until(() => link()?.textContent?.includes('suggestions') === true);
 
     expect(link()?.getAttribute('href')).toBe(`/lists/${work.id}/optimize`);
-    // Under 960 px it's compact, in the pinned bar with the search box (M6.13): the icon and the count.
+    // Under 960 px it's compact, in the pinned bar with the search box (M6.13): the icon and the count, named by its
+    // words, the strongest's section with them, which the colour shows.
     expect(page().querySelector('.toolbar ss-optimizations-link a.compact')).toBe(link());
-    expect(spoken(link())).toBe('4');
-    // Its name says the strongest's section, which the colour shows.
-    expect(link()?.getAttribute('aria-label')).toBe(
-      'View optimizations (4), the strongest: Recommended',
-    );
+    expect(text(link()?.querySelector('.visually-hidden'))).toBe('View optimizations:');
+    expect(spoken(link())).toBe('View optimizations: 4 suggestions, the strongest: Recommended');
+    expect(link()?.hasAttribute('aria-label')).toBe(false);
     expect(link()?.getAttribute('data-strongest')).toBe('red');
 
     // With the red ones dismissed, the next strongest colours it.
@@ -584,7 +581,7 @@ describe('ListViewPage', () => {
     }
     const next = suggestionSummary(suggestions, new Set(red.map((card) => card.fingerprint)));
     await until(() => link()?.getAttribute('data-strongest') === next.strongest);
-    expect(link()?.getAttribute('aria-label')).toContain(`View optimizations (${next.count})`);
+    expect(link()?.textContent).toContain(`${next.count} suggestions`);
   });
 
   it('offers to add from the catalog or a custom subscription to an empty list', async () => {

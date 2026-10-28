@@ -1,11 +1,11 @@
 import {
   Component,
   ElementRef,
-  Injector,
-  afterNextRender,
+  afterRenderEffect,
   computed,
   inject,
   input,
+  signal,
 } from '@angular/core';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -54,7 +54,6 @@ export class BudgetWarnings {
   private readonly settings = inject(SettingsStore);
   private readonly today = inject(ClockService).today;
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
-  private readonly injector = inject(Injector);
 
   /** Core's checks; none while the totals aren't ready. */
   readonly warnings = input<Warnings | undefined>();
@@ -114,6 +113,25 @@ export class BudgetWarnings {
   protected readonly hidden = computed(() =>
     this.all().filter((warning) => this.dismissed().has(warning.key)),
   );
+  /**
+   * Where focus goes once the page has drawn it: Show hidden after ✕, the warning's ✕ after Show hidden. The settings
+   * come back from storage a moment after they're saved, so it waits for the element rather than for one render.
+   */
+  private readonly pendingFocus = signal<string | undefined>(undefined);
+
+  constructor() {
+    afterRenderEffect(() => {
+      const selector = this.pendingFocus();
+      this.lines();
+      this.hidden();
+      if (selector === undefined) return;
+      const target = this.host.nativeElement.querySelector<HTMLElement>(selector);
+      if (target) {
+        target.focus();
+        this.pendingFocus.set(undefined);
+      }
+    });
+  }
 
   /** Hides the warning until its period or budget changes; focus moves to "Show hidden", which brings it back. */
   protected async dismiss(warning: Warning): Promise<void> {
@@ -126,7 +144,7 @@ export class BudgetWarnings {
         this.today(),
       ),
     });
-    this.focusAfterRender('.show-hidden');
+    this.pendingFocus.set('.show-hidden');
   }
 
   /** Shows the hidden warnings again, with focus on the first one's ✕. */
@@ -137,14 +155,9 @@ export class BudgetWarnings {
       saved.dismissedBudgetWarnings ?? [],
       this.hidden().map((warning) => warning.key),
     );
+    const [first] = this.hidden();
     await this.settings.update({ dismissedBudgetWarnings: left.length > 0 ? left : undefined });
-    this.focusAfterRender('.dismiss');
-  }
-
-  private focusAfterRender(selector: string): void {
-    afterNextRender(() => this.host.nativeElement.querySelector<HTMLElement>(selector)?.focus(), {
-      injector: this.injector,
-    });
+    if (first) this.pendingFocus.set(`[data-key="${first.key}"] .dismiss`);
   }
 
   /** The Calendar on the month, showing List view's list alone. */

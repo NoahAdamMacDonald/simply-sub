@@ -148,6 +148,8 @@ export class SettingsPage {
   protected editLocation(saved: Settings): void {
     this.dialog.open(LocationDialog, {
       data: saved,
+      // Its heading first: the Country menu, focused, would open its list over the dialog (M6.16).
+      autoFocus: 'first-heading',
       maxWidth: 'min(560px, calc(100vw - 32px))',
       width: '560px',
     });
