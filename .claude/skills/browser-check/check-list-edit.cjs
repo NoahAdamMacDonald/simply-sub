@@ -275,8 +275,9 @@ async function draftOf(page) {
         (await page.locator('ss-list-edit-page h1').textContent()).trim() === 'Edit list' &&
           (await nameField(page).inputValue()) === 'Work Related' &&
           shownTitles.join(' | ') === 'Netflix · Standard | Mullvad VPN' &&
+          // When it renews, from its next charge (M7.1).
           (await page.locator('li.item .details').first().textContent()).trim() ===
-            'Monthly · auto-renews · 1 custom rank' &&
+            'Renews Nov 12 · auto · 1 custom rank' &&
           (await page.locator('li.item ss-tag-chip').first().textContent()).trim() === 'Family' &&
           /^No unsaved changes · ≈ \$\d+\.\d\d \/ mo average$/.test(shownFooter),
         `${shownTitles.join(' | ')} / ${shownFooter}`,

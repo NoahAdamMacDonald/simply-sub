@@ -2,10 +2,11 @@ import { Component, ElementRef, computed, inject, input, output, viewChild } fro
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import { itemActivity, type ResolvedItem, type Tag } from '@simply-sub/core';
+import type { ResolvedItem, Tag } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
-import { ClockService } from '../../core/clock/clock-service';
+import { SettingsStore } from '../../core/settings/settings-store';
 import { addOnText, billingText } from '../billing-text';
+import { chargeAmountText, type ShownAndSpoken } from '../charge-text';
 import { countryName } from '../country-name';
 import { dateText } from '../date-text';
 import { FeatureList } from '../feature-list/feature-list';
@@ -13,6 +14,7 @@ import { PriceTag } from '../price-tag/price-tag';
 import { ProviderIcon } from '../provider-icon/provider-icon';
 import { StatusBadge, type BadgeStatus } from '../status-badge/status-badge';
 import { TagChip } from '../tags/tag-chip';
+import { WrongDate } from '../wrong-date/wrong-date';
 import { planTitle } from './card-text';
 import { slidingDetails } from './sliding-details';
 
@@ -20,10 +22,11 @@ let nextId = 0;
 
 /**
  * A subscription card's list variant (PROJECT-PLAN §4.3, P4, M6.8): one item of a list, with its icon, name and plan
- * (or its nickname, with the plan under it), status, tags, 📌 and price. Its details, which slide open and shut as
- * Search's do, add how it's billed, its note, its features with their ranks for this item, its Plan and Cancel links,
- * View in Search for a catalog plan or bundle, and Edit, which opens it in the list editor. The page saves 📌
- * (pinToggle). M7.1 adds its next charge and M7.2 its share of the list's total.
+ * (or its nickname, with the plan under it), status (with "Ends" and "Renew by", M7.1), tags, 📌 and price. Its
+ * details, which slide open and shut as Search's do, add its next charge as charged with "Wrong date?" (M7.1), how
+ * it's billed, its note, its features with their ranks for this item, its Plan and Cancel links, View in Search for a
+ * catalog plan or bundle, and Edit, which opens it in the list editor. The page saves 📌 (pinToggle). M7.2 adds its
+ * share of the list's total.
  */
 @Component({
   selector: 'ss-item-card',
@@ -42,8 +45,9 @@ let nextId = 0;
   styleUrl: './item-card.scss',
 })
 export class ItemCard {
-  private readonly today = inject(ClockService).today;
   private readonly catalog = inject(CatalogStore);
+  private readonly settings = inject(SettingsStore);
+  private readonly wrongDates = inject(WrongDate);
   private readonly expandButton = viewChild<string, ElementRef<HTMLElement>>('expandButton', {
     read: ElementRef,
   });
@@ -89,11 +93,23 @@ export class ItemCard {
   });
   /** What it costs: the price override while it applies, else the plan's price. */
   protected readonly price = computed(() => this.resolved().override ?? this.resolved().price);
-  protected readonly status = computed<BadgeStatus>(() => ({
-    ...itemActivity(this.item(), this.today()),
-    manual: false,
-  }));
-  /** How it's billed, and what else it has, in words. Its next charge comes with M7.1. */
+  protected readonly status = computed<BadgeStatus>(() => this.resolved().status);
+  /**
+   * Its next charge, as charged with tax: the date, and "$21.46, with $2.47 tax". "Wrong date?" moves an Ongoing
+   * item's (its anchor); Specific dates' windows have no anchor to move.
+   */
+  protected readonly next = computed<
+    { date: string; amount: ShownAndSpoken; movable: boolean } | undefined
+  >(() => {
+    const { nextCharge, item } = this.resolved();
+    if (!nextCharge) return undefined;
+    return {
+      date: dateText(nextCharge.date),
+      amount: chargeAmountText(nextCharge, this.settings.saved()?.country),
+      movable: item.billing.mode === 'recurring',
+    };
+  });
+  /** How it's billed, and what else it has, in words. */
   protected readonly facts = computed(() => {
     const { item, addOns, override } = this.resolved();
     const { billing, priceOverride, region } = item;
@@ -114,6 +130,12 @@ export class ItemCard {
       ...(region === undefined ? [] : [`Bought in ${countryName(region)}`]),
     ];
   });
+  /** "Wrong date?": the date its next charge is really on becomes its anchor, saved to the item at once (P4). */
+  protected async wrongDate(): Promise<void> {
+    const next = this.resolved().nextCharge;
+    if (next) await this.wrongDates.ask(this.item(), this.label(), next.date);
+  }
+
   /** The details, which slide open and shut, and close from their foot too (M5.7). */
   protected readonly details = slidingDetails(
     () => this.body()?.nativeElement,

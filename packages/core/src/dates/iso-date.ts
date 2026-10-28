@@ -20,11 +20,23 @@ export function addDays(date: IsoDate, days: number): IsoDate {
 /**
  * `date` plus `months`, on the same day of the month, or on the month's last day when it's shorter: Jan 31 plus a
  * month is Feb 28 (29 in a leap year), as Netflix and Stripe bill (PROJECT-PLAN §3.1). Negative `months` go back.
+ * `onDay` puts it on another day, and on the last day when the month is shorter: a plan billed on the 31st anchored on
+ * Feb 28 (`billingDay`) renews on Mar 31.
  */
-export function addMonths(date: IsoDate, months: number): IsoDate {
+export function addMonths(date: IsoDate, months: number, onDay?: number): IsoDate {
   const { year, month, day } = parse(date);
   const lastDay = new Date(utc(year, month - 1 + months + 1, 0)).getUTCDate();
-  return formatUtc(utc(year, month - 1 + months, Math.min(day, lastDay)));
+  return formatUtc(utc(year, month - 1 + months, Math.min(onDay ?? day, lastDay)));
+}
+
+/** How many days `to` is after `from`: negative when it's before. */
+export function daysBetween(from: IsoDate, to: IsoDate): number {
+  const start = parse(from);
+  const end = parse(to);
+  return Math.round(
+    (utc(end.year, end.month - 1, end.day) - utc(start.year, start.month - 1, start.day)) /
+      86_400_000,
+  );
 }
 
 /** The day of the week, from 0 for Sunday to 6 for Saturday. */

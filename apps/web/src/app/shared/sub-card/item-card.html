@@ -8,7 +8,11 @@
       @if (names().planName; as planName) {
         <p class="plan-name">{{ planName }}</p>
       }
-      <ss-status-badge class="status" [status]="status()" />
+      <ss-status-badge
+        class="status"
+        [status]="status()"
+        [nextCharge]="resolved().nextCharge?.date"
+      />
       @if (tags().length > 0) {
         <ul class="tags" aria-label="Tags">
           @for (tag of tags(); track tag.id) {
@@ -52,6 +56,27 @@
       <div #body class="details-body" [class.moving]="details.moving()">
         <div class="details-clip">
           <div class="details-content">
+            <!-- As charged, tax included (P4); ≈ is read "about". -->
+            @if (next(); as next) {
+              <p class="next-charge">
+                <span
+                  >Next charge {{ next.date }}:
+                  <span aria-hidden="true">{{ next.amount.shown }}</span>
+                  <span class="visually-hidden">{{ next.amount.spoken }}</span></span
+                >
+                @if (next.movable) {
+                  <button
+                    matButton
+                    type="button"
+                    class="wrong-date"
+                    [attr.aria-label]="'Wrong date? ' + label()"
+                    (click)="wrongDate()"
+                  >
+                    Wrong date?
+                  </button>
+                }
+              </p>
+            }
             @if (facts().length > 0) {
               <ul class="facts">
                 @for (fact of facts(); track fact) {

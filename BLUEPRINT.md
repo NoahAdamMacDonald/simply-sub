@@ -210,11 +210,14 @@ simply-sub/
 │     │  ├─ catalog/         # Zod schemas + inferred types for the catalog files, JSON Schema export (section 4.5),
 │     │  │                   # validateCatalog (section 6.2), regions, availability, pickPrice and convert (section 4.7)
 │     │  ├─ user/            # user-data types (lists, items, cards…), resolveItem (M4.6), itemActivity (M5.1)
-│     │  ├─ dates/           # ISO calendar dates in UTC: IsoDate, toIsoDate, addDays, addMonths (M7.1)
+│     │  ├─ dates/           # ISO calendar dates in UTC: IsoDate, toIsoDate, addDays, addMonths, daysBetween, and
+│     │  │                   # billing periods (Period, addPeriods)
 │     │  ├─ icons/           # PNG and ICO reading, a page's icon links, the icon services, picking the best icon,
 │     │  │                   # GET /icon's query (M2.6)
-│     │  ├─ schedule/        # recurrence: next payment dates, monthly/annual totals
-│     │  ├─ tax/             # sales tax: tax-added regions, the Canadian rate table, subdivisions (section 4.8)
+│     │  ├─ schedule/        # charge dates, charges with tax, the next charge, statuses, totals and budget checks
+│     │  │                   # (M7.1)
+│     │  ├─ tax/             # sales tax: tax-added regions, the Canadian rate table, subdivisions, the tax on a
+│     │  │                   # charge (section 4.8)
 │     │  ├─ ranking/         # rank keys, providesKey (M2.3) and providedKeys (M2.4); rank resolution (item override >
 │     │  │                   # profile > not ranked), rank counts and the feature summary (M6.1)
 │     │  ├─ search/          # searchProviders, readProvidersQuery, providersBody (GET /providers); searchCatalog
@@ -1030,7 +1033,7 @@ Catalog prices are what providers list, and whether that includes sales tax depe
 Canadian and US prices exclude it (Netflix Canada adds GST/HST, so $18.99 is $21.46 in Ontario), while EU, UK,
 Australian and most other prices include VAT or GST. Without tax, a Canadian's totals would come out 5–15% low.
 The rules live in `packages/core/src/tax/`: the rates and subdivision lists since M4.2 (`salesTaxRate`,
-`subdivisionsOf`), and the maths on charges in M7.1:
+`subdivisionsOf`), and the tax on a charge since M7.1 (`salesTaxOn` in `charge-tax.ts`):
 - **The buyer's location decides**, not where the price came from: Settings' `country` and `subdivision`. In a
   **tax-added region** (`taxAddedRegions` in core: CA and US), tax is added to every catalog price, converted ones
   included, since foreign services such as Proton must collect GST/HST from Canadians. Elsewhere prices already
@@ -2467,8 +2470,8 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 - Files: `kebab-case.ts`; types and classes in `PascalCase`; ids and slugs in `kebab-case` with dot namespaces (`netflix.standard`).
 - Money: store `amount` with its `currency`. Never format money in the logic layer, only in the UI (`Intl.NumberFormat`).
 - Dates: ISO strings (`YYYY-MM-DD`) everywhere, never `Date` objects in data. Date maths uses core's own
-  `dates/` helpers (`addDays`, and `addMonths` in M7.1), which work in UTC so a time zone or a daylight-saving
-  change can't shift a date. No date library: date-fns works in local time.
+  `dates/` helpers (`addDays`, `addMonths`, `daysBetween`, `addPeriods`), which work in UTC so a time zone or a
+  daylight-saving change can't shift a date. No date library: date-fns works in local time.
 - Lint and format with ESLint (angular-eslint) and Prettier.
 
 ### 13.3 Testing
@@ -2532,6 +2535,61 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-28, M7.1)**
+- **The schedule engine** is core's `schedule/`, on M4.6's resolved items:
+  - **Dates** (`chargeDates`, `nextChargeDate`, `lastChargeDate`): each date is counted from a fixed point, never
+    from the charge before. Ongoing billing is the anchor plus or minus whole periods, on or after `startDate` and
+    before `endDate`. Months and years use `addMonths(anchor, n, billingDay)`, which now takes the day to land on;
+    days and weeks are plain counts. Specific dates charge at each window's start, then every period before its end,
+    with a yearly window copied into each later year.
+  - **Charges** (`itemCharges`): §3.1's `Charge`, plus `ends` on the last charge before an end date (P10's "Ends").
+    A date costs the price override while it's before the override's `until`, else the price plus each add-on ×
+    its quantity. An add-on sold only for another period (Disney+'s monthly extra member on a yearly plan) is charged
+    on that period's dates, from the same anchor. A charge of 0 isn't one, so a free plan has none. A date with a price
+    in another currency, for want of a rate, gets a charge in each currency.
+  - **Status** (`itemStatus`, on `itemActivity`): "Ends" when the end date is after today and within 30 days, and a
+    manual renewal when the next charge is one: an Ongoing item that doesn't auto-renew, or Specific dates on a price
+    renewed by hand.
+  - **Totals** (`listMetrics`): this month, this year and the next 12 months; `approx`; `notCounted` (items that
+    can't be priced, and items with a charge in another currency); each item's share of the next 12 months (a card's
+    "31% of list", M7.2); rank counts and the feature summary; the budget shares; and `warnings`, the budget checks:
+    the first of the next 12 calendar months, this one included, over the monthly budget, and this year's past and
+    projected charges over the annual one.
+- **Tax on charges** (`tax/charge-tax.ts`, `salesTaxOn`): each price in a charge gets the buyer's rate from
+  `addedSalesTax`, where the item was bought (`buyerTaxPlace`). None on a price with `taxIncluded` (Mullvad), and
+  none on a typed amount unless it's marked plus tax. The Canadian rates were checked on 2026-10-26
+  (`canadianSalesTaxCheckedOn`), two days before, so they weren't checked again.
+- **A future anchor is the next renewal:** the item dialog asks for the anchor as "Next renewal", one period from
+  today by default. Counted back, that puts a charge on today, the payment made on subscribing. Decided here: an
+  Ongoing item's next charge is on or after its anchor while that's still to come. Today's charge still counts in the
+  totals, and the calendar shows it.
+- **`ResolvedItem`** gains `overridePrice` (the override whatever the date, for the charges before its `until`),
+  `status` and `nextCharge`. `resolveItem` takes the tax place, Settings' country, province and rate, which
+  `MetricsService` passes. The item dialog resolves its form's item as it's typed: one with a date that isn't one yet
+  has no next charge, rather than throwing.
+- **"Wrong date?"** (P4; the Calendar's day panel comes with M7.4) follows a card's next charge, for an Ongoing item
+  only (Specific dates have no anchor). Its dialog (`shared/wrong-date/`, loaded on first use) asks for the date,
+  filled in, with the datepicker. Core's `reanchorIssue` wants today or later, within the item's start and end dates,
+  and `reanchored` keeps the billing day while the new date allows it (Nov 30 for the 31st). It's saved straight to
+  the item, with no draft. The field has no `[min]`: the datepicker's own check added an error with no message, ahead
+  of core's.
+- **Where it shows:**
+  - **List view's cards:** the status with "Ends Nov 3" and ↻ "Renew by Nov 3", and the details start with "Next
+    charge Nov 12, 2026: $19.94, with $0.95 tax" and Wrong date?.
+  - **The list editor's rows:** "Renews Nov 12 · auto", "Renews Jan 20, 2027 · manual · ends …", "Specific dates · next
+    charge Sep 2", and "Ended Oct 1, 2026" when nothing is left.
+  - **The item dialog's footer:** "$18.99 / mo · next charge Nov 12".
+  - **Search:** a provider's "Ends" and "Renew by" (core's `providerRenewals`; the user chose the rule): "Renew by"
+    when its soonest next charge across its items is a manual renewal, and "Ends" only when every item still going on
+    ends within 30 days, on the latest end.
+- **Period helpers:** `Period`, `samePeriod` and `addPeriods` moved from `user/item-form.ts` to `dates/period.ts`, so
+  the schedule doesn't load the item dialog's rules. That took 2.2 kB gzipped off the Lists overview and the list
+  editor.
+- **Bundles:** the initial bundle grew by 0.1 kB (495.5 kB), for the date helpers the startup code has. Beyond it,
+  gzipped: Search from 192.8 to 198.4 kB, as it now resolves the user's items for its badges (MetricsService and the
+  schedule); List view 5.3 kB more, the list editor 1.6, the Lists overview 1.0 and the item dialog 2.7. Wrong date's
+  dialog is 1.5 kB of its own, on the item dialog's datepicker chunk.
 
 **Resolved (2026-10-28, M6.11)**
 - **Custom tags** (PROJECT-PLAN P13) is a card in Settings, after Budgets, near the top as the wireframe has it.

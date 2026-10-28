@@ -168,7 +168,7 @@ export class ListViewPage {
   /** The items it can't price or name, as the list editor's rows say why. */
   protected readonly unresolvedRows = computed(() =>
     this.view().unresolved.map((unresolved) =>
-      editRow({ ok: false, unresolved }, this.tags.byId()),
+      editRow({ ok: false, unresolved }, this.tags.byId(), this.today()),
     ),
   );
   /** How many of each type it has: "Streaming video: 3". */

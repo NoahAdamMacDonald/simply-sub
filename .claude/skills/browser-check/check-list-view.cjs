@@ -321,9 +321,11 @@ async function openView(page, listId = LIST) {
       const statuses = await view(page)
         .locator('ss-item-card ss-status-badge')
         .evaluateAll((badges) => badges.map((badge) => badge.textContent.trim()));
+      // Mullvad renews by hand (M7.1): its badge says when, after its icon's ligature.
       check(
-        `${label}: each card's status, and Netflix's tag`,
-        statuses.join(' | ') === 'Inactive · active from Dec 1, 2026 | Active | Active' &&
+        `${label}: each card's status, Mullvad's "Renew by", and Netflix's tag`,
+        statuses.join(' | ') ===
+          'Inactive · active from Dec 1, 2026 | Active | Activeautorenew Renew by Nov 12' &&
           (
             await view(page).locator(`[data-item="${NETFLIX}"] ss-tag-chip`).textContent()
           ).trim() === 'Family',
@@ -544,6 +546,62 @@ async function openView(page, listId = LIST) {
       await noSideScroll(page, viewport, `${label}, the details`);
       await page.screenshot({ path: shot('view-details'), fullPage: true });
       await axeCheck(page, `${label}, a card's details`);
+
+      // Its next charge as charged, with Alberta's 5% (M7.1), and Wrong date? by keyboard.
+      const nextCharge = async () =>
+        (await details.locator('.next-charge > span').textContent()).replace(/\s+/g, ' ').trim();
+      check(
+        `${label}: the details give the next charge as charged, tax included`,
+        (await nextCharge()).startsWith('Next charge Nov 12, 2026: $19.94, with $0.95 tax'),
+        await nextCharge(),
+      );
+      await keyToName(page, 'Wrong date? Netflix Standard');
+      await page.keyboard.press('Enter');
+      const wrongDate = page.locator('ss-wrong-date-dialog');
+      await wrongDate.waitFor();
+      await until('focus in its field', () =>
+        page.evaluate(() => !!document.activeElement?.closest('ss-wrong-date-dialog input')),
+      );
+      check(
+        `${label}: Wrong date? asks for the next charge, filled in, with focus in the field`,
+        (await wrongDate.locator('input').inputValue()) === '2026-11-12',
+      );
+      await page.screenshot({ path: shot('view-wrong-date') });
+      await axeCheck(page, `${label}, Wrong date?`);
+      await page.keyboard.press('Control+A');
+      await page.keyboard.type('2026-11-14');
+      await page.keyboard.press('Enter');
+      await wrongDate.waitFor({ state: 'detached' });
+      await until('the new anchor stored', async () =>
+        (await readTable(page, 'items')).some(
+          (item) => item.id === NETFLIX && item.billing.anchorDate === '2026-11-14',
+        ),
+      );
+      await until('the card following it', async () =>
+        (await nextCharge()).includes('Nov 14, 2026'),
+      );
+      check(
+        `${label}: the date becomes the item's anchor, saved at once with no draft, and focus goes back`,
+        (await readTable(page, 'drafts')).length === 0 &&
+          (await page.evaluate(() => document.activeElement?.classList.contains('wrong-date'))),
+      );
+      // Back as it was, for what follows. The Enter that saves mustn't open it again once focus is back on its button.
+      await page.keyboard.press('Enter');
+      await wrongDate.waitFor();
+      await until('focus in its field', () =>
+        page.evaluate(() => !!document.activeElement?.closest('ss-wrong-date-dialog input')),
+      );
+      await page.keyboard.press('Control+A');
+      await page.keyboard.type('2026-11-12');
+      await page.keyboard.press('Enter');
+      await until('the anchor back', async () => (await nextCharge()).includes('Nov 12, 2026'));
+      await sleep(1000);
+      check(
+        `${label}: Enter saves and closes it, and doesn't open it again`,
+        (await wrongDate.count()) === 0,
+        `${await wrongDate.count()} open`,
+      );
+
       await keyToName(page, 'Edit Netflix Standard');
       await page.keyboard.press('Enter');
       const dialog = page.locator('ss-item-dialog');

@@ -1,11 +1,8 @@
 import { monthlyAverage, type ResolvedItem } from '@simply-sub/core';
+import type { ShownAndSpoken } from '../../shared/charge-text';
 import { amountText } from '../../shared/price-tag/price-text';
 
-/** A text as it shows ("≈ $26.84 / mo average") and as it's read ("about $26.84 a month on average"). */
-export interface ShownAndSpoken {
-  shown: string;
-  spoken: string;
-}
+export type { ShownAndSpoken } from '../../shared/charge-text';
 
 /**
  * What a list costs per month on average, before tax (§3.1's monthly equivalents, core's monthlyAverage), with ≈ when

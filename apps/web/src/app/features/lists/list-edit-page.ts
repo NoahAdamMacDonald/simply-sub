@@ -33,6 +33,7 @@ import {
 } from '@simply-sub/core';
 import { filter, firstValueFrom, map } from 'rxjs';
 import { CatalogStore } from '../../core/catalog/catalog-store';
+import { ClockService } from '../../core/clock/clock-service';
 import type { AsksBeforeLeaving } from '../../core/leave-guard';
 import { ListDraftService } from '../../core/lists/list-draft-service';
 import { MetricsService } from '../../core/metrics/metrics-service';
@@ -121,6 +122,7 @@ export class ListEditPage implements AsksBeforeLeaving {
   private readonly catalog = inject(CatalogStore);
   private readonly settings = inject(SettingsStore);
   private readonly tags = inject(TagsRepository);
+  private readonly today = inject(ClockService).today;
   protected readonly customSubs = inject(CustomSubsRepository);
   private readonly customSubEditor = inject(CustomSubEditor);
   private readonly confirmer = inject(ConfirmService);
@@ -213,7 +215,7 @@ export class ListEditPage implements AsksBeforeLeaving {
     return draft ? this.metrics.resolve(draftItems(draft)) : [];
   });
   protected readonly rows = computed(() =>
-    this.resolutions().map((result) => editRow(result, this.tags.byId())),
+    this.resolutions().map((result) => editRow(result, this.tags.byId(), this.today())),
   );
 
   /**

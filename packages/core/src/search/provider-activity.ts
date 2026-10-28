@@ -2,6 +2,7 @@ import type { Bundle } from '../catalog/bundle';
 import type { IsoDate } from '../dates/iso-date';
 import { itemActivity, type ItemActivity } from '../user/item-activity';
 import type { ListItem } from '../user/list-item';
+import type { ResolvedItem } from '../user/resolved';
 
 // A provider's place in the user's lists, for Search (PROJECT-PLAN P8, §3.3): its status across every list ("Active ·
 // 2 lists"), the Activity filter, and which of its plans the user has, which a card shows first.
@@ -75,4 +76,52 @@ export function providerActivity(
       },
     ]),
   );
+}
+
+/** What Search's status says of a provider's charges (PROJECT-PLAN §3.3, M7.1): "Ends Nov 3" and "Renew by Nov 3". */
+export interface ProviderRenewal {
+  /** Every one of its items that's active, or starts later, ends within 30 days: the latest of their end dates. */
+  endsOn?: IsoDate;
+  /** Its soonest next charge across its items, when that one is a manual renewal. */
+  renewBy?: IsoDate;
+}
+
+/**
+ * Each listed provider's renewals, by provider id, from its resolved items: a catalog plan's provider, and each
+ * provider whose plan a bundle includes, as providerActivity groups them. A provider with one item ending and another
+ * going on isn't ending; its soonest charge decides "Renew by".
+ */
+export function providerRenewals(
+  items: readonly ResolvedItem[],
+  bundles: readonly Bundle[],
+): Map<string, ProviderRenewal> {
+  const byProvider = new Map<string, ResolvedItem[]>();
+  for (const resolved of items) {
+    const { source } = resolved.item;
+    const planIds =
+      source.kind === 'catalog'
+        ? [source.planId]
+        : source.kind === 'bundle'
+          ? (bundles.find((bundle) => bundle.id === source.bundleId)?.includes ?? [])
+          : [];
+    for (const providerId of new Set(planIds.map((id) => id.slice(0, id.indexOf('.'))))) {
+      byProvider.set(providerId, [...(byProvider.get(providerId) ?? []), resolved]);
+    }
+  }
+  const renewals = new Map<string, ProviderRenewal>();
+  for (const [providerId, resolved] of byProvider) {
+    const going = resolved.filter(
+      ({ status }) => status.kind === 'active' || status.activeFrom !== undefined,
+    );
+    const ends = going.map(({ status }) => status.endsOn);
+    const soonest = resolved
+      .flatMap(({ nextCharge }) => (nextCharge ? [nextCharge] : []))
+      .sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0))[0];
+    renewals.set(providerId, {
+      ...(going.length > 0 &&
+        ends.every((date) => date !== undefined) && { endsOn: ends.sort().at(-1) }),
+      ...(soonest?.manual && { renewBy: soonest.date }),
+    });
+  }
+  return renewals;
 }

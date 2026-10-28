@@ -265,6 +265,15 @@ It runs axe on the card, the editor and its error, the question, the menu and Li
 scroll. Wait for the item dialog to put focus on its heading before tabbing: it moves focus there once it's open,
 which undoes Tab presses made sooner.
 
+Since M7.1, the scripts check the charges:
+- `check-list-view.cjs`: Mullvad's "Renew by Nov 12", Netflix's next charge as charged in its details ("Next charge Nov
+  12, 2026: $19.94, with $0.95 tax", Alberta's 5%), and Wrong date? by keyboard: the dialog filled in with focus in
+  its field, a new date saved as the item's anchor with no draft, the card following it, focus back on Wrong date?,
+  and the Enter that saves not opening it again. Wait for focus in the field before typing: the dialog moves it there
+  once it's open.
+- `check-list-edit.cjs`: a row's "Renews Nov 12 · auto".
+- `check-search.cjs`: a provider renewed by hand (Mullvad, yearly, auto-renew off) shows "Renew by Jan 20".
+
 Since the feedback after M6.8, the other scripts check more:
 - `check-search.cjs`: at 360 px each shop's price is on its line under one "Cheaper at".
 - `check-item-dialog.cjs`: the three date boxes have the same height.

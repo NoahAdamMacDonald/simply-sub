@@ -57,6 +57,16 @@
   padding-top: 12px;
 }
 
+// The next charge, with Wrong date? beside it, or under it when there's no room.
+.next-charge {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 8px;
+  margin: 0;
+  font: var(--mat-sys-body-medium);
+}
+
 .facts {
   display: flex;
   flex-direction: column;

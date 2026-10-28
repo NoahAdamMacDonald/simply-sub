@@ -1,0 +1,31 @@
+<form [formRoot]="form">
+  <h2 mat-dialog-title>Wrong date?</h2>
+  <mat-dialog-content>
+    <p id="wrong-date-message">
+      When is {{ data.title }} charged next? Every later charge follows the date you give.
+    </p>
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Next charge</mat-label>
+      <input
+        matInput
+        autocomplete="off"
+        aria-describedby="wrong-date-message"
+        cdkFocusInitial
+        [matDatepicker]="picker"
+        [formField]="form.date"
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+        [aria-label]="'Next charge: choose a date'"
+      />
+      <mat-datepicker #picker [calendarHeaderComponent]="calendarHeader" />
+      <mat-hint>YYYY-MM-DD, as your account page says</mat-hint>
+      <mat-error>{{ firstError(form.date) }}</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button matButton type="button" mat-dialog-close>Cancel</button>
+    <button matButton="filled" type="submit">Save</button>
+  </mat-dialog-actions>
+</form>

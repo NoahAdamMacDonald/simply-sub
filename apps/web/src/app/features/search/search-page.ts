@@ -31,6 +31,7 @@ import { ActivatedRoute, NavigationStart, Router, RouterLink } from '@angular/ro
 import {
   filterCount,
   listsWithDrafts,
+  providerRenewals,
   readSearchParams,
   sameSearchParams,
   searchCatalog,
@@ -45,6 +46,7 @@ import { filter, map } from 'rxjs';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { ClockService } from '../../core/clock/clock-service';
 import { FxStore } from '../../core/fx/fx-store';
+import { MetricsService } from '../../core/metrics/metrics-service';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { DraftsRepository } from '../../core/storage/drafts-repository';
 import { ItemsRepository } from '../../core/storage/items-repository';
@@ -128,6 +130,7 @@ export class SearchPage {
   private readonly drafts = inject(DraftsRepository);
   private readonly rankings = inject(RankingsRepository);
   private readonly today = inject(ClockService).today;
+  private readonly metrics = inject(MetricsService);
 
   private readonly drawerTemplate = viewChild.required<TemplateRef<unknown>>('drawer');
   private readonly pinned = viewChild.required<ElementRef<HTMLElement>>('pinned');
@@ -233,6 +236,15 @@ export class SearchPage {
       profileRanks: this.rankings.ranks(),
     });
   });
+  /** Each listed provider's "Ends" and "Renew by", from its items' charges (§3.3, M7.1). */
+  protected readonly renewals = computed(() =>
+    providerRenewals(
+      [...this.metrics.resolutions().values()].flatMap((result) =>
+        result.ok ? [result.resolved] : [],
+      ),
+      this.catalog.catalog()?.bundles ?? [],
+    ),
+  );
   /** The user's lists' names, by id: a card's "· 2 lists" names them. */
   protected readonly listNames = computed(
     () => new Map(this.lists.records().map((list) => [list.id, list.name])),

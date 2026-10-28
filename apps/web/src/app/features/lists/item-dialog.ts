@@ -87,6 +87,7 @@ import { RankingsRepository } from '../../core/storage/rankings-repository';
 import { TagsRepository } from '../../core/storage/tags-repository';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
 import { CalendarHeader } from '../../shared/calendar-header';
+import { nearDateText } from '../../shared/charge-text';
 import { periodText } from '../../shared/billing-text';
 import { focusFirstError } from '../../shared/focus-first-error';
 import { isoDateProviders } from '../../shared/iso-date-adapter';
@@ -463,7 +464,10 @@ export class ItemDialog {
     return result?.ok ? result.resolved : undefined;
   });
 
-  /** The footer's "≈ $18.99 / mo": the monthly equivalent, before tax, with ≈ when it's converted. */
+  /**
+   * The footer's "≈ $18.99 / mo · next charge Nov 12": the monthly equivalent, before tax, with ≈ when it's converted,
+   * and the date of its next charge as the form has it (M7.1).
+   */
   protected readonly monthly = computed<ChoiceText | undefined>(() => {
     const resolved = this.preview();
     if (!resolved) return undefined;
@@ -471,9 +475,11 @@ export class ItemDialog {
     const average = monthlyAverage([resolved], this.currency());
     if (average.leftOut > 0) return undefined;
     const amount = amountText(average.amount, average.currency, this.country());
+    const next = resolved.nextCharge;
+    const nextText = next ? ` next charge ${nearDateText(next.date, this.today())}` : '';
     return {
-      shown: `${average.approx ? '≈ ' : ''}${amount} / mo`,
-      spoken: `${average.approx ? 'about ' : ''}${amount} a month`,
+      shown: `${average.approx ? '≈ ' : ''}${amount} / mo${nextText && ` ·${nextText}`}`,
+      spoken: `${average.approx ? 'about ' : ''}${amount} a month${nextText && `,${nextText}`}`,
     };
   });
 

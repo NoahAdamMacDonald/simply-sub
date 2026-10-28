@@ -25,8 +25,8 @@ const noItems: ListItems = { resolved: [], unresolved: [] };
 /**
  * The view models pages show (PROJECT-PLAN §3.4), as signals built from the repositories, CatalogStore, FxStore and
  * SettingsStore with core's resolveItem, so components never price, join or rank anything themselves. Each item is
- * priced with the catalog file of the region it was bought in, and its keys ranked by its overrides over the
- * profile's ranks (M6.1). M7.1 adds their status, next charge and the totals (ListMetrics).
+ * priced with the catalog file of the region it was bought in, its keys ranked by its overrides over the profile's
+ * ranks (M6.1), and given its status and next charge, with the user's sales tax (M7.1).
  */
 @Service()
 export class MetricsService {
@@ -79,6 +79,8 @@ export class MetricsService {
       ...(fx && { fx }),
       today: this.clock.today(),
       profileRanks: this.rankings.ranks(),
+      // Where the user pays sales tax, for each item's next charge (BLUEPRINT §4.8).
+      taxPlace: saved,
     };
     return items.map((item) =>
       resolveItem(item, {

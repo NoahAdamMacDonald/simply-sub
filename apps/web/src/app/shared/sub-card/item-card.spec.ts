@@ -9,6 +9,8 @@ import {
 } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { ClockService } from '../../core/clock/clock-service';
+import { SettingsStore } from '../../core/settings/settings-store';
+import { WrongDate } from '../wrong-date/wrong-date';
 import { ItemCard } from './item-card';
 import { alberta, fx, listItem, searchCatalogData, today } from './search.testing';
 
@@ -43,6 +45,7 @@ function resolved(planId: string, extra: Partial<ListItem> = {}): ResolvedItem {
       fx,
       today,
       profileRanks: new Map(),
+      taxPlace: alberta,
     },
   );
   if (!result.ok) throw new Error(result.unresolved.reason);
@@ -50,12 +53,25 @@ function resolved(planId: string, extra: Partial<ListItem> = {}): ResolvedItem {
 }
 
 describe('ItemCard', () => {
+  let asked: unknown[][];
+
   beforeEach(() => {
+    asked = [];
     TestBed.configureTestingModule({
       providers: [
         provideRouter([]),
         { provide: ClockService, useValue: { today: signal(today) } },
         { provide: CatalogStore, useValue: { catalog: signal(searchCatalogData) } },
+        { provide: SettingsStore, useValue: { saved: signal(alberta) } },
+        {
+          provide: WrongDate,
+          useValue: {
+            ask: async (...args: unknown[]) => {
+              asked.push(args);
+              return true;
+            },
+          },
+        },
       ],
     });
   });
@@ -190,5 +206,64 @@ describe('ItemCard', () => {
         resolved('', { source: { kind: 'custom', customSubId: gymId, customPlanId: gymPlanId } }),
       ),
     ).toBeNull();
+  });
+
+  describe('its next charge (M7.1)', () => {
+    it('says when, and what it costs as charged, with tax, and offers Wrong date?', async () => {
+      const netflix = resolved('netflix.standard');
+      const fixture = render(netflix);
+      const element = fixture.nativeElement as HTMLElement;
+      element.querySelector<HTMLElement>('.expand')?.click();
+      await fixture.whenStable();
+      // $18.99 and Alberta's 5%.
+      expect(text(element.querySelector('.next-charge > span [aria-hidden]'))).toBe(
+        '$19.94, with $0.95 tax',
+      );
+      expect(text(element.querySelector('.next-charge > span'))).toContain(
+        'Next charge Nov 10, 2026:',
+      );
+      const wrong = element.querySelector<HTMLButtonElement>('.wrong-date');
+      expect(wrong?.getAttribute('aria-label')).toBe('Wrong date? Netflix Standard');
+
+      wrong?.click();
+      await fixture.whenStable();
+      expect(asked).toEqual([[netflix.item, 'Netflix Standard', '2026-11-10']]);
+    });
+
+    it('shows a manual renewal and an end date on its status', () => {
+      const manual = resolved('netflix.standard', {
+        billing: {
+          mode: 'recurring',
+          interval: 'month',
+          intervalCount: 1,
+          anchorDate: '2026-09-10',
+          endDate: '2026-11-20',
+          autoRenew: false,
+        },
+      });
+      const element = render(manual).nativeElement as HTMLElement;
+      expect(
+        Array.from(element.querySelectorAll('ss-status-badge .badge')).map((badge) =>
+          text(badge)?.replace('autorenew', '').trim(),
+        ),
+      ).toEqual(['Ends Nov 20', 'Renew by Nov 10']);
+    });
+
+    it('has no Wrong date? for Specific dates, which have no anchor to move', async () => {
+      const windows = resolved('netflix.standard', {
+        billing: {
+          mode: 'limited',
+          windows: [{ start: '2026-11-02', end: '2026-12-15', repeatYearly: false }],
+          interval: 'month',
+          intervalCount: 1,
+        },
+      });
+      const fixture = render(windows);
+      const element = fixture.nativeElement as HTMLElement;
+      element.querySelector<HTMLElement>('.expand')?.click();
+      await fixture.whenStable();
+      expect(text(element.querySelector('.next-charge'))).toContain('Next charge Nov 2, 2026:');
+      expect(element.querySelector('.wrong-date')).toBeNull();
+    });
   });
 });

@@ -192,7 +192,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 ### M7 — Money, schedule & calendar
 | ID | Task | Done when |
 |---|---|---|
-| M7.1 | core: schedule engine for charges, statuses (`ItemStatus` on M5.1's `itemActivity`, adding the end date and manual renewal), totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/` (built in M4.5 for the mini calendar), on M4.6's resolved items (`ResolvedItem.status` and `nextCharge`, `ListMetrics`; unresolved items left out of totals and counted; an add-on billed on its own period); sales tax on charges in `tax/`, from `addedSalesTax` (M4.2's rates, none on a price with `taxIncluded`) (BLUEPRINT §4.8; recheck the rates if `canadianSalesTaxCheckedOn` is old) | Charges include tax by province and "plus tax" amounts, and none on a price that includes it (Mullvad). Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
+| M7.1 | core: schedule engine for charges, statuses (`ItemStatus` on M5.1's `itemActivity`, adding the end date and manual renewal), totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/` (built in M4.5 for the mini calendar), on M4.6's resolved items (`ResolvedItem.status` and `nextCharge`, `ListMetrics`; unresolved items left out of totals and counted; an add-on billed on its own period); sales tax on charges in `tax/`, from `addedSalesTax` (M4.2's rates, none on a price with `taxIncluded`) (BLUEPRINT §4.8; recheck the rates if `canadianSalesTaxCheckedOn` is old). As built: core's `schedule/` (`chargeDates`, `itemCharges`, `nextCharge`, `itemStatus`, `listMetrics` with the budget checks), `tax/charge-tax.ts` (`salesTaxOn`), `user/reanchor.ts` and `dates/period.ts`; `ResolvedItem.status`, `nextCharge` and `overridePrice`; and the UI it was waiting for: the cards' next charge and "Wrong date?", the editor's renewal dates, the item dialog's "next charge" and Search's "Ends" and "Renew by" (BLUEPRINT §14) | Charges include tax by province and "plus tax" amounts, and none on a price that includes it (Mullvad). Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
 | M7.2 | Totals and budget bars on Home, Lists and List view | The numbers match the §3.1 definitions |
 | M7.3 | Home (P2) | P2 criteria met |
 | M7.4 | Calendar (P10): grid, day panel, list filter, upcoming list, agenda layout on mobile | P10 criteria met |
@@ -266,6 +266,9 @@ These live in `packages/core` as pure functions, so every page computes them the
   item like pinning.
 - **Free plans:** a $0 price creates no charges, so a free item never appears on the calendar and adds nothing to
   totals. A price of 0 shows as "Free", never with ≈ (pickPrice marks it native).
+- **Next charge:** an item's first charge on or after today. An Ongoing item's anchor that's still to come is its next
+  renewal (P6 asks for it so), so its next charge is on or after it: a charge counted back from it onto today is the
+  payment just made, which totals count and the calendar shows (M7.1).
 - **Specific dates (limited windows):** a charge at each window's start, then one every interval while the date is
   before the window's end. The item is active from `start` through `end`, both included. `repeatYearly` copies the
   window into every year. Example: Sep 2 – Nov 1, monthly → charges on Sep 2 and Oct 2, active until Nov 1; a window
@@ -325,13 +328,14 @@ Users rank **rank keys**. Each one points to one rankable option of a feature:
 In Search the status is per provider, across all lists ("Active · 2 lists").
 
 Active and Inactive, with "Active from", come from the billing dates alone (core's `itemActivity`, M5.1); a window
-that repeats yearly is copied into each later year, never earlier ones. Ending and Manual renewal need the charges
-(M7.1).
+that repeats yearly is copied into each later year, never earlier ones. Ending and Manual renewal need the charges:
+core's `itemStatus` (M7.1), and for Search's providers `providerRenewals`, where "Ends" needs every item still going
+on to end within 30 days.
 
 ### 3.4 View models
 ```ts
 // packages/core/src/user/resolved.ts: resolveItem(item, context) → { ok: true, resolved } | { ok: false, unresolved }
-export interface ResolvedItem {        // as built in M4.6; the fields marked "M6.1" and "M7.1" come with those tasks
+export interface ResolvedItem {        // as built in M4.6, M6.1 and M7.1
   item: ListItem;
   listId: string;
   providerId?: string; planId?: string; bundleId?: string; customSubId?: string;
@@ -347,11 +351,12 @@ export interface ResolvedItem {        // as built in M4.6; the fields marked "M
                            // each priced for the item's period when sold that way, else its shortest (Disney+ bills
                            // extra members monthly, even on a yearly plan)
   override?: PickedPrice;  // the price override with the item's period, while it applies (before its `until`)
+  overridePrice?: PickedPrice; // M7.1: the same whatever the date, for the charges dated before its `until`
   monthlyEquivalent: number; // today: the override, else price + add-ons × quantity; before tax, except typed amounts
   features: Plan['features']; // the plan's, a bundle's plans' together (bundleFeatures), or the custom plan's
   providedKeys: RankKey[];
   status: ItemStatus;      // M7.1: { kind: 'active' | 'inactive'; activeFrom?; endsOn?; manual }
-  nextCharge?: Charge;     // M7.1
+  nextCharge?: Charge;     // M7.1: with tax; none for a free plan or once nothing is left
   effectiveRanks: Record<RankKey, Rank>; // M6.1: each provided key's rank, override > profile > not-ranked
   // cardId is the item's own (item.cardId), Phase 4
 }
@@ -363,12 +368,15 @@ export interface UnresolvedItem {     // pages say why; totals leave it out and 
     | 'no-price';                     // no price for the item's billing period where it's bought
 }
 
-export interface ListMetrics {
+export interface ListMetrics {       // as built in M7.1: core's listMetrics (schedule/list-metrics.ts)
   thisMonth: number; thisYear: number; next12: number;
   approx: boolean;                                   // true if converted amounts are included
+  notCounted: number;                                // unresolved items, and ones with a charge it couldn't convert
+  shares: ReadonlyMap<string, number>;               // each item's share of next12: a card's "31% of list"
   rankCounts: Record<Exclude<Rank, 'not-ranked'>, number>;
   featureSummary: { key: RankKey; label: string; active: number; total: number }[];
   monthlyBudgetShare?: number; annualBudgetShare?: number;
+  warnings: BudgetWarnings;                          // §3.1's budget checks: { month?, year? }
 }
 ```
 `MetricsService` (Angular) builds these as `computed()` signals from the repositories, `CatalogStore`,
@@ -651,7 +659,9 @@ stays.
 - **Sort:** opens a panel under the search box with the sorts and the filters, and Clear all. The default sort is
   Highest price first.
 - **Feature summary:** under the cards below 960 px, as on the Lists overview, until the bars take the place above them.
-- **Cards** are `ss-item-card`, whose details have Edit. "Wrong date?" comes with the next charge (M7.1).
+- **Cards** are `ss-item-card`, whose details have Edit. Since M7.1 they start with the next charge as charged, tax
+  included ("Next charge Nov 12, 2026: $19.94, with $0.95 tax"), with "Wrong date?" for an Ongoing item, and the
+  status shows "Ends" and "Renew by".
 - **Unsaved changes:** a note links back to the editor when it has changes not saved.
 
 **Since the feedback after M6.8:**
@@ -691,8 +701,8 @@ Editing  [ Work Related______________ ]                        [Cancel] [Save]  
 Unsaved changes · This month $26.52 · ≈ $26.52 / mo average
 ```
 **As built (M6.4):** the heading is "Edit list" ("New list" for a new list), with the List name field beside
-Cancel, Save and ⋮ under it. Until M7.1 a row says how it's billed ("Monthly · auto-renews") rather than its renewal
-date, and until M7.2 the footer has only the average.
+Cancel, Save and ⋮ under it. Since M7.1 a row says when it renews ("Renews Nov 12 · auto", "Renews Jan 20, 2027 ·
+manual"), and until M7.2 the footer has only the average.
 
 **Data:** `ListDraftService` (the draft lives in the Dexie `drafts` table), catalog, custom subscriptions.
 **Behaviour**
@@ -780,8 +790,8 @@ first when it's in use, as Settings' ✕ does (P13).
 
 **As built (M6.5):** the sections run Plan, Add-ons (P6's "Extra members": an add-on can be a channel), Billing, "I
 pay a different price", Advanced, Feature ranks and Tags, and Plus tax shows only where tax is added. The billing day
-is a "Billed on" choice. The footer's ≈ marks a converted price only, and "next charge" comes with M7.1. Payment comes
-with M9.4. BLUEPRINT §14 has the rest.
+is a "Billed on" choice. The footer's ≈ marks a converted price only, and "next charge Nov 12" came with M7.1.
+Payment comes with M9.4. BLUEPRINT §14 has the rest.
 **Rules**
 - **Plan:** plans of the same provider (or of the custom subscription), with their prices. Changing the plan keeps the interval if the new plan offers it; otherwise the first available interval is picked.
 - **Extra members:** add-ons of the selected plan, with quantity up to `addOnLimit`.

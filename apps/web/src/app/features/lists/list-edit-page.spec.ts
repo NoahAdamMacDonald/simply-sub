@@ -212,14 +212,14 @@ describe('ListEditPage', () => {
       expect(rows()).toEqual([
         {
           title: 'Netflix · Standard',
-          details: 'Monthly · auto-renews · 1 custom rank',
+          details: 'Renews Nov 12 · auto · 1 custom rank',
           tags: ['Family'],
           price: expect.stringMatching(/^\$18\.99 \/ mo a month \+ tax$/),
           problem: undefined,
         },
         {
           title: 'Mullvad VPN',
-          details: 'Yearly · renews manually',
+          details: 'Renews Jan 20, 2027 · manual',
           tags: [],
           price: expect.stringContaining('$94.16 / year'),
           problem: undefined,
@@ -476,7 +476,7 @@ describe('ListEditPage', () => {
         expect(await (await control(loader, 'Next renewal', MatInputHarness)).getValue()).toBe(
           '2027-10-25',
         );
-        expect(inDialog('.monthly [aria-hidden]')).toBe('$15.83 / mo');
+        expect(inDialog('.monthly [aria-hidden]')).toBe('$15.83 / mo · next charge Oct 25, 2027');
         await until(() => location.path() === editor());
         expect(location.urlChanges.at(-1)).toBe(`replace: ${editor()}`);
 
@@ -624,7 +624,7 @@ describe('ListEditPage', () => {
 
       await until(() => dialog() === null);
       await until(() => rows().length === 3);
-      expect(rows()[2]).toMatchObject({ title: 'Crave · Basic', details: 'Monthly · auto-renews' });
+      expect(rows()[2]).toMatchObject({ title: 'Crave · Basic', details: 'Renews Nov 25 · auto' });
       expect(document.querySelector('.mat-mdc-snack-bar-container')?.textContent).toContain(
         'Added Crave Basic',
       );
@@ -932,7 +932,7 @@ describe('ListEditPage', () => {
       answer = true;
       expect(inDialog('.add-ons legend')).toBe('Add-ons');
       await (await loader.getHarness(MatCheckboxHarness.with({ label: 'Extra member' }))).check();
-      expect(inDialog('.monthly [aria-hidden]')).toBe('$26.98 / mo');
+      expect(inDialog('.monthly [aria-hidden]')).toBe('$26.98 / mo · next charge Nov 25');
       await press(loader, 'Add to list');
 
       await until(() => dialog() === null);

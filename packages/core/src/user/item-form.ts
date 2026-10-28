@@ -1,6 +1,7 @@
 import { isoDateSchema } from '../catalog/formats';
 import type { Interval } from '../catalog/price';
 import { addDays, addMonths, type IsoDate } from '../dates/iso-date';
+import { addPeriods, samePeriod, type Period } from '../dates/period';
 import type { RankKey } from '../ranking/rank-keys';
 import { maxIntervalCount } from './add-request';
 import {
@@ -16,12 +17,6 @@ import type { Rank } from './rank';
 // The item dialog's rules (PROJECT-PLAN P6, M6.5): the billing periods a plan offers, when an Ongoing item renews by
 // default and which day of the month it's billed on, Specific dates' windows, what the form needs before it's saved,
 // and the list item it saves. The dialog holds the form and the catalog; what it decides is here.
-
-/** A billing period: an interval, and how many of them one payment covers (3 months). */
-export interface Period {
-  interval: Interval;
-  intervalCount: number;
-}
 
 /** The day an item is billed on when its anchor is a shorter month's last day (PROJECT-PLAN §3.1). */
 export type BillingDay = 29 | 30 | 31;
@@ -112,11 +107,6 @@ export interface NewItemOptions {
   currency: string;
 }
 
-/** Whether two periods are the same: monthly isn't every 2 months. */
-export function samePeriod(a: Period, b: Period): boolean {
-  return a.interval === b.interval && a.intervalCount === b.intervalCount;
-}
-
 /**
  * Whether two periods are as long as each other, whatever their units: every 12 months is a year, and both bill on
  * the same dates (Amazon sells Mullvad for 12 months, which Mullvad prices as a year).
@@ -148,21 +138,6 @@ export function periodAfterPlanChange(current: Period, choices: readonly Period[
     choices.find((choice) => sameLength(choice, current));
   const { interval, intervalCount } = kept ?? choices[0] ?? current;
   return { interval, intervalCount };
-}
-
-/** `date` plus `count` periods. Months and years land on the same day, or the month's last day when it's shorter. */
-export function addPeriods(date: IsoDate, period: Period, count = 1): IsoDate {
-  const n = period.intervalCount * count;
-  switch (period.interval) {
-    case 'day':
-      return addDays(date, n);
-    case 'week':
-      return addDays(date, 7 * n);
-    case 'month':
-      return addMonths(date, n);
-    case 'year':
-      return addMonths(date, 12 * n);
-  }
 }
 
 /**
