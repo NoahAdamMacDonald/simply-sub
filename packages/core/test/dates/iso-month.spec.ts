@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { addMonthsToMonth, monthOf, monthWeeks } from '../../src';
+import { addMonthsToMonth, monthGrid, monthOf, monthWeeks } from '../../src';
 
 describe('monthOf', () => {
   it("gives a date's month", () => {
@@ -63,5 +63,55 @@ describe('monthWeeks', () => {
   it('takes 6 weeks when the month needs them', () => {
     // August 2026 starts on a Saturday and has 31 days.
     expect(monthWeeks('2026-08')).toHaveLength(6);
+  });
+});
+
+describe('monthGrid', () => {
+  it('fills the weeks with the neighbouring months’ days, marked as not in the month', () => {
+    const grid = monthGrid('2026-10');
+    expect(grid).toHaveLength(5);
+    // Oct 1, 2026 is a Thursday: Sunday to Wednesday are September's last days.
+    expect(grid[0].map((day) => `${day.date}${day.inMonth ? '' : '*'}`)).toEqual([
+      '2026-09-27*',
+      '2026-09-28*',
+      '2026-09-29*',
+      '2026-09-30*',
+      '2026-10-01',
+      '2026-10-02',
+      '2026-10-03',
+    ]);
+    expect(grid[4].map((day) => day.date.slice(5))).toEqual([
+      '10-25',
+      '10-26',
+      '10-27',
+      '10-28',
+      '10-29',
+      '10-30',
+      '10-31',
+    ]);
+    // Its days are monthWeeks' days, in order.
+    expect(
+      grid
+        .flat()
+        .filter((day) => day.inMonth)
+        .map((day) => day.date),
+    ).toEqual(
+      monthWeeks('2026-10')
+        .flat()
+        .filter((date) => date !== null),
+    );
+  });
+
+  it('runs into the next month after a month’s last day, and over a year’s end', () => {
+    const december = monthGrid('2026-12');
+    expect(december.at(-1)?.map((day) => `${day.date}${day.inMonth ? '' : '*'}`)).toEqual([
+      '2026-12-27',
+      '2026-12-28',
+      '2026-12-29',
+      '2026-12-30',
+      '2026-12-31',
+      '2027-01-01*',
+      '2027-01-02*',
+    ]);
   });
 });

@@ -71,6 +71,7 @@ export * from './tax/subdivisions';
 export * from './user/add-request';
 export * from './user/app-lock';
 export * from './user/backup';
+export * from './user/calendar-params';
 export * from './user/catalog-cache';
 export * from './user/custom-sub-form';
 export * from './user/custom-subscription';

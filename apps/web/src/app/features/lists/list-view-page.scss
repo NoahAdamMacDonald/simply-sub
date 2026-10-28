@@ -172,3 +172,41 @@
 .features h2 {
   margin-bottom: 4px;
 }
+
+// The mini calendar under the totals: from 960 px under its heading, below that folded behind a button (P4).
+.list-calendar {
+  margin-top: 16px;
+}
+
+.calendar-heading {
+  display: none;
+  margin: 0 0 8px;
+  font: var(--mat-sys-title-large);
+
+  @media (min-width: 960px) {
+    display: block;
+  }
+}
+
+.calendar-toggle {
+  margin-left: -12px;
+
+  @media (min-width: 960px) {
+    display: none;
+  }
+}
+
+.calendar-body {
+  display: none;
+  padding: 8px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+
+  &.open {
+    display: block;
+  }
+
+  @media (min-width: 960px) {
+    display: block;
+  }
+}

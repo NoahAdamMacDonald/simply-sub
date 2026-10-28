@@ -49,6 +49,29 @@
       @if (total() > 0 && totals(); as totals) {
         <div class="money">
           <ss-budget-totals [metrics]="totals" />
+          <!-- This list's payment days (P4, M7.4). Under 960 px it folds behind a button. -->
+          <section class="list-calendar" aria-labelledby="list-calendar-heading">
+            <h2 id="list-calendar-heading" class="calendar-heading">Calendar</h2>
+            <button
+              matButton
+              type="button"
+              class="calendar-toggle"
+              aria-controls="list-calendar"
+              [attr.aria-expanded]="calendarOpen()"
+              (click)="calendarOpen.set(!calendarOpen())"
+            >
+              <mat-icon>{{ calendarOpen() ? 'expand_less' : 'expand_more' }}</mat-icon>
+              Calendar
+            </button>
+            <div id="list-calendar" class="calendar-body" [class.open]="calendarOpen()">
+              <ss-mini-calendar
+                [(month)]="calendarMonth"
+                [charges]="calendarCharges()"
+                (dayClick)="openCalendar(monthOf($event))"
+                (monthClick)="openCalendar($event)"
+              />
+            </div>
+          </section>
         </div>
       }
       <div class="items">

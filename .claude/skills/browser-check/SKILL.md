@@ -281,6 +281,27 @@ Light at 1280 px, it also checks Home's totals against the sum of the Lists over
 amount is rounded for display). It runs axe on each state, the open tooltip included, and checks for horizontal
 scroll.
 
+`check-calendar.cjs` (M7.4) checks the Calendar on `ng serve` for a Canadian in Alberta with a $60 monthly budget. It
+writes to IndexedDB Work Related (Netflix Standard on the 12th, Crave Premium billed on the 31st) and Family (Mullvad
+VPN, yearly on Jan 20, renewed by hand; Netflix Standard with ads on Specific dates, Sep 2 to Nov 1 every year).
+
+In both themes at both widths, keyboard only, it checks:
+- the days with charges: October's 2nd, 12th and 31st, November's 12th and 30th (the window ended), February's 12th
+  and 28th;
+- the bar: a past month paid in full, a future one at $0.00, this one up to today with the budget's tick;
+- at 1280 px the grid: today's tab stop, arrows to the 12th, Enter opening its panel (focus on its heading, Netflix,
+  its list link, Renews automatically), Escape putting focus back, Page Down to the next month in the URL;
+- at 360 px the agenda, and Enter on a payment opening its day in a bottom sheet with focus on it, which Escape
+  closes;
+- Showing by keyboard (Space unticks Work Related): the URL's `lists`, `settings.calendarHiddenLists`, and the same
+  after a reload; Next month and Today;
+- Home's dots on the Calendar's days this month, and List view's mini calendar, folded under 960 px until its button
+  opens it.
+
+It runs axe on the page, the panel, the open select, the sheet and List view, setting aside contrast hits on text
+under an open panel as `check-list-view.cjs` does, and checks for horizontal scroll. Wait about 600 ms before judging a
+bottom sheet: it slides up.
+
 Since M7.1, the scripts check the charges:
 - `check-list-view.cjs`: Mullvad's "Renew by Nov 12", Netflix's next charge as charged in its details ("Next charge Nov
   12, 2026: $19.94, with $0.95 tax", Alberta's 5%), and Wrong date? by keyboard: the dialog filled in with focus in

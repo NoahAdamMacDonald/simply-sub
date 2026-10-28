@@ -195,7 +195,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M7.1 | core: schedule engine for charges, statuses (`ItemStatus` on M5.1's `itemActivity`, adding the end date and manual renewal), totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/` (built in M4.5 for the mini calendar), on M4.6's resolved items (`ResolvedItem.status` and `nextCharge`, `ListMetrics`; unresolved items left out of totals and counted; an add-on billed on its own period); sales tax on charges in `tax/`, from `addedSalesTax` (M4.2's rates, none on a price with `taxIncluded`) (BLUEPRINT §4.8; recheck the rates if `canadianSalesTaxCheckedOn` is old). As built: core's `schedule/` (`chargeDates`, `itemCharges`, `nextCharge`, `itemStatus`, `listMetrics` with the budget checks), `tax/charge-tax.ts` (`salesTaxOn`), `user/reanchor.ts` and `dates/period.ts`; `ResolvedItem.status`, `nextCharge` and `overridePrice`; and the UI it was waiting for: the cards' next charge and "Wrong date?", the editor's renewal dates, the item dialog's "next charge" and Search's "Ends" and "Renew by" (BLUEPRINT §14) | Charges include tax by province and "plus tax" amounts, and none on a price that includes it (Mullvad). Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
 | M7.2 | Totals and budget bars on Home, Lists and List view. As built: `MetricsService`'s `metrics`, `global`, `metricsOf` and `charges` (core's `listMetrics`, with a conversion flag for each total), `ss-budget-totals` (a bar against each budget that's set, else the total alone, and Home's "Set a monthly budget →"), the Lists cards' bars, List view's side column and each card's "31% of list", and the list editor's "This month" (BLUEPRINT §14) | The numbers match the §3.1 definitions |
 | M7.3 | Home (P2). As built: the mini calendar on a card beside every list's totals (stacked under 720 px), the Subscription Lists pill, Next payments (the next three charges), the empty state's Create a list, Browse services and Import backup, and pulsing dots while prices load (BLUEPRINT §14) | P2 criteria met |
-| M7.4 | Calendar (P10): grid, day panel, list filter, upcoming list, agenda layout on mobile | P10 criteria met |
+| M7.4 | Calendar (P10): grid, day panel, list filter, upcoming list, agenda layout on mobile. As built: core's `readCalendarParams`, `writeCalendarParams`, `hiddenLists` (`user/calendar-params.ts`), `monthGrid` and `settings.calendarHiddenLists`; the page, `ss-day-panel` and its bottom sheet; List view's mini calendar; and `ClockService.today` moving on at midnight (BLUEPRINT §14) | P10 criteria met |
 | M7.5 | Exports: ICS (one all-day event per charge, no `RRULE`s: BLUEPRINT §11.2), CSV, XLSX, TXT (lazy-loaded) | The files open in Google Calendar and Excel, and a plan billed on the 31st shows in every month |
 | M7.6 | Budget warning banners | A warning appears for a projected over-budget month |
 
@@ -388,7 +388,8 @@ it was bought in (`CatalogStore.catalogFor`).
 ### 3.5 State and URL conventions
 - **Saved data** (lists, items, rankings, tags, cards, settings, drafts) → Dexie.
 - **Shareable UI state** (search query and filters, calendar month, selected lists) → URL query parameters.
-- **Small per-device preferences** (the calendar's list filter, collapsed groups) → `settings`.
+- **Small per-device preferences** (the calendar's list filter, collapsed groups) → `settings`. The Calendar keeps
+  the lists it leaves out (`calendarHiddenLists`, M7.4), so a list made since shows.
 - Dialogs that need deep links use query params (`?add=`, `?item=`). All other dialogs are plain `MatDialog`s.
 
 ---
@@ -682,6 +683,8 @@ stays.
 
 **Since the feedback after M6.8:**
 - **Side column:** Types ("Streaming video: 2") comes first, then the feature summary, which folds after 8 rows.
+  Since M7.4 the list's mini calendar follows the totals, folded behind a Calendar button under 960 px; a day or its
+  title opens the Calendar on that month, showing this list.
 - **Cards:** a card shows its nickname over its plan, and its details have its note and View in Search.
 - **Search box:** finds a nickname or a note.
 - **Sort menu:** Features and Tags are always there, turned off when there's nothing to choose.
@@ -1065,6 +1068,23 @@ Upcoming   Oct 28 Crave $22.00 · Nov 3 Mullvad ≈ $7.53 ↻ · Nov 12 Netflix 
   - Phase 3: Google / Apple / Proton each download the .ics and show that app's import steps.
   - Phase 5: "Live calendar link" → opt-in dialog → `POST /cal` → shows the URL, subscribe steps for each app and a Revoke button.
 - A year view (12 small months plus monthly totals) comes in M10.
+
+**As built (M7.4):**
+- **Layout:** "Calendar", the month's bar with its total, then Showing (a multi-select of the lists, "All lists" or
+  their names) and ‹ [Month] [Year] › [Today]; the grid with the day's panel on its right from 960 px; then Upcoming,
+  the next five charges. Sync calendar and Export to file come with the exports (M7.5).
+- **The grid:** each day's date is a button over its cell, named with its payments ("Monday, October 12, 1 payment,
+  $19.94"), one tab stop that the arrow keys, Home, End and Page Up/Down move, as the mini calendar's. Its chips
+  (icon, amount, ≈, ↻, and the name where the cell is wide enough), "+2 more" and the day's total sit beside the
+  button, hidden from screen readers; a chip's click opens the day on that charge. Other months' days are muted
+  numbers.
+- **The panel:** the day's heading (focus starts there), then each charge: its name, as charged with tax, how it
+  renews, "Ends" on its last charge, its list as a link, and Wrong date? for a charge still to come of an Ongoing item.
+  ✕ and Escape close it, with focus back on the day.
+- **Under 600 px:** an agenda, a card per day with payments; a payment opens its day in a bottom sheet, with focus on
+  it.
+- **The URL:** `?month=` and `lists=` only when not every list is shown; a month that isn't one, or a list that's
+  gone, is rewritten in place. Without `lists`, the Calendar shows what it last showed on this device.
 
 **Acceptance**
 - [ ] Charges appear on the right days, including month-end dates and limited windows

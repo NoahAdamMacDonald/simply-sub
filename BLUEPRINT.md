@@ -884,6 +884,7 @@ export interface Settings {             // one record, under the key 'settings'
   monthlyBudget?: number; annualBudget?: number;
   theme: 'light' | 'dark' | 'system';
   searchSoldOnly?: true;                        // Search starts with Sold in on (M5.6); left out when off
+  calendarHiddenLists?: string[];               // the lists the Calendar leaves out on this device (M7.4)
   appLock?: {                                   // the app lock, when it's on (M6.10, 11.5): no secret, only the salt
     salt: string; iterations: number;           // and a sealed check value. Plain while the rest of the settings are
     check: { iv: string; ciphertext: string };  // sealed, changed only by the lock's own methods, never backed up
@@ -2536,6 +2537,43 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-28, M7.4)**
+- **The Calendar** (PROJECT-PLAN P10) is "Calendar" with the month's bar, Showing, the month's navigation, the grid
+  and Upcoming. Sync calendar and Export to file come with M7.5.
+- **The bar** (section 8.1.1) is `ss-budget-bar` with the amount inside: what's been paid so far (charges up to today;
+  all of a past month, none of a future one) out of the month's total, which is beside it, with the monthly budget's
+  tick when the total reaches it. Its colour compares the total with the budget.
+- **The URL** (core's `user/calendar-params.ts`): `?month=2026-10&lists=<id>,<id>`, with `lists` only when not every
+  list is shown. A month that isn't one, a list that's gone or every list named is rewritten in place, as Search
+  does; a month or list change adds a history entry.
+- **Showing** is remembered on this device, as PROJECT-PLAN §3.5 has it: `settings.calendarHiddenLists` keeps the
+  lists left out (an optional field, so stored settings stay valid with no new Dexie version), so a list made since
+  shows. A URL with `lists` wins.
+- **The grid** (core's `monthGrid`, which fills the weeks from the months on either side, shown muted):
+  - Each day of the month is a button over its cell, named with its payments, "Monday, October 12, 1 payment,
+    $19.94". It's one tab stop, moved like the mini calendar's, Page Down crossing into the next month.
+  - Its chips (the icon and the amount, the name too where the cell is 140 px wide), "+2 more" and the total sit beside
+    the button and are hidden from screen readers: inside it, axe's `label-content-name-mismatch` failed, as its name
+    didn't hold what it showed (WCAG 2.5.3). A chip's own click opens the day on that charge.
+  - Today is outlined; the day the panel shows has a border twice as thick in the accent colour. A tint failed
+    contrast for the muted total in dark mode (4.2:1), and the faded other-month numbers did too, so they're the muted
+    colour alone.
+- **The day's panel** (`ss-day-panel`), on the grid's right from 960 px: the day, then each charge with what it is, its
+  amount as charged, how it renews ("Renew manually" with ↻), "Ends Nov 3" on the last charge before an end date, its
+  list as a link, and Wrong date? (M7.1's dialog) for a charge still to come of an Ongoing item. Focus starts on its
+  heading, or on the charge a chip opened; ✕ and Escape close it, with focus back on the day.
+- **Under 600 px** the month is an agenda: a card per day with payments, each payment a button that opens the day in a
+  bottom sheet (Material's, loaded on first use), whose panel puts focus on that payment.
+- **Upcoming:** the next five charges from today for the lists shown, as charged.
+- **List view's mini calendar** (P4) follows the totals: the list's charges, with a day or the title opening the
+  Calendar on that month, showing that list. Under 960 px it folds behind a Calendar button (`aria-expanded`).
+- **`ClockService.today` moves on at midnight** (a timer for a second past the next local midnight, so a 25-hour
+  night is fine) and when a hidden tab is shown again, as timers there run late. Home's and List view's mini calendars
+  and the Calendar follow it into a new month when their month isn't set.
+- **Bundles:** the initial bundle grew by 0.8 kB (496.4 kB of 500): ClockService's timer (0.6 kB), and esbuild's names
+  for the CDK code another page now shares. Beyond it, gzipped: the Calendar 124.7 kB, and its bottom sheet 7.4 kB
+  more on a phone; List view 5.7 kB more, for its mini calendar.
 
 **Resolved (2026-10-28, M7.3)**
 - **Home** (PROJECT-PLAN P2) follows the wireframe: the mini calendar on a card, every list's totals beside it (M7.2's

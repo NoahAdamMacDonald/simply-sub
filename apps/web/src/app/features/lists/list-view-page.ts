@@ -7,6 +7,7 @@ import {
   computed,
   effect,
   inject,
+  linkedSignal,
   signal,
 } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
@@ -21,7 +22,11 @@ import {
   listFilterCount,
   listFilterOptions,
   listView,
+  monthOf,
+  monthRange,
   typeCounts,
+  type IsoDate,
+  type IsoMonth,
   type ResolvedItem,
   type Tag,
 } from '@simply-sub/core';
@@ -38,6 +43,7 @@ import { TagsRepository } from '../../core/storage/tags-repository';
 import { BudgetTotals } from '../../shared/budget-totals/budget-totals';
 import { EmptyState } from '../../shared/empty-state/empty-state';
 import { FeatureSummary } from '../../shared/feature-summary/feature-summary';
+import { MiniCalendar, type CalendarCharge } from '../../shared/mini-calendar/mini-calendar';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { ItemCard } from '../../shared/sub-card/item-card';
 import { TypeCounts } from '../../shared/type-counts/type-counts';
@@ -50,8 +56,8 @@ import { ListFilters, listQuery, noListFilters, type ListFilterState } from './l
  * List view (PROJECT-PLAN P4, M6.8): one list's subscriptions as cards (ss-item-card), pinned ones first, with what the
  * list costs a month on average and how many it has, a search box and the Sort menu (core's listView), 📌 saved
  * straight to the item, each card's Edit and the list's, and on the side this month's and this year's totals against
- * the budgets, with each card's share of the list (M7.2), then its types and feature summary (§3.2). M7.4 adds the
- * mini calendar, M7.5 Export and M8 the optimizations button.
+ * the budgets, with each card's share of the list (M7.2), its mini calendar (M7.4, collapsed under 960 px), then its
+ * types and feature summary (§3.2). M7.5 adds Export and M8 the optimizations button.
  */
 @Component({
   selector: 'ss-list-view-page',
@@ -73,6 +79,7 @@ import { ListFilters, listQuery, noListFilters, type ListFilterState } from './l
     MatMenuTrigger,
     MatPrefix,
     MatSuffix,
+    MiniCalendar,
     PageHeader,
     RouterLink,
     TypeCounts,
@@ -182,6 +189,32 @@ export class ListViewPage {
     const listId = this.listId();
     return listId === undefined ? undefined : this.metrics.metrics(listId);
   });
+  /** The mini calendar's month (P4, M7.4): this one, until ‹ or › moves it, and the new one at midnight into it. */
+  protected readonly calendarMonth = linkedSignal<IsoDate, IsoMonth>({
+    source: this.today,
+    computation: (today) => monthOf(today),
+  });
+  /** Under 960 px the mini calendar folds (P4); from there it's always shown. */
+  protected readonly calendarOpen = signal(false);
+  /** This list's charges in the mini calendar's month. */
+  protected readonly calendarCharges = computed<CalendarCharge[]>(() => {
+    const listId = this.listId();
+    if (listId === undefined) return [];
+    const names = new Map(
+      this.listItems().resolved.map(({ item, name }) => [item.id, item.nickname ?? name]),
+    );
+    return this.metrics
+      .charges(monthRange(this.calendarMonth()), new Set([listId]))
+      .map((charge) => ({
+        date: charge.date,
+        name: names.get(charge.itemId) ?? '',
+        amount: charge.amount,
+        currency: charge.currency,
+        converted: charge.converted,
+        manual: charge.manual,
+      }));
+  });
+
   /** "VPN: 2 / 3" for this list's items (§3.2). */
   protected readonly features = computed(() => this.totals()?.featureSummary ?? []);
 
@@ -207,6 +240,15 @@ export class ListViewPage {
       );
     });
   }
+
+  /** A day or the month's title in the mini calendar: the Calendar on that month, showing this list. */
+  protected openCalendar(month: IsoMonth): void {
+    void this.router.navigate(['/calendar'], {
+      queryParams: { month, lists: this.listId() },
+    });
+  }
+
+  protected readonly monthOf = monthOf;
 
   protected tagsOf({ item }: ResolvedItem): Tag[] {
     const byId = this.tags.byId();
