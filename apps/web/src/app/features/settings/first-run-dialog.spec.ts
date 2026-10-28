@@ -8,7 +8,8 @@ import { MatCheckboxHarness } from '@angular/material/checkbox/testing';
 import { MatDialogHarness } from '@angular/material/dialog/testing';
 import { MatFormFieldHarness } from '@angular/material/form-field/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
-import { MatSelectHarness } from '@angular/material/select/testing';
+import { MatAutocompleteHarness } from '@angular/material/autocomplete/testing';
+import { TestKey } from '@angular/cdk/testing';
 import type { Settings } from '@simply-sub/core';
 import { BROWSER_LANGUAGES } from '../../core/settings/browser-languages';
 import { FirstRun } from '../../core/settings/first-run';
@@ -60,10 +61,11 @@ describe('First run', () => {
     return fields[0];
   }
 
-  async function select(dialog: HarnessLoader, label: string): Promise<MatSelectHarness> {
-    const control = await (await field(dialog, label)).getControl(MatSelectHarness);
-    if (!control) throw new Error(`No menu labelled ${label}`);
-    return control;
+  /** The menu you can type in labelled `label` (M6.16). */
+  async function select(dialog: HarnessLoader, label: string): Promise<MatAutocompleteHarness> {
+    return dialog.getHarness(
+      MatAutocompleteHarness.with({ ancestor: `ss-choice-field[data-label="${label}"]` }),
+    );
   }
 
   async function input(dialog: HarnessLoader, label: string): Promise<MatInputHarness> {
@@ -74,8 +76,8 @@ describe('First run', () => {
 
   async function choose(dialog: HarnessLoader, label: string, option: string) {
     const menu = await select(dialog, label);
-    await menu.open();
-    await menu.clickOptions({ text: option });
+    await menu.focus();
+    await menu.selectOption({ text: option });
   }
 
   async function getStarted(dialog: HarnessLoader) {
@@ -96,9 +98,9 @@ describe('First run', () => {
   it('asks once the settings have loaded, starting from the browser’s language', async () => {
     await start(['en-CA']);
     const form = await dialog();
-    expect(await (await select(form, 'Country')).getValueText()).toBe('Canada');
-    expect(await (await select(form, 'Currency')).getValueText()).toBe('CAD — Canadian Dollar');
-    expect(await (await select(form, 'Province or territory')).getValueText()).toBe('');
+    expect(await (await select(form, 'Country')).getValue()).toBe('Canada');
+    expect(await (await select(form, 'Currency')).getValue()).toBe('CAD — Canadian Dollar');
+    expect(await (await select(form, 'Province or territory')).getValue()).toBe('');
     expect(dialogText()).toContain('Your data stays in this browser. No account needed.');
   });
 
@@ -158,9 +160,9 @@ describe('First run', () => {
     const form = await dialog();
     await choose(form, 'Country', 'United States');
 
-    expect(await (await select(form, 'Currency')).getValueText()).toBe('USD — US Dollar');
+    expect(await (await select(form, 'Currency')).getValue()).toBe('USD — US Dollar');
     const states = await select(form, 'State');
-    await states.open();
+    await states.focus();
     const options = await Promise.all(
       (await states.getOptions()).map((option) => option.getText()),
     );
@@ -169,7 +171,7 @@ describe('First run', () => {
       expect.arrayContaining(['Not given', 'California', 'District of Columbia']),
     );
     expect(options).not.toContain('Ontario');
-    await states.close();
+    await states.blur();
 
     expect(dialogText()).toContain('Your state and city sales tax on subscriptions, if any');
     await getStarted(form);
@@ -183,10 +185,51 @@ describe('First run', () => {
     expect(saved.salesTaxPercent).toBeUndefined();
   });
 
+  it('narrows a menu as it’s typed in, and Enter picks the first left (M6.16)', async () => {
+    await start(['en-CA']);
+    const form = await dialog();
+    const province = await select(form, 'Province or territory');
+    // Focused with nothing typed, it lists them all.
+    await province.focus();
+    expect(await province.getOptions()).toHaveLength(13);
+
+    await province.enterText('al');
+    const shown = async () =>
+      Promise.all((await province.getOptions()).map((option) => option.getText()));
+    expect(await shown()).toEqual(['Alberta']);
+    // The first is made active a moment after the list changes.
+    await vi.waitFor(async () =>
+      expect(await (await province.getOptions())[0].isActive()).toBe(true),
+    );
+    await (await province.host()).sendKeys(TestKey.ENTER);
+    expect(await province.getValue()).toBe('Alberta');
+    expect(dialogText()).toContain('Sales tax 5% (Alberta)');
+
+    // A name's start first, then anywhere in it; or its code: "us" is US Dollar, then the rest.
+    const currency = await select(form, 'Currency');
+    await currency.clear();
+    await currency.enterText('dollar');
+    expect(
+      (await Promise.all((await currency.getOptions()).map((option) => option.getText()))).slice(
+        0,
+        2,
+      ),
+    ).toEqual(['AUD — Australian Dollar', 'CAD — Canadian Dollar']);
+    await currency.clear();
+    await currency.enterText('usd');
+    expect(
+      await Promise.all((await currency.getOptions()).map((option) => option.getText())),
+    ).toEqual(['USD — US Dollar']);
+
+    // Leaving without picking puts back the one chosen.
+    await currency.blur();
+    await vi.waitFor(async () => expect(await currency.getValue()).toBe('CAD — Canadian Dollar'));
+  });
+
   it('asks nothing about tax where prices include it', async () => {
     await start(['en-GB']);
     const form = await dialog();
-    expect(await (await select(form, 'Currency')).getValueText()).toBe('GBP — British Pound');
+    expect(await (await select(form, 'Currency')).getValue()).toBe('GBP — British Pound');
     expect(await field(form, 'Province or territory')).toBeUndefined();
     expect(await field(form, 'State')).toBeUndefined();
     expect(dialogText()).toContain('Prices for United Kingdom already include sales tax.');
@@ -197,7 +240,7 @@ describe('First run', () => {
     const form = await dialog();
     await choose(form, 'Currency', 'EUR — Euro');
     await choose(form, 'Country', 'United Kingdom');
-    expect(await (await select(form, 'Currency')).getValueText()).toBe('EUR — Euro');
+    expect(await (await select(form, 'Currency')).getValue()).toBe('EUR — Euro');
   });
 
   it("can't be closed without saving", async () => {

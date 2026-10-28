@@ -6,8 +6,10 @@
   padding-top: 8px;
 }
 
-// Fields whose hint can wrap take the room it needs (subscriptSizing="dynamic"), with space before what follows.
-mat-form-field[subscriptSizing='dynamic'] {
+// Fields whose hint can wrap take the room it needs (subscriptSizing="dynamic"), with space before what follows; the
+// menus you can type in (ss-choice-field) are such fields.
+mat-form-field[subscriptSizing='dynamic'],
+ss-choice-field {
   margin-bottom: 12px;
 }
 
