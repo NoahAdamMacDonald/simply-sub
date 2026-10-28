@@ -470,6 +470,7 @@ describe('itemFromForm', () => {
         region: 'US',
         rankOverrides: { 'streaming.ad-free': 'essential', 'video.quality=4k': 'needed' },
         tagIds: ['0192f1c7-3e4f-7051-ac6d-7e8f9a0b1c2d'],
+        cardId: '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d3e',
       }),
       context,
     );
@@ -494,6 +495,7 @@ describe('itemFromForm', () => {
       tagIds: ['0192f1c7-3e4f-7051-ac6d-7e8f9a0b1c2d'],
       // 4K isn't a key Netflix Standard provides.
       rankOverrides: { 'streaming.ad-free': 'essential' },
+      cardId: '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d3e',
     });
     expect(() => stored(fields)).not.toThrow();
   });
@@ -529,13 +531,14 @@ describe('itemFromForm', () => {
     expect(() => stored(fields)).not.toThrow();
   });
 
-  it('saves a free plan as Ongoing from today, with no own price', () => {
+  it('saves a free plan as Ongoing from today, with no own price or card', () => {
     const free = { ...context, free: true, periods: [monthly] };
     const form = standardForm({
       mode: 'limited',
       ownPrice: true,
       priceAmount: 4.99,
       startDate: '2026-01-01',
+      cardId: '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d3e',
     });
     const fields = itemFromForm(form, free);
     expect(fields.billing).toEqual({
@@ -547,6 +550,7 @@ describe('itemFromForm', () => {
       autoRenew: true,
     });
     expect(fields.priceOverride).toBeUndefined();
+    expect(fields.cardId).toBeUndefined();
     expect(() => stored(fields)).not.toThrow();
   });
 
@@ -637,6 +641,7 @@ describe('itemFormFor', () => {
           priceUntil: '2027-01-31',
           region: 'US',
           rankOverrides: { 'streaming.ad-free': 'critical' },
+          cardId: '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d3e',
         }),
         context,
       ),
@@ -657,6 +662,7 @@ describe('itemFormFor', () => {
       billingDay: 31,
       windows: [window(today, '')],
       region: 'US',
+      cardId: '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d3e',
     });
     expect(stored(itemFromForm(form, context))).toEqual(item);
 

@@ -28,8 +28,10 @@ import { BudgetBar } from '../../shared/budget-bar/budget-bar';
 import type { ShownAndSpoken } from '../../shared/charge-text';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
 import { EmptyState } from '../../shared/empty-state/empty-state';
+import { monthText } from '../../shared/date-text';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { amountText } from '../../shared/price-tag/price-text';
+import { CardAssigner } from './card-assigner';
 import { CardEditor } from './card-editor';
 
 /** A card as its tile shows it (P11). */
@@ -46,8 +48,11 @@ interface CardTile {
   limit?: { value: number; max: number; currency: string; text: ShownAndSpoken };
   /** The subscriptions paid with it, each with what it costs a month with tax. */
   subscriptions: { itemId: string; title: string; amount?: ShownAndSpoken }[];
-  /** What they cost a month together, with tax. */
+  /** What they cost a month together, with tax, and after the card's cash back and FX fees. */
   total?: ShownAndSpoken;
+  net?: ShownAndSpoken;
+  /** The first of the next 12 months its charges go over its limit (M9.4), and how many more do. */
+  overLimit?: ShownAndSpoken;
   /** Paid with it, but can't be priced: no longer in the catalog, or no price for their period. */
   unpriced: number;
 }
@@ -77,6 +82,7 @@ export class PaymentPage {
   private readonly clock = inject(ClockService);
   private readonly fx = inject(FxStore);
   private readonly editor = inject(CardEditor);
+  private readonly assigner = inject(CardAssigner);
   private readonly confirmer = inject(ConfirmService);
   private readonly snackBar = inject(MatSnackBar);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -138,6 +144,24 @@ export class PaymentPage {
       }
       const counted = summary.subscriptions.length - summary.notCounted;
       const total = money(summary.monthly, saved.currency, summary.monthlyApprox);
+      const net = money(summary.net, saved.currency, summary.monthlyApprox);
+      const [over, ...moreOver] = summary.overLimit;
+      let overLimit: ShownAndSpoken | undefined;
+      if (over) {
+        const posted = money(over.posted, card.currency, over.converted);
+        const max = amountText(over.limit, card.currency, saved.country);
+        const more =
+          moreOver.length === 0
+            ? ''
+            : moreOver.length === 1
+              ? ', and in 1 more month'
+              : `, and in ${moreOver.length} more months`;
+        const when = monthText(over.month);
+        overLimit = {
+          shown: `Over its limit in ${when}: ${posted.shown} of ${max}${more}`,
+          spoken: `Warning: over its limit in ${when}: ${posted.spoken} of ${max}${more}`,
+        };
+      }
       return {
         card,
         title,
@@ -158,7 +182,12 @@ export class PaymentPage {
             shown: `${total.shown} / mo with tax`,
             spoken: `${total.spoken} a month with tax`,
           },
+          net: {
+            shown: `${net.shown} after cash back & FX fees`,
+            spoken: `${net.spoken} after cash back and FX fees`,
+          },
         }),
+        ...(overLimit && { overLimit }),
         unpriced: unpriced.filter((cardId) => cardId === card.id).length,
       };
     });
@@ -193,6 +222,11 @@ export class PaymentPage {
       ready: (tiles) => tiles.some((tile) => tile.card.id === result.id),
       target: () => this.button(result.id, 'edit'),
     });
+  }
+
+  /** Assign best cards (P11, M9.4): the preview, and Apply with Undo. */
+  protected assign(): Promise<void> {
+    return this.assigner.assign();
   }
 
   /** ✎: the dialog for it. Focus goes back to ✎ as the dialog closes. */

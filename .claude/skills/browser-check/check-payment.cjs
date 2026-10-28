@@ -7,6 +7,10 @@
 // the subscriptions with what they cost a month with tax, and "1 subscription has no card"; ✎ clearing the limit;
 // and 🗑 asking with the count it pays for (focus on Cancel), then the items with no card and focus on Add card. With
 // axe on the page, the dialog, its errors, the tile and the question, and no horizontal scroll.
+// M9.4 adds, with three cards and Family open in the editor: the tile's over-limit warning and net; Assign best cards
+// by keyboard (its preview, Family skipped, Apply and Undo); the item dialog's card menu with only the cards Netflix
+// takes, the Best card chip by Tab and Enter, and Mullvad's notes; List view's net figures; and the Calendar's day over
+// a card's limit, reached by the arrow keys, with its panel (a bottom sheet at 360 px).
 // Usage: node check-payment.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
 const fs = require('fs');
 const path = require('path');
@@ -135,17 +139,48 @@ function putRecord(page, table, record) {
   );
 }
 
-async function axeCheck(page, label) {
+/** axe on the page, leaving out `exclude` (selectors of what's hidden under a popup, which axe measures anyway). */
+async function axeCheck(page, label, exclude = []) {
   await sleep(600);
   await page.evaluate(axeSource);
-  const result = await page.evaluate(() => axe.run(document));
+  const result = await page.evaluate(
+    (left) =>
+      axe.run(
+        left.length === 0 ? document : { include: [document], exclude: left.map((s) => [s]) },
+      ),
+    exclude,
+  );
+  // A select's open panel sits in the browser's top layer over the field's own hint, which axe measures against the
+  // panel's colour: set aside contrast hits on text under a panel (the skill's gotchas, as check-list-view.cjs does).
+  const hidden = await page.evaluate(
+    (targets) =>
+      targets.map((selector) => {
+        const element = document.querySelector(selector);
+        if (!element) return false;
+        const box = element.getBoundingClientRect();
+        const top = document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2);
+        // Inside a dialog the panel can sit outside a .cdk-overlay-pane: its listbox is what covers the text.
+        const popup = '.cdk-overlay-pane, [role="listbox"]';
+        return (top?.closest(popup) ?? null) !== null && !element.closest(popup);
+      }),
+    (result.violations.find((violation) => violation.id === 'color-contrast')?.nodes ?? []).map(
+      (node) => node.target.join(' '),
+    ),
+  );
   // Material renders menus, dialogs and snackbars outside the page's landmarks (the skill's gotchas): set aside
   // `region` hits that are all inside its overlay container.
-  const violations = result.violations.filter(
-    (violation) =>
-      violation.id !== 'region' ||
-      !violation.nodes.every((node) => node.target.join(' ').includes('cdk-overlay')),
-  );
+  const violations = result.violations
+    .map((violation) =>
+      violation.id === 'color-contrast'
+        ? { ...violation, nodes: violation.nodes.filter((_, index) => !hidden[index]) }
+        : violation,
+    )
+    .filter(
+      (violation) =>
+        violation.nodes.length > 0 &&
+        (violation.id !== 'region' ||
+          !violation.nodes.every((node) => node.target.join(' ').includes('cdk-overlay'))),
+    );
   const problems = violations.map(
     (violation) =>
       `${violation.id}: ${violation.nodes
@@ -184,7 +219,7 @@ function buttonIn(scope, text) {
     `const el = document.activeElement;
      return !!el?.closest(${JSON.stringify(scope)}) &&
        (el.getAttribute('aria-label') === ${JSON.stringify(text)} ||
-        el.textContent?.replace(/^\\s*(add|edit|delete|close)\\s*/, '').trim() === ${JSON.stringify(text)});`,
+        el.textContent?.replace(/^\\s*[a-z_]+\\s+(?=[A-Z])/, '').trim() === ${JSON.stringify(text)});`,
   );
 }
 
@@ -274,6 +309,340 @@ async function plantList(page, cardId) {
       ...stamps,
     });
   }
+}
+
+// ── M9.4: net costs, Assign best cards, the item dialog's cards and over-limit warnings ──────────────────────────────
+
+const FAMILY = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4e';
+const FAMILY_CRAVE = '0192f1c5-1c2d-7e3f-8a4b-5c6d7e8f9a0e';
+const EVERYDAY = '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d3e';
+const DEBIT = '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d40';
+const DISCOVER = '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d41';
+const card = (id, name, network, cashbackPercent, extra = {}) => ({
+  id,
+  name,
+  type: network === 'interac' ? 'debit' : 'credit',
+  network,
+  currency: 'CAD',
+  cashbackPercent,
+  fxFeePercent: 2.5,
+  ...stamps,
+  ...extra,
+});
+
+/** This month in words, as the app writes it: "October 2026". */
+function thisMonthText() {
+  const now = new Date();
+  return `${now.toLocaleString('en', { month: 'long' })} ${now.getFullYear()}`;
+}
+
+/** Everyday (Mastercard, 1.5%, a $30 limit), Everyday Debit (Interac) and Discover It (Discover, 2%), all in CAD. */
+async function plantCards(page) {
+  await putRecord(
+    page,
+    'cards',
+    card(EVERYDAY, 'Simplii Cashback Mastercard', 'mastercard', 1.5, {
+      nickname: 'Everyday',
+      monthlyLimit: 30,
+    }),
+  );
+  await putRecord(page, 'cards', card(DEBIT, 'Everyday Debit', 'interac', 0));
+  await putRecord(page, 'cards', card(DISCOVER, 'Discover It', 'discover', 2));
+  await plantList(page, EVERYDAY);
+  // Crave Premium moves to Family, which is open in the editor (an unsaved draft).
+  const { netflix } = dates();
+  await putRecord(page, 'items', {
+    id: CRAVE,
+    listId: LIST,
+    source: { kind: 'catalog', planId: 'crave.premium' },
+    billing: {
+      mode: 'recurring',
+      interval: 'month',
+      intervalCount: 1,
+      autoRenew: true,
+      anchorDate: netflix,
+    },
+    tagIds: [],
+    rankOverrides: {},
+    pinned: false,
+    ...stamps,
+    deletedAt: stamps.updatedAt,
+  });
+  await putRecord(page, 'lists', { id: FAMILY, name: 'Family', ...stamps });
+  const crave = {
+    id: FAMILY_CRAVE,
+    listId: FAMILY,
+    source: { kind: 'catalog', planId: 'crave.premium' },
+    billing: {
+      mode: 'recurring',
+      interval: 'month',
+      intervalCount: 1,
+      autoRenew: true,
+      anchorDate: netflix,
+    },
+    tagIds: [],
+    rankOverrides: {},
+    pinned: false,
+    ...stamps,
+  };
+  await putRecord(page, 'items', crave);
+  await putRecord(page, 'drafts', {
+    listId: FAMILY,
+    isNew: false,
+    name: 'Family',
+    startName: 'Family',
+    items: [{ item: crave, saved: crave }],
+    startedAt: stamps.updatedAt,
+  });
+}
+
+/** The focused element's text without icons and hidden words, or its label. */
+const focusedText = (page) =>
+  page.evaluate(() => {
+    const element = document.activeElement;
+    if (!element) return '';
+    const copy = element.cloneNode(true);
+    copy.querySelectorAll('mat-icon, .visually-hidden').forEach((hidden) => hidden.remove());
+    return element.getAttribute('aria-label') ?? copy.textContent.replace(/\s+/g, ' ').trim();
+  });
+
+async function checkM94(page, label, viewport, shot) {
+  const month = thisMonthText();
+  await plantCards(page);
+
+  // ── P11: the over-limit warning, then Assign best cards by keyboard ──────────────────────────────────────────
+  await page.goto(`${baseUrl}payment`);
+  await page.locator('ss-payment-page li.tile .over-limit').waitFor({ timeout: 20000 });
+  const everyday = page.locator('ss-payment-page li.tile', { hasText: 'Everyday' }).first();
+  const over = (
+    await everyday.locator('.over-limit [aria-hidden="true"]:not(mat-icon)').textContent()
+  ).trim();
+  check(
+    `${label}: a card over its limit says so on its tile, its bar red`,
+    over === `Over its limit in ${month}: ≈ $116.46 of $30.00` &&
+      (await everyday.locator('.limit ss-budget-bar').getAttribute('data-level')) === 'over',
+    over,
+  );
+  check(
+    `${label}: and gives what its subscriptions come to after cash back & FX fees`,
+    (await everyday.locator('.net [aria-hidden="true"]').textContent()).trim() ===
+      '≈ $27.56 after cash back & FX fees',
+  );
+  await noSideScroll(page, viewport, `${label}, a card over its limit`);
+  await axeCheck(page, `${label}, a card over its limit`);
+  await page.screenshot({ path: shot('payment-over-limit'), fullPage: true });
+
+  await page.locator('ss-payment-page h1').click();
+  await keyTo(page, buttonIn('ss-payment-page', 'Assign best cards'));
+  await page.keyboard.press('Enter');
+  const preview = page.locator('ss-assign-cards-dialog');
+  await preview.waitFor();
+  await until('focus on its heading', () =>
+    page.evaluate(() => document.activeElement?.tagName === 'H2'),
+  );
+  const rows = await preview.locator('li').evaluateAll((items) =>
+    items.map((item) => {
+      const part = (selector) =>
+        item.querySelector(selector)?.textContent.replace(/\s+/g, ' ').trim();
+      return `${part('.item')} | ${part('.move')} | ${part('.savings [aria-hidden="true"]')}`;
+    }),
+  );
+  check(
+    `${label}: Assign best cards previews each list: Mullvad’s euros cost least on Discover It`,
+    JSON.stringify(rows) ===
+      JSON.stringify(['Mullvad VPN | Everyday → to Discover It | ≈ $0.48']) &&
+      (await preview.locator('h3').first().textContent()).trim() === 'Work Related',
+    JSON.stringify(rows),
+  );
+  check(
+    `${label}: a list with unsaved edits is skipped, with a note`,
+    (await preview.locator('.skipped').textContent()).replace(/\s+/g, ' ').trim() ===
+      "Family has changes in the editor that aren't saved, so its subscriptions keep their cards.",
+  );
+  await axeCheck(page, `${label}, Assign best cards`);
+  await page.screenshot({ path: shot('payment-assign') });
+  await keyTo(page, buttonIn('ss-assign-cards-dialog', 'Apply'));
+  await page.keyboard.press('Enter');
+  await preview.waitFor({ state: 'detached' });
+  await until(
+    'Mullvad on Discover It',
+    async () =>
+      (await readTable(page, 'items')).find((item) => item.id === MULLVAD)?.cardId === DISCOVER,
+  );
+  const snack = page.locator('.mat-mdc-snack-bar-container');
+  await snack.waitFor();
+  check(
+    `${label}: Apply writes the card to the saved item, and says so with Undo`,
+    (await snack.textContent()).includes('Assigned a card to 1 subscription') &&
+      (await readTable(page, 'items')).find((item) => item.id === FAMILY_CRAVE)?.cardId ===
+        undefined,
+  );
+  await until(
+    'the warning gone',
+    async () => (await page.locator('ss-payment-page .over-limit').count()) === 0,
+  );
+  await snack.locator('button').focus();
+  await page.keyboard.press('Enter');
+  await until(
+    'Mullvad back on Everyday',
+    async () =>
+      (await readTable(page, 'items')).find((item) => item.id === MULLVAD)?.cardId === EVERYDAY,
+  );
+  check(`${label}: Undo puts the cards back`, true);
+
+  // ── P6: the item dialog's cards: only the ones Netflix takes, and the Best card chip ─────────────────────────
+  await page.goto(`${baseUrl}lists/${LIST}/edit`);
+  await page.locator('li.item').first().waitFor({ timeout: 20000 });
+  await page.locator('ss-list-edit-page h1').click();
+  await keyTo(page, buttonIn('ss-list-edit-page', 'Edit Netflix Standard'));
+  await page.keyboard.press('Enter');
+  const dialog = page.locator('ss-item-dialog');
+  await dialog.waitFor();
+  await until('focus on its heading', () =>
+    page.evaluate(() => document.activeElement?.tagName === 'H2'),
+  );
+  await keyTo(page, fieldIn('ss-item-dialog', 'Paid with'), 'Tab', 120);
+  await page.keyboard.press('Enter');
+  const options = page.locator('.cdk-overlay-pane mat-option');
+  await options.first().waitFor();
+  const optionTexts = await options.evaluateAll((all) =>
+    all.map((option) => option.textContent.trim()),
+  );
+  check(
+    `${label}: the dialog offers only the cards Netflix takes in Canada: no Interac, no Discover`,
+    JSON.stringify(optionTexts) === JSON.stringify(['No card', 'Everyday (Mastercard, 1.5% back)']),
+    JSON.stringify(optionTexts),
+  );
+  // The open menu covers the field's hint, which axe still measures, against the menu's colour.
+  await axeCheck(page, `${label}, the card menu`, ['ss-item-dialog .card mat-hint']);
+  // No card, by typeahead: the chip then offers Everyday.
+  await page.keyboard.type('N');
+  await sleep(300);
+  await page.keyboard.press('Enter');
+  const chip = dialog.locator('.best-card');
+  await chip.waitFor();
+  await page.keyboard.press('Tab');
+  check(
+    `${label}: with no card, the Best card chip names the saving, next in the Tab order`,
+    (await focusedText(page)) === 'Best card: Everyday, saves $0.30 / mo',
+    await focusedText(page),
+  );
+  await page.keyboard.press('Enter');
+  await chip.waitFor({ state: 'detached' });
+  const hint = (await dialog.locator('.card mat-hint [aria-hidden="true"]').textContent()).trim();
+  check(
+    `${label}: Enter on the chip pays with Everyday, and the hint gives the net`,
+    hint === '$19.94 / mo with tax, $19.64 after cash back and FX fees',
+    hint,
+  );
+  await noSideScroll(page, viewport, `${label}, the dialog's card`);
+  await axeCheck(page, `${label}, the dialog's card`);
+  await page.screenshot({ path: shot('item-dialog-card') });
+  await page.keyboard.press('Escape');
+  await dialog.waitFor({ state: 'detached' });
+
+  await keyTo(page, buttonIn('ss-list-edit-page', 'Edit Mullvad VPN'));
+  await page.keyboard.press('Enter');
+  await dialog.waitFor();
+  await dialog.locator('.card-note').nth(1).waitFor();
+  const notes = await dialog
+    .locator('.card-note')
+    .evaluateAll((all) => all.map((note) => note.textContent.replace(/\s+/g, ' ').trim()));
+  check(
+    `${label}: Mullvad’s card notes say acceptance isn’t confirmed, and that its euros pay the FX fee`,
+    notes[0] === 'Acceptance not confirmed: Mullvad VPN doesn’t say which cards it takes.' &&
+      notes[1] ===
+        'Mullvad VPN charges in EUR, so this card’s 2.5% FX fee applies (estimated at the ECB’s rate). A checkout that offers to charge you in CAD instead converts at its own rate, which can cost more.',
+    JSON.stringify(notes),
+  );
+  await axeCheck(page, `${label}, Mullvad's card notes`);
+  await page.keyboard.press('Escape');
+  await dialog.waitFor({ state: 'detached' });
+
+  // ── P4: the net beside the gross ─────────────────────────────────────────────────────────────────────────────
+  await page.goto(`${baseUrl}lists/${LIST}`);
+  await page.locator('ss-list-view-page .net-summary').waitFor({ timeout: 20000 });
+  const net = (await page.locator('.net-summary [aria-hidden="true"]').textContent()).trim();
+  const netflixLine = (
+    await page.locator('ss-item-card .on-card', { hasText: '$19.94' }).textContent()
+  ).replace(/\s+/g, ' ');
+  check(
+    `${label}: List view gives the month with tax and after cash back & FX fees, and each card's`,
+    net === '≈ $27.79 / mo with tax · ≈ $27.56 after cash back & FX fees' &&
+      netflixLine.includes(
+        'Paid with Everyday: $19.94 / mo with tax · $19.64 after cash back & FX fees',
+      ),
+    `${net} | ${netflixLine}`,
+  );
+  await noSideScroll(page, viewport, `${label}, List view's net`);
+  await axeCheck(page, `${label}, List view's net`);
+  await page.screenshot({ path: shot('list-view-net'), fullPage: true });
+
+  // ── P10: the day that takes Everyday over its limit, and the card in the day's panel ─────────────────────────
+  const { mullvad } = dates();
+  const overDay = `${new Date().getFullYear()}-${mullvad.slice(5)}`;
+  await page.goto(`${baseUrl}calendar`);
+  const warning = `Everyday goes over its $30.00 limit in ${month}: ≈ $116.46`;
+  if (viewport === WIDE) {
+    const day = page.locator(`.day[data-date="${overDay}"]`);
+    await day.waitFor({ timeout: 20000 });
+    await until('the day flagged', async () =>
+      (await day.getAttribute('aria-label')).endsWith(', over a card’s limit'),
+    );
+    check(
+      `${label}: the Calendar flags the day that takes a card over its limit`,
+      (await page.locator(`.cell:has(.day[data-date="${overDay}"]) .over-limit`).count()) === 1,
+    );
+    // The grid's one tab stop (today), then the arrow keys to the day, as check-calendar.cjs goes.
+    await page.locator('main').focus();
+    await keyTo(page, () => document.activeElement?.classList.contains('day') === true);
+    const focusedDate = () =>
+      page.evaluate(() => document.activeElement?.getAttribute('data-date'));
+    const steps = Number((await focusedDate()).slice(8)) - Number(overDay.slice(8));
+    for (let i = 0; i < Math.abs(steps); i++) {
+      await page.keyboard.press(steps > 0 ? 'ArrowLeft' : 'ArrowRight');
+    }
+    await until('the day over the limit', async () => (await focusedDate()) === overDay);
+    await page.keyboard.press('Enter');
+    const panel = page.locator('ss-day-panel');
+    await panel.locator('.over-limit').waitFor();
+    check(
+      `${label}: its panel names the card, and the warning`,
+      (await panel.locator('.card').first().textContent()).trim() === 'Paid with Everyday' &&
+        (await panel.locator('.over-limit > span').textContent()).replace(/\s+/g, ' ').trim() ===
+          `Warning: ${warning}`,
+    );
+    await axeCheck(page, `${label}, the day over the limit`);
+    await page.screenshot({ path: shot('calendar-over-limit') });
+  } else {
+    const entry = page.locator('.agenda .entry', { hasText: 'Mullvad VPN' });
+    await entry.waitFor({ timeout: 20000 });
+    check(
+      `${label}: the agenda marks the payment that takes a card over its limit`,
+      (await entry.locator('.over-limit').count()) === 1 &&
+        (await entry.textContent()).includes('over its card’s limit'),
+    );
+    await page.locator('main').focus();
+    await keyTo(
+      page,
+      () =>
+        document.activeElement?.classList.contains('entry') === true &&
+        document.activeElement.textContent.includes('Mullvad VPN'),
+    );
+    await page.keyboard.press('Enter');
+    const sheet = page.locator('ss-day-sheet');
+    await sheet.locator('.over-limit').waitFor();
+    await sleep(600);
+    check(
+      `${label}: its bottom sheet names the card, and the warning`,
+      (await sheet.locator('.over-limit > span').textContent()).replace(/\s+/g, ' ').trim() ===
+        `Warning: ${warning}`,
+    );
+    await axeCheck(page, `${label}, the sheet over the limit`);
+    await page.screenshot({ path: shot('calendar-over-limit') });
+    await page.keyboard.press('Escape');
+  }
+  await noSideScroll(page, viewport, `${label}, the Calendar with a card over its limit`);
 }
 
 (async () => {
@@ -400,7 +769,10 @@ async function plantList(page, cardId) {
           card.cashbackPercent === 1.5 &&
           card.fxFeePercent === 2.5 &&
           card.monthlyLimit === 500 &&
-          !/\d{12}/.test(JSON.stringify(card).replace(/[ -]/g, '')),
+          // The fields typed in, not the id and dates, whose digits run on once dashes are taken out.
+          !/\d{12}/.test(
+            JSON.stringify([card.name, card.nickname, card.monthlyLimit]).replace(/[ -]/g, ''),
+          ),
         JSON.stringify(card),
       );
       await snackBar(page).waitFor();
@@ -494,6 +866,8 @@ async function plantList(page, cardId) {
         `${label}: Delete card soft-deletes it, its subscriptions have no card, focus on Add card`,
         deleted.deletedAt !== undefined && items.every((item) => item.cardId === undefined),
       );
+
+      await checkM94(page, label, viewport, shot);
       await context.close();
     }
   }

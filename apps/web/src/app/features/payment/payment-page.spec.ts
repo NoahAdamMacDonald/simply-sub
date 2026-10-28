@@ -13,6 +13,8 @@ import { CatalogStore } from '../../core/catalog/catalog-store';
 import { FxStore } from '../../core/fx/fx-store';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { CardsRepository } from '../../core/storage/cards-repository';
+import { DraftsRepository } from '../../core/storage/drafts-repository';
+import { ListsRepository } from '../../core/storage/lists-repository';
 import { ItemsRepository } from '../../core/storage/items-repository';
 import type { NewRecord } from '../../core/storage/record-repository';
 import {
@@ -146,11 +148,23 @@ describe('PaymentPage', () => {
           text(row.querySelector('.paid-amount [aria-hidden="true"]')),
       ),
       total: text(tile.querySelector('.total [aria-hidden="true"]')),
+      net: text(tile.querySelector('.net [aria-hidden="true"]')),
+      overLimit: text(tile.querySelector('.over-limit [aria-hidden="true"]:not(mat-icon)')),
       muted: text(tile.querySelector('.subscriptions .muted')),
     }));
   const dialog = () => document.querySelector<HTMLElement>('ss-card-dialog');
   const storedCards = async () => (await storedRows(storage.indexedDB, 'cards')) as PaymentCard[];
   const storedItems = async () => (await storedRows(storage.indexedDB, 'items')) as ListItem[];
+
+  /** Waits until the stored items pass `condition`. */
+  async function storedUntil(condition: (stored: ListItem[]) => boolean): Promise<void> {
+    await vi.waitFor(
+      async () => {
+        if (!condition(await storedItems())) throw new Error('Not yet');
+      },
+      { timeout: 2000 },
+    );
+  }
 
   async function click(label: string): Promise<void> {
     const target = Array.from(page().querySelectorAll<HTMLElement>('button')).find(
@@ -227,6 +241,9 @@ describe('PaymentPage', () => {
         limit: '≈ $119.62 of $500.00',
         paid: ['Crave Premium $23.10', 'Mullvad VPN ≈ $7.85'],
         total: '≈ $30.95 / mo with tax',
+        // 1.5% back on both, and the 2.5% FX fee on Mullvad's euros.
+        net: '≈ $30.68 after cash back & FX fees',
+        overLimit: undefined,
         muted: undefined,
       },
       {
@@ -237,6 +254,8 @@ describe('PaymentPage', () => {
         limit: 'No limit',
         paid: [],
         total: undefined,
+        net: undefined,
+        overLimit: undefined,
         muted: 'No subscriptions',
       },
     ]);
@@ -247,6 +266,71 @@ describe('PaymentPage', () => {
       'about $119.62 of $500.00',
     );
     expect(text(page().querySelector('.unassigned'))).toBe('1 subscription has no card');
+  });
+
+  it('warns of a month its charges take over its limit (M9.4)', async () => {
+    const tight = await cards.create({ ...simpliiFields, monthlyLimit: 30 });
+    await items.create(itemFields('crave.premium', workId, tight.id));
+    // A year of Mullvad on Oct 20: October goes over $30.
+    await items.create(
+      itemFields('mullvad.vpn', familyId, tight.id, {
+        interval: 'year',
+        anchorDate: '2027-10-20',
+        autoRenew: false,
+      }),
+    );
+    await open();
+    await until(() => tiles()[0]?.overLimit !== undefined);
+    expect(tiles()[0].overLimit).toBe('Over its limit in October 2026: ≈ $119.62 of $30.00');
+    expect(text(page().querySelector('.over-limit .visually-hidden'))).toBe(
+      'Warning: over its limit in October 2026: about $119.62 of $30.00',
+    );
+    expect(page().querySelector('.limit ss-budget-bar')?.getAttribute('data-level')).toBe('over');
+  });
+
+  it('assigns the best cards: a preview of each list, one with unsaved edits skipped, then Apply and Undo (M9.4)', async () => {
+    const lists = TestBed.inject(ListsRepository);
+    const work = await lists.create({ name: 'Work Related' });
+    const family = await lists.create({ name: 'Family' });
+    const simplii = await cards.create({ ...simpliiFields, monthlyLimit: undefined });
+    await cards.create(debitFields);
+    const crave = await items.create(itemFields('crave.premium', work.id, undefined));
+    const kept = await items.create(itemFields('crave.basic', family.id, undefined));
+    // Family's open in the editor.
+    await TestBed.inject(DraftsRepository).start(family.id);
+    await open();
+    await until(() => page().querySelector('.assign-button:not([disabled])') !== null);
+
+    page().querySelector<HTMLElement>('.assign-button')?.click();
+    await until(() => document.querySelector('ss-assign-cards-dialog li') !== null);
+    const preview = document.querySelector<HTMLElement>('ss-assign-cards-dialog');
+    const flat = (element: Element | null | undefined) =>
+      element?.textContent?.replace(/\s+/g, ' ').trim();
+    expect(flat(preview?.querySelector('h3'))).toBe('Work Related');
+    // 1.5% back on $22 a month and Alberta's 5%, over the next 12 months.
+    const row = preview?.querySelector('li');
+    expect(flat(row?.querySelector('.item'))).toBe('Crave Premium');
+    expect(flat(row?.querySelector('.move'))).toBe('No card → to Everyday');
+    expect(flat(row?.querySelector('.savings [aria-hidden="true"]'))).toBe('$4.16');
+    expect(flat(preview?.querySelector('.skipped'))).toBe(
+      "Family has changes in the editor that aren't saved, so its subscriptions keep their cards.",
+    );
+    expect(flat(preview?.querySelector('.total [aria-hidden="true"]'))).toBe('$4.16');
+    Array.from(preview?.querySelectorAll('button') ?? [])
+      .find((button) => button.textContent?.trim() === 'Apply')
+      ?.click();
+
+    await storedUntil(
+      (stored) => stored.find((item) => item.id === crave.id)?.cardId === simplii.id,
+    );
+    const snack = () => document.querySelector('.mat-mdc-snack-bar-container');
+    await until(() => snack()?.textContent?.includes('Assigned a card to 1 subscription') === true);
+    expect((await storedItems()).find((item) => item.id === kept.id)).not.toHaveProperty('cardId');
+
+    Array.from(snack()?.querySelectorAll('button') ?? [])
+      .find((button) => button.textContent?.trim() === 'Undo')
+      ?.click();
+    await storedUntil((stored) => stored.every((item) => item.cardId === undefined));
   });
 
   it('adds a card in the dialog, and says so', async () => {

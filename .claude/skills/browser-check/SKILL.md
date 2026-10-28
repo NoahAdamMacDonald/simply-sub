@@ -351,7 +351,7 @@ a month), and Family Mullvad VPN (about $94.16 on Jan 20). In both themes at bot
 
 It runs axe on both pages with their warnings and checks for horizontal scroll.
 
-`check-payment.cjs` (M9.1) checks Payment (P11) on `ng serve` for a Canadian in Alberta. In both themes at both
+`check-payment.cjs` (M9.1, M9.4) checks Payment (P11) on `ng serve` for a Canadian in Alberta. In both themes at both
 widths, keyboard only:
 - no cards: the heading, the line about card numbers and the empty state;
 - Add card by Tab and Enter: the dialog with focus on its heading, 720 px wide or the whole screen, its "Never enter a
@@ -360,9 +360,9 @@ widths, keyboard only:
 - the card typed in field by field (Type and Network by typeahead), stored as typed (read from IndexedDB), the
   snackbar and focus on its ✎;
 - Work Related written to IndexedDB (Netflix Standard on the 1st and Mullvad VPN on the 2nd of every month and year,
-  paid with it; Crave Premium with none): the tile's badges, rates, this month's "≈ $116.46 of $500.00" (Mullvad's euros with the 2.5% FX fee), the
-  subscriptions with what they cost a month with tax ("≈ $27.79 / mo with tax"), the bar's name, and "1 subscription
-  has no card";
+  paid with it; Crave Premium with none): the tile's badges, rates, this month's "≈ $116.46 of $500.00" (Mullvad's
+  euros with the 2.5% FX fee), the subscriptions with what they cost a month with tax ("≈ $27.79 / mo with tax"), the
+  bar's name, and "1 subscription has no card";
 - ✎ clearing the limit ("No limit", the field gone from the record), and focus back on ✎;
 - 🗑 asking with the count it pays for (focus on Cancel), then the card soft-deleted, its items with no card and focus
   on Add card.
@@ -370,6 +370,26 @@ widths, keyboard only:
 It runs axe on the page, the dialog, its errors, the tile and the question, and checks for horizontal scroll. Wait
 about 600 ms before a screenshot of the dialog's errors: they fade in, and the limit's label floats up meanwhile.
 `check-shell.cjs` knows Payment's heading, "Payment cards".
+
+M9.4 adds three cards (Everyday, a Mastercard at 1.5% with a $30 limit; Everyday Debit on Interac; Discover It at 2%)
+and Family open in the editor (an unsaved draft with Crave Premium), then, keyboard only:
+- P11: Everyday's "Over its limit in <this month>: ≈ $116.46 of $30.00" with its bar red, and "≈ $27.56 after cash
+  back & FX fees"; Assign best cards, its preview (Work Related's Mullvad VPN from Everyday to Discover It, saving
+  ≈ $0.48; Family skipped, with its note), Apply (Mullvad's `cardId` in IndexedDB, Family's Crave Premium untouched,
+  the warning gone) and Undo;
+- P6: Netflix's "Paid with" menu with only No card and Everyday (no Interac or Discover in Canada); No card by
+  typeahead, the Best card chip next in the Tab order ("Best card: Everyday, saves $0.30 / mo"), Enter on it, and the
+  hint's net; Mullvad's two notes (acceptance not confirmed; its euros and the card's FX fee);
+- P4: the header's "≈ $27.79 / mo with tax · ≈ $27.56 after cash back & FX fees" and Netflix's "Paid with Everyday: …";
+- P10: at 1280 px the day that takes Everyday over its limit, flagged in the grid (its name ending ", over a card’s
+  limit"), reached by the arrow keys, and its panel naming the card and the warning; at 360 px the agenda's payment
+  and its bottom sheet.
+
+With axe on each, and no horizontal scroll.
+- With a select open, axe measures the field's hint against the panel's colour, which fails in dark theme. When the
+  panel doesn't cover the hint's middle, `axeCheck`'s set-aside misses it, so it takes selectors to leave out of a scan.
+- `buttonIn` drops a leading icon's ligature ("auto_fix_high Assign best cards").
+- The card-number check reads the fields typed in, not ids or dates, whose digits run on once dashes are taken out.
 
 Since M7.1, the scripts check the charges:
 - `check-list-view.cjs`: Mullvad's "Renew by Nov 12", Netflix's next charge as charged in its details ("Next charge Nov

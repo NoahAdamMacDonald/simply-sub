@@ -109,6 +109,10 @@
                         <mat-icon aria-hidden="true">autorenew</mat-icon>
                         <span class="visually-hidden">, renew manually</span>
                       }
+                      @if (entry.overLimit) {
+                        <mat-icon class="over-limit" aria-hidden="true">warning</mat-icon>
+                        <span class="visually-hidden">, over its card’s limit</span>
+                      }
                     </button>
                   </li>
                 }
@@ -180,6 +184,10 @@
                           }
                           @if (day.total) {
                             <span class="day-total">{{ day.total }}</span>
+                          }
+                          <!-- A card goes over its limit (P10, M9.4): the day's name says so. -->
+                          @if (day.overLimit) {
+                            <mat-icon class="over-limit">warning</mat-icon>
                           }
                         </div>
                       </div>

@@ -20,6 +20,14 @@
           }
         </ul>
       }
+      <!-- The net beside the gross (P4, M9.4): with tax, and after its card's cash back and FX fees. -->
+      @if (onCard(); as paid) {
+        <p class="on-card">
+          <span>Paid with {{ paid.card }}: </span>
+          <span aria-hidden="true">{{ paid.month.shown }}</span>
+          <span class="visually-hidden">{{ paid.month.spoken }}</span>
+        </p>
+      }
     </div>
 
     <!-- Saved to the item at once, outside the list editor (P4). -->

@@ -1,5 +1,7 @@
 import { Service, inject } from '@angular/core';
 import {
+  cardLoads,
+  itemLedger,
   optimize,
   type CatalogData,
   type OptimizerInput,
@@ -10,6 +12,7 @@ import { ClockService } from '../clock/clock-service';
 import { FxStore } from '../fx/fx-store';
 import { MetricsService } from '../metrics/metrics-service';
 import { SettingsStore } from '../settings/settings-store';
+import { CardsRepository } from '../storage/cards-repository';
 import { RankingsRepository } from '../storage/rankings-repository';
 import type { OptimizerRequest, OptimizerResponse } from './optimizer-messages';
 import { startOptimizerWorker } from './optimizer-worker';
@@ -38,6 +41,7 @@ export class OptimizerService {
   private readonly fx = inject(FxStore);
   private readonly settings = inject(SettingsStore);
   private readonly rankings = inject(RankingsRepository);
+  private readonly cards = inject(CardsRepository);
   private readonly clock = inject(ClockService);
   /** Undefined until it's needed; null once it's failed. */
   private worker?: Worker | null;
@@ -46,12 +50,16 @@ export class OptimizerService {
 
   /**
    * What the optimizer needs for a list: undefined before the first run, and while any of its items waits for its
-   * catalog file. Items that can't be priced are left out, as totals leave them out. Called in a computed(), it follows
-   * the list, the catalog, the rates, the settings, the ranks and the date.
+   * catalog file. Items that can't be priced are left out, as totals leave them out. With the user's payment cards,
+   * what the other lists' items post to each one too, so a better card for an item is suggested only with room for it
+   * (M9.3). Called in a computed(), it follows the list, the catalog, the rates, the settings, the ranks, the cards and
+   * the date.
    */
   input(listId: string): OptimizerInput | undefined {
     const saved = this.settings.saved();
-    if (!saved || this.metrics.status() !== 'ready') return undefined;
+    if (!saved || this.metrics.status() !== 'ready' || this.cards.status() === 'loading') {
+      return undefined;
+    }
     const { resolved, unresolved } = this.metrics.list(listId);
     if (unresolved.some((item) => item.reason === 'pending')) return undefined;
     const catalogs = new Map<string, CatalogData>();
@@ -60,9 +68,23 @@ export class OptimizerService {
       if (catalog) catalogs.set(region, catalog);
     }
     const fx = this.fx.rates();
+    const cards = this.cards.records();
+    const rewards = {
+      today: this.clock.today(),
+      currency: saved.currency,
+      place: saved,
+      ...(fx && { fx }),
+    };
+    const elsewhere = [...this.metrics.byList()]
+      .filter(([other]) => other !== listId)
+      .flatMap(([, items]) => items.resolved.map((item) => itemLedger(item, rewards)));
     return {
       items: resolved,
       catalogs,
+      ...(cards.length > 0 && {
+        cards: [...cards],
+        cardLoads: cardLoads(elsewhere, cards, rewards),
+      }),
       context: {
         today: this.clock.today(),
         country: saved.country,

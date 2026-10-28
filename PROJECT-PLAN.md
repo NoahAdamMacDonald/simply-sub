@@ -212,7 +212,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M9.1 | Cards repo, Payment page and card dialog (P11). As built: `CardsRepository` (with `usage` and `removeWithItems`), the page's tiles from core's `cardSummary` and `monthlyWithTax`, and the card dialog (`CardEditor`) on core's `cardFormIssues`, with `cardUsage` and `withoutCard` for deleting one (BLUEPRINT §14) | P11 criteria met |
 | M9.2 | `acceptedNetworks` in the data and the extraction pipeline (the schema has validated the field since M1.1). As built: per region, each with its page and quotes (the user's choice), core's `networksNamedIn`; read for all ten providers (five name none); the price-research skill and §6.5's extraction record it, and the nightly bot rechecks it (BLUEPRINT §14) | The pipeline fills it |
 | M9.3 | core: eligibility, FX and cash-back maths, card assignment, limit checks (BLUEPRINT §9.3). As built: core's `rewards/` (`networkRate`, `cardCost`, `cardAcceptance`, `itemOnCard`, `cardLoads`, `overLimits`, `monthlyOnCard`, `bestCard`, `assignCards`), `Charge.charged` and `ResolvedItem.acceptedNetworks`, and the optimizer's `card` action; open question 1 decided with the user (BLUEPRINT §14) | Tests pass |
-| M9.4 | Card select in the item dialog, net-cost displays, over-limit warnings | All visible on P4, P6, P10 and P11 |
+| M9.4 | Card select in the item dialog, net-cost displays, over-limit warnings. As built: the item dialog's Payment (only the cards its seller takes, the Best card chip and notes on acceptance and FX fees), List view's net in its header and on its cards, P11's Assign best cards (a preview per list, lists with unsaved edits skipped, Apply with Undo through `CardsRepository.assign`) and each tile's net and over-limit warning, the Calendar's days that take a card over its limit with the card in the day's panel, and the optimizer's card action wired in (BLUEPRINT §14) | All visible on P4, P6, P10 and P11 |
 
 ### M10 — Extras (Phase 5)
 Live calendar feed (`POST /cal`), encrypted device sync, "report a wrong price", PWA install and offline mode,
@@ -720,6 +720,15 @@ payments in January 2027 add up to…", the user's choice), the month's link ope
   how it renews, its next charge and live tags), Excel (Summary, the list's items, Payments), JSON (the list and its
   items as stored, not importable, as the user chose), Text (a summary) and Calendar (.ics, the next 12 months).
 
+**As built (M9.4):** the net, both with tax (the user's choice: today's monthly equivalents, net = gross + FX fee − cash
+back):
+- **Header:** once an item is paid with a card, a second line, "≈ $27.79 / mo with tax · ≈ $27.56 after cash back & FX
+  fees", an item with no card counting at its gross.
+- **Cards:** one paid with a card says so after its tags: "Paid with Everyday: $19.94 / mo with tax · $19.64 after cash
+  back & FX fees".
+- The card is chosen in the item dialog (P6), not here: the cards change only through the editor, but for pinning and
+  Wrong date?.
+
 BLUEPRINT §14 has the details.
 
 **Acceptance**
@@ -834,7 +843,21 @@ first when it's in use, as Settings' ✕ does (P13).
 **As built (M6.5):** the sections run Plan, Add-ons (P6's "Extra members": an add-on can be a channel), Billing, "I
 pay a different price", Advanced, Feature ranks and Tags, and Plus tax shows only where tax is added. The billing day
 is a "Billed on" choice. The footer's ≈ marks a converted price only, and "next charge Nov 12" came with M7.1.
-Payment comes with M9.4. BLUEPRINT §14 has the rest.
+BLUEPRINT §14 has the rest.
+
+**As built (M9.4):** Payment comes after Tags, for a plan that isn't free:
+- **Paid with:** No card, then the cards its seller takes where it's bought ("Everyday (Mastercard, 1.5% back)"), or
+  every card where that isn't known, marked "· acceptance not confirmed" (but for a custom subscription, which never
+  says). Its hint gives the month with tax and after cash back and FX fees.
+- **Best card:** a chip beside it, "Best card: Everyday, saves $0.30 / mo", when another card leaves a cent or more
+  less to pay a month; Enter or a click pays with it.
+- **Notes:** "Acceptance not confirmed: Mullvad VPN doesn't say which cards it takes.", and for a charge in another
+  currency, the card's FX fee estimated at the ECB's rate and a checkout's own conversion (the user's choice for
+  Mullvad, BLUEPRINT §14).
+- **A card its seller doesn't take** (its networks became known since): dropped as the dialog opens, with a note
+  naming it.
+- **No cards:** "Add your cards on the Payment page to see what each one pays back here."
+- **A free plan:** no Payment section, and saving drops a card it had, as it drops an own price.
 **Rules**
 - **Plan:** plans of the same provider (or of the custom subscription), with their prices. Changing the plan keeps the interval if the new plan offers it; otherwise the first available interval is picked.
 - **Extra members:** add-ons of the selected plan, with quantity up to `addOnLimit`.
@@ -1108,6 +1131,13 @@ Upcoming   Oct 28 Crave $22.00 · Nov 3 Mullvad ≈ $7.53 ↻ · Nov 12 Netflix 
   import steps, with Download again.
 - **Export to file ▾:** Calendar (.ics) as the main button, then Payment schedule (.csv, a row per charge) and Excel.
 
+**As built (M9.4):** every list's charges count against a card's limit, shown or not (BLUEPRINT §9.3):
+- **The grid:** the day of the charge that takes a card over its limit, and its later charges on the card that month,
+  have a warning icon after the day's total, and the day's name ends ", over a card's limit". In the agenda, the
+  payment itself has it, read ", over its card's limit".
+- **The panel** (and the bottom sheet): each charge's card ("Paid with Everyday"), and on such a day "Everyday goes over
+  its $30.00 limit in October 2026: ≈ $116.46", read with "Warning:".
+
 **Acceptance**
 - [ ] Charges appear on the right days, including month-end dates and limited windows
 - [ ] The spent/total bar matches §3.1 for past, current and future months
@@ -1148,12 +1178,23 @@ We never ask for card numbers, only what's needed to estimate cash back and fees
   a bar of this month's charges paid with it against its limit ("≈ $114.10 of $500.00", in the card's currency), or
   "No limit". Then the subscriptions paid with it, from every list, each with what it costs a month with sales tax,
   and their total ("≈ $27.79 / mo with tax", the user's choice in M9: the net costs are with tax too), then ✎ and 🗑.
-- **Under the tiles:** "1 subscription has no card". Assign best cards comes with M9.4.
+- **Under the tiles:** "1 subscription has no card".
 - **The dialog:** P11's fields in that order, the limit in the card's currency, starting with "Never enter a card
   number…". Cash back and FX fee left empty are 0. 12 or more digits in a row are refused in every field, the number
   fields too.
 - **Deleting:** "Delete Everyday?", with how many subscriptions it pays for, in lists and drafts ("…, and will have
   no card."); focus then moves to the next tile's 🗑, else Add card.
+
+**As built (M9.4):**
+- **Tiles:** after the total, what the subscriptions come to after cash back & FX fees ("≈ $27.56 after cash back & FX
+  fees"). Under the limit bar, the first of the next 12 months whose charges go over it: "Over its limit in October
+  2026: ≈ $116.46 of $30.00, and in 1 more month", read with "Warning:" (the bar is red when it's this month).
+- **Assign best cards** under the tiles, after "1 subscription has no card" (turned off while prices load). Its dialog
+  has a heading per list with changes and a row per item ("Mullvad VPN · Everyday → Discover It · saves ≈ $0.48 a
+  year"), a note for each list with unsaved edits ("Family has changes in the editor that aren't saved, so its
+  subscriptions keep their cards."), and the total over the next 12 months. Apply writes the cards to the saved items
+  in one transaction, with Undo in the snackbar. With nothing to change: "Every subscription is on its best card
+  already." and Close.
 
 BLUEPRINT §14 has the details.
 

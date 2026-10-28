@@ -23,15 +23,24 @@
     }
   }
   @if (state() === 'ready') {
-    <!-- "/ mo" and ≈ are read as words, as ss-price's are. -->
-    <p subtitle class="summary">
-      @if (summary().average; as average) {
-        <span aria-hidden="true">{{ average.shown }}</span>
-        <span class="visually-hidden">{{ average.spoken }}, </span>
-        <span aria-hidden="true"> · </span>
+    <div subtitle>
+      <!-- "/ mo" and ≈ are read as words, as ss-price's are. -->
+      <p class="summary">
+        @if (summary().average; as average) {
+          <span aria-hidden="true">{{ average.shown }}</span>
+          <span class="visually-hidden">{{ average.spoken }}, </span>
+          <span aria-hidden="true"> · </span>
+        }
+        <span>{{ summary().count }}</span>
+      </p>
+      <!-- With tax, and after the cards' cash back and FX fees, once an item is paid with one (P4, M9.4). -->
+      @if (netSummary(); as net) {
+        <p class="net-summary">
+          <span aria-hidden="true">{{ net.shown }}</span>
+          <span class="visually-hidden">{{ net.spoken }}</span>
+        </p>
       }
-      <span>{{ summary().count }}</span>
-    </p>
+    </div>
   }
 </ss-page-header>
 
@@ -200,6 +209,7 @@
                     [resolved]="resolved"
                     [tags]="tagsOf(resolved)"
                     [share]="totals()?.shares?.get(resolved.item.id)"
+                    [onCard]="onCard().get(resolved.item.id)"
                     (pinToggle)="pin(resolved, $event)"
                   />
                 </li>
@@ -219,6 +229,7 @@
                     [resolved]="resolved"
                     [tags]="tagsOf(resolved)"
                     [share]="totals()?.shares?.get(resolved.item.id)"
+                    [onCard]="onCard().get(resolved.item.id)"
                     (pinToggle)="pin(resolved, $event)"
                   />
                 </li>

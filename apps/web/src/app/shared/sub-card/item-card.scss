@@ -55,6 +55,12 @@
   list-style: none;
 }
 
+.on-card {
+  margin: 6px 0 0;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}
+
 // Padding inside the clipped part, which can shrink to nothing.
 .details-content {
   display: flex;

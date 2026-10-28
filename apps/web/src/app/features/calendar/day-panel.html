@@ -34,6 +34,15 @@
           <p class="list">
             In <a [routerLink]="['/lists', entry.charge.listId]">{{ entry.listName }}</a>
           </p>
+          @if (entry.card; as card) {
+            <p class="card">Paid with {{ card }}</p>
+          }
+          @if (entry.overLimit; as overLimit) {
+            <p class="over-limit">
+              <mat-icon aria-hidden="true">warning</mat-icon>
+              <span><span class="visually-hidden">Warning: </span>{{ overLimit }}</span>
+            </p>
+          }
           @if (entry.movable) {
             <button
               matButton

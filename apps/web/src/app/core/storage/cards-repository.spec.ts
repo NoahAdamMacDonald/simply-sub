@@ -204,6 +204,31 @@ describe('CardsRepository', () => {
     expect(await storedRows(storage.indexedDB, 'items')).toEqual(before);
   });
 
+  it('assigns items their cards in one transaction, and gives back the cards they had', async () => {
+    const before = await cards.assign([
+      { itemId: netflix.id, cardId: debit.id },
+      { itemId: mullvad.id },
+      // Deleted: left as it is.
+      { itemId: gone.id, cardId: debit.id },
+    ]);
+    expect(before).toEqual([
+      { itemId: netflix.id, cardId: simplii.id },
+      { itemId: mullvad.id, cardId: debit.id },
+    ]);
+    const stored = new Map(((await readAll('items')) as ListItem[]).map((item) => [item.id, item]));
+    expect(stored.get(netflix.id)?.cardId).toBe(debit.id);
+    expect(stored.get(netflix.id)?.updatedAt).toBe('2026-10-28T10:00:00.000Z');
+    expect(stored.get(mullvad.id)).not.toHaveProperty('cardId');
+    expect(stored.get(gone.id)?.cardId).toBe(simplii.id);
+    // Undo puts them back.
+    await cards.assign(before);
+    const back = new Map(((await readAll('items')) as ListItem[]).map((item) => [item.id, item]));
+    expect([back.get(netflix.id)?.cardId, back.get(mullvad.id)?.cardId]).toEqual([
+      simplii.id,
+      debit.id,
+    ]);
+  });
+
   it('writes nothing when a step fails', async () => {
     const before = await storedRows(storage.indexedDB, 'items');
     const real = await TestBed.inject(StorageService).engine();

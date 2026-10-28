@@ -1,0 +1,70 @@
+// The title, with ✕ on its right.
+.title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline-end: 12px;
+
+  h2 {
+    flex: 1;
+    min-width: 0;
+
+    // Focus starts here so a screen reader begins at the title; it isn't a control, so it has no ring.
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+p {
+  margin: 0 0 12px;
+}
+
+.intro,
+.skipped,
+.none {
+  color: var(--ss-text-muted);
+}
+
+h3 {
+  margin: 12px 0 4px;
+  font: var(--mat-sys-title-small);
+  overflow-wrap: anywhere;
+}
+
+ul {
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+// A subscription, the card it moves from and to, and what that saves, wrapping where there's no room.
+li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+  padding: 6px 0;
+  overflow-wrap: anywhere;
+
+  & + & {
+    border-top: 1px solid var(--ss-divider);
+  }
+}
+
+.item {
+  flex: 1 1 100%;
+  font-weight: 600;
+}
+
+.move {
+  flex: 1 1 auto;
+}
+
+.savings {
+  color: var(--ss-text-muted);
+}
+
+.total {
+  margin-top: 8px;
+  font-weight: 600;
+}

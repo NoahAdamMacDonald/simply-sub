@@ -21,29 +21,35 @@ import { MatInput } from '@angular/material/input';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
+  cardTitle,
   listFilterCount,
   listFilterOptions,
   listView,
   monthOf,
   monthRange,
+  monthlyOnCard,
   typeCounts,
   type IsoDate,
   type IsoMonth,
   type ResolvedItem,
+  type RewardsContext,
   type Tag,
 } from '@simply-sub/core';
 import { filter, firstValueFrom, map } from 'rxjs';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { ClockService } from '../../core/clock/clock-service';
+import { FxStore } from '../../core/fx/fx-store';
 import { ListDraftService } from '../../core/lists/list-draft-service';
 import { MetricsService } from '../../core/metrics/metrics-service';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { CardsRepository } from '../../core/storage/cards-repository';
 import { CustomSubsRepository } from '../../core/storage/custom-subs-repository';
 import { ItemsRepository } from '../../core/storage/items-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
 import { TagsRepository } from '../../core/storage/tags-repository';
 import { BudgetTotals } from '../../shared/budget-totals/budget-totals';
 import { BudgetWarnings } from '../../shared/budget-warnings/budget-warnings';
+import { netMonthText, type ShownAndSpoken } from '../../shared/charge-text';
 import { EmptyState } from '../../shared/empty-state/empty-state';
 import { Exporter, type ListExportFormat } from '../../shared/export/exporter';
 import { FeatureSummary } from '../../shared/feature-summary/feature-summary';
@@ -105,6 +111,8 @@ export class ListViewPage {
   private readonly metrics = inject(MetricsService);
   private readonly catalog = inject(CatalogStore);
   private readonly settings = inject(SettingsStore);
+  private readonly fx = inject(FxStore);
+  private readonly cards = inject(CardsRepository);
   private readonly customSubEditor = inject(CustomSubEditor);
   private readonly exporter = inject(Exporter);
   private readonly today = inject(ClockService).today;
@@ -143,6 +151,53 @@ export class ListViewPage {
       ...(saved && total > 0 && { average: averageText(this.listItems(), saved) }),
       count: total === 1 ? '1 subscription' : `${total} subscriptions`,
     };
+  });
+  /**
+   * Each item paid with a card, by item id: its card's name, and what it costs a month with tax and after the card's
+   * cash back and FX fees (P4, M9.4; core's monthlyOnCard). None for an item with no card, or one it can't price.
+   */
+  protected readonly onCard = computed(() => {
+    const context = this.rewardsContext();
+    const byId = this.cards.byId();
+    const lines = new Map<string, { card: string; month: ShownAndSpoken }>();
+    if (!context) return lines;
+    for (const resolved of this.listItems().resolved) {
+      const card = byId.get(resolved.item.cardId ?? '');
+      const month = card && monthlyOnCard(resolved, card, context);
+      if (card && month) {
+        lines.set(resolved.item.id, {
+          card: cardTitle(card),
+          month: netMonthText(month, context.currency, this.settings.saved()?.country),
+        });
+      }
+    }
+    return lines;
+  });
+  /**
+   * The header's line with tax and after cash back & FX fees (P4, M9.4), once an item is paid with a card: every item
+   * it can price a month, the ones with no card at their gross.
+   */
+  protected readonly netSummary = computed(() => {
+    const context = this.rewardsContext();
+    const byId = this.cards.byId();
+    const { resolved } = this.listItems();
+    if (!context || !resolved.some((item) => byId.has(item.item.cardId ?? ''))) return undefined;
+    const sum = { gross: 0, net: 0, converted: false };
+    for (const item of resolved) {
+      const month = monthlyOnCard(item, byId.get(item.item.cardId ?? ''), context);
+      if (!month) continue;
+      sum.gross += month.gross;
+      sum.net += month.net;
+      sum.converted ||= month.converted;
+    }
+    return netMonthText(sum, context.currency, this.settings.saved()?.country);
+  });
+  /** What the card maths needs: today, the user's currency and tax place, and the rates. */
+  private readonly rewardsContext = computed<RewardsContext | undefined>(() => {
+    const saved = this.settings.saved();
+    if (!saved) return undefined;
+    const fx = this.fx.rates();
+    return { today: this.today(), currency: saved.currency, place: saved, ...(fx && { fx }) };
   });
   /** The list has changes in the editor that weren't saved: the cards show it as saved. */
   protected readonly unsaved = computed(() => {

@@ -91,6 +91,25 @@ p {
   color: var(--ss-accent-text);
 }
 
+.card {
+  color: var(--ss-text-muted);
+}
+
+// Its card goes over its limit with this charge (M9.4).
+.over-limit {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  color: var(--ss-danger);
+
+  mat-icon {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+  }
+}
+
 .wrong-date {
   align-self: flex-start;
   margin-left: -12px;

@@ -144,7 +144,38 @@
   justify-content: flex-end;
 }
 
+.net {
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+  text-align: end;
+}
+
+// Over its limit in a month (M9.4): the danger colour, as a budget warning's.
+.over-limit {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  color: var(--ss-danger);
+  font: var(--mat-sys-body-medium);
+
+  mat-icon {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+  }
+}
+
+// "1 subscription has no card", then Assign best cards (P11).
+.assign {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: 16px;
+}
+
 .unassigned {
-  margin: 16px 0 0;
+  margin: 0;
   color: var(--ss-text-muted);
 }

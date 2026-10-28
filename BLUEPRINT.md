@@ -2242,6 +2242,11 @@ the item's own currency (Proton's buyer-chosen lists: pickPrice's; Mullvad: EUR)
   chip that names the expected savings.
 - The list view shows **net cost after cash back and FX fees** next to the gross cost.
 
+**As built (M9.4):** the card dropdown and the Best card chip are in the item dialog only, where the user's M9.4 tasks
+put them: the list view's cards change only through the editor's draft (but for pinning and Wrong date?), so it shows
+the net beside the gross, in its header and on each card paid with one (section 14, M9.4). Since M9.1 the tiles name
+the network in a badge rather than show its logo.
+
 ---
 
 ## 10. Optimizer engine
@@ -2569,6 +2574,40 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-28, M9.4)**
+- **The item dialog's card** (PROJECT-PLAN P6): a Payment section after Tags, for a plan that isn't free.
+  - "Paid with": No card, then the cards its seller takes where it's bought (core's `cardChoices`), or every card where
+    that isn't known, marked "acceptance not confirmed" (but for a custom subscription, which never says). The hint
+    gives the month with tax and after cash back and FX fees (`monthlyOnCard`).
+  - The Best card chip (`bestCard`): the card that leaves the least to pay a month, when it saves a cent or more. Enter
+    or a click pays with it.
+  - Notes: acceptance not confirmed, and for a charge in another currency, the card's FX fee estimated at the ECB's
+    rate and a checkout's own conversion (the user's choice for Mullvad, M9.3).
+  - A card the seller doesn't take (its networks became known since) is dropped as the dialog opens, with a note. The
+    form's `cardId` (core's `item-form.ts`) is saved to the draft with the rest, but not for a free plan, which has
+    nothing to pay (its own price is dropped the same way).
+- **The card select is in the item dialog only.** Section 9.4 also put one on the list view, but the user's M9.4 tasks
+  put it in the dialog, and the list view's cards change only through the editor's draft (but for pinning and Wrong
+  date?). The list view shows the net instead.
+- **List view's net** (P4, the user's choice in M9: both with tax): once an item has a card, the header's second line
+  ("≈ $27.79 / mo with tax · ≈ $27.56 after cash back & FX fees", an item with no card at its gross), and on each card
+  paid with one, "Paid with Everyday: $19.94 / mo with tax · $19.64 after cash back & FX fees".
+- **Assign best cards** (P11): core's `assignCards` over every list's saved items, then a preview per list in a dialog
+  that loads on first use, as Material's dialog does. A list with unsaved edits is skipped, with a note: its items keep
+  their cards, and their charges still count against the limits. Apply writes the cards in one transaction, with Undo.
+  `CardsRepository.assign` does it rather than `ItemsRepository`, which the app starts with, so the initial bundle
+  doesn't grow.
+- **Over-limit warnings:** a tile names the first of the next 12 months over its limit, and how many more. The Calendar
+  flags the charge that takes a card over and its later ones that month, on the day and in the agenda, and the day's
+  panel names each charge's card, and the warning. Every list's charges count, shown or not.
+- **The optimizer's card action, wired in:** `OptimizerService` passes the cards and what the other lists' items post
+  to each (`cardLoads`), and waits for the cards to load. List view's suggestion reads "With Discover It instead of
+  Everyday, from now on".
+- **Bundle:** the initial bundle is 496.39 kB, as since M9.1 (497.31 kB before M9).
+- **Checks:** `check-payment.cjs` (185 checks, both themes at 360 and 1280 px, keyboard only) on `ng serve` and under
+  `wrangler dev`'s production CSP, csp-check, and the list-view, item-dialog, calendar, backup, app-lock, optimizations
+  and shell scripts again.
 
 **Resolved (2026-10-28, M9.3)**
 - **Buyer-chosen charge currency** (the old open question 1), the user's choices:

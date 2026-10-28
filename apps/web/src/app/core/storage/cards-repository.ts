@@ -1,7 +1,13 @@
 import { Service, inject } from '@angular/core';
-import { cardUsage, softDeleted, withoutCard } from '@simply-sub/core';
+import { cardUsage, softDeleted, withChanges, withoutCard } from '@simply-sub/core';
 import { RecordRepository } from './record-repository';
 import { StorageService } from './storage-service';
+
+/** An item's card: a card id, or none. */
+export interface ItemCard {
+  itemId: string;
+  cardId?: string;
+}
 
 /**
  * The user's payment cards (PROJECT-PLAN P11, BLUEPRINT §9.2): a name, network, cash back, FX fee and limit, never a
@@ -45,6 +51,26 @@ export class CardsRepository extends RecordRepository<'cards'> {
       );
       for (const item of items) await transaction.put('items', item);
       for (const draft of drafts) await transaction.put('drafts', draft);
+    });
+  }
+
+  /**
+   * Gives each item its card, or none (P11's Assign best cards, and its Undo), in one transaction, and gives back the
+   * card each one had. An item deleted since is left as it is. Here rather than in ItemsRepository, which the app
+   * starts with, so it stays out of the initial bundle.
+   */
+  async assign(cards: readonly ItemCard[]): Promise<ItemCard[]> {
+    const now = this.service.now();
+    const engine = await this.service.engine();
+    return engine.transaction(['items'], async (transaction) => {
+      const before: ItemCard[] = [];
+      for (const { itemId, cardId } of cards) {
+        const item = await transaction.get('items', itemId);
+        if (item === undefined || item.deletedAt !== undefined) continue;
+        before.push({ itemId, ...(item.cardId !== undefined && { cardId: item.cardId }) });
+        await transaction.put('items', withChanges(item, { cardId }, now));
+      }
+      return before;
     });
   }
 }

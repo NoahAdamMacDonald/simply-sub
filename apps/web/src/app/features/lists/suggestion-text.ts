@@ -47,6 +47,11 @@ export function actionLine(action: SuggestionAction): ActionLine {
         when: `From ${dateText(action.on)}, as each one ends`,
       };
     case 'card':
-      return { title, from: [], when: '' };
+      // Nothing it costs changes but what comes back: the card says where the saving comes from (M9.3).
+      return {
+        title,
+        from: [],
+        when: `With ${action.cardTitle} instead of ${action.fromCardTitle ?? 'no card'}, from now on`,
+      };
   }
 }

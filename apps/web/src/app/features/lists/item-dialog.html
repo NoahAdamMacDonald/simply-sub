@@ -410,6 +410,52 @@
 
     <ss-tag-picker class="tags" [tagIds]="model().tagIds" (tagIdsChange)="setTags($event)" />
 
+    <!-- The card it's paid with (P6, M9.4): only the cards its seller takes, and the best one as a chip. -->
+    @if (!free()) {
+      <section class="payment" [attr.aria-labelledby]="ids + '-payment'">
+        <h3 [id]="ids + '-payment'">Payment</h3>
+        @if (cardNotTaken(); as title) {
+          <p class="card-note">
+            {{ title }} paid for it until now, but {{ subject().name }} doesn’t take it: choose
+            another card.
+          </p>
+        }
+        @if (hasCards()) {
+          <div class="row card-row">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic" class="card">
+              <mat-label>Paid with</mat-label>
+              <mat-select [formField]="form.cardId">
+                <mat-option value="">No card</mat-option>
+                @for (choice of cardChoices(); track choice.card.id) {
+                  <mat-option [value]="choice.card.id">{{ choice.label }}</mat-option>
+                }
+              </mat-select>
+              @if (cardMonth(); as month) {
+                <mat-hint>
+                  <span aria-hidden="true">{{ month.shown }}</span>
+                  <span class="visually-hidden">{{ month.spoken }}</span>
+                </mat-hint>
+              }
+            </mat-form-field>
+            @if (bestCardChip(); as best) {
+              <button type="button" class="best-card" (click)="useBestCard(best.cardId)">
+                <mat-icon aria-hidden="true">savings</mat-icon>
+                <span aria-hidden="true">{{ best.shown }}</span>
+                <span class="visually-hidden">{{ best.spoken }}</span>
+              </button>
+            }
+          </div>
+          @for (note of cardNotes(); track note) {
+            <p class="card-note">{{ note }}</p>
+          }
+        } @else {
+          <p class="note">
+            Add your cards on the Payment page to see what each one pays back here.
+          </p>
+        }
+      </section>
+    }
+
     <mat-form-field appearance="outline" class="notes" subscriptSizing="dynamic">
       <mat-label>Note</mat-label>
       <textarea matInput rows="3" [formField]="form.note"></textarea>

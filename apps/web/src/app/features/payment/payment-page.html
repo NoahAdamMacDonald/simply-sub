@@ -55,6 +55,14 @@
             } @else {
               <p class="no-limit">No limit</p>
             }
+            <!-- A month of the next 12 its charges take over its limit (P11, M9.4). -->
+            @if (tile.overLimit; as over) {
+              <p class="over-limit">
+                <mat-icon aria-hidden="true">warning</mat-icon>
+                <span aria-hidden="true">{{ over.shown }}</span>
+                <span class="visually-hidden">{{ over.spoken }}</span>
+              </p>
+            }
 
             <div class="subscriptions">
               @if (pricesLoading()) {
@@ -80,6 +88,12 @@
                   <p class="total">
                     <span aria-hidden="true">{{ total.shown }}</span>
                     <span class="visually-hidden">{{ total.spoken }}</span>
+                  </p>
+                }
+                @if (tile.net; as net) {
+                  <p class="net">
+                    <span aria-hidden="true">{{ net.shown }}</span>
+                    <span class="visually-hidden">{{ net.spoken }}</span>
                   </p>
                 }
                 @if (tile.unpriced > 0) {
@@ -117,9 +131,21 @@
           </li>
         }
       </ul>
-      @if (unassigned(); as text) {
-        <p class="unassigned">{{ text }}</p>
-      }
+      <div class="assign">
+        @if (unassigned(); as text) {
+          <p class="unassigned">{{ text }}</p>
+        }
+        <button
+          matButton="outlined"
+          type="button"
+          class="assign-button"
+          [disabled]="pricesLoading()"
+          (click)="assign()"
+        >
+          <mat-icon>auto_fix_high</mat-icon>
+          Assign best cards
+        </button>
+      </div>
     } @else {
       <ss-empty-state icon="credit_card" heading="No cards yet">
         Add the cards you pay for your subscriptions with, to see what each one earns back and costs
