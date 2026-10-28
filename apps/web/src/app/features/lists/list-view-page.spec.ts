@@ -213,7 +213,10 @@ describe('ListViewPage', () => {
     ]);
     expect(page().querySelector('.items h2')?.classList).toContain('visually-hidden');
     expect(text(card(netflix.id)?.querySelector('ss-tag-chip'))).toBe('Family');
-    expect(text(card(netflix.id)?.querySelector('ss-status-badge'))).toBe('Active');
+    // It renews by itself, and says when (M6.12).
+    expect(text(card(netflix.id)?.querySelector('ss-status-badge'))).toBe(
+      'Active Auto-renews Nov 12',
+    );
     expect(text(page().querySelectorAll('ss-item-card ss-status-badge')[0])).toBe(
       'Inactive · active from Dec 1, 2026',
     );
@@ -310,7 +313,7 @@ describe('ListViewPage', () => {
     ).toEqual([
       ['Plan Mullvad VPN, opens in a new tab', 'https://example.com/mullvad.vpn'],
       ['Cancel Mullvad VPN, opens in a new tab', 'https://mullvad.net/cancel'],
-      ['View in Search', '/search?q=Mullvad%20VPN'],
+      ['View in Search', '/search?q=Mullvad%20VPN&plan=mullvad.vpn'],
       ['Edit', `/lists/${work.id}/edit?item=${mullvad.id}`],
     ]);
     expect(button('Details: Mullvad VPN')?.getAttribute('aria-expanded')).toBe('true');
@@ -556,9 +559,14 @@ describe('ListViewPage', () => {
     await plant();
     await open(work.id);
     const link = () => page().querySelector('ss-optimizations-link a');
-    await until(() => spoken(link())?.startsWith('View optimizations (') === true);
+    await until(
+      () => link()?.getAttribute('aria-label')?.startsWith('View optimizations (') === true,
+    );
 
     expect(link()?.getAttribute('href')).toBe(`/lists/${work.id}/optimize`);
+    // Under 960 px it's compact, in the pinned bar with the search box (M6.13): the icon and the count.
+    expect(page().querySelector('.toolbar ss-optimizations-link a.compact')).toBe(link());
+    expect(spoken(link())).toBe('4');
     // Its name says the strongest's section, which the colour shows.
     expect(link()?.getAttribute('aria-label')).toBe(
       'View optimizations (4), the strongest: Recommended',
@@ -576,7 +584,7 @@ describe('ListViewPage', () => {
     }
     const next = suggestionSummary(suggestions, new Set(red.map((card) => card.fingerprint)));
     await until(() => link()?.getAttribute('data-strongest') === next.strongest);
-    expect(spoken(link())).toContain(`View optimizations (${next.count})`);
+    expect(link()?.getAttribute('aria-label')).toContain(`View optimizations (${next.count})`);
   });
 
   it('offers to add from the catalog or a custom subscription to an empty list', async () => {

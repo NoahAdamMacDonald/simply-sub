@@ -4,9 +4,17 @@
   class="link"
   [attr.data-strongest]="summary()?.strongest"
   [attr.aria-label]="label()"
+  [class.compact]="compact()"
   [routerLink]="['/lists', listId(), 'optimize']"
 >
-  @if (summary(); as summary) {
+  @if (compact()) {
+    <mat-icon>savings</mat-icon>
+    @if (summary(); as summary) {
+      @if (summary.count > 0) {
+        <span class="dot" aria-hidden="true"></span>{{ summary.count }}
+      }
+    }
+  } @else if (summary(); as summary) {
     @if (summary.count > 0) {
       <span class="dot" aria-hidden="true"></span>
       View optimizations ({{ summary.count }})

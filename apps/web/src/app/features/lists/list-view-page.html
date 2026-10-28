@@ -180,6 +180,10 @@
                 <span class="badge" aria-hidden="true">{{ filterCount() }}</span>
               }
             </button>
+            <!-- Under 960 px the side column's at the page's foot, so its View optimizations is here, compact (M6.13). -->
+            @if (!wide()) {
+              <ss-optimizations-link compact class="optimize" [listId]="listId() ?? ''" />
+            }
           </div>
 
           <div id="list-filters">
@@ -293,8 +297,11 @@
               </p>
             }
           </section>
-          <!-- How to pay less (P4, M8.2): coloured by the strongest suggestion. -->
-          <ss-optimizations-link [listId]="listId() ?? ''" />
+          <!-- How to pay less (P4, M8.2): coloured by the strongest suggestion, and pinned below the column's other
+               parts as they scroll away (M6.13). Under 960 px it's in the pinned bar. -->
+          @if (wide()) {
+            <ss-optimizations-link class="optimize" [listId]="listId() ?? ''" />
+          }
         </div>
       }
     </div>
