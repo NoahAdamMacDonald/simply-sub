@@ -173,8 +173,9 @@
   margin-bottom: 4px;
 }
 
-// The mini calendar under the totals: from 960 px under its heading, below that folded behind a button (P4).
-.list-calendar {
+// The mini calendar: below 960 px under the totals, folded behind a button; from there at the top of the side column,
+// under its heading (P4).
+.money .list-calendar {
   margin-top: 16px;
 }
 

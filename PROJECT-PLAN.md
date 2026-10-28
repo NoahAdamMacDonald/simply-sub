@@ -688,7 +688,7 @@ stays.
 **Since the feedback after M6.8:**
 - **Side column:** Types ("Streaming video: 2") comes first, then the feature summary, which folds after 8 rows.
   Since M7.4 the list's mini calendar follows the totals, folded behind a Calendar button under 960 px; a day or its
-  title opens the Calendar on that month, showing this list.
+  title opens the Calendar on that month, showing this list. From 960 px the Tab order reaches it after the cards.
 - **Cards:** a card shows its nickname over its plan, and its details have its note and View in Search.
 - **Search box:** finds a nickname or a note.
 - **Sort menu:** Features and Tags are always there, turned off when there's nothing to choose.

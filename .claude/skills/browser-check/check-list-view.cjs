@@ -415,9 +415,10 @@ async function openView(page, listId = LIST) {
       await page.screenshot({ path: shot('view'), fullPage: true });
       await axeCheck(page, `${label}, the list`);
 
-      // The Tab order: the header's ← Lists and Edit list (the feedback after M6.9), the search box, Sort, then each
-      // card's 📌 and details button. A click on the title focuses <main> (the skip link's target), so Tab starts
-      // from its top.
+      // The Tab order: the header's ← Lists, Edit list and Export (the feedback after M6.9, M7.5), at 360 px the
+      // folded mini calendar's button above the cards, the search box, Sort, then each card's 📌 and details button.
+      // From 960 px the mini calendar is in the side column, after the cards. A click on the title focuses <main> (the
+      // skip link's target), so Tab starts from its top.
       await view(page).locator('h1').click();
       const stops = [];
       for (let i = 0; i < 10; i++) {
@@ -425,20 +426,21 @@ async function openView(page, listId = LIST) {
         // A name with a colon comes back quoted, and a link's line ends in a colon.
         stops.push((await stop(page)).replace(/^'(.*)'$/, '$1').replace(/:$/, ''));
       }
-      const order = stops.slice(stops.indexOf('link "Lists"')).slice(0, 8);
+      const expected = [
+        'link "Lists"',
+        'link "Edit list"',
+        'button "Export"',
+        ...(viewport === NARROW ? ['button "Calendar"'] : []),
+        'textbox "Search this list"',
+        'button "Sort and filter"',
+        'button "Pin Crave Premium"',
+        'button "Details: Crave Premium"',
+        'button "Pin Netflix Standard"',
+      ];
+      const order = stops.slice(stops.indexOf('link "Lists"')).slice(0, expected.length);
       check(
-        `${label}: Tab goes ← Lists, Edit list, the search box, Sort, then each card's 📌 and details`,
-        order.join(' | ') ===
-          [
-            'link "Lists"',
-            'link "Edit list"',
-            'textbox "Search this list"',
-            'button "Sort and filter"',
-            'button "Pin Crave Premium"',
-            'button "Details: Crave Premium"',
-            'button "Pin Netflix Standard"',
-            'button "Details: Netflix Standard"',
-          ].join(' | '),
+        `${label}: Tab goes ← Lists, Edit list, Export, the search box, Sort, then each card's 📌 and details`,
+        order.join(' | ') === expected.join(' | '),
         stops.join(' | '),
       );
 

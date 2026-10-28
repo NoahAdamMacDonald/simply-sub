@@ -2635,7 +2635,9 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
   bottom sheet (Material's, loaded on first use), whose panel puts focus on that payment.
 - **Upcoming:** the next five charges from today for the lists shown, as charged.
 - **List view's mini calendar** (P4) follows the totals: the list's charges, with a day or the title opening the
-  Calendar on that month, showing that list. Under 960 px it folds behind a Calendar button (`aria-expanded`).
+  Calendar on that month, showing that list. Under 960 px it folds behind a Calendar button (`aria-expanded`). From
+  960 px it's at the top of the side column, after the cards in the page too, so the Tab order goes from the cards to
+  it as the columns read (fixed after M7.6: inside the totals' block, it came before the search box).
 - **`ClockService.today` moves on at midnight** (a timer for a second past the next local midnight, so a 25-hour
   night is fine) and when a hidden tab is shown again, as timers there run late. Home's and List view's mini calendars
   and the Calendar follow it into a new month when their month isn't set.

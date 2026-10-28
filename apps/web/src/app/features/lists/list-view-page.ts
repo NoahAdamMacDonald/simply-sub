@@ -1,3 +1,5 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   Component,
   DestroyRef,
@@ -84,6 +86,7 @@ import { ListFilters, listQuery, noListFilters, type ListFilterState } from './l
     MatPrefix,
     MatSuffix,
     MiniCalendar,
+    NgTemplateOutlet,
     PageHeader,
     RouterLink,
     TypeCounts,
@@ -199,6 +202,16 @@ export class ListViewPage {
     source: this.today,
     computation: (today) => monthOf(today),
   });
+  /**
+   * From 960 px, the side column on the right: the mini calendar moves into it, after the cards in the page, so the Tab
+   * order goes from the cards to it, as the columns read.
+   */
+  protected readonly wide = toSignal(
+    inject(BreakpointObserver)
+      .observe('(min-width: 960px)')
+      .pipe(map((state) => state.matches)),
+    { requireSync: true },
+  );
   /** Under 960 px the mini calendar folds (P4); from there it's always shown. */
   protected readonly calendarOpen = signal(false);
   /** This list's charges in the mini calendar's month. */
