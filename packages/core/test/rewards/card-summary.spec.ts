@@ -53,6 +53,20 @@ describe('cardSummary', () => {
     expect(november.thisMonthApprox).toBe(true);
   });
 
+  it('counts a foreign charge as posted, its FX fee in, and gives the net a month and the months over the limit', () => {
+    // Mullvad's €60 a year, renewing Nov 12 (Ontario's tax: the test catalog's Mullvad doesn't include it).
+    const mullvad = resolved('mullvad.vpn', { cardId: simplii.id, billing: yearly });
+    const netflix = resolved('netflix.standard', { cardId: simplii.id });
+    const tight = { ...simplii, monthlyLimit: 50 };
+    const november = cardSummary(tight, [mullvad, netflix], { ...context, today: '2026-11-03' });
+    const inCad = (60 * 1.13) / 0.664;
+    expect(november.thisMonth).toBeCloseTo(inCad * 1.025 + 18.99 * 1.13);
+    expect(november.net).toBeCloseTo((inCad / 12) * 1.025 * 0.985 + 18.99 * 1.13 * 0.985);
+    expect(november.overLimit.map((over) => [over.month, over.days])).toEqual([
+      ['2026-11', ['2026-11-12']],
+    ]);
+  });
+
   it('leaves out and counts what it has no rate for', () => {
     const mullvad = resolved('mullvad.vpn', { cardId: simplii.id, billing: yearly }, noRates);
     const summary = cardSummary(simplii, [mullvad], {

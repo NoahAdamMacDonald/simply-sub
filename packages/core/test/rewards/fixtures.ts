@@ -7,16 +7,43 @@ import {
   type ResolveContext,
   type ResolvedItem,
 } from '../../src';
-import { catalog } from '../catalog/catalog-files';
+import { catalog, edited } from '../catalog/catalog-files';
 import { listId } from '../user/fixtures';
 
-// Items and cards for the rewards specs: the real catalog, a Canadian in Ontario, and the ECB's rates of 2026-10-21.
+// Items and cards for the rewards specs: the test catalog with the networks its providers take, a Canadian in Ontario,
+// and the ECB's rates of 2026-10-21.
+
+const taken = (networks: string[], quote: string) => ({
+  networks,
+  url: 'https://example.com/payment-methods',
+  quotes: [quote],
+});
+
+/** Netflix takes Discover in the US only, Crave (the bundle's seller) Visa and Mastercard, Mullvad isn't known. */
+const sources = [
+  [
+    'data/providers/netflix.yaml',
+    {
+      CA: taken(['visa', 'mastercard', 'amex'], 'Visa, Mastercard, Amex'),
+      US: taken(['visa', 'mastercard', 'amex', 'discover'], 'Visa, Mastercard, Amex, Discover'),
+    },
+  ],
+  ['data/providers/crave.yaml', { CA: taken(['visa', 'mastercard'], 'Visa and Mastercard') }],
+  [
+    'data/providers/proton.yaml',
+    { GLOBAL: taken(['visa', 'mastercard', 'amex'], 'Visa, Mastercard and Amex') },
+  ],
+] as const;
+export const rewardsCatalog = sources.reduce(
+  (files, [file, networks]) => edited(files, file, ['acceptedNetworks'], networks),
+  catalog(),
+);
 
 export const today = '2026-10-26';
 export const ontario = { country: 'CA', subdivision: 'CA-ON' };
 
 export const canadian: ResolveContext = {
-  catalog: buildCatalogData(readCatalogSource(catalog()), 'https://sub.simplely.ca/icons/'),
+  catalog: buildCatalogData(readCatalogSource(rewardsCatalog), 'https://sub.simplely.ca/icons/'),
   customSubs: new Map(),
   country: 'CA',
   currency: 'CAD',
@@ -87,6 +114,30 @@ export const simplii: PaymentCard = {
   cashbackPercent: 1.5,
   fxFeePercent: 2.5,
   monthlyLimit: 500,
+  ...stamps,
+};
+
+/** A CAD Discover card with 2% back, a 2.5% FX fee and no limit. */
+export const discoverCard: PaymentCard = {
+  id: '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d41',
+  name: 'Discover It',
+  type: 'credit',
+  network: 'discover',
+  currency: 'CAD',
+  cashbackPercent: 2,
+  fxFeePercent: 2.5,
+  ...stamps,
+};
+
+/** A CAD debit card with no cash back and no FX fee. */
+export const debitCard: PaymentCard = {
+  id: '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d42',
+  name: 'Everyday Debit',
+  type: 'debit',
+  network: 'interac',
+  currency: 'CAD',
+  cashbackPercent: 0,
+  fxFeePercent: 0,
   ...stamps,
 };
 

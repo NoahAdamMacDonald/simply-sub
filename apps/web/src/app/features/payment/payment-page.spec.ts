@@ -223,8 +223,8 @@ describe('PaymentPage', () => {
         name: 'Simplii Cashback Mastercard',
         badges: ['Mastercard', 'Credit'],
         rates: '1.5% cash back · FX fee 2.5%',
-        // $22 + 5% GST, and €60 with VAT included.
-        limit: '≈ $117.26 of $500.00',
+        // $22 + 5% GST, and €60 with VAT included plus the card's 2.5% FX fee on it.
+        limit: '≈ $119.62 of $500.00',
         paid: ['Crave Premium $23.10', 'Mullvad VPN ≈ $7.85'],
         total: '≈ $30.95 / mo with tax',
         muted: undefined,
@@ -244,7 +244,7 @@ describe('PaymentPage', () => {
       'Everyday, this month against its limit',
     );
     expect(text(page().querySelector('.limit-total .visually-hidden'))).toBe(
-      'about $117.26 of $500.00',
+      'about $119.62 of $500.00',
     );
     expect(text(page().querySelector('.unassigned'))).toBe('1 subscription has no card');
   });

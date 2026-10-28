@@ -2220,6 +2220,10 @@ network-specific rates if that ever changes. Watch out for **dynamic currency
 conversion** (a merchant charging in your currency at its own rate). It's rare for subscriptions, so it's only
 noted in a help tooltip.
 
+**As built (M9.3):** `packages/core/src/rewards/`, with the user's choices in section 14 (M9.3): the charge is in
+the item's own currency (Proton's buyer-chosen lists: pickPrice's; Mullvad: EUR), every charge carries it
+(`Charge.charged`), and the monthly figures are with tax (P4).
+
 **Choosing a card for each subscription (optimizer):**
 - Maximize total monthly `cashback − fxFee` across all items, subject to each card's `monthlyLimit` and network acceptance.
 - Greedy approach: sort items by the biggest difference between their best and second-best card, assign each
@@ -2268,7 +2272,8 @@ Lives in `packages/core/src/optimizer/`. It's a **pure function**:
 4. Convert to an **add-on** of another item's plan (for example a second Netflix account becomes an extra member).
 5. Replace with a **bundle** or a **suite plan** (section 4.4) that covers two or more items.
 6. Remove.
-7. (Phase 4) Move to a better card (an eligible network, within limits; section 9.3).
+7. (Phase 4) Move to a better card (an eligible network, within limits; section 9.3). Built in M9.3 as a free
+   saving of its own (section 14).
 
 ### 10.4 Search
 - Enumerate combinations of actions (lists are usually under about 15 items, and each item has only a few
@@ -2563,12 +2568,58 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 ## 14. Open questions
 
 **Still open**
-1. **Buyer-chosen charge currency** (decide in M9): some providers let the buyer pick the currency they're charged
-   in. Proton sells fixed price lists in USD, CAD, EUR and CHF (stored as `GLOBAL` prices in each currency, with
-   `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
-   about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
-   M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
-   CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+None.
+
+**Resolved (2026-10-28, M9.3)**
+- **Buyer-chosen charge currency** (the old open question 1), the user's choices:
+  - **Proton** (fixed price lists in USD, CAD, EUR and CHF, the buyer picks one): a card's FX fee is judged against the
+    item's own currency, pickPrice's, which its charges and totals already use: the user's own when Proton sells in
+    it (a Canadian pays CAD), else `billingCurrency` (USD). A card in another currency pays its FX fee. Someone who
+    pays in another currency records it with "I pay a different price" in that currency, and the fee follows it.
+  - **Mullvad** (one fixed €5 a month, cards also charged in about 20 currencies at its own rate): charged in EUR, as
+    stored, so a card in another currency pays its FX fee on the ECB's conversion (CA$94.17 + 2.5% = CA$96.52 for a
+    year). Mullvad's own conversion cost CA$98.04 on 2026-10-26, 4.1% over the ECB's, more than a 2.5% fee. Its blog
+    (2023-10-04, "Select your local currency when paying for Mullvad to avoid fees!") says the local price is "the
+    equivalent of €5" at "the correct exchange rate ... without any extra fees", which that checkout didn't bear
+    out. The item dialog's card hint says a checkout that offers your currency converts at its own rate.
+  - So every charge now says what the provider charges, in its currency: `Charge.charged` (`{ amount, currency }`,
+    tax included, the prices' `source` before any conversion). Parts charged in different currencies are separate
+    charges, which no real item has.
+- **The maths** (`packages/core/src/rewards/`, pure and tested):
+  - `networkRate` (the ECB's for every network, the one place for a network's own) and `cardCost`: the charge with
+    tax in the card's currency, the FX fee when the currencies differ, the posted amount (what counts against the
+    limit), cash back on it, and the net; "estimated" when converted.
+  - **Eligibility** (`cardAcceptance`, `eligibleCards`): the networks the seller takes where the item is bought
+    (`ResolvedItem.acceptedNetworks`, from core's `acceptedNetworksIn`: the region, its group, GLOBAL; a bundle's
+    seller's), every card where they aren't known (a custom subscription's never are).
+  - **An item's charges on a card** (`itemLedger`, `itemOnCard`): the next 12 months for savings (PROJECT-PLAN
+    §3.1), and what's posted to it in each of the 12 calendar months from this one for its limit, an annual plan in
+    the month it's charged.
+  - **Limits** (`cardLoads`, `overLimits`, `fits`): a month whose posted charges go over a card's limit, with the
+    days past it (the one that goes over, and later ones that month), for P10's days and P11's tiles.
+  - **A month on a card** (`monthlyOnCard`, `cardChoices`, `bestCard`): today's monthly equivalent with tax, its FX
+    fee and cash back, so net = gross + FX fee − cash back (P11's acceptance), for P4's figures and P6's select and
+    Best card chip.
+  - **Assign best cards** (`assignCards`): the most cash back less FX fees over the next 12 months, within each
+    card's limit in every one of the 12 months and the seller's networks: the items with the most to lose (best card
+    against the next; an item with one card possible first) take their best card with room, then moves and swaps
+    while they save more. An item with a card always keeps one, moving only to a better card or one its seller
+    takes; one with no card gets one only when it pays back more than its FX fees; an item in a list with unsaved
+    edits keeps its card, which its charges count against.
+  - The tile's summary (`cardSummary`) now posts this month's charges with their FX fees, and gives the net a month
+    and the months over the limit.
+- **The optimizer's card action** (section 10.3's 7th, `optimizer/card-suggestions.ts`): "Pay for X with a better card"
+  as a free saving, for any item, an Essential plan's too: its seller's card that leaves the least to pay over the next
+  12 months, with room for its charges on top of what's on the card (the other lists' items, `cardLoads` in the
+  input, and this list's). The items it saves the most for choose first, and each suggestion's charges count against
+  the cards the next ones look at, never freeing room, so they all fit, alone or together. The action names the card
+  (`cardTitle`) and the one it's paid with now (`fromCardTitle`); Apply sets the draft item's `cardId` and nothing
+  else; the fingerprint includes both cards, so a dismissal ends when the item's card changes. "Save up to" adds the
+  card savings of the items the best plan keeps.
+- **Tests:** 34 more in core (the formula, Mullvad's euros, a USD card, eligibility per region, limits and their
+  days, the assignment within limits with fixed items, the monthly figures and the best card, and the optimizer's
+  card suggestions with Apply).
+
 
 **Resolved (2026-10-28, M9.2)**
 - **`acceptedNetworks` is per region, quoted** (the user's choice): a map keyed like `billingCurrency` (a country, a

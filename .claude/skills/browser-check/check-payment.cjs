@@ -420,8 +420,8 @@ async function plantList(page, cardId) {
         tile.title === 'Everyday' &&
           JSON.stringify(tile.badges) === JSON.stringify(['Mastercard', 'Credit']) &&
           tile.rates === '1.5% cash back · FX fee 2.5%' &&
-          // Netflix's $19.94 on the 1st and Mullvad's CA$94.16 on the 2nd.
-          tile.limit === '≈ $114.10 of $500.00',
+          // Netflix's $19.94 on the 1st, and Mullvad's CA$94.16 on the 2nd with the card's 2.5% FX fee.
+          tile.limit === '≈ $116.46 of $500.00',
         JSON.stringify(tile),
       );
       check(

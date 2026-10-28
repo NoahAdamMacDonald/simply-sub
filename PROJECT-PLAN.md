@@ -211,7 +211,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 |---|---|---|
 | M9.1 | Cards repo, Payment page and card dialog (P11). As built: `CardsRepository` (with `usage` and `removeWithItems`), the page's tiles from core's `cardSummary` and `monthlyWithTax`, and the card dialog (`CardEditor`) on core's `cardFormIssues`, with `cardUsage` and `withoutCard` for deleting one (BLUEPRINT §14) | P11 criteria met |
 | M9.2 | `acceptedNetworks` in the data and the extraction pipeline (the schema has validated the field since M1.1). As built: per region, each with its page and quotes (the user's choice), core's `networksNamedIn`; read for all ten providers (five name none); the price-research skill and §6.5's extraction record it, and the nightly bot rechecks it (BLUEPRINT §14) | The pipeline fills it |
-| M9.3 | core: eligibility, FX and cash-back maths, card assignment, limit checks (BLUEPRINT §9.3) | Tests pass |
+| M9.3 | core: eligibility, FX and cash-back maths, card assignment, limit checks (BLUEPRINT §9.3). As built: core's `rewards/` (`networkRate`, `cardCost`, `cardAcceptance`, `itemOnCard`, `cardLoads`, `overLimits`, `monthlyOnCard`, `bestCard`, `assignCards`), `Charge.charged` and `ResolvedItem.acceptedNetworks`, and the optimizer's `card` action; open question 1 decided with the user (BLUEPRINT §14) | Tests pass |
 | M9.4 | Card select in the item dialog, net-cost displays, over-limit warnings | All visible on P4, P6, P10 and P11 |
 
 ### M10 — Extras (Phase 5)
@@ -236,7 +236,7 @@ These live in `packages/core` as pure functions, so every page computes them the
 | **Item price** | The price override if one is set and the charge is dated before its `until` (if any); otherwise the picked plan price plus each picked add-on price × its quantity. Bundle items use the bundle price. An add-on not sold for the item's billing period is billed on its own (M4.6: Disney+'s monthly extra member on a yearly plan), so its charges follow its period | Charges |
 | **Sales tax** | Added to the item price for a buyer in a tax-added region (Canada, US) at their rate: the built-in rate for their province, or their own `salesTaxPercent`. Typed amounts (a custom plan, a price override) already include it unless marked `plusTax` (BLUEPRINT §4.8) | Charges |
 | **Monthly equivalent** | Price per month: year ÷ 12, week × 52 ÷ 12, day × 365 ÷ 12, each ÷ `intervalCount`. Before tax, like the price tags | Sorting, the price filter, "≈ $x/mo" hints |
-| **Charge** | One scheduled payment: `{ date, amount, tax, currency, itemId, listId, converted, manual }`. `amount` includes `tax`, the sales tax part | Calendar and all totals |
+| **Charge** | One scheduled payment: `{ date, amount, tax, currency, itemId, listId, converted, manual, charged }`. `amount` includes `tax`, the sales tax part; `charged` is the same in the currency the provider charges it in, before any conversion, which a payment card's FX fee is judged against (M9.3) | Calendar and all totals |
 | **This month** | Sum of the charges dated in the current calendar month | Monthly budget bars, list cards |
 | **This year** | Sum of the charges dated in the current calendar year (Jan 1 – Dec 31) | Annual budget bars, list cards |
 | **Next 12 months** | Sum of the charges from today up to, but not including, the same day next year (so a yearly plan renewing today counts once) | An item's "% of list", optimizer savings |
@@ -358,6 +358,7 @@ export interface ResolvedItem {        // as built in M4.6, M6.1 and M7.1
   status: ItemStatus;      // M7.1: { kind: 'active' | 'inactive'; activeFrom?; endsOn?; manual }
   nextCharge?: Charge;     // M7.1: with tax; none for a free plan or once nothing is left
   effectiveRanks: Record<RankKey, Rank>; // M6.1: each provided key's rank, override > profile > not-ranked
+  acceptedNetworks?: CardNetwork[]; // M9.3: the seller's where it's bought; left out when unknown (custom too)
   // cardId is the item's own (item.cardId), Phase 4
 }
 

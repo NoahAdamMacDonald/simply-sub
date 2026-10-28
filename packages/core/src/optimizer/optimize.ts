@@ -9,6 +9,7 @@ import {
   type Checks,
 } from './evaluate';
 import { fingerprintOf, itemSignature } from './fingerprint';
+import { cardSuggestions } from './card-suggestions';
 import { buildModel, savingEpsilon, type OptimizerInput, type OptimizerModel } from './model';
 import { searchPlans } from './search';
 import {
@@ -24,7 +25,9 @@ import {
 // their own (PROJECT-PLAN P14). Each section lists its own plan's cards of its severity: within a section the cards
 // never conflict, and a card in a looser section can be an alternative to one in a stricter section for the same
 // item (Disney+ billed yearly, or Standard billed yearly). A looser plan's card that gives up less than its section
-// is left out: it's a stricter plan's card, or an alternative to one, rearranged around the looser changes.
+// is left out: it's a stricter plan's card, or an alternative to one, rearranged around the looser changes. With the
+// user's payment cards, a better card for an item is a free saving of its own (M9.3, card-suggestions.ts), and "Save up
+// to" adds those of the items the best plan keeps.
 
 /** The suggestions for a list, and what its best plan saves. */
 export function optimize(input: OptimizerInput): OptimizerResult {
@@ -46,6 +49,10 @@ export function optimize(input: OptimizerInput): OptimizerResult {
       if (suggestion?.severity === severities[level]) suggestions.push(suggestion);
     }
   });
+  const cards = input.cards ?? [];
+  const byCard =
+    cards.length > 0 ? cardSuggestions(model, cards, input.cardLoads, input.context, list) : [];
+  suggestions.push(...byCard);
   suggestions.sort(
     (a, b) =>
       severities.indexOf(a.severity) - severities.indexOf(b.severity) ||
@@ -53,16 +60,24 @@ export function optimize(input: OptimizerInput): OptimizerResult {
       (a.fingerprint < b.fingerprint ? -1 : 1),
   );
   const best = evaluate(model, checks, plans[3]);
-  const bestSavings = model.baseline - best.cost;
+  const planSavings = model.baseline - best.cost;
+  const changes = [...new Set(plans[3])].filter((option) => !isKeep(model, option));
+  // A better card for each item the best plan keeps: one it removes or replaces isn't paid for any more.
+  const replaced = new Set(changes.flatMap((option) => replacedItems(model, option)));
+  const cardKept = byCard.filter((suggestion) =>
+    suggestion.actions.every(
+      (action) => action.kind === 'card' && !replaced.has(action.item.itemId),
+    ),
+  );
+  const bestSavings =
+    (planSavings >= savingEpsilon ? planSavings : 0) +
+    cardKept.reduce((total, suggestion) => total + suggestion.savings, 0);
   return {
     suggestions,
-    bestSavings: bestSavings >= savingEpsilon ? bestSavings : 0,
+    bestSavings,
     bestEstimated:
-      bestSavings >= savingEpsilon &&
-      estimated(
-        model,
-        [...new Set(plans[3])].filter((option) => !isKeep(model, option)),
-      ),
+      (planSavings >= savingEpsilon && estimated(model, changes)) ||
+      cardKept.some((suggestion) => suggestion.estimated),
     currency: input.context.currency,
     next12: model.baseline,
     search: exhaustive ? 'exhaustive' : 'greedy',
@@ -117,6 +132,22 @@ function cardsOf(model: OptimizerModel, checks: Checks, plan: Int32Array): numbe
     cards.set(root, [...(cards.get(root) ?? []), change]);
   }
   return [...cards.values()];
+}
+
+/** The items an option ends: one it removes, or makes an extra member, or puts in a bundle or suite. */
+function replacedItems(model: OptimizerModel, option: number): string[] {
+  return model.options[option].actions.flatMap((action) => {
+    switch (action.kind) {
+      case 'remove':
+      case 'extra-member':
+        return [action.item.itemId];
+      case 'bundle':
+      case 'suite':
+        return action.items.map((item) => item.itemId);
+      default:
+        return [];
+    }
+  });
 }
 
 function isKeep(model: OptimizerModel, option: number): boolean {

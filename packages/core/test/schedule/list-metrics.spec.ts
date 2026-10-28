@@ -105,6 +105,7 @@ describe('chargeTotal', () => {
     listId,
     converted: false,
     manual: false,
+    charged: { amount, currency: 'CAD' },
     ...extra,
   });
 
@@ -268,6 +269,7 @@ describe('itemStatus', () => {
     listId,
     converted: false,
     manual,
+    charged: { amount: 10, currency: 'CAD' },
   });
 
   it('is active or inactive from its dates, with when it starts again', () => {

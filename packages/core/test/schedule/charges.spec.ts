@@ -87,6 +87,7 @@ describe('itemCharges', () => {
         listId,
         converted: false,
         manual: false,
+        charged: { amount: 18.99 * 1.13, currency: 'CAD' },
       });
       expect(round(charge.amount)).toBe(21.4587);
     });
@@ -233,6 +234,49 @@ describe('itemCharges', () => {
       expect(
         itemCharges(thirty, { from: '2026-05-01', to: '2026-06-01' }, { country: 'GB' }),
       ).toHaveLength(2);
+    });
+  });
+
+  describe('what the provider charges', () => {
+    it('is the price in its own currency with the tax, before it was converted', () => {
+      const dollars = chargeable(
+        {},
+        {
+          price: picked(13.79, {
+            native: false,
+            source: { region: 'US', amount: 9.99, currency: 'USD' },
+            fx: { rate: 1.38, date: '2026-10-21', source: 'ECB' },
+          }),
+        },
+      );
+      const [charge] = itemCharges(dollars, november, alberta);
+      expect([round(charge.amount), charge.currency]).toEqual([round(13.79 * 1.05), 'CAD']);
+      expect([round(charge.charged.amount), charge.charged.currency]).toEqual([10.4895, 'USD']);
+    });
+
+    it('is a charge of its own for a part the provider charges in another currency', () => {
+      const mixed = chargeable(
+        {},
+        {
+          addOns: [
+            {
+              id: 'x.extra',
+              name: 'Extra',
+              quantity: 2,
+              price: picked(6.9, {
+                native: false,
+                source: { region: 'US', amount: 5, currency: 'USD' },
+                fx: { rate: 1.38, date: '2026-10-21', source: 'ECB' },
+              }),
+            },
+          ],
+        },
+      );
+      const charges = itemCharges(mixed, november, { country: 'GB' });
+      expect(charges.map(({ amount, currency, charged }) => [amount, currency, charged])).toEqual([
+        [18.99, 'CAD', { amount: 18.99, currency: 'CAD' }],
+        [13.8, 'CAD', { amount: 10, currency: 'USD' }],
+      ]);
     });
   });
 

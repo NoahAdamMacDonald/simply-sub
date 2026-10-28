@@ -1,10 +1,11 @@
 import { bundleFeatures } from '../catalog/bundle-deal';
+import { acceptedNetworksIn } from '../catalog/card-networks';
 import { isoDateSchema } from '../catalog/formats';
 import type { FxRates } from '../catalog/convert';
 import { pickPrice, typedPrice, type PickedPrice, type PriceContext } from '../catalog/pick-price';
 import { planCategories } from '../catalog/plan-categories';
 import type { Price } from '../catalog/price';
-import type { Plan } from '../catalog/provider';
+import type { CardNetwork, Plan } from '../catalog/provider';
 import { catalogIconFile, type CatalogData, type SnapshotProvider } from '../catalog/snapshot';
 import type { IsoDate } from '../dates/iso-date';
 import { providedKeys, type RankKey } from '../ranking/rank-keys';
@@ -109,6 +110,11 @@ export interface ResolvedItem {
   status: ItemStatus;
   /** Its first charge on or after today, sales tax included; none when it has none to come (M7.1). */
   nextCharge?: Charge;
+  /**
+   * The card networks the seller (a catalog plan's provider, a bundle's soldBy) takes where it's bought (BLUEPRINT
+   * §9.3, M9.3). Left out when they aren't known there, and for a custom subscription: every card is then allowed.
+   */
+  acceptedNetworks?: readonly CardNetwork[];
 }
 
 /**
@@ -194,6 +200,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         if (!addOnPrice) return unresolved('no-price');
         addOns.push({ id, name: addOn.name, quantity, price: addOnPrice });
       }
+      const networks = acceptedNetworksIn(provider, region);
       parts = {
         providerId: provider.id,
         planId: plan.id,
@@ -204,6 +211,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         addOns,
         features: plan.features,
         categories: [...planCategories(plan, provider)],
+        ...(networks && { acceptedNetworks: networks }),
       };
       break;
     }
@@ -220,6 +228,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         const plan = provider?.plans.find((candidate) => candidate.id === planId);
         return provider && plan ? [{ provider, plan }] : [];
       });
+      const networks = acceptedNetworksIn(seller, region);
       parts = {
         providerId: seller.id,
         bundleId: bundle.id,
@@ -237,6 +246,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         categories: [
           ...new Set(plans.flatMap(({ provider, plan }) => planCategories(plan, provider))),
         ],
+        ...(networks && { acceptedNetworks: networks }),
       };
       break;
     }

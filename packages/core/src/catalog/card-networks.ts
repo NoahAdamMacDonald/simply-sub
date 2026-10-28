@@ -1,8 +1,10 @@
-import type { CardNetwork } from './provider';
+import type { CardNetwork, Provider } from './provider';
+import { globalRegion, groupsOf } from './regions';
 
-// The card networks (BLUEPRINT §9): their names, and how a provider's page writes them, so validation can check that a
-// region's quotes name its networks, and the nightly check can find a network a page names that the catalog doesn't
-// list. This file imports no Zod, so the Payment page and the bot can use it without loading the schemas.
+// The card networks (BLUEPRINT §9): their names, the ones a provider takes in a region, and how a provider's page writes
+// them, so validation can check that a region's quotes name its networks, and the nightly check can find a network a
+// page names that the catalog doesn't list. This file imports no Zod, so the Payment page and the bot can use it
+// without loading the schemas.
 
 /** Each network's name, as a card's badge and the card dialog's menu say it. */
 export const cardNetworkNames: Readonly<Record<CardNetwork, string>> = {
@@ -41,4 +43,20 @@ export function namesNetwork(text: string, network: CardNetwork): boolean {
 /** The networks `text` names, in cardNetworks' order. */
 export function networksNamedIn(text: string): CardNetwork[] {
   return cardNetworks.filter((network) => namesNetwork(text, network));
+}
+
+/**
+ * The networks `provider` takes in `region` (BLUEPRINT §9.3): its own entry, else its group's (EU), else GLOBAL's.
+ * Undefined when they aren't known there, and every card is then allowed.
+ */
+export function acceptedNetworksIn(
+  provider: Pick<Provider, 'acceptedNetworks'>,
+  region: string,
+): readonly CardNetwork[] | undefined {
+  const byRegion = provider.acceptedNetworks;
+  if (!byRegion) return undefined;
+  const where = [region, ...groupsOf(region), globalRegion].find((code) =>
+    Object.hasOwn(byRegion, code),
+  );
+  return where === undefined ? undefined : byRegion[where].networks;
 }

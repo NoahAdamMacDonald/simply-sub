@@ -1,4 +1,5 @@
 import type { PickedPrice } from '../catalog/pick-price';
+import type { Charged } from '../schedule/charges';
 import { salesTaxOn } from '../tax/charge-tax';
 import { buyerTaxPlace, type TaxPlace } from '../tax/sales-tax-rate';
 import type { ResolvedItem } from './resolved';
@@ -63,14 +64,48 @@ export function monthlyWithTax(
   currency: string,
   place: TaxPlace,
 ): MonthlyWithTax | undefined {
+  const parts = monthlyParts(item, currency, place);
+  return (
+    parts && {
+      amount: parts.reduce((total, part) => total + part.amount, 0),
+      converted: parts.some((part) => part.converted),
+    }
+  );
+}
+
+/** A part of what an item costs a month today with tax: its price, or an add-on's, or its price override. */
+export interface MonthlyPart {
+  /** In the user's currency, sales tax included. */
+  amount: number;
+  /** The same in the currency the provider charges it in, before any conversion: what a card works on (§9.3). */
+  charged: Charged;
+  converted: boolean;
+}
+
+/**
+ * The parts of monthlyWithTax, a price at a time (an add-on × its quantity), or undefined when one is in another
+ * currency for want of a rate. A free part is in it, at 0.
+ */
+export function monthlyParts(
+  item: ResolvedItem,
+  currency: string,
+  place: TaxPlace,
+): MonthlyPart[] | undefined {
   if (monthlyIn(item, currency) === undefined) return undefined;
   const taxPlace = buyerTaxPlace(place, item.region);
-  let amount = 0;
-  for (const { price, count } of partsToday(item)) {
+  return partsToday(item).map(({ price, count }) => {
     const monthly = price.monthlyEquivalent * count;
-    amount += monthly + salesTaxOn(monthly, price, taxPlace);
-  }
-  return { amount, converted: pricesToday(item).some((price) => !price.native) };
+    // The source price's share of the converted one: its amount over the picked amount, 1 when nothing was converted.
+    const charged = price.amount === 0 ? 0 : (monthly * price.source.amount) / price.amount;
+    return {
+      amount: monthly + salesTaxOn(monthly, price, taxPlace),
+      charged: {
+        amount: charged + salesTaxOn(charged, price, taxPlace),
+        currency: price.source.currency,
+      },
+      converted: !price.native,
+    };
+  });
 }
 
 /** The prices that make up its monthly equivalent: the override while it applies, else its price and add-ons. */

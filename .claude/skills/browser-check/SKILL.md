@@ -360,7 +360,7 @@ widths, keyboard only:
 - the card typed in field by field (Type and Network by typeahead), stored as typed (read from IndexedDB), the
   snackbar and focus on its ✎;
 - Work Related written to IndexedDB (Netflix Standard on the 1st and Mullvad VPN on the 2nd of every month and year,
-  paid with it; Crave Premium with none): the tile's badges, rates, this month's "≈ $114.10 of $500.00", the
+  paid with it; Crave Premium with none): the tile's badges, rates, this month's "≈ $116.46 of $500.00" (Mullvad's euros with the 2.5% FX fee), the
   subscriptions with what they cost a month with tax ("≈ $27.79 / mo with tax"), the bar's name, and "1 subscription
   has no card";
 - ✎ clearing the limit ("No limit", the field gone from the record), and focus back on ✎;

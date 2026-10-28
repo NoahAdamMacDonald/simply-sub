@@ -61,7 +61,8 @@ export interface SuggestedItem {
  * - `remove`: the item ends at its next charge.
  * - `extra-member`: the item ends, and its person becomes an extra member (an add-on) on `host`.
  * - `bundle` and `suite`: the items are replaced by one bundle or suite plan.
- * - `card` (Phase 4): a better payment card. Not suggested yet: M9 fills it in (§9.3).
+ * - `card` (M9.3): pay with a better payment card (§9.3): `cardId`, and the cards' names, the one it's paid with now
+ *   when it has one.
  */
 export type SuggestionAction =
   | { kind: 'interval'; item: SuggestedItem; to: PickedPrice; on: IsoDate }
@@ -104,7 +105,13 @@ export type SuggestionAction =
       to: PickedPrice;
       on: IsoDate;
     }
-  | { kind: 'card'; item: SuggestedItem; cardId: string };
+  | {
+      kind: 'card';
+      item: SuggestedItem;
+      cardId: string;
+      cardTitle: string;
+      fromCardTitle?: string;
+    };
 
 export type SuggestionActionKind = SuggestionAction['kind'];
 

@@ -13,6 +13,7 @@ import type { TaxPlace } from '../tax/sales-tax-rate';
 import { keptBillingDay } from '../user/item-form';
 import { itemTitle } from '../user/item-text';
 import type { ItemSource, ListItem } from '../user/list-item';
+import type { CardLoads } from '../rewards/card-limits';
 import type { PaymentCard } from '../user/payment-card';
 import type { Rank } from '../user/rank';
 import { resolveItem, type ResolveContext, type ResolvedItem } from '../user/resolved';
@@ -43,8 +44,13 @@ export interface OptimizerInput {
   /** The catalog file of each region the items are priced in (ResolvedItem.region), as CatalogStore.catalogFor. */
   catalogs: ReadonlyMap<string, CatalogData>;
   context: OptimizerContext;
-  /** The user's payment cards (Phase 4): M9 suggests better ones (BLUEPRINT §9.3, §10.3's 7th action). */
+  /** The user's payment cards: a better one for an item is a free saving (BLUEPRINT §9.3, §10.3's 7th action, M9.3). */
   cards?: readonly PaymentCard[];
+  /**
+   * What the items in the other lists post to each card in each of the 12 calendar months from this one (core's
+   * cardLoads), so a card's room is what they leave.
+   */
+  cardLoads?: CardLoads;
 }
 
 /** A cost over a range: in the user's currency, whether it includes a converted amount, and any in another currency. */

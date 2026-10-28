@@ -22,7 +22,7 @@ export type DraftEdit =
   | { kind: 'remove'; itemId: string }
   | { kind: 'add'; fields: NewItemFields };
 
-type ChangedField = 'source' | 'billing' | 'priceOverride';
+type ChangedField = 'source' | 'billing' | 'priceOverride' | 'cardId';
 
 /**
  * The edits that apply `suggestion` to a draft whose items (the ones it hasn't removed) are `items`, by id. Undefined
@@ -118,7 +118,8 @@ export function suggestionEdits(
         break;
       }
       case 'card':
-        // M9 (BLUEPRINT §9.3): the item's card. Never suggested yet.
+        // Paid with a better card (M9.3), from now on: nothing else changes.
+        change(action.item.itemId, { cardId: action.cardId });
         break;
     }
   }
@@ -129,7 +130,13 @@ export function suggestionEdits(
     edits.push({
       kind: 'change',
       itemId,
-      changes: { source: item.source, billing: item.billing, priceOverride: item.priceOverride },
+      changes: {
+        source: item.source,
+        billing: item.billing,
+        priceOverride: item.priceOverride,
+        // Only a card change names the card, so an edit never clears one.
+        ...(item.cardId !== items.get(itemId)?.cardId && { cardId: item.cardId }),
+      },
     });
   }
   for (const itemId of removed) edits.push({ kind: 'remove', itemId });
