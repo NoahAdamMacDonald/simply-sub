@@ -62,10 +62,17 @@ const day = new Intl.DateTimeFormat('en', {
   timeZone: 'UTC',
 });
 
+const monthName = new Intl.DateTimeFormat('en', {
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+
 /** Money and dates as the app writes them for a Canadian. */
 export const format: ExportFormat = {
   money: (amount, currency) => amount.toLocaleString('en-CA', { style: 'currency', currency }),
   date: (date) => day.format(new Date(`${date}T00:00:00Z`)),
+  month: (month) => monthName.format(new Date(`${month}-01T00:00:00Z`)),
 };
 
 function picked(amount: number, extra: Partial<PickedPrice> = {}): PickedPrice {

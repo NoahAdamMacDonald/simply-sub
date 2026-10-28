@@ -316,6 +316,8 @@ describe('CalendarPage', () => {
       'Calendar (.ics)',
       'Payment schedule (.csv)',
       'Excel (.xlsx)',
+      'JSON (.json)',
+      'Text (.txt)',
     ]);
     choices[1].click();
     await until(() => downloads.length === 2, 5000);
@@ -355,12 +357,17 @@ describe('CalendarPage', () => {
       copy.querySelectorAll('[aria-hidden="true"]').forEach((hidden) => hidden.remove());
       return text(copy);
     });
+    // Into a calendar of their own, made the first time (M7.9).
     expect(steps).toEqual([
       'Open Proton Calendar on the web, at calendar.proton.me, opens in a new tab.',
+      'The first time, make a calendar for them: beside My calendars, select +, then Create calendar, and name it Simply Sub.',
       'Open Settings, then All settings, then Import/export.',
-      'Select Import from ICS, then choose the file and the calendar to add the payments to.',
+      'Select Import from ICS, then choose the file and the Simply Sub calendar.',
       'Select Import.',
     ]);
+    expect(text(dialog?.querySelector('.note'))).toBe(
+      "Its calendar's colour colours every payment: the app colours a whole calendar, not each event. Each payment lists its tags in its details.",
+    );
     // Focus starts on the heading, for the steps to be read in order.
     await until(() => document.activeElement === dialog?.querySelector('h2'));
 

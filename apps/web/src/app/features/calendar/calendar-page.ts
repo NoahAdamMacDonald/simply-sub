@@ -132,11 +132,13 @@ export class CalendarPage {
 
   protected readonly weekdays = weekdays;
   protected readonly calendarApps = calendarApps;
-  /** Export to file (P10, M7.5): the calendar first, as the main button does. */
+  /** Export to file (P10, M7.5): the calendar first, as the main button does; JSON and Text since M7.9. */
   protected readonly exportChoices: readonly SplitButtonItem[] = [
     { id: 'ics', label: 'Calendar (.ics)', icon: 'event' },
     { id: 'csv', label: 'Payment schedule (.csv)', icon: 'table_view' },
     { id: 'xlsx', label: 'Excel (.xlsx)', icon: 'grid_on' },
+    { id: 'json', label: 'JSON (.json)', icon: 'data_object' },
+    { id: 'txt', label: 'Text (.txt)', icon: 'description' },
   ];
   protected readonly monthNames = monthNames;
   protected readonly agenda = toSignal(

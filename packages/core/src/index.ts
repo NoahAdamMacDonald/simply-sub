@@ -48,6 +48,7 @@ export * from './export/export-tables';
 export * from './export/file-names';
 export * from './export/list-file';
 export * from './export/list-text';
+export * from './export/payments-file';
 export * from './icons/icon-image';
 export * from './icons/icon-query';
 export * from './icons/icon-sources';

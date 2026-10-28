@@ -7,6 +7,8 @@ import {
   listFile,
   listText,
   paymentTable,
+  paymentsFile,
+  paymentsText,
   type CalendarEvent,
   type CustomSubscription,
   type ExportCell,
@@ -22,8 +24,8 @@ import {
 
 /** What a list's Export offers (P4). */
 export type ListExportFormat = 'csv' | 'xlsx' | 'json' | 'txt' | 'ics';
-/** What the Calendar's Export to file offers (P10). */
-export type PaymentsExportFormat = 'ics' | 'csv' | 'xlsx';
+/** What the Calendar's Export to file offers (P10; JSON and Text since M7.9). */
+export type PaymentsExportFormat = 'ics' | 'csv' | 'xlsx' | 'json' | 'txt';
 
 /** A file to save. */
 export interface ExportFile {
@@ -83,7 +85,7 @@ export async function listExport(
 
 /**
  * The Calendar's file (Export to file and Sync calendar, P10): the next 12 months' charges of the lists shown, as a
- * calendar or a CSV payment schedule, or the workbook.
+ * calendar, a CSV payment schedule, the workbook, or the schedule as JSON or text (M7.9).
  */
 export async function paymentsExport(
   { lists, context, format }: ExportRequest,
@@ -98,6 +100,10 @@ export async function paymentsExport(
       return file(await csvText(paymentTable(lists, context)));
     case 'xlsx':
       return file(await workbookBytes(exportWorkbook(lists, context)));
+    case 'json':
+      return file(JSON.stringify(paymentsFile(lists, context), null, 2));
+    case 'txt':
+      return file(paymentsText(lists, context, format));
   }
 }
 
@@ -117,7 +123,10 @@ async function csvText({ columns, rows }: ExportTable): Promise<string> {
   );
 }
 
-/** A calendar of all-day events (`VALUE=DATE`), which no time zone can move to another day. */
+/**
+ * A calendar of all-day events (`VALUE=DATE`), which no time zone can move to another day, each with its tags as its
+ * categories (M7.9).
+ */
 async function icsText(events: readonly CalendarEvent[], calName: string): Promise<string> {
   const { createEvents } = commonJs(await import('ics'));
   const { error, value } = createEvents(
