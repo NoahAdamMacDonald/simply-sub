@@ -265,6 +265,22 @@ It runs axe on the card, the editor and its error, the question, the menu and Li
 scroll. Wait for the item dialog to put focus on its heading before tabbing: it moves focus there once it's open,
 which undoes Tab presses made sooner.
 
+`check-home.cjs` (M7.3) checks Home on `ng serve` for a Canadian in Alberta, with no lists, then with Work Related
+(Netflix Standard, monthly on the 12th) and Family (Mullvad VPN, yearly on Jan 20, renewed by hand) written to
+IndexedDB.
+
+In both themes at both widths, keyboard only, it checks:
+- no lists: the empty state's Create a list, Browse services and Import backup, and Enter on the first;
+- the mini calendar's dot on the 12th of this month (it reads the machine's date), reached with the arrow keys from
+  today's tab stop, its tooltip "Netflix $19.94" and Enter opening `/calendar?month=`;
+- every list's totals without budgets, "Set a monthly budget →" to Settings, and with budgets a bar for each, the
+  monthly one over at 133%;
+- Next payments, Subscription Lists by keyboard, and the calendar beside the totals at 1280 px and above them at 360.
+
+Light at 1280 px, it also checks Home's totals against the sum of the Lists overview's cards, to a cent a list (each
+amount is rounded for display). It runs axe on each state, the open tooltip included, and checks for horizontal
+scroll.
+
 Since M7.1, the scripts check the charges:
 - `check-list-view.cjs`: Mullvad's "Renew by Nov 12", Netflix's next charge as charged in its details ("Next charge Nov
   12, 2026: $19.94, with $0.95 tax", Alberta's 5%), and Wrong date? by keyboard: the dialog filled in with focus in

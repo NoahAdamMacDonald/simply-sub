@@ -2055,7 +2055,8 @@ turning a second Netflix plan into an extra-member add-on.)
 
 ### 8.3 Page notes
 **Home.** Shows the current-month mini calendar with payment days highlighted, plus the monthly and annual budget
-bars for **all lists combined** (section 8.1.1). The bars appear only if a budget is set. The big CTA opens `/lists`.
+bars for **all lists combined** (section 8.1.1). The bars appear only if a budget is set; without one, the total and
+"Set a monthly budget →". The big CTA opens `/lists`, and the next three payments follow (M7.3).
 
 **Lists overview.** Each card shows the name, a monthly bar (**this list's share** of the monthly budget), a yearly bar, rank
 counts in rank colours (zero counts in grey), a View button and delete (with confirmation and Undo). Without a budget
@@ -2535,6 +2536,26 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-28, M7.3)**
+- **Home** (PROJECT-PLAN P2) follows the wireframe: the mini calendar on a card, every list's totals beside it (M7.2's
+  `ss-budget-totals`, with "Set a monthly budget →" where a budget isn't set), and the Subscription Lists pill under
+  them, centred. Under 720 px they stack. Its "Home" heading is for screen readers only.
+- **Next payments** (P2's optional strip): the next three charges from today, as charged, with ↻ and "renew manually"
+  for a manual renewal. Its parts keep their spaces inside the spans, so a screen reader doesn't run "Nov 12Netflix"
+  together.
+- **The mini calendar** shows every list's charges in its month (`MetricsService.charges`, as the Calendar does). A day
+  or the month's title opens the Calendar on that month. Its month follows today, so a tab left open past midnight
+  into a new month shows it (M7.4's ClockService).
+- **While prices load** (an item's catalog file not yet downloaded, `pending`), the calendar has no dots, a row of dots
+  under it that pulse (they stay still with reduced motion), and "Loading your payments…" in a live region: P2's
+  skeleton dots.
+- **No lists:** an empty state, "Start with a list", with Create a list, Browse services and Import backup. Import opens
+  Settings' dialog, with Material's dialog and snackbar loaded on the click, since Home rarely needs them.
+- **Totals match:** Home's this month and this year are the sum of every list's at full precision (a unit test). Shown
+  rounded, a list's cents can add up a cent away from Home's, which `check-home.cjs` allows.
+- **Bundles:** the initial bundle didn't change (495.5 kB). Home loads 78.3 kB gzipped beyond it (53.2 kB with M7.2's
+  totals): the mini calendar's tooltip brings the CDK overlay, which Search and List view load too.
 
 **Resolved (2026-10-28, M7.2)**
 - **Totals in `MetricsService`** (§3.4): `metrics(listId)` and `global` (every list's items together, Home's), both

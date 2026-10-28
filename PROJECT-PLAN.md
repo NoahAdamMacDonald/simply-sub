@@ -194,7 +194,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 |---|---|---|
 | M7.1 | core: schedule engine for charges, statuses (`ItemStatus` on M5.1's `itemActivity`, adding the end date and manual renewal), totals and budget checks (§3.1, §3.3), with `addMonths` in core's `dates/` (built in M4.5 for the mini calendar), on M4.6's resolved items (`ResolvedItem.status` and `nextCharge`, `ListMetrics`; unresolved items left out of totals and counted; an add-on billed on its own period); sales tax on charges in `tax/`, from `addedSalesTax` (M4.2's rates, none on a price with `taxIncluded`) (BLUEPRINT §4.8; recheck the rates if `canadianSalesTaxCheckedOn` is old). As built: core's `schedule/` (`chargeDates`, `itemCharges`, `nextCharge`, `itemStatus`, `listMetrics` with the budget checks), `tax/charge-tax.ts` (`salesTaxOn`), `user/reanchor.ts` and `dates/period.ts`; `ResolvedItem.status`, `nextCharge` and `overridePrice`; and the UI it was waiting for: the cards' next charge and "Wrong date?", the editor's renewal dates, the item dialog's "next charge" and Search's "Ends" and "Renew by" (BLUEPRINT §14) | Charges include tax by province and "plus tax" amounts, and none on a price that includes it (Mullvad). Tests cover month-end with and without `billingDay`, leap years, 30-day and 2-week cycles, windows, yearly repeats, start/end dates, a re-anchored date and a price override ending |
 | M7.2 | Totals and budget bars on Home, Lists and List view. As built: `MetricsService`'s `metrics`, `global`, `metricsOf` and `charges` (core's `listMetrics`, with a conversion flag for each total), `ss-budget-totals` (a bar against each budget that's set, else the total alone, and Home's "Set a monthly budget →"), the Lists cards' bars, List view's side column and each card's "31% of list", and the list editor's "This month" (BLUEPRINT §14) | The numbers match the §3.1 definitions |
-| M7.3 | Home (P2) | P2 criteria met |
+| M7.3 | Home (P2). As built: the mini calendar on a card beside every list's totals (stacked under 720 px), the Subscription Lists pill, Next payments (the next three charges), the empty state's Create a list, Browse services and Import backup, and pulsing dots while prices load (BLUEPRINT §14) | P2 criteria met |
 | M7.4 | Calendar (P10): grid, day panel, list filter, upcoming list, agenda layout on mobile | P10 criteria met |
 | M7.5 | Exports: ICS (one all-day event per charge, no `RRULE`s: BLUEPRINT §11.2), CSV, XLSX, TXT (lazy-loaded) | The files open in Google Calendar and Excel, and a plan billed on the 31st shows in every month |
 | M7.6 | Budget warning banners | A warning appears for a projected over-budget month |
@@ -560,6 +560,17 @@ Oct 22, 2026, and use the illustrative prices from `docs/api-output-examples.jso
 - First run → the P1 dialog.
 - No lists → empty state with [Create a list] [Browse services] [Import backup].
 - Catalog still loading → skeleton dots.
+
+**As built (M7.3):**
+- **Layout:** the mini calendar on a card, with the totals on its right from 720 px and under it below that; then the
+  Subscription Lists pill, centred; then Next payments ("Nov 12 Netflix $19.94", as charged, ↻ for a manual renewal).
+  The page's heading, "Home", is for screen readers only: the wireframe has none.
+- **Mini calendar:** the shown month's charges for every list, the same as the Calendar's (`MetricsService.charges`); a
+  day or the month's title opens `/calendar?month=YYYY-MM`; it follows today into a new month at midnight.
+- **Catalog loading:** while an item's catalog file hasn't loaded, the calendar has no dots, a row of pulsing dots
+  under it, and "Loading your payments…" in a live region.
+- **No lists:** "Start with a list", with Create a list, Browse services (Search) and Import backup (Settings' dialog,
+  loaded on the click).
 
 **Acceptance**
 - [ ] The bar totals equal the sum of every list's "this month" / "this year"
