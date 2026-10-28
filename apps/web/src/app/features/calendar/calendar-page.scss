@@ -208,6 +208,15 @@
   color: var(--ss-text-muted);
 }
 
+// A card goes over its limit that day (M9.4): in the cell's corner, and beside an agenda payment.
+.over-limit {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: var(--ss-danger);
+  font-size: 16px;
+}
+
 .day-total {
   margin-top: auto;
   text-align: end;

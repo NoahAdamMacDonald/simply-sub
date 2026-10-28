@@ -4,6 +4,8 @@ aliases: [mullvad]
 website: https://mullvad.net
 category: vpn
 spendCategory: software
+# Accepted cards, read 2026-10-28 (M9.2): none named, so no acceptedNetworks. /en/pricing lists "credit card" among
+# its payment methods, /en/help/Invoices "Stripe: Credit/Debit card", and the card checkout needs an account.
 billingCurrency: { GLOBAL: EUR }
 # Nothing renews, so there's nothing to cancel: Mullvad ended subscriptions in 2022
 # (/en/blog/were-removing-the-option-to-create-new-subscriptions), and the terms say they "expire at the end of

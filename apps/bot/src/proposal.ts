@@ -4,6 +4,7 @@ import type { Finding, PriceTarget } from './types';
 import {
   withLastVerified,
   withPrice,
+  withoutAcceptedNetworks,
   withoutReseller,
   withoutTaxIncluded,
   type PriceLocation,
@@ -37,6 +38,7 @@ export function filesToRead(findings: readonly Finding[], today: string): string
     if (finding.kind === 'confirmed' && stale(finding.target, today))
       paths.add(finding.target.file);
     if (finding.kind === 'reseller') paths.add(finding.approval.file);
+    if (finding.kind === 'networks' && finding.missing.length > 0) paths.add(finding.target.file);
   }
   return [...paths].sort();
 }
@@ -116,6 +118,26 @@ export function proposal(
         }
         break;
       }
+      case 'networks': {
+        const { target } = finding;
+        const cards = `**${cell(target.provider)}**’s cards in ${target.region}`;
+        if (finding.missing.length === 0) {
+          review.push(
+            `- ${cards}: ${link(target.url)} now also names ${finding.named.map(cell).join(', ')} beside them. Add it with the page’s words if it takes it.`,
+          );
+        } else if (
+          edit(target.file, (text) => withoutAcceptedNetworks(text, target.region), finding)
+        ) {
+          review.push(
+            `- ${cards}: ${finding.missing
+              .map((quote) => `“${cell(quote)}”`)
+              .join(
+                ', ',
+              )} isn’t on ${link(target.url)} any more, so the region’s networks are removed: every card is allowed there until they’re read again.`,
+          );
+        }
+        break;
+      }
       case 'logo':
         changes.push({ path: `data/logos/${finding.id}.png`, base64: finding.png });
         logos.push(
@@ -148,9 +170,11 @@ export function proposal(
     const subject =
       finding.kind === 'reseller'
         ? `${finding.approval.provider}’s reseller ${finding.approval.reseller}`
-        : 'target' in finding
-          ? finding.target.label
-          : 'A change';
+        : finding.kind === 'networks'
+          ? `${finding.target.provider}’s cards in ${finding.target.region}`
+          : 'target' in finding
+            ? finding.target.label
+            : 'A change';
     manual.push(
       `- **${cell(subject)}**: its entry couldn’t be found in the file, so it wasn’t changed`,
     );

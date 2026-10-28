@@ -85,6 +85,8 @@ export interface ItemForm {
   /** The user's own name for it and their note, as typed: '' for none. */
   nickname: string;
   note: string;
+  /** The payment card it's paid with (M9.4): '' for none. */
+  cardId: string;
 }
 
 /** A rule the form breaks, at the field it's about: `['windows', 0, 'end']`. */
@@ -324,9 +326,9 @@ export function itemFormIssues(form: ItemForm, rules: ItemFormRules): FormIssue[
   return issues;
 }
 
-/** What the form saves: all of a list item but its id, list, pinning, card and timestamps. */
+/** What the form saves: all of a list item but its id, list, pinning and timestamps. */
 export type ItemFields = Pick<ListItem, 'source' | 'billing' | 'tagIds' | 'rankOverrides'> &
-  Partial<Pick<ListItem, 'region' | 'priceOverride' | 'nickname' | 'note'>>;
+  Partial<Pick<ListItem, 'region' | 'priceOverride' | 'nickname' | 'note' | 'cardId'>>;
 
 export interface ItemFormContext extends ItemFormRules {
   /** The chosen price's autoRenew: a plan that's renewed by hand never auto-renews. */
@@ -343,8 +345,9 @@ export interface ItemFormContext extends ItemFormRules {
 /**
  * The list item the form describes, once itemFormIssues finds nothing wrong (what it would find is left out). A free
  * plan is saved as Ongoing with today as its anchor (P6), or the anchor it had, so opening and saving an item changes
- * nothing; it has no own price, since there's nothing to pay. Windows are saved in date order, a billing day only
- * while it applies, and ranks only for the keys the item provides. An item bought in Settings' country has no region.
+ * nothing; it has no own price or card, since there's nothing to pay. Windows are saved in date order, a billing day
+ * only while it applies, and ranks only for the keys the item provides. An item bought in Settings' country has no
+ * region.
  */
 export function itemFromForm(form: ItemForm, context: ItemFormContext): ItemFields {
   const period: Period = { interval: form.interval, intervalCount: form.intervalCount };
@@ -363,6 +366,7 @@ export function itemFromForm(form: ItemForm, context: ItemFormContext): ItemFiel
     rankOverrides,
     ...trimmed('nickname', form.nickname),
     ...trimmed('note', form.note),
+    ...(!free && form.cardId !== '' && { cardId: form.cardId }),
   };
 }
 
@@ -405,6 +409,7 @@ export function newItemForm({
     tagIds: [],
     nickname: '',
     note: '',
+    cardId: '',
   };
 }
 
@@ -444,6 +449,7 @@ export function itemFormFor(
     tagIds: [...item.tagIds],
     nickname: item.nickname ?? '',
     note: item.note ?? '',
+    cardId: item.cardId ?? '',
   };
 }
 

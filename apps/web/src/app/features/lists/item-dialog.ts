@@ -4,8 +4,10 @@ import {
   Injector,
   afterNextRender,
   computed,
+  effect,
   inject,
   signal,
+  untracked,
   viewChild,
 } from '@angular/core';
 import {
@@ -40,7 +42,11 @@ import {
   addPeriods,
   afterPlanChange,
   availability,
+  bestCard,
   billingDayChoices,
+  cardChoices,
+  cardNetworkNames,
+  cardTitle,
   draftItems,
   emptyWindow,
   filterRanking,
@@ -50,6 +56,8 @@ import {
   itemFormIssues,
   itemFromForm,
   monthlyAverage,
+  monthlyOnCard,
+  monthlyParts,
   newItemForm,
   periodChoices,
   periodOf,
@@ -76,6 +84,7 @@ import {
   type RankingEntry,
   type RankingRow,
   type RequestedPrice,
+  type RewardsContext,
   type SnapshotProvider,
 } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
@@ -84,6 +93,7 @@ import { FxStore } from '../../core/fx/fx-store';
 import { ListDraftService } from '../../core/lists/list-draft-service';
 import { MetricsService } from '../../core/metrics/metrics-service';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { CardsRepository } from '../../core/storage/cards-repository';
 import { CustomSubsRepository } from '../../core/storage/custom-subs-repository';
 import { RankingsRepository } from '../../core/storage/rankings-repository';
 import { TagsRepository } from '../../core/storage/tags-repository';
@@ -188,6 +198,7 @@ export class ItemDialog {
   private readonly settings = inject(SettingsStore);
   private readonly fx = inject(FxStore);
   private readonly customSubs = inject(CustomSubsRepository);
+  private readonly cards = inject(CardsRepository);
   private readonly rankings = inject(RankingsRepository);
   private readonly tags = inject(TagsRepository);
   private readonly metrics = inject(MetricsService);
@@ -516,6 +527,101 @@ export class ItemDialog {
     });
   });
 
+  /** What the card maths needs (BLUEPRINT §9.3): today, the user's currency and tax place, and the rates. */
+  private readonly rewardsContext = computed<RewardsContext | undefined>(() => {
+    const saved = this.settings.saved();
+    if (!saved) return undefined;
+    const fx = this.fx.rates();
+    return { today: this.today(), currency: saved.currency, place: saved, ...(fx && { fx }) };
+  });
+
+  /** Whether there are cards to pay with: else Payment says where to add them. */
+  protected readonly hasCards = computed(() => this.cards.records().length > 0);
+
+  /**
+   * The cards the item can be paid with (P6, M9.4): the ones its seller takes where it's bought, or every card when
+   * that isn't known, marked "acceptance not confirmed" (but for a custom subscription, which never says).
+   */
+  protected readonly cardChoices = computed(() => {
+    const resolved = this.preview();
+    const context = this.rewardsContext();
+    if (!resolved || !context) return [];
+    const unconfirmed = resolved.customSubId === undefined;
+    return cardChoices(resolved, this.cards.records(), context).map((choice) => ({
+      ...choice,
+      label:
+        `${cardTitle(choice.card)} (${cardNetworkNames[choice.card.network]}, ` +
+        `${percentText(choice.card.cashbackPercent)} back)` +
+        (choice.acceptance === 'unknown' && unconfirmed ? ' · acceptance not confirmed' : ''),
+    }));
+  });
+
+  /** The chosen card's month: "$21.46 / mo with tax, $21.14 after cash back and FX fees". */
+  protected readonly cardMonth = computed<ChoiceText | undefined>(() => {
+    const resolved = this.preview();
+    const context = this.rewardsContext();
+    const choice = this.cardChoices().find(({ card }) => card.id === this.model().cardId);
+    if (!resolved || !context || !choice || this.free()) return undefined;
+    const month = monthlyOnCard(resolved, choice.card, context);
+    if (!month) return undefined;
+    const shown = month.converted ? '≈ ' : '';
+    const spoken = month.converted ? 'about ' : '';
+    const money = (amount: number) => amountText(amount, context.currency, this.country());
+    return {
+      shown: `${shown}${money(month.gross)} / mo with tax, ${shown}${money(month.net)} after cash back and FX fees`,
+      spoken: `${spoken}${money(month.gross)} a month with tax, ${spoken}${money(month.net)} after cash back and FX fees`,
+    };
+  });
+
+  /** The Best card chip (P6): the card that leaves the least to pay a month, when it isn't the one chosen. */
+  protected readonly bestCardChip = computed(() => {
+    const resolved = this.preview();
+    const context = this.rewardsContext();
+    if (!resolved || !context || this.free()) return undefined;
+    const best = bestCard(this.cardChoices(), this.model().cardId || undefined, resolved, context);
+    if (!best) return undefined;
+    const title = cardTitle(best.choice.card);
+    const saving = amountText(best.saving, context.currency, this.country());
+    return {
+      cardId: best.choice.card.id,
+      shown: `Best card: ${title}, saves ${best.estimated ? '≈ ' : ''}${saving} / mo`,
+      spoken: `Best card: ${title}, saves ${best.estimated ? 'about ' : ''}${saving} a month`,
+    };
+  });
+
+  /**
+   * What the chosen card means here: acceptance its seller doesn't confirm, and an FX fee on a charge in another
+   * currency, with a word on a checkout's own conversion (the user's choice for Mullvad, M9.3).
+   */
+  protected readonly cardNotes = computed(() => {
+    const resolved = this.preview();
+    const context = this.rewardsContext();
+    const choice = this.cardChoices().find(({ card }) => card.id === this.model().cardId);
+    if (!resolved || !context || !choice || this.free()) return [];
+    const notes: string[] = [];
+    if (choice.acceptance === 'unknown' && resolved.customSubId === undefined) {
+      notes.push(`Acceptance not confirmed: ${resolved.name} doesn’t say which cards it takes.`);
+    }
+    const charged = (monthlyParts(resolved, context.currency, context.place) ?? [])
+      .filter((part) => part.charged.amount > 0)
+      .map((part) => part.charged.currency);
+    const foreign = [...new Set(charged)].filter((currency) => currency !== choice.card.currency);
+    if (foreign.length > 0) {
+      const fee =
+        choice.card.fxFeePercent > 0
+          ? `this card’s ${percentText(choice.card.fxFeePercent)} FX fee applies (estimated at the ECB’s rate)`
+          : 'this card adds no FX fee';
+      notes.push(
+        `${resolved.name} charges in ${foreign.join(' and ')}, so ${fee}. A checkout that offers to charge you ` +
+          `in ${choice.card.currency} instead converts at its own rate, which can cost more.`,
+      );
+    }
+    return notes;
+  });
+
+  /** The card the item was paid with when the dialog opened, when its seller doesn't take it: it's dropped. */
+  protected readonly cardNotTaken = signal<string | undefined>(undefined);
+
   protected readonly form = form(
     this.model,
     (path) => {
@@ -542,6 +648,26 @@ export class ItemDialog {
     );
 
     fillScreenWhenNarrow(this.dialogRef);
+
+    // An item paid with a card its seller doesn't take (its networks became known since) loses it, with a note: the
+    // menu offers only the cards it takes (P11). Once the cards and the item's price have loaded.
+    const dropUntaken = effect(() => {
+      const cardId = untracked(() => this.model().cardId);
+      if (cardId !== '' && (this.cards.status() !== 'ready' || !this.preview())) return;
+      if (cardId !== '' && !this.cardChoices().some(({ card }) => card.id === cardId)) {
+        const card = this.cards.byId().get(cardId);
+        untracked(() => {
+          this.model.update((current) => ({ ...current, cardId: '' }));
+          if (card) this.cardNotTaken.set(cardTitle(card));
+        });
+      }
+      dropUntaken.destroy();
+    });
+  }
+
+  /** The Best card chip: pays with it. */
+  protected useBestCard(cardId: string): void {
+    this.model.update((current) => ({ ...current, cardId }));
   }
 
   /**
@@ -711,12 +837,13 @@ export class ItemDialog {
     let itemId: string;
     if (this.editing) {
       itemId = this.editing.id;
-      // Optional fields the form leaves out are cleared; pinned and cardId aren't the dialog's to change.
+      // Optional fields the form leaves out are cleared, the card too; pinned isn't the dialog's to change.
       await this.drafts.updateItem(listId, itemId, {
         region: undefined,
         priceOverride: undefined,
         nickname: undefined,
         note: undefined,
+        cardId: undefined,
         ...fields,
       });
     } else {
@@ -813,6 +940,11 @@ function entryRows(entry: RankingEntry): RankingRow[] {
 
 function periodKey({ interval, intervalCount }: Period): string {
   return `${interval}:${intervalCount}`;
+}
+
+/** "1.5%", "0%": a card's cash back or FX fee. */
+function percentText(value: number): string {
+  return `${value.toLocaleString('en', { maximumFractionDigits: 3 })}%`;
 }
 
 function capitalized(text: string): string {

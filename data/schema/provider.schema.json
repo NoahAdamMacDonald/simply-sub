@@ -44,13 +44,51 @@
       "description": "A spend category id from categories.yaml, for card rewards"
     },
     "acceptedNetworks": {
-      "minItems": 1,
-      "type": "array",
-      "items": {
+      "type": "object",
+      "propertyNames": {
         "type": "string",
-        "enum": ["visa", "mastercard", "amex", "discover", "interac", "unionpay", "jcb", "other"]
+        "pattern": "^(?:[A-Z]{2}|GLOBAL)$",
+        "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL"
       },
-      "description": "Card networks the provider accepts. Leave it out when unknown, and every card is allowed"
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "networks": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "visa",
+                "mastercard",
+                "amex",
+                "discover",
+                "interac",
+                "unionpay",
+                "jcb",
+                "other"
+              ]
+            },
+            "description": "The networks it takes there: other for one not listed here"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://",
+            "patternErrorMessage": "Use a full https:// URL",
+            "description": "The provider's own page that names them (payment methods, a help article, the checkout), on its website's domain or one of its domains"
+          },
+          "quotes": {
+            "minItems": 1,
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "description": "Where that page names the networks (\"Visa\", \"American Express\"), word for word, which the nightly check looks for"
+          }
+        },
+        "required": ["networks", "url", "quotes"],
+        "additionalProperties": false
+      },
+      "description": "Region → the card networks the provider takes there, quoted from its own page (GLOBAL: wherever it sells). A region it doesn't cover is unknown, and every card is allowed there"
     },
     "billingCurrency": {
       "type": "object",

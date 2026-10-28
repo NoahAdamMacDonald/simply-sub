@@ -17,7 +17,7 @@ const PAGES = [
   { url: '/search', heading: 'Search', title: 'Search · Simply Sub' },
   { url: '/features', heading: 'Your feature ranks', title: 'Features · Simply Sub' },
   { url: '/calendar', heading: 'Calendar', title: 'Calendar · Simply Sub' },
-  { url: '/payment', heading: 'Payment', title: 'Payment · Simply Sub' },
+  { url: '/payment', heading: 'Payment cards', title: 'Payment · Simply Sub' },
   { url: '/custom', heading: 'Custom subscriptions', title: 'Custom subscriptions · Simply Sub' },
   { url: '/settings', heading: 'Settings', title: 'Settings · Simply Sub' },
 ];

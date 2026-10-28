@@ -9,6 +9,7 @@ import { of } from 'rxjs';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { FxStore } from '../../core/fx/fx-store';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { CardsRepository } from '../../core/storage/cards-repository';
 import { ItemsRepository } from '../../core/storage/items-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
 import type { NewRecord } from '../../core/storage/record-repository';
@@ -227,6 +228,33 @@ describe('CalendarPage', () => {
     await until(() => page().querySelector('ss-day-panel') === null);
     await harness.fixture.whenStable();
     expect(document.activeElement).toBe(day);
+  });
+
+  it('flags a day that takes a card over its limit, and names the card in the day’s panel (M9.4)', async () => {
+    const card = await TestBed.inject(CardsRepository).create({
+      name: 'Simplii Cashback Mastercard',
+      nickname: 'Everyday',
+      type: 'credit',
+      network: 'mastercard',
+      currency: 'CAD',
+      cashbackPercent: 1.5,
+      fxFeePercent: 2.5,
+      monthlyLimit: 15,
+    });
+    await TestBed.inject(ItemsRepository).update(netflix.id, { cardId: card.id });
+    await open('/calendar?month=2026-11');
+    await until(() => cell('2026-11-12')?.querySelector('.over-limit') !== null);
+    const day = page().querySelector<HTMLElement>('.day[data-date="2026-11-12"]');
+    expect(day?.getAttribute('aria-label')).toBe(
+      'Thursday, November 12, 1 payment, $19.94, over a card’s limit',
+    );
+    day?.click();
+    await until(() => page().querySelector('ss-day-panel .over-limit') !== null);
+    const panel = page().querySelector('ss-day-panel');
+    expect(text(panel?.querySelector('.card'))).toBe('Paid with Everyday');
+    expect(text(panel?.querySelector('.over-limit > span'))).toBe(
+      'Warning: Everyday goes over its $15.00 limit in November 2026: $19.94',
+    );
   });
 
   it('has no Wrong date? for a charge that’s passed', async () => {

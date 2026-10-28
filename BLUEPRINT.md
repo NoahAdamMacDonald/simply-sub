@@ -462,7 +462,13 @@ name: Netflix
 website: https://www.netflix.com
 category: streaming                 # from categories.yaml
 spendCategory: streaming            # used for card-reward maths (section 9)
-acceptedNetworks: [visa, mastercard, amex, discover]   # omit = unknown → all cards allowed, with a warning
+acceptedNetworks:                   # the cards it takes, per region, quoted from its own page (section 9.3)
+  CA:
+    networks: [visa, mastercard, amex]
+    url: https://help.netflix.com/en/node/116380/ca
+    quotes: [Visa, MasterCard, American Express]   # word for word, which the nightly check looks for
+  US: { networks: [visa, mastercard, amex, discover], url: …, quotes: […] }
+  # a region left out (or the whole field) = unknown → every card allowed, with a hint
 billingCurrency: { CA: CAD }        # currency actually charged per region (drives FX-fee maths)
 cancelUrl: https://www.netflix.com/cancelplan   # required: its cancel page, or its help article on cancelling
 sources: { pricing: https://help.netflix.com/en/node/24926 }
@@ -726,7 +732,8 @@ interface Provider {
   domains?: string[];        // its other sites, whose pages can name its resellers (protonvpn.com)
   category: string;          // service category
   spendCategory: string;
-  acceptedNetworks?: CardNetwork[];          // left out = unknown
+  acceptedNetworks?: Record<string, {        // region (its group, or GLOBAL) → the cards it takes there (M9.2)
+    networks: CardNetwork[]; url: string; quotes: string[] }>;   // left out = unknown
   billingCurrency?: Record<string, string>;  // region → the currency charged there
   availableIn?: string[];    // every region it sells in, when known (section 4.7)
   cancelUrl?: string;
@@ -1518,6 +1525,8 @@ Cron trigger (03:00 UTC) → Workflow (one step per provider, automatic retries)
      │    opposite ("+ tax", "excl. VAT", "taxes calculated at checkout"); either is a change for review
      ├─ reseller prices too (section 4.9), and each reseller's approval: its quotes still on the provider's page;
      │    a reseller no longer named there is a change for review, and a sale price is never taken
+     ├─ each region's accepted card networks (section 9.3): its quotes still on its page, else the region's networks
+     │    are taken out, for review; a network named beside them that isn't listed is for review too
      on no change → bump lastVerified (batched into the same PR, or skipped to avoid noise)
      on failure  → list it in the PR body as "needs manual check"
 ```
@@ -1602,7 +1611,9 @@ use canonical ids, and it maps provider wording through `aliases`. The output co
 - each plan's sign-up `link` and the provider's `cancelUrl` (its cancel page or help article), which the schema
   requires
 - a plan's `categories` when it's in other service categories than its provider's (a suite's VPN plan)
-- **accepted card networks** (from the checkout or help page, for example "We accept Visa, Mastercard, Amex")
+- **accepted card networks** for each region the page covers (from the checkout or help page, for example "We
+  accept Visa, Mastercard, Amex"), with the page's URL on the provider's own site and its words quoted, each network
+  named in them (`acceptedNetworks`, M9.2); none when no page names them ("all major credit cards" names none),
   and the billing currency
 - an **evidence quote** for every price and feature (shown in the PR, so review is fast)
 - whether the prices **include tax** for every buyer ("Including VAT", "taxes included"), as `taxIncluded` with
@@ -2177,8 +2188,11 @@ or nickname with 12 or more digits in a row (spaces and dashes between them incl
 
 ### 9.3 Calculations (`packages/core/src/rewards/`)
 **Which cards can pay for a subscription:**
-- A card is eligible if `provider.acceptedNetworks` includes its network.
-- If the provider's networks are **unknown**, every card is allowed and shown with an "acceptance not confirmed" hint.
+- A card is eligible if the provider's `acceptedNetworks` for the item's region (else its group, else `GLOBAL`)
+  include its network. Since M9.2 they're per region, since a provider can take other cards in another country
+  (Netflix takes Discover in the US, not in Canada), each quoted from its own page (section 4.3).
+- If the provider's networks are **unknown** there, every card is allowed and shown with an "acceptance not
+  confirmed" hint.
 - Ineligible cards are hidden from the item's card dropdown, and the optimizer never assigns them.
 
 **Effective monthly cost of an item on a card:**
@@ -2206,6 +2220,10 @@ network-specific rates if that ever changes. Watch out for **dynamic currency
 conversion** (a merchant charging in your currency at its own rate). It's rare for subscriptions, so it's only
 noted in a help tooltip.
 
+**As built (M9.3):** `packages/core/src/rewards/`, with the user's choices in section 14 (M9.3): the charge is in
+the item's own currency (Proton's buyer-chosen lists: pickPrice's; Mullvad: EUR), every charge carries it
+(`Charge.charged`), and the monthly figures are with tax (P4).
+
 **Choosing a card for each subscription (optimizer):**
 - Maximize total monthly `cashback − fxFee` across all items, subject to each card's `monthlyLimit` and network acceptance.
 - Greedy approach: sort items by the biggest difference between their best and second-best card, assign each
@@ -2223,6 +2241,11 @@ noted in a help tooltip.
 - The list view and the item dialog show a card dropdown (eligible cards only), plus a "Best card" suggestion
   chip that names the expected savings.
 - The list view shows **net cost after cash back and FX fees** next to the gross cost.
+
+**As built (M9.4):** the card dropdown and the Best card chip are in the item dialog only, where the user's M9.4 tasks
+put them: the list view's cards change only through the editor's draft (but for pinning and Wrong date?), so it shows
+the net beside the gross, in its header and on each card paid with one (section 14, M9.4). Since M9.1 the tiles name
+the network in a badge rather than show its logo.
 
 ---
 
@@ -2254,7 +2277,8 @@ Lives in `packages/core/src/optimizer/`. It's a **pure function**:
 4. Convert to an **add-on** of another item's plan (for example a second Netflix account becomes an extra member).
 5. Replace with a **bundle** or a **suite plan** (section 4.4) that covers two or more items.
 6. Remove.
-7. (Phase 4) Move to a better card (an eligible network, within limits; section 9.3).
+7. (Phase 4) Move to a better card (an eligible network, within limits; section 9.3). Built in M9.3 as a free
+   saving of its own (section 14).
 
 ### 10.4 Search
 - Enumerate combinations of actions (lists are usually under about 15 items, and each item has only a few
@@ -2295,7 +2319,7 @@ prompted after each big change, or weekly).
 
 **As built (M4.1)**, in `apps/web/src/app/core/storage/`:
 - **Repositories** (`ListsRepository`, `ItemsRepository`, `CustomSubsRepository`, `TagsRepository`,
-  `RankingsRepository`, `SettingsRepository`; cards come with M9.1) are `@Service()`s. Each streams a Dexie
+  `RankingsRepository`, `SettingsRepository`, and `CardsRepository` since M9.1) are `@Service()`s. Each streams a Dexie
   `liveQuery` of its whole table through `rxResource`, so every write, in any tab, updates every signal. They expose
   the valid, non-deleted records, a `status` (`loading`, `ready` or `error`) and computed lookups (`byId`,
   `byList`). A user has a few hundred records at most, so pages filter them with `computed()` instead of querying.
@@ -2549,12 +2573,152 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 ## 14. Open questions
 
 **Still open**
-1. **Buyer-chosen charge currency** (decide in M9): some providers let the buyer pick the currency they're charged
-   in. Proton sells fixed price lists in USD, CAD, EUR and CHF (stored as `GLOBAL` prices in each currency, with
-   `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
-   about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
-   M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
-   CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+None.
+
+**Resolved (2026-10-28, M9.4)**
+- **The item dialog's card** (PROJECT-PLAN P6): a Payment section after Tags, for a plan that isn't free.
+  - "Paid with": No card, then the cards its seller takes where it's bought (core's `cardChoices`), or every card where
+    that isn't known, marked "acceptance not confirmed" (but for a custom subscription, which never says). The hint
+    gives the month with tax and after cash back and FX fees (`monthlyOnCard`).
+  - The Best card chip (`bestCard`): the card that leaves the least to pay a month, when it saves a cent or more. Enter
+    or a click pays with it.
+  - Notes: acceptance not confirmed, and for a charge in another currency, the card's FX fee estimated at the ECB's
+    rate and a checkout's own conversion (the user's choice for Mullvad, M9.3).
+  - A card the seller doesn't take (its networks became known since) is dropped as the dialog opens, with a note. The
+    form's `cardId` (core's `item-form.ts`) is saved to the draft with the rest, but not for a free plan, which has
+    nothing to pay (its own price is dropped the same way).
+- **The card select is in the item dialog only.** Section 9.4 also put one on the list view, but the user's M9.4 tasks
+  put it in the dialog, and the list view's cards change only through the editor's draft (but for pinning and Wrong
+  date?). The list view shows the net instead.
+- **List view's net** (P4, the user's choice in M9: both with tax): once an item has a card, the header's second line
+  ("≈ $27.79 / mo with tax · ≈ $27.56 after cash back & FX fees", an item with no card at its gross), and on each card
+  paid with one, "Paid with Everyday: $19.94 / mo with tax · $19.64 after cash back & FX fees".
+- **Assign best cards** (P11): core's `assignCards` over every list's saved items, then a preview per list in a dialog
+  that loads on first use, as Material's dialog does. A list with unsaved edits is skipped, with a note: its items keep
+  their cards, and their charges still count against the limits. Apply writes the cards in one transaction, with Undo.
+  `CardsRepository.assign` does it rather than `ItemsRepository`, which the app starts with, so the initial bundle
+  doesn't grow.
+- **Over-limit warnings:** a tile names the first of the next 12 months over its limit, and how many more. The Calendar
+  flags the charge that takes a card over and its later ones that month, on the day and in the agenda, and the day's
+  panel names each charge's card, and the warning. Every list's charges count, shown or not.
+- **The optimizer's card action, wired in:** `OptimizerService` passes the cards and what the other lists' items post
+  to each (`cardLoads`), and waits for the cards to load. List view's suggestion reads "With Discover It instead of
+  Everyday, from now on".
+- **Bundle:** the initial bundle is 496.39 kB, as since M9.1 (497.31 kB before M9).
+- **Checks:** `check-payment.cjs` (185 checks, both themes at 360 and 1280 px, keyboard only) on `ng serve` and under
+  `wrangler dev`'s production CSP, csp-check, and the list-view, item-dialog, calendar, backup, app-lock, optimizations
+  and shell scripts again.
+
+**Resolved (2026-10-28, M9.3)**
+- **Buyer-chosen charge currency** (the old open question 1), the user's choices:
+  - **Proton** (fixed price lists in USD, CAD, EUR and CHF, the buyer picks one): a card's FX fee is judged against the
+    item's own currency, pickPrice's, which its charges and totals already use: the user's own when Proton sells in
+    it (a Canadian pays CAD), else `billingCurrency` (USD). A card in another currency pays its FX fee. Someone who
+    pays in another currency records it with "I pay a different price" in that currency, and the fee follows it.
+  - **Mullvad** (one fixed €5 a month, cards also charged in about 20 currencies at its own rate): charged in EUR, as
+    stored, so a card in another currency pays its FX fee on the ECB's conversion (CA$94.17 + 2.5% = CA$96.52 for a
+    year). Mullvad's own conversion cost CA$98.04 on 2026-10-26, 4.1% over the ECB's, more than a 2.5% fee. Its blog
+    (2023-10-04, "Select your local currency when paying for Mullvad to avoid fees!") says the local price is "the
+    equivalent of €5" at "the correct exchange rate ... without any extra fees", which that checkout didn't bear
+    out. The item dialog's card hint says a checkout that offers your currency converts at its own rate.
+  - So every charge now says what the provider charges, in its currency: `Charge.charged` (`{ amount, currency }`,
+    tax included, the prices' `source` before any conversion). Parts charged in different currencies are separate
+    charges, which no real item has.
+- **The maths** (`packages/core/src/rewards/`, pure and tested):
+  - `networkRate` (the ECB's for every network, the one place for a network's own) and `cardCost`: the charge with
+    tax in the card's currency, the FX fee when the currencies differ, the posted amount (what counts against the
+    limit), cash back on it, and the net; "estimated" when converted.
+  - **Eligibility** (`cardAcceptance`, `eligibleCards`): the networks the seller takes where the item is bought
+    (`ResolvedItem.acceptedNetworks`, from core's `acceptedNetworksIn`: the region, its group, GLOBAL; a bundle's
+    seller's), every card where they aren't known (a custom subscription's never are).
+  - **An item's charges on a card** (`itemLedger`, `itemOnCard`): the next 12 months for savings (PROJECT-PLAN
+    §3.1), and what's posted to it in each of the 12 calendar months from this one for its limit, an annual plan in
+    the month it's charged.
+  - **Limits** (`cardLoads`, `overLimits`, `fits`): a month whose posted charges go over a card's limit, with the
+    days past it (the one that goes over, and later ones that month), for P10's days and P11's tiles.
+  - **A month on a card** (`monthlyOnCard`, `cardChoices`, `bestCard`): today's monthly equivalent with tax, its FX
+    fee and cash back, so net = gross + FX fee − cash back (P11's acceptance), for P4's figures and P6's select and
+    Best card chip.
+  - **Assign best cards** (`assignCards`): the most cash back less FX fees over the next 12 months, within each
+    card's limit in every one of the 12 months and the seller's networks: the items with the most to lose (best card
+    against the next; an item with one card possible first) take their best card with room, then moves and swaps
+    while they save more. An item with a card always keeps one, moving only to a better card or one its seller
+    takes; one with no card gets one only when it pays back more than its FX fees; an item in a list with unsaved
+    edits keeps its card, which its charges count against.
+  - The tile's summary (`cardSummary`) now posts this month's charges with their FX fees, and gives the net a month
+    and the months over the limit.
+- **The optimizer's card action** (section 10.3's 7th, `optimizer/card-suggestions.ts`): "Pay for X with a better card"
+  as a free saving, for any item, an Essential plan's too: its seller's card that leaves the least to pay over the next
+  12 months, with room for its charges on top of what's on the card (the other lists' items, `cardLoads` in the
+  input, and this list's). The items it saves the most for choose first, and each suggestion's charges count against
+  the cards the next ones look at, never freeing room, so they all fit, alone or together. The action names the card
+  (`cardTitle`) and the one it's paid with now (`fromCardTitle`); Apply sets the draft item's `cardId` and nothing
+  else; the fingerprint includes both cards, so a dismissal ends when the item's card changes. "Save up to" adds the
+  card savings of the items the best plan keeps.
+- **Tests:** 34 more in core (the formula, Mullvad's euros, a USD card, eligibility per region, limits and their
+  days, the assignment within limits with fixed items, the monthly figures and the best card, and the optimizer's
+  card suggestions with Apply).
+
+
+**Resolved (2026-10-28, M9.2)**
+- **`acceptedNetworks` is per region, quoted** (the user's choice): a map keyed like `billingCurrency` (a country, a
+  group such as EU, or GLOBAL), each entry `{ networks, url, quotes }`: the networks, the provider's own page that
+  names them, and its words, word for word. Netflix showed why: its Canadian page lists Visa, MasterCard and American
+  Express, and its US page adds Discover. The schema (`acceptedNetworksSchema`) needs each network named in the quotes
+  (core's `card-networks.ts`: `namesNetwork`, `networksNamedIn`, MasterCard or Mastercard, Amex or American Express;
+  `other` needs no name), and `validateCatalog` a real region and a page on the provider's own domains. A region left
+  out is unknown. The API shows the map as written (the contract's examples changed with it), the D1 tables don't
+  change, and a downloaded catalog file with the old list fails its schema in the browser and is downloaded again,
+  as any cached file that doesn't read is (M4.3), so it needs no Dexie version.
+- **The data, read 2026-10-28:**
+  - Netflix: Canada Visa, MasterCard and American Express; the US adds Discover (`help.netflix.com/en/node/116380/ca`
+    and `/us`).
+  - Disney+: Canada JCB, Visa, Mastercard, American Express and Diners Club (`other`); the US Visa (the Disney Visa
+    too), Mastercard, American Express and Discover. One help article, whose list follows the country picked.
+  - Hulu (US): American Express, Visa, Mastercard and Discover, U.S. cards only. ESPN (US): Visa (the Disney Visa too),
+    Mastercard, Amex and Discover.
+  - Proton (GLOBAL): Visa, Mastercard and American Express, in `/pricing`'s FAQ; its support page says only "all
+    major credit and debit cards".
+  - None named, so none stored (each file's comment says what its pages said): Mullvad ("credit card"; the card
+    checkout needs an account), Crave, TSN and RDS (Bell Media's help says "credit card", and the payment details are
+    behind a sign-in), and ICI TOU.TV ("par carte de crédit").
+- **The pipeline:** M3's scripts aren't built, so the price-research skill (its new rule) and section 6.5's extraction
+  (for M3.4) record it, and the nightly bot rechecks it (section 6.4): each region's page is read once a night with
+  the rest; a quote gone takes the region's networks out (`withoutAcceptedNetworks`), for review, so its cards are
+  unknown again; a network named within 40 characters of the quotes that isn't listed is for review, since only the
+  page's words can add one. A page several regions cite (Disney+'s) shows one country's list at a time, so when
+  another region's quotes are all there, a region's missing ones are "needs manual check", never a removal. The bot's
+  bundle is 680.8 KiB gzipped. It needs redeploying from main once this is merged (section 7.2).
+- **The skill's driver:** Disney+'s help centre picker is now a button named "Change country or language", showing a
+  flag and the language; `read-page.cjs`'s `country:` step finds it by that name.
+
+**Resolved (2026-10-28, M9.1)**
+- **Payment** (PROJECT-PLAN P11) is "Payment cards" with Add card, and under it "We never ask for card numbers, only
+  what's needed to estimate cash back and fees." A tile per card, two side by side where they fit: its nickname with
+  its name under it; the network and Credit or Debit as outlined badges (their names: no brand images); "1.5% cash
+  back · FX fee 2.5%"; "This month" with a budget bar of this month's charges paid with it against its limit ("≈
+  $114.10 of $500.00", in the card's currency at the ECB rate), or "No limit"; then the subscriptions paid with it,
+  from every list, each with what it costs a month today with sales tax (core's `monthlyWithTax`), and their total
+  ("≈ $27.79 / mo with tax"); then ✎ and 🗑. Under the tiles, "1 subscription has no card". With no cards, an empty
+  state. Core's `cardSummary` (`rewards/card-summary.ts`) gives a tile's figures.
+- **Amounts with tax** (the user's choice for P4's net costs, M9): cash back is earned on the amount charged, tax
+  included (section 4.8), so the card figures are with tax, as the totals are, and the price tags stay before tax.
+- **The card dialog** (`ss-card-dialog`, opened by `CardEditor`, so Material's dialog and it load on first use) has
+  section 9.2's fields and no more: Name, Nickname, Type, Network, Card currency (the user's for a new card), Cash
+  back ("Points cards: your own effective %"), FX fee ("Most Canadian cards charge 2.5%") and Monthly limit, in the
+  card's currency, empty for none. It starts with "Never enter a card number. Simply Sub never asks for one, …".
+  Cash back and FX fee left empty are 0. Core's `cardFormIssues` refuses 12 or more digits in a row in every field,
+  the number fields too (typed as text), and the schema now refuses a limit of 12 digits (`maxMonthlyLimit`) as well
+  as a name or nickname with a card number, so no import can store one either.
+- **Deleting** asks "Delete Everyday?" with how many subscriptions it pays for, in lists and drafts (core's
+  `cardUsage`): "2 subscriptions are paid with it, and will have no card." `CardsRepository.removeWithItems`
+  soft-deletes it and takes it off every item and draft in one transaction (core's `withoutCard`), as deleting a tag
+  does. Focus moves to the next tile's 🗑, else Add card.
+- **`CardsRepository`** on the `cards` table: create, update and soft delete through `RecordRepository`, every record
+  checked on the way in and out; the app lock seals its rows and backups carry them, as before.
+- **Bundles:** the initial bundle went from 497.31 to 496.39 kB (esbuild regrouped a shared chunk). The page is 13.1
+  kB raw (4.5 kB gzipped) and the dialog 8.7 kB (2.9 kB), both lazy.
+- **Browser checks:** `check-payment.cjs` (new) passes 89/89 on `ng serve`.
 
 **Resolved (2026-10-28, M8.3)**
 - **The free-tier limits** (the old open question 1), read on Cloudflare's pages on 2026-10-28 and recorded in

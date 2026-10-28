@@ -26,10 +26,21 @@ export interface Charge {
   manual: boolean;
   /** The last charge before the item's end date: the calendar marks it "Ends" (P10). */
   ends?: true;
+  /**
+   * What the provider charges, sales tax included, in the currency it charges: its prices' own (pickPrice's, or a
+   * price override's), before any conversion. A payment card's FX fee and cash back are worked on it (BLUEPRINT §9.3).
+   */
+  charged: Charged;
+}
+
+/** An amount in the currency the provider charges it in. */
+export interface Charged {
+  amount: number;
+  currency: string;
 }
 
 /** What one charge costs: an item's (periodCost), or a part of a date's charges in one currency. */
-export type ChargeCost = Pick<Charge, 'amount' | 'tax' | 'currency' | 'converted'>;
+export type ChargeCost = Pick<Charge, 'amount' | 'tax' | 'currency' | 'converted' | 'charged'>;
 
 /** What an item's charges need: its record, its prices for its period, and its price override's. */
 export type Chargeable = Pick<
@@ -98,7 +109,15 @@ export function itemCharges(resolved: Chargeable, range: DateRange, place: TaxPl
  */
 export function periodCost(resolved: Chargeable, date: IsoDate, place: TaxPlace): ChargeCost {
   const [cost] = costsOf(ownParts(resolved, date), buyerTaxPlace(place, resolved.item.region));
-  return cost ?? { amount: 0, tax: 0, currency: resolved.price.currency, converted: false };
+  return (
+    cost ?? {
+      amount: 0,
+      tax: 0,
+      currency: resolved.price.currency,
+      converted: false,
+      charged: { amount: 0, currency: resolved.price.source.currency },
+    }
+  );
 }
 
 /** Whether the item is renewed by hand: `autoRenew: false`, or a prepaid plan's dates (the calendar's ↻). */
@@ -165,29 +184,38 @@ function ownParts(resolved: Chargeable, date: IsoDate): Part[] {
 }
 
 /**
- * Parts of a charge priced with sales tax and added up by currency. A price with no rate to convert it stays in its
- * own currency, so a date can have a charge in each. A part that comes to 0 adds nothing.
+ * Parts of a charge priced with sales tax and added up by currency, a charge for each: a price with no rate to convert
+ * it stays in its own currency, so a date can have a charge in each; and a part the provider charges in another
+ * currency is a charge of its own too, since a card's FX fee depends on it. A part that comes to 0 adds nothing.
  */
 function costsOf(parts: readonly Part[], taxPlace: TaxPlace): ChargeCost[] {
-  const byCurrency = new Map<string, ChargeCost>();
+  const bySource = new Map<string, ChargeCost>();
   for (const { price, count } of parts) {
     const amount = price.amount * count;
     if (amount === 0) continue;
-    const sum = byCurrency.get(price.currency) ?? {
+    const source = price.source.currency;
+    const key = `${price.currency} ${source}`;
+    const sum = bySource.get(key) ?? {
       amount: 0,
       tax: 0,
       currency: price.currency,
       converted: false,
+      charged: { amount: 0, currency: source },
     };
     const tax = salesTaxOn(amount, price, taxPlace);
-    byCurrency.set(price.currency, {
+    const charged = price.source.amount * count;
+    bySource.set(key, {
       amount: sum.amount + amount + tax,
       tax: sum.tax + tax,
       currency: price.currency,
       converted: sum.converted || price.fx !== undefined,
+      charged: {
+        amount: sum.charged.amount + charged + salesTaxOn(charged, price, taxPlace),
+        currency: source,
+      },
     });
   }
-  return [...byCurrency.values()];
+  return [...bySource.values()];
 }
 
 /** Whether a charge on a date costs the item's price override: it has one, and the date is before its `until`. */

@@ -1,7 +1,13 @@
 import { parse } from 'yaml';
 import { describe, expect, it } from 'vitest';
 import { bundleSchema, providerSchema } from '@simply-sub/core';
-import { withLastVerified, withPrice, withoutReseller, withoutTaxIncluded } from '../src/yaml-edit';
+import {
+  withLastVerified,
+  withPrice,
+  withoutAcceptedNetworks,
+  withoutReseller,
+  withoutTaxIncluded,
+} from '../src/yaml-edit';
 import bundleYaml from '../../../data/bundles/disney-crave-premium.yaml?raw';
 import mullvadYaml from '../../../data/providers/mullvad.yaml?raw';
 import netflixYaml from '../../../data/providers/netflix.yaml?raw';
@@ -102,6 +108,20 @@ describe('YAML edits', () => {
     }
     expect(all).not.toContain('resellers:');
     expect(providerSchema.safeParse(parse(all)).success).toBe(true);
+  });
+
+  it('remove a region’s accepted networks, and the acceptedNetworks key with the last one', () => {
+    const withoutUs = withoutAcceptedNetworks(netflixYaml, 'US') ?? '';
+    const provider = providerSchema.parse(parse(withoutUs));
+    expect(Object.keys(provider.acceptedNetworks ?? {})).toEqual(['CA']);
+    // Only the US block's lines: "  US:" and what's under it.
+    expect(withoutUs).toBe(netflixYaml.replace(/^ {2}US:\n(?: {4}.*\n)+/m, ''));
+    expect(differing(netflixYaml, withoutUs)).toBeGreaterThan(0);
+    const neither = withoutAcceptedNetworks(withoutUs, 'CA') ?? '';
+    expect(providerSchema.parse(parse(neither)).acceptedNetworks).toBeUndefined();
+    expect(neither).not.toContain('acceptedNetworks:');
+    expect(withoutAcceptedNetworks(neither, 'CA')).toBeUndefined();
+    expect(withoutAcceptedNetworks(netflixYaml, 'GB')).toBeUndefined();
   });
 
   it('give undefined for a price or reseller the file doesn’t have', () => {

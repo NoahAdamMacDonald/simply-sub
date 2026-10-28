@@ -31,6 +31,17 @@ export interface ApprovalTarget {
   quotes: string[];
 }
 
+/** A region's accepted card networks: the provider's page that names them, and its words (BLUEPRINT §9.3). */
+export interface NetworksTarget {
+  file: string;
+  provider: string;
+  /** The region they're for: CA, US, a group or GLOBAL. */
+  region: string;
+  networks: string[];
+  url: string;
+  quotes: string[];
+}
+
 /** Something the check found, for the pull request. */
 export type Finding =
   /** The page shows another regular price: the stored amount changes, flagged when it moves more than 30%. */
@@ -41,6 +52,12 @@ export type Finding =
   | { kind: 'tax'; target: PriceTarget; reason: 'quote-gone' | 'contradicted'; wording?: string }
   /** The provider's page no longer names a reseller: its listing is removed, for review. */
   | { kind: 'reseller'; approval: ApprovalTarget; missing: string[] }
+  /**
+   * A region's accepted networks: quotes gone from their page take the region's networks out (unknown again, so every
+   * card is allowed there), for review; networks the page names beside them that the catalog doesn't list are for
+   * review too, since only the page's words can add one.
+   */
+  | { kind: 'networks'; target: NetworksTarget; missing: string[]; named: string[] }
   /** A provider's or reseller's icon isn't the committed logo any more (a rebrand). */
   | { kind: 'logo'; id: string; png: string; width: number; source: string; replaces: boolean }
   /** Something that couldn't be checked, which a person should look at. */

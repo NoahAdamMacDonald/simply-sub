@@ -15,6 +15,13 @@ export interface CalendarEntry {
   title: string;
   iconUrl?: string;
   listName: string;
+  /** The payment card it's paid with, by its name (M9.4). */
+  card?: string;
+  /**
+   * Its card is over its monthly limit with this charge (P10, M9.4): "Everyday goes over its $100.00 limit in November
+   * 2026: ≈ $157.05".
+   */
+  overLimit?: string;
 }
 
 /** A day's charges. */

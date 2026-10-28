@@ -568,6 +568,41 @@ describe('validateCatalog', () => {
     });
   });
 
+  describe('acceptedNetworks', () => {
+    const canada = {
+      networks: ['visa', 'mastercard', 'amex'],
+      // The test catalog's streaming providers are on example.com.
+      url: 'https://help.example.com/payment-methods',
+      quotes: ['Visa', 'MasterCard', 'American Express'],
+    };
+
+    it('takes a page of the provider’s own sites for each region, GLOBAL and groups too', () => {
+      const regions = catalogWith(netflix, ['acceptedNetworks'], {
+        CA: canada,
+        EU: canada,
+        GLOBAL: canada,
+      });
+      expect(messages(regions)).toEqual([]);
+    });
+
+    it('needs real regions, and the provider’s own page', () => {
+      expect(messagesWith(netflix, ['acceptedNetworks'], { XX: canada })).toEqual([
+        `data/providers/netflix.yaml acceptedNetworks.XX: "XX" isn't an ISO 3166-1 alpha-2 region code (CA, US, GB), a group (EU) or GLOBAL`,
+      ]);
+      const elsewhere = {
+        ...canada,
+        url: 'https://www.paypal.com/ca/webapps/mpp/accept-payments-online',
+      };
+      expect(messagesWith(netflix, ['acceptedNetworks'], { CA: elsewhere })).toEqual([
+        "data/providers/netflix.yaml acceptedNetworks.CA.url: Must be a page of Netflix's own sites, on example.com: only the cards it says it takes are listed",
+      ]);
+    });
+
+    it('is optional', () => {
+      expect(messagesWith(netflix, ['acceptedNetworks'], undefined)).toEqual([]);
+    });
+  });
+
   describe('regions', () => {
     it('needs a real ISO 3166-1 code, and says the United Kingdom is GB', () => {
       // Only the region's own error: billingCurrency isn't also asked to list "UK".

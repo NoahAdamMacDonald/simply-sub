@@ -413,6 +413,7 @@ describe('resolveItem', () => {
         listId,
         converted: false,
         manual: false,
+        charged: { amount: 18.99 + 18.99 * 0.13, currency: 'CAD' },
       });
       expect(netflix.status).toEqual({ kind: 'active', manual: false });
       // Without a tax place, nothing is added.

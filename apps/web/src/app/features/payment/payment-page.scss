@@ -1,0 +1,181 @@
+:host {
+  display: block;
+  max-width: 960px;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--ss-text-muted);
+}
+
+.note {
+  margin: 0;
+  color: var(--ss-text-muted);
+}
+
+// Two tiles side by side where they fit, as on P11, one under 600 px.
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 16px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+  overflow-wrap: anywhere;
+
+  p {
+    margin: 0;
+  }
+}
+
+// The card's name, with its network and credit or debit on the right.
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+
+.names {
+  flex: 1 1 160px;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font: var(--mat-sys-title-medium);
+  font-weight: 600;
+}
+
+.name,
+.muted,
+.no-limit {
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.badge {
+  padding: 0 8px;
+  border: 1px solid var(--ss-divider);
+  border-radius: 999px;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-label-medium);
+  white-space: nowrap;
+}
+
+.rates {
+  font: var(--mat-sys-body-medium);
+}
+
+.limit-heading {
+  display: block;
+  margin-bottom: 4px;
+  font: var(--mat-sys-label-large);
+}
+
+// The bar, then its total beside it, under it when there's no room (as ss-budget-totals lays them out).
+.line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+}
+
+.bar {
+  flex: 1 1 140px;
+}
+
+.limit-total {
+  font: var(--mat-sys-body-medium);
+}
+
+.subscriptions {
+  flex: 1;
+}
+
+// Each subscription with what it costs a month on the right, then the total.
+.paid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0 12px;
+    padding: 2px 0;
+    font: var(--mat-sys-body-medium);
+  }
+}
+
+.paid-title {
+  min-width: 0;
+}
+
+.total {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid var(--ss-divider);
+  font: var(--mat-sys-body-medium);
+  font-weight: 600;
+  text-align: end;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.net {
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+  text-align: end;
+}
+
+// Over its limit in a month (M9.4): the danger colour, as a budget warning's.
+.over-limit {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  color: var(--ss-danger);
+  font: var(--mat-sys-body-medium);
+
+  mat-icon {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+  }
+}
+
+// "1 subscription has no card", then Assign best cards (P11).
+.assign {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: 16px;
+}
+
+.unassigned {
+  margin: 0;
+  color: var(--ss-text-muted);
+}

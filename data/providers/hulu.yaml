@@ -3,6 +3,18 @@ name: Hulu
 website: https://www.hulu.com
 category: streaming
 spendCategory: streaming
+# Accepted cards, read 2026-10-28 (M9.2) on the help centre's Your payment options (/article/hulu-payment-options):
+# American Express, Visa, Mastercard and Discover, U.S. cards only.
+acceptedNetworks:
+  US:
+    networks: [amex, visa, mastercard, discover]
+    url: https://help.hulu.com/article/hulu-payment-options
+    quotes:
+      - 'We accept U.S. based credit or debit cards like:'
+      - American Express
+      - Visa
+      - Mastercard
+      - Discover
 billingCurrency: { US: USD }
 # help.hulu.com/article/hulu-how-much-does-hulu-cost, read 2026-10-26: "To subscribe to Hulu, you'll need: To be
 # located within the U.S."

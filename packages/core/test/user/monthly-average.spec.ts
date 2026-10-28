@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   buildCatalogData,
   monthlyAverage,
+  monthlyWithTax,
   readCatalogSource,
   resolveItem,
   type ListItem,
@@ -117,5 +118,47 @@ describe('monthlyAverage', () => {
     expect(
       monthlyAverage([resolved('netflix.standard', inDollars.item, noRates)], 'CAD'),
     ).toMatchObject({ amount: 0, leftOut: 1 });
+  });
+});
+
+describe('monthlyWithTax', () => {
+  const ontario = { country: 'CA', subdivision: 'CA-ON' };
+
+  it('adds the sales tax its charges add to its monthly equivalent', () => {
+    const netflix = resolved('netflix.standard', {
+      source: {
+        kind: 'catalog',
+        planId: 'netflix.standard',
+        addOns: [{ id: 'netflix.extra-member', quantity: 2 }],
+      },
+    });
+    const monthly = monthlyWithTax(netflix, 'CAD', ontario);
+    expect(monthly?.amount).toBeCloseTo((18.99 + 2 * 7.99) * 1.13);
+    expect(monthly?.converted).toBe(false);
+    const crave = resolved('crave.standard', { billing: { ...yearly, autoRenew: true } });
+    expect(monthlyWithTax(crave, 'CAD', ontario)?.amount).toBeCloseTo((119.99 / 12) * 1.13);
+  });
+
+  it('says when a price was converted', () => {
+    const mullvad = resolved('mullvad.vpn', { billing: yearly });
+    const monthly = monthlyWithTax(mullvad, 'CAD', ontario);
+    expect(monthly?.amount).toBeCloseTo((60 / 0.664 / 12) * 1.13);
+    expect(monthly?.converted).toBe(true);
+  });
+
+  it('adds none to a typed price, which includes it, unless it is plus tax', () => {
+    const typed = resolved('netflix.standard', {
+      priceOverride: { amount: 15.99, currency: 'CAD' },
+    });
+    expect(monthlyWithTax(typed, 'CAD', ontario)?.amount).toBeCloseTo(15.99);
+    const plusTax = resolved('netflix.standard', {
+      priceOverride: { amount: 15.99, currency: 'CAD', plusTax: true },
+    });
+    expect(monthlyWithTax(plusTax, 'CAD', ontario)?.amount).toBeCloseTo(15.99 * 1.13);
+  });
+
+  it('is undefined for want of a rate', () => {
+    const mullvad = resolved('mullvad.vpn', { billing: yearly }, noRates);
+    expect(monthlyWithTax(mullvad, 'CAD', ontario)).toBeUndefined();
   });
 });

@@ -63,6 +63,41 @@ describe('providerSchema', () => {
     });
   });
 
+  describe('accepted card networks', () => {
+    const canada = ['acceptedNetworks', 'CA'];
+
+    it('are given per region, GLOBAL too, each with its page and the words that name them', () => {
+      const global = withValue(provider, ['acceptedNetworks', 'GLOBAL'], {
+        networks: ['visa', 'mastercard', 'amex', 'discover', 'jcb', 'unionpay', 'other'],
+        url: 'https://help.netflix.com/en/node/116380',
+        quotes: ['Visa, Mastercard, American Express, Discover, JCB, Union Pay and Diners Club'],
+      });
+      expect(issues(providerSchema, global)).toEqual([]);
+    });
+
+    it('needs a quote to name each network, in any case, other excepted', () => {
+      const discover = withValue(
+        provider,
+        [...canada, 'networks'],
+        ['visa', 'mastercard', 'amex', 'discover'],
+      );
+      expect(issues(providerSchema, discover)).toEqual([
+        "acceptedNetworks.CA.networks.3: No quote names Discover: quote the page's words for it",
+      ]);
+      const written = withValue(provider, [...canada, 'quotes'], ['VISA, Mastercard and AMEX']);
+      expect(issues(providerSchema, written)).toEqual([]);
+      const other = withValue(written, [...canada, 'networks'], ['visa', 'other']);
+      expect(issues(providerSchema, other)).toEqual([]);
+    });
+
+    it('rejects a network listed twice', () => {
+      const twice = withValue(provider, [...canada, 'networks'], ['visa', 'visa']);
+      expect(issues(providerSchema, twice)).toEqual([
+        'acceptedNetworks.CA.networks.1: "visa" is listed more than once',
+      ]);
+    });
+  });
+
   describe('unknown keys', () => {
     it.each([
       ['on the provider', ['cancelURL'], ': Unrecognized key: "cancelURL"'],
@@ -145,11 +180,18 @@ describe('providerSchema', () => {
       [['plans', 0, 'prices'], [], 'List at least one price'],
       [['plans'], [], 'List at least one plan'],
       [
-        ['acceptedNetworks', 1],
+        ['acceptedNetworks', 'CA', 'networks', 1],
         'diners',
         'Invalid option: expected one of "visa"|"mastercard"|"amex"|"discover"|"interac"|"unionpay"|"jcb"|"other"',
       ],
-      [['acceptedNetworks'], [], 'Leave acceptedNetworks out when they are unknown'],
+      [['acceptedNetworks'], {}, 'Leave acceptedNetworks out when they are unknown'],
+      [['acceptedNetworks', 'CA', 'networks'], [], 'List at least one network'],
+      [['acceptedNetworks', 'CA', 'quotes'], [], 'Quote the words that name them'],
+      [
+        ['acceptedNetworks', 'CA', 'url'],
+        'http://help.netflix.com/en/node/116380/ca',
+        'Use a full https:// URL',
+      ],
       [['availableIn'], [], 'Leave availableIn out when the regions are unknown'],
       [
         ['billingCurrency', 'CA'],

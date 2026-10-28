@@ -23,6 +23,7 @@ import { SettingsStore } from '../../core/settings/settings-store';
 import { OptimizerService } from '../../core/optimizer/optimizer-service';
 import { DismissedSuggestionsRepository } from '../../core/storage/dismissed-suggestions-repository';
 import { DraftsRepository } from '../../core/storage/drafts-repository';
+import { CardsRepository } from '../../core/storage/cards-repository';
 import { ItemsRepository } from '../../core/storage/items-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
 import { RankingsRepository } from '../../core/storage/rankings-repository';
@@ -239,6 +240,35 @@ describe('ListViewPage', () => {
       `/lists/${work.id}/edit`,
     );
     expect(text(page().querySelector('.shown'))).toBe('');
+  });
+
+  it('shows the net beside the gross, with tax, once an item is paid with a card (M9.4)', async () => {
+    await plant();
+    await open(work.id);
+    expect(page().querySelector('.net-summary')).toBeNull();
+    const card = await TestBed.inject(CardsRepository).create({
+      name: 'Simplii Cashback Mastercard',
+      nickname: 'Everyday',
+      type: 'credit',
+      network: 'mastercard',
+      currency: 'CAD',
+      cashbackPercent: 1.5,
+      fxFeePercent: 2.5,
+    });
+    await TestBed.inject(ItemsRepository).update(netflix.id, { cardId: card.id });
+    // A month with Alberta's 5%: Netflix $19.94 with 1.5% back, Mullvad ≈ $7.85 and Crave $23.10 with no card.
+    await until(() => page().querySelector('.net-summary') !== null);
+    expect(text(page().querySelector('.net-summary [aria-hidden="true"]'))).toBe(
+      '≈ $50.89 / mo with tax · ≈ $50.59 after cash back & FX fees',
+    );
+    expect(text(page().querySelector('.net-summary .visually-hidden'))).toBe(
+      'about $50.89 a month with tax, about $50.59 after cash back and FX fees',
+    );
+    const netflixCard = page().querySelector(`[data-item="${netflix.id}"] .on-card`);
+    expect(spoken(netflixCard)).toBe(
+      'Paid with Everyday: $19.94 a month with tax, $19.64 after cash back and FX fees',
+    );
+    expect(page().querySelectorAll('.on-card')).toHaveLength(1);
   });
 
   it('shows this month and this year, and each card’s share of the next 12 months (M7.2)', async () => {

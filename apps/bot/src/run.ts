@@ -3,7 +3,7 @@ import { checkPages, message, type CheckInput, type PageDeps } from './check-pag
 import type { RepositoryState } from './github';
 import { filesToRead, proposal, type Proposal } from './proposal';
 import type { Robots } from './robots';
-import { approvalTargets, bundleTargets, providerTargets } from './targets';
+import { approvalTargets, bundleTargets, networksTargets, providerTargets } from './targets';
 import type { Budget, Finding } from './types';
 
 // A night's price check (BLUEPRINT §6.4), as the Workflow runs it: read what's to check, read each host's robots.txt
@@ -17,7 +17,7 @@ export type Step = <T>(name: string, task: () => Promise<T>) => Promise<T>;
 
 /** What to check: each provider's and bundle's pages, and every host they and the websites are on. */
 export interface CatalogIndex {
-  /** Provider id → the pages its prices and resellers' approvals cite. */
+  /** Provider id → the pages its prices, resellers' approvals and accepted networks cite. */
   providers: Record<string, string[]>;
   /** Bundle id → the pages its prices cite. */
   bundles: Record<string, string[]>;
@@ -126,6 +126,7 @@ export async function runPriceCheck(
         subject: id,
         targets: [...(provider ? providerTargets(provider) : []), ...(await bundlesOf(bundles))],
         approvals: provider ? approvalTargets(provider) : [],
+        networks: provider ? networksTargets(provider) : [],
         ...(provider && { logo: { id, website: provider.website, ...committed(repository, id) } }),
       };
     });
@@ -135,6 +136,7 @@ export async function runPriceCheck(
       subject: bundles.join(', '),
       targets: await bundlesOf(bundles),
       approvals: [],
+      networks: [],
     }));
   }
   for (const reseller of repository.resellers) {
@@ -142,6 +144,7 @@ export async function runPriceCheck(
       subject: reseller.id,
       targets: [],
       approvals: [],
+      networks: [],
       logo: { id: reseller.id, website: reseller.website, ...committed(repository, reseller.id) },
     }));
   }

@@ -23,12 +23,14 @@ import {
   addDays,
   addMonths,
   addMonthsToMonth,
+  cardTitle,
   chargeTotal,
   hiddenLists,
   itemTitle,
   monthGrid,
   monthOf,
   monthRange,
+  overLimits,
   readCalendarParams,
   weekdayOf,
   writeCalendarParams,
@@ -38,8 +40,10 @@ import {
 } from '@simply-sub/core';
 import { map } from 'rxjs';
 import { ClockService } from '../../core/clock/clock-service';
+import { FxStore } from '../../core/fx/fx-store';
 import { MetricsService } from '../../core/metrics/metrics-service';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { CardsRepository } from '../../core/storage/cards-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
 import { BudgetBar } from '../../shared/budget-bar/budget-bar';
 import { chargeAmountText, nearDateText } from '../../shared/charge-text';
@@ -113,6 +117,8 @@ export class CalendarPage {
   private readonly metrics = inject(MetricsService);
   private readonly lists = inject(ListsRepository);
   private readonly settings = inject(SettingsStore);
+  private readonly fx = inject(FxStore);
+  private readonly cards = inject(CardsRepository);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector = inject(Injector);
   private readonly exporter = inject(Exporter);
@@ -188,14 +194,46 @@ export class CalendarPage {
   private readonly listNames = computed(
     () => new Map(this.listChoices().map((list) => [list.id, list.name])),
   );
+  /**
+   * The shown month's days that take a card over its monthly limit (P10, M9.4; core's overLimits), by card id: every
+   * list's charges count against a card, shown or not.
+   */
+  private readonly overLimit = computed(() => {
+    const saved = this.settings.saved();
+    const over = new Map<string, { days: ReadonlySet<IsoDate>; text: string }>();
+    if (!saved) return over;
+    const fx = this.fx.rates();
+    const context = {
+      today: this.today(),
+      currency: saved.currency,
+      place: saved,
+      ...(fx && { fx }),
+    };
+    const cards = this.cards.records();
+    for (const found of overLimits([...this.resolved().values()], cards, [this.month()], context)) {
+      const card = this.cards.byId().get(found.cardId);
+      if (!card) continue;
+      const money = (amount: number) => amountText(amount, card.currency, saved.country);
+      over.set(found.cardId, {
+        days: new Set(found.days),
+        text:
+          `${cardTitle(card)} goes over its ${money(found.limit)} limit in ${monthText(found.month)}: ` +
+          `${found.converted ? '≈ ' : ''}${money(found.posted)}`,
+      });
+    }
+    return over;
+  });
   /** The shown month's charges for the lists shown, as entries by day. */
   private readonly entries = computed(() => {
     const byDay = new Map<IsoDate, CalendarEntry[]>();
     const charges = this.metrics.charges(monthRange(this.month()), this.shown());
+    const cards = this.cards.byId();
     for (const [index, charge] of charges.entries()) {
       const resolved = this.resolved().get(charge.itemId);
       if (!resolved) continue;
       const { item, name } = resolved;
+      const card = cards.get(item.cardId ?? '');
+      const over = card && this.overLimit().get(card.id);
       const entry: CalendarEntry = {
         key: `${charge.itemId}-${charge.date}-${charge.currency}-${index}`,
         charge,
@@ -204,6 +242,8 @@ export class CalendarPage {
         title: itemTitle(resolved),
         ...(resolved.iconUrl !== undefined && { iconUrl: resolved.iconUrl }),
         listName: this.listNames().get(charge.listId) ?? '',
+        ...(card && { card: cardTitle(card) }),
+        ...(over?.days.has(charge.date) && { overLimit: over.text }),
       };
       byDay.set(charge.date, [...(byDay.get(charge.date) ?? []), entry]);
     }
@@ -275,9 +315,11 @@ export class CalendarPage {
             ? ''
             : `${total.approx ? '≈ ' : ''}${amountText(total.amount, currency, country)}`;
         const count = entries.length;
+        const overLimit = entries.some((entry) => entry.overLimit !== undefined);
         return {
           date,
           inMonth,
+          overLimit,
           number: Number(date.slice(8)),
           chips: entries.slice(0, chipCount).map((entry) => ({
             key: entry.key,
@@ -289,9 +331,10 @@ export class CalendarPage {
           more: Math.max(0, count - chipCount),
           total: totalText,
           label:
-            count === 0
+            (count === 0
               ? spokenDayText(date)
-              : `${spokenDayText(date)}, ${count === 1 ? '1 payment' : `${count} payments`}, ${totalText.replace('≈ ', 'about ')}`,
+              : `${spokenDayText(date)}, ${count === 1 ? '1 payment' : `${count} payments`}, ${totalText.replace('≈ ', 'about ')}`) +
+            (overLimit ? ', over a card’s limit' : ''),
         };
       }),
     );

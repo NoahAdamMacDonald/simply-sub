@@ -453,6 +453,18 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
       report(['billingCurrency', region], `"${currency}" isn't a real ISO 4217 currency code`);
     }
   }
+  const own = [siteDomain(provider.website), ...(provider.domains ?? [])];
+  for (const [region, accepted] of Object.entries(provider.acceptedNetworks ?? {})) {
+    if (!isCatalogRegion(region)) {
+      report(['acceptedNetworks', region], regionProblem(region));
+    }
+    if (!isOnDomain(accepted.url, own)) {
+      report(
+        ['acceptedNetworks', region, 'url'],
+        `Must be a page of ${provider.name}'s own sites, on ${own.join(' or ')}: only the cards it says it takes are listed`,
+      );
+    }
+  }
 
   const planIds = provider.plans.map((plan) => plan.id);
   const addOnIds = (provider.addOns ?? []).map((addOn) => addOn.id);

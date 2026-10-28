@@ -4,7 +4,29 @@ aliases: [disney plus, disneyplus]
 website: https://www.disneyplus.com
 category: streaming
 spendCategory: streaming
-acceptedNetworks: [visa, mastercard, amex, jcb]
+# Accepted cards, read 2026-10-28 (M9.2) on the help centre's Payment methods for Disney+, whose list follows the
+# country picked (Canada, then United States): Canada takes JCB, Visa, Mastercard, American Express and Diners Club
+# (other), and the US Visa, Mastercard, American Express and Discover. "International cards are not accepted".
+acceptedNetworks:
+  CA:
+    networks: [jcb, visa, mastercard, amex, other]
+    url: https://help.disneyplus.com/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - JCB
+      - Visa
+      - Mastercard
+      - American Express
+      - Diners Club
+  US:
+    networks: [visa, mastercard, amex, discover]
+    url: https://help.disneyplus.com/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - Visa, including the Disney Visa
+      - Mastercard
+      - American Express
+      - Discover
 billingCurrency: { CA: CAD, US: USD }
 # The help centre's one cancel article: the same steps in Canada and the US (Account > Subscription > Cancel
 # Subscription), read 2026-10-26 with the help centre set to each country.

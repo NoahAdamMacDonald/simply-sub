@@ -24,6 +24,7 @@ import { CatalogStore } from '../../core/catalog/catalog-store';
 import { FxStore } from '../../core/fx/fx-store';
 import { leaveGuard } from '../../core/leave-guard';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { CardsRepository } from '../../core/storage/cards-repository';
 import { CustomSubsRepository } from '../../core/storage/custom-subs-repository';
 import { ItemsRepository } from '../../core/storage/items-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
@@ -50,6 +51,44 @@ import { ListEditPage } from './list-edit-page';
 class Elsewhere {}
 
 const unknownId = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d';
+
+/** A CAD Mastercard with 1.5% back and a 2.5% FX fee, and an Interac debit card with nothing back. */
+const simpliiFields: NewRecord<'cards'> = {
+  name: 'Simplii Cashback Mastercard',
+  nickname: 'Everyday',
+  type: 'credit',
+  network: 'mastercard',
+  currency: 'CAD',
+  cashbackPercent: 1.5,
+  fxFeePercent: 2.5,
+};
+const debitFields: NewRecord<'cards'> = {
+  name: 'Everyday Debit',
+  type: 'debit',
+  network: 'interac',
+  currency: 'CAD',
+  cashbackPercent: 0,
+  fxFeePercent: 0,
+};
+
+/** The test catalog, with Netflix taking Visa and Mastercard in Canada (M9.2). */
+const withNetworks: CatalogData = {
+  ...searchCatalogData,
+  providers: searchCatalogData.providers.map((provider) =>
+    provider.id === 'netflix'
+      ? {
+          ...provider,
+          acceptedNetworks: {
+            CA: {
+              networks: ['visa', 'mastercard'],
+              url: 'https://help.netflix.com/en/node/116380/ca',
+              quotes: ['Visa', 'MasterCard'],
+            },
+          },
+        }
+      : provider,
+  ),
+};
 
 function fields(planId: string, extra: Partial<NewRecord<'items'>> = {}): NewRecord<'items'> {
   return {
@@ -78,9 +117,12 @@ describe('ListEditPage', () => {
   let work: SubscriptionList;
   let netflix: ListItem;
   let mullvad: ListItem;
+  /** The catalog file every region is priced with: Search's small one, unless a test says. */
+  let catalogData: CatalogData;
 
   beforeEach(async () => {
     storage = testStorage();
+    catalogData = searchCatalogData;
     answer = true;
     questions = [];
     TestBed.configureTestingModule({
@@ -91,7 +133,7 @@ describe('ListEditPage', () => {
           provide: CatalogStore,
           useValue: {
             catalog: signal<CatalogData | undefined>(searchCatalogData),
-            catalogFor: () => searchCatalogData,
+            catalogFor: () => catalogData,
             need: () => undefined,
           },
         },
@@ -851,7 +893,7 @@ describe('ListEditPage', () => {
     });
 
     it('changes an item in the draft, keeping its id, pinning and card', async () => {
-      const cardId = '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d3e';
+      const cardId = (await TestBed.inject(CardsRepository).create(simpliiFields)).id;
       await TestBed.inject(ItemsRepository).update(netflix.id, { pinned: true, cardId });
       await open(editor());
       await click('Edit Netflix Standard');
@@ -888,6 +930,102 @@ describe('ListEditPage', () => {
       );
       await until(() => document.activeElement === button('Edit Netflix Standard with ads'));
       await until(() => footer()?.startsWith('Unsaved changes') === true);
+    });
+
+    describe('its card (M9.4)', () => {
+      const cardControl = (loader: HarnessLoader) => control(loader, 'Paid with', MatSelectHarness);
+      const notes = () =>
+        Array.from(dialog()?.querySelectorAll('.card-note') ?? []).map((note) =>
+          note.textContent?.replace(/\s+/g, ' ').trim(),
+        );
+
+      it('says where to add cards when there are none', async () => {
+        await open(editor());
+        await click('Edit Netflix Standard');
+        await dialogLoader();
+        expect(dialog()?.querySelector('.payment .note')?.textContent?.trim()).toBe(
+          'Add your cards on the Payment page to see what each one pays back here.',
+        );
+      });
+
+      it('offers the cards, the best one as a chip with what it saves, and saves the one chosen', async () => {
+        const cards = TestBed.inject(CardsRepository);
+        const simplii = await cards.create(simpliiFields);
+        await cards.create(debitFields);
+        await open(editor());
+        await click('Edit Netflix Standard');
+        const loader = await dialogLoader();
+        const select = await cardControl(loader);
+        await select.open();
+        // Netflix names no networks in this catalog: every card, unconfirmed.
+        expect((await select.getOptions()).length).toBe(3);
+        expect(await (await select.getOptions())[1].getText()).toBe(
+          'Everyday (Mastercard, 1.5% back) · acceptance not confirmed',
+        );
+        // Closed by choosing: Escape would close the dialog too.
+        await select.clickOptions({ text: 'No card' });
+        // $18.99 and Alberta's 5% a month, and 1.5% of it back.
+        const chip = () => dialog()?.querySelector<HTMLButtonElement>('.best-card');
+        expect(
+          chip()?.querySelector('[aria-hidden="true"]:not(mat-icon)')?.textContent?.trim(),
+        ).toBe('Best card: Everyday, saves $0.30 / mo');
+        chip()?.click();
+        await harness.fixture.whenStable();
+        expect(await select.getValueText()).toBe(
+          'Everyday (Mastercard, 1.5% back) · acceptance not confirmed',
+        );
+        expect(chip()).toBeNull();
+        expect(
+          dialog()?.querySelector('.card mat-hint [aria-hidden="true"]')?.textContent?.trim(),
+        ).toBe('$19.94 / mo with tax, $19.64 after cash back and FX fees');
+        expect(notes()).toEqual([
+          'Acceptance not confirmed: Netflix doesn’t say which cards it takes.',
+        ]);
+        await press(loader, 'Save');
+        await until(() => dialog() === null);
+        expect((await draftItem(netflix.id))?.cardId).toBe(simplii.id);
+      });
+
+      it('says a card pays FX fees on a charge in another currency: Mullvad’s euros', async () => {
+        const simplii = await TestBed.inject(CardsRepository).create(simpliiFields);
+        await TestBed.inject(ItemsRepository).update(mullvad.id, { cardId: simplii.id });
+        await open(editor());
+        await click('Edit Mullvad VPN');
+        await dialogLoader();
+        await until(() => notes().length === 2);
+        expect(notes()[1]).toBe(
+          'Mullvad VPN charges in EUR, so this card’s 2.5% FX fee applies (estimated at the ECB’s rate). ' +
+            'A checkout that offers to charge you in CAD instead converts at its own rate, which can cost more.',
+        );
+      });
+
+      it('offers only the cards its seller takes, and drops one it doesn’t, saying so', async () => {
+        catalogData = withNetworks;
+        const cards = TestBed.inject(CardsRepository);
+        await cards.create(simpliiFields);
+        const debit = await cards.create(debitFields);
+        await TestBed.inject(ItemsRepository).update(netflix.id, { cardId: debit.id });
+        await open(editor());
+        await click('Edit Netflix Standard');
+        const loader = await dialogLoader();
+        await until(() => dialog()?.querySelector('.payment .card-note') !== null);
+        expect(
+          dialog()?.querySelector('.payment .card-note')?.textContent?.replace(/\s+/g, ' ').trim(),
+        ).toBe(
+          'Everyday Debit paid for it until now, but Netflix doesn’t take it: choose another card.',
+        );
+        const select = await cardControl(loader);
+        expect(await select.getValueText()).toBe('No card');
+        await select.open();
+        expect(
+          await Promise.all((await select.getOptions()).map((option) => option.getText())),
+        ).toEqual(['No card', 'Everyday (Mastercard, 1.5% back)']);
+        // Closed by choosing: Escape would close the dialog too.
+        await select.clickOptions({ text: 'No card' });
+        await press(loader, 'Save');
+        await until(() => dialog() === null);
+        expect(await draftItem(netflix.id)).not.toHaveProperty('cardId');
+      });
     });
 
     it('gives an item a nickname and a note, which its row shows, and clears them', async () => {

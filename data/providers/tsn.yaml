@@ -4,6 +4,9 @@ aliases: [the sports network]
 website: https://www.tsn.ca
 category: streaming
 spendCategory: streaming
+# Accepted cards, read 2026-10-28 (M9.2): none named, so no acceptedNetworks. The FAQ's billing answers mention only
+# a "credit card issuer" (/help/faq/), /subscribe names none, and payment details are in Bell Media's Account
+# Management portal, behind a sign-in.
 billingCurrency: { CA: CAD }
 # tsn.ca/help/faq/#not-canada, read 2026-10-26: "TSN is only available for subscription and use within Canada due to
 # licensing agreements."

@@ -3,6 +3,9 @@ name: Crave
 website: https://www.crave.ca
 category: streaming
 spendCategory: streaming
+# Accepted cards, read 2026-10-28 (M9.2): none named, so no acceptedNetworks. The help centre's billing articles say
+# only "credit card" (plus.crave.ca/en/faq/plans-billing-bundles/), /en/subscribe names none, and payment details are
+# in Bell Media's Account Management portal, behind a sign-in.
 billingCurrency: { CA: CAD }
 # Crave's terms (plus.crave.ca/en/faq/account-profiles/terms-and-conditions, read 2026-10-26): "The Service is
 # intended for use in Canada."

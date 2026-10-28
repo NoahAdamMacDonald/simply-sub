@@ -57,6 +57,8 @@ export class ItemCard {
   readonly tags = input<readonly Tag[]>([]);
   /** Its share of the list's next 12 months, from 0 to 1 (M7.2): "31% of list". */
   readonly share = input<number>();
+  /** What it costs a month with tax, and after its card's cash back and FX fees, when it's paid with one (M9.4). */
+  readonly onCard = input<{ card: string; month: ShownAndSpoken }>();
   /** 📌: whether the item should now be pinned. */
   readonly pinToggle = output<boolean>();
 

@@ -176,6 +176,54 @@ p {
   margin-bottom: 16px;
 }
 
+// The card it's paid with (M9.4), then the Best card chip beside it, under it when there's no room.
+.payment {
+  margin-top: 16px;
+}
+
+.card-row {
+  align-items: center;
+
+  .card {
+    flex: 1 1 260px;
+  }
+}
+
+.best-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--ss-accent-text);
+  border-radius: 999px;
+  background: none;
+  color: var(--ss-accent-text);
+  font: var(--mat-sys-label-large);
+  cursor: pointer;
+
+  mat-icon {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+  }
+
+  &:hover {
+    background-color: var(--ss-state-tint);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 2px;
+  }
+}
+
+.card-note {
+  margin: 8px 0 0;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}
+
 .mode {
   display: flex;
   flex-wrap: wrap;

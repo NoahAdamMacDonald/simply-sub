@@ -1,0 +1,64 @@
+<div class="title-bar">
+  <h2 mat-dialog-title>Assign best cards</h2>
+  <button matIconButton type="button" mat-dialog-close aria-label="Close">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content>
+  <p class="intro">
+    The card that pays back the most for each subscription after its FX fees, within each card's
+    monthly limit, and only cards the service takes.
+  </p>
+
+  @for (list of preview.lists; track list.listId) {
+    <section [attr.aria-labelledby]="'assign-' + list.listId">
+      <h3 [id]="'assign-' + list.listId">{{ list.name }}</h3>
+      <ul>
+        @for (change of list.changes; track change.itemId) {
+          <!-- Spaces go inside the spans: screen readers need them between the parts. -->
+          <li>
+            <span class="item">{{ change.title }} </span>
+            <span class="move">
+              <span>{{ change.from }} </span>
+              <span aria-hidden="true">→ </span><span class="visually-hidden">to </span>
+              <span>{{ change.to }} </span>
+            </span>
+            <span class="savings">
+              <span>saves </span>
+              <span aria-hidden="true">{{ change.savings.shown }}</span>
+              <span class="visually-hidden">{{ change.savings.spoken }}</span>
+              <span> a year</span>
+            </span>
+          </li>
+        }
+      </ul>
+    </section>
+  } @empty {
+    <p class="none">Every subscription is on its best card already.</p>
+  }
+
+  @for (name of preview.skipped; track name) {
+    <p class="skipped">
+      {{ name }} has changes in the editor that aren't saved, so its subscriptions keep their cards.
+    </p>
+  }
+
+  @if (preview.total; as total) {
+    <p class="total">
+      <span>Saves </span>
+      <span aria-hidden="true">{{ total.shown }}</span>
+      <span class="visually-hidden">{{ total.spoken }}</span>
+      <span> over the next 12 months</span>
+    </p>
+  }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  @if (preview.total) {
+    <button matButton type="button" mat-dialog-close>Cancel</button>
+    <button matButton="filled" type="button" [mat-dialog-close]="true">Apply</button>
+  } @else {
+    <button matButton="filled" type="button" mat-dialog-close>Close</button>
+  }
+</mat-dialog-actions>

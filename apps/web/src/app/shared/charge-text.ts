@@ -31,3 +31,22 @@ export function chargeAmountText(
 export function nearDateText(date: IsoDate, today: IsoDate): string {
   return date.slice(0, 4) === today.slice(0, 4) ? dayText(date) : dateText(date);
 }
+
+/**
+ * A month with sales tax, and after a payment card's cash back and FX fees (P4, M9.4): "$21.46 / mo with tax · $21.14
+ * after cash back & FX fees", read "$21.46 a month with tax, $21.14 after cash back and FX fees"; ≈ and "about" when
+ * converted.
+ */
+export function netMonthText(
+  month: { gross: number; net: number; converted: boolean },
+  currency: string,
+  country: string | undefined,
+): ShownAndSpoken {
+  const [shown, spoken] = month.converted ? ['≈ ', 'about '] : ['', ''];
+  const gross = amountText(month.gross, currency, country);
+  const net = amountText(month.net, currency, country);
+  return {
+    shown: `${shown}${gross} / mo with tax · ${shown}${net} after cash back & FX fees`,
+    spoken: `${spoken}${gross} a month with tax, ${spoken}${net} after cash back and FX fees`,
+  };
+}
