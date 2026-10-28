@@ -17,3 +17,10 @@ form {
   margin: 8px 0 0;
   color: var(--ss-text-muted);
 }
+
+// Import a backup instead on the left, Get started on the right; one above the other when the dialog is narrow.
+mat-dialog-actions {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+}

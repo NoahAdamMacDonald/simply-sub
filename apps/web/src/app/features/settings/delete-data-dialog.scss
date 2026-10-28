@@ -1,0 +1,30 @@
+@use '@angular/material' as mat;
+
+// The form wraps the dialog's title, content and actions, which the dialog lays out as its own children.
+form {
+  display: contents;
+}
+
+p {
+  margin: 0 0 16px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+// As ss-confirm's destructive button.
+.danger {
+  @include mat.button-overrides(
+    (
+      filled-container-color: var(--ss-danger),
+      filled-label-text-color: var(--ss-on-danger),
+      filled-state-layer-color: var(--ss-on-danger),
+      filled-ripple-color: color-mix(
+          in srgb,
+          var(--ss-on-danger) calc(var(--mat-sys-pressed-state-layer-opacity) * 100%),
+          transparent
+        ),
+    )
+  );
+}

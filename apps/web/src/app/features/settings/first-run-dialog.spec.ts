@@ -226,4 +226,57 @@ describe('First run', () => {
     await new Promise((resolve) => setTimeout(resolve, 20));
     expect(await loader.getAllHarnesses(MatDialogHarness)).toHaveLength(0);
   });
+
+  it('imports a backup instead, which ends the first run', async () => {
+    await start();
+    const first = await dialog();
+    await (
+      await first.getHarness(MatButtonHarness.with({ text: 'Import a backup instead' }))
+    ).click();
+    await until(() => document.querySelector('ss-import-backup-dialog input[type=file]') !== null);
+    const picker = document.querySelector<HTMLInputElement>(
+      'ss-import-backup-dialog input[type=file]',
+    );
+    const backup = {
+      app: 'simply-sub',
+      schemaVersion: 1,
+      exportedAt: '2026-10-22T18:30:00.000Z',
+      data: {
+        settings: {
+          key: 'settings',
+          country: 'GB',
+          currency: 'GBP',
+          theme: 'dark',
+          updatedAt: '2026-10-20T09:15:00.000Z',
+        },
+        lists: [],
+        items: [],
+        customSubs: [],
+        rankings: [],
+        cards: [],
+        tags: [],
+      },
+    };
+    Object.defineProperty(picker, 'files', {
+      value: [new File([JSON.stringify(backup)], 'backup.json')],
+    });
+    picker?.dispatchEvent(new Event('change'));
+    // Nothing is here yet, so it's one Import, with nothing to ask.
+    await vi.waitFor(async () => {
+      TestBed.tick();
+      expect(await loader.getAllHarnesses(MatButtonHarness.with({ text: 'Import' }))).toHaveLength(
+        1,
+      );
+    });
+    expect(await loader.getAllHarnesses(MatButtonHarness.with({ text: 'Replace' }))).toHaveLength(
+      0,
+    );
+    await (await loader.getHarness(MatButtonHarness.with({ text: 'Import' }))).click();
+
+    await until(() => TestBed.inject(SettingsStore).saved()?.country === 'GB');
+    await vi.waitFor(async () => {
+      TestBed.tick();
+      expect(await loader.getAllHarnesses(MatDialogHarness)).toHaveLength(0);
+    });
+  });
 });

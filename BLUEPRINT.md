@@ -2520,6 +2520,56 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
+**Resolved (2026-10-27, M6.9)**
+- **Your data** (PROJECT-PLAN P13) is a card in Settings with Export backup, Import backup and Delete all data. The
+  first-run dialog has Import a backup instead (P1).
+- **The file** (core's `user/backup.ts`):
+  - It's `{ app: 'simply-sub', schemaVersion: 1, exportedAt, catalogVersion?, data }`. `data` holds settings, lists,
+    items, customSubs, rankings, cards and tags, deleted ones included, so a restore gives back the data as it was.
+  - It leaves out the caches, which download again, and the list drafts, which are unsaved edits.
+  - It's checked whole against the records' own strict schemas, plus one rule: no record twice. As in storage
+    (section 11.1), links between records aren't checked.
+  - A newer `schemaVersion` is refused. An older one goes through `migrateBackupPayload`'s steps; version 1 is the
+    first, so there are none yet.
+- **Encrypted** (section 11.5):
+  - The file is `{ app, schemaVersion, encrypted: { kdf: 'PBKDF2-SHA256', iterations: 600000, salt, iv, ciphertext }
+    }`: AES-256-GCM, with a 16-byte salt and a 12-byte IV, both random, in base64.
+  - The header is bound to the ciphertext as GCM's additional data (`simply-sub:1`), so changing it fails like a
+    changed ciphertext.
+  - The key is non-extractable, and nothing is stored.
+  - **Where the crypto module lives:** it's the web app's `core/crypto/passphrase-crypto.ts`, not core. Core builds
+    with ES2022 alone and no DOM types, so WebCrypto and base64 aren't there. The app lock (M6.10) and sync will use
+    it from the app too.
+  - **A wrong passphrase and a changed file** fail GCM's check alike, so one message says both: "That passphrase
+    doesn't open this backup, or the file was changed."
+- **Export:**
+  - "Protect with a passphrase", typed twice: at least 8 characters, never trimmed. The dialog says nobody can
+    recover a forgotten one.
+  - It downloads `simply-sub-backup-YYYY-MM-DD.json` (today's local date) from a Blob URL on a link that's clicked.
+    That works under the production CSP and Trusted Types, checked under `wrangler dev`.
+  - A snackbar says "Saved simply-sub-backup-2026-10-27.json".
+- **Import:**
+  1. **Choose a file.** The control is the browser's own file input, focusable but out of sight, and its label is the
+     button people see. Enter and Space open it, with no script in between.
+  2. **Read it.** A file over 10 MB, or one that isn't a backup, says why without quoting it, and nothing is written.
+  3. **Passphrase,** when the file is encrypted.
+  4. **Preview:** the export day in the user's time zone, then "1 list · 12 subscriptions · … · your settings". The
+     counts leave out deleted records.
+  5. **Merge or Replace:**
+     - **Merge** takes each record the backup has newer (`updatedAt`) or that isn't here (core's `mergedRecords`).
+       A deletion merges like any change, and drafts stay. A snackbar says what it took: "Merged 4 records from the
+       backup", or "Nothing in the backup was newer than what's here".
+     - **Replace** asks first. It then clears the backed-up tables and the drafts (edits of lists that may be gone)
+       and writes the backup's records.
+
+  Both are one transaction (`BackupRepository`), with every record checked on the way in. From the first-run
+  dialog it's one Import, with nothing to ask, and it ends the first run.
+- **Delete all data:** typing DELETE (in capitals) clears every table in one transaction, the caches and drafts
+  too, using the storage transaction's new `clear`. The page then goes Home, where the first-run dialog shows.
+- **Not yet:** section 11.1's reminder to back up now and then.
+- **Bundles:** the initial bundle didn't change (492.5 kB). The backup rules, the crypto module and the repository
+  are a lazy chunk of 6.6 kB, and each dialog has its own: Import 8.8 kB, Export 4.1 kB and Delete 3.2 kB.
+
 **Resolved (2026-10-27, feedback after M6.8)**
 Reported from the running app, with screenshots, and fixed before M6.9:
 - **Pages scrolled sideways on a phone** (the list editor, Search). This wasn't reproduced. Every page fit at 320,

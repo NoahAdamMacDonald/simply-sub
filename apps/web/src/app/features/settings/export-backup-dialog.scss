@@ -1,0 +1,26 @@
+// The form wraps the dialog's title, content and actions, which the dialog lays out as its own children.
+form {
+  display: contents;
+}
+
+p {
+  margin: 0 0 12px;
+}
+
+// The checkbox's own padding lines its box up with the text above.
+mat-checkbox {
+  margin-left: -10px;
+}
+
+.passphrase {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.warning {
+  margin: 0;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}

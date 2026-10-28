@@ -36,12 +36,34 @@ function blockIndexedDb() {
   };
 }
 
+/** Rates per Canadian dollar, from the API contract's example. */
+const cadRates = { CHF: 0.581, EUR: 0.6372, GBP: 0.5571, SEK: 7.097, USD: 0.7243 };
+
+/** GET /fx's body for `base`, from the rates per Canadian dollar. */
+function fxBody(base) {
+  const perCad = (currency) => (currency === 'CAD' ? 1 : cadRates[currency]);
+  const rates = Object.fromEntries(
+    ['CAD', ...Object.keys(cadRates)]
+      .filter((currency) => currency !== base)
+      .map((currency) => [currency, Number((perCad(currency) / perCad(base)).toPrecision(6))]),
+  );
+  return {
+    data: { base, date: '2026-10-26', source: 'European Central Bank via Frankfurter', rates },
+    meta: { fetchedAt: '2026-10-26T06:00:02Z', stale: false },
+  };
+}
+
 async function newContext(
   browser,
   { viewport = WIDE, colorScheme = 'light', locale = 'en-CA', blocked = false },
 ) {
   const context = await browser.newContext({ viewport, colorScheme, locale });
   if (blocked) await context.addInitScript(blockIndexedDb);
+  // GET /fx, answered with fixed rates in the currency asked for, as check-search.cjs does: there's no Worker behind
+  // the dev proxy, and its 502 was a console error.
+  await context.route('**/api/v1/fx?**', (route) =>
+    route.fulfill({ json: fxBody(new URL(route.request().url()).searchParams.get('base')) }),
+  );
   return context;
 }
 
@@ -187,19 +209,21 @@ async function firstRunKeyboard(browser) {
   check('first run: Escape does not close it', (await dialog(page).count()) === 1);
 
   const order = [await focused(page)];
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 8; i++) {
     await page.keyboard.press('Tab');
     order.push(await focused(page));
   }
   check(
     'first run: Tab order, kept inside the dialog',
-    order.slice(0, 7).join(' > ') ===
+    order.slice(0, 8).join(' > ') ===
       [
         'mat-select "Country"',
         'mat-select "Province or territory"',
         'mat-select "Currency"',
         'input "Monthly budget"',
         'input "Annual budget"',
+        // M6.9.
+        'button "Import a backup instead"',
         'button "Get started"',
         'mat-select "Country"',
       ].join(' > '),
@@ -207,7 +231,7 @@ async function firstRunKeyboard(browser) {
   );
 
   // Get started without a province: the error shows, and focus goes to the menu. Focus is on the province now.
-  for (let i = 0; i < 4; i++) await page.keyboard.press('Tab');
+  for (let i = 0; i < 5; i++) await page.keyboard.press('Tab');
   check('first run: reached Get started', (await focused(page)) === 'button "Get started"');
   await page.keyboard.press('Enter');
   await page.waitForTimeout(300);

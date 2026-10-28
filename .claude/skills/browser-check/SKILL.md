@@ -195,6 +195,26 @@ It runs axe on the page, the open Sort menu (and an open select at 1280 px), the
 checks for horizontal scroll. Its `focusedName` reads the accessibility snapshot, so an icon's ligature ("tune") and
 an input's `<label>` come out right.
 
+`check-backup.cjs` (M6.9) checks backups on `ng serve` for a Canadian in Alberta. It writes to IndexedDB Work Related
+(Netflix Standard nicknamed Mom's and tagged Family), a custom subscription and a rank.
+
+In both themes at both widths, keyboard only, it checks:
+- Export with a passphrase, read back from the download: encrypted, at 600,000 iterations, with no names in it;
+- Export without one: every record, the deleted list too;
+- Delete all data: starting in its DELETE field, refusing "delete", then everything cleared, Home and the first-run
+  dialog;
+- the first-run dialog's Import a backup instead with the encrypted file:
+  - a wrong passphrase says so, keeps focus in its field and writes nothing;
+  - the right one shows the counts, with focus on the preview;
+  - Import brings back exactly what was stored, compared with sorted keys and with `undefined` fields left out.
+
+Then at 1280 px:
+- Merge, keeping a list renamed here since;
+- Replace's question, with focus on Cancel;
+- a file that isn't a backup.
+
+It runs axe on each dialog and step, and checks for horizontal scroll.
+
 `check-overflow.cjs` (the feedback after M6.8) checks that no page scrolls sideways at 320, 360 and 390 px, with the
 browser's scrollbars shown (`ignoreDefaultArgs: ['--hide-scrollbars']`). It covers Home, Search (filters and
 Mullvad's details open), Lists, List view (Sort and a card's details open), the editor, a new list, the item dialog,
@@ -208,6 +228,11 @@ Since the feedback after M6.8, the other scripts check more:
 - `check-lists.cjs`: the overview's Types, and its summary folded after 8 rows with "Show all".
 
 ## Gotchas
+
+- Playwright starts catching file pickers only when something first waits for one (`waitForEvent('filechooser')`),
+  without waiting for the browser to agree. A key press straight after that first wait sometimes opened a picker it
+  missed, and the next Enter worked. Listen from the page's start (`page.on('filechooser', () => undefined)`), as
+  `check-backup.cjs` does.
 
 - Headless Chromium hides scrollbars, so a width that counts on them (`100vw`, a scrollbar's 15 px) never shows up.
   Launch with `ignoreDefaultArgs: ['--hide-scrollbars']` to measure with them, as `check-overflow.cjs` does. When a

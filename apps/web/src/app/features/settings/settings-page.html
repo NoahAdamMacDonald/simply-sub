@@ -46,6 +46,28 @@
     </p>
   </section>
 
+  <section aria-labelledby="data-heading">
+    <h2 id="data-heading">Your data</h2>
+    <p class="hint">
+      Everything stays in this browser. A backup is a file you keep: import it to bring your lists
+      back, here or on another device.
+    </p>
+    <div class="data-actions">
+      <button matButton="outlined" type="button" (click)="exportBackup()">
+        <mat-icon>download</mat-icon>
+        Export backup
+      </button>
+      <button matButton="outlined" type="button" (click)="importBackup()">
+        <mat-icon>upload</mat-icon>
+        Import backup
+      </button>
+      <button matButton="outlined" type="button" class="delete-all" (click)="deleteAll()">
+        <mat-icon>delete_forever</mat-icon>
+        Delete all data
+      </button>
+    </div>
+  </section>
+
   <section aria-labelledby="catalog-heading">
     <h2 id="catalog-heading">Catalog</h2>
     <div class="catalog">
