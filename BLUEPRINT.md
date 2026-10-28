@@ -1524,6 +1524,11 @@ Cron trigger (03:00 UTC) → Workflow (one step per provider, automatic retries)
 **Logos** ride along (M8.3): the run fetches each provider's best icon the way `npm run data:icons` does, and when
 it differs from the committed `data/logos/<id>.png` (a rebrand), the same PR proposes the new one.
 
+**As built (M8.3)** in `apps/bot`, with section 14 (M8.3) for the details: a step per provider, with the bundles that
+cite its pages; Workers AI only for a price whose stored amount isn't on its page; no per-provider `extract:` selectors
+(the schema has none); the YAML edited line by line, which CI's `data:validate` then checks; `lastVerified` bumped
+for a price confirmed 30 or more days after it was last verified; and a night with nothing to change opens no PR.
+
 **Guardrails**
 - **Never auto-merge.** You review the PR, which takes a minute a day at most.
 - Flag changes larger than ±30% as suspicious.
@@ -1675,9 +1680,9 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
 | GitHub Actions | Free for public repos, 2,000 min/month for private | CI plus a nightly check, around 300 min/month |
 | Domain | **simplely.ca**, already bought through Cloudflare Registrar, which renews at cost | The only real expense |
 | Workers Builds | ~3,000 build minutes/month, 1 concurrent build | A few minutes per deploy |
-| Browser Rendering | ~10 browser-minutes/day, 3 concurrent | Only JS-heavy pricing pages in the nightly check |
-| Workers AI | Daily free allowance | Price extraction when no selector matches |
-| Cron Triggers / Workflows | Included in Workers free (verify Workflows limits) | One nightly run |
+| Browser Rendering | 10 browser-minutes a day, 3 concurrent browsers, a new one every 20 s, 60 s timeout (confirmed 2026-10-28) | Only pages a plain fetch gets nothing from, at most 5 a night (M8.3) |
+| Workers AI | 10,000 Neurons a day, reset at 00:00 UTC (confirmed 2026-10-28) | Prices whose stored amount isn't on their page: Llama 3.3 70B in JSON mode, at most 8,000 Neurons a night (M8.3) |
+| Cron Triggers / Workflows | Included in Workers free. Workflows on the free plan (confirmed 2026-10-28): 10 ms of CPU and 50 requests out per step, 1,024 steps, 100 concurrent instances, 100,000 executions a day shared with Workers, 1 MiB per step result, 3 days' retention | One nightly run, a step per provider (M8.3) |
 | If you outgrow it | Workers Paid at $5/mo for 10M requests | Still under the $10/mo goal |
 
 > **Free-tier gotcha:** requests that invoke the Worker get an HTTP 429 once the daily limit is used up. That's why
@@ -1715,6 +1720,10 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
 7. **No Cloudflare token in GitHub.** Workers Builds deploys with a token Cloudflare keeps (section 7.6), and
    GitHub's CI only checks code, so the repo has no Cloudflare secrets. The bot's GitHub token (M8.3) is a
    Worker secret on the Cloudflare side.
+8. **The bot** (M8.3, not done yet: the owner's to do): a fine-grained GitHub token for this repository only, with
+   Contents and Pull requests read and write, then `cd apps/bot && npx wrangler secret put GITHUB_TOKEN` and
+   `npx wrangler deploy`. Workers Builds doesn't deploy it (it isn't connected to it), so a change to `apps/bot`
+   reaches Cloudflare only by that deploy.
 
 ### 7.3 Serving the app from `sub.simplely.ca`
 The app and the API have the subdomain to themselves: **https://sub.simplely.ca/** for the app, and
@@ -2538,13 +2547,82 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 ## 14. Open questions
 
 **Still open**
-1. **Workflows free-tier limits**: confirm at setup time (section 7.1).
-2. **Buyer-chosen charge currency** (decide in M9): some providers let the buyer pick the currency they're charged
+1. **Buyer-chosen charge currency** (decide in M9): some providers let the buyer pick the currency they're charged
    in. Proton sells fixed price lists in USD, CAD, EUR and CHF (stored as `GLOBAL` prices in each currency, with
    `billingCurrency: { GLOBAL: USD }` for everyone else). Mullvad has one fixed price in EUR but takes cards in
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-28, M8.3)**
+- **The free-tier limits** (the old open question 1), read on Cloudflare's pages on 2026-10-28 and recorded in
+  section 7.1:
+  - Workflows (Workers Free): 10 ms of CPU and 50 requests out (1,000 to Cloudflare's services) per step, 1,024
+    steps, 100 concurrent instances, 100 created a second, 100,000 executions a day shared with Workers, 1 MiB per
+    step result and per event, 100 MB of state, 10,000 retries a step, and 3 days' retention. Cron-triggered
+    `schedules` are Paid only; a cron trigger on the Worker starts the instance instead.
+  - Browser Rendering (Workers Free): 10 browser-minutes a day, 3 concurrent browsers, a new browser every 20 s, a
+    60 s timeout (`keep_alive` up to 20 minutes).
+  - Workers AI: 10,000 Neurons a day, reset at 00:00 UTC. JSON mode is on Llama 3.3 70B (26,668 and 204,805 Neurons
+    a million input and output tokens), Llama 3.1 and 3 8B and a few others.
+- **The bot** is `apps/bot`, a second Worker (`simply-sub-bot`, its own `wrangler.jsonc`): a cron trigger at
+  `0 3 * * *` creates the night's Workflow instance (`price-check-<date>`, so a second trigger starts nothing), with
+  AI and Browser bindings and the catalog D1, which it only reads (every query goes through a SELECT-only helper:
+  D1 has no read-only binding). No public URL. It's built and type-checked by `npm run build` (a dry-run bundle:
+  3.3 MB, 679 KB gzipped, within the free plan's 3 MB) but not deployed: its token and its deploy are the owner's
+  (section 7.2).
+- **A night:** read the catalog's index from D1 (each provider's and bundle's pages, and every host); read the base
+  branch (its commit, its logos' Git blob hashes, `data/resellers.yaml`); read each host's robots.txt once, 40 hosts a
+  step; then a step per provider, with the bundles whose every page it cites, a step per group of the other bundles
+  that share a page, and a step per reseller's logo, each retried twice, a failed one listed and the night going on;
+  then one step for the pull request. A page is read in one step only, so it's requested once a night.
+- **The checks** (`check-pages.ts`):
+  - **Prices:** each page's text (`page-text.ts`: no scripts, styles or comments, inline tags joined, entities
+    decoded). A price whose amount is on the page near its plan's name, in its currency (`amounts.ts`), or a price for
+    several months shown a month at a time (Mullvad's "€5 /month"), is confirmed with no AI. The rest of a page's
+    prices go to Workers AI together, on an excerpt around the plans' names (12,000 characters at most), which
+    answers each plan's regular price, or that only a sale or first-term price shows. A yearly price isn't matched a
+    month at a time: on a page like Proton's ("$3.99/month billed yearly") a changed yearly price could match another
+    plan's.
+  - **Guardrails (§6.4):** a change over ±30% is flagged ⚠️; a sale or first-term price alone, a price not found, a
+    currency other than the stored one (a geo-priced page) and a page that can't be read are "needs manual check",
+    never a change. Requests carry `SimplySubBot/1.0` and `Accept-Language: en-CA`, and follow robots.txt (RFC 9309:
+    the bot's own group, else `*`; a 4xx allows everything, a 5xx or no answer nothing).
+  - **taxIncluded:** its quote must still be on the page (in any quotes and spacing), and no "+ tax", "excl. VAT",
+    "taxes calculated at checkout" and the like near the price; otherwise it's taken out, for review.
+  - **Resellers:** each approval's quotes on the provider's page; a missing one removes the reseller's listing from
+    the provider file, for review (a reseller no provider lists is only a warning in `data:validate`). Their offers'
+    prices are checked like any price.
+  - **Logos:** the provider's or reseller's best icon, found as `data:icons` finds it, compared by Git blob hash with
+    the committed logo, which is read only when they differ. Only an icon at least as big as the committed one is
+    proposed: the smoke run found Disney+'s and Hulu's own icons out of reach and the icon services' 96 px ones in
+    their place, which is no rebrand.
+  - **Browser Rendering** only when a fetch fails (not for robots.txt) or gets no plan name and no price at all, at
+    most 5 pages a night (the user's choice). Workers AI stops at 8,000 estimated Neurons a night.
+- **The pull request** (`proposal.ts`, `github.ts`): the YAML edited line by line (`yaml-edit.ts`: a price's amount
+  and `lastVerified`, `taxIncluded` out, a reseller's listing out), keeping comments and layout; CI's `data:validate`
+  checks the result. A price confirmed 30 or more days after it was last verified gets today's `lastVerified` (the
+  user's choice), so the 90-day badge never shows on a price the bot keeps confirming. The commit goes on
+  `bot/price-updates`, rebuilt from the base branch each night it has changes (force-pushed: the branch is the bot's
+  own), and the open PR gets tonight's title and body, or a new one opens. It never merges. A night with nothing to
+  change opens none, and what needs checking waits for the next PR's body (the user's choice). The body has Price
+  changes (a table with the change in %), For review, Logos, Needs manual check (one line per page and reason) and
+  Confirmed. Pages' words are only ever quoted, escaped and cut to 160 characters.
+- **Libraries:** `@cloudflare/playwright` 1.3.6 for Browser Rendering, which has no dependencies.
+  `@cloudflare/puppeteer` 1.4.0 was tried first: its `@puppeteer/browsers` (a Chrome downloader a Worker never runs)
+  brings 7 high advisories, `extract-zip`'s with no fixed version, so CI's audit would fail. `npm audit
+  --audit-level=high` passes.
+- **The smoke run** (once, from this machine, on 2026-10-28): the real night against the live sites with the local
+  catalog, no Browser Rendering and Workers AI answering nothing, in 42 s and 147 requests, every robots.txt
+  followed. 41 prices were confirmed without AI. It found the fixes above (pages read twice by a provider and its
+  bundles, the smaller icons, `&reg;` undecoded, which likely made SerialCart's quote look gone) and that many pages
+  are rendered by scripts (Proton, Crave, TSN, RDS, Disney+'s help pages): on a real night those go to Workers AI
+  when their text has the plans, or to the 5 browser pages, else they're "needs manual check".
+- **Tests** (`apps/bot/test`, on Node with fakes): the four "done when" cases end to end on the real Netflix and
+  Mullvad files (a changed price, a changed logo, a taxIncluded quote gone and a reseller no longer named each make a
+  PR, with the edited file passing its schema), a quiet night opening none, a failed step, and the parts: page text,
+  amounts, tax wording, robots.txt, the YAML edits on real files, the guardrails, the browser and AI budgets, logos,
+  the step plan, the PR's text and GitHub's calls (one branch, one PR refreshed, never a merge).
 
 **Resolved (2026-10-28, M8.2)**
 - **Optimizations** (PROJECT-PLAN P14) is "Optimizations" under the back button by the list's name, with "Save up to

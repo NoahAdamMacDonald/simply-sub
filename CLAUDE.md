@@ -22,7 +22,8 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 - Node 24.22.1 / npm 12.0.2 via Volta 2.0.2 (`"volta"` field in root package.json). Workers Builds pins Node
   with its `NODE_VERSION` build variable (BLUEPRINT §7.6), so change both together.
 - Cloudflare Worker (Hono) + D1 for the read-only catalog API; the same Worker serves the SPA as static assets
-- npm workspaces: `apps/web`, `apps/api`, `packages/core`, plus `data/` (YAML catalog) and `scripts/`
+- npm workspaces: `apps/web`, `apps/api`, `apps/bot` (the nightly price check, M8.3), `packages/core`, plus `data/`
+  (YAML catalog) and `scripts/`
 
 ## Decisions already made (don't re-litigate)
 - Local-first: all user data lives in IndexedDB (Dexie). No accounts or server-side user data in v1.
