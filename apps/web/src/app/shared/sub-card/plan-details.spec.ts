@@ -152,11 +152,17 @@ describe('PlanDetails', () => {
       saved.set({ ...alberta, country: 'US', subdivision: undefined, currency: 'USD' });
       await show('mullvad.vpn');
 
-      expect(groups().at(-1)).toBe(
-        'Terms and policies Legal Disputes (Bad): A made-up US rule, for the test. [1] ' +
-          'Service VPN logging (Great): No connection logs, and an audit found none. [2] ' +
-          'Sources [1] Terms of service [2] No-logging policy',
+      expect(text('.policies .rated')).toContain(
+        'Disputes (Bad): A made-up US rule, for the test.',
       );
+      // Where to change it (M5.12): the provider's own page, in a new tab, named in one piece.
+      const action = element().querySelector<HTMLAnchorElement>('.policies .action');
+      expect([action?.href, action?.target, action?.rel]).toEqual([
+        'https://mullvad.net/en/help/opt-out',
+        '_blank',
+        'noopener',
+      ]);
+      expect(action?.getAttribute('aria-label')).toBe('How to opt out, opens in a new tab');
     });
 
     it('has no such group for a provider with no ratings', async () => {

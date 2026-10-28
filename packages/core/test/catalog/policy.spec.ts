@@ -143,6 +143,20 @@ describe('a provider’s policies', () => {
     ).toEqual(['No rating quotes this page: leave it out']);
   });
 
+  it('keeps a way to change it to a few words and a page (M5.12)', () => {
+    const withAction = (action: unknown) => ({
+      ...mullvadPolicies,
+      ratings: [rating('privacy.data-collection', { action }), ...mullvadPolicies.ratings.slice(1)],
+    });
+    expect(issues(withAction({ name: 'How to ask for your data', url: privacy }))).toEqual([]);
+    expect(issues(withAction({ name: 'x'.repeat(61), url: privacy }))).toEqual([
+      'Keep it to a few words (60 characters at most)',
+    ]);
+    expect(issues(withAction({ name: 'Ask', url: 'http://mullvad.net/' })).length).toBeGreaterThan(
+      0,
+    );
+  });
+
   it('keeps the reason to a sentence or two', () => {
     expect(
       issues({
@@ -194,6 +208,19 @@ describe('validateCatalog, for policies', () => {
     ).toEqual([
       'data/providers/netflix.yaml policies.ratings.0.topic: "privacy.data-colection" isn\'t a topic in data/policy-topics.yaml (privacy.data-collection, privacy.ads-tracking, billing.cancel-refunds, service.vpn-logging)',
       'data/providers/netflix.yaml policies.ratings.1.topic: VPN logging is only for providers with a plan in vpn',
+    ]);
+  });
+
+  it('takes a way to change it on the provider’s own sites or its policies’, and no other (M5.12)', () => {
+    // The test catalog's Netflix is on example.com; its privacy statement is on help.netflix.com.
+    const action = (url: string) =>
+      netflixRating('privacy.ads-tracking', {
+        action: { name: 'How to turn off Behavioral Advertising', url },
+      });
+    expect(messages(withNetflix([action('https://help.netflix.com/node/100637')]))).toEqual([]);
+    expect(messages(withNetflix([action('https://www.example.com/account/privacy')]))).toEqual([]);
+    expect(messages(withNetflix([action('https://optout.example.org/netflix')]))).toEqual([
+      "data/providers/netflix.yaml policies.ratings.0.action.url: Must be a page of Netflix's own sites or its policies' (example.com, help.netflix.com): its own way to change it",
     ]);
   });
 
@@ -309,6 +336,21 @@ describe('planPolicies', () => {
     expect(reason('CA')).toBe('Everywhere.');
     expect(reason('SE')).toBe('In the EU.');
     expect(reason('US')).toBe('The plan in the US.');
+  });
+
+  it('gives a rating’s way to change it (M5.12)', () => {
+    const action = { name: 'How to ask for your data', url: privacy };
+    const shown = planPolicies(
+      provider([rating('privacy.data-collection', { action })]),
+      'mullvad.vpn',
+      'CA',
+      topics,
+    );
+    expect(shown?.groups[0].policies[0].action).toEqual(action);
+    expect(
+      planPolicies(provider(mullvadPolicies.ratings), 'mullvad.vpn', 'CA', topics)?.groups[0]
+        .policies[0],
+    ).not.toHaveProperty('action');
   });
 
   it('shows nothing for a provider with no ratings, or none that applies', () => {

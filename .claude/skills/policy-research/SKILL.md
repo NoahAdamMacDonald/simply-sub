@@ -36,6 +36,14 @@ their own.
   for providers with a plan in one of them; validation says so.
 - **Links:** every page a rating quotes goes in `policies.links`, named as the card shows it ("Terms of use",
   "Conditions d'utilisation (in French)"), and every link is quoted somewhere.
+- **Where to change it (M5.12):** when a reason says the user has to do something themselves (turn a setting off, ask
+  for their data to be deleted), give the rating an `action`: what the link does, in a few words ("How to turn off
+  Behavioral Advertising", 60 characters at most), and the page the provider's own policy or help pages link for it
+  (Netflix's statement links help.netflix.com/node/100637 for its choices). Copy the link from the page, never guess
+  an account URL. It has to be on the provider's own sites or the site its quoted policies are on (Disney's privacy
+  center, bell.ca); validation says so. A form on another company's domain (a OneTrust web form) isn't linked: link
+  the provider's page that explains it instead. None when the change is the browser's or device's own setting (ICI
+  TOU.TV) or there's nothing to change (a refund to ask for).
 - **Say what wasn't rated, and why,** in the comment above `policies:` (no free trial, the agreement didn't render,
   Access Denied), with the date the pages were read.
 

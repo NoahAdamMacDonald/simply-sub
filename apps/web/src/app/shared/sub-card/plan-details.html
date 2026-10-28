@@ -133,25 +133,41 @@
           <li>
             <!-- The dot is decorative: the grade is in words beside the topic (M5.9). -->
             <span class="dot" aria-hidden="true" [attr.data-tier]="policy.tier"></span>
-            <p class="rated">
-              <span class="topic">{{ policy.topic.name }}</span>
-              <span class="grade"> ({{ tierNames[policy.tier] }}): </span>
-              <!-- The space before the citations is the reason's: Angular drops a span of only a space. -->
-              <span>{{ policy.reason }} </span>
-              @for (citation of policy.citations; track $index) {
+            <!-- The reason with its citations, then where to change it (M5.12). -->
+            <div class="rating">
+              <p class="rated">
+                <span class="topic">{{ policy.topic.name }}</span>
+                <span class="grade"> ({{ tierNames[policy.tier] }}): </span>
+                <!-- The space before the citations is the reason's: Angular drops a span of only a space. -->
+                <span>{{ policy.reason }} </span>
+                @for (citation of policy.citations; track $index) {
+                  <a
+                    class="cite"
+                    [href]="citation.href"
+                    target="_blank"
+                    rel="noopener"
+                    [matTooltip]="quoteText(citation)"
+                    matTooltipTouchGestures="off"
+                  >
+                    <span>[{{ citation.number }}]</span>
+                    <span class="visually-hidden"> {{ citation.name }}, opens in a new tab</span>
+                  </a>
+                }
+              </p>
+              <!-- Where to change it, when the user has to (M5.12): the provider's own page. -->
+              @if (policy.action; as action) {
                 <a
-                  class="cite"
-                  [href]="citation.href"
+                  class="action"
+                  [href]="action.url"
                   target="_blank"
                   rel="noopener"
-                  [matTooltip]="quoteText(citation)"
-                  matTooltipTouchGestures="off"
+                  [attr.aria-label]="action.name + ', opens in a new tab'"
                 >
-                  <span>[{{ citation.number }}]</span>
-                  <span class="visually-hidden"> {{ citation.name }}, opens in a new tab</span>
+                  <span>{{ action.name }}</span>
+                  <mat-icon aria-hidden="true">open_in_new</mat-icon>
                 </a>
               }
-            </p>
+            </div>
           </li>
         }
       </ul>

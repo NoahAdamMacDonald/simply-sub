@@ -23,6 +23,23 @@ export const policySourceSchema = z.strictObject({
 });
 export type PolicySource = z.infer<typeof policySourceSchema>;
 
+/** What a rating's link to the user's own way out says: a few words. */
+export const policyActionNameMax = 60;
+
+/**
+ * Where the user acts on what a rating says they can change (M5.12): a setting to turn off, a request to make. The
+ * provider's own page for it, which its own policy or help pages link, never guessed.
+ */
+export const policyActionSchema = z.strictObject({
+  name: textSchema
+    .max(policyActionNameMax, `Keep it to a few words (${policyActionNameMax} characters at most)`)
+    .describe('What the link does, as the card shows it: How to turn off Behavioral Advertising'),
+  url: httpsUrlSchema.describe(
+    "The page, on the provider's own sites or its policies' site, that its policy or help pages link for it",
+  ),
+});
+export type PolicyAction = z.infer<typeof policyActionSchema>;
+
 export const policyRatingSchema = z.strictObject({
   topic: dottedSlugSchema.describe('A topic id from policy-topics.yaml'),
   tier: policyTierSchema.describe("The rubric's grade its quotes fit"),
@@ -43,6 +60,9 @@ export const policyRatingSchema = z.strictObject({
     .array(regionSchema)
     .min(1, 'Leave regions out when it applies everywhere')
     .describe("Only buyers here (a country's own terms), over a rating for everywhere")
+    .optional(),
+  action: policyActionSchema
+    .describe('Where to change what the reason says the user has to change themselves (M5.12)')
     .optional(),
   lastVerified: isoDateSchema.describe('When the quotes were read'),
 });
