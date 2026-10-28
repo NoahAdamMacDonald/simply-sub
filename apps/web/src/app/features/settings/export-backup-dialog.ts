@@ -16,7 +16,7 @@ import { minPassphraseLength, passphraseIssues, type PassphraseForm } from '@sim
 import { BackupService } from '../../core/backup/backup-service';
 import { focusFirstError } from '../../shared/focus-first-error';
 import { issueErrors } from '../../shared/form-issues';
-import { saveTextFile } from '../../shared/save-file';
+import { saveFile } from '../../shared/save-file';
 
 /**
  * Export backup (PROJECT-PLAN P13): every backed-up record as a file the browser downloads, encrypted when "Protect
@@ -70,7 +70,7 @@ export class ExportBackupDialog {
     try {
       const file = await this.backups.export(this.protect() ? this.model().passphrase : undefined);
       if (!file) return;
-      saveTextFile(this.document, file.name, file.text);
+      saveFile(this.document, file.name, file.text, 'application/json');
       this.dialogRef.close(file.name);
     } finally {
       this.busy.set(false);

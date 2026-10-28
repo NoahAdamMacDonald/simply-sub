@@ -11,6 +11,7 @@ import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import {
   countedRanks,
+  planTitle,
   type AddRequest,
   type CatalogResult,
   type PickedPrice,
@@ -27,7 +28,7 @@ import { PriceTag } from '../price-tag/price-tag';
 import { ProviderIcon } from '../provider-icon/provider-icon';
 import { RankCounts } from '../rank/rank-counts';
 import { StatusBadge, type BadgeStatus } from '../status-badge/status-badge';
-import { catalogIcon, planTitle } from './card-text';
+import { catalogIcon } from './card-text';
 import { InLists, type NamedList } from './in-lists';
 import { PlanDetails } from './plan-details';
 import { slidingDetails } from './sliding-details';

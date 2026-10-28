@@ -1,17 +1,9 @@
-import type { Billing, Charge, Interval, IsoDate, ResolvedAddOn } from '@simply-sub/core';
+import { periodText, type Billing, type Charge, type IsoDate } from '@simply-sub/core';
 import { nearDateText } from './charge-text';
 import { dateText } from './date-text';
 
-// How an item is billed, in words: the list editor's rows (P5), the item dialog's periods (P6) and List view's cards
-// (P4), with its renewal date from its next charge (M7.1).
-
-/** How often a period bills, in words: monthly, every 3 months, every 30 days. */
-export function periodText(interval: Interval, count: number): string {
-  if (count === 1) {
-    return { day: 'daily', week: 'weekly', month: 'monthly', year: 'yearly' }[interval];
-  }
-  return `every ${count} ${interval}s`;
-}
+// How an item is billed, in words: the list editor's rows (P5) and List view's cards (P4), with its renewal date from
+// its next charge (M7.1). The period's words are core's periodText, as the exports write them.
 
 /** "Monthly · auto-renews", "Yearly · renews manually · ends Nov 3, 2027", "Specific dates, billed monthly". */
 export function billingText(billing: Billing): string {
@@ -45,9 +37,4 @@ export function renewalText(billing: Billing, next: Charge | undefined, today: I
     next.manual ? 'manual' : 'auto',
     ...(billing.endDate === undefined ? [] : [`ends ${dateText(billing.endDate)}`]),
   ].join(' · ');
-}
-
-/** "Extra member", or "Extra member × 2". */
-export function addOnText({ name, quantity }: ResolvedAddOn): string {
-  return quantity === 1 ? name : `${name} × ${quantity}`;
 }

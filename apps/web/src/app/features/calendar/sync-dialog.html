@@ -1,0 +1,60 @@
+<h2 mat-dialog-title>Add your payments to {{ name }}</h2>
+<mat-dialog-content>
+  <p id="sync-file">
+    Your payments for the next 12 months are in <strong>{{ data.fileName }}</strong
+    >, in your downloads.
+  </p>
+  @switch (data.app) {
+    @case ('google') {
+      <ol>
+        <li>
+          On a computer, open
+          <a href="https://calendar.google.com" target="_blank" rel="noopener"
+            ><span>calendar.google.com</span
+            ><span class="visually-hidden">, opens in a new tab</span
+            ><mat-icon aria-hidden="true">open_in_new</mat-icon></a
+          >. Google Calendar imports files only there.
+        </li>
+        <li>Open Settings (the gear), then Settings, then Import &amp; export.</li>
+        <li>Choose the file, then the calendar to add the payments to.</li>
+        <li>Select Import.</li>
+      </ol>
+    }
+    @case ('apple') {
+      <h3>On a Mac</h3>
+      <ol>
+        <li>In Calendar, choose File, then Import.</li>
+        <li>Choose the file, then the calendar to add the payments to.</li>
+      </ol>
+      <h3>On an iPhone or iPad</h3>
+      <ol>
+        <li>Open the file from Downloads in the Files app.</li>
+        <li>Add its events to Calendar.</li>
+      </ol>
+    }
+    @case ('proton') {
+      <ol>
+        <li>
+          Open Proton Calendar on the web, at
+          <a href="https://calendar.proton.me" target="_blank" rel="noopener"
+            ><span>calendar.proton.me</span><span class="visually-hidden">, opens in a new tab</span
+            ><mat-icon aria-hidden="true">open_in_new</mat-icon></a
+          >.
+        </li>
+        <li>Open Settings, then All settings, then Import/export.</li>
+        <li>
+          Select Import from ICS, then choose the file and the calendar to add the payments to.
+        </li>
+        <li>Select Import.</li>
+      </ol>
+    }
+  }
+  <p class="note">
+    It's a copy of your payments as they are today: export it again after you change your lists. A
+    calendar of its own makes the old copy easy to remove.
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button matButton type="button" (click)="data.download()">Download again</button>
+  <button matButton="filled" type="button" mat-dialog-close>Done</button>
+</mat-dialog-actions>

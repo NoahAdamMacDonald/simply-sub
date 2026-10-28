@@ -1,4 +1,19 @@
-<ss-page-header heading="Calendar" />
+<ss-page-header heading="Calendar">
+  <!-- The lists shown, over the next 12 months (P10, M7.5): Sync calendar's steps for each app, and the files. -->
+  @if (state() === 'ready') {
+    <button matButton="outlined" type="button" class="sync" [matMenuTriggerFor]="syncMenu">
+      <mat-icon>calendar_add_on</mat-icon>
+      Sync calendar
+      <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #syncMenu>
+      @for (app of calendarApps; track app.id) {
+        <button mat-menu-item type="button" (click)="sync(app.id)">{{ app.name }}</button>
+      }
+    </mat-menu>
+    <ss-split-button label="Export to file" [items]="exportChoices" (action)="exportFile($event)" />
+  }
+</ss-page-header>
 
 @switch (state()) {
   @case ('loading') {

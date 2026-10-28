@@ -2,10 +2,10 @@ import { Component, ElementRef, computed, inject, input, output, viewChild } fro
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import type { ResolvedItem, Tag } from '@simply-sub/core';
+import { addOnText, planTitle, type ResolvedItem, type Tag } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { SettingsStore } from '../../core/settings/settings-store';
-import { addOnText, billingText } from '../billing-text';
+import { billingText } from '../billing-text';
 import { chargeAmountText, type ShownAndSpoken } from '../charge-text';
 import { countryName } from '../country-name';
 import { dateText } from '../date-text';
@@ -15,7 +15,6 @@ import { ProviderIcon } from '../provider-icon/provider-icon';
 import { StatusBadge, type BadgeStatus } from '../status-badge/status-badge';
 import { TagChip } from '../tags/tag-chip';
 import { WrongDate } from '../wrong-date/wrong-date';
-import { planTitle } from './card-text';
 import { slidingDetails } from './sliding-details';
 
 let nextId = 0;

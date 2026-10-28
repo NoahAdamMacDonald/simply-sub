@@ -28,6 +28,9 @@ export interface Charge {
   ends?: true;
 }
 
+/** What one charge costs: an item's (periodCost), or a part of a date's charges in one currency. */
+export type ChargeCost = Pick<Charge, 'amount' | 'tax' | 'currency' | 'converted'>;
+
 /** What an item's charges need: its record, its prices for its period, and its price override's. */
 export type Chargeable = Pick<
   ResolvedItem,
@@ -51,17 +54,11 @@ export function itemCharges(resolved: Chargeable, range: DateRange, place: TaxPl
   const { item } = resolved;
   const { billing } = item;
   const overridden = overrideTest(resolved);
-  const together = resolved.addOns.filter((addOn) => samePeriod(addOn.price, billing));
   const separate = resolved.addOns.filter((addOn) => !samePeriod(addOn.price, billing));
   const byDate = new Map<IsoDate, Part[]>();
   const add = (date: IsoDate, part: Part) => byDate.set(date, [...(byDate.get(date) ?? []), part]);
   for (const date of chargeDates(billing, range)) {
-    if (overridden(date) && resolved.overridePrice) {
-      add(date, { price: resolved.overridePrice, count: 1 });
-      continue;
-    }
-    add(date, { price: resolved.price, count: 1 });
-    for (const addOn of together) add(date, { price: addOn.price, count: addOn.quantity });
+    for (const part of ownParts(resolved, date)) add(date, part);
   }
   for (const addOn of separate) {
     for (const date of chargeDates(billing, range, addOn.price)) {
@@ -70,7 +67,7 @@ export function itemCharges(resolved: Chargeable, range: DateRange, place: TaxPl
   }
 
   const taxPlace = buyerTaxPlace(place, item.region);
-  const manual = billing.mode === 'recurring' ? !billing.autoRenew : !resolved.price.autoRenew;
+  const manual = manualRenewal(resolved);
   const last = [
     lastChargeDate(billing),
     ...separate.map((addOn) => lastChargeDate(billing, addOn.price)),
@@ -80,34 +77,33 @@ export function itemCharges(resolved: Chargeable, range: DateRange, place: TaxPl
     .at(-1);
   const charges: Charge[] = [];
   for (const date of [...byDate.keys()].sort()) {
-    // A price with no rate to convert it stays in its own currency, so a date can have a charge in each.
-    const byCurrency = new Map<string, { amount: number; tax: number; converted: boolean }>();
-    for (const { price, count } of byDate.get(date) ?? []) {
-      const amount = price.amount * count;
-      if (amount === 0) continue;
-      const sum = byCurrency.get(price.currency) ?? { amount: 0, tax: 0, converted: false };
-      const tax = salesTaxOn(amount, price, taxPlace);
-      byCurrency.set(price.currency, {
-        amount: sum.amount + amount + tax,
-        tax: sum.tax + tax,
-        converted: sum.converted || price.fx !== undefined,
-      });
-    }
-    for (const [currency, { amount, tax, converted }] of byCurrency) {
+    for (const cost of costsOf(byDate.get(date) ?? [], taxPlace)) {
       charges.push({
         date,
-        amount,
-        tax,
-        currency,
+        ...cost,
         itemId: item.id,
         listId: resolved.listId,
-        converted,
         manual,
         ...(date === last && { ends: true as const }),
       });
     }
   }
   return charges;
+}
+
+/**
+ * What one charge of the item's own billing period costs on `date`, sales tax included (the exports' Cost, M7.5): its
+ * price override while it applies, else its price plus each add-on billed with it × its quantity. An add-on billed on a
+ * period of its own isn't in it. A free plan costs 0 in its price's currency.
+ */
+export function periodCost(resolved: Chargeable, date: IsoDate, place: TaxPlace): ChargeCost {
+  const [cost] = costsOf(ownParts(resolved, date), buyerTaxPlace(place, resolved.item.region));
+  return cost ?? { amount: 0, tax: 0, currency: resolved.price.currency, converted: false };
+}
+
+/** Whether the item is renewed by hand: `autoRenew: false`, or a prepaid plan's dates (the calendar's ↻). */
+export function manualRenewal({ item, price }: Pick<Chargeable, 'item' | 'price'>): boolean {
+  return item.billing.mode === 'recurring' ? !item.billing.autoRenew : !price.autoRenew;
 }
 
 /**
@@ -150,6 +146,48 @@ export function nextCharge(
     from = addDays(date, 1);
   }
   return undefined;
+}
+
+/**
+ * What the item's own period costs on `date`: its price override while it applies, else its price and the add-ons
+ * billed with it.
+ */
+function ownParts(resolved: Chargeable, date: IsoDate): Part[] {
+  if (overrideTest(resolved)(date) && resolved.overridePrice) {
+    return [{ price: resolved.overridePrice, count: 1 }];
+  }
+  return [
+    { price: resolved.price, count: 1 },
+    ...resolved.addOns
+      .filter((addOn) => samePeriod(addOn.price, resolved.item.billing))
+      .map((addOn) => ({ price: addOn.price, count: addOn.quantity })),
+  ];
+}
+
+/**
+ * Parts of a charge priced with sales tax and added up by currency. A price with no rate to convert it stays in its
+ * own currency, so a date can have a charge in each. A part that comes to 0 adds nothing.
+ */
+function costsOf(parts: readonly Part[], taxPlace: TaxPlace): ChargeCost[] {
+  const byCurrency = new Map<string, ChargeCost>();
+  for (const { price, count } of parts) {
+    const amount = price.amount * count;
+    if (amount === 0) continue;
+    const sum = byCurrency.get(price.currency) ?? {
+      amount: 0,
+      tax: 0,
+      currency: price.currency,
+      converted: false,
+    };
+    const tax = salesTaxOn(amount, price, taxPlace);
+    byCurrency.set(price.currency, {
+      amount: sum.amount + amount + tax,
+      tax: sum.tax + tax,
+      currency: price.currency,
+      converted: sum.converted || price.fx !== undefined,
+    });
+  }
+  return [...byCurrency.values()];
 }
 
 /** Whether a charge on a date costs the item's price override: it has one, and the date is before its `until`. */

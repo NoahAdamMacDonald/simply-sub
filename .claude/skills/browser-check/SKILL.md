@@ -302,6 +302,23 @@ It runs axe on the page, the panel, the open select, the sheet and List view, se
 under an open panel as `check-list-view.cjs` does, and checks for horizontal scroll. Wait about 600 ms before judging a
 bottom sheet: it slides up.
 
+`check-exports.cjs` (M7.5) checks the exports on `ng serve` for a Canadian in Alberta. It writes to IndexedDB Work
+Related (Netflix Standard on the 12th, tagged Family and with a tag deleted since; Crave Premium billed on the 31st)
+and Family (Mullvad VPN, yearly on Jan 20, renewed by hand), then reads every file it downloads:
+- List view's Export by keyboard: the CSV (its byte order mark, header and rows, live tags only), the workbook
+  (parsed by the repository's exceljs: Summary, the list's sheet, Payments), the JSON, the text, and the .ics (an
+  all-day event per charge, Crave's in every one of 12 months), with "Saved <name>" after each;
+- the Calendar's Export to file (the main button's .ics for both lists, the menu's payment schedule in date order
+  and its workbook) and Sync calendar for each app: the .ics, then its steps with focus on the heading, and Escape
+  back on Sync calendar;
+- offline at 360 px, a library not loaded yet: the snack bar's "The file couldn't be made".
+
+Every format runs light at 1280 px; the other runs open each menu and download one file of each page. It runs axe on
+the open menus and each app's steps, and checks for horizontal scroll. Wait for focus on a menu's first item before
+pressing the arrows: keys sent while it opens land elsewhere. A closing menu stays in the DOM a moment: look for
+`.mat-mdc-menu-panel:not(.mat-menu-panel-exit-animation)`. Material nests two `.mat-mdc-snack-bar-label`s, and the live
+announcer holds the same words: take the first.
+
 Since M7.1, the scripts check the charges:
 - `check-list-view.cjs`: Mullvad's "Renew by Nov 12", Netflix's next charge as charged in its details ("Next charge Nov
   12, 2026: $19.94, with $0.95 tax", Alberta's 5%), and Wrong date? by keyboard: the dialog filled in with focus in

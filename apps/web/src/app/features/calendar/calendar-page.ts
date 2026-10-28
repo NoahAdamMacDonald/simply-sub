@@ -16,6 +16,7 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatOption } from '@angular/material/core';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
+import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { MatSelect, MatSelectTrigger } from '@angular/material/select';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -24,6 +25,7 @@ import {
   addMonthsToMonth,
   chargeTotal,
   hiddenLists,
+  itemTitle,
   monthGrid,
   monthOf,
   monthRange,
@@ -42,10 +44,12 @@ import { ListsRepository } from '../../core/storage/lists-repository';
 import { BudgetBar } from '../../shared/budget-bar/budget-bar';
 import { chargeAmountText, nearDateText } from '../../shared/charge-text';
 import { monthText, spokenDayText } from '../../shared/date-text';
+import { Exporter, type PaymentsExportFormat } from '../../shared/export/exporter';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { amountText } from '../../shared/price-tag/price-text';
 import { ProviderIcon } from '../../shared/provider-icon/provider-icon';
-import { planTitle } from '../../shared/sub-card/card-text';
+import { SplitButton, type SplitButtonItem } from '../../shared/split-button/split-button';
+import { calendarApps, type CalendarApp } from './calendar-apps';
 import type { CalendarDay, CalendarEntry } from './calendar-entries';
 import { DayPanel } from './day-panel';
 
@@ -90,11 +94,15 @@ const monthNames = Array.from({ length: 12 }, (_, index) =>
     MatIcon,
     MatIconButton,
     MatLabel,
+    MatMenu,
+    MatMenuItem,
+    MatMenuTrigger,
     MatOption,
     MatSelect,
     MatSelectTrigger,
     PageHeader,
     ProviderIcon,
+    SplitButton,
   ],
   templateUrl: './calendar-page.html',
   styleUrl: './calendar-page.scss',
@@ -107,9 +115,17 @@ export class CalendarPage {
   private readonly settings = inject(SettingsStore);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector = inject(Injector);
+  private readonly exporter = inject(Exporter);
   protected readonly today = inject(ClockService).today;
 
   protected readonly weekdays = weekdays;
+  protected readonly calendarApps = calendarApps;
+  /** Export to file (P10, M7.5): the calendar first, as the main button does. */
+  protected readonly exportChoices: readonly SplitButtonItem[] = [
+    { id: 'ics', label: 'Calendar (.ics)', icon: 'event' },
+    { id: 'csv', label: 'Payment schedule (.csv)', icon: 'table_view' },
+    { id: 'xlsx', label: 'Excel (.xlsx)', icon: 'grid_on' },
+  ];
   protected readonly monthNames = monthNames;
   protected readonly agenda = toSignal(
     inject(BreakpointObserver)
@@ -179,14 +195,13 @@ export class CalendarPage {
     for (const [index, charge] of charges.entries()) {
       const resolved = this.resolved().get(charge.itemId);
       if (!resolved) continue;
-      const { item, name, planName } = resolved;
-      const plan = item.source.kind === 'bundle' ? name : planTitle(name, planName);
+      const { item, name } = resolved;
       const entry: CalendarEntry = {
         key: `${charge.itemId}-${charge.date}-${charge.currency}-${index}`,
         charge,
         item,
         name: item.nickname ?? name,
-        title: item.nickname === undefined ? plan : `${item.nickname} (${plan})`,
+        title: itemTitle(resolved),
         ...(resolved.iconUrl !== undefined && { iconUrl: resolved.iconUrl }),
         listName: this.listNames().get(charge.listId) ?? '',
       };
@@ -359,6 +374,33 @@ export class CalendarPage {
         this.focusDay.set(date);
         afterNextRender(() => this.dayButton(date)?.focus(), { injector: this.injector });
       });
+    });
+  }
+
+  /** Export to file: the lists shown, over the next 12 months. The file downloads, and a snackbar names it. */
+  protected exportFile(kind: string): void {
+    void this.exporter.exportPayments(this.shownLists(), kind as PaymentsExportFormat);
+  }
+
+  /**
+   * Sync calendar (P10, Phase 3): the .ics for the lists shown downloads, then a dialog gives the app's import steps.
+   * The dialog loads with the first.
+   */
+  protected async sync(app: CalendarApp): Promise<void> {
+    const lists = this.shownLists();
+    const download = () => this.exporter.exportPayments(lists, 'ics', { announce: false });
+    const fileName = await download();
+    if (fileName === undefined) return;
+    const [{ MatDialog }, { SyncDialog }] = await Promise.all([
+      import('@angular/material/dialog'),
+      import('./sync-dialog'),
+    ]);
+    this.injector.get(MatDialog).open(SyncDialog, {
+      data: { app, fileName, download },
+      autoFocus: 'first-heading',
+      ariaDescribedBy: 'sync-file',
+      maxWidth: 'min(520px, calc(100vw - 32px))',
+      width: '520px',
     });
   }
 

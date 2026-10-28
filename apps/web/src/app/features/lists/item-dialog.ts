@@ -53,7 +53,9 @@ import {
   newItemForm,
   periodChoices,
   periodOf,
+  periodText,
   pickPrice,
+  planTitle,
   rankingSections,
   renewalAfterPeriodChange,
   samePeriod,
@@ -88,7 +90,6 @@ import { TagsRepository } from '../../core/storage/tags-repository';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
 import { CalendarHeader } from '../../shared/calendar-header';
 import { nearDateText } from '../../shared/charge-text';
-import { periodText } from '../../shared/billing-text';
 import { focusFirstError } from '../../shared/focus-first-error';
 import { isoDateProviders } from '../../shared/iso-date-adapter';
 import { issueErrors } from '../../shared/form-issues';
@@ -97,7 +98,7 @@ import { PriceTag } from '../../shared/price-tag/price-tag';
 import { amountText, intervalSpoken, intervalText } from '../../shared/price-tag/price-text';
 import { ProviderIcon } from '../../shared/provider-icon/provider-icon';
 import { RankSelect } from '../../shared/rank/rank-select';
-import { catalogIcon, planTitle } from '../../shared/sub-card/card-text';
+import { catalogIcon } from '../../shared/sub-card/card-text';
 import { TagPicker } from '../../shared/tags/tag-picker';
 import { fillScreenWhenNarrow } from '../../shared/wide-dialog';
 

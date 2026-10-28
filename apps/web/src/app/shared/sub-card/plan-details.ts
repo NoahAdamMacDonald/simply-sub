@@ -5,6 +5,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import {
   planExtras,
   planPolicies,
+  planTitle,
   type AddRequest,
   type BundleSaving,
   type PickedPrice,
@@ -26,7 +27,7 @@ import { dateText } from '../date-text';
 import { FeatureList } from '../feature-list/feature-list';
 import { PriceTag } from '../price-tag/price-tag';
 import { ProviderIcon } from '../provider-icon/provider-icon';
-import { catalogIcon, planTitle, savingText, type SavingText } from './card-text';
+import { catalogIcon, savingText, type SavingText } from './card-text';
 
 /** The grades' names, in muted text beside each rating's topic (BLUEPRINT §4.10). */
 const tierNames: Record<PolicyTier, string> = {

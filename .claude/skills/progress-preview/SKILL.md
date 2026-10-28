@@ -74,7 +74,9 @@ node .claude/skills/progress-preview/csp-check.cjs "$DEPS" "<scratchpad>/shots" 
 
 `check-preview.cjs`: full-page screenshots in both themes at 1280 px and at 360 px, axe, no horizontal scroll, no
 console errors, and the icon lookup (proton.me's icon, gooooogle.com's letter). `csp-check.cjs`: every page,
-in-app navigation, the theme toggle, the drawer and the snackbar with no CSP or Trusted Types violations, and
+in-app navigation, the theme toggle, the drawer, the snackbar and every export with its library (M7.5: List view's five
+formats, the Calendar's three and Sync calendar, each file checked for its first bytes) with no CSP or Trusted Types
+violations, and
 Cloudflare's beacon (inserted as the edge does, its reports aborted) loading. Against the live link or production,
 `csp-check.cjs` uses the beacon already in the page. **Look at the screenshots.** Stop `wrangler dev` afterwards
 (kill its node parent: the user's memory notes say how).
@@ -89,5 +91,11 @@ Cloudflare's beacon (inserted as the edge does, its reports aborted) loading. Ag
 - `csp-check.cjs`'s three beacon checks fail with `ERR_NAME_NOT_RESOLVED` when the machine's DNS filter blocks
   `static.cloudflareinsights.com` (as NextDNS does on the user's machine). That's the network, not the app: the
   violations check still runs, and visitors without such a filter load the beacon (BLUEPRINT §7.6).
+- `wrangler dev` keeps the files it started with: after copying a new build into `apps/api/public`, restart it, or
+  the new chunks come back as `index.html` ("Expected a JavaScript-or-Wasm module script but the server responded
+  with a MIME type of text/html").
+- Only the production build runs Angular's chunk optimizer, which gives a CommonJS library loaded with `import()` as
+  `default` only (M7.5: papaparse, exceljs, ics). `ng serve` and the unit tests also give it by name, so code that
+  reads named exports works there and fails here: check such code under `wrangler dev`.
 - To check code that only runs when something uses it (M4.1's storage, before any page did), add a temporary
   consumer, build, check, and drop it with `git checkout --` before committing. It never needs this branch.

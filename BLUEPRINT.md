@@ -170,7 +170,7 @@ simply-sub/
 │  │  │  │  ├─ payment/
 │  │  │  │  ├─ custom-subs/
 │  │  │  │  └─ settings/
-│  │  │  ├─ shared/ui/       # sub-card, rank-select, budget-bar, price-tag, mini-calendar…
+│  │  │  ├─ shared/ui/       # sub-card, rank-select, budget-bar, price-tag, mini-calendar…; export/ (M7.5)
 │  │  │  ├─ layout/          # sidebar, shell
 │  │  │  ├─ app.routes.ts
 │  │  │  └─ app.config.ts
@@ -227,7 +227,8 @@ simply-sub/
 │     │  │                   # bodies (M2.4)
 │     │  ├─ optimizer/       # suggestion engine (section 10)
 │     │  ├─ rewards/         # card reward maths (section 9)
-│     │  └─ export/          # csv, json, txt, xlsx, ics serializers
+│     │  └─ export/          # the exports' tables, calendar events, text and list file, which the app writes
+│     │                      # with papaparse, exceljs and ics (M7.5)
 │     └─ test/               # Vitest specs, mirroring src/ (run in the America/Vancouver time zone)
 │
 ├─ data/                     # catalog source of truth (human-edited)
@@ -2333,9 +2334,10 @@ prompted after each big change, or weekly).
 | Format | Library | Notes |
 |---|---|---|
 | JSON | native | **Full backup**: all tables plus `schemaVersion`. The only format that can be re-imported. An optional passphrase encrypts it (section 11.5), since backups sit in Downloads unencrypted. Imports are validated with Zod before anything is written |
-| CSV | papaparse | One row per item (list, service, plan, cost, interval, next date, tags) |
-| XLSX | exceljs (lazy-loaded) | One sheet per list plus a summary sheet |
-| TXT | native | A readable summary |
+| CSV | papaparse | List view: one row per item (list, service, plan, cost as charged with tax, interval, next charge, live tags). The Calendar: one row per charge in the next 12 months |
+| XLSX | exceljs (lazy-loaded) | Summary, one sheet per list of its items, then Payments, the next 12 months' charges |
+| TXT | native | A readable summary of one list |
+| JSON (one list) | native | List view's: the list, its items and what they name, as stored. Not a backup, so not importable (M7.5) |
 | ICS | `ics` npm package | One all-day event (`VALUE=DATE`, so no time zone can move it) per charge in the next 12 months, from the schedule engine. Not `RRULE`s: a monthly rule starting on the 31st skips every shorter month (RFC 5545 drops dates that don't exist), and separate events also follow windows, end dates and price changes |
 
 ### 11.3 Calendar integration
@@ -2537,6 +2539,58 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    about 20 currencies at a converted amount, so `billingCurrency: { GLOBAL: EUR }` overstates its card FX fee.
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
+
+**Resolved (2026-10-28, M7.5)**
+- **The exports** (section 11.2) are laid out by core's `export/` (tables, calendar events, a list's text and its JSON
+  file) and written by the libraries chosen for them, pinned to exact versions and loaded only for their format:
+  papaparse for CSV, exceljs for the workbook and `ics` for calendars. Text and JSON need none. In the app,
+  `shared/export/`'s `Exporter` reads the lists as their pages show them (MetricsService, live tags) and saves through
+  `save-file` with "Saved <name>"; `export-files.ts` loads with the first export.
+- **What each file holds** (the user's choices):
+  - List view's CSV: a row per item with List, Service, Plan, Nickname, Cost, Tax, Currency, Converted, Billed,
+    Renews, Next charge, Ends, Status and Tags. Cost is one charge of the item's own period today, as charged with tax
+    (core's `periodCost`: the price override while it applies, else the price and the add-ons billed with it; an
+    add-on on a period of its own isn't in it). An item that can't be priced is named by its source, with why in
+    Status.
+  - The Calendar's payment schedule (CSV): a row per charge in the next 12 months for the lists shown, in date order.
+  - The workbook, from either page: Summary (each list's totals as its page shows them, then Total), a sheet per list
+    of its items (the CSV's columns without List), then Payments.
+  - Text (List view): the list's totals, then each item with its cost, renewal, next charge, end date, add-ons, own
+    price, status, tags and note, then the items it can't price.
+  - JSON (List view): the list, its items as stored, and the custom subscriptions and live tags they name. It has no
+    `schemaVersion`, so Import refuses it ("This file isn't a Simply Sub backup").
+  - Calendar (.ics): an all-day event per charge in the next 12 months (`DTSTART;VALUE=DATE`, ending the next day,
+    shown as free), titled "Netflix: $19.94", or "Renew Mullvad VPN: ≈ $94.16" for a manual renewal, with the plan,
+    list, tax, renewal and "Its last charge before it ends". A plan billed on the 31st has an event in every month.
+    Each UID is the item, the date and the currency, the same in every export.
+  - Amounts are numbers rounded to their currency's minor unit, beside its code, and dates are ISO (real dates in the
+    workbook), so spreadsheets add and sort them. Only live tags are named (M6.11).
+- **Spreadsheet safety:** a CSV cell of text that starts like a formula (=, +, -, @) gets a `'` first (papaparse's
+  `escapeFormulae`), and the file starts with a byte order mark, so Excel reads it as UTF-8. exceljs writes text cells
+  as text.
+- **File names:** `simply-sub-work-related-2026-10-28.csv` from List view (the list's name in plain letters and
+  digits) and `simply-sub-payments-2026-10-28.ics` from the Calendar.
+- **List view:** Export ▾ beside Edit list, when the list has something in it: CSV, Excel, JSON, Text and Calendar
+  (.ics).
+- **The Calendar:** for the lists shown, over the next 12 months:
+  - Sync calendar ▾ (Google, Apple and Proton Calendar): the .ics downloads, then a dialog gives that app's import
+    steps (from each one's help pages), with focus on its heading, Download again and Done.
+  - Export to file (`ss-split-button`): Calendar (.ics) as the main button, then Payment schedule (.csv) and Excel.
+- **Under the production CSP with Trusted Types** (`wrangler dev`, csp-check.cjs): no library needed eval or
+  innerHTML, and there were no violations. One fix: the production build's chunk optimizer gives a CommonJS library's
+  dynamic import as `default` only, keeping just what the code reads, so named exports alone were undefined there
+  (the dev server and the tests had them). `export-files.ts` reads `default` when there is one.
+- **Offline,** a library not loaded yet can't load: "The file couldn't be made. Check your connection, then try
+  again." The snack bar loads with the page so it can say so.
+- **npm audit --audit-level=high** passes. exceljs 4.4.0, the latest, brings two moderate advisories (uuid < 11.1.1:
+  a missing bounds check in v3, v5 and v6 when a buffer is given); exceljs only calls v4.
+- **Core:** `planTitle`, `itemTitle`, `periodText`, `addOnText` and the words for an item that can't be resolved moved
+  to `user/item-text.ts`, so the cards, the editor and the exports say the same.
+- **Bundles:** the initial bundle grew 0.9 kB (497.3 kB of 500): the bundler's CommonJS helpers that exceljs and ics
+  need, which it keeps with its other helpers in a chunk the initial bundle loads. Beyond it, gzipped: List view
+  +1.6 kB; the Calendar +11.4 kB, mostly Material's menu (30.7 kB raw) for its two menus, which List view, Lists and
+  Search load too. With the first export: export-files 3.9 kB, papaparse 7.0 kB, ics 23.9 kB (with yup) and exceljs
+  270 kB (Excel only).
 
 **Resolved (2026-10-28, M7.4)**
 - **The Calendar** (PROJECT-PLAN P10) is "Calendar" with the month's bar, Showing, the month's navigation, the grid

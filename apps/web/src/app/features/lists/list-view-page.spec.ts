@@ -25,6 +25,7 @@ import {
   until,
   type TestStorage,
 } from '../../core/storage/storage.testing';
+import { captureDownloads, csvText } from '../../shared/export/downloads.testing';
 import { alberta, fx, searchCatalogData } from '../../shared/sub-card/search.testing';
 import { CustomSubEditor } from '../custom-subs/custom-sub-editor';
 import { ListViewPage } from './list-view-page';
@@ -90,6 +91,7 @@ describe('ListViewPage', () => {
   });
 
   afterEach(() => {
+    vi.restoreAllMocks();
     document.querySelectorAll('.cdk-overlay-container').forEach((overlay) => overlay.remove());
   });
 
@@ -458,6 +460,42 @@ describe('ListViewPage', () => {
     expect(page().querySelector('.unsaved a')?.getAttribute('href')).toBe(`/lists/${work.id}/edit`);
   });
 
+  it('exports the list from Export, in each format, and says what it saved (M7.5)', async () => {
+    const downloads = captureDownloads();
+    await plant();
+    await open(work.id);
+    await until(() => groups().length === 4);
+    page().querySelector<HTMLElement>('.export')?.click();
+    await harness.fixture.whenStable();
+    const choices = Array.from(
+      document.querySelectorAll<HTMLElement>('.mat-mdc-menu-panel [mat-menu-item]'),
+    );
+    expect(choices.map(spoken)).toEqual([
+      'CSV (.csv)',
+      'Excel (.xlsx)',
+      'JSON (.json)',
+      'Text (.txt)',
+      'Calendar (.ics)',
+    ]);
+
+    choices[0].click();
+    await until(() => downloads.length === 1);
+    expect(downloads[0].name).toBe('simply-sub-work-related-2026-10-25.csv');
+    // Only this list's items, in the order they were added.
+    const rows = (await csvText(downloads[0])).split('\r\n');
+    expect(rows.map((row) => row.split(',').slice(0, 3).join(' · '))).toEqual([
+      'List · Service · Plan',
+      'Work Related · Netflix · Standard',
+      'Work Related · Mullvad VPN · Mullvad VPN',
+      'Work Related · Crave · Premium',
+    ]);
+    await until(
+      () =>
+        document.querySelector('.mat-mdc-snack-bar-label')?.textContent?.trim() ===
+        'Saved simply-sub-work-related-2026-10-25.csv',
+    );
+  });
+
   it('offers to add from the catalog or a custom subscription to an empty list', async () => {
     const empty = await TestBed.inject(ListsRepository).create({ name: 'Empty' });
     await open(empty.id);
@@ -472,6 +510,8 @@ describe('ListViewPage', () => {
     expect(spoken(page().querySelector('ss-empty-state button'))).toBe('Add custom subscription');
     expect(page().querySelector('.features')).toBeNull();
     expect(page().querySelector('.search')).toBeNull();
+    // Nothing to export.
+    expect(page().querySelector('.export')).toBeNull();
   });
 
   it('says a list that isn’t there doesn’t exist', async () => {

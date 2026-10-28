@@ -5,6 +5,22 @@
       <mat-icon>edit</mat-icon>
       Edit list
     </a>
+    <!-- The list in each format the exports write (P4, M7.5): none for a list with nothing in it. -->
+    @if (total() > 0) {
+      <button matButton="outlined" type="button" class="export" [matMenuTriggerFor]="exportMenu">
+        <mat-icon>download</mat-icon>
+        Export
+        <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #exportMenu>
+        @for (choice of exportChoices; track choice.kind) {
+          <button mat-menu-item type="button" (click)="export(choice.kind)">
+            <mat-icon aria-hidden="true">{{ choice.icon }}</mat-icon>
+            <span>{{ choice.label }}</span>
+          </button>
+        }
+      </mat-menu>
+    }
   }
   @if (state() === 'ready') {
     <!-- "/ mo" and ≈ are read as words, as ss-price's are. -->

@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import {
   itemCharges,
+  manualRenewal,
   nextCharge,
+  periodCost,
   type Billing,
   type Chargeable,
   type ListItem,
@@ -336,5 +338,95 @@ describe('nextCharge', () => {
     );
     expect(nextCharge(free, '2026-10-28', alberta)?.date).toBe('2026-11-12');
     expect(nextCharge(free, '2026-11-13', alberta)).toBeUndefined();
+  });
+});
+
+describe('periodCost', () => {
+  const cost = (one: Chargeable, date = '2026-10-28', place: TaxPlace = alberta) => {
+    const { amount, tax, currency, converted } = periodCost(one, date, place);
+    return { amount: round(amount), tax: round(tax), currency, converted };
+  };
+
+  it('is a charge of the item’s period with the add-ons billed with it, sales tax included', () => {
+    const withMember = chargeable(
+      {},
+      {
+        addOns: [
+          { id: 'netflix.extra-member', name: 'Extra member', quantity: 2, price: picked(7.99) },
+        ],
+      },
+    );
+    expect(cost(withMember)).toEqual({
+      amount: round((18.99 + 2 * 7.99) * 1.05),
+      tax: round((18.99 + 2 * 7.99) * 0.05),
+      currency: 'CAD',
+      converted: false,
+    });
+  });
+
+  it('leaves out an add-on billed on a period of its own', () => {
+    const disney = chargeable(
+      { interval: 'year' },
+      {
+        price: picked(169.99, { interval: 'year' }),
+        addOns: [{ id: 'disney.extra', name: 'Extra member', quantity: 1, price: picked(7.99) }],
+      },
+    );
+    expect(cost(disney, '2026-10-28', { country: 'GB' }).amount).toBe(169.99);
+  });
+
+  it('is the price override while it applies, then the price', () => {
+    const offer = chargeable(
+      {},
+      {
+        item: { priceOverride: { amount: 9.99, currency: 'CAD', until: '2027-01-12' } },
+        overridePrice: picked(9.99, { taxIncluded: true }),
+      },
+    );
+    expect(cost(offer).amount).toBe(9.99);
+    expect(cost(offer, '2027-01-12').amount).toBe(round(18.99 * 1.05));
+  });
+
+  it('marks a converted price, adds no tax to one that includes it, and follows the region it was bought in', () => {
+    const mullvad = chargeable(
+      { interval: 'year' },
+      {
+        price: picked(94.16, {
+          interval: 'year',
+          native: false,
+          taxIncluded: true,
+          source: { region: 'EU', amount: 60, currency: 'EUR' },
+          fx: { rate: 1.5693, date: '2026-10-21', source: 'ECB' },
+        }),
+      },
+    );
+    expect(cost(mullvad)).toEqual({ amount: 94.16, tax: 0, currency: 'CAD', converted: true });
+    // Bought in the US, where this buyer added no rate: no tax.
+    const american = chargeable({}, { item: { region: 'US' } });
+    expect(cost(american).tax).toBe(0);
+  });
+
+  it('is 0 in its price’s currency for a free plan', () => {
+    expect(cost(chargeable({}, { price: picked(0, { currency: 'USD' }) }))).toEqual({
+      amount: 0,
+      tax: 0,
+      currency: 'USD',
+      converted: false,
+    });
+  });
+});
+
+describe('manualRenewal', () => {
+  it('is an Ongoing item’s autoRenew turned off, or a prepaid price’s dates', () => {
+    expect(manualRenewal(chargeable())).toBe(false);
+    expect(manualRenewal(chargeable({ autoRenew: false }))).toBe(true);
+    const window = {
+      mode: 'limited',
+      windows: [{ start: '2026-09-02', end: '2026-11-01' }],
+    } as unknown as Partial<Billing>;
+    expect(manualRenewal(chargeable(window, { price: picked(9, { autoRenew: false }) }))).toBe(
+      true,
+    );
+    expect(manualRenewal(chargeable(window))).toBe(false);
   });
 });

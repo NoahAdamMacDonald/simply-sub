@@ -2,16 +2,6 @@ import { catalogIconFile, type BundleSaving, type PickedPrice } from '@simply-su
 import { amountText, intervalSpoken, intervalText } from '../price-tag/price-text';
 
 /**
- * A plan's full name: "Netflix Standard", but "Proton Unlimited" for Proton's plan of that name, since plans often
- * start with their provider's name.
- */
-export function planTitle(providerName: string, planName: string): string {
-  return planName.toLocaleLowerCase('en').startsWith(providerName.toLocaleLowerCase('en'))
-    ? planName
-    : `${providerName} ${planName}`;
-}
-
-/**
  * A provider's or reseller's icon as the app loads it: the relative icons/<id>.webp, since the snapshot's absolute
  * URL points at production, where a preview's new logo isn't yet (as ResolvedItem.iconUrl). None without a logo.
  */

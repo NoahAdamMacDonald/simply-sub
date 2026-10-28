@@ -1,14 +1,15 @@
-import type {
-  IsoDate,
-  ItemResolution,
-  ItemSource,
-  PickedPrice,
-  Tag,
-  UnresolvedReason,
+import {
+  addOnText,
+  planTitle,
+  sourceText,
+  unresolvedText,
+  type IsoDate,
+  type ItemResolution,
+  type PickedPrice,
+  type Tag,
 } from '@simply-sub/core';
-import { addOnText, billingText, renewalText } from '../../shared/billing-text';
+import { billingText, renewalText } from '../../shared/billing-text';
 import { dateText } from '../../shared/date-text';
-import { planTitle } from '../../shared/sub-card/card-text';
 
 // What the list editor (P5) says about each item of its draft: when it renews, from its next charge ("Renews Nov 12 ·
 // auto", M7.1), or how it's billed when it can't be priced (shared/billing-text.ts).
@@ -89,29 +90,6 @@ export function editRow(
       ...ranks,
     ],
   };
-}
-
-/** What an item is when it can't be resolved: its plan's or bundle's id, or that it's a custom subscription. */
-function sourceText(source: ItemSource): string {
-  switch (source.kind) {
-    case 'catalog':
-      return source.planId;
-    case 'bundle':
-      return source.bundleId;
-    case 'custom':
-      return 'Custom subscription';
-  }
-}
-
-function unresolvedText(reason: UnresolvedReason): string {
-  return {
-    pending: 'Loading…',
-    'plan-gone': 'This plan is no longer in the catalog',
-    'bundle-gone': 'This bundle is no longer in the catalog',
-    'custom-gone': 'Its custom subscription was deleted',
-    'add-on-gone': 'One of its add-ons is no longer in the catalog',
-    'no-price': 'There’s no price for how it’s billed',
-  }[reason];
 }
 
 function customRanksText(count: number): string[] {

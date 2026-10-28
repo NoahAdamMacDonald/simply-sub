@@ -42,6 +42,7 @@ import { ListsRepository } from '../../core/storage/lists-repository';
 import { TagsRepository } from '../../core/storage/tags-repository';
 import { BudgetTotals } from '../../shared/budget-totals/budget-totals';
 import { EmptyState } from '../../shared/empty-state/empty-state';
+import { Exporter, type ListExportFormat } from '../../shared/export/exporter';
 import { FeatureSummary } from '../../shared/feature-summary/feature-summary';
 import { MiniCalendar, type CalendarCharge } from '../../shared/mini-calendar/mini-calendar';
 import { PageHeader } from '../../shared/page-header/page-header';
@@ -57,7 +58,7 @@ import { ListFilters, listQuery, noListFilters, type ListFilterState } from './l
  * list costs a month on average and how many it has, a search box and the Sort menu (core's listView), 📌 saved
  * straight to the item, each card's Edit and the list's, and on the side this month's and this year's totals against
  * the budgets, with each card's share of the list (M7.2), its mini calendar (M7.4, collapsed under 960 px), then its
- * types and feature summary (§3.2). M7.5 adds Export and M8 the optimizations button.
+ * types and feature summary (§3.2), and Export (M7.5). M8 adds the optimizations button.
  */
 @Component({
   selector: 'ss-list-view-page',
@@ -98,6 +99,7 @@ export class ListViewPage {
   private readonly catalog = inject(CatalogStore);
   private readonly settings = inject(SettingsStore);
   private readonly customSubEditor = inject(CustomSubEditor);
+  private readonly exporter = inject(Exporter);
   private readonly today = inject(ClockService).today;
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector = inject(Injector);
@@ -215,6 +217,19 @@ export class ListViewPage {
       }));
   });
 
+  /** Export (P4, M7.5): the list in each format the exports write. */
+  protected readonly exportChoices: readonly {
+    kind: ListExportFormat;
+    label: string;
+    icon: string;
+  }[] = [
+    { kind: 'csv', label: 'CSV (.csv)', icon: 'table_view' },
+    { kind: 'xlsx', label: 'Excel (.xlsx)', icon: 'grid_on' },
+    { kind: 'json', label: 'JSON (.json)', icon: 'data_object' },
+    { kind: 'txt', label: 'Text (.txt)', icon: 'description' },
+    { kind: 'ics', label: 'Calendar (.ics)', icon: 'event' },
+  ];
+
   /** "VPN: 2 / 3" for this list's items (§3.2). */
   protected readonly features = computed(() => this.totals()?.featureSummary ?? []);
 
@@ -249,6 +264,12 @@ export class ListViewPage {
   }
 
   protected readonly monthOf = monthOf;
+
+  /** One of Export's formats: the file downloads, and a snackbar names it. */
+  protected export(kind: ListExportFormat): void {
+    const listId = this.listId();
+    if (listId !== undefined) void this.exporter.exportList(listId, kind);
+  }
 
   protected tagsOf({ item }: ResolvedItem): Tag[] {
     const byId = this.tags.byId();

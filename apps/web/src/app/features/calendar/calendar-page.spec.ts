@@ -13,6 +13,7 @@ import { ItemsRepository } from '../../core/storage/items-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
 import type { NewRecord } from '../../core/storage/record-repository';
 import { testStorage, until, type TestStorage } from '../../core/storage/storage.testing';
+import { captureDownloads, csvText } from '../../shared/export/downloads.testing';
 import { alberta, fx, searchCatalogData } from '../../shared/sub-card/search.testing';
 import { CalendarPage } from './calendar-page';
 
@@ -105,6 +106,7 @@ describe('CalendarPage', () => {
   });
 
   afterEach(() => {
+    vi.restoreAllMocks();
     document.querySelectorAll('.cdk-overlay-container').forEach((overlay) => overlay.remove());
   });
 
@@ -251,6 +253,85 @@ describe('CalendarPage', () => {
     );
     await until(() => url() === '/calendar?month=2026-11');
     await until(() => document.activeElement?.getAttribute('data-date') === '2026-11-18');
+  });
+
+  it('exports the lists shown for the next 12 months, the calendar first (M7.5)', async () => {
+    const downloads = captureDownloads();
+    await open(`/calendar?month=2027-01&lists=${family.id}`);
+    await until(() => days().length === 1);
+    const main = page().querySelector<HTMLElement>('ss-split-button .main');
+    expect(main?.getAttribute('aria-label')).toBe('Export to file: Calendar (.ics)');
+    main?.click();
+    await until(() => downloads.length === 1);
+    expect(downloads[0].name).toBe('simply-sub-payments-2026-10-25.ics');
+    const ics = await downloads[0].blob.text();
+    // Family's Mullvad only: Work Related isn't shown.
+    expect(ics.match(/BEGIN:VEVENT/g)).toHaveLength(1);
+    expect(ics).toContain('DTSTART;VALUE=DATE:20270120\r\n');
+
+    page().querySelector<HTMLElement>('ss-split-button .more')?.click();
+    await harness.fixture.whenStable();
+    const choices = Array.from(
+      document.querySelectorAll<HTMLElement>('.mat-mdc-menu-panel [mat-menu-item]'),
+    );
+    expect(choices.map((choice) => text(choice.querySelector('span')))).toEqual([
+      'Calendar (.ics)',
+      'Payment schedule (.csv)',
+      'Excel (.xlsx)',
+    ]);
+    choices[1].click();
+    await until(() => downloads.length === 2);
+    expect(downloads[1].name).toBe('simply-sub-payments-2026-10-25.csv');
+    expect((await csvText(downloads[1])).split('\r\n')[1]).toBe(
+      '2027-01-20,Family,Mullvad VPN,Mullvad VPN,,94.16,0,CAD,yes,Manually,',
+    );
+  });
+
+  it('syncs a calendar: the .ics downloads, then the app’s import steps', async () => {
+    const downloads = captureDownloads();
+    await open();
+    await until(() => days().length === 1);
+    page().querySelector<HTMLElement>('.sync')?.click();
+    await harness.fixture.whenStable();
+    const apps = Array.from(
+      document.querySelectorAll<HTMLElement>('.mat-mdc-menu-panel [mat-menu-item]'),
+    );
+    expect(apps.map((app) => text(app))).toEqual([
+      'Google Calendar',
+      'Apple Calendar',
+      'Proton Calendar',
+    ]);
+    apps[2].click();
+    await until(() => document.querySelector('ss-sync-dialog') !== null);
+    expect(downloads.map((download) => download.name)).toEqual([
+      'simply-sub-payments-2026-10-25.ics',
+    ]);
+    const dialog = document.querySelector('ss-sync-dialog');
+    expect(text(dialog?.querySelector('h2'))).toBe('Add your payments to Proton Calendar');
+    expect(text(dialog?.querySelector('#sync-file'))).toBe(
+      'Your payments for the next 12 months are in simply-sub-payments-2026-10-25.ics, in your downloads.',
+    );
+    // As a screen reader hears them: the link's icon is hidden.
+    const steps = Array.from(dialog?.querySelectorAll('li') ?? []).map((step) => {
+      const copy = step.cloneNode(true) as Element;
+      copy.querySelectorAll('[aria-hidden="true"]').forEach((hidden) => hidden.remove());
+      return text(copy);
+    });
+    expect(steps).toEqual([
+      'Open Proton Calendar on the web, at calendar.proton.me, opens in a new tab.',
+      'Open Settings, then All settings, then Import/export.',
+      'Select Import from ICS, then choose the file and the calendar to add the payments to.',
+      'Select Import.',
+    ]);
+    // Focus starts on the heading, for the steps to be read in order.
+    await until(() => document.activeElement === dialog?.querySelector('h2'));
+
+    Array.from(dialog?.querySelectorAll<HTMLElement>('button') ?? [])
+      .find((button) => text(button) === 'Download again')
+      ?.click();
+    await until(() => downloads.length === 2);
+    // Sync calendar's dialog says it downloaded: no snackbar.
+    expect(document.querySelector('.mat-mdc-snack-bar-label')).toBeNull();
   });
 
   it('lays the month out as an agenda by date on a phone', async () => {

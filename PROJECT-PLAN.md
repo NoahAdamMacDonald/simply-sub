@@ -196,7 +196,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M7.2 | Totals and budget bars on Home, Lists and List view. As built: `MetricsService`'s `metrics`, `global`, `metricsOf` and `charges` (core's `listMetrics`, with a conversion flag for each total), `ss-budget-totals` (a bar against each budget that's set, else the total alone, and Home's "Set a monthly budget →"), the Lists cards' bars, List view's side column and each card's "31% of list", and the list editor's "This month" (BLUEPRINT §14) | The numbers match the §3.1 definitions |
 | M7.3 | Home (P2). As built: the mini calendar on a card beside every list's totals (stacked under 720 px), the Subscription Lists pill, Next payments (the next three charges), the empty state's Create a list, Browse services and Import backup, and pulsing dots while prices load (BLUEPRINT §14) | P2 criteria met |
 | M7.4 | Calendar (P10): grid, day panel, list filter, upcoming list, agenda layout on mobile. As built: core's `readCalendarParams`, `writeCalendarParams`, `hiddenLists` (`user/calendar-params.ts`), `monthGrid` and `settings.calendarHiddenLists`; the page, `ss-day-panel` and its bottom sheet; List view's mini calendar; and `ClockService.today` moving on at midnight (BLUEPRINT §14) | P10 criteria met |
-| M7.5 | Exports: ICS (one all-day event per charge, no `RRULE`s: BLUEPRINT §11.2), CSV, XLSX, TXT (lazy-loaded) | The files open in Google Calendar and Excel, and a plan billed on the 31st shows in every month |
+| M7.5 | Exports: ICS (one all-day event per charge, no `RRULE`s: BLUEPRINT §11.2), CSV, XLSX, TXT (lazy-loaded). As built: core's `export/` (`itemTable`, `paymentTable`, `summaryTable`, `exportWorkbook`, `calendarEvents`, `listText`, `listFile`, `exportFileName`) and `periodCost`; the app's `Exporter` and `export-files.ts` with papaparse, exceljs and ics; List view's Export, the Calendar's Sync calendar and Export to file, and a per-list JSON (BLUEPRINT §14) | The files open in Google Calendar and Excel, and a plan billed on the 31st shows in every month |
 | M7.6 | Budget warning banners | A warning appears for a projected over-budget month |
 
 ### M8 — Optimizer & bot
@@ -703,6 +703,11 @@ stays.
 - **Cards:** each gives its share of the list's next 12 months under its price, "31% of list" (read "… over the next
   12 months"), or "<1% of list"; none with no charge to come.
 
+**As built (M7.5):**
+- **Export ▾** beside Edit list, when the list has something in it: CSV (a row per item: what it costs as charged,
+  how it renews, its next charge and live tags), Excel (Summary, the list's items, Payments), JSON (the list and its
+  items as stored, not importable, as the user chose), Text (a summary) and Calendar (.ics, the next 12 months).
+
 BLUEPRINT §14 has the details.
 
 **Acceptance**
@@ -1085,6 +1090,11 @@ Upcoming   Oct 28 Crave $22.00 · Nov 3 Mullvad ≈ $7.53 ↻ · Nov 12 Netflix 
   it.
 - **The URL:** `?month=` and `lists=` only when not every list is shown; a month that isn't one, or a list that's
   gone, is rewritten in place. Without `lists`, the Calendar shows what it last showed on this device.
+
+**As built (M7.5):** beside the heading, for the lists shown, over the next 12 months:
+- **Sync calendar ▾:** Google, Apple and Proton Calendar. Each downloads the .ics, then a dialog gives that app's
+  import steps, with Download again.
+- **Export to file ▾:** Calendar (.ics) as the main button, then Payment schedule (.csv, a row per charge) and Excel.
 
 **Acceptance**
 - [ ] Charges appear on the right days, including month-end dates and limited windows

@@ -1,9 +1,10 @@
 // CSP and Trusted Types check of the production build (wrangler dev serves it with public/_headers).
 // Usage: node csp-check.cjs <deps dir> <output dir> <base url>
 // Records every securitypolicyviolation event and console error while visiting every page, navigating in the app,
-// toggling the theme, opening the drawer and the error snackbar, the first-run and 📍 dialogs, and in-memory mode with
-// IndexedDB blocked (M4.2). Cloudflare Web Analytics' beacon tag, as the live site gets it, is added to each HTML page
-// the way Cloudflare's edge does, and its reports are aborted (never sent).
+// toggling the theme, opening the drawer and the error snackbar, the first-run and 📍 dialogs, in-memory mode with
+// IndexedDB blocked (M4.2), and every export with its library (papaparse, exceljs, ics: M7.5). Cloudflare Web Analytics'
+// beacon tag, as the live site gets it, is added to each HTML page the way Cloudflare's edge does, and its reports are
+// aborted (never sent).
 const path = require('path');
 
 const [depsDir, outDir, baseUrl] = process.argv.slice(2);
@@ -46,6 +47,66 @@ async function completeFirstRun(page) {
   await page.getByRole('option', { name: 'Ontario', exact: true }).click();
   await page.getByRole('button', { name: 'Get started' }).click();
   await dialog.waitFor({ state: 'detached' });
+}
+
+/** Writes a record straight to an IndexedDB table. Dexie's live queries don't see it: reload after. */
+function putRecord(page, table, record) {
+  return page.evaluate(
+    ([store, value]) =>
+      new Promise((resolve, reject) => {
+        const request = indexedDB.open('simply-sub');
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => {
+          const db = request.result;
+          const transaction = db.transaction(store, 'readwrite');
+          transaction.objectStore(store).put(value);
+          transaction.oncomplete = () => {
+            db.close();
+            resolve();
+          };
+          transaction.onerror = () => reject(transaction.error);
+        };
+      }),
+    [table, record],
+  );
+}
+
+const WORK = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d';
+
+/** Work Related, with Netflix Standard on the 12th, tagged Family, and Crave Premium billed on the 31st. */
+async function plantList(page) {
+  const stamps = { createdAt: '2026-10-20T12:00:00.000Z', updatedAt: '2026-10-20T12:00:00.000Z' };
+  const tag = '0192f1c7-3e4f-7051-ac6d-7e8f9a0b1c2d';
+  await putRecord(page, 'lists', { id: WORK, name: 'Work Related', ...stamps });
+  await putRecord(page, 'tags', { id: tag, name: 'Family', color: '#1e88e5', ...stamps });
+  for (const [index, [planId, anchorDate, tagIds]] of [
+    ['netflix.standard', '2026-11-12', [tag]],
+    ['crave.premium', '2026-01-31', []],
+  ].entries()) {
+    await putRecord(page, 'items', {
+      id: `0192f1c5-1c2d-7e3f-8a4b-5c6d7e8f9a0${index}`,
+      listId: WORK,
+      source: { kind: 'catalog', planId },
+      billing: {
+        mode: 'recurring',
+        interval: 'month',
+        intervalCount: 1,
+        anchorDate,
+        autoRenew: true,
+      },
+      tagIds,
+      rankOverrides: {},
+      pinned: false,
+      ...stamps,
+    });
+  }
+}
+
+/** Clicks `target` and returns what downloaded: its name and its first bytes. */
+async function download(page, target) {
+  const [file] = await Promise.all([page.waitForEvent('download'), target.click()]);
+  const bytes = require('fs').readFileSync(await file.path());
+  return { name: file.suggestedFilename(), size: bytes.length, start: bytes.subarray(0, 4) };
 }
 
 async function waitForServer() {
@@ -211,6 +272,56 @@ async function waitForServer() {
     await page.getByText('Sales tax 5% (your rate)').waitFor();
     await page.screenshot({ path: path.join(outDir, 'csp-settings.png') });
     check('Settings work under the CSP: budget, appearance, 📍', true);
+    await context.close();
+  }
+
+  // The exports (M7.5): every format from List view and the Calendar, each library loading and writing its file under
+  // the CSP and Trusted Types, and Sync calendar's dialog.
+  {
+    const { context, page } = await newPage({ width: 1280, height: 800 }, 'light');
+    await page.goto(baseUrl + '/');
+    await page.locator('main h1').waitFor();
+    await completeFirstRun(page);
+    await plantList(page);
+    await page.goto(`${baseUrl}/lists/${WORK}`);
+    await page.locator('ss-item-card').first().waitFor();
+    const files = [];
+    for (const name of [
+      'CSV (.csv)',
+      'Excel (.xlsx)',
+      'JSON (.json)',
+      'Text (.txt)',
+      'Calendar (.ics)',
+    ]) {
+      await page.getByRole('button', { name: 'Export', exact: true }).click();
+      files.push(await download(page, page.getByRole('menuitem', { name })));
+    }
+    await page.goto(`${baseUrl}/calendar`);
+    await page.locator('ss-split-button .main').waitFor();
+    files.push(await download(page, page.locator('ss-split-button .main')));
+    for (const name of ['Payment schedule (.csv)', 'Excel (.xlsx)']) {
+      await page.locator('ss-split-button .more').click();
+      files.push(await download(page, page.getByRole('menuitem', { name })));
+    }
+    await page.getByRole('button', { name: 'Sync calendar' }).click();
+    files.push(await download(page, page.getByRole('menuitem', { name: 'Google Calendar' })));
+    await page.getByRole('heading', { name: 'Add your payments to Google Calendar' }).waitFor();
+    await page.screenshot({ path: path.join(outDir, 'csp-exports.png') });
+    await page.getByRole('button', { name: 'Done' }).click();
+    const looksRight = files.every(({ name, size, start }) => {
+      if (size === 0) return false;
+      // A workbook is a zip; a CSV starts with its byte order mark; an .ics with BEGIN; JSON with {.
+      if (name.endsWith('.xlsx')) return start.subarray(0, 2).toString() === 'PK';
+      if (name.endsWith('.csv')) return start[0] === 0xef && start[1] === 0xbb && start[2] === 0xbf;
+      if (name.endsWith('.ics')) return start.toString() === 'BEGI';
+      if (name.endsWith('.json')) return start.toString().startsWith('{');
+      return true;
+    });
+    check(
+      'every export downloads under the CSP: List view 5, the Calendar 3, Sync calendar 1',
+      files.length === 9 && looksRight,
+      files.map(({ name, size }) => `${name} (${size} B)`).join(', '),
+    );
     await context.close();
   }
 
