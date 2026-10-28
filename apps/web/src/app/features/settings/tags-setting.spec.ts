@@ -173,10 +173,34 @@ describe('TagsSetting', () => {
     await settle(() => element().textContent?.includes('Use six hex digits') === true);
     type(field('Hex colour'), '#12AB9F');
     await settle();
-    // No preset is that colour, so none is checked.
+    // No preset is that colour, so none is checked; the picker beside the field shows it (M6.15).
     expect(element().querySelector('ss-tag-colours input:checked')).toBeNull();
+    const picker = element().querySelector<HTMLInputElement>('ss-colour-picker input');
+    expect(picker?.type).toBe('color');
+    expect(picker?.value).toBe('#12ab9f');
+    expect(picker?.getAttribute('aria-label')).toBe('Choose any colour');
     submit();
     await settle(() => tags.byId().get(family.id)?.color === '#12ab9f');
+  });
+
+  it('takes any colour from the device’s picker, which the hex field follows (M6.15)', async () => {
+    const family = await addTag('Family', tagColorPresets[0].color);
+    await render();
+    button(family, 'swatch').click();
+    await settle();
+    const picker = element().querySelector<HTMLInputElement>('ss-colour-picker input')!;
+    expect(picker.value).toBe(tagColorPresets[0].color);
+    picker.value = '#ff8800';
+    picker.dispatchEvent(new Event('input', { bubbles: true }));
+    await settle();
+    expect(field('Hex colour').value).toBe('#ff8800');
+    // A hex that isn't a colour yet leaves the picker on the last that was.
+    type(field('Hex colour'), '#ff88');
+    await settle();
+    expect(picker.value).toBe('#ff8800');
+    type(field('Hex colour'), '#ff8800');
+    submit();
+    await settle(() => tags.byId().get(family.id)?.color === '#ff8800');
   });
 
   it('cancels an edit with Escape, changing nothing', async () => {

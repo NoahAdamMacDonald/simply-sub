@@ -6,12 +6,16 @@
     <mat-error>{{ firstError(form.name) }}</mat-error>
   </mat-form-field>
   <ss-tag-colours [color]="chosen()" (colorChange)="pick($event)" />
-  <mat-form-field appearance="outline" class="hex" subscriptSizing="dynamic">
-    <mat-label>Hex colour</mat-label>
-    <input matInput autocomplete="off" spellcheck="false" [formField]="form.color" />
-    <mat-hint>Any colour, as #rrggbb</mat-hint>
-    <mat-error>{{ firstError(form.color) }}</mat-error>
-  </mat-form-field>
+  <!-- Any colour: typed, or from the device's picker beside it, each following the other (M6.15). -->
+  <div class="any-colour">
+    <mat-form-field appearance="outline" class="hex" subscriptSizing="dynamic">
+      <mat-label>Hex colour</mat-label>
+      <input matInput autocomplete="off" spellcheck="false" [formField]="form.color" />
+      <mat-hint>Any colour, as #rrggbb</mat-hint>
+      <mat-error>{{ firstError(form.color) }}</mat-error>
+    </mat-form-field>
+    <ss-colour-picker [color]="form.color().value()" (colorChange)="pick($event)" />
+  </div>
   <div class="actions">
     <button matButton="filled" type="submit">Save</button>
     <button matButton type="button" (click)="cancel()">Cancel</button>

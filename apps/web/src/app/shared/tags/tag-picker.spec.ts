@@ -166,6 +166,41 @@ describe('TagPicker', () => {
     expect(document.activeElement).toBe(element().querySelector('mat-chip-grid input'));
   });
 
+  it('takes a new tag’s colour as a hex or from the device’s picker, each following the other (M6.15)', async () => {
+    const input = await loader.getHarness(MatAutocompleteHarness);
+    await input.enterText('Gym');
+    await input.selectOption({ text: /Create tag “Gym”/ });
+    await fixture.whenStable();
+    const hex = element().querySelector<HTMLInputElement>('.create .hex input')!;
+    const picker = element().querySelector<HTMLInputElement>('.create ss-colour-picker input')!;
+    expect(hex.value).toBe(tagColorPresets[0].color);
+    expect(picker.value).toBe(tagColorPresets[0].color);
+
+    picker.value = '#ff8800';
+    picker.dispatchEvent(new Event('input', { bubbles: true }));
+    await fixture.whenStable();
+    expect(hex.value).toBe('#ff8800');
+    expect(element().querySelector('.colours input:checked')).toBeNull();
+
+    hex.value = '12ab9';
+    hex.dispatchEvent(new Event('input', { bubbles: true }));
+    await fixture.whenStable();
+    expect(element().querySelector('.create .hint-error')?.textContent?.trim()).toBe(
+      'Use six hex digits, like #1e88e5',
+    );
+    const createButton = Array.from(element().querySelectorAll('button')).find((button) =>
+      button.textContent?.includes('Create tag'),
+    ) as HTMLButtonElement;
+    expect(createButton.disabled).toBe(true);
+    hex.value = '12AB9F';
+    hex.dispatchEvent(new Event('input', { bubbles: true }));
+    await fixture.whenStable();
+    expect(picker.value).toBe('#12ab9f');
+    createButton.click();
+    await until(() => tags.records().length === 1);
+    expect(tags.records()[0].color).toBe('#12ab9f');
+  });
+
   it('cancels creating with Escape, saving nothing', async () => {
     const input = await loader.getHarness(MatAutocompleteHarness);
     await input.enterText('Gym');
