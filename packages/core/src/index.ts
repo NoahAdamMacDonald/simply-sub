@@ -4,6 +4,7 @@ export * from './api/error-body';
 export * from './api/health-body';
 export * from './api/response-schemas';
 export * from './budget/budget-bar';
+export * from './budget/budget-dismissals';
 export * from './catalog/availability';
 export * from './catalog/bundle';
 export * from './catalog/bundle-deal';

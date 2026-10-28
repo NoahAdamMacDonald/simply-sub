@@ -27,7 +27,21 @@ describe('BudgetWarnings', () => {
     TestBed.configureTestingModule({
       providers: [
         testStorage().providers,
-        { provide: SettingsStore, useValue: { saved } },
+        {
+          provide: SettingsStore,
+          useValue: {
+            saved,
+            // As the store saves them: a setting left undefined is taken out.
+            update: async (changes: Partial<Settings>) => {
+              const next: Record<string, unknown> = { ...saved(), ...changes };
+              for (const [key, value] of Object.entries(changes)) {
+                if (value === undefined) delete next[key];
+              }
+              saved.set(next as Settings);
+              return next;
+            },
+          },
+        },
         provideRouter([]),
       ],
     });
@@ -101,6 +115,55 @@ describe('BudgetWarnings', () => {
       'See January 2027 in the Calendar',
       `/calendar?month=2027-01&lists=${listId}`,
     ]);
+  });
+
+  it('hides a dismissed warning until its period or budget changes, and shows it again (M7.7)', async () => {
+    const over: Warnings = {
+      month: { month: '2026-11', amount: 212.4, approx: false },
+      year: { year: 2026, amount: 1200, approx: false },
+    };
+    await show(over);
+    const buttons = () => Array.from(element().querySelectorAll<HTMLButtonElement>('.dismiss'));
+    expect(buttons().map((button) => button.getAttribute('aria-label'))).toEqual([
+      'Dismiss the November 2026 warning',
+      'Dismiss this year’s warning',
+    ]);
+
+    buttons()[0].click();
+    await vi.waitFor(() => expect(warnings()).toHaveLength(1));
+    await fixture.whenStable();
+    expect(warnings()[0].shown).toContain('this year');
+    expect(saved()?.dismissedBudgetWarnings).toEqual(['all month 2026-11 200']);
+    const showHidden = element().querySelector<HTMLButtonElement>('.show-hidden');
+    expect(text(showHidden)).toBe('visibility Show 1 hidden budget warning');
+    expect(document.activeElement).toBe(showHidden);
+
+    // A new budget is a new warning; the old one stays dismissed for when the budget's back.
+    saved.update((settings) => settings && { ...settings, monthlyBudget: 150 });
+    await fixture.whenStable();
+    expect(warnings()).toHaveLength(2);
+    saved.update((settings) => settings && { ...settings, monthlyBudget: 200 });
+    await fixture.whenStable();
+    expect(warnings()).toHaveLength(1);
+
+    // The button came back with the warning it brings back.
+    element().querySelector<HTMLButtonElement>('.show-hidden')?.click();
+    await vi.waitFor(() => expect(warnings()).toHaveLength(2));
+    await fixture.whenStable();
+    expect(saved()).not.toHaveProperty('dismissedBudgetWarnings');
+    expect(element().querySelector('.show-hidden')).toBeNull();
+    expect(document.activeElement).toBe(buttons()[0]);
+  });
+
+  it('keeps List view’s dismissals to its own list', async () => {
+    const listId = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d';
+    await show({ month: { month: '2026-11', amount: 212.4, approx: false } }, listId);
+    element().querySelector<HTMLButtonElement>('.dismiss')?.click();
+    await vi.waitFor(() => expect(warnings()).toHaveLength(0));
+    expect(saved()?.dismissedBudgetWarnings).toEqual([`${listId} month 2026-11 200`]);
+    // Home's, for every list, still shows.
+    await show({ month: { month: '2026-11', amount: 212.4, approx: false } });
+    expect(warnings()).toHaveLength(1);
   });
 
   it('shows nothing with nothing over budget, or no budget to be over', async () => {

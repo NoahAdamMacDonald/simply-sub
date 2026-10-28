@@ -25,6 +25,8 @@
   --fill-color: var(--budget-over);
 }
 
+// The gradient is as long as the bar, so the fill shows as much of it as it covers (M7.7): green at the start, amber
+// at 75% of the budget and red from the budget on. The label is dark enough on all of it (4.9:1 at its reddest).
 .fill {
   position: absolute;
   inset-block: 0;
@@ -32,6 +34,23 @@
   width: calc(var(--fill) * 100%);
   border-radius: inherit;
   background-color: var(--fill-color);
+  background-image: linear-gradient(
+    to right,
+    var(--budget-ok),
+    var(--budget-warn) calc(var(--budget-at) * 75%),
+    var(--budget-over) calc(var(--budget-at) * 100%)
+  );
+  background-repeat: no-repeat;
+  background-size: 100cqi 100%;
+}
+
+// The Calendar's bar past its budget's tick: the part of the month that goes over.
+.over-zone {
+  position: absolute;
+  inset-block: 0;
+  left: calc(var(--marker) * 100%);
+  right: 0;
+  background-color: var(--budget-over-zone);
 }
 
 // The tick at the monthly budget, kept inside the bar at either end.

@@ -19,6 +19,12 @@ export interface BudgetBar {
   percent: number;
   /** Where the marker's tick sits, from 0 to 1; none without a marker, or with one past the bar's end. */
   markerAt?: number;
+  /**
+   * Where the budget sits on the bar, as a share of its length, for its gradient (M7.7): green at the start, amber at
+   * 75% of the budget and red from the budget on, so the fill's colour says how far along it is. 1 without a marker,
+   * where the max is the budget; with one, the marker's share of the max, past 1 when the budget is past the bar's end.
+   */
+  budgetAt: number;
 }
 
 /**
@@ -39,6 +45,7 @@ export function budgetBar(value: number, max: number, marker?: number): BudgetBa
       max > 0 &&
       marker >= 0 &&
       marker <= max && { markerAt: marker / max }),
+    budgetAt: marker !== undefined && max > 0 ? marker / max : 1,
   };
 }
 

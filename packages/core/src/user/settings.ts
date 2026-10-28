@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { budgetWarningKeyPattern, maxDismissedBudgetWarnings } from '../budget/budget-dismissals';
 import { currencySchema } from '../catalog/formats';
 import { appLockSchema } from './app-lock';
 import { countrySchema, recordIdSchema, timestampSchema } from './record';
@@ -31,6 +32,15 @@ export const settingsSchema = z
      * Left out, it shows them all.
      */
     calendarHiddenLists: z.array(recordIdSchema).min(1).optional(),
+    /**
+     * The budget warnings dismissed on Home and List view (P2, P4, M7.7), each hidden until its period or budget
+     * changes: core's budgetWarningKey. Left out, none are.
+     */
+    dismissedBudgetWarnings: z
+      .array(z.string().regex(budgetWarningKeyPattern, 'Use a budget warning’s key'))
+      .min(1)
+      .max(maxDismissedBudgetWarnings)
+      .optional(),
     /**
      * The app lock (P13, M6.10; BLUEPRINT §11.5), when it's on: no secret, only the salt and a sealed check value. It
      * stays plain while the rest of the settings are sealed, and only the storage engine's lock methods change it.

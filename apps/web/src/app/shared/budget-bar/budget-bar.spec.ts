@@ -39,6 +39,9 @@ describe('BudgetBar', () => {
     expect(bar.getAttribute('aria-valuetext')).toBe('50%, $100.00 of $200.00');
     expect(bar.dataset['level']).toBe('ok');
     expect(bar.style.getPropertyValue('--fill')).toBe('0.5');
+    // The gradient's budget is the bar's end (M7.7), with no tinted track.
+    expect(bar.style.getPropertyValue('--budget-at')).toBe('1');
+    expect(bar.querySelector('.over-zone')).toBeNull();
   });
 
   it('turns amber from 75%', async () => {
@@ -62,12 +65,17 @@ describe('BudgetBar', () => {
     expect(bar.querySelector('.marker')).not.toBeNull();
     expect(Number(bar.style.getPropertyValue('--marker'))).toBeCloseTo(60 / 66.45);
     expect(bar.getAttribute('aria-valuetext')).toBe('$44.45 of $66.45, budget $60.00');
+    // The gradient follows the budget, and the track past it is tinted: the month goes over (M7.7).
+    expect(Number(bar.style.getPropertyValue('--budget-at'))).toBeCloseTo(60 / 66.45);
+    expect(bar.querySelector('.over-zone')).not.toBeNull();
   });
 
   it('draws no tick when the budget is past the end of the bar', async () => {
     const bar = await show({ value: 10, max: 50, marker: 60, labelMode: 'amount' });
     expect(bar.querySelector('.marker')).toBeNull();
     expect(bar.style.getPropertyValue('--marker')).toBe('');
+    expect(bar.querySelector('.over-zone')).toBeNull();
+    expect(Number(bar.style.getPropertyValue('--budget-at'))).toBeCloseTo(1.2);
   });
 
   it('takes a currency of its own', async () => {

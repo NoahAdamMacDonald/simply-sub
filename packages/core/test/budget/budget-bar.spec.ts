@@ -35,11 +35,21 @@ describe('budgetBar', () => {
   it("isn't thrown off by floating point", () => {
     // 29 / 100 * 100 is 28.999999999999996.
     expect(budgetBar(29, 100).percent).toBe(29);
-    expect(budgetBar(0.1 + 0.2, 0.3)).toEqual({ level: 'warn', fill: 1, percent: 100 });
+    expect(budgetBar(0.1 + 0.2, 0.3)).toEqual({
+      level: 'warn',
+      fill: 1,
+      percent: 100,
+      budgetAt: 1,
+    });
   });
 
   it('gives an empty bar for a max of 0', () => {
-    expect(budgetBar(0, 0)).toEqual({ level: 'ok', fill: 0, percent: 0 });
+    expect(budgetBar(0, 0)).toEqual({ level: 'ok', fill: 0, percent: 0, budgetAt: 1 });
+  });
+
+  it('puts the budget at the end of the bar for its gradient (M7.7)', () => {
+    expect(budgetBar(50, 200).budgetAt).toBe(1);
+    expect(budgetBar(224, 200).budgetAt).toBe(1);
   });
 
   describe('with a marker (the Calendar: paid so far of the month, and the monthly budget)', () => {
@@ -60,8 +70,13 @@ describe('budgetBar', () => {
       expect(budgetBar(10, 50, 60)).not.toHaveProperty('markerAt');
     });
 
+    it('puts the budget where the marker is for the gradient, past the end when the budget is (M7.7)', () => {
+      expect(budgetBar(10, 80, 60).budgetAt).toBe(0.75);
+      expect(budgetBar(10, 50, 60).budgetAt).toBe(1.2);
+    });
+
     it('gives an empty bar and no tick for a month with no payments', () => {
-      expect(budgetBar(0, 0, 60)).toEqual({ level: 'ok', fill: 0, percent: 0 });
+      expect(budgetBar(0, 0, 60)).toEqual({ level: 'ok', fill: 0, percent: 0, budgetAt: 1 });
     });
   });
 });
