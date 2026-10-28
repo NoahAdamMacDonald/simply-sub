@@ -144,7 +144,7 @@ describe('providerRenewals', () => {
     ...extra,
   });
 
-  it('renews by hand when its soonest next charge across its items does', () => {
+  it('renews by hand when its soonest next charge across its items does, else by itself', () => {
     const renewals = providerRenewals(
       [
         resolved(plan('mullvad.vpn'), active({ manual: true }), {
@@ -160,8 +160,8 @@ describe('providerRenewals', () => {
       bundles,
     );
     expect(renewals.get('mullvad')).toEqual({ renewBy: '2026-11-03' });
-    // Netflix's soonest is automatic.
-    expect(renewals.get('netflix')).toEqual({});
+    // Netflix's soonest renews by itself (M6.12).
+    expect(renewals.get('netflix')).toEqual({ renews: '2026-11-12' });
   });
 
   it('ends only when every item that’s going on ends soon: the latest end', () => {

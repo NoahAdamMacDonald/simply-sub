@@ -114,7 +114,25 @@ describe('ItemCard', () => {
     expect(mullvad.querySelector('.plan-name')).toBeNull();
   });
 
-  it('says how it’s billed, since when, its add-ons, its own price and where it was bought', async () => {
+  it('lists its add-ons under its names, each with its price for all it has (M6.12)', () => {
+    const card = render(
+      resolved('netflix.standard', {
+        source: {
+          kind: 'catalog',
+          planId: 'netflix.standard',
+          addOns: [{ id: 'netflix.extra-member', quantity: 2 }],
+        },
+      }),
+    ).nativeElement as HTMLElement;
+    const addOns = card.querySelector('.head .add-ons');
+    expect(addOns?.getAttribute('aria-label')).toBe('Add-ons');
+    // Two extra members at $7.99 each; the plan's own price tag stays the plan's.
+    expect(text(addOns?.querySelector('li'))).toBe('+ Extra member × 2 $15.98 / mo a month + tax');
+    expect(text(card.querySelector('.price ss-price'))).toBe('$18.99 / mo a month + tax');
+    expect(render(resolved('netflix.standard')).nativeElement.querySelector('.add-ons')).toBeNull();
+  });
+
+  it('says how it’s billed, since when, its own price and where it was bought', async () => {
     expect(
       await facts(
         resolved('netflix.standard', {
@@ -139,7 +157,6 @@ describe('ItemCard', () => {
     ).toEqual([
       'Monthly · auto-renews · ends Mar 12, 2027',
       'Subscribed since Mar 12, 2025',
-      'Add-on: Extra member × 2',
       'Your own price until Dec 31, 2026',
       'Bought in United States',
     ]);
@@ -194,8 +211,9 @@ describe('ItemCard', () => {
       const link = element.querySelector('a.view');
       return link && [link.getAttribute('href'), link.getAttribute('aria-label')];
     };
+    // The plan's own card in Search shows this plan, not the user's other Netflix plan (M5.11).
     expect(await view(resolved('netflix.standard', { nickname: "Mom's" }))).toEqual([
-      '/search?q=Netflix',
+      '/search?q=Netflix&plan=netflix.standard',
       "View in Search, Mom's (Netflix Standard)",
     ]);
     expect(

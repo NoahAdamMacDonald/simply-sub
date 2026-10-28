@@ -84,12 +84,14 @@ export interface ProviderRenewal {
   endsOn?: IsoDate;
   /** Its soonest next charge across its items, when that one is a manual renewal. */
   renewBy?: IsoDate;
+  /** Its soonest next charge across its items, when that one renews by itself (M6.12). */
+  renews?: IsoDate;
 }
 
 /**
  * Each listed provider's renewals, by provider id, from its resolved items: a catalog plan's provider, and each
  * provider whose plan a bundle includes, as providerActivity groups them. A provider with one item ending and another
- * going on isn't ending; its soonest charge decides "Renew by".
+ * going on isn't ending; its soonest charge decides "Renew by", or "Auto-renews" when it renews by itself.
  */
 export function providerRenewals(
   items: readonly ResolvedItem[],
@@ -121,6 +123,7 @@ export function providerRenewals(
       ...(going.length > 0 &&
         ends.every((date) => date !== undefined) && { endsOn: ends.sort().at(-1) }),
       ...(soonest?.manual && { renewBy: soonest.date }),
+      ...(soonest && !soonest.manual && { renews: soonest.date }),
     });
   }
   return renewals;

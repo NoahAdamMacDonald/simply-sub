@@ -87,12 +87,18 @@ export class ItemCard {
     if (nickname !== undefined) return { name: nickname, planName: this.title() };
     return this.title() === planName ? { name: planName } : { name, planName };
   });
-  /** What View in Search looks for: the plan's provider, or the bundle's seller. None for a custom plan. */
-  protected readonly searchText = computed(() => {
-    const { providerId, bundleId, name } = this.resolved();
+  /**
+   * What View in Search looks for: the plan's provider, with the plan itself shown on its card (M5.11), or the bundle's
+   * seller. None for a custom plan.
+   */
+  protected readonly searchParams = computed(() => {
+    const { item, providerId, bundleId, name } = this.resolved();
     if (providerId === undefined) return undefined;
-    if (bundleId === undefined) return name;
-    return this.catalog.catalog()?.providers.find((provider) => provider.id === providerId)?.name;
+    if (bundleId === undefined) {
+      return { q: name, ...(item.source.kind === 'catalog' && { plan: item.source.planId }) };
+    }
+    const seller = this.catalog.catalog()?.providers.find((provider) => provider.id === providerId);
+    return seller && { q: seller.name };
   });
   /** "31% of list", or "<1% of list" for a sliver; nothing when it has no charge in the next 12 months. */
   protected readonly shareText = computed(() => {
@@ -103,6 +109,28 @@ export class ItemCard {
   });
   /** What it costs: the price override while it applies, else the plan's price. */
   protected readonly price = computed(() => this.resolved().override ?? this.resolved().price);
+  /**
+   * Its add-ons under its names (M6.12), each with what it adds: "+ Extra member × 2" and its price for both. The
+   * totals and its share of the list count them already; the price tag on the right is the plan's.
+   */
+  protected readonly addOns = computed(() =>
+    this.resolved().addOns.map((addOn) => {
+      const { price, quantity } = addOn;
+      return {
+        id: addOn.id,
+        text: addOnText(addOn),
+        price:
+          quantity === 1
+            ? price
+            : {
+                ...price,
+                amount: price.amount * quantity,
+                monthlyEquivalent: price.monthlyEquivalent * quantity,
+                source: { ...price.source, amount: price.source.amount * quantity },
+              },
+      };
+    }),
+  );
   protected readonly status = computed<BadgeStatus>(() => this.resolved().status);
   /**
    * Its next charge, as charged with tax: the date, and "$21.46, with $2.47 tax". "Wrong date?" moves an Ongoing
@@ -121,7 +149,7 @@ export class ItemCard {
   });
   /** How it's billed, and what else it has, in words. */
   protected readonly facts = computed(() => {
-    const { item, addOns, override } = this.resolved();
+    const { item, override } = this.resolved();
     const { billing, priceOverride, region } = item;
     return [
       // A free plan has nothing to bill.
@@ -129,7 +157,6 @@ export class ItemCard {
       ...(billing.mode === 'recurring' && billing.startDate !== undefined
         ? [`Subscribed since ${dateText(billing.startDate)}`]
         : []),
-      ...addOns.map((addOn) => `Add-on: ${addOnText(addOn)}`),
       ...(override && priceOverride
         ? [
             priceOverride.until === undefined

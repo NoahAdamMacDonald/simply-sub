@@ -55,6 +55,11 @@ export interface CatalogQuery {
    * price for Canada yet"), and no card for a provider that isn't sold there.
    */
   soldOnly?: boolean;
+  /**
+   * The plan its provider's card shows, when it's among the card's plans (M5.11): List view's View in Search names the
+   * item's plan, so a user with two of a provider's plans sees the one they came from. Not a filter.
+   */
+  plan?: string;
 }
 
 /** P8's Activity filter: Active, Inactive or Not listed (PROJECT-PLAN §3.3). */
@@ -100,7 +105,10 @@ export interface PricedResult extends ResultBase {
   kind: 'priced';
   /** Cheapest first, by their shortest billing period's price per month (searchProviders). */
   plans: [CatalogPlan, ...CatalogPlan[]];
-  /** The plan the card shows: the user's own when it matches (an active one first), else the first. */
+  /**
+   * The plan the card shows: the query's plan, else the user's own when it matches (an active one first), else the
+   * first.
+   */
   shownPlanId: string;
 }
 
@@ -202,7 +210,12 @@ export function searchCatalog(query: CatalogQuery, context: CatalogSearchContext
         kind: 'priced',
         provider,
         plans: chips,
-        shownPlanId: (owned('active') ?? owned() ?? (sort === 'ranks' ? bestFit() : first)).plan.id,
+        shownPlanId: (
+          chips.find((plan) => plan.plan.id === query.plan) ??
+          owned('active') ??
+          owned() ??
+          (sort === 'ranks' ? bestFit() : first)
+        ).plan.id,
         matchedOn,
         ...(relevance !== undefined && { relevance }),
         ...listed(provider),

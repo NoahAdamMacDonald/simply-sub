@@ -32,6 +32,17 @@ describe('StatusBadge', () => {
       nextCharge: '2026-11-03',
       text: 'Active Renew by Nov 3',
     },
+    // One that renews by itself says when (M6.12); one that starts later doesn't renew yet.
+    {
+      status: { kind: 'active', manual: false },
+      nextCharge: '2026-11-03',
+      text: 'Active Auto-renews Nov 3',
+    },
+    {
+      status: { kind: 'inactive', activeFrom: '2026-11-03', manual: false },
+      nextCharge: '2026-11-03',
+      text: 'Inactive · active from Nov 3, 2026',
+    },
   ])('$text', async ({ status, nextCharge, text }) => {
     expect(await shown(status, nextCharge)).toBe(text);
   });

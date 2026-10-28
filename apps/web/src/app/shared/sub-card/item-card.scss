@@ -46,6 +46,23 @@
   font: var(--mat-sys-body-small);
 }
 
+// An add-on and its price, in a smaller price tag than the plan's.
+.add-ons {
+  margin: 2px 0 0;
+  padding: 0;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-medium);
+  list-style: none;
+  --ss-price-font: var(--mat-sys-label-large);
+
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 6px;
+  }
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;

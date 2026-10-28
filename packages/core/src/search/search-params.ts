@@ -3,14 +3,15 @@ import { rankKeyOptions } from '../ranking/rank-keys';
 import type { SubscriptionList } from '../user/subscription-list';
 import { catalogSorts, type ActivityFilter, type CatalogQuery } from './search-catalog';
 
-// Search's URL (PROJECT-PLAN P8, §3.5, M5.3): ?q=&sort=&min=&max=&cat=&f=&act=&native=1&sold=1, read into
+// Search's URL (PROJECT-PLAN P8, §3.5, M5.3): ?q=&sort=&min=&max=&cat=&f=&act=&native=1&sold=1&plan=, read into
 // searchCatalog's query and written back from it. Reading keeps only what's valid in the catalog file on screen, and
 // the page rewrites a URL that had anything else: an unknown parameter, sort, category, rank key or activity, an
 // amount that isn't one, a minimum above the maximum, Best match without text. Writing leaves out what's empty or the
 // default and lists Activity in a fixed order, so the query a URL reads to writes that URL again. Sold in starts as
-// the user's setting says (M5.6), so the URL has `sold` only when it differs: sold=1 turns it on, sold=0 off. Pick
-// mode's addTo=<list id> (P7, flow F2, M5.5) comes last and isn't a filter: it's kept while it names one of the
-// user's lists, a new list's draft included (M6.3).
+// the user's setting says (M5.6), so the URL has `sold` only when it differs: sold=1 turns it on, sold=0 off.
+// plan=<plan id> (M5.11) isn't a filter either: its provider's card shows that plan, as List view's View in Search
+// asks; it's kept while it names a plan in the catalog. Pick mode's addTo=<list id> (P7, flow F2, M5.5) comes last and
+// isn't a filter: it's kept while it names one of the user's lists, a new list's draft included (M6.3).
 
 export const searchParamNames = [
   'q',
@@ -22,6 +23,7 @@ export const searchParamNames = [
   'act',
   'native',
   'sold',
+  'plan',
   'addTo',
 ] as const;
 export type SearchParamName = (typeof searchParamNames)[number];
@@ -59,11 +61,11 @@ export function searchText(text: string): string {
  * (f, act) keeps every value, and any other repeated parameter its first. A minimum of 0 is no minimum, and a minimum
  * above the maximum drops both. Sold in is on with sold=1, off with sold=0, and else as `defaults` say. An addTo is
  * kept only when it names one of `lists`: the user's lists that aren't deleted, and new lists' drafts
- * (listsWithDrafts).
+ * (listsWithDrafts). A plan is kept when it's one of the catalog's.
  */
 export function readSearchParams(
   params: QueryParams,
-  catalog: Pick<CatalogData, 'features' | 'categories'>,
+  catalog: Pick<CatalogData, 'features' | 'categories' | 'providers'>,
   defaults: SearchDefaults = {},
   lists: readonly Pick<SubscriptionList, 'id'>[] = [],
 ): SearchQuery {
@@ -96,6 +98,9 @@ export function readSearchParams(
   }
   const sold = one('sold');
   const soldOnly = sold === '1' || (sold !== '0' && defaults.soldOnly === true);
+  const plan = catalog.providers
+    .flatMap((provider) => provider.plans)
+    .find((candidate) => candidate.id === one('plan'))?.id;
   const addTo = lists.find((list) => list.id === one('addTo'))?.id;
 
   return {
@@ -108,6 +113,7 @@ export function readSearchParams(
     ...(activity.length > 0 && { activity }),
     ...(one('native') === '1' && { nativeOnly: true }),
     ...(soldOnly && { soldOnly: true }),
+    ...(plan !== undefined && { plan }),
     ...(addTo !== undefined && { addTo }),
   };
 }
@@ -137,6 +143,9 @@ export function writeSearchParams(query: SearchQuery, defaults: SearchDefaults =
   }
   if ((query.soldOnly === true) !== (defaults.soldOnly === true)) {
     params.sold = query.soldOnly ? '1' : '0';
+  }
+  if (query.plan !== undefined) {
+    params.plan = query.plan;
   }
   if (query.addTo !== undefined) {
     params.addTo = query.addTo;

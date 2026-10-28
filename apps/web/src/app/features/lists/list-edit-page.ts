@@ -216,7 +216,9 @@ export class ListEditPage implements AsksBeforeLeaving {
     return draft ? this.metrics.resolve(draftItems(draft)) : [];
   });
   protected readonly rows = computed(() =>
-    this.resolutions().map((result) => editRow(result, this.tags.byId(), this.today())),
+    this.resolutions().map((result) =>
+      editRow(result, this.tags.byId(), this.today(), this.settings.saved()?.country),
+    ),
   );
 
   /**
