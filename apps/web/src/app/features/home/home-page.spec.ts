@@ -183,4 +183,30 @@ describe('HomePage', () => {
     page().querySelector<HTMLElement>('ss-mini-calendar .title')?.click();
     await until(() => TestBed.inject(Router).url === '/calendar?month=2026-11');
   });
+
+  it('warns of the first month and of this year over budget, for every list together (M7.6)', async () => {
+    saved.set({ ...alberta, monthlyBudget: 100, annualBudget: 200 });
+    await plant();
+    await open();
+    await until(() => page().querySelectorAll('ss-budget-warnings .warning').length === 2);
+    const warnings = Array.from(page().querySelectorAll('ss-budget-warnings .warning'));
+    // Netflix every month, and in January Mullvad's ≈ $94.16 too; this year, Netflix 12 times and Mullvad on Jan 20.
+    expect(
+      warnings.map((warning) => text(warning.querySelector('[aria-hidden="true"]:not(mat-icon)'))),
+    ).toEqual([
+      'Your payments in January 2027 add up to ≈ $114.10, over your $100.00 monthly budget.',
+      'Your payments this year, past and to come, add up to ≈ $333.44, over your $200.00 annual budget.',
+    ]);
+    expect(warnings[0].querySelector('a')?.getAttribute('href')).toBe('/calendar?month=2027-01');
+    // Above the calendar and the totals.
+    expect(page().querySelector('ss-budget-warnings + .top')).not.toBeNull();
+  });
+
+  it('has no warning when every month and the year are within budget', async () => {
+    saved.set({ ...alberta, monthlyBudget: 200, annualBudget: 1000 });
+    await plant();
+    await open();
+    await until(() => page().querySelector('ss-budget-totals') !== null);
+    expect(page().querySelector('ss-budget-warnings .warning')).toBeNull();
+  });
 });

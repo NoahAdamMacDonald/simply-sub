@@ -319,6 +319,17 @@ pressing the arrows: keys sent while it opens land elsewhere. A closing menu sta
 `.mat-mdc-menu-panel:not(.mat-menu-panel-exit-animation)`. Material nests two `.mat-mdc-snack-bar-label`s, and the live
 announcer holds the same words: take the first.
 
+`check-budget-banners.cjs` (M7.6) checks the budget warnings on `ng serve` for a Canadian in Alberta with a $50 monthly
+and a $500 annual budget, written into the stored settings. Work Related has Netflix Standard and Crave Premium ($43.04
+a month), and Family Mullvad VPN (about $94.16 on Jan 20). In both themes at both widths, keyboard only:
+- Home: January 2027 (≈ $137.20) and this year (≈ $610.64), above the calendar, in a status region and read with
+  "Warning:"; Tab to the January link, and Enter opens the Calendar on that month;
+- List view: Work Related only this year ($516.47) with no link; Family January 2027 (≈ $94.16), whose link opens the
+  Calendar on it showing Family alone;
+- with the budgets at $200 and $1,000, no warning, and the status region still there.
+
+It runs axe on both pages with their warnings and checks for horizontal scroll.
+
 Since M7.1, the scripts check the charges:
 - `check-list-view.cjs`: Mullvad's "Renew by Nov 12", Netflix's next charge as charged in its details ("Next charge Nov
   12, 2026: $19.94, with $0.95 tax", Alberta's 5%), and Wrong date? by keyboard: the dialog filled in with focus in

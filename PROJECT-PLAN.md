@@ -197,7 +197,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M7.3 | Home (P2). As built: the mini calendar on a card beside every list's totals (stacked under 720 px), the Subscription Lists pill, Next payments (the next three charges), the empty state's Create a list, Browse services and Import backup, and pulsing dots while prices load (BLUEPRINT §14) | P2 criteria met |
 | M7.4 | Calendar (P10): grid, day panel, list filter, upcoming list, agenda layout on mobile. As built: core's `readCalendarParams`, `writeCalendarParams`, `hiddenLists` (`user/calendar-params.ts`), `monthGrid` and `settings.calendarHiddenLists`; the page, `ss-day-panel` and its bottom sheet; List view's mini calendar; and `ClockService.today` moving on at midnight (BLUEPRINT §14) | P10 criteria met |
 | M7.5 | Exports: ICS (one all-day event per charge, no `RRULE`s: BLUEPRINT §11.2), CSV, XLSX, TXT (lazy-loaded). As built: core's `export/` (`itemTable`, `paymentTable`, `summaryTable`, `exportWorkbook`, `calendarEvents`, `listText`, `listFile`, `exportFileName`) and `periodCost`; the app's `Exporter` and `export-files.ts` with papaparse, exceljs and ics; List view's Export, the Calendar's Sync calendar and Export to file, and a per-list JSON (BLUEPRINT §14) | The files open in Google Calendar and Excel, and a plan billed on the 31st shows in every month |
-| M7.6 | Budget warning banners | A warning appears for a projected over-budget month |
+| M7.6 | Budget warning banners. As built: `ss-budget-warnings` on Home (every list together) and List view (the list alone), from M7.1's budget checks, with the month's link to the Calendar (BLUEPRINT §14) | A warning appears for a projected over-budget month |
 
 ### M8 — Optimizer & bot
 | ID | Task | Done when |
@@ -573,6 +573,10 @@ Oct 22, 2026, and use the illustrative prices from `docs/api-output-examples.jso
 - **No lists:** "Start with a list", with Create a list, Browse services (Search) and Import backup (Settings' dialog,
   loaded on the click).
 
+**As built (M7.6):** above the calendar, a warning for each budget check that fails, for every list together: "Your
+payments in January 2027 add up to ≈ $137.20, over your $50.00 monthly budget." with "See January 2027 in the
+Calendar", and "Your payments this year, past and to come, add up to ≈ $610.64, over your $500.00 annual budget."
+
 **Acceptance**
 - [ ] The bar totals equal the sum of every list's "this month" / "this year"
 - [ ] Unset budgets show the prompt instead of a bar
@@ -702,6 +706,9 @@ stays.
   the user chose. Under 960 px they come above the cards, and Types and Features stay after them.
 - **Cards:** each gives its share of the list's next 12 months under its price, "31% of list" (read "… over the next
   12 months"), or "<1% of list"; none with no charge to come.
+
+**As built (M7.6):** the list's own budget warnings come first, as on Home but for this list alone ("This list's
+payments in January 2027 add up to…", the user's choice), the month's link opening the Calendar showing the list.
 
 **As built (M7.5):**
 - **Export ▾** beside Edit list, when the list has something in it: CSV (a row per item: what it costs as charged,

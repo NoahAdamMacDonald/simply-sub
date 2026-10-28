@@ -62,7 +62,8 @@ describe('WrongDate', () => {
   it('asks with the next charge filled in, and makes a new date the item’s anchor', async () => {
     // Today is Oct 25 (FakeClock); the next charge is Oct 31.
     const asked = TestBed.inject(WrongDate).ask(item, 'Netflix Standard', '2026-10-31');
-    await until(() => dialog() !== null);
+    // The dialog and the datepicker load with the first question: give them time when every spec runs at once.
+    await until(() => dialog() !== null, 5000);
     expect(dialog()?.querySelector('h2')?.textContent?.trim()).toBe('Wrong date?');
     expect(dialog()?.querySelector('p')?.textContent).toContain(
       'When is Netflix Standard charged next?',
@@ -86,7 +87,7 @@ describe('WrongDate', () => {
 
   it('refuses a past date at the field, and saves nothing on Cancel', async () => {
     const asked = TestBed.inject(WrongDate).ask(item, 'Netflix Standard', '2026-10-31');
-    await until(() => dialog() !== null);
+    await until(() => dialog() !== null, 5000);
     await type('2026-10-01');
     await submit();
     await until(() => errors() === 'Pick today or a later date');

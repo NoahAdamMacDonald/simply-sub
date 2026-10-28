@@ -9,6 +9,7 @@ import { MetricsService } from '../../core/metrics/metrics-service';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { ListsRepository } from '../../core/storage/lists-repository';
 import { BudgetTotals } from '../../shared/budget-totals/budget-totals';
+import { BudgetWarnings } from '../../shared/budget-warnings/budget-warnings';
 import { chargeAmountText, nearDateText } from '../../shared/charge-text';
 import { EmptyState } from '../../shared/empty-state/empty-state';
 import { MiniCalendar, type CalendarCharge } from '../../shared/mini-calendar/mini-calendar';
@@ -20,12 +21,13 @@ const nextCount = 3;
 /**
  * Home (PROJECT-PLAN P2, M7.3): budget status at a glance and the way into the lists. A mini calendar of the month with
  * a dot on each day with a charge (the Calendar's charges, P10), whose days and title open the Calendar on that month;
- * every list's totals against the budgets (M7.2, BLUEPRINT §8.1.1); the Subscription Lists button; and the next three
- * payments. With no lists, an empty state offers a list, Search or a backup instead.
+ * every list's totals against the budgets (M7.2, BLUEPRINT §8.1.1), with a warning over them for a month or year that
+ * goes over (M7.6); the Subscription Lists button; and the next three payments. With no lists, an empty state offers a
+ * list, Search or a backup instead.
  */
 @Component({
   selector: 'ss-home-page',
-  imports: [BudgetTotals, EmptyState, MatButton, MatIcon, MiniCalendar, RouterLink],
+  imports: [BudgetTotals, BudgetWarnings, EmptyState, MatButton, MatIcon, MiniCalendar, RouterLink],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
 })

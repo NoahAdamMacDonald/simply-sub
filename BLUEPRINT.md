@@ -2540,6 +2540,20 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    M9's FX-fee maths has to decide how to treat both cases (section 9.3). On 2026-10-26 Mullvad's checkout charged
    CA$98.04 for a year, about 4% above the ECB's conversion of €60 (CA$94.17).
 
+**Resolved (2026-10-28, M7.6)**
+- **The budget warnings** (PROJECT-PLAN §3.1) are `ss-budget-warnings`, on core's checks (`ListMetrics.warnings`,
+  M7.1):
+  - "Your payments in January 2027 add up to ≈ $137.20, over your $50.00 monthly budget." names the first of the next
+    12 months over the monthly budget ("this month" for this one), with "See January 2027 in the Calendar".
+  - "Your payments this year, past and to come, add up to ≈ $610.64, over your $500.00 annual budget."
+- **Home** checks every list together, above its calendar and totals, once every item is priced. **List view**
+  checks the list alone ("This list's payments…", the user's choice), its link opening the Calendar on that month
+  showing the list.
+- **How it reads:** a card with the over colour's stripe and a warning icon, read "Warning: …" with "about" for ≈. Its
+  status region is there before any warning, so one that appears as prices load is read out. On Home it shares a block
+  with the calendar and totals, so the empty region adds no gap to Home's spaced column.
+- **Bundles:** the initial bundle didn't change (497.3 kB). Home and List view grew 0.9 kB gzipped each.
+
 **Resolved (2026-10-28, M7.5)**
 - **The exports** (section 11.2) are laid out by core's `export/` (tables, calendar events, a list's text and its JSON
   file) and written by the libraries chosen for them, pinned to exact versions and loaded only for their format:

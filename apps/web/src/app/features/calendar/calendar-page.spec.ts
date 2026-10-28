@@ -262,7 +262,8 @@ describe('CalendarPage', () => {
     const main = page().querySelector<HTMLElement>('ss-split-button .main');
     expect(main?.getAttribute('aria-label')).toBe('Export to file: Calendar (.ics)');
     main?.click();
-    await until(() => downloads.length === 1);
+    // Each library loads with its first file: give it time when every spec runs at once.
+    await until(() => downloads.length === 1, 5000);
     expect(downloads[0].name).toBe('simply-sub-payments-2026-10-25.ics');
     const ics = await downloads[0].blob.text();
     // Family's Mullvad only: Work Related isn't shown.
@@ -280,7 +281,7 @@ describe('CalendarPage', () => {
       'Excel (.xlsx)',
     ]);
     choices[1].click();
-    await until(() => downloads.length === 2);
+    await until(() => downloads.length === 2, 5000);
     expect(downloads[1].name).toBe('simply-sub-payments-2026-10-25.csv');
     expect((await csvText(downloads[1])).split('\r\n')[1]).toBe(
       '2027-01-20,Family,Mullvad VPN,Mullvad VPN,,94.16,0,CAD,yes,Manually,',
@@ -302,7 +303,7 @@ describe('CalendarPage', () => {
       'Proton Calendar',
     ]);
     apps[2].click();
-    await until(() => document.querySelector('ss-sync-dialog') !== null);
+    await until(() => document.querySelector('ss-sync-dialog') !== null, 5000);
     expect(downloads.map((download) => download.name)).toEqual([
       'simply-sub-payments-2026-10-25.ics',
     ]);

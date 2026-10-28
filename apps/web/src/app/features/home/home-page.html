@@ -28,30 +28,35 @@
     </ss-empty-state>
   }
   @case ('ready') {
-    <div class="top">
-      <section class="calendar" aria-labelledby="calendar-heading">
-        <h2 id="calendar-heading" class="visually-hidden">Payments</h2>
-        <!-- While prices load there are no dots yet: pulsing ones under the grid say so. -->
-        <ss-mini-calendar
-          [(month)]="month"
-          [charges]="pricing() ? [] : charges()"
-          (dayClick)="openCalendar(monthOf($event))"
-          (monthClick)="openCalendar($event)"
-        />
-        @if (pricing()) {
-          <div class="skeleton-dots" aria-hidden="true">
-            @for (dot of [1, 2, 3, 4, 5]; track dot) {
-              <span></span>
-            }
-          </div>
-        }
-        <p class="loading" role="status">{{ pricing() ? 'Loading your payments…' : '' }}</p>
-      </section>
+    <!-- The warnings with the calendar and totals, so their region takes no room while there's none. -->
+    <div class="overview">
+      <!-- Every list's payments against the budgets (§3.1, M7.6), once they're all priced. -->
+      <ss-budget-warnings [warnings]="pricing() ? undefined : global()?.warnings" />
+      <div class="top">
+        <section class="calendar" aria-labelledby="calendar-heading">
+          <h2 id="calendar-heading" class="visually-hidden">Payments</h2>
+          <!-- While prices load there are no dots yet: pulsing ones under the grid say so. -->
+          <ss-mini-calendar
+            [(month)]="month"
+            [charges]="pricing() ? [] : charges()"
+            (dayClick)="openCalendar(monthOf($event))"
+            (monthClick)="openCalendar($event)"
+          />
+          @if (pricing()) {
+            <div class="skeleton-dots" aria-hidden="true">
+              @for (dot of [1, 2, 3, 4, 5]; track dot) {
+                <span></span>
+              }
+            </div>
+          }
+          <p class="loading" role="status">{{ pricing() ? 'Loading your payments…' : '' }}</p>
+        </section>
 
-      <div class="budgets">
-        @if (global(); as global) {
-          <ss-budget-totals [metrics]="global" prompt />
-        }
+        <div class="budgets">
+          @if (global(); as global) {
+            <ss-budget-totals [metrics]="global" prompt />
+          }
+        </div>
       </div>
     </div>
 

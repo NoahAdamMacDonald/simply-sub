@@ -1,6 +1,6 @@
 import type { ComponentHarnessConstructor, HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { Component, signal } from '@angular/core';
+import { Component, signal, type WritableSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { MATERIAL_ANIMATIONS } from '@angular/material/core';
 import { MatFormFieldHarness } from '@angular/material/form-field/testing';
@@ -479,7 +479,8 @@ describe('ListViewPage', () => {
     ]);
 
     choices[0].click();
-    await until(() => downloads.length === 1);
+    // papaparse loads with the first CSV: give it time when every spec runs at once.
+    await until(() => downloads.length === 1, 5000);
     expect(downloads[0].name).toBe('simply-sub-work-related-2026-10-25.csv');
     // Only this list's items, in the order they were added.
     const rows = (await csvText(downloads[0])).split('\r\n');
@@ -493,6 +494,22 @@ describe('ListViewPage', () => {
       () =>
         document.querySelector('.mat-mdc-snack-bar-label')?.textContent?.trim() ===
         'Saved simply-sub-work-related-2026-10-25.csv',
+    );
+  });
+
+  it('warns when the list alone goes over the monthly budget, with its month in the Calendar (M7.6)', async () => {
+    const saved = TestBed.inject(SettingsStore).saved as WritableSignal<Settings | undefined>;
+    saved.set({ ...alberta, monthlyBudget: 50 });
+    await plant();
+    await open(work.id);
+    await until(() => page().querySelector('ss-budget-warnings .warning') !== null);
+    const warning = page().querySelector('ss-budget-warnings .warning');
+    // January: Netflix, Crave (from Dec 1) and Mullvad's ≈ $94.16.
+    expect(text(warning?.querySelector('.text [aria-hidden="true"]'))).toBe(
+      'This list’s payments in January 2027 add up to ≈ $137.20, over your $50.00 monthly budget.',
+    );
+    expect(warning?.querySelector('a')?.getAttribute('href')).toBe(
+      `/calendar?month=2027-01&lists=${work.id}`,
     );
   });
 
