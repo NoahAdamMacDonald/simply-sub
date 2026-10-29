@@ -132,9 +132,10 @@
         <ul class="list-cards">
           @for (list of listCards(); track list.id) {
             <li>
+              <!-- Spaces inside the spans, so the link's name reads as words. -->
               <a class="list-card" [routerLink]="['/lists', list.id]">
-                <span class="list-name">{{ list.name }}</span>
-                <span class="list-month">{{ list.month }}</span>
+                <span class="list-name">{{ list.name }} </span>
+                <span class="list-month">{{ list.month }} </span>
                 <span class="list-count">{{ list.count }}</span>
               </a>
             </li>
