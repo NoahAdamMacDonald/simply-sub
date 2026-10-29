@@ -2893,6 +2893,34 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 **Still open**
 None.
 
+**Resolved (2026-10-29, M10's plan)**
+The owner's choices for Phase 5, which PROJECT-PLAN's M10 (M10.1–M10.13) follows:
+- **Where user data lives on the server:** a second D1 database, `simply-sub-user`, for the live calendar feeds, sync's
+  sealed copies and price reports. Not KV, whose 1,000 writes a day the bot, `/fx` and `/icon` need; not R2, which
+  needs a payment method on file; not Durable Objects, since a Worker that has one gets no preview links. D1's daily
+  writes are the account's, shared with the catalog's deploys, so user writes are capped at half of them.
+- **For how long:** a feed set or a sync chain is deleted 180 days after the app last wrote it, and the app writes at
+  least every 30 days while it's used; Revoke and Delete are immediate. A report leaves D1 the next night for the
+  bot's KV and is gone once the weekly digest has it.
+- **Limits:** writes 10 a minute per IP and 6 a minute per feed set or sync chain; a feed's downloads 30 a minute per
+  feed, not per IP, since calendar apps' servers share addresses; 26 calendars and 2,000 events per feed set; 1 MiB
+  per sync copy; reports 3 a minute per IP and 500 a day; daily caps that keep user writes under half of D1's 100,000.
+- **Reports:** choices only, no free text, which would reach the digest's reviewer, a model included; no Turnstile.
+  The bot checks each reported plan's page the next night, and only what it can't settle reaches a person.
+- **The live calendar and Proton Calendar** (the owner's calendar, and their condition for building it): Proton
+  subscribes to a URL and refreshes it every 4 to 16 hours on its own (its help page "Subscribe to an external
+  calendar"), each subscription counting toward the plan's calendars (3 on the free plan, 25 on paid ones). Its web
+  client takes a monthly rule with one day of the month, and `BYSETPOS` only with a weekday
+  (`packages/shared/lib/calendar/recurrence/rrule.ts`, read 2026-10-29), and drops other events on import, so M7.12's
+  rule for a plan billed on the 29th to the 31st never reached a Proton import. M10.2 writes rules it takes, for the
+  download too, and a test calendar on the branch's preview link checks them in the owner's Proton Calendar before the
+  app's side is built. Google adds a calendar by URL on a computer only and doesn't say how often it refreshes; Apple's
+  Calendar on a Mac refreshes from every 5 minutes to weekly, and an iPhone on its fetch setting.
+- **Regions first:** the US's gaps, the United Kingdom, the euro countries, and Australia and New Zealand.
+- **The app's icon:** a simple mark drawn for the app, shown to the owner before it's committed. It replaces the
+  favicon, still Angular's default logo.
+- **Not in M10:** "Suggest a service" (section 12).
+
 **Resolved (2026-10-29, the UI polish and the feedback after M3)**
 The UI polish the user approved (M9.5, M4.9, and with their OK of the proposals, M7.10, M4.7 and M4.8), and their
 eleven fixes and ideas after M3, as M5.13, M6.17–M6.19, M7.11, M7.12, M8.5, M8.6 and M9.6. PROJECT-PLAN's rows have

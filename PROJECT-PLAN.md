@@ -14,7 +14,7 @@
 > If this file and BLUEPRINT.md disagree, treat it as a bug and fix whichever is wrong in the same PR.
 > **For AI assistants:** implement one task ID at a time (section 2) and check it against its page's acceptance criteria.
 
-Last updated: 2026-10-23
+Last updated: 2026-10-29
 
 ---
 
@@ -244,21 +244,332 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M9.6 | Pay in another currency (added 2026-10-29, the feedback after M3): when a plan's seller prices it in several currencies for where it's bought, a group of it or GLOBAL (Proton's USD, CAD, EUR and CHF), the optimizer suggests the one that costs least on the item's card after its FX fee and cash back, as a free saving ("Pay for Proton Unlimited in CAD" for a US buyer, whose US$12.99 a month is about US$11.60 in CAD at late October’s rate; core's `currencySuggestions`); another country's price never counts, since it's set by where the buyer is; Apply makes it the user's own price in that currency from the item's next charge (`priceOverride.since`, the item dialog's From); cards, editor rows, Review changes and the text export say what an own price still to come will be, and from when (P6, P14, BLUEPRINT §4.7, §10.3) | A plan sold in USD and CAD, paid with a card with no FX fee, is suggested in the cheaper one with its saving; a card whose FX fee cancels the difference gets no suggestion, nor does a plan priced by country; after Apply its next charge is in that currency, this year's past ones are as they were, and nothing more is suggested for it |
 
 ### M10 — Extras (Phase 5)
-Live calendar feed (`POST /cal`), encrypted device sync, "report a wrong price", PWA install and offline mode,
-calendar year view, broader regional price coverage.
+Planned on 2026-10-29 with the owner, from BLUEPRINT §11.3, §11.4 and §14, where their decisions are recorded:
+three pull requests, each built a task at a time with a commit per task.
+1. **The Calendar** (M10.1–M10.4): the server's user data and the live calendar feeds, with a test calendar the owner
+   subscribes to in Proton Calendar before the app's side is built; then the year view.
+2. **Offline and sync** (M10.5–M10.9): the service worker, the update prompt and install, then encrypted device sync.
+3. **The catalog** (M10.10–M10.12): price reports, and regional prices in the discovery pipeline. The regions' prices
+   (M10.13) then arrive as the pipeline's own batch pull requests: the US's gaps, the United Kingdom, the euro
+   countries, and Australia and New Zealand.
 
-The live calendar feed (BLUEPRINT §11.3) serves a calendar of its own by nature; since M7.9 found that Google, Apple
-and Proton colour a whole calendar and not each event, it can offer a feed per tag as well as one for everything, so
-each tag subscribes as a calendar with the colour picked for it.
+The local-first rule still holds: the feeds and sync are opt-in, a report is anonymous, and nothing leaves the device
+that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't part of M10.
 
-Encrypted device sync follows Brave's sync chain (BLUEPRINT §11.4, researched 2026-10-28): a random 32-byte seed shown
-as a word code (and a QR code), keys derived from it on the device, the encrypted database on Cloudflare where nothing
-can read it, and records merged by `updatedAt` and `deletedAt`.
+| ID | Task | Done when |
+|---|---|---|
+| M10.1 | The server's user data: a D1 database of its own (`simply-sub-user`), the API's write rules (rate limits per IP and per resource, size limits, daily caps, secrets kept as hashes) and a nightly clean-up | A write over any limit is refused with its error code; user data can't use more than half of D1's daily writes; what has expired is gone the next night |
+| M10.2 | Live calendar feeds, the API: `POST /cal`, `PUT /cal/:id`, `DELETE /cal/:id` and `GET /cal/:token.ics`, on core's feed schema and calendar writer; repeat rules Proton Calendar accepts, for the .ics download too | The contract's examples pass; a revoked feed answers 404; the owner's Proton Calendar shows every event of the test calendar |
+| M10.3 | Live calendar in the app (P10, P13): the opt-in dialog, a calendar for everything and one per tag, the subscribe steps for each app, updates after every change, Revoke | A change to a list reaches its feeds within seconds; each tag's calendar holds only its payments; Revoke ends every link |
+| M10.4 | Calendar year view (P10): `view=year`, twelve small months with their totals, and the year against the annual budget | Each month's total matches the month view's; it works by keyboard, in both themes at 360 and 1280 px, from a lazy chunk |
+| M10.5 | Offline start: the service worker, registered through a Trusted Types policy of its own, with `navigationRequestStrategy: 'freshness'` | Under `wrangler dev` the app starts and every page works with the network off, with no CSP or Trusted Types error; the initial bundle doesn't grow |
+| M10.6 | The update prompt and install: "A new version is ready" with Reload, the web app manifest and icons, Settings' Install | A second build served brings the prompt, and Reload runs it; Edge offers to install the app |
+| M10.7 | Sync's code and merge: a 32-byte seed shown as 24 words and a QR code, keys derived from it on the device (HKDF), core's sync payload and per-record merge by `updatedAt` and `deletedAt` | Tests: the newer of each record wins and every deletion carries; the keys match their test vectors; a wrong code opens nothing |
+| M10.8 | Sync, the API: `GET`, `PUT` and `DELETE /sync/:chain`, each write conditional on the version read | Two devices writing at once never overwrite each other; the server holds nothing it can read |
+| M10.9 | Sync in the app (P13): turn it on, join with the code, the devices, syncing after changes, turn it off, start over with a new code | Two browsers stay the same through adds, edits and deletes on either, offline ones included |
+| M10.10 | Price reports, the API and the bot: `POST /reports` (choices only, no free text), the bot checking each reported plan's page the next night, and the weekly digest | A report its page confirms becomes the digest's price edit; one it doesn't costs the reviewer nothing |
+| M10.11 | Report a wrong price in the app (P8) | A report sent by keyboard from a Search card reaches the server, and each refusal is explained |
+| M10.12 | Regional prices in the pipeline: each page's other regions (hreflang links, locale paths), `--region` for rendering, extraction and batches, and pages that redirect to another country refused | A batch drafts a region's prices for the catalog's providers, every price quoted on its page |
+| M10.13 | The first regions: a batch pull request each for the US's gaps, the United Kingdom, the euro countries, and Australia and New Zealand | A user there sees native prices for every provider whose pages could be read |
 
-Offline mode means a service worker for the app's own files, so the app starts with no network; the catalog is
-already kept offline by M4.3. Angular's `provideServiceWorker` is blocked by our Trusted Types CSP, so the app
-registers the worker itself through a policy of its own in `_headers`; `navigationRequestStrategy: 'freshness'`
-keeps Web Analytics counting repeat visits; and a new version needs an update prompt (BLUEPRINT §14, M4.3).
+#### M10 specs
+
+**M10.1 — The server's user data** (BLUEPRINT §5.4, §7.1)
+- **Where:** a second D1 database, `simply-sub-user` (binding `USER_DB`, migrations in `apps/api/migrations-user/`,
+  applied by `npm run deploy` as the catalog's are), so user data never shares the catalog's database, which a deploy
+  can reseed. Made with `wrangler d1 create` (free); its id goes in `wrangler.jsonc`. Branch previews use the same
+  database (a preview version keeps the Worker's resources).
+- **Write rules**, for every request that stores something (`apps/api/src/writes.ts`):
+  - per IP, 10 writes a minute (a Rate Limiting binding, on top of the 60 requests a minute); per feed set or sync
+    chain, 6 a minute (the same kind of binding, keyed by the resource);
+  - JSON bodies only, but sync's sealed payload, with a size limit per route;
+  - daily caps, counted in the database and reset at 00:00 UTC, so user data never uses more than half of D1's
+    100,000 rows written a day, which the catalog's deploys share (the limit is the account's); new feeds and sync
+    chains stop at 400 MB stored (of 500);
+  - secrets (a feed's token, its manage key, sync's auth secret) are random values of at least 128 bits, kept only
+    as SHA-256 hashes and compared in constant time; none is ever logged, and errors log the route's pattern only
+    (M2.8);
+  - `Cache-Control: no-store` on every write's answer.
+- **Clean-up:** a cron trigger on the API Worker, nightly before the bot's 03:00 UTC run, deletes what has expired
+  (M10.2, M10.8) and old daily counts, and hands the day's reports to the bot (M10.10).
+- **Contract:** new error codes for a body too large (413), a stale sync version (412) and a daily cap reached (503,
+  with `Retry-After`), in the examples' `errorCodes` and core's `errorBodySchema`.
+- **Acceptance**
+  - [ ] Over each limit the Worker answers with its code and writes nothing; the daily caps hold under a loop of
+        writes (Worker tests)
+  - [ ] No token, key or chain id appears in a log line, with every route made to throw in tests
+  - [ ] The nightly clean-up deletes only what has expired
+
+**M10.2 — Live calendar feeds, the API** (BLUEPRINT §5.2, §11.3)
+- **A feed set**, made by one device: a calendar for everything, one for each tag chosen and one for payments
+  without a tag.
+  - `POST /cal` `{ feeds: [{ name, color?, events }] }` → `201` with the set's id, its manage key (shown once) and each
+    feed's token, `https://` URL and `webcal://` URL.
+  - `PUT /cal/:id` (`Authorization: Bearer <manage key>`) replaces the set: a feed sent with its token keeps its URL,
+    one without gets a new token, and a feed left out is revoked.
+  - `DELETE /cal/:id` revokes the whole set (`204`). A missing or wrong key gets `403 forbidden`.
+  - `GET /cal/:token.ics` serves one calendar (`text/calendar`, an ETag and `304`), or `404` once revoked or expired.
+    Calendar apps' servers fetch it, and they share IP addresses, so it's limited per feed (30 a minute), not per IP.
+- **What's sent and kept:** each payment's title (its name and amount as charged, or its name alone), its day and its
+  repeat rule (M7.12), and each calendar's name and colour. No list names unless chosen, no notes, no record ids: each
+  event's UID is a hash the app makes. The server keeps the set's id, the manage key's hash and an expiry date, and
+  per feed its token's hash and its calendar file, written when the set is.
+- **Expiry:** 180 days after the app last wrote the set; the app writes at least every 30 days while it's used.
+- **Repeat rules Proton Calendar accepts** (the owner's calendar; its web client's `getIsRruleSupported`, read
+  2026-10-29, takes one day of the month, and `BYSETPOS` only with a weekday, and drops other events on import): core's
+  `repeatRule` writes a plan billed on the 31st as `BYMONTHDAY=-1` (the 31st, or a shorter month's last day: the
+  billing rule exactly) and a yearly Feb 29 as `BYMONTH=2;BYMONTHDAY=-1`, and `calendarEvents` makes a monthly plan
+  billed on the 29th or 30th an event per charge (the download's next 12 months; a feed's events roll forward with it).
+  M7.12's `BYMONTHDAY=28,29,30,31;BYSETPOS=-1` goes, from the download too.
+- **The test calendar:** once M10.1 and M10.2 are on the branch's preview link, a feed made with `POST /cal` holds an
+  event for each kind of rule the app writes (a day of the month, the 31st, every 3 months, every 30 days, every 2
+  weeks, yearly, a yearly Feb 29, a run with an end, a single charge), each titled with what it tests. The owner
+  subscribes in Proton Calendar and says which show; a rule that doesn't becomes single events before M10.3. A title
+  then changed with `PUT` shows whether Proton picks the change up on its own (every 4 to 16 hours, by its help page).
+  The test feed is revoked after.
+- **Core:** `calendarFeedsSchema` (strict: up to 26 feeds and 2,000 events in all, titles up to 120 characters, ISO
+  dates, repeat rules only of the form `repeatRule` writes, colours `#rrggbb`) and `feedIcs`, RFC 5545's text: CRLF
+  lines folded at 75 octets without splitting a character, escaped text, all-day `VALUE=DATE` events that don't block
+  time, `X-WR-CALNAME` and RFC 7986's `NAME`, a refresh hint of 12 hours (`REFRESH-INTERVAL`, `X-PUBLISHED-TTL`), and
+  the colour where apps read one (`X-APPLE-CALENDAR-COLOR`, RFC 7986's `COLOR`). The bodies' schemas join
+  `successBodySchemas`.
+- **Contract:** the Phase 5 sketch rewritten for sets; its note "never repeat rules" has been wrong since M7.12.
+- **Acceptance**
+  - [ ] Every example passes the contract tests; `feedIcs` has tests for folding, escaping and repeat rules, and its
+        output parses back as a calendar (a test-only parser, pinned)
+  - [ ] A PUT keeps each kept feed's URL and revokes the ones left out; a wrong key changes nothing
+  - [ ] A revoked or expired feed answers 404 at once
+  - [ ] No rule `repeatRule` writes fails Proton's check (a test against its supported forms), and the owner's Proton
+        Calendar shows every event of the test calendar
+
+**M10.3 — Live calendar in the app** (P10, P13; BLUEPRINT §11.3)
+- **Where:** Sync calendar ▾ starts with "Live calendar…", above the three apps' file imports; Settings' Your data
+  gets a Live calendar card that opens the same dialog.
+- **Turning it on:** the dialog says what's uploaded and who can see it ("Anyone with a link can see that calendar"),
+  then asks which calendars (Everything, on by default; each tag, with its colour; Without a tag), what each payment
+  shows (its name and amount, the default, or its name only; and whether to add its list's name), and [Create links]
+  uploads them (M10.2).
+- **With links:** each calendar's name and colour, Copy link, Add to Google Calendar (Google's add-by-URL page, in a
+  new tab), Add to Apple Calendar (the `webcal://` link) and Proton Calendar's steps, each app's steps folded under it
+  (from its own help pages, read when built: where the link goes, how to give it the tag's colour, how soon a change
+  shows, and that each calendar counts toward the app's calendars: Proton's free plan has 3); when the links were
+  last updated; Change calendars, New links (revoke and create, for a link shared too far) and Revoke all (asks
+  first).
+- **Keeping it current:** a lazy `LiveCalendarService`, started when there are links, builds each calendar's events
+  (core's `feedEvents`, from `calendarEvents`, with amounts as the provider charges them, so exchange rates never
+  change a feed), hashes them, and sends a PUT only when the hash changed: 5 s after a save, a catalog update or a
+  change of country or tax rate, on start, when back online, and at least every 30 days. A tag renamed or recoloured
+  updates its calendar under the same link; a tag deleted revokes its calendar. Offline, it waits; a `404` or `403`
+  says the links no longer work, with New links.
+- **Stored:** a `calendarFeeds` record (Dexie v4): the set's id, the manage key, each calendar's token and what it's
+  for, the choices and the last hash. The app lock seals it, backups leave it out (it holds a key), and sync carries
+  it (M10.9), so any device keeps the links current.
+- **Acceptance**
+  - [ ] Links for Everything and two tags serve three calendars; an item with both tags is in both; Without a tag has
+        the rest
+  - [ ] A saved change reaches the feeds within 10 s; a change that touches no payment, or new exchange rates, sends
+        nothing
+  - [ ] Revoke all makes every link answer 404, and the dialog starts over
+  - [ ] Keyboard only, both themes at 360 and 1280 px, axe with the dialog open, no horizontal scroll; the dialog and
+        the service in lazy chunks
+  - [ ] The owner subscribes to a preview link in Proton Calendar and sees a change arrive
+
+**M10.4 — Calendar year view** (P10; BLUEPRINT §8.3, §13.1)
+- **URL:** `?view=year` beside the `month` the page already has: its year is shown, and Month returns to that month.
+  Core's `readCalendarParams` and `writeCalendarParams` gain `view` (`month` by default, written only when `year`).
+- **Controls:** a Month | Year switch (two buttons with `aria-pressed`) before the arrows. In the year view the Month
+  select is gone, the arrows move a year ("Previous year", "Next year") and Today goes to this year.
+- **The bar:** this year's payments so far against the year's total, with the annual budget's tick and M7.7's colour
+  against it (§3.1's This year); a past year shows full, a future one $0 so far.
+- **The months:** twelve cards (four a row from 1280 px, three from 960, two from 600, one below), each with the
+  month's name, its total (≈ when converted) and payment count, coloured against the monthly budget as the Calendar's
+  bar is, a warning when a card goes over its limit that month (M9.4), and a small grid of its days, a dot on each
+  day with a payment and today ringed. The grid is decorative: the card is one link, named with all it shows ("March
+  2026, 4 payments, $63.21"), to that month's view, which opens with focus on its grid.
+- **Built from:** core's `yearSummary` (each month's total, conversion, count, days with payments, budget state and
+  over-limit cards) from the charges the month view uses; the view is a lazy `@defer` chunk (BLUEPRINT §13.1).
+- **Unchanged:** Showing, Sync calendar and Export to file (the next 12 months). Upcoming isn't shown in the year view.
+- **Acceptance**
+  - [ ] Every month's total equals the month view's for the same lists, and the bar matches §3.1's This year
+  - [ ] Month ↔ Year keeps the month; the arrows, the Year select and Today work; a reload, Back and Forward restore
+        the view
+  - [ ] Keyboard only: the switch, the year's controls, then each month in order; Enter on a month opens it
+  - [ ] Both themes at 360 and 1280 px with axe and no horizontal scroll; the initial bundle unchanged
+
+**M10.5 — Offline start** (BLUEPRINT §6.3, §7.6, §14)
+- **The worker:** `@angular/service-worker` 22.2.3 (exact) and `ngsw-config.json`:
+  - `navigationRequestStrategy: 'freshness'`: a page load asks the network first, so Web Analytics keeps counting
+    visits (BLUEPRINT §14, M4.3), and falls back to the cached `index.html` offline;
+  - every script, style and font prefetched at install (about 1.4 MB compressed, once; after that only the files a
+    version changed), so a page never opened online still works offline;
+  - provider icons (`/icons/*`) kept as they're used, for 30 days;
+  - `/api/*` and `/data/*` left to the network: the catalog and the rates are kept in IndexedDB (M4.3, M4.4), and the
+    catalog's check must reach the server to see a new version.
+- **Registration:** after the first render, from a lazy chunk, in production builds only, through a Trusted Types
+  policy of its own, `simply-sub#service-worker`, which accepts only `/ngsw-worker.js` and joins `_headers`'
+  `trusted-types` (Angular's `provideServiceWorker` registers with a plain string, which the CSP blocks). `SwUpdate`
+  comes from an environment injector made in that chunk, so the initial bundle doesn't grow.
+- **Headers:** `ngsw-worker.js`, `ngsw.json` and `safety-worker.js` revalidated on every load (`no-cache`); the kill
+  switch documented (`safety-worker.js` deployed as `ngsw-worker.js` unregisters the worker everywhere).
+- **Checks:** under `wrangler dev`. Browser checks that answer requests themselves (`context.route`) block the worker
+  (`serviceWorkers: 'block'`), since Playwright doesn't see a worker's requests.
+- **Web Analytics:** whether Cloudflare still adds its beacon to a page the worker fetched is checked on the live site
+  after the merge; if visits stop counting, `index.html` carries Web Analytics' own snippet instead (the owner's
+  call).
+- **Acceptance**
+  - [ ] After one online visit, with the network off, `/`, a deep link and every sidebar page load with the catalog,
+        the rates and the lists, and no CSP or Trusted Types error in the console
+  - [ ] No `/api/` or `/data/` request is answered by the worker (CDP's `fromServiceWorker`)
+  - [ ] The initial bundle stays at or under 497.84 kB
+
+**M10.6 — The update prompt and install** (P1, P13)
+- **Update prompt:** when the worker has a new version ready, a snackbar "A new version of Simply Sub is ready."
+  [Reload] (with the lock on, it adds "Reloading locks the app."). Reload activates it and reloads; a list being
+  edited is a draft in IndexedDB, so nothing is lost. If the worker can't serve the app any more: "Simply Sub needs to
+  reload to keep working." [Reload]. The worker checks on each page load, and the app asks it again when a tab is
+  shown after an hour and from Settings' Check for updates.
+- **Manifest:** `manifest.webmanifest` (`id` and `start_url` `/`, `display: standalone`, the name, a description,
+  `theme_color` and `background_color` with `_tokens.scss`'s values, which a test compares), icons of 192 and 512 px
+  and a maskable 512 made by a script (`sharp`) from an SVG mark and committed. The mark is a simple one drawn for the
+  app from the logo's "Sub" pill, in the theme's colours, shown to the owner before it's committed; it replaces the
+  favicon, still Angular's default logo, too. `<link rel="manifest">` and a
+  `theme-color` meta per colour scheme in `index.html`, its inline script and that script's CSP hash unchanged.
+- **Install** (Settings, a new App group after Your data): [Install] when the browser offers it
+  (`beforeinstallprompt`, Chromium), else the steps for Safari (Share, then Add to Home Screen; on a Mac, File, then
+  Add to Dock) and Firefox on Android; hidden when the app runs installed. The app's version and Check for updates sit
+  under it.
+- **Acceptance**
+  - [ ] Under `wrangler dev`, a second build served brings the prompt within a page load, and Reload shows the new
+        version
+  - [ ] Edge offers to install the app; DevTools shows no manifest error; the icons look right in both themes and
+        as a maskable icon
+  - [ ] Keyboard only, both themes at 360 and 1280 px, axe with the snackbar shown
+
+**M10.7 — Sync's code and merge** (BLUEPRINT §11.4, §11.5)
+- **The code:** 32 random bytes, shown as 24 BIP39 words (the last word carries a checksum) and a QR code of the
+  words, which a phone's camera app can read; scanning inside the app comes later (Firefox and Safari can't).
+  `@scure/bip39` and a QR library that returns the modules, both pinned exactly and in the lazy sync chunk; the QR is
+  one SVG path bound with `[attr.d]` (no `innerHTML`).
+- **Keys** (the app's crypto module): HKDF-SHA256 over the seed, an info string per key: the chain's id (16 bytes),
+  the auth secret (32 bytes; the server keeps its SHA-256) and the AES-256-GCM key (non-extractable). A random seed
+  needs no slow stretching, unlike a passphrase. The payload is gzipped (`CompressionStream`), then sealed with
+  AES-256-GCM, bound to the chain's id. The key protects the copy on the server from the server; on the device the seed
+  is the user's secret, sealed by the app lock when it's on (BLUEPRINT §11.5).
+- **The payload** (core's `user/sync.ts`): the backup's tables (lists, items, custom subscriptions, tags, rankings,
+  cards, dismissed suggestions) with their soft-deleted records, M10.3's links, the settings every device shares
+  (country, subdivision, currency, tax rate, budgets, Search's defaults, dismissed budget warnings) with a
+  `sharedUpdatedAt` of their own, the backup's `schemaVersion`, and the devices (an id, a name and when each last
+  synced). Never the theme, the Calendar's shown lists, Home's price changes, the app lock, drafts or the caches.
+- **The merge:** `mergeSync(local, remote)`, per record by id: the later `updatedAt` wins, a deletion included; a tie
+  goes the same way on both sides; a record only one side has is kept. It says which records this device must write
+  and whether the chain needs a new version. Remote records are checked with their schemas (a bad one is left out and
+  logged by table and key only); a newer `schemaVersion` stops sync on this device; an older one is migrated as
+  backups are.
+- **Acceptance**
+  - [ ] Tests: newer wins, deletions carry, ties agree, shared settings by their own time, per-device settings never
+        leave the device, invalid records left out, a newer version refused
+  - [ ] Tests: the words round-trip and a changed word fails its checksum; known seeds give known chain ids; a wrong
+        key or a changed byte opens nothing
+
+**M10.8 — Sync, the API** (BLUEPRINT §5.2, §11.4)
+- `GET /sync/:chain` (`Authorization: Bearer <auth secret>`): the sealed payload (`application/octet-stream`) with
+  `ETag: "<version>"`, `304` when it hasn't changed, `404` when there's none.
+- `PUT /sync/:chain`: with `If-None-Match: *` it starts a chain and keeps the secret's hash; with `If-Match:
+  "<version>"` it replaces the payload only if nobody wrote since, else `412` (the app reads, merges and tries
+  again). Up to 1 MiB. One SQL statement compares and writes, so two devices can't both win.
+- `DELETE /sync/:chain`: the chain is gone for every device (`204`).
+- **Stored:** the chain's id, the secret's hash, the version, the sealed payload, its size and when it changed;
+  deleted 180 days after its last write (the app writes at least every 30 days while it's used).
+- **Acceptance**
+  - [ ] Contract examples and Worker tests: start, read, `304`, a write after another's gets `412` and changes nothing,
+        a wrong secret `403`, too big `413`, delete
+  - [ ] What's stored has no list name, amount or record id in it (a test searches the stored bytes)
+
+**M10.9 — Sync in the app** (P13; BLUEPRINT §11.4)
+- **Settings' Your data, Sync between devices** (replacing "Create local sync"):
+  - Off: [Turn on sync] and [Join with a code].
+  - Turn on makes the code and shows its words (numbered, with Copy) and its QR code: "Keep it in a password manager
+    or on paper: it's how you add a device, and nobody can recover it." [I've saved it] sends the first copy.
+  - Join: 24 fields, each completing a word from its first four letters, or the words pasted at once; a wrong
+    checksum says so; then what the synced copy holds (counts, as Import shows them), and Merge (the default) or
+    Replace this device's data (asks first).
+  - On: "Synced 2 minutes ago" and Sync now; the devices, this one first with its name editable; Show the code (asks
+    first); Turn off on this device (the data stays here); Start over with a new code (moves the data to a new chain
+    and deletes the old, for a lost device: the others join again); Delete the synced copy.
+  - Problems in words: offline (it waits), the chain deleted from another device, a newer version of the app needed,
+    a copy that won't open.
+- **`SyncService`** (lazy, started when sync is on, after unlocking): syncs on start, when back online, when a tab is
+  shown again, 10 s after a change to a synced table, and from Sync now; one tab at a time (a Web Lock, like the
+  catalog's check); reads with `If-None-Match`, merges, writes this device's changes in one transaction, then sends a
+  new version with `If-Match`, up to three tries.
+- **Stored:** a `sync` record (Dexie v5): the seed, this device's id and name, the last version and when. The app lock
+  seals it; backups leave it out. Delete all data asks whether to delete the synced copy too; Import's Replace waits
+  until sync is off (Merge works).
+- **Acceptance**
+  - [ ] Two browsers on `wrangler dev`: turned on in one and joined in the other by keyboard, an item added, edited or
+        deleted on either shows on the other after Sync now, and within 15 s on its own
+  - [ ] Changes made offline on both, to different records, all survive; the theme stays per device
+  - [ ] Start over and Delete the synced copy leave the other browser saying what happened
+  - [ ] Keyboard only, both themes at 360 and 1280 px, axe with each dialog open, no horizontal scroll
+
+**M10.10 — Price reports, the API and the bot** (BLUEPRINT §5.2, §5.4, §6.4)
+- **`POST /reports`:** a plan, the country, and what's wrong: a different price (amount, currency and period), not
+  sold any more, or not sold in that country. No free text: nothing a visitor types reaches a person or a model.
+  Checked by core's `priceReportSchema` against the catalog's ids; `202` with nothing to read back. The write rules
+  apply (M10.1), with 3 a minute per IP and 500 a day. No Turnstile: the limits and the bot's check keep spam from
+  costing anyone time.
+- **Kept:** a row per plan, country, problem and price, with a count and the first and last day. No IP address, and
+  nothing else about the sender.
+- **To the bot:** the nightly clean-up (M10.1) moves the day's reports into the bot's KV (one key per reported plan,
+  so its writes stay few) and deletes them from D1. The bot checks each reported plan's price pages that night, ahead
+  of their cadence and within its budgets, and the weekly digest gets:
+  - the page shows a new price: the price edit, as from any check, noting the reports;
+  - the page still shows the catalog's price: a line in the digest's body, nothing to review;
+  - the page can't be read: a review item;
+  - a country the catalog doesn't price yet: counted under "Regions people asked about", for M10.13.
+- **Acceptance**
+  - [ ] Worker tests: a valid report is counted; an unknown plan, a bad price or an extra field gets `400`; the
+        limits hold
+  - [ ] Bot tests: a reported plan is checked that night, and each outcome lands in the digest as above
+  - [ ] The catalog-review skill handles the new items
+
+**M10.11 — Report a wrong price in the app** (P8)
+- **Where:** Search's expanded card, beside the price's date: "Report a wrong price".
+- **The dialog:** the plan and the user's country; What's wrong: The price is different (amount, currency and period,
+  filled in with the price shown), It's not sold any more, or It's not sold in Canada; [Send report]. Offline, it
+  says so and sends nothing. After: "Thanks. Netflix's page will be checked tonight." Refusals in words (too many just
+  now, paused for today).
+- **Acceptance**
+  - [ ] By keyboard from a Search card to the dialog and Send; the report reaches the local database under
+        `wrangler dev`
+  - [ ] Both themes at 360 and 1280 px, axe with the dialog open, no horizontal scroll; the dialog in a lazy chunk
+
+**M10.12 — Regional prices in the pipeline** (BLUEPRINT §6.5)
+- **Finding a region's page:** a pricing page's other regions from its `hreflang` links and the site's locale paths
+  (`/en-gb/`, `/uk/`), mapped to ISO countries (core's `regionalPages`); `find-pages` and the search score pages for
+  the region asked for, not Canada.
+- **Reading it:** `data:render --region GB` with that region's locale, language and time zone. A page that redirects
+  to another country or shows another country's currency is recorded as unread, never extracted. A page that shows
+  prices only to visitors in the country is left for a browser there (the computer's VPN, if the owner wants).
+- **Drafting:** `data:extract --region` and `draftFromAnswer` add only that region's prices to an existing provider,
+  each quoted on its page; `data:batch --region GB` opens one pull request for the region, with the review table and
+  the providers left out and why.
+- **The bot:** a regional page is a page like any other, with its own baseline, so the nightly checks cover it; a
+  redirect to another country counts as unread.
+- **Skills:** price-research reads a region this way.
+- **Acceptance**
+  - [ ] Tests: hreflang links and locale paths map to countries; a redirected page is refused
+  - [ ] A dry run for one region finds the regional pricing page for most of the catalog's providers that have one,
+        and its drafts pass `data:validate`
+
+**M10.13 — The first regions** (the owner's choice)
+- A batch pull request from `data:batch --region` for each of: the US's gaps (the providers sold there with Canada's
+  prices only, such as Bitdefender and Xbox Game Pass), the United Kingdom, the euro countries (the `EU` group's price
+  where a provider charges every euro country the same, else each country's), and Australia and New Zealand. Each is
+  reviewed and merged by the owner like any batch; each region's catalog file follows from `data:build`.
+- **Acceptance**
+  - [ ] In each region, every provider whose pages could be read has native prices, and the pull request lists the
+        rest with why
 
 ---
 
@@ -270,7 +581,7 @@ These live in `packages/core` as pure functions, so every page computes them the
 | Term | Definition | Used by |
 |---|---|---|
 | **Picked price** | The price `pickPrice` chooses for the user's region and currency: one source region and currency per plan, add-on or bundle, with every interval priced there, converted if it isn't in the user's currency. Native means no conversion was needed (BLUEPRINT §4.7) | Everywhere a price appears |
-| **Item price** | The price override if one is set and the charge is dated before its `until` (if any); otherwise the picked plan price plus each picked add-on price × its quantity. Bundle items use the bundle price. An add-on not sold for the item's billing period is billed on its own (M4.6: Disney+'s monthly extra member on a yearly plan), so its charges follow its period | Charges |
+| **Item price** | The price override if one is set and the charge is dated on or after its `since` (if any, M9.6) and before its `until` (if any); otherwise the picked plan price plus each picked add-on price × its quantity. Bundle items use the bundle price. An add-on not sold for the item's billing period is billed on its own (M4.6: Disney+'s monthly extra member on a yearly plan), so its charges follow its period | Charges |
 | **Sales tax** | Added to the item price for a buyer in a tax-added region (Canada, US) at their rate: the built-in rate for their province, or their own `salesTaxPercent`. Typed amounts (a custom plan, a price override) already include it unless marked `plusTax` (BLUEPRINT §4.8) | Charges |
 | **Monthly equivalent** | Price per month: year ÷ 12, week × 52 ÷ 12, day × 365 ÷ 12, each ÷ `intervalCount`. Before tax, like the price tags | Sorting, the price filter, "≈ $x/mo" hints |
 | **Charge** | One scheduled payment: `{ date, amount, tax, currency, itemId, listId, converted, manual, charged }`. `amount` includes `tax`, the sales tax part; `charged` is the same in the currency the provider charges it in, before any conversion, which a payment card's FX fee is judged against (M9.3) | Calendar and all totals |
@@ -1220,8 +1531,8 @@ Upcoming   Oct 28 Crave $22.00 · Nov 3 Mullvad ≈ $7.53 ↻ · Nov 12 Netflix 
 - **Export to file ▾:** Calendar (.ics) as the main action, plus a CSV payment schedule and Excel. Covers the shown lists for the next 12 months. The .ics has one all-day event per charge, not repeat rules (BLUEPRINT §11.2).
 - **Sync calendar ▾:**
   - Phase 3: Google / Apple / Proton each download the .ics and show that app's import steps.
-  - Phase 5: "Live calendar link" → opt-in dialog → `POST /cal` → shows the URL, subscribe steps for each app and a Revoke button.
-- A year view (12 small months plus monthly totals) comes in M10.
+  - Phase 5: "Live calendar link" → opt-in dialog → `POST /cal` → shows the URL, subscribe steps for each app and a Revoke button (M10.2, M10.3).
+- A year view (12 small months plus monthly totals) comes in M10.4.
 
 **As built (M7.4):**
 - **Layout:** "Calendar", the month's bar with its total, then Showing (a multi-select of the lists, "All lists" or
@@ -1439,7 +1750,7 @@ Local sync comes with Phase 5.
   - Turning it off asks for the passphrase and decrypts everything. A wrong one says so and changes nothing.
   - With nothing saved (in-memory mode, P15) it's turned off and says why.
   - As built: BLUEPRINT §14.
-- Create local sync stays disabled until Phase 5.
+- Create local sync stays disabled until Phase 5 (M10.9).
 
 **Since the feedback after M9:** the 📍 dialog's menus can be typed in (M6.16, as P1's), and a tag's colour can also
 come from the device's own colour picker beside Hex colour, each following the other (M6.15).
