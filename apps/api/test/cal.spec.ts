@@ -121,9 +121,10 @@ describe('POST /cal', () => {
     });
 
     expect(answer.status).toBe(413);
-    expect((await env.USER_DB.prepare('SELECT COUNT(*) AS sets FROM cal_sets').first())?.sets).toBe(
-      0,
-    );
+    expect(
+      (await env.USER_DB.prepare('SELECT COUNT(*) AS sets FROM cal_sets').first<{ sets: number }>())
+        ?.sets,
+    ).toBe(0);
   });
 
   it("answers 503 once the day's writes reach their cap, and stores nothing", async () => {
@@ -135,9 +136,10 @@ describe('POST /cal', () => {
 
     expect(answer.status).toBe(503);
     expect((await answer.json<{ error: { code: string } }>()).error.code).toBe('over_capacity');
-    expect((await env.USER_DB.prepare('SELECT COUNT(*) AS sets FROM cal_sets').first())?.sets).toBe(
-      0,
-    );
+    expect(
+      (await env.USER_DB.prepare('SELECT COUNT(*) AS sets FROM cal_sets').first<{ sets: number }>())
+        ?.sets,
+    ).toBe(0);
   });
 });
 
@@ -324,7 +326,11 @@ describe('the clean-up', () => {
       'Crave: $22.00',
     ]);
     expect(
-      (await env.USER_DB.prepare('SELECT COUNT(*) AS feeds FROM cal_feeds').first())?.feeds,
+      (
+        await env.USER_DB.prepare('SELECT COUNT(*) AS feeds FROM cal_feeds').first<{
+          feeds: number;
+        }>()
+      )?.feeds,
     ).toBe(1);
   });
 });

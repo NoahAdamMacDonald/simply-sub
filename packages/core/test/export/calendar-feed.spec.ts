@@ -87,10 +87,9 @@ describe('feedIcs', () => {
     const lines = text.split('\r\n');
 
     for (const line of lines) {
-      const bytes = new TextEncoder().encode(line);
-      expect(bytes.length).toBeLessThanOrEqual(75);
-      // Each line is whole UTF-8 on its own.
-      expect(new TextDecoder('utf-8', { fatal: true }).decode(bytes)).toBe(line);
+      // Its size in UTF-8. encodeURIComponent throws on half a character (a lone surrogate), so each line is whole.
+      const octets = encodeURIComponent(line).replace(/%[0-9A-F]{2}/g, '-').length;
+      expect(octets).toBeLessThanOrEqual(75);
     }
     expect(text.replaceAll('\r\n ', '').split('\r\n')).toContain(`SUMMARY:${title}`);
   });
