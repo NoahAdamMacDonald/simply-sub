@@ -1,7 +1,9 @@
-// The "simply-sub-bot" Worker: the nightly price check (BLUEPRINT §6.4, §7.7, M8.3). A cron trigger starts a Workflow
-// that checks each provider's pages, step by step, and opens or refreshes one "Price updates YYYY-MM-DD" pull request
+// The "simply-sub-bot" Worker (BLUEPRINT §6.4, §6.5, §7.7; M8.3, M3.9 to M3.11). A cron trigger starts a Workflow that
+// checks the catalog's pages against their baselines, step by step, builds the weekly "Catalog digest" pull request,
+// and on data/automation.yaml's discovery cadence drafts the next queued services into a batch pull request, all
 // through the GitHub REST API. It never merges, and it never writes to the catalog: Git is the source of truth.
-// Not deployed by Workers Builds: deploying it, and its GITHUB_TOKEN secret, are the project owner's to do.
+// Not deployed by Workers Builds: deploying it and its secrets (GITHUB_TOKEN; the search's TAVILY_API_KEY,
+// BRAVE_API_KEY and SEARXNG_URL, each optional) are the project owner's to do.
 {
   "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "simply-sub-bot",
@@ -15,7 +17,8 @@
   "workflows": [
     { "name": "simply-sub-price-check", "binding": "PRICE_CHECK", "class_name": "PriceCheck" },
   ],
-  // Workers AI reads a price off a page when the stored amount isn't on it (10,000 Neurons a day on the free plan).
+  // Workers AI reads a price off a changed page, reviews the digest, and extracts new services (10,000 Neurons a day on
+  // the free plan; data/automation.yaml's batch.neurons is the night's share).
   "ai": { "binding": "AI" },
   // Browser Rendering, only for pages whose text a plain fetch doesn't get (10 browser-minutes a day on the free plan).
   "browser": { "binding": "BROWSER" },

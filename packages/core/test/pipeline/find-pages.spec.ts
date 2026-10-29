@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  findKind,
   findPages,
   linksIn,
   missingPath,
@@ -9,6 +10,7 @@ import {
   readSitemap,
   registeredDomain,
   sitemapsIn,
+  surveySite,
   urlScore,
   type FetchedPage,
   type FindIo,
@@ -357,5 +359,44 @@ describe('findPages', () => {
     );
     expect(report).toMatchObject({ kind: 'bundles', searched: 'none-left' });
     expect(report.found).toBeUndefined();
+  });
+});
+
+describe('surveySite and findKind', () => {
+  it('surveys a site once, sitemaps and all, as plain data a later step finds each kind from', async () => {
+    const web = fakeWeb(
+      {
+        'https://example.com':
+          '<footer><a href="/legal/consumer-terms">Consumer Terms</a></footer>',
+        'https://example.com/en/subscribe': '<div id="app"></div>',
+        'https://example.com/legal/consumer-terms': `These Terms of Service apply to you. ${'You agree to these terms. '.repeat(100)}`,
+      },
+      {
+        answersAnyPath: true,
+        files: {
+          'https://example.com/robots.txt': 'Sitemap: https://example.com/sitemap.xml',
+          'https://example.com/sitemap.xml':
+            '<urlset><url><loc>https://example.com/en/subscribe</loc></url><url><loc>https://example.com/blog/our-team</loc></url></urlset>',
+        },
+      },
+    );
+    const site = { name: 'Example', website: 'https://example.com' };
+    const survey = JSON.parse(
+      JSON.stringify(await surveySite(site, web, { sitemaps: true })),
+    ) as Awaited<ReturnType<typeof surveySite>>;
+    // Only the sitemap's pages that could be a kind are kept.
+    expect(survey.sitemap).toEqual(['https://example.com/en/subscribe']);
+    const files: string[] = [];
+    const later = { ...web, file: async (url: string) => (files.push(url), web.file(url)) };
+    expect((await findKind('pricing', site, survey, later)).found).toMatchObject({
+      url: 'https://example.com/en/subscribe',
+      via: 'sitemap',
+    });
+    expect((await findKind('terms', site, survey, later)).found).toMatchObject({
+      url: 'https://example.com/legal/consumer-terms',
+      via: 'link',
+      fit: 'yes',
+    });
+    expect(files).toEqual([]);
   });
 });

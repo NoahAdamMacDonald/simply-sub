@@ -487,15 +487,27 @@ const maxSitemaps = 4;
 /** The lowest URL score a sitemap entry or link needs to be read. */
 const minScore = 4;
 
-/** What's known about a provider's sites before the kinds are searched: one read each, shared by every kind. */
-interface SiteFacts {
+/**
+ * What's known about a provider's sites before the kinds are searched: one read each, shared by every kind. It's plain
+ * data, so the bot can keep it between the steps that search one kind each.
+ */
+export interface SiteSurvey {
   origin: string;
   /** The website itself, when it has a path of its own: a product's page. */
   productPage?: string;
   /** Whether the host answers a path that can't be there with a page (a soft 404). */
   answersAnyPath: boolean;
   links: PageLink[];
-  sitemap: () => Promise<string[]>;
+  /**
+   * The sitemaps' pages that could be one of the kinds (on the provider's sites, with a URL score of at least
+   * `minScore` for one), when read with the rest; otherwise they're read when a kind first needs them.
+   */
+  sitemap?: string[];
+}
+
+interface SiteFacts extends SiteSurvey {
+  sitemap: undefined;
+  pages: () => Promise<string[]>;
 }
 
 /** Finds each kind's page for a provider, in the order of the steps above. */
@@ -504,22 +516,26 @@ export async function findPages(
   kinds: readonly PageKind[],
   io: FindIo,
 ): Promise<KindReport[]> {
-  const facts = await siteFacts(site, io);
+  const facts = factsOf(site, await surveySite(site, io), io);
   const reports: KindReport[] = [];
-  for (const kind of kinds) reports.push(await findKind(kind, site, facts, io));
+  for (const kind of kinds) reports.push(await searchKind(kind, site, facts, io));
   return reports;
 }
 
-async function siteFacts(site: ProviderSite, io: FindIo): Promise<SiteFacts> {
+/**
+ * The survey of a provider's sites: the website's and its help centre's links, whether the host answers any path, and
+ * with `sitemaps`, the sitemaps' pages worth reading.
+ */
+export async function surveySite(
+  site: ProviderSite,
+  io: FindIo,
+  options: { sitemaps?: boolean } = {},
+): Promise<SiteSurvey> {
   const home = parseWebAddress(site.website);
   if (!home) throw new Error(`Not a web address: ${site.website}`);
   const origin = `https://${home.host}`;
-  const domain = registeredDomain(home.host);
-  const helpHosts = ['help', 'support']
-    .map((prefix) => `https://${prefix}.${domain}`)
-    .filter((url) => url !== origin);
   const links: PageLink[] = [];
-  for (const start of [site.website, ...helpHosts]) {
+  for (const start of [site.website, ...helpOrigins(origin)]) {
     const page = await io.page(start);
     if ('error' in page) continue;
     for (const link of linksIn(page.html)) {
@@ -529,17 +545,68 @@ async function siteFacts(site: ProviderSite, io: FindIo): Promise<SiteFacts> {
     }
   }
   const missing = await io.page(`${origin}${missingPath}`);
-  let sitemap: Promise<string[]> | undefined;
   return {
     origin,
     ...(home.path !== '/' && { productPage: site.website }),
     answersAnyPath: !('error' in missing),
     links,
-    sitemap: () => (sitemap ??= readSitemaps([origin, ...helpHosts], io)),
+    ...(options.sitemaps && {
+      sitemap: worthReading(await readSitemaps([origin, ...helpOrigins(origin)], io), site),
+    }),
   };
 }
 
-async function findKind(
+/** Finds one kind's page from a survey of the provider's sites. */
+export async function findKind(
+  kind: PageKind,
+  site: ProviderSite,
+  survey: SiteSurvey,
+  io: FindIo,
+): Promise<KindReport> {
+  return searchKind(kind, site, factsOf(site, survey, io), io);
+}
+
+/** The help centre's hosts on the website's domain (help.netflix.com), where policies and prices often are. */
+function helpOrigins(origin: string): string[] {
+  const host = parseWebAddress(origin)?.host ?? '';
+  const domain = registeredDomain(host);
+  return ['help', 'support']
+    .map((prefix) => `https://${prefix}.${domain}`)
+    .filter((url) => url !== origin);
+}
+
+/** A survey with its sitemap's pages read once, when a kind first needs them (or as surveyed). */
+function factsOf(site: ProviderSite, survey: SiteSurvey, io: FindIo): SiteFacts {
+  let read: Promise<string[]> | undefined;
+  const { sitemap, ...rest } = survey;
+  return {
+    ...rest,
+    sitemap: undefined,
+    pages: () =>
+      (read ??= sitemap
+        ? Promise.resolve(sitemap)
+        : readSitemaps([survey.origin, ...helpOrigins(survey.origin)], io)),
+  };
+}
+
+/** The sitemap's pages that could be one of the kinds, best first: a sitemap can list tens of thousands. */
+function worthReading(pages: readonly string[], site: ProviderSite): string[] {
+  const best = new Map<string, number>();
+  for (const url of pages) {
+    if (best.has(url) || !onProviderSite(url, site)) continue;
+    const score = Math.max(...pageKinds.map((kind) => urlScore(kind, url)));
+    if (score >= minScore) best.set(url, score);
+  }
+  return [...best]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, maxSurveyedPages)
+    .map(([url]) => url);
+}
+
+/** The most sitemap pages a survey keeps. */
+const maxSurveyedPages = 400;
+
+async function searchKind(
   kind: PageKind,
   site: ProviderSite,
   facts: SiteFacts,
@@ -598,7 +665,7 @@ async function findKind(
     tryAll(
       ranked(
         kind,
-        (await facts.sitemap()).map((url) => ({ url, words: '' })),
+        (await facts.pages()).map((url) => ({ url, words: '' })),
         site,
       ),
       'sitemap',

@@ -1,10 +1,14 @@
-import type { IsoDate } from '@simply-sub/core';
+import type { IsoDate, SearchEngine } from '@simply-sub/core';
+import type { DiscoveryBatch, ServiceWork } from './discovery';
+import type { Searches } from './search';
 import type { Finding } from './types';
 
 // What the bot remembers between nights (BLUEPRINT §6.4, M3.9), in the KV namespace it shares with the API under keys
 // that start with `bot:`: when each page and logo was last checked (one key, written once a night), the day the last
-// digest was built, and what each page that changed is waiting to propose (a key per page, kept until main's
-// baseline has caught up with it). The catalog itself stays in Git: nothing here is a source of truth.
+// digest was built, what each page that changed is waiting to propose (a key per page, kept until main's
+// baseline has caught up with it), the month's searches (M3.11), and the discovery batch under way with each
+// service's work so far, until its pull request is opened. The catalog itself stays in Git: nothing here is a
+// source of truth.
 
 /** A page's (or a logo's) findings waiting for the weekly digest. */
 export interface Pending {
@@ -24,6 +28,15 @@ export interface BotState {
   pending(): Promise<Pending[]>;
   putPending(pending: Pending): Promise<void>;
   dropPending(key: string): Promise<void>;
+  /** The month's searches (YYYY-MM), by engine. */
+  searches(month: string): Promise<Searches>;
+  countSearch(month: string, engine: SearchEngine): Promise<void>;
+  /** The discovery batch under way; saving undefined ends it. */
+  discovery(): Promise<DiscoveryBatch | undefined>;
+  saveDiscovery(batch: DiscoveryBatch | undefined): Promise<void>;
+  /** A service's discovery work; saving undefined drops it. */
+  work(id: string): Promise<ServiceWork | undefined>;
+  saveWork(id: string, work: ServiceWork | undefined): Promise<void>;
 }
 
 /** The part of Workers KV the state uses. */
@@ -41,9 +54,14 @@ export interface KvLike {
 const checksKey = 'bot:checks';
 const digestKey = 'bot:digest';
 const pendingPrefix = 'bot:pending:';
+const searchPrefix = 'bot:search:';
+const discoveryKey = 'bot:discovery';
+const workPrefix = 'bot:discovery:';
 
 /** The state in a KV namespace. */
 export function kvState(kv: KvLike): BotState {
+  const searches = async (month: string) =>
+    JSON.parse((await kv.get(`${searchPrefix}${month}`)) ?? '{}') as Searches;
   return {
     async checks() {
       return JSON.parse((await kv.get(checksKey)) ?? '{}') as Record<string, IsoDate>;
@@ -75,6 +93,28 @@ export function kvState(kv: KvLike): BotState {
     },
     async dropPending(key) {
       await kv.delete(pendingKey(key));
+    },
+    searches,
+    async countSearch(month, engine) {
+      const used = await searches(month);
+      used[engine] = (used[engine] ?? 0) + 1;
+      await kv.put(`${searchPrefix}${month}`, JSON.stringify(used));
+    },
+    async discovery() {
+      const value = await kv.get(discoveryKey);
+      return value ? (JSON.parse(value) as DiscoveryBatch) : undefined;
+    },
+    async saveDiscovery(batch) {
+      if (batch) await kv.put(discoveryKey, JSON.stringify(batch));
+      else await kv.delete(discoveryKey);
+    },
+    async work(id) {
+      const value = await kv.get(`${workPrefix}${id}`);
+      return value ? (JSON.parse(value) as ServiceWork) : undefined;
+    },
+    async saveWork(id, work) {
+      if (work) await kv.put(`${workPrefix}${id}`, JSON.stringify(work));
+      else await kv.delete(`${workPrefix}${id}`);
     },
   };
 }

@@ -5,6 +5,11 @@ description: Discover the features a category of subscriptions is compared on (V
 
 # Feature discovery (registry entries from official pages)
 
+> **The discovery pipeline proposes features, never adds them** (BLUEPRINT §6.5): a capability its extraction can't
+> map to an id or alias in `data/features.yaml` becomes a proposed feature in the batch pull request, with its quote.
+> Each one goes through this skill (propose first, the registry in its own commit, every provider's value sourced)
+> before any provider file uses it.
+
 Features are what users rank and what the optimizer compares (BLUEPRINT §4.2). Their ids become **rank keys stored in
 users' data**, so a feature is cheap to add and expensive to rename or remove. Discover deliberately, propose, then
 add. The VPN group (`vpn.*`, PR #25) is the worked example of everything below.

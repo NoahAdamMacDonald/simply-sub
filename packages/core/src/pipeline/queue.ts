@@ -1,6 +1,7 @@
 import * as z from 'zod';
 import { addDuplicateIssues } from '../catalog/checks';
 import { httpsUrlSchema, isoDateSchema, slugSchema, textSchema } from '../catalog/formats';
+import { yamlScalar } from './draft-yaml';
 import { bareHost, parseWebAddress } from './web-address';
 
 // The discovery queue, data/queue.yaml (BLUEPRINT §6.5, M3.1): the services the pipeline adds next, in order. The
@@ -110,6 +111,27 @@ export function providerSiteKeys(provider: {
 export function onSites(website: string, keys: readonly string[]): boolean {
   const key = siteKey(website);
   return key !== undefined && keys.some((site) => key === site || key.startsWith(`${site}/`));
+}
+
+/**
+ * data/queue.yaml's text with an entry's new status, the day it changed and, for one left out, why: its other lines
+ * and the file's comments as they were, in the layout Prettier keeps. Undefined when the entry isn't there.
+ */
+export function withQueueStatus(
+  text: string,
+  id: string,
+  change: { status: QueueStatus; date: string; note?: string },
+): string | undefined {
+  const lines = text.split('\n');
+  const start = lines.indexOf(`- id: ${id}`);
+  if (start < 0) return undefined;
+  let end = start + 1;
+  while (end < lines.length && lines[end].startsWith('  ')) end++;
+  const entry = lines.slice(start, end).filter((line) => !/^ {2}(?:status|date|note):/.test(line));
+  entry.push(`  status: ${change.status}`, `  date: ${change.date}`);
+  if (change.note !== undefined) entry.push(`  note: ${yamlScalar(change.note)}`);
+  lines.splice(start, end - start, ...entry);
+  return lines.join('\n');
 }
 
 /** The first `count` queued entries, in the queue's order, leaving out `skip` (ids already in an open pull request). */

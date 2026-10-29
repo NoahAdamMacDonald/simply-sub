@@ -2,9 +2,9 @@ import { WorkflowEntrypoint, type WorkflowEvent, type WorkflowStep } from 'cloud
 import { runNight, type NightSummary } from './run';
 import { workerServices } from './services';
 
-// The "simply-sub-bot" Worker (BLUEPRINT §6.4, §7.7, M8.3, M3.9): at 03:00 UTC its cron trigger starts the night's
-// Workflow, which checks what data/automation.yaml says is due, step by step, and on the digest's day opens or refreshes
-// the week's pull request. Nothing here merges.
+// The "simply-sub-bot" Worker (BLUEPRINT §6.4, §6.5, §7.7; M8.3, M3.9 to M3.11): at 03:00 UTC its cron trigger starts
+// the night's Workflow, which checks what data/automation.yaml says is due, step by step, opens or refreshes the week's
+// digest on its day, and goes on with the discovery's batch. Nothing here merges.
 
 /** Each step is retried twice, a little later each time, before the night goes on without it. */
 const stepConfig = {

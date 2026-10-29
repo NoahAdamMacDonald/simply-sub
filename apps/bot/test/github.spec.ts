@@ -152,6 +152,41 @@ describe('GitHub', () => {
     );
   });
 
+  it('lists the queue ids of open batch pull requests, and of closed ones not merged', async () => {
+    const pulls: Record<string, unknown[]> = {
+      open: [
+        {
+          head: { ref: 'catalog/batch-2026-10-29-streamco' },
+          body: '<!-- simply-sub-batch: streamco -->',
+          merged_at: null,
+        },
+        { head: { ref: 'bot/catalog-digest' }, body: 'Catalog digest', merged_at: null },
+      ],
+      closed: [
+        {
+          head: { ref: 'catalog/batch-2026-10-01-hulu' },
+          body: '<!-- simply-sub-batch: hulu max -->',
+          merged_at: null,
+        },
+        {
+          head: { ref: 'catalog/batch-2026-09-01-tidal' },
+          body: '<!-- simply-sub-batch: tidal -->',
+          merged_at: '2026-09-02T00:00:00Z',
+        },
+      ],
+    };
+    const github = new GitHub({
+      token: 't0ken',
+      repository: 'owner/simply-sub',
+      base: 'main',
+      fetch: (async (input: RequestInfo | URL) =>
+        Response.json(
+          pulls[new URL(String(input)).searchParams.get('state') ?? ''],
+        )) as typeof fetch,
+    });
+    expect(await github.batchPulls()).toEqual({ open: ['streamco'], closed: ['hulu', 'max'] });
+  });
+
   it('reads the resellers’ websites', () => {
     expect(
       resellerSites(

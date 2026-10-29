@@ -1,4 +1,4 @@
-import { userAgent } from '@simply-sub/core';
+import { batchIdsIn, userAgent } from '@simply-sub/core';
 import type { FileChange, Proposal } from './proposal';
 
 // The bot's way to GitHub (BLUEPRINT §7.7): the REST API with a fine-grained token for this repository only (Contents
@@ -55,6 +55,23 @@ export class GitHub {
     );
     const resellers = resellerSites(await this.text('data/resellers.yaml', commit));
     return { commit, tree: tree.sha, logos, resellers };
+  }
+
+  /**
+   * The queue ids named by batch pull requests (on catalog/batch- branches, the bot's and data:batch's): in open ones,
+   * which no new batch takes, and in the latest closed ones that weren't merged, which a person rejected.
+   */
+  async batchPulls(): Promise<{ open: string[]; closed: string[] }> {
+    const ids = async (state: 'open' | 'closed') =>
+      (
+        await this.call<{ head: { ref: string }; body: string | null; merged_at: string | null }[]>(
+          'GET',
+          `pulls?state=${state}&per_page=100`,
+        )
+      )
+        .filter((pull) => pull.head.ref.startsWith('catalog/batch-') && pull.merged_at === null)
+        .flatMap((pull) => batchIdsIn(pull.body ?? ''));
+    return { open: await ids('open'), closed: await ids('closed') };
   }
 
   /** A text file as the commit (or branch) has it. */

@@ -1863,8 +1863,35 @@ own sites and its quotes on it word for word; each price on the shop's own site 
 aren't resellers (the rules say so, and only a shop named as selling the provider's subscription has an approval to
 quote). The batch's review lists each reseller's prices and its approval, linked to its quote.
 
-**Ongoing:** the nightly price check (section 6.4) reuses the saved `sources:` URLs. A weekly job takes the next
-N services from the queue, so the catalog grows on its own while you only review.
+**As built (M3.11):** the discovery in the bot (`apps/bot/src/discovery.ts`), what `npm run data:batch -- --next <n>
+--model workers-ai` does on a computer, run by the nightly Workflow after the checks and the digest with what they left
+of the night's Neurons and browser pages.
+- **When:** `cadence.discovery` in `data/automation.yaml` (weekly by default; `off` stops it). A due night takes the
+  next `batch.discovery` queued services from main's queue, leaving out any in an open batch pull request or a closed
+  one that wasn't merged (the hidden line `batchReview` writes). The batch and each service's work wait in KV
+  (`bot:discovery`, `bot:discovery:<id>`) until its pull request opens, so a batch takes as many nights as its
+  budgets need, and no new batch starts before it's done.
+- **Each service, a stage at a time:** a survey of its sites (core's `surveySite`: the website's and help centre's
+  links, whether the host answers any path, the sitemaps' pages that could be one of the kinds) in one step, then a
+  step per kind (`findKind`, searching last), so each step stays within its 50 requests; then Browser Rendering for a
+  page only a browser shows (one of the night's browser pages each); then Workers AI, one step per part of
+  `extractionParts`, while the night's Neurons last; then the draft (`draftFromAnswer`, `draftYaml`, core's schema),
+  its logo (the bot's `findIcon`), its cited pages' baselines from the text it was drafted from, and any new
+  reseller with its logo. A service whose steps fail two nights is left for a person (`needs-fix`).
+- **The pull request:** once every service of the batch is done, one pull request on `catalog/batch-<date>-<first id>`
+  (the branch name `data:batch` uses, so each sees the other's batches) with the drafts, logos, baselines, new
+  resellers (`draftYamlList`) and the queue's new statuses (`withQueueStatus`: done, or why it was left out), and the
+  review table. CI's `data:validate` checks it; a person merges.
+- **Search:** core's engines in `data/automation.yaml`'s order with the bot's budgets (`searchBudgets(settings,
+  'bot')`), counted in KV by month (`bot:search:<YYYY-MM>`). Their keys are Worker secrets (`TAVILY_API_KEY`,
+  `BRAVE_API_KEY`, `SEARXNG_URL`, section 7.2); an engine without one is skipped, and with none the search is left
+  out.
+- **What it doesn't do:** refill the queue from Wikidata (`npm run data:queue`, on a computer; the queue holds over a
+  hundred services), or the computer's browser tricks (cookie banners, tabs, toggles): a page they're needed for is
+  read as Browser Rendering shows it, and a service the bot can't read is left out with why, for `data:batch`.
+
+**Ongoing:** the nightly bot (section 6.4) checks the saved `sources:` URLs against their baselines, and its discovery
+takes the next services from the queue on its cadence, so the catalog grows on its own while you only review.
 
 **Licensing & etiquette:** store facts (prices, feature flags) and links, never copied marketing text. Follow
 robots.txt, make one request per page per run, and send an identifying User-Agent. Logos come from favicons
@@ -1970,7 +1997,12 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
    `main` once the change has merged. When the token expires, a new one replaces it with
    `npx wrangler secret put GITHUB_TOKEN` (the value typed at its prompt, never on the command line), with no
    redeploy: the next night uses it.
-9. **The weekly review** (M3.10), with `reviewer: scheduled-claude`: a Claude Code scheduled task the owner creates
+9. **The discovery's search** (M3.11), optional: each engine's secret on the bot, typed at the prompt, never on the
+   command line or in a file: `npx wrangler secret put TAVILY_API_KEY` (Tavily's free plan: 1,000 searches a month,
+   no card), `BRAVE_API_KEY` (Brave's $5 monthly credit, a card on file) and `SEARXNG_URL` (your own SearXNG's https
+   address, with its JSON format turned on). Without them the discovery still runs, without a search. The bot needs
+   redeploying once M3.9 to M3.11 merge, for its KV binding and its discovery.
+10. **The weekly review** (M3.10), with `reviewer: scheduled-claude`: a Claude Code scheduled task the owner creates
    once at claude.ai/code/routines (or `/schedule`). It uses this repository and the **Default** environment (Trusted
    network access), runs weekly on Mondays at 9:07 local time, after the digest's 03:00 UTC run, and its
    instructions run the catalog-review skill on `bot/catalog-digest`, pushing to that branch only. The skill has the
@@ -2844,6 +2876,17 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-28, M3.11)**
+- **The bot discovers too** (the user's request: discovery has a cadence, and no part may need a Claude plan): with
+  Workers AI and Browser Rendering, within the night's budgets, over as many nights as a batch needs. A service it
+  can't read is left out with why; `npm run data:batch` on a computer reads it with the local browser.
+- **Search keys are Worker secrets** for the bot and `.env` (gitignored) on a computer, never in the repository:
+  Tavily first (its free 1,000 a month), then Brave (its $5 credit), then the owner's SearXNG, each within its budget.
+- **Within the free plan's limits:** a step per kind of page and per extraction part keeps each step within 50
+  requests; its results are small (a survey keeps only the sitemap pages that could be a kind), and each service's
+  work waits in KV (a write or two a step, of 1,000 a day). A step parses whole pages, so on the free plan's 10 ms of
+  CPU a step a big site can fail its step: two such nights leave the service for `data:batch`.
 
 **Resolved (2026-10-28, M3.10)**
 - **Who reviews** (the user's choice): `scheduled-claude`, a weekly scheduled task the owner sets up (section 7.2) on

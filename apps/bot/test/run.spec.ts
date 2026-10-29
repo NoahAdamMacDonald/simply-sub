@@ -90,6 +90,7 @@ describe('a quiet night', () => {
       'check netflix',
       'read the last digest',
       'gather the digest',
+      'read the discovery batch',
       'save the check dates',
     ]);
     expect(ai).toEqual([]);

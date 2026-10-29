@@ -2,6 +2,7 @@ import {
   baselineDiff,
   digestDue,
   isDue,
+  searchBudgets,
   type Automation,
   type Baseline,
   type Bundle,
@@ -13,6 +14,7 @@ import {
 } from '@simply-sub/core';
 import { checkPages, message, type CheckInput, type PageDeps } from './check-pages';
 import { digest, digestBranch, urlOf } from './digest';
+import { discover, type DiscoveryServices } from './discovery';
 import type { RepositoryState } from './github';
 import { filesToRead, worthProposing, type Proposal } from './proposal';
 import { reviewWithModel } from './review';
@@ -30,9 +32,9 @@ import type { Budget, Finding } from './types';
 // from main, read each host's robots.txt once, then a step for each provider (with the bundles whose pages it cites
 // too), each other group of bundles that share a page, and each reseller's logo, checking only what's due by its
 // cadence. A page is compared with its baseline: unchanged, its facts hold and no model is asked; changed, the M8.3
-// checks run, and what it found waits in KV for the weekly digest, which one step builds on the digest's day. Steps
-// pass only small, plain data: a step's result is at most 1 MiB, and on the free plan a step has 10 ms of CPU and 50
-// requests out.
+// checks run, and what it found waits in KV for the weekly digest, built on the digest's day; then the discovery takes
+// what's left of the night's budgets (discovery.ts). Steps pass only small, plain data: a step's result is at most
+// 1 MiB, and on the free plan a step has 10 ms of CPU and 50 requests out.
 
 /** A Workflow step: runs once, its result kept, and retried when it throws. */
 export type Step = <T>(name: string, task: () => Promise<T>) => Promise<T>;
@@ -69,6 +71,8 @@ export interface Services {
   readFiles(paths: readonly string[], commit: string): Promise<Record<string, string>>;
   propose(state: RepositoryState, proposal: Proposal, branch: string): Promise<string>;
   state: BotState;
+  /** What the discovery needs (M3.11). */
+  discovery: DiscoveryServices;
 }
 
 /** The most hosts one step reads robots.txt for: a step has 50 requests out on the free plan. */
@@ -78,6 +82,8 @@ export interface NightSummary {
   findings: number;
   /** The digest's pull request, opened or refreshed, on the digest's day. */
   pullRequest?: string;
+  /** The discovery batch's pull request, the night its last service is done. */
+  batch?: string;
 }
 
 /** Which bundles each provider's step checks, and the groups of the rest that share a page. */
@@ -276,9 +282,11 @@ export async function runNight(
                 notes: [...done.notes].map(
                   ([finding, note]) => [findings.indexOf(finding), note] as const,
                 ),
+                neurons: done.neurons,
               };
             })
-          : { added: [], notes: [] };
+          : { added: [], notes: [], neurons: 0 };
+      budget = { ...budget, neurons: budget.neurons - review.neurons };
       pullRequest = await step('build the digest', async () => {
         const findings = await live();
         const reviewed = new Map(review.notes.map(([place, note]) => [findings[place], note]));
@@ -292,9 +300,31 @@ export async function runNight(
       });
     }
   }
+
+  // The discovery (M3.11), with what the checks and the digest left of the night.
+  const discovery = await discover(
+    {
+      today,
+      settings,
+      repository,
+      budget,
+      due: isDue(settings.cadence.discovery, checks[discoveryKey], today),
+      searchBudgets: searchBudgets(settings, 'bot'),
+    },
+    step,
+    services.discovery,
+  );
+  if (discovery.took) checked[discoveryKey] = today;
   await step('save the check dates', () => services.state.saveChecks(checked));
-  return { findings, ...(pullRequest !== undefined && { pullRequest }) };
+  return {
+    findings,
+    ...(pullRequest !== undefined && { pullRequest }),
+    ...(discovery.pullRequest !== undefined && { batch: discovery.pullRequest }),
+  };
 }
+
+/** The check dates' key for the discovery's last batch. */
+const discoveryKey = 'discovery';
 
 /** The pages (and logo) a step checks, as check-date keys. */
 function keysOf(input: Omit<CheckInput, 'baselines' | 'cited'>): string[] {

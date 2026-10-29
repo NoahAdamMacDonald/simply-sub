@@ -5,6 +5,12 @@ description: Rate a subscription provider's terms of service, privacy policy and
 
 # Policy research (official pages, quoted word for word)
 
+> **The discovery pipeline drafts ratings first** (BLUEPRINT §6.5): its extraction rates each topic from the terms and
+> privacy pages with the same rubric, and core drops any quote that isn't on the page word for word. This skill is
+> for grading by hand: a rating to check before a batch merges, a policy page the weekly digest says changed (the
+> catalog-review skill), or a provider the pipeline couldn't read. Its rules are the pipeline's rules too (core's
+> `extractionRules`): change both together.
+
 A card's Terms and policies (BLUEPRINT §4.10) grades a provider on the topics in `data/policy-topics.yaml`. Each
 rating is a grade (Great, Good, Neutral, Poor or Bad: its `tier`), a reason in plain words, and the provider's own
 words with the page they're on, which the card cites. The rubric decides the grade; the quotes have to support it on

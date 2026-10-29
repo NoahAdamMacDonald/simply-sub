@@ -22,6 +22,18 @@ export function draftYaml(value: Record<string, unknown>, comments: YamlComments
   return `${lines.join('\n')}\n`;
 }
 
+/** A list's items as a file of them at the top level (data/resellers.yaml's), written the way draftYaml writes a file. */
+export function draftYamlList(items: readonly Record<string, unknown>[]): string {
+  const lines: string[] = [];
+  writeList(items, 0, [], lines, {});
+  return `${lines.join('\n')}\n`;
+}
+
+/** A value as it's written after its key: plain when it can be, otherwise quoted the way Prettier quotes it. */
+export function yamlScalar(value: string | number | boolean): string {
+  return scalar(value);
+}
+
 /** A comment's lines, wrapped at word breaks the way the repository's comments are (118 characters). */
 function comment(line: string, indent: number): string {
   const pad = `${' '.repeat(indent)}#`;

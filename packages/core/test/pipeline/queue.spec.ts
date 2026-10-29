@@ -1,4 +1,6 @@
+import { format } from 'prettier';
 import { describe, expect, it } from 'vitest';
+import { parse } from 'yaml';
 import {
   idFromName,
   mergeCandidates,
@@ -7,6 +9,7 @@ import {
   providerSiteKeys,
   queueFileSchema,
   siteKey,
+  withQueueStatus,
   type QueueEntry,
 } from '../../src';
 import { issues } from '../catalog/helpers';
@@ -266,5 +269,66 @@ describe('idFromName', () => {
     ['!!!', ''],
   ])('makes %s %s', (name, id) => {
     expect(idFromName(name)).toBe(id);
+  });
+});
+
+describe('withQueueStatus', () => {
+  const text = [
+    '# The queue.',
+    '- id: bitdefender',
+    '  name: Bitdefender',
+    '  website: https://www.bitdefender.com',
+    '  category: privacy-suite',
+    '  source: own',
+    '  status: queued',
+    '- id: claude',
+    '  name: Claude',
+    '  website: https://claude.com',
+    '  category: ai',
+    '  source: own',
+    '  status: queued',
+    '',
+    '# Wikidata.',
+    '- id: hulu',
+    '  name: Hulu',
+    '  website: https://www.hulu.com',
+    '  category: streaming',
+    '  source: wikidata',
+    '  status: queued',
+    '',
+  ].join('\n');
+
+  it('changes one entry, keeping the rest of the file and Prettier’s layout', async () => {
+    const done = withQueueStatus(text, 'bitdefender', { status: 'done', date: '2026-11-02' });
+    expect(done).toBe(
+      text.replace(
+        '  status: queued\n- id: claude',
+        '  status: done\n  date: 2026-11-02\n- id: claude',
+      ),
+    );
+    const left = withQueueStatus(done ?? '', 'claude', {
+      status: 'unreadable',
+      date: '2026-11-02',
+      note: 'Its prices are on a page that shows the bot an error: a person reads it',
+    });
+    expect(left).toContain(
+      "  status: unreadable\n  date: 2026-11-02\n  note: 'Its prices are on a page that shows the bot an error: a person reads it'\n\n# Wikidata.",
+    );
+    expect(queueFileSchema.parse(parse(left ?? ''))).toHaveLength(3);
+    expect(await format(left ?? '', { parser: 'yaml', printWidth: 100, singleQuote: true })).toBe(
+      left,
+    );
+    // Its status set again, not added twice.
+    expect(
+      withQueueStatus(left ?? '', 'claude', { status: 'queued', date: '2026-11-09' })?.match(
+        /status:/g,
+      ),
+    ).toHaveLength(3);
+  });
+
+  it('says when the entry isn’t there', () => {
+    expect(
+      withQueueStatus(text, 'netflix', { status: 'done', date: '2026-11-02' }),
+    ).toBeUndefined();
   });
 });

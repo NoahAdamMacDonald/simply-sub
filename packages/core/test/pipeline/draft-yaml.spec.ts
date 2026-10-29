@@ -6,7 +6,7 @@ import disneyPlus from '../../../../data/providers/disney-plus.yaml?raw';
 import mullvad from '../../../../data/providers/mullvad.yaml?raw';
 import netflix from '../../../../data/providers/netflix.yaml?raw';
 import proton from '../../../../data/providers/proton.yaml?raw';
-import { draftYaml } from '../../src';
+import { draftYaml, draftYamlList } from '../../src';
 
 /** Prettier as the repository runs it (.prettierrc). */
 const prettier = (text: string) =>
@@ -54,6 +54,19 @@ describe('draftYaml', () => {
       ].join('\n'),
     );
     expect(parse(written)).toEqual(value);
+    expect(await prettier(written)).toBe(written);
+  });
+});
+
+describe('draftYamlList', () => {
+  it('writes entries to add at the end of a list file, as Prettier leaves them', async () => {
+    const written = draftYamlList([
+      { id: 'inet', name: 'Inet', website: 'https://www.inet.se' },
+      { id: 'amazon', name: 'Amazon', website: 'https://www.amazon.com', domains: ['amazon.ca'] },
+    ]);
+    expect(written).toBe(
+      '- id: inet\n  name: Inet\n  website: https://www.inet.se\n- id: amazon\n  name: Amazon\n  website: https://www.amazon.com\n  domains: [amazon.ca]\n',
+    );
     expect(await prettier(written)).toBe(written);
   });
 });
