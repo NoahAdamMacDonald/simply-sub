@@ -16,10 +16,6 @@
   font: var(--mat-sys-title-medium);
 }
 
-ss-empty-state a {
-  color: var(--ss-accent-text);
-}
-
 // A section per severity, in P14's order, its heading with the section's colour dot.
 // Applied suggestions waiting in the draft (M8.4): what that means, and Review and save, which wraps under it on a
 // phone.
