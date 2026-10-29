@@ -316,6 +316,15 @@ describe('SubCard', () => {
     expect(shown('ss-status-badge')).toBe('Inactive · 1 list');
   });
 
+  it('says which bundle the user has a provider through (M7.11)', async () => {
+    const bundled = {
+      ...listItem('crave.premium', work),
+      source: { kind: 'bundle' as const, bundleId: 'bundle.netflix-crave' },
+    };
+    await show(resultFor('crave', {}, [bundled]));
+    expect(shown('ss-status-badge')).toBe('Active · 1 list · in Netflix and Crave');
+  });
+
   it('names the lists that have the provider on hover, and opens a menu of them', async () => {
     fixture.componentRef.setInput(
       'listNames',

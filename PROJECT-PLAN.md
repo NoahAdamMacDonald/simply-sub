@@ -212,6 +212,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M7.7 | Budget bars' colour scale and warnings you can dismiss (added 2026-10-28, the feedback after M9): every budget bar's fill is one colour, changing gradually from green, to yellow exactly at the budget, to red at 150% (core's `budgetBar.towardYellow` and `towardRed`, the user's choice), the Calendar's by the month's total against the budget; the budget warnings' ✕ hides one until its period or budget changes (`settings.dismissedBudgetWarnings`, core's `budgetWarningKey`), and "Show 1 hidden budget warning" brings them back (BLUEPRINT §8.1.1, §14) | A bar's colour moves gradually from green to yellow at its budget and on to red; a dismissed warning stays hidden after a reload and comes back for a new month or budget |
 | M7.8 | The Calendar, still and reachable (added 2026-10-28, the feedback after M9): from 960 px a column of its own beside the grid, for the day's panel and Upcoming, so opening a day never moves the grid; under 600 px a compact grid (dates and dots) above the agenda, any day opening in the bottom sheet; a back button to the page it was opened from, named by it, but not from the sidebar (BLUEPRINT §14) | The grid keeps its width when a day opens; a phone can open any day from the grid; from List view's mini calendar, "← Work Related" goes back |
 | M7.9 | The Calendar's JSON and Text, and its own calendar (added 2026-10-28, the feedback after M9): Export to file adds JSON (core's `paymentsFile`) and Text (`paymentsText`); each event lists its tags and has them as `CATEGORIES`; Sync calendar's steps make a Simply Sub calendar first in Google, Apple and Proton Calendar, since they colour a calendar and not an event (BLUEPRINT §11.2, §11.3, §14) | Both files download with the lists shown; the steps import into a calendar of its own |
+| M7.11 | Statuses you can see (added 2026-10-29, the feedback after M3; §3.3): a manual renewal says "Manual · renew by Nov 29"; an item a bundle, suite or extra member replaces says what it becomes ("Moves to Netflix and Crave on Nov 15", "Extra member on Mine (Netflix Standard) from Nov 20"; core's `itemReplacements`); and Search says which bundle a provider is in ("Active · 1 list · in Netflix and Crave"; `ProviderActivity.bundleIds`) (P4, P8) | Proton Family with auto-renew off shows "Manual"; a bundle applied on Optimizations, saved, shows on each plan it replaces; a provider in a listed bundle shows the bundle's name on Search |
 
 ### M8 — Optimizer & bot
 | ID | Task | Done when |
@@ -348,8 +349,10 @@ Users rank **rank keys**. Each one points to one rankable option of a feature:
 | Active | Today is inside a paid period (ongoing: on or after `startDate` and before `endDate`; limited: from a window's start through its end) | Green dot, "Active" |
 | Inactive | In a list but not active today | Amber dot, "Inactive", plus "Active from Sep 10, 2026" when a future window or start date exists |
 | Not listed | (Search only) The provider isn't in any list | Grey dot, "Not listed" |
-| Ending | `endDate` is within the next 30 days | Small "Ends Nov 3" badge |
-| Manual renewal | The next charge is `manual` | Small ↻ "Renew by Nov 3" badge |
+| Ending | `endDate` is within the next 30 days | Small "Ends Nov 3" badge; with a renewal before it, one badge: "Renews Nov 1, then ends Nov 3" (M6.19) |
+| Manual renewal | The next charge is `manual` | Small ↻ "Manual · renew by Nov 3" badge (the word since M7.11) |
+| Replaced | (List view) It ends on a day when, in the same list, a bundle or suite that includes it has started, or an extra member joins another account of its provider (core's `itemReplacements`, M7.11) | Small "Moves to Netflix and Crave on Nov 15", or "Extra member on Mine (Netflix Standard) from Nov 20", in place of the renewal and end |
+| In a bundle | (Search only) A bundle in a list includes one of the provider's plans (`ProviderActivity.bundleIds`, M7.11) | "Active · 1 list · in Netflix and Crave" |
 
 In Search the status is per provider, across all lists ("Active · 2 lists").
 

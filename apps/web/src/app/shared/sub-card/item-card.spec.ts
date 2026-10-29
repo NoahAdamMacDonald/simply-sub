@@ -278,7 +278,7 @@ describe('ItemCard', () => {
         Array.from(element.querySelectorAll('ss-status-badge .badge')).map((badge) =>
           text(badge)?.replace('autorenew', '').trim(),
         ),
-      ).toEqual(['Renew by Nov 10, then ends Nov 20']);
+      ).toEqual(['Manual · renew by Nov 10, then ends Nov 20']);
     });
 
     it('has no Wrong date? for Specific dates, which have no anchor to move', async () => {

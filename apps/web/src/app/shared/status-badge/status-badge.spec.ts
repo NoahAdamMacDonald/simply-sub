@@ -30,7 +30,7 @@ describe('StatusBadge', () => {
     {
       status: { kind: 'active', manual: true },
       nextCharge: '2026-11-03',
-      text: 'Active Renew by Nov 3',
+      text: 'Active Manual · renew by Nov 3',
     },
     // One that renews by itself says when (M6.12); one that starts later doesn't renew yet.
     {
@@ -47,7 +47,7 @@ describe('StatusBadge', () => {
     {
       status: { kind: 'active', endsOn: '2026-11-28', manual: true },
       nextCharge: '2026-11-12',
-      text: 'Active Renew by Nov 12, then ends Nov 28',
+      text: 'Active Manual · renew by Nov 12, then ends Nov 28',
     },
     {
       status: { kind: 'active', endsOn: '2026-11-28', manual: false },
@@ -61,6 +61,13 @@ describe('StatusBadge', () => {
     },
   ])('$text', async ({ status, nextCharge, text }) => {
     expect(await shown(status, nextCharge)).toBe(text);
+  });
+
+  it('says what takes over in place of the renewal and the end (M7.11)', async () => {
+    fixture.componentRef.setInput('replacement', 'Moves to Netflix and Crave on Nov 15');
+    expect(await shown({ kind: 'active', endsOn: '2026-11-15', manual: false }, '2026-11-12')).toBe(
+      'Active Moves to Netflix and Crave on Nov 15',
+    );
   });
 
   it('colours the dot by the status, and hides it from screen readers', async () => {

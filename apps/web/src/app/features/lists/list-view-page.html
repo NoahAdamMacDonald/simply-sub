@@ -221,6 +221,7 @@
                     [tags]="tagsOf(resolved)"
                     [share]="totals()?.shares?.get(resolved.item.id)"
                     [onCard]="onCard().get(resolved.item.id)"
+                    [replacement]="replacements().get(resolved.item.id)"
                     (pinToggle)="pin(resolved, $event)"
                   />
                 </li>
@@ -241,6 +242,7 @@
                     [tags]="tagsOf(resolved)"
                     [share]="totals()?.shares?.get(resolved.item.id)"
                     [onCard]="onCard().get(resolved.item.id)"
+                    [replacement]="replacements().get(resolved.item.id)"
                     (pinToggle)="pin(resolved, $event)"
                   />
                 </li>

@@ -16,6 +16,10 @@
         @if (result().activity; as activity) {
           <span aria-hidden="true"> · </span>
           <ss-in-lists [count]="activity.lists" [lists]="inLists()" [provider]="provider().name" />
+          <!-- A provider the user has through a bundle says which (M7.11). -->
+          @if (inBundles(); as bundles) {
+            <span class="in-bundles"><span aria-hidden="true"> · </span>in {{ bundles }}</span>
+          }
         }
       </ss-status-badge>
       @if (rankCounts(); as counts) {

@@ -18,6 +18,8 @@ export interface ProviderActivity {
   listIds: string[];
   /** The plans of it in the lists, each active when an item with it is, in the order the items came. */
   plans: { planId: string; kind: ItemActivity['kind'] }[];
+  /** The bundles in the lists that include one of its plans (M7.11): Search says it's "in" them. */
+  bundleIds?: string[];
 }
 
 /**
@@ -34,6 +36,7 @@ export function providerActivity(
     {
       lists: Set<string>;
       plans: Map<string, ItemActivity['kind']>;
+      bundles: Set<string>;
       active: boolean;
       from?: IsoDate;
     }
@@ -52,9 +55,13 @@ export function providerActivity(
       const providerId = planId.slice(0, planId.indexOf('.'));
       let provider = found.get(providerId);
       if (!provider) {
-        found.set(providerId, (provider = { lists: new Set(), plans: new Map(), active: false }));
+        found.set(
+          providerId,
+          (provider = { lists: new Set(), plans: new Map(), bundles: new Set(), active: false }),
+        );
       }
       provider.lists.add(item.listId);
+      if (source.kind === 'bundle') provider.bundles.add(source.bundleId);
       if (kind === 'active' || !provider.plans.has(planId)) {
         provider.plans.set(planId, kind);
       }
@@ -65,7 +72,7 @@ export function providerActivity(
     }
   }
   return new Map(
-    [...found].map(([id, { lists, plans, active, from }]) => [
+    [...found].map(([id, { lists, plans, bundles, active, from }]) => [
       id,
       {
         kind: active ? 'active' : 'inactive',
@@ -73,6 +80,7 @@ export function providerActivity(
         lists: lists.size,
         listIds: [...lists],
         plans: [...plans].map(([planId, kind]) => ({ planId, kind })),
+        ...(bundles.size > 0 && { bundleIds: [...bundles] }),
       },
     ]),
   );

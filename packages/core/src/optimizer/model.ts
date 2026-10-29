@@ -1,5 +1,6 @@
 import type { FxRates } from '../catalog/convert';
 import { pickPrice, type PickedPrice, type PriceContext } from '../catalog/pick-price';
+import { inclusionsOf, planOf } from '../catalog/plan-lookup';
 import type { Plan } from '../catalog/provider';
 import type { CatalogData, SnapshotProvider } from '../catalog/snapshot';
 import type { IsoDate } from '../dates/iso-date';
@@ -782,35 +783,6 @@ class ModelBuilder {
     }
     return number;
   }
-}
-
-/** A plan by its id (<provider id>.<slug>), with its provider. */
-function planOf(
-  catalog: Pick<CatalogData, 'providers'>,
-  planId: string,
-): { provider: SnapshotProvider; plan: Plan } | undefined {
-  const provider = catalog.providers.find(({ id }) => id === planId.slice(0, planId.indexOf('.')));
-  const plan = provider?.plans.find(({ id }) => id === planId);
-  return provider && plan ? { provider, plan } : undefined;
-}
-
-/**
- * Every plan or provider a suite includes, through the plans it includes too (Duo includes Unlimited, which includes
- * the Plus plans).
- */
-function inclusionsOf(plan: Plan, catalog: CatalogData): Set<string> {
-  const found = new Set<string>();
-  const queue = [plan];
-  while (queue.length > 0) {
-    const listed = queue.shift()?.features['includes-subscription'];
-    for (const id of Array.isArray(listed) ? listed : []) {
-      if (found.has(id) || id === plan.id) continue;
-      found.add(id);
-      const included = planOf(catalog, id)?.plan;
-      if (included) queue.push(included);
-    }
-  }
-  return found;
 }
 
 /** The item on another plan or period from `on`, its next charge: its price override goes, being for the old one. */

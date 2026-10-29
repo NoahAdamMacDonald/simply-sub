@@ -25,6 +25,11 @@ export class StatusBadge {
   readonly status = input.required<BadgeStatus>();
   /** The date of the item's next charge: when it renews, or for a manual renewal what it must be renewed by. */
   readonly nextCharge = input<IsoDate>();
+  /**
+   * What takes over when it ends (M7.11): "Moves to Netflix and Crave on Nov 15", "Extra member on Mine (Netflix
+   * Standard) from Nov 20". It replaces the renewal's and the end's badge.
+   */
+  readonly replacement = input<string>();
 
   protected readonly text = computed(() => {
     const status = this.status();
@@ -47,10 +52,15 @@ export class StatusBadge {
   protected readonly badge = computed(() => {
     const status = this.status();
     if (status.kind === 'not-listed') return undefined;
+    const replacement = this.replacement();
+    if (replacement) return { manual: false, text: replacement };
     const next = this.next();
     const ends = this.endsOn();
     const then = ends ? `, then ends ${ends}` : '';
-    if (status.manual && next) return { manual: true, text: `Renew by ${dayText(next)}${then}` };
+    // "Manual" in words, beside the ↻ (M7.11).
+    if (status.manual && next) {
+      return { manual: true, text: `Manual · renew by ${dayText(next)}${then}` };
+    }
     if (status.kind === 'active' && next) {
       return {
         manual: false,

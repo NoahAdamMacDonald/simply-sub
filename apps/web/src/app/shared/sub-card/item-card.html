@@ -23,6 +23,7 @@
         class="status"
         [status]="status()"
         [nextCharge]="resolved().nextCharge?.date"
+        [replacement]="replacement()"
       />
       @if (tags().length > 0) {
         <ul class="tags" aria-label="Tags">

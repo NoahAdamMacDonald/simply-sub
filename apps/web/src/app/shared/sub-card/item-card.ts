@@ -61,6 +61,8 @@ export class ItemCard {
   readonly share = input<number>();
   /** What it costs a month with tax, and after its card's cash back and FX fees, when it's paid with one (M9.4). */
   readonly onCard = input<{ card: string; month: ShownAndSpoken }>();
+  /** What takes over when it ends, in words (M7.11): List view finds it in the list. */
+  readonly replacement = input<string>();
   /** 📌: whether the item should now be pinned. */
   readonly pinToggle = output<boolean>();
 
