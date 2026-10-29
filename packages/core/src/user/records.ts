@@ -131,7 +131,7 @@ export function unopenedRecord(table: UserTable, row: unknown): RejectedRecord {
  * Describes a record by its key and its issues' paths and codes. Never the messages: Zod's can quote the data
  * ('Unrecognized key: "…"'), and so can a duplicate check's.
  */
-function describeRejected(
+export function describeRejected(
   table: UserTable,
   row: unknown,
   issues: readonly z.core.$ZodIssue[],

@@ -523,10 +523,17 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   logged by table and key only); a newer `schemaVersion` stops sync on this device; an older one is migrated as
   backups are.
 - **Acceptance**
-  - [ ] Tests: newer wins, deletions carry, ties agree, shared settings by their own time, per-device settings never
+  - [x] Tests: newer wins, deletions carry, ties agree, shared settings by their own time, per-device settings never
         leave the device, invalid records left out, a newer version refused
-  - [ ] Tests: the words round-trip and a changed word fails its checksum; known seeds give known chain ids; a wrong
+  - [x] Tests: the words round-trip and a changed word fails its checksum; known seeds give known chain ids; a wrong
         key or a changed byte opens nothing
+- **As built:** core's `user/sync.ts` (`syncTables`, `sharedSettingsFields`, `sharedSettings`, `withSharedSettings`,
+  `touchesSharedSettings`, `readSyncCopy`, `mergeSync`; the copy holds the tables under `data`, as a backup does, so
+  its migrations apply), the settings' `sharedUpdatedAt` (the backup's version 3), and the crypto module's
+  `sync-crypto.ts` (`@scure/bip39` 2.4.0: the words, `completeWord`; `syncKeys`, `sealCopy`, `openCopy`). A tie is
+  settled by the records' canonical JSON (keys sorted), the same on every device; a device with nothing new writes
+  once a day, to move its "last synced" on. Tested in core's `sync.spec.ts` (BIP39's and Node's HKDF known answers in
+  `sync-crypto.spec.ts`). Nothing imports the crypto yet: M10.9's lazy sync chunk will.
 
 **M10.8 — Sync, the API** (BLUEPRINT §5.2, §11.4)
 - `GET /sync/:chain` (`Authorization: Bearer <auth secret>`): the sealed payload (`application/octet-stream`) with

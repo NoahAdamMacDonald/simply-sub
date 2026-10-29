@@ -139,7 +139,7 @@ describe('encrypted backups', () => {
   });
 
   it('binds the header to the ciphertext', () => {
-    expect(backupAssociatedData(encryptedBackup(envelope))).toBe('simply-sub:2');
+    expect(backupAssociatedData(encryptedBackup(envelope))).toBe('simply-sub:3');
   });
 });
 

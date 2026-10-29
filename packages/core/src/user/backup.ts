@@ -23,9 +23,10 @@ export const backupApp = 'simply-sub';
 
 /**
  * This version of the file's shape. A file from an older version is migrated as it's read (migrateBackupPayload).
- * Version 2 (M8.2) adds the dismissed optimizer suggestions.
+ * Version 2 (M8.2) adds the dismissed optimizer suggestions; version 3 (M10.7) the settings' `sharedUpdatedAt`, which
+ * an older file leaves out, so it needs no step. A synced copy (sync.ts) carries the same version.
  */
-export const backupSchemaVersion = 2;
+export const backupSchemaVersion = 3;
 
 /** The tables a backup holds, in the order they're written back. */
 export const backupTables = [

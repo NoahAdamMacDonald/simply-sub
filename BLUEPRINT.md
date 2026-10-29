@@ -3005,6 +3005,25 @@ None.
   background chunk both take the theme on screen (`core/theme/title-bar.ts`), so an installed app chosen dark on a
   light OS gets a dark title bar.
 - **Bundle** (M10.6): 499.14 kB initial (499.00 before): the install offer's listener.
+- **Sync's copy** (M10.7, core's `user/sync.ts`): `{ schemaVersion, settings, data, devices }`, the tables under
+  `data` as in a backup, so a copy from an older app is migrated by the backup's steps, and one from a newer app stops
+  sync on the device (`kind: 'newer'`). Each record is checked by its schema as it's read; one that fails is left out
+  and described by its table, key and issues' paths and codes, never its values. `mergeSync` takes the later
+  `updatedAt` per record (a soft delete moves it on, so deletions carry), settles a tie by the records' canonical JSON
+  (keys sorted), the same on every device, and keeps a record only one side has. It returns the next version, the
+  records this device must write, the shared settings to take and whether to send; a device with nothing new still
+  sends once a day, to move its "last synced" on (and the chain's age on the server).
+- **Shared settings** (M10.7): country, subdivision, currency, the tax rate, both budgets, Search's two defaults and
+  the dismissed budget warnings, merged as one by the settings' new `sharedUpdatedAt` (`updatedAt` stands in until a
+  shared one changes), so a theme changed here later doesn't outweigh a budget set on another device. The theme, the
+  Calendar's shown lists, Home's price changes and the app lock never leave the device: the copy's settings schema is
+  strict. The field made the backup's `schemaVersion` 3; an older file needs no step.
+- **Sync's keys** (M10.7, the crypto module's `sync-crypto.ts`): the code is 32 random bytes as BIP39's 24 English
+  words (`@scure/bip39` 2.4.0, exact, which brings `@noble/hashes` 2.4.0); HKDF-SHA256 with an empty salt and the
+  infos "simply-sub sync: chain id" (16 bytes), "…: auth secret" (32) and "…: copy key" (AES-256-GCM, not
+  extractable); the ids and secrets as unpadded base64url. A sealed copy is a format byte (1), a random 12-byte IV and
+  the gzipped JSON (`CompressionStream`) sealed with the key, bound to "simply-sub sync 1:<chain id>". The tests pin
+  the words to BIP39's own vectors and the derivations to Node's `hkdfSync`.
 - **Checks** (M10.6): web 720 tests, core 1773, API 268 (the manifest's 4), bot 60. Under `wrangler dev`:
   `check-m10-offline-sync.cjs` (69, with two more builds), `check-catalog.cjs` (41; its Catalog card's button and
   message now scoped, since the App group has a Check for updates of its own when the worker runs, Playwright's
