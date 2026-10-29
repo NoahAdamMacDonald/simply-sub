@@ -14,6 +14,8 @@ import { MatSelectHarness } from '@angular/material/select/testing';
 import { Router, provideRouter } from '@angular/router';
 import type { Settings } from '@simply-sub/core';
 import { CatalogStore, type CatalogCheckOutcome } from '../../core/catalog/catalog-store';
+import { AppUpdates, type AppCheckOutcome } from '../../core/pwa/app-updates';
+import { installOffer, installedHere, type InstallPromptEvent } from '../../core/pwa/install-offer';
 import { SettingsStore } from '../../core/settings/settings-store';
 import {
   plantRows,
@@ -42,8 +44,15 @@ class FakeCatalogStore {
   readonly check = vi.fn(async (): Promise<CatalogCheckOutcome> => 'current');
 }
 
+/** AppUpdates as a development build has it, with no worker, until a test gives it one. */
+class FakeAppUpdates {
+  readonly available = signal(false);
+  readonly check = vi.fn(async (): Promise<AppCheckOutcome> => 'current');
+}
+
 describe('SettingsPage', () => {
   let catalog: FakeCatalogStore;
+  let appUpdates: FakeAppUpdates;
   let storage: TestStorage;
   let fixture: ComponentFixture<SettingsPage>;
   let loader: HarnessLoader;
@@ -51,11 +60,13 @@ describe('SettingsPage', () => {
   beforeEach(async () => {
     storage = testStorage();
     catalog = new FakeCatalogStore();
+    appUpdates = new FakeAppUpdates();
     await plantRows(storage.indexedDB, 'settings', [ontario]);
     TestBed.configureTestingModule({
       providers: [
         storage.providers,
         { provide: CatalogStore, useValue: catalog },
+        { provide: AppUpdates, useValue: appUpdates },
         provideRouter([]),
         { provide: MATERIAL_ANIMATIONS, useValue: { animationsDisabled: true } },
       ],
@@ -69,6 +80,8 @@ describe('SettingsPage', () => {
   afterEach(() => {
     localStorage.clear();
     document.documentElement.removeAttribute('data-theme');
+    installOffer.set(undefined);
+    installedHere.set(false);
   });
 
   const text = () => (fixture.nativeElement as HTMLElement).textContent ?? '';
@@ -260,6 +273,77 @@ describe('SettingsPage', () => {
       expect(catalog.check).toHaveBeenCalledTimes(1);
       expect(message()?.textContent).toBe(expected);
     });
+  });
+
+  describe('the App group (M10.6)', () => {
+    const appSection = (id: string) =>
+      (fixture.nativeElement as HTMLElement).querySelector(
+        `section[aria-labelledby="${id}-heading"]`,
+      );
+
+    it('is on the page and in On this page, with Install and Version', () => {
+      expect(appSection('app')?.querySelector('h2')?.textContent).toBe('App');
+      const links = [
+        ...(fixture.nativeElement as HTMLElement).querySelectorAll(
+          'nav[aria-label="On this page"] a',
+        ),
+      ].map((link) => link.textContent?.trim());
+      expect(links.slice(-3)).toEqual(['App', 'Install', 'Version']);
+    });
+
+    it('offers Install when the browser does, which shows its dialog once', async () => {
+      const prompt = vi.fn(async () => ({ outcome: 'accepted' as const }));
+      installOffer.set(
+        Object.assign(new Event('beforeinstallprompt'), { prompt }) as InstallPromptEvent,
+      );
+      await fixture.whenStable();
+      await (
+        await loader.getHarness(MatButtonHarness.with({ text: /Install Simply Sub$/ }))
+      ).click();
+      expect(prompt).toHaveBeenCalledTimes(1);
+      expect(appSection('install')?.textContent).toContain(
+        'Safari on a Mac: File, then Add to Dock.',
+      );
+
+      installedHere.set(true);
+      await fixture.whenStable();
+      expect(appSection('install')?.textContent).toContain(
+        'Installed: open Simply Sub from your apps, home screen or taskbar.',
+      );
+    });
+
+    it('gives each browser’s steps when there’s no offer', () => {
+      const install = appSection('install')?.textContent ?? '';
+      expect(install).toContain('Safari on an iPhone or iPad: Share, then Add to Home Screen.');
+      expect(install).toContain('Firefox on Android: the menu, then Install.');
+      expect(appSection('install')?.querySelector('button')).toBeNull();
+    });
+
+    it('says a development build has no version, and has nothing to check with', () => {
+      const version = appSection('version')?.textContent ?? '';
+      expect(version).toContain('A development build');
+      expect(version).toContain('Each visit loads the latest version.');
+      expect(appSection('version')?.querySelector('button')).toBeNull();
+    });
+
+    it.each([
+      ['current', 'You have the latest version.'],
+      ['ready', 'A new version is ready: reload to use it.'],
+      ['offline', "You're offline. Try again when you're back online."],
+      ['failed', "Couldn't check for updates. Try again later."],
+    ] as const)(
+      'checks for a new version and says what it found: %s',
+      async (outcome, expected) => {
+        appUpdates.available.set(true);
+        appUpdates.check.mockResolvedValue(outcome);
+        await fixture.whenStable();
+        appSection('version')?.querySelector('button')?.click();
+        await fixture.whenStable();
+        expect(appUpdates.check).toHaveBeenCalledTimes(1);
+        expect(appSection('version')?.querySelector('[role="status"]')?.textContent).toBe(expected);
+        expect(appSection('version')?.textContent).not.toContain('Each visit loads');
+      },
+    );
   });
 
   it('goes back Home when Settings was the first page opened', async () => {

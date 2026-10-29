@@ -2174,6 +2174,9 @@ Settings → Build*). The settings as they are now:
   - Checked in Edge on the production build under `wrangler dev` (which applies `_headers`): every page, in-app
     navigation, both themes, the drawer and the error snackbar run with no CSP or Trusted Types violations, and
     the beacon, inserted the way Cloudflare does, loads and sends its report.
+- **The app's version** (M10.6): apps/web's `npm run build` is `scripts/build.mjs`, which runs `ng build` with the
+  commit being built (Workers Builds' `WORKERS_CI_COMMIT_SHA`, or the checkout's) and the day as two string defines.
+  Settings shows them ("Version fd54aac, built Oct 29, 2026").
 - **The service worker's kill switch** (M10.5): if a broken worker ever has to leave every browser, deploy a build
   whose `ngsw-worker.js` is Angular's `safety-worker.js` (the build writes both; copy one over the other in
   `apps/api/scripts/copy-web-build.mjs`, through a pull request like any change). Each browser's next check installs
@@ -2859,7 +2862,7 @@ written and tested once. It uses WebCrypto (`crypto.subtle`), available in every
 - [ ] Encrypted device sync
 - [ ] "Report wrong price" / "Suggest a service"
 - [ ] Broaden regional price coverage (the schema and UI handle all regions from Phase 1)
-- [ ] PWA (installable, offline): offline start since M10.5
+- [x] PWA (installable, offline): offline start in M10.5, the update prompt and install in M10.6
 
 ---
 
@@ -2970,6 +2973,43 @@ None.
   (#76's Claude, Bitdefender and Xbox Game Pass: 12 services for a Canadian, 10 priced in CAD, the price slider to $300
   by $10) and the catalog's behind the Lists page's heading (#77). `calendar-page.scss` was 73 bytes over its 4 kB
   budget since M10.4: a day's button and an agenda payment now share their hover and focus rules (on PR #78).
+- **The update prompt** (M10.6): `AppUpdates` (`core/pwa/app-updates.ts`) takes the worker's `SwUpdate` in the
+  background chunk. A version ready brings "A new version of Simply Sub is ready." [Reload] ("Reloading locks the
+  app." added when the lock is on), and a worker that can't serve the app "Simply Sub needs to reload to keep
+  working."; Reload just reloads, since the worker gives a new page load its latest version. A tab shown an hour after
+  the last check asks the worker again (the catalog's rule, `catalogCheckDue`), and so does Settings.
+- **A page load runs a new version before the worker knows of it** (M10.6): with `freshness`, a page load after a
+  deploy fetches the new `index.html`, whose files the worker passes to the network, so the page already runs the new
+  version when the worker finds it a few seconds later. On a version ready, the app reads that version's `ngsw.json`
+  past the worker (`?ngsw-bypass`); when its own main script is one of the files, it moves onto the version quietly
+  (`activateUpdate`) instead of asking for a reload it doesn't need. Only a tab that's really behind is prompted. A
+  version the worker has held before isn't new to it: serving the previous build again brings no prompt, so the check
+  uses three builds.
+- **The app's version** (M10.6): two string defines from `apps/web/scripts/build.mjs` (section 7.6). One define holding
+  an object cost 2 kB of the initial bundle, which esbuild hoisted into a shared chunk; strings are inlined where
+  they're read, in Settings' chunk.
+- **Install** (M10.6): Chromium's `beforeinstallprompt` comes once a page load, early, so `keepInstallOffer()`
+  (`core/pwa/install-offer.ts`) listens from the start: two signals and two listeners, the only part of M10.6 in the
+  initial bundle. Settings' Install shows the browser's dialog once; other browsers get their steps. Edge offers no
+  install to a private window (CDP's `in-incognito`), which every new Playwright context is, so the check installs in a
+  profile of its own.
+- **The icon** (M10.6): `scripts/app-icons.ts` (`npm run app:icons`) draws the mark, an S of two bowls with round ends,
+  white on the accent, reading both colours from `_tokens.scss`, and writes `app-icons/icon.svg`, PNGs of 192 and
+  512 px, a maskable 512 (the S at 82%, inside the safe zone), a 180 px `apple-touch-icon.png` (square: iOS rounds the
+  corners) and `favicon.ico` (16, 32 and 48 px PNGs in an ICO the script assembles; Angular's 15 kB default is gone).
+  `index.html` links the ICO for 32 px and the SVG, as browsers prefer. The owner chose it on 2026-10-29 from a review
+  sheet (the tile at 160 to 16 px, the maskable icon in a circle and a squircle, the iOS icon, on light and dark), over
+  the same S in burgundy on a white tile.
+- **The title bar's colour** (M10.6): `index.html` has a `theme-color` meta per OS scheme with the top bar's colour
+  (`--ss-sidebar-bg`), which an API test compares with the tokens, as it does the manifest's colours. From the
+  background chunk both take the theme on screen (`core/theme/title-bar.ts`), so an installed app chosen dark on a
+  light OS gets a dark title bar.
+- **Bundle** (M10.6): 499.14 kB initial (499.00 before): the install offer's listener.
+- **Checks** (M10.6): web 720 tests, core 1773, API 268 (the manifest's 4), bot 60. Under `wrangler dev`:
+  `check-m10-offline-sync.cjs` (69, with two more builds), `check-catalog.cjs` (41; its Catalog card's button and
+  message now scoped, since the App group has a Check for updates of its own when the worker runs, Playwright's
+  blocked registration included) and `csp-check.cjs` (8); on `ng serve`, `check-settings.cjs` (81) and
+  `check-shell.cjs` (51).
 
 **Resolved (2026-10-29, M10.1–M10.4, as built)**
 - **The year view** (M10.4): `?view=year` keeps the month, so Month goes back to it; Today goes to this year. Each

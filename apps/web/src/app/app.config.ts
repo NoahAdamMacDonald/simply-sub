@@ -15,6 +15,7 @@ import { CatalogStore } from './core/catalog/catalog-store';
 import { FxStore } from './core/fx/fx-store';
 import { GlobalErrorHandler } from './core/errors/global-error-handler';
 import { AutoLock } from './core/lock/auto-lock';
+import { keepInstallOffer } from './core/pwa/install-offer';
 import { FirstRun } from './core/settings/first-run';
 import { ThemeService } from './core/theme/theme-service';
 
@@ -33,13 +34,14 @@ export const appConfig: ApplicationConfig = {
     ),
     // Start the theme at boot, so 'system' follows the OS even before a toggle is on screen, the first-run check,
     // which opens the settings on the way, the catalog, which shows its cached files and checks for a new version, the
-    // exchange rates, and the app lock's idle timer.
+    // exchange rates, the app lock's idle timer, and the browser's offer to install the app, which comes early, once.
     provideAppInitializer(() => {
       inject(ThemeService);
       inject(FirstRun);
       inject(CatalogStore);
       inject(FxStore);
       inject(AutoLock);
+      keepInstallOffer();
       // Once the app has shown, from a chunk of its own: the live calendar's updates and the service worker.
       const injector = inject(EnvironmentInjector);
       void inject(ApplicationRef)

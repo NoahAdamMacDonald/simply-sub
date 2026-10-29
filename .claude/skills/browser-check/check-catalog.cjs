@@ -113,8 +113,9 @@ const catalogSection = (page) =>
   page.locator('section.card', { has: page.getByRole('heading', { name: 'Catalog' }) });
 const catalogText = async (page) =>
   ((await catalogSection(page).textContent()) ?? '').replace(/\s+/g, ' ').trim();
+// The Catalog card's: the App group has a [Check for updates] of its own (M10.6), shown when the app has a worker.
 const checkMessage = async (page) =>
-  ((await page.locator('.check-message').textContent()) ?? '').trim();
+  ((await catalogSection(page).locator('.check-message').textContent()) ?? '').trim();
 const snackbarText = async (page) => {
   const bar = page.locator('.mat-mdc-snack-bar-container');
   return (await bar.count()) > 0 ? ((await bar.first().textContent()) ?? '').trim() : '';
@@ -199,7 +200,7 @@ async function deployVersion(context, real, version) {
 }
 
 async function checkButton(page) {
-  await page.getByRole('button', { name: 'Check for updates' }).click();
+  await catalogSection(page).getByRole('button', { name: 'Check for updates' }).click();
 }
 
 /** Downloads, reloads, the keyboard, two tabs and a region with no file of its own (light, 1280 px). */

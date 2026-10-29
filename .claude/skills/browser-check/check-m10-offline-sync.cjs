@@ -7,12 +7,30 @@
 //   page and caches the app's files; with the network off, Home, a deep link and every sidebar page load, the catalog,
 //   the rates and the lists from IndexedDB, no CSP or Trusted Types error; none of the worker's caches holds an /api/ or /data/
 //   answer (Angular's worker passes every request through itself, so Playwright's fromServiceWorker says nothing).
-// With axe offline, and no horizontal scroll.
+// - M10.6, the update prompt and install: both theme-color metas take the theme on screen; Settings gives the build's
+//   version, and its Check for updates by Enter finds nothing new. Two more builds, each new to the worker (their
+//   browser folders, the 4th and 5th arguments: `WORKERS_CI_COMMIT_SHA=b0b0b0b node scripts/build.mjs
+//   --output-path=<dir>` in apps/web, then c0c0c0c): with the second served, the open tab's Check for updates finds it
+//   and "A new version of Simply Sub is ready." [Reload] shows, reached by Tab from Check for updates, and Enter
+//   runs it; with the third served, a page load runs it at once (freshness) and the worker, learning of it after,
+//   prompts nothing. Then, in a profile of its own (Edge offers no install to a private window): no manifest or
+//   installability error, Edge's offer as Settings' Install, and Enter on it, which an offer allows once. The script
+//   serves a build by copying it into apps/api/public/, as copy-web-build.mjs does, and puts the first build
+//   (apps/web/dist's) back after each run.
+// With axe offline and with the prompt shown, and no horizontal scroll.
 // Usage: node check-m10-offline-sync.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
+//   <second build's browser dir> <third build's browser dir>
 const fs = require('fs');
 const path = require('path');
 
-const [depsDir, outDir, baseUrl] = process.argv.slice(2);
+const [depsDir, outDir, baseUrl, secondBuild, thirdBuild] = process.argv.slice(2);
+for (const build of [secondBuild, thirdBuild]) {
+  if (!build || !fs.existsSync(path.join(build, 'ngsw.json'))) {
+    throw new Error(
+      'The 4th and 5th arguments are the browser folders of two more production builds, each with its ngsw.json.',
+    );
+  }
+}
 const { chromium } = require(path.join(depsDir, 'node_modules', 'playwright-core'));
 const axeSource = fs.readFileSync(
   path.join(depsDir, 'node_modules', 'axe-core', 'axe.min.js'),
@@ -22,6 +40,20 @@ fs.mkdirSync(outDir, { recursive: true });
 
 const WIDE = { width: 1280, height: 900 };
 const NARROW = { width: 360, height: 740 };
+
+const repo = path.resolve(__dirname, '..', '..', '..');
+const publicDir = path.join(repo, 'apps', 'api', 'public');
+const firstBuild = path.join(repo, 'apps', 'web', 'dist', 'web', 'browser');
+
+/** Serves a build under wrangler dev, as copy-web-build.mjs does: public/'s own files (_headers) stay. */
+function serve(build) {
+  for (const entry of fs.readdirSync(publicDir)) {
+    if (entry !== '_headers' && entry !== '_redirects') {
+      fs.rmSync(path.join(publicDir, entry), { recursive: true, force: true });
+    }
+  }
+  fs.cpSync(build, publicDir, { recursive: true });
+}
 const checks = [];
 const consoleProblems = [];
 function check(name, ok, detail = '') {
@@ -69,8 +101,13 @@ const network = { offline: false };
 async function newPage(browser, label, { colorScheme = 'light', viewport = WIDE } = {}) {
   // Service workers allowed: they're what's checked.
   const context = await browser.newContext({ locale: 'en-CA', colorScheme, viewport });
+  return { context, page: await prepare(context, label) };
+}
+
+/** A context's first page, with /fx answered and the console watched. */
+async function prepare(context, label) {
   await context.route('**/api/v1/fx?**', (route) => route.fulfill({ json: rates }));
-  const page = await context.newPage();
+  const page = context.pages()[0] ?? (await context.newPage());
   page.on('console', (msg) => {
     const failedOffline = network.offline && /^Failed to load resource/.test(msg.text());
     if ((msg.type() === 'error' || msg.type() === 'warning') && !failedOffline) {
@@ -78,7 +115,7 @@ async function newPage(browser, label, { colorScheme = 'light', viewport = WIDE 
     }
   });
   page.on('pageerror', (error) => consoleProblems.push(`[${label}] pageerror: ${error.message}`));
-  return { context, page };
+  return page;
 }
 
 /** Opens Home and completes the first-run dialog for Alberta. */
@@ -338,6 +375,172 @@ async function offlineStart(page, context, viewport, label) {
   );
 }
 
+/** The worker's caches of a version's app files, one per version it holds. */
+function appCaches(page) {
+  return page.evaluate(async () =>
+    (await caches.keys()).filter((name) => name.endsWith(':assets:app:cache')),
+  );
+}
+
+const versionPattern = /^Version [0-9a-f]{7}, built [A-Z][a-z]{2} \d{1,2}, \d{4}$/;
+
+/** M10.6: the title bar's colour, the version and its check, then two more builds: one prompted, one a page load runs. */
+async function updates(page, viewport, label, colorScheme) {
+  const colour = colorScheme === 'dark' ? '#000000' : '#ffffff';
+  const metas = await until('the theme-color metas', async () => {
+    const contents = await page.evaluate(() =>
+      [...document.querySelectorAll('meta[name="theme-color"]')].map((meta) => meta.content),
+    );
+    return contents.length === 2 && contents.every((content) => content === colour) && contents;
+  }).catch(() => []);
+  check(
+    `${label}: both theme-color metas take the theme's top bar colour`,
+    metas.length === 2,
+    metas.join(', '),
+  );
+
+  await page.goto(`${baseUrl}settings`);
+  const card = page.locator('section[aria-labelledby="version-heading"]');
+  const button = card.getByRole('button', { name: 'Check for updates' });
+  const line = card.locator('.check-row p');
+  const status = card.locator('[role="status"]');
+  /** What a Check for updates by Enter says, once it has an answer. */
+  const checked = async () => {
+    await button.focus();
+    await page.keyboard.press('Enter');
+    return until(
+      'the check',
+      async () => {
+        const text = (await status.innerText()).trim();
+        return text !== '' && text !== 'Checking for updates…' && text;
+      },
+      45000,
+    ).catch(() => '');
+  };
+  await button.waitFor({ timeout: 20000 });
+  const first = (await line.innerText()).trim();
+  check(`${label}: Settings gives the build's version`, versionPattern.test(first), first);
+  const latest = await checked();
+  check(
+    `${label}: Check for updates by Enter: "You have the latest version."`,
+    latest === 'You have the latest version.',
+    latest,
+  );
+  await page.locator('section[aria-labelledby="app-heading"]').screenshot({
+    path: path.join(outDir, `m10-app-group-${label}.png`),
+  });
+
+  // A second build served: this open tab's Check for updates finds it, and offers to reload into it.
+  serve(secondBuild);
+  const ready = await checked();
+  const snackBar = page.locator('.mat-mdc-snack-bar-container');
+  const prompt = await snackBar
+    .waitFor({ timeout: 20000 })
+    .then(async () => (await snackBar.innerText()).replace(/\s+/g, ' ').trim())
+    .catch(() => '');
+  check(
+    `${label}: an open tab's Check for updates finds the new version, and "A new version of Simply Sub is ready." [Reload] shows`,
+    ready === 'A new version is ready: reload to use it.' &&
+      prompt === 'A new version of Simply Sub is ready. Reload',
+    `${ready} / ${prompt}`,
+  );
+  await axeCheck(page, `${label}: Settings with the update prompt`);
+  await page.screenshot({ path: path.join(outDir, `m10-update-prompt-${label}.png`) });
+  await noSideScroll(page, viewport, `${label}: the update prompt`);
+  // By keyboard: the snackbar comes after the page's content, so Tab from Check for updates reaches Reload.
+  const stops = [];
+  for (let i = 0; i < 4 && stops.at(-1) !== 'Reload'; i++) {
+    await page.keyboard.press('Tab');
+    stops.push(await page.evaluate(() => document.activeElement?.textContent?.trim()));
+  }
+  check(
+    `${label}: Tab from Check for updates reaches Reload`,
+    stops.at(-1) === 'Reload',
+    stops.join(' → '),
+  );
+  await Promise.all([page.waitForEvent('load'), page.keyboard.press('Enter')]);
+  await button.waitFor({ timeout: 20000 });
+  const second = (await line.innerText()).trim();
+  check(
+    `${label}: Enter on Reload runs the new version`,
+    versionPattern.test(second) && second !== first,
+    `${first} → ${second}`,
+  );
+
+  // A third build served: a page load fetches its index.html (freshness), so it runs at once; the worker, learning of
+  // it a few seconds later, moves the page onto it with no prompt.
+  const before = await appCaches(page);
+  serve(thirdBuild);
+  await page.reload();
+  await button.waitFor({ timeout: 20000 });
+  const third = (await line.innerText()).trim();
+  await until(
+    'the worker to download the third build',
+    async () => (await appCaches(page)).some((name) => !before.includes(name)),
+    60000,
+  ).catch(() => undefined);
+  await sleep(3000);
+  check(
+    `${label}: a page load runs the third build at once, and no prompt follows`,
+    versionPattern.test(third) &&
+      third !== second &&
+      (await page.locator('.mat-mdc-snack-bar-container').count()) === 0,
+    `${second} → ${third}`,
+  );
+  serve(firstBuild);
+}
+
+/** M10.6's install, in a profile of its own: Edge offers no install to a private window, which a new context is. */
+async function install(label) {
+  const profile = fs.mkdtempSync(path.join(outDir, 'edge-profile-'));
+  const context = await chromium.launchPersistentContext(profile, {
+    channel: 'msedge',
+    locale: 'en-CA',
+    viewport: WIDE,
+  });
+  try {
+    const page = await prepare(context, label);
+    await firstRun(page);
+    const cdp = await context.newCDPSession(page);
+    const manifest = await cdp.send('Page.getAppManifest');
+    check(
+      `${label}: the manifest loads with no error`,
+      manifest.url === `${baseUrl}manifest.webmanifest` && manifest.errors.length === 0,
+      JSON.stringify(manifest.errors),
+    );
+    await page.goto(`${baseUrl}settings`);
+    const offer = page.getByRole('button', { name: 'Install Simply Sub' });
+    const offered = await offer.waitFor({ timeout: 20000 }).then(
+      () => true,
+      () => false,
+    );
+    const { installabilityErrors } = await cdp.send('Page.getInstallabilityErrors');
+    check(
+      `${label}: Edge offers to install the app, as Settings' Install`,
+      offered && installabilityErrors.length === 0,
+      JSON.stringify(installabilityErrors),
+    );
+    await axeCheck(page, `${label}: Settings' App group with Install`);
+    await page.locator('section[aria-labelledby="app-heading"]').screenshot({
+      path: path.join(outDir, `m10-install-${label}.png`),
+    });
+    // Enter shows Edge's own dialog, which the script can't answer; the offer is used, so the steps take its place.
+    await offer.focus();
+    await page.keyboard.press('Enter');
+    const steps = await page
+      .locator('.install-steps')
+      .waitFor({ timeout: 10000 })
+      .then(
+        () => true,
+        () => false,
+      );
+    check(`${label}: Enter on Install uses the offer, once: the steps take its place`, steps);
+  } finally {
+    await context.close();
+    fs.rmSync(profile, { recursive: true, force: true });
+  }
+}
+
 (async () => {
   await waitForServer();
   const browser = await chromium.launch({ channel: 'msedge' });
@@ -352,10 +555,12 @@ async function offlineStart(page, context, viewport, label) {
       await plant(page);
       await page.reload();
       await offlineStart(page, context, viewport, label);
+      await updates(page, viewport, label, colorScheme);
       await context.close();
     }
   }
   await browser.close();
+  await install('light wide, a profile of its own');
 
   // Offline, the catalog's check and the rates' fetch fail and say so: expected, not a problem.
   const problems = consoleProblems.filter(
@@ -371,5 +576,7 @@ async function offlineStart(page, context, viewport, label) {
   process.exit(failed === 0 ? 0 : 1);
 })().catch((error) => {
   console.error(error);
+  // Each run of updates() ends on the first build; one cut short may not have.
+  serve(firstBuild);
   process.exit(1);
 });

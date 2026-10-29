@@ -454,17 +454,31 @@ A feed takes 30 fetches a minute, so poll one every 2 s, not every 100 ms, or th
 change. The links view and the choosing view without links share the title Live calendar: wait for Make links to
 know a revoke has finished.
 
-`check-m10-offline-sync.cjs` (M10's offline and sync batch: M10.5 so far) runs under `wrangler dev` on the production
-build (`npm -w apps/web run build`, then `node apps/api/scripts/copy-web-build.mjs`), with the user database migrated,
-so the CSP, Trusted Types and the service worker are as on the live site; it answers `/fx` itself. For a Canadian in
-Alberta with Work Related (Netflix, Crave) and Family (Mullvad, in euros), in both themes at both widths: the worker
-registers through its own policy, controls the page after a reload and holds every file of `ngsw.json`'s app group;
-then, with `context.setOffline`, Home, a deep link and every sidebar page start, Work Related lists its items from the
-cached catalog under the Offline banner (axe, no horizontal scroll), and Family's Mullvad is converted with the saved
-rates (`≈`); back online, none of the worker's caches holds an `/api/` or `/data/` answer. Angular's worker answers
-every request in its scope, passing on those it doesn't keep, so Playwright's `fromServiceWorker()` can't tell what it
-cached. Offline, it answers what it never kept (an icon never shown online) with a 504: wait a second before going
-back online, or that console line arrives after.
+`check-m10-offline-sync.cjs` (M10's offline and sync batch: M10.5 and M10.6 so far) runs under `wrangler dev` on the
+production build (`npm -w apps/web run build`, then `node apps/api/scripts/copy-web-build.mjs`), with the user database
+migrated, so the CSP, Trusted Types and the service worker are as on the live site; it answers `/fx` itself. It takes
+two more builds of the same code, each new to the worker: in `apps/web`, `WORKERS_CI_COMMIT_SHA=b0b0b0b0 node
+scripts/build.mjs --output-path=<scratchpad>/build-b`, then `c0c0c0c0` into `build-c`; pass their `browser` folders
+as the 4th and 5th arguments. It serves each by copying it into `apps/api/public/` and puts `apps/web/dist`'s back,
+so don't build the app while it runs. For a Canadian in Alberta with Work Related (Netflix, Crave) and Family
+(Mullvad, in euros), in both themes at both widths:
+- M10.5: the worker registers through its own policy, controls the page after a reload and holds every file of
+  `ngsw.json`'s app group; then, with `context.setOffline`, Home, a deep link and every sidebar page start, Work Related
+  lists its items from the cached catalog under the Offline banner (axe, no horizontal scroll), and Family's Mullvad
+  is converted with the saved rates (`≈`); back online, none of the worker's caches holds an `/api/` or `/data/`
+  answer.
+- M10.6: both `theme-color` metas take the theme on screen; Settings' Version line and its Check for updates by Enter
+  ("You have the latest version."); with the second build served, Check for updates finds it and the prompt shows
+  (axe, a screenshot, no horizontal scroll), Tab from Check for updates reaches Reload, and Enter runs the new
+  version; with the third served, a page load runs it at once and no prompt follows. Then, light and wide in a
+  `launchPersistentContext` profile (Edge offers no install to a private window: CDP's `in-incognito`), CDP's
+  `Page.getAppManifest` and `Page.getInstallabilityErrors` report nothing, Settings' Install appears, and Enter on it
+  uses the offer (Edge's dialog, which the script can't answer), the steps taking its place.
+
+Angular's worker answers every request in its scope, passing on those it doesn't keep, so Playwright's
+`fromServiceWorker()` can't tell what it cached. Offline, it answers what it never kept (an icon never shown online)
+with a 504: wait a second before going back online, or that console line arrives after. A version the worker has held
+before isn't new to it, so serving the first build again brings no update: hence two more builds.
 
 `check-after-m3.cjs` (the feedback after M3: M5.13, M6.17–M6.19, M7.11, M8.5, M8.6, M9.6) checks the batch on
 `ng serve` for a Canadian in Alberta, with Streaming (Crave Premium and Disney+ Premium) and Family (two Disney+

@@ -162,7 +162,7 @@
 
         <section class="card" aria-labelledby="catalog-heading">
           <h3 id="catalog-heading" tabindex="-1">Catalog</h3>
-          <div class="catalog">
+          <div class="check-row">
             <p>{{ catalogLine() }}</p>
             <button matButton="outlined" type="button" (click)="checkForUpdates()">
               Check for updates
@@ -183,6 +183,55 @@
             Delete all data…
           </button>
         </details>
+      </section>
+
+      <section class="group" aria-labelledby="app-heading">
+        <h2 id="app-heading" tabindex="-1">App</h2>
+        @if (!runsInstalled) {
+          <section class="card" aria-labelledby="install-heading">
+            <h3 id="install-heading" tabindex="-1">Install</h3>
+            @if (installedHere()) {
+              <p class="hint">Installed: open Simply Sub from your apps, home screen or taskbar.</p>
+            } @else {
+              <p class="hint">
+                Opens Simply Sub in a window of its own, from your apps or home screen. Installed or
+                not, it works offline once you've opened it.
+              </p>
+              @if (installAvailable()) {
+                <button matButton="outlined" type="button" class="install" (click)="install()">
+                  <mat-icon>install_desktop</mat-icon>
+                  Install Simply Sub
+                </button>
+              } @else {
+                <ul class="install-steps">
+                  <li>
+                    Chrome or Edge on a computer: the install icon at the end of the address bar.
+                  </li>
+                  <li>Chrome on Android: the menu, then Add to Home screen.</li>
+                  <li>Safari on an iPhone or iPad: Share, then Add to Home Screen.</li>
+                  <li>Safari on a Mac: File, then Add to Dock.</li>
+                  <li>Firefox on Android: the menu, then Install.</li>
+                </ul>
+              }
+            }
+          </section>
+        }
+
+        <section class="card" aria-labelledby="version-heading">
+          <h3 id="version-heading" tabindex="-1">Version</h3>
+          <div class="check-row">
+            <p>{{ versionLine }}</p>
+            @if (updatesAvailable()) {
+              <button matButton="outlined" type="button" (click)="checkForAppUpdates()">
+                Check for updates
+              </button>
+            }
+          </div>
+          @if (!updatesAvailable()) {
+            <p class="hint">Each visit loads the latest version.</p>
+          }
+          <p class="check-message" role="status">{{ appCheckMessage() }}</p>
+        </section>
       </section>
     </div>
   </div>

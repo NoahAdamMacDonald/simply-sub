@@ -110,7 +110,9 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
   `npm run data:schema` and commit `data/schema/`, because CI fails if it's stale. After editing `data/`, run
   `npm run data:validate`: the schemas plus the cross-file checks of `validateCatalog` (BLUEPRINT §6.2). A new
   provider's logo comes from `npm run data:icons` into `data/logos/<id>.png` (committed), and `data:build`
-  publishes it as a 96 px WebP at `/icons/<id>.webp`; builds never fetch icons.
+  publishes it as a 96 px WebP at `/icons/<id>.webp`; builds never fetch icons. The app's own icon
+  (`apps/web/public/app-icons/`, `favicon.ico`) comes from `npm run app:icons`, drawn in `_tokens.scss`'s accent:
+  rerun it when the accent changes.
 - User records (lists, items, settings…) are strict Zod schemas in `packages/core/src/user/`, with `z.infer` types
   too (BLUEPRINT §4.6). The repositories in `apps/web/src/app/core/storage/` are the only code that imports `dexie`
   (ESLint enforces it). They load Dexie lazily, outside the initial bundle, and check every record on the way in and

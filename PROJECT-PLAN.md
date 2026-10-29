@@ -263,7 +263,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.3 | Live calendar in the app (P10, P13): the opt-in dialog, a calendar for everything and one per tag, the subscribe steps for each app, updates after every change, Revoke | A change to a list reaches its feeds within seconds; each tag's calendar holds only its payments; Revoke ends every link |
 | M10.4 | Calendar year view (P10): `view=year`, twelve small months with their totals, and the year against the annual budget | Each month's total matches the month view's; it works by keyboard, in both themes at 360 and 1280 px, from a lazy chunk |
 | M10.5 | Offline start: the service worker, registered through a Trusted Types policy of its own, with `navigationRequestStrategy: 'freshness'` | Under `wrangler dev` the app starts and every page works with the network off, with no CSP or Trusted Types error; the worker's code is lazy and the initial bundle stays under 500 kB |
-| M10.6 | The update prompt and install: "A new version is ready" with Reload, the web app manifest and icons, Settings' Install | A second build served brings the prompt, and Reload runs it; Edge offers to install the app |
+| M10.6 | The update prompt and install: "A new version is ready" with Reload, the web app manifest and icons, Settings' Install | A new build served reaches an open tab as the prompt, and Reload runs it; Edge offers to install the app |
 | M10.7 | Sync's code and merge: a 32-byte seed shown as 24 words and a QR code, keys derived from it on the device (HKDF), core's sync payload and per-record merge by `updatedAt` and `deletedAt` | Tests: the newer of each record wins and every deletion carries; the keys match their test vectors; a wrong code opens nothing |
 | M10.8 | Sync, the API: `GET`, `PUT` and `DELETE /sync/:chain`, each write conditional on the version read | Two devices writing at once never overwrite each other; the server holds nothing it can read |
 | M10.9 | Sync in the app (P13): turn it on, join with the code, the devices, syncing after changes, turn it off, start over with a new code | Two browsers stay the same through adds, edits and deletes on either, offline ones included |
@@ -466,26 +466,41 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 
 **M10.6 — The update prompt and install** (P1, P13)
 - **Update prompt:** when the worker has a new version ready, a snackbar "A new version of Simply Sub is ready."
-  [Reload] (with the lock on, it adds "Reloading locks the app."). Reload activates it and reloads; a list being
-  edited is a draft in IndexedDB, so nothing is lost. If the worker can't serve the app any more: "Simply Sub needs to
-  reload to keep working." [Reload]. The worker checks on each page load, and the app asks it again when a tab is
-  shown after an hour and from Settings' Check for updates.
+  [Reload] (with the lock on, it adds "Reloading locks the app."). Reload reloads, which the worker answers with the
+  new version; a list being edited is a draft in IndexedDB, so nothing is lost. If the worker can't serve the app any
+  more: "Simply Sub needs to reload to keep working." [Reload]. The worker checks on each page load, and the app asks
+  it again when a tab is shown after an hour and from Settings' Check for updates. A page load fetches `index.html`
+  from the network first (M10.5), so it may already run a version the worker learns of only afterwards: then the page
+  moves onto it with no prompt.
 - **Manifest:** `manifest.webmanifest` (`id` and `start_url` `/`, `display: standalone`, the name, a description,
   `theme_color` and `background_color` with `_tokens.scss`'s values, which a test compares), icons of 192 and 512 px
   and a maskable 512 made by a script (`sharp`) from an SVG mark and committed. The mark is a simple one drawn for the
   app from the logo's "Sub" pill, in the theme's colours, shown to the owner before it's committed; it replaces the
   favicon, still Angular's default logo, too. `<link rel="manifest">` and a
-  `theme-color` meta per colour scheme in `index.html`, its inline script and that script's CSP hash unchanged.
+  `theme-color` meta per colour scheme in `index.html`, its inline script and that script's CSP hash unchanged; once
+  the app has started, both take the theme on screen, so an installed app's title bar follows a theme chosen in the
+  app.
 - **Install** (Settings, a new App group after Your data): [Install] when the browser offers it
   (`beforeinstallprompt`, Chromium), else the steps for Safari (Share, then Add to Home Screen; on a Mac, File, then
   Add to Dock) and Firefox on Android; hidden when the app runs installed. The app's version and Check for updates sit
   under it.
 - **Acceptance**
-  - [ ] Under `wrangler dev`, a second build served brings the prompt within a page load, and Reload shows the new
-        version
-  - [ ] Edge offers to install the app; DevTools shows no manifest error; the icons look right in both themes and
-        as a maskable icon
-  - [ ] Keyboard only, both themes at 360 and 1280 px, axe with the snackbar shown
+  - [x] Under `wrangler dev`, a new build served reaches an open tab through Check for updates as the prompt, and
+        Reload runs it; a page load runs a new build at once, with no prompt
+  - [x] Edge offers to install the app (Settings' Install); CDP reports no manifest or installability error
+  - [x] The owner approves the icon: in both themes, as a maskable icon and at favicon sizes (2026-10-29, the white S
+        on burgundy over the inverted one)
+  - [x] Keyboard only, both themes at 360 and 1280 px, axe with the snackbar shown
+- **As built:** `core/pwa/app-updates.ts` (the prompt, the hourly and Settings' checks, a page already on the new
+  version moved onto it quietly), `core/pwa/install-offer.ts` (Chromium's offer, listened for from the start: the only
+  part in the initial bundle, 0.14 kB), `core/pwa/app-version.ts` with `apps/web/scripts/build.mjs` (the commit and
+  day as defines), `core/theme/title-bar.ts`, the manifest and `scripts/app-icons.ts` (`npm run app:icons`: the icon
+  SVG, PNGs of 192, 512 and a maskable 512, a 180 px apple-touch-icon and `favicon.ico`), and Settings' App group.
+  "A second build served brings the prompt within a page load" became two cases: with `freshness` a page load already
+  runs a new build, so only an open tab is prompted, which the hourly check or Check for updates finds. Tested in
+  `app-updates.spec.ts`, `install-offer.spec.ts`, `title-bar.spec.ts`, Settings' spec and the API's
+  `web-manifest.spec.ts` (the manifest's and the metas' colours against `_tokens.scss`); `check-m10-offline-sync.cjs`
+  with two more builds (BLUEPRINT §14).
 
 **M10.7 — Sync's code and merge** (BLUEPRINT §11.4, §11.5)
 - **The code:** 32 random bytes, shown as 24 BIP39 words (the last word carries a checksum) and a QR code of the
@@ -839,6 +854,7 @@ Chromium) and, where those aren't supported (Safari), `::-webkit-scrollbar` with
 - Global pieces: the skip-to-content link and the "Something went wrong" snackbar (P15) arrive in M0.5; the offline banner and the "Catalog updated" toast arrive with `CatalogStore` in M4.3:
   - The banner is a line at the top of every page while the browser is offline or the last check couldn't reach the server: "Offline — catalog from Oct 22" (the cached catalog's build date), or "Offline — the catalog will load when you're back online" when nothing is cached yet. It's a polite live region.
   - The toast shows "Catalog updated" for 5 seconds when a new version replaces the one on screen, in every open tab. A first download, or a new country's file at the same version, isn't announced.
+  - Since M10.6, "A new version of Simply Sub is ready." [Reload] (with "Reloading locks the app." when the lock is on) when the service worker has a version an open tab isn't running, and "Simply Sub needs to reload to keep working." [Reload] when the worker can't serve the app any more. It stays until used or dismissed, the page's last tab stop.
 - Page titles like "Lists · Simply Sub" come from each route's `title`.
 
 **First-run dialog** (shown when no settings are saved, M4.2):
@@ -1743,7 +1759,7 @@ own. A set feature asks for one or more of its values, as enum and number featur
 ```
 **Built so far:** the budgets, Appearance and 📍 (M4.2), each a card ("Location and currency" holds 📍 and the tax
 line under it), the Catalog line (M4.3), Your data (M6.9), Security (M6.10) and Custom tags (M6.11), after Budgets.
-Local sync comes with Phase 5.
+The App group (M10.6) comes last. Local sync comes with Phase 5.
 - **Your data** (M6.9):
   - **Export backup:** a dialog with "Protect with a passphrase" (at least 8 characters, typed twice). It downloads
     the file.
@@ -1772,6 +1788,9 @@ Local sync comes with Phase 5.
 - 📍 opens a dialog for country, province or state, and currency (the currency follows the country unless you change it), with the sales tax that follows: "Sales tax 13% (Ontario)" and a "Use my own rate" checkbox (BLUEPRINT §4.8). It shares the first-run dialog's fields (P1). Cancel or Escape changes nothing.
 - **Appearance** (M4.2): System, Light or Dark, saved in `settings.theme` (BLUEPRINT §8.1).
 - **Catalog** (M4.3): "Updated Oct 22, 2026 · version c4f9a21" (the build date and version of the user's region's file), or "Not downloaded yet". [Check for updates] checks now and says what it found in a live region under it: "You have the latest catalog.", "Downloaded the latest catalog.", "You're offline. Try again when you're back online." or "Couldn't check for updates. Try again later."
+- **App** (M10.6), after Your data:
+  - **Install**, left out in the installed app: what installing does, then [Install Simply Sub] when the browser offers it (Chromium), which shows the browser's dialog once, or else the steps for each browser (Chrome or Edge's address bar, Chrome on Android, Safari on an iPhone or iPad and on a Mac, Firefox on Android). Installed from the tab: "Installed: open Simply Sub from your apps, home screen or taskbar."
+  - **Version:** "Version fd54aac, built Oct 29, 2026" (the commit and day of the build), or "A development build". Its own [Check for updates] asks the service worker and says what it found: "You have the latest version.", "A new version is ready: reload to use it." (the prompt shows too), the offline message or the failure. With no worker (a development build, or a browser that refuses them): "Each visit loads the latest version." instead.
 - **Export backup** downloads `simply-sub-backup-YYYY-MM-DD.json`:
   ```json
   {

@@ -21,6 +21,9 @@ import {
 import { firstValueFrom } from 'rxjs';
 import { catalogDate } from '../../core/catalog/catalog-dates';
 import { CatalogStore, type CatalogCheckOutcome } from '../../core/catalog/catalog-store';
+import { AppUpdates, type AppCheckOutcome } from '../../core/pwa/app-updates';
+import { appVersion } from '../../core/pwa/app-version';
+import { installOffer, installedHere } from '../../core/pwa/install-offer';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { AppLockRepository } from '../../core/storage/app-lock-repository';
 import { LiveCalendarRepository } from '../../core/storage/live-calendar-repository';
@@ -44,9 +47,18 @@ const checkMessages: Record<CatalogCheckOutcome, string> = {
   failed: "Couldn't check for updates. Try again later.",
 };
 
+/** What the App group's [Check for updates] found (M10.6). */
+const appCheckMessages: Record<AppCheckOutcome, string> = {
+  current: 'You have the latest version.',
+  ready: 'A new version is ready: reload to use it.',
+  offline: "You're offline. Try again when you're back online.",
+  failed: "Couldn't check for updates. Try again later.",
+};
+
 /**
  * Settings (PROJECT-PLAN P13): budgets, custom tags (M6.11), appearance, where the user is (📍), Search's start, Your
- * data (backups and Delete all data, M6.9), Security (the app lock, M6.10) and the catalog's version.
+ * data (backups and Delete all data, M6.9), Security (the app lock, M6.10), the catalog's version, and the App: its
+ * install and its version (M10.6).
  */
 @Component({
   selector: 'ss-settings-page',
@@ -78,6 +90,7 @@ export class SettingsPage {
   private readonly lock = inject(AppLockRepository);
   private readonly storage = inject(StorageService);
   private readonly liveCalendar = inject(LiveCalendarRepository);
+  private readonly appUpdates = inject(AppUpdates);
   private readonly injector = inject(Injector);
 
   protected readonly saved = this.settings.saved;
@@ -133,6 +146,35 @@ export class SettingsPage {
   /** What the last [Check for updates] found: only the user's own checks, not the automatic ones. */
   protected readonly checkMessage = signal('');
 
+  /**
+   * The App group (M10.6): Install, unless this is the installed app (iOS's home screen apps say so their own way), and
+   * the version with its own check.
+   */
+  protected readonly runsInstalled =
+    matchMedia('(display-mode: standalone)').matches ||
+    (navigator as { standalone?: boolean }).standalone === true;
+  protected readonly installAvailable = computed(() => installOffer() !== undefined);
+  protected readonly installedHere = installedHere.asReadonly();
+  protected readonly updatesAvailable = this.appUpdates.available;
+  protected readonly appCheckMessage = signal('');
+  /** "Version fd54aac, built Oct 29, 2026"; a development build has no version. */
+  protected readonly versionLine = appVersion
+    ? `${appVersion.commit ? `Version ${appVersion.commit}, built` : 'Built'} ${dateText(appVersion.builtOn)}`
+    : 'A development build';
+
+  /** The browser's install dialog, which an offer shows once; installing it fires appinstalled. */
+  protected install(): void {
+    const offer = installOffer();
+    if (!offer) return;
+    installOffer.set(undefined);
+    void offer.prompt();
+  }
+
+  protected async checkForAppUpdates(): Promise<void> {
+    this.appCheckMessage.set('Checking for updates…');
+    this.appCheckMessage.set(appCheckMessages[await this.appUpdates.check()]);
+  }
+
   /** Security: whether the app lock is on, and Lock after. */
   protected readonly lockOn = computed(() => this.saved()?.appLock !== undefined);
   protected readonly idleChoice = computed(() => {
@@ -181,6 +223,14 @@ export class SettingsPage {
         { id: 'live-calendar', name: 'Live calendar' },
         { id: 'catalog', name: 'Catalog' },
         { id: 'delete', name: 'Delete all data' },
+      ],
+    },
+    {
+      id: 'app',
+      name: 'App',
+      sections: [
+        ...(this.runsInstalled ? [] : [{ id: 'install', name: 'Install' }]),
+        { id: 'version', name: 'Version' },
       ],
     },
   ];
