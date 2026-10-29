@@ -10,7 +10,8 @@
   category: privacy-suite
   source: own
   wikidata: Q854605
-  status: queued
+  status: done
+  date: 2026-10-28
 - id: proton
   name: Proton
   website: https://proton.me
@@ -23,21 +24,25 @@
   category: gaming
   source: own
   wikidata: Q29578331
-  status: queued
+  status: done
+  date: 2026-10-28
 - id: crunchyroll
   name: Crunchyroll
   website: https://www.crunchyroll.com
   category: streaming
   source: own
   wikidata: Q1142035
-  status: queued
+  status: unreadable
+  date: 2026-10-28
+  note: Its plans and prices are only on crunchyroll.com/premium, which shows the bot an error page ("Something Went Wrong"); its help centre's membership article sends readers there for the prices
 - id: claude
   name: Claude
   website: https://claude.com
   category: ai
   source: own
   wikidata: Q118876059
-  status: queued
+  status: done
+  date: 2026-10-28
 - id: netflix
   name: Netflix
   website: https://www.netflix.com

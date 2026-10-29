@@ -177,9 +177,9 @@ describe('GET /providers', () => {
     expect(body.meta).toEqual({
       ...example.response.body.meta,
       catalogVersion: 'abc1234',
-      total: 2,
+      total: 3,
     });
-    const [mullvad, proton] = body.data;
+    const [mullvad, proton, bitdefender] = body.data;
     expect(mullvad.provider.id).toBe('mullvad');
     // Every rank key whose name or alias says VPN: Unlimited VPN traffic, and Multi-hop as "double vpn".
     expect(mullvad.matchedOn).toEqual([
@@ -197,6 +197,9 @@ describe('GET /providers', () => {
     expect(proton.provider.id).toBe('proton');
     expect(proton.matchedOn[0]).toBe('alias:proton vpn');
     expect(proton.bestPlanId).toBe('proton.free');
+    // Bitdefender's suites include its VPN (the discovery batch of 2026-10-28).
+    expect(bitdefender.provider.id).toBe('bitdefender');
+    expect(bitdefender.matchedOn).toContain('feature:vpn.included');
   });
 
   it("refuses the third example's query exactly as the example shows", async () => {
