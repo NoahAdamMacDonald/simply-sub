@@ -230,7 +230,8 @@ simply-sub/
 │     │  ├─ pipeline/        # the discovery pipeline's logic (section 6.5): the queue and Wikidata (M3.1), web
 │     │  │                   # addresses; finding pages and web search (M3.2); a page's text, amounts, tax wording
 │     │  │                   # and robots.txt, shared with the bot (moved from apps/bot in M3.2); extraction: the
-│     │  │                   # answer's schema, the request, quotes, checks and drafts, and the drafts' YAML (M3.4)
+│     │  │                   # answer's schema, the request, quotes, checks and drafts, and the drafts' YAML (M3.4);
+│     │  │                   # a batch's review table (M3.5)
 │     │  └─ export/          # the exports' tables, calendar events, text and list file, which the app writes
 │     │                      # with papaparse, exceljs and ics (M7.5)
 │     └─ test/               # Vitest specs, mirroring src/ (run in the America/Vancouver time zone)
@@ -263,6 +264,7 @@ simply-sub/
 │  ├─ render-pages.ts        # each page in the browser → .pipeline/<id>/pages/ (`npm run data:render`, section 6.5)
 │  ├─ lib/browser.ts         # the pipeline's browser: the system Edge through playwright-core
 │  ├─ extract-plans.ts       # saved pages → a model's answer → data/providers/<id>.yaml (`npm run data:extract`)
+│  ├─ batch-pr.ts            # a batch of queued services → one pull request (`npm run data:batch`, section 6.5)
 │  ├─ price-check.ts         # nightly price monitor (section 6.4)
 │  └─ draft-provider.ts      # AI-assisted: pricing page URL → draft YAML
 │
@@ -1751,6 +1753,20 @@ amounts and duplicate plans.
 each new provider's logo, fetched into `data/logos/<id>.png` the way `npm run data:icons` does (M3.5). You merge,
 fix or close. Rejected items are marked in `queue.yaml` so they aren't retried every night.
 
+**As built (M3.5):** `npm run data:batch -- --next 10` (or queue ids; `scripts/batch-pr.ts`) runs the steps for
+each service of the batch, each once (its files stay in `.pipeline/<id>/`): find-urls with the browser, render-pages,
+then the extraction: Workers AI with `--model workers-ai`, or else it writes each request and stops, and runs on once
+every `answer.json` is there. It drafts each provider file, fetches the new ones' logos (`fetch-icons.ts`, as
+`npm run data:icons` does), and checks the catalog: a draft with a `data:validate` error stops the batch, or is left
+out with `--leave-out-broken` (moved to `.pipeline/<id>/draft.yaml`, still queued). The queue's entries become done,
+or out-of-scope or unreadable with a note. One branch (`catalog/batch-<date>-<first id>`), one commit and one pull
+request into `--base` (main by default; `--dry-run` stops before them). The body (core's `batchReview`): a table of
+the providers (plans, prices, proposed features, dropped facts, what to check), then each provider's pages, logo,
+plans with each price linked to its page at its quote (`quoteLink`'s text fragment), card networks, policies,
+proposed features with their quotes, dropped facts and what to check; the services left out with why; and a hidden
+line of the batch's queue ids (`batchIdsIn`): a service in an open batch's pull request isn't taken again, and one
+in a batch closed without merging is passed over as rejected.
+
 **Ongoing:** the nightly price check (section 6.4) reuses the saved `sources:` URLs. A weekly job takes the next
 N services from the queue, so the catalog grows on its own while you only review.
 
@@ -2725,6 +2741,12 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-28, M3.5)**
+- **A rejected batch:** the pull request's hidden line of queue ids is how the next batch knows: one closed without
+  merging leaves its services queued in `main`, and `--next` passes over them, so nothing is retried every night; a
+  person sets each to rejected with a note (or queued again) when they get to it.
+- **A broken draft** stops the batch rather than reaching CI, unless `--leave-out-broken` sets it aside, still queued.
 
 **Resolved (2026-10-28, M3.4)**
 - **One answer schema for every model** (the user's rule that no part may need a Claude subscription): a session's
