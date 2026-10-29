@@ -625,9 +625,15 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   says so and sends nothing. After: "Thanks. Netflix's page will be checked tonight." Refusals in words (too many just
   now, paused for today).
 - **Acceptance**
-  - [ ] By keyboard from a Search card to the dialog and Send; the report reaches the local database under
+  - [x] By keyboard from a Search card to the dialog and Send; the report reaches the local database under
         `wrangler dev`
-  - [ ] Both themes at 360 and 1280 px, axe with the dialog open, no horizontal scroll; the dialog in a lazy chunk
+  - [x] Both themes at 360 and 1280 px, axe with the dialog open, no horizontal scroll; the dialog in a lazy chunk
+- **As built:** `shared/report-price/` (the dialog and `sendReport`), opened from `ss-plan-details`, the expanded
+  card's section, with the plan its details show (a card's first plan until another is chosen). "The price is
+  different" is filled in with the catalog's price before any conversion (`PickedPrice.source`), asking which billing
+  period when the card shows several; it's offered only when the card shows a price. A report sent closes the dialog,
+  and a snackbar thanks the user. Tested in the dialog's spec, `plan-details.spec.ts` and `check-m10-reports.cjs`
+  (BLUEPRINT §14).
 
 **M10.12 — Regional prices in the pipeline** (BLUEPRINT §6.5)
 - **Finding a region's page:** a pricing page's other regions from its `hreflang` links and the site's locale paths
@@ -1467,7 +1473,8 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
   - Add-ons with prices, and bundles containing the plan with their savings (a bundle price click → F4).
   - For a suite plan (BLUEPRINT §4.4): the plans it includes, and its savings against buying them separately when there are any.
   - Perks, and accepted cards (Phase 4).
-  - "Price checked Oct 14, 2026", with a "may be out of date" badge when it's older than 90 days.
+  - "Price checked Oct 14, 2026", with a "may be out of date" badge when it's older than 90 days, and beside it
+    Report a wrong price (M10.11).
   - Terms and policies (M1.13, BLUEPRINT §4.10): the provider's ratings on `data/policy-topics.yaml`'s topics for
     the plan and the user's country, by group (Privacy, Billing, Legal, Service), each a dot in its grade's colour
     (Great to Bad, green to red), with the topic in bold, its grade in words, muted ("Disputes (Good):", M5.9),

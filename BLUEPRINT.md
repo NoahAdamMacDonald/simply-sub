@@ -2972,6 +2972,13 @@ None.
 - **The hand-over** (M10.10, `clean-up.ts`): one `DELETE … WHERE last_day < today RETURNING …` takes the rows, so a
   report counted meanwhile waits for the next night; each plan's KV key gets them added (core's `addReports`); a plan
   whose key can't be written gets its rows back. The bot's state reads `bot:report:*` with one list a night.
+- **Report a wrong price in the app** (M10.11, `shared/report-price/`): beside Search's "Price checked …" in the
+  expanded card, for the plan its details show. The dialog (a lazy chunk with Material's radio and select) fills a
+  different price in with the catalog's own amount and currency (`PickedPrice.source`, not the converted one the card
+  shows), asking which billing period when the card has several, and sends only the choices; offline it says so and
+  sends nothing, and 429 and 503 are said in words. Material's `disabledInteractive` leaves Send's clicks to it, so the
+  send checks it isn't busy (§14, M10.9). Checked by `check-m10-reports.cjs` (65 checks) under `wrangler dev`, whose
+  reports reach the local user database; `check-search.cjs` (187) still passes with the button in each card.
 - **A reported plan's confirmation is kept** (M10.10): the night's checks keep a confirmed price only when its
   `lastVerified` is due again, so "the page still shows the catalog's price" would have left nothing for the digest
   to find. A confirmation of a reported plan's price is kept until the digest, and proposes no edit.
