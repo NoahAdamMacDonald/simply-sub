@@ -1,17 +1,19 @@
 import type { IsoDate } from '../dates/iso-date';
-import type { ListDraft } from '../user/list-draft';
+import type { AppliedChange, ListDraft } from '../user/list-draft';
 import type { ListItem } from '../user/list-item';
 import { rankSchema, type Rank } from '../user/rank';
 import type { Timestamp } from '../user/record';
 import { withChanges } from '../user/stamps';
 import { reperiod, withAddOn } from './model';
-import type { Suggestion, SuggestionAction } from './suggestion';
+import { actionItemIds, type Suggestion } from './suggestion';
 
 // Apply (PROJECT-PLAN P14): a suggestion's changes as edits to its list's draft, which the editor opens with them, so
 // nothing is saved until Save. Each change takes effect on the item's next charge, as the savings assume: a removed
 // or replaced item ends then (it stays until what's paid for runs out), a plan or billing change re-anchors the item
-// on it, and a bundle or suite starts on the earliest next charge of the items it replaces. Specific dates have no
-// end date, so a removed one leaves the draft, and a plan change keeps its windows.
+// on it, and a bundle or suite starts on the earliest next charge of the items it replaces, with that as its start
+// date, and an extra member joins its host on the day its own plan ends (M8.5): nothing new is charged before it
+// starts, so this year's past charges stay as they were. Specific dates have no end date, so a removed one leaves the
+// draft, and a plan change keeps its windows.
 
 /** An item's fields, as the draft gives them an id, its list and the time. */
 export type NewItemFields = Omit<ListItem, 'id' | 'listId' | 'createdAt' | 'updatedAt'>;
@@ -56,7 +58,7 @@ export function suggestionEdits(
   };
 
   for (const action of suggestion.actions) {
-    if (actionItems(action).some((itemId) => !items.has(itemId))) return undefined;
+    if (actionItemIds(action).some((itemId) => !items.has(itemId))) return undefined;
     switch (action.kind) {
       case 'interval':
       case 'downgrade':
@@ -88,7 +90,10 @@ export function suggestionEdits(
         const host = current(action.host.itemId);
         if (host?.source.kind === 'catalog') {
           change(host.id, {
-            source: { ...host.source, addOns: withAddOn(host.source.addOns, action.addOnId, 1) },
+            source: {
+              ...host.source,
+              addOns: withAddOn(host.source.addOns, action.addOnId, 1, action.on),
+            },
           });
         }
         end(action.item.itemId, action.on);
@@ -108,6 +113,7 @@ export function suggestionEdits(
             interval: action.to.interval,
             intervalCount: action.to.intervalCount,
             anchorDate: action.on,
+            startDate: action.on,
             autoRenew: action.to.autoRenew,
           },
           tagIds: [...new Set(members.flatMap((member) => member.tagIds))],
@@ -120,6 +126,17 @@ export function suggestionEdits(
       case 'card':
         // Paid with a better card (M9.3), from now on: nothing else changes.
         change(action.item.itemId, { cardId: action.cardId });
+        break;
+      case 'currency':
+        // Paid in another currency from its next charge (M9.6): the user's own price in it, with tax as it's sold.
+        change(action.item.itemId, {
+          priceOverride: {
+            amount: action.to.source.amount,
+            currency: action.to.source.currency,
+            since: action.on,
+            ...(!action.to.taxIncluded && { plusTax: true }),
+          },
+        });
         break;
     }
   }
@@ -144,17 +161,26 @@ export function suggestionEdits(
   return edits;
 }
 
+/** A suggestion applied, as Review changes names it (M8.6). */
+export type AppliedSuggestion = Pick<AppliedChange, 'title' | 'savings' | 'currency'>;
+
 /**
  * `draft` with `edits` made at `now`: changed items stamped, removed ones marked (so Undo can bring them back, P5),
- * and added ones given `ids`, one for each edit, in order (undefined for the others). Throws when an edit names an
- * item the draft doesn't have.
+ * and added ones given `ids`, one for each edit, in order (undefined for the others). With `suggestion`, the edits are
+ * a suggestion applied, recorded with what it changed so it can be undone on its own (M8.6). Throws when an edit names
+ * an item the draft doesn't have.
  */
 export function withDraftEdits(
   draft: ListDraft,
   edits: readonly DraftEdit[],
   ids: readonly (string | undefined)[],
   now: Timestamp,
+  suggestion?: AppliedSuggestion,
 ): ListDraft {
+  const touched = new Set(edits.flatMap((edit) => (edit.kind === 'add' ? [] : [edit.itemId])));
+  const before = draft.items
+    .filter((entry) => touched.has(entry.item.id))
+    .map((entry) => entry.item);
   let items = draft.items;
   const named = (itemId: string) => {
     if (!items.some((entry) => entry.item.id === itemId)) {
@@ -188,22 +214,17 @@ export function withDraftEdits(
       }
     }
   });
-  return { ...draft, items };
+  if (!suggestion) return { ...draft, items };
+  const change: AppliedChange = {
+    ...suggestion,
+    before,
+    removed: edits.flatMap((edit) => (edit.kind === 'remove' ? [edit.itemId] : [])),
+    added: ids.filter((id): id is string => id !== undefined),
+  };
+  return { ...draft, items, applied: [...(draft.applied ?? []), change] };
 }
 
 /** The items an action changes. */
-function actionItems(action: SuggestionAction): string[] {
-  switch (action.kind) {
-    case 'bundle':
-    case 'suite':
-      return action.items.map((item) => item.itemId);
-    case 'extra-member':
-      return [action.item.itemId, action.host.itemId];
-    default:
-      return [action.item.itemId];
-  }
-}
-
 /** The replaced items' own ranks together: where two rank one key, the more important rank. */
 function mergedOverrides(items: readonly ListItem[]): ListItem['rankOverrides'] {
   const merged: Record<string, Rank> = {};

@@ -383,8 +383,8 @@ describe('itemFormIssues', () => {
 
   it('allows add-ons up to the plan’s limit in all', () => {
     const addOns = [
-      { id: 'netflix.extra-member-ads', chosen: true, quantity: 1 },
-      { id: 'netflix.extra-member', chosen: true, quantity: 1 },
+      { id: 'netflix.extra-member-ads', chosen: true, quantity: 1, joining: [] },
+      { id: 'netflix.extra-member', chosen: true, quantity: 1, joining: [] },
     ];
     expect(itemFormIssues(standardForm({ addOns }), context)).toEqual([]);
     expect(
@@ -413,6 +413,21 @@ describe('itemFormIssues', () => {
     ).toEqual([{ path: ['priceCurrency'], message: 'Choose a currency' }]);
     // Unticked, what it holds isn't checked.
     expect(itemFormIssues(standardForm({ ownPrice: false, priceAmount: 0 }), context)).toEqual([]);
+  });
+
+  it('needs an own price’s end after its start (M9.6)', () => {
+    const own = { ownPrice: true, priceAmount: 15.99, priceCurrency: 'USD' };
+    for (const priceUntil of ['2026-11-12', '2026-11-01']) {
+      expect(
+        itemFormIssues(standardForm({ ...own, priceSince: '2026-11-12', priceUntil }), context),
+      ).toEqual([{ path: ['priceUntil'], message: 'Must be after the date it starts' }]);
+    }
+    expect(
+      itemFormIssues(
+        standardForm({ ...own, priceSince: '2026-11-12', priceUntil: '2026-11-13' }),
+        context,
+      ),
+    ).toEqual([]);
   });
 
   it('checks only a free plan’s dates', () => {
@@ -454,8 +469,8 @@ describe('itemFromForm', () => {
     const fields = itemFromForm(
       standardForm({
         addOns: [
-          { id: 'netflix.extra-member-ads', chosen: false, quantity: 1 },
-          { id: 'netflix.extra-member', chosen: true, quantity: 2 },
+          { id: 'netflix.extra-member-ads', chosen: false, quantity: 1, joining: [] },
+          { id: 'netflix.extra-member', chosen: true, quantity: 2, joining: [] },
         ],
         anchorDate: '2027-02-28',
         billingDay: 31,
@@ -465,6 +480,7 @@ describe('itemFromForm', () => {
         ownPrice: true,
         priceAmount: 15.99,
         priceCurrency: 'USD',
+        priceSince: '2026-11-12',
         priceUntil: '2027-01-31',
         plusTax: true,
         region: 'US',
@@ -492,7 +508,13 @@ describe('itemFromForm', () => {
         endDate: '2027-06-30',
         autoRenew: false,
       },
-      priceOverride: { amount: 15.99, currency: 'USD', until: '2027-01-31', plusTax: true },
+      priceOverride: {
+        amount: 15.99,
+        currency: 'USD',
+        since: '2026-11-12',
+        until: '2027-01-31',
+        plusTax: true,
+      },
       tagIds: ['0192f1c7-3e4f-7051-ac6d-7e8f9a0b1c2d'],
       // 4K isn't a key Netflix Standard provides.
       rankOverrides: { 'streaming.ad-free': 'essential' },
@@ -633,14 +655,15 @@ describe('itemFormFor', () => {
       itemFromForm(
         standardForm({
           addOns: [
-            { id: 'netflix.extra-member-ads', chosen: true, quantity: 1 },
-            { id: 'netflix.extra-member', chosen: false, quantity: 1 },
+            { id: 'netflix.extra-member-ads', chosen: true, quantity: 1, joining: [] },
+            { id: 'netflix.extra-member', chosen: false, quantity: 1, joining: [] },
           ],
           anchorDate: '2027-02-28',
           billingDay: 31,
           endDate: '2027-06-30',
           ownPrice: true,
           priceAmount: 15.99,
+          priceSince: '2026-11-12',
           priceUntil: '2027-01-31',
           region: 'US',
           rankOverrides: { 'streaming.ad-free': 'critical' },
@@ -659,8 +682,8 @@ describe('itemFormFor', () => {
     const form = itemFormFor(item, options);
     expect(form).toMatchObject({
       addOns: [
-        { id: 'netflix.extra-member-ads', chosen: true, quantity: 1 },
-        { id: 'netflix.extra-member', chosen: false, quantity: 1 },
+        { id: 'netflix.extra-member-ads', chosen: true, quantity: 1, joining: [] },
+        { id: 'netflix.extra-member', chosen: false, quantity: 1, joining: [] },
       ],
       anchorDate: '2027-02-28',
       billingDay: 31,
@@ -692,15 +715,15 @@ describe('afterPlanChange', () => {
     const form = standardForm({
       interval: 'year',
       addOns: [
-        { id: 'netflix.extra-member-ads', chosen: false, quantity: 1 },
-        { id: 'netflix.extra-member', chosen: true, quantity: 2 },
+        { id: 'netflix.extra-member-ads', chosen: false, quantity: 1, joining: [] },
+        { id: 'netflix.extra-member', chosen: true, quantity: 2, joining: [] },
       ],
     });
     expect(
       afterPlanChange(form, { periods: [monthly, yearly], addOnIds: ['netflix.extra-member'] }),
     ).toMatchObject({
       interval: 'year',
-      addOns: [{ id: 'netflix.extra-member', chosen: true, quantity: 2 }],
+      addOns: [{ id: 'netflix.extra-member', chosen: true, quantity: 2, joining: [] }],
     });
   });
 
@@ -715,6 +738,54 @@ describe('afterPlanChange', () => {
     expect(afterPlanChange(form, { addOnIds: [] })).toMatchObject({
       interval: 'month',
       intervalCount: 3,
+    });
+  });
+});
+
+describe('add-ons that join later (M8.5)', () => {
+  const options = {
+    addOnIds: ['netflix.extra-member-ads', 'netflix.extra-member'],
+    today,
+    country: 'CA',
+    currency: 'CAD',
+  };
+  const host = {
+    ...itemFromForm(standardForm(), context),
+    source: {
+      kind: 'catalog' as const,
+      planId: 'netflix.standard',
+      addOns: [
+        { id: 'netflix.extra-member', quantity: 1 },
+        { id: 'netflix.extra-member', quantity: 1, since: '2026-11-20' },
+      ],
+    },
+  };
+
+  it('shows them all in one row, and keeps the one that joins later as it is', () => {
+    const form = itemFormFor(stored(host), options);
+    expect(form.addOns[1]).toEqual({
+      id: 'netflix.extra-member',
+      chosen: true,
+      quantity: 2,
+      joining: [{ quantity: 1, since: '2026-11-20' }],
+    });
+    expect(itemFromForm(form, context).source).toEqual(host.source);
+  });
+
+  it('adds to the ones from the start, and drops the days below what joins later', () => {
+    const form = itemFormFor(stored(host), options);
+    const more = { ...form, addOns: [form.addOns[0], { ...form.addOns[1], quantity: 3 }] };
+    expect(itemFromForm(more, context).source).toEqual({
+      ...host.source,
+      addOns: [
+        { id: 'netflix.extra-member', quantity: 2 },
+        { id: 'netflix.extra-member', quantity: 1, since: '2026-11-20' },
+      ],
+    });
+    const fewer = { ...form, addOns: [form.addOns[0], { ...form.addOns[1], quantity: 1 }] };
+    expect(itemFromForm(fewer, context).source).toEqual({
+      ...host.source,
+      addOns: [{ id: 'netflix.extra-member', quantity: 1, since: '2026-11-20' }],
     });
   });
 });

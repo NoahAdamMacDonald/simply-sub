@@ -48,6 +48,7 @@ import { issueErrors } from '../../shared/form-issues';
 import { currencyChoices } from '../../shared/place-choices';
 import { fillScreenWhenNarrow } from '../../shared/wide-dialog';
 import { FeaturePicker } from './feature-picker';
+import { ChoiceField } from '../../shared/choice-field/choice-field';
 
 export interface CustomSubDialogData {
   /** The custom subscription to change; none for a new one. */
@@ -77,6 +78,7 @@ const intervalNames: Record<Interval, string> = {
 @Component({
   selector: 'ss-custom-sub-dialog',
   imports: [
+    ChoiceField,
     FeaturePicker,
     FormField,
     FormRoot,

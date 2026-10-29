@@ -19,7 +19,7 @@ const cardTextSchema = textSchema.refine(
 
 export const paymentCardSchema = z.strictObject({
   ...recordMetaShape,
-  /** "Simplii Cashback Mastercard" */
+  /** "Cash Back Mastercard" */
   name: cardTextSchema,
   /** Shown instead of the name when set. */
   nickname: cardTextSchema.optional(),

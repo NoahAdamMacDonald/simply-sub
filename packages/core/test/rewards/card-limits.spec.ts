@@ -7,7 +7,7 @@ import {
   overLimits,
   type PaymentCard,
 } from '../../src';
-import { canadian, noRates, ontario, resolved, simplii, today, yearly } from './fixtures';
+import { canadian, noRates, ontario, resolved, cashBack, today, yearly } from './fixtures';
 
 // An item's charges on a card (card-ledger.ts) and a card's monthly limit (card-limits.ts): Ontario's 13%, Oct 26, 2026.
 
@@ -31,7 +31,7 @@ describe('itemLedger and itemOnCard', () => {
     expect(ledger.months.map((charges) => charges.length)).toEqual(Array(12).fill(1));
     expect(ledger.months[0][0].date).toBe('2026-10-12');
 
-    const on = itemOnCard(ledger, simplii, context);
+    const on = itemOnCard(ledger, cashBack, context);
     expect(on.gross).toBeCloseTo(12 * netflixMonth);
     expect(on.net).toBeCloseTo(12 * netflixMonth * 0.985);
     expect(on.posted[0]).toBeCloseTo(netflixMonth);
@@ -44,7 +44,7 @@ describe('itemLedger and itemOnCard', () => {
   it('count an annual plan in the month it’s charged, and add the FX fee to a foreign one', () => {
     // €60 a year, renewing Nov 12, with Ontario's 13%: the test catalog's Mullvad doesn't include tax.
     const ledger = itemLedger(resolved('mullvad.vpn', { billing: yearly }), context);
-    const on = itemOnCard(ledger, simplii, context);
+    const on = itemOnCard(ledger, cashBack, context);
     const inCad = (60 * 1.13) / 0.664;
     expect(on.posted[1]).toBeCloseTo(inCad * 1.025);
     expect(on.posted.filter((amount) => amount > 0)).toHaveLength(1);
@@ -54,22 +54,22 @@ describe('itemLedger and itemOnCard', () => {
 
   it('leave out what they have no rate for', () => {
     const ledger = itemLedger(resolved('mullvad.vpn', { billing: yearly }, noRates), context);
-    expect(itemOnCard(ledger, simplii, { ...context, fx: undefined }).leftOut).toBe(1);
+    expect(itemOnCard(ledger, cashBack, { ...context, fx: undefined }).leftOut).toBe(1);
   });
 });
 
 describe('cardLoads and overLimits', () => {
-  const tight: PaymentCard = { ...simplii, monthlyLimit: 100 };
+  const tight: PaymentCard = { ...cashBack, monthlyLimit: 100 };
 
   it('add up what each card’s items post to it, a month at a time', () => {
-    const netflix = resolved('netflix.standard', { cardId: simplii.id });
-    const crave = resolved('crave.standard', { cardId: simplii.id });
+    const netflix = resolved('netflix.standard', { cardId: cashBack.id });
+    const crave = resolved('crave.standard', { cardId: cashBack.id });
     const loads = cardLoads(
       [itemLedger(netflix, context), itemLedger(crave, context)],
-      [simplii],
+      [cashBack],
       context,
     );
-    expect(loads.get(simplii.id)?.[0]).toBeCloseTo(netflixMonth + 11.99 * 1.13);
+    expect(loads.get(cashBack.id)?.[0]).toBeCloseTo(netflixMonth + 11.99 * 1.13);
   });
 
   it('flag a month over the limit, from the day that takes it over', () => {

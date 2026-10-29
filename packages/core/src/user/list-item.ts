@@ -22,6 +22,11 @@ const positiveCount = z.int().positive('Must be a whole number of at least 1');
 const addOnChoiceSchema = z.strictObject({
   id: planIdSchema,
   quantity: positiveCount,
+  /**
+   * The day it joined, when that's after the item began (an extra member Optimizations adds when another account
+   * ends, M8.5): charges before then don't include it. The same add-on can be listed again with another day.
+   */
+  since: isoDateSchema.optional(),
 });
 
 /** What the item is: a catalog plan with its add-ons, a bundle (whose plans come from the catalog), or a custom plan. */
@@ -36,7 +41,9 @@ export const itemSourceSchema = z.discriminatedUnion('kind', [
         .optional(),
     })
     .superRefine((source, ctx) => {
-      const ids = (source.addOns ?? []).map((addOn) => addOn.id);
+      const ids = (source.addOns ?? []).map((addOn) =>
+        addOn.since === undefined ? addOn.id : `${addOn.id} (since ${addOn.since})`,
+      );
       addDuplicateIssues(ctx, ids, (index) => ['addOns', index, 'id']);
     }),
   z.strictObject({ kind: z.literal('bundle'), bundleId: bundleIdSchema }),
@@ -118,14 +125,24 @@ export const maxNicknameLength = 60;
 export const maxNoteLength = 1000;
 
 /** What the user pays instead of the catalog price: a promo, a first-term offer or a grandfathered price. */
-export const priceOverrideSchema = z.strictObject({
-  amount: z.number().positive('Must be more than 0'),
-  currency: currencySchema,
-  /** The date the catalog price applies again: charges dated before it use the override. */
-  until: isoDateSchema.optional(),
-  /** The amount is before sales tax; without it, the amount includes tax (BLUEPRINT §4.8). */
-  plusTax: z.boolean().optional(),
-});
+export const priceOverrideSchema = z
+  .strictObject({
+    amount: z.number().positive('Must be more than 0'),
+    currency: currencySchema,
+    /**
+     * The first date it's charged (M9.6): charges dated before it use the catalog price. A switch to another currency
+     * takes effect on the item's next charge, so what's paid for already keeps its price.
+     */
+    since: isoDateSchema.optional(),
+    /** The date the catalog price applies again: charges dated before it use the override. */
+    until: isoDateSchema.optional(),
+    /** The amount is before sales tax; without it, the amount includes tax (BLUEPRINT §4.8). */
+    plusTax: z.boolean().optional(),
+  })
+  .refine(({ since, until }) => since === undefined || until === undefined || since < until, {
+    message: 'Must end after it starts',
+    path: ['until'],
+  });
 export type PriceOverride = z.infer<typeof priceOverrideSchema>;
 
 export const listItemSchema = z

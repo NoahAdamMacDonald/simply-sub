@@ -305,8 +305,8 @@ async function plantLists(page) {
       await page.goto(`${baseUrl}lists`);
       await page.locator('ss-lists-overview-page .new-list').waitFor({ timeout: 20000 });
       check(
-        `${label}: with no lists, a hint and New Subscription List, and no feature column`,
-        (await page.locator('ss-lists-overview-page .hint').count()) === 1 &&
+        `${label}: with no lists, the empty state and New Subscription List, and no feature column`,
+        (await page.locator('ss-lists-overview-page ss-empty-state').count()) === 1 &&
           (await page.locator('ss-lists-overview-page li.card').count()) === 0 &&
           (await page.locator('ss-lists-overview-page .features').count()) === 0,
       );

@@ -1,5 +1,6 @@
 import {
   Component,
+  DestroyRef,
   Injector,
   afterNextRender,
   computed,
@@ -11,7 +12,11 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatIcon } from '@angular/material/icon';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  type MatSnackBarRef,
+  type TextOnlySnackBar,
+} from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
@@ -38,8 +43,9 @@ import { actionLine } from './suggestion-text';
  * A list's optimizations (PROJECT-PLAN P14, M8.2): core's optimizer for the list, its cards in Free savings, Red,
  * Orange and Yellow, with Save up to, Show dismissed and the rules in a tooltip. Apply puts a card's changes on the
  * list's draft and stays (M8.4): the suggestions are for the list as the draft has it, so the next one counts the
- * changes before it, Undo puts the draft back, and Review and save opens the editor, where nothing is saved until Save.
- * Dismiss hides a card until the list changes.
+ * changes before it, and while they're worked out again no card can be applied (M8.6), so none that clashes with what
+ * was applied stays in reach. Undo takes back that change; Review changes lists each one with what it was and what it
+ * becomes, to undo one or save them (M8.6). Dismiss hides a card until the list changes.
  */
 @Component({
   selector: 'ss-optimizations-page',
@@ -65,6 +71,12 @@ export class OptimizationsPage {
   private readonly drafts = inject(ListDraftService);
   private readonly settings = inject(SettingsStore);
   private readonly snackBar = inject(MatSnackBar);
+  /**
+   * Applied's or Dismissed's snackbar, closed when the page is left (M8.6): its Undo is for this page's draft, and once
+   * the changes are saved or reviewed it could take back a later one.
+   */
+  private undoBar?: MatSnackBarRef<TextOnlySnackBar>;
+  private left = false;
   private readonly injector = inject(Injector);
 
   protected readonly listId = toSignal(
@@ -101,6 +113,12 @@ export class OptimizationsPage {
     const draft = this.drafts.byList().get(this.listId());
     return draft !== undefined && this.drafts.hasChanges(this.listId());
   });
+  /** How many suggestions are applied to the draft (M8.6). */
+  protected readonly appliedCount = computed(
+    () => this.drafts.byList().get(this.listId())?.applied?.length ?? 0,
+  );
+  /** The suggestions are being worked out again (after an Apply): no card can be applied till they're back (M8.6). */
+  protected readonly updating = computed(() => this.result.isLoading());
 
   /** The sections in P14's order, each with its cards: dismissed ones only with Show dismissed. */
   protected readonly sections = computed(() => {
@@ -138,6 +156,13 @@ export class OptimizationsPage {
   protected readonly unpriced = computed(() => this.metrics.list(this.listId()).unresolved.length);
   protected readonly empty = computed(() => this.metrics.list(this.listId()).resolved.length === 0);
 
+  constructor() {
+    inject(DestroyRef).onDestroy(() => {
+      this.left = true;
+      this.undoBar?.dismiss();
+    });
+  }
+
   /**
    * Puts the card's changes on the list's draft (P5) and stays, so another can follow (M8.4): the suggestions come
    * again for the draft, and focus moves to the next card, or to Review and save when none is left. Undo puts the
@@ -150,8 +175,7 @@ export class OptimizationsPage {
     try {
       const started = await this.drafts.start(listId);
       if (!started) return;
-      const before = started.draft;
-      const items = new Map(draftItems(before).map((item) => [item.id, item]));
+      const items = new Map(draftItems(started.draft).map((item) => [item.id, item]));
       const edits = suggestionEdits(suggestion, items);
       if (!edits) {
         this.snackBar.open(
@@ -160,7 +184,14 @@ export class OptimizationsPage {
         );
         return;
       }
-      await this.drafts.applyEdits(listId, edits);
+      const currency = this.found()?.currency ?? this.settings.saved()?.currency ?? 'CAD';
+      const title = suggestion.actions.map((action) => actionLine(action).title).join('; ');
+      const applied = await this.drafts.applyEdits(listId, edits, {
+        title,
+        savings: Math.max(0, suggestion.savings),
+        currency,
+      });
+      const index = (applied.applied?.length ?? 1) - 1;
       // The suggestions for the draft, without the one applied (or after 5 s, whatever they are).
       await firstValueFrom(
         race(
@@ -175,10 +206,15 @@ export class OptimizationsPage {
         ),
       );
       this.focusAfterRender(next, true);
-      const title = suggestion.actions.map((action) => actionLine(action).title).join('; ');
+      // Left while the suggestions came again (Review changes): its own Undo is there.
+      if (this.left) return;
       const undo = this.snackBar.open(`Applied: ${title}`, 'Undo', { duration: 8000 });
+      this.undoBar = undo;
       undo.onAction().subscribe(() => {
-        void (started.resumed ? this.drafts.putBack(listId, before) : this.drafts.cancel(listId));
+        // A draft this Apply started goes with it; one that was there keeps its other changes.
+        void (started.resumed || index > 0
+          ? this.drafts.undoApplied(listId, index)
+          : this.drafts.cancel(listId));
       });
     } finally {
       this.applying.set(undefined);
@@ -191,6 +227,7 @@ export class OptimizationsPage {
     await this.dismissals.dismiss(suggestion.fingerprint, this.listId());
     this.focusAfterRender(next);
     const undo = this.snackBar.open('Dismissed until the list changes', 'Undo', { duration: 8000 });
+    this.undoBar = undo;
     undo.onAction().subscribe(() => void this.restore(suggestion));
   }
 

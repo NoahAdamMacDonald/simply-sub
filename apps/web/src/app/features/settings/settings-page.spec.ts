@@ -167,6 +167,19 @@ describe('SettingsPage', () => {
     await vi.waitFor(async () => expect(await saved()).not.toHaveProperty('searchSoldOnly'));
   });
 
+  it('keeps Show every reseller, off unless it’s turned on (M5.13)', async () => {
+    const sold = await loader.getHarness(
+      MatCheckboxHarness.with({ label: "Show every reseller, even when it isn't cheaper" }),
+    );
+    expect(await sold.isChecked()).toBe(false);
+    expect(text()).toContain('Search lists each official reseller of a plan');
+
+    await sold.check();
+    await vi.waitFor(async () => expect((await saved()).searchAllResellers).toBe(true));
+    await sold.uncheck();
+    await vi.waitFor(async () => expect(await saved()).not.toHaveProperty('searchAllResellers'));
+  });
+
   describe('the 📍 dialog', () => {
     async function open(): Promise<HarnessLoader> {
       await (await loader.getHarness(MatButtonHarness.with({ text: /Ontario, Canada/ }))).click();

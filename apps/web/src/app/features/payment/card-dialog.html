@@ -19,7 +19,7 @@
       <mat-form-field appearance="outline" subscriptSizing="dynamic">
         <mat-label>Name</mat-label>
         <input matInput autocomplete="off" [formField]="form.name" />
-        <mat-hint>As on the card: Simplii Cashback Mastercard</mat-hint>
+        <mat-hint>As on the card: Cash Back Mastercard</mat-hint>
         <mat-error>{{ firstError(form.name) }}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" subscriptSizing="dynamic">
@@ -49,16 +49,13 @@
         </mat-select>
         <mat-error>{{ firstError(form.network) }}</mat-error>
       </mat-form-field>
-      <mat-form-field appearance="outline" subscriptSizing="dynamic">
-        <mat-label>Card currency</mat-label>
-        <mat-select [formField]="form.currency">
-          @for (choice of currencies; track choice.value) {
-            <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
-          }
-        </mat-select>
-        <mat-hint>The currency its statement is in</mat-hint>
-        <mat-error>{{ firstError(form.currency) }}</mat-error>
-      </mat-form-field>
+      <!-- A long list: a menu you can type in (M4.8). -->
+      <ss-choice-field
+        label="Card currency"
+        hint="The currency its statement is in"
+        [formField]="form.currency"
+        [choices]="currencies"
+      />
     </div>
 
     <div class="row">

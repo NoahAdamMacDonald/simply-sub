@@ -21,6 +21,7 @@ import {
   type ResellerDeal,
   type SubscriptionList,
 } from '@simply-sub/core';
+import { CatalogStore } from '../../core/catalog/catalog-store';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { AddToListMenu } from '../add-to-list/add-to-list-menu';
 import { countryName } from '../country-name';
@@ -63,6 +64,7 @@ let nextId = 0;
 })
 export class SubCard {
   private readonly settings = inject(SettingsStore);
+  private readonly catalog = inject(CatalogStore);
   private readonly expandButton = viewChild<string, ElementRef<HTMLElement>>('expandButton', {
     read: ElementRef,
   });
@@ -181,5 +183,16 @@ export class SubCard {
   protected readonly country = computed(() => {
     const code = this.settings.saved()?.country;
     return code && countryName(code);
+  });
+  /** "Cheaper at" over the shops when they all are, else "Also sold at" (Settings' "Show every reseller", M5.13). */
+  protected readonly dealsLabel = computed(() =>
+    (this.plan()?.deals ?? []).every((deal) => deal.cheaper) ? 'Cheaper at' : 'Also sold at',
+  );
+  /** The bundles in the lists that include one of its plans, by name (M7.11): "Netflix and Crave". */
+  protected readonly inBundles = computed(() => {
+    const ids = this.result().activity?.bundleIds ?? [];
+    const bundles = this.catalog.catalog()?.bundles ?? [];
+    const names = ids.flatMap((id) => bundles.find((bundle) => bundle.id === id)?.name ?? []);
+    return names.length > 0 ? names.join(' and ') : undefined;
   });
 }

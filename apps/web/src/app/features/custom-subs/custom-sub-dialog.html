@@ -48,15 +48,12 @@
             />
             <mat-error>{{ firstError(form.plans[index].amount) }}</mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline" subscriptSizing="dynamic">
-            <mat-label>Currency</mat-label>
-            <mat-select [formField]="form.plans[index].currency">
-              @for (choice of currencies; track choice.value) {
-                <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
-              }
-            </mat-select>
-            <mat-error>{{ firstError(form.plans[index].currency) }}</mat-error>
-          </mat-form-field>
+          <!-- A long list: a menu you can type in (M4.8). -->
+          <ss-choice-field
+            label="Currency"
+            [formField]="form.plans[index].currency"
+            [choices]="currencies"
+          />
         </div>
         <div class="row">
           <mat-form-field appearance="outline" subscriptSizing="dynamic" class="count">

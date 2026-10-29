@@ -163,6 +163,9 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M4.4 | `FxStore` + `ss-price` with the converted marker and "+ tax" in tax-added regions ("incl. tax" for a price with `taxIncluded`, from core's `addedSalesTax`). The rates are kept in Dexie v2's `fxRates` table; core's `priceTaxNote` and `buyerTaxPlace` decide the note; the `/dev/components` gallery starts with `ss-price` (BLUEPRINT §4.7, §4.8, §14) | Converted prices show ≈, the icon and the tooltip; a Canadian sees "+ tax", and "incl. tax" on Mullvad |
 | M4.5 | Shared components (§4.3) + a `/dev/components` gallery (dev builds only; started in M4.4 with `ss-price`), with hand-made inputs where the data comes later (charges M7.1, counts M6.1, view models M4.6); `ss-sub-card` moved to M5.2 and M6.8 (2026-10-26). Core: `budgetBar`, `rankChoices` and `countedRanks`, `planFeatureRows`, `monthWeeks` and `addMonths`, `tagColorPresets`, and the view-model parts the components take (`ItemStatus`, `RankCounts`, `FeatureSummaryRow`) (BLUEPRINT §14) | Every component renders in both themes in the gallery; each is keyboard-usable and passes axe; no hex colours outside `_tokens.scss` |
 | M4.6 | `MetricsService` skeleton: resolved items (§3.4) from repos + catalog + FX. Core's `resolveItem` (and `typedPrice` for custom plans and price overrides); items it can't resolve come back with a reason. Status, the next charge and `ListMetrics` come with M7.1, effective ranks with M6.1 (BLUEPRINT §14) | Unit tests pass with a fixture list |
+| M4.7 | Settings, grouped, the most used first (added 2026-10-28, UI polish, the owner's OK): Everyday (Budgets, Custom tags, Appearance), Where you are (Location and currency, Search), Your data (Backups, App lock, Catalog, and Delete all data folded until opened); "On this page" links each group and section, a side column from 960 px and chips that wrap under it; tags fold after six with Show all (P13) | Each jump link lands on its heading below the top bar with focus there; Delete all data opens only from its own summary; the page is one column at 360 px with nothing scrolling sideways |
+| M4.8 | One control for each kind of choice (added 2026-10-28, UI polish; §4.3): every dropdown listed with a call; the four long lists (the item dialog's Bought in and own price's Currency, a custom plan's Currency, the card dialog's Card currency) become menus you can type in, like Settings'; the short ones stay; Lists' empty state is `ss-empty-state` like every other page's, and Features' loading line the same muted note (P3, P6, P9, P11, P12) | Typing "cad" or "cana" and Enter picks the currency or country in each of the four; no page's empty or loading state differs from the rest |
+| M4.9 | Themed scrollbars (added 2026-10-28, UI polish; §4.1): thin, in both themes' colours from `_tokens.scss` only, with `scrollbar-color` and `scrollbar-width` and a `::-webkit-scrollbar` fallback for Safari | The page's, dialogs' and panels' scrollbars are thin, themed in light and dark, still draggable, and the thumb is at least 3:1 against what's behind it |
 
 ### M5 — Search & add
 | ID | Task | Done when |
@@ -179,6 +182,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M5.10 | Names without a stray space (added 2026-10-27): a browser puts a space before a `.visually-hidden` box ("$7.99 a month , add to a list"), so an Add to list menu item and the card's Plan, reseller, Hide details and policy-page links are named by one `aria-label`, and a price's action ends its hidden words (an `aria-label` would fail WCAG 2.5.3, since "/ mo" is read "a month") (BLUEPRINT §14) | A price reads "$7.99 a month, add to a list"; with cards expanded, no name on Search has a space before a comma or colon, in both themes at 360 and 1280 px |
 | M5.11 | View in Search shows the item's plan (added 2026-10-28, the feedback after M9): Search's URL takes `plan=<plan id>` (core's `readSearchParams` and `writeSearchParams`, kept while the catalog has it; not a filter), and its provider's card shows that plan over the user's own (`CatalogQuery.plan`); List view's View in Search names the item's plan (BLUEPRINT §14) | From a Netflix Standard card, Search shows Netflix with Standard picked, though the user also has Standard with Ads |
 | M5.12 | Where to change a policy (added 2026-10-28, the feedback after M9): a policy rating's optional `action` (core's `policyActionSchema`: what the link does and the provider's own page for it, which its policy or help pages link), checked by `validateCatalog` to be on the provider's own sites or its quoted policies' site; Search's Terms and policies links it under the reason; read for Netflix, Disney+, Hulu, ESPN, Crave, TSN and RDS; the policy-research skill's rule (BLUEPRINT §4.10, §14) | A rating whose reason says the user has to change something themselves links the provider's page for it, and validation refuses another company's |
+| M5.13 | Show every reseller (added 2026-10-29, the feedback after M3): Settings' Search has "Show every reseller, even when it isn't cheaper", off by default (`searchAllResellers`); on, Search lists each official reseller of a plan, "Cheaper at" for the ones that sell it for less after the buyer's sales tax and "Also at" for the rest (core's `resellerDeals` with `all`, `ResellerDeal.cheaper`) (P8, P13, BLUEPRINT §4.9) | Off, Search is as before; on, Mullvad in Ontario lists Amazon "Also at"; the setting is saved and left out when off |
 
 ### M6 — Lists & ranking
 | ID | Task | Done when |
@@ -199,6 +203,9 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M6.14 | Shared ranks (added 2026-10-28, the feedback after M9): ranks changed in a plan's item dialog go to the same provider's other plans in that list (the user's choice), saved with the list's Save; Essential stays on its plan; "Ranks for this plan only" (`ListItem.ownRanks`) keeps a plan out; a new plan starts with its siblings' ranks. Core's `ranking/shared-ranks.ts` (BLUEPRINT §4.6, §14) | Changing Netflix Standard's 1080p rank changes Standard with Ads' too, in the draft, and not with the box ticked |
 | M6.15 | Any colour for a tag (added 2026-10-28, the feedback after M9): `ss-colour-picker`, the device's own colour picker as a swatch beside the hex field, each following the other, in Settings' tag editor and the item dialog's New tag (which gets the hex field too) (BLUEPRINT §14) | A colour picked on a phone or a desktop fills the hex field, and a hex typed colours the swatch |
 | M6.16 | Menus you can type in (added 2026-10-28, the feedback after M9): `ss-choice-field`, a Signal Forms control on Material's autocomplete, for the first-run and 📍 dialogs' Country, Province or territory (State) and Currency: typing narrows the list (a name's start first, then anywhere, or a code), Enter picks the first, and leaving without a pick puts the choice back (BLUEPRINT §14) | Typing "al" and Enter picks Alberta; "usd" finds US Dollar; leaving the field restores the chosen one |
+| M6.17 | List view's filters pinned with their button (added 2026-10-29, the feedback after M3): the search box, Sort and the filters Sort opens are pinned together below the top bar, at every width, and open filters taller than the window leaves them scroll on their own (P4) | Scrolled to the end of a long list with the filters open, they're still under the bar, and every filter can be reached |
+| M6.18 | List view's round buttons centred (added 2026-10-29, the feedback after M3): under 600 px Sort's icon, and under 960 px View optimizations' compact icon, sit in the middle of their buttons, with the same padding on both sides (P4) | The icon's centre is within 1 px of its button's, in both themes, with and without a count beside it |
+| M6.19 | Auto-renews with an end date, in words that agree (added 2026-10-29, the feedback after M3): Auto-renews says how it's charged and Ends on when it stops, so both can be set; the dialog says "Auto-renews until it ends" and "It stops then: no renewal after"; one badge says "Renews Nov 12, then ends Nov 28" (or "Renew by …, then ends …"), never a renewal on or after the end; the billing line says "auto-renews until Nov 28, 2026" (P4, P5, P6) | No text reads "Auto-renews" next to "Ends" as two facts; an item ending before its next charge says only "Ends Nov 28" |
 
 ### M7 — Money, schedule & calendar
 | ID | Task | Done when |
@@ -212,6 +219,9 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M7.7 | Budget bars' colour scale and warnings you can dismiss (added 2026-10-28, the feedback after M9): every budget bar's fill is one colour, changing gradually from green, to yellow exactly at the budget, to red at 150% (core's `budgetBar.towardYellow` and `towardRed`, the user's choice), the Calendar's by the month's total against the budget; the budget warnings' ✕ hides one until its period or budget changes (`settings.dismissedBudgetWarnings`, core's `budgetWarningKey`), and "Show 1 hidden budget warning" brings them back (BLUEPRINT §8.1.1, §14) | A bar's colour moves gradually from green to yellow at its budget and on to red; a dismissed warning stays hidden after a reload and comes back for a new month or budget |
 | M7.8 | The Calendar, still and reachable (added 2026-10-28, the feedback after M9): from 960 px a column of its own beside the grid, for the day's panel and Upcoming, so opening a day never moves the grid; under 600 px a compact grid (dates and dots) above the agenda, any day opening in the bottom sheet; a back button to the page it was opened from, named by it, but not from the sidebar (BLUEPRINT §14) | The grid keeps its width when a day opens; a phone can open any day from the grid; from List view's mini calendar, "← Work Related" goes back |
 | M7.9 | The Calendar's JSON and Text, and its own calendar (added 2026-10-28, the feedback after M9): Export to file adds JSON (core's `paymentsFile`) and Text (`paymentsText`); each event lists its tags and has them as `CATEGORIES`; Sync calendar's steps make a Simply Sub calendar first in Google, Apple and Proton Calendar, since they colour a calendar and not an event (BLUEPRINT §11.2, §11.3, §14) | Both files download with the lists shown; the steps import into a calendar of its own |
+| M7.10 | Home as a hub (added 2026-10-28, UI polish, the owner's OK of its 360 and 1280 px wireframes): quick actions (Add a subscription to a list or a custom one, New list, Open a list); the budget warnings and budgets; Coming up, every payment in the next 14 days, with Mark renewed on a manual renewal (the next renewal moves to the charge after it, with Undo; a charge the schedule counts as paid, before an item's next one, isn't listed); the mini calendar; Your lists, a card each with this month; Ways to save, each list's View optimizations; Price changes, what catalog updates changed in the lists' prices this past month (core's `priceChangesBetween`, `withPriceChanges`, kept in `settings.priceChanges` by CatalogStore after an update, in a chunk of its own) (P2) | The hub at 1280 px has budgets and Coming up beside the calendar, and one column at 360 px; Mark renewed moves the renewal on a period and Undo puts it back; a catalog update that changes a listed plan's price lists it for a month |
+| M7.11 | Statuses you can see (added 2026-10-29, the feedback after M3; §3.3): a manual renewal says "Manual · renew by Nov 29"; an item a bundle, suite or extra member replaces says what it becomes ("Moves to Netflix and Crave on Nov 15", "Extra member on Mine (Netflix Standard) from Nov 20"; core's `itemReplacements`); and Search says which bundle a provider is in ("Active · 1 list · in Netflix and Crave"; `ProviderActivity.bundleIds`) (P4, P8) | Proton Family with auto-renew off shows "Manual"; a bundle applied on Optimizations, saved, shows on each plan it replaces; a provider in a listed bundle shows the bundle's name on Search |
+| M7.12 | Calendar events that repeat (added 2026-10-29, the feedback after M3): the .ics has a repeating event for each run of an ongoing subscription's charges at one amount, with the schedule's own rule (core's `repeatRule`: the day of the month, or the 28th up to it with `BYSETPOS=-1` for a shorter month's last day; `INTERVAL`; `UNTIL` where the plan or a price of the user's own ends), so it shows past the first year; Specific dates stay an event per charge; `X-WR-CALNAME` names the calendar, which only a subscribed feed (M10's live feed) makes on its own (P10, BLUEPRINT §11.2) | A monthly plan billed on the 31st imports as one event on the 31st or each month's last day, every year after; an end date or an own price's end stops its run there |
 
 ### M8 — Optimizer & bot
 | ID | Task | Done when |
@@ -220,6 +230,8 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M8.2 | Optimizations page (P14) + "Apply" to a draft. As built: `ss-suggestion-card` in the sections, Apply through core's `suggestionEdits` onto the draft, Dismiss into `dismissedSuggestions` (its schema, repository, Dexie v3, sealed by the lock and in backups v2), List view's `ss-optimizations-link`, and `OptimizerService` with a Web Worker for lists over 12 items under the production CSP (BLUEPRINT §14) | P14 criteria met |
 | M8.3 | `apps/bot` nightly price check → GitHub PR (BLUEPRINT §6.4, §7.7), which also checks each `taxIncluded` quote is still on its page, rereads reseller prices and checks each reseller's approval quotes on the provider's page (BLUEPRINT §4.9); the same run proposes a new logo when a provider's or reseller's icon changed (a rebrand). As built: a cron-started Workflow with a step per provider, prices confirmed on their pages before any Workers AI, Browser Rendering as a fallback, YAML edited line by line, and one `Price updates <date>` PR on `bot/price-updates`; deployed by hand on 2026-10-28, with its token (BLUEPRINT §7.2, §14) | A changed price produces a PR, and so does a changed logo, a `taxIncluded` quote gone from its page or a reseller the provider no longer names |
 | M8.4 | Apply several optimizations (added 2026-10-28, the feedback after M9): Apply puts a card's changes on the list's draft and stays, the optimizer running on the list as its draft has it, so the next suggestion counts them; Undo puts the draft back (`ListDraftService.putBack`), and Review and save opens the editor (BLUEPRINT §10, §14) | Two suggestions applied one after the other are both in the editor's draft, and Undo takes back the last |
+| M8.5 | Apply replaces what a suggestion replaces (added 2026-10-29, the feedback after M3): a bundle or suite Optimizations adds starts on its first charge (`startDate`), and an extra member joins its host on the day the account it replaces ends (an add-on's optional `since`), so nothing new is charged before it starts and this year's past charges stay as they were; the optimizer prices them the same way; equal savings are listed by title (P14, BLUEPRINT §4.6, §10.3) | Replacing Crave Premium and Disney+ Premium with their bundle lowers this year's total and the next 12 months' by what the card said, never raises them; an extra member adds nothing to its host's charges before it joins; the item dialog keeps the day it joins unless its quantity changes |
+| M8.6 | Review changes, and suggestions that never clash (added 2026-10-29, the feedback after M3): each suggestion applied is recorded on the draft with the items it changed as they were and what it added (core's `appliedChangeSchema`, `withDraftEdits`, `dependentChanges`, `withoutApplied`); Review changes (`/lists/:listId/optimize/review`) lists each one like a diff (− what goes, + what comes, ~ what changes), what it saves, and the list's totals before and after, with Undo for each (and the later ones that build on it), Save changes, Open in the editor and a back button to Optimizations; while the suggestions are worked out again after an Apply, no card can be applied (P14) | Applying two suggestions and undoing the first takes back the second only when it builds on the first; Save changes saves the list with the rest; no card that clashes with one applied can be applied |
 
 ### M9 — Payment (Phase 4)
 | ID | Task | Done when |
@@ -228,6 +240,8 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M9.2 | `acceptedNetworks` in the data and the extraction pipeline (the schema has validated the field since M1.1). As built: per region, each with its page and quotes (the user's choice), core's `networksNamedIn`; read for all ten providers (five name none); the price-research skill and §6.5's extraction record it, and the nightly bot rechecks it (BLUEPRINT §14) | The pipeline fills it |
 | M9.3 | core: eligibility, FX and cash-back maths, card assignment, limit checks (BLUEPRINT §9.3). As built: core's `rewards/` (`networkRate`, `cardCost`, `cardAcceptance`, `itemOnCard`, `cardLoads`, `overLimits`, `monthlyOnCard`, `bestCard`, `assignCards`), `Charge.charged` and `ResolvedItem.acceptedNetworks`, and the optimizer's `card` action; open question 1 decided with the user (BLUEPRINT §14) | Tests pass |
 | M9.4 | Card select in the item dialog, net-cost displays, over-limit warnings. As built: the item dialog's Payment (only the cards its seller takes, the Best card chip and notes on acceptance and FX fees), List view's net in its header and on its cards, P11's Assign best cards (a preview per list, lists with unsaved edits skipped, Apply with Undo through `CardsRepository.assign`) and each tile's net and over-limit warning, the Calendar's days that take a card over its limit with the card in the day's panel, and the optimizer's card action wired in (BLUEPRINT §14) | All visible on P4, P6, P10 and P11 |
+| M9.5 | Examples that name no real card (added 2026-10-28, UI polish): the card dialog's Name hint ("As on the card: Cash Back Mastercard"), and every example card in the docs and the tests ("Cash Back Mastercard", "Rewards Mastercard", "Rewards Discover"), where real products were named | No real card product is named in the app, the docs or the tests; the card dialog's hint shows the generic example |
+| M9.6 | Pay in another currency (added 2026-10-29, the feedback after M3): when a plan's seller prices it in several currencies for where it's bought, a group of it or GLOBAL (Proton's USD, CAD, EUR and CHF), the optimizer suggests the one that costs least on the item's card after its FX fee and cash back, as a free saving ("Pay for Proton Unlimited in CAD" for a US buyer, whose US$12.99 a month is about US$11.60 in CAD at late October’s rate; core's `currencySuggestions`); another country's price never counts, since it's set by where the buyer is; Apply makes it the user's own price in that currency from the item's next charge (`priceOverride.since`, the item dialog's From); cards, editor rows, Review changes and the text export say what an own price still to come will be, and from when (P6, P14, BLUEPRINT §4.7, §10.3) | A plan sold in USD and CAD, paid with a card with no FX fee, is suggested in the cheaper one with its saving; a card whose FX fee cancels the difference gets no suggestion, nor does a plan priced by country; after Apply its next charge is in that currency, this year's past ones are as they were, and nothing more is suggested for it |
 
 ### M10 — Extras (Phase 5)
 Live calendar feed (`POST /cal`), encrypted device sync, "report a wrong price", PWA install and offline mode,
@@ -345,8 +359,10 @@ Users rank **rank keys**. Each one points to one rankable option of a feature:
 | Active | Today is inside a paid period (ongoing: on or after `startDate` and before `endDate`; limited: from a window's start through its end) | Green dot, "Active" |
 | Inactive | In a list but not active today | Amber dot, "Inactive", plus "Active from Sep 10, 2026" when a future window or start date exists |
 | Not listed | (Search only) The provider isn't in any list | Grey dot, "Not listed" |
-| Ending | `endDate` is within the next 30 days | Small "Ends Nov 3" badge |
-| Manual renewal | The next charge is `manual` | Small ↻ "Renew by Nov 3" badge |
+| Ending | `endDate` is within the next 30 days | Small "Ends Nov 3" badge; with a renewal before it, one badge: "Renews Nov 1, then ends Nov 3" (M6.19) |
+| Manual renewal | The next charge is `manual` | Small ↻ "Manual · renew by Nov 3" badge (the word since M7.11) |
+| Replaced | (List view) It ends on a day when, in the same list, a bundle or suite that includes it has started, or an extra member joins another account of its provider (core's `itemReplacements`, M7.11) | Small "Moves to Netflix and Crave on Nov 15", or "Extra member on Mine (Netflix Standard) from Nov 20", in place of the renewal and end |
+| In a bundle | (Search only) A bundle in a list includes one of the provider's plans (`ProviderActivity.bundleIds`, M7.11) | "Active · 1 list · in Netflix and Crave" |
 
 In Search the status is per provider, across all lists ("Active · 2 lists").
 
@@ -435,6 +451,12 @@ Add these aliases to `_tokens.scss`. They build on the rank tokens in BLUEPRINT 
   --ss-font: 'Inter', system-ui, sans-serif;
 }
 ```
+
+**Scrollbars (M4.9, UI polish):** thin everywhere, in the theme's colours: `--ss-scrollbar-thumb` (the muted text
+colour: 5.0:1 or more on every light background and 4.2:1 or more on the dark ones, Material's dark menus being the
+least; WCAG 1.4.11 asks 3:1), `--ss-scrollbar-thumb-active` (the text colour, while Safari's thumb is hovered or
+dragged) and `--ss-scrollbar-track` (transparent), all in `_tokens.scss`. `styles.scss` sets `scrollbar-color` and `scrollbar-width: thin` (Firefox,
+Chromium) and, where those aren't supported (Safari), `::-webkit-scrollbar` with a 6 px thumb in a 10 px gutter.
 
 ### 4.2 P1 — App shell & first run
 **Wireframes:** every frame shares the shell; the dark version is `docs/wireframes/02-home-dark.png`.
@@ -535,6 +557,15 @@ stay out of the initial bundle.
 
 ---
 
+**Choices, which control (M4.8, UI polish):** a long list (over about 15) is a menu you can type in
+(`ss-choice-field`, M6.16): Settings', the first run's and 📍's Country, province or state and Currency; the item
+dialog's Bought in and its own price's Currency; a custom plan's Currency; the card dialog's Card currency. A short one
+stays a `mat-select`: the item dialog's Plan, billing period, Unit, add-on Quantity and Paid with; a custom plan's
+Unit; a feature's Value; the card dialog's Type and Network; Search's Sort and Category; List view's Sort; the
+Calendar's Showing, Month and Year; Lock after (Settings and its dialog); the rank menus. Features, tags and Add a
+feature were typed into already. Every page with nothing to show uses `ss-empty-state` (Lists' too, M4.8), and every
+loading line is the page's muted `.note`.
+
 ## 5. Page specs
 
 Each page lists its **wireframe**, **purpose**, **layout**, **data**, **behaviour**, **states** and **acceptance** criteria.
@@ -609,6 +640,18 @@ Calendar", and "Your payments this year, past and to come, add up to ≈ $610.64
 **Since the feedback after M9 (M7.7):** each bar is one colour, changing gradually from green to yellow exactly at the
 budget and on to red at 150%, and each budget warning has ✕, which hides it until its period or budget changes, with "Show 1 hidden budget
 warning" to bring it back.
+
+**Since the UI polish (M7.10):** Home is a hub. Quick actions first: Add a subscription (a menu: each list, which opens
+Search in its pick mode, or a custom subscription), New list and Open a list. Then the budget warnings, the budgets,
+and Coming up: every payment of the next 14 days still to pay, as charged, with Mark renewed on one renewed by hand: the
+renewal due is paid, so the next one is the charge after it (as P4's Wrong date? would set it), saved at once with Undo,
+and the line goes. A charge the schedule counts as paid already (before the item's next one, such as the payment for a
+plan whose next renewal is a month away) isn't listed. The payment stays on its due date, in the totals as before. The mini calendar sits
+beside the budgets and Coming up from 960 px. Your lists has a card each (its name, this month's total and how many
+subscriptions), with a New list card and Subscription Lists; Ways to save has each list's View optimizations; and Price
+changes lists what catalog updates changed in the lists' prices this past month ("Netflix Standard $18.99 → $19.99 a
+month, Nov 1"), which CatalogStore keeps in the settings when an update changes the catalog. Under 960 px it's one
+column, in that order.
 
 **Acceptance**
 - [ ] The bar totals equal the sum of every list's "this month" / "this year"
@@ -870,7 +913,7 @@ Opened from P5 to add or edit an item. It goes full screen under 600 px.
 │ Simultaneous streams · 2–4   [ Profile default (Not ranked)    ▾ ]        │
 │                                                                           │
 │ TAGS     [#family ✕] [+ Add tag]                                          │
-│ PAYMENT  [ Simplii Cashback ▾ ]  Best card: saves $0.27 / mo   (Phase 4)  │
+│ PAYMENT  [ Cash Back Mastercard ▾ ]  Best card: saves $0.27/mo (Phase 4)  │
 │                                                                           │
 │ ≈ $18.99 / mo · next charge Nov 12               [Cancel] [Add to list]   │
 └───────────────────────────────────────────────────────────────────────────┘
@@ -926,13 +969,18 @@ BLUEPRINT §14 has the rest.
 - **Free plans:** when the picked price is 0, Billed, Next renewal, Auto-renews and the price override are hidden, and so is the Ongoing / Specific dates choice. The item is saved as Ongoing, with today as the anchor date (an item being changed keeps its own).
 - **Specific dates:** at least one window; each end must be after its start; windows can't overlap. Two that share a
   day overlap (a window is active through its end), and one that repeats every year must be shorter than a year.
-- **Price override:** an amount above 0, with a currency, and an optional "until" date for an offer that ends (first-term discounts): charges from that date on use the catalog price. The amount is taken as charged, tax included, unless "plus tax" is ticked (BLUEPRINT §4.8). It's also how an item bought from a reseller records what it cost, until an item can name its shop (BLUEPRINT §4.9).
+- **Price override:** an amount above 0, with a currency, and an optional "until" date for an offer that ends (first-term discounts): charges from that date on use the catalog price. Since M9.6 an optional "From" date too, the first charge at that price (another currency from the next charge, a known increase), which Until must come after: charges before it use the catalog price, and the cards say "Your own price from Nov 10, 2026: CA$16.24 a month + tax" until then. The amount is taken as charged, tax included, unless "plus tax" is ticked (BLUEPRINT §4.8). It's also how an item bought from a reseller records what it cost, until an item can name its shop (BLUEPRINT §4.9).
 - **Bought in region** (Advanced): any country; it sets `region`, which picks the item's price and availability. Defaults to Settings' country.
 - **Feature ranks:** the plan's provided keys (§3.2), grouped. The dropdown starts with "Profile default (X)" and includes Essential ("keep this plan") and Critical ("keep this provider"), each with a one-line hint. Only the provided keys' ranks are saved.
 - **Tags:** autocomplete from the Settings tags, with "Create tag" inline (name + colour).
 - **Bundles:** bundle items show the bundle's included plans read-only, and their combined features for ranking.
 - **Duplicates:** adding a plan that's already in the list shows "Already in this list — add another?" (duplicates are allowed), and so does changing an item to another item's plan.
 - **Save** writes to the **draft** (P5), closes the dialog and shows "Added Netflix Standard".
+
+**Since the feedback after M3 (M6.19):** Auto-renews and Ends on can both be set: one says how it's charged, the
+other when it stops. With an end date the checkbox reads "Auto-renews until it ends" and Ends on's hint "It stops then:
+no renewal after"; the cards' badge reads "Renews Nov 12, then ends Nov 28" (or "Renew by Nov 12, then ends Nov 28"),
+and the billing line "Monthly · auto-renews until Nov 28, 2026".
 
 **Acceptance**
 - [ ] Invalid combinations can't be saved, and show inline errors
@@ -1229,7 +1277,7 @@ Upcoming   Oct 28 Crave $22.00 · Nov 3 Mullvad ≈ $7.53 ↻ · Nov 12 Netflix 
 Payment cards                                                          [+ Add card]
 We never ask for card numbers, only what's needed to estimate cash back and fees.
 ┌──────────────────────────────────────┐  ┌──────────────────────────────────────┐
-│ Simplii Cashback        [MC]  CREDIT │  │ Everyday Debit      [Interac]  DEBIT │
+│ Cash Back Mastercard    [MC]  CREDIT │  │ Everyday Debit      [Interac]  DEBIT │
 │ 1.5% cash back · FX fee 2.5%         │  │ 0% cash back · FX fee 2.5%           │
 │ This month [███████░░░] $60 of $500  │  │ No limit                             │
 │ Netflix $18.99 · Proton ≈ $17.93     │  │ No subscriptions                     │
@@ -1269,8 +1317,8 @@ We never ask for card numbers, only what's needed to estimate cash back and fees
   fees"). Under the limit bar, the first of the next 12 months whose charges go over it: "Over its limit in October
   2026: ≈ $116.46 of $30.00, and in 1 more month", read with "Warning:" (the bar is red when it's this month).
 - **Assign best cards** under the tiles, after "1 subscription has no card" (turned off while prices load). Its dialog
-  has a heading per list with changes and a row per item ("Mullvad VPN · Everyday → Discover It · saves ≈ $0.48 a
-  year"), a note for each list with unsaved edits ("Family has changes in the editor that aren't saved, so its
+  has a heading per list with changes and a row per item ("Mullvad VPN · Everyday → Rewards Discover · saves ≈ $0.48
+  a year"), a note for each list with unsaved edits ("Family has changes in the editor that aren't saved, so its
   subscriptions keep their cards."), and the total over the next 12 months. Apply writes the cards to the saved items
   in one transaction, with Undo in the snackbar. With nothing to change: "Every subscription is on its best card
   already." and Close.
@@ -1396,6 +1444,13 @@ Local sync comes with Phase 5.
 **Since the feedback after M9:** the 📍 dialog's menus can be typed in (M6.16, as P1's), and a tag's colour can also
 come from the device's own colour picker beside Hex colour, each following the other (M6.15).
 
+**Since the UI polish (M4.7):** the sections are grouped, the most used first: **Everyday** (Budgets, Custom tags,
+Appearance), **Where you are** (Location and currency, Search) and **Your data** (Backups, App lock, which was
+Security, Catalog, and Delete all data, folded under its summary until opened, its button "Delete all data…"). "On
+this page" links each group and its sections: a sticky side column from 960 px, and a chip for each group, wrapping,
+above them on a phone. A link moves focus to its heading, below the top bar. A long list of tags folds after six, with
+"Show all 14 tags" and "Show fewer".
+
 **Acceptance**
 - [ ] Budgets and tags persist and update every page live
 - [ ] Export → Delete all → Import (Replace) restores identical data, with and without a passphrase
@@ -1424,7 +1479,8 @@ FREE SAVINGS — nothing is lost
 - Runs the optimizer for this list, in a Web Worker if it takes longer than about 50 ms.
 - Sections, in this order: Free savings, Red, Orange, Yellow.
 - Each card shows:
-  - the changes (keep / downgrade / switch / remove / convert to extra member / bundle or suite / interval / card)
+  - the changes (keep / downgrade / switch / remove / convert to extra member / bundle or suite / interval / card /
+    currency)
   - savings over the next 12 months
   - features lost or gained, with rank dots
   - an "estimated" tag when converted prices are involved
@@ -1454,9 +1510,38 @@ card (the first left, else Review and save). "Applied: <change>" has Undo, which
 says the list has changes not saved and that the suggestions count them, with Review and save, which opens the
 editor.
 
+**Since the feedback after M3 (M8.5):** what Apply adds never charges before it starts. A bundle or suite starts on
+the earliest next charge of the items it replaces, with that as its "Subscribed since", and each item it replaces ends
+on its own next charge, when what's paid for runs out. An extra member joins its host on the day the account it
+replaces ends (the add-on's `since`): the host's charges before then don't include it, and its card says "Extra
+member, joins Nov 20" until then. So the list never pays for both, and this year's past charges stay as they were:
+before, a bundle with no start date was counted as if it had been paid all year, which raised this year's total.
+
+**Since the feedback after M3 (M8.6):** "Review changes" takes the place of Review and save. It opens a page of its
+own (`/lists/:listId/optimize/review`, its back button to Optimizations) that lists each suggestion applied, in
+order, like a diff: − for what goes ("Crave Premium · $22.00 a month · Ends Nov 5, when what's paid for runs out"),
++ for what comes ("Netflix and Crave · $35.00 a month · From Nov 5"), ~ for what changes ("Paid with Cash Back
+Mastercard"), with what it saves and the list's totals this year and over the next 12 months, before and after. Each
+has Undo, which takes back that change and any later one that changed what it changed or added; then Save changes
+(the list with every change kept) or Open in the editor. The snackbar's Undo after Apply takes back that one change.
+While the suggestions are worked out again after an Apply, the cards can't be applied ("Updating the suggestions…"),
+so a card that clashes with what was applied (a card for a plan a bundle replaces) is never in reach.
+
+**Since the feedback after M3 (M9.6):** another currency is a free saving too. When a plan's seller prices it in
+several currencies for the buyer (Proton sells every paid plan in USD, CAD, EUR and CHF, wherever you are), a US buyer
+sees "Pay for Proton Unlimited in CAD": the price it is now, and the CAD price converted (its tooltip giving the CAD
+amount), "From Nov 10, paid with Everyday", and what it saves over the next 12 months on that card after its FX fee and
+cash back, marked Estimated. It needs the item's card: a card with an FX fee as large as the
+difference gets nothing, and an item with no card gets a better card first. Only the currencies of the price list the
+buyer's own price comes from count (their country's, a group's such as EU, or GLOBAL): a price another country sets for
+its own buyers is never offered. An item with an own price, add-ons, or another free change suggested (annual billing,
+a better card) waits until that's applied or dismissed. Apply makes it the user's own price in that currency from the
+item's next charge, plus tax where the catalog's price is before tax, and Review changes says "Paid in CAD from Nov 10,
+2026: CA$16.24 a month + tax".
+
 **Acceptance**
 - [ ] The optimizer fixtures produce the expected cards and colours
-- [ ] Apply never saves until the user presses Save in edit mode
+- [ ] Apply never saves until the user presses Save in edit mode or Save changes on Review changes
 - [ ] Dismissed suggestions stay hidden until the list changes
 
 ### P15 — Not found & errors

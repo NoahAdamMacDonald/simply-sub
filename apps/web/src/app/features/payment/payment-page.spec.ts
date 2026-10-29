@@ -34,8 +34,8 @@ import { PaymentPage } from './payment-page';
 const workId = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d';
 const familyId = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4e';
 
-const simpliiFields: NewRecord<'cards'> = {
-  name: 'Simplii Cashback Mastercard',
+const cashBackFields: NewRecord<'cards'> = {
+  name: 'Cash Back Mastercard',
   nickname: 'Everyday',
   type: 'credit',
   network: 'mastercard',
@@ -214,14 +214,14 @@ describe('PaymentPage', () => {
   });
 
   it('shows each card with its network, cash back, FX fee, limit and the subscriptions it pays for', async () => {
-    const simplii = await cards.create(simpliiFields);
+    const cashBack = await cards.create(cashBackFields);
     await cards.create(debitFields);
     // Charged on Oct 10 and Oct 20, this month.
     await items.create(
-      itemFields('crave.premium', workId, simplii.id, { anchorDate: '2026-11-10' }),
+      itemFields('crave.premium', workId, cashBack.id, { anchorDate: '2026-11-10' }),
     );
     await items.create(
-      itemFields('mullvad.vpn', familyId, simplii.id, {
+      itemFields('mullvad.vpn', familyId, cashBack.id, {
         interval: 'year',
         anchorDate: '2027-10-20',
         autoRenew: false,
@@ -234,7 +234,7 @@ describe('PaymentPage', () => {
     expect(tiles()).toEqual([
       {
         title: 'Everyday',
-        name: 'Simplii Cashback Mastercard',
+        name: 'Cash Back Mastercard',
         badges: ['Mastercard', 'Credit'],
         rates: '1.5% cash back · FX fee 2.5%',
         // $22 + 5% GST, and €60 with VAT included plus the card's 2.5% FX fee on it.
@@ -269,7 +269,7 @@ describe('PaymentPage', () => {
   });
 
   it('warns of a month its charges take over its limit (M9.4)', async () => {
-    const tight = await cards.create({ ...simpliiFields, monthlyLimit: 30 });
+    const tight = await cards.create({ ...cashBackFields, monthlyLimit: 30 });
     await items.create(itemFields('crave.premium', workId, tight.id));
     // A year of Mullvad on Oct 20: October goes over $30.
     await items.create(
@@ -292,7 +292,7 @@ describe('PaymentPage', () => {
     const lists = TestBed.inject(ListsRepository);
     const work = await lists.create({ name: 'Work Related' });
     const family = await lists.create({ name: 'Family' });
-    const simplii = await cards.create({ ...simpliiFields, monthlyLimit: undefined });
+    const cashBack = await cards.create({ ...cashBackFields, monthlyLimit: undefined });
     await cards.create(debitFields);
     const crave = await items.create(itemFields('crave.premium', work.id, undefined));
     const kept = await items.create(itemFields('crave.basic', family.id, undefined));
@@ -321,7 +321,7 @@ describe('PaymentPage', () => {
       ?.click();
 
     await storedUntil(
-      (stored) => stored.find((item) => item.id === crave.id)?.cardId === simplii.id,
+      (stored) => stored.find((item) => item.id === crave.id)?.cardId === cashBack.id,
     );
     const snack = () => document.querySelector('.mat-mdc-snack-bar-container');
     await until(() => snack()?.textContent?.includes('Assigned a card to 1 subscription') === true);
@@ -340,13 +340,12 @@ describe('PaymentPage', () => {
     expect(dialog()?.querySelector('h2')?.textContent).toBe('Add a card');
     expect(text(dialog()?.querySelector('.never'))).toContain('Never enter a card number');
     // The user's currency to start with.
-    expect(await (await control(loader, 'Card currency', MatSelectHarness)).getValueText()).toBe(
+    // A menu you can type in (M4.8), showing its choice's name.
+    expect(await (await control(loader, 'Card currency', MatInputHarness)).getValue()).toBe(
       'CAD — Canadian Dollar',
     );
 
-    await (
-      await control(loader, 'Name', MatInputHarness)
-    ).setValue(' Simplii Cashback Mastercard ');
+    await (await control(loader, 'Name', MatInputHarness)).setValue(' Cash Back Mastercard ');
     await (await control(loader, 'Type', MatSelectHarness)).clickOptions({ text: 'Credit' });
     await (await control(loader, 'Network', MatSelectHarness)).clickOptions({ text: 'Mastercard' });
     await (await control(loader, 'Cash back', MatInputHarness)).setValue('1.5');
@@ -357,7 +356,7 @@ describe('PaymentPage', () => {
     await until(() => dialog() === null);
     const [saved] = await storedCards();
     expect(saved).toMatchObject({
-      name: 'Simplii Cashback Mastercard',
+      name: 'Cash Back Mastercard',
       type: 'credit',
       network: 'mastercard',
       currency: 'CAD',
@@ -367,12 +366,11 @@ describe('PaymentPage', () => {
     });
     expect(saved).not.toHaveProperty('nickname');
     expect(document.querySelector('.mat-mdc-snack-bar-container')?.textContent).toContain(
-      'Added Simplii Cashback Mastercard',
+      'Added Cash Back Mastercard',
     );
     await until(
       () =>
-        document.activeElement ===
-        page().querySelector('[aria-label="Edit Simplii Cashback Mastercard"]'),
+        document.activeElement === page().querySelector('[aria-label="Edit Cash Back Mastercard"]'),
     );
   });
 
@@ -400,7 +398,7 @@ describe('PaymentPage', () => {
   });
 
   it('changes a card, clearing a nickname and limit left empty', async () => {
-    await cards.create(simpliiFields);
+    await cards.create(cashBackFields);
     await open();
     await click('Edit Everyday');
     const loader = await dialogLoader();
@@ -412,17 +410,17 @@ describe('PaymentPage', () => {
 
     await until(() => dialog() === null);
     const [saved] = await storedCards();
-    expect(saved).toMatchObject({ name: 'Simplii Cashback Mastercard', cashbackPercent: 2 });
+    expect(saved).toMatchObject({ name: 'Cash Back Mastercard', cashbackPercent: 2 });
     expect(saved).not.toHaveProperty('nickname');
     expect(saved).not.toHaveProperty('monthlyLimit');
-    await until(() => tiles()[0]?.title === 'Simplii Cashback Mastercard');
+    await until(() => tiles()[0]?.title === 'Cash Back Mastercard');
     expect(tiles()[0].limit).toBe('No limit');
   });
 
   it('deletes a card after asking, and the subscriptions it paid for have no card', async () => {
-    const simplii = await cards.create(simpliiFields);
+    const cashBack = await cards.create(cashBackFields);
     const debit = await cards.create(debitFields);
-    const crave = await items.create(itemFields('crave.premium', workId, simplii.id));
+    const crave = await items.create(itemFields('crave.premium', workId, cashBack.id));
     await items.create(itemFields('crave.basic', familyId, debit.id));
     await open();
 

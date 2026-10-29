@@ -24,6 +24,7 @@ import { FeatureSummary } from '../../shared/feature-summary/feature-summary';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { RankCounts } from '../../shared/rank/rank-counts';
 import { TypeCounts } from '../../shared/type-counts/type-counts';
+import { EmptyState } from '../../shared/empty-state/empty-state';
 
 /** One list's card (P3). */
 interface ListCard {
@@ -54,6 +55,7 @@ const undoMillis = 10_000;
 @Component({
   selector: 'ss-lists-overview-page',
   imports: [
+    EmptyState,
     BudgetTotals,
     FeatureSummary,
     MatButton,

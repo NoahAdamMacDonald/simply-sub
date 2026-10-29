@@ -1,0 +1,94 @@
+<ss-page-header
+  heading="Review changes"
+  [backLink]="['/lists', listId(), 'optimize']"
+  backLabel="Optimizations"
+>
+  <p subtitle class="subtitle">
+    {{ listName() }}: what each change you applied does. Nothing is saved until Save changes.
+  </p>
+</ss-page-header>
+
+@switch (state()) {
+  @case ('loading') {
+    <p class="note">Loading the changes…</p>
+  }
+  @case ('none') {
+    <ss-empty-state icon="checklist" heading="No changes to review">
+      Apply a suggestion on Optimizations, and it waits here until you save it.
+      <div actions>
+        <a matButton="filled" [routerLink]="['/lists', listId(), 'optimize']"
+          >Back to optimizations</a
+        >
+      </div>
+    </ss-empty-state>
+  }
+  @case ('ready') {
+    @if (totals().length > 0) {
+      <dl class="totals">
+        @for (row of totals(); track row.label) {
+          <div>
+            <dt>{{ row.label }}</dt>
+            <dd>
+              <span class="visually-hidden">from </span>{{ row.before }}
+              <span aria-hidden="true">→ </span><span class="visually-hidden"> to</span>
+              <strong>{{ row.after }}</strong>
+            </dd>
+          </div>
+        }
+      </dl>
+    }
+
+    <ol class="changes">
+      @for (change of changes(); track change.index) {
+        <li class="change">
+          <div class="head">
+            <h2 [id]="'change-' + change.index" tabindex="-1">{{ change.title }}</h2>
+            <p class="saves">{{ change.savings }}</p>
+          </div>
+          <ul class="lines">
+            @for (line of change.lines; track $index) {
+              <li [class]="line.kind">
+                <span class="sign" aria-hidden="true">{{
+                  line.kind === 'goes' ? '−' : line.kind === 'comes' ? '+' : '~'
+                }}</span>
+                <span class="visually-hidden">{{
+                  line.kind === 'goes' ? 'Goes: ' : line.kind === 'comes' ? 'Comes: ' : 'Changes: '
+                }}</span>
+                <!-- Spaces inside the spans: Angular drops those between them, and screen readers need them. -->
+                <span class="name">{{ line.name }} </span>
+                @if (line.price) {
+                  <span class="price">{{ line.price }} </span>
+                }
+                <span class="what">{{ line.what }}</span>
+              </li>
+            }
+          </ul>
+          <button
+            matButton="outlined"
+            type="button"
+            class="undo"
+            [attr.aria-label]="'Undo: ' + change.title"
+            (click)="undo(change.index)"
+          >
+            <mat-icon>undo</mat-icon>
+            Undo
+          </button>
+        </li>
+      }
+    </ol>
+
+    @if (others() > 0) {
+      <p class="note">
+        {{ others() === 1 ? '1 other change' : others() + ' other changes' }} in this list
+        {{ others() === 1 ? 'was' : 'were' }} made in the editor.
+      </p>
+    }
+
+    <div class="actions">
+      <a matButton="outlined" [routerLink]="['/lists', listId(), 'edit']">Open in the editor</a>
+      <button matButton="filled" type="button" [disabled]="saving()" (click)="save()">
+        Save changes
+      </button>
+    </div>
+  }
+}

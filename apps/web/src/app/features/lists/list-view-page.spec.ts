@@ -250,7 +250,7 @@ describe('ListViewPage', () => {
     await open(work.id);
     expect(page().querySelector('.net-summary')).toBeNull();
     const card = await TestBed.inject(CardsRepository).create({
-      name: 'Simplii Cashback Mastercard',
+      name: 'Cash Back Mastercard',
       nickname: 'Everyday',
       type: 'credit',
       network: 'mastercard',
@@ -461,6 +461,42 @@ describe('ListViewPage', () => {
     await until(() => groups().includes('Work laptop · Mullvad VPN'));
     await search('laptop');
     expect(groups()).toEqual(['# Subscriptions', 'Work laptop · Mullvad VPN']);
+  });
+
+  it('says what takes over from an item a bundle replaces (M7.11)', async () => {
+    const lists = TestBed.inject(ListsRepository);
+    const items = TestBed.inject(ItemsRepository);
+    const home = await lists.create({ name: 'Home' });
+    const ending = await items.create({
+      ...fields('crave.premium'),
+      listId: home.id,
+      billing: {
+        mode: 'recurring',
+        interval: 'month',
+        intervalCount: 1,
+        anchorDate: '2026-11-12',
+        endDate: '2026-11-12',
+        autoRenew: true,
+      },
+    });
+    await items.create({
+      ...fields('crave.basic'),
+      listId: home.id,
+      source: { kind: 'bundle', bundleId: 'bundle.netflix-crave' },
+      billing: {
+        mode: 'recurring',
+        interval: 'month',
+        intervalCount: 1,
+        anchorDate: '2026-11-12',
+        startDate: '2026-11-12',
+        autoRenew: true,
+      },
+    });
+    await open(home.id);
+    await until(() => card(ending.id) !== null);
+    expect(text(card(ending.id)?.querySelector('ss-status-badge .badge'))).toBe(
+      'Moves to Netflix and Crave on Nov 12',
+    );
   });
 
   it('lists an item it can’t price, with why and Edit', async () => {

@@ -362,7 +362,31 @@ async function exportBackup(page, label, shot, passphrase) {
 
       // ── Delete all data ─────────────────────────────────────────────────────────────────────
       await openSettings(page);
-      await keyToName(page, 'Delete all data');
+      // Folded under its summary since M4.7. At 1280 px the jump link of the same name (first in the Tab order) puts
+      // focus on the summary; at 360 the jump list has only the groups, and Tab reaches the summary itself, which an
+      // accessibility snapshot reads as plain text, with no name: it's found by its id. Its Enter opens it; then its
+      // button asks.
+      for (let presses = 0; ; presses++) {
+        const there = await page.evaluate(
+          () =>
+            document.activeElement?.id === 'delete-heading' ||
+            (document.activeElement?.tagName === 'A' &&
+              document.activeElement.textContent.trim() === 'Delete all data'),
+        );
+        if (there) break;
+        if (presses === 200) throw new Error("Couldn't reach Delete all data");
+        await page.keyboard.press('Tab');
+      }
+      await page.keyboard.press('Enter');
+      const folded = () =>
+        page.evaluate(() => document.querySelector('details.danger')?.open === false);
+      if (await folded()) {
+        await until('focus on its summary', () =>
+          page.evaluate(() => document.activeElement?.id === 'delete-heading'),
+        );
+        await page.keyboard.press('Enter');
+      }
+      await keyToName(page, 'Delete all data…');
       await page.keyboard.press('Enter');
       await dialog(page).locator('h2', { hasText: 'Delete all data?' }).waitFor();
       await sleep(400);

@@ -241,7 +241,7 @@ describe('CalendarPage', () => {
 
   it('flags a day that takes a card over its limit, and names the card in the day’s panel (M9.4)', async () => {
     const card = await TestBed.inject(CardsRepository).create({
-      name: 'Simplii Cashback Mastercard',
+      name: 'Cash Back Mastercard',
       nickname: 'Everyday',
       type: 'credit',
       network: 'mastercard',

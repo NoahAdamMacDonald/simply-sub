@@ -43,6 +43,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/lists/optimizations-page').then((m) => m.OptimizationsPage),
       },
+      {
+        // The changes Optimizations applied, before and after, to undo one or save them (M8.6).
+        path: ':listId/optimize/review',
+        title: 'Review changes · Simply Sub',
+        loadComponent: () =>
+          import('./features/lists/review-changes-page').then((m) => m.ReviewChangesPage),
+      },
     ],
   },
   {

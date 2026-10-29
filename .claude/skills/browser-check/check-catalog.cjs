@@ -106,7 +106,8 @@ const banner = async (page) =>
     .replace(/\s+/g, ' ')
     .trim();
 const catalogSection = (page) =>
-  page.locator('section', { has: page.getByRole('heading', { name: 'Catalog' }) });
+  // Its card: since M4.7 the "Your data" group's section holds it too.
+  page.locator('section.card', { has: page.getByRole('heading', { name: 'Catalog' }) });
 const catalogText = async (page) =>
   ((await catalogSection(page).textContent()) ?? '').replace(/\s+/g, ' ').trim();
 const checkMessage = async (page) =>

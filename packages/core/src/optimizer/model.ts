@@ -1,5 +1,6 @@
 import type { FxRates } from '../catalog/convert';
 import { pickPrice, type PickedPrice, type PriceContext } from '../catalog/pick-price';
+import { inclusionsOf, planOf } from '../catalog/plan-lookup';
 import type { Plan } from '../catalog/provider';
 import type { CatalogData, SnapshotProvider } from '../catalog/snapshot';
 import type { IsoDate } from '../dates/iso-date';
@@ -450,7 +451,11 @@ class ModelBuilder {
             includesAll(keys, member.critical),
         );
         for (const chosen of subsets(members, 1, room)) {
-          const addOns = withAddOn(source.addOns, addOnId, chosen.length);
+          // Each member joins on its own next charge, when its own plan ends (M8.5).
+          const addOns = chosen.reduce<AddOnChoice[] | undefined>(
+            (list, member) => withAddOn(list, addOnId, 1, member.next ?? this.context.today),
+            source.addOns,
+          ) as AddOnChoice[];
           const hosted = this.resolve(
             { ...host.resolved.item, source: { ...source, addOns } },
             catalog,
@@ -720,18 +725,7 @@ class ModelBuilder {
   }
 
   private resolve(item: ListItem, catalog: CatalogData): ResolvedItem | undefined {
-    const context: ResolveContext = {
-      catalog,
-      customSubs: undefined,
-      country: this.context.country,
-      currency: this.context.currency,
-      ...(this.context.fx && { fx: this.context.fx }),
-      today: this.context.today,
-      profileRanks: this.context.profileRanks,
-      taxPlace: this.context.place,
-    };
-    const resolution = resolveItem(item, context);
-    return resolution.ok ? resolution.resolved : undefined;
+    return resolveChanged(item, catalog, this.context);
   }
 
   private priceContext(region: string, seller: SnapshotProvider): PriceContext {
@@ -780,33 +774,24 @@ class ModelBuilder {
   }
 }
 
-/** A plan by its id (<provider id>.<slug>), with its provider. */
-function planOf(
-  catalog: Pick<CatalogData, 'providers'>,
-  planId: string,
-): { provider: SnapshotProvider; plan: Plan } | undefined {
-  const provider = catalog.providers.find(({ id }) => id === planId.slice(0, planId.indexOf('.')));
-  const plan = provider?.plans.find(({ id }) => id === planId);
-  return provider && plan ? { provider, plan } : undefined;
-}
-
-/**
- * Every plan or provider a suite includes, through the plans it includes too (Duo includes Unlimited, which includes
- * the Plus plans).
- */
-function inclusionsOf(plan: Plan, catalog: CatalogData): Set<string> {
-  const found = new Set<string>();
-  const queue = [plan];
-  while (queue.length > 0) {
-    const listed = queue.shift()?.features['includes-subscription'];
-    for (const id of Array.isArray(listed) ? listed : []) {
-      if (found.has(id) || id === plan.id) continue;
-      found.add(id);
-      const included = planOf(catalog, id)?.plan;
-      if (included) queue.push(included);
-    }
-  }
-  return found;
+/** A changed catalog item or bundle, resolved for the user: undefined when it can't be priced. */
+export function resolveChanged(
+  item: ListItem,
+  catalog: CatalogData,
+  context: OptimizerContext,
+): ResolvedItem | undefined {
+  const resolveContext: ResolveContext = {
+    catalog,
+    customSubs: undefined,
+    country: context.country,
+    currency: context.currency,
+    ...(context.fx && { fx: context.fx }),
+    today: context.today,
+    profileRanks: context.profileRanks,
+    taxPlace: context.place,
+  };
+  const resolution = resolveItem(item, resolveContext);
+  return resolution.ok ? resolution.resolved : undefined;
 }
 
 /** The item on another plan or period from `on`, its next charge: its price override goes, being for the old one. */
@@ -867,15 +852,23 @@ export function keptAddOns(
 
 /** `addOns` with `count` more of one. */
 export function withAddOn(
-  addOns: readonly { id: string; quantity: number }[] | undefined,
+  addOns: readonly AddOnChoice[] | undefined,
   id: string,
   count: number,
-): { id: string; quantity: number }[] {
+  since?: IsoDate,
+): AddOnChoice[] {
   const list = [...(addOns ?? [])];
-  const index = list.findIndex((addOn) => addOn.id === id);
-  if (index >= 0) list[index] = { id, quantity: list[index].quantity + count };
-  else list.push({ id, quantity: count });
+  // One entry per day it joined: an extra member from Nov 20 never adds to the charges before it.
+  const index = list.findIndex((addOn) => addOn.id === id && addOn.since === since);
+  if (index >= 0) list[index] = { ...list[index], quantity: list[index].quantity + count };
+  else list.push({ id, quantity: count, ...(since !== undefined && { since }) });
   return list;
+}
+
+interface AddOnChoice {
+  id: string;
+  quantity: number;
+  since?: IsoDate;
 }
 
 /** A new item a bundle or suite adds, priced like its first member and billed from `on`. */
@@ -891,6 +884,8 @@ function newItem(first: ItemModel, source: ItemSource, price: PickedPrice, on: I
       interval: price.interval,
       intervalCount: price.intervalCount,
       anchorDate: on,
+      // Nothing before it starts: the items it replaces are paid for until then (M8.5).
+      startDate: on,
       autoRenew: price.autoRenew,
     },
     tagIds: [],

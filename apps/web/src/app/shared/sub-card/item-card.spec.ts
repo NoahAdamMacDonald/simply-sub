@@ -155,7 +155,7 @@ describe('ItemCard', () => {
         }),
       ),
     ).toEqual([
-      'Monthly · auto-renews · ends Mar 12, 2027',
+      'Monthly · auto-renews until Mar 12, 2027',
       'Subscribed since Mar 12, 2025',
       'Your own price until Dec 31, 2026',
       'Bought in United States',
@@ -168,6 +168,14 @@ describe('ItemCard', () => {
         resolved('netflix.standard', { priceOverride: { amount: 0.01, currency: 'CAD' } }),
       ),
     ).toEqual(['Monthly · auto-renews', 'Your own price']);
+  });
+
+  it('says what an own price still to come will be, and from when (M9.6)', async () => {
+    const own = { amount: 9.99, currency: 'USD', since: '2026-11-12', plusTax: true };
+    expect(await facts(resolved('netflix.standard', { priceOverride: own }))).toEqual([
+      'Monthly · auto-renews',
+      'Your own price from Nov 12, 2026: US$9.99 a month + tax',
+    ]);
   });
 
   it('emits the pin it should have, and shows it pressed when pinned', () => {
@@ -278,7 +286,7 @@ describe('ItemCard', () => {
         Array.from(element.querySelectorAll('ss-status-badge .badge')).map((badge) =>
           text(badge)?.replace('autorenew', '').trim(),
         ),
-      ).toEqual(['Ends Nov 20', 'Renew by Nov 10']);
+      ).toEqual(['Manual · renew by Nov 10, then ends Nov 20']);
     });
 
     it('has no Wrong date? for Specific dates, which have no anchor to move', async () => {

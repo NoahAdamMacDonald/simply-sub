@@ -53,5 +53,13 @@ export function actionLine(action: SuggestionAction): ActionLine {
         from: [],
         when: `With ${action.cardTitle} instead of ${action.fromCardTitle ?? 'no card'}, from now on`,
       };
+    case 'currency':
+      // The same plan from another price list: the converted price, and the card whose FX fee is in the saving (M9.6).
+      return {
+        title,
+        from: [action.item.price],
+        to: action.to,
+        when: `From ${dateText(action.on)}, paid with ${action.cardTitle}`,
+      };
   }
 }

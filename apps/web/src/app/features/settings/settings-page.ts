@@ -132,8 +132,54 @@ export class SettingsPage {
   });
 
   /** Whether Search starts with Sold in on (P8, M5.6); kept only when it's on. */
+  /** The page's groups and their sections, for "On this page" (M4.7): the most used first. */
+  protected readonly groups = [
+    {
+      id: 'everyday',
+      name: 'Everyday',
+      sections: [
+        { id: 'budgets', name: 'Budgets' },
+        { id: 'tags', name: 'Custom tags' },
+        { id: 'appearance', name: 'Appearance' },
+      ],
+    },
+    {
+      id: 'where',
+      name: 'Where you are',
+      sections: [
+        { id: 'location', name: 'Location and currency' },
+        { id: 'search', name: 'Search' },
+      ],
+    },
+    {
+      id: 'data',
+      name: 'Your data',
+      sections: [
+        { id: 'backups', name: 'Backups' },
+        { id: 'lock', name: 'App lock' },
+        { id: 'catalog', name: 'Catalog' },
+        { id: 'delete', name: 'Delete all data' },
+      ],
+    },
+  ];
+
+  /** Goes to a group or section, below the top bar, with focus on its heading so Tab goes on from there. */
+  protected jump(event: Event, id: string): void {
+    const target = document.getElementById(id);
+    if (!target) return;
+    event.preventDefault();
+    const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+    target.focus({ preventScroll: true });
+  }
+
   protected setSoldOnly(on: boolean): void {
     void this.settings.update({ searchSoldOnly: on ? true : undefined });
+  }
+
+  /** Search lists every official reseller of a plan, cheaper or not (M5.13). Off by default. */
+  protected setAllResellers(on: boolean): void {
+    void this.settings.update({ searchAllResellers: on ? true : undefined });
   }
 
   protected setMode(mode: ThemeMode): void {

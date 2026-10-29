@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { acceptedNetworksIn, cardAcceptance, eligibleCards, type ListItem } from '../../src';
 import { customPlanId, customSub, customSubId } from '../user/fixtures';
-import { canadian, debitCard, discoverCard, dollarCard, resolved, simplii } from './fixtures';
+import { canadian, debitCard, discoverCard, dollarCard, resolved, cashBack } from './fixtures';
 
 // Which cards can pay for an item (BLUEPRINT §9.3): the networks its seller takes where it's bought, per region since
 // M9.2, every card where they aren't known.
@@ -63,9 +63,9 @@ describe('cardAcceptance and eligibleCards', () => {
     expect(cardAcceptance(discoverCard, canada)).toBe('not-accepted');
     expect(cardAcceptance(discoverCard, states)).toBe('accepted');
     expect(cardAcceptance(debitCard, resolved('mullvad.vpn'))).toBe('unknown');
-    const cards = [debitCard, simplii, discoverCard, dollarCard];
+    const cards = [debitCard, cashBack, discoverCard, dollarCard];
     expect(eligibleCards(cards, canada)).toEqual([
-      { card: simplii, acceptance: 'accepted' },
+      { card: cashBack, acceptance: 'accepted' },
       { card: dollarCard, acceptance: 'accepted' },
     ]);
     expect(

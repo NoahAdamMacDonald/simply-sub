@@ -1,16 +1,21 @@
-// M7.3 in the system Edge: Home (P2) on `ng serve`, for a Canadian in Alberta, with no lists, then with Work Related
-// (Netflix Standard, monthly on the 12th) and Family (Mullvad VPN, yearly on Jan 20, renewed by hand) written to
-// IndexedDB.
+// M7.3 and M7.10 in the system Edge: Home (P2), the hub, on `ng serve`, for a Canadian in Alberta, with no lists,
+// then with Work Related (Netflix Standard, monthly on the 12th) and Family (Mullvad VPN, yearly, renewed by hand, due
+// a week from today) written to IndexedDB.
 // In both themes at 1280 and 360 px, keyboard only:
 // - no lists: the empty state's Create a list, Browse services and Import backup, Enter on the first;
-// - the mini calendar's dot on the 12th of this month, reached with the arrow keys from today, its tooltip naming
-//   Netflix as charged, and Enter opening the Calendar on that month;
+// - the quick actions first: Add a subscription's menu (each list, then a custom one) and Escape back on it, and Open
+//   a list's menu taking an arrow and Enter to Family;
+// - the mini calendar's dots, the 12th reached with the arrow keys from today, its tooltip naming Netflix as charged,
+//   and Enter opening the Calendar on that month;
 // - every list's totals without budgets, with "Set a monthly budget →" taking Enter to Settings, and with budgets
-//   (written to the settings, then a reload) a bar for each, the monthly one over its budget;
-// - Subscription Lists by keyboard, and the next three payments;
-// - the calendar beside the totals at 1280 px and above them at 360.
+//   (written to the settings, then a reload) a bar for each;
+// - Coming up: the payments of the next 14 days, Mullvad's with Mark renewed, which Enter makes the renewal after it
+//   (read from IndexedDB) and takes off the list, with Undo in a snackbar putting it back;
+// - Your lists' cards and Subscription Lists by Enter; Ways to save with each list's View optimizations; Price
+//   changes from the settings;
+// - budgets and Coming up beside the calendar at 1280 px, one column at 360.
 // Then, light at 1280 px, Home's totals against the sum of the Lists overview's cards (P2's acceptance).
-// With axe on each state, and no horizontal scroll.
+// With axe on each state, the menus and the snackbar, and no horizontal scroll.
 // Usage: node check-home.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
 const fs = require('fs');
 const path = require('path');
@@ -182,7 +187,14 @@ const NETFLIX = '0192f1c5-1c2d-7e3f-8a4b-5c6d7e8f9a0b';
 const MULLVAD = '0192f1c5-1c2d-7e3f-8a4b-5c6d7e8f9a0c';
 const stamps = { createdAt: '2026-10-20T12:00:00.000Z', updatedAt: '2026-10-20T12:00:00.000Z' };
 
-async function plant(page) {
+/** `iso` moved by `days`, in UTC (dates only). */
+function addDaysTo(iso, days) {
+  const date = new Date(`${iso}T00:00:00Z`);
+  date.setUTCDate(date.getUTCDate() + days);
+  return date.toISOString().slice(0, 10);
+}
+
+async function plant(page, mullvadDue) {
   await putRecord(page, 'lists', { id: LIST, name: 'Work Related', ...stamps });
   await putRecord(page, 'lists', {
     id: FAMILY,
@@ -212,7 +224,7 @@ async function plant(page) {
       mode: 'recurring',
       interval: 'year',
       intervalCount: 1,
-      anchorDate: '2027-01-20',
+      anchorDate: mullvadDue,
       autoRenew: false,
     },
     ...item,
@@ -220,6 +232,17 @@ async function plant(page) {
 }
 
 const home = (page) => page.locator('ss-home-page');
+/** Each line of a section's list as a screen reader reads it: what's hidden from it left out. */
+const spokenLines = (page, selector) =>
+  home(page)
+    .locator(selector)
+    .evaluateAll((items) =>
+      items.map((item) => {
+        const copy = item.cloneNode(true);
+        copy.querySelectorAll('[aria-hidden="true"]').forEach((hidden) => hidden.remove());
+        return copy.textContent.replace(/\s+/g, ' ').trim();
+      }),
+    );
 const totals = (page) =>
   home(page)
     .locator('ss-budget-totals .total [aria-hidden]')
@@ -244,6 +267,18 @@ const localToday = () => {
   const today = localToday();
   const month = today.slice(0, 7);
   const payday = `${month}-12`;
+  // Mullvad is due in a week, so Coming up has it; marked renewed, its next renewal is a year on.
+  const mullvadDue = addDaysTo(today, 7);
+  const renewedTo = `${Number(mullvadDue.slice(0, 4)) + 1}${mullvadDue.slice(4)}`;
+  const mullvadThisMonth = mullvadDue.startsWith(month);
+  // Netflix's $18.99 with Alberta's 5%; Mullvad's €60 a year, tax included, at the route's rate.
+  const netflix = 18.99 * 1.05;
+  const mullvad = 60 / 0.6372;
+  const thisMonth = netflix + (mullvadThisMonth ? mullvad : 0);
+  const money = (amount) => `$${amount.toFixed(2)}`;
+  const netflixNext =
+    Number(today.slice(8)) <= 12 ? payday : `${addDaysTo(`${month}-01`, 40).slice(0, 7)}-12`;
+  const comingEnd = addDaysTo(today, 14);
 
   for (const colorScheme of ['light', 'dark']) {
     for (const viewport of [WIDE, NARROW]) {
@@ -275,56 +310,167 @@ const localToday = () => {
       check(`${label}: Enter on Create a list opens a new list's editor`, true);
 
       // ── Two lists ─────────────────────────────────────────────────────────────────────────────
-      await plant(page);
+      await plant(page, mullvadDue);
       await page.goto(baseUrl);
       await home(page).locator('ss-mini-calendar').waitFor({ timeout: 20000 });
       await until('the dots', async () => (await home(page).locator('.day.paid').count()) > 0);
       const paid = await home(page)
         .locator('.day.paid')
         .evaluateAll((days) => days.map((day) => day.getAttribute('data-date')));
+      const dots = [payday, ...(mullvadThisMonth ? [mullvadDue] : [])].sort();
       check(
-        `${label}: the mini calendar has a dot on the 12th, Netflix's day`,
-        paid.join() === payday,
+        `${label}: the mini calendar has a dot on each payment day this month`,
+        paid.join() === dots.join(),
         paid.join(),
       );
-      // Netflix's $18.99 with Alberta's 5% each month; Mullvad's €60 a year (tax included), on Jan 20.
       await until('the totals', async () => (await totals(page)).length === 2);
       check(
         `${label}: every list's totals, this month's and this year's, without budgets`,
         (await totals(page)).join(' | ') ===
-          `$19.94 this month | ≈ $333.44 in ${month.slice(0, 4)}` &&
+          `${mullvadThisMonth ? '≈ ' : ''}${money(thisMonth)} this month | ≈ $333.44 in ${month.slice(0, 4)}` &&
           (await home(page).locator('ss-budget-bar').count()) === 0,
         (await totals(page)).join(' | '),
       );
-      const next = await home(page)
-        .locator('.next li')
+
+      // Coming up: the next 14 days' payments as charged, a manual renewal with Mark renewed.
+      const coming = await spokenLines(page, '.coming li');
+      const expected = [
+        ...(netflixNext < comingEnd ? [[netflixNext, /Netflix \$19\.94$/]] : []),
+        [mullvadDue, /Mullvad VPN about \$94\.16 Mark renewed$/],
+      ].sort((a, b) => (a[0] < b[0] ? -1 : 1));
+      check(
+        `${label}: Coming up has the next 14 days' payments, Mullvad's with Mark renewed`,
+        coming.length === expected.length &&
+          expected.every(([, pattern], index) => pattern.test(coming[index])),
+        coming.join(' | '),
+      );
+
+      // Your lists, a card each; Ways to save, each list's View optimizations.
+      const cardsShown = await spokenLines(page, '.list-card');
+      check(
+        `${label}: Your lists has a card for each list, with this month and its count, and New list`,
+        cardsShown.length === 3 &&
+          /^Work Related \$19\.94 this month 1 subscription$/.test(cardsShown[0]) &&
+          /^Family .* this month 1 subscription$/.test(cardsShown[1]) &&
+          cardsShown[2] === 'New list',
+        cardsShown.join(' | '),
+      );
+      const saves = await home(page)
+        .locator('.save li')
         .evaluateAll((items) =>
-          items.map((item) => {
-            const copy = item.cloneNode(true);
-            copy.querySelectorAll('[aria-hidden="true"]').forEach((hidden) => hidden.remove());
-            return copy.textContent.replace(/\s+/g, ' ').trim();
-          }),
+          items.map(
+            (item) =>
+              `${item.querySelector('.list-name').textContent.trim()} ${item.querySelector('a').getAttribute('href')}`,
+          ),
         );
       check(
-        `${label}: Next payments lists the next three, as charged`,
-        next.length === 3 &&
-          next.every((payment) =>
-            /Netflix \$19\.94$|Mullvad VPN about \$94\.16, renew manually$/.test(payment),
-          ),
-        next.join(' | '),
+        `${label}: Ways to save has each list's View optimizations`,
+        saves.join(' | ') ===
+          `Work Related /lists/${LIST}/optimize | Family /lists/${FAMILY}/optimize`,
+        saves.join(' | '),
       );
-      // The calendar beside the totals from 720 px, above them on a phone.
-      const calendarBox = await home(page).locator('.calendar').boundingBox();
-      const budgetsBox = await home(page).locator('.budgets').boundingBox();
+
+      // Budgets and Coming up beside the calendar from 960 px; one column on a phone, in that order.
+      const box = (name) => home(page).locator(`.hub > .${name}`).boundingBox();
+      const [budgetsBox, comingBox, calendarBox, listsBox] = [
+        await box('budgets'),
+        await box('coming'),
+        await box('calendar'),
+        await box('lists'),
+      ];
       check(
-        `${label}: the calendar is ${viewport.width < 720 ? 'above' : 'beside'} the totals`,
-        viewport.width < 720
-          ? calendarBox.y + calendarBox.height <= budgetsBox.y
-          : calendarBox.x + calendarBox.width <= budgetsBox.x,
+        `${label}: ${viewport.width < 960 ? 'one column: budgets, Coming up, the calendar, the lists' : 'budgets and Coming up beside the calendar, the lists under them'}`,
+        viewport.width < 960
+          ? budgetsBox.y + budgetsBox.height <= comingBox.y &&
+              comingBox.y + comingBox.height <= calendarBox.y &&
+              calendarBox.y + calendarBox.height <= listsBox.y
+          : budgetsBox.x + budgetsBox.width <= calendarBox.x &&
+              comingBox.x + comingBox.width <= calendarBox.x &&
+              Math.max(comingBox.y + comingBox.height, calendarBox.y + calendarBox.height) <=
+                listsBox.y,
       );
       await noSideScroll(page, viewport, `${label}, Home`);
       await page.screenshot({ path: shot('home'), fullPage: true });
       await axeCheck(page, `${label}, Home`);
+
+      // The quick actions come first: Add a subscription's menu, Escape back on its button.
+      await page.locator('main').focus();
+      await page.keyboard.press('Tab');
+      check(
+        `${label}: the first stop is Add a subscription`,
+        (await focused(page)).text?.endsWith('Add a subscription'),
+        (await focused(page)).text,
+      );
+      await page.keyboard.press('Enter');
+      const menuItems = page.locator('.cdk-overlay-pane [mat-menu-item]');
+      await until('the menu', async () => (await menuItems.count()) > 0);
+      const addChoices = (await menuItems.allTextContents()).map((text) => text.trim());
+      check(
+        `${label}: Add a subscription offers each list, then a custom one`,
+        addChoices.join(' | ') === 'To Work Related | To Family | A custom subscription',
+        addChoices.join(' | '),
+      );
+      await page.screenshot({ path: shot('home-add-menu') });
+      await axeCheck(page, `${label}, Add a subscription's menu`);
+      await page.keyboard.press('Escape');
+      await until('the menu closed', async () => (await menuItems.count()) === 0);
+      check(
+        `${label}: Escape closes it, back on its button`,
+        (await focused(page)).text?.endsWith('Add a subscription'),
+        (await focused(page)).text,
+      );
+      // Open a list: New list, then it; an arrow to Family, Enter opens it.
+      await page.keyboard.press('Tab');
+      check(
+        `${label}: New list is next`,
+        (await focused(page)).href === '/lists/new',
+        (await focused(page)).href,
+      );
+      await page.keyboard.press('Tab');
+      await page.keyboard.press('Enter');
+      await until('the menu', async () => (await menuItems.count()) === 2);
+      // The menu focuses its first item once it's open: an arrow before that is lost.
+      await until('its first item focused', () =>
+        page.evaluate(() => document.activeElement?.hasAttribute('mat-menu-item')),
+      );
+      await page.keyboard.press('ArrowDown');
+      await page.keyboard.press('Enter');
+      await until('Family', () => pathOf(page) === `/lists/${FAMILY}`);
+      check(`${label}: Open a list's menu opens Family by an arrow and Enter`, true);
+      await page.goBack();
+      await home(page).locator('ss-mini-calendar').waitFor({ timeout: 20000 });
+      await until('the dots', async () => (await home(page).locator('.day.paid').count()) > 0);
+
+      // Mark renewed, by keyboard: the renewal after the one due, saved, the line gone; Undo puts it back.
+      await page.locator('main').focus();
+      await keyTo(
+        page,
+        `document.activeElement?.getAttribute('aria-label') === 'Mark renewed: Mullvad VPN'`,
+      );
+      await page.keyboard.press('Enter');
+      const snackBar = page.locator('mat-snack-bar-container');
+      await snackBar.waitFor({ timeout: 10000 });
+      const anchorOf = async () =>
+        (await readTable(page, 'items')).find((item) => item.id === MULLVAD).billing.anchorDate;
+      await until('the new renewal', async () => (await anchorOf()) === renewedTo);
+      await until(
+        'the line gone',
+        async () =>
+          !(await spokenLines(page, '.coming li')).some((line) => line.includes('Mullvad')),
+      );
+      check(
+        `${label}: Mark renewed moves Mullvad's renewal on a year, to ${renewedTo}, and takes it off Coming up`,
+        (await snackBar.textContent()).replace(/\s+/g, ' ').trim() ===
+          'Mullvad VPN is renewed Undo',
+        (await snackBar.textContent()).replace(/\s+/g, ' ').trim(),
+      );
+      await axeCheck(page, `${label}, Mark renewed's snackbar`);
+      await snackBar.getByRole('button', { name: 'Undo' }).click();
+      await until('the old renewal', async () => (await anchorOf()) === mullvadDue);
+      await until('the line back', async () =>
+        (await spokenLines(page, '.coming li')).some((line) => line.includes('Mullvad')),
+      );
+      check(`${label}: Undo puts the renewal back, and the line`, true);
 
       // The mini calendar by keyboard: the grid's one tab stop is today; the arrows reach the 12th, whose tooltip
       // names what's charged, and Enter opens the Calendar on its month.
@@ -363,9 +509,25 @@ const localToday = () => {
       await until('Settings', () => pathOf(page) === '/settings');
       check(`${label}: "Set a monthly budget →" goes to Settings`, true);
 
-      // With budgets: a bar for each, the monthly one over its $15.
+      // With budgets: a bar for each, the monthly one over its $15. A price change from a catalog update, too.
       const [settings] = await readTable(page, 'settings');
-      await putRecord(page, 'settings', { ...settings, monthlyBudget: 15, annualBudget: 1000 });
+      await putRecord(page, 'settings', {
+        ...settings,
+        monthlyBudget: 15,
+        annualBudget: 1000,
+        priceChanges: [
+          {
+            planId: 'netflix.standard',
+            title: 'Netflix Standard',
+            currency: 'CAD',
+            interval: 'month',
+            intervalCount: 1,
+            from: 16.99,
+            to: 18.99,
+            date: today,
+          },
+        ],
+      });
       await page.goto(baseUrl);
       await until(
         'the bars',
@@ -381,9 +543,17 @@ const localToday = () => {
         );
       check(
         `${label}: with budgets, a bar for each against every list's totals, over the budget in red`,
-        bars.join(' | ') === 'Monthly budget: over 133% | Annual budget: ok 33%' &&
+        bars.join(' | ') ===
+          `Monthly budget: over ${Math.round((thisMonth / 15) * 100)}% | Annual budget: ok 33%` &&
           (await home(page).locator('a.prompt').count()) === 0,
         bars.join(' | '),
+      );
+      const changes = await spokenLines(page, '.changes li');
+      check(
+        `${label}: Price changes lists the catalog update's new price, from the settings`,
+        changes.length === 1 &&
+          /^Netflix Standard \$16\.99 → \$18\.99 a month \w{3} \d+$/.test(changes[0]),
+        changes.join(' | '),
       );
       await noSideScroll(page, viewport, `${label}, with budgets`);
       await page.screenshot({ path: shot('home-budgets'), fullPage: true });
@@ -391,7 +561,7 @@ const localToday = () => {
 
       // Subscription Lists, by keyboard.
       await page.locator('main').focus();
-      await keyTo(page, `document.activeElement?.classList.contains('lists-button')`);
+      await keyTo(page, `document.activeElement?.classList.contains('all')`);
       await page.keyboard.press('Enter');
       await until('Lists', () => pathOf(page) === '/lists');
       check(`${label}: Subscription Lists opens the Lists overview`, true);

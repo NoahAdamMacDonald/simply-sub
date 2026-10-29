@@ -6,6 +6,39 @@
 
 html {
   height: 100%;
+  // Scrollbars in the theme's colours (M4.9); scrollbar-color is inherited, scrollbar-width isn't (below).
+  scrollbar-color: var(--ss-scrollbar-thumb) var(--ss-scrollbar-track);
+}
+
+// Thin scrollbars everywhere: the page, dialogs, menus and panels. Firefox and Chromium take the standard properties.
+* {
+  scrollbar-width: thin;
+}
+
+// Safari has neither standard property: its own pseudo-elements, with a thumb that's still a 6 px handle to drag,
+// inset in a 10 px gutter, and darker while it's hovered or dragged.
+@supports not (scrollbar-color: auto) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track,
+  ::-webkit-scrollbar-corner {
+    background: var(--ss-scrollbar-track);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+    border-radius: 999px;
+    background-clip: padding-box;
+    background-color: var(--ss-scrollbar-thumb);
+  }
+
+  ::-webkit-scrollbar-thumb:hover,
+  ::-webkit-scrollbar-thumb:active {
+    background-color: var(--ss-scrollbar-thumb-active);
+  }
 }
 
 body {

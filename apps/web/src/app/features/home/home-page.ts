@@ -1,33 +1,60 @@
 import { Component, Injector, computed, inject, linkedSignal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { Router, RouterLink } from '@angular/router';
-import { addMonths, monthOf, monthRange, type IsoDate, type IsoMonth } from '@simply-sub/core';
+import {
+  addDays,
+  monthOf,
+  monthRange,
+  nextChargeDate,
+  priceChangeDays,
+  reanchored,
+  type IsoDate,
+  type IsoMonth,
+} from '@simply-sub/core';
 import { firstValueFrom } from 'rxjs';
 import { ClockService } from '../../core/clock/clock-service';
 import { MetricsService } from '../../core/metrics/metrics-service';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { ItemsRepository } from '../../core/storage/items-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
 import { BudgetTotals } from '../../shared/budget-totals/budget-totals';
 import { BudgetWarnings } from '../../shared/budget-warnings/budget-warnings';
 import { chargeAmountText, nearDateText } from '../../shared/charge-text';
+import { dayText } from '../../shared/date-text';
 import { EmptyState } from '../../shared/empty-state/empty-state';
 import { MiniCalendar, type CalendarCharge } from '../../shared/mini-calendar/mini-calendar';
+import { amountText, intervalSpoken } from '../../shared/price-tag/price-text';
+import { OptimizationsLink } from '../lists/optimizations-link';
 import { importedText } from '../settings/backup-text';
 
-/** How many charges "Next payments" lists (P2). */
-const nextCount = 3;
+/** How far ahead "Coming up" looks (M7.10). */
+const comingDays = 14;
 
 /**
- * Home (PROJECT-PLAN P2, M7.3): budget status at a glance and the way into the lists. A mini calendar of the month with
- * a dot on each day with a charge (the Calendar's charges, P10), whose days and title open the Calendar on that month;
- * every list's totals against the budgets (M7.2, BLUEPRINT §8.1.1), with a warning over them for a month or year that
- * goes over (M7.6); the Subscription Lists button; and the next three payments. With no lists, an empty state offers a
- * list, Search or a backup instead.
+ * Home (PROJECT-PLAN P2, M7.3, M7.10): a hub. Quick actions (Add a subscription to a list or a custom one, New list,
+ * Open a list); the budget warnings (dismissable, M7.7) and every list's totals against the budgets (M7.2, BLUEPRINT
+ * §8.1.1); what's coming up in the next 14 days, with Mark renewed on a manual renewal; a mini calendar of the month,
+ * whose days and title open the Calendar on it; each list with this month's total; each list's ways to save; and what
+ * catalog updates changed in the lists' prices this past month. With no lists, an empty state offers a list, Search or
+ * a backup instead.
  */
 @Component({
   selector: 'ss-home-page',
-  imports: [BudgetTotals, BudgetWarnings, EmptyState, MatButton, MatIcon, MiniCalendar, RouterLink],
+  imports: [
+    BudgetTotals,
+    BudgetWarnings,
+    EmptyState,
+    MatButton,
+    MatIcon,
+    MatMenu,
+    MatMenuItem,
+    MatMenuTrigger,
+    MiniCalendar,
+    OptimizationsLink,
+    RouterLink,
+  ],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
 })
@@ -38,6 +65,7 @@ export class HomePage {
   private readonly router = inject(Router);
   private readonly injector = inject(Injector);
   private readonly today = inject(ClockService).today;
+  private readonly items = inject(ItemsRepository);
 
   protected readonly global = this.metrics.global;
   protected readonly state = computed<'loading' | 'error' | 'empty' | 'ready'>(() => {
@@ -69,6 +97,15 @@ export class HomePage {
     }
     return names;
   });
+  /** Each item's next charge, by id: one dated before it is the payment just made, as the schedule counts it. */
+  private readonly nextDates = computed(() => {
+    const next = new Map<string, IsoDate>();
+    for (const result of this.metrics.resolutions().values()) {
+      const date = result.ok ? result.resolved.nextCharge?.date : undefined;
+      if (result.ok && date !== undefined) next.set(result.resolved.item.id, date);
+    }
+    return next;
+  });
   /** The month's charges, for the dots. */
   protected readonly charges = computed<CalendarCharge[]>(() =>
     this.metrics.charges(monthRange(this.month())).map((charge) => ({
@@ -80,21 +117,82 @@ export class HomePage {
       manual: charge.manual,
     })),
   );
-  /** "Oct 28 Crave $22.00": the next three charges from today, as charged. */
-  protected readonly next = computed(() => {
+  /**
+   * "Oct 28 Crave $22.00": every charge of the next 14 days still to pay, as charged, with Mark renewed on a manual
+   * renewal (M7.10). A charge before its item's next one is paid already (a renewal marked, or the payment for a plan
+   * whose next renewal is still to come), so it isn't listed.
+   */
+  protected readonly coming = computed(() => {
     const today = this.today();
     const country = this.settings.saved()?.country;
+    const next = this.nextDates();
     return this.metrics
-      .charges({ from: today, to: addMonths(today, 12) })
-      .slice(0, nextCount)
+      .charges({ from: today, to: addDays(today, comingDays) })
+      .filter((charge) => charge.date >= (next.get(charge.itemId) ?? charge.date))
       .map((charge, index) => ({
         key: `${charge.itemId}-${charge.date}-${index}`,
+        itemId: charge.itemId,
+        charged: charge.date,
         date: nearDateText(charge.date, today),
         name: this.names().get(charge.itemId) ?? '',
         amount: chargeAmountText({ ...charge, tax: 0 }, country),
-        manual: charge.manual,
+        // The last renewal before an end date has no next one to move on to.
+        renewable: charge.manual && charge.ends !== true,
       }));
   });
+
+  /** Each list, the way into it (M7.10): its name, this month and how many subscriptions. */
+  protected readonly listCards = computed(() => {
+    const saved = this.settings.saved();
+    return this.lists.records().map((list) => {
+      const metrics = this.metrics.metrics(list.id);
+      const count =
+        this.metrics.list(list.id).resolved.length + this.metrics.list(list.id).unresolved.length;
+      return {
+        id: list.id,
+        name: list.name,
+        month:
+          metrics && saved
+            ? `${metrics.converted.thisMonth ? '≈ ' : ''}${amountText(metrics.thisMonth, saved.currency, saved.country)} this month`
+            : '',
+        count: count === 1 ? '1 subscription' : `${count} subscriptions`,
+      };
+    });
+  });
+
+  /** What catalog updates changed in the lists' prices this past month (M7.10): "$18.99 → $19.99 a month". */
+  protected readonly changes = computed(() => {
+    const saved = this.settings.saved();
+    const since = addDays(this.today(), -priceChangeDays);
+    return (saved?.priceChanges ?? [])
+      .filter((change) => change.date >= since)
+      .map((change) => ({
+        key: `${change.planId} ${change.currency} ${change.interval}/${change.intervalCount}`,
+        title: change.title,
+        text: `${amountText(change.from, change.currency, saved?.country)} → ${amountText(change.to, change.currency, saved?.country)} ${intervalSpoken(change.interval, change.intervalCount)}`,
+        date: dayText(change.date),
+      }));
+  });
+
+  /**
+   * Mark renewed (M7.10): the renewal due on `date` is paid, so the next one is the charge after it, as P4's "Wrong
+   * date?" would move it; saved at once, with Undo. The payment stays on its due date, in the totals as before.
+   */
+  protected async markRenewed(itemId: string, date: IsoDate): Promise<void> {
+    const item = this.items.byId().get(itemId);
+    if (!item || item.billing.mode !== 'recurring') return;
+    const before = item.billing;
+    const after = nextChargeDate(before, addDays(date, 1));
+    if (after === undefined) return;
+    await this.items.update(itemId, { billing: reanchored(before, after) });
+    const { MatSnackBar } = await import('@angular/material/snack-bar');
+    const name = this.names().get(itemId) ?? 'It';
+    this.injector
+      .get(MatSnackBar)
+      .open(`${name} is renewed`, 'Undo', { duration: 8000 })
+      .onAction()
+      .subscribe(() => void this.items.update(itemId, { billing: before }));
+  }
 
   protected readonly monthOf = monthOf;
 

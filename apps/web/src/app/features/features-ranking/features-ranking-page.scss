@@ -32,6 +32,7 @@ ss-ranking-card {
   break-inside: avoid;
 }
 
-.loading {
+// "Loading the features…", as every page's loading line is (M4.8).
+.note {
   color: var(--ss-text-muted);
 }

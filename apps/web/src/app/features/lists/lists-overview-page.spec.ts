@@ -206,10 +206,11 @@ describe('ListsOverviewPage', () => {
     ).toBe('/custom');
   });
 
-  it('has only the new list tile and a hint with no lists, and no feature column', async () => {
+  it('has only the empty state and the new list tile with no lists, and no feature column', async () => {
     await open();
     expect(page().querySelector('li.card')).toBeNull();
-    expect(text(page().querySelector('.hint'))).toBe(
+    expect(text(page().querySelector('ss-empty-state h2'))).toBe('No lists yet');
+    expect(text(page().querySelector('ss-empty-state'))).toContain(
       "A list holds the subscriptions you pay for, or the ones you're weighing up. Make your first one.",
     );
     expect(page().querySelector('.features')).toBeNull();

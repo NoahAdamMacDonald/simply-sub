@@ -496,11 +496,12 @@ async function addItem(page, planId) {
     });
     const mullvad = card(page, 'Mullvad VPN');
     await until('Mullvad listed', async () =>
-      (await shown(mullvad.locator('ss-status-badge'))).includes('Renew by'),
+      (await shown(mullvad.locator('ss-status-badge'))).includes('renew by'),
     );
     check(
       'a provider renewed by hand shows when to renew by',
-      (await shown(mullvad.locator('ss-status-badge'))) === 'Active · 1 list Renew by Jan 20',
+      (await shown(mullvad.locator('ss-status-badge'))) ===
+        'Active · 1 list Manual · renew by Jan 20',
       await shown(mullvad.locator('ss-status-badge')),
     );
     await page.screenshot({ path: path.join(outDir, 'ca-listed-1280.png'), fullPage: true });

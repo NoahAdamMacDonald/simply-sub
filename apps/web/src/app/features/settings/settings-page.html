@@ -2,116 +2,180 @@
 <ss-page-header heading="Settings" backLink="/" backInHistory />
 
 @if (saved(); as saved) {
-  <section aria-labelledby="budgets-heading">
-    <h2 id="budgets-heading">Budgets</h2>
-    <ss-budget-setting budget="monthlyBudget" label="Monthly budget" />
-    <ss-budget-setting budget="annualBudget" label="Annual budget" />
-  </section>
+  <!--
+    Grouped, the most used first (M4.7): what's changed often, then where you are, then your data. "On this page" is a
+    side column from 960 px, and a row of chips that wrap under it.
+  -->
+  <div class="layout">
+    <nav class="jump" aria-label="On this page">
+      <p class="jump-label" aria-hidden="true">On this page</p>
+      <ul class="groups">
+        @for (group of groups; track group.id) {
+          <li>
+            <a [href]="'#' + group.id + '-heading'" (click)="jump($event, group.id + '-heading')">{{
+              group.name
+            }}</a>
+            <ul class="sections">
+              @for (section of group.sections; track section.id) {
+                <li>
+                  <a
+                    [href]="'#' + section.id + '-heading'"
+                    (click)="jump($event, section.id + '-heading')"
+                    >{{ section.name }}</a
+                  >
+                </li>
+              }
+            </ul>
+          </li>
+        }
+      </ul>
+    </nav>
 
-  <section aria-labelledby="tags-heading">
-    <h2 id="tags-heading">Custom tags</h2>
-    <ss-tags-setting />
-  </section>
+    <div class="content">
+      <section class="group" aria-labelledby="everyday-heading">
+        <h2 id="everyday-heading" tabindex="-1">Everyday</h2>
+        <section class="card" aria-labelledby="budgets-heading">
+          <h3 id="budgets-heading" tabindex="-1">Budgets</h3>
+          <ss-budget-setting budget="monthlyBudget" label="Monthly budget" />
+          <ss-budget-setting budget="annualBudget" label="Annual budget" />
+        </section>
 
-  <section aria-labelledby="appearance-heading">
-    <h2 id="appearance-heading">Appearance</h2>
-    <mat-radio-group
-      aria-labelledby="appearance-heading"
-      [value]="mode()"
-      (change)="setMode($event.value)"
-    >
-      @for (choice of modes; track choice.value) {
-        <mat-radio-button [value]="choice.value">{{ choice.label }}</mat-radio-button>
-      }
-    </mat-radio-group>
-  </section>
+        <section class="card" aria-labelledby="tags-heading">
+          <h3 id="tags-heading" tabindex="-1">Custom tags</h3>
+          <ss-tags-setting />
+        </section>
 
-  <section aria-labelledby="location-heading">
-    <h2 id="location-heading">Location and currency</h2>
-    <button matButton="outlined" type="button" (click)="editLocation(saved)">
-      <mat-icon>location_on</mat-icon>
-      {{ place() }}
-    </button>
-    <p class="tax">{{ salesTax() }}</p>
-  </section>
+        <section class="card" aria-labelledby="appearance-heading">
+          <h3 id="appearance-heading" tabindex="-1">Appearance</h3>
+          <mat-radio-group
+            aria-labelledby="appearance-heading"
+            [value]="mode()"
+            (change)="setMode($event.value)"
+          >
+            @for (choice of modes; track choice.value) {
+              <mat-radio-button [value]="choice.value">{{ choice.label }}</mat-radio-button>
+            }
+          </mat-radio-group>
+        </section>
+      </section>
 
-  <section aria-labelledby="search-heading">
-    <h2 id="search-heading">Search</h2>
-    <mat-checkbox
-      [checked]="saved.searchSoldOnly === true"
-      aria-describedby="search-sold-hint"
-      (change)="setSoldOnly($event.checked)"
-    >
-      Show only what's sold in {{ country() }}
-    </mat-checkbox>
-    <p id="search-sold-hint" class="hint">
-      Search starts with its “Sold in {{ country() }}” filter on. You can still turn it off there.
-    </p>
-  </section>
+      <section class="group" aria-labelledby="where-heading">
+        <h2 id="where-heading" tabindex="-1">Where you are</h2>
+        <section class="card" aria-labelledby="location-heading">
+          <h3 id="location-heading" tabindex="-1">Location and currency</h3>
+          <button matButton="outlined" type="button" (click)="editLocation(saved)">
+            <mat-icon>location_on</mat-icon>
+            {{ place() }}
+          </button>
+          <p class="tax">{{ salesTax() }}</p>
+        </section>
 
-  <section aria-labelledby="data-heading">
-    <h2 id="data-heading">Your data</h2>
-    <p class="hint">
-      Everything stays in this browser. A backup is a file you keep: import it to bring your lists
-      back, here or on another device.
-    </p>
-    <div class="data-actions">
-      <button matButton="outlined" type="button" (click)="exportBackup()">
-        <mat-icon>download</mat-icon>
-        Export backup
-      </button>
-      <button matButton="outlined" type="button" (click)="importBackup()">
-        <mat-icon>upload</mat-icon>
-        Import backup
-      </button>
-      <button matButton="outlined" type="button" class="delete-all" (click)="deleteAll()">
-        <mat-icon>delete_forever</mat-icon>
-        Delete all data
-      </button>
-    </div>
-  </section>
+        <section class="card" aria-labelledby="search-heading">
+          <h3 id="search-heading" tabindex="-1">Search</h3>
+          <mat-checkbox
+            [checked]="saved.searchSoldOnly === true"
+            aria-describedby="search-sold-hint"
+            (change)="setSoldOnly($event.checked)"
+          >
+            Show only what's sold in {{ country() }}
+          </mat-checkbox>
+          <p id="search-sold-hint" class="hint">
+            Search starts with its “Sold in {{ country() }}” filter on. You can still turn it off
+            there.
+          </p>
+          <mat-checkbox
+            [checked]="saved.searchAllResellers === true"
+            aria-describedby="search-resellers-hint"
+            (change)="setAllResellers($event.checked)"
+          >
+            Show every reseller, even when it isn't cheaper
+          </mat-checkbox>
+          <p id="search-resellers-hint" class="hint">
+            Search lists each official reseller of a plan; the ones that sell it for less say
+            “Cheaper at”.
+          </p>
+        </section>
+      </section>
 
-  <section aria-labelledby="security-heading">
-    <h2 id="security-heading">Security</h2>
-    <mat-checkbox
-      [checked]="lockOn()"
-      [disabled]="inMemory()"
-      aria-describedby="lock-hint"
-      (change)="toggleLock($event)"
-    >
-      Lock with a passphrase
-    </mat-checkbox>
-    <p id="lock-hint" class="hint">
-      @if (inMemory()) {
-        Nothing is saved in this tab, so there’s nothing to lock.
-      } @else if (lockOn()) {
-        Your data in this browser is encrypted. Simply Sub asks for the passphrase each time you
-        open it.
-      } @else {
-        Encrypts your data in this browser, so it opens only with a passphrase you type.
-      }
-    </p>
-    @if (lockOn()) {
-      <mat-form-field appearance="outline" class="lock-after" subscriptSizing="dynamic">
-        <mat-label>Lock after</mat-label>
-        <mat-select [value]="idleChoice()" (selectionChange)="setIdle($event.value)">
-          @for (choice of idleChoices; track choice.value) {
-            <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
+      <section class="group" aria-labelledby="data-heading">
+        <h2 id="data-heading" tabindex="-1">Your data</h2>
+        <section class="card" aria-labelledby="backups-heading">
+          <h3 id="backups-heading" tabindex="-1">Backups</h3>
+          <p class="hint">
+            Everything stays in this browser. A backup is a file you keep: import it to bring your
+            lists back, here or on another device.
+          </p>
+          <div class="data-actions">
+            <button matButton="outlined" type="button" (click)="exportBackup()">
+              <mat-icon>download</mat-icon>
+              Export backup
+            </button>
+            <button matButton="outlined" type="button" (click)="importBackup()">
+              <mat-icon>upload</mat-icon>
+              Import backup
+            </button>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="lock-heading">
+          <h3 id="lock-heading" tabindex="-1">App lock</h3>
+          <mat-checkbox
+            [checked]="lockOn()"
+            [disabled]="inMemory()"
+            aria-describedby="lock-hint"
+            (change)="toggleLock($event)"
+          >
+            Lock with a passphrase
+          </mat-checkbox>
+          <p id="lock-hint" class="hint">
+            @if (inMemory()) {
+              Nothing is saved in this tab, so there’s nothing to lock.
+            } @else if (lockOn()) {
+              Your data in this browser is encrypted. Simply Sub asks for the passphrase each time
+              you open it.
+            } @else {
+              Encrypts your data in this browser, so it opens only with a passphrase you type.
+            }
+          </p>
+          @if (lockOn()) {
+            <mat-form-field appearance="outline" class="lock-after" subscriptSizing="dynamic">
+              <mat-label>Lock after</mat-label>
+              <mat-select [value]="idleChoice()" (selectionChange)="setIdle($event.value)">
+                @for (choice of idleChoices; track choice.value) {
+                  <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
+                }
+              </mat-select>
+              <mat-hint
+                >With no key, click, tap or scroll. It always locks when the tab closes.</mat-hint
+              >
+            </mat-form-field>
           }
-        </mat-select>
-        <mat-hint>With no key, click, tap or scroll. It always locks when the tab closes.</mat-hint>
-      </mat-form-field>
-    }
-  </section>
+        </section>
 
-  <section aria-labelledby="catalog-heading">
-    <h2 id="catalog-heading">Catalog</h2>
-    <div class="catalog">
-      <p>{{ catalogLine() }}</p>
-      <button matButton="outlined" type="button" (click)="checkForUpdates()">
-        Check for updates
-      </button>
+        <section class="card" aria-labelledby="catalog-heading">
+          <h3 id="catalog-heading" tabindex="-1">Catalog</h3>
+          <div class="catalog">
+            <p>{{ catalogLine() }}</p>
+            <button matButton="outlined" type="button" (click)="checkForUpdates()">
+              Check for updates
+            </button>
+          </div>
+          <p class="check-message" role="status">{{ checkMessage() }}</p>
+        </section>
+
+        <!-- Folded until opened (M4.7): it can't be undone. Its summary is in the Tab order, as a summary is. -->
+        <details class="card danger">
+          <summary id="delete-heading">Delete all data</summary>
+          <p class="hint">
+            Removes your lists, subscriptions, cards, tags and settings from this browser. Export a
+            backup first if you might want them back.
+          </p>
+          <button matButton="outlined" type="button" class="delete-all" (click)="deleteAll()">
+            <mat-icon>delete_forever</mat-icon>
+            Delete all data…
+          </button>
+        </details>
+      </section>
     </div>
-    <p class="check-message" role="status">{{ checkMessage() }}</p>
-  </section>
+  </div>
 }

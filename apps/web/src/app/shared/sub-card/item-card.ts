@@ -4,11 +4,12 @@ import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { addOnText, planTitle, type ResolvedItem, type Tag } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
+import { ClockService } from '../../core/clock/clock-service';
 import { SettingsStore } from '../../core/settings/settings-store';
-import { billingText } from '../billing-text';
+import { billingText, ownPriceText } from '../billing-text';
 import { chargeAmountText, type ShownAndSpoken } from '../charge-text';
 import { countryName } from '../country-name';
-import { dateText } from '../date-text';
+import { dateText, joinsText } from '../date-text';
 import { FeatureList } from '../feature-list/feature-list';
 import { PriceTag } from '../price-tag/price-tag';
 import { ProviderIcon } from '../provider-icon/provider-icon';
@@ -45,6 +46,7 @@ let nextId = 0;
 })
 export class ItemCard {
   private readonly catalog = inject(CatalogStore);
+  private readonly clock = inject(ClockService);
   private readonly settings = inject(SettingsStore);
   private readonly wrongDates = inject(WrongDate);
   private readonly expandButton = viewChild<string, ElementRef<HTMLElement>>('expandButton', {
@@ -59,6 +61,8 @@ export class ItemCard {
   readonly share = input<number>();
   /** What it costs a month with tax, and after its card's cash back and FX fees, when it's paid with one (M9.4). */
   readonly onCard = input<{ card: string; month: ShownAndSpoken }>();
+  /** What takes over when it ends, in words (M7.11): List view finds it in the list. */
+  readonly replacement = input<string>();
   /** 📌: whether the item should now be pinned. */
   readonly pinToggle = output<boolean>();
 
@@ -117,8 +121,9 @@ export class ItemCard {
     this.resolved().addOns.map((addOn) => {
       const { price, quantity } = addOn;
       return {
-        id: addOn.id,
-        text: addOnText(addOn),
+        // One added by Optimizations is listed apart, from the day it joins (M8.5).
+        id: `${addOn.id} ${addOn.since ?? ''}`,
+        text: `${addOnText(addOn)}${joinsText(addOn, this.clock.today())}`,
         price:
           quantity === 1
             ? price
@@ -149,21 +154,21 @@ export class ItemCard {
   });
   /** How it's billed, and what else it has, in words. */
   protected readonly facts = computed(() => {
-    const { item, override } = this.resolved();
+    const { item } = this.resolved();
     const { billing, priceOverride, region } = item;
+    const ownPrice = ownPriceText(
+      priceOverride,
+      billing,
+      this.clock.today(),
+      this.settings.saved()?.country,
+    );
     return [
       // A free plan has nothing to bill.
       ...(this.price().amount === 0 ? [] : [billingText(billing)]),
       ...(billing.mode === 'recurring' && billing.startDate !== undefined
         ? [`Subscribed since ${dateText(billing.startDate)}`]
         : []),
-      ...(override && priceOverride
-        ? [
-            priceOverride.until === undefined
-              ? 'Your own price'
-              : `Your own price until ${dateText(priceOverride.until)}`,
-          ]
-        : []),
+      ...(ownPrice === undefined ? [] : [ownPrice]),
       ...(region === undefined ? [] : [`Bought in ${countryName(region)}`]),
     ];
   });

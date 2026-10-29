@@ -1,4 +1,102 @@
-section {
+// "On this page" beside the groups from 960 px, and above them as chips that wrap under it (M4.7).
+.layout {
+  display: grid;
+  gap: 16px 32px;
+
+  @media (min-width: 960px) {
+    grid-template-columns: 200px minmax(0, 640px);
+    align-items: start;
+  }
+}
+
+.jump {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    color: var(--ss-accent-text);
+  }
+
+  .jump-label {
+    margin: 0 0 8px;
+    color: var(--ss-text-muted);
+    font: var(--mat-sys-label-large);
+  }
+
+  @media (min-width: 960px) {
+    position: sticky;
+    top: calc(var(--ss-top-bar-height, 0px) + 16px);
+
+    .groups > li {
+      margin-bottom: 12px;
+
+      > a {
+        font: var(--mat-sys-title-small);
+      }
+    }
+
+    .sections {
+      margin-top: 4px;
+      padding-left: 12px;
+
+      li {
+        margin: 4px 0;
+      }
+    }
+  }
+
+  // A chip for each group under 960 px; the sections' links are for the side column.
+  @media (max-width: 959.98px) {
+    .groups {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      > li > a {
+        display: inline-block;
+        padding: 6px 14px;
+        border: 1px solid var(--ss-divider);
+        border-radius: 16px;
+        font: var(--mat-sys-label-large);
+        text-decoration: none;
+      }
+    }
+
+    .sections {
+      display: none;
+    }
+  }
+}
+
+// A group's heading over its cards, which a jump link lands on below the top bar.
+.group {
+  margin-bottom: 24px;
+
+  h2 {
+    margin: 0 0 12px;
+    font: var(--mat-sys-title-large);
+  }
+}
+
+h2,
+h3,
+summary {
+  scroll-margin-top: calc(var(--ss-top-bar-height, 0px) + 16px);
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 2px;
+  }
+}
+
+.card {
   max-width: 640px;
   margin-bottom: 16px;
   padding: 16px;
@@ -6,9 +104,21 @@ section {
   background-color: var(--ss-card-bg);
 }
 
-h2 {
+h3 {
   margin: 0 0 8px;
   font: var(--mat-sys-title-medium);
+}
+
+// Delete all data, folded until opened.
+.danger {
+  summary {
+    cursor: pointer;
+    font: var(--mat-sys-title-medium);
+  }
+
+  .hint {
+    margin: 8px 0 12px;
+  }
 }
 
 mat-radio-group {

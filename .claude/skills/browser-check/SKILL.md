@@ -152,7 +152,8 @@ snackbar and focus on its ✎ → Save → the list view; the dialog 720 px wide
 dates with no end and an own price of 0 refused at their fields, with focus on the first; and ✎ on Netflix changing
 its plan to Premium, an extra member with a quantity of 2, Feb 28 typed with its billing day chosen by arrow keys, the
 renewal hint ending above Auto-renews, Ends on picked from the calendar by keyboard (its button, an arrow, Enter, focus
-back on the button), and Auto-renews, then Save, a reload and the item read from IndexedDB (its id, tags and ranks
+back on the button), "Auto-renews until it ends" and Ends on's "It stops then" once there's an end date (M6.19), and
+that checkbox by Space, then Save, a reload and the item read from IndexedDB (its id, tags and ranks
 kept). With axe on the dialog, its errors, the billing day choice and the open calendar, and no horizontal scroll. The first card on Search is Proton, whose
 first price is Proton Free.
 
@@ -179,7 +180,8 @@ Related (Netflix Standard tagged Family, Mullvad VPN, and Crave Premium from Dec
 
 In both themes at both widths, keyboard only, it checks:
 - the header's average and count;
-- the cards by price, with their statuses ("Auto-renews Nov 12", "Renew by Nov 12"), tags and the feature summary;
+- the cards by price, with their statuses ("Auto-renews Nov 12", "Manual · renew by Nov 12" since M7.11), tags and the
+  feature summary;
 - the Tab order (← Lists, Edit list, the search box, at 360 px the compact View optimizations (M6.13), Sort, then each
   card's 📌 and details);
 - 📌 by Space: saved to the item with no draft, the card moving to Pinned with focus on its 📌, and still there after a
@@ -205,7 +207,9 @@ an input's `<label>` come out right.
 In both themes at both widths, keyboard only, it checks:
 - Export with a passphrase, read back from the download: encrypted, at 600,000 iterations, with no names in it;
 - Export without one: every record, the deleted list too;
-- Delete all data: starting in its DELETE field, refusing "delete", then everything cleared, Home and the first-run
+- Delete all data (folded since M4.7: at 1280 px the jump link of its name puts focus on its summary, at 360 px, whose
+  jump list has only the groups, Tab reaches the summary, found by its id since an accessibility snapshot gives a
+  summary no name; Enter opens it, then its button): starting in its DELETE field, refusing "delete", then everything cleared, Home and the first-run
   dialog;
 - the first-run dialog's Import a backup instead with the encrypted file:
   - a wrong passphrase says so, keeps focus in its field and writes nothing;
@@ -268,17 +272,23 @@ It runs axe on the card, the editor and its error, the question, the menu and Li
 scroll. Wait for the item dialog to put focus on its heading before tabbing: it moves focus there once it's open,
 which undoes Tab presses made sooner.
 
-`check-home.cjs` (M7.3) checks Home on `ng serve` for a Canadian in Alberta, with no lists, then with Work Related
-(Netflix Standard, monthly on the 12th) and Family (Mullvad VPN, yearly on Jan 20, renewed by hand) written to
-IndexedDB.
+`check-home.cjs` (M7.3, M7.10) checks Home, the hub, on `ng serve` for a Canadian in Alberta, with no lists, then with
+Work Related (Netflix Standard, monthly on the 12th) and Family (Mullvad VPN, yearly, renewed by hand, due a week from
+today) written to IndexedDB.
 
 In both themes at both widths, keyboard only, it checks:
 - no lists: the empty state's Create a list, Browse services and Import backup, and Enter on the first;
-- the mini calendar's dot on the 12th of this month (it reads the machine's date), reached with the arrow keys from
-  today's tab stop, its tooltip "Netflix $19.94" and Enter opening `/calendar?month=`;
+- the mini calendar's dots this month (it reads the machine's date), the 12th reached with the arrow keys from today's
+  tab stop, its tooltip "Netflix $19.94" and Enter opening `/calendar?month=`;
 - every list's totals without budgets, "Set a monthly budget →" to Settings, and with budgets a bar for each, the
-  monthly one over at 133%;
-- Next payments, Subscription Lists by keyboard, and the calendar beside the totals at 1280 px and above them at 360.
+  monthly one over;
+- the quick actions first in the Tab order: Add a subscription's menu (To Work Related, To Family, A custom
+  subscription) and Escape back on it, New list, and Open a list's menu, an arrow and Enter opening Family;
+- Coming up (the next 14 days, Mullvad's with Mark renewed), Enter on Mark renewed moving its renewal on a year (read
+  from IndexedDB) and taking it off the list, and the snackbar's Undo putting both back;
+- Your lists' cards (each one's words read with spaces: the link's name), Ways to save with each list's View
+  optimizations, Price changes from `settings.priceChanges`, Subscription Lists by keyboard;
+- budgets and Coming up beside the calendar at 1280 px, one column at 360.
 
 Light at 1280 px, it also checks Home's totals against the sum of the Lists overview's cards, to a cent a list (each
 amount is rounded for display). It runs axe on each state, the open tooltip included, and checks for horizontal
@@ -309,8 +319,9 @@ bottom sheet: it slides up.
 Related (Netflix Standard on the 12th, tagged Family and with a tag deleted since; Crave Premium billed on the 31st)
 and Family (Mullvad VPN, yearly on Jan 20, renewed by hand), then reads every file it downloads:
 - List view's Export by keyboard: the CSV (its byte order mark, header and rows, live tags only), the workbook
-  (parsed by the repository's exceljs: Summary, the list's sheet, Payments), the JSON, the text, and the .ics (an
-  all-day event per charge, Crave's in every one of 12 months), with "Saved <name>" after each;
+  (parsed by the repository's exceljs: Summary, the list's sheet, Payments), the JSON, the text, and the .ics (since
+  M7.12 a repeating all-day event per subscription, its RRULE read: Crave's on each month's 31st or last day,
+  `BYMONTHDAY=28,29,30,31;BYSETPOS=-1`), with "Saved <name>" after each;
 - the Calendar's Export to file (the main button's .ics for both lists, the menu's payment schedule in date order
   and its workbook) and Sync calendar for each app: the .ics, then its steps with focus on the heading, and Escape
   back on Sync calendar;
@@ -334,8 +345,9 @@ keyboard only:
   name and first in the Tab order, the rules' tooltip on Tab, Dismiss right after Apply with the same changes;
 - Dismiss by Enter: one card fewer, focus on a card's heading, the snackbar with Undo; Show dismissed by Space and
   back; a reload keeping it dismissed (one row in `dismissedSuggestions`); List view counting one fewer;
-- Apply by Enter: it stays on the page (M8.4), focus moves on, and Review and save opens the editor; the list's draft
-  in IndexedDB with the change, the items table as it was.
+- Apply by Enter: it stays on the page (M8.4), focus moves on, and Review changes (M8.6) lists the change with its
+  Undo and the back button to Optimizations; Open in the editor shows the list's draft in IndexedDB with the change,
+  the items table as it was.
 
 Then a 14-item list, which the Web Worker optimizes (`page.on('worker')`). It logs `securitypolicyviolation` events as
 console errors, so under `wrangler dev` (base URL ending in `/`) it checks the production CSP too, the worker included.
@@ -376,11 +388,11 @@ It runs axe on the page, the dialog, its errors, the tile and the question, and 
 about 600 ms before a screenshot of the dialog's errors: they fade in, and the limit's label floats up meanwhile.
 `check-shell.cjs` knows Payment's heading, "Payment cards".
 
-M9.4 adds three cards (Everyday, a Mastercard at 1.5% with a $30 limit; Everyday Debit on Interac; Discover It at 2%)
-and Family open in the editor (an unsaved draft with Crave Premium), then, keyboard only:
+M9.4 adds three cards (Everyday, a Mastercard at 1.5% with a $30 limit; Everyday Debit on Interac; Rewards Discover at
+2%) and Family open in the editor (an unsaved draft with Crave Premium), then, keyboard only:
 - P11: Everyday's "Over its limit in <this month>: ≈ $116.46 of $30.00" with its bar red, and "≈ $27.56 after cash
-  back & FX fees"; Assign best cards, its preview (Work Related's Mullvad VPN from Everyday to Discover It, saving
-  ≈ $0.48; Family skipped, with its note), Apply (Mullvad's `cardId` in IndexedDB, Family's Crave Premium untouched,
+  back & FX fees"; Assign best cards, its preview (Work Related's Mullvad VPN from Everyday to Rewards Discover,
+  saving ≈ $0.48; Family skipped, with its note), Apply (Mullvad's `cardId` in IndexedDB, Family's Crave Premium untouched,
   the warning gone) and Undo;
 - P6: Netflix's "Paid with" menu with only No card and Everyday (no Interac or Discover in Canada); No card by
   typeahead, the Best card chip next in the Tab order ("Best card: Everyday, saves $0.30 / mo"), Enter on it, and the
@@ -396,23 +408,53 @@ With axe on each, and no horizontal scroll.
 - `buttonIn` drops a leading icon's ligature ("auto_fix_high Assign best cards").
 - The card-number check reads the fields typed in, not ids or dates, whose digits run on once dashes are taken out.
 
+`check-scrollbars.cjs` (M4.9, M9.5; UI polish) checks the scrollbars on `ng serve` with the browser's own shown
+(`ignoreDefaultArgs: ['--hide-scrollbars']`), for a Canadian in Alberta, in both themes at 1280 and 360 px: the page's,
+the card dialog's and its Card currency menu's (since M4.8 a menu you can type in: a click on its input lists every
+currency, in `.mat-mdc-autocomplete-panel`) `scrollbar-color` (the muted text colour on a transparent track, read
+against the tokens) and `scrollbar-width: thin`, a gutter of 12 px at most, the thumb's contrast against what's behind
+it (WCAG's formula; Material's surfaces resolve to `color(srgb …)`, 0 to 1), dragging the thumb scrolling the page,
+Add card reached by Tab with its Name hint naming no real card, axe and no horizontal scroll.
+
 `check-after-m9.cjs` (the feedback after M9: M5.11, M5.12, M6.12–M6.16, M7.7–M7.9, M8.4) checks the batch on `ng serve`
 for a Canadian in Alberta with a $50 monthly budget, Work Related planted with eight items (Netflix Standard with an
 extra member, Netflix Standard with ads, Mullvad VPN renewed by hand, Crave, Disney+, Proton and TSN). In both themes
 at both widths, keyboard only, each part on its own, so one failing doesn't stop the rest:
 - first run typed in: the dialog opens on its heading with no list open, Tab to Province, "alb" and Enter;
-- List view: the add-on with its price, "Auto-renews" and "Renew by", the warning's ✕ then Show hidden (the key in the
+- List view: the add-on with its price, "Auto-renews" and "Manual · renew by", the warning's ✕ then Show hidden (the key in the
   settings, focus moving between them), the bar's one colour (all red, half again over), scrolled to the end with the
   bar below the top bar and View optimizations on screen (compact in the bar at 360), then View in Search by keyboard
   with `plan=`;
 - Search: Standard picked over the user's Standard with ads, "Auto-renews", and Netflix's Behavioral Advertising link;
 - the item dialog: the shared-ranks note, French-language content set to Needed by keyboard, Save sharing it with
   Standard with ads in the draft, then New tag's hex field and colour picker following each other;
-- Optimizations: Apply staying, Review and save, Undo dropping the draft, Apply again and Review and save;
+- Optimizations: Apply staying, Review changes, Undo dropping the draft, Apply again, Review changes and Open in the
+  editor;
 - the Calendar: "← Work Related" from a budget warning, the grid's width unchanged when a day opens at 1280 and none
   from the sidebar, the compact grid and its bottom sheet at 360, and the JSON and Text downloads;
 - Settings: the 📍 dialog's province typed ("que" is Quebec alone) and the tag editor's picker;
 - Home: the bars' colour on the scale and the warnings' ✕.
+
+`check-after-m3.cjs` (the feedback after M3: M5.13, M6.17–M6.19, M7.11, M8.5, M8.6, M9.6) checks the batch on
+`ng serve` for a Canadian in Alberta, with Streaming (Crave Premium and Disney+ Premium) and Family (two Disney+
+Premium, Netflix Standard auto-renewing until an end date, Mullvad renewed by hand, and four more so it scrolls). In
+both themes at both widths, keyboard only, each part on its own:
+- List view: Netflix's "Renews Nov 12, then ends Nov 28" (M6.19); Sort's filters opened, the page scrolled to its foot,
+  the bar still at its sticky offset (read from its own `top`) and the filters under it on screen (M6.17); at 360 px
+  Sort's icon, and View optimizations' icon and count, even on both sides of their buttons (M6.18); the item dialog's
+  "Auto-renews until it ends" and Ends on's "It stops then: no renewal after", then Cancel;
+- the bundle (M8.5, M8.6): its card applied by Enter, after which no card left changes either plan; Review changes'
+  lines (− for each plan, ending when what's paid
+  for runs out, + for the bundle from then) and totals (this year not up, the next 12 months down by the card's
+  saving); Undo by Enter emptying it, Back to optimizations, applied again and Save changes; the saved bundle's start
+  and both plans' ends, and List view's "Moves to Disney+ and Crave Premium Bundle on Nov 12" (M7.11);
+- the extra member (M8.5): whichever Disney+ Premium the optimizer chose ends on its next charge and its extra member
+  joins the other that day, in Review changes, in IndexedDB (the add-on's `since`) and on List view's cards;
+- Settings' "Show every reseller" by Space (M5.13), then Mullvad's card on Search with its "Also at" resellers too;
+- a buyer in the US (its own context: the settings rewritten to US-NY and USD, `/fx` answered for the base asked for),
+  Proton Unlimited billed yearly on a USD card with no FX fee (M9.6): "Pay for Proton Unlimited in CAD", its "From
+  <date>, paid with No FX Visa" and Estimated tag, Review changes' "Paid in CAD from <date>: CA$149.88 a year + tax",
+  and the saved `priceOverride` with its `since`. Billed monthly, annual billing would come first and hold it back.
 
 What it taught:
 - A dialog moves focus to its heading (or its first field) once it has opened: wait for that before pressing Tab, or

@@ -2,6 +2,7 @@ import * as z from 'zod';
 import { budgetWarningKeyPattern, maxDismissedBudgetWarnings } from '../budget/budget-dismissals';
 import { currencySchema } from '../catalog/formats';
 import { appLockSchema } from './app-lock';
+import { maxPriceChanges, priceChangeSchema } from './price-changes';
 import { countrySchema, recordIdSchema, timestampSchema } from './record';
 
 const subdivisionSchema = z
@@ -27,6 +28,13 @@ export const settingsSchema = z
     theme: z.enum(['system', 'light', 'dark']),
     /** Search starts with "Sold in <country>" on (PROJECT-PLAN P8, P13, M5.6). Left out, it starts off. */
     searchSoldOnly: z.literal(true).optional(),
+    /**
+     * Search lists every official reseller of a plan, cheaper or not (P8, P13, M5.13). Left out, only the ones that sell
+     * it for less.
+     */
+    searchAllResellers: z.literal(true).optional(),
+    /** What catalog updates changed in the lists' prices this past month, newest first, for Home (P2, M7.10). */
+    priceChanges: z.array(priceChangeSchema).min(1).max(maxPriceChanges).optional(),
     /**
      * The lists the Calendar leaves out, as last chosen on this device (P10, §3.5, M7.4), so a list made since shows.
      * Left out, it shows them all.

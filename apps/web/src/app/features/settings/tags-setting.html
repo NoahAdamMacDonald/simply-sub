@@ -6,7 +6,7 @@
   }
   @if (records().length > 0 || editing()?.id === 'new') {
     <ul class="tags">
-      @for (tag of records(); track tag.id) {
+      @for (tag of shown(); track tag.id) {
         <li [attr.data-tag]="tag.id">
           @if (editing(); as open) {
             @if (open.id === tag.id) {
@@ -55,6 +55,17 @@
         }
       }
     </ul>
+  }
+  @if (records().length > foldAfter) {
+    <button
+      matButton
+      type="button"
+      class="show-all"
+      [attr.aria-expanded]="showAll()"
+      (click)="showAll.set(!showAll())"
+    >
+      {{ showAll() ? 'Show fewer' : 'Show all ' + records().length + ' tags' }}
+    </button>
   }
   @if (editing()?.id !== 'new') {
     <button matButton="outlined" type="button" class="add" (click)="edit('new', 'name')">

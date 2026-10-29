@@ -22,6 +22,8 @@ import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
   cardTitle,
+  itemReplacements,
+  itemTitle,
   listFilterCount,
   listFilterOptions,
   listView,
@@ -50,6 +52,7 @@ import { TagsRepository } from '../../core/storage/tags-repository';
 import { BudgetTotals } from '../../shared/budget-totals/budget-totals';
 import { BudgetWarnings } from '../../shared/budget-warnings/budget-warnings';
 import { netMonthText, type ShownAndSpoken } from '../../shared/charge-text';
+import { dayText } from '../../shared/date-text';
 import { EmptyState } from '../../shared/empty-state/empty-state';
 import { Exporter, type ListExportFormat } from '../../shared/export/exporter';
 import { FeatureSummary } from '../../shared/feature-summary/feature-summary';
@@ -151,6 +154,32 @@ export class ListViewPage {
       ...(saved && total > 0 && { average: averageText(this.listItems(), saved) }),
       count: total === 1 ? '1 subscription' : `${total} subscriptions`,
     };
+  });
+  /**
+   * What takes over from each item that ends, in words, by item id (M7.11): the bundle or suite Optimizations put in
+   * its place, or the account it becomes an extra member on.
+   */
+  protected readonly replacements = computed(() => {
+    const catalog = this.catalog.catalog();
+    const words = new Map<string, string>();
+    if (!catalog) return words;
+    const { resolved } = this.listItems();
+    const byId = new Map(resolved.map((entry) => [entry.item.id, entry]));
+    for (const [itemId, replacement] of itemReplacements(
+      resolved.map((entry) => entry.item),
+      catalog,
+    )) {
+      const by = byId.get(replacement.itemId);
+      if (!by) continue;
+      const day = dayText(replacement.on);
+      words.set(
+        itemId,
+        replacement.kind === 'extra-member'
+          ? `Extra member on ${itemTitle(by)} from ${day}`
+          : `Moves to ${itemTitle(by)} on ${day}`,
+      );
+    }
+    return words;
   });
   /**
    * Each item paid with a card, by item id: its card's name, and what it costs a month with tax and after the card's

@@ -96,7 +96,7 @@ export const dismissedSuggestion = { fingerprint: '3f9a0c1d2e4b5a67', listId, ..
 
 export const card = {
   id: cardId,
-  name: 'Simplii Cashback Mastercard',
+  name: 'Cash Back Mastercard',
   nickname: 'Everyday',
   type: 'credit',
   network: 'mastercard',

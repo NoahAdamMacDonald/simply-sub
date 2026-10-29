@@ -63,6 +63,8 @@ export interface SuggestedItem {
  * - `bundle` and `suite`: the items are replaced by one bundle or suite plan.
  * - `card` (M9.3): pay with a better payment card (§9.3): `cardId`, and the cards' names, the one it's paid with now
  *   when it has one.
+ * - `currency` (M9.6): pay in another currency its seller prices it in for the buyer (§4.7), with the card it's paid
+ *   with (`cardTitle`). `to` is that price, which becomes the user's own price from `on`.
  */
 export type SuggestionAction =
   | { kind: 'interval'; item: SuggestedItem; to: PickedPrice; on: IsoDate }
@@ -111,9 +113,23 @@ export type SuggestionAction =
       cardId: string;
       cardTitle: string;
       fromCardTitle?: string;
-    };
+    }
+  | { kind: 'currency'; item: SuggestedItem; to: PickedPrice; on: IsoDate; cardTitle: string };
 
 export type SuggestionActionKind = SuggestionAction['kind'];
+
+/** The ids of the items a change is about: an extra member's host too. */
+export function actionItemIds(action: SuggestionAction): string[] {
+  switch (action.kind) {
+    case 'bundle':
+    case 'suite':
+      return action.items.map((item) => item.itemId);
+    case 'extra-member':
+      return [action.item.itemId, action.host.itemId];
+    default:
+      return [action.item.itemId];
+  }
+}
 
 /** A feature a suggestion loses or gains, with its rank: for a loss, the most severe among the items that lose it. */
 export interface FeatureChange {

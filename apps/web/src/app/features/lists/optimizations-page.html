@@ -53,23 +53,30 @@
       <p class="note" role="status">
         @if (!found()) {
           Looking for savings…
+        } @else if (updating()) {
+          Updating the suggestions…
         } @else if (sections().length === 0) {
           No suggestions.
         }
       </p>
-      <!-- Applied suggestions wait in the list's draft (M8.4): the editor saves them. -->
+      <!-- Applied suggestions wait in the list's draft (M8.4), to review, undo or save (M8.6). -->
       @if (unsaved()) {
         <div class="unsaved">
           <p>
-            This list has changes you haven't saved, and the suggestions count them. Apply more,
-            then review and save them in the editor.
+            @if (appliedCount() > 0) {
+              {{ appliedCount() === 1 ? '1 change is' : appliedCount() + ' changes are' }} applied
+              but not saved, and the suggestions count {{ appliedCount() === 1 ? 'it' : 'them' }}.
+              Apply more, then review them before you save.
+            } @else {
+              This list has changes you haven't saved, and the suggestions count them.
+            }
           </p>
           <a
             matButton="filled"
             id="review"
             class="review"
-            [routerLink]="['/lists', listId(), 'edit']"
-            >Review and save</a
+            [routerLink]="['/lists', listId(), 'optimize', 'review']"
+            >Review changes</a
           >
         </div>
       }
@@ -106,7 +113,7 @@
                     [suggestion]="card.suggestion"
                     [currency]="found.currency"
                     [dismissed]="card.dismissed"
-                    [busy]="applying() !== undefined"
+                    [busy]="applying() !== undefined || updating()"
                     (apply)="apply(card.suggestion)"
                     (dismiss)="dismiss(card.suggestion)"
                     (restore)="restore(card.suggestion)"

@@ -9,7 +9,7 @@ import type { SnapshotProvider, SnapshotReseller } from './snapshot';
 // leaves the account: Amazon.ca adds HST to a Mullvad voucher and Mullvad's own price includes tax, so Amazon is
 // cheaper in Alberta but not in Ontario.
 
-/** A reseller that sells the plan for less, at its cheapest price. */
+/** A reseller that sells the plan (for less, unless every one is asked for), at its cheapest price. */
 export interface ResellerDeal {
   reseller: SnapshotReseller;
   /** The price, picked for the buyer: converted into their currency, as price tags show it. */
@@ -18,8 +18,10 @@ export interface ResellerDeal {
   link: string;
   /** What it costs the buyer per month, sales tax included. */
   monthlyCost: number;
-  /** How much less that is than the provider's own cheapest price, per month, with tax. */
+  /** How much less that is than the provider's own cheapest price, per month, with tax: 0 or less when it isn't. */
   monthlySaving: number;
+  /** It sells the plan for less than the provider does. */
+  cheaper: boolean;
 }
 
 export interface DealContext extends PriceContext {
@@ -29,15 +31,17 @@ export interface DealContext extends PriceContext {
 
 /**
  * The resellers that sell `planId` for less than `provider` does, each at its cheapest price per month after tax,
- * cheapest first. Only prices for the buyer's region, a group it belongs to or GLOBAL count: a reseller doesn't sell
- * where it has no price. A price that leaves VAT to be added (`taxExcluded`) counts only in Canada and the US, where
- * the app knows the tax. Nothing is compared without a rate to convert into the buyer's currency.
+ * cheapest first; with `all` (Settings' "Show every reseller", M5.13), the ones that don't too. Only prices for the
+ * buyer's region, a group it belongs to or GLOBAL count: a reseller doesn't sell where it has no price. A price that
+ * leaves VAT to be added (`taxExcluded`) counts only in Canada and the US, where the app knows the tax. Nothing is
+ * compared without a rate to convert into the buyer's currency.
  */
 export function resellerDeals(
   provider: SnapshotProvider,
   planId: string,
   resellers: readonly SnapshotReseller[],
   context: DealContext,
+  all = false,
 ): ResellerDeal[] {
   const plan = provider.plans.find((candidate) => candidate.id === planId);
   if (!plan) return [];
@@ -61,7 +65,9 @@ export function resellerDeals(
       .filter((price) => usable.has(price.region) && (knowsTax || !price.taxExcluded))
       .map((price) => ({ price: picked(price, context), link: price.sourceUrl }));
     const best = cheapest(offers, context);
-    if (!best || best.monthlyCost >= direct.monthlyCost - halfACent) return [];
+    if (!best) return [];
+    const cheaper = best.monthlyCost < direct.monthlyCost - halfACent;
+    if (!cheaper && !all) return [];
     return [
       {
         reseller,
@@ -69,6 +75,7 @@ export function resellerDeals(
         link: best.link,
         monthlyCost: best.monthlyCost,
         monthlySaving: direct.monthlyCost - best.monthlyCost,
+        cheaper,
       },
     ];
   });

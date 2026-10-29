@@ -444,6 +444,10 @@ const rowsOf = (page) =>
       await customDialog(page).waitFor({ state: 'detached' });
       await until('the row', async () => (await rowsOf(page)).length === 1);
       await until('focus on its ✎', async () => (await focusedName(page)) === 'Edit Local Gym');
+      // The row's icon is asked for once the row is drawn, which can come after focus moves.
+      await until('the icon asked for', async () =>
+        iconRequests.includes('?domain=www.localgym.ca'),
+      ).catch(() => {});
       const [stored] = await readTable(page, 'customSubs');
       check(
         `${label}: Save stores it, shows its row with its icon and says so, with focus on its ✎`,

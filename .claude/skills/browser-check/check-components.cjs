@@ -291,7 +291,7 @@ async function statuses(page) {
   const expected = [
     'Active',
     'Active Ends Nov 3',
-    'Active Renew by Nov 3',
+    'Active Manual · renew by Nov 3',
     'Inactive · active from Sep 10, 2027',
     'Inactive',
     'Active · 2 lists',

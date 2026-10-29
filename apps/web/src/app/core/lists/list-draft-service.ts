@@ -2,6 +2,8 @@ import { Service, inject } from '@angular/core';
 import {
   draftChanged,
   withChanges,
+  withoutApplied,
+  type AppliedSuggestion,
   type DraftEdit,
   type DraftItem,
   type ListDraft,
@@ -87,9 +89,21 @@ export class ListDraftService {
     );
   }
 
-  /** Several edits at once, as one change to the draft: an optimizer suggestion applied (P14). */
-  applyEdits(listId: string, edits: readonly DraftEdit[]): Promise<ListDraft> {
-    return this.drafts.applyEdits(listId, edits);
+  /**
+   * Several edits at once, as one change to the draft: an optimizer suggestion applied (P14), recorded with what it
+   * changed when `suggestion` names it, so Review changes can undo it on its own (M8.6).
+   */
+  applyEdits(
+    listId: string,
+    edits: readonly DraftEdit[],
+    suggestion?: AppliedSuggestion,
+  ): Promise<ListDraft> {
+    return this.drafts.applyEdits(listId, edits, suggestion);
+  }
+
+  /** Undoes applied change `index`, with the later ones that build on it (M8.6's Review changes). */
+  undoApplied(listId: string, index: number): Promise<ListDraft> {
+    return this.drafts.change(listId, (draft) => withoutApplied(draft, index));
   }
 
   /** The Undo of applied edits (P14, M8.4): the draft as it was before them. */

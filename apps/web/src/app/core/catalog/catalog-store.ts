@@ -172,6 +172,9 @@ export class CatalogStore {
     this.checkingNow.set(true);
     try {
       const { downloadCatalog } = await import('./catalog-download');
+      // The catalog before, to compare prices with once an update has changed it (M7.10).
+      const before = this.catalog();
+      const version = this.version();
       const outcome = await exclusively(async () => {
         // What's stored now, which another tab may have just updated, and this tab's downloads.
         const stored = await this.repository.read().catch(() => []);
@@ -200,6 +203,18 @@ export class CatalogStore {
         }
         return download.outcome;
       });
+      const after = this.catalog();
+      if (before && after && version !== undefined && this.version() !== version) {
+        void import('./price-changes').then(({ recordPriceChanges }) =>
+          recordPriceChanges(
+            before,
+            after,
+            this.items.records(),
+            this.settings,
+            this.clock.today(),
+          ),
+        );
+      }
       this.unreachable.set(outcome === 'offline');
       this.lastCheckedAt = this.clock.now();
       this.lastOutcome.set(outcome);

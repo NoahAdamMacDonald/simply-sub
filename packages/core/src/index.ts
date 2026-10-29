@@ -33,6 +33,7 @@ export * from './catalog/reseller';
 export * from './catalog/reseller-deals';
 export * from './catalog/seed-sql';
 export * from './catalog/snapshot';
+export * from './catalog/plan-lookup';
 export {
   formatCatalogIssue,
   validateCatalog,
@@ -126,6 +127,8 @@ export * from './user/custom-subscription';
 export * from './user/dismissed-suggestion';
 export * from './user/fx-cache';
 export * from './user/item-activity';
+export * from './user/item-replacement';
+export * from './user/price-changes';
 export * from './user/item-form';
 export * from './user/item-text';
 export * from './user/list-draft';

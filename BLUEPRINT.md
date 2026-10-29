@@ -569,7 +569,8 @@ its `features` list those too (Proton Mail Plus still has Proton Free's VPN and 
 
 **Regular prices, not offers.** A price is what the subscription renews at. "$53.88 for the first 12 months, then
 $83.88" stores 83.88. First-term discounts are common (VPNs, antivirus), so a user who got one enters it as their
-own price with an end date (`priceOverride.until`, section 4.6), after which the schedule uses the catalog price.
+own price with an end date (`priceOverride.until`, section 4.6), after which the schedule uses the catalog price. It
+can start later too (`priceOverride.since`, M9.6): paying in another currency from the next charge.
 An offer can be mentioned in `notes`.
 
 **The billing period as the provider states it.** `interval` and `intervalCount` say how often a payment is taken,
@@ -854,7 +855,8 @@ export interface SubscriptionList {
 export interface ListItem {
   id: string; listId: string;
   source:
-    | { kind: 'catalog'; planId: string; addOns?: { id: string; quantity: number }[] }  // quantity ≥ 1
+    | { kind: 'catalog'; planId: string;
+        addOns?: { id: string; quantity: number; since?: string }[] }  // quantity ≥ 1; since: M8.5
     | { kind: 'bundle'; bundleId: string }   // the bundle's plans come from the catalog
     | { kind: 'custom'; customSubId: string; customPlanId: string };
   region?: string;                   // bought in another region than Settings.country (pickPrice's region)
@@ -869,6 +871,7 @@ export interface ListItem {
     | { mode: 'limited'; windows: { start: string; end: string; repeatYearly: boolean }[];
         interval: Interval; intervalCount: number };  // e.g. Netflix Premium every Sep–Oct
   priceOverride?: { amount: number; currency: string;   // promos, first-term offers, grandfathered prices
+                    since?: string;                     // the first charge at it (M9.6); before it, the catalog's
                     until?: string;                     // the date the catalog price applies again
                     plusTax?: boolean };                // the amount is before sales tax (default: tax included, 4.8)
   cardId?: string;
@@ -955,9 +958,14 @@ Since M6.14 a rank changed in an item dialog is also written to the same provide
   it, every later date of a plan billed on the 31st would come out up to 3 days early (PROJECT-PLAN §3.1).
 - `region`: what pickPrice and availability use for this item, for services bought abroad. Settings' `country`
   is the default.
-- `addOns` with a quantity: a plan can allow two extra members (`addOnLimit: 2`).
+- `addOns` with a quantity: a plan can allow two extra members (`addOnLimit: 2`). `since` (M8.5) is the day an
+  add-on joined when that's after the item began: an extra member Optimizations adds joins on the day the account it
+  replaces ends, and charges before then don't include it. The same add-on can be listed again with another day.
 - `bundle` as its own kind: a bundle covers several plans, so it has no single `planId`.
 - `priceOverride.until`: a first-term offer ends (section 4.3); charges dated before `until` use the override.
+  `priceOverride.since` (M9.6): the first charge at that price, which `until` comes after; charges before it use the
+  catalog price. Optimizations' currency change sets it to the item's next charge, so what's paid for keeps its price.
+  An optional field, so stored items need no new Dexie version.
 
 **Dexie schema** (`apps/web/src/app/core/storage/db.ts`, a plain `Dexie`: TypeScript gives up on Dexie's
 transaction types for a subclass). Dexie keeps only keys and indexes, not the records' shapes:
@@ -1027,7 +1035,10 @@ the first that fits:
 4. A fallback region, US → GB → EU, then the first region listed, converted.
 
 In a region priced in several currencies, the user's currency wins, then the one the provider's `billingCurrency`
-names for that region, then the first listed. A picked price has the shape of the API's `pricing` entries
+names for that region, then the first listed. Several currencies in one region always mean the buyer picks one
+(Proton's USD, CAD, EUR and CHF under `GLOBAL`): a price shown only as a conversion isn't stored, and a price set by
+where the buyer is lives under that region alone. So the optimizer can suggest the cheapest of a region's currencies
+on the user's card (section 10.3's 8th change, M9.6), and never another region's price. A picked price has the shape of the API's `pricing` entries
 (`PickedPrice`): `amount` and `currency`, `monthlyEquivalent`, `autoRenew`, `native`, the `source` price, and `fx`
 (rate, date, source) when it was converted. Amounts keep full precision; the UI rounds to 2 decimals, and the API
 also rounds rates to 4. Without a rate (offline on the first visit, or `/fx` down), the price stays in its own
@@ -1115,7 +1126,8 @@ The rules live in `packages/core/src/tax/`: the rates and subdivision lists sinc
 ### 4.9 Resellers
 Some providers sell their subscription through other shops too: Mullvad's scratch cards are on Amazon and at
 Swedish and German retailers, sometimes for less than Mullvad's own price. The catalog lists these **resellers**,
-and Search shows one next to a plan's prices when it's cheaper for the buyer (M5.2).
+and Search shows one next to a plan's prices when it's cheaper for the buyer (M5.2), or each of them with Settings'
+"Show every reseller" on (off by default, M5.13): "Also at" for the ones that aren't cheaper.
 - **Only official resellers:** a shop is listed only when the provider's own site names it as one, and its listing
   quotes that page (`approvedBy: { url, quotes }`, on the provider's website's domain or one of its other sites'
   `domains`, such as Proton VPN's protonvpn.com, which validation checks). Partners that
@@ -2449,7 +2461,7 @@ export type CardNetwork = 'visa' | 'mastercard' | 'amex' | 'discover' | 'interac
 
 export interface PaymentCard {
   id: string;
-  name: string;                 // "Simplii Cashback Mastercard"
+  name: string;                 // "Cash Back Mastercard"
   nickname?: string;            // shown instead of name if set
   type: 'credit' | 'debit';
   network: CardNetwork;
@@ -2544,7 +2556,7 @@ Lives in `packages/core/src/optimizer/`. It's a **pure function**:
 ### 10.2 Hard constraints
 - **Essential** (this plan): an item with any Essential feature keeps its exact plan. It can't be removed,
   downgraded or switched. Only changes that keep the plan apply: annual instead of monthly billing, a better card,
-  or a bundle that contains this same plan.
+  another currency, or a bundle that contains this same plan.
 - **Critical** (this provider): an item with any Critical feature can't be removed, and can only move to another
   plan of the same provider that keeps that feature at the same or a higher level.
 - **Needed:** after any change, every Needed feature must still be provided by at least one item **in every
@@ -2555,10 +2567,14 @@ Lives in `packages/core/src/optimizer/`. It's a **pure function**:
 2. Change interval (monthly → annual if cheaper over 12 months and the item renews automatically).
 3. Downgrade or switch plans within the same provider, including down to its free plan.
 4. Convert to an **add-on** of another item's plan (for example a second Netflix account becomes an extra member).
-5. Replace with a **bundle** or a **suite plan** (section 4.4) that covers two or more items.
+   The member joins on the day its own account's paid period ends (the add-on's `since`, M8.5).
+5. Replace with a **bundle** or a **suite plan** (section 4.4) that covers two or more items. It starts on the
+   earliest next charge of the items it replaces, with that as its start date, so it's never charged before (M8.5).
 6. Remove.
 7. (Phase 4) Move to a better card (an eligible network, within limits; section 9.3). Built in M9.3 as a free
    saving of its own (section 14).
+8. Pay in another currency the seller prices the plan in for the buyer (section 4.7), on the item's card: built in
+   M9.6 as a free saving of its own (section 14).
 
 ### 10.4 Search
 - Enumerate combinations of actions (lists are usually under about 15 items, and each item has only a few
@@ -2660,7 +2676,7 @@ prompted after each big change, or weekly).
 | TXT | native | A readable summary of one list; the Calendar's, its next 12 months by month (M7.9) |
 | JSON (one list) | native | List view's: the list, its items and what they name, as stored. Not a backup, so not importable (M7.5) |
 | JSON (payments) | native | The Calendar's: the lists shown and each charge in the next 12 months as charged, with its tax, renewal and live tags (core's `paymentsFile`, M7.9). Not a backup either |
-| ICS | `ics` npm package | One all-day event (`VALUE=DATE`, so no time zone can move it) per charge in the next 12 months, from the schedule engine. Not `RRULE`s: a monthly rule starting on the 31st skips every shorter month (RFC 5545 drops dates that don't exist), and separate events also follow windows, end dates and price changes. Each event lists its item's live tags, also as `CATEGORIES` (M7.9) |
+| ICS | `ics` npm package | All-day events (`VALUE=DATE`, so no time zone can move it), titled with what each costs as charged and `X-WR-CALNAME` naming the calendar. Since M7.12 an ongoing subscription is one repeating event (`RRULE`) for each run of charges at one amount, written from the schedule's own rule: a month's or year's day, or the 28th up to it with `BYSETPOS=-1` (a plan billed on the 31st falls on a shorter month's last day), `INTERVAL` for every 3 months or every 30 days, and `UNTIL` the day before the plan ends or a price of the user's own does, when the next run starts. So it goes on past the first year. Specific dates, and add-ons billed on a period of their own, stay an event per charge in the next 12 months, which no repeat rule writes exactly |
 
 ### 11.3 Calendar integration
 - **Phase 3, download `.ics`:** works with Google, Apple and Proton through their import features. This is
@@ -2877,6 +2893,51 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 **Still open**
 None.
 
+**Resolved (2026-10-29, the UI polish and the feedback after M3)**
+The UI polish the user approved (M9.5, M4.9, and with their OK of the proposals, M7.10, M4.7 and M4.8), and their
+eleven fixes and ideas after M3, as M5.13, M6.17–M6.19, M7.11, M7.12, M8.5, M8.6 and M9.6. PROJECT-PLAN's rows have
+each as built; what was decided:
+- **Apply replaces what a suggestion replaces (M8.5):** a bundle Apply added had no start date, so it was counted as
+  if paid all year, and an extra member's add-on was charged on every one of its host's charges: this year's total
+  rose. A bundle or suite now starts on the earliest next charge of the items it replaces (its `startDate`), each item
+  ends on its own next charge, and an extra member joins its host the day the account it replaces ends (an add-on's
+  `since`). The optimizer prices them the same way.
+- **Review changes (M8.6):** each suggestion applied is kept on the draft with what it changed, so it can be undone on
+  its own (with the changes built on it); its page reads like a diff, with the totals before and after. While the
+  suggestions are worked out again after an Apply, none can be applied, so a card that clashes with one applied (a
+  better card for a plan a bundle replaces) is never in reach.
+- **Statuses (M7.11, §3.3):** a manual renewal says "Manual · renew by"; an item a bundle, suite or extra member
+  replaces says what it becomes and when, so a plan still listed until its paid period ends reads as intended.
+  Proton Family with auto-renew off was already Manual: the badge only said "Renew by".
+- **Auto-renews and an end date (M6.19):** both can be set, one saying how it's charged and the other when it stops:
+  "Renews Nov 12, then ends Nov 28".
+- **Calendar files (M7.12):** an ongoing subscription is a repeating event per run of charges at one amount, with the
+  schedule's own rule (a plan billed on the 31st falls on a shorter month's last day: `BYSETPOS=-1`), so it goes past
+  the first year. An app makes a calendar of its own only for a subscribed feed, so that waits for M10's live feed;
+  `X-WR-CALNAME` names it where an app reads it.
+- **Every reseller (M5.13):** Settings' Search, off by default (the user's choice).
+- **Another currency (M9.6), the user's idea:** no catalog field is needed. Several currencies in one region already
+  mean the buyer picks (Proton's four), and a price set by where the buyer is lives under that region alone, so
+  another country's price is never offered (geo-locked). It needs the item's card, since the FX fee decides it, and
+  it's applied as the user's own price in that currency from the next charge (`priceOverride.since`, the item dialog's
+  From). With Proton's prices and late October's rates a US buyer saves by paying in CAD; a Canadian already pays
+  least in CAD.
+- **Home (M7.10):** Mark renewed means the renewal due is paid, so the next one is the charge after it; Coming up leaves
+  out a charge the schedule counts as paid (before an item's next one).
+- **Fixes the checks found:** Settings' Delete all data summary had `tabindex="-1"`, out of the Tab order; Home's list
+  cards and Review changes' lines ran their words together for a screen reader; Home's Budgets kept the old layout's
+  480 px limit; List view's open filters, scrolling since M6.17, scrolled sideways for the price slider's thumbs; and
+  at 320 px a custom plan's box was wider than its editor, M4.8's Currency menu not shrinking below its arrow's room;
+  and the empty states of Optimizations and Review changes coloured their filled buttons' labels with the colour the
+  buttons are filled with, which axe leaves out (a Material button's layered background is "incomplete" to it); a
+  status badge naming a bundle didn't wrap and widened List view at 360 px; and Applied's snackbar stayed up after
+  Optimizations was left, its Undo out of date (after a save it could cancel a new draft).
+- **The browser checks' catalog:** `apps/web/public/data/` is built and not in Git, so it's the catalog of whichever
+  branch last ran `data:build`. Run it on the branch under test, then restart `ng serve`, before Search's checks.
+- **Bundle:** the initial bundle is 497.84 kB, as before the batch; the new pages and code are in lazy chunks.
+- **Checks:** core 1597 tests, web 684, API 213, bot 41; all 26 browser-check scripts (2503 checks, both themes at 360
+  and 1280 px, keyboard only, with axe), `check-after-m3.cjs` (143) new for the batch.
+
 **Resolved (2026-10-28, M3.11)**
 - **The bot discovers too** (the user's request: discovery has a cadence, and no part may need a Claude plan): with
   Workers AI and Browser Rendering, within the night's budgets, over as many nights as a batch needs. A service it
@@ -3067,8 +3128,8 @@ The user's sixteen fixes and improvements after M9, as M5.11–M5.12, M6.12–M6
   flags the charge that takes a card over and its later ones that month, on the day and in the agenda, and the day's
   panel names each charge's card, and the warning. Every list's charges count, shown or not.
 - **The optimizer's card action, wired in:** `OptimizerService` passes the cards and what the other lists' items post
-  to each (`cardLoads`), and waits for the cards to load. List view's suggestion reads "With Discover It instead of
-  Everyday, from now on".
+  to each (`cardLoads`), and waits for the cards to load. List view's suggestion reads "With Rewards Discover
+  instead of Everyday, from now on".
 - **Bundle:** the initial bundle is 496.39 kB, as since M9.1 (497.31 kB before M9).
 - **Checks:** `check-payment.cjs` (185 checks, both themes at 360 and 1280 px, keyboard only) on `ng serve` and under
   `wrangler dev`'s production CSP, csp-check, and the list-view, item-dialog, calendar, backup, app-lock, optimizations

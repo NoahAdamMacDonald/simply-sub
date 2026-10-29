@@ -45,7 +45,8 @@ form {
   gap: 12px 16px;
   margin-bottom: 12px;
 
-  mat-form-field {
+  mat-form-field,
+  ss-choice-field {
     flex: 1 1 220px;
   }
 

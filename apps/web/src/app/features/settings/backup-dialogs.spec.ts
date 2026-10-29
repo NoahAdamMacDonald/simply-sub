@@ -276,7 +276,8 @@ describe('Your data', () => {
 
   it('deletes everything once DELETE is typed, then goes Home', async () => {
     const navigate = vi.spyOn(TestBed.inject(Router), 'navigateByUrl');
-    await press('Delete all data');
+    // Folded under its summary on the page (M4.7); the button says a dialog follows.
+    await press('Delete all data…');
     await until(() => dialogText()?.startsWith('Delete all data?') === true);
     await (await input('Type DELETE to confirm')).setValue('delete');
     await (

@@ -9,8 +9,8 @@ import {
   type ResolvedAddOn,
   type Tag,
 } from '@simply-sub/core';
-import { billingText, renewalText } from '../../shared/billing-text';
-import { dateText } from '../../shared/date-text';
+import { billingText, ownPriceText, renewalText } from '../../shared/billing-text';
+import { joinsText } from '../../shared/date-text';
 import { amountText, intervalSpoken } from '../../shared/price-tag/price-text';
 
 // What the list editor (P5) says about each item of its draft: when it renews, from its next charge ("Renews Nov 12 ·
@@ -68,7 +68,7 @@ export function editRow(
   }
   const { name, planName, iconUrl, override, price, addOns, nextCharge } = result.resolved;
   const shown = override ?? price;
-  const priceOverride = item.priceOverride;
+  const ownPrice = ownPriceText(item.priceOverride, item.billing, today, country);
   const plan = item.source.kind === 'bundle' ? name : planTitle(name, planName);
   const { nickname } = item;
   return {
@@ -85,14 +85,8 @@ export function editRow(
     details: [
       // A free plan has nothing to bill.
       ...(shown.amount === 0 ? [] : [renewalText(item.billing, nextCharge, today)]),
-      ...addOns.map((addOn) => addOnLine(addOn, country)),
-      ...(override && priceOverride
-        ? [
-            priceOverride.until === undefined
-              ? 'Your own price'
-              : `Your own price until ${dateText(priceOverride.until)}`,
-          ]
-        : []),
+      ...addOns.map((addOn) => addOnLine(addOn, country, today)),
+      ...(ownPrice === undefined ? [] : [ownPrice]),
       ...ranks,
     ],
   };
@@ -102,11 +96,11 @@ export function editRow(
  * An add-on and what it costs, in words that read the same aloud (M6.12): "Extra member (with ads) for $7.99 a month",
  * "for about" when converted. Before tax, as its price tag is.
  */
-function addOnLine(addOn: ResolvedAddOn, country: string | undefined): string {
+function addOnLine(addOn: ResolvedAddOn, country: string | undefined, today: IsoDate): string {
   const { price } = addOn;
   const amount = amountText(price.amount * addOn.quantity, price.currency, country);
   const about = price.fx === undefined ? '' : 'about ';
-  return `${addOnText(addOn)} for ${about}${amount} ${intervalSpoken(price.interval, price.intervalCount)}`;
+  return `${addOnText(addOn)}${joinsText(addOn, today)} for ${about}${amount} ${intervalSpoken(price.interval, price.intervalCount)}`;
 }
 
 function customRanksText(count: number): string[] {

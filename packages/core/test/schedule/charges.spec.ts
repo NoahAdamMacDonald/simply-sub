@@ -199,6 +199,22 @@ describe('itemCharges', () => {
       ]);
     });
 
+    it('costs the catalog price before the override’s since, and the override from that day on (M9.6)', () => {
+      const switched = chargeable(
+        {},
+        {
+          item: { priceOverride: { amount: 9.99, currency: 'CAD', since: '2026-12-12' } },
+          overridePrice: picked(9.99, { taxIncluded: true }),
+        },
+      );
+      const charges = itemCharges(switched, { from: '2026-11-01', to: '2027-02-01' }, alberta);
+      expect(amounts(charges)).toEqual([
+        ['2026-11-12', round(18.99 * 1.05), round(18.99 * 0.05)],
+        ['2026-12-12', 9.99, 0],
+        ['2027-01-12', 9.99, 0],
+      ]);
+    });
+
     it('costs the override on every date when it has no until', () => {
       const own = chargeable(
         {},

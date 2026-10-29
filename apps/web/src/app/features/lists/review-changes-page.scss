@@ -1,0 +1,137 @@
+:host {
+  display: block;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  color: var(--ss-text-muted);
+}
+
+.note {
+  margin: 0 0 12px;
+  color: var(--ss-text-muted);
+}
+
+// The list's totals as saved and with the changes.
+.totals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+
+  div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+  }
+
+  dt {
+    color: var(--ss-text-muted);
+  }
+
+  dd {
+    margin: 0;
+  }
+}
+
+// A card per change, like a diff: − for what goes, + for what comes, ~ for what changes.
+.changes {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.change {
+  padding: 16px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 16px;
+  }
+
+  h2 {
+    flex: 1 1 280px;
+    margin: 0;
+    font: var(--mat-sys-title-medium);
+    overflow-wrap: anywhere;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .saves {
+    margin: 0;
+    color: var(--status-active);
+    font: var(--mat-sys-label-large);
+  }
+}
+
+.lines {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: grid;
+    grid-template-columns: 1.25rem minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 2px 8px;
+  }
+
+  .sign {
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .goes .sign {
+    color: var(--ss-danger);
+  }
+
+  .comes .sign {
+    color: var(--status-active);
+  }
+
+  .alters .sign {
+    color: var(--ss-text-muted);
+  }
+
+  .name {
+    font-weight: 500;
+    overflow-wrap: anywhere;
+  }
+
+  .price {
+    color: var(--ss-text-muted);
+    white-space: nowrap;
+  }
+
+  .what {
+    grid-column: 2 / -1;
+    color: var(--ss-text-muted);
+  }
+}
+
+.undo {
+  margin-top: 4px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin: 16px 0 0;
+}

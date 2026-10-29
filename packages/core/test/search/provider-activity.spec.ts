@@ -120,6 +120,8 @@ describe('providerActivity', () => {
       lists: 1,
       listIds: [family],
       plans: [{ planId: 'crave.premium', kind: 'active' }],
+      // In the bundle, which Search says (M7.11).
+      bundleIds: ['bundle.netflix-crave'],
     });
   });
 });

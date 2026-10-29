@@ -218,7 +218,9 @@
               [aria-label]="'Ends on: choose a date'"
             />
             <mat-datepicker #endPicker [calendarHeaderComponent]="calendarHeader" />
-            <mat-hint>Optional</mat-hint>
+            <mat-hint>{{
+              model().endDate ? 'It stops then: no renewal after' : 'Optional'
+            }}</mat-hint>
             <mat-error>{{ firstError(form.endDate) }}</mat-error>
           </mat-form-field>
         </div>
@@ -241,7 +243,10 @@
 
         @if (!free()) {
           @if (autoRenewAvailable()) {
-            <mat-checkbox [formField]="form.autoRenew">Auto-renews</mat-checkbox>
+            <!-- With an end date, it renews by itself until then (M6.19). -->
+            <mat-checkbox [formField]="form.autoRenew">{{
+              model().endDate ? 'Auto-renews until it ends' : 'Auto-renews'
+            }}</mat-checkbox>
           } @else {
             <p class="note">This plan renews manually — we’ll remind you</p>
           }
@@ -318,14 +323,28 @@
               <input matInput type="number" step="any" [formField]="form.priceAmount" />
               <mat-error>{{ firstError(form.priceAmount) }}</mat-error>
             </mat-form-field>
+            <ss-choice-field
+              label="Currency"
+              [formField]="form.priceCurrency"
+              [choices]="currencies"
+            />
+            <!-- From (M9.6): a price that starts on a later charge, such as another currency from the next one. -->
             <mat-form-field appearance="outline" subscriptSizing="dynamic">
-              <mat-label>Currency</mat-label>
-              <mat-select [formField]="form.priceCurrency">
-                @for (choice of currencies; track choice.value) {
-                  <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
-                }
-              </mat-select>
-              <mat-error>{{ firstError(form.priceCurrency) }}</mat-error>
+              <mat-label>From</mat-label>
+              <input
+                matInput
+                autocomplete="off"
+                placeholder="YYYY-MM-DD"
+                [matDatepicker]="sincePicker"
+                [formField]="form.priceSince"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="sincePicker"
+                [aria-label]="'From: choose a date'"
+              />
+              <mat-datepicker #sincePicker [calendarHeaderComponent]="calendarHeader" />
+              <mat-hint>The first charge at this price (optional)</mat-hint>
             </mat-form-field>
             <mat-form-field appearance="outline" subscriptSizing="dynamic">
               <mat-label>Until</mat-label>
@@ -343,6 +362,7 @@
               />
               <mat-datepicker #untilPicker [calendarHeaderComponent]="calendarHeader" />
               <mat-hint>When the regular price starts again (optional)</mat-hint>
+              <mat-error>{{ firstError(form.priceUntil) }}</mat-error>
             </mat-form-field>
           </div>
           @if (taxAdded()) {
@@ -356,15 +376,15 @@
 
     <details class="advanced" [open]="model().region !== country()">
       <summary>Advanced</summary>
-      <mat-form-field appearance="outline">
-        <mat-label>Bought in</mat-label>
-        <mat-select [formField]="form.region" (selectionChange)="regionChanged()">
-          @for (choice of countries; track choice.value) {
-            <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
-          }
-        </mat-select>
-        <mat-hint>Its price and sales tax are that country’s</mat-hint>
-      </mat-form-field>
+      <!-- A long list: a menu you can type in, like Settings' Country (M4.8). -->
+      <ss-choice-field
+        class="bought-in"
+        label="Bought in"
+        hint="Its price and sales tax are that country’s"
+        [formField]="form.region"
+        [choices]="countries"
+        (picked)="regionChanged()"
+      />
     </details>
 
     <section class="ranks" [attr.aria-labelledby]="ids + '-ranks'">
