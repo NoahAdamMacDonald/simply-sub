@@ -1,6 +1,13 @@
-import { periodText, type Billing, type Charge, type IsoDate } from '@simply-sub/core';
+import {
+  periodText,
+  type Billing,
+  type Charge,
+  type IsoDate,
+  type PriceOverride,
+} from '@simply-sub/core';
 import { nearDateText } from './charge-text';
 import { dateText } from './date-text';
+import { amountText, intervalSpoken } from './price-tag/price-text';
 
 // How an item is billed, in words: the list editor's rows (P5) and List view's cards (P4), with its renewal date from
 // its next charge (M7.1). The period's words are core's periodText, as the exports write them.
@@ -41,4 +48,22 @@ export function renewalText(billing: Billing, next: Charge | undefined, today: I
     `Renews ${nearDateText(next.date, today)}`,
     billing.endDate === undefined ? how : `${how}, then ends ${dateText(billing.endDate)}`,
   ].join(' · ');
+}
+
+/**
+ * The user's own price, while it applies or while it's still to come (M9.6), when the price shown is the catalog's:
+ * "Your own price", "Your own price until Feb 12, 2027", "Your own price from Nov 12: US$9.99 a month + tax". Nothing
+ * once it has ended.
+ */
+export function ownPriceText(
+  own: PriceOverride | undefined,
+  billing: Billing,
+  today: IsoDate,
+  country: string | undefined,
+): string | undefined {
+  if (!own || (own.until !== undefined && own.until <= today)) return undefined;
+  const until = own.until === undefined ? '' : ` until ${dateText(own.until)}`;
+  if (own.since === undefined || own.since <= today) return `Your own price${until}`;
+  const amount = `${amountText(own.amount, own.currency, country)} ${intervalSpoken(billing.interval, billing.intervalCount)}`;
+  return `Your own price from ${dateText(own.since)}${until}: ${amount}${own.plusTax ? ' + tax' : ''}`;
 }

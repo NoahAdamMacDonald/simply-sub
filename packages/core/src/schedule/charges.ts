@@ -3,6 +3,7 @@ import { addDays, type IsoDate } from '../dates/iso-date';
 import { salesTaxOn } from '../tax/charge-tax';
 import { buyerTaxPlace, type TaxPlace } from '../tax/sales-tax-rate';
 import { samePeriod, type Period } from '../dates/period';
+import type { PriceOverride } from '../user/list-item';
 import type { ResolvedItem } from '../user/resolved';
 import { chargeDates, lastChargeDate, nextChargeDate, type DateRange } from './charge-dates';
 
@@ -57,8 +58,8 @@ interface Part {
 /**
  * The item's charges dated within `range`, in date order, for a buyer at `place` (Settings' country, province and
  * rate; an item bought in another region follows that region's rule, buyerTaxPlace). On each charge date the item
- * costs its price override, while the date is before the override's `until`, else its price plus each add-on ×
- * its quantity. An add-on sold only for another period is charged on that period's dates, from the same anchor or
+ * costs its price override, while the date is from the override's `since` and before its `until`, else its price plus
+ * each add-on × its quantity. An add-on sold only for another period is charged on that period's dates, from the same anchor or
  * window (Disney+'s monthly extra member on a yearly plan). A charge that comes to 0 (a free plan) isn't one.
  */
 export function itemCharges(resolved: Chargeable, range: DateRange, place: TaxPlace): Charge[] {
@@ -225,10 +226,19 @@ function costsOf(parts: readonly Part[], taxPlace: TaxPlace): ChargeCost[] {
   return [...bySource.values()];
 }
 
-/** Whether a charge on a date costs the item's price override: it has one, and the date is before its `until`. */
+/**
+ * Whether a charge on a date costs the item's price override: it has one, and the date is from its `since` and before
+ * its `until`.
+ */
 function overrideTest({ item, overridePrice }: Chargeable): (date: IsoDate) => boolean {
-  const until = item.priceOverride?.until;
-  return (date) => overridePrice !== undefined && (until === undefined || date < until);
+  return (date) => overridePrice !== undefined && ownPriceOn(item.priceOverride ?? {}, date);
+}
+
+/** Whether a price override applies on `date`: from its `since`, before its `until`. */
+export function ownPriceOn(own: Pick<PriceOverride, 'since' | 'until'>, date: IsoDate): boolean {
+  return (
+    (own.since === undefined || own.since <= date) && (own.until === undefined || date < own.until)
+  );
 }
 
 function isDate(date: IsoDate | undefined): date is IsoDate {

@@ -89,4 +89,18 @@ describe('listText', () => {
       ].join('\n'),
     );
   });
+
+  it('says what an own price still to come will be, and from when (M9.6)', () => {
+    const [netflix] = workList.resolved;
+    const own = { amount: 9.99, currency: 'USD', since: '2026-11-12', plusTax: true };
+    const switched = { ...netflix, item: { ...netflix.item, priceOverride: own } };
+    expect(listText({ ...workList, resolved: [switched] }, context, format)).toContain(
+      '  Your own price from Nov 12, 2026: US$9.99 monthly + tax\n',
+    );
+    const started = { ...own, since: '2026-10-12' };
+    const applies = { ...switched, item: { ...switched.item, priceOverride: started } };
+    expect(listText({ ...workList, resolved: [applies] }, context, format)).toContain(
+      '  Your own price\n',
+    );
+  });
 });

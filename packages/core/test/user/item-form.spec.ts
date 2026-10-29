@@ -415,6 +415,21 @@ describe('itemFormIssues', () => {
     expect(itemFormIssues(standardForm({ ownPrice: false, priceAmount: 0 }), context)).toEqual([]);
   });
 
+  it('needs an own price’s end after its start (M9.6)', () => {
+    const own = { ownPrice: true, priceAmount: 15.99, priceCurrency: 'USD' };
+    for (const priceUntil of ['2026-11-12', '2026-11-01']) {
+      expect(
+        itemFormIssues(standardForm({ ...own, priceSince: '2026-11-12', priceUntil }), context),
+      ).toEqual([{ path: ['priceUntil'], message: 'Must be after the date it starts' }]);
+    }
+    expect(
+      itemFormIssues(
+        standardForm({ ...own, priceSince: '2026-11-12', priceUntil: '2026-11-13' }),
+        context,
+      ),
+    ).toEqual([]);
+  });
+
   it('checks only a free plan’s dates', () => {
     const free = { ...context, free: true };
     const form = standardForm({
@@ -465,6 +480,7 @@ describe('itemFromForm', () => {
         ownPrice: true,
         priceAmount: 15.99,
         priceCurrency: 'USD',
+        priceSince: '2026-11-12',
         priceUntil: '2027-01-31',
         plusTax: true,
         region: 'US',
@@ -492,7 +508,13 @@ describe('itemFromForm', () => {
         endDate: '2027-06-30',
         autoRenew: false,
       },
-      priceOverride: { amount: 15.99, currency: 'USD', until: '2027-01-31', plusTax: true },
+      priceOverride: {
+        amount: 15.99,
+        currency: 'USD',
+        since: '2026-11-12',
+        until: '2027-01-31',
+        plusTax: true,
+      },
       tagIds: ['0192f1c7-3e4f-7051-ac6d-7e8f9a0b1c2d'],
       // 4K isn't a key Netflix Standard provides.
       rankOverrides: { 'streaming.ad-free': 'essential' },
@@ -641,6 +663,7 @@ describe('itemFormFor', () => {
           endDate: '2027-06-30',
           ownPrice: true,
           priceAmount: 15.99,
+          priceSince: '2026-11-12',
           priceUntil: '2027-01-31',
           region: 'US',
           rankOverrides: { 'streaming.ad-free': 'critical' },

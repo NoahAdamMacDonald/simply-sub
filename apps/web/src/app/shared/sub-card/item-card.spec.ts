@@ -170,6 +170,14 @@ describe('ItemCard', () => {
     ).toEqual(['Monthly · auto-renews', 'Your own price']);
   });
 
+  it('says what an own price still to come will be, and from when (M9.6)', async () => {
+    const own = { amount: 9.99, currency: 'USD', since: '2026-11-12', plusTax: true };
+    expect(await facts(resolved('netflix.standard', { priceOverride: own }))).toEqual([
+      'Monthly · auto-renews',
+      'Your own price from Nov 12, 2026: US$9.99 a month + tax',
+    ]);
+  });
+
   it('emits the pin it should have, and shows it pressed when pinned', () => {
     const fixture = render(resolved('netflix.standard', { pinned: true }));
     const pins: boolean[] = [];

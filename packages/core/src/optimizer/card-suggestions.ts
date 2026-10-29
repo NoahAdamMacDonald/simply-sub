@@ -1,4 +1,9 @@
-import { itemLedger, itemOnCard, type RewardsContext } from '../rewards/card-ledger';
+import {
+  itemLedger,
+  itemOnCard,
+  type ItemLedger,
+  type RewardsContext,
+} from '../rewards/card-ledger';
 import { fits, type CardLoads } from '../rewards/card-limits';
 import { eligibleCards } from '../rewards/eligibility';
 import { cardTitle } from '../user/card-rules';
@@ -14,13 +19,24 @@ import type { Suggestion } from './suggestion';
 // and this list's). The items it saves the most for choose first, and each suggestion's charges count against the
 // cards the ones after it look at, never freeing room, so every suggestion fits alone and all of them together.
 
-export function cardSuggestions(
+/**
+ * The user's cards and the room on them: what's posted to each in each of the 12 calendar months from this one, by the
+ * other lists' items and this list's, which the suggestions add theirs to as they're made, so they all fit together.
+ */
+export interface CardRoom {
+  cards: readonly PaymentCard[];
+  byId: ReadonlyMap<string, PaymentCard>;
+  /** Each item's charges, by its index in the model. */
+  ledgers: readonly ItemLedger[];
+  loads: Map<string, number[]>;
+}
+
+export function cardRoom(
   model: OptimizerModel,
   cards: readonly PaymentCard[],
   outside: CardLoads | undefined,
   context: RewardsContext,
-  list: string,
-): Suggestion[] {
+): CardRoom {
   const byId = new Map(cards.map((card) => [card.id, card]));
   const loads = new Map(
     cards.map((card) => [card.id, [...(outside?.get(card.id) ?? Array<number>(12).fill(0))]]),
@@ -33,7 +49,15 @@ export function cardSuggestions(
       itemOnCard(ledger, card, context).posted.forEach((amount, month) => (load[month] += amount));
     }
   });
+  return { cards, byId, ledgers, loads };
+}
 
+export function cardSuggestions(
+  model: OptimizerModel,
+  { cards, byId, ledgers, loads }: CardRoom,
+  context: RewardsContext,
+  list: string,
+): Suggestion[] {
   const moves = model.items
     .flatMap((item, index) => {
       const ledger = ledgers[index];

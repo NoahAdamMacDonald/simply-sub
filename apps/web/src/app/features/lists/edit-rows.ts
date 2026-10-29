@@ -9,8 +9,8 @@ import {
   type ResolvedAddOn,
   type Tag,
 } from '@simply-sub/core';
-import { billingText, renewalText } from '../../shared/billing-text';
-import { dateText, joinsText } from '../../shared/date-text';
+import { billingText, ownPriceText, renewalText } from '../../shared/billing-text';
+import { joinsText } from '../../shared/date-text';
 import { amountText, intervalSpoken } from '../../shared/price-tag/price-text';
 
 // What the list editor (P5) says about each item of its draft: when it renews, from its next charge ("Renews Nov 12 ·
@@ -68,7 +68,7 @@ export function editRow(
   }
   const { name, planName, iconUrl, override, price, addOns, nextCharge } = result.resolved;
   const shown = override ?? price;
-  const priceOverride = item.priceOverride;
+  const ownPrice = ownPriceText(item.priceOverride, item.billing, today, country);
   const plan = item.source.kind === 'bundle' ? name : planTitle(name, planName);
   const { nickname } = item;
   return {
@@ -86,13 +86,7 @@ export function editRow(
       // A free plan has nothing to bill.
       ...(shown.amount === 0 ? [] : [renewalText(item.billing, nextCharge, today)]),
       ...addOns.map((addOn) => addOnLine(addOn, country, today)),
-      ...(override && priceOverride
-        ? [
-            priceOverride.until === undefined
-              ? 'Your own price'
-              : `Your own price until ${dateText(priceOverride.until)}`,
-          ]
-        : []),
+      ...(ownPrice === undefined ? [] : [ownPrice]),
       ...ranks,
     ],
   };

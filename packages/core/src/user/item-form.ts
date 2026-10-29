@@ -82,6 +82,8 @@ export interface ItemForm {
   ownPrice: boolean;
   priceAmount: number | null;
   priceCurrency: string;
+  /** The first date it's paid (M9.6), and the date the regular price starts again: '' for none. */
+  priceSince: string | null;
   priceUntil: string | null;
   plusTax: boolean;
   /** Where it was bought: Settings' country unless it's changed. */
@@ -323,6 +325,9 @@ export function itemFormIssues(form: ItemForm, rules: ItemFormRules): FormIssue[
       add(['priceAmount'], 'Enter an amount above 0');
     }
     if (form.priceCurrency === '') add(['priceCurrency'], 'Choose a currency');
+    if (isDate(form.priceSince) && isDate(form.priceUntil) && form.priceUntil <= form.priceSince) {
+      add(['priceUntil'], 'Must be after the date it starts');
+    }
   }
 
   if (form.nickname.trim().length > maxNicknameLength) {
@@ -411,6 +416,7 @@ export function newItemForm({
     ownPrice: ownPrice !== undefined,
     priceAmount: ownPrice?.amount ?? null,
     priceCurrency: ownPrice?.currency ?? currency,
+    priceSince: '',
     priceUntil: '',
     plusTax: ownPrice?.plusTax ?? false,
     region: country,
@@ -451,6 +457,7 @@ export function itemFormFor(
       ownPrice: true,
       priceAmount: own.amount,
       priceCurrency: own.currency,
+      priceSince: own.since ?? '',
       priceUntil: own.until ?? '',
       plusTax: own.plusTax ?? false,
     }),
@@ -626,6 +633,7 @@ function priceOverride(form: ItemForm): { priceOverride?: PriceOverride } {
     priceOverride: {
       amount: form.priceAmount,
       currency: form.priceCurrency,
+      ...(isDate(form.priceSince) && { since: form.priceSince }),
       ...(isDate(form.priceUntil) && { until: form.priceUntil }),
       ...(form.plusTax && { plusTax: true }),
     },

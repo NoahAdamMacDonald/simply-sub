@@ -6,7 +6,7 @@ import { addOnText, planTitle, type ResolvedItem, type Tag } from '@simply-sub/c
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { ClockService } from '../../core/clock/clock-service';
 import { SettingsStore } from '../../core/settings/settings-store';
-import { billingText } from '../billing-text';
+import { billingText, ownPriceText } from '../billing-text';
 import { chargeAmountText, type ShownAndSpoken } from '../charge-text';
 import { countryName } from '../country-name';
 import { dateText, joinsText } from '../date-text';
@@ -154,21 +154,21 @@ export class ItemCard {
   });
   /** How it's billed, and what else it has, in words. */
   protected readonly facts = computed(() => {
-    const { item, override } = this.resolved();
+    const { item } = this.resolved();
     const { billing, priceOverride, region } = item;
+    const ownPrice = ownPriceText(
+      priceOverride,
+      billing,
+      this.clock.today(),
+      this.settings.saved()?.country,
+    );
     return [
       // A free plan has nothing to bill.
       ...(this.price().amount === 0 ? [] : [billingText(billing)]),
       ...(billing.mode === 'recurring' && billing.startDate !== undefined
         ? [`Subscribed since ${dateText(billing.startDate)}`]
         : []),
-      ...(override && priceOverride
-        ? [
-            priceOverride.until === undefined
-              ? 'Your own price'
-              : `Your own price until ${dateText(priceOverride.until)}`,
-          ]
-        : []),
+      ...(ownPrice === undefined ? [] : [ownPrice]),
       ...(region === undefined ? [] : [`Bought in ${countryName(region)}`]),
     ];
   });

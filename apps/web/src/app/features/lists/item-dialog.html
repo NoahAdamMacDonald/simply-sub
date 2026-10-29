@@ -328,6 +328,24 @@
               [formField]="form.priceCurrency"
               [choices]="currencies"
             />
+            <!-- From (M9.6): a price that starts on a later charge, such as another currency from the next one. -->
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+              <mat-label>From</mat-label>
+              <input
+                matInput
+                autocomplete="off"
+                placeholder="YYYY-MM-DD"
+                [matDatepicker]="sincePicker"
+                [formField]="form.priceSince"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="sincePicker"
+                [aria-label]="'From: choose a date'"
+              />
+              <mat-datepicker #sincePicker [calendarHeaderComponent]="calendarHeader" />
+              <mat-hint>The first charge at this price (optional)</mat-hint>
+            </mat-form-field>
             <mat-form-field appearance="outline" subscriptSizing="dynamic">
               <mat-label>Until</mat-label>
               <input
@@ -344,6 +362,7 @@
               />
               <mat-datepicker #untilPicker [calendarHeaderComponent]="calendarHeader" />
               <mat-hint>When the regular price starts again (optional)</mat-hint>
+              <mat-error>{{ firstError(form.priceUntil) }}</mat-error>
             </mat-form-field>
           </div>
           @if (taxAdded()) {

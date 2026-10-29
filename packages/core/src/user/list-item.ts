@@ -125,14 +125,24 @@ export const maxNicknameLength = 60;
 export const maxNoteLength = 1000;
 
 /** What the user pays instead of the catalog price: a promo, a first-term offer or a grandfathered price. */
-export const priceOverrideSchema = z.strictObject({
-  amount: z.number().positive('Must be more than 0'),
-  currency: currencySchema,
-  /** The date the catalog price applies again: charges dated before it use the override. */
-  until: isoDateSchema.optional(),
-  /** The amount is before sales tax; without it, the amount includes tax (BLUEPRINT §4.8). */
-  plusTax: z.boolean().optional(),
-});
+export const priceOverrideSchema = z
+  .strictObject({
+    amount: z.number().positive('Must be more than 0'),
+    currency: currencySchema,
+    /**
+     * The first date it's charged (M9.6): charges dated before it use the catalog price. A switch to another currency
+     * takes effect on the item's next charge, so what's paid for already keeps its price.
+     */
+    since: isoDateSchema.optional(),
+    /** The date the catalog price applies again: charges dated before it use the override. */
+    until: isoDateSchema.optional(),
+    /** The amount is before sales tax; without it, the amount includes tax (BLUEPRINT §4.8). */
+    plusTax: z.boolean().optional(),
+  })
+  .refine(({ since, until }) => since === undefined || until === undefined || since < until, {
+    message: 'Must end after it starts',
+    path: ['until'],
+  });
 export type PriceOverride = z.infer<typeof priceOverrideSchema>;
 
 export const listItemSchema = z

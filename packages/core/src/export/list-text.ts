@@ -52,7 +52,7 @@ function itemLines(
   { today, place, tags }: ExportContext,
   format: ExportFormat,
 ): string[] {
-  const { item, nextCharge, status, override } = resolved;
+  const { item, nextCharge, status } = resolved;
   const { billing } = item;
   const cost = periodCost(resolved, today, place);
   const period = periodText(billing.interval, billing.intervalCount);
@@ -64,7 +64,8 @@ function itemLines(
           ...(billing.mode === 'limited' ? [' on specific dates'] : []),
           ...(cost.tax > 0 ? [`, with ${format.money(cost.tax, cost.currency)} tax`] : []),
         ].join('');
-  const until = item.priceOverride?.until;
+  const own = item.priceOverride;
+  const until = own?.until === undefined ? '' : ` until ${format.date(own.until)}`;
   return [
     itemTitle(resolved),
     `  Cost: ${costText}`,
@@ -78,9 +79,14 @@ function itemLines(
     ...(resolved.addOns.length === 0
       ? []
       : [`  Add-ons: ${resolved.addOns.map(addOnText).join(', ')}`]),
-    ...(override
-      ? [until === undefined ? '  Your own price' : `  Your own price until ${format.date(until)}`]
-      : []),
+    // While it applies, or still to come (M9.6), with what it'll be.
+    ...(!own || (own.until !== undefined && own.until <= today)
+      ? []
+      : own.since === undefined || own.since <= today
+        ? [`  Your own price${until}`]
+        : [
+            `  Your own price from ${format.date(own.since)}${until}: ${format.money(own.amount, own.currency)} ${period}${own.plusTax ? ' + tax' : ''}`,
+          ]),
     `  Status: ${
       status.kind === 'active'
         ? 'Active'

@@ -9,11 +9,13 @@ import {
   type Checks,
 } from './evaluate';
 import { fingerprintOf, itemSignature } from './fingerprint';
-import { cardSuggestions } from './card-suggestions';
+import { cardRoom, cardSuggestions } from './card-suggestions';
+import { currencySuggestions } from './currency-suggestions';
 import { buildModel, savingEpsilon, type OptimizerInput, type OptimizerModel } from './model';
 import { searchPlans } from './search';
 import { actionTitle } from './suggestion-text';
 import {
+  actionItemIds,
   severities,
   severityOfRank,
   type FeatureChange,
@@ -27,8 +29,9 @@ import {
 // never conflict, and a card in a looser section can be an alternative to one in a stricter section for the same
 // item (Disney+ billed yearly, or Standard billed yearly). A looser plan's card that gives up less than its section
 // is left out: it's a stricter plan's card, or an alternative to one, rearranged around the looser changes. With the
-// user's payment cards, a better card for an item is a free saving of its own (M9.3, card-suggestions.ts), and "Save up
-// to" adds those of the items the best plan keeps.
+// user's payment cards, a better card for an item is a free saving of its own (M9.3, card-suggestions.ts), and so is
+// paying in another currency its seller lets the buyer pick (M9.6, currency-suggestions.ts), for an item no other free
+// change is about. "Save up to" adds those of the items the best plan keeps as they are.
 
 /** The suggestions for a list, and what its best plan saves. */
 export function optimize(input: OptimizerInput): OptimizerResult {
@@ -51,9 +54,17 @@ export function optimize(input: OptimizerInput): OptimizerResult {
     }
   });
   const cards = input.cards ?? [];
-  const byCard =
-    cards.length > 0 ? cardSuggestions(model, cards, input.cardLoads, input.context, list) : [];
-  suggestions.push(...byCard);
+  const room =
+    cards.length > 0 ? cardRoom(model, cards, input.cardLoads, input.context) : undefined;
+  const byCard = room ? cardSuggestions(model, room, input.context, list) : [];
+  // A currency is judged on the item as it'll be paid for: one another free change is about waits for it.
+  const freeChanged = new Set(
+    [...suggestions, ...byCard]
+      .filter((suggestion) => suggestion.severity === 'free')
+      .flatMap((suggestion) => suggestion.actions.flatMap(actionItemIds)),
+  );
+  const byCurrency = room ? currencySuggestions(model, input, room, freeChanged, list) : [];
+  suggestions.push(...byCard, ...byCurrency);
   // Equal savings by their changes' titles, so the order never hangs on the items' ids.
   const titles = new Map(
     suggestions.map((suggestion) => [suggestion, suggestion.actions.map(actionTitle).join(' + ')]),
@@ -75,15 +86,25 @@ export function optimize(input: OptimizerInput): OptimizerResult {
       (action) => action.kind === 'card' && !replaced.has(action.item.itemId),
     ),
   );
+  // Another currency for each item the best plan leaves as it is: a new plan or period has prices of its own.
+  const changed = new Set(
+    changes.flatMap((option) =>
+      model.options[option].items.map((index) => model.items[index].resolved.item.id),
+    ),
+  );
+  const currencyKept = byCurrency.filter((suggestion) =>
+    suggestion.actions.flatMap(actionItemIds).every((itemId) => !changed.has(itemId)),
+  );
+  const kept = [...cardKept, ...currencyKept];
   const bestSavings =
     (planSavings >= savingEpsilon ? planSavings : 0) +
-    cardKept.reduce((total, suggestion) => total + suggestion.savings, 0);
+    kept.reduce((total, suggestion) => total + suggestion.savings, 0);
   return {
     suggestions,
     bestSavings,
     bestEstimated:
       (planSavings >= savingEpsilon && estimated(model, changes)) ||
-      cardKept.some((suggestion) => suggestion.estimated),
+      kept.some((suggestion) => suggestion.estimated),
     currency: input.context.currency,
     next12: model.baseline,
     search: exhaustive ? 'exhaustive' : 'greedy',

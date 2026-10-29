@@ -725,18 +725,7 @@ class ModelBuilder {
   }
 
   private resolve(item: ListItem, catalog: CatalogData): ResolvedItem | undefined {
-    const context: ResolveContext = {
-      catalog,
-      customSubs: undefined,
-      country: this.context.country,
-      currency: this.context.currency,
-      ...(this.context.fx && { fx: this.context.fx }),
-      today: this.context.today,
-      profileRanks: this.context.profileRanks,
-      taxPlace: this.context.place,
-    };
-    const resolution = resolveItem(item, context);
-    return resolution.ok ? resolution.resolved : undefined;
+    return resolveChanged(item, catalog, this.context);
   }
 
   private priceContext(region: string, seller: SnapshotProvider): PriceContext {
@@ -783,6 +772,26 @@ class ModelBuilder {
     }
     return number;
   }
+}
+
+/** A changed catalog item or bundle, resolved for the user: undefined when it can't be priced. */
+export function resolveChanged(
+  item: ListItem,
+  catalog: CatalogData,
+  context: OptimizerContext,
+): ResolvedItem | undefined {
+  const resolveContext: ResolveContext = {
+    catalog,
+    customSubs: undefined,
+    country: context.country,
+    currency: context.currency,
+    ...(context.fx && { fx: context.fx }),
+    today: context.today,
+    profileRanks: context.profileRanks,
+    taxPlace: context.place,
+  };
+  const resolution = resolveItem(item, resolveContext);
+  return resolution.ok ? resolution.resolved : undefined;
 }
 
 /** The item on another plan or period from `on`, its next charge: its price override goes, being for the old one. */

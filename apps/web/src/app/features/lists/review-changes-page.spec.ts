@@ -211,4 +211,27 @@ describe('ReviewChangesPage', () => {
     expect(stored.some((item) => item.source.kind === 'bundle')).toBe(true);
     expect(TestBed.inject(DraftsRepository).byList().has(work.id)).toBe(false);
   }, 20000);
+
+  it('says what another currency costs, and from when (M9.6)', async () => {
+    await plant();
+    await TestBed.inject(ListDraftService).applyEdits(
+      work.id,
+      [
+        {
+          kind: 'change',
+          itemId: netflix.id,
+          changes: {
+            priceOverride: { amount: 13.99, currency: 'USD', since: '2026-11-12', plusTax: true },
+          },
+        },
+      ],
+      { title: 'Pay for Netflix Standard in USD', savings: 1.2, currency: 'CAD' },
+    );
+    await open();
+    await until(() => shown().length === 8, 5000);
+    expect(shown().slice(6)).toEqual([
+      '# Pay for Netflix Standard in USD',
+      '~ | Netflix Standard | $18.99 a month | Paid in USD from Nov 12, 2026: US$13.99 a month + tax',
+    ]);
+  }, 20000);
 });

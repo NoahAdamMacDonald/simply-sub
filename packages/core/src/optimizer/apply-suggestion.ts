@@ -5,7 +5,7 @@ import { rankSchema, type Rank } from '../user/rank';
 import type { Timestamp } from '../user/record';
 import { withChanges } from '../user/stamps';
 import { reperiod, withAddOn } from './model';
-import type { Suggestion, SuggestionAction } from './suggestion';
+import { actionItemIds, type Suggestion } from './suggestion';
 
 // Apply (PROJECT-PLAN P14): a suggestion's changes as edits to its list's draft, which the editor opens with them, so
 // nothing is saved until Save. Each change takes effect on the item's next charge, as the savings assume: a removed
@@ -58,7 +58,7 @@ export function suggestionEdits(
   };
 
   for (const action of suggestion.actions) {
-    if (actionItems(action).some((itemId) => !items.has(itemId))) return undefined;
+    if (actionItemIds(action).some((itemId) => !items.has(itemId))) return undefined;
     switch (action.kind) {
       case 'interval':
       case 'downgrade':
@@ -126,6 +126,17 @@ export function suggestionEdits(
       case 'card':
         // Paid with a better card (M9.3), from now on: nothing else changes.
         change(action.item.itemId, { cardId: action.cardId });
+        break;
+      case 'currency':
+        // Paid in another currency from its next charge (M9.6): the user's own price in it, with tax as it's sold.
+        change(action.item.itemId, {
+          priceOverride: {
+            amount: action.to.source.amount,
+            currency: action.to.source.currency,
+            since: action.on,
+            ...(!action.to.taxIncluded && { plusTax: true }),
+          },
+        });
         break;
     }
   }
@@ -214,18 +225,6 @@ export function withDraftEdits(
 }
 
 /** The items an action changes. */
-function actionItems(action: SuggestionAction): string[] {
-  switch (action.kind) {
-    case 'bundle':
-    case 'suite':
-      return action.items.map((item) => item.itemId);
-    case 'extra-member':
-      return [action.item.itemId, action.host.itemId];
-    default:
-      return [action.item.itemId];
-  }
-}
-
 /** The replaced items' own ranks together: where two rank one key, the more important rank. */
 function mergedOverrides(items: readonly ListItem[]): ListItem['rankOverrides'] {
   const merged: Record<string, Rank> = {};

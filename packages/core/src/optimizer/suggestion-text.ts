@@ -25,6 +25,8 @@ export function actionTitle(action: SuggestionAction): string {
       return `Replace ${namesText(action.items.map((item) => item.title))} with ${planTitle(action.name, action.planName)}`;
     case 'card':
       return `Pay for ${action.item.title} with a better card`;
+    case 'currency':
+      return `Pay for ${action.item.title} in ${action.to.source.currency}`;
   }
 }
 

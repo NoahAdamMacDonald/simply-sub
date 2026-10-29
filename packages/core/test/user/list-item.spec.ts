@@ -211,6 +211,13 @@ describe('listItemSchema', () => {
         'priceOverride.currency: Use a three-letter ISO 4217 currency code in capitals (CAD)',
       ]);
     });
+    it('takes a start before its end (M9.6)', () => {
+      const own = { amount: 9.99, currency: 'USD', since: '2026-11-12' };
+      expect(issues(listItemSchema, withValue(item, ['priceOverride'], own))).toEqual([]);
+      expect(
+        issues(listItemSchema, withValue(item, ['priceOverride'], { ...own, until: '2026-11-12' })),
+      ).toEqual(['priceOverride.until: Must end after it starts']);
+    });
   });
 
   describe('tags and ranks', () => {

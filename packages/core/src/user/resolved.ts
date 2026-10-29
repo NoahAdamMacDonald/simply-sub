@@ -10,7 +10,7 @@ import { catalogIconFile, type CatalogData, type SnapshotProvider } from '../cat
 import type { IsoDate } from '../dates/iso-date';
 import { providedKeys, type RankKey } from '../ranking/rank-keys';
 import { effectiveRanks, type ProfileRanks } from '../ranking/resolve-rank';
-import { nextCharge, type Charge } from '../schedule/charges';
+import { nextCharge, ownPriceOn, type Charge } from '../schedule/charges';
 import { itemStatus } from '../schedule/item-status';
 import type { TaxPlace } from '../tax/sales-tax-rate';
 import { customIconUrl } from './custom-sub-form';
@@ -85,11 +85,11 @@ export interface ResolvedItem {
   /** The plan's, bundle's or custom plan's price for the item's billing period. */
   price: PickedPrice;
   addOns: ResolvedAddOn[];
-  /** The price override, with the item's billing period, while it applies (dates before its `until`). */
+  /** The price override, with the item's billing period, while it applies today (from its `since`, before its `until`). */
   override?: PickedPrice;
   /**
-   * The price override as a price for the item's billing period, whatever the date: charges dated before its `until`
-   * cost it (§3.1). `override` is the same while it applies today.
+   * The price override as a price for the item's billing period, whatever the date: charges dated from its `since` and
+   * before its `until` cost it (§3.1). `override` is the same while it applies today.
    */
   overridePrice?: PickedPrice;
   /**
@@ -281,8 +281,8 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
     }
   }
   const overridePrice = typedOverride(item, parts.price, priceContext(context, region));
-  const { until } = item.priceOverride ?? {};
-  const override = until === undefined || context.today < until ? overridePrice : undefined;
+  const override =
+    item.priceOverride && ownPriceOn(item.priceOverride, context.today) ? overridePrice : undefined;
   const keys = providedKeys(parts.features, catalog.features);
   const charged = {
     item,

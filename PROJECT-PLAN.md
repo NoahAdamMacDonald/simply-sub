@@ -237,6 +237,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M9.3 | core: eligibility, FX and cash-back maths, card assignment, limit checks (BLUEPRINT §9.3). As built: core's `rewards/` (`networkRate`, `cardCost`, `cardAcceptance`, `itemOnCard`, `cardLoads`, `overLimits`, `monthlyOnCard`, `bestCard`, `assignCards`), `Charge.charged` and `ResolvedItem.acceptedNetworks`, and the optimizer's `card` action; open question 1 decided with the user (BLUEPRINT §14) | Tests pass |
 | M9.4 | Card select in the item dialog, net-cost displays, over-limit warnings. As built: the item dialog's Payment (only the cards its seller takes, the Best card chip and notes on acceptance and FX fees), List view's net in its header and on its cards, P11's Assign best cards (a preview per list, lists with unsaved edits skipped, Apply with Undo through `CardsRepository.assign`) and each tile's net and over-limit warning, the Calendar's days that take a card over its limit with the card in the day's panel, and the optimizer's card action wired in (BLUEPRINT §14) | All visible on P4, P6, P10 and P11 |
 | M9.5 | Examples that name no real card (added 2026-10-28, UI polish): the card dialog's Name hint ("As on the card: Cash Back Mastercard"), and every example card in the docs and the tests ("Cash Back Mastercard", "Rewards Mastercard", "Rewards Discover"), where real products were named | No real card product is named in the app, the docs or the tests; the card dialog's hint shows the generic example |
+| M9.6 | Pay in another currency (added 2026-10-29, the feedback after M3): when a plan's seller prices it in several currencies for where it's bought, a group of it or GLOBAL (Proton's USD, CAD, EUR and CHF), the optimizer suggests the one that costs least on the item's card after its FX fee and cash back, as a free saving ("Pay for Proton Unlimited in CAD" for a US buyer, whose US$12.99 a month is about US$11.60 in CAD at late October’s rate; core's `currencySuggestions`); another country's price never counts, since it's set by where the buyer is; Apply makes it the user's own price in that currency from the item's next charge (`priceOverride.since`, the item dialog's From); cards, editor rows, Review changes and the text export say what an own price still to come will be, and from when (P6, P14, BLUEPRINT §4.7, §10.3) | A plan sold in USD and CAD, paid with a card with no FX fee, is suggested in the cheaper one with its saving; a card whose FX fee cancels the difference gets no suggestion, nor does a plan priced by country; after Apply its next charge is in that currency, this year's past ones are as they were, and nothing more is suggested for it |
 
 ### M10 — Extras (Phase 5)
 Live calendar feed (`POST /cal`), encrypted device sync, "report a wrong price", PWA install and offline mode,
@@ -962,7 +963,7 @@ BLUEPRINT §14 has the rest.
 - **Free plans:** when the picked price is 0, Billed, Next renewal, Auto-renews and the price override are hidden, and so is the Ongoing / Specific dates choice. The item is saved as Ongoing, with today as the anchor date (an item being changed keeps its own).
 - **Specific dates:** at least one window; each end must be after its start; windows can't overlap. Two that share a
   day overlap (a window is active through its end), and one that repeats every year must be shorter than a year.
-- **Price override:** an amount above 0, with a currency, and an optional "until" date for an offer that ends (first-term discounts): charges from that date on use the catalog price. The amount is taken as charged, tax included, unless "plus tax" is ticked (BLUEPRINT §4.8). It's also how an item bought from a reseller records what it cost, until an item can name its shop (BLUEPRINT §4.9).
+- **Price override:** an amount above 0, with a currency, and an optional "until" date for an offer that ends (first-term discounts): charges from that date on use the catalog price. Since M9.6 an optional "From" date too, the first charge at that price (another currency from the next charge, a known increase), which Until must come after: charges before it use the catalog price, and the cards say "Your own price from Nov 10, 2026: CA$16.24 a month + tax" until then. The amount is taken as charged, tax included, unless "plus tax" is ticked (BLUEPRINT §4.8). It's also how an item bought from a reseller records what it cost, until an item can name its shop (BLUEPRINT §4.9).
 - **Bought in region** (Advanced): any country; it sets `region`, which picks the item's price and availability. Defaults to Settings' country.
 - **Feature ranks:** the plan's provided keys (§3.2), grouped. The dropdown starts with "Profile default (X)" and includes Essential ("keep this plan") and Critical ("keep this provider"), each with a one-line hint. Only the provided keys' ranks are saved.
 - **Tags:** autocomplete from the Settings tags, with "Create tag" inline (name + colour).
@@ -1472,7 +1473,8 @@ FREE SAVINGS — nothing is lost
 - Runs the optimizer for this list, in a Web Worker if it takes longer than about 50 ms.
 - Sections, in this order: Free savings, Red, Orange, Yellow.
 - Each card shows:
-  - the changes (keep / downgrade / switch / remove / convert to extra member / bundle or suite / interval / card)
+  - the changes (keep / downgrade / switch / remove / convert to extra member / bundle or suite / interval / card /
+    currency)
   - savings over the next 12 months
   - features lost or gained, with rank dots
   - an "estimated" tag when converted prices are involved
@@ -1518,6 +1520,18 @@ has Undo, which takes back that change and any later one that changed what it ch
 (the list with every change kept) or Open in the editor. The snackbar's Undo after Apply takes back that one change.
 While the suggestions are worked out again after an Apply, the cards can't be applied ("Updating the suggestions…"),
 so a card that clashes with what was applied (a card for a plan a bundle replaces) is never in reach.
+
+**Since the feedback after M3 (M9.6):** another currency is a free saving too. When a plan's seller prices it in
+several currencies for the buyer (Proton sells every paid plan in USD, CAD, EUR and CHF, wherever you are), a US buyer
+sees "Pay for Proton Unlimited in CAD": the price it is now, and the CAD price converted (its tooltip giving the CAD
+amount), "From Nov 10, paid with Everyday", and what it saves over the next 12 months on that card after its FX fee and
+cash back, marked Estimated. It needs the item's card: a card with an FX fee as large as the
+difference gets nothing, and an item with no card gets a better card first. Only the currencies of the price list the
+buyer's own price comes from count (their country's, a group's such as EU, or GLOBAL): a price another country sets for
+its own buyers is never offered. An item with an own price, add-ons, or another free change suggested (annual billing,
+a better card) waits until that's applied or dismissed. Apply makes it the user's own price in that currency from the
+item's next charge, plus tax where the catalog's price is before tax, and Review changes says "Paid in CAD from Nov 10,
+2026: CA$16.24 a month + tax".
 
 **Acceptance**
 - [ ] The optimizer fixtures produce the expected cards and colours

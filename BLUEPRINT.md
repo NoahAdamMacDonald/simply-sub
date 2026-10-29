@@ -552,7 +552,8 @@ its `features` list those too (Proton Mail Plus still has Proton Free's VPN and 
 
 **Regular prices, not offers.** A price is what the subscription renews at. "$53.88 for the first 12 months, then
 $83.88" stores 83.88. First-term discounts are common (VPNs, antivirus), so a user who got one enters it as their
-own price with an end date (`priceOverride.until`, section 4.6), after which the schedule uses the catalog price.
+own price with an end date (`priceOverride.until`, section 4.6), after which the schedule uses the catalog price. It
+can start later too (`priceOverride.since`, M9.6): paying in another currency from the next charge.
 An offer can be mentioned in `notes`.
 
 **The billing period as the provider states it.** `interval` and `intervalCount` say how often a payment is taken,
@@ -853,6 +854,7 @@ export interface ListItem {
     | { mode: 'limited'; windows: { start: string; end: string; repeatYearly: boolean }[];
         interval: Interval; intervalCount: number };  // e.g. Netflix Premium every Sep–Oct
   priceOverride?: { amount: number; currency: string;   // promos, first-term offers, grandfathered prices
+                    since?: string;                     // the first charge at it (M9.6); before it, the catalog's
                     until?: string;                     // the date the catalog price applies again
                     plusTax?: boolean };                // the amount is before sales tax (default: tax included, 4.8)
   cardId?: string;
@@ -944,6 +946,9 @@ Since M6.14 a rank changed in an item dialog is also written to the same provide
   replaces ends, and charges before then don't include it. The same add-on can be listed again with another day.
 - `bundle` as its own kind: a bundle covers several plans, so it has no single `planId`.
 - `priceOverride.until`: a first-term offer ends (section 4.3); charges dated before `until` use the override.
+  `priceOverride.since` (M9.6): the first charge at that price, which `until` comes after; charges before it use the
+  catalog price. Optimizations' currency change sets it to the item's next charge, so what's paid for keeps its price.
+  An optional field, so stored items need no new Dexie version.
 
 **Dexie schema** (`apps/web/src/app/core/storage/db.ts`, a plain `Dexie`: TypeScript gives up on Dexie's
 transaction types for a subclass). Dexie keeps only keys and indexes, not the records' shapes:
@@ -1013,7 +1018,10 @@ the first that fits:
 4. A fallback region, US → GB → EU, then the first region listed, converted.
 
 In a region priced in several currencies, the user's currency wins, then the one the provider's `billingCurrency`
-names for that region, then the first listed. A picked price has the shape of the API's `pricing` entries
+names for that region, then the first listed. Several currencies in one region always mean the buyer picks one
+(Proton's USD, CAD, EUR and CHF under `GLOBAL`): a price shown only as a conversion isn't stored, and a price set by
+where the buyer is lives under that region alone. So the optimizer can suggest the cheapest of a region's currencies
+on the user's card (section 10.3's 8th change, M9.6), and never another region's price. A picked price has the shape of the API's `pricing` entries
 (`PickedPrice`): `amount` and `currency`, `monthlyEquivalent`, `autoRenew`, `native`, the `source` price, and `fx`
 (rate, date, source) when it was converted. Amounts keep full precision; the UI rounds to 2 decimals, and the API
 also rounds rates to 4. Without a rate (offline on the first visit, or `/fx` down), the price stays in its own
@@ -2284,7 +2292,7 @@ Lives in `packages/core/src/optimizer/`. It's a **pure function**:
 ### 10.2 Hard constraints
 - **Essential** (this plan): an item with any Essential feature keeps its exact plan. It can't be removed,
   downgraded or switched. Only changes that keep the plan apply: annual instead of monthly billing, a better card,
-  or a bundle that contains this same plan.
+  another currency, or a bundle that contains this same plan.
 - **Critical** (this provider): an item with any Critical feature can't be removed, and can only move to another
   plan of the same provider that keeps that feature at the same or a higher level.
 - **Needed:** after any change, every Needed feature must still be provided by at least one item **in every
@@ -2301,6 +2309,8 @@ Lives in `packages/core/src/optimizer/`. It's a **pure function**:
 6. Remove.
 7. (Phase 4) Move to a better card (an eligible network, within limits; section 9.3). Built in M9.3 as a free
    saving of its own (section 14).
+8. Pay in another currency the seller prices the plan in for the buyer (section 4.7), on the item's card: built in
+   M9.6 as a free saving of its own (section 14).
 
 ### 10.4 Search
 - Enumerate combinations of actions (lists are usually under about 15 items, and each item has only a few

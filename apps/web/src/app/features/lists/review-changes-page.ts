@@ -10,6 +10,7 @@ import {
   draftChanged,
   draftItems,
   planTitle,
+  stableJson,
   type AppliedChange,
   type ListDraft,
   type ListItem,
@@ -236,6 +237,17 @@ export class ReviewChangesPage {
       if (had.has(`${addOn.id} ${addOn.since ?? ''}`)) continue;
       parts.push(
         `Adds ${addOn.name.toLowerCase()}${addOn.since ? ` from ${dayText(addOn.since)}` : ''}`,
+      );
+    }
+    const own = after.priceOverride;
+    if (own && stableJson(own) !== stableJson(before.priceOverride ?? null)) {
+      // Another currency's price, as the user's own from the next charge (M9.6).
+      const from = own.since === undefined ? '' : ` from ${dateText(own.since)}`;
+      const amount = `${amountText(own.amount, own.currency, this.country())} ${intervalSpoken(after.billing.interval, after.billing.intervalCount)}${own.plusTax ? ' + tax' : ''}`;
+      parts.push(
+        own.currency === was?.price.source.currency
+          ? `Your own price${from}: ${amount}`
+          : `Paid in ${own.currency}${from}: ${amount}`,
       );
     }
     if (after.cardId !== before.cardId) {
