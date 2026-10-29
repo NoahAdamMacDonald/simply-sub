@@ -2,11 +2,9 @@ import { userAgent } from '@simply-sub/core';
 import type { FileChange, Proposal } from './proposal';
 
 // The bot's way to GitHub (BLUEPRINT §7.7): the REST API with a fine-grained token for this repository only (Contents
-// and Pull requests, read and write). It reads the base branch, commits the night's changes on one branch of its own,
-// and opens or refreshes one pull request. It never merges, and never pushes to the base branch.
-
-/** The one branch the bot commits to: rebuilt from the base branch every night it has changes. */
-export const botBranch = 'bot/price-updates';
+// and Pull requests, read and write). It reads the base branch, commits its changes on branches of its own (the
+// weekly digest's, and each discovery run's), and opens or refreshes their pull requests. It never merges, and never
+// pushes to the base branch.
 
 export interface GitHubOptions {
   token: string;
@@ -61,18 +59,28 @@ export class GitHub {
     return new TextDecoder().decode(await this.bytes(path, ref));
   }
 
+  /** A text file as the commit has it, or undefined when there's none (a page without a baseline yet). */
+  async textIfThere(path: string, ref: string): Promise<string | undefined> {
+    const file = await this.call<{ content: string } | undefined>(
+      'GET',
+      `contents/${path}?ref=${ref}`,
+      undefined,
+      true,
+    );
+    return file && new TextDecoder().decode(fromBase64(file.content));
+  }
+
   /** A file's bytes as the commit (or branch) has it: the contents API gives files up to 1 MB. */
   async bytes(path: string, ref: string): Promise<Uint8Array> {
     const file = await this.call<{ content: string }>('GET', `contents/${path}?ref=${ref}`);
-    const binary = atob(file.content.replace(/\s/g, ''));
-    return Uint8Array.from(binary, (character) => character.charCodeAt(0));
+    return fromBase64(file.content);
   }
 
   /**
-   * Commits `proposal`'s changes on the bot's branch, made afresh from the base branch's `state`, and opens its pull
-   * request, or gives the open one tonight's title and body. Returns the pull request's URL.
+   * Commits `proposal`'s changes on one of the bot's branches, made afresh from the base branch's `state`, and opens its
+   * pull request, or gives the open one tonight's title and body. Returns the pull request's URL.
    */
-  async propose(state: RepositoryState, proposal: Proposal): Promise<string> {
+  async propose(state: RepositoryState, proposal: Proposal, branch: string): Promise<string> {
     const entries = [];
     for (const change of proposal.changes) entries.push(await this.blob(change));
     const tree = await this.call<{ sha: string }>('POST', 'git/trees', {
@@ -80,21 +88,21 @@ export class GitHub {
       tree: entries,
     });
     const commit = await this.call<{ sha: string }>('POST', 'git/commits', {
-      message: `${proposal.title}\n\nThe nightly price check (BLUEPRINT §6.4). Review before merging.`,
+      message: `${proposal.title}\n\nThe nightly bot (BLUEPRINT §6.4). Review before merging.`,
       tree: tree.sha,
       parents: [state.commit],
     });
-    const exists = await this.call<unknown>('GET', `git/ref/heads/${botBranch}`, undefined, true);
+    const exists = await this.call<unknown>('GET', `git/ref/heads/${branch}`, undefined, true);
     if (exists === undefined) {
-      await this.call('POST', 'git/refs', { ref: `refs/heads/${botBranch}`, sha: commit.sha });
+      await this.call('POST', 'git/refs', { ref: `refs/heads/${branch}`, sha: commit.sha });
     } else {
-      // The branch is the bot's own: rebuilt every night, so last night's changes don't pile up.
-      await this.call('PATCH', `git/refs/heads/${botBranch}`, { sha: commit.sha, force: true });
+      // The branch is the bot's own: rebuilt each time, so earlier changes don't pile up.
+      await this.call('PATCH', `git/refs/heads/${branch}`, { sha: commit.sha, force: true });
     }
     const [owner] = this.options.repository.split('/');
     const open = await this.call<{ number: number; html_url: string }[]>(
       'GET',
-      `pulls?state=open&head=${owner}:${botBranch}`,
+      `pulls?state=open&head=${owner}:${branch}`,
     );
     if (open[0]) {
       await this.call('PATCH', `pulls/${open[0].number}`, {
@@ -105,7 +113,7 @@ export class GitHub {
     }
     const created = await this.call<{ html_url: string }>('POST', 'pulls', {
       title: proposal.title,
-      head: botBranch,
+      head: branch,
       base: this.options.base,
       body: proposal.body,
     });
@@ -153,6 +161,12 @@ export class GitHub {
     }
     return (response.status === 204 ? undefined : await response.json()) as T;
   }
+}
+
+/** The bytes of the contents API's base64, which has line breaks. */
+function fromBase64(content: string): Uint8Array {
+  const binary = atob(content.replace(/\s/g, ''));
+  return Uint8Array.from(binary, (character) => character.charCodeAt(0));
 }
 
 /** Each reseller's id and website, read from data/resellers.yaml's `- id:` items and their `website:` lines. */

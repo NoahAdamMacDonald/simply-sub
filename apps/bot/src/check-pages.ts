@@ -1,7 +1,11 @@
 import {
+  baselineDiff,
+  baselineLines,
   comparable,
   excerpt,
+  findQuote,
   missingQuotes,
+  moneyIn,
   nameIndexes,
   networksNamedIn,
   pageShows,
@@ -9,6 +13,8 @@ import {
   sameAmount,
   sameCurrency,
   taxWording,
+  type Baseline,
+  type CitedType,
 } from '@simply-sub/core';
 import {
   extractionRequest,
@@ -19,7 +25,14 @@ import {
 } from './extraction';
 import { findIcon, gitBlobSha, toBase64, type Download } from './icons';
 import { priceText } from './targets';
-import type { ApprovalTarget, Budget, Finding, NetworksTarget, PriceTarget } from './types';
+import type {
+  ApprovalTarget,
+  Budget,
+  Finding,
+  NetworksTarget,
+  PolicyPageTarget,
+  PriceTarget,
+} from './types';
 
 // One provider's (or bundle's, or reseller's) part of the nightly check (BLUEPRINT §6.4), a Workflow step: each of its
 // pages read once, its prices looked for on them, its taxIncluded quotes, resellers' approvals and accepted card
@@ -52,6 +65,16 @@ export interface CheckInput {
   networks: NetworksTarget[];
   /** The provider's or reseller's website, and its committed logo's Git blob hash (none without one). */
   logo?: { id: string; website: string; committed?: string };
+  /** The pages policy ratings quote, when they're due (M3.9). */
+  policyPages?: PolicyPageTarget[];
+  /**
+   * Each page's baseline as main has it, or null for a page without one yet (M3.9). A page with a baseline its text
+   * still matches is unchanged: its prices are confirmed and its quotes kept, with no model. Pages left out have no
+   * baseline check (a night before M3.9).
+   */
+  baselines?: Readonly<Record<string, Baseline | null>>;
+  /** What each page is, and who cites it, for its page finding. */
+  cited?: Readonly<Record<string, { type: CitedType; owners: string[] }>>;
 }
 
 export interface CheckResult {
@@ -71,15 +94,41 @@ export async function checkPages(
   const read = async (url: string, names: readonly string[]): Promise<PageResult> => {
     const known = pages.get(url);
     if (known) return known;
-    let result = await deps.page(url);
-    if (budget.browserPages > 0 && needsBrowser(result, names)) {
+    let result: PageResult;
+    // A page whose baseline was read in a browser is opened in one again, when tonight's budget allows (M3.9).
+    if (input.baselines?.[url]?.method === 'browser' && budget.browserPages > 0) {
       budget.browserPages--;
-      const rendered = await deps.browser(url);
-      if ('text' in rendered || 'error' in result) result = rendered;
+      result = await deps.browser(url);
+      browsed.add(url);
+    } else {
+      result = await deps.page(url);
+      if (budget.browserPages > 0 && needsBrowser(result, names)) {
+        budget.browserPages--;
+        const rendered = await deps.browser(url);
+        if ('text' in rendered || 'error' in result) {
+          result = rendered;
+          browsed.add(url);
+        }
+      }
     }
     pages.set(url, result);
     return result;
   };
+  /** Whether a page still reads as its baseline: `same`, else undefined (changed, new, or not checked against one). */
+  const statuses = new Map<string, { lines: string[]; baseline: Baseline | null }>();
+  const unchanged = (url: string, page: PageResult, read: 'fetch' | 'browser'): boolean => {
+    if (!input.baselines || !(url in input.baselines) || 'error' in page) return false;
+    const baseline = input.baselines[url];
+    // Read another way than its baseline (no browser left tonight): not compared, and checked as before M3.9.
+    if (baseline && baseline.method !== read) return false;
+    const lines = baselineLines(page.text);
+    statuses.set(url, { lines, baseline });
+    if (!baseline) return false;
+    const diff = baselineDiff(baseline.lines, lines);
+    return diff.added.length === 0 && diff.removed.length === 0;
+  };
+  const methodOf = (url: string): 'fetch' | 'browser' => (browsed.has(url) ? 'browser' : 'fetch');
+  const browsed = new Set<string>();
 
   const byUrl = new Map<string, PriceTarget[]>();
   for (const target of input.targets) {
@@ -90,6 +139,11 @@ export async function checkPages(
     const page = await read(url, names);
     if ('error' in page) {
       findings.push({ kind: 'manual', subject: label(targets), url, reason: page.error });
+      continue;
+    }
+    // Unchanged since its facts were read: every price on it holds, with no model.
+    if (unchanged(url, page, methodOf(url))) {
+      for (const target of targets) findings.push({ kind: 'confirmed', target });
       continue;
     }
     const around = excerpt(page.text, nameIndexes(page.text, names));
@@ -131,6 +185,7 @@ export async function checkPages(
       });
       continue;
     }
+    if (unchanged(approval.url, page, methodOf(approval.url))) continue;
     const missing = missingQuotes(page.text, approval.quotes);
     if (missing.length > 0) findings.push({ kind: 'reseller', approval, missing });
   }
@@ -154,7 +209,48 @@ export async function checkPages(
       });
       continue;
     }
+    if (unchanged(url, page, methodOf(url))) continue;
     findings.push(...networksFindings(page.text, targets));
+  }
+
+  // Policy pages (M3.9): a changed one is for a reviewer to grade again, with the ratings' quotes it lost.
+  for (const target of input.policyPages ?? []) {
+    const page = await read(target.url, []);
+    if ('error' in page) {
+      findings.push({
+        kind: 'manual',
+        subject: `${target.provider}'s policies`,
+        url: target.url,
+        reason: page.error,
+      });
+      continue;
+    }
+    if (unchanged(target.url, page, methodOf(target.url))) continue;
+    const missing = target.ratings.flatMap((rating) =>
+      missingQuotes(page.text, rating.quotes).map((quote) => ({ topic: rating.topic, quote })),
+    );
+    // A first baseline is no change: only quotes gone from it are.
+    if (input.baselines?.[target.url] !== null || missing.length > 0) {
+      findings.push({ kind: 'policy', target, missing });
+    }
+  }
+
+  // Each page that changed, or had no baseline, with its new lines for the digest.
+  for (const [url, { lines, baseline }] of statuses) {
+    const diff = baseline ? baselineDiff(baseline.lines, lines) : { added: lines, removed: [] };
+    if (baseline && diff.added.length === 0 && diff.removed.length === 0) continue;
+    const cited = input.cited?.[url];
+    findings.push({
+      kind: 'page',
+      url,
+      type: cited?.type ?? 'pricing',
+      owners: cited?.owners ?? [input.subject],
+      method: methodOf(url),
+      lines,
+      added: diff.added,
+      removed: diff.removed,
+      had: baseline !== null,
+    });
   }
 
   if (input.logo) {
@@ -282,7 +378,24 @@ async function extracted(
       },
     ];
   }
-  return targets.map((target, index) => judged(target, answers[index]));
+  return targets.map((target, index) => {
+    const answer = answers[index];
+    // A price the model reads is taken only with the page's own words for it (M3.9): its quote must be on the page,
+    // word for word, and show the amount.
+    if (answer?.found && answer.regularAmount !== undefined) {
+      const words = answer.quote === undefined ? undefined : findQuote(answer.quote, text);
+      const amount = answer.regularAmount;
+      if (!words || !moneyIn(words).some((mention) => sameAmount(mention.amount, amount))) {
+        return {
+          kind: 'manual',
+          subject: `${target.label} (${priceText(target.price)})`,
+          url,
+          reason: 'Workers AI’s quote for its price isn’t on the page word for word',
+        } satisfies Finding;
+      }
+    }
+    return judged(target, answer);
+  });
 }
 
 /** What an answer means for a stored price (§6.4's guardrails). */

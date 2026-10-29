@@ -1565,6 +1565,36 @@ cite its pages; Workers AI only for a price whose stored amount isn't on its pag
 (the schema has none); the YAML edited line by line, which CI's `data:validate` then checks; `lastVerified` bumped
 for a price confirmed 30 or more days after it was last verified; and a night with nothing to change opens no PR.
 
+**Baselines and the weekly digest (M3.9):** the night now checks what `data/automation.yaml` says is due, and
+compares each page with its baseline (`data/baselines/`, section 6.5) before anything else.
+- **What's due:** every page the catalog cites (core's `citedPages`: pricing pages daily, the policy pages its ratings
+  quote weekly) whose last check, kept in KV (`bot:checks`, one key written once a night), is a cadence ago, and each
+  logo weekly; a provider with nothing due has no step.
+- **Unchanged:** a page read the way its baseline was (`fetch`, or a browser when the baseline says so and tonight's
+  browser pages allow) whose lines are its baseline's (`baselineDiff`, which ignores order) confirms every price on it
+  and keeps its quotes, with no model and no money matching. A page read another way (no browser left) is checked as
+  before, without the comparison.
+- **Changed, or no baseline yet:** the M8.3 checks run on it (prices on the page, then Workers AI for the rest; the
+  `taxIncluded`, reseller and card quotes), and a policy page's ratings' quotes are looked for. Workers AI's answer now
+  carries the page's words for each price, which must be on the page word for word and show the amount, else the price
+  goes to review ("failed quotes"). Each page's new lines are kept as a `page` finding.
+- **Pending:** what a page found waits in KV (`bot:pending:<hash of its URL>`), replaced each time it's checked and
+  dropped once nothing on it is worth proposing (unchanged again, every price confirmed and recently verified).
+- **The digest** (`digest.ts`), on `digest.day` (Monday by default), one step: every pending entry still live (one for
+  a page the catalog no longer cites, or whose new text main's baseline already has, is dropped), the provider files'
+  edits (M8.3's `proposal`), each changed page's new text as its baseline, and `review/README.md`, the review list,
+  all committed to `bot/catalog-digest`, rebuilt from main, with its pull request `Catalog digest <date>`. The clear
+  changes are edits: a price that moved within ±30% with its quote, a `lastVerified` bumped, a new logo, a page that
+  changed with nothing to review. The unclear ones are review items, by section (prices, then policies, then
+  features, then pages not read), each with the page's changed lines and its baseline's path, whose diff in the pull
+  request is what changed: a price over ±30%, a quote gone (`taxIncluded`, a reseller's approval, the cards), a
+  policy page that changed (to grade again, with the quotes it lost), a price not found or only a sale, a failed
+  quote, a page not read. A reviewer needs only GitHub: to accept a change, merge; to reject one, revert its edit on
+  the branch but keep its baseline, then merge. The nightly `Price updates` pull request of M8.3 is gone: an open one
+  on `bot/price-updates` can be closed.
+- **KV:** the API's namespace, `simply-sub-kv`, with the bot's keys under `bot:` (no new resource): a few writes a
+  night, of 1,000 a day. The bot needs redeploying from main once this merges (section 7.2): its binding is new.
+
 **Settings (M3.8):** `data/automation.yaml`, checked by `data:validate` against core's `automationSchema`
 (`pipeline/automation.ts`, `data/schema/automation.schema.json`): a cadence for pricing pages, policy pages, logos and
 discovery (`daily`, `weekly`, `monthly` or `off`), the digest's weekday, the reviewer (`scheduled-claude`, `workers-ai`
@@ -1842,7 +1872,7 @@ Bitdefender are in the batch's pull request; Crunchyroll's prices couldn't be re
 | Workers requests | ~100,000 per day | API calls only: a few hundred per day at first |
 | Static assets | Free and unlimited. Up to 20,000 files per version, 25 MiB per file | The Angular build has well under 100 files |
 | D1 | 5 GB storage per account (500 MB per database), 5M rows read and 100k rows written per day (index entries count), 2 MB per row | Under 25 MB even at 1,000 providers. **Rows written** is the one to watch: from M2.1 a deploy writes only what changed (section 5.3) |
-| KV | 1 GB, 100k reads and 1k writes per day, 25 MiB per value | One namespace, `simply-sub-kv` (binding `KV`, M2.5), for small values that must survive: the last good `/fx` rates (M2.5: one key, `fx:ecb`, written when the rates are fetched, about twice a day) and the `/icon` cache (M2.6: one key per domain asked for, written on a miss and kept 30 days, or a day for "no icon"). The Cache API is per data centre and can evict them. A few dozen writes a day |
+| KV | 1 GB, 100k reads and 1k writes per day, 25 MiB per value | One namespace, `simply-sub-kv` (binding `KV`, M2.5; the bot's too since M3.9, its keys under `bot:`: check dates, pending pages, the last digest), for small values that must survive: the last good `/fx` rates (M2.5: one key, `fx:ecb`, written when the rates are fetched, about twice a day) and the `/icon` cache (M2.6: one key per domain asked for, written on a miss and kept 30 days, or a day for "no icon"). The Cache API is per data centre and can evict them. A few dozen writes a day |
 | R2 | 10 GB-month storage, 1M writes and 10M reads per month, no egress fees. Activating R2 asks for a payment method, even within the free tier | Not used yet: see the triggers below |
 
 **Each store has one job:** static files serve the catalog and icons, D1 answers the API's searches, KV keeps
@@ -2787,6 +2817,15 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-28, M3.9)**
+- **Where pending changes live:** KV, a key per page (the user's choice was check dates in KV and baselines in Git):
+  the digest is rebuilt from main each week, and a page's findings have to outlast the nights between. A change is
+  over once main's baseline has the page's new text, which is what merging the digest does.
+- **The digest is weekly, the checks nightly** (the user's design): a price change waits up to a week for its pull
+  request. A night with nothing due reads only the settings, the check dates and the catalog.
+- **The bot's bundle** is 3.58 MB, 736.7 KiB gzipped (680.8 before), within the free plan's 3 MB: `yaml` reads the
+  settings.
 
 **Resolved (2026-10-28, M3.8)**
 - **The defaults** (the user's choices): pricing pages daily, policies, logos and discovery weekly, the digest on

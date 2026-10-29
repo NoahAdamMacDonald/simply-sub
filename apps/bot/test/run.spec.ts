@@ -1,175 +1,279 @@
-import { parse } from 'yaml';
+import {
+  baselineLines,
+  baselinePath,
+  pageText,
+  providerSchema,
+  type Automation,
+  type Baseline,
+} from '@simply-sub/core';
 import { describe, expect, it } from 'vitest';
-import { providerSchema } from '@simply-sub/core';
-import { runPriceCheck } from '../src/run';
-import { fakeServices, mullvad, png, stepper, storedWorld, today, type World } from './fakes';
+import { parse } from 'yaml';
+import { digestBranch, reviewFile } from '../src/digest';
+import { runNight } from '../src/run';
+import { memoryState } from '../src/state';
+import { catalogIndex } from '../src/targets';
+import {
+  fakeServices,
+  mullvad,
+  netflix,
+  png,
+  settings,
+  stepper,
+  storedWorld,
+  today,
+  type World,
+} from './fakes';
 import mullvadNoInet from './fixtures/mullvad-resellers-no-inet.html?raw';
 import mullvadTaxGone from './fixtures/mullvad-pricing-tax-gone.html?raw';
 import netflixChanged from './fixtures/netflix-ca-changed.html?raw';
-import netflixPaymentUsChanged from './fixtures/netflix-payment-us-changed.html?raw';
 
-// A night of the price check, end to end with fakes (PROJECT-PLAN M8.3's "done when"): a changed price, a changed
-// logo, a taxIncluded quote gone from its page and a reseller the provider no longer names each produce a pull
-// request, and so does a region's accepted cards no longer on their page (M9.2); a night where nothing changed
-// produces none.
+// A night of the bot, end to end with fakes (M3.9, and M8.3's "done when" through the weekly digest): each due page is
+// compared with its baseline; one that's unchanged needs no model, one that changed waits in KV, and on the digest's
+// day one pull request proposes the week's clear changes, each changed page's new baseline and a review list.
 
-async function night(world: World) {
-  const services = await fakeServices(world);
-  const steps: string[] = [];
-  const summary = await runPriceCheck(today, stepper(steps), services);
-  return { summary, steps, proposals: services.proposals };
-}
-
-/** The lines a change took out and put in, in order: the edits only replace or take out lines. */
-function changedLines(before: string, after: string): string[] {
-  const old = before.split('\n');
-  const now = after.split('\n');
-  const removed: string[] = [];
-  const added: string[] = [];
-  let j = 0;
-  for (let i = 0; i < old.length; i++) {
-    if (old[i] === now[j]) {
-      j++;
-    } else if (old[i + 1] === now[j]) {
-      removed.push(`- ${old[i].trim()}`);
-    } else {
-      removed.push(`- ${old[i].trim()}`);
-      added.push(`+ ${now[j].trim()}`);
-      j++;
-    }
+/** The stored world with every page the catalog cites, each the same as its baseline. */
+function quietWorld(): World {
+  const world = storedWorld();
+  for (const page of catalogIndex([netflix, mullvad], []).cited) {
+    world.pages[page.url] ??= `<p>${page.url} as it was read.</p>`;
   }
-  return [...removed, ...added];
+  return world;
 }
 
-describe('a night of the price check', () => {
-  it('runs a step per provider, then the pull request, and opens none when nothing changed', async () => {
-    const { summary, steps, proposals } = await night(storedWorld());
+/** Each page's baseline: its text in `world`. */
+function baselinesOf(world: World): Record<string, Baseline> {
+  return Object.fromEntries(
+    Object.entries(world.pages).map(([url, html]) => [
+      url,
+      { url, method: 'fetch' as const, saved: '2026-10-28', lines: baselineLines(pageText(html)) },
+    ]),
+  );
+}
+
+async function night(
+  world: World,
+  options: {
+    baselines?: Record<string, Baseline>;
+    settings?: Automation;
+    state?: ReturnType<typeof memoryState>;
+    date?: string;
+  } = {},
+) {
+  const services = await fakeServices(world, undefined, {
+    baselines: options.baselines ?? baselinesOf(quietWorld()),
+    ...(options.settings && { settings: options.settings }),
+    ...(options.state && { state: options.state }),
+  });
+  const steps: string[] = [];
+  const ai: unknown[] = [];
+  const pages = services.pages.bind(services);
+  services.pages = (robots) => {
+    const deps = pages(robots);
+    const extract = deps.extract;
+    return { ...deps, extract: async (request) => (ai.push(request), extract(request)) };
+  };
+  const summary = await runNight(options.date ?? today, stepper(steps), services);
+  return { summary, steps, proposals: services.proposals, ai, state: services.state };
+}
+
+/** A night with nothing new: the same world, its own baselines, and no AI. */
+describe('a quiet night', () => {
+  it('reads the settings and checks each provider, with no model and no pull request', async () => {
+    const { summary, steps, proposals, ai } = await night(quietWorld());
     expect(steps).toEqual([
-      'read the catalog',
       'read the repository',
+      'read the settings',
+      'read the check dates',
+      'read the catalog',
       'read robots.txt 1',
       'check mullvad',
       'check netflix',
-      'open or refresh the pull request',
+      'read the last digest',
+      'build the digest',
+      'save the check dates',
     ]);
+    expect(ai).toEqual([]);
     expect(proposals).toEqual([]);
     expect(summary.pullRequest).toBeUndefined();
   });
 
-  it('proposes a changed price, with today’s lastVerified', async () => {
-    const world = storedWorld();
+  it('checks nothing whose cadence is off, and nothing checked since its cadence began', async () => {
+    const off = settings({
+      cadence: { pricing: 'off', policies: 'off', logos: 'off', discovery: 'off' },
+    });
+    const { steps } = await night(quietWorld(), { settings: off });
+    expect(steps).not.toContain('read robots.txt 2');
+    const state = memoryState();
+    await night(quietWorld(), { state });
+    const checks = await state.checks();
+    expect(checks['https://help.netflix.com/en/node/24926/ca']).toBe(today);
+    expect(checks['https://help.netflix.com/legal/termsofuse']).toBe(today);
+  });
+});
+
+describe('the weekly digest', () => {
+  it('proposes a changed price, with its quote checked, the page’s new baseline and an empty review list', async () => {
+    const world = quietWorld();
     world.pages['https://help.netflix.com/en/node/24926/ca'] = netflixChanged;
-    // Workers AI reads Standard's new price off the page.
     world.ai = (request) => ({
       response: {
         prices: request.messages[1].content.includes('1. Netflix Standard:')
-          ? [{ plan: 1, found: true, regularAmount: 19.99, currency: 'CAD', onlySalePrice: false }]
+          ? [
+              {
+                plan: 1,
+                found: true,
+                regularAmount: 19.99,
+                currency: 'CAD',
+                onlySalePrice: false,
+                quote: 'Standard: $19.99 / month',
+              },
+            ]
           : [],
       },
     });
     const { summary, proposals } = await night(world);
     expect(summary.pullRequest).toBe('https://github.com/NoahAdamMacDonald/simply-sub/pull/1');
     const [made] = proposals;
-    expect(made.title).toBe(`Price updates ${today}`);
-    const file = made.changes.find((change) => change.path === 'data/providers/netflix.yaml');
-    expect(
-      changedLines(
-        (await import('../../../data/providers/netflix.yaml?raw')).default,
-        file?.text ?? '',
-      ),
-    ).toEqual([
-      '- amount: 18.99',
-      '- lastVerified: 2026-10-23',
-      '+ amount: 19.99',
-      `+ lastVerified: ${today}`,
-    ]);
-    expect(providerSchema.safeParse(parse(file?.text ?? '')).success).toBe(true);
+    expect(made.branch).toBe(digestBranch);
+    expect(made.title).toBe(`Catalog digest ${today}`);
+    const paths = made.changes.map((change) => change.path);
+    expect(paths).toContain('data/providers/netflix.yaml');
+    expect(paths).toContain(baselinePath('https://help.netflix.com/en/node/24926/ca'));
+    expect(paths).toContain(reviewFile);
+    const file =
+      made.changes.find((change) => change.path === 'data/providers/netflix.yaml')?.text ?? '';
+    const provider = providerSchema.parse(parse(file));
+    expect(provider.plans.find((plan) => plan.id === 'netflix.standard')?.prices[0].amount).toBe(
+      19.99,
+    );
     expect(made.body).toContain(
       '| Netflix Standard, CA in CAD, monthly | 18.99 CAD | 19.99 CAD (+5.3%) |',
     );
+    expect(made.changes.find((change) => change.path === reviewFile)?.text).toContain(
+      'Nothing to review this week.',
+    );
+  });
+
+  it('sends a price whose quote isn’t on the page to the review list, never taking it', async () => {
+    const world = quietWorld();
+    world.pages['https://help.netflix.com/en/node/24926/ca'] = netflixChanged;
+    world.ai = (request) => ({
+      response: {
+        prices: request.messages[1].content.includes('1. Netflix Standard:')
+          ? [
+              {
+                plan: 1,
+                found: true,
+                regularAmount: 21.99,
+                currency: 'CAD',
+                onlySalePrice: false,
+                quote: 'Standard: $21.99 / month',
+              },
+            ]
+          : [],
+      },
+    });
+    const [made] = (await night(world)).proposals;
+    const review = made.changes.find((change) => change.path === reviewFile)?.text ?? '';
+    expect(review).toContain('Workers AI’s quote for its price isn’t on the page word for word');
+    expect(review).toContain(`\`${baselinePath('https://help.netflix.com/en/node/24926/ca')}\``);
+    const file = made.changes.find((change) => change.path === 'data/providers/netflix.yaml');
+    expect(file).toBeUndefined();
+  });
+
+  it('keeps what a night found until the digest’s day, then proposes it', async () => {
+    const world = quietWorld();
+    world.pages['https://mullvad.net/en/pricing'] = mullvadTaxGone;
+    const state = memoryState();
+    const notToday = settings({ digest: { day: 'monday' } });
+    const first = await night(world, { state, settings: notToday });
+    expect(first.proposals).toEqual([]);
+    expect((await state.pending()).map((entry) => entry.key)).toEqual([
+      'https://mullvad.net/en/pricing',
+    ]);
+    // The digest's day: the pricing page isn't due again, and what it found is still proposed.
+    const second = await night(quietWorld(), {
+      state,
+      date: '2026-11-02',
+      settings: settings({
+        digest: { day: 'monday' },
+        cadence: { ...notToday.cadence, pricing: 'weekly' },
+      }),
+    });
+    const [made] = second.proposals;
+    const review = made.changes.find((change) => change.path === reviewFile)?.text ?? '';
+    expect(review).toContain('its "tax included" words are gone from');
+    const file =
+      made.changes.find((change) => change.path === 'data/providers/mullvad.yaml')?.text ?? '';
+    // The plan's prices lose their taxIncluded; resellers' prices cite other pages and keep theirs.
+    expect(
+      providerSchema.parse(parse(file)).plans[0].prices.some((price) => price.taxIncluded),
+    ).toBe(false);
+  });
+
+  it('drops a pending page once main’s baseline has its new text (the digest merged)', async () => {
+    const world = quietWorld();
+    world.pages['https://mullvad.net/en/help/partnerships-and-resellers'] = mullvadNoInet;
+    const state = memoryState();
+    await night(world, { state, settings: settings({ digest: { day: 'monday' } }) });
+    expect(await state.pending()).toHaveLength(1);
+    // Main now has the page's new text as its baseline, and the reseller's listing gone.
+    const merged = baselinesOf(world);
+    const later = await night(world, {
+      state,
+      baselines: merged,
+      date: '2026-10-30',
+      settings: settings({ digest: { day: 'monday' } }),
+    });
+    expect(later.ai).toEqual([]);
+    expect(await state.pending()).toEqual([]);
+  });
+
+  it('lists a changed policy page for review, with the quotes it lost', async () => {
+    const world = quietWorld();
+    world.pages['https://help.netflix.com/legal/termsofuse'] =
+      '<p>Our terms have changed completely.</p>';
+    const [made] = (await night(world)).proposals;
+    const review = made.changes.find((change) => change.path === reviewFile)?.text ?? '';
+    expect(review).toMatch(
+      /## Policies\n\n- \[ \] \*\*netflix's \[help\.netflix\.com\/legal\/termsofuse\]/,
+    );
+    expect(review).toContain('added: “Our terms have changed completely.”');
+  });
+
+  it('gives a page without a baseline its first one, with nothing to review', async () => {
+    const world = quietWorld();
+    const baselines = baselinesOf(world);
+    delete baselines['https://help.netflix.com/en/node/116380/ca'];
+    const [made] = (await night(world, { baselines })).proposals;
+    expect(made.changes.map((change) => change.path)).toEqual([
+      baselinePath('https://help.netflix.com/en/node/116380/ca'),
+      reviewFile,
+    ]);
+    expect(made.body).toContain('### Pages that changed with nothing to review');
   });
 
   it('proposes a changed logo (a rebrand)', async () => {
-    const world = storedWorld();
+    const world = quietWorld();
     world.icons['https://www.netflix.com/icon-180.png'] = png(180, 7);
-    const { proposals } = await night(world);
-    const [made] = proposals;
-    expect(made.changes.map((change) => change.path)).toEqual(['data/logos/netflix.png']);
-    expect(made.changes[0].base64).toBeDefined();
+    const [made] = (await night(world)).proposals;
+    expect(made.changes.map((change) => change.path)).toContain('data/logos/netflix.png');
     expect(made.body).toContain(
       '**netflix**: a new 180×180 icon from [www.netflix.com/icon-180.png]',
     );
   });
 
-  it('proposes taking out taxIncluded when its quote is gone from the page', async () => {
-    const world = storedWorld();
-    world.pages['https://mullvad.net/en/pricing'] = mullvadTaxGone;
-    const { proposals } = await night(world);
-    const [made] = proposals;
-    const file = made.changes.find((change) => change.path === 'data/providers/mullvad.yaml');
-    // Each of Mullvad's prices cites the page and its quote.
-    const prices = mullvad.plans[0].prices.length;
-    expect(prices).toBe(5);
-    expect(
-      changedLines(
-        (await import('../../../data/providers/mullvad.yaml?raw')).default,
-        file?.text ?? '',
-      ),
-    ).toEqual([
-      ...Array.from({ length: prices }, () => [
-        '- taxIncluded: { quote: Including VAT. }',
-        '- lastVerified: 2026-10-26',
-      ]).flat(),
-      ...Array.from({ length: prices }, () => `+ lastVerified: ${today}`),
-    ]);
-    expect(providerSchema.safeParse(parse(file?.text ?? '')).success).toBe(true);
-    expect(made.body).toContain('its quote “Including VAT.” isn’t on the page any more');
-  });
-
-  it('proposes removing a reseller the provider’s page no longer names', async () => {
-    const world = storedWorld();
-    world.pages['https://mullvad.net/en/help/partnerships-and-resellers'] = mullvadNoInet;
-    const { proposals } = await night(world);
-    const [made] = proposals;
-    const text =
-      made.changes.find((change) => change.path === 'data/providers/mullvad.yaml')?.text ?? '';
-    const provider = providerSchema.parse(parse(text));
-    expect(provider.resellers?.map((listing) => listing.reseller)).toEqual([
-      'amazon',
-      'laptopwithlinux',
-      'proxystore',
-      'serialcart',
-      'webhallen',
-    ]);
-    expect(made.body).toContain('**inet** isn’t named as mullvad’s reseller any more');
-  });
-
-  it('proposes taking a region’s accepted cards out when a quote is gone from their page (M9.2)', async () => {
-    const world = storedWorld();
-    world.pages['https://help.netflix.com/en/node/116380/us'] = netflixPaymentUsChanged;
-    const { proposals } = await night(world);
-    const [made] = proposals;
-    const text =
-      made.changes.find((change) => change.path === 'data/providers/netflix.yaml')?.text ?? '';
-    const provider = providerSchema.parse(parse(text));
-    expect(Object.keys(provider.acceptedNetworks ?? {})).toEqual(['CA']);
-    expect(made.body).toContain(
-      '**netflix**’s cards in US: “Discover” isn’t on [help.netflix.com/en/node/116380/us]',
-    );
-    expect(made.body).toContain('every card is allowed there until they’re read again');
-  });
-
-  it('goes on when a provider’s step fails, saying so in the pull request', async () => {
-    const world = storedWorld();
-    world.icons['https://www.netflix.com/icon-180.png'] = png(180, 9);
-    const services = await fakeServices(world);
+  it('goes on when a provider’s step fails, saying so in the review list', async () => {
+    const world = quietWorld();
+    const services = await fakeServices(world, undefined, { baselines: baselinesOf(world) });
+    const read = services.readProvider;
     services.readProvider = async (id) => {
       if (id === 'mullvad') throw new Error('D1 is unavailable');
-      return (await fakeServices(world)).readProvider(id);
+      return read(id);
     };
-    await runPriceCheck(today, stepper([]), services);
-    expect(services.proposals[0].body).toContain(
-      '**mullvad**: The check failed: D1 is unavailable',
-    );
+    await runNight(today, stepper([]), services);
+    const review =
+      services.proposals[0].changes.find((change) => change.path === reviewFile)?.text ?? '';
+    expect(review).toContain('**mullvad**: The check failed: D1 is unavailable');
   });
 });

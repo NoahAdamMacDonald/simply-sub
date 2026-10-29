@@ -1,6 +1,9 @@
 import { launch } from '@cloudflare/playwright';
 import {
+  automationSchema,
+  baselinePath,
   maxPageChars,
+  readBaseline,
   pageText,
   parseRobots,
   robotsAllow,
@@ -12,11 +15,14 @@ import {
 import type { PageDeps, PageResult } from './check-pages';
 import { extractionModel } from './extraction';
 import { GitHub } from './github';
+import { parse } from 'yaml';
 import type { Services } from './run';
+import { kvState, type KvLike } from './state';
 import { catalogIndex } from './targets';
 
 // The night's services in the Worker: the catalog D1, the web (polite: robots.txt, one request per URL, en-CA
-// headers), Browser Rendering, Workers AI and GitHub. Tests use fakes of these (test/run.spec.ts).
+// headers), Browser Rendering, Workers AI, GitHub (the settings, the baselines, the pull requests) and KV (what the bot
+// remembers between nights, under bot: keys in the namespace it shares with the API). Tests use fakes of these (test/run.spec.ts).
 
 /** Canadian English, so a site that prices by locale shows Canada's (BLUEPRINT §7.7's region caveat). */
 const headers = { 'User-Agent': userAgent, 'Accept-Language': 'en-CA,en;q=0.9' };
@@ -66,13 +72,21 @@ export function workerServices(env: Env): Services {
       return found;
     },
     readRepository: () => github.state(),
+    async readSettings(commit) {
+      return automationSchema.parse(parse(await github.text('data/automation.yaml', commit)));
+    },
+    async readBaseline(url, commit) {
+      const text = await github.textIfThere(baselinePath(url), commit);
+      return text === undefined ? null : (readBaseline(text) ?? null);
+    },
+    state: kvState(env.KV as unknown as KvLike),
     pages: (robots) => pageDeps(env, robots, github),
     async readFiles(paths, commit) {
       const files: Record<string, string> = {};
       for (const path of paths) files[path] = await github.text(path, commit);
       return files;
     },
-    propose: (state, made) => github.propose(state, made),
+    propose: (state, made, branch) => github.propose(state, made, branch),
   };
 }
 

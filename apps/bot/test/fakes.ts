@@ -1,4 +1,12 @@
-import { pageText, type SnapshotProvider } from '@simply-sub/core';
+import {
+  automationSchema,
+  baselineLines,
+  pageText,
+  type Automation,
+  type Baseline,
+  type SnapshotProvider,
+} from '@simply-sub/core';
+import automationYaml from '../../../data/automation.yaml?raw';
 import { parse } from 'yaml';
 import mullvadYaml from '../../../data/providers/mullvad.yaml?raw';
 import netflixYaml from '../../../data/providers/netflix.yaml?raw';
@@ -8,6 +16,7 @@ import type { RepositoryState } from '../src/github';
 import { gitBlobSha } from '../src/icons';
 import type { Proposal } from '../src/proposal';
 import type { Services } from '../src/run';
+import { memoryState, type BotState } from '../src/state';
 import { catalogIndex } from '../src/targets';
 import mullvadPricing from './fixtures/mullvad-pricing.html?raw';
 import mullvadResellers from './fixtures/mullvad-resellers.html?raw';
@@ -110,17 +119,38 @@ export function fakeDeps(
   };
 }
 
+/** data/automation.yaml as main has it, with the digest on 2026-10-29's weekday unless `changes` say otherwise. */
+export function settings(changes: Partial<Automation> = {}): Automation {
+  const automation = automationSchema.parse(parse(automationYaml));
+  return { ...automation, digest: { day: 'thursday' }, ...changes };
+}
+
+/**
+ * Each stored page's baseline, as main has it: its text as the bot reads it (M3.9), so a night with nothing changed
+ * finds every page the same.
+ */
+export function storedBaselines(): Record<string, Baseline> {
+  return Object.fromEntries(
+    Object.entries(storedWorld().pages).map(([url, html]) => [
+      url,
+      { url, method: 'fetch', saved: '2026-10-28', lines: baselineLines(pageText(html)) },
+    ]),
+  );
+}
+
 /** The catalog D1, the repository and GitHub for `world`; `proposals` keeps what GitHub was given. */
 export async function fakeServices(
   world: World,
   providers: SnapshotProvider[] = [netflix, mullvad],
-): Promise<Services & { proposals: Proposal[]; steps: string[] }> {
+  options: { settings?: Automation; baselines?: Record<string, Baseline>; state?: BotState } = {},
+): Promise<Services & { proposals: (Proposal & { branch: string })[]; steps: string[] }> {
   const logos = {
     netflix: await gitBlobSha(committedLogos['netflix']),
     mullvad: await gitBlobSha(committedLogos['mullvad']),
   };
   const repository: RepositoryState = { commit: 'c0ffee', tree: 'tree0', logos, resellers: [] };
-  const proposals: Proposal[] = [];
+  const proposals: (Proposal & { branch: string })[] = [];
+  const baselines = options.baselines ?? storedBaselines();
   return {
     proposals,
     steps: [],
@@ -130,10 +160,13 @@ export async function fakeServices(
     readRobots: async (hosts) =>
       Object.fromEntries(hosts.map((host) => [host, 'allow-all' as const])),
     readRepository: async () => repository,
+    readSettings: async () => options.settings ?? settings(),
+    readBaseline: async (url) => baselines[url] ?? null,
+    state: options.state ?? memoryState(),
     pages: () => fakeDeps(world),
     readFiles: async (paths) => Object.fromEntries(paths.map((path) => [path, files[path] ?? ''])),
-    propose: async (_state, made) => {
-      proposals.push(made);
+    propose: async (_state, made, branch) => {
+      proposals.push({ ...made, branch });
       return 'https://github.com/NoahAdamMacDonald/simply-sub/pull/1';
     },
   };

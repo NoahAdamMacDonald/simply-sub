@@ -1,4 +1,4 @@
-import type { Price } from '@simply-sub/core';
+import type { BaselineMethod, CitedType, Price } from '@simply-sub/core';
 
 // What the nightly check reads and what it finds (BLUEPRINT §6.4). Everything here passes between Workflow steps, so
 // it's plain data.
@@ -42,6 +42,15 @@ export interface NetworksTarget {
   quotes: string[];
 }
 
+/** A page the policy ratings quote, and their quotes on it (BLUEPRINT §4.10). */
+export interface PolicyPageTarget {
+  file: string;
+  provider: string;
+  url: string;
+  /** Each rating's topic and its quotes from this page. */
+  ratings: { topic: string; quotes: string[] }[];
+}
+
 /** Something the check found, for the pull request. */
 export type Finding =
   /** The page shows another regular price: the stored amount changes, flagged when it moves more than 30%. */
@@ -61,7 +70,25 @@ export type Finding =
   /** A provider's or reseller's icon isn't the committed logo any more (a rebrand). */
   | { kind: 'logo'; id: string; png: string; width: number; source: string; replaces: boolean }
   /** Something that couldn't be checked, which a person should look at. */
-  | { kind: 'manual'; subject: string; url?: string; reason: string };
+  | { kind: 'manual'; subject: string; url?: string; reason: string }
+  /**
+   * A page whose text isn't its baseline any more, or has none yet (M3.9): its new lines become its baseline in the
+   * digest, and the lines it gained and lost show what changed.
+   */
+  | {
+      kind: 'page';
+      url: string;
+      type: CitedType;
+      owners: string[];
+      method: BaselineMethod;
+      lines: string[];
+      added: string[];
+      removed: string[];
+      /** Whether it had a baseline: a first one is no change to review. */
+      had: boolean;
+    }
+  /** A policy page that changed: the ratings' quotes it lost, for a reviewer to grade again. */
+  | { kind: 'policy'; target: PolicyPageTarget; missing: { topic: string; quote: string }[] };
 
 /** What a night may still spend, passed from step to step. */
 export interface Budget {

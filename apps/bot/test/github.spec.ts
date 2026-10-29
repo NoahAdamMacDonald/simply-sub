@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { GitHub, botBranch, resellerSites } from '../src/github';
+import { digestBranch as botBranch } from '../src/digest';
+import { GitHub, resellerSites } from '../src/github';
 import type { Proposal } from '../src/proposal';
 
 // The pull request through GitHub's REST API, against a fake GitHub that records every call: one branch of the bot's
@@ -58,7 +59,9 @@ const state = { commit: 'base1', tree: 'basetree', logos: {}, resellers: [] };
 describe('GitHub', () => {
   it('commits on its own branch from the base branch and opens a pull request', async () => {
     const { calls, github } = fakeGitHub([], false);
-    expect(await github.propose(state, made)).toBe('https://github.com/owner/simply-sub/pull/7');
+    expect(await github.propose(state, made, botBranch)).toBe(
+      'https://github.com/owner/simply-sub/pull/7',
+    );
     expect(calls.map((call) => `${call.method} ${call.path}`)).toEqual([
       'POST git/blobs',
       'POST git/blobs',
@@ -87,7 +90,9 @@ describe('GitHub', () => {
       [{ number: 3, html_url: 'https://github.com/owner/simply-sub/pull/3' }],
       true,
     );
-    expect(await github.propose(state, made)).toBe('https://github.com/owner/simply-sub/pull/3');
+    expect(await github.propose(state, made, botBranch)).toBe(
+      'https://github.com/owner/simply-sub/pull/3',
+    );
     expect(calls.slice(5).map((call) => `${call.method} ${call.path}`)).toEqual([
       `PATCH git/refs/heads/${botBranch}`,
       `GET pulls?state=open&head=owner:${botBranch}`,
