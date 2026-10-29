@@ -139,70 +139,73 @@
             </div>
           </ss-empty-state>
         } @else {
-          <div class="toolbar">
-            <mat-form-field appearance="outline" class="search" subscriptSizing="dynamic">
-              <mat-icon matPrefix aria-hidden="true">search</mat-icon>
-              <mat-label>Search this list</mat-label>
-              <input
-                #box
-                matInput
-                autocomplete="off"
-                [value]="text()"
-                (input)="text.set(box.value)"
-              />
-              @if (text() !== '') {
-                <button
-                  matIconButton
-                  matSuffix
-                  type="button"
-                  aria-label="Clear search"
-                  (click)="clearSearch(box)"
-                >
-                  <mat-icon>close</mat-icon>
-                </button>
-              }
-            </mat-form-field>
-            <!--
+          <!-- The bar and the filters it opens, pinned together below the top bar (M6.17). -->
+          <div class="pinned">
+            <div class="toolbar">
+              <mat-form-field appearance="outline" class="search" subscriptSizing="dynamic">
+                <mat-icon matPrefix aria-hidden="true">search</mat-icon>
+                <mat-label>Search this list</mat-label>
+                <input
+                  #box
+                  matInput
+                  autocomplete="off"
+                  [value]="text()"
+                  (input)="text.set(box.value)"
+                />
+                @if (text() !== '') {
+                  <button
+                    matIconButton
+                    matSuffix
+                    type="button"
+                    aria-label="Clear search"
+                    (click)="clearSearch(box)"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                }
+              </mat-form-field>
+              <!--
               Under 960 px the side column's at the page's foot, so its View optimizations is here, compact (M6.13): before
               Sort, so Tab goes from Sort straight into the menu it opens.
             -->
-            @if (!wide()) {
-              <ss-optimizations-link compact class="optimize" [listId]="listId() ?? ''" />
-            }
-            <!-- Its name says how many filters are on; the count beside it is the same, shown. -->
-            <button
-              matButton="outlined"
-              type="button"
-              class="filters-toggle"
-              aria-controls="list-filters"
-              [attr.aria-expanded]="filtersOpen()"
-              (click)="filtersOpen.set(!filtersOpen())"
-            >
-              <mat-icon>tune</mat-icon>
-              <!-- Read but not shown under 600 px, where the search box needs the room (M6.13). -->
-              <span class="sort-label">Sort</span>
-              <span class="visually-hidden">
-                and filter{{ filterCount() > 0 ? ', ' + filterCount() + ' on' : '' }}</span
-              >
-              @if (filterCount() > 0) {
-                <span class="badge" aria-hidden="true">{{ filterCount() }}</span>
+              @if (!wide()) {
+                <ss-optimizations-link compact class="optimize" [listId]="listId() ?? ''" />
               }
-            </button>
-          </div>
+              <!-- Its name says how many filters are on; the count beside it is the same, shown. -->
+              <button
+                matButton="outlined"
+                type="button"
+                class="filters-toggle"
+                aria-controls="list-filters"
+                [attr.aria-expanded]="filtersOpen()"
+                (click)="filtersOpen.set(!filtersOpen())"
+              >
+                <mat-icon>tune</mat-icon>
+                <!-- Read but not shown under 600 px, where the search box needs the room (M6.13). -->
+                <span class="sort-label">Sort</span>
+                <span class="visually-hidden">
+                  and filter{{ filterCount() > 0 ? ', ' + filterCount() + ' on' : '' }}</span
+                >
+                @if (filterCount() > 0) {
+                  <span class="badge" aria-hidden="true">{{ filterCount() }}</span>
+                }
+              </button>
+            </div>
 
-          <div id="list-filters">
-            @if (filtersOpen()) {
-              <ss-list-filters
-                class="filters"
-                [(state)]="filters"
-                [options]="options()"
-                [features]="context().registry"
-                [categories]="featureCategories()"
-                [currency]="context().currency"
-                [country]="country()"
-                [count]="filterCount()"
-              />
-            }
+            <div id="list-filters">
+              @if (filtersOpen()) {
+                <ss-list-filters
+                  class="filters"
+                  [(state)]="filters"
+                  [options]="options()"
+                  [features]="context().registry"
+                  [categories]="featureCategories()"
+                  [currency]="context().currency"
+                  [country]="country()"
+                  [count]="filterCount()"
+                />
+              }
+            </div>
           </div>
 
           <p class="note shown" role="status">{{ shownText() }}</p>

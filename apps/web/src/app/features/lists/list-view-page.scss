@@ -67,17 +67,21 @@
 }
 
 // The search box, with Sort on its right (and under 960 px View optimizations between them), pinned below the top bar
-// while the cards scroll under it (M6.13), as Search's bar is. The app background hides what passes beneath.
-.toolbar {
+// while the cards scroll under it (M6.13), as Search's bar is, and the filters Sort opens with it (M6.17), so they stay
+// in reach wherever the list is scrolled to. The app background hides what passes beneath.
+.pinned {
   position: sticky;
   top: var(--ss-top-bar-height, 0px);
   z-index: 1;
+  margin-top: -8px;
+  background-color: var(--ss-app-bg);
+}
+
+.toolbar {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-top: -8px;
   padding-block: 8px;
-  background-color: var(--ss-app-bg);
 }
 
 .optimize {
@@ -142,8 +146,14 @@ ss-item-card {
   font: var(--mat-sys-label-small);
 }
 
+// Open, the filters scroll on their own when they're taller than the window leaves them (M6.17), so the bar above
+// stays put and every filter can still be reached.
 .filters {
-  margin-top: 16px;
+  max-height: calc(100dvh - var(--ss-top-bar-height, 0px) - 96px);
+  margin-top: 8px;
+  padding-bottom: 8px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 // Room under the toolbar, which says how many are shown when some are hidden.
