@@ -7,6 +7,7 @@ import {
   addDays,
   monthOf,
   monthRange,
+  nextChargeDate,
   priceChangeDays,
   reanchored,
   type IsoDate,
@@ -96,6 +97,15 @@ export class HomePage {
     }
     return names;
   });
+  /** Each item's next charge, by id: one dated before it is the payment just made, as the schedule counts it. */
+  private readonly nextDates = computed(() => {
+    const next = new Map<string, IsoDate>();
+    for (const result of this.metrics.resolutions().values()) {
+      const date = result.ok ? result.resolved.nextCharge?.date : undefined;
+      if (result.ok && date !== undefined) next.set(result.resolved.item.id, date);
+    }
+    return next;
+  });
   /** The month's charges, for the dots. */
   protected readonly charges = computed<CalendarCharge[]>(() =>
     this.metrics.charges(monthRange(this.month())).map((charge) => ({
@@ -107,19 +117,27 @@ export class HomePage {
       manual: charge.manual,
     })),
   );
-  /** "Oct 28 Crave $22.00": every charge of the next 14 days, as charged, with Mark renewed on a manual one (M7.10). */
+  /**
+   * "Oct 28 Crave $22.00": every charge of the next 14 days still to pay, as charged, with Mark renewed on a manual
+   * renewal (M7.10). A charge before its item's next one is paid already (a renewal marked, or the payment for a plan
+   * whose next renewal is still to come), so it isn't listed.
+   */
   protected readonly coming = computed(() => {
     const today = this.today();
     const country = this.settings.saved()?.country;
+    const next = this.nextDates();
     return this.metrics
       .charges({ from: today, to: addDays(today, comingDays) })
+      .filter((charge) => charge.date >= (next.get(charge.itemId) ?? charge.date))
       .map((charge, index) => ({
         key: `${charge.itemId}-${charge.date}-${index}`,
         itemId: charge.itemId,
+        charged: charge.date,
         date: nearDateText(charge.date, today),
         name: this.names().get(charge.itemId) ?? '',
         amount: chargeAmountText({ ...charge, tax: 0 }, country),
-        manual: charge.manual,
+        // The last renewal before an end date has no next one to move on to.
+        renewable: charge.manual && charge.ends !== true,
       }));
   });
 
@@ -157,14 +175,16 @@ export class HomePage {
   });
 
   /**
-   * Mark renewed (M7.10): a subscription renewed by hand today, so its next renewal is a period from now, as P4's
-   * "Wrong date?" moves it; saved at once, with Undo.
+   * Mark renewed (M7.10): the renewal due on `date` is paid, so the next one is the charge after it, as P4's "Wrong
+   * date?" would move it; saved at once, with Undo. The payment stays on its due date, in the totals as before.
    */
-  protected async markRenewed(itemId: string): Promise<void> {
+  protected async markRenewed(itemId: string, date: IsoDate): Promise<void> {
     const item = this.items.byId().get(itemId);
     if (!item || item.billing.mode !== 'recurring') return;
     const before = item.billing;
-    await this.items.update(itemId, { billing: reanchored(before, this.today()) });
+    const after = nextChargeDate(before, addDays(date, 1));
+    if (after === undefined) return;
+    await this.items.update(itemId, { billing: reanchored(before, after) });
     const { MatSnackBar } = await import('@angular/material/snack-bar');
     const name = this.names().get(itemId) ?? 'It';
     this.injector

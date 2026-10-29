@@ -84,14 +84,14 @@
                   <span aria-hidden="true">{{ payment.amount.shown }}</span>
                   <span class="visually-hidden">{{ payment.amount.spoken }}</span>
                 </span>
-                @if (payment.manual) {
-                  <!-- A renewal by hand: done, it moves on a period, with Undo (M7.10). -->
+                @if (payment.renewable) {
+                  <!-- A renewal by hand: done, the next one is the charge after it, with Undo (M7.10). -->
                   <button
                     matButton
                     type="button"
                     class="renewed"
                     [attr.aria-label]="'Mark renewed: ' + payment.name"
-                    (click)="markRenewed(payment.itemId)"
+                    (click)="markRenewed(payment.itemId, payment.charged)"
                   >
                     <mat-icon>autorenew</mat-icon>
                     Mark renewed
