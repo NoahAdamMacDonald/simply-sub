@@ -17,6 +17,7 @@ import {
   nextQueued,
   queueFileSchema,
   readIconImage,
+  toIsoDate,
   type BatchProvider,
   type Evidence,
   type ExtractionIssue,
@@ -42,7 +43,7 @@ const option = (name: string) => (args.includes(name) ? args[args.indexOf(name) 
 const model = option('--model');
 const base = option('--base') ?? 'main';
 const dryRun = args.includes('--dry-run');
-const today = new Date().toISOString().slice(0, 10);
+const today = toIsoDate(new Date());
 
 const queue = queueFileSchema.parse(
   parseDocument(await readFile(absolute('data/queue.yaml'), 'utf8')).toJS() ?? [],
@@ -108,7 +109,18 @@ for (const entry of batch) {
     continue;
   }
   if (!(await exists(`data/providers/${entry.id}.yaml`))) {
-    results.push(left(entry, 'needs-fix', 'Nothing held up: see .pipeline/<id>/report.json'));
+    // No page that could be read shows its plans (Crunchyroll's are only on a page that shows the bot an error):
+    // unreadable, with the answer's own words for why; anything else is a draft to fix.
+    const answer = await readJson<{ notOnPages?: string[] }>(workFile(entry.id, 'answer.json'));
+    const unpriced = report?.issues.some((issue) =>
+      issue.reason.startsWith('No plan with a checked price'),
+    );
+    const why = answer?.notOnPages?.[0];
+    results.push(
+      unpriced && why
+        ? left(entry, 'unreadable', why)
+        : left(entry, 'needs-fix', 'Nothing held up: see .pipeline/<id>/report.json'),
+    );
     continue;
   }
   const provider = parseDocument(
@@ -155,6 +167,10 @@ for (const result of drafted) {
   Object.assign(result, { status: 'needs-fix', note: errors.map(formatIssue).join('; ') });
 }
 
+// Each new provider's pages become baselines for the nightly bot (M3.6), from the pages the batch read.
+const keptIds = results.filter((result) => result.status === 'drafted').map((result) => result.id);
+if (keptIds.length > 0) run('save-baselines.ts', keptIds);
+
 await markQueue(results);
 const body = batchReview(results, {
   date: today,
@@ -176,7 +192,7 @@ const files = [
   ]),
 ];
 git(['switch', '-c', branch]);
-git(['add', ...files]);
+git(['add', ...files, 'data/baselines']);
 git([
   'commit',
   '-m',

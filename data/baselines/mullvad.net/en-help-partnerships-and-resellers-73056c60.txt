@@ -1,0 +1,128 @@
+url: https://mullvad.net/en/help/partnerships-and-resellers
+method: fetch
+saved: 2026-10-29
+
+Partnerships and Resellers
+Skip to main content
+Products and services
+VPN
+Browser
+Browser extension
+Pricing
+Privacy
+Why privacy matters
+Technical resources
+Downloads
+Tech blog & news
+Open source
+Check for leaks
+Servers
+Help and support
+Guides
+FAQ
+VPN
+Browser
+Pricing
+Downloads
+Why privacy matters
+Log in Get started
+Partnerships and Resellers
+Policies
+Last updated: October 20, 2026
+This page gives an overview of our current partners, distributors, and resellers.
+Resellers - purchase Mullvad VPN scratch cards
+With our official resellers, you can purchase Mullvad VPN scratch cards that contain an activation code to top up a new or existing account.
+Benefits:
+The design of the activation code removes the possibility for third parties to link a payment to a Mullvad account, for privacy.
+You can gift time and give it to a friend without knowing their account number.
+Available at:
+Amazon - US
+Amazon - UK
+Amazon - DE
+Amazon - CA
+Amazon - SE
+Amazon - FR
+Amazon - ES
+Amazon - PL
+Amazon - NL
+Amazon - MX
+Amazon - AU
+Amazon - IT
+Amazon - BE
+Inet
+Since March 2020, we’ve partnered with Inet, a Swedish-based electronics retailer, in order to sell Mullvad VPN online and in stores.
+Webhallen
+Since March 2020, we’ve partnered with Webhallen, a Swedish-based electronics retailer, in order to sell Mullvad VPN online and in stores.
+ProxyStore
+Since April 2021, we’ve partnered with ProxyStore, a German-based provider of privacy-focused goods and services, in order to sell Mullvad VPN online and in store.
+SerialCart
+Since April 2022, we’ve a distribution partnership with SerialCart® (MySecure Space GmbH), an Austrian-based provider of privacy and security focused products and services. They offer Mullvad VPN physically and digitally on their websites: SerialCart.com, SerialCart.de and MySecure.Space.
+Laptop with Linux
+Since October 2022, we’ve partnered with Laptop with Linux, a Dutch-based reseller of privacy-focused goods and services, They offer physical Mullvad VPN activation codes with free delivery world-wide.
+Partners
+Mozilla
+Mozilla has partnered with Mullvad in order to utilize our global network of VPN servers for its own VPN application, Mozilla VPN, since July 2019.
+Tailscale
+Tailscale has partnered with Mullvad in order to allow customers of Tailscale to make use of our WireGuard VPN servers as “exit nodes” for Tailscale, since September 2023. This enables Mullvad and Tailscale to co-exist.
+Obscura VPN
+Obscura VPN has partnered with Mullvad in order to make use of our WireGuard VPN servers as “exit nodes” for its own VPN application, Obscura, since February 2025.
+Mullvad
+About
+Help
+Servers
+Pricing
+Blog
+Mullvad VPN
+Mullvad Browser
+Why privacy matters
+Why Mullvad VPN?
+What is a VPN?
+Downloads
+Stop chat control
+Press
+Careers
+Policies
+Policies
+Open source
+Privacy policy
+Cookies
+Terms of service
+Partnerships and resellers
+Reviews, ads and affiliates
+Reporting a bug or vulnerability
+Address
+Mullvad VPN AB
+Box 53049
+400 14 Gothenburg
+Sweden
+support@mullvadvpn.net
+GPG key
+Onion service
+Follow us
+@mullvadnet
+@mullvadnet
+Mullvad VPN
+mullvad
+Language
+English العربيّة
+Dansk
+Deutsch
+English
+Español
+فارسی
+Suomi
+Français
+Italiano
+日本語
+한국어
+Nederlands
+Norsk
+Polski
+Português
+Русский
+Svenska
+ภาษาไทย
+Türkçe
+Українська
+简体中文
+繁體中文

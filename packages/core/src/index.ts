@@ -68,6 +68,7 @@ export * from './optimizer/optimize';
 export * from './optimizer/suggestion';
 export * from './optimizer/suggestion-text';
 export * from './pipeline/amounts';
+export * from './pipeline/baseline';
 export * from './pipeline/batch-review';
 export * from './pipeline/draft-yaml';
 export * from './pipeline/extraction';

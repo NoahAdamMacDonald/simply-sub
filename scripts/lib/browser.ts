@@ -21,8 +21,8 @@ export interface RenderedPage {
   servedText: string;
   /** The visible text after each toggle clicked (Yearly, Monthly …). */
   views: { label: string; text: string }[];
-  /** The screenshot's path from the repository's root. */
-  screenshot: string;
+  /** The screenshot's absolute path, when one was taken. */
+  screenshot?: string;
 }
 
 /** Words of a page that checks for bots instead of showing itself. */
@@ -54,13 +54,11 @@ export class Renderer {
 
   /**
    * Opens `url` once and reads it, or says why it couldn't be: robots.txt, a bot check, an error status, a timeout.
-   * `screenshot` is the path (from the repository's root) the screenshot is saved to, its folder made already.
+   * `screenshot` is the absolute path the screenshot is saved to, its folder made already; none without it.
    */
   async render(
     url: string,
-    screenshot: string,
-    absolute: (path: string) => string,
-    options: { toggles?: boolean } = {},
+    options: { screenshot?: string; toggles?: boolean } = {},
   ): Promise<RenderedPage | { error: string }> {
     const address = URL.parse(url);
     if (!address) return { error: 'Not a web address' };
@@ -75,6 +73,7 @@ export class Renderer {
       const status = response.status();
       const served = await response.text().catch(() => '');
       await declineCookies(page);
+      await expandSections(page);
       await page.waitForTimeout(1_500);
       const title = await page.title();
       const renderedText = await page.innerText('body').catch(() => '');
@@ -90,20 +89,21 @@ export class Renderer {
         return { error: 'The site showed the bot an error page: not read' };
       }
       const views = options.toggles ? await toggleViews(page) : [];
-      await page.screenshot({
-        path: absolute(screenshot),
-        type: 'jpeg',
-        quality: 70,
-        clip: {
-          x: 0,
-          y: 0,
-          width: 1280,
-          height: Math.min(
-            maxScreenshotHeight,
-            Number(await page.evaluate('document.documentElement.scrollHeight')),
-          ),
-        },
-      });
+      if (options.screenshot)
+        await page.screenshot({
+          path: options.screenshot,
+          type: 'jpeg',
+          quality: 70,
+          clip: {
+            x: 0,
+            y: 0,
+            width: 1280,
+            height: Math.min(
+              maxScreenshotHeight,
+              Number(await page.evaluate('document.documentElement.scrollHeight')),
+            ),
+          },
+        });
       return {
         url: address.href,
         finalUrl: page.url(),
@@ -112,7 +112,7 @@ export class Renderer {
         renderedText,
         servedText: pageText(served),
         views,
-        screenshot,
+        ...(options.screenshot && { screenshot: options.screenshot }),
       };
     } catch (error) {
       return {
@@ -194,6 +194,30 @@ async function open(page: Page, url: string) {
     .catch(() => null);
   await page.waitForLoadState('networkidle', { timeout: 15_000 }).catch(() => undefined);
   return response;
+}
+
+/**
+ * Opens a page's folded sections, so their words are read: up to 25 closed <details> and collapsed buttons named like a
+ * question (a help article's "What are the prices for each plan?"), which role locators find inside components too.
+ * Menus and other collapsed buttons stay shut.
+ */
+async function expandSections(page: Page): Promise<void> {
+  let opened = 0;
+  // Playwright's locators see inside components' shadow DOM, where Crunchyroll's help articles keep theirs.
+  for (const summary of await page.locator('details:not([open]) > summary').all()) {
+    if (opened >= 25) break;
+    if (!(await summary.isVisible().catch(() => false))) continue;
+    await summary.click({ timeout: 2_000 }).catch(() => undefined);
+    opened++;
+  }
+  for (const button of await page.getByRole('button', { expanded: false }).all()) {
+    if (opened >= 25) break;
+    const name = (await button.innerText().catch(() => '')).trim();
+    if (!/\?\s*$/.test(name) || !(await button.isVisible().catch(() => false))) continue;
+    await button.click({ timeout: 2_000 }).catch(() => undefined);
+    opened++;
+  }
+  if (opened > 0) await page.waitForTimeout(800);
 }
 
 async function declineCookies(page: Page): Promise<void> {

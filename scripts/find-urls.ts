@@ -16,6 +16,7 @@ import {
   nextQueued,
   pageKinds,
   queueFileSchema,
+  toIsoDate,
   type FetchedPage,
   type PageKind,
   type ProviderSite,
@@ -24,7 +25,7 @@ import { readFile } from 'node:fs/promises';
 import { parse } from 'yaml';
 import { loadCatalogFiles, plural } from './lib/catalog-files';
 import { Renderer } from './lib/browser';
-import { absolute, workFile, writeJson, type FoundUrls } from './lib/pipeline-files';
+import { absolute, readJson, workFile, writeJson, type FoundUrls } from './lib/pipeline-files';
 import { webSearch } from './lib/search';
 import { urlSample } from './lib/url-sample';
 import { PoliteWeb } from './lib/web';
@@ -74,8 +75,13 @@ const io = {
 };
 let right = 0;
 for (const target of targets) {
-  const reports = await findPages(target, sample ? ['pricing'] : kinds, io);
-  const pages: FoundUrls['pages'] = {};
+  const searched = sample ? (['pricing'] as PageKind[]) : kinds;
+  const reports = await findPages(target, searched, io);
+  // A run for some kinds keeps what an earlier run found for the others.
+  const earlier = await readJson<FoundUrls>(workFile(target.id, 'urls.json'));
+  const pages: FoundUrls['pages'] = Object.fromEntries(
+    Object.entries(earlier?.pages ?? {}).filter(([kind]) => !searched.includes(kind as PageKind)),
+  );
   for (const report of reports) {
     if (report.found) {
       pages[report.kind] = { url: report.found.url, via: report.found.via, fit: report.found.fit };
@@ -86,9 +92,12 @@ for (const target of targets) {
     name: target.name,
     website: target.website,
     ...(target.domains && { domains: [...target.domains] }),
-    found: new Date().toISOString().slice(0, 10),
+    found: toIsoDate(new Date()),
     pages,
-    reports,
+    reports: [
+      ...(earlier?.reports ?? []).filter((report) => !searched.includes(report.kind)),
+      ...reports,
+    ],
   };
   await writeJson(workFile(target.id, 'urls.json'), found);
   if (sample) {

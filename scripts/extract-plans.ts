@@ -21,6 +21,10 @@ import {
   policyTopicsFileSchema,
   queueFileSchema,
   readModelAnswer,
+  baselineLines,
+  moneyIn,
+  servedCovers,
+  toIsoDate,
   workersAiModel,
   type ExtractionAnswer,
   type ExtractionContext,
@@ -129,6 +133,23 @@ async function contextFor(provider: string): Promise<ExtractionContext> {
         ...record.views.map((view) => `--- after clicking "${view.label}" ---\n${view.text}`),
       ].join('\n\n'),
     });
+    // A page its scripts change (Claude's prices in Canada's dollars) has other words as served: its own page, when
+    // it has a line with an amount the page as shown doesn't.
+    const shown = new Set(baselineLines(record.renderedText));
+    const priced = baselineLines(record.servedText).some(
+      (line) => !shown.has(line) && moneyIn(line).some((mention) => mention.currency !== undefined),
+    );
+    if (
+      priced ||
+      (record.servedText.length >= 400 && !servedCovers(record.servedText, record.renderedText))
+    ) {
+      pages.push({
+        name: `${name.slice(0, -'.json'.length)}-served`,
+        kind: record.kind as PageKind,
+        url: record.finalUrl,
+        text: record.servedText,
+      });
+    }
   }
   if (pages.length === 0)
     fail(`No pages saved for ${provider}: run npm run data:urls and data:render first.`);
@@ -148,7 +169,7 @@ async function contextFor(provider: string): Promise<ExtractionContext> {
     pages,
     features: featuresFileSchema.parse(data('data/features.yaml')),
     topics: policyTopicsFileSchema.parse(data('data/policy-topics.yaml') ?? []),
-    today: new Date().toISOString().slice(0, 10),
+    today: toIsoDate(new Date()),
   };
 }
 

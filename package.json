@@ -24,7 +24,8 @@
     "data:urls": "tsx scripts/find-urls.ts",
     "data:render": "tsx scripts/render-pages.ts",
     "data:extract": "tsx scripts/extract-plans.ts",
-    "data:batch": "tsx scripts/batch-pr.ts"
+    "data:batch": "tsx scripts/batch-pr.ts",
+    "data:baselines": "tsx scripts/save-baselines.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

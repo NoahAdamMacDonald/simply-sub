@@ -231,7 +231,8 @@ simply-sub/
 │     │  │                   # addresses; finding pages and web search (M3.2); a page's text, amounts, tax wording
 │     │  │                   # and robots.txt, shared with the bot (moved from apps/bot in M3.2); extraction: the
 │     │  │                   # answer's schema, the request, quotes, checks and drafts, and the drafts' YAML (M3.4);
-│     │  │                   # a batch's review table (M3.5)
+│     │  │                   # a batch's review table (M3.5); baselines: a page's lines, their file, the pages and
+│     │  │                   # facts the catalog cites (M3.6)
 │     │  └─ export/          # the exports' tables, calendar events, text and list file, which the app writes
 │     │                      # with papaparse, exceljs and ics (M7.5)
 │     └─ test/               # Vitest specs, mirroring src/ (run in the America/Vancouver time zone)
@@ -246,6 +247,7 @@ simply-sub/
 │  ├─ bundles/
 │  │  └─ disney-crave-premium.yaml
 │  ├─ queue.yaml             # the discovery queue: the services to add next, and what became of each (section 6.5)
+│  ├─ baselines/             # each cited page's text when its facts were read, <host>/<path>-<hash>.txt (section 6.5)
 │  ├─ schema/                # JSON Schema for the YAML above, generated from core's Zod schemas (committed)
 │  └─ logos/                 # provider logos, <id>.png: fetched by `npm run data:icons` or added by hand (committed);
 │                            # data:build publishes each as a WebP of at most 96 px (section 6.3)
@@ -265,6 +267,7 @@ simply-sub/
 │  ├─ lib/browser.ts         # the pipeline's browser: the system Edge through playwright-core
 │  ├─ extract-plans.ts       # saved pages → a model's answer → data/providers/<id>.yaml (`npm run data:extract`)
 │  ├─ batch-pr.ts            # a batch of queued services → one pull request (`npm run data:batch`, section 6.5)
+│  ├─ save-baselines.ts      # each cited page → data/baselines/ (`npm run data:baselines`, section 6.5)
 │  ├─ price-check.ts         # nightly price monitor (section 6.4)
 │  └─ draft-provider.ts      # AI-assisted: pricing page URL → draft YAML
 │
@@ -1767,6 +1770,27 @@ proposed features with their quotes, dropped facts and what to check; the servic
 line of the batch's queue ids (`batchIdsIn`): a service in an open batch's pull request isn't taken again, and one
 in a batch closed without merging is passed over as rejected.
 
+**As built (M3.6):** the first load, run in a session by Claude (on the owner's subscription) on the owner's services
+(section 6.6), each page read by the pipeline and every quote checked by it.
+- **Baselines** (`npm run data:baselines`, core's `pipeline/baseline.ts`): every page the catalog cites (`citedPages`:
+  the prices' sources and pricing pages, the pages naming resellers and accepted cards: pricing; the pages policy
+  ratings quote: policies) saved as `data/baselines/<host>/<path>-<hash>.txt`: a header (`url`, `method`, `saved`)
+  and the page's lines, white space collapsed. The method is how the bot reads it: `fetch` when the HTML as served has
+  what the page shows (`servedCovers`) and every fact the catalog rests on it (`citedFacts`: quotes, and prices near
+  their names), else `browser`. A page the pipeline read this run (render-pages) isn't requested again; a fact not to be
+  seen on today's page is listed. The batch saves its new providers' baselines and commits them. On 2026-10-28: 54
+  pages, 34 read by fetch and 20 by browser, 792 KB. The facts not seen were views the default page doesn't show:
+  Proton's other currencies, Disney+'s other countries' prices and cards, TSN's and RDS's other periods' tabs,
+  SerialCart's and Amazon's prices in the basket, Mullvad's yearly price shown a month at a time.
+- **The tuning it took:** a terms or privacy page comes from the footer's links before a sitemap's (Claude's sitemap
+  lists its school terms, Bitdefender's its forum's policy), and another audience's policy (K-12, community,
+  commercial) never counts; a page's folded sections are opened before it's read (`<details>`, and collapsed
+  buttons named like a question, inside components too: Crunchyroll's help articles); a page whose scripts change its
+  prices also goes to the model as served (`pricing-served`: Claude's US prices under Canada's); pages added by hand
+  take the next free name; dates are the local date, as `data:validate`'s.
+- **The batch** (`catalog/batch-2026-10-28-bitdefender`, its own pull request into this work's branch): Claude, Xbox
+  Game Pass and Bitdefender drafted, Crunchyroll unreadable. Section 14 (M3.6) has what was found.
+
 **Ongoing:** the nightly price check (section 6.4) reuses the saved `sources:` URLs. A weekly job takes the next
 N services from the queue, so the catalog grows on its own while you only review.
 
@@ -1778,7 +1802,8 @@ or a manual override, not scraped images.
 
 ### 6.6 First seed (Phase 1)
 Run the pipeline on your own services first (`subscriptions.txt`), all in CAD, to tune the prompts. Then add
-the Wikidata queue:
+the Wikidata queue (as of M3.6: Proton, Netflix, Disney+ and Crave were in the catalog; Claude, Xbox Game Pass and
+Bitdefender are in the batch's pull request; Crunchyroll's prices couldn't be read, section 14):
 - Bitdefender (Premium Security, Family, Digital Identity Protection, the free plan)
 - Proton (Free, Mail Plus, Drive Plus, VPN Plus, Pass Plus, and the Unlimited, Duo and Family suites)
 - Xbox Game Pass (PC, Standard, Ultimate)
@@ -2741,6 +2766,26 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-28, M3.6)**
+- **Claude:** Free, Pro (US$20 a month, US$200 a year) and Max 5x and 20x (US$100 and US$200 a month), the US prices
+  from Claude's help centre ("$20 per month (US)") and its pricing page as served. A Canadian is shown $28 a month,
+  $280 a year and Max from $140 without a currency named (its help says it prices "in your local currency where
+  supported"), so they aren't stored: the owner, a subscriber, can say which currency the bill is in. No card network is
+  named; its consumer terms are Canada's (they name Canadian law), so their ratings are for CA.
+- **Xbox Game Pass:** Essential, Premium, Ultimate and PC Game Pass a month in CAD from the `/en-CA/` page, the "first
+  14 days for $1" left out as an offer; Canada's prorated refund of the last charge; 30 days' notice of a price change.
+- **Bitdefender:** Total Security, Premium Security and Ultimate Security (Individual and Family) and Digital Identity
+  Protection, a year in CAD: each the "Old price" or struck price, since its terms renew "at Bitdefender's then-current
+  price and any applicable taxes, excluding promotional and discount pricing" (the "Sales tax included" first-year
+  price is an offer). Its Canadian terms both require arbitration and name Romania's courts, so disputes are for a
+  person to read; the monthly identity plan's "for the first month" price isn't stored.
+- **Crunchyroll** is unreadable: its plans' prices are only on `/premium`, which shows the bot an error page
+  ("Something Went Wrong"), and its help centre sends readers there. Its cards (Visa, Mastercard, American Express,
+  Discover) were read, for when its prices are.
+- **Proposed features** (in the batch's pull request, for the owner, through the feature-discovery skill): a coding
+  agent, a usage allowance and included API credits (AI); cloud gaming hours, the game library's size, day-one games
+  and online multiplayer (gaming); antivirus, protected devices and scam protection (security).
 
 **Resolved (2026-10-28, M3.5)**
 - **A rejected batch:** the pull request's hidden line of queue ids is how the next batch knows: one closed without

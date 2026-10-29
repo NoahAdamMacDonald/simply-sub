@@ -7,8 +7,8 @@
 //   npm run data:render -- bitdefender claude                       every page found for these
 //   npm run data:render -- claude --kinds pricing                   only these kinds
 //   npm run data:render -- claude --url pricing=https://claude.com/pricing/max   another page, as pricing-2
-import { moneyIn, pageKinds, type PageKind } from '@simply-sub/core';
-import { mkdir } from 'node:fs/promises';
+import { moneyIn, pageKinds, toIsoDate, type PageKind } from '@simply-sub/core';
+import { mkdir, readdir } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { Renderer } from './lib/browser';
 import { plural } from './lib/catalog-files';
@@ -34,7 +34,7 @@ if (added.length > 0 && ids.length > 1) fail('--url adds pages to one provider a
 
 const web = new PoliteWeb();
 const renderer = new Renderer(web);
-const today = new Date().toISOString().slice(0, 10);
+const today = toIsoDate(new Date());
 try {
   for (const id of ids) {
     const found = await readJson<FoundUrls>(workFile(id, 'urls.json'));
@@ -48,9 +48,12 @@ try {
       if (!(pageKinds as readonly string[]).includes(kind) || !url) {
         fail(`--url takes <kind>=<url>, a kind being one of ${pageKinds.join(', ')}`);
       }
-      const count = pages.filter((page) => page.kind === kind).length;
+      // The next name no page of this run or of an earlier one has: pricing, pricing-2 …
+      const taken = new Set([...pages.map((page) => page.name), ...(await savedNames(id))]);
+      let name = kind;
+      for (let n = 2; taken.has(name); n++) name = `${kind}-${n}`;
       pages.push({
-        name: count === 0 ? kind : `${kind}-${count + 1}`,
+        name,
         kind: kind as PageKind,
         url,
       });
@@ -65,7 +68,8 @@ try {
     for (const page of pages) {
       const screenshot = workFile(id, `pages/${page.name}.jpg`);
       await mkdir(dirname(absolute(screenshot)), { recursive: true });
-      const rendered = await renderer.render(page.url, screenshot, absolute, {
+      const rendered = await renderer.render(page.url, {
+        screenshot: absolute(screenshot),
         toggles: page.kind === 'pricing' || page.kind === 'bundles',
       });
       if ('error' in rendered) {
@@ -99,6 +103,14 @@ try {
 console.log(
   `\n${plural(web.requested.length, 'request')} outside the browser (robots.txt). Pages in .pipeline/<id>/pages/.`,
 );
+
+/** The pages saved for a provider by earlier runs, by name. */
+async function savedNames(id: string): Promise<string[]> {
+  const names = await readdir(absolute(workFile(id, 'pages'))).catch(() => [] as string[]);
+  return names
+    .filter((name) => name.endsWith('.json'))
+    .map((name) => name.slice(0, -'.json'.length));
+}
 
 /** How many prices the texts show in each currency, each mention once. */
 function currencies(texts: readonly string[]): Record<string, number> {

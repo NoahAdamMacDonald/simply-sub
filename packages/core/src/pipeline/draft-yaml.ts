@@ -22,9 +22,25 @@ export function draftYaml(value: Record<string, unknown>, comments: YamlComments
   return `${lines.join('\n')}\n`;
 }
 
+/** A comment's lines, wrapped at word breaks the way the repository's comments are (118 characters). */
 function comment(line: string, indent: number): string {
-  return `${' '.repeat(indent)}#${line === '' ? '' : ` ${line}`}`;
+  const pad = `${' '.repeat(indent)}#`;
+  if (line === '') return pad;
+  const lines: string[] = [];
+  let current = '';
+  for (const word of line.split(' ')) {
+    if (current !== '' && pad.length + 1 + current.length + 1 + word.length > commentWidth) {
+      lines.push(`${pad} ${current}`);
+      current = word;
+    } else {
+      current = current === '' ? word : `${current} ${word}`;
+    }
+  }
+  lines.push(`${pad} ${current}`);
+  return lines.join('\n');
 }
+
+const commentWidth = 118;
 
 function writeMap(
   map: Record<string, unknown>,

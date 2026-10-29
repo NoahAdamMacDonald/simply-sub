@@ -574,7 +574,7 @@ export function draftFromAnswer(
     });
     return { comments, issues, proposedFeatures, evidence };
   }
-  const cancelUrl = context.pages.find((page) => page.kind === 'cancel')?.url;
+  const cancelUrl = mainPage(context.pages, 'cancel')?.url;
   if (!cancelUrl) {
     issues.push({
       kind: 'warning',
@@ -582,7 +582,7 @@ export function draftFromAnswer(
       reason: 'No cancel page was found: add cancelUrl (its cancel page or help article) by hand',
     });
   }
-  const pricing = context.pages.find((page) => page.kind === 'pricing')?.url;
+  const pricing = mainPage(context.pages, 'pricing')?.url;
   const provider: DraftProvider = {
     id: context.provider.id,
     name: context.provider.name,
@@ -601,6 +601,11 @@ export function draftFromAnswer(
     ...(policies && { policies }),
   };
   return { provider, comments, issues, proposedFeatures, evidence };
+}
+
+/** A kind's page that find-urls found (named after the kind), else the first one added by hand. */
+function mainPage(pages: readonly ExtractionPage[], kind: PageKind): ExtractionPage | undefined {
+  return pages.find((page) => page.name === kind) ?? pages.find((page) => page.kind === kind);
 }
 
 /** A price that can't be stored as it is, or undefined. */
@@ -863,10 +868,10 @@ function sourceComments(context: ExtractionContext, answer: ExtractionAnswer): s
     `Drafted by the discovery pipeline on ${context.today} (BLUEPRINT §6.5) from these pages, each quoted where it's used.`,
   ];
   for (const kind of kinds) {
-    const read = context.pages.filter((page) => page.kind === kind);
-    lines.push(
-      `${label[kind]}: ${read.length > 0 ? read.map((page) => page.url).join(', ') : 'none found'}.`,
-    );
+    const read = [
+      ...new Set(context.pages.filter((page) => page.kind === kind).map((page) => page.url)),
+    ];
+    lines.push(`${label[kind]}: ${read.length > 0 ? read.join(', ') : 'none found'}.`);
   }
   if (answer.notOnPages.length > 0)
     lines.push(`Not on the pages: ${answer.notOnPages.join('; ')}.`);

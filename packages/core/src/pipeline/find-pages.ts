@@ -240,6 +240,16 @@ export function urlScore(kind: PageKind, url: string, words = ''): number {
   if (score === 0) return 0;
   // Business plans are out of the catalog's scope (BLUEPRINT §1.3), and a sign-in or a show is never the page.
   if (tokens.some((token) => offTopic.test(token) || catalogue.test(token))) return 0;
+  // Another audience's policies: a school's, a forum's, a business customer's, a job applicant's.
+  if (
+    (kind === 'terms' || kind === 'privacy') &&
+    tokens.some((token) =>
+      /^(?:k12|schools?|education|edu|commercial|community|forums?|candidates?|recruiting|employees?|vendors?|suppliers?)$/.test(
+        token,
+      ),
+    )
+  )
+    return 0;
   // A help-centre article is fine, but not a list of them; a blog post is only a reseller's announcement.
   if (tokens.some((token) => listing.test(token))) score -= 3;
   if (kind !== 'resellers' && tokens.some((token) => /^(?:blog|news)$/.test(token))) score -= 3;
@@ -574,20 +584,25 @@ async function findKind(
     const url = `${facts.origin}${path}`;
     return { url, score: urlScore(kind, url) };
   });
-  const done =
-    (kind === 'pricing' &&
-      facts.productPage !== undefined &&
-      (await read(facts.productPage, 'website', minScore))) ||
-    (await tryAll(paths, 'path')) ||
-    (await tryAll(
+  const sitemap = async () =>
+    tryAll(
       ranked(
         kind,
         (await facts.sitemap()).map((url) => ({ url, words: '' })),
         site,
       ),
       'sitemap',
-    )) ||
-    (await tryAll(ranked(kind, facts.links, site), 'link'));
+    );
+  const links = () => tryAll(ranked(kind, facts.links, site), 'link');
+  // The terms and the privacy policy are what the footer links (BLUEPRINT §6.5): a sitemap also lists a forum's
+  // policy and the school terms (Claude's K-12 terms), so the links come first for them.
+  const policy = kind === 'terms' || kind === 'privacy';
+  const done =
+    (kind === 'pricing' &&
+      facts.productPage !== undefined &&
+      (await read(facts.productPage, 'website', minScore))) ||
+    (await tryAll(paths, 'path')) ||
+    (policy ? (await links()) || (await sitemap()) : (await sitemap()) || (await links()));
   if (!done && io.search) {
     const results = await io.search(searchQuery(kind, site.name));
     report.searched = results === undefined ? 'none-left' : 'yes';

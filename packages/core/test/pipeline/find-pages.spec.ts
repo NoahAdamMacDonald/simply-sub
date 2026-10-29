@@ -297,6 +297,30 @@ describe('findPages', () => {
     });
   });
 
+  it('takes the footer’s terms before a sitemap’s, and never another audience’s', async () => {
+    const terms = `These Terms of Service apply to you. ${'You agree to these terms. '.repeat(100)}`;
+    const web = fakeWeb(
+      {
+        'https://ai.example': '<footer><a href="/legal/consumer-terms">Consumer Terms</a></footer>',
+        'https://ai.example/legal/k12-terms': terms,
+        'https://ai.example/legal/consumer-terms': terms,
+      },
+      {
+        files: {
+          'https://ai.example/robots.txt': 'Sitemap: https://ai.example/sitemap.xml',
+          'https://ai.example/sitemap.xml':
+            '<urlset><url><loc>https://ai.example/legal/k12-terms</loc></url></urlset>',
+        },
+      },
+    );
+    const [report] = await findPages({ name: 'AI', website: 'https://ai.example' }, ['terms'], web);
+    expect(report.found).toMatchObject({
+      url: 'https://ai.example/legal/consumer-terms',
+      via: 'link',
+    });
+    expect(urlScore('terms', 'https://ai.example/legal/k12-terms')).toBe(0);
+  });
+
   it('searches last, and only takes results on the provider’s sites', async () => {
     const web = fakeWeb(
       {
