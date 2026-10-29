@@ -35,9 +35,12 @@ h3 {
   gap: 12px 16px;
   margin-bottom: 12px;
 
+  // Narrower than their own width if the dialog is (a plan's box at 320 px): a menu you can type in is wider than a
+  // field, for its arrow.
   mat-form-field,
   ss-choice-field {
     flex: 1 1 180px;
+    min-width: 0;
   }
 
   // Short values, which widen when they're alone on a line, so an error fits under them.
@@ -52,8 +55,10 @@ h3 {
   }
 }
 
-// Each plan in a box of its own, its name as the box's title.
+// Each plan in a box of its own, its name as the box's title, no wider than the dialog (a fieldset is as wide as what's
+// in it at the least, unless told otherwise).
 .plan {
+  min-width: 0;
   margin: 0 0 16px;
   padding: 8px 16px 16px;
   border: 1px solid var(--ss-divider);
