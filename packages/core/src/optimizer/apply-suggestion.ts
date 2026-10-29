@@ -1,5 +1,5 @@
 import type { IsoDate } from '../dates/iso-date';
-import type { ListDraft } from '../user/list-draft';
+import type { AppliedChange, ListDraft } from '../user/list-draft';
 import type { ListItem } from '../user/list-item';
 import { rankSchema, type Rank } from '../user/rank';
 import type { Timestamp } from '../user/record';
@@ -150,17 +150,26 @@ export function suggestionEdits(
   return edits;
 }
 
+/** A suggestion applied, as Review changes names it (M8.6). */
+export type AppliedSuggestion = Pick<AppliedChange, 'title' | 'savings' | 'currency'>;
+
 /**
  * `draft` with `edits` made at `now`: changed items stamped, removed ones marked (so Undo can bring them back, P5),
- * and added ones given `ids`, one for each edit, in order (undefined for the others). Throws when an edit names an
- * item the draft doesn't have.
+ * and added ones given `ids`, one for each edit, in order (undefined for the others). With `suggestion`, the edits are
+ * a suggestion applied, recorded with what it changed so it can be undone on its own (M8.6). Throws when an edit names
+ * an item the draft doesn't have.
  */
 export function withDraftEdits(
   draft: ListDraft,
   edits: readonly DraftEdit[],
   ids: readonly (string | undefined)[],
   now: Timestamp,
+  suggestion?: AppliedSuggestion,
 ): ListDraft {
+  const touched = new Set(edits.flatMap((edit) => (edit.kind === 'add' ? [] : [edit.itemId])));
+  const before = draft.items
+    .filter((entry) => touched.has(entry.item.id))
+    .map((entry) => entry.item);
   let items = draft.items;
   const named = (itemId: string) => {
     if (!items.some((entry) => entry.item.id === itemId)) {
@@ -194,7 +203,14 @@ export function withDraftEdits(
       }
     }
   });
-  return { ...draft, items };
+  if (!suggestion) return { ...draft, items };
+  const change: AppliedChange = {
+    ...suggestion,
+    before,
+    removed: edits.flatMap((edit) => (edit.kind === 'remove' ? [edit.itemId] : [])),
+    added: ids.filter((id): id is string => id !== undefined),
+  };
+  return { ...draft, items, applied: [...(draft.applied ?? []), change] };
 }
 
 /** The items an action changes. */

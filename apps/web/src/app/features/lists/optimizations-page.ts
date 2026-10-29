@@ -38,8 +38,9 @@ import { actionLine } from './suggestion-text';
  * A list's optimizations (PROJECT-PLAN P14, M8.2): core's optimizer for the list, its cards in Free savings, Red,
  * Orange and Yellow, with Save up to, Show dismissed and the rules in a tooltip. Apply puts a card's changes on the
  * list's draft and stays (M8.4): the suggestions are for the list as the draft has it, so the next one counts the
- * changes before it, Undo puts the draft back, and Review and save opens the editor, where nothing is saved until Save.
- * Dismiss hides a card until the list changes.
+ * changes before it, and while they're worked out again no card can be applied (M8.6), so none that clashes with what
+ * was applied stays in reach. Undo takes back that change; Review changes lists each one with what it was and what it
+ * becomes, to undo one or save them (M8.6). Dismiss hides a card until the list changes.
  */
 @Component({
   selector: 'ss-optimizations-page',
@@ -101,6 +102,12 @@ export class OptimizationsPage {
     const draft = this.drafts.byList().get(this.listId());
     return draft !== undefined && this.drafts.hasChanges(this.listId());
   });
+  /** How many suggestions are applied to the draft (M8.6). */
+  protected readonly appliedCount = computed(
+    () => this.drafts.byList().get(this.listId())?.applied?.length ?? 0,
+  );
+  /** The suggestions are being worked out again (after an Apply): no card can be applied till they're back (M8.6). */
+  protected readonly updating = computed(() => this.result.isLoading());
 
   /** The sections in P14's order, each with its cards: dismissed ones only with Show dismissed. */
   protected readonly sections = computed(() => {
@@ -150,8 +157,7 @@ export class OptimizationsPage {
     try {
       const started = await this.drafts.start(listId);
       if (!started) return;
-      const before = started.draft;
-      const items = new Map(draftItems(before).map((item) => [item.id, item]));
+      const items = new Map(draftItems(started.draft).map((item) => [item.id, item]));
       const edits = suggestionEdits(suggestion, items);
       if (!edits) {
         this.snackBar.open(
@@ -160,7 +166,14 @@ export class OptimizationsPage {
         );
         return;
       }
-      await this.drafts.applyEdits(listId, edits);
+      const currency = this.found()?.currency ?? this.settings.saved()?.currency ?? 'CAD';
+      const title = suggestion.actions.map((action) => actionLine(action).title).join('; ');
+      const applied = await this.drafts.applyEdits(listId, edits, {
+        title,
+        savings: Math.max(0, suggestion.savings),
+        currency,
+      });
+      const index = (applied.applied?.length ?? 1) - 1;
       // The suggestions for the draft, without the one applied (or after 5 s, whatever they are).
       await firstValueFrom(
         race(
@@ -175,10 +188,12 @@ export class OptimizationsPage {
         ),
       );
       this.focusAfterRender(next, true);
-      const title = suggestion.actions.map((action) => actionLine(action).title).join('; ');
       const undo = this.snackBar.open(`Applied: ${title}`, 'Undo', { duration: 8000 });
       undo.onAction().subscribe(() => {
-        void (started.resumed ? this.drafts.putBack(listId, before) : this.drafts.cancel(listId));
+        // A draft this Apply started goes with it; one that was there keeps its other changes.
+        void (started.resumed || index > 0
+          ? this.drafts.undoApplied(listId, index)
+          : this.drafts.cancel(listId));
       });
     } finally {
       this.applying.set(undefined);

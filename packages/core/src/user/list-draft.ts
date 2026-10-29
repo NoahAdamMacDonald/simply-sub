@@ -1,5 +1,6 @@
 import * as z from 'zod';
 import { addDuplicateIssues } from '../catalog/checks';
+import { currencySchema, textSchema } from '../catalog/formats';
 import { listItemSchema, type ListItem } from './list-item';
 import { recordIdSchema, timestampSchema, type Timestamp } from './record';
 import { softDeleted, withChanges } from './stamps';
@@ -23,6 +24,24 @@ export const draftItemSchema = z.strictObject({
 });
 export type DraftItem = z.infer<typeof draftItemSchema>;
 
+/**
+ * An optimizer suggestion applied to a draft (P14, M8.6), so Review changes can list what it changed and undo it on its
+ * own: the items it changed or removed as they were just before, and the ones it added.
+ */
+export const appliedChangeSchema = z.strictObject({
+  /** Its changes' titles: "Replace Disney+ Premium and Crave Premium with Disney+ and Crave Premium Bundle". */
+  title: textSchema,
+  /** What it saves over the next 12 months, as the card said, in `currency`. */
+  savings: z.number().nonnegative(),
+  currency: currencySchema,
+  before: z.array(listItemSchema),
+  /** Items it took out of the draft (Specific dates, which have no end date), by id. */
+  removed: z.array(recordIdSchema),
+  /** Items it added (a bundle or suite), by id. */
+  added: z.array(recordIdSchema),
+});
+export type AppliedChange = z.infer<typeof appliedChangeSchema>;
+
 /** One list's draft, keyed by the list's id: one draft per list. */
 export const listDraftSchema = z
   .strictObject({
@@ -34,6 +53,8 @@ export const listDraftSchema = z
     startName: subscriptionListSchema.shape.name,
     items: z.array(draftItemSchema),
     startedAt: timestampSchema,
+    /** The optimizer suggestions applied to it, in order (M8.6). */
+    applied: z.array(appliedChangeSchema).optional(),
   })
   .superRefine((draft, ctx) => {
     const ids = draft.items.map(({ item }) => item.id);
@@ -190,4 +211,53 @@ function sameValue(a: unknown, b: unknown): boolean {
     keys.length === Object.keys(bRecord).length &&
     keys.every((key) => Object.hasOwn(bRecord, key) && sameValue(aRecord[key], bRecord[key]))
   );
+}
+
+/**
+ * The applied changes Undo of change `index` takes back (M8.6): that one, and every later one that changed or added an
+ * item it touched, or one of those touched, since each was worked out on the draft with the ones before it. In order.
+ */
+export function dependentChanges(applied: readonly AppliedChange[], index: number): number[] {
+  const touched = (change: AppliedChange) => [
+    ...change.before.map((item) => item.id),
+    ...change.removed,
+    ...change.added,
+  ];
+  const ids = new Set(touched(applied[index]));
+  const undone = [index];
+  for (let later = index + 1; later < applied.length; later++) {
+    const own = touched(applied[later]);
+    if (own.some((id) => ids.has(id))) {
+      undone.push(later);
+      for (const id of own) ids.add(id);
+    }
+  }
+  return undone;
+}
+
+/**
+ * `draft` with applied change `index` undone, and the later ones that build on it (dependentChanges): each item it
+ * changed or removed goes back as it was just before, and each item it added goes, latest change first.
+ */
+export function withoutApplied(draft: ListDraft, index: number): ListDraft {
+  const applied = draft.applied ?? [];
+  if (applied[index] === undefined) throw new Error(`The draft has no applied change ${index}`);
+  const undone = dependentChanges(applied, index);
+  let items = draft.items;
+  for (const change of undone.map((at) => applied[at]).reverse()) {
+    const before = new Map(change.before.map((item) => [item.id, item]));
+    const added = new Set(change.added);
+    items = items
+      .filter((entry) => !added.has(entry.item.id))
+      .map((entry) => {
+        const item = before.get(entry.item.id);
+        if (!item) return entry;
+        // As it was, and back in the list if this change took it out.
+        return { item, ...(entry.saved && { saved: entry.saved }) };
+      });
+  }
+  const kept = applied.filter((_, at) => !undone.includes(at));
+  const next: ListDraft = { ...draft, items, applied: kept };
+  if (kept.length === 0) delete next.applied;
+  return next;
 }

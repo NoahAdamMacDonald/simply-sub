@@ -9,6 +9,7 @@ import {
   softDeleted,
   startDraft,
   withDraftEdits,
+  type AppliedSuggestion,
   type DraftEdit,
   type ListDraft,
   type ListItem,
@@ -120,10 +121,14 @@ export class DraftsRepository {
    * Makes several edits to a list's draft in one write (P14's Apply): changes, removals, and items added with new ids.
    * Returns the draft as stored.
    */
-  async applyEdits(listId: string, edits: readonly DraftEdit[]): Promise<ListDraft> {
+  async applyEdits(
+    listId: string,
+    edits: readonly DraftEdit[],
+    suggestion?: AppliedSuggestion,
+  ): Promise<ListDraft> {
     const now = this.storage.now();
     const ids = edits.map((edit) => (edit.kind === 'add' ? this.storage.newId(now) : undefined));
-    return this.change(listId, (draft, at) => withDraftEdits(draft, edits, ids, at));
+    return this.change(listId, (draft, at) => withDraftEdits(draft, edits, ids, at, suggestion));
   }
 
   /**

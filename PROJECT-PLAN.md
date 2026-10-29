@@ -218,6 +218,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M8.3 | `apps/bot` nightly price check → GitHub PR (BLUEPRINT §6.4, §7.7), which also checks each `taxIncluded` quote is still on its page, rereads reseller prices and checks each reseller's approval quotes on the provider's page (BLUEPRINT §4.9); the same run proposes a new logo when a provider's or reseller's icon changed (a rebrand). As built: a cron-started Workflow with a step per provider, prices confirmed on their pages before any Workers AI, Browser Rendering as a fallback, YAML edited line by line, and one `Price updates <date>` PR on `bot/price-updates`; deployed by hand on 2026-10-28, with its token (BLUEPRINT §7.2, §14) | A changed price produces a PR, and so does a changed logo, a `taxIncluded` quote gone from its page or a reseller the provider no longer names |
 | M8.4 | Apply several optimizations (added 2026-10-28, the feedback after M9): Apply puts a card's changes on the list's draft and stays, the optimizer running on the list as its draft has it, so the next suggestion counts them; Undo puts the draft back (`ListDraftService.putBack`), and Review and save opens the editor (BLUEPRINT §10, §14) | Two suggestions applied one after the other are both in the editor's draft, and Undo takes back the last |
 | M8.5 | Apply replaces what a suggestion replaces (added 2026-10-29, the feedback after M3): a bundle or suite Optimizations adds starts on its first charge (`startDate`), and an extra member joins its host on the day the account it replaces ends (an add-on's optional `since`), so nothing new is charged before it starts and this year's past charges stay as they were; the optimizer prices them the same way; equal savings are listed by title (P14, BLUEPRINT §4.6, §10.3) | Replacing Crave Premium and Disney+ Premium with their bundle lowers this year's total and the next 12 months' by what the card said, never raises them; an extra member adds nothing to its host's charges before it joins; the item dialog keeps the day it joins unless its quantity changes |
+| M8.6 | Review changes, and suggestions that never clash (added 2026-10-29, the feedback after M3): each suggestion applied is recorded on the draft with the items it changed as they were and what it added (core's `appliedChangeSchema`, `withDraftEdits`, `dependentChanges`, `withoutApplied`); Review changes (`/lists/:listId/optimize/review`) lists each one like a diff (− what goes, + what comes, ~ what changes), what it saves, and the list's totals before and after, with Undo for each (and the later ones that build on it), Save changes, Open in the editor and a back button to Optimizations; while the suggestions are worked out again after an Apply, no card can be applied (P14) | Applying two suggestions and undoing the first takes back the second only when it builds on the first; Save changes saves the list with the rest; no card that clashes with one applied can be applied |
 
 ### M9 — Payment (Phase 4)
 | ID | Task | Done when |
@@ -1466,9 +1467,19 @@ replaces ends (the add-on's `since`): the host's charges before then don't inclu
 member, joins Nov 20" until then. So the list never pays for both, and this year's past charges stay as they were:
 before, a bundle with no start date was counted as if it had been paid all year, which raised this year's total.
 
+**Since the feedback after M3 (M8.6):** "Review changes" takes the place of Review and save. It opens a page of its
+own (`/lists/:listId/optimize/review`, its back button to Optimizations) that lists each suggestion applied, in
+order, like a diff: − for what goes ("Crave Premium · $22.00 a month · Ends Nov 5, when what's paid for runs out"),
++ for what comes ("Netflix and Crave · $35.00 a month · From Nov 5"), ~ for what changes ("Paid with Cash Back
+Mastercard"), with what it saves and the list's totals this year and over the next 12 months, before and after. Each
+has Undo, which takes back that change and any later one that changed what it changed or added; then Save changes
+(the list with every change kept) or Open in the editor. The snackbar's Undo after Apply takes back that one change.
+While the suggestions are worked out again after an Apply, the cards can't be applied ("Updating the suggestions…"),
+so a card that clashes with what was applied (a card for a plan a bundle replaces) is never in reach.
+
 **Acceptance**
 - [ ] The optimizer fixtures produce the expected cards and colours
-- [ ] Apply never saves until the user presses Save in edit mode
+- [ ] Apply never saves until the user presses Save in edit mode or Save changes on Review changes
 - [ ] Dismissed suggestions stay hidden until the list changes
 
 ### P15 — Not found & errors

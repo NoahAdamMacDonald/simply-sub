@@ -50,6 +50,7 @@ describe('OptimizationsPage', () => {
           { path: 'lists/:listId', component: Elsewhere },
           { path: 'lists/:listId/optimize', component: OptimizationsPage },
           { path: 'lists/:listId/edit', component: Elsewhere },
+          { path: 'lists/:listId/optimize/review', component: Elsewhere },
           { path: 'features', component: Elsewhere },
         ]),
         { provide: MATERIAL_ANIMATIONS, useValue: { animationsDisabled: true } },
@@ -147,9 +148,9 @@ describe('OptimizationsPage', () => {
     const review = () => page().querySelector<HTMLAnchorElement>('.unsaved a.review');
     await until(() => review() !== null, 5000);
     expect(text(page().querySelector('.unsaved p'))).toBe(
-      "This list has changes you haven't saved, and the suggestions count them. Apply more, then review and save them in the editor.",
+      '1 change is applied but not saved, and the suggestions count it. Apply more, then review them before you save.',
     );
-    expect(review()?.getAttribute('href')).toBe(`/lists/${work.id}/edit`);
+    expect(review()?.getAttribute('href')).toBe(`/lists/${work.id}/optimize/review`);
     const snack = () => document.querySelector('.mat-mdc-snack-bar-container');
     await until(() => text(snack())?.startsWith('Applied: Downgrade Crave Premium') === true, 5000);
     // Focus is on a card that's left.
@@ -164,7 +165,7 @@ describe('OptimizationsPage', () => {
     await until(() => planOf(netflix.id) === 'netflix.standard-ads', 5000);
     expect(planOf(crave.id)).toBe('crave.basic');
 
-    // Undo puts the draft back as it was before the last one.
+    // Undo takes back the last one, and the one before stays (M8.6).
     await until(
       () => text(snack())?.startsWith('Applied: Downgrade Netflix Standard') === true,
       5000,
