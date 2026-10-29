@@ -20,6 +20,7 @@ import {
   secretHash,
   storageFull,
 } from '../src/writes';
+import { freshRateLimitWindow } from './rate-limit-window';
 
 // The rules for every request that stores something (src/writes.ts, M10.1) and the nightly clean-up of the user
 // database (src/clean-up.ts). The routes that store things come with their tasks (M10.2, M10.8, M10.10); here a route
@@ -50,6 +51,7 @@ function fromIp(method: string, path: string, ip: string) {
 
 describe('the write limit', () => {
   it('holds an IP to 10 writes a minute, but not its reads or another IP', async () => {
+    await freshRateLimitWindow();
     const statuses: number[] = [];
     for (let count = 0; count < 10; count++) {
       statuses.push((await fromIp('POST', '/nowhere', '203.0.113.20')).status);

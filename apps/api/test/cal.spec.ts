@@ -5,6 +5,7 @@ import { cleanUp } from '../src/clean-up';
 import { utcDay } from '../src/http';
 import worker from '../src/index';
 import { dailyCaps } from '../src/writes';
+import { freshRateLimitWindow } from './rate-limit-window';
 
 // The live calendar's routes (src/routes/cal.ts, M10.2) beyond the contract's examples: a set's calendars and what
 // each holds, what PUT keeps, revokes and adds, the manage key, the limits per feed and per set, the daily cap, the
@@ -157,6 +158,7 @@ describe('GET /cal/:token.ics', () => {
   });
 
   it('holds each feed to 30 fetches a minute, but not an IP, which calendar apps share', async () => {
+    await freshRateLimitWindow();
     const set = await createSet();
     const fromOneIp = (url: string) =>
       send('GET', url, { headers: { 'CF-Connecting-IP': '198.51.100.7' } });
@@ -266,6 +268,7 @@ describe('PUT /cal/:id', () => {
   });
 
   it('holds a set to 6 writes a minute', async () => {
+    await freshRateLimitWindow();
     const set = await createSet([family]);
     const statuses: number[] = [];
     for (let write = 0; write < 7; write++) {
