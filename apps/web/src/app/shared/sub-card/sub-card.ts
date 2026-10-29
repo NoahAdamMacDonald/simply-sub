@@ -184,6 +184,10 @@ export class SubCard {
     const code = this.settings.saved()?.country;
     return code && countryName(code);
   });
+  /** "Cheaper at" over the shops when they all are, else "Also sold at" (Settings' "Show every reseller", M5.13). */
+  protected readonly dealsLabel = computed(() =>
+    (this.plan()?.deals ?? []).every((deal) => deal.cheaper) ? 'Cheaper at' : 'Also sold at',
+  );
   /** The bundles in the lists that include one of its plans, by name (M7.11): "Netflix and Crave". */
   protected readonly inBundles = computed(() => {
     const ids = this.result().activity?.bundleIds ?? [];

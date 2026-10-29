@@ -403,6 +403,17 @@ describe('resellerDeals', () => {
     ]);
   });
 
+  it('lists the ones that aren’t cheaper too when every reseller is asked for (M5.13)', () => {
+    // In Ontario, Amazon's CA$98.31 a year with HST costs more than Mullvad's own CA$94.17, and SerialCart more again.
+    const all = resellerDeals(mullvad, 'mullvad.vpn', data.resellers, canadian('CA-ON'), true);
+    expect(all.map((deal) => [deal.reseller.id, deal.cheaper])).toEqual([
+      ['proxystore', true],
+      ['amazon', false],
+      ['serialcart', false],
+    ]);
+    expect(all[1].monthlySaving).toBeLessThan(0);
+  });
+
   it('gives the cost and saving per month with tax, and the page to buy from', () => {
     const [proxystore, amazon] = resellerDeals(
       mullvad,

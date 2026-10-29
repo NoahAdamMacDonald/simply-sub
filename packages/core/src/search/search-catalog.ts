@@ -69,7 +69,10 @@ export interface CatalogSearchContext {
   /** The catalog file for Settings' country (CatalogStore.catalogFor). */
   catalog: CatalogData;
   /** Where the user is (the region prices are picked for), their currency and their sales tax. */
-  settings: Pick<Settings, 'country' | 'subdivision' | 'currency' | 'salesTaxPercent'>;
+  settings: Pick<
+    Settings,
+    'country' | 'subdivision' | 'currency' | 'salesTaxPercent' | 'searchAllResellers'
+  >;
   /** Exchange rates in the user's currency. Without them, converted prices stay in their own currency. */
   fx?: FxRates;
   /** Every list's items. */
@@ -187,7 +190,13 @@ export function searchCatalog(query: CatalogQuery, context: CatalogSearchContext
     const [first, ...rest] = sold.map((match) =>
       catalogPlan(
         match,
-        resellerDeals(provider, match.plan.id, catalog.resellers, buyer),
+        resellerDeals(
+          provider,
+          match.plan.id,
+          catalog.resellers,
+          buyer,
+          context.settings.searchAllResellers === true,
+        ),
         planRankCounts(match.plan.features, catalog.features, profileRanks),
       ),
     );

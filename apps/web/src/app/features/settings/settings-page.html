@@ -47,6 +47,17 @@
     <p id="search-sold-hint" class="hint">
       Search starts with its “Sold in {{ country() }}” filter on. You can still turn it off there.
     </p>
+    <mat-checkbox
+      [checked]="saved.searchAllResellers === true"
+      aria-describedby="search-resellers-hint"
+      (change)="setAllResellers($event.checked)"
+    >
+      Show every reseller, even when it isn't cheaper
+    </mat-checkbox>
+    <p id="search-resellers-hint" class="hint">
+      Search lists each official reseller of a plan; the ones that sell it for less say “Cheaper
+      at”.
+    </p>
   </section>
 
   <section aria-labelledby="data-heading">

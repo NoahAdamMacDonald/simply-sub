@@ -95,11 +95,12 @@
   @if (plan()?.deals; as deals) {
     @if (deals.length) {
       <!-- At phone width "Cheaper at" shows once, above a row per shop; each row still says it to screen readers. -->
-      <p class="deals-label" aria-hidden="true">Cheaper at</p>
+      <p class="deals-label" aria-hidden="true">{{ dealsLabel() }}</p>
       <ul class="deals">
         @for (deal of deals; track deal.reseller.id) {
           <li>
-            <span class="cheaper">Cheaper at </span>
+            <!-- One that isn't cheaper shows only with Settings' "Show every reseller" (M5.13). -->
+            <span class="cheaper">{{ deal.cheaper ? 'Cheaper at ' : 'Also at ' }}</span>
             <a
               [href]="deal.link"
               target="_blank"

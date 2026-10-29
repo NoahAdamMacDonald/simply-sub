@@ -423,6 +423,16 @@ describe('SubCard', () => {
     expect(link?.querySelector('img')?.getAttribute('src')).toBe('icons/amazon.webp');
   });
 
+  it('lists a reseller that isn’t cheaper only with Settings’ Show every reseller (M5.13)', async () => {
+    // In Ontario, Amazon's CA$87 a year with 13% HST costs more than Mullvad's own price.
+    const ontario = { ...alberta, subdivision: 'CA-ON' };
+    await show(resultFor('mullvad', {}, [], ontario));
+    expect(query('.deals')).toBeNull();
+    await show(resultFor('mullvad', {}, [], { ...ontario, searchAllResellers: true }));
+    expect(shown('.deals')).toBe('Also at Amazon $87.00 / 12 mo + tax');
+    expect(shown('.deals-label')).toBe('Also sold at');
+  });
+
   it('expands to the plan’s details, and says so to screen readers', async () => {
     await show(resultFor('netflix'));
     const button = query<HTMLButtonElement>('button.expand');

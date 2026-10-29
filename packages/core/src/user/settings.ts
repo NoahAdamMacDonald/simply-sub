@@ -28,6 +28,11 @@ export const settingsSchema = z
     /** Search starts with "Sold in <country>" on (PROJECT-PLAN P8, P13, M5.6). Left out, it starts off. */
     searchSoldOnly: z.literal(true).optional(),
     /**
+     * Search lists every official reseller of a plan, cheaper or not (P8, P13, M5.13). Left out, only the ones that sell
+     * it for less.
+     */
+    searchAllResellers: z.literal(true).optional(),
+    /**
      * The lists the Calendar leaves out, as last chosen on this device (P10, §3.5, M7.4), so a list made since shows.
      * Left out, it shows them all.
      */

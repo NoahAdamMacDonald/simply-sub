@@ -136,6 +136,11 @@ export class SettingsPage {
     void this.settings.update({ searchSoldOnly: on ? true : undefined });
   }
 
+  /** Search lists every official reseller of a plan, cheaper or not (M5.13). Off by default. */
+  protected setAllResellers(on: boolean): void {
+    void this.settings.update({ searchAllResellers: on ? true : undefined });
+  }
+
   protected setMode(mode: ThemeMode): void {
     this.theme.setMode(mode);
   }

@@ -1101,7 +1101,8 @@ The rules live in `packages/core/src/tax/`: the rates and subdivision lists sinc
 ### 4.9 Resellers
 Some providers sell their subscription through other shops too: Mullvad's scratch cards are on Amazon and at
 Swedish and German retailers, sometimes for less than Mullvad's own price. The catalog lists these **resellers**,
-and Search shows one next to a plan's prices when it's cheaper for the buyer (M5.2).
+and Search shows one next to a plan's prices when it's cheaper for the buyer (M5.2), or each of them with Settings'
+"Show every reseller" on (off by default, M5.13): "Also at" for the ones that aren't cheaper.
 - **Only official resellers:** a shop is listed only when the provider's own site names it as one, and its listing
   quotes that page (`approvedBy: { url, quotes }`, on the provider's website's domain or one of its other sites'
   `domains`, such as Proton VPN's protonvpn.com, which validation checks). Partners that
