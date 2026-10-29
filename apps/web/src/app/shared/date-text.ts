@@ -41,3 +41,8 @@ export function monthText(iso: IsoMonth): string {
 function utc(iso: IsoDate): Date {
   return new Date(`${iso}T00:00:00Z`);
 }
+
+/** ", joins Nov 20" for an add-on that joins on a later day (an extra member Optimizations added, M8.5); else ''. */
+export function joinsText(addOn: { since?: IsoDate }, today: IsoDate): string {
+  return addOn.since !== undefined && addOn.since > today ? `, joins ${dayText(addOn.since)}` : '';
+}

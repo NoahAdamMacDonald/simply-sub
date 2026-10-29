@@ -450,7 +450,11 @@ class ModelBuilder {
             includesAll(keys, member.critical),
         );
         for (const chosen of subsets(members, 1, room)) {
-          const addOns = withAddOn(source.addOns, addOnId, chosen.length);
+          // Each member joins on its own next charge, when its own plan ends (M8.5).
+          const addOns = chosen.reduce<AddOnChoice[] | undefined>(
+            (list, member) => withAddOn(list, addOnId, 1, member.next ?? this.context.today),
+            source.addOns,
+          ) as AddOnChoice[];
           const hosted = this.resolve(
             { ...host.resolved.item, source: { ...source, addOns } },
             catalog,
@@ -867,15 +871,23 @@ export function keptAddOns(
 
 /** `addOns` with `count` more of one. */
 export function withAddOn(
-  addOns: readonly { id: string; quantity: number }[] | undefined,
+  addOns: readonly AddOnChoice[] | undefined,
   id: string,
   count: number,
-): { id: string; quantity: number }[] {
+  since?: IsoDate,
+): AddOnChoice[] {
   const list = [...(addOns ?? [])];
-  const index = list.findIndex((addOn) => addOn.id === id);
-  if (index >= 0) list[index] = { id, quantity: list[index].quantity + count };
-  else list.push({ id, quantity: count });
+  // One entry per day it joined: an extra member from Nov 20 never adds to the charges before it.
+  const index = list.findIndex((addOn) => addOn.id === id && addOn.since === since);
+  if (index >= 0) list[index] = { ...list[index], quantity: list[index].quantity + count };
+  else list.push({ id, quantity: count, ...(since !== undefined && { since }) });
   return list;
+}
+
+interface AddOnChoice {
+  id: string;
+  quantity: number;
+  since?: IsoDate;
 }
 
 /** A new item a bundle or suite adds, priced like its first member and billed from `on`. */
@@ -891,6 +903,8 @@ function newItem(first: ItemModel, source: ItemSource, price: PickedPrice, on: I
       interval: price.interval,
       intervalCount: price.intervalCount,
       anchorDate: on,
+      // Nothing before it starts: the items it replaces are paid for until then (M8.5).
+      startDate: on,
       autoRenew: price.autoRenew,
     },
     tagIds: [],

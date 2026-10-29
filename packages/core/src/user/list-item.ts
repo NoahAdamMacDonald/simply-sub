@@ -22,6 +22,11 @@ const positiveCount = z.int().positive('Must be a whole number of at least 1');
 const addOnChoiceSchema = z.strictObject({
   id: planIdSchema,
   quantity: positiveCount,
+  /**
+   * The day it joined, when that's after the item began (an extra member Optimizations adds when another account
+   * ends, M8.5): charges before then don't include it. The same add-on can be listed again with another day.
+   */
+  since: isoDateSchema.optional(),
 });
 
 /** What the item is: a catalog plan with its add-ons, a bundle (whose plans come from the catalog), or a custom plan. */
@@ -36,7 +41,9 @@ export const itemSourceSchema = z.discriminatedUnion('kind', [
         .optional(),
     })
     .superRefine((source, ctx) => {
-      const ids = (source.addOns ?? []).map((addOn) => addOn.id);
+      const ids = (source.addOns ?? []).map((addOn) =>
+        addOn.since === undefined ? addOn.id : `${addOn.id} (since ${addOn.since})`,
+      );
       addDuplicateIssues(ctx, ids, (index) => ['addOns', index, 'id']);
     }),
   z.strictObject({ kind: z.literal('bundle'), bundleId: bundleIdSchema }),

@@ -73,7 +73,9 @@ export function itemCharges(resolved: Chargeable, range: DateRange, place: TaxPl
   }
   for (const addOn of separate) {
     for (const date of chargeDates(billing, range, addOn.price)) {
-      if (!overridden(date)) add(date, { price: addOn.price, count: addOn.quantity });
+      if (!overridden(date) && joined(addOn, date)) {
+        add(date, { price: addOn.price, count: addOn.quantity });
+      }
     }
   }
 
@@ -178,9 +180,14 @@ function ownParts(resolved: Chargeable, date: IsoDate): Part[] {
   return [
     { price: resolved.price, count: 1 },
     ...resolved.addOns
-      .filter((addOn) => samePeriod(addOn.price, resolved.item.billing))
+      .filter((addOn) => samePeriod(addOn.price, resolved.item.billing) && joined(addOn, date))
       .map((addOn) => ({ price: addOn.price, count: addOn.quantity })),
   ];
+}
+
+/** Whether an add-on is on the item by `date`: one that joined later (an extra member, M8.5) isn't yet. */
+function joined(addOn: { since?: IsoDate }, date: IsoDate): boolean {
+  return addOn.since === undefined || addOn.since <= date;
 }
 
 /**

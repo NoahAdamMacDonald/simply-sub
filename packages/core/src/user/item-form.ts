@@ -41,7 +41,13 @@ export interface WindowForm {
 export interface AddOnForm {
   id: string;
   chosen: boolean;
+  /** How many in all, the ones that join later included. */
   quantity: number;
+  /**
+   * The ones that join on a later day (an extra member Optimizations added, M8.5), kept as they are while the quantity
+   * stays at least theirs.
+   */
+  joining: { quantity: number; since: string }[];
 }
 
 /**
@@ -527,9 +533,7 @@ function sourceFields(
 function itemSource(form: ItemForm): ItemSource {
   switch (form.kind) {
     case 'catalog': {
-      const addOns = form.addOns
-        .filter((addOn) => addOn.chosen)
-        .map(({ id, quantity }) => ({ id, quantity }));
+      const addOns = form.addOns.filter((addOn) => addOn.chosen).flatMap(addOnEntries);
       return { kind: 'catalog', planId: form.planId, ...(addOns.length > 0 && { addOns }) };
     }
     case 'bundle':
@@ -542,12 +546,36 @@ function itemSource(form: ItemForm): ItemSource {
 /** The plan's add-ons as the form lists them, the ones in `chosen` taken with their quantity. */
 function addOnRows(
   addOnIds: readonly string[],
-  chosen: readonly { id: string; quantity: number }[] = [],
+  chosen: readonly { id: string; quantity: number; since?: string }[] = [],
 ): AddOnForm[] {
   return addOnIds.map((id) => {
-    const taken = chosen.find((addOn) => addOn.id === id);
-    return { id, chosen: taken !== undefined, quantity: taken?.quantity ?? 1 };
+    // An add-on can be listed once more for each day some of it joins (M8.5): its row shows them all.
+    const taken = chosen.filter((addOn) => addOn.id === id);
+    const joining = taken.flatMap(({ quantity, since }) =>
+      since === undefined ? [] : [{ quantity, since }],
+    );
+    const quantity = taken.reduce((total, addOn) => total + addOn.quantity, 0);
+    return { id, chosen: taken.length > 0, quantity: quantity || 1, joining };
   });
+}
+
+/**
+ * A chosen row as the item lists it: the ones that join later keep their days while the quantity is at least theirs,
+ * and the rest are on the item from the start; a quantity below theirs is the user's own, with no days.
+ */
+function addOnEntries({ id, quantity, joining }: AddOnForm): ItemAddOn[] {
+  const later = joining.reduce((total, entry) => total + entry.quantity, 0);
+  if (later === 0 || quantity < later) return [{ id, quantity }];
+  return [
+    ...(quantity > later ? [{ id, quantity: quantity - later }] : []),
+    ...joining.map((entry) => ({ id, quantity: entry.quantity, since: entry.since })),
+  ];
+}
+
+interface ItemAddOn {
+  id: string;
+  quantity: number;
+  since?: string;
 }
 
 function billing(form: ItemForm, period: Period, context: ItemFormContext): Billing {

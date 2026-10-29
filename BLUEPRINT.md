@@ -837,7 +837,8 @@ export interface SubscriptionList {
 export interface ListItem {
   id: string; listId: string;
   source:
-    | { kind: 'catalog'; planId: string; addOns?: { id: string; quantity: number }[] }  // quantity ≥ 1
+    | { kind: 'catalog'; planId: string;
+        addOns?: { id: string; quantity: number; since?: string }[] }  // quantity ≥ 1; since: M8.5
     | { kind: 'bundle'; bundleId: string }   // the bundle's plans come from the catalog
     | { kind: 'custom'; customSubId: string; customPlanId: string };
   region?: string;                   // bought in another region than Settings.country (pickPrice's region)
@@ -938,7 +939,9 @@ Since M6.14 a rank changed in an item dialog is also written to the same provide
   it, every later date of a plan billed on the 31st would come out up to 3 days early (PROJECT-PLAN §3.1).
 - `region`: what pickPrice and availability use for this item, for services bought abroad. Settings' `country`
   is the default.
-- `addOns` with a quantity: a plan can allow two extra members (`addOnLimit: 2`).
+- `addOns` with a quantity: a plan can allow two extra members (`addOnLimit: 2`). `since` (M8.5) is the day an
+  add-on joined when that's after the item began: an extra member Optimizations adds joins on the day the account it
+  replaces ends, and charges before then don't include it. The same add-on can be listed again with another day.
 - `bundle` as its own kind: a bundle covers several plans, so it has no single `planId`.
 - `priceOverride.until`: a first-term offer ends (section 4.3); charges dated before `until` use the override.
 
@@ -2291,7 +2294,9 @@ Lives in `packages/core/src/optimizer/`. It's a **pure function**:
 2. Change interval (monthly → annual if cheaper over 12 months and the item renews automatically).
 3. Downgrade or switch plans within the same provider, including down to its free plan.
 4. Convert to an **add-on** of another item's plan (for example a second Netflix account becomes an extra member).
-5. Replace with a **bundle** or a **suite plan** (section 4.4) that covers two or more items.
+   The member joins on the day its own account's paid period ends (the add-on's `since`, M8.5).
+5. Replace with a **bundle** or a **suite plan** (section 4.4) that covers two or more items. It starts on the
+   earliest next charge of the items it replaces, with that as its start date, so it's never charged before (M8.5).
 6. Remove.
 7. (Phase 4) Move to a better card (an eligible network, within limits; section 9.3). Built in M9.3 as a free
    saving of its own (section 14).

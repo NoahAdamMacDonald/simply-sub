@@ -12,6 +12,7 @@ import { fingerprintOf, itemSignature } from './fingerprint';
 import { cardSuggestions } from './card-suggestions';
 import { buildModel, savingEpsilon, type OptimizerInput, type OptimizerModel } from './model';
 import { searchPlans } from './search';
+import { actionTitle } from './suggestion-text';
 import {
   severities,
   severityOfRank,
@@ -53,10 +54,15 @@ export function optimize(input: OptimizerInput): OptimizerResult {
   const byCard =
     cards.length > 0 ? cardSuggestions(model, cards, input.cardLoads, input.context, list) : [];
   suggestions.push(...byCard);
+  // Equal savings by their changes' titles, so the order never hangs on the items' ids.
+  const titles = new Map(
+    suggestions.map((suggestion) => [suggestion, suggestion.actions.map(actionTitle).join(' + ')]),
+  );
   suggestions.sort(
     (a, b) =>
       severities.indexOf(a.severity) - severities.indexOf(b.severity) ||
       b.savings - a.savings ||
+      (titles.get(a) ?? '').localeCompare(titles.get(b) ?? '', 'en') ||
       (a.fingerprint < b.fingerprint ? -1 : 1),
   );
   const best = evaluate(model, checks, plans[3]);

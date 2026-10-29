@@ -53,6 +53,8 @@ export interface ResolvedAddOn {
    * extra members monthly only, even on a yearly plan).
    */
   price: PickedPrice;
+  /** The day it joined, when after the item began (M8.5): its charges before then don't include it. */
+  since?: IsoDate;
 }
 
 /** A list item joined to what it is, priced for the user. */
@@ -192,13 +194,19 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
       const price = forPeriod(plan.prices, item, pricing);
       if (!price) return unresolved('no-price');
       const addOns: ResolvedAddOn[] = [];
-      for (const { id, quantity } of source.addOns ?? []) {
+      for (const { id, quantity, since } of source.addOns ?? []) {
         const addOn = provider.addOns?.find((candidate) => candidate.id === id);
         if (!addOn) return unresolved('add-on-gone');
         const picked = pickPrice(addOn.prices, pricing);
         const addOnPrice = picked.find((candidate) => samePeriod(candidate, item)) ?? picked[0];
         if (!addOnPrice) return unresolved('no-price');
-        addOns.push({ id, name: addOn.name, quantity, price: addOnPrice });
+        addOns.push({
+          id,
+          name: addOn.name,
+          quantity,
+          price: addOnPrice,
+          ...(since !== undefined && { since }),
+        });
       }
       const networks = acceptedNetworksIn(provider, region);
       parts = {

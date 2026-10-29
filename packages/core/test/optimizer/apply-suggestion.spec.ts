@@ -148,7 +148,8 @@ describe('suggestionEdits', () => {
     expect(host.source).toEqual({
       kind: 'catalog',
       planId: 'netflix.standard',
-      addOns: [{ id: 'netflix.extra-member', quantity: 1 }],
+      // From Sam's next charge, when Sam's own plan ends (M8.5).
+      addOns: [{ id: 'netflix.extra-member', quantity: 1, since: '2026-11-20' }],
     });
     expect(member.billing).toMatchObject({ endDate: '2026-11-20' });
   });

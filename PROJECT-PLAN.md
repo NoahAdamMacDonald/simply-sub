@@ -217,6 +217,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M8.2 | Optimizations page (P14) + "Apply" to a draft. As built: `ss-suggestion-card` in the sections, Apply through core's `suggestionEdits` onto the draft, Dismiss into `dismissedSuggestions` (its schema, repository, Dexie v3, sealed by the lock and in backups v2), List view's `ss-optimizations-link`, and `OptimizerService` with a Web Worker for lists over 12 items under the production CSP (BLUEPRINT §14) | P14 criteria met |
 | M8.3 | `apps/bot` nightly price check → GitHub PR (BLUEPRINT §6.4, §7.7), which also checks each `taxIncluded` quote is still on its page, rereads reseller prices and checks each reseller's approval quotes on the provider's page (BLUEPRINT §4.9); the same run proposes a new logo when a provider's or reseller's icon changed (a rebrand). As built: a cron-started Workflow with a step per provider, prices confirmed on their pages before any Workers AI, Browser Rendering as a fallback, YAML edited line by line, and one `Price updates <date>` PR on `bot/price-updates`; deployed by hand on 2026-10-28, with its token (BLUEPRINT §7.2, §14) | A changed price produces a PR, and so does a changed logo, a `taxIncluded` quote gone from its page or a reseller the provider no longer names |
 | M8.4 | Apply several optimizations (added 2026-10-28, the feedback after M9): Apply puts a card's changes on the list's draft and stays, the optimizer running on the list as its draft has it, so the next suggestion counts them; Undo puts the draft back (`ListDraftService.putBack`), and Review and save opens the editor (BLUEPRINT §10, §14) | Two suggestions applied one after the other are both in the editor's draft, and Undo takes back the last |
+| M8.5 | Apply replaces what a suggestion replaces (added 2026-10-29, the feedback after M3): a bundle or suite Optimizations adds starts on its first charge (`startDate`), and an extra member joins its host on the day the account it replaces ends (an add-on's optional `since`), so nothing new is charged before it starts and this year's past charges stay as they were; the optimizer prices them the same way; equal savings are listed by title (P14, BLUEPRINT §4.6, §10.3) | Replacing Crave Premium and Disney+ Premium with their bundle lowers this year's total and the next 12 months' by what the card said, never raises them; an extra member adds nothing to its host's charges before it joins; the item dialog keeps the day it joins unless its quantity changes |
 
 ### M9 — Payment (Phase 4)
 | ID | Task | Done when |
@@ -1457,6 +1458,13 @@ can follow: the suggestions are for the list as its draft has it, the card appli
 card (the first left, else Review and save). "Applied: <change>" has Undo, which puts the draft back as it was. A note
 says the list has changes not saved and that the suggestions count them, with Review and save, which opens the
 editor.
+
+**Since the feedback after M3 (M8.5):** what Apply adds never charges before it starts. A bundle or suite starts on
+the earliest next charge of the items it replaces, with that as its "Subscribed since", and each item it replaces ends
+on its own next charge, when what's paid for runs out. An extra member joins its host on the day the account it
+replaces ends (the add-on's `since`): the host's charges before then don't include it, and its card says "Extra
+member, joins Nov 20" until then. So the list never pays for both, and this year's past charges stay as they were:
+before, a bundle with no start date was counted as if it had been paid all year, which raised this year's total.
 
 **Acceptance**
 - [ ] The optimizer fixtures produce the expected cards and colours

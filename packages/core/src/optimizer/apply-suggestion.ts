@@ -10,8 +10,10 @@ import type { Suggestion, SuggestionAction } from './suggestion';
 // Apply (PROJECT-PLAN P14): a suggestion's changes as edits to its list's draft, which the editor opens with them, so
 // nothing is saved until Save. Each change takes effect on the item's next charge, as the savings assume: a removed
 // or replaced item ends then (it stays until what's paid for runs out), a plan or billing change re-anchors the item
-// on it, and a bundle or suite starts on the earliest next charge of the items it replaces. Specific dates have no
-// end date, so a removed one leaves the draft, and a plan change keeps its windows.
+// on it, and a bundle or suite starts on the earliest next charge of the items it replaces, with that as its start
+// date, and an extra member joins its host on the day its own plan ends (M8.5): nothing new is charged before it
+// starts, so this year's past charges stay as they were. Specific dates have no end date, so a removed one leaves the
+// draft, and a plan change keeps its windows.
 
 /** An item's fields, as the draft gives them an id, its list and the time. */
 export type NewItemFields = Omit<ListItem, 'id' | 'listId' | 'createdAt' | 'updatedAt'>;
@@ -88,7 +90,10 @@ export function suggestionEdits(
         const host = current(action.host.itemId);
         if (host?.source.kind === 'catalog') {
           change(host.id, {
-            source: { ...host.source, addOns: withAddOn(host.source.addOns, action.addOnId, 1) },
+            source: {
+              ...host.source,
+              addOns: withAddOn(host.source.addOns, action.addOnId, 1, action.on),
+            },
           });
         }
         end(action.item.itemId, action.on);
@@ -108,6 +113,7 @@ export function suggestionEdits(
             interval: action.to.interval,
             intervalCount: action.to.intervalCount,
             anchorDate: action.on,
+            startDate: action.on,
             autoRenew: action.to.autoRenew,
           },
           tagIds: [...new Set(members.flatMap((member) => member.tagIds))],

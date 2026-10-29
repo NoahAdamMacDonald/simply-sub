@@ -10,7 +10,7 @@ import {
   type Tag,
 } from '@simply-sub/core';
 import { billingText, renewalText } from '../../shared/billing-text';
-import { dateText } from '../../shared/date-text';
+import { dateText, joinsText } from '../../shared/date-text';
 import { amountText, intervalSpoken } from '../../shared/price-tag/price-text';
 
 // What the list editor (P5) says about each item of its draft: when it renews, from its next charge ("Renews Nov 12 ·
@@ -85,7 +85,7 @@ export function editRow(
     details: [
       // A free plan has nothing to bill.
       ...(shown.amount === 0 ? [] : [renewalText(item.billing, nextCharge, today)]),
-      ...addOns.map((addOn) => addOnLine(addOn, country)),
+      ...addOns.map((addOn) => addOnLine(addOn, country, today)),
       ...(override && priceOverride
         ? [
             priceOverride.until === undefined
@@ -102,11 +102,11 @@ export function editRow(
  * An add-on and what it costs, in words that read the same aloud (M6.12): "Extra member (with ads) for $7.99 a month",
  * "for about" when converted. Before tax, as its price tag is.
  */
-function addOnLine(addOn: ResolvedAddOn, country: string | undefined): string {
+function addOnLine(addOn: ResolvedAddOn, country: string | undefined, today: IsoDate): string {
   const { price } = addOn;
   const amount = amountText(price.amount * addOn.quantity, price.currency, country);
   const about = price.fx === undefined ? '' : 'about ';
-  return `${addOnText(addOn)} for ${about}${amount} ${intervalSpoken(price.interval, price.intervalCount)}`;
+  return `${addOnText(addOn)}${joinsText(addOn, today)} for ${about}${amount} ${intervalSpoken(price.interval, price.intervalCount)}`;
 }
 
 function customRanksText(count: number): string[] {

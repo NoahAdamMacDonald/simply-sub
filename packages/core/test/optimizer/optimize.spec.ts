@@ -165,9 +165,10 @@ describe('optimize: duplicates, family members and extra members', () => {
     const mine = item('netflix.standard', {}, { nickname: 'Mine' });
     const sams = item('netflix.standard', { anchorDate: '2026-11-20' }, { nickname: "Sam's" });
     const result = run([mine, sams], { 'streaming.ad-free': 'wanted' });
+    // Sam's extra member joins on Sam's next charge, so it adds nothing to Mine's charge before (M8.5).
     expect(cards(result)).toMatchInlineSnapshot(`
       [
-        "free | Make Sam's (Netflix Standard) an extra member on Mine (Netflix Standard) | save 138.60",
+        "free | Make Sam's (Netflix Standard) an extra member on Mine (Netflix Standard) | save 146.99",
         "yellow | Downgrade Mine (Netflix Standard) → Standard with ads | save 138.60 | lose streaming.ad-free (wanted)",
         "yellow | Downgrade Sam's (Netflix Standard) → Standard with ads | save 138.60 | lose streaming.ad-free (wanted)",
       ]
@@ -258,15 +259,15 @@ describe('optimize: a list too big for exhaustive search', () => {
     expect(result.search).toBe('greedy');
     expect(cards(result)).toMatchInlineSnapshot(`
       [
-        "free | Make Sam's (Netflix Standard) an extra member on Mine (Netflix Premium) + Make Alex's (Netflix Standard) an extra member on Mine (Netflix Premium) | save 277.20",
+        "free | Make Sam's (Netflix Standard) an extra member on Mine (Netflix Premium) + Make Alex's (Netflix Standard) an extra member on Mine (Netflix Premium) | save 293.98",
         "free | Replace Proton Mail Plus, Proton VPN Plus and Proton Pass Plus with Proton Unlimited | save 150.95 | gain storage.cloud=100-plus",
+        "free | Make Jo's (Netflix Standard) an extra member on Office (Netflix Premium) | save 127.05",
         "free | Replace Disney+ Premium and Crave Premium with Disney+ and Crave Premium Bundle | save 122.72",
-        "free | Make Jo's (Netflix Standard) an extra member on Office (Netflix Premium) | save 118.66",
         "free | Replace Cabin (Disney+ Premium) and Cabin (Crave Premium) with Disney+ and Crave Premium Bundle | save 112.50",
         "free | Switch Kids (Disney+ Standard) to annual billing | save 27.18",
         "red | Downgrade Proton Mail Plus → Free | save 78.62 | lose email.addresses=10-plus (not-ranked)",
         "red | Downgrade IVPN Pro → Standard | save 51.66 | lose vpn.multi-hop (not-ranked)",
-        "orange | Make Sam's (Netflix Standard) an extra member on Mine (Netflix Premium) + Make Office (Netflix Premium) an extra member on Mine (Netflix Premium) | save 340.20 | lose video.quality=4k (unused), video.hdr (unwanted)",
+        "orange | Make Sam's (Netflix Standard) an extra member on Mine (Netflix Premium) + Make Office (Netflix Premium) an extra member on Mine (Netflix Premium) | save 356.98 | lose video.quality=4k (unused), video.hdr (unwanted)",
         "yellow | Remove Mine (Netflix Premium) + Remove Sam's (Netflix Standard) + Remove Alex's (Netflix Standard) + Remove Disney+ Premium + Remove Crave Premium + Switch Kids (Disney+ Standard) to annual billing + Remove Den (Netflix Standard with ads) + Remove Office (Netflix Premium) + Remove Cabin (Crave Premium) + Remove Cabin (Disney+ Premium) + Downgrade Jo's (Netflix Standard) → Standard with ads | save 2279.61 | lose Mine (Netflix Premium), Sam's (Netflix Standard), Alex's (Netflix Standard), Disney+ Premium, Crave Premium, Den (Netflix Standard with ads), Office (Netflix Premium), Cabin (Crave Premium), Cabin (Disney+ Premium), video.quality=4k (unused), video.hdr (unwanted), streaming.ad-free (wanted)",
         "yellow | Remove Proton VPN Plus + Remove IVPN Pro | save 311.09 | lose Proton VPN Plus, IVPN Pro, vpn.multi-hop (not-ranked)",
       ]
