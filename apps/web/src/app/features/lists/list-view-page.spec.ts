@@ -250,7 +250,7 @@ describe('ListViewPage', () => {
     await open(work.id);
     expect(page().querySelector('.net-summary')).toBeNull();
     const card = await TestBed.inject(CardsRepository).create({
-      name: 'Simplii Cashback Mastercard',
+      name: 'Cash Back Mastercard',
       nickname: 'Everyday',
       type: 'credit',
       network: 'mastercard',

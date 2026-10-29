@@ -105,9 +105,9 @@ export const yearly: Extract<ListItem['billing'], { mode: 'recurring' }> = {
 const stamps = { createdAt: '2026-10-01T12:00:00.000Z', updatedAt: '2026-10-20T09:15:00.000Z' };
 
 /** A CAD Mastercard with 1.5% back, a 2.5% FX fee and a $500 limit. */
-export const simplii: PaymentCard = {
+export const cashBack: PaymentCard = {
   id: '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d3e',
-  name: 'Simplii Cashback Mastercard',
+  name: 'Cash Back Mastercard',
   type: 'credit',
   network: 'mastercard',
   currency: 'CAD',
@@ -120,7 +120,7 @@ export const simplii: PaymentCard = {
 /** A CAD Discover card with 2% back, a 2.5% FX fee and no limit. */
 export const discoverCard: PaymentCard = {
   id: '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d41',
-  name: 'Discover It',
+  name: 'Rewards Discover',
   type: 'credit',
   network: 'discover',
   currency: 'CAD',

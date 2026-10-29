@@ -376,11 +376,11 @@ It runs axe on the page, the dialog, its errors, the tile and the question, and 
 about 600 ms before a screenshot of the dialog's errors: they fade in, and the limit's label floats up meanwhile.
 `check-shell.cjs` knows Payment's heading, "Payment cards".
 
-M9.4 adds three cards (Everyday, a Mastercard at 1.5% with a $30 limit; Everyday Debit on Interac; Discover It at 2%)
-and Family open in the editor (an unsaved draft with Crave Premium), then, keyboard only:
+M9.4 adds three cards (Everyday, a Mastercard at 1.5% with a $30 limit; Everyday Debit on Interac; Rewards Discover at
+2%) and Family open in the editor (an unsaved draft with Crave Premium), then, keyboard only:
 - P11: Everyday's "Over its limit in <this month>: ≈ $116.46 of $30.00" with its bar red, and "≈ $27.56 after cash
-  back & FX fees"; Assign best cards, its preview (Work Related's Mullvad VPN from Everyday to Discover It, saving
-  ≈ $0.48; Family skipped, with its note), Apply (Mullvad's `cardId` in IndexedDB, Family's Crave Premium untouched,
+  back & FX fees"; Assign best cards, its preview (Work Related's Mullvad VPN from Everyday to Rewards Discover,
+  saving ≈ $0.48; Family skipped, with its note), Apply (Mullvad's `cardId` in IndexedDB, Family's Crave Premium untouched,
   the warning gone) and Undo;
 - P6: Netflix's "Paid with" menu with only No card and Everyday (no Interac or Discover in Canada); No card by
   typeahead, the Best card chip next in the Tab order ("Best card: Everyday, saves $0.30 / mo"), Enter on it, and the

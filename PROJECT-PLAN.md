@@ -224,6 +224,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M9.2 | `acceptedNetworks` in the data and the extraction pipeline (the schema has validated the field since M1.1). As built: per region, each with its page and quotes (the user's choice), core's `networksNamedIn`; read for all ten providers (five name none); the price-research skill and §6.5's extraction record it, and the nightly bot rechecks it (BLUEPRINT §14) | The pipeline fills it |
 | M9.3 | core: eligibility, FX and cash-back maths, card assignment, limit checks (BLUEPRINT §9.3). As built: core's `rewards/` (`networkRate`, `cardCost`, `cardAcceptance`, `itemOnCard`, `cardLoads`, `overLimits`, `monthlyOnCard`, `bestCard`, `assignCards`), `Charge.charged` and `ResolvedItem.acceptedNetworks`, and the optimizer's `card` action; open question 1 decided with the user (BLUEPRINT §14) | Tests pass |
 | M9.4 | Card select in the item dialog, net-cost displays, over-limit warnings. As built: the item dialog's Payment (only the cards its seller takes, the Best card chip and notes on acceptance and FX fees), List view's net in its header and on its cards, P11's Assign best cards (a preview per list, lists with unsaved edits skipped, Apply with Undo through `CardsRepository.assign`) and each tile's net and over-limit warning, the Calendar's days that take a card over its limit with the card in the day's panel, and the optimizer's card action wired in (BLUEPRINT §14) | All visible on P4, P6, P10 and P11 |
+| M9.5 | Examples that name no real card (added 2026-10-28, UI polish): the card dialog's Name hint ("As on the card: Cash Back Mastercard"), and every example card in the docs and the tests ("Cash Back Mastercard", "Rewards Mastercard", "Rewards Discover"), where real products were named | No real card product is named in the app, the docs or the tests; the card dialog's hint shows the generic example |
 
 ### M10 — Extras (Phase 5)
 Live calendar feed (`POST /cal`), encrypted device sync, "report a wrong price", PWA install and offline mode,
@@ -866,7 +867,7 @@ Opened from P5 to add or edit an item. It goes full screen under 600 px.
 │ Simultaneous streams · 2–4   [ Profile default (Not ranked)    ▾ ]        │
 │                                                                           │
 │ TAGS     [#family ✕] [+ Add tag]                                          │
-│ PAYMENT  [ Simplii Cashback ▾ ]  Best card: saves $0.27 / mo   (Phase 4)  │
+│ PAYMENT  [ Cash Back Mastercard ▾ ]  Best card: saves $0.27/mo (Phase 4)  │
 │                                                                           │
 │ ≈ $18.99 / mo · next charge Nov 12               [Cancel] [Add to list]   │
 └───────────────────────────────────────────────────────────────────────────┘
@@ -1225,7 +1226,7 @@ Upcoming   Oct 28 Crave $22.00 · Nov 3 Mullvad ≈ $7.53 ↻ · Nov 12 Netflix 
 Payment cards                                                          [+ Add card]
 We never ask for card numbers, only what's needed to estimate cash back and fees.
 ┌──────────────────────────────────────┐  ┌──────────────────────────────────────┐
-│ Simplii Cashback        [MC]  CREDIT │  │ Everyday Debit      [Interac]  DEBIT │
+│ Cash Back Mastercard    [MC]  CREDIT │  │ Everyday Debit      [Interac]  DEBIT │
 │ 1.5% cash back · FX fee 2.5%         │  │ 0% cash back · FX fee 2.5%           │
 │ This month [███████░░░] $60 of $500  │  │ No limit                             │
 │ Netflix $18.99 · Proton ≈ $17.93     │  │ No subscriptions                     │
@@ -1265,8 +1266,8 @@ We never ask for card numbers, only what's needed to estimate cash back and fees
   fees"). Under the limit bar, the first of the next 12 months whose charges go over it: "Over its limit in October
   2026: ≈ $116.46 of $30.00, and in 1 more month", read with "Warning:" (the bar is red when it's this month).
 - **Assign best cards** under the tiles, after "1 subscription has no card" (turned off while prices load). Its dialog
-  has a heading per list with changes and a row per item ("Mullvad VPN · Everyday → Discover It · saves ≈ $0.48 a
-  year"), a note for each list with unsaved edits ("Family has changes in the editor that aren't saved, so its
+  has a heading per list with changes and a row per item ("Mullvad VPN · Everyday → Rewards Discover · saves ≈ $0.48
+  a year"), a note for each list with unsaved edits ("Family has changes in the editor that aren't saved, so its
   subscriptions keep their cards."), and the total over the next 12 months. Apply writes the cards to the saved items
   in one transaction, with Undo in the snackbar. With nothing to change: "Every subscription is on its best card
   already." and Close.

@@ -2185,7 +2185,7 @@ export type CardNetwork = 'visa' | 'mastercard' | 'amex' | 'discover' | 'interac
 
 export interface PaymentCard {
   id: string;
-  name: string;                 // "Simplii Cashback Mastercard"
+  name: string;                 // "Cash Back Mastercard"
   nickname?: string;            // shown instead of name if set
   type: 'credit' | 'debit';
   network: CardNetwork;
@@ -2698,8 +2698,8 @@ The user's sixteen fixes and improvements after M9, as M5.11–M5.12, M6.12–M6
   flags the charge that takes a card over and its later ones that month, on the day and in the agenda, and the day's
   panel names each charge's card, and the warning. Every list's charges count, shown or not.
 - **The optimizer's card action, wired in:** `OptimizerService` passes the cards and what the other lists' items post
-  to each (`cardLoads`), and waits for the cards to load. List view's suggestion reads "With Discover It instead of
-  Everyday, from now on".
+  to each (`cardLoads`), and waits for the cards to load. List view's suggestion reads "With Rewards Discover
+  instead of Everyday, from now on".
 - **Bundle:** the initial bundle is 496.39 kB, as since M9.1 (497.31 kB before M9).
 - **Checks:** `check-payment.cjs` (185 checks, both themes at 360 and 1280 px, keyboard only) on `ng serve` and under
   `wrangler dev`'s production CSP, csp-check, and the list-view, item-dialog, calendar, backup, app-lock, optimizations

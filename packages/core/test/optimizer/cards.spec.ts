@@ -13,9 +13,9 @@ import { catalog, cards, fx, item, resolveAll, today } from './fixtures';
 // The fixtures' providers name no networks, so every card can pay for anything. Alberta's 5% GST.
 
 const stamps = { createdAt: '2026-10-01T12:00:00.000Z', updatedAt: '2026-10-20T09:15:00.000Z' };
-const simplii: PaymentCard = {
+const cashBack: PaymentCard = {
   id: '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d3e',
-  name: 'Simplii Cashback Mastercard',
+  name: 'Cash Back Mastercard',
   nickname: 'Everyday',
   type: 'credit',
   network: 'mastercard',
@@ -25,9 +25,9 @@ const simplii: PaymentCard = {
   monthlyLimit: 30,
   ...stamps,
 };
-const tangerine: PaymentCard = {
+const rewardsCard: PaymentCard = {
   id: '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d43',
-  name: 'Tangerine Money-Back',
+  name: 'Rewards Mastercard',
   type: 'credit',
   network: 'mastercard',
   currency: 'CAD',
@@ -71,7 +71,7 @@ describe('optimize: a better card', () => {
       {},
       { rankOverrides: { 'video.quality=4k': 'essential' } },
     );
-    const result = run([essential], { cards: [tangerine, simplii] });
+    const result = run([essential], { cards: [rewardsCard, cashBack] });
     expect(cards(result)).toEqual([
       'free | Pay for Netflix Premium with a better card | save 4.53',
     ]);
@@ -81,7 +81,7 @@ describe('optimize: a better card', () => {
       {
         kind: 'card',
         item: expect.objectContaining({ itemId: essential.id, title: 'Netflix Premium' }),
-        cardId: simplii.id,
+        cardId: cashBack.id,
         cardTitle: 'Everyday',
       },
     ]);
@@ -90,43 +90,45 @@ describe('optimize: a better card', () => {
   });
 
   it('moves an item only to a card that does better than its own', () => {
-    const onTangerine = item('netflix.premium', {}, { cardId: tangerine.id });
-    const [suggestion] = byCard(run([onTangerine], { cards: [tangerine, simplii] }));
+    const onRewards = item('netflix.premium', {}, { cardId: rewardsCard.id });
+    const [suggestion] = byCard(run([onRewards], { cards: [rewardsCard, cashBack] }));
     expect(suggestion.actions).toMatchObject([
-      { kind: 'card', cardId: simplii.id, fromCardTitle: 'Tangerine Money-Back' },
+      { kind: 'card', cardId: cashBack.id, fromCardTitle: 'Rewards Mastercard' },
     ]);
     expect(suggestion.savings).toBeCloseTo(premiumYear * 0.005);
-    const onSimplii = item('netflix.premium', {}, { cardId: simplii.id });
-    expect(byCard(run([onSimplii], { cards: [tangerine, simplii] }))).toEqual([]);
+    const onCashBack = item('netflix.premium', {}, { cardId: cashBack.id });
+    expect(byCard(run([onCashBack], { cards: [rewardsCard, cashBack] }))).toEqual([]);
   });
 
   it('fits each card’s limit, with what’s on it already, and the suggestions fit together', () => {
-    // $25.19 a month each: Simplii's $30 takes one.
+    // $25.19 a month each: the Cash Back card's $30 takes one.
     const mine = item('netflix.premium');
     const sams = item('netflix.premium');
-    const both = run([mine, sams], { cards: [tangerine, simplii] });
+    const both = run([mine, sams], { cards: [rewardsCard, cashBack] });
     expect(byCard(both).map((suggestion) => suggestion.actions[0])).toMatchObject([
-      { kind: 'card', cardId: simplii.id },
-      { kind: 'card', cardId: tangerine.id },
+      { kind: 'card', cardId: cashBack.id },
+      { kind: 'card', cardId: rewardsCard.id },
     ]);
-    // Another list's items fill Simplii in one of the 12 months: Tangerine it is.
-    const loads = new Map([[simplii.id, [0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0]]]);
-    const outside = run([mine], { cards: [tangerine, simplii], loads });
-    expect(byCard(outside)[0].actions).toMatchObject([{ cardId: tangerine.id }]);
+    // Another list's items fill the Cash Back card in one of the 12 months: the Rewards card it is.
+    const loads = new Map([[cashBack.id, [0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0]]]);
+    const outside = run([mine], { cards: [rewardsCard, cashBack], loads });
+    expect(byCard(outside)[0].actions).toMatchObject([{ cardId: rewardsCard.id }]);
   });
 
   it('gives a new fingerprint once the item’s card changes', () => {
     const plain = item('netflix.premium');
-    const first = byCard(run([plain], { cards: [tangerine, simplii] }))[0].fingerprint;
-    const again = byCard(run([plain], { cards: [tangerine, simplii] }))[0].fingerprint;
-    const onTangerine = run([{ ...plain, cardId: tangerine.id }], { cards: [tangerine, simplii] });
+    const first = byCard(run([plain], { cards: [rewardsCard, cashBack] }))[0].fingerprint;
+    const again = byCard(run([plain], { cards: [rewardsCard, cashBack] }))[0].fingerprint;
+    const onRewards = run([{ ...plain, cardId: rewardsCard.id }], {
+      cards: [rewardsCard, cashBack],
+    });
     expect(again).toBe(first);
-    expect(byCard(onTangerine)[0].fingerprint).not.toBe(first);
+    expect(byCard(onRewards)[0].fingerprint).not.toBe(first);
   });
 
   it('applies as the item’s card in the draft, changing nothing else', () => {
     const premium = item('netflix.premium');
-    const [suggestion] = byCard(run([premium], { cards: [simplii] }));
+    const [suggestion] = byCard(run([premium], { cards: [cashBack] }));
     expect(suggestionEdits(suggestion, new Map([[premium.id, premium]]))).toEqual([
       {
         kind: 'change',
@@ -135,7 +137,7 @@ describe('optimize: a better card', () => {
           source: premium.source,
           billing: premium.billing,
           priceOverride: undefined,
-          cardId: simplii.id,
+          cardId: cashBack.id,
         },
       },
     ]);

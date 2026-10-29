@@ -7,7 +7,7 @@ import {
   ontario,
   otherListId,
   resolved,
-  simplii,
+  cashBack,
   today,
 } from './fixtures';
 
@@ -18,10 +18,10 @@ const context = { today, currency: 'CAD', place: ontario, fx: canadian.fx };
 const netflixYear = 12 * 18.99 * 1.13;
 
 /** A CAD Mastercard with 1% back and no limit. */
-const tangerine: PaymentCard = {
-  ...simplii,
+const rewardsCard: PaymentCard = {
+  ...cashBack,
   id: '0192f1c8-4f50-7162-bd7e-8f9a0b1c2d43',
-  name: 'Tangerine Money-Back',
+  name: 'Rewards Mastercard',
   cashbackPercent: 1,
   monthlyLimit: undefined,
 };
@@ -32,7 +32,7 @@ describe('assignCards', () => {
     const netflix = resolved('netflix.standard');
     const { changes, savings } = assignCards({
       items: [netflix],
-      cards: [debitCard, discoverCard, tangerine, simplii],
+      cards: [debitCard, discoverCard, rewardsCard, cashBack],
       context,
     });
     expect(changes).toEqual([
@@ -40,7 +40,7 @@ describe('assignCards', () => {
         itemId: netflix.item.id,
         listId: netflix.listId,
         title: 'Netflix Standard',
-        to: simplii.id,
+        to: cashBack.id,
         savings: expect.closeTo(netflixYear * 0.015, 6),
         estimated: false,
       },
@@ -49,54 +49,58 @@ describe('assignCards', () => {
   });
 
   it('keeps within each card’s limit: the next best card takes what doesn’t fit', () => {
-    const tight = { ...simplii, monthlyLimit: 30 };
+    const tight = { ...cashBack, monthlyLimit: 30 };
     const mine = resolved('netflix.standard');
     const sams = resolved('netflix.standard', { listId: otherListId });
-    const { changes } = assignCards({ items: [mine, sams], cards: [tangerine, tight], context });
+    const { changes } = assignCards({ items: [mine, sams], cards: [rewardsCard, tight], context });
     expect(changes.map((change) => [change.itemId, change.to])).toEqual([
       [mine.item.id, tight.id],
-      [sams.item.id, tangerine.id],
+      [sams.item.id, rewardsCard.id],
     ]);
   });
 
   it('leaves a fixed item on its card, counting its charges against the limit', () => {
-    const tight = { ...simplii, monthlyLimit: 30 };
+    const tight = { ...cashBack, monthlyLimit: 30 };
     const kept = resolved('netflix.standard', { cardId: tight.id });
     const free = resolved('netflix.standard', { listId: otherListId });
     const { changes } = assignCards({
       items: [kept, free],
-      cards: [tangerine, tight],
+      cards: [rewardsCard, tight],
       fixed: new Set([kept.item.id]),
       context,
     });
     expect(changes.map((change) => [change.itemId, change.to])).toEqual([
-      [free.item.id, tangerine.id],
+      [free.item.id, rewardsCard.id],
     ]);
   });
 
   it('moves an item off a card its seller doesn’t take, and leaves one on its best card', () => {
     const onDebit = resolved('netflix.standard', { cardId: debitCard.id });
-    const onSimplii = resolved('crave.standard', { cardId: simplii.id });
+    const onCashBack = resolved('crave.standard', { cardId: cashBack.id });
     const { changes } = assignCards({
-      items: [onDebit, onSimplii],
-      cards: [debitCard, tangerine, simplii],
+      items: [onDebit, onCashBack],
+      cards: [debitCard, rewardsCard, cashBack],
       context,
     });
     expect(changes).toMatchObject([
-      { itemId: onDebit.item.id, from: debitCard.id, to: simplii.id },
+      { itemId: onDebit.item.id, from: debitCard.id, to: cashBack.id },
     ]);
   });
 
   it('gives no card to an item every card would cost more in FX fees than it pays back', () => {
     // Bought in the US: charged in US dollars, and every card here is in CAD with a 2.5% fee.
     const american = resolved('netflix.standard', { region: 'US' });
-    const { changes } = assignCards({ items: [american], cards: [discoverCard, simplii], context });
+    const { changes } = assignCards({
+      items: [american],
+      cards: [discoverCard, cashBack],
+      context,
+    });
     expect(changes).toEqual([]);
     // With a card already, it moves to the one that costs the least.
-    const paid = resolved('netflix.standard', { region: 'US', cardId: simplii.id });
-    const moved = assignCards({ items: [paid], cards: [discoverCard, simplii], context });
+    const paid = resolved('netflix.standard', { region: 'US', cardId: cashBack.id });
+    const moved = assignCards({ items: [paid], cards: [discoverCard, cashBack], context });
     expect(moved.changes).toMatchObject([
-      { from: simplii.id, to: discoverCard.id, estimated: true },
+      { from: cashBack.id, to: discoverCard.id, estimated: true },
     ]);
     expect(moved.changes[0].savings).toBeGreaterThan(0);
   });

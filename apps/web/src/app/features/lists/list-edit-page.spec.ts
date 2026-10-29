@@ -54,8 +54,8 @@ class Elsewhere {}
 const unknownId = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d';
 
 /** A CAD Mastercard with 1.5% back and a 2.5% FX fee, and an Interac debit card with nothing back. */
-const simpliiFields: NewRecord<'cards'> = {
-  name: 'Simplii Cashback Mastercard',
+const cashBackFields: NewRecord<'cards'> = {
+  name: 'Cash Back Mastercard',
   nickname: 'Everyday',
   type: 'credit',
   network: 'mastercard',
@@ -991,7 +991,7 @@ describe('ListEditPage', () => {
     });
 
     it('changes an item in the draft, keeping its id, pinning and card', async () => {
-      const cardId = (await TestBed.inject(CardsRepository).create(simpliiFields)).id;
+      const cardId = (await TestBed.inject(CardsRepository).create(cashBackFields)).id;
       await TestBed.inject(ItemsRepository).update(netflix.id, { pinned: true, cardId });
       await open(editor());
       await click('Edit Netflix Standard');
@@ -1048,7 +1048,7 @@ describe('ListEditPage', () => {
 
       it('offers the cards, the best one as a chip with what it saves, and saves the one chosen', async () => {
         const cards = TestBed.inject(CardsRepository);
-        const simplii = await cards.create(simpliiFields);
+        const cashBack = await cards.create(cashBackFields);
         await cards.create(debitFields);
         await open(editor());
         await click('Edit Netflix Standard');
@@ -1081,12 +1081,12 @@ describe('ListEditPage', () => {
         ]);
         await press(loader, 'Save');
         await until(() => dialog() === null);
-        expect((await draftItem(netflix.id))?.cardId).toBe(simplii.id);
+        expect((await draftItem(netflix.id))?.cardId).toBe(cashBack.id);
       });
 
       it('says a card pays FX fees on a charge in another currency: Mullvad’s euros', async () => {
-        const simplii = await TestBed.inject(CardsRepository).create(simpliiFields);
-        await TestBed.inject(ItemsRepository).update(mullvad.id, { cardId: simplii.id });
+        const cashBack = await TestBed.inject(CardsRepository).create(cashBackFields);
+        await TestBed.inject(ItemsRepository).update(mullvad.id, { cardId: cashBack.id });
         await open(editor());
         await click('Edit Mullvad VPN');
         await dialogLoader();
@@ -1100,7 +1100,7 @@ describe('ListEditPage', () => {
       it('offers only the cards its seller takes, and drops one it doesn’t, saying so', async () => {
         catalogData = withNetworks;
         const cards = TestBed.inject(CardsRepository);
-        await cards.create(simpliiFields);
+        await cards.create(cashBackFields);
         const debit = await cards.create(debitFields);
         await TestBed.inject(ItemsRepository).update(netflix.id, { cardId: debit.id });
         await open(editor());

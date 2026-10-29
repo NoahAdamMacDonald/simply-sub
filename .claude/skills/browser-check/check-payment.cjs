@@ -336,18 +336,18 @@ function thisMonthText() {
   return `${now.toLocaleString('en', { month: 'long' })} ${now.getFullYear()}`;
 }
 
-/** Everyday (Mastercard, 1.5%, a $30 limit), Everyday Debit (Interac) and Discover It (Discover, 2%), all in CAD. */
+/** Everyday (Mastercard, 1.5%, a $30 limit), Everyday Debit (Interac) and Rewards Discover (Discover, 2%), all in CAD. */
 async function plantCards(page) {
   await putRecord(
     page,
     'cards',
-    card(EVERYDAY, 'Simplii Cashback Mastercard', 'mastercard', 1.5, {
+    card(EVERYDAY, 'Cash Back Mastercard', 'mastercard', 1.5, {
       nickname: 'Everyday',
       monthlyLimit: 30,
     }),
   );
   await putRecord(page, 'cards', card(DEBIT, 'Everyday Debit', 'interac', 0));
-  await putRecord(page, 'cards', card(DISCOVER, 'Discover It', 'discover', 2));
+  await putRecord(page, 'cards', card(DISCOVER, 'Rewards Discover', 'discover', 2));
   await plantList(page, EVERYDAY);
   // Crave Premium moves to Family, which is open in the editor (an unsaved draft).
   const { netflix } = dates();
@@ -448,9 +448,9 @@ async function checkM94(page, label, viewport, shot) {
     }),
   );
   check(
-    `${label}: Assign best cards previews each list: Mullvad’s euros cost least on Discover It`,
+    `${label}: Assign best cards previews each list: Mullvad’s euros cost least on Rewards Discover`,
     JSON.stringify(rows) ===
-      JSON.stringify(['Mullvad VPN | Everyday → to Discover It | ≈ $0.48']) &&
+      JSON.stringify(['Mullvad VPN | Everyday → to Rewards Discover | ≈ $0.48']) &&
       (await preview.locator('h3').first().textContent()).trim() === 'Work Related',
     JSON.stringify(rows),
   );
@@ -465,7 +465,7 @@ async function checkM94(page, label, viewport, shot) {
   await page.keyboard.press('Enter');
   await preview.waitFor({ state: 'detached' });
   await until(
-    'Mullvad on Discover It',
+    'Mullvad on Rewards Discover',
     async () =>
       (await readTable(page, 'items')).find((item) => item.id === MULLVAD)?.cardId === DISCOVER,
   );
@@ -714,7 +714,7 @@ async function checkM94(page, label, viewport, shot) {
       );
       await axeCheck(page, `${label}, the dialog's errors`);
 
-      await page.keyboard.type('Simplii 4111 1111 1111 1111');
+      await page.keyboard.type('Cash Back 4111 1111 1111 1111');
       await keyTo(page, fieldIn('ss-card-dialog', 'Monthly limit'));
       await page.keyboard.type('5500000000000004');
       await keyTo(page, buttonIn('ss-card-dialog', 'Add card'));
@@ -736,7 +736,7 @@ async function checkM94(page, label, viewport, shot) {
       // The card, field by field, as typed: the selects by typeahead.
       await keyTo(page, fieldIn('ss-card-dialog', 'Name'), 'Shift+Tab');
       await page.keyboard.press('Control+A');
-      await page.keyboard.type('Simplii Cashback Mastercard');
+      await page.keyboard.type('Cash Back Mastercard');
       await page.keyboard.press('Tab');
       await page.keyboard.type('Everyday');
       await keyTo(page, fieldIn('ss-card-dialog', 'Type'));
@@ -761,7 +761,7 @@ async function checkM94(page, label, viewport, shot) {
       });
       check(
         `${label}: Add stores the card, and nothing like a card number`,
-        card.name === 'Simplii Cashback Mastercard' &&
+        card.name === 'Cash Back Mastercard' &&
           card.nickname === 'Everyday' &&
           card.type === 'credit' &&
           card.network === 'mastercard' &&

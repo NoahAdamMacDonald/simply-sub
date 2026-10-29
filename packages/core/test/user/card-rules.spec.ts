@@ -54,10 +54,8 @@ describe('looksLikeCardNumber', () => {
 
 describe('cardTitle and cardNetworkNames', () => {
   it('calls a card by its nickname, else its name', () => {
-    expect(cardTitle({ name: 'Simplii Cashback Mastercard', nickname: 'Everyday' })).toBe(
-      'Everyday',
-    );
-    expect(cardTitle({ name: 'Simplii Cashback Mastercard' })).toBe('Simplii Cashback Mastercard');
+    expect(cardTitle({ name: 'Cash Back Mastercard', nickname: 'Everyday' })).toBe('Everyday');
+    expect(cardTitle({ name: 'Cash Back Mastercard' })).toBe('Cash Back Mastercard');
   });
 
   it('names every network', () => {
@@ -139,7 +137,7 @@ describe('withoutCard', () => {
 
 describe('the card form', () => {
   const filled: CardForm = {
-    name: ' Simplii Cashback Mastercard ',
+    name: ' Cash Back Mastercard ',
     nickname: '',
     type: 'credit',
     network: 'mastercard',
@@ -212,7 +210,7 @@ describe('the card form', () => {
 
   it('saves a trimmed card, with no cash back or FX fee when they were left empty', () => {
     expect(cardFromForm({ ...filled, cashbackPercent: '', fxFeePercent: ' ' })).toEqual({
-      name: 'Simplii Cashback Mastercard',
+      name: 'Cash Back Mastercard',
       type: 'credit',
       network: 'mastercard',
       currency: 'CAD',

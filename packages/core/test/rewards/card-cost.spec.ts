@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { cardCost, networkRate } from '../../src';
-import { canadian, dollarCard, simplii } from './fixtures';
+import { canadian, dollarCard, cashBack } from './fixtures';
 
 // BLUEPRINT §9.3's formula: the charge with tax, in the card's currency at the network's rate (the ECB's), the FX fee
 // when the currencies differ, and cash back on the full posted amount.
@@ -19,7 +19,7 @@ describe('networkRate', () => {
 
 describe('cardCost', () => {
   it('has no FX fee in the card’s own currency, and cash back on the charge', () => {
-    const cost = cardCost({ amount: 21.4587, currency: 'CAD' }, simplii, fx);
+    const cost = cardCost({ amount: 21.4587, currency: 'CAD' }, cashBack, fx);
     expect(cost).toMatchObject({ inCardCurrency: 21.4587, fxFee: 0, posted: 21.4587 });
     expect(cost?.cashback).toBeCloseTo(21.4587 * 0.015);
     expect(cost?.net).toBeCloseTo(21.4587 * 0.985);
@@ -28,7 +28,7 @@ describe('cardCost', () => {
 
   it('adds the FX fee to a charge in another currency, and pays cash back on both (Mullvad’s euros)', () => {
     // Mullvad charges in euros, whatever card pays (the user's choice for open question 1).
-    const cost = cardCost({ amount: 60, currency: 'EUR' }, simplii, fx);
+    const cost = cardCost({ amount: 60, currency: 'EUR' }, cashBack, fx);
     const inCad = 60 * eurToCad;
     expect(cost?.inCardCurrency).toBeCloseTo(inCad);
     expect(cost?.fxFee).toBeCloseTo(inCad * 0.025);
@@ -46,6 +46,6 @@ describe('cardCost', () => {
   });
 
   it('is undefined for want of a rate', () => {
-    expect(cardCost({ amount: 60, currency: 'EUR' }, simplii, undefined)).toBeUndefined();
+    expect(cardCost({ amount: 60, currency: 'EUR' }, cashBack, undefined)).toBeUndefined();
   });
 });
