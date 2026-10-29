@@ -196,6 +196,19 @@ describe('OptimizationsPage', () => {
     expect(page().querySelector('.unsaved')).toBeNull();
   });
 
+  it('closes Applied’s snackbar when the page is left, its Undo being for this page (M8.6)', async () => {
+    await plant();
+    await open(work.id);
+    await until(() => button('Apply: Switch Netflix Standard') !== null, 5000);
+    button('Apply: Switch Netflix Standard')?.click();
+    const snack = () => document.querySelector('.mat-mdc-snack-bar-container');
+    await until(() => text(snack())?.startsWith('Applied:') === true, 5000);
+    await harness.navigateByUrl(`/lists/${work.id}/optimize/review`);
+    await until(() => snack() === null, 5000);
+    // The draft stays, for Review changes.
+    expect(TestBed.inject(DraftsRepository).byList().has(work.id)).toBe(true);
+  });
+
   it('hides a dismissed card until the list changes, and Show dismissed brings it back', async () => {
     await plant();
     await open(work.id);
