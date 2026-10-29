@@ -4,9 +4,11 @@ import { defineConfig } from 'vitest/config';
 import { parse } from 'yaml';
 
 // Route tests run inside workerd with the bindings from wrangler.jsonc (BLUEPRINT §13.3). Each test
-// file gets a local D1 with the migrations applied (test/apply-migrations.ts).
+// file gets a local D1 for the catalog and one for user data, each with its migrations applied
+// (test/apply-migrations.ts).
 export default defineConfig(async () => {
   const migrations = await readD1Migrations('./migrations');
+  const userMigrations = await readD1Migrations('./migrations-user');
   return {
     plugins: [
       cloudflareTest({
@@ -14,6 +16,7 @@ export default defineConfig(async () => {
         miniflare: {
           bindings: {
             TEST_MIGRATIONS: migrations,
+            TEST_USER_MIGRATIONS: userMigrations,
             TEST_CATALOG: await readCatalog(),
             // For test/static-headers.spec.ts: the CSP must hash index.html's inline script.
             TEST_STATIC: {

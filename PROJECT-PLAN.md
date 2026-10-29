@@ -295,10 +295,16 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 - **Contract:** new error codes for a body too large (413), a stale sync version (412) and a daily cap reached (503,
   with `Retry-After`), in the examples' `errorCodes` and core's `errorBodySchema`.
 - **Acceptance**
-  - [ ] Over each limit the Worker answers with its code and writes nothing; the daily caps hold under a loop of
+  - [x] Over each limit the Worker answers with its code and writes nothing; the daily caps hold under a loop of
         writes (Worker tests)
-  - [ ] No token, key or chain id appears in a log line, with every route made to throw in tests
-  - [ ] The nightly clean-up deletes only what has expired
+  - [ ] No token, key or chain id appears in a log line, with every route made to throw in tests (with the routes,
+        M10.2 and M10.8)
+  - [x] The nightly clean-up deletes only what has expired
+- **As built:** `apps/api/src/writes.ts` (`writeLimit` on every `/api/*` write, `resourceAllowed`, `readBody` and
+  `readJson`, `countWrite` with `dailyCaps` and `storageCap`, `capReached` and `storageFull`, `newSecret`,
+  `secretHash`, `isSecretOf` and `bearerSecret`), `src/clean-up.ts` from the Worker's `scheduled` handler (its default
+  export is now `{ fetch, scheduled }`), the user database's first migration (`daily_counts`), and core's new error
+  codes with `bodyProblemSchema`. Tested in `apps/api/test/writes.spec.ts`.
 
 **M10.2 — Live calendar feeds, the API** (BLUEPRINT §5.2, §11.3)
 - **A feed set**, made by one device: a calendar for everything, one for each tag chosen and one for payments
@@ -1880,8 +1886,8 @@ item's next charge, plus tax where the catalog's price is before tax, and Review
 - **Contract first:** `docs/api-output-examples.json` holds an example request and response for every endpoint.
   Implement the endpoints in M2 order; task M2.7 makes the examples part of the test suite.
 - **Envelope:** `{ "data": …, "meta": … }` on success, `{ "error": { "code", "message", "details?" } }` on failure.
-- **Error codes:** `bad_request` (400), `forbidden` (403), `not_found` (404), `rate_limited` (429), `upstream_unavailable` (502), `internal` (500).
-- **Limits and headers:** 60 requests a minute per IP, 10 on `/icon` (`429 rate_limited`, `Retry-After: 60`); every `/api/*` response carries the CORS header and the security headers (BLUEPRINT §5.4).
+- **Error codes:** `bad_request` (400), `forbidden` (403), `not_found` (404), `stale_version` (412), `too_large` (413), `rate_limited` (429), `upstream_unavailable` (502), `internal` (500), `over_capacity` (503). A body's problems are listed by path (`{ path, issue }`, M10.1).
+- **Limits and headers:** 60 requests a minute per IP, 10 on `/icon` (`429 rate_limited`, `Retry-After: 60`); a write 10 a minute per IP and 6 per feed set or sync chain, a size limit per route, and daily caps (M10.1); every `/api/*` response carries the CORS header and the security headers (BLUEPRINT §5.4).
 - **Validation:** core's query readers (`readProvidersQuery`, `readPricingQuery`, `readBundlesQuery`, `readIconQuery`) check every parameter. Unknown or invalid params → 400, listing each problem.
 - **Pagination:** `limit` (1–50, default 20) plus an opaque `cursor`. `meta.nextCursor` is `null` on the last page.
 - **What the app actually calls:**

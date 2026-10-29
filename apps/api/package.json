@@ -12,7 +12,9 @@
     "db:migrate:remote": "wrangler d1 migrations apply simply-sub-catalog --remote",
     "db:seed:local": "wrangler d1 migrations apply simply-sub-catalog --local && tsx ../../scripts/seed-d1.ts --local",
     "db:seed:remote": "wrangler d1 migrations apply simply-sub-catalog --remote && tsx ../../scripts/seed-d1.ts --remote",
-    "deploy": "npm run db:seed:remote && wrangler deploy",
+    "db:user:migrate:local": "wrangler d1 migrations apply simply-sub-user --local",
+    "db:user:migrate:remote": "wrangler d1 migrations apply simply-sub-user --remote",
+    "deploy": "npm run db:seed:remote && npm run db:user:migrate:remote && wrangler deploy",
     "test": "vitest run"
   },
   "dependencies": {

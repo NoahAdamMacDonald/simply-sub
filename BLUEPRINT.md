@@ -1360,7 +1360,17 @@ shipped to the browser is visible. The risks are abuse, and M2 builds these defe
   it from a browser. It's an extra layer, not authentication. Every response also carries `X-Content-Type-Options:
   nosniff`, a CSP that allows nothing (`default-src 'none'; frame-ancestors 'none'`: an API answer is never a page)
   and `Cross-Origin-Resource-Policy: same-origin`, so other sites can't embed the answers, `/icon` images included.
-- **Writes** arrive only in Phase 5 (`POST /reports`), with Turnstile and a stricter rate limit.
+- **Writes** (M10.1, `apps/api/src/writes.ts`): Phase 5's live calendar feeds, sync's sealed copies and price reports
+  are stored, in the user database (`simply-sub-user`, section 7.1), so every request that stores something follows
+  the same rules. An IP has 10 writes a minute (`WRITE_RATE_LIMIT`, on top of the 60 requests) and a feed set or sync
+  chain 6 (`RESOURCE_RATE_LIMIT`, keyed by its id). A body is refused with `413 too_large` over its route's limit, at
+  once from its `Content-Length` or as it streams in, and a JSON body that isn't JSON gets `400` with its problems by
+  path. Each kind of data counts the rows it writes a day in the database, one statement checking and counting, up to
+  a cap (feeds 15,000, sync 25,000, reports 1,000: 41,000 together), because D1's 100,000 rows written a day are the
+  account's and the catalog's deploys need them; past a cap, or with the database over 400 MB, `503 over_capacity`
+  until midnight UTC. Secrets (a feed's token and manage key, sync's auth secret) are random values of 128 bits or
+  more, kept only as SHA-256 hashes and compared in constant time, and never logged. A cron trigger at 02:30 UTC
+  deletes what has expired (`src/clean-up.ts`).
 - **Secrets** (the bot's GitHub token, AI keys) are Worker secrets (`wrangler secret put`) or a gitignored `.env`,
   never tracked files. The D1 `database_id` in `wrangler.jsonc` isn't a secret: using it needs a Cloudflare login.
 
@@ -1931,12 +1941,13 @@ Bitdefender are in the batch's pull request; Crunchyroll's prices couldn't be re
 |---|---|---|
 | Workers requests | ~100,000 per day | API calls only: a few hundred per day at first |
 | Static assets | Free and unlimited. Up to 20,000 files per version, 25 MiB per file | The Angular build has well under 100 files |
-| D1 | 5 GB storage per account (500 MB per database), 5M rows read and 100k rows written per day (index entries count), 2 MB per row | Under 25 MB even at 1,000 providers. **Rows written** is the one to watch: from M2.1 a deploy writes only what changed (section 5.3) |
+| D1 | 5 GB storage per account (500 MB per database, 10 databases), 5M rows read and 100k rows written per day for the whole account (index entries count), 2 MB per row | The catalog: under 25 MB even at 1,000 providers. **Rows written** is the one to watch: from M2.1 a deploy writes only what changed (section 5.3). Since M10.1 a second database, `simply-sub-user`, holds what users send (feeds, sync copies, reports), its writes capped at 41,000 a day so the catalog's deploys always have room (section 5.4) |
 | KV | 1 GB, 100k reads and 1k writes per day, 25 MiB per value | One namespace, `simply-sub-kv` (binding `KV`, M2.5; the bot's too since M3.9, its keys under `bot:`: check dates, pending pages, the last digest), for small values that must survive: the last good `/fx` rates (M2.5: one key, `fx:ecb`, written when the rates are fetched, about twice a day) and the `/icon` cache (M2.6: one key per domain asked for, written on a miss and kept 30 days, or a day for "no icon"). The Cache API is per data centre and can evict them. A few dozen writes a day |
 | R2 | 10 GB-month storage, 1M writes and 10M reads per month, no egress fees. Activating R2 asks for a payment method, even within the free tier | Not used yet: see the triggers below |
 
-**Each store has one job:** static files serve the catalog and icons, D1 answers the API's searches, KV keeps
-small values that must survive, and R2 will hold large files. Using a store outside its job gains nothing: KV
+**Each store has one job:** static files serve the catalog and icons, D1 answers the API's searches (and, in a
+database of its own since M10.1, keeps what users send), KV keeps small values that must survive, and R2 will hold
+large files. Using a store outside its job gains nothing: KV
 values and static files have the same 25 MiB cap, and KV allows far fewer writes.
 - **Setting one up:** create the KV namespace (or the R2 bucket) in the dashboard or with `wrangler` (section 7.2;
   `simply-sub-kv` was made with `wrangler kv namespace create`), and its id goes in `wrangler.jsonc`, like D1's. Wrangler can create resources on deploy (an open beta), but an id in the config is
@@ -1995,6 +2006,7 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
    ```bash
    npx wrangler d1 create simply-sub-catalog --location enam   # ✅ done in M0.8; the id is in wrangler.jsonc
    npx wrangler d1 migrations apply simply-sub-catalog --remote   # ✅ M0.8: applies migrations/0001_init.sql
+   npx wrangler d1 create simply-sub-user --location enam      # ✅ done in M10.1 (2026-10-29); binding USER_DB
    ```
 6. **KV:**
    ```bash
@@ -2088,7 +2100,7 @@ Settings → Build*). The settings as they are now:
 | Production branch | `main` |
 | Root directory | `apps/api` |
 | Build command | `cd ../.. && npm ci && npm run build` |
-| Deploy command | `npm run deploy` (since M2.1): `apps/api/package.json` runs `db:seed:remote` (the migrations, then `seed-d1.ts --remote`) and then `wrangler deploy`. From M1.5 it was `npx wrangler d1 migrations apply simply-sub-catalog --remote && npx wrangler d1 execute simply-sub-catalog --remote --file dist/seed.sql && npx wrangler deploy`, and before that `npx wrangler deploy` |
+| Deploy command | `npm run deploy` (since M2.1): `apps/api/package.json` runs `db:seed:remote` (the migrations, then `seed-d1.ts --remote`), `db:user:migrate:remote` (the user database's migrations, since M10.1) and then `wrangler deploy`. From M1.5 it was `npx wrangler d1 migrations apply simply-sub-catalog --remote && npx wrangler d1 execute simply-sub-catalog --remote --file dist/seed.sql && npx wrangler deploy`, and before that `npx wrangler deploy` |
 | Preview (non-production branch) command | `npx wrangler versions upload`: a preview link on workers.dev, production untouched |
 | Build variable | `NODE_VERSION` = `24.22.1` (since 2026-10-26; it was 24.19.0, and the image defaults to 24.18.0). It must match the root `package.json`'s `volta` pin, which CI reads too. The first build detected Node 24.19.0 and npm 12.0.2 (from `packageManager`); npm 10.9.2 would also install our lockfile cleanly |
 | API token | `simply-sub-builds`, created by Workers Builds: Workers scripts, KV, R2, **D1 (edit)**, routes on the zone, and a few unused products. Cloudflare keeps it; it's never in GitHub |

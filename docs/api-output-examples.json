@@ -2370,8 +2370,11 @@
     { "code": "bad_request", "status": 400, "meaning": "A query parameter or body field is missing or invalid. 'details' lists each problem." },
     { "code": "forbidden", "status": 403, "meaning": "Missing or wrong manage key (calendar feeds)." },
     { "code": "not_found", "status": 404, "meaning": "Unknown id, path or calendar token." },
+    { "code": "stale_version", "status": 412, "meaning": "The sync copy changed since it was read (If-Match). Read it again, merge, and send the new version." },
+    { "code": "too_large", "status": 413, "meaning": "The request's body is over its route's size limit." },
     { "code": "rate_limited", "status": 429, "meaning": "Too many requests. Respect the Retry-After header." },
     { "code": "upstream_unavailable", "status": 502, "meaning": "A third-party source (such as Frankfurter) failed and no cached copy exists." },
-    { "code": "internal", "status": 500, "meaning": "Unexpected error. Safe to retry later." }
+    { "code": "internal", "status": 500, "meaning": "Unexpected error. Safe to retry later." },
+    { "code": "over_capacity", "status": 503, "meaning": "A daily limit on what users store was reached, or the storage is full. Respect the Retry-After header." }
   ]
 }
