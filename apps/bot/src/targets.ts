@@ -102,7 +102,7 @@ export function policyTargets(provider: SnapshotProvider): PolicyPageTarget[] {
       };
       const own = page.ratings.find((entry) => entry.topic === rating.topic);
       if (own) own.quotes.push(source.quote);
-      else page.ratings.push({ topic: rating.topic, quotes: [source.quote] });
+      else page.ratings.push({ topic: rating.topic, tier: rating.tier, quotes: [source.quote] });
       pages.set(source.url, page);
     }
   }

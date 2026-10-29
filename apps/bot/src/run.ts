@@ -7,6 +7,7 @@ import {
   type Bundle,
   type CitedPage,
   type IsoDate,
+  type PolicyTopic,
   type Robots,
   type SnapshotProvider,
 } from '@simply-sub/core';
@@ -14,6 +15,7 @@ import { checkPages, message, type CheckInput, type PageDeps } from './check-pag
 import { digest, digestBranch, urlOf } from './digest';
 import type { RepositoryState } from './github';
 import { filesToRead, worthProposing, type Proposal } from './proposal';
+import { reviewWithModel } from './review';
 import type { BotState, Pending } from './state';
 import {
   approvalTargets,
@@ -58,6 +60,10 @@ export interface Services {
   readSettings(commit: string): Promise<Automation>;
   /** A page's baseline as the commit has it, or null without one. */
   readBaseline(url: string, commit: string): Promise<Baseline | null>;
+  /** data/policy-topics.yaml as the commit has it, for the review's rubrics. */
+  readTopics(commit: string): Promise<PolicyTopic[]>;
+  /** Workers AI's answer to a system and a user message (M3.10's review). */
+  ask(system: string, user: string): Promise<unknown>;
   /** The page readers, minding `robots`. */
   pages(robots: Readonly<Record<string, Robots>>): PageDeps;
   readFiles(paths: readonly string[], commit: string): Promise<Record<string, string>>;
@@ -231,22 +237,60 @@ export async function runNight(
       await step('read the last digest', () => services.state.lastDigest()),
     )
   ) {
-    pullRequest = await step('build the digest', async () => {
-      const pending = await services.state.pending();
-      const live: Finding[] = [];
-      for (const entry of pending) {
-        const kept = await stillPending(entry, index, services, repository.commit, today);
-        if (kept.length === 0) await services.state.dropPending(entry.key);
-        live.push(...kept);
+    // Steps pass each other only small data: which pending findings still stand (by their KV entry), and the review's
+    // notes by their place in that list. Each step reads the findings themselves, page texts and all, from KV.
+    const kept = await step('gather the digest', async () => {
+      const found: Record<string, number[]> = {};
+      for (const entry of await services.state.pending()) {
+        const standing = await stillPending(entry, index, services, repository.commit, today);
+        if (standing.length === 0) await services.state.dropPending(entry.key);
+        else found[entry.key] = standing.map((finding) => entry.findings.indexOf(finding));
       }
       await services.state.saveDigest(today);
-      if (live.length === 0) return undefined;
-      const files = await services.readFiles(filesToRead(live, today), repository.commit);
-      const made = digest(live, new Map(Object.entries(files)), today, {
-        reviewer: settings.reviewer,
-      });
-      return services.propose(repository, made, digestBranch);
+      return found;
     });
+    const live = async () => {
+      const entries = new Map(
+        (await services.state.pending()).map((entry) => [entry.key, entry] as const),
+      );
+      return Object.entries(kept).flatMap(([key, places]) => {
+        const entry = entries.get(key);
+        return entry ? places.map((place) => entry.findings[place]) : [];
+      });
+    };
+    if (Object.keys(kept).length > 0) {
+      // The free model's review (M3.10), within the Neurons the night's checks left and the week's review items.
+      const review =
+        settings.reviewer === 'workers-ai'
+          ? await step('review the digest', async () => {
+              const findings = await live();
+              const done = await reviewWithModel(
+                findings,
+                await services.readTopics(repository.commit),
+                (system, user) => services.ask(system, user),
+                settings.batch.reviewItems,
+                budget.neurons,
+              );
+              return {
+                added: done.added,
+                notes: [...done.notes].map(
+                  ([finding, note]) => [findings.indexOf(finding), note] as const,
+                ),
+              };
+            })
+          : { added: [], notes: [] };
+      pullRequest = await step('build the digest', async () => {
+        const findings = await live();
+        const reviewed = new Map(review.notes.map(([place, note]) => [findings[place], note]));
+        const all = [...findings, ...review.added];
+        const files = await services.readFiles(filesToRead(all, today), repository.commit);
+        const made = digest(all, new Map(Object.entries(files)), today, {
+          reviewer: settings.reviewer,
+          reviewed,
+        });
+        return services.propose(repository, made, digestBranch);
+      });
+    }
   }
   await step('save the check dates', () => services.state.saveChecks(checked));
   return { findings, ...(pullRequest !== undefined && { pullRequest }) };

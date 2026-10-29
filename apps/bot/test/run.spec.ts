@@ -89,7 +89,7 @@ describe('a quiet night', () => {
       'check mullvad',
       'check netflix',
       'read the last digest',
-      'build the digest',
+      'gather the digest',
       'save the check dates',
     ]);
     expect(ai).toEqual([]);
@@ -275,5 +275,136 @@ describe('the weekly digest', () => {
     const review =
       services.proposals[0].changes.find((change) => change.path === reviewFile)?.text ?? '';
     expect(review).toContain('**mullvad**: The check failed: D1 is unavailable');
+  });
+});
+
+describe('the review by Workers AI (M3.10)', () => {
+  const byModel = settings({ reviewer: 'workers-ai' });
+  const reviewOf = (made: { changes: { path: string; text?: string }[] }) =>
+    made.changes.find((change) => change.path === reviewFile)?.text ?? '';
+
+  /** A night where the check's quote for Netflix Standard isn't on its changed page. */
+  function misquoted(): World {
+    const world = quietWorld();
+    world.pages['https://help.netflix.com/en/node/24926/ca'] = netflixChanged;
+    world.ai = (request) => ({
+      response: {
+        prices: request.messages[1].content.includes('1. Netflix Standard:')
+          ? [
+              {
+                plan: 1,
+                found: true,
+                regularAmount: 21.99,
+                currency: 'CAD',
+                onlySalePrice: false,
+                quote: 'Standard: $21.99 / month',
+              },
+            ]
+          : [],
+      },
+    });
+    return world;
+  }
+
+  /** A night where Netflix's terms changed, with every rating that quotes them to grade again. */
+  function newTerms(): World {
+    const world = quietWorld();
+    world.pages['https://help.netflix.com/legal/termsofuse'] =
+      '<p>Our terms have changed completely. There are no refunds.</p>';
+    return world;
+  }
+
+  it('reads a price the check couldn’t confirm, and proposes it with its quote checked', async () => {
+    const world = misquoted();
+    const asked: string[] = [];
+    world.review = (_system, user) => {
+      asked.push(user);
+      return {
+        response: {
+          decision: 'update',
+          amount: 19.99,
+          currency: 'CAD',
+          quotes: ['Standard: $19.99 / month'],
+        },
+      };
+    };
+    const { steps, proposals } = await night(world, { settings: byModel });
+    expect(steps).toContain('review the digest');
+    expect(asked).toHaveLength(1);
+    expect(asked[0]).toContain('The catalog says Netflix Standard');
+    const [made] = proposals;
+    const file =
+      made.changes.find((change) => change.path === 'data/providers/netflix.yaml')?.text ?? '';
+    expect(
+      providerSchema.parse(parse(file)).plans.find((plan) => plan.id === 'netflix.standard')
+        ?.prices[0].amount,
+    ).toBe(19.99);
+    expect(reviewOf(made)).toContain(
+      '  - Workers AI read 19.99 CAD (“Standard: $19.99 / month”): the edit is in this pull request; check it',
+    );
+  });
+
+  it('labels what its quotes don’t show for the owner, and proposes nothing from it', async () => {
+    const world = misquoted();
+    world.review = () => ({
+      response: {
+        decision: 'update',
+        amount: 21.99,
+        currency: 'CAD',
+        quotes: ['Standard: $21.99 / month'],
+      },
+    });
+    const [made] = (await night(world, { settings: byModel })).proposals;
+    expect(made.changes.map((change) => change.path)).not.toContain('data/providers/netflix.yaml');
+    expect(reviewOf(made)).toContain(
+      'Workers AI is unsure (None of its quotes is on the page word for word): for you',
+    );
+  });
+
+  it('suggests a policy grade, leaving the grading to a person', async () => {
+    const world = newTerms();
+    world.review = () => ({
+      response: {
+        decision: 'update',
+        tier: 'bad',
+        reason: 'No refunds at all.',
+        quotes: ['There are no refunds.'],
+      },
+    });
+    const [made] = (await night(world, { settings: byModel })).proposals;
+    expect(made.changes.map((change) => change.path)).not.toContain('data/providers/netflix.yaml');
+    expect(reviewOf(made)).toMatch(
+      /\n {2}- [A-Z][^:\n]+: Workers AI suggests bad: No refunds at all\. \(“There are no refunds\.”\); grade it yourself\n/,
+    );
+  });
+
+  it('reviews no more than the week’s review items', async () => {
+    const world = newTerms();
+    let asked = 0;
+    world.review = () => {
+      asked++;
+      return { response: { decision: 'unsure', reason: 'Too vague', quotes: [] } };
+    };
+    const [made] = (
+      await night(world, {
+        settings: settings({ reviewer: 'workers-ai', batch: { ...byModel.batch, reviewItems: 1 } }),
+      })
+    ).proposals;
+    expect(asked).toBe(1);
+    expect(reviewOf(made)).toMatch(
+      /\n {2}- [A-Z][^:\n]+: Workers AI is unsure \(Too vague\): for you\n/,
+    );
+    expect(reviewOf(made)).toMatch(
+      /\n {2}- Not reviewed \(this week’s review items are used up\): [A-Z][^,\n]+(, [A-Z][^,\n]+)+\n/,
+    );
+  });
+
+  it('asks nothing when a person or the scheduled Claude task reviews', async () => {
+    const world = misquoted();
+    let asked = 0;
+    world.review = () => (asked++, {});
+    const { steps } = await night(world);
+    expect(asked).toBe(0);
+    expect(steps).not.toContain('review the digest');
   });
 });

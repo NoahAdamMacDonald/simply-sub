@@ -47,8 +47,8 @@ export interface PolicyPageTarget {
   file: string;
   provider: string;
   url: string;
-  /** Each rating's topic and its quotes from this page. */
-  ratings: { topic: string; quotes: string[] }[];
+  /** Each rating's topic, its grade and its quotes from this page. */
+  ratings: { topic: string; tier: string; quotes: string[] }[];
 }
 
 /** Something the check found, for the pull request. */
@@ -70,7 +70,14 @@ export type Finding =
   /** A provider's or reseller's icon isn't the committed logo any more (a rebrand). */
   | { kind: 'logo'; id: string; png: string; width: number; source: string; replaces: boolean }
   /** Something that couldn't be checked, which a person should look at. */
-  | { kind: 'manual'; subject: string; url?: string; reason: string }
+  | {
+      kind: 'manual';
+      subject: string;
+      url?: string;
+      reason: string;
+      /** The price it's about, for the review (M3.10). */
+      target?: PriceTarget;
+    }
   /**
    * A page whose text isn't its baseline any more, or has none yet (M3.9): its new lines become its baseline in the
    * digest, and the lines it gained and lost show what changed.

@@ -6,6 +6,9 @@ import type { FileChange, Proposal } from './proposal';
 // weekly digest's, and each discovery run's), and opens or refreshes their pull requests. It never merges, and never
 // pushes to the base branch.
 
+/** In each of the bot's commit messages: a branch whose last commit lacks it has a reviewer's work on it. */
+export const botSignature = 'The nightly bot (BLUEPRINT §6.4).';
+
 export interface GitHubOptions {
   token: string;
   /** owner/name. */
@@ -78,38 +81,61 @@ export class GitHub {
 
   /**
    * Commits `proposal`'s changes on one of the bot's branches, made afresh from the base branch's `state`, and opens its
-   * pull request, or gives the open one tonight's title and body. Returns the pull request's URL.
+   * pull request, or gives the open one tonight's title and body. Returns the pull request's URL. A branch whose open
+   * pull request has someone else's commits on it (a reviewer's: the scheduled Claude task's, or a person's) is never
+   * overwritten: the bot says so on the pull request, and what it found waits in KV until that one is merged or closed.
    */
   async propose(state: RepositoryState, proposal: Proposal, branch: string): Promise<string> {
+    const head = await this.call<{ object: { sha: string } } | undefined>(
+      'GET',
+      `git/ref/heads/${branch}`,
+      undefined,
+      true,
+    );
+    const [owner] = this.options.repository.split('/');
+    const [open] = await this.call<{ number: number; html_url: string }[]>(
+      'GET',
+      `pulls?state=open&head=${owner}:${branch}`,
+    );
+    if (head && open) {
+      const last = await this.call<{ message: string }>('GET', `git/commits/${head.object.sha}`);
+      if (!last.message.includes(botSignature)) {
+        await this.call('POST', `issues/${open.number}/comments`, {
+          body: `${proposal.title} is held: this branch has a review's commits, which the bot never overwrites. Merge or close this pull request, and the next digest proposes what's waiting.`,
+        });
+        return open.html_url;
+      }
+    }
+    // Text goes in the tree itself; only images need a blob of their own first.
     const entries = [];
-    for (const change of proposal.changes) entries.push(await this.blob(change));
+    for (const change of proposal.changes) {
+      entries.push(
+        change.base64 === undefined
+          ? { path: change.path, mode: '100644', type: 'blob', content: change.text ?? '' }
+          : await this.blob(change),
+      );
+    }
     const tree = await this.call<{ sha: string }>('POST', 'git/trees', {
       base_tree: state.tree,
       tree: entries,
     });
     const commit = await this.call<{ sha: string }>('POST', 'git/commits', {
-      message: `${proposal.title}\n\nThe nightly bot (BLUEPRINT §6.4). Review before merging.`,
+      message: `${proposal.title}\n\n${botSignature} Review before merging.`,
       tree: tree.sha,
       parents: [state.commit],
     });
-    const exists = await this.call<unknown>('GET', `git/ref/heads/${branch}`, undefined, true);
-    if (exists === undefined) {
+    if (head === undefined) {
       await this.call('POST', 'git/refs', { ref: `refs/heads/${branch}`, sha: commit.sha });
     } else {
       // The branch is the bot's own: rebuilt each time, so earlier changes don't pile up.
       await this.call('PATCH', `git/refs/heads/${branch}`, { sha: commit.sha, force: true });
     }
-    const [owner] = this.options.repository.split('/');
-    const open = await this.call<{ number: number; html_url: string }[]>(
-      'GET',
-      `pulls?state=open&head=${owner}:${branch}`,
-    );
-    if (open[0]) {
-      await this.call('PATCH', `pulls/${open[0].number}`, {
+    if (open) {
+      await this.call('PATCH', `pulls/${open.number}`, {
         title: proposal.title,
         body: proposal.body,
       });
-      return open[0].html_url;
+      return open.html_url;
     }
     const created = await this.call<{ html_url: string }>('POST', 'pulls', {
       title: proposal.title,
@@ -123,13 +149,10 @@ export class GitHub {
   private async blob(
     change: FileChange,
   ): Promise<{ path: string; mode: string; type: string; sha: string }> {
-    const blob = await this.call<{ sha: string }>(
-      'POST',
-      'git/blobs',
-      change.base64 !== undefined
-        ? { content: change.base64, encoding: 'base64' }
-        : { content: change.text ?? '', encoding: 'utf-8' },
-    );
+    const blob = await this.call<{ sha: string }>('POST', 'git/blobs', {
+      content: change.base64,
+      encoding: 'base64',
+    });
     return { path: change.path, mode: '100644', type: 'blob', sha: blob.sha };
   }
 

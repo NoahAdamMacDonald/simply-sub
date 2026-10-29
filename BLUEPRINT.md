@@ -1580,8 +1580,9 @@ compares each page with its baseline (`data/baselines/`, section 6.5) before any
   goes to review ("failed quotes"). Each page's new lines are kept as a `page` finding.
 - **Pending:** what a page found waits in KV (`bot:pending:<hash of its URL>`), replaced each time it's checked and
   dropped once nothing on it is worth proposing (unchanged again, every price confirmed and recently verified).
-- **The digest** (`digest.ts`), on `digest.day` (Monday by default), one step: every pending entry still live (one for
-  a page the catalog no longer cites, or whose new text main's baseline already has, is dropped), the provider files'
+- **The digest** (`digest.ts`), on `digest.day` (Monday by default), in steps that pass each other only small data
+  (which pending findings stand, the review's notes): every pending entry still live (one for a page the catalog no
+  longer cites, or whose new text main's baseline already has, is dropped), the provider files'
   edits (M8.3's `proposal`), each changed page's new text as its baseline, and `review/README.md`, the review list,
   all committed to `bot/catalog-digest`, rebuilt from main, with its pull request `Catalog digest <date>`. The clear
   changes are edits: a price that moved within ±30% with its quote, a `lastVerified` bumped, a new logo, a page that
@@ -1594,6 +1595,10 @@ compares each page with its baseline (`data/baselines/`, section 6.5) before any
   on `bot/price-updates` can be closed.
 - **KV:** the API's namespace, `simply-sub-kv`, with the bot's keys under `bot:` (no new resource): a few writes a
   night, of 1,000 a day. The bot needs redeploying from main once this merges (section 7.2): its binding is new.
+- **A review's commits are kept (M3.10):** the bot never rebuilds a branch whose open pull request has commits that
+  aren't its own (a reviewer's: its commit messages carry `botSignature`). It comments that the week's digest is held
+  instead, and the findings stay pending until that pull request is merged or closed. Text files go into the commit's
+  tree in one request, and only images need a blob each, so a digest of many pages stays within a step's 50 requests.
 
 **Settings (M3.8):** `data/automation.yaml`, checked by `data:validate` against core's `automationSchema`
 (`pipeline/automation.ts`, `data/schema/automation.schema.json`): a cadence for pricing pages, policy pages, logos and
@@ -1603,6 +1608,22 @@ items a week) and the search engines in order, each with a monthly budget for th
 and Brave's required, so neither can run unlimited; SearXNG, your own, needs none). The bot's cron still runs every
 night and reads the file from main to decide what's due (`isDue`, `digestDue`), so a change takes a merge, never a
 redeploy. The scripts' search reads this machine's budgets from it (`searchBudgets`).
+
+**Reviewers (M3.10):** `reviewer` in `data/automation.yaml` says who works through the review list. Nothing merges
+itself under any of them.
+- **`scheduled-claude`:** a weekly Claude Code scheduled task, on the owner's Claude plan, runs the catalog-review
+  skill (`.claude/skills/catalog-review/SKILL.md`) on `bot/catalog-digest`. It works from the committed text alone (the
+  Default environment reaches GitHub and package registries only): prices first, then policies, then features, with a
+  commit and a push after each item, so a run stopped by a usage limit loses at most one item and the next run
+  resumes at the first unticked one. Its setup is in section 7.2. Nothing else needs a Claude plan: with `workers-ai`
+  or `manual`, the bot and the scripts run without one.
+- **`workers-ai`:** the digest's step `review the digest` (`apps/bot/src/review.ts`, core's `reviewRequest` and
+  `reviewOutcome`) asks the free model about each item, within the Neurons the night's checks left and
+  `batch.reviewItems`. A price it reads for one the check couldn't confirm becomes an edit only when its quote is on
+  the page word for word and shows the amount in the price's currency. On a suspicious change it agrees or not, and
+  a policy grade it suggests stays a suggestion, since grading is a person's call. Anything else is labelled for the
+  owner. Its notes go under each item, a line each.
+- **`manual`:** the items wait in the pull request for the owner.
 
 **Guardrails**
 - **Never auto-merge.** You review the PR, which takes a minute a day at most.
@@ -1949,6 +1970,12 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
    `main` once the change has merged. When the token expires, a new one replaces it with
    `npx wrangler secret put GITHUB_TOKEN` (the value typed at its prompt, never on the command line), with no
    redeploy: the next night uses it.
+9. **The weekly review** (M3.10), with `reviewer: scheduled-claude`: a Claude Code scheduled task the owner creates
+   once at claude.ai/code/routines (or `/schedule`). It uses this repository and the **Default** environment (Trusted
+   network access), runs weekly on Mondays at 9:07 local time, after the digest's 03:00 UTC run, and its
+   instructions run the catalog-review skill on `bot/catalog-digest`, pushing to that branch only. The skill has the
+   exact settings and prompt (`.claude/skills/catalog-review/SKILL.md`). Until it exists, the review list waits as
+   with `manual`.
 
 ### 7.3 Serving the app from `sub.simplely.ca`
 The app and the API have the subdomain to themselves: **https://sub.simplely.ca/** for the app, and
@@ -2817,6 +2844,14 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-28, M3.10)**
+- **Who reviews** (the user's choice): `scheduled-claude`, a weekly scheduled task the owner sets up (section 7.2) on
+  their Claude plan. It's the only part that uses one: with `workers-ai` or `manual`, the pipeline runs without it.
+- **Workers AI proposes only what it quotes:** a price edit needs a quote, on the page word for word, that shows the
+  amount in the price's currency; a grade stays a suggestion.
+- **A held digest:** a reviewer's commits on the digest's branch hold the next digest rather than be overwritten, and
+  its findings wait in KV, so an unmerged review loses nothing.
 
 **Resolved (2026-10-28, M3.9)**
 - **Where pending changes live:** KV, a key per page (the user's choice was check dates in KV and baselines in Git):

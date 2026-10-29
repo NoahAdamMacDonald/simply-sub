@@ -1,6 +1,8 @@
 import { launch } from '@cloudflare/playwright';
 import {
   automationSchema,
+  policyTopicsFileSchema,
+  workersAiModel,
   baselinePath,
   maxPageChars,
   readBaseline,
@@ -79,6 +81,22 @@ export function workerServices(env: Env): Services {
       const text = await github.textIfThere(baselinePath(url), commit);
       return text === undefined ? null : (readBaseline(text) ?? null);
     },
+    async readTopics(commit) {
+      return policyTopicsFileSchema.parse(
+        parse(await github.text('data/policy-topics.yaml', commit)),
+      );
+    },
+    ask: (system, user) =>
+      (env.AI as unknown as { run(model: string, input: unknown): Promise<unknown> }).run(
+        workersAiModel,
+        {
+          messages: [
+            { role: 'system', content: system },
+            { role: 'user', content: user },
+          ],
+          max_tokens: 600,
+        },
+      ),
     state: kvState(env.KV as unknown as KvLike),
     pages: (robots) => pageDeps(env, robots, github),
     async readFiles(paths, commit) {

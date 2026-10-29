@@ -78,6 +78,7 @@ export * from './pipeline/find-pages';
 export * from './pipeline/page-text';
 export * from './pipeline/queue';
 export * from './pipeline/quotes';
+export * from './pipeline/review';
 export * from './pipeline/robots';
 export * from './pipeline/search';
 export * from './pipeline/tax-wording';

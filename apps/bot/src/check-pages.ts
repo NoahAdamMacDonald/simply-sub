@@ -391,6 +391,7 @@ async function extracted(
           subject: `${target.label} (${priceText(target.price)})`,
           url,
           reason: 'Workers AI’s quote for its price isn’t on the page word for word',
+          target,
         } satisfies Finding;
       }
     }
@@ -400,7 +401,7 @@ async function extracted(
 
 /** What an answer means for a stored price (§6.4's guardrails). */
 export function judged(target: PriceTarget, answer: ExtractedPrice | undefined): Finding {
-  const { amount, currency, sourceUrl } = target.price;
+  const { currency, sourceUrl } = target.price;
   const subject = `${target.label} (${priceText(target.price)})`;
   if (answer?.onlySalePrice) {
     return {
@@ -408,10 +409,17 @@ export function judged(target: PriceTarget, answer: ExtractedPrice | undefined):
       subject,
       url: sourceUrl,
       reason: 'The page shows only a sale or first-term price',
+      target,
     };
   }
   if (!answer?.found || answer.regularAmount === undefined) {
-    return { kind: 'manual', subject, url: sourceUrl, reason: 'Its price isn’t on the page' };
+    return {
+      kind: 'manual',
+      subject,
+      url: sourceUrl,
+      reason: 'Its price isn’t on the page',
+      target,
+    };
   }
   if (
     answer.currency !== undefined &&
@@ -422,11 +430,18 @@ export function judged(target: PriceTarget, answer: ExtractedPrice | undefined):
       subject,
       url: sourceUrl,
       reason: `The page shows ${answer.currency}, not ${currency}: a region or currency mismatch`,
+      target,
     };
   }
-  if (sameAmount(answer.regularAmount, amount)) return { kind: 'confirmed', target };
-  const change = Math.abs(answer.regularAmount - amount) / (amount === 0 ? 1 : amount);
-  return { kind: 'changed', target, amount: answer.regularAmount, suspicious: change > 0.3 };
+  return readPrice(target, answer.regularAmount);
+}
+
+/** What reading `amount` for a price means: the same to the cent confirms it, and a change of over ±30% is suspicious. */
+export function readPrice(target: PriceTarget, amount: number): Finding {
+  const was = target.price.amount;
+  if (sameAmount(amount, was)) return { kind: 'confirmed', target };
+  const change = Math.abs(amount - was) / (was === 0 ? 1 : was);
+  return { kind: 'changed', target, amount, suspicious: change > 0.3 };
 }
 
 function label(targets: readonly PriceTarget[]): string {

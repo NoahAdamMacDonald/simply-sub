@@ -25,7 +25,13 @@ export function digest(
   findings: readonly Finding[],
   files: ReadonlyMap<string, string>,
   today: IsoDate,
-  extra: { reviewer: string; notes?: readonly string[] } = { reviewer: 'manual' },
+  extra: {
+    reviewer: string;
+    notes?: readonly string[];
+    reviewed?: ReadonlyMap<Finding, readonly string[]>;
+  } = {
+    reviewer: 'manual',
+  },
 ): Proposal {
   const made = proposal(findings, files, today);
   const changes: FileChange[] = [...made.changes];
@@ -38,7 +44,7 @@ export function digest(
       text: writeBaseline({ url: page.url, method: page.method, saved: today, lines: page.lines }),
     });
   }
-  const items = reviewItems(findings);
+  const items = reviewItems(findings, extra.reviewed ?? new Map());
   // The list is rebuilt each week: last week's, merged with its pull request, is replaced.
   changes.push({
     path: reviewFile,
@@ -69,8 +75,16 @@ export function digest(
 }
 
 /** What a person has to look at, by section: prices first, then policies, then features, then pages not read. */
-function reviewItems(findings: readonly Finding[]): ReviewItem[] {
+function reviewItems(
+  findings: readonly Finding[],
+  reviewed: ReadonlyMap<Finding, readonly string[]>,
+): ReviewItem[] {
   const items: ReviewItem[] = [];
+  const push = (finding: Finding, item: ReviewItem) => {
+    // The reviewer's notes, a line each under the item.
+    const notes = (reviewed.get(finding) ?? []).map((note) => `\n  - ${cell(note, 600)}`);
+    items.push({ ...item, text: `${item.text}${notes.join('')}` });
+  };
   const pageOf = (url: string | undefined) =>
     findings.find(
       (finding): finding is Extract<Finding, { kind: 'page' }> =>
@@ -90,38 +104,38 @@ function reviewItems(findings: readonly Finding[]): ReviewItem[] {
     switch (finding.kind) {
       case 'changed':
         if (finding.suspicious) {
-          items.push({
+          push(finding, {
             section: 'Prices',
             text: `**${cell(finding.target.label)}** (${priceText(finding.target.price)}): ${finding.target.price.amount} → ${finding.amount} ${finding.target.price.currency}, more than ±30%: the edit is in this pull request, check it against ${link(finding.target.price.sourceUrl)}${changedLines(finding.target.price.sourceUrl)}`,
           });
         }
         break;
       case 'tax':
-        items.push({
+        push(finding, {
           section: 'Prices',
           text: `**${cell(finding.target.label)}**: its "tax included" ${finding.reason === 'quote-gone' ? 'words are gone from' : `is contradicted by “${cell(finding.wording ?? '')}” on`} ${link(finding.target.price.sourceUrl)}, so \`taxIncluded\` is taken out in this pull request${changedLines(finding.target.price.sourceUrl)}`,
         });
         break;
       case 'reseller':
-        items.push({
+        push(finding, {
           section: 'Prices',
           text: `**${cell(finding.approval.reseller)}** isn't named as ${cell(finding.approval.provider)}'s reseller on ${link(finding.approval.url)} any more, so its listing is taken out${changedLines(finding.approval.url)}`,
         });
         break;
       case 'networks':
-        items.push({
+        push(finding, {
           section: 'Prices',
           text: `**${cell(finding.target.provider)}'s cards in ${finding.target.region}**: ${finding.missing.length > 0 ? `“${finding.missing.map(cell).join('”, “')}” gone from ${link(finding.target.url)}` : `${finding.named.map(cell).join(', ')} now named beside them on ${link(finding.target.url)}`}${changedLines(finding.target.url)}`,
         });
         break;
       case 'policy':
-        items.push({
+        push(finding, {
           section: 'Policies',
           text: `**${cell(finding.target.provider)}'s ${link(finding.target.url)}** changed: grade the ratings that quote it again (${finding.target.ratings.map((rating) => rating.topic).join(', ')})${finding.missing.length > 0 ? `; these quotes are gone: ${finding.missing.map((gone) => `${gone.topic} “${cell(gone.quote)}”`).join('; ')}` : ''}${changedLines(finding.target.url)}`,
         });
         break;
       case 'manual':
-        items.push({
+        push(finding, {
           section: /polic/i.test(finding.subject)
             ? 'Policies'
             : finding.url
@@ -185,12 +199,12 @@ export function urlOf(finding: Finding): string | undefined {
   }
 }
 
-function cell(text: string): string {
+function cell(text: string, max = 160): string {
   const flat = text
     .replace(/\s+/g, ' ')
     .replace(/[|`<>]/g, (character) => `\\${character}`)
     .trim();
-  return flat.length > 160 ? `${flat.slice(0, 157)}…` : flat;
+  return flat.length > max ? `${flat.slice(0, max - 3)}…` : flat;
 }
 
 function link(url: string): string {

@@ -172,7 +172,7 @@ export function proposal(
         ? `${finding.approval.provider}’s reseller ${finding.approval.reseller}`
         : finding.kind === 'networks'
           ? `${finding.target.provider}’s cards in ${finding.target.region}`
-          : 'target' in finding && 'label' in finding.target
+          : 'target' in finding && finding.target && 'label' in finding.target
             ? finding.target.label
             : 'A change';
     manual.push(

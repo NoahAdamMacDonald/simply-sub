@@ -1,12 +1,14 @@
 import {
   automationSchema,
   baselineLines,
+  policyTopicsFileSchema,
   pageText,
   type Automation,
   type Baseline,
   type SnapshotProvider,
 } from '@simply-sub/core';
 import automationYaml from '../../../data/automation.yaml?raw';
+import policyTopicsYaml from '../../../data/policy-topics.yaml?raw';
 import { parse } from 'yaml';
 import mullvadYaml from '../../../data/providers/mullvad.yaml?raw';
 import netflixYaml from '../../../data/providers/netflix.yaml?raw';
@@ -57,6 +59,8 @@ export interface World {
   ai?: (request: ExtractionRequest) => unknown;
   /** URLs only a browser gets the text of. */
   browserOnly?: Record<string, string>;
+  /** Workers AI's answer to a review's messages (M3.10). */
+  review?: (system: string, user: string) => unknown;
 }
 
 /** The logos as committed. */
@@ -162,6 +166,9 @@ export async function fakeServices(
     readRepository: async () => repository,
     readSettings: async () => options.settings ?? settings(),
     readBaseline: async (url) => baselines[url] ?? null,
+    readTopics: async () => policyTopicsFileSchema.parse(parse(policyTopicsYaml)),
+    ask: async (system, user) =>
+      world.review?.(system, user) ?? { response: { decision: 'unsure', quotes: [] } },
     state: options.state ?? memoryState(),
     pages: () => fakeDeps(world),
     readFiles: async (paths) => Object.fromEntries(paths.map((path) => [path, files[path] ?? ''])),
