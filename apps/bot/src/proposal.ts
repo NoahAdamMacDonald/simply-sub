@@ -172,7 +172,7 @@ export function proposal(
         ? `${finding.approval.provider}’s reseller ${finding.approval.reseller}`
         : finding.kind === 'networks'
           ? `${finding.target.provider}’s cards in ${finding.target.region}`
-          : 'target' in finding
+          : 'target' in finding && finding.target && 'label' in finding.target
             ? finding.target.label
             : 'A change';
     manual.push(
@@ -206,6 +206,14 @@ export function proposal(
 
 function at(target: PriceTarget): PriceLocation {
   return { owner: target.owner, price: target.price };
+}
+
+/**
+ * Whether a finding has something for the digest (M3.9): every kind does, but a price confirmed on its page only when
+ * its lastVerified is old enough to be bumped.
+ */
+export function worthProposing(finding: Finding, today: string): boolean {
+  return finding.kind !== 'confirmed' || stale(finding.target, today);
 }
 
 function stale(target: PriceTarget, today: string): boolean {

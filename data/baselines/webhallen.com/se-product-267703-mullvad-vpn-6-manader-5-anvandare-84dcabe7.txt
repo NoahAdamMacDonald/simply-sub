@@ -1,0 +1,276 @@
+url: https://www.webhallen.com/se/product/267703-Mullvad-VPN-6-manader-5-anvandare
+method: browser
+saved: 2026-10-29
+
+Logga in
+Skapa konto
+Logga in
+Samla XP till ditt konto
+Spara kvitton digitalt
+Inte medlem? Skapa konto
+Spel
+Gaming
+Datorer & Tillbehör
+Datorkomponenter
+Nätverk & Smarta Hem
+TV, Ljud & Bild
+Apple
+Mobil
+Hem & Hälsa
+Leksaker & Hobby
+Fyndvaror
+Kampanjer
+Fri frakt över 800 kr.
+Förboka Macbook Pro PROLED XDR
+Kundservice
+Butiker
+Företag
+Cardboard
+Datorer & Tillbehör
+Datortillbehör
+Mjukvara
+Antivirusprogram & Säkerhetsprogram
+Mullvad VPN 6 månader / 5 användare
+Antivirusprogram & Säkerhetsprogram / iOS, Android, MacOS, Linux, Windows / 6 månader / 3 enheter / Artikelnr: 267703 (1041236)
+4.8
+(72)
+Spara
+299 kr
+Varianter
+Lägg i varukorg
+Frakt från: 19 kr. Eller hämta gratis i butik.
+Lagerstatus
+Webblager
+37 st
+Butiker
+Fridhemsplan
+1 st
+Ringen
+2 st
+Solna Centrum
+1 st
+Nordstan, Femmanhuset
+2 st
+Visa alla butiker
+Framröstad topprecension
+ase.oskar
+Verifierad köpare
+Lvl 20 Grand Sorceress
+funkar bra, enkelt att använda
+Mullvad VPN 12 månader / 5 användare
+Översikt
+Recensioner
+Frågor
+Specifikationer
+Produktinfo
+Översikt
+Onlinesäkerhet i världsklass
+Mullvad är en VPN-tjänst som hjälper till att hålla dina online-aktiviteter, din identitet och den plats där du befinner dig för dig själv.
+Håll dig säker på allmänna WiFi-anslutningar
+Ansluter du till ett WiFi på ett café, hotell, en flygplats eller i något annat öppet och oskyddat nätverk betyder det att du är i riskzonen för att bli hackad eller spårad. När du är uppkopplad via Mullvad så är all trafik till och från din dator starkt krypterad - Surfa säkert även om du använder ett publikt WiFi-nätverk på ett hotell eller på ett cafe. Undvik hackare och att bli avlyssnad!
+Lätt att använda
+Det är lätt och snabbt att komma i gång med Mullvad - du behöver bara ladda ned och installera klienten. Du behöver inte slösa tid på inställningar eller registreringsformulär. Mullvad är byggt med användarvänlighet i åtanke.
+Ange var du vill befinna dig
+Välj att du är i Sverige när du är utomlands för att komma åt allt svenskt material, eller vänd på det och ange att du är i ett annat land när du är i Sverige för att komma åt det utländska materialet.
+Skydda dig mot massövervakning
+Är du orolig att din online-aktivitet granskas och används otillbörligt? Mullvad skyddar din internet-trafik från avlyssning.
+Håll dig säker under nedkopplingar
+Med Mullvadklienten igång, så blockeras all internettrafik vid VPN-anslutningsfel. Detta säkerställer att din riktiga IP-adress inte avslöjas av misstag medan Mullvad-klienten försöker att återansluta. Denna funktion är ett alternativ som finns tillgängligt i inställningarna, "Blockera internet om anslutningen bryts".
+Detaljer
+Mullvad tillhandahåller skydd mot DNS-läckage
+Mullvad stöder Teredo (IPv6 över IPv4) läckageskydd
+Mullvad stöder IPv6-tunnel så väl som IPv6-blockering och läckageskydd
+Mullvad stöder OpenVPN på en rad portar, inklusive men inte begränsat till 53/udp (DNS), 80/tcp (HTTP), 443/tcp (HTTPS)
+Mullvad stöder endast VPN-protokollen OpenVPN och Wireguard
+Mullvad stöder obfsproxy för att kringgå censur
+Mullvad blockerar inte autentiserad SMTP
+Mullvad blockerar inte P2P
+Mullvad blockerar SMTP port 25/tcp på grund av spam
+Vår datakryptering är AES-256 (med återgång till BF-128 under speciella förhållanden)
+Vi har och driftar egen privat nyckelhanteringsinfrastruktur (PKI)
+Våra OpenVPN-servrar använder 4096 bit RSA certifikat (med SHA512) för serverautentisering
+Våra OpenVPN-servrar använder 2048 bit Diffie-Hellman parametrar för byte av sessionsnyckel
+Alla våra OpenVPN-servrar använder DHE för "perfect forward secrecy"
+OpenVPN-nycklarna byts ut var sextionde minut
+Alla våra OpenVPN-servrar erbjuder alla krypterings algoritmer på alla portar, inklusive: AES-256-GCM, AES-256-CBC, och BF-CBC. AES-256-GCM är den förvalda
+Mullvad uppfyller privacytools.io kriterier
+Licensmodell Fullversion
+Plattform Windows, Mac, iOS, Android och Linux
+Antal användare 5 st
+Giltighetstid 6 mån
+Läs mer
+Recensioner
+(72)
+Snittbetyg
+(72 st)
+Betygsätt produkt
+Sortera efter: Nyast först
+Framröstad topprecension
+över åtta år sedan
+ase.oskar
+Verifierad köpare
+Lvl 20 Grand Sorceress
+18
+1
+funkar bra, enkelt att använda
+Mullvad VPN 12 månader / 5 användare
+två månader sedan
+No-Face
+Jobbar på webhallen
+1
+0
+Mycket bra tjänst och mycket bra folk bakom tjänsten.
+Mullvad VPN 12 månader / 5 användare
+sex månader sedan
+bellmano
+Verifierad köpare
+Lvl 24 Anointed Theocrat
+0
+0
+Klockrent!
+Mullvad VPN 6 månader / 5 användare
+sex månader sedan
+lafiel
+Verifierad köpare
+Lvl 22 Necromancer
+0
+0
+Fint och funkat snabbt
+Mullvad VPN 12 månader / 5 användare
+sex månader sedan
+drpatrik
+Verifierad köpare
+Lvl 24 Tyrant Despot
+0
+0
+Enkelt och säkert att använda. Bra app samt ger tillgänglighet för upp till fem olika enheter.
+Mullvad VPN 6 månader / 5 användare
+Visa fler recensioner
+Frågor & svar
+(3)
+Ställ en fråga
+No-Face
+nästan två år sedan
+4
+0
+Fråga: Kan jag köpa det med kontanter i era butiker?
+Svara No-Face
+BosarX
+Lvl 24 Tyrant Despot
+nästan två år sedan
+4
+4
+Svar: Det går tyvärr inte. Vi tar inte emot kontanter i våra butiker.
+marrrrk
+Lvl 20 Grand Sorceress
+över ett år sedan
+3
+0
+Fråga: Hur länga är den giltig? Kan jag t.ex. vänta ett år innan jag aktiverar den?
+Svara marrrrk
+joakim@nordberg.org
+Lvl 24 Anointed Theocrat
+över ett år sedan
+2
+0
+Svar: Ja.
+Visa fler svar
+boyrei
+Lvl 1 Peasant
+sex dagar sedan
+0
+0
+Fråga: Hej, skickas koden fysiskt eller levereras den digitalt via e-post? Jag bor inte i Sverige och kan bara ta emot den digitalt. Tack.
+Svara boyrei
+mattias
+Lvl 24 Master of the Elements
+ungefär tolv timmar sedan
+0
+0
+Svar: Hej! Detta är en fysisk produkt som vi säljer.
+Tekniska specifikationer
+SystemkravOS-familj: iOS, Android, MacOS, Linux, Windows
+ProgramvaraAntal licenser: 3 enheter
+Licenskategori: Litet paket
+Giltighetsperiod för licens: 6 månader
+Typ av licens: Boxpaket
+AllmäntKategori: Säkerhetstillämpningar
+Underkategori: Säkerhet - VPN-programvara
+Installationstyp: Lokalt installerad
+HeaderFörpackad kvantitet: 1
+Märke: Mullvad
+Produktlinje: Mullvad VPN
+Tillverkare: Mullvad
+Produktinfo
+Produktspecifikationer
+Release 2017-03-30
+Vårt artikelnr 267703
+Tillverkarens artikelnr MVPN6NB3
+Tillverkare Mullvad
+Visa tillbehör/se även
+Andra kunder har även köpt
+Mullvad VPN 12 månader / 5 användare
+Antivirusprogram & Säkerhetsprogram
+549 kr
+PNY CS900 250GB
+2.5" / 250 GB / Serial ATA-600 / 535 MBps
+629 kr
+Seagate Expansion Portable USB 3.0 - 2TB
+Extern Hårddisk 2,5" / USB 3.0 / 2 TB / Svart
+1 790 kr
+Andersson - Tryckluft på burk 400ml
+Rengöring
+99 kr
+LEGO Botanicals Bonsaiträd 10281
+LEGO Botanical Collection / 18 år
+529 kr
+Presentkort
+Presentkort
+100 kr
+Sida 1 av 3
+Liknande produkter
+Norton Secure VPN / 1 år / 5 Enheter
+Antivirusprogram & Säkerhetsprogram
+149 kr
+Norton Secure VPN / 6 månader / 5 Enheter
+Antivirusprogram & Säkerhetsprogram
+99 kr
+Norton 360 Advanced + Norton Utilities Ultimate (5-year Subscription)
+Antivirusprogram & Säkerhetsprogram / Windows, MacOS, Android, iOS / 5 år / 10 enheter
+8 449 kr
+Norton 360 Deluxe
+Antivirusprogram & Säkerhetsprogram / Windows, iOS, Android, MacOS / 1 år / 50 GB molnlagringsutrymme, 5 enheter
+399 kr
+Norton 360 Deluxe + Norton Utilities Ultimate (5-year Subscription)
+Antivirusprogram & Säkerhetsprogram
+7 199 kr
+Norton 360 Advanced + Norton Utilities Ultimate (1-year Subscription)
+Antivirusprogram & Säkerhetsprogram / iOS, Windows, MacOS, Android / 1 år / 10 enheter
+1 249 kr
+Sida 1 av 3
+Webhallen skickar beställda varor som finns i vårt webblager inom 24 timmar om du väljer expressfrakt. Alla priser är i svenska kronor inklusive moms och gäller även i butik.
+Visa priser inklusive moms
+Information
+Köpvillkor
+Leveransvillkor
+Garantivillkor
+Ångerrätt och öppet köp
+Reklamation
+Personuppgifter
+Integritetspolicy
+Cookieinställningar
+Black Friday
+Om Webhallen
+Våra butiker
+Om Webhallen
+Miljöpolicy
+Lediga tjänster
+Tillverkare
+Webhallen Företag
+Köp presentkort
+Medlemsförmåner
+Kontakta oss
+Webhallens nyhetsbrev
+Email
+Skriv upp mig!
+© 1999-2026 Webhallen Sverige AB, Org.Nr: 556558-8224

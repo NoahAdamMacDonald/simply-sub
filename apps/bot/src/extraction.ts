@@ -39,7 +39,8 @@ export function extractionRequest(
           'You read subscription prices from the text of a web page. Report only what the text states. The regular ' +
           'price is what the plan renews at. A sale, discount, promotional, introductory or first-term price is not ' +
           'regular: when the text shows only such a price for a plan, say so. Give amounts as numbers in the ' +
-          "page's currency, with its ISO 4217 code.",
+          "page's currency, with its ISO 4217 code, and quote the page's own words that show each price, copied " +
+          'exactly: a quote that is not on the page word for word is thrown away.',
       },
       { role: 'user', content: `Plans to find:\n${wanted}\n\nPage text:\n${text}` },
     ],
@@ -64,8 +65,12 @@ const answerSchema = {
           regularAmount: { type: ['number', 'null'] },
           currency: { type: ['string', 'null'] },
           onlySalePrice: { type: 'boolean' },
+          quote: {
+            type: ['string', 'null'],
+            description: "The page's own words that show the price, copied exactly",
+          },
         },
-        required: ['plan', 'found', 'regularAmount', 'currency', 'onlySalePrice'],
+        required: ['plan', 'found', 'regularAmount', 'currency', 'onlySalePrice', 'quote'],
       },
     },
   },
@@ -78,6 +83,8 @@ export interface ExtractedPrice {
   regularAmount?: number;
   currency?: string;
   onlySalePrice: boolean;
+  /** The page's words that show it, which the check finds on the page before taking the price (M3.9). */
+  quote?: string;
 }
 
 const answerShape = z.object({
@@ -88,6 +95,7 @@ const answerShape = z.object({
       regularAmount: z.number().nonnegative().nullable().optional(),
       currency: z.string().nullable().optional(),
       onlySalePrice: z.boolean().optional(),
+      quote: z.string().nullable().optional(),
     }),
   ),
 });
@@ -121,6 +129,7 @@ export function readExtraction(output: unknown, count: number): (ExtractedPrice 
         answer.regularAmount !== undefined && { regularAmount: answer.regularAmount }),
       ...(answer.currency && { currency: answer.currency.trim().toUpperCase() }),
       onlySalePrice: answer.onlySalePrice ?? false,
+      ...(answer.quote && { quote: answer.quote }),
     };
   }
   return answers;

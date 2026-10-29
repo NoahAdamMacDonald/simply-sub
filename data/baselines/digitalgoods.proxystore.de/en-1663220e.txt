@@ -1,0 +1,366 @@
+url: https://digitalgoods.proxystore.de/en
+method: fetch
+saved: 2026-10-29
+
+Digital Goods by ProxyStore
+New website address, everything else stays the same.
+Read more
+All Services and Projects
+Open shops menu
+Close shops menu
+Local Store
+Digital Goods
+Online shop
+Order Service
+Online printing
+Why?
+dys2p
+Digital Goods
+DE
+EN
+Order with a few clicks. Pay with Monero, Bitcoin, cash in 20 currencies, or SEPA Bank transfer.Read more
+Enter the quantity and press „Buy“.
+Bookmark your order. You will need it to access your goods.
+Pay your order. (Unpaid orders are deleted after 30 days.)
+Monero (XMR) or Bitcoin (BTC): Your voucher codes are shown as soon as your payment is confirmed on the blockchain.
+Cash: Send cash (we accept 20 currencies) to our office in Germany. We shred the letter after processing.
+SEPA (Single Euro Payments Area) bank transfer to our German bank account. We manually check for new payments every day.
+Optional: Get notified by email or ntfy.sh when your payment arrives.
+Write down your codes. We will delete them 30 days after delivery.
+Cloud storage and encryption
+Cryptomator
+The Cryptomator app encrypts your data so that you can synchronize it with a cloud without the cloud provider being able to read it. To redeem a coupon, you need to click through the regular checkout process for the Cryptomator for Desktop supporter certificate (choose the €29,99 license) or the Android app. Remove any existing discounts, then select „Add Discount“ and enter the voucher code. You have to provide an email address to which Cryptomator will send the license key. You can find illustrated instructions for the supporter certificate and for the Android app at the Cryptomator forum. You can find Cryptomator's terms and conditions here. We are an official reseller of Cryptomator.
+Cryptomator for Android License Key (Coupon)
+29,99 €
+–
++
+59 in stock
+Cryptomator for Desktop Supporter Certificate (Coupon)
+29,99 €
+–
++
+31 in stock
+Koofr Cloud Storage
+Koofr offers cloud storage that you can access over the web, with the Koofr apps, or via protocols like WebDAV or rclone – perfectly suitable for syncing or backup. Koofr works great with Cryptomator, which encrypts your data before uploading. Voucher codes can be redeemed in the Koofr Web App in the „Gift Cards“ section. Redeeming multiple vouchers of the same value credits your account for multiple years. Entering a higher-value voucher code will upgrade your account, shortening your previously paid time accordingly. The vouchers are valid for one year from the date of purchase. You can find Koofr's terms and conditions here. We are an official reseller of Koofr.
+Koofr Cloud Storage M (25 GB) 12 months
+12,00 €
+–
++
+27 in stock
+Koofr Cloud Storage L (100 GB) 12 months
+24,00 €
+–
++
+33 in stock
+Koofr Cloud Storage XL (250 GB) 12 months
+48,00 €
+–
++
+11 in stock
+Koofr Cloud Storage XL+ (500 GB) 12 months (19% discount)
+68,00 €
+–
++
+9 in stock
+Koofr Cloud Storage XXL (1 TB) 12 months (30% discount)
+84,00 €
+–
++
+10 in stock
+Koofr Cloud Storage XXXL (2.5 TB) 12 months (30% discount)
+168,00 €
+–
++
+7 in stock
+Notesnook
+Notesnook is an open-source, cross-platform private note-taking app that provides end-to-end encryption by default, allowing users to securely write, organize, and sync notes across all devices with features like reminders, bidirectional linking, and offline access. Gift cards can be used to create a new account or to renew an expiring account. You can easily redeem them in the app or on the web interface. See their Gift Card Help for a step-by-step guide. The vouchers are valid for at least two years from the date of purchase. You can find Notesnook's terms and conditions here. We are an official reseller of Notesnook.
+Notesnook Pro 1 Year Gift Card
+70,00 €
+–
++
+3 in stock
+Notesnook Pro 3 Year Gift Card
+200,00 €
+–
++
+2 in stock
+Notesnook Pro 5 Year Gift Card
+300,00 €
+–
++
+1 in stock
+Private.Storage
+Private.Storage is based on the open source software Tahoe-LAFS. It provides strong end-to-end encryption and does not require any login or user accounts. You only pay for the space you use. A voucher purchased here can be redeemed in the Private.Storage Desktop App. The vouchers are valid for at least two years from the date of purchase. You can find the terms and conditions of Private.Storage here. We are an official reseller of Private.Storage.
+Private.Storage 30 GB×Months Storage-Time
+6,50 €
+–
++
+26 in stock
+Proton Drive
+Proton Drive is Proton's end-to-end encrypted cloud storage with built-in online office. Install the Drive app on Windows, macOS, Android, iOS or iPadOS, or use the web app. Each voucher is a web address. Just open it to create a new account, upgrade a Free account, or renew an existing account. Renewing is only possible if the account is already on the same plan. (Trial accounts need to be downgraded through Proton support before.) Please also note that an account cannot be topped up for multiple years in advance. The vouchers are valid for at least 12 months from the date of purchase. You can find Proton's terms and conditions here. We are an official reseller of Proton.
+Proton Drive Plus (200 GB): 12 months
+47,88 €
+–
++
+20 in stock
+Proton Unlimited (VPN + Pass + Mail + Calendar + Drive, 500 GB): 12 months
+119,88 €
+–
++
+40 in stock
+Proton Pass
+Proton Pass is an end-to-end encrypted online password manager that supports multiple devices and has all the features you need, including unlimited email aliases. Each voucher is a web address. Just open it to create a new account, upgrade a Free account, or renew an existing account. Renewing is only possible if the account is already on the same plan. (Trial accounts need to be downgraded through Proton support before.) Please also note that an account cannot be topped up for multiple years in advance. The vouchers are valid for at least 12 months from the date of purchase. You can find Proton's terms and conditions here. We are an official reseller of Proton.
+Proton Pass Plus (10 GB): 12 months
+35,88 €
+–
++
+32 in stock
+Proton Unlimited (VPN + Pass + Mail + Calendar + Drive, 500 GB): 12 months
+119,88 €
+–
++
+40 in stock
+Education
+PentesterLab
+Learn how to manually find and exploit vulnerabilities in online systems with PentesterLab. While their free exercises are great to get started, a Pro subscription gives you access to more than 400 challenges and help from PentesterLab's friendly support. Each gift card is a web address. Just open it to redeem it. You will be asked for an email address. The vouchers are valid for at least two years from the date of purchase. You can find PentesterLab's terms of service here. We are an official reseller of PentesterLab.
+PentesterLab Pro voucher code: 1 month
+20,00 €
+–
++
+4 in stock
+PentesterLab Pro voucher code: 1 year
+200,00 €
+–
++
+1 in stock
+Email: Mailboxes and Aliases
+addy.io
+addy.io (formerly AnonAddy) is an open-source email forwarding service to protect your email address. The voucher code upgrades your account to a Lite or Pro account for the given duration or renews your current subscription accordingly. Log in to your account and redeem the voucher at „Subscription“. Redeeming multiple vouchers of the same value credits your account for multiple years. Redeeming a Pro voucher in a Lite account will upgrade your account, shortening your previously paid time to one third. The vouchers are valid for at least two years from the date of purchase. You can find addy.io's terms of service here. We are an official reseller of addy.io.
+addy.io Lite voucher code: 1 year
+12,00 €
+–
++
+226 in stock
+addy.io Pro voucher code: 1 year
+36,00 €
+–
++
+81 in stock
+Proton Mail
+Proton Mail encrypts your inbox and makes sending and receiving PGP-encrypted emails easy. It also includes a calendar and other features depending on your plan. Each voucher is a web address. Just open it to create a new account, upgrade a Free account, or renew an existing account. Renewing is only possible if the account is already on the same plan. (Trial accounts need to be downgraded through Proton support before.) Please also note that an account cannot be topped up for multiple years in advance. The vouchers are valid for at least 12 months from the date of purchase. You can find Proton's terms and conditions here. We are an official reseller of Proton.
+Proton Mail Plus (15 GB storage): 12 months
+47,88 €
+–
++
+20 in stock
+Proton Unlimited (VPN + Pass + Mail + Calendar + Drive, 500 GB): 12 months
+119,88 €
+–
++
+40 in stock
+SimpleLogin
+SimpleLogin is an open-source email forwarding service to protect your email address. SimpleLogin Premium now also includes the premium features of the Proton Pass password manager. The voucher turns your new or existing account into a premium account for the given duration or renews your subscription accordingly. Log in to your account and redeem the voucher at „Upgrade“. You can find SimpleLogin's terms of service here. We are an official reseller of SimpleLogin.
+SimpleLogin Premium voucher code: 1 year
+33,00 €
+–
++
+58 in stock
+Tuta Mail
+With built-in encryption and open source code, Tuta (formerly Tutanota) claims to be the world's most secure email provider. Each gift card is a web address. Just open it to redeem it. It is only valid for personal subscriptions, not for Tuta's business offers. Gift cards cannot be combined with discount promotions. The Revolutionary plan is preselected when redeeming. To switch a Tuta account to Legend, please contact Tuta Premium Support before redeeming. The gift cards are valid for at least two years from the date of purchase. You can find Tuta's terms and conditions here and their gift card terms here. We are an official reseller of Tuta.
+Tuta Gift Card 18 EUR
+18,00 €
+–
++
+23 in stock
+Tuta Gift Card 36 EUR
+36,00 €
+–
++
+27 in stock
+Tuta Gift Card 96 EUR
+96,00 €
+–
++
+10 in stock
+Mobile Communications: eSIMs and SMS Verifications
+SimJuno
+If you would like to transfer your SMSPool balance to SimJuno, please log in to your SMSPool.net account, go to "Tickets" and open a new ticket. Provide your SimJuno username or account number and ask for a balance transfer.
+SimJuno offers data-only eSIMs for 7 to 180 days and 100+ countries. SimJuno prioritizes your privacy and security and does not require any personal information. Create an account to view all plans and prices. You can redeem vouchers in your account on the Wallet page. Click "Add Funds" and "Redeem Coupon". Vouchers are valid for at least two years from the date of purchase. You can find the terms and conditions of SimJuno here. We are an official reseller of SimJuno.
+SimJuno Voucher 10 USD
+10,00 €
+–
++
+30 in stock
+SimJuno Voucher 25 USD
+25,00 €
+–
++
+19 in stock
+SMSPool
+SMSPool eSIMs have moved to SimJuno. If you would like to transfer your SMSPool balance to SimJuno, please create a SimJuno account first. (You don't have to provide any personal data.) Then log in to your SMSPool.net account, go to "Tickets" and open a new ticket. Provide your SimJuno username or account number and ask for a balance transfer.
+SMSPool.net offers real (non-VoIP) mobile phone number rentals from 50+ countries for one-time temporary SMS verifications, long-term number rentals, and ethically sourced residential proxies, all at affordable prices. Note that SMS verifications for financial services are not allowed. Also note that, while they never sell a number twice for the same service, mobile carriers may recycle phone numbers after six months or more. SMSPool claims to be privacy-friendly and does not require any personal information. See the SMSPool FAQ or create an account to view all offers and prices. You can redeem vouchers in your account on the Deposit page at "Promotion code". Vouchers are valid for at least two years from the date of purchase. You can find the terms and conditions of SMSPool here. We are an official reseller of SMSPool.
+SMSPool Voucher 5 USD
+5,00 €
+–
++
+38 in stock
+SMSPool Voucher 10 USD
+10,00 €
+–
++
+18 in stock
+SMSPool Voucher 20 USD
+20,00 €
+–
++
+8 in stock
+Network: VPN and Firewalls
+IVPN
+IVPN helps you keep your online activity, identity and location secret. Just install the IVPN app or set up WireGuard, OpenVPN or IPSec. You can find a comparison of the IVPN Standard, Plus, and Pro Suite plans here. To redeem a voucher, first log in with your account ID or create a new account with one click. Redeem the voucher at Payment or follow the instructions from the Voucher cards FAQ. The vouchers are valid for at least two years from the date of purchase. You can find IVPN's terms of service here. We are an official reseller of IVPN.
+IVPN Standard 1 month
+5,40 €
+–
++
+69 in stock
+IVPN Standard 1 year (60 USD)
+54,00 €
+–
++
+41 in stock
+IVPN Standard 2 years (100 USD, same as 1 year Pro)
+90,00 €
+–
++
+11 in stock
+IVPN Standard 3 years (140 USD)
+126,00 €
+–
++
+1 in stock
+IVPN Plus 1 month
+7,20 €
+–
++
+84 in stock
+IVPN Plus 1 year (80 USD)
+72,00 €
+–
++
+16 in stock
+IVPN Plus 2 years (140 USD)
+126,00 €
+–
++
+5 in stock
+IVPN Plus 3 years (180 USD)
+162,00 €
+–
++
+4 in stock
+IVPN Pro Suite 1 month
+9,00 €
+–
++
+70 in stock
+IVPN Pro Suite 1 year (100 USD, same as 2 years Standard)
+90,00 €
+–
++
+11 in stock
+IVPN Pro Suite 2 years (160 USD)
+144,00 €
+–
++
+3 in stock
+IVPN Pro Suite 3 years (220 USD)
+198,00 €
+–
++
+2 in stock
+Little Snitch Firewall for macOS
+Little Snitch is a personal firewall for macOS which gives you full control over outgoing network connections. Define which applications can connect to what servers, and get warned if they try to do something else. To get the license key, redeem the coupon code here. You will be asked for a name and an email address. Then download the software here. Coupons are redeemable for the specified version of Little Snitch only. They are valid as long as the specified version is available. You can find the terms and conditions of the manufacturer here. We are an official cooperation partner of them.
+Little Snitch 6 single user license (gift card)
+59,00 €
+–
++
+7 in stock
+Mullvad VPN
+Mullvad VPN helps you keep your online activity, identity and location secret. Just install the Mullvad app or set up WireGuard or OpenVPN. To redeem a voucher, first log in with your account number or create a new account with one click. After that, click on „Voucher“ and enter the code. The vouchers are valid for at least two years from the date of purchase. You can find Mullvad's terms of service here. We are an official reseller of Mullvad VPN.
+Mullvad VPN voucher code: 6 months, 5 devices (10% discount)
+27,00 €
+–
++
+121 in stock
+Mullvad VPN voucher code: 12 months, 5 devices (10% discount)
+54,00 €
+–
++
+27 in stock
+Proton VPN
+With servers in over 120 countries, Proton VPN Plus helps you keep your online activity, identity and location secret. Just install the Proton VPN app or set up WireGuard or OpenVPN. Each voucher is a web address. Just open it to create a new account, upgrade a Free account, or renew an existing account. Renewing is only possible if the account is already on the same plan. (Trial accounts need to be downgraded through Proton support before.) Please also note that an account cannot be topped up for multiple years in advance. The vouchers are valid for at least 12 months from the date of purchase. You can find Proton's terms and conditions here. We are an official reseller of Proton.
+Proton VPN Plus: 12 months, up to 10 devices
+83,88 €
+–
++
+88 in stock
+Proton Unlimited (VPN + Pass + Mail + Calendar + Drive, 500 GB): 12 months
+119,88 €
+–
++
+40 in stock
+Safing Privacy Network
+Safing develops the privacy firewall „Portmaster“ and runs the „Safing Privacy Network“ (SPN) which joins features of Onion Routing and VPN. The company has a transparent business model and the code is open source. To redeem a voucher, first log in to your account or create a new account. After that, go to Redeem Gift Card (on the left) and enter your code into the „Redeem Gift Card“ field. The vouchers are valid for at least two years from the date of purchase. You can find the terms of service of Portmaster and SPN here. We are an official reseller of Portmaster Pro.
+Portmaster Pro 1 month
+8,00 €
+–
++
+10 in stock
+Search Engines
+Uruky
+Uruky is a private search engine focused on personal search customization. Uruky is independent, ad-free, and does not collect any personal data. You can try it for free. The paid plan includes unlimited searches. To redeem a voucher, log in to your account, go to Top-up and click "Use a voucher". See also their Voucher FAQ. The vouchers are valid for at least two years from the date of purchase. You can find Uruky's privacy policy and terms of service here. We are an official reseller of Uruky.
+Uruky 1 month
+5,00 €
+–
++
+3 in stock
+Uruky 6 months
+30,00 €
+–
++
+8 in stock
+Uruky 12 months
+60,00 €
+–
++
+8 in stock
+Where do you live? (We have to ask that for tax reasons. It does not affect the price or the goods.)
+Not in the European Union
+Please select your country of residence.
+Country options are limited by your IP address and browser language.
+Please leave this field empty
+Buy
+Payment
+Cash
+Cash by mail in 18 currencies
+Monero and Bitcoin
+SEPA bank transfer
+Legal
+Terms and Conditions
+Privacy policy
+Legal Notice
+Cancellation Policy
+Contact & News
+Contact us
+Blog
+GitHub
+Mastodon + RSS
+Local Store
+Wolfgang-Heinze-Str. 14
+04277 Leipzig
+Germany
+Opening hours:
+Mon+Thu 2pm-6pm
+Tue+Wed+Fri+Sat 10am-2pm
+See here for short-term changes
+Uptime and BTCPay sync status
+Got an idea or found an error? Drop us a note!

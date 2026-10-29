@@ -1,6 +1,13 @@
-import { planTitle, type Bundle, type Price, type SnapshotProvider } from '@simply-sub/core';
+import {
+  citedPages,
+  planTitle,
+  type Bundle,
+  type Price,
+  type Provider,
+  type SnapshotProvider,
+} from '@simply-sub/core';
 import type { CatalogIndex } from './run';
-import type { ApprovalTarget, NetworksTarget, PriceTarget } from './types';
+import type { ApprovalTarget, NetworksTarget, PolicyPageTarget, PriceTarget } from './types';
 
 // What the check looks at for each provider and bundle (BLUEPRINT §6.4): every price with a sourceUrl (its plans', its
 // add-ons', its resellers' offers'), every reseller's approval, and each region's accepted card networks (§9.3). A price
@@ -82,6 +89,26 @@ export function networksTargets(provider: SnapshotProvider): NetworksTarget[] {
   }));
 }
 
+/** A provider's policy pages, each with the quotes its ratings take from it (BLUEPRINT §4.10, M3.9). */
+export function policyTargets(provider: SnapshotProvider): PolicyPageTarget[] {
+  const pages = new Map<string, PolicyPageTarget>();
+  for (const rating of provider.policies?.ratings ?? []) {
+    for (const source of rating.sources) {
+      const page = pages.get(source.url) ?? {
+        file: providerFile(provider.id),
+        provider: provider.id,
+        url: source.url,
+        ratings: [],
+      };
+      const own = page.ratings.find((entry) => entry.topic === rating.topic);
+      if (own) own.quotes.push(source.quote);
+      else page.ratings.push({ topic: rating.topic, tier: rating.tier, quotes: [source.quote] });
+      pages.set(source.url, page);
+    }
+  }
+  return [...pages.values()];
+}
+
 export function bundleTargets(bundle: Bundle): PriceTarget[] {
   return sourced(bundle.prices).map((price) => ({
     file: bundleFile(bundle.id),
@@ -126,13 +153,19 @@ export function catalogIndex(
     }
     return [...new Set(urls)];
   };
-  const index: CatalogIndex = { providers: {}, bundles: {}, hosts: [] };
+  const index: CatalogIndex = {
+    providers: {},
+    bundles: {},
+    hosts: [],
+    cited: citedPages(providers as readonly Provider[], bundles),
+  };
   for (const provider of providers) {
     pagesOf([provider.website]);
     index.providers[provider.id] = pagesOf([
       ...providerTargets(provider).map((target) => target.price.sourceUrl),
       ...approvalTargets(provider).map((approval) => approval.url),
       ...networksTargets(provider).map((target) => target.url),
+      ...policyTargets(provider).map((target) => target.url),
     ]);
   }
   for (const bundle of bundles) {

@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "cadence": {
+      "type": "object",
+      "properties": {
+        "pricing": {
+          "type": "string",
+          "enum": ["daily", "weekly", "monthly", "off"],
+          "description": "Price pages, and the pages that name resellers and accepted cards"
+        },
+        "policies": {
+          "type": "string",
+          "enum": ["daily", "weekly", "monthly", "off"],
+          "description": "The pages policy ratings quote: terms, privacy policies"
+        },
+        "logos": {
+          "type": "string",
+          "enum": ["daily", "weekly", "monthly", "off"],
+          "description": "Each provider’s and reseller’s icon, for a rebrand"
+        },
+        "discovery": {
+          "type": "string",
+          "enum": ["daily", "weekly", "monthly", "off"],
+          "description": "A batch of queued services drafted into a pull request"
+        }
+      },
+      "required": ["pricing", "policies", "logos", "discovery"],
+      "additionalProperties": false,
+      "description": "How often the bot does each thing"
+    },
+    "digest": {
+      "type": "object",
+      "properties": {
+        "day": {
+          "type": "string",
+          "enum": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
+          "description": "The day the weekly pull request is built (UTC)"
+        }
+      },
+      "required": ["day"],
+      "additionalProperties": false,
+      "description": "The weekly pull request of what changed"
+    },
+    "reviewer": {
+      "type": "string",
+      "enum": ["scheduled-claude", "workers-ai", "manual"],
+      "description": "Who reviews what the bot can’t settle: scheduled-claude (a weekly Claude Code task), workers-ai (the free model, labelling anything unsure) or manual (it waits in the pull request)"
+    },
+    "batch": {
+      "type": "object",
+      "properties": {
+        "discovery": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "description": "Services a discovery run takes from the queue"
+        },
+        "browserPages": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "description": "Pages Browser Rendering may open a night (the free plan has 10 browser-minutes a day)"
+        },
+        "neurons": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "description": "Workers AI Neurons a night may use (the free plan has 10,000 a day)"
+        },
+        "reviewItems": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991,
+          "description": "Review items Workers AI reviews a week, at most"
+        }
+      },
+      "required": ["discovery", "browserPages", "neurons", "reviewItems"],
+      "additionalProperties": false,
+      "description": "How much is done at a time"
+    },
+    "search": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "engine": { "type": "string", "enum": ["tavily", "brave", "searxng"] },
+          "bot": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991,
+            "description": "Searches the bot may make a month"
+          },
+          "local": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991,
+            "description": "Searches this machine’s scripts may make a month"
+          }
+        },
+        "required": ["engine"],
+        "additionalProperties": false
+      },
+      "description": "Web search engines, tried in this order, each until its monthly budget is spent; no budget is no limit (your own SearXNG)"
+    }
+  },
+  "required": ["cadence", "digest", "reviewer", "batch", "search"],
+  "additionalProperties": false,
+  "title": "Simply Sub automation",
+  "description": "data/automation.yaml: how often the nightly bot checks pages and runs discovery, who reviews, and its budgets (BLUEPRINT §6.4)"
+}
