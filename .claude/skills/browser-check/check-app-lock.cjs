@@ -480,7 +480,8 @@ async function checkSealed(page, label) {
 
       // ── Settings' Security, before ─────────────────────────────────────────────────────────
       await openSettings(page);
-      const security = page.locator('ss-settings-page section', { hasText: 'Security' });
+      // Its card was Security until M4.7.
+      const security = page.locator('ss-settings-page section.card', { hasText: 'App lock' });
       await security.waitFor();
       await security.screenshot({ path: shot('security-off') });
 

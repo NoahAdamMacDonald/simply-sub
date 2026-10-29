@@ -362,7 +362,10 @@ async function exportBackup(page, label, shot, passphrase) {
 
       // ── Delete all data ─────────────────────────────────────────────────────────────────────
       await openSettings(page);
+      // Folded under its summary since M4.7: Enter opens it, then its button asks.
       await keyToName(page, 'Delete all data');
+      await page.keyboard.press('Enter');
+      await keyToName(page, 'Delete all data…');
       await page.keyboard.press('Enter');
       await dialog(page).locator('h2', { hasText: 'Delete all data?' }).waitFor();
       await sleep(400);

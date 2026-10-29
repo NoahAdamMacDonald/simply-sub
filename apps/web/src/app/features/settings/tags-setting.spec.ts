@@ -107,6 +107,19 @@ describe('TagsSetting', () => {
     expect(element().querySelector('[aria-label="Colour of Work: #123abc"]')).not.toBeNull();
   });
 
+  it('folds a long list after six, with Show all and Show fewer (M4.7)', async () => {
+    for (const name of ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']) await addTag(name, '#123abc');
+    await render();
+    await settle(() => rows().length === 6);
+    const more = () => element().querySelector<HTMLButtonElement>('.show-all')!;
+    expect(more().textContent?.trim()).toBe('Show all 8 tags');
+    expect(more().getAttribute('aria-expanded')).toBe('false');
+    more().click();
+    await settle(() => rows().length === 8);
+    expect(more().textContent?.trim()).toBe('Show fewer');
+    expect(more().getAttribute('aria-expanded')).toBe('true');
+  });
+
   it('renames a tag in place: ✎ opens its name, Enter saves, and focus goes back to ✎', async () => {
     const family = await addTag('Family', tagColorPresets[0].color);
     await render();

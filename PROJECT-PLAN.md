@@ -159,6 +159,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M4.4 | `FxStore` + `ss-price` with the converted marker and "+ tax" in tax-added regions ("incl. tax" for a price with `taxIncluded`, from core's `addedSalesTax`). The rates are kept in Dexie v2's `fxRates` table; core's `priceTaxNote` and `buyerTaxPlace` decide the note; the `/dev/components` gallery starts with `ss-price` (BLUEPRINT §4.7, §4.8, §14) | Converted prices show ≈, the icon and the tooltip; a Canadian sees "+ tax", and "incl. tax" on Mullvad |
 | M4.5 | Shared components (§4.3) + a `/dev/components` gallery (dev builds only; started in M4.4 with `ss-price`), with hand-made inputs where the data comes later (charges M7.1, counts M6.1, view models M4.6); `ss-sub-card` moved to M5.2 and M6.8 (2026-10-26). Core: `budgetBar`, `rankChoices` and `countedRanks`, `planFeatureRows`, `monthWeeks` and `addMonths`, `tagColorPresets`, and the view-model parts the components take (`ItemStatus`, `RankCounts`, `FeatureSummaryRow`) (BLUEPRINT §14) | Every component renders in both themes in the gallery; each is keyboard-usable and passes axe; no hex colours outside `_tokens.scss` |
 | M4.6 | `MetricsService` skeleton: resolved items (§3.4) from repos + catalog + FX. Core's `resolveItem` (and `typedPrice` for custom plans and price overrides); items it can't resolve come back with a reason. Status, the next charge and `ListMetrics` come with M7.1, effective ranks with M6.1 (BLUEPRINT §14) | Unit tests pass with a fixture list |
+| M4.7 | Settings, grouped, the most used first (added 2026-10-28, UI polish, the owner's OK): Everyday (Budgets, Custom tags, Appearance), Where you are (Location and currency, Search), Your data (Backups, App lock, Catalog, and Delete all data folded until opened); "On this page" links each group and section, a side column from 960 px and chips that wrap under it; tags fold after six with Show all (P13) | Each jump link lands on its heading below the top bar with focus there; Delete all data opens only from its own summary; the page is one column at 360 px with nothing scrolling sideways |
 | M4.8 | One control for each kind of choice (added 2026-10-28, UI polish; §4.3): every dropdown listed with a call; the four long lists (the item dialog's Bought in and own price's Currency, a custom plan's Currency, the card dialog's Card currency) become menus you can type in, like Settings'; the short ones stay; Lists' empty state is `ss-empty-state` like every other page's, and Features' loading line the same muted note (P3, P6, P9, P11, P12) | Typing "cad" or "cana" and Enter picks the currency or country in each of the four; no page's empty or loading state differs from the rest |
 | M4.9 | Themed scrollbars (added 2026-10-28, UI polish; §4.1): thin, in both themes' colours from `_tokens.scss` only, with `scrollbar-color` and `scrollbar-width` and a `::-webkit-scrollbar` fallback for Safari | The page's, dialogs' and panels' scrollbars are thin, themed in light and dark, still draggable, and the thumb is at least 3:1 against what's behind it |
 
@@ -1423,6 +1424,13 @@ Local sync comes with Phase 5.
 
 **Since the feedback after M9:** the 📍 dialog's menus can be typed in (M6.16, as P1's), and a tag's colour can also
 come from the device's own colour picker beside Hex colour, each following the other (M6.15).
+
+**Since the UI polish (M4.7):** the sections are grouped, the most used first: **Everyday** (Budgets, Custom tags,
+Appearance), **Where you are** (Location and currency, Search) and **Your data** (Backups, App lock, which was
+Security, Catalog, and Delete all data, folded under its summary until opened, its button "Delete all data…"). "On
+this page" links each group and its sections: a sticky side column from 960 px, and a chip for each group, wrapping,
+above them on a phone. A link moves focus to its heading, below the top bar. A long list of tags folds after six, with
+"Show all 14 tags" and "Show fewer".
 
 **Acceptance**
 - [ ] Budgets and tags persist and update every page live

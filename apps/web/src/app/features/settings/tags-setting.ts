@@ -1,5 +1,6 @@
 import {
   Component,
+  computed,
   ElementRef,
   Injector,
   afterNextRender,
@@ -26,6 +27,9 @@ interface PendingFocus {
   selector: string;
 }
 
+/** How many tags show before Show all (M4.7). */
+const foldAfter = 6;
+
 /**
  * Custom tags on Settings (P13, M6.11): a row per tag with its colour, which opens its palette, its name, ✎ to rename
  * it in place, and ✕ to delete it, asking first when subscriptions use it; then ⊕ for a new tag, in edit mode. The
@@ -44,6 +48,15 @@ export class TagsSetting {
   private readonly injector = inject(Injector);
 
   protected readonly records = this.tags.records;
+  /** A long list folds after its first few (M4.7), with Show all; one being edited shows it all. */
+  protected readonly showAll = signal(false);
+  protected readonly foldAfter = foldAfter;
+  protected readonly shown = computed(() => {
+    const records = this.records();
+    const open = this.editing()?.id;
+    const unfolded = this.showAll() || records.slice(foldAfter).some((tag) => tag.id === open);
+    return unfolded ? records : records.slice(0, foldAfter);
+  });
   protected readonly status = this.tags.status;
   protected readonly editing = signal<Editing | undefined>(undefined);
   private readonly pendingFocus = signal<PendingFocus | undefined>(undefined);
