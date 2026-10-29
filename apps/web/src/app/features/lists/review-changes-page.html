@@ -54,9 +54,10 @@
                 <span class="visually-hidden">{{
                   line.kind === 'goes' ? 'Goes: ' : line.kind === 'comes' ? 'Comes: ' : 'Changes: '
                 }}</span>
-                <span class="name">{{ line.name }}</span>
+                <!-- Spaces inside the spans: Angular drops those between them, and screen readers need them. -->
+                <span class="name">{{ line.name }} </span>
                 @if (line.price) {
-                  <span class="price">{{ line.price }}</span>
+                  <span class="price">{{ line.price }} </span>
                 }
                 <span class="what">{{ line.what }}</span>
               </li>
