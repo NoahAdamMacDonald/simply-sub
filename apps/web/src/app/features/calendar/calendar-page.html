@@ -8,8 +8,16 @@
       <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
     </button>
     <mat-menu #syncMenu>
+      <!-- A link the apps follow (M10.3), then a file for each app to import (M7.5). -->
+      <button mat-menu-item type="button" (click)="liveCalendar()">
+        <mat-icon>link</mat-icon>
+        Live calendar…
+      </button>
       @for (app of calendarApps; track app.id) {
-        <button mat-menu-item type="button" (click)="sync(app.id)">{{ app.name }}</button>
+        <button mat-menu-item type="button" (click)="sync(app.id)">
+          <mat-icon>download</mat-icon>
+          {{ app.name }} file
+        </button>
       }
     </mat-menu>
     <ss-split-button label="Export to file" [items]="exportChoices" (action)="exportFile($event)" />

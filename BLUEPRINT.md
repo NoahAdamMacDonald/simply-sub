@@ -2674,6 +2674,9 @@ prompted after each big change, or weekly).
 - **The app lock (M6.10):** the database opens as soon as `StorageService` starts. The user's repositories load once
   it has said whether the lock is on, and drop their records while it's locked (`StorageService.access`); the caches
   load regardless (section 14).
+- **The live calendar (M10.3):** `LiveCalendarRepository` keeps the feed set the user made, one record under the key
+  `liveCalendar` (Dexie v4), sealed by the app lock like the settings, and left out of backups, since its manage key
+  changes and revokes the links. A revoke soft-deletes it, so a sync (M10.9) passes that on.
 - **IndexedDB blocked** (some private browsing modes, or site data blocked): the repositories' status is `error`, and
   the app shows the P15 notice in place of the shell. [Continue anyway] calls `StorageService.useMemory()`: the same
   Dexie database opens on `fake-indexeddb` (57 kB, a chunk loaded only then), and every repository reloads from it
@@ -2714,6 +2717,16 @@ prompted after each big change, or weekly).
   time, `X-WR-CALNAME` and RFC 7986's `NAME`, Apple's `X-APPLE-CALENDAR-COLOR`, a 12-hour refresh hint), keeps only
   hashes of the tokens and the set's manage key, and deletes a set 180 days after the app last wrote it. RFC 7986's
   `COLOR` is left out: it takes only a CSS colour name.
+- **As built (M10.3), the app's side:** Sync calendar's **Live calendar…** and Settings' Live calendar card open one
+  dialog: what's uploaded and who can see it, the calendars (Everything, each tag, Payments without a tag) and what
+  each payment shows; then each calendar's link with Copy link, Google's add page (its undocumented
+  `calendar/render?cid=webcal://…`, which works for an https feed) and Apple's `webcal://` link, each app's steps, and
+  Change calendars, New links and Revoke all. `LiveCalendarService` keeps the feeds current from a chunk of its own,
+  started once the app is stable: 5 s after a change that reaches them (core's `liveCalendars`, hashed and compared
+  with what was last sent), when the network is back, and at least every 30 days, one tab at a time (a Web Lock). A
+  run of charges starts from its item's anchor once that has passed, so a feed's events keep their start and UID as
+  the days go by. The record (`liveCalendar`, Dexie v4) holds the set's id, its manage key and each calendar's token;
+  the app lock seals it, backups leave it out, and Delete all data revokes the links first when it can read them.
 
 ### 11.4 Device sync and future accounts
 - **Phase 5, encrypted sync ("sync chain", like Brave's):** generate a sync code (a passphrase). The browser
@@ -2772,7 +2785,7 @@ gone. That's why it's opt-in.
 - **Key:** derived like the backup key, then held in memory only, as a non-extractable WebCrypto `CryptoKey`.
   Nothing secret is stored: only the salt and an encrypted check value, which tells a wrong passphrase.
 - **What's encrypted:** each record of `settings`, `lists`, `items`, `customSubs`, `rankings`, `cards`, `tags` and
-  `drafts` and `dismissedSuggestions` (M8.2) keeps its key and indexed fields in plain text and
+  `drafts`, `dismissedSuggestions` (M8.2) and `liveCalendar` (M10.3) keeps its key and indexed fields in plain text and
   stores the whole record as one encrypted value. Of the settings, only what's needed before unlocking stays plain:
   the theme and the lock itself. The caches (the catalog files, the exchange rates) stay plain, since they're public.
 - **Locking:** the lock screen asks for the passphrase on each visit. The app locks again after a chosen idle time
@@ -2915,6 +2928,25 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-29, M10.1–M10.3, as built)**
+- **The user database** (M10.1): `simply-sub-user` was made on 2026-10-29 (ENAM, `wrangler d1 create`), and its first
+  two migrations applied remotely by hand that day for the Proton test on the preview link, ahead of the deploy, which
+  finds them applied. Its first query after creating it failed once with Cloudflare's 7403 ("not authorized"), then
+  worked: a new database takes a moment.
+- **The test calendar for Proton** (M10.2): made on the branch's preview link with `POST /cal`, one event per kind of
+  rule the app writes, for the owner to subscribe to in Proton Calendar. Its result goes here when they report it.
+- **Feeds don't follow exchange rates** (M10.3): a feed's amounts are as the provider charges them, in its currency
+  ("Renew Mullvad VPN: €60.00"), so new rates never change it, and each run of charges starts from its anchor once that
+  has passed, so its start and UID don't move as the days go by. A feed changes only when the lists do (or a
+  per-charge event passes), and the app sends it only then.
+- **No record id leaves the device** (M10.3): each event's UID is a SHA-256 of the app's own, cut to 32 hex digits.
+- **Sync calendar's menu** (M10.3): Live calendar… comes first; the file items are named "Google Calendar file" and so
+  on, so the two kinds read apart.
+- **Delete all data** (M10.3) revokes the live calendar's links first, while it can read their key; locked, or offline,
+  it can't, and the server deletes them after 180 days.
+- **Bundle:** 498.90 kB initial (497.84 before). The starter costs 0.18 kB of `main`; the rest is the split its lazy
+  chunk caused in the chunk the app shares at start (223.37 kB became 150.60 and 73.68), the glue between two chunks.
 
 **Resolved (2026-10-29, M10's plan)**
 The owner's choices for Phase 5, which PROJECT-PLAN's M10 (M10.1–M10.13) follows:

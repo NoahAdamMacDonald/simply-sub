@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, Injector, computed, inject, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox, type MatCheckboxChange } from '@angular/material/checkbox';
 import { MatOption } from '@angular/material/core';
@@ -23,9 +23,12 @@ import { catalogDate } from '../../core/catalog/catalog-dates';
 import { CatalogStore, type CatalogCheckOutcome } from '../../core/catalog/catalog-store';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { AppLockRepository } from '../../core/storage/app-lock-repository';
+import { LiveCalendarRepository } from '../../core/storage/live-calendar-repository';
 import { StorageService } from '../../core/storage/storage-service';
 import { ThemeService, type ThemeMode } from '../../core/theme/theme-service';
 import { countryName } from '../../shared/country-name';
+import { dateText } from '../../shared/date-text';
+import { openLiveCalendar } from '../../shared/live-calendar/open-live-calendar';
 import { importedText } from './backup-text';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { BudgetSetting } from './budget-setting';
@@ -74,6 +77,8 @@ export class SettingsPage {
   private readonly snackBar = inject(MatSnackBar);
   private readonly lock = inject(AppLockRepository);
   private readonly storage = inject(StorageService);
+  private readonly liveCalendar = inject(LiveCalendarRepository);
+  private readonly injector = inject(Injector);
 
   protected readonly saved = this.settings.saved;
   protected readonly mode = this.theme.mode;
@@ -108,6 +113,22 @@ export class SettingsPage {
       ? 'Not downloaded yet'
       : `Updated ${catalogDate(generatedAt)} · version ${version}`;
   });
+
+  /** The live calendar (M10.3): on, with how many calendars and when they were last sent, or off. */
+  protected readonly liveCalendarOn = computed(() => this.liveCalendar.record() !== undefined);
+  protected readonly liveCalendarLine = computed(() => {
+    const record = this.liveCalendar.record();
+    if (!record) {
+      return 'Off. A link your calendar app follows, so your payments show there and stay up to date.';
+    }
+    if (record.broken) return 'Its links no longer work: make new ones.';
+    const count = record.calendars.length;
+    return `On: ${count === 1 ? 'a calendar' : `${count} calendars`}, last sent ${dateText(record.sentAt.slice(0, 10))}.`;
+  });
+
+  protected openLiveCalendar(): void {
+    void openLiveCalendar(this.injector);
+  }
 
   /** What the last [Check for updates] found: only the user's own checks, not the automatic ones. */
   protected readonly checkMessage = signal('');
@@ -157,6 +178,7 @@ export class SettingsPage {
       sections: [
         { id: 'backups', name: 'Backups' },
         { id: 'lock', name: 'App lock' },
+        { id: 'live-calendar', name: 'Live calendar' },
         { id: 'catalog', name: 'Catalog' },
         { id: 'delete', name: 'Delete all data' },
       ],

@@ -1,6 +1,7 @@
 import * as z from 'zod';
 import { isoDateSchema } from '../catalog/formats';
 import { addDays, type IsoDate } from '../dates/iso-date';
+import { feedSecretSchema, maxFeeds } from './feed-secret';
 
 // The live calendar (BLUEPRINT §11.3, M10.2): a feed set holds a calendar for everything, one for each tag chosen and
 // one for payments without a tag, each served at a URL of its own that calendar apps subscribe to. The app sends the
@@ -9,13 +10,8 @@ import { addDays, type IsoDate } from '../dates/iso-date';
 // name and amount, or its name alone), day and repeat rule, and each calendar's name and colour. No list, note or record
 // id: each event's UID is a hash the app makes.
 
-/** A feed set holds the everything calendar, the no-tag calendar and up to 24 tags'. */
-export const maxFeeds = 26;
 /** The events of a whole feed set: about 400 kB of calendar files, under D1's 2 MB a row. */
 export const maxFeedEvents = 2_000;
-
-/** A feed's token, a set's id or its manage key, as the Worker makes them: 128 random bits in base64url. */
-export const feedSecretSchema = z.string().regex(/^[A-Za-z0-9_-]{22}$/, 'Use a 22-character token');
 
 /**
  * A repeat rule of the forms core's repeatRule writes, all of which Proton Calendar takes: every few days or weeks, a

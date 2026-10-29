@@ -336,12 +336,14 @@ describe('CalendarPage', () => {
     const apps = Array.from(
       document.querySelectorAll<HTMLElement>('.mat-mdc-menu-panel [mat-menu-item]'),
     );
-    expect(apps.map((app) => text(app))).toEqual([
-      'Google Calendar',
-      'Apple Calendar',
-      'Proton Calendar',
+    // The live calendar's link first (M10.3), then each app's file; the icons' names aren't read.
+    expect(apps.map((app) => text(app.querySelector('.mat-mdc-menu-item-text')))).toEqual([
+      'Live calendar…',
+      'Google Calendar file',
+      'Apple Calendar file',
+      'Proton Calendar file',
     ]);
-    apps[2].click();
+    apps[3].click();
     await until(() => document.querySelector('ss-sync-dialog') !== null, 5000);
     expect(downloads.map((download) => download.name)).toEqual([
       'simply-sub-payments-2026-10-25.ics',

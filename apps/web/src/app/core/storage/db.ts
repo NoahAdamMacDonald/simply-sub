@@ -36,5 +36,7 @@ export function createUserDatabase(options?: DexieOptions): Dexie {
   db.version(3)
     .stores({ dismissedSuggestions: 'fingerprint, listId' })
     .upgrade((transaction) => transaction.table('dismissedSuggestions').clear());
+  // The live calendar's feed set (M10.3): one record, under the key `liveCalendar`. A new table needs no upgrade.
+  db.version(4).stores({ liveCalendar: 'key' });
   return db;
 }

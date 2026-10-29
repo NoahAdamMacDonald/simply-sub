@@ -52,6 +52,7 @@ import { Exporter, type PaymentsExportFormat } from '../../shared/export/exporte
 import { PageHeader } from '../../shared/page-header/page-header';
 import { amountText } from '../../shared/price-tag/price-text';
 import { ProviderIcon } from '../../shared/provider-icon/provider-icon';
+import { openLiveCalendar } from '../../shared/live-calendar/open-live-calendar';
 import { SplitButton, type SplitButtonItem } from '../../shared/split-button/split-button';
 import { calendarApps, type CalendarApp } from './calendar-apps';
 import type { CalendarDay, CalendarEntry } from './calendar-entries';
@@ -447,6 +448,11 @@ export class CalendarPage {
   /** Export to file: the lists shown, over the next 12 months. The file downloads, and a snackbar names it. */
   protected exportFile(kind: string): void {
     void this.exporter.exportPayments(this.shownLists(), kind as PaymentsExportFormat);
+  }
+
+  /** Sync calendar's Live calendar (P10, M10.3): the dialog, with every list, whatever the page shows. */
+  protected liveCalendar(): void {
+    void openLiveCalendar(this.injector);
   }
 
   /**

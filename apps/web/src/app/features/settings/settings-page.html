@@ -152,6 +152,14 @@
           }
         </section>
 
+        <section class="card" aria-labelledby="live-calendar-heading">
+          <h3 id="live-calendar-heading" tabindex="-1">Live calendar</h3>
+          <p class="hint">{{ liveCalendarLine() }}</p>
+          <button matButton="outlined" type="button" (click)="openLiveCalendar()">
+            {{ liveCalendarOn() ? 'Manage…' : 'Set up…' }}
+          </button>
+        </section>
+
         <section class="card" aria-labelledby="catalog-heading">
           <h3 id="catalog-heading" tabindex="-1">Catalog</h3>
           <div class="catalog">

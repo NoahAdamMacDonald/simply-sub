@@ -1,7 +1,7 @@
 import { addDays, type IsoDate } from '../dates/iso-date';
 import type { IsoMonth } from '../dates/iso-month';
 import { samePeriod } from '../dates/period';
-import { itemCharges, type Charge } from '../schedule/charges';
+import { itemCharges, type Charge, type Charged } from '../schedule/charges';
 import { next12Range } from '../schedule/list-metrics';
 import type { Billing } from '../user/list-item';
 import { itemTitle } from '../user/item-text';
@@ -48,6 +48,32 @@ export interface CalendarEvent {
 const uidDomain = 'sub.simplely.ca';
 
 /**
+ * How the events are written. The download's amounts are in the user's currency, ≈ when converted; the live calendar's
+ * (M10.3) are as the provider charges them, in its currency, so new exchange rates never change a feed, with the titles
+ * the user chose.
+ */
+export interface CalendarEventOptions {
+  amounts: 'user' | 'charged';
+  /** Each title's name and amount ("Netflix: $19.94"), or its name alone. */
+  titles: 'name-amount' | 'name';
+  /** Each title ends with its list's name, for lists kept for different people: "Netflix: $19.94 (Family)". */
+  listNames: boolean;
+  /**
+   * Where a run of charges starts: at the first charge from today (a download, a copy as of today), or from its anchor
+   * once that has passed, so a live calendar's events keep their start and UID as the days go by.
+   */
+  runsFrom: 'today' | 'anchor';
+}
+
+/** The .ics download's events (M7.5). */
+export const downloadEventOptions: CalendarEventOptions = {
+  amounts: 'user',
+  titles: 'name-amount',
+  listNames: false,
+  runsFrom: 'today',
+};
+
+/**
  * The events of `lists` (M7.12): a repeating event for each run of an ongoing subscription's charges at one amount, and
  * an event for each charge of the rest in the next 12 months. Each is titled with what it is and costs as charged
  * ("Netflix: $19.94"; "Renew Mullvad VPN: ≈ $94.16" for one renewed by hand), its description saying its plan, its
@@ -57,6 +83,7 @@ export function calendarEvents(
   lists: readonly ExportList[],
   context: ExportContext,
   format: ExportFormat,
+  options: CalendarEventOptions = downloadEventOptions,
 ): CalendarEvent[] {
   const window = next12Range(context.today);
   const events: { date: IsoDate; event: CalendarEvent }[] = [];
@@ -71,17 +98,24 @@ export function calendarEvents(
       const until = resolved.item.priceOverride?.until;
       const to =
         repeats && until !== undefined && until >= window.to ? addDays(until, 400) : window.to;
-      const charges = itemCharges(resolved, { from: window.from, to }, context.place);
+      const from =
+        repeats &&
+        options.runsFrom === 'anchor' &&
+        billing.mode === 'recurring' &&
+        billing.anchorDate < window.from
+          ? billing.anchorDate
+          : window.from;
+      const charges = itemCharges(resolved, { from, to }, context.place);
       if (!repeats || billing.mode !== 'recurring') {
         for (const charge of charges.filter((one) => one.date < window.to)) {
           events.push({
             date: charge.date,
-            event: chargeEvent(charge, resolved, list.name, context, format),
+            event: chargeEvent(charge, resolved, list.name, context, format, options),
           });
         }
         continue;
       }
-      const runs = runsOf(charges);
+      const runs = runsOf(charges, options);
       runs.forEach((run, index) => {
         const next = runs[index + 1];
         // Charges are before the end date; the next run starts the day after this one's last.
@@ -98,7 +132,17 @@ export function calendarEvents(
             : `Ends ${format.date(billing.endDate)}`;
         events.push({
           date: run[0].date,
-          event: runEvent(run[0], last, note, billing, resolved, list.name, context, format),
+          event: runEvent(
+            run[0],
+            last,
+            note,
+            billing,
+            resolved,
+            list.name,
+            context,
+            format,
+            options,
+          ),
         });
       });
     }
@@ -113,17 +157,24 @@ function ownPeriodAddOns(resolved: ResolvedItem): boolean {
   return resolved.addOns.some((addOn) => !samePeriod(addOn.price, resolved.item.billing));
 }
 
-/** Charges in runs of the same amount, currency and renewal: a price that changes starts a run. */
-function runsOf(charges: readonly Charge[]): Charge[][] {
+/** A charge's amount as the events show it: in the user's currency, or as the provider charges it. */
+function shown(charge: Charge, options: CalendarEventOptions): Charged {
+  return options.amounts === 'charged' ? charge.charged : charge;
+}
+
+/** Charges in runs of the same amount, currency and renewal, as shown: a price that changes starts a run. */
+function runsOf(charges: readonly Charge[], options: CalendarEventOptions): Charge[][] {
   const runs: Charge[][] = [];
   for (const charge of charges) {
     const run = runs.at(-1);
-    const first = run?.[0];
+    const first = run && shown(run[0], options);
+    const next = shown(charge, options);
     if (
+      run &&
       first &&
-      Math.round(first.amount * 100) === Math.round(charge.amount * 100) &&
-      first.currency === charge.currency &&
-      first.manual === charge.manual
+      Math.round(first.amount * 100) === Math.round(next.amount * 100) &&
+      first.currency === next.currency &&
+      run[0].manual === charge.manual
     ) {
       run.push(charge);
     } else {
@@ -173,11 +224,12 @@ function runEvent(
   listName: string,
   context: ExportContext,
   format: ExportFormat,
+  options: CalendarEventOptions,
 ): CalendarEvent {
-  const event = chargeEvent(first, resolved, listName, context, format, note);
+  const event = chargeEvent(first, resolved, listName, context, format, options, note);
   return {
     ...event,
-    uid: `${first.itemId}-from-${first.date}-${first.currency}@${uidDomain}`,
+    uid: `${first.itemId}-from-${first.date}-${shown(first, options).currency}@${uidDomain}`,
     recurrenceRule: repeatRule(billing, last),
   };
 }
@@ -189,16 +241,24 @@ function chargeEvent(
   listName: string,
   context: ExportContext,
   format: ExportFormat,
+  options: CalendarEventOptions,
   until?: string,
 ): CalendarEvent {
   const name = resolved.item.nickname ?? resolved.name;
   const tags = resolved.item.tagIds.flatMap((id) => context.tags.get(id)?.name ?? []);
   const amount = `${charge.converted ? '≈ ' : ''}${format.money(charge.amount, charge.currency)}`;
+  const { amount: titleAmount, currency } = shown(charge, options);
+  const priced =
+    options.amounts === 'charged'
+      ? `${name}: ${format.money(titleAmount, currency)}`
+      : `${name}: ${amount}`;
+  const what = options.titles === 'name' ? name : priced;
+  const title = charge.manual ? `Renew ${what}` : what;
   return {
-    uid: `${charge.itemId}-${charge.date}-${charge.currency}@${uidDomain}`,
+    uid: `${charge.itemId}-${charge.date}-${currency}@${uidDomain}`,
     start: calendarDate(charge.date),
     end: calendarDate(addDays(charge.date, 1)),
-    title: charge.manual ? `Renew ${name}: ${amount}` : `${name}: ${amount}`,
+    title: options.listNames ? `${title} (${listName})` : title,
     description: [
       itemTitle(resolved),
       `List: ${listName}`,

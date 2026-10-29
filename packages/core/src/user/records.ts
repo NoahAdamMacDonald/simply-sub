@@ -6,6 +6,7 @@ import { dismissedSuggestionSchema, suggestionFingerprintSchema } from './dismis
 import { fxCacheSchema } from './fx-cache';
 import { listDraftSchema } from './list-draft';
 import { listItemSchema } from './list-item';
+import { liveCalendarSchema } from './live-calendar';
 import { paymentCardSchema } from './payment-card';
 import { profileRankingSchema } from './profile-ranking';
 import { recordIdSchema } from './record';
@@ -30,6 +31,7 @@ export const userRecordSchemas = {
   drafts: listDraftSchema,
   dismissedSuggestions: dismissedSuggestionSchema,
   fxRates: fxCacheSchema,
+  liveCalendar: liveCalendarSchema,
 };
 export type UserTable = keyof typeof userRecordSchemas;
 export type UserRecords = { [T in UserTable]: z.infer<(typeof userRecordSchemas)[T]> };
@@ -54,6 +56,7 @@ export const userRecordKeys = {
   drafts: 'listId',
   dismissedSuggestions: 'fingerprint',
   fxRates: 'key',
+  liveCalendar: 'key',
 } as const satisfies Record<UserTable, string>;
 
 /** What each table's well-formed keys look like. */
@@ -69,6 +72,7 @@ const keySchemas: Record<UserTable, z.ZodType<string>> = {
   drafts: recordIdSchema,
   dismissedSuggestions: suggestionFingerprintSchema,
   fxRates: fxCacheSchema.shape.key,
+  liveCalendar: liveCalendarSchema.shape.key,
 };
 
 /** A stored record that failed its schema, described without any of its values. */

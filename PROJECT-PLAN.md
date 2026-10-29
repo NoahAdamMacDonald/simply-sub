@@ -378,14 +378,23 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   for, the choices and the last hash. The app lock seals it, backups leave it out (it holds a key), and sync carries
   it (M10.9), so any device keeps the links current.
 - **Acceptance**
-  - [ ] Links for Everything and two tags serve three calendars; an item with both tags is in both; Without a tag has
+  - [x] Links for Everything and two tags serve three calendars; an item with both tags is in both; Without a tag has
         the rest
-  - [ ] A saved change reaches the feeds within 10 s; a change that touches no payment, or new exchange rates, sends
+  - [x] A saved change reaches the feeds within 10 s; a change that touches no payment, or new exchange rates, sends
         nothing
-  - [ ] Revoke all makes every link answer 404, and the dialog starts over
-  - [ ] Keyboard only, both themes at 360 and 1280 px, axe with the dialog open, no horizontal scroll; the dialog and
+  - [x] Revoke all makes every link answer 404, and the dialog starts over
+  - [x] Keyboard only, both themes at 360 and 1280 px, axe with the dialog open, no horizontal scroll; the dialog and
         the service in lazy chunks
   - [ ] The owner subscribes to a preview link in Proton Calendar and sees a change arrive
+- **As built:** core's `liveCalendars` (`export/live-calendars.ts`) on `calendarEvents`' new options (amounts as
+  charged; the titles chosen; a list's name; a run starting from its anchor once that has passed, so its start and UID
+  hold still as the days go by and a feed changes only when the lists do), and the `liveCalendar` record
+  (`user/live-calendar.ts`, Dexie v4, sealed by the lock, left out of backups); the app's `LiveCalendarRepository`,
+  `shared/live-calendar/` (the client, `LiveCalendarService` with a Web Lock across tabs, the dialog and its opener),
+  started from a chunk of its own once the app is stable; Sync calendar's menu now names each app's item "… file";
+  Settings' Live calendar card (Your data, after App lock); Delete all data revokes the links first when it can. Tested
+  in `live-calendar-service.spec.ts`, `live-calendar-dialog.spec.ts` and core's `live-calendars.spec.ts`;
+  `check-m10-calendar.cjs` in the browser.
 
 **M10.4 — Calendar year view** (P10; BLUEPRINT §8.3, §13.1)
 - **URL:** `?view=year` beside the `month` the page already has: its year is shown, and Month returns to that month.
@@ -1589,6 +1598,10 @@ Upcoming   Oct 28 Crave $22.00 · Nov 3 Mullvad ≈ $7.53 ↻ · Nov 12 Netflix 
   app and import into it, since the apps colour a whole calendar, not each event.
 - **The bar (M7.7):** its one colour is the month's total against the budget, on the scale (P2).
 
+**Since M10 (M10.3):** Sync calendar ▾ starts with **Live calendar…**, the dialog that makes, shows, changes and
+revokes the live calendar's links (a calendar for everything, each tag chosen, the payments without a tag); the file
+items below it are named "Google Calendar file" and so on. The dialog's spec is M10.3's.
+
 **Acceptance**
 - [ ] Charges appear on the right days, including month-end dates and limited windows
 - [ ] The spent/total bar matches §3.1 for past, current and future months
@@ -1768,6 +1781,10 @@ Local sync comes with Phase 5.
 **Since the feedback after M9:** the 📍 dialog's menus can be typed in (M6.16, as P1's), and a tag's colour can also
 come from the device's own colour picker beside Hex colour, each following the other (M6.15).
 
+**Since M10 (M10.3):** Your data has a **Live calendar** card after App lock: "Off" with Set up…, or "On: 2 calendars,
+last sent Oct 29, 2026." with Manage…, both opening the live calendar's dialog (P10). Delete all data revokes the links
+first, while it can read their key.
+
 **Since the UI polish (M4.7):** the sections are grouped, the most used first: **Everyday** (Budgets, Custom tags,
 Appearance), **Where you are** (Location and currency, Search) and **Your data** (Backups, App lock, which was
 Security, Catalog, and Delete all data, folded under its summary until opened, its button "Delete all data…"). "On
@@ -1905,6 +1922,8 @@ item's next charge, plus tax where the catalog's price is before tax, and Review
   | `/icons/<id>.webp` | static asset | 1 day, then revalidated (the URL has no version, so a new logo must show up) | No |
   | `/api/v1/fx?base=CAD` | Worker → Frankfurter | 12 h at the edge + browser cache (about once a day per user) | Yes (tiny) |
   | `/api/v1/icon?domain=` | Worker → Google/DuckDuckGo | 30 days (KV) | Yes (custom subscriptions only) |
+  | `POST /api/v1/cal`, `PUT` and `DELETE /api/v1/cal/:id` | Worker → the user database | Never (`no-store`) | Yes (only with a live calendar: 5 s after a change that reaches it, and at least monthly) |
+  | `/api/v1/cal/<token>.ics` | Worker → the user database | `no-cache` with an ETag | Yes (calendar apps' servers, a few times a day per calendar) |
 - The other endpoints (`/providers`, `/plans`, `/bundles`, `/features`, `/categories`, `/catalog`) serve deep links,
   future features and anyone else using the API. They're edge-cached for an hour, keyed by URL.
 - **Versioning:** everything is under `/v1`, changes are additive only, and `/health` reports `apiVersion`.
