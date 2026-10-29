@@ -196,34 +196,19 @@ describe('Exporter', () => {
     expect(text).not.toContain('Old');
   });
 
-  it('saves the next 12 months as all-day events, one in every month for a plan billed on the 31st', async () => {
+  it('saves each subscription as a repeating all-day event, a plan billed on the 31st on each month’s last day (M7.12)', async () => {
     await exporter().exportPayments([work.id, family.id], 'ics');
     const [file] = downloads;
     expect(file.name).toBe('simply-sub-payments-2026-10-25.ics');
     expect(file.blob.type).toBe('text/calendar;charset=utf-8');
     const ics = await file.blob.text();
     expect(ics).toContain('X-WR-CALNAME:Simply Sub payments\r\n');
-    expect(ics.match(/BEGIN:VEVENT/g)).toHaveLength(25);
+    expect(ics.match(/BEGIN:VEVENT/g)).toHaveLength(3);
     expect(ics).toContain('SUMMARY:Netflix: $19.94\r\n');
     expect(ics).toContain('DTSTART;VALUE=DATE:20261112\r\nDTEND;VALUE=DATE:20261113\r\n');
+    expect(ics).toContain('RRULE:FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=12\r\n');
     expect(ics).toContain('SUMMARY:Renew Mullvad VPN: ≈ $94.16\r\n');
-    const craves = [
-      ...ics.matchAll(/SUMMARY:Crave: \$23\.10\r\n[\s\S]*?DTSTART;VALUE=DATE:(\d{6})\d\d/g),
-    ].map((match) => match[1]);
-    expect(craves).toEqual([
-      '202610',
-      '202611',
-      '202612',
-      '202701',
-      '202702',
-      '202703',
-      '202704',
-      '202705',
-      '202706',
-      '202707',
-      '202708',
-      '202709',
-    ]);
+    expect(ics).toContain('RRULE:FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=28,29,30,31;BYSETPOS=-1\r\n');
   });
 
   it('saves the payment schedule as JSON and as text too (M7.9)', async () => {
