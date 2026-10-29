@@ -1929,6 +1929,27 @@ of the night's Neurons and browser pages.
   hundred services), or the computer's browser tricks (cookie banners, tabs, toggles): a page they're needed for is
   read as Browser Rendering shows it, and a service the bot can't read is left out with why, for `data:batch`.
 
+**Regional prices (M10.12):** a region the catalog doesn't price a provider in yet goes through the same steps with
+`--region GB`, for the providers the catalog has, in `.pipeline/<id>/regions/<region>/`:
+- **Finding the page:** the pages its prices cite are read for their `hreflang` links and the links under the region's
+  locale (`/en-gb/`, `/uk/`), then the same address with the region's country in place of its own (Netflix's help
+  article's `/ca` to `/gb`, Xbox's `/en-US/` to `/en-GB/`), kept when it answers without going to another country;
+  then the usual steps, which score the region's locale first and search for its name (`ProviderSite.region`).
+  Pricing only, since terms and policies are the provider's everywhere.
+- **Reading it:** in the system Edge in the region's English and time zone (`regionBrowser`). A page whose address
+  names another country, or that shows only other currencies' prices (a bare `$` is a dollar, never pounds or
+  euros), is unread and never extracted: a site that prices by where the visitor is shows this machine Canada's, and
+  that region's needs a browser there.
+- **Drafting:** a request of its own (`regionalPrompt`: the provider's plans, the region's currency, the page), whose
+  answer `regionalPrices` checks: a plan the provider has, the region's currency, the quote on its page with its
+  amount, one price a plan and period. The prices kept go into the provider file beside the others, each replacing
+  the plan's price for that region and period, with the region added to `billingCurrency` when the file lists it.
+- **The batch:** `npm run data:batch -- --region GB` opens one pull request for the region: each price with a link
+  that opens its page at its quote, and the providers left out with why (`regionalReview`). `EU` is the region for a
+  provider that charges every euro country the same; otherwise each country's own (M10.13).
+- **The bot:** a regional page is a page like any other, with its own baseline; one whose fetch ends on another
+  country's address (its first two path segments) is unread.
+
 **Ongoing:** the nightly bot (section 6.4) checks the saved `sources:` URLs against their baselines, and its discovery
 takes the next services from the queue on its cadence, so the catalog grows on its own while you only review.
 
@@ -2982,6 +3003,19 @@ None.
 - **A reported plan's confirmation is kept** (M10.10): the night's checks keep a confirmed price only when its
   `lastVerified` is due again, so "the page still shows the catalog's price" would have left nothing for the digest
   to find. A confirmation of a reported plan's price is kept until the digest, and proposes no edit.
+
+- **A region's page by its address** (M10.12): hreflang finds few of the catalog's regional pages (Bitdefender's);
+  most sites put the country in the address instead, at the start (Xbox's `/en-US/`) or the end (Netflix's help
+  article's `/ca`), with no link between countries. `regionalVariants` swaps the country for the region's, as
+  a guess the browser then reads: Netflix's and Xbox's GB pages came that way. A guess that went elsewhere is caught
+  by its address or its currency: Disney+'s `disneyplus-en-gb-price` went to Canada's article, priced in CAD.
+- **The currency decides** (M10.12): the first dry run took Hulu's, Claude's and the Canadian services' pages for GB,
+  their bare `$` counting for nothing. A bare `$` is now a dollar: any region's that pays in one, and never pounds or
+  euros, so those pages are unread, with why. A page that names several currencies (Mullvad's "€5 is equivalent to
+  £4.18") is read, and the extraction finds no price charged in pounds there: its euros are its price everywhere.
+- **Regional prices beside the others** (M10.12): the YAML edit keeps the file as written (`lineWidth: 0`, as the
+  other scripts' edits), so a region's pull request changes only its prices and `billingCurrency`; `data:validate`
+  wants every priced region in `billingCurrency` when a file lists it, which the first apply missed.
 
 **Resolved (2026-10-29, M10.5–M10.9, as built)**
 - **The service worker** (M10.5): Angular's `ngsw-worker.js` (`@angular/service-worker` 22.2.3) with

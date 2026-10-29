@@ -649,9 +649,18 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   redirect to another country counts as unread.
 - **Skills:** price-research reads a region this way.
 - **Acceptance**
-  - [ ] Tests: hreflang links and locale paths map to countries; a redirected page is refused
-  - [ ] A dry run for one region finds the regional pricing page for most of the catalog's providers that have one,
+  - [x] Tests: hreflang links and locale paths map to countries; a redirected page is refused
+  - [x] A dry run for one region finds the regional pricing page for most of the catalog's providers that have one,
         and its drafts pass `data:validate`
+- **As built:** core's `pipeline/regional-pages.ts` (locales to countries, `regionalPages`, `regionalVariants`,
+  `regionBrowser`, `regionalRefusal`, `wentToAnotherCountry`) and `pipeline/regional-draft.ts` (the request, the answer
+  and `regionalPrices`, a check of its own rather than `draftFromAnswer`, which drafts whole providers), and
+  `regionalReview` in `batch-review.ts`; `ProviderSite.region` in find-pages; the scripts' `--region`, working in
+  `.pipeline/<id>/regions/<region>/`; and the bot's page reader. The dry run for GB (2026-10-29): a regional pricing
+  page read for Bitdefender (hreflang), Netflix and Xbox Game Pass (their addresses with GB's country), and Mullvad;
+  Disney+'s went to Canada's (a page that needs a visitor there); the rest are sold in Canada or the US only, or at
+  one price everywhere. 11 prices for 3 providers, none dropped, each file passing `data:validate`
+  (BLUEPRINT §6.5, §14).
 
 **M10.13 — The first regions** (the owner's choice)
 - A batch pull request from `data:batch --region` for each of: the US's gaps (the providers sold there with Canada's

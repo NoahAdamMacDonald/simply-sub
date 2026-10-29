@@ -19,6 +19,8 @@ const spacingMs = 750;
 export const pipelineHeaders = { 'User-Agent': userAgent, 'Accept-Language': 'en-CA,en;q=0.9' };
 
 export class PoliteWeb {
+  /** What every request sends: Canada's English unless a region's pages are read (M10.12). */
+  private readonly headers: Record<string, string>;
   /** Each host's robots.txt: its rules, and its text for the sitemaps it names. */
   private readonly robots = new Map<string, Promise<{ rules: Robots; text?: string }>>();
   private readonly pages = new Map<string, Promise<FetchedPage | { error: string }>>();
@@ -26,6 +28,10 @@ export class PoliteWeb {
   private readonly lastRequest = new Map<string, number>();
   /** Every URL requested this run, in order, for the run's report. */
   readonly requested: string[] = [];
+
+  constructor(acceptLanguage = pipelineHeaders['Accept-Language']) {
+    this.headers = { ...pipelineHeaders, 'Accept-Language': acceptLanguage };
+  }
 
   /** A page's HTML and words, as robots.txt allows; or why it couldn't be read. */
   page(url: string): Promise<FetchedPage | { error: string }> {
@@ -98,7 +104,7 @@ export class PoliteWeb {
       await this.wait(url.host);
       this.requested.push(`${url.origin}/robots.txt`);
       const response = await fetch(`${url.origin}/robots.txt`, {
-        headers: pipelineHeaders,
+        headers: this.headers,
         signal: AbortSignal.timeout(timeoutMs),
       });
       // RFC 9309: a 4xx allows everything; a 5xx or no answer allows nothing.
@@ -122,7 +128,7 @@ export class PoliteWeb {
       await this.wait(url.host);
       this.requested.push(url.href);
       const response = await fetch(url, {
-        headers: { ...pipelineHeaders, Accept: accept },
+        headers: { ...this.headers, Accept: accept },
         signal: AbortSignal.timeout(timeoutMs),
       });
       if (!response.ok) return { error: `The page answered ${response.status}` };
