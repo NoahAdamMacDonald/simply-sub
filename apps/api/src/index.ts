@@ -3,6 +3,7 @@ import { cleanUp } from './clean-up';
 import { utcDay } from './http';
 import { apiHeaders, edgeCache, noRoute, rateLimit, unexpectedError } from './middleware';
 import { bundles } from './routes/bundles';
+import { cal } from './routes/cal';
 import { catalog } from './routes/catalog';
 import { categories } from './routes/categories';
 import { features } from './routes/features';
@@ -21,6 +22,7 @@ import { writeLimit } from './writes';
 const v1 = new Hono<{ Bindings: Env }>()
   .use('*', edgeCache)
   .route('/bundles', bundles)
+  .route('/cal', cal)
   .route('/catalog', catalog)
   .route('/categories', categories)
   .route('/features', features)

@@ -1,3 +1,4 @@
+import type { BodyProblem } from '@simply-sub/core';
 import type { Context, MiddlewareHandler } from 'hono';
 import { badBody, overCapacity, rateLimited, tooLarge } from './http';
 
@@ -160,7 +161,21 @@ export function newSecret(bytes = 16): string {
 
 /** What the user database keeps of a secret: its SHA-256, in hex. */
 export async function secretHash(secret: string): Promise<string> {
-  return [...(await sha256(secret))].map((byte) => byte.toString(16).padStart(2, '0')).join('');
+  return sha256Hex(secret);
+}
+
+/** The SHA-256 of `text`, in hex: a secret's hash, or the hash a stored file's ETag comes from. */
+export async function sha256Hex(text: string): Promise<string> {
+  return [...(await sha256(text))].map((byte) => byte.toString(16).padStart(2, '0')).join('');
+}
+
+/** Zod's issues with a body as a 400's problems, at most 20: where each is (keys and indexes, dotted) and what. */
+export function bodyProblems(
+  issues: readonly { path: readonly PropertyKey[]; message: string }[],
+): BodyProblem[] {
+  return issues
+    .slice(0, 20)
+    .map((issue) => ({ path: issue.path.map(String).join('.'), issue: issue.message }));
 }
 
 /** Whether `secret` is the one `hash` (secretHash's) was made from, compared in constant time. */

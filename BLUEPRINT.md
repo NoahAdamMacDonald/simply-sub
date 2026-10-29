@@ -1228,8 +1228,11 @@ M1.14), so a buyer can see what signing up means beyond the price.
 | `GET /icon?domain=example.com` | Icon proxy for **custom subscriptions**: asks Google's and DuckDuckGo's icon services (core's `iconServices`) and returns the best square PNG of at least 32 pixels (`pickIcon`, Google's on a tie), or `404` when neither has one, and the app shows the subscription's first letter. KV keeps an icon for 30 days and "no icon" for a day (section 5.4). No `size`: the Worker can't resize, so the app scales the icon. Catalog icons are fetched once by `scripts/fetch-icons.ts` into `data/logos/` (committed, so builds never fetch) and served as static WebP files at `/icons/<id>.webp` (section 6.3) |
 | `GET /fx?base=CAD` | The ECB's daily rates in the user's currency. The Worker fetches them in euros from Frankfurter's ECB-only route (`/v2/providers/ecb/rates?base=EUR`; v1 is deprecated, and v2's default blends in other central banks), keeps them in KV under `fx:ecb` for 12 hours, and rebases them to any currency the ECB publishes (core's `rebaseRates`), so one fetch serves every base. When Frankfurter fails after that, the last good rates are sent with `meta.stale: true`; with none kept, `502 upstream_unavailable`. `GET /providers` uses the same rates (M2.3) |
 | `GET /health` | Returns the API version, and the catalog version, build time and counts that D1 holds (the `catalog` row, section 5.3) |
-| *(Phase 5)* `POST /reports` | "This price looks wrong" reports (Turnstile-protected, rate-limited) |
-| *(Phase 5)* `GET /cal/:token.ics` | Opt-in live calendar feed (section 11.3) |
+| *(Phase 5)* `POST /reports` | "This price looks wrong" reports (rate-limited, no free text; M10.10) |
+| `POST /cal` | Makes a live calendar feed set (section 11.3, M10.2): one calendar per feed sent (everything, each tag chosen, no tag), each payment's title, day and repeat rule only. Answers each feed's token and links, and the set's manage key, shown once. The user database keeps hashes of the tokens and the key, and each feed's calendar file |
+| `PUT /cal/:id` | Replaces a set's calendars with its manage key (`Authorization: Bearer`): a feed with its token keeps its URL and, unchanged, its file; one without gets a new URL; one left out is revoked. Its 180 days start again. 6 writes a minute per set |
+| `DELETE /cal/:id` | Revokes a set with its manage key: every calendar of it answers 404, and nothing of it is kept |
+| `GET /cal/:token.ics` | One calendar file (`text/calendar`), revalidated on every fetch (`no-cache` with an ETag), so a change or a revoke shows at the app's next check. Limited per feed (30 a minute), not per IP, since calendar apps' servers share addresses |
 
 Example requests and responses for every endpoint are in [docs/api-output-examples.json](docs/api-output-examples.json).
 Core holds the contract's response schemas (M2.7): `successBodySchemas` names each built endpoint's (the bodies'
@@ -2688,7 +2691,7 @@ prompted after each big change, or weekly).
 | TXT | native | A readable summary of one list; the Calendar's, its next 12 months by month (M7.9) |
 | JSON (one list) | native | List view's: the list, its items and what they name, as stored. Not a backup, so not importable (M7.5) |
 | JSON (payments) | native | The Calendar's: the lists shown and each charge in the next 12 months as charged, with its tax, renewal and live tags (core's `paymentsFile`, M7.9). Not a backup either |
-| ICS | `ics` npm package | All-day events (`VALUE=DATE`, so no time zone can move it), titled with what each costs as charged and `X-WR-CALNAME` naming the calendar. Since M7.12 an ongoing subscription is one repeating event (`RRULE`) for each run of charges at one amount, written from the schedule's own rule: a month's or year's day, or the 28th up to it with `BYSETPOS=-1` (a plan billed on the 31st falls on a shorter month's last day), `INTERVAL` for every 3 months or every 30 days, and `UNTIL` the day before the plan ends or a price of the user's own does, when the next run starts. So it goes on past the first year. Specific dates, and add-ons billed on a period of their own, stay an event per charge in the next 12 months, which no repeat rule writes exactly |
+| ICS | `ics` npm package | All-day events (`VALUE=DATE`, so no time zone can move it), titled with what each costs as charged and `X-WR-CALNAME` naming the calendar. Since M7.12 an ongoing subscription is one repeating event (`RRULE`) for each run of charges at one amount, written from the schedule's own rule: a month's or year's day, `INTERVAL` for every 3 months or every 30 days, and `UNTIL` the day before the plan ends or a price of the user's own does, when the next run starts. So it goes on past the first year. Since M10.2 the rules keep to the forms Proton Calendar takes (one day of the month; it drops other events): a plan billed on the 31st is `BYMONTHDAY=-1`, each month's last day, and a yearly Feb 29 `BYMONTH=2;BYMONTHDAY=-1`, where M7.12 had the 28th up to the day with `BYSETPOS=-1`. Specific dates, add-ons billed on a period of their own and a monthly plan billed on the 29th or 30th, which February keeps from following one rule, stay an event per charge in the next 12 months |
 
 ### 11.3 Calendar integration
 - **Phase 3, download `.ics`:** works with Google, Apple and Proton through their import features. This is
@@ -2703,6 +2706,14 @@ prompted after each big change, or weekly).
   revoke the token at any time. Subscribed calendars are read-only in Proton, which is fine for this. A feed per tag,
   besides the one for everything, would give each tag a calendar of its own and so a colour of its own: the way the
   apps can show tags in colour (M7.9).
+- **As built (M10.2), the server's side:** a *feed set* per device that turns it on, in the user database
+  (`simply-sub-user`): a calendar for everything, one for each tag chosen and one for payments without a tag, each at
+  `/api/v1/cal/<token>.ics` (section 5.2). The app sends each payment's title (its name and amount as the provider
+  charges it, or its name alone), its day and its repeat rule, and each calendar's name and colour; event UIDs are
+  hashes the app makes. The Worker writes each calendar's file then (core's `feedIcs`: all-day events that don't block
+  time, `X-WR-CALNAME` and RFC 7986's `NAME`, Apple's `X-APPLE-CALENDAR-COLOR`, a 12-hour refresh hint), keeps only
+  hashes of the tokens and the set's manage key, and deletes a set 180 days after the app last wrote it. RFC 7986's
+  `COLOR` is left out: it takes only a CSS colour name.
 
 ### 11.4 Device sync and future accounts
 - **Phase 5, encrypted sync ("sync chain", like Brave's):** generate a sync code (a passphrase). The browser

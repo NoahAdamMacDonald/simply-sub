@@ -45,6 +45,7 @@ export * from './dates/iso-date';
 export * from './dates/iso-month';
 export * from './dates/period';
 export * from './export/calendar-events';
+export * from './export/calendar-feed';
 export * from './export/export-tables';
 export * from './export/file-names';
 export * from './export/list-file';

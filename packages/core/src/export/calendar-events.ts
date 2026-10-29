@@ -8,12 +8,13 @@ import { itemTitle } from '../user/item-text';
 import type { ResolvedItem } from '../user/resolved';
 import type { ExportContext, ExportList } from './export-tables';
 
-// The .ics file (BLUEPRINT §11.2, §11.3, M7.5, M7.12): an ongoing subscription is one repeating event for each run of
-// charges at the same amount, its repeat rule written from the schedule's own (a plan billed on the 31st falls on a
-// shorter month's last day: BYMONTHDAY=28,29,30,31 with BYSETPOS=-1; an end date is UNTIL), so it goes on past the first
-// year, and a calendar shows it as long as it lasts. A price of the user's own that ends, or a plan's end, ends its run.
-// Specific dates and add-ons billed on a period of their own stay an event per charge in the next 12 months, which no
-// repeat rule writes exactly. The app gives the events to the `ics` package.
+// The .ics file (BLUEPRINT §11.2, §11.3, M7.5, M7.12, M10.2): an ongoing subscription is one repeating event for each
+// run of charges at the same amount, its repeat rule written from the schedule's own (a plan billed on the 31st falls
+// on each month's last day: BYMONTHDAY=-1; an end date is UNTIL), so it goes on past the first year, and a calendar
+// shows it as long as it lasts. A price of the user's own that ends, or a plan's end, ends its run. The rules keep to
+// what Proton Calendar takes, which drops any other event (repeatRule). Specific dates, add-ons billed on a period of
+// their own and a monthly plan billed on the 29th or 30th stay an event per charge in the next 12 months, which no
+// such rule writes exactly. The app gives the events to the `ics` package, and the live calendar to POST /cal.
 
 /** How the app writes money and dates: core lays the files out, and the app formats what they say. */
 export interface ExportFormat {
@@ -62,7 +63,10 @@ export function calendarEvents(
   for (const { list, resolved: items } of lists) {
     for (const resolved of items) {
       const { billing } = resolved.item;
-      const repeats = billing.mode === 'recurring' && !ownPeriodAddOns(resolved);
+      const repeats =
+        billing.mode === 'recurring' &&
+        !ownPeriodAddOns(resolved) &&
+        repeatRule(billing) !== undefined;
       // A run that a price of the user's own ends is followed through to the regular price after it.
       const until = resolved.item.priceOverride?.until;
       const to =
@@ -132,26 +136,31 @@ function runsOf(charges: readonly Charge[]): Charge[][] {
 /**
  * The repeat rule of an ongoing item's charges from one of them on (M7.12), as the schedule has them: a month's or
  * year's on the anchor's day, or its billing day, falling on a shorter month's last day; `last` is the last day a charge
- * can fall on.
+ * can fall on. Only in the forms Proton Calendar takes (M10.2): one day of the month, and no BYSETPOS without a
+ * weekday (its web client's getIsRruleSupported, read 2026-10-29), so a month's 31st is BYMONTHDAY=-1, its last day,
+ * and a year's day its month's own (February's last for the 29th). A monthly plan billed on the 29th or 30th has no
+ * such rule (February would need a second day), so undefined: its charges are events of their own.
  */
 export function repeatRule(
   billing: Extract<Billing, { mode: 'recurring' }>,
   last?: IsoDate,
-): string {
+): string | undefined {
   const [, month, day] = billing.anchorDate.split('-').map(Number);
   const dayOfMonth = billing.billingDay ?? day;
-  // A day some months don't have: the latest of the 28th up to it that the month has.
-  const days =
-    dayOfMonth <= 28
-      ? `BYMONTHDAY=${dayOfMonth}`
-      : `BYMONTHDAY=${Array.from({ length: dayOfMonth - 27 }, (_, at) => 28 + at).join(',')};BYSETPOS=-1`;
   const every = `INTERVAL=${billing.intervalCount}`;
-  const rule = {
-    day: `FREQ=DAILY;${every}`,
-    week: `FREQ=WEEKLY;${every}`,
-    month: `FREQ=MONTHLY;${every};${days}`,
-    year: `FREQ=YEARLY;${every};BYMONTH=${month};${days}`,
-  }[billing.interval];
+  let rule: string;
+  if (billing.interval === 'day' || billing.interval === 'week') {
+    rule = `FREQ=${billing.interval === 'day' ? 'DAILY' : 'WEEKLY'};${every}`;
+  } else if (billing.interval === 'month') {
+    if (dayOfMonth === 29 || dayOfMonth === 30) return undefined;
+    rule = `FREQ=MONTHLY;${every};BYMONTHDAY=${dayOfMonth === 31 ? -1 : dayOfMonth}`;
+  } else {
+    // February's 29th and later fall on its last day; another month's day on the most it has.
+    const longest = new Date(Date.UTC(2001, month, 0)).getUTCDate();
+    const yearDay =
+      month === 2 ? (dayOfMonth >= 29 ? -1 : dayOfMonth) : Math.min(dayOfMonth, longest);
+    rule = `FREQ=YEARLY;${every};BYMONTH=${month};BYMONTHDAY=${yearDay}`;
+  }
   return last === undefined ? rule : `${rule};UNTIL=${last.replaceAll('-', '')}`;
 }
 

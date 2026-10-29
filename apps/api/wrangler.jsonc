@@ -44,6 +44,9 @@
     { "name": "API_RATE_LIMIT", "namespace_id": "1001", "simple": { "limit": 60, "period": 60 } },
     { "name": "ICON_RATE_LIMIT", "namespace_id": "1002", "simple": { "limit": 10, "period": 60 } },
     { "name": "WRITE_RATE_LIMIT", "namespace_id": "1003", "simple": { "limit": 10, "period": 60 } },
+    // A live calendar feed, fetched by calendar apps' servers that share addresses, is limited by itself instead of
+    // by IP: 30 a minute, keyed by its token's hash (M10.2).
+    { "name": "FEED_RATE_LIMIT", "namespace_id": "1005", "simple": { "limit": 30, "period": 60 } },
     {
       "name": "RESOURCE_RATE_LIMIT",
       "namespace_id": "1004",

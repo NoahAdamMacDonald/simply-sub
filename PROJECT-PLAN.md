@@ -221,7 +221,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M7.9 | The Calendar's JSON and Text, and its own calendar (added 2026-10-28, the feedback after M9): Export to file adds JSON (core's `paymentsFile`) and Text (`paymentsText`); each event lists its tags and has them as `CATEGORIES`; Sync calendar's steps make a Simply Sub calendar first in Google, Apple and Proton Calendar, since they colour a calendar and not an event (BLUEPRINT §11.2, §11.3, §14) | Both files download with the lists shown; the steps import into a calendar of its own |
 | M7.10 | Home as a hub (added 2026-10-28, UI polish, the owner's OK of its 360 and 1280 px wireframes): quick actions (Add a subscription to a list or a custom one, New list, Open a list); the budget warnings and budgets; Coming up, every payment in the next 14 days, with Mark renewed on a manual renewal (the next renewal moves to the charge after it, with Undo; a charge the schedule counts as paid, before an item's next one, isn't listed); the mini calendar; Your lists, a card each with this month; Ways to save, each list's View optimizations; Price changes, what catalog updates changed in the lists' prices this past month (core's `priceChangesBetween`, `withPriceChanges`, kept in `settings.priceChanges` by CatalogStore after an update, in a chunk of its own) (P2) | The hub at 1280 px has budgets and Coming up beside the calendar, and one column at 360 px; Mark renewed moves the renewal on a period and Undo puts it back; a catalog update that changes a listed plan's price lists it for a month |
 | M7.11 | Statuses you can see (added 2026-10-29, the feedback after M3; §3.3): a manual renewal says "Manual · renew by Nov 29"; an item a bundle, suite or extra member replaces says what it becomes ("Moves to Netflix and Crave on Nov 15", "Extra member on Mine (Netflix Standard) from Nov 20"; core's `itemReplacements`); and Search says which bundle a provider is in ("Active · 1 list · in Netflix and Crave"; `ProviderActivity.bundleIds`) (P4, P8) | Proton Family with auto-renew off shows "Manual"; a bundle applied on Optimizations, saved, shows on each plan it replaces; a provider in a listed bundle shows the bundle's name on Search |
-| M7.12 | Calendar events that repeat (added 2026-10-29, the feedback after M3): the .ics has a repeating event for each run of an ongoing subscription's charges at one amount, with the schedule's own rule (core's `repeatRule`: the day of the month, or the 28th up to it with `BYSETPOS=-1` for a shorter month's last day; `INTERVAL`; `UNTIL` where the plan or a price of the user's own ends), so it shows past the first year; Specific dates stay an event per charge; `X-WR-CALNAME` names the calendar, which only a subscribed feed (M10's live feed) makes on its own (P10, BLUEPRINT §11.2) | A monthly plan billed on the 31st imports as one event on the 31st or each month's last day, every year after; an end date or an own price's end stops its run there |
+| M7.12 | Calendar events that repeat (added 2026-10-29, the feedback after M3): the .ics has a repeating event for each run of an ongoing subscription's charges at one amount, with the schedule's own rule (core's `repeatRule`: the day of the month, or the 28th up to it with `BYSETPOS=-1` for a shorter month's last day, which M10.2 made `BYMONTHDAY=-1` for Proton Calendar; `INTERVAL`; `UNTIL` where the plan or a price of the user's own ends), so it shows past the first year; Specific dates stay an event per charge; `X-WR-CALNAME` names the calendar, which only a subscribed feed (M10's live feed) makes on its own (P10, BLUEPRINT §11.2) | A monthly plan billed on the 31st imports as one event on the 31st or each month's last day, every year after; an end date or an own price's end stops its run there |
 
 ### M8 — Optimizer & bot
 | ID | Task | Done when |
@@ -297,8 +297,8 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 - **Acceptance**
   - [x] Over each limit the Worker answers with its code and writes nothing; the daily caps hold under a loop of
         writes (Worker tests)
-  - [ ] No token, key or chain id appears in a log line, with every route made to throw in tests (with the routes,
-        M10.2 and M10.8)
+  - [x] No token, key or chain id appears in a log line, with every route made to throw in tests (the live calendar's
+        in M10.2; sync's come with M10.8)
   - [x] The nightly clean-up deletes only what has expired
 - **As built:** `apps/api/src/writes.ts` (`writeLimit` on every `/api/*` write, `resourceAllowed`, `readBody` and
   `readJson`, `countWrite` with `dailyCaps` and `storageCap`, `capReached` and `storageFull`, `newSecret`,
@@ -337,16 +337,23 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   dates, repeat rules only of the form `repeatRule` writes, colours `#rrggbb`) and `feedIcs`, RFC 5545's text: CRLF
   lines folded at 75 octets without splitting a character, escaped text, all-day `VALUE=DATE` events that don't block
   time, `X-WR-CALNAME` and RFC 7986's `NAME`, a refresh hint of 12 hours (`REFRESH-INTERVAL`, `X-PUBLISHED-TTL`), and
-  the colour where apps read one (`X-APPLE-CALENDAR-COLOR`, RFC 7986's `COLOR`). The bodies' schemas join
-  `successBodySchemas`.
+  the colour where apps read one (Apple's `X-APPLE-CALENDAR-COLOR`; RFC 7986's `COLOR` takes only a CSS colour name, so
+  it's left out). The bodies' schemas join `successBodySchemas`.
 - **Contract:** the Phase 5 sketch rewritten for sets; its note "never repeat rules" has been wrong since M7.12.
 - **Acceptance**
-  - [ ] Every example passes the contract tests; `feedIcs` has tests for folding, escaping and repeat rules, and its
+  - [x] Every example passes the contract tests; `feedIcs` has tests for folding, escaping and repeat rules, and its
         output parses back as a calendar (a test-only parser, pinned)
-  - [ ] A PUT keeps each kept feed's URL and revokes the ones left out; a wrong key changes nothing
-  - [ ] A revoked or expired feed answers 404 at once
+  - [x] A PUT keeps each kept feed's URL and revokes the ones left out; a wrong key changes nothing
+  - [x] A revoked or expired feed answers 404 at once
   - [ ] No rule `repeatRule` writes fails Proton's check (a test against its supported forms), and the owner's Proton
-        Calendar shows every event of the test calendar
+        Calendar shows every event of the test calendar (the test: done; the owner's calendar: pending)
+- **As built:** core's `export/calendar-feed.ts` (`calendarFeedsSchema` with `feedRulePattern`, `feedIcs`, the bodies'
+  schemas) and `repeatRule`'s Proton forms, tested against Proton's conditions and against `chargeDates` for every
+  anchor of 2027 and 2028, monthly and yearly, every 1 to 3 periods with each billing day, and by `ical.js` 2.2.1 (a
+  test-only dependency of core) expanding each kind of rule; `apps/api/src/routes/cal.ts` on the user database's second
+  migration (`cal_sets`, `cal_feeds`), `FEED_RATE_LIMIT` and `rateLimit` leaving feeds to it, and the clean-up of
+  expired sets; the contract's calendar examples rewritten, the GET example's file written by `feedIcs` and held to
+  the Worker's answer word for word. Tested in `apps/api/test/cal.spec.ts`.
 
 **M10.3 — Live calendar in the app** (P10, P13; BLUEPRINT §11.3)
 - **Where:** Sync calendar ▾ starts with "Live calendar…", above the three apps' file imports; Settings' Your data

@@ -42,6 +42,14 @@ export function badBody(c: Context, problems: readonly BodyProblem[]): Response 
   return c.json(body, 400, { 'Content-Type': jsonType, 'Cache-Control': 'no-store' });
 }
 
+/** 403 forbidden: a write without the secret its feed set or sync chain was made with, or with another (M10.2). */
+export function forbidden(c: Context, message: string): Response {
+  return c.json({ error: { code: 'forbidden', message } } satisfies ErrorBody, 403, {
+    'Content-Type': jsonType,
+    'Cache-Control': 'no-store',
+  });
+}
+
 /** 413 too_large: the body is over its route's limit, which the message names in bytes (M10.1). */
 export function tooLarge(c: Context, limit: number): Response {
   return c.json(
