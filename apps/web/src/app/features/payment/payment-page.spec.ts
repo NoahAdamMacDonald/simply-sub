@@ -340,7 +340,8 @@ describe('PaymentPage', () => {
     expect(dialog()?.querySelector('h2')?.textContent).toBe('Add a card');
     expect(text(dialog()?.querySelector('.never'))).toContain('Never enter a card number');
     // The user's currency to start with.
-    expect(await (await control(loader, 'Card currency', MatSelectHarness)).getValueText()).toBe(
+    // A menu you can type in (M4.8), showing its choice's name.
+    expect(await (await control(loader, 'Card currency', MatInputHarness)).getValue()).toBe(
       'CAD — Canadian Dollar',
     );
 

@@ -4,9 +4,8 @@
 }
 
 .note,
-.hint {
-  margin: 0 0 12px;
-  color: var(--ss-text-muted);
+ss-empty-state {
+  margin-bottom: 12px;
 }
 
 // The cards, and the feature summary on their right from 960 px; under it the summary comes after them.

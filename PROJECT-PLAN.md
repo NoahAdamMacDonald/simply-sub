@@ -159,6 +159,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M4.4 | `FxStore` + `ss-price` with the converted marker and "+ tax" in tax-added regions ("incl. tax" for a price with `taxIncluded`, from core's `addedSalesTax`). The rates are kept in Dexie v2's `fxRates` table; core's `priceTaxNote` and `buyerTaxPlace` decide the note; the `/dev/components` gallery starts with `ss-price` (BLUEPRINT §4.7, §4.8, §14) | Converted prices show ≈, the icon and the tooltip; a Canadian sees "+ tax", and "incl. tax" on Mullvad |
 | M4.5 | Shared components (§4.3) + a `/dev/components` gallery (dev builds only; started in M4.4 with `ss-price`), with hand-made inputs where the data comes later (charges M7.1, counts M6.1, view models M4.6); `ss-sub-card` moved to M5.2 and M6.8 (2026-10-26). Core: `budgetBar`, `rankChoices` and `countedRanks`, `planFeatureRows`, `monthWeeks` and `addMonths`, `tagColorPresets`, and the view-model parts the components take (`ItemStatus`, `RankCounts`, `FeatureSummaryRow`) (BLUEPRINT §14) | Every component renders in both themes in the gallery; each is keyboard-usable and passes axe; no hex colours outside `_tokens.scss` |
 | M4.6 | `MetricsService` skeleton: resolved items (§3.4) from repos + catalog + FX. Core's `resolveItem` (and `typedPrice` for custom plans and price overrides); items it can't resolve come back with a reason. Status, the next charge and `ListMetrics` come with M7.1, effective ranks with M6.1 (BLUEPRINT §14) | Unit tests pass with a fixture list |
+| M4.8 | One control for each kind of choice (added 2026-10-28, UI polish; §4.3): every dropdown listed with a call; the four long lists (the item dialog's Bought in and own price's Currency, a custom plan's Currency, the card dialog's Card currency) become menus you can type in, like Settings'; the short ones stay; Lists' empty state is `ss-empty-state` like every other page's, and Features' loading line the same muted note (P3, P6, P9, P11, P12) | Typing "cad" or "cana" and Enter picks the currency or country in each of the four; no page's empty or loading state differs from the rest |
 | M4.9 | Themed scrollbars (added 2026-10-28, UI polish; §4.1): thin, in both themes' colours from `_tokens.scss` only, with `scrollbar-color` and `scrollbar-width` and a `::-webkit-scrollbar` fallback for Safari | The page's, dialogs' and panels' scrollbars are thin, themed in light and dark, still draggable, and the thumb is at least 3:1 against what's behind it |
 
 ### M5 — Search & add
@@ -547,6 +548,15 @@ are lazy, so the components and the Material modules they use (select, menu, chi
 stay out of the initial bundle.
 
 ---
+
+**Choices, which control (M4.8, UI polish):** a long list (over about 15) is a menu you can type in
+(`ss-choice-field`, M6.16): Settings', the first run's and 📍's Country, province or state and Currency; the item
+dialog's Bought in and its own price's Currency; a custom plan's Currency; the card dialog's Card currency. A short one
+stays a `mat-select`: the item dialog's Plan, billing period, Unit, add-on Quantity and Paid with; a custom plan's
+Unit; a feature's Value; the card dialog's Type and Network; Search's Sort and Category; List view's Sort; the
+Calendar's Showing, Month and Year; Lock after (Settings and its dialog); the rank menus. Features, tags and Add a
+feature were typed into already. Every page with nothing to show uses `ss-empty-state` (Lists' too, M4.8), and every
+loading line is the page's muted `.note`.
 
 ## 5. Page specs
 

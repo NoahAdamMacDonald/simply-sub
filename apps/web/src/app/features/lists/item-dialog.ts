@@ -118,6 +118,7 @@ import { RankSelect } from '../../shared/rank/rank-select';
 import { catalogIcon } from '../../shared/sub-card/card-text';
 import { TagPicker } from '../../shared/tags/tag-picker';
 import { fillScreenWhenNarrow } from '../../shared/wide-dialog';
+import { ChoiceField } from '../../shared/choice-field/choice-field';
 
 /** What the dialog opens on: a plan, bundle or custom subscription to add, at a period, or an item to change. */
 export type ItemDialogRequest =
@@ -174,6 +175,7 @@ let nextId = 0;
 @Component({
   selector: 'ss-item-dialog',
   imports: [
+    ChoiceField,
     FormField,
     FormRoot,
     MatButton,

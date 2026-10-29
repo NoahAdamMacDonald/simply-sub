@@ -323,15 +323,11 @@
               <input matInput type="number" step="any" [formField]="form.priceAmount" />
               <mat-error>{{ firstError(form.priceAmount) }}</mat-error>
             </mat-form-field>
-            <mat-form-field appearance="outline" subscriptSizing="dynamic">
-              <mat-label>Currency</mat-label>
-              <mat-select [formField]="form.priceCurrency">
-                @for (choice of currencies; track choice.value) {
-                  <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
-                }
-              </mat-select>
-              <mat-error>{{ firstError(form.priceCurrency) }}</mat-error>
-            </mat-form-field>
+            <ss-choice-field
+              label="Currency"
+              [formField]="form.priceCurrency"
+              [choices]="currencies"
+            />
             <mat-form-field appearance="outline" subscriptSizing="dynamic">
               <mat-label>Until</mat-label>
               <input
@@ -361,15 +357,15 @@
 
     <details class="advanced" [open]="model().region !== country()">
       <summary>Advanced</summary>
-      <mat-form-field appearance="outline">
-        <mat-label>Bought in</mat-label>
-        <mat-select [formField]="form.region" (selectionChange)="regionChanged()">
-          @for (choice of countries; track choice.value) {
-            <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
-          }
-        </mat-select>
-        <mat-hint>Its price and sales tax are that country’s</mat-hint>
-      </mat-form-field>
+      <!-- A long list: a menu you can type in, like Settings' Country (M4.8). -->
+      <ss-choice-field
+        class="bought-in"
+        label="Bought in"
+        hint="Its price and sales tax are that country’s"
+        [formField]="form.region"
+        [choices]="countries"
+        (picked)="regionChanged()"
+      />
     </details>
 
     <section class="ranks" [attr.aria-labelledby]="ids + '-ranks'">

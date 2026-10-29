@@ -61,10 +61,11 @@
             }
           </ul>
         } @else {
-          <p class="hint">
+          <!-- The empty state every page has (M4.8), with the New Subscription List tile below. -->
+          <ss-empty-state icon="playlist_add" heading="No lists yet">
             A list holds the subscriptions you pay for, or the ones you're weighing up. Make your
             first one.
-          </p>
+          </ss-empty-state>
         }
         <a class="new-list" routerLink="/lists/new">
           <span>New Subscription List</span>

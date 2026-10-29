@@ -31,6 +31,7 @@ import { focusFirstError } from '../../shared/focus-first-error';
 import { issueErrors } from '../../shared/form-issues';
 import { currencyChoices } from '../../shared/place-choices';
 import { fillScreenWhenNarrow } from '../../shared/wide-dialog';
+import { ChoiceField } from '../../shared/choice-field/choice-field';
 
 export interface CardDialogData {
   /** The card to change; none for a new one. */
@@ -52,6 +53,7 @@ export interface CardDialogResult {
 @Component({
   selector: 'ss-card-dialog',
   imports: [
+    ChoiceField,
     FormField,
     FormRoot,
     MatButton,

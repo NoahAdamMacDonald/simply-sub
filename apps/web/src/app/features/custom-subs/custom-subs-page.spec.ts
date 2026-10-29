@@ -232,7 +232,9 @@ describe('CustomSubsPage', () => {
     await (await loader.getHarness(MatCheckboxHarness.with({ label: /^Plus tax/ }))).check();
 
     // A yes-or-no feature is added at once; an enum asks for its value.
-    const features = await loader.getHarness(MatAutocompleteHarness);
+    const features = await loader.getHarness(
+      MatAutocompleteHarness.with({ ancestor: 'ss-feature-picker' }),
+    );
     await features.enterText('ad');
     await features.selectOption({ text: 'Ad free' });
     await features.enterText('video');
