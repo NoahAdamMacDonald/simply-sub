@@ -136,11 +136,14 @@ async function waitForServer() {
   const beaconLoads = [];
 
   async function newPage(viewport, colorScheme, { blocked = false } = {}) {
+    // The service worker (M10.5) would fetch page loads itself, past the routing that adds the beacon to them;
+    // check-m10-offline-sync.cjs checks it under the production CSP.
     const context = await browser.newContext({
       viewport,
       colorScheme,
       userAgent: UA,
       locale: 'en-CA',
+      serviceWorkers: 'block',
     });
     if (blocked) {
       await context.addInitScript(() => {
@@ -187,7 +190,13 @@ async function waitForServer() {
     const page = await context.newPage();
     page.on('console', (message) => {
       const aborted = message.location().url.includes('/cdn-cgi/rum');
-      if ((message.type() === 'error' || message.type() === 'warning') && !aborted) {
+      // Playwright's own note each time it stops the service worker's registration (serviceWorkers: 'block').
+      const blockedWorker = message.text() === 'Service Worker registration blocked by Playwright';
+      if (
+        (message.type() === 'error' || message.type() === 'warning') &&
+        !aborted &&
+        !blockedWorker
+      ) {
         problems.push(`${message.type()}: ${message.text()}`);
       }
     });

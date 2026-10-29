@@ -1,8 +1,8 @@
 import {
   ApplicationConfig,
   ApplicationRef,
+  EnvironmentInjector,
   ErrorHandler,
-  Injector,
   inject,
   provideAppInitializer,
   provideBrowserGlobalErrorListeners,
@@ -40,12 +40,12 @@ export const appConfig: ApplicationConfig = {
       inject(CatalogStore);
       inject(FxStore);
       inject(AutoLock);
-      // Once the app has shown, from a chunk of its own: the live calendar's updates (M10.3).
-      const injector = inject(Injector);
+      // Once the app has shown, from a chunk of its own: the live calendar's updates and the service worker.
+      const injector = inject(EnvironmentInjector);
       void inject(ApplicationRef)
         .whenStable()
-        .then(() => import('./shared/live-calendar/live-calendar-service'))
-        .then(({ LiveCalendarService }) => injector.get(LiveCalendarService))
+        .then(() => import('./app.background'))
+        .then(({ startBackground }) => startBackground(injector))
         .catch(() => undefined);
     }),
     {

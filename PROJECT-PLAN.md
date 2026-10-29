@@ -262,7 +262,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.2 | Live calendar feeds, the API: `POST /cal`, `PUT /cal/:id`, `DELETE /cal/:id` and `GET /cal/:token.ics`, on core's feed schema and calendar writer; repeat rules Proton Calendar accepts, for the .ics download too | The contract's examples pass; a revoked feed answers 404; the owner's Proton Calendar shows every event of the test calendar |
 | M10.3 | Live calendar in the app (P10, P13): the opt-in dialog, a calendar for everything and one per tag, the subscribe steps for each app, updates after every change, Revoke | A change to a list reaches its feeds within seconds; each tag's calendar holds only its payments; Revoke ends every link |
 | M10.4 | Calendar year view (P10): `view=year`, twelve small months with their totals, and the year against the annual budget | Each month's total matches the month view's; it works by keyboard, in both themes at 360 and 1280 px, from a lazy chunk |
-| M10.5 | Offline start: the service worker, registered through a Trusted Types policy of its own, with `navigationRequestStrategy: 'freshness'` | Under `wrangler dev` the app starts and every page works with the network off, with no CSP or Trusted Types error; the initial bundle doesn't grow |
+| M10.5 | Offline start: the service worker, registered through a Trusted Types policy of its own, with `navigationRequestStrategy: 'freshness'` | Under `wrangler dev` the app starts and every page works with the network off, with no CSP or Trusted Types error; the worker's code is lazy and the initial bundle stays under 500 kB |
 | M10.6 | The update prompt and install: "A new version is ready" with Reload, the web app manifest and icons, Settings' Install | A second build served brings the prompt, and Reload runs it; Edge offers to install the app |
 | M10.7 | Sync's code and merge: a 32-byte seed shown as 24 words and a QR code, keys derived from it on the device (HKDF), core's sync payload and per-record merge by `updatedAt` and `deletedAt` | Tests: the newer of each record wins and every deletion carries; the keys match their test vectors; a wrong code opens nothing |
 | M10.8 | Sync, the API: `GET`, `PUT` and `DELETE /sync/:chain`, each write conditional on the version read | Two devices writing at once never overwrite each other; the server holds nothing it can read |
@@ -430,27 +430,39 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 - **The worker:** `@angular/service-worker` 22.2.3 (exact) and `ngsw-config.json`:
   - `navigationRequestStrategy: 'freshness'`: a page load asks the network first, so Web Analytics keeps counting
     visits (BLUEPRINT §14, M4.3), and falls back to the cached `index.html` offline;
-  - every script, style and font prefetched at install (about 1.4 MB compressed, once; after that only the files a
-    version changed), so a page never opened online still works offline;
-  - provider icons (`/icons/*`) kept as they're used, for 30 days;
+  - every script and style prefetched at install (about 1 MB compressed, once; after that only the files a version
+    changed), so a page never opened online still works offline;
+  - the fonts kept as they're used (43 files and 1 MB in all, most of them subsets a page never needs), and the
+    provider icons (`/icons/*`) for 30 days;
   - `/api/*` and `/data/*` left to the network: the catalog and the rates are kept in IndexedDB (M4.3, M4.4), and the
     catalog's check must reach the server to see a new version.
 - **Registration:** after the first render, from a lazy chunk, in production builds only, through a Trusted Types
   policy of its own, `simply-sub#service-worker`, which accepts only `/ngsw-worker.js` and joins `_headers`'
   `trusted-types` (Angular's `provideServiceWorker` registers with a plain string, which the CSP blocks). `SwUpdate`
-  comes from an environment injector made in that chunk, so the initial bundle doesn't grow.
-- **Headers:** `ngsw-worker.js`, `ngsw.json` and `safety-worker.js` revalidated on every load (`no-cache`); the kill
-  switch documented (`safety-worker.js` deployed as `ngsw-worker.js` unregisters the worker everywhere).
+  comes from an environment injector made in that chunk, so none of the worker's code is in the initial bundle.
+- **Headers:** `ngsw-worker.js` and `ngsw.json` revalidated on every load (Cloudflare's default, as for `index.html`);
+  the kill switch documented (`safety-worker.js` deployed as `ngsw-worker.js` unregisters the worker everywhere).
 - **Checks:** under `wrangler dev`. Browser checks that answer requests themselves (`context.route`) block the worker
   (`serviceWorkers: 'block'`), since Playwright doesn't see a worker's requests.
 - **Web Analytics:** whether Cloudflare still adds its beacon to a page the worker fetched is checked on the live site
   after the merge; if visits stop counting, `index.html` carries Web Analytics' own snippet instead (the owner's
   call).
 - **Acceptance**
-  - [ ] After one online visit, with the network off, `/`, a deep link and every sidebar page load with the catalog,
+  - [x] After one online visit, with the network off, `/`, a deep link and every sidebar page load with the catalog,
         the rates and the lists, and no CSP or Trusted Types error in the console
-  - [ ] No `/api/` or `/data/` request is answered by the worker (CDP's `fromServiceWorker`)
-  - [ ] The initial bundle stays at or under 497.84 kB
+  - [x] No `/api/` or `/data/` answer is kept by the worker: its caches hold none (Angular's worker answers every
+        request in its scope, passing on those it doesn't keep, so CDP's `fromServiceWorker` can't tell them apart)
+  - [x] The worker's code is in a lazy chunk, and the initial bundle stays under 500 kB: 499.00 kB, 0.10 kB more than
+        M10.4's
+- **As built:** `apps/web/ngsw-config.json` and the production build's `serviceWorker`; `core/pwa/service-worker.ts`
+  (the policy, the registration, and `SwUpdate` from an injector made there with a `registrationStrategy` that never
+  fires); `app.background.ts`, the one chunk the app loads once it's stable, which starts the live calendar's updates
+  (moved there from `app.config.ts`) and the worker, so a third background job adds nothing to the initial bundle. A
+  browser that refuses service workers gets a console warning and the app needs the network, as before. `_headers`
+  adds `simply-sub#service-worker`. Tested in `service-worker.spec.ts`; `check-m10-offline-sync.cjs` (29: offline
+  start, the rates from IndexedDB, the worker's caches) under `wrangler dev`, and the older scripts that answer
+  requests themselves now block the worker. Their counts had fallen behind the catalog (#76) and the Lists heading
+  (#77) and are brought up to date (BLUEPRINT §14).
 
 **M10.6 — The update prompt and install** (P1, P13)
 - **Update prompt:** when the worker has a new version ready, a snackbar "A new version of Simply Sub is ready."

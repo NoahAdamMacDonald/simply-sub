@@ -18,6 +18,7 @@
     "@angular/material": "22.2.4",
     "@angular/platform-browser": "22.2.3",
     "@angular/router": "22.2.3",
+    "@angular/service-worker": "22.2.3",
     "@fontsource/inter": "5.3.0",
     "@fontsource/material-symbols-outlined": "5.3.9",
     "dexie": "4.4.6",

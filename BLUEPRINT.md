@@ -1551,9 +1551,9 @@ never downloads every region's prices.
   shows "Offline — catalog from Oct 22" (the cached file's `generatedAt`), or "Offline — the catalog will load when
   you're back online" on a first visit. A new version replacing the one on screen shows "Catalog updated" in every
   open tab; a first download doesn't. A file that can't be saved (a full disk) is still used in that tab.
-- **Not offline on start yet:** without a service worker the browser revalidates `index.html` on every visit, so the
-  app keeps working only when the network drops while it's open. M10's service worker makes it start offline
-  (section 14).
+- **Offline on start** (M10.5): the service worker keeps the app's own files, so after one visit the app starts with
+  no network, on the cached files and with the Offline banner above. It never keeps `/data/` or `/api/` answers: the
+  catalog's check has to reach the server to see a new version (section 14).
 
 The cheapest price per feature (what `api-all-example.json` tried to store) is computed on demand with today's
 exchange rates instead, so it's never stale.
@@ -2132,7 +2132,9 @@ Settings → Build*). The settings as they are now:
   (`static.cloudflareinsights.com/beacon.min.js`) into HTML pages requested by browsers. It uses no cookies and
   sends only page views and timings, never anything from IndexedDB. The beacon is a module script from
   `static.cloudflareinsights.com`, and it reports to `/cdn-cgi/rum` on the site itself (or to
-  `cloudflareinsights.com`), which the CSP allows (M2.8). Content blockers stop it, which is harmless.
+  `cloudflareinsights.com`), which the CSP allows (M2.8). Content blockers stop it, which is harmless. The service
+  worker (M10.5) passes page loads on to the network (`freshness`), so they should still get the beacon; checked on
+  the live site after M10.5's merge (section 14).
 - Workers Builds deploys straight from `main`; it doesn't wait for GitHub checks. Branch protection (M0.10) is
   what keeps a failing change off `main`.
 - A small GitHub Actions `.github/workflows/ci.yml` (M0.10) runs `npm audit --audit-level=high`, lint, the Prettier check, the generated JSON
@@ -2150,8 +2152,9 @@ Settings → Build*). The settings as they are now:
     - `default-src 'self'`; `script-src 'self'`, the inline theme script's SHA-256 and the Web Analytics beacon's
       host; `connect-src 'self' https://cloudflareinsights.com` for its reports;
     - `object-src 'none'`, `base-uri 'self'`, `form-action 'self'` and `frame-ancestors 'none'`;
-    - **Trusted Types**: `require-trusted-types-for 'script'` with Angular's policies
-      (`trusted-types angular angular#bundler`), so no string can reach a script sink. Zod would otherwise test
+    - **Trusted Types**: `require-trusted-types-for 'script'` with Angular's policies and the app's two, each taking
+      only its own files (`trusted-types angular angular#bundler simply-sub#worker simply-sub#service-worker`: the
+      optimizer's Web Worker, M8.2, and the service worker, M10.5), so no string can reach a script sink. Zod would otherwise test
       for `new Function` (a sink) to compile its parsers, so `apps/web/src/zod-setup.ts`, the app's first import,
       turns that off (`jitless`) through the global Zod reads, keeping Zod out of the first bundle; a test checks
       Zod still reads it;
@@ -2166,10 +2169,16 @@ Settings → Build*). The settings as they are now:
     Icons (`/icons/*`) get one day and are then revalidated, because their URLs carry no version and a replaced logo
     must show up. `index.html` and the catalog files keep the default, revalidated on every visit: Cloudflare sends
     `Cache-Control: public, max-age=0, must-revalidate` with an ETag and answers `If-None-Match` with a 304 (checked
-    on 2026-10-26), which is what makes the app's catalog check cheap (section 6.3).
+    on 2026-10-26), which is what makes the app's catalog check cheap (section 6.3). The service worker's
+    `ngsw-worker.js` and `ngsw.json` (M10.5) keep the default too, so a new version is found on the next visit.
   - Checked in Edge on the production build under `wrangler dev` (which applies `_headers`): every page, in-app
     navigation, both themes, the drawer and the error snackbar run with no CSP or Trusted Types violations, and
     the beacon, inserted the way Cloudflare does, loads and sends its report.
+- **The service worker's kill switch** (M10.5): if a broken worker ever has to leave every browser, deploy a build
+  whose `ngsw-worker.js` is Angular's `safety-worker.js` (the build writes both; copy one over the other in
+  `apps/api/scripts/copy-web-build.mjs`, through a pull request like any change). Each browser's next check installs
+  it, and it deletes the worker's caches and unregisters itself. Angular's other fail-safe, a 404 for `ngsw.json`,
+  can't work here: the SPA fallback answers a missing file with `index.html` and a 200 (tried under `wrangler dev`).
 
 ### 7.7 Where automation runs: Cloudflare vs GitHub
 | Job | Cloudflare option | GitHub option | **Choice** |
@@ -2850,7 +2859,7 @@ written and tested once. It uses WebCrypto (`crypto.subtle`), available in every
 - [ ] Encrypted device sync
 - [ ] "Report wrong price" / "Suggest a service"
 - [ ] Broaden regional price coverage (the schema and UI handle all regions from Phase 1)
-- [ ] PWA (installable, offline)
+- [ ] PWA (installable, offline): offline start since M10.5
 
 ---
 
@@ -2931,6 +2940,36 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-29, M10.5–M10.9, as built)**
+- **The service worker** (M10.5): Angular's `ngsw-worker.js` (`@angular/service-worker` 22.2.3) with
+  `apps/web/ngsw-config.json`. Page loads ask the network first and fall back to the cached `index.html`. Every script
+  and style (153 files, about 1 MB compressed) is fetched as it installs, so a page never opened online works offline;
+  the fonts (43 files, 1 MB: Inter's subsets in two formats, most never needed, and the symbols) and the providers'
+  icons are kept as they're used. The first visit's fonts load before the worker controls a page, but they're in the
+  browser's cache, immutable for a year, which the worker's fetch reads offline.
+- **Registration** (M10.5): `app.background.ts`, one lazy chunk loaded once the app is stable, starts what runs in the
+  background: the live calendar's updates (moved there) and, in production builds, the worker, registered through
+  `simply-sub#service-worker`. `SwUpdate` comes from an environment injector made in that chunk, with a
+  `registrationStrategy` that never fires (`NEVER`): Angular's own registration is an app initializer, which runs only
+  at bootstrap, and would otherwise pass a plain string the CSP refuses. A browser that refuses service workers (some
+  private modes) gets a console warning, and the app needs the network to start, as before.
+- **Angular's worker answers every request in its scope** (M10.5), passing those it doesn't keep to the network, so
+  Playwright's `fromServiceWorker()` is true for `/api/` too. `check-m10-offline-sync.cjs` looks in the worker's caches
+  instead: no `/api/` or `/data/` answer is there. Checks that answer requests themselves (`context.route`) block the
+  worker (`serviceWorkers: 'block'`), whose own requests their routing doesn't see.
+- **Web Analytics with the worker** (M10.5): to check on the live site after the merge, that visits served through the
+  worker still count. If they stop, `index.html` gets Web Analytics' own snippet (the owner's call).
+- **Bundle** (M10.5): 499.00 kB initial (498.90 before). The starter's import replaced the live calendar's; Angular's
+  chunk optimizer put rxjs's `NEVER` (21 bytes) in the shared chunk `main` imports, and the rest is the renaming of
+  what crosses chunks. Two imports, one per job, made it 499.14 kB.
+- **Checks** (M10.5): web 702 tests (the worker's 3), core 1773, API 264, bot 60. Under `wrangler dev`:
+  `check-m10-offline-sync.cjs` (29, new for the batch); `check-catalog.cjs`
+  (41), `check-search.cjs` (187), `check-optimizations.cjs` (106) and the progress preview's `csp-check.cjs` (8), which
+  now block the worker and ignore Playwright's note that they do. Search's script had fallen behind the catalog
+  (#76's Claude, Bitdefender and Xbox Game Pass: 12 services for a Canadian, 10 priced in CAD, the price slider to $300
+  by $10) and the catalog's behind the Lists page's heading (#77). `calendar-page.scss` was 73 bytes over its 4 kB
+  budget since M10.4: a day's button and an agenda payment now share their hover and focus rules (on PR #78).
 
 **Resolved (2026-10-29, M10.1–M10.4, as built)**
 - **The year view** (M10.4): `?view=year` keeps the month, so Month goes back to it; Today goes to this year. Each

@@ -76,8 +76,9 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 - The app reads the catalog from static files built by `npm run data:build` (`data/catalog/index.json`, then its
   region's `data/catalog/<region>.json` or the full `data/catalog.json`, BLUEPRINT §6.3) and icons from static
   files. It keeps the files it downloaded in Dexie (`catalogCache`, one record per file, never merged) and checks
-  `index.json`'s version on start (M4.3). No service worker before M10: Trusted Types block Angular's registration
-  (BLUEPRINT §14). It only calls the Worker for `/fx` and custom-subscription icons (and, from M10, what the user
+  `index.json`'s version on start (M4.3). The service worker (M10.5, production builds only) keeps the app's own
+  files so it starts offline, never `/api/` or `/data/`; the app registers it through its `simply-sub#service-worker`
+  Trusted Types policy, since Angular's registration passes a plain string the CSP refuses (BLUEPRINT §14). It only calls the Worker for `/fx` and custom-subscription icons (and, from M10, what the user
   opts in to send). The catalog's D1 serves only the public API, and a deploy writes only what changed (free plan:
   100k rows written a day for the account, BLUEPRINT §5.3). A change to the catalog
   tables or the derived columns bumps `seedFormat` in core, which makes the next deploy reseed in full.

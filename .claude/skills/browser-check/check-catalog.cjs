@@ -84,7 +84,8 @@ async function routeFx(context) {
 }
 
 async function newContext(browser, options) {
-  const context = await browser.newContext(options);
+  // Under `wrangler dev` the production build's service worker (M10.5) would answer requests Playwright can't route.
+  const context = await browser.newContext({ ...options, serviceWorkers: 'block' });
   await routeFx(context);
   return context;
 }
@@ -92,7 +93,9 @@ async function newContext(browser, options) {
 async function newPage(context, label) {
   const page = await context.newPage();
   page.on('console', (msg) => {
-    if (msg.type() === 'error' || msg.type() === 'warning') {
+    // Playwright's own note each time it stops the service worker's registration (serviceWorkers: 'block').
+    const blockedWorker = msg.text() === 'Service Worker registration blocked by Playwright';
+    if ((msg.type() === 'error' || msg.type() === 'warning') && !blockedWorker) {
       consoleProblems.push(`[${label}] ${msg.type()}: ${msg.text()}`);
     }
   });
@@ -321,7 +324,7 @@ async function requestsAndTabs(browser, real) {
   await page.getByRole('heading', { name: 'Catalog' }).waitFor();
   const page2 = await newPage(context, 'tab 2');
   await page2.goto(`${baseUrl}lists`);
-  await page2.getByRole('heading', { name: 'Lists' }).waitFor();
+  await page2.getByRole('heading', { name: 'Subscription Lists' }).waitFor();
   await sleep(1000);
   await deployVersion(context, real, 'abcdef1');
   requests.length = 0;

@@ -454,6 +454,18 @@ A feed takes 30 fetches a minute, so poll one every 2 s, not every 100 ms, or th
 change. The links view and the choosing view without links share the title Live calendar: wait for Make links to
 know a revoke has finished.
 
+`check-m10-offline-sync.cjs` (M10's offline and sync batch: M10.5 so far) runs under `wrangler dev` on the production
+build (`npm -w apps/web run build`, then `node apps/api/scripts/copy-web-build.mjs`), with the user database migrated,
+so the CSP, Trusted Types and the service worker are as on the live site; it answers `/fx` itself. For a Canadian in
+Alberta with Work Related (Netflix, Crave) and Family (Mullvad, in euros), in both themes at both widths: the worker
+registers through its own policy, controls the page after a reload and holds every file of `ngsw.json`'s app group;
+then, with `context.setOffline`, Home, a deep link and every sidebar page start, Work Related lists its items from the
+cached catalog under the Offline banner (axe, no horizontal scroll), and Family's Mullvad is converted with the saved
+rates (`≈`); back online, none of the worker's caches holds an `/api/` or `/data/` answer. Angular's worker answers
+every request in its scope, passing on those it doesn't keep, so Playwright's `fromServiceWorker()` can't tell what it
+cached. Offline, it answers what it never kept (an icon never shown online) with a 504: wait a second before going
+back online, or that console line arrives after.
+
 `check-after-m3.cjs` (the feedback after M3: M5.13, M6.17–M6.19, M7.11, M8.5, M8.6, M9.6) checks the batch on
 `ng serve` for a Canadian in Alberta, with Streaming (Crave Premium and Disney+ Premium) and Family (two Disney+
 Premium, Netflix Standard auto-renewing until an end date, Mullvad renewed by hand, and four more so it scrolls). In
@@ -609,8 +621,14 @@ Playwright's `hasText` matches without case.
 - Trigger the error snackbar with `page.evaluate(() => setTimeout(() => { throw new Error('x'); }))`.
 - Run axe about 600 ms after clicking a Material button: its ripple and state layer fade out, and mid-fade the
   dark theme's accent label on them measures 4:1, a contrast failure that isn't there once they settle.
-- Offline, a lazy page that hasn't been opened in the session can't load its chunk, and the error snackbar shows.
-  That's expected until M10's service worker: navigate offline only to pages already opened.
+- Offline on `ng serve`, a lazy page that hasn't been opened in the session can't load its chunk, and the error
+  snackbar shows: navigate offline only to pages already opened. The production build's service worker (M10.5) holds
+  every chunk once it controls the page, which `check-m10-offline-sync.cjs` checks under `wrangler dev`.
+- Under `wrangler dev` the production build registers its service worker (M10.5), which then fetches the page's
+  requests itself, past `context.route`. Scripts that answer requests themselves create their contexts with
+  `serviceWorkers: 'block'` (`check-catalog.cjs`, `check-search.cjs`, `check-optimizations.cjs`, the progress preview's
+  `csp-check.cjs`) and leave Playwright's console warning "Service Worker registration blocked by Playwright" out of
+  their console check. `ng serve`'s development build registers no worker.
 - A Material tooltip opens on hover and on keyboard focus (Tab), not on a script's `locator.focus()`.
 - Read a control's accessible name with `locator.ariaSnapshot()` (`- button "about $7.53 a month"`), not its
   `textContent`, which keeps `aria-hidden` text and icon ligatures, and which joins a `.visually-hidden` span without
