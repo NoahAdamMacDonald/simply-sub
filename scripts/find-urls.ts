@@ -8,20 +8,23 @@
 //   npm run data:urls -- --next 10                   the next 10 queued services
 //   npm run data:urls -- --sample                    the 20-service sample: how often the pricing page is right
 //   options: --kinds pricing,terms (only these kinds)   --no-search (no web search)
+//            --browser (a page whose plain fetch gets only a script's shell is opened once in the browser, as the
+//            nightly bot does with Browser Rendering)
 import {
   findPages,
   hostOf,
   nextQueued,
   pageKinds,
   queueFileSchema,
-  type KindReport,
+  type FetchedPage,
   type PageKind,
   type ProviderSite,
 } from '@simply-sub/core';
 import { readFile } from 'node:fs/promises';
 import { parse } from 'yaml';
 import { loadCatalogFiles, plural } from './lib/catalog-files';
-import { absolute, workFile, writeJson } from './lib/pipeline-files';
+import { Renderer } from './lib/browser';
+import { absolute, workFile, writeJson, type FoundUrls } from './lib/pipeline-files';
 import { webSearch } from './lib/search';
 import { urlSample } from './lib/url-sample';
 import { PoliteWeb } from './lib/web';
@@ -30,18 +33,6 @@ interface Target extends ProviderSite {
   id: string;
   /** The sample's right pricing pages. */
   pricing?: RegExp[];
-}
-
-/** What urls.json holds for a provider. */
-export interface FoundUrls {
-  id: string;
-  name: string;
-  website: string;
-  domains?: string[];
-  /** When the pages were found. */
-  found: string;
-  pages: Partial<Record<PageKind, { url: string; via: string; fit: string }>>;
-  reports: KindReport[];
 }
 
 const args = process.argv.slice(2);
@@ -66,8 +57,17 @@ if (!search) {
 }
 
 const web = new PoliteWeb();
+const renderer = args.includes('--browser') ? new Renderer(web) : undefined;
+/** Less text than this is a script's shell (an app that fills itself in), which the browser reads. */
+const shellChars = 400;
 const io = {
-  page: (url: string) => web.page(url),
+  page: async (url: string): Promise<FetchedPage | { error: string }> => {
+    const page = await web.page(url);
+    if (!renderer || 'error' in page || page.text.replace(/\s+/g, ' ').length >= shellChars)
+      return page;
+    const rendered = await renderer.renderForLinks(page.url);
+    return 'error' in rendered ? page : rendered;
+  },
   file: (url: string) => web.file(url),
   resolve: (href: string, base: string) => web.resolve(href, base),
   ...(search && { search }),
@@ -113,6 +113,7 @@ for (const target of targets) {
     }
   }
 }
+await renderer?.close();
 if (sample) {
   console.log(
     `\n${right} of ${targets.length} right (${Math.round((right / targets.length) * 100)}%), in ${plural(web.requested.length, 'request')}.`,

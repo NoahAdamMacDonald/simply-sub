@@ -21,13 +21,15 @@
     "data:build": "tsx scripts/build-catalog.ts",
     "data:icons": "tsx scripts/fetch-icons.ts",
     "data:queue": "tsx scripts/discover-services.ts",
-    "data:urls": "tsx scripts/find-urls.ts"
+    "data:urls": "tsx scripts/find-urls.ts",
+    "data:render": "tsx scripts/render-pages.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/node": "24.19.2",
     "angular-eslint": "^22.6.0",
     "eslint": "^10.13.0",
+    "playwright-core": "1.64.1",
     "postcss-scss": "^4.0.9",
     "prettier": "^3.8.1",
     "sharp": "0.35.5",

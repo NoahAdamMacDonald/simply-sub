@@ -259,6 +259,8 @@ simply-sub/
 │  ├─ discover-services.ts   # Wikidata's services → data/queue.yaml (`npm run data:queue`, section 6.5)
 │  ├─ find-urls.ts           # each provider's pages → .pipeline/<id>/urls.json (`npm run data:urls`, section 6.5)
 │  ├─ lib/web.ts, lib/search.ts  # the pipeline's polite fetch and its web search (Tavily, Brave, SearXNG)
+│  ├─ render-pages.ts        # each page in the browser → .pipeline/<id>/pages/ (`npm run data:render`, section 6.5)
+│  ├─ lib/browser.ts         # the pipeline's browser: the system Edge through playwright-core
 │  ├─ price-check.ts         # nightly price monitor (section 6.4)
 │  └─ draft-provider.ts      # AI-assisted: pricing page URL → draft YAML
 │
@@ -1675,6 +1677,19 @@ to render, clicks visible "Monthly/Annual" toggles, and saves the visible text p
   Canada) or use the site's region URL or selector. Many services also publish per-country price pages in
   their help centre (Netflix does), which are ideal sources for multi-region data.
 
+**As built (M3.3):** `npm run data:render -- <ids>` (`scripts/render-pages.ts`, `scripts/lib/browser.ts`) opens each
+page find-urls found (and any added with `--url pricing=<url>`) in the system Edge through `playwright-core` 1.64.1
+(pinned; it drives an installed browser and downloads none; `PIPELINE_BROWSER=chrome` picks another), on this machine,
+so sites that price by location show Canada's. One navigation per page, after robots.txt allows it; the browser's
+own User-Agent with the bot's token after it (`… SimplySubBot/1.0 (+https://sub.simplely.ca/)`), so a site's
+SimplySubBot rules apply and its owner can tell who's asking; `en-CA` and Toronto's time zone. It declines cookie
+banners (never accepts), clicks a pricing or bundle page's Monthly and Yearly toggles (at most four), and writes
+`.pipeline/<id>/pages/<name>.json`: the text as shown, the HTML's text as served (what the nightly bot's plain fetch
+reads), each toggle's text, the currencies the prices are in, and a screenshot (`<name>.jpg`, at most 12,000 px
+tall). A bot check, or an app that shows the bot its own error page (Crunchyroll's `/premium/error`), is reported as
+unread and never got past. `npm run data:urls -- --browser` opens a page whose plain fetch is only a script's shell
+in the browser too (as the nightly bot does with Browser Rendering), which is how Crave's menus are read.
+
 **④ AI extraction:** `scripts/extract-plans.ts` sends the cleaned page text to an LLM with **structured
 output** constrained to the provider schema. The prompt includes the feature registry, so the model can only
 use canonical ids, and it maps provider wording through `aliases`. The output contains:
@@ -2680,6 +2695,16 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-28, M3.3)**
+- **The renderer identifies itself** (the user's rule): the browser's User-Agent with the bot's token after it.
+  Crunchyroll shows that browser its own error page on `/premium` ("Something Went Wrong", `/premium/error`); its other
+  pages and help centre are read instead, and a check that compared User-Agents to find out why was stopped, since
+  that's a step towards getting past a site's defences.
+- **The sample with the browser:** `npm run data:urls -- --sample --no-search --browser` gets 16 of 20 right (80%), the
+  pages Crave, Disney+ and Hulu fill in by script now confirmed by their words. The misses: Netflix (robots.txt keeps
+  the bot to its help centre, whose plans article only a search finds), NordVPN and Tidal (403 to any bot) and
+  Bitdefender (a product's page, its VPN's, before its lineup).
 
 **Resolved (2026-10-28, M3.2)**
 - **Shared with the bot:** the bot's `page-text.ts`, `amounts.ts`, `tax-wording.ts` and `robots.ts` moved to core's

@@ -85,7 +85,7 @@ export const urlSample: readonly SampleService[] = [
     id: 'crunchyroll',
     name: 'Crunchyroll',
     website: 'https://www.crunchyroll.com',
-    pricing: [/crunchyroll\.com\/(?:[a-z-]+\/)?premium/],
+    pricing: [/crunchyroll\.com\/(?:[a-z-]+\/)?premium\/?(?:$|\?)/],
   },
   {
     id: 'xbox-game-pass',

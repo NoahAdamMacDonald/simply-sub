@@ -1,10 +1,23 @@
 // The discovery pipeline's working files (BLUEPRINT §6.5), in .pipeline/ at the repository's root, which Git ignores:
 // for each provider, the pages found (urls.json), each page read (pages/<kind>.json and its screenshot), and the
 // extraction's request and answer. What the catalog keeps goes into data/; these stay on this machine as evidence.
+import type { KindReport, PageKind } from '@simply-sub/core';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { repoRoot } from './catalog-files';
+
+/** What find-urls writes for a provider: urls.json. */
+export interface FoundUrls {
+  id: string;
+  name: string;
+  website: string;
+  domains?: string[];
+  /** When the pages were found. */
+  found: string;
+  pages: Partial<Record<PageKind, { url: string; via: string; fit: string }>>;
+  reports: KindReport[];
+}
 
 /** A path in a provider's working folder, from the repository's root: .pipeline/<id>/<name>. */
 export function workFile(id: string, name: string): string {
