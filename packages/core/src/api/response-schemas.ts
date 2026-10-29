@@ -9,6 +9,7 @@ import {
 } from '../export/calendar-feed';
 import { bundlesBodySchema, planBodySchema, providerBodySchema } from '../lookup/lookup-bodies';
 import { providersBodySchema } from '../search/providers-body';
+import { syncBody, syncWriteBodySchema } from '../user/sync';
 import { healthBodySchema } from './health-body';
 
 // The contract's success bodies (docs/api-output-examples.json), by endpoint as the examples file names them. The
@@ -35,6 +36,13 @@ export const successBodySchemas = {
   // 204 No Content.
   'DELETE /cal/:id': z.null(),
   'GET /cal/:token.ics': calendarBody,
-} as const satisfies Record<string, z.ZodType | typeof pngBody | typeof calendarBody>;
+  'GET /sync/:chain': syncBody,
+  'PUT /sync/:chain': syncWriteBodySchema,
+  // 204 No Content.
+  'DELETE /sync/:chain': z.null(),
+} as const satisfies Record<
+  string,
+  z.ZodType | typeof pngBody | typeof calendarBody | typeof syncBody
+>;
 
 export type BuiltEndpoint = keyof typeof successBodySchemas;

@@ -335,3 +335,21 @@ function keyOf(record: object, key: string): string {
 function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
+
+// The API's side (M10.8): GET, PUT and DELETE /sync/:chain.
+
+/** The largest sealed copy the server keeps: a few hundred records are tens of kB gzipped. */
+export const maxSealedCopyBytes = 1024 * 1024;
+
+/** GET /sync/:chain answers with the sealed copy's bytes, not JSON. */
+export const syncBody = 'application/octet-stream';
+
+/** PUT /sync/:chain's answer: the chain's new version, also its ETag, and when it was written. */
+export const syncWriteBodySchema = z.strictObject({
+  data: z.strictObject({
+    version: z.string().regex(/^[1-9][0-9]*$/),
+    updatedAt: z.iso.datetime(),
+  }),
+  meta: z.strictObject({}),
+});
+export type SyncWriteBody = z.infer<typeof syncWriteBodySchema>;

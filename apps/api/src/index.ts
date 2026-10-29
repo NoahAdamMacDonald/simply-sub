@@ -13,6 +13,7 @@ import { icon } from './routes/icon';
 import { plans } from './routes/plans';
 import { provider } from './routes/provider';
 import { providers } from './routes/providers';
+import { sync } from './routes/sync';
 import { writeLimit } from './writes';
 
 // Every API route lives under /api/v1 (BLUEPRINT §5.2). Other paths never reach the Worker: wrangler.jsonc serves
@@ -31,7 +32,8 @@ const v1 = new Hono<{ Bindings: Env }>()
   .route('/icon', icon)
   .route('/plans', plans)
   .route('/providers', providers)
-  .route('/providers', provider);
+  .route('/providers', provider)
+  .route('/sync', sync);
 
 const app = new Hono<{ Bindings: Env }>();
 app.use('/api/*', apiHeaders, rateLimit, writeLimit);

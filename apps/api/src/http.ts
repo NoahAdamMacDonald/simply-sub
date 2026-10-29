@@ -50,6 +50,14 @@ export function forbidden(c: Context, message: string): Response {
   });
 }
 
+/** 412 stale_version: a sync chain's write named a version another device has written past (M10.8). */
+export function staleVersion(c: Context, message: string): Response {
+  return c.json({ error: { code: 'stale_version', message } } satisfies ErrorBody, 412, {
+    'Content-Type': jsonType,
+    'Cache-Control': 'no-store',
+  });
+}
+
 /** 413 too_large: the body is over its route's limit, which the message names in bytes (M10.1). */
 export function tooLarge(c: Context, limit: number): Response {
   return c.json(

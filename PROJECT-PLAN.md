@@ -545,9 +545,15 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 - **Stored:** the chain's id, the secret's hash, the version, the sealed payload, its size and when it changed;
   deleted 180 days after its last write (the app writes at least every 30 days while it's used).
 - **Acceptance**
-  - [ ] Contract examples and Worker tests: start, read, `304`, a write after another's gets `412` and changes nothing,
+  - [x] Contract examples and Worker tests: start, read, `304`, a write after another's gets `412` and changes nothing,
         a wrong secret `403`, too big `413`, delete
-  - [ ] What's stored has no list name, amount or record id in it (a test searches the stored bytes)
+  - [x] What's stored has no list name, amount or record id in it (a test searches the stored bytes)
+- **As built:** `apps/api/src/routes/sync.ts` and `migrations-user/0003_sync_chains.sql` (the copy as base64, since D1
+  answers a BLOB as an array of numbers); PUT answers `201` or `200` with `{ data: { version, updatedAt } }` and the
+  ETag; core's `maxSealedCopyBytes`, `syncWriteBodySchema` and `syncBody`; the nightly clean-up deletes chains past
+  their days. A write that can't be made (none, another secret, a stale version) is answered before it's counted, and
+  a chain past its days starts again with its version moving on. The contract's examples carry bytes as `bodyBase64`
+  (BLUEPRINT §14).
 
 **M10.9 — Sync in the app** (P13; BLUEPRINT §11.4)
 - **Settings' Your data, Sync between devices** (replacing "Create local sync"):
@@ -1970,6 +1976,7 @@ item's next charge, plus tax where the catalog's price is before tax, and Review
   | `/api/v1/icon?domain=` | Worker → Google/DuckDuckGo | 30 days (KV) | Yes (custom subscriptions only) |
   | `POST /api/v1/cal`, `PUT` and `DELETE /api/v1/cal/:id` | Worker → the user database | Never (`no-store`) | Yes (only with a live calendar: 5 s after a change that reaches it, and at least monthly) |
   | `/api/v1/cal/<token>.ics` | Worker → the user database | `no-cache` with an ETag | Yes (calendar apps' servers, a few times a day per calendar) |
+  | `GET`, `PUT` and `DELETE /api/v1/sync/:chain` | Worker → the user database | Never (`no-store`); `GET` answers `304` to the version the device has | Yes (only with sync on: on start, a tab shown again, back online, 10 s after a change, and a write at least daily, M10.9) |
 - The other endpoints (`/providers`, `/plans`, `/bundles`, `/features`, `/categories`, `/catalog`) serve deep links,
   future features and anyone else using the API. They're edge-cached for an hour, keyed by URL.
 - **Versioning:** everything is under `/v1`, changes are additive only, and `/health` reports `apiVersion`.

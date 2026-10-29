@@ -1233,6 +1233,9 @@ M1.14), so a buyer can see what signing up means beyond the price.
 | `PUT /cal/:id` | Replaces a set's calendars with its manage key (`Authorization: Bearer`): a feed with its token keeps its URL and, unchanged, its file; one without gets a new URL; one left out is revoked. Its 180 days start again. 6 writes a minute per set |
 | `DELETE /cal/:id` | Revokes a set with its manage key: every calendar of it answers 404, and nothing of it is kept |
 | `GET /cal/:token.ics` | One calendar file (`text/calendar`), revalidated on every fetch (`no-cache` with an ETag), so a change or a revoke shows at the app's next check. Limited per feed (30 a minute), not per IP, since calendar apps' servers share addresses |
+| `GET /sync/:chain` | A sync chain's sealed copy (`application/octet-stream`) with its auth secret (`Authorization: Bearer`), which each device derives from the sync code (section 11.4, M10.8); its version is the ETag, `304` with `If-None-Match`, `404` when there's none (or it was deleted) |
+| `PUT /sync/:chain` | Writes the sealed copy, up to 1 MiB: `If-None-Match: *` starts the chain (`201`), keeping the secret's SHA-256; `If-Match` with the version read replaces it (`200`) only if no device wrote since, else `412 stale_version`. One statement compares and writes, so two devices can't both win. A write that can't be made is answered before it's counted against the day's cap. Its 180 days start again. 6 writes a minute per chain |
+| `DELETE /sync/:chain` | Deletes a chain with its secret: every device's next sync finds it gone, and nothing of it is kept |
 
 Example requests and responses for every endpoint are in [docs/api-output-examples.json](docs/api-output-examples.json).
 Core holds the contract's response schemas (M2.7): `successBodySchemas` names each built endpoint's (the bodies'
@@ -2753,6 +2756,11 @@ prompted after each big change, or weekly).
   stretched from the phrase (scrypt, with a salt the first device stores on the server for the others). The server
   (Chromium's sync protocol, Commit and GetUpdates, on DynamoDB) holds only what it can't read. Brave has since added
   a word that changes daily to the code shown for adding a device, and doesn't support the code as a backup.
+- **As built (M10.7, M10.8):** the shape below, with D1 in place of R2 (the owner's choice, section 14): the
+  `simply-sub-user` database's `sync_chains` keeps each chain's id, its auth secret's SHA-256, its version, the sealed
+  copy (as base64: D1 answers a BLOB as an array of numbers), its size, when it changed and when it expires, 180 days
+  after its last write. A conditional `UPDATE … WHERE version = ?` is the compare-and-write. Core's `user/sync.ts` is the
+  copy and the merge; the crypto module's `sync-crypto.ts` the code and the keys.
 - **For Simply Sub, the same shape on Cloudflare** (the recommended design for M10): a random 32-byte seed as the sync
   code, shown as words (and a QR code; scanning one can come later, since not every browser can); from it, with
   WebCrypto's HKDF-SHA256 (a random seed needs no slow stretching, unlike a passphrase): the chain's id, an auth secret
@@ -3018,6 +3026,16 @@ None.
   shared one changes), so a theme changed here later doesn't outweigh a budget set on another device. The theme, the
   Calendar's shown lists, Home's price changes and the app lock never leave the device: the copy's settings schema is
   strict. The field made the backup's `schemaVersion` 3; an older file needs no step.
+- **Sync's API** (M10.8, `routes/sync.ts`, migration `0003_sync_chains.sql`): GET reads the copy, its version the
+  ETag; PUT starts a chain with `If-None-Match: *` or replaces the copy with `If-Match`, one statement comparing and
+  writing; DELETE ends it. Before a write is counted against the day's cap, the chain is looked at: none (404), another
+  secret (403), already started or moved past the version read (412) are answered first, so a device learns that its
+  chain was deleted even on a day at the cap; the statement still settles a race. A chain past its days that the
+  night's clean-up hasn't reached starts again with its version moving on, so a device still holding an old version
+  can't write over it. Copies are stored as base64. Tests: `sync.spec.ts` (two devices at once, one winning; the
+  limits; expiry and the clean-up; the stored row holding no list name, amount, record id or secret; no chain or
+  secret in a log) and the contract's examples, whose sealed copy is a real one from the code 0x00..0x1f, its bytes as
+  `bodyBase64`.
 - **Sync's keys** (M10.7, the crypto module's `sync-crypto.ts`): the code is 32 random bytes as BIP39's 24 English
   words (`@scure/bip39` 2.4.0, exact, which brings `@noble/hashes` 2.4.0); HKDF-SHA256 with an empty salt and the
   infos "simply-sub sync: chain id" (16 bytes), "…: auth secret" (32) and "…: copy key" (AES-256-GCM, not
