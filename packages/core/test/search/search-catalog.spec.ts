@@ -227,6 +227,21 @@ describe('searchCatalog', () => {
       expect(shown).toEqual(['crave.premium', 'netflix.standard']);
     });
 
+    it('is the query’s plan when the card has it, over the user’s own (View in Search)', () => {
+      const items = [item('netflix.standard-ads'), item('netflix.standard')];
+
+      expect(cards(search({ q: 'netflix' }, { items }))[0]?.[1]).toBe('netflix.standard-ads');
+      expect(cards(search({ q: 'netflix', plan: 'netflix.standard' }, { items }))[0]?.[1]).toBe(
+        'netflix.standard',
+      );
+      // A plan the filters leave out isn't shown: the card shows the user's own that matches.
+      expect(
+        cards(
+          search({ features: ['streaming.ad-free'], plan: 'netflix.standard-ads' }, { items }),
+        )[0]?.[1],
+      ).toBe('netflix.standard');
+    });
+
     it('is the cheapest that matches when the user’s own doesn’t', () => {
       const results = search(
         { features: ['streaming.ad-free'] },

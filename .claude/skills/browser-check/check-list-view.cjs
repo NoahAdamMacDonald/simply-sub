@@ -380,11 +380,12 @@ async function openView(page, listId = LIST) {
       const statuses = await view(page)
         .locator('ss-item-card ss-status-badge')
         .evaluateAll((badges) => badges.map((badge) => badge.textContent.trim()));
-      // Mullvad renews by hand (M7.1): its badge says when, after its icon's ligature.
+      // Mullvad renews by hand (M7.1): its badge says when, after its icon's ligature. Netflix renews by itself, and
+      // says when (M6.12).
       check(
-        `${label}: each card's status, Mullvad's "Renew by", and Netflix's tag`,
+        `${label}: each card's status, Netflix's "Auto-renews", Mullvad's "Renew by", and Netflix's tag`,
         statuses.join(' | ') ===
-          'Inactive · active from Dec 1, 2026 | Active | Activeautorenew Renew by Nov 12' &&
+          'Inactive · active from Dec 1, 2026 | Active Auto-renews Nov 12 | Activeautorenew Renew by Nov 12' &&
           (
             await view(page).locator(`[data-item="${NETFLIX}"] ss-tag-chip`).textContent()
           ).trim() === 'Family',
@@ -416,15 +417,16 @@ async function openView(page, listId = LIST) {
       await axeCheck(page, `${label}, the list`);
 
       // The Tab order: the header's ← Lists, Edit list and Export (the feedback after M6.9, M7.5), at 360 px the
-      // folded mini calendar's button above the cards, the search box, Sort, then each card's 📌 and details button.
-      // From 960 px the mini calendar is in the side column, after the cards. A click on the title focuses <main> (the
-      // skip link's target), so Tab starts from its top.
+      // folded mini calendar's button above the cards, the search box, at 360 px the compact View optimizations (M6.13),
+      // Sort, then each card's 📌 and details button. From 960 px the mini calendar and View optimizations are in the
+      // side column, after the cards. A click on the title focuses <main> (the skip link's target), so Tab starts from
+      // its top.
       await view(page).locator('h1').click();
       const stops = [];
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 12; i++) {
         await page.keyboard.press('Tab');
         // A name with a colon comes back quoted, and a link's line ends in a colon.
-        stops.push((await stop(page)).replace(/^'(.*)'$/, '$1').replace(/:$/, ''));
+        stops.push((await stop(page)).replace(/:$/, '').replace(/^'(.*)'$/, '$1'));
       }
       const expected = [
         'link "Lists"',
@@ -432,6 +434,9 @@ async function openView(page, listId = LIST) {
         'button "Export"',
         ...(viewport === NARROW ? ['button "Calendar"'] : []),
         'textbox "Search this list"',
+        ...(viewport === NARROW
+          ? ['link "View optimizations: 4 suggestions, the strongest: Recommended"']
+          : []),
         'button "Sort and filter"',
         'button "Pin Crave Premium"',
         'button "Details: Crave Premium"',
@@ -600,7 +605,7 @@ async function openView(page, listId = LIST) {
         facts.join(' | ') === 'Monthly · auto-renews' &&
           (await details.locator('ss-feature-list li').count()) > 0 &&
           links.length === 4 &&
-          links[2] === '/search?q=Netflix' &&
+          links[2] === '/search?q=Netflix&plan=netflix.standard' &&
           links[3] === `/lists/${LIST}/edit?item=${NETFLIX}`,
         `${facts.join(' | ')} / ${links.join(' | ')}`,
       );

@@ -8,6 +8,17 @@
       @if (names().planName; as planName) {
         <p class="plan-name">{{ planName }}</p>
       }
+      <!-- Its add-ons, each with what it adds (M6.12): the price tag on the right is the plan's. -->
+      @if (addOns().length > 0) {
+        <ul class="add-ons" aria-label="Add-ons">
+          @for (addOn of addOns(); track addOn.id) {
+            <li>
+              <span>+ {{ addOn.text }} </span>
+              <ss-price [price]="addOn.price" [region]="item().region" />
+            </li>
+          }
+        </ul>
+      }
       <ss-status-badge
         class="status"
         [status]="status()"
@@ -130,12 +141,12 @@
                   <mat-icon aria-hidden="true">open_in_new</mat-icon>
                 </a>
               }
-              <!-- Its provider's card in Search, which shows this plan (P8). -->
-              @if (searchText(); as text) {
+              <!-- Its provider's card in Search, which shows this plan (P8, M5.11). -->
+              @if (searchParams(); as params) {
                 <a
                   class="view"
                   routerLink="/search"
-                  [queryParams]="{ q: text }"
+                  [queryParams]="params"
                   [attr.aria-label]="'View in Search, ' + label()"
                 >
                   <mat-icon aria-hidden="true">search</mat-icon>

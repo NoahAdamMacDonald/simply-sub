@@ -138,9 +138,33 @@ h4 {
   }
 }
 
+.rating {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 0;
+}
+
 .rated {
   margin: 0;
   color: var(--ss-text-muted);
+}
+
+// Where to change what the reason says (M5.12): the provider's own page, in a new tab.
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  color: var(--ss-accent-text);
+  font: var(--mat-sys-label-large);
+
+  mat-icon {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+  }
 }
 
 .topic {
@@ -164,6 +188,7 @@ h4 {
 }
 
 .cite,
+.action,
 .policy-links a {
   &:focus-visible {
     outline: 2px solid var(--ss-accent-text);

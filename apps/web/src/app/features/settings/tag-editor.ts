@@ -18,6 +18,7 @@ import { MatInput } from '@angular/material/input';
 import { freeTagColor, parseTagColor, tagNameIssue, type Tag } from '@simply-sub/core';
 import { TagsRepository } from '../../core/storage/tags-repository';
 import { focusFirstError } from '../../shared/focus-first-error';
+import { ColourPicker } from '../../shared/tags/colour-picker';
 import { TagColours } from '../../shared/tags/tag-colours';
 
 /** Which field the editor opens on: ✎ opens the name, the colour swatch its colours. */
@@ -25,12 +26,13 @@ export type TagEditorFocus = 'name' | 'colour';
 
 /**
  * A tag's row on Settings while it's edited (P13, M6.11), or ⊕'s new tag: its name, one of the 12 preset colours or a
- * hex colour, then Save or Cancel. Enter saves and Escape cancels. The names follow core's rules (tagNameIssue): one,
+ * hex colour, typed or from the device's colour picker (M6.15), then Save or Cancel. Enter saves and Escape cancels. The names follow core's rules (tagNameIssue): one,
  * trimmed, that no other tag has in any case.
  */
 @Component({
   selector: 'ss-tag-editor',
   imports: [
+    ColourPicker,
     FormField,
     FormRoot,
     MatButton,

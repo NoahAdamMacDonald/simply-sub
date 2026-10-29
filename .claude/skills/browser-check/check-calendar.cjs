@@ -412,8 +412,9 @@ const localToday = () => {
         await page.goto(`${baseUrl}calendar?month=2026-10`);
         await until('the agenda', async () => (await agendaDays(page)).length === 3);
         check(
-          `${label}: under 600 px the month is an agenda by date, with no grid`,
-          (await calendar(page).locator('.grid').count()) === 0,
+          `${label}: under 600 px the month is an agenda by date, under a compact grid with no chips (M7.8)`,
+          (await calendar(page).locator('.grid.compact').count()) === 1 &&
+            (await calendar(page).locator('.grid .chip').count()) === 0,
         );
         await page.locator('main').focus();
         await keyTo(page, `document.activeElement?.classList.contains('entry')`);

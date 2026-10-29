@@ -215,6 +215,7 @@ export const searchCatalogData: CatalogData = {
             reason: 'A made-up US rule, for the test.',
             regions: ['US'],
             sources: [{ url: 'https://mullvad.net/en/help/terms-service', quote: 'Any dispute' }],
+            action: { name: 'How to opt out', url: 'https://mullvad.net/en/help/opt-out' },
             lastVerified: '2026-10-22',
           },
         ],

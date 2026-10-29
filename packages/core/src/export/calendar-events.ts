@@ -1,4 +1,5 @@
 import { addDays, type IsoDate } from '../dates/iso-date';
+import type { IsoMonth } from '../dates/iso-month';
 import { itemTitle } from '../user/item-text';
 import { exportCharges, type ExportContext, type ExportList } from './export-tables';
 
@@ -12,6 +13,8 @@ export interface ExportFormat {
   money(amount: number, currency: string): string;
   /** "Nov 12, 2026". */
   date(date: IsoDate): string;
+  /** "November 2026" (the Calendar's Text export, M7.9). */
+  month(month: IsoMonth): string;
 }
 
 /** A day as the `ics` package takes it: [2026, 11, 12]. */
@@ -26,6 +29,8 @@ export interface CalendarEvent {
   end: CalendarDate;
   title: string;
   description: string;
+  /** Its item's live tags, by name (M7.9): calendars that show categories show them. */
+  categories?: string[];
 }
 
 /** The domain each event's UID ends with. */
@@ -34,7 +39,7 @@ const uidDomain = 'sub.simplely.ca';
 /**
  * An event for each charge of `lists` in the next 12 months, titled with what it is and costs as charged ("Netflix:
  * $19.94"; "Renew Mullvad VPN: ≈ $94.16" for one renewed by hand), its description saying its plan, its list, its tax,
- * how it renews and whether it's the last before the item ends.
+ * how it renews, whether it's the last before the item ends and its tags, which are its categories too (M7.9).
  */
 export function calendarEvents(
   lists: readonly ExportList[],
@@ -43,6 +48,7 @@ export function calendarEvents(
 ): CalendarEvent[] {
   return exportCharges(lists, context).map(({ charge, resolved, listName }) => {
     const name = resolved.item.nickname ?? resolved.name;
+    const tags = resolved.item.tagIds.flatMap((id) => context.tags.get(id)?.name ?? []);
     const amount = `${charge.converted ? '≈ ' : ''}${format.money(charge.amount, charge.currency)}`;
     return {
       uid: `${charge.itemId}-${charge.date}-${charge.currency}@${uidDomain}`,
@@ -57,7 +63,9 @@ export function calendarEvents(
           : amount,
         charge.manual ? 'Renew manually' : 'Renews automatically',
         ...(charge.ends ? ['Its last charge before it ends'] : []),
+        ...(tags.length > 0 ? [`Tags: ${tags.join(', ')}`] : []),
       ].join('\n'),
+      ...(tags.length > 0 && { categories: tags }),
     };
   });
 }

@@ -75,7 +75,7 @@ export class SubCard {
   readonly pickList = input<Pick<SubscriptionList, 'id' | 'name'>>();
   /** The user's lists' names, by id, which "· 2 lists" names. */
   readonly listNames = input<ReadonlyMap<string, string>>(new Map());
-  /** Its "Ends" and "Renew by" from the user's items' charges (M7.1). */
+  /** Its "Ends", and "Renew by" or "Auto-renews", from the user's items' charges (M7.1, M6.12). */
   readonly renewal = input<ProviderRenewal>();
 
   protected readonly id = `ss-sub-card-${nextId++}`;

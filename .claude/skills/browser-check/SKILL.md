@@ -50,7 +50,9 @@ script doesn't prove the layout looks right.
 
 `check-settings.cjs` (M4.2) checks the first-run dialog (defaults per browser locale, keyboard, validation, axe),
 Settings (budgets edited in place, Appearance, the 📍 dialog), the theme saved in Dexie (reloads, a second tab, a
-lost cache), and the "IndexedDB blocked" notice with in-memory mode. Run it the same way. For the production build
+lost cache), and the "IndexedDB blocked" notice with in-memory mode. Since M6.16 both dialogs open on their heading
+with no list open, and Country, the province or state, and Currency are menus you can type in: it Tabs to one, types
+("Ont", "Que") and presses Enter, and for the mouse clicks the field, then the choice. Run it the same way. For the production build
 under `wrangler dev`, with the CSP, see the progress-preview skill's `csp-check.cjs`.
 
 `check-catalog.cjs` (M4.3) checks the catalog downloads (which `/data/` files each step asks for, and what's cached in
@@ -177,8 +179,9 @@ Related (Netflix Standard tagged Family, Mullvad VPN, and Crave Premium from Dec
 
 In both themes at both widths, keyboard only, it checks:
 - the header's average and count;
-- the cards by price, with their statuses, tags and the feature summary;
-- the Tab order (← Lists, Edit list, the search box, Sort, then each card's 📌 and details);
+- the cards by price, with their statuses ("Auto-renews Nov 12", "Renew by Nov 12"), tags and the feature summary;
+- the Tab order (← Lists, Edit list, the search box, at 360 px the compact View optimizations (M6.13), Sort, then each
+  card's 📌 and details);
 - 📌 by Space: saved to the item with no draft, the card moving to Pinned with focus on its 📌, and still there after a
   reload;
 - the search box finding a tag, and Clear search;
@@ -291,8 +294,8 @@ In both themes at both widths, keyboard only, it checks:
 - the bar: a past month paid in full, a future one at $0.00, this one up to today with the budget's tick;
 - at 1280 px the grid: today's tab stop, arrows to the 12th, Enter opening its panel (focus on its heading, Netflix,
   its list link, Renews automatically), Escape putting focus back, Page Down to the next month in the URL;
-- at 360 px the agenda, and Enter on a payment opening its day in a bottom sheet with focus on it, which Escape
-  closes;
+- at 360 px the compact grid (a dot per day, no chips, M7.8) and the agenda, and Enter on a payment opening its day
+  in a bottom sheet with focus on it, which Escape closes;
 - Showing by keyboard (Space unticks Work Related): the URL's `lists`, `settings.calendarHiddenLists`, and the same
   after a reload; Next month and Today;
 - Home's dots on the Calendar's days this month, and List view's mini calendar, folded under 960 px until its button
@@ -324,13 +327,15 @@ a Canadian in Alberta. It writes to IndexedDB Family (Netflix Standard twice, Mi
 Mullvad VPN; Proton VPN Plus) with VPN ranked Needed, and prints the cards it finds. In both themes at both widths,
 keyboard only:
 - List view's link: its count, `data-strongest` and its name ("View optimizations (9), the strongest: Recommended"),
-  reached by Tab after the side column, Enter opening the page;
+  reached by Tab after the side column, Enter opening the page; at 360 px the compact one in the pinned bar ("View
+  optimizations: 9 suggestions, the strongest: Recommended", M6.13);
 - the sections in P14's order, every card's saving, as many cards as List view counted, the extra member for the two
   Netflix accounts in Free savings (a removal of one only in Worth a look), Save up to, the back button by the list's
   name and first in the Tab order, the rules' tooltip on Tab, Dismiss right after Apply with the same changes;
 - Dismiss by Enter: one card fewer, focus on a card's heading, the snackbar with Undo; Show dismissed by Space and
   back; a reload keeping it dismissed (one row in `dismissedSuggestions`); List view counting one fewer;
-- Apply by Enter: the editor, the list's draft in IndexedDB with the change, the items table as it was.
+- Apply by Enter: it stays on the page (M8.4), focus moves on, and Review and save opens the editor; the list's draft
+  in IndexedDB with the change, the items table as it was.
 
 Then a 14-item list, which the Web Worker optimizes (`page.on('worker')`). It logs `securitypolicyviolation` events as
 console errors, so under `wrangler dev` (base URL ending in `/`) it checks the production CSP too, the worker included.
@@ -390,6 +395,43 @@ With axe on each, and no horizontal scroll.
   panel doesn't cover the hint's middle, `axeCheck`'s set-aside misses it, so it takes selectors to leave out of a scan.
 - `buttonIn` drops a leading icon's ligature ("auto_fix_high Assign best cards").
 - The card-number check reads the fields typed in, not ids or dates, whose digits run on once dashes are taken out.
+
+`check-after-m9.cjs` (the feedback after M9: M5.11, M5.12, M6.12–M6.16, M7.7–M7.9, M8.4) checks the batch on `ng serve`
+for a Canadian in Alberta with a $50 monthly budget, Work Related planted with eight items (Netflix Standard with an
+extra member, Netflix Standard with ads, Mullvad VPN renewed by hand, Crave, Disney+, Proton and TSN). In both themes
+at both widths, keyboard only, each part on its own, so one failing doesn't stop the rest:
+- first run typed in: the dialog opens on its heading with no list open, Tab to Province, "alb" and Enter;
+- List view: the add-on with its price, "Auto-renews" and "Renew by", the warning's ✕ then Show hidden (the key in the
+  settings, focus moving between them), the bar's one colour (all red, half again over), scrolled to the end with the
+  bar below the top bar and View optimizations on screen (compact in the bar at 360), then View in Search by keyboard
+  with `plan=`;
+- Search: Standard picked over the user's Standard with ads, "Auto-renews", and Netflix's Behavioral Advertising link;
+- the item dialog: the shared-ranks note, French-language content set to Needed by keyboard, Save sharing it with
+  Standard with ads in the draft, then New tag's hex field and colour picker following each other;
+- Optimizations: Apply staying, Review and save, Undo dropping the draft, Apply again and Review and save;
+- the Calendar: "← Work Related" from a budget warning, the grid's width unchanged when a day opens at 1280 and none
+  from the sidebar, the compact grid and its bottom sheet at 360, and the JSON and Text downloads;
+- Settings: the 📍 dialog's province typed ("que" is Quebec alone) and the tag editor's picker;
+- Home: the bars' colour on the scale and the warnings' ✕.
+
+What it taught:
+- A dialog moves focus to its heading (or its first field) once it has opened: wait for that before pressing Tab, or
+  the dialog takes focus back mid-way and what's typed goes nowhere.
+- A menu you can type in opens its list on focus. Tab pressed right after it opened came before Material set up its
+  own closing: the list stayed open over the next field, and two presses with no gap sent focus out of the page (no
+  `focusin` at all). The field closes its list on the Tab keydown now, and when focus moves to another control.
+- CDK draws a menu's list inside the dialog that holds its field (a popover in the top layer, not in
+  `.cdk-overlay-container`), so a press on a choice moves focus to the dialog, the nearest focusable element around
+  it. A blur rule that closed the list for focus going outside the list's own pane closed it on mousedown, and the
+  click landed on the dialog: no mouse pick worked. The rule now is the tag picker's: leave it alone when focus goes to
+  an element that holds the field. Unit tests run in jsdom, where the list is at the page's end, so only a browser
+  shows this; `check-settings.cjs` and the older scripts' first runs pick by mouse.
+- List view's compact View optimizations sat between Sort and the menu Sort opens, so Tab after opening Sort went to the
+  link, not the menu: it comes before Sort now.
+- An icon's word is in a button's `textContent` with no space ("checkStandard", "eventCalendar (.ics)"): read the
+  label's own span, or drop `mat-icon` first.
+- Tab into a tag picker stops on its chips first: wait for the chip grid's input (`.mat-mdc-chip-input`).
+- The list editor's Cancel asks "Discard changes?" a moment later: wait for the question or the editor to go.
 
 Since M7.1, the scripts check the charges:
 - `check-list-view.cjs`: Mullvad's "Renew by Nov 12", Netflix's next charge as charged in its details ("Next charge Nov
@@ -471,6 +513,11 @@ Playwright's `hasText` matches without case.
 - Every new browser context starts with no settings, so the first-run dialog (M4.2) covers the page until it's
   completed. The scripts complete it first. The context's `locale` sets its defaults (Playwright uses the system's
   unless given): `en-CA` needs a province, `en-US` and `en-GB` need nothing.
+- Since M6.16 the first-run and 📍 dialogs' Country, province or state, and Currency are menus you can type in
+  (`ss-choice-field[data-label="…"] input`). A click on the field, or its `.mat-mdc-text-field-wrapper`, opens the
+  list; typing narrows it, and its first is made active a moment after the list changes, so wait about 400 ms before
+  Enter. Tab into a filled one selects what it shows; Control+A first anyway. A list's options aren't focusable:
+  read focus from the field, not the option.
 - An empty outlined field's label lies over its `mat-select`, so Playwright won't click the select: click the
   field's `.mat-mdc-text-field-wrapper`, as a user does.
 - A `mat-select`'s typeahead moves to a match after a 200 ms pause: wait before pressing Enter.

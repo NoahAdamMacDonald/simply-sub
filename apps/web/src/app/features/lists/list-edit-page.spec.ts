@@ -23,6 +23,7 @@ import type {
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { FxStore } from '../../core/fx/fx-store';
 import { leaveGuard } from '../../core/leave-guard';
+import { ListDraftService } from '../../core/lists/list-draft-service';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { CardsRepository } from '../../core/storage/cards-repository';
 import { CustomSubsRepository } from '../../core/storage/custom-subs-repository';
@@ -853,6 +854,103 @@ describe('ListEditPage', () => {
       await until(() => dialog() === null);
       expect((await draftItem(netflix.id))?.rankOverrides).toEqual({
         'video.quality=1080p': 'critical',
+      });
+    });
+
+    describe('ranks shared with the provider’s other plans (M6.14)', () => {
+      let ads: ListItem;
+      beforeEach(async () => {
+        ads = await TestBed.inject(ItemsRepository).create({
+          ...fields('netflix.standard-ads'),
+          listId: work.id,
+          rankOverrides: { 'video.quality=1080p': 'wanted' },
+        });
+      });
+
+      it('gives the ranks changed to its provider’s other plans in the list, but not Essential', async () => {
+        await open(editor());
+        await click('Edit Netflix Standard');
+        const loader = await dialogLoader();
+        expect(inDialog('.ranks .note')).toBe(
+          'Changes here go to the same features of Netflix Standard with ads in this list too. Essential stays on this plan.',
+        );
+
+        await (
+          await rankSelect(loader, 'Video quality: 1080p (Full HD)')
+        ).clickOptions({
+          text: /^Critical/,
+        });
+        await press(loader, 'Save');
+        await until(() => dialog() === null);
+
+        expect((await draftItem(netflix.id))?.rankOverrides).toEqual({
+          'streaming.ad-free': 'essential',
+          'video.quality=1080p': 'critical',
+        });
+        expect((await draftItem(ads.id))?.rankOverrides).toEqual({
+          'video.quality=1080p': 'critical',
+        });
+        expect(document.querySelector('.mat-mdc-snack-bar-container')?.textContent).toContain(
+          'Saved Netflix Standard, and its ranks to 1 more plan',
+        );
+      });
+
+      it('keeps them to the one plan with Ranks for this plan only', async () => {
+        await open(editor());
+        await click('Edit Netflix Standard');
+        const loader = await dialogLoader();
+        await (
+          await loader.getHarness(MatCheckboxHarness.with({ label: 'Ranks for this plan only' }))
+        ).check();
+        expect(inDialog('.ranks .note')).toBe(
+          'Changes here stay on this plan, and changes to its provider’s other plans don’t reach it.',
+        );
+        await (
+          await rankSelect(loader, 'Video quality: 1080p (Full HD)')
+        ).clickOptions({
+          text: /^Critical/,
+        });
+        await press(loader, 'Save');
+        await until(() => dialog() === null);
+
+        expect((await draftItem(netflix.id))?.ownRanks).toBe(true);
+        expect((await draftItem(ads.id))?.rankOverrides).toEqual({
+          'video.quality=1080p': 'wanted',
+        });
+      });
+
+      /** Waits for the dialog's 1080p row: its group starts open when the plan starts with a rank in it. */
+      async function rowFor1080p(): Promise<void> {
+        await until(
+          () =>
+            Array.from(dialog()?.querySelectorAll('.rank-name') ?? []).some(
+              (row) => row.textContent?.trim() === 'Video quality: 1080p (Full HD)',
+            ),
+          5000,
+        );
+      }
+
+      it('starts a new plan of the provider with their shared ranks', async () => {
+        const loader = await openDialog(`${editor()}?add=netflix.standard&interval=month`);
+        await rowFor1080p();
+        // Standard with ads' Wanted; Standard's Essential stays its own.
+        expect(
+          await (await rankSelect(loader, 'Video quality: 1080p (Full HD)')).getValueText(),
+        ).toBe('Wanted');
+        expect(await (await rankSelect(loader, 'Ad free')).getValueText()).toBe(
+          'Profile default (Not ranked)',
+        );
+      });
+
+      it('shares them with a new plan before the drafts’ live query has the draft', async () => {
+        // The editor opens the dialog on the draft it started, which the live query can bring a moment later: the
+        // dialog starts from the editor's, or the new plan would start with none of the ranks (found in the full run).
+        vi.spyOn(TestBed.inject(ListDraftService), 'byList').mockReturnValue(new Map());
+        const loader = await openDialog(`${editor()}?add=netflix.standard&interval=month`);
+        await rowFor1080p();
+        expect(
+          await (await rankSelect(loader, 'Video quality: 1080p (Full HD)')).getValueText(),
+        ).toBe('Wanted');
       });
     });
 

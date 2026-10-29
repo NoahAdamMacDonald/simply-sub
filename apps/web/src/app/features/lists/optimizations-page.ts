@@ -7,13 +7,13 @@ import {
   resource,
   signal,
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatIcon } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
   draftItems,
   severities,
@@ -21,7 +21,7 @@ import {
   suggestionEdits,
   type Suggestion,
 } from '@simply-sub/core';
-import { map } from 'rxjs';
+import { filter, firstValueFrom, map, race, timer } from 'rxjs';
 import { ListDraftService } from '../../core/lists/list-draft-service';
 import { MetricsService } from '../../core/metrics/metrics-service';
 import { OptimizerService } from '../../core/optimizer/optimizer-service';
@@ -32,11 +32,14 @@ import { EmptyState } from '../../shared/empty-state/empty-state';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { amountText } from '../../shared/price-tag/price-text';
 import { SuggestionCard } from './suggestion-card';
+import { actionLine } from './suggestion-text';
 
 /**
  * A list's optimizations (PROJECT-PLAN P14, M8.2): core's optimizer for the list, its cards in Free savings, Red,
  * Orange and Yellow, with Save up to, Show dismissed and the rules in a tooltip. Apply puts a card's changes on the
- * list's draft and opens the editor, so nothing is saved until Save; Dismiss hides a card until the list changes.
+ * list's draft and stays (M8.4): the suggestions are for the list as the draft has it, so the next one counts the
+ * changes before it, Undo puts the draft back, and Review and save opens the editor, where nothing is saved until Save.
+ * Dismiss hides a card until the list changes.
  */
 @Component({
   selector: 'ss-optimizations-page',
@@ -61,7 +64,6 @@ export class OptimizationsPage {
   private readonly dismissals = inject(DismissedSuggestionsRepository);
   private readonly drafts = inject(ListDraftService);
   private readonly settings = inject(SettingsStore);
-  private readonly router = inject(Router);
   private readonly snackBar = inject(MatSnackBar);
   private readonly injector = inject(Injector);
 
@@ -93,6 +95,12 @@ export class OptimizationsPage {
   protected readonly showDismissed = signal(false);
   /** The card whose changes are being put on the draft. */
   protected readonly applying = signal<string | undefined>(undefined);
+  private readonly found$ = toObservable(this.found);
+  /** The list has changes in its draft that aren't saved, applied here or in the editor: the suggestions count them. */
+  protected readonly unsaved = computed(() => {
+    const draft = this.drafts.byList().get(this.listId());
+    return draft !== undefined && this.drafts.hasChanges(this.listId());
+  });
 
   /** The sections in P14's order, each with its cards: dismissed ones only with Show dismissed. */
   protected readonly sections = computed(() => {
@@ -130,14 +138,20 @@ export class OptimizationsPage {
   protected readonly unpriced = computed(() => this.metrics.list(this.listId()).unresolved.length);
   protected readonly empty = computed(() => this.metrics.list(this.listId()).resolved.length === 0);
 
-  /** Puts the card's changes on the list's draft and opens the editor on it (P5): nothing is saved until Save. */
+  /**
+   * Puts the card's changes on the list's draft (P5) and stays, so another can follow (M8.4): the suggestions come
+   * again for the draft, and focus moves to the next card, or to Review and save when none is left. Undo puts the
+   * draft back as it was, or drops it when this made it. Nothing is saved until the editor's Save.
+   */
   protected async apply(suggestion: Suggestion): Promise<void> {
     const listId = this.listId();
+    const next = this.neighbour(suggestion.fingerprint);
     this.applying.set(suggestion.fingerprint);
     try {
       const started = await this.drafts.start(listId);
       if (!started) return;
-      const items = new Map(draftItems(started.draft).map((item) => [item.id, item]));
+      const before = started.draft;
+      const items = new Map(draftItems(before).map((item) => [item.id, item]));
       const edits = suggestionEdits(suggestion, items);
       if (!edits) {
         this.snackBar.open(
@@ -147,7 +161,25 @@ export class OptimizationsPage {
         return;
       }
       await this.drafts.applyEdits(listId, edits);
-      await this.router.navigate(['/lists', listId, 'edit']);
+      // The suggestions for the draft, without the one applied (or after 5 s, whatever they are).
+      await firstValueFrom(
+        race(
+          this.found$.pipe(
+            filter(
+              (found) =>
+                found !== undefined &&
+                !found.suggestions.some((card) => card.fingerprint === suggestion.fingerprint),
+            ),
+          ),
+          timer(5000),
+        ),
+      );
+      this.focusAfterRender(next, true);
+      const title = suggestion.actions.map((action) => actionLine(action).title).join('; ');
+      const undo = this.snackBar.open(`Applied: ${title}`, 'Undo', { duration: 8000 });
+      undo.onAction().subscribe(() => {
+        void (started.resumed ? this.drafts.putBack(listId, before) : this.drafts.cancel(listId));
+      });
     } finally {
       this.applying.set(undefined);
     }
@@ -175,7 +207,19 @@ export class OptimizationsPage {
     return other ? `suggestion-${other.suggestion.fingerprint}-title` : 'show-dismissed-input';
   }
 
-  private focusAfterRender(id: string): void {
-    afterNextRender(() => document.getElementById(id)?.focus(), { injector: this.injector });
+  /**
+   * Focuses the element with `id` once the page has drawn. After Apply, whose changes can change the cards, one that's
+   * gone gives way to the first card's heading, else Review and save.
+   */
+  private focusAfterRender(id: string, applied = false): void {
+    const focus = () => {
+      const fallback = () =>
+        document.querySelector<HTMLElement>('ss-suggestion-card .title') ??
+        document.getElementById('review');
+      (document.getElementById(id) ?? (applied ? fallback() : null))?.focus();
+    };
+    // After Apply the page has drawn the new cards already, waiting for them: there may be no render to come.
+    if (applied) focus();
+    else afterNextRender(focus, { injector: this.injector });
   }
 }

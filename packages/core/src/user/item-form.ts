@@ -87,6 +87,8 @@ export interface ItemForm {
   note: string;
   /** The payment card it's paid with (M9.4): '' for none. */
   cardId: string;
+  /** Its ranks are its own, not shared with its provider's other plans in the list (M6.14). */
+  ownRanks: boolean;
 }
 
 /** A rule the form breaks, at the field it's about: `['windows', 0, 'end']`. */
@@ -328,7 +330,7 @@ export function itemFormIssues(form: ItemForm, rules: ItemFormRules): FormIssue[
 
 /** What the form saves: all of a list item but its id, list, pinning and timestamps. */
 export type ItemFields = Pick<ListItem, 'source' | 'billing' | 'tagIds' | 'rankOverrides'> &
-  Partial<Pick<ListItem, 'region' | 'priceOverride' | 'nickname' | 'note' | 'cardId'>>;
+  Partial<Pick<ListItem, 'region' | 'priceOverride' | 'nickname' | 'note' | 'cardId' | 'ownRanks'>>;
 
 export interface ItemFormContext extends ItemFormRules {
   /** The chosen price's autoRenew: a plan that's renewed by hand never auto-renews. */
@@ -367,6 +369,7 @@ export function itemFromForm(form: ItemForm, context: ItemFormContext): ItemFiel
     ...trimmed('nickname', form.nickname),
     ...trimmed('note', form.note),
     ...(!free && form.cardId !== '' && { cardId: form.cardId }),
+    ...(form.ownRanks && { ownRanks: true as const }),
   };
 }
 
@@ -410,6 +413,7 @@ export function newItemForm({
     nickname: '',
     note: '',
     cardId: '',
+    ownRanks: false,
   };
 }
 
@@ -450,6 +454,7 @@ export function itemFormFor(
     nickname: item.nickname ?? '',
     note: item.note ?? '',
     cardId: item.cardId ?? '',
+    ownRanks: item.ownRanks === true,
   };
 }
 

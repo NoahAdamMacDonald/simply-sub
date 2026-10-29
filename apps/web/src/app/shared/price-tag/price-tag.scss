@@ -14,8 +14,9 @@
   white-space: nowrap;
 }
 
+// A page can make the amount smaller (an add-on's on List view's cards, M6.12).
 .amount {
-  font: var(--mat-sys-title-medium);
+  font: var(--ss-price-font, var(--mat-sys-title-medium));
 }
 
 .interval {

@@ -135,6 +135,29 @@ describe('Sold in', () => {
   });
 });
 
+describe('the plan shown (plan)', () => {
+  it('keeps a plan the catalog has, and writes it before addTo', () => {
+    const work = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d';
+    const query = readSearchParams(
+      { plan: 'netflix.standard', q: 'Netflix', addTo: work },
+      registry,
+      {},
+      [{ id: work }],
+    );
+
+    expect(query).toEqual({ q: 'Netflix', plan: 'netflix.standard', addTo: work });
+    expect(Object.keys(writeSearchParams(query))).toEqual(['q', 'plan', 'addTo']);
+    expect(readSearchParams(writeSearchParams(query), registry, {}, [{ id: work }])).toEqual(query);
+    // It isn't a filter.
+    expect(filterCount(query)).toBe(0);
+  });
+
+  it('drops one that names no plan', () => {
+    expect(read({ plan: 'netflix.ultra', q: 'Netflix' })).toEqual({ q: 'Netflix' });
+    expect(read({ plan: 'netflix' })).toEqual({});
+  });
+});
+
 describe('pick mode (addTo)', () => {
   const work = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d';
   const lists = [{ id: work }, { id: '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4e' }];

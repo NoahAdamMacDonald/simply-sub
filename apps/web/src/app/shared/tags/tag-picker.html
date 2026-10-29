@@ -90,6 +90,29 @@
       />
     </mat-form-field>
     <ss-tag-colours [color]="draft.color" (colorChange)="recolour($event)" />
+    <!-- Any colour, typed or from the device's picker, each following the other (M6.15), as Settings has it. -->
+    <div class="any-colour">
+      <mat-form-field appearance="outline" class="hex" subscriptSizing="dynamic">
+        <mat-label>Hex colour</mat-label>
+        <input
+          #hexInput
+          matInput
+          autocomplete="off"
+          spellcheck="false"
+          [value]="hexText()"
+          (input)="typeHex(hexInput.value)"
+          (keydown.enter)="$event.preventDefault(); create()"
+          [attr.aria-invalid]="hexError() !== undefined"
+          [attr.aria-describedby]="hexError() ? headingId + '-hex-error' : null"
+        />
+        @if (hexError(); as error) {
+          <mat-hint class="hint-error" [id]="headingId + '-hex-error'">{{ error }}</mat-hint>
+        } @else {
+          <mat-hint>Any colour, as #rrggbb</mat-hint>
+        }
+      </mat-form-field>
+      <ss-colour-picker [color]="draft.color" (colorChange)="recolour($event)" />
+    </div>
     @if (failed()) {
       <p class="error" role="alert">Couldn't save the tag. Try again.</p>
     }
@@ -97,7 +120,7 @@
       <button
         matButton="filled"
         type="button"
-        [disabled]="!draft.name.trim() || saving()"
+        [disabled]="!draft.name.trim() || saving() || hexError() !== undefined"
         (click)="create()"
       >
         Create tag

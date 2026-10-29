@@ -22,7 +22,7 @@ export type DraftEdit =
   | { kind: 'remove'; itemId: string }
   | { kind: 'add'; fields: NewItemFields };
 
-type ChangedField = 'source' | 'billing' | 'priceOverride' | 'cardId';
+type ChangedField = 'source' | 'billing' | 'priceOverride' | 'cardId' | 'rankOverrides';
 
 /**
  * The edits that apply `suggestion` to a draft whose items (the ones it hasn't removed) are `items`, by id. Undefined

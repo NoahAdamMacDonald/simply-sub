@@ -8,7 +8,7 @@ import { SettingsStore } from '../../core/settings/settings-store';
 import { CustomSubsRepository } from '../../core/storage/custom-subs-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
 import { TagsRepository } from '../../core/storage/tags-repository';
-import { dateText } from '../date-text';
+import { dateText, monthText } from '../date-text';
 import { amountText } from '../price-tag/price-text';
 import { saveFile } from '../save-file';
 import type {
@@ -128,6 +128,7 @@ export class Exporter {
       format: {
         money: (amount, currency) => amountText(amount, currency, saved.country),
         date: dateText,
+        month: monthText,
       },
     };
   }

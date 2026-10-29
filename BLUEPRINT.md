@@ -857,6 +857,7 @@ export interface ListItem {
   cardId?: string;
   tagIds: string[];
   rankOverrides: Record<RankKey, Rank>;  // subscription-level ranks (PROJECT-PLAN.md §3.2)
+  ownRanks?: true;                       // not shared with its provider's other plans in the list (M6.14)
   pinned: boolean;
   createdAt: string; updatedAt: string; deletedAt?: string;
 }
@@ -893,6 +894,7 @@ export interface Settings {             // one record, under the key 'settings'
   theme: 'light' | 'dark' | 'system';
   searchSoldOnly?: true;                        // Search starts with Sold in on (M5.6); left out when off
   calendarHiddenLists?: string[];               // the lists the Calendar leaves out on this device (M7.4)
+  dismissedBudgetWarnings?: string[];           // budget warnings hidden until their period or budget changes (M7.7)
   appLock?: {                                   // the app lock, when it's on (M6.10, 11.5): no secret, only the salt
     salt: string; iterations: number;           // and a sealed check value. Plain while the rest of the settings are
     check: { iv: string; ciphertext: string };  // sealed, changed only by the lock's own methods, never backed up
@@ -928,6 +930,8 @@ export interface ListDraft {            // a list's unsaved edits (PROJECT-PLAN 
 subdivision must belong to the country.
 
 **Rank resolution:** `item.rankOverrides[key]` → `profileRanking[key]` → `'not-ranked'`. Group ranks never cascade to children.
+Since M6.14 a rank changed in an item dialog is also written to the same provider's other plans in the list (their own
+`rankOverrides`, in the draft), unless either has `ownRanks`; Essential stays on its plan (section 14).
 
 **Why these fields** (settled before M4.1 ships Dexie v1, since every later change needs an upgrade function):
 - `billingDay`: a date alone can't tell "billed on the 28th" from "billed on the 31st" when it's Feb 28. Without
@@ -1145,7 +1149,10 @@ M1.14), so a buyer can see what signing up means beyond the price.
   (`tier`), a reason of a sentence or two in plain words anyone can follow (240 characters at most; M1.13 kept it to
   one line of 100), one to three sources (a URL and the page's words, word for word) and the date they were read, optionally for some plans (an ad tier's tracking) or regions (a country's own terms), which
   sit over a rating for every plan or everywhere. Every quoted page is linked and every link is quoted; a topic for
-  some categories applies only to a provider with a plan in one (`validateCatalog`).
+  some categories applies only to a provider with a plan in one (`validateCatalog`). A rating whose reason says the
+  user has to change something themselves (a setting to turn off, a request to make) has an `action` (M5.12): what the
+  link does, in a few words, and the provider's own page for it, which its policy or help pages link; validation takes
+  it on the provider's own sites or its quoted policies' site, never another company's.
 - **On the card:** core's `planPolicies` picks, for the plan shown and the user's country, each topic's rating, by
   group in the registry's order, and the pages those ratings quote, numbered from 1. Each rating is a dot in its
   grade's colour, green to red (`--policy-*`, section 8.1), like the rank dots and as decorative, then the topic in
@@ -1153,7 +1160,7 @@ M1.14), so a buyer can see what signing up means beyond the price.
   quotes it takes from it): a link to the page with a text fragment (`#:~:text=`, core's `quoteLink`) that scrolls
   to its first quote and highlights each, and the quotes as its tooltip. The numbered pages follow, under Sources.
   A topic with no rating isn't shown, and a provider with none has no
-  section.
+  section. A rating's action is a link under its reason, in a new tab (M5.12).
 - **Read like prices:** the policy-research skill, from the provider's own pages; a page behind a bot check stays
   unread. The quotes are in the catalog files, and the card shows them in its citations' tooltips and links (about
   7 kB more to download, compressed, for ten providers). Nothing rereads them nightly yet: validation warns once a rating is
@@ -2060,6 +2067,13 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
 | **View list** | Only **that list's** cost against the budgets |
 | **Calendar** | **The displayed month only**: spent so far (payments dated up to today) against the month's total, for the lists currently shown, with a tick mark at the monthly budget (none when the budget is past the month's total). Its colour compares the month's total with the budget |
 
+**Colours (M7.7, the user's choice):** a bar's fill is one colour, which changes gradually with how far along its
+budget it is, with no hard step: green with nothing spent, yellow exactly at the budget, red at half again over it
+(150%) and beyond (core's `budgetBar`: `towardYellow` and `towardRed`, mixed from `--budget-ok`, `--budget-warn` and
+`--budget-over` in OKLab). The Calendar's bar takes its colour from the month's total against the budget, so a month
+that goes over shows it before it's paid. The level (ok under 75%, warn to 100%, over past it) keeps its meaning
+(`data-level`). The dark label is 4.9:1 or more on every colour of the scale.
+
 **Every item counts, including duplicates.** The same plan can legitimately appear several times: a family
 might have several Netflix plans, and lists can be used **per family member** to track each person's costs.
 Home simply sums every item in every list. (The optimizer can still spot these and suggest, for example,
@@ -2257,6 +2271,8 @@ Lives in `packages/core/src/optimizer/`. It's a **pure function**:
 `{ suggestions, bestSavings, … }`, with the rules the user chose in section 14 (M8.1).
 
 ### 10.1 Inputs, prepared first
+0. The list's items as its draft has them when it has one, else as saved (M8.4): the suggestions are for what Save
+   would keep, so one applied on the Optimizations page counts in the next.
 1. Resolve each item's effective feature ranks (section 4.6).
 2. Build a **month-by-month coverage map** for the next 12 months: for each feature, which items provide it in
    each month. Limited-timeframe items count only in the months they're active.
@@ -2377,18 +2393,24 @@ prompted after each big change, or weekly).
 | JSON | native | **Full backup**: all tables plus `schemaVersion`. The only format that can be re-imported. An optional passphrase encrypts it (section 11.5), since backups sit in Downloads unencrypted. Imports are validated with Zod before anything is written |
 | CSV | papaparse | List view: one row per item (list, service, plan, cost as charged with tax, interval, next charge, live tags). The Calendar: one row per charge in the next 12 months |
 | XLSX | exceljs (lazy-loaded) | Summary, one sheet per list of its items, then Payments, the next 12 months' charges |
-| TXT | native | A readable summary of one list |
+| TXT | native | A readable summary of one list; the Calendar's, its next 12 months by month (M7.9) |
 | JSON (one list) | native | List view's: the list, its items and what they name, as stored. Not a backup, so not importable (M7.5) |
-| ICS | `ics` npm package | One all-day event (`VALUE=DATE`, so no time zone can move it) per charge in the next 12 months, from the schedule engine. Not `RRULE`s: a monthly rule starting on the 31st skips every shorter month (RFC 5545 drops dates that don't exist), and separate events also follow windows, end dates and price changes |
+| JSON (payments) | native | The Calendar's: the lists shown and each charge in the next 12 months as charged, with its tax, renewal and live tags (core's `paymentsFile`, M7.9). Not a backup either |
+| ICS | `ics` npm package | One all-day event (`VALUE=DATE`, so no time zone can move it) per charge in the next 12 months, from the schedule engine. Not `RRULE`s: a monthly rule starting on the 31st skips every shorter month (RFC 5545 drops dates that don't exist), and separate events also follow windows, end dates and price changes. Each event lists its item's live tags, also as `CATEGORIES` (M7.9) |
 
 ### 11.3 Calendar integration
 - **Phase 3, download `.ics`:** works with Google, Apple and Proton through their import features. This is
-  offline and private, but a snapshot, so it doesn't update when the list changes.
+  offline and private, but a snapshot, so it doesn't update when the list changes. Since M7.9 Sync calendar's steps
+  make a "Simply Sub" calendar first and import into it: each app colours a whole calendar, not an event (Apple's
+  guide: imported events "lose any custom color"; Google's and Proton's import pages say nothing of one), so a
+  calendar of its own keeps the payments apart, in a colour the user picks, and easy to replace.
 - **Phase 5, live subscription URL:** Google, Apple and **Proton Calendar ("Add calendar from URL")** all
   support subscribing to an `.ics` URL. This needs the payment schedule stored on the server, so it's
   **opt-in**: the app uploads a **minimal schedule** (titles and amounts only, or event titles alone if
   the user prefers) under a random 128-bit token. The Worker then serves `/api/v1/cal/<token>.ics`. Users can
-  revoke the token at any time. Subscribed calendars are read-only in Proton, which is fine for this.
+  revoke the token at any time. Subscribed calendars are read-only in Proton, which is fine for this. A feed per tag,
+  besides the one for everything, would give each tag a calendar of its own and so a colour of its own: the way the
+  apps can show tags in colour (M7.9).
 
 ### 11.4 Device sync and future accounts
 - **Phase 5, encrypted sync ("sync chain", like Brave's):** generate a sync code (a passphrase). The browser
@@ -2396,6 +2418,22 @@ prompted after each big change, or weekly).
   and the app lock, section 11.5) and stores the blob in R2 (section 7.1), keyed by a hash of the code. Other devices enter the code to pull and merge.
   The server can't read the data. Merging works per record using `updatedAt` and `deletedAt`
   (last write wins), which is why every record has those fields.
+- **How Brave does it** (its Sync v2 wiki and `brave/go-sync`, read 2026-10-28): the first device makes a random
+  32-byte seed and shows it as a 24-word BIP39 phrase or a QR code; HKDF-SHA512 derives from it an Ed25519 key pair
+  that signs the device's requests to Brave's own sync server, and the data is encrypted on the device with a key
+  stretched from the phrase (scrypt, with a salt the first device stores on the server for the others). The server
+  (Chromium's sync protocol, Commit and GetUpdates, on DynamoDB) holds only what it can't read. Brave has since added
+  a word that changes daily to the code shown for adding a device, and doesn't support the code as a backup.
+- **For Simply Sub, the same shape on Cloudflare** (the recommended design for M10): a random 32-byte seed as the sync
+  code, shown as words (and a QR code; scanning one can come later, since not every browser can); from it, with
+  WebCrypto's HKDF-SHA256 (a random seed needs no slow stretching, unlike a passphrase): the chain's id, an auth secret
+  whose SHA-256 hash is all the server keeps to check writes, and the AES-256-GCM key. One encrypted snapshot of the
+  synced tables per chain, in R2 (or a Durable Object, which would also serialize writes), written with a conditional
+  PUT (`If-Match` its ETag) after merging what's there, so two devices never overwrite each other. Not synced: the
+  catalog and rate caches, drafts (edits not saved), the app lock and per-device settings (the theme, Calendar's
+  shown lists). The server sees a blob's size and when it changed, nothing else. Leaving a chain or a lost device:
+  a new code moves the data to a new chain. Accounts, or a passkey to open the chain (WebAuthn's PRF extension), can
+  come later without changing this.
 - **Accounts later:** add Cloudflare Access or an auth library on top. An account just owns sync blobs, so
   the data model doesn't change.
 
@@ -2574,6 +2612,64 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-28, the feedback after M9)**
+The user's sixteen fixes and improvements after M9, as M5.11–M5.12, M6.12–M6.16, M7.7–M7.9 and M8.4:
+- **View in Search shows the item's plan (M5.11):** Search's URL takes `plan=<plan id>` (kept while the catalog has
+  it, not a filter), and its provider's card shows that plan over the user's own. A user with Standard with Ads and
+  Standard saw Standard with Ads from the Standard card: the card showed the user's cheapest active plan.
+- **Where to change a policy (M5.12):** a rating's optional `action` (section 4.10), read 2026-10-28 from each
+  provider's own pages: Netflix's privacy statement links its choices (help.netflix.com/node/100637, Behavioral
+  Advertising) and its deletion help (node/100625); Disney's privacy center explains its "Your Privacy Controls" for
+  Disney+, Hulu and ESPN (its "Do Not Sell or Share" form is on OneTrust's domain, so it isn't linked); Bell's privacy
+  page links its preferences (bell.ca/email-updates) for Crave, TSN and RDS. ICI TOU.TV's rating points to the
+  browser's own settings and Mullvad's to a refund, so they have none.
+- **Add-ons on the cards (M6.12):** an add-on chosen in the item dialog was saved, and counted in the totals, but no
+  card showed it or its price, so it seemed not to be added (the optimizer's extra member looked no different). List
+  view's cards list each add-on with its price, and the editor's rows say what it adds. **Renewals:** an active item
+  that renews by itself says when ("Auto-renews Nov 12"), on Search's cards too.
+- **List view's pinned bar (M6.13):** the search box and Sort stay below the top bar; View optimizations stays pinned at
+  the side column's foot from 960 px, never over the column's other parts, and under 960 px a compact one (the icon and
+  the count, named by hidden words, not an `aria-label`, which axe faults when the icon's word shows) is in the bar
+  before Sort, so Tab goes from Sort straight into the menu it opens; Sort is its icon under 600 px.
+- **Shared ranks (M6.14), the user's choice:** within the list, saved with the list's Save (Cancel undoes them), not a
+  provider-wide layer for every list saved at once. Only what changed in the dialog goes; Essential stays on its
+  plan and a sibling's Essential stays too; "Ranks for this plan only" (`ListItem.ownRanks`) opts a plan out; a new plan
+  starts with its siblings' ranks. The editor hands the item dialog the draft it has (`ItemDialogData.draft`): the
+  drafts' live query can come a moment after the draft was started, and a new plan read from it then started with
+  none.
+- **Tag colours (M6.15):** the device's own colour picker (`<input type="color">`, on iOS, Android and desktop, no
+  library) beside the hex field, each following the other, in Settings and the item dialog's New tag, which gets the
+  hex field too.
+- **Menus you can type in (M6.16):** `ss-choice-field`, a Signal Forms control on Material's autocomplete, for Country,
+  Province or territory (State) and Currency in the first-run and 📍 dialogs. Both dialogs now start on their heading:
+  focused, the Country menu would open its list over the dialog. Tab closes a list before focus moves on, as
+  Material's own Tab does once the list is set up: pressed right after the list opened, it came first, and left the
+  list open over the next field, or sent focus out of the page. Focus moved to another control some other way closes
+  it too. A choice pressed with a mouse or a finger moves focus to the dialog (CDK draws the list inside it, as a
+  popover), so that's left to Material, as the tag picker does (M6.6). The form sending focus to a field it's missing
+  (`focusFirstError`) leaves its list closed, so the message under the field shows; typing opens it.
+- **Budget bars and warnings (M7.7):** one colour per bar, on a scale from green to yellow exactly at the budget to red
+  at 150%, the user's choice over a first try that drew a green-to-red gradient along the fill (section 8.1.1); a
+  dismissed warning's key is whose payments, month
+  or year, the period and the budget, so it comes back for a new period or budget; keys of past periods are dropped.
+  Focus waits for its target: the settings come back from storage a moment after they're saved.
+- **The Calendar (M7.8):** a column beside the grid from 960 px, so a day's panel never narrows it (Upcoming, now
+  `ss-upcoming`, sits there under the panel); a compact grid above the agenda on phones; a back button to the page it
+  was opened from (the router's previous navigation, by name), none from the sidebar, whose links carry
+  `{ sidebar: true }` in their navigation's state.
+- **Its exports and its own calendar (M7.9):** JSON and Text; tags in each event; Sync calendar's steps make a Simply
+  Sub calendar first. The apps colour a calendar, not an event (section 11.3), so no per-event `COLOR` is written.
+- **Several optimizations before the editor (M8.4):** the optimizer runs on the list as its draft has it (section
+  10.1), Apply stays, Undo puts the draft back, Review and save opens the editor.
+- **Bundle:** the initial bundle is 496.91 kB (496.39 before), still under 500 kB: the settings' schema now holds the
+  dismissed warnings' pattern, and the sidebar and page header their navigation state. The pages' chunks stay lazy.
+- **Checks:** core 1569 tests, web 662, API 213, bot 41; `check-after-m9.cjs` (the batch, both themes at 360 and 1280
+  px, keyboard only, with axe) and the scripts of the pages it changed (the browser-check skill).
+- **M3 or M10 next:** M3, the discovery pipeline. The catalog has ten providers, so most of what a user pays for is a
+  custom subscription; M3 fills it (the user's own services first, M3.6: Crunchyroll, Xbox Game Pass, Bitdefender,
+  Claude) and builds on M8.3's bot, which already reads pages, asks Workers AI and opens PRs. M10's "Suggest a service"
+  and broader regional coverage feed on the pipeline, and its sync is designed (section 11.4) for when it comes.
 
 **Resolved (2026-10-28, M9.4)**
 - **The item dialog's card** (PROJECT-PLAN P6): a Payment section after Tags, for a plan that isn't free.

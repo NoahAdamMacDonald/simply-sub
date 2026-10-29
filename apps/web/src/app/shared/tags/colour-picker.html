@@ -1,0 +1,9 @@
+<!-- The native picker, as a swatch of the colour: its own button, with a name, on every platform. -->
+<input
+  type="color"
+  class="picker"
+  [value]="shown()"
+  [attr.aria-label]="label()"
+  [style.--picked]="shown()"
+  (input)="picked($event)"
+/>

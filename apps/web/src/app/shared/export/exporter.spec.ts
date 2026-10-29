@@ -226,6 +226,38 @@ describe('Exporter', () => {
     ]);
   });
 
+  it('saves the payment schedule as JSON and as text too (M7.9)', async () => {
+    await exporter().exportPayments([work.id, family.id], 'json');
+    expect(downloads[0].name).toBe('simply-sub-payments-2026-10-25.json');
+    const json = JSON.parse(await downloads[0].blob.text());
+    expect(json).toMatchObject({
+      app: 'simply-sub',
+      file: 'payments',
+      exportedOn: '2026-10-25',
+      lists: ['Work Related', 'Family'],
+    });
+    expect(json.payments).toHaveLength(25);
+    expect(json.payments[0]).toMatchObject({ list: 'Work Related', name: 'Crave', amount: 23.1 });
+
+    await exporter().exportPayments([work.id, family.id], 'txt');
+    expect(downloads[1].name).toBe('simply-sub-payments-2026-10-25.txt');
+    const text = await downloads[1].blob.text();
+    expect(
+      text.startsWith('Simply Sub payments\nExported on Oct 25, 2026, for the next 12 months\n'),
+    ).toBe(true);
+    expect(text).toContain('\nNovember 2026: ');
+    expect(text).toContain(
+      '  Nov 12, 2026: Netflix Standard (Work Related), $19.94, with $0.95 tax\n',
+    );
+  });
+
+  it('gives each payment in the calendar its tags, as categories and in its details (M7.9)', async () => {
+    await exporter().exportPayments([work.id], 'ics');
+    const ics = await downloads[0].blob.text();
+    expect(ics).toContain('CATEGORIES:Family\r\n');
+    expect(ics).toContain('Tags: Family');
+  });
+
   it('saves the lists’ payment schedule as a CSV, and only the lists asked for', async () => {
     await exporter().exportPayments([family.id], 'csv');
     expect((await csvText(downloads[0])).split('\r\n')).toEqual([

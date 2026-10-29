@@ -15,6 +15,17 @@
   width: min(100%, 320px);
 }
 
+// The hex field, with the colour picker beside it.
+.any-colour {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  ss-colour-picker {
+    margin-top: 8px;
+  }
+}
+
 .hex {
   width: min(100%, 200px);
 }

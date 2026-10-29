@@ -39,6 +39,9 @@ describe('BudgetBar', () => {
     expect(bar.getAttribute('aria-valuetext')).toBe('50%, $100.00 of $200.00');
     expect(bar.dataset['level']).toBe('ok');
     expect(bar.style.getPropertyValue('--fill')).toBe('0.5');
+    // Its one colour is halfway from green to yellow (M7.7).
+    expect(bar.style.getPropertyValue('--toward-yellow')).toBe('50%');
+    expect(bar.style.getPropertyValue('--toward-red')).toBe('0%');
   });
 
   it('turns amber from 75%', async () => {
@@ -62,12 +65,16 @@ describe('BudgetBar', () => {
     expect(bar.querySelector('.marker')).not.toBeNull();
     expect(Number(bar.style.getPropertyValue('--marker'))).toBeCloseTo(60 / 66.45);
     expect(bar.getAttribute('aria-valuetext')).toBe('$44.45 of $66.45, budget $60.00');
+    // Its colour is the month's total against the budget: past yellow toward red (M7.7).
+    expect(bar.style.getPropertyValue('--toward-yellow')).toBe('100%');
+    expect(parseFloat(bar.style.getPropertyValue('--toward-red'))).toBeCloseTo(21.5, 1);
   });
 
   it('draws no tick when the budget is past the end of the bar', async () => {
     const bar = await show({ value: 10, max: 50, marker: 60, labelMode: 'amount' });
     expect(bar.querySelector('.marker')).toBeNull();
     expect(bar.style.getPropertyValue('--marker')).toBe('');
+    expect(parseFloat(bar.style.getPropertyValue('--toward-yellow'))).toBeCloseTo(83.33, 1);
   });
 
   it('takes a currency of its own', async () => {

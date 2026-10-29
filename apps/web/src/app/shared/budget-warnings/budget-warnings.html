@@ -1,7 +1,7 @@
 <!-- Always there, so screen readers read a warning out when it appears. -->
 <div role="status">
-  @for (warning of lines(); track warning.kind) {
-    <p class="warning" [attr.data-kind]="warning.kind">
+  @for (warning of lines(); track warning.key) {
+    <p class="warning" [attr.data-kind]="warning.kind" [attr.data-key]="warning.key">
       <mat-icon aria-hidden="true">warning</mat-icon>
       <span class="text">
         <span aria-hidden="true">{{ warning.shown }}</span>
@@ -12,6 +12,22 @@
           See {{ month.name }} in the Calendar
         </a>
       }
+      <!-- Hidden until its period or budget changes (M7.7). -->
+      <button
+        matIconButton
+        type="button"
+        class="dismiss"
+        [attr.aria-label]="warning.dismissLabel"
+        (click)="dismiss(warning)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
     </p>
   }
 </div>
+@if (hidden().length > 0) {
+  <button matButton type="button" class="show-hidden" (click)="showHidden()">
+    <mat-icon>visibility</mat-icon>
+    {{ hidden().length === 1 ? 'Show 1 hidden budget warning' : 'Show 2 hidden budget warnings' }}
+  </button>
+}

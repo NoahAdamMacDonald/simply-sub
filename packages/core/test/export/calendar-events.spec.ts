@@ -15,8 +15,10 @@ describe('calendarEvents', () => {
       start: [2026, 11, 12],
       end: [2026, 11, 13],
       title: 'Netflix: $19.94',
+      // Its live tags, not the one deleted since (M7.9).
       description:
-        'Netflix Standard\nList: Work Related\n$19.94, with $0.95 tax\nRenews automatically',
+        'Netflix Standard\nList: Work Related\n$19.94, with $0.95 tax\nRenews automatically\nTags: Family',
+      categories: ['Family'],
     });
   });
 

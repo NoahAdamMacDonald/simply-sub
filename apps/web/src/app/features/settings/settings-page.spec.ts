@@ -9,6 +9,7 @@ import { MatDialogHarness } from '@angular/material/dialog/testing';
 import { MatFormFieldHarness } from '@angular/material/form-field/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { MatRadioGroupHarness } from '@angular/material/radio/testing';
+import { MatAutocompleteHarness } from '@angular/material/autocomplete/testing';
 import { MatSelectHarness } from '@angular/material/select/testing';
 import { Router, provideRouter } from '@angular/router';
 import type { Settings } from '@simply-sub/core';
@@ -175,9 +176,13 @@ describe('SettingsPage', () => {
 
     it('changes the province, and the tax follows', async () => {
       const dialog = await open();
-      const province = await control(dialog, 'Province or territory', MatSelectHarness);
-      await province.open();
-      await province.clickOptions({ text: 'Quebec' });
+      const province = await dialog.getHarness(
+        MatAutocompleteHarness.with({
+          ancestor: 'ss-choice-field[data-label="Province or territory"]',
+        }),
+      );
+      await province.focus();
+      await province.selectOption({ text: 'Quebec' });
       await (await dialog.getHarness(MatButtonHarness.with({ text: 'Save' }))).click();
 
       await shows('Quebec, Canada (CAD)');
@@ -201,9 +206,11 @@ describe('SettingsPage', () => {
 
     it('changes nothing on Cancel', async () => {
       const dialog = await open();
-      const country = await control(dialog, 'Country', MatSelectHarness);
-      await country.open();
-      await country.clickOptions({ text: 'United Kingdom' });
+      const country = await dialog.getHarness(
+        MatAutocompleteHarness.with({ ancestor: 'ss-choice-field[data-label="Country"]' }),
+      );
+      await country.focus();
+      await country.selectOption({ text: 'United Kingdom' });
       await (await dialog.getHarness(MatButtonHarness.with({ text: 'Cancel' }))).click();
       await vi.waitFor(async () =>
         expect(await loader.getAllHarnesses(MatDialogHarness)).toHaveLength(0),

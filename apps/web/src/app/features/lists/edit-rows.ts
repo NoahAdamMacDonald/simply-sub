@@ -6,10 +6,12 @@ import {
   type IsoDate,
   type ItemResolution,
   type PickedPrice,
+  type ResolvedAddOn,
   type Tag,
 } from '@simply-sub/core';
 import { billingText, renewalText } from '../../shared/billing-text';
 import { dateText } from '../../shared/date-text';
+import { amountText, intervalSpoken } from '../../shared/price-tag/price-text';
 
 // What the list editor (P5) says about each item of its draft: when it renews, from its next charge ("Renews Nov 12 ·
 // auto", M7.1), or how it's billed when it can't be priced (shared/billing-text.ts).
@@ -30,18 +32,22 @@ export interface EditRow {
   price?: PickedPrice;
   /** Where it was bought, when that's not the user's country: its tax rule applies. */
   region?: string;
-  /** When it renews, its add-ons, own price and custom ranks, in words. */
+  /** When it renews, its add-ons with their prices, own price and custom ranks, in words. */
   details: string[];
   tags: Tag[];
   /** Why it can't be priced or named. */
   problem?: string;
 }
 
-/** An item's row. `tags` are the user's, by id; one the item names that's gone is left out. */
+/**
+ * An item's row. `tags` are the user's, by id; one the item names that's gone is left out. Amounts are written for
+ * `country`, Settings' country.
+ */
 export function editRow(
   result: ItemResolution,
   tags: ReadonlyMap<string, Tag>,
   today: IsoDate,
+  country?: string,
 ): EditRow {
   const item = result.ok ? result.resolved.item : result.unresolved.item;
   const shared = {
@@ -79,7 +85,7 @@ export function editRow(
     details: [
       // A free plan has nothing to bill.
       ...(shown.amount === 0 ? [] : [renewalText(item.billing, nextCharge, today)]),
-      ...addOns.map(addOnText),
+      ...addOns.map((addOn) => addOnLine(addOn, country)),
       ...(override && priceOverride
         ? [
             priceOverride.until === undefined
@@ -90,6 +96,17 @@ export function editRow(
       ...ranks,
     ],
   };
+}
+
+/**
+ * An add-on and what it costs, in words that read the same aloud (M6.12): "Extra member (with ads) for $7.99 a month",
+ * "for about" when converted. Before tax, as its price tag is.
+ */
+function addOnLine(addOn: ResolvedAddOn, country: string | undefined): string {
+  const { price } = addOn;
+  const amount = amountText(price.amount * addOn.quantity, price.currency, country);
+  const about = price.fx === undefined ? '' : 'about ';
+  return `${addOnText(addOn)} for ${about}${amount} ${intervalSpoken(price.interval, price.intervalCount)}`;
 }
 
 function customRanksText(count: number): string[] {

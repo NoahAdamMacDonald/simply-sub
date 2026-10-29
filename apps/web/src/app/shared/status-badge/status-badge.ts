@@ -10,8 +10,8 @@ const names = { active: 'Active', inactive: 'Inactive', 'not-listed': 'Not liste
 
 /**
  * Active, Inactive or Not listed, with a coloured dot (PROJECT-PLAN §3.3), and "active from Sep 10, 2026" for an
- * item that starts later. Small badges add "Ends Nov 3" and, for a manual renewal, "Renew by Nov 3". Text after the
- * status (Search's " · 2 lists") is projected.
+ * item that starts later. Small badges add "Ends Nov 3" and, for a manual renewal, "Renew by Nov 3", or for an active
+ * one that renews by itself "Auto-renews Nov 3" (M6.12). Text after the status (Search's " · 2 lists") is projected.
  */
 @Component({
   selector: 'ss-status-badge',
@@ -21,7 +21,7 @@ const names = { active: 'Active', inactive: 'Inactive', 'not-listed': 'Not liste
 })
 export class StatusBadge {
   readonly status = input.required<BadgeStatus>();
-  /** The date of the item's next charge, which a manual renewal must be made by. */
+  /** The date of the item's next charge: when it renews, or for a manual renewal what it must be renewed by. */
   readonly nextCharge = input<IsoDate>();
 
   protected readonly text = computed(() => {
@@ -38,5 +38,10 @@ export class StatusBadge {
     const status = this.status();
     const next = this.nextCharge();
     return status.kind !== 'not-listed' && status.manual && next ? dayText(next) : undefined;
+  });
+  protected readonly renews = computed(() => {
+    const status = this.status();
+    const next = this.nextCharge();
+    return status.kind === 'active' && !status.manual && next ? dayText(next) : undefined;
   });
 }

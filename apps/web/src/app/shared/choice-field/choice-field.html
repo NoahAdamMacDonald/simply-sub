@@ -1,0 +1,33 @@
+<mat-form-field appearance="outline" subscriptSizing="dynamic">
+  <mat-label>{{ label() }}</mat-label>
+  <input
+    #box
+    matInput
+    autocomplete="off"
+    spellcheck="false"
+    [value]="text()"
+    [matAutocomplete]="list"
+    [errorStateMatcher]="errorState"
+    (input)="type(box.value)"
+    (keydown)="keydown($event)"
+    (blur)="leave($event)"
+  />
+  <mat-icon matSuffix aria-hidden="true">arrow_drop_down</mat-icon>
+  <mat-autocomplete
+    #list="matAutocomplete"
+    [autoActiveFirstOption]="typing()"
+    [displayWith]="display"
+    (optionSelected)="pick($event)"
+    (closed)="settle()"
+  >
+    @for (choice of matches(); track choice.value) {
+      <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
+    } @empty {
+      <mat-option disabled>No match</mat-option>
+    }
+  </mat-autocomplete>
+  @if (hint(); as hint) {
+    <mat-hint>{{ hint }}</mat-hint>
+  }
+  <mat-error>{{ error() }}</mat-error>
+</mat-form-field>

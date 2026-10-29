@@ -79,6 +79,9 @@ policies:
       sources:
         - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
           quote: 'You can manage the types of ads you receive or opt out of communications by updating your preferences.'
+      action:
+        name: 'Update your Bell preferences'
+        url: https://www.bell.ca/email-updates
       lastVerified: 2026-10-27
     - topic: billing.cancel-refunds
       tier: neutral

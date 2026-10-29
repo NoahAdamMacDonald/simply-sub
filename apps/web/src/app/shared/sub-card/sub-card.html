@@ -8,7 +8,11 @@
       @if (plan(); as plan) {
         <p class="plan-name">{{ plan.plan.name }}</p>
       }
-      <ss-status-badge class="status" [status]="status()" [nextCharge]="renewal()?.renewBy">
+      <ss-status-badge
+        class="status"
+        [status]="status()"
+        [nextCharge]="renewal()?.renewBy ?? renewal()?.renews"
+      >
         @if (result().activity; as activity) {
           <span aria-hidden="true"> · </span>
           <ss-in-lists [count]="activity.lists" [lists]="inLists()" [provider]="provider().name" />

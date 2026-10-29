@@ -74,7 +74,7 @@ const barCases: BarCase[] = [
   { name: 'Half the monthly budget', value: 100, max: 200, labelMode: 'percent' },
   { name: 'A short fill', value: 24, max: 200, labelMode: 'percent' },
   { name: 'Almost nothing', value: 4, max: 200, labelMode: 'percent' },
-  { name: 'Amber from 75%', value: 160, max: 200, labelMode: 'percent' },
+  { name: 'Most of the budget, nearly yellow', value: 160, max: 200, labelMode: 'percent' },
   { name: 'Exactly the budget', value: 200, max: 200, labelMode: 'percent' },
   { name: 'Over the budget', value: 224, max: 200, labelMode: 'percent' },
   { name: 'Calendar: over the budget', value: 44.45, max: 66.45, marker: 60, labelMode: 'amount' },

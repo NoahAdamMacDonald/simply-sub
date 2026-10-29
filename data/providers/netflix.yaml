@@ -184,6 +184,9 @@ policies:
           quote: 'We collect information about the advertisements on the Netflix service that you view or interact with, device information (such as resettable device identifiers), IP addresses, inferences we make about you or your household based on data we collect from or about you'
         - url: https://help.netflix.com/legal/privacy
           quote: 'If your Behavioral Advertisements setting is off, you will still see advertisements, but they will be non-behavioral advertisements.'
+      action:
+        name: 'How to turn off Behavioral Advertising'
+        url: https://help.netflix.com/node/100637
       lastVerified: 2026-10-27
     - topic: privacy.data-sharing
       tier: neutral
@@ -193,6 +196,9 @@ policies:
           quote: 'We may disclose certain personal information to Advertising Companies (see definition above) in order to select advertisements shown on Netflix'
         - url: https://help.netflix.com/legal/privacy
           quote: 'a “Behavioral Advertising” setting will be available to you in the “Privacy and data settings” menu'
+      action:
+        name: 'How to turn off Behavioral Advertising'
+        url: https://help.netflix.com/node/100637
       lastVerified: 2026-10-27
     - topic: privacy.ads-tracking
       tier: neutral
@@ -203,6 +209,9 @@ policies:
           quote: 'We use your personal information to present you with advertisements. Some of our advertisements may be Behavioral Advertisements.'
         - url: https://help.netflix.com/legal/privacy
           quote: 'If your Behavioral Advertisements setting is off, you will still see advertisements, but they will be non-behavioral advertisements.'
+      action:
+        name: 'How to turn off Behavioral Advertising'
+        url: https://help.netflix.com/node/100637
       lastVerified: 2026-10-27
     - topic: privacy.data-deletion
       tier: neutral
@@ -210,6 +219,9 @@ policies:
       sources:
         - url: https://help.netflix.com/legal/privacy
           quote: 'You may also correct or update out-of-date or inaccurate personal information or request that we delete personal information that we hold about you.'
+      action:
+        name: 'How to ask it to delete your data'
+        url: https://help.netflix.com/node/100625
       lastVerified: 2026-10-27
     - topic: billing.cancel-refunds
       tier: neutral

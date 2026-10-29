@@ -80,7 +80,16 @@ describe('CalendarPage', () => {
           },
         },
         { provide: FxStore, useValue: { rates: signal(fx) } },
-        { provide: BreakpointObserver, useValue: { observe: () => of({ matches: narrow }) } },
+        // A phone (under 600 px) when `narrow`, else a wide screen (960 px and up).
+        {
+          provide: BreakpointObserver,
+          useValue: {
+            observe: (query: string) =>
+              of({ matches: query.includes('max-width') ? narrow : !narrow }),
+            // The bottom sheet asks too.
+            isMatched: () => narrow,
+          },
+        },
         provideRouter([
           { path: 'calendar', component: CalendarPage },
           { path: 'lists/:listId', component: Elsewhere },
@@ -307,6 +316,8 @@ describe('CalendarPage', () => {
       'Calendar (.ics)',
       'Payment schedule (.csv)',
       'Excel (.xlsx)',
+      'JSON (.json)',
+      'Text (.txt)',
     ]);
     choices[1].click();
     await until(() => downloads.length === 2, 5000);
@@ -346,12 +357,17 @@ describe('CalendarPage', () => {
       copy.querySelectorAll('[aria-hidden="true"]').forEach((hidden) => hidden.remove());
       return text(copy);
     });
+    // Into a calendar of their own, made the first time (M7.9).
     expect(steps).toEqual([
       'Open Proton Calendar on the web, at calendar.proton.me, opens in a new tab.',
+      'The first time, make a calendar for them: beside My calendars, select +, then Create calendar, and name it Simply Sub.',
       'Open Settings, then All settings, then Import/export.',
-      'Select Import from ICS, then choose the file and the calendar to add the payments to.',
+      'Select Import from ICS, then choose the file and the Simply Sub calendar.',
       'Select Import.',
     ]);
+    expect(text(dialog?.querySelector('.note'))).toBe(
+      "Its calendar's colour colours every payment: the app colours a whole calendar, not each event. Each payment lists its tags in its details.",
+    );
     // Focus starts on the heading, for the steps to be read in order.
     await until(() => document.activeElement === dialog?.querySelector('h2'));
 
@@ -363,14 +379,55 @@ describe('CalendarPage', () => {
     expect(document.querySelector('.mat-mdc-snack-bar-label')).toBeNull();
   });
 
-  it('lays the month out as an agenda by date on a phone', async () => {
+  it('lays the month out as a compact grid over an agenda by date on a phone (M7.8)', async () => {
     narrow = true;
     await open('/calendar?month=2027-01');
     await until(() => page().querySelectorAll('.agenda-day').length === 2);
-    expect(page().querySelector('.grid')).toBeNull();
     expect(
       Array.from(page().querySelectorAll('.agenda-day h3')).map((heading) => text(heading)),
     ).toEqual(['Tuesday, January 12', 'Wednesday, January 20']);
     expect(text(page().querySelector('.agenda-day .entry .entry-name'))).toBe('Netflix Standard');
+    // Each day can be picked straight from the grid: a dot on the days with payments, no chips.
+    expect(page().querySelector('.grid.compact')).not.toBeNull();
+    expect(page().querySelector('.grid .chip')).toBeNull();
+    expect(
+      Array.from(page().querySelectorAll('.cell:has(.dot) .day')).map((day) =>
+        day.getAttribute('data-date'),
+      ),
+    ).toEqual(['2027-01-12', '2027-01-20']);
+    page().querySelector<HTMLElement>('.day[data-date="2027-01-05"]')?.click();
+    await until(() => document.querySelector('ss-day-sheet') !== null, 5000);
+    await until(
+      () => text(document.querySelector('ss-day-sheet h2')) === 'Tuesday, January 5',
+      5000,
+    );
+    expect(text(document.querySelector('ss-day-sheet'))).toContain('No payments on this day.');
+  });
+
+  it('keeps the grid where it is when a day opens, in a column beside it with Upcoming (M7.8)', async () => {
+    await open('/calendar?month=2026-10');
+    await until(() => days().length > 0);
+    expect(page().querySelector('.body.wide')).not.toBeNull();
+    expect(text(page().querySelector('.side .pick-day'))).toBe('Choose a day to see its payments.');
+    expect(page().querySelector('.side .upcoming')).not.toBeNull();
+    page().querySelector<HTMLElement>('.day[data-date="2026-10-12"]')?.click();
+    await until(() => page().querySelector('.side ss-day-panel') !== null);
+    expect(page().querySelector('.side .pick-day')).toBeNull();
+    expect(page().querySelector('.side .upcoming')).not.toBeNull();
+  });
+
+  it('has a back button to the page it was opened from, but not from the sidebar (M7.8)', async () => {
+    harness = await RouterTestingHarness.create(`/lists/${work.id}`);
+    await harness.navigateByUrl('/calendar?month=2026-10');
+    // Named by the list, once the lists have loaded.
+    await until(() => text(page().querySelector('.back')) === 'arrow_back Work Related');
+    expect(page().querySelector('.back')?.getAttribute('href')).toBe(`/lists/${work.id}`);
+
+    const router = TestBed.inject(Router);
+    await router.navigateByUrl(`/lists/${work.id}`);
+    await router.navigateByUrl('/calendar', { state: { sidebar: true } });
+    await harness.fixture.whenStable();
+    await until(() => page().querySelector('h1') !== null);
+    expect(page().querySelector('.back')).toBeNull();
   });
 });

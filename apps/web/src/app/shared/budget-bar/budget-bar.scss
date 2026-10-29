@@ -1,7 +1,13 @@
 // The label is the same dark colour on every fill and on the track (BLUEPRINT §8.1), so it can start at the bar's
 // left edge and run past a short fill without measuring anything.
 :host {
-  --fill-color: var(--budget-ok);
+  // One colour on a scale (M7.7): green with nothing spent, gradually to yellow exactly at the budget, then to red at
+  // half again over it. The host says how far along each half it is. The label is 4.9:1 or more on all of it.
+  --fill-color: color-mix(
+    in oklab,
+    var(--budget-over) var(--toward-red, 0%),
+    color-mix(in oklab, var(--budget-warn) var(--toward-yellow, 0%), var(--budget-ok))
+  );
 
   position: relative;
   display: block;
@@ -15,14 +21,6 @@
   container-type: inline-size;
   // The fill colours and the label already contrast; forced colours would drop the fill.
   forced-color-adjust: none;
-}
-
-:host([data-level='warn']) {
-  --fill-color: var(--budget-warn);
-}
-
-:host([data-level='over']) {
-  --fill-color: var(--budget-over);
 }
 
 .fill {

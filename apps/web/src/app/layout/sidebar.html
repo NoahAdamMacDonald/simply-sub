@@ -9,6 +9,7 @@
           <a
             class="link"
             [routerLink]="link.path"
+            [state]="{ sidebar: true }"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: link.path === '/' }"
             ariaCurrentWhenActive="page"
@@ -25,6 +26,7 @@
       matIconButton
       class="settings"
       routerLink="/settings"
+      [state]="{ sidebar: true }"
       routerLinkActive="active"
       ariaCurrentWhenActive="page"
       aria-label="Settings"

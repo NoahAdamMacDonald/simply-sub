@@ -3,12 +3,14 @@
 // Premium monthly, Mullvad VPN and Proton VPN Plus, with VPN ranked Needed.
 //
 // In both themes at 1280 and 360 px, keyboard only, it checks:
-// - List view's View optimizations: its count, the strongest's colour and its name, Enter opening the page;
+// - List view's View optimizations: its count, the strongest's colour and its name, Enter opening the page (at 360 px
+//   the compact one in the pinned bar, M6.13);
 // - the page: the back button by the list's name, Save up to, the sections in P14's order (Free savings, Recommended,
 //   Suggested, Worth a look), each card's changes, saving, Apply and Dismiss, and the rules' tooltip on Tab;
 // - Dismiss by Enter: the card gone, focus on the next card's heading, the snackbar; Show dismissed by Space bringing it
 //   back with Show again; a reload keeping it dismissed; List view's count one less;
-// - Apply by Enter: the editor, the change on the list's draft in IndexedDB, the saved items unchanged.
+// - Apply by Enter: it stays on the page (M8.4), then Review and save opens the editor, the change on the list's draft in
+//   IndexedDB, the saved items unchanged.
 // Then light at 1280 px: a list of 14 items, which the Web Worker optimizes.
 // With axe on the page, the tooltip, the snackbar and List view, no horizontal scroll, and screenshots.
 // Usage: node check-optimizations.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
@@ -280,6 +282,13 @@ const layout = (page) =>
 const cardCount = async (page) => optimize(page).locator('ss-suggestion-card').count();
 const linkText = async (page) =>
   (await page.locator('ss-optimizations-link a').ariaSnapshot()).split('\n')[0];
+// View optimizations' name: "View optimizations (9), the strongest: …", or under 960 px the compact one's
+// "View optimizations: 9 suggestions, the strongest: …" (M6.13).
+const LINK_NAME = /View optimizations(?: \((\d+)\)|: (\d+) suggestions?), the strongest: /;
+const linkCount = async (page) => {
+  const match = LINK_NAME.exec(await linkText(page));
+  return match ? Number(match[1] ?? match[2]) : undefined;
+};
 
 (async () => {
   await waitForServer();
@@ -297,8 +306,8 @@ const linkText = async (page) =>
       // ── List view's View optimizations ─────────────────────────────────────────────────────────
       await page.goto(`${baseUrl}lists/${LIST}`);
       const link = page.locator('ss-optimizations-link a');
-      await until('the count', async () => /View optimizations \(\d+\)/.test(await linkText(page)));
-      const before = Number(/\((\d+)\)/.exec(await linkText(page))[1]);
+      await until('the count', async () => (await linkCount(page)) !== undefined);
+      const before = await linkCount(page);
       const strongest = await link.getAttribute('data-strongest');
       check(
         `${label}: List view's View optimizations has a count and is coloured by the strongest, which it names`,
@@ -313,7 +322,7 @@ const linkText = async (page) =>
       await link.scrollIntoViewIfNeeded();
       await page.screenshot({ path: shot('list-view-link') });
       await page.locator('h1').click();
-      await tabTo(page, 'link', /^View optimizations \(\d+\), the strongest: /);
+      await tabTo(page, 'link', new RegExp(`^${LINK_NAME.source}`));
       await page.keyboard.press('Enter');
       await until('the page', async () => new URL(page.url()).pathname.endsWith('/optimize'));
 
@@ -449,9 +458,7 @@ const linkText = async (page) =>
           (await readTable(page, 'dismissedSuggestions')).length === 1,
       );
       await page.goto(`${baseUrl}lists/${LIST}`);
-      await until('List view one fewer', async () =>
-        (await linkText(page)).includes(`(${before - 1})`),
-      );
+      await until('List view one fewer', async () => (await linkCount(page)) === before - 1);
       check(`${label}: List view counts one fewer`, true);
       await page.goBack();
       await until('the cards again', async () => (await cardCount(page)) === count - 1, 20000);
@@ -460,6 +467,23 @@ const linkText = async (page) =>
       const itemsBefore = JSON.stringify(await readTable(page, 'items'));
       await optimize(page).locator('h1').click();
       const applied = (await tabTo(page, 'button', /^Apply: /)).replace(/^Apply: /, '');
+      await page.keyboard.press('Enter');
+      // Since M8.4 Apply stays, for more to follow, with Review and save, which opens the editor.
+      const review = optimize(page).locator('.unsaved a.review');
+      await review.waitFor({ timeout: 20000 });
+      check(
+        `${label}: Apply stays on the page, with Review and save (M8.4)`,
+        /\/optimize$/.test(new URL(page.url()).pathname),
+      );
+      await until('focus moved on', () =>
+        page.evaluate(
+          () =>
+            document.activeElement?.classList.contains('title') === true ||
+            document.activeElement?.id === 'review',
+        ),
+      );
+      await optimize(page).locator('h1').click();
+      await tabTo(page, 'link', /^Review and save$/);
       await page.keyboard.press('Enter');
       await until('the editor', async () =>
         /\/lists\/[^/]+\/edit$/.test(new URL(page.url()).pathname),

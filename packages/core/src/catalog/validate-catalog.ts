@@ -551,6 +551,13 @@ function checkPolicies(
 ): void {
   const categories = providerCategories(provider);
   const topicIds = [...(policyTopics?.keys() ?? [])];
+  const actionSites = [
+    ...new Set([
+      siteDomain(provider.website),
+      ...(provider.domains ?? []),
+      ...policies.links.map((link) => siteDomain(link.url)),
+    ]),
+  ];
   let oldest: IsoDate | undefined;
   policies.ratings.forEach((rating, index) => {
     const path = ['policies', 'ratings', index];
@@ -569,6 +576,14 @@ function checkPolicies(
     }
     if (rating.lastVerified > today) {
       report([...path, 'lastVerified'], `${rating.lastVerified} is after today (${today})`);
+    }
+    // The provider's own way to change it (M5.12): on its sites, or the site its policies are on (Disney's privacy
+    // center, Bell's), never another company's.
+    if (rating.action && !isOnDomain(rating.action.url, actionSites)) {
+      report(
+        [...path, 'action', 'url'],
+        `Must be a page of ${provider.name}'s own sites or its policies' (${actionSites.join(', ')}): its own way to change it`,
+      );
     }
     if (oldest === undefined || rating.lastVerified < oldest) {
       oldest = rating.lastVerified;

@@ -216,7 +216,9 @@ export class ListEditPage implements AsksBeforeLeaving {
     return draft ? this.metrics.resolve(draftItems(draft)) : [];
   });
   protected readonly rows = computed(() =>
-    this.resolutions().map((result) => editRow(result, this.tags.byId(), this.today())),
+    this.resolutions().map((result) =>
+      editRow(result, this.tags.byId(), this.today(), this.settings.saved()?.country),
+    ),
   );
 
   /**
@@ -502,13 +504,17 @@ export class ListEditPage implements AsksBeforeLeaving {
       .get(MatDialog)
       .open<ItemDialog, ItemDialogData, ItemDialogResult>(ItemDialog, {
         ...wideDialogConfig,
-        data: { listId: draft.listId, listName: draft.name, request },
+        data: { listId: draft.listId, listName: draft.name, request, draft },
       });
     this.itemDialog = dialog;
     const result = await firstValueFrom(dialog.afterClosed());
     this.itemDialog = undefined;
     if (!result) return;
-    this.snackBar.open(`${result.added ? 'Added' : 'Saved'} ${result.title}`, undefined, {
+    const shared =
+      result.shared === 0
+        ? ''
+        : `, and its ranks to ${result.shared === 1 ? '1 more plan' : `${result.shared} more plans`}`;
+    this.snackBar.open(`${result.added ? 'Added' : 'Saved'} ${result.title}${shared}`, undefined, {
       duration: 5000,
     });
     this.pendingFocus.set({

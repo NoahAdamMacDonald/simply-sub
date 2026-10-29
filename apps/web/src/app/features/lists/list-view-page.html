@@ -162,6 +162,13 @@
                 </button>
               }
             </mat-form-field>
+            <!--
+              Under 960 px the side column's at the page's foot, so its View optimizations is here, compact (M6.13): before
+              Sort, so Tab goes from Sort straight into the menu it opens.
+            -->
+            @if (!wide()) {
+              <ss-optimizations-link compact class="optimize" [listId]="listId() ?? ''" />
+            }
             <!-- Its name says how many filters are on; the count beside it is the same, shown. -->
             <button
               matButton="outlined"
@@ -172,7 +179,8 @@
               (click)="filtersOpen.set(!filtersOpen())"
             >
               <mat-icon>tune</mat-icon>
-              <span>Sort</span>
+              <!-- Read but not shown under 600 px, where the search box needs the room (M6.13). -->
+              <span class="sort-label">Sort</span>
               <span class="visually-hidden">
                 and filter{{ filterCount() > 0 ? ', ' + filterCount() + ' on' : '' }}</span
               >
@@ -293,8 +301,11 @@
               </p>
             }
           </section>
-          <!-- How to pay less (P4, M8.2): coloured by the strongest suggestion. -->
-          <ss-optimizations-link [listId]="listId() ?? ''" />
+          <!-- How to pay less (P4, M8.2): coloured by the strongest suggestion, and pinned below the column's other
+               parts as they scroll away (M6.13). Under 960 px it's in the pinned bar. -->
+          @if (wide()) {
+            <ss-optimizations-link class="optimize" [listId]="listId() ?? ''" />
+          }
         </div>
       }
     </div>

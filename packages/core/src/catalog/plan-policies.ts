@@ -1,4 +1,4 @@
-import type { PolicyLink, PolicyRating, PolicySource } from './policy';
+import type { PolicyAction, PolicyLink, PolicyRating, PolicySource } from './policy';
 import { policyGroups, type PolicyGroup, type PolicyTier, type PolicyTopic } from './policy-topic';
 import type { Provider } from './provider';
 import { globalRegion, groupsOf } from './regions';
@@ -23,6 +23,8 @@ export interface PlanPolicy {
   tier: PolicyTier;
   reason: string;
   citations: PolicyCitation[];
+  /** Where to change it, when the user has to (M5.12). */
+  action?: PolicyAction;
 }
 
 export interface PlanPolicies {
@@ -84,6 +86,7 @@ export function planPolicies(
           tier: rating.tier,
           reason: rating.reason,
           citations: cite(rating.sources),
+          ...(rating.action && { action: rating.action }),
         }));
       return inGroup.length > 0 ? [{ group, policies: inGroup }] : [];
     }),

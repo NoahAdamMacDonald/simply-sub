@@ -4,9 +4,28 @@
   class="link"
   [attr.data-strongest]="summary()?.strongest"
   [attr.aria-label]="label()"
+  [class.compact]="compact()"
   [routerLink]="['/lists', listId(), 'optimize']"
 >
-  @if (summary(); as summary) {
+  <!-- On its own in its @if, so the button puts it in its icon's place. -->
+  @if (compact()) {
+    <mat-icon>savings</mat-icon>
+  }
+  @if (compact()) {
+    <!-- Named by its words, hidden but its count: an aria-label wouldn't hold the icon's word axe sees. -->
+    <span class="visually-hidden">View optimizations: </span>
+    @if (summary(); as summary) {
+      @if (summary.count > 0) {
+        <span class="dot" aria-hidden="true"></span>{{ summary.count
+        }}<span class="visually-hidden">
+          {{ summary.count === 1 ? 'suggestion' : 'suggestions' }}, the strongest:
+          {{ strongest() }}</span
+        >
+      } @else {
+        <span class="visually-hidden">no suggestions</span>
+      }
+    }
+  } @else if (summary(); as summary) {
     @if (summary.count > 0) {
       <span class="dot" aria-hidden="true"></span>
       View optimizations ({{ summary.count }})

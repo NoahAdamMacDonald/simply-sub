@@ -1,36 +1,29 @@
-<mat-form-field appearance="outline">
-  <mat-label>Country</mat-label>
-  <mat-select [formField]="fields().country" (selectionChange)="countryChanged()">
-    @for (choice of countries; track choice.value) {
-      <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
-    }
-  </mat-select>
-</mat-form-field>
+<!-- Menus you can type in (M6.16): typing narrows the list, and Enter picks the first. -->
+<ss-choice-field
+  class="field"
+  label="Country"
+  [formField]="fields().country"
+  [choices]="countries"
+  (picked)="countryChanged()"
+/>
 
 @if (taxAdded()) {
-  <mat-form-field appearance="outline">
-    <mat-label>{{ subdivisionLabel() }}</mat-label>
-    <mat-select [formField]="fields().subdivision">
-      @if (country() !== 'CA') {
-        <mat-option value="">Not given</mat-option>
-      }
-      @for (subdivision of subdivisions(); track subdivision.code) {
-        <mat-option [value]="subdivision.code">{{ subdivision.name }}</mat-option>
-      }
-    </mat-select>
-    <mat-error>{{ firstError(fields().subdivision) }}</mat-error>
-  </mat-form-field>
+  <ss-choice-field
+    class="field"
+    [label]="subdivisionLabel()"
+    [formField]="fields().subdivision"
+    [choices]="subdivisionChoices()"
+  />
 }
 
-<mat-form-field appearance="outline" subscriptSizing="dynamic">
-  <mat-label>Currency</mat-label>
-  <mat-select [formField]="fields().currency" (selectionChange)="currencyChanged()">
-    @for (choice of currencies; track choice.value) {
-      <mat-option [value]="choice.value">{{ choice.label }}</mat-option>
-    }
-  </mat-select>
-  <mat-hint>Prices in other currencies are converted</mat-hint>
-</mat-form-field>
+<ss-choice-field
+  class="field"
+  label="Currency"
+  hint="Prices in other currencies are converted"
+  [formField]="fields().currency"
+  [choices]="currencies"
+  (picked)="currencyChanged()"
+/>
 
 @if (!taxAdded()) {
   <p class="tax-note">Prices for {{ countryName() }} already include sales tax.</p>

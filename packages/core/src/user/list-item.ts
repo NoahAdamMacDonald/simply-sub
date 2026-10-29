@@ -141,6 +141,11 @@ export const listItemSchema = z
     tagIds: z.array(recordIdSchema),
     /** Subscription-level ranks; a key that isn't here takes the profile rank (PROJECT-PLAN §3.2). */
     rankOverrides: z.record(rankKeySchema, rankSchema),
+    /**
+     * Its ranks are its own (P6, M6.14): ranks changed in the item dialog for another of its provider's plans in the
+     * list don't reach it, and its own don't reach them. Left out, they're shared.
+     */
+    ownRanks: z.literal(true).optional(),
     pinned: z.boolean(),
     /** The user's own name for it, which tells two of the same plan apart: "Mom's". */
     nickname: textSchema

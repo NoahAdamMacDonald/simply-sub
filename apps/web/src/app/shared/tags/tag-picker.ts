@@ -6,6 +6,7 @@ import {
   computed,
   inject,
   input,
+  linkedSignal,
   model,
   signal,
   viewChild,
@@ -13,12 +14,13 @@ import {
 import { MatAutocomplete, MatAutocompleteTrigger, MatOption } from '@angular/material/autocomplete';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatChipGrid, MatChipInput, MatChipRemove, MatChipRow } from '@angular/material/chips';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
-import { freeTagColor, tagNamed, type Tag } from '@simply-sub/core';
+import { freeTagColor, parseTagColor, tagNamed, type Tag } from '@simply-sub/core';
 import { TagsRepository } from '../../core/storage/tags-repository';
+import { ColourPicker } from './colour-picker';
 import { TagColours } from './tag-colours';
 import { TagDeleter } from './tag-deleter';
 
@@ -31,12 +33,13 @@ let nextId = 0;
  * Picks an item's tags (P6): the chosen ones as chips, an autocomplete of the others, and "Create tag “…”", which
  * opens a row for the new tag's name and colour and saves it through TagsRepository. "Delete a tag" beside the field
  * is a menu of the tags, which deletes one everywhere, asking first when it's in use (M6.11): an ✕ inside a
- * suggestion would be a button in an option, which the arrow keys skip and axe fails. Renaming and any hex colour
- * belong to Settings (P13).
+ * suggestion would be a button in an option, which the arrow keys skip and axe fails. The new tag's colour is a
+ * preset, a hex colour or one from the device's picker, as on Settings (M6.15); renaming belongs to Settings (P13).
  */
 @Component({
   selector: 'ss-tag-picker',
   imports: [
+    ColourPicker,
     MatAutocomplete,
     MatAutocompleteTrigger,
     MatButton,
@@ -45,6 +48,7 @@ let nextId = 0;
     MatChipRemove,
     MatChipRow,
     MatFormField,
+    MatHint,
     MatIcon,
     MatIconButton,
     MatInput,
@@ -80,6 +84,14 @@ export class TagPicker {
   protected readonly draft = signal<{ name: string; color: string } | undefined>(undefined);
   protected readonly saving = signal(false);
   protected readonly failed = signal(false);
+  /** The hex field's text: the new tag's colour, until something else is typed (M6.15). */
+  protected readonly hexText = linkedSignal(() => this.draft()?.color ?? '');
+  /** What's typed in the hex field isn't a colour. */
+  protected readonly hexError = computed(() =>
+    this.draft() !== undefined && parseTagColor(this.hexText()) === undefined
+      ? 'Use six hex digits, like #1e88e5'
+      : undefined,
+  );
 
   protected readonly chosen = computed(() => {
     const byId = this.tags.byId();
@@ -150,10 +162,17 @@ export class TagPicker {
     this.draft.update((draft) => draft && { ...draft, color });
   }
 
+  /** The hex field: once it's a colour, it's the new tag's, and the swatches and the picker follow. */
+  protected typeHex(text: string): void {
+    this.hexText.set(text);
+    const color = parseTagColor(text);
+    if (color !== undefined && color !== this.draft()?.color) this.recolour(color);
+  }
+
   protected async create(): Promise<void> {
     const draft = this.draft();
     const name = draft?.name.trim();
-    if (!draft || !name || this.saving()) return;
+    if (!draft || !name || this.saving() || this.hexError() !== undefined) return;
     this.saving.set(true);
     this.failed.set(false);
     try {

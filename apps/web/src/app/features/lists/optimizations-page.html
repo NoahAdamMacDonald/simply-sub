@@ -57,6 +57,22 @@
           No suggestions.
         }
       </p>
+      <!-- Applied suggestions wait in the list's draft (M8.4): the editor saves them. -->
+      @if (unsaved()) {
+        <div class="unsaved">
+          <p>
+            This list has changes you haven't saved, and the suggestions count them. Apply more,
+            then review and save them in the editor.
+          </p>
+          <a
+            matButton="filled"
+            id="review"
+            class="review"
+            [routerLink]="['/lists', listId(), 'edit']"
+            >Review and save</a
+          >
+        </div>
+      }
       @if (unpriced() > 0) {
         <p class="note">
           {{ unpriced() === 1 ? '1 subscription' : unpriced() + ' subscriptions' }} in this list

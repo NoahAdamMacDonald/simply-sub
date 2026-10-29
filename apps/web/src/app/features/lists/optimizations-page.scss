@@ -21,6 +21,26 @@ ss-empty-state a {
 }
 
 // A section per severity, in P14's order, its heading with the section's colour dot.
+// Applied suggestions waiting in the draft (M8.4): what that means, and Review and save, which wraps under it on a
+// phone.
+.unsaved {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+  box-shadow: inset 4px 0 0 var(--ss-accent);
+
+  p {
+    flex: 1 1 280px;
+    margin: 0;
+  }
+}
+
 .section {
   margin: 0 0 24px;
 

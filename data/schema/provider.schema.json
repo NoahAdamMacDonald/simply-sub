@@ -671,6 +671,27 @@
                 },
                 "description": "Only buyers here (a country's own terms), over a rating for everywhere"
               },
+              "action": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 60,
+                    "description": "What the link does, as the card shows it: How to turn off Behavioral Advertising"
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https://",
+                    "patternErrorMessage": "Use a full https:// URL",
+                    "description": "The page, on the provider's own sites or its policies' site, that its policy or help pages link for it"
+                  }
+                },
+                "required": ["name", "url"],
+                "additionalProperties": false,
+                "description": "Where to change what the reason says the user has to change themselves (M5.12)"
+              },
               "lastVerified": {
                 "type": "string",
                 "format": "date",

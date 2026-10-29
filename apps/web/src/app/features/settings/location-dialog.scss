@@ -2,3 +2,8 @@
 form {
   display: contents;
 }
+
+// Focus starts on the title (M6.16). It isn't a control, so it needs no focus ring.
+h2:focus {
+  outline: none;
+}
