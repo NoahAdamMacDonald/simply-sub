@@ -3,6 +3,7 @@ import { bundleSchema } from './bundle';
 import { categoriesFileSchema } from './category';
 import { featuresFileSchema } from './feature';
 import { policyTopicsFileSchema } from './policy-topic';
+import { automationSchema } from '../pipeline/automation';
 import { queueFileSchema } from '../pipeline/queue';
 import { providerSchema } from './provider';
 import { resellersFileSchema } from './reseller';
@@ -26,6 +27,7 @@ export function catalogJsonSchemas() {
     resellers: toJsonSchema(resellersFileSchema),
     'policy-topics': toJsonSchema(policyTopicsFileSchema),
     queue: toJsonSchema(queueFileSchema),
+    automation: toJsonSchema(automationSchema),
   };
 }
 export type CatalogFileKind = keyof ReturnType<typeof catalogJsonSchemas>;

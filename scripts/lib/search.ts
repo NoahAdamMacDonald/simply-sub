@@ -1,9 +1,11 @@
 // Web search for the pipeline's scripts (BLUEPRINT §6.5, M3.2): core's engines (Tavily, then Brave, then SearXNG),
-// each until its monthly budget for this machine is spent. Keys come from the environment or the gitignored .env
-// at the repository's root (TAVILY_API_KEY, BRAVE_API_KEY, SEARXNG_URL), never from the repository. Each search is
-// counted in .pipeline/search-usage.json, by month and engine.
+// each until this machine's monthly budget in data/automation.yaml (M3.8) is spent. Keys come from the environment or
+// the gitignored .env at the repository's root (TAVILY_API_KEY, BRAVE_API_KEY, SEARXNG_URL), never from the
+// repository. Each search is counted in .pipeline/search-usage.json, by month and engine.
 import {
+  automationSchema,
   nextSearchEngine,
+  searchBudgets,
   readSearchResults,
   searchRequest,
   type SearchAccess,
@@ -14,17 +16,14 @@ import {
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parse } from 'yaml';
 import { repoRoot } from './catalog-files';
 
-/**
- * What this machine may search a month: half of Tavily's free 1,000, and 450 of the 1,000 Brave's $5 credit buys, so
- * the bot's share and this machine's never add up to more than the free allowances. SearXNG is your own: no limit.
- */
-export const localSearchBudgets: readonly SearchBudget[] = [
-  { engine: 'tavily', monthly: 500 },
-  { engine: 'brave', monthly: 450 },
-  { engine: 'searxng' },
-];
+/** What this machine may search a month, by engine: its share in data/automation.yaml. */
+export async function localSearchBudgets(): Promise<SearchBudget[]> {
+  const text = await readFile(fileURLToPath(new URL('data/automation.yaml', repoRoot)), 'utf8');
+  return searchBudgets(automationSchema.parse(parse(text)), 'local');
+}
 
 const usageFile = fileURLToPath(new URL('.pipeline/search-usage.json', repoRoot));
 
@@ -53,7 +52,7 @@ function access(engine: SearchEngine): SearchAccess {
  * budget is spent this month, and an empty list when an engine fails (the next search tries again).
  */
 export function webSearch(
-  budgets: readonly SearchBudget[] = localSearchBudgets,
+  budgets: readonly SearchBudget[],
 ): ((query: string) => Promise<SearchResult[] | undefined>) | undefined {
   loadDotEnv();
   const configured = (engine: SearchEngine) =>

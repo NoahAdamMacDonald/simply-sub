@@ -26,7 +26,7 @@ import { parse } from 'yaml';
 import { loadCatalogFiles, plural } from './lib/catalog-files';
 import { Renderer } from './lib/browser';
 import { absolute, readJson, workFile, writeJson, type FoundUrls } from './lib/pipeline-files';
-import { webSearch } from './lib/search';
+import { localSearchBudgets, webSearch } from './lib/search';
 import { urlSample } from './lib/url-sample';
 import { PoliteWeb } from './lib/web';
 
@@ -46,7 +46,7 @@ for (const kind of kinds) {
   }
 }
 const sample = args.includes('--sample');
-const search = args.includes('--no-search') ? undefined : webSearch();
+const search = args.includes('--no-search') ? undefined : webSearch(await localSearchBudgets());
 const targets = sample ? urlSample : await targetsFrom(args);
 if (targets.length === 0) {
   fail('Name the services (queue or provider ids), or use --next <count> or --sample.');

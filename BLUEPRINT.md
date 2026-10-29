@@ -232,7 +232,7 @@ simply-sub/
 │     │  │                   # and robots.txt, shared with the bot (moved from apps/bot in M3.2); extraction: the
 │     │  │                   # answer's schema, the request, quotes, checks and drafts, and the drafts' YAML (M3.4);
 │     │  │                   # a batch's review table (M3.5); baselines: a page's lines, their file, the pages and
-│     │  │                   # facts the catalog cites (M3.6)
+│     │  │                   # facts the catalog cites (M3.6); the automation's settings (M3.8)
 │     │  └─ export/          # the exports' tables, calendar events, text and list file, which the app writes
 │     │                      # with papaparse, exceljs and ics (M7.5)
 │     └─ test/               # Vitest specs, mirroring src/ (run in the America/Vancouver time zone)
@@ -248,6 +248,7 @@ simply-sub/
 │  │  └─ disney-crave-premium.yaml
 │  ├─ queue.yaml             # the discovery queue: the services to add next, and what became of each (section 6.5)
 │  ├─ baselines/             # each cited page's text when its facts were read, <host>/<path>-<hash>.txt (section 6.5)
+│  ├─ automation.yaml        # the bot's settings: cadences, reviewer, batch sizes, search budgets (section 6.4)
 │  ├─ schema/                # JSON Schema for the YAML above, generated from core's Zod schemas (committed)
 │  └─ logos/                 # provider logos, <id>.png: fetched by `npm run data:icons` or added by hand (committed);
 │                            # data:build publishes each as a WebP of at most 96 px (section 6.3)
@@ -1564,6 +1565,15 @@ cite its pages; Workers AI only for a price whose stored amount isn't on its pag
 (the schema has none); the YAML edited line by line, which CI's `data:validate` then checks; `lastVerified` bumped
 for a price confirmed 30 or more days after it was last verified; and a night with nothing to change opens no PR.
 
+**Settings (M3.8):** `data/automation.yaml`, checked by `data:validate` against core's `automationSchema`
+(`pipeline/automation.ts`, `data/schema/automation.schema.json`): a cadence for pricing pages, policy pages, logos and
+discovery (`daily`, `weekly`, `monthly` or `off`), the digest's weekday, the reviewer (`scheduled-claude`, `workers-ai`
+or `manual`), the batch sizes (services a discovery run takes, browser pages and Workers AI Neurons a night, review
+items a week) and the search engines in order, each with a monthly budget for the bot and for this machine (Tavily's
+and Brave's required, so neither can run unlimited; SearXNG, your own, needs none). The bot's cron still runs every
+night and reads the file from main to decide what's due (`isDue`, `digestDue`), so a change takes a merge, never a
+redeploy. The scripts' search reads this machine's budgets from it (`searchBudgets`).
+
 **Guardrails**
 - **Never auto-merge.** You review the PR, which takes a minute a day at most.
 - Flag changes larger than ±30% as suspicious.
@@ -2777,6 +2787,12 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-28, M3.8)**
+- **The defaults** (the user's choices): pricing pages daily, policies, logos and discovery weekly, the digest on
+  Mondays, the reviewer `scheduled-claude` (items wait, as with `manual`, until its task is set up), three services a
+  discovery run, five browser pages and 8,000 Neurons a night, ten reviewed items a week, and Tavily (500 for the bot,
+  500 here) then Brave (450 and 450, under its $5 credit's 1,000) then SearXNG.
 
 **Resolved (2026-10-28, M3.7)**
 - **The batch's providers have none:** Xbox's where-to-buy page lists retailers for consoles, games and accessories and

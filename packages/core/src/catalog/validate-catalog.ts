@@ -10,6 +10,7 @@ import type { CatalogFileKind } from './json-schema';
 import { providerCategories } from './plan-categories';
 import type { Policies } from './policy';
 import { policyTopicsFileSchema, type PolicyTopic } from './policy-topic';
+import { automationSchema } from '../pipeline/automation';
 import { onSites, providerSiteKeys, queueFileSchema } from '../pipeline/queue';
 import type { Price } from './price';
 import { providerSchema, type AddOn, type Plan, type Provider } from './provider';
@@ -79,6 +80,7 @@ const categoriesFile = 'data/categories.yaml';
 const resellersFile = 'data/resellers.yaml';
 const policyTopicsFile = 'data/policy-topics.yaml';
 const queueFile = 'data/queue.yaml';
+const automationFile = 'data/automation.yaml';
 const staleAfterDays = 90;
 /** Terms change less often than prices, and no nightly check reads them. */
 const policyStaleAfterDays = 365;
@@ -207,6 +209,9 @@ export function validateCatalog(
   if (located.queue) {
     checkQueue(located.queue, providers, unchecked, categories, reportIn(queueFile));
   }
+  if (located.automation) {
+    parseFile(automationSchema, located.automation, reportIn(automationFile));
+  }
   return issues;
 }
 
@@ -230,6 +235,7 @@ interface LocatedFiles {
   resellers?: CatalogSourceFile;
   policyTopics?: CatalogSourceFile;
   queue?: CatalogSourceFile;
+  automation?: CatalogSourceFile;
   providers: NamedFile[];
   bundles: NamedFile[];
   logos: NamedFile[];
@@ -257,6 +263,9 @@ export function locateCatalogFile(
   if (file === queueFile) {
     return { kind: 'queue', name: 'queue' };
   }
+  if (file === automationFile) {
+    return { kind: 'automation', name: 'automation' };
+  }
   const named = /^data\/(providers|bundles)\/([^/]+)\.yaml$/.exec(file);
   if (named) {
     return { kind: named[1] === 'providers' ? 'provider' : 'bundle', name: named[2] };
@@ -283,6 +292,8 @@ function locateFiles(
       located.policyTopics = source;
     } else if (where?.kind === 'queue') {
       located.queue = source;
+    } else if (where?.kind === 'automation') {
+      located.automation = source;
     } else if (where) {
       const list = { provider: 'providers', bundle: 'bundles', logo: 'logos' } as const;
       located[list[where.kind]].push({ source, name: where.name });
@@ -297,7 +308,7 @@ function locateFiles(
     } else {
       reportIn(file)(
         [],
-        'Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
+        'Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/automation.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
       );
     }
   }
