@@ -1,0 +1,172 @@
+# Drafted by the discovery pipeline on 2026-10-28 (BLUEPRINT §6.5) from these pages, each quoted where it's used.
+# Pricing: https://www.bitdefender.com/en-ca/consumer/premium-security,
+# https://www.bitdefender.com/en-ca/consumer/total-security,
+# https://www.bitdefender.com/en-ca/consumer/ultimate-security,
+# https://www.bitdefender.com/en-ca/consumer/digital-identity-protection, https://www.bitdefender.com/en-ca/consumer/.
+# Payment methods: none found.
+# Cancelling: https://www.bitdefender.com/consumer/support/answer/29081/.
+# Terms:
+# https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions.
+# Privacy: https://www.bitdefender.com/en-ca/site/view/legal-privacy-policy-for-home-users-solutions.
+# Bundles: none found.
+# Official resellers: none found.
+# Not on the pages: 2-year prices: each suite's page has a 2 Years tab that wasn't read; Digital Identity Protection's
+# 1-Month Plan: the page says CA$7.99 "for the first month" and not what it renews at, so it isn't stored; the smaller
+# products (Device Security, Mobile Security, Premium VPN, the free antivirus): not read in this batch; the card
+# networks it takes: no page read names them; disputes: its Canadian terms both require arbitration and name the
+# courts of Romania, so the topic is left for a person to read; official resellers: none named for its home plans; its
+# partners page is for business partners.
+
+id: bitdefender
+name: Bitdefender
+website: https://www.bitdefender.com
+category: privacy-suite
+spendCategory: software
+billingCurrency: { CA: CAD }
+cancelUrl: https://www.bitdefender.com/consumer/support/answer/29081/
+sources: { pricing: https://www.bitdefender.com/en-ca/consumer/ }
+
+plans:
+  - id: bitdefender.total-security
+    name: Total Security
+    link: https://www.bitdefender.com/en-ca/consumer/total-security
+    features: {}
+    perks:
+      - Real-time protection for up to 5 Windows, Mac, Android and iOS devices
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://www.bitdefender.com/en-ca/consumer/
+
+  - id: bitdefender.premium-security-individual
+    name: Premium Security Individual
+    link: https://www.bitdefender.com/en-ca/consumer/premium-security
+    features:
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.server-countries: 100
+      vpn.content-blocking: [ads, trackers]
+      password-manager: true
+      security.dark-web-monitoring: true
+    perks: [Scam Protection Pro]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 129.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://www.bitdefender.com/en-ca/consumer/premium-security
+
+  - id: bitdefender.premium-security-family
+    name: Premium Security Family
+    link: https://www.bitdefender.com/en-ca/consumer/premium-security
+    features:
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.server-countries: 100
+      vpn.content-blocking: [ads, trackers]
+      password-manager: true
+      security.dark-web-monitoring: true
+      account.users: 5
+    perks: [Scam Protection Pro]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 169.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://www.bitdefender.com/en-ca/consumer/premium-security
+
+  - id: bitdefender.ultimate-security-individual
+    name: Ultimate Security Individual
+    link: https://www.bitdefender.com/en-ca/consumer/ultimate-security
+    features:
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.server-countries: 100
+      password-manager: true
+      security.dark-web-monitoring: true
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 159.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://www.bitdefender.com/en-ca/consumer/ultimate-security
+
+  - id: bitdefender.ultimate-security-family
+    name: Ultimate Security Family
+    link: https://www.bitdefender.com/en-ca/consumer/ultimate-security
+    features:
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.server-countries: 100
+      password-manager: true
+      security.dark-web-monitoring: true
+      account.users: 5
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 199.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://www.bitdefender.com/en-ca/consumer/ultimate-security
+
+  - id: bitdefender.digital-identity-protection
+    name: Digital Identity Protection
+    link: https://www.bitdefender.com/en-ca/consumer/digital-identity-protection
+    features: { security.dark-web-monitoring: true }
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://www.bitdefender.com/en-ca/consumer/digital-identity-protection
+
+policies:
+  links:
+    - name: Terms of service
+      url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+  ratings:
+    - topic: billing.cancel-refunds
+      tier: good
+      reason: You can turn off renewal in your Bitdefender Central account before the next billing date, and you can ask for your money back within 30 days of buying.
+      sources:
+        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+          quote: unless You cancel Your subscription through the Bitdefender Central Account prior to Your next scheduled billing date
+        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+          quote: FOR INFORMATION ON HOW TO OBTAIN A REFUND OF THE MONEY YOU PAID FOR THE SOFTWARE AT ANY TIME DURING THE THIRTY (30) DAYS PERIOD FOLLOWING THE DATE OF PURCHASE.
+      regions: [CA]
+      lastVerified: 2026-10-28
+    - topic: billing.price-changes
+      tier: great
+      reason: A new price only applies from your next renewal, and it tells you ahead of time, so you can cancel first.
+      sources:
+        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+          quote: Any price change will take effect at the next subscription renewal date, and we will notify you in advance.
+      regions: [CA]
+      lastVerified: 2026-10-28
+    - topic: legal.account-closure
+      tier: neutral
+      reason: If you break its terms, your subscription ends right away without notice, and you get no refund.
+      sources:
+        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+          quote: The Subscription will terminate immediately without notice if You are in breach of any of its terms and conditions. You shall not be entitled to a refund from Bitdefender or any resellers of Bitdefender as a result of termination.
+      regions: [CA]
+      lastVerified: 2026-10-28

@@ -1,0 +1,61 @@
+url: https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription
+method: fetch
+saved: 2026-10-28
+
+Cancel your Pro or Max subscription | Claude Help Center Skip to main content
+API docsRelease notesHow to get support English Français Deutsch Bahasa Indonesia Italiano 日本語 한국어 Português Pусский 简体中文 Español 繁體中文 English
+Search⌘K
+Claude
+Pro and Max plans
+Team and Enterprise plans
+Identity management (SSO, JIT, SCIM)
+Claude Cowork
+Claude Code
+Claude Desktop
+Claude Mobile apps
+Claude API and Console
+Connectors
+Claude in Chrome
+Claude for Education
+Privacy and legal
+Safeguards
+Amazon Bedrock
+All Collections Pro and Max plans General Cancel your Pro or Max subscription Cancel your Pro or Max subscription
+Updated over 3 weeks ago
+Copy for LLM
+You may cancel your Pro or Max plan subscription at any time by following the cancellation instructions for the platform you signed up on. Your cancellation will take effect at the end of your current billing period and you can continue using your paid plan until then.
+Note:
+To avoid being charged for your next billing period, cancel your subscription at least 24 hours before your next billing date.
+Monthly API credits included with Max and Team plans aren’t purchased, so they can’t be refunded. They expire at the end of each billing cycle. If you cancel or get a refund for your plan, new monthly credits stop, and credits you already have stay usable until they expire.
+Cancel your Pro or Max subscription on Claude and Claude Desktop
+If you signed up for a paid plan on the web version of Claude (claude.ai) or Claude Desktop (Mac, Windows, or Linux), start by logging into your account on a web browser or opening the desktop app. Click on your initials or name in the lower left corner and select “Settings” from the menu. Navigate to Settings > Billing and click the “Cancel” button.
+Cancel your Pro or Max subscription on Claude for iOS
+If you subscribed to a Pro or Max plan via Claude for iOS, your subscription and payment will be handled directly on your iOS device.
+To cancel your subscription, click on your initials in the top right corner of Claude for iOS, and then click “Billing” from the menu options. Select “Manage subscription” and follow the prompts for cancellation. If you’ve already removed the app from your device, you can also follow the instructions located in this App Store resource to unsubscribe: If you want to cancel a subscription from Apple.
+You may cancel your Pro or Max subscription at any time from the platform you signed up on. To avoid being charged for your next billing period, cancel your subscription at least 24 hours before your next billing date.
+Cancel your Pro or Max subscription on Claude for Android
+If you subscribed to a Pro or Max plan via Claude for Android, your subscription and payment will be handled directly on your Android device.
+To cancel your subscription, click on your initials in the top right corner of Claude for Android, and then click “Billing” from the menu options. Select “Manage subscription” and follow the prompts for cancellation. If you’ve already removed the app from your device, you can also follow the instructions located in this Play Store resource to unsubscribe: Cancel, pause, or change a subscription on Google Play.
+You may cancel your Pro or Max subscription at any time from the platform you signed up on. To avoid being charged for your next billing period, cancel your subscription at least 24 hours before your next billing date.
+Did this answer your question? Disappointed Reaction Neutral Reaction Smiley Reaction
+Related Articles
+How to change your Pro plan from monthly to annual billing
+What is the Max plan?
+How do I sign up for the Max plan?
+Use Claude Code with your Pro or Max plan
+Understanding your Pro or Max plan invoices
+On this page
+Cancel your Pro or Max subscription on Claude and Claude Desktop
+Cancel your Pro or Max subscription on Claude for iOS
+Cancel your Pro or Max subscription on Claude for Android
+Product
+Research
+Company
+News
+Careers
+Terms of Service - Consumer
+Terms of Service - Commercial
+Privacy Policy
+Usage Policy
+Responsible Disclosure Policy
+Compliance
