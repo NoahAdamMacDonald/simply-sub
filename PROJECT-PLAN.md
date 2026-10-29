@@ -608,10 +608,15 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   - the page can't be read: a review item;
   - a country the catalog doesn't price yet: counted under "Regions people asked about", for M10.13.
 - **Acceptance**
-  - [ ] Worker tests: a valid report is counted; an unknown plan, a bad price or an extra field gets `400`; the
+  - [x] Worker tests: a valid report is counted; an unknown plan, a bad price or an extra field gets `400`; the
         limits hold
-  - [ ] Bot tests: a reported plan is checked that night, and each outcome lands in the digest as above
-  - [ ] The catalog-review skill handles the new items
+  - [x] Bot tests: a reported plan is checked that night, and each outcome lands in the digest as above
+  - [x] The catalog-review skill handles the new items
+- **As built:** core's `catalog/price-report.ts` (`priceReportSchema` with the problems `price`, `discontinued` and
+  `not-in-country`; the counts' and the KV entry's schemas; `addReports`; `reportedPrices`); the API's
+  `routes/reports.ts`, user migration `0004_price_reports` and the clean-up's hand-over; the bot's `reports.ts`, its
+  state's `reports()` and the digest's two sections and review items. Tested in core's `price-report.spec.ts`, the
+  API's `reports.spec.ts` and contract examples, and the bot's `run.spec.ts` (BLUEPRINT §6.4, §14).
 
 **M10.11 — Report a wrong price in the app** (P8)
 - **Where:** Search's expanded card, beside the price's date: "Report a wrong price".

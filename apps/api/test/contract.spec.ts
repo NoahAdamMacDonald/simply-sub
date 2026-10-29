@@ -209,6 +209,7 @@ beforeEach(async () => {
     env.USER_DB.prepare('DELETE FROM cal_feeds'),
     env.USER_DB.prepare('DELETE FROM cal_sets'),
     env.USER_DB.prepare('DELETE FROM sync_chains'),
+    env.USER_DB.prepare('DELETE FROM price_reports'),
   ]);
 });
 
@@ -293,7 +294,7 @@ describe('every example of a built endpoint, sent to the Worker', () => {
     }
 
     const schema = successBodySchemas[endpoint as keyof typeof successBodySchemas];
-    if (response.status === 304 || response.status === 204) {
+    if (response.status === 304 || response.status === 204 || response.status === 202) {
       expect(await answer.text()).toBe('');
     } else if (response.status >= 400) {
       const body = await answer.json();

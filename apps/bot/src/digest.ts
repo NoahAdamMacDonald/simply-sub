@@ -1,5 +1,6 @@
 import { baselinePath, writeBaseline, type IsoDate } from '@simply-sub/core';
 import { proposal, type FileChange, type Proposal } from './proposal';
+import type { ReportOutcome, ReportOutcomes } from './reports';
 import { priceText } from './targets';
 import type { Finding } from './types';
 
@@ -7,6 +8,8 @@ import type { Finding } from './types';
 // are edits (a price that moved, with its page's words; a lastVerified bumped; a new logo; a page that changed with
 // nothing to review); the rest go to a review list, review/README.md, committed on the same branch with each page's
 // new text as its baseline, so a reviewer needs only GitHub: the pull request's diff of a baseline is what changed.
+// The week's price reports (M10.10) are in the body with what their pages showed, the review list when a page
+// couldn't be read, and the countries the catalog doesn't price yet are counted for the next regions.
 
 /** The digest's branch: rebuilt from main each week. */
 export const digestBranch = 'bot/catalog-digest';
@@ -29,6 +32,8 @@ export function digest(
     reviewer: string;
     notes?: readonly string[];
     reviewed?: ReadonlyMap<Finding, readonly string[]>;
+    /** What the week's price reports came to (M10.10). */
+    reports?: ReportOutcomes;
   } = {
     reviewer: 'manual',
   },
@@ -44,7 +49,10 @@ export function digest(
       text: writeBaseline({ url: page.url, method: page.method, saved: today, lines: page.lines }),
     });
   }
-  const items = reviewItems(findings, extra.reviewed ?? new Map());
+  const items = [
+    ...reviewItems(findings, extra.reviewed ?? new Map()),
+    ...reportItems(extra.reports?.outcomes ?? []),
+  ];
   // The list is rebuilt each week: last week's, merged with its pull request, is replaced.
   changes.push({
     path: reviewFile,
@@ -65,6 +73,8 @@ export function digest(
   const body = [
     `The weekly digest of ${today} (BLUEPRINT §6.4): what the nightly checks found since the last one. The clear changes are in this pull request's edits; what needs a person is in [${reviewFile}](../blob/${digestBranch}/${reviewFile})${counts.length > 0 ? ` (${counts.map(([section, count]) => `${section.toLowerCase()} ${count}`).join(', ')})` : ' (nothing this week)'}, reviewed by ${extra.reviewer}. Each changed page's new text is its baseline in data/baselines/, so this pull request's diff of it shows what changed. Nothing is merged by the bot.`,
     made.body.split('\n\n').slice(1).join('\n\n'),
+    reportLines(extra.reports?.outcomes ?? []),
+    askedRegions(extra.reports?.regions ?? []),
     quiet.length > 0 &&
       `### Pages that changed with nothing to review\n\n${quiet.length === 1 ? 'One page' : `${quiet.length} pages`} changed in ways that touch none of the catalog's facts; their baselines are updated: ${quiet
         .slice(0, 20)
@@ -151,6 +161,42 @@ function reviewItems(
     }
   }
   return items;
+}
+
+/** The reports whose page couldn't be read: a person checks the price on its page. */
+function reportItems(outcomes: readonly ReportOutcome[]): ReviewItem[] {
+  return outcomes
+    .filter((outcome) => outcome.shown === 'unread')
+    .map((outcome) => ({
+      section: 'Prices',
+      text: `${reported(outcome)}, and ${outcome.urls.length > 0 ? `its page couldn't be read this week: check ${outcome.urls.map(link).join(', ')} by hand, and change the price if it says so` : "its price has no page the bot can read: check it on the provider's site"}`,
+    }));
+}
+
+/** The reports whose page answered, for the body: a new price (its edit is in the pull request) or the catalog's. */
+function reportLines(outcomes: readonly ReportOutcome[]): string | undefined {
+  const answered = outcomes.filter((outcome) => outcome.shown !== 'unread');
+  if (answered.length === 0) return undefined;
+  const shown = (outcome: ReportOutcome) =>
+    outcome.shown === 'new'
+      ? `Its page shows ${outcome.prices.join(', ')}: the edit is in this pull request.`
+      : outcome.shown === 'same'
+        ? `Its page still shows the catalog's ${outcome.prices.join(', ')}: nothing to review.`
+        : "The catalog doesn't have the plan any more.";
+  return `### Price reports\n\nWhat visitors reported with "Report a wrong price", and what the page showed (a page that couldn't be read is in the review list):\n\n${answered.map((outcome) => `- ${reported(outcome)}. ${shown(outcome)}`).join('\n')}`;
+}
+
+/** The countries people reported from that the catalog doesn't price the plans in yet, for the next regions. */
+function askedRegions(regions: ReportOutcomes['regions']): string | undefined {
+  if (regions.length === 0) return undefined;
+  return `### Regions people asked about\n\nReports from countries the catalog doesn't price these plans in yet, for the regions to add (PROJECT-PLAN M10.13): ${regions.map((region) => `${region.country} ${region.count} (${region.plans.map((plan) => `${cell(plan.label)} ${plan.count}`).join(', ')})`).join('; ')}.`;
+}
+
+/** "**Netflix Standard** in CA: 3 reports of 20.99 CAD monthly (2026-10-27 to 2026-10-28)". */
+function reported(outcome: ReportOutcome): string {
+  const days =
+    outcome.first === outcome.last ? outcome.first : `${outcome.first} to ${outcome.last}`;
+  return `**${cell(outcome.label)}** in ${outcome.country}: ${outcome.said} (${days})`;
 }
 
 function reviewList(

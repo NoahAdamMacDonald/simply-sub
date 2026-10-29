@@ -321,7 +321,7 @@ describe('the clean-up', () => {
       .bind(utcDay(new Date()), old.id)
       .run();
 
-    await cleanUp(env.USER_DB, utcDay(new Date()));
+    await cleanUp(env.USER_DB, env.KV, utcDay(new Date()));
 
     expect(await summaries(old.feeds[0].url)).toBe(404);
     expect(await summaries(current.feeds[0].url)).toEqual([

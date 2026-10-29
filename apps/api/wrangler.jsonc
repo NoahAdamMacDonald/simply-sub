@@ -52,9 +52,11 @@
       "namespace_id": "1004",
       "simple": { "limit": 6, "period": 60 },
     },
+    // A price report (M10.10) counts against 3 a minute per IP besides the write limit.
+    { "name": "REPORT_RATE_LIMIT", "namespace_id": "1006", "simple": { "limit": 3, "period": 60 } },
   ],
   // The nightly clean-up (M10.1, src/clean-up.ts), at 02:30 UTC, before the bot's 03:00 run: it deletes what users sent
-  // that has expired.
+  // that has expired, and hands the price reports to the bot (M10.10).
   "triggers": { "crons": ["30 2 * * *"] },
   // The app and the API have the subdomain to themselves: browser storage is shared by everything on
   // one origin, so another app on simplely.ca could read Simply Sub's data (BLUEPRINT §11.5). A

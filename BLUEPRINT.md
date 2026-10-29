@@ -1228,7 +1228,7 @@ M1.14), so a buyer can see what signing up means beyond the price.
 | `GET /icon?domain=example.com` | Icon proxy for **custom subscriptions**: asks Google's and DuckDuckGo's icon services (core's `iconServices`) and returns the best square PNG of at least 32 pixels (`pickIcon`, Google's on a tie), or `404` when neither has one, and the app shows the subscription's first letter. KV keeps an icon for 30 days and "no icon" for a day (section 5.4). No `size`: the Worker can't resize, so the app scales the icon. Catalog icons are fetched once by `scripts/fetch-icons.ts` into `data/logos/` (committed, so builds never fetch) and served as static WebP files at `/icons/<id>.webp` (section 6.3) |
 | `GET /fx?base=CAD` | The ECB's daily rates in the user's currency. The Worker fetches them in euros from Frankfurter's ECB-only route (`/v2/providers/ecb/rates?base=EUR`; v1 is deprecated, and v2's default blends in other central banks), keeps them in KV under `fx:ecb` for 12 hours, and rebases them to any currency the ECB publishes (core's `rebaseRates`), so one fetch serves every base. When Frankfurter fails after that, the last good rates are sent with `meta.stale: true`; with none kept, `502 upstream_unavailable`. `GET /providers` uses the same rates (M2.3) |
 | `GET /health` | Returns the API version, and the catalog version, build time and counts that D1 holds (the `catalog` row, section 5.3) |
-| *(Phase 5)* `POST /reports` | "This price looks wrong" reports (rate-limited, no free text; M10.10) |
+| `POST /reports` | "Report a wrong price" (M10.10): a plan the catalog has, the visitor's country and what's wrong (another price, with its amount, currency and period; not sold any more; not sold in that country), in choices only: no free text, so nothing a visitor types reaches a person or a model (core's `priceReportSchema`, strict). `202` with no body. The user database counts it, a row per plan, country, problem and price, with nothing about the sender; the nightly clean-up hands the counts to the bot (section 6.4). 3 a minute per IP besides the write limit, and 500 a day |
 | `POST /cal` | Makes a live calendar feed set (section 11.3, M10.2): one calendar per feed sent (everything, each tag chosen, no tag), each payment's title, day and repeat rule only. Answers each feed's token and links, and the set's manage key, shown once. The user database keeps hashes of the tokens and the key, and each feed's calendar file |
 | `PUT /cal/:id` | Replaces a set's calendars with its manage key (`Authorization: Bearer`): a feed with its token keeps its URL and, unchanged, its file; one without gets a new URL; one left out is revoked. Its 180 days start again. 6 writes a minute per set |
 | `DELETE /cal/:id` | Revokes a set with its manage key: every calendar of it answers 404, and nothing of it is kept |
@@ -1376,7 +1376,8 @@ shipped to the browser is visible. The risks are abuse, and M2 builds these defe
   account's and the catalog's deploys need them; past a cap, or with the database over 400 MB, `503 over_capacity`
   until midnight UTC. Secrets (a feed's token and manage key, sync's auth secret) are random values of 128 bits or
   more, kept only as SHA-256 hashes and compared in constant time, and never logged. A cron trigger at 02:30 UTC
-  deletes what has expired (`src/clean-up.ts`).
+  deletes what has expired and hands the price reports counted before that day to the bot (`src/clean-up.ts`, section
+  6.4).
 - **Secrets** (the bot's GitHub token, AI keys) are Worker secrets (`wrangler secret put`) or a gitignored `.env`,
   never tracked files. The D1 `database_id` in `wrangler.jsonc` isn't a secret: using it needs a Cloudflare login.
 
@@ -1652,6 +1653,16 @@ itself under any of them.
   a policy grade it suggests stays a suggestion, since grading is a person's call. Anything else is labelled for the
   owner. Its notes go under each item, a line each.
 - **`manual`:** the items wait in the pull request for the owner.
+
+**Price reports (M10.10):** at 02:30 UTC the API's clean-up moves the reports counted before that day from the user
+database to KV, a key per reported plan (`bot:report:<plan>`, added to what it holds), so a night writes a key per
+plan, not per report. At 03:00 the bot reads them, and each reported plan's pages in the countries it was reported
+from (core's `reportedPrices`: the country's own prices, else its group's, else GLOBAL) are checked that night,
+whatever their cadence, within the night's budgets. The weekly digest says what each showed: a new price is the edit
+any check makes, listed under **Price reports** in the body with the reports; the catalog's price still there is a
+line there too, nothing to review (its confirmation is kept for the digest, though no edit is proposed); a page that
+couldn't be read is a review item under Prices; a country the catalog doesn't price the plan in yet is counted under
+**Regions people asked about**, for the regional batches (M10.13). The digest then lets the reports go.
 
 **Guardrails**
 - **Never auto-merge.** You review the PR, which takes a minute a day at most.
@@ -2951,6 +2962,19 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-29, M10.10–M10.12, as built)**
+- **Price reports' rows** (M10.10, user migration `0004_price_reports`): `price_reports`, keyed by plan, country,
+  problem and price (the price's fields as JSON in one order, `''` without one), with a count and the first and last
+  day, `WITHOUT ROWID` and no index, since the clean-up empties it each night. A report writes one row besides the
+  day's count, so the `report` cap's 1,000 rows is 500 reports. Its plan is checked against the catalog's `plans` in
+  D1 (one row read). `REPORT_RATE_LIMIT` (3 a minute, keyed by IP) comes before the body is read.
+- **The hand-over** (M10.10, `clean-up.ts`): one `DELETE … WHERE last_day < today RETURNING …` takes the rows, so a
+  report counted meanwhile waits for the next night; each plan's KV key gets them added (core's `addReports`); a plan
+  whose key can't be written gets its rows back. The bot's state reads `bot:report:*` with one list a night.
+- **A reported plan's confirmation is kept** (M10.10): the night's checks keep a confirmed price only when its
+  `lastVerified` is due again, so "the page still shows the catalog's price" would have left nothing for the digest
+  to find. A confirmation of a reported plan's price is kept until the digest, and proposes no edit.
 
 **Resolved (2026-10-29, M10.5–M10.9, as built)**
 - **The service worker** (M10.5): Angular's `ngsw-worker.js` (`@angular/service-worker` 22.2.3) with

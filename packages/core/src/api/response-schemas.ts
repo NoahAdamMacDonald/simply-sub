@@ -40,6 +40,8 @@ export const successBodySchemas = {
   'PUT /sync/:chain': syncWriteBodySchema,
   // 204 No Content.
   'DELETE /sync/:chain': z.null(),
+  // 202 Accepted, with nothing to read back.
+  'POST /reports': z.null(),
 } as const satisfies Record<
   string,
   z.ZodType | typeof pngBody | typeof calendarBody | typeof syncBody

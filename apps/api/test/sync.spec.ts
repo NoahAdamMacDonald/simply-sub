@@ -231,7 +231,7 @@ describe('a chain past its days', () => {
     expect(again.headers.get('ETag')).toBe('"3"');
 
     await expire();
-    await cleanUp(env.USER_DB, today);
+    await cleanUp(env.USER_DB, env.KV, today);
     expect(await chains()).toBe(0);
   });
 });
