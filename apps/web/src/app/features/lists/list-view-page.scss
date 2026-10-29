@@ -126,8 +126,9 @@ ss-item-card {
       white-space: nowrap;
     }
 
+    // Material's leading icon is set 4 px left for its label: with none, it's centred (M6.18).
     mat-icon {
-      margin-inline-end: 0;
+      margin-inline: 0;
     }
   }
 }
