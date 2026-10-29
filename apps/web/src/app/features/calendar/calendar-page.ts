@@ -23,6 +23,7 @@ import {
   addDays,
   addMonths,
   addMonthsToMonth,
+  budgetBar,
   cardTitle,
   chargeTotal,
   hiddenLists,
@@ -34,6 +35,7 @@ import {
   readCalendarParams,
   weekdayOf,
   writeCalendarParams,
+  yearSummary,
   type IsoDate,
   type IsoMonth,
   type ResolvedItem,
@@ -55,6 +57,7 @@ import { ProviderIcon } from '../../shared/provider-icon/provider-icon';
 import { openLiveCalendar } from '../../shared/live-calendar/open-live-calendar';
 import { SplitButton, type SplitButtonItem } from '../../shared/split-button/split-button';
 import { calendarApps, type CalendarApp } from './calendar-apps';
+import { CalendarYear, type YearMonth } from './calendar-year';
 import type { CalendarDay, CalendarEntry } from './calendar-entries';
 import { DayPanel } from './day-panel';
 import { Upcoming } from './upcoming';
@@ -98,6 +101,7 @@ const monthNames = Array.from({ length: 12 }, (_, index) =>
   selector: 'ss-calendar-page',
   imports: [
     BudgetBar,
+    CalendarYear,
     DayPanel,
     MatButton,
     MatFormField,
@@ -142,6 +146,11 @@ export class CalendarPage {
     { id: 'txt', label: 'Text (.txt)', icon: 'description' },
   ];
   protected readonly monthNames = monthNames;
+  /** Month and Year (M10.4). */
+  protected readonly views = [
+    { id: 'month', label: 'Month' },
+    { id: 'year', label: 'Year' },
+  ] as const;
   protected readonly agenda = toSignal(
     inject(BreakpointObserver)
       .observe(AGENDA)
@@ -184,6 +193,8 @@ export class CalendarPage {
     ),
   );
   protected readonly month = computed(() => this.read().query.month);
+  /** The month's view, or its year's (M10.4). */
+  protected readonly view = computed(() => this.read().query.view ?? 'month');
   protected readonly shownLists = computed(() => this.read().query.lists);
   private readonly shown = computed(() => new Set(this.shownLists()));
   protected readonly listChoices = computed(() =>
@@ -204,7 +215,9 @@ export class CalendarPage {
     const to = Math.max(year + 5, shown);
     return Array.from({ length: to - from + 1 }, (_, index) => String(from + index));
   });
-  protected readonly title = computed(() => monthText(this.month()));
+  protected readonly title = computed(() =>
+    this.view() === 'year' ? this.month().slice(0, 4) : monthText(this.month()),
+  );
   /** The month select's choice: 0 for January. */
   protected readonly monthIndex = computed(() => Number(this.month().slice(5)) - 1);
 
@@ -293,11 +306,16 @@ export class CalendarPage {
       : `${count} subscriptions aren't shown: they can't be priced.`;
   });
 
+  /** The bar: the month's, or the year's in the year view. */
+  protected readonly bar = computed(() =>
+    this.view() === 'year' ? this.yearBar() : this.monthBar(),
+  );
+
   /**
-   * The bar (P10): what's been paid so far of the month's total, the whole of it for a past month and none of a future
-   * one, against the monthly budget's tick; its colour compares the total with the budget.
+   * The month's bar (P10): what's been paid so far of the month's total, the whole of it for a past month and none of
+   * a future one, against the monthly budget's tick; its colour compares the total with the budget.
    */
-  protected readonly bar = computed(() => {
+  private readonly monthBar = computed(() => {
     const saved = this.settings.saved();
     const currency = saved?.currency ?? '';
     const charges = [...this.entries().values()].flat().map((entry) => entry.charge);
@@ -322,6 +340,92 @@ export class CalendarPage {
       totalText: `${total.approx ? '≈ ' : ''}${money(total.amount)}`,
       totalSpoken: `${total.approx ? 'about ' : ''}${money(total.amount)}`,
     };
+  });
+
+  /** The year view's year (M10.4): its payments by month for the lists shown (core's yearSummary). */
+  private readonly year = computed(() => {
+    const year = Number(this.month().slice(0, 4));
+    return yearSummary(
+      this.metrics.charges({ from: `${year}-01-01`, to: `${year + 1}-01-01` }, this.shown()),
+      String(year),
+      this.today(),
+      this.settings.saved()?.currency ?? '',
+    );
+  });
+
+  /**
+   * The year's bar (M10.4): what's been paid so far of the year's total (§3.1's This year, for this one), against the
+   * annual budget's tick; its colour compares the total with the budget.
+   */
+  private readonly yearBar = computed(() => {
+    const saved = this.settings.saved();
+    const { total, spent } = this.year();
+    const money = (amount: number) => amountText(amount, saved?.currency ?? '', saved?.country);
+    return {
+      spent,
+      total: total.amount,
+      ...(saved?.annualBudget !== undefined && { budget: saved.annualBudget }),
+      totalText: `${total.approx ? '≈ ' : ''}${money(total.amount)}`,
+      totalSpoken: `${total.approx ? 'about ' : ''}${money(total.amount)}`,
+    };
+  });
+
+  /** The year's months that take a card over its limit (M9.4), counting every list's charges, as the month view does. */
+  private readonly overLimitMonths = computed(() => {
+    const saved = this.settings.saved();
+    if (!saved || this.view() !== 'year') return new Set<string>();
+    const fx = this.fx.rates();
+    const months = this.year().months.map((month) => month.month);
+    const found = overLimits([...this.resolved().values()], this.cards.records(), months, {
+      today: this.today(),
+      currency: saved.currency,
+      place: saved,
+      ...(fx && { fx }),
+    });
+    return new Set(found.map((over) => over.month));
+  });
+
+  /** The year view's cards (M10.4): each month's total, count, strip and days, and its link. */
+  protected readonly yearMonths = computed<YearMonth[]>(() => {
+    const saved = this.settings.saved();
+    const { months } = this.year();
+    const biggest = Math.max(...months.map((month) => month.total.amount));
+    const today = this.today();
+    return months.map(({ month, total, count, days }) => {
+      const money = `${total.approx ? '≈ ' : ''}${amountText(total.amount, saved?.currency ?? '', saved?.country)}`;
+      const countText =
+        count === 0 ? 'No payments' : count === 1 ? '1 payment' : `${count} payments`;
+      const overLimit = this.overLimitMonths().has(month);
+      const scale =
+        saved?.monthlyBudget === undefined
+          ? undefined
+          : budgetBar(total.amount, total.amount, saved.monthlyBudget);
+      const paid = new Set(days);
+      return {
+        month,
+        name: monthNames[Number(month.slice(5)) - 1],
+        totalText: money,
+        countText,
+        label:
+          `${monthText(month)}, ${countText}` +
+          (count === 0 ? '' : `, ${money.replace('≈ ', 'about ')}`) +
+          (overLimit ? ', a card goes over its limit' : ''),
+        strip: {
+          share: biggest > 0 ? total.amount / biggest : 0,
+          ...(scale && { towardYellow: scale.towardYellow, towardRed: scale.towardRed }),
+        },
+        overLimit,
+        current: month === monthOf(today),
+        weeks: monthGrid(month).map((week) =>
+          week.map(({ date, inMonth }) =>
+            inMonth
+              ? { day: Number(date.slice(8)), paid: paid.has(date), today: date === today }
+              : undefined,
+          ),
+        ),
+        queryParams: writeCalendarParams({ month, lists: this.shownLists() }, this.listIds()),
+      };
+    });
   });
 
   /** The grid's weeks: each day of the month with its chips, "+2 more", its total and what it's called. */
@@ -434,9 +538,10 @@ export class CalendarPage {
           }),
       );
     });
+    // A day the keys moved to in another month, or a month the year view opened, once its grid shows.
     effect(() => {
       const date = this.pendingFocus();
-      if (date === undefined || monthOf(date) !== this.month()) return;
+      if (date === undefined || monthOf(date) !== this.month() || this.view() !== 'month') return;
       untracked(() => {
         this.pendingFocus.set(undefined);
         this.focusDay.set(date);
@@ -477,8 +582,20 @@ export class CalendarPage {
     });
   }
 
-  protected step(months: number): void {
-    this.go(addMonthsToMonth(this.month(), months));
+  /** ‹ and ›: a month, or in the year view a year. */
+  protected step(by: number): void {
+    this.go(addMonthsToMonth(this.month(), this.view() === 'year' ? by * 12 : by));
+  }
+
+  /** Month and Year (M10.4): the year view shows the month's year, and Month goes back to the month. */
+  protected setView(view: 'month' | 'year'): void {
+    this.go(this.month(), this.shownLists(), view);
+  }
+
+  /** A month's card in the year view: its month opens, with focus on its grid, on today or its 1st. */
+  protected openMonth(month: IsoMonth): void {
+    const today = this.today();
+    this.pendingFocus.set(monthOf(today) === month ? today : `${month}-01`);
   }
 
   protected toToday(): void {
@@ -546,9 +663,16 @@ export class CalendarPage {
     this.go(monthOf(target));
   }
 
-  private go(month: IsoMonth, lists: readonly string[] = this.shownLists()): void {
+  private go(
+    month: IsoMonth,
+    lists: readonly string[] = this.shownLists(),
+    view: 'month' | 'year' = this.view(),
+  ): void {
     void this.router.navigate([], {
-      queryParams: writeCalendarParams({ month, lists: [...lists] }, this.listIds()),
+      queryParams: writeCalendarParams(
+        { month, lists: [...lists], ...(view === 'year' && { view }) },
+        this.listIds(),
+      ),
     });
   }
 

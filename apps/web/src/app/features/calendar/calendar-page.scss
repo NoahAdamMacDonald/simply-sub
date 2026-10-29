@@ -52,6 +52,17 @@
   align-items: center;
   gap: 4px 8px;
 
+  // Month and Year (M10.4), the one shown filled; on a phone, on a line of their own, so the arrows stay together.
+  .views {
+    display: flex;
+    gap: 4px;
+    margin-right: 8px;
+
+    @media (max-width: 599.98px) {
+      flex-basis: 100%;
+    }
+  }
+
   // ‹, the month, the year and › keep to one line on a phone, with Today under them.
   .month {
     flex: 1 1 120px;

@@ -106,6 +106,7 @@ export * from './schedule/charge-dates';
 export * from './schedule/charges';
 export * from './schedule/item-status';
 export * from './schedule/list-metrics';
+export * from './schedule/year-summary';
 export * from './search/name-match';
 export * from './search/plan-extras';
 export * from './search/provider-activity';

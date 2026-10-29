@@ -409,14 +409,22 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   day with a payment and today ringed. The grid is decorative: the card is one link, named with all it shows ("March
   2026, 4 payments, $63.21"), to that month's view, which opens with focus on its grid.
 - **Built from:** core's `yearSummary` (each month's total, conversion, count, days with payments, budget state and
-  over-limit cards) from the charges the month view uses; the view is a lazy `@defer` chunk (BLUEPRINT §13.1).
+  over-limit cards) from the charges the month view uses; the view is in the Calendar's own lazy chunk (the page is a
+  lazy route), since the app's first `@defer` would bring Angular's defer runtime, 7.6 kB, into the initial bundle.
 - **Unchanged:** Showing, Sync calendar and Export to file (the next 12 months). Upcoming isn't shown in the year view.
 - **Acceptance**
-  - [ ] Every month's total equals the month view's for the same lists, and the bar matches §3.1's This year
-  - [ ] Month ↔ Year keeps the month; the arrows, the Year select and Today work; a reload, Back and Forward restore
+  - [x] Every month's total equals the month view's for the same lists, and the bar matches §3.1's This year
+  - [x] Month ↔ Year keeps the month; the arrows, the Year select and Today work; a reload, Back and Forward restore
         the view
-  - [ ] Keyboard only: the switch, the year's controls, then each month in order; Enter on a month opens it
-  - [ ] Both themes at 360 and 1280 px with axe and no horizontal scroll; the initial bundle unchanged
+  - [x] Keyboard only: the switch, the year's controls, then each month in order; Enter on a month opens it
+  - [x] Both themes at 360 and 1280 px with axe and no horizontal scroll; the initial bundle unchanged
+- **As built:** core's `view` in `readCalendarParams` and `writeCalendarParams` (only `year` is written; another value
+  is rewritten away) and `yearSummary` (`schedule/year-summary.ts`); the page's Month | Year switch (the one shown
+  filled, `aria-pressed`; on a phone a line of its own, so the arrows stay with the year), and `ss-calendar-year`. A
+  card's link is its month's name, stretched over the card, named with all the card shows ("March 2026, 2 payments,
+  $43.04"), its other text hidden from screen readers: a link around all of it failed axe's label-in-name, its visible
+  text in another order than its name. A strip gives each month's total against the biggest month's, coloured against
+  the monthly budget on M7.7's scale when one is set. The initial bundle stays at 498.90 kB.
 
 **M10.5 — Offline start** (BLUEPRINT §6.3, §7.6, §14)
 - **The worker:** `@angular/service-worker` 22.2.3 (exact) and `ngsw-config.json`:
@@ -1554,7 +1562,7 @@ Upcoming   Oct 28 Crave $22.00 · Nov 3 Mullvad ≈ $7.53 ↻ · Nov 12 Netflix 
 - **Sync calendar ▾:**
   - Phase 3: Google / Apple / Proton each download the .ics and show that app's import steps.
   - Phase 5: "Live calendar link" → opt-in dialog → `POST /cal` → shows the URL, subscribe steps for each app and a Revoke button (M10.2, M10.3).
-- A year view (12 small months plus monthly totals) comes in M10.4.
+- A year view (12 small months plus monthly totals) comes in M10.4 (built: `?view=year`, its spec is M10.4's).
 
 **As built (M7.4):**
 - **Layout:** "Calendar", the month's bar with its total, then Showing (a multi-select of the lists, "All lists" or

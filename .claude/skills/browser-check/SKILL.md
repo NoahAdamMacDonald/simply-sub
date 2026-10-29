@@ -445,7 +445,10 @@ billed on the 31st) and Family (Mullvad renewed by hand), in both themes at both
   links; Copy link read back from the clipboard (the context grants clipboard access) and its spoken message;
   Proton's steps opened with Enter; Escape back on Sync calendar; Settings' card ("On: 2 calendars…") and Manage…;
 - light and wide only: a nickname written to IndexedDB reaching the feed after a reload (the next start), Change
-  calendars keeping each link, and Revoke all asking first (focus on Cancel), then every link answering 404.
+  calendars keeping each link, and Revoke all asking first (focus on Cancel), then every link answering 404;
+- the year view (M10.4): Year by Enter (pressed, in the URL, the year's bar), twelve month links each named with all
+  its card shows, no Month select and the arrows by year, Tab from Today to January then February, axe and a
+  full-page screenshot, Enter on March opening its month with focus on its grid, then Year and Month by Enter.
 
 A feed takes 30 fetches a minute, so poll one every 2 s, not every 100 ms, or the Worker's 429 looks like a missing
 change. The links view and the choosing view without links share the title Live calendar: wait for Make links to

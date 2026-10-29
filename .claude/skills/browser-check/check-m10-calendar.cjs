@@ -10,7 +10,10 @@
 //   link, each app's steps opening with Enter; Escape back to Sync calendar. Settings' Live calendar card says it's on
 //   and opens the dialog. Light and wide also: a change saved while the app was closed reaches the feed on the next
 //   start, Change calendars, and Revoke all (asking first), after which every link answers 404.
-// With axe on each view of the dialog and on the confirmation, and no horizontal scroll.
+// - M10.4, the year view: Year by Enter (pressed, in the URL); the year's bar; twelve month cards, each a link named
+//   with all it shows, reached in order by Tab after the year's controls (no month to choose, the arrows by year);
+//   Enter on March opens its month with focus on its grid; Month goes back.
+// With axe on each view of the dialog, on the confirmation and on the year, and no horizontal scroll.
 // Usage: node check-m10-calendar.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
 const fs = require('fs');
 const path = require('path');
@@ -476,6 +479,89 @@ async function changeAndRevoke(page, urls) {
   await page.keyboard.press('Escape');
 }
 
+async function yearView(page, viewport, label) {
+  await page.goto(`${baseUrl}calendar`);
+  await page.locator('.views button').first().waitFor();
+  await tabToNamed(page, 'Year');
+  await page.keyboard.press('Enter');
+  await page.waitForURL(/view=year/);
+  await page.locator('ss-calendar-year .month').nth(11).waitFor();
+  const pressed = await page.evaluate(() =>
+    [...document.querySelectorAll('.views button')].map(
+      (button) => `${button.textContent.trim()}: ${button.getAttribute('aria-pressed')}`,
+    ),
+  );
+  const year = new Date().getFullYear();
+  const barName = await page.locator('.month-bar ss-budget-bar').getAttribute('aria-label');
+  check(
+    `${label}: Year by Enter: pressed, in the URL, with the year's bar and twelve months`,
+    pressed.join(', ') === 'Month: false, Year: true' && barName === `Paid so far in ${year}`,
+    `${pressed.join(', ')} / ${barName}`,
+  );
+  const names = await page
+    .locator('ss-calendar-year .month a')
+    .evaluateAll((cards) => cards.map((card) => card.getAttribute('aria-label')));
+  check(
+    `${label}: each month is a link named with what it shows`,
+    names.length === 12 &&
+      names[0].startsWith(`January ${year}, `) &&
+      names.every((name) =>
+        /^[A-Z][a-z]+ \d{4}, (No payments|\d+ payments?, (about )?\$[\d,.]+)/.test(name),
+      ),
+    names.slice(0, 2).join(' / '),
+  );
+  const controls = await page.evaluate(() => ({
+    month: document.querySelector('mat-form-field.month') !== null,
+    next: document.querySelector('button[aria-label="Next year"]') !== null,
+  }));
+  check(
+    `${label}: no month to choose, and the arrows go by year`,
+    !controls.month && controls.next,
+  );
+  // Tab from Today reaches January, then February.
+  await tabToNamed(page, 'Today');
+  await page.keyboard.press('Tab');
+  const first = await page.evaluate(() => document.activeElement?.getAttribute('aria-label') ?? '');
+  await page.keyboard.press('Tab');
+  const second = await page.evaluate(
+    () => document.activeElement?.getAttribute('aria-label') ?? '',
+  );
+  check(
+    `${label}: Tab goes from Today to January, then February`,
+    first.startsWith('January') && second.startsWith('February'),
+    `${first} / ${second}`,
+  );
+  await axeCheck(page, `${label}: the year view`);
+  await page.screenshot({ path: path.join(outDir, `m10-year-${label}.png`), fullPage: true });
+  await noSideScroll(page, viewport, `${label}: the year view`);
+
+  await keyTo(
+    page,
+    `document.activeElement?.getAttribute('aria-label')?.startsWith('March') ?? false`,
+  );
+  await page.keyboard.press('Enter');
+  await page.waitForURL(new RegExp(`month=${year}-03(?!.*view)`));
+  const focused = await until('focus on March’s grid', () =>
+    page.evaluate(() =>
+      document.activeElement?.closest('.grid')?.querySelector('.day')
+        ? document.activeElement.getAttribute('data-date')
+        : '',
+    ),
+  ).catch(() => '');
+  check(
+    `${label}: Enter on March opens it, focus on its grid`,
+    focused.startsWith(`${year}-03-`),
+    focused,
+  );
+  await tabToNamed(page, 'Year');
+  await page.keyboard.press('Enter');
+  await page.waitForURL(new RegExp(`month=${year}-03.*view=year`));
+  await tabToNamed(page, 'Month');
+  await page.keyboard.press('Enter');
+  await page.waitForURL(new RegExp(`month=${year}-03$`));
+  check(`${label}: Month goes back to the month the year view was opened on`, true);
+}
+
 (async () => {
   await waitForServer();
   const browser = await chromium.launch({ channel: 'msedge' });
@@ -492,6 +578,7 @@ async function changeAndRevoke(page, urls) {
       await page.reload();
       const urls = await liveCalendar(page, viewport, label, everything);
       await settingsCard(page, label);
+      await yearView(page, viewport, label);
       if (everything) {
         await updates(page, urls);
         await changeAndRevoke(page, urls);

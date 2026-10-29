@@ -2439,10 +2439,11 @@ the feature to that subscription's plan or provider. Resetting means choosing
   Its "Set all in this group" menu ranks every child in one step. Ranks never cascade on their own.
 - A "Show ranked only" toggle and a search box help with the large registry.
 
-**Calendar.** A month view (a year view later) shows payment dates and amounts per day, plus a progress bar
+**Calendar.** A month view shows payment dates and amounts per day, plus a progress bar
 covering **the displayed month only**: *spent so far / that month's total*, with a monthly-budget marker. Users can toggle which lists are shown. **Export to file** downloads
-an `.ics` file. **Sync Calendar** is a Phase 5 feature (section 11.3). Until then it shows "Download .ics" with
-import instructions for Google, Apple and Proton.
+an `.ics` file. **Sync Calendar** offers the live calendar (section 11.3, M10.3) and each app's `.ics` file with its
+import steps for Google, Apple and Proton. The year view (M10.4) shows twelve small months with their totals, its bar
+the year's payments so far against the annual budget.
 
 **Settings.** A back button, plus:
 - budgets (warnings appear when any projected month or year goes over)
@@ -2859,7 +2860,9 @@ written and tested once. It uses WebCrypto (`crypto.subtle`), available in every
 The general Angular rules are in [docs/angular-best-practices.md](docs/angular-best-practices.md), Angular's
 official AI rules file, which CLAUDE.md loads automatically. On top of those rules:
 - Zoneless change detection, which is the default. OnPush is the default too, so never set it explicitly.
-- `resource` / `httpResource` for fetching, and `@defer` for heavy widgets (XLSX export, the year calendar).
+- `resource` / `httpResource` for fetching, and lazy chunks for heavy widgets (XLSX export). Not `@defer` while the
+  initial bundle is near its 500 kB: the first `@defer` brings Angular's defer runtime (7.6 kB) into it, so the year
+  calendar (M10.4) lives in the Calendar's own lazy chunk instead.
 - **Signal Forms** for every form (they're stable in v22).
 - New singleton services in `core/` use the `@Service()` decorator.
 - Templates and styles live in their own `.html` and `.scss` files, never inline, even for small components.
@@ -2929,7 +2932,11 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 **Still open**
 None.
 
-**Resolved (2026-10-29, M10.1–M10.3, as built)**
+**Resolved (2026-10-29, M10.1–M10.4, as built)**
+- **The year view** (M10.4): `?view=year` keeps the month, so Month goes back to it; Today goes to this year. Each
+  month's card is a link named with all it shows, but only its month's name is inside the link (stretched over the
+  card), since axe's label-in-name rule wants a link's visible text in its name in the same order. No `@defer`: it
+  would have taken the initial bundle to 505.27 kB.
 - **The user database** (M10.1): `simply-sub-user` was made on 2026-10-29 (ENAM, `wrangler d1 create`), and its first
   two migrations applied remotely by hand that day for the Proton test on the preview link, ahead of the deploy, which
   finds them applied. Its first query after creating it failed once with Cloudflare's 7403 ("not authorized"), then
@@ -2947,6 +2954,10 @@ None.
   it can't, and the server deletes them after 180 days.
 - **Bundle:** 498.90 kB initial (497.84 before). The starter costs 0.18 kB of `main`; the rest is the split its lazy
   chunk caused in the chunk the app shares at start (223.37 kB became 150.60 and 73.68), the glue between two chunks.
+- **Checks:** core 1773 tests, web 699, API 264, bot 60; `check-m10-calendar.cjs` (96, new for the batch, with
+  `wrangler dev` behind `ng serve`), and the scripts of the pages it changed: `check-exports.cjs` (88, Sync calendar's
+  items one further down, the 31st's `BYMONTHDAY=-1`), `check-calendar.cjs` (87), `check-settings.cjs` (81),
+  `check-backup.cjs` (81) and `check-app-lock.cjs` (159).
 
 **Resolved (2026-10-29, M10's plan)**
 The owner's choices for Phase 5, which PROJECT-PLAN's M10 (M10.1–M10.13) follows:
