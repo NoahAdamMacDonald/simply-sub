@@ -196,6 +196,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M6.14 | Shared ranks (added 2026-10-28, the feedback after M9): ranks changed in a plan's item dialog go to the same provider's other plans in that list (the user's choice), saved with the list's Save; Essential stays on its plan; "Ranks for this plan only" (`ListItem.ownRanks`) keeps a plan out; a new plan starts with its siblings' ranks. Core's `ranking/shared-ranks.ts` (BLUEPRINT §4.6, §14) | Changing Netflix Standard's 1080p rank changes Standard with Ads' too, in the draft, and not with the box ticked |
 | M6.15 | Any colour for a tag (added 2026-10-28, the feedback after M9): `ss-colour-picker`, the device's own colour picker as a swatch beside the hex field, each following the other, in Settings' tag editor and the item dialog's New tag (which gets the hex field too) (BLUEPRINT §14) | A colour picked on a phone or a desktop fills the hex field, and a hex typed colours the swatch |
 | M6.16 | Menus you can type in (added 2026-10-28, the feedback after M9): `ss-choice-field`, a Signal Forms control on Material's autocomplete, for the first-run and 📍 dialogs' Country, Province or territory (State) and Currency: typing narrows the list (a name's start first, then anywhere, or a code), Enter picks the first, and leaving without a pick puts the choice back (BLUEPRINT §14) | Typing "al" and Enter picks Alberta; "usd" finds US Dollar; leaving the field restores the chosen one |
+| M6.19 | Auto-renews with an end date, in words that agree (added 2026-10-29, the feedback after M3): Auto-renews says how it's charged and Ends on when it stops, so both can be set; the dialog says "Auto-renews until it ends" and "It stops then: no renewal after"; one badge says "Renews Nov 12, then ends Nov 28" (or "Renew by …, then ends …"), never a renewal on or after the end; the billing line says "auto-renews until Nov 28, 2026" (P4, P5, P6) | No text reads "Auto-renews" next to "Ends" as two facts; an item ending before its next charge says only "Ends Nov 28" |
 
 ### M7 — Money, schedule & calendar
 | ID | Task | Done when |
@@ -939,6 +940,11 @@ BLUEPRINT §14 has the rest.
 - **Bundles:** bundle items show the bundle's included plans read-only, and their combined features for ranking.
 - **Duplicates:** adding a plan that's already in the list shows "Already in this list — add another?" (duplicates are allowed), and so does changing an item to another item's plan.
 - **Save** writes to the **draft** (P5), closes the dialog and shows "Added Netflix Standard".
+
+**Since the feedback after M3 (M6.19):** Auto-renews and Ends on can both be set: one says how it's charged, the
+other when it stops. With an end date the checkbox reads "Auto-renews until it ends" and Ends on's hint "It stops then:
+no renewal after"; the cards' badge reads "Renews Nov 12, then ends Nov 28" (or "Renew by Nov 12, then ends Nov 28"),
+and the billing line "Monthly · auto-renews until Nov 28, 2026".
 
 **Acceptance**
 - [ ] Invalid combinations can't be saved, and show inline errors

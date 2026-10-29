@@ -10,8 +10,10 @@ const names = { active: 'Active', inactive: 'Inactive', 'not-listed': 'Not liste
 
 /**
  * Active, Inactive or Not listed, with a coloured dot (PROJECT-PLAN §3.3), and "active from Sep 10, 2026" for an
- * item that starts later. Small badges add "Ends Nov 3" and, for a manual renewal, "Renew by Nov 3", or for an active
- * one that renews by itself "Auto-renews Nov 3" (M6.12). Text after the status (Search's " · 2 lists") is projected.
+ * item that starts later. A small badge adds, for a manual renewal, "Renew by Nov 3", or for an active one that renews
+ * by itself "Auto-renews Nov 3" (M6.12), and "Ends Nov 3" for one ending soon: one badge for both, "Renews Nov 3, then
+ * ends Nov 28" (M6.19), and never a renewal on or after its end. Text after the status (Search's " · 2 lists") is
+ * projected.
  */
 @Component({
   selector: 'ss-status-badge',
@@ -34,14 +36,27 @@ export class StatusBadge {
     const status = this.status();
     return status.kind !== 'not-listed' && status.endsOn ? dayText(status.endsOn) : undefined;
   });
-  protected readonly renewBy = computed(() => {
+  /** The next charge, unless it's on or after the end (a charge an ending item doesn't make). */
+  private readonly next = computed(() => {
     const status = this.status();
     const next = this.nextCharge();
-    return status.kind !== 'not-listed' && status.manual && next ? dayText(next) : undefined;
+    if (!next || status.kind === 'not-listed') return undefined;
+    return status.endsOn !== undefined && next >= status.endsOn ? undefined : next;
   });
-  protected readonly renews = computed(() => {
+  /** "Renew by Nov 3" (with ↻), "Auto-renews Nov 3", "Ends Nov 28", or the renewal and the end together. */
+  protected readonly badge = computed(() => {
     const status = this.status();
-    const next = this.nextCharge();
-    return status.kind === 'active' && !status.manual && next ? dayText(next) : undefined;
+    if (status.kind === 'not-listed') return undefined;
+    const next = this.next();
+    const ends = this.endsOn();
+    const then = ends ? `, then ends ${ends}` : '';
+    if (status.manual && next) return { manual: true, text: `Renew by ${dayText(next)}${then}` };
+    if (status.kind === 'active' && next) {
+      return {
+        manual: false,
+        text: ends ? `Renews ${dayText(next)}${then}` : `Auto-renews ${dayText(next)}`,
+      };
+    }
+    return ends ? { manual: false, text: `Ends ${ends}` } : undefined;
   });
 }

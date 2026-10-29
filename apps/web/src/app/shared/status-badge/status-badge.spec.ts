@@ -38,6 +38,22 @@ describe('StatusBadge', () => {
       nextCharge: '2026-11-03',
       text: 'Active Auto-renews Nov 3',
     },
+    // A renewal and the end together, in one badge (M6.19); no renewal on or after the end.
+    {
+      status: { kind: 'active', endsOn: '2026-11-28', manual: false },
+      nextCharge: '2026-11-12',
+      text: 'Active Renews Nov 12, then ends Nov 28',
+    },
+    {
+      status: { kind: 'active', endsOn: '2026-11-28', manual: true },
+      nextCharge: '2026-11-12',
+      text: 'Active Renew by Nov 12, then ends Nov 28',
+    },
+    {
+      status: { kind: 'active', endsOn: '2026-11-28', manual: false },
+      nextCharge: '2026-11-28',
+      text: 'Active Ends Nov 28',
+    },
     {
       status: { kind: 'inactive', activeFrom: '2026-11-03', manual: false },
       nextCharge: '2026-11-03',

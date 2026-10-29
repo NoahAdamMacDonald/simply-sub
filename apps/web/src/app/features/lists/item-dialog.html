@@ -218,7 +218,9 @@
               [aria-label]="'Ends on: choose a date'"
             />
             <mat-datepicker #endPicker [calendarHeaderComponent]="calendarHeader" />
-            <mat-hint>Optional</mat-hint>
+            <mat-hint>{{
+              model().endDate ? 'It stops then: no renewal after' : 'Optional'
+            }}</mat-hint>
             <mat-error>{{ firstError(form.endDate) }}</mat-error>
           </mat-form-field>
         </div>
@@ -241,7 +243,10 @@
 
         @if (!free()) {
           @if (autoRenewAvailable()) {
-            <mat-checkbox [formField]="form.autoRenew">Auto-renews</mat-checkbox>
+            <!-- With an end date, it renews by itself until then (M6.19). -->
+            <mat-checkbox [formField]="form.autoRenew">{{
+              model().endDate ? 'Auto-renews until it ends' : 'Auto-renews'
+            }}</mat-checkbox>
           } @else {
             <p class="note">This plan renews manually — we’ll remind you</p>
           }

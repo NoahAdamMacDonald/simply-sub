@@ -3,12 +3,12 @@
   <span class="dot" aria-hidden="true"></span>
   <span>{{ text() }}<ng-content /></span>
 </span>
-@if (endsOn(); as date) {
-  <span class="badge"> Ends {{ date }}</span>
-}
-@if (renewBy(); as date) {
-  <span class="badge"><mat-icon aria-hidden="true">autorenew</mat-icon> Renew by {{ date }}</span>
-}
-@if (renews(); as date) {
-  <span class="badge"> Auto-renews {{ date }}</span>
+<!-- One badge for the renewal and the end together: "Renews Nov 12, then ends Nov 28" (M6.19). -->
+@if (badge(); as badge) {
+  <span class="badge">
+    @if (badge.manual) {
+      <mat-icon aria-hidden="true">autorenew</mat-icon>
+    }
+    {{ badge.text }}</span
+  >
 }

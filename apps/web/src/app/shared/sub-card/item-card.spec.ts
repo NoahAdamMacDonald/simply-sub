@@ -155,7 +155,7 @@ describe('ItemCard', () => {
         }),
       ),
     ).toEqual([
-      'Monthly · auto-renews · ends Mar 12, 2027',
+      'Monthly · auto-renews until Mar 12, 2027',
       'Subscribed since Mar 12, 2025',
       'Your own price until Dec 31, 2026',
       'Bought in United States',
@@ -278,7 +278,7 @@ describe('ItemCard', () => {
         Array.from(element.querySelectorAll('ss-status-badge .badge')).map((badge) =>
           text(badge)?.replace('autorenew', '').trim(),
         ),
-      ).toEqual(['Ends Nov 20', 'Renew by Nov 10']);
+      ).toEqual(['Renew by Nov 10, then ends Nov 20']);
     });
 
     it('has no Wrong date? for Specific dates, which have no anchor to move', async () => {
