@@ -165,11 +165,13 @@ for (const result of drafted) {
   Object.assign(result, { status: 'needs-fix', note: errors.map(formatIssue).join('; ') });
 }
 
+// The queue first: save-baselines checks the whole catalog, and a drafted provider's entry must say done by then.
+await markQueue(results);
+
 // Each new provider's pages become baselines for the nightly bot (M3.6), from the pages the batch read.
 const keptIds = results.filter((result) => result.status === 'drafted').map((result) => result.id);
 if (keptIds.length > 0) run('save-baselines.ts', keptIds);
 
-await markQueue(results);
 const body = batchReview(results, {
   date: today,
   extractor: model === 'workers-ai' ? 'Workers AI' : 'a session’s model (Claude)',
