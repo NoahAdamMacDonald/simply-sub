@@ -2629,6 +2629,51 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 **Still open**
 None.
 
+**Resolved (2026-10-29, the UI polish and the feedback after M3)**
+The UI polish the user approved (M9.5, M4.9, and with their OK of the proposals, M7.10, M4.7 and M4.8), and their
+eleven fixes and ideas after M3, as M5.13, M6.17–M6.19, M7.11, M7.12, M8.5, M8.6 and M9.6. PROJECT-PLAN's rows have
+each as built; what was decided:
+- **Apply replaces what a suggestion replaces (M8.5):** a bundle Apply added had no start date, so it was counted as
+  if paid all year, and an extra member's add-on was charged on every one of its host's charges: this year's total
+  rose. A bundle or suite now starts on the earliest next charge of the items it replaces (its `startDate`), each item
+  ends on its own next charge, and an extra member joins its host the day the account it replaces ends (an add-on's
+  `since`). The optimizer prices them the same way.
+- **Review changes (M8.6):** each suggestion applied is kept on the draft with what it changed, so it can be undone on
+  its own (with the changes built on it); its page reads like a diff, with the totals before and after. While the
+  suggestions are worked out again after an Apply, none can be applied, so a card that clashes with one applied (a
+  better card for a plan a bundle replaces) is never in reach.
+- **Statuses (M7.11, §3.3):** a manual renewal says "Manual · renew by"; an item a bundle, suite or extra member
+  replaces says what it becomes and when, so a plan still listed until its paid period ends reads as intended.
+  Proton Family with auto-renew off was already Manual: the badge only said "Renew by".
+- **Auto-renews and an end date (M6.19):** both can be set, one saying how it's charged and the other when it stops:
+  "Renews Nov 12, then ends Nov 28".
+- **Calendar files (M7.12):** an ongoing subscription is a repeating event per run of charges at one amount, with the
+  schedule's own rule (a plan billed on the 31st falls on a shorter month's last day: `BYSETPOS=-1`), so it goes past
+  the first year. An app makes a calendar of its own only for a subscribed feed, so that waits for M10's live feed;
+  `X-WR-CALNAME` names it where an app reads it.
+- **Every reseller (M5.13):** Settings' Search, off by default (the user's choice).
+- **Another currency (M9.6), the user's idea:** no catalog field is needed. Several currencies in one region already
+  mean the buyer picks (Proton's four), and a price set by where the buyer is lives under that region alone, so
+  another country's price is never offered (geo-locked). It needs the item's card, since the FX fee decides it, and
+  it's applied as the user's own price in that currency from the next charge (`priceOverride.since`, the item dialog's
+  From). With Proton's prices and late October's rates a US buyer saves by paying in CAD; a Canadian already pays
+  least in CAD.
+- **Home (M7.10):** Mark renewed means the renewal due is paid, so the next one is the charge after it; Coming up leaves
+  out a charge the schedule counts as paid (before an item's next one).
+- **Fixes the checks found:** Settings' Delete all data summary had `tabindex="-1"`, out of the Tab order; Home's list
+  cards and Review changes' lines ran their words together for a screen reader; Home's Budgets kept the old layout's
+  480 px limit; List view's open filters, scrolling since M6.17, scrolled sideways for the price slider's thumbs; and
+  at 320 px a custom plan's box was wider than its editor, M4.8's Currency menu not shrinking below its arrow's room;
+  and the empty states of Optimizations and Review changes coloured their filled buttons' labels with the colour the
+  buttons are filled with, which axe leaves out (a Material button's layered background is "incomplete" to it); a
+  status badge naming a bundle didn't wrap and widened List view at 360 px; and Applied's snackbar stayed up after
+  Optimizations was left, its Undo out of date (after a save it could cancel a new draft).
+- **The browser checks' catalog:** `apps/web/public/data/` is built and not in Git, so it's the catalog of whichever
+  branch last ran `data:build`. Run it on the branch under test, then restart `ng serve`, before Search's checks.
+- **Bundle:** the initial bundle is 497.84 kB, as before the batch; the new pages and code are in lazy chunks.
+- **Checks:** core 1597 tests, web 684, API 213, bot 41; all 26 browser-check scripts (2503 checks, both themes at 360
+  and 1280 px, keyboard only, with axe), `check-after-m3.cjs` (143) new for the batch.
+
 **Resolved (2026-10-28, the feedback after M9)**
 The user's sixteen fixes and improvements after M9, as M5.11–M5.12, M6.12–M6.16, M7.7–M7.9 and M8.4:
 - **View in Search shows the item's plan (M5.11):** Search's URL takes `plan=<plan id>` (kept while the catalog has
