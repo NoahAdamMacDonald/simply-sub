@@ -1,5 +1,5 @@
-// A page's words, for finding prices and quotes in (BLUEPRINT §6.4). Regular expressions rather than a parser: a
-// Workflow step on the free plan has 10 ms of CPU, and the words are all the check needs.
+// A page's words, for finding prices and quotes in (BLUEPRINT §6.4, §6.5). Regular expressions rather than a parser:
+// a Workflow step on the free plan has 10 ms of CPU, and the words are all the bot and the pipeline need.
 
 const entities: Record<string, string> = {
   amp: '&',

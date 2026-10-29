@@ -1,8 +1,7 @@
-import type { Bundle, SnapshotProvider } from '@simply-sub/core';
+import type { Bundle, Robots, SnapshotProvider } from '@simply-sub/core';
 import { checkPages, message, type CheckInput, type PageDeps } from './check-pages';
 import type { RepositoryState } from './github';
 import { filesToRead, proposal, type Proposal } from './proposal';
-import type { Robots } from './robots';
 import { approvalTargets, bundleTargets, networksTargets, providerTargets } from './targets';
 import type { Budget, Finding } from './types';
 

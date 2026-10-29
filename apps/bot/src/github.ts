@@ -1,4 +1,4 @@
-import { userAgent } from './robots';
+import { userAgent } from '@simply-sub/core';
 import type { FileChange, Proposal } from './proposal';
 
 // The bot's way to GitHub (BLUEPRINT §7.7): the REST API with a fine-grained token for this repository only (Contents

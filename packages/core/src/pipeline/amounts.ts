@@ -1,7 +1,8 @@
 import { nameIndexes } from './page-text';
 
-// Amounts on a page (BLUEPRINT §6.4): every price-like number, with the currency written beside it, so the check can
-// tell that a stored price is still there without asking Workers AI.
+// Amounts on a page (BLUEPRINT §6.4, §6.5): every price-like number, with the currency written beside it, so the
+// nightly check can tell that a stored price is still there without asking Workers AI, and the pipeline that a page
+// shows prices.
 
 /** A price-like number in the text. */
 export interface MoneyMention {

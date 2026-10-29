@@ -228,7 +228,8 @@ simply-sub/
 │     │  ├─ optimizer/       # suggestion engine (section 10)
 │     │  ├─ rewards/         # card reward maths (section 9)
 │     │  ├─ pipeline/        # the discovery pipeline's logic (section 6.5): the queue and Wikidata (M3.1), web
-│     │  │                   # addresses
+│     │  │                   # addresses; finding pages and web search (M3.2); a page's text, amounts, tax wording
+│     │  │                   # and robots.txt, shared with the bot (moved from apps/bot in M3.2)
 │     │  └─ export/          # the exports' tables, calendar events, text and list file, which the app writes
 │     │                      # with papaparse, exceljs and ics (M7.5)
 │     └─ test/               # Vitest specs, mirroring src/ (run in the America/Vancouver time zone)
@@ -256,6 +257,8 @@ simply-sub/
 │  ├─ lib/catalog-files.ts   # reads, parses and checks data/ for the catalog scripts
 │  ├─ fetch-icons.ts         # any website's best icon → data/logos/<id>.png (`npm run data:icons`)
 │  ├─ discover-services.ts   # Wikidata's services → data/queue.yaml (`npm run data:queue`, section 6.5)
+│  ├─ find-urls.ts           # each provider's pages → .pipeline/<id>/urls.json (`npm run data:urls`, section 6.5)
+│  ├─ lib/web.ts, lib/search.ts  # the pipeline's polite fetch and its web search (Tavily, Brave, SearXNG)
 │  ├─ price-check.ts         # nightly price monitor (section 6.4)
 │  └─ draft-provider.ts      # AI-assisted: pricing page URL → draft YAML
 │
@@ -1605,8 +1608,8 @@ plans and opens PRs. **Your only manual step is reviewing PRs.**
   Plus is only a "subscription"), so they're added by hand (`source: manual`). Some entries aren't subscriptions
   (VK, SourceForge, Android TV): a batch marks them out-of-scope with a note.
 
-**② Find URLs automatically:** `scripts/find-urls.ts`. For each website, it tries these in order and stops at
-the first strong match:
+**② Find URLs automatically:** `scripts/find-urls.ts` (as built in M3.2: below). For each website, it tries these
+in order and stops at the first strong match:
 1. Common paths: `/pricing`, `/plans`, `/premium`, `/subscribe`, `/compare`, `/en-ca/pricing`, `/ca/plans`.
 2. `sitemap.xml` / `robots.txt` sitemaps: URLs containing `pricing|plans|subscribe|compare|premium`.
 3. The homepage's nav and footer links whose text matches "Pricing", "Plans", "Get started" and so on.
@@ -1634,6 +1637,36 @@ Every run also collects, for every provider (M1.12), whether or not it's new or 
 
 A provider file's header comment says what each check found, "none" included, so a PR's reviewer can tell a check
 that found nothing from one that wasn't done.
+
+**As built (M3.2):** `npm run data:urls -- <ids>` (or `--next 10`, or `--sample`), on core's `pipeline/find-pages.ts`
+(`findPages`, with the caller's fetch and search) and `pipeline/search.ts`; it writes `.pipeline/<id>/urls.json` (the
+pipeline's working folder, gitignored) for the renderer.
+- **Kinds:** pricing, cancel, terms, privacy, payment (accepted card networks), bundles and resellers, each found in
+  this order: the website itself when it's a product's own page (youtube.com/premium); common paths on its host
+  (`/pricing`, `/plans`, `/abonnement`, `/terms`, `/confidentialite` …); its sitemaps and its help centre's (help. and
+  support.), Canada's first (Disney+'s help centre splits them by country); the home page's navigation and footer
+  links, then its other links and the help centre's; then a web search.
+- **A page counts** when its words fit the kind (`pageFits`: prices for a period near plan words, "personal
+  information" in a privacy policy, two card networks on a payments page, in English or French); a page whose words
+  a plain fetch can't read (its scripts fill them in) is only probable, chosen by its URL's score (`urlScore`: the
+  kind's words in its path and its link's words, Canada's locale first, another country's last, a list of articles
+  after an article). A guessed path proves nothing on a site that answers every path (`missingPath`, a soft 404:
+  Crave, ESPN), and business plans, sign-ins and a catalogue's shows never count. A footer's terms and privacy links
+  may go to a parent company (Bell for Crave); everything else must be on the provider's sites.
+- **Politeness** (`scripts/lib/web.ts`): the bot's User-Agent and `en-CA`, each host's robots.txt (read once, and
+  reused for its sitemaps), each URL at most once a run, and 750 ms between requests to a host. Netflix, Disney+ and
+  Hulu disallow every bot but search engines and named AI crawlers on their main sites, so only their help centres
+  are read.
+- **Search** (`pipeline/search.ts`, the user's choice): Tavily first (its free plan: 1,000 searches a month, no card),
+  then Brave (a card on file and $5 of free credit a month, about 1,000 searches), then SearXNG (an instance you run;
+  free, no budget). Keys come from the gitignored `.env` (`TAVILY_API_KEY`, `BRAVE_API_KEY`, `SEARXNG_URL`); this
+  machine's searches are counted in `.pipeline/search-usage.json`, and it may use 500 of Tavily's and 450 of Brave's
+  a month, leaving the rest for the bot. Only results on the provider's sites are read.
+- **The 20-service sample** (`scripts/lib/url-sample.ts`: the ten providers and ten from the queue, each with the
+  pricing pages that count as right, read on their sites on 2026-10-28): 15 of 20 right without search or a browser
+  (75%). The misses: Netflix (robots.txt; its help centre's home page doesn't link the plans article, so it needs the
+  search), Crave (a single-page app: its menus need the browser, M3.3), NordVPN and Tidal (403 to any bot: unreadable),
+  and Bitdefender (its VPN's own page, not its consumer lineup). See section 14 (M3.2) for the run with search.
 
 **③ Render:** Playwright (free on GitHub Actions) loads each page with `en-CA` locale headers, waits for prices
 to render, clicks visible "Monthly/Annual" toggles, and saves the visible text plus a screenshot as evidence.
@@ -2647,6 +2680,18 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-28, M3.2)**
+- **Shared with the bot:** the bot's `page-text.ts`, `amounts.ts`, `tax-wording.ts` and `robots.ts` moved to core's
+  `pipeline/` (unchanged), since the scripts read pages, amounts and robots.txt the same way; the bot imports them from
+  `@simply-sub/core`, and its tests stay where their HTML fixtures are.
+- **Brave has no free tier any more** (February 2026): a card on file, $5 of credit a month (about 1,000 searches) and
+  billing beyond it. Tavily's free plan (1,000 a month) needs no card, so it's first (the user's choice), Brave second
+  within its credit, and SearXNG last.
+- **Robots.txt is followed even where it costs results:** Netflix, Disney+ and Hulu allow only search engines and named
+  AI crawlers on their main sites, so the pipeline reads their help centres instead, found by sitemaps or search.
+- **The sample:** 15 of 20 right with common paths, sitemaps and links alone (75%), short of M3.2's 80% until a search
+  or the browser fills in: the run with search waits for a key in `.env` (the user's sign-up).
 
 **Resolved (2026-10-28, M3.1)**
 - **The discovery queue** is `data/queue.yaml` (section 6.5): the user's own services first, then Wikidata's, each

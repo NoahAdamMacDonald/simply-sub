@@ -1,4 +1,4 @@
-import type { SnapshotProvider } from '@simply-sub/core';
+import { pageText, type SnapshotProvider } from '@simply-sub/core';
 import { parse } from 'yaml';
 import mullvadYaml from '../../../data/providers/mullvad.yaml?raw';
 import netflixYaml from '../../../data/providers/netflix.yaml?raw';
@@ -6,7 +6,6 @@ import type { PageDeps, PageResult } from '../src/check-pages';
 import type { ExtractionRequest } from '../src/extraction';
 import type { RepositoryState } from '../src/github';
 import { gitBlobSha } from '../src/icons';
-import { pageText } from '../src/page-text';
 import type { Proposal } from '../src/proposal';
 import type { Services } from '../src/run';
 import { catalogIndex } from '../src/targets';

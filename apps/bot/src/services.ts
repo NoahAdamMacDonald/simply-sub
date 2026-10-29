@@ -1,10 +1,17 @@
 import { launch } from '@cloudflare/playwright';
-import type { Bundle, SnapshotProvider } from '@simply-sub/core';
+import {
+  maxPageChars,
+  pageText,
+  parseRobots,
+  robotsAllow,
+  userAgent,
+  type Bundle,
+  type Robots,
+  type SnapshotProvider,
+} from '@simply-sub/core';
 import type { PageDeps, PageResult } from './check-pages';
 import { extractionModel } from './extraction';
 import { GitHub } from './github';
-import { maxPageChars, pageText } from './page-text';
-import { parseRobots, robotsAllow, userAgent, type Robots } from './robots';
 import type { Services } from './run';
 import { catalogIndex } from './targets';
 

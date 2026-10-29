@@ -20,7 +20,8 @@
     "data:validate": "tsx scripts/validate-data.ts",
     "data:build": "tsx scripts/build-catalog.ts",
     "data:icons": "tsx scripts/fetch-icons.ts",
-    "data:queue": "tsx scripts/discover-services.ts"
+    "data:queue": "tsx scripts/discover-services.ts",
+    "data:urls": "tsx scripts/find-urls.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

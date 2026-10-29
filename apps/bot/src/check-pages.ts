@@ -1,5 +1,15 @@
-import { networksNamedIn, readIconImage } from '@simply-sub/core';
-import { pageShows, sameAmount, sameCurrency } from './amounts';
+import {
+  comparable,
+  excerpt,
+  missingQuotes,
+  nameIndexes,
+  networksNamedIn,
+  pageShows,
+  readIconImage,
+  sameAmount,
+  sameCurrency,
+  taxWording,
+} from '@simply-sub/core';
 import {
   extractionRequest,
   neuronEstimate,
@@ -8,8 +18,6 @@ import {
   type ExtractedPrice,
 } from './extraction';
 import { findIcon, gitBlobSha, toBase64, type Download } from './icons';
-import { comparable, excerpt, nameIndexes } from './page-text';
-import { missingQuotes, taxWording } from './tax-wording';
 import { priceText } from './targets';
 import type { ApprovalTarget, Budget, Finding, NetworksTarget, PriceTarget } from './types';
 

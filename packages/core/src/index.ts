@@ -67,7 +67,13 @@ export {
 export * from './optimizer/optimize';
 export * from './optimizer/suggestion';
 export * from './optimizer/suggestion-text';
+export * from './pipeline/amounts';
+export * from './pipeline/find-pages';
+export * from './pipeline/page-text';
 export * from './pipeline/queue';
+export * from './pipeline/robots';
+export * from './pipeline/search';
+export * from './pipeline/tax-wording';
 export * from './pipeline/web-address';
 export * from './pipeline/wikidata';
 export * from './ranking/feature-ranking';

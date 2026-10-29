@@ -24,6 +24,9 @@ apps/api/public/*
 apps/web/public/data/
 apps/web/public/icons/
 
+# The discovery pipeline's working files: pages read, screenshots, extraction requests (BLUEPRINT §6.5).
+.pipeline/
+
 # Environment
 .env
 .env.*
