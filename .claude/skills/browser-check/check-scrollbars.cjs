@@ -253,17 +253,18 @@ const fxRates = {
           dialogBar.contrast >= 3,
         JSON.stringify(dialogBar),
       );
-      // Its Card currency menu: a long panel that scrolls.
-      await dialog
-        .locator('mat-form-field', { has: page.locator('mat-label', { hasText: 'Card currency' }) })
-        .locator('.mat-mdc-text-field-wrapper')
-        .click();
-      const panel = page.locator('.mat-mdc-select-panel');
+      // Its Card currency menu, a menu you can type in since M4.8: with nothing typed, a long list that scrolls.
+      await dialog.locator('ss-choice-field[data-label="Card currency"] input').click();
+      const panel = page.locator('.mat-mdc-autocomplete-panel');
       await panel.waitFor();
       await sleep(600);
-      const panelBar = await scrollbarOf(page, '.mat-mdc-select-panel', '.mat-mdc-select-panel');
+      const panelBar = await scrollbarOf(
+        page,
+        '.mat-mdc-autocomplete-panel',
+        '.mat-mdc-autocomplete-panel',
+      );
       check(
-        `${label}: the select panel's scrollbar is thin and themed, at least 3:1 (${panelBar?.contrast}:1)`,
+        `${label}: the menu's scrollbar is thin and themed, at least 3:1 (${panelBar?.contrast}:1)`,
         panelBar?.width === 'thin' &&
           panelBar?.color === `${panelBar?.thumb} rgba(0, 0, 0, 0)` &&
           panelBar.contrast >= 3,

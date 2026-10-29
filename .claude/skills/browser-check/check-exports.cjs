@@ -4,8 +4,8 @@
 // In both themes at 1280 and 360 px, keyboard only:
 // - List view's Export menu: each format downloads with this list only. The CSV has a byte order mark, its header and
 //   a row per item with live tags only; the workbook parses (exceljs) with Summary, the list's sheet and Payments; the
-//   JSON holds the list, its items and the live tag; the text names the list and its items; the .ics has an all-day
-//   event per charge, Crave's in every one of 12 months. "Saved <name>" follows each.
+//   JSON holds the list, its items and the live tag; the text names the list and its items; the .ics has a repeating
+//   all-day event per subscription (M7.12), Crave's on each month's 31st or last day. "Saved <name>" follows each.
 // - The Calendar's Export to file: the main button's .ics for the lists shown, the menu's payment schedule (.csv, in
 //   date order) and Excel (both lists' sheets).
 // - Sync calendar: each app downloads the .ics and opens its steps, focus on the heading; Escape closes them, with focus
@@ -283,13 +283,14 @@ async function workbook({ bytes }) {
   return book;
 }
 
-/** Each VEVENT's DTSTART (YYYYMMDD) and SUMMARY, unfolded. */
+/** Each VEVENT's DTSTART (YYYYMMDD), SUMMARY and RRULE, unfolded. */
 function events({ bytes }) {
   const text = bytes.toString('utf8').replace(/\r\n[ \t]/g, '');
   return [...text.matchAll(/BEGIN:VEVENT\r\n([\s\S]*?)END:VEVENT/g)].map(([, body]) => ({
     start: /DTSTART;VALUE=DATE:(\d{8})/.exec(body)?.[1],
     end: /DTEND;VALUE=DATE:(\d{8})/.exec(body)?.[1],
     summary: /SUMMARY:(.*)/.exec(body)?.[1],
+    rule: /RRULE:(.*)/.exec(body)?.[1],
   }));
 }
 
@@ -464,14 +465,19 @@ async function listView(page, viewport, label, everyFormat) {
   const calendar = events(files.ics);
   const craves = calendar.filter((event) => event.summary === 'Crave: $23.10');
   check(
-    `${label}: the .ics has an all-day event per charge, this list only`,
-    calendar.length === 24 && calendar.every((event) => event.start && event.end),
-    `${calendar.length} events`,
+    `${label}: the .ics has a repeating all-day event per subscription, this list only (M7.12)`,
+    calendar.length === 2 &&
+      calendar.every(
+        (event) => event.start && event.end && event.rule?.startsWith('FREQ=MONTHLY;'),
+      ),
+    calendar.map((event) => `${event.summary} ${event.start} ${event.rule}`).join(' | '),
   );
   check(
-    `${label}: the plan billed on the 31st has an event in every month`,
-    craves.map((event) => event.start.slice(0, 6)).join() === next12Months().join(),
-    craves.map((event) => event.start).join(' '),
+    `${label}: the plan billed on the 31st repeats on each month's 31st, or its last day`,
+    craves.length === 1 &&
+      craves[0].start.slice(0, 6) === next12Months()[0] &&
+      craves[0].rule === 'FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=28,29,30,31;BYSETPOS=-1',
+    craves.map((event) => `${event.start} ${event.rule}`).join(' '),
   );
   await page.keyboard.press('Escape');
 }
@@ -486,8 +492,12 @@ async function calendarPage(page, viewport, label, everyFormat) {
   check(
     `${label}: Export to file's main button: the .ics for every list shown`,
     /^simply-sub-payments-\d{4}-\d\d-\d\d\.ics$/.test(ics.name) &&
-      calendar.length === 25 &&
-      calendar.some((event) => event.summary === 'Renew Mullvad VPN: ≈ $94.16'),
+      calendar.length === 3 &&
+      calendar.some(
+        (event) =>
+          event.summary === 'Renew Mullvad VPN: ≈ $94.16' &&
+          event.rule === 'FREQ=YEARLY;INTERVAL=1;BYMONTH=1;BYMONTHDAY=20',
+      ),
     `${ics.name}: ${calendar.length} events`,
   );
   check(`${label}: "Saved" names the .ics`, await snackBar(page, ics.name));

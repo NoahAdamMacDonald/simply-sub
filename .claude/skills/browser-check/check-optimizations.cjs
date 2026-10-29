@@ -9,8 +9,9 @@
 //   Suggested, Worth a look), each card's changes, saving, Apply and Dismiss, and the rules' tooltip on Tab;
 // - Dismiss by Enter: the card gone, focus on the next card's heading, the snackbar; Show dismissed by Space bringing it
 //   back with Show again; a reload keeping it dismissed; List view's count one less;
-// - Apply by Enter: it stays on the page (M8.4), then Review and save opens the editor, the change on the list's draft in
-//   IndexedDB, the saved items unchanged.
+// - Apply by Enter: it stays on the page (M8.4), then Review changes (M8.6) lists it like a diff, with its Undo and the
+//   back button to Optimizations, and Open in the editor shows the change on the list's draft in IndexedDB, the saved
+//   items unchanged.
 // Then light at 1280 px: a list of 14 items, which the Web Worker optimizes.
 // With axe on the page, the tooltip, the snackbar and List view, no horizontal scroll, and screenshots.
 // Usage: node check-optimizations.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
@@ -468,12 +469,13 @@ const linkCount = async (page) => {
       await optimize(page).locator('h1').click();
       const applied = (await tabTo(page, 'button', /^Apply: /)).replace(/^Apply: /, '');
       await page.keyboard.press('Enter');
-      // Since M8.4 Apply stays, for more to follow, with Review and save, which opens the editor.
+      // Since M8.4 Apply stays, for more to follow; since M8.6 with Review changes, a page of its own.
       const review = optimize(page).locator('.unsaved a.review');
       await review.waitFor({ timeout: 20000 });
       check(
-        `${label}: Apply stays on the page, with Review and save (M8.4)`,
-        /\/optimize$/.test(new URL(page.url()).pathname),
+        `${label}: Apply stays on the page, with Review changes (M8.6)`,
+        /\/optimize$/.test(new URL(page.url()).pathname) &&
+          (await review.textContent()).trim() === 'Review changes',
       );
       await until('focus moved on', () =>
         page.evaluate(
@@ -483,7 +485,30 @@ const linkCount = async (page) => {
         ),
       );
       await optimize(page).locator('h1').click();
-      await tabTo(page, 'link', /^Review and save$/);
+      await tabTo(page, 'link', /^Review changes$/);
+      await page.keyboard.press('Enter');
+      await until('Review changes', async () =>
+        /\/lists\/[^/]+\/optimize\/review$/.test(new URL(page.url()).pathname),
+      );
+      const reviewPage = page.locator('ss-review-changes-page');
+      await reviewPage.locator('li.change').first().waitFor({ timeout: 20000 });
+      const headings = await reviewPage.locator('li.change h2').allTextContents();
+      const lines = await reviewPage
+        .locator('.lines li')
+        .evaluateAll((items) => items.map((item) => item.textContent.replace(/\s+/g, ' ').trim()));
+      check(
+        `${label}: Review changes lists "${applied}" with what it does, its Undo, and the back button to Optimizations`,
+        headings.map((heading) => heading.trim()).join(' | ') === applied &&
+          lines.length > 0 &&
+          (await reviewPage.getByRole('button', { name: `Undo: ${applied}` }).count()) === 1 &&
+          (await reviewPage.locator('ss-page-header a').first().getAttribute('href')) ===
+            `/lists/${LIST}/optimize`,
+        `${headings.join(' | ')} / ${lines.join(' | ')}`,
+      );
+      await noSideScroll(page, viewport, `${label} Review changes`);
+      await page.screenshot({ path: shot('review-changes'), fullPage: true });
+      await axeCheck(page, `${label} Review changes`);
+      await tabTo(page, 'link', /^Open in the editor$/);
       await page.keyboard.press('Enter');
       await until('the editor', async () =>
         /\/lists\/[^/]+\/edit$/.test(new URL(page.url()).pathname),

@@ -610,9 +610,25 @@ async function shownValue(page, selector) {
         `${endsOn} / ${await focusedName(page)}`,
       );
 
+      // With an end date, the checkbox says it renews until then and Ends on's hint that it stops (M6.19).
+      const endsHint = await itemDialog(page)
+        .locator('mat-form-field', { hasText: 'Ends on' })
+        .locator('mat-hint')
+        .textContent();
+      const renews = await itemDialog(page)
+        .locator('mat-checkbox', { hasText: 'Auto-renews' })
+        .textContent();
+      check(
+        `${label}: with an end date, "Auto-renews until it ends", and Ends on's hint "It stops then: no renewal after" (M6.19)`,
+        renews.trim() === 'Auto-renews until it ends' &&
+          endsHint.trim() === 'It stops then: no renewal after',
+        `${renews.trim()} / ${endsHint.trim()}`,
+      );
       await keyTo(
         page,
-        () => document.activeElement?.closest('mat-checkbox')?.textContent.trim() === 'Auto-renews',
+        () =>
+          document.activeElement?.closest('mat-checkbox')?.textContent.trim() ===
+          'Auto-renews until it ends',
         'Tab',
         10,
       );

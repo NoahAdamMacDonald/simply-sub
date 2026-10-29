@@ -8,7 +8,7 @@
 //   way to change it;
 // - the item dialog (P6): ranks shared with the provider's other plan, saved to both in the draft, and New tag's hex
 //   field with the colour picker following it;
-// - Optimizations (P14): Apply stays on the page, with Review and save and Undo;
+// - Optimizations (P14): Apply stays on the page, with Review changes (M8.6) and Undo;
 // - the Calendar (P10): the grid keeps its width when a day opens, Upcoming beside it, the compact grid and its
 //   bottom sheet on a phone, a back button from List view and none from the sidebar, and JSON and Text exports;
 // - Settings (P13): the 📍 dialog's menus typed in, and a tag's colour picker beside its hex field.
@@ -374,8 +374,8 @@ async function checkListView(page, label, viewport, shot) {
   const badge = await text(netflix.locator('ss-status-badge'));
   const mullvad = await text(page.locator(`li[data-item="${MULLVAD}"] ss-status-badge`));
   check(
-    `${label}: one that renews by itself says when, one renewed by hand "Renew by" (M6.12)`,
-    /^Active Auto-renews [A-Z][a-z]{2} 12$/.test(badge) && mullvad.includes('Renew by'),
+    `${label}: one that renews by itself says when, one renewed by hand "Manual · renew by" (M6.12, M7.11)`,
+    /^Active Auto-renews [A-Z][a-z]{2} 12$/.test(badge) && mullvad.includes('Manual · renew by'),
     `${badge} | ${mullvad}`,
   );
 
@@ -640,13 +640,13 @@ async function checkOptimizations(page, label, viewport, shot) {
   await page.locator('ss-optimizations-page .unsaved a.review').waitFor({ timeout: 15000 });
   await snackBar(page).waitFor();
   check(
-    `${label}: Apply stays on the page, with Review and save and "Applied:" with Undo (M8.4)`,
+    `${label}: Apply stays on the page, with Review changes and "Applied:" with Undo (M8.4, M8.6)`,
     page.url().endsWith(`/lists/${LIST}/optimize`) &&
       (await text(snackBar(page))).startsWith('Applied:') &&
       (await readTable(page, 'drafts')).length === 1,
     applied,
   );
-  await until('focus on a card or Review and save', () =>
+  await until('focus on a card or Review changes', () =>
     page.evaluate(
       () =>
         document.activeElement?.classList.contains('title') === true ||
@@ -654,7 +654,7 @@ async function checkOptimizations(page, label, viewport, shot) {
     ),
   );
   check(
-    `${label}: focus moves on to the next card (or Review and save)`,
+    `${label}: focus moves on to the next card (or Review changes)`,
     true,
     `${before} cards before`,
   );
@@ -666,15 +666,19 @@ async function checkOptimizations(page, label, viewport, shot) {
   await page.keyboard.press('Enter');
   await until('the draft dropped', async () => (await readTable(page, 'drafts')).length === 0);
   check(`${label}: Undo drops the draft the first Apply made`, true);
-  // Apply again, then Review and save opens the editor with it.
+  // Apply again, then Review changes (M8.6), whose Open in the editor opens the editor with it.
   await page.locator('ss-optimizations-page h1').click();
   await keyTo(page, buttonIn('ss-optimizations-page', 'Apply:', true));
   await page.keyboard.press('Enter');
   await page.locator('ss-optimizations-page .unsaved a.review').waitFor({ timeout: 15000 });
   await keyTo(page, () => document.activeElement?.id === 'review');
   await page.keyboard.press('Enter');
+  await page.waitForURL(new RegExp(`/lists/${LIST}/optimize/review$`));
+  await page.locator('ss-review-changes-page li.change').first().waitFor({ timeout: 20000 });
+  await keyTo(page, buttonIn('ss-review-changes-page', 'Open in the editor'));
+  await page.keyboard.press('Enter');
   await page.waitForURL(new RegExp(`/lists/${LIST}/edit$`));
-  check(`${label}: Review and save opens the editor`, true);
+  check(`${label}: Review changes, then Open in the editor, opens the editor`, true);
   await page.locator('li.item').first().waitFor({ timeout: 20000 });
   await discardEdits(page);
 }

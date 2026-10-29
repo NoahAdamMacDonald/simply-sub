@@ -380,12 +380,12 @@ async function openView(page, listId = LIST) {
       const statuses = await view(page)
         .locator('ss-item-card ss-status-badge')
         .evaluateAll((badges) => badges.map((badge) => badge.textContent.trim()));
-      // Mullvad renews by hand (M7.1): its badge says when, after its icon's ligature. Netflix renews by itself, and
-      // says when (M6.12).
+      // Mullvad renews by hand (M7.1): its badge says so in words (M7.11) and when, after its icon's ligature. Netflix
+      // renews by itself, and says when (M6.12).
       check(
-        `${label}: each card's status, Netflix's "Auto-renews", Mullvad's "Renew by", and Netflix's tag`,
+        `${label}: each card's status, Netflix's "Auto-renews", Mullvad's "Manual · renew by", and Netflix's tag`,
         statuses.join(' | ') ===
-          'Inactive · active from Dec 1, 2026 | Active Auto-renews Nov 12 | Activeautorenew Renew by Nov 12' &&
+          'Inactive · active from Dec 1, 2026 | Active Auto-renews Nov 12 | Activeautorenew Manual · renew by Nov 12' &&
           (
             await view(page).locator(`[data-item="${NETFLIX}"] ss-tag-chip`).textContent()
           ).trim() === 'Family',
