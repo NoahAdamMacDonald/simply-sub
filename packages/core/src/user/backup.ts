@@ -239,7 +239,9 @@ export interface BackupCounts {
   tags: number;
 }
 
-export function backupCounts(data: BackupData): BackupCounts {
+export function backupCounts(
+  data: Pick<BackupData, 'lists' | 'items' | 'customSubs' | 'rankings' | 'cards' | 'tags'>,
+): BackupCounts {
   const live = (records: readonly { deletedAt?: Timestamp }[]) =>
     records.filter((record) => record.deletedAt === undefined).length;
   return {

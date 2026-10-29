@@ -41,6 +41,7 @@ export const lockedTables = [
   'drafts',
   'dismissedSuggestions',
   'liveCalendar',
+  'sync',
 ] as const satisfies readonly UserTable[];
 export type LockedTable = (typeof lockedTables)[number];
 
@@ -64,6 +65,7 @@ export const lockPlainFields = {
   drafts: ['listId'],
   dismissedSuggestions: ['fingerprint', 'listId'],
   liveCalendar: ['key'],
+  sync: ['key'],
 } as const satisfies Record<LockedTable, readonly string[]>;
 
 /** The fields kept in plain text only, never sealed: the lock's own settings, so Lock after changes with no key. */

@@ -3036,6 +3036,55 @@ None.
   limits; expiry and the clean-up; the stored row holding no list name, amount, record id or secret; no chain or
   secret in a log) and the contract's examples, whose sealed copy is a real one from the code 0x00..0x1f, its bytes as
   `bodyBase64`.
+- **Sync in the app** (M10.9, `shared/sync/`): `SyncService`, started from `app.background.ts` once the `sync`
+  record is readable (sync on, the app unlocked), syncs on start, when back online, when a tab is shown again, 10 s
+  after a change to a synced table or the settings (`SyncRepository.changes()`), every 10 s while the tab is shown, and
+  on Sync now, one tab at a time (a Web Lock). A run reads the chain with `If-None-Match` (a 304 when nothing changed),
+  opens and reads the copy, merges, writes what it took in one transaction, and sends a new version with `If-Match`,
+  reading and merging again up to three times if another device wrote first. The poll every 10 s, not 15, keeps "an
+  edit shows on the other device within 15 s" with a margin; each is a 304 costing one D1 row read. The devices'
+  list is the chain's, in memory: after a reload it fills in with the first sync, a moment later.
+- **The sync record** (M10.9, core's `user/sync-record.ts`, Dexie v5): the code (base64), this device's id and name
+  (`defaultDeviceName` from the browser: "Edge on Windows"), the version last read or written, when it last synced,
+  and what stopped sync (`gone`, `newer`, `unopenable`). The app lock seals it; backups and sync leave it out; Turn
+  off deletes it outright (a `TransientTable`, as drafts are), since it was this device's alone.
+- **Joining takes the chain's shared settings** (M10.9): a new device has just made its own in the first run, so by
+  their time they'd win the merge and overwrite every device's. Join (Merge or Replace) takes the copy's shared
+  settings first, then merges the records.
+- **The words and the keys apart** (M10.9): `sync-code.ts` (the words, with `@scure/bip39`'s word list) loads only
+  with the dialogs that show or take a code; `sync-crypto.ts` (keys, seal) with the service. The QR code is
+  `@paulmillr/qr` 0.3.0 (exact, no dependencies), its raw modules drawn as one SVG path (`ss-qr-code`), dark on light
+  in either theme (`--ss-qr-ink`, `--ss-qr-paper`), with a 4-module quiet zone.
+- **The shared time in the initial bundle** (M10.9): the settings repository stamps `sharedUpdatedAt` on every write
+  through core's `withSharedTime`, which moves it only when a shared value changed. A first version imported it from
+  `sync.ts`, which brought Zod and every record schema into the initial bundle (671 kB): `shared-settings.ts` holds
+  only the field list and that function, with no Zod, as `stamps.ts` does for the repositories.
+- **Bundle** (M10.9): 499.65 kB initial (499.14 before): the shared settings' list and `withSharedTime`, and
+  `oneAtATime`, now in a chunk shared with sync's.
+- **A check that races the worker's own** (M10.6, found by M10.9's batch run): Angular's worker answers "no new
+  version" to a check for a version it already holds, and its own check after a page load holds one as soon as it's
+  downloaded: a moment before it says so (`VERSION_READY`), and before the page has decided between a prompt and a
+  move (`runsLatest`, a fetch). So Settings said "You have the latest version." as the prompt appeared. `AppUpdates`
+  now follows the worker's news: a version detected keeps a check waiting until it's offered or run, or its download
+  fails, and `ready` remembers a version offered, which Settings' message goes by too. The wait ends with
+  `takeUntil(timer())`, not rxjs's `timeout`: the initial bundle's rxjs chunk holds every rxjs function the app uses,
+  lazy chunks' included, and `timeout` took it to 500.40 kB. The same runs found that `wrangler dev` serves a file new
+  to `public/` about half a second after it appears, and the SPA's `index.html` until then ("Failed to load module
+  script" for a new `main-*.js`), and that on Windows its watcher stops for good when it meets a file still being
+  written (`EBUSY`: a copy rewriting the 940 kB exceljs chunk), after which every new file gets `index.html`. The
+  batch's `serve()` puts a build over the last one rather than deleting it first, writing only new and changed files,
+  each moved in whole from beside `public/`, and waits until every file in its `ngsw.json` is served as built.
+- **Delete all data and Import** (M10.9): Delete all data asks whether to delete the synced copy too (sync turns off
+  here either way); Import's Replace waits until sync is off, since sync would bring back what Replace takes away.
+- **A disabled button still clicks** (M10.9): Material's `disabledInteractive` (a button kept focusable while
+  disabled) gives a `<button>` `aria-disabled` and stops clicks only on an anchor: a button's `(click)` and a form's
+  submit still run. Import's Replace with sync on and the join dialog's buttons while it's busy check in their
+  handlers, and their tests click them. The older dialogs' busy buttons (18 uses in 11 templates) rely on it too:
+  worth the same check.
+- **Checks** (M10.9): web 769 tests, core 1812, API 290, bot 60. Under `wrangler dev`: `check-m10-offline-sync.cjs`
+  (113: offline, the updates, install, and sync between two browsers both ways; its sync part again, 45, after the
+  dialogs' guards); on `ng serve`, `check-settings.cjs` (81), `check-backup.cjs` (81, again after Import's guard) and
+  `check-app-lock.cjs` (159).
 - **Sync's keys** (M10.7, the crypto module's `sync-crypto.ts`): the code is 32 random bytes as BIP39's 24 English
   words (`@scure/bip39` 2.4.0, exact, which brings `@noble/hashes` 2.4.0); HKDF-SHA256 with an empty salt and the
   infos "simply-sub sync: chain id" (16 bytes), "…: auth secret" (32) and "…: copy key" (AES-256-GCM, not

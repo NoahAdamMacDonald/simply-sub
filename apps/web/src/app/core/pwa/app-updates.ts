@@ -7,9 +7,11 @@ import {
   computed,
   inject,
   signal,
+  untracked,
 } from '@angular/core';
 import type { SwUpdate } from '@angular/service-worker';
 import { catalogCheckDue, type Timestamp } from '@simply-sub/core';
+import { BehaviorSubject, filter, firstValueFrom, takeUntil, timer } from 'rxjs';
 import { ClockService } from '../clock/clock-service';
 import { StorageService } from '../storage/storage-service';
 
@@ -45,20 +47,32 @@ export class AppUpdates {
 
   /** Whether the app can check for a new version: its worker is running. */
   readonly available = computed(() => this.worker() !== undefined);
+  /** A new version is ready and offered: what Settings says too, whichever check found it. */
+  readonly ready = signal(false);
+  /**
+   * A version the worker found, until it's offered or run, or fails to download: what a check that overlaps the
+   * worker's own waits for.
+   */
+  private readonly pending = new BehaviorSubject<string | undefined>(undefined);
 
   /** Starts with the worker, which has just checked for a new version itself. */
   watch(update: SwUpdate): void {
     this.worker.set(update);
     this.lastCheckedAt = this.clock.now();
     update.versionUpdates.subscribe(async (event) => {
+      if (event.type === 'VERSION_DETECTED') this.pending.next(event.version.hash);
+      if (event.type === 'VERSION_INSTALLATION_FAILED') this.pending.next(undefined);
       if (event.type !== 'VERSION_READY') return;
+      this.pending.next(event.latestVersion.hash);
       if (await this.runsLatest()) {
         await update.activateUpdate().catch(() => undefined);
-        return;
+      } else {
+        // Reloading starts the app afresh: locked, when the lock is on (P15). A list being edited is a draft, kept.
+        const locks = this.storage.lock() === 'unlocked' ? ' Reloading locks the app.' : '';
+        this.ready.set(true);
+        this.offerReload(`A new version of Simply Sub is ready.${locks}`);
       }
-      // Reloading starts the app afresh: locked, when the lock is on (P15). A list being edited is a draft, kept.
-      const locks = this.storage.lock() === 'unlocked' ? ' Reloading locks the app.' : '';
-      this.offerReload(`A new version of Simply Sub is ready.${locks}`);
+      this.pending.next(undefined);
     });
     update.unrecoverable.subscribe(() =>
       this.offerReload('Simply Sub needs to reload to keep working.'),
@@ -83,7 +97,20 @@ export class AppUpdates {
     if (!navigator.onLine) return 'offline';
     this.lastCheckedAt = this.clock.now();
     try {
-      return (await update.checkForUpdate()) ? 'ready' : 'current';
+      if (await update.checkForUpdate()) return 'ready';
+      // The worker answers "none" for a version it already holds: its own check, after a page load, may have just
+      // downloaded it, with the news still on its way. Wait for that, as this check would have.
+      if (this.pending.value !== undefined) {
+        await firstValueFrom(
+          this.pending.pipe(
+            filter((hash) => hash === undefined),
+            // Not rxjs's timeout: the initial bundle holds every rxjs function the app uses, and that one takes it
+            // past 500 kB.
+            takeUntil(timer(60_000)),
+          ),
+        ).catch(() => undefined);
+      }
+      return untracked(this.ready) ? 'ready' : 'current';
     } catch {
       return 'failed';
     }

@@ -16,6 +16,7 @@ import {
   type BackupPayload,
   type Settings,
   type SubscriptionList,
+  type SyncRecord,
 } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { encryptText } from '../../core/crypto/passphrase-crypto';
@@ -27,10 +28,13 @@ import {
   until,
   type TestStorage,
 } from '../../core/storage/storage.testing';
+import { ConfirmService } from '../../shared/confirm/confirm-service';
+import { SyncService } from '../../shared/sync/sync-service';
 import { SettingsPage } from './settings-page';
 
 // Settings' Your data (P13): Export, Import (Replace, Merge, a passphrase, a refused file) and Delete all data, on a
-// fake IndexedDB, for an Ontarian with one list. The clock says Oct 25, 2026.
+// fake IndexedDB, for an Ontarian with one list; then both with sync on (M10.9), with a stand-in for SyncService. The
+// clock says Oct 25, 2026.
 
 const ontario: Settings = {
   key: 'settings',
@@ -50,6 +54,17 @@ const family: SubscriptionList = {
   ...work,
   id: '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4e',
   name: 'Family',
+};
+
+/** Sync on in this browser. */
+const synced: SyncRecord = {
+  key: 'sync',
+  seed: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
+  deviceId: '0192f1d0-0000-7000-8000-00000000000a',
+  deviceName: 'Edge on Windows',
+  version: '3',
+  syncedAt: '2026-10-25T11:58:00.000Z',
+  updatedAt: '2026-10-25T11:58:00.000Z',
 };
 
 /** A backup with Family only, and budgets in its settings. */
@@ -72,10 +87,13 @@ describe('Your data', () => {
   let fixture: ComponentFixture<SettingsPage>;
   let loader: HarnessLoader;
   let saved: { name: string; text: string }[];
+  /** How many sync records were stored when the synced copy was deleted. */
+  let deleteCopy: ReturnType<typeof vi.fn<() => Promise<number>>>;
 
   beforeEach(async () => {
     storage = testStorage();
     saved = [];
+    deleteCopy = vi.fn(async () => (await storedRows(storage.indexedDB, 'sync')).length);
     await plantRows(storage.indexedDB, 'settings', [ontario]);
     await plantRows(storage.indexedDB, 'lists', [work]);
     // jsdom has no Blob URLs: what a download would save is kept here.
@@ -101,6 +119,18 @@ describe('Your data', () => {
             version: signal('37f6573'),
             generatedAt: signal('2026-10-22T12:00:00Z'),
             check: async () => 'current',
+          },
+        },
+        // Sync's card is on the page, but there's no server to sync with.
+        {
+          provide: SyncService,
+          useValue: {
+            record: signal(undefined),
+            syncing: signal(false),
+            snag: signal(undefined),
+            devices: signal([]),
+            start: () => undefined,
+            deleteCopy,
           },
         },
         provideRouter([]),
@@ -300,5 +330,64 @@ describe('Your data', () => {
     expect(navigate).toHaveBeenCalledWith('/');
     expect(await storedRows(storage.indexedDB, 'settings')).toEqual([]);
     expect(await storedRows(storage.indexedDB, 'lists')).toEqual([]);
+  });
+
+  describe('with sync on (M10.9)', () => {
+    beforeEach(() => plantRows(storage.indexedDB, 'sync', [synced]));
+
+    /** Deletes everything, with or without the synced copy, then waits until it has gone Home. */
+    async function deleteAll(withSyncedCopy: boolean): Promise<void> {
+      const navigate = vi.spyOn(TestBed.inject(Router), 'navigateByUrl');
+      await press('Delete all data…');
+      await until(() => dialogText()?.includes('Delete the synced copy too') === true);
+      expect(dialogText()).toContain('Sync turns off here either way.');
+      if (withSyncedCopy) {
+        await (
+          await loader.getHarness(MatCheckboxHarness.with({ label: 'Delete the synced copy too' }))
+        ).check();
+      }
+      await (await input('Type DELETE to confirm')).setValue('DELETE');
+      await (
+        await loader.getHarness(
+          MatButtonHarness.with({ text: 'Delete all data', selector: '.danger' }),
+        )
+      ).click();
+      await until(() => navigate.mock.calls.length > 0);
+    }
+
+    it('deletes the synced copy too when asked, while its code is still here', async () => {
+      await deleteAll(true);
+      expect(deleteCopy).toHaveBeenCalledTimes(1);
+      expect(await deleteCopy.mock.results[0].value).toBe(1);
+      expect(await storedRows(storage.indexedDB, 'sync')).toEqual([]);
+      expect(await storedRows(storage.indexedDB, 'lists')).toEqual([]);
+    });
+
+    it('leaves the synced copy to the other devices otherwise, and still turns sync off here', async () => {
+      await deleteAll(false);
+      expect(deleteCopy).not.toHaveBeenCalled();
+      expect(await storedRows(storage.indexedDB, 'sync')).toEqual([]);
+      expect(await storedRows(storage.indexedDB, 'lists')).toEqual([]);
+    });
+
+    it('imports by Merge only, saying why Replace waits until sync is off', async () => {
+      await press('Import backup');
+      await until(() => dialogText()?.startsWith('Import a backup') === true);
+      await pickFile(JSON.stringify(plainBackup(payload)));
+      await until(() => dialogText()?.includes('With sync on, only Merge works') === true);
+      const replace = await loader.getHarness(MatButtonHarness.with({ text: 'Replace' }));
+      expect(await replace.isDisabled()).toBe(true);
+      expect(await (await replace.host()).getAttribute('aria-describedby')).toBe(
+        'import-sync-hint',
+      );
+      // Material's disabledInteractive leaves a button's clicks to the button.
+      const confirm = vi.spyOn(TestBed.inject(ConfirmService), 'confirm');
+      await replace.click();
+      expect(confirm).not.toHaveBeenCalled();
+
+      await press('Merge');
+      await until(() => snackBar() === 'Merged 1 record from the backup');
+      expect((await storedLists()).sort()).toEqual(['Family', 'Work Related']);
+    });
   });
 });

@@ -7,7 +7,6 @@ import {
   sharedSettings,
   syncSchemaVersion,
   syncTables,
-  touchesSharedSettings,
   withSharedSettings,
   type LocalSync,
   type Settings,
@@ -250,12 +249,6 @@ describe('mergeSync', () => {
       // A copy whose settings carry one of them is refused that part: each device keeps its own.
       const reading = readSyncCopy({ ...copy(), settings: { ...shared, theme: 'dark' } });
       expect(reading.kind === 'copy' && reading.copy.settings).toBeUndefined();
-    });
-
-    it('say which changes touch them', () => {
-      expect(touchesSharedSettings({ monthlyBudget: 250 })).toBe(true);
-      expect(touchesSharedSettings({ theme: 'light' })).toBe(false);
-      expect(touchesSharedSettings({ theme: 'light', currency: 'USD' })).toBe(true);
     });
   });
 });

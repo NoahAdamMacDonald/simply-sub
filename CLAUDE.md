@@ -36,7 +36,9 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
   - imports and stored records are validated with Zod;
   - backups can be encrypted, and an optional passphrase lock encrypts data at rest (PBKDF2-SHA256 600k →
     AES-256-GCM).
-  Never encrypt with a key the app stores itself.
+  Never encrypt with a key the app stores itself. Sync (M10.7–M10.9) is the one kind that differs: its copy is sealed
+  with keys derived from the sync code, which the device keeps (sealed by the app lock when it's on), so the copy is
+  safe from the server, not from the device.
 - Multi-region prices; the user's region is the default; non-native prices are FX-converted and marked with an icon.
   Regions are ISO 3166-1 codes (`GB`, not `UK`), the `EU` group or `GLOBAL`. Whether something is sold in a region
   is `availability` in core: offered, not offered or unknown (BLUEPRINT §4.7).

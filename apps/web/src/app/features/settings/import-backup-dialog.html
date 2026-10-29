@@ -63,6 +63,12 @@
           Merge keeps what’s here and takes what’s newer in the backup. Replace swaps everything
           here for the backup.
         </p>
+        @if (syncOn()) {
+          <p id="import-sync-hint" class="hint">
+            With sync on, only Merge works: sync would bring back what Replace takes away. Turn off
+            sync on this device to replace.
+          </p>
+        }
       }
     }
   }
@@ -112,7 +118,8 @@
           matButton="filled"
           type="button"
           disabledInteractive
-          [disabled]="busy()"
+          [disabled]="busy() || syncOn()"
+          [attr.aria-describedby]="syncOn() ? 'import-sync-hint' : null"
           (click)="replace()"
         >
           Replace

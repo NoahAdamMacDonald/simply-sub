@@ -9,7 +9,9 @@ import {
   type UserRecords,
 } from './records';
 import { addSubdivisionIssue, settingsSchema, type Settings } from './settings';
+import { sharedSettingsFields } from './shared-settings';
 import { nextUpdatedAt } from './stamps';
+import { maxDeviceNameLength } from './sync-record';
 
 // Device sync (PROJECT-PLAN M10.7–M10.9, BLUEPRINT §11.4): the copy of the user's data a sync chain keeps, which each
 // device seals with a key only the chain's devices have, and how a device merges it with its own. A record merges by
@@ -35,19 +37,6 @@ export type SyncData = { [T in SyncTable]: UserRecords[T][] };
 /** The version of a copy's shape: the backup's, so a copy from an older app is migrated as a backup is. */
 export const syncSchemaVersion = backupSchemaVersion;
 
-/** The settings every device shares: where the user is, the tax, the budgets, Search's defaults and dismissed warnings. */
-export const sharedSettingsFields = [
-  'country',
-  'subdivision',
-  'currency',
-  'salesTaxPercent',
-  'monthlyBudget',
-  'annualBudget',
-  'searchSoldOnly',
-  'searchAllResellers',
-  'dismissedBudgetWarnings',
-] as const satisfies readonly (keyof Settings)[];
-
 const settingsShape = settingsSchema.shape;
 
 /** A copy's shared settings, with when one of them last changed. */
@@ -66,9 +55,6 @@ export const sharedSettingsSchema = z
   })
   .superRefine(addSubdivisionIssue);
 export type SharedSettings = z.infer<typeof sharedSettingsSchema>;
-
-/** The longest name a device can have. */
-export const maxDeviceNameLength = 60;
 
 /** A device on a chain: its id, the name its user gave it, and when it last synced. */
 export const syncDeviceSchema = z.strictObject({
@@ -140,7 +126,9 @@ export function withSharedSettings(
   now: Timestamp,
 ): Settings {
   const own = Object.fromEntries(
-    Object.entries(settings).filter(([field]) => !isSharedField(field)),
+    Object.entries(settings).filter(
+      ([field]) => !(sharedSettingsFields as readonly string[]).includes(field),
+    ),
   );
   const { updatedAt, ...fields } = shared;
   return {
@@ -149,11 +137,6 @@ export function withSharedSettings(
     sharedUpdatedAt: updatedAt,
     updatedAt: nextUpdatedAt(settings.updatedAt, now),
   } as Settings;
-}
-
-/** Whether a change to the settings changes one every device shares, which moves `sharedUpdatedAt` on. */
-export function touchesSharedSettings(changes: Partial<Settings>): boolean {
-  return Object.keys(changes).some(isSharedField);
 }
 
 /**
@@ -288,19 +271,6 @@ function later<T extends Stamped>(a: T, b: T): T {
   return canonical(a) >= canonical(b) ? a : b;
 }
 
-function same(a: unknown, b: unknown): boolean {
-  return canonical(a) === canonical(b);
-}
-
-/** JSON with every object's keys sorted, so two devices that store a record's fields in another order agree on it. */
-function canonical(value: unknown): string {
-  return JSON.stringify(value, (_key, field: unknown) =>
-    isObject(field)
-      ? Object.fromEntries(Object.entries(field).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)))
-      : field,
-  );
-}
-
 /** A table's records with one per key, the latest, should a copy hold two. */
 function newestByKey<T extends Stamped>(table: SyncTable, records: readonly T[]): T[] {
   const key = userRecordKeys[table];
@@ -322,10 +292,6 @@ function newestDevices(devices: readonly SyncDevice[]): SyncDevice[] {
   return [...byId.values()]
     .sort((a, b) => (a.syncedAt < b.syncedAt ? 1 : a.syncedAt > b.syncedAt ? -1 : 0))
     .slice(0, maxSyncDevices);
-}
-
-function isSharedField(field: string): boolean {
-  return (sharedSettingsFields as readonly string[]).includes(field);
 }
 
 function keyOf(record: object, key: string): string {
@@ -353,3 +319,17 @@ export const syncWriteBodySchema = z.strictObject({
   meta: z.strictObject({}),
 });
 export type SyncWriteBody = z.infer<typeof syncWriteBodySchema>;
+
+/** Whether two values are the same, whatever order their objects' keys are in. */
+function same(a: unknown, b: unknown): boolean {
+  return canonical(a) === canonical(b);
+}
+
+/** JSON with every object's keys sorted, so two devices that store a record's fields in another order agree on it. */
+function canonical(value: unknown): string {
+  return JSON.stringify(value, (_key, field: unknown) =>
+    isObject(field)
+      ? Object.fromEntries(Object.entries(field).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)))
+      : field,
+  );
+}

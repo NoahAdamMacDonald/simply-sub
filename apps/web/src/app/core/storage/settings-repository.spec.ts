@@ -38,7 +38,13 @@ describe('SettingsRepository', () => {
 
   it('saves the settings as one record', async () => {
     const saved = await repository.save(fields);
-    const expected = { ...fields, key: 'settings', updatedAt: '2026-10-25T12:00:00.000Z' };
+    const expected = {
+      ...fields,
+      key: 'settings',
+      // New settings: every shared one has just changed (M10.7).
+      sharedUpdatedAt: '2026-10-25T12:00:00.000Z',
+      updatedAt: '2026-10-25T12:00:00.000Z',
+    };
     expect(saved).toEqual(expected);
     await until(() => repository.settings() !== undefined);
     expect(repository.settings()).toEqual(expected);
@@ -56,6 +62,8 @@ describe('SettingsRepository', () => {
       currency: 'CAD',
       theme: 'dark',
       key: 'settings',
+      // The budget, a shared setting, went too.
+      sharedUpdatedAt: '2026-10-25T12:00:00.001Z',
       // The clock went back, so updatedAt moves a millisecond forward.
       updatedAt: '2026-10-25T12:00:00.001Z',
     });
@@ -77,7 +85,12 @@ describe('SettingsRepository', () => {
     await repository.save(fields);
     await until(() => repository.settings() !== undefined);
     expect(await storedRows(storage.indexedDB, 'settings')).toEqual([
-      { ...fields, key: 'settings', updatedAt: '2026-10-25T12:00:00.000Z' },
+      {
+        ...fields,
+        key: 'settings',
+        sharedUpdatedAt: '2026-10-25T12:00:00.000Z',
+        updatedAt: '2026-10-25T12:00:00.000Z',
+      },
     ]);
   });
 
@@ -92,9 +105,21 @@ describe('SettingsRepository', () => {
         currency: 'CAD',
         theme: 'dark',
         key: 'settings',
+        // The budget, shared, was cleared with it.
+        sharedUpdatedAt: '2026-10-26T08:00:00.000Z',
         updatedAt: '2026-10-26T08:00:00.000Z',
       });
       expect(await storedRows(storage.indexedDB, 'settings')).toEqual([updated]);
+    });
+
+    it('keeps when the shared settings last changed through a change to the theme alone (M10.7)', async () => {
+      await repository.save(fields);
+      storage.clock.time = '2026-10-26T08:00:00.000Z';
+      const updated = await repository.update({ theme: 'dark' });
+      expect(updated).toMatchObject({
+        sharedUpdatedAt: '2026-10-25T12:00:00.000Z',
+        updatedAt: '2026-10-26T08:00:00.000Z',
+      });
     });
 
     it('writes nothing before the first run', async () => {

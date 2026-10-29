@@ -1,0 +1,47 @@
+p {
+  margin: 0 0 12px;
+}
+
+// The words beside the QR code, under it on a phone.
+.code {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  align-items: flex-start;
+}
+
+.words {
+  flex: 1 1 280px;
+  margin: 0;
+  padding-left: 2.2em;
+  columns: 2;
+  column-gap: 2.4em;
+  font: var(--mat-sys-body-large);
+
+  li {
+    break-inside: avoid;
+    padding: 1px 0;
+  }
+
+  li::marker {
+    color: var(--ss-text-muted);
+  }
+}
+
+ss-qr-code {
+  flex: 0 1 200px;
+}
+
+.copy {
+  margin-top: 16px;
+}
+
+// A live region, so it stays in the page while empty, when it takes no room.
+.status {
+  margin: 0;
+  color: var(--ss-text-muted);
+
+  &:not(:empty) {
+    margin-top: 12px;
+  }
+}

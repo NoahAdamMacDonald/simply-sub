@@ -500,7 +500,8 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   runs a new build, so only an open tab is prompted, which the hourly check or Check for updates finds. Tested in
   `app-updates.spec.ts`, `install-offer.spec.ts`, `title-bar.spec.ts`, Settings' spec and the API's
   `web-manifest.spec.ts` (the manifest's and the metas' colours against `_tokens.scss`); `check-m10-offline-sync.cjs`
-  with two more builds (BLUEPRINT §14).
+  with two more builds (BLUEPRINT §14). Since M10.9 a check the worker answers "none" waits for a version its own
+  check has just downloaded, until the page has offered it or moved onto it.
 
 **M10.7 — Sync's code and merge** (BLUEPRINT §11.4, §11.5)
 - **The code:** 32 random bytes, shown as 24 BIP39 words (the last word carries a checksum) and a QR code of the
@@ -569,18 +570,27 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   - Problems in words: offline (it waits), the chain deleted from another device, a newer version of the app needed,
     a copy that won't open.
 - **`SyncService`** (lazy, started when sync is on, after unlocking): syncs on start, when back online, when a tab is
-  shown again, 10 s after a change to a synced table, and from Sync now; one tab at a time (a Web Lock, like the
-  catalog's check); reads with `If-None-Match`, merges, writes this device's changes in one transaction, then sends a
-  new version with `If-Match`, up to three tries.
+  shown again, 10 s after a change to a synced table, every 10 s while the tab is shown, and from Sync now; one tab at
+  a time (a Web Lock, like the catalog's check); reads with `If-None-Match`, merges, writes this device's changes in
+  one transaction, then sends a new version with `If-Match`, up to three tries.
 - **Stored:** a `sync` record (Dexie v5): the seed, this device's id and name, the last version and when. The app lock
   seals it; backups leave it out. Delete all data asks whether to delete the synced copy too; Import's Replace waits
   until sync is off (Merge works).
 - **Acceptance**
-  - [ ] Two browsers on `wrangler dev`: turned on in one and joined in the other by keyboard, an item added, edited or
+  - [x] Two browsers on `wrangler dev`: turned on in one and joined in the other by keyboard, an item added, edited or
         deleted on either shows on the other after Sync now, and within 15 s on its own
-  - [ ] Changes made offline on both, to different records, all survive; the theme stays per device
-  - [ ] Start over and Delete the synced copy leave the other browser saying what happened
-  - [ ] Keyboard only, both themes at 360 and 1280 px, axe with each dialog open, no horizontal scroll
+  - [x] Changes made offline on both, to different records, all survive; the theme stays per device
+  - [x] Start over and Delete the synced copy leave the other browser saying what happened
+  - [x] Keyboard only, both themes at 360 and 1280 px, axe with each dialog open, no horizontal scroll
+- **As built:** core's `user/sync-record.ts` (the record, `defaultDeviceName`) and `shared-settings.ts`
+  (`withSharedTime`, which the settings repository stamps every write with, Zod-free since it's in the initial
+  bundle); `SyncRepository` (Dexie v5); the crypto module's `sync-code.ts` (the words, apart from the keys, so only the
+  dialogs load the word list); `shared/sync/` (the client, `SyncService`), `shared/qr-code/` (`@paulmillr/qr` 0.3.0,
+  exact), and Settings' `ss-sync-setting` with its three dialogs (the code, Join, Rename). Polling is every 10 s, not
+  15, to keep "within 15 s" with a margin. Join takes the chain's shared settings, which a new device's first run would
+  otherwise outweigh. Tested in `sync-service.spec.ts` (against a stand-in server, another device's writes sealed with
+  core's functions), the card's and the join dialog's specs, and `check-m10-offline-sync.cjs`'s two browsers
+  (BLUEPRINT §14).
 
 **M10.10 — Price reports, the API and the bot** (BLUEPRINT §5.2, §5.4, §6.4)
 - **`POST /reports`:** a plan, the country, and what's wrong: a different price (amount, currency and period), not
@@ -1772,7 +1782,8 @@ own. A set feature asks for one or more of its values, as enum and number featur
 ```
 **Built so far:** the budgets, Appearance and 📍 (M4.2), each a card ("Location and currency" holds 📍 and the tax
 line under it), the Catalog line (M4.3), Your data (M6.9), Security (M6.10) and Custom tags (M6.11), after Budgets.
-The App group (M10.6) comes last. Local sync comes with Phase 5.
+The App group (M10.6) comes last. Sync between devices (M10.9) opens Your data, in the wireframe's "Create local sync"
+place.
 - **Your data** (M6.9):
   - **Export backup:** a dialog with "Protect with a passphrase" (at least 8 characters, typed twice). It downloads
     the file.
@@ -1828,7 +1839,19 @@ The App group (M10.6) comes last. Local sync comes with Phase 5.
   - Turning it off asks for the passphrase and decrypts everything. A wrong one says so and changes nothing.
   - With nothing saved (in-memory mode, P15) it's turned off and says why.
   - As built: BLUEPRINT §14.
-- Create local sync stays disabled until Phase 5 (M10.9).
+- **Sync between devices** (M10.9), first in Your data:
+  - Off: what it does and that the server can't read it, then [Turn on sync] and [Join with a code].
+  - Turn on: a new code's 24 words, numbered, with Copy, and its QR code, to keep first; [I've saved it] starts the
+    chain with this device's data.
+  - Join: the 24 words, each completed from its first letters as its box is left, or pasted at once; a mistyped word is
+    caught by the checksum; then what the synced copy holds and Merge (the default) or Replace, which asks first. Either
+    way the chain's shared settings come with it, and the theme stays this device's.
+  - On: "Synced 2 minutes ago" and [Sync now]; the devices, this one first with [Rename…]; [Show the code…],
+    [Start over with a new code…], [Turn off on this device…] and [Delete the synced copy…], each asking first.
+  - Stopped: why (the copy was deleted, it needs a newer app, or it won't open), with [Join with a code] or
+    [Check for updates], and [Turn off sync here…]. What holds a sync back for now (offline, busy, full) is said in
+    the status line, and sync tries again by itself.
+  - Delete all data asks whether to delete the synced copy too; Import's Replace waits until sync is off.
 
 **Since the feedback after M9:** the 📍 dialog's menus can be typed in (M6.16, as P1's), and a tag's colour can also
 come from the device's own colour picker beside Hex colour, each following the other (M6.15).

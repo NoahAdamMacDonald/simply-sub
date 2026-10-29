@@ -117,6 +117,15 @@ const records: Record<UserTable, readonly unknown[]> = {
       updatedAt: '2026-10-29T18:20:00.000Z',
     },
   ],
+  sync: [
+    {
+      key: 'sync',
+      seed: 'AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8=',
+      deviceId: '0192f1d0-0000-7000-8000-00000000000a',
+      deviceName: 'Work Laptop',
+      updatedAt: '2026-10-29T18:20:00.000Z',
+    },
+  ],
   catalogCache: [],
   fxRates: [
     {
@@ -148,6 +157,9 @@ const secrets = [
   'CA-AB',
   // The live calendar's manage key and link (M10.3).
   'Jd8f2LqP0zXn5Vt7Bc3HyA',
+  // Sync's code and this device's name (M10.9).
+  'AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8=',
+  'Work Laptop',
   'k7Qm2Zp9XvT4bN8cR1sW0a',
 ];
 

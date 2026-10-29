@@ -112,6 +112,46 @@ describe('AppUpdates', () => {
     }
   });
 
+  it('counts a version the worker’s own check found just before as ready, though its answer is "none"', async () => {
+    watch();
+    worker.versionUpdates.next(ready);
+    await settle();
+    expect(updates.ready()).toBe(true);
+    expect(await updates.check()).toBe('ready');
+  });
+
+  it('waits for a version the worker found itself and is still downloading, though its answer is "none"', async () => {
+    watch();
+    worker.versionUpdates.next({ type: 'VERSION_DETECTED', version: { hash: 'b2' } });
+    const checking = updates.check();
+    await settle();
+    worker.versionUpdates.next(ready);
+    expect(await checking).toBe('ready');
+  });
+
+  it('waits while the worker’s own check decides between a prompt and a move, though its answer is "none"', async () => {
+    // A page running the old version: whether it's the new one is read from the network, which takes a moment.
+    const main = document.createElement('script');
+    main.src = 'main-A1A1A1A1.js';
+    document.body.append(main);
+    let answer: (response: Response) => void = () => undefined;
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(() => new Promise<Response>((resolve) => (answer = resolve))),
+    );
+    try {
+      watch();
+      worker.versionUpdates.next({ type: 'VERSION_DETECTED', version: { hash: 'b2' } });
+      worker.versionUpdates.next(ready);
+      const checking = updates.check();
+      await settle();
+      answer(Response.json({ hashTable: { '/main-B2B2B2B2.js': 'y' } }));
+      expect(await checking).toBe('ready');
+    } finally {
+      main.remove();
+    }
+  });
+
   it('says that reloading locks the app when the lock is on', async () => {
     lock.set('unlocked');
     watch();

@@ -1,12 +1,10 @@
-import { entropyToMnemonic, mnemonicToEntropy } from '@scure/bip39';
-import { wordlist } from '@scure/bip39/wordlists/english.js';
 import { toBase64 } from './passphrase-crypto';
 
-// Sync's code and keys (PROJECT-PLAN M10.7, BLUEPRINT §11.4, §11.5), in the app's crypto module. A chain's code is 32
-// random bytes, shown as 24 BIP39 words, the last carrying a checksum. HKDF-SHA256 derives from it, on the device, the
-// chain's id, an auth secret whose SHA-256 is all the server keeps, and the AES-256-GCM key that seals the copy: a random
-// seed needs no slow stretching, unlike a passphrase. The copy is gzipped, then sealed bound to the chain's id, so the
-// server holds only bytes it can't read. This file is only in the lazy sync chunk, with its word list.
+// Sync's keys (PROJECT-PLAN M10.7, BLUEPRINT §11.4, §11.5), in the app's crypto module. A chain's code is 32 random
+// bytes (shown as words: sync-code.ts). HKDF-SHA256 derives from it, on the device, the chain's id, an auth secret whose
+// SHA-256 is all the server keeps, and the AES-256-GCM key that seals the copy: a random seed needs no slow stretching,
+// unlike a passphrase. The copy is gzipped, then sealed bound to the chain's id, so the server holds only bytes it can't
+// read. Only sync's lazy chunks load this.
 
 /** The code's length: 24 words. */
 export const seedBytes = 32;
@@ -29,30 +27,6 @@ export interface SyncKeys {
 /** A new chain's code. */
 export function newSyncSeed(): Uint8Array<ArrayBuffer> {
   return crypto.getRandomValues(new Uint8Array(seedBytes));
-}
-
-/** The code's 24 words. */
-export function syncWords(seed: Uint8Array): string[] {
-  return entropyToMnemonic(seed, wordlist).split(' ');
-}
-
-/** The code the words give, or undefined when one isn't a BIP39 word or the checksum fails (a word mistyped). */
-export function seedFromWords(words: readonly string[]): Uint8Array<ArrayBuffer> | undefined {
-  const typed = words.map((word) => word.trim().toLowerCase());
-  if (typed.length !== 24) return undefined;
-  try {
-    return new Uint8Array(mnemonicToEntropy(typed.join(' '), wordlist));
-  } catch {
-    return undefined;
-  }
-}
-
-/** The one BIP39 word that starts with `typed`: four letters always tell, and fewer can. */
-export function completeWord(typed: string): string | undefined {
-  const start = typed.trim().toLowerCase();
-  if (start === '') return undefined;
-  const matches = wordlist.filter((word) => word.startsWith(start));
-  return matches.length === 1 ? matches[0] : matches.find((word) => word === start);
 }
 
 /** The chain's id, auth secret and key, from its code. */

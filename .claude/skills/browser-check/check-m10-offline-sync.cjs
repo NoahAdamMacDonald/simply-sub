@@ -15,15 +15,23 @@
 //   runs it; with the third served, a page load runs it at once (freshness) and the worker, learning of it after,
 //   prompts nothing. Then, in a profile of its own (Edge offers no install to a private window): no manifest or
 //   installability error, Edge's offer as Settings' Install, and Enter on it, which an offer allows once. The script
-//   serves a build by copying it into apps/api/public/, as copy-web-build.mjs does, and puts the first build
-//   (apps/web/dist's) back after each run.
-// With axe offline and with the prompt shown, and no horizontal scroll.
+//   serves a build by putting its new and changed files over apps/api/public/'s and waiting until wrangler dev serves
+//   them, then puts the first build (apps/web/dist's) back after each run.
+// - M10.9, sync between two browsers, A and B (light at 1280 px and dark at 360, then the other way round), by
+//   keyboard: A turns sync on (the new code's 24 words and QR code, axe), B joins with four letters of each word and
+//   Tab, sees what the copy holds (axe) and merges; then A's lists and B's are in both, an edit in A reaches B within
+//   15 s with B doing nothing, a deletion in B reaches A, changes made offline on both to different lists all survive,
+//   the theme stays each browser's, and A's Start over and then its Delete the synced copy each leave B saying the copy
+//   was deleted, B joining the new chain in between and turning sync off at the end.
+// With axe offline, with the prompt shown and with each sync dialog open, and no horizontal scroll.
 // Usage: node check-m10-offline-sync.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
-//   <second build's browser dir> <third build's browser dir>
+//   <second build's browser dir> <third build's browser dir> [parts: offline,updates,install,sync, all by default]
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
-const [depsDir, outDir, baseUrl, secondBuild, thirdBuild] = process.argv.slice(2);
+const [depsDir, outDir, baseUrl, secondBuild, thirdBuild, partsArgument] = process.argv.slice(2);
+const parts = new Set((partsArgument ?? 'offline,updates,install,sync').split(','));
 for (const build of [secondBuild, thirdBuild]) {
   if (!build || !fs.existsSync(path.join(build, 'ngsw.json'))) {
     throw new Error(
@@ -45,14 +53,55 @@ const repo = path.resolve(__dirname, '..', '..', '..');
 const publicDir = path.join(repo, 'apps', 'api', 'public');
 const firstBuild = path.join(repo, 'apps', 'web', 'dist', 'web', 'browser');
 
-/** Serves a build under wrangler dev, as copy-web-build.mjs does: public/'s own files (_headers) stay. */
-function serve(build) {
-  for (const entry of fs.readdirSync(publicDir)) {
-    if (entry !== '_headers' && entry !== '_redirects') {
-      fs.rmSync(path.join(publicDir, entry), { recursive: true, force: true });
+/**
+ * Puts a build in apps/api/public over the last one, whose files stay: deleting them first would leave a moment when a
+ * request finds no file and gets the SPA's index.html, and the build names its files after their content, so a file
+ * left over from another build changes nothing. Only new and changed files are written, each copied beside the folder
+ * and then moved in whole: on Windows, wrangler dev's watcher fails on a file still being written (EBUSY, the 940 kB
+ * exceljs chunk rewritten as it was) and stops for good, after which every new file gets index.html.
+ */
+function put(build) {
+  const staging = fs.mkdtempSync(path.join(publicDir, '..', '.serve-'));
+  try {
+    for (const entry of fs.readdirSync(build, { recursive: true, withFileTypes: true })) {
+      if (!entry.isFile()) continue;
+      const from = path.join(entry.parentPath, entry.name);
+      const to = path.join(publicDir, path.relative(build, from));
+      if (fs.existsSync(to) && fs.readFileSync(to).equals(fs.readFileSync(from))) continue;
+      const staged = path.join(staging, entry.name);
+      fs.copyFileSync(from, staged);
+      fs.mkdirSync(path.dirname(to), { recursive: true });
+      fs.renameSync(staged, to);
     }
+  } finally {
+    fs.rmSync(staging, { recursive: true, force: true });
   }
-  fs.cpSync(build, publicDir, { recursive: true });
+}
+
+/** Serves a build under wrangler dev: put, then wait until its ngsw.json and every file it lists come back as built. */
+async function serve(build) {
+  put(build);
+  // wrangler dev serves a new file about half a second after it appears, and index.html until then.
+  const manifest = fs.readFileSync(path.join(build, 'ngsw.json'), 'utf8');
+  const served = async (file) =>
+    Buffer.from(await (await fetch(new URL(file, baseUrl), { cache: 'no-store' })).arrayBuffer());
+  await until(
+    `wrangler dev to serve ${build} (if its log says its assets watcher was disabled, restart it)`,
+    async () => {
+      try {
+        if ((await served('ngsw.json')).toString('utf8') !== manifest) return false;
+        for (const [file, hash] of Object.entries(JSON.parse(manifest).hashTable)) {
+          const body = await served(file.slice(1));
+          if (crypto.createHash('sha1').update(body).digest('hex') !== hash) return false;
+        }
+        return true;
+      } catch {
+        // wrangler dev reloading
+        return false;
+      }
+    },
+    60000,
+  );
 }
 const checks = [];
 const consoleProblems = [];
@@ -110,7 +159,10 @@ async function prepare(context, label) {
   const page = context.pages()[0] ?? (await context.newPage());
   page.on('console', (msg) => {
     const failedOffline = network.offline && /^Failed to load resource/.test(msg.text());
-    if ((msg.type() === 'error' || msg.type() === 'warning') && !failedOffline) {
+    // A deleted chain answers 404, and a write after another device's 412: sync says so in the page.
+    const syncAnswer =
+      /^Failed to load resource/.test(msg.text()) && msg.location().url.includes('/api/v1/sync/');
+    if ((msg.type() === 'error' || msg.type() === 'warning') && !failedOffline && !syncAnswer) {
       consoleProblems.push(`[${label}] ${msg.type()}: ${msg.text()}`);
     }
   });
@@ -431,7 +483,7 @@ async function updates(page, viewport, label, colorScheme) {
   });
 
   // A second build served: this open tab's Check for updates finds it, and offers to reload into it.
-  serve(secondBuild);
+  await serve(secondBuild);
   const ready = await checked();
   const snackBar = page.locator('.mat-mdc-snack-bar-container');
   const prompt = await snackBar
@@ -470,7 +522,7 @@ async function updates(page, viewport, label, colorScheme) {
   // A third build served: a page load fetches its index.html (freshness), so it runs at once; the worker, learning of
   // it a few seconds later, moves the page onto it with no prompt.
   const before = await appCaches(page);
-  serve(thirdBuild);
+  await serve(thirdBuild);
   await page.reload();
   await button.waitFor({ timeout: 20000 });
   const third = (await line.innerText()).trim();
@@ -487,7 +539,7 @@ async function updates(page, viewport, label, colorScheme) {
       (await page.locator('.mat-mdc-snack-bar-container').count()) === 0,
     `${second} → ${third}`,
   );
-  serve(firstBuild);
+  await serve(firstBuild);
 }
 
 /** M10.6's install, in a profile of its own: Edge offers no install to a private window, which a new context is. */
@@ -541,6 +593,343 @@ async function install(label) {
   }
 }
 
+// M10.9: sync between two browsers.
+
+/** A list B has before it joins. */
+const PHONE = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c50';
+
+/** Reads a table's records straight from IndexedDB. */
+function readRecords(page, table) {
+  return page.evaluate(
+    (store) =>
+      new Promise((resolve, reject) => {
+        const request = indexedDB.open('simply-sub');
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => {
+          const all = request.result.transaction(store).objectStore(store).getAll();
+          all.onsuccess = () => {
+            request.result.close();
+            resolve(all.result);
+          };
+        };
+      }),
+    table,
+  );
+}
+
+/** Changes a list straight in IndexedDB, as an edit made then, and reloads so the app's live queries see it. */
+async function changeList(page, id, change) {
+  const list = (await readRecords(page, 'lists')).find((record) => record.id === id);
+  const at = new Date().toISOString();
+  await putRecord(page, 'lists', {
+    ...list,
+    ...change,
+    updatedAt: at,
+    ...(change.deletedAt && { deletedAt: at }),
+  });
+  await page.reload();
+}
+
+/** The lists the Lists page shows, by name, sorted. */
+async function listNames(page) {
+  await page.goto(`${baseUrl}lists`);
+  await page.locator('main h1').waitFor();
+  await sleep(500);
+  return (await page.locator('h2.name a').allTextContents()).map((name) => name.trim()).sort();
+}
+
+const syncCard = (page) => page.locator('section[aria-labelledby="sync-heading"]');
+const syncStatus = async (page) =>
+  (
+    (await syncCard(page)
+      .locator('.status')
+      .textContent({ timeout: 2000 })
+      .catch(() => '')) ?? ''
+  ).trim();
+
+async function openSync(page) {
+  if (!page.url().endsWith('/settings')) await page.goto(`${baseUrl}settings`);
+  await syncCard(page).waitFor({ timeout: 20000 });
+}
+
+/** A button pressed by keyboard: focused, then Enter. */
+async function press(page, scope, name) {
+  const button = scope.getByRole('button', { name, exact: true });
+  await button.waitFor({ timeout: 20000 });
+  await button.focus();
+  await page.keyboard.press('Enter');
+}
+
+/** The dialog on top: the confirmation's, or sync's own. */
+const topDialog = (page) => page.locator('mat-dialog-container').last();
+
+/** Sync now, by keyboard, until this sync is done: the record's syncedAt moves on (a status could be the last one's). */
+async function syncNow(page, label) {
+  await openSync(page);
+  const syncedAt = async () => (await readRecords(page, 'sync'))[0]?.syncedAt;
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const before = await syncedAt();
+    await until(
+      'Sync now to be there',
+      () => syncCard(page).getByRole('button', { name: 'Sync now' }).isEnabled(),
+      20000,
+    );
+    await press(page, syncCard(page), 'Sync now');
+    const synced = await until(
+      `${label} to sync`,
+      async () => (await syncedAt()) !== before,
+      15000,
+    ).catch(() => false);
+    if (synced) return;
+    // Busy (the API's writes a minute): it tries again.
+    await sleep(5000);
+  }
+  throw new Error(`${label} didn't sync: ${await syncStatus(page)}`);
+}
+
+/** Types the code's words into the join dialog: four letters of each, then Tab, which completes it. */
+async function typeCode(page, dialog, words) {
+  // The dialog puts focus in the first box itself, once it has opened.
+  await until('focus in the first box', () =>
+    page.evaluate(() => document.activeElement?.matches('.words input') === true),
+  );
+  await sleep(300);
+  for (const word of words) {
+    await page.keyboard.type(word.slice(0, 4));
+    await page.keyboard.press('Tab');
+  }
+  return dialog.locator('.words input').evaluateAll((inputs) => inputs.map((input) => input.value));
+}
+
+/** Joins with the code's words, by keyboard, merging: what the copy said it holds. */
+async function joinWith(page, label, words, viewport, shots) {
+  await openSync(page);
+  await press(page, syncCard(page), 'Join with a code');
+  const dialog = topDialog(page);
+  await dialog.locator('.words input').first().waitFor({ timeout: 20000 });
+  if (shots) {
+    await axeCheck(page, `${label}: Join with a code`);
+    await noSideScroll(page, viewport, `${label}: Join with a code`);
+  }
+  const typed = await typeCode(page, dialog, words);
+  check(
+    `${label}: four letters and Tab complete each of the 24 words`,
+    typed.join(' ') === words.join(' '),
+    typed.join(' '),
+  );
+  await press(page, dialog, 'Continue');
+  await dialog.getByRole('heading', { name: 'Join this synced copy' }).waitFor({ timeout: 20000 });
+  const holds = ((await dialog.locator('mat-dialog-content p').first().textContent()) ?? '').trim();
+  if (shots) {
+    await axeCheck(page, `${label}: the synced copy to join`);
+    await page.screenshot({ path: path.join(outDir, `m10-sync-join-${label}.png`) });
+    await noSideScroll(page, viewport, `${label}: the synced copy to join`);
+  }
+  await press(page, dialog, 'Join');
+  await dialog.waitFor({ state: 'detached', timeout: 20000 });
+  await until(
+    `${label} to sync`,
+    async () => (await syncStatus(page)) === 'Synced just now',
+    20000,
+  );
+  return holds;
+}
+
+/** Turns sync on, or starts over, by keyboard: the new code's words, once kept. */
+async function keepNewCode(page, label, viewport, shots) {
+  const dialog = topDialog(page);
+  await dialog.locator('ss-qr-code path').waitFor({ timeout: 20000 });
+  const words = (await dialog.locator('.words li').allTextContents()).map((word) => word.trim());
+  if (shots) {
+    await axeCheck(page, `${label}: the new code`);
+    await page.screenshot({ path: path.join(outDir, `m10-sync-code-${label}.png`) });
+    await noSideScroll(page, viewport, `${label}: the new code`);
+  }
+  await press(page, dialog, 'I’ve saved it');
+  await dialog.waitFor({ state: 'detached', timeout: 20000 });
+  await until(
+    `${label} to sync`,
+    async () => (await syncStatus(page)) === 'Synced just now',
+    20000,
+  );
+  return words;
+}
+
+async function syncBetween(browser, a, b) {
+  const labelA = `A ${a.colorScheme} ${a.viewport === WIDE ? 'wide' : 'narrow'}`;
+  const labelB = `B ${b.colorScheme} ${b.viewport === WIDE ? 'wide' : 'narrow'}`;
+  const A = await newPage(browser, labelA, a);
+  const B = await newPage(browser, labelB, b);
+  await firstRun(A.page);
+  await plant(A.page);
+  await A.page.reload();
+  await firstRun(B.page);
+  await putRecord(B.page, 'lists', { id: PHONE, name: 'Phone list', ...stamps });
+  await B.page.reload();
+
+  // A turns sync on.
+  await openSync(A.page);
+  await press(A.page, syncCard(A.page), 'Turn on sync');
+  const words = await keepNewCode(A.page, labelA, a.viewport, true);
+  check(
+    `${labelA}: Turn on shows a new code of 24 words, then starts the chain: "Synced just now"`,
+    words.length === 24,
+    words.length,
+  );
+
+  // B joins, merging.
+  const holds = await joinWith(B.page, labelB, words, b.viewport, true);
+  check(
+    `${labelB}: Join says what the synced copy holds`,
+    holds === 'It holds 2 lists, 3 subscriptions.',
+    holds,
+  );
+  const both = 'Family,Phone list,Work Related';
+  check(
+    `${labelB}: after Merge it has the copy's lists and its own`,
+    (await listNames(B.page)).join() === both,
+    (await listNames(B.page)).join(),
+  );
+  await syncNow(A.page, labelA);
+  check(
+    `${labelA}: Sync now brings B's list`,
+    (await listNames(A.page)).join() === both,
+    (await listNames(A.page)).join(),
+  );
+  // The devices are the chain's, known again once the page's first sync is done.
+  await openSync(A.page);
+  const devices = async () =>
+    ((await syncCard(A.page).locator('.devices').textContent()) ?? '').replace(/\s+/g, ' ');
+  await until('B among the devices', async () => /synced/.test(await devices()), 15000).catch(
+    () => false,
+  );
+  check(
+    `${labelA}: the devices: this one, and B`,
+    /\(this device\)/.test(await devices()) && /synced/.test(await devices()),
+    (await devices()).trim(),
+  );
+  await A.page.screenshot({ path: path.join(outDir, `m10-sync-on-${labelA}.png`) });
+  await axeCheck(A.page, `${labelA}: Sync between devices, on`);
+
+  // An edit in A reaches B within 15 s, B doing nothing on its Lists page, opened before.
+  await B.page.goto(`${baseUrl}lists`);
+  await B.page.locator('h2.name a').first().waitFor({ timeout: 20000 });
+  await sleep(2000);
+  await changeList(A.page, FAMILY, { name: 'Family 2' });
+  await syncNow(A.page, labelA);
+  const sent = Date.now();
+  const arrived = await until(
+    'the edit on B',
+    async () =>
+      (await B.page.locator('h2.name a').allTextContents()).some(
+        (name) => name.trim() === 'Family 2',
+      ),
+    25000,
+  ).then(
+    () => Date.now() - sent,
+    () => undefined,
+  );
+  check(
+    `${labelB}: an edit made in A shows within 15 s, B doing nothing`,
+    arrived !== undefined && arrived <= 15000,
+    `${arrived} ms`,
+  );
+
+  // A deletion in B reaches A.
+  await changeList(B.page, WORK, { deletedAt: true });
+  await syncNow(B.page, labelB);
+  await syncNow(A.page, labelA);
+  check(
+    `${labelA}: a list deleted in B is gone after Sync now`,
+    (await listNames(A.page)).join() === 'Family 2,Phone list',
+    (await listNames(A.page)).join(),
+  );
+
+  // Offline on both, changes to different lists: all survive.
+  await A.context.setOffline(true);
+  await B.context.setOffline(true);
+  network.offline = true;
+  await changeList(A.page, PHONE, { name: 'Phone list (A)' });
+  await putRecord(B.page, 'lists', {
+    id: '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c51',
+    name: 'Offline (B)',
+    ...stamps,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  });
+  await B.page.reload();
+  await sleep(1000);
+  await A.context.setOffline(false);
+  await B.context.setOffline(false);
+  network.offline = false;
+  await syncNow(A.page, labelA);
+  await syncNow(B.page, labelB);
+  await syncNow(A.page, labelA);
+  const all = 'Family 2,Offline (B),Phone list (A)';
+  const [listsA, listsB] = [(await listNames(A.page)).join(), (await listNames(B.page)).join()];
+  check(
+    `${labelA} and ${labelB}: changes made offline on both, to different lists, all survive`,
+    listsA === all && listsB === all,
+    `${listsA} / ${listsB}`,
+  );
+
+  // The theme stays each browser's.
+  await A.page.goto(`${baseUrl}settings`);
+  const dark = A.page.getByRole('radio', { name: a.colorScheme === 'dark' ? 'Light' : 'Dark' });
+  await dark.focus();
+  await A.page.keyboard.press('Space');
+  await sleep(500);
+  await syncNow(A.page, labelA);
+  await syncNow(B.page, labelB);
+  const themeB = (await readRecords(B.page, 'settings'))[0]?.theme;
+  check(`${labelB}: the theme A chose stays A's`, themeB === 'system', themeB);
+
+  // Start over in A: B learns its copy was deleted.
+  await openSync(A.page);
+  await press(A.page, syncCard(A.page), 'Start over with a new code…');
+  await press(A.page, topDialog(A.page), 'Start over');
+  const fresh = await keepNewCode(A.page, labelA, a.viewport, false);
+  await openSync(B.page);
+  const gone = await until(
+    'B to see its chain gone',
+    async () => (await syncStatus(B.page)).startsWith('The synced copy was deleted'),
+    25000,
+  ).catch(() => false);
+  check(
+    `${labelB}: after A's Start over, B says the synced copy was deleted`,
+    gone !== false,
+    await syncStatus(B.page),
+  );
+  await axeCheck(B.page, `${labelB}: sync stopped`);
+
+  // B joins the new chain; then A deletes the synced copy, and B says so again.
+  await joinWith(B.page, labelB, fresh, b.viewport, false);
+  await openSync(A.page);
+  await press(A.page, syncCard(A.page), 'Delete the synced copy…');
+  await press(A.page, topDialog(A.page), 'Delete the synced copy');
+  await syncCard(A.page).getByRole('button', { name: 'Turn on sync' }).waitFor({ timeout: 20000 });
+  const goneAgain = await until(
+    'B to see the copy deleted',
+    async () => (await syncStatus(B.page)).startsWith('The synced copy was deleted'),
+    25000,
+  ).catch(() => false);
+  check(
+    `${labelB}: after A deletes the synced copy, B says so`,
+    goneAgain !== false,
+    await syncStatus(B.page),
+  );
+  await press(B.page, syncCard(B.page), 'Turn off sync here…');
+  await press(B.page, topDialog(B.page), 'Turn off');
+  await syncCard(B.page).getByRole('button', { name: 'Turn on sync' }).waitFor({ timeout: 20000 });
+  check(
+    `${labelB}: Turn off ends sync here, its data staying`,
+    (await listNames(B.page)).join() === all,
+    (await listNames(B.page)).join(),
+  );
+  await A.context.close();
+  await B.context.close();
+}
+
 (async () => {
   await waitForServer();
   const browser = await chromium.launch({ channel: 'msedge' });
@@ -549,18 +938,31 @@ async function install(label) {
       [WIDE, 'wide'],
       [NARROW, 'narrow'],
     ]) {
+      if (!parts.has('offline') && !parts.has('updates')) continue;
       const label = `${colorScheme} ${width}`;
       const { context, page } = await newPage(browser, label, { colorScheme, viewport });
       await firstRun(page);
       await plant(page);
       await page.reload();
-      await offlineStart(page, context, viewport, label);
-      await updates(page, viewport, label, colorScheme);
+      if (parts.has('offline')) await offlineStart(page, context, viewport, label);
+      if (parts.has('updates')) await updates(page, viewport, label, colorScheme);
       await context.close();
     }
   }
+  if (parts.has('sync')) {
+    await syncBetween(
+      browser,
+      { colorScheme: 'light', viewport: WIDE },
+      { colorScheme: 'dark', viewport: NARROW },
+    );
+    await syncBetween(
+      browser,
+      { colorScheme: 'dark', viewport: NARROW },
+      { colorScheme: 'light', viewport: WIDE },
+    );
+  }
   await browser.close();
-  await install('light wide, a profile of its own');
+  if (parts.has('install')) await install('light wide, a profile of its own');
 
   // Offline, the catalog's check and the rates' fetch fail and say so: expected, not a problem.
   const problems = consoleProblems.filter(
@@ -576,7 +978,9 @@ async function install(label) {
   process.exit(failed === 0 ? 0 : 1);
 })().catch((error) => {
   console.error(error);
+  // What the pages logged before it stopped, which may say why.
+  for (const line of consoleProblems) console.error(`console: ${line}`);
   // Each run of updates() ends on the first build; one cut short may not have.
-  serve(firstBuild);
+  put(firstBuild);
   process.exit(1);
 });

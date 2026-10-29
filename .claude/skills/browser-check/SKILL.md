@@ -454,13 +454,13 @@ A feed takes 30 fetches a minute, so poll one every 2 s, not every 100 ms, or th
 change. The links view and the choosing view without links share the title Live calendar: wait for Make links to
 know a revoke has finished.
 
-`check-m10-offline-sync.cjs` (M10's offline and sync batch: M10.5 and M10.6 so far) runs under `wrangler dev` on the
+`check-m10-offline-sync.cjs` (M10's offline and sync batch: M10.5, M10.6 and M10.9) runs under `wrangler dev` on the
 production build (`npm -w apps/web run build`, then `node apps/api/scripts/copy-web-build.mjs`), with the user database
 migrated, so the CSP, Trusted Types and the service worker are as on the live site; it answers `/fx` itself. It takes
 two more builds of the same code, each new to the worker: in `apps/web`, `WORKERS_CI_COMMIT_SHA=b0b0b0b0 node
 scripts/build.mjs --output-path=<scratchpad>/build-b`, then `c0c0c0c0` into `build-c`; pass their `browser` folders
-as the 4th and 5th arguments. It serves each by copying it into `apps/api/public/` and puts `apps/web/dist`'s back,
-so don't build the app while it runs. For a Canadian in Alberta with Work Related (Netflix, Crave) and Family
+as the 4th and 5th arguments. It serves each by putting its new and changed files over `apps/api/public/`'s and
+waiting until wrangler dev serves them, and puts `apps/web/dist`'s back, so don't build the app while it runs. For a Canadian in Alberta with Work Related (Netflix, Crave) and Family
 (Mullvad, in euros), in both themes at both widths:
 - M10.5: the worker registers through its own policy, controls the page after a reload and holds every file of
   `ngsw.json`'s app group; then, with `context.setOffline`, Home, a deep link and every sidebar page start, Work Related
@@ -475,10 +475,27 @@ so don't build the app while it runs. For a Canadian in Alberta with Work Relate
   `Page.getAppManifest` and `Page.getInstallabilityErrors` report nothing, Settings' Install appears, and Enter on it
   uses the offer (Edge's dialog, which the script can't answer), the steps taking its place.
 
+- M10.9, two browsers, A and B (light at 1280 px with dark at 360, then the other way round), by keyboard: A turns sync
+  on (the new code, axe, a screenshot), B joins by typing four letters of each word and Tab (axe on the words and on
+  the copy to join) and merges; both then have both lists; an edit in A shows on B's open Lists page within 15 s;
+  a deletion in B reaches A; changes made offline on both survive; B's theme stays its own; A's Start over, then its
+  Delete the synced copy, each leave B saying the copy was deleted (B joining the new chain in between), and B turns
+  sync off. A 6th argument runs some parts only: `offline,updates,install,sync` (all by default).
+
 Angular's worker answers every request in its scope, passing on those it doesn't keep, so Playwright's
-`fromServiceWorker()` can't tell what it cached. Offline, it answers what it never kept (an icon never shown online)
-with a 504: wait a second before going back online, or that console line arrives after. A version the worker has held
-before isn't new to it, so serving the first build again brings no update: hence two more builds.
+`fromServiceWorker()` can't tell what it cached. Sync's helpers wait for the `sync` record's `syncedAt` to move on, not
+for "Synced just now", which the last sync may have left; the join dialog puts focus in the first box itself, so wait for
+that before typing; and `page.goto` reloads the app, whose list of devices is in memory until its first sync. Offline,
+it answers what it never kept (an icon never shown online) with a 504: wait a second before going back online, or that
+console line arrives after. `wrangler dev` serves a file new to `apps/api/public/` about half a second after it
+appears, and the SPA's index.html until then (for a new `main-*.js`, "Failed to load module script"); on Windows its
+watcher also stops for good when it meets a file still being written (its log: "Assets directory watcher encountered an
+error and has been disabled", `EBUSY`). So the script's `serve()` writes only new and changed files, each moved in whole
+from beside the folder, and waits until every file in the build's `ngsw.json` comes back as built; if its wait times
+out, look for that line and restart wrangler dev. For the same reason, copy a new first build in (`copy-web-build.mjs`,
+which deletes and copies everything) only with wrangler dev stopped: `npm run dev:api` copies it before it starts. A
+version the worker has held before isn't new to it, so serving the first build again brings no update: hence two more
+builds.
 
 `check-after-m3.cjs` (the feedback after M3: M5.13, M6.17–M6.19, M7.11, M8.5, M8.6, M9.6) checks the batch on
 `ng serve` for a Canadian in Alberta, with Streaming (Crave Premium and Disney+ Premium) and Family (two Disney+

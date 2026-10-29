@@ -47,6 +47,7 @@ class FakeCatalogStore {
 /** AppUpdates as a development build has it, with no worker, until a test gives it one. */
 class FakeAppUpdates {
   readonly available = signal(false);
+  readonly ready = signal(false);
   readonly check = vi.fn(async (): Promise<AppCheckOutcome> => 'current');
 }
 
@@ -344,6 +345,18 @@ describe('SettingsPage', () => {
         expect(appSection('version')?.textContent).not.toContain('Each visit loads');
       },
     );
+
+    it('says a new version is ready once the worker’s own check finds one, after a check found none', async () => {
+      appUpdates.available.set(true);
+      await fixture.whenStable();
+      appSection('version')?.querySelector('button')?.click();
+      await fixture.whenStable();
+      const status = () => appSection('version')?.querySelector('[role="status"]')?.textContent;
+      expect(status()).toBe('You have the latest version.');
+      appUpdates.ready.set(true);
+      await fixture.whenStable();
+      expect(status()).toBe('A new version is ready: reload to use it.');
+    });
   });
 
   it('goes back Home when Settings was the first page opened', async () => {

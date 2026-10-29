@@ -68,7 +68,11 @@ const replace = (body: Uint8Array, version: string) =>
 async function read(): Promise<{ copy: string; etag: string | null } | number> {
   const answer = await send('GET');
   if (answer.status !== 200) return answer.status;
-  return { copy: await answer.text(), etag: answer.headers.get('ETag') };
+  // Its bytes decoded: workerd warns about text() on an octet-stream body.
+  return {
+    copy: new TextDecoder().decode(await answer.arrayBuffer()),
+    etag: answer.headers.get('ETag'),
+  };
 }
 
 const chains = async () =>

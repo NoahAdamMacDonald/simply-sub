@@ -37,6 +37,7 @@ import { PageHeader } from '../../shared/page-header/page-header';
 import { BudgetSetting } from './budget-setting';
 import { LocationDialog } from './location-dialog';
 import { percentText, placeSummary } from './place-names';
+import { SyncSetting } from './sync-setting';
 import { TagsSetting } from './tags-setting';
 
 /** What [Check for updates] found. */
@@ -57,8 +58,8 @@ const appCheckMessages: Record<AppCheckOutcome, string> = {
 
 /**
  * Settings (PROJECT-PLAN P13): budgets, custom tags (M6.11), appearance, where the user is (📍), Search's start, Your
- * data (backups and Delete all data, M6.9), Security (the app lock, M6.10), the catalog's version, and the App: its
- * install and its version (M10.6).
+ * data (sync between devices, M10.9; backups and Delete all data, M6.9), Security (the app lock, M6.10), the catalog's
+ * version, and the App: its install and its version (M10.6).
  */
 @Component({
   selector: 'ss-settings-page',
@@ -75,6 +76,7 @@ const appCheckMessages: Record<AppCheckOutcome, string> = {
     MatRadioGroup,
     MatSelect,
     PageHeader,
+    SyncSetting,
     TagsSetting,
   ],
   templateUrl: './settings-page.html',
@@ -156,7 +158,13 @@ export class SettingsPage {
   protected readonly installAvailable = computed(() => installOffer() !== undefined);
   protected readonly installedHere = installedHere.asReadonly();
   protected readonly updatesAvailable = this.appUpdates.available;
-  protected readonly appCheckMessage = signal('');
+  private readonly appChecked = signal('');
+  /** What the last check found; once a new version is ready, by this check or the worker's own, that it's ready. */
+  protected readonly appCheckMessage = computed(() =>
+    this.appChecked() !== '' && this.appUpdates.ready()
+      ? appCheckMessages.ready
+      : this.appChecked(),
+  );
   /** "Version fd54aac, built Oct 29, 2026"; a development build has no version. */
   protected readonly versionLine = appVersion
     ? `${appVersion.commit ? `Version ${appVersion.commit}, built` : 'Built'} ${dateText(appVersion.builtOn)}`
@@ -171,8 +179,8 @@ export class SettingsPage {
   }
 
   protected async checkForAppUpdates(): Promise<void> {
-    this.appCheckMessage.set('Checking for updates…');
-    this.appCheckMessage.set(appCheckMessages[await this.appUpdates.check()]);
+    this.appChecked.set('Checking for updates…');
+    this.appChecked.set(appCheckMessages[await this.appUpdates.check()]);
   }
 
   /** Security: whether the app lock is on, and Lock after. */
@@ -218,6 +226,7 @@ export class SettingsPage {
       id: 'data',
       name: 'Your data',
       sections: [
+        { id: 'sync', name: 'Sync between devices' },
         { id: 'backups', name: 'Backups' },
         { id: 'lock', name: 'App lock' },
         { id: 'live-calendar', name: 'Live calendar' },
