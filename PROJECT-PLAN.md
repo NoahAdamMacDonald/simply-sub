@@ -215,6 +215,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M7.7 | Budget bars' colour scale and warnings you can dismiss (added 2026-10-28, the feedback after M9): every budget bar's fill is one colour, changing gradually from green, to yellow exactly at the budget, to red at 150% (core's `budgetBar.towardYellow` and `towardRed`, the user's choice), the Calendar's by the month's total against the budget; the budget warnings' ✕ hides one until its period or budget changes (`settings.dismissedBudgetWarnings`, core's `budgetWarningKey`), and "Show 1 hidden budget warning" brings them back (BLUEPRINT §8.1.1, §14) | A bar's colour moves gradually from green to yellow at its budget and on to red; a dismissed warning stays hidden after a reload and comes back for a new month or budget |
 | M7.8 | The Calendar, still and reachable (added 2026-10-28, the feedback after M9): from 960 px a column of its own beside the grid, for the day's panel and Upcoming, so opening a day never moves the grid; under 600 px a compact grid (dates and dots) above the agenda, any day opening in the bottom sheet; a back button to the page it was opened from, named by it, but not from the sidebar (BLUEPRINT §14) | The grid keeps its width when a day opens; a phone can open any day from the grid; from List view's mini calendar, "← Work Related" goes back |
 | M7.9 | The Calendar's JSON and Text, and its own calendar (added 2026-10-28, the feedback after M9): Export to file adds JSON (core's `paymentsFile`) and Text (`paymentsText`); each event lists its tags and has them as `CATEGORIES`; Sync calendar's steps make a Simply Sub calendar first in Google, Apple and Proton Calendar, since they colour a calendar and not an event (BLUEPRINT §11.2, §11.3, §14) | Both files download with the lists shown; the steps import into a calendar of its own |
+| M7.10 | Home as a hub (added 2026-10-28, UI polish, the owner's OK of its 360 and 1280 px wireframes): quick actions (Add a subscription to a list or a custom one, New list, Open a list); the budget warnings and budgets; Coming up, every payment in the next 14 days, with Mark renewed on a manual renewal (re-anchored on today, with Undo); the mini calendar; Your lists, a card each with this month; Ways to save, each list's View optimizations; Price changes, what catalog updates changed in the lists' prices this past month (core's `priceChangesBetween`, `withPriceChanges`, kept in `settings.priceChanges` by CatalogStore after an update, in a chunk of its own) (P2) | The hub at 1280 px has budgets and Coming up beside the calendar, and one column at 360 px; Mark renewed moves the renewal on a period and Undo puts it back; a catalog update that changes a listed plan's price lists it for a month |
 | M7.11 | Statuses you can see (added 2026-10-29, the feedback after M3; §3.3): a manual renewal says "Manual · renew by Nov 29"; an item a bundle, suite or extra member replaces says what it becomes ("Moves to Netflix and Crave on Nov 15", "Extra member on Mine (Netflix Standard) from Nov 20"; core's `itemReplacements`); and Search says which bundle a provider is in ("Active · 1 list · in Netflix and Crave"; `ProviderActivity.bundleIds`) (P4, P8) | Proton Family with auto-renew off shows "Manual"; a bundle applied on Optimizations, saved, shows on each plan it replaces; a provider in a listed bundle shows the bundle's name on Search |
 
 ### M8 — Optimizer & bot
@@ -633,6 +634,16 @@ Calendar", and "Your payments this year, past and to come, add up to ≈ $610.64
 **Since the feedback after M9 (M7.7):** each bar is one colour, changing gradually from green to yellow exactly at the
 budget and on to red at 150%, and each budget warning has ✕, which hides it until its period or budget changes, with "Show 1 hidden budget
 warning" to bring it back.
+
+**Since the UI polish (M7.10):** Home is a hub. Quick actions first: Add a subscription (a menu: each list, which opens
+Search in its pick mode, or a custom subscription), New list and Open a list. Then the budget warnings, the budgets,
+and Coming up: every payment of the next 14 days, as charged, with Mark renewed on one renewed by hand, which re-anchors
+it on today (its next renewal a period on, as P4's Wrong date? does), saved at once with Undo. The mini calendar sits
+beside the budgets and Coming up from 960 px. Your lists has a card each (its name, this month's total and how many
+subscriptions), with a New list card and Subscription Lists; Ways to save has each list's View optimizations; and Price
+changes lists what catalog updates changed in the lists' prices this past month ("Netflix Standard $18.99 → $19.99 a
+month, Nov 1"), which CatalogStore keeps in the settings when an update changes the catalog. Under 960 px it's one
+column, in that order.
 
 **Acceptance**
 - [ ] The bar totals equal the sum of every list's "this month" / "this year"

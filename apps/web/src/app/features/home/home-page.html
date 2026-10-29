@@ -28,61 +28,152 @@
     </ss-empty-state>
   }
   @case ('ready') {
-    <!-- The warnings with the calendar and totals, so their region takes no room while there's none. -->
-    <div class="overview">
-      <!-- Every list's payments against the budgets (§3.1, M7.6), once they're all priced. -->
-      <ss-budget-warnings [warnings]="pricing() ? undefined : global()?.warnings" />
-      <div class="top">
-        <section class="calendar" aria-labelledby="calendar-heading">
-          <h2 id="calendar-heading" class="visually-hidden">Payments</h2>
-          <!-- While prices load there are no dots yet: pulsing ones under the grid say so. -->
-          <ss-mini-calendar
-            [(month)]="month"
-            [charges]="pricing() ? [] : charges()"
-            (dayClick)="openCalendar(monthOf($event))"
-            (monthClick)="openCalendar($event)"
-          />
-          @if (pricing()) {
-            <div class="skeleton-dots" aria-hidden="true">
-              @for (dot of [1, 2, 3, 4, 5]; track dot) {
-                <span></span>
-              }
-            </div>
-          }
-          <p class="loading" role="status">{{ pricing() ? 'Loading your payments…' : '' }}</p>
-        </section>
-
-        <div class="budgets">
-          @if (global(); as global) {
-            <ss-budget-totals [metrics]="global" prompt />
-          }
-        </div>
-      </div>
+    <!-- A hub (M7.10): what's coming, what to do, and the way into each list. -->
+    <div class="quick" role="group" aria-label="Quick actions">
+      <button matButton="filled" type="button" [matMenuTriggerFor]="addMenu">
+        <mat-icon>add</mat-icon>
+        Add a subscription
+      </button>
+      <mat-menu #addMenu="matMenu">
+        @for (list of listCards(); track list.id) {
+          <a mat-menu-item routerLink="/search" [queryParams]="{ addTo: list.id }"
+            >To {{ list.name }}</a
+          >
+        }
+        <a mat-menu-item routerLink="/custom">A custom subscription</a>
+      </mat-menu>
+      <a matButton="outlined" routerLink="/lists/new">
+        <mat-icon>playlist_add</mat-icon>
+        New list
+      </a>
+      <button matButton="outlined" type="button" [matMenuTriggerFor]="openMenu">
+        <mat-icon>list</mat-icon>
+        Open a list
+      </button>
+      <mat-menu #openMenu="matMenu">
+        @for (list of listCards(); track list.id) {
+          <a mat-menu-item [routerLink]="['/lists', list.id]">{{ list.name }}</a>
+        }
+      </mat-menu>
     </div>
 
-    <a matButton="filled" class="lists-button" routerLink="/lists">Subscription Lists</a>
+    <div class="hub">
+      <!-- Every list's payments against the budgets (§3.1, M7.6), once they're all priced; each can be dismissed. -->
+      <ss-budget-warnings
+        class="warnings"
+        [warnings]="pricing() ? undefined : global()?.warnings"
+      />
 
-    @if (next().length > 0) {
+      <section class="budgets card" aria-labelledby="budgets-heading">
+        <h2 id="budgets-heading">Budgets</h2>
+        @if (global(); as global) {
+          <ss-budget-totals [metrics]="global" prompt />
+        }
+      </section>
+
       <!-- Spaces go inside the spans: Angular drops the whitespace between them, and screen readers need it. -->
-      <section class="next" aria-labelledby="next-heading">
-        <h2 id="next-heading">Next payments</h2>
-        <ul>
-          @for (payment of next(); track payment.key) {
+      <section class="coming card" aria-labelledby="coming-heading">
+        <h2 id="coming-heading">Coming up</h2>
+        @if (coming().length > 0) {
+          <ul>
+            @for (payment of coming(); track payment.key) {
+              <li>
+                <span class="date">{{ payment.date }} </span>
+                <span class="name">{{ payment.name }} </span>
+                <span class="amount">
+                  <span aria-hidden="true">{{ payment.amount.shown }}</span>
+                  <span class="visually-hidden">{{ payment.amount.spoken }}</span>
+                </span>
+                @if (payment.manual) {
+                  <!-- A renewal by hand: done, it moves on a period, with Undo (M7.10). -->
+                  <button
+                    matButton
+                    type="button"
+                    class="renewed"
+                    [attr.aria-label]="'Mark renewed: ' + payment.name"
+                    (click)="markRenewed(payment.itemId)"
+                  >
+                    <mat-icon>autorenew</mat-icon>
+                    Mark renewed
+                  </button>
+                }
+              </li>
+            }
+          </ul>
+        } @else {
+          <p class="none">Nothing in the next 14 days.</p>
+        }
+      </section>
+
+      <section class="calendar card" aria-labelledby="calendar-heading">
+        <h2 id="calendar-heading" class="visually-hidden">Payments</h2>
+        <!-- While prices load there are no dots yet: pulsing ones under the grid say so. -->
+        <ss-mini-calendar
+          [(month)]="month"
+          [charges]="pricing() ? [] : charges()"
+          (dayClick)="openCalendar(monthOf($event))"
+          (monthClick)="openCalendar($event)"
+        />
+        @if (pricing()) {
+          <div class="skeleton-dots" aria-hidden="true">
+            @for (dot of [1, 2, 3, 4, 5]; track dot) {
+              <span></span>
+            }
+          </div>
+        }
+        <p class="loading" role="status">{{ pricing() ? 'Loading your payments…' : '' }}</p>
+      </section>
+
+      <section class="lists" aria-labelledby="lists-heading">
+        <div class="lists-head">
+          <h2 id="lists-heading">Your lists</h2>
+          <a class="all" routerLink="/lists">Subscription Lists</a>
+        </div>
+        <ul class="list-cards">
+          @for (list of listCards(); track list.id) {
             <li>
-              <span class="date">{{ payment.date }} </span>
-              <span class="name">{{ payment.name }} </span>
-              <span class="amount">
-                <span aria-hidden="true">{{ payment.amount.shown }}</span>
-                <span class="visually-hidden">{{ payment.amount.spoken }}</span>
-              </span>
-              @if (payment.manual) {
-                <mat-icon class="manual" aria-hidden="true">autorenew</mat-icon>
-                <span class="visually-hidden">, renew manually</span>
-              }
+              <a class="list-card" [routerLink]="['/lists', list.id]">
+                <span class="list-name">{{ list.name }}</span>
+                <span class="list-month">{{ list.month }}</span>
+                <span class="list-count">{{ list.count }}</span>
+              </a>
+            </li>
+          }
+          <li>
+            <a class="list-card new" routerLink="/lists/new">
+              <mat-icon aria-hidden="true">add</mat-icon>
+              New list
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="save card" aria-labelledby="save-heading">
+        <h2 id="save-heading">Ways to save</h2>
+        <ul>
+          @for (list of listCards(); track list.id) {
+            <li>
+              <span class="list-name">{{ list.name }}</span>
+              <ss-optimizations-link [listId]="list.id" />
             </li>
           }
         </ul>
       </section>
-    }
+
+      @if (changes().length > 0) {
+        <section class="changes card" aria-labelledby="changes-heading">
+          <h2 id="changes-heading">Price changes</h2>
+          <ul>
+            @for (change of changes(); track change.key) {
+              <li>
+                <span class="name">{{ change.title }} </span>
+                <span>{{ change.text }} </span>
+                <span class="date">{{ change.date }}</span>
+              </li>
+            }
+          </ul>
+        </section>
+      }
+    </div>
   }
 }

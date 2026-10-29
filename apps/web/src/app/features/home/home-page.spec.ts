@@ -146,18 +146,58 @@ describe('HomePage', () => {
       ['Set a monthly budget →', '/settings'],
       ['Set an annual budget →', '/settings'],
     ]);
-    expect(page().querySelector('.lists-button')?.getAttribute('href')).toBe('/lists');
+    // The hub's way into the lists (M7.10): a card each, and Subscription Lists.
+    expect(page().querySelector('.lists-head .all')?.getAttribute('href')).toBe('/lists');
+    expect(
+      Array.from(page().querySelectorAll('.list-card:not(.new) .list-name')).map(text),
+    ).toEqual(['Work Related', 'Family']);
     // As a screen reader hears them: no icons or shown-only words.
     const spoken = (element: Element) => {
       const copy = element.cloneNode(true) as Element;
       copy.querySelectorAll('[aria-hidden="true"]').forEach((hidden) => hidden.remove());
       return text(copy);
     };
-    expect(Array.from(page().querySelectorAll('.next li')).map(spoken)).toEqual([
-      'Nov 12 Netflix $19.94',
-      'Dec 12 Netflix $19.94',
-      'Jan 12, 2027 Netflix $19.94',
-    ]);
+    // Coming up looks 14 days ahead (M7.10): Netflix's next is Nov 12.
+    expect(text(page().querySelector('.coming .none'))).toBe('Nothing in the next 14 days.');
+    expect(page().querySelectorAll('.coming li')).toHaveLength(0);
+    // The quick actions, as heard: their icons are hidden.
+    expect(spoken(page().querySelector('.quick') as Element)).toBe(
+      'Add a subscription New list Open a list',
+    );
+  });
+
+  it('marks a manual renewal coming up as renewed today, with Undo (M7.10)', async () => {
+    const [netflix] = await plant();
+    const items = TestBed.inject(ItemsRepository);
+    const gym = await items.create({
+      ...fields('netflix.standard'),
+      listId: netflix.listId,
+      billing: {
+        mode: 'recurring',
+        interval: 'month',
+        intervalCount: 1,
+        anchorDate: '2026-11-01',
+        autoRenew: false,
+      },
+    });
+    await open();
+    const button = () =>
+      page().querySelector<HTMLButtonElement>('.coming button[aria-label^="Mark renewed"]');
+    await until(() => button() !== null);
+    button()?.click();
+    await until(() => {
+      const billing = items.byId().get(gym.id)?.billing;
+      return billing?.mode === 'recurring' && billing.anchorDate !== '2026-11-01';
+    });
+    const snack = () => document.querySelector('.mat-mdc-snack-bar-container');
+    await until(() => text(snack())?.endsWith('is renewed Undo') === true);
+    Array.from(snack()?.querySelectorAll('button') ?? [])
+      .find((element) => text(element) === 'Undo')
+      ?.click();
+    await until(() => {
+      const billing = items.byId().get(gym.id)?.billing;
+      return billing?.mode === 'recurring' && billing.anchorDate === '2026-11-01';
+    });
   });
 
   it('shows bars for the budgets that are set', async () => {
@@ -199,7 +239,7 @@ describe('HomePage', () => {
     ]);
     expect(warnings[0].querySelector('a')?.getAttribute('href')).toBe('/calendar?month=2027-01');
     // Above the calendar and the totals.
-    expect(page().querySelector('ss-budget-warnings + .top')).not.toBeNull();
+    expect(page().querySelector('ss-budget-warnings + .budgets')).not.toBeNull();
   });
 
   it('has no warning when every month and the year are within budget', async () => {

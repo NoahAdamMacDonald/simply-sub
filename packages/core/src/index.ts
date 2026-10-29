@@ -111,6 +111,7 @@ export * from './user/dismissed-suggestion';
 export * from './user/fx-cache';
 export * from './user/item-activity';
 export * from './user/item-replacement';
+export * from './user/price-changes';
 export * from './user/item-form';
 export * from './user/item-text';
 export * from './user/list-draft';
