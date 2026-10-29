@@ -75,6 +75,12 @@
   --ss-state-hover: oklch(from var(--ss-text) l c h / 0.1);
   // Behind logos, in both themes: sites draw their icons for white, and some are dark on transparent (ProxyStore's).
   --ss-icon-tile: #ffffff;
+  // Scrollbars (M4.9): a thin thumb in the muted text colour over whatever is behind it, at least 4.2:1 on every
+  // background in both themes (Material's dark menus are the least; WCAG 1.4.11 asks 3:1), and in the text colour
+  // while Safari's is hovered or dragged.
+  --ss-scrollbar-thumb: var(--ss-text-muted);
+  --ss-scrollbar-thumb-active: var(--ss-text);
+  --ss-scrollbar-track: transparent;
 
   --ss-sidebar-width: 216px;
   --ss-radius-card: 12px;

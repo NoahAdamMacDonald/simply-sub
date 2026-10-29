@@ -159,6 +159,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 | M4.4 | `FxStore` + `ss-price` with the converted marker and "+ tax" in tax-added regions ("incl. tax" for a price with `taxIncluded`, from core's `addedSalesTax`). The rates are kept in Dexie v2's `fxRates` table; core's `priceTaxNote` and `buyerTaxPlace` decide the note; the `/dev/components` gallery starts with `ss-price` (BLUEPRINT §4.7, §4.8, §14) | Converted prices show ≈, the icon and the tooltip; a Canadian sees "+ tax", and "incl. tax" on Mullvad |
 | M4.5 | Shared components (§4.3) + a `/dev/components` gallery (dev builds only; started in M4.4 with `ss-price`), with hand-made inputs where the data comes later (charges M7.1, counts M6.1, view models M4.6); `ss-sub-card` moved to M5.2 and M6.8 (2026-10-26). Core: `budgetBar`, `rankChoices` and `countedRanks`, `planFeatureRows`, `monthWeeks` and `addMonths`, `tagColorPresets`, and the view-model parts the components take (`ItemStatus`, `RankCounts`, `FeatureSummaryRow`) (BLUEPRINT §14) | Every component renders in both themes in the gallery; each is keyboard-usable and passes axe; no hex colours outside `_tokens.scss` |
 | M4.6 | `MetricsService` skeleton: resolved items (§3.4) from repos + catalog + FX. Core's `resolveItem` (and `typedPrice` for custom plans and price overrides); items it can't resolve come back with a reason. Status, the next charge and `ListMetrics` come with M7.1, effective ranks with M6.1 (BLUEPRINT §14) | Unit tests pass with a fixture list |
+| M4.9 | Themed scrollbars (added 2026-10-28, UI polish; §4.1): thin, in both themes' colours from `_tokens.scss` only, with `scrollbar-color` and `scrollbar-width` and a `::-webkit-scrollbar` fallback for Safari | The page's, dialogs' and panels' scrollbars are thin, themed in light and dark, still draggable, and the thumb is at least 3:1 against what's behind it |
 
 ### M5 — Search & add
 | ID | Task | Done when |
@@ -432,6 +433,12 @@ Add these aliases to `_tokens.scss`. They build on the rank tokens in BLUEPRINT 
   --ss-font: 'Inter', system-ui, sans-serif;
 }
 ```
+
+**Scrollbars (M4.9, UI polish):** thin everywhere, in the theme's colours: `--ss-scrollbar-thumb` (the muted text
+colour: 5.0:1 or more on every light background and 4.2:1 or more on the dark ones, Material's dark menus being the
+least; WCAG 1.4.11 asks 3:1), `--ss-scrollbar-thumb-active` (the text colour, while Safari's thumb is hovered or
+dragged) and `--ss-scrollbar-track` (transparent), all in `_tokens.scss`. `styles.scss` sets `scrollbar-color` and `scrollbar-width: thin` (Firefox,
+Chromium) and, where those aren't supported (Safari), `::-webkit-scrollbar` with a 6 px thumb in a 10 px gutter.
 
 ### 4.2 P1 — App shell & first run
 **Wireframes:** every frame shares the shell; the dark version is `docs/wireframes/02-home-dark.png`.

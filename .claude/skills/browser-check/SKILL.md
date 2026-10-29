@@ -396,6 +396,13 @@ With axe on each, and no horizontal scroll.
 - `buttonIn` drops a leading icon's ligature ("auto_fix_high Assign best cards").
 - The card-number check reads the fields typed in, not ids or dates, whose digits run on once dashes are taken out.
 
+`check-scrollbars.cjs` (M4.9, M9.5; UI polish) checks the scrollbars on `ng serve` with the browser's own shown
+(`ignoreDefaultArgs: ['--hide-scrollbars']`), for a Canadian in Alberta, in both themes at 1280 and 360 px: the page's,
+the card dialog's and its Card currency panel's `scrollbar-color` (the muted text colour on a transparent track, read
+against the tokens) and `scrollbar-width: thin`, a gutter of 12 px at most, the thumb's contrast against what's behind
+it (WCAG's formula; Material's surfaces resolve to `color(srgb …)`, 0 to 1), dragging the thumb scrolling the page,
+Add card reached by Tab with its Name hint naming no real card, axe and no horizontal scroll.
+
 `check-after-m9.cjs` (the feedback after M9: M5.11, M5.12, M6.12–M6.16, M7.7–M7.9, M8.4) checks the batch on `ng serve`
 for a Canadian in Alberta with a $50 monthly budget, Work Related planted with eight items (Netflix Standard with an
 extra member, Netflix Standard with ads, Mullvad VPN renewed by hand, Crave, Disney+, Proton and TSN). In both themes
