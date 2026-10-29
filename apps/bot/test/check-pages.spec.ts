@@ -53,11 +53,11 @@ describe('checkPages', () => {
     // yearly price isn't matched a month at a time (a per-month figure could be another plan's), so a person checks it.
     expect(
       result.findings.map((finding) =>
-        'target' in finding && 'price' in finding.target
+        'target' in finding && finding.target && 'price' in finding.target
           ? `${finding.kind} ${finding.target.price.amount}`
           : finding.kind,
       ),
-    ).toEqual(['confirmed 5', 'confirmed 10', 'confirmed 15', 'confirmed 30', 'manual']);
+    ).toEqual(['confirmed 5', 'confirmed 10', 'confirmed 15', 'confirmed 30', 'manual 60']);
 
     const none = await checkPages(
       { subject: 'mullvad', targets, approvals: [], networks: [] },

@@ -1,0 +1,126 @@
+url: https://mullvad.net/en/blog/no-pii-or-privacy-leaks-found-cure53s-infrastructure-audit
+method: fetch
+saved: 2026-10-29
+
+No PII or privacy leaks found in Cure53's Infrastructure audit | Mullvad VPN
+Skip to main content
+Products and services
+VPN
+Browser
+Browser extension
+Pricing
+Privacy
+Why privacy matters
+Technical resources
+Downloads
+Tech blog & news
+Open source
+Check for leaks
+Servers
+Help and support
+Guides
+FAQ
+VPN
+Browser
+Pricing
+Downloads
+Why privacy matters
+Log in Get started
+This blog post is 5 years old and may be out of date.
+No PII or privacy leaks found in Cure53's Infrastructure audit
+January 20, 2021 External audits
+We invite you to read the final report of the first security-focused audit on Mullvad’s infrastructure, completed in December 2020.
+As Mullvad exists to protect users and their data, we are rather happy with independent auditor Cure53's statement, “The security awareness and overall security posture should be regarded as rather good, as expected Cure53 were not able to discover any Personally-Identifiable-Information attached to Mullvad's end-users.”
+The audit report is available on Cure53's website.
+Overview of findings
+Cure53 did not find any Personally Identifiable Information (PII) or potentially privacy-compromising information.
+Cure53 identified six (6) vulnerabilities that ranged from “informative” to “high”.
+An additional six (6) miscellaneous issues were noted, again ranging from informative to high. Below you can see our responses to a select few of Cure53’s findings.
+We have resolutions to all of the vulnerabilities that Cure53 identified. Some are already in place while the rest will be rolled out in the coming days after proper testing.
+Key takeaway: Mullvad is now audited on both the infrastructure and the app! Completing external and regular audits on the entirety of our VPN service has been a long-term goal of ours.
+Identified vulnerabilities of interest
+MUL-03-005 WP2: OpenVPN users can be disconnected by attackers (High)
+To quote Cure53: “It was found that attackers can close the connection of other OpenVPN peers who are using the same entry gate. An OpenVPN monitor.py script frequently connects to the OpenVPN management interface of an OpenVPN-configured server instance. The script intends to fetch all connected OpenVPN users and check through the API if any of these accounts are expired. Finally, expired accounts are disconnected via the client-kill command issued through the OpenVPN management interface.”
+Our comments: Cure53 found this vulnerability in a script that had not been updated in some time. We have never experienced this vulnerability having been exploited. We have since deployed fixes for this exploit by improving the input sanitization on the client's username.
+MUL-03-002 WP2: OpenVPN user-authentication can be bypassed (Medium)
+To quote Cure53: “It was found that attackers could make use of Mullvad’s OpenVPN service without paying for it.”
+Our comments: There is a fine line between preserving a high uptime and losing potentially happy customers. We felt that our original approach was a good balance between the two.
+This vulnerability identified our approach for if and when our API were to become unavailable, specifically for OpenVPN relays. The negative implication identified by Cure53 was that malicious individuals or bots could have gained free time on our OpenVPN relays.
+For paying customers, functionality on OpenVPN relays should still be available as before in the event of API downtime, while abuse prevention has been upgraded.
+Miscellaneous issues of interest
+MUL-03-010 WP2: Insecure Docker configuration leads to breakout (High)
+To quote Cure53: “The overall Docker configuration offers neither additional separation nor further security boundaries for the host environment. The configuration concerns addresses should be further investigated by Mullvad, in order to determine if the use of docker as a technology stack offers any meaningful performance or security enhancing features for the overall integrity of the hosts. If this results in a decision to further use docker an overall hardening project should be initiated in order to minimize the attack surface of the current configuration.”
+Our comments: Docker, on the VPN relays, is not being used to compartmentalize from a security perspective, but rather to improve dependency handling for services that rely on differing software versions.
+We have resolved their areas of concern as they stand now, but the focus going forward will be to move toward a more trustworthy and transparent infrastructure.
+MUL-03-001: Timing-unsafe comparison used in authentication (Low)
+To quote Cure53: “It was found that the web application uses the SQL timing-unsafe comparison operator to query the account identified by the account token from the database. This induces a linear relationship between the runtime of the query and the equivalent prefix-length of the queried account-token, which is compared with the account tokens of the stored data.”
+Our comments: We determined that the proper solution to this problem would require some refactoring of the account database that we were not prepared to do on short notice. Given that the vulnerability was considered a low risk and that it would require a fairly involved attack to exploit, we decided not to act on it immediately. It will be fixed in the weeks to come.
+MUL-03-006 WP2: Shadowsocks-libev outdated and runs as root (Low)
+To quote Cure53: “It was found that the shadowsocks-libev library version 3.1.3 is outdated and vulnerable to multiple known attack-vectors that led to the decryption of the encrypted traffic. This induces the risk of VPN-usage-detection by censors, next to a publicly known static key. At the same time, one of the ss-server instances runs as root, therefore exposing an unnecessarily elevated risk.
+”It is recommended that the ss-server runs as a standard user on a port that requires no root privileges. Port-forwarding could be deployed via iptables to route all traffic destined to the root port(443) to the non-root port of the ss-server. Additionally, it should be considered to use a different Socks proxy that deploys user-authentication instead of a static key in order to circumvent potential censorship.
+”Note: This issue is not applicable to VPN traffic that passes through. The integrity of these services is protected by the use of the encryption schemes offered by OpenVPN and WireGuard.”
+Our Comments: The public static key is a design choice so that users can connect to the server without credentials. Running the ss-server process as root for port 443 has been fixed. We will update our Shadowsocks servers to change ciphers that will coincide with an app release.
+Our intentions to perform regular audits
+Now that we’ve completed the first-ever audit on our infrastructure, we will endeavor to do so on a yearly basis, just like our app audits. Our future audits will revolve more predominantly around our System Transparency focus.
+For the universal right to privacy,
+Mullvad
+Mullvad
+About
+Help
+Servers
+Pricing
+Blog
+Mullvad VPN
+Mullvad Browser
+Why privacy matters
+Why Mullvad VPN?
+What is a VPN?
+Downloads
+Stop chat control
+Press
+Careers
+Policies
+Policies
+Open source
+Privacy policy
+Cookies
+Terms of service
+Partnerships and resellers
+Reviews, ads and affiliates
+Reporting a bug or vulnerability
+Address
+Mullvad VPN AB
+Box 53049
+400 14 Gothenburg
+Sweden
+support@mullvadvpn.net
+GPG key
+Onion service
+Follow us
+@mullvadnet
+@mullvadnet
+Mullvad VPN
+mullvad
+Language
+English العربيّة
+Dansk
+Deutsch
+English
+Español
+فارسی
+Suomi
+Français
+Italiano
+日本語
+한국어
+Nederlands
+Norsk
+Polski
+Português
+Русский
+Svenska
+ภาษาไทย
+Türkçe
+Українська
+简体中文
+繁體中文

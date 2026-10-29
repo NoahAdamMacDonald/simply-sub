@@ -1,0 +1,295 @@
+url: https://protonvpn.com/blog/no-logs-audit
+method: fetch
+saved: 2026-10-29
+
+Proton VPN passes 5th annual external audit of no-logs policy | Proton VPN Why Proton VPN What is a VPN?
+Find out what a VPN is, how it works, and when to use one.
+Why Proton VPN?
+No logs, no ads, open-source and independently audited.
+All features
+Learn how our advanced security and privacy features allow you to browse the web with peace of mind.
+VPN servers
+Servers in 140+ countries for truly global connectivity.
+VPN for Streaming
+Watch what you want, when you want, from wherever you want with Proton VPN.
+Countries
+United States
+United Kingdom
+France
+All countries
+Services
+Netflix
+Amazon Prime Video
+Disney+
+All services
+Devices
+Android TV
+Fire Stick
+Apple TV
+All devices
+Pricing
+Download Devices
+Windows
+macOS
+Linux
+Chromebook
+Android
+iPhone / iPad
+VPN extensions
+Chrome
+Firefox
+Smart TV
+Android TV
+Apple TV
+Firestick
+Auto-detect the right version for your device
+Resources Resources
+What is my IP address?
+Find your public IP address using our safe, free IP scanner.
+Proton VPN Observatory
+Documenting spikes in Proton VPN use as people fight for online freedom.
+Censorship simulator
+See what a VPN unblocks with our interactive tool
+Help and support
+Proton VPN support
+Blog
+Proton VPN blog
+Company news
+(new window) Privacy guides
+(new window)
+Business VPN(new window)
+Discover Proton Proton ecosystem
+Proton Mail
+Secure your communications with encrypted email.
+(new window) Proton Calendar
+Organize your schedule privately.
+(new window) Proton Meet New
+Talk in private with confidential video conferencing.
+(new window) Proton VPN
+Keep your online activity secure and private.
+Proton Pass
+Protect your online identity with an encrypted password manager.
+(new window) Proton Authenticator
+Secure your online accounts with 2FA across devices.
+(new window) Proton Drive
+Organize your photos and files with secure cloud storage.
+(new window) Proton Docs
+Draft and edit secure online documents.
+(new window) Proton Sheets New
+Collaborate on sensitive spreadsheets in real time.
+(new window)
+More from Proton
+Lumo AI
+Ask and ideate with a privacy-first AI assistant.
+(new window) Simple Login
+Shield your inbox from spam and phishing with an email alias service.
+(new window) Standard Notes
+Write and store private notes across your devices.
+(new window)
+Proton for Business
+Protect your business with end-to-end encryption and compliance-ready security.
+(new window)
+Proton
+A better internet starts with privacy and freedom.
+(new window) About us
+(new window) Impact
+(new window) Community
+(new window) Open source
+(new window) Team
+(new window) Careers We’re hiring
+(new window) Proton Foundation
+(new window)
+Get Proton VPN
+Sign in
+Open menu
+How-to
+Privacy basics
+Privacy deep dives
+Proton VPN news
+Proton stories
+Releases
+Service updates
+For business(new window)
+Subscribe by RSS
+Search for blog posts Get Proton VPN
+For 5th year running, Proton VPN passes external no-logs audit
+Proton VPN news
+Andy Yen
+Last update on June 16, 2026Published on April 22, 2022
+Share this page:
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+Copy link
+Editor’s note: This article has been updated to feature the latest audit of our no-logs policy by Securitum. Links to all our no-logs policy audits are included.
+We’re pleased to announce that Proton VPN has passed a fifth consecutive annual third-party audit of our infrastructure that confirms our strict no-logs policy. When we say we are a no-logs VPN, it is not just a claim: It has been double-checked by independent experts.
+Many of our competitors have never been independently audited or have performed a sleight-of-hand, getting their privacy policy audited instead of their actual no-logs infrastructure. And even where their no-logs claims have been independently verified with an audit, many don’t publish the results, require you to sign a non-disclosure agreement to access them, only make them available to paying customers, or otherwise make it difficult to read them.
+By contrast, Proton VPN openly publishes the full no-logs report for anyone to read. As an organization founded by scientists who met at CERN, we believe in peer review and transparency. This is also why we make all our apps open source so that anyone can examine our code.
+Of course, we understand that not everyone has the time or skills to inspect code themselves. That is why, in addition to our internal audits, we regularly submit our apps to third-party security audits(new window) and make the results public. This way, everyone can get an independent expert’s opinion of our apps’ security.
+In the most recent security audit of all Proton apps(new window), security experts from Securitum(new window), a leading European security auditing company that oversees more than 300 security testing projects every year for major corporations and banks, uncovered no significant security issues. This shows that Proton’s internal audits and culture of secure software development are effective. And because our apps’ code is entirely open source, our security is bolstered by our bug bounty program(new window), which brings security experts together from all around the world to check our applications.
+However, with a VPN service, it’s also important to verify what is happening on the server side, and not just the application side.
+Why it’s important to verify a VPN’s no-logs policy
+When you connect to a VPN, it effectively becomes your internet provider, meaning any VPN provider is technically capable of tracking and logging what you do online. While many VPNs claim to have no-logs policies, these policies do not always hold up when put to the test.
+Proton VPN’s strict no-logs policy has been tested in over 400 legal cases so far. We were ordered to turn over logs to help identify our users, but we were unable to comply because these logs did not exist.
+Proton VPN’s Swiss jurisdiction also confers additional benefits for VPN services. For example, within the current Swiss legal framework, Proton VPN does not have any logging requirements. However, there remains the possibility that an incorrect server configuration or flawed system architecture could cause logs to be accidentally stored.
+To address this, we’ve asked Securitum to perform regular thorough examinations of our infrastructure and server-side operations. Each year, Securitum security experts spent several days on site reviewing our VPN configuration files and server configurations, assessing our operating procedures, and interviewing our staff. Their annual audits are extensive and checked the following:
+Is user activity tracked or logged on the production VPN servers that handle user traffic?
+Is connection metadata, such as DNS queries or session timestamps, logged on VPN servers?
+Is user network traffic actively inspected, or are its contents logged on VPN servers?
+Is information monitored or logged regarding the specific services (e.g., websites, external servers) a user connects to?
+Are aggregate logs maintained that correlate services accessed (e.g., websites, servers) with the specific VPN server used?
+Is the no-logs policy applied uniformly across all servers, in all geographic regions, and to all user subscription tiers?
+Is an automated process in place to detect and generate alerts for unauthorized configuration changes that could enable logging (e.g., changing a “log” parameter from false to true)?
+Is a formal change management process, incorporating a dual-control (four-eyes) principle, enforced for all authorized changes to logging-related configurations?
+Do the active configuration files for the core VPN services contain any enabled logging directives?
+Is information logged that associates a specific user with a specific VPN server they are connected to?
+The resulting reports confirm that we do not keep any metadata logs, do not log your VPN activity, and do not engage in any practices that might compromise your privacy. The reports also confirm that as Proton VPN adds more features and functionality to our service, this in no way impacts our strict no-logs policy. As the latest (2026) report concludes:
+“The technical evidence reviewed during the engagement did not indicate that the examined Proton VPN server infrastructure logs users’ browsing activity, DNS queries, destination services, network traffic contents or user-identifiable connection metadata. Securitum also did not identify persistent records that would allow Proton to associate a specific user with activity performed through a reviewed VPN server.”
+You can read the latest full report from Securitum below:
+Proton VPN no-logs audit 2026(new window)
+In line with Securitum’s recommendations, this is now the fifth consecutive annual audit of our no logs policy. You can also read our past no-logs audits by Securitum:
+Proton VPN no-logs audit 2025(new window)
+Proton VPN no-logs audit 2024(new window)
+Proton VPN no-logs audit 2023(new window)
+Proton VPN no-logs audit 2022(new window)
+Trust through transparency
+At Proton, we believe that all claims should be investigated and verified, including our own. Going forward, we will continue to perform regular security audits and publish the results so you can read an independent security professional’s report before you entrust us with your data.
+If you are a security researcher, we also invite you to support security at Proton through our bug bounty program(new window) that offers generous bounties to anyone who can identify vulnerabilities in our open-source services.
+Sign up for Proton VPN(new window) to get a transparent, open-source, and fully audited no-logs VPN that respects your privacy
+Share this page:
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+Copy link
+Andy Yen Andy is the founder and CEO of Proton. He is a long-time advocate for privacy rights and has spoken at TED, Web Summit, and the United Nations about online privacy issues. Previously, Andy was a research scientist at CERN and has a PhD in particle physics from Harvard University.
+Connect anywhere, privately
+Change location and browse without blocks.
+Get your fast VPN now Free and paid plans available
+Privacy basics
+What does a VPN protect you from?
+Privacy deep dives
+Can you be tracked when using a VPN?
+Privacy deep dives
+How does a VPN work?
+Related articles
+Oct 23, 2026 Proton VPN news
+Greece bans social media for children under 15
+Greece has banned social media for children under 15 and made platforms check users’ ages. Here’s what it does and why age checks risk everyone’s privacy.
+Oct 21, 2026 Proton VPN news
+Proton VPN fall and winter 2026 recap and roadmap
+See what Proton VPN delivered this spring and summer, and what’s coming this fall and winter: refreshed apps, a smarter kill switch, pause and resume, and more.
+Oct 14, 2026 Proton VPN news
+Proton stories
+Azerbaijan social media blocked amid protests over school hijab ban
+Instagram, TikTok, and X have been blocked in Azerbaijan amid protests over school dress codes seen as banning the hijab.
+Aug 14, 2026 Proton VPN news
+Vietnam’s new fake news fines triple VPN demand
+Harsh new social media laws and other repressive moves lead to a jump in VPN signups in Vietnam.
+Aug 14, 2026 Proton VPN news
+Is TikTok banned again in Oman?
+For the second time in about 18 months, Omanis are experiencing problems accessing TikTok. Here's what we know.
+Jul 14, 2026 Proton VPN news
+Proton VPN transparency report and warrant canary
+Under Swiss law, Proton VPN is not obligated to save connection logs, and we adhere to a strict no-logs VPN policy. Therefore, we are unable to comply with requests for user connection logs.
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+Proton AG Route de la Galaise 32
+1228 Plan-les-Ouates
+Geneva, Switzerland
+Features Free VPN
+VPN servers
+VPN for streaming
+Netflix VPN
+Secure Core VPN
+VPN for Business(new window)
+Getting started
+Features
+Free VPN
+VPN servers
+VPN for streaming
+Netflix VPN
+Secure Core VPN
+VPN for Business(new window)
+Getting started
+Platforms Download VPN
+VPN for Windows
+VPN for macOS
+VPN for Android
+VPN for iOS
+VPN for Linux
+VPN for Chrome
+VPN for Firefox
+VPN for Chromebook
+VPN for Android TV
+VPN for Apple TV
+Amazon Fire TV
+Platforms
+Download VPN
+VPN for Windows
+VPN for macOS
+VPN for Android
+VPN for iOS
+VPN for Linux
+VPN for Chrome
+VPN for Firefox
+VPN for Chromebook
+VPN for Android TV
+VPN for Apple TV
+Amazon Fire TV
+Company About us
+Proton Foundation(new window)
+Blog
+Careers(new window) We’re hiring
+Threat model
+Open source
+Company
+About us
+Proton Foundation(new window)
+Blog
+Careers(new window) We’re hiring
+Threat model
+Open source
+Connect Help and support
+Business sales(new window)
+Partners and affiliates(new window)
+Press and media(new window)
+Contact us
+Donate(new window)
+Live chat For customers
+Student discount(new window)
+Connect
+Help and support
+Business sales(new window)
+Partners and affiliates(new window)
+Press and media(new window)
+Contact us
+Donate(new window)
+Live chat For customers
+Student discount(new window)
+English
+System status(new window)
+Report abuse
+Report a problem
+Report a security issue(new window)
+Request a feature(new window)
+English
+Privacy Policy
+Terms & conditions(new window)
+Transparency report
+© 2026 Proton AG. All rights reserved.

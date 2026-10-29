@@ -1,0 +1,31 @@
+# The automation's settings (BLUEPRINT §6.4, §7.7): how often the nightly bot (apps/bot) checks each kind of page and
+# runs discovery, who reviews what it can't settle, how much it does a night, and the web searches it and this
+# machine may make a month. The bot reads this file from main every night, so a change takes a merge, not a redeploy.
+# Shapes: packages/core/src/pipeline/automation.ts.
+
+cadence:
+  pricing: daily
+  policies: weekly
+  logos: weekly
+  discovery: weekly
+
+# The weekly pull request of what changed, built on this day (UTC).
+digest:
+  day: monday
+
+# scheduled-claude: a weekly Claude Code task (BLUEPRINT §7.2); if it isn't set up, items wait as with manual.
+reviewer: scheduled-claude
+
+batch:
+  discovery: 3
+  browserPages: 5
+  neurons: 8000
+  reviewItems: 10
+
+# Tried in order, each until its monthly budget is spent. Tavily's free plan gives 1,000 searches a month (no card);
+# Brave's $5 of monthly credit buys 1,000 and it bills the card past that, so its budgets stay under it; SearXNG is
+# your own instance, with no limit. Keys go in .env and in the bot's secrets, never here.
+search:
+  - { engine: tavily, bot: 500, local: 500 }
+  - { engine: brave, bot: 450, local: 450 }
+  - { engine: searxng }

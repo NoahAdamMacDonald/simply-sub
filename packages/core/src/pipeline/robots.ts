@@ -1,12 +1,12 @@
-// robots.txt (RFC 9309), which the bot follows for every page it reads (BLUEPRINT §6.4). The group for its own token,
-// else `*`; within it, the longest matching rule decides, and Allow wins a tie. `*` matches anything and `$` ends a
-// pattern. A site's rules are read once a night and passed from step to step, so they're kept small: only the
-// group that applies.
+// robots.txt (RFC 9309), which the bot and the discovery pipeline follow for every page they read (BLUEPRINT §6.4,
+// §6.5). The group for its own token, else `*`; within it, the longest matching rule decides, and Allow wins a tie.
+// `*` matches anything and `$` ends a pattern. The bot reads a site's rules once a night and passes them from step to
+// step, so they're kept small: only the group that applies.
 
 /** The token the bot's User-Agent starts with, which a site's robots.txt can name. */
 export const robotsToken = 'SimplySubBot';
 
-/** The User-Agent of every request the bot makes. */
+/** The User-Agent of every request the bot and the pipeline's scripts make. */
 export const userAgent = `${robotsToken}/1.0 (+https://sub.simplely.ca/)`;
 
 export interface RobotsRule {

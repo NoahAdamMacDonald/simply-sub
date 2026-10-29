@@ -1,0 +1,122 @@
+# Drafted by the discovery pipeline on 2026-10-28 (BLUEPRINT §6.5) from these pages, each quoted where it's used.
+# Pricing: https://www.xbox.com/en-CA/xbox-game-pass.
+# Payment methods: none found.
+# Cancelling:
+# https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription.
+# Terms: https://www.xbox.com/en-US/legal/subscription-terms.
+# Privacy: none found.
+# Bundles: none found.
+# Official resellers: https://www.xbox.com/en-CA/where-to-buy.
+# Not on the pages: yearly prices: the page sells monthly plans only; the card networks it takes: no page read names
+# them; the countries it sells in: the page points to xbox.com/regions, which wasn't read; the first 14 days for $1 is
+# a promotional offer for new subscribers, so it isn't stored; official resellers: none; its where-to-buy page lists
+# retailers for consoles, games and accessories and says it "does not constitute an endorsement of any retailer".
+
+id: xbox-game-pass
+name: Xbox Game Pass
+website: https://www.xbox.com/xbox-game-pass
+category: gaming
+spendCategory: gaming
+billingCurrency: { CA: CAD }
+cancelUrl: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
+sources: { pricing: https://www.xbox.com/en-CA/xbox-game-pass }
+
+plans:
+  - id: xbox-game-pass.essential
+    name: Essential
+    link: https://www.xbox.com/en-CA/xbox-game-pass
+    features: {}
+    perks:
+      - 50+ games on console, PC and more devices
+      - Cloud playtime, 5 hours a month
+      - Online console multiplayer
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 13.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://www.xbox.com/en-CA/xbox-game-pass
+
+  - id: xbox-game-pass.premium
+    name: Premium
+    link: https://www.xbox.com/en-CA/xbox-game-pass
+    features: {}
+    perks:
+      - 200+ games on console, PC and more devices
+      - New Xbox-published games within a year of launch
+      - Cloud playtime, 10 hours a month
+      - Online console multiplayer
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 17.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://www.xbox.com/en-CA/xbox-game-pass
+
+  - id: xbox-game-pass.ultimate
+    name: Ultimate
+    link: https://www.xbox.com/en-CA/xbox-game-pass
+    features: {}
+    perks:
+      - 400+ games on console, PC and more devices
+      - New games on day one
+      - EA Play, Fortnite Crew and Ubisoft+ Classics
+      - Cloud playtime, 15 hours a month
+      - Online console multiplayer
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 25.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://www.xbox.com/en-CA/xbox-game-pass
+
+  - id: xbox-game-pass.pc-game-pass
+    name: PC Game Pass
+    link: https://www.xbox.com/en-CA/xbox-game-pass
+    features: {}
+    perks: [300+ games on PC only, New games on day one, EA Play]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 16.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://www.xbox.com/en-CA/xbox-game-pass
+
+policies:
+  links:
+    - name: Cancelling
+      url: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
+    - name: Plans and pricing
+      url: https://www.xbox.com/en-CA/xbox-game-pass
+  ratings:
+    - topic: billing.cancel-refunds
+      tier: great
+      reason: You can cancel at any time, and in Canada you can cancel with immediate effect and get a prorated refund of your last charge.
+      sources:
+        - url: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
+          quote: You can cancel an XBOX subscription at any time.
+        - url: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
+          quote: 'In the following countries, you have the right to cancel a subscription that has recurring billing with immediate effect and receive a prorated refund as described in the Microsoft Consumer Subscription Prorated Refund Policy:'
+      regions: [CA]
+      lastVerified: 2026-10-28
+    - topic: billing.price-changes
+      tier: good
+      reason: It gives at least 30 days' notice before raising the price, and you can cancel before the next billing date.
+      sources:
+        - url: https://www.xbox.com/en-CA/xbox-game-pass
+          quote: Charges may be increased on at least 30 days notice as described in the Microsoft Store Terms of Sale.
+        - url: https://www.xbox.com/en-CA/xbox-game-pass
+          quote: To stop being charged, cancel your subscription in your Microsoft account (account.microsoft.com/services) or on your XBOX console, before the next billing date.
+      lastVerified: 2026-10-28

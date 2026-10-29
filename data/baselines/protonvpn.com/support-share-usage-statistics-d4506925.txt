@@ -1,0 +1,280 @@
+url: https://protonvpn.com/support/share-usage-statistics
+method: fetch
+saved: 2026-10-29
+
+Help us fight censorship | Proton VPN Why Proton VPN What is a VPN?
+Find out what a VPN is, how it works, and when to use one.
+Why Proton VPN?
+No logs, no ads, open-source and independently audited.
+All features
+Learn how our advanced security and privacy features allow you to browse the web with peace of mind.
+VPN servers
+Servers in 140+ countries for truly global connectivity.
+VPN for Streaming
+Watch what you want, when you want, from wherever you want with Proton VPN.
+Countries
+United States
+United Kingdom
+France
+All countries
+Services
+Netflix
+Amazon Prime Video
+Disney+
+All services
+Devices
+Android TV
+Fire Stick
+Apple TV
+All devices
+Pricing
+Download Devices
+Windows
+macOS
+Linux
+Chromebook
+Android
+iPhone / iPad
+VPN extensions
+Chrome
+Firefox
+Smart TV
+Android TV
+Apple TV
+Firestick
+Auto-detect the right version for your device
+Resources Resources
+What is my IP address?
+Find your public IP address using our safe, free IP scanner.
+Proton VPN Observatory
+Documenting spikes in Proton VPN use as people fight for online freedom.
+Censorship simulator
+See what a VPN unblocks with our interactive tool
+Help and support
+Proton VPN support
+Blog
+Proton VPN blog
+Company news
+(new window) Privacy guides
+(new window)
+Business VPN(new window)
+Discover Proton Proton ecosystem
+Proton Mail
+Secure your communications with encrypted email.
+(new window) Proton Calendar
+Organize your schedule privately.
+(new window) Proton Meet New
+Talk in private with confidential video conferencing.
+(new window) Proton VPN
+Keep your online activity secure and private.
+Proton Pass
+Protect your online identity with an encrypted password manager.
+(new window) Proton Authenticator
+Secure your online accounts with 2FA across devices.
+(new window) Proton Drive
+Organize your photos and files with secure cloud storage.
+(new window) Proton Docs
+Draft and edit secure online documents.
+(new window) Proton Sheets New
+Collaborate on sensitive spreadsheets in real time.
+(new window)
+More from Proton
+Lumo AI
+Ask and ideate with a privacy-first AI assistant.
+(new window) Simple Login
+Shield your inbox from spam and phishing with an email alias service.
+(new window) Standard Notes
+Write and store private notes across your devices.
+(new window)
+Proton for Business
+Protect your business with end-to-end encryption and compliance-ready security.
+(new window)
+Proton
+A better internet starts with privacy and freedom.
+(new window) About us
+(new window) Impact
+(new window) Community
+(new window) Open source
+(new window) Team
+(new window) Careers We’re hiring
+(new window) Proton Foundation
+(new window)
+Get Proton VPN
+Sign in
+Open menu
+Support
+Get started
+Support search
+Help us fight censorship
+Reading
+5 mins
+Category
+Get started
+Proton VPN is on the front line of the fight for online freedom and privacy, often battling nation states(new window) to enable free access to information.
+Recently, there have been increased attempts by authoritarian governments to block our services — but your insights can help us stay one step ahead of the censors.
+By sharing anonymous statistics and crash reports from your device with the Proton VPN team, you can help us get around VPN blocks, improve our encryption technology, and continue to provide online freedom and privacy to the global community.
+What are usage statistics?
+Usage statistics are anonymized data points that help our researchers and scientists understand how Proton VPN interacts with your device, internet service providers (ISPs), firewalls, and other censorship systems.
+Usage statistic sharing is enabled by default, but you can disable it at any time (as described below). This data does not contain any personal information and is permanently deleted after 30 days.
+Why share usage statistics?
+It helps us overcome government censorship
+The sooner we can identify censorship, the sooner we can get around it.
+Usage statistics and crash reports alert us to potential VPN blocks, firewalls, and other censorship systems by exposing the resulting clusters of connection issues in real time.
+The need for on-the-ground information became especially clear during the recent unrest in Iran, where there have been increasingly severe attempts to prevent citizens from using Proton VPN to access outside information.
+Usage statistics help us stay one step ahead of the censors and ensure that everyone has uninterrupted access to uncensored news and social media.
+Our anti-censorship efforts benefit the entire Proton community. Learning how to overcome deliberate network restrictions also helps us improve VPN performance in other challenging conditions.
+It helps us improve our apps
+Millions of activists, journalists, and ordinary people around the world trust Proton VPN to help them browse safely, access independent news, and express themselves online.
+To meet the needs of the Proton community, we need a better understanding of how our services are used in the real world, what threats they face, and what challenges we need to overcome to build a better, safer internet.
+Usage statistics can show our engineers which bugs need to be fixed and alert them to system outages that are otherwise difficult to track down because they impact only a small number of our community members.
+They also help our experience team tackle design issues and update outdated information, as well as showing our product team where the Proton VPN experience can be improved with new features.
+What statistics are shared?
+Some examples include:
+Crash reports
+We use these to identify and solve bugs, improving the stability of our apps.
+Failed connection attempts
+We use these to assess how different VPN protocols and ports are performing so we can tackle the root causes of connection issues.
+Internet service provider (ISP) and network type
+By understanding how censorship restrictions are applied across different providers and networks, we can fine-tune our Smart Protocol and our Stealth Protocol and get better at bypassing VPN blocks.
+We look at aggregated statistics to find unusual usage patterns and to identify areas for potential improvement. Statistics are always aggregated and anonymized, allowing us to look at the overall picture — not individual behavior.
+You can find more information in our Privacy Policy.
+You can also read about the usage statistics shared with other Proton apps(new window).
+Your privacy comes first
+We’re committed to respecting your online security and privacy. Sharing usage statistics will always be:
+Anonymous: Usage data does not contain your IP address and can’t be used to identify you.
+Limited in scope: Usage data can’t be used to track the websites you visit or your activity in any other apps. It does not change or alter our no-logs policy.
+Optional: You can disable anonymous usage statistics sharing at any time.
+Temporary: Usage statistics are permanently deleted after 30 days.
+How do I stop sharing anonymous usage statistics?
+You can stop sharing anonymous usage statistics with Proton VPN at any time from inside most of our VPN apps.
+Windows
+1. Go to Settings → Help us fight censorship.
+2. Toggle the Share anonymous usage statistics switch off and apply the changes.
+macOS
+1. Go to Preferences → Advanced.
+2. Toggle the Share anonymous usage statistics switch off.
+Mobile
+1. On iOS or iPadOS, go the Settings tab → Usage statistics.
+On Android, go the Settings tab → Improve Proton VPN → Help us fight censorship.
+2. Toggle the Share anonymous usage statistics switch off.
+You can also turn off usage statistic sharing for all Proton services by taking the following steps. (This will also disable usage statistic sharing on the Proton VPN Windows app.)
+1. Sign in to your Proton Account on our web app.
+2. Select Settings → All Settings → Security and privacy → Privacy and data collection.
+3. Scroll to the bottom of the page and turn off the Collect usage diagnostics toggle. By turning this switch off, you will stop sharing your usage statistics from all Proton services.
+Note: The Proton VPN app has app-level controls. If you don’t want to share usage statistics from Proton VPN, you can turn off Usage statistics in the Proton VPN app without affecting another service.
+However, you cannot share usage statistics from Proton VPN unless you have enabled Collect usage diagnostics in your Proton Account.
+On this page
+What are usage statistics?
+Why share usage statistics?
+What statistics are shared?
+Your privacy comes first
+How do I stop sharing anonymous usage statistics?
+Get started
+How to use Proton VPN Live Chat
+How to use Okta SCIM with Proton VPN for Business
+How to set up SSO for Proton VPN using Google
+How to set up SSO for Proton VPN using Okta
+Didn’t find what you were looking for?
+Get help
+General contactcontact@proton.me
+Media contactmedia@proton.me
+Legal contactlegal@proton.me
+Partnerships contactpartners@proton.me
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+Proton AG Route de la Galaise 32
+1228 Plan-les-Ouates
+Geneva, Switzerland
+Features Free VPN
+VPN servers
+VPN for streaming
+Netflix VPN
+Secure Core VPN
+VPN for Business(new window)
+Getting started
+Features
+Free VPN
+VPN servers
+VPN for streaming
+Netflix VPN
+Secure Core VPN
+VPN for Business(new window)
+Getting started
+Platforms Download VPN
+VPN for Windows
+VPN for macOS
+VPN for Android
+VPN for iOS
+VPN for Linux
+VPN for Chrome
+VPN for Firefox
+VPN for Chromebook
+VPN for Android TV
+VPN for Apple TV
+Amazon Fire TV
+Platforms
+Download VPN
+VPN for Windows
+VPN for macOS
+VPN for Android
+VPN for iOS
+VPN for Linux
+VPN for Chrome
+VPN for Firefox
+VPN for Chromebook
+VPN for Android TV
+VPN for Apple TV
+Amazon Fire TV
+Company About us
+Proton Foundation(new window)
+Blog
+Careers(new window) We’re hiring
+Threat model
+Open source
+Company
+About us
+Proton Foundation(new window)
+Blog
+Careers(new window) We’re hiring
+Threat model
+Open source
+Connect Help and support
+Business sales(new window)
+Partners and affiliates(new window)
+Press and media(new window)
+Contact us
+Donate(new window)
+Live chat For customers
+Student discount(new window)
+Connect
+Help and support
+Business sales(new window)
+Partners and affiliates(new window)
+Press and media(new window)
+Contact us
+Donate(new window)
+Live chat For customers
+Student discount(new window)
+English
+System status(new window)
+Report abuse
+Report a problem
+Report a security issue(new window)
+Request a feature(new window)
+English
+Privacy Policy
+Terms & conditions(new window)
+Transparency report
+© 2026 Proton AG. All rights reserved.

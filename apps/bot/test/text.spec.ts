@@ -1,8 +1,17 @@
 import { describe, expect, it } from 'vitest';
-import { moneyIn, pageShows, sameCurrency } from '../src/amounts';
-import { comparable, excerpt, nameIndexes, pageText } from '../src/page-text';
-import { parseRobots, robotsAllow } from '../src/robots';
-import { missingQuotes, taxWording } from '../src/tax-wording';
+import {
+  comparable,
+  excerpt,
+  missingQuotes,
+  moneyIn,
+  nameIndexes,
+  pageShows,
+  pageText,
+  parseRobots,
+  robotsAllow,
+  sameCurrency,
+  taxWording,
+} from '@simply-sub/core';
 import netflixCa from './fixtures/netflix-ca.html?raw';
 
 describe('pageText', () => {

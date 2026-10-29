@@ -5,6 +5,12 @@ description: Read a subscription provider's real plans, prices, add-ons, bundles
 
 # Price research (official sites, system Edge)
 
+> **New providers come from the discovery pipeline first** (BLUEPRINT §6.5): `npm run data:batch` on a computer, or
+> the nightly bot on its cadence, finds the pages, has them extracted with every quote checked word for word, and
+> opens a batch pull request. This skill is for what the pipeline leaves to a person: a service it couldn't read, a
+> draft to fix, a region or price it didn't settle, and the weekly digest's price items (the catalog-review skill).
+> Its rules are the pipeline's rules too (core's `extractionRules`): change both together.
+
 Every catalog price needs a `lastVerified` date (the day you read it) and a `sourceUrl` you actually opened. The
 API contract's prices are illustrative and never a source. This skill is how to read the real ones.
 

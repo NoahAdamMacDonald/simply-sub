@@ -1,0 +1,297 @@
+url: https://protonvpn.com/blog/spring-summer-recap-2025
+method: fetch
+saved: 2026-10-29
+
+Proton VPN spring and summer recap 2025 | Proton VPN Why Proton VPN What is a VPN?
+Find out what a VPN is, how it works, and when to use one.
+Why Proton VPN?
+No logs, no ads, open-source and independently audited.
+All features
+Learn how our advanced security and privacy features allow you to browse the web with peace of mind.
+VPN servers
+Servers in 140+ countries for truly global connectivity.
+VPN for Streaming
+Watch what you want, when you want, from wherever you want with Proton VPN.
+Countries
+United States
+United Kingdom
+France
+All countries
+Services
+Netflix
+Amazon Prime Video
+Disney+
+All services
+Devices
+Android TV
+Fire Stick
+Apple TV
+All devices
+Pricing
+Download Devices
+Windows
+macOS
+Linux
+Chromebook
+Android
+iPhone / iPad
+VPN extensions
+Chrome
+Firefox
+Smart TV
+Android TV
+Apple TV
+Firestick
+Auto-detect the right version for your device
+Resources Resources
+What is my IP address?
+Find your public IP address using our safe, free IP scanner.
+Proton VPN Observatory
+Documenting spikes in Proton VPN use as people fight for online freedom.
+Censorship simulator
+See what a VPN unblocks with our interactive tool
+Help and support
+Proton VPN support
+Blog
+Proton VPN blog
+Company news
+(new window) Privacy guides
+(new window)
+Business VPN(new window)
+Discover Proton Proton ecosystem
+Proton Mail
+Secure your communications with encrypted email.
+(new window) Proton Calendar
+Organize your schedule privately.
+(new window) Proton Meet New
+Talk in private with confidential video conferencing.
+(new window) Proton VPN
+Keep your online activity secure and private.
+Proton Pass
+Protect your online identity with an encrypted password manager.
+(new window) Proton Authenticator
+Secure your online accounts with 2FA across devices.
+(new window) Proton Drive
+Organize your photos and files with secure cloud storage.
+(new window) Proton Docs
+Draft and edit secure online documents.
+(new window) Proton Sheets New
+Collaborate on sensitive spreadsheets in real time.
+(new window)
+More from Proton
+Lumo AI
+Ask and ideate with a privacy-first AI assistant.
+(new window) Simple Login
+Shield your inbox from spam and phishing with an email alias service.
+(new window) Standard Notes
+Write and store private notes across your devices.
+(new window)
+Proton for Business
+Protect your business with end-to-end encryption and compliance-ready security.
+(new window)
+Proton
+A better internet starts with privacy and freedom.
+(new window) About us
+(new window) Impact
+(new window) Community
+(new window) Open source
+(new window) Team
+(new window) Careers We’re hiring
+(new window) Proton Foundation
+(new window)
+Get Proton VPN
+Sign in
+Open menu
+How-to
+Privacy basics
+Privacy deep dives
+Proton VPN news
+Proton stories
+Releases
+Service updates
+For business(new window)
+Subscribe by RSS
+Search for blog posts Get Proton VPN
+Proton VPN spring and summer recap 2025
+Proton VPN news
+Antonio Cesarano
+Published on October 1, 2025
+Share this page:
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+Copy link
+You should be able to enjoy all of Proton VPN’s advanced features, no matter what device you’re using. To help you track our progress in achieving this goal, we published a roadmap in April outlining our plans for new features and products designed to make your life more private, more productive, and more convenient.
+We believe keeping you, the Proton community, informed of what has been completed is an important part of ensuring the tools we build serve your needs. In case you missed any of these announcements, here’s a list of everything that’s been added over the year so far.
+We’ll share our roadmap for fall soon, so be sure to check back in and see what’s coming next.
+More private
+Never fall for a phishing attack
+Have you ever clicked on a link that takes you to a suspicious website or downloads files you didn’t want? Our NetShield Ad-blocker DNS filtering feature has always protected you from a wide range of malware and unwanted trackers, but now you can rely on it for even more protection from malicious actors.
+NetShield now blocks almost all known phishing(new window) domains (while minimizing “false positives”), making the internet safer and more enjoyable to explore.
+Use Proton VPN on your iPhone and iPad – no account needed
+You can now use Proton VPN on your iPhone and iPad without a Proton Account. Just install the app and tap the Continue as guest button to defeat censorship and protect your privacy online.
+Bypass censorship and access local services in more locations
+Defeat government efforts to censor international connections and access local content by connecting to 15,000+ VPN servers in 126 countries. New locations include Panama, Armenia, Mongolia, Laos, Brunei, Cuba, Dominican Republic, Guatemala, and Honduras, plus an additional two new US cities (Memphis, Tennessee, and McAllen, Texas).
+More productive
+Use our VPN your way
+Already available on Windows, Android, and our browser extensions for Chrome and Firefox, you can now use split tunneling on your Linux or Mac device to route some connections through the VPN tunnel while excluding others. For example, you can use a VPN only for specific purposes, like protecting your torrenting sessions or changing your location when gaming.
+And by popular demand, you can now join in the fun by torrenting faster than ever on your Mac by port forwarding through the firewall(new window) Proton VPN uses to protect our customers.
+Split tunneling and port forwarding are available to everyone with a paid Proton VPN plan.
+Note that split tunneling on macOS is currently an experimental feature, so we’d greatly appreciate your feedback on how it works for you.
+Connect over IPv6 on Windows
+As part of our commitment to future-proofing our service across all apps, you can now connect to websites using IPv6 in our Windows app, joining our Android and Linux apps. We’re still working on adding IPv6 support to our macOS, iOS, and iPadOS apps.
+Browse faster for longer
+Improvements to our Android and iOS apps mean you can now browse the internet safely wherever you have reception without worrying about your smartphone dying. Your phone will wake up less when it’s supposed to be idle, conserving battery power while Proton VPN works in the background to protect your privacy.
+A major improvement to our unique VPN Accelerator technology also ensures that everyone enjoys blazing-fast page load times and fully benefits from the bandwidth you pay for, even under unusual network conditions.
+More convenient
+Use advanced content filters on Apple devices
+Normally, when you connect to Proton VPN, we encrypt and resolve your DNS queries. Custom DNS lets you choose one or more third-party DNS resolvers instead, allowing you to access their advanced DNS filtering features, such as parental controls and customized blocklists.
+Now, we’ve added Custom DNS support to our iOS/iPadOS, macOS, and Android TV apps. This means you can now enjoy this popular feature on all your devices, including Android, Linux, and Windows. Custom DNS is available to everyone with a paid Proton VPN plan.
+See fewer ads on Android TV
+New support for NetShield Ad-blocker on our Android TV app means you can enjoy your favorite shows, movies, and sports events on your big-screen TV with fewer ads. You can also set Proton VPN to launch and connect when your device starts to ensure your viewing habits always remain private.
+Buy Proton VPN your way
+For greater convenience, you can now pay for Proton VPN using Apple Pay, and companies in Europe can pay for Proton for Business plans using SEPA. We’ve also partnered with ProxyStore(new window) and CoinGate(new window) to provide new ways to buy our service and make Proton VPN accessible to more people.
+We also now accept additional cryptocurrency payment options, such as Monero, Litecoin, Ethereum, and more. We’re using resellers to handle these cryptocurrency payments, which lets us provide an additional layer of privacy for customers whose threat models require additional security.
+This was one of the community’s most popular requests.
+Thrill to the sound of burning rubber
+Do you love Formula 1? You can now catch the latest racing coverage, exclusive feeds, and breathtaking on-demand action with better F1 TV streaming support in more countries worldwide.
+Stream like you’re home — from wherever you are
+You can now watch local versions of Netflix, Amazon Prime Video, and Disney+ safely and securely in most countries worldwide. We’ve also added support for many regional services, such as Channel 5 (UK), Discovery+ (US), VTR Max (Belgium), and Megogo (Ukraine).
+Connect and Go
+With our new Connect and Go feature available for Android and Windows, you can automatically launch an app or website using a VPN connection profile, which is great for anyone who always uses a VPN for specific apps or websites. You can even open websites in Incognito mode.
+Proton VPN for Business
+If you’re a Proton VPN for Business administrator, you can now customize shared servers and specify which server locations the users in your organization can access.
+You can also configure dedicated IP addresses for your gateways in more countries to better serve distributed teams. Finally, you can ensure only authorized users access your gateways using Gateway Monitor.
+So what’s next?
+We also have some exciting new announcements (some previously only hinted at) about upcoming new features and improvements to come over the coming months. Highlights include a cleaner interface and quicker access to our servers in 120+ countries and their cities for our macOS and Linux apps, and a treat for those of you on our Free plan.
+Lastly, good things come to those who sudo wait.
+To find out more, watch out for our upcoming Proton VPN fall and winter roadmap.
+Thank you for supporting our work to make privacy and freedom available to everyone. To tell us what you think about our recent improvements or to suggest new features you’d like to see, join our community(new window).
+Share this page:
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+Copy link
+Antonio Cesarano Antonio is Product Lead at Proton VPN, Proton's free, no-logs VPN service. He has a background in Software Engineering and IT Management Before working at Proton, Antonio was Project Manager at CERN, building platforms to make free physics literature available to everyone. He has also actively developed open source software at CERN and RedHat.
+Related articles
+Oct 23, 2026 Proton VPN news
+Greece bans social media for children under 15
+Greece has banned social media for children under 15 and made platforms check users’ ages. Here’s what it does and why age checks risk everyone’s privacy.
+Oct 21, 2026 Proton VPN news
+Proton VPN fall and winter 2026 recap and roadmap
+See what Proton VPN delivered this spring and summer, and what’s coming this fall and winter: refreshed apps, a smarter kill switch, pause and resume, and more.
+Oct 14, 2026 Proton VPN news
+Proton stories
+Azerbaijan social media blocked amid protests over school hijab ban
+Instagram, TikTok, and X have been blocked in Azerbaijan amid protests over school dress codes seen as banning the hijab.
+Aug 14, 2026 Proton VPN news
+Vietnam’s new fake news fines triple VPN demand
+Harsh new social media laws and other repressive moves lead to a jump in VPN signups in Vietnam.
+Aug 14, 2026 Proton VPN news
+Is TikTok banned again in Oman?
+For the second time in about 18 months, Omanis are experiencing problems accessing TikTok. Here's what we know.
+Jul 14, 2026 Proton VPN news
+Proton VPN transparency report and warrant canary
+Under Swiss law, Proton VPN is not obligated to save connection logs, and we adhere to a strict no-logs VPN policy. Therefore, we are unable to comply with requests for user connection logs.
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+Proton AG Route de la Galaise 32
+1228 Plan-les-Ouates
+Geneva, Switzerland
+Features Free VPN
+VPN servers
+VPN for streaming
+Netflix VPN
+Secure Core VPN
+VPN for Business(new window)
+Getting started
+Features
+Free VPN
+VPN servers
+VPN for streaming
+Netflix VPN
+Secure Core VPN
+VPN for Business(new window)
+Getting started
+Platforms Download VPN
+VPN for Windows
+VPN for macOS
+VPN for Android
+VPN for iOS
+VPN for Linux
+VPN for Chrome
+VPN for Firefox
+VPN for Chromebook
+VPN for Android TV
+VPN for Apple TV
+Amazon Fire TV
+Platforms
+Download VPN
+VPN for Windows
+VPN for macOS
+VPN for Android
+VPN for iOS
+VPN for Linux
+VPN for Chrome
+VPN for Firefox
+VPN for Chromebook
+VPN for Android TV
+VPN for Apple TV
+Amazon Fire TV
+Company About us
+Proton Foundation(new window)
+Blog
+Careers(new window) We’re hiring
+Threat model
+Open source
+Company
+About us
+Proton Foundation(new window)
+Blog
+Careers(new window) We’re hiring
+Threat model
+Open source
+Connect Help and support
+Business sales(new window)
+Partners and affiliates(new window)
+Press and media(new window)
+Contact us
+Donate(new window)
+Live chat For customers
+Student discount(new window)
+Connect
+Help and support
+Business sales(new window)
+Partners and affiliates(new window)
+Press and media(new window)
+Contact us
+Donate(new window)
+Live chat For customers
+Student discount(new window)
+English
+System status(new window)
+Report abuse
+Report a problem
+Report a security issue(new window)
+Request a feature(new window)
+English
+Privacy Policy
+Terms & conditions(new window)
+Transparency report
+© 2026 Proton AG. All rights reserved.

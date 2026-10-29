@@ -1,0 +1,175 @@
+# Drafted by the discovery pipeline on 2026-10-28 (BLUEPRINT §6.5) from these pages, each quoted where it's used.
+# Pricing: https://support.claude.com/en/articles/8325606-what-is-the-pro-plan,
+# https://support.claude.com/en/articles/11049741-what-is-the-max-plan, https://claude.com/pricing.
+# Payment methods: https://support.claude.com/en/articles/8325618-paid-plan-billing-faqs.
+# Cancelling: https://support.claude.com/en/articles/12386328-request-a-refund-for-a-paid-claude-plan,
+# https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription.
+# Terms: https://www.anthropic.com/legal/consumer-terms.
+# Privacy: https://www.anthropic.com/legal/privacy.
+# Bundles: none found.
+# Official resellers: none found.
+# Not on the pages: the currency of the prices a Canadian sees on claude.com/pricing ($23 a month billed yearly, $280
+# a year, $28 a month, Max from $140): no page names it, so only the US prices are stored; Max's yearly price: its
+# help article says nothing about yearly billing; the card networks it takes: its billing pages name none; the
+# countries it sells in: its Pro article says only certain supported locations; official resellers: none found.
+
+id: claude
+name: Claude
+website: https://claude.com
+category: ai
+spendCategory: software
+billingCurrency: { GLOBAL: USD, US: USD }
+cancelUrl: https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription
+sources: { pricing: https://claude.com/pricing }
+
+plans:
+  - id: claude.free
+    name: Free
+    link: https://claude.com/pricing
+    features: { ai.assistant: true }
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://claude.com/pricing
+
+  - id: claude.pro
+    name: Pro
+    link: https://claude.com/pricing
+    features: { ai.assistant: true }
+    perks: [Claude Code]
+    prices:
+      - region: US
+        currency: USD
+        amount: 20
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://support.claude.com/en/articles/8325606-what-is-the-pro-plan
+      - region: US
+        currency: USD
+        amount: 200
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://claude.com/pricing
+
+  - id: claude.max-5x
+    name: Max 5x
+    link: https://claude.com/pricing
+    features: { ai.assistant: true }
+    perks: [Claude Code, Priority access at high traffic times]
+    prices:
+      - region: US
+        currency: USD
+        amount: 100
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://support.claude.com/en/articles/11049741-what-is-the-max-plan
+
+  - id: claude.max-20x
+    name: Max 20x
+    link: https://claude.com/pricing
+    features: { ai.assistant: true }
+    perks: [Claude Code, Priority access at high traffic times]
+    prices:
+      - region: US
+        currency: USD
+        amount: 200
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://support.claude.com/en/articles/11049741-what-is-the-max-plan
+
+policies:
+  links:
+    - name: Cancelling
+      url: https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription
+    - name: Cancelling (2)
+      url: https://support.claude.com/en/articles/12386328-request-a-refund-for-a-paid-claude-plan
+    - name: Terms of service
+      url: https://www.anthropic.com/legal/consumer-terms
+    - name: Privacy policy
+      url: https://www.anthropic.com/legal/privacy
+  ratings:
+    - topic: billing.cancel-refunds
+      tier: neutral
+      reason: You can cancel online at any time and keep using it until the end of the period you paid for, but payments aren't refunded unless its terms or the law say so.
+      sources:
+        - url: https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription
+          quote: You may cancel your Pro or Max plan subscription at any time by following the cancellation instructions for the platform you signed up on.
+        - url: https://support.claude.com/en/articles/12386328-request-a-refund-for-a-paid-claude-plan
+          quote: Except as expressly provided in our Consumer Terms of Service or where required by law, all payments are non-refundable.
+      lastVerified: 2026-10-28
+    - topic: billing.price-changes
+      tier: great
+      reason: A new price never applies to time you've already paid for, and it tells you at least 30 days before a price goes up, so you can cancel first.
+      sources:
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: we will not make any change to the fees applicable to your Subscription during the current Initial Term or Renewal Term, as applicable
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: we will inform you at least 30 days in advance of the change
+      regions: [CA]
+      lastVerified: 2026-10-28
+    - topic: legal.disputes
+      tier: good
+      reason: "There's no arbitration: disputes go to the courts in San Francisco, California, the ones it chose."
+      sources:
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: any disputes arising out of or relating to these Terms will be resolved exclusively in the state or federal courts located in San Francisco, California
+      regions: [CA]
+      lastVerified: 2026-10-28
+    - topic: legal.terms-changes
+      tier: poor
+      reason: It can change its terms when it wants, and if you keep using Claude after they're posted, you've agreed to them.
+      sources:
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: If you continue to access the Services after we post the updated Terms on Anthropic’s website or otherwise give you notice of Terms changes, then you agree to the updated Terms.
+      regions: [CA]
+      lastVerified: 2026-10-28
+    - topic: legal.account-closure
+      tier: neutral
+      reason: It can close your account without notice if it believes you broke its terms, with no refund; if it ends your plan for any other reason, it refunds the unused time.
+      sources:
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: If we terminate your access to the Services due to a violation of these Terms and you have a Subscription, you will not be entitled to any refund.
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: If we exercise this right, we will refund you, on a pro rata basis, the fees you paid for the remaining portion of your Subscription after termination.
+      regions: [CA]
+      lastVerified: 2026-10-28
+    - topic: privacy.data-collection
+      tier: poor
+      reason: It may use your chats to train its AI unless you turn that off in your settings, and even then it uses chats flagged for a safety review.
+      sources:
+        - url: https://www.anthropic.com/legal/privacy
+          quote: We may use your Inputs and Outputs to train and improve Anthropic AI models, unless you opt out through your account settings.
+        - url: https://www.anthropic.com/legal/privacy
+          quote: 'Even if you opt-out, we will use Inputs and Outputs for model improvement when:'
+      lastVerified: 2026-10-28
+    - topic: privacy.data-sharing
+      tier: neutral
+      reason: It doesn't sell your data, but it shares it to show you ads for its own products unless you opt out.
+      sources:
+        - url: https://www.anthropic.com/legal/privacy
+          quote: Anthropic does not “sell” your personal data as that term is defined by applicable laws and regulations.
+        - url: https://www.anthropic.com/legal/privacy
+          quote: You can opt-out of sharing your personal data for targeted advertising to promote our products and services, and we will honor global privacy controls.
+      lastVerified: 2026-10-28
+    - topic: privacy.data-deletion
+      tier: good
+      reason: You can delete chats yourself, and they're gone from its systems within 30 days; you can also ask it to delete your other data, with some exceptions.
+      sources:
+        - url: https://www.anthropic.com/legal/privacy
+          quote: You also are able to delete individual conversations, which will be removed immediately from your conversation history and automatically deleted from our back-end within 30 days.
+        - url: https://www.anthropic.com/legal/privacy
+          quote: the right to request that we delete personal data collected from you when you use our Services, subject to certain exceptions.
+      lastVerified: 2026-10-28

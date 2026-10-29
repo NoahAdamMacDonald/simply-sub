@@ -16,6 +16,7 @@ describe('stepPlan', () => {
         'bundle.d': ['https://tsn.ca/subscribe', 'https://crave.ca/subscribe'],
       },
       hosts: [],
+      cited: [],
     });
     expect(plan.withProvider).toEqual({ crave: ['bundle.a'], tsn: [] });
     expect(plan.groups).toEqual([['bundle.b', 'bundle.c'], ['bundle.d']]);
@@ -29,6 +30,11 @@ describe('stepPlan', () => {
       // Its accepted cards in each country (M9.2).
       'https://help.netflix.com/en/node/116380/ca',
       'https://help.netflix.com/en/node/116380/us',
+      // The pages its policy ratings quote (M3.9).
+      'https://help.netflix.com/legal/privacy',
+      'https://help.netflix.com/legal/termsofuse',
+      'https://help.netflix.com/en/node/123277',
+      'https://help.netflix.com/en/node/54816',
     ]);
     expect(index.hosts).toContain('www.amazon.ca');
     expect(index.hosts).toContain('icons.duckduckgo.com');

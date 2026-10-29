@@ -1,0 +1,214 @@
+url: https://protonvpn.com/privacy-policy
+method: fetch
+saved: 2026-10-29
+
+Proton VPN - Privacy Policy | Proton VPN Why Proton VPN What is a VPN?
+Find out what a VPN is, how it works, and when to use one.
+Why Proton VPN?
+No logs, no ads, open-source and independently audited.
+All features
+Learn how our advanced security and privacy features allow you to browse the web with peace of mind.
+VPN servers
+Servers in 140+ countries for truly global connectivity.
+VPN for Streaming
+Watch what you want, when you want, from wherever you want with Proton VPN.
+Countries
+United States
+United Kingdom
+France
+All countries
+Services
+Netflix
+Amazon Prime Video
+Disney+
+All services
+Devices
+Android TV
+Fire Stick
+Apple TV
+All devices
+Pricing
+Download Devices
+Windows
+macOS
+Linux
+Chromebook
+Android
+iPhone / iPad
+VPN extensions
+Chrome
+Firefox
+Smart TV
+Android TV
+Apple TV
+Firestick
+Auto-detect the right version for your device
+Resources Resources
+What is my IP address?
+Find your public IP address using our safe, free IP scanner.
+Proton VPN Observatory
+Documenting spikes in Proton VPN use as people fight for online freedom.
+Censorship simulator
+See what a VPN unblocks with our interactive tool
+Help and support
+Proton VPN support
+Blog
+Proton VPN blog
+Company news
+(new window) Privacy guides
+(new window)
+Business VPN(new window)
+Discover Proton Proton ecosystem
+Proton Mail
+Secure your communications with encrypted email.
+(new window) Proton Calendar
+Organize your schedule privately.
+(new window) Proton Meet New
+Talk in private with confidential video conferencing.
+(new window) Proton VPN
+Keep your online activity secure and private.
+Proton Pass
+Protect your online identity with an encrypted password manager.
+(new window) Proton Authenticator
+Secure your online accounts with 2FA across devices.
+(new window) Proton Drive
+Organize your photos and files with secure cloud storage.
+(new window) Proton Docs
+Draft and edit secure online documents.
+(new window) Proton Sheets New
+Collaborate on sensitive spreadsheets in real time.
+(new window)
+More from Proton
+Lumo AI
+Ask and ideate with a privacy-first AI assistant.
+(new window) Simple Login
+Shield your inbox from spam and phishing with an email alias service.
+(new window) Standard Notes
+Write and store private notes across your devices.
+(new window)
+Proton for Business
+Protect your business with end-to-end encryption and compliance-ready security.
+(new window)
+Proton
+A better internet starts with privacy and freedom.
+(new window) About us
+(new window) Impact
+(new window) Community
+(new window) Open source
+(new window) Team
+(new window) Careers We’re hiring
+(new window) Proton Foundation
+(new window)
+Get Proton VPN
+Sign in
+Open menu
+Proton VPN - Privacy policy
+Last modified: July 30th, 2025
+This sub-policy is an integral part of the Proton Privacy Policy(new window). It details the data processing activities specifically related to the creation and activity of your Proton Account when you use Proton VPN.
+Account activity: Proton VPN is a no-logs VPN service. When you use the Service, we do NOT do any of the following:
+Log users' traffic or the content of any communications
+Discriminate against devices, protocols, or applications
+Throttle your Internet connection
+Our free VPN service is also covered by our no-logs policy, and has in general no speed restrictions. We do reserve the right to impose speed restrictions in cases of excessive consumption in order to ensure service quality for all users on free servers.
+You can find details about our no-logs VPN policy here.
+All Proton VPN servers are encrypted and we do not log VPN session data.
+Transparency report: Information about law enforcement data requests can be found in the Proton VPN Transparency Report and Warrant Canary.
+Data security: All information required to maintain your account are managed by servers that are wholly owned and operated by Proton or our subsidiaries. This data is always stored in encrypted format on our servers, which are exclusively located in Switzerland, Germany or Norway, under the protection of some of the world's strongest privacy laws. Furthermore, Proton physically owns and operates all Secure Core servers, and a majority of our VPN servers in Switzerland and Germany (Proton owned servers can be identified by IP addresses which identify Proton AG as the internet service provider). All Proton VPN servers, irrespective of location, utilize full-disk encryption, and in the highly unlikely event that the full-disk encryption is compromised, Proton VPN servers also contain no logs and no user data.
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+Proton AG Route de la Galaise 32
+1228 Plan-les-Ouates
+Geneva, Switzerland
+Features Free VPN
+VPN servers
+VPN for streaming
+Netflix VPN
+Secure Core VPN
+VPN for Business(new window)
+Getting started
+Features
+Free VPN
+VPN servers
+VPN for streaming
+Netflix VPN
+Secure Core VPN
+VPN for Business(new window)
+Getting started
+Platforms Download VPN
+VPN for Windows
+VPN for macOS
+VPN for Android
+VPN for iOS
+VPN for Linux
+VPN for Chrome
+VPN for Firefox
+VPN for Chromebook
+VPN for Android TV
+VPN for Apple TV
+Amazon Fire TV
+Platforms
+Download VPN
+VPN for Windows
+VPN for macOS
+VPN for Android
+VPN for iOS
+VPN for Linux
+VPN for Chrome
+VPN for Firefox
+VPN for Chromebook
+VPN for Android TV
+VPN for Apple TV
+Amazon Fire TV
+Company About us
+Proton Foundation(new window)
+Blog
+Careers(new window) We’re hiring
+Threat model
+Open source
+Company
+About us
+Proton Foundation(new window)
+Blog
+Careers(new window) We’re hiring
+Threat model
+Open source
+Connect Help and support
+Business sales(new window)
+Partners and affiliates(new window)
+Press and media(new window)
+Contact us
+Donate(new window)
+Live chat For customers
+Student discount(new window)
+Connect
+Help and support
+Business sales(new window)
+Partners and affiliates(new window)
+Press and media(new window)
+Contact us
+Donate(new window)
+Live chat For customers
+Student discount(new window)
+English
+System status(new window)
+Report abuse
+Report a problem
+Report a security issue(new window)
+Request a feature(new window)
+English
+Privacy Policy
+Terms & conditions(new window)
+Transparency report
+© 2026 Proton AG. All rights reserved.

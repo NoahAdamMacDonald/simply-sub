@@ -132,6 +132,11 @@ export function printIssues(issues: readonly LocatedIssue[]): void {
   }
 }
 
+/** An issue as data:validate prints it, without the "Error:" in front. */
+export function formatIssue({ issue, line }: LocatedIssue): string {
+  return formatCatalogIssue(issue, line);
+}
+
 export function countErrors(issues: readonly LocatedIssue[]): number {
   return issues.filter(({ issue }) => issue.severity === 'error').length;
 }

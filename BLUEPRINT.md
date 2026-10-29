@@ -227,6 +227,12 @@ simply-sub/
 │     │  │                   # bodies (M2.4)
 │     │  ├─ optimizer/       # suggestion engine (section 10)
 │     │  ├─ rewards/         # card reward maths (section 9)
+│     │  ├─ pipeline/        # the discovery pipeline's logic (section 6.5): the queue and Wikidata (M3.1), web
+│     │  │                   # addresses; finding pages and web search (M3.2); a page's text, amounts, tax wording
+│     │  │                   # and robots.txt, shared with the bot (moved from apps/bot in M3.2); extraction: the
+│     │  │                   # answer's schema, the request, quotes, checks and drafts, and the drafts' YAML (M3.4);
+│     │  │                   # a batch's review table (M3.5); baselines: a page's lines, their file, the pages and
+│     │  │                   # facts the catalog cites (M3.6); the automation's settings (M3.8)
 │     │  └─ export/          # the exports' tables, calendar events, text and list file, which the app writes
 │     │                      # with papaparse, exceljs and ics (M7.5)
 │     └─ test/               # Vitest specs, mirroring src/ (run in the America/Vancouver time zone)
@@ -240,6 +246,9 @@ simply-sub/
 │  │  └─ …
 │  ├─ bundles/
 │  │  └─ disney-crave-premium.yaml
+│  ├─ queue.yaml             # the discovery queue: the services to add next, and what became of each (section 6.5)
+│  ├─ baselines/             # each cited page's text when its facts were read, <host>/<path>-<hash>.txt (section 6.5)
+│  ├─ automation.yaml        # the bot's settings: cadences, reviewer, batch sizes, search budgets (section 6.4)
 │  ├─ schema/                # JSON Schema for the YAML above, generated from core's Zod schemas (committed)
 │  └─ logos/                 # provider logos, <id>.png: fetched by `npm run data:icons` or added by hand (committed);
 │                            # data:build publishes each as a WebP of at most 96 px (section 6.3)
@@ -252,6 +261,14 @@ simply-sub/
 │  ├─ seed-d1.ts             # catalog.json + what D1 holds → apps/api/dist/seed.sql, run on D1 (sections 5.3, 7.6)
 │  ├─ lib/catalog-files.ts   # reads, parses and checks data/ for the catalog scripts
 │  ├─ fetch-icons.ts         # any website's best icon → data/logos/<id>.png (`npm run data:icons`)
+│  ├─ discover-services.ts   # Wikidata's services → data/queue.yaml (`npm run data:queue`, section 6.5)
+│  ├─ find-urls.ts           # each provider's pages → .pipeline/<id>/urls.json (`npm run data:urls`, section 6.5)
+│  ├─ lib/web.ts, lib/search.ts  # the pipeline's polite fetch and its web search (Tavily, Brave, SearXNG)
+│  ├─ render-pages.ts        # each page in the browser → .pipeline/<id>/pages/ (`npm run data:render`, section 6.5)
+│  ├─ lib/browser.ts         # the pipeline's browser: the system Edge through playwright-core
+│  ├─ extract-plans.ts       # saved pages → a model's answer → data/providers/<id>.yaml (`npm run data:extract`)
+│  ├─ batch-pr.ts            # a batch of queued services → one pull request (`npm run data:batch`, section 6.5)
+│  ├─ save-baselines.ts      # each cited page → data/baselines/ (`npm run data:baselines`, section 6.5)
 │  ├─ price-check.ts         # nightly price monitor (section 6.4)
 │  └─ draft-provider.ts      # AI-assisted: pricing page URL → draft YAML
 │
@@ -1384,8 +1401,8 @@ or the disk. Today is the date where the script runs, which is UTC in CI.
 Validation fails if:
 - a file isn't valid YAML (a duplicate key, more than one document), isn't one of `data/features.yaml`,
   `data/categories.yaml`, `data/resellers.yaml` (optional), `data/policy-topics.yaml` (optional until a provider
-  rates its policies), `data/providers/<id>.yaml` or `data/bundles/<slug>.yaml` (always `.yaml`), or
-  `features.yaml` or `categories.yaml` is missing
+  rates its policies), `data/queue.yaml` (optional, section 6.5), `data/providers/<id>.yaml` or
+  `data/bundles/<slug>.yaml` (always `.yaml`), or `features.yaml` or `categories.yaml` is missing
 - a file doesn't match its Zod schema (section 4.5), which already covers unknown keys, formats, negative amounts
   and the checks within one file
 - a provider's `id` isn't its file name, or a bundle's `id` isn't `bundle.<file name>`
@@ -1422,6 +1439,9 @@ Validation fails if:
 - a currency in a price or in `billingCurrency` isn't a real ISO 4217 code (`Intl.supportedValuesOf('currency')`;
   the schema only checks that it's three capital letters)
 - `lastVerified` is after today
+- the discovery queue (`data/queue.yaml`, section 6.5) gives a service an unknown service category, leaves a
+  rejected, unreadable or out-of-scope service without a note, marks a service done that has no provider file (or a
+  provider's entry isn't done), or queues a service on a catalog provider's site (Proton Mail on proton.me)
 
 Validation warns (but passes) when `lastVerified` is older than 90 days: one warning per file, with the count and
 the oldest price. It also warns about a provider or reseller without a logo in `data/logos/`, which the app shows as
@@ -1557,6 +1577,66 @@ cite its pages; Workers AI only for a price whose stored amount isn't on its pag
 (the schema has none); the YAML edited line by line, which CI's `data:validate` then checks; `lastVerified` bumped
 for a price confirmed 30 or more days after it was last verified; and a night with nothing to change opens no PR.
 
+**Baselines and the weekly digest (M3.9):** the night now checks what `data/automation.yaml` says is due, and
+compares each page with its baseline (`data/baselines/`, section 6.5) before anything else.
+- **What's due:** every page the catalog cites (core's `citedPages`: pricing pages daily, the policy pages its ratings
+  quote weekly) whose last check, kept in KV (`bot:checks`, one key written once a night), is a cadence ago, and each
+  logo weekly; a provider with nothing due has no step.
+- **Unchanged:** a page read the way its baseline was (`fetch`, or a browser when the baseline says so and tonight's
+  browser pages allow) whose lines are its baseline's (`baselineDiff`, which ignores order) confirms every price on it
+  and keeps its quotes, with no model and no money matching. A page read another way (no browser left) is checked as
+  before, without the comparison.
+- **Changed, or no baseline yet:** the M8.3 checks run on it (prices on the page, then Workers AI for the rest; the
+  `taxIncluded`, reseller and card quotes), and a policy page's ratings' quotes are looked for. Workers AI's answer now
+  carries the page's words for each price, which must be on the page word for word and show the amount, else the price
+  goes to review ("failed quotes"). Each page's new lines are kept as a `page` finding.
+- **Pending:** what a page found waits in KV (`bot:pending:<hash of its URL>`), replaced each time it's checked and
+  dropped once nothing on it is worth proposing (unchanged again, every price confirmed and recently verified).
+- **The digest** (`digest.ts`), on `digest.day` (Monday by default), in steps that pass each other only small data
+  (which pending findings stand, the review's notes): every pending entry still live (one for a page the catalog no
+  longer cites, or whose new text main's baseline already has, is dropped), the provider files'
+  edits (M8.3's `proposal`), each changed page's new text as its baseline, and `review/README.md`, the review list,
+  all committed to `bot/catalog-digest`, rebuilt from main, with its pull request `Catalog digest <date>`. The clear
+  changes are edits: a price that moved within ±30% with its quote, a `lastVerified` bumped, a new logo, a page that
+  changed with nothing to review. The unclear ones are review items, by section (prices, then policies, then
+  features, then pages not read), each with the page's changed lines and its baseline's path, whose diff in the pull
+  request is what changed: a price over ±30%, a quote gone (`taxIncluded`, a reseller's approval, the cards), a
+  policy page that changed (to grade again, with the quotes it lost), a price not found or only a sale, a failed
+  quote, a page not read. A reviewer needs only GitHub: to accept a change, merge; to reject one, revert its edit on
+  the branch but keep its baseline, then merge. The nightly `Price updates` pull request of M8.3 is gone: an open one
+  on `bot/price-updates` can be closed.
+- **KV:** the API's namespace, `simply-sub-kv`, with the bot's keys under `bot:` (no new resource): a few writes a
+  night, of 1,000 a day. The bot needs redeploying from main once this merges (section 7.2): its binding is new.
+- **A review's commits are kept (M3.10):** the bot never rebuilds a branch whose open pull request has commits that
+  aren't its own (a reviewer's: its commit messages carry `botSignature`). It comments that the week's digest is held
+  instead, and the findings stay pending until that pull request is merged or closed. Text files go into the commit's
+  tree in one request, and only images need a blob each, so a digest of many pages stays within a step's 50 requests.
+
+**Settings (M3.8):** `data/automation.yaml`, checked by `data:validate` against core's `automationSchema`
+(`pipeline/automation.ts`, `data/schema/automation.schema.json`): a cadence for pricing pages, policy pages, logos and
+discovery (`daily`, `weekly`, `monthly` or `off`), the digest's weekday, the reviewer (`scheduled-claude`, `workers-ai`
+or `manual`), the batch sizes (services a discovery run takes, browser pages and Workers AI Neurons a night, review
+items a week) and the search engines in order, each with a monthly budget for the bot and for this machine (Tavily's
+and Brave's required, so neither can run unlimited; SearXNG, your own, needs none). The bot's cron still runs every
+night and reads the file from main to decide what's due (`isDue`, `digestDue`), so a change takes a merge, never a
+redeploy. The scripts' search reads this machine's budgets from it (`searchBudgets`).
+
+**Reviewers (M3.10):** `reviewer` in `data/automation.yaml` says who works through the review list. Nothing merges
+itself under any of them.
+- **`scheduled-claude`:** a weekly Claude Code scheduled task, on the owner's Claude plan, runs the catalog-review
+  skill (`.claude/skills/catalog-review/SKILL.md`) on `bot/catalog-digest`. It works from the committed text alone (the
+  Default environment reaches GitHub and package registries only): prices first, then policies, then features, with a
+  commit and a push after each item, so a run stopped by a usage limit loses at most one item and the next run
+  resumes at the first unticked one. Its setup is in section 7.2. Nothing else needs a Claude plan: with `workers-ai`
+  or `manual`, the bot and the scripts run without one.
+- **`workers-ai`:** the digest's step `review the digest` (`apps/bot/src/review.ts`, core's `reviewRequest` and
+  `reviewOutcome`) asks the free model about each item, within the Neurons the night's checks left and
+  `batch.reviewItems`. A price it reads for one the check couldn't confirm becomes an edit only when its quote is on
+  the page word for word and shows the amount in the price's currency. On a suspicious change it agrees or not, and
+  a policy grade it suggests stays a suggestion, since grading is a person's call. Anything else is labelled for the
+  owner. Its notes go under each item, a line each.
+- **`manual`:** the items wait in the pull request for the owner.
+
 **Guardrails**
 - **Never auto-merge.** You review the PR, which takes a minute a day at most.
 - Flag changes larger than ±30% as suspicious.
@@ -1582,8 +1662,36 @@ plans and opens PRs. **Your only manual step is reviewing PRs.**
 - **Demand signal (later):** opt-in anonymous "suggest this service" reports from custom subscriptions raise a
   service's priority.
 
-**② Find URLs automatically:** `scripts/find-urls.ts`. For each website, it tries these in order and stops at
-the first strong match:
+**As built (M3.1):** `npm run data:queue` (`scripts/discover-services.ts`, on core's `pipeline/queue.ts` and
+`pipeline/wikidata.ts`).
+- **The queue** (`queueFileSchema`, checked by `data:validate`, with `data/schema/queue.schema.json` for the editor):
+  each entry has an `id` (the provider id it gets), `name`, `website`, a service `category`, a `source` (own,
+  wikidata or manual), its Wikidata item and `sitelinks` (how many Wikipedia articles it has), and a `status`:
+  queued, done (it has a provider file), rejected, unreadable or out-of-scope, the last three with a `note`. Your own
+  services (section 6.6) are first, `source: own`: Bitdefender, Xbox Game Pass, Crunchyroll and Claude queued, and
+  Proton, Netflix, Disney+ and Crave done. A batch takes the next queued ones in the file's order (`nextQueued`).
+- **Wikidata:** one SPARQL query per class in core's `wikidataClasses` (video streaming, subscription video on
+  demand, over-the-top media, music streaming, VPN, password manager, antivirus, file hosting, generative AI chatbot,
+  online and cloud gaming, MOOC and online learning, fitness app, daily newspaper, email hosting), each mapped to a
+  service category. It asks for instances with an official website (P856), an English name and at least 8 Wikipedia
+  articles, without those dissolved (P576), discontinued (P2669) or retired (P730), up to 40 a class (15 newspapers),
+  one query at a time with the bot's User-Agent. Below 8 articles the classes fill with tiny apps, casinos and
+  courses: 382 services at 0, 148 at 8.
+- **Merging** (`mergeCandidates`): every class's services in one list, each item once (the first class gives its
+  category), the most written-about first, added after the queue's entries, which keep their place, status and
+  comments. Left out: a provider's site (`onSites`: Proton Mail's proton.me/mail is Proton's), the same Wikidata item
+  or the same site as an entry (YouTube Premium's youtube.com/premium is another service than YouTube's
+  youtube.com), and an id another service has (printed, for a person to name). The website is the official one
+  with a word of the name in its host (`pickWebsite`: YouTube Premium also lists an APK site), then the fewest path
+  segments.
+- **The first run** (2026-10-28) added 124 services: streaming 40, privacy and security 28, music 16, news 15,
+  storage 9, education 5, email (software) 5, AI 2, VPN 2, gaming and fitness 1 each. Wikidata files some big services under
+  other classes (ExpressVPN has only a company item; Surfshark and Private Internet Access are "software"; PlayStation
+  Plus is only a "subscription"), so they're added by hand (`source: manual`). Some entries aren't subscriptions
+  (VK, SourceForge, Android TV): a batch marks them out-of-scope with a note.
+
+**② Find URLs automatically:** `scripts/find-urls.ts` (as built in M3.2: below). For each website, it tries these
+in order and stops at the first strong match:
 1. Common paths: `/pricing`, `/plans`, `/premium`, `/subscribe`, `/compare`, `/en-ca/pricing`, `/ca/plans`.
 2. `sitemap.xml` / `robots.txt` sitemaps: URLs containing `pricing|plans|subscribe|compare|premium`.
 3. The homepage's nav and footer links whose text matches "Pricing", "Plans", "Get started" and so on.
@@ -1612,12 +1720,55 @@ Every run also collects, for every provider (M1.12), whether or not it's new or 
 A provider file's header comment says what each check found, "none" included, so a PR's reviewer can tell a check
 that found nothing from one that wasn't done.
 
+**As built (M3.2):** `npm run data:urls -- <ids>` (or `--next 10`, or `--sample`), on core's `pipeline/find-pages.ts`
+(`findPages`, with the caller's fetch and search) and `pipeline/search.ts`; it writes `.pipeline/<id>/urls.json` (the
+pipeline's working folder, gitignored) for the renderer.
+- **Kinds:** pricing, cancel, terms, privacy, payment (accepted card networks), bundles and resellers, each found in
+  this order: the website itself when it's a product's own page (youtube.com/premium); common paths on its host
+  (`/pricing`, `/plans`, `/abonnement`, `/terms`, `/confidentialite` …); its sitemaps and its help centre's (help. and
+  support.), Canada's first (Disney+'s help centre splits them by country); the home page's navigation and footer
+  links, then its other links and the help centre's; then a web search.
+- **A page counts** when its words fit the kind (`pageFits`: prices for a period near plan words, "personal
+  information" in a privacy policy, two card networks on a payments page, in English or French); a page whose words
+  a plain fetch can't read (its scripts fill them in) is only probable, chosen by its URL's score (`urlScore`: the
+  kind's words in its path and its link's words, Canada's locale first, another country's last, a list of articles
+  after an article). A guessed path proves nothing on a site that answers every path (`missingPath`, a soft 404:
+  Crave, ESPN), and business plans, sign-ins and a catalogue's shows never count. A footer's terms and privacy links
+  may go to a parent company (Bell for Crave); everything else must be on the provider's sites.
+- **Politeness** (`scripts/lib/web.ts`): the bot's User-Agent and `en-CA`, each host's robots.txt (read once, and
+  reused for its sitemaps), each URL at most once a run, and 750 ms between requests to a host. Netflix, Disney+ and
+  Hulu disallow every bot but search engines and named AI crawlers on their main sites, so only their help centres
+  are read.
+- **Search** (`pipeline/search.ts`, the user's choice): Tavily first (its free plan: 1,000 searches a month, no card),
+  then Brave (a card on file and $5 of free credit a month, about 1,000 searches), then SearXNG (an instance you run;
+  free, no budget). Keys come from the gitignored `.env` (`TAVILY_API_KEY`, `BRAVE_API_KEY`, `SEARXNG_URL`); this
+  machine's searches are counted in `.pipeline/search-usage.json`, and it may use 500 of Tavily's and 450 of Brave's
+  a month, leaving the rest for the bot. Only results on the provider's sites are read.
+- **The 20-service sample** (`scripts/lib/url-sample.ts`: the ten providers and ten from the queue, each with the
+  pricing pages that count as right, read on their sites on 2026-10-28): 15 of 20 right without search or a browser
+  (75%). The misses: Netflix (robots.txt; its help centre's home page doesn't link the plans article, so it needs the
+  search), Crave (a single-page app: its menus need the browser, M3.3), NordVPN and Tidal (403 to any bot: unreadable),
+  and Bitdefender (its VPN's own page, not its consumer lineup). See section 14 (M3.2) for the run with search.
+
 **③ Render:** Playwright (free on GitHub Actions) loads each page with `en-CA` locale headers, waits for prices
 to render, clicks visible "Monthly/Annual" toggles, and saves the visible text plus a screenshot as evidence.
 - **Region gotcha:** many sites price by IP address, and GitHub runners are in the US. For Canadian prices,
   either run discovery **from your own PC** (`npm run data:discover`, the simplest option since you're in
   Canada) or use the site's region URL or selector. Many services also publish per-country price pages in
   their help centre (Netflix does), which are ideal sources for multi-region data.
+
+**As built (M3.3):** `npm run data:render -- <ids>` (`scripts/render-pages.ts`, `scripts/lib/browser.ts`) opens each
+page find-urls found (and any added with `--url pricing=<url>`) in the system Edge through `playwright-core` 1.64.1
+(pinned; it drives an installed browser and downloads none; `PIPELINE_BROWSER=chrome` picks another), on this machine,
+so sites that price by location show Canada's. One navigation per page, after robots.txt allows it; the browser's
+own User-Agent with the bot's token after it (`… SimplySubBot/1.0 (+https://sub.simplely.ca/)`), so a site's
+SimplySubBot rules apply and its owner can tell who's asking; `en-CA` and Toronto's time zone. It declines cookie
+banners (never accepts), clicks a pricing or bundle page's Monthly and Yearly toggles (at most four), and writes
+`.pipeline/<id>/pages/<name>.json`: the text as shown, the HTML's text as served (what the nightly bot's plain fetch
+reads), each toggle's text, the currencies the prices are in, and a screenshot (`<name>.jpg`, at most 12,000 px
+tall). A bot check, or an app that shows the bot its own error page (Crunchyroll's `/premium/error`), is reported as
+unread and never got past. `npm run data:urls -- --browser` opens a page whose plain fetch is only a script's shell
+in the browser too (as the nightly bot does with Browser Rendering), which is how Crave's menus are read.
 
 **④ AI extraction:** `scripts/extract-plans.ts` sends the cleaned page text to an LLM with **structured
 output** constrained to the provider schema. The prompt includes the feature registry, so the model can only
@@ -1643,6 +1794,34 @@ use canonical ids, and it maps provider wording through `aliases`. The output co
 Model choice: the Workers AI free daily allowance, or a small Claude model (`claude-haiku-5-5`), which costs
 cents per provider. Check current pricing. One run fills hundreds of providers.
 
+**As built (M3.4):** `npm run data:extract -- <id>` (`scripts/extract-plans.ts`) on core's `pipeline/extraction.ts`,
+`extraction-request.ts`, `quotes.ts` and `draft-yaml.ts`.
+- **Who answers:** any model, in one schema (`extractionAnswerSchema`): every fact with the page it's on (by name:
+  pricing, terms, pricing-2) and its words. `--prepare` writes the whole request (`extractionPrompt`: the rules of the
+  price-research and policy-research skills, the registry by id with each feature's values and aliases, the policy
+  topics with their rubrics, the answer's JSON Schema, the pages) to `.pipeline/<id>/extraction.md` for a session's
+  model, Claude run by the owner, which answers in `answer.json`. `--model workers-ai` asks Workers AI's Llama 3.3 70B
+  instead (`CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` in `.env`), in parts that fit its context
+  (`extractionParts`: the plans from the pricing, payment, cancel and bundle pages; the policies from the terms' and
+  privacy policy's passages around each topic's words), merged (`mergeAnswers`).
+- **The checks** (`draftFromAnswer`), whoever answered: each quote must be on its page word for word, white space
+  aside, or what rests on it is dropped; when only its quote marks, dashes or capitals differ the page's own words are
+  kept (`findQuote`), so the nightly check and the card's links find them. A price's quote must show its amount; a
+  sale or first-term price, a business or per-seat plan, an unknown region or currency, a period over 366 days, 104
+  weeks, 36 months or 5 years, and over 2,000 a month are dropped; over 200 a month, or a year costing more than 12
+  months, is flagged. Features resolve by id, name or alias, with a value the registry allows (and their group set);
+  anything else is a proposed feature, for the owner's approval through the feature-discovery skill. Card networks are
+  only those their checked quotes name; `availableIn` only with its words; `taxIncluded` only when its words are on the
+  price's page; policy ratings only on the registry's topics and grades, a reason of 240 characters at most, one to
+  three checked quotes.
+- **The draft:** plan ids from their names (`<provider>.<slug>`), each price with today's `lastVerified` and its
+  page as `sourceUrl`, `billingCurrency` when each region is priced in one currency, the cancel page find-urls found
+  as `cancelUrl` (a draft without one says so), the pricing page as `sources.pricing`, the policy pages as the card's
+  links, and a header comment with every page read and each check that found nothing. `draftYaml` writes it the way
+  the catalog's files are written, so Prettier leaves it alone (tested on five real provider files) and the bot needs
+  no Prettier. The script writes `data/providers/<id>.yaml`, `.pipeline/<id>/report.json` (what was dropped, what to
+  check, the proposed features) and prints the file's `data:validate` issues.
+
 **⑤ Validate:** the same `validate-data.ts` rules (section 6.2), plus checks for missing prices, implausible
 amounts and duplicate plans.
 
@@ -1650,8 +1829,81 @@ amounts and duplicate plans.
 each new provider's logo, fetched into `data/logos/<id>.png` the way `npm run data:icons` does (M3.5). You merge,
 fix or close. Rejected items are marked in `queue.yaml` so they aren't retried every night.
 
-**Ongoing:** the nightly price check (section 6.4) reuses the saved `sources:` URLs. A weekly job takes the next
-N services from the queue, so the catalog grows on its own while you only review.
+**As built (M3.5):** `npm run data:batch -- --next 10` (or queue ids; `scripts/batch-pr.ts`) runs the steps for
+each service of the batch, each once (its files stay in `.pipeline/<id>/`): find-urls with the browser, render-pages,
+then the extraction: Workers AI with `--model workers-ai`, or else it writes each request and stops, and runs on once
+every `answer.json` is there. It drafts each provider file, fetches the new ones' logos (`fetch-icons.ts`, as
+`npm run data:icons` does), and checks the catalog: a draft with a `data:validate` error stops the batch, or is left
+out with `--leave-out-broken` (moved to `.pipeline/<id>/draft.yaml`, still queued). The queue's entries become done,
+or out-of-scope or unreadable with a note. One branch (`catalog/batch-<date>-<first id>`), one commit and one pull
+request into `--base` (main by default; `--dry-run` stops before them). The body (core's `batchReview`): a table of
+the providers (plans, prices, proposed features, dropped facts, what to check), then each provider's pages, logo,
+plans with each price linked to its page at its quote (`quoteLink`'s text fragment), card networks, policies,
+proposed features with their quotes, dropped facts and what to check; the services left out with why; and a hidden
+line of the batch's queue ids (`batchIdsIn`): a service in an open batch's pull request isn't taken again, and one
+in a batch closed without merging is passed over as rejected.
+
+**As built (M3.6):** the first load, run in a session by Claude (on the owner's subscription) on the owner's services
+(section 6.6), each page read by the pipeline and every quote checked by it.
+- **Baselines** (`npm run data:baselines`, core's `pipeline/baseline.ts`): every page the catalog cites (`citedPages`:
+  the prices' sources and pricing pages, the pages naming resellers and accepted cards: pricing; the pages policy
+  ratings quote: policies) saved as `data/baselines/<host>/<path>-<hash>.txt`: a header (`url`, `method`, `saved`)
+  and the page's lines, white space collapsed. The method is how the bot reads it: `fetch` when the HTML as served has
+  what the page shows (`servedCovers`) and every fact the catalog rests on it (`citedFacts`: quotes, and prices near
+  their names), else `browser`. A page the pipeline read this run (render-pages) isn't requested again; a fact not to be
+  seen on today's page is listed. The batch saves its new providers' baselines and commits them. On 2026-10-28: 54
+  pages, 34 read by fetch and 20 by browser, 792 KB. The facts not seen were views the default page doesn't show:
+  Proton's other currencies, Disney+'s other countries' prices and cards, TSN's and RDS's other periods' tabs,
+  SerialCart's and Amazon's prices in the basket, Mullvad's yearly price shown a month at a time.
+- **The tuning it took:** a terms or privacy page comes from the footer's links before a sitemap's (Claude's sitemap
+  lists its school terms, Bitdefender's its forum's policy), and another audience's policy (K-12, community,
+  commercial) never counts; a page's folded sections are opened before it's read (`<details>`, and collapsed
+  buttons named like a question, inside components too: Crunchyroll's help articles); a page whose scripts change its
+  prices also goes to the model as served (`pricing-served`: Claude's US prices under Canada's); pages added by hand
+  take the next free name; dates are the local date, as `data:validate`'s.
+- **The batch** (`catalog/batch-2026-10-28-bitdefender`, its own pull request into this work's branch): Claude, Xbox
+  Game Pass and Bitdefender drafted, Crunchyroll unreadable. Section 14 (M3.6) has what was found.
+
+**As built (M3.7):** resellers in the pipeline. Find-urls looks for the reseller page in the usual steps and, when
+it has to search, also in the provider's own posts on each of its sites (`site:<domain> reseller OR partnered OR
+voucher`, after `<name> official resellers where to buy`). The extraction's `resellers`: each shop with the words that
+name it on the provider's page and its offers, each plan's regular prices read from the shop's own page (added with
+`--url resellers=<shop's page>`), "excl. VAT" as `taxExcluded`. The checks: the approval page must be on the provider's
+own sites and its quotes on it word for word; each price on the shop's own site (its website or domains); a shop
+`data/resellers.yaml` lists keeps its id, and a new one gets an id no provider or reseller has and is added there
+(`extract-plans`), with its logo fetched by the batch. Partners that run their own product on the provider's service
+aren't resellers (the rules say so, and only a shop named as selling the provider's subscription has an approval to
+quote). The batch's review lists each reseller's prices and its approval, linked to its quote.
+
+**As built (M3.11):** the discovery in the bot (`apps/bot/src/discovery.ts`), what `npm run data:batch -- --next <n>
+--model workers-ai` does on a computer, run by the nightly Workflow after the checks and the digest with what they left
+of the night's Neurons and browser pages.
+- **When:** `cadence.discovery` in `data/automation.yaml` (weekly by default; `off` stops it). A due night takes the
+  next `batch.discovery` queued services from main's queue, leaving out any in an open batch pull request or a closed
+  one that wasn't merged (the hidden line `batchReview` writes). The batch and each service's work wait in KV
+  (`bot:discovery`, `bot:discovery:<id>`) until its pull request opens, so a batch takes as many nights as its
+  budgets need, and no new batch starts before it's done.
+- **Each service, a stage at a time:** a survey of its sites (core's `surveySite`: the website's and help centre's
+  links, whether the host answers any path, the sitemaps' pages that could be one of the kinds) in one step, then a
+  step per kind (`findKind`, searching last), so each step stays within its 50 requests; then Browser Rendering for a
+  page only a browser shows (one of the night's browser pages each); then Workers AI, one step per part of
+  `extractionParts`, while the night's Neurons last; then the draft (`draftFromAnswer`, `draftYaml`, core's schema),
+  its logo (the bot's `findIcon`), its cited pages' baselines from the text it was drafted from, and any new
+  reseller with its logo. A service whose steps fail two nights is left for a person (`needs-fix`).
+- **The pull request:** once every service of the batch is done, one pull request on `catalog/batch-<date>-<first id>`
+  (the branch name `data:batch` uses, so each sees the other's batches) with the drafts, logos, baselines, new
+  resellers (`draftYamlList`) and the queue's new statuses (`withQueueStatus`: done, or why it was left out), and the
+  review table. CI's `data:validate` checks it; a person merges.
+- **Search:** core's engines in `data/automation.yaml`'s order with the bot's budgets (`searchBudgets(settings,
+  'bot')`), counted in KV by month (`bot:search:<YYYY-MM>`). Their keys are Worker secrets (`TAVILY_API_KEY`,
+  `BRAVE_API_KEY`, `SEARXNG_URL`, section 7.2); an engine without one is skipped, and with none the search is left
+  out.
+- **What it doesn't do:** refill the queue from Wikidata (`npm run data:queue`, on a computer; the queue holds over a
+  hundred services), or the computer's browser tricks (cookie banners, tabs, toggles): a page they're needed for is
+  read as Browser Rendering shows it, and a service the bot can't read is left out with why, for `data:batch`.
+
+**Ongoing:** the nightly bot (section 6.4) checks the saved `sources:` URLs against their baselines, and its discovery
+takes the next services from the queue on its cadence, so the catalog grows on its own while you only review.
 
 **Licensing & etiquette:** store facts (prices, feature flags) and links, never copied marketing text. Follow
 robots.txt, make one request per page per run, and send an identifying User-Agent. Logos come from favicons
@@ -1661,7 +1913,8 @@ or a manual override, not scraped images.
 
 ### 6.6 First seed (Phase 1)
 Run the pipeline on your own services first (`subscriptions.txt`), all in CAD, to tune the prompts. Then add
-the Wikidata queue:
+the Wikidata queue (as of M3.6: Proton, Netflix, Disney+ and Crave were in the catalog; Claude, Xbox Game Pass and
+Bitdefender are in the batch's pull request; Crunchyroll's prices couldn't be read, section 14):
 - Bitdefender (Premium Security, Family, Digital Identity Protection, the free plan)
 - Proton (Free, Mail Plus, Drive Plus, VPN Plus, Pass Plus, and the Unlimited, Duo and Family suites)
 - Xbox Game Pass (PC, Standard, Ultimate)
@@ -1679,7 +1932,7 @@ the Wikidata queue:
 | Workers requests | ~100,000 per day | API calls only: a few hundred per day at first |
 | Static assets | Free and unlimited. Up to 20,000 files per version, 25 MiB per file | The Angular build has well under 100 files |
 | D1 | 5 GB storage per account (500 MB per database), 5M rows read and 100k rows written per day (index entries count), 2 MB per row | Under 25 MB even at 1,000 providers. **Rows written** is the one to watch: from M2.1 a deploy writes only what changed (section 5.3) |
-| KV | 1 GB, 100k reads and 1k writes per day, 25 MiB per value | One namespace, `simply-sub-kv` (binding `KV`, M2.5), for small values that must survive: the last good `/fx` rates (M2.5: one key, `fx:ecb`, written when the rates are fetched, about twice a day) and the `/icon` cache (M2.6: one key per domain asked for, written on a miss and kept 30 days, or a day for "no icon"). The Cache API is per data centre and can evict them. A few dozen writes a day |
+| KV | 1 GB, 100k reads and 1k writes per day, 25 MiB per value | One namespace, `simply-sub-kv` (binding `KV`, M2.5; the bot's too since M3.9, its keys under `bot:`: check dates, pending pages, the last digest), for small values that must survive: the last good `/fx` rates (M2.5: one key, `fx:ecb`, written when the rates are fetched, about twice a day) and the `/icon` cache (M2.6: one key per domain asked for, written on a miss and kept 30 days, or a day for "no icon"). The Cache API is per data centre and can evict them. A few dozen writes a day |
 | R2 | 10 GB-month storage, 1M writes and 10M reads per month, no egress fees. Activating R2 asks for a payment method, even within the free tier | Not used yet: see the triggers below |
 
 **Each store has one job:** static files serve the catalog and icons, D1 answers the API's searches, KV keeps
@@ -1756,6 +2009,17 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
    `main` once the change has merged. When the token expires, a new one replaces it with
    `npx wrangler secret put GITHUB_TOKEN` (the value typed at its prompt, never on the command line), with no
    redeploy: the next night uses it.
+9. **The discovery's search** (M3.11), optional: each engine's secret on the bot, typed at the prompt, never on the
+   command line or in a file: `npx wrangler secret put TAVILY_API_KEY` (Tavily's free plan: 1,000 searches a month,
+   no card), `BRAVE_API_KEY` (Brave's $5 monthly credit, a card on file) and `SEARXNG_URL` (your own SearXNG's https
+   address, with its JSON format turned on). Without them the discovery still runs, without a search. The bot needs
+   redeploying once M3.9 to M3.11 merge, for its KV binding and its discovery.
+10. **The weekly review** (M3.10), with `reviewer: scheduled-claude`: a Claude Code scheduled task the owner creates
+   once at claude.ai/code/routines (or `/schedule`). It uses this repository and the **Default** environment (Trusted
+   network access), runs weekly on Mondays at 9:07 local time, after the digest's 03:00 UTC run, and its
+   instructions run the catalog-review skill on `bot/catalog-digest`, pushing to that branch only. The skill has the
+   exact settings and prompt (`.claude/skills/catalog-review/SKILL.md`). Until it exists, the review list waits as
+   with `manual`.
 
 ### 7.3 Serving the app from `sub.simplely.ca`
 The app and the API have the subdomain to themselves: **https://sub.simplely.ca/** for the app, and
@@ -2673,6 +2937,111 @@ each as built; what was decided:
 - **Bundle:** the initial bundle is 497.84 kB, as before the batch; the new pages and code are in lazy chunks.
 - **Checks:** core 1597 tests, web 684, API 213, bot 41; all 26 browser-check scripts (2503 checks, both themes at 360
   and 1280 px, keyboard only, with axe), `check-after-m3.cjs` (143) new for the batch.
+
+**Resolved (2026-10-28, M3.11)**
+- **The bot discovers too** (the user's request: discovery has a cadence, and no part may need a Claude plan): with
+  Workers AI and Browser Rendering, within the night's budgets, over as many nights as a batch needs. A service it
+  can't read is left out with why; `npm run data:batch` on a computer reads it with the local browser.
+- **Search keys are Worker secrets** for the bot and `.env` (gitignored) on a computer, never in the repository:
+  Tavily first (its free 1,000 a month), then Brave (its $5 credit), then the owner's SearXNG, each within its budget.
+- **Within the free plan's limits:** a step per kind of page and per extraction part keeps each step within 50
+  requests; its results are small (a survey keeps only the sitemap pages that could be a kind), and each service's
+  work waits in KV (a write or two a step, of 1,000 a day). A step parses whole pages, so on the free plan's 10 ms of
+  CPU a step a big site can fail its step: two such nights leave the service for `data:batch`.
+
+**Resolved (2026-10-28, M3.10)**
+- **Who reviews** (the user's choice): `scheduled-claude`, a weekly scheduled task the owner sets up (section 7.2) on
+  their Claude plan. It's the only part that uses one: with `workers-ai` or `manual`, the pipeline runs without it.
+- **Workers AI proposes only what it quotes:** a price edit needs a quote, on the page word for word, that shows the
+  amount in the price's currency; a grade stays a suggestion.
+- **A held digest:** a reviewer's commits on the digest's branch hold the next digest rather than be overwritten, and
+  its findings wait in KV, so an unmerged review loses nothing.
+
+**Resolved (2026-10-28, M3.9)**
+- **Where pending changes live:** KV, a key per page (the user's choice was check dates in KV and baselines in Git):
+  the digest is rebuilt from main each week, and a page's findings have to outlast the nights between. A change is
+  over once main's baseline has the page's new text, which is what merging the digest does.
+- **The digest is weekly, the checks nightly** (the user's design): a price change waits up to a week for its pull
+  request. A night with nothing due reads only the settings, the check dates and the catalog.
+- **The bot's bundle** is 3.58 MB, 736.7 KiB gzipped (680.8 before), within the free plan's 3 MB: `yaml` reads the
+  settings.
+
+**Resolved (2026-10-28, M3.8)**
+- **The defaults** (the user's choices): pricing pages daily, policies, logos and discovery weekly, the digest on
+  Mondays, the reviewer `scheduled-claude` (items wait, as with `manual`, until its task is set up), three services a
+  discovery run, five browser pages and 8,000 Neurons a night, ten reviewed items a week, and Tavily (500 for the bot,
+  500 here) then Brave (450 and 450, under its $5 credit's 1,000) then SearXNG.
+
+**Resolved (2026-10-28, M3.7)**
+- **The batch's providers have none:** Xbox's where-to-buy page lists retailers for consoles, games and accessories and
+  says it "does not constitute an endorsement of any retailer"; Bitdefender's partners page is for business partners;
+  Claude names none. Each provider file's header says so.
+
+**Resolved (2026-10-28, M3.6)**
+- **Claude:** Free, Pro (US$20 a month, US$200 a year) and Max 5x and 20x (US$100 and US$200 a month), the US prices
+  from Claude's help centre ("$20 per month (US)") and its pricing page as served. A Canadian is shown $28 a month,
+  $280 a year and Max from $140 without a currency named (its help says it prices "in your local currency where
+  supported"), so they aren't stored: the owner, a subscriber, can say which currency the bill is in. No card network is
+  named; its consumer terms are Canada's (they name Canadian law), so their ratings are for CA.
+- **Xbox Game Pass:** Essential, Premium, Ultimate and PC Game Pass a month in CAD from the `/en-CA/` page, the "first
+  14 days for $1" left out as an offer; Canada's prorated refund of the last charge; 30 days' notice of a price change.
+- **Bitdefender:** Total Security, Premium Security and Ultimate Security (Individual and Family) and Digital Identity
+  Protection, a year in CAD: each the "Old price" or struck price, since its terms renew "at Bitdefender's then-current
+  price and any applicable taxes, excluding promotional and discount pricing" (the "Sales tax included" first-year
+  price is an offer). Its Canadian terms both require arbitration and name Romania's courts, so disputes are for a
+  person to read; the monthly identity plan's "for the first month" price isn't stored.
+- **Crunchyroll** is unreadable: its plans' prices are only on `/premium`, which shows the bot an error page
+  ("Something Went Wrong"), and its help centre sends readers there. Its cards (Visa, Mastercard, American Express,
+  Discover) were read, for when its prices are.
+- **Proposed features** (in the batch's pull request, for the owner, through the feature-discovery skill): a coding
+  agent, a usage allowance and included API credits (AI); cloud gaming hours, the game library's size, day-one games
+  and online multiplayer (gaming); antivirus, protected devices and scam protection (security).
+
+**Resolved (2026-10-28, M3.5)**
+- **A rejected batch:** the pull request's hidden line of queue ids is how the next batch knows: one closed without
+  merging leaves its services queued in `main`, and `--next` passes over them, so nothing is retried every night; a
+  person sets each to rejected with a note (or queued again) when they get to it.
+- **A broken draft** stops the batch rather than reaching CI, unless `--leave-out-broken` sets it aside, still queued.
+
+**Resolved (2026-10-28, M3.4)**
+- **One answer schema for every model** (the user's rule that no part may need a Claude subscription): a session's
+  Claude, Workers AI or a person fills in the same JSON, and the same checks run on it. Nothing the model says is kept
+  without the page's own words, which are what's stored.
+- **Proposed features** are listed for the owner (the report, and the batch's pull request), never added to
+  `features.yaml` by the pipeline: the feature-discovery skill adds them, in their own commit.
+- **The YAML is written by core** rather than the `yaml` package, whose flow lists (`[ a, b ]`) Prettier rewrites
+  (`[a, b]`): CI's format check would fail on every draft the bot writes.
+
+**Resolved (2026-10-28, M3.3)**
+- **The renderer identifies itself** (the user's rule): the browser's User-Agent with the bot's token after it.
+  Crunchyroll shows that browser its own error page on `/premium` ("Something Went Wrong", `/premium/error`); its other
+  pages and help centre are read instead, and a check that compared User-Agents to find out why was stopped, since
+  that's a step towards getting past a site's defences.
+- **The sample with the browser:** `npm run data:urls -- --sample --no-search --browser` gets 16 of 20 right (80%), the
+  pages Crave, Disney+ and Hulu fill in by script now confirmed by their words. The misses: Netflix (robots.txt keeps
+  the bot to its help centre, whose plans article only a search finds), NordVPN and Tidal (403 to any bot) and
+  Bitdefender (a product's page, its VPN's, before its lineup).
+
+**Resolved (2026-10-28, M3.2)**
+- **Shared with the bot:** the bot's `page-text.ts`, `amounts.ts`, `tax-wording.ts` and `robots.ts` moved to core's
+  `pipeline/` (unchanged), since the scripts read pages, amounts and robots.txt the same way; the bot imports them from
+  `@simply-sub/core`, and its tests stay where their HTML fixtures are.
+- **Brave has no free tier any more** (February 2026): a card on file, $5 of credit a month (about 1,000 searches) and
+  billing beyond it. Tavily's free plan (1,000 a month) needs no card, so it's first (the user's choice), Brave second
+  within its credit, and SearXNG last.
+- **Robots.txt is followed even where it costs results:** Netflix, Disney+ and Hulu allow only search engines and named
+  AI crawlers on their main sites, so the pipeline reads their help centres instead, found by sitemaps or search.
+- **The sample:** 15 of 20 right with common paths, sitemaps and links alone (75%), short of M3.2's 80% until a search
+  or the browser fills in: the run with search waits for a key in `.env` (the user's sign-up).
+
+**Resolved (2026-10-28, M3.1)**
+- **The discovery queue** is `data/queue.yaml` (section 6.5): the user's own services first, then Wikidata's, each
+  with a status, so a batch never takes a service twice; `data:validate` keeps it in line with the provider files.
+- **Wikidata's classes** were chosen from what known services are instances of (Netflix and Disney+: video streaming
+  service; Spotify: music streaming service; Mullvad and NordVPN: virtual private network service; 1Password and
+  Bitwarden: password manager; Dropbox: file-hosting service; Claude and ChatGPT: generative AI chatbot; Xbox Game
+  Pass: online gaming service; Coursera: MOOC provider). Core has no URL parser, so `pipeline/web-address.ts` reads
+  absolute http(s) addresses with a regular expression; relative links are the caller's to resolve.
 
 **Resolved (2026-10-28, the feedback after M9)**
 The user's sixteen fixes and improvements after M9, as M5.11–M5.12, M6.12–M6.16, M7.7–M7.9 and M8.4:

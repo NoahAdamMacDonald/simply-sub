@@ -45,11 +45,11 @@ describe('validateCatalog', () => {
     it.each([
       [
         'data/notes.yaml',
-        'data/notes.yaml: Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
+        'data/notes.yaml: Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/automation.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
       ],
       [
         'data/providers/old/netflix.yaml',
-        'data/providers/old/netflix.yaml: Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
+        'data/providers/old/netflix.yaml: Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/automation.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
       ],
       [
         'data/providers/hulu.yml',
@@ -733,6 +733,70 @@ describe('validateCatalog', () => {
         ],
       );
     });
+  });
+});
+
+describe('validateCatalog: the discovery queue', () => {
+  const queueFile = 'data/queue.yaml';
+  const queued = (id: string, website: string, more: object = {}) => ({
+    id,
+    name: id,
+    website,
+    category: 'streaming',
+    source: 'wikidata',
+    status: 'queued',
+    ...more,
+  });
+  const withQueue = (entries: unknown[]) => withFile(catalog(), { file: queueFile, data: entries });
+
+  it('accepts a queue that agrees with the catalog', () => {
+    expect(
+      messages(
+        withQueue([
+          queued('netflix', 'https://www.netflix.com', { source: 'own', status: 'done' }),
+          queued('spotify', 'https://www.spotify.com'),
+          queued('vk', 'https://vk.ru', { status: 'out-of-scope', note: 'A social network' }),
+        ]),
+      ),
+    ).toEqual([]);
+  });
+
+  it("reports the queue's schema problems", () => {
+    expect(
+      messages(withQueue([queued('spotify', 'https://www.spotify.com', { status: 'rejected' })])),
+    ).toEqual([
+      "data/queue.yaml 0.status: Say why it's rejected in a note, so nobody adds it again",
+    ]);
+  });
+
+  it('wants a real service category', () => {
+    expect(
+      messages(withQueue([queued('spotify', 'https://www.spotify.com', { category: 'musik' })])),
+    ).toEqual([
+      expect.stringMatching(
+        /^data\/queue\.yaml 0\.category: "musik" isn't a service category in data\/categories\.yaml/,
+      ),
+    ]);
+  });
+
+  it('wants done entries to have a provider file, and providers to be done', () => {
+    expect(
+      messages(
+        withQueue([
+          queued('spotify', 'https://www.spotify.com', { status: 'done' }),
+          queued('netflix', 'https://www.netflix.com'),
+        ]),
+      ),
+    ).toEqual([
+      `data/queue.yaml 0.status: "spotify" is done, but there's no data/providers/spotify.yaml: add it, or give another status with a note`,
+      'data/queue.yaml 1.status: "netflix" is in the catalog (data/providers/netflix.yaml): mark it done',
+    ]);
+  });
+
+  it("refuses a queued service on a catalog provider's site", () => {
+    expect(messages(withQueue([queued('proton-mail', 'https://proton.me/mail')]))).toEqual([
+      "data/queue.yaml 0.website: It's on proton's site, which is in the catalog: remove the entry, or give it a status with a note",
+    ]);
   });
 });
 

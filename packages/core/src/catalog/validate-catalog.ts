@@ -10,6 +10,8 @@ import type { CatalogFileKind } from './json-schema';
 import { providerCategories } from './plan-categories';
 import type { Policies } from './policy';
 import { policyTopicsFileSchema, type PolicyTopic } from './policy-topic';
+import { automationSchema } from '../pipeline/automation';
+import { onSites, providerSiteKeys, queueFileSchema } from '../pipeline/queue';
 import type { Price } from './price';
 import { providerSchema, type AddOn, type Plan, type Provider } from './provider';
 import { globalRegion, groupsOf, isCatalogRegion, membersOf, regionProblem } from './regions';
@@ -77,6 +79,8 @@ const featuresFile = 'data/features.yaml';
 const categoriesFile = 'data/categories.yaml';
 const resellersFile = 'data/resellers.yaml';
 const policyTopicsFile = 'data/policy-topics.yaml';
+const queueFile = 'data/queue.yaml';
+const automationFile = 'data/automation.yaml';
 const staleAfterDays = 90;
 /** Terms change less often than prices, and no nightly check reads them. */
 const policyStaleAfterDays = 365;
@@ -202,6 +206,12 @@ export function validateCatalog(
     ),
   );
   checkLogos(located.logos, providers, resellersRead, context, reportIn);
+  if (located.queue) {
+    checkQueue(located.queue, providers, unchecked, categories, reportIn(queueFile));
+  }
+  if (located.automation) {
+    parseFile(automationSchema, located.automation, reportIn(automationFile));
+  }
   return issues;
 }
 
@@ -224,6 +234,8 @@ interface LocatedFiles {
   categories?: CatalogSourceFile;
   resellers?: CatalogSourceFile;
   policyTopics?: CatalogSourceFile;
+  queue?: CatalogSourceFile;
+  automation?: CatalogSourceFile;
   providers: NamedFile[];
   bundles: NamedFile[];
   logos: NamedFile[];
@@ -247,6 +259,12 @@ export function locateCatalogFile(
   }
   if (file === policyTopicsFile) {
     return { kind: 'policy-topics', name: 'policy-topics' };
+  }
+  if (file === queueFile) {
+    return { kind: 'queue', name: 'queue' };
+  }
+  if (file === automationFile) {
+    return { kind: 'automation', name: 'automation' };
   }
   const named = /^data\/(providers|bundles)\/([^/]+)\.yaml$/.exec(file);
   if (named) {
@@ -272,6 +290,10 @@ function locateFiles(
       located.resellers = source;
     } else if (where?.kind === 'policy-topics') {
       located.policyTopics = source;
+    } else if (where?.kind === 'queue') {
+      located.queue = source;
+    } else if (where?.kind === 'automation') {
+      located.automation = source;
     } else if (where) {
       const list = { provider: 'providers', bundle: 'bundles', logo: 'logos' } as const;
       located[list[where.kind]].push({ source, name: where.name });
@@ -286,7 +308,7 @@ function locateFiles(
     } else {
       reportIn(file)(
         [],
-        'Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
+        'Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/automation.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
       );
     }
   }
@@ -801,6 +823,56 @@ function checkLogos(
   resellers?.value.forEach((reseller, index) => {
     if (!named.has(reseller.id)) {
       resellers.report([index, 'id'], noLogo(reseller.id), 'warning');
+    }
+  });
+}
+
+/**
+ * The discovery queue (BLUEPRINT §6.5): its schema, real service categories, and agreement with the catalog: an entry
+ * is done exactly when its provider file is there, and a queued service isn't already on a provider's site.
+ */
+function checkQueue(
+  source: CatalogSourceFile,
+  providers: readonly ReadFile<Provider>[],
+  unchecked: ReadonlySet<string>,
+  categories: Categories | undefined,
+  report: Report,
+): void {
+  const queue = parseFile(queueFileSchema, source, report);
+  if (!queue) {
+    return;
+  }
+  const serviceIds = categories?.service.map((category) => category.id);
+  const providerIds = new Set(providers.map(({ value }) => value.id));
+  queue.forEach((entry, index) => {
+    if (serviceIds && !serviceIds.includes(entry.category)) {
+      report(
+        [index, 'category'],
+        `"${entry.category}" isn't a service category in ${categoriesFile}${choices(entry.category, serviceIds)}`,
+      );
+    }
+    if (unchecked.has(entry.id)) {
+      return;
+    }
+    const inCatalog = providerIds.has(entry.id);
+    if (entry.status === 'done' && !inCatalog) {
+      report(
+        [index, 'status'],
+        `"${entry.id}" is done, but there's no data/providers/${entry.id}.yaml: add it, or give another status with a note`,
+      );
+    } else if (entry.status !== 'done' && inCatalog) {
+      report(
+        [index, 'status'],
+        `"${entry.id}" is in the catalog (data/providers/${entry.id}.yaml): mark it done`,
+      );
+    } else if (entry.status === 'queued') {
+      const owner = providers.find(({ value }) => onSites(entry.website, providerSiteKeys(value)));
+      if (owner) {
+        report(
+          [index, 'website'],
+          `It's on ${owner.value.id}'s site, which is in the catalog: remove the entry, or give it a status with a note`,
+        );
+      }
     }
   });
 }
