@@ -46,6 +46,13 @@ Where it's sold and how it's paid
 - "acceptedNetworks": for each region a page covers, the card networks its words name ("We accept Visa, Mastercard"),
   quoting the words for each. "All major credit cards" names none: leave the region out.
 
+Official resellers
+- Only shops the provider's own page names as selling its own subscription ("Where to buy", its resellers page, a blog
+  post on its own site), quoting the words that name each one. A company that uses the provider's service in its own
+  product (a VPN app running on its servers) is a partner, not a reseller: leave it out.
+- Each shop's regular prices, read from the shop's own page for the plan, never a sale price; "excl. VAT" is
+  "taxExcluded" with the shop's words.
+
 Policies
 - Grade the terms and privacy policy on the topics in the list, with the rubric's grade the quotes fit: great, good,
   neutral, poor or bad. One to three quotes that show it, word for word; when the pages don't settle a topic, leave it out.
@@ -205,7 +212,7 @@ export function extractionParts(context: ExtractionContext, maxChars = 30_000): 
     parts.push({
       part: 'plans',
       system,
-      user: `${header} Fill in plans, addOns, acceptedNetworks, availableIn, proposedFeatures and notOnPages; leave policies empty.\n\nFeatures:\n${registryDigest(context.features)}\n\n${pagesText(planPages.map((page) => ({ ...page, text: page.text.slice(0, share) })))}`,
+      user: `${header} Fill in plans, addOns, acceptedNetworks, availableIn, resellers, proposedFeatures and notOnPages; leave policies empty.\n\nFeatures:\n${registryDigest(context.features)}\n\n${pagesText(planPages.map((page) => ({ ...page, text: page.text.slice(0, share) })))}`,
     });
   }
   const topics = context.topics.filter(
@@ -259,6 +266,7 @@ export function mergeAnswers(answers: readonly ExtractionAnswer[]): ExtractionAn
     addOns: [],
     acceptedNetworks: [],
     policies: [],
+    resellers: [],
     proposedFeatures: [],
     notOnPages: [],
   };
@@ -267,6 +275,7 @@ export function mergeAnswers(answers: readonly ExtractionAnswer[]): ExtractionAn
     merged.addOns.push(...answer.addOns);
     merged.acceptedNetworks.push(...answer.acceptedNetworks);
     merged.policies.push(...answer.policies);
+    merged.resellers.push(...answer.resellers);
     merged.proposedFeatures.push(...answer.proposedFeatures);
     merged.notOnPages.push(...answer.notOnPages);
     merged.availableIn ??= answer.availableIn;

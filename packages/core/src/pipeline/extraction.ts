@@ -7,12 +7,14 @@ import { policyTiers, type PolicyTopic } from '../catalog/policy-topic';
 import type { Price } from '../catalog/price';
 import type { AcceptedNetworks, AddOn, CardNetwork, Plan, Provider } from '../catalog/provider';
 import { isCatalogRegion } from '../catalog/regions';
+import type { Reseller, ResellerListing, ResellerOffer, ResellerPrice } from '../catalog/reseller';
 import type { IsoDate } from '../dates/iso-date';
 import { moneyIn, sameAmount, sameCurrency } from './amounts';
 import type { PageKind } from './find-pages';
 import { onProviderSite } from './find-pages';
 import { idFromName } from './queue';
 import { findQuote } from './quotes';
+import { parseWebAddress } from './web-address';
 
 // Extraction (BLUEPRINT §6.5 ④, M3.4): a model reads a provider's saved pages and answers in the shape below, every
 // fact with the page's own words; then the pipeline checks the answer against the pages and the catalog's rules and
@@ -150,6 +152,43 @@ const extractedAnswerSchema = z.object({
       }),
     )
     .default([]),
+  resellers: z
+    .array(
+      z.object({
+        shop: z.string().describe('The shop’s name, as the provider’s page writes it'),
+        website: z.string().describe('The shop’s home page'),
+        approval: z
+          .object({ page: pageQuote.page, quotes: z.array(z.string()) })
+          .describe(
+            'Where the provider’s own page names the shop as an official reseller, word for word',
+          ),
+        offers: z
+          .array(
+            z.object({
+              plan: z.string().describe('The provider’s plan it sells, by name'),
+              notes: z
+                .string()
+                .optional()
+                .describe('What the buyer gets: a code by email, a card in the post'),
+              prices: z
+                .array(
+                  extractedPriceSchema.extend({
+                    taxExcluded: z
+                      .string()
+                      .optional()
+                      .describe('The shop page’s words that say VAT or tax is added ("excl. VAT")'),
+                  }),
+                )
+                .default([]),
+            }),
+          )
+          .default([]),
+      }),
+    )
+    .default([])
+    .describe(
+      'Shops the provider’s own site names as official resellers of its own subscription, with their regular prices from their own pages: never partners that use its service in their own product',
+    ),
   proposedFeatures: z
     .array(
       z.object({
@@ -195,6 +234,8 @@ export interface ExtractionContext {
   features: readonly Feature[];
   /** data/policy-topics.yaml. */
   topics: readonly PolicyTopic[];
+  /** data/resellers.yaml: a shop already listed keeps its id. */
+  resellers?: readonly Reseller[];
   today: IsoDate;
 }
 
@@ -228,6 +269,8 @@ export interface ExtractionDraft {
   proposedFeatures: ProposedFeature[];
   /** What each kept price and feature rests on, for the pull request's evidence links. */
   evidence: Evidence[];
+  /** Shops of the draft's resellers that data/resellers.yaml doesn't list yet. */
+  newResellers: Reseller[];
   outOfScope?: string;
 }
 
@@ -271,7 +314,14 @@ export function draftFromAnswer(
   const currencies = new Set(Intl.supportedValuesOf('currency'));
   const comments = sourceComments(context, answer);
   if (answer.outOfScope) {
-    return { comments, issues, proposedFeatures: [], evidence: [], outOfScope: answer.outOfScope };
+    return {
+      comments,
+      issues,
+      proposedFeatures: [],
+      evidence: [],
+      newResellers: [],
+      outOfScope: answer.outOfScope,
+    };
   }
 
   /** The page's own words for a quote, or undefined (and an issue) when it isn't there. */
@@ -554,6 +604,97 @@ export function draftFromAnswer(
 
   const policies = policyDrafts(answer, context, planIds, verified, issues);
 
+  // Official resellers (BLUEPRINT §4.9): named on the provider's own page, priced on the shop's own pages.
+  const listings: ResellerListing[] = [];
+  const newResellers: Reseller[] = [];
+  for (const claim of answer.resellers) {
+    const subject = `Reseller ${claim.shop}`;
+    const page = pages.get(claim.approval.page);
+    if (!page || !onProviderSite(page.url, context.provider)) {
+      issues.push({
+        kind: 'dropped',
+        subject,
+        reason: 'Its approval isn’t on the provider’s own site',
+      });
+      continue;
+    }
+    const quotes = claim.approval.quotes.flatMap(
+      (quote) => verified(subject, claim.approval.page, quote)?.quote ?? [],
+    );
+    if (quotes.length === 0) continue;
+    const shopSite = parseWebAddress(claim.website);
+    if (!shopSite) {
+      issues.push({ kind: 'dropped', subject, reason: `"${claim.website}" isn't a web address` });
+      continue;
+    }
+    const known = (context.resellers ?? []).find((reseller) =>
+      onProviderSite(claim.website, {
+        name: reseller.name,
+        website: reseller.website,
+        domains: reseller.domains,
+      }),
+    );
+    const shop: Reseller = known ?? {
+      id: uniqueReseller(claim.shop, context, newResellers),
+      name: claim.shop.trim(),
+      website: `https://${shopSite.host}`,
+    };
+    const offers: ResellerOffer[] = [];
+    for (const offer of claim.offers) {
+      const plan = planIds.get(normalize(offer.plan));
+      if (!plan) {
+        issues.push({
+          kind: 'dropped',
+          subject: `${subject}: ${offer.plan}`,
+          reason: 'Not a plan in the draft',
+        });
+        continue;
+      }
+      const offerPrices: ResellerPrice[] = offer.prices.flatMap((claimed) => {
+        const [price] = prices(`${subject}: ${offer.plan}`, [claimed]);
+        if (!price) return [];
+        if (
+          !price.sourceUrl ||
+          !onProviderSite(price.sourceUrl, {
+            name: shop.name,
+            website: shop.website,
+            domains: shop.domains,
+          })
+        ) {
+          issues.push({
+            kind: 'dropped',
+            subject: `${subject}: ${offer.plan}`,
+            reason: 'Its price isn’t on the shop’s own page',
+          });
+          return [];
+        }
+        const words =
+          claimed.taxExcluded &&
+          findQuote(claimed.taxExcluded, pages.get(claimed.page)?.text ?? '');
+        return [
+          { ...price, sourceUrl: price.sourceUrl, ...(words && { taxExcluded: { quote: words } }) },
+        ];
+      });
+      if (offerPrices.length > 0) {
+        offers.push({
+          plan,
+          ...(offer.notes && { notes: offer.notes.trim() }),
+          prices: offerPrices,
+        });
+      }
+    }
+    if (offers.length === 0) {
+      issues.push({
+        kind: 'dropped',
+        subject,
+        reason: 'No offer with a checked price on the shop’s own page',
+      });
+      continue;
+    }
+    listings.push({ reseller: shop.id, approvedBy: { url: page.url, quotes }, offers });
+    if (!known) newResellers.push(shop);
+  }
+
   for (const proposal of answer.proposedFeatures) {
     const source = verified(`Proposed: ${proposal.name}`, proposal.page, proposal.quote);
     if (source) {
@@ -572,7 +713,7 @@ export function draftFromAnswer(
       subject: context.provider.name,
       reason: 'No plan with a checked price: no draft',
     });
-    return { comments, issues, proposedFeatures, evidence };
+    return { comments, issues, proposedFeatures, evidence, newResellers: [] };
   }
   const cancelUrl = mainPage(context.pages, 'cancel')?.url;
   if (!cancelUrl) {
@@ -598,9 +739,10 @@ export function draftFromAnswer(
     ...(pricing && { sources: { pricing } }),
     plans,
     ...(addOns.length > 0 && { addOns }),
+    ...(listings.length > 0 && { resellers: listings }),
     ...(policies && { policies }),
   };
-  return { provider, comments, issues, proposedFeatures, evidence };
+  return { provider, comments, issues, proposedFeatures, evidence, newResellers };
 }
 
 /** A kind's page that find-urls found (named after the kind), else the first one added by hand. */
@@ -640,6 +782,23 @@ function normalize(text: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9+]+/g, ' ')
     .trim();
+}
+
+/** A new shop's id from its name: one no reseller, new one or provider has (they share data/logos/). */
+function uniqueReseller(
+  name: string,
+  context: ExtractionContext,
+  added: readonly Reseller[],
+): string {
+  const taken = new Set([
+    context.provider.id,
+    ...(context.resellers ?? []).map((reseller) => reseller.id),
+    ...added.map((reseller) => reseller.id),
+  ]);
+  const slug = idFromName(name) || 'shop';
+  let id = slug;
+  for (let n = 2; taken.has(id); n++) id = `${slug}-${n}`;
+  return id;
 }
 
 function uniqueId(providerId: string, name: string, taken: ReadonlySet<string>): string {

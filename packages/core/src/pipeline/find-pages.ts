@@ -75,23 +75,33 @@ export const commonPaths: Readonly<Record<PageKind, readonly string[]>> = {
 /** A path no site has, which a site that answers every path still answers (a single-page app's soft 404). */
 export const missingPath = '/simply-sub-page-that-isnt-here';
 
-/** What a web search asks, for a provider named `name`. */
-export function searchQuery(kind: PageKind, name: string): string {
+/**
+ * What web searches ask, in order, for a provider's page of a kind. Resellers are also looked for in its own posts on
+ * each of its sites (BLUEPRINT §6.5): Proton names its resellers only in a Proton VPN blog post.
+ */
+export function searchQueries(kind: PageKind, site: ProviderSite): string[] {
+  const { name } = site;
   switch (kind) {
     case 'pricing':
-      return `${name} plans pricing Canada`;
+      return [`${name} plans pricing Canada`];
     case 'cancel':
-      return `how to cancel ${name} subscription`;
+      return [`how to cancel ${name} subscription`];
     case 'terms':
-      return `${name} terms of service`;
+      return [`${name} terms of service`];
     case 'privacy':
-      return `${name} privacy policy`;
+      return [`${name} privacy policy`];
     case 'payment':
-      return `${name} accepted payment methods credit cards`;
+      return [`${name} accepted payment methods credit cards`];
     case 'bundles':
-      return `${name} bundle`;
-    case 'resellers':
-      return `${name} official resellers where to buy`;
+      return [`${name} bundle`];
+    case 'resellers': {
+      const host = parseWebAddress(site.website)?.host;
+      const domains = [...(host ? [registeredDomain(host)] : []), ...(site.domains ?? [])];
+      return [
+        `${name} official resellers where to buy`,
+        ...domains.map((domain) => `site:${domain} reseller OR partnered OR voucher`),
+      ];
+    }
   }
 }
 
@@ -604,14 +614,15 @@ async function findKind(
     (await tryAll(paths, 'path')) ||
     (policy ? (await links()) || (await sitemap()) : (await sitemap()) || (await links()));
   if (!done && io.search) {
-    const results = await io.search(searchQuery(kind, site.name));
-    report.searched = results === undefined ? 'none-left' : 'yes';
-    if (results) {
+    for (const query of searchQueries(kind, site)) {
+      const results = await io.search(query);
+      report.searched = results === undefined ? 'none-left' : 'yes';
+      if (!results) break;
       // In the engine's order, which is what it found most relevant.
       const onSite = results
         .filter((result) => onProviderSite(result.url, site))
         .map((result) => ({ url: result.url, score: urlScore(kind, result.url, result.title) }));
-      await tryAll(onSite, 'search');
+      if (await tryAll(onSite, 'search')) break;
     }
   }
   if (!report.found && probable) report.found = probable;

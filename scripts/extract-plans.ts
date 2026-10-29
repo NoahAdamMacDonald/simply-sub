@@ -19,6 +19,7 @@ import {
   mergeAnswers,
   pageKinds,
   policyTopicsFileSchema,
+  resellersFileSchema,
   queueFileSchema,
   readModelAnswer,
   baselineLines,
@@ -30,10 +31,11 @@ import {
   type ExtractionContext,
   type ExtractionPage,
   type PageKind,
+  type Reseller,
 } from '@simply-sub/core';
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { format, resolveConfig } from 'prettier';
-import { parse } from 'yaml';
+import { isSeq, parse, parseDocument, type Document } from 'yaml';
 import { checkCatalog, loadCatalogFiles, plural } from './lib/catalog-files';
 import {
   absolute,
@@ -94,6 +96,7 @@ if (draft.outOfScope) {
     absolute(file),
     await format(text, { ...(await resolveConfig(absolute(file))), filepath: absolute(file) }),
   );
+  await addResellers(draft.newResellers);
   const { issues } = await checkCatalog();
   const own = issues.filter(({ issue }) => issue.file === file);
   for (const { issue, line } of own)
@@ -169,8 +172,29 @@ async function contextFor(provider: string): Promise<ExtractionContext> {
     pages,
     features: featuresFileSchema.parse(data('data/features.yaml')),
     topics: policyTopicsFileSchema.parse(data('data/policy-topics.yaml') ?? []),
+    resellers: resellersFileSchema.parse(data('data/resellers.yaml') ?? []),
     today: toIsoDate(new Date()),
   };
+}
+
+/** New shops at the end of data/resellers.yaml, keeping what's written above them. */
+async function addResellers(shops: readonly Reseller[]): Promise<void> {
+  if (shops.length === 0) return;
+  const file = absolute('data/resellers.yaml');
+  const document: Document = parseDocument(await readFile(file, 'utf8'));
+  const list = document.contents;
+  if (!isSeq(list)) fail('data/resellers.yaml must be a list');
+  for (const shop of shops) list.items.push(document.createNode(shop));
+  await writeFile(
+    file,
+    await format(document.toString({ lineWidth: 0 }), {
+      ...(await resolveConfig(file)),
+      filepath: file,
+    }),
+  );
+  console.log(
+    `Added ${shops.map((shop) => shop.id).join(', ')} to data/resellers.yaml: npm run data:icons fetches their logos.`,
+  );
 }
 
 async function readAnswer(provider: string): Promise<ExtractionAnswer> {

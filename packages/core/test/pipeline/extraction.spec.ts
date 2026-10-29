@@ -384,3 +384,116 @@ describe('the request', () => {
     expect(merged.policies).toHaveLength(1);
   });
 });
+
+describe('draftFromAnswer: official resellers', () => {
+  const resellerContext = (): ExtractionContext => ({
+    ...context(),
+    pages: [
+      ...context().pages,
+      {
+        name: 'resellers',
+        kind: 'resellers',
+        url: 'https://www.streamco.example/where-to-buy',
+        text: 'Our official resellers: Shopmart - CA. Gift cards also at Bargains.',
+      },
+      {
+        name: 'resellers-2',
+        kind: 'resellers',
+        url: 'https://www.shopmart.example/streamco-card',
+        text: 'StreamCo Standard 12-month card: $199.99. Regular price. Sale ends soon.',
+      },
+    ],
+    resellers: [{ id: 'bargains', name: 'Bargains', website: 'https://www.bargains.example' }],
+  });
+  const offer = (page: string, quote: string) => ({
+    plan: 'Standard',
+    prices: [
+      price(199.99, quote, { page, interval: 'month', intervalCount: 12, autoRenew: false }),
+    ],
+  });
+
+  it('lists a shop the provider’s own page names, priced on its own page, and adds it to the resellers', () => {
+    const draft = draftFromAnswer(
+      answer({
+        resellers: [
+          {
+            shop: 'Shopmart',
+            website: 'https://www.shopmart.example',
+            approval: { page: 'resellers', quotes: ['Shopmart - CA'] },
+            offers: [offer('resellers-2', 'StreamCo Standard 12-month card: $199.99')],
+          },
+        ],
+      }),
+      resellerContext(),
+    );
+    expect(draft.issues).toEqual([]);
+    expect(draft.newResellers).toEqual([
+      { id: 'shopmart', name: 'Shopmart', website: 'https://www.shopmart.example' },
+    ]);
+    expect(draft.provider?.resellers).toEqual([
+      {
+        reseller: 'shopmart',
+        approvedBy: { url: 'https://www.streamco.example/where-to-buy', quotes: ['Shopmart - CA'] },
+        offers: [
+          {
+            plan: 'streamco.standard',
+            prices: [
+              {
+                region: 'CA',
+                currency: 'CAD',
+                amount: 199.99,
+                interval: 'month',
+                intervalCount: 12,
+                autoRenew: false,
+                lastVerified: '2026-10-28',
+                sourceUrl: 'https://www.shopmart.example/streamco-card',
+              },
+            ],
+          },
+        ],
+      },
+    ]);
+    expect(providerSchema.safeParse(draft.provider).success).toBe(true);
+  });
+
+  it('keeps a known shop’s id, and drops a price that isn’t on the shop’s own page', () => {
+    const draft = draftFromAnswer(
+      answer({
+        resellers: [
+          {
+            shop: 'Bargains',
+            website: 'https://bargains.example',
+            approval: { page: 'resellers', quotes: ['Gift cards also at Bargains.'] },
+            offers: [offer('resellers-2', 'StreamCo Standard 12-month card: $199.99')],
+          },
+        ],
+      }),
+      resellerContext(),
+    );
+    expect(draft.newResellers).toEqual([]);
+    expect(draft.issues.map(({ reason }) => reason)).toEqual([
+      'Its price isn’t on the shop’s own page',
+      'No offer with a checked price on the shop’s own page',
+    ]);
+  });
+
+  it('never takes a shop named anywhere but on the provider’s own site', () => {
+    const draft = draftFromAnswer(
+      answer({
+        resellers: [
+          {
+            shop: 'Shopmart',
+            website: 'https://www.shopmart.example',
+            approval: { page: 'resellers-2', quotes: ['Regular price.'] },
+            offers: [offer('resellers-2', 'StreamCo Standard 12-month card: $199.99')],
+          },
+        ],
+      }),
+      resellerContext(),
+    );
+    expect(draft.provider?.resellers).toBeUndefined();
+    expect(draft.issues.map(({ reason }) => reason)).toEqual([
+      'Its approval isn’t on the provider’s own site',
+    ]);
+  });
+});

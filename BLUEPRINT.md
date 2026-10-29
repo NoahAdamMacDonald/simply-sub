@@ -1791,6 +1791,17 @@ in a batch closed without merging is passed over as rejected.
 - **The batch** (`catalog/batch-2026-10-28-bitdefender`, its own pull request into this work's branch): Claude, Xbox
   Game Pass and Bitdefender drafted, Crunchyroll unreadable. Section 14 (M3.6) has what was found.
 
+**As built (M3.7):** resellers in the pipeline. Find-urls looks for the reseller page in the usual steps and, when
+it has to search, also in the provider's own posts on each of its sites (`site:<domain> reseller OR partnered OR
+voucher`, after `<name> official resellers where to buy`). The extraction's `resellers`: each shop with the words that
+name it on the provider's page and its offers, each plan's regular prices read from the shop's own page (added with
+`--url resellers=<shop's page>`), "excl. VAT" as `taxExcluded`. The checks: the approval page must be on the provider's
+own sites and its quotes on it word for word; each price on the shop's own site (its website or domains); a shop
+`data/resellers.yaml` lists keeps its id, and a new one gets an id no provider or reseller has and is added there
+(`extract-plans`), with its logo fetched by the batch. Partners that run their own product on the provider's service
+aren't resellers (the rules say so, and only a shop named as selling the provider's subscription has an approval to
+quote). The batch's review lists each reseller's prices and its approval, linked to its quote.
+
 **Ongoing:** the nightly price check (section 6.4) reuses the saved `sources:` URLs. A weekly job takes the next
 N services from the queue, so the catalog grows on its own while you only review.
 
@@ -2766,6 +2777,11 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-28, M3.7)**
+- **The batch's providers have none:** Xbox's where-to-buy page lists retailers for consoles, games and accessories and
+  says it "does not constitute an endorsement of any retailer"; Bitdefender's partners page is for business partners;
+  Claude names none. Each provider file's header says so.
 
 **Resolved (2026-10-28, M3.6)**
 - **Claude:** Free, Pro (US$20 a month, US$200 a year) and Max 5x and 20x (US$100 and US$200 a month), the US prices

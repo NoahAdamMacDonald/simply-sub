@@ -122,6 +122,21 @@ function providerSection(entry: BatchProvider): string {
         .join('; ')}`,
     );
   }
+  if (provider.resellers) {
+    lines.push(
+      '- **Official resellers** (named on its own page, at their regular prices):',
+      ...provider.resellers.map(
+        (listing) =>
+          `  - ${cell(listing.reseller)}: ${listing.offers
+            .flatMap((offer) =>
+              offer.prices.map((price) => `[${priceWords(price)}](${linkTarget(price.sourceUrl)})`),
+            )
+            .join(
+              ' · ',
+            )}; named “${cell(listing.approvedBy.quotes.join('”, “'))}” on [its page](${linkTarget(quoteLink(listing.approvedBy.url, listing.approvedBy.quotes))})`,
+      ),
+    );
+  }
   if (provider.policies) lines.push(`- **Policies:** ${provider.policies.ratings.length} rated`);
   if (entry.proposedFeatures.length > 0) {
     lines.push(

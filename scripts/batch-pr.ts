@@ -139,12 +139,10 @@ for (const entry of batch) {
   });
 }
 const drafted = results.filter((result) => result.status === 'drafted');
+// The new providers' logos, and the new resellers' (data/resellers.yaml without a logo yet).
+const resellerIds = await resellersWithoutLogo();
 if (drafted.length > 0)
-  run(
-    'fetch-icons.ts',
-    drafted.map((result) => result.id),
-    true,
-  );
+  run('fetch-icons.ts', [...drafted.map((result) => result.id), ...resellerIds], true);
 for (const result of drafted) result.logo = await logoOf(result.id);
 
 // The catalog must pass data:validate: a broken draft stops the batch, or is left out with --leave-out-broken.
@@ -186,6 +184,8 @@ if (dryRun) process.exit(0);
 const branch = `catalog/batch-${today}-${batch[0].id}`;
 const files = [
   'data/queue.yaml',
+  'data/resellers.yaml',
+  ...resellerIds.flatMap((id) => [`data/logos/${id}.png`]),
   ...kept.flatMap((result) => [
     `data/providers/${result.id}.yaml`,
     ...(result.logo ? [`data/logos/${result.id}.png`] : []),
@@ -332,6 +332,17 @@ async function markQueue(batchResults: readonly BatchProvider[]): Promise<void> 
   await mkdir(absolute('.pipeline'), { recursive: true });
   const text = document.toString({ lineWidth: 0 });
   await writeFile(file, await format(text, { ...(await resolveConfig(file)), filepath: file }));
+}
+
+/** The resellers that have no logo yet: the batch's new shops. */
+async function resellersWithoutLogo(): Promise<string[]> {
+  const list = parseDocument(await readFile(absolute('data/resellers.yaml'), 'utf8')).toJS() as
+    { id: string }[] | null;
+  const missing: string[] = [];
+  for (const { id } of list ?? []) {
+    if (!(await exists(`data/logos/${id}.png`))) missing.push(id);
+  }
+  return missing;
 }
 
 async function exists(path: string): Promise<boolean> {
