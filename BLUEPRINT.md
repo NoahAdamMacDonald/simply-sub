@@ -229,7 +229,8 @@ simply-sub/
 │     │  ├─ rewards/         # card reward maths (section 9)
 │     │  ├─ pipeline/        # the discovery pipeline's logic (section 6.5): the queue and Wikidata (M3.1), web
 │     │  │                   # addresses; finding pages and web search (M3.2); a page's text, amounts, tax wording
-│     │  │                   # and robots.txt, shared with the bot (moved from apps/bot in M3.2)
+│     │  │                   # and robots.txt, shared with the bot (moved from apps/bot in M3.2); extraction: the
+│     │  │                   # answer's schema, the request, quotes, checks and drafts, and the drafts' YAML (M3.4)
 │     │  └─ export/          # the exports' tables, calendar events, text and list file, which the app writes
 │     │                      # with papaparse, exceljs and ics (M7.5)
 │     └─ test/               # Vitest specs, mirroring src/ (run in the America/Vancouver time zone)
@@ -261,6 +262,7 @@ simply-sub/
 │  ├─ lib/web.ts, lib/search.ts  # the pipeline's polite fetch and its web search (Tavily, Brave, SearXNG)
 │  ├─ render-pages.ts        # each page in the browser → .pipeline/<id>/pages/ (`npm run data:render`, section 6.5)
 │  ├─ lib/browser.ts         # the pipeline's browser: the system Edge through playwright-core
+│  ├─ extract-plans.ts       # saved pages → a model's answer → data/providers/<id>.yaml (`npm run data:extract`)
 │  ├─ price-check.ts         # nightly price monitor (section 6.4)
 │  └─ draft-provider.ts      # AI-assisted: pricing page URL → draft YAML
 │
@@ -1714,6 +1716,34 @@ use canonical ids, and it maps provider wording through `aliases`. The output co
 Model choice: the Workers AI free daily allowance, or a small Claude model (`claude-haiku-5-5`), which costs
 cents per provider. Check current pricing. One run fills hundreds of providers.
 
+**As built (M3.4):** `npm run data:extract -- <id>` (`scripts/extract-plans.ts`) on core's `pipeline/extraction.ts`,
+`extraction-request.ts`, `quotes.ts` and `draft-yaml.ts`.
+- **Who answers:** any model, in one schema (`extractionAnswerSchema`): every fact with the page it's on (by name:
+  pricing, terms, pricing-2) and its words. `--prepare` writes the whole request (`extractionPrompt`: the rules of the
+  price-research and policy-research skills, the registry by id with each feature's values and aliases, the policy
+  topics with their rubrics, the answer's JSON Schema, the pages) to `.pipeline/<id>/extraction.md` for a session's
+  model, Claude run by the owner, which answers in `answer.json`. `--model workers-ai` asks Workers AI's Llama 3.3 70B
+  instead (`CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` in `.env`), in parts that fit its context
+  (`extractionParts`: the plans from the pricing, payment, cancel and bundle pages; the policies from the terms' and
+  privacy policy's passages around each topic's words), merged (`mergeAnswers`).
+- **The checks** (`draftFromAnswer`), whoever answered: each quote must be on its page word for word, white space
+  aside, or what rests on it is dropped; when only its quote marks, dashes or capitals differ the page's own words are
+  kept (`findQuote`), so the nightly check and the card's links find them. A price's quote must show its amount; a
+  sale or first-term price, a business or per-seat plan, an unknown region or currency, a period over 366 days, 104
+  weeks, 36 months or 5 years, and over 2,000 a month are dropped; over 200 a month, or a year costing more than 12
+  months, is flagged. Features resolve by id, name or alias, with a value the registry allows (and their group set);
+  anything else is a proposed feature, for the owner's approval through the feature-discovery skill. Card networks are
+  only those their checked quotes name; `availableIn` only with its words; `taxIncluded` only when its words are on the
+  price's page; policy ratings only on the registry's topics and grades, a reason of 240 characters at most, one to
+  three checked quotes.
+- **The draft:** plan ids from their names (`<provider>.<slug>`), each price with today's `lastVerified` and its
+  page as `sourceUrl`, `billingCurrency` when each region is priced in one currency, the cancel page find-urls found
+  as `cancelUrl` (a draft without one says so), the pricing page as `sources.pricing`, the policy pages as the card's
+  links, and a header comment with every page read and each check that found nothing. `draftYaml` writes it the way
+  the catalog's files are written, so Prettier leaves it alone (tested on five real provider files) and the bot needs
+  no Prettier. The script writes `data/providers/<id>.yaml`, `.pipeline/<id>/report.json` (what was dropped, what to
+  check, the proposed features) and prints the file's `data:validate` issues.
+
 **⑤ Validate:** the same `validate-data.ts` rules (section 6.2), plus checks for missing prices, implausible
 amounts and duplicate plans.
 
@@ -2695,6 +2725,15 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-28, M3.4)**
+- **One answer schema for every model** (the user's rule that no part may need a Claude subscription): a session's
+  Claude, Workers AI or a person fills in the same JSON, and the same checks run on it. Nothing the model says is kept
+  without the page's own words, which are what's stored.
+- **Proposed features** are listed for the owner (the report, and the batch's pull request), never added to
+  `features.yaml` by the pipeline: the feature-discovery skill adds them, in their own commit.
+- **The YAML is written by core** rather than the `yaml` package, whose flow lists (`[ a, b ]`) Prettier rewrites
+  (`[a, b]`): CI's format check would fail on every draft the bot writes.
 
 **Resolved (2026-10-28, M3.3)**
 - **The renderer identifies itself** (the user's rule): the browser's User-Agent with the bot's token after it.

@@ -10,19 +10,17 @@
 import { moneyIn, pageKinds, type PageKind } from '@simply-sub/core';
 import { mkdir } from 'node:fs/promises';
 import { dirname } from 'node:path';
-import { Renderer, type RenderedPage } from './lib/browser';
+import { Renderer } from './lib/browser';
 import { plural } from './lib/catalog-files';
-import { absolute, readJson, workFile, writeJson, type FoundUrls } from './lib/pipeline-files';
+import {
+  absolute,
+  readJson,
+  workFile,
+  writeJson,
+  type FoundUrls,
+  type PageRecord,
+} from './lib/pipeline-files';
 import { PoliteWeb } from './lib/web';
-
-/** What pages/<name>.json holds. */
-export interface PageRecord extends RenderedPage {
-  kind: PageKind;
-  /** When it was read. */
-  read: string;
-  /** How many prices it shows in each currency (a bare $ is `dollar`), to spot a page priced for another country. */
-  currencies: Record<string, number>;
-}
 
 const args = process.argv.slice(2);
 const value = (name: string) => (args.includes(name) ? args[args.indexOf(name) + 1] : undefined);

@@ -22,7 +22,8 @@
     "data:icons": "tsx scripts/fetch-icons.ts",
     "data:queue": "tsx scripts/discover-services.ts",
     "data:urls": "tsx scripts/find-urls.ts",
-    "data:render": "tsx scripts/render-pages.ts"
+    "data:render": "tsx scripts/render-pages.ts",
+    "data:extract": "tsx scripts/extract-plans.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
