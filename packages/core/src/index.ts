@@ -67,6 +67,9 @@ export {
 export * from './optimizer/optimize';
 export * from './optimizer/suggestion';
 export * from './optimizer/suggestion-text';
+export * from './pipeline/queue';
+export * from './pipeline/web-address';
+export * from './pipeline/wikidata';
 export * from './ranking/feature-ranking';
 export * from './ranking/plan-features';
 export * from './ranking/rank-fit';

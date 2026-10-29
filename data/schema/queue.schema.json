@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+        "description": "The provider id it gets, and its file name once added (xbox-game-pass)"
+      },
+      "name": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Its name, as the provider writes it"
+      },
+      "website": {
+        "type": "string",
+        "format": "uri",
+        "pattern": "^https://",
+        "patternErrorMessage": "Use a full https:// URL",
+        "description": "Its home page, where the pipeline starts looking"
+      },
+      "category": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+        "description": "A service category id from categories.yaml"
+      },
+      "source": {
+        "type": "string",
+        "enum": ["own", "wikidata", "manual"],
+        "description": "own: one of your own services, first in the queue. wikidata: found by npm run data:queue. manual: added by hand"
+      },
+      "wikidata": {
+        "type": "string",
+        "pattern": "^Q[1-9]\\d*$",
+        "description": "Its Wikidata item, when it came from there"
+      },
+      "sitelinks": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 9007199254740991,
+        "description": "How many Wikipedia articles it has: the queue puts the most written-about first"
+      },
+      "status": {
+        "type": "string",
+        "enum": ["queued", "done", "rejected", "unreadable", "out-of-scope"],
+        "description": "queued: a batch takes it next. done: it has a provider file. rejected: a person said no. unreadable: its pages couldn’t be read (a bot check, a geo-block). out-of-scope: not a personal or family subscription (business only, free, closed)"
+      },
+      "date": {
+        "type": "string",
+        "format": "date",
+        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+        "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+        "description": "When its status last changed"
+      },
+      "note": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Why it was rejected, couldn’t be read or is out of scope, or anything else to know"
+      }
+    },
+    "required": ["id", "name", "website", "category", "source", "status"],
+    "additionalProperties": false
+  },
+  "title": "Simply Sub discovery queue",
+  "description": "data/queue.yaml: the services the discovery pipeline adds next, in order, and what became of each (BLUEPRINT §6.5)"
+}

@@ -142,7 +142,7 @@ app and the API to `sub.simplely.ca` (BLUEPRINT §7.3).
 ### M3 — Discovery pipeline (BLUEPRINT §6.5)
 | ID | Task | Done when |
 |---|---|---|
-| M3.1 | `discover-services.ts` (Wikidata) → `data/queue.yaml` | The queue has services with websites and categories |
+| M3.1 | `discover-services.ts` (Wikidata) → `data/queue.yaml`. As built: `npm run data:queue` on core's `pipeline/queue.ts` (the queue's schema, checked by `data:validate`; `mergeCandidates`, `nextQueued`, `siteKey`) and `pipeline/wikidata.ts` (one query per class with an official website and 8 or more Wikipedia articles, `pickWebsite`); your own services first; 124 Wikidata services on 2026-10-28 (BLUEPRINT §6.5, §14) | The queue has services with websites and categories |
 | M3.2 | `find-urls.ts` (common paths → sitemap → nav links → search API) | At least 80% of a 20-service sample get a correct pricing URL |
 | M3.3 | Playwright renderer, run locally so prices come back in CAD | Text and a screenshot are saved for each page |
 | M3.4 | `extract-plans.ts` (LLM structured output, evidence quotes, proposed features; regular prices, the billing period as stated, `availableIn` from the provider's own country list, `taxIncluded` with the page's words when prices include tax everywhere, `acceptedNetworks` per region with its page's words (M9.2): BLUEPRINT §6.5) | Draft YAML passes validation for most services |

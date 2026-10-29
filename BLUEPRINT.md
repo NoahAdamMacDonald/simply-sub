@@ -227,6 +227,8 @@ simply-sub/
 │     │  │                   # bodies (M2.4)
 │     │  ├─ optimizer/       # suggestion engine (section 10)
 │     │  ├─ rewards/         # card reward maths (section 9)
+│     │  ├─ pipeline/        # the discovery pipeline's logic (section 6.5): the queue and Wikidata (M3.1), web
+│     │  │                   # addresses
 │     │  └─ export/          # the exports' tables, calendar events, text and list file, which the app writes
 │     │                      # with papaparse, exceljs and ics (M7.5)
 │     └─ test/               # Vitest specs, mirroring src/ (run in the America/Vancouver time zone)
@@ -240,6 +242,7 @@ simply-sub/
 │  │  └─ …
 │  ├─ bundles/
 │  │  └─ disney-crave-premium.yaml
+│  ├─ queue.yaml             # the discovery queue: the services to add next, and what became of each (section 6.5)
 │  ├─ schema/                # JSON Schema for the YAML above, generated from core's Zod schemas (committed)
 │  └─ logos/                 # provider logos, <id>.png: fetched by `npm run data:icons` or added by hand (committed);
 │                            # data:build publishes each as a WebP of at most 96 px (section 6.3)
@@ -252,6 +255,7 @@ simply-sub/
 │  ├─ seed-d1.ts             # catalog.json + what D1 holds → apps/api/dist/seed.sql, run on D1 (sections 5.3, 7.6)
 │  ├─ lib/catalog-files.ts   # reads, parses and checks data/ for the catalog scripts
 │  ├─ fetch-icons.ts         # any website's best icon → data/logos/<id>.png (`npm run data:icons`)
+│  ├─ discover-services.ts   # Wikidata's services → data/queue.yaml (`npm run data:queue`, section 6.5)
 │  ├─ price-check.ts         # nightly price monitor (section 6.4)
 │  └─ draft-provider.ts      # AI-assisted: pricing page URL → draft YAML
 │
@@ -1372,8 +1376,8 @@ or the disk. Today is the date where the script runs, which is UTC in CI.
 Validation fails if:
 - a file isn't valid YAML (a duplicate key, more than one document), isn't one of `data/features.yaml`,
   `data/categories.yaml`, `data/resellers.yaml` (optional), `data/policy-topics.yaml` (optional until a provider
-  rates its policies), `data/providers/<id>.yaml` or `data/bundles/<slug>.yaml` (always `.yaml`), or
-  `features.yaml` or `categories.yaml` is missing
+  rates its policies), `data/queue.yaml` (optional, section 6.5), `data/providers/<id>.yaml` or
+  `data/bundles/<slug>.yaml` (always `.yaml`), or `features.yaml` or `categories.yaml` is missing
 - a file doesn't match its Zod schema (section 4.5), which already covers unknown keys, formats, negative amounts
   and the checks within one file
 - a provider's `id` isn't its file name, or a bundle's `id` isn't `bundle.<file name>`
@@ -1410,6 +1414,9 @@ Validation fails if:
 - a currency in a price or in `billingCurrency` isn't a real ISO 4217 code (`Intl.supportedValuesOf('currency')`;
   the schema only checks that it's three capital letters)
 - `lastVerified` is after today
+- the discovery queue (`data/queue.yaml`, section 6.5) gives a service an unknown service category, leaves a
+  rejected, unreadable or out-of-scope service without a note, marks a service done that has no provider file (or a
+  provider's entry isn't done), or queues a service on a catalog provider's site (Proton Mail on proton.me)
 
 Validation warns (but passes) when `lastVerified` is older than 90 days: one warning per file, with the count and
 the oldest price. It also warns about a provider or reseller without a logo in `data/logos/`, which the app shows as
@@ -1569,6 +1576,34 @@ plans and opens PRs. **Your only manual step is reviewing PRs.**
 - Your own list (`subscriptions.txt`) and category "top lists" go to the front of the queue.
 - **Demand signal (later):** opt-in anonymous "suggest this service" reports from custom subscriptions raise a
   service's priority.
+
+**As built (M3.1):** `npm run data:queue` (`scripts/discover-services.ts`, on core's `pipeline/queue.ts` and
+`pipeline/wikidata.ts`).
+- **The queue** (`queueFileSchema`, checked by `data:validate`, with `data/schema/queue.schema.json` for the editor):
+  each entry has an `id` (the provider id it gets), `name`, `website`, a service `category`, a `source` (own,
+  wikidata or manual), its Wikidata item and `sitelinks` (how many Wikipedia articles it has), and a `status`:
+  queued, done (it has a provider file), rejected, unreadable or out-of-scope, the last three with a `note`. Your own
+  services (section 6.6) are first, `source: own`: Bitdefender, Xbox Game Pass, Crunchyroll and Claude queued, and
+  Proton, Netflix, Disney+ and Crave done. A batch takes the next queued ones in the file's order (`nextQueued`).
+- **Wikidata:** one SPARQL query per class in core's `wikidataClasses` (video streaming, subscription video on
+  demand, over-the-top media, music streaming, VPN, password manager, antivirus, file hosting, generative AI chatbot,
+  online and cloud gaming, MOOC and online learning, fitness app, daily newspaper, email hosting), each mapped to a
+  service category. It asks for instances with an official website (P856), an English name and at least 8 Wikipedia
+  articles, without those dissolved (P576), discontinued (P2669) or retired (P730), up to 40 a class (15 newspapers),
+  one query at a time with the bot's User-Agent. Below 8 articles the classes fill with tiny apps, casinos and
+  courses: 382 services at 0, 148 at 8.
+- **Merging** (`mergeCandidates`): every class's services in one list, each item once (the first class gives its
+  category), the most written-about first, added after the queue's entries, which keep their place, status and
+  comments. Left out: a provider's site (`onSites`: Proton Mail's proton.me/mail is Proton's), the same Wikidata item
+  or the same site as an entry (YouTube Premium's youtube.com/premium is another service than YouTube's
+  youtube.com), and an id another service has (printed, for a person to name). The website is the official one
+  with a word of the name in its host (`pickWebsite`: YouTube Premium also lists an APK site), then the fewest path
+  segments.
+- **The first run** (2026-10-28) added 124 services: streaming 40, privacy and security 28, music 16, news 15,
+  storage 9, education 5, email (software) 5, AI 2, VPN 2, gaming and fitness 1 each. Wikidata files some big services under
+  other classes (ExpressVPN has only a company item; Surfshark and Private Internet Access are "software"; PlayStation
+  Plus is only a "subscription"), so they're added by hand (`source: manual`). Some entries aren't subscriptions
+  (VK, SourceForge, Android TV): a batch marks them out-of-scope with a note.
 
 **② Find URLs automatically:** `scripts/find-urls.ts`. For each website, it tries these in order and stops at
 the first strong match:
@@ -2612,6 +2647,15 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-28, M3.1)**
+- **The discovery queue** is `data/queue.yaml` (section 6.5): the user's own services first, then Wikidata's, each
+  with a status, so a batch never takes a service twice; `data:validate` keeps it in line with the provider files.
+- **Wikidata's classes** were chosen from what known services are instances of (Netflix and Disney+: video streaming
+  service; Spotify: music streaming service; Mullvad and NordVPN: virtual private network service; 1Password and
+  Bitwarden: password manager; Dropbox: file-hosting service; Claude and ChatGPT: generative AI chatbot; Xbox Game
+  Pass: online gaming service; Coursera: MOOC provider). Core has no URL parser, so `pipeline/web-address.ts` reads
+  absolute http(s) addresses with a regular expression; relative links are the caller's to resolve.
 
 **Resolved (2026-10-28, the feedback after M9)**
 The user's sixteen fixes and improvements after M9, as M5.11–M5.12, M6.12–M6.16, M7.7–M7.9 and M8.4:

@@ -13,6 +13,7 @@ describe('catalogJsonSchemas', () => {
       'bundle',
       'resellers',
       'policy-topics',
+      'queue',
     ]);
     for (const schema of Object.values(schemas)) {
       expect(schema.$schema).toBe('https://json-schema.org/draft/2020-12/schema');
