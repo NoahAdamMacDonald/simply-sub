@@ -362,9 +362,18 @@ async function exportBackup(page, label, shot, passphrase) {
 
       // ── Delete all data ─────────────────────────────────────────────────────────────────────
       await openSettings(page);
-      // Folded under its summary since M4.7: Enter opens it, then its button asks.
+      // Folded under its summary since M4.7: the jump link of the same name (on this page's list, first in the Tab
+      // order) puts focus on the summary, whose Enter opens it; then its button asks.
       await keyToName(page, 'Delete all data');
       await page.keyboard.press('Enter');
+      const folded = () =>
+        page.evaluate(() => document.querySelector('details.danger')?.open === false);
+      if (await folded()) {
+        await until('focus on its summary', () =>
+          page.evaluate(() => document.activeElement?.id === 'delete-heading'),
+        );
+        await page.keyboard.press('Enter');
+      }
       await keyToName(page, 'Delete all data…');
       await page.keyboard.press('Enter');
       await dialog(page).locator('h2', { hasText: 'Delete all data?' }).waitFor();
