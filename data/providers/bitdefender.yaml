@@ -22,7 +22,8 @@ name: Bitdefender
 website: https://www.bitdefender.com
 category: privacy-suite
 spendCategory: software
-billingCurrency: { CA: CAD, GB: GBP, US: USD, AU: AUD, NZ: NZD }
+billingCurrency:
+  { CA: CAD, GB: GBP, US: USD, AU: AUD, NZ: NZD, DE: EUR, FR: EUR, NL: EUR, ES: EUR, IT: EUR }
 cancelUrl: https://www.bitdefender.com/consumer/support/answer/29081/
 sources: { pricing: https://www.bitdefender.com/en-ca/consumer/ }
 
@@ -80,6 +81,56 @@ plans:
           quote: Sales tax included.
         lastVerified: 2026-10-29
         sourceUrl: https://www.bitdefender.com/en-nz/consumer/
+      - region: DE
+        currency: EUR
+        amount: 94.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Inklusive Mehrwertsteuer.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/de-de/consumer/
+      - region: FR
+        currency: EUR
+        amount: 94.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: TVA incluse.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/fr-fr/consumer/
+      - region: NL
+        currency: EUR
+        amount: 94.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Inclusief BTW.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/nl-nl/consumer/
+      - region: ES
+        currency: EUR
+        amount: 94.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: IVA incluido.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/es-es/consumer/
+      - region: IT
+        currency: EUR
+        amount: 94.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: IVA inclusa.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/it-it/consumer/
 
   - id: bitdefender.premium-security-individual
     name: Premium Security Individual
@@ -139,6 +190,56 @@ plans:
           quote: Sales tax included.
         lastVerified: 2026-10-29
         sourceUrl: https://www.bitdefender.com/en-nz/consumer/
+      - region: DE
+        currency: EUR
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Inklusive Mehrwertsteuer.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/de-de/consumer/
+      - region: FR
+        currency: EUR
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: TVA incluse.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/fr-fr/consumer/
+      - region: NL
+        currency: EUR
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Inclusief BTW.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/nl-nl/consumer/
+      - region: ES
+        currency: EUR
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: IVA incluido.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/es-es/consumer/
+      - region: IT
+        currency: EUR
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: IVA inclusa.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/it-it/consumer/
 
   - id: bitdefender.premium-security-family
     name: Premium Security Family
@@ -218,6 +319,56 @@ plans:
           quote: Sales tax included.
         lastVerified: 2026-10-29
         sourceUrl: https://www.bitdefender.com/en-nz/consumer/
+      - region: DE
+        currency: EUR
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Inklusive Mehrwertsteuer.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/de-de/consumer/
+      - region: FR
+        currency: EUR
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: TVA incluse.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/fr-fr/consumer/
+      - region: NL
+        currency: EUR
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Inclusief BTW.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/nl-nl/consumer/
+      - region: ES
+        currency: EUR
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: IVA incluido.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/es-es/consumer/
+      - region: IT
+        currency: EUR
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: IVA inclusa.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/it-it/consumer/
 
   - id: bitdefender.ultimate-security-family
     name: Ultimate Security Family
@@ -282,6 +433,56 @@ plans:
           quote: Sales tax included.
         lastVerified: 2026-10-29
         sourceUrl: https://www.bitdefender.com/en-nz/consumer/
+      - region: DE
+        currency: EUR
+        amount: 69.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Inklusive Mehrwertsteuer.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/de-de/consumer/
+      - region: FR
+        currency: EUR
+        amount: 69.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: TVA incluse.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/fr-fr/consumer/
+      - region: NL
+        currency: EUR
+        amount: 69.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Inclusief BTW.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/nl-nl/consumer/
+      - region: ES
+        currency: EUR
+        amount: 69.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: IVA incluido.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/es-es/consumer/
+      - region: IT
+        currency: EUR
+        amount: 69.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: IVA inclusa.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/it-it/consumer/
 
 policies:
   links:

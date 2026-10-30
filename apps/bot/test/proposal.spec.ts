@@ -29,7 +29,13 @@ describe('stepPlan', () => {
       'https://help.netflix.com/en/node/24926/us',
       'https://help.netflix.com/en/node/24926/gb',
       'https://help.netflix.com/en/node/24926/au',
+      'https://help.netflix.com/en/node/24926/de',
+      'https://help.netflix.com/en/node/24926/fr',
+      'https://help.netflix.com/en/node/24926/es',
+      'https://help.netflix.com/en/node/24926/it',
       'https://help.netflix.com/en/node/24926/nz',
+      'https://help.netflix.com/en/node/24926/ie',
+      'https://help.netflix.com/en/node/24926/nl',
       // Its accepted cards in each country (M9.2).
       'https://help.netflix.com/en/node/116380/ca',
       'https://help.netflix.com/en/node/116380/us',
