@@ -379,8 +379,8 @@ one canonical feature describes the same capability across every provider, whate
 (`perks: [{ id: fortnite-crew, name: Fortnite Crew passes }]`), and each plan lists the ids it has. Each perk is a
 rank key, `perk:<provider>/<perk>`, ranked on the plan in the item dialog, never on the Features page (it means
 nothing to another provider), and shared with the provider's other plans in the list (M6.14). The optimizer treats it
-as any rank key. A perk a second provider comes to offer becomes a feature, and its `movedTo` lets the app move
-users' ranks to the feature's key.
+as any rank key. A perk a second provider comes to offer becomes a feature, and a `perk` entry in `data/redirects.yaml`
+("Ids that last" in section 4.3) moves users' ranks to the feature's key.
 
 ```yaml
 # data/features.yaml (an excerpt: the file is the registry)
@@ -609,6 +609,38 @@ rules, in the task that first needs it.
         rate: 0.035
         estimate: user-input     # the user enters a balance to estimate value
 ```
+
+#### Ids that last
+Lists, ranks and live calendars point at catalog ids, so an id never changes or goes once it's published (M10.27, the
+owner's choice on 2026-10-30). Ids stay readable slugs, not UUIDs: a CI guard keeps them instead.
+- **A rename keeps the id.** The provider file gets the new `name`, a YAML comment with the old one, and on a plan
+  `formerNames` (a provider has `aliases`). Search matches former names; the cards show "Ultra (formerly Max 20x)" until
+  six months after `until`; Home tells the users who have the plan, once. A rebrand is a name change, never a new plan.
+  ```yaml
+    - id: claude.max-20x            # was "Max 20x" until 2026-10-29
+      name: Ultra
+      formerNames: [{ name: Max 20x, until: 2026-10-29 }]
+  ```
+- **Retired, never deleted.** A plan or provider no longer sold gets `retired: <date>` and keeps its last prices.
+  From that day nothing offers it (Search, a card's bundle offers, the optimizer) and its prices aren't flagged as
+  old, but items on it resolve and count, and the item card says "<provider> no longer sells <plan> to new
+  subscribers". `endsOn` says it ends for its subscribers too: the item counts until then, Home warns once, and
+  Optimizations lists replacements that keep its Needed keys.
+- **Redirects** (`data/redirects.yaml`) are for an id that had to change, and for subscribers moved to another plan:
+  ```yaml
+  redirects:
+    - { kind: plan, from: netflix.basic, to: netflix.standard-ads, on: 2026-12-01 }  # a sketch: a retired plan moved
+    - { kind: feature, from: streaming.ad-free, to: ad-free, on: 2026-11-15 }  # M11.4
+  ```
+  `kind` is `provider`, `plan`, `add-on`, `bundle`, `feature` (rank keys) or `perk` (M11.6). An entry whose `from` is
+  gone applies at once; one whose `from` is a retired plan or provider is a move on its `on` date. Validation refuses
+  a target that doesn't exist or is retired, a chain (a `to` that's another entry's `from`, which also rules out
+  cycles), and a `from` still sold. The build publishes them in the catalog files and `ids.json`. Resolution (M4.6)
+  follows them before calling an item gone; the app rewrites stored items, ranks and drafts to the new ids once, in
+  one transaction through the repositories (section 11.1); the API answers an old provider or plan id with a 301.
+- **The guard** (`npm run data:ids`, also run by `data:validate` and so by `ci`): every id main publishes (providers,
+  plans, add-ons, bundles and rank keys, built from main's `data/` at the merge base) must still be in the branch, or
+  be redirected. A missing one fails with the three fixes: keep the id under its new name, retire it, or redirect it.
 
 ### 4.4 Bundle file (`data/bundles/disney-crave-premium.yaml`)
 ```yaml
@@ -3131,6 +3163,19 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-30, ids that last)**
+Decided with the owner after Claude renamed Max 5x to Max and Max 20x to Ultra (M10.27, section 4.3):
+- **Readable slugs, made permanent:** UUIDs would survive a rename but make the YAML, rank keys, links and the API
+  unreadable; slugs with a guard keep both. An id's name can go stale (`claude.max-20x` is called Ultra), which is
+  harmless.
+- **Renamed, retired or redirected:** a rename keeps the id (`formerNames`), a plan no longer sold is retired with its
+  last prices, and only an id that truly has to change, or subscribers moved to another plan, gets a redirect.
+- **The guard's baseline** is main's `data/` at the merge base, built with core's `publishedIds`, rather than
+  production's `ids.json`: a branch made before main added an id doesn't fail for it, and the check works offline.
+- **Users' records** are rewritten in the app, once, rather than read through redirects for ever: Dexie keeps only
+  current ids, a sync passes the rewrite on, and other devices make the same one.
+- **M11.4's `ad-free` and M11.6's perks moved to features** use the redirect file, so there's one mechanism.
 
 **Resolved (2026-10-30, catalog expansion)**
 Planned with the owner as M11 (PROJECT-PLAN §2), from `docs/catalog-expansion-guide.md`:

@@ -351,7 +351,7 @@ the optimizer always picks the cheapest tier:
    5. a perk.
    Never a provider-named id (`xbox.ea-play`): a subscription inside a plan is `includes-subscription`, and the
    included service is added as a provider (with at least its own plan) before it's listed. Until then it's a perk,
-   and `movedTo` carries its ranks over.
+   and a `perk` redirect (`data/redirects.yaml`, M10.27) carries its ranks over.
 4. **A capability from another category uses that category's feature.** The plan also joins that category
    (`categories`) when the capability works as that kind of product on its own, with its own app or standalone use:
    Proton Unlimited gets `ai.assistant` for Lumo and `categories: [privacy-suite, vpn, storage, ai]`; Bitdefender
@@ -458,8 +458,8 @@ counts them.
   makes a suggestion yellow. An unranked perk counts as Not ranked, as features do.
 - **Counts and summaries:** ranked perks count in rank counts and the feature summary ("Fortnite Crew passes 1 / 1"; a usage level, "Max 20x usage 1 / 1").
 - **A perk that becomes a feature:** when a second provider offers the same thing, it becomes a feature, and the
-  catalog says so (`movedTo: <rank key>` on the perk). The app then moves users' perk ranks to the feature's key
-  once, in a Dexie upgrade, so nobody loses a rank.
+  catalog says so (a `perk` entry in `data/redirects.yaml` to its rank key, M10.27). The app then moves users' perk
+  ranks to the feature's key once, so nobody loses a rank.
 - **Data rule:** §2.2 still comes first. A perk is never a way around modelling a capability two providers have.
   For the price-differences warning, a feature or a perk difference counts (§2.2, rule 1).
 
@@ -623,7 +623,7 @@ category it's in (M1.10; the API's `provider_categories` table). The rule from n
 2. Schema additions (§3.1): `paymentMethods`, `currencies`, `renewalAnchor`, `sourceRepo`, `owner`, `ratings`,
    `requiredIn` on features, and the price-differences warning (§2.2).
 3. Ranked perks (§2.5): perk ids in the catalog, `perk:` rank keys, the item dialog's perk ranks, the optimizer and
-   summaries, and `movedTo`.
+   summaries, and perks moved to features through `data/redirects.yaml`.
 4. Categories (§5) and cross-category features (§2.3), including the `ad-free` rename and its migration.
 5. Tooling: `data:coverage` (§3.2), the Mullvad Browser reader, the region checklist in price-research.
 6. Limits work that has to come first (§8): the rows-written check, the full-reseed plan, and search's FTS5 table.
