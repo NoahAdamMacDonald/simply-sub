@@ -296,8 +296,11 @@ describe('PaymentPage', () => {
     await cards.create(debitFields);
     const crave = await items.create(itemFields('crave.premium', work.id, undefined));
     const kept = await items.create(itemFields('crave.basic', family.id, undefined));
-    // Family's open in the editor.
+    // Family's open in the editor, and so is another list called Family.
+    const otherFamily = await lists.create({ name: 'Family' });
+    await items.create(itemFields('crave.basic', otherFamily.id, undefined));
     await TestBed.inject(DraftsRepository).start(family.id);
+    await TestBed.inject(DraftsRepository).start(otherFamily.id);
     await open();
     await until(() => page().querySelector('.assign-button:not([disabled])') !== null);
 
@@ -312,9 +315,10 @@ describe('PaymentPage', () => {
     expect(flat(row?.querySelector('.item'))).toBe('Crave Premium');
     expect(flat(row?.querySelector('.move'))).toBe('No card → to Everyday');
     expect(flat(row?.querySelector('.savings [aria-hidden="true"]'))).toBe('$4.16');
-    expect(flat(preview?.querySelector('.skipped'))).toBe(
+    expect(Array.from(preview?.querySelectorAll('.skipped') ?? [], flat)).toEqual([
       "Family has changes in the editor that aren't saved, so its subscriptions keep their cards.",
-    );
+      "Family has changes in the editor that aren't saved, so its subscriptions keep their cards.",
+    ]);
     expect(flat(preview?.querySelector('.total [aria-hidden="true"]'))).toBe('$4.16');
     Array.from(preview?.querySelectorAll('button') ?? [])
       .find((button) => button.textContent?.trim() === 'Apply')

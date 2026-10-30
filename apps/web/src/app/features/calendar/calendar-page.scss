@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 :host {
   display: block;
   max-width: 1280px;
@@ -32,12 +34,11 @@
   white-space: nowrap;
 }
 
-// Showing, then the month's navigation; they wrap on a phone.
+// Showing, then the views and the navigation; they wrap on a phone, and the navigation under Showing when it can't fit.
 .controls {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
   gap: 8px 24px;
   margin-bottom: 12px;
 }
@@ -48,25 +49,42 @@
 
 .nav {
   display: flex;
+  flex: 1 1 auto;
   flex-wrap: wrap;
+  min-width: 0;
   align-items: center;
   gap: 4px 8px;
 }
 
-// Month and Year (M10.4), the one shown filled; on a phone, on a line of their own, so the arrows stay together.
+// Month and Year (M10.4), the one shown filled, then Today. They lead, so the Month field coming and going leaves them
+// where they are (M10.20); on a phone Today ends their row.
 .views {
   display: flex;
   gap: 4px;
-  margin-right: 8px;
-
-  @media (max-width: 599.98px) {
-    flex-basis: 100%;
-  }
+  margin-right: auto;
+  // An outlined button's border makes it 2 px wider than a filled one: a pixel less padding a side keeps Year where it
+  // is as Month changes from one to the other.
+  @include mat.button-overrides(
+    (
+      outlined-horizontal-padding: 23px,
+    )
+  );
 }
 
-// ‹, the month, the year and › keep to one line on a phone, with Today under them.
+// ‹, the month, the year and ›, at the row's end, or on a row of their own on a phone. Material's fields are 180 px wide
+// at their least: the month's narrows to fit a phone, and so do the rows that hold it.
+.arrows {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+}
+
 .month {
   flex: 1 1 120px;
+  min-width: 0;
   max-width: 170px;
 }
 
@@ -97,9 +115,6 @@
 // Where the day's panel goes, until a day is chosen.
 .pick-day {
   margin: 0;
-  padding: 16px;
-  border-radius: var(--ss-radius-card);
-  background-color: var(--ss-card-bg);
 }
 
 .grid {
@@ -238,6 +253,7 @@
   text-align: end;
 }
 
+.pick-day,
 .side-panel {
   padding: 16px;
   border-radius: var(--ss-radius-card);

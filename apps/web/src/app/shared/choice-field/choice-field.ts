@@ -1,8 +1,11 @@
 import {
   Component,
+  DOCUMENT,
+  DestroyRef,
   ElementRef,
   computed,
   effect,
+  inject,
   input,
   linkedSignal,
   model,
@@ -72,18 +75,27 @@ export class ChoiceField implements FormValueControl<string> {
   readonly label = input.required<string>();
   readonly choices = input.required<readonly Choice[]>();
   readonly hint = input<string>();
+  /**
+   * The words for the choice with no value, shown as the empty field's placeholder rather than as its text, so typing
+   * starts at once (Search's Category, "All": the feedback after M10, part 2). The list still offers that choice.
+   */
+  readonly placeholder = input<string>();
   /** The user picked a choice; the value is it already. */
   readonly picked = output<string>();
 
   private readonly box = viewChild.required<ElementRef<HTMLInputElement>>('box');
   private readonly trigger = viewChild.required(MatAutocompleteTrigger);
   private readonly matInput = viewChild(MatInput);
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly document = inject(DOCUMENT);
+  /** A press began in the list and hasn't picked anything yet: it moves focus off the field first. */
+  private pressingList = false;
 
   private readonly labels = computed(
     () => new Map(this.choices().map((choice) => [choice.value, choice.label])),
   );
   /** The chosen one's name: what the field shows until something else is typed. */
-  private readonly chosenLabel = computed(() => this.labels().get(this.value()) ?? '');
+  private readonly chosenLabel = computed(() => this.textOf(this.value()));
   /** What the field shows: the chosen name, or what's typed. */
   protected readonly text = linkedSignal(() => this.chosenLabel());
   /**
@@ -111,7 +123,7 @@ export class ChoiceField implements FormValueControl<string> {
     isErrorState: () => this.invalid() && this.touched(),
   };
   protected readonly display = (value: string | null): string =>
-    value === null ? '' : (this.labels().get(value) ?? '');
+    value === null ? '' : this.textOf(value);
 
   constructor() {
     // matInput works out its error state only with a form control of its own: this field tells it.
@@ -120,6 +132,7 @@ export class ChoiceField implements FormValueControl<string> {
       this.touched();
       this.matInput()?.updateErrorState();
     });
+    inject(DestroyRef).onDestroy(() => this.stopWatching());
   }
 
   /**
@@ -147,7 +160,7 @@ export class ChoiceField implements FormValueControl<string> {
   protected pick(event: MatAutocompleteSelectedEvent): void {
     const value = event.option.value as string;
     this.value.set(value);
-    this.text.set(this.labels().get(value) ?? '');
+    this.text.set(this.textOf(value));
     this.picked.emit(value);
   }
 
@@ -163,27 +176,69 @@ export class ChoiceField implements FormValueControl<string> {
   /**
    * Focus left: touched, and the field shows the chosen name again (a choice clicked in the list, which takes focus
    * from it first, then shows its own). Focus moved to another control some other way, as the form does to a field
-   * it's missing, closes the list too, as the tag picker's does. A choice pressed with a mouse or a finger moves focus
-   * to the dialog, which holds the field, so that's left to Material, as are clicks elsewhere.
+   * it's missing, closes the list too, as the tag picker's does, and so does focus that went nowhere: an iPhone's
+   * keyboard Done (the feedback after M10, part 2). A choice pressed with a mouse or a finger moves focus to the
+   * dialog that holds the field, or nowhere on a page, before it's picked, so the list stays for it.
    */
   protected leave(event: FocusEvent): void {
     this.touch.emit();
     this.text.set(this.chosenLabel());
     const next = event.relatedTarget;
-    const list = this.trigger().autocomplete?.panel?.nativeElement as HTMLElement | undefined;
-    if (
-      next instanceof Node &&
-      event.target instanceof Node &&
-      !next.contains(event.target) &&
-      !list?.contains(next)
-    ) {
-      this.trigger().closePanel();
-    }
+    const list = this.list();
+    const elsewhere =
+      next === null
+        ? !this.pressingList
+        : next instanceof Node &&
+          event.target instanceof Node &&
+          !next.contains(event.target) &&
+          !list?.contains(next);
+    if (elsewhere) this.trigger().closePanel();
+  }
+
+  /** The list opened: a press anywhere else now closes it. */
+  protected watch(): void {
+    this.document.addEventListener('pointerdown', this.pressed, true);
+    this.document.addEventListener('pointercancel', this.cancelled, true);
+  }
+
+  /** What the field shows for `value`: its choice's name, or nothing for the one with no value when it has a placeholder. */
+  private textOf(value: string): string {
+    return value === '' && this.placeholder() !== undefined ? '' : (this.labels().get(value) ?? '');
   }
 
   /** The list closed: it shows them all next time, and the field the chosen name. */
   protected settle(): void {
+    this.stopWatching();
     this.query.set('');
     this.text.set(this.chosenLabel());
+  }
+
+  private stopWatching(): void {
+    this.pressingList = false;
+    this.document.removeEventListener('pointerdown', this.pressed, true);
+    this.document.removeEventListener('pointercancel', this.cancelled, true);
+  }
+
+  /**
+   * A press outside the field and its list closes the list (the feedback after M10, part 2). Material closes it on a
+   * click elsewhere only once focus has left the field, and an iPhone leaves focus in a field when a tap lands on
+   * something that can't take it, so there the list stayed open over the page.
+   */
+  private readonly pressed = (event: PointerEvent): void => {
+    const target = event.target;
+    if (!(target instanceof Node)) return;
+    this.pressingList = this.list()?.contains(target) ?? false;
+    if (!this.pressingList && !this.host.nativeElement.contains(target)) {
+      this.trigger().closePanel();
+    }
+  };
+
+  /** A press in the list that became a scroll picks nothing. */
+  private readonly cancelled = (): void => {
+    this.pressingList = false;
+  };
+
+  private list(): HTMLElement | undefined {
+    return this.trigger().autocomplete?.panel?.nativeElement as HTMLElement | undefined;
   }
 }

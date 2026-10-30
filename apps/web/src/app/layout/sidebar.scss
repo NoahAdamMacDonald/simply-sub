@@ -5,7 +5,8 @@
   flex-direction: column;
   box-sizing: border-box;
   min-height: 100%;
-  padding: 16px 12px 8px;
+  padding: calc(16px + var(--ss-inset-top)) 12px calc(8px + var(--ss-inset-bottom))
+    calc(12px + var(--ss-inset-left));
 }
 
 .logo {

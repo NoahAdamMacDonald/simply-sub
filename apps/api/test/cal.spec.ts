@@ -1,15 +1,16 @@
-import { addDays, type CalendarFeed, type CalendarSetBody } from '@simply-sub/core';
+import { addDays, feedIcs, type CalendarFeed, type CalendarSetBody } from '@simply-sub/core';
 import { env } from 'cloudflare:workers';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanUp } from '../src/clean-up';
 import { utcDay } from '../src/http';
 import worker from '../src/index';
-import { dailyCaps } from '../src/writes';
+import { dailyCaps, secretHash, sha256Hex } from '../src/writes';
 import { freshRateLimitWindow } from './rate-limit-window';
 
 // The live calendar's routes (src/routes/cal.ts, M10.2) beyond the contract's examples: a set's calendars and what
 // each holds, what PUT keeps, revokes and adds, the manage key, the limits per feed and per set, the daily cap, the
-// clean-up, and that no token, key or id reaches a log.
+// clean-up, and that no token, key or id reaches a log; each calendar sealed at rest, and one stored before that
+// sealed by the next request that brings its token (M10.21).
 const BASE = 'https://sub.simplely.ca/api/v1/cal';
 
 const netflix = { uid: 'netflix000000001', date: '2026-11-12', title: 'Netflix: $19.94' };
@@ -99,6 +100,29 @@ describe('POST /cal', () => {
     expect(stored).not.toContain('/api/v1/cal/');
   });
 
+  it('keeps each calendar sealed: nothing it says is in the database, and only its token opens it', async () => {
+    const set = await createSet();
+    const { results } = await env.USER_DB.prepare('SELECT * FROM cal_feeds').all<{
+      content_hash: string;
+      sealed: string | null;
+      ics: string | null;
+    }>();
+    const stored = JSON.stringify(results);
+
+    expect(results.map((row) => [typeof row.sealed, row.ics])).toEqual([
+      ['string', null],
+      ['string', null],
+      ['string', null],
+    ]);
+    for (const said of ['Netflix', '19.94', 'Mullvad', 'Simply Sub', 'VCALENDAR', '1E88E5']) {
+      expect(stored).not.toContain(said);
+    }
+    // The content hash is keyed, so it can't be matched to a guess at what a calendar holds.
+    const { name, events } = everything;
+    expect(stored).not.toContain(await sha256Hex(JSON.stringify({ name, color: null, events })));
+    expect(await summaries(set.feeds[0].url)).toHaveLength(3);
+  });
+
   it("refuses a new set's feed that has a token, as it can't have one yet", async () => {
     const answer = await send('POST', BASE, {
       body: { feeds: [{ ...family, token: 'k7Qm2Zp9XvT4bN8cR1sW0a' }] },
@@ -171,6 +195,84 @@ describe('GET /cal/:token.ics', () => {
     // 90 from one IP, over its 60 a minute, and each feed at its 30.
     expect(statuses.filter((status) => status !== 200)).toEqual([]);
     expect((await fromOneIp(set.feeds[0].url)).status).toBe(429);
+  });
+
+  describe('a feed stored before M10.21, plain', () => {
+    /** A set whose one feed, `family`, was stored as M10.2 stored it: its file plain, its content's SHA-256. */
+    async function storePlain() {
+      const set = await createSet([family]);
+      const [{ token }] = set.feeds;
+      const { name, color, events } = family;
+      await env.USER_DB.prepare(
+        'UPDATE cal_feeds SET content_hash = ?, sealed = NULL, ics = ? WHERE token_hash = ?',
+      )
+        .bind(
+          await sha256Hex(JSON.stringify({ name, color, events })),
+          feedIcs(family, '2026-10-29T18:20:00Z'),
+          await secretHash(token),
+        )
+        .run();
+      return set;
+    }
+
+    const storedRow = () =>
+      env.USER_DB.prepare('SELECT content_hash, sealed, ics FROM cal_feeds').first<{
+        content_hash: string;
+        sealed: string | null;
+        ics: string | null;
+      }>();
+
+    it('is served as it was, then sealed now that a fetch brought its token, with a new ETag', async () => {
+      const set = await storePlain();
+      const first = await send('GET', set.feeds[0].url);
+      const body = await first.text();
+
+      expect(first.status).toBe(200);
+      expect(body).toContain('SUMMARY:Netflix: $19.94');
+      const row = await storedRow();
+      expect(row?.ics).toBeNull();
+      expect(row?.sealed).toEqual(expect.any(String));
+
+      const again = await send('GET', set.feeds[0].url, {
+        headers: { 'If-None-Match': first.headers.get('ETag') ?? '' },
+      });
+      expect(again.status).toBe(200);
+      expect(again.headers.get('ETag')).not.toBe(first.headers.get('ETag'));
+      expect(await again.text()).toBe(body);
+    });
+
+    it('is sealed by a fetch that answers 304 too', async () => {
+      const set = await storePlain();
+      const etag = `"${(await storedRow())?.content_hash.slice(0, 16)}"`;
+
+      const answer = await send('GET', set.feeds[0].url, { headers: { 'If-None-Match': etag } });
+
+      expect(answer.status).toBe(304);
+      expect((await storedRow())?.ics).toBeNull();
+    });
+
+    it('is sealed by the next PUT, though what it holds is the same', async () => {
+      const set = await storePlain();
+
+      await send('PUT', `${BASE}/${set.id}`, {
+        key: set.manageKey,
+        body: { feeds: [{ ...family, token: set.feeds[0].token }] },
+      });
+
+      const row = await storedRow();
+      expect(row?.ics).toBeNull();
+      expect(await summaries(set.feeds[0].url)).toEqual(['Netflix: $19.94']);
+    });
+
+    it("stays plain, and is served, when the day's writes are at their cap", async () => {
+      const set = await storePlain();
+      await env.USER_DB.prepare('UPDATE daily_counts SET rows = ? WHERE day = ? AND kind = ?')
+        .bind(dailyCaps.cal, utcDay(new Date()), 'cal')
+        .run();
+
+      expect(await summaries(set.feeds[0].url)).toEqual(['Netflix: $19.94']);
+      expect((await storedRow())?.ics).toEqual(expect.any(String));
+    });
   });
 
   it.each([

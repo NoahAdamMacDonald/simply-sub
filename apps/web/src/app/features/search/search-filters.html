@@ -7,8 +7,10 @@
   (limitsChange)="choosePrice($event)"
 />
 
+<!-- Empty with All as its placeholder, so typing a category starts at once (the feedback after M10, part 2). -->
 <ss-choice-field
   label="Category"
+  placeholder="All"
   [choices]="categoryChoices()"
   [value]="query().category ?? ''"
   (picked)="chooseCategory($event)"

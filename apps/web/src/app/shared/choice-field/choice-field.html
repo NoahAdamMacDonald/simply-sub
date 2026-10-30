@@ -5,6 +5,7 @@
     matInput
     autocomplete="off"
     spellcheck="false"
+    [placeholder]="placeholder() ?? ''"
     [value]="text()"
     [matAutocomplete]="list"
     [errorStateMatcher]="errorState"
@@ -19,6 +20,7 @@
     [autoActiveFirstOption]="typing()"
     [displayWith]="display"
     (optionSelected)="pick($event)"
+    (opened)="watch()"
     (closed)="settle()"
   >
     @for (choice of matches(); track choice.value) {

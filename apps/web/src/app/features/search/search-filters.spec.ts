@@ -113,11 +113,12 @@ describe('SearchFilters', () => {
         MatAutocompleteHarness.with({ ancestor: 'ss-choice-field[data-label="Category"]' }),
       );
 
-      expect(await category.getValue()).toBe('All');
+      // Empty, All its placeholder, so what's typed starts at once (the feedback after M10, part 2).
+      expect(await category.getValue()).toBe('');
+      expect(await (await category.host()).getAttribute('placeholder')).toBe('All');
       await category.focus();
       expect(await optionTexts(category)).toEqual(['All', 'Streaming video', 'VPN']);
       // A menu you can type in (M5.14), as Settings' Country is.
-      await category.clear();
       await category.enterText('vp');
       expect(await optionTexts(category)).toEqual(['VPN']);
       await category.selectOption({ text: 'VPN' });
@@ -128,6 +129,8 @@ describe('SearchFilters', () => {
       await category.clear();
       await category.selectOption({ text: 'All' });
       expect(changes[1]).toEqual({ category: undefined, nativeOnly: true });
+      await show({ nativeOnly: true });
+      expect(await category.getValue()).toBe('');
     });
 
     it('selects the chosen name on a click, so what’s typed takes its place', async () => {

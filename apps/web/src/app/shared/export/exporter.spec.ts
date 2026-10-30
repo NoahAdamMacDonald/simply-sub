@@ -110,7 +110,8 @@ describe('Exporter', () => {
   });
 
   const exporter = () => TestBed.inject(Exporter);
-  const snackBar = () => document.querySelector('.mat-mdc-snack-bar-label')?.textContent?.trim();
+  const snackBar = () =>
+    document.querySelector('ss-snack .mat-mdc-snack-bar-label')?.textContent?.trim();
 
   it('saves a list’s items as a CSV for Excel, with its live tags, and says so', async () => {
     expect(await exporter().exportList(work.id, 'csv')).toBe(

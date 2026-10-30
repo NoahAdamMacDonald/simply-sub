@@ -21,10 +21,8 @@ export class GlobalErrorHandler extends ErrorHandler {
 
   private async showMessage(): Promise<void> {
     // Loaded on first use, so the snackbar and its overlay code stay out of the initial bundle.
-    const { MatSnackBar } = await import('@angular/material/snack-bar');
-    this.injector
-      .get(MatSnackBar)
-      .open('Something went wrong', 'Dismiss', { duration: 8000 })
+    const { openSnack } = await import('../../shared/snack/snack');
+    openSnack(this.injector, 'Something went wrong', undefined, { duration: 8000 })
       .afterDismissed()
       .subscribe(() => (this.messageShown = false));
   }

@@ -26,6 +26,7 @@ import { PageHeader } from '../../shared/page-header/page-header';
 import { RankCounts } from '../../shared/rank/rank-counts';
 import { TypeCounts } from '../../shared/type-counts/type-counts';
 import { EmptyState } from '../../shared/empty-state/empty-state';
+import { openSnack, undoMillis } from '../../shared/snack/snack';
 
 /** One list's card (P3). */
 interface ListCard {
@@ -45,7 +46,6 @@ interface PendingFocus {
 }
 
 /** How long Undo stays after a list is deleted (P3). */
-const undoMillis = 10_000;
 
 /**
  * The Lists overview (PROJECT-PLAN P3): a card for each list, in the order they were made, with this month's and this
@@ -161,8 +161,7 @@ export class ListsOverviewPage {
       ready: (shown) => !shown.some((candidate) => candidate.id === card.id),
       target: () => (next ? this.removeButton(next.id) : this.newListLink()),
     });
-    this.snackBar
-      .open(`Deleted ${card.name}`, 'Undo', { duration: undoMillis })
+    openSnack(this.snackBar, `Deleted ${card.name}`, 'Undo', { duration: undoMillis })
       .onAction()
       .subscribe(() => void this.restore(deleted));
   }

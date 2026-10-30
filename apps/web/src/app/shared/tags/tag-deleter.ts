@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import type { Tag } from '@simply-sub/core';
 import { TagsRepository } from '../../core/storage/tags-repository';
 import { ConfirmService } from '../confirm/confirm-service';
+import { openSnack, snackMillis } from '../snack/snack';
 
 /**
  * Deletes a tag (P13's ✕, P6's picker): when subscriptions use it, it asks first ("Used by 5 subscriptions"), then the
@@ -27,7 +28,7 @@ export class TagDeleter {
       if (!confirmed) return false;
     }
     await this.tags.removeWithItems(tag.id);
-    this.snackBar.open(`Deleted ${tag.name}`, undefined, { duration: 5000 });
+    openSnack(this.snackBar, `Deleted ${tag.name}`, undefined, { duration: snackMillis });
     return true;
   }
 }

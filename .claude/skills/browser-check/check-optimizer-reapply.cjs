@@ -458,7 +458,9 @@ function memberProblems(items) {
       await dialog.waitFor({ state: 'detached', timeout: 20000 });
       const snackBar = page.locator('.mat-mdc-snack-bar-container').last();
       await snackBar.waitFor({ timeout: 10000 });
-      const said = (await snackBar.textContent()).replace(/\s+/g, ' ').trim();
+      const said = (await snackBar.locator('ss-snack .mat-mdc-snack-bar-label').textContent())
+        .replace(/\s+/g, ' ')
+        .trim();
       check(
         `${label}: the snackbar says the other account no longer ends`,
         said === 'Saved Netflix Standard, and the other Netflix Standard no longer ends',
