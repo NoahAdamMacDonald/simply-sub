@@ -1,17 +1,17 @@
 @use '@angular/material' as mat;
 
-// Off-screen until it receives focus.
+// Off-screen until it receives focus, then below the status bar.
 .skip-link {
   position: fixed;
-  top: 8px;
-  left: 8px;
+  top: calc(8px + var(--ss-inset-top));
+  left: calc(8px + var(--ss-inset-left));
   z-index: 2; // above the sidenav container
   padding: 8px 16px;
   border-radius: 4px;
   background-color: var(--ss-accent);
   color: var(--ss-on-accent);
   font: var(--mat-sys-label-large);
-  transform: translateY(calc(-100% - 16px));
+  transform: translateY(calc(-100% - 16px - var(--ss-inset-top)));
 
   &:focus {
     transform: none;
@@ -42,11 +42,16 @@
   overflow: visible;
 }
 
-// What pages pin below the top bar (Search's bar, M5.7) sticks this far down.
-.narrow {
-  --ss-top-bar-height: 56px;
+// What pages pin below the top bar (Search's bar, M5.7) sticks this far down: below the status bar, with no top bar.
+.container {
+  --ss-top-bar-height: var(--ss-inset-top);
 }
 
+.narrow {
+  --ss-top-bar-height: calc(56px + var(--ss-inset-top));
+}
+
+// Under the status bar, with its background, in an app that reaches the screen's top.
 .top-bar {
   position: sticky;
   top: 0;
@@ -54,8 +59,8 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  height: var(--ss-top-bar-height);
-  padding: 0 16px 0 4px;
+  height: 56px;
+  padding: var(--ss-inset-top) calc(16px + var(--ss-inset-right)) 0 calc(4px + var(--ss-inset-left));
   border-bottom: 1px solid var(--ss-divider);
   background-color: var(--ss-sidebar-bg);
   font: var(--mat-sys-title-large);
@@ -72,7 +77,8 @@
 // and icons (z-index 1), which drew Search's Filters label over the bar as it scrolled under it.
 main {
   isolation: isolate;
-  padding: 24px;
+  padding: calc(24px + var(--ss-inset-top)) calc(24px + var(--ss-inset-right))
+    calc(24px + var(--ss-inset-bottom)) 24px;
 
   // Only the skip link focuses <main>; it isn't a control, so it needs no focus ring.
   &:focus {
@@ -81,7 +87,8 @@ main {
 }
 
 .narrow main {
-  padding: 16px;
+  padding: 16px calc(16px + var(--ss-inset-right)) calc(16px + var(--ss-inset-bottom))
+    calc(16px + var(--ss-inset-left));
 }
 
 .memory-notice {
