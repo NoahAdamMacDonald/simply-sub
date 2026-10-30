@@ -197,6 +197,7 @@ export function customSubChange(
         if (
           item.deletedAt === undefined &&
           item.source.kind === 'custom' &&
+          item.source.customSubId === before.id &&
           item.source.customPlanId === plan.id
         ) {
           lists.add(item.listId);

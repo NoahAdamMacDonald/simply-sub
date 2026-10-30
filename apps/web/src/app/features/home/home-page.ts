@@ -185,11 +185,11 @@ export class HomePage {
     const after = nextChargeDate(before, addDays(date, 1));
     if (after === undefined) return;
     await this.items.update(itemId, { billing: reanchored(before, after) });
-    const { MatSnackBar } = await import('@angular/material/snack-bar');
+    const { openSnack, undoMillis } = await import('../../shared/snack/snack');
     const name = this.names().get(itemId) ?? 'It';
-    this.injector
-      .get(MatSnackBar)
-      .open(`${name} is renewed`, 'Undo', { duration: 8000 })
+    openSnack(this.injector, `${name} is renewed`, 'Undo', {
+      duration: undoMillis,
+    })
       .onAction()
       .subscribe(() => void this.items.update(itemId, { billing: before }));
   }
@@ -206,9 +206,9 @@ export class HomePage {
    * as Home rarely needs them.
    */
   protected async importBackup(): Promise<void> {
-    const [{ MatDialog }, { MatSnackBar }, { ImportBackupDialog }] = await Promise.all([
+    const [{ MatDialog }, { openSnack, snackMillis }, { ImportBackupDialog }] = await Promise.all([
       import('@angular/material/dialog'),
-      import('@angular/material/snack-bar'),
+      import('../../shared/snack/snack'),
       import('../settings/import-backup-dialog'),
     ]);
     const result = await firstValueFrom(
@@ -218,9 +218,9 @@ export class HomePage {
         .afterClosed(),
     );
     if (result) {
-      this.injector
-        .get(MatSnackBar)
-        .open(importedText(result.mode, result.counts), undefined, { duration: 5000 });
+      openSnack(this.injector, importedText(result.mode, result.counts), undefined, {
+        duration: snackMillis,
+      });
     }
   }
 }

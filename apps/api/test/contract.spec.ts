@@ -150,18 +150,13 @@ async function storeExampleFeedSet(): Promise<void> {
       .bind(id, await secretHash(manageKey), addDays(utcDay(new Date()), 180)),
     ...(await Promise.all(
       feeds.map(async (feed, index) => {
-        const row = await feedRow(feed, '2026-10-29T18:20:00Z');
+        const hash = await secretHash(links[index].token);
+        const row = await feedRow(feed, links[index].token, hash, '2026-10-29T18:20:00Z');
         return db
           .prepare(
-            'INSERT INTO cal_feeds (token_hash, set_id, content_hash, ics, updated_at) VALUES (?, ?, ?, ?, ?)',
+            'INSERT INTO cal_feeds (token_hash, set_id, content_hash, sealed, updated_at) VALUES (?, ?, ?, ?, ?)',
           )
-          .bind(
-            await secretHash(links[index].token),
-            id,
-            row.content_hash,
-            row.ics,
-            '2026-10-29T18:20:00Z',
-          );
+          .bind(hash, id, row.content_hash, row.sealed, '2026-10-29T18:20:00Z');
       }),
     )),
   ]);

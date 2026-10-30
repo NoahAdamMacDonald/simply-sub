@@ -1,0 +1,11 @@
+<div matSnackBarLabel>{{ data.message }}</div>
+<div matSnackBarActions>
+  @if (data.action; as action) {
+    <button matButton matSnackBarAction type="button" (click)="ref.dismissWithAction()">
+      {{ action }}
+    </button>
+  }
+  <button matIconButton type="button" class="dismiss" aria-label="Dismiss" (click)="close()">
+    <mat-icon aria-hidden="true">close</mat-icon>
+  </button>
+</div>

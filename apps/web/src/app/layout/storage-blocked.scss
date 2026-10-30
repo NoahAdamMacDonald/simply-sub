@@ -2,7 +2,7 @@
   box-sizing: border-box;
   max-width: 560px;
   margin: 0 auto;
-  padding: 48px 16px;
+  padding: calc(48px + var(--ss-inset-top)) 16px calc(48px + var(--ss-inset-bottom));
   font: var(--mat-sys-body-large);
 }
 

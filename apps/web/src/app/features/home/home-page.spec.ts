@@ -192,7 +192,12 @@ describe('HomePage', () => {
     });
     await until(() => button() === null);
     const snack = () => document.querySelector('.mat-mdc-snack-bar-container');
-    await until(() => text(snack())?.endsWith('is renewed Undo') === true);
+    await until(
+      () =>
+        text(snack()?.querySelector('ss-snack .mat-mdc-snack-bar-label'))?.endsWith(
+          'is renewed',
+        ) === true,
+    );
     Array.from(snack()?.querySelectorAll('button') ?? [])
       .find((element) => text(element) === 'Undo')
       ?.click();

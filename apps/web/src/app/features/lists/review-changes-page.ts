@@ -27,6 +27,7 @@ import { dateText, dayText } from '../../shared/date-text';
 import { EmptyState } from '../../shared/empty-state/empty-state';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { amountText, intervalSpoken } from '../../shared/price-tag/price-text';
+import { openSnack, snackMillis } from '../../shared/snack/snack';
 
 /** One line of a change: an item that goes, comes, or changes, with what happens to it. */
 interface ChangeLine {
@@ -139,12 +140,13 @@ export class ReviewChangesPage {
     const after = await this.drafts.undoApplied(listId, index);
     // Nothing left to save: the draft goes, as Cancel would.
     if (!draftChanged(after)) await this.drafts.cancel(listId);
-    this.snackBar.open(
+    openSnack(
+      this.snackBar,
       count === 1
         ? 'Undone'
         : `Undone, with ${count === 2 ? 'the change' : `the ${count - 1} changes`} that built on it`,
       undefined,
-      { duration: 5000 },
+      { duration: snackMillis },
     );
     afterNextRender(
       () => {
@@ -166,7 +168,7 @@ export class ReviewChangesPage {
       const name = this.listName();
       await this.drafts.save(listId);
       await this.router.navigate(['/lists', listId]);
-      this.snackBar.open(`Saved ${name}`, undefined, { duration: 4000 });
+      openSnack(this.snackBar, `Saved ${name}`, undefined, { duration: snackMillis });
     } finally {
       this.saving.set(false);
     }

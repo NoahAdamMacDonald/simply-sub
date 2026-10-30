@@ -12,11 +12,7 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatIcon } from '@angular/material/icon';
-import {
-  MatSnackBar,
-  type MatSnackBarRef,
-  type TextOnlySnackBar,
-} from '@angular/material/snack-bar';
+import { MatSnackBar, type MatSnackBarRef } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
@@ -38,6 +34,7 @@ import { PageHeader } from '../../shared/page-header/page-header';
 import { amountText } from '../../shared/price-tag/price-text';
 import { SuggestionCard } from './suggestion-card';
 import { actionLine } from './suggestion-text';
+import { openSnack, undoMillis, type Snack } from '../../shared/snack/snack';
 
 /**
  * A list's optimizations (PROJECT-PLAN P14, M8.2): core's optimizer for the list, its cards in Free savings, Red,
@@ -75,7 +72,7 @@ export class OptimizationsPage {
    * Applied's or Dismissed's snackbar, closed when the page is left (M8.6): its Undo is for this page's draft, and once
    * the changes are saved or reviewed it could take back a later one.
    */
-  private undoBar?: MatSnackBarRef<TextOnlySnackBar>;
+  private undoBar?: MatSnackBarRef<Snack>;
   private left = false;
   private readonly injector = inject(Injector);
 
@@ -178,9 +175,9 @@ export class OptimizationsPage {
       const items = new Map(draftItems(started.draft).map((item) => [item.id, item]));
       const edits = suggestionEdits(suggestion, items);
       if (!edits) {
-        this.snackBar.open(
+        openSnack(
+          this.snackBar,
           'The list’s unsaved changes took out a subscription this suggestion changes, so it wasn’t applied.',
-          'OK',
         );
         return;
       }
@@ -208,7 +205,7 @@ export class OptimizationsPage {
       this.focusAfterRender(next, true);
       // Left while the suggestions came again (Review changes): its own Undo is there.
       if (this.left) return;
-      const undo = this.snackBar.open(`Applied: ${title}`, 'Undo', { duration: 8000 });
+      const undo = openSnack(this.snackBar, `Applied: ${title}`, 'Undo', { duration: undoMillis });
       this.undoBar = undo;
       undo.onAction().subscribe(() => {
         // A draft this Apply started goes with it; one that was there keeps its other changes.
@@ -226,7 +223,9 @@ export class OptimizationsPage {
     const next = this.neighbour(suggestion.fingerprint);
     await this.dismissals.dismiss(suggestion.fingerprint, this.listId());
     this.focusAfterRender(next);
-    const undo = this.snackBar.open('Dismissed until the list changes', 'Undo', { duration: 8000 });
+    const undo = openSnack(this.snackBar, 'Dismissed until the list changes', 'Undo', {
+      duration: undoMillis,
+    });
     this.undoBar = undo;
     undo.onAction().subscribe(() => void this.restore(suggestion));
   }

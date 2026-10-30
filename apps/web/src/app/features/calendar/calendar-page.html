@@ -58,6 +58,7 @@
         </mat-select>
       </mat-form-field>
 
+      <!-- The views first, so they stay put when the view changes; then Today and the arrows (M10.20). -->
       <div class="nav">
         <!-- The month's view or its year's (M10.4), each a button that says whether it's the one shown. -->
         <div class="views" role="group" aria-label="View">
@@ -72,41 +73,43 @@
             </button>
           }
         </div>
-        <button
-          matIconButton
-          type="button"
-          [attr.aria-label]="view() === 'year' ? 'Previous year' : 'Previous month'"
-          (click)="step(-1)"
-        >
-          <mat-icon>chevron_left</mat-icon>
-        </button>
-        @if (view() === 'month') {
-          <mat-form-field appearance="outline" class="month" subscriptSizing="dynamic">
-            <mat-label>Month</mat-label>
-            <mat-select [value]="monthIndex()" (selectionChange)="setMonth($event.value)">
-              @for (name of monthNames; track name; let index = $index) {
-                <mat-option [value]="index">{{ name }}</mat-option>
+        <button matButton="outlined" type="button" class="today" (click)="toToday()">Today</button>
+        <div class="arrows">
+          <button
+            matIconButton
+            type="button"
+            [attr.aria-label]="view() === 'year' ? 'Previous year' : 'Previous month'"
+            (click)="step(-1)"
+          >
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          @if (view() === 'month') {
+            <mat-form-field appearance="outline" class="month" subscriptSizing="dynamic">
+              <mat-label>Month</mat-label>
+              <mat-select [value]="monthIndex()" (selectionChange)="setMonth($event.value)">
+                @for (name of monthNames; track name; let index = $index) {
+                  <mat-option [value]="index">{{ name }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          }
+          <mat-form-field appearance="outline" class="year" subscriptSizing="dynamic">
+            <mat-label>Year</mat-label>
+            <mat-select [value]="month().slice(0, 4)" (selectionChange)="setYear($event.value)">
+              @for (year of years(); track year) {
+                <mat-option [value]="year">{{ year }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
-        }
-        <mat-form-field appearance="outline" class="year" subscriptSizing="dynamic">
-          <mat-label>Year</mat-label>
-          <mat-select [value]="month().slice(0, 4)" (selectionChange)="setYear($event.value)">
-            @for (year of years(); track year) {
-              <mat-option [value]="year">{{ year }}</mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-        <button
-          matIconButton
-          type="button"
-          [attr.aria-label]="view() === 'year' ? 'Next year' : 'Next month'"
-          (click)="step(1)"
-        >
-          <mat-icon>chevron_right</mat-icon>
-        </button>
-        <button matButton="outlined" type="button" class="today" (click)="toToday()">Today</button>
+          <button
+            matIconButton
+            type="button"
+            [attr.aria-label]="view() === 'year' ? 'Next year' : 'Next month'"
+            (click)="step(1)"
+          >
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
       </div>
     </div>
 

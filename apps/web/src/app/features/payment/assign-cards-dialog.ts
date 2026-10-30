@@ -26,8 +26,8 @@ export interface AssignPreview {
       savings: ShownAndSpoken;
     }[];
   }[];
-  /** The lists with unsaved edits, which keep their cards. */
-  skipped: string[];
+  /** The lists with unsaved edits, which keep their cards. Two lists can have one name. */
+  skipped: { listId: string; name: string }[];
   /** What the changes save together over the next 12 months; none without changes. */
   total?: ShownAndSpoken;
 }

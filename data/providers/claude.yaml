@@ -8,17 +8,23 @@
 # Privacy: https://www.anthropic.com/legal/privacy.
 # Bundles: none found.
 # Official resellers: none found.
-# Not on the pages: the currency of the prices a Canadian sees on claude.com/pricing ($23 a month billed yearly, $280
-# a year, $28 a month, Max from $140): no page names it, so only the US prices are stored; Max's yearly price: its
-# help article says nothing about yearly billing; the card networks it takes: its billing pages name none; the
-# countries it sells in: its Pro article says only certain supported locations; official resellers: none found.
+# Canada's prices (2026-10-30, the feedback after M10): claude.com/pricing, read from Canada in Canada's English with a
+# browser's own user agent, shows "$23 Per month with annual subscription discount ($280 billed up front). $28 if
+# billed monthly." and Max "From $140 Per month", a bare $ (a headless browser's user agent gets the US prices). The
+# page's own pricing data (claude.ai/api/billing/subscription_pricing, which it loads) names "country":"CA" and
+# "currency":"CAD": Pro 2800 a month and 28000 a year, Max 5x 14000 and Max 20x 28000 a month, in cents, none an
+# offer, tax not included ("show_included":false). The Pro article: "with pricing in your local currency where
+# supported". The owner's bill agrees: CA$31.64 for Pro, $28 with Ontario's 13% HST.
+# Not on the pages: Max's yearly price: its help article says nothing about yearly billing; the card networks it
+# takes: its billing pages name none; the countries it sells in: its Pro article says only certain supported
+# locations; official resellers: none found.
 
 id: claude
 name: Claude
 website: https://claude.com
 category: ai
 spendCategory: software
-billingCurrency: { GLOBAL: USD, US: USD }
+billingCurrency: { CA: CAD, GLOBAL: USD, US: USD }
 cancelUrl: https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription
 sources: { pricing: https://claude.com/pricing }
 
@@ -59,6 +65,22 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-28
         sourceUrl: https://claude.com/pricing
+      - region: CA
+        currency: CAD
+        amount: 28
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-30
+        sourceUrl: https://claude.com/pricing
+      - region: CA
+        currency: CAD
+        amount: 280
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-30
+        sourceUrl: https://claude.com/pricing
 
   - id: claude.max-5x
     name: Max 5x
@@ -74,6 +96,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-28
         sourceUrl: https://support.claude.com/en/articles/11049741-what-is-the-max-plan
+      - region: CA
+        currency: CAD
+        amount: 140
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-30
+        sourceUrl: https://claude.com/pricing
 
   - id: claude.max-20x
     name: Max 20x
@@ -89,6 +119,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-28
         sourceUrl: https://support.claude.com/en/articles/11049741-what-is-the-max-plan
+      - region: CA
+        currency: CAD
+        amount: 280
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-30
+        sourceUrl: https://claude.com/pricing
 
 policies:
   links:
