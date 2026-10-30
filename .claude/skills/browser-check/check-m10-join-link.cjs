@@ -189,12 +189,8 @@ function readRecords(page, table) {
 
 async function axeCheck(page, label) {
   await sleep(600);
-  try {
-    await page.addScriptTag({ path: path.join(depsDir, 'node_modules', 'axe-core', 'axe.min.js') });
-  } catch {
-    // The production build's Trusted Types refuse a script tag.
-    await page.evaluate(axeSource);
-  }
+  // Not a script tag, which the production build's Trusted Types refuse, and log as an error.
+  await page.evaluate(axeSource);
   const result = await page.evaluate(() => axe.run(document));
   const inOverlay = await page.evaluate(
     (targets) =>
