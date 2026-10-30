@@ -3093,6 +3093,16 @@ The owner's nine points after M10, and two more while they were worked on, a tas
   any change and could undo an edit another device made to one of them meanwhile. So nothing merges by itself:
   Settings' Custom tags marks the later of two tags with one name, and its Merge into it, after asking, moves its
   subscriptions and drafts to the first and deletes it, in one transaction.
+- **Live calendars on the 29th and 30th (M10.25):** the owner's Xbox Game Pass, billed on the 29th, stopped after
+  October 2027 in Proton: a monthly plan on the 29th or 30th falls on February's last day, which no monthly rule
+  Proton takes can say (its web client's `getIsRruleSupported`: a monthly rule names no months, and a yearly one names
+  one), so its charges were events of their own for the next 12 months, from today. It's now twelve yearly series,
+  each month on its day and February on its last (`monthSeries`), so it goes on with no end; a notification set on one
+  is that month's. A plan billed every few months on those days stays events of their own, and a live calendar keeps
+  a year of those already paid.
+- **Links gone on the server (M10.25):** the app learned a set was gone only when a change failed to send, so a set
+  deleted on the server (the Proton test feed) showed working links. It now fetches one calendar once a start and
+  when the Live calendar dialog opens, and a 404 marks the set broken, which offers new links.
 - **Focus (M10.14):** Join opens on Scan the QR code, its first control, so a phone's keyboard doesn't cover it;
   the words are a Tab on. The scanner takes the button's place and focus with it, onto Stop scanning, and gives it back.
 - **The Proton test feed (M10.2):** deleted from the user database on 2026-10-30 with the owner's OK. Proton Calendar

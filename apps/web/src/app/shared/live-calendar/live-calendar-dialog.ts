@@ -138,6 +138,7 @@ export class LiveCalendarDialog {
   });
 
   constructor() {
+    void this.service.checkLinks();
     const online = () => this.online.set(true);
     const offline = () => this.online.set(false);
     window.addEventListener('online', online);

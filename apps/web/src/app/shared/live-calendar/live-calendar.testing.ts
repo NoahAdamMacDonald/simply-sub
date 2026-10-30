@@ -1,7 +1,7 @@
 import type { CalendarFeeds } from '@simply-sub/core';
 
 // A stand-in for the Worker's live calendar routes (M10.2) for specs: it keeps sets and answers POST, PUT and DELETE
-// /api/v1/cal as the Worker does, recording each request. *.testing.ts files are left out of the app build.
+// /api/v1/cal, and GET of a feed's file (M10.25), as the Worker does, recording each request. *.testing.ts files are left out of the app build.
 
 export interface CalRequest {
   method: string;
@@ -38,6 +38,15 @@ export class FakeCalServer {
         { data: { id, manageKey, feeds: links(tokens, body) }, meta: {} },
         { status: 201 },
       );
+    }
+    const token = /^\/api\/v1\/cal\/([A-Za-z0-9_-]{22})\.ics$/.exec(path)?.[1];
+    if (method === 'GET' && token !== undefined) {
+      const served = [...this.sets.values()].some((set) => set.tokens.includes(token));
+      return served
+        ? new Response('BEGIN:VCALENDAR\r\nEND:VCALENDAR\r\n', {
+            headers: { 'Content-Type': 'text/calendar; charset=utf-8' },
+          })
+        : error(404);
     }
     const id = /^\/api\/v1\/cal\/([A-Za-z0-9_-]{22})$/.exec(path)?.[1];
     const set = id === undefined ? undefined : this.sets.get(id);

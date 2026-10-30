@@ -58,6 +58,21 @@ export async function revokeFeedSet(id: string, manageKey: string): Promise<void
   }
 }
 
+/**
+ * Whether the calendar of `token` is still served (M10.25): false once its set is gone, revoked on another device,
+ * expired or deleted; undefined when the server couldn't be asked. Its file is small, and a feed takes 30 fetches a
+ * minute.
+ */
+export async function feedServed(token: string): Promise<boolean | undefined> {
+  try {
+    const answer = await fetch(`${base}/${token}.ics`, { cache: 'no-store' });
+    if (answer.status === 404) return false;
+    return answer.ok ? true : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 /** The answer to a request, or a LiveCalendarError saying why there's no good one. */
 async function send(
   method: 'POST' | 'PUT' | 'DELETE',

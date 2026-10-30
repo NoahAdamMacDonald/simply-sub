@@ -90,20 +90,28 @@ export function calendarEvents(
   for (const { list, resolved: items } of lists) {
     for (const resolved of items) {
       const { billing } = resolved.item;
+      // A monthly plan billed on the 29th or 30th has no rule Proton takes: a yearly series for each month (M10.25).
+      const months =
+        billing.mode === 'recurring' && repeatRule(billing) === undefined
+          ? monthSeries(billing)
+          : undefined;
       const repeats =
         billing.mode === 'recurring' &&
         !ownPeriodAddOns(resolved) &&
-        repeatRule(billing) !== undefined;
+        (repeatRule(billing) !== undefined || months !== undefined);
       // A run that a price of the user's own ends is followed through to the regular price after it.
       const until = resolved.item.priceOverride?.until;
       const to =
         repeats && until !== undefined && until >= window.to ? addDays(until, 400) : window.to;
+      // A live calendar keeps what's been paid: from the anchor once it has passed, a year back at most for charges
+      // that are events of their own (M10.25).
       const from =
-        repeats &&
         options.runsFrom === 'anchor' &&
         billing.mode === 'recurring' &&
         billing.anchorDate < window.from
-          ? billing.anchorDate
+          ? repeats
+            ? billing.anchorDate
+            : maxDate(billing.anchorDate, addDays(window.from, -365))
           : window.from;
       const charges = itemCharges(resolved, { from, to }, context.place);
       if (!repeats || billing.mode !== 'recurring') {
@@ -130,20 +138,29 @@ export function calendarEvents(
           : billing.endDate === undefined
             ? undefined
             : `Ends ${format.date(billing.endDate)}`;
-        events.push({
-          date: run[0].date,
-          event: runEvent(
-            run[0],
-            last,
-            note,
-            billing,
-            resolved,
-            list.name,
-            context,
-            format,
-            options,
-          ),
+        const series = months?.flatMap(({ month, day }) => {
+          const start = firstOn(run[0].date, month, day);
+          return last !== undefined && start > last
+            ? []
+            : [{ start, rule: `FREQ=YEARLY;INTERVAL=1;BYMONTH=${month};BYMONTHDAY=${day}` }];
         });
+        for (const { start, rule } of series ?? [{ start: run[0].date, rule: undefined }]) {
+          events.push({
+            date: start,
+            event: runEvent(
+              { ...run[0], date: start },
+              last,
+              note,
+              billing,
+              resolved,
+              list.name,
+              context,
+              format,
+              options,
+              rule,
+            ),
+          });
+        }
       });
     }
   }
@@ -215,6 +232,38 @@ export function repeatRule(
   return last === undefined ? rule : `${rule};UNTIL=${last.replaceAll('-', '')}`;
 }
 
+/**
+ * A monthly plan billed on the 29th or 30th (M10.25) as a yearly series for each month, which Proton Calendar takes
+ * (a monthly rule can't name months there, and a yearly one names one): each month on that day, February on its last
+ * (-1), as the schedule moves it. Undefined for any other plan, and every few months, which stay events of their own.
+ */
+export function monthSeries(
+  billing: Extract<Billing, { mode: 'recurring' }>,
+): { month: number; day: number }[] | undefined {
+  const dayOfMonth = billing.billingDay ?? Number(billing.anchorDate.slice(8, 10));
+  if (billing.interval !== 'month' || billing.intervalCount !== 1) return undefined;
+  if (dayOfMonth !== 29 && dayOfMonth !== 30) return undefined;
+  return Array.from({ length: 12 }, (_, index) => ({
+    month: index + 1,
+    day: index === 1 ? -1 : dayOfMonth,
+  }));
+}
+
+/** The first date on or after `from` in `month` on `day` (-1: its last). */
+function firstOn(from: IsoDate, month: number, day: number): IsoDate {
+  const year = Number(from.slice(0, 4));
+  const on = (inYear: number) => {
+    const length = new Date(Date.UTC(inYear, month, 0)).getUTCDate();
+    const date = day === -1 ? length : Math.min(day, length);
+    return `${inYear}-${String(month).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+  };
+  return on(year) >= from ? on(year) : on(year + 1);
+}
+
+function maxDate(a: IsoDate, b: IsoDate): IsoDate {
+  return a > b ? a : b;
+}
+
 function runEvent(
   first: Charge,
   last: IsoDate | undefined,
@@ -225,12 +274,18 @@ function runEvent(
   context: ExportContext,
   format: ExportFormat,
   options: CalendarEventOptions,
+  rule?: string,
 ): CalendarEvent {
   const event = chargeEvent(first, resolved, listName, context, format, options, note);
   return {
     ...event,
     uid: `${first.itemId}-from-${first.date}-${shown(first, options).currency}@${uidDomain}`,
-    recurrenceRule: repeatRule(billing, last),
+    recurrenceRule:
+      rule === undefined
+        ? repeatRule(billing, last)
+        : last === undefined
+          ? rule
+          : `${rule};UNTIL=${last.replaceAll('-', '')}`,
   };
 }
 
