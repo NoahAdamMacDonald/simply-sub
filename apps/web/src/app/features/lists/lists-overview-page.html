@@ -15,7 +15,18 @@
     <p class="note">Your lists couldn't be read.</p>
   }
   @case ('ready') {
+    <!-- Every list's payments against the budgets, as Home warns of them (§3.1, M7.6), once they're all priced
+         (M10.23). Dismissing one here dismisses it on Home too. -->
+    <ss-budget-warnings [warnings]="pricing() ? undefined : global()?.warnings" />
+
     <div class="layout" [class.with-features]="cards().length > 0">
+      <!-- Every list together, this month and this year against the budgets, as on Home (M10.23): on the right from
+           960 px, above Types and Features, as List view's own; under it, above the cards. -->
+      @if (anyItems() && global(); as global) {
+        <div class="money">
+          <ss-budget-totals [metrics]="global" />
+        </div>
+      }
       <div class="lists">
         @if (cards().length > 0) {
           <ul class="cards">

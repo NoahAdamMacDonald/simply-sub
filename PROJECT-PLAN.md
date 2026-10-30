@@ -275,6 +275,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.13 | The first regions: a batch pull request each for the US's gaps, the United Kingdom, the euro countries, and Australia and New Zealand | A user there sees native prices for every provider whose pages could be read |
 | M10.14 | Scan to join, once (added 2026-10-30, the feedback after M10): Show the code's QR code is a join link that works once, for 10 minutes (`/join#<id>.<key>`: the code sealed with a key only the link carries, `POST /join` and `DELETE /join/:id`), which a phone's camera opens; Join scans one with the device's camera; Turn on and Start over show the words alone (P13; BLUEPRINT §5.2, §11.4, §14) | A link opened on a new device joins with no word typed, and again says it was used; one past its 10 minutes or withdrawn opens nothing; no request carries the key; Join's camera reads Show the code's QR code |
 | M10.15 | Join on the first visit (added 2026-10-30, the feedback after M10): the first-run dialog's Join with a sync code, and a join link opened on a new device, start its settings from the synced copy's, with the device's own theme (P1, P13) | A new device joins from its first run, with no Merge or Replace, its settings the copy's place and budgets with its own theme, and the first run is over |
+| M10.23 | Budgets on the Lists overview (added 2026-10-30, the feedback after M10): every list's budget warnings above the cards, as Home's (one dismissal for both), and every list's This month and This year bars together, as Home's Budgets card has them, on the right above Types and Features from 960 px, as List view has its own, and above the cards under it (P3) | With two lists over the monthly budget together, the overview warns of it, and its bars show both lists' totals beside the cards; dismissed here, the warning is gone from Home too |
 
 #### M10 specs
 
@@ -1181,6 +1182,11 @@ stays.
 **States:** no lists → only the New tile and a one-line hint; the feature column is hidden.
 
 **Since the feedback after M9 (M7.7):** each card's bars take their colour from the scale (P2).
+
+**Since the feedback after M10 (M10.23):** above the cards, every list's budget warnings, as Home's (§3.1: dismissing
+one here dismisses it there); and every list's This month and This year bars together, as Home's Budgets card has
+them, on the right above Types and Features from 960 px, as List view has its own, and above the cards under it. The
+bars show once a list has a subscription, and the warnings once every price has loaded.
 
 **Acceptance**
 - [ ] Rank counts match §3.2 for a fixture list

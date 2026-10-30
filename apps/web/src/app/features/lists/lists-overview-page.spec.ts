@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, type WritableSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { MATERIAL_ANIMATIONS } from '@angular/material/core';
 import { provideRouter } from '@angular/router';
@@ -53,15 +53,17 @@ describe('ListsOverviewPage', () => {
   let questions: ConfirmOptions[];
   let work: SubscriptionList;
   let family: SubscriptionList;
+  let settings: WritableSignal<Settings | undefined>;
 
   beforeEach(async () => {
     storage = testStorage();
+    settings = signal<Settings | undefined>(alberta);
     answer = true;
     questions = [];
     TestBed.configureTestingModule({
       providers: [
         storage.providers,
-        { provide: SettingsStore, useValue: { saved: signal<Settings | undefined>(alberta) } },
+        { provide: SettingsStore, useValue: { saved: settings } },
         {
           provide: CatalogStore,
           useValue: {
@@ -204,6 +206,37 @@ describe('ListsOverviewPage', () => {
         .find((link) => text(link) === 'Custom subscriptions')
         ?.getAttribute('href'),
     ).toBe('/custom');
+  });
+
+  it('warns of every list’s payments together, as Home does, with their bars on the right (M10.23)', async () => {
+    await plant();
+    await TestBed.inject(ItemsRepository).create({
+      ...fields('netflix.standard'),
+      listId: family.id,
+    });
+    settings.set({ ...alberta, monthlyBudget: 15, annualBudget: 300 });
+    await open();
+    await until(() => page().querySelector('ss-budget-warnings .warning') !== null);
+
+    const spoken = (selector: string) =>
+      Array.from(page().querySelectorAll(selector)).map((element) => text(element));
+    expect(spoken('ss-budget-warnings .warning .visually-hidden')).toEqual([
+      expect.stringMatching(/over your \$15\.00 monthly budget/),
+      expect.stringMatching(/over your \$300\.00 annual budget/),
+    ]);
+    // Both lists' Netflix, and Work Related's Mullvad: what Home's Budgets card shows.
+    expect(spoken('.money ss-budget-totals .total .visually-hidden')).toEqual([
+      '$39.88 of $15.00 this month',
+      'about $572.71 of $300.00 in 2026',
+    ]);
+    expect(page().querySelectorAll('.money ss-budget-bar')).toHaveLength(2);
+    // On the right from 960 px, above Types and Features; first, so under 960 px above the cards.
+    const layout = page().querySelector('.layout');
+    expect(Array.from(layout?.children ?? [], (child) => child.className)).toEqual([
+      'money',
+      'lists',
+      'side',
+    ]);
   });
 
   it('has only the empty state and the new list tile with no lists, and no feature column', async () => {

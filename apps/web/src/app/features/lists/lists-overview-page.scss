@@ -8,15 +8,33 @@ ss-empty-state {
   margin-bottom: 12px;
 }
 
-// The cards, and the feature summary on their right from 960 px; under it the summary comes after them.
+// The cards, and on their right from 960 px every list's totals, then the types and feature summary, as List view has
+// its own. Under 960 px the totals come above the cards, and the types and summary after them.
 .layout {
   display: grid;
   gap: 24px;
 
   &.with-features {
     @media (min-width: 960px) {
+      grid-template-areas:
+        'lists money'
+        'lists side';
+      grid-template-rows: auto 1fr;
       grid-template-columns: minmax(0, 1fr) minmax(200px, 280px);
       align-items: start;
+
+      // Named only here: under 960 px there's no template, and the blocks go in their order.
+      .lists {
+        grid-area: lists;
+      }
+
+      .money {
+        grid-area: money;
+      }
+
+      .side {
+        grid-area: side;
+      }
     }
   }
 }

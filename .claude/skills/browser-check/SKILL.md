@@ -526,6 +526,14 @@ a minute per IP, and wrangler dev's limiter counts in the wall clock's minutes: 
 which the script checks is said in words, then sends again in the next minute (a run takes 2 to 3 minutes). A snackbar
 fading out is paler than it shows, so axe waits until the thanks has gone.
 
+`check-m10-lists-budgets.cjs` (M10.23, the feedback after M10, part 2) checks the Lists overview's budgets on `ng serve`
+for a Canadian in Alberta (base URL ending in `/`), with a $20 monthly and $300 annual budget, Work Related (Netflix
+Standard) and Family (Crave Premium), both due this month, in both themes at both widths: the overview's warnings the
+same as Home's, its This month and This year bars the same amounts as Home's Budgets card, on the right above Types at
+1280 px and above the cards at 360 px, and a warning's ✕ by keyboard hiding it there and on Home, with axe and no
+horizontal scroll. Since M10.23 `check-lists.cjs` counts each card's bars (`li.card ss-budget-bar`), apart from every
+list's together in `.money`.
+
 `check-m10-join-link.cjs` (M10.14 and M10.15, the feedback after M10, part 2: sync's one-time join link and joining on
 the first visit) needs wrangler dev answering the API, with its user database migrated (`npm -w apps/api run
 db:user:migrate:local`, for `join_links`): behind `ng serve`'s proxy (`http://localhost:4300/`), or the production
