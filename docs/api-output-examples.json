@@ -2393,7 +2393,7 @@
             "headers": {
               "Content-Type": "text/calendar; charset=utf-8",
               "Cache-Control": "no-cache",
-              "ETag": "\"7b1775337e5c2d13\""
+              "ETag": "\"a78098ac6c1c36d5\""
             },
             "body": "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//sub.simplely.ca//Simply Sub//EN\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nX-WR-CALNAME:Simply Sub\r\nNAME:Simply Sub\r\nREFRESH-INTERVAL;VALUE=DURATION:PT12H\r\nX-PUBLISHED-TTL:PT12H\r\nBEGIN:VEVENT\r\nUID:9f2c4e6a8b0d1f3e@sub.simplely.ca\r\nDTSTAMP:20261029T182000Z\r\nDTSTART;VALUE=DATE:20261112\r\nDTEND;VALUE=DATE:20261113\r\nSUMMARY:Netflix: $19.94\r\nRRULE:FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=12\r\nTRANSP:TRANSPARENT\r\nEND:VEVENT\r\nBEGIN:VEVENT\r\nUID:3b5d7f9a1c2e4a6b@sub.simplely.ca\r\nDTSTAMP:20261029T182000Z\r\nDTSTART;VALUE=DATE:20270120\r\nDTEND;VALUE=DATE:20270121\r\nSUMMARY:Renew Mullvad VPN: €60.00\r\nRRULE:FREQ=YEARLY;INTERVAL=1;BYMONTH=1;BYMONTHDAY=20\r\nTRANSP:TRANSPARENT\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n",
             "_note": "The set's Simply Sub calendar, as POST /cal's example made it: amounts as the provider charges them, so exchange rates never change a feed."
@@ -2405,14 +2405,14 @@
             "method": "GET",
             "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
             "headers": {
-              "If-None-Match": "\"7b1775337e5c2d13\""
+              "If-None-Match": "\"a78098ac6c1c36d5\""
             }
           },
           "response": {
             "status": 304,
             "headers": {
               "Cache-Control": "no-cache",
-              "ETag": "\"7b1775337e5c2d13\""
+              "ETag": "\"a78098ac6c1c36d5\""
             },
             "body": null
           }
