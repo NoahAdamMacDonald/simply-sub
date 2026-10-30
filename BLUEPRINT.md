@@ -349,10 +349,11 @@ one canonical feature describes the same capability across every provider, whate
    matter once you rank them, and a "Set all in this group" action makes bulk ranking quick. Ranks deliberately
    **don't cascade**. Otherwise ranking "Password manager: Needed" would make all 22 item types Needed, and the
    optimizer could never suggest a simpler password manager.
-3. **Reusable or nothing.** A feature goes in the registry if it is comparable and either exists at **two or more
-   providers** or matters for ranking. Anything else that is truly provider-specific (the Fortnite Crew passes in
-   Game Pass Ultimate) goes in a plan's `perks` list (free text, shown but not compared until M11.6 makes perks rankable: Ranked perks, below). How to find, model and add
-   features from providers' pages: `.claude/skills/feature-discovery/SKILL.md`.
+3. **Reusable or nothing.** A feature goes in the registry if it is comparable and exists at **two or more
+   providers** (in the catalog or queued for research; before M11, also when it mattered for ranking). Anything else
+   that is truly provider-specific (the Fortnite Crew passes in Game Pass Ultimate) goes in a plan's `perks` list
+   (free text, shown but not compared until M11.6 makes perks rankable: Ranked perks, below). How to find, model and
+   add features from providers' pages: `.claude/skills/feature-discovery/SKILL.md`.
 4. **Prefer structured types:** `boolean`, `number` (with `unlimited`), `enum` (ordered) and `set` (a
    multi-select of canonical values, for example the item types a password manager can store).
 5. **Plans can show provider wording.** `featureLabels: { password-manager.item-types=identity: "Personal info" }`
@@ -1224,15 +1225,20 @@ M1.14), so a buyer can see what signing up means beyond the price.
   finance, money protection and holds.
 - **One procedure for every grade:** the default first, then how you change it (self-serve, partial, on request or
   not at all); exceptions for the law, fraud, safety or security never count against an opt-out, and exceptions for
-  business purposes do; the worst clause wins, with better terms in some countries as a rating with `regions`; broad
-  wording read broadly; each fact in one topic, by a routing table.
+  business purposes do; the worst clause wins; broad
+  wording read broadly; each fact in one topic, by a routing table. An exception is judged by what the data is used
+  for, not by what selects it (the owner's choice: chats flagged for safety and then used to improve models count
+  against an opt-out). A clause for some countries or plans is a rating with `regions` or `plans`, better or worse
+  than the provider-wide one, which takes the worst clause that applies everywhere else. A topic and a feature on the
+  same fact both stay, and validation checks they agree.
 - **Silence** (the owner's choice): each topic says what silence means. Where it means a missing protection (no
   notice of price changes promised), it's graded; where it proves nothing (data sharing), the card says *Not stated*
   in grey. Every topic that applies has a grade or a status, so cards can be compared line by line.
 - **Shared policy documents:** a company's privacy policy or terms that cover several providers (Disney's for Disney+,
   Hulu and ESPN; Bell's for Crave, TSN and RDS; Microsoft's, Google's, Amazon's) are rated once in
-  `data/policies/<set>.yaml`. A provider names the sets it's covered by and adds ratings from its own terms; its own
-  rating wins for a topic both rate. One read, one set of quotes, one re-read when the page changes.
+  `data/policies/<set>.yaml`. A provider names the sets it's covered by and adds ratings from its own terms; for a
+  topic both rate, its own wins only when its document says it applies instead, else the worst clause wins. One read,
+  one set of quotes, one re-read when the page changes.
 - **Notable:** up to three ratings of `other.notable`, with a title, for what no topic covers.
 - **Outside raters** (M11.2, the owner's choice): news bias and reliability from at least two named raters, and
   antivirus lab results, as a provider's `ratings`: the rater, its label, the date and a link, never the rater's text
@@ -3137,6 +3143,10 @@ Planned with the owner as M11 (PROJECT-PLAN §2), from `docs/catalog-expansion-g
   which would have needed a new stored record). Features stay the general list; a perk is only for what no feature
   describes.
 - **Several categories per plan,** about 18 new service categories (section 4.5).
+- **Fable 5.1's review of the rules** (the guide's §9): exceptions judged by what the data is used for, so Claude's AI
+  training is Poor; a feature needs two providers; a feature or a perk difference silences the price-differences
+  warning; AI usage levels are perks, since they can't be compared across providers; a topic and a feature on the
+  same fact both stay, checked against each other.
 - **Sync that waits** (M10.26): checks for other devices' changes back off while idle and stop when a device is
   alone, since each is a Worker request from the account's 100,000 a day; the theme and other device-own settings no
   longer start a sync.

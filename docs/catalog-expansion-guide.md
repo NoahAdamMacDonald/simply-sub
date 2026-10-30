@@ -37,39 +37,72 @@ back to this scale:
 | Grade | Means |
 |---|---|
 | **Great** | Protects you by design. You have nothing to do, and the fine print has no catch. |
-| **Good** | Protects you by default, with minor stated limits, or does more only if you opt in. |
-| **Neutral** | Typical for the industry. Works against you by default, but a full, self-serve setting or right fixes it. |
-| **Poor** | Works against you by default, and the fix is partial, hard (a letter, an email, a ticket), only in some places, or only for some data. |
+| **Good** | Protects you by default, with minor stated limits on the protection, or does more only if you opt in. |
+| **Neutral** | Works against you by default, but a full, self-serve setting or right fixes it. |
+| **Poor** | Works against you by default, and the fix is partial (some data, some apps, products or devices) or hard (a letter, an email, a ticket). |
 | **Bad** | Works against you, with no way out. |
+
+- **The default and the control decide the grade.** Neutral is typical in most industries, but what's typical never
+  decides a grade: AI training by default is typical for AI and still Neutral at best.
+- **Anything on by default that you must turn off is Neutral at best, however small.** "Minor stated limits" are
+  limits on the protection (backups kept 30 days), never a default you change (Proton's VPN usage statistics).
+- **Opt-in means off until you turn it on,** with the choices shown equally. A banner whose main button accepts, or
+  "by using the service you agree", is a default.
+- **"Some places" never means countries.** A right only some countries have is a rating for them (§1.3, step 5).
 
 ### 1.3 How to grade (in this order, every time)
 
-1. **Find the clause(s)** for the topic and quote them (as today: word for word, up to three).
-2. **Default:** what happens if you do nothing? Protective → Great or Good. Not protective → Neutral or worse.
+1. **Find the clause(s)** for the topic and quote them (as today: word for word, up to three). Read the terms, the
+   privacy policy, and the help centre's billing and privacy sections. A grade read from a form or a sign-up flow
+   quotes the page that hosts it, and the reason says so.
+2. **Default:** what happens if you do nothing? Protective → Great or Good. Not protective → Neutral or worse (§1.2).
 3. **Control:** if the default isn't protective, how do you change it?
-   - **Self-serve:** a setting in the account or app, a one-click link, or a browser signal it says it honours
-     (Global Privacy Control). Neutral.
-   - **Partial:** the setting covers some data, some apps or devices, or one *use* of the data while collection goes
-     on (Netflix). Poor.
-   - **On request:** an email, a form, a letter or a support ticket. Poor for opt-outs. Deletion and export have their
-     own rubrics, where "on request within a stated time" can be Good or Neutral.
+   - **Self-serve:** the change takes effect without a person acting on it, for the account on every device: a
+     setting in the account or app, a one-click link, a form that takes effect at once. Neutral.
+   - **Partial:** it covers some data, some apps, products or devices, or one *use* of the data while collection goes
+     on (Netflix); or it's set per device or browser, or resets (cookie choices, Global Privacy Control). Poor.
+   - **On request:** an email, a letter, a support ticket, or a form that promises a reply or a review. Poor for
+     opt-outs. Deletion and export have their own rubrics, where "on request within a stated time" can be Good or
+     Neutral.
    - **None:** Bad.
-4. **Necessary exceptions don't count against a grade:** keeping or using data to meet a law, to prevent fraud or
-   abuse, for a safety review, for security, or to process a payment. Exceptions for business purposes do count:
-   analytics, "improving our services", marketing, training, personalisation. *Under this rule Claude's AI training
-   is Neutral (self-serve opt-out; the safety-review exception is necessary).*
-5. **Worst clause wins** within a rating's scope. When a country's terms are better (Quebec's consumer law, the EU),
-   that's a rating with `regions`, never a reason to lift the provider-wide one. The same goes for plans
-   (`plans: [netflix.standard-ads]`).
-6. **Broad wording is read broadly.** "May", "such as", "including but not limited to", "partners": the provider has
-   reserved that right, so grade as if it uses it.
-7. **One fact, one topic.** Use the routing table (§1.5). A fact that seems to fit two topics goes to the more
-   specific one.
-8. **Silence:** see the "If the policy says nothing" column (§1.4). A topic the provider's pages don't address is
-   either graded by that rule or recorded as *not stated*, never left out without a word.
-9. **An `action` is required** when a grade depends on the user changing something (Neutral or Poor through an
-   opt-out): the provider's own page for it, as M5.12 does today.
-10. **Calibrate:** before grading a provider, read the same topics for two providers already graded in its category.
+   - **A topic's own rubric beats this step** where both name the same thing (disputes: an arbitration opt-out with a
+     deadline, by post, or only for new accounts is "narrow", Poor).
+4. **Necessary exceptions don't count against a grade.** The list is closed: a legal duty, fraud and abuse prevention
+   (enforcing its terms, protecting its rights), a safety review, security, and processing a payment. Anything else
+   is a business purpose and counts: analytics, "improving our services", marketing, training, personalisation,
+   "legitimate interests".
+   - **An exception is judged by what the data is used for, not by what selects it** (the owner's choice,
+     2026-10-30). Claude uses chats flagged for a safety review "for model improvement" even after you opt out: the
+     use is improvement, so its AI-training opt-out is partial, Poor.
+   - **De-identified or aggregated data** doesn't count against a grade, unless the policy says it may re-identify it,
+     or de-identifying is the only opt-out offered.
+5. **Scope: the provider-wide rating** covers every region and plan without a rating of its own, at the worst clause
+   that applies to any of them. A clause for only some countries or plans is a rating with `regions` or `plans`,
+   better or worse than the provider-wide one (Proton: courts in Geneva everywhere, Good; arbitration in the US, a
+   Poor rating with `regions: [US]`).
+   - A right only some countries have (California's "Do Not Sell") is a rating for those countries; the provider-wide
+     rating is graded as if it didn't exist.
+   - A province's law never changes a grade: a `CA` rating is graded for the rest of Canada, and the reason mentions
+     Quebec (Netflix's disputes).
+6. **Broad wording is read broadly.** "May", "such as", "including but not limited to": the provider has reserved that
+   right, so grade as if it uses it.
+   - "Service providers" or "processors acting for us" run the service; "affiliates" are its own group; "partners"
+     with no stated purpose are other companies using it for their own ends.
+   - A denial that names the act ("we do not sell your data") beats a generic reservation; otherwise the reservation
+     wins.
+7. **One fact, one topic.** A fact lowers the grade of the one topic whose question it answers (the routing table,
+   §1.5). It may be quoted under another topic only when that grade is the same without it. What data is used for is
+   graded under the use's topic: data collected only for ads is ads-tracking's, and data-collection grades what's
+   left.
+8. **Silence:** absent from everything step 1 reads. The "If silent" column (§1.4) says whether it's graded or
+   recorded as *not stated*; a topic is never left out without a word.
+9. **A topic and a feature on the same fact both stay,** the feature for ranking and the topic for the card, and
+   validation checks they agree: `service.activity-logging` is Great only with `vpn.independent-audits` including
+   no-logs. A topic grades only what the feature doesn't say: device-limits grades registration caps and download
+   expiry, never the device count.
+10. **An `action` is required** when a grade depends on the user changing something (Neutral or Poor through an
+    opt-out): the provider's own page for it, as M5.12 does today.
+11. **Calibrate:** before grading a provider, read the same topics for two providers already graded in its category.
     After each batch, print a table of topic × provider × grade × the deciding fact in five words, and look for the
     same fact with different grades. Fix those before the pull request.
 
@@ -85,7 +118,7 @@ of them, as today.
 
 | Topic | Status | Applies to | If silent |
 |---|---|---|---|
-| `privacy.data-collection`: what it collects beyond what the service needs | changed: AI training moves out; "needed to work" defined (account, payment, delivering the service, security, legal duties) | all | not stated |
+| `privacy.data-collection`: what it collects beyond what the service needs | changed: AI training moves out; "needed to work" defined (account, payment, delivering the service, security, legal duties); analytics, telemetry, crash reports and recommendations are beyond it | all | not stated |
 | `privacy.data-sharing`: selling or sharing it with other companies for their own use | kept; "selling" includes US-law "sharing" for cross-context ads | all | not stated |
 | `privacy.ads-tracking`: tracking you for ads, in its apps or across sites | kept | all | not stated |
 | `privacy.ai-training`: whether what you write, upload or say trains AI models | **new** | all | not stated (an AI provider that's silent: Poor, since training is the default in that industry) |
@@ -102,34 +135,40 @@ Rubrics for the new privacy topics:
 
 - **ai-training.** Great: never trains on your content. Good: only if you opt in, or only on what you send as
   feedback. Neutral: trains by default, with a self-serve opt-out that applies from then on. Poor: the opt-out is
-  partial (some content, some regions, by request, or past data stays in trained models with no stated end).
-  Bad: no opt-out, or it licenses your content to others to train on. *"Your content" is what you write, upload or
-  say: prompts, messages, files, photos, voice. What you watch, used for recommendations, is data collection.*
+  partial (some content, some products, by request, or past data keeps being used for new training after you opt
+  out). Bad: no opt-out, or it licenses your content to others to train on. *"Your content" is what you write, upload
+  or say: prompts, messages, files, photos, voice. What you watch, used for recommendations, is data collection.
+  "AI models" are models that generate content or are used beyond the service (sold, licensed, in other products); a
+  model that only runs the service's own features (a spam filter, recommendations) is data collection.*
 - **content-access.** Great: end-to-end or zero-access encryption by default for the main content. Good: E2EE you can
   turn on for the main content. Neutral: encrypted in transit and at rest; staff read it only for support with your
-  permission, or for legal or safety reasons. Poor: people or automated systems read it for other purposes (human
-  review to improve the product), with an opt-out. Bad: read or scanned for other purposes, with no opt-out.
+  permission, or for legal or safety reasons; automated processing serves only you (search indexing, link previews,
+  smart replies). Poor: people or automated systems read it for the provider's purposes (ads, training, human review
+  to improve the product), with an opt-out. Bad: the same, with no opt-out.
 - **data-retention.** Great: stated short periods, and deleted within 30 days of closing the account. Good: stated
   periods for the main kinds of data; deleted within 90 days of closing. Neutral: "as long as necessary", with some
   stated periods. Poor: no stated periods. Bad: keeps it indefinitely, or keeps what you deleted for its own use.
   Records a law requires (tax, banking: often seven years) don't count against it.
-- **data-portability.** Great: self-serve export of everything in open, documented formats (CSV, JSON, ICS, VCF,
-  mbox, KDBX, otpauth) and import from rivals. Good: self-serve export of the main content in a usable format.
-  Neutral: export on request, within the legal time limit. Poor: a partial export, or only in its own format.
-  Bad: no way to get it.
-- **government-requests.** Great: requires valid legal process, tells you unless a law forbids it, publishes a
-  transparency report, and holds little to hand over. Good: two of those three. Neutral: discloses "when required by
-  law", nothing more. Poor: may disclose without legal process when it thinks it right (beyond emergencies). Bad:
-  shares with authorities voluntarily or routinely, or sells to them.
-- **data-location.** Great: in a stated country with strong privacy law (Canada, EU/EEA, UK, Switzerland), staying
-  there, or your choice of region. Good: a stated region; transfers only under recognised safeguards (adequacy, EU
-  standard contractual clauses). Neutral: the US or several countries, with stated safeguards. Poor: anywhere, with
-  safeguards it doesn't describe. Bad: anywhere, to parties it doesn't name, with no safeguards.
+- **data-portability** (whether you can leave with your data; the formats themselves are features, and import never
+  counts). Great: self-serve export of everything in open, documented formats (CSV, JSON, ICS, VCF, mbox, KDBX,
+  otpauth). Good: self-serve export of the main content in an open format. Neutral: self-serve in its own format, or
+  on request within the legal time limit. Poor: a partial export (partial outweighs format when both apply). Bad: no
+  way to get it.
+- **government-requests.** Four things count: (1) it requires valid legal process, (2) it tells you unless a law
+  forbids it, (3) it publishes a transparency report, (4) it holds little to hand over. Great: all four. Good: three of
+  the four. Neutral: fewer, or "when required by law" and nothing more. Poor: may disclose without legal process when
+  it thinks it right (beyond emergencies). Bad: shares with authorities voluntarily or routinely, or sells to them.
+- **data-location.** Great: in a stated country with strong privacy law (Canada, EU/EEA, UK, Switzerland), and it
+  says the data never leaves, or you choose the region. Good: a stated region, with any transfer under recognised
+  safeguards (adequacy, EU standard contractual clauses). Neutral: the US or several countries, with stated
+  safeguards. Poor: anywhere, with safeguards it doesn't describe. Bad: anywhere, to parties it doesn't name, with no
+  safeguards.
 - **sign-up-data.** Great: no personal information (an account number; Mullvad). Good: an email address only, an alias
-  accepted. Neutral: email plus a name and payment details for paid plans; phone optional. Poor: a phone number, or
-  a real name or ID no law requires. Bad: government ID or a face scan no law requires. *Identity checks a law
-  requires (Canadian banks' know-your-client rules) are Neutral.*
-- **children.** Great: kids' profiles collect the minimum, with no ads or tracking for minors and parental controls.
+  accepted. Neutral: email plus a name you choose and payment details for paid plans; phone optional. Poor: a phone
+  number (including "may ask for"), or a legal or verified name no law requires. Bad: government ID or a face scan no
+  law requires. *Identity checks a law requires (Canadian banks' know-your-client rules) are Neutral.*
+- **children.** *A minor is under 18 for the ads rungs; a child is under the service's stated minimum age for the
+  deletion rung.* Great: kids' profiles collect the minimum, with no ads or tracking for minors and parental controls.
   Good: no targeted ads to minors, and parental consent. Neutral: a stated minimum age, and it deletes children's data
   it finds. Poor: minors get the same ads and tracking as adults. Bad: targets minors with ads or tracking.
 
@@ -145,17 +184,19 @@ Rubrics for the new privacy topics:
 | `billing.fees`: fees beyond the price | **new** | all paid | not stated |
 | `billing.plan-changes`: switching plans | **new** | providers with two or more paid plans | not stated |
 
-- **cancellation.** Great: online in a couple of clicks, no retention maze, and you keep what you paid for. Good:
-  online at any time, through retention offers. Neutral: online, but only through the store or partner you bought
-  from, or a set time before renewal. Poor: you must contact someone, or there's a minimum term. Bad: a fee to leave,
-  or only by post or in person.
+- **cancellation.** *Cancelling in the app store you bought through counts as online at any time.* Great: online in a
+  couple of clicks, no retention maze, and you keep what you paid for. Good: online at any time, through retention
+  offers. Neutral: online, but by a stated deadline before renewal (24 hours, 7 days; "before it renews" isn't a
+  deadline). Poor: you must contact someone, or there's a minimum term. Bad: a fee to leave, or only by post or in
+  person.
 - **refunds.** Great: a refund of unused time whenever you cancel. Good: a full refund within a stated window after
-  buying or renewing. Neutral: no refunds, but access to the end of the period. Poor: no refunds and access ends at
-  once, or refunds only as credit. Bad: no refund even for its own errors or charges after you cancelled.
-- **renewal-notice.** Great: no automatic renewal unless you turn it on, or a reminder before every renewal with a
-  stated lead. Good: a reminder before yearly renewals with a stated lead. Neutral: "may" remind, no lead. Poor: no
-  reminder stated. Bad: renews into a longer or dearer plan (monthly to yearly, offer to full price) without a clear
-  warning.
+  buying and after each renewal. Neutral: no refunds but access to the end of the period, or a window after the first
+  purchase only (Proton's 30 days), which the reason states. Poor: no refunds and access ends at once, or refunds only
+  as credit. Bad: no refund even for its own errors or charges after you cancelled.
+- **renewal-notice.** Great: no automatic renewal unless you turn it on, or a reminder with a stated lead before every
+  renewal of every period it sells. Good: a reminder with a stated lead before yearly renewals, or before every
+  renewal with no stated lead. Neutral: "may" remind. Poor: no reminder stated. Bad: renews into a longer or dearer
+  plan (monthly to yearly) without a clear warning, when there was no trial.
 - **fees.** Great: none beyond the price. Good: only small, listed, avoidable fees (a paper bill). Neutral: listed
   fees for optional things. Poor: fees for ordinary use (inactivity, payment-method fees, an unstated currency
   markup). Bad: fees it doesn't disclose, or sets at its discretion.
@@ -175,15 +216,22 @@ Rubrics for the new privacy topics:
 | `legal.inactivity`: closing inactive accounts | **new** | all | Great (it doesn't) |
 | `legal.output-rights`: who owns what an AI or creative tool makes | **new** | ai, creative | not stated |
 
+- **disputes** (kept; "narrow" defined): an arbitration opt-out with a deadline, by post, or only for new accounts is
+  narrow, so Poor.
+- **account-closure** (kept; a rung added). Great: only for a clear breach of its terms, with notice and a refund of
+  time paid for. Good: only for a breach, with notice or a refund. Neutral: for a breach with no refund, or at its
+  discretion with a refund of time paid for. Poor: at its discretion, with notice but no refund. Bad: at any time and
+  for any reason, without notice or a refund.
 - **content-rights.** Great: no rights beyond running the service, ending when you delete. Good: a limited licence to
   run and improve the service, ending on deletion (bar backups and what others were sent). Neutral: a broad,
-  worldwide, royalty-free licence limited to running or promoting the service, ending on deletion. Poor: perpetual or
-  irrevocable, or surviving deletion. Bad: it may sublicense or sell it, or use your name or likeness in ads with no
-  opt-out.
+  worldwide, royalty-free licence limited to running or promoting the service, ending on deletion; sublicensable only
+  to providers acting for it. Poor: perpetual or irrevocable, or surviving deletion. Bad: it may sublicense to anyone
+  else or sell it, or use your name or likeness in ads with no opt-out.
 - **service-changes.** Great: purchases are yours (DRM-free downloads), or kept even if the service ends. Good:
   purchases stay; a removal is rare and refunded. Neutral: a licence only; content and features may change, as a
-  subscription's catalogue does. Poor: it may remove purchased items or your plan's features with no refund. Bad: it
-  may revoke purchases or close libraries at will.
+  subscription's catalogue does ("we may modify or discontinue features" alone). Poor: it may remove purchased items or
+  what your plan sells with no refund, or disclaims liability for removing them. Bad: it may revoke purchases or close
+  libraries at will.
 - **inactivity.** Great: never closes inactive accounts. Good: only free accounts, after a year or more, with
   warnings. Neutral: after a stated period, with a warning. Poor: no stated period, under a year, or no warning.
   Bad: deletes balances, credit or wallet funds for inactivity.
@@ -207,7 +255,7 @@ generic claims. Bad: no stated measures and no way to report a vulnerability.
 |---|---|---|
 | `service.activity-logging` | renamed from `vpn-logging`, same rubric worded for "what you do (sites, searches, queries) or when and where you connect" | vpn, dns, search, browsers |
 | `service.account-sharing` | kept, wider | streaming, music, gaming, software, storage, ai (family plans) |
-| `service.device-limits` | kept, wider | streaming, music, gaming, software, vpn |
+| `service.device-limits` | kept, wider; grades only what the device-count features don't say: registration caps and download expiry | streaming, music, gaming, software, vpn |
 | `finance.money-protection`: what protects your money | **new** | finance |
 | `finance.holds`: when it can hold or freeze your money | **new** | finance |
 
@@ -226,8 +274,9 @@ generic claims. Bad: no stated measures and no way to report a vulnerability.
 One company's policy often covers several providers: Disney's privacy policy covers Disney+, Hulu and ESPN; Bell's,
 Crave, TSN and RDS; Microsoft's, Xbox, Microsoft 365 and Copilot; and Google's, Amazon's and Proton's likewise. Rate
 such a document once, in `data/policies/<set>.yaml` (M11.1), and have each provider name it and add ratings from its
-own terms (its own wins for a topic both rate). Before reading a provider's policies, check whether a set already
-covers them.
+own terms. For a topic both rate, the provider's own rating wins only when its document says it applies instead of
+the shared one; otherwise the worst clause wins (§1.3, step 5). Before reading a provider's policies, check whether a
+set already covers them.
 
 #### Notable (anything else)
 
@@ -241,12 +290,20 @@ change: a `title` on ratings of this topic.
 |---|---|
 | Trains AI on your chats, files, photos | ai-training |
 | Recommends from what you watch or listen to | data-collection |
-| Shows ads chosen from your activity, in its own apps | ads-tracking |
-| Gives data to ad networks (Meta, Google) to target its own ads to you elsewhere | data-sharing |
+| Analytics, telemetry, crash reports | data-collection |
+| A spam filter or recommendations trained on your content | data-collection |
+| Shows you ads chosen from your activity, in its apps or anywhere else | ads-tracking |
+| Data collected only for ads | ads-tracking (data-collection grades what's left) |
+| Data that reaches another company (a Meta or Google pixel, ad networks), even to show its own ads | data-sharing |
 | Sells to data brokers | data-sharing |
+| A licence over your content that includes training AI | ai-training (content-rights grades the rest) |
 | Staff read your messages for support or quality | content-access |
-| Keeps chats 30 days after you delete them | data-retention |
-| "Contact us to delete" | data-deletion |
+| How you ask for deletion, and whether it happens | data-deletion |
+| How long anything stays, deleted data included ("chats are kept 30 days") | data-retention |
+| An inactive account closed and its data deleted | inactivity |
+| An account closed for a breach, with no refund | account-closure |
+| A free trial or introductory price ending | free-trials |
+| A renewal into a dearer plan, with no trial before it | renewal-notice |
 | Throttling or network management (telecom) | a plan feature, not a policy |
 | A fee to cancel | cancellation (Bad), and `cancelFee` |
 | A currency markup at checkout | fees |
@@ -277,34 +334,47 @@ the optimizer always picks the cheapest tier:
 
 ### 2.2 Rules
 
-1. **Price differences need feature differences.** Two plans of one provider at different prices (same region and
-   period) must differ in at least one feature value. A new validation *warning* catches the case. Everything a
-   provider's own comparison table shows as a difference between tiers becomes a feature value. A perk is only for
-   what no other provider has *and* nobody would rank on.
-2. **Reuse before creating**, in this order:
+1. **Price differences need a feature or perk difference.** Two plans of one provider at different prices (same
+   region and period) must differ in at least one feature or perk (BLUEPRINT §4.2 rule 8); a validation *warning*
+   catches the case. Everything a provider's own comparison table shows as a difference between tiers becomes a
+   feature value where a feature fits (rules 2 and 3), else a perk.
+2. **Feature or perk:** a feature needs two providers, in the catalog or queued for research. What only one provider
+   has is a perk, rankable or not (§2.5). Day-one games are a feature (Game Pass and Ubisoft+ both have them).
+3. **Reuse before creating**, in this order:
    1. an existing id, as it is;
-   2. an existing id with a new enum or set value, or an alias for the provider's wording;
+   2. an existing id with a new enum or set value, or an alias for the provider's wording. An alias is the same
+      technology under another name; a different technology for the same purpose (Amazon's 360 Reality Audio beside
+      Dolby Atmos) is a new value, and a boolean that becomes a set is a rename of its rank key (rule 10);
    3. a cross-category feature (§2.3);
    4. a new feature in the category's group, through the feature-discovery skill (propose, registry commit, every
       provider sourced);
    5. a perk.
-   Never a provider-named id (`xbox.ea-play`): a subscription inside a plan is `includes-subscription`.
-3. **A capability from another category uses that category's feature**, and the plan joins that category
-   (`categories`): Proton Unlimited gets `ai.assistant` for Lumo and `categories: [privacy-suite, vpn, storage, ai]`;
-   Bitdefender Ultimate gets `vpn.included` and `password-manager`; a phone plan with Crave gets
+   Never a provider-named id (`xbox.ea-play`): a subscription inside a plan is `includes-subscription`, and the
+   included service is added as a provider (with at least its own plan) before it's listed. Until then it's a perk,
+   and `movedTo` carries its ranks over.
+4. **A capability from another category uses that category's feature.** The plan also joins that category
+   (`categories`) when the capability works as that kind of product on its own, with its own app or standalone use:
+   Proton Unlimited gets `ai.assistant` for Lumo and `categories: [privacy-suite, vpn, storage, ai]`; Bitdefender
+   Ultimate gets `vpn.included` and `password-manager`. Joining means stating that category's required features
+   (rule 5); a token inclusion (a capped add-on VPN) is the feature only. A phone plan with Crave gets
    `includes-subscription`.
-4. **Required features per category.** Each category lists the features every plan in it must state, `false` and
+5. **Required features per category.** Each category lists the features every plan in it must state, `false` and
    `0` included (a `requiredIn: [categories]` field on a feature, which validation enforces). This ends the
-   "unlisted means no" ambiguity for the features that matter most: `video.quality` is required in streaming.
-5. **Quantities are numbers with tiers**, in normalised units: GB, hours a month, devices, MB per file, messages a
-   day. "5 hours of cloud play a month" is a number, not a perk.
-6. **Values that change monthly aren't features.** Model names (an AI's "GPT-x"), a show, a promotion: plan notes.
-   The capability behind them is the feature (reasoning model, video generation).
-7. **Every value is sourced**: the provider-file comment names the page for each fact, as feature-discovery
+   "unlisted means no" ambiguity for the features that matter most: `video.quality` is required in streaming. A
+   required feature no official page states is `false`, with a comment naming the page that was silent, never a value
+   from reviews.
+6. **Quantities are numbers with tiers.** The registry names each feature's unit and how to convert to it (a daily cap
+   × 30 for a month, a weekly one × 4.33); the provider file's comment keeps the provider's own figure, and fair-use
+   "unlimited" is `unlimited`. "5 hours of cloud play a month" is a number, not a perk.
+7. **Values that change monthly aren't features.** Model names (an AI's "GPT-x"), a show, a promotion: plan notes.
+   The capability behind them is the feature (reasoning model, video generation). A quantity that changes is a
+   feature when the tier it falls in is stable: record the floor the provider states ("400+ games").
+8. **Every value is sourced**: the provider-file comment names the page for each fact, as feature-discovery
    requires.
-8. **Provider-wide features:** what every plan of a provider has (platforms, sign-in, open source, languages,
-   support) goes once in the provider's own `features` (M11.4); a plan states a value only where it differs.
-9. **Rename or remove early.** Feature ids are rank keys in users' data, so any rename needs a migration. Do the
+9. **Provider-wide features:** only features the registry marks provider-scoped (platforms, sign-in, open source,
+   languages, support) go once in the provider's own `features` (M11.4), and a plan states a value only where it
+   differs. Category features stay on the plans, even when every plan has the same value (Crave's video quality).
+10. **Rename or remove early.** Feature ids are rank keys in users' data, so any rename needs a migration. Do the
    renames in §2.3 once, in Phase 0, before the catalog grows.
 
 ### 2.3 Cross-category features (proposed)
@@ -327,12 +397,13 @@ Candidates for feature-discovery to verify and propose. **Bold** = existing.
   kids, reality, documentaries), profiles (number), paid extra members.
 - **Music:** audio quality (enum: standard, high, lossless, hi-res), spatial audio (**audio.dolby-atmos** alias),
   ad-free, offline, on-demand vs shuffle-only, audiobook hours a month, podcasts, lyrics, **account.users**.
-- **AI:** **ai.assistant** (parent), usage level (enum: limited, standard, extended, highest, from the provider's
-  own multiples), reasoning models, image generation, video generation, voice conversation, deep research, web
+- **AI:** **ai.assistant** (parent), reasoning models, image generation, video generation, voice conversation, deep research, web
   search, file uploads, context size (tiers), memory, projects, coding agent, computer or browser agent,
   integrations (set: mcp, connectors, api-access, browser-extension, ide), model choice (several providers' models:
   OpenRouter, Perplexity, Kagi, Brave Leo), runs on device (Ollama), chat storage (enum: cloud, zero-access cloud,
-  device only). Training and retention are policy topics.
+  device only). Training and retention are policy topics. *Usage levels (Pro, Max 5x, Max 20x) are perks, not a
+  feature: each provider measures them its own way, so they can't be compared across providers (the owner's choice,
+  2026-10-30). The tiers then differ in perks, which the price-differences warning and the optimizer both count.*
 - **VPN:** the existing `vpn.*` group.
 - **Antivirus and security:** real-time protection, behavioural detection, ransomware protection and remediation, web
   and phishing protection, firewall, scheduled and manual scans, email protection, vulnerability scan, parental
@@ -376,21 +447,21 @@ counts them.
 - **In the catalog:** a provider lists its perks once, each with a stable id and a name
   (`perks: [{ id: cloud-play, name: Cloud play, 5 hours a month }]`), and each plan lists the ids it has, as plans list
   add-ons. Perk ids are kept as carefully as feature ids, since users' ranks point at them.
-- **Rank keys:** `perk:<provider>/<perk>` (`perk:xbox-game-pass/day-one`). A plan provides the key when it lists the
+- **Rank keys:** `perk:<provider>/<perk>` (`perk:xbox-game-pass/fortnite-crew`). A plan provides the key when it lists the
   perk.
 - **Where they're ranked:** on the plan, never on the Features page, because a perk means nothing to another provider.
   The rank is an item override like any other (`ListItem` ranks, §3.2's resolution order). M6.14's shared ranks carry
-  it to the same provider's other plans in the list, so ranking "Day-one games" on Ultimate covers the provider's
+  it to the same provider's other plans in the list, so ranking "Fortnite Crew passes" on Ultimate covers the provider's
   plans in that list, which is what "provider level" needs. Essential and Critical work on perks as on features.
 - **In the optimizer:** a perk is a rank key, so §10.2's constraints and §10.4's severities apply unchanged: a Needed
   perk must stay provided, which in practice means keeping a plan of that provider that has it; losing a Wanted perk
   makes a suggestion yellow. An unranked perk counts as Not ranked, as features do.
-- **Counts and summaries:** ranked perks count in rank counts and the feature summary ("Day-one games 1 / 1").
+- **Counts and summaries:** ranked perks count in rank counts and the feature summary ("Fortnite Crew passes 1 / 1"; a usage level, "Max 20x usage 1 / 1").
 - **A perk that becomes a feature:** when a second provider offers the same thing, it becomes a feature, and the
   catalog says so (`movedTo: <rank key>` on the perk). The app then moves users' perk ranks to the feature's key
   once, in a Dexie upgrade, so nobody loses a rank.
-- **Data rule:** §2.2 still comes first. A perk is never a way around modelling a comparable capability, and the
-  price-differences warning counts perk differences only after features.
+- **Data rule:** §2.2 still comes first. A perk is never a way around modelling a capability two providers have.
+  For the price-differences warning, a feature or a perk difference counts (§2.2, rule 1).
 
 ---
 
@@ -632,6 +703,10 @@ likely to use a Max plan's allowance at about that rate too; `/usage` shows the 
 ## 9. Decisions for the owner
 
 Decided on 2026-10-30:
+- Fable 5.1's review of §1 and §2 (43 points): taken as written, with five adjusted, and these choices: exceptions are
+  judged by what the data is used for (Claude's AI training is Poor); a feature needs two providers; a feature or a
+  perk difference silences the price-differences warning; AI usage levels are perks; a topic and a feature on the same
+  fact both stay, and validation checks they agree.
 - Silence: graded where it means a missing protection, *Not stated* where it proves nothing (the "If silent" columns).
 - Outside raters: allowed, as labels with dates and links, at least two raters for news (§3.3); which raters is
   M11.2's.
