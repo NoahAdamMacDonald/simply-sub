@@ -536,6 +536,23 @@ scroll; Settings' end above the indicator; Search's bar pinned below the top bar
 button; and a browser tab with no insets as before. Edge can't show iOS's own bug (its `vh` counting the status bar):
 the owner checks that on a preview link.
 
+`check-m10-menus-snackbars.cjs` (M10.19, the feedback after M10, part 2) checks, on `ng serve` for a Canadian in
+Alberta (base URL ending in `/`), in both themes at 360 px (as the Home Screen app: CDP's safe areas, the display mode
+standalone and touch, as `check-home-screen-app.cjs` sets them) and 1280 px: the first-run dialog's Province, opened by
+typing, closed by a tap that leaves focus in it, by focus going nowhere (`blur()`, an iPhone keyboard's Done) and by a
+tap or click on the dialog's heading, then Alberta picked by a tap or click; Search's Category (its panel at 1280 px,
+its drawer at 360 px) picking VPN by a click or tap and closed the same three ways; then Lists' 🗑 → Delete list's
+"Deleted Work Related" with Undo and ✕ (Dismiss), 8 px above the screen's bottom (42 with the home indicator); Escape
+in a question opened over it closing only the question; Tab from the page to Undo, then ✕, and Enter on ✕ with focus
+back where it came from; Escape closing the next; at 1280 px light, hovered past its 10 s it stays, and left it goes.
+With axe on the open lists and the snackbar, and no horizontal scroll.
+- An iPhone leaves focus in a field when a tap lands on something that can't take it, which Edge doesn't: the script
+  sends that tap's pointer events itself, with no focus change (`iphoneTap`).
+- An open list covers the dialog's text below its field, so a real tap or click elsewhere goes to the heading.
+- Since M10.19 a snackbar's text is its message, its action and ✕'s icon name ("close"): read the message from
+  `ss-snack .mat-mdc-snack-bar-label` (the container's own `.mat-mdc-snack-bar-label` wraps all of it), and find a
+  button by its name, since there are two.
+
 `check-m10-join-link.cjs` (M10.14 and M10.15, the feedback after M10, part 2: sync's one-time join link and joining on
 the first visit) needs wrangler dev answering the API, with its user database migrated (`npm -w apps/api run
 db:user:migrate:local`, for `join_links`): behind `ng serve`'s proxy (`http://localhost:4300/`), or the production

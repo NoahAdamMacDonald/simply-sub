@@ -570,7 +570,7 @@ describe('ListViewPage', () => {
     ]);
     await until(
       () =>
-        document.querySelector('.mat-mdc-snack-bar-label')?.textContent?.trim() ===
+        document.querySelector('ss-snack .mat-mdc-snack-bar-label')?.textContent?.trim() ===
         'Saved simply-sub-work-related-2026-10-25.csv',
     );
   });

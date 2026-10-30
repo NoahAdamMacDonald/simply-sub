@@ -2,6 +2,7 @@ import { ApplicationRef, signal } from '@angular/core';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
 import { MATERIAL_ANIMATIONS } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Snack } from '../shared/snack/snack';
 import { CatalogStore } from '../core/catalog/catalog-store';
 import { CatalogStatus } from './catalog-status';
 
@@ -25,17 +26,18 @@ describe('CatalogStatus', () => {
         { provide: MATERIAL_ANIMATIONS, useValue: { animationsDisabled: true } },
       ],
     });
-    open = vi.spyOn(TestBed.inject(MatSnackBar), 'open');
+    open = vi.spyOn(TestBed.inject(MatSnackBar), 'openFromComponent');
     fixture = TestBed.createComponent(CatalogStatus);
     await fixture.whenStable();
   });
 
   const status = () => (fixture.nativeElement as HTMLElement).querySelector('[role="status"]');
 
-  /** Lets the effect run and the snackbar load. */
+  /** Lets the effect run and the snackbar load (Material's and the app's chunks). */
   async function settle() {
     await fixture.whenStable();
     await TestBed.inject(ApplicationRef).whenStable();
+    await import('../shared/snack/snack');
     await new Promise((resolve) => setTimeout(resolve));
   }
 
@@ -69,8 +71,8 @@ describe('CatalogStatus', () => {
 
       catalog.version.set('2222222');
       await settle();
-      expect(open).toHaveBeenCalledExactlyOnceWith('Catalog updated', undefined, {
-        duration: 5000,
+      expect(open).toHaveBeenCalledExactlyOnceWith(Snack, {
+        data: { message: 'Catalog updated', duration: 5000 },
       });
     });
 

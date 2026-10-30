@@ -28,6 +28,7 @@ import { firstValueFrom } from 'rxjs';
 import { AppLockRepository } from '../../core/storage/app-lock-repository';
 import { focusFirstError } from '../../shared/focus-first-error';
 import { issueErrors } from '../../shared/form-issues';
+import { openSnack, snackMillis } from '../../shared/snack/snack';
 
 /**
  * Lock with a passphrase (PROJECT-PLAN P13; BLUEPRINT §11.5): the passphrase typed twice (at least 8 characters, never
@@ -95,7 +96,7 @@ export class LockOnDialog {
         })
         .afterClosed(),
     );
-    if (name) this.snackBar.open(`Saved ${name}`, undefined, { duration: 5000 });
+    if (name) openSnack(this.snackBar, `Saved ${name}`, undefined, { duration: snackMillis });
   }
 
   private async turnOn(): Promise<void> {

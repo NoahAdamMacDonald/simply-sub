@@ -131,11 +131,9 @@ export class AppUpdates {
 
   private offerReload(message: string): void {
     // Loaded on first use, as the catalog's toast is, so the snackbar stays out of the initial bundle.
-    import('@angular/material/snack-bar')
-      .then(({ MatSnackBar }) =>
-        this.injector
-          .get(MatSnackBar)
-          .open(message, 'Reload')
+    import('../../shared/snack/snack')
+      .then(({ openSnack }) =>
+        openSnack(this.injector, message, 'Reload')
           .onAction()
           .subscribe(() => this.reload()),
       )
