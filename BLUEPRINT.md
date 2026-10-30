@@ -1233,6 +1233,9 @@ M1.14), so a buyer can see what signing up means beyond the price.
 | `PUT /cal/:id` | Replaces a set's calendars with its manage key (`Authorization: Bearer`): a feed with its token keeps its URL and, unchanged, its file; one without gets a new URL; one left out is revoked. Its 180 days start again. 6 writes a minute per set |
 | `DELETE /cal/:id` | Revokes a set with its manage key: every calendar of it answers 404, and nothing of it is kept |
 | `GET /cal/:token.ics` | One calendar file (`text/calendar`), revalidated on every fetch (`no-cache` with an ETag), so a change or a revoke shows at the app's next check. Limited per feed (30 a minute), not per IP, since calendar apps' servers share addresses |
+| `GET /sync/:chain` | A sync chain's sealed copy (`application/octet-stream`) with its auth secret (`Authorization: Bearer`), which each device derives from the sync code (section 11.4, M10.8); its version is the ETag, `304` with `If-None-Match`, `404` when there's none (or it was deleted) |
+| `PUT /sync/:chain` | Writes the sealed copy, up to 1 MiB: `If-None-Match: *` starts the chain (`201`), keeping the secret's SHA-256; `If-Match` with the version read replaces it (`200`) only if no device wrote since, else `412 stale_version`. One statement compares and writes, so two devices can't both win. A write that can't be made is answered before it's counted against the day's cap. Its 180 days start again. 6 writes a minute per chain |
+| `DELETE /sync/:chain` | Deletes a chain with its secret: every device's next sync finds it gone, and nothing of it is kept |
 
 Example requests and responses for every endpoint are in [docs/api-output-examples.json](docs/api-output-examples.json).
 Core holds the contract's response schemas (M2.7): `successBodySchemas` names each built endpoint's (the bodies'
@@ -1551,9 +1554,9 @@ never downloads every region's prices.
   shows "Offline — catalog from Oct 22" (the cached file's `generatedAt`), or "Offline — the catalog will load when
   you're back online" on a first visit. A new version replacing the one on screen shows "Catalog updated" in every
   open tab; a first download doesn't. A file that can't be saved (a full disk) is still used in that tab.
-- **Not offline on start yet:** without a service worker the browser revalidates `index.html` on every visit, so the
-  app keeps working only when the network drops while it's open. M10's service worker makes it start offline
-  (section 14).
+- **Offline on start** (M10.5): the service worker keeps the app's own files, so after one visit the app starts with
+  no network, on the cached files and with the Offline banner above. It never keeps `/data/` or `/api/` answers: the
+  catalog's check has to reach the server to see a new version (section 14).
 
 The cheapest price per feature (what `api-all-example.json` tried to store) is computed on demand with today's
 exchange rates instead, so it's never stale.
@@ -2132,7 +2135,9 @@ Settings → Build*). The settings as they are now:
   (`static.cloudflareinsights.com/beacon.min.js`) into HTML pages requested by browsers. It uses no cookies and
   sends only page views and timings, never anything from IndexedDB. The beacon is a module script from
   `static.cloudflareinsights.com`, and it reports to `/cdn-cgi/rum` on the site itself (or to
-  `cloudflareinsights.com`), which the CSP allows (M2.8). Content blockers stop it, which is harmless.
+  `cloudflareinsights.com`), which the CSP allows (M2.8). Content blockers stop it, which is harmless. The service
+  worker (M10.5) passes page loads on to the network (`freshness`), so they should still get the beacon; checked on
+  the live site after M10.5's merge (section 14).
 - Workers Builds deploys straight from `main`; it doesn't wait for GitHub checks. Branch protection (M0.10) is
   what keeps a failing change off `main`.
 - A small GitHub Actions `.github/workflows/ci.yml` (M0.10) runs `npm audit --audit-level=high`, lint, the Prettier check, the generated JSON
@@ -2150,8 +2155,9 @@ Settings → Build*). The settings as they are now:
     - `default-src 'self'`; `script-src 'self'`, the inline theme script's SHA-256 and the Web Analytics beacon's
       host; `connect-src 'self' https://cloudflareinsights.com` for its reports;
     - `object-src 'none'`, `base-uri 'self'`, `form-action 'self'` and `frame-ancestors 'none'`;
-    - **Trusted Types**: `require-trusted-types-for 'script'` with Angular's policies
-      (`trusted-types angular angular#bundler`), so no string can reach a script sink. Zod would otherwise test
+    - **Trusted Types**: `require-trusted-types-for 'script'` with Angular's policies and the app's two, each taking
+      only its own files (`trusted-types angular angular#bundler simply-sub#worker simply-sub#service-worker`: the
+      optimizer's Web Worker, M8.2, and the service worker, M10.5), so no string can reach a script sink. Zod would otherwise test
       for `new Function` (a sink) to compile its parsers, so `apps/web/src/zod-setup.ts`, the app's first import,
       turns that off (`jitless`) through the global Zod reads, keeping Zod out of the first bundle; a test checks
       Zod still reads it;
@@ -2166,10 +2172,19 @@ Settings → Build*). The settings as they are now:
     Icons (`/icons/*`) get one day and are then revalidated, because their URLs carry no version and a replaced logo
     must show up. `index.html` and the catalog files keep the default, revalidated on every visit: Cloudflare sends
     `Cache-Control: public, max-age=0, must-revalidate` with an ETag and answers `If-None-Match` with a 304 (checked
-    on 2026-10-26), which is what makes the app's catalog check cheap (section 6.3).
+    on 2026-10-26), which is what makes the app's catalog check cheap (section 6.3). The service worker's
+    `ngsw-worker.js` and `ngsw.json` (M10.5) keep the default too, so a new version is found on the next visit.
   - Checked in Edge on the production build under `wrangler dev` (which applies `_headers`): every page, in-app
     navigation, both themes, the drawer and the error snackbar run with no CSP or Trusted Types violations, and
     the beacon, inserted the way Cloudflare does, loads and sends its report.
+- **The app's version** (M10.6): apps/web's `npm run build` is `scripts/build.mjs`, which runs `ng build` with the
+  commit being built (Workers Builds' `WORKERS_CI_COMMIT_SHA`, or the checkout's) and the day as two string defines.
+  Settings shows them ("Version fd54aac, built Oct 29, 2026").
+- **The service worker's kill switch** (M10.5): if a broken worker ever has to leave every browser, deploy a build
+  whose `ngsw-worker.js` is Angular's `safety-worker.js` (the build writes both; copy one over the other in
+  `apps/api/scripts/copy-web-build.mjs`, through a pull request like any change). Each browser's next check installs
+  it, and it deletes the worker's caches and unregisters itself. Angular's other fail-safe, a 404 for `ngsw.json`,
+  can't work here: the SPA fallback answers a missing file with `index.html` and a 200 (tried under `wrangler dev`).
 
 ### 7.7 Where automation runs: Cloudflare vs GitHub
 | Job | Cloudflare option | GitHub option | **Choice** |
@@ -2741,6 +2756,11 @@ prompted after each big change, or weekly).
   stretched from the phrase (scrypt, with a salt the first device stores on the server for the others). The server
   (Chromium's sync protocol, Commit and GetUpdates, on DynamoDB) holds only what it can't read. Brave has since added
   a word that changes daily to the code shown for adding a device, and doesn't support the code as a backup.
+- **As built (M10.7, M10.8):** the shape below, with D1 in place of R2 (the owner's choice, section 14): the
+  `simply-sub-user` database's `sync_chains` keeps each chain's id, its auth secret's SHA-256, its version, the sealed
+  copy (as base64: D1 answers a BLOB as an array of numbers), its size, when it changed and when it expires, 180 days
+  after its last write. A conditional `UPDATE … WHERE version = ?` is the compare-and-write. Core's `user/sync.ts` is the
+  copy and the merge; the crypto module's `sync-crypto.ts` the code and the keys.
 - **For Simply Sub, the same shape on Cloudflare** (the recommended design for M10): a random 32-byte seed as the sync
   code, shown as words (and a QR code; scanning one can come later, since not every browser can); from it, with
   WebCrypto's HKDF-SHA256 (a random seed needs no slow stretching, unlike a passphrase): the chain's id, an auth secret
@@ -2850,7 +2870,7 @@ written and tested once. It uses WebCrypto (`crypto.subtle`), available in every
 - [ ] Encrypted device sync
 - [ ] "Report wrong price" / "Suggest a service"
 - [ ] Broaden regional price coverage (the schema and UI handle all regions from Phase 1)
-- [ ] PWA (installable, offline)
+- [x] PWA (installable, offline): offline start in M10.5, the update prompt and install in M10.6
 
 ---
 
@@ -2931,6 +2951,151 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-29, M10.5–M10.9, as built)**
+- **The service worker** (M10.5): Angular's `ngsw-worker.js` (`@angular/service-worker` 22.2.3) with
+  `apps/web/ngsw-config.json`. Page loads ask the network first and fall back to the cached `index.html`. Every script
+  and style (153 files, about 1 MB compressed) is fetched as it installs, so a page never opened online works offline;
+  the fonts (43 files, 1 MB: Inter's subsets in two formats, most never needed, and the symbols) and the providers'
+  icons are kept as they're used. The first visit's fonts load before the worker controls a page, but they're in the
+  browser's cache, immutable for a year, which the worker's fetch reads offline.
+- **Registration** (M10.5): `app.background.ts`, one lazy chunk loaded once the app is stable, starts what runs in the
+  background: the live calendar's updates (moved there) and, in production builds, the worker, registered through
+  `simply-sub#service-worker`. `SwUpdate` comes from an environment injector made in that chunk, with a
+  `registrationStrategy` that never fires (`NEVER`): Angular's own registration is an app initializer, which runs only
+  at bootstrap, and would otherwise pass a plain string the CSP refuses. A browser that refuses service workers (some
+  private modes) gets a console warning, and the app needs the network to start, as before.
+- **Angular's worker answers every request in its scope** (M10.5), passing those it doesn't keep to the network, so
+  Playwright's `fromServiceWorker()` is true for `/api/` too. `check-m10-offline-sync.cjs` looks in the worker's caches
+  instead: no `/api/` or `/data/` answer is there. Checks that answer requests themselves (`context.route`) block the
+  worker (`serviceWorkers: 'block'`), whose own requests their routing doesn't see.
+- **Web Analytics with the worker** (M10.5): to check on the live site after the merge, that visits served through the
+  worker still count. If they stop, `index.html` gets Web Analytics' own snippet (the owner's call).
+- **Bundle** (M10.5): 499.00 kB initial (498.90 before). The starter's import replaced the live calendar's; Angular's
+  chunk optimizer put rxjs's `NEVER` (21 bytes) in the shared chunk `main` imports, and the rest is the renaming of
+  what crosses chunks. Two imports, one per job, made it 499.14 kB.
+- **Checks** (M10.5): web 702 tests (the worker's 3), core 1773, API 264, bot 60. Under `wrangler dev`:
+  `check-m10-offline-sync.cjs` (29, new for the batch); `check-catalog.cjs`
+  (41), `check-search.cjs` (187), `check-optimizations.cjs` (106) and the progress preview's `csp-check.cjs` (8), which
+  now block the worker and ignore Playwright's note that they do. Search's script had fallen behind the catalog
+  (#76's Claude, Bitdefender and Xbox Game Pass: 12 services for a Canadian, 10 priced in CAD, the price slider to $300
+  by $10) and the catalog's behind the Lists page's heading (#77). `calendar-page.scss` was 73 bytes over its 4 kB
+  budget since M10.4: a day's button and an agenda payment now share their hover and focus rules (on PR #78).
+- **The update prompt** (M10.6): `AppUpdates` (`core/pwa/app-updates.ts`) takes the worker's `SwUpdate` in the
+  background chunk. A version ready brings "A new version of Simply Sub is ready." [Reload] ("Reloading locks the
+  app." added when the lock is on), and a worker that can't serve the app "Simply Sub needs to reload to keep
+  working."; Reload just reloads, since the worker gives a new page load its latest version. A tab shown an hour after
+  the last check asks the worker again (the catalog's rule, `catalogCheckDue`), and so does Settings.
+- **A page load runs a new version before the worker knows of it** (M10.6): with `freshness`, a page load after a
+  deploy fetches the new `index.html`, whose files the worker passes to the network, so the page already runs the new
+  version when the worker finds it a few seconds later. On a version ready, the app reads that version's `ngsw.json`
+  past the worker (`?ngsw-bypass`); when its own main script is one of the files, it moves onto the version quietly
+  (`activateUpdate`) instead of asking for a reload it doesn't need. Only a tab that's really behind is prompted. A
+  version the worker has held before isn't new to it: serving the previous build again brings no prompt, so the check
+  uses three builds.
+- **The app's version** (M10.6): two string defines from `apps/web/scripts/build.mjs` (section 7.6). One define holding
+  an object cost 2 kB of the initial bundle, which esbuild hoisted into a shared chunk; strings are inlined where
+  they're read, in Settings' chunk.
+- **Install** (M10.6): Chromium's `beforeinstallprompt` comes once a page load, early, so `keepInstallOffer()`
+  (`core/pwa/install-offer.ts`) listens from the start: two signals and two listeners, the only part of M10.6 in the
+  initial bundle. Settings' Install shows the browser's dialog once; other browsers get their steps. Edge offers no
+  install to a private window (CDP's `in-incognito`), which every new Playwright context is, so the check installs in a
+  profile of its own.
+- **The icon** (M10.6): `scripts/app-icons.ts` (`npm run app:icons`) draws the mark, an S of two bowls with round ends,
+  white on the accent, reading both colours from `_tokens.scss`, and writes `app-icons/icon.svg`, PNGs of 192 and
+  512 px, a maskable 512 (the S at 82%, inside the safe zone), a 180 px `apple-touch-icon.png` (square: iOS rounds the
+  corners) and `favicon.ico` (16, 32 and 48 px PNGs in an ICO the script assembles; Angular's 15 kB default is gone).
+  `index.html` links the ICO for 32 px and the SVG, as browsers prefer. The owner chose it on 2026-10-29 from a review
+  sheet (the tile at 160 to 16 px, the maskable icon in a circle and a squircle, the iOS icon, on light and dark), over
+  the same S in burgundy on a white tile.
+- **The title bar's colour** (M10.6): `index.html` has a `theme-color` meta per OS scheme with the top bar's colour
+  (`--ss-sidebar-bg`), which an API test compares with the tokens, as it does the manifest's colours. From the
+  background chunk both take the theme on screen (`core/theme/title-bar.ts`), so an installed app chosen dark on a
+  light OS gets a dark title bar.
+- **Bundle** (M10.6): 499.14 kB initial (499.00 before): the install offer's listener.
+- **Sync's copy** (M10.7, core's `user/sync.ts`): `{ schemaVersion, settings, data, devices }`, the tables under
+  `data` as in a backup, so a copy from an older app is migrated by the backup's steps, and one from a newer app stops
+  sync on the device (`kind: 'newer'`). Each record is checked by its schema as it's read; one that fails is left out
+  and described by its table, key and issues' paths and codes, never its values. `mergeSync` takes the later
+  `updatedAt` per record (a soft delete moves it on, so deletions carry), settles a tie by the records' canonical JSON
+  (keys sorted), the same on every device, and keeps a record only one side has. It returns the next version, the
+  records this device must write, the shared settings to take and whether to send; a device with nothing new still
+  sends once a day, to move its "last synced" on (and the chain's age on the server).
+- **Shared settings** (M10.7): country, subdivision, currency, the tax rate, both budgets, Search's two defaults and
+  the dismissed budget warnings, merged as one by the settings' new `sharedUpdatedAt` (`updatedAt` stands in until a
+  shared one changes), so a theme changed here later doesn't outweigh a budget set on another device. The theme, the
+  Calendar's shown lists, Home's price changes and the app lock never leave the device: the copy's settings schema is
+  strict. The field made the backup's `schemaVersion` 3; an older file needs no step.
+- **Sync's API** (M10.8, `routes/sync.ts`, migration `0003_sync_chains.sql`): GET reads the copy, its version the
+  ETag; PUT starts a chain with `If-None-Match: *` or replaces the copy with `If-Match`, one statement comparing and
+  writing; DELETE ends it. Before a write is counted against the day's cap, the chain is looked at: none (404), another
+  secret (403), already started or moved past the version read (412) are answered first, so a device learns that its
+  chain was deleted even on a day at the cap; the statement still settles a race. A chain past its days that the
+  night's clean-up hasn't reached starts again with its version moving on, so a device still holding an old version
+  can't write over it. Copies are stored as base64. Tests: `sync.spec.ts` (two devices at once, one winning; the
+  limits; expiry and the clean-up; the stored row holding no list name, amount, record id or secret; no chain or
+  secret in a log) and the contract's examples, whose sealed copy is a real one from the code 0x00..0x1f, its bytes as
+  `bodyBase64`.
+- **Sync in the app** (M10.9, `shared/sync/`): `SyncService`, started from `app.background.ts` once the `sync`
+  record is readable (sync on, the app unlocked), syncs on start, when back online, when a tab is shown again, 10 s
+  after a change to a synced table or the settings (`SyncRepository.changes()`), every 10 s while the tab is shown, and
+  on Sync now, one tab at a time (a Web Lock). A run reads the chain with `If-None-Match` (a 304 when nothing changed),
+  opens and reads the copy, merges, writes what it took in one transaction, and sends a new version with `If-Match`,
+  reading and merging again up to three times if another device wrote first. The poll every 10 s, not 15, keeps "an
+  edit shows on the other device within 15 s" with a margin; each is a 304 costing one D1 row read. The devices'
+  list is the chain's, in memory: after a reload it fills in with the first sync, a moment later.
+- **The sync record** (M10.9, core's `user/sync-record.ts`, Dexie v5): the code (base64), this device's id and name
+  (`defaultDeviceName` from the browser: "Edge on Windows"), the version last read or written, when it last synced,
+  and what stopped sync (`gone`, `newer`, `unopenable`). The app lock seals it; backups and sync leave it out; Turn
+  off deletes it outright (a `TransientTable`, as drafts are), since it was this device's alone.
+- **Joining takes the chain's shared settings** (M10.9): a new device has just made its own in the first run, so by
+  their time they'd win the merge and overwrite every device's. Join (Merge or Replace) takes the copy's shared
+  settings first, then merges the records.
+- **The words and the keys apart** (M10.9): `sync-code.ts` (the words, with `@scure/bip39`'s word list) loads only
+  with the dialogs that show or take a code; `sync-crypto.ts` (keys, seal) with the service. The QR code is
+  `@paulmillr/qr` 0.3.0 (exact, no dependencies), its raw modules drawn as one SVG path (`ss-qr-code`), dark on light
+  in either theme (`--ss-qr-ink`, `--ss-qr-paper`), with a 4-module quiet zone.
+- **The shared time in the initial bundle** (M10.9): the settings repository stamps `sharedUpdatedAt` on every write
+  through core's `withSharedTime`, which moves it only when a shared value changed. A first version imported it from
+  `sync.ts`, which brought Zod and every record schema into the initial bundle (671 kB): `shared-settings.ts` holds
+  only the field list and that function, with no Zod, as `stamps.ts` does for the repositories.
+- **Bundle** (M10.9): 499.65 kB initial (499.14 before): the shared settings' list and `withSharedTime`, and
+  `oneAtATime`, now in a chunk shared with sync's.
+- **A check that races the worker's own** (M10.6, found by M10.9's batch run): Angular's worker answers "no new
+  version" to a check for a version it already holds, and its own check after a page load holds one as soon as it's
+  downloaded: a moment before it says so (`VERSION_READY`), and before the page has decided between a prompt and a
+  move (`runsLatest`, a fetch). So Settings said "You have the latest version." as the prompt appeared. `AppUpdates`
+  now follows the worker's news: a version detected keeps a check waiting until it's offered or run, or its download
+  fails, and `ready` remembers a version offered, which Settings' message goes by too. The wait ends with
+  `takeUntil(timer())`, not rxjs's `timeout`: the initial bundle's rxjs chunk holds every rxjs function the app uses,
+  lazy chunks' included, and `timeout` took it to 500.40 kB. The same runs found that `wrangler dev` serves a file new
+  to `public/` about half a second after it appears, and the SPA's `index.html` until then ("Failed to load module
+  script" for a new `main-*.js`), and that on Windows its watcher stops for good when it meets a file still being
+  written (`EBUSY`: a copy rewriting the 940 kB exceljs chunk), after which every new file gets `index.html`. The
+  batch's `serve()` puts a build over the last one rather than deleting it first, writing only new and changed files,
+  each moved in whole from beside `public/`, and waits until every file in its `ngsw.json` is served as built.
+- **Delete all data and Import** (M10.9): Delete all data asks whether to delete the synced copy too (sync turns off
+  here either way); Import's Replace waits until sync is off, since sync would bring back what Replace takes away.
+- **A disabled button still clicks** (M10.9): Material's `disabledInteractive` (a button kept focusable while
+  disabled) gives a `<button>` `aria-disabled` and stops clicks only on an anchor: a button's `(click)` and a form's
+  submit still run. Import's Replace with sync on and the join dialog's buttons while it's busy check in their
+  handlers, and their tests click them. The older dialogs' busy buttons (18 uses in 11 templates) rely on it too:
+  worth the same check.
+- **Checks** (M10.9): web 769 tests, core 1812, API 290, bot 60. Under `wrangler dev`: `check-m10-offline-sync.cjs`
+  (113: offline, the updates, install, and sync between two browsers both ways; its sync part again, 45, after the
+  dialogs' guards); on `ng serve`, `check-settings.cjs` (81), `check-backup.cjs` (81, again after Import's guard) and
+  `check-app-lock.cjs` (159).
+- **Sync's keys** (M10.7, the crypto module's `sync-crypto.ts`): the code is 32 random bytes as BIP39's 24 English
+  words (`@scure/bip39` 2.4.0, exact, which brings `@noble/hashes` 2.4.0); HKDF-SHA256 with an empty salt and the
+  infos "simply-sub sync: chain id" (16 bytes), "…: auth secret" (32) and "…: copy key" (AES-256-GCM, not
+  extractable); the ids and secrets as unpadded base64url. A sealed copy is a format byte (1), a random 12-byte IV and
+  the gzipped JSON (`CompressionStream`) sealed with the key, bound to "simply-sub sync 1:<chain id>". The tests pin
+  the words to BIP39's own vectors and the derivations to Node's `hkdfSync`.
+- **Checks** (M10.6): web 720 tests, core 1773, API 268 (the manifest's 4), bot 60. Under `wrangler dev`:
+  `check-m10-offline-sync.cjs` (69, with two more builds), `check-catalog.cjs` (41; its Catalog card's button and
+  message now scoped, since the App group has a Check for updates of its own when the worker runs, Playwright's
+  blocked registration included) and `csp-check.cjs` (8); on `ng serve`, `check-settings.cjs` (81) and
+  `check-shell.cjs` (51).
 
 **Resolved (2026-10-29, M10.1–M10.4, as built)**
 - **The year view** (M10.4): `?view=year` keeps the month, so Month goes back to it; Today goes to this year. Each

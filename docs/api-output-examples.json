@@ -2496,11 +2496,237 @@
           }
         }
       ]
+    },
+    "GET /sync/:chain": {
+      "description": "Reads a sync chain's sealed copy with its auth secret, which each device derives from the sync code with the chain's id. The server can't read the copy: it's gzipped JSON sealed with AES-256-GCM on the device. Its version is the ETag, which the device's next PUT names in If-Match.",
+      "examples": [
+        {
+          "title": "Read the chain's copy",
+          "request": {
+            "method": "GET",
+            "url": "https://sub.simplely.ca/api/v1/sync/7RzuOE455uZWapOAE8ToYw",
+            "headers": {
+              "Authorization": "Bearer eB-fvhcPV5EjET-L_3Eq09laqjt3_jCD0EV2QhRDeDg"
+            }
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/octet-stream",
+              "Cache-Control": "no-store",
+              "ETag": "\"3\""
+            },
+            "_note": "The body is the sealed copy as sent, here as bodyBase64: a format byte (1), a 12-byte IV, then the ciphertext and its tag.",
+            "body": null,
+            "bodyBase64": "AaChoqOkpaanqKmqqwtsy666YpBxeqjEMF2J7GKd3JJDarftQXKmzidwL5caonaDNOLwSoyU0GsMA3et6+YxCpEbkktqATu7X+MSedd3xyevxXw6o0Y4JY2CXyg0DNyUgOVaJPH8AGNsNIEs6KOL8QvOIGuZGzobmR7+5cMktB3ybsafzPeBMuiZpRWSP1mlMVReg03ceeK63iyu3FhIJDXnEGWpQFrra0ssVy4ot1qRUUOO7jUzkOmfaeL8/GU4GG96o3vi2FbfurkIDdT/gfatMhsqKh5HExm5g6vaGroG8Pyg+a6mjoNrGj4haFGHI/2lAFuA4H6fdbBVf5aBueDVHP8ZI1n7reIwSP9vUaIT565Pvj5jN7z5ldVlM2Q36CIUHqs="
+          }
+        },
+        {
+          "title": "Unchanged since this device read it",
+          "request": {
+            "method": "GET",
+            "url": "https://sub.simplely.ca/api/v1/sync/7RzuOE455uZWapOAE8ToYw",
+            "headers": {
+              "Authorization": "Bearer eB-fvhcPV5EjET-L_3Eq09laqjt3_jCD0EV2QhRDeDg",
+              "If-None-Match": "\"3\""
+            }
+          },
+          "response": {
+            "status": 304,
+            "headers": {
+              "Cache-Control": "no-store",
+              "ETag": "\"3\""
+            },
+            "body": null
+          }
+        },
+        {
+          "title": "No such chain",
+          "request": {
+            "method": "GET",
+            "url": "https://sub.simplely.ca/api/v1/sync/7RzuOE455uZWapOAE8ToYw",
+            "headers": {
+              "Authorization": "Bearer eB-fvhcPV5EjET-L_3Eq09laqjt3_jCD0EV2QhRDeDg"
+            }
+          },
+          "response": {
+            "status": 404,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "not_found",
+                "message": "This sync chain doesn't exist or was deleted."
+              }
+            }
+          }
+        },
+        {
+          "title": "Wrong auth secret",
+          "request": {
+            "method": "GET",
+            "url": "https://sub.simplely.ca/api/v1/sync/7RzuOE455uZWapOAE8ToYw",
+            "headers": {
+              "Authorization": "Bearer wrongSecret000000000000"
+            }
+          },
+          "response": {
+            "status": 403,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "forbidden",
+                "message": "The auth secret is missing or isn't this sync chain's."
+              }
+            }
+          }
+        }
+      ]
+    },
+    "PUT /sync/:chain": {
+      "description": "Writes a sync chain's sealed copy (application/octet-stream, up to 1 MiB). With If-None-Match: * it starts the chain, keeping its auth secret's SHA-256; with If-Match and the version the device read, it replaces the copy only if no other device wrote since, else 412, and the device reads the chain again, merges and sends the new version. One statement compares and writes, so two devices can't both win. Each write starts the chain's 180 days again.",
+      "examples": [
+        {
+          "title": "Start a chain",
+          "request": {
+            "method": "PUT",
+            "url": "https://sub.simplely.ca/api/v1/sync/7RzuOE455uZWapOAE8ToYw",
+            "headers": {
+              "Authorization": "Bearer eB-fvhcPV5EjET-L_3Eq09laqjt3_jCD0EV2QhRDeDg",
+              "Content-Type": "application/octet-stream",
+              "If-None-Match": "*"
+            },
+            "bodyBase64": "AaChoqOkpaanqKmqqwtsy666YpBxeqjEMF2J7GKd3JJDarftQXKmzidwL5caonaDNOLwSoyU0GsMA3et6+YxCpEbkktqATu7X+MSedd3xyevxXw6o0Y4JY2CXyg0DNyUgOVaJPH8AGNsNIEs6KOL8QvOIGuZGzobmR7+5cMktB3ybsafzPeBMuiZpRWSP1mlMVReg03ceeK63iyu3FhIJDXnEGWpQFrra0ssVy4ot1qRUUOO7jUzkOmfaeL8/GU4GG96o3vi2FbfurkIDdT/gfatMhsqKh5HExm5g6vaGroG8Pyg+a6mjoNrGj4haFGHI/2lAFuA4H6fdbBVf5aBueDVHP8ZI1n7reIwSP9vUaIT565Pvj5jN7z5ldVlM2Q36CIUHqs="
+          },
+          "response": {
+            "status": 201,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store",
+              "ETag": "\"1\""
+            },
+            "body": {
+              "data": {
+                "version": "1",
+                "updatedAt": "2026-10-29T18:20:00Z"
+              },
+              "meta": {}
+            }
+          }
+        },
+        {
+          "title": "Replace the copy after reading version 3",
+          "request": {
+            "method": "PUT",
+            "url": "https://sub.simplely.ca/api/v1/sync/7RzuOE455uZWapOAE8ToYw",
+            "headers": {
+              "Authorization": "Bearer eB-fvhcPV5EjET-L_3Eq09laqjt3_jCD0EV2QhRDeDg",
+              "Content-Type": "application/octet-stream",
+              "If-Match": "\"3\""
+            },
+            "bodyBase64": "AaChoqOkpaanqKmqqwtsy666YpBxeqjEMF2J7GKd3JJDarftQXKmzidwL5caonaDNOLwSoyU0GsMA3et6+YxCpEbkktqATu7X+MSedd3xyevxXw6o0Y4JY2CXyg0DNyUgOVaJPH8AGNsNIEs6KOL8QvOIGuZGzobmR7+5cMktB3ybsafzPeBMuiZpRWSP1mlMVReg03ceeK63iyu3FhIJDXnEGWpQFrra0ssVy4ot1qRUUOO7jUzkOmfaeL8/GU4GG96o3vi2FbfurkIDdT/gfatMhsqKh5HExm5g6vaGroG8Pyg+a6mjoNrGj4haFGHI/2lAFuA4H6fdbBVf5aBueDVHP8ZI1n7reIwSP9vUaIT565Pvj5jN7z5ldVlM2Q36CIUHqs="
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store",
+              "ETag": "\"4\""
+            },
+            "body": {
+              "data": {
+                "version": "4",
+                "updatedAt": "2026-10-29T18:25:00Z"
+              },
+              "meta": {}
+            }
+          }
+        },
+        {
+          "title": "Another device wrote first",
+          "request": {
+            "method": "PUT",
+            "url": "https://sub.simplely.ca/api/v1/sync/7RzuOE455uZWapOAE8ToYw",
+            "headers": {
+              "Authorization": "Bearer eB-fvhcPV5EjET-L_3Eq09laqjt3_jCD0EV2QhRDeDg",
+              "Content-Type": "application/octet-stream",
+              "If-Match": "\"2\""
+            },
+            "bodyBase64": "AaChoqOkpaanqKmqqwtsy666YpBxeqjEMF2J7GKd3JJDarftQXKmzidwL5caonaDNOLwSoyU0GsMA3et6+YxCpEbkktqATu7X+MSedd3xyevxXw6o0Y4JY2CXyg0DNyUgOVaJPH8AGNsNIEs6KOL8QvOIGuZGzobmR7+5cMktB3ybsafzPeBMuiZpRWSP1mlMVReg03ceeK63iyu3FhIJDXnEGWpQFrra0ssVy4ot1qRUUOO7jUzkOmfaeL8/GU4GG96o3vi2FbfurkIDdT/gfatMhsqKh5HExm5g6vaGroG8Pyg+a6mjoNrGj4haFGHI/2lAFuA4H6fdbBVf5aBueDVHP8ZI1n7reIwSP9vUaIT565Pvj5jN7z5ldVlM2Q36CIUHqs="
+          },
+          "response": {
+            "status": 412,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "stale_version",
+                "message": "Another device wrote since version 2: read the chain, merge and try again."
+              }
+            }
+          }
+        },
+        {
+          "title": "Start a chain that already exists",
+          "request": {
+            "method": "PUT",
+            "url": "https://sub.simplely.ca/api/v1/sync/7RzuOE455uZWapOAE8ToYw",
+            "headers": {
+              "Authorization": "Bearer eB-fvhcPV5EjET-L_3Eq09laqjt3_jCD0EV2QhRDeDg",
+              "Content-Type": "application/octet-stream",
+              "If-None-Match": "*"
+            },
+            "bodyBase64": "AaChoqOkpaanqKmqqwtsy666YpBxeqjEMF2J7GKd3JJDarftQXKmzidwL5caonaDNOLwSoyU0GsMA3et6+YxCpEbkktqATu7X+MSedd3xyevxXw6o0Y4JY2CXyg0DNyUgOVaJPH8AGNsNIEs6KOL8QvOIGuZGzobmR7+5cMktB3ybsafzPeBMuiZpRWSP1mlMVReg03ceeK63iyu3FhIJDXnEGWpQFrra0ssVy4ot1qRUUOO7jUzkOmfaeL8/GU4GG96o3vi2FbfurkIDdT/gfatMhsqKh5HExm5g6vaGroG8Pyg+a6mjoNrGj4haFGHI/2lAFuA4H6fdbBVf5aBueDVHP8ZI1n7reIwSP9vUaIT565Pvj5jN7z5ldVlM2Q36CIUHqs="
+          },
+          "response": {
+            "status": 412,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "stale_version",
+                "message": "This sync chain already exists: read it, merge, then write with If-Match."
+              }
+            }
+          }
+        }
+      ]
+    },
+    "DELETE /sync/:chain": {
+      "description": "Deletes a sync chain with its auth secret: each device's next sync finds it gone (404), and nothing of it is kept.",
+      "examples": [
+        {
+          "title": "Delete the synced copy",
+          "request": {
+            "method": "DELETE",
+            "url": "https://sub.simplely.ca/api/v1/sync/7RzuOE455uZWapOAE8ToYw",
+            "headers": {
+              "Authorization": "Bearer eB-fvhcPV5EjET-L_3Eq09laqjt3_jCD0EV2QhRDeDg"
+            }
+          },
+          "response": {
+            "status": 204,
+            "headers": {
+              "Cache-Control": "no-store"
+            },
+            "body": null
+          }
+        }
+      ]
     }
   },
   "errorCodes": [
     { "code": "bad_request", "status": 400, "meaning": "A query parameter or body field is missing or invalid. 'details' lists each problem." },
-    { "code": "forbidden", "status": 403, "meaning": "Missing or wrong manage key (calendar feeds)." },
+    { "code": "forbidden", "status": 403, "meaning": "Missing or wrong manage key (calendar feeds) or auth secret (sync)." },
     { "code": "not_found", "status": 404, "meaning": "Unknown id, path or calendar token." },
     { "code": "stale_version", "status": 412, "meaning": "The sync copy changed since it was read (If-Match). Read it again, merge, and send the new version." },
     { "code": "too_large", "status": 413, "meaning": "The request's body is over its route's size limit." },

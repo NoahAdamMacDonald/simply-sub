@@ -16,5 +16,6 @@ export async function cleanUp(db: D1Database, today: IsoDate): Promise<void> {
       )
       .bind(today),
     db.prepare('DELETE FROM cal_sets WHERE expires_on <= ?').bind(today),
+    db.prepare('DELETE FROM sync_chains WHERE expires_on <= ?').bind(today),
   ]);
 }

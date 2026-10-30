@@ -262,8 +262,8 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.2 | Live calendar feeds, the API: `POST /cal`, `PUT /cal/:id`, `DELETE /cal/:id` and `GET /cal/:token.ics`, on core's feed schema and calendar writer; repeat rules Proton Calendar accepts, for the .ics download too | The contract's examples pass; a revoked feed answers 404; the owner's Proton Calendar shows every event of the test calendar |
 | M10.3 | Live calendar in the app (P10, P13): the opt-in dialog, a calendar for everything and one per tag, the subscribe steps for each app, updates after every change, Revoke | A change to a list reaches its feeds within seconds; each tag's calendar holds only its payments; Revoke ends every link |
 | M10.4 | Calendar year view (P10): `view=year`, twelve small months with their totals, and the year against the annual budget | Each month's total matches the month view's; it works by keyboard, in both themes at 360 and 1280 px, from a lazy chunk |
-| M10.5 | Offline start: the service worker, registered through a Trusted Types policy of its own, with `navigationRequestStrategy: 'freshness'` | Under `wrangler dev` the app starts and every page works with the network off, with no CSP or Trusted Types error; the initial bundle doesn't grow |
-| M10.6 | The update prompt and install: "A new version is ready" with Reload, the web app manifest and icons, Settings' Install | A second build served brings the prompt, and Reload runs it; Edge offers to install the app |
+| M10.5 | Offline start: the service worker, registered through a Trusted Types policy of its own, with `navigationRequestStrategy: 'freshness'` | Under `wrangler dev` the app starts and every page works with the network off, with no CSP or Trusted Types error; the worker's code is lazy and the initial bundle stays under 500 kB |
+| M10.6 | The update prompt and install: "A new version is ready" with Reload, the web app manifest and icons, Settings' Install | A new build served reaches an open tab as the prompt, and Reload runs it; Edge offers to install the app |
 | M10.7 | Sync's code and merge: a 32-byte seed shown as 24 words and a QR code, keys derived from it on the device (HKDF), core's sync payload and per-record merge by `updatedAt` and `deletedAt` | Tests: the newer of each record wins and every deletion carries; the keys match their test vectors; a wrong code opens nothing |
 | M10.8 | Sync, the API: `GET`, `PUT` and `DELETE /sync/:chain`, each write conditional on the version read | Two devices writing at once never overwrite each other; the server holds nothing it can read |
 | M10.9 | Sync in the app (P13): turn it on, join with the code, the devices, syncing after changes, turn it off, start over with a new code | Two browsers stay the same through adds, edits and deletes on either, offline ones included |
@@ -430,50 +430,78 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 - **The worker:** `@angular/service-worker` 22.2.3 (exact) and `ngsw-config.json`:
   - `navigationRequestStrategy: 'freshness'`: a page load asks the network first, so Web Analytics keeps counting
     visits (BLUEPRINT §14, M4.3), and falls back to the cached `index.html` offline;
-  - every script, style and font prefetched at install (about 1.4 MB compressed, once; after that only the files a
-    version changed), so a page never opened online still works offline;
-  - provider icons (`/icons/*`) kept as they're used, for 30 days;
+  - every script and style prefetched at install (about 1 MB compressed, once; after that only the files a version
+    changed), so a page never opened online still works offline;
+  - the fonts kept as they're used (43 files and 1 MB in all, most of them subsets a page never needs), and the
+    provider icons (`/icons/*`) for 30 days;
   - `/api/*` and `/data/*` left to the network: the catalog and the rates are kept in IndexedDB (M4.3, M4.4), and the
     catalog's check must reach the server to see a new version.
 - **Registration:** after the first render, from a lazy chunk, in production builds only, through a Trusted Types
   policy of its own, `simply-sub#service-worker`, which accepts only `/ngsw-worker.js` and joins `_headers`'
   `trusted-types` (Angular's `provideServiceWorker` registers with a plain string, which the CSP blocks). `SwUpdate`
-  comes from an environment injector made in that chunk, so the initial bundle doesn't grow.
-- **Headers:** `ngsw-worker.js`, `ngsw.json` and `safety-worker.js` revalidated on every load (`no-cache`); the kill
-  switch documented (`safety-worker.js` deployed as `ngsw-worker.js` unregisters the worker everywhere).
+  comes from an environment injector made in that chunk, so none of the worker's code is in the initial bundle.
+- **Headers:** `ngsw-worker.js` and `ngsw.json` revalidated on every load (Cloudflare's default, as for `index.html`);
+  the kill switch documented (`safety-worker.js` deployed as `ngsw-worker.js` unregisters the worker everywhere).
 - **Checks:** under `wrangler dev`. Browser checks that answer requests themselves (`context.route`) block the worker
   (`serviceWorkers: 'block'`), since Playwright doesn't see a worker's requests.
 - **Web Analytics:** whether Cloudflare still adds its beacon to a page the worker fetched is checked on the live site
   after the merge; if visits stop counting, `index.html` carries Web Analytics' own snippet instead (the owner's
   call).
 - **Acceptance**
-  - [ ] After one online visit, with the network off, `/`, a deep link and every sidebar page load with the catalog,
+  - [x] After one online visit, with the network off, `/`, a deep link and every sidebar page load with the catalog,
         the rates and the lists, and no CSP or Trusted Types error in the console
-  - [ ] No `/api/` or `/data/` request is answered by the worker (CDP's `fromServiceWorker`)
-  - [ ] The initial bundle stays at or under 497.84 kB
+  - [x] No `/api/` or `/data/` answer is kept by the worker: its caches hold none (Angular's worker answers every
+        request in its scope, passing on those it doesn't keep, so CDP's `fromServiceWorker` can't tell them apart)
+  - [x] The worker's code is in a lazy chunk, and the initial bundle stays under 500 kB: 499.00 kB, 0.10 kB more than
+        M10.4's
+- **As built:** `apps/web/ngsw-config.json` and the production build's `serviceWorker`; `core/pwa/service-worker.ts`
+  (the policy, the registration, and `SwUpdate` from an injector made there with a `registrationStrategy` that never
+  fires); `app.background.ts`, the one chunk the app loads once it's stable, which starts the live calendar's updates
+  (moved there from `app.config.ts`) and the worker, so a third background job adds nothing to the initial bundle. A
+  browser that refuses service workers gets a console warning and the app needs the network, as before. `_headers`
+  adds `simply-sub#service-worker`. Tested in `service-worker.spec.ts`; `check-m10-offline-sync.cjs` (29: offline
+  start, the rates from IndexedDB, the worker's caches) under `wrangler dev`, and the older scripts that answer
+  requests themselves now block the worker. Their counts had fallen behind the catalog (#76) and the Lists heading
+  (#77) and are brought up to date (BLUEPRINT §14).
 
 **M10.6 — The update prompt and install** (P1, P13)
 - **Update prompt:** when the worker has a new version ready, a snackbar "A new version of Simply Sub is ready."
-  [Reload] (with the lock on, it adds "Reloading locks the app."). Reload activates it and reloads; a list being
-  edited is a draft in IndexedDB, so nothing is lost. If the worker can't serve the app any more: "Simply Sub needs to
-  reload to keep working." [Reload]. The worker checks on each page load, and the app asks it again when a tab is
-  shown after an hour and from Settings' Check for updates.
+  [Reload] (with the lock on, it adds "Reloading locks the app."). Reload reloads, which the worker answers with the
+  new version; a list being edited is a draft in IndexedDB, so nothing is lost. If the worker can't serve the app any
+  more: "Simply Sub needs to reload to keep working." [Reload]. The worker checks on each page load, and the app asks
+  it again when a tab is shown after an hour and from Settings' Check for updates. A page load fetches `index.html`
+  from the network first (M10.5), so it may already run a version the worker learns of only afterwards: then the page
+  moves onto it with no prompt.
 - **Manifest:** `manifest.webmanifest` (`id` and `start_url` `/`, `display: standalone`, the name, a description,
   `theme_color` and `background_color` with `_tokens.scss`'s values, which a test compares), icons of 192 and 512 px
   and a maskable 512 made by a script (`sharp`) from an SVG mark and committed. The mark is a simple one drawn for the
   app from the logo's "Sub" pill, in the theme's colours, shown to the owner before it's committed; it replaces the
   favicon, still Angular's default logo, too. `<link rel="manifest">` and a
-  `theme-color` meta per colour scheme in `index.html`, its inline script and that script's CSP hash unchanged.
+  `theme-color` meta per colour scheme in `index.html`, its inline script and that script's CSP hash unchanged; once
+  the app has started, both take the theme on screen, so an installed app's title bar follows a theme chosen in the
+  app.
 - **Install** (Settings, a new App group after Your data): [Install] when the browser offers it
   (`beforeinstallprompt`, Chromium), else the steps for Safari (Share, then Add to Home Screen; on a Mac, File, then
   Add to Dock) and Firefox on Android; hidden when the app runs installed. The app's version and Check for updates sit
   under it.
 - **Acceptance**
-  - [ ] Under `wrangler dev`, a second build served brings the prompt within a page load, and Reload shows the new
-        version
-  - [ ] Edge offers to install the app; DevTools shows no manifest error; the icons look right in both themes and
-        as a maskable icon
-  - [ ] Keyboard only, both themes at 360 and 1280 px, axe with the snackbar shown
+  - [x] Under `wrangler dev`, a new build served reaches an open tab through Check for updates as the prompt, and
+        Reload runs it; a page load runs a new build at once, with no prompt
+  - [x] Edge offers to install the app (Settings' Install); CDP reports no manifest or installability error
+  - [x] The owner approves the icon: in both themes, as a maskable icon and at favicon sizes (2026-10-29, the white S
+        on burgundy over the inverted one)
+  - [x] Keyboard only, both themes at 360 and 1280 px, axe with the snackbar shown
+- **As built:** `core/pwa/app-updates.ts` (the prompt, the hourly and Settings' checks, a page already on the new
+  version moved onto it quietly), `core/pwa/install-offer.ts` (Chromium's offer, listened for from the start: the only
+  part in the initial bundle, 0.14 kB), `core/pwa/app-version.ts` with `apps/web/scripts/build.mjs` (the commit and
+  day as defines), `core/theme/title-bar.ts`, the manifest and `scripts/app-icons.ts` (`npm run app:icons`: the icon
+  SVG, PNGs of 192, 512 and a maskable 512, a 180 px apple-touch-icon and `favicon.ico`), and Settings' App group.
+  "A second build served brings the prompt within a page load" became two cases: with `freshness` a page load already
+  runs a new build, so only an open tab is prompted, which the hourly check or Check for updates finds. Tested in
+  `app-updates.spec.ts`, `install-offer.spec.ts`, `title-bar.spec.ts`, Settings' spec and the API's
+  `web-manifest.spec.ts` (the manifest's and the metas' colours against `_tokens.scss`); `check-m10-offline-sync.cjs`
+  with two more builds (BLUEPRINT §14). Since M10.9 a check the worker answers "none" waits for a version its own
+  check has just downloaded, until the page has offered it or moved onto it.
 
 **M10.7 — Sync's code and merge** (BLUEPRINT §11.4, §11.5)
 - **The code:** 32 random bytes, shown as 24 BIP39 words (the last word carries a checksum) and a QR code of the
@@ -496,10 +524,17 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   logged by table and key only); a newer `schemaVersion` stops sync on this device; an older one is migrated as
   backups are.
 - **Acceptance**
-  - [ ] Tests: newer wins, deletions carry, ties agree, shared settings by their own time, per-device settings never
+  - [x] Tests: newer wins, deletions carry, ties agree, shared settings by their own time, per-device settings never
         leave the device, invalid records left out, a newer version refused
-  - [ ] Tests: the words round-trip and a changed word fails its checksum; known seeds give known chain ids; a wrong
+  - [x] Tests: the words round-trip and a changed word fails its checksum; known seeds give known chain ids; a wrong
         key or a changed byte opens nothing
+- **As built:** core's `user/sync.ts` (`syncTables`, `sharedSettingsFields`, `sharedSettings`, `withSharedSettings`,
+  `touchesSharedSettings`, `readSyncCopy`, `mergeSync`; the copy holds the tables under `data`, as a backup does, so
+  its migrations apply), the settings' `sharedUpdatedAt` (the backup's version 3), and the crypto module's
+  `sync-crypto.ts` (`@scure/bip39` 2.4.0: the words, `completeWord`; `syncKeys`, `sealCopy`, `openCopy`). A tie is
+  settled by the records' canonical JSON (keys sorted), the same on every device; a device with nothing new writes
+  once a day, to move its "last synced" on. Tested in core's `sync.spec.ts` (BIP39's and Node's HKDF known answers in
+  `sync-crypto.spec.ts`). Nothing imports the crypto yet: M10.9's lazy sync chunk will.
 
 **M10.8 — Sync, the API** (BLUEPRINT §5.2, §11.4)
 - `GET /sync/:chain` (`Authorization: Bearer <auth secret>`): the sealed payload (`application/octet-stream`) with
@@ -511,9 +546,15 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 - **Stored:** the chain's id, the secret's hash, the version, the sealed payload, its size and when it changed;
   deleted 180 days after its last write (the app writes at least every 30 days while it's used).
 - **Acceptance**
-  - [ ] Contract examples and Worker tests: start, read, `304`, a write after another's gets `412` and changes nothing,
+  - [x] Contract examples and Worker tests: start, read, `304`, a write after another's gets `412` and changes nothing,
         a wrong secret `403`, too big `413`, delete
-  - [ ] What's stored has no list name, amount or record id in it (a test searches the stored bytes)
+  - [x] What's stored has no list name, amount or record id in it (a test searches the stored bytes)
+- **As built:** `apps/api/src/routes/sync.ts` and `migrations-user/0003_sync_chains.sql` (the copy as base64, since D1
+  answers a BLOB as an array of numbers); PUT answers `201` or `200` with `{ data: { version, updatedAt } }` and the
+  ETag; core's `maxSealedCopyBytes`, `syncWriteBodySchema` and `syncBody`; the nightly clean-up deletes chains past
+  their days. A write that can't be made (none, another secret, a stale version) is answered before it's counted, and
+  a chain past its days starts again with its version moving on. The contract's examples carry bytes as `bodyBase64`
+  (BLUEPRINT §14).
 
 **M10.9 — Sync in the app** (P13; BLUEPRINT §11.4)
 - **Settings' Your data, Sync between devices** (replacing "Create local sync"):
@@ -529,18 +570,27 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   - Problems in words: offline (it waits), the chain deleted from another device, a newer version of the app needed,
     a copy that won't open.
 - **`SyncService`** (lazy, started when sync is on, after unlocking): syncs on start, when back online, when a tab is
-  shown again, 10 s after a change to a synced table, and from Sync now; one tab at a time (a Web Lock, like the
-  catalog's check); reads with `If-None-Match`, merges, writes this device's changes in one transaction, then sends a
-  new version with `If-Match`, up to three tries.
+  shown again, 10 s after a change to a synced table, every 10 s while the tab is shown, and from Sync now; one tab at
+  a time (a Web Lock, like the catalog's check); reads with `If-None-Match`, merges, writes this device's changes in
+  one transaction, then sends a new version with `If-Match`, up to three tries.
 - **Stored:** a `sync` record (Dexie v5): the seed, this device's id and name, the last version and when. The app lock
   seals it; backups leave it out. Delete all data asks whether to delete the synced copy too; Import's Replace waits
   until sync is off (Merge works).
 - **Acceptance**
-  - [ ] Two browsers on `wrangler dev`: turned on in one and joined in the other by keyboard, an item added, edited or
+  - [x] Two browsers on `wrangler dev`: turned on in one and joined in the other by keyboard, an item added, edited or
         deleted on either shows on the other after Sync now, and within 15 s on its own
-  - [ ] Changes made offline on both, to different records, all survive; the theme stays per device
-  - [ ] Start over and Delete the synced copy leave the other browser saying what happened
-  - [ ] Keyboard only, both themes at 360 and 1280 px, axe with each dialog open, no horizontal scroll
+  - [x] Changes made offline on both, to different records, all survive; the theme stays per device
+  - [x] Start over and Delete the synced copy leave the other browser saying what happened
+  - [x] Keyboard only, both themes at 360 and 1280 px, axe with each dialog open, no horizontal scroll
+- **As built:** core's `user/sync-record.ts` (the record, `defaultDeviceName`) and `shared-settings.ts`
+  (`withSharedTime`, which the settings repository stamps every write with, Zod-free since it's in the initial
+  bundle); `SyncRepository` (Dexie v5); the crypto module's `sync-code.ts` (the words, apart from the keys, so only the
+  dialogs load the word list); `shared/sync/` (the client, `SyncService`), `shared/qr-code/` (`@paulmillr/qr` 0.3.0,
+  exact), and Settings' `ss-sync-setting` with its three dialogs (the code, Join, Rename). Polling is every 10 s, not
+  15, to keep "within 15 s" with a margin. Join takes the chain's shared settings, which a new device's first run would
+  otherwise outweigh. Tested in `sync-service.spec.ts` (against a stand-in server, another device's writes sealed with
+  core's functions), the card's and the join dialog's specs, and `check-m10-offline-sync.cjs`'s two browsers
+  (BLUEPRINT §14).
 
 **M10.10 — Price reports, the API and the bot** (BLUEPRINT §5.2, §5.4, §6.4)
 - **`POST /reports`:** a plan, the country, and what's wrong: a different price (amount, currency and period), not
@@ -827,6 +877,7 @@ Chromium) and, where those aren't supported (Safari), `::-webkit-scrollbar` with
 - Global pieces: the skip-to-content link and the "Something went wrong" snackbar (P15) arrive in M0.5; the offline banner and the "Catalog updated" toast arrive with `CatalogStore` in M4.3:
   - The banner is a line at the top of every page while the browser is offline or the last check couldn't reach the server: "Offline — catalog from Oct 22" (the cached catalog's build date), or "Offline — the catalog will load when you're back online" when nothing is cached yet. It's a polite live region.
   - The toast shows "Catalog updated" for 5 seconds when a new version replaces the one on screen, in every open tab. A first download, or a new country's file at the same version, isn't announced.
+  - Since M10.6, "A new version of Simply Sub is ready." [Reload] (with "Reloading locks the app." when the lock is on) when the service worker has a version an open tab isn't running, and "Simply Sub needs to reload to keep working." [Reload] when the worker can't serve the app any more. It stays until used or dismissed, the page's last tab stop.
 - Page titles like "Lists · Simply Sub" come from each route's `title`.
 
 **First-run dialog** (shown when no settings are saved, M4.2):
@@ -1731,7 +1782,8 @@ own. A set feature asks for one or more of its values, as enum and number featur
 ```
 **Built so far:** the budgets, Appearance and 📍 (M4.2), each a card ("Location and currency" holds 📍 and the tax
 line under it), the Catalog line (M4.3), Your data (M6.9), Security (M6.10) and Custom tags (M6.11), after Budgets.
-Local sync comes with Phase 5.
+The App group (M10.6) comes last. Sync between devices (M10.9) opens Your data, in the wireframe's "Create local sync"
+place.
 - **Your data** (M6.9):
   - **Export backup:** a dialog with "Protect with a passphrase" (at least 8 characters, typed twice). It downloads
     the file.
@@ -1760,6 +1812,9 @@ Local sync comes with Phase 5.
 - 📍 opens a dialog for country, province or state, and currency (the currency follows the country unless you change it), with the sales tax that follows: "Sales tax 13% (Ontario)" and a "Use my own rate" checkbox (BLUEPRINT §4.8). It shares the first-run dialog's fields (P1). Cancel or Escape changes nothing.
 - **Appearance** (M4.2): System, Light or Dark, saved in `settings.theme` (BLUEPRINT §8.1).
 - **Catalog** (M4.3): "Updated Oct 22, 2026 · version c4f9a21" (the build date and version of the user's region's file), or "Not downloaded yet". [Check for updates] checks now and says what it found in a live region under it: "You have the latest catalog.", "Downloaded the latest catalog.", "You're offline. Try again when you're back online." or "Couldn't check for updates. Try again later."
+- **App** (M10.6), after Your data:
+  - **Install**, left out in the installed app: what installing does, then [Install Simply Sub] when the browser offers it (Chromium), which shows the browser's dialog once, or else the steps for each browser (Chrome or Edge's address bar, Chrome on Android, Safari on an iPhone or iPad and on a Mac, Firefox on Android). Installed from the tab: "Installed: open Simply Sub from your apps, home screen or taskbar."
+  - **Version:** "Version fd54aac, built Oct 29, 2026" (the commit and day of the build), or "A development build". Its own [Check for updates] asks the service worker and says what it found: "You have the latest version.", "A new version is ready: reload to use it." (the prompt shows too), the offline message or the failure. With no worker (a development build, or a browser that refuses them): "Each visit loads the latest version." instead.
 - **Export backup** downloads `simply-sub-backup-YYYY-MM-DD.json`:
   ```json
   {
@@ -1784,7 +1839,19 @@ Local sync comes with Phase 5.
   - Turning it off asks for the passphrase and decrypts everything. A wrong one says so and changes nothing.
   - With nothing saved (in-memory mode, P15) it's turned off and says why.
   - As built: BLUEPRINT §14.
-- Create local sync stays disabled until Phase 5 (M10.9).
+- **Sync between devices** (M10.9), first in Your data:
+  - Off: what it does and that the server can't read it, then [Turn on sync] and [Join with a code].
+  - Turn on: a new code's 24 words, numbered, with Copy, and its QR code, to keep first; [I've saved it] starts the
+    chain with this device's data.
+  - Join: the 24 words, each completed from its first letters as its box is left, or pasted at once; a mistyped word is
+    caught by the checksum; then what the synced copy holds and Merge (the default) or Replace, which asks first. Either
+    way the chain's shared settings come with it, and the theme stays this device's.
+  - On: "Synced 2 minutes ago" and [Sync now]; the devices, this one first with [Rename…]; [Show the code…],
+    [Start over with a new code…], [Turn off on this device…] and [Delete the synced copy…], each asking first.
+  - Stopped: why (the copy was deleted, it needs a newer app, or it won't open), with [Join with a code] or
+    [Check for updates], and [Turn off sync here…]. What holds a sync back for now (offline, busy, full) is said in
+    the status line, and sync tries again by itself.
+  - Delete all data asks whether to delete the synced copy too; Import's Replace waits until sync is off.
 
 **Since the feedback after M9:** the 📍 dialog's menus can be typed in (M6.16, as P1's), and a tag's colour can also
 come from the device's own colour picker beside Hex colour, each following the other (M6.15).
@@ -1932,6 +1999,7 @@ item's next charge, plus tax where the catalog's price is before tax, and Review
   | `/api/v1/icon?domain=` | Worker → Google/DuckDuckGo | 30 days (KV) | Yes (custom subscriptions only) |
   | `POST /api/v1/cal`, `PUT` and `DELETE /api/v1/cal/:id` | Worker → the user database | Never (`no-store`) | Yes (only with a live calendar: 5 s after a change that reaches it, and at least monthly) |
   | `/api/v1/cal/<token>.ics` | Worker → the user database | `no-cache` with an ETag | Yes (calendar apps' servers, a few times a day per calendar) |
+  | `GET`, `PUT` and `DELETE /api/v1/sync/:chain` | Worker → the user database | Never (`no-store`); `GET` answers `304` to the version the device has | Yes (only with sync on: on start, a tab shown again, back online, 10 s after a change, and a write at least daily, M10.9) |
 - The other endpoints (`/providers`, `/plans`, `/bundles`, `/features`, `/categories`, `/catalog`) serve deep links,
   future features and anyone else using the API. They're edge-cached for an hour, keyed by URL.
 - **Versioning:** everything is under `/v1`, changes are additive only, and `/health` reports `apiVersion`.

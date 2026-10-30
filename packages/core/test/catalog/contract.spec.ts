@@ -9,6 +9,7 @@ import {
   errorStatuses,
   pngBody,
   successBodySchemas,
+  syncBody,
   categoriesBodySchema,
   categoriesFileSchema,
   featuresBodySchema,
@@ -272,7 +273,8 @@ describe('every example, against the response schemas', () => {
     "%s is its endpoint's success body",
     (_name, { endpoint, status, body }) => {
       const schema = successBodySchemas[endpoint as keyof typeof successBodySchemas];
-      if (status === 304 || schema === pngBody) {
+      // Bytes (an icon, a sealed copy) aren't shown in the examples.
+      if (status === 304 || schema === pngBody || schema === syncBody) {
         expect(body).toBeNull();
       } else if (schema === calendarBody) {
         expect(body).toMatch(/^BEGIN:VCALENDAR\r\n[^]*\r\nEND:VCALENDAR\r\n$/);

@@ -16,6 +16,9 @@
   --ss-app-bg: #e4e4e4;
   --ss-card-bg: #ffffff;
   --ss-divider: #d0d0d0;
+  // A QR code stays dark on light in either theme, as cameras read it best (M10.9).
+  --ss-qr-ink: #000000;
+  --ss-qr-paper: #ffffff;
 
   // Each rank has a vivid fill (dots, chips, bars) and a text shade (≥ 4.5:1 on white cards). The
   // text shades are tuned one by one for contrast, so they stay hex values rather than a formula.

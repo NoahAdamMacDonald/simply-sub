@@ -5,6 +5,7 @@ import {
   errorBodySchema,
   pngBody,
   successBodySchemas,
+  syncBody,
   type CalendarFeed,
 } from '@simply-sub/core';
 import { env } from 'cloudflare:workers';
@@ -26,14 +27,21 @@ import { catalogAssets, catalogSnapshot, seedCatalog } from './seeded-catalog';
 //
 // The Worker runs on the real catalog in data/, built and seeded under the examples' catalog version, with the
 // static files data:build writes. Frankfurter and the icon services are stand-ins; a few examples need them in a
-// particular state (setups), and the live calendar's the example's feed set. The examples' prices and other values are
-// illustrative, so a success body is held to its schema and its meta's keys, not to the example's values; a calendar
-// file, written from the feed set, is held to the example's text.
+// particular state (setups), the live calendar's the example's feed set and sync's its chain. The examples' prices and
+// other values are illustrative, so a success body is held to its schema and its meta's keys, not to the example's
+// values; a calendar file, written from the feed set, is held to the example's text, and a sealed copy to its bytes.
 
 interface Example {
   title: string;
-  request: { method: string; url: string; headers?: Record<string, string>; body?: unknown };
-  response: { status: number; headers: Record<string, string>; body: unknown };
+  request: {
+    method: string;
+    url: string;
+    headers?: Record<string, string>;
+    body?: unknown;
+    /** A body of bytes: a sealed sync copy. */
+    bodyBase64?: string;
+  };
+  response: { status: number; headers: Record<string, string>; body: unknown; bodyBase64?: string };
 }
 interface Endpoint {
   phase?: number;
@@ -66,6 +74,8 @@ interface Setup {
   duckduckgo?: Uint8Array<ArrayBuffer>;
   /** POST /cal's example's feed set is stored, as it made it. */
   feedSet?: true;
+  /** GET /sync/:chain's example's chain is stored, at version 3. */
+  syncChain?: true;
 }
 
 /** The state an example needs, by its title. */
@@ -78,7 +88,33 @@ const setups: Record<string, Setup> = {
   'Change a feed set': { feedSet: true },
   'Wrong manage key': { feedSet: true },
   'Revoke a feed set': { feedSet: true },
+  "Read the chain's copy": { syncChain: true },
+  'Unchanged since this device read it': { syncChain: true },
+  'Wrong auth secret': { syncChain: true },
+  'Replace the copy after reading version 3': { syncChain: true },
+  'Another device wrote first': { syncChain: true },
+  'Start a chain that already exists': { syncChain: true },
+  'Delete the synced copy': { syncChain: true },
 };
+
+/** Stores the chain GET /sync/:chain's example reads, at version 3, with the example's sealed copy. */
+async function storeExampleChain(): Promise<void> {
+  const { request, response } = contract.endpoints['GET /sync/:chain']
+    .examples[0] as unknown as Example;
+  const copy = response.bodyBase64 ?? '';
+  await env.USER_DB.prepare(
+    `INSERT INTO sync_chains (id, secret_hash, version, copy, size, updated_at, expires_on)
+     VALUES (?, ?, 3, ?, ?, '2026-10-29T18:20:00Z', ?)`,
+  )
+    .bind(
+      new URL(request.url).pathname.split('/').at(-1),
+      await secretHash((request.headers?.['Authorization'] ?? '').replace(/^Bearer /, '')),
+      copy,
+      atob(copy).length,
+      addDays(utcDay(new Date()), 180),
+    )
+    .run();
+}
 
 /**
  * Stores the feed set POST /cal's example made, under its id, manage key and tokens, at the time the GET example's
@@ -172,6 +208,7 @@ beforeEach(async () => {
   await env.USER_DB.batch([
     env.USER_DB.prepare('DELETE FROM cal_feeds'),
     env.USER_DB.prepare('DELETE FROM cal_sets'),
+    env.USER_DB.prepare('DELETE FROM sync_chains'),
   ]);
 });
 
@@ -220,12 +257,18 @@ describe('every example of a built endpoint, sent to the Worker', () => {
     if (setup.feedSet) {
       await storeExampleFeedSet();
     }
+    if (setup.syncChain) {
+      await storeExampleChain();
+    }
 
     const answer = await app.fetch(
       new Request(request.url, {
         method: request.method,
         headers: request.headers,
         ...(request.body !== undefined && { body: JSON.stringify(withoutNotes(request.body)) }),
+        ...(request.bodyBase64 !== undefined && {
+          body: Uint8Array.from(atob(request.bodyBase64), (char) => char.charCodeAt(0)),
+        }),
       }),
       { ...env, ASSETS: assets },
     );
@@ -258,6 +301,9 @@ describe('every example of a built endpoint, sent to the Worker', () => {
       expect(body).toEqual(withoutNotes(response.body));
     } else if (schema === calendarBody) {
       expect(await answer.text()).toBe(response.body);
+    } else if (schema === syncBody) {
+      const bytes = new Uint8Array(await answer.arrayBuffer());
+      expect(btoa(String.fromCharCode(...bytes))).toBe(response.bodyBase64);
     } else if (schema === pngBody) {
       expect((await answer.arrayBuffer()).byteLength).toBeGreaterThan(0);
     } else {

@@ -21,6 +21,9 @@ import {
 import { firstValueFrom } from 'rxjs';
 import { catalogDate } from '../../core/catalog/catalog-dates';
 import { CatalogStore, type CatalogCheckOutcome } from '../../core/catalog/catalog-store';
+import { AppUpdates, type AppCheckOutcome } from '../../core/pwa/app-updates';
+import { appVersion } from '../../core/pwa/app-version';
+import { installOffer, installedHere } from '../../core/pwa/install-offer';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { AppLockRepository } from '../../core/storage/app-lock-repository';
 import { LiveCalendarRepository } from '../../core/storage/live-calendar-repository';
@@ -34,6 +37,7 @@ import { PageHeader } from '../../shared/page-header/page-header';
 import { BudgetSetting } from './budget-setting';
 import { LocationDialog } from './location-dialog';
 import { percentText, placeSummary } from './place-names';
+import { SyncSetting } from './sync-setting';
 import { TagsSetting } from './tags-setting';
 
 /** What [Check for updates] found. */
@@ -44,9 +48,18 @@ const checkMessages: Record<CatalogCheckOutcome, string> = {
   failed: "Couldn't check for updates. Try again later.",
 };
 
+/** What the App group's [Check for updates] found (M10.6). */
+const appCheckMessages: Record<AppCheckOutcome, string> = {
+  current: 'You have the latest version.',
+  ready: 'A new version is ready: reload to use it.',
+  offline: "You're offline. Try again when you're back online.",
+  failed: "Couldn't check for updates. Try again later.",
+};
+
 /**
  * Settings (PROJECT-PLAN P13): budgets, custom tags (M6.11), appearance, where the user is (📍), Search's start, Your
- * data (backups and Delete all data, M6.9), Security (the app lock, M6.10) and the catalog's version.
+ * data (sync between devices, M10.9; backups and Delete all data, M6.9), Security (the app lock, M6.10), the catalog's
+ * version, and the App: its install and its version (M10.6).
  */
 @Component({
   selector: 'ss-settings-page',
@@ -63,6 +76,7 @@ const checkMessages: Record<CatalogCheckOutcome, string> = {
     MatRadioGroup,
     MatSelect,
     PageHeader,
+    SyncSetting,
     TagsSetting,
   ],
   templateUrl: './settings-page.html',
@@ -78,6 +92,7 @@ export class SettingsPage {
   private readonly lock = inject(AppLockRepository);
   private readonly storage = inject(StorageService);
   private readonly liveCalendar = inject(LiveCalendarRepository);
+  private readonly appUpdates = inject(AppUpdates);
   private readonly injector = inject(Injector);
 
   protected readonly saved = this.settings.saved;
@@ -133,6 +148,41 @@ export class SettingsPage {
   /** What the last [Check for updates] found: only the user's own checks, not the automatic ones. */
   protected readonly checkMessage = signal('');
 
+  /**
+   * The App group (M10.6): Install, unless this is the installed app (iOS's home screen apps say so their own way), and
+   * the version with its own check.
+   */
+  protected readonly runsInstalled =
+    matchMedia('(display-mode: standalone)').matches ||
+    (navigator as { standalone?: boolean }).standalone === true;
+  protected readonly installAvailable = computed(() => installOffer() !== undefined);
+  protected readonly installedHere = installedHere.asReadonly();
+  protected readonly updatesAvailable = this.appUpdates.available;
+  private readonly appChecked = signal('');
+  /** What the last check found; once a new version is ready, by this check or the worker's own, that it's ready. */
+  protected readonly appCheckMessage = computed(() =>
+    this.appChecked() !== '' && this.appUpdates.ready()
+      ? appCheckMessages.ready
+      : this.appChecked(),
+  );
+  /** "Version fd54aac, built Oct 29, 2026"; a development build has no version. */
+  protected readonly versionLine = appVersion
+    ? `${appVersion.commit ? `Version ${appVersion.commit}, built` : 'Built'} ${dateText(appVersion.builtOn)}`
+    : 'A development build';
+
+  /** The browser's install dialog, which an offer shows once; installing it fires appinstalled. */
+  protected install(): void {
+    const offer = installOffer();
+    if (!offer) return;
+    installOffer.set(undefined);
+    void offer.prompt();
+  }
+
+  protected async checkForAppUpdates(): Promise<void> {
+    this.appChecked.set('Checking for updates…');
+    this.appChecked.set(appCheckMessages[await this.appUpdates.check()]);
+  }
+
   /** Security: whether the app lock is on, and Lock after. */
   protected readonly lockOn = computed(() => this.saved()?.appLock !== undefined);
   protected readonly idleChoice = computed(() => {
@@ -176,11 +226,20 @@ export class SettingsPage {
       id: 'data',
       name: 'Your data',
       sections: [
+        { id: 'sync', name: 'Sync between devices' },
         { id: 'backups', name: 'Backups' },
         { id: 'lock', name: 'App lock' },
         { id: 'live-calendar', name: 'Live calendar' },
         { id: 'catalog', name: 'Catalog' },
         { id: 'delete', name: 'Delete all data' },
+      ],
+    },
+    {
+      id: 'app',
+      name: 'App',
+      sections: [
+        ...(this.runsInstalled ? [] : [{ id: 'install', name: 'Install' }]),
+        { id: 'version', name: 'Version' },
       ],
     },
   ];

@@ -3,7 +3,7 @@ import { IDBFactory, IDBKeyRange } from 'fake-indexeddb';
 import { createUserDatabase, databaseName } from './db';
 
 describe('createUserDatabase', () => {
-  it("upgrades a version 1 database to version 4 and keeps what's stored", async () => {
+  it("upgrades a version 1 database to version 5 and keeps what's stored", async () => {
     const indexedDB = new IDBFactory();
     // Version 1 as M4.1 shipped it.
     const v1 = new Dexie(databaseName, { indexedDB, IDBKeyRange });
@@ -26,7 +26,7 @@ describe('createUserDatabase', () => {
 
     const db = createUserDatabase({ indexedDB, IDBKeyRange });
     await db.open();
-    expect(db.verno).toBe(4);
+    expect(db.verno).toBe(5);
     expect(await db.table('settings').get('settings')).toEqual({ key: 'settings', theme: 'dark' });
     await db.table('fxRates').put({ key: 'fx' });
     expect(await db.table('fxRates').count()).toBe(1);
