@@ -545,6 +545,12 @@ scroll; Settings' end above the indicator; Search's bar pinned below the top bar
 button; and a browser tab with no insets as before. Edge can't show iOS's own bug (its `vh` counting the status bar):
 the owner checks that on a preview link.
 
+`check-m10-merge-tags.cjs` (M10.24, the feedback after M10) checks Settings' Custom tags on `ng serve` for a Canadian
+in Alberta (base URL ending in `/`), with Family, Work and family written to IndexedDB and Netflix Standard tagged
+family, in both themes at both widths, keyboard only: the note under family alone, Merge into it asking first with
+focus on Merge, Escape keeping both, then Merge moving the subscription to Family, deleting family and putting focus on
+Family's ✎, with axe on the note and the question and no horizontal scroll.
+
 `check-m10-menus-snackbars.cjs` (M10.19, the feedback after M10, part 2) checks, on `ng serve` for a Canadian in
 Alberta (base URL ending in `/`), in both themes at 360 px (as the Home Screen app: CDP's safe areas, the display mode
 standalone and touch, as `check-home-screen-app.cjs` sets them) and 1280 px: the first-run dialog's Province, opened by

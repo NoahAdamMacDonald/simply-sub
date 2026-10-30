@@ -10,8 +10,11 @@ import {
 } from '@angular/core';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { tagColorName, type Tag } from '@simply-sub/core';
+import { namesakes, tagColorName, type Tag } from '@simply-sub/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TagsRepository } from '../../core/storage/tags-repository';
+import { ConfirmService } from '../../shared/confirm/confirm-service';
+import { openSnack, snackMillis } from '../../shared/snack/snack';
 import { TagDeleter } from '../../shared/tags/tag-deleter';
 import { TagEditor, type TagEditorFocus } from './tag-editor';
 
@@ -32,8 +35,9 @@ const foldAfter = 6;
 
 /**
  * Custom tags on Settings (P13, M6.11): a row per tag with its colour, which opens its palette, its name, ✎ to rename
- * it in place, and ✕ to delete it, asking first when subscriptions use it; then ⊕ for a new tag, in edit mode. The
- * item dialog's tag picker creates and deletes tags too, so every page follows the repository live.
+ * it in place, and ✕ to delete it, asking first when subscriptions use it; then ⊕ for a new tag, in edit mode. A tag
+ * with the name of one before it (two devices' tags, joined by a merge or sync) says so, with Merge into it (M10.24).
+ * The item dialog's tag picker creates and deletes tags too, so every page follows the repository live.
  */
 @Component({
   selector: 'ss-tags-setting',
@@ -44,6 +48,8 @@ const foldAfter = 6;
 export class TagsSetting {
   private readonly tags = inject(TagsRepository);
   private readonly deleter = inject(TagDeleter);
+  private readonly confirmer = inject(ConfirmService);
+  private readonly snackBar = inject(MatSnackBar);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly injector = inject(Injector);
 
@@ -61,6 +67,8 @@ export class TagsSetting {
   protected readonly editing = signal<Editing | undefined>(undefined);
   private readonly pendingFocus = signal<PendingFocus | undefined>(undefined);
   protected readonly colourName = tagColorName;
+  /** Each tag with the name of one before it, and that one (M10.24). */
+  protected readonly namesakes = computed(() => namesakes(this.records()));
 
   constructor() {
     effect(() => {
@@ -98,6 +106,26 @@ export class TagsSetting {
     this.pendingFocus.set({
       ready: () => true,
       selector: rowButton(id, focus === 'name' ? 'rename' : 'swatch'),
+    });
+  }
+
+  /**
+   * Merge into it (M10.24): after asking, the tag's subscriptions get the first tag of its name instead, and it's
+   * deleted. Focus goes to that tag's ✎.
+   */
+  protected async merge(tag: Tag, into: Tag): Promise<void> {
+    const count = await this.tags.usage(tag.id);
+    const confirmed = await this.confirmer.confirm({
+      title: `Merge the two “${into.name}” tags?`,
+      message: `${count === 1 ? 'Its 1 subscription gets' : `Its ${count} subscriptions get`} the first “${into.name}” tag, in its colour, and this one is deleted.`,
+      confirmText: 'Merge',
+    });
+    if (!confirmed) return;
+    await this.tags.mergeInto(tag.id, into.id);
+    openSnack(this.snackBar, `Merged into ${into.name}`, undefined, { duration: snackMillis });
+    this.pendingFocus.set({
+      ready: (shown) => !shown.some((candidate) => candidate.id === tag.id),
+      selector: rowButton(into.id, 'rename'),
     });
   }
 

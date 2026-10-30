@@ -3010,11 +3010,7 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 ## 14. Open questions
 
 **Still open**
-- **Two tags of one name after a merge (M10.18):** tags must have names of their own (P13), but a backup's Merge
-  and sync join records by id, so two devices that each made a Family tag before they synced end with two. Nothing
-  breaks: each item keeps its own tag, and the picker takes the first of them for a name typed. Folding them when
-  they merge would move one's items onto the other and delete it, which sync would then send like any change, and
-  could undo an edit another device made to one of those items at the same time. Asked of the owner.
+None.
 
 **Resolved (2026-10-30, the feedback after M10, part 2)**
 The owner's nine points after M10, and two more while they were worked on, a task row each in PROJECT-PLAN
@@ -3091,6 +3087,12 @@ The owner's nine points after M10, and two more while they were worked on, a tas
 - **Budgets on the Lists overview (M10.23):** the owner asked for every list's bars together and the budget warnings
   there, as Home and List view have them. They're Home's own (MetricsService's `global`): the same totals, and the same
   warnings, so a dismissal holds on both pages.
+- **Two tags of one name (M10.18, M10.24, the owner's choice):** tags must have names of their own (P13), but a
+  backup's Merge and sync join records by id, so two devices that each made a Family tag before they synced end with
+  two. Folding them as they merge would move one's subscriptions onto the other by itself, which sync would send like
+  any change and could undo an edit another device made to one of them meanwhile. So nothing merges by itself:
+  Settings' Custom tags marks the later of two tags with one name, and its Merge into it, after asking, moves its
+  subscriptions and drafts to the first and deletes it, in one transaction.
 - **Focus (M10.14):** Join opens on Scan the QR code, its first control, so a phone's keyboard doesn't cover it;
   the words are a Tab on. The scanner takes the button's place and focus with it, onto Stop scanning, and gives it back.
 - **The Proton test feed (M10.2):** deleted from the user database on 2026-10-30 with the owner's OK. Proton Calendar

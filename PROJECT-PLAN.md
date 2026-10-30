@@ -283,6 +283,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.21 | Live calendars sealed at rest (added 2026-10-30, the feedback after M10): each feed's calendar file gzipped and sealed with a key derived from its token (HKDF-SHA256 → AES-256-GCM, bound to its row), and the hash of what it was made from keyed by the token (HMAC), so the user database holds no title, amount or date; a GET finds the row by the token's SHA-256 and answers a 304 before opening anything; a feed stored before is served as it was and sealed by the next GET or PUT that brings its token (migration `0006_sealed_feeds.sql`; BLUEPRINT §11.3, §14) | `cal_feeds` holds no calendar's words, names or colours after POST and PUT; a sealed file opens only with its token and under its row; a plain feed is served, then sealed with a new ETag, by a fetch or the next PUT, and left plain when the day's writes are at their cap |
 | M10.22 | Category starts empty (added 2026-10-30, the feedback after M10): Search's Category is empty while it's All, its label in the field as Features' is, and "All" its placeholder once it's focused, so a category typed starts at once rather than after "All"; All is still the list's first choice (`ss-choice-field`'s `placeholder`; P8) | Category shows nothing while it's All; Tab to it and "vp" typed at once narrows the list to VPN; picking All empties it again |
 | M10.23 | Budgets on the Lists overview (added 2026-10-30, the feedback after M10): every list's budget warnings above the cards, as Home's (one dismissal for both), and every list's This month and This year bars together, as Home's Budgets card has them, on the right above Types and Features from 960 px, as List view has its own, and above the cards under it (P3) | With two lists over the monthly budget together, the overview warns of it, and its bars show both lists' totals beside the cards; dismissed here, the warning is gone from Home too |
+| M10.24 | Merge tags of one name (added 2026-10-30, the feedback after M10, the owner's choice): a backup's Merge and sync join tags by id, so two devices' Family tags meet as two; Settings' Custom tags says of the later one "Another tag is called Family." with Merge into it, which asks first, then gives its subscriptions and drafts the first tag and deletes it in one transaction (core's `namesakes` and `withTagMerged`, `TagsRepository.mergeInto`). Nothing merges by itself, so no device's edit is overwritten (P13; BLUEPRINT §14) | Two tags called Family show the note on the later one; Merge into it leaves one Family on every subscription that had either |
 
 #### M10 specs
 
@@ -2052,6 +2053,11 @@ Security, Catalog, and Delete all data, folded under its summary until opened, i
 this page" links each group and its sections: a sticky side column from 960 px, and a chip for each group, wrapping,
 above them on a phone. A link moves focus to its heading, below the top bar. A long list of tags folds after six, with
 "Show all 14 tags" and "Show fewer".
+
+**Since the feedback after M10 (M10.24):** two tags of one name, in any case, which a backup's Merge or sync can leave
+(two devices that each made Family), show a line under the later one: "Another tag is called Family." with
+**Merge into it**. It asks first ("Merge the two “Family” tags?", saying how many subscriptions move), then its
+subscriptions, and lists' unsaved edits, take the first tag in its colour, and it's deleted; focus goes to that tag's ✎.
 
 **Acceptance**
 - [ ] Budgets and tags persist and update every page live

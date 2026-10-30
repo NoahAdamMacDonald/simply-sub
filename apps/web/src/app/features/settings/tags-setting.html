@@ -44,6 +44,21 @@
                 <mat-icon>close</mat-icon>
               </button>
             </div>
+            <!-- Two tags of one name, from two devices (M10.24): this one can join the first. -->
+            @if (namesakes().get(tag.id); as first) {
+              <p class="namesake" [id]="'namesake-' + tag.id">
+                Another tag is called {{ first.name }}.
+                <button
+                  matButton
+                  type="button"
+                  class="merge"
+                  [attr.aria-describedby]="'namesake-' + tag.id"
+                  (click)="merge(tag, first)"
+                >
+                  Merge into it
+                </button>
+              </p>
+            }
           }
         </li>
       }
