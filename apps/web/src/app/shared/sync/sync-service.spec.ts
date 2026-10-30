@@ -7,7 +7,9 @@ import {
   type SyncCopy,
 } from '@simply-sub/core';
 import { openCopy, sealCopy, syncKeys, type SyncKeys } from '../../core/crypto/sync-crypto';
+import { AppLockRepository } from '../../core/storage/app-lock-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
+import { SettingsRepository } from '../../core/storage/settings-repository';
 import {
   deleteRows,
   plantRows,
@@ -16,6 +18,7 @@ import {
   until,
   type TestStorage,
 } from '../../core/storage/storage.testing';
+import { StorageService } from '../../core/storage/storage-service';
 import { SyncRepository } from '../../core/storage/sync-repository';
 import { SYNC_TIMING, SyncService } from './sync-service';
 import { FakeSyncServer } from './sync.testing';
@@ -35,6 +38,8 @@ const settings: Settings = {
 
 const seed = Uint8Array.from({ length: 32 }, (_, index) => index);
 const otherDevice = { id: '0192f1d0-0000-7000-8000-00000000000b', name: 'Phone' };
+/** setTimeout before a spec fakes it. */
+const realTimeout = globalThis.setTimeout;
 
 describe('SyncService', () => {
   let storage: TestStorage;
@@ -50,7 +55,7 @@ describe('SyncService', () => {
     TestBed.configureTestingModule({
       providers: [
         storage.providers,
-        { provide: SYNC_TIMING, useValue: { settleMs: 0, pollMs: 60_000 } },
+        { provide: SYNC_TIMING, useValue: { settleMs: 0, pollMs: 10_000, pollMaxMs: 300_000 } },
       ],
     });
     service = TestBed.inject(SyncService);
@@ -267,6 +272,198 @@ describe('SyncService', () => {
             .join() === 'Shared',
       );
       expect((await chainCopy()).data.lists.map((list) => list.name)).toEqual(['Shared']);
+    });
+  });
+
+  describe('checking for the other devices’ changes (M10.26)', () => {
+    beforeEach(async () => {
+      await turnOn();
+      vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+    });
+
+    afterEach(() => {
+      vi.useRealTimers();
+      Reflect.deleteProperty(document, 'visibilityState');
+    });
+
+    /** Each read of the chain is a check: a Worker request. */
+    const checks = () => server.requests.filter((request) => request.method === 'GET').length;
+
+    /** Change detection, and Dexie's live queries, which wait for a setTimeout of 0. */
+    function tick(): void {
+      vi.advanceTimersByTime(0);
+      TestBed.tick();
+    }
+
+    /** Waits on real time, since vi.waitFor (and so `until`) would move the fake clock the checks wait on. */
+    async function soon(condition: () => boolean): Promise<void> {
+      for (let tries = 0; tries < 1000; tries++) {
+        tick();
+        if (condition()) return;
+        await new Promise((resolve) => realTimeout(resolve, 1));
+      }
+      throw new Error('Not yet');
+    }
+
+    /** Long enough on real time for a sync something started to have made its request. */
+    async function pause(): Promise<void> {
+      for (let tries = 0; tries < 10; tries++) {
+        tick();
+        await new Promise((resolve) => realTimeout(resolve, 5));
+      }
+    }
+
+    /** `count` checks made, and none under way. */
+    function checked(count: number): () => boolean {
+      return () => checks() === count && !service.syncing();
+    }
+
+    /** Starts syncing by itself, as the background does, and waits for the start's sync and the tables' watches. */
+    async function start(): Promise<void> {
+      const before = checks();
+      service.start();
+      await soon(checked(before + 1));
+      await pause();
+    }
+
+    /** The next check comes `ms` from now, and not before. */
+    async function nextCheckIn(ms: number): Promise<void> {
+      const before = checks();
+      vi.advanceTimersByTime(ms - 1);
+      await pause();
+      expect(checks()).toBe(before);
+      vi.advanceTimersByTime(1);
+      await soon(checked(before + 1));
+    }
+
+    async function phoneJoins(): Promise<void> {
+      await otherDeviceWrites((copy) => ({
+        ...copy,
+        devices: [...copy.devices, { ...otherDevice, syncedAt: '2026-10-26T10:00:00.000Z' }],
+      }));
+    }
+
+    function showTab(shown: boolean): void {
+      Object.defineProperty(document, 'visibilityState', {
+        configurable: true,
+        value: shown ? 'visible' : 'hidden',
+      });
+      document.dispatchEvent(new Event('visibilitychange'));
+    }
+
+    it('waits 10 s, then twice as long after each check while nothing happens, up to 5 minutes', async () => {
+      await phoneJoins();
+      await start();
+      for (const seconds of [10, 20, 40, 80, 160, 300, 300]) await nextCheckIn(seconds * 1000);
+    });
+
+    it('checks 10 s after a press, a key or focus, which never put off a check due sooner', async () => {
+      await phoneJoins();
+      await start();
+      await nextCheckIn(10_000);
+      for (const used of [
+        () => document.body.dispatchEvent(new Event('pointerdown', { bubbles: true })),
+        () => document.body.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true })),
+        () => window.dispatchEvent(new FocusEvent('focus')),
+      ]) {
+        await nextCheckIn(20_000);
+        // The wait is 40 s now: in use, it's 10 again, from the first use, then 20.
+        vi.advanceTimersByTime(5_000);
+        used();
+        vi.advanceTimersByTime(5_000);
+        used();
+        await nextCheckIn(5_000);
+      }
+    });
+
+    it('checks at once when the tab is shown again, then 10 s on, and never while it’s hidden', async () => {
+      await phoneJoins();
+      await start();
+      await nextCheckIn(10_000);
+      showTab(false);
+      vi.advanceTimersByTime(3_600_000);
+      await pause();
+      const hidden = checks();
+
+      showTab(true);
+      await soon(checked(hidden + 1));
+      await nextCheckIn(10_000);
+    });
+
+    it('checks 10 s after a change here, or a merge that took something in', async () => {
+      await phoneJoins();
+      await start();
+      await nextCheckIn(10_000);
+      await nextCheckIn(20_000);
+
+      // Sent once it settles (settleMs 0 here), with the next check 10 s on.
+      const before = checks();
+      await lists().create({ name: 'Mine' });
+      await soon(checked(before + 1));
+      await nextCheckIn(10_000);
+      await nextCheckIn(20_000);
+
+      await otherDeviceWrites((copy) => ({
+        ...copy,
+        data: {
+          ...copy.data,
+          lists: [...copy.data.lists, newList('Family', '2026-10-26T10:00:00.000Z')],
+        },
+      }));
+      const merged = checks();
+      vi.advanceTimersByTime(40_000);
+      // What the merge wrote is a change too: settled, it makes one more check.
+      await soon(() => lists().records().length === 3 && checked(merged + 2)());
+      await nextCheckIn(10_000);
+    });
+
+    it('never checks while this device is the chain’s only one, and starts once a second is seen', async () => {
+      await start();
+      vi.advanceTimersByTime(3_600_000);
+      await pause();
+      expect(checks()).toBe(2);
+
+      // The phone is seen at this device's next sync: back online here, shown again, a change, or Sync now.
+      await phoneJoins();
+      window.dispatchEvent(new Event('online'));
+      await soon(checked(3));
+      expect(service.devices().map((device) => device.name)).toContain('Phone');
+      await nextCheckIn(10_000);
+    });
+
+    it('makes no request for this device’s own settings: the theme, the Calendar’s lists, the lock', async () => {
+      await start();
+      const settings = TestBed.inject(SettingsRepository);
+      const list = await lists().create({ name: 'Mine' });
+      await soon(checked(3));
+      const before = server.requests.length;
+
+      await settings.update({ theme: 'light' });
+      await settings.update({ calendarHiddenLists: [list.id] });
+      await TestBed.inject(AppLockRepository).turnOn('correct horse battery', 5);
+      await pause();
+      expect(server.requests.length).toBe(before);
+
+      // A setting every device shares does.
+      await settings.update({ monthlyBudget: 250 });
+      await soon(checked(4));
+      expect((await chainCopy()).settings).toMatchObject({ monthlyBudget: 250 });
+    });
+
+    it('syncs a change made after the app locked and unlocked', async () => {
+      await start();
+      const storage = TestBed.inject(StorageService);
+      const lock = TestBed.inject(AppLockRepository);
+      await lock.turnOn('correct horse battery', 5);
+      storage.lockNow();
+      await soon(() => storage.lock() === 'locked');
+      expect(await lock.unlock('correct horse battery')).toBe(true);
+      // Unlocked, it syncs, as on start.
+      await soon(checked(3));
+
+      await lists().create({ name: 'Mine' });
+      await soon(checked(4));
+      expect((await chainCopy()).data.lists.map((list) => list.name)).toContain('Mine');
     });
   });
 

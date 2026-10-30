@@ -36,9 +36,16 @@ import { StorageService } from '../../core/storage/storage-service';
 import { SyncRepository } from '../../core/storage/sync-repository';
 import { SyncCallError, deleteChain, readChain, writeChain } from './sync-client';
 
-/** How long a change waits for the next before a sync, and how often a shown tab asks for the others'. Specs set 0. */
-export const SYNC_TIMING = new InjectionToken<{ settleMs: number; pollMs: number }>('SYNC_TIMING', {
-  factory: () => ({ settleMs: 10_000, pollMs: 10_000 }),
+/**
+ * How long a change waits for the next before a sync, and how long a shown tab waits to ask for the other devices'
+ * changes: `pollMs` after activity, doubling while nothing happens up to `pollMaxMs` (M10.26). Specs set them.
+ */
+export const SYNC_TIMING = new InjectionToken<{
+  settleMs: number;
+  pollMs: number;
+  pollMaxMs: number;
+}>('SYNC_TIMING', {
+  factory: () => ({ settleMs: 10_000, pollMs: 10_000, pollMaxMs: 300_000 }),
 });
 /** One tab at a time syncs. */
 const syncLock = 'simply-sub:sync';
@@ -58,10 +65,13 @@ export type JoinPreview =
 
 /**
  * Device sync in the app (PROJECT-PLAN P13, M10.9; BLUEPRINT §11.4). While sync is on, and the app unlocked, it syncs
- * on start, when back online, when a tab is shown again, 10 s after a change to a synced table, every 10 s while shown,
- * and on Sync now, one tab at a time: it reads the chain (If-None-Match, so an unchanged copy costs a 304), merges it
- * with this device's data (core's mergeSync), writes what it took in one transaction, and sends a new version when
- * this device has something newer (If-Match), reading and merging again if another device wrote first.
+ * on start, when back online, when a tab is shown again, 10 s after a change to a synced record or a shared setting,
+ * and on Sync now. While the chain has other devices and the tab is shown, it also checks for their changes 10 s after
+ * activity, waiting twice as long after each check while nothing happens, up to 5 minutes (M10.26). One tab at a
+ * time, it reads the chain (If-None-Match, so an unchanged copy costs a 304), merges it with this device's data
+ * (core's mergeSync), writes what it took in one transaction, and sends a new version when this device has something
+ * newer (If-Match), reading and merging again if another device wrote first. Each check is a Worker request, from the
+ * account's 100,000 a day (BLUEPRINT §7.1).
  */
 @Service()
 export class SyncService {
@@ -85,7 +95,10 @@ export class SyncService {
   private keys?: { seed: string; keys: SyncKeys };
   private readonly watching = new Subscription();
   private readonly started = signal(false);
-  private polling?: ReturnType<typeof setInterval>;
+  /** The next check for the other devices' changes, and how long it was set to wait. */
+  private polling?: { timer: ReturnType<typeof setTimeout>; wait: number };
+  /** How long the next check waits: pollMs after activity, twice the last while nothing happens. */
+  private wait = this.timing.pollMs;
   private readonly runOnce = oneAtATime(() => this.locked(() => this.run()));
 
   /** Whether syncing can go on by itself: on, unlocked, and not stopped by a problem. */
@@ -95,11 +108,15 @@ export class SyncService {
       this.record()?.problem === undefined &&
       this.storage.lock() !== 'locked',
   );
+  /** The chain has devices besides this one, as last read: none are known until the first sync after a reload. */
+  private readonly others = computed(() =>
+    this.devices().some((device) => device.id !== this.record()?.deviceId),
+  );
 
   constructor() {
     inject(DestroyRef).onDestroy(() => {
       this.watching.unsubscribe();
-      clearInterval(this.polling);
+      clearTimeout(this.polling?.timer);
     });
     // Once started, a sync each time syncing can go on by itself again: turned on, joined, unlocked.
     effect(() => {
@@ -115,36 +132,70 @@ export class SyncService {
   start(): void {
     if (untracked(this.started)) return;
     this.started.set(true);
+    const view = this.document.defaultView;
     const online = () => void this.sync();
     const shown = () => {
-      if (this.document.visibilityState === 'visible') void this.sync();
+      if (this.document.visibilityState === 'visible') {
+        this.wait = this.timing.pollMs;
+        void this.sync();
+      }
       this.poll();
     };
-    this.document.defaultView?.addEventListener('online', online);
+    const used = () => this.stir();
+    const quietly = { capture: true, passive: true };
+    view?.addEventListener('online', online);
+    view?.addEventListener('focus', used);
     this.document.addEventListener('visibilitychange', shown);
+    this.document.addEventListener('pointerdown', used, quietly);
+    this.document.addEventListener('keydown', used, quietly);
     this.watching.add(() => {
-      this.document.defaultView?.removeEventListener('online', online);
+      view?.removeEventListener('online', online);
+      view?.removeEventListener('focus', used);
       this.document.removeEventListener('visibilitychange', shown);
+      this.document.removeEventListener('pointerdown', used, quietly);
+      this.document.removeEventListener('keydown', used, quietly);
     });
     this.watching.add(
       this.repository
         .changes()
         .pipe(debounceTime(this.timing.settleMs))
-        .subscribe(() => void this.sync()),
+        .subscribe(() => {
+          this.wait = this.timing.pollMs;
+          void this.sync();
+        }),
     );
   }
 
-  /** Asks for the other devices' changes every 10 s while the tab is shown and syncing goes on by itself. */
+  /**
+   * Sets the next check for the other devices' changes, `wait` from now, while the tab is shown, syncing goes on by
+   * itself and the chain has other devices; else none. A check doubles the wait for the one after.
+   */
   private poll(): void {
-    clearInterval(this.polling);
+    clearTimeout(this.polling?.timer);
     this.polling = undefined;
     if (
       untracked(this.started) &&
       untracked(this.live) &&
+      untracked(this.others) &&
       this.document.visibilityState === 'visible'
     ) {
-      this.polling = setInterval(() => void this.sync(), this.timing.pollMs);
+      const wait = this.wait;
+      const timer = setTimeout(() => {
+        this.polling = undefined;
+        this.wait = Math.min(wait * 2, this.timing.pollMaxMs);
+        void this.sync();
+      }, wait);
+      this.polling = { timer, wait };
     }
+  }
+
+  /**
+   * Activity here (focus, a press, a key): the next check comes pollMs from now, unless it's due sooner. So however
+   * often they come, they move it at most once a check, and a device in use checks every 10 s.
+   */
+  private stir(): void {
+    this.wait = this.timing.pollMs;
+    if (this.polling && this.polling.wait > this.wait) this.poll();
   }
 
   /** Syncs now, unless sync is off, stopped, or locked; one already under way is followed by another. */
@@ -283,6 +334,9 @@ export class SyncService {
 
   /** One sync, as the class comment says. It never rejects: what went wrong is its outcome. */
   private async run(): Promise<SyncOutcome> {
+    // This run is the check: the next one waits from its end.
+    clearTimeout(this.polling?.timer);
+    this.polling = undefined;
     this.syncing.set(true);
     try {
       const outcome = await this.attempt();
@@ -299,6 +353,7 @@ export class SyncService {
       return snag;
     } finally {
       this.syncing.set(false);
+      this.poll();
     }
   }
 
@@ -340,6 +395,8 @@ export class SyncService {
       );
       if (Object.keys(merge.writes).length > 0 || merge.settings) {
         await this.repository.applyMerge(merge.writes, merge.settings);
+        // It took something in: the other devices are in use, so the next check comes soon.
+        this.wait = this.timing.pollMs;
       }
 
       let version = remote?.version;

@@ -3413,15 +3413,28 @@ The user's report after M10, as M8.7 (PROJECT-PLAN's row has it as built):
   `bodyBase64`.
 - **Sync in the app** (M10.9, `shared/sync/`): `SyncService`, started from `app.background.ts` once the `sync`
   record is readable (sync on, the app unlocked), syncs on start, when back online, when a tab is shown again, 10 s
-  after a change to a synced table or the settings (`SyncRepository.changes()`), every 10 s while the tab is shown, and
-  on Sync now, one tab at a time (a Web Lock). A run reads the chain with `If-None-Match` (a 304 when nothing changed),
-  opens and reads the copy, merges, writes what it took in one transaction, and sends a new version with `If-Match`,
-  reading and merging again up to three times if another device wrote first. The poll every 10 s, not 15, keeps "an
-  edit shows on the other device within 15 s" with a margin; each is a 304 costing one D1 row read. The devices'
-  list is the chain's, in memory: after a reload it fills in with the first sync, a moment later.
-  **Planned (M10.26):** no polling while this device is the chain's only one; with others, polling backs off from
-  10 s to 5 minutes while nothing happens and starts again at 10 s on any activity; and only synced records and the
-  shared settings start a sync (not the theme). Each check is a Worker request from the account's 100,000 a day.
+  after a change to a synced record or a shared setting (`SyncRepository.changes()`), and on Sync now, one tab at a
+  time (a Web Lock). A run reads the chain with `If-None-Match` (a 304 when nothing changed), opens and reads the copy,
+  merges, writes what it took in one transaction, and sends a new version with `If-Match`, reading and merging again up
+  to three times if another device wrote first. The devices' list is the chain's, in memory: after a reload it fills
+  in with the first sync, a moment later.
+- **Sync that waits** (M10.26): each check for the other devices' changes is a Worker request from the account's
+  100,000 a day (section 7.1), so they come only while they can find something:
+  - **Alone, none:** while the chain's devices as last read are this device only, nothing polls. Before the first
+    read after a reload they aren't known, and the start's sync reads them; a device that joins later is seen at this
+    one's next start, return, reconnection or change.
+  - **With others, a ladder:** one timer, set from the end of each sync while the tab is shown: 10 s, then twice as
+    long after each check it made while nothing happens, 5 minutes at most (`SYNC_TIMING`'s `pollMs` and
+    `pollMaxMs`). A change here and the tab shown sync at once and set it back to 10 s, as does a merge that took
+    something in. Focus, a pointer press or a key (listened for on the page, capturing and passive) bring the next
+    check to 10 s away unless it's due sooner, so however often they come they move it at most once a check. A device
+    in use checks every 10 s, so an edit shows on it within 15 s; an idle shown tab checks 5 times in its first 5
+    minutes, then 12 an hour; a hidden one never.
+  - **Shared changes only:** `changes()` watches each synced table's `updatedAt`s and the settings' shared time
+    (`sharedUpdatedAt`, or `updatedAt` for settings from before it, as the copy has it). The theme, the Calendar's
+    shown lists, Home's seen price changes and the app lock start nothing, nor does the lock sealing rows. Its watches
+    start again when the app unlocks: they end when it locks, and from M10.9 until this a change made after
+    unlocking started no sync (the 10 s poll hid it).
 - **The sync record** (M10.9, core's `user/sync-record.ts`, Dexie v5): the code (base64), this device's id and name
   (`defaultDeviceName` from the browser: "Edge on Windows"), the version last read or written, when it last synced,
   and what stopped sync (`gone`, `newer`, `unopenable`). The app lock seals it; backups and sync leave it out; Turn
