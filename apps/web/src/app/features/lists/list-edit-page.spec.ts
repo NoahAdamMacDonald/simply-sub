@@ -1215,7 +1215,7 @@ describe('ListEditPage', () => {
       expect((await draftItem(sams.id))?.billing).toEqual(ongoing);
       await until(
         () =>
-          document.querySelector('.mat-mdc-snack-bar-container')?.textContent?.trim() ===
+          document.querySelector('ss-snack .mat-mdc-snack-bar-label')?.textContent?.trim() ===
           "Saved Netflix Standard, and Sam's (Netflix Standard) no longer ends",
       );
     });

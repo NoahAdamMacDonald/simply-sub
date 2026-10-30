@@ -42,7 +42,9 @@ export class CatalogStatus {
 
   private async announce(): Promise<void> {
     // Loaded on first use, as GlobalErrorHandler does, so the snackbar stays out of the initial bundle.
-    const { MatSnackBar } = await import('@angular/material/snack-bar');
-    this.injector.get(MatSnackBar).open('Catalog updated', undefined, { duration: 5000 });
+    const { openSnack, snackMillis } = await import('../shared/snack/snack');
+    openSnack(this.injector, 'Catalog updated', undefined, {
+      duration: snackMillis,
+    });
   }
 }

@@ -28,9 +28,10 @@ describe('RejectedRecords', () => {
     vi.restoreAllMocks();
   });
 
-  /** Lets the snackbar load and render. */
+  /** Lets the snackbar load (Material's and the app's chunks) and render. */
   async function settle() {
     await TestBed.inject(ApplicationRef).whenStable();
+    await import('../../shared/snack/snack');
     await new Promise((resolve) => setTimeout(resolve));
   }
 
@@ -49,7 +50,7 @@ describe('RejectedRecords', () => {
   });
 
   it('tells the user once per session, until they dismiss it', async () => {
-    const open = vi.spyOn(TestBed.inject(MatSnackBar), 'open');
+    const open = vi.spyOn(TestBed.inject(MatSnackBar), 'openFromComponent');
     rejected.report([item]);
     await settle();
     rejected.report([tag]);
@@ -59,11 +60,11 @@ describe('RejectedRecords', () => {
     expect(container?.textContent).toContain(
       "Some saved data couldn't be read, so it's hidden. The rest is fine.",
     );
-    expect(container?.textContent).toContain('Dismiss');
+    expect(container?.querySelector('button[aria-label="Dismiss"]')).not.toBeNull();
   });
 
   it("logs a cached catalog file once, and doesn't tell the user: it's downloaded again", async () => {
-    const open = vi.spyOn(TestBed.inject(MatSnackBar), 'open');
+    const open = vi.spyOn(TestBed.inject(MatSnackBar), 'openFromComponent');
     const file: RejectedRecord = {
       table: 'catalogCache',
       key: 'CA',
@@ -92,7 +93,7 @@ describe('RejectedRecords', () => {
   });
 
   it('says nothing when there is nothing new', async () => {
-    const open = vi.spyOn(TestBed.inject(MatSnackBar), 'open');
+    const open = vi.spyOn(TestBed.inject(MatSnackBar), 'openFromComponent');
     rejected.report([]);
     await settle();
     expect(open).not.toHaveBeenCalled();

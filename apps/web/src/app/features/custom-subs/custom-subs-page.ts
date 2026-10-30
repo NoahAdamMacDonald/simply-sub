@@ -24,6 +24,7 @@ import { EmptyState } from '../../shared/empty-state/empty-state';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { ProviderIcon } from '../../shared/provider-icon/provider-icon';
 import { CustomSubEditor } from './custom-sub-editor';
+import { openSnack, snackMillis } from '../../shared/snack/snack';
 
 /** A custom subscription as its row shows it. */
 interface SubRow {
@@ -97,7 +98,7 @@ export class CustomSubsPage {
   protected async create(): Promise<void> {
     const result = await this.editor.open();
     if (!result) return;
-    this.snackBar.open(`Added ${result.name}`, undefined, { duration: 5000 });
+    openSnack(this.snackBar, `Added ${result.name}`, undefined, { duration: snackMillis });
     this.pendingFocus.set({
       ready: (rows) => rows.some((row) => row.sub.id === result.id),
       target: () => this.button(result.id, 'edit'),
@@ -107,7 +108,8 @@ export class CustomSubsPage {
   /** ✎: the editor for it. Focus goes back to ✎ as the dialog closes. */
   protected async edit(sub: CustomSubscription): Promise<void> {
     const result = await this.editor.open(sub);
-    if (result) this.snackBar.open(`Saved ${result.name}`, undefined, { duration: 5000 });
+    if (result)
+      openSnack(this.snackBar, `Saved ${result.name}`, undefined, { duration: snackMillis });
   }
 
   /**
@@ -130,7 +132,7 @@ export class CustomSubsPage {
     const index = rows.findIndex((candidate) => candidate.sub.id === sub.id);
     const next = rows[index + 1] ?? rows[index - 1];
     await this.repository.removeWithItems(sub.id);
-    this.snackBar.open(`Deleted ${sub.name}`, undefined, { duration: 5000 });
+    openSnack(this.snackBar, `Deleted ${sub.name}`, undefined, { duration: snackMillis });
     this.pendingFocus.set({
       ready: (shown) => !shown.some((candidate) => candidate.sub.id === sub.id),
       target: () =>

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { AppLockRepository } from '../core/storage/app-lock-repository';
 import { Logo } from './logo';
+import { openSnack, snackMillis } from '../shared/snack/snack';
 
 /** The backup dialogs' size, as Settings opens them. */
 const backupDialog = { maxWidth: 'min(480px, calc(100vw - 32px))', width: '480px' };
@@ -71,7 +72,7 @@ export class LockScreen {
         .afterClosed(),
     );
     if (!result) return;
-    this.snackBar.open('Imported the backup', undefined, { duration: 5000 });
+    openSnack(this.snackBar, 'Imported the backup', undefined, { duration: snackMillis });
     void this.router.navigateByUrl('/');
   }
 

@@ -3026,6 +3026,14 @@ The owner's nine points after M10, a task row each in PROJECT-PLAN ("added 2026-
 - **Joining on a new device (M10.15):** a device in its first run has no settings, which a join only updated, so Join
   starts them from the copy's shared settings with the device's theme (`joinedSettings`) and shows no Merge or Replace.
   The first-run dialog now also closes when settings are saved any other way.
+- **Menus and snackbars on a phone (M10.19):** an open Country, Province or Currency list stayed over the dialog on
+  the owner's iPhone: Material closes an autocomplete on a click elsewhere only once focus has left its field, and an
+  iPhone leaves focus in a field when a tap lands on something that can't take it. `ss-choice-field` now closes its
+  list on any press outside it, and when focus goes nowhere (the keyboard's Done), but not for a press on a choice.
+  Snackbars are the app's own component (`shared/snack`), since Material's has no way to close one with an action but
+  that action: ✕ beside it, Escape, focus back where it came from, time counted only while it isn't hovered or
+  focused, and the home indicator's inset below it. Its styles style Material's container too, so they're
+  unencapsulated and load with it, keeping the initial bundle at 499.42 kB.
 - **Focus (M10.14):** Join opens on Scan the QR code, its first control, so a phone's keyboard doesn't cover it;
   the words are a Tab on. The scanner takes the button's place and focus with it, onto Stop scanning, and gives it back.
 - **The Proton test feed (M10.2):** deleted from the user database on 2026-10-30 with the owner's OK. Proton Calendar

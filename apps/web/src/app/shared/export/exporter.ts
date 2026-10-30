@@ -39,7 +39,7 @@ export class Exporter {
 
   constructor() {
     // The snack bar says how an export went, even when a library can't load (offline): load it ahead, with the page.
-    import('@angular/material/snack-bar').catch(() => undefined);
+    import('../snack/snack').catch(() => undefined);
   }
 
   /** One list's file (P4). Resolves with its name, or nothing when it couldn't be made. */
@@ -135,7 +135,7 @@ export class Exporter {
 
   /** A snackbar, loaded with the first export's. */
   private async say(message: string): Promise<void> {
-    const { MatSnackBar } = await import('@angular/material/snack-bar');
-    this.injector.get(MatSnackBar).open(message, undefined, { duration: 5000 });
+    const { openSnack, snackMillis } = await import('../snack/snack');
+    openSnack(this.injector, message, undefined, { duration: snackMillis });
   }
 }
