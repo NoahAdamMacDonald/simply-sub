@@ -3,6 +3,7 @@ import * as z from 'zod';
 import contract from '../../../../docs/api-output-examples.json';
 import {
   bundleSchema,
+  calendarBody,
   catalogSnapshotSchema,
   errorBodySchema,
   errorStatuses,
@@ -273,6 +274,8 @@ describe('every example, against the response schemas', () => {
       const schema = successBodySchemas[endpoint as keyof typeof successBodySchemas];
       if (status === 304 || schema === pngBody) {
         expect(body).toBeNull();
+      } else if (schema === calendarBody) {
+        expect(body).toMatch(/^BEGIN:VCALENDAR\r\n[^]*\r\nEND:VCALENDAR\r\n$/);
       } else {
         expect(issues(schema, body)).toEqual([]);
       }

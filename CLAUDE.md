@@ -50,7 +50,10 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 - Catalog icons are static files: fetched once from each provider's site and committed, never fetched per view
   (cost, privacy, offline). Only custom subscriptions use `GET /icon` (BLUEPRINT §14).
 - Storage, all on Cloudflare: static files for the catalog and icons, D1 for the API's searches, KV for small values
-  that must survive (M2.5), R2 only when a trigger in BLUEPRINT §7.1 is reached.
+  that must survive (M2.5), R2 only when a trigger in BLUEPRINT §7.1 is reached. What users choose to send (M10's live
+  calendar feeds, sealed sync copies, price reports) goes in a D1 database of its own, `simply-sub-user`, through
+  `apps/api/src/writes.ts`' rules (BLUEPRINT §5.4): kept 180 days unused at most, secrets only as hashes, writes capped
+  under half of D1's daily quota.
 - Catalog growth is automated (discover → find URLs → AI extract → validate → PR). Humans only review PRs.
 - Business logic (optimizer, schedules, rewards, exporters) lives in `packages/core` as pure, tested functions.
 - Feature ids come from `data/features.yaml`. Never invent feature keys inline: new ones follow the feature-discovery
@@ -74,8 +77,9 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
   region's `data/catalog/<region>.json` or the full `data/catalog.json`, BLUEPRINT §6.3) and icons from static
   files. It keeps the files it downloaded in Dexie (`catalogCache`, one record per file, never merged) and checks
   `index.json`'s version on start (M4.3). No service worker before M10: Trusted Types block Angular's registration
-  (BLUEPRINT §14). It only calls the Worker for `/fx` and custom-subscription icons. D1 serves only the public API,
-  and a deploy writes only what changed (free plan: 100k rows written a day, BLUEPRINT §5.3). A change to the catalog
+  (BLUEPRINT §14). It only calls the Worker for `/fx` and custom-subscription icons (and, from M10, what the user
+  opts in to send). The catalog's D1 serves only the public API, and a deploy writes only what changed (free plan:
+  100k rows written a day for the account, BLUEPRINT §5.3). A change to the catalog
   tables or the derived columns bumps `seedFormat` in core, which makes the next deploy reseed in full.
 
 ## Git workflow

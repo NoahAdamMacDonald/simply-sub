@@ -196,7 +196,7 @@ describe('Exporter', () => {
     expect(text).not.toContain('Old');
   });
 
-  it('saves each subscription as a repeating all-day event, a plan billed on the 31st on each month’s last day (M7.12)', async () => {
+  it('saves each subscription as a repeating all-day event, a plan billed on the 31st on each month’s last day (M7.12, M10.2)', async () => {
     await exporter().exportPayments([work.id, family.id], 'ics');
     const [file] = downloads;
     expect(file.name).toBe('simply-sub-payments-2026-10-25.ics');
@@ -208,7 +208,8 @@ describe('Exporter', () => {
     expect(ics).toContain('DTSTART;VALUE=DATE:20261112\r\nDTEND;VALUE=DATE:20261113\r\n');
     expect(ics).toContain('RRULE:FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=12\r\n');
     expect(ics).toContain('SUMMARY:Renew Mullvad VPN: ≈ $94.16\r\n');
-    expect(ics).toContain('RRULE:FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=28,29,30,31;BYSETPOS=-1\r\n');
+    // In the one form Proton Calendar takes, which drops BYSETPOS without a weekday.
+    expect(ics).toContain('RRULE:FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=-1\r\n');
   });
 
   it('saves the payment schedule as JSON and as text too (M7.9)', async () => {

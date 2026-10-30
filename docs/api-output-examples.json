@@ -2193,11 +2193,10 @@
       ]
     },
     "POST /cal": {
-      "phase": 5,
-      "description": "Creates an opt-in live calendar feed. The app uploads a minimal schedule (titles and dates only) and gets an unguessable feed URL to subscribe to in Google, Apple or Proton Calendar. The server stores nothing else.",
+      "description": "Creates a live calendar's feed set (BLUEPRINT §11.3, M10.2): a calendar for everything, one for each tag chosen and one for payments without a tag, each at a URL of its own that Google, Apple or Proton Calendar subscribes to. The app sends each payment's title, day and repeat rule (in the forms core's repeatRule writes, which Proton Calendar takes) and each calendar's name and colour, nothing else. The answer's manageKey changes or revokes the set and is never shown again. A set is deleted 180 days after the app last writes it.",
       "examples": [
         {
-          "title": "Create a feed",
+          "title": "Create a feed set",
           "request": {
             "method": "POST",
             "url": "https://sub.simplely.ca/api/v1/cal",
@@ -2205,10 +2204,36 @@
               "Content-Type": "application/json"
             },
             "body": {
-              "name": "Simply Sub payments",
-              "events": [
-                { "uid": "0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d", "title": "Netflix — $18.99", "start": "2026-11-12", "rrule": "FREQ=MONTHLY;INTERVAL=1" },
-                { "uid": "0192f1c5-0a11-7e42-8b7c-1f2e3d4c5b6a", "title": "Renew Mullvad VPN — ≈ $7.53", "start": "2026-11-03", "rrule": "FREQ=MONTHLY;INTERVAL=1" }
+              "feeds": [
+                {
+                  "name": "Simply Sub",
+                  "events": [
+                    {
+                      "uid": "9f2c4e6a8b0d1f3e",
+                      "date": "2026-11-12",
+                      "title": "Netflix: $19.94",
+                      "rule": "FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=12"
+                    },
+                    {
+                      "uid": "3b5d7f9a1c2e4a6b",
+                      "date": "2027-01-20",
+                      "title": "Renew Mullvad VPN: €60.00",
+                      "rule": "FREQ=YEARLY;INTERVAL=1;BYMONTH=1;BYMONTHDAY=20"
+                    }
+                  ]
+                },
+                {
+                  "name": "Simply Sub: Family",
+                  "color": "#1E88E5",
+                  "events": [
+                    {
+                      "uid": "3b5d7f9a1c2e4a6b",
+                      "date": "2027-01-20",
+                      "title": "Renew Mullvad VPN: €60.00",
+                      "rule": "FREQ=YEARLY;INTERVAL=1;BYMONTH=1;BYMONTHDAY=20"
+                    }
+                  ]
+                }
               ]
             }
           },
@@ -2217,27 +2242,81 @@
             "headers": {
               "Content-Type": "application/json; charset=utf-8",
               "Cache-Control": "no-store",
-              "Location": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics"
+              "Location": "https://sub.simplely.ca/api/v1/cal/Qx3Lm8Rt5Vw2Yz7Bd4Gh1J"
             },
             "body": {
               "data": {
-                "token": "k7Qm2Zp9XvT4bN8cR1sW0a",
-                "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
-                "webcalUrl": "webcal://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
+                "id": "Qx3Lm8Rt5Vw2Yz7Bd4Gh1J",
                 "manageKey": "Jd8f2LqP0zXn5Vt7Bc3HyA",
-                "eventCount": 2
+                "feeds": [
+                  {
+                    "token": "k7Qm2Zp9XvT4bN8cR1sW0a",
+                    "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
+                    "webcalUrl": "webcal://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
+                    "eventCount": 2
+                  },
+                  {
+                    "token": "p4Ld8Wq2Zr6Ty1Uc5Ve9Xb",
+                    "url": "https://sub.simplely.ca/api/v1/cal/p4Ld8Wq2Zr6Ty1Uc5Ve9Xb.ics",
+                    "webcalUrl": "webcal://sub.simplely.ca/api/v1/cal/p4Ld8Wq2Zr6Ty1Uc5Ve9Xb.ics",
+                    "eventCount": 1
+                  }
+                ]
               },
-              "meta": {
-                "_note": "The app stores token and manageKey locally. manageKey is required to update (PUT) or revoke (DELETE) the feed, and is never shown again."
-              }
+              "meta": {}
+            },
+            "_note": "The id, the manage key and each token are new random values of 128 bits: the app keeps them on the device, sealed by the app lock when it is on, and the server keeps only their SHA-256 hashes."
+          }
+        },
+        {
+          "title": "A repeat rule that isn't one of the app's",
+          "request": {
+            "method": "POST",
+            "url": "https://sub.simplely.ca/api/v1/cal",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "feeds": [
+                {
+                  "name": "Simply Sub",
+                  "events": [
+                    {
+                      "uid": "9f2c4e6a8b0d1f3e",
+                      "date": "2026-11-30",
+                      "title": "Netflix: $19.94",
+                      "rule": "FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=28,29,30;BYSETPOS=-1"
+                    }
+                  ]
+                }
+              ]
             }
+          },
+          "response": {
+            "status": 400,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "bad_request",
+                "message": "Invalid body field 'feeds.0.events.0.rule'.",
+                "details": [
+                  {
+                    "path": "feeds.0.events.0.rule",
+                    "issue": "Use a repeat rule of the forms the app writes"
+                  }
+                ]
+              }
+            },
+            "_note": "Proton Calendar drops an event whose monthly rule lists several days."
           }
         }
       ]
     },
     "GET /cal/:token.ics": {
-      "phase": 5,
-      "description": "The iCalendar feed that calendar apps subscribe to.",
+      "description": "One calendar of a feed set, as calendar apps fetch it: an all-day event per payment that does not block time, each repeating by its rule, the calendar's name, its colour for Apple Calendar, and a hint to check again every 12 hours. Revalidated on every fetch (its ETag), so a change or a revoke shows at the app's next check; Proton Calendar checks every 4 to 16 hours. Limited per feed, 30 a minute, not per IP: calendar apps' servers fetch many users' feeds from one address.",
       "examples": [
         {
           "title": "Feed contents",
@@ -2249,10 +2328,29 @@
             "status": 200,
             "headers": {
               "Content-Type": "text/calendar; charset=utf-8",
-              "Cache-Control": "public, max-age=3600"
+              "Cache-Control": "no-cache",
+              "ETag": "\"7b1775337e5c2d13\""
             },
-            "body": "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Simply Sub//sub.simplely.ca//EN\r\nCALSCALE:GREGORIAN\r\nX-WR-CALNAME:Simply Sub payments\r\nBEGIN:VEVENT\r\nUID:0192f1c5-0a11-7e42-8b7c-1f2e3d4c5b6a-20261103@sub.simplely.ca\r\nDTSTAMP:20261022T182000Z\r\nDTSTART;VALUE=DATE:20261103\r\nSUMMARY:Renew Mullvad VPN — ≈ $8.51\r\nEND:VEVENT\r\nBEGIN:VEVENT\r\nUID:0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d-20261112@sub.simplely.ca\r\nDTSTAMP:20261022T182000Z\r\nDTSTART;VALUE=DATE:20261112\r\nSUMMARY:Netflix — $21.46\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n",
-            "_note": "One all-day event per charge for the next 12 months, never repeat rules (BLUEPRINT §11.2): the first two are shown. Each UID is the item id plus the charge date. Amounts are what's charged, here with Ontario's 13% HST (BLUEPRINT §4.8)."
+            "body": "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//sub.simplely.ca//Simply Sub//EN\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nX-WR-CALNAME:Simply Sub\r\nNAME:Simply Sub\r\nREFRESH-INTERVAL;VALUE=DURATION:PT12H\r\nX-PUBLISHED-TTL:PT12H\r\nBEGIN:VEVENT\r\nUID:9f2c4e6a8b0d1f3e@sub.simplely.ca\r\nDTSTAMP:20261029T182000Z\r\nDTSTART;VALUE=DATE:20261112\r\nDTEND;VALUE=DATE:20261113\r\nSUMMARY:Netflix: $19.94\r\nRRULE:FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=12\r\nTRANSP:TRANSPARENT\r\nEND:VEVENT\r\nBEGIN:VEVENT\r\nUID:3b5d7f9a1c2e4a6b@sub.simplely.ca\r\nDTSTAMP:20261029T182000Z\r\nDTSTART;VALUE=DATE:20270120\r\nDTEND;VALUE=DATE:20270121\r\nSUMMARY:Renew Mullvad VPN: €60.00\r\nRRULE:FREQ=YEARLY;INTERVAL=1;BYMONTH=1;BYMONTHDAY=20\r\nTRANSP:TRANSPARENT\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n",
+            "_note": "The set's Simply Sub calendar, as POST /cal's example made it: amounts as the provider charges them, so exchange rates never change a feed."
+          }
+        },
+        {
+          "title": "Unchanged since the app last fetched it",
+          "request": {
+            "method": "GET",
+            "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
+            "headers": {
+              "If-None-Match": "\"7b1775337e5c2d13\""
+            }
+          },
+          "response": {
+            "status": 304,
+            "headers": {
+              "Cache-Control": "no-cache",
+              "ETag": "\"7b1775337e5c2d13\""
+            },
+            "body": null
           }
         },
         {
@@ -2277,23 +2375,44 @@
         }
       ]
     },
-    "PUT /cal/:token": {
-      "phase": 5,
-      "description": "Replaces the feed's events after the user changes their lists. Requires the manage key.",
+    "PUT /cal/:id": {
+      "description": "Replaces a feed set's calendars with its manage key, after the user changes their lists. A calendar sent with its token keeps its URL, and one that has not changed keeps its file and ETag; one without a token gets a new URL; one left out is revoked. The set's 180 days start again.",
       "examples": [
         {
-          "title": "Update events",
+          "title": "Change a feed set",
           "request": {
             "method": "PUT",
-            "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a",
+            "url": "https://sub.simplely.ca/api/v1/cal/Qx3Lm8Rt5Vw2Yz7Bd4Gh1J",
             "headers": {
               "Content-Type": "application/json",
               "Authorization": "Bearer Jd8f2LqP0zXn5Vt7Bc3HyA"
             },
             "body": {
-              "name": "Simply Sub payments",
-              "events": [
-                { "uid": "0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d", "title": "Netflix — $18.99", "start": "2026-11-12", "rrule": "FREQ=MONTHLY;INTERVAL=1" }
+              "feeds": [
+                {
+                  "token": "k7Qm2Zp9XvT4bN8cR1sW0a",
+                  "name": "Simply Sub",
+                  "events": [
+                    {
+                      "uid": "9f2c4e6a8b0d1f3e",
+                      "date": "2026-11-12",
+                      "title": "Netflix: $19.94",
+                      "rule": "FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=12"
+                    }
+                  ]
+                },
+                {
+                  "name": "Simply Sub: Work",
+                  "color": "#E53935",
+                  "events": [
+                    {
+                      "uid": "9f2c4e6a8b0d1f3e",
+                      "date": "2026-11-12",
+                      "title": "Netflix: $19.94",
+                      "rule": "FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=12"
+                    }
+                  ]
+                }
               ]
             }
           },
@@ -2305,19 +2424,33 @@
             },
             "body": {
               "data": {
-                "token": "k7Qm2Zp9XvT4bN8cR1sW0a",
-                "eventCount": 1,
-                "updatedAt": "2026-10-23T09:00:00Z"
+                "id": "Qx3Lm8Rt5Vw2Yz7Bd4Gh1J",
+                "feeds": [
+                  {
+                    "token": "k7Qm2Zp9XvT4bN8cR1sW0a",
+                    "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
+                    "webcalUrl": "webcal://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
+                    "eventCount": 1
+                  },
+                  {
+                    "token": "Wv7Kc2Nh9Rb4Tf6Xq1Ld8M",
+                    "url": "https://sub.simplely.ca/api/v1/cal/Wv7Kc2Nh9Rb4Tf6Xq1Ld8M.ics",
+                    "webcalUrl": "webcal://sub.simplely.ca/api/v1/cal/Wv7Kc2Nh9Rb4Tf6Xq1Ld8M.ics",
+                    "eventCount": 1
+                  }
+                ],
+                "updatedAt": "2026-10-30T09:00:00Z"
               },
               "meta": {}
-            }
+            },
+            "_note": "Simply Sub keeps its URL with its new events, Simply Sub: Work is new, and Simply Sub: Family, left out, is revoked: its URL answers 404."
           }
         },
         {
           "title": "Wrong manage key",
           "request": {
             "method": "PUT",
-            "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a",
+            "url": "https://sub.simplely.ca/api/v1/cal/Qx3Lm8Rt5Vw2Yz7Bd4Gh1J",
             "headers": {
               "Content-Type": "application/json",
               "Authorization": "Bearer wrongKey000000000000000"
@@ -2335,22 +2468,21 @@
             "body": {
               "error": {
                 "code": "forbidden",
-                "message": "The manage key doesn't match this calendar feed."
+                "message": "The manage key is missing or isn't this feed set's."
               }
             }
           }
         }
       ]
     },
-    "DELETE /cal/:token": {
-      "phase": 5,
-      "description": "Revokes the feed. Calendar apps stop receiving updates. Requires the manage key.",
+    "DELETE /cal/:id": {
+      "description": "Revokes a feed set with its manage key: each of its calendars answers 404 from then on, and nothing of it is kept.",
       "examples": [
         {
-          "title": "Revoke a feed",
+          "title": "Revoke a feed set",
           "request": {
             "method": "DELETE",
-            "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a",
+            "url": "https://sub.simplely.ca/api/v1/cal/Qx3Lm8Rt5Vw2Yz7Bd4Gh1J",
             "headers": {
               "Authorization": "Bearer Jd8f2LqP0zXn5Vt7Bc3HyA"
             }
@@ -2370,8 +2502,11 @@
     { "code": "bad_request", "status": 400, "meaning": "A query parameter or body field is missing or invalid. 'details' lists each problem." },
     { "code": "forbidden", "status": 403, "meaning": "Missing or wrong manage key (calendar feeds)." },
     { "code": "not_found", "status": 404, "meaning": "Unknown id, path or calendar token." },
+    { "code": "stale_version", "status": 412, "meaning": "The sync copy changed since it was read (If-Match). Read it again, merge, and send the new version." },
+    { "code": "too_large", "status": 413, "meaning": "The request's body is over its route's size limit." },
     { "code": "rate_limited", "status": 429, "meaning": "Too many requests. Respect the Retry-After header." },
     { "code": "upstream_unavailable", "status": 502, "meaning": "A third-party source (such as Frankfurter) failed and no cached copy exists." },
-    { "code": "internal", "status": 500, "meaning": "Unexpected error. Safe to retry later." }
+    { "code": "internal", "status": 500, "meaning": "Unexpected error. Safe to retry later." },
+    { "code": "over_capacity", "status": 503, "meaning": "A daily limit on what users store was reached, or the storage is full. Respect the Retry-After header." }
   ]
 }

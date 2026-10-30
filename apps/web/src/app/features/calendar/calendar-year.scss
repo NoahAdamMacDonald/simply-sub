@@ -1,0 +1,140 @@
+// Four months a row from 1280 px, three from 960, two from 600, one on a phone: as many as fit 220 px each.
+.months {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// A month's card: its name, which is the link, its total and count, its strip, and its days.
+.month {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  gap: 2px;
+  height: 100%;
+  padding: 12px;
+  border: 1px solid transparent;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+  color: var(--ss-text);
+
+  &:hover {
+    background-color: var(--ss-state-hover);
+  }
+
+  // The link's focus ring goes round the whole card.
+  &:has(.name:focus-visible) {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 1px;
+  }
+
+  // This month is outlined, as today is on the month view.
+  &.current {
+    border-color: var(--ss-text);
+  }
+}
+
+// The link, stretched over the card so a click anywhere opens the month.
+.name {
+  color: inherit;
+  font: var(--mat-sys-title-small);
+  text-decoration: none;
+
+  &::after {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--ss-radius-card);
+    content: '';
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.total {
+  font: var(--mat-sys-title-medium);
+}
+
+.count {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}
+
+// A card goes over its limit this month (M9.4).
+.warning {
+  width: 16px;
+  height: 16px;
+  color: var(--ss-danger);
+  font-size: 16px;
+}
+
+// The month's total against the biggest month's: muted, or with a monthly budget on its scale (M7.7), green to yellow
+// at the budget and red at half again over it.
+.track {
+  display: block;
+  height: 4px;
+  margin: 6px 0 8px;
+  overflow: hidden;
+  border-radius: 2px;
+  background-color: var(--budget-track);
+}
+
+.strip {
+  display: block;
+  width: calc(var(--share) * 100%);
+  height: 100%;
+  border-radius: inherit;
+  background-color: var(--ss-text-muted);
+
+  &.scaled {
+    background-color: color-mix(
+      in oklab,
+      var(--budget-over) var(--toward-red),
+      color-mix(in oklab, var(--budget-warn) var(--toward-yellow), var(--budget-ok))
+    );
+  }
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  text-align: center;
+  font: var(--mat-sys-label-small);
+}
+
+.weekday {
+  color: var(--ss-text-muted);
+}
+
+.day {
+  position: relative;
+  padding: 2px 0 4px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  &.today {
+    border-color: var(--ss-text);
+  }
+
+  // A payment: a dot under the date, as on the month view.
+  &.paid::after {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--ss-accent-text);
+    content: '';
+    translate: -50% 0;
+  }
+}

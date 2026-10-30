@@ -320,11 +320,11 @@ Related (Netflix Standard on the 12th, tagged Family and with a tag deleted sinc
 and Family (Mullvad VPN, yearly on Jan 20, renewed by hand), then reads every file it downloads:
 - List view's Export by keyboard: the CSV (its byte order mark, header and rows, live tags only), the workbook
   (parsed by the repository's exceljs: Summary, the list's sheet, Payments), the JSON, the text, and the .ics (since
-  M7.12 a repeating all-day event per subscription, its RRULE read: Crave's on each month's 31st or last day,
-  `BYMONTHDAY=28,29,30,31;BYSETPOS=-1`), with "Saved <name>" after each;
+  M7.12 a repeating all-day event per subscription, its RRULE read: Crave's on each month's last day,
+  `BYMONTHDAY=-1` since M10.2, the form Proton Calendar takes), with "Saved <name>" after each;
 - the Calendar's Export to file (the main button's .ics for both lists, the menu's payment schedule in date order
-  and its workbook) and Sync calendar for each app: the .ics, then its steps with focus on the heading, and Escape
-  back on Sync calendar;
+  and its workbook) and Sync calendar for each app's file (since M10.3 below Live calendar…, so one item further
+  down): the .ics, then its steps with focus on the heading, and Escape back on Sync calendar;
 - offline at 360 px, a library not loaded yet: the snack bar's "The file couldn't be made".
 
 Every format runs light at 1280 px; the other runs open each menu and download one file of each page. It runs axe on
@@ -434,6 +434,25 @@ at both widths, keyboard only, each part on its own, so one failing doesn't stop
   from the sidebar, the compact grid and its bottom sheet at 360, and the JSON and Text downloads;
 - Settings: the 📍 dialog's province typed ("que" is Quebec alone) and the tag editor's picker;
 - Home: the bars' colour on the scale and the warnings' ✕.
+
+`check-m10-calendar.cjs` (M10's Calendar batch: M10.3, and M10.4's year view) needs `wrangler dev` behind `ng serve`'s
+proxy, its user database migrated (`npm -w apps/api run db:user:migrate:local`), since the live calendar's requests
+go to the Worker; it answers `/fx` itself. For a Canadian in Alberta with Work Related (Netflix tagged Family, Crave
+billed on the 31st) and Family (Mullvad renewed by hand), in both themes at both widths, keyboard only:
+- the live calendar (M10.3): Sync calendar's menu (Live calendar…, then each app's file); the dialog on its title,
+  saying what's uploaded and who can see it; Family chosen with Space and Make links with Enter; each link fetched
+  from the Worker with only its own payments (amounts as charged, Crave's `BYMONTHDAY=-1`); Google's and Apple's
+  links; Copy link read back from the clipboard (the context grants clipboard access) and its spoken message;
+  Proton's steps opened with Enter; Escape back on Sync calendar; Settings' card ("On: 2 calendars…") and Manage…;
+- light and wide only: a nickname written to IndexedDB reaching the feed after a reload (the next start), Change
+  calendars keeping each link, and Revoke all asking first (focus on Cancel), then every link answering 404;
+- the year view (M10.4): Year by Enter (pressed, in the URL, the year's bar), twelve month links each named with all
+  its card shows, no Month select and the arrows by year, Tab from Today to January then February, axe and a
+  full-page screenshot, Enter on March opening its month with focus on its grid, then Year and Month by Enter.
+
+A feed takes 30 fetches a minute, so poll one every 2 s, not every 100 ms, or the Worker's 429 looks like a missing
+change. The links view and the choosing view without links share the title Live calendar: wait for Make links to
+know a revoke has finished.
 
 `check-after-m3.cjs` (the feedback after M3: M5.13, M6.17–M6.19, M7.11, M8.5, M8.6, M9.6) checks the batch on
 `ng serve` for a Canadian in Alberta, with Streaming (Crave Premium and Disney+ Premium) and Family (two Disney+

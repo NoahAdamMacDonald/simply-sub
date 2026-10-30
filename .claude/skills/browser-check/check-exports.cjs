@@ -5,11 +5,12 @@
 // - List view's Export menu: each format downloads with this list only. The CSV has a byte order mark, its header and
 //   a row per item with live tags only; the workbook parses (exceljs) with Summary, the list's sheet and Payments; the
 //   JSON holds the list, its items and the live tag; the text names the list and its items; the .ics has a repeating
-//   all-day event per subscription (M7.12), Crave's on each month's 31st or last day. "Saved <name>" follows each.
+//   all-day event per subscription (M7.12), Crave's on each month's last day (BYMONTHDAY=-1, M10.2). "Saved <name>"
+//   follows each.
 // - The Calendar's Export to file: the main button's .ics for the lists shown, the menu's payment schedule (.csv, in
 //   date order) and Excel (both lists' sheets).
-// - Sync calendar: each app downloads the .ics and opens its steps, focus on the heading; Escape closes them, with focus
-//   back on Sync calendar.
+// - Sync calendar: each app's file (after M10.3's Live calendar…) downloads the .ics and opens its steps, focus on the
+//   heading; Escape closes them, with focus back on Sync calendar.
 // - Offline, a library not loaded yet: the snack bar says the file couldn't be made.
 // With axe on List view's open menu, the Calendar's open menu and each app's steps, and no horizontal scroll.
 // Usage: node check-exports.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
@@ -473,10 +474,10 @@ async function listView(page, viewport, label, everyFormat) {
     calendar.map((event) => `${event.summary} ${event.start} ${event.rule}`).join(' | '),
   );
   check(
-    `${label}: the plan billed on the 31st repeats on each month's 31st, or its last day`,
+    `${label}: the plan billed on the 31st repeats on each month's last day, as Proton takes it (M10.2)`,
     craves.length === 1 &&
       craves[0].start.slice(0, 6) === next12Months()[0] &&
-      craves[0].rule === 'FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=28,29,30,31;BYSETPOS=-1',
+      craves[0].rule === 'FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=-1',
     craves.map((event) => `${event.start} ${event.rule}`).join(' '),
   );
   await page.keyboard.press('Escape');
@@ -541,7 +542,8 @@ async function calendarPage(page, viewport, label, everyFormat) {
     await tabTo(page, 'button.sync');
     await page.keyboard.press('Enter');
     await page.locator(OPEN_MENU).waitFor();
-    const index = ['Google Calendar', 'Apple Calendar', 'Proton Calendar'].indexOf(app);
+    // The live calendar's link comes first (M10.3), then each app's file.
+    const index = ['Google Calendar', 'Apple Calendar', 'Proton Calendar'].indexOf(app) + 1;
     const download = await chooseAndDownload(page, index);
     const dialog = page.locator('ss-sync-dialog');
     await dialog.waitFor();

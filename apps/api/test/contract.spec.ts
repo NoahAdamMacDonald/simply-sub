@@ -1,9 +1,20 @@
-import { ecbRatesUrl, errorBodySchema, pngBody, successBodySchemas } from '@simply-sub/core';
+import {
+  addDays,
+  calendarBody,
+  ecbRatesUrl,
+  errorBodySchema,
+  pngBody,
+  successBodySchemas,
+  type CalendarFeed,
+} from '@simply-sub/core';
 import { env } from 'cloudflare:workers';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { z } from 'zod';
 import contract from '../../../docs/api-output-examples.json';
+import { utcDay } from '../src/http';
 import app from '../src/index';
+import { feedRow } from '../src/routes/cal';
+import { secretHash } from '../src/writes';
 import { ico, png } from './icon-images';
 import { catalogAssets, catalogSnapshot, seedCatalog } from './seeded-catalog';
 
@@ -15,12 +26,13 @@ import { catalogAssets, catalogSnapshot, seedCatalog } from './seeded-catalog';
 //
 // The Worker runs on the real catalog in data/, built and seeded under the examples' catalog version, with the
 // static files data:build writes. Frankfurter and the icon services are stand-ins; a few examples need them in a
-// particular state (setups). The examples' prices and other values are illustrative, so a success body is held to
-// its schema and its meta's keys, not to the example's values.
+// particular state (setups), and the live calendar's the example's feed set. The examples' prices and other values are
+// illustrative, so a success body is held to its schema and its meta's keys, not to the example's values; a calendar
+// file, written from the feed set, is held to the example's text.
 
 interface Example {
   title: string;
-  request: { method: string; url: string; headers?: Record<string, string> };
+  request: { method: string; url: string; headers?: Record<string, string>; body?: unknown };
   response: { status: number; headers: Record<string, string>; body: unknown };
 }
 interface Endpoint {
@@ -52,6 +64,8 @@ interface Setup {
   keptRates?: 'stale';
   /** What DuckDuckGo's icon service has for the site: by default, like Google's, nothing. */
   duckduckgo?: Uint8Array<ArrayBuffer>;
+  /** POST /cal's example's feed set is stored, as it made it. */
+  feedSet?: true;
 }
 
 /** The state an example needs, by its title. */
@@ -59,6 +73,52 @@ const setups: Record<string, Setup> = {
   'Frankfurter is down: last good rates are served': { frankfurter: 'down', keptRates: 'stale' },
   'Frankfurter is down and nothing is cached yet': { frankfurter: 'down' },
   'Icon for a custom subscription': { duckduckgo: ico(png(64)) },
+  'Feed contents': { feedSet: true },
+  'Unchanged since the app last fetched it': { feedSet: true },
+  'Change a feed set': { feedSet: true },
+  'Wrong manage key': { feedSet: true },
+  'Revoke a feed set': { feedSet: true },
+};
+
+/**
+ * Stores the feed set POST /cal's example made, under its id, manage key and tokens, at the time the GET example's
+ * file was written.
+ */
+async function storeExampleFeedSet(): Promise<void> {
+  const create = contract.endpoints['POST /cal'].examples[0];
+  const { feeds } = create.request.body as { feeds: CalendarFeed[] };
+  const { data } = create.response.body as unknown as {
+    data: { id: string; manageKey: string; feeds: { token: string }[] };
+  };
+  const { id, manageKey, feeds: links } = data;
+  const db = env.USER_DB;
+  await db.batch([
+    db
+      .prepare('INSERT INTO cal_sets (id, manage_hash, expires_on) VALUES (?, ?, ?)')
+      .bind(id, await secretHash(manageKey), addDays(utcDay(new Date()), 180)),
+    ...(await Promise.all(
+      feeds.map(async (feed, index) => {
+        const row = await feedRow(feed, '2026-10-29T18:20:00Z');
+        return db
+          .prepare(
+            'INSERT INTO cal_feeds (token_hash, set_id, content_hash, ics, updated_at) VALUES (?, ?, ?, ?, ?)',
+          )
+          .bind(
+            await secretHash(links[index].token),
+            id,
+            row.content_hash,
+            row.ics,
+            '2026-10-29T18:20:00Z',
+          );
+      }),
+    )),
+  ]);
+}
+
+/** A header whose value is new each time: what of it can be compared. */
+const madeEachTime: Record<string, (value: string) => RegExp> = {
+  // A new feed set's id.
+  Location: (value) => new RegExp(`^${value.replace(/[A-Za-z0-9_-]{22}$/, '[A-Za-z0-9_-]{22}')}$`),
 };
 
 const snapshot = catalogSnapshot(catalogVersion);
@@ -109,6 +169,10 @@ beforeEach(async () => {
   for (const { name } of (await env.KV.list()).keys) {
     await env.KV.delete(name);
   }
+  await env.USER_DB.batch([
+    env.USER_DB.prepare('DELETE FROM cal_feeds'),
+    env.USER_DB.prepare('DELETE FROM cal_sets'),
+  ]);
 });
 
 /** A copy of `value` without the documentation notes (keys that start with _). */
@@ -153,9 +217,16 @@ describe('every example of a built endpoint, sent to the Worker', () => {
         JSON.stringify({ date: '2026-10-20', rates: perEuro, fetchedAt: '2026-10-21T06:00:01Z' }),
       );
     }
+    if (setup.feedSet) {
+      await storeExampleFeedSet();
+    }
 
     const answer = await app.fetch(
-      new Request(request.url, { method: request.method, headers: request.headers }),
+      new Request(request.url, {
+        method: request.method,
+        headers: request.headers,
+        ...(request.body !== undefined && { body: JSON.stringify(withoutNotes(request.body)) }),
+      }),
       { ...env, ASSETS: assets },
     );
 
@@ -168,6 +239,8 @@ describe('every example of a built endpoint, sent to the Worker', () => {
       const hashed = /^"([0-9a-f]{7})-[0-9a-f]{4}"$/.exec(value);
       if (name === 'ETag' && hashed) {
         expect(answer.headers.get(name), name).toMatch(new RegExp(`^"${hashed[1]}-[0-9a-f]{4}"$`));
+      } else if (name in madeEachTime) {
+        expect(answer.headers.get(name), name).toMatch(madeEachTime[name](value));
       } else {
         expect(answer.headers.get(name), name).toBe(value);
       }
@@ -177,12 +250,14 @@ describe('every example of a built endpoint, sent to the Worker', () => {
     }
 
     const schema = successBodySchemas[endpoint as keyof typeof successBodySchemas];
-    if (response.status === 304) {
+    if (response.status === 304 || response.status === 204) {
       expect(await answer.text()).toBe('');
     } else if (response.status >= 400) {
       const body = await answer.json();
       expect(issues(errorBodySchema, body)).toEqual([]);
       expect(body).toEqual(withoutNotes(response.body));
+    } else if (schema === calendarBody) {
+      expect(await answer.text()).toBe(response.body);
     } else if (schema === pngBody) {
       expect((await answer.arrayBuffer()).byteLength).toBeGreaterThan(0);
     } else {

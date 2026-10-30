@@ -12,6 +12,7 @@ import {
 import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { BackupService } from '../../core/backup/backup-service';
+import { LiveCalendarRepository } from '../../core/storage/live-calendar-repository';
 import { focusFirstError } from '../../shared/focus-first-error';
 
 /** What the user types to delete everything (P13). */
@@ -47,6 +48,7 @@ export interface DeleteDataData {
 })
 export class DeleteDataDialog {
   private readonly backups = inject(BackupService);
+  private readonly liveCalendar = inject(LiveCalendarRepository);
   private readonly dialogRef = inject<MatDialogRef<DeleteDataDialog, boolean>>(MatDialogRef);
 
   protected readonly word = confirmWord;
@@ -72,6 +74,15 @@ export class DeleteDataDialog {
   private async delete(): Promise<void> {
     this.busy.set(true);
     try {
+      // The live calendar's links go first, while their manage key is here (M10.3). Offline, or locked, when it can't
+      // be read, they stop updating, and the server deletes them after 180 days.
+      if (!this.locked) {
+        const record = await this.liveCalendar.readOnce().catch(() => undefined);
+        if (record) {
+          const { revokeFeedSet } = await import('../../shared/live-calendar/live-calendar-client');
+          await revokeFeedSet(record.setId, record.manageKey).catch(() => undefined);
+        }
+      }
       await this.backups.deleteAll();
       this.dialogRef.close(true);
     } finally {

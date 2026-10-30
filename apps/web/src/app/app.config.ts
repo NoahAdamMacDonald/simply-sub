@@ -1,6 +1,8 @@
 import {
   ApplicationConfig,
+  ApplicationRef,
   ErrorHandler,
+  Injector,
   inject,
   provideAppInitializer,
   provideBrowserGlobalErrorListeners,
@@ -38,6 +40,13 @@ export const appConfig: ApplicationConfig = {
       inject(CatalogStore);
       inject(FxStore);
       inject(AutoLock);
+      // Once the app has shown, from a chunk of its own: the live calendar's updates (M10.3).
+      const injector = inject(Injector);
+      void inject(ApplicationRef)
+        .whenStable()
+        .then(() => import('./shared/live-calendar/live-calendar-service'))
+        .then(({ LiveCalendarService }) => injector.get(LiveCalendarService))
+        .catch(() => undefined);
     }),
     {
       provide: MAT_ICON_DEFAULT_OPTIONS,

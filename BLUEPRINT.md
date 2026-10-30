@@ -1228,8 +1228,11 @@ M1.14), so a buyer can see what signing up means beyond the price.
 | `GET /icon?domain=example.com` | Icon proxy for **custom subscriptions**: asks Google's and DuckDuckGo's icon services (core's `iconServices`) and returns the best square PNG of at least 32 pixels (`pickIcon`, Google's on a tie), or `404` when neither has one, and the app shows the subscription's first letter. KV keeps an icon for 30 days and "no icon" for a day (section 5.4). No `size`: the Worker can't resize, so the app scales the icon. Catalog icons are fetched once by `scripts/fetch-icons.ts` into `data/logos/` (committed, so builds never fetch) and served as static WebP files at `/icons/<id>.webp` (section 6.3) |
 | `GET /fx?base=CAD` | The ECB's daily rates in the user's currency. The Worker fetches them in euros from Frankfurter's ECB-only route (`/v2/providers/ecb/rates?base=EUR`; v1 is deprecated, and v2's default blends in other central banks), keeps them in KV under `fx:ecb` for 12 hours, and rebases them to any currency the ECB publishes (core's `rebaseRates`), so one fetch serves every base. When Frankfurter fails after that, the last good rates are sent with `meta.stale: true`; with none kept, `502 upstream_unavailable`. `GET /providers` uses the same rates (M2.3) |
 | `GET /health` | Returns the API version, and the catalog version, build time and counts that D1 holds (the `catalog` row, section 5.3) |
-| *(Phase 5)* `POST /reports` | "This price looks wrong" reports (Turnstile-protected, rate-limited) |
-| *(Phase 5)* `GET /cal/:token.ics` | Opt-in live calendar feed (section 11.3) |
+| *(Phase 5)* `POST /reports` | "This price looks wrong" reports (rate-limited, no free text; M10.10) |
+| `POST /cal` | Makes a live calendar feed set (section 11.3, M10.2): one calendar per feed sent (everything, each tag chosen, no tag), each payment's title, day and repeat rule only. Answers each feed's token and links, and the set's manage key, shown once. The user database keeps hashes of the tokens and the key, and each feed's calendar file |
+| `PUT /cal/:id` | Replaces a set's calendars with its manage key (`Authorization: Bearer`): a feed with its token keeps its URL and, unchanged, its file; one without gets a new URL; one left out is revoked. Its 180 days start again. 6 writes a minute per set |
+| `DELETE /cal/:id` | Revokes a set with its manage key: every calendar of it answers 404, and nothing of it is kept |
+| `GET /cal/:token.ics` | One calendar file (`text/calendar`), revalidated on every fetch (`no-cache` with an ETag), so a change or a revoke shows at the app's next check. Limited per feed (30 a minute), not per IP, since calendar apps' servers share addresses |
 
 Example requests and responses for every endpoint are in [docs/api-output-examples.json](docs/api-output-examples.json).
 Core holds the contract's response schemas (M2.7): `successBodySchemas` names each built endpoint's (the bodies'
@@ -1360,7 +1363,17 @@ shipped to the browser is visible. The risks are abuse, and M2 builds these defe
   it from a browser. It's an extra layer, not authentication. Every response also carries `X-Content-Type-Options:
   nosniff`, a CSP that allows nothing (`default-src 'none'; frame-ancestors 'none'`: an API answer is never a page)
   and `Cross-Origin-Resource-Policy: same-origin`, so other sites can't embed the answers, `/icon` images included.
-- **Writes** arrive only in Phase 5 (`POST /reports`), with Turnstile and a stricter rate limit.
+- **Writes** (M10.1, `apps/api/src/writes.ts`): Phase 5's live calendar feeds, sync's sealed copies and price reports
+  are stored, in the user database (`simply-sub-user`, section 7.1), so every request that stores something follows
+  the same rules. An IP has 10 writes a minute (`WRITE_RATE_LIMIT`, on top of the 60 requests) and a feed set or sync
+  chain 6 (`RESOURCE_RATE_LIMIT`, keyed by its id). A body is refused with `413 too_large` over its route's limit, at
+  once from its `Content-Length` or as it streams in, and a JSON body that isn't JSON gets `400` with its problems by
+  path. Each kind of data counts the rows it writes a day in the database, one statement checking and counting, up to
+  a cap (feeds 15,000, sync 25,000, reports 1,000: 41,000 together), because D1's 100,000 rows written a day are the
+  account's and the catalog's deploys need them; past a cap, or with the database over 400 MB, `503 over_capacity`
+  until midnight UTC. Secrets (a feed's token and manage key, sync's auth secret) are random values of 128 bits or
+  more, kept only as SHA-256 hashes and compared in constant time, and never logged. A cron trigger at 02:30 UTC
+  deletes what has expired (`src/clean-up.ts`).
 - **Secrets** (the bot's GitHub token, AI keys) are Worker secrets (`wrangler secret put`) or a gitignored `.env`,
   never tracked files. The D1 `database_id` in `wrangler.jsonc` isn't a secret: using it needs a Cloudflare login.
 
@@ -1931,12 +1944,13 @@ Bitdefender are in the batch's pull request; Crunchyroll's prices couldn't be re
 |---|---|---|
 | Workers requests | ~100,000 per day | API calls only: a few hundred per day at first |
 | Static assets | Free and unlimited. Up to 20,000 files per version, 25 MiB per file | The Angular build has well under 100 files |
-| D1 | 5 GB storage per account (500 MB per database), 5M rows read and 100k rows written per day (index entries count), 2 MB per row | Under 25 MB even at 1,000 providers. **Rows written** is the one to watch: from M2.1 a deploy writes only what changed (section 5.3) |
+| D1 | 5 GB storage per account (500 MB per database, 10 databases), 5M rows read and 100k rows written per day for the whole account (index entries count), 2 MB per row | The catalog: under 25 MB even at 1,000 providers. **Rows written** is the one to watch: from M2.1 a deploy writes only what changed (section 5.3). Since M10.1 a second database, `simply-sub-user`, holds what users send (feeds, sync copies, reports), its writes capped at 41,000 a day so the catalog's deploys always have room (section 5.4) |
 | KV | 1 GB, 100k reads and 1k writes per day, 25 MiB per value | One namespace, `simply-sub-kv` (binding `KV`, M2.5; the bot's too since M3.9, its keys under `bot:`: check dates, pending pages, the last digest), for small values that must survive: the last good `/fx` rates (M2.5: one key, `fx:ecb`, written when the rates are fetched, about twice a day) and the `/icon` cache (M2.6: one key per domain asked for, written on a miss and kept 30 days, or a day for "no icon"). The Cache API is per data centre and can evict them. A few dozen writes a day |
 | R2 | 10 GB-month storage, 1M writes and 10M reads per month, no egress fees. Activating R2 asks for a payment method, even within the free tier | Not used yet: see the triggers below |
 
-**Each store has one job:** static files serve the catalog and icons, D1 answers the API's searches, KV keeps
-small values that must survive, and R2 will hold large files. Using a store outside its job gains nothing: KV
+**Each store has one job:** static files serve the catalog and icons, D1 answers the API's searches (and, in a
+database of its own since M10.1, keeps what users send), KV keeps small values that must survive, and R2 will hold
+large files. Using a store outside its job gains nothing: KV
 values and static files have the same 25 MiB cap, and KV allows far fewer writes.
 - **Setting one up:** create the KV namespace (or the R2 bucket) in the dashboard or with `wrangler` (section 7.2;
   `simply-sub-kv` was made with `wrangler kv namespace create`), and its id goes in `wrangler.jsonc`, like D1's. Wrangler can create resources on deploy (an open beta), but an id in the config is
@@ -1995,6 +2009,7 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
    ```bash
    npx wrangler d1 create simply-sub-catalog --location enam   # ✅ done in M0.8; the id is in wrangler.jsonc
    npx wrangler d1 migrations apply simply-sub-catalog --remote   # ✅ M0.8: applies migrations/0001_init.sql
+   npx wrangler d1 create simply-sub-user --location enam      # ✅ done in M10.1 (2026-10-29); binding USER_DB
    ```
 6. **KV:**
    ```bash
@@ -2088,7 +2103,7 @@ Settings → Build*). The settings as they are now:
 | Production branch | `main` |
 | Root directory | `apps/api` |
 | Build command | `cd ../.. && npm ci && npm run build` |
-| Deploy command | `npm run deploy` (since M2.1): `apps/api/package.json` runs `db:seed:remote` (the migrations, then `seed-d1.ts --remote`) and then `wrangler deploy`. From M1.5 it was `npx wrangler d1 migrations apply simply-sub-catalog --remote && npx wrangler d1 execute simply-sub-catalog --remote --file dist/seed.sql && npx wrangler deploy`, and before that `npx wrangler deploy` |
+| Deploy command | `npm run deploy` (since M2.1): `apps/api/package.json` runs `db:seed:remote` (the migrations, then `seed-d1.ts --remote`), `db:user:migrate:remote` (the user database's migrations, since M10.1) and then `wrangler deploy`. From M1.5 it was `npx wrangler d1 migrations apply simply-sub-catalog --remote && npx wrangler d1 execute simply-sub-catalog --remote --file dist/seed.sql && npx wrangler deploy`, and before that `npx wrangler deploy` |
 | Preview (non-production branch) command | `npx wrangler versions upload`: a preview link on workers.dev, production untouched |
 | Build variable | `NODE_VERSION` = `24.22.1` (since 2026-10-26; it was 24.19.0, and the image defaults to 24.18.0). It must match the root `package.json`'s `volta` pin, which CI reads too. The first build detected Node 24.19.0 and npm 12.0.2 (from `packageManager`); npm 10.9.2 would also install our lockfile cleanly |
 | API token | `simply-sub-builds`, created by Workers Builds: Workers scripts, KV, R2, **D1 (edit)**, routes on the zone, and a few unused products. Cloudflare keeps it; it's never in GitHub |
@@ -2424,10 +2439,11 @@ the feature to that subscription's plan or provider. Resetting means choosing
   Its "Set all in this group" menu ranks every child in one step. Ranks never cascade on their own.
 - A "Show ranked only" toggle and a search box help with the large registry.
 
-**Calendar.** A month view (a year view later) shows payment dates and amounts per day, plus a progress bar
+**Calendar.** A month view shows payment dates and amounts per day, plus a progress bar
 covering **the displayed month only**: *spent so far / that month's total*, with a monthly-budget marker. Users can toggle which lists are shown. **Export to file** downloads
-an `.ics` file. **Sync Calendar** is a Phase 5 feature (section 11.3). Until then it shows "Download .ics" with
-import instructions for Google, Apple and Proton.
+an `.ics` file. **Sync Calendar** offers the live calendar (section 11.3, M10.3) and each app's `.ics` file with its
+import steps for Google, Apple and Proton. The year view (M10.4) shows twelve small months with their totals, its bar
+the year's payments so far against the annual budget.
 
 **Settings.** A back button, plus:
 - budgets (warnings appear when any projected month or year goes over)
@@ -2659,6 +2675,9 @@ prompted after each big change, or weekly).
 - **The app lock (M6.10):** the database opens as soon as `StorageService` starts. The user's repositories load once
   it has said whether the lock is on, and drop their records while it's locked (`StorageService.access`); the caches
   load regardless (section 14).
+- **The live calendar (M10.3):** `LiveCalendarRepository` keeps the feed set the user made, one record under the key
+  `liveCalendar` (Dexie v4), sealed by the app lock like the settings, and left out of backups, since its manage key
+  changes and revokes the links. A revoke soft-deletes it, so a sync (M10.9) passes that on.
 - **IndexedDB blocked** (some private browsing modes, or site data blocked): the repositories' status is `error`, and
   the app shows the P15 notice in place of the shell. [Continue anyway] calls `StorageService.useMemory()`: the same
   Dexie database opens on `fake-indexeddb` (57 kB, a chunk loaded only then), and every repository reloads from it
@@ -2676,7 +2695,7 @@ prompted after each big change, or weekly).
 | TXT | native | A readable summary of one list; the Calendar's, its next 12 months by month (M7.9) |
 | JSON (one list) | native | List view's: the list, its items and what they name, as stored. Not a backup, so not importable (M7.5) |
 | JSON (payments) | native | The Calendar's: the lists shown and each charge in the next 12 months as charged, with its tax, renewal and live tags (core's `paymentsFile`, M7.9). Not a backup either |
-| ICS | `ics` npm package | All-day events (`VALUE=DATE`, so no time zone can move it), titled with what each costs as charged and `X-WR-CALNAME` naming the calendar. Since M7.12 an ongoing subscription is one repeating event (`RRULE`) for each run of charges at one amount, written from the schedule's own rule: a month's or year's day, or the 28th up to it with `BYSETPOS=-1` (a plan billed on the 31st falls on a shorter month's last day), `INTERVAL` for every 3 months or every 30 days, and `UNTIL` the day before the plan ends or a price of the user's own does, when the next run starts. So it goes on past the first year. Specific dates, and add-ons billed on a period of their own, stay an event per charge in the next 12 months, which no repeat rule writes exactly |
+| ICS | `ics` npm package | All-day events (`VALUE=DATE`, so no time zone can move it), titled with what each costs as charged and `X-WR-CALNAME` naming the calendar. Since M7.12 an ongoing subscription is one repeating event (`RRULE`) for each run of charges at one amount, written from the schedule's own rule: a month's or year's day, `INTERVAL` for every 3 months or every 30 days, and `UNTIL` the day before the plan ends or a price of the user's own does, when the next run starts. So it goes on past the first year. Since M10.2 the rules keep to the forms Proton Calendar takes (one day of the month; it drops other events): a plan billed on the 31st is `BYMONTHDAY=-1`, each month's last day, and a yearly Feb 29 `BYMONTH=2;BYMONTHDAY=-1`, where M7.12 had the 28th up to the day with `BYSETPOS=-1`. Specific dates, add-ons billed on a period of their own and a monthly plan billed on the 29th or 30th, which February keeps from following one rule, stay an event per charge in the next 12 months |
 
 ### 11.3 Calendar integration
 - **Phase 3, download `.ics`:** works with Google, Apple and Proton through their import features. This is
@@ -2691,6 +2710,24 @@ prompted after each big change, or weekly).
   revoke the token at any time. Subscribed calendars are read-only in Proton, which is fine for this. A feed per tag,
   besides the one for everything, would give each tag a calendar of its own and so a colour of its own: the way the
   apps can show tags in colour (M7.9).
+- **As built (M10.2), the server's side:** a *feed set* per device that turns it on, in the user database
+  (`simply-sub-user`): a calendar for everything, one for each tag chosen and one for payments without a tag, each at
+  `/api/v1/cal/<token>.ics` (section 5.2). The app sends each payment's title (its name and amount as the provider
+  charges it, or its name alone), its day and its repeat rule, and each calendar's name and colour; event UIDs are
+  hashes the app makes. The Worker writes each calendar's file then (core's `feedIcs`: all-day events that don't block
+  time, `X-WR-CALNAME` and RFC 7986's `NAME`, Apple's `X-APPLE-CALENDAR-COLOR`, a 12-hour refresh hint), keeps only
+  hashes of the tokens and the set's manage key, and deletes a set 180 days after the app last wrote it. RFC 7986's
+  `COLOR` is left out: it takes only a CSS colour name.
+- **As built (M10.3), the app's side:** Sync calendar's **Live calendar…** and Settings' Live calendar card open one
+  dialog: what's uploaded and who can see it, the calendars (Everything, each tag, Payments without a tag) and what
+  each payment shows; then each calendar's link with Copy link, Google's add page (its undocumented
+  `calendar/render?cid=webcal://…`, which works for an https feed) and Apple's `webcal://` link, each app's steps, and
+  Change calendars, New links and Revoke all. `LiveCalendarService` keeps the feeds current from a chunk of its own,
+  started once the app is stable: 5 s after a change that reaches them (core's `liveCalendars`, hashed and compared
+  with what was last sent), when the network is back, and at least every 30 days, one tab at a time (a Web Lock). A
+  run of charges starts from its item's anchor once that has passed, so a feed's events keep their start and UID as
+  the days go by. The record (`liveCalendar`, Dexie v4) holds the set's id, its manage key and each calendar's token;
+  the app lock seals it, backups leave it out, and Delete all data revokes the links first when it can read them.
 
 ### 11.4 Device sync and future accounts
 - **Phase 5, encrypted sync ("sync chain", like Brave's):** generate a sync code (a passphrase). The browser
@@ -2749,7 +2786,7 @@ gone. That's why it's opt-in.
 - **Key:** derived like the backup key, then held in memory only, as a non-extractable WebCrypto `CryptoKey`.
   Nothing secret is stored: only the salt and an encrypted check value, which tells a wrong passphrase.
 - **What's encrypted:** each record of `settings`, `lists`, `items`, `customSubs`, `rankings`, `cards`, `tags` and
-  `drafts` and `dismissedSuggestions` (M8.2) keeps its key and indexed fields in plain text and
+  `drafts`, `dismissedSuggestions` (M8.2) and `liveCalendar` (M10.3) keeps its key and indexed fields in plain text and
   stores the whole record as one encrypted value. Of the settings, only what's needed before unlocking stays plain:
   the theme and the lock itself. The caches (the catalog files, the exchange rates) stay plain, since they're public.
 - **Locking:** the lock screen asks for the passphrase on each visit. The app locks again after a chosen idle time
@@ -2823,7 +2860,9 @@ written and tested once. It uses WebCrypto (`crypto.subtle`), available in every
 The general Angular rules are in [docs/angular-best-practices.md](docs/angular-best-practices.md), Angular's
 official AI rules file, which CLAUDE.md loads automatically. On top of those rules:
 - Zoneless change detection, which is the default. OnPush is the default too, so never set it explicitly.
-- `resource` / `httpResource` for fetching, and `@defer` for heavy widgets (XLSX export, the year calendar).
+- `resource` / `httpResource` for fetching, and lazy chunks for heavy widgets (XLSX export). Not `@defer` while the
+  initial bundle is near its 500 kB: the first `@defer` brings Angular's defer runtime (7.6 kB) into it, so the year
+  calendar (M10.4) lives in the Calendar's own lazy chunk instead.
 - **Signal Forms** for every form (they're stable in v22).
 - New singleton services in `core/` use the `@Service()` decorator.
 - Templates and styles live in their own `.html` and `.scss` files, never inline, even for small components.
@@ -2892,6 +2931,61 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-29, M10.1–M10.4, as built)**
+- **The year view** (M10.4): `?view=year` keeps the month, so Month goes back to it; Today goes to this year. Each
+  month's card is a link named with all it shows, but only its month's name is inside the link (stretched over the
+  card), since axe's label-in-name rule wants a link's visible text in its name in the same order. No `@defer`: it
+  would have taken the initial bundle to 505.27 kB.
+- **The user database** (M10.1): `simply-sub-user` was made on 2026-10-29 (ENAM, `wrangler d1 create`), and its first
+  two migrations applied remotely by hand that day for the Proton test on the preview link, ahead of the deploy, which
+  finds them applied. Its first query after creating it failed once with Cloudflare's 7403 ("not authorized"), then
+  worked: a new database takes a moment.
+- **The test calendar for Proton** (M10.2): made on the branch's preview link with `POST /cal`, one event per kind of
+  rule the app writes, for the owner to subscribe to in Proton Calendar. Its result goes here when they report it.
+- **Feeds don't follow exchange rates** (M10.3): a feed's amounts are as the provider charges them, in its currency
+  ("Renew Mullvad VPN: €60.00"), so new rates never change it, and each run of charges starts from its anchor once that
+  has passed, so its start and UID don't move as the days go by. A feed changes only when the lists do (or a
+  per-charge event passes), and the app sends it only then.
+- **No record id leaves the device** (M10.3): each event's UID is a SHA-256 of the app's own, cut to 32 hex digits.
+- **Sync calendar's menu** (M10.3): Live calendar… comes first; the file items are named "Google Calendar file" and so
+  on, so the two kinds read apart.
+- **Delete all data** (M10.3) revokes the live calendar's links first, while it can read their key; locked, or offline,
+  it can't, and the server deletes them after 180 days.
+- **Bundle:** 498.90 kB initial (497.84 before). The starter costs 0.18 kB of `main`; the rest is the split its lazy
+  chunk caused in the chunk the app shares at start (223.37 kB became 150.60 and 73.68), the glue between two chunks.
+- **Checks:** core 1773 tests, web 699, API 264, bot 60; `check-m10-calendar.cjs` (96, new for the batch, with
+  `wrangler dev` behind `ng serve`), and the scripts of the pages it changed: `check-exports.cjs` (88, Sync calendar's
+  items one further down, the 31st's `BYMONTHDAY=-1`), `check-calendar.cjs` (87), `check-settings.cjs` (81),
+  `check-backup.cjs` (81) and `check-app-lock.cjs` (159).
+
+**Resolved (2026-10-29, M10's plan)**
+The owner's choices for Phase 5, which PROJECT-PLAN's M10 (M10.1–M10.13) follows:
+- **Where user data lives on the server:** a second D1 database, `simply-sub-user`, for the live calendar feeds, sync's
+  sealed copies and price reports. Not KV, whose 1,000 writes a day the bot, `/fx` and `/icon` need; not R2, which
+  needs a payment method on file; not Durable Objects, since a Worker that has one gets no preview links. D1's daily
+  writes are the account's, shared with the catalog's deploys, so user writes are capped at half of them.
+- **For how long:** a feed set or a sync chain is deleted 180 days after the app last wrote it, and the app writes at
+  least every 30 days while it's used; Revoke and Delete are immediate. A report leaves D1 the next night for the
+  bot's KV and is gone once the weekly digest has it.
+- **Limits:** writes 10 a minute per IP and 6 a minute per feed set or sync chain; a feed's downloads 30 a minute per
+  feed, not per IP, since calendar apps' servers share addresses; 26 calendars and 2,000 events per feed set; 1 MiB
+  per sync copy; reports 3 a minute per IP and 500 a day; daily caps that keep user writes under half of D1's 100,000.
+- **Reports:** choices only, no free text, which would reach the digest's reviewer, a model included; no Turnstile.
+  The bot checks each reported plan's page the next night, and only what it can't settle reaches a person.
+- **The live calendar and Proton Calendar** (the owner's calendar, and their condition for building it): Proton
+  subscribes to a URL and refreshes it every 4 to 16 hours on its own (its help page "Subscribe to an external
+  calendar"), each subscription counting toward the plan's calendars (3 on the free plan, 25 on paid ones). Its web
+  client takes a monthly rule with one day of the month, and `BYSETPOS` only with a weekday
+  (`packages/shared/lib/calendar/recurrence/rrule.ts`, read 2026-10-29), and drops other events on import, so M7.12's
+  rule for a plan billed on the 29th to the 31st never reached a Proton import. M10.2 writes rules it takes, for the
+  download too, and a test calendar on the branch's preview link checks them in the owner's Proton Calendar before the
+  app's side is built. Google adds a calendar by URL on a computer only and doesn't say how often it refreshes; Apple's
+  Calendar on a Mac refreshes from every 5 minutes to weekly, and an iPhone on its fetch setting.
+- **Regions first:** the US's gaps, the United Kingdom, the euro countries, and Australia and New Zealand.
+- **The app's icon:** a simple mark drawn for the app, shown to the owner before it's committed. It replaces the
+  favicon, still Angular's default logo.
+- **Not in M10:** "Suggest a service" (section 12).
 
 **Resolved (2026-10-29, the UI polish and the feedback after M3)**
 The UI polish the user approved (M9.5, M4.9, and with their OK of the proposals, M7.10, M4.7 and M4.8), and their
