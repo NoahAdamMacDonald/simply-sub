@@ -22,7 +22,7 @@ name: Bitdefender
 website: https://www.bitdefender.com
 category: privacy-suite
 spendCategory: software
-billingCurrency: { CA: CAD, GB: GBP, US: USD }
+billingCurrency: { CA: CAD, GB: GBP, US: USD, AU: AUD, NZ: NZD }
 cancelUrl: https://www.bitdefender.com/consumer/support/answer/29081/
 sources: { pricing: https://www.bitdefender.com/en-ca/consumer/ }
 
@@ -60,6 +60,26 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-29
         sourceUrl: https://www.bitdefender.com/en-us/consumer/
+      - region: AU
+        currency: AUD
+        amount: 159.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Sales tax included.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-au/consumer/
+      - region: NZ
+        currency: NZD
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Sales tax included.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-nz/consumer/
 
   - id: bitdefender.premium-security-individual
     name: Premium Security Individual
@@ -99,6 +119,26 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-29
         sourceUrl: https://www.bitdefender.com/en-us/consumer/
+      - region: AU
+        currency: AUD
+        amount: 169.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Sales tax included.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-au/consumer/
+      - region: NZ
+        currency: NZD
+        amount: 189.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Sales tax included.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-nz/consumer/
 
   - id: bitdefender.premium-security-family
     name: Premium Security Family
@@ -158,6 +198,26 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-29
         sourceUrl: https://www.bitdefender.com/en-us/consumer/
+      - region: AU
+        currency: AUD
+        amount: 199.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Sales tax included.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-au/consumer/
+      - region: NZ
+        currency: NZD
+        amount: 229.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Sales tax included.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-nz/consumer/
 
   - id: bitdefender.ultimate-security-family
     name: Ultimate Security Family
@@ -202,6 +262,26 @@ plans:
           quote: Sales tax included.
         lastVerified: 2026-10-29
         sourceUrl: https://www.bitdefender.com/en-gb/consumer/
+      - region: AU
+        currency: AUD
+        amount: 129.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Sales tax included.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-au/consumer/
+      - region: NZ
+        currency: NZD
+        amount: 129.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Sales tax included.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-nz/consumer/
 
 policies:
   links:

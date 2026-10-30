@@ -23,7 +23,7 @@ acceptedNetworks:
       - MasterCard
       - American Express
       - Discover
-billingCurrency: { CA: CAD, US: USD, GB: GBP }
+billingCurrency: { CA: CAD, US: USD, GB: GBP, AU: AUD, NZ: NZD }
 cancelUrl: https://www.netflix.com/cancelplan
 sources: { pricing: https://help.netflix.com/en/node/24926 }
 
@@ -63,6 +63,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-29
         sourceUrl: https://help.netflix.com/en/node/24926/gb
+      - region: AU
+        currency: AUD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://help.netflix.com/en/node/24926/au
 
   - id: netflix.standard
     name: Standard
@@ -99,6 +107,22 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-29
         sourceUrl: https://help.netflix.com/en/node/24926/gb
+      - region: AU
+        currency: AUD
+        amount: 20.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://help.netflix.com/en/node/24926/au
+      - region: NZ
+        currency: NZD
+        amount: 25.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://help.netflix.com/en/node/24926/nz
     addOnIds: [netflix.extra-member-ads, netflix.extra-member]
     addOnLimit: 1
 
@@ -141,6 +165,22 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-29
         sourceUrl: https://help.netflix.com/en/node/24926/gb
+      - region: AU
+        currency: AUD
+        amount: 28.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://help.netflix.com/en/node/24926/au
+      - region: NZ
+        currency: NZD
+        amount: 33.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://help.netflix.com/en/node/24926/nz
     addOnIds: [netflix.extra-member-ads, netflix.extra-member]
     addOnLimit: 2
 
