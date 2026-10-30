@@ -86,10 +86,10 @@ update BLUEPRINT.md / PROJECT-PLAN.md in the same PR, so future AI sessions get 
 M0 Setup ──► M1 Catalog data ──► M2 API
   │              └──► M3 Discovery pipeline (runs alongside everything below)
   └──► M4 App foundations ──► M5 Search & add ──► M6 Lists & ranking ──► M7 Money & calendar
-                                                                            └──► M8 Optimizer ──► M9 Payment ──► M10 Extras
+                                                                            └──► M8 Optimizer ──► M9 Payment ──► M10 Extras ──► M11 Catalog expansion
 ```
 - M4 only needs the catalog **file** from M1.5 (as a fixture), not the deployed API.
-- Mapping to BLUEPRINT phases: M0–M3 = Phases 0–1, M4–M6 = Phase 2, M7–M8 = Phase 3, M9 = Phase 4, M10 = Phase 5.
+- Mapping to BLUEPRINT phases: M0–M3 = Phases 0–1, M4–M6 = Phase 2, M7–M8 = Phase 3, M9 = Phase 4, M10 = Phase 5, M11 = Phase 6.
 
 ### M0 — Setup
 These rows describe the setup as built, at `simplely.ca/simply/sub/`. The security review (2026-10-23) moved the
@@ -803,6 +803,138 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
         its 10 s it stays, and left it goes; axe and no horizontal scroll
   - [ ] On the owner's iPhone, from its Home Screen: a tap beside an open list closes it, and a snackbar sits above the
         home indicator with ✕
+
+### M11 — Catalog expansion (Phase 6)
+Planned on 2026-10-30 with the owner, from `docs/catalog-expansion-guide.md` (the owner's research list, the rules
+drafted for it, and the policy rubrics) and the decisions recorded in BLUEPRINT §14. The catalog grows from 13
+providers to several hundred in about 30 service categories, so the rules and the limits come before the research:
+1. **Rules and schema** (M11.1–M11.8): policy topics v2, outside ratings, categories, features that compare,
+   provider facts, ranked perks, regional coverage, and the free-plan limits that would break first.
+2. **The existing 13** (M11.9), re-checked under all of it: the test of the rules before they're used at scale.
+3. **Finance** (M11.10–M11.14): banks, credit unions, fintechs and brokerages as accounts with rates, fee waivers
+   and protection, and an optimizer that weighs a fee against interest (BLUEPRINT §4.11, §10.6).
+4. **The research** (M11.15): a category at a time, as the pipeline's batch pull requests (M10.13's way).
+
+Telecom (mobile and home internet) needs a design of its own first (the guide's §4) and isn't part of M11.
+
+| ID | Task | Done when |
+|---|---|---|
+| M11.1 | Policy topics v2 (BLUEPRINT §4.10): the guide's §1.4 topics and rubrics in `data/policy-topics.yaml` (privacy, billing, legal, a new security group, service and finance topics; `billing.cancel-refunds` split into `billing.cancellation` and `billing.refunds`; `service.vpn-logging` renamed `service.activity-logging`, for VPN, DNS, search and browsers); each topic's `silent` rule; a rating's `status` (not stated, not applicable); `other.notable` with a `title`, up to three; the grading procedure (§1.3) and routing table (§1.5) in the policy-research skill and core's `extractionRules` together; the card's grey Not stated line; shared policy documents (`data/policies/<set>.yaml`: a company's policy rated once, which each provider it covers names with `policies: { shared: [<set>] }` and adds its own ratings to, its own winning a topic both rate) | Every topic has five rungs and a silent rule; the 13 providers' ratings move to the split and renamed topics and still validate; a card shows Not stated in grey; Disney+, Hulu and ESPN share one rated privacy policy; the skill and `extractionRules` state the same procedure |
+| M11.2 | Outside ratings and owners (the owner's choice): a provider's `ratings` (rater, subject, label, date, link) from raters in `data/raters.yaml`, each with its terms of reuse checked; at least two raters for a news provider's bias and reliability, lab results for antivirus; `owner`, quoted from the provider's own about page; both on the card after Terms and policies | A news provider shows two raters' labels with links and dates, and its owner; validation refuses a rater not in the registry and a news bias rating from one rater |
+| M11.3 | Service categories (the guide's §5): finance, social, browsers, search, email, passwords, security, dns, telecom, shopping, developer, file-sharing, calendar, maps, creative, cloud, delivery and jobs in `categories.yaml`, spend categories where card rewards differ, a Wikidata class for each in `wikidataClasses`, and the rule that a plan lists every category it fits | `data:queue` adds services in the new categories; Proton Unlimited is found under AI and email |
+| M11.4 | Features that compare (BLUEPRINT §4.2 rules 7–10): `requiredIn` on a feature (an error when a plan in that category doesn't state it, `false` and `0` included); a warning when two of a provider's plans at different prices, for the same region and period, have the same features and perks; the cross-category features (`platforms`, `software.open-source`, `account.sign-in`, `languages.audio`, `languages.subtitles`, `support.channels`); provider-wide features (a provider's own `features`, which every plan has unless it states its own value), stored once per provider in D1 (`provider_features`) rather than on each plan; `streaming.ad-free` renamed `ad-free`, with a Dexie upgrade of users' ranks and old links' `feature=streaming.ad-free` read as `ad-free` | `video.quality` is required in streaming; Claude's and Xbox Game Pass's plans warn until M11.9; a user's Ad free rank survives the rename; a provider's `platforms` set once writes its rows once |
+| M11.5 | Provider facts (the guide's §3.1): `paymentMethods` (cards, PayPal, app stores, gift cards, bank transfer, cash, crypto) and `currencies` (every currency it takes), each quoted; `renewalAnchor` (the same date, every 30 days, the first of the month, the end of the month), a new item's billing day by default; `sourceRepo` for the open-source link; all on the card, and read by price-research and extraction | Mullvad shows cash and crypto with their quotes; a new item of a plan that renews on the 1st is billed on the 1st |
+| M11.6 | Ranked perks (BLUEPRINT §4.2, the owner's choice): perks with ids at the provider, plans listing theirs; `perk:<provider>/<perk>` rank keys, ranked in the item dialog only and shared with the provider's other plans in the list (M6.14); counted in rank counts, feature summaries, Search's ranks and the optimizer (§10.2, §10.4); `movedTo` on a perk that became a feature, with a Dexie upgrade moving its ranks | A perk ranked Needed on a provider's top plan stops the optimizer suggesting a plan without it; the rank is on that provider's other plans in the list; a perk moved to a feature keeps users' ranks |
+| M11.7 | Regional coverage (the guide's §3.2): `npm run data:coverage` (plans priced in some of a provider's regions but not others; paid plans with no price where it's sold); the region checklist in the price-research skill, each step's result in the provider file's header; a Mullvad Browser reader (`read-page-mullvad.cjs`, WebDriver BiDi, a throwaway profile) as the third browser; the browser that read each page recorded | The report flags a fixture like Claude before M10.17; the reader saves a page's text as `read-page.cjs` does |
+| M11.8 | Limits before growth (BLUEPRINT §5.3, §7.1): Terms and policies in a file per provider (`/data/policies/<id>.json`), out of the region files and D1's `json` column, loaded when a card opens them; the seed writing only the rows that changed, counting its writes first and stopping at the catalog's daily share, whole providers at a time, the rest left for the next deploy or the bot's night; a change of the tables' shape filled over days beside them, then switched; CI printing a pull request's estimated writes; search's FTS5 table, a search column without the long text, and price sorting and pages in SQL (a `seedFormat` bump); `data:build` failing at 20 MiB; the bot checking a rotating slice each night; the API's and the app's tests on a fixed catalog of their own, never `data/` | A Proton price change writes under 10 rows; 400 generated providers seed over several days with no failed deploy, and /health says how many wait; a text search reads under 50 rows; the region files hold no policy quotes; a research batch changes no test's results |
+| M11.9 | The existing 13 under the new rules: every topic regraded, with the calibration table in the pull request; each category's required features and the cross-category ones (Claude, Xbox Game Pass, Bitdefender and Proton first, through feature-discovery for AI, gaming and security); perks given ids; provider facts; the coverage report and region checklist for every region; reviewed by a second model (the guide's §7.3) | No price-differences warning and no coverage gap left without a reason in its header; every rating follows the procedure |
+| M11.10 | Finance in the catalog (BLUEPRINT §4.11): a plan's `account` (kind, fee waivers, interest tiers and how they apply, what the rate follows, limits, protection, eligibility), the finance feature group, `regulators` from regulators' registers, the `finance.money-protection` and `finance.holds` topics; posted rates only, never promotional ones | Two fixture providers (a bank with a waivable fee, a fintech whose better rate is a paid tier) validate; Search filters for a TFSA and fractional shares |
+| M11.11 | Balances (BLUEPRINT §4.6, §11.5): an account item's balance and the waivers the user meets, never indexed, sealed by the app lock, in backups and sync; entered in the item dialog; left out of exports unless chosen | A balance survives a backup and a sync, is in no Dexie index, and is encrypted at rest with the lock on |
+| M11.12 | Interest and net cost (§3.1, core): interest a year from the tiers and the balance, the fee after waivers, and net cost; Home and the lists show interest earned beside spending, never inside subscription totals | A fixture's balance gives the interest its tiers state; a fee the balance waives counts $0 |
+| M11.13 | The finance optimizer (BLUEPRINT §10.6): the balance where a paid rate pays for itself, the cost of holding a waiver's minimum against paying the fee, moving savings to a better account the user has or one sold in their region, and a warning when a balance passes its insurer's limit; worded as information, not advice | A $10 monthly fee for 1.5 points more is worth it above $8,000; a balance over its insurer's limit warns |
+| M11.14 | Rate history (the bot): rates read like prices, each change kept with its date; for a rate that follows the Bank of Canada's, how many days it took to follow its last changes | After a fixture change of the Bank of Canada's rate, a linked rate's lag shows on its card |
+| M11.15 | The research, a category at a time (the guide's §7): feature-discovery for the category, then its providers in batch pull requests of about 10, each reviewed by a second model; pushed once per batch, and web searches after sitemaps and known paths, SearXNG before the paid engines (the guide's §7.2). In order: AI, streaming, music, VPN, password managers and authenticators, antivirus, storage, email, gaming, office and creative, news; then browsers, search, DNS, file sharing, calendars, maps, social, jobs, developer tools; then finance, after M11.10–M11.14 | Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date |
+
+#### M11 specs
+
+**M11.1 — Policy topics v2** (BLUEPRINT §4.10)
+- **The rubrics** are the guide's §1.4, final once this task's pull request merges. The guide stays the place for the
+  reasoning; `data/policy-topics.yaml` is the source of truth.
+- **A topic's `silent`:** what a provider's silence means, as one of `not-stated` or a tier (`poor` for
+  `billing.price-changes`: a missing promise is a missing protection). The owner chose this mix on 2026-10-30.
+- **A rating's `status`:** `not-stated` (the pages read don't address it, with the pages in `links` as usual) or
+  `not-applicable` (no free trial), with a reason and no tier. Every topic that applies to a provider has a rating or
+  a status, so cards line up: validation says which are missing.
+- **The procedure** (the guide's §1.3) and **routing table** (§1.5) go in the policy-research skill's Rules and in
+  core's `extractionRules`, worded the same.
+- **Moving the 13:** `billing.cancel-refunds` becomes two ratings from the same quotes, regraded in M11.9;
+  `service.vpn-logging` is renamed. Policy topics aren't in users' data, so there's no Dexie upgrade.
+- **Acceptance**
+  - [ ] `data:validate` refuses a topic without `silent` or five rungs, and a provider missing an applicable topic
+  - [ ] A Not stated line is grey, with the reason, in both themes, and passes axe
+
+**M11.6 — Ranked perks** (BLUEPRINT §4.2)
+```yaml
+# data/providers/xbox-game-pass.yaml (a sketch)
+perks:
+  - { id: fortnite-crew, name: Fortnite Crew passes }
+plans:
+  - id: xbox-game-pass.ultimate
+    perks: [fortnite-crew]
+```
+- **Rank keys** `perk:<provider>/<perk>`. `providedKeys` adds a plan's perks; `rankKeyLabel` names them by the
+  provider's name for them.
+- **Where they're ranked:** the item dialog's ranks (P6) and nowhere else: Features (P9) never lists them. They're
+  item overrides, so resolution (§3.2) is unchanged, and M6.14's sharing carries them to the provider's other plans
+  in the list. Essential and Critical apply to them.
+- **The optimizer** treats them as any rank key (BLUEPRINT §10.2, §10.4): a Needed perk must stay provided in every
+  month it was, a lost Wanted perk makes a suggestion yellow, and an unranked perk is Not ranked.
+- **`movedTo`:** a perk that became a feature names its rank key; a Dexie upgrade rewrites users' overrides once.
+- **Acceptance**
+  - [ ] The optimizer fixture: with the perk Needed, no suggestion drops it; unranked, the cheaper plan is suggested
+  - [ ] Ranking a perk in one plan's dialog ranks it on its siblings in the list, and not with "Ranks for this plan
+        only" ticked
+
+**M11.8 — Limits before growth** (BLUEPRINT §5.3, §7.1)
+Measured on 2026-10-30: 13 providers make 125 KB of catalog, about 9.6 KB each, 41% of it policy quotes. Policies v2
+about doubles the topics, so 20–30 KB a provider is likely. The quotes are in every region file the app downloads and
+in every D1 `json` column search parses.
+- **Policies out** (first, since it shrinks the other two): `data:build` writes each provider's `policies` to
+  `/data/policies/<id>.json` (its hash in `index.json`) and leaves them out of `catalog.json`, the region files and
+  D1. The card fetches the file when Terms and policies opens, and keeps it in `catalogCache` like any catalog file
+  (one record per file). `GET /providers/:id` points to the file.
+- **Rows that changed, not providers:** a changed provider is deleted and inserted again today, every row plus every
+  index entry (Proton: 882 writes for one price). The seed instead reads the changed providers' rows (rows read are
+  plentiful: 5 million a day) and writes only the difference: a price change is its price row and that row's index
+  entry. The provider's hash still says which providers to compare.
+- **A daily budget:** the seed counts its writes before running (an insert or delete is 1 plus one per index; an
+  update, the rows and index entries it changes). The catalog's share is 50,000 a day: D1's 100,000 for the account,
+  less the user database's 41,000 cap (M10.1), less a margin. Over it, the seed applies whole providers, in the
+  file's order, until the next one wouldn't fit, and records how many wait in the `catalog` row (`/health` says so).
+  The deploy succeeds; since providers are compared by hash, the next deploy carries on, and the bot's nightly run does
+  too: a Workflows step that seeds what waits (the bot gets the catalog database's binding, and reads the per-provider
+  files to build the SQL, a provider per step within its 10 ms).
+- **Full reseeds** spread the same way. A `seedFormat` bump that changes only derived columns is updates through the
+  budget. One that changes a table's shape builds the new tables beside the old (`plans_v3`…), filled through the
+  budget over the days it needs, then the API switches to them in one small write and the old ones are dropped.
+- **CI** prints a pull request's estimated writes (core's seed against main's built catalog, which is what D1 holds),
+  so a large batch is seen before it merges; it never fails a pull request, since the budget makes it safe.
+- **Search:** a text search can't use an index today, so D1 returns every provider and the Worker parses and matches
+  them all (about 10 ms of CPU at about 200 providers, the free plan's limit).
+  - An FTS5 table (`provider_search`: names, aliases, plan names, and the names and aliases of the features its plans
+    have) finds the candidates in D1; the Worker parses only those.
+  - A `search` column holds what `searchProviders` needs (no policies, notes, perks' text or resellers' listings), so
+    every parse is smaller; `GET /providers/:id` keeps the full `json`.
+  - Sorting by price and paging run in SQL on `prices (region, monthly_equiv)` with `LIMIT`, so a query with no text
+    reads a page of providers, not all of them.
+  - The FTS table's rows count as writes too: a few per provider, only when its names change.
+- **Shared policies** (M11.1) are files of their own too, `/data/policies/<set>.json`, fetched once for every provider
+  that names them.
+- **Tests on a fixed catalog:** the API's contract and search tests and the app's specs read a fixture catalog in
+  their own folder, built by the same `data:build` code, never `data/`. A research batch then changes no test (it moved
+  the contract test's VPN results more than once).
+- **Static files:** `data:build` fails at 20 MiB for any file, with the file named, before Cloudflare's 25 MiB refuses
+  the deploy. Without policies, a provider is about 6–15 KB, so `catalog.json` holds well over 1,500.
+- **Acceptance**
+  - [ ] Seed tests in workerd: a price change, a feature added to 100 providers, a budget reached mid-catalog and
+        resumed, a shape change over three days with the API reading only complete tables
+  - [ ] EXPLAIN QUERY PLAN shows no table scan for text, category or price-sorted queries
+  - [ ] Opening Terms and policies offline after one visit shows them; first time offline says they need a connection
+
+**M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
+- **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and
+  cards already work. What's new is the plan's `account` block and the finance features (§4.11).
+- **Sources:** the provider's own pages, plus regulators' registers (CDIC's members, CIRO, FCAC, provincial deposit
+  insurers and regulators), which count as official for finance. Rate tables on other sites only help find banks.
+- **Acceptance**
+  - [ ] Validation refuses a rate tier out of order, a waiver with no condition, and protection without a quote
+  - [ ] An account's card shows its rates, waivers, limits and protection, with their quotes, in both themes
+
+**M11.13 — The finance optimizer** (BLUEPRINT §10.6)
+- **Acceptance**
+  - [ ] Fixtures: paying for a better rate (worth it above the break-even, not below); holding a waiver's minimum
+        against paying the fee; moving savings to a better account; a balance over its insurer's limit
+  - [ ] Every finance suggestion says it's information, not financial advice
 
 ---
 

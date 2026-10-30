@@ -75,6 +75,12 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
   the sum of their plans (BLUEPRINT §4.4).
 - All colours are CSS custom properties. Never hard-code hex values in components.
 - Ranking uses rank keys (`video.quality=4k`, `streaming.concurrent-streams=2-4`), and group ranks never cascade (PROJECT-PLAN.md §3.2).
+- Perks become rank keys (`perk:<provider>/<perk>`, M11.6): ranked on the plan, shared with the provider's other plans
+  in a list, never on the Features page, and counted by the optimizer. Features stay the general list; a perk is only
+  for what no feature describes.
+- Growing the catalog (new categories, policy topics v2, finance) follows PROJECT-PLAN's M11 and
+  `docs/catalog-expansion-guide.md`, which has the rubrics and research rules until M11 moves them into the data
+  and skills.
 - Money and time terms ("this month", "this year", "next 12 months", monthly equivalent) are defined in PROJECT-PLAN.md §3.1. Compute them only in `packages/core`.
 - List editing works on a draft saved in Dexie: Save commits atomically, Cancel discards.
 - `packages/core` functions never read the clock. They take `today` as a parameter, and the app passes it in from a single `ClockService`, so tests can fix the date.
