@@ -279,6 +279,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.17 | Claude's Canadian prices (added 2026-10-30, the feedback after M10): Search showed only Claude's free plan with Sold in or Native pricing only on, since its paid plans had only US prices; Pro CA$28 a month and CA$280 a year, Max 5x CA$140 and Max 20x CA$280 a month, read from claude.com/pricing in Canada, whose own pricing data names CAD, and the owner's bill; the price-research driver now sends the browser's own user agent, which a headless one isn't shown (BLUEPRINT §14) | A Canadian with Sold in on, or Native pricing only, sees Claude's four plans, Pro at $28 a month with no ≈ |
 | M10.18 | Ids, not names (added 2026-10-30, the feedback after M10): tests that things named alike stay apart, two custom subscriptions called Gym and one called Netflix with a plan called Standard beside the catalog's Netflix Standard, through resolving, the editor's duplicate question, Search's listed status, shared ranks, type counts, the optimizer's `custom:` keys, exports, calendar UIDs, list files, icons, backups and sync; a custom plan is matched only within its own subscription (`isDuplicate`, `customSubChange`), and Assign best cards keys the lists it skips by id (BLUEPRINT §14) | core's `same-names.spec.ts` and the editor's spec pass: a custom Netflix never asks as a duplicate of the catalog's, never lists Netflix on Search and never becomes its extra member, and two Gyms are two plans |
 | M10.19 | Menus that close, snackbars with ✕ (added 2026-10-30, the feedback after M10): a menu you can type in (`ss-choice-field`) closes on a press anywhere else, though focus stays in the field as an iPhone leaves it, and when focus goes nowhere (an iPhone keyboard's Done), a choice pressed in it still picked; every snackbar is the app's own (`shared/snack`): its action, if any, and ✕ (Dismiss), Escape unless a dialog or menu above it takes the key, focus back where it came from, 5 s or 10 s with Undo counted while it isn't hovered or focused, 8 px above the home indicator (P1, P15; BLUEPRINT §14) | On a phone, a tap beside an open Country, Province or Currency list closes it; every snackbar has ✕, Escape closes it, and it sits above the home indicator; Tab reaches its Undo then ✕, and Enter on ✕ puts focus back |
+| M10.20 | The Calendar's controls and month cards (added 2026-10-30, the feedback after M10): Month and Year first, then Today, then ‹, the month, the year and › (that Tab order); Month, Year and Today never moving as the view changes, and the arrows at the row's end (the views' outlined padding a pixel less, for the border); on a phone Month and Year on Today's row, Today at its end, and the arrows on their own row; the year view's month card one target, its link over its days, with no text to select (P10; BLUEPRINT §14) | At 1280 px Month, Year and Today stay put from the month view to the year view; at 360 px Today shares their row; a click on any part of a month card opens its month, with the pointer cursor, and a double click selects nothing |
 
 #### M10 specs
 
@@ -1822,6 +1823,12 @@ Upcoming   Oct 28 Crave $22.00 · Nov 3 Mullvad ≈ $7.53 ↻ · Nov 12 Netflix 
 **Since M10 (M10.3):** Sync calendar ▾ starts with **Live calendar…**, the dialog that makes, shows, changes and
 revokes the live calendar's links (a calendar for everything, each tag chosen, the payments without a tag); the file
 items below it are named "Google Calendar file" and so on. The dialog's spec is M10.3's.
+
+**Since the feedback after M10 (M10.20):** the controls read Showing, Month | Year, [Today], ‹ [Month] [Year] ›, and
+Tab follows them. Month, Year and Today lead and the arrows end the row, so nothing but the arrows' group moves when
+the year view takes the Month select away; on a phone Month and Year share Today's row, Today at its end, and the
+arrows have a row of their own. In the year view a month card is one target: its link covers its days, total and
+strip, with the pointer cursor, and a double click selects none of its text.
 
 **Acceptance**
 - [ ] Charges appear on the right days, including month-end dates and limited windows

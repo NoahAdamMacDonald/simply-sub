@@ -450,6 +450,15 @@ at both widths, keyboard only, each part on its own, so one failing doesn't stop
 - Settings: the 📍 dialog's province typed ("que" is Quebec alone) and the tag editor's picker;
 - Home: the bars' colour on the scale and the warnings' ✕.
 
+`check-m10-calendar-controls.cjs` (M10.20, the feedback after M10, part 2) checks the Calendar's controls and the year
+view's cards on `ng serve` for a Canadian in Alberta (base URL ending in `/`), with Work Related and Family written to
+IndexedDB, in both themes at both widths: the Tab order Month, Year, Today, ‹, the month, the year, › (in the year view
+then January); at 1280 px Month, Year and Today not moving when the view changes, and the arrows at the row's end; at 360 px Month and Year on Today's row with Today at its end, and the arrows on a row of their own; every point
+of March's card being its link (`elementFromPoint` on its days, total and strip) with the pointer cursor, a double click
+on its total selecting nothing (`user-select: none`), and a click on its days opening March. With axe on both views,
+screenshots and no horizontal scroll. An outlined Material button is 2 px wider than a filled one (its border), which
+is why the views' outlined padding is a pixel less a side.
+
 `check-m10-calendar.cjs` (M10's Calendar batch: M10.3, and M10.4's year view) needs `wrangler dev` behind `ng serve`'s
 proxy, its user database migrated (`npm -w apps/api run db:user:migrate:local`), since the live calendar's requests
 go to the Worker; it answers `/fx` itself. For a Canadian in Alberta with Work Related (Netflix tagged Family, Crave
@@ -462,7 +471,7 @@ billed on the 31st) and Family (Mullvad renewed by hand), in both themes at both
 - light and wide only: a nickname written to IndexedDB reaching the feed after a reload (the next start), Change
   calendars keeping each link, and Revoke all asking first (focus on Cancel), then every link answering 404;
 - the year view (M10.4): Year by Enter (pressed, in the URL, the year's bar), twelve month links each named with all
-  its card shows, no Month select and the arrows by year, Tab from Today to January then February, axe and a
+  its card shows, no Month select and the arrows by year, Tab from Next year to January then February (Today comes before the arrows since M10.20), axe and a
   full-page screenshot, Enter on March opening its month with focus on its grid, then Year and Month by Enter.
 
 A feed takes 30 fetches a minute, so poll one every 2 s, not every 100 ms, or the Worker's 429 looks like a missing

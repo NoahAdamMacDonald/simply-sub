@@ -3055,6 +3055,15 @@ The owner's nine points after M10, a task row each in PROJECT-PLAN ("added 2026-
   count of lists a custom subscription's removed plans leave. Plan ids are random, so they never clashed, but a backup
   edited by hand could; both now match the subscription too. Assign best cards named the lists it skips by name in
   its `@for`'s track, and two lists can share one, so they're tracked by id.
+- **The Calendar's controls (M10.20):** Month and Year sat between Showing and the arrows in a group pushed to the
+  row's end, so the year view, which drops the Month select, moved them 180 px. They now lead, with Today beside them,
+  and the arrows' group ends the row, its content at its end. An outlined Material button is 2 px wider than a filled one (its 1 px border), which shifted Year
+  by 2 px as Month changed look: the views' outlined padding is a pixel less a side. On a phone Material's form
+  fields' 180 px minimum width had to be let go (`min-width: 0` on the field and the rows that hold it) for ‹ [Month]
+  [Year] › to fit 360 px.
+- **The year view's cards (M10.20):** a card's link was stretched over it, but its days are positioned (for their
+  payment dots), so they painted above the link and took the clicks: the link's stretch is now above them
+  (`z-index: 1`), and the card takes no text selection.
 - **Focus (M10.14):** Join opens on Scan the QR code, its first control, so a phone's keyboard doesn't cover it;
   the words are a Tab on. The scanner takes the button's place and focus with it, onto Stop scanning, and gives it back.
 - **The Proton test feed (M10.2):** deleted from the user database on 2026-10-30 with the owner's OK. Proton Calendar

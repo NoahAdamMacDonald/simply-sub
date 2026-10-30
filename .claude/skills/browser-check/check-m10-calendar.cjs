@@ -518,8 +518,8 @@ async function yearView(page, viewport, label) {
     `${label}: no month to choose, and the arrows go by year`,
     !controls.month && controls.next,
   );
-  // Tab from Today reaches January, then February.
-  await tabToNamed(page, 'Today');
+  // Tab from Next year reaches January, then February (since M10.20 Today comes before the arrows).
+  await tabToNamed(page, 'Next year');
   await page.keyboard.press('Tab');
   const first = await page.evaluate(() => document.activeElement?.getAttribute('aria-label') ?? '');
   await page.keyboard.press('Tab');
@@ -527,7 +527,7 @@ async function yearView(page, viewport, label) {
     () => document.activeElement?.getAttribute('aria-label') ?? '',
   );
   check(
-    `${label}: Tab goes from Today to January, then February`,
+    `${label}: Tab goes from Next year to January, then February`,
     first.startsWith('January') && second.startsWith('February'),
     `${first} / ${second}`,
   );
