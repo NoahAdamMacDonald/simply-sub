@@ -17,6 +17,7 @@ import {
   utcDay,
   utcTimestamp,
 } from '../http';
+import { contentHash, openFeed, sealFeed } from '../feed-seal';
 import {
   bearerSecret,
   bodyProblems,
@@ -27,7 +28,6 @@ import {
   readJson,
   resourceAllowed,
   secretHash,
-  sha256Hex,
   storageCap,
   storageFull,
 } from '../writes';
@@ -35,9 +35,10 @@ import {
 // The live calendar (BLUEPRINT §5.2, §11.3, M10.2), in the user database, under the write rules (writes.ts). POST /cal
 // makes a feed set, PUT /cal/:id changes it and DELETE /cal/:id revokes it, each but the first with the manage key POST
 // gave; GET /cal/:token.ics serves one of its calendars to the apps that subscribe. The database keeps the set's id, its
-// manage key's hash and when it's deleted, and per feed its token's hash and its calendar file (core's feedIcs), so it
-// names no link. Calendar apps' servers fetch many users' feeds from one address, so a feed is limited by itself
-// (FEED_RATE_LIMIT, 30 a minute), not by IP (middleware.ts).
+// manage key's hash and when it's deleted, and per feed its token's hash and its calendar file (core's feedIcs), sealed
+// with a key only the token gives (feed-seal.ts, M10.21), so it names no link and says nothing of what's paid for.
+// Calendar apps' servers fetch many users' feeds from one address, so a feed is limited by itself (FEED_RATE_LIMIT, 30
+// a minute), not by IP (middleware.ts).
 
 interface Api {
   Bindings: Env;
@@ -52,18 +53,37 @@ const rowsEach = 2;
 
 /** A stored feed, as the database keeps it. */
 export interface FeedRow {
-  /** A SHA-256 of what the calendar was made from: its ETag's start, and how a PUT knows it hasn't changed. */
+  /**
+   * A hash of what the calendar was made from, keyed by its token: its ETag's start, and how a PUT knows it hasn't
+   * changed. A feed stored before M10.21 has a plain SHA-256 until it's sealed.
+   */
   content_hash: string;
-  ics: string;
+  /** Its calendar file, sealed (feed-seal.ts), as base64; null for a feed stored before M10.21 until it's sealed. */
+  sealed: string | null;
+  /** The plain calendar file of a feed stored before M10.21; null once it's sealed. */
+  ics: string | null;
 }
 
-/** The row for `feed` written at `stamp`: its calendar file and the hash of what it was made from. */
-export async function feedRow(feed: CalendarFeed, stamp: string): Promise<FeedRow> {
-  const { name, color, events } = feed;
-  return {
-    content_hash: await sha256Hex(JSON.stringify({ name, color: color ?? null, events })),
-    ics: feedIcs(feed, stamp),
-  };
+/** What a feed's calendar is made from, as its content hash takes it. */
+function feedContent({ name, color, events }: CalendarFeed): string {
+  return JSON.stringify({ name, color: color ?? null, events });
+}
+
+/**
+ * The row for `feed` under `token`, whose hash is `tokenHash`, written at `stamp`: its calendar file sealed with the
+ * token's key, and the keyed hash of what it was made from.
+ */
+export async function feedRow(
+  feed: CalendarFeed,
+  token: string,
+  tokenHash: string,
+  stamp: string,
+): Promise<{ content_hash: string; sealed: string }> {
+  const [content_hash, sealed] = await Promise.all([
+    contentHash(token, feedContent(feed)),
+    sealFeed(token, tokenHash, feedIcs(feed, stamp)),
+  ]);
+  return { content_hash, sealed };
 }
 
 export const cal = new Hono<Api>()
@@ -142,15 +162,16 @@ export const cal = new Hono<Api>()
         writes.push(await insertFeed(db, id, tokens[index], feed, stamp));
         continue;
       }
-      const row = await feedRow(feed, stamp);
-      // A calendar that hasn't changed keeps its file, stamp and ETag.
-      if (row.content_hash !== contents.get(hash)) {
+      // A calendar that hasn't changed keeps its file, stamp and ETag. One stored before M10.21 has a plain hash, so
+      // it's sealed now.
+      if ((await contentHash(tokens[index], feedContent(feed))) !== contents.get(hash)) {
+        const row = await feedRow(feed, tokens[index], hash, stamp);
         writes.push(
           db
             .prepare(
-              'UPDATE cal_feeds SET content_hash = ?, ics = ?, updated_at = ? WHERE token_hash = ?',
+              'UPDATE cal_feeds SET content_hash = ?, sealed = ?, ics = NULL, updated_at = ? WHERE token_hash = ?',
             )
-            .bind(row.content_hash, row.ics, stamp, hash),
+            .bind(row.content_hash, row.sealed, stamp, hash),
         );
       }
     }
@@ -187,17 +208,43 @@ export const cal = new Hono<Api>()
     const hash = await secretHash(token);
     if (!(await c.env.FEED_RATE_LIMIT.limit({ key: hash })).success) return rateLimited(c);
     const row = await c.env.USER_DB.prepare(
-      `SELECT f.content_hash, f.ics FROM cal_feeds f JOIN cal_sets s ON s.id = f.set_id
+      `SELECT f.content_hash, f.sealed, f.ics FROM cal_feeds f JOIN cal_sets s ON s.id = f.set_id
        WHERE f.token_hash = ? AND s.expires_on > ?`,
     )
       .bind(hash, utcDay(new Date()))
       .first<FeedRow>();
     if (row === null) return feedGone(c, 'calendar feed');
-    // Revalidated each time, so a revoke or a change shows at the app's next check.
+    // A feed stored before M10.21 is served as it is, and sealed now that its token is here.
+    if (row.ics !== null) await sealStored(c.env.USER_DB, token, hash, row.ics);
+    // Revalidated each time, so a revoke or a change shows at the app's next check. A 304 needs no key.
     const headers = { 'Cache-Control': 'no-cache', ETag: `"${row.content_hash.slice(0, 16)}"` };
     if (notModified(c, headers.ETag)) return c.body(null, 304, headers);
-    return c.body(row.ics, 200, { ...headers, 'Content-Type': 'text/calendar; charset=utf-8' });
+    const ics = row.sealed === null ? (row.ics ?? '') : await openFeed(token, hash, row.sealed);
+    return c.body(ics, 200, { ...headers, 'Content-Type': 'text/calendar; charset=utf-8' });
   });
+
+/**
+ * Seals the plain file of a feed stored before M10.21, with its keyed hash, when the day's writes have room; the next
+ * fetch gets the new ETag, and the file again. A failure leaves it plain for the next request: the fetch is answered.
+ */
+async function sealStored(db: D1Database, token: string, hash: string, ics: string): Promise<void> {
+  try {
+    const now = new Date();
+    if (!(await countWrite(db, 'cal', rowsEach, utcDay(now))).allowed) return;
+    const [content_hash, sealed] = await Promise.all([
+      contentHash(token, ics),
+      sealFeed(token, hash, ics),
+    ]);
+    await db
+      .prepare(
+        'UPDATE cal_feeds SET content_hash = ?, sealed = ?, ics = NULL WHERE token_hash = ? AND ics IS NOT NULL',
+      )
+      .bind(content_hash, sealed, hash)
+      .run();
+  } catch {
+    // Left plain until a request seals it.
+  }
+}
 
 /** The body of a POST or PUT, checked; or the 400 or 413 that refuses it. */
 async function readFeeds(c: Context<Api>): Promise<CalendarFeeds | Response> {
@@ -237,12 +284,13 @@ async function insertFeed(
   feed: CalendarFeed,
   stamp: string,
 ): Promise<D1PreparedStatement> {
-  const row = await feedRow(feed, stamp);
+  const hash = await secretHash(token);
+  const row = await feedRow(feed, token, hash, stamp);
   return db
     .prepare(
-      'INSERT INTO cal_feeds (token_hash, set_id, content_hash, ics, updated_at) VALUES (?, ?, ?, ?, ?)',
+      'INSERT INTO cal_feeds (token_hash, set_id, content_hash, sealed, updated_at) VALUES (?, ?, ?, ?, ?)',
     )
-    .bind(await secretHash(token), id, row.content_hash, row.ics, stamp);
+    .bind(hash, id, row.content_hash, row.sealed, stamp);
 }
 
 /** Each feed's links, in the order sent: its https:// URL, which Google and Proton take, and Apple's webcal://. */

@@ -1229,7 +1229,7 @@ M1.14), so a buyer can see what signing up means beyond the price.
 | `GET /fx?base=CAD` | The ECB's daily rates in the user's currency. The Worker fetches them in euros from Frankfurter's ECB-only route (`/v2/providers/ecb/rates?base=EUR`; v1 is deprecated, and v2's default blends in other central banks), keeps them in KV under `fx:ecb` for 12 hours, and rebases them to any currency the ECB publishes (core's `rebaseRates`), so one fetch serves every base. When Frankfurter fails after that, the last good rates are sent with `meta.stale: true`; with none kept, `502 upstream_unavailable`. `GET /providers` uses the same rates (M2.3) |
 | `GET /health` | Returns the API version, and the catalog version, build time and counts that D1 holds (the `catalog` row, section 5.3) |
 | `POST /reports` | "Report a wrong price" (M10.10): a plan the catalog has, the visitor's country and what's wrong (another price, with its amount, currency and period; not sold any more; not sold in that country), in choices only: no free text, so nothing a visitor types reaches a person or a model (core's `priceReportSchema`, strict). `202` with no body. The user database counts it, a row per plan, country, problem and price, with nothing about the sender; the nightly clean-up hands the counts to the bot (section 6.4). 3 a minute per IP besides the write limit, and 500 a day |
-| `POST /cal` | Makes a live calendar feed set (section 11.3, M10.2): one calendar per feed sent (everything, each tag chosen, no tag), each payment's title, day and repeat rule only. Answers each feed's token and links, and the set's manage key, shown once. The user database keeps hashes of the tokens and the key, and each feed's calendar file |
+| `POST /cal` | Makes a live calendar feed set (section 11.3, M10.2): one calendar per feed sent (everything, each tag chosen, no tag), each payment's title, day and repeat rule only. Answers each feed's token and links, and the set's manage key, shown once. The user database keeps hashes of the tokens and the key, and each feed's calendar file, sealed with a key derived from its token (M10.21) |
 | `PUT /cal/:id` | Replaces a set's calendars with its manage key (`Authorization: Bearer`): a feed with its token keeps its URL and, unchanged, its file; one without gets a new URL; one left out is revoked. Its 180 days start again. 6 writes a minute per set |
 | `DELETE /cal/:id` | Revokes a set with its manage key: every calendar of it answers 404, and nothing of it is kept |
 | `GET /cal/:token.ics` | One calendar file (`text/calendar`), revalidated on every fetch (`no-cache` with an ETag), so a change or a revoke shows at the app's next check. Limited per feed (30 a minute), not per IP, since calendar apps' servers share addresses |
@@ -2775,6 +2775,20 @@ prompted after each big change, or weekly).
   time, `X-WR-CALNAME` and RFC 7986's `NAME`, Apple's `X-APPLE-CALENDAR-COLOR`, a 12-hour refresh hint), keeps only
   hashes of the tokens and the set's manage key, and deletes a set 180 days after the app last wrote it. RFC 7986's
   `COLOR` is left out: it takes only a CSS colour name.
+- **Sealed at rest (M10.21, the owner's choice):** the database held each calendar's file as served, so whoever could
+  read it (Cloudflare, or a leak) could read what a user pays for, when, and for whom, with no link to a user beyond
+  that. A feed's token reaches the Worker with every request that needs the file (the app's PUT, a calendar app's
+  GET) and is kept only as its SHA-256, so it can key the file without the server keeping a key: HKDF-SHA256 from the
+  token (info `simply-sub cal: file key`) gives an AES-256-GCM key that seals the file, gzipped first, with the row's
+  token hash as additional data (`feed-seal.ts`; a format byte, the IV, then the ciphertext, as base64 in `sealed`).
+  The hash of what a calendar was made from, its ETag and a PUT's "unchanged" test, is an HMAC keyed the same way
+  (info `simply-sub cal: content hash`), so a copy of the database can't be matched to a guess at a calendar either.
+  A GET finds the row by the token's SHA-256 and answers a 304 before opening anything. A feed stored before is
+  served as it was and sealed by the next GET or PUT that brings its token (with a new ETag, once), unless the day's
+  writes are at their cap. What the database still says: how many calendars a set has, when each changed, and how big
+  its sealed file is. Measured in Node: opening a 30-event calendar 0.33 ms, sealing and hashing it 0.43 ms; at 2,000
+  events 2.1 and 4.1 ms, beside the 15 ms building that file already took. A PUT whose calendar hasn't changed now
+  only hashes, without building it.
 - **As built (M10.3), the app's side:** Sync calendar's **Live calendar…** and Settings' Live calendar card open one
   dialog: what's uploaded and who can see it, the calendars (Everything, each tag, Payments without a tag) and what
   each payment shows; then each calendar's link with Copy link, Google's add page (its undocumented
@@ -3064,6 +3078,11 @@ The owner's nine points after M10, a task row each in PROJECT-PLAN ("added 2026-
 - **The year view's cards (M10.20):** a card's link was stretched over it, but its days are positioned (for their
   payment dots), so they painted above the link and took the clicks: the link's stretch is now above them
   (`z-index: 1`), and the card takes no text selection.
+- **The live calendar's privacy (M10.21, the owner's choice):** the owner asked how a live calendar is encrypted. Its
+  links are HTTPS, and the database kept only hashes of its tokens and manage key, but each calendar's file as
+  served, so the titles, amounts and dates sat readable at rest. They're now sealed with a key derived from each
+  feed's token, which the server never keeps (section 11.3). A calendar app still receives the file in the clear over
+  HTTPS, as an `.ics` subscription must be.
 - **Focus (M10.14):** Join opens on Scan the QR code, its first control, so a phone's keyboard doesn't cover it;
   the words are a Tab on. The scanner takes the button's place and focus with it, onto Stop scanning, and gives it back.
 - **The Proton test feed (M10.2):** deleted from the user database on 2026-10-30 with the owner's OK. Proton Calendar
