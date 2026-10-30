@@ -275,6 +275,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.13 | The first regions: a batch pull request each for the US's gaps, the United Kingdom, the euro countries, and Australia and New Zealand | A user there sees native prices for every provider whose pages could be read |
 | M10.14 | Scan to join, once (added 2026-10-30, the feedback after M10): Show the code's QR code is a join link that works once, for 10 minutes (`/join#<id>.<key>`: the code sealed with a key only the link carries, `POST /join` and `DELETE /join/:id`), which a phone's camera opens; Join scans one with the device's camera; Turn on and Start over show the words alone (P13; BLUEPRINT §5.2, §11.4, §14) | A link opened on a new device joins with no word typed, and again says it was used; one past its 10 minutes or withdrawn opens nothing; no request carries the key; Join's camera reads Show the code's QR code |
 | M10.15 | Join on the first visit (added 2026-10-30, the feedback after M10): the first-run dialog's Join with a sync code, and a join link opened on a new device, start its settings from the synced copy's, with the device's own theme (P1, P13) | A new device joins from its first run, with no Merge or Replace, its settings the copy's place and budgets with its own theme, and the first run is over |
+| M10.16 | The Home Screen app fits (added 2026-10-30, the feedback after M10): `viewport-fit=cover`, and the safe areas (`--ss-inset-*`) padding the top bar, the sidebar, the page's foot, a full-screen dialog, the lock screen and the IndexedDB notice; an installed app's top at least `100vh − 100dvh`, for iOS 26.1's status bar (WebKit bug 301994); Inter in woff2 alone, which pays for them in the initial bundle (P1; BLUEPRINT §8.1, §14) | With a phone's safe areas (59 and 34 px, through CDP) the ☰, the logo and a full-screen dialog's title are below the status bar, and the drawer's foot, the page's end and the dialog's button above the home indicator; a browser tab is as before; the owner's iPhone, from its Home Screen, shows the ☰ and the drawer's foot without scrolling |
 
 #### M10 specs
 
@@ -736,6 +737,36 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   settings are saved any other way. Tested in `sync-service.spec.ts`, `first-run-dialog.spec.ts` and
   `check-m10-join-link.cjs`.
 
+**M10.16 — The Home Screen app fits** (the feedback after M10; P1; BLUEPRINT §8.1, §14)
+- **Why:** opened from an iPhone's Home Screen, the app was cut off at the top (the ☰ out of reach until scrolled to)
+  or at the bottom (the drawer's Settings and theme), though it fit in Safari. The viewport didn't reach the screen's
+  edges, so nothing knew the status bar's or the home indicator's size, and iOS 26.1 and later draw the status bar over
+  an installed app's top while saying no inset is there (WebKit bug 301994, reopened for 26.5 and 27).
+- **The viewport:** `viewport-fit=cover`, so `env(safe-area-inset-*)` has the edges' sizes. `_tokens.scss` names them
+  `--ss-inset-top`, `-bottom`, `-left` and `-right`. In an installed app (`display-mode: standalone`) the top is at
+  least `100vh − 100dvh`: there iOS's `vh` counts the band its status bar covers and `dvh` doesn't, and both are equal
+  where nothing covers the top. A browser tab, whose `vh` and `dvh` differ by its toolbar, never takes it.
+- **What keeps clear:** the top bar reaches the screen's top in its own colour, its ☰ below the status bar, and what
+  pages pin below it moves down with it (`--ss-top-bar-height`); from 960 px the sidebar and the page start below the
+  status bar. The sidebar's foot, the page's end, a full-screen dialog's buttons, the lock screen and the IndexedDB
+  notice stay above the home indicator, and the sides clear a landscape notch. Skip to main content shows below the
+  status bar.
+- **The bundle:** the insets' rules are in the initial bundle, so Inter's `@font-face` rules are written from
+  Fontsource's metadata in woff2 alone: every browser the app supports reads it, and the woff beside each cost 1.4 kB.
+  499.29 kB initial on `main` (499.65 before), and the fonts in `/media/` 21 files instead of 42.
+- **Acceptance**
+  - [x] With a phone's safe areas set through CDP (59 px top, 34 bottom) and the display mode standalone: the ☰, the
+        logo and the item dialog's title below the status bar; the drawer's foot, Settings' end and the dialog's
+        button above the home indicator; the drawer with nothing to scroll; Search's bar pinned below the top bar;
+        Skip to main content off-screen until it has focus
+  - [x] A browser tab as before (`check-shell.cjs`); both themes at 360 and 1280 px, axe, no horizontal scroll
+  - [ ] The owner's iPhone 17, from its Home Screen: the ☰ and the drawer's Settings and theme in reach without
+        scrolling (the preview link)
+- **As built:** `index.html`'s viewport, `_tokens.scss`' insets, the shell's, the sidebar's, the lock screen's and the
+  IndexedDB notice's styles, `styles.scss`' full-screen dialog, and `_fonts.scss`. Checked by
+  `check-home-screen-app.cjs` (CDP's `Emulation.setSafeAreaInsetsOverride` and `setEmulatedMedia`) and
+  `check-shell.cjs`.
+
 ---
 
 ## 3. Core rules every page uses
@@ -990,6 +1021,10 @@ Chromium) and, where those aren't supported (Safari), `::-webkit-scrollbar` with
   subscriptions, if any". Elsewhere: "Prices for United Kingdom already include sales tax."
 - **[Import a backup instead]** (M6.9) opens Import backup (P13) as one Import, with no question, since there's
   nothing here yet. The backup's settings end the first run.
+
+**Since the feedback after M10 (M10.16):** installed on a phone's Home Screen, the shell keeps clear of its status bar
+and home indicator: the top bar reaches the screen's top in its colour, with ☰ below the status bar, and the drawer's
+foot and the page's end stay above the home indicator.
 
 **Since the feedback after M10 (M10.15):** Join with a sync code sits beside Import a backup instead: a new device
 joins a synced copy, its settings starting from the copy's with the theme on screen. A join link opened on a new

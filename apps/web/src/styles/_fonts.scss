@@ -1,9 +1,22 @@
 // Self-hosted fonts, bundled from npm, so the app never calls Google Fonts (BLUEPRINT §1.2).
+@use 'sass:map';
+@use '@fontsource/inter/scss/metadata' as inter;
 
-// Inter in the three weights the Material type scale uses (regular, medium, bold).
-@use '@fontsource/inter/400' as inter-400;
-@use '@fontsource/inter/500' as inter-500;
-@use '@fontsource/inter/700' as inter-700;
+// Inter in the three weights the Material type scale uses (regular, medium, bold), each of its subsets in woff2 only:
+// every browser the app supports reads it, and the woff Fontsource's own CSS adds beside each cost the initial bundle
+// about 1.4 kB (the feedback after M10).
+@each $weight in (400, 500, 700) {
+  @each $subset, $range in map.get(inter.$metadata, unicode) {
+    @font-face {
+      font-family: Inter;
+      font-style: normal;
+      font-display: swap;
+      font-weight: $weight;
+      src: url('@fontsource/inter/files/inter-#{$subset}-#{$weight}-normal.woff2') format('woff2');
+      unicode-range: $range;
+    }
+  }
+}
 
 // Material Symbols (outlined, weight 400). Declared here instead of importing the Fontsource CSS
 // because an icon font needs `block`: `swap` would flash ligature names like "dark_mode".

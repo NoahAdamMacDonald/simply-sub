@@ -119,5 +119,9 @@ h1 {
     .mat-mdc-dialog-content {
       max-height: none;
     }
+
+    .mat-mdc-dialog-surface {
+      padding: var(--ss-inset-top) var(--ss-inset-right) var(--ss-inset-bottom) var(--ss-inset-left);
+    }
   }
 }

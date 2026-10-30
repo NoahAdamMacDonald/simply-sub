@@ -526,6 +526,16 @@ a minute per IP, and wrangler dev's limiter counts in the wall clock's minutes: 
 which the script checks is said in words, then sends again in the next minute (a run takes 2 to 3 minutes). A snackbar
 fading out is paler than it shows, so axe waits until the thanks has gone.
 
+`check-home-screen-app.cjs` (M10.16, the feedback after M10, part 2) checks the app installed on a phone's Home Screen,
+on `ng serve` for a Canadian in Alberta (base URL ending in `/`): CDP's `Emulation.setSafeAreaInsetsOverride` gives the
+screen an iPhone's safe areas (59 px top, 34 bottom) and `Emulation.setEmulatedMedia` the display mode standalone,
+which `viewport-fit=cover` turns into `env(safe-area-inset-*)`. In both themes at both widths: the inset reaching the
+app's tokens; Skip to main content off-screen until focused, then below the status bar; the top bar at the screen's top
+with its ☰ below the status bar; the drawer's logo below it and its foot above the home indicator, with nothing to
+scroll; Settings' end above the indicator; Search's bar pinned below the top bar; at 360 px the item dialog's title and
+button; and a browser tab with no insets as before. Edge can't show iOS's own bug (its `vh` counting the status bar):
+the owner checks that on a preview link.
+
 `check-m10-join-link.cjs` (M10.14 and M10.15, the feedback after M10, part 2: sync's one-time join link and joining on
 the first visit) needs wrangler dev answering the API, with its user database migrated (`npm -w apps/api run
 db:user:migrate:local`, for `join_links`): behind `ng serve`'s proxy (`http://localhost:4300/`), or the production
