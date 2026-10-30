@@ -21,6 +21,11 @@ what the `scheduled-claude` reviewer runs each week (setup below), and it works 
   has them. Regular (renewal) prices only, never a sale, introductory or first-term price; the billing period as the
   page states it (price-research skill). Policies follow the policy-research skill's rules; features use existing ids
   in `data/features.yaml` only (a new one is proposed through the feature-discovery skill, never added here).
+- **Ids stay** (M10.27, BLUEPRINT §4.3). A plan the page now calls by another name is the same plan: change its `name`,
+  add `formerNames: [{ name: <old name>, until: <the day before the page's new name> }]` and a YAML comment with the old
+  name, and keep its `id`. Never add a plan for the new name or delete one: every user's item on it would drop out of
+  their totals, and `data:validate` fails. A plan gone from the page, or a new plan that might replace one, is left for
+  the owner: only they retire or redirect a plan.
 - **In order:** Prices, then Policies, then Features, then Unreadable: the list's own order. A note by Workers AI
   under an item ("Workers AI read …") is a lead to check, never a reason to skip the check.
 - **Save progress after every item:** make the edit, tick the item, run `npm run data:validate`, commit and push. A run
