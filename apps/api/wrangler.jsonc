@@ -23,16 +23,41 @@
       "database_id": "bddf9622-ec55-4c38-8fb7-350a16f98fb2",
       "migrations_dir": "migrations",
     },
+    // What users send (BLUEPRINT §5.4, M10.1): the live calendar's feeds, sync's sealed copies and price reports, in a
+    // database of their own, so the catalog's, which a deploy can reseed, never holds them. Also in Eastern North
+    // America. `npm run db:user:migrate:local` / `:remote` applies its migrations; the deploy does too.
+    {
+      "binding": "USER_DB",
+      "database_name": "simply-sub-user",
+      "database_id": "14c63010-f928-4bbc-9a40-158beda06eb6",
+      "migrations_dir": "migrations-user",
+    },
   ],
   // Small values that must survive (BLUEPRINT §7.1): the last good exchange rates (key fx:ecb, M2.5) and the
   // /icon cache (keys icon:<SHA-256 of the domain>, M2.6). Like D1's, the id isn't a secret.
   "kv_namespaces": [{ "binding": "KV", "id": "a1507dd46d40411d8af62a85614db96c" }],
   // Per-IP limits on /api/* (BLUEPRINT §5.4, M2.8), counted in each Cloudflare location: 60 requests a minute, and
-  // 10 a minute on /icon, whose misses cost KV writes. The namespace ids only need to be unique in the account.
+  // 10 a minute on /icon, whose misses cost KV writes. A write (anything but GET) also counts against 10 a minute per
+  // IP, and against 6 a minute for the feed set or sync chain it writes, keyed by its id (M10.1). The namespace ids
+  // only need to be unique in the account.
   "ratelimits": [
     { "name": "API_RATE_LIMIT", "namespace_id": "1001", "simple": { "limit": 60, "period": 60 } },
     { "name": "ICON_RATE_LIMIT", "namespace_id": "1002", "simple": { "limit": 10, "period": 60 } },
+    { "name": "WRITE_RATE_LIMIT", "namespace_id": "1003", "simple": { "limit": 10, "period": 60 } },
+    // A live calendar feed, fetched by calendar apps' servers that share addresses, is limited by itself instead of
+    // by IP: 30 a minute, keyed by its token's hash (M10.2).
+    { "name": "FEED_RATE_LIMIT", "namespace_id": "1005", "simple": { "limit": 30, "period": 60 } },
+    {
+      "name": "RESOURCE_RATE_LIMIT",
+      "namespace_id": "1004",
+      "simple": { "limit": 6, "period": 60 },
+    },
+    // A price report (M10.10) counts against 3 a minute per IP besides the write limit.
+    { "name": "REPORT_RATE_LIMIT", "namespace_id": "1006", "simple": { "limit": 3, "period": 60 } },
   ],
+  // The nightly clean-up (M10.1, src/clean-up.ts), at 02:30 UTC, before the bot's 03:00 run: it deletes what users sent
+  // that has expired, and hands the price reports to the bot (M10.10).
+  "triggers": { "crons": ["30 2 * * *"] },
   // The app and the API have the subdomain to themselves: browser storage is shared by everything on
   // one origin, so another app on simplely.ca could read Simply Sub's data (BLUEPRINT §11.5). A
   // custom domain sends every path to this Worker, and the deploy creates its DNS record and

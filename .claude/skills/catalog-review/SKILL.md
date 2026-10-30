@@ -46,6 +46,10 @@ what the `scheduled-claude` reviewer runs each week (setup below), and it works 
      change over ±30%, a price Workers AI read) is confirmed or corrected the same way. A `taxIncluded` whose words are
      gone, a reseller no longer named, a card network gone: check the new text and keep or correct the bot's edit.
      Only a sale price, another currency or no price on the page: leave it for the owner.
+   - **A price report** ("**Netflix Premium** in US: 1 report of 26.99 USD monthly …, and its page couldn't be read
+     this week", PROJECT-PLAN M10.10): visitors said the price is wrong, and the bot couldn't read the page to check.
+     There's no new text, so leave it for the owner with that reason. A report is never evidence on its own: a price
+     changes only with the page's words for it, read by the bot or by the owner.
    - **Policies.** For each rating the item names, read the rubric in `data/policy-topics.yaml` and the page's new
      text: replace each lost quote with the page's words that now say it (up to three, word for word), grade again
      if another tier's description fits better, and rewrite the reason in plain words (240 characters at most). A
@@ -60,6 +64,10 @@ what the `scheduled-claude` reviewer runs each week (setup below), and it works 
      bot/catalog-digest`.
 4. **When the list is done**, if the `gh` CLI is available, comment a short summary on the pull request (`gh pr comment
    --body …`: what was changed, what's left for the owner). The ticked list is the record either way.
+
+The pull request's body may also have **Price reports** (each report whose page the bot read: a new price, already an
+edit, or the catalog's price still there) and **Regions people asked about** (countries the catalog doesn't price those
+plans in yet, for the regional batches of PROJECT-PLAN M10.13). Neither is a review item: there's nothing to do there.
 
 ## Setting up the weekly scheduled task (once, by the owner)
 

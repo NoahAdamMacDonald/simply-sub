@@ -3,7 +3,7 @@ import { hiddenLists, readCalendarParams, settingsSchema, writeCalendarParams } 
 import { issues } from '../catalog/helpers';
 import { settings } from './fixtures';
 
-// The Calendar's URL (P10, M7.4): ?month=2026-10&lists=<id>,<id>.
+// The Calendar's URL (P10, M7.4, M10.4): ?month=2026-10&lists=<id>,<id>&view=year.
 
 const today = '2026-10-28';
 const work = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d';
@@ -53,6 +53,19 @@ describe('readCalendarParams', () => {
     }
   });
 
+  it('takes the year view, keeping its month, and rewrites any other view', () => {
+    expect(readCalendarParams({ month: '2027-02', view: 'year' }, today, lists)).toEqual({
+      query: { month: '2027-02', lists, view: 'year' },
+      rewrite: false,
+    });
+    for (const view of ['month', 'week', '']) {
+      expect(readCalendarParams({ view }, today, lists)).toEqual({
+        query: { month: '2026-10', lists },
+        rewrite: true,
+      });
+    }
+  });
+
   it('takes the first of a repeated parameter', () => {
     expect(readCalendarParams({ month: ['2027-01', '2027-02'] }, today, lists).query.month).toBe(
       '2027-01',
@@ -69,12 +82,23 @@ describe('writeCalendarParams and hiddenLists', () => {
     });
   });
 
-  it('reads back what it writes', () => {
-    const query = { month: '2026-11', lists: [family] };
-    expect(readCalendarParams(writeCalendarParams(query, lists), today, lists)).toEqual({
-      query,
-      rewrite: false,
+  it('writes the year view, and nothing for the month’s', () => {
+    expect(writeCalendarParams({ month: '2026-10', lists, view: 'year' }, lists)).toEqual({
+      month: '2026-10',
+      view: 'year',
     });
+  });
+
+  it('reads back what it writes', () => {
+    for (const query of [
+      { month: '2026-11', lists: [family] },
+      { month: '2026-11', lists: [family], view: 'year' as const },
+    ]) {
+      expect(readCalendarParams(writeCalendarParams(query, lists), today, lists)).toEqual({
+        query,
+        rewrite: false,
+      });
+    }
   });
 
   it('remembers the lists left out', () => {

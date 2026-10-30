@@ -5,7 +5,13 @@
     <title>Simply Sub</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="icon" href="favicon.ico" sizes="32x32" />
+    <link rel="icon" href="app-icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="app-icons/apple-touch-icon.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <!-- An installed app's title bar: the top bar's colour (--ss-sidebar-bg), then the app's theme (core/theme/title-bar.ts). -->
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
     <script>
       // Apply the saved theme before the first paint. ThemeService (same storage key) takes over
       // once Angular starts.

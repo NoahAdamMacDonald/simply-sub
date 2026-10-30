@@ -1228,8 +1228,14 @@ M1.14), so a buyer can see what signing up means beyond the price.
 | `GET /icon?domain=example.com` | Icon proxy for **custom subscriptions**: asks Google's and DuckDuckGo's icon services (core's `iconServices`) and returns the best square PNG of at least 32 pixels (`pickIcon`, Google's on a tie), or `404` when neither has one, and the app shows the subscription's first letter. KV keeps an icon for 30 days and "no icon" for a day (section 5.4). No `size`: the Worker can't resize, so the app scales the icon. Catalog icons are fetched once by `scripts/fetch-icons.ts` into `data/logos/` (committed, so builds never fetch) and served as static WebP files at `/icons/<id>.webp` (section 6.3) |
 | `GET /fx?base=CAD` | The ECB's daily rates in the user's currency. The Worker fetches them in euros from Frankfurter's ECB-only route (`/v2/providers/ecb/rates?base=EUR`; v1 is deprecated, and v2's default blends in other central banks), keeps them in KV under `fx:ecb` for 12 hours, and rebases them to any currency the ECB publishes (core's `rebaseRates`), so one fetch serves every base. When Frankfurter fails after that, the last good rates are sent with `meta.stale: true`; with none kept, `502 upstream_unavailable`. `GET /providers` uses the same rates (M2.3) |
 | `GET /health` | Returns the API version, and the catalog version, build time and counts that D1 holds (the `catalog` row, section 5.3) |
-| *(Phase 5)* `POST /reports` | "This price looks wrong" reports (Turnstile-protected, rate-limited) |
-| *(Phase 5)* `GET /cal/:token.ics` | Opt-in live calendar feed (section 11.3) |
+| `POST /reports` | "Report a wrong price" (M10.10): a plan the catalog has, the visitor's country and what's wrong (another price, with its amount, currency and period; not sold any more; not sold in that country), in choices only: no free text, so nothing a visitor types reaches a person or a model (core's `priceReportSchema`, strict). `202` with no body. The user database counts it, a row per plan, country, problem and price, with nothing about the sender; the nightly clean-up hands the counts to the bot (section 6.4). 3 a minute per IP besides the write limit, and 500 a day |
+| `POST /cal` | Makes a live calendar feed set (section 11.3, M10.2): one calendar per feed sent (everything, each tag chosen, no tag), each payment's title, day and repeat rule only. Answers each feed's token and links, and the set's manage key, shown once. The user database keeps hashes of the tokens and the key, and each feed's calendar file |
+| `PUT /cal/:id` | Replaces a set's calendars with its manage key (`Authorization: Bearer`): a feed with its token keeps its URL and, unchanged, its file; one without gets a new URL; one left out is revoked. Its 180 days start again. 6 writes a minute per set |
+| `DELETE /cal/:id` | Revokes a set with its manage key: every calendar of it answers 404, and nothing of it is kept |
+| `GET /cal/:token.ics` | One calendar file (`text/calendar`), revalidated on every fetch (`no-cache` with an ETag), so a change or a revoke shows at the app's next check. Limited per feed (30 a minute), not per IP, since calendar apps' servers share addresses |
+| `GET /sync/:chain` | A sync chain's sealed copy (`application/octet-stream`) with its auth secret (`Authorization: Bearer`), which each device derives from the sync code (section 11.4, M10.8); its version is the ETag, `304` with `If-None-Match`, `404` when there's none (or it was deleted) |
+| `PUT /sync/:chain` | Writes the sealed copy, up to 1 MiB: `If-None-Match: *` starts the chain (`201`), keeping the secret's SHA-256; `If-Match` with the version read replaces it (`200`) only if no device wrote since, else `412 stale_version`. One statement compares and writes, so two devices can't both win. A write that can't be made is answered before it's counted against the day's cap. Its 180 days start again. 6 writes a minute per chain |
+| `DELETE /sync/:chain` | Deletes a chain with its secret: every device's next sync finds it gone, and nothing of it is kept |
 
 Example requests and responses for every endpoint are in [docs/api-output-examples.json](docs/api-output-examples.json).
 Core holds the contract's response schemas (M2.7): `successBodySchemas` names each built endpoint's (the bodies'
@@ -1360,7 +1366,18 @@ shipped to the browser is visible. The risks are abuse, and M2 builds these defe
   it from a browser. It's an extra layer, not authentication. Every response also carries `X-Content-Type-Options:
   nosniff`, a CSP that allows nothing (`default-src 'none'; frame-ancestors 'none'`: an API answer is never a page)
   and `Cross-Origin-Resource-Policy: same-origin`, so other sites can't embed the answers, `/icon` images included.
-- **Writes** arrive only in Phase 5 (`POST /reports`), with Turnstile and a stricter rate limit.
+- **Writes** (M10.1, `apps/api/src/writes.ts`): Phase 5's live calendar feeds, sync's sealed copies and price reports
+  are stored, in the user database (`simply-sub-user`, section 7.1), so every request that stores something follows
+  the same rules. An IP has 10 writes a minute (`WRITE_RATE_LIMIT`, on top of the 60 requests) and a feed set or sync
+  chain 6 (`RESOURCE_RATE_LIMIT`, keyed by its id). A body is refused with `413 too_large` over its route's limit, at
+  once from its `Content-Length` or as it streams in, and a JSON body that isn't JSON gets `400` with its problems by
+  path. Each kind of data counts the rows it writes a day in the database, one statement checking and counting, up to
+  a cap (feeds 15,000, sync 25,000, reports 1,000: 41,000 together), because D1's 100,000 rows written a day are the
+  account's and the catalog's deploys need them; past a cap, or with the database over 400 MB, `503 over_capacity`
+  until midnight UTC. Secrets (a feed's token and manage key, sync's auth secret) are random values of 128 bits or
+  more, kept only as SHA-256 hashes and compared in constant time, and never logged. A cron trigger at 02:30 UTC
+  deletes what has expired and hands the price reports counted before that day to the bot (`src/clean-up.ts`, section
+  6.4).
 - **Secrets** (the bot's GitHub token, AI keys) are Worker secrets (`wrangler secret put`) or a gitignored `.env`,
   never tracked files. The D1 `database_id` in `wrangler.jsonc` isn't a secret: using it needs a Cloudflare login.
 
@@ -1538,9 +1555,9 @@ never downloads every region's prices.
   shows "Offline — catalog from Oct 22" (the cached file's `generatedAt`), or "Offline — the catalog will load when
   you're back online" on a first visit. A new version replacing the one on screen shows "Catalog updated" in every
   open tab; a first download doesn't. A file that can't be saved (a full disk) is still used in that tab.
-- **Not offline on start yet:** without a service worker the browser revalidates `index.html` on every visit, so the
-  app keeps working only when the network drops while it's open. M10's service worker makes it start offline
-  (section 14).
+- **Offline on start** (M10.5): the service worker keeps the app's own files, so after one visit the app starts with
+  no network, on the cached files and with the Offline banner above. It never keeps `/data/` or `/api/` answers: the
+  catalog's check has to reach the server to see a new version (section 14).
 
 The cheapest price per feature (what `api-all-example.json` tried to store) is computed on demand with today's
 exchange rates instead, so it's never stale.
@@ -1636,6 +1653,16 @@ itself under any of them.
   a policy grade it suggests stays a suggestion, since grading is a person's call. Anything else is labelled for the
   owner. Its notes go under each item, a line each.
 - **`manual`:** the items wait in the pull request for the owner.
+
+**Price reports (M10.10):** at 02:30 UTC the API's clean-up moves the reports counted before that day from the user
+database to KV, a key per reported plan (`bot:report:<plan>`, added to what it holds), so a night writes a key per
+plan, not per report. At 03:00 the bot reads them, and each reported plan's pages in the countries it was reported
+from (core's `reportedPrices`: the country's own prices, else its group's, else GLOBAL) are checked that night,
+whatever their cadence, within the night's budgets. The weekly digest says what each showed: a new price is the edit
+any check makes, listed under **Price reports** in the body with the reports; the catalog's price still there is a
+line there too, nothing to review (its confirmation is kept for the digest, though no edit is proposed); a page that
+couldn't be read is a review item under Prices; a country the catalog doesn't price the plan in yet is counted under
+**Regions people asked about**, for the regional batches (M10.13). The digest then lets the reports go.
 
 **Guardrails**
 - **Never auto-merge.** You review the PR, which takes a minute a day at most.
@@ -1902,6 +1929,27 @@ of the night's Neurons and browser pages.
   hundred services), or the computer's browser tricks (cookie banners, tabs, toggles): a page they're needed for is
   read as Browser Rendering shows it, and a service the bot can't read is left out with why, for `data:batch`.
 
+**Regional prices (M10.12):** a region the catalog doesn't price a provider in yet goes through the same steps with
+`--region GB`, for the providers the catalog has, in `.pipeline/<id>/regions/<region>/`:
+- **Finding the page:** the pages its prices cite are read for their `hreflang` links and the links under the region's
+  locale (`/en-gb/`, `/uk/`), then the same address with the region's country in place of its own (Netflix's help
+  article's `/ca` to `/gb`, Xbox's `/en-US/` to `/en-GB/`), kept when it answers without going to another country;
+  then the usual steps, which score the region's locale first and search for its name (`ProviderSite.region`).
+  Pricing only, since terms and policies are the provider's everywhere.
+- **Reading it:** in the system Edge in the region's English and time zone (`regionBrowser`). A page whose address
+  names another country, or that shows only other currencies' prices (a bare `$` is a dollar, never pounds or
+  euros), is unread and never extracted: a site that prices by where the visitor is shows this machine Canada's, and
+  that region's needs a browser there.
+- **Drafting:** a request of its own (`regionalPrompt`: the provider's plans, the region's currency, the page), whose
+  answer `regionalPrices` checks: a plan the provider has, the region's currency, the quote on its page with its
+  amount, one price a plan and period. The prices kept go into the provider file beside the others, each replacing
+  the plan's price for that region and period, with the region added to `billingCurrency` when the file lists it.
+- **The batch:** `npm run data:batch -- --region GB` opens one pull request for the region: each price with a link
+  that opens its page at its quote, and the providers left out with why (`regionalReview`). `EU` is the region for a
+  provider that charges every euro country the same; otherwise each country's own (M10.13).
+- **The bot:** a regional page is a page like any other, with its own baseline; one whose fetch ends on another
+  country's address (its first two path segments) is unread.
+
 **Ongoing:** the nightly bot (section 6.4) checks the saved `sources:` URLs against their baselines, and its discovery
 takes the next services from the queue on its cadence, so the catalog grows on its own while you only review.
 
@@ -1931,12 +1979,13 @@ Bitdefender are in the batch's pull request; Crunchyroll's prices couldn't be re
 |---|---|---|
 | Workers requests | ~100,000 per day | API calls only: a few hundred per day at first |
 | Static assets | Free and unlimited. Up to 20,000 files per version, 25 MiB per file | The Angular build has well under 100 files |
-| D1 | 5 GB storage per account (500 MB per database), 5M rows read and 100k rows written per day (index entries count), 2 MB per row | Under 25 MB even at 1,000 providers. **Rows written** is the one to watch: from M2.1 a deploy writes only what changed (section 5.3) |
+| D1 | 5 GB storage per account (500 MB per database, 10 databases), 5M rows read and 100k rows written per day for the whole account (index entries count), 2 MB per row | The catalog: under 25 MB even at 1,000 providers. **Rows written** is the one to watch: from M2.1 a deploy writes only what changed (section 5.3). Since M10.1 a second database, `simply-sub-user`, holds what users send (feeds, sync copies, reports), its writes capped at 41,000 a day so the catalog's deploys always have room (section 5.4) |
 | KV | 1 GB, 100k reads and 1k writes per day, 25 MiB per value | One namespace, `simply-sub-kv` (binding `KV`, M2.5; the bot's too since M3.9, its keys under `bot:`: check dates, pending pages, the last digest), for small values that must survive: the last good `/fx` rates (M2.5: one key, `fx:ecb`, written when the rates are fetched, about twice a day) and the `/icon` cache (M2.6: one key per domain asked for, written on a miss and kept 30 days, or a day for "no icon"). The Cache API is per data centre and can evict them. A few dozen writes a day |
 | R2 | 10 GB-month storage, 1M writes and 10M reads per month, no egress fees. Activating R2 asks for a payment method, even within the free tier | Not used yet: see the triggers below |
 
-**Each store has one job:** static files serve the catalog and icons, D1 answers the API's searches, KV keeps
-small values that must survive, and R2 will hold large files. Using a store outside its job gains nothing: KV
+**Each store has one job:** static files serve the catalog and icons, D1 answers the API's searches (and, in a
+database of its own since M10.1, keeps what users send), KV keeps small values that must survive, and R2 will hold
+large files. Using a store outside its job gains nothing: KV
 values and static files have the same 25 MiB cap, and KV allows far fewer writes.
 - **Setting one up:** create the KV namespace (or the R2 bucket) in the dashboard or with `wrangler` (section 7.2;
   `simply-sub-kv` was made with `wrangler kv namespace create`), and its id goes in `wrangler.jsonc`, like D1's. Wrangler can create resources on deploy (an open beta), but an id in the config is
@@ -1995,6 +2044,7 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
    ```bash
    npx wrangler d1 create simply-sub-catalog --location enam   # ✅ done in M0.8; the id is in wrangler.jsonc
    npx wrangler d1 migrations apply simply-sub-catalog --remote   # ✅ M0.8: applies migrations/0001_init.sql
+   npx wrangler d1 create simply-sub-user --location enam      # ✅ done in M10.1 (2026-10-29); binding USER_DB
    ```
 6. **KV:**
    ```bash
@@ -2088,7 +2138,7 @@ Settings → Build*). The settings as they are now:
 | Production branch | `main` |
 | Root directory | `apps/api` |
 | Build command | `cd ../.. && npm ci && npm run build` |
-| Deploy command | `npm run deploy` (since M2.1): `apps/api/package.json` runs `db:seed:remote` (the migrations, then `seed-d1.ts --remote`) and then `wrangler deploy`. From M1.5 it was `npx wrangler d1 migrations apply simply-sub-catalog --remote && npx wrangler d1 execute simply-sub-catalog --remote --file dist/seed.sql && npx wrangler deploy`, and before that `npx wrangler deploy` |
+| Deploy command | `npm run deploy` (since M2.1): `apps/api/package.json` runs `db:seed:remote` (the migrations, then `seed-d1.ts --remote`), `db:user:migrate:remote` (the user database's migrations, since M10.1) and then `wrangler deploy`. From M1.5 it was `npx wrangler d1 migrations apply simply-sub-catalog --remote && npx wrangler d1 execute simply-sub-catalog --remote --file dist/seed.sql && npx wrangler deploy`, and before that `npx wrangler deploy` |
 | Preview (non-production branch) command | `npx wrangler versions upload`: a preview link on workers.dev, production untouched |
 | Build variable | `NODE_VERSION` = `24.22.1` (since 2026-10-26; it was 24.19.0, and the image defaults to 24.18.0). It must match the root `package.json`'s `volta` pin, which CI reads too. The first build detected Node 24.19.0 and npm 12.0.2 (from `packageManager`); npm 10.9.2 would also install our lockfile cleanly |
 | API token | `simply-sub-builds`, created by Workers Builds: Workers scripts, KV, R2, **D1 (edit)**, routes on the zone, and a few unused products. Cloudflare keeps it; it's never in GitHub |
@@ -2117,7 +2167,9 @@ Settings → Build*). The settings as they are now:
   (`static.cloudflareinsights.com/beacon.min.js`) into HTML pages requested by browsers. It uses no cookies and
   sends only page views and timings, never anything from IndexedDB. The beacon is a module script from
   `static.cloudflareinsights.com`, and it reports to `/cdn-cgi/rum` on the site itself (or to
-  `cloudflareinsights.com`), which the CSP allows (M2.8). Content blockers stop it, which is harmless.
+  `cloudflareinsights.com`), which the CSP allows (M2.8). Content blockers stop it, which is harmless. The service
+  worker (M10.5) passes page loads on to the network (`freshness`), so they should still get the beacon; checked on
+  the live site after M10.5's merge (section 14).
 - Workers Builds deploys straight from `main`; it doesn't wait for GitHub checks. Branch protection (M0.10) is
   what keeps a failing change off `main`.
 - A small GitHub Actions `.github/workflows/ci.yml` (M0.10) runs `npm audit --audit-level=high`, lint, the Prettier check, the generated JSON
@@ -2135,8 +2187,9 @@ Settings → Build*). The settings as they are now:
     - `default-src 'self'`; `script-src 'self'`, the inline theme script's SHA-256 and the Web Analytics beacon's
       host; `connect-src 'self' https://cloudflareinsights.com` for its reports;
     - `object-src 'none'`, `base-uri 'self'`, `form-action 'self'` and `frame-ancestors 'none'`;
-    - **Trusted Types**: `require-trusted-types-for 'script'` with Angular's policies
-      (`trusted-types angular angular#bundler`), so no string can reach a script sink. Zod would otherwise test
+    - **Trusted Types**: `require-trusted-types-for 'script'` with Angular's policies and the app's two, each taking
+      only its own files (`trusted-types angular angular#bundler simply-sub#worker simply-sub#service-worker`: the
+      optimizer's Web Worker, M8.2, and the service worker, M10.5), so no string can reach a script sink. Zod would otherwise test
       for `new Function` (a sink) to compile its parsers, so `apps/web/src/zod-setup.ts`, the app's first import,
       turns that off (`jitless`) through the global Zod reads, keeping Zod out of the first bundle; a test checks
       Zod still reads it;
@@ -2151,10 +2204,19 @@ Settings → Build*). The settings as they are now:
     Icons (`/icons/*`) get one day and are then revalidated, because their URLs carry no version and a replaced logo
     must show up. `index.html` and the catalog files keep the default, revalidated on every visit: Cloudflare sends
     `Cache-Control: public, max-age=0, must-revalidate` with an ETag and answers `If-None-Match` with a 304 (checked
-    on 2026-10-26), which is what makes the app's catalog check cheap (section 6.3).
+    on 2026-10-26), which is what makes the app's catalog check cheap (section 6.3). The service worker's
+    `ngsw-worker.js` and `ngsw.json` (M10.5) keep the default too, so a new version is found on the next visit.
   - Checked in Edge on the production build under `wrangler dev` (which applies `_headers`): every page, in-app
     navigation, both themes, the drawer and the error snackbar run with no CSP or Trusted Types violations, and
     the beacon, inserted the way Cloudflare does, loads and sends its report.
+- **The app's version** (M10.6): apps/web's `npm run build` is `scripts/build.mjs`, which runs `ng build` with the
+  commit being built (Workers Builds' `WORKERS_CI_COMMIT_SHA`, or the checkout's) and the day as two string defines.
+  Settings shows them ("Version fd54aac, built Oct 29, 2026").
+- **The service worker's kill switch** (M10.5): if a broken worker ever has to leave every browser, deploy a build
+  whose `ngsw-worker.js` is Angular's `safety-worker.js` (the build writes both; copy one over the other in
+  `apps/api/scripts/copy-web-build.mjs`, through a pull request like any change). Each browser's next check installs
+  it, and it deletes the worker's caches and unregisters itself. Angular's other fail-safe, a 404 for `ngsw.json`,
+  can't work here: the SPA fallback answers a missing file with `index.html` and a 200 (tried under `wrangler dev`).
 
 ### 7.7 Where automation runs: Cloudflare vs GitHub
 | Job | Cloudflare option | GitHub option | **Choice** |
@@ -2424,10 +2486,11 @@ the feature to that subscription's plan or provider. Resetting means choosing
   Its "Set all in this group" menu ranks every child in one step. Ranks never cascade on their own.
 - A "Show ranked only" toggle and a search box help with the large registry.
 
-**Calendar.** A month view (a year view later) shows payment dates and amounts per day, plus a progress bar
+**Calendar.** A month view shows payment dates and amounts per day, plus a progress bar
 covering **the displayed month only**: *spent so far / that month's total*, with a monthly-budget marker. Users can toggle which lists are shown. **Export to file** downloads
-an `.ics` file. **Sync Calendar** is a Phase 5 feature (section 11.3). Until then it shows "Download .ics" with
-import instructions for Google, Apple and Proton.
+an `.ics` file. **Sync Calendar** offers the live calendar (section 11.3, M10.3) and each app's `.ics` file with its
+import steps for Google, Apple and Proton. The year view (M10.4) shows twelve small months with their totals, its bar
+the year's payments so far against the annual budget.
 
 **Settings.** A back button, plus:
 - budgets (warnings appear when any projected month or year goes over)
@@ -2659,6 +2722,9 @@ prompted after each big change, or weekly).
 - **The app lock (M6.10):** the database opens as soon as `StorageService` starts. The user's repositories load once
   it has said whether the lock is on, and drop their records while it's locked (`StorageService.access`); the caches
   load regardless (section 14).
+- **The live calendar (M10.3):** `LiveCalendarRepository` keeps the feed set the user made, one record under the key
+  `liveCalendar` (Dexie v4), sealed by the app lock like the settings, and left out of backups, since its manage key
+  changes and revokes the links. A revoke soft-deletes it, so a sync (M10.9) passes that on.
 - **IndexedDB blocked** (some private browsing modes, or site data blocked): the repositories' status is `error`, and
   the app shows the P15 notice in place of the shell. [Continue anyway] calls `StorageService.useMemory()`: the same
   Dexie database opens on `fake-indexeddb` (57 kB, a chunk loaded only then), and every repository reloads from it
@@ -2676,7 +2742,7 @@ prompted after each big change, or weekly).
 | TXT | native | A readable summary of one list; the Calendar's, its next 12 months by month (M7.9) |
 | JSON (one list) | native | List view's: the list, its items and what they name, as stored. Not a backup, so not importable (M7.5) |
 | JSON (payments) | native | The Calendar's: the lists shown and each charge in the next 12 months as charged, with its tax, renewal and live tags (core's `paymentsFile`, M7.9). Not a backup either |
-| ICS | `ics` npm package | All-day events (`VALUE=DATE`, so no time zone can move it), titled with what each costs as charged and `X-WR-CALNAME` naming the calendar. Since M7.12 an ongoing subscription is one repeating event (`RRULE`) for each run of charges at one amount, written from the schedule's own rule: a month's or year's day, or the 28th up to it with `BYSETPOS=-1` (a plan billed on the 31st falls on a shorter month's last day), `INTERVAL` for every 3 months or every 30 days, and `UNTIL` the day before the plan ends or a price of the user's own does, when the next run starts. So it goes on past the first year. Specific dates, and add-ons billed on a period of their own, stay an event per charge in the next 12 months, which no repeat rule writes exactly |
+| ICS | `ics` npm package | All-day events (`VALUE=DATE`, so no time zone can move it), titled with what each costs as charged and `X-WR-CALNAME` naming the calendar. Since M7.12 an ongoing subscription is one repeating event (`RRULE`) for each run of charges at one amount, written from the schedule's own rule: a month's or year's day, `INTERVAL` for every 3 months or every 30 days, and `UNTIL` the day before the plan ends or a price of the user's own does, when the next run starts. So it goes on past the first year. Since M10.2 the rules keep to the forms Proton Calendar takes (one day of the month; it drops other events): a plan billed on the 31st is `BYMONTHDAY=-1`, each month's last day, and a yearly Feb 29 `BYMONTH=2;BYMONTHDAY=-1`, where M7.12 had the 28th up to the day with `BYSETPOS=-1`. Specific dates, add-ons billed on a period of their own and a monthly plan billed on the 29th or 30th, which February keeps from following one rule, stay an event per charge in the next 12 months |
 
 ### 11.3 Calendar integration
 - **Phase 3, download `.ics`:** works with Google, Apple and Proton through their import features. This is
@@ -2691,6 +2757,24 @@ prompted after each big change, or weekly).
   revoke the token at any time. Subscribed calendars are read-only in Proton, which is fine for this. A feed per tag,
   besides the one for everything, would give each tag a calendar of its own and so a colour of its own: the way the
   apps can show tags in colour (M7.9).
+- **As built (M10.2), the server's side:** a *feed set* per device that turns it on, in the user database
+  (`simply-sub-user`): a calendar for everything, one for each tag chosen and one for payments without a tag, each at
+  `/api/v1/cal/<token>.ics` (section 5.2). The app sends each payment's title (its name and amount as the provider
+  charges it, or its name alone), its day and its repeat rule, and each calendar's name and colour; event UIDs are
+  hashes the app makes. The Worker writes each calendar's file then (core's `feedIcs`: all-day events that don't block
+  time, `X-WR-CALNAME` and RFC 7986's `NAME`, Apple's `X-APPLE-CALENDAR-COLOR`, a 12-hour refresh hint), keeps only
+  hashes of the tokens and the set's manage key, and deletes a set 180 days after the app last wrote it. RFC 7986's
+  `COLOR` is left out: it takes only a CSS colour name.
+- **As built (M10.3), the app's side:** Sync calendar's **Live calendar…** and Settings' Live calendar card open one
+  dialog: what's uploaded and who can see it, the calendars (Everything, each tag, Payments without a tag) and what
+  each payment shows; then each calendar's link with Copy link, Google's add page (its undocumented
+  `calendar/render?cid=webcal://…`, which works for an https feed) and Apple's `webcal://` link, each app's steps, and
+  Change calendars, New links and Revoke all. `LiveCalendarService` keeps the feeds current from a chunk of its own,
+  started once the app is stable: 5 s after a change that reaches them (core's `liveCalendars`, hashed and compared
+  with what was last sent), when the network is back, and at least every 30 days, one tab at a time (a Web Lock). A
+  run of charges starts from its item's anchor once that has passed, so a feed's events keep their start and UID as
+  the days go by. The record (`liveCalendar`, Dexie v4) holds the set's id, its manage key and each calendar's token;
+  the app lock seals it, backups leave it out, and Delete all data revokes the links first when it can read them.
 
 ### 11.4 Device sync and future accounts
 - **Phase 5, encrypted sync ("sync chain", like Brave's):** generate a sync code (a passphrase). The browser
@@ -2704,6 +2788,11 @@ prompted after each big change, or weekly).
   stretched from the phrase (scrypt, with a salt the first device stores on the server for the others). The server
   (Chromium's sync protocol, Commit and GetUpdates, on DynamoDB) holds only what it can't read. Brave has since added
   a word that changes daily to the code shown for adding a device, and doesn't support the code as a backup.
+- **As built (M10.7, M10.8):** the shape below, with D1 in place of R2 (the owner's choice, section 14): the
+  `simply-sub-user` database's `sync_chains` keeps each chain's id, its auth secret's SHA-256, its version, the sealed
+  copy (as base64: D1 answers a BLOB as an array of numbers), its size, when it changed and when it expires, 180 days
+  after its last write. A conditional `UPDATE … WHERE version = ?` is the compare-and-write. Core's `user/sync.ts` is the
+  copy and the merge; the crypto module's `sync-crypto.ts` the code and the keys.
 - **For Simply Sub, the same shape on Cloudflare** (the recommended design for M10): a random 32-byte seed as the sync
   code, shown as words (and a QR code; scanning one can come later, since not every browser can); from it, with
   WebCrypto's HKDF-SHA256 (a random seed needs no slow stretching, unlike a passphrase): the chain's id, an auth secret
@@ -2749,7 +2838,7 @@ gone. That's why it's opt-in.
 - **Key:** derived like the backup key, then held in memory only, as a non-extractable WebCrypto `CryptoKey`.
   Nothing secret is stored: only the salt and an encrypted check value, which tells a wrong passphrase.
 - **What's encrypted:** each record of `settings`, `lists`, `items`, `customSubs`, `rankings`, `cards`, `tags` and
-  `drafts` and `dismissedSuggestions` (M8.2) keeps its key and indexed fields in plain text and
+  `drafts`, `dismissedSuggestions` (M8.2) and `liveCalendar` (M10.3) keeps its key and indexed fields in plain text and
   stores the whole record as one encrypted value. Of the settings, only what's needed before unlocking stays plain:
   the theme and the lock itself. The caches (the catalog files, the exchange rates) stay plain, since they're public.
 - **Locking:** the lock screen asks for the passphrase on each visit. The app locks again after a chosen idle time
@@ -2813,7 +2902,7 @@ written and tested once. It uses WebCrypto (`crypto.subtle`), available in every
 - [ ] Encrypted device sync
 - [ ] "Report wrong price" / "Suggest a service"
 - [ ] Broaden regional price coverage (the schema and UI handle all regions from Phase 1)
-- [ ] PWA (installable, offline)
+- [x] PWA (installable, offline): offline start in M10.5, the update prompt and install in M10.6
 
 ---
 
@@ -2823,7 +2912,9 @@ written and tested once. It uses WebCrypto (`crypto.subtle`), available in every
 The general Angular rules are in [docs/angular-best-practices.md](docs/angular-best-practices.md), Angular's
 official AI rules file, which CLAUDE.md loads automatically. On top of those rules:
 - Zoneless change detection, which is the default. OnPush is the default too, so never set it explicitly.
-- `resource` / `httpResource` for fetching, and `@defer` for heavy widgets (XLSX export, the year calendar).
+- `resource` / `httpResource` for fetching, and lazy chunks for heavy widgets (XLSX export). Not `@defer` while the
+  initial bundle is near its 500 kB: the first `@defer` brings Angular's defer runtime (7.6 kB) into it, so the year
+  calendar (M10.4) lives in the Calendar's own lazy chunk instead.
 - **Signal Forms** for every form (they're stable in v22).
 - New singleton services in `core/` use the `@Service()` decorator.
 - Templates and styles live in their own `.html` and `.scss` files, never inline, even for small components.
@@ -2892,6 +2983,245 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-29, M10.10–M10.12, as built)**
+- **Price reports' rows** (M10.10, user migration `0004_price_reports`): `price_reports`, keyed by plan, country,
+  problem and price (the price's fields as JSON in one order, `''` without one), with a count and the first and last
+  day, `WITHOUT ROWID` and no index, since the clean-up empties it each night. A report writes one row besides the
+  day's count, so the `report` cap's 1,000 rows is 500 reports. Its plan is checked against the catalog's `plans` in
+  D1 (one row read). `REPORT_RATE_LIMIT` (3 a minute, keyed by IP) comes before the body is read.
+- **The hand-over** (M10.10, `clean-up.ts`): one `DELETE … WHERE last_day < today RETURNING …` takes the rows, so a
+  report counted meanwhile waits for the next night; each plan's KV key gets them added (core's `addReports`); a plan
+  whose key can't be written gets its rows back. The bot's state reads `bot:report:*` with one list a night.
+- **Report a wrong price in the app** (M10.11, `shared/report-price/`): beside Search's "Price checked …" in the
+  expanded card, for the plan its details show. The dialog (a lazy chunk with Material's radio and select) fills a
+  different price in with the catalog's own amount and currency (`PickedPrice.source`, not the converted one the card
+  shows), asking which billing period when the card has several, and sends only the choices; offline it says so and
+  sends nothing, and 429 and 503 are said in words. Material's `disabledInteractive` leaves Send's clicks to it, so the
+  send checks it isn't busy (§14, M10.9). Checked by `check-m10-reports.cjs` (65 checks) under `wrangler dev`, whose
+  reports reach the local user database; `check-search.cjs` (187) still passes with the button in each card.
+- **A reported plan's confirmation is kept** (M10.10): the night's checks keep a confirmed price only when its
+  `lastVerified` is due again, so "the page still shows the catalog's price" would have left nothing for the digest
+  to find. A confirmation of a reported plan's price is kept until the digest, and proposes no edit.
+
+- **The first regions** (M10.13, the owner's choices of 2026-10-29): no VPN, so a page a site prices by where the
+  visitor is stays out with why (Disney+'s help article went to Canada's for every region); the euro countries read
+  are Germany, France, Ireland, the Netherlands, Spain and Italy, and the same price in all six becomes the `EU`
+  group's (Xbox Game Pass), else each country read keeps its own (Netflix's differ; Bitdefender's five are the same but
+  its Irish page wasn't found); each region's pull request goes into `main`, data only with the tests that read those
+  files, so they merge apart from #78–#80. 78 prices in all, every one quoted on its page: #81, #82, #83, #84.
+- **A region's page by its address** (M10.12): hreflang finds few of the catalog's regional pages (Bitdefender's);
+  most sites put the country in the address instead, at the start (Xbox's `/en-US/`) or the end (Netflix's help
+  article's `/ca`), with no link between countries. `regionalVariants` swaps the country for the region's, as
+  a guess the browser then reads: Netflix's and Xbox's GB pages came that way. A guess that went elsewhere is caught
+  by its address or its currency: Disney+'s `disneyplus-en-gb-price` went to Canada's article, priced in CAD.
+- **The currency decides** (M10.12): the first dry run took Hulu's, Claude's and the Canadian services' pages for GB,
+  their bare `$` counting for nothing. A bare `$` is now a dollar: any region's that pays in one, and never pounds or
+  euros, so those pages are unread, with why. A page that names several currencies (Mullvad's "€5 is equivalent to
+  £4.18") is read, and the extraction finds no price charged in pounds there: its euros are its price everywhere.
+- **Regional prices beside the others** (M10.12): the YAML edit keeps the file as written (`lineWidth: 0`, as the
+  other scripts' edits), so a region's pull request changes only its prices and `billingCurrency`; `data:validate`
+  wants every priced region in `billingCurrency` when a file lists it, which the first apply missed.
+
+**Resolved (2026-10-29, M10.5–M10.9, as built)**
+- **The service worker** (M10.5): Angular's `ngsw-worker.js` (`@angular/service-worker` 22.2.3) with
+  `apps/web/ngsw-config.json`. Page loads ask the network first and fall back to the cached `index.html`. Every script
+  and style (153 files, about 1 MB compressed) is fetched as it installs, so a page never opened online works offline;
+  the fonts (43 files, 1 MB: Inter's subsets in two formats, most never needed, and the symbols) and the providers'
+  icons are kept as they're used. The first visit's fonts load before the worker controls a page, but they're in the
+  browser's cache, immutable for a year, which the worker's fetch reads offline.
+- **Registration** (M10.5): `app.background.ts`, one lazy chunk loaded once the app is stable, starts what runs in the
+  background: the live calendar's updates (moved there) and, in production builds, the worker, registered through
+  `simply-sub#service-worker`. `SwUpdate` comes from an environment injector made in that chunk, with a
+  `registrationStrategy` that never fires (`NEVER`): Angular's own registration is an app initializer, which runs only
+  at bootstrap, and would otherwise pass a plain string the CSP refuses. A browser that refuses service workers (some
+  private modes) gets a console warning, and the app needs the network to start, as before.
+- **Angular's worker answers every request in its scope** (M10.5), passing those it doesn't keep to the network, so
+  Playwright's `fromServiceWorker()` is true for `/api/` too. `check-m10-offline-sync.cjs` looks in the worker's caches
+  instead: no `/api/` or `/data/` answer is there. Checks that answer requests themselves (`context.route`) block the
+  worker (`serviceWorkers: 'block'`), whose own requests their routing doesn't see.
+- **Web Analytics with the worker** (M10.5): to check on the live site after the merge, that visits served through the
+  worker still count. If they stop, `index.html` gets Web Analytics' own snippet (the owner's call).
+- **Bundle** (M10.5): 499.00 kB initial (498.90 before). The starter's import replaced the live calendar's; Angular's
+  chunk optimizer put rxjs's `NEVER` (21 bytes) in the shared chunk `main` imports, and the rest is the renaming of
+  what crosses chunks. Two imports, one per job, made it 499.14 kB.
+- **Checks** (M10.5): web 702 tests (the worker's 3), core 1773, API 264, bot 60. Under `wrangler dev`:
+  `check-m10-offline-sync.cjs` (29, new for the batch); `check-catalog.cjs`
+  (41), `check-search.cjs` (187), `check-optimizations.cjs` (106) and the progress preview's `csp-check.cjs` (8), which
+  now block the worker and ignore Playwright's note that they do. Search's script had fallen behind the catalog
+  (#76's Claude, Bitdefender and Xbox Game Pass: 12 services for a Canadian, 10 priced in CAD, the price slider to $300
+  by $10) and the catalog's behind the Lists page's heading (#77). `calendar-page.scss` was 73 bytes over its 4 kB
+  budget since M10.4: a day's button and an agenda payment now share their hover and focus rules (on PR #78).
+- **The update prompt** (M10.6): `AppUpdates` (`core/pwa/app-updates.ts`) takes the worker's `SwUpdate` in the
+  background chunk. A version ready brings "A new version of Simply Sub is ready." [Reload] ("Reloading locks the
+  app." added when the lock is on), and a worker that can't serve the app "Simply Sub needs to reload to keep
+  working."; Reload just reloads, since the worker gives a new page load its latest version. A tab shown an hour after
+  the last check asks the worker again (the catalog's rule, `catalogCheckDue`), and so does Settings.
+- **A page load runs a new version before the worker knows of it** (M10.6): with `freshness`, a page load after a
+  deploy fetches the new `index.html`, whose files the worker passes to the network, so the page already runs the new
+  version when the worker finds it a few seconds later. On a version ready, the app reads that version's `ngsw.json`
+  past the worker (`?ngsw-bypass`); when its own main script is one of the files, it moves onto the version quietly
+  (`activateUpdate`) instead of asking for a reload it doesn't need. Only a tab that's really behind is prompted. A
+  version the worker has held before isn't new to it: serving the previous build again brings no prompt, so the check
+  uses three builds.
+- **The app's version** (M10.6): two string defines from `apps/web/scripts/build.mjs` (section 7.6). One define holding
+  an object cost 2 kB of the initial bundle, which esbuild hoisted into a shared chunk; strings are inlined where
+  they're read, in Settings' chunk.
+- **Install** (M10.6): Chromium's `beforeinstallprompt` comes once a page load, early, so `keepInstallOffer()`
+  (`core/pwa/install-offer.ts`) listens from the start: two signals and two listeners, the only part of M10.6 in the
+  initial bundle. Settings' Install shows the browser's dialog once; other browsers get their steps. Edge offers no
+  install to a private window (CDP's `in-incognito`), which every new Playwright context is, so the check installs in a
+  profile of its own.
+- **The icon** (M10.6): `scripts/app-icons.ts` (`npm run app:icons`) draws the mark, an S of two bowls with round ends,
+  white on the accent, reading both colours from `_tokens.scss`, and writes `app-icons/icon.svg`, PNGs of 192 and
+  512 px, a maskable 512 (the S at 82%, inside the safe zone), a 180 px `apple-touch-icon.png` (square: iOS rounds the
+  corners) and `favicon.ico` (16, 32 and 48 px PNGs in an ICO the script assembles; Angular's 15 kB default is gone).
+  `index.html` links the ICO for 32 px and the SVG, as browsers prefer. The owner chose it on 2026-10-29 from a review
+  sheet (the tile at 160 to 16 px, the maskable icon in a circle and a squircle, the iOS icon, on light and dark), over
+  the same S in burgundy on a white tile.
+- **The title bar's colour** (M10.6): `index.html` has a `theme-color` meta per OS scheme with the top bar's colour
+  (`--ss-sidebar-bg`), which an API test compares with the tokens, as it does the manifest's colours. From the
+  background chunk both take the theme on screen (`core/theme/title-bar.ts`), so an installed app chosen dark on a
+  light OS gets a dark title bar.
+- **Bundle** (M10.6): 499.14 kB initial (499.00 before): the install offer's listener.
+- **Sync's copy** (M10.7, core's `user/sync.ts`): `{ schemaVersion, settings, data, devices }`, the tables under
+  `data` as in a backup, so a copy from an older app is migrated by the backup's steps, and one from a newer app stops
+  sync on the device (`kind: 'newer'`). Each record is checked by its schema as it's read; one that fails is left out
+  and described by its table, key and issues' paths and codes, never its values. `mergeSync` takes the later
+  `updatedAt` per record (a soft delete moves it on, so deletions carry), settles a tie by the records' canonical JSON
+  (keys sorted), the same on every device, and keeps a record only one side has. It returns the next version, the
+  records this device must write, the shared settings to take and whether to send; a device with nothing new still
+  sends once a day, to move its "last synced" on (and the chain's age on the server).
+- **Shared settings** (M10.7): country, subdivision, currency, the tax rate, both budgets, Search's two defaults and
+  the dismissed budget warnings, merged as one by the settings' new `sharedUpdatedAt` (`updatedAt` stands in until a
+  shared one changes), so a theme changed here later doesn't outweigh a budget set on another device. The theme, the
+  Calendar's shown lists, Home's price changes and the app lock never leave the device: the copy's settings schema is
+  strict. The field made the backup's `schemaVersion` 3; an older file needs no step.
+- **Sync's API** (M10.8, `routes/sync.ts`, migration `0003_sync_chains.sql`): GET reads the copy, its version the
+  ETag; PUT starts a chain with `If-None-Match: *` or replaces the copy with `If-Match`, one statement comparing and
+  writing; DELETE ends it. Before a write is counted against the day's cap, the chain is looked at: none (404), another
+  secret (403), already started or moved past the version read (412) are answered first, so a device learns that its
+  chain was deleted even on a day at the cap; the statement still settles a race. A chain past its days that the
+  night's clean-up hasn't reached starts again with its version moving on, so a device still holding an old version
+  can't write over it. Copies are stored as base64. Tests: `sync.spec.ts` (two devices at once, one winning; the
+  limits; expiry and the clean-up; the stored row holding no list name, amount, record id or secret; no chain or
+  secret in a log) and the contract's examples, whose sealed copy is a real one from the code 0x00..0x1f, its bytes as
+  `bodyBase64`.
+- **Sync in the app** (M10.9, `shared/sync/`): `SyncService`, started from `app.background.ts` once the `sync`
+  record is readable (sync on, the app unlocked), syncs on start, when back online, when a tab is shown again, 10 s
+  after a change to a synced table or the settings (`SyncRepository.changes()`), every 10 s while the tab is shown, and
+  on Sync now, one tab at a time (a Web Lock). A run reads the chain with `If-None-Match` (a 304 when nothing changed),
+  opens and reads the copy, merges, writes what it took in one transaction, and sends a new version with `If-Match`,
+  reading and merging again up to three times if another device wrote first. The poll every 10 s, not 15, keeps "an
+  edit shows on the other device within 15 s" with a margin; each is a 304 costing one D1 row read. The devices'
+  list is the chain's, in memory: after a reload it fills in with the first sync, a moment later.
+- **The sync record** (M10.9, core's `user/sync-record.ts`, Dexie v5): the code (base64), this device's id and name
+  (`defaultDeviceName` from the browser: "Edge on Windows"), the version last read or written, when it last synced,
+  and what stopped sync (`gone`, `newer`, `unopenable`). The app lock seals it; backups and sync leave it out; Turn
+  off deletes it outright (a `TransientTable`, as drafts are), since it was this device's alone.
+- **Joining takes the chain's shared settings** (M10.9): a new device has just made its own in the first run, so by
+  their time they'd win the merge and overwrite every device's. Join (Merge or Replace) takes the copy's shared
+  settings first, then merges the records.
+- **The words and the keys apart** (M10.9): `sync-code.ts` (the words, with `@scure/bip39`'s word list) loads only
+  with the dialogs that show or take a code; `sync-crypto.ts` (keys, seal) with the service. The QR code is
+  `@paulmillr/qr` 0.3.0 (exact, no dependencies), its raw modules drawn as one SVG path (`ss-qr-code`), dark on light
+  in either theme (`--ss-qr-ink`, `--ss-qr-paper`), with a 4-module quiet zone.
+- **The shared time in the initial bundle** (M10.9): the settings repository stamps `sharedUpdatedAt` on every write
+  through core's `withSharedTime`, which moves it only when a shared value changed. A first version imported it from
+  `sync.ts`, which brought Zod and every record schema into the initial bundle (671 kB): `shared-settings.ts` holds
+  only the field list and that function, with no Zod, as `stamps.ts` does for the repositories.
+- **Bundle** (M10.9): 499.65 kB initial (499.14 before): the shared settings' list and `withSharedTime`, and
+  `oneAtATime`, now in a chunk shared with sync's.
+- **A check that races the worker's own** (M10.6, found by M10.9's batch run): Angular's worker answers "no new
+  version" to a check for a version it already holds, and its own check after a page load holds one as soon as it's
+  downloaded: a moment before it says so (`VERSION_READY`), and before the page has decided between a prompt and a
+  move (`runsLatest`, a fetch). So Settings said "You have the latest version." as the prompt appeared. `AppUpdates`
+  now follows the worker's news: a version detected keeps a check waiting until it's offered or run, or its download
+  fails, and `ready` remembers a version offered, which Settings' message goes by too. The wait ends with
+  `takeUntil(timer())`, not rxjs's `timeout`: the initial bundle's rxjs chunk holds every rxjs function the app uses,
+  lazy chunks' included, and `timeout` took it to 500.40 kB. The same runs found that `wrangler dev` serves a file new
+  to `public/` about half a second after it appears, and the SPA's `index.html` until then ("Failed to load module
+  script" for a new `main-*.js`), and that on Windows its watcher stops for good when it meets a file still being
+  written (`EBUSY`: a copy rewriting the 940 kB exceljs chunk), after which every new file gets `index.html`. The
+  batch's `serve()` puts a build over the last one rather than deleting it first, writing only new and changed files,
+  each moved in whole from beside `public/`, and waits until every file in its `ngsw.json` is served as built.
+- **Delete all data and Import** (M10.9): Delete all data asks whether to delete the synced copy too (sync turns off
+  here either way); Import's Replace waits until sync is off, since sync would bring back what Replace takes away.
+- **A disabled button still clicks** (M10.9): Material's `disabledInteractive` (a button kept focusable while
+  disabled) gives a `<button>` `aria-disabled` and stops clicks only on an anchor: a button's `(click)` and a form's
+  submit still run. Import's Replace with sync on and the join dialog's buttons while it's busy check in their
+  handlers, and their tests click them. The older dialogs' busy buttons (18 uses in 11 templates) rely on it too:
+  worth the same check.
+- **Checks** (M10.9): web 769 tests, core 1812, API 290, bot 60. Under `wrangler dev`: `check-m10-offline-sync.cjs`
+  (113: offline, the updates, install, and sync between two browsers both ways; its sync part again, 45, after the
+  dialogs' guards); on `ng serve`, `check-settings.cjs` (81), `check-backup.cjs` (81, again after Import's guard) and
+  `check-app-lock.cjs` (159).
+- **Sync's keys** (M10.7, the crypto module's `sync-crypto.ts`): the code is 32 random bytes as BIP39's 24 English
+  words (`@scure/bip39` 2.4.0, exact, which brings `@noble/hashes` 2.4.0); HKDF-SHA256 with an empty salt and the
+  infos "simply-sub sync: chain id" (16 bytes), "…: auth secret" (32) and "…: copy key" (AES-256-GCM, not
+  extractable); the ids and secrets as unpadded base64url. A sealed copy is a format byte (1), a random 12-byte IV and
+  the gzipped JSON (`CompressionStream`) sealed with the key, bound to "simply-sub sync 1:<chain id>". The tests pin
+  the words to BIP39's own vectors and the derivations to Node's `hkdfSync`.
+- **Checks** (M10.6): web 720 tests, core 1773, API 268 (the manifest's 4), bot 60. Under `wrangler dev`:
+  `check-m10-offline-sync.cjs` (69, with two more builds), `check-catalog.cjs` (41; its Catalog card's button and
+  message now scoped, since the App group has a Check for updates of its own when the worker runs, Playwright's
+  blocked registration included) and `csp-check.cjs` (8); on `ng serve`, `check-settings.cjs` (81) and
+  `check-shell.cjs` (51).
+
+**Resolved (2026-10-29, M10.1–M10.4, as built)**
+- **The year view** (M10.4): `?view=year` keeps the month, so Month goes back to it; Today goes to this year. Each
+  month's card is a link named with all it shows, but only its month's name is inside the link (stretched over the
+  card), since axe's label-in-name rule wants a link's visible text in its name in the same order. No `@defer`: it
+  would have taken the initial bundle to 505.27 kB.
+- **The user database** (M10.1): `simply-sub-user` was made on 2026-10-29 (ENAM, `wrangler d1 create`), and its first
+  two migrations applied remotely by hand that day for the Proton test on the preview link, ahead of the deploy, which
+  finds them applied. Its first query after creating it failed once with Cloudflare's 7403 ("not authorized"), then
+  worked: a new database takes a moment.
+- **The test calendar for Proton** (M10.2): made on the branch's preview link with `POST /cal`, one event per kind of
+  rule the app writes, for the owner to subscribe to in Proton Calendar. Its result goes here when they report it.
+- **Feeds don't follow exchange rates** (M10.3): a feed's amounts are as the provider charges them, in its currency
+  ("Renew Mullvad VPN: €60.00"), so new rates never change it, and each run of charges starts from its anchor once that
+  has passed, so its start and UID don't move as the days go by. A feed changes only when the lists do (or a
+  per-charge event passes), and the app sends it only then.
+- **No record id leaves the device** (M10.3): each event's UID is a SHA-256 of the app's own, cut to 32 hex digits.
+- **Sync calendar's menu** (M10.3): Live calendar… comes first; the file items are named "Google Calendar file" and so
+  on, so the two kinds read apart.
+- **Delete all data** (M10.3) revokes the live calendar's links first, while it can read their key; locked, or offline,
+  it can't, and the server deletes them after 180 days.
+- **Bundle:** 498.90 kB initial (497.84 before). The starter costs 0.18 kB of `main`; the rest is the split its lazy
+  chunk caused in the chunk the app shares at start (223.37 kB became 150.60 and 73.68), the glue between two chunks.
+- **Checks:** core 1773 tests, web 699, API 264, bot 60; `check-m10-calendar.cjs` (96, new for the batch, with
+  `wrangler dev` behind `ng serve`), and the scripts of the pages it changed: `check-exports.cjs` (88, Sync calendar's
+  items one further down, the 31st's `BYMONTHDAY=-1`), `check-calendar.cjs` (87), `check-settings.cjs` (81),
+  `check-backup.cjs` (81) and `check-app-lock.cjs` (159).
+
+**Resolved (2026-10-29, M10's plan)**
+The owner's choices for Phase 5, which PROJECT-PLAN's M10 (M10.1–M10.13) follows:
+- **Where user data lives on the server:** a second D1 database, `simply-sub-user`, for the live calendar feeds, sync's
+  sealed copies and price reports. Not KV, whose 1,000 writes a day the bot, `/fx` and `/icon` need; not R2, which
+  needs a payment method on file; not Durable Objects, since a Worker that has one gets no preview links. D1's daily
+  writes are the account's, shared with the catalog's deploys, so user writes are capped at half of them.
+- **For how long:** a feed set or a sync chain is deleted 180 days after the app last wrote it, and the app writes at
+  least every 30 days while it's used; Revoke and Delete are immediate. A report leaves D1 the next night for the
+  bot's KV and is gone once the weekly digest has it.
+- **Limits:** writes 10 a minute per IP and 6 a minute per feed set or sync chain; a feed's downloads 30 a minute per
+  feed, not per IP, since calendar apps' servers share addresses; 26 calendars and 2,000 events per feed set; 1 MiB
+  per sync copy; reports 3 a minute per IP and 500 a day; daily caps that keep user writes under half of D1's 100,000.
+- **Reports:** choices only, no free text, which would reach the digest's reviewer, a model included; no Turnstile.
+  The bot checks each reported plan's page the next night, and only what it can't settle reaches a person.
+- **The live calendar and Proton Calendar** (the owner's calendar, and their condition for building it): Proton
+  subscribes to a URL and refreshes it every 4 to 16 hours on its own (its help page "Subscribe to an external
+  calendar"), each subscription counting toward the plan's calendars (3 on the free plan, 25 on paid ones). Its web
+  client takes a monthly rule with one day of the month, and `BYSETPOS` only with a weekday
+  (`packages/shared/lib/calendar/recurrence/rrule.ts`, read 2026-10-29), and drops other events on import, so M7.12's
+  rule for a plan billed on the 29th to the 31st never reached a Proton import. M10.2 writes rules it takes, for the
+  download too, and a test calendar on the branch's preview link checks them in the owner's Proton Calendar before the
+  app's side is built. Google adds a calendar by URL on a computer only and doesn't say how often it refreshes; Apple's
+  Calendar on a Mac refreshes from every 5 minutes to weekly, and an iPhone on its fetch setting.
+- **Regions first:** the US's gaps, the United Kingdom, the euro countries, and Australia and New Zealand.
+- **The app's icon:** a simple mark drawn for the app, shown to the owner before it's committed. It replaces the
+  favicon, still Angular's default logo.
+- **Not in M10:** "Suggest a service" (section 12).
 
 **Resolved (2026-10-29, the UI polish and the feedback after M3)**
 The UI polish the user approved (M9.5, M4.9, and with their OK of the proposals, M7.10, M4.7 and M4.8), and their

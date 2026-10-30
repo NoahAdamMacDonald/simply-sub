@@ -1,0 +1,21 @@
+{
+  "id": "/",
+  "name": "Simply Sub",
+  "short_name": "Simply Sub",
+  "description": "Track, budget and optimize your subscriptions. Your lists stay in your browser.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#e4e4e4",
+  "icons": [
+    { "src": "app-icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "app-icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    {
+      "src": "app-icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

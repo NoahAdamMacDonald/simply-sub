@@ -20,6 +20,7 @@
     "data:validate": "tsx scripts/validate-data.ts",
     "data:build": "tsx scripts/build-catalog.ts",
     "data:icons": "tsx scripts/fetch-icons.ts",
+    "app:icons": "tsx scripts/app-icons.ts",
     "data:queue": "tsx scripts/discover-services.ts",
     "data:urls": "tsx scripts/find-urls.ts",
     "data:render": "tsx scripts/render-pages.ts",

@@ -320,11 +320,11 @@ Related (Netflix Standard on the 12th, tagged Family and with a tag deleted sinc
 and Family (Mullvad VPN, yearly on Jan 20, renewed by hand), then reads every file it downloads:
 - List view's Export by keyboard: the CSV (its byte order mark, header and rows, live tags only), the workbook
   (parsed by the repository's exceljs: Summary, the list's sheet, Payments), the JSON, the text, and the .ics (since
-  M7.12 a repeating all-day event per subscription, its RRULE read: Crave's on each month's 31st or last day,
-  `BYMONTHDAY=28,29,30,31;BYSETPOS=-1`), with "Saved <name>" after each;
+  M7.12 a repeating all-day event per subscription, its RRULE read: Crave's on each month's last day,
+  `BYMONTHDAY=-1` since M10.2, the form Proton Calendar takes), with "Saved <name>" after each;
 - the Calendar's Export to file (the main button's .ics for both lists, the menu's payment schedule in date order
-  and its workbook) and Sync calendar for each app: the .ics, then its steps with focus on the heading, and Escape
-  back on Sync calendar;
+  and its workbook) and Sync calendar for each app's file (since M10.3 below Live calendar…, so one item further
+  down): the .ics, then its steps with focus on the heading, and Escape back on Sync calendar;
 - offline at 360 px, a library not loaded yet: the snack bar's "The file couldn't be made".
 
 Every format runs light at 1280 px; the other runs open each menu and download one file of each page. It runs axe on
@@ -434,6 +434,82 @@ at both widths, keyboard only, each part on its own, so one failing doesn't stop
   from the sidebar, the compact grid and its bottom sheet at 360, and the JSON and Text downloads;
 - Settings: the 📍 dialog's province typed ("que" is Quebec alone) and the tag editor's picker;
 - Home: the bars' colour on the scale and the warnings' ✕.
+
+`check-m10-calendar.cjs` (M10's Calendar batch: M10.3, and M10.4's year view) needs `wrangler dev` behind `ng serve`'s
+proxy, its user database migrated (`npm -w apps/api run db:user:migrate:local`), since the live calendar's requests
+go to the Worker; it answers `/fx` itself. For a Canadian in Alberta with Work Related (Netflix tagged Family, Crave
+billed on the 31st) and Family (Mullvad renewed by hand), in both themes at both widths, keyboard only:
+- the live calendar (M10.3): Sync calendar's menu (Live calendar…, then each app's file); the dialog on its title,
+  saying what's uploaded and who can see it; Family chosen with Space and Make links with Enter; each link fetched
+  from the Worker with only its own payments (amounts as charged, Crave's `BYMONTHDAY=-1`); Google's and Apple's
+  links; Copy link read back from the clipboard (the context grants clipboard access) and its spoken message;
+  Proton's steps opened with Enter; Escape back on Sync calendar; Settings' card ("On: 2 calendars…") and Manage…;
+- light and wide only: a nickname written to IndexedDB reaching the feed after a reload (the next start), Change
+  calendars keeping each link, and Revoke all asking first (focus on Cancel), then every link answering 404;
+- the year view (M10.4): Year by Enter (pressed, in the URL, the year's bar), twelve month links each named with all
+  its card shows, no Month select and the arrows by year, Tab from Today to January then February, axe and a
+  full-page screenshot, Enter on March opening its month with focus on its grid, then Year and Month by Enter.
+
+A feed takes 30 fetches a minute, so poll one every 2 s, not every 100 ms, or the Worker's 429 looks like a missing
+change. The links view and the choosing view without links share the title Live calendar: wait for Make links to
+know a revoke has finished.
+
+`check-m10-offline-sync.cjs` (M10's offline and sync batch: M10.5, M10.6 and M10.9) runs under `wrangler dev` on the
+production build (`npm -w apps/web run build`, then `node apps/api/scripts/copy-web-build.mjs`), with the user database
+migrated, so the CSP, Trusted Types and the service worker are as on the live site; it answers `/fx` itself. It takes
+two more builds of the same code, each new to the worker: in `apps/web`, `WORKERS_CI_COMMIT_SHA=b0b0b0b0 node
+scripts/build.mjs --output-path=<scratchpad>/build-b`, then `c0c0c0c0` into `build-c`; pass their `browser` folders
+as the 4th and 5th arguments. It serves each by putting its new and changed files over `apps/api/public/`'s and
+waiting until wrangler dev serves them, and puts `apps/web/dist`'s back, so don't build the app while it runs. For a Canadian in Alberta with Work Related (Netflix, Crave) and Family
+(Mullvad, in euros), in both themes at both widths:
+- M10.5: the worker registers through its own policy, controls the page after a reload and holds every file of
+  `ngsw.json`'s app group; then, with `context.setOffline`, Home, a deep link and every sidebar page start, Work Related
+  lists its items from the cached catalog under the Offline banner (axe, no horizontal scroll), and Family's Mullvad
+  is converted with the saved rates (`≈`); back online, none of the worker's caches holds an `/api/` or `/data/`
+  answer.
+- M10.6: both `theme-color` metas take the theme on screen; Settings' Version line and its Check for updates by Enter
+  ("You have the latest version."); with the second build served, Check for updates finds it and the prompt shows
+  (axe, a screenshot, no horizontal scroll), Tab from Check for updates reaches Reload, and Enter runs the new
+  version; with the third served, a page load runs it at once and no prompt follows. Then, light and wide in a
+  `launchPersistentContext` profile (Edge offers no install to a private window: CDP's `in-incognito`), CDP's
+  `Page.getAppManifest` and `Page.getInstallabilityErrors` report nothing, Settings' Install appears, and Enter on it
+  uses the offer (Edge's dialog, which the script can't answer), the steps taking its place.
+
+- M10.9, two browsers, A and B (light at 1280 px with dark at 360, then the other way round), by keyboard: A turns sync
+  on (the new code, axe, a screenshot), B joins by typing four letters of each word and Tab (axe on the words and on
+  the copy to join) and merges; both then have both lists; an edit in A shows on B's open Lists page within 15 s;
+  a deletion in B reaches A; changes made offline on both survive; B's theme stays its own; A's Start over, then its
+  Delete the synced copy, each leave B saying the copy was deleted (B joining the new chain in between), and B turns
+  sync off. A 6th argument runs some parts only: `offline,updates,install,sync` (all by default).
+
+Angular's worker answers every request in its scope, passing on those it doesn't keep, so Playwright's
+`fromServiceWorker()` can't tell what it cached. Sync's helpers wait for the `sync` record's `syncedAt` to move on, not
+for "Synced just now", which the last sync may have left; the join dialog puts focus in the first box itself, so wait for
+that before typing; and `page.goto` reloads the app, whose list of devices is in memory until its first sync. Offline,
+it answers what it never kept (an icon never shown online) with a 504: wait a second before going back online, or that
+console line arrives after. `wrangler dev` serves a file new to `apps/api/public/` about half a second after it
+appears, and the SPA's index.html until then (for a new `main-*.js`, "Failed to load module script"); on Windows its
+watcher also stops for good when it meets a file still being written (its log: "Assets directory watcher encountered an
+error and has been disabled", `EBUSY`). So the script's `serve()` writes only new and changed files, each moved in whole
+from beside the folder, and waits until every file in the build's `ngsw.json` comes back as built; if its wait times
+out, look for that line and restart wrangler dev. For the same reason, copy a new first build in (`copy-web-build.mjs`,
+which deletes and copies everything) only with wrangler dev stopped: `npm run dev:api` copies it before it starts. A
+version the worker has held before isn't new to it, so serving the first build again brings no update: hence two more
+builds.
+
+`check-m10-reports.cjs` (M10.11, Report a wrong price) runs under `wrangler dev` on the production build too, with the
+local catalog seeded (`npm -w apps/api run db:seed:local`: the report's plan is checked against D1's `plans`) and the
+user database migrated (`npm -w apps/api run db:user:migrate:local`); run `npm run data:build` on the branch first. For
+a Canadian in Alberta, in both themes at both widths, by keyboard: Search's Netflix card expanded, Tab to Report a wrong
+price beside the price's date and Enter, which loads the dialog's chunk then; focus on the first choice, axe, no
+horizontal scroll; a different price typed and sent (offline first in one run: it says so, sends nothing), or "It's not
+sold any more" with an arrow key; the thanks with axe, and focus back on the button. Then Mullvad's card, whose five
+billing periods its dialog asks for, filled in with the catalog's euro price, and Yearly chosen by keyboard. It reads the
+local user database with `wrangler d1 execute --local` before and after: 3 reports of a different price and 1 that the
+plan isn't sold any more, on Netflix's first plan (Standard with ads, the one its details show). A report is limited to 3
+a minute per IP, and wrangler dev's limiter counts in the wall clock's minutes: a run's fourth report can be refused,
+which the script checks is said in words, then sends again in the next minute (a run takes 2 to 3 minutes). A snackbar
+fading out is paler than it shows, so axe waits until the thanks has gone.
 
 `check-after-m3.cjs` (the feedback after M3: M5.13, M6.17–M6.19, M7.11, M8.5, M8.6, M9.6) checks the batch on
 `ng serve` for a Canadian in Alberta, with Streaming (Crave Premium and Disney+ Premium) and Family (two Disney+
@@ -590,8 +666,14 @@ Playwright's `hasText` matches without case.
 - Trigger the error snackbar with `page.evaluate(() => setTimeout(() => { throw new Error('x'); }))`.
 - Run axe about 600 ms after clicking a Material button: its ripple and state layer fade out, and mid-fade the
   dark theme's accent label on them measures 4:1, a contrast failure that isn't there once they settle.
-- Offline, a lazy page that hasn't been opened in the session can't load its chunk, and the error snackbar shows.
-  That's expected until M10's service worker: navigate offline only to pages already opened.
+- Offline on `ng serve`, a lazy page that hasn't been opened in the session can't load its chunk, and the error
+  snackbar shows: navigate offline only to pages already opened. The production build's service worker (M10.5) holds
+  every chunk once it controls the page, which `check-m10-offline-sync.cjs` checks under `wrangler dev`.
+- Under `wrangler dev` the production build registers its service worker (M10.5), which then fetches the page's
+  requests itself, past `context.route`. Scripts that answer requests themselves create their contexts with
+  `serviceWorkers: 'block'` (`check-catalog.cjs`, `check-search.cjs`, `check-optimizations.cjs`, the progress preview's
+  `csp-check.cjs`) and leave Playwright's console warning "Service Worker registration blocked by Playwright" out of
+  their console check. `ng serve`'s development build registers no worker.
 - A Material tooltip opens on hover and on keyboard focus (Tab), not on a script's `locator.focus()`.
 - Read a control's accessible name with `locator.ariaSnapshot()` (`- button "about $7.53 a month"`), not its
   `textContent`, which keeps `aria-hidden` text and icon ligatures, and which joins a `.visually-hidden` span without

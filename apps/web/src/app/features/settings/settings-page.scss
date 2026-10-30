@@ -157,7 +157,8 @@ mat-checkbox {
   margin-top: 16px;
 }
 
-.catalog {
+// A line and its [Check for updates]: the catalog's and the app's.
+.check-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -165,6 +166,20 @@ mat-checkbox {
 
   p {
     margin: 0;
+  }
+}
+
+.install {
+  margin-top: 12px;
+}
+
+.install-steps {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  font: var(--mat-sys-body-medium);
+
+  li + li {
+    margin-top: 4px;
   }
 }
 

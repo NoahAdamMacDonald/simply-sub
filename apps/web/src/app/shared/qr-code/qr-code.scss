@@ -1,0 +1,19 @@
+:host {
+  display: block;
+  width: 100%;
+  max-width: 220px;
+}
+
+svg {
+  display: block;
+  width: 100%;
+  shape-rendering: crispEdges;
+}
+
+.paper {
+  fill: var(--ss-qr-paper);
+}
+
+.ink {
+  fill: var(--ss-qr-ink);
+}

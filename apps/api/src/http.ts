@@ -1,9 +1,9 @@
-import type { ErrorBody } from '@simply-sub/core';
+import type { BodyProblem, ErrorBody } from '@simply-sub/core';
 import type { Context } from 'hono';
 
 // What every route answers the same way: the JSON content type, the catalog's caching, the 400 bad_request,
-// 404 not_found, 429 rate_limited, 500 internal and 502 shapes (core's ErrorBody, the contract's error envelope),
-// timestamps, If-None-Match and the ETag's hash. No error may be cached.
+// 404 not_found, 413 too_large, 429 rate_limited, 500 internal, 502 and 503 over_capacity shapes (core's ErrorBody,
+// the contract's error envelope), timestamps, If-None-Match and the ETag's hash. No error may be cached.
 
 // Hono's default is plain application/json, so every JSON answer sets the contract's type.
 export const jsonType = 'application/json; charset=utf-8';
@@ -26,6 +26,62 @@ export function badQuery(c: Context, problems: readonly ParamProblem[]): Respons
     error: { code: 'bad_request', message, details: [...problems] },
   } satisfies ErrorBody;
   return c.json(body, 400, { 'Content-Type': jsonType, 'Cache-Control': 'no-store' });
+}
+
+/** 400 bad_request for a body that isn't what its route takes, listing each problem by where it is (M10.1). */
+export function badBody(c: Context, problems: readonly BodyProblem[]): Response {
+  const message =
+    problems.length === 1
+      ? problems[0].path === ''
+        ? problems[0].issue
+        : `Invalid body field '${problems[0].path}'.`
+      : `${problems.length} body fields are invalid.`;
+  const body = {
+    error: { code: 'bad_request', message, details: [...problems] },
+  } satisfies ErrorBody;
+  return c.json(body, 400, { 'Content-Type': jsonType, 'Cache-Control': 'no-store' });
+}
+
+/** 403 forbidden: a write without the secret its feed set or sync chain was made with, or with another (M10.2). */
+export function forbidden(c: Context, message: string): Response {
+  return c.json({ error: { code: 'forbidden', message } } satisfies ErrorBody, 403, {
+    'Content-Type': jsonType,
+    'Cache-Control': 'no-store',
+  });
+}
+
+/** 412 stale_version: a sync chain's write named a version another device has written past (M10.8). */
+export function staleVersion(c: Context, message: string): Response {
+  return c.json({ error: { code: 'stale_version', message } } satisfies ErrorBody, 412, {
+    'Content-Type': jsonType,
+    'Cache-Control': 'no-store',
+  });
+}
+
+/** 413 too_large: the body is over its route's limit, which the message names in bytes (M10.1). */
+export function tooLarge(c: Context, limit: number): Response {
+  return c.json(
+    {
+      error: {
+        code: 'too_large',
+        message: `The request's body is over its limit of ${limit} bytes.`,
+      },
+    } satisfies ErrorBody,
+    413,
+    { 'Content-Type': jsonType, 'Cache-Control': 'no-store' },
+  );
+}
+
+/**
+ * 503 over_capacity: a daily cap on what users store was reached, or the storage is full (M10.1). Either way, try
+ * again after `retryAfter` seconds.
+ */
+export function overCapacity(c: Context, message: string, retryAfter: number): Response {
+  return c.json({ error: { code: 'over_capacity', message } } satisfies ErrorBody, 503, {
+    'Content-Type': jsonType,
+    'Cache-Control': 'no-store',
+    'Retry-After': String(retryAfter),
+  });
 }
 
 /** A problem for each query parameter, on a route that takes none. */
@@ -116,6 +172,11 @@ export function notModified(c: Context, etag: string): boolean {
 /** `date` as the API writes timestamps: ISO 8601 in UTC, to the second. */
 export function utcTimestamp(date: Date): string {
   return date.toISOString().replace(/\.\d{3}Z$/, 'Z');
+}
+
+/** The day `date` is in UTC, as an ISO date: what the user database's dates and daily counts use (M10.1). */
+export function utcDay(date: Date): string {
+  return date.toISOString().slice(0, 10);
 }
 
 /** The first 4 hex digits of a SHA-256 of `text`: the part of an ETag after D1's catalog version. */

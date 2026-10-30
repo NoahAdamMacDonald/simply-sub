@@ -59,7 +59,13 @@ async function until(what, condition, timeout = 15000) {
 }
 
 async function newPage(browser, label, { colorScheme = 'light', viewport = WIDE } = {}) {
-  const context = await browser.newContext({ locale: 'en-CA', colorScheme, viewport });
+  // Under `wrangler dev` the production build's service worker (M10.5) would answer requests Playwright can't route.
+  const context = await browser.newContext({
+    locale: 'en-CA',
+    colorScheme,
+    viewport,
+    serviceWorkers: 'block',
+  });
   // GET /fx, answered with fixed rates, so no Worker is needed behind the dev proxy.
   await context.route('**/api/v1/fx?**', (route) =>
     route.fulfill({
@@ -82,7 +88,9 @@ async function newPage(browser, label, { colorScheme = 'light', viewport = WIDE 
   );
   const page = await context.newPage();
   page.on('console', (msg) => {
-    if (msg.type() === 'error' || msg.type() === 'warning') {
+    // Playwright's own note each time it stops the service worker's registration (serviceWorkers: 'block').
+    const blockedWorker = msg.text() === 'Service Worker registration blocked by Playwright';
+    if ((msg.type() === 'error' || msg.type() === 'warning') && !blockedWorker) {
       consoleProblems.push(`[${label}] ${msg.type()}: ${msg.text()}`);
     }
   });
