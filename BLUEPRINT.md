@@ -2390,6 +2390,11 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
     the last one it wrote are ignored, so quick toggles never flash back.
   - **Before the first run** there's no settings record to save it in (country and currency are required), so the
     choice is only cached, and the first-run dialog saves the theme on screen.
+- **The screen's edges** (M10.16): `viewport-fit=cover`, and `--ss-inset-top`, `-bottom`, `-left` and `-right`
+  (`_tokens.scss`, from `env(safe-area-inset-*)`) keep the shell clear of a phone's status bar, home indicator and
+  landscape notch: the top bar and the sidebar start below the status bar, the page's end and a full-screen dialog's
+  buttons stay above the indicator. An installed app's top is at least `100vh − 100dvh`, for iOS 26.1's status bar,
+  which reports no inset (section 14).
 - **Rank chips:** a coloured dot (vivid fill) + the rank name in normal text colour. This is readable in both
   themes and in every rank.
 - **Budget bars:** a vivid fill with a dark label inside (as in the wireframes). Green under 75%, amber at
@@ -3026,6 +3031,17 @@ The owner's nine points after M10, a task row each in PROJECT-PLAN ("added 2026-
 - **The Proton test feed (M10.2):** deleted from the user database on 2026-10-30 with the owner's OK. Proton Calendar
   had added it by its name; its events weren't checked, so M10.2's last box waits for the owner's own live calendar.
 - **Bundle:** 499.76 kB initial (499.65 before): the redirect and the inbox.
+- **The Home Screen app (M10.16):** opened from an iPhone's Home Screen, the app was cut off at the top or the bottom,
+  though it fit in Safari. The viewport didn't reach the screen's edges (no `viewport-fit=cover`), so the shell knew
+  nothing of the status bar and the home indicator. And since iOS 26.1 an installed app's status bar is drawn over its
+  top with `env(safe-area-inset-top)` 0 (WebKit bug 301994: fixed in 26.2, back in 26.5 and the iOS 27 beta, where
+  `screen.height` is 874 and `innerHeight` 812). There `vh` counts the band the status bar covers and `dvh` doesn't, so
+  an installed app's top inset is the larger of the two measures, `100vh − 100dvh`; a browser tab's `vh` and `dvh`
+  differ by its toolbar, so only `display-mode: standalone` takes it. Edge can't run iOS, so the CDP check sets a
+  phone's safe areas; the owner checks the real thing on the preview link.
+- **Fonts in woff2 alone (M10.16):** the insets' rules sit in the initial bundle, which had 0.35 kB left. Fontsource's
+  CSS gives each of Inter's 21 faces a woff beside its woff2; written from its metadata in woff2 alone (`_fonts.scss`),
+  they cost 1.4 kB less. Every browser the app supports reads woff2. 499.43 kB initial with M10.14.
 
 **Resolved (2026-10-29, the feedback after M10)**
 The user's report after M10, as M8.7 (PROJECT-PLAN's row has it as built):
