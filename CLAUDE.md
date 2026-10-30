@@ -13,12 +13,16 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 
 ## Stack (pinned)
 - Angular 22.2.3 (CLI/build 22.2.4), exact versions with no `^` · TypeScript · Angular Material 3 (material/cdk 22.2.4) · standalone + signals + zoneless
-- The root `package.json` `overrides` pins patched versions of three dependencies with known advisories:
+- The root `package.json` `overrides` pins patched versions of four dependencies with known advisories:
   - `vite` 8.3.5: `@angular/build` 22.2.4 ships a vulnerable vite 8.3.0.
   - `undici` 7.30.1: wrangler's and the vitest plugin's miniflare pin 7.29.1.
   - `zod` 4.6.6: the vitest plugin pins 4.6.5.
+  - `uuid` 14.0.3 (the app's own) for `exceljs` only: exceljs 4.4.0 asks for uuid ^8.3.0. The app bundles exceljs's
+    prebuilt browser file, which has a copy of its own, so this clears the tree; exceljs only calls `v4()`, which the
+    advisory doesn't affect.
   Remove each one once the package that pulls it in ships a fixed version. CI runs `npm audit --audit-level=high`,
-  so a new advisory with no fix gets an override like these.
+  so a new advisory with no fix gets an override like these. npm applies a new override to a package already in the
+  lockfile only once it resolves that package again (`npm install exceljs@4.4.0 -w apps/web`).
 - Node 24.22.1 / npm 12.0.2 via Volta 2.0.2 (`"volta"` field in root package.json). Workers Builds pins Node
   with its `NODE_VERSION` build variable (BLUEPRINT §7.6), so change both together.
 - Cloudflare Worker (Hono) + D1 for the read-only catalog API; the same Worker serves the SPA as static assets
