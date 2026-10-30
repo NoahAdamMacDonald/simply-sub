@@ -18,7 +18,7 @@
 //   serves a build by putting its new and changed files over apps/api/public/'s and waiting until wrangler dev serves
 //   them, then puts the first build (apps/web/dist's) back after each run.
 // - M10.9, sync between two browsers, A and B (light at 1280 px and dark at 360, then the other way round), by
-//   keyboard: A turns sync on (the new code's 24 words and QR code, axe), B joins with four letters of each word and
+//   keyboard: A turns sync on (the new code's 24 words, axe), B joins with four letters of each word and
 //   Tab, sees what the copy holds (axe) and merges; then A's lists and B's are in both, an edit in A reaches B within
 //   15 s with B doing nothing, a deletion in B reaches A, changes made offline on both to different lists all survive,
 //   the theme stays each browser's, and A's Start over and then its Delete the synced copy each leave B saying the copy
@@ -689,7 +689,11 @@ async function syncNow(page, label) {
 
 /** Types the code's words into the join dialog: four letters of each, then Tab, which completes it. */
 async function typeCode(page, dialog, words) {
-  // The dialog puts focus in the first box itself, once it has opened.
+  // The dialog puts focus on Scan the QR code itself, once it has opened (M10.14): the first box is a Tab on.
+  await until('focus on Scan the QR code', () =>
+    page.evaluate(() => document.activeElement?.matches('button.scan') === true),
+  );
+  await page.keyboard.press('Tab');
   await until('focus in the first box', () =>
     page.evaluate(() => document.activeElement?.matches('.words input') === true),
   );
@@ -738,7 +742,8 @@ async function joinWith(page, label, words, viewport, shots) {
 /** Turns sync on, or starts over, by keyboard: the new code's words, once kept. */
 async function keepNewCode(page, label, viewport, shots) {
   const dialog = topDialog(page);
-  await dialog.locator('ss-qr-code path').waitFor({ timeout: 20000 });
+  // A new code is one to keep: its QR code comes with Show the code, once sync is on (M10.14).
+  await dialog.locator('.words li').nth(23).waitFor({ timeout: 20000 });
   const words = (await dialog.locator('.words li').allTextContents()).map((word) => word.trim());
   if (shots) {
     await axeCheck(page, `${label}: the new code`);

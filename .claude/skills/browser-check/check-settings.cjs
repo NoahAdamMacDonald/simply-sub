@@ -241,7 +241,7 @@ async function firstRunKeyboard(browser) {
 
   // From the heading: each menu (whose list opens with focus and closes as it moves on), the budgets, then the buttons.
   const order = [];
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 9; i++) {
     await page.keyboard.press('Tab');
     order.push(await focused(page));
   }
@@ -256,6 +256,8 @@ async function firstRunKeyboard(browser) {
         'input "Annual budget"',
         // M6.9.
         'button "Import a backup instead"',
+        // M10.15.
+        'button "Join with a sync code"',
         'button "Get started"',
         'input "Country"',
       ].join(' > '),

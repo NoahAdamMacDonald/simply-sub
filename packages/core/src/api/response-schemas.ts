@@ -9,6 +9,7 @@ import {
 } from '../export/calendar-feed';
 import { bundlesBodySchema, planBodySchema, providerBodySchema } from '../lookup/lookup-bodies';
 import { providersBodySchema } from '../search/providers-body';
+import { joinLinkBodySchema } from '../user/join-link';
 import { syncBody, syncWriteBodySchema } from '../user/sync';
 import { healthBodySchema } from './health-body';
 
@@ -40,6 +41,9 @@ export const successBodySchemas = {
   'PUT /sync/:chain': syncWriteBodySchema,
   // 204 No Content.
   'DELETE /sync/:chain': z.null(),
+  'POST /join': joinLinkBodySchema,
+  // The sealed code's bytes, once: the same body as GET /sync/:chain's.
+  'DELETE /join/:id': syncBody,
   // 202 Accepted, with nothing to read back.
   'POST /reports': z.null(),
 } as const satisfies Record<

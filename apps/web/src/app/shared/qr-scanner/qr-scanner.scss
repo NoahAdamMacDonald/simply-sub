@@ -1,0 +1,30 @@
+:host {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+
+// A square on the middle of the frame, which is where the decoder looks: a QR code fills it best.
+.viewfinder {
+  display: none;
+  width: min(280px, 100%);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: var(--ss-radius-card);
+  background: var(--ss-qr-paper);
+
+  &.showing {
+    display: block;
+  }
+
+  video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.status {
+  margin: 0;
+}

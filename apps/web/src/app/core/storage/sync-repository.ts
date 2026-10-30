@@ -1,12 +1,14 @@
 import { Service, computed, inject } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import {
+  joinedSettings,
   nextUpdatedAt,
   sharedSettings,
   syncTables,
   withChanges,
   withSharedSettings,
   type LocalSync,
+  type Settings,
   type SharedSettings,
   type SyncData,
   type SyncRecord,
@@ -100,27 +102,38 @@ export class SyncRepository {
     });
   }
 
-  /** What a merge took from the chain, written in one transaction: the records, and the shared settings. */
-  async applyMerge(writes: Partial<SyncData>, settings: SharedSettings | undefined): Promise<void> {
+  /**
+   * What a merge took from the chain, written in one transaction: the records, and the shared settings. A new device
+   * in its first run, which has no settings yet, starts them from the shared ones and its `theme` (M10.15).
+   */
+  async applyMerge(
+    writes: Partial<SyncData>,
+    settings: SharedSettings | undefined,
+    theme?: Settings['theme'],
+  ): Promise<void> {
     const now = this.storage.now();
     const engine = await this.storage.engine();
     await engine.transaction(mergedTables, async (transaction) => {
       await putAll(transaction, writes);
-      if (settings) await takeSettings(transaction, settings, now);
+      if (settings) await takeSettings(transaction, settings, now, theme);
     });
   }
 
   /**
    * Join's Replace: this device's synced records and list drafts cleared, the chain's written, and its shared settings
-   * taken, in one transaction. This device's own settings (the theme…) stay.
+   * taken, in one transaction. This device's own settings (the theme…) stay, or start from `theme` (applyMerge).
    */
-  async replaceLocal(data: SyncData, settings: SharedSettings | undefined): Promise<void> {
+  async replaceLocal(
+    data: SyncData,
+    settings: SharedSettings | undefined,
+    theme?: Settings['theme'],
+  ): Promise<void> {
     const now = this.storage.now();
     const engine = await this.storage.engine();
     await engine.transaction([...mergedTables, 'drafts'], async (transaction) => {
       for (const table of [...syncTables, 'drafts'] as const) await transaction.clear(table);
       await putAll(transaction, data);
-      if (settings) await takeSettings(transaction, settings, now);
+      if (settings) await takeSettings(transaction, settings, now, theme);
     });
   }
 }
@@ -137,7 +150,9 @@ async function takeSettings(
   transaction: StorageTransaction,
   settings: SharedSettings,
   now: string,
+  theme: Settings['theme'] | undefined,
 ): Promise<void> {
   const current = await transaction.get('settings', 'settings');
   if (current) await transaction.put('settings', withSharedSettings(current, settings, now));
+  else if (theme) await transaction.put('settings', joinedSettings(settings, theme, now));
 }

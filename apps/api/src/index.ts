@@ -10,6 +10,7 @@ import { features } from './routes/features';
 import { fx } from './routes/fx';
 import { health } from './routes/health';
 import { icon } from './routes/icon';
+import { join } from './routes/join';
 import { plans } from './routes/plans';
 import { provider } from './routes/provider';
 import { providers } from './routes/providers';
@@ -31,6 +32,7 @@ const v1 = new Hono<{ Bindings: Env }>()
   .route('/fx', fx)
   .route('/health', health)
   .route('/icon', icon)
+  .route('/join', join)
   .route('/plans', plans)
   .route('/providers', providers)
   .route('/providers', provider)

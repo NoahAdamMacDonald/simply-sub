@@ -16,6 +16,7 @@ import {
   mergeSync,
   readSyncCopy,
   type BackupCounts,
+  type Settings,
   type SyncCopy,
   type SyncDevice,
   type SyncRecord,
@@ -195,18 +196,20 @@ export class SyncService {
   /**
    * Joins the chain a preview read: this device takes its shared settings (where the user is, the tax, the budgets),
    * then merges its records with the copy's, or replaces its own with them; then it syncs, adding itself to the devices.
+   * A new device in its first run has no settings yet: they start from the shared ones and its `theme` (M10.15).
    */
   async join(
     seed: Uint8Array<ArrayBuffer>,
     preview: Extract<JoinPreview, { kind: 'copy' }>,
     mode: 'merge' | 'replace',
+    theme?: Settings['theme'],
   ): Promise<SyncOutcome> {
     const now = this.storage.now();
     const { copy, version } = preview;
     if (mode === 'replace') {
-      await this.repository.replaceLocal(copy.data, copy.settings);
+      await this.repository.replaceLocal(copy.data, copy.settings, theme);
     } else {
-      await this.repository.applyMerge({}, copy.settings);
+      await this.repository.applyMerge({}, copy.settings, theme);
     }
     const kept = await this.repository.readOnce();
     await this.repository.save({

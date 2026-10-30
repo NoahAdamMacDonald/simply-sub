@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import {
   deviceRefreshMs,
+  joinedSettings,
   maxSyncDevices,
   mergeSync,
   readSyncCopy,
+  settingsSchema,
   sharedSettings,
   syncSchemaVersion,
   syncTables,
@@ -196,6 +198,20 @@ describe('mergeSync', () => {
         monthlyBudget: 300,
         theme: 'dark',
         calendarHiddenLists: [list.id],
+        sharedUpdatedAt: later,
+        updatedAt: now,
+      });
+    });
+
+    it('start a new device’s settings when it joins in its first run, with its own theme (M10.15)', () => {
+      const budgetThere = { ...shared, monthlyBudget: 300, updatedAt: later };
+      const joined = joinedSettings(budgetThere, 'dark', now);
+      expect(settingsSchema.parse(joined)).toEqual(joined);
+      expect(joined).toEqual({
+        ...sharedSettings(settings as Settings),
+        key: 'settings',
+        monthlyBudget: 300,
+        theme: 'dark',
         sharedUpdatedAt: later,
         updatedAt: now,
       });

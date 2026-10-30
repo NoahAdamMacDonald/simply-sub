@@ -1,5 +1,6 @@
 import type { SyncProblem } from '@simply-sub/core';
 import { dateText } from '../../shared/date-text';
+import type { TakenLink } from '../../shared/sync/join-links';
 import type { JoinPreview, SyncSnag } from '../../shared/sync/sync-service';
 
 // What Settings' Sync between devices says (PROJECT-PLAN P13, M10.9): when this device last synced, and what held
@@ -42,3 +43,19 @@ export const previewTexts: Record<Exclude<JoinPreview['kind'], 'copy'>, string> 
   offline: 'You’re offline. Join once you’re back online.',
   failed: 'The synced copy couldn’t be read. Try again in a moment.',
 };
+
+/** Why a join link gave no code (M10.14). */
+export const linkTexts: Record<Exclude<TakenLink['kind'], 'code'>, string> = {
+  gone:
+    'This link was used or has expired. On your other device, show the code again and scan its new QR ' +
+    'code, or type the words.',
+  offline: 'You’re offline. Connect, then scan the QR code again.',
+  unopenable: 'This link doesn’t open. Scan the QR code again.',
+  failed: 'The link couldn’t be read just now. Scan the QR code again in a moment.',
+};
+
+/** A scanned QR code that isn't a sync code's (M10.14). */
+export const scannedTexts = {
+  elsewhere: 'This QR code is for another site’s Simply Sub.',
+  unknown: 'That QR code isn’t a sync code: scan the one your other device shows in Show the code.',
+} as const;

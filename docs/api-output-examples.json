@@ -2786,6 +2786,79 @@
           }
         }
       ]
+    },
+    "POST /join": {
+      "description": "Makes a join link (M10.14): the one-time QR code a device shows to add another to its sync chain. The device seals the chain's code with a new random key and sends only the sealed bytes (application/octet-stream, up to 256 bytes); the link it shows is https://sub.simplely.ca/join#<id>.<key>, whose key, after the #, never reaches the server. The server keeps the sealed bytes under the id's SHA-256 for 10 minutes and answers the id. Counted against sync's daily cap.",
+      "examples": [
+        {
+          "title": "Make a join link",
+          "request": {
+            "method": "POST",
+            "url": "https://sub.simplely.ca/api/v1/join",
+            "headers": {
+              "Content-Type": "application/octet-stream"
+            },
+            "_note": "The sync code 0x00..0x1f sealed with the key 0x40..0x5f (the link's QEFCQ0RFRkdISUpLTE1OT1BRUlNUVVZXWFlaW1xdXl8): a format byte (1), a 12-byte IV, then the ciphertext and its tag, bound to 'simply-sub join 1'.",
+            "bodyBase64": "AaChoqOkpaanqKmqq9eOBDzm7poqcWZL9YWxPvn/BufU+HqTOvrF9IH132Dn+8HGQ/R+tiAS23AcFJXkNA=="
+          },
+          "response": {
+            "status": 201,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "data": {
+                "id": "YGFiY2RlZmdoaWprbG1ubw",
+                "expiresAt": "2026-10-30T18:40:00Z"
+              },
+              "meta": {}
+            }
+          }
+        }
+      ]
+    },
+    "DELETE /join/:id": {
+      "description": "Takes a join link's sealed code: the first request answers its bytes and deletes it in the same statement, so a link works once, and one left in a browser's History opens nothing. After its 10 minutes, or once taken, 404. The device that showed the link withdraws it the same way when its dialog closes.",
+      "examples": [
+        {
+          "title": "Take the sealed code, once",
+          "request": {
+            "method": "DELETE",
+            "url": "https://sub.simplely.ca/api/v1/join/YGFiY2RlZmdoaWprbG1ubw"
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/octet-stream",
+              "Cache-Control": "no-store"
+            },
+            "_note": "The sealed code POST /join kept, as bodyBase64.",
+            "body": null,
+            "bodyBase64": "AaChoqOkpaanqKmqq9eOBDzm7poqcWZL9YWxPvn/BufU+HqTOvrF9IH132Dn+8HGQ/R+tiAS23AcFJXkNA=="
+          }
+        },
+        {
+          "title": "A link that was used or has expired",
+          "request": {
+            "method": "DELETE",
+            "url": "https://sub.simplely.ca/api/v1/join/YGFiY2RlZmdoaWprbG1ubw"
+          },
+          "response": {
+            "status": 404,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "not_found",
+                "message": "This join link was used or has expired: show the code again on your other device."
+              }
+            }
+          }
+        }
+      ]
     }
   },
   "errorCodes": [

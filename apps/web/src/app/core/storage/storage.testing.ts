@@ -52,6 +52,17 @@ export async function plantRows(
   db.close();
 }
 
+/** Deletes rows straight from IndexedDB: a device that has no settings yet, as in its first run. */
+export async function deleteRows(
+  indexedDB: IDBFactory,
+  table: UserTable,
+  keys: readonly string[],
+): Promise<void> {
+  const db = createUserDatabase({ indexedDB, IDBKeyRange });
+  await db.table(table).bulkDelete([...keys]);
+  db.close();
+}
+
 /** Every row of a table as it's stored, deleted and malformed ones included. */
 export async function storedRows(indexedDB: IDBFactory, table: UserTable): Promise<unknown[]> {
   const db = createUserDatabase({ indexedDB, IDBKeyRange });

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, type Provider } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import type { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
@@ -10,7 +10,9 @@ import { MatFormFieldHarness } from '@angular/material/form-field/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 import { MatAutocompleteHarness } from '@angular/material/autocomplete/testing';
 import { TestKey } from '@angular/cdk/testing';
-import type { Settings } from '@simply-sub/core';
+import { syncSchemaVersion, type Settings } from '@simply-sub/core';
+import { sealCopy, syncKeys } from '../../core/crypto/sync-crypto';
+import { joinInbox } from '../../core/join-inbox';
 import { BROWSER_LANGUAGES } from '../../core/settings/browser-languages';
 import { FirstRun } from '../../core/settings/first-run';
 import { SettingsStore } from '../../core/settings/settings-store';
@@ -22,6 +24,8 @@ import {
   type TestStorage,
 } from '../../core/storage/storage.testing';
 import { ThemeService } from '../../core/theme/theme-service';
+import { JoinLinks } from '../../shared/sync/join-links';
+import { FakeSyncServer } from '../../shared/sync/sync.testing';
 
 @Component({ template: '' })
 class Host {}
@@ -30,12 +34,13 @@ describe('First run', () => {
   let storage: TestStorage;
   let loader: HarnessLoader;
 
-  async function start(languages: readonly string[] = ['en-CA']) {
+  async function start(languages: readonly string[] = ['en-CA'], providers: Provider[] = []) {
     TestBed.configureTestingModule({
       providers: [
         storage.providers,
         { provide: BROWSER_LANGUAGES, useValue: languages },
         { provide: MATERIAL_ANIMATIONS, useValue: { animationsDisabled: true } },
+        providers,
       ],
     });
     const fixture = TestBed.createComponent(Host);
@@ -97,6 +102,8 @@ describe('First run', () => {
   afterEach(() => {
     localStorage.clear();
     document.documentElement.removeAttribute('data-theme');
+    vi.unstubAllGlobals();
+    joinInbox.set(undefined);
   });
 
   it('asks once the settings have loaded, starting from the browser’s language', async () => {
@@ -371,5 +378,88 @@ describe('First run', () => {
       TestBed.tick();
       expect(await loader.getAllHarnesses(MatDialogHarness)).toHaveLength(0);
     });
+  });
+
+  it('joins a synced copy instead, which ends the first run with its settings and this theme (M10.15)', async () => {
+    // Another device's chain, for the code of 32 zero bytes: "abandon" 23 times, then "art".
+    const server = new FakeSyncServer();
+    vi.stubGlobal('fetch', server.fetch);
+    const keys = await syncKeys(new Uint8Array(32));
+    server.store(
+      keys.chainId,
+      keys.authSecret,
+      await sealCopy(keys, {
+        schemaVersion: syncSchemaVersion,
+        settings: {
+          country: 'GB',
+          currency: 'GBP',
+          monthlyBudget: 50,
+          updatedAt: '2026-10-19T10:00:00.000Z',
+        },
+        data: {
+          tags: [],
+          customSubs: [],
+          lists: [],
+          items: [],
+          rankings: [],
+          cards: [],
+          dismissedSuggestions: [],
+          liveCalendar: [],
+        },
+        devices: [],
+      }),
+    );
+    await start();
+    const first = await dialog();
+    await (
+      await first.getHarness(MatButtonHarness.with({ text: 'Join with a sync code' }))
+    ).click();
+    await until(() => document.querySelector('ss-join-sync-dialog .words input') !== null, 5000);
+    const paste = new Event('paste', { bubbles: true, cancelable: true });
+    const words = [...Array<string>(23).fill('abandon'), 'art'].join(' ');
+    Object.defineProperty(paste, 'clipboardData', { value: { getData: () => words } });
+    document.querySelector('ss-join-sync-dialog .words input')?.dispatchEvent(paste);
+    await (await loader.getHarness(MatButtonHarness.with({ text: 'Continue' }))).click();
+    await vi.waitFor(() =>
+      expect(document.querySelector('ss-join-sync-dialog h2')?.textContent).toBe(
+        'Join this synced copy',
+      ),
+    );
+    await (await loader.getHarness(MatButtonHarness.with({ text: 'Join' }))).click();
+
+    await until(() => TestBed.inject(SettingsStore).saved()?.country === 'GB', 5000);
+    expect(TestBed.inject(SettingsStore).saved()).toMatchObject({
+      currency: 'GBP',
+      monthlyBudget: 50,
+      theme: TestBed.inject(ThemeService).mode(),
+    });
+    await vi.waitFor(async () => {
+      TestBed.tick();
+      expect(await loader.getAllHarnesses(MatDialogHarness)).toHaveLength(0);
+    });
+  });
+
+  it('opens Join at once with a join link opened on a new device (M10.14)', async () => {
+    const link = {
+      id: 'YGFiY2RlZmdoaWprbG1ubw',
+      key: 'QEFCQ0RFRkdISUpLTE1OT1BRUlNUVVZXWFlaW1xdXl8',
+    };
+    joinInbox.set(`${link.id}.${link.key}`);
+    const take = vi.fn(async () => ({ kind: 'gone' }));
+    await start(['en-CA'], [{ provide: JoinLinks, useValue: { take } }]);
+    await vi.waitFor(
+      async () => {
+        TestBed.tick();
+        expect(await loader.getAllHarnesses(MatDialogHarness)).toHaveLength(2);
+      },
+      { timeout: 5000 },
+    );
+    await vi.waitFor(() => expect(take).toHaveBeenCalledWith(link));
+    expect(joinInbox()).toBeUndefined();
+    await vi.waitFor(() =>
+      expect(document.querySelector('ss-join-sync-dialog .error')?.textContent).toContain(
+        'This link was used or has expired.',
+      ),
+    );
   });
 });

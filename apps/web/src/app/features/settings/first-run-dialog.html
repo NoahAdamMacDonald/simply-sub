@@ -23,10 +23,11 @@
     <p class="privacy">Your data stays in this browser. No account needed.</p>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <!-- Brings back a backup's settings and lists instead, which ends the first run (P1). -->
-    <button matButton type="button" class="import" (click)="importBackup()">
-      Import a backup instead
-    </button>
+    <!-- Bring back a backup's settings and lists, or a synced copy's, instead, which ends the first run (P1). -->
+    <div class="instead">
+      <button matButton type="button" (click)="importBackup()">Import a backup instead</button>
+      <button matButton type="button" (click)="joinSync()">Join with a sync code</button>
+    </div>
     <button matButton="filled" type="submit">Get started</button>
   </mat-dialog-actions>
 </form>

@@ -273,6 +273,8 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.11 | Report a wrong price in the app (P8) | A report sent by keyboard from a Search card reaches the server, and each refusal is explained |
 | M10.12 | Regional prices in the pipeline: each page's other regions (hreflang links, locale paths), `--region` for rendering, extraction and batches, and pages that redirect to another country refused | A batch drafts a region's prices for the catalog's providers, every price quoted on its page |
 | M10.13 | The first regions: a batch pull request each for the US's gaps, the United Kingdom, the euro countries, and Australia and New Zealand | A user there sees native prices for every provider whose pages could be read |
+| M10.14 | Scan to join, once (added 2026-10-30, the feedback after M10): Show the code's QR code is a join link that works once, for 10 minutes (`/join#<id>.<key>`: the code sealed with a key only the link carries, `POST /join` and `DELETE /join/:id`), which a phone's camera opens; Join scans one with the device's camera; Turn on and Start over show the words alone (P13; BLUEPRINT §5.2, §11.4, §14) | A link opened on a new device joins with no word typed, and again says it was used; one past its 10 minutes or withdrawn opens nothing; no request carries the key; Join's camera reads Show the code's QR code |
+| M10.15 | Join on the first visit (added 2026-10-30, the feedback after M10): the first-run dialog's Join with a sync code, and a join link opened on a new device, start its settings from the synced copy's, with the device's own theme (P1, P13) | A new device joins from its first run, with no Merge or Replace, its settings the copy's place and budgets with its own theme, and the first run is over |
 
 #### M10 specs
 
@@ -680,6 +682,60 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   went to Canada's (no VPN, the owner's choice), the services sold only in Canada or the US, the ones priced the same
   everywhere, and the plans a region's page doesn't price (BLUEPRINT §14).
 
+**M10.14 — Scan to join, once** (the feedback after M10; P13; BLUEPRINT §5.2, §11.4, §14)
+- **Why:** the QR code held the 24 words as text, which an iPhone's camera offers to search the web for, sending the
+  code to a search engine. A link opens the app instead, but a link that is the code stays in the browser's History,
+  where anyone who reads it could join the chain until it starts over. The owner chose a link that works once.
+- **The link:** Show the code seals the code with a new random 32-byte key (AES-256-GCM) and sends only the sealed
+  bytes, `POST /join` (61 bytes; the server keeps them under the SHA-256 of a new 16-byte id, for 10 minutes), then
+  shows `https://sub.simplely.ca/join#<id>.<key>`. After the #, the key never reaches the server, and Web Analytics'
+  beacon leaves fragments out of what it reports. `DELETE /join/:id` answers the sealed bytes and deletes them in one
+  statement, so a second device, or a link found in History, gets `404`. Closing the dialog, or Make a new QR code,
+  withdraws an untaken link the same way; the nightly clean-up deletes any left past their time. Writes count against
+  sync's daily cap.
+- **Opening it:** `/join` redirects to Settings at once, keeping the link in memory (`core/join-inbox.ts`), so it
+  leaves the address bar even with the app locked. Settings' sync card takes it once the settings are read (after an
+  unlock); on a new device, the first run's dialog does (M10.15). Join fetches the code, which deletes it, then shows
+  what the copy holds.
+- **Scanning in the app:** an iPhone's camera opens a link in Safari, never in a Home Screen web app, whose storage is
+  its own, so Join has Scan the QR code: the device's camera, read every 150 ms by `@paulmillr/qr`'s decoder (already
+  pinned, loaded only then). It takes a join link of this site, or a code's 24 words (the QR code before M10.14), and
+  says what else it saw. No camera, or none allowed, is said in words.
+- **Only once sync is on:** Turn on and Start over show the words to keep, and a note that Show the code gives the
+  QR code: a link that works 10 minutes is no backup.
+- **Acceptance**
+  - [x] Worker tests: a link answers its code once (one of two devices asking at once), never after its 10 minutes,
+        the size and daily limits, the clean-up, and the database keeps no id; the contract's examples
+  - [x] A link opened on a new device joins with no word typed, and again says it was used; withdrawn links are gone
+        from the database; no request carries a key; Join's camera reads Show the code's QR code (a Y4M file as Edge's
+        camera)
+  - [x] Keyboard only, both themes at 360 and 1280 px, axe with each dialog and the scanner, no horizontal scroll; the
+        initial bundle under 500 kB
+  - [ ] The owner scans Show the code's QR code with an iPhone's camera, and with Join's Scan, on the preview link
+- **As built:** core's `user/join-link.ts` (`joinLinkBodySchema`, `joinLinkUrl`, `readJoinLink`, `readScannedCode`); the
+  API's `routes/join.ts` on user migration `0005_join_links`, and the clean-up's line; the app's
+  `core/crypto/join-crypto.ts`, `shared/sync/join-client.ts` and `JoinLinks`, `core/join-inbox.ts` with the route's
+  redirect, `shared/qr-scanner/`, and the code and Join dialogs. `ss-qr-code` draws a code the scanner's decoder reads:
+  it misreads about 2 join links in 100 by a mask's pattern, so such a code is drawn with another mask
+  (`readableModules`). Tested in core's `join-link.spec.ts`, the API's `join.spec.ts` and contract, the app's specs and
+  `check-m10-join-link.cjs`.
+
+**M10.15 — Join on the first visit** (the feedback after M10; P1, P13)
+- **Where:** the first-run dialog's Join with a sync code, beside Import a backup instead, opens Join; a join link
+  opened on a new device opens it at once.
+- **The join:** a new device has nothing to merge or replace, so Join shows what the copy holds and Join alone. Its
+  settings start from the copy's shared ones (where the user is, the tax, the budgets, Search's defaults) with the
+  theme on screen (core's `joinedSettings`), which ends the first run. A copy with no settings yet is refused, saying
+  to get started first.
+- **Acceptance**
+  - [x] A new device joins from its first run, with no Merge or Replace; its settings are the copy's with its own
+        theme, its lists the copy's, and the first-run dialog closes
+  - [x] Keyboard only (Tab to Join with a sync code), both themes at 360 and 1280 px, axe, no horizontal scroll
+- **As built:** core's `joinedSettings`; `SyncRepository`'s `applyMerge` and `replaceLocal` start a device's settings
+  when it has none, from the theme `SyncService.join` passes; the first-run dialog's button, and its closing when
+  settings are saved any other way. Tested in `sync-service.spec.ts`, `first-run-dialog.spec.ts` and
+  `check-m10-join-link.cjs`.
+
 ---
 
 ## 3. Core rules every page uses
@@ -934,6 +990,10 @@ Chromium) and, where those aren't supported (Safari), `::-webkit-scrollbar` with
   subscriptions, if any". Elsewhere: "Prices for United Kingdom already include sales tax."
 - **[Import a backup instead]** (M6.9) opens Import backup (P13) as one Import, with no question, since there's
   nothing here yet. The backup's settings end the first run.
+
+**Since the feedback after M10 (M10.15):** Join with a sync code sits beside Import a backup instead: a new device
+joins a synced copy, its settings starting from the copy's with the theme on screen. A join link opened on a new
+device (M10.14) opens Join at once.
 
 **Since the feedback after M9 (M6.16):** Country, Province or territory (State) and Currency are menus you can type
 in (`ss-choice-field`): typing narrows the list to the names that start with it, then those that have it anywhere, or
@@ -1885,6 +1945,11 @@ place.
 
 **Since the feedback after M9:** the 📍 dialog's menus can be typed in (M6.16, as P1's), and a tag's colour can also
 come from the device's own colour picker beside Hex colour, each following the other (M6.15).
+
+**Since the feedback after M10 (M10.14):** Show the code's QR code is a join link that works once, for 10 minutes, made
+as the dialog opens and withdrawn as it closes, with Make a new QR code; offline it says why there's none. Turn on and
+Start over show the words alone. Join opens on Scan the QR code, the device's camera, above the words; a join link
+opened in the browser opens Join here once the app is unlocked.
 
 **Since M10 (M10.3):** Your data has a **Live calendar** card after App lock: "Off" with Set up…, or "On: 2 calendars,
 last sent Oct 29, 2026." with Manage…, both opening the live calendar's dialog (P10). Delete all data revokes the links
