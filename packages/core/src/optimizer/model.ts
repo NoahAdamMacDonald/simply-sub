@@ -96,6 +96,12 @@ export interface ItemModel {
   before: Cost;
   /** Priced in the user's currency with something to pay, so it can change. */
   changeable: boolean;
+  /**
+   * The extra members it hosts, joined or joining: add-ons that are a plan of their own. Their people have no item
+   * of their own to check, so no change may take them away: it isn't removed, nor made an extra member or put in a
+   * bundle or suite, and moves only to plans that keep them.
+   */
+  hosted: AddOnChoice[];
   /** Its Essential keys keep its exact plan; its Critical ones keep its provider (BLUEPRINT §10.2). */
   essential: boolean;
   critical: number[];
@@ -220,6 +226,7 @@ class ModelBuilder {
       full,
       before,
       changeable: catalog !== undefined && next !== undefined && !full.foreign && full.amount > 0,
+      hosted: this.hostedOf(resolved, catalog),
       essential: provided.includes('essential'),
       critical: [...ranks].filter(([, rank]) => rank === 'critical').map(([key]) => key),
       serviceSeverity:
@@ -265,6 +272,16 @@ class ModelBuilder {
     ];
   }
 
+  /** A catalog plan's add-ons that grant a plan: its extra members. */
+  private hostedOf(resolved: ResolvedItem, catalog: CatalogData | undefined): AddOnChoice[] {
+    const { source } = resolved.item;
+    if (source.kind !== 'catalog' || !catalog) return [];
+    const provider = catalog.providers.find(({ id }) => id === resolved.providerId);
+    return (source.addOns ?? []).filter(
+      (addOn) => provider?.addOns?.find(({ id }) => id === addOn.id)?.grantsPlan !== undefined,
+    );
+  }
+
   private keepContributions(item: ItemModel): Contribution[] {
     return contributionsOf(item.parts, item.active, [item.index]);
   }
@@ -279,7 +296,12 @@ class ModelBuilder {
   private addOwnOptions(item: ItemModel): void {
     if (!item.changeable || item.next === undefined) return;
     const on = item.next;
-    if (!item.essential && item.critical.length === 0 && this.removable(item)) {
+    if (
+      !item.essential &&
+      item.critical.length === 0 &&
+      item.hosted.length === 0 &&
+      this.removable(item)
+    ) {
       this.addOption(
         [item.index],
         item.before,
@@ -313,6 +335,9 @@ class ModelBuilder {
             on,
             plan,
           );
+          if (changed.source.kind === 'catalog' && !keepsAll(changed.source.addOns, item.hosted)) {
+            continue;
+          }
           const resolved = this.resolve(changed, catalog);
           if (!resolved) continue;
           const after = this.cost(resolved, { from: on, to: this.range.to });
@@ -422,12 +447,17 @@ class ModelBuilder {
 
   // ── Options of several items ───────────────────────────────────────────────────────────────────────────────────
 
-  /** Another item of the same provider becomes an extra member on this one (BLUEPRINT §10.3 action 4). */
+  /**
+   * Another item of the same provider becomes an extra member on this one (BLUEPRINT §10.3 action 4). The host goes on:
+   * one that ends (an extra member itself from its next charge, or cancelled) would take its new member's service with
+   * it. A member that hosts extra members of its own would take theirs.
+   */
   private addExtraMembers(): void {
     for (const host of this.items) {
-      const { source } = host.resolved.item;
+      const { source, billing } = host.resolved.item;
       const catalog = this.input.catalogs.get(host.resolved.region);
       if (source.kind !== 'catalog' || !catalog || host.full.foreign) continue;
+      if (billing.mode !== 'recurring' || billing.endDate !== undefined) continue;
       const found = planOf(catalog, source.planId);
       if (!found) continue;
       const { provider, plan } = found;
@@ -443,6 +473,7 @@ class ModelBuilder {
           (member) =>
             member !== host &&
             member.changeable &&
+            member.hosted.length === 0 &&
             member.resolved.item.source.kind === 'catalog' &&
             member.resolved.item.billing.mode === 'recurring' &&
             member.resolved.providerId === provider.id &&
@@ -645,11 +676,15 @@ class ModelBuilder {
     );
   }
 
-  /** The items a bundle or suite can take in a region: ongoing catalog plans with something to pay. */
+  /**
+   * The items a bundle or suite can take in a region: ongoing catalog plans with something to pay, and no extra members
+   * to lose.
+   */
   private joiners(region: string): ItemModel[] {
     return this.items.filter(
       (item) =>
         item.changeable &&
+        item.hosted.length === 0 &&
         item.resolved.region === region &&
         item.resolved.item.source.kind === 'catalog' &&
         item.resolved.item.billing.mode === 'recurring',
@@ -834,20 +869,33 @@ export function reperiod(billing: Recurring, period: Period, on: IsoDate): Recur
   };
 }
 
-/** The add-ons a plan allows, within its limit. */
+/** The add-ons a plan allows, within its limit, each from the day it joined. */
 export function keptAddOns(
-  addOns: readonly { id: string; quantity: number }[] | undefined,
+  addOns: readonly AddOnChoice[] | undefined,
   plan: Pick<Plan, 'addOnIds' | 'addOnLimit'>,
-): { id: string; quantity: number }[] | undefined {
+): AddOnChoice[] | undefined {
   let room = plan.addOnLimit ?? Infinity;
-  const kept: { id: string; quantity: number }[] = [];
+  const kept: AddOnChoice[] = [];
   for (const addOn of addOns ?? []) {
     if (!(plan.addOnIds ?? []).includes(addOn.id) || room <= 0) continue;
     const quantity = Math.min(addOn.quantity, room);
-    kept.push({ id: addOn.id, quantity });
+    kept.push({ ...addOn, quantity });
     room -= quantity;
   }
   return kept.length > 0 ? kept : undefined;
+}
+
+/** Whether `addOns` has each of `hosted`, from the same day, as many or more. */
+function keepsAll(
+  addOns: readonly AddOnChoice[] | undefined,
+  hosted: readonly AddOnChoice[],
+): boolean {
+  return hosted.every((wanted) =>
+    (addOns ?? []).some(
+      (addOn) =>
+        addOn.id === wanted.id && addOn.since === wanted.since && addOn.quantity >= wanted.quantity,
+    ),
+  );
 }
 
 /** `addOns` with `count` more of one. */
@@ -865,7 +913,8 @@ export function withAddOn(
   return list;
 }
 
-interface AddOnChoice {
+/** An item's add-on, as its source lists it. */
+export interface AddOnChoice {
   id: string;
   quantity: number;
   since?: IsoDate;

@@ -2,12 +2,16 @@ import { Service, inject } from '@angular/core';
 import {
   draftChanged,
   withChanges,
+  withEndsRestored,
+  withReleasedItems,
   withoutApplied,
   type AppliedSuggestion,
+  type CatalogData,
   type DraftEdit,
   type DraftItem,
   type ListDraft,
   type ListItem,
+  type Timestamp,
 } from '@simply-sub/core';
 import {
   DraftsRepository,
@@ -21,6 +25,18 @@ export type DraftItemFields = Omit<NewRecord<'items'>, 'listId'>;
 
 /** Changes to a draft's item. A field set to undefined is cleared. */
 export type DraftItemChanges = Omit<RecordChanges<'items'>, 'listId'>;
+
+/**
+ * A draft after a change to one of its items, and the items the change released: each ended on the day what it
+ * changed or took out took over from it, so it goes on now (core's withReleasedItems). They're as they were, for Undo.
+ */
+export interface DraftItemChange {
+  draft: ListDraft;
+  released: ListItem[];
+}
+
+/** What tells what takes over from an item (core's itemReplacements): the plans' add-ons, the bundles. */
+export type ReplacementCatalog = Pick<CatalogData, 'providers' | 'bundles'>;
 
 /**
  * Edits to a list before Save (PROJECT-PLAN P5's draft model). The list editor (M6.4) and the item dialog (M6.5)
@@ -66,8 +82,14 @@ export class ListDraftService {
     return this.drafts.addItem(listId, fields);
   }
 
-  updateItem(listId: string, itemId: string, changes: DraftItemChanges): Promise<ListDraft> {
-    return this.drafts.change(listId, (draft, now) =>
+  /** Changes an item in the draft, and with `catalog`, lets the items it no longer takes over from go on. */
+  updateItem(
+    listId: string,
+    itemId: string,
+    changes: DraftItemChanges,
+    catalog?: ReplacementCatalog,
+  ): Promise<DraftItemChange> {
+    return this.changeReleasing(listId, catalog, (draft, now) =>
       changeItem(draft, itemId, (entry) => ({
         ...entry,
         item: withChanges<ListItem>(entry.item, changes, now),
@@ -75,17 +97,32 @@ export class ListDraftService {
     );
   }
 
-  /** Removes an item from the draft. It stays in the draft, marked, so restoreItem can undo it. */
-  removeItem(listId: string, itemId: string): Promise<ListDraft> {
-    return this.drafts.change(listId, (draft) =>
+  /**
+   * Removes an item from the draft, and with `catalog`, lets the items it took over from go on. It stays in the draft,
+   * marked, so restoreItem can undo it.
+   */
+  removeItem(
+    listId: string,
+    itemId: string,
+    catalog?: ReplacementCatalog,
+  ): Promise<DraftItemChange> {
+    return this.changeReleasing(listId, catalog, (draft) =>
       changeItem(draft, itemId, (entry) => ({ ...entry, removed: true })),
     );
   }
 
-  /** Puts a removed item back: the snackbar's Undo (P5). */
-  restoreItem(listId: string, itemId: string): Promise<ListDraft> {
-    return this.drafts.change(listId, (draft) =>
-      changeItem(draft, itemId, ({ item, saved }) => ({ item, ...(saved && { saved }) })),
+  /** Puts a removed item back, and the end dates of the items its removal released: the snackbar's Undo (P5). */
+  restoreItem(
+    listId: string,
+    itemId: string,
+    released: readonly ListItem[] = [],
+  ): Promise<ListDraft> {
+    return this.drafts.change(listId, (draft, now) =>
+      withEndsRestored(
+        changeItem(draft, itemId, ({ item, saved }) => ({ item, ...(saved && { saved }) })),
+        released,
+        now,
+      ),
     );
   }
 
@@ -132,6 +169,23 @@ export class ListDraftService {
   /** Undo of a Delete list: the list and the items it deleted come back, together. */
   restoreList(deleted: DeletedList): Promise<void> {
     return this.drafts.restoreList(deleted);
+  }
+
+  /** One change to the draft, in one write with the items it releases, which takes `catalog` to tell. */
+  private async changeReleasing(
+    listId: string,
+    catalog: ReplacementCatalog | undefined,
+    change: (draft: ListDraft, now: Timestamp) => ListDraft,
+  ): Promise<DraftItemChange> {
+    let released: ListItem[] = [];
+    const draft = await this.drafts.change(listId, (current, now) => {
+      const changed = change(current, now);
+      if (!catalog) return changed;
+      const result = withReleasedItems(current, changed, catalog, now);
+      released = result.released;
+      return result.draft;
+    });
+    return { draft, released };
   }
 }
 
