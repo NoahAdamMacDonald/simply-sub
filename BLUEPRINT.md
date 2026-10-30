@@ -3034,6 +3034,14 @@ The owner's nine points after M10, a task row each in PROJECT-PLAN ("added 2026-
   that action: ✕ beside it, Escape, focus back where it came from, time counted only while it isn't hovered or
   focused, and the home indicator's inset below it. Its styles style Material's container too, so they're
   unencapsulated and load with it, keeping the initial bundle at 499.42 kB.
+- **Claude in Canada (M10.17):** Search listed only Claude's free plan for the owner: its paid plans had only US
+  prices, since the pipeline had found no page naming the currency of the $28 a Canadian sees, and Sold in Canada
+  and Native pricing only hide a plan with no price there, leaving Free's `GLOBAL` price. claude.com/pricing shows
+  Canada's prices to a browser that sends its own user agent and the US's to a headless one, and the page's own
+  pricing data (`claude.ai/api/billing/subscription_pricing`, which it loads, never called by itself) names
+  `"country":"CA"` and `"currency":"CAD"`: Pro CA$28 a month and CA$280 a year, Max 5x CA$140, Max 20x CA$280 (the
+  page shows only "From $140"). The owner's bill agrees: CA$31.64, $28 with Ontario's 13% HST. All four were added
+  together, since once a provider has a Canadian price, a plan without one counts as not offered there.
 - **Focus (M10.14):** Join opens on Scan the QR code, its first control, so a phone's keyboard doesn't cover it;
   the words are a Tab on. The scanner takes the button's place and focus with it, onto Stop scanning, and gives it back.
 - **The Proton test feed (M10.2):** deleted from the user database on 2026-10-30 with the owner's OK. Proton Calendar

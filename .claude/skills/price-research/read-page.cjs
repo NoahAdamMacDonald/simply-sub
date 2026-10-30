@@ -37,8 +37,17 @@ async function snap(page, name) {
 (async () => {
   fs.mkdirSync(outDir, { recursive: true });
   const browser = await chromium.launch({ channel: 'msedge', headless: true });
+  // The browser's own user agent, as the discovery pipeline's (scripts/lib/browser.ts): a site that prices by where the
+  // visitor is can show a headless one another country's prices (claude.com/pricing showed Canada the US's).
+  const probe = await browser.newPage();
+  const userAgent = String(await probe.evaluate('navigator.userAgent')).replace(
+    'HeadlessChrome',
+    'Chrome',
+  );
+  await probe.close();
   const page = await browser.newPage({
     locale: process.env.LOCALE ?? 'en-CA',
+    userAgent,
     viewport: { width: 1400, height: 1000 },
   });
   let snapped = false;
