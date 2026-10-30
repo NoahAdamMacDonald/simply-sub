@@ -148,6 +148,8 @@ export interface ItemDialogResult {
   title: string;
   added: boolean;
   shared: number;
+  /** The items the change lets go on, by id: it took away what was taking over from them (ListDraftService). */
+  released: string[];
 }
 
 /** A choice in a menu, as it shows ("Standard — $18.99 / mo") and as it's read ("Standard, $18.99 a month"). */
@@ -892,18 +894,26 @@ export class ItemDialog {
     // The ranks it changed go to its provider's other plans in the list (M6.14).
     const siblings = this.rankSiblings();
     let itemId: string;
+    let released: string[] = [];
     if (this.editing) {
       itemId = this.editing.id;
-      // Optional fields the form leaves out are cleared, the card too; pinned isn't the dialog's to change.
-      await this.drafts.updateItem(listId, itemId, {
-        region: undefined,
-        priceOverride: undefined,
-        nickname: undefined,
-        note: undefined,
-        cardId: undefined,
-        ownRanks: undefined,
-        ...fields,
-      });
+      // Optional fields the form leaves out are cleared, the card too; pinned isn't the dialog's to change. An extra
+      // member taken off lets the account that was to become it go on (the feedback after M10).
+      const change = await this.drafts.updateItem(
+        listId,
+        itemId,
+        {
+          region: undefined,
+          priceOverride: undefined,
+          nickname: undefined,
+          note: undefined,
+          cardId: undefined,
+          ownRanks: undefined,
+          ...fields,
+        },
+        this.catalogStore.catalog(),
+      );
+      released = change.released.map((item) => item.id);
     } else {
       itemId = (await this.drafts.addItem(listId, { ...fields, pinned: false })).id;
     }
@@ -918,6 +928,7 @@ export class ItemDialog {
       title,
       added: this.editing === undefined,
       shared: edits.length,
+      released,
     });
   }
 

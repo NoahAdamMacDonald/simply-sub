@@ -1,6 +1,8 @@
 import * as z from 'zod';
 import { addDuplicateIssues } from '../catalog/checks';
 import { currencySchema, textSchema } from '../catalog/formats';
+import type { CatalogData } from '../catalog/snapshot';
+import { releasedItems } from './item-replacement';
 import { listItemSchema, type ListItem } from './list-item';
 import { recordIdSchema, timestampSchema, type Timestamp } from './record';
 import { softDeleted, withChanges } from './stamps';
@@ -105,6 +107,64 @@ export function newListName(taken: readonly string[]): string {
 /** The draft's items as edited, without the removed ones. */
 export function draftItems(draft: ListDraft): ListItem[] {
   return draft.items.filter((entry) => entry.removed === undefined).map(({ item }) => item);
+}
+
+/**
+ * `draft`, made from `before` by one edit, with the items it released going on (core's releasedItems): their end dates
+ * were for what took over from them, which the edit took away (P5, the feedback after M10). Returns those items too,
+ * as they were, for Undo (withEndsRestored).
+ */
+export function withReleasedItems(
+  before: ListDraft,
+  draft: ListDraft,
+  catalog: Pick<CatalogData, 'providers' | 'bundles'>,
+  now: Timestamp,
+): { draft: ListDraft; released: ListItem[] } {
+  const released = releasedItems(draftItems(before), draftItems(draft), catalog);
+  if (released.length === 0) return { draft, released };
+  const ids = new Set(released.map((item) => item.id));
+  return {
+    draft: {
+      ...draft,
+      items: draft.items.map((entry) => {
+        const { billing } = entry.item;
+        if (!ids.has(entry.item.id) || billing.mode !== 'recurring') return entry;
+        const ongoing = { ...billing };
+        delete ongoing.endDate;
+        return { ...entry, item: withChanges<ListItem>(entry.item, { billing: ongoing }, now) };
+      }),
+    },
+    released,
+  };
+}
+
+/**
+ * `draft` with the end dates of `released` back (withReleasedItems' Undo), on each that's still in it with none since.
+ */
+export function withEndsRestored(
+  draft: ListDraft,
+  released: readonly ListItem[],
+  now: Timestamp,
+): ListDraft {
+  const ends = new Map(
+    released.flatMap(({ id, billing }) =>
+      billing.mode === 'recurring' && billing.endDate !== undefined ? [[id, billing.endDate]] : [],
+    ),
+  );
+  return {
+    ...draft,
+    items: draft.items.map((entry) => {
+      const { billing } = entry.item;
+      const endDate = ends.get(entry.item.id);
+      if (endDate === undefined || billing.mode !== 'recurring' || billing.endDate !== undefined) {
+        return entry;
+      }
+      return {
+        ...entry,
+        item: withChanges<ListItem>(entry.item, { billing: { ...billing, endDate } }, now),
+      };
+    }),
+  };
 }
 
 /** Whether the draft differs from the list as it started: a new name, or an item added, changed or removed. */

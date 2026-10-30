@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { MATERIAL_ANIMATIONS } from '@angular/material/core';
-import type { ListItem, SubscriptionList } from '@simply-sub/core';
+import type { ListDraft, ListItem, SubscriptionList } from '@simply-sub/core';
+import { searchCatalogData } from '../../shared/sub-card/search.testing';
 import { ItemsRepository } from '../storage/items-repository';
 import { ListsRepository } from '../storage/lists-repository';
 import { storedRows, testStorage, until, type TestStorage } from '../storage/storage.testing';
@@ -86,6 +87,58 @@ describe('ListDraftService', () => {
     await service.restoreItem(work.id, netflix.id);
     await until(() => !service.hasChanges(work.id));
     expect(service.hasChanges('no-such-list')).toBe(false);
+  });
+
+  it('lets an account go on once the extra member it was to become goes, and Undo ends it again', async () => {
+    // Netflix becomes an extra member on Mine from Nov 12, as Optimizations' Apply leaves them (M8.5).
+    const items = TestBed.inject(ItemsRepository);
+    const extraMember = { id: 'netflix.extra-member', quantity: 1, since: '2026-11-12' };
+    const mine = await items.create({
+      ...netflixFields,
+      listId: work.id,
+      nickname: 'Mine',
+      source: { kind: 'catalog', planId: 'netflix.standard', addOns: [extraMember] },
+    });
+    const endsNov12 = {
+      mode: 'recurring',
+      interval: 'month',
+      intervalCount: 1,
+      anchorDate: '2026-11-12',
+      endDate: '2026-11-12',
+      autoRenew: true,
+    } as const;
+    await items.update(netflix.id, { billing: endsNov12 });
+    const ending = (await storedItems()).find((item) => item.id === netflix.id);
+    const draftOf = (change: { draft: ListDraft }) =>
+      new Map(change.draft.items.map(({ item }) => [item.id, item]));
+    await service.start(work.id);
+
+    // Taken off its host in the item dialog.
+    const edited = await service.updateItem(
+      work.id,
+      mine.id,
+      { source: { kind: 'catalog', planId: 'netflix.standard' } },
+      searchCatalogData,
+    );
+    expect(edited.released).toEqual([ending]);
+    expect(draftOf(edited).get(netflix.id)?.billing).toEqual(netflixFields.billing);
+    await service.updateItem(work.id, mine.id, {
+      source: { kind: 'catalog', planId: 'netflix.standard', addOns: [extraMember] },
+    });
+    await service.updateItem(work.id, netflix.id, { billing: ending?.billing });
+
+    // The host taken out, then put back.
+    const removed = await service.removeItem(work.id, mine.id, searchCatalogData);
+    expect(removed.released.map((item) => item.id)).toEqual([netflix.id]);
+    expect(draftOf(removed).get(netflix.id)?.billing).not.toHaveProperty('endDate');
+    const restored = await service.restoreItem(work.id, mine.id, removed.released);
+    expect(restored.items.find(({ item }) => item.id === netflix.id)?.item.billing).toMatchObject({
+      endDate: '2026-11-12',
+    });
+    expect(restored.items.find(({ item }) => item.id === mine.id)?.removed).toBeUndefined();
+
+    // Without the catalog to tell, nothing else changes.
+    expect((await service.removeItem(work.id, mine.id)).released).toEqual([]);
   });
 
   it('refuses a change to an item the draft hasn’t', async () => {
