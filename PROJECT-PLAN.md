@@ -282,6 +282,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.20 | The Calendar's controls and month cards (added 2026-10-30, the feedback after M10): Month and Year first, then Today, then ‹, the month, the year and › (that Tab order); Month, Year and Today never moving as the view changes, and the arrows at the row's end (the views' outlined padding a pixel less, for the border); on a phone Month and Year on Today's row, Today at its end, and the arrows on their own row; the year view's month card one target, its link over its days, with no text to select (P10; BLUEPRINT §14) | At 1280 px Month, Year and Today stay put from the month view to the year view; at 360 px Today shares their row; a click on any part of a month card opens its month, with the pointer cursor, and a double click selects nothing |
 | M10.21 | Live calendars sealed at rest (added 2026-10-30, the feedback after M10): each feed's calendar file gzipped and sealed with a key derived from its token (HKDF-SHA256 → AES-256-GCM, bound to its row), and the hash of what it was made from keyed by the token (HMAC), so the user database holds no title, amount or date; a GET finds the row by the token's SHA-256 and answers a 304 before opening anything; a feed stored before is served as it was and sealed by the next GET or PUT that brings its token (migration `0006_sealed_feeds.sql`; BLUEPRINT §11.3, §14) | `cal_feeds` holds no calendar's words, names or colours after POST and PUT; a sealed file opens only with its token and under its row; a plain feed is served, then sealed with a new ETag, by a fetch or the next PUT, and left plain when the day's writes are at their cap |
 | M10.22 | Category starts empty (added 2026-10-30, the feedback after M10): Search's Category is empty while it's All, its label in the field as Features' is, and "All" its placeholder once it's focused, so a category typed starts at once rather than after "All"; All is still the list's first choice (`ss-choice-field`'s `placeholder`; P8) | Category shows nothing while it's All; Tab to it and "vp" typed at once narrows the list to VPN; picking All empties it again |
+| M10.23 | Budgets on the Lists overview (added 2026-10-30, the feedback after M10): every list's budget warnings above the cards, as Home's (one dismissal for both), and every list's This month and This year bars together, as Home's Budgets card has them, on the right above Types and Features from 960 px, as List view has its own, and above the cards under it (P3) | With two lists over the monthly budget together, the overview warns of it, and its bars show both lists' totals beside the cards; dismissed here, the warning is gone from Home too |
 
 #### M10 specs
 
@@ -1256,6 +1257,11 @@ stays.
 **States:** no lists → only the New tile and a one-line hint; the feature column is hidden.
 
 **Since the feedback after M9 (M7.7):** each card's bars take their colour from the scale (P2).
+
+**Since the feedback after M10 (M10.23):** above the cards, every list's budget warnings, as Home's (§3.1: dismissing
+one here dismisses it there); and every list's This month and This year bars together, as Home's Budgets card has
+them, on the right above Types and Features from 960 px, as List view has its own, and above the cards under it. The
+bars show once a list has a subscription, and the warnings once every price has loaded.
 
 **Acceptance**
 - [ ] Rank counts match §3.2 for a fixture list

@@ -376,12 +376,14 @@ async function plantLists(page) {
       await putRecord(page, 'settings', { ...settings, monthlyBudget: 20, annualBudget: 1000 });
       // A write past Dexie isn't seen by its live queries: a reload reads it.
       await page.reload();
+      // The cards' own bars; every list's together (M10.23) are the side's.
       await until(
         'the bars',
-        async () => (await page.locator('ss-lists-overview-page ss-budget-bar').count()) === 2,
+        async () =>
+          (await page.locator('ss-lists-overview-page li.card ss-budget-bar').count()) === 2,
       );
       const bars = await page
-        .locator('ss-lists-overview-page ss-budget-bar')
+        .locator('ss-lists-overview-page li.card ss-budget-bar')
         .evaluateAll((elements) =>
           elements.map(
             (bar) =>
@@ -393,6 +395,15 @@ async function plantLists(page) {
         bars.join(' | ') ===
           'Work Related, monthly budget: over 139% | Work Related, annual budget: ok 33%',
         bars.join(' | '),
+      );
+      const together = await page
+        .locator('ss-lists-overview-page .money .total [aria-hidden]')
+        .allTextContents();
+      check(
+        `${label}: every list's bars together, beside the cards (M10.23)`,
+        together.map((text) => text.trim()).join(' | ') ===
+          '≈ $27.79 of $20.00 this month | ≈ $333.44 of $1,000.00 in ' + new Date().getFullYear(),
+        together.join(' | '),
       );
       await noSideScroll(page, viewport, `${label}, with budgets`);
       await page.screenshot({ path: shot('lists-budgets'), fullPage: true });

@@ -19,6 +19,7 @@ import { MetricsService } from '../../core/metrics/metrics-service';
 import type { DeletedList } from '../../core/storage/drafts-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
 import { BudgetTotals } from '../../shared/budget-totals/budget-totals';
+import { BudgetWarnings } from '../../shared/budget-warnings/budget-warnings';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
 import { FeatureSummary } from '../../shared/feature-summary/feature-summary';
 import { PageHeader } from '../../shared/page-header/page-header';
@@ -50,13 +51,15 @@ interface PendingFocus {
  * The Lists overview (PROJECT-PLAN P3): a card for each list, in the order they were made, with this month's and this
  * year's bars against the budgets, or the amounts alone without them (M7.2), how many subscriptions it has, its rank
  * counts (§3.2), View and 🗑, which asks first and offers Undo; then New Subscription List, and the feature summary of
- * every list (§3.2). Core counts and sums (listMetrics); MetricsService prices.
+ * every list (§3.2). Above them every list's budget warnings and, beside them, every list's bars together, as Home's
+ * (M10.23). Core counts and sums (listMetrics); MetricsService prices.
  */
 @Component({
   selector: 'ss-lists-overview-page',
   imports: [
     EmptyState,
     BudgetTotals,
+    BudgetWarnings,
     FeatureSummary,
     MatButton,
     MatIcon,
@@ -114,6 +117,16 @@ export class ListsOverviewPage {
   );
   /** "VPN: 2 / 3" for every list's items together (§3.2). */
   protected readonly features = computed(() => this.metrics.global()?.featureSummary ?? []);
+  /** Every list's totals and warnings together, as Home has them (M10.23). */
+  protected readonly global = this.metrics.global;
+  /** Some list has a subscription: the bars have something to show. */
+  protected readonly anyItems = computed(() => this.cards().some((card) => card.count > 0));
+  /** Prices still on their way: the catalog file an item needs hasn't loaded, so the warnings wait, as Home's do. */
+  protected readonly pricing = computed(() =>
+    [...this.metrics.resolutions().values()].some(
+      (result) => !result.ok && result.unresolved.reason === 'pending',
+    ),
+  );
 
   constructor() {
     // Focus moves once the cards show the change it waited for.

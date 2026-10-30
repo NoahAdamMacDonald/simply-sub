@@ -3017,7 +3017,8 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
   could undo an edit another device made to one of those items at the same time. Asked of the owner.
 
 **Resolved (2026-10-30, the feedback after M10, part 2)**
-The owner's nine points after M10, a task row each in PROJECT-PLAN ("added 2026-10-30, the feedback after M10"):
+The owner's nine points after M10, and two more while they were worked on, a task row each in PROJECT-PLAN
+("added 2026-10-30, the feedback after M10"):
 - **Scanning the sync code (M10.14, the owner's choice):** the QR code held the 24 words as text, which an iPhone's
   camera offers to search the web for: one tap would have sent the code to a search engine and its history. A link to
   the app with the code after its # (the owner's idea) never reaches the server, and Web Analytics' beacon leaves
@@ -3087,6 +3088,9 @@ The owner's nine points after M10, a task row each in PROJECT-PLAN ("added 2026-
   wherever a click didn't select it first (an iPhone's tap places the caret). `ss-choice-field` takes a `placeholder`
   for the choice with no value: while it's chosen the field is empty, its label inside as Features' is, and the
   placeholder shows once it's focused.
+- **Budgets on the Lists overview (M10.23):** the owner asked for every list's bars together and the budget warnings
+  there, as Home and List view have them. They're Home's own (MetricsService's `global`): the same totals, and the same
+  warnings, so a dismissal holds on both pages.
 - **Focus (M10.14):** Join opens on Scan the QR code, its first control, so a phone's keyboard doesn't cover it;
   the words are a Tab on. The scanner takes the button's place and focus with it, onto Stop scanning, and gives it back.
 - **The Proton test feed (M10.2):** deleted from the user database on 2026-10-30 with the owner's OK. Proton Calendar
