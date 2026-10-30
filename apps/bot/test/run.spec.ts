@@ -338,7 +338,7 @@ describe('price reports (M10.10)', () => {
             count: 3,
             ...days,
           },
-          { country: 'GB', problem: 'not-in-country', count: 2, ...days },
+          { country: 'JP', problem: 'not-in-country', count: 2, ...days },
         ],
       },
       {
@@ -377,7 +377,7 @@ describe('price reports (M10.10)', () => {
     );
     // A country the catalog doesn't price the plan in: counted for the next regions.
     expect(made.body).toContain(
-      "### Regions people asked about\n\nReports from countries the catalog doesn't price these plans in yet, for the regions to add (PROJECT-PLAN M10.13): GB 2 (Netflix Standard 2).",
+      "### Regions people asked about\n\nReports from countries the catalog doesn't price these plans in yet, for the regions to add (PROJECT-PLAN M10.13): JP 2 (Netflix Standard 2).",
     );
     expect(await state.reports()).toEqual([]);
   });
@@ -386,7 +386,7 @@ describe('price reports (M10.10)', () => {
     const state = reportedState([
       {
         plan: 'netflix.standard',
-        reports: [{ country: 'GB', problem: 'not-in-country', count: 1, ...days }],
+        reports: [{ country: 'JP', problem: 'not-in-country', count: 1, ...days }],
       },
     ]);
     // A Wednesday: the digest is on Thursdays.
