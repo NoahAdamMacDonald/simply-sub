@@ -1,10 +1,13 @@
 import { Service, computed, inject } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { nextUpdatedAt, withChanges, type Settings } from '@simply-sub/core';
+import { nextUpdatedAt, withChanges, withSharedTime, type Settings } from '@simply-sub/core';
 import { storageStatus } from './record-repository';
 import { StorageService } from './storage-service';
 
-/** The user's settings: one record (BLUEPRINT §4.6). SettingsStore (M4.2) builds on it. */
+/**
+ * The user's settings: one record (BLUEPRINT §4.6). SettingsStore (M4.2) builds on it. Each write also says when a
+ * setting every device shares last changed (`sharedUpdatedAt`, M10.7), which sync merges those by.
+ */
 @Service()
 export class SettingsRepository {
   private readonly storage = inject(StorageService);
@@ -29,11 +32,12 @@ export class SettingsRepository {
     const saved = await engine.modify(
       'settings',
       'settings',
-      (current) => ({
-        ...settings,
-        key: 'settings',
-        updatedAt: current ? nextUpdatedAt(current.updatedAt, now) : now,
-      }),
+      (current) =>
+        withSharedTime(current, {
+          ...settings,
+          key: 'settings',
+          updatedAt: current ? nextUpdatedAt(current.updatedAt, now) : now,
+        }),
       { invalid: 'replace' },
     );
     return saved as Settings;
@@ -51,7 +55,7 @@ export class SettingsRepository {
     return engine.modify(
       'settings',
       'settings',
-      (current) => current && withChanges<Settings>(current, changes, now),
+      (current) => current && withSharedTime(current, withChanges<Settings>(current, changes, now)),
       { invalid: 'replace' },
     );
   }

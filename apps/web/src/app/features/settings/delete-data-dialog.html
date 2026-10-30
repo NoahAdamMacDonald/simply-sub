@@ -7,8 +7,8 @@
         deleted from this browser, and the lock is turned off. This can’t be undone.
       } @else {
         Your lists, subscriptions, custom subscriptions, feature ranks, tags and settings are
-        deleted from this browser. This can’t be undone: export a backup first if you might want
-        them back.
+        deleted from this browser, and your live calendar’s links stop working. This can’t be
+        undone: export a backup first if you might want them back.
       }
     </p>
     <mat-form-field appearance="outline" subscriptSizing="dynamic">
@@ -22,6 +22,19 @@
       />
       <mat-error>{{ firstError(form.confirm) }}</mat-error>
     </mat-form-field>
+    @if (syncOn()) {
+      <mat-checkbox
+        aria-describedby="delete-synced-hint"
+        [checked]="deleteSynced()"
+        (change)="deleteSynced.set($event.checked)"
+      >
+        Delete the synced copy too
+      </mat-checkbox>
+      <p id="delete-synced-hint" class="hint">
+        Sync turns off here either way. With this, your other devices stop syncing too; without it,
+        they keep the synced copy.
+      </p>
+    }
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button matButton type="button" mat-dialog-close>Cancel</button>

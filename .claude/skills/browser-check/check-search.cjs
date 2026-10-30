@@ -74,7 +74,14 @@ async function newContext(
   browser,
   { locale, colorScheme = 'light', viewport = WIDE, reducedMotion = 'no-preference' },
 ) {
-  const context = await browser.newContext({ locale, colorScheme, viewport, reducedMotion });
+  // Under `wrangler dev` the production build's service worker (M10.5) would answer requests Playwright can't route.
+  const context = await browser.newContext({
+    locale,
+    colorScheme,
+    viewport,
+    reducedMotion,
+    serviceWorkers: 'block',
+  });
   await context.route('**/api/v1/fx?**', (route) =>
     route.fulfill({ json: fxBody(new URL(route.request().url()).searchParams.get('base')) }),
   );
@@ -84,7 +91,9 @@ async function newContext(
 async function newPage(context, label) {
   const page = await context.newPage();
   page.on('console', (msg) => {
-    if (msg.type() === 'error' || msg.type() === 'warning') {
+    // Playwright's own note each time it stops the service worker's registration (serviceWorkers: 'block').
+    const blockedWorker = msg.text() === 'Service Worker registration blocked by Playwright';
+    if ((msg.type() === 'error' || msg.type() === 'warning') && !blockedWorker) {
       consoleProblems.push(`[${label}] ${msg.type()}: ${msg.text()}`);
     }
   });
@@ -303,7 +312,7 @@ async function addItem(page, planId) {
     // M1.11: Hulu is sold in the US only; ESPN has no price for Canada and no country list, so it's unknown.
     check(
       'one card per provider, and the count',
-      all.length === 9 && (await count(page)) === '9 services' && !all.includes('Hulu'),
+      all.length === 12 && (await count(page)) === '12 services' && !all.includes('Hulu'),
       `${all.join(', ')} / ${await count(page)}`,
     );
     const cancels = Object.fromEntries(
@@ -460,7 +469,7 @@ async function addItem(page, planId) {
     check('no match shows the empty state', (await count(page)) === 'No services match');
     await page.getByRole('button', { name: 'Clear search' }).focus();
     await page.keyboard.press('Enter');
-    await until('the cards again', async () => (await names(page)).length === 9);
+    await until('the cards again', async () => (await names(page)).length === 12);
     check(
       'Clear search empties the box and focuses it',
       (await focused(page)).type === 'search' &&
@@ -538,11 +547,11 @@ async function addItem(page, planId) {
     const start = panel.locator('input[type=range]').first();
     const end = panel.locator('input[type=range]').last();
     check(
-      // ESPN Unlimited's US$319.99 a year is about CA$36.80 a month, rounded up to $40.
-      'the price runs from $0 to Unlimited at $40, the catalog’s priciest rounded up, by $1',
+      // Claude Max 20x's US$200 a month is about CA$276 at these rates, rounded up to $300 in about 40 steps of $10.
+      'the price runs from $0 to Unlimited at $300, the catalog’s priciest rounded up, by $10',
       (await panel.locator('.range').textContent()).trim() === '$0 – Unlimited' &&
-        (await end.getAttribute('max')) === '40' &&
-        (await end.getAttribute('step')) === '1' &&
+        (await end.getAttribute('max')) === '300' &&
+        (await end.getAttribute('step')) === '10' &&
         (await end.getAttribute('aria-valuetext')) === 'Unlimited' &&
         (await start.getAttribute('aria-valuetext')) === '$0',
       `${await end.getAttribute('max')} by ${await end.getAttribute('step')}`,
@@ -568,8 +577,8 @@ async function addItem(page, planId) {
       /^checkbox "Native pricing only"/,
       /^checkbox "Sold in Canada"/,
       /^button "Clear all" \[disabled\]/,
-      // The first card's chips, right below its names (M5.7).
-      /^radio "Proton Free" \[checked\]/,
+      // The first card's chips, right below its names (M5.7): Claude's, free like Proton's.
+      /^radio "Free" \[checked\]/,
     ];
     check(
       'Tab goes Sort → the price’s two thumbs → Category → Features → Activity → Native → Sold in → Clear all → the results',
@@ -608,7 +617,8 @@ async function addItem(page, planId) {
     await until('Mullvad to go', async () => !(await names(page)).includes('Mullvad VPN'));
     check(
       '"Native pricing only" hides converted prices, in the URL as native=1',
-      (await names(page)).join() === 'Proton,ICI TOU.TV,Netflix,Disney+,Crave,RDS,TSN' &&
+      (await names(page)).join() ===
+        'Claude,Proton,ICI TOU.TV,Bitdefender,Netflix,Disney+,Crave,Xbox Game Pass,RDS,TSN' &&
         (await entries(page)) === base + 1,
       `${(await names(page)).join(', ')} / ${search(page)}`,
     );
@@ -662,7 +672,7 @@ async function addItem(page, planId) {
     await until('no chips', async () => (await chipNames()).length === 0);
     check(
       'Back undoes the last filter',
-      search(page) === '?native=1' && (await names(page)).length === 7,
+      search(page) === '?native=1' && (await names(page)).length === 10,
       `${search(page)} / ${(await names(page)).join(', ')}`,
     );
     await go(page, 'forward');
@@ -681,22 +691,22 @@ async function addItem(page, planId) {
 
     // The price, by arrow keys: a run of changes is one entry. Netflix Premium is CA$23.99.
     const priceFrom = await entries(page);
-    const presses = Number(await end.getAttribute('max')) - 24;
+    const presses = (Number(await end.getAttribute('max')) - 30) / 10;
     await end.focus();
     for (let i = 0; i < presses; i++) {
       await page.keyboard.press('ArrowLeft');
       await sleep(150);
     }
-    await until('max=24', () => search(page).includes('max=24'));
+    await until('max=30', () => search(page).includes('max=30'));
     check(
-      `${presses} arrow presses on the top thumb make one history entry, at $24`,
+      `${presses} arrow presses on the top thumb make one history entry, at $30`,
       (await entries(page)) === priceFrom + 1 &&
         (await names(page)).join() === 'Netflix' &&
-        (await panel.locator('.range').textContent()).trim() === '$0 – $24',
+        (await panel.locator('.range').textContent()).trim() === '$0 – $30',
       `${search(page)} / ${priceFrom} → ${await entries(page)}`,
     );
     await page.keyboard.press('ArrowLeft');
-    await until('max=23', () => search(page).includes('max=23'));
+    await until('max=20', () => search(page).includes('max=20'));
     await until('no match', async () => (await count(page)) === 'No services match');
     check(
       'below Netflix Premium’s price nothing matches, and the empty state offers Clear filters',
@@ -740,7 +750,8 @@ async function addItem(page, planId) {
     );
     check(
       'Category offers All and the categories a plan sold here is in',
-      categoryOptions.join() === 'All,Streaming video,VPN,Privacy & security suites,Cloud storage',
+      categoryOptions.join() ===
+        'All,Streaming video,VPN,Privacy & security suites,Cloud storage,AI assistants,Gaming',
       categoryOptions.join(', '),
     );
     // M1.10: Proton is a privacy suite, and its VPN Plus, Free and suites are VPNs too.
@@ -842,7 +853,7 @@ async function addItem(page, planId) {
     await until('native=1', () => search(page) === '?native=1');
     await until(
       'the drawer’s count',
-      async () => (await drawer.locator('[role=status]').textContent()) === '7 services',
+      async () => (await drawer.locator('[role=status]').textContent()) === '10 services',
     );
     check('a filter in the drawer applies at once, and the drawer announces the count', true);
     await page.screenshot({ path: path.join(outDir, 'drawer-native-360.png') });
@@ -1799,7 +1810,7 @@ async function addItem(page, planId) {
       /^≈ £\d+\.\d\d \/ mo .*No price for United Kingdom yet$/.test(prices),
       prices,
     );
-    // M5.6: Sold in United Kingdom hides what has no UK price, and Settings can make it the default.
+    // M5.6: Sold in United Kingdom hides what has no UK price (Claude's is global), and Settings can make it the default.
     const sold = second.getByRole('checkbox', { name: 'Sold in United Kingdom' });
     await sold.focus();
     await second.keyboard.press('Space');

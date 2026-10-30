@@ -191,9 +191,12 @@
   </div>
 }
 
-<p class="checked">
-  <span>Price checked {{ checked() }}</span>
-  @if (match().stale) {
-    <span class="badge"> May be out of date</span>
-  }
-</p>
+<div class="checked-row">
+  <p class="checked">
+    <span>Price checked {{ checked() }}</span>
+    @if (match().stale) {
+      <span class="badge"> May be out of date</span>
+    }
+  </p>
+  <button matButton type="button" class="report" (click)="report()">Report a wrong price</button>
+</div>

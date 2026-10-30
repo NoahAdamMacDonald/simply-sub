@@ -1,0 +1,197 @@
+@if (choosing()) {
+  <form (submit)="save($event)">
+    <h2 mat-dialog-title #title tabindex="-1">
+      {{ record() ? 'Change your live calendar' : 'Live calendar' }}
+    </h2>
+    <mat-dialog-content>
+      @if (!record()) {
+        <p>
+          A link your calendar app follows, so your payments show there and keep up with your lists.
+          Proton Calendar checks it every 4 to 16 hours, Google Calendar about once a day, and Apple
+          Calendar as often as you set.
+        </p>
+        <p>
+          To make it, Simply Sub keeps a copy of your payment schedule on its server: each payment’s
+          name, amount, date and how it repeats, and nothing else.
+          <strong>Anyone with a link can see that calendar.</strong> You can revoke the links here
+          at any time, and they’re deleted after 180 days without an update.
+        </p>
+      }
+      <fieldset aria-describedby="live-calendars-hint">
+        <legend>Calendars</legend>
+        <mat-checkbox [checked]="has('all')" (change)="toggle('all', $event.checked)">
+          Everything
+        </mat-checkbox>
+        @for (tag of tagChoices(); track tag.id) {
+          <mat-checkbox [checked]="has(tag.id)" (change)="toggle(tag.id, $event.checked)">
+            <span class="swatch" aria-hidden="true" [style.background-color]="tag.color"></span>
+            {{ tag.name }}
+          </mat-checkbox>
+        }
+        <mat-checkbox [checked]="has('untagged')" (change)="toggle('untagged', $event.checked)">
+          Payments without a tag
+        </mat-checkbox>
+        <p id="live-calendars-hint" class="hint">
+          Each is a calendar of its own in your app, so a tag’s can have the tag’s colour. Each
+          counts toward your app’s calendars: Proton Calendar’s free plan has 3.
+        </p>
+      </fieldset>
+      <fieldset>
+        <legend id="live-titles-legend">Each payment shows</legend>
+        <mat-radio-group
+          aria-labelledby="live-titles-legend"
+          [value]="titles()"
+          (change)="titles.set($event.value)"
+        >
+          <mat-radio-button value="name-amount"
+            >Its name and amount: “Netflix: $19.94”</mat-radio-button
+          >
+          <mat-radio-button value="name">Its name only</mat-radio-button>
+        </mat-radio-group>
+        <mat-checkbox [checked]="listNames()" (change)="listNames.set($event.checked)">
+          And its list’s name: “Netflix (Family)”
+        </mat-checkbox>
+      </fieldset>
+      @if (!online()) {
+        <p class="hint">You’re offline. You can make the links once you’re back online.</p>
+      }
+      <p class="error" role="alert">{{ error() }}</p>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      @if (record()) {
+        <button matButton type="button" (click)="show(false)">Cancel</button>
+      } @else {
+        <button matButton type="button" mat-dialog-close>Cancel</button>
+      }
+      <button
+        matButton="filled"
+        type="submit"
+        disabledInteractive
+        [disabled]="working() || !online()"
+      >
+        {{
+          working()
+            ? record()
+              ? 'Saving…'
+              : 'Making links…'
+            : record()
+              ? 'Save changes'
+              : 'Make links'
+        }}
+      </button>
+    </mat-dialog-actions>
+  </form>
+} @else {
+  <h2 mat-dialog-title #title tabindex="-1">Live calendar</h2>
+  <mat-dialog-content>
+    <p class="status" role="status">{{ status() }}</p>
+    <ul class="calendars">
+      @for (calendar of calendars(); track calendar.holds) {
+        <li>
+          <h3>
+            @if (calendar.color) {
+              <span
+                class="swatch"
+                aria-hidden="true"
+                [style.background-color]="calendar.color"
+              ></span>
+            }
+            {{ calendar.label }}
+          </h3>
+          <p class="link">{{ calendar.url }}</p>
+          <div class="actions">
+            <button
+              matButton="outlined"
+              type="button"
+              [attr.aria-label]="'Copy link: ' + calendar.label"
+              (click)="copy(calendar)"
+            >
+              <mat-icon>content_copy</mat-icon>
+              Copy link
+            </button>
+            <a
+              matButton="outlined"
+              target="_blank"
+              rel="noopener"
+              [href]="calendar.googleUrl"
+              [attr.aria-label]="
+                'Add to Google Calendar: ' + calendar.label + ', opens in a new tab'
+              "
+            >
+              Add to Google Calendar
+              <mat-icon iconPositionEnd aria-hidden="true">open_in_new</mat-icon>
+            </a>
+            <a
+              matButton="outlined"
+              [href]="calendar.webcalUrl"
+              [attr.aria-label]="'Add to Apple Calendar: ' + calendar.label"
+            >
+              Add to Apple Calendar
+            </a>
+          </div>
+        </li>
+      }
+    </ul>
+
+    <h3 class="steps-heading">How to add them</h3>
+    <details>
+      <summary>Proton Calendar</summary>
+      <ol>
+        <li>In Proton Calendar on the web, open Settings, then All settings, then Calendars.</li>
+        <li>Under Other calendars, select Add calendar from URL.</li>
+        <li>Paste a calendar’s link (Copy link above), then add it.</li>
+      </ol>
+      <p class="hint">
+        It shows in Proton’s phone and desktop apps too, and Proton checks it for changes every 4 to
+        16 hours. It’s read-only there: change your payments in Simply Sub.
+      </p>
+    </details>
+    <details>
+      <summary>Google Calendar</summary>
+      <ol>
+        <li>
+          On a computer, select Add to Google Calendar above, then confirm. Or open Google Calendar,
+          select + beside Other calendars, then From URL, paste the link and select Add calendar.
+        </li>
+        <li>
+          To give it a tag’s colour, select ⋮ beside it under Other calendars, then a colour, or +
+          for the tag’s own.
+        </li>
+      </ol>
+      <p class="hint">
+        It shows in Google Calendar’s phone apps too. Google checks for changes on its own schedule,
+        about once a day.
+      </p>
+    </details>
+    <details>
+      <summary>Apple Calendar</summary>
+      <ol>
+        <li>
+          On an iPhone, iPad or Mac, select Add to Apple Calendar above, and Calendar asks to
+          subscribe. Or, on a Mac, in Calendar choose File, then New Calendar Subscription, and
+          paste the link.
+        </li>
+        <li>
+          Choose its colour and how often it refreshes, and iCloud as its location to see it on your
+          other Apple devices.
+        </li>
+      </ol>
+    </details>
+    @if (error()) {
+      <p class="error" role="alert">{{ error() }}</p>
+    }
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button matButton type="button" class="danger" [disabled]="working()" (click)="revoke()">
+      Revoke all…
+    </button>
+    <button matButton type="button" [disabled]="working()" (click)="renew()">
+      {{ record()?.broken ? 'Make new links' : 'New links…' }}
+    </button>
+    <button matButton type="button" [disabled]="working()" (click)="show(true)">
+      Change calendars
+    </button>
+    <button matButton="filled" type="button" mat-dialog-close>Done</button>
+  </mat-dialog-actions>
+}
+<p class="visually-hidden" role="status">{{ message() }}</p>

@@ -1,0 +1,44 @@
+// The form wraps the dialog's title, content and actions, which the dialog lays out as its own children.
+form {
+  display: contents;
+}
+
+p {
+  margin: 0 0 12px;
+}
+
+.label {
+  margin-bottom: 4px;
+  font: var(--mat-sys-title-small);
+}
+
+// The circles' own padding lines them up with the text above.
+mat-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin-left: -10px;
+}
+
+// The price and its currency, with the billing period when the card shows several: a row from 600 px, sharing it
+// equally however many there are, and each on its own line on a phone.
+.price {
+  display: grid;
+  gap: 4px 12px;
+  margin-top: 12px;
+
+  @media (min-width: 600px) {
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+  }
+}
+
+.hint {
+  margin: 4px 0 0;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}
+
+.refusal {
+  margin: 12px 0 0;
+  color: var(--ss-danger);
+}

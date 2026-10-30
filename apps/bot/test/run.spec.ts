@@ -3,8 +3,10 @@ import {
   baselinePath,
   pageText,
   providerSchema,
+  reportKey,
   type Automation,
   type Baseline,
+  type ReportedPlan,
 } from '@simply-sub/core';
 import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
@@ -85,6 +87,7 @@ describe('a quiet night', () => {
       'read the settings',
       'read the check dates',
       'read the catalog',
+      'read the reports',
       'read robots.txt 1',
       'check mullvad',
       'check netflix',
@@ -276,6 +279,120 @@ describe('the weekly digest', () => {
     const review =
       services.proposals[0].changes.find((change) => change.path === reviewFile)?.text ?? '';
     expect(review).toContain('**mullvad**: The check failed: D1 is unavailable');
+  });
+});
+
+describe('price reports (M10.10)', () => {
+  /** A state holding `reported`, as the API's nightly clean-up leaves it. */
+  function reportedState(reported: readonly ReportedPlan[]): ReturnType<typeof memoryState> {
+    const state = memoryState();
+    for (const plan of reported) state.kv.set(reportKey(plan.plan), JSON.stringify(plan));
+    return state;
+  }
+  const days = { first: '2026-10-27', last: '2026-10-28' };
+
+  it('checks a reported plan’s pages that night, whatever their cadence', async () => {
+    const off = settings({
+      cadence: { pricing: 'off', policies: 'off', logos: 'off', discovery: 'off' },
+    });
+    const state = reportedState([
+      {
+        plan: 'mullvad.vpn',
+        reports: [{ country: 'CA', problem: 'discontinued', count: 1, ...days }],
+      },
+    ]);
+    await night(quietWorld(), { settings: off, state });
+    const checks = await state.checks();
+    expect(checks['https://mullvad.net/en/pricing']).toBe(today);
+    expect(checks['https://help.netflix.com/en/node/24926/ca']).toBeUndefined();
+  });
+
+  it('says in the digest what each reported page showed, then lets the reports go', async () => {
+    const world = quietWorld();
+    world.pages['https://help.netflix.com/en/node/24926/ca'] = netflixChanged;
+    world.ai = (request) => ({
+      response: {
+        prices: request.messages[1].content.includes('1. Netflix Standard:')
+          ? [
+              {
+                plan: 1,
+                found: true,
+                regularAmount: 19.99,
+                currency: 'CAD',
+                onlySalePrice: false,
+                quote: 'Standard: $19.99 / month',
+              },
+            ]
+          : [],
+      },
+    });
+    delete world.pages['https://help.netflix.com/en/node/24926/us'];
+    const state = reportedState([
+      {
+        plan: 'netflix.standard',
+        reports: [
+          {
+            country: 'CA',
+            problem: 'price',
+            price: { amount: 19.99, currency: 'CAD', interval: 'month', intervalCount: 1 },
+            count: 3,
+            ...days,
+          },
+          { country: 'GB', problem: 'not-in-country', count: 2, ...days },
+        ],
+      },
+      {
+        plan: 'netflix.premium',
+        reports: [
+          {
+            country: 'US',
+            problem: 'price',
+            price: { amount: 26.99, currency: 'USD', interval: 'month', intervalCount: 1 },
+            count: 1,
+            first: '2026-10-28',
+            last: '2026-10-28',
+          },
+        ],
+      },
+      {
+        plan: 'mullvad.vpn',
+        reports: [{ country: 'DE', problem: 'discontinued', count: 1, ...days }],
+      },
+    ]);
+
+    const { proposals } = await night(world, { state });
+    const [made] = proposals;
+    // A new price: the edit any check makes, with the reports beside it.
+    expect(made.body).toContain(
+      '- **Netflix Standard** in CA: 3 reports of 19.99 CAD monthly (2026-10-27 to 2026-10-28). Its page shows 19.99 CAD monthly: the edit is in this pull request.',
+    );
+    expect(made.changes.map((change) => change.path)).toContain('data/providers/netflix.yaml');
+    // The catalog's price still there: a line, nothing to review. Germany has Mullvad's one price everywhere.
+    expect(made.body).toMatch(
+      /- \*\*Mullvad VPN\*\* in DE: 1 report that it isn't sold any more \(2026-10-27 to 2026-10-28\)\. Its page still shows the catalog's .+: nothing to review\./,
+    );
+    // A page that couldn't be read: a review item.
+    expect(made.changes.find((change) => change.path === reviewFile)?.text).toContain(
+      "- [ ] **Netflix Premium** in US: 1 report of 26.99 USD monthly (2026-10-28), and its page couldn't be read this week: check [help.netflix.com/en/node/24926/us](https://help.netflix.com/en/node/24926/us) by hand, and change the price if it says so",
+    );
+    // A country the catalog doesn't price the plan in: counted for the next regions.
+    expect(made.body).toContain(
+      "### Regions people asked about\n\nReports from countries the catalog doesn't price these plans in yet, for the regions to add (PROJECT-PLAN M10.13): GB 2 (Netflix Standard 2).",
+    );
+    expect(await state.reports()).toEqual([]);
+  });
+
+  it('keeps the reports until the digest’s day', async () => {
+    const state = reportedState([
+      {
+        plan: 'netflix.standard',
+        reports: [{ country: 'GB', problem: 'not-in-country', count: 1, ...days }],
+      },
+    ]);
+    // A Wednesday: the digest is on Thursdays.
+    const { proposals } = await night(quietWorld(), { state, date: '2026-10-28' });
+    expect(proposals).toEqual([]);
+    expect((await state.reports()).map(({ plan }) => plan)).toEqual(['netflix.standard']);
   });
 });
 

@@ -4,9 +4,11 @@ import { defineConfig } from 'vitest/config';
 import { parse } from 'yaml';
 
 // Route tests run inside workerd with the bindings from wrangler.jsonc (BLUEPRINT §13.3). Each test
-// file gets a local D1 with the migrations applied (test/apply-migrations.ts).
+// file gets a local D1 for the catalog and one for user data, each with its migrations applied
+// (test/apply-migrations.ts).
 export default defineConfig(async () => {
   const migrations = await readD1Migrations('./migrations');
+  const userMigrations = await readD1Migrations('./migrations-user');
   return {
     plugins: [
       cloudflareTest({
@@ -14,11 +16,22 @@ export default defineConfig(async () => {
         miniflare: {
           bindings: {
             TEST_MIGRATIONS: migrations,
+            TEST_USER_MIGRATIONS: userMigrations,
             TEST_CATALOG: await readCatalog(),
-            // For test/static-headers.spec.ts: the CSP must hash index.html's inline script.
+            // For test/static-headers.spec.ts, where the CSP must hash index.html's inline script, and
+            // test/web-manifest.spec.ts, where the manifest's colours are the tokens' (M10.6).
             TEST_STATIC: {
               headers: await readFile(new URL('public/_headers', import.meta.url), 'utf8'),
               indexHtml: await readFile(new URL('../web/src/index.html', import.meta.url), 'utf8'),
+              manifest: await readFile(
+                new URL('../web/public/manifest.webmanifest', import.meta.url),
+                'utf8',
+              ),
+              tokens: await readFile(
+                new URL('../web/src/styles/_tokens.scss', import.meta.url),
+                'utf8',
+              ),
+              appIcons: await readdir(new URL('../web/public/app-icons', import.meta.url)),
             },
           },
           // public/ holds the web build only after `npm run build`, which CI runs after the tests.

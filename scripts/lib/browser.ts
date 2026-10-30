@@ -6,6 +6,7 @@
 // screenshot as evidence. A bot check is never got past: the page is reported unread.
 import { pageText, userAgent } from '@simply-sub/core';
 import { chromium, type Browser, type BrowserContext, type Page } from 'playwright-core';
+import type { RegionBrowser } from '@simply-sub/core';
 import { pipelineHeaders, type PoliteWeb } from './web';
 
 /** A page as the browser showed it. */
@@ -50,7 +51,15 @@ export class Renderer {
   private context?: BrowserContext;
   private readonly opened = new Set<string>();
 
-  constructor(private readonly web: PoliteWeb) {}
+  constructor(
+    private readonly web: PoliteWeb,
+    /** How pages are read: in Canada's English and time zone, unless a region's are read (M10.12). */
+    private readonly settings: RegionBrowser = {
+      locale: 'en-CA',
+      acceptLanguage: pipelineHeaders['Accept-Language'],
+      timeZone: 'America/Toronto',
+    },
+  ) {}
 
   /**
    * Opens `url` once and reads it, or says why it couldn't be: robots.txt, a bot check, an error status, a timeout.
@@ -175,10 +184,10 @@ export class Renderer {
     this.context = await this.browser.newContext({
       // The browser's own, so sites show their normal page, with the bot's token after it to say who's asking.
       userAgent: `${browserAgent.replace('HeadlessChrome', 'Chrome')} ${userAgent}`,
-      locale: 'en-CA',
-      timezoneId: 'America/Toronto',
+      locale: this.settings.locale,
+      timezoneId: this.settings.timeZone,
       viewport: { width: 1280, height: 900 },
-      extraHTTPHeaders: { 'Accept-Language': pipelineHeaders['Accept-Language'] },
+      extraHTTPHeaders: { 'Accept-Language': this.settings.acceptLanguage },
     });
     return this.context;
   }

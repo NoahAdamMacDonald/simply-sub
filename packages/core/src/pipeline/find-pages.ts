@@ -1,6 +1,7 @@
 import { networksNamedIn } from '../catalog/card-networks';
 import { moneyIn } from './amounts';
 import { pageText } from './page-text';
+import { segmentCountry } from './regional-pages';
 import type { SearchResult } from './search';
 import { bareHost, hostOnDomain, parseWebAddress } from './web-address';
 
@@ -72,6 +73,24 @@ export const commonPaths: Readonly<Record<PageKind, readonly string[]>> = {
   resellers: ['/resellers', '/where-to-buy', '/retailers', '/partners/resellers', '/partners'],
 };
 
+/**
+ * The paths tried for a kind in a region: Canada's are commonPaths; another region's pricing paths use its own
+ * locales in place of Canada's (/en-gb/pricing, /uk/plans), M10.12.
+ */
+export function pathsFor(kind: PageKind, region = 'CA'): readonly string[] {
+  if (kind !== 'pricing' || region === 'CA') return commonPaths[kind];
+  const codes = region === 'GB' ? ['gb', 'uk'] : [region.toLowerCase()];
+  const local = codes.flatMap((code) => [
+    `/en-${code}/pricing`,
+    `/${code}/pricing`,
+    `/${code}/plans`,
+  ]);
+  return [
+    ...commonPaths.pricing.filter((path) => path !== '/en-ca/pricing' && path !== '/ca/plans'),
+    ...local,
+  ];
+}
+
 /** A path no site has, which a site that answers every path still answers (a single-page app's soft 404). */
 export const missingPath = '/simply-sub-page-that-isnt-here';
 
@@ -83,7 +102,7 @@ export function searchQueries(kind: PageKind, site: ProviderSite): string[] {
   const { name } = site;
   switch (kind) {
     case 'pricing':
-      return [`${name} plans pricing Canada`];
+      return [`${name} plans pricing ${countryNames.of(site.region ?? 'CA') ?? 'Canada'}`];
     case 'cancel':
       return [`how to cancel ${name} subscription`];
     case 'terms':
@@ -198,39 +217,68 @@ const catalogue =
 /** Words of a page that lists others: a help centre's category or section, a tag. */
 const listing = /^(?:categories|category|sections?|tags?|topics?|collections?)$/;
 
+/** The languages a region speaks besides English, whose locale alone (/fr/, /de/) may be its page (M10.12). */
+const regionLanguages: Readonly<Record<string, readonly string[]>> = {
+  CA: ['fr'],
+  AT: ['de'],
+  BE: ['fr', 'nl', 'de'],
+  DE: ['de'],
+  ES: ['es'],
+  FI: ['fi'],
+  FR: ['fr'],
+  GR: ['el'],
+  IT: ['it'],
+  LU: ['fr', 'de'],
+  NL: ['nl'],
+  PT: ['pt'],
+};
+
+const countryNames = new Intl.DisplayNames(['en'], { type: 'region' });
+
 /**
- * Locales in a path, as whole segments (/en-ca/, /ca/) or inside a slug (disneyplus-en-ca-price): Canada's English or
- * French first, then English or none (en, en-us: often the default), French without a country neutral; another
- * country's last (en-au, fr-fr, de).
+ * Locales in a path, as whole segments (/en-ca/, /ca/, /uk/) or inside a slug (disneyplus-en-ca-price): the region's
+ * own first, its English before its other languages, since the catalog is written in English; then English or none
+ * (en, and in Canada en-us: often the default); a language alone the region speaks neutral (French in Canada); another
+ * country's last (en-au, fr-fr, de). The region is Canada's unless the pipeline asks for another (M10.12).
  */
-function localeScore(segments: readonly string[]): number {
+function localeScore(segments: readonly string[], region = 'CA'): number {
+  const own = region.toLowerCase();
   let score = 0;
   const judge = (language: string | undefined, country: string | undefined) => {
-    // Canada's English before its French: the catalog is written in English.
-    if (country === 'ca') score = Math.max(score, language === 'fr' ? 2 : 3);
-    else if (language === 'en' && (country === undefined || country === 'us'))
+    if (country === own) score = Math.max(score, language === 'en' ? 3 : 2);
+    else if (language === 'en' && (country === undefined || (country === 'us' && own === 'ca')))
       score = Math.max(score, 1);
-    else if (!(language === 'fr' && country === undefined)) score = Math.min(score, -3);
+    else if (!(country === undefined && (regionLanguages[region] ?? []).includes(language ?? '')))
+      score = Math.min(score, -3);
   };
   for (const segment of segments) {
     const whole = /^([a-z]{2})(?:[-_]([a-z]{2}))?$/.exec(segment);
     if (whole && !/^(?:tv|my|go|me|vpn|pc|ai|hc)$/.test(segment)) {
-      // ca and us alone are countries; ca-en is Spotify's way round.
-      const [first, second] = [whole[1], whole[2]];
-      if (second === undefined && (first === 'ca' || first === 'us')) judge('en', first);
-      else if (first === 'ca' || second === 'en')
-        judge(second ?? first, first === 'ca' ? 'ca' : first);
-      else judge(first, second);
+      // A country alone (ca, uk) is its English; ca-en is Spotify's way round, the country first.
+      const [, first, second] = whole;
+      const country = segmentCountry(segment)?.toLowerCase();
+      const language =
+        second === undefined
+          ? country === undefined
+            ? first
+            : 'en'
+          : segmentCountry(second) === undefined && segmentCountry(first) !== undefined
+            ? second
+            : first;
+      judge(language, country);
       continue;
     }
     const inside = /(?:^|[-_])(en|fr)[-_]([a-z]{2})(?:[-_]|$)/.exec(segment);
-    if (inside) judge(inside[1], inside[2]);
+    if (inside) judge(inside[1], inside[2] === 'uk' ? 'gb' : inside[2]);
   }
   return score;
 }
 
-/** How well a URL (and the words of the link to it) fits a kind: above 0 when it might be one. */
-export function urlScore(kind: PageKind, url: string, words = ''): number {
+/**
+ * How well a URL (and the words of the link to it) fits a kind: above 0 when it might be one. Its locale counts for the
+ * region its pages are looked for in, Canada unless another is asked for (M10.12).
+ */
+export function urlScore(kind: PageKind, url: string, words = '', region = 'CA'): number {
   const address = parseWebAddress(url);
   if (!address) return 0;
   const segments = withoutAccents(decodePath(address.path).toLowerCase())
@@ -263,7 +311,7 @@ export function urlScore(kind: PageKind, url: string, words = ''): number {
   // A help-centre article is fine, but not a list of them; a blog post is only a reseller's announcement.
   if (tokens.some((token) => listing.test(token))) score -= 3;
   if (kind !== 'resellers' && tokens.some((token) => /^(?:blog|news)$/.test(token))) score -= 3;
-  return Math.max(0, score + localeScore(segments));
+  return Math.max(0, score + localeScore(segments, region));
 }
 
 function decodePath(path: string): string {
@@ -428,6 +476,11 @@ export interface ProviderSite {
   website: string;
   /** Its other sites (Proton VPN's protonvpn.com). */
   domains?: readonly string[];
+  /**
+   * The country whose pages are looked for, Canada's by default (M10.12): its locale paths and sitemaps first, and its
+   * name in the pricing search.
+   */
+  region?: string;
 }
 
 /** Whether `url` is on the provider's sites: its website's registered domain or one of its other domains. */
@@ -459,7 +512,8 @@ export interface FindIo {
 }
 
 /** Where a page was found. */
-export type FoundVia = 'website' | 'path' | 'sitemap' | 'link' | 'search';
+/** How a page was found; `hreflang` is a region's, as a page the catalog cites links to it (M10.12). */
+export type FoundVia = 'website' | 'path' | 'sitemap' | 'link' | 'search' | 'hreflang';
 
 /** A page of one kind: confirmed by its words (`yes`), or probable by its URL when its words need a browser. */
 export interface FoundPage {
@@ -551,7 +605,10 @@ export async function surveySite(
     answersAnyPath: !('error' in missing),
     links,
     ...(options.sitemaps && {
-      sitemap: worthReading(await readSitemaps([origin, ...helpOrigins(origin)], io), site),
+      sitemap: worthReading(
+        await readSitemaps([origin, ...helpOrigins(origin)], io, site.region),
+        site,
+      ),
     }),
   };
 }
@@ -585,7 +642,7 @@ function factsOf(site: ProviderSite, survey: SiteSurvey, io: FindIo): SiteFacts 
     pages: () =>
       (read ??= sitemap
         ? Promise.resolve(sitemap)
-        : readSitemaps([survey.origin, ...helpOrigins(survey.origin)], io)),
+        : readSitemaps([survey.origin, ...helpOrigins(survey.origin)], io, site.region)),
   };
 }
 
@@ -594,7 +651,7 @@ function worthReading(pages: readonly string[], site: ProviderSite): string[] {
   const best = new Map<string, number>();
   for (const url of pages) {
     if (best.has(url) || !onProviderSite(url, site)) continue;
-    const score = Math.max(...pageKinds.map((kind) => urlScore(kind, url)));
+    const score = Math.max(...pageKinds.map((kind) => urlScore(kind, url, '', site.region)));
     if (score >= minScore) best.set(url, score);
   }
   return [...best]
@@ -628,7 +685,9 @@ async function searchKind(
     report.tried.push({ url: page.url, via, result: fit });
     // A guessed path counts by its final URL: one that redirects home isn't the page, whatever its words say.
     const finalScore =
-      via === 'path' ? urlScore(kind, page.url) : Math.max(score, urlScore(kind, page.url));
+      via === 'path'
+        ? urlScore(kind, page.url, '', site.region)
+        : Math.max(score, urlScore(kind, page.url, '', site.region));
     if (fit === 'yes' && (via !== 'path' || finalScore > 0)) {
       report.found = { kind, url: page.url, via, fit, score: finalScore };
       return true;
@@ -657,9 +716,9 @@ async function searchKind(
     return false;
   };
 
-  const paths = commonPaths[kind].map((path) => {
+  const paths = pathsFor(kind, site.region).map((path) => {
     const url = `${facts.origin}${path}`;
-    return { url, score: urlScore(kind, url) };
+    return { url, score: urlScore(kind, url, '', site.region) };
   });
   const sitemap = async () =>
     tryAll(
@@ -688,7 +747,10 @@ async function searchKind(
       // In the engine's order, which is what it found most relevant.
       const onSite = results
         .filter((result) => onProviderSite(result.url, site))
-        .map((result) => ({ url: result.url, score: urlScore(kind, result.url, result.title) }));
+        .map((result) => ({
+          url: result.url,
+          score: urlScore(kind, result.url, result.title, site.region),
+        }));
       if (await tryAll(onSite, 'search')) break;
     }
   }
@@ -712,7 +774,7 @@ function ranked(
     const footerPolicy = (kind === 'terms' || kind === 'privacy') && link.area === 'footer';
     if (!onSite && !footerPolicy) continue;
     const score =
-      urlScore(kind, link.url, link.words) +
+      urlScore(kind, link.url, link.words, site.region) +
       (link.area === 'footer' || link.area === 'nav' ? 1 : 0);
     if (score >= minScore) scored.set(link.url, Math.max(score, scored.get(link.url) ?? 0));
   }
@@ -722,7 +784,11 @@ function ranked(
 }
 
 /** Every page the hosts' sitemaps list (robots.txt's, else /sitemap.xml), following a few sitemap indexes each. */
-async function readSitemaps(origins: readonly string[], io: FindIo): Promise<string[]> {
+async function readSitemaps(
+  origins: readonly string[],
+  io: FindIo,
+  region?: string,
+): Promise<string[]> {
   const pages: string[] = [];
   for (const origin of origins) {
     const robots = await io.file(`${origin}/robots.txt`);
@@ -735,15 +801,18 @@ async function readSitemaps(origins: readonly string[], io: FindIo): Promise<str
       const found = readSitemap(xml);
       pages.push(...found.pages);
       // Sitemaps of pages before sitemaps of products, posts or images.
-      queue.push(...found.sitemaps.sort((a, b) => sitemapRank(a) - sitemapRank(b)));
+      queue.push(...found.sitemaps.sort((a, b) => sitemapRank(a, region) - sitemapRank(b, region)));
     }
   }
   return pages;
 }
 
-function sitemapRank(url: string): number {
-  // Canada's first (Disney+'s help centre splits its sitemap by country=CA), then the site's pages.
-  if (/(?:^|[-_/=.])(?:en[-_])?ca(?:[-_/.&]|$)|canada/i.test(url)) return -1;
+function sitemapRank(url: string, region = 'CA'): number {
+  // The region's first (Disney+'s help centre splits its sitemap by country=CA), then the site's pages.
+  const codes = region === 'GB' ? 'gb|uk' : region.toLowerCase();
+  const name = (countryNames.of(region) ?? region).toLowerCase().replace(/\s+/g, '[-_ ]?');
+  if (new RegExp(`(?:^|[-_/=.])(?:en[-_])?(?:${codes})(?:[-_/.&]|$)|${name}`, 'i').test(url))
+    return -1;
   if (/page|main|static|site/i.test(url)) return 0;
   return /post|blog|product|image|video|news/i.test(url) ? 2 : 1;
 }

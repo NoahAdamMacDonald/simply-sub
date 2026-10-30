@@ -191,6 +191,57 @@ describe('CalendarPage', () => {
     await until(() => url() === '/calendar?month=2026-10');
   });
 
+  it('shows a year of months, each its total and payments, and the year against the annual budget (M10.4)', async () => {
+    saved.set({ ...alberta, monthlyBudget: 15, annualBudget: 200 });
+    await open('/calendar?month=2026-10&view=year');
+    await until(() => page().querySelectorAll('ss-calendar-year .month').length === 12);
+    const cards = Array.from(page().querySelectorAll('ss-calendar-year .month'));
+    const links = cards.map((card) => card.querySelector('a'));
+    // Netflix on every 12th, Mullvad on Jan 20 too, counted back from its anchor: no start date means it was on already.
+    // Each card's link is its month's name, named with all the card shows.
+    expect(links.slice(0, 3).map((link) => [text(link), link?.getAttribute('aria-label')])).toEqual(
+      [
+        ['January', 'January 2026, 2 payments, about $114.10'],
+        ['February', 'February 2026, 1 payment, $19.94'],
+        ['March', 'March 2026, 1 payment, $19.94'],
+      ],
+    );
+    expect(text(cards[0].querySelector('.total'))).toBe('≈ $114.10');
+    expect(page().querySelector('ss-calendar-year a[aria-current="date"]')).toBe(links[9]);
+    expect(bar()?.getAttribute('aria-label')).toBe('Paid so far in 2026');
+    expect(bar()?.getAttribute('aria-valuetext')).toBe('$293.56 of $333.44, budget $200.00');
+    // No month to choose, and the arrows move a year.
+    expect(page().querySelector('mat-form-field.month')).toBeNull();
+    expect(page().querySelector('button[aria-label="Next year"]')).not.toBeNull();
+    // A day with a payment has a dot; the grid is for the eye, its card's name says it all.
+    expect(cards[2].querySelector('.days')?.getAttribute('aria-hidden')).toBe('true');
+    expect(cards[2].querySelectorAll('.day.paid')).toHaveLength(1);
+  });
+
+  it('switches to the year and back, keeping the month, and opens a month with focus on its grid (M10.4)', async () => {
+    await open('/calendar?month=2026-10');
+    const views = () =>
+      Array.from(page().querySelectorAll('.views button')).map(
+        (button) => `${text(button)}: ${button.getAttribute('aria-pressed')}`,
+      );
+    expect(views()).toEqual(['Month: true', 'Year: false']);
+    page().querySelectorAll<HTMLElement>('.views button')[1].click();
+    await until(() => url() === '/calendar?month=2026-10&view=year');
+    expect(views()).toEqual(['Month: false', 'Year: true']);
+
+    page().querySelector<HTMLElement>('button[aria-label="Next year"]')?.click();
+    await until(() => url() === '/calendar?month=2027-10&view=year');
+    page().querySelector<HTMLElement>('button[aria-label="Previous year"]')?.click();
+    await until(() => url() === '/calendar?month=2026-10&view=year');
+
+    await until(() => page().querySelectorAll('ss-calendar-year .month').length === 12);
+    page().querySelectorAll<HTMLElement>('ss-calendar-year .month a')[2].click();
+    await until(() => url() === '/calendar?month=2026-03');
+    await until(
+      () => document.activeElement === page().querySelector('.day[data-date="2026-03-01"]'),
+    );
+  });
+
   it('rewrites a month that isn’t one in place', async () => {
     await open('/calendar?month=2026-13');
     await until(() => url() === '/calendar?month=2026-10');
@@ -336,12 +387,14 @@ describe('CalendarPage', () => {
     const apps = Array.from(
       document.querySelectorAll<HTMLElement>('.mat-mdc-menu-panel [mat-menu-item]'),
     );
-    expect(apps.map((app) => text(app))).toEqual([
-      'Google Calendar',
-      'Apple Calendar',
-      'Proton Calendar',
+    // The live calendar's link first (M10.3), then each app's file; the icons' names aren't read.
+    expect(apps.map((app) => text(app.querySelector('.mat-mdc-menu-item-text')))).toEqual([
+      'Live calendar…',
+      'Google Calendar file',
+      'Apple Calendar file',
+      'Proton Calendar file',
     ]);
-    apps[2].click();
+    apps[3].click();
     await until(() => document.querySelector('ss-sync-dialog') !== null, 5000);
     expect(downloads.map((download) => download.name)).toEqual([
       'simply-sub-payments-2026-10-25.ics',

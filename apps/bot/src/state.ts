@@ -1,4 +1,11 @@
-import type { IsoDate, SearchEngine } from '@simply-sub/core';
+import {
+  reportedPlanSchema,
+  reportKey,
+  reportKeyPrefix,
+  type IsoDate,
+  type ReportedPlan,
+  type SearchEngine,
+} from '@simply-sub/core';
 import type { DiscoveryBatch, ServiceWork } from './discovery';
 import type { Searches } from './search';
 import type { Finding } from './types';
@@ -7,8 +14,9 @@ import type { Finding } from './types';
 // that start with `bot:`: when each page and logo was last checked (one key, written once a night), the day the last
 // digest was built, what each page that changed is waiting to propose (a key per page, kept until main's
 // baseline has caught up with it), the month's searches (M3.11), and the discovery batch under way with each
-// service's work so far, until its pull request is opened. The catalog itself stays in Git: nothing here is a
-// source of truth.
+// service's work so far, until its pull request is opened. The API's nightly clean-up adds the price reports, a key per
+// reported plan (M10.10), which the weekly digest takes. The catalog itself stays in Git: nothing here is a source of
+// truth.
 
 /** A page's (or a logo's) findings waiting for the weekly digest. */
 export interface Pending {
@@ -37,6 +45,9 @@ export interface BotState {
   /** A service's discovery work; saving undefined drops it. */
   work(id: string): Promise<ServiceWork | undefined>;
   saveWork(id: string, work: ServiceWork | undefined): Promise<void>;
+  /** The price reports the API handed over (M10.10), a plan each, until a digest has them. */
+  reports(): Promise<ReportedPlan[]>;
+  dropReport(plan: string): Promise<void>;
 }
 
 /** The part of Workers KV the state uses. */
@@ -116,7 +127,32 @@ export function kvState(kv: KvLike): BotState {
       if (work) await kv.put(`${workPrefix}${id}`, JSON.stringify(work));
       else await kv.delete(`${workPrefix}${id}`);
     },
+    async reports() {
+      const found: ReportedPlan[] = [];
+      let cursor: string | undefined;
+      do {
+        const page = await kv.list({ prefix: reportKeyPrefix, ...(cursor && { cursor }) });
+        for (const { name } of page.keys) {
+          const parsed = reportedPlanSchema.safeParse(parseJson(await kv.get(name)));
+          if (parsed.success) found.push(parsed.data);
+        }
+        cursor = page.list_complete ? undefined : page.cursor;
+      } while (cursor);
+      return found;
+    },
+    async dropReport(plan) {
+      await kv.delete(reportKey(plan));
+    },
   };
+}
+
+/** A KV value's JSON, or undefined for none or text that isn't JSON. */
+function parseJson(value: string | null): unknown {
+  try {
+    return value === null ? undefined : (JSON.parse(value) as unknown);
+  } catch {
+    return undefined;
+  }
 }
 
 /** A page's KV key: a hash of its URL, since KV keys are at most 512 bytes. */
