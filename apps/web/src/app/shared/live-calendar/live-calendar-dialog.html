@@ -53,7 +53,9 @@
         </mat-checkbox>
       </fieldset>
       @if (!online()) {
-        <p class="hint">You’re offline. You can make the links once you’re back online.</p>
+        <p class="hint" id="live-calendar-offline">
+          You’re offline. You can make the links once you’re back online.
+        </p>
       }
       <p class="error" role="alert">{{ error() }}</p>
     </mat-dialog-content>
@@ -68,6 +70,7 @@
         type="submit"
         disabledInteractive
         [disabled]="working() || !online()"
+        [attr.aria-describedby]="online() ? null : 'live-calendar-offline'"
       >
         {{
           working()

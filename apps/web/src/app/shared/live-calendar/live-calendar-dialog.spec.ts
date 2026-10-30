@@ -102,6 +102,20 @@ describe('LiveCalendarDialog', () => {
     expect(server.requests).toEqual([]);
   });
 
+  it('makes no links offline, where Make links says why it can’t', async () => {
+    window.dispatchEvent(new Event('offline'));
+    await until(() => button('Make links')?.getAttribute('aria-disabled') === 'true');
+    const hint = button('Make links')?.getAttribute('aria-describedby') ?? '';
+    expect(text(document.getElementById(hint))).toBe(
+      'You’re offline. You can make the links once you’re back online.',
+    );
+    button('Make links')?.click();
+    window.dispatchEvent(new Event('online'));
+    await until(() => button('Make links')?.getAttribute('aria-disabled') === null);
+    expect(server.requests).toEqual([]);
+    expect(text(dialog()?.querySelector('.error'))).toBe('');
+  });
+
   it('makes the links, then shows each with its apps, focus on the title', async () => {
     checkbox('Family')?.click();
     button('Make links')?.click();

@@ -81,6 +81,8 @@ export class SyncSetting {
   }
 
   protected syncNow(): void {
+    // Its button only says it's disabled while syncing (disabledInteractive), so a press still comes here.
+    if (this.syncing()) return;
     this.notice.set('');
     void this.sync.sync();
   }

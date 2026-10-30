@@ -120,8 +120,6 @@ export class ReportPriceDialog {
   }
 
   private async send(): Promise<void> {
-    // Send only says it's disabled while sending (disabledInteractive): a second press still comes here.
-    if (this.busy()) return;
     this.busy.set(true);
     this.refusal.set('');
     try {

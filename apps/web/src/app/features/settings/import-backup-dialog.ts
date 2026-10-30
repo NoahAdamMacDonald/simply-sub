@@ -92,6 +92,11 @@ export class ImportBackupDialog {
   protected readonly fileName = signal('');
   /** Why the file picked can't be used. */
   protected readonly refusal = signal<string | undefined>(undefined);
+  /**
+   * Opening the file or importing it. Import, Merge and Replace then only say they're disabled (disabledInteractive),
+   * and can still be clicked, so they do nothing while it's busy. Open submits the form, which Signal Forms doesn't
+   * submit again until the last submission is done.
+   */
   protected readonly busy = signal(false);
   /** Sync is on here (M10.9): Replace waits until it's off, as sync would bring back what Replace takes away. */
   protected readonly syncOn = signal(false);
@@ -160,7 +165,7 @@ export class ImportBackupDialog {
   protected async replace(): Promise<void> {
     const backup = this.backup();
     // Its button only says it's disabled with sync on (disabledInteractive), so it can still be clicked.
-    if (!backup || this.syncOn()) return;
+    if (!backup || this.busy() || this.syncOn()) return;
     if (
       !this.firstRun &&
       !(await this.confirmer.confirm({
@@ -185,7 +190,7 @@ export class ImportBackupDialog {
   /** Merge: each of the backup's records that's newer than the one here, or isn't here. */
   protected async merge(): Promise<void> {
     const backup = this.backup();
-    if (!backup) return;
+    if (!backup || this.busy()) return;
     await this.run(async () => ({ mode: 'merge', counts: await this.backups.merge(backup.data) }));
   }
 

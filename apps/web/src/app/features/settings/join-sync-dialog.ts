@@ -55,8 +55,9 @@ export class JoinSyncDialog {
 
   protected readonly indexes = Array.from({ length: wordCount }, (_, index) => index);
   /**
-   * Looking for the copy, joining it, or asking first. Its buttons then only say they're disabled (disabledInteractive),
-   * and can still be clicked, so each of their handlers does nothing while it's busy.
+   * Looking for the copy, joining it, or asking first. Back and Join then only say they're disabled (disabledInteractive),
+   * and can still be clicked, so they do nothing while it's busy. Continue submits the form, which Signal Forms doesn't
+   * submit again until the last submission is done.
    */
   protected readonly busy = signal(false);
   protected readonly error = signal('');
@@ -141,7 +142,6 @@ export class JoinSyncDialog {
   }
 
   private async find(): Promise<void> {
-    if (this.busy()) return;
     const seed = seedFromWords(this.model().words);
     if (!seed) {
       this.error.set(

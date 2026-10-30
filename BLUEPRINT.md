@@ -3008,6 +3008,15 @@ The user's report after M10, as M8.7 (PROJECT-PLAN's row has it as built):
   Proton with two VPNs, and a list of nine), checking that nobody loses a service no card said it gives up and that
   each list costs what the card applied said; `check-optimizer-reapply.cjs` runs the report's steps, the extra member
   taken off, and a 14-item list applied, saved and applied again at once.
+- **A Category you can type in (M5.14):** noted beside M6.16's menus you can type in.
+- **Buttons that only say they're disabled:** Material's `disabledInteractive` keeps a busy button focusable but only
+  sets `aria-disabled`, so its `(click)` still runs. Every such handler now returns while its button says it's
+  disabled: Import a backup's Import, Merge and Replace, the live calendar's Make links offline, Settings' Sync now
+  while syncing. A form's submit button needs no check: Signal Forms' `submit()` refuses a second submission while
+  one runs (documented in `@angular/forms` 22.2), and `mat-dialog-close` skips a button whose `aria-disabled` is true.
+- **Dependabot alert #1** (uuid before 11.1.1, GHSA-w5hq-g745-h8pq): exceljs 4.4.0, its latest, asks for uuid ^8.3.0.
+  A root override gives it the app's uuid 14.0.3 (CLAUDE.md's overrides). The app wasn't affected: exceljs calls only
+  `v4()` without a buffer, and the browser build bundles exceljs's prebuilt file, which keeps a copy of its own.
 
 **Resolved (2026-10-29, M10.10–M10.12, as built)**
 - **Price reports' rows** (M10.10, user migration `0004_price_reports`): `price_reports`, keyed by plan, country,
