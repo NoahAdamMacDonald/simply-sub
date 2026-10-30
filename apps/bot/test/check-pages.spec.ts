@@ -25,11 +25,11 @@ describe('checkPages', () => {
       budget,
     );
     const confirmed = findings.filter((finding) => finding.kind === 'confirmed');
-    // The Canadian prices are on the fixture page; the US page isn't there.
+    // The Canadian prices are on the fixture page; the US and the six euro countries' pages aren't there.
     expect(confirmed.map((finding) => 'target' in finding && finding.target.price.region)).toEqual(
       Array.from({ length: 5 }, () => 'CA'),
     );
-    expect(findings.filter((finding) => finding.kind === 'manual')).toHaveLength(1);
+    expect(findings.filter((finding) => finding.kind === 'manual')).toHaveLength(7);
     expect(calls.ai).toEqual([]);
     expect(new Set(calls.pages).size).toBe(calls.pages.length);
   });
