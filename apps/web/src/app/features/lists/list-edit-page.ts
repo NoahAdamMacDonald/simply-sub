@@ -60,6 +60,7 @@ import type {
   ItemDialogRequest,
   ItemDialogResult,
 } from './item-dialog';
+import { openSnack, snackMillis } from '../../shared/snack/snack';
 
 /** Where focus goes once the rows have caught up with a change: the row after a removed one, or a restored one. */
 interface PendingFocus {
@@ -381,7 +382,7 @@ export class ListEditPage implements AsksBeforeLeaving {
       rows,
       row.title,
     );
-    this.undo = this.snackBar.open(`Removed ${row.title}${goOn}`, 'Undo');
+    this.undo = openSnack(this.snackBar, `Removed ${row.title}${goOn}`, 'Undo');
     this.undo.onAction().subscribe(() => void this.restore(draft.listId, row.id, released));
   }
 
@@ -529,10 +530,11 @@ export class ListEditPage implements AsksBeforeLeaving {
         ? ''
         : `, and its ranks to ${result.shared === 1 ? '1 more plan' : `${result.shared} more plans`}`;
     const goOn = releasedText(result.released, this.rows(), result.title);
-    this.snackBar.open(
+    openSnack(
+      this.snackBar,
       `${result.added ? 'Added' : 'Saved'} ${result.title}${shared}${goOn}`,
       undefined,
-      { duration: 5000 },
+      { duration: snackMillis },
     );
     this.pendingFocus.set({
       ready: (shown) => shown.some((candidate) => candidate.id === result.itemId),

@@ -38,9 +38,10 @@
     <p class="none">Every subscription is on its best card already.</p>
   }
 
-  @for (name of preview.skipped; track name) {
+  @for (list of preview.skipped; track list.listId) {
     <p class="skipped">
-      {{ name }} has changes in the editor that aren't saved, so its subscriptions keep their cards.
+      {{ list.name }} has changes in the editor that aren't saved, so its subscriptions keep their
+      cards.
     </p>
   }
 

@@ -52,9 +52,7 @@ export class RejectedRecords {
   private async showNotice(): Promise<void> {
     // Loaded on first use, as GlobalErrorHandler does, so the snackbar stays out of the initial bundle. It stays
     // until dismissed: it's rare, and there's no hurry to read it.
-    const { MatSnackBar } = await import('@angular/material/snack-bar');
-    this.injector
-      .get(MatSnackBar)
-      .open("Some saved data couldn't be read, so it's hidden. The rest is fine.", 'Dismiss');
+    const { openSnack } = await import('../../shared/snack/snack');
+    openSnack(this.injector, "Some saved data couldn't be read, so it's hidden. The rest is fine.");
   }
 }
