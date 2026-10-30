@@ -184,6 +184,9 @@ describe('changed items', () => {
       { id: 'netflix.extra-member', quantity: 1 },
     ]);
     expect(keptAddOns(addOns, {})).toBeUndefined();
+    // An extra member who joins on a later day keeps it.
+    const joining = [{ id: 'netflix.extra-member', quantity: 1, since: '2026-11-20' }];
+    expect(keptAddOns(joining, { addOnIds: ['netflix.extra-member'] })).toEqual(joining);
     expect(withAddOn(addOns, 'netflix.extra-member', 1)[0]).toEqual({
       id: 'netflix.extra-member',
       quantity: 3,

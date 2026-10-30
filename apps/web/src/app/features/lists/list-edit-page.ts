@@ -26,10 +26,12 @@ import { ActivatedRoute, Router, RouterLink, type Params } from '@angular/router
 import {
   draftChanged,
   draftItems,
+  namesText,
   readAddRequest,
   recordIdSchema,
   type AddRequest,
   type ListDraft,
+  type ListItem,
 } from '@simply-sub/core';
 import { filter, firstValueFrom, map } from 'rxjs';
 import { CatalogStore } from '../../core/catalog/catalog-store';
@@ -359,20 +361,28 @@ export class ListEditPage implements AsksBeforeLeaving {
     await this.router.navigate(['/lists'], { replaceUrl: true });
   }
 
-  /** 🗑: removes the item from the draft, with Undo in a snackbar, and moves focus to the next row. */
+  /**
+   * 🗑: removes the item from the draft, with Undo in a snackbar, and moves focus to the next row. What it was to take
+   * over from goes on: a bundle's items, or the account its extra member left.
+   */
   protected async remove(row: EditRow): Promise<void> {
     const draft = this.draft();
     if (!draft) return;
     const rows = this.rows();
     const index = rows.findIndex((candidate) => candidate.id === row.id);
     const next = rows[index + 1] ?? rows[index - 1];
-    await this.drafts.removeItem(draft.listId, row.id);
+    const { released } = await this.drafts.removeItem(draft.listId, row.id, this.catalog.catalog());
     this.pendingFocus.set({
       ready: (shown) => !shown.some((candidate) => candidate.id === row.id),
       target: () => (next ? this.removeButton(next.id) : this.addButton()),
     });
-    this.undo = this.snackBar.open(`Removed ${row.title}`, 'Undo');
-    this.undo.onAction().subscribe(() => void this.restore(draft.listId, row.id));
+    const goOn = releasedText(
+      released.map((item) => item.id),
+      rows,
+      row.title,
+    );
+    this.undo = this.snackBar.open(`Removed ${row.title}${goOn}`, 'Undo');
+    this.undo.onAction().subscribe(() => void this.restore(draft.listId, row.id, released));
   }
 
   /** [+ Add custom subscription]'s menu: the item dialog for one of the user's custom subscriptions (flow F3). */
@@ -441,8 +451,12 @@ export class ListEditPage implements AsksBeforeLeaving {
     await this.router.navigate(['/lists', draft.listId], { replaceUrl: true });
   }
 
-  private async restore(listId: string, itemId: string): Promise<void> {
-    await this.drafts.restoreItem(listId, itemId);
+  private async restore(
+    listId: string,
+    itemId: string,
+    released: readonly ListItem[],
+  ): Promise<void> {
+    await this.drafts.restoreItem(listId, itemId, released);
     this.pendingFocus.set({
       ready: (shown) => shown.some((candidate) => candidate.id === itemId),
       target: () => this.removeButton(itemId),
@@ -514,9 +528,12 @@ export class ListEditPage implements AsksBeforeLeaving {
       result.shared === 0
         ? ''
         : `, and its ranks to ${result.shared === 1 ? '1 more plan' : `${result.shared} more plans`}`;
-    this.snackBar.open(`${result.added ? 'Added' : 'Saved'} ${result.title}${shared}`, undefined, {
-      duration: 5000,
-    });
+    const goOn = releasedText(result.released, this.rows(), result.title);
+    this.snackBar.open(
+      `${result.added ? 'Added' : 'Saved'} ${result.title}${shared}${goOn}`,
+      undefined,
+      { duration: 5000 },
+    );
     this.pendingFocus.set({
       ready: (shown) => shown.some((candidate) => candidate.id === result.itemId),
       target: () => this.editButton(result.itemId),
@@ -548,6 +565,17 @@ export class ListEditPage implements AsksBeforeLeaving {
       replaceUrl: true,
     });
   }
+}
+
+/**
+ * ", and Crave Premium and Disney+ Premium no longer end": the items an edit let go on, by their rows' titles, "the
+ * other Netflix Standard" for one with the changed item's own.
+ */
+function releasedText(itemIds: readonly string[], rows: readonly EditRow[], own: string): string {
+  const titles = itemIds.flatMap((id) => rows.find((row) => row.id === id)?.title ?? []);
+  if (titles.length === 0) return '';
+  const named = titles.map((title) => (title === own ? `the other ${title}` : title));
+  return `, and ${namesText(named)} no longer ${titles.length === 1 ? 'ends' : 'end'}`;
 }
 
 /** What the URL asks the item dialog to open, or nothing for a malformed request. */

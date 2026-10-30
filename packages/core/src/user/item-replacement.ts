@@ -65,3 +65,25 @@ export function itemReplacements(
   }
   return found;
 }
+
+/**
+ * The items of `after` that something took over from in `before`, and nothing does now (the feedback after M10): an
+ * extra member's add-on taken off its host, or the host, bundle or suite taken out. Each still ends on the day the
+ * replacement began, which was for the replacement only. One whose end date changed too isn't one.
+ */
+export function releasedItems(
+  before: readonly ListItem[],
+  after: readonly ListItem[],
+  catalog: Pick<CatalogData, 'providers' | 'bundles'>,
+): ListItem[] {
+  const now = itemReplacements(after, catalog);
+  const byId = new Map(after.map((item) => [item.id, item]));
+  return [...itemReplacements(before, catalog)].flatMap(([itemId, replacement]) => {
+    const item = byId.get(itemId);
+    return item?.billing.mode === 'recurring' &&
+      item.billing.endDate === replacement.on &&
+      !now.has(itemId)
+      ? [item]
+      : [];
+  });
+}
