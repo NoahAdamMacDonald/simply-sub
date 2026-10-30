@@ -1,12 +1,25 @@
-import { Component, DestroyRef, Injector, computed, inject, signal } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  Injector,
+  computed,
+  effect,
+  inject,
+  signal,
+  untracked,
+} from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { readJoinLink, type JoinLink } from '@simply-sub/core';
 import { ClockService } from '../../core/clock/clock-service';
 import { fromBase64 } from '../../core/crypto/passphrase-crypto';
+import { joinInbox } from '../../core/join-inbox';
 import { AppUpdates } from '../../core/pwa/app-updates';
+import { SettingsStore } from '../../core/settings/settings-store';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
 import { dateText } from '../../shared/date-text';
 import { SyncService } from '../../shared/sync/sync-service';
+import type { JoinSyncData } from './join-sync-dialog';
 import type { SyncCodeData } from './sync-code-dialog';
 import { problemTexts, snagTexts, syncedText } from './sync-text';
 
@@ -14,7 +27,8 @@ import { problemTexts, snagTexts, syncedText } from './sync-text';
  * Settings' Sync between devices (PROJECT-PLAN P13, M10.9). Off: Turn on sync, which shows a new code to keep first,
  * and Join with a code. On: when this device last synced and Sync now; the devices, this one first, with Rename; Show
  * the code, Start over with a new code, Turn off on this device and Delete the synced copy, each asking first. Stopped:
- * what stopped it, and what to do. The dialogs load as they open.
+ * what stopped it, and what to do. The dialogs load as they open. A join link opened in the browser (M10.14) opens Join
+ * here, with the link, once the settings are read; on a new device, the first run's dialog takes it instead.
  */
 @Component({
   selector: 'ss-sync-setting',
@@ -61,6 +75,18 @@ export class SyncSetting {
     this.sync.start();
     const ticking = setInterval(() => this.now.set(Date.parse(this.clock.now())), 30_000);
     inject(DestroyRef).onDestroy(() => clearInterval(ticking));
+    const settings = inject(SettingsStore);
+    effect(() => {
+      const fragment = joinInbox();
+      if (fragment === undefined || settings.status() !== 'ready' || settings.needsFirstRun()) {
+        return;
+      }
+      untracked(() => {
+        joinInbox.set(undefined);
+        const link = readJoinLink(fragment);
+        if (link) void this.join(link);
+      });
+    });
   }
 
   protected async turnOn(): Promise<void> {
@@ -68,12 +94,14 @@ export class SyncSetting {
     if (await this.showCode({ mode: 'turn-on', seed })) await this.sync.turnOn(seed);
   }
 
-  protected async join(): Promise<void> {
+  /** Join with a code, or with a join link opened in the browser. */
+  protected async join(link?: JoinLink): Promise<void> {
     const [{ MatDialog }, { JoinSyncDialog }] = await Promise.all([
       import('@angular/material/dialog'),
       import('./join-sync-dialog'),
     ]);
     this.injector.get(MatDialog).open(JoinSyncDialog, {
+      data: { link } satisfies JoinSyncData,
       autoFocus: 'first-tabbable',
       maxWidth: 'min(720px, calc(100vw - 32px))',
       width: '720px',

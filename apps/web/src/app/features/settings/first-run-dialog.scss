@@ -23,9 +23,22 @@ h2:focus {
   color: var(--ss-text-muted);
 }
 
-// Import a backup instead on the left, Get started on the right; one above the other when the dialog is narrow.
+// Import a backup or join a synced copy instead on the left, Get started on the right; one above the other when the
+// dialog is narrow.
 mat-dialog-actions {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 8px;
+}
+
+.instead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+
+  // The gap spaces them: Material's dialog actions give a button after another a margin, which indents it once they
+  // wrap.
+  .mat-mdc-button-base + .mat-mdc-button-base {
+    margin-left: 0;
+  }
 }

@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { Router, provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { routes } from './app.routes';
+import { joinInbox } from './core/join-inbox';
 import { testStorage, until } from './core/storage/storage.testing';
 
 /**
@@ -44,6 +45,17 @@ describe('routes', () => {
 
     await until(() => harness.routeNativeElement?.querySelector('h1')?.textContent === 'New list');
     expect(document.title).toBe('New list · Simply Sub');
+  });
+
+  it('/join keeps a join link for Join, in memory, and opens Settings without it (M10.14)', async () => {
+    const harness = await RouterTestingHarness.create(
+      '/join#YGFiY2RlZmdoaWprbG1ubw.QEFCQ0RFRkdISUpLTE1OT1BRUlNUVVZXWFlaW1xdXl8',
+    );
+
+    expect(TestBed.inject(Router).url).toBe('/settings');
+    expect(joinInbox()).toBe('YGFiY2RlZmdoaWprbG1ubw.QEFCQ0RFRkdISUpLTE1OT1BRUlNUVVZXWFlaW1xdXl8');
+    expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toBe('Settings');
+    joinInbox.set(undefined);
   });
 
   it('has the component gallery in development builds (dev-routes.ts)', async () => {

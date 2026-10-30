@@ -6,13 +6,22 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { MATERIAL_ANIMATIONS } from '@angular/material/core';
 import { MatDialogHarness } from '@angular/material/dialog/testing';
 import type { SyncDevice, SyncRecord } from '@simply-sub/core';
-import { testStorage } from '../../core/storage/storage.testing';
+import { joinInbox } from '../../core/join-inbox';
+import { SettingsStore } from '../../core/settings/settings-store';
+import {
+  plantRows,
+  testStorage,
+  until,
+  type TestStorage,
+} from '../../core/storage/storage.testing';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
+import { JoinLinks, type TakenLink } from '../../shared/sync/join-links';
 import { SyncService, type SyncSnag } from '../../shared/sync/sync-service';
 import { SyncSetting } from './sync-setting';
 
 // Settings' Sync between devices (M10.9): off, on and stopped, with a stand-in for SyncService and every confirmation
-// answered yes. The clock says Oct 25, 2026, 12:00 UTC.
+// answered yes; Show the code's one-time QR code and a join link opened in the browser (M10.14), with a stand-in for
+// JoinLinks. The clock says Oct 25, 2026, 12:00 UTC.
 
 const seed = new Uint8Array(32);
 
@@ -29,6 +38,16 @@ class FakeSync {
   readonly newSeed = () => seed;
 }
 
+class FakeLinks {
+  readonly make = vi.fn(async () => ({
+    url: 'https://sub.simplely.ca/join#YGFiY2RlZmdoaWprbG1ubw.QEFCQ0RFRkdISUpLTE1OT1BRUlNUVVZXWFlaW1xdXl8',
+    id: 'YGFiY2RlZmdoaWprbG1ubw',
+    expiresAt: '2026-10-25T12:10:00Z',
+  }));
+  readonly withdraw = vi.fn(async () => undefined);
+  readonly take = vi.fn(async (): Promise<TakenLink> => ({ kind: 'gone' }));
+}
+
 const on: SyncRecord = {
   key: 'sync',
   seed: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
@@ -40,18 +59,23 @@ const on: SyncRecord = {
 };
 
 describe('SyncSetting', () => {
+  let storage: TestStorage;
   let sync: FakeSync;
+  let links: FakeLinks;
   let confirm: ReturnType<typeof vi.fn>;
   let fixture: ComponentFixture<SyncSetting>;
   let loader: HarnessLoader;
 
   beforeEach(async () => {
+    storage = testStorage();
     sync = new FakeSync();
+    links = new FakeLinks();
     confirm = vi.fn(async () => true);
     TestBed.configureTestingModule({
       providers: [
-        testStorage().providers,
+        storage.providers,
         { provide: SyncService, useValue: sync },
+        { provide: JoinLinks, useValue: links },
         { provide: ConfirmService, useValue: { confirm } },
         { provide: MATERIAL_ANIMATIONS, useValue: { animationsDisabled: true } },
       ],
@@ -60,6 +84,8 @@ describe('SyncSetting', () => {
     loader = TestbedHarnessEnvironment.documentRootLoader(fixture);
     await fixture.whenStable();
   });
+
+  afterEach(() => joinInbox.set(undefined));
 
   const text = () =>
     ((fixture.nativeElement as HTMLElement).textContent ?? '').replace(/\s+/g, ' ');
@@ -78,10 +104,92 @@ describe('SyncSetting', () => {
     expect(await dialog.getTitleText()).toBe('Your sync code');
     const words = [...document.querySelectorAll('.words li')].map((word) => word.textContent);
     expect(words).toEqual([...Array<string>(23).fill('abandon'), 'art']);
-    expect(document.querySelector('ss-qr-code path')?.getAttribute('d')).toMatch(/^M\d/);
+    // A new code is one to keep: no QR code until sync is on (M10.14).
+    expect(document.querySelector('ss-qr-code')).toBeNull();
+    expect(links.make).not.toHaveBeenCalled();
 
     await (await loader.getHarness(MatButtonHarness.with({ text: 'I’ve saved it' }))).click();
     await vi.waitFor(() => expect(sync.turnOn).toHaveBeenCalledWith(seed));
+  });
+
+  it('on: Show the code shows a QR code of a link that works once, withdrawn as it closes', async () => {
+    sync.record.set(on);
+    await fixture.whenStable();
+    await (await button('Show the code…')).click();
+    const dialog = await vi.waitFor(() => loader.getHarness(MatDialogHarness));
+    await vi.waitFor(() =>
+      expect(document.querySelector('ss-qr-code path')?.getAttribute('d')).toMatch(/^M\d/),
+    );
+    expect(links.make).toHaveBeenCalledWith(new Uint8Array(32));
+    expect(await dialog.getText()).toContain('It works once, for 10 minutes.');
+
+    // A new one replaces it, withdrawing the first.
+    await (await loader.getHarness(MatButtonHarness.with({ text: /Make a new QR code$/ }))).click();
+    await vi.waitFor(() => expect(links.make).toHaveBeenCalledTimes(2));
+    expect(links.withdraw).toHaveBeenCalledWith('YGFiY2RlZmdoaWprbG1ubw');
+
+    await (await loader.getHarness(MatButtonHarness.with({ text: 'Done' }))).click();
+    await vi.waitFor(() => expect(links.withdraw).toHaveBeenCalledTimes(2));
+  });
+
+  it('on, offline: Show the code says why there’s no QR code, with the words still there', async () => {
+    const { JoinCallError } = await import('../../shared/sync/join-client');
+    links.make.mockRejectedValue(new JoinCallError('offline'));
+    sync.record.set(on);
+    await fixture.whenStable();
+    await (await button('Show the code…')).click();
+    const dialog = await vi.waitFor(() => loader.getHarness(MatDialogHarness));
+    await vi.waitFor(async () =>
+      expect(await dialog.getText()).toContain('You’re offline, so there’s no QR code'),
+    );
+    expect(document.querySelector('ss-qr-code')).toBeNull();
+    expect(document.querySelectorAll('.words li')).toHaveLength(24);
+  });
+
+  it('opens Join with a join link opened in the browser, once the settings are read (M10.14)', async () => {
+    await plantRows(storage.indexedDB, 'settings', [
+      {
+        key: 'settings',
+        country: 'CA',
+        currency: 'CAD',
+        theme: 'system',
+        updatedAt: '2026-10-20T09:15:00.000Z',
+      },
+    ]);
+    joinInbox.set('YGFiY2RlZmdoaWprbG1ubw.QEFCQ0RFRkdISUpLTE1OT1BRUlNUVVZXWFlaW1xdXl8');
+    const dialog = await vi.waitFor(() => loader.getHarness(MatDialogHarness), { timeout: 5000 });
+    expect(await dialog.getTitleText()).toBe('Join with a sync code');
+    await vi.waitFor(() =>
+      expect(links.take).toHaveBeenCalledWith({
+        id: 'YGFiY2RlZmdoaWprbG1ubw',
+        key: 'QEFCQ0RFRkdISUpLTE1OT1BRUlNUVVZXWFlaW1xdXl8',
+      }),
+    );
+    expect(joinInbox()).toBeUndefined();
+    await vi.waitFor(async () =>
+      expect(await dialog.getText()).toContain('This link was used or has expired.'),
+    );
+  });
+
+  it('leaves a join link to the first run’s dialog on a new device, and drops what isn’t one', async () => {
+    joinInbox.set('YGFiY2RlZmdoaWprbG1ubw.QEFCQ0RFRkdISUpLTE1OT1BRUlNUVVZXWFlaW1xdXl8');
+    await until(() => TestBed.inject(SettingsStore).needsFirstRun());
+    await fixture.whenStable();
+    expect(joinInbox()).toBeDefined();
+    expect(await loader.getAllHarnesses(MatDialogHarness)).toHaveLength(0);
+
+    await plantRows(storage.indexedDB, 'settings', [
+      {
+        key: 'settings',
+        country: 'CA',
+        currency: 'CAD',
+        theme: 'system',
+        updatedAt: '2026-10-20T09:15:00.000Z',
+      },
+    ]);
+    joinInbox.set('budgets');
+    await until(() => joinInbox() === undefined, 5000);
+    expect(await loader.getAllHarnesses(MatDialogHarness)).toHaveLength(0);
   });
 
   it('on: when it last synced, Sync now, the devices, and Turn off and Delete asking first', async () => {

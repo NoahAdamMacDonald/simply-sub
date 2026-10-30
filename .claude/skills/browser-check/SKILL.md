@@ -526,6 +526,25 @@ a minute per IP, and wrangler dev's limiter counts in the wall clock's minutes: 
 which the script checks is said in words, then sends again in the next minute (a run takes 2 to 3 minutes). A snackbar
 fading out is paler than it shows, so axe waits until the thanks has gone.
 
+`check-m10-join-link.cjs` (M10.14 and M10.15, the feedback after M10, part 2: sync's one-time join link and joining on
+the first visit) needs wrangler dev answering the API, with its user database migrated (`npm -w apps/api run
+db:user:migrate:local`, for `join_links`): behind `ng serve`'s proxy (`http://localhost:4300/`), or the production
+build itself (`http://localhost:8787/`), where the CSP and Trusted Types apply. Its base URL ends in `/`. For a Canadian
+in Alberta, in both themes at both widths, by keyboard: A turns sync on (the words, no QR code), then Show the code's QR
+code is read back from its SVG with the decoder and must be a join link on this site; B, a new device, opens the link
+(the address loses it at once, Join over the first run's dialog, no Merge or Replace, the settings the copy's with B's
+theme); C opens it again ("used or has expired"); A's Make a new QR code and Done withdraw their links, and the local user
+database (`wrangler d1 execute --local`) keeps none; D, a new device whose camera plays A's next QR code, joins from the
+first run's Join with a sync code by scanning. Light and wide only: a link opened with the app lock on, unlocked; a link
+moved past its 10 minutes in the local database; Show the code offline. It checks no request carries a link's key.
+- Edge plays a Y4M file as its camera (`--use-fake-device-for-media-stream`, `--use-file-for-fake-video-capture`,
+  `--use-fake-ui-for-media-stream` and the context's `camera` permission), so a browser with a camera is launched for
+  each QR code: the script writes the code as drawn, 8 px a module, into a 640 by 480 grey frame.
+- Every browser here shares one IP, and wrangler dev holds it to the API's 10 writes a minute, in the wall clock's
+  minutes: `room(n)` waits for the next minute when a step's writes wouldn't fit.
+- `wrangler d1 execute` gets its SQL from this script's own node and wrangler's JS entry, with no shell: Volta's shim
+  passes arguments through cmd, which splits them.
+
 `check-after-m3.cjs` (the feedback after M3: M5.13, M6.17–M6.19, M7.11, M8.5, M8.6, M9.6) checks the batch on
 `ng serve` for a Canadian in Alberta, with Streaming (Crave Premium and Disney+ Premium) and Family (two Disney+
 Premium, Netflix Standard auto-renewing until an end date, Mullvad renewed by hand, and four more so it scrolls). In

@@ -12,6 +12,12 @@ p {
   margin: 0 0 12px;
 }
 
+// Scan the QR code, or the camera in its place, above the words.
+.scan,
+ss-qr-scanner {
+  margin-bottom: 16px;
+}
+
 // Two boxes a row on a phone, four from 600 px.
 .words {
   display: grid;
@@ -39,6 +45,16 @@ mat-radio-group {
   margin: 12px 0 0;
   color: var(--ss-text-muted);
   font: var(--mat-sys-body-small);
+}
+
+// A live region, so it stays in the page while empty, when it takes no room.
+.status {
+  margin: 0;
+  color: var(--ss-text-muted);
+
+  &:not(:empty) {
+    margin-top: 12px;
+  }
 }
 
 .error {

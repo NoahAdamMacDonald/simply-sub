@@ -14,12 +14,14 @@ import {
   bearerSecret,
   capReached,
   countWrite,
+  fromBase64,
   isSecretOf,
   readBody,
   resourceAllowed,
   secretHash,
   storageCap,
   storageFull,
+  toBase64,
 } from '../writes';
 
 // Device sync (BLUEPRINT §5.2, §11.4, M10.8), in the user database under the write rules (writes.ts). A chain is the
@@ -211,20 +213,4 @@ function chainGone(c: Context<Api>): Response {
     404,
     { 'Content-Type': jsonType, 'Cache-Control': 'no-store' },
   );
-}
-
-/** Bytes as base64, a chunk at a time: a MiB spread into one call would overflow the stack. */
-function toBase64(bytes: Uint8Array): string {
-  let binary = '';
-  for (let at = 0; at < bytes.length; at += 0x8000) {
-    binary += String.fromCharCode(...bytes.subarray(at, at + 0x8000));
-  }
-  return btoa(binary);
-}
-
-function fromBase64(text: string): Uint8Array<ArrayBuffer> {
-  const binary = atob(text);
-  const bytes = new Uint8Array(binary.length);
-  for (let index = 0; index < binary.length; index++) bytes[index] = binary.charCodeAt(index);
-  return bytes;
 }

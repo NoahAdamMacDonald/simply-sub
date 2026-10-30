@@ -28,8 +28,23 @@ p {
   }
 }
 
-ss-qr-code {
+// The QR code, what it does, and Make a new QR code, under it.
+.qr {
+  display: flex;
   flex: 0 1 200px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+ss-qr-code {
+  width: 100%;
+}
+
+.qr-status {
+  margin: 0;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
 }
 
 .copy {

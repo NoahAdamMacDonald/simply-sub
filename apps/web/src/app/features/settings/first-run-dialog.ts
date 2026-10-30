@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { FormField, FormRoot, apply, form } from '@angular/forms/signals';
 import { MatButton } from '@angular/material/button';
 import {
@@ -10,12 +10,14 @@ import {
 } from '@angular/material/dialog';
 import { MatError, MatFormField, MatHint, MatLabel, MatSuffix } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { settingsDefaults } from '@simply-sub/core';
+import { readJoinLink, settingsDefaults, type JoinLink } from '@simply-sub/core';
 import { firstValueFrom } from 'rxjs';
+import { joinInbox } from '../../core/join-inbox';
 import { BROWSER_LANGUAGES } from '../../core/settings/browser-languages';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { ThemeService } from '../../core/theme/theme-service';
 import { focusFirstError } from '../../shared/focus-first-error';
+import type { JoinSyncData } from './join-sync-dialog';
 import { LocationFields } from './location-fields';
 import {
   budgetSchema,
@@ -34,7 +36,9 @@ interface FirstRunModel {
 /**
  * "Welcome to Simply Sub" (PROJECT-PLAN P1): shown while no settings are saved, and closed only by saving them. It
  * starts from the browser's languages (en-CA → Canada, in CAD), and saves the theme already on screen. "Import a
- * backup instead" comes with backups (M6.9).
+ * backup instead" (M6.9) and "Join with a sync code" (M10.15) end it too, with the backup's settings or the synced
+ * copy's; a join link opened on a new device (M10.14) opens Join at once. Settings saved some other way (another tab's
+ * first run) close it as well.
  */
 @Component({
   selector: 'ss-first-run-dialog',
@@ -80,6 +84,21 @@ export class FirstRunDialog {
 
   protected readonly currency = computed(() => this.model().location.currency);
 
+  constructor() {
+    effect(() => {
+      const fragment = joinInbox();
+      if (fragment === undefined) return;
+      untracked(() => {
+        joinInbox.set(undefined);
+        const link = readJoinLink(fragment);
+        if (link) void this.joinSync(link);
+      });
+    });
+    effect(() => {
+      if (this.settings.saved()) untracked(() => this.dialogRef.close());
+    });
+  }
+
   protected firstError(field: 'monthlyBudget' | 'annualBudget'): string | undefined {
     return this.form[field]().errors()[0]?.message;
   }
@@ -97,6 +116,22 @@ export class FirstRunDialog {
         .afterClosed(),
     );
     if (imported) this.dialogRef.close();
+  }
+
+  /** Join with a sync code (M10.15), or a join link: the synced copy's settings and data, which end the first run. */
+  protected async joinSync(link?: JoinLink): Promise<void> {
+    const { JoinSyncDialog } = await import('./join-sync-dialog');
+    const joined = await firstValueFrom(
+      this.dialog
+        .open(JoinSyncDialog, {
+          data: { firstRun: true, link } satisfies JoinSyncData,
+          autoFocus: 'first-tabbable',
+          maxWidth: 'min(720px, calc(100vw - 32px))',
+          width: '720px',
+        })
+        .afterClosed(),
+    );
+    if (joined) this.dialogRef.close();
   }
 
   private async save(): Promise<void> {

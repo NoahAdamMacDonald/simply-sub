@@ -12,7 +12,7 @@ import { env } from 'cloudflare:workers';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { z } from 'zod';
 import contract from '../../../docs/api-output-examples.json';
-import { utcDay } from '../src/http';
+import { utcDay, utcTimestamp } from '../src/http';
 import app from '../src/index';
 import { feedRow } from '../src/routes/cal';
 import { secretHash } from '../src/writes';
@@ -27,7 +27,7 @@ import { catalogAssets, catalogSnapshot, seedCatalog } from './seeded-catalog';
 //
 // The Worker runs on the real catalog in data/, built and seeded under the examples' catalog version, with the
 // static files data:build writes. Frankfurter and the icon services are stand-ins; a few examples need them in a
-// particular state (setups), the live calendar's the example's feed set and sync's its chain. The examples' prices and
+// particular state (setups), the live calendar's the example's feed set, sync's its chain and a join link its link. The examples' prices and
 // other values are illustrative, so a success body is held to its schema and its meta's keys, not to the example's
 // values; a calendar file, written from the feed set, is held to the example's text, and a sealed copy to its bytes.
 
@@ -76,6 +76,8 @@ interface Setup {
   feedSet?: true;
   /** GET /sync/:chain's example's chain is stored, at version 3. */
   syncChain?: true;
+  /** DELETE /join/:id's example's link is stored, with its sealed code, working for 10 more minutes. */
+  joinLink?: true;
 }
 
 /** The state an example needs, by its title. */
@@ -95,6 +97,7 @@ const setups: Record<string, Setup> = {
   'Another device wrote first': { syncChain: true },
   'Start a chain that already exists': { syncChain: true },
   'Delete the synced copy': { syncChain: true },
+  'Take the sealed code, once': { joinLink: true },
 };
 
 /** Stores the chain GET /sync/:chain's example reads, at version 3, with the example's sealed copy. */
@@ -112,6 +115,19 @@ async function storeExampleChain(): Promise<void> {
       copy,
       atob(copy).length,
       addDays(utcDay(new Date()), 180),
+    )
+    .run();
+}
+
+/** Stores the join link DELETE /join/:id's example takes, with its sealed code, for 10 more minutes. */
+async function storeExampleJoinLink(): Promise<void> {
+  const { request, response } = contract.endpoints['DELETE /join/:id']
+    .examples[0] as unknown as Example;
+  await env.USER_DB.prepare('INSERT INTO join_links (id_hash, sealed, expires_at) VALUES (?, ?, ?)')
+    .bind(
+      await secretHash(new URL(request.url).pathname.split('/').at(-1) ?? ''),
+      response.bodyBase64 ?? '',
+      utcTimestamp(new Date(Date.now() + 600_000)),
     )
     .run();
 }
@@ -209,6 +225,7 @@ beforeEach(async () => {
     env.USER_DB.prepare('DELETE FROM cal_feeds'),
     env.USER_DB.prepare('DELETE FROM cal_sets'),
     env.USER_DB.prepare('DELETE FROM sync_chains'),
+    env.USER_DB.prepare('DELETE FROM join_links'),
     env.USER_DB.prepare('DELETE FROM price_reports'),
   ]);
 });
@@ -260,6 +277,9 @@ describe('every example of a built endpoint, sent to the Worker', () => {
     }
     if (setup.syncChain) {
       await storeExampleChain();
+    }
+    if (setup.joinLink) {
+      await storeExampleJoinLink();
     }
 
     const answer = await app.fetch(

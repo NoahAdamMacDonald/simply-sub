@@ -11,7 +11,8 @@ import {
 
 // The nightly clean-up (BLUEPRINT §5.4, M10.1), from wrangler.jsonc's cron trigger at 02:30 UTC: what users sent that
 // has expired goes, with the daily counts (writes.ts) before yesterday. Each kind of user data brings its own statements
-// with its tables: the live calendar's feed sets (M10.2) and the sync chains (M10.8). The price reports counted before
+// with its tables: the live calendar's feed sets (M10.2), the sync chains (M10.8) and the join links that stopped
+// working before the day began (M10.14), which can't be used after their 10 minutes but stay until then. The price reports counted before
 // today go to the bot (M10.10), which runs at 03:00 and checks the reported plans' pages that night.
 
 /** The part of Workers KV the hand-over uses. */
@@ -43,6 +44,8 @@ export async function cleanUp(db: D1Database, kv: ReportsKv, today: IsoDate): Pr
       .bind(today),
     db.prepare('DELETE FROM cal_sets WHERE expires_on <= ?').bind(today),
     db.prepare('DELETE FROM sync_chains WHERE expires_on <= ?').bind(today),
+    // A link's time is a timestamp, which sorts after its day: these stopped working before today began.
+    db.prepare('DELETE FROM join_links WHERE expires_at < ?').bind(today),
   ]);
   await handOverReports(db, kv, today);
 }

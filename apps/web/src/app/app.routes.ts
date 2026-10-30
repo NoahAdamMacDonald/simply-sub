@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { joinInbox } from './core/join-inbox';
 import { leaveGuard } from './core/leave-guard';
 import { devRoutes } from './dev-routes';
 
@@ -85,6 +86,14 @@ export const routes: Routes = [
     path: 'settings',
     title: 'Settings · Simply Sub',
     loadComponent: () => import('./features/settings/settings-page').then((m) => m.SettingsPage),
+  },
+  {
+    // A sync join link (M10.14): what's after its # waits for Join, and Settings opens without it.
+    path: 'join',
+    redirectTo: ({ fragment }) => {
+      joinInbox.set(fragment ?? undefined);
+      return '/settings';
+    },
   },
   ...devRoutes,
   {
