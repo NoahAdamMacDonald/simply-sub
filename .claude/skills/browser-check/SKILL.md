@@ -86,7 +86,8 @@ page (M1.9), for a US user a provider not sold there (Crave, sold in Canada only
 ("No price for United Kingdom yet") and Sold in with its Settings default (M5.6), with axe in both themes at both
 widths with cards expanded and with no match. It answers `GET /fx` itself. M5.3 added the filter panel:
 its Tab order (after Sort, before the results), each filter by keyboard (Native by Space, 4K from the Features
-suggestions by arrow keys, the price's top thumb by arrow keys, Category, an Activity chip, Clear all), the URL and
+suggestions by arrow keys, the price's top thumb by arrow keys, Category typed to narrow, and again after a click
+(M5.14), an Activity chip, Clear all), the URL and
 `history.length` after each (typing replaces its entry, a run of price changes makes one, anything else adds one), a
 reload, Back and Forward, a URL with values the catalog doesn't have (rewritten in place), no scroll on a filter
 change, and at 360 px the drawer by keyboard (focus on its close button, the trap, the count it announces, Escape,
@@ -356,6 +357,20 @@ With axe on List view, the page, the tooltip and the snackbar, and no horizontal
   its `focused()` parses the role and name.
 - The dev server serves the worker as `/worker-<hash>.js?worker_file&type=module`: match its path.
 - The real catalog's Proton Free has a VPN, so a Proton VPN Plus moving to it keeps VPN: the cards depend on the data.
+
+`check-optimizer-reapply.cjs` (M8.7, the feedback after M10) applies Optimizations' cards one after another, saves, and
+applies again, on `ng serve` for a Canadian in Alberta (base URL ending in `/`). In both themes at both widths,
+keyboard only: two Netflix Standards added today and a better card (the report's steps), every free saving applied,
+Review changes, Open in the editor and Save; List view says one account becomes an extra member on the other, which
+renews; Optimizations again offers no extra member (the host never joins the account that ends); Upcoming still has
+the host's charge. Then the item dialog's Extra member unticked on the host: the snackbar says "the other Netflix
+Standard no longer ends", and neither account ends in the draft or, after Save, in the list. Then, in light at 1280 px,
+a 14-item list whose cards are clicked as soon as they can be (6, Save, then the rest at once, Save): no console
+error, and every extra member's host goes on (`memberProblems`). Axe on Optimizations, List view and the editor with
+its snackbar, and no horizontal scroll.
+- The real catalog's Netflix lists Extra member (with ads) before Extra member: Tab to `/^Extra member$/`.
+- Two of the same plan in a list: the item dialog's Save asks "Already in this list" first, a moment after.
+- Each status badge's text starts with the words only screen readers get ("Active", "Inactive").
 
 `check-budget-banners.cjs` (M7.6) checks the budget warnings on `ng serve` for a Canadian in Alberta with a $50 monthly
 and a $500 annual budget, written into the stored settings. Work Related has Netflix Standard and Crave Premium ($43.04

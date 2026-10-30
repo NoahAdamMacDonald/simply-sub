@@ -730,18 +730,19 @@ async function addItem(page, planId) {
       await stop(page),
     );
 
-    // Category by keyboard, then an Activity chip by Space.
+    // Category by keyboard, a menu you can type in (M5.14), then an Activity chip by Space. Tab's focus opens its list
+    // and selects the name, so what's typed takes its place.
+    const shownOptions = async () =>
+      (await page.getByRole('option').allTextContents()).map((text) => text.trim());
     await page.getByRole('button', { name: 'Clear the search' }).click();
     await until('no text', () => search(page) === '');
-    await panel.getByRole('combobox', { name: 'Category' }).focus();
-    await page.keyboard.press('Enter');
+    await panel.getByRole('slider', { name: 'Highest price per month' }).focus();
+    await page.keyboard.press('Tab');
     await page.getByRole('option', { name: 'VPN', exact: true }).waitFor();
-    const categoryOptions = (await page.getByRole('option').allTextContents()).map((text) =>
-      text.trim(),
-    );
-    await sleep(250);
-    await page.keyboard.type('VPN');
-    await sleep(300);
+    const categoryOptions = await shownOptions();
+    await page.keyboard.type('vp');
+    await until('the list narrowed to VPN', async () => (await shownOptions()).join() === 'VPN');
+    check('Typing "vp" in Category narrows its list to VPN', true);
     await page.keyboard.press('Enter');
     await until('cat=vpn', () => search(page) === '?cat=vpn');
     await until(
@@ -766,6 +767,16 @@ async function addItem(page, planId) {
     await until('act=none', () => search(page) === '?cat=vpn&act=none');
     check('Space on Not listed adds act=none', (await names(page)).join() === 'Proton,Mullvad VPN');
     await page.screenshot({ path: path.join(outDir, 'filters-1280.png'), fullPage: true });
+    // With a mouse, a click on Category selects its name, so what's typed takes its place too.
+    await panel.getByRole('combobox', { name: 'Category' }).click();
+    await page.keyboard.type('str');
+    await until(
+      'the list narrowed',
+      async () => (await shownOptions()).join() === 'Streaming video',
+    );
+    await page.keyboard.press('Enter');
+    await until('cat=streaming', () => search(page) === '?cat=streaming&act=none');
+    check('a click on Category, "str" and Enter pick Streaming video', true);
 
     // A URL with values the catalog doesn't have is rewritten in place.
     const previous = page.url();
@@ -838,8 +849,8 @@ async function addItem(page, planId) {
         () => !!document.activeElement?.closest('.mat-mdc-autocomplete-panel'),
       );
     }
-    // The Features box opens its suggestions on focus: leave it, and they close.
-    if (/^combobox "Features/.test(await stop(page))) {
+    // The Category and Features boxes open their lists on focus (M5.14): leave them, and they close.
+    for (let i = 0; i < 3 && /^combobox "(Category|Features)/.test(await stop(page)); i++) {
       await page.keyboard.press('Tab');
       await sleep(200);
     }

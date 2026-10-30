@@ -78,7 +78,8 @@ describe('Shell', () => {
         expect(heading()).toBe(pageHeading);
         expect(currentLinks()).toEqual([name]);
       }
-    });
+      // Each page's lazy chunk loads in turn: about 5 s in the full run.
+    }, 15_000);
 
     it('keeps Lists current on the pages inside a list', async () => {
       const { currentLinks } = await setup({ url: '/lists/abc/optimize' });

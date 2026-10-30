@@ -81,23 +81,26 @@ describe('suggestionEdits', () => {
     expect(changed.source).toEqual({ kind: 'catalog', planId: 'disney-plus.premium' });
   });
 
-  it('downgrades a plan on its next charge, keeping the add-ons the new plan allows', () => {
-    const netflix = item(
-      'netflix.premium',
-      {},
-      {
-        source: {
-          kind: 'catalog',
-          planId: 'netflix.premium',
-          addOns: [{ id: 'netflix.extra-member', quantity: 2 }],
+  it('downgrades a plan on its next charge, keeping its extra members, never to one with room for fewer', () => {
+    const premium = (quantity: number) =>
+      item(
+        'netflix.premium',
+        {},
+        {
+          source: {
+            kind: 'catalog',
+            planId: 'netflix.premium',
+            addOns: [{ id: 'netflix.extra-member', quantity }],
+          },
         },
-      },
-    );
-    const { edits } = editsFor([netflix], /→ Standard$/, {
+      );
+    const ranks: Record<string, ProfileRank> = {
       'video.quality=4k': 'unwanted',
       'video.hdr': 'unwanted',
       'streaming.ad-free': 'wanted',
-    });
+    };
+    const netflix = premium(1);
+    const { edits } = editsFor([netflix], /→ Standard$/, ranks);
     const [changed] = applied([netflix], edits);
     // Standard allows one extra member.
     expect(changed.source).toEqual({
@@ -106,6 +109,8 @@ describe('suggestionEdits', () => {
       addOns: [{ id: 'netflix.extra-member', quantity: 1 }],
     });
     expect(changed.billing).toMatchObject({ anchorDate: '2026-11-10', interval: 'month' });
+    // With two, Standard would leave one of them without Netflix, which no suggestion could say.
+    expect(() => editsFor([premium(2)], /→ Standard$/, ranks)).toThrow('No suggestion matches');
   });
 
   it('ends a removed item on its next charge, so what is paid for is used up', () => {

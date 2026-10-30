@@ -136,6 +136,14 @@ export class ChoiceField implements FormValueControl<string> {
     this.query.set(text);
   }
 
+  /**
+   * A click on the chosen name selects it, as Tab's focus does, so what's typed next takes its place rather than
+   * following it ("CanadaUn"). Once something is typed, a click places the caret.
+   */
+  protected clicked(box: HTMLInputElement): void {
+    if (!this.typing()) box.select();
+  }
+
   protected pick(event: MatAutocompleteSelectedEvent): void {
     const value = event.option.value as string;
     this.value.set(value);

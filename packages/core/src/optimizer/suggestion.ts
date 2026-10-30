@@ -73,8 +73,8 @@ export type SuggestionAction =
       item: SuggestedItem;
       planId: string;
       planName: string;
-      /** The item's add-ons the new plan allows, within its limit. */
-      addOns?: { id: string; quantity: number }[];
+      /** The item's add-ons the new plan allows, within its limit, each from the day it joined. */
+      addOns?: { id: string; quantity: number; since?: IsoDate }[];
       to: PickedPrice;
       on: IsoDate;
     }

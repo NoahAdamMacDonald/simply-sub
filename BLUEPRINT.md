@@ -2630,7 +2630,10 @@ Lives in `packages/core/src/optimizer/`. It's a **pure function**:
 2. Change interval (monthly → annual if cheaper over 12 months and the item renews automatically).
 3. Downgrade or switch plans within the same provider, including down to its free plan.
 4. Convert to an **add-on** of another item's plan (for example a second Netflix account becomes an extra member).
-   The member joins on the day its own account's paid period ends (the add-on's `since`, M8.5).
+   The member joins on the day its own account's paid period ends (the add-on's `since`, M8.5). The host goes on (it
+   has no end date), and an account that hosts an extra member keeps it, since the model has no item for that
+   person: it isn't removed, made an extra member or put in a bundle or suite, and moves only to a plan with room for
+   its extra members, each from the day it joins (M8.7).
 5. Replace with a **bundle** or a **suite plan** (section 4.4) that covers two or more items. It starts on the
    earliest next charge of the items it replaces, with that as its start date, so it's never charged before (M8.5).
 6. Remove.
@@ -2983,6 +2986,28 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-29, the feedback after M10)**
+The user's report after M10, as M8.7 (PROJECT-PLAN's row has it as built):
+- **Two accounts each an extra member of the other (M8.7):** once "Make Netflix Standard an extra member on Netflix
+  Standard" was applied, the next suggestions offered the host the same move onto the account that ends; applied too,
+  both ended, and the list had no Netflix after that month. The host could end because nothing asked whether it goes
+  on, and the loss went unsaid because an item that ends has no keys to check after it. An extra member's host now
+  goes on (no end date). The model has no item for the person on an extra member either, so an account that hosts one
+  keeps it: no card removes it, makes it an extra member, puts it in a bundle or suite, or moves it to a plan without
+  room for its extra members (Standard with ads has none), and a plan change keeps the day each joins
+  (`keptAddOns` kept only the id and quantity, so a downgrade unlinked them). A bundle or suite has the ranks of the
+  people it took over, so a change to it says what it gives up in its own losses.
+- **An extra member taken off (M8.7):** the account that was to become it kept its end date, ending with nothing to
+  take over. In the editor, an edit or a removal that takes away what an item ends for (the add-on, or the host,
+  bundle or suite) clears that end date in the same change (core's `releasedItems`), the snackbar says so ("Saved
+  Netflix Standard, and the other Netflix Standard no longer ends"), and Undo of a removal puts it back. Saving the
+  host unchanged keeps the link: the item form keeps each add-on's day.
+- **Checks:** core's `reapply.spec.ts` applies suggestions one after another as Optimizations does, in every order for
+  a few steps and the first every time to the end (two Netflix accounts, four with a Premium, Crave and Disney+,
+  Proton with two VPNs, and a list of nine), checking that nobody loses a service no card said it gives up and that
+  each list costs what the card applied said; `check-optimizer-reapply.cjs` runs the report's steps, the extra member
+  taken off, and a 14-item list applied, saved and applied again at once.
 
 **Resolved (2026-10-29, M10.10–M10.12, as built)**
 - **Price reports' rows** (M10.10, user migration `0004_price_reports`): `price_reports`, keyed by plan, country,
@@ -3409,6 +3434,11 @@ The user's sixteen fixes and improvements after M9, as M5.11–M5.12, M6.12–M6
   it too. A choice pressed with a mouse or a finger moves focus to the dialog (CDK draws the list inside it, as a
   popover), so that's left to Material, as the tag picker does (M6.6). The form sending focus to a field it's missing
   (`focusFirstError`) leaves its list closed, so the message under the field shows; typing opens it.
+  Since the feedback after M10 (M5.14), Search's Category is one too, as the categories will grow, and a click on any
+  of them selects the chosen name, as Tab's focus does, so what's typed takes its place: after a click, typing
+  followed the name ("CanadaUn") and matched nothing. The other menus stay selects: short lists that don't grow
+  (Sort, ranks, billing periods, Lock after, a card's network), where Material's select already moves to an option as
+  its first letters are typed.
 - **Budget bars and warnings (M7.7):** one colour per bar, on a scale from green to yellow exactly at the budget to red
   at 150%, the user's choice over a first try that drew a green-to-red gradient along the fill (section 8.1.1); a
   dismissed warning's key is whose payments, month

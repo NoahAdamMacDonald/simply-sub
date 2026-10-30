@@ -6,7 +6,6 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatCheckboxHarness } from '@angular/material/checkbox/testing';
 import { MatChipGridHarness } from '@angular/material/chips/testing';
 import { MATERIAL_ANIMATIONS } from '@angular/material/core';
-import { MatSelectHarness } from '@angular/material/select/testing';
 import { MatSliderHarness } from '@angular/material/slider/testing';
 import { searchFilterOptions, type CatalogQuery } from '@simply-sub/core';
 import { alberta, fx, searchCatalogData, today } from '../../shared/sub-card/search.testing';
@@ -105,29 +104,46 @@ describe('SearchFilters', () => {
   });
 
   describe('category', () => {
-    it('offers All and the categories of what’s sold here, and the one chosen', async () => {
-      await setup();
-      const select = await loader.getHarness(MatSelectHarness);
+    const optionTexts = async (menu: MatAutocompleteHarness) =>
+      Promise.all((await menu.getOptions()).map((option) => option.getText()));
 
-      expect(await select.getValueText()).toBe('All');
-      await select.open();
-      expect(
-        await Promise.all((await select.getOptions()).map((option) => option.getText())),
-      ).toEqual(['All', 'Streaming video', 'VPN']);
-      await select.clickOptions({ text: 'VPN' });
+    it('offers All and the categories of what’s sold here, and the one chosen, typed to narrow', async () => {
+      await setup();
+      const category = await loader.getHarness(
+        MatAutocompleteHarness.with({ ancestor: 'ss-choice-field[data-label="Category"]' }),
+      );
+
+      expect(await category.getValue()).toBe('All');
+      await category.focus();
+      expect(await optionTexts(category)).toEqual(['All', 'Streaming video', 'VPN']);
+      // A menu you can type in (M5.14), as Settings' Country is.
+      await category.clear();
+      await category.enterText('vp');
+      expect(await optionTexts(category)).toEqual(['VPN']);
+      await category.selectOption({ text: 'VPN' });
       expect(changes).toEqual([{ category: 'vpn' }]);
 
       await show({ category: 'vpn', nativeOnly: true });
-      await select.open();
-      await select.clickOptions({ text: 'All' });
+      expect(await category.getValue()).toBe('VPN');
+      await category.clear();
+      await category.selectOption({ text: 'All' });
       expect(changes[1]).toEqual({ category: undefined, nativeOnly: true });
+    });
+
+    it('selects the chosen name on a click, so what’s typed takes its place', async () => {
+      await setup({ category: 'vpn' });
+      const box = element().querySelector<HTMLInputElement>('ss-choice-field input');
+      box?.click();
+      expect([box?.selectionStart, box?.selectionEnd]).toEqual([0, 'VPN'.length]);
     });
   });
 
   describe('features', () => {
     it('suggests the keys a feature’s name names, then the rest of its category, and adds the one picked', async () => {
       await setup();
-      const box = await loader.getHarness(MatAutocompleteHarness);
+      const box = await loader.getHarness(
+        MatAutocompleteHarness.with({ ancestor: 'ss-feature-filter' }),
+      );
 
       await box.enterText('video');
       const groups = await box.getOptionGroups();
@@ -158,7 +174,9 @@ describe('SearchFilters', () => {
         'Video quality: 4K (Ultra HD)',
         'Ad free',
       ]);
-      const box = await loader.getHarness(MatAutocompleteHarness);
+      const box = await loader.getHarness(
+        MatAutocompleteHarness.with({ ancestor: 'ss-feature-filter' }),
+      );
       await box.enterText('video');
       expect(await Promise.all((await box.getOptions()).map((option) => option.getText()))).toEqual(
         ['Video quality: 1080p (Full HD)'],

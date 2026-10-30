@@ -1182,6 +1182,44 @@ describe('ListEditPage', () => {
       });
     });
 
+    it('lets the account that was to become an extra member go on once it’s taken off', async () => {
+      // Sam's becomes an extra member on this Netflix from Nov 12, as Optimizations' Apply leaves them (M8.5).
+      const items = TestBed.inject(ItemsRepository);
+      await items.update(netflix.id, {
+        source: {
+          kind: 'catalog',
+          planId: 'netflix.standard',
+          addOns: [{ id: 'netflix.extra-member', quantity: 1, since: '2026-11-12' }],
+        },
+      });
+      const ongoing = {
+        mode: 'recurring',
+        interval: 'month',
+        intervalCount: 1,
+        anchorDate: '2026-11-12',
+        autoRenew: true,
+      } as const;
+      const sams = await items.create({
+        ...fields('netflix.standard'),
+        listId: work.id,
+        nickname: "Sam's",
+        billing: { ...ongoing, endDate: '2026-11-12' },
+      });
+      await open(editor());
+      await click('Edit Netflix Standard');
+      const loader = await dialogLoader();
+      await (await loader.getHarness(MatCheckboxHarness.with({ label: 'Extra member' }))).uncheck();
+      await press(loader, 'Save');
+
+      await until(() => dialog() === null);
+      expect((await draftItem(sams.id))?.billing).toEqual(ongoing);
+      await until(
+        () =>
+          document.querySelector('.mat-mdc-snack-bar-container')?.textContent?.trim() ===
+          "Saved Netflix Standard, and Sam's (Netflix Standard) no longer ends",
+      );
+    });
+
     describe('[+ Add custom subscription] (flow F3)', () => {
       const planId = '0192f1c6-2d3e-7f40-9b5c-6d7e8f9a0b1d';
       const menuItems = () =>
