@@ -275,6 +275,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.13 | The first regions: a batch pull request each for the US's gaps, the United Kingdom, the euro countries, and Australia and New Zealand | A user there sees native prices for every provider whose pages could be read |
 | M10.14 | Scan to join, once (added 2026-10-30, the feedback after M10): Show the code's QR code is a join link that works once, for 10 minutes (`/join#<id>.<key>`: the code sealed with a key only the link carries, `POST /join` and `DELETE /join/:id`), which a phone's camera opens; Join scans one with the device's camera; Turn on and Start over show the words alone (P13; BLUEPRINT §5.2, §11.4, §14) | A link opened on a new device joins with no word typed, and again says it was used; one past its 10 minutes or withdrawn opens nothing; no request carries the key; Join's camera reads Show the code's QR code |
 | M10.15 | Join on the first visit (added 2026-10-30, the feedback after M10): the first-run dialog's Join with a sync code, and a join link opened on a new device, start its settings from the synced copy's, with the device's own theme (P1, P13) | A new device joins from its first run, with no Merge or Replace, its settings the copy's place and budgets with its own theme, and the first run is over |
+| M10.20 | The Calendar's controls and month cards (added 2026-10-30, the feedback after M10): Month and Year first, then Today, then ‹, the month, the year and › (that Tab order); Month, Year and Today never moving as the view changes, and the arrows at the row's end (the views' outlined padding a pixel less, for the border); on a phone Month and Year on Today's row, Today at its end, and the arrows on their own row; the year view's month card one target, its link over its days, with no text to select (P10; BLUEPRINT §14) | At 1280 px Month, Year and Today stay put from the month view to the year view; at 360 px Today shares their row; a click on any part of a month card opens its month, with the pointer cursor, and a double click selects nothing |
 
 #### M10 specs
 
@@ -1750,6 +1751,12 @@ Upcoming   Oct 28 Crave $22.00 · Nov 3 Mullvad ≈ $7.53 ↻ · Nov 12 Netflix 
 **Since M10 (M10.3):** Sync calendar ▾ starts with **Live calendar…**, the dialog that makes, shows, changes and
 revokes the live calendar's links (a calendar for everything, each tag chosen, the payments without a tag); the file
 items below it are named "Google Calendar file" and so on. The dialog's spec is M10.3's.
+
+**Since the feedback after M10 (M10.20):** the controls read Showing, Month | Year, [Today], ‹ [Month] [Year] ›, and
+Tab follows them. Month, Year and Today lead and the arrows end the row, so nothing but the arrows' group moves when
+the year view takes the Month select away; on a phone Month and Year share Today's row, Today at its end, and the
+arrows have a row of their own. In the year view a month card is one target: its link covers its days, total and
+strip, with the pointer cursor, and a double click selects none of its text.
 
 **Acceptance**
 - [ ] Charges appear on the right days, including month-end dates and limited windows
