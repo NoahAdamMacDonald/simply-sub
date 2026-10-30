@@ -9,6 +9,7 @@
     [matAutocomplete]="list"
     [errorStateMatcher]="errorState"
     (input)="type(box.value)"
+    (click)="clicked(box)"
     (keydown)="keydown($event)"
     (blur)="leave($event)"
   />

@@ -86,7 +86,8 @@ page (M1.9), for a US user a provider not sold there (Crave, sold in Canada only
 ("No price for United Kingdom yet") and Sold in with its Settings default (M5.6), with axe in both themes at both
 widths with cards expanded and with no match. It answers `GET /fx` itself. M5.3 added the filter panel:
 its Tab order (after Sort, before the results), each filter by keyboard (Native by Space, 4K from the Features
-suggestions by arrow keys, the price's top thumb by arrow keys, Category, an Activity chip, Clear all), the URL and
+suggestions by arrow keys, the price's top thumb by arrow keys, Category typed to narrow, and again after a click
+(M5.14), an Activity chip, Clear all), the URL and
 `history.length` after each (typing replaces its entry, a run of price changes makes one, anything else adds one), a
 reload, Back and Forward, a URL with values the catalog doesn't have (rewritten in place), no scroll on a filter
 change, and at 360 px the drawer by keyboard (focus on its close button, the trap, the count it announces, Escape,

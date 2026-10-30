@@ -1,9 +1,6 @@
 import { Component, computed, input, output } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { MatOption } from '@angular/material/core';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatSelect } from '@angular/material/select';
 import {
   filterCount,
   type ActivityFilter,
@@ -11,6 +8,7 @@ import {
   type CatalogQuery,
   type SearchFilterOptions,
 } from '@simply-sub/core';
+import { ChoiceField, type Choice } from '../../shared/choice-field/choice-field';
 import { countryName } from '../../shared/country-name';
 import { ChipChoices, type ChipChoice } from '../../shared/filters/chip-choices';
 import { FeatureFilter } from '../../shared/filters/feature-filter';
@@ -25,27 +23,16 @@ const activityChoices: readonly (ChipChoice & { value: ActivityFilter })[] = [
 ];
 
 /**
- * Search's filter panel (PROJECT-PLAN P8, M5.3): the price per month, Category, Features (rank keys, each a chip;
- * a plan needs them all), Activity, Native pricing only, Sold in (M5.6) and Clear all, which goes back to the
- * user's defaults. The price, Features and Activity are the shared filters List view's Sort menu has too
- * (shared/filters, the feedback after M6.9). It shows the query it's given and emits the
- * next one, which the page puts in the URL: a price once the slider is let go (priceChange, so a run of them makes
- * one history entry), anything else at once (queryChange). Search's page shows it beside the results, or in a drawer
- * under 960 px.
+ * Search's filter panel (PROJECT-PLAN P8, M5.3): the price per month, Category (a menu you can type in, M5.14),
+ * Features (rank keys, each a chip; a plan needs them all), Activity, Native pricing only, Sold in (M5.6) and Clear
+ * all, which goes back to the user's defaults. The price, Features and Activity are the shared filters List view's
+ * Sort menu has too (shared/filters, the feedback after M6.9). It shows the query it's given and emits the next one,
+ * which the page puts in the URL: a price once the slider is let go (priceChange, so a run of them makes one history
+ * entry), anything else at once (queryChange). Search's page shows it beside the results, or in a drawer under 960 px.
  */
 @Component({
   selector: 'ss-search-filters',
-  imports: [
-    ChipChoices,
-    FeatureFilter,
-    MatButton,
-    MatCheckbox,
-    MatFormField,
-    MatLabel,
-    MatOption,
-    MatSelect,
-    PriceRangeFilter,
-  ],
+  imports: [ChipChoices, ChoiceField, FeatureFilter, MatButton, MatCheckbox, PriceRangeFilter],
   templateUrl: './search-filters.html',
   styleUrl: './search-filters.scss',
 })
@@ -78,6 +65,11 @@ export class SearchFilters {
       (category) => categories.has(category.id) || category.id === chosen,
     );
   });
+  /** Category's menu: All, then those categories. */
+  protected readonly categoryChoices = computed<Choice[]>(() => [
+    { value: '', label: 'All' },
+    ...this.categories().map(({ id, name }) => ({ value: id, label: name })),
+  ]);
 
   protected readonly active = computed(
     () => filterCount(this.query(), { soldOnly: this.soldByDefault() }) > 0,
