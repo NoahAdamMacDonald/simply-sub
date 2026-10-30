@@ -1,0 +1,45 @@
+<ul class="months" [attr.aria-label]="label()">
+  @for (card of months(); track card.month) {
+    <!-- The link is the month's name, stretched over the card. Its name says all the card shows, so the rest of the
+         card is for the eye; the visible name starts it (WCAG 2.5.3). -->
+    <li class="month" [class.current]="card.current">
+      <a
+        class="name"
+        [routerLink]="[]"
+        [queryParams]="card.queryParams"
+        [attr.aria-label]="card.label"
+        [attr.aria-current]="card.current ? 'date' : null"
+        (click)="opened.emit(card.month)"
+        >{{ card.name }}</a
+      >
+      <span class="total" aria-hidden="true">{{ card.totalText }}</span>
+      <span class="count" aria-hidden="true">
+        {{ card.countText }}
+        @if (card.overLimit) {
+          <mat-icon class="warning">warning</mat-icon>
+        }
+      </span>
+      <span class="track" aria-hidden="true">
+        <span
+          class="strip"
+          [class.scaled]="card.strip.towardYellow !== undefined"
+          [style.--share]="card.strip.share"
+          [style.--toward-yellow]="(card.strip.towardYellow ?? 0) * 100 + '%'"
+          [style.--toward-red]="(card.strip.towardRed ?? 0) * 100 + '%'"
+        ></span>
+      </span>
+      <span class="days" aria-hidden="true">
+        @for (weekday of weekdays; track $index) {
+          <span class="weekday">{{ weekday }}</span>
+        }
+        @for (week of card.weeks; track $index) {
+          @for (day of week; track $index) {
+            <span class="day" [class.paid]="day?.paid" [class.today]="day?.today">{{
+              day?.day
+            }}</span>
+          }
+        }
+      </span>
+    </li>
+  }
+</ul>

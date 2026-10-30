@@ -30,6 +30,7 @@ import {
 import { BackupService } from '../../core/backup/backup-service';
 import { catalogDate } from '../../core/catalog/catalog-dates';
 import type { ImportCounts } from '../../core/storage/backup-repository';
+import { SyncRepository } from '../../core/storage/sync-repository';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
 import { countLines } from './backup-text';
 
@@ -75,6 +76,7 @@ export interface ImportBackupResult {
 })
 export class ImportBackupDialog {
   private readonly backups = inject(BackupService);
+  private readonly syncRepository = inject(SyncRepository);
   private readonly confirmer = inject(ConfirmService);
   private readonly injector = inject(Injector);
   private readonly dialogRef =
@@ -91,6 +93,8 @@ export class ImportBackupDialog {
   /** Why the file picked can't be used. */
   protected readonly refusal = signal<string | undefined>(undefined);
   protected readonly busy = signal(false);
+  /** Sync is on here (M10.9): Replace waits until it's off, as sync would bring back what Replace takes away. */
+  protected readonly syncOn = signal(false);
   private encrypted?: EncryptedBackup;
   private readonly backup = signal<BackupPayload | undefined>(undefined);
 
@@ -110,6 +114,15 @@ export class ImportBackupDialog {
     const backup = this.backup();
     return backup ? countLines(backupCounts(backup.data)) : [];
   });
+
+  constructor() {
+    if (!this.firstRun && !this.locked) {
+      this.syncRepository
+        .readOnce()
+        .then((record) => this.syncOn.set(record !== undefined))
+        .catch(() => undefined);
+    }
+  }
 
   protected firstError(field: FieldTree<unknown>): string | undefined {
     return field().errors()[0]?.message;
@@ -146,7 +159,8 @@ export class ImportBackupDialog {
    */
   protected async replace(): Promise<void> {
     const backup = this.backup();
-    if (!backup) return;
+    // Its button only says it's disabled with sync on (disabledInteractive), so it can still be clicked.
+    if (!backup || this.syncOn()) return;
     if (
       !this.firstRun &&
       !(await this.confirmer.confirm({

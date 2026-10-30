@@ -111,4 +111,10 @@ export default defineConfig(
       ],
     },
   },
+  {
+    // index.html's theme-color metas (M10.6) are read before any CSS, so they hold the top bar's colours as hex;
+    // apps/api/test/web-manifest.spec.ts keeps them equal to _tokens.scss's.
+    files: ['apps/web/src/index.html'],
+    rules: { 'no-restricted-syntax': 'off' },
+  },
 );

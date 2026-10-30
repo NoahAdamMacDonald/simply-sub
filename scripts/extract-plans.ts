@@ -8,6 +8,10 @@
 //   npm run data:extract -- claude                      checks answer.json and writes data/providers/claude.yaml
 //   npm run data:extract -- claude --model workers-ai   asks Workers AI (CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN
 //                                                       in .env: a token with Workers AI read), then as above
+//   npm run data:extract -- netflix --region GB [--prepare | --model workers-ai]
+//                                                       a region's prices for a provider the catalog has (M10.12), from
+//                                                       the pages read for it (.pipeline/<id>/regions/GB/): only those
+//                                                       prices are added to its file, each quoted on its page
 import {
   draftFromAnswer,
   draftYaml,
@@ -22,7 +26,12 @@ import {
   resellersFileSchema,
   queueFileSchema,
   readModelAnswer,
+  regionalAnswerSchema,
+  regionalPriceText,
+  regionalPrices,
+  regionalPrompt,
   baselineLines,
+  providerSchema,
   moneyIn,
   servedCovers,
   toIsoDate,
@@ -31,16 +40,19 @@ import {
   type ExtractionContext,
   type ExtractionPage,
   type PageKind,
+  type RegionalAnswer,
+  type RegionalContext,
   type Reseller,
 } from '@simply-sub/core';
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { format, resolveConfig } from 'prettier';
-import { isSeq, parse, parseDocument, type Document } from 'yaml';
+import { isMap, isSeq, parse, parseDocument, type Document } from 'yaml';
 import { checkCatalog, loadCatalogFiles, plural } from './lib/catalog-files';
 import {
   absolute,
   readJson,
   workFile,
+  workId,
   writeJson,
   type FoundUrls,
   type PageRecord,
@@ -48,10 +60,17 @@ import {
 import { loadDotEnv } from './lib/search';
 
 const args = process.argv.slice(2);
-const [id] = args.filter((arg, index) => !arg.startsWith('--') && args[index - 1] !== '--model');
+const [id] = args.filter(
+  (arg, index) => !arg.startsWith('--') && !['--model', '--region'].includes(args[index - 1] ?? ''),
+);
 if (!id) fail('Name the provider: npm run data:extract -- <id> [--prepare | --model workers-ai]');
 const model = args.includes('--model') ? args[args.indexOf('--model') + 1] : undefined;
 if (model !== undefined && model !== 'workers-ai') fail('--model takes workers-ai');
+const region = args.includes('--region') ? args[args.indexOf('--region') + 1] : undefined;
+if (region !== undefined) {
+  await regional(id, region);
+  process.exit();
+}
 
 const context = await contextFor(id);
 if (args.includes('--prepare')) {
@@ -117,8 +136,40 @@ async function contextFor(provider: string): Promise<ExtractionContext> {
   const found = await readJson<FoundUrls>(workFile(provider, 'urls.json'));
   const entry = queue.find((candidate) => candidate.id === provider);
   if (!entry) fail(`"${provider}" isn't in data/queue.yaml: add it there first.`);
+  const { pages } = await pagesIn(provider);
+  if (pages.length === 0)
+    fail(`No pages saved for ${provider}: run npm run data:urls and data:render first.`);
+  const { sources } = await loadCatalogFiles();
+  const data = (file: string) => {
+    const source = sources.find((candidate) => candidate.file === file);
+    return source && 'data' in source ? source.data : undefined;
+  };
+  return {
+    provider: {
+      id: provider,
+      name: entry.name,
+      website: entry.website,
+      ...(found?.domains && { domains: found.domains }),
+      category: entry.category,
+    },
+    pages,
+    features: featuresFileSchema.parse(data('data/features.yaml')),
+    topics: policyTopicsFileSchema.parse(data('data/policy-topics.yaml') ?? []),
+    resellers: resellersFileSchema.parse(data('data/resellers.yaml') ?? []),
+    today: toIsoDate(new Date()),
+  };
+}
+
+/**
+ * The pages saved in a working folder, as the extraction reads them; and those read for a region that turned out to be
+ * another's (render-pages' unread), left out with why.
+ */
+async function pagesIn(
+  work: string,
+): Promise<{ pages: ExtractionPage[]; unread: { name: string; reason: string }[] }> {
   const pages: ExtractionPage[] = [];
-  const folder = absolute(workFile(provider, 'pages'));
+  const unread: { name: string; reason: string }[] = [];
+  const folder = absolute(workFile(work, 'pages'));
   const names = (await readdir(folder).catch(() => [] as string[]))
     .filter((name) => name.endsWith('.json'))
     .sort();
@@ -127,6 +178,10 @@ async function contextFor(provider: string): Promise<ExtractionContext> {
       PageRecord | { error: string };
     if ('error' in record) continue;
     if (!(pageKinds as readonly string[]).includes(record.kind)) continue;
+    if (record.unread) {
+      unread.push({ name: name.slice(0, -'.json'.length), reason: record.unread });
+      continue;
+    }
     pages.push({
       name: name.slice(0, -'.json'.length),
       kind: record.kind as PageKind,
@@ -154,27 +209,161 @@ async function contextFor(provider: string): Promise<ExtractionContext> {
       });
     }
   }
-  if (pages.length === 0)
-    fail(`No pages saved for ${provider}: run npm run data:urls and data:render first.`);
-  const { sources } = await loadCatalogFiles();
-  const data = (file: string) => {
-    const source = sources.find((candidate) => candidate.file === file);
-    return source && 'data' in source ? source.data : undefined;
-  };
-  return {
+  return { pages, unread };
+}
+
+/**
+ * A region's prices for a provider the catalog has (M10.12). With --prepare, the request for the pages read for the
+ * region (regions/<region>/extraction.md); else its answer (answer.json there, or Workers AI's) is checked by core's
+ * regionalPrices, and the prices kept go into data/providers/<id>.yaml beside the others, each replacing the plan's
+ * price for that region and period. What was kept and dropped is in regions/<region>/report.json, for the batch.
+ */
+async function regional(provider: string, where: string): Promise<void> {
+  const work = workId(provider, where);
+  const file = `data/providers/${provider}.yaml`;
+  const text = await readFile(absolute(file), 'utf8').catch(() =>
+    fail(`No ${file}: a region's prices go into a provider the catalog has.`),
+  );
+  const own = providerSchema.parse(parse(text));
+  const { pages, unread } = await pagesIn(work);
+  for (const page of unread) console.log(`Unread: ${page.name}: ${page.reason}`);
+  const regional: RegionalContext = {
     provider: {
       id: provider,
-      name: entry.name,
-      website: entry.website,
-      ...(found?.domains && { domains: found.domains }),
-      category: entry.category,
+      name: own.name,
+      plans: own.plans.map((plan) => ({ id: plan.id, name: plan.name, prices: plan.prices })),
     },
-    pages,
-    features: featuresFileSchema.parse(data('data/features.yaml')),
-    topics: policyTopicsFileSchema.parse(data('data/policy-topics.yaml') ?? []),
-    resellers: resellersFileSchema.parse(data('data/resellers.yaml') ?? []),
-    today: toIsoDate(new Date()),
+    region: where,
+    pages: pages.filter((page) => page.kind === 'pricing'),
   };
+  if (regional.pages.length === 0) {
+    await writeJson(workFile(work, 'report.json'), {
+      region: where,
+      unread,
+      prices: [],
+      issues: [],
+    });
+    fail(
+      `No pricing page for ${provider} in ${where} to read: run npm run data:urls and data:render with --region ${where} first.`,
+    );
+  }
+  if (args.includes('--prepare')) {
+    const request = workFile(work, 'extraction.md');
+    await writeFile(absolute(request), regionalPrompt(regional));
+    console.log(
+      `Wrote ${request}: ${plural(regional.pages.length, 'page')}. Answer it in ${workFile(work, 'answer.json')}, then run npm run data:extract -- ${provider} --region ${where}.`,
+    );
+    return;
+  }
+  const answer =
+    model === 'workers-ai'
+      ? await askWorkersAiRegional(regional)
+      : await readRegionalAnswer(workFile(work, 'answer.json'), workFile(work, 'extraction.md'));
+  await writeJson(workFile(work, 'answer.json'), answer);
+  const { prices, issues } = regionalPrices(answer, regional, toIsoDate(new Date()));
+  await writeJson(workFile(work, 'report.json'), { region: where, unread, prices, issues });
+  for (const issue of issues) {
+    console.log(
+      `${issue.kind === 'dropped' ? 'Dropped' : 'Check'}: ${issue.subject}: ${issue.reason}${issue.quote ? ` ("${issue.quote.slice(0, 80)}")` : ''}`,
+    );
+  }
+  if (prices.length === 0) {
+    console.log(`No prices for ${where} held up: ${file} is unchanged.`);
+    process.exitCode = 1;
+    return;
+  }
+  const doc = parseDocument(text);
+  for (const { plan, price } of prices) {
+    const index = own.plans.findIndex((candidate) => candidate.id === plan);
+    const list = doc.getIn(['plans', index, 'prices']);
+    if (!isSeq(list)) continue;
+    // The plan's price for this region and period is replaced; its others stay as they are.
+    list.items = list.items.filter(
+      (item) =>
+        !(
+          isMap(item) &&
+          item.get('region') === price.region &&
+          item.get('interval') === price.interval &&
+          item.get('intervalCount') === price.intervalCount
+        ),
+    );
+    list.add(doc.createNode(price));
+  }
+  // A provider that names each region's billing currency names the new one's too.
+  const billing = doc.get('billingCurrency');
+  if (isMap(billing) && !billing.has(where)) billing.set(where, prices[0].price.currency);
+  await writeFile(
+    absolute(file),
+    await format(doc.toString({ lineWidth: 0 }), {
+      ...(await resolveConfig(absolute(file))),
+      filepath: absolute(file),
+    }),
+  );
+  const { issues: catalog } = await checkCatalog();
+  const mine = catalog.filter(({ issue }) => issue.file === file);
+  for (const { issue, line } of mine)
+    console.log(
+      `${issue.severity === 'error' ? 'Error' : 'Warning'}: ${formatCatalogIssue(issue, line)}`,
+    );
+  for (const { plan, price } of prices) console.log(`Added: ${plan}: ${regionalPriceText(price)}`);
+  const dropped = issues.filter((issue) => issue.kind === 'dropped').length;
+  console.log(
+    `Wrote ${file}: ${plural(prices.length, 'price')} for ${where}, ${dropped} dropped, ${plural(mine.filter(({ issue }) => issue.severity === 'error').length, 'validation error')}.`,
+  );
+  if (mine.some(({ issue }) => issue.severity === 'error')) process.exitCode = 1;
+}
+
+async function readRegionalAnswer(file: string, request: string): Promise<RegionalAnswer> {
+  const json = await readJson<unknown>(file);
+  if (json === undefined) fail(`No ${file}: answer ${request} there first (--prepare writes it).`);
+  const parsed = regionalAnswerSchema.safeParse(json);
+  if (!parsed.success) {
+    fail(
+      `${file} doesn't match the answer schema:\n${parsed.error.issues.map((issue) => `  ${issue.path.join('.')}: ${issue.message}`).join('\n')}`,
+    );
+  }
+  return parsed.data;
+}
+
+/** Workers AI's answer to a region's request (its REST API, from this machine). */
+async function askWorkersAiRegional(regional: RegionalContext): Promise<RegionalAnswer> {
+  loadDotEnv();
+  const account = process.env['CLOUDFLARE_ACCOUNT_ID'];
+  const token = process.env['CLOUDFLARE_API_TOKEN'];
+  if (!account || !token)
+    fail('Workers AI needs CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN in .env.');
+  const response = await fetch(
+    `https://api.cloudflare.com/client/v4/accounts/${account}/ai/run/${workersAiModel}`,
+    {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        messages: [
+          {
+            role: 'system',
+            content: 'Answer with the JSON the request asks for, and nothing else.',
+          },
+          { role: 'user', content: regionalPrompt(regional) },
+        ],
+        max_tokens: 4096,
+      }),
+      signal: AbortSignal.timeout(120_000),
+    },
+  );
+  if (!response.ok) fail(`Workers AI answered ${response.status}.`);
+  const body = (await response.json()) as { result?: { response?: unknown } };
+  const said = body.result?.response;
+  let json: unknown = said;
+  if (typeof said === 'string') {
+    try {
+      json = JSON.parse(said.slice(said.indexOf('{'), said.lastIndexOf('}') + 1));
+    } catch {
+      json = undefined;
+    }
+  }
+  const parsed = regionalAnswerSchema.safeParse(json);
+  if (!parsed.success) fail("Workers AI's answer didn't match the schema.");
+  return parsed.data;
 }
 
 /** New shops at the end of data/resellers.yaml, keeping what's written above them. */

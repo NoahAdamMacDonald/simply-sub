@@ -6,11 +6,13 @@ import { dismissedSuggestionSchema, suggestionFingerprintSchema } from './dismis
 import { fxCacheSchema } from './fx-cache';
 import { listDraftSchema } from './list-draft';
 import { listItemSchema } from './list-item';
+import { liveCalendarSchema } from './live-calendar';
 import { paymentCardSchema } from './payment-card';
 import { profileRankingSchema } from './profile-ranking';
 import { recordIdSchema } from './record';
 import { settingsSchema } from './settings';
 import { subscriptionListSchema } from './subscription-list';
+import { syncRecordSchema } from './sync-record';
 import { tagSchema } from './tag';
 
 /**
@@ -30,6 +32,8 @@ export const userRecordSchemas = {
   drafts: listDraftSchema,
   dismissedSuggestions: dismissedSuggestionSchema,
   fxRates: fxCacheSchema,
+  liveCalendar: liveCalendarSchema,
+  sync: syncRecordSchema,
 };
 export type UserTable = keyof typeof userRecordSchemas;
 export type UserRecords = { [T in UserTable]: z.infer<(typeof userRecordSchemas)[T]> };
@@ -54,6 +58,8 @@ export const userRecordKeys = {
   drafts: 'listId',
   dismissedSuggestions: 'fingerprint',
   fxRates: 'key',
+  liveCalendar: 'key',
+  sync: 'key',
 } as const satisfies Record<UserTable, string>;
 
 /** What each table's well-formed keys look like. */
@@ -69,6 +75,8 @@ const keySchemas: Record<UserTable, z.ZodType<string>> = {
   drafts: recordIdSchema,
   dismissedSuggestions: suggestionFingerprintSchema,
   fxRates: fxCacheSchema.shape.key,
+  liveCalendar: liveCalendarSchema.shape.key,
+  sync: syncRecordSchema.shape.key,
 };
 
 /** A stored record that failed its schema, described without any of its values. */
@@ -127,7 +135,7 @@ export function unopenedRecord(table: UserTable, row: unknown): RejectedRecord {
  * Describes a record by its key and its issues' paths and codes. Never the messages: Zod's can quote the data
  * ('Unrecognized key: "…"'), and so can a duplicate check's.
  */
-function describeRejected(
+export function describeRejected(
   table: UserTable,
   row: unknown,
   issues: readonly z.core.$ZodIssue[],

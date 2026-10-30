@@ -1,0 +1,44 @@
+:host {
+  display: block;
+}
+
+.status,
+.hint {
+  margin: 0 0 12px;
+}
+
+.hint {
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}
+
+h4 {
+  margin: 16px 0 4px;
+  font: var(--mat-sys-title-small);
+}
+
+.devices {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 12px;
+    min-height: 40px;
+  }
+}
+
+.day {
+  color: var(--ss-text-muted);
+}
+
+// The chain's actions, wrapping on a phone.
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}

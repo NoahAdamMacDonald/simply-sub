@@ -11,29 +11,39 @@
 //            --base <branch>       the branch the pull request goes into (main by default)
 //            --leave-out-broken    leave out a draft data:validate rejects, instead of stopping
 //            --dry-run             everything but the branch, the commit and the pull request
+//
+//   npm run data:batch -- --region GB [<id> …]      a region's batch (M10.12): the catalog's providers (or these),
+//                                                    each one's pricing page for the region found and read as a visitor
+//                                                    there, its prices extracted and added beside the others, and one
+//                                                    pull request for the region: the prices to review, each linked to
+//                                                    its quote, and the providers left out with why
 import {
   batchIdsIn,
   batchReview,
   nextQueued,
   queueFileSchema,
   readIconImage,
+  regionalReview,
   toIsoDate,
   type BatchProvider,
   type Evidence,
   type ExtractionIssue,
   type ProposedFeature,
   type QueueEntry,
+  type RegionalBatchProvider,
+  type RegionalPrice,
 } from '@simply-sub/core';
 import { spawnSync } from 'node:child_process';
-import { access, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
+import { access, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { format, resolveConfig } from 'prettier';
 import { isSeq, parseDocument } from 'yaml';
-import { checkCatalog, formatIssue, plural } from './lib/catalog-files';
+import { checkCatalog, formatIssue, loadCatalogFiles, plural } from './lib/catalog-files';
 import {
   absolute,
   readJson,
   workFile,
+  workId,
   type FoundUrls,
   type PageRecord,
 } from './lib/pipeline-files';
@@ -44,6 +54,11 @@ const model = option('--model');
 const base = option('--base') ?? 'main';
 const dryRun = args.includes('--dry-run');
 const today = toIsoDate(new Date());
+const region = option('--region');
+if (region !== undefined) {
+  await regionalBatch(region);
+  process.exit();
+}
 
 const queue = queueFileSchema.parse(
   parseDocument(await readFile(absolute('data/queue.yaml'), 'utf8')).toJS() ?? [],
@@ -179,7 +194,7 @@ const body = batchReview(results, {
 await writeFile(absolute('.pipeline/batch-pr.md'), body);
 const kept = results.filter((result) => result.status === 'drafted');
 console.log(
-  `\n${plural(kept.length, 'provider')} drafted, ${plural(results.length - kept.length, 'left out')}. The pull request's text is in .pipeline/batch-pr.md.`,
+  `\n${plural(kept.length, 'provider')} drafted, ${results.length - kept.length} left out. The pull request's text is in .pipeline/batch-pr.md.`,
 );
 if (dryRun) process.exit(0);
 
@@ -220,6 +235,147 @@ const pr = spawnSync(
   { stdio: 'inherit' },
 );
 process.exitCode = pr.status ?? 1;
+
+/**
+ * A region's batch (M10.12): for each provider the catalog has (or each named), its pricing page for the region found
+ * and read in the browser as a visitor there, its prices extracted (Workers AI, or a session's model answering the
+ * requests written) and added beside the others, and the catalog checked. Then one pull request for the region: the
+ * prices to review, each linked to its quote, and the providers left out with why. It never merges.
+ */
+async function regionalBatch(where: string): Promise<void> {
+  const named = args.filter(
+    (arg, index) =>
+      !arg.startsWith('--') && !['--model', '--base', '--region'].includes(args[index - 1] ?? ''),
+  );
+  const { sources } = await loadCatalogFiles();
+  const catalog = sources.flatMap((source) => {
+    const data =
+      'data' in source
+        ? (source.data as {
+            id?: string;
+            name?: string;
+            plans?: { id: string; name: string }[];
+          } | null)
+        : null;
+    return source.file.startsWith('data/providers/') && data?.id && data.name
+      ? [{ id: data.id, name: data.name, plans: data.plans ?? [] }]
+      : [];
+  });
+  const batch =
+    named.length > 0
+      ? named.map(
+          (id) =>
+            catalog.find((provider) => provider.id === id) ??
+            fail(`"${id}" isn't in data/providers/.`),
+        )
+      : catalog;
+  // Each one's page found and read once: a step that has run keeps its files in .pipeline/<id>/regions/<region>/.
+  for (const { id } of batch) {
+    const work = workId(id, where);
+    if (!(await exists(workFile(work, 'urls.json'))))
+      run('find-urls.ts', [id, '--region', where, '--browser'], true);
+    if (!(await exists(workFile(work, 'pages'))))
+      run('render-pages.ts', [id, '--region', where], true);
+  }
+  const unanswered: string[] = [];
+  for (const { id } of batch) {
+    const work = workId(id, where);
+    if (await exists(workFile(work, 'report.json'))) continue;
+    if (model === 'workers-ai') {
+      run('extract-plans.ts', [id, '--region', where, '--model', 'workers-ai'], true);
+    } else if (await exists(workFile(work, 'answer.json'))) {
+      run('extract-plans.ts', [id, '--region', where], true);
+    } else {
+      run('extract-plans.ts', [id, '--region', where, '--prepare'], true);
+      if (await exists(workFile(work, 'extraction.md'))) unanswered.push(id);
+    }
+  }
+  if (unanswered.length > 0) {
+    console.log(
+      `\nAnswer each request in answer.json beside it, then run this again:\n${unanswered.map((id) => `  ${workFile(workId(id, where), 'extraction.md')}`).join('\n')}`,
+    );
+    return;
+  }
+
+  const { issues } = await checkCatalog();
+  const results: RegionalBatchProvider[] = [];
+  for (const provider of batch) {
+    const work = workId(provider.id, where);
+    const found = await readJson<FoundUrls>(workFile(work, 'urls.json'));
+    const report = await readJson<{
+      unread?: { name: string; reason: string }[];
+      prices?: RegionalPrice[];
+      issues?: ExtractionIssue[];
+    }>(workFile(work, 'report.json'));
+    const file = `data/providers/${provider.id}.yaml`;
+    const broken = issues.filter(({ issue }) => issue.severity === 'error' && issue.file === file);
+    const names = new Map(provider.plans.map((plan) => [plan.id, plan.name]));
+    const added = broken.length > 0 ? [] : (report?.prices ?? []);
+    const notes = [
+      ...(found?.pages.pricing ? [] : [`No pricing page for ${where} was found.`]),
+      ...(report?.unread ?? []).map((page) => `Its ${page.name} page is unread: ${page.reason}`),
+      ...(report?.issues ?? [])
+        .filter((issue) => issue.kind === 'dropped')
+        .map((issue) => `Dropped ${issue.subject}: ${issue.reason}`),
+      ...broken.map((located) => `data:validate refused it: ${formatIssue(located)}`),
+      ...(found?.pages.pricing && report && added.length === 0 && (report.unread ?? []).length === 0
+        ? ['Its page priced none of its plans for the region.']
+        : []),
+    ];
+    // A file data:validate refuses goes back as it was, and its answer is applied again next run; the pull request
+    // says why.
+    if (broken.length > 0) {
+      git(['checkout', '--', file]);
+      await rm(absolute(workFile(work, 'report.json')), { force: true });
+    }
+    results.push({
+      id: provider.id,
+      name: provider.name,
+      added: added.map((entry) => ({ ...entry, planName: names.get(entry.plan) ?? entry.plan })),
+      notes,
+    });
+  }
+  const body = regionalReview(where, results);
+  const bodyFile = `.pipeline/region-${where}-pr.md`;
+  await writeFile(absolute(bodyFile), body);
+  const kept = results.filter((result) => result.added.length > 0);
+  console.log(
+    `\n${plural(
+      kept.reduce((sum, result) => sum + result.added.length, 0),
+      'price',
+    )} for ${plural(kept.length, 'provider')}, ${results.length - kept.length} left out. The pull request's text is in ${bodyFile}.`,
+  );
+  if (dryRun) return;
+  if (kept.length === 0) fail(`No prices for ${where} to propose.`);
+  const branch = `catalog/region-${where.toLowerCase()}-${today}`;
+  git(['switch', '-c', branch]);
+  git(['add', ...kept.map((result) => `data/providers/${result.id}.yaml`)]);
+  git([
+    'commit',
+    '-m',
+    `feat(catalog): prices for ${where} (regional batch of ${today})`,
+    '-m',
+    'Read by the discovery pipeline (BLUEPRINT §6.5, M10.12): every price quoted from the provider’s own page for the region.',
+  ]);
+  git(['push', '-u', 'origin', branch]);
+  const pr = spawnSync(
+    'gh',
+    [
+      'pr',
+      'create',
+      '--base',
+      base,
+      '--head',
+      branch,
+      '--title',
+      `Catalog: prices for ${where}`,
+      '--body-file',
+      absolute(bodyFile),
+    ],
+    { stdio: 'inherit' },
+  );
+  process.exitCode = pr.status ?? 1;
+}
 
 /** Runs a pipeline script with tsx, stopping on failure unless `tolerate`. */
 function run(script: string, scriptArgs: string[], tolerate = false): void {

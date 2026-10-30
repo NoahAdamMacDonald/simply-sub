@@ -1,7 +1,10 @@
 import type { WritableSignal } from '@angular/core';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TestBed, type ComponentFixture } from '@angular/core/testing';
+import { MatButtonHarness } from '@angular/material/button/testing';
 import { MATERIAL_ANIMATIONS } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipHarness } from '@angular/material/tooltip/testing';
 import { searchCatalog, type CatalogPlan, type Settings } from '@simply-sub/core';
 import { SettingsStore } from '../../core/settings/settings-store';
@@ -170,5 +173,26 @@ describe('PlanDetails', () => {
 
       expect(groups().some((group) => group.startsWith('Terms and policies'))).toBe(false);
     });
+  });
+  it('offers Report a wrong price beside the price’s date, and thanks the user once a report is sent', async () => {
+    await show('netflix.standard');
+    await (
+      await TestbedHarnessEnvironment.loader(fixture).getHarness(
+        MatButtonHarness.with({ text: 'Report a wrong price' }),
+      )
+    ).click();
+    // Its dialog loads as it opens.
+    await vi.waitFor(() =>
+      expect(document.querySelector('ss-report-price-dialog')?.textContent).toContain(
+        'Netflix Standard in Canada.',
+      ),
+    );
+    TestBed.inject(MatDialog).openDialogs[0].close(true);
+    await vi.waitFor(() =>
+      expect(document.querySelector('.mat-mdc-snack-bar-container')?.textContent).toContain(
+        'Thanks. Netflix’s page will be checked tonight.',
+      ),
+    );
+    TestBed.inject(MatSnackBar).dismiss();
   });
 });

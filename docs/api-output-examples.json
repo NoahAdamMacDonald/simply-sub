@@ -2127,11 +2127,10 @@
       ]
     },
     "POST /reports": {
-      "phase": 5,
-      "description": "A user reports that a catalog price looks wrong. Protected by Cloudflare Turnstile and rate limiting. Reports are stored in D1 and triaged into GitHub issues.",
+      "description": "Says a catalog price looks wrong, in choices only: a plan, the visitor's country, and what's wrong (a different price, not sold any more, or not sold in that country). There's no free text. The report is counted, with nothing about its sender; the bot checks the plan's pages the next night and the weekly digest says what it found. 3 a minute per IP besides the write limit, and 500 a day for everyone (503 over_capacity after that).",
       "examples": [
         {
-          "title": "Report accepted",
+          "title": "Report a different price",
           "request": {
             "method": "POST",
             "url": "https://sub.simplely.ca/api/v1/reports",
@@ -2139,32 +2138,27 @@
               "Content-Type": "application/json"
             },
             "body": {
-              "planId": "netflix.standard",
-              "region": "CA",
-              "reported": { "amount": 20.99, "currency": "CAD", "interval": "month" },
-              "comment": "My bill went up this month.",
-              "turnstileToken": "0.zXc9Vb8Nm7As6Df5Gh4Jk3Lq"
+              "plan": "netflix.standard",
+              "country": "CA",
+              "problem": "price",
+              "price": {
+                "amount": 20.99,
+                "currency": "CAD",
+                "interval": "month",
+                "intervalCount": 1
+              }
             }
           },
           "response": {
             "status": 202,
             "headers": {
-              "Content-Type": "application/json; charset=utf-8",
               "Cache-Control": "no-store"
             },
-            "body": {
-              "data": {
-                "id": "0192f1c6-3d4e-7f5a-9b6c-7d8e9f0a1b2c",
-                "status": "received"
-              },
-              "meta": {
-                "receivedAt": "2026-10-22T18:20:00Z"
-              }
-            }
+            "body": null
           }
         },
         {
-          "title": "Too many reports from this visitor",
+          "title": "Report a plan that isn't sold any more",
           "request": {
             "method": "POST",
             "url": "https://sub.simplely.ca/api/v1/reports",
@@ -2172,20 +2166,90 @@
               "Content-Type": "application/json"
             },
             "body": {
-              "_note": "Same shape as the example above."
+              "plan": "netflix.standard-ads",
+              "country": "CA",
+              "problem": "discontinued"
             }
           },
           "response": {
-            "status": 429,
+            "status": 202,
+            "headers": {
+              "Cache-Control": "no-store"
+            },
+            "body": null
+          }
+        },
+        {
+          "title": "A plan the catalog doesn't have",
+          "request": {
+            "method": "POST",
+            "url": "https://sub.simplely.ca/api/v1/reports",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "plan": "netflix.ultra",
+              "country": "CA",
+              "problem": "discontinued"
+            }
+          },
+          "response": {
+            "status": 400,
             "headers": {
               "Content-Type": "application/json; charset=utf-8",
-              "Retry-After": "60",
               "Cache-Control": "no-store"
             },
             "body": {
               "error": {
-                "code": "rate_limited",
-                "message": "Too many requests. Try again in 60 seconds."
+                "code": "bad_request",
+                "message": "Invalid body field 'plan'.",
+                "details": [
+                  {
+                    "path": "plan",
+                    "issue": "The catalog has no plan netflix.ultra."
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "title": "Free text isn't taken",
+          "request": {
+            "method": "POST",
+            "url": "https://sub.simplely.ca/api/v1/reports",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "plan": "netflix.standard",
+              "country": "CA",
+              "problem": "price",
+              "price": {
+                "amount": 20.99,
+                "currency": "CAD",
+                "interval": "month",
+                "intervalCount": 1
+              },
+              "comment": "My bill went up this month."
+            }
+          },
+          "response": {
+            "status": 400,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "bad_request",
+                "message": "Unrecognized key: \"comment\"",
+                "details": [
+                  {
+                    "path": "",
+                    "issue": "Unrecognized key: \"comment\""
+                  }
+                ]
               }
             }
           }
@@ -2193,11 +2257,10 @@
       ]
     },
     "POST /cal": {
-      "phase": 5,
-      "description": "Creates an opt-in live calendar feed. The app uploads a minimal schedule (titles and dates only) and gets an unguessable feed URL to subscribe to in Google, Apple or Proton Calendar. The server stores nothing else.",
+      "description": "Creates a live calendar's feed set (BLUEPRINT §11.3, M10.2): a calendar for everything, one for each tag chosen and one for payments without a tag, each at a URL of its own that Google, Apple or Proton Calendar subscribes to. The app sends each payment's title, day and repeat rule (in the forms core's repeatRule writes, which Proton Calendar takes) and each calendar's name and colour, nothing else. The answer's manageKey changes or revokes the set and is never shown again. A set is deleted 180 days after the app last writes it.",
       "examples": [
         {
-          "title": "Create a feed",
+          "title": "Create a feed set",
           "request": {
             "method": "POST",
             "url": "https://sub.simplely.ca/api/v1/cal",
@@ -2205,10 +2268,36 @@
               "Content-Type": "application/json"
             },
             "body": {
-              "name": "Simply Sub payments",
-              "events": [
-                { "uid": "0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d", "title": "Netflix — $18.99", "start": "2026-11-12", "rrule": "FREQ=MONTHLY;INTERVAL=1" },
-                { "uid": "0192f1c5-0a11-7e42-8b7c-1f2e3d4c5b6a", "title": "Renew Mullvad VPN — ≈ $7.53", "start": "2026-11-03", "rrule": "FREQ=MONTHLY;INTERVAL=1" }
+              "feeds": [
+                {
+                  "name": "Simply Sub",
+                  "events": [
+                    {
+                      "uid": "9f2c4e6a8b0d1f3e",
+                      "date": "2026-11-12",
+                      "title": "Netflix: $19.94",
+                      "rule": "FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=12"
+                    },
+                    {
+                      "uid": "3b5d7f9a1c2e4a6b",
+                      "date": "2027-01-20",
+                      "title": "Renew Mullvad VPN: €60.00",
+                      "rule": "FREQ=YEARLY;INTERVAL=1;BYMONTH=1;BYMONTHDAY=20"
+                    }
+                  ]
+                },
+                {
+                  "name": "Simply Sub: Family",
+                  "color": "#1E88E5",
+                  "events": [
+                    {
+                      "uid": "3b5d7f9a1c2e4a6b",
+                      "date": "2027-01-20",
+                      "title": "Renew Mullvad VPN: €60.00",
+                      "rule": "FREQ=YEARLY;INTERVAL=1;BYMONTH=1;BYMONTHDAY=20"
+                    }
+                  ]
+                }
               ]
             }
           },
@@ -2217,27 +2306,81 @@
             "headers": {
               "Content-Type": "application/json; charset=utf-8",
               "Cache-Control": "no-store",
-              "Location": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics"
+              "Location": "https://sub.simplely.ca/api/v1/cal/Qx3Lm8Rt5Vw2Yz7Bd4Gh1J"
             },
             "body": {
               "data": {
-                "token": "k7Qm2Zp9XvT4bN8cR1sW0a",
-                "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
-                "webcalUrl": "webcal://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
+                "id": "Qx3Lm8Rt5Vw2Yz7Bd4Gh1J",
                 "manageKey": "Jd8f2LqP0zXn5Vt7Bc3HyA",
-                "eventCount": 2
+                "feeds": [
+                  {
+                    "token": "k7Qm2Zp9XvT4bN8cR1sW0a",
+                    "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
+                    "webcalUrl": "webcal://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
+                    "eventCount": 2
+                  },
+                  {
+                    "token": "p4Ld8Wq2Zr6Ty1Uc5Ve9Xb",
+                    "url": "https://sub.simplely.ca/api/v1/cal/p4Ld8Wq2Zr6Ty1Uc5Ve9Xb.ics",
+                    "webcalUrl": "webcal://sub.simplely.ca/api/v1/cal/p4Ld8Wq2Zr6Ty1Uc5Ve9Xb.ics",
+                    "eventCount": 1
+                  }
+                ]
               },
-              "meta": {
-                "_note": "The app stores token and manageKey locally. manageKey is required to update (PUT) or revoke (DELETE) the feed, and is never shown again."
-              }
+              "meta": {}
+            },
+            "_note": "The id, the manage key and each token are new random values of 128 bits: the app keeps them on the device, sealed by the app lock when it is on, and the server keeps only their SHA-256 hashes."
+          }
+        },
+        {
+          "title": "A repeat rule that isn't one of the app's",
+          "request": {
+            "method": "POST",
+            "url": "https://sub.simplely.ca/api/v1/cal",
+            "headers": {
+              "Content-Type": "application/json"
+            },
+            "body": {
+              "feeds": [
+                {
+                  "name": "Simply Sub",
+                  "events": [
+                    {
+                      "uid": "9f2c4e6a8b0d1f3e",
+                      "date": "2026-11-30",
+                      "title": "Netflix: $19.94",
+                      "rule": "FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=28,29,30;BYSETPOS=-1"
+                    }
+                  ]
+                }
+              ]
             }
+          },
+          "response": {
+            "status": 400,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "bad_request",
+                "message": "Invalid body field 'feeds.0.events.0.rule'.",
+                "details": [
+                  {
+                    "path": "feeds.0.events.0.rule",
+                    "issue": "Use a repeat rule of the forms the app writes"
+                  }
+                ]
+              }
+            },
+            "_note": "Proton Calendar drops an event whose monthly rule lists several days."
           }
         }
       ]
     },
     "GET /cal/:token.ics": {
-      "phase": 5,
-      "description": "The iCalendar feed that calendar apps subscribe to.",
+      "description": "One calendar of a feed set, as calendar apps fetch it: an all-day event per payment that does not block time, each repeating by its rule, the calendar's name, its colour for Apple Calendar, and a hint to check again every 12 hours. Revalidated on every fetch (its ETag), so a change or a revoke shows at the app's next check; Proton Calendar checks every 4 to 16 hours. Limited per feed, 30 a minute, not per IP: calendar apps' servers fetch many users' feeds from one address.",
       "examples": [
         {
           "title": "Feed contents",
@@ -2249,10 +2392,29 @@
             "status": 200,
             "headers": {
               "Content-Type": "text/calendar; charset=utf-8",
-              "Cache-Control": "public, max-age=3600"
+              "Cache-Control": "no-cache",
+              "ETag": "\"7b1775337e5c2d13\""
             },
-            "body": "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Simply Sub//sub.simplely.ca//EN\r\nCALSCALE:GREGORIAN\r\nX-WR-CALNAME:Simply Sub payments\r\nBEGIN:VEVENT\r\nUID:0192f1c5-0a11-7e42-8b7c-1f2e3d4c5b6a-20261103@sub.simplely.ca\r\nDTSTAMP:20261022T182000Z\r\nDTSTART;VALUE=DATE:20261103\r\nSUMMARY:Renew Mullvad VPN — ≈ $8.51\r\nEND:VEVENT\r\nBEGIN:VEVENT\r\nUID:0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d-20261112@sub.simplely.ca\r\nDTSTAMP:20261022T182000Z\r\nDTSTART;VALUE=DATE:20261112\r\nSUMMARY:Netflix — $21.46\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n",
-            "_note": "One all-day event per charge for the next 12 months, never repeat rules (BLUEPRINT §11.2): the first two are shown. Each UID is the item id plus the charge date. Amounts are what's charged, here with Ontario's 13% HST (BLUEPRINT §4.8)."
+            "body": "BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//sub.simplely.ca//Simply Sub//EN\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nX-WR-CALNAME:Simply Sub\r\nNAME:Simply Sub\r\nREFRESH-INTERVAL;VALUE=DURATION:PT12H\r\nX-PUBLISHED-TTL:PT12H\r\nBEGIN:VEVENT\r\nUID:9f2c4e6a8b0d1f3e@sub.simplely.ca\r\nDTSTAMP:20261029T182000Z\r\nDTSTART;VALUE=DATE:20261112\r\nDTEND;VALUE=DATE:20261113\r\nSUMMARY:Netflix: $19.94\r\nRRULE:FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=12\r\nTRANSP:TRANSPARENT\r\nEND:VEVENT\r\nBEGIN:VEVENT\r\nUID:3b5d7f9a1c2e4a6b@sub.simplely.ca\r\nDTSTAMP:20261029T182000Z\r\nDTSTART;VALUE=DATE:20270120\r\nDTEND;VALUE=DATE:20270121\r\nSUMMARY:Renew Mullvad VPN: €60.00\r\nRRULE:FREQ=YEARLY;INTERVAL=1;BYMONTH=1;BYMONTHDAY=20\r\nTRANSP:TRANSPARENT\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n",
+            "_note": "The set's Simply Sub calendar, as POST /cal's example made it: amounts as the provider charges them, so exchange rates never change a feed."
+          }
+        },
+        {
+          "title": "Unchanged since the app last fetched it",
+          "request": {
+            "method": "GET",
+            "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
+            "headers": {
+              "If-None-Match": "\"7b1775337e5c2d13\""
+            }
+          },
+          "response": {
+            "status": 304,
+            "headers": {
+              "Cache-Control": "no-cache",
+              "ETag": "\"7b1775337e5c2d13\""
+            },
+            "body": null
           }
         },
         {
@@ -2277,23 +2439,44 @@
         }
       ]
     },
-    "PUT /cal/:token": {
-      "phase": 5,
-      "description": "Replaces the feed's events after the user changes their lists. Requires the manage key.",
+    "PUT /cal/:id": {
+      "description": "Replaces a feed set's calendars with its manage key, after the user changes their lists. A calendar sent with its token keeps its URL, and one that has not changed keeps its file and ETag; one without a token gets a new URL; one left out is revoked. The set's 180 days start again.",
       "examples": [
         {
-          "title": "Update events",
+          "title": "Change a feed set",
           "request": {
             "method": "PUT",
-            "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a",
+            "url": "https://sub.simplely.ca/api/v1/cal/Qx3Lm8Rt5Vw2Yz7Bd4Gh1J",
             "headers": {
               "Content-Type": "application/json",
               "Authorization": "Bearer Jd8f2LqP0zXn5Vt7Bc3HyA"
             },
             "body": {
-              "name": "Simply Sub payments",
-              "events": [
-                { "uid": "0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d", "title": "Netflix — $18.99", "start": "2026-11-12", "rrule": "FREQ=MONTHLY;INTERVAL=1" }
+              "feeds": [
+                {
+                  "token": "k7Qm2Zp9XvT4bN8cR1sW0a",
+                  "name": "Simply Sub",
+                  "events": [
+                    {
+                      "uid": "9f2c4e6a8b0d1f3e",
+                      "date": "2026-11-12",
+                      "title": "Netflix: $19.94",
+                      "rule": "FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=12"
+                    }
+                  ]
+                },
+                {
+                  "name": "Simply Sub: Work",
+                  "color": "#E53935",
+                  "events": [
+                    {
+                      "uid": "9f2c4e6a8b0d1f3e",
+                      "date": "2026-11-12",
+                      "title": "Netflix: $19.94",
+                      "rule": "FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=12"
+                    }
+                  ]
+                }
               ]
             }
           },
@@ -2305,19 +2488,33 @@
             },
             "body": {
               "data": {
-                "token": "k7Qm2Zp9XvT4bN8cR1sW0a",
-                "eventCount": 1,
-                "updatedAt": "2026-10-23T09:00:00Z"
+                "id": "Qx3Lm8Rt5Vw2Yz7Bd4Gh1J",
+                "feeds": [
+                  {
+                    "token": "k7Qm2Zp9XvT4bN8cR1sW0a",
+                    "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
+                    "webcalUrl": "webcal://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a.ics",
+                    "eventCount": 1
+                  },
+                  {
+                    "token": "Wv7Kc2Nh9Rb4Tf6Xq1Ld8M",
+                    "url": "https://sub.simplely.ca/api/v1/cal/Wv7Kc2Nh9Rb4Tf6Xq1Ld8M.ics",
+                    "webcalUrl": "webcal://sub.simplely.ca/api/v1/cal/Wv7Kc2Nh9Rb4Tf6Xq1Ld8M.ics",
+                    "eventCount": 1
+                  }
+                ],
+                "updatedAt": "2026-10-30T09:00:00Z"
               },
               "meta": {}
-            }
+            },
+            "_note": "Simply Sub keeps its URL with its new events, Simply Sub: Work is new, and Simply Sub: Family, left out, is revoked: its URL answers 404."
           }
         },
         {
           "title": "Wrong manage key",
           "request": {
             "method": "PUT",
-            "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a",
+            "url": "https://sub.simplely.ca/api/v1/cal/Qx3Lm8Rt5Vw2Yz7Bd4Gh1J",
             "headers": {
               "Content-Type": "application/json",
               "Authorization": "Bearer wrongKey000000000000000"
@@ -2335,24 +2532,249 @@
             "body": {
               "error": {
                 "code": "forbidden",
-                "message": "The manage key doesn't match this calendar feed."
+                "message": "The manage key is missing or isn't this feed set's."
               }
             }
           }
         }
       ]
     },
-    "DELETE /cal/:token": {
-      "phase": 5,
-      "description": "Revokes the feed. Calendar apps stop receiving updates. Requires the manage key.",
+    "DELETE /cal/:id": {
+      "description": "Revokes a feed set with its manage key: each of its calendars answers 404 from then on, and nothing of it is kept.",
       "examples": [
         {
-          "title": "Revoke a feed",
+          "title": "Revoke a feed set",
           "request": {
             "method": "DELETE",
-            "url": "https://sub.simplely.ca/api/v1/cal/k7Qm2Zp9XvT4bN8cR1sW0a",
+            "url": "https://sub.simplely.ca/api/v1/cal/Qx3Lm8Rt5Vw2Yz7Bd4Gh1J",
             "headers": {
               "Authorization": "Bearer Jd8f2LqP0zXn5Vt7Bc3HyA"
+            }
+          },
+          "response": {
+            "status": 204,
+            "headers": {
+              "Cache-Control": "no-store"
+            },
+            "body": null
+          }
+        }
+      ]
+    },
+    "GET /sync/:chain": {
+      "description": "Reads a sync chain's sealed copy with its auth secret, which each device derives from the sync code with the chain's id. The server can't read the copy: it's gzipped JSON sealed with AES-256-GCM on the device. Its version is the ETag, which the device's next PUT names in If-Match.",
+      "examples": [
+        {
+          "title": "Read the chain's copy",
+          "request": {
+            "method": "GET",
+            "url": "https://sub.simplely.ca/api/v1/sync/7RzuOE455uZWapOAE8ToYw",
+            "headers": {
+              "Authorization": "Bearer eB-fvhcPV5EjET-L_3Eq09laqjt3_jCD0EV2QhRDeDg"
+            }
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/octet-stream",
+              "Cache-Control": "no-store",
+              "ETag": "\"3\""
+            },
+            "_note": "The body is the sealed copy as sent, here as bodyBase64: a format byte (1), a 12-byte IV, then the ciphertext and its tag.",
+            "body": null,
+            "bodyBase64": "AaChoqOkpaanqKmqqwtsy666YpBxeqjEMF2J7GKd3JJDarftQXKmzidwL5caonaDNOLwSoyU0GsMA3et6+YxCpEbkktqATu7X+MSedd3xyevxXw6o0Y4JY2CXyg0DNyUgOVaJPH8AGNsNIEs6KOL8QvOIGuZGzobmR7+5cMktB3ybsafzPeBMuiZpRWSP1mlMVReg03ceeK63iyu3FhIJDXnEGWpQFrra0ssVy4ot1qRUUOO7jUzkOmfaeL8/GU4GG96o3vi2FbfurkIDdT/gfatMhsqKh5HExm5g6vaGroG8Pyg+a6mjoNrGj4haFGHI/2lAFuA4H6fdbBVf5aBueDVHP8ZI1n7reIwSP9vUaIT565Pvj5jN7z5ldVlM2Q36CIUHqs="
+          }
+        },
+        {
+          "title": "Unchanged since this device read it",
+          "request": {
+            "method": "GET",
+            "url": "https://sub.simplely.ca/api/v1/sync/7RzuOE455uZWapOAE8ToYw",
+            "headers": {
+              "Authorization": "Bearer eB-fvhcPV5EjET-L_3Eq09laqjt3_jCD0EV2QhRDeDg",
+              "If-None-Match": "\"3\""
+            }
+          },
+          "response": {
+            "status": 304,
+            "headers": {
+              "Cache-Control": "no-store",
+              "ETag": "\"3\""
+            },
+            "body": null
+          }
+        },
+        {
+          "title": "No such chain",
+          "request": {
+            "method": "GET",
+            "url": "https://sub.simplely.ca/api/v1/sync/7RzuOE455uZWapOAE8ToYw",
+            "headers": {
+              "Authorization": "Bearer eB-fvhcPV5EjET-L_3Eq09laqjt3_jCD0EV2QhRDeDg"
+            }
+          },
+          "response": {
+            "status": 404,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "not_found",
+                "message": "This sync chain doesn't exist or was deleted."
+              }
+            }
+          }
+        },
+        {
+          "title": "Wrong auth secret",
+          "request": {
+            "method": "GET",
+            "url": "https://sub.simplely.ca/api/v1/sync/7RzuOE455uZWapOAE8ToYw",
+            "headers": {
+              "Authorization": "Bearer wrongSecret000000000000"
+            }
+          },
+          "response": {
+            "status": 403,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "forbidden",
+                "message": "The auth secret is missing or isn't this sync chain's."
+              }
+            }
+          }
+        }
+      ]
+    },
+    "PUT /sync/:chain": {
+      "description": "Writes a sync chain's sealed copy (application/octet-stream, up to 1 MiB). With If-None-Match: * it starts the chain, keeping its auth secret's SHA-256; with If-Match and the version the device read, it replaces the copy only if no other device wrote since, else 412, and the device reads the chain again, merges and sends the new version. One statement compares and writes, so two devices can't both win. Each write starts the chain's 180 days again.",
+      "examples": [
+        {
+          "title": "Start a chain",
+          "request": {
+            "method": "PUT",
+            "url": "https://sub.simplely.ca/api/v1/sync/7RzuOE455uZWapOAE8ToYw",
+            "headers": {
+              "Authorization": "Bearer eB-fvhcPV5EjET-L_3Eq09laqjt3_jCD0EV2QhRDeDg",
+              "Content-Type": "application/octet-stream",
+              "If-None-Match": "*"
+            },
+            "bodyBase64": "AaChoqOkpaanqKmqqwtsy666YpBxeqjEMF2J7GKd3JJDarftQXKmzidwL5caonaDNOLwSoyU0GsMA3et6+YxCpEbkktqATu7X+MSedd3xyevxXw6o0Y4JY2CXyg0DNyUgOVaJPH8AGNsNIEs6KOL8QvOIGuZGzobmR7+5cMktB3ybsafzPeBMuiZpRWSP1mlMVReg03ceeK63iyu3FhIJDXnEGWpQFrra0ssVy4ot1qRUUOO7jUzkOmfaeL8/GU4GG96o3vi2FbfurkIDdT/gfatMhsqKh5HExm5g6vaGroG8Pyg+a6mjoNrGj4haFGHI/2lAFuA4H6fdbBVf5aBueDVHP8ZI1n7reIwSP9vUaIT565Pvj5jN7z5ldVlM2Q36CIUHqs="
+          },
+          "response": {
+            "status": 201,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store",
+              "ETag": "\"1\""
+            },
+            "body": {
+              "data": {
+                "version": "1",
+                "updatedAt": "2026-10-29T18:20:00Z"
+              },
+              "meta": {}
+            }
+          }
+        },
+        {
+          "title": "Replace the copy after reading version 3",
+          "request": {
+            "method": "PUT",
+            "url": "https://sub.simplely.ca/api/v1/sync/7RzuOE455uZWapOAE8ToYw",
+            "headers": {
+              "Authorization": "Bearer eB-fvhcPV5EjET-L_3Eq09laqjt3_jCD0EV2QhRDeDg",
+              "Content-Type": "application/octet-stream",
+              "If-Match": "\"3\""
+            },
+            "bodyBase64": "AaChoqOkpaanqKmqqwtsy666YpBxeqjEMF2J7GKd3JJDarftQXKmzidwL5caonaDNOLwSoyU0GsMA3et6+YxCpEbkktqATu7X+MSedd3xyevxXw6o0Y4JY2CXyg0DNyUgOVaJPH8AGNsNIEs6KOL8QvOIGuZGzobmR7+5cMktB3ybsafzPeBMuiZpRWSP1mlMVReg03ceeK63iyu3FhIJDXnEGWpQFrra0ssVy4ot1qRUUOO7jUzkOmfaeL8/GU4GG96o3vi2FbfurkIDdT/gfatMhsqKh5HExm5g6vaGroG8Pyg+a6mjoNrGj4haFGHI/2lAFuA4H6fdbBVf5aBueDVHP8ZI1n7reIwSP9vUaIT565Pvj5jN7z5ldVlM2Q36CIUHqs="
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store",
+              "ETag": "\"4\""
+            },
+            "body": {
+              "data": {
+                "version": "4",
+                "updatedAt": "2026-10-29T18:25:00Z"
+              },
+              "meta": {}
+            }
+          }
+        },
+        {
+          "title": "Another device wrote first",
+          "request": {
+            "method": "PUT",
+            "url": "https://sub.simplely.ca/api/v1/sync/7RzuOE455uZWapOAE8ToYw",
+            "headers": {
+              "Authorization": "Bearer eB-fvhcPV5EjET-L_3Eq09laqjt3_jCD0EV2QhRDeDg",
+              "Content-Type": "application/octet-stream",
+              "If-Match": "\"2\""
+            },
+            "bodyBase64": "AaChoqOkpaanqKmqqwtsy666YpBxeqjEMF2J7GKd3JJDarftQXKmzidwL5caonaDNOLwSoyU0GsMA3et6+YxCpEbkktqATu7X+MSedd3xyevxXw6o0Y4JY2CXyg0DNyUgOVaJPH8AGNsNIEs6KOL8QvOIGuZGzobmR7+5cMktB3ybsafzPeBMuiZpRWSP1mlMVReg03ceeK63iyu3FhIJDXnEGWpQFrra0ssVy4ot1qRUUOO7jUzkOmfaeL8/GU4GG96o3vi2FbfurkIDdT/gfatMhsqKh5HExm5g6vaGroG8Pyg+a6mjoNrGj4haFGHI/2lAFuA4H6fdbBVf5aBueDVHP8ZI1n7reIwSP9vUaIT565Pvj5jN7z5ldVlM2Q36CIUHqs="
+          },
+          "response": {
+            "status": 412,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "stale_version",
+                "message": "Another device wrote since version 2: read the chain, merge and try again."
+              }
+            }
+          }
+        },
+        {
+          "title": "Start a chain that already exists",
+          "request": {
+            "method": "PUT",
+            "url": "https://sub.simplely.ca/api/v1/sync/7RzuOE455uZWapOAE8ToYw",
+            "headers": {
+              "Authorization": "Bearer eB-fvhcPV5EjET-L_3Eq09laqjt3_jCD0EV2QhRDeDg",
+              "Content-Type": "application/octet-stream",
+              "If-None-Match": "*"
+            },
+            "bodyBase64": "AaChoqOkpaanqKmqqwtsy666YpBxeqjEMF2J7GKd3JJDarftQXKmzidwL5caonaDNOLwSoyU0GsMA3et6+YxCpEbkktqATu7X+MSedd3xyevxXw6o0Y4JY2CXyg0DNyUgOVaJPH8AGNsNIEs6KOL8QvOIGuZGzobmR7+5cMktB3ybsafzPeBMuiZpRWSP1mlMVReg03ceeK63iyu3FhIJDXnEGWpQFrra0ssVy4ot1qRUUOO7jUzkOmfaeL8/GU4GG96o3vi2FbfurkIDdT/gfatMhsqKh5HExm5g6vaGroG8Pyg+a6mjoNrGj4haFGHI/2lAFuA4H6fdbBVf5aBueDVHP8ZI1n7reIwSP9vUaIT565Pvj5jN7z5ldVlM2Q36CIUHqs="
+          },
+          "response": {
+            "status": 412,
+            "headers": {
+              "Content-Type": "application/json; charset=utf-8",
+              "Cache-Control": "no-store"
+            },
+            "body": {
+              "error": {
+                "code": "stale_version",
+                "message": "This sync chain already exists: read it, merge, then write with If-Match."
+              }
+            }
+          }
+        }
+      ]
+    },
+    "DELETE /sync/:chain": {
+      "description": "Deletes a sync chain with its auth secret: each device's next sync finds it gone (404), and nothing of it is kept.",
+      "examples": [
+        {
+          "title": "Delete the synced copy",
+          "request": {
+            "method": "DELETE",
+            "url": "https://sub.simplely.ca/api/v1/sync/7RzuOE455uZWapOAE8ToYw",
+            "headers": {
+              "Authorization": "Bearer eB-fvhcPV5EjET-L_3Eq09laqjt3_jCD0EV2QhRDeDg"
             }
           },
           "response": {
@@ -2368,10 +2790,13 @@
   },
   "errorCodes": [
     { "code": "bad_request", "status": 400, "meaning": "A query parameter or body field is missing or invalid. 'details' lists each problem." },
-    { "code": "forbidden", "status": 403, "meaning": "Missing or wrong manage key (calendar feeds)." },
+    { "code": "forbidden", "status": 403, "meaning": "Missing or wrong manage key (calendar feeds) or auth secret (sync)." },
     { "code": "not_found", "status": 404, "meaning": "Unknown id, path or calendar token." },
+    { "code": "stale_version", "status": 412, "meaning": "The sync copy changed since it was read (If-Match). Read it again, merge, and send the new version." },
+    { "code": "too_large", "status": 413, "meaning": "The request's body is over its route's size limit." },
     { "code": "rate_limited", "status": 429, "meaning": "Too many requests. Respect the Retry-After header." },
     { "code": "upstream_unavailable", "status": 502, "meaning": "A third-party source (such as Frankfurter) failed and no cached copy exists." },
-    { "code": "internal", "status": 500, "meaning": "Unexpected error. Safe to retry later." }
+    { "code": "internal", "status": 500, "meaning": "Unexpected error. Safe to retry later." },
+    { "code": "over_capacity", "status": 503, "meaning": "A daily limit on what users store was reached, or the storage is full. Respect the Retry-After header." }
   ]
 }

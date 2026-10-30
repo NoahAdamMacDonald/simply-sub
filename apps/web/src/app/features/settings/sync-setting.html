@@ -1,0 +1,68 @@
+@if (record(); as record) {
+  <p class="status" role="status">{{ statusLine() }}</p>
+  @if (record.problem) {
+    <div class="actions">
+      @if (record.problem === 'gone') {
+        <button matButton="outlined" type="button" (click)="join()">Join with a code</button>
+      }
+      @if (record.problem === 'newer') {
+        <button matButton="outlined" type="button" (click)="checkForUpdates()">
+          Check for updates
+        </button>
+      }
+      <button matButton="outlined" type="button" (click)="turnOff()">Turn off sync here…</button>
+    </div>
+  } @else {
+    <button
+      matButton="outlined"
+      type="button"
+      (click)="syncNow()"
+      disabledInteractive
+      [disabled]="syncing()"
+    >
+      <mat-icon>sync</mat-icon>
+      Sync now
+    </button>
+    <h4 id="sync-devices-heading">Devices</h4>
+    <ul class="devices" aria-labelledby="sync-devices-heading">
+      <li>
+        <span id="sync-this-device"
+          ><strong>{{ record.deviceName }}</strong> (this device)</span
+        >
+        <button matButton type="button" aria-describedby="sync-this-device" (click)="rename()">
+          Rename…
+        </button>
+      </li>
+      @for (device of others(); track device.id) {
+        <li>
+          {{ device.name }} <span class="day">synced {{ device.day }}</span>
+        </li>
+      }
+    </ul>
+    <div class="actions">
+      <button matButton="outlined" type="button" (click)="show()">Show the code…</button>
+      <button matButton="outlined" type="button" (click)="startOver()">
+        Start over with a new code…
+      </button>
+      <button matButton="outlined" type="button" (click)="turnOff()">
+        Turn off on this device…
+      </button>
+      <button matButton="outlined" type="button" (click)="deleteCopy()">
+        Delete the synced copy…
+      </button>
+    </div>
+  }
+} @else {
+  <p class="hint">
+    Keeps your lists, subscriptions, cards, tags and budgets the same on each of your devices.
+    They’re sealed on this device with a code only your devices have before they’re sent, so the
+    server can’t read them.
+  </p>
+  <div class="actions">
+    <button matButton="outlined" type="button" (click)="turnOn()">
+      <mat-icon>sync</mat-icon>
+      Turn on sync
+    </button>
+    <button matButton="outlined" type="button" (click)="join()">Join with a code</button>
+  </div>
+}

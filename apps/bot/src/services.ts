@@ -7,6 +7,7 @@ import {
   maxPageChars,
   readBaseline,
   pageText,
+  wentToAnotherCountry,
   parseRobots,
   robotsAllow,
   userAgent,
@@ -208,7 +209,13 @@ function pageDeps(env: Env, known: Readonly<Record<string, Robots>>, github: Git
   return {
     async page(address): Promise<PageResult> {
       const got = await get(address, 'text/html,application/xhtml+xml', 4_000_000);
-      return 'error' in got ? got : { text: pageText(new TextDecoder().decode(got.bytes)) };
+      if ('error' in got) return got;
+      // A region's page that went to another country's isn't its page there (M10.12): unread, like one that didn't
+      // answer.
+      if (wentToAnotherCountry(address, got.url)) {
+        return { error: `It went to another country's page (${got.url})` };
+      }
+      return { text: pageText(new TextDecoder().decode(got.bytes)) };
     },
     async browser(address): Promise<PageResult> {
       const url = URL.parse(address);

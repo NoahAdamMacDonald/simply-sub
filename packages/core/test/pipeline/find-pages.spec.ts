@@ -11,6 +11,8 @@ import {
   registeredDomain,
   sitemapsIn,
   surveySite,
+  pathsFor,
+  searchQueries,
   urlScore,
   type FetchedPage,
   type FindIo,
@@ -398,5 +400,40 @@ describe('surveySite and findKind', () => {
       fit: 'yes',
     });
     expect(files).toEqual([]);
+  });
+});
+
+describe('another region’s pages (M10.12)', () => {
+  it('scores the region’s own locale first, and another country’s last', () => {
+    const score = (url: string, region?: string) => urlScore('pricing', url, '', region);
+    expect(score('https://www.example.com/en-gb/pricing', 'GB')).toBeGreaterThan(
+      score('https://www.example.com/pricing', 'GB'),
+    );
+    expect(score('https://www.example.com/uk/pricing', 'GB')).toBeGreaterThan(
+      score('https://www.example.com/en-us/pricing', 'GB'),
+    );
+    expect(score('https://www.example.com/en-ca/pricing', 'GB')).toBeLessThan(
+      score('https://www.example.com/pricing', 'GB'),
+    );
+    // German alone is Germany's language, not another country's.
+    expect(score('https://www.example.com/de/pricing', 'DE')).toBeGreaterThan(
+      score('https://www.example.com/fr/pricing', 'DE'),
+    );
+    // Canada's as before.
+    expect(score('https://www.example.com/en-ca/pricing')).toBeGreaterThan(
+      score('https://www.example.com/en-gb/pricing'),
+    );
+  });
+
+  it('searches for the region’s prices, and tries its locale paths', () => {
+    const site = { name: 'Example', website: 'https://www.example.com/', region: 'GB' };
+    expect(searchQueries('pricing', site)).toEqual(['Example plans pricing United Kingdom']);
+    expect(searchQueries('pricing', { ...site, region: undefined })).toEqual([
+      'Example plans pricing Canada',
+    ]);
+    const paths = pathsFor('pricing', 'GB');
+    expect(paths).toEqual(expect.arrayContaining(['/en-gb/pricing', '/uk/pricing', '/uk/plans']));
+    expect(paths).not.toContain('/en-ca/pricing');
+    expect(pathsFor('pricing')).toContain('/en-ca/pricing');
   });
 });

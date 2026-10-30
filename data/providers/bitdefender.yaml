@@ -22,7 +22,7 @@ name: Bitdefender
 website: https://www.bitdefender.com
 category: privacy-suite
 spendCategory: software
-billingCurrency: { CA: CAD, AU: AUD, NZ: NZD }
+billingCurrency: { CA: CAD, GB: GBP, US: USD, AU: AUD, NZ: NZD }
 cancelUrl: https://www.bitdefender.com/consumer/support/answer/29081/
 sources: { pricing: https://www.bitdefender.com/en-ca/consumer/ }
 
@@ -42,6 +42,24 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-28
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/
+      - region: GB
+        currency: GBP
+        amount: 84.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Sales tax included.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-gb/consumer/
+      - region: US
+        currency: USD
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-us/consumer/
       - region: AU
         currency: AUD
         amount: 159.99
@@ -83,6 +101,24 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-28
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/premium-security
+      - region: GB
+        currency: GBP
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Sales tax included.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-gb/consumer/
+      - region: US
+        currency: USD
+        amount: 129.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-us/consumer/
       - region: AU
         currency: AUD
         amount: 169.99
@@ -144,6 +180,24 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-28
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/ultimate-security
+      - region: GB
+        currency: GBP
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Sales tax included.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-gb/consumer/
+      - region: US
+        currency: USD
+        amount: 159.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-us/consumer/
       - region: AU
         currency: AUD
         amount: 199.99
@@ -198,6 +252,16 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-28
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/digital-identity-protection
+      - region: GB
+        currency: GBP
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Sales tax included.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-gb/consumer/
       - region: AU
         currency: AUD
         amount: 129.99

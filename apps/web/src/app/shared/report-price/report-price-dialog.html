@@ -1,0 +1,60 @@
+<form [formRoot]="form">
+  <h2 mat-dialog-title>Report a wrong price</h2>
+  <mat-dialog-content>
+    <p id="report-about">
+      {{ data.title }} in {{ countryName }}. The report holds only that and what you choose here,
+      and the plan’s page is checked tonight.
+    </p>
+    <p id="report-problem-label" class="label">What’s wrong</p>
+    <mat-radio-group
+      aria-labelledby="report-problem-label"
+      [value]="problem()"
+      (change)="problem.set($event.value)"
+    >
+      @if (priced) {
+        <mat-radio-button value="price">The price is different</mat-radio-button>
+      }
+      <mat-radio-button value="discontinued">It’s not sold any more</mat-radio-button>
+      <mat-radio-button value="not-in-country">It’s not sold in {{ countryName }}</mat-radio-button>
+    </mat-radio-group>
+    @if (problem() === 'price') {
+      <div class="price">
+        @if (periods.length > 1) {
+          <mat-form-field appearance="outline" subscriptSizing="dynamic" class="period">
+            <mat-label>Billed</mat-label>
+            <mat-select [formField]="form.period" (selectionChange)="periodChosen()">
+              @for (period of periods; track period.value) {
+                <mat-option [value]="period.value">{{ period.name }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        }
+        <mat-form-field appearance="outline" subscriptSizing="dynamic" class="amount">
+          <mat-label>Price</mat-label>
+          <!-- Text, not a number field, as the custom subscription's cost (CustomPlanForm.amount). -->
+          <input
+            matInput
+            inputmode="decimal"
+            autocomplete="off"
+            aria-describedby="report-price-hint"
+            [formField]="form.amount"
+          />
+          <mat-error>{{ firstError(form.amount) }}</mat-error>
+        </mat-form-field>
+        <ss-choice-field label="Currency" [formField]="form.currency" [choices]="currencies" />
+      </div>
+      <p id="report-price-hint" class="hint">
+        The regular price, as the provider’s page or your bill shows it: not a sale price.
+      </p>
+    }
+    @if (refusal()) {
+      <p class="refusal" role="alert">{{ refusal() }}</p>
+    }
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button matButton type="button" mat-dialog-close>Cancel</button>
+    <button matButton="filled" type="submit" disabledInteractive [disabled]="busy()">
+      {{ busy() ? 'Sending…' : 'Send report' }}
+    </button>
+  </mat-dialog-actions>
+</form>

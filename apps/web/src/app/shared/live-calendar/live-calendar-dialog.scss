@@ -1,0 +1,138 @@
+@use '@angular/material' as mat;
+
+// The form wraps the dialog's title, content and actions, which the dialog lays out as its own children.
+form {
+  display: contents;
+}
+
+// Focus moves to the title when the view changes. It isn't a control, so it needs no focus ring.
+h2:focus {
+  outline: none;
+}
+
+p {
+  margin: 0 0 12px;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
+}
+
+legend {
+  margin-bottom: 4px;
+  padding: 0;
+  font: var(--mat-sys-title-small);
+}
+
+// The boxes' and circles' own padding lines them up with the text above.
+mat-checkbox,
+mat-radio-group {
+  margin-left: -10px;
+}
+
+mat-radio-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+  border: 1px solid var(--ss-divider);
+  border-radius: 50%;
+  vertical-align: -1px;
+}
+
+.hint,
+.status {
+  color: var(--ss-text-muted);
+}
+
+.hint {
+  margin: 4px 0 0;
+  font: var(--mat-sys-body-small);
+}
+
+.error {
+  margin: 0;
+  color: var(--ss-danger);
+
+  &:empty {
+    display: none;
+  }
+}
+
+.calendars {
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+
+  > li + li {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--ss-divider);
+  }
+}
+
+h3 {
+  margin: 0 0 4px;
+  font: var(--mat-sys-title-small);
+}
+
+// A link is long and has no spaces: it breaks anywhere rather than widen the dialog.
+.link {
+  margin: 0 0 8px;
+  font: var(--mat-sys-body-small);
+  overflow-wrap: anywhere;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.steps-heading {
+  margin-top: 8px;
+}
+
+details {
+  margin: 0 0 8px;
+
+  summary {
+    cursor: pointer;
+  }
+
+  ol {
+    margin: 8px 0;
+    padding-inline-start: 24px;
+  }
+
+  li + li {
+    margin-top: 4px;
+  }
+
+  .hint {
+    margin-bottom: 8px;
+  }
+}
+
+mat-dialog-actions {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.danger {
+  @include mat.button-overrides(
+    (
+      text-label-text-color: var(--ss-danger),
+    )
+  );
+}

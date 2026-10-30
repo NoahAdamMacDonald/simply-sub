@@ -27,15 +27,19 @@ export const apiHeaders: MiddlewareHandler<Api> = async (c, next) => {
   headers.set('Content-Security-Policy', "default-src 'none'; frame-ancestors 'none'");
 };
 
+/** A live calendar feed's path: limited by the feed, not by IP (routes/cal.ts). */
+const feedPath = /^\/api\/v1\/cal\/[^/]+\.ics$/;
+
 /**
  * 429 rate_limited for a client over its per-IP limits (wrangler.jsonc): 60 requests a minute on /api/*, and 10 a
  * minute on /icon. Cloudflare counts them in each location, roughly. The key is CF-Connecting-IP, which Cloudflare's
  * edge sets on every request; it's never stored or logged. A request without it didn't come through the edge (a
- * test calling the Worker directly), and isn't limited.
+ * test calling the Worker directly), and isn't limited. A live calendar feed isn't either: calendar apps' servers fetch
+ * many users' feeds from one address, so each feed has a limit of its own (M10.2).
  */
 export const rateLimit: MiddlewareHandler<Api> = async (c, next) => {
   const ip = c.req.header('CF-Connecting-IP');
-  if (ip !== undefined) {
+  if (ip !== undefined && !(c.req.method === 'GET' && feedPath.test(c.req.path))) {
     const limiters = [
       c.env.API_RATE_LIMIT,
       ...(c.req.path === '/api/v1/icon' ? [c.env.ICON_RATE_LIMIT] : []),

@@ -36,7 +36,9 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
   - imports and stored records are validated with Zod;
   - backups can be encrypted, and an optional passphrase lock encrypts data at rest (PBKDF2-SHA256 600k →
     AES-256-GCM).
-  Never encrypt with a key the app stores itself.
+  Never encrypt with a key the app stores itself. Sync (M10.7–M10.9) is the one kind that differs: its copy is sealed
+  with keys derived from the sync code, which the device keeps (sealed by the app lock when it's on), so the copy is
+  safe from the server, not from the device.
 - Multi-region prices; the user's region is the default; non-native prices are FX-converted and marked with an icon.
   Regions are ISO 3166-1 codes (`GB`, not `UK`), the `EU` group or `GLOBAL`. Whether something is sold in a region
   is `availability` in core: offered, not offered or unknown (BLUEPRINT §4.7).
@@ -50,7 +52,10 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 - Catalog icons are static files: fetched once from each provider's site and committed, never fetched per view
   (cost, privacy, offline). Only custom subscriptions use `GET /icon` (BLUEPRINT §14).
 - Storage, all on Cloudflare: static files for the catalog and icons, D1 for the API's searches, KV for small values
-  that must survive (M2.5), R2 only when a trigger in BLUEPRINT §7.1 is reached.
+  that must survive (M2.5), R2 only when a trigger in BLUEPRINT §7.1 is reached. What users choose to send (M10's live
+  calendar feeds, sealed sync copies, price reports) goes in a D1 database of its own, `simply-sub-user`, through
+  `apps/api/src/writes.ts`' rules (BLUEPRINT §5.4): kept 180 days unused at most, secrets only as hashes, writes capped
+  under half of D1's daily quota.
 - Catalog growth is automated (discover → find URLs → AI extract → validate → PR). Humans only review PRs.
 - Business logic (optimizer, schedules, rewards, exporters) lives in `packages/core` as pure, tested functions.
 - Feature ids come from `data/features.yaml`. Never invent feature keys inline: new ones follow the feature-discovery
@@ -73,9 +78,11 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 - The app reads the catalog from static files built by `npm run data:build` (`data/catalog/index.json`, then its
   region's `data/catalog/<region>.json` or the full `data/catalog.json`, BLUEPRINT §6.3) and icons from static
   files. It keeps the files it downloaded in Dexie (`catalogCache`, one record per file, never merged) and checks
-  `index.json`'s version on start (M4.3). No service worker before M10: Trusted Types block Angular's registration
-  (BLUEPRINT §14). It only calls the Worker for `/fx` and custom-subscription icons. D1 serves only the public API,
-  and a deploy writes only what changed (free plan: 100k rows written a day, BLUEPRINT §5.3). A change to the catalog
+  `index.json`'s version on start (M4.3). The service worker (M10.5, production builds only) keeps the app's own
+  files so it starts offline, never `/api/` or `/data/`; the app registers it through its `simply-sub#service-worker`
+  Trusted Types policy, since Angular's registration passes a plain string the CSP refuses (BLUEPRINT §14). It only calls the Worker for `/fx` and custom-subscription icons (and, from M10, what the user
+  opts in to send). The catalog's D1 serves only the public API, and a deploy writes only what changed (free plan:
+  100k rows written a day for the account, BLUEPRINT §5.3). A change to the catalog
   tables or the derived columns bumps `seedFormat` in core, which makes the next deploy reseed in full.
 
 ## Git workflow
@@ -105,7 +112,9 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
   `npm run data:schema` and commit `data/schema/`, because CI fails if it's stale. After editing `data/`, run
   `npm run data:validate`: the schemas plus the cross-file checks of `validateCatalog` (BLUEPRINT §6.2). A new
   provider's logo comes from `npm run data:icons` into `data/logos/<id>.png` (committed), and `data:build`
-  publishes it as a 96 px WebP at `/icons/<id>.webp`; builds never fetch icons.
+  publishes it as a 96 px WebP at `/icons/<id>.webp`; builds never fetch icons. The app's own icon
+  (`apps/web/public/app-icons/`, `favicon.ico`) comes from `npm run app:icons`, drawn in `_tokens.scss`'s accent:
+  rerun it when the accent changes.
 - User records (lists, items, settings…) are strict Zod schemas in `packages/core/src/user/`, with `z.infer` types
   too (BLUEPRINT §4.6). The repositories in `apps/web/src/app/core/storage/` are the only code that imports `dexie`
   (ESLint enforces it). They load Dexie lazily, outside the initial bundle, and check every record on the way in and

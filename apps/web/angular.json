@@ -45,6 +45,7 @@
               "fileReplacements": [
                 { "replace": "src/app/dev-routes.ts", "with": "src/app/dev-routes.prod.ts" }
               ],
+              "serviceWorker": "ngsw-config.json",
               "optimization": {
                 "scripts": true,
                 "styles": { "minify": true, "inlineCritical": false },

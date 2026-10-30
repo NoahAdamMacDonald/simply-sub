@@ -1,0 +1,14 @@
+<form [formRoot]="form">
+  <h2 mat-dialog-title>Name this device</h2>
+  <mat-dialog-content>
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Device name</mat-label>
+      <input matInput autocomplete="off" cdkFocusInitial [formField]="form.name" />
+      <mat-error>{{ firstError(form.name) }}</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button matButton type="button" mat-dialog-close>Cancel</button>
+    <button matButton="filled" type="submit">Save</button>
+  </mat-dialog-actions>
+</form>

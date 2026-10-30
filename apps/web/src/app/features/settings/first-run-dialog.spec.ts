@@ -137,6 +137,7 @@ describe('First run', () => {
           currency: 'CAD',
           monthlyBudget: 200,
           theme: 'dark',
+          sharedUpdatedAt: '2026-10-25T12:00:00.000Z',
           updatedAt: '2026-10-25T12:00:00.000Z',
         } satisfies Settings,
       ]),

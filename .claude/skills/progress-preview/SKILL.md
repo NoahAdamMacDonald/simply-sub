@@ -78,7 +78,9 @@ in-app navigation, the theme toggle, the drawer, the snackbar and every export w
 formats, the Calendar's three and Sync calendar, each file checked for its first bytes) with no CSP or Trusted Types
 violations, and
 Cloudflare's beacon (inserted as the edge does, its reports aborted) loading. Against the live link or production,
-`csp-check.cjs` uses the beacon already in the page. **Look at the screenshots.** Stop `wrangler dev` afterwards
+`csp-check.cjs` uses the beacon already in the page. It blocks the service worker (M10.5), which would fetch page loads
+past the routing that adds the beacon; the browser-check skill's `check-m10-offline-sync.cjs` checks the worker under
+the CSP. **Look at the screenshots.** Stop `wrangler dev` afterwards
 (kill its node parent: the user's memory notes say how).
 
 ## Gotchas
