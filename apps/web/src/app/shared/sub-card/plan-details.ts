@@ -145,10 +145,10 @@ export class PlanDetails {
   }
 
   private async thank(provider: string): Promise<void> {
-    const { MatSnackBar } = await import('@angular/material/snack-bar');
-    this.injector
-      .get(MatSnackBar)
-      .open(`Thanks. ${provider}’s page will be checked tonight.`, undefined, { duration: 5000 });
+    const { openSnack, snackMillis } = await import('../snack/snack');
+    openSnack(this.injector, `Thanks. ${provider}’s page will be checked tonight.`, undefined, {
+      duration: snackMillis,
+    });
   }
 
   /** A citation's tooltip: the words it quotes, and the page. */

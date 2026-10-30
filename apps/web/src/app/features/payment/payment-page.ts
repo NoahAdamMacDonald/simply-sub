@@ -33,6 +33,7 @@ import { PageHeader } from '../../shared/page-header/page-header';
 import { amountText } from '../../shared/price-tag/price-text';
 import { CardAssigner } from './card-assigner';
 import { CardEditor } from './card-editor';
+import { openSnack, snackMillis } from '../../shared/snack/snack';
 
 /** A card as its tile shows it (P11). */
 interface CardTile {
@@ -217,7 +218,7 @@ export class PaymentPage {
   protected async create(): Promise<void> {
     const result = await this.editor.open();
     if (!result) return;
-    this.snackBar.open(`Added ${result.title}`, undefined, { duration: 5000 });
+    openSnack(this.snackBar, `Added ${result.title}`, undefined, { duration: snackMillis });
     this.pendingFocus.set({
       ready: (tiles) => tiles.some((tile) => tile.card.id === result.id),
       target: () => this.button(result.id, 'edit'),
@@ -232,7 +233,8 @@ export class PaymentPage {
   /** ✎: the dialog for it. Focus goes back to ✎ as the dialog closes. */
   protected async edit(card: PaymentCard): Promise<void> {
     const result = await this.editor.open(card);
-    if (result) this.snackBar.open(`Saved ${result.title}`, undefined, { duration: 5000 });
+    if (result)
+      openSnack(this.snackBar, `Saved ${result.title}`, undefined, { duration: snackMillis });
   }
 
   /**
@@ -258,7 +260,7 @@ export class PaymentPage {
     const index = tiles.findIndex((candidate) => candidate.card.id === card.id);
     const next = tiles[index + 1] ?? tiles[index - 1];
     await this.cards.removeWithItems(card.id);
-    this.snackBar.open(`Deleted ${title}`, undefined, { duration: 5000 });
+    openSnack(this.snackBar, `Deleted ${title}`, undefined, { duration: snackMillis });
     this.pendingFocus.set({
       ready: (shown) => !shown.some((candidate) => candidate.card.id === card.id),
       target: () =>

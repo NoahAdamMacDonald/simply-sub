@@ -19,6 +19,7 @@
     [autoActiveFirstOption]="typing()"
     [displayWith]="display"
     (optionSelected)="pick($event)"
+    (opened)="watch()"
     (closed)="settle()"
   >
     @for (choice of matches(); track choice.value) {

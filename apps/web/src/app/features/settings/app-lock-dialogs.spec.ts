@@ -86,7 +86,7 @@ describe('Security', () => {
     document.querySelector('mat-dialog-container')?.textContent?.replace(/\s+/g, ' ').trim();
   /** The newest snackbar's text: the one before can still be closing. */
   const snackBar = () =>
-    [...document.querySelectorAll('.mat-mdc-snack-bar-container')].at(-1)?.textContent?.trim();
+    [...document.querySelectorAll('ss-snack .mat-mdc-snack-bar-label')].at(-1)?.textContent?.trim();
   const text = () => (fixture.nativeElement as HTMLElement).textContent?.replace(/\s+/g, ' ');
   const storedSettings = async () =>
     ((await storedRows(storage.indexedDB, 'settings')) as Record<string, unknown>[])[0];
@@ -139,6 +139,11 @@ describe('Security', () => {
     }
     await press('Turn on the lock');
     await until(() => dialogText() === undefined, 5000);
+    // The page shows the lock on (and Lock after) from the stored settings' live query, which can come a moment after
+    // the dialog closes when the suite is busy.
+    await vi.waitFor(async () => expect(await (await lockBox()).isChecked()).toBe(true), {
+      timeout: 5000,
+    });
   }
 
   it('starts off, and says what the lock does', async () => {
@@ -180,11 +185,6 @@ describe('Security', () => {
   it('turns on: every table encrypted, Lock after kept, and the page says so', async () => {
     await turnOn('1 hour');
     await until(() => snackBar() === 'The lock is on', 5000);
-    // The box follows the stored settings' live query, which can come a moment after the snackbar when the suite is
-    // busy.
-    await vi.waitFor(async () => expect(await (await lockBox()).isChecked()).toBe(true), {
-      timeout: 5000,
-    });
     expect(text()).toContain('Your data in this browser is encrypted');
     expect(await lockAfter()).toBe('1 hour');
     const settings = await storedSettings();

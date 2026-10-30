@@ -171,7 +171,7 @@ describe('Your data', () => {
   }
 
   const snackBar = () =>
-    document.querySelector('.mat-mdc-snack-bar-container')?.textContent?.trim();
+    document.querySelector('ss-snack .mat-mdc-snack-bar-label')?.textContent?.trim();
   const dialogText = () =>
     document.querySelector('mat-dialog-container')?.textContent?.replace(/\s+/g, ' ').trim();
   const storedLists = async () =>

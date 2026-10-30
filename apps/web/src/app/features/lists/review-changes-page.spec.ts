@@ -176,7 +176,7 @@ describe('ReviewChangesPage', () => {
     page().querySelector<HTMLButtonElement>('button[aria-label^="Undo: Replace"]')?.click();
     const drafts = TestBed.inject(DraftsRepository);
     await until(() => !drafts.byList().has(work.id), 5000);
-    const snack = () => document.querySelector('.mat-mdc-snack-bar-container');
+    const snack = () => document.querySelector('ss-snack .mat-mdc-snack-bar-label');
     await until(() => text(snack()) === 'Undone, with the change that built on it', 5000);
     await until(
       () => text(page().querySelector('ss-empty-state h2')) === 'No changes to review',
