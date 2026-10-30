@@ -3409,6 +3409,11 @@ The user's sixteen fixes and improvements after M9, as M5.11–M5.12, M6.12–M6
   it too. A choice pressed with a mouse or a finger moves focus to the dialog (CDK draws the list inside it, as a
   popover), so that's left to Material, as the tag picker does (M6.6). The form sending focus to a field it's missing
   (`focusFirstError`) leaves its list closed, so the message under the field shows; typing opens it.
+  Since the feedback after M10 (M5.14), Search's Category is one too, as the categories will grow, and a click on any
+  of them selects the chosen name, as Tab's focus does, so what's typed takes its place: after a click, typing
+  followed the name ("CanadaUn") and matched nothing. The other menus stay selects: short lists that don't grow
+  (Sort, ranks, billing periods, Lock after, a card's network), where Material's select already moves to an option as
+  its first letters are typed.
 - **Budget bars and warnings (M7.7):** one colour per bar, on a scale from green to yellow exactly at the budget to red
   at 150%, the user's choice over a first try that drew a green-to-red gradient along the fill (section 8.1.1); a
   dismissed warning's key is whose payments, month

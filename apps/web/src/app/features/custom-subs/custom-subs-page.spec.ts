@@ -143,7 +143,8 @@ describe('CustomSubsPage', () => {
   }
 
   async function dialogLoader(): Promise<HarnessLoader> {
-    await until(() => dialog() !== null);
+    // The dialog loads with the first one: give it time when every spec runs at once.
+    await until(() => dialog() !== null, 5000);
     await fixture.whenStable();
     return TestbedHarnessEnvironment.documentRootLoader(fixture).getChildLoader(
       'ss-custom-sub-dialog',
