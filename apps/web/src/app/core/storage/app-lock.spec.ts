@@ -141,6 +141,9 @@ const records: Record<UserTable, readonly unknown[]> = {
   ],
 };
 
+/** A sealed row's iv and ciphertext: base64, and nothing else. */
+const base64 = /^[A-Za-z0-9+/]+={0,2}$/;
+
 /** What mustn't show in a locked table's rows. */
 const secrets = [
   'Work Related',
@@ -217,9 +220,20 @@ describe('the app lock', () => {
     it('seals every user table, with only keys and indexes in plain text', async () => {
       const rows = await snapshot(storage.indexedDB);
       for (const table of lockedTables) {
-        const text = JSON.stringify(rows[table]);
+        // The sealed bytes are random base64, which can hold a short secret's digits by chance ("…k3+271Fw…"), so
+        // they're checked for being base64 (no record's JSON is) and left out of the search.
+        const text = JSON.stringify(rows[table], (key, value: unknown) =>
+          key === 'iv' || key === 'ciphertext' ? '' : value,
+        );
         for (const secret of secrets) expect(text, `${table}: ${secret}`).not.toContain(secret);
-        for (const row of rows[table]) expect(row).toHaveProperty('sealed');
+        for (const row of rows[table]) {
+          expect(row).toMatchObject({
+            sealed: {
+              iv: expect.stringMatching(base64),
+              ciphertext: expect.stringMatching(base64),
+            },
+          });
+        }
       }
       expect(rows['lists']).toContainEqual({
         id: ids.work,
