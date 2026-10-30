@@ -140,6 +140,19 @@ export function withSharedSettings(
 }
 
 /**
+ * The settings of a new device that joins a chain in its first run (M10.15), which has none yet: the chain's shared
+ * ones, and its own theme.
+ */
+export function joinedSettings(
+  shared: SharedSettings,
+  theme: Settings['theme'],
+  now: Timestamp,
+): Settings {
+  const { updatedAt, ...fields } = shared;
+  return { key: 'settings', ...fields, theme, sharedUpdatedAt: updatedAt, updatedAt: now };
+}
+
+/**
  * Reads a copy a device opened: each record checked with its schema (one that fails is left out, and described by its
  * table, key and issues, never its values), a copy from an older app migrated as a backup is, one from a newer app
  * refused.

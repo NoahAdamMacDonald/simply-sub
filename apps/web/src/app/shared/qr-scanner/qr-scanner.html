@@ -1,0 +1,6 @@
+<!-- What the camera sees, while it shows: the status line says what to do, for every user. -->
+<div class="viewfinder" [class.showing]="showing()">
+  <video #video muted playsinline aria-hidden="true"></video>
+</div>
+<p class="status" role="status">{{ status() }}</p>
+<button #stop matButton="outlined" type="button" (click)="closed.emit()">Stop scanning</button>

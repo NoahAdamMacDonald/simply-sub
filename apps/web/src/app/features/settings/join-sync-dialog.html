@@ -2,24 +2,33 @@
   <h2 mat-dialog-title #copyTitle tabindex="-1">Join this synced copy</h2>
   <mat-dialog-content>
     <p>It holds {{ countText() }}.</p>
-    <p id="join-mode-label" class="label">This device’s data</p>
-    <mat-radio-group
-      aria-labelledby="join-mode-label"
-      [value]="mode()"
-      (change)="mode.set($event.value)"
-    >
-      <mat-radio-button value="merge">
-        Merge: keep it, and add the synced copy’s. Where both changed a record, the later change
-        wins.
-      </mat-radio-button>
-      <mat-radio-button value="replace">
-        Replace it with the synced copy’s lists, subscriptions, cards and tags
-      </mat-radio-button>
-    </mat-radio-group>
-    <p class="hint">
-      Either way, where you are, the tax and the budgets come from the synced copy, and the theme
-      stays this device’s.
-    </p>
+    @if (moving()) {
+      <p>This device syncs with another copy now: joining moves it to this one.</p>
+    }
+    @if (firstRun) {
+      <p class="hint">
+        Where you are, the tax and the budgets come from it, and the theme stays this device’s.
+      </p>
+    } @else {
+      <p id="join-mode-label" class="label">This device’s data</p>
+      <mat-radio-group
+        aria-labelledby="join-mode-label"
+        [value]="mode()"
+        (change)="mode.set($event.value)"
+      >
+        <mat-radio-button value="merge">
+          Merge: keep it, and add the synced copy’s. Where both changed a record, the later change
+          wins.
+        </mat-radio-button>
+        <mat-radio-button value="replace">
+          Replace it with the synced copy’s lists, subscriptions, cards and tags
+        </mat-radio-button>
+      </mat-radio-group>
+      <p class="hint">
+        Either way, where you are, the tax and the budgets come from the synced copy, and the theme
+        stays this device’s.
+      </p>
+    }
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button matButton type="button" (click)="back()" disabledInteractive [disabled]="busy()">
@@ -40,9 +49,25 @@
     <h2 mat-dialog-title>Join with a sync code</h2>
     <mat-dialog-content>
       <p id="join-words-hint">
-        Type the 24 words your other device shows (Settings, Sync between devices, Show the code),
-        or paste them all into the first box. Four letters are enough for each.
+        Scan the QR code your other device shows (Settings, Sync between devices, Show the code), or
+        type its 24 words, or paste them all into the first box. Four letters are enough for each.
       </p>
+      @if (scanning()) {
+        <ss-qr-scanner (scanned)="scanned($event)" (closed)="stopScanning()" />
+      } @else {
+        <button
+          #scanButton
+          matButton="outlined"
+          type="button"
+          class="scan"
+          (click)="startScanning()"
+          disabledInteractive
+          [disabled]="busy()"
+        >
+          <mat-icon>qr_code_scanner</mat-icon>
+          Scan the QR code
+        </button>
+      }
       <div class="words">
         @for (index of indexes; track index) {
           <mat-form-field appearance="outline" subscriptSizing="dynamic">
@@ -62,6 +87,7 @@
           </mat-form-field>
         }
       </div>
+      <p class="status" role="status">{{ status() }}</p>
       <p class="error" role="alert">{{ error() }}</p>
     </mat-dialog-content>
     <mat-dialog-actions align="end">

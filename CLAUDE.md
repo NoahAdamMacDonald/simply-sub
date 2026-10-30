@@ -57,7 +57,7 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
   (cost, privacy, offline). Only custom subscriptions use `GET /icon` (BLUEPRINT §14).
 - Storage, all on Cloudflare: static files for the catalog and icons, D1 for the API's searches, KV for small values
   that must survive (M2.5), R2 only when a trigger in BLUEPRINT §7.1 is reached. What users choose to send (M10's live
-  calendar feeds, sealed sync copies, price reports) goes in a D1 database of its own, `simply-sub-user`, through
+  calendar feeds, sealed sync copies and join links, price reports) goes in a D1 database of its own, `simply-sub-user`, through
   `apps/api/src/writes.ts`' rules (BLUEPRINT §5.4): kept 180 days unused at most, secrets only as hashes, writes capped
   under half of D1's daily quota.
 - Catalog growth is automated (discover → find URLs → AI extract → validate → PR). Humans only review PRs.

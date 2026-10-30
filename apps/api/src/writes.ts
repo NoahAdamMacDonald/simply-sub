@@ -3,10 +3,10 @@ import type { Context, MiddlewareHandler } from 'hono';
 import { badBody, overCapacity, rateLimited, tooLarge } from './http';
 
 // The rules for every request that stores something (BLUEPRINT §5.4, M10.1): the live calendar's feeds (M10.2), sync's
-// sealed copies (M10.8) and price reports (M10.10), all in the user database (USER_DB). An IP's writes have a limit of
-// their own on top of the API's, and so has each feed set or sync chain; every body has a size limit; each kind of
-// data has a daily cap on the rows it writes, since D1 counts them for the whole account, the catalog's deploys
-// included; and a secret is kept only as its hash, never logged.
+// sealed copies (M10.8) and join links (M10.14), and price reports (M10.10), all in the user database (USER_DB). An
+// IP's writes have a limit of their own on top of the API's, and so has each feed set or sync chain; every body has a
+// size limit; each kind of data has a daily cap on the rows it writes, since D1 counts them for the whole account, the
+// catalog's deploys included; and a secret is kept only as its hash, never logged.
 
 interface Api {
   Bindings: Env;
@@ -193,6 +193,22 @@ export function bearerSecret(c: Context<Api>): string | undefined {
 
 async function sha256(text: string): Promise<Uint8Array> {
   return new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)));
+}
+
+/** Bytes as base64, a chunk at a time: a MiB spread into one call would overflow the stack. */
+export function toBase64(bytes: Uint8Array): string {
+  let binary = '';
+  for (let at = 0; at < bytes.length; at += 0x8000) {
+    binary += String.fromCharCode(...bytes.subarray(at, at + 0x8000));
+  }
+  return btoa(binary);
+}
+
+export function fromBase64(text: string): Uint8Array<ArrayBuffer> {
+  const binary = atob(text);
+  const bytes = new Uint8Array(binary.length);
+  for (let index = 0; index < binary.length; index++) bytes[index] = binary.charCodeAt(index);
+  return bytes;
 }
 
 function base64url(bytes: Uint8Array): string {

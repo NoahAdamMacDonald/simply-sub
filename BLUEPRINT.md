@@ -1236,6 +1236,8 @@ M1.14), so a buyer can see what signing up means beyond the price.
 | `GET /sync/:chain` | A sync chain's sealed copy (`application/octet-stream`) with its auth secret (`Authorization: Bearer`), which each device derives from the sync code (section 11.4, M10.8); its version is the ETag, `304` with `If-None-Match`, `404` when there's none (or it was deleted) |
 | `PUT /sync/:chain` | Writes the sealed copy, up to 1 MiB: `If-None-Match: *` starts the chain (`201`), keeping the secret's SHA-256; `If-Match` with the version read replaces it (`200`) only if no device wrote since, else `412 stale_version`. One statement compares and writes, so two devices can't both win. A write that can't be made is answered before it's counted against the day's cap. Its 180 days start again. 6 writes a minute per chain |
 | `DELETE /sync/:chain` | Deletes a chain with its secret: every device's next sync finds it gone, and nothing of it is kept |
+| `POST /join` | Makes a join link (M10.14), the one-time QR code that adds a device: a sync code sealed on the device with a key only the link carries (`application/octet-stream`, up to 256 bytes), kept 10 minutes under the SHA-256 of a new 16-byte id; answers the id and when it stops working. Counted against sync's daily cap |
+| `DELETE /join/:id` | Takes a join link: answers its sealed code and deletes it in the same statement, so a link works once; `404` once taken, withdrawn (the showing device's dialog closing) or past its 10 minutes |
 
 Example requests and responses for every endpoint are in [docs/api-output-examples.json](docs/api-output-examples.json).
 Core holds the contract's response schemas (M2.7): `successBodySchemas` names each built endpoint's (the bodies'
@@ -1366,18 +1368,18 @@ shipped to the browser is visible. The risks are abuse, and M2 builds these defe
   it from a browser. It's an extra layer, not authentication. Every response also carries `X-Content-Type-Options:
   nosniff`, a CSP that allows nothing (`default-src 'none'; frame-ancestors 'none'`: an API answer is never a page)
   and `Cross-Origin-Resource-Policy: same-origin`, so other sites can't embed the answers, `/icon` images included.
-- **Writes** (M10.1, `apps/api/src/writes.ts`): Phase 5's live calendar feeds, sync's sealed copies and price reports
-  are stored, in the user database (`simply-sub-user`, section 7.1), so every request that stores something follows
-  the same rules. An IP has 10 writes a minute (`WRITE_RATE_LIMIT`, on top of the 60 requests) and a feed set or sync
-  chain 6 (`RESOURCE_RATE_LIMIT`, keyed by its id). A body is refused with `413 too_large` over its route's limit, at
-  once from its `Content-Length` or as it streams in, and a JSON body that isn't JSON gets `400` with its problems by
-  path. Each kind of data counts the rows it writes a day in the database, one statement checking and counting, up to
-  a cap (feeds 15,000, sync 25,000, reports 1,000: 41,000 together), because D1's 100,000 rows written a day are the
-  account's and the catalog's deploys need them; past a cap, or with the database over 400 MB, `503 over_capacity`
-  until midnight UTC. Secrets (a feed's token and manage key, sync's auth secret) are random values of 128 bits or
-  more, kept only as SHA-256 hashes and compared in constant time, and never logged. A cron trigger at 02:30 UTC
-  deletes what has expired and hands the price reports counted before that day to the bot (`src/clean-up.ts`, section
-  6.4).
+- **Writes** (M10.1, `apps/api/src/writes.ts`): Phase 5's live calendar feeds, sync's sealed copies and join links
+  (M10.14), and price reports are stored, in the user database (`simply-sub-user`, section 7.1), so every request that
+  stores something follows the same rules. An IP has 10 writes a minute (`WRITE_RATE_LIMIT`, on top of the 60 requests)
+  and a feed set or sync chain 6 (`RESOURCE_RATE_LIMIT`, keyed by its id). A body is refused with `413 too_large` over
+  its route's limit, at once from its `Content-Length` or as it streams in, and a JSON body that isn't JSON gets `400`
+  with its problems by path. Each kind of data counts the rows it writes a day in the database, one statement checking
+  and counting, up to a cap (feeds 15,000, sync 25,000, reports 1,000: 41,000 together), because D1's 100,000 rows
+  written a day are the account's and the catalog's deploys need them; past a cap, or with the database over 400 MB,
+  `503 over_capacity` until midnight UTC. Secrets (a feed's token and manage key, sync's auth secret, a join link's id)
+  are random values of 128 bits or more, kept only as SHA-256 hashes and compared in constant time, and never logged. A
+  cron trigger at 02:30 UTC deletes what has expired and hands the price reports counted before that day to the bot
+  (`src/clean-up.ts`, section 6.4).
 - **Secrets** (the bot's GitHub token, AI keys) are Worker secrets (`wrangler secret put`) or a gitignored `.env`,
   never tracked files. The D1 `database_id` in `wrangler.jsonc` isn't a secret: using it needs a Cloudflare login.
 
@@ -1979,7 +1981,7 @@ Bitdefender are in the batch's pull request; Crunchyroll's prices couldn't be re
 |---|---|---|
 | Workers requests | ~100,000 per day | API calls only: a few hundred per day at first |
 | Static assets | Free and unlimited. Up to 20,000 files per version, 25 MiB per file | The Angular build has well under 100 files |
-| D1 | 5 GB storage per account (500 MB per database, 10 databases), 5M rows read and 100k rows written per day for the whole account (index entries count), 2 MB per row | The catalog: under 25 MB even at 1,000 providers. **Rows written** is the one to watch: from M2.1 a deploy writes only what changed (section 5.3). Since M10.1 a second database, `simply-sub-user`, holds what users send (feeds, sync copies, reports), its writes capped at 41,000 a day so the catalog's deploys always have room (section 5.4) |
+| D1 | 5 GB storage per account (500 MB per database, 10 databases), 5M rows read and 100k rows written per day for the whole account (index entries count), 2 MB per row | The catalog: under 25 MB even at 1,000 providers. **Rows written** is the one to watch: from M2.1 a deploy writes only what changed (section 5.3). Since M10.1 a second database, `simply-sub-user`, holds what users send (feeds, sync copies, join links, reports), its writes capped at 41,000 a day so the catalog's deploys always have room (section 5.4) |
 | KV | 1 GB, 100k reads and 1k writes per day, 25 MiB per value | One namespace, `simply-sub-kv` (binding `KV`, M2.5; the bot's too since M3.9, its keys under `bot:`: check dates, pending pages, the last digest), for small values that must survive: the last good `/fx` rates (M2.5: one key, `fx:ecb`, written when the rates are fetched, about twice a day) and the `/icon` cache (M2.6: one key per domain asked for, written on a miss and kept 30 days, or a day for "no icon"). The Cache API is per data centre and can evict them. A few dozen writes a day |
 | R2 | 10 GB-month storage, 1M writes and 10M reads per month, no egress fees. Activating R2 asks for a payment method, even within the free tier | Not used yet: see the triggers below |
 
@@ -2806,6 +2808,10 @@ prompted after each big change, or weekly).
   shown lists). The server sees a blob's size and when it changed, nothing else. Leaving a chain or a lost device:
   a new code moves the data to a new chain. Accounts, or a passkey to open the chain (WebAuthn's PRF extension), can
   come later without changing this.
+- **Adding a device by its QR code (M10.14, M10.15):** Show the code's QR code is a join link that works once, for 10
+  minutes: the code sealed on the device with a key only the link carries, after its #, which the server never sees
+  (`POST /join`, `DELETE /join/:id`, section 5.2). A phone's camera opens it, or Join's own scanner reads it; a new
+  device can join from its first run, its settings starting from the copy's. Section 14 has the why.
 - **Accounts later:** add Cloudflare Access or an auth library on top. An account just owns sync blobs, so
   the data model doesn't change.
 
@@ -2986,6 +2992,40 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-30, the feedback after M10, part 2)**
+The owner's nine points after M10, a task row each in PROJECT-PLAN ("added 2026-10-30, the feedback after M10"):
+- **Scanning the sync code (M10.14, the owner's choice):** the QR code held the 24 words as text, which an iPhone's
+  camera offers to search the web for: one tap would have sent the code to a search engine and its history. A link to
+  the app with the code after its # (the owner's idea) never reaches the server, and Web Analytics' beacon leaves
+  fragments out of what it reports (read in its script, 2026-10-30), but the browser keeps the visit in its History,
+  and wherever that syncs, where anyone who reads it could join the chain until it starts over. The owner wanted no
+  such reuse, so the link works once: the device seals the code with a new random key, the server keeps the sealed
+  bytes 10 minutes, and the first device to take them deletes them, in one statement. A link left in History opens
+  nothing. The owner agreed to the short-lived sealed row in `simply-sub-user`; Show the code needs a connection for
+  its QR code, and offline shows the words alone.
+- **iPhone's Home Screen app (M10.14):** the camera opens links in Safari, never in a Home Screen web app, whose
+  storage is its own, so a link alone would join Safari. Join's Scan the QR code reads the code with the device's
+  camera (`getUserMedia`, which iOS allows a Home Screen app), with the decoder `@paulmillr/qr` already had, in a chunk
+  loaded only then; nothing it sees leaves the device. It also reads a code's 24 words, the QR code before.
+- **The decoder misreads a few codes (M10.14):** `@paulmillr/qr` 0.3.0's decoder fails on some codes whatever their
+  size, by the pattern their mask makes: 7 random join links in 400 at its default mask, every mask failing on some.
+  A phone's camera reads them all, but the app's scanner wouldn't, so `ss-qr-code` checks each code against the decoder
+  as it draws it and takes the first mask it reads (`readableModules`).
+- **/join is a redirect, not a page (M10.14):** a lazy route of its own was the only lazy entry to reach
+  `@angular/router` (and through it `@angular/common`) without the CDK, so the bundler split the 73.7 kB chunk the app
+  loads at start in two, and the glue between them took the initial bundle to 500.10 kB. `/join` now redirects to
+  Settings, keeping what's after its # in a signal (`core/join-inbox.ts`): 0.11 kB, and the link leaves the address
+  bar at once, before the lock screen too. Settings' sync card takes it once the app is unlocked, the first run's
+  dialog on a new device.
+- **Joining on a new device (M10.15):** a device in its first run has no settings, which a join only updated, so Join
+  starts them from the copy's shared settings with the device's theme (`joinedSettings`) and shows no Merge or Replace.
+  The first-run dialog now also closes when settings are saved any other way.
+- **Focus (M10.14):** Join opens on Scan the QR code, its first control, so a phone's keyboard doesn't cover it;
+  the words are a Tab on. The scanner takes the button's place and focus with it, onto Stop scanning, and gives it back.
+- **The Proton test feed (M10.2):** deleted from the user database on 2026-10-30 with the owner's OK. Proton Calendar
+  had added it by its name; its events weren't checked, so M10.2's last box waits for the owner's own live calendar.
+- **Bundle:** 499.76 kB initial (499.65 before): the redirect and the inbox.
 
 **Resolved (2026-10-29, the feedback after M10)**
 The user's report after M10, as M8.7 (PROJECT-PLAN's row has it as built):

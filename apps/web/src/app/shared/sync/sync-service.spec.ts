@@ -9,6 +9,7 @@ import {
 import { openCopy, sealCopy, syncKeys, type SyncKeys } from '../../core/crypto/sync-crypto';
 import { ListsRepository } from '../../core/storage/lists-repository';
 import {
+  deleteRows,
   plantRows,
   storedRows,
   testStorage,
@@ -217,13 +218,38 @@ describe('SyncService', () => {
       const preview = await service.preview(seed);
       if (preview.kind !== 'copy') throw new Error(preview.kind);
 
-      expect(await service.join(seed, preview, 'merge')).toBe('synced');
+      // The theme on screen starts only a new device's settings (M10.15): this one keeps its own.
+      expect(await service.join(seed, preview, 'merge', 'light')).toBe('synced');
       await until(() => lists().records().length === 2);
       const saved = (await storedRows(storage.indexedDB, 'settings'))[0] as Settings;
       expect(saved).toMatchObject({ subdivision: 'CA-ON', monthlyBudget: 300, theme: 'dark' });
       const copy = await chainCopy();
       expect(copy.data.lists.map((list) => list.name).sort()).toEqual(['Mine', 'Shared']);
       expect(copy.devices.map((device) => device.name)).toEqual(['This browser', 'Phone']);
+    });
+
+    it('joins a new device in its first run: its settings start from the chain’s and its theme (M10.15)', async () => {
+      await deleteRows(storage.indexedDB, 'settings', ['settings']);
+      await firstDevice();
+      const preview = await service.preview(seed);
+      if (preview.kind !== 'copy') throw new Error(preview.kind);
+
+      expect(await service.join(seed, preview, 'merge', 'light')).toBe('synced');
+      await until(() => lists().records().length === 1);
+      expect(await storedRows(storage.indexedDB, 'settings')).toEqual([
+        expect.objectContaining({
+          country: 'CA',
+          subdivision: 'CA-ON',
+          currency: 'CAD',
+          monthlyBudget: 300,
+          theme: 'light',
+          sharedUpdatedAt: '2026-10-19T10:00:00.000Z',
+        }),
+      ]);
+      expect((await chainCopy()).devices.map((device) => device.name)).toEqual([
+        'This browser',
+        'Phone',
+      ]);
     });
 
     it('replaces: this device’s records give way to the chain’s', async () => {

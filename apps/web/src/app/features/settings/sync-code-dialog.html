@@ -2,8 +2,8 @@
 <mat-dialog-content>
   @if (data.mode === 'show') {
     <p>
-      On the device you’re adding, open Settings, then Join with a code, and type these words, or
-      scan the QR code with its camera.
+      On the device you’re adding, scan the QR code with its camera. Or open Settings there, then
+      Join with a code, and scan it or type these words.
     </p>
   } @else {
     <p>
@@ -13,14 +13,31 @@
     @if (data.mode === 'start-over') {
       <p>Your other devices stop syncing until they join with this code.</p>
     }
+    <p>Once sync is on, Show the code gives a QR code that adds a device in one scan.</p>
   }
+  <!-- To add a device, the QR code comes first: on a phone it's above the words. -->
   <div class="code">
+    @if (data.mode === 'show') {
+      <div class="qr">
+        @if (qr(); as qr) {
+          @if (qr.kind === 'made') {
+            <ss-qr-code [text]="qr.url" label="A QR code that adds a device to this sync once" />
+          }
+        }
+        <p class="qr-status" role="status">{{ qrText() }}</p>
+        @if (qr().kind !== 'making') {
+          <button matButton type="button" (click)="makeLink()">
+            <mat-icon>refresh</mat-icon>
+            Make a new QR code
+          </button>
+        }
+      </div>
+    }
     <ol class="words" aria-label="The code’s 24 words">
       @for (word of words; track $index) {
         <li translate="no">{{ word }}</li>
       }
     </ol>
-    <ss-qr-code [text]="words.join(' ')" label="A QR code of the same 24 words" />
   </div>
   <!-- In the content, where a phone scrolls to it: a scrolling region needs something to Tab to. -->
   <button matButton="outlined" type="button" class="copy" (click)="copy()">

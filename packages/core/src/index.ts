@@ -138,6 +138,7 @@ export * from './user/item-replacement';
 export * from './user/price-changes';
 export * from './user/item-form';
 export * from './user/item-text';
+export * from './user/join-link';
 export * from './user/list-draft';
 export * from './user/list-item';
 export * from './user/list-view';
