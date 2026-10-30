@@ -3083,6 +3083,10 @@ The owner's nine points after M10, a task row each in PROJECT-PLAN ("added 2026-
   served, so the titles, amounts and dates sat readable at rest. They're now sealed with a key derived from each
   feed's token, which the server never keeps (section 11.3). A calendar app still receives the file in the clear over
   HTTPS, as an `.ics` subscription must be.
+- **Category starts empty (M10.22):** Search's Category showed "All" as its text, which a typed category followed
+  wherever a click didn't select it first (an iPhone's tap places the caret). `ss-choice-field` takes a `placeholder`
+  for the choice with no value: while it's chosen the field is empty, its label inside as Features' is, and the
+  placeholder shows once it's focused.
 - **Focus (M10.14):** Join opens on Scan the QR code, its first control, so a phone's keyboard doesn't cover it;
   the words are a Tab on. The scanner takes the button's place and focus with it, onto Stop scanning, and gives it back.
 - **The Proton test feed (M10.2):** deleted from the user database on 2026-10-30 with the owner's OK. Proton Calendar

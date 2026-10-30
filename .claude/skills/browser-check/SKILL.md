@@ -561,6 +561,11 @@ With axe on the open lists and the snackbar, and no horizontal scroll.
 - Since M10.19 a snackbar's text is its message, its action and ✕'s icon name ("close"): read the message from
   `ss-snack .mat-mdc-snack-bar-label` (the container's own `.mat-mdc-snack-bar-label` wraps all of it), and find a
   button by its name, since there are two.
+`check-m10-category.cjs` (M10.22, the feedback after M10, part 2) checks Search's Category on `ng serve` for a Canadian
+in Alberta (base URL ending in `/`), in both themes at 1280 px (the filter panel) and 360 px (the drawer): empty while
+it's All with its label in the field, then focused by Tab with its label floated and "All" its placeholder, "vp" typed
+at once narrowing the list to VPN and Enter picking it, and All picked with the pointer emptying it again, with axe on
+the field focused and not, and no horizontal scroll.
 
 `check-m10-join-link.cjs` (M10.14 and M10.15, the feedback after M10, part 2: sync's one-time join link and joining on
 the first visit) needs wrangler dev answering the API, with its user database migrated (`npm -w apps/api run
