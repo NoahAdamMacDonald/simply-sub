@@ -88,10 +88,10 @@ export interface ModifyOptions {
 }
 
 /**
- * The tables whose records are deleted outright rather than soft-deleted: the caches, and drafts, which are edits not
- * saved yet, so a sync has no deletion to pass on.
+ * The tables whose records are deleted outright rather than soft-deleted: the caches, drafts, which are edits not
+ * saved yet, and sync's own record (M10.9), this device's: a sync has no deletion of theirs to pass on.
  */
-export type TransientTable = CacheTable | 'drafts';
+export type TransientTable = CacheTable | 'drafts' | 'sync';
 
 /** What a StorageEngine.transaction reads and writes, every record checked on the way in and out. */
 export interface StorageTransaction {

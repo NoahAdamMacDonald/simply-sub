@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>{{ data.mode === 'start-over' ? 'Your new sync code' : 'Your sync code' }}</h2>
+<mat-dialog-content>
+  @if (data.mode === 'show') {
+    <p>
+      On the device you’re adding, open Settings, then Join with a code, and type these words, or
+      scan the QR code with its camera.
+    </p>
+  } @else {
+    <p>
+      Keep it in a password manager or on paper: it’s how you add a device, and nobody can recover
+      it.
+    </p>
+    @if (data.mode === 'start-over') {
+      <p>Your other devices stop syncing until they join with this code.</p>
+    }
+  }
+  <div class="code">
+    <ol class="words" aria-label="The code’s 24 words">
+      @for (word of words; track $index) {
+        <li translate="no">{{ word }}</li>
+      }
+    </ol>
+    <ss-qr-code [text]="words.join(' ')" label="A QR code of the same 24 words" />
+  </div>
+  <!-- In the content, where a phone scrolls to it: a scrolling region needs something to Tab to. -->
+  <button matButton="outlined" type="button" class="copy" (click)="copy()">
+    <mat-icon>content_copy</mat-icon>
+    Copy the words
+  </button>
+  <p class="status" role="status">{{ copied() }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  @if (data.mode === 'show') {
+    <button matButton="filled" type="button" mat-dialog-close>Done</button>
+  } @else {
+    <button matButton type="button" mat-dialog-close>Cancel</button>
+    <button matButton="filled" type="button" [mat-dialog-close]="true">I’ve saved it</button>
+  }
+</mat-dialog-actions>

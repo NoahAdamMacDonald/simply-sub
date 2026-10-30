@@ -63,7 +63,7 @@ describe('public/_headers', () => {
     expect(csp['connect-src']).toEqual(["'self'", 'https://cloudflareinsights.com']);
   });
 
-  it("locks everything else down, with Trusted Types for Angular and the optimizer's worker only", () => {
+  it("locks everything else down, with Trusted Types for Angular, the optimizer's worker and the service worker only", () => {
     expect(csp).toMatchObject({
       'default-src': ["'self'"],
       'object-src': ["'none'"],
@@ -72,7 +72,12 @@ describe('public/_headers', () => {
       'frame-ancestors': ["'none'"],
       'worker-src': ["'self'"],
       'require-trusted-types-for': ["'script'"],
-      'trusted-types': ['angular', 'angular#bundler', 'simply-sub#worker'],
+      'trusted-types': [
+        'angular',
+        'angular#bundler',
+        'simply-sub#worker',
+        'simply-sub#service-worker',
+      ],
     });
     expect(site.get('Referrer-Policy')).toBe('no-referrer');
     expect(site.get('X-Content-Type-Options')).toBe('nosniff');

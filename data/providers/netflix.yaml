@@ -23,7 +23,20 @@ acceptedNetworks:
       - MasterCard
       - American Express
       - Discover
-billingCurrency: { CA: CAD, US: USD, DE: EUR, FR: EUR, IE: EUR, NL: EUR, ES: EUR, IT: EUR }
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    AU: AUD,
+    NZ: NZD,
+    DE: EUR,
+    FR: EUR,
+    IE: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+  }
 cancelUrl: https://www.netflix.com/cancelplan
 sources: { pricing: https://help.netflix.com/en/node/24926 }
 
@@ -55,6 +68,22 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://help.netflix.com/en/node/24926/us
+      - region: GB
+        currency: GBP
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://help.netflix.com/en/node/24926/gb
+      - region: AU
+        currency: AUD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://help.netflix.com/en/node/24926/au
       - region: DE
         currency: EUR
         amount: 6.99
@@ -115,6 +144,30 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://help.netflix.com/en/node/24926/us
+      - region: GB
+        currency: GBP
+        amount: 13.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://help.netflix.com/en/node/24926/gb
+      - region: AU
+        currency: AUD
+        amount: 20.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://help.netflix.com/en/node/24926/au
+      - region: NZ
+        currency: NZD
+        amount: 25.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://help.netflix.com/en/node/24926/nz
       - region: DE
         currency: EUR
         amount: 15.99
@@ -197,6 +250,30 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://help.netflix.com/en/node/24926/us
+      - region: GB
+        currency: GBP
+        amount: 20.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://help.netflix.com/en/node/24926/gb
+      - region: AU
+        currency: AUD
+        amount: 28.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://help.netflix.com/en/node/24926/au
+      - region: NZ
+        currency: NZD
+        amount: 33.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://help.netflix.com/en/node/24926/nz
       - region: DE
         currency: EUR
         amount: 21.99

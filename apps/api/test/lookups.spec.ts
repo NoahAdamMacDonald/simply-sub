@@ -214,8 +214,8 @@ describe('GET /providers/:id', () => {
       await get('/providers/disney-plus?region=CA')
     ).json<{ data: { plans: Json[]; addOns: Json[] } }>();
     const britain = await (
-      await get('/providers/netflix?region=GB')
-    ).json<{ data: { plans: { pricing: Picked[] }[] }; meta: Json }>();
+      await get('/providers/disney-plus?region=GB')
+    ).json<{ data: { plans: { id: string; pricing: Picked[] }[] }; meta: Json }>();
 
     const priced = (items: Json[]) =>
       items.filter((item) => 'pricing' in item).map((item) => item['id']);
@@ -225,9 +225,10 @@ describe('GET /providers/:id', () => {
       'disney-plus.premium',
     ]);
     expect(priced(canada.data.addOns)).not.toContain('disney-plus.extra-member-with-ads');
-    // Netflix has no British prices: unknown there, so the US price is converted, as pickPrice falls back.
+    // Disney+ has no British prices: unknown there, so Premium's US price is converted, as pickPrice falls back.
     expect(britain.meta).toMatchObject({ region: 'GB', currency: 'GBP' });
-    expect(britain.data.plans[0].pricing[0]).toMatchObject({
+    const premium = britain.data.plans.find((plan) => plan.id === 'disney-plus.premium');
+    expect(premium?.pricing[0]).toMatchObject({
       currency: 'GBP',
       native: false,
       source: { region: 'US', currency: 'USD' },

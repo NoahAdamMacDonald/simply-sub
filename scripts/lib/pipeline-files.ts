@@ -27,6 +27,19 @@ export interface PageRecord extends RenderedPage {
   read: string;
   /** How many prices it shows in each currency (a bare $ is `dollar`), to spot a page priced for another country. */
   currencies: Record<string, number>;
+  /**
+   * Why a page read for a region isn't its page there (M10.12): it went to another country's, or shows another
+   * currency's prices only. It isn't extracted.
+   */
+  unread?: string;
+}
+
+/**
+ * A provider's working folder: its own for Canada's pages, .pipeline/<id>, and one in it for a region's,
+ * .pipeline/<id>/regions/<region> (M10.12), so the two never mix. workFile takes it in place of the id.
+ */
+export function workId(id: string, region?: string): string {
+  return region === undefined ? id : `${id}/regions/${region}`;
 }
 
 /** A path in a provider's working folder, from the repository's root: .pipeline/<id>/<name>. */

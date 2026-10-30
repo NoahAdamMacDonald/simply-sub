@@ -4,6 +4,7 @@ import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import app from '../src/index';
 import { png } from './icon-images';
 import { catalogAssets, catalogSnapshot, seedCatalog } from './seeded-catalog';
+import { freshRateLimitWindow } from './rate-limit-window';
 
 // What every /api/* request goes through (src/middleware.ts, M2.8): the API's headers, JSON errors for unknown paths
 // and unexpected throws, the per-IP rate limits and the edge cache, on the real catalog.
@@ -129,6 +130,7 @@ describe('the error middleware', () => {
 
 describe('the rate limits', () => {
   it('give an IP 60 requests a minute, then 429 with Retry-After, while another IP goes on', async () => {
+    await freshRateLimitWindow();
     const statuses: number[] = [];
     for (let i = 0; i < 61; i++) {
       statuses.push((await get('/health', { 'CF-Connecting-IP': '203.0.113.1' })).status);
@@ -152,6 +154,7 @@ describe('the rate limits', () => {
   });
 
   it('give an IP 10 requests a minute to /icon', async () => {
+    await freshRateLimitWindow();
     const statuses: number[] = [];
     for (let i = 0; i < 11; i++) {
       statuses.push(

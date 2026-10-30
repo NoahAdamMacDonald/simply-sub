@@ -9,6 +9,25 @@ const subdivisionSchema = z
   .string()
   .regex(/^[A-Z]{2}-[A-Z0-9]{1,3}$/, 'Use an ISO 3166-2 code (CA-ON)');
 
+/** A subdivision is one of the chosen country's: CA-ON with CA. A malformed country or subdivision has its own issue. */
+export function addSubdivisionIssue(
+  { country, subdivision }: { country: string; subdivision?: string },
+  ctx: z.RefinementCtx,
+): void {
+  if (
+    subdivision !== undefined &&
+    countrySchema.safeParse(country).success &&
+    subdivisionSchema.safeParse(subdivision).success &&
+    !subdivision.startsWith(`${country}-`)
+  ) {
+    ctx.addIssue({
+      code: 'custom',
+      message: 'Use a subdivision of the chosen country',
+      path: ['subdivision'],
+    });
+  }
+}
+
 /**
  * The user's settings: one record, under the key `settings` (BLUEPRINT §4.6). Per-device preferences (PROJECT-PLAN
  * §3.5) arrive with their tasks as optional fields, which stored records without them still pass.
@@ -54,21 +73,12 @@ export const settingsSchema = z
      * stays plain while the rest of the settings are sealed, and only the storage engine's lock methods change it.
      */
     appLock: appLockSchema.optional(),
+    /**
+     * When a setting every device shares last changed (core's sharedSettingsFields, M10.7): sync merges those by it, so
+     * a change to the theme here doesn't outweigh a budget set on another device. Left out, `updatedAt` stands in.
+     */
+    sharedUpdatedAt: timestampSchema.optional(),
     updatedAt: timestampSchema,
   })
-  .superRefine(({ country, subdivision }, ctx) => {
-    // A malformed country or subdivision has its own issue.
-    if (
-      subdivision !== undefined &&
-      countrySchema.safeParse(country).success &&
-      subdivisionSchema.safeParse(subdivision).success &&
-      !subdivision.startsWith(`${country}-`)
-    ) {
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Use a subdivision of the chosen country',
-        path: ['subdivision'],
-      });
-    }
-  });
+  .superRefine(addSubdivisionIssue);
 export type Settings = z.infer<typeof settingsSchema>;

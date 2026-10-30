@@ -2,6 +2,7 @@ import { quoteLink } from '../catalog/plan-policies';
 import type { Price } from '../catalog/price';
 import type { DraftProvider, Evidence, ExtractionIssue, ProposedFeature } from './extraction';
 import type { PageKind } from './find-pages';
+import { regionWords, type RegionalPrice } from './regional-draft';
 
 // The pull request of a batch of new providers (BLUEPRINT §6.5 ⑥, M3.5): a table to review them by, each provider's
 // plans and prices with links that open each price's page at its quote, what was dropped, what to check, the proposed
@@ -165,6 +166,52 @@ function providerSection(entry: BatchProvider): string {
     );
   }
   return lines.join('\n');
+}
+
+/** A provider of a region's batch (M10.12): the prices added for it, and why any of its pages or prices weren't. */
+export interface RegionalBatchProvider {
+  id: string;
+  name: string;
+  /** Each price added, with its plan's name. */
+  added: (RegionalPrice & { planName: string })[];
+  /** Why the provider (or some of its prices) was left out: no page found, a page unread, a price dropped. */
+  notes: string[];
+}
+
+/**
+ * The pull request of a region's batch (BLUEPRINT §6.5, M10.12): each price added with a link that opens its page at
+ * its quote, then the providers left out with why, so a reviewer checks each against the provider's own page.
+ */
+export function regionalReview(
+  region: string,
+  providers: readonly RegionalBatchProvider[],
+): string {
+  const name = regionWords(region);
+  const added = providers.filter((provider) => provider.added.length > 0);
+  const left = providers.filter((provider) => provider.added.length === 0);
+  const prices = added.reduce((sum, provider) => sum + provider.added.length, 0);
+  const rows = added.flatMap((provider) =>
+    provider.added.map(
+      (entry) =>
+        `| ${cell(provider.name)} | ${cell(entry.planName)} | ${priceWords(entry.price)} | [${cell(entry.quote)}](${linkTarget(quoteLink(entry.price.sourceUrl ?? '', [entry.quote]))}) |`,
+    ),
+  );
+  const notes = (provider: RegionalBatchProvider) =>
+    provider.notes.map((note) => `  - ${cell(note)}`).join('\n');
+  return [
+    `Prices for ${name} (${region}), read from each provider's own page for ${name} by the discovery pipeline (BLUEPRINT §6.5, PROJECT-PLAN M10.12): every price is its regular one, quoted word for word from its page, which each link opens at the quote. Nothing is merged by the bot: check each against its page.`,
+    `### Added: ${prices === 1 ? '1 price' : `${prices} prices`} for ${added.length === 1 ? '1 provider' : `${added.length} providers`}`,
+    rows.length > 0
+      ? ['| Provider | Plan | Price | Quote |', '|---|---|---|---|', ...rows].join('\n')
+      : 'None.',
+    ...added
+      .filter((provider) => provider.notes.length > 0)
+      .map((provider) => `**${cell(provider.name)}** also:\n${notes(provider)}`),
+    `### Left out: ${left.length === 1 ? '1 provider' : `${left.length} providers`}`,
+    left.length > 0
+      ? left.map((provider) => `- **${cell(provider.name)}**\n${notes(provider)}`).join('\n')
+      : 'None.',
+  ].join('\n\n');
 }
 
 /** "18.99 CAD a month", "99 USD every 2 years". */

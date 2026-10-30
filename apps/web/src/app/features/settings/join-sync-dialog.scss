@@ -1,0 +1,51 @@
+// The form wraps the dialog's title, content and actions, which the dialog lays out as its own children.
+form {
+  display: contents;
+}
+
+// Focus moves to the title when the copy is found. It isn't a control, so it needs no focus ring.
+h2:focus {
+  outline: none;
+}
+
+p {
+  margin: 0 0 12px;
+}
+
+// Two boxes a row on a phone, four from 600 px.
+.words {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 12px;
+
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.label {
+  margin-bottom: 4px;
+  font: var(--mat-sys-title-small);
+}
+
+// The circles' own padding lines them up with the text above.
+mat-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin-left: -10px;
+}
+
+.hint {
+  margin: 12px 0 0;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}
+
+.error {
+  margin: 12px 0 0;
+  color: var(--ss-danger);
+
+  &:empty {
+    display: none;
+  }
+}

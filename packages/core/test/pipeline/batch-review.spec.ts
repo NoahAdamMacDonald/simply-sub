@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { batchIdsIn, batchReview, type BatchProvider } from '../../src';
+import { batchIdsIn, batchReview, regionalReview, type BatchProvider } from '../../src';
 
 const claude: BatchProvider = {
   id: 'claude',
@@ -113,5 +113,45 @@ describe('batchReview', () => {
 describe('batchIdsIn', () => {
   it('reads nothing from a body without the line', () => {
     expect(batchIdsIn('A pull request.')).toEqual([]);
+  });
+});
+
+describe('regionalReview (M10.12)', () => {
+  it('lists each price added with a link to its quote, then the providers left out with why', () => {
+    const body = regionalReview('GB', [
+      {
+        id: 'netflix',
+        name: 'Netflix',
+        added: [
+          {
+            plan: 'netflix.standard',
+            planName: 'Standard',
+            quote: 'Standard: £12.99 / month',
+            price: {
+              region: 'GB',
+              currency: 'GBP',
+              amount: 12.99,
+              interval: 'month',
+              intervalCount: 1,
+              autoRenew: true,
+              lastVerified: '2026-10-29',
+              sourceUrl: 'https://help.netflix.com/en/node/24926/gb',
+            },
+          },
+        ],
+        notes: [],
+      },
+      { id: 'crave', name: 'Crave', added: [], notes: ['No pricing page for GB found.'] },
+    ]);
+    expect(body).toContain('Prices for the United Kingdom (GB)');
+    expect(body).toContain('### Added: 1 price for 1 provider');
+    expect(body).toContain(
+      '| Netflix | Standard | 12.99 GBP a month (GB) | [Standard: £12.99 / month](',
+    );
+    expect(body).toContain(
+      ['### Left out: 1 provider', '', '- **Crave**', '  - No pricing page for GB found.'].join(
+        '\n',
+      ),
+    );
   });
 });

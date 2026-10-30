@@ -133,6 +133,27 @@ node .claude/skills/price-research/read-page.cjs "$DEPS" "$OUT" https://proton.m
 | **Extra members** (Netflix, Disney+) | The price usually depends on the account holder's plan. Read the limit from the help article ("can have one Extra Member"). | One add-on per price and plan, with `grantsPlan` set to the plan whose features the member gets, and `addOnLimit`. |
 | **Suites** (Proton Unlimited, Duo, Family) | Read their own limits (storage, addresses, users). Don't add up the parts. | Normal plans with their own features, `includes-subscription` and `account.users` (BLUEPRINT §4.4). |
 
+## Reading a region (M10.12)
+
+A region the catalog doesn't price a provider in yet, for a provider it has, goes through the discovery pipeline,
+which reads each page as a visitor there would, before any hand reading:
+
+1. `npm run data:urls -- <id> --region GB`: the pages the provider's prices cite are read first for their `hreflang`
+   links and the links under the region's locale (`/en-gb/`, `/uk/`: core's `regionalPages`), then its common paths,
+   sitemaps and links score the region's locale first (pricing only, unless `--kinds` says otherwise). Written to
+   `.pipeline/<id>/regions/GB/`.
+2. `npm run data:render -- <id> --region GB`: the page in the system Edge in the region's English and time zone. A page
+   that went to another country's (`/en-us/` from `/en-gb/`) or shows only another currency's prices is kept as
+   unread, never extracted: a site that prices by where the visitor is shows this machine Canada's. Read that one
+   here only with the region's prices on screen (a country picker, or the computer's VPN if the owner wants).
+3. `npm run data:extract -- <id> --region GB --prepare`, answer `extraction.md` in `answer.json` beside it, then
+   `npm run data:extract -- <id> --region GB`: core's `regionalPrices` keeps only prices for the provider's plans, in
+   the region's currency, each quoted on its page with its amount, and adds them to the provider file beside the
+   others (the plan's price for that region and period replaced).
+4. `npm run data:batch -- --region GB` does all of it for the catalog's providers and opens one pull request for the
+   region (`--dry-run` stops before the branch): the prices with a link to each quote, and the providers left out with
+   why. `EU` is the region for a provider that charges every euro country the same; otherwise each country's own.
+
 ## After writing the files
 
 1. `npx prettier --write data/providers data/bundles`. For a new provider, `npm run data:icons` fetches its logo
