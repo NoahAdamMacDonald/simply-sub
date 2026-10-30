@@ -351,7 +351,7 @@ one canonical feature describes the same capability across every provider, whate
    optimizer could never suggest a simpler password manager.
 3. **Reusable or nothing.** A feature goes in the registry if it is comparable and either exists at **two or more
    providers** or matters for ranking. Anything else that is truly provider-specific (the Fortnite Crew passes in
-   Game Pass Ultimate) goes in a plan's `perks` list (free text, shown but not compared). How to find, model and add
+   Game Pass Ultimate) goes in a plan's `perks` list (free text, shown but not compared until M11.6 makes perks rankable: Ranked perks, below). How to find, model and add
    features from providers' pages: `.claude/skills/feature-discovery/SKILL.md`.
 4. **Prefer structured types:** `boolean`, `number` (with `unlimited`), `enum` (ordered) and `set` (a
    multi-select of canonical values, for example the item types a password manager can store).
@@ -360,6 +360,26 @@ one canonical feature describes the same capability across every provider, whate
 6. **Every value is an object** with an `id` and a `name` (plus optional `aliases` and `headline`), and every
    feature has a `category`, children included. There's no shorthand, so the file reads one way and the display
    names stay deliberate ("480p (SD)", not "480p").
+7. **Required features** (M11.4). A feature's `requiredIn: [streaming]` makes every plan in those categories state
+   it, `false` and `0` included, so the features buyers compare most never rest on "unlisted means no".
+8. **Price differences need feature differences** (M11.4). Two of a provider's plans at different prices, for the
+   same region and period, must differ in a feature or a perk; validation warns otherwise. The optimizer compares
+   only rank keys, so a tier whose extras were text made it suggest the cheapest tier every time (Xbox Game Pass,
+   Claude before M11.9).
+9. **Provider-wide features** (M11.4). What every plan of a provider has (platforms, sign-in, open source, languages,
+   support) is stated once in the provider's own `features`; a plan states a value only where it differs. D1 keeps
+   them once per provider (`provider_features`), not once per plan, which saves about 150 rows a provider.
+10. **Reuse first.** An existing id as it is; then a new value or alias of one; then a cross-category feature
+   (`platforms`, `software.open-source`, `account.sign-in`…); then a new feature through feature-discovery; then a
+   perk. A capability from another category uses that category's feature and puts the plan in that category
+   (Proton's Lumo is `ai.assistant`, and its plans list `ai`).
+
+**Ranked perks** (M11.6, the owner's choice on 2026-10-30). A provider lists its perks once, with ids
+(`perks: [{ id: fortnite-crew, name: Fortnite Crew passes }]`), and each plan lists the ids it has. Each perk is a
+rank key, `perk:<provider>/<perk>`, ranked on the plan in the item dialog, never on the Features page (it means
+nothing to another provider), and shared with the provider's other plans in the list (M6.14). The optimizer treats it
+as any rank key. A perk a second provider comes to offer becomes a feature, and its `movedTo` lets the app move
+users' ranks to the feature's key.
 
 ```yaml
 # data/features.yaml (an excerpt: the file is the registry)
@@ -1194,6 +1214,77 @@ M1.14), so a buyer can see what signing up means beyond the price.
   unread. The quotes are in the catalog files, and the card shows them in its citations' tooltips and links (about
   7 kB more to download, compressed, for ten providers). Nothing rereads them nightly yet: validation warns once a rating is
   a year old.
+
+**Version 2** (M11.1–M11.2, planned 2026-10-30 with the owner; the rubrics and their reasoning are in
+`docs/catalog-expansion-guide.md` until M11.1 puts them in `data/policy-topics.yaml`):
+- **More topics,** most for every provider: AI training, who can read your content, retention, export, government
+  requests, where data is kept, what sign-up needs, children; cancellation and refunds as two topics, renewal
+  notice, fees, plan changes; content rights, what you paid for being taken away, inactive accounts, who owns an AI's
+  output; a security group (independent audits); `service.activity-logging` (VPN, DNS, search, browsers); and for
+  finance, money protection and holds.
+- **One procedure for every grade:** the default first, then how you change it (self-serve, partial, on request or
+  not at all); exceptions for the law, fraud, safety or security never count against an opt-out, and exceptions for
+  business purposes do; the worst clause wins, with better terms in some countries as a rating with `regions`; broad
+  wording read broadly; each fact in one topic, by a routing table.
+- **Silence** (the owner's choice): each topic says what silence means. Where it means a missing protection (no
+  notice of price changes promised), it's graded; where it proves nothing (data sharing), the card says *Not stated*
+  in grey. Every topic that applies has a grade or a status, so cards can be compared line by line.
+- **Shared policy documents:** a company's privacy policy or terms that cover several providers (Disney's for Disney+,
+  Hulu and ESPN; Bell's for Crave, TSN and RDS; Microsoft's, Google's, Amazon's) are rated once in
+  `data/policies/<set>.yaml`. A provider names the sets it's covered by and adds ratings from its own terms; its own
+  rating wins for a topic both rate. One read, one set of quotes, one re-read when the page changes.
+- **Notable:** up to three ratings of `other.notable`, with a title, for what no topic covers.
+- **Outside raters** (M11.2, the owner's choice): news bias and reliability from at least two named raters, and
+  antivirus lab results, as a provider's `ratings`: the rater, its label, the date and a link, never the rater's text
+  or our own judgement.
+
+### 4.11 Finance accounts (planned: M11.10–M11.14)
+Banks, credit unions, fintechs and brokerages, decided with the owner on 2026-10-30. They aren't subscriptions with a
+price list, so they reuse what fits and add what doesn't:
+- **An account is a plan.** Its monthly fee is the plan's price ($0 for a free account), so totals, schedules, cards
+  and the optimizer's existing actions work unchanged. A provider's main `category` is `finance`.
+- **The plan's `account` block** holds what a price can't:
+
+  ```yaml
+  account:
+    kind: savings                 # chequing, savings, usd, tfsa, rrsp, fhsa, resp, rdsp, rrif, lira, gic, investing
+    waivers:                      # any one waives the fee; the user says which they meet (M11.11)
+      - { minBalance: 3000 }
+      - { directDeposit: true }
+    rates:
+      follows: prime              # prime, boc-overnight or none: whether it moves with the Bank of Canada's
+      applies: whole              # whole: the balance at its tier's rate; portion: each part at its own
+      tiers:                      # % a year, posted rates only (no promotional rate, as with prices)
+        - { from: 0, rate: 1.25 }
+        - { from: 5000, rate: 2.0 }
+    limits:                       # shown, not ranked
+      eTransfer: { day: 3000, week: 10000, month: 20000 }
+    protection:                   # quoted, like acceptedNetworks
+      insurer: cdic               # cdic, a provincial insurer, cipf, or none
+      held: trust                 # own-name, trust (you're the beneficiary) or company
+      url: https://…
+      quotes: ['…']
+    eligibility: { minAssets: 100000 }   # tiers decided by assets rather than a fee
+  ```
+
+- **Finance features** (a feature category of their own, through feature-discovery): account types and registered
+  accounts (TFSA, RRSP, FHSA, RESP, RDSP, RRIF, LIRA), cards and their networks (Interac debit, Visa Debit,
+  Mastercard, prepaid, credit), Interac e-Transfer, ATM network and fee refunds, cash deposits (branch, partner, Canada
+  Post), USD accounts, online or branch, and for investing: self-directed or managed, products (stocks, ETFs, GICs,
+  mutual funds, options, short selling, margin, crypto), order types (market, limit, stop-loss, stop-limit),
+  fractional shares and markets (TSX, TSXV, NYSE, NASDAQ, Cboe Canada…).
+- **Regulators:** a provider's `regulators`, each with its register's page for the provider (CIRO, OSFI, FCAC,
+  provincial regulators); with the `finance.money-protection` and `finance.holds` topics (section 4.10), they answer
+  "is it a bank, and who protects my money".
+- **The user's side** (section 4.6, M11.11): an account item has a `balance` (amount and currency) and the waivers the
+  user meets. Balances are sensitive: never indexed, sealed by the app lock, in backups and sync, and in exports only
+  when chosen.
+- **Money terms** (PROJECT-PLAN §3.1, M11.12): *interest a year* is the balance at its tiers (`applies`), before tax;
+  *fee after waivers* is $0 when a waiver is met; *net cost* is the fee after waivers less interest. Interest is shown
+  beside spending, never inside subscription totals.
+- **Rates change** (M11.14): the bot reads them as it reads prices, and keeps each change with its date, so a rate
+  that follows the Bank of Canada's shows how many days it took to follow its last changes.
+- **Information, not advice:** the app says so wherever it suggests a finance change.
 
 ---
 
@@ -2671,6 +2762,22 @@ pricier when they're alike, the cheaper when only the pricier has another Needed
 blocks a downgrade", "Critical feature allows a same-provider downgrade that keeps it but blocks removal" and "a
 limited Sep–Oct window keeps a Needed feature covered".
 
+
+### 10.6 Finance accounts (planned: M11.13)
+With balances (section 4.11), the optimizer weighs fees against interest. Every finance suggestion is labelled as
+information, not financial advice.
+- **A paid rate:** paying a fee `F` a month for a rate `r₁` instead of `r₀` pays for itself above the balance
+  `12F / (r₁ − r₀)` (a $10 fee for 1.5 points more: $8,000). Below it, the suggestion is the cheaper account, with that
+  balance named.
+- **A waiver's minimum:** holding a minimum `M` in an account paying `r_here` to waive a fee costs
+  `M × (r_best − r_here)` a year in interest given up, against `12F`. The cheaper of the two is suggested.
+- **Moving savings:** to a better account the user already has, or one sold in their region, when its interest after
+  fees is higher; switching providers is a yellow suggestion, never a free saving.
+- **Protection:** a warning when a balance passes its insurer's limit at one institution, or sits with a provider
+  whose money isn't insured (section 4.10's `finance.money-protection`).
+- **Tax:** before tax at first. An optional marginal rate in Settings can come later; registered accounts are
+  tax-free either way.
+
 ---
 
 ## 11. User data, export, calendar & sync
@@ -2884,7 +2991,7 @@ written and tested once. It uses WebCrypto (`crypto.subtle`), available in every
 
 ## 12. Roadmap
 
-> The task-level breakdown (milestones M0–M10, each task with a "done when" check) is in **PROJECT-PLAN.md §2**.
+> The task-level breakdown (milestones M0–M11, each task with a "done when" check) is in **PROJECT-PLAN.md §2**.
 
 ### Phase 0: Setup
 - [x] Register `simplely.ca` (bought through Cloudflare Registrar)
@@ -2931,6 +3038,13 @@ written and tested once. It uses WebCrypto (`crypto.subtle`), available in every
 - [ ] "Report wrong price" / "Suggest a service"
 - [ ] Broaden regional price coverage (the schema and UI handle all regions from Phase 1)
 - [x] PWA (installable, offline): offline start in M10.5, the update prompt and install in M10.6
+
+### Phase 6: Catalog expansion
+- [ ] Policy topics v2, outside ratings, new categories, features that compare, provider facts, ranked perks
+- [ ] Regional coverage checks, and the free-plan limits fixed before the catalog grows
+- [ ] The existing providers re-checked under the new rules
+- [ ] Finance accounts: the catalog, balances, interest and the finance optimizer
+- [ ] The research, a category at a time (PROJECT-PLAN M11)
 
 ---
 
@@ -3011,6 +3125,26 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-30, catalog expansion)**
+Planned with the owner as M11 (PROJECT-PLAN §2), from `docs/catalog-expansion-guide.md`:
+- **Policies v2** (section 4.10): the owner's list of topics for every provider, one grading procedure, and silence
+  graded where it means a missing protection and *Not stated* where it proves nothing (the owner's choice).
+- **Outside raters** (the owner's choice): news bias and reliability from at least two named raters, and antivirus lab
+  results, as labels with dates and links only.
+- **Ranked perks** (the owner's request, section 4.2): perks are rank keys the optimizer counts, ranked on the plan
+  and shared with the provider's other plans in a list (the owner chose this over a rank per provider for every list,
+  which would have needed a new stored record). Features stay the general list; a perk is only for what no feature
+  describes.
+- **Several categories per plan,** about 18 new service categories (section 4.5).
+- **Fewer reads and rows:** shared policy documents rated once (section 4.10) and provider-wide features stored once
+  per provider (section 4.2); tests on a fixed catalog of their own, so research never changes them (M11.8).
+- **Finance** (sections 4.11, 10.6): accounts as plans with an `account` block; balances on the device only; interest
+  beside spending, never in totals; suggestions as information, not advice.
+- **Research tools:** a third browser, Mullvad Browser through WebDriver BiDi, for pages the owner's DNS filter
+  blocks (tested 2026-10-30: it read Bitdefender, claude.com and Snopes); it reports en-US and UTC to every site, so a
+  price it reads counts only once the page's currency matches the region. A site's own paywall or ad-blocker wall is
+  still never got around.
 
 **Resolved (2026-10-30, the feedback after M10, part 2)**
 The owner's nine points after M10, and two more while they were worked on, a task row each in PROJECT-PLAN
