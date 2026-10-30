@@ -2,6 +2,7 @@ import {
   baselineDiff,
   digestDue,
   isDue,
+  planTitle,
   searchBudgets,
   type Automation,
   type Baseline,
@@ -9,6 +10,7 @@ import {
   type CitedPage,
   type IsoDate,
   type PolicyTopic,
+  type ReportedPlan,
   type Robots,
   type SnapshotProvider,
 } from '@simply-sub/core';
@@ -17,6 +19,13 @@ import { digest, digestBranch, urlOf } from './digest';
 import { discover, type DiscoveryServices } from './discovery';
 import type { RepositoryState } from './github';
 import { filesToRead, worthProposing, type Proposal } from './proposal';
+import {
+  confirmsReported,
+  reportedCountries,
+  reportedPages,
+  reportOutcomes,
+  type ReportedPlanInfo,
+} from './reports';
 import { reviewWithModel } from './review';
 import type { BotState, Pending } from './state';
 import {
@@ -33,7 +42,8 @@ import type { Budget, Finding } from './types';
 // too), each other group of bundles that share a page, and each reseller's logo, checking only what's due by its
 // cadence. A page is compared with its baseline: unchanged, its facts hold and no model is asked; changed, the M8.3
 // checks run, and what it found waits in KV for the weekly digest, built on the digest's day; then the discovery takes
-// what's left of the night's budgets (discovery.ts). Steps pass only small, plain data: a step's result is at most
+// what's left of the night's budgets (discovery.ts). A plan visitors reported (M10.10) has its pages checked that
+// night whatever their cadence, and the digest says what they showed (reports.ts). Steps pass only small, plain data: a step's result is at most
 // 1 MiB, and on the free plan a step has 10 ms of CPU and 50 requests out.
 
 /** A Workflow step: runs once, its result kept, and retried when it throws. */
@@ -135,6 +145,10 @@ export async function runNight(
       .map((page) => page.url),
   );
   const logoDue = (id: string) => isDue(settings.cadence.logos, checks[`logo:${id}`], today);
+  const reported = await step('read the reports', () => services.state.reports());
+  const countries = reportedCountries(reported);
+  /** What the digest needs besides what it proposes: a reported plan's price that the page still shows. */
+  const alsoKept = (finding: Finding) => confirmsReported(finding, countries);
 
   const robots: Record<string, Robots> = {};
   for (let start = 0; start < index.hosts.length; start += robotsPerStep) {
@@ -159,7 +173,7 @@ export async function runNight(
         const keys = keysOf(made);
         if (keys.length === 0) return { count: 0, keys, budget };
         const found = await checkPages(made, services.pages(robots), budget);
-        await keep(found.findings, keys, today, services.state);
+        await keep(found.findings, keys, today, services.state, alsoKept);
         return { count: found.findings.length, keys, budget: found.budget };
       });
       findings += result.count;
@@ -176,11 +190,14 @@ export async function runNight(
       );
     }
   };
-  /** Each due page's baseline, as main has it. */
-  const baselines = async (urls: readonly string[]) => {
+  /** Each due page's baseline, as main has it: due by its cadence, or for a reported plan. */
+  const baselines = async (urls: readonly string[], reportedHere: ReadonlySet<string>) => {
     const found: Record<string, Baseline | null> = {};
-    for (const url of urls)
-      if (due.has(url)) found[url] = await services.readBaseline(url, repository.commit);
+    for (const url of urls) {
+      if (due.has(url) || reportedHere.has(url)) {
+        found[url] = await services.readBaseline(url, repository.commit);
+      }
+    }
     return found;
   };
   const bundlesOf = async (ids: readonly string[]) => {
@@ -189,28 +206,38 @@ export async function runNight(
   };
   const dueOnly = (
     input: Omit<CheckInput, 'baselines' | 'cited'>,
-  ): Omit<CheckInput, 'baselines' | 'cited'> => ({
-    ...input,
-    targets: input.targets.filter((target) => due.has(target.price.sourceUrl)),
-    approvals: input.approvals.filter((approval) => due.has(approval.url)),
-    networks: input.networks.filter((target) => due.has(target.url)),
-    policyPages: (input.policyPages ?? []).filter((target) => due.has(target.url)),
-  });
+    reportedHere: ReadonlySet<string> = new Set(),
+  ): Omit<CheckInput, 'baselines' | 'cited'> => {
+    const checked = (url: string) => due.has(url) || reportedHere.has(url);
+    return {
+      ...input,
+      targets: input.targets.filter((target) => checked(target.price.sourceUrl)),
+      approvals: input.approvals.filter((approval) => checked(approval.url)),
+      networks: input.networks.filter((target) => checked(target.url)),
+      policyPages: (input.policyPages ?? []).filter((target) => checked(target.url)),
+    };
+  };
 
   const plan = stepPlan(index);
   for (const [id, bundles] of Object.entries(plan.withProvider)) {
     await check(`check ${id}`, id, async () => {
       const provider = await services.readProvider(id);
-      const made = dueOnly({
-        subject: id,
-        targets: [...(provider ? providerTargets(provider) : []), ...(await bundlesOf(bundles))],
-        approvals: provider ? approvalTargets(provider) : [],
-        networks: provider ? networksTargets(provider) : [],
-        policyPages: provider ? policyTargets(provider) : [],
-        ...(provider &&
-          logoDue(id) && { logo: { id, website: provider.website, ...committed(repository, id) } }),
-      });
-      return { ...made, baselines: await baselines(urlsOf(made)), cited };
+      const reportedHere = provider ? reportedPages(provider, countries) : new Set<string>();
+      const made = dueOnly(
+        {
+          subject: id,
+          targets: [...(provider ? providerTargets(provider) : []), ...(await bundlesOf(bundles))],
+          approvals: provider ? approvalTargets(provider) : [],
+          networks: provider ? networksTargets(provider) : [],
+          policyPages: provider ? policyTargets(provider) : [],
+          ...(provider &&
+            logoDue(id) && {
+              logo: { id, website: provider.website, ...committed(repository, id) },
+            }),
+        },
+        reportedHere,
+      );
+      return { ...made, baselines: await baselines(urlsOf(made), reportedHere), cited };
     });
   }
   for (const bundles of plan.groups) {
@@ -221,7 +248,7 @@ export async function runNight(
         approvals: [],
         networks: [],
       });
-      return { ...made, baselines: await baselines(urlsOf(made)), cited };
+      return { ...made, baselines: await baselines(urlsOf(made), new Set()), cited };
     });
   }
   for (const reseller of repository.resellers) {
@@ -248,7 +275,14 @@ export async function runNight(
     const kept = await step('gather the digest', async () => {
       const found: Record<string, number[]> = {};
       for (const entry of await services.state.pending()) {
-        const standing = await stillPending(entry, index, services, repository.commit, today);
+        const standing = await stillPending(
+          entry,
+          index,
+          services,
+          repository.commit,
+          today,
+          alsoKept,
+        );
         if (standing.length === 0) await services.state.dropPending(entry.key);
         else found[entry.key] = standing.map((finding) => entry.findings.indexOf(finding));
       }
@@ -264,7 +298,7 @@ export async function runNight(
         return entry ? places.map((place) => entry.findings[place]) : [];
       });
     };
-    if (Object.keys(kept).length > 0) {
+    if (Object.keys(kept).length > 0 || reported.length > 0) {
       // The free model's review (M3.10), within the Neurons the night's checks left and the week's review items.
       const review =
         settings.reviewer === 'workers-ai'
@@ -287,6 +321,16 @@ export async function runNight(
             })
           : { added: [], notes: [], neurons: 0 };
       budget = { ...budget, neurons: budget.neurons - review.neurons };
+      const reports =
+        reported.length > 0
+          ? await step('weigh the reports', async () =>
+              reportOutcomes(
+                reported,
+                await reportedPlans(reported, index, services),
+                await live(),
+              ),
+            )
+          : undefined;
       pullRequest = await step('build the digest', async () => {
         const findings = await live();
         const reviewed = new Map(review.notes.map(([place, note]) => [findings[place], note]));
@@ -295,9 +339,16 @@ export async function runNight(
         const made = digest(all, new Map(Object.entries(files)), today, {
           reviewer: settings.reviewer,
           reviewed,
+          ...(reports && { reports }),
         });
         return services.propose(repository, made, digestBranch);
       });
+      // The digest has them now.
+      if (reported.length > 0) {
+        await step('drop the reports', async () => {
+          for (const { plan } of reported) await services.state.dropReport(plan);
+        });
+      }
     }
   }
 
@@ -321,6 +372,27 @@ export async function runNight(
     ...(pullRequest !== undefined && { pullRequest }),
     ...(discovery.pullRequest !== undefined && { batch: discovery.pullRequest }),
   };
+}
+
+/** Each reported plan's name and prices, from its provider's file; a plan the catalog doesn't have now is left out. */
+async function reportedPlans(
+  reported: readonly ReportedPlan[],
+  index: CatalogIndex,
+  services: Services,
+): Promise<Map<string, ReportedPlanInfo>> {
+  const providers = new Map<string, SnapshotProvider | undefined>();
+  const plans = new Map<string, ReportedPlanInfo>();
+  for (const { plan } of reported) {
+    const id = Object.keys(index.providers).find((provider) => plan.startsWith(`${provider}.`));
+    if (id === undefined) continue;
+    if (!providers.has(id)) providers.set(id, await services.readProvider(id));
+    const provider = providers.get(id);
+    const found = provider?.plans.find((candidate) => candidate.id === plan);
+    if (provider && found) {
+      plans.set(plan, { label: planTitle(provider.name, found.name), prices: found.prices });
+    }
+  }
+  return plans;
 }
 
 /** The check dates' key for the discovery's last batch. */
@@ -353,6 +425,7 @@ async function keep(
   keys: readonly string[],
   today: IsoDate,
   state: BotState,
+  alsoKept: (finding: Finding) => boolean,
 ): Promise<void> {
   for (const key of keys) {
     const own = found.filter((finding) =>
@@ -366,7 +439,7 @@ async function keep(
         ...found.filter((finding) => finding.kind === 'manual' && finding.url === undefined),
       );
     }
-    const worth = own.filter((finding) => worthProposing(finding, today));
+    const worth = own.filter((finding) => worthProposing(finding, today) || alsoKept(finding));
     if (worth.length > 0) await state.putPending({ key, seen: today, findings: worth });
     else await state.dropPending(key);
   }
@@ -382,6 +455,7 @@ async function stillPending(
   services: Services,
   commit: string,
   today: IsoDate,
+  alsoKept: (finding: Finding) => boolean,
 ): Promise<Finding[]> {
   if (
     !entry.key.startsWith('logo:') &&
@@ -397,7 +471,7 @@ async function stillPending(
       const diff = main ? baselineDiff(main.lines, finding.lines) : undefined;
       if (diff && diff.added.length === 0 && diff.removed.length === 0) continue;
     }
-    if (worthProposing(finding, today)) kept.push(finding);
+    if (worthProposing(finding, today) || alsoKept(finding)) kept.push(finding);
   }
   return kept;
 }

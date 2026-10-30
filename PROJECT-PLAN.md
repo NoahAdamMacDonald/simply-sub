@@ -608,10 +608,15 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   - the page can't be read: a review item;
   - a country the catalog doesn't price yet: counted under "Regions people asked about", for M10.13.
 - **Acceptance**
-  - [ ] Worker tests: a valid report is counted; an unknown plan, a bad price or an extra field gets `400`; the
+  - [x] Worker tests: a valid report is counted; an unknown plan, a bad price or an extra field gets `400`; the
         limits hold
-  - [ ] Bot tests: a reported plan is checked that night, and each outcome lands in the digest as above
-  - [ ] The catalog-review skill handles the new items
+  - [x] Bot tests: a reported plan is checked that night, and each outcome lands in the digest as above
+  - [x] The catalog-review skill handles the new items
+- **As built:** core's `catalog/price-report.ts` (`priceReportSchema` with the problems `price`, `discontinued` and
+  `not-in-country`; the counts' and the KV entry's schemas; `addReports`; `reportedPrices`); the API's
+  `routes/reports.ts`, user migration `0004_price_reports` and the clean-up's hand-over; the bot's `reports.ts`, its
+  state's `reports()` and the digest's two sections and review items. Tested in core's `price-report.spec.ts`, the
+  API's `reports.spec.ts` and contract examples, and the bot's `run.spec.ts` (BLUEPRINT §6.4, §14).
 
 **M10.11 — Report a wrong price in the app** (P8)
 - **Where:** Search's expanded card, beside the price's date: "Report a wrong price".
@@ -620,9 +625,15 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   says so and sends nothing. After: "Thanks. Netflix's page will be checked tonight." Refusals in words (too many just
   now, paused for today).
 - **Acceptance**
-  - [ ] By keyboard from a Search card to the dialog and Send; the report reaches the local database under
+  - [x] By keyboard from a Search card to the dialog and Send; the report reaches the local database under
         `wrangler dev`
-  - [ ] Both themes at 360 and 1280 px, axe with the dialog open, no horizontal scroll; the dialog in a lazy chunk
+  - [x] Both themes at 360 and 1280 px, axe with the dialog open, no horizontal scroll; the dialog in a lazy chunk
+- **As built:** `shared/report-price/` (the dialog and `sendReport`), opened from `ss-plan-details`, the expanded
+  card's section, with the plan its details show (a card's first plan until another is chosen). "The price is
+  different" is filled in with the catalog's price before any conversion (`PickedPrice.source`), asking which billing
+  period when the card shows several; it's offered only when the card shows a price. A report sent closes the dialog,
+  and a snackbar thanks the user. Tested in the dialog's spec, `plan-details.spec.ts` and `check-m10-reports.cjs`
+  (BLUEPRINT §14).
 
 **M10.12 — Regional prices in the pipeline** (BLUEPRINT §6.5)
 - **Finding a region's page:** a pricing page's other regions from its `hreflang` links and the site's locale paths
@@ -638,9 +649,18 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   redirect to another country counts as unread.
 - **Skills:** price-research reads a region this way.
 - **Acceptance**
-  - [ ] Tests: hreflang links and locale paths map to countries; a redirected page is refused
-  - [ ] A dry run for one region finds the regional pricing page for most of the catalog's providers that have one,
+  - [x] Tests: hreflang links and locale paths map to countries; a redirected page is refused
+  - [x] A dry run for one region finds the regional pricing page for most of the catalog's providers that have one,
         and its drafts pass `data:validate`
+- **As built:** core's `pipeline/regional-pages.ts` (locales to countries, `regionalPages`, `regionalVariants`,
+  `regionBrowser`, `regionalRefusal`, `wentToAnotherCountry`) and `pipeline/regional-draft.ts` (the request, the answer
+  and `regionalPrices`, a check of its own rather than `draftFromAnswer`, which drafts whole providers), and
+  `regionalReview` in `batch-review.ts`; `ProviderSite.region` in find-pages; the scripts' `--region`, working in
+  `.pipeline/<id>/regions/<region>/`; and the bot's page reader. The dry run for GB (2026-10-29): a regional pricing
+  page read for Bitdefender (hreflang), Netflix and Xbox Game Pass (their addresses with GB's country), and Mullvad;
+  Disney+'s went to Canada's (a page that needs a visitor there); the rest are sold in Canada or the US only, or at
+  one price everywhere. 11 prices for 3 providers, none dropped, each file passing `data:validate`
+  (BLUEPRINT §6.5, §14).
 
 **M10.13 — The first regions** (the owner's choice)
 - A batch pull request from `data:batch --region` for each of: the US's gaps (the providers sold there with Canada's
@@ -648,8 +668,15 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   where a provider charges every euro country the same, else each country's), and Australia and New Zealand. Each is
   reviewed and merged by the owner like any batch; each region's catalog file follows from `data:build`.
 - **Acceptance**
-  - [ ] In each region, every provider whose pages could be read has native prices, and the pull request lists the
+  - [x] In each region, every provider whose pages could be read has native prices, and the pull request lists the
         rest with why
+- **As built (2026-10-29):** four pull requests into `main`, data only with the tests that read those provider
+  files, as the owner chose: the United Kingdom (#81: Bitdefender, Netflix, Xbox Game Pass, 11 prices), the US's gaps
+  (#82: Bitdefender and Xbox Game Pass, 6), Australia and New Zealand (#83: the same three, 21), and the euro
+  countries (#84: Germany, France, Ireland, the Netherlands, Spain and Italy read; Xbox Game Pass the same in all six,
+  so one EU price; Bitdefender and Netflix each country's). Left out with why: Disney+, whose pages for every region
+  went to Canada's (no VPN, the owner's choice), the services sold only in Canada or the US, the ones priced the same
+  everywhere, and the plans a region's page doesn't price (BLUEPRINT §14).
 
 ---
 
@@ -1462,7 +1489,8 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
   - Add-ons with prices, and bundles containing the plan with their savings (a bundle price click → F4).
   - For a suite plan (BLUEPRINT §4.4): the plans it includes, and its savings against buying them separately when there are any.
   - Perks, and accepted cards (Phase 4).
-  - "Price checked Oct 14, 2026", with a "may be out of date" badge when it's older than 90 days.
+  - "Price checked Oct 14, 2026", with a "may be out of date" badge when it's older than 90 days, and beside it
+    Report a wrong price (M10.11).
   - Terms and policies (M1.13, BLUEPRINT §4.10): the provider's ratings on `data/policy-topics.yaml`'s topics for
     the plan and the user's country, by group (Privacy, Billing, Legal, Service), each a dot in its grade's colour
     (Great to Bad, green to red), with the topic in bold, its grade in words, muted ("Disputes (Good):", M5.9),

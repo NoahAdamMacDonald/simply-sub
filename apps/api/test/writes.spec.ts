@@ -240,7 +240,7 @@ describe('the nightly clean-up', () => {
   });
 
   it('deletes the daily counts before yesterday', async () => {
-    await cleanUp(env.USER_DB, '2026-10-29');
+    await cleanUp(env.USER_DB, env.KV, '2026-10-29');
 
     expect(await countDays()).toEqual(['2026-10-28', '2026-10-29']);
   });

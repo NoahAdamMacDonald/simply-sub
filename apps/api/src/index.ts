@@ -13,6 +13,7 @@ import { icon } from './routes/icon';
 import { plans } from './routes/plans';
 import { provider } from './routes/provider';
 import { providers } from './routes/providers';
+import { reports } from './routes/reports';
 import { sync } from './routes/sync';
 import { writeLimit } from './writes';
 
@@ -33,6 +34,7 @@ const v1 = new Hono<{ Bindings: Env }>()
   .route('/plans', plans)
   .route('/providers', providers)
   .route('/providers', provider)
+  .route('/reports', reports)
   .route('/sync', sync);
 
 const app = new Hono<{ Bindings: Env }>();
@@ -44,6 +46,6 @@ app.onError(unexpectedError);
 export default {
   fetch: app.fetch,
   scheduled(controller, env, context) {
-    context.waitUntil(cleanUp(env.USER_DB, utcDay(new Date(controller.scheduledTime))));
+    context.waitUntil(cleanUp(env.USER_DB, env.KV, utcDay(new Date(controller.scheduledTime))));
   },
 } satisfies ExportedHandler<Env>;

@@ -1228,7 +1228,7 @@ M1.14), so a buyer can see what signing up means beyond the price.
 | `GET /icon?domain=example.com` | Icon proxy for **custom subscriptions**: asks Google's and DuckDuckGo's icon services (core's `iconServices`) and returns the best square PNG of at least 32 pixels (`pickIcon`, Google's on a tie), or `404` when neither has one, and the app shows the subscription's first letter. KV keeps an icon for 30 days and "no icon" for a day (section 5.4). No `size`: the Worker can't resize, so the app scales the icon. Catalog icons are fetched once by `scripts/fetch-icons.ts` into `data/logos/` (committed, so builds never fetch) and served as static WebP files at `/icons/<id>.webp` (section 6.3) |
 | `GET /fx?base=CAD` | The ECB's daily rates in the user's currency. The Worker fetches them in euros from Frankfurter's ECB-only route (`/v2/providers/ecb/rates?base=EUR`; v1 is deprecated, and v2's default blends in other central banks), keeps them in KV under `fx:ecb` for 12 hours, and rebases them to any currency the ECB publishes (core's `rebaseRates`), so one fetch serves every base. When Frankfurter fails after that, the last good rates are sent with `meta.stale: true`; with none kept, `502 upstream_unavailable`. `GET /providers` uses the same rates (M2.3) |
 | `GET /health` | Returns the API version, and the catalog version, build time and counts that D1 holds (the `catalog` row, section 5.3) |
-| *(Phase 5)* `POST /reports` | "This price looks wrong" reports (rate-limited, no free text; M10.10) |
+| `POST /reports` | "Report a wrong price" (M10.10): a plan the catalog has, the visitor's country and what's wrong (another price, with its amount, currency and period; not sold any more; not sold in that country), in choices only: no free text, so nothing a visitor types reaches a person or a model (core's `priceReportSchema`, strict). `202` with no body. The user database counts it, a row per plan, country, problem and price, with nothing about the sender; the nightly clean-up hands the counts to the bot (section 6.4). 3 a minute per IP besides the write limit, and 500 a day |
 | `POST /cal` | Makes a live calendar feed set (section 11.3, M10.2): one calendar per feed sent (everything, each tag chosen, no tag), each payment's title, day and repeat rule only. Answers each feed's token and links, and the set's manage key, shown once. The user database keeps hashes of the tokens and the key, and each feed's calendar file |
 | `PUT /cal/:id` | Replaces a set's calendars with its manage key (`Authorization: Bearer`): a feed with its token keeps its URL and, unchanged, its file; one without gets a new URL; one left out is revoked. Its 180 days start again. 6 writes a minute per set |
 | `DELETE /cal/:id` | Revokes a set with its manage key: every calendar of it answers 404, and nothing of it is kept |
@@ -1376,7 +1376,8 @@ shipped to the browser is visible. The risks are abuse, and M2 builds these defe
   account's and the catalog's deploys need them; past a cap, or with the database over 400 MB, `503 over_capacity`
   until midnight UTC. Secrets (a feed's token and manage key, sync's auth secret) are random values of 128 bits or
   more, kept only as SHA-256 hashes and compared in constant time, and never logged. A cron trigger at 02:30 UTC
-  deletes what has expired (`src/clean-up.ts`).
+  deletes what has expired and hands the price reports counted before that day to the bot (`src/clean-up.ts`, section
+  6.4).
 - **Secrets** (the bot's GitHub token, AI keys) are Worker secrets (`wrangler secret put`) or a gitignored `.env`,
   never tracked files. The D1 `database_id` in `wrangler.jsonc` isn't a secret: using it needs a Cloudflare login.
 
@@ -1653,6 +1654,16 @@ itself under any of them.
   owner. Its notes go under each item, a line each.
 - **`manual`:** the items wait in the pull request for the owner.
 
+**Price reports (M10.10):** at 02:30 UTC the API's clean-up moves the reports counted before that day from the user
+database to KV, a key per reported plan (`bot:report:<plan>`, added to what it holds), so a night writes a key per
+plan, not per report. At 03:00 the bot reads them, and each reported plan's pages in the countries it was reported
+from (core's `reportedPrices`: the country's own prices, else its group's, else GLOBAL) are checked that night,
+whatever their cadence, within the night's budgets. The weekly digest says what each showed: a new price is the edit
+any check makes, listed under **Price reports** in the body with the reports; the catalog's price still there is a
+line there too, nothing to review (its confirmation is kept for the digest, though no edit is proposed); a page that
+couldn't be read is a review item under Prices; a country the catalog doesn't price the plan in yet is counted under
+**Regions people asked about**, for the regional batches (M10.13). The digest then lets the reports go.
+
 **Guardrails**
 - **Never auto-merge.** You review the PR, which takes a minute a day at most.
 - Flag changes larger than ±30% as suspicious.
@@ -1917,6 +1928,27 @@ of the night's Neurons and browser pages.
 - **What it doesn't do:** refill the queue from Wikidata (`npm run data:queue`, on a computer; the queue holds over a
   hundred services), or the computer's browser tricks (cookie banners, tabs, toggles): a page they're needed for is
   read as Browser Rendering shows it, and a service the bot can't read is left out with why, for `data:batch`.
+
+**Regional prices (M10.12):** a region the catalog doesn't price a provider in yet goes through the same steps with
+`--region GB`, for the providers the catalog has, in `.pipeline/<id>/regions/<region>/`:
+- **Finding the page:** the pages its prices cite are read for their `hreflang` links and the links under the region's
+  locale (`/en-gb/`, `/uk/`), then the same address with the region's country in place of its own (Netflix's help
+  article's `/ca` to `/gb`, Xbox's `/en-US/` to `/en-GB/`), kept when it answers without going to another country;
+  then the usual steps, which score the region's locale first and search for its name (`ProviderSite.region`).
+  Pricing only, since terms and policies are the provider's everywhere.
+- **Reading it:** in the system Edge in the region's English and time zone (`regionBrowser`). A page whose address
+  names another country, or that shows only other currencies' prices (a bare `$` is a dollar, never pounds or
+  euros), is unread and never extracted: a site that prices by where the visitor is shows this machine Canada's, and
+  that region's needs a browser there.
+- **Drafting:** a request of its own (`regionalPrompt`: the provider's plans, the region's currency, the page), whose
+  answer `regionalPrices` checks: a plan the provider has, the region's currency, the quote on its page with its
+  amount, one price a plan and period. The prices kept go into the provider file beside the others, each replacing
+  the plan's price for that region and period, with the region added to `billingCurrency` when the file lists it.
+- **The batch:** `npm run data:batch -- --region GB` opens one pull request for the region: each price with a link
+  that opens its page at its quote, and the providers left out with why (`regionalReview`). `EU` is the region for a
+  provider that charges every euro country the same; otherwise each country's own (M10.13).
+- **The bot:** a regional page is a page like any other, with its own baseline; one whose fetch ends on another
+  country's address (its first two path segments) is unread.
 
 **Ongoing:** the nightly bot (section 6.4) checks the saved `sources:` URLs against their baselines, and its discovery
 takes the next services from the queue on its cadence, so the catalog grows on its own while you only review.
@@ -2951,6 +2983,45 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-29, M10.10–M10.12, as built)**
+- **Price reports' rows** (M10.10, user migration `0004_price_reports`): `price_reports`, keyed by plan, country,
+  problem and price (the price's fields as JSON in one order, `''` without one), with a count and the first and last
+  day, `WITHOUT ROWID` and no index, since the clean-up empties it each night. A report writes one row besides the
+  day's count, so the `report` cap's 1,000 rows is 500 reports. Its plan is checked against the catalog's `plans` in
+  D1 (one row read). `REPORT_RATE_LIMIT` (3 a minute, keyed by IP) comes before the body is read.
+- **The hand-over** (M10.10, `clean-up.ts`): one `DELETE … WHERE last_day < today RETURNING …` takes the rows, so a
+  report counted meanwhile waits for the next night; each plan's KV key gets them added (core's `addReports`); a plan
+  whose key can't be written gets its rows back. The bot's state reads `bot:report:*` with one list a night.
+- **Report a wrong price in the app** (M10.11, `shared/report-price/`): beside Search's "Price checked …" in the
+  expanded card, for the plan its details show. The dialog (a lazy chunk with Material's radio and select) fills a
+  different price in with the catalog's own amount and currency (`PickedPrice.source`, not the converted one the card
+  shows), asking which billing period when the card has several, and sends only the choices; offline it says so and
+  sends nothing, and 429 and 503 are said in words. Material's `disabledInteractive` leaves Send's clicks to it, so the
+  send checks it isn't busy (§14, M10.9). Checked by `check-m10-reports.cjs` (65 checks) under `wrangler dev`, whose
+  reports reach the local user database; `check-search.cjs` (187) still passes with the button in each card.
+- **A reported plan's confirmation is kept** (M10.10): the night's checks keep a confirmed price only when its
+  `lastVerified` is due again, so "the page still shows the catalog's price" would have left nothing for the digest
+  to find. A confirmation of a reported plan's price is kept until the digest, and proposes no edit.
+
+- **The first regions** (M10.13, the owner's choices of 2026-10-29): no VPN, so a page a site prices by where the
+  visitor is stays out with why (Disney+'s help article went to Canada's for every region); the euro countries read
+  are Germany, France, Ireland, the Netherlands, Spain and Italy, and the same price in all six becomes the `EU`
+  group's (Xbox Game Pass), else each country read keeps its own (Netflix's differ; Bitdefender's five are the same but
+  its Irish page wasn't found); each region's pull request goes into `main`, data only with the tests that read those
+  files, so they merge apart from #78–#80. 78 prices in all, every one quoted on its page: #81, #82, #83, #84.
+- **A region's page by its address** (M10.12): hreflang finds few of the catalog's regional pages (Bitdefender's);
+  most sites put the country in the address instead, at the start (Xbox's `/en-US/`) or the end (Netflix's help
+  article's `/ca`), with no link between countries. `regionalVariants` swaps the country for the region's, as
+  a guess the browser then reads: Netflix's and Xbox's GB pages came that way. A guess that went elsewhere is caught
+  by its address or its currency: Disney+'s `disneyplus-en-gb-price` went to Canada's article, priced in CAD.
+- **The currency decides** (M10.12): the first dry run took Hulu's, Claude's and the Canadian services' pages for GB,
+  their bare `$` counting for nothing. A bare `$` is now a dollar: any region's that pays in one, and never pounds or
+  euros, so those pages are unread, with why. A page that names several currencies (Mullvad's "€5 is equivalent to
+  £4.18") is read, and the extraction finds no price charged in pounds there: its euros are its price everywhere.
+- **Regional prices beside the others** (M10.12): the YAML edit keeps the file as written (`lineWidth: 0`, as the
+  other scripts' edits), so a region's pull request changes only its prices and `billingCurrency`; `data:validate`
+  wants every priced region in `billingCurrency` when a file lists it, which the first apply missed.
 
 **Resolved (2026-10-29, M10.5–M10.9, as built)**
 - **The service worker** (M10.5): Angular's `ngsw-worker.js` (`@angular/service-worker` 22.2.3) with

@@ -497,6 +497,20 @@ which deletes and copies everything) only with wrangler dev stopped: `npm run de
 version the worker has held before isn't new to it, so serving the first build again brings no update: hence two more
 builds.
 
+`check-m10-reports.cjs` (M10.11, Report a wrong price) runs under `wrangler dev` on the production build too, with the
+local catalog seeded (`npm -w apps/api run db:seed:local`: the report's plan is checked against D1's `plans`) and the
+user database migrated (`npm -w apps/api run db:user:migrate:local`); run `npm run data:build` on the branch first. For
+a Canadian in Alberta, in both themes at both widths, by keyboard: Search's Netflix card expanded, Tab to Report a wrong
+price beside the price's date and Enter, which loads the dialog's chunk then; focus on the first choice, axe, no
+horizontal scroll; a different price typed and sent (offline first in one run: it says so, sends nothing), or "It's not
+sold any more" with an arrow key; the thanks with axe, and focus back on the button. Then Mullvad's card, whose five
+billing periods its dialog asks for, filled in with the catalog's euro price, and Yearly chosen by keyboard. It reads the
+local user database with `wrangler d1 execute --local` before and after: 3 reports of a different price and 1 that the
+plan isn't sold any more, on Netflix's first plan (Standard with ads, the one its details show). A report is limited to 3
+a minute per IP, and wrangler dev's limiter counts in the wall clock's minutes: a run's fourth report can be refused,
+which the script checks is said in words, then sends again in the next minute (a run takes 2 to 3 minutes). A snackbar
+fading out is paler than it shows, so axe waits until the thanks has gone.
+
 `check-after-m3.cjs` (the feedback after M3: M5.13, M6.17–M6.19, M7.11, M8.5, M8.6, M9.6) checks the batch on
 `ng serve` for a Canadian in Alberta, with Streaming (Crave Premium and Disney+ Premium) and Family (two Disney+
 Premium, Netflix Standard auto-renewing until an end date, Mullvad renewed by hand, and four more so it scrolls). In
