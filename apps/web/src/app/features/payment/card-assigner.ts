@@ -83,7 +83,7 @@ export class CardAssigner {
       skipped: this.lists
         .records()
         .filter((list) => drafted.has(list.id))
-        .map((list) => list.name),
+        .map((list) => ({ listId: list.id, name: list.name })),
       ...(assignment.changes.length > 0 && {
         total: money(assignment.savings, assignment.estimated),
       }),

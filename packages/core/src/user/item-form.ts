@@ -497,7 +497,8 @@ export function emptyWindow(today: IsoDate): WindowForm {
 /**
  * Whether saving `source` puts a plan in the list twice (P6 asks first, since duplicates are allowed): the same catalog
  * plan, whatever its add-ons, bundle or custom plan as another item of `items`, unless it's the plan `editing`, the
- * item being changed, had already.
+ * item being changed, had already. Plans are the same by id, never by name: a custom subscription called Netflix isn't
+ * the catalog's, and a custom plan is its own subscription's.
  */
 export function isDuplicate(
   source: ItemSource,
@@ -515,7 +516,9 @@ function samePlan(a: ItemSource, b: ItemSource): boolean {
     case 'bundle':
       return b.kind === 'bundle' && a.bundleId === b.bundleId;
     case 'custom':
-      return b.kind === 'custom' && a.customPlanId === b.customPlanId;
+      return (
+        b.kind === 'custom' && a.customSubId === b.customSubId && a.customPlanId === b.customPlanId
+      );
   }
 }
 

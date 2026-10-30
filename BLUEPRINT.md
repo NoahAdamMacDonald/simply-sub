@@ -2991,7 +2991,11 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 ## 14. Open questions
 
 **Still open**
-None.
+- **Two tags of one name after a merge (M10.18):** tags must have names of their own (P13), but a backup's Merge
+  and sync join records by id, so two devices that each made a Family tag before they synced end with two. Nothing
+  breaks: each item keeps its own tag, and the picker takes the first of them for a name typed. Folding them when
+  they merge would move one's items onto the other and delete it, which sync would then send like any change, and
+  could undo an edit another device made to one of those items at the same time. Asked of the owner.
 
 **Resolved (2026-10-30, the feedback after M10, part 2)**
 The owner's nine points after M10, a task row each in PROJECT-PLAN ("added 2026-10-30, the feedback after M10"):
@@ -3021,6 +3025,15 @@ The owner's nine points after M10, a task row each in PROJECT-PLAN ("added 2026-
 - **Joining on a new device (M10.15):** a device in its first run has no settings, which a join only updated, so Join
   starts them from the copy's shared settings with the device's theme (`joinedSettings`) and shows no Merge or Replace.
   The first-run dialog now also closes when settings are saved any other way.
+- **Ids, not names (M10.18):** the owner asked for tests with custom subscriptions named alike, and named like the
+  catalog's ("Netflix", "Standard"). Everything was told apart by id already: Search lists a provider only from catalog
+  items, the optimizer keys a custom subscription `custom:<id>` and ranks `custom <id>`, calendar UIDs start with the
+  item's id, and backups and sync merge by id, so two devices' Gyms are both kept. A custom subscription's icon comes
+  from its own website, so one called Netflix with none shows its letter. Two places matched a custom plan by its id
+  alone, where `resolveItem` finds it in its own subscription: the editor's "Already in this list" question and the
+  count of lists a custom subscription's removed plans leave. Plan ids are random, so they never clashed, but a backup
+  edited by hand could; both now match the subscription too. Assign best cards named the lists it skips by name in
+  its `@for`'s track, and two lists can share one, so they're tracked by id.
 - **Focus (M10.14):** Join opens on Scan the QR code, its first control, so a phone's keyboard doesn't cover it;
   the words are a Tab on. The scanner takes the button's place and focus with it, onto Stop scanning, and gives it back.
 - **The Proton test feed (M10.2):** deleted from the user database on 2026-10-30 with the owner's OK. Proton Calendar
