@@ -12,6 +12,7 @@ import { provideRouter } from '@angular/router';
 import type { Settings, SubscriptionList } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { AppLockRepository } from '../../core/storage/app-lock-repository';
 import { StorageService } from '../../core/storage/storage-service';
 import {
   plantRows,
@@ -229,6 +230,33 @@ describe('Security', () => {
     await until(() => snackBar() === 'The lock is off');
     expect(await (await lockBox()).isChecked()).toBe(false);
     expect(await storedSettings()).toEqual(ontario);
+    expect(await storedRows(storage.indexedDB, 'lists')).toEqual([work]);
+  });
+
+  it('turns off once and stays open, however often Turn off the lock and Cancel are pressed meanwhile', async () => {
+    await turnOn();
+    // While it decrypts, both buttons only say they're disabled (disabledInteractive): Signal Forms doesn't submit the
+    // form again until the last submission is done, and mat-dialog-close ignores a button that says it's disabled.
+    const lock = TestBed.inject(AppLockRepository);
+    const turnOff = lock.turnOff.bind(lock);
+    let release: () => void = () => undefined;
+    const held = new Promise<void>((resolve) => (release = resolve));
+    const turningOff = vi.spyOn(lock, 'turnOff').mockImplementation(async (typed) => {
+      await held;
+      return turnOff(typed);
+    });
+    await (await lockBox()).toggle();
+    await until(() => dialogText()?.startsWith('Turn off the lock?') === true);
+    await (await control('Passphrase', MatInputHarness)).setValue(passphrase);
+    await press('Turn off the lock');
+    await press('Decrypting…');
+    await press('Cancel');
+    expect(turningOff).toHaveBeenCalledTimes(1);
+    expect(dialogText()).toContain('Turn off the lock?');
+
+    release();
+    await until(() => dialogText() === undefined, 5000);
+    await until(() => snackBar() === 'The lock is off');
     expect(await storedRows(storage.indexedDB, 'lists')).toEqual([work]);
   });
 

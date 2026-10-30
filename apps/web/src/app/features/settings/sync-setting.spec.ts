@@ -110,6 +110,16 @@ describe('SyncSetting', () => {
     expect(confirm.mock.calls[1][0]).toMatchObject({ danger: true });
   });
 
+  it('doesn’t sync again while it’s syncing, where Sync now says it can’t', async () => {
+    sync.record.set(on);
+    sync.syncing.set(true);
+    await fixture.whenStable();
+    const syncNow = await button(/Sync now$/);
+    expect(await syncNow.isDisabled()).toBe(true);
+    await syncNow.click();
+    expect(sync.sync).not.toHaveBeenCalled();
+  });
+
   it('says what held sync back, and what stopped it, with what to do', async () => {
     sync.record.set(on);
     sync.snag.set('offline');

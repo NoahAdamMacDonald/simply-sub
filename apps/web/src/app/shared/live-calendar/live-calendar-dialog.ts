@@ -162,7 +162,9 @@ export class LiveCalendarDialog {
   /** Create links, or Save changes. */
   protected async save(event: Event): Promise<void> {
     event.preventDefault();
-    if (this.working()) return;
+    // Its button only says it's disabled while a request is under way or offline (disabledInteractive), so a press
+    // still comes here.
+    if (this.working() || !this.online()) return;
     const tagIds = new Set(this.tagChoices().map((tag) => tag.id));
     // In the order the dialog lists them.
     const holds = ['all', ...this.tagChoices().map((tag) => tag.id), 'untagged'].filter(

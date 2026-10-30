@@ -18,6 +18,7 @@ import {
   type SubscriptionList,
   type SyncRecord,
 } from '@simply-sub/core';
+import { BackupService } from '../../core/backup/backup-service';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { encryptText } from '../../core/crypto/passphrase-crypto';
 import { SettingsStore } from '../../core/settings/settings-store';
@@ -264,6 +265,31 @@ describe('Your data', () => {
     await pickFile(JSON.stringify(plainBackup(payload)));
     await until(() => dialogText()?.includes('Merge keeps what’s here') === true);
     await press('Merge');
+    await until(() => snackBar() === 'Merged 1 record from the backup');
+    expect((await storedLists()).sort()).toEqual(['Family', 'Work Related']);
+  });
+
+  it('imports once, however often Merge and Replace are pressed meanwhile', async () => {
+    const backups = TestBed.inject(BackupService);
+    const merge = backups.merge.bind(backups);
+    let release: () => void = () => undefined;
+    const held = new Promise<void>((resolve) => (release = resolve));
+    const merging = vi.spyOn(backups, 'merge').mockImplementation(async (data) => {
+      await held;
+      return merge(data);
+    });
+    const confirm = vi.spyOn(TestBed.inject(ConfirmService), 'confirm');
+    await press('Import backup');
+    await until(() => dialogText()?.startsWith('Import a backup') === true);
+    await pickFile(JSON.stringify(plainBackup(payload)));
+    await until(() => dialogText()?.includes('Merge keeps what’s here') === true);
+    await press('Merge');
+    await press('Merge');
+    await press('Replace');
+    expect(merging).toHaveBeenCalledTimes(1);
+    expect(confirm).not.toHaveBeenCalled();
+
+    release();
     await until(() => snackBar() === 'Merged 1 record from the backup');
     expect((await storedLists()).sort()).toEqual(['Family', 'Work Related']);
   });
