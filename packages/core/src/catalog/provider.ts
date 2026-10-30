@@ -8,6 +8,7 @@ import {
   domainSchema,
   dottedSlugSchema,
   httpsUrlSchema,
+  isoDateSchema,
   planIdSchema,
   rankKeySchema,
   regionSchema,
@@ -74,6 +75,18 @@ export const planSchema = z
   .strictObject({
     id: planIdSchema.describe('<provider id>.<slug> (netflix.standard)'),
     name: textSchema.describe('The plan name, without the provider name (Standard)'),
+    formerNames: z
+      .array(
+        z.strictObject({
+          name: textSchema.describe('A name the plan had before (Max 20x)'),
+          until: isoDateSchema.describe('The last day it had that name'),
+        }),
+      )
+      .min(1, 'Leave formerNames out instead of listing none')
+      .describe(
+        'Names the plan had before, newest first (M10.27): a renamed plan keeps its id. Search matches them, and its cards say "formerly" for six months after until',
+      )
+      .optional(),
     link: httpsUrlSchema.describe("Where to sign up for this plan, on the provider's own site"),
     categories: z
       .array(slugSchema)
@@ -113,6 +126,27 @@ export const planSchema = z
   })
   .superRefine((plan, ctx) => {
     addDuplicateIssues(ctx, plan.categories ?? [], (index) => ['categories', index]);
+    const formerNames = (plan.formerNames ?? []).map(({ name }) => name);
+    addDuplicateIssues(ctx, formerNames, (index) => ['formerNames', index, 'name']);
+    formerNames.forEach((name, index) => {
+      if (name === plan.name) {
+        ctx.addIssue({
+          code: 'custom',
+          message: "That's its name now: list only the names it had before",
+          path: ['formerNames', index, 'name'],
+        });
+      }
+    });
+    plan.formerNames?.forEach((former, index) => {
+      const newer = plan.formerNames?.[index - 1];
+      if (newer && newer.until < former.until) {
+        ctx.addIssue({
+          code: 'custom',
+          message: 'List former names newest first',
+          path: ['formerNames', index, 'until'],
+        });
+      }
+    });
     addDuplicateIssues(ctx, plan.addOnIds ?? [], (index) => ['addOnIds', index]);
     if (plan.addOnLimit !== undefined && plan.addOnIds === undefined) {
       ctx.addIssue({ code: 'custom', message: 'addOnLimit needs addOnIds', path: ['addOnLimit'] });

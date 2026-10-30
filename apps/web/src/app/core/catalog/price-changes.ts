@@ -1,5 +1,7 @@
 import {
+  planNoticesBetween,
   priceChangesBetween,
+  withPlanNotices,
   withPriceChanges,
   type CatalogData,
   type IsoDate,
@@ -8,8 +10,9 @@ import {
 import type { SettingsStore } from '../settings/settings-store';
 
 /**
- * Keeps what a catalog update changed in the lists' prices (P2's Price changes, M7.10) in the settings, newest first,
- * for a month. In a chunk of its own: CatalogStore loads it only when an update changes the catalog.
+ * Keeps what a catalog update changed in the lists' prices (P2's Price changes, M7.10) and plans (a plan renamed,
+ * M10.27) in the settings, newest first, for a month. In a chunk of its own: CatalogStore loads it only when an update
+ * changes the catalog.
  */
 export async function recordPriceChanges(
   before: CatalogData,
@@ -27,7 +30,12 @@ export async function recordPriceChanges(
     today,
     profileRanks: new Map(),
   });
-  if (found.length === 0) return;
+  const notices = planNoticesBetween(items, before, after, today);
+  if (found.length === 0 && notices.length === 0) return;
   const kept = withPriceChanges(saved.priceChanges ?? [], found, today);
-  await settings.update({ priceChanges: kept.length > 0 ? kept : undefined });
+  const keptNotices = withPlanNotices(saved.planNotices ?? [], notices, today);
+  await settings.update({
+    priceChanges: kept.length > 0 ? kept : undefined,
+    planNotices: keptNotices.length > 0 ? keptNotices : undefined,
+  });
 }

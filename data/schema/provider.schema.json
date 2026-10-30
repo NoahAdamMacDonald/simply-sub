@@ -158,6 +158,30 @@
             "minLength": 1,
             "description": "The plan name, without the provider name (Standard)"
           },
+          "formerNames": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "A name the plan had before (Max 20x)"
+                },
+                "until": {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+                  "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+                  "description": "The last day it had that name"
+                }
+              },
+              "required": ["name", "until"],
+              "additionalProperties": false
+            },
+            "description": "Names the plan had before, newest first (M10.27): a renamed plan keeps its id. Search matches them, and its cards say \"formerly\" for six months after until"
+          },
           "link": {
             "type": "string",
             "format": "uri",

@@ -91,6 +91,11 @@ export class ItemCard {
     if (nickname !== undefined) return { name: nickname, planName: this.title() };
     return this.title() === planName ? { name: planName } : { name, planName };
   });
+  /** "(formerly Max 20x)" beside a renamed plan's name, for six months (M10.27). */
+  protected readonly formerly = computed(() => {
+    const { formerName } = this.resolved();
+    return formerName === undefined ? undefined : `(formerly ${formerName})`;
+  });
   /**
    * What View in Search looks for: the plan's provider, with the plan itself shown on its card (M5.11), or the bundle's
    * seller. None for a custom plan.

@@ -1,6 +1,7 @@
 import { bundleFeatures } from '../catalog/bundle-deal';
 import { acceptedNetworksIn } from '../catalog/card-networks';
 import { isoDateSchema } from '../catalog/formats';
+import { shownFormerName } from '../catalog/former-names';
 import type { FxRates } from '../catalog/convert';
 import { pickPrice, typedPrice, type PickedPrice, type PriceContext } from '../catalog/pick-price';
 import { planCategories } from '../catalog/plan-categories';
@@ -69,6 +70,8 @@ export interface ResolvedItem {
   name: string;
   /** The plan's name: "Standard". A bundle's is its plans': "Netflix Standard + Crave Premium". */
   planName: string;
+  /** A catalog plan's former name, for six months after its rename (M10.27): "Max 20x" for Ultra. */
+  formerName?: string;
   /**
    * Catalog: the relative icons/<id>.webp when the provider has a logo (the snapshot's absolute URL points at
    * production, so a preview would miss a new logo). Custom: api/v1/icon?domain= from its link. None: a letter.
@@ -209,11 +212,13 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         });
       }
       const networks = acceptedNetworksIn(provider, region);
+      const formerName = shownFormerName(plan, context.today);
       parts = {
         providerId: provider.id,
         planId: plan.id,
         name: provider.name,
         planName: plan.name,
+        ...(formerName !== undefined && { formerName }),
         ...providerLinks(provider, plan),
         price,
         addOns,

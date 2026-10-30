@@ -8,6 +8,7 @@ import {
   monthOf,
   monthRange,
   nextChargeDate,
+  planNoticeText,
   priceChangeDays,
   reanchored,
   type IsoDate,
@@ -37,8 +38,8 @@ const comingDays = 14;
  * Open a list); the budget warnings (dismissable, M7.7) and every list's totals against the budgets (M7.2, BLUEPRINT
  * §8.1.1); what's coming up in the next 14 days, with Mark renewed on a manual renewal; a mini calendar of the month,
  * whose days and title open the Calendar on it; each list with this month's total; each list's ways to save; and what
- * catalog updates changed in the lists' prices this past month. With no lists, an empty state offers a list, Search or
- * a backup instead.
+ * catalog updates changed in the lists' plans (M10.27) and prices this past month. With no lists, an empty state
+ * offers a list, Search or a backup instead.
  */
 @Component({
   selector: 'ss-home-page',
@@ -172,6 +173,24 @@ export class HomePage {
         text: `${amountText(change.from, change.currency, saved?.country)} → ${amountText(change.to, change.currency, saved?.country)} ${intervalSpoken(change.interval, change.intervalCount)}`,
         date: dayText(change.date),
       }));
+  });
+
+  /** What catalog updates changed in the lists' plans this past month (M10.27): "Claude Max 20x is now called Ultra". */
+  protected readonly notices = computed(() => {
+    const since = addDays(this.today(), -priceChangeDays);
+    return (this.settings.saved()?.planNotices ?? [])
+      .filter((notice) => notice.date >= since)
+      .map((notice) => ({
+        key: `${notice.kind} ${notice.planId}`,
+        text: planNoticeText(notice),
+        date: dayText(notice.date),
+      }));
+  });
+  /** The changes section's heading: what it holds. */
+  protected readonly changesHeading = computed(() => {
+    const prices = this.changes().length > 0;
+    const plans = this.notices().length > 0;
+    return plans && prices ? 'Plan and price changes' : plans ? 'Plan changes' : 'Price changes';
   });
 
   /**

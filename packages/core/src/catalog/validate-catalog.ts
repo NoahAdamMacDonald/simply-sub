@@ -521,6 +521,14 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
         );
       }
     });
+    plan.formerNames?.forEach((former, formerIndex) => {
+      if (former.until > context.today) {
+        report(
+          [...path, 'formerNames', formerIndex, 'until'],
+          `${former.until} is after today (${context.today}): use the last day the plan had that name`,
+        );
+      }
+    });
     prices.check(plan.prices, [...path, 'prices']);
   });
 

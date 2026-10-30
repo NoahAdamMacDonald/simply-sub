@@ -1,6 +1,7 @@
 import { availability, type Availability } from '../catalog/availability';
 import type { Categories } from '../catalog/category';
 import type { FxRates } from '../catalog/convert';
+import { planNames } from '../catalog/former-names';
 import type { Feature } from '../catalog/feature';
 import { pickPrice, type PickedPrice } from '../catalog/pick-price';
 import { planCategories } from '../catalog/plan-categories';
@@ -22,7 +23,7 @@ import type { ProviderSort, ProvidersQuery } from './providers-query';
 //
 // Text is matched term by term, and every term must match: "netflix 4k" is Netflix's 4k plans. A term is the longest
 // run of words that a name in the registry contains ("ultra hd", "video quality"), or else one word. Terms match
-// provider names and aliases, plan names, service category names, rank keys by their names and aliases (a boolean
+// provider names and aliases, plan names (and former names, M10.27), service category names, rank keys by their names and aliases (a boolean
 // feature's own; an enum value's, tier's or set value's otherwise: "4K (Ultra HD)" and uhd are video.quality=4k), and
 // the other features by their own ("video quality", "streams"). Matching ignores case, accents and extra spaces, and a
 // term whose last word looks plural also matches its singular (vpns, boxes, categories). Relevance, best first: a
@@ -279,7 +280,9 @@ function textMatch(provider: SnapshotProvider, terms: readonly TextTerm[]): Text
       contains(normalized(alias), term.forms),
     );
     const named = nameHit !== undefined || aliasHits.length > 0;
-    const planNames = provider.plans.filter((plan) => contains(normalized(plan.name), term.forms));
+    const namedPlans = provider.plans.filter((plan) =>
+      planNames(plan).some((name) => contains(normalized(name), term.forms)),
+    );
     const namedCategories = term.categories.filter((id) =>
       provider.plans.some((plan) => planCategories(plan, provider).includes(id)),
     );
@@ -291,10 +294,10 @@ function textMatch(provider: SnapshotProvider, terms: readonly TextTerm[]): Text
       inCategory.length > 0
         ? inCategory
         : providing.length > 0
-          ? provider.plans.filter((plan) => providing.includes(plan) || planNames.includes(plan))
+          ? provider.plans.filter((plan) => providing.includes(plan) || namedPlans.includes(plan))
           : named
             ? provider.plans
-            : planNames;
+            : namedPlans;
     if (picked.length === 0) {
       return undefined;
     }
@@ -303,7 +306,7 @@ function textMatch(provider: SnapshotProvider, terms: readonly TextTerm[]): Text
     namedCategories.forEach((id) => categories.add(id));
     aliasHits.forEach((alias) => aliases.add(alias));
     if (!named) {
-      planNames.forEach((plan) => planReasons.add(plan));
+      namedPlans.forEach((plan) => planReasons.add(plan));
     }
     relevance = Math.min(
       relevance,
@@ -313,7 +316,7 @@ function textMatch(provider: SnapshotProvider, terms: readonly TextTerm[]): Text
           ? 2
           : aliasHits.length > 0
             ? 3
-            : planNames.length > 0
+            : namedPlans.length > 0
               ? 4
               : 5,
     );
