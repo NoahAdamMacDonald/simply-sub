@@ -275,6 +275,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.13 | The first regions: a batch pull request each for the US's gaps, the United Kingdom, the euro countries, and Australia and New Zealand | A user there sees native prices for every provider whose pages could be read |
 | M10.14 | Scan to join, once (added 2026-10-30, the feedback after M10): Show the code's QR code is a join link that works once, for 10 minutes (`/join#<id>.<key>`: the code sealed with a key only the link carries, `POST /join` and `DELETE /join/:id`), which a phone's camera opens; Join scans one with the device's camera; Turn on and Start over show the words alone (P13; BLUEPRINT §5.2, §11.4, §14) | A link opened on a new device joins with no word typed, and again says it was used; one past its 10 minutes or withdrawn opens nothing; no request carries the key; Join's camera reads Show the code's QR code |
 | M10.15 | Join on the first visit (added 2026-10-30, the feedback after M10): the first-run dialog's Join with a sync code, and a join link opened on a new device, start its settings from the synced copy's, with the device's own theme (P1, P13) | A new device joins from its first run, with no Merge or Replace, its settings the copy's place and budgets with its own theme, and the first run is over |
+| M10.22 | Category starts empty (added 2026-10-30, the feedback after M10): Search's Category is empty while it's All, its label in the field as Features' is, and "All" its placeholder once it's focused, so a category typed starts at once rather than after "All"; All is still the list's first choice (`ss-choice-field`'s `placeholder`; P8) | Category shows nothing while it's All; Tab to it and "vp" typed at once narrows the list to VPN; picking All empties it again |
 
 #### M10 specs
 
@@ -1611,6 +1612,10 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
 - **Renewals (M6.12):** a listed provider's status says "Auto-renews Nov 12" when its soonest charge renews by itself.
 - **Where to change it (M5.12):** a policy rating whose reason says the user has to change something themselves links
   the provider's own page for it under the reason ("How to turn off Behavioral Advertising ↗").
+
+**Since the feedback after M10 (M10.22):** Category is empty while it's All, its label in the field as Features' is,
+and "All" is its placeholder once it's focused, so what's typed is the category looked for, with no "All" to delete
+first. All is still the list's first choice, and picking it empties the field again.
 
 BLUEPRINT §14 has the scores.
 

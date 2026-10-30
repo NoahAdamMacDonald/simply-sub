@@ -526,6 +526,12 @@ a minute per IP, and wrangler dev's limiter counts in the wall clock's minutes: 
 which the script checks is said in words, then sends again in the next minute (a run takes 2 to 3 minutes). A snackbar
 fading out is paler than it shows, so axe waits until the thanks has gone.
 
+`check-m10-category.cjs` (M10.22, the feedback after M10, part 2) checks Search's Category on `ng serve` for a Canadian
+in Alberta (base URL ending in `/`), in both themes at 1280 px (the filter panel) and 360 px (the drawer): empty while
+it's All with its label in the field, then focused by Tab with its label floated and "All" its placeholder, "vp" typed
+at once narrowing the list to VPN and Enter picking it, and All picked with the pointer emptying it again, with axe on
+the field focused and not, and no horizontal scroll.
+
 `check-m10-join-link.cjs` (M10.14 and M10.15, the feedback after M10, part 2: sync's one-time join link and joining on
 the first visit) needs wrangler dev answering the API, with its user database migrated (`npm -w apps/api run
 db:user:migrate:local`, for `join_links`): behind `ng serve`'s proxy (`http://localhost:4300/`), or the production

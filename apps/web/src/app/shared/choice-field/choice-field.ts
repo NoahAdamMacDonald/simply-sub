@@ -72,6 +72,11 @@ export class ChoiceField implements FormValueControl<string> {
   readonly label = input.required<string>();
   readonly choices = input.required<readonly Choice[]>();
   readonly hint = input<string>();
+  /**
+   * The words for the choice with no value, shown as the empty field's placeholder rather than as its text, so typing
+   * starts at once (Search's Category, "All": the feedback after M10, part 2). The list still offers that choice.
+   */
+  readonly placeholder = input<string>();
   /** The user picked a choice; the value is it already. */
   readonly picked = output<string>();
 
@@ -83,7 +88,7 @@ export class ChoiceField implements FormValueControl<string> {
     () => new Map(this.choices().map((choice) => [choice.value, choice.label])),
   );
   /** The chosen one's name: what the field shows until something else is typed. */
-  private readonly chosenLabel = computed(() => this.labels().get(this.value()) ?? '');
+  private readonly chosenLabel = computed(() => this.textOf(this.value()));
   /** What the field shows: the chosen name, or what's typed. */
   protected readonly text = linkedSignal(() => this.chosenLabel());
   /**
@@ -111,7 +116,7 @@ export class ChoiceField implements FormValueControl<string> {
     isErrorState: () => this.invalid() && this.touched(),
   };
   protected readonly display = (value: string | null): string =>
-    value === null ? '' : (this.labels().get(value) ?? '');
+    value === null ? '' : this.textOf(value);
 
   constructor() {
     // matInput works out its error state only with a form control of its own: this field tells it.
@@ -147,7 +152,7 @@ export class ChoiceField implements FormValueControl<string> {
   protected pick(event: MatAutocompleteSelectedEvent): void {
     const value = event.option.value as string;
     this.value.set(value);
-    this.text.set(this.labels().get(value) ?? '');
+    this.text.set(this.textOf(value));
     this.picked.emit(value);
   }
 
@@ -179,6 +184,11 @@ export class ChoiceField implements FormValueControl<string> {
     ) {
       this.trigger().closePanel();
     }
+  }
+
+  /** What the field shows for `value`: its choice's name, or nothing for the one with no value when it has a placeholder. */
+  private textOf(value: string): string {
+    return value === '' && this.placeholder() !== undefined ? '' : (this.labels().get(value) ?? '');
   }
 
   /** The list closed: it shows them all next time, and the field the chosen name. */

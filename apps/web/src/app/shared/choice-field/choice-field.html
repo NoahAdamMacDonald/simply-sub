@@ -5,6 +5,7 @@
     matInput
     autocomplete="off"
     spellcheck="false"
+    [placeholder]="placeholder() ?? ''"
     [value]="text()"
     [matAutocomplete]="list"
     [errorStateMatcher]="errorState"
