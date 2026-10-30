@@ -26,7 +26,9 @@ import { memoryState, type BotState } from '../src/state';
 import { catalogIndex } from '../src/targets';
 import mullvadPricing from './fixtures/mullvad-pricing.html?raw';
 import mullvadResellers from './fixtures/mullvad-resellers.html?raw';
+import netflixAu from './fixtures/netflix-au.html?raw';
 import netflixCa from './fixtures/netflix-ca.html?raw';
+import netflixNz from './fixtures/netflix-nz.html?raw';
 import netflixPaymentCa from './fixtures/netflix-payment-ca.html?raw';
 import netflixPaymentUs from './fixtures/netflix-payment-us.html?raw';
 
@@ -85,6 +87,8 @@ export function storedWorld(): World {
   return {
     pages: {
       'https://help.netflix.com/en/node/24926/ca': netflixCa,
+      'https://help.netflix.com/en/node/24926/au': netflixAu,
+      'https://help.netflix.com/en/node/24926/nz': netflixNz,
       'https://help.netflix.com/en/node/116380/ca': netflixPaymentCa,
       'https://help.netflix.com/en/node/116380/us': netflixPaymentUs,
       'https://mullvad.net/en/pricing': mullvadPricing,

@@ -27,6 +27,8 @@ describe('stepPlan', () => {
     expect(index.providers['netflix']).toEqual([
       'https://help.netflix.com/en/node/24926/ca',
       'https://help.netflix.com/en/node/24926/us',
+      'https://help.netflix.com/en/node/24926/au',
+      'https://help.netflix.com/en/node/24926/nz',
       // Its accepted cards in each country (M9.2).
       'https://help.netflix.com/en/node/116380/ca',
       'https://help.netflix.com/en/node/116380/us',
