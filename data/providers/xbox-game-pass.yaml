@@ -17,7 +17,7 @@ name: Xbox Game Pass
 website: https://www.xbox.com/xbox-game-pass
 category: gaming
 spendCategory: gaming
-billingCurrency: { CA: CAD }
+billingCurrency: { CA: CAD, US: USD }
 cancelUrl: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
 sources: { pricing: https://www.xbox.com/en-CA/xbox-game-pass }
 
@@ -39,6 +39,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-28
         sourceUrl: https://www.xbox.com/en-CA/xbox-game-pass
+      - region: US
+        currency: USD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-US/xbox-game-pass?wfExp=390B
 
   - id: xbox-game-pass.premium
     name: Premium
@@ -58,6 +66,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-28
         sourceUrl: https://www.xbox.com/en-CA/xbox-game-pass
+      - region: US
+        currency: USD
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-US/xbox-game-pass?wfExp=390B
 
   - id: xbox-game-pass.ultimate
     name: Ultimate
@@ -78,6 +94,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-28
         sourceUrl: https://www.xbox.com/en-CA/xbox-game-pass
+      - region: US
+        currency: USD
+        amount: 22.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-US/xbox-game-pass?wfExp=390B
 
   - id: xbox-game-pass.pc-game-pass
     name: PC Game Pass
