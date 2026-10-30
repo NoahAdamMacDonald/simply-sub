@@ -17,6 +17,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
   draftItems,
+  planTitle,
   severities,
   severityText,
   suggestionEdits,
@@ -31,6 +32,8 @@ import { DismissedSuggestionsRepository } from '../../core/storage/dismissed-sug
 import { ListsRepository } from '../../core/storage/lists-repository';
 import { EmptyState } from '../../shared/empty-state/empty-state';
 import { PageHeader } from '../../shared/page-header/page-header';
+import { dateText } from '../../shared/date-text';
+import { PriceTag } from '../../shared/price-tag/price-tag';
 import { amountText } from '../../shared/price-tag/price-text';
 import { SuggestionCard } from './suggestion-card';
 import { actionLine } from './suggestion-text';
@@ -54,6 +57,7 @@ import { openSnack, undoMillis, type Snack } from '../../shared/snack/snack';
     MatIconButton,
     MatTooltip,
     PageHeader,
+    PriceTag,
     RouterLink,
     SuggestionCard,
   ],
@@ -116,6 +120,28 @@ export class OptimizationsPage {
   );
   /** The suggestions are being worked out again (after an Apply): no card can be applied till they're back (M8.6). */
   protected readonly updating = computed(() => this.result.isLoading());
+
+  /**
+   * The items whose plans end for their subscribers within the next 12 months (M10.27), above the sections: each with
+   * the plans that keep what it's ranked Needed, which Search shows.
+   */
+  protected readonly endings = computed(() =>
+    (this.found()?.replacements ?? []).map((ending) => ({
+      itemId: ending.itemId,
+      text: `${ending.title} ends for its subscribers on ${dateText(ending.endsOn)}.`,
+      intro:
+        ending.plans.length === 0
+          ? 'No plan sold where you bought it keeps everything you rank Needed.'
+          : ending.keys.length > 0
+            ? 'These keep everything you rank Needed, cheapest first:'
+            : 'Plans like it, cheapest first:',
+      plans: ending.plans.map((plan) => ({
+        ...plan,
+        title: planTitle(plan.name, plan.planName),
+        search: { q: plan.name, plan: plan.planId },
+      })),
+    })),
+  );
 
   /** The sections in P14's order, each with its cards: dismissed ones only with Show dismissed. */
   protected readonly sections = computed(() => {

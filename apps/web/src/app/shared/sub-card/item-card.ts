@@ -91,6 +91,16 @@ export class ItemCard {
     if (nickname !== undefined) return { name: nickname, planName: this.title() };
     return this.title() === planName ? { name: planName } : { name, planName };
   });
+  /**
+   * A plan no longer sold (M10.27): "Anthropic no longer sells Max to new subscribers", and when it ends for them too,
+   * "It ends for its subscribers on Mar 1, 2027." The item still counts until then.
+   */
+  protected readonly retiredText = computed(() => {
+    const { retired, planEnds, name, planName } = this.resolved();
+    const ends =
+      planEnds === undefined ? '' : ` It ends for its subscribers on ${dateText(planEnds)}.`;
+    return retired && `${name} no longer sells ${planName} to new subscribers.${ends}`;
+  });
   /** "(formerly Max 20x)" beside a renamed plan's name, for six months (M10.27). */
   protected readonly formerly = computed(() => {
     const { formerName } = this.resolved();

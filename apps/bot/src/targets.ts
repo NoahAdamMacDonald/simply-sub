@@ -1,6 +1,7 @@
 import {
   citedPages,
   planTitle,
+  retirementOf,
   type Bundle,
   type Price,
   type Provider,
@@ -11,7 +12,9 @@ import type { ApprovalTarget, NetworksTarget, PolicyPageTarget, PriceTarget } fr
 
 // What the check looks at for each provider and bundle (BLUEPRINT §6.4): every price with a sourceUrl (its plans', its
 // add-ons', its resellers' offers'), every reseller's approval, and each region's accepted card networks (§9.3). A price
-// without a sourceUrl was read from a page that can't be fetched (a checkout), so a person checks it.
+// without a sourceUrl was read from a page that can't be fetched (a checkout), so a person checks it. A retired plan's
+// prices are its last ones, kept as they were (BLUEPRINT §4.3, M10.27): its page no longer has them, so they're left
+// out, and so are a retired provider's add-ons.
 
 export function providerFile(id: string): string {
   return `data/providers/${id}.yaml`;
@@ -26,6 +29,7 @@ export function providerTargets(provider: SnapshotProvider): PriceTarget[] {
   const file = providerFile(provider.id);
   const targets: PriceTarget[] = [];
   for (const plan of provider.plans) {
+    if (retirementOf(plan, provider)) continue;
     const title = planTitle(provider.name, plan.name);
     for (const price of sourced(plan.prices)) {
       targets.push({
@@ -37,7 +41,7 @@ export function providerTargets(provider: SnapshotProvider): PriceTarget[] {
       });
     }
   }
-  for (const addOn of provider.addOns ?? []) {
+  for (const addOn of provider.retired === undefined ? (provider.addOns ?? []) : []) {
     for (const price of sourced(addOn.prices)) {
       targets.push({
         file,

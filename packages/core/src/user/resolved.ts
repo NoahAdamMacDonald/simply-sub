@@ -5,13 +5,14 @@ import { shownFormerName } from '../catalog/former-names';
 import type { FxRates } from '../catalog/convert';
 import { pickPrice, typedPrice, type PickedPrice, type PriceContext } from '../catalog/pick-price';
 import { planCategories } from '../catalog/plan-categories';
+import { retirementOf, type Retirement } from '../catalog/retired';
 import type { Price } from '../catalog/price';
 import type { CardNetwork, Plan } from '../catalog/provider';
 import { catalogIconFile, type CatalogData, type SnapshotProvider } from '../catalog/snapshot';
 import type { IsoDate } from '../dates/iso-date';
 import { providedKeys, type RankKey } from '../ranking/rank-keys';
 import { effectiveRanks, type ProfileRanks } from '../ranking/resolve-rank';
-import { nextCharge, ownPriceOn, type Charge } from '../schedule/charges';
+import { chargedItem, nextCharge, ownPriceOn, type Charge } from '../schedule/charges';
 import { itemStatus } from '../schedule/item-status';
 import type { TaxPlace } from '../tax/sales-tax-rate';
 import { customIconUrl } from './custom-sub-form';
@@ -72,6 +73,16 @@ export interface ResolvedItem {
   planName: string;
   /** A catalog plan's former name, for six months after its rename (M10.27): "Max 20x" for Ultra. */
   formerName?: string;
+  /**
+   * A catalog plan its provider no longer sells, from its `retired` date (M10.27): since when, and the day it ends for
+   * its subscribers too, if it does. The item still counts.
+   */
+  retired?: Retirement;
+  /**
+   * The day the plan ends for its subscribers (its `endsOn`), whether or not it's retired yet: the item has no charges
+   * from then on, and its status ends then, as if it were its end date (chargedItem).
+   */
+  planEnds?: IsoDate;
   /**
    * Catalog: the relative icons/<id>.webp when the provider has a logo (the snapshot's absolute URL points at
    * production, so a preview would miss a new logo). Custom: api/v1/icon?domain= from its link. None: a letter.
@@ -213,12 +224,15 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
       }
       const networks = acceptedNetworksIn(provider, region);
       const formerName = shownFormerName(plan, context.today);
+      const retirement = retirementOf(plan, provider);
       parts = {
         providerId: provider.id,
         planId: plan.id,
         name: provider.name,
         planName: plan.name,
         ...(formerName !== undefined && { formerName }),
+        ...(retirement && retirement.since <= context.today && { retired: retirement }),
+        ...(retirement?.endsOn !== undefined && { planEnds: retirement.endsOn }),
         ...providerLinks(provider, plan),
         price,
         addOns,
@@ -295,6 +309,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
     price: parts.price,
     addOns: parts.addOns,
     overridePrice,
+    ...(parts.planEnds !== undefined && { planEnds: parts.planEnds }),
   };
   // The item dialog resolves its form's item while a date is still being typed: that has no charges, and no status.
   const dated = hasDates(item.billing);
@@ -318,7 +333,9 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         ),
       providedKeys: keys,
       effectiveRanks: effectiveRanks(keys, item.rankOverrides, context.profileRanks),
-      status: dated ? itemStatus(item, context.today, next) : { kind: 'inactive', manual: false },
+      status: dated
+        ? itemStatus(chargedItem(charged), context.today, next)
+        : { kind: 'inactive', manual: false },
       ...(next && { nextCharge: next }),
     },
   };

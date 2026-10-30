@@ -7,6 +7,7 @@ import { pickPrice, type PickedPrice } from '../catalog/pick-price';
 import { planCategories } from '../catalog/plan-categories';
 import type { Interval } from '../catalog/price';
 import type { Plan } from '../catalog/provider';
+import { isRetired } from '../catalog/retired';
 import type { SnapshotProvider } from '../catalog/snapshot';
 import { addDays, type IsoDate } from '../dates/iso-date';
 import {
@@ -88,8 +89,10 @@ export function searchProviders(
   const terms = query.q === undefined ? [] : textTerms(query.q, options, context);
 
   const matches = providers.flatMap((provider): ProviderMatch[] => {
+    // A plan no longer sold is never offered (M10.27), whatever else matches it.
     const inCategory = (plan: Plan) =>
-      query.category === undefined || planCategories(plan, provider).includes(query.category);
+      !isRetired(plan, provider, context.today) &&
+      (query.category === undefined || planCategories(plan, provider).includes(query.category));
     if (!provider.plans.some(inCategory)) {
       return [];
     }

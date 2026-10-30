@@ -88,6 +88,30 @@
       }
 
       @if (found(); as found) {
+        <!-- Plans that end for their subscribers (M10.27): not a saving, so above the suggestions. -->
+        @if (endings().length > 0) {
+          <section class="section endings" aria-labelledby="section-endings">
+            <h2 id="section-endings">Plans that end</h2>
+            <ul class="cards">
+              @for (ending of endings(); track ending.itemId) {
+                <li class="ending">
+                  <p>{{ ending.text }} {{ ending.intro }}</p>
+                  @if (ending.plans.length > 0) {
+                    <ul class="plans">
+                      @for (plan of ending.plans; track plan.planId) {
+                        <li>
+                          <a routerLink="/search" [queryParams]="plan.search">{{ plan.title }}</a>
+                          <ss-price [price]="plan.price" />
+                        </li>
+                      }
+                    </ul>
+                  }
+                </li>
+              }
+            </ul>
+          </section>
+        }
+
         @if (sections().length === 0 && dismissedCount() === 0) {
           <ss-empty-state icon="savings" heading="No suggestions">
             Nothing in this list can cost less without losing what you rank. Rank the features you

@@ -33,6 +33,7 @@ export * from './catalog/regions';
 export * from './catalog/registry-files';
 export * from './catalog/reseller';
 export * from './catalog/reseller-deals';
+export * from './catalog/retired';
 export * from './catalog/seed-sql';
 export * from './catalog/snapshot';
 export * from './catalog/plan-lookup';
@@ -71,6 +72,7 @@ export {
   type OptimizerInput,
 } from './optimizer/model';
 export * from './optimizer/optimize';
+export * from './optimizer/replacements';
 export * from './optimizer/suggestion';
 export * from './optimizer/suggestion-text';
 export * from './pipeline/amounts';

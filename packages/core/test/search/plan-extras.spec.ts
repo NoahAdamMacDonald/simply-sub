@@ -41,7 +41,7 @@ function extras(
   const provider = data.providers.find(({ id }) => planId.startsWith(`${id}.`));
   const plan = provider?.plans.find(({ id }) => id === planId);
   if (!provider || !plan) throw new Error(`No plan ${planId}`);
-  return planExtras(provider, plan, data, context);
+  return planExtras(provider, plan, data, context, '2026-10-23');
 }
 
 describe('planExtras', () => {

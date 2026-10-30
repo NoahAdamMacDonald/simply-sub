@@ -14,6 +14,7 @@ import { automationSchema } from '../pipeline/automation';
 import { onSites, providerSiteKeys, queueFileSchema } from '../pipeline/queue';
 import type { Price } from './price';
 import { providerSchema, type AddOn, type Plan, type Provider } from './provider';
+import { isRetired } from './retired';
 import { globalRegion, groupsOf, isCatalogRegion, membersOf, regionProblem } from './regions';
 import {
   isOnDomain,
@@ -529,7 +530,7 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
         );
       }
     });
-    prices.check(plan.prices, [...path, 'prices']);
+    prices.check(plan.prices, [...path, 'prices'], isRetired(plan, provider, context.today));
   });
 
   const sold = new Set(provider.plans.flatMap((plan) => plan.addOnIds ?? []));
@@ -550,7 +551,11 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
           : `"${granted}" isn't a plan in this file${choices(granted, planIds)}`,
       );
     }
-    prices.check(addOn.prices, [...path, 'prices']);
+    prices.check(
+      addOn.prices,
+      [...path, 'prices'],
+      provider.retired !== undefined && provider.retired <= context.today,
+    );
   });
 
   if (provider.billingCurrency) {
@@ -929,8 +934,8 @@ class PriceChecks {
     this.staleBefore = addDays(context.today, -staleAfterDays);
   }
 
-  /** `path` is the prices list's own. */
-  check(prices: readonly Price[], path: CatalogIssuePath): void {
+  /** `path` is the prices list's own. A retired plan's are its last prices, kept as they were, so never stale (M10.27). */
+  check(prices: readonly Price[], path: CatalogIssuePath, retired = false): void {
     const { today, currencies } = this.context;
     const first = new Map<string, number>();
     prices.forEach((price, index) => {
@@ -946,7 +951,7 @@ class PriceChecks {
           [...at, 'lastVerified'],
           `${price.lastVerified} is after today (${today}): use the date the price was checked`,
         );
-      } else if (price.lastVerified < this.staleBefore) {
+      } else if (!retired && price.lastVerified < this.staleBefore) {
         this.stale.push({ date: price.lastVerified, path: [...at, 'lastVerified'] });
       }
       this.count++;

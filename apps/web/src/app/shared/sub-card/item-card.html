@@ -33,6 +33,12 @@
         [nextCharge]="resolved().nextCharge?.date"
         [replacement]="replacement()"
       />
+      @if (retiredText(); as text) {
+        <p class="retired">
+          <mat-icon aria-hidden="true">info</mat-icon>
+          <span>{{ text }}</span>
+        </p>
+      }
       @if (tags().length > 0) {
         <ul class="tags" aria-label="Tags">
           @for (tag of tags(); track tag.id) {

@@ -23,7 +23,7 @@ import { ListsRepository } from '../../core/storage/lists-repository';
 import { BudgetTotals } from '../../shared/budget-totals/budget-totals';
 import { BudgetWarnings } from '../../shared/budget-warnings/budget-warnings';
 import { chargeAmountText, nearDateText } from '../../shared/charge-text';
-import { dayText } from '../../shared/date-text';
+import { dateText, dayText } from '../../shared/date-text';
 import { EmptyState } from '../../shared/empty-state/empty-state';
 import { MiniCalendar, type CalendarCharge } from '../../shared/mini-calendar/mini-calendar';
 import { amountText, intervalSpoken } from '../../shared/price-tag/price-text';
@@ -175,14 +175,17 @@ export class HomePage {
       }));
   });
 
-  /** What catalog updates changed in the lists' plans this past month (M10.27): "Claude Max 20x is now called Ultra". */
+  /**
+   * What catalog updates changed in the lists' plans this past month (M10.27): "Claude Max 20x is now called Ultra",
+   * "Claude Max ends for its subscribers on Mar 1, 2027".
+   */
   protected readonly notices = computed(() => {
     const since = addDays(this.today(), -priceChangeDays);
     return (this.settings.saved()?.planNotices ?? [])
       .filter((notice) => notice.date >= since)
       .map((notice) => ({
         key: `${notice.kind} ${notice.planId}`,
-        text: planNoticeText(notice),
+        text: planNoticeText(notice, dateText),
         date: dayText(notice.date),
       }));
   });

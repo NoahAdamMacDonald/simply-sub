@@ -141,6 +141,20 @@
       "description": "Pages the catalog data was taken from"
     },
     "notes": { "type": "string", "minLength": 1, "description": "Shown on the provider" },
+    "retired": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+      "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+      "description": "The day it stopped selling (M10.27): never delete a provider. Its plans' last prices stay, and items on them still count"
+    },
+    "endsOn": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+      "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+      "description": "The day it ends for its current subscribers too, when it says so: needs retired. Items on its plans count until then"
+    },
     "plans": {
       "minItems": 1,
       "type": "array",
@@ -245,6 +259,20 @@
             "description": "Provider-specific extras, shown but never compared"
           },
           "notes": { "type": "string", "minLength": 1, "description": "Shown on the plan" },
+          "retired": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+            "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+            "description": "The day it stopped being sold to new subscribers (M10.27): never delete a plan. Its last prices stay, and items on it still count"
+          },
+          "endsOn": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+            "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+            "description": "The day it ends for its current subscribers too, when the provider says so: needs retired. Items on it count until then"
+          },
           "prices": {
             "minItems": 1,
             "type": "array",

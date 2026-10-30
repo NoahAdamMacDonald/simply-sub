@@ -112,6 +112,16 @@ export const planSchema = z
       .describe('Provider-specific extras, shown but never compared')
       .optional(),
     notes: textSchema.describe('Shown on the plan').optional(),
+    retired: isoDateSchema
+      .describe(
+        'The day it stopped being sold to new subscribers (M10.27): never delete a plan. Its last prices stay, and items on it still count',
+      )
+      .optional(),
+    endsOn: isoDateSchema
+      .describe(
+        'The day it ends for its current subscribers too, when the provider says so: needs retired. Items on it count until then',
+      )
+      .optional(),
     prices: pricesSchema,
     addOnIds: z
       .array(planIdSchema)
@@ -151,7 +161,29 @@ export const planSchema = z
     if (plan.addOnLimit !== undefined && plan.addOnIds === undefined) {
       ctx.addIssue({ code: 'custom', message: 'addOnLimit needs addOnIds', path: ['addOnLimit'] });
     }
+    addRetirementIssues(plan, ctx);
   });
+
+/** `endsOn` needs `retired`, on or before it (M10.27). */
+function addRetirementIssues(
+  { retired, endsOn }: { retired?: string; endsOn?: string },
+  ctx: z.RefinementCtx,
+): void {
+  if (endsOn === undefined) return;
+  if (retired === undefined) {
+    ctx.addIssue({
+      code: 'custom',
+      message: 'endsOn needs retired: the day it stopped being sold',
+      path: ['endsOn'],
+    });
+  } else if (endsOn < retired) {
+    ctx.addIssue({
+      code: 'custom',
+      message: `Must be on or after retired (${retired})`,
+      path: ['endsOn'],
+    });
+  }
+}
 export type Plan = z.infer<typeof planSchema>;
 
 export const addOnSchema = z.strictObject({
@@ -215,6 +247,16 @@ export const providerSchema = z
       .describe('Pages the catalog data was taken from')
       .optional(),
     notes: textSchema.describe('Shown on the provider').optional(),
+    retired: isoDateSchema
+      .describe(
+        "The day it stopped selling (M10.27): never delete a provider. Its plans' last prices stay, and items on them still count",
+      )
+      .optional(),
+    endsOn: isoDateSchema
+      .describe(
+        'The day it ends for its current subscribers too, when it says so: needs retired. Items on its plans count until then',
+      )
+      .optional(),
     plans: z.array(planSchema).min(1, 'List at least one plan'),
     addOns: z
       .array(addOnSchema)
@@ -258,6 +300,7 @@ export const providerSchema = z
       (index) => ids[index].path,
     );
     addDuplicateIssues(ctx, provider.availableIn ?? [], (index) => ['availableIn', index]);
+    addRetirementIssues(provider, ctx);
     const resellers = provider.resellers ?? [];
     addDuplicateIssues(
       ctx,

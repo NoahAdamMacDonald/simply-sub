@@ -44,7 +44,9 @@ describe('planNoticesBetween', () => {
         date: today,
       },
     ]);
-    expect(planNoticeText(notices[0])).toBe('Netflix Standard is now called Essentials');
+    expect(planNoticeText(notices[0], (date) => date)).toBe(
+      'Netflix Standard is now called Essentials',
+    );
     // The next update, with the rename already in: nothing new.
     expect(planNoticesBetween([item('netflix.standard')], renamed(), renamed(), today)).toEqual([]);
   });

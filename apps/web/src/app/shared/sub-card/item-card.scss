@@ -78,6 +78,23 @@
   font: var(--mat-sys-body-small);
 }
 
+// A plan no longer sold (M10.27): a note under the status, its icon beside the first line.
+.retired {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  margin: 6px 0 0;
+  font: var(--mat-sys-body-medium);
+
+  mat-icon {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    color: var(--ss-text-muted);
+    font-size: 18px;
+  }
+}
+
 // Padding inside the clipped part, which can shrink to nothing.
 .details-content {
   display: flex;
