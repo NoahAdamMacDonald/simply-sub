@@ -662,7 +662,7 @@ async function checkOptimizations(page, label, viewport, shot) {
   await axeCheck(page, `${label}, Optimizations with a change applied`);
   await page.screenshot({ path: shot('optimizations-applied'), fullPage: true });
   // Undo puts the draft back: this Apply made it, so it's gone.
-  await snackBar(page).locator('button').focus();
+  await snackBar(page).getByRole('button', { name: 'Undo' }).focus();
   await page.keyboard.press('Enter');
   await until('the draft dropped', async () => (await readTable(page, 'drafts')).length === 0);
   check(`${label}: Undo drops the draft the first Apply made`, true);

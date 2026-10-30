@@ -162,6 +162,11 @@ which reads each page as a visitor there would, before any hand reading:
 
 ## Gotchas
 
+- **A headless user agent can get another country's prices:** claude.com/pricing showed this machine the US prices
+  ($20) when its user agent said `HeadlessChrome`, and Canada's ($28, a bare `$`) with the browser's own, which
+  `read-page.cjs` and the pipeline's browser send. Its own pricing data, which the page loads
+  (`claude.ai/api/billing/subscription_pricing`), names the country and currency (`"country":"CA","currency":"CAD"`):
+  read it as part of the page, never call it yourself (the feedback after M10, 2026-10-30).
 - **Some US sites block this machine (in Canada):** hbomax.com and plus.espn.com answer Access Denied, and
   nfl.com/plus redirects to DAZN's international NFL Game Pass. Their US prices can't be read here: report them,
   and read what their help centres show (support.espn.com does). help.hulu.com works.

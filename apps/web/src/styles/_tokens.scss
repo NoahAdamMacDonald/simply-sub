@@ -88,6 +88,22 @@
   --ss-sidebar-width: 216px;
   --ss-radius-card: 12px;
   --ss-font: 'Inter', system-ui, sans-serif;
+
+  // The screen's edges the app keeps clear (the feedback after M10): a phone's status bar and home indicator, and its
+  // sides in landscape, which viewport-fit=cover (index.html) gives sizes.
+  --ss-inset-top: env(safe-area-inset-top, 0px);
+  --ss-inset-bottom: env(safe-area-inset-bottom, 0px);
+  --ss-inset-left: env(safe-area-inset-left, 0px);
+  --ss-inset-right: env(safe-area-inset-right, 0px);
+}
+
+// An iPhone's Home Screen app: iOS 26.1 and later draw the status bar over its top and say no inset is there (WebKit
+// bug 301994), and its vh then counts that band, which dvh leaves out. In a browser tab vh and dvh differ by the
+// toolbar instead, so only an installed app takes it.
+@media (display-mode: standalone) {
+  :root {
+    --ss-inset-top: max(env(safe-area-inset-top, 0px), calc(100vh - 100dvh));
+  }
 }
 
 // Dark mode inherits the accent, --ss-on-accent, the vivid rank fills and the budget colours on

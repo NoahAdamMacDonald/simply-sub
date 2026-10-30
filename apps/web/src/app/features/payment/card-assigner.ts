@@ -12,6 +12,7 @@ import { ListsRepository } from '../../core/storage/lists-repository';
 import type { ShownAndSpoken } from '../../shared/charge-text';
 import { amountText } from '../../shared/price-tag/price-text';
 import type { AssignCardsDialog, AssignPreview } from './assign-cards-dialog';
+import { openSnack, snackMillis, undoMillis } from '../../shared/snack/snack';
 
 /**
  * Assign best cards (PROJECT-PLAN P11, M9.4): core's assignCards over every list's saved items, a preview per list in a
@@ -110,19 +111,20 @@ export class CardAssigner {
       changes.map((change) => ({ itemId: change.itemId, cardId: change.to })),
     );
     const count = before.length;
-    const undo = this.snackBar.open(
+    const undo = openSnack(
+      this.snackBar,
       count === 1
         ? 'Assigned a card to 1 subscription'
         : `Assigned cards to ${count} subscriptions`,
       'Undo',
-      { duration: 8000 },
+      { duration: undoMillis },
     );
     undo.onAction().subscribe(() => {
-      void this.cards
-        .assign(before)
-        .then(() =>
-          this.snackBar.open('Cards put back as they were', undefined, { duration: 5000 }),
-        );
+      void this.cards.assign(before).then(() =>
+        openSnack(this.snackBar, 'Cards put back as they were', undefined, {
+          duration: snackMillis,
+        }),
+      );
     });
   }
 }

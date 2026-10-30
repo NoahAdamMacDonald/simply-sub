@@ -1,0 +1,20 @@
+// Unencapsulated (snack.ts), so each rule names what it's for.
+
+// The message, then its buttons, as Material's own snackbar lays them out. The buttons' focus ring takes the message's
+// colour: the accent's is too close to the snackbar's own, dark on dark or light on light.
+ss-snack {
+  --mat-focus-indicator-border-color: var(--mat-sys-inverse-on-surface);
+
+  display: flex;
+}
+
+// ✕ in the message's colour; an action takes Material's.
+ss-snack .dismiss {
+  color: var(--mat-sys-inverse-on-surface);
+}
+
+// Above an iPhone's home indicator in the Home Screen app, as the pages' ends are (M10.16). Material gives the
+// container 8 px all round; this rule is the more specific.
+.cdk-overlay-container .mat-mdc-snack-bar-container {
+  margin-bottom: calc(8px + var(--ss-inset-bottom));
+}

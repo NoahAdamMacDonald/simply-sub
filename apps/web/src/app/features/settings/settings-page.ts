@@ -39,6 +39,7 @@ import { LocationDialog } from './location-dialog';
 import { percentText, placeSummary } from './place-names';
 import { SyncSetting } from './sync-setting';
 import { TagsSetting } from './tags-setting';
+import { openSnack, snackMillis } from '../../shared/snack/snack';
 
 /** What [Check for updates] found. */
 const checkMessages: Record<CatalogCheckOutcome, string> = {
@@ -288,7 +289,7 @@ export class SettingsPage {
     const name = await firstValueFrom(
       this.dialog.open(ExportBackupDialog, backupDialog).afterClosed(),
     );
-    if (name) this.snackBar.open(`Saved ${name}`, undefined, { duration: 5000 });
+    if (name) openSnack(this.snackBar, `Saved ${name}`, undefined, { duration: snackMillis });
   }
 
   /** Import backup: the dialog, then what it did. */
@@ -298,7 +299,9 @@ export class SettingsPage {
       this.dialog.open(ImportBackupDialog, backupDialog).afterClosed(),
     );
     if (result) {
-      this.snackBar.open(importedText(result.mode, result.counts), undefined, { duration: 5000 });
+      openSnack(this.snackBar, importedText(result.mode, result.counts), undefined, {
+        duration: snackMillis,
+      });
     }
   }
 
@@ -316,7 +319,9 @@ export class SettingsPage {
       this.dialog.open<unknown, unknown, boolean>(dialog, backupDialog).afterClosed(),
     );
     if (done) {
-      this.snackBar.open(on ? 'The lock is off' : 'The lock is on', undefined, { duration: 5000 });
+      openSnack(this.snackBar, on ? 'The lock is off' : 'The lock is on', undefined, {
+        duration: snackMillis,
+      });
     }
   }
 

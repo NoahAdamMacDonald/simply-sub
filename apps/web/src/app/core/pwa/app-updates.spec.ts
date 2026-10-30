@@ -54,9 +54,10 @@ describe('AppUpdates', () => {
     vi.unstubAllGlobals();
   });
 
-  /** Lets the snackbar load and render. */
+  /** Lets the snackbar load (Material's and the app's chunks) and render. */
   async function settle() {
     await TestBed.inject(ApplicationRef).whenStable();
+    await import('../../shared/snack/snack');
     await new Promise((resolve) => setTimeout(resolve));
   }
 
