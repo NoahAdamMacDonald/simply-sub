@@ -668,8 +668,15 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   where a provider charges every euro country the same, else each country's), and Australia and New Zealand. Each is
   reviewed and merged by the owner like any batch; each region's catalog file follows from `data:build`.
 - **Acceptance**
-  - [ ] In each region, every provider whose pages could be read has native prices, and the pull request lists the
+  - [x] In each region, every provider whose pages could be read has native prices, and the pull request lists the
         rest with why
+- **As built (2026-10-29):** four pull requests into `main`, data only with the tests that read those provider
+  files, as the owner chose: the United Kingdom (#81: Bitdefender, Netflix, Xbox Game Pass, 11 prices), the US's gaps
+  (#82: Bitdefender and Xbox Game Pass, 6), Australia and New Zealand (#83: the same three, 21), and the euro
+  countries (#84: Germany, France, Ireland, the Netherlands, Spain and Italy read; Xbox Game Pass the same in all six,
+  so one EU price; Bitdefender and Netflix each country's). Left out with why: Disney+, whose pages for every region
+  went to Canada's (no VPN, the owner's choice), the services sold only in Canada or the US, the ones priced the same
+  everywhere, and the plans a region's page doesn't price (BLUEPRINT §14).
 
 ---
 

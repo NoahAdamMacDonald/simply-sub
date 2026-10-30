@@ -3004,6 +3004,12 @@ None.
   `lastVerified` is due again, so "the page still shows the catalog's price" would have left nothing for the digest
   to find. A confirmation of a reported plan's price is kept until the digest, and proposes no edit.
 
+- **The first regions** (M10.13, the owner's choices of 2026-10-29): no VPN, so a page a site prices by where the
+  visitor is stays out with why (Disney+'s help article went to Canada's for every region); the euro countries read
+  are Germany, France, Ireland, the Netherlands, Spain and Italy, and the same price in all six becomes the `EU`
+  group's (Xbox Game Pass), else each country read keeps its own (Netflix's differ; Bitdefender's five are the same but
+  its Irish page wasn't found); each region's pull request goes into `main`, data only with the tests that read those
+  files, so they merge apart from #78–#80. 78 prices in all, every one quoted on its page: #81, #82, #83, #84.
 - **A region's page by its address** (M10.12): hreflang finds few of the catalog's regional pages (Bitdefender's);
   most sites put the country in the address instead, at the start (Xbox's `/en-US/`) or the end (Netflix's help
   article's `/ca`), with no link between countries. `regionalVariants` swaps the country for the region's, as
