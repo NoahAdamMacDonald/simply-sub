@@ -31,6 +31,7 @@ import {
   LiveCalendarError,
   createFeedSet,
   replaceFeedSet,
+  feedServed,
   revokeFeedSet,
   type LiveCalendarProblem,
 } from './live-calendar-client';
@@ -86,11 +87,18 @@ export class LiveCalendarService {
   });
 
   private readonly sendChanges = oneAtATime(() => this.run());
+  /** The set whose links were checked, or made, here: the start's check is once a set. */
+  private checked?: string;
   private settling: ReturnType<typeof setTimeout> | undefined;
 
   constructor() {
     effect(() => {
       if (this.drafts() !== undefined) untracked(() => this.settle(this.settleMs));
+    });
+    // A set deleted on the server while nothing changed here would keep showing dead links (M10.25).
+    effect(() => {
+      const record = this.record();
+      if (record && record.setId !== this.checked) untracked(() => void this.checkLinks());
     });
     const online = () => this.settle(0);
     window.addEventListener('online', online);
@@ -123,6 +131,8 @@ export class LiveCalendarService {
     this.sending.set(true);
     try {
       const made = await createFeedSet(await feedsToSend(drafts, undefined));
+      // Just made: nothing to check.
+      this.checked = made.id;
       await this.repository.save({
         setId: made.id,
         manageKey: made.manageKey,
@@ -175,6 +185,21 @@ export class LiveCalendarService {
       this.problem.set(undefined);
     } finally {
       this.sending.set(false);
+    }
+  }
+
+  /**
+   * Asks the server whether the set's first calendar is still served, and marks the set broken when it isn't, so the
+   * app says its links no longer work and offers new ones (M10.25). Nothing changes when the server can't be asked.
+   */
+  async checkLinks(): Promise<void> {
+    const record = this.record();
+    const token = record?.calendars[0]?.token;
+    if (!record || record.broken || token === undefined) return;
+    this.checked = record.setId;
+    if ((await feedServed(token)) === false && this.record()?.setId === record.setId) {
+      await this.repository.update({ broken: true });
+      this.problem.set('gone');
     }
   }
 

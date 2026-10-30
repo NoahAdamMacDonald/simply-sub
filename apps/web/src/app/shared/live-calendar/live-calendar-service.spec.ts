@@ -176,6 +176,35 @@ describe('LiveCalendarService', () => {
     expect(service().problem()).toBe('gone');
   });
 
+  it('finds a set gone on the server though nothing changed here, and marks it broken (M10.25)', async () => {
+    await create();
+    await until(() => record() !== undefined);
+    server.forget('secret0000000000000000');
+
+    await service().checkLinks();
+
+    await until(() => record()?.broken === true);
+    expect(service().problem()).toBe('gone');
+    expect(server.requests.at(-1)).toMatchObject({
+      method: 'GET',
+      path: '/api/v1/cal/secret0000000000000002.ics',
+    });
+  });
+
+  it('keeps links that are still served, and asks nothing more of a broken set', async () => {
+    await create();
+    await until(() => record() !== undefined);
+    await service().checkLinks();
+    expect(record()?.broken).toBeUndefined();
+
+    server.forget('secret0000000000000000');
+    await service().checkLinks();
+    await until(() => record()?.broken === true);
+    const asked = server.requests.length;
+    await service().checkLinks();
+    expect(server.requests).toHaveLength(asked);
+  });
+
   it('waits for the network, then sends what changed', async () => {
     await create();
     await until(() => record() !== undefined);

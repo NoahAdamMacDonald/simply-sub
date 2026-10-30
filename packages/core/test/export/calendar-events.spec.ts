@@ -4,6 +4,7 @@ import {
   addMonths,
   calendarEvents,
   chargeDates,
+  downloadEventOptions,
   repeatRule,
   type Billing,
   type IsoDate,
@@ -42,7 +43,7 @@ describe('calendarEvents', () => {
     expect(event.recurrenceRule).toBe('FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=-1');
   });
 
-  it('gives a plan billed on the 29th or 30th an event per charge in the next 12 months', () => {
+  it('gives a monthly plan billed on the 29th or 30th a yearly series for each month, February on its last (M10.25)', () => {
     const on30th: ResolvedItem = {
       ...netflix,
       item: {
@@ -50,18 +51,60 @@ describe('calendarEvents', () => {
         billing: { ...(netflix.item.billing as Recurring), anchorDate: '2026-11-30' },
       },
     };
-    const charges = calendarEvents([{ ...workList, resolved: [on30th] }], context, format);
-    // From the fixtures' today, Oct 28, 2026: the charge a month before the anchor is in the window.
-    expect(charges.map((event) => event.start)).toEqual([
-      [2026, 10, 30],
-      [2026, 11, 30],
-      [2026, 12, 30],
-      [2027, 1, 30],
-      [2027, 2, 28],
-      ...[3, 4, 5, 6, 7, 8, 9].map((month) => [2027, month, 30]),
+    const series = calendarEvents([{ ...workList, resolved: [on30th] }], context, format);
+    // From the fixtures' today, Oct 28, 2026: each month's first charge on or after the run's first, Oct 30.
+    expect(series.map((event) => [event.start, event.recurrenceRule])).toEqual([
+      [[2026, 10, 30], 'FREQ=YEARLY;INTERVAL=1;BYMONTH=10;BYMONTHDAY=30'],
+      [[2026, 11, 30], 'FREQ=YEARLY;INTERVAL=1;BYMONTH=11;BYMONTHDAY=30'],
+      [[2026, 12, 30], 'FREQ=YEARLY;INTERVAL=1;BYMONTH=12;BYMONTHDAY=30'],
+      [[2027, 1, 30], 'FREQ=YEARLY;INTERVAL=1;BYMONTH=1;BYMONTHDAY=30'],
+      [[2027, 2, 28], 'FREQ=YEARLY;INTERVAL=1;BYMONTH=2;BYMONTHDAY=-1'],
+      ...[3, 4, 5, 6, 7, 8, 9].map((month) => [
+        [2027, month, 30],
+        `FREQ=YEARLY;INTERVAL=1;BYMONTH=${month};BYMONTHDAY=30`,
+      ]),
     ]);
-    expect(charges.every((event) => event.recurrenceRule === undefined)).toBe(true);
-    expect(charges[0].uid).toBe(`${netflix.item.id}-2026-10-30-CAD@sub.simplely.ca`);
+    expect(new Set(series.map((event) => event.uid)).size).toBe(12);
+    expect(series[0].uid).toBe(`${netflix.item.id}-from-2026-10-30-CAD@sub.simplely.ca`);
+    // Ending, each series stops the day before.
+    const ending: ResolvedItem = {
+      ...on30th,
+      item: {
+        ...on30th.item,
+        billing: { ...(on30th.item.billing as Recurring), endDate: '2027-03-15' },
+      },
+    };
+    const ended = calendarEvents([{ ...workList, resolved: [ending] }], context, format);
+    expect(ended.map((event) => event.recurrenceRule?.split(';').at(-1))).toEqual(
+      Array(5).fill('UNTIL=20270314'),
+    );
+  });
+
+  it('keeps an event per charge for a plan billed on the 30th every few months, and a year of past ones live', () => {
+    const every2: ResolvedItem = {
+      ...netflix,
+      item: {
+        ...netflix.item,
+        billing: {
+          ...(netflix.item.billing as Recurring),
+          anchorDate: '2026-04-30',
+          intervalCount: 2,
+        },
+      },
+    };
+    const download = calendarEvents([{ ...workList, resolved: [every2] }], context, format);
+    expect(download.every((event) => event.recurrenceRule === undefined)).toBe(true);
+    expect(download[0].start).toEqual([2026, 10, 30]);
+    // A live calendar keeps what's been paid since the anchor.
+    const live = calendarEvents([{ ...workList, resolved: [every2] }], context, format, {
+      ...downloadEventOptions,
+      runsFrom: 'anchor',
+    });
+    expect(live.slice(0, 3).map((event) => event.start)).toEqual([
+      [2026, 4, 30],
+      [2026, 6, 30],
+      [2026, 8, 30],
+    ]);
   });
 
   it('asks for a manual renewal every year, and ends a run on the day before the plan does', () => {

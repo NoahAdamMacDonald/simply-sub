@@ -15,7 +15,8 @@ export const maxFeedEvents = 2_000;
 
 /**
  * A repeat rule of the forms core's repeatRule writes, all of which Proton Calendar takes: every few days or weeks, a
- * month's day (-1 its last), a year's month and day, each with an optional UNTIL date. Nothing else reaches a feed.
+ * month's day (-1 its last), a year's month and day (twelve of them make a monthly plan on the 29th or 30th, M10.25),
+ * each with an optional UNTIL date. Nothing else reaches a feed.
  */
 export const feedRulePattern = new RegExp(
   '^(?:FREQ=(?:DAILY|WEEKLY);INTERVAL=[1-9]\\d{0,2}' +
