@@ -59,3 +59,14 @@
   overflow-wrap: anywhere;
   font: var(--mat-sys-body-large);
 }
+
+// A tag with another's name (M10.24): under its row, beside the swatch's column.
+.namesake {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 8px;
+  margin: 0 0 4px 44px;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}

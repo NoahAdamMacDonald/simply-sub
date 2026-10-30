@@ -314,4 +314,58 @@ describe('TagsSetting', () => {
       await settle(() => document.activeElement === element().querySelector('.add'));
     });
   });
+
+  it('offers to merge a tag into the first of its name, from two devices, and moves its subscriptions (M10.24)', async () => {
+    const family = await addTag('Family', tagColorPresets[7].color);
+    const work = await addTag('Work', tagColorPresets[1].color);
+    // A backup's Merge or sync joins tags by id: the phone's own "family".
+    const phone = await addTag('family', tagColorPresets[9].color);
+    const listId = (await TestBed.inject(ListsRepository).create({ name: 'Work Related' })).id;
+    const item = await TestBed.inject(ItemsRepository).create({
+      listId,
+      source: { kind: 'catalog', planId: 'netflix.standard' },
+      billing: {
+        mode: 'recurring',
+        interval: 'month',
+        intervalCount: 1,
+        anchorDate: '2026-11-12',
+        autoRenew: true,
+      },
+      tagIds: [work.id, phone.id],
+      rankOverrides: {},
+      pinned: false,
+    });
+    await render();
+    await settle(() => element().querySelector('.namesake') !== null);
+
+    // Only the later one says so, and its button is described by the note.
+    const notes = element().querySelectorAll('.namesake');
+    expect(notes).toHaveLength(1);
+    expect(notes[0].closest('li')?.getAttribute('data-tag')).toBe(phone.id);
+    expect(notes[0].textContent?.replace(/\s+/g, ' ').trim()).toBe(
+      'Another tag is called Family. Merge into it',
+    );
+    const merge = notes[0].querySelector<HTMLButtonElement>('.merge')!;
+    expect(merge.getAttribute('aria-describedby')).toBe(notes[0].id);
+
+    answer = false;
+    merge.click();
+    await settle(() => questions.length === 1);
+    expect(questions[0]).toEqual({
+      title: 'Merge the two “Family” tags?',
+      message:
+        'Its 1 subscription gets the first “Family” tag, in its colour, and this one is deleted.',
+      confirmText: 'Merge',
+    });
+    expect(tags.byId().has(phone.id)).toBe(true);
+
+    answer = true;
+    merge.click();
+    await settle(() => !tags.byId().has(phone.id));
+    const stored = (await storedRows(storage.indexedDB, 'items')) as ListItem[];
+    expect(stored.find(({ id }) => id === item.id)?.tagIds).toEqual([work.id, family.id]);
+    expect(rows()).toEqual(['Family', 'Work']);
+    expect(element().querySelector('.namesake')).toBeNull();
+    await settle(() => document.activeElement === button(family, 'rename'));
+  });
 });

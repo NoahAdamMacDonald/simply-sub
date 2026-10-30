@@ -4,6 +4,7 @@ import {
   freeTagColor,
   listDraftSchema,
   listItemSchema,
+  namesakes,
   parseTagColor,
   savedItem,
   startDraft,
@@ -13,6 +14,7 @@ import {
   tagNameIssue,
   tagNamed,
   tagUsage,
+  withTagMerged,
   withoutTag,
   type ListDraft,
   type ListItem,
@@ -177,5 +179,45 @@ describe('withoutTag', () => {
   it('changes nothing when nothing has the tag', () => {
     const items = [tagged(netflix.id, [otherTagId])];
     expect(withoutTag(tagId, items, [], now)).toEqual({ items: [], drafts: [] });
+  });
+});
+
+describe('namesakes', () => {
+  it('pairs each tag with the first before it of its name, in any case, as two devices’ tags meet (M10.24)', () => {
+    const phoneFamily: TagFields = { id: 'phone', name: 'family ', color: '#8e24aa' };
+    const third: TagFields = { id: 'third', name: 'FAMILY', color: '#757575' };
+    const found = namesakes([family, work, phoneFamily, third]);
+    expect([...found].map(([id, first]) => [id, first.id])).toEqual([
+      ['phone', tagId],
+      ['third', tagId],
+    ]);
+    expect(namesakes([family, work])).toEqual(new Map());
+  });
+});
+
+describe('withTagMerged', () => {
+  const into = '0192f1c7-3e4f-7051-ac6d-7e8f9a0b1c2f';
+
+  it('puts the tag kept in place of the merged one, once, on every item that had it, as a change made now', () => {
+    const items = [
+      tagged(netflix.id, [tagId, otherTagId]),
+      tagged(secondItemId, [tagId, into]),
+      tagged(thirdItemId, [otherTagId]),
+    ];
+    const { items: changed } = withTagMerged(tagId, into, items, [], now);
+    expect(changed.map((item) => [item.id, item.tagIds, item.updatedAt])).toEqual([
+      [netflix.id, [otherTagId, into], now],
+      [secondItemId, [into], now],
+    ]);
+  });
+
+  it("does the same in a draft, as edited and as saved, so the draft doesn't look changed", () => {
+    const saved = tagged(netflix.id, [tagId]);
+    const draft = startDraft(savedWork as SubscriptionList, [saved], now);
+    const { drafts } = withTagMerged(tagId, into, [], [draft], now);
+    const [entry] = drafts[0].items;
+    expect(entry.item.tagIds).toEqual([into]);
+    expect(entry.saved?.tagIds).toEqual([into]);
+    expect(draftChanged(drafts[0])).toBe(false);
   });
 });

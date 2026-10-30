@@ -42,6 +42,23 @@ export function tagNamed<T extends TagFields>(tags: readonly T[], name: string):
 }
 
 /**
+ * Each tag whose name, in any case, a tag before it in `tags` has, with that first tag (M10.24). Names are unique when
+ * tags are made, but a backup's Merge and sync join tags by id, so two devices that each made "Family" end with two.
+ * Settings offers to merge each into the first; nothing merges them by itself.
+ */
+export function namesakes<T extends TagFields>(tags: readonly T[]): Map<string, T> {
+  const first = new Map<string, T>();
+  const found = new Map<string, T>();
+  for (const tag of tags) {
+    const key = nameKey(tag.name);
+    const earlier = first.get(key);
+    if (earlier === undefined) first.set(key, tag);
+    else found.set(tag.id, earlier);
+  }
+  return found;
+}
+
+/**
  * What's wrong with `name` for a tag, or undefined when nothing is: it needs a name once trimmed, and one no other
  * tag has, in any case. `id` is the tag being renamed, which may keep its own name.
  */
@@ -119,20 +136,54 @@ export function withoutTag(
   drafts: readonly ListDraft[],
   now: Timestamp,
 ): TagRemoval {
+  return replacedTag(tagId, undefined, items, drafts, now);
+}
+
+/**
+ * What merging the tag `fromId` into `intoId` changes besides deleting `fromId` (M10.24): every item and draft that had
+ * it has `intoId` in its place, once, so the subscriptions keep their label.
+ */
+export function withTagMerged(
+  fromId: string,
+  intoId: string,
+  items: readonly ListItem[],
+  drafts: readonly ListDraft[],
+  now: Timestamp,
+): TagRemoval {
+  return replacedTag(fromId, intoId, items, drafts, now);
+}
+
+/** `tagId` taken off every item and draft, or `replacement` put in its place, where it isn't already. */
+function replacedTag(
+  tagId: string,
+  replacement: string | undefined,
+  items: readonly ListItem[],
+  drafts: readonly ListDraft[],
+  now: Timestamp,
+): TagRemoval {
   const has = (item: ListItem | undefined) => item?.tagIds.includes(tagId) === true;
-  const dropped = (tagIds: readonly string[]) => tagIds.filter((id) => id !== tagId);
+  const replaced = (tagIds: readonly string[]) => {
+    const kept = tagIds.filter((id) => id !== tagId);
+    return replacement === undefined || kept.includes(replacement) ? kept : [...kept, replacement];
+  };
   return {
     items: items
       .filter((item) => has(item))
-      .map((item) => withChanges(item, { tagIds: dropped(item.tagIds) }, now)),
+      .map((item) => withChanges(item, { tagIds: replaced(item.tagIds) }, now)),
     drafts: drafts
       .filter((draft) => draft.items.some(({ item, saved }) => has(item) || has(saved)))
       .map((draft) => ({
         ...draft,
         items: draft.items.map((entry) => ({
           ...entry,
-          item: { ...entry.item, tagIds: dropped(entry.item.tagIds) },
-          ...(entry.saved && { saved: { ...entry.saved, tagIds: dropped(entry.saved.tagIds) } }),
+          item: has(entry.item)
+            ? { ...entry.item, tagIds: replaced(entry.item.tagIds) }
+            : entry.item,
+          ...(entry.saved && {
+            saved: has(entry.saved)
+              ? { ...entry.saved, tagIds: replaced(entry.saved.tagIds) }
+              : entry.saved,
+          }),
         })),
       })),
   };
