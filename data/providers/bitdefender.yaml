@@ -22,7 +22,7 @@ name: Bitdefender
 website: https://www.bitdefender.com
 category: privacy-suite
 spendCategory: software
-billingCurrency: { CA: CAD, GB: GBP }
+billingCurrency: { CA: CAD, GB: GBP, US: USD }
 cancelUrl: https://www.bitdefender.com/consumer/support/answer/29081/
 sources: { pricing: https://www.bitdefender.com/en-ca/consumer/ }
 
@@ -52,6 +52,14 @@ plans:
           quote: Sales tax included.
         lastVerified: 2026-10-29
         sourceUrl: https://www.bitdefender.com/en-gb/consumer/
+      - region: US
+        currency: USD
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-us/consumer/
 
   - id: bitdefender.premium-security-individual
     name: Premium Security Individual
@@ -83,6 +91,14 @@ plans:
           quote: Sales tax included.
         lastVerified: 2026-10-29
         sourceUrl: https://www.bitdefender.com/en-gb/consumer/
+      - region: US
+        currency: USD
+        amount: 129.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-us/consumer/
 
   - id: bitdefender.premium-security-family
     name: Premium Security Family
@@ -134,6 +150,14 @@ plans:
           quote: Sales tax included.
         lastVerified: 2026-10-29
         sourceUrl: https://www.bitdefender.com/en-gb/consumer/
+      - region: US
+        currency: USD
+        amount: 159.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-us/consumer/
 
   - id: bitdefender.ultimate-security-family
     name: Ultimate Security Family
