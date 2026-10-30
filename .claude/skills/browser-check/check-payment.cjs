@@ -481,7 +481,7 @@ async function checkM94(page, label, viewport, shot) {
     'the warning gone',
     async () => (await page.locator('ss-payment-page .over-limit').count()) === 0,
   );
-  await snack.locator('button').focus();
+  await snack.getByRole('button', { name: 'Undo' }).focus();
   await page.keyboard.press('Enter');
   await until(
     'Mullvad back on Everyday',

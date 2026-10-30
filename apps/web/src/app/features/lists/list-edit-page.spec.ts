@@ -1215,7 +1215,7 @@ describe('ListEditPage', () => {
       expect((await draftItem(sams.id))?.billing).toEqual(ongoing);
       await until(
         () =>
-          document.querySelector('.mat-mdc-snack-bar-container')?.textContent?.trim() ===
+          document.querySelector('ss-snack .mat-mdc-snack-bar-label')?.textContent?.trim() ===
           "Saved Netflix Standard, and Sam's (Netflix Standard) no longer ends",
       );
     });
@@ -1269,6 +1269,85 @@ describe('ListEditPage', () => {
           customPlanId: planId,
         });
         await until(() => rows().some((row) => row.title === 'Local Gym · Basic'));
+      });
+
+      it('tells them apart by id: two called Gym, and one called Netflix beside the catalog’s Netflix Standard', async () => {
+        const subs = TestBed.inject(CustomSubsRepository);
+        const sub = (name: string, plan: { id: string; name: string; amount: number }) =>
+          subs.create({
+            name,
+            plans: [
+              {
+                id: plan.id,
+                name: plan.name,
+                features: {},
+                price: {
+                  amount: plan.amount,
+                  currency: 'CAD',
+                  interval: 'month',
+                  intervalCount: 1,
+                },
+                autoRenewAvailable: true,
+              },
+            ],
+          });
+        const gymA = await sub('Gym', { id: planId, name: 'Basic', amount: 30 });
+        const gymB = await sub('Gym', {
+          id: '0192f1c6-2d3e-7f40-9b5c-6d7e8f9a0b2b',
+          name: 'Basic',
+          amount: 45,
+        });
+        const ownNetflix = await sub('Netflix', {
+          id: '0192f1c6-2d3e-7f40-9b5c-6d7e8f9a0b2c',
+          name: 'Standard',
+          amount: 16.49,
+        });
+
+        async function add(index: number): Promise<void> {
+          await openMenu();
+          const choices = document.querySelectorAll<HTMLElement>(
+            '.mat-mdc-menu-panel [mat-menu-item]',
+          );
+          choices[index].click();
+          await harness.fixture.whenStable();
+          await press(await dialogLoader(), 'Add to list');
+        }
+
+        await open(editor());
+        await openMenu();
+        expect(menuItems()).toEqual(['Gym', 'Gym', 'Netflix', 'Create new…']);
+        document.querySelector<HTMLElement>('.cdk-overlay-backdrop')?.click();
+        await harness.fixture.whenStable();
+
+        // The list has the catalog's Netflix Standard, and each Gym is a plan of its own: none asks.
+        for (const index of [2, 0, 1]) {
+          await add(index);
+          await until(() => dialog() === null);
+        }
+        expect(questions).toEqual([]);
+        expect((await addedItems()).map(({ source }) => source)).toEqual([
+          { kind: 'custom', customSubId: ownNetflix.id, customPlanId: ownNetflix.plans[0].id },
+          { kind: 'custom', customSubId: gymA.id, customPlanId: planId },
+          { kind: 'custom', customSubId: gymB.id, customPlanId: gymB.plans[0].id },
+        ]);
+        await until(() => rows().length === 5);
+        expect(
+          rows().map(({ title, price }) => `${title}: ${/\$[\d.]+/.exec(price ?? '')}`),
+        ).toEqual([
+          'Netflix · Standard: $18.99',
+          'Mullvad VPN: $94.16',
+          'Netflix · Standard: $16.49',
+          'Gym · Basic: $30.00',
+          'Gym · Basic: $45.00',
+        ]);
+
+        // The first Gym again is the same plan.
+        answer = false;
+        await add(0);
+        await vi.waitFor(() => expect(questions).toHaveLength(1));
+        expect(questions[0].message).toBe(
+          'Gym Basic is in Work Related already. A list can have it more than once, for each person who has it.',
+        );
       });
 
       it('Create new… opens the custom subscription editor, then the item dialog for what it made', async () => {

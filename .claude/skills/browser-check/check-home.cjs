@@ -458,10 +458,13 @@ const localToday = () => {
         async () =>
           !(await spokenLines(page, '.coming li')).some((line) => line.includes('Mullvad')),
       );
+      // Its message, then Undo and ✕ (M10.19), found by role once the snackbar has moved them out of its aria-hidden
+      // wrapper into its live region.
+      await snackBar.getByRole('button', { name: 'Undo' }).waitFor({ timeout: 5000 });
       check(
         `${label}: Mark renewed moves Mullvad's renewal on a year, to ${renewedTo}, and takes it off Coming up`,
-        (await snackBar.textContent()).replace(/\s+/g, ' ').trim() ===
-          'Mullvad VPN is renewed Undo',
+        (await snackBar.locator('ss-snack .mat-mdc-snack-bar-label').textContent()).trim() ===
+          'Mullvad VPN is renewed',
         (await snackBar.textContent()).replace(/\s+/g, ' ').trim(),
       );
       await axeCheck(page, `${label}, Mark renewed's snackbar`);

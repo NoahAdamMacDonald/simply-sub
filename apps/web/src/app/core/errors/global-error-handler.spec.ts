@@ -21,9 +21,10 @@ describe('GlobalErrorHandler', () => {
     vi.restoreAllMocks();
   });
 
-  /** Lets the snackbar load and render, or finish closing. */
+  /** Lets the snackbar load (Material's and the app's chunks) and render, or finish closing. */
   async function settle() {
     await TestBed.inject(ApplicationRef).whenStable();
+    await import('../../shared/snack/snack');
     await new Promise((resolve) => setTimeout(resolve));
   }
 
@@ -43,7 +44,7 @@ describe('GlobalErrorHandler', () => {
   it('shows one message at a time, and a new one once it has closed', async () => {
     const consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined);
     const snackBar = TestBed.inject(MatSnackBar);
-    const open = vi.spyOn(snackBar, 'open');
+    const open = vi.spyOn(snackBar, 'openFromComponent');
 
     handler.handleError(new Error('first'));
     handler.handleError(new Error('second'));

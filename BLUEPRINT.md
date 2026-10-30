@@ -2390,6 +2390,11 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
     the last one it wrote are ignored, so quick toggles never flash back.
   - **Before the first run** there's no settings record to save it in (country and currency are required), so the
     choice is only cached, and the first-run dialog saves the theme on screen.
+- **The screen's edges** (M10.16): `viewport-fit=cover`, and `--ss-inset-top`, `-bottom`, `-left` and `-right`
+  (`_tokens.scss`, from `env(safe-area-inset-*)`) keep the shell clear of a phone's status bar, home indicator and
+  landscape notch: the top bar and the sidebar start below the status bar, the page's end and a full-screen dialog's
+  buttons stay above the indicator. An installed app's top is at least `100vh − 100dvh`, for iOS 26.1's status bar,
+  which reports no inset (section 14).
 - **Rank chips:** a coloured dot (vivid fill) + the rank name in normal text colour. This is readable in both
   themes and in every rank.
 - **Budget bars:** a vivid fill with a dark label inside (as in the wireframes). Green under 75%, amber at
@@ -2991,7 +2996,11 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 ## 14. Open questions
 
 **Still open**
-None.
+- **Two tags of one name after a merge (M10.18):** tags must have names of their own (P13), but a backup's Merge
+  and sync join records by id, so two devices that each made a Family tag before they synced end with two. Nothing
+  breaks: each item keeps its own tag, and the picker takes the first of them for a name typed. Folding them when
+  they merge would move one's items onto the other and delete it, which sync would then send like any change, and
+  could undo an edit another device made to one of those items at the same time. Asked of the owner.
 
 **Resolved (2026-10-30, the feedback after M10, part 2)**
 The owner's nine points after M10, a task row each in PROJECT-PLAN ("added 2026-10-30, the feedback after M10"):
@@ -3021,6 +3030,31 @@ The owner's nine points after M10, a task row each in PROJECT-PLAN ("added 2026-
 - **Joining on a new device (M10.15):** a device in its first run has no settings, which a join only updated, so Join
   starts them from the copy's shared settings with the device's theme (`joinedSettings`) and shows no Merge or Replace.
   The first-run dialog now also closes when settings are saved any other way.
+- **Menus and snackbars on a phone (M10.19):** an open Country, Province or Currency list stayed over the dialog on
+  the owner's iPhone: Material closes an autocomplete on a click elsewhere only once focus has left its field, and an
+  iPhone leaves focus in a field when a tap lands on something that can't take it. `ss-choice-field` now closes its
+  list on any press outside it, and when focus goes nowhere (the keyboard's Done), but not for a press on a choice.
+  Snackbars are the app's own component (`shared/snack`), since Material's has no way to close one with an action but
+  that action: ✕ beside it, Escape, focus back where it came from, time counted only while it isn't hovered or
+  focused, and the home indicator's inset below it. Its styles style Material's container too, so they're
+  unencapsulated and load with it, keeping the initial bundle at 499.42 kB.
+- **Claude in Canada (M10.17):** Search listed only Claude's free plan for the owner: its paid plans had only US
+  prices, since the pipeline had found no page naming the currency of the $28 a Canadian sees, and Sold in Canada
+  and Native pricing only hide a plan with no price there, leaving Free's `GLOBAL` price. claude.com/pricing shows
+  Canada's prices to a browser that sends its own user agent and the US's to a headless one, and the page's own
+  pricing data (`claude.ai/api/billing/subscription_pricing`, which it loads, never called by itself) names
+  `"country":"CA"` and `"currency":"CAD"`: Pro CA$28 a month and CA$280 a year, Max 5x CA$140, Max 20x CA$280 (the
+  page shows only "From $140"). The owner's bill agrees: CA$31.64, $28 with Ontario's 13% HST. All four were added
+  together, since once a provider has a Canadian price, a plan without one counts as not offered there.
+- **Ids, not names (M10.18):** the owner asked for tests with custom subscriptions named alike, and named like the
+  catalog's ("Netflix", "Standard"). Everything was told apart by id already: Search lists a provider only from catalog
+  items, the optimizer keys a custom subscription `custom:<id>` and ranks `custom <id>`, calendar UIDs start with the
+  item's id, and backups and sync merge by id, so two devices' Gyms are both kept. A custom subscription's icon comes
+  from its own website, so one called Netflix with none shows its letter. Two places matched a custom plan by its id
+  alone, where `resolveItem` finds it in its own subscription: the editor's "Already in this list" question and the
+  count of lists a custom subscription's removed plans leave. Plan ids are random, so they never clashed, but a backup
+  edited by hand could; both now match the subscription too. Assign best cards named the lists it skips by name in
+  its `@for`'s track, and two lists can share one, so they're tracked by id.
 - **The Calendar's controls (M10.20):** Month and Year sat between Showing and the arrows in a group pushed to the
   row's end, so the year view, which drops the Month select, moved them 180 px. They now lead, with Today beside them,
   and the arrows' group ends the row, its content at its end. An outlined Material button is 2 px wider than a filled one (its 1 px border), which shifted Year
@@ -3035,6 +3069,17 @@ The owner's nine points after M10, a task row each in PROJECT-PLAN ("added 2026-
 - **The Proton test feed (M10.2):** deleted from the user database on 2026-10-30 with the owner's OK. Proton Calendar
   had added it by its name; its events weren't checked, so M10.2's last box waits for the owner's own live calendar.
 - **Bundle:** 499.76 kB initial (499.65 before): the redirect and the inbox.
+- **The Home Screen app (M10.16):** opened from an iPhone's Home Screen, the app was cut off at the top or the bottom,
+  though it fit in Safari. The viewport didn't reach the screen's edges (no `viewport-fit=cover`), so the shell knew
+  nothing of the status bar and the home indicator. And since iOS 26.1 an installed app's status bar is drawn over its
+  top with `env(safe-area-inset-top)` 0 (WebKit bug 301994: fixed in 26.2, back in 26.5 and the iOS 27 beta, where
+  `screen.height` is 874 and `innerHeight` 812). There `vh` counts the band the status bar covers and `dvh` doesn't, so
+  an installed app's top inset is the larger of the two measures, `100vh − 100dvh`; a browser tab's `vh` and `dvh`
+  differ by its toolbar, so only `display-mode: standalone` takes it. Edge can't run iOS, so the CDP check sets a
+  phone's safe areas; the owner checks the real thing on the preview link.
+- **Fonts in woff2 alone (M10.16):** the insets' rules sit in the initial bundle, which had 0.35 kB left. Fontsource's
+  CSS gives each of Inter's 21 faces a woff beside its woff2; written from its metadata in woff2 alone (`_fonts.scss`),
+  they cost 1.4 kB less. Every browser the app supports reads woff2. 499.43 kB initial with M10.14.
 
 **Resolved (2026-10-29, the feedback after M10)**
 The user's report after M10, as M8.7 (PROJECT-PLAN's row has it as built):

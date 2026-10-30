@@ -275,6 +275,10 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.13 | The first regions: a batch pull request each for the US's gaps, the United Kingdom, the euro countries, and Australia and New Zealand | A user there sees native prices for every provider whose pages could be read |
 | M10.14 | Scan to join, once (added 2026-10-30, the feedback after M10): Show the code's QR code is a join link that works once, for 10 minutes (`/join#<id>.<key>`: the code sealed with a key only the link carries, `POST /join` and `DELETE /join/:id`), which a phone's camera opens; Join scans one with the device's camera; Turn on and Start over show the words alone (P13; BLUEPRINT §5.2, §11.4, §14) | A link opened on a new device joins with no word typed, and again says it was used; one past its 10 minutes or withdrawn opens nothing; no request carries the key; Join's camera reads Show the code's QR code |
 | M10.15 | Join on the first visit (added 2026-10-30, the feedback after M10): the first-run dialog's Join with a sync code, and a join link opened on a new device, start its settings from the synced copy's, with the device's own theme (P1, P13) | A new device joins from its first run, with no Merge or Replace, its settings the copy's place and budgets with its own theme, and the first run is over |
+| M10.16 | The Home Screen app fits (added 2026-10-30, the feedback after M10): `viewport-fit=cover`, and the safe areas (`--ss-inset-*`) padding the top bar, the sidebar, the page's foot, a full-screen dialog, the lock screen and the IndexedDB notice; an installed app's top at least `100vh − 100dvh`, for iOS 26.1's status bar (WebKit bug 301994); Inter in woff2 alone, which pays for them in the initial bundle (P1; BLUEPRINT §8.1, §14) | With a phone's safe areas (59 and 34 px, through CDP) the ☰, the logo and a full-screen dialog's title are below the status bar, and the drawer's foot, the page's end and the dialog's button above the home indicator; a browser tab is as before; the owner's iPhone, from its Home Screen, shows the ☰ and the drawer's foot without scrolling |
+| M10.17 | Claude's Canadian prices (added 2026-10-30, the feedback after M10): Search showed only Claude's free plan with Sold in or Native pricing only on, since its paid plans had only US prices; Pro CA$28 a month and CA$280 a year, Max 5x CA$140 and Max 20x CA$280 a month, read from claude.com/pricing in Canada, whose own pricing data names CAD, and the owner's bill; the price-research driver now sends the browser's own user agent, which a headless one isn't shown (BLUEPRINT §14) | A Canadian with Sold in on, or Native pricing only, sees Claude's four plans, Pro at $28 a month with no ≈ |
+| M10.18 | Ids, not names (added 2026-10-30, the feedback after M10): tests that things named alike stay apart, two custom subscriptions called Gym and one called Netflix with a plan called Standard beside the catalog's Netflix Standard, through resolving, the editor's duplicate question, Search's listed status, shared ranks, type counts, the optimizer's `custom:` keys, exports, calendar UIDs, list files, icons, backups and sync; a custom plan is matched only within its own subscription (`isDuplicate`, `customSubChange`), and Assign best cards keys the lists it skips by id (BLUEPRINT §14) | core's `same-names.spec.ts` and the editor's spec pass: a custom Netflix never asks as a duplicate of the catalog's, never lists Netflix on Search and never becomes its extra member, and two Gyms are two plans |
+| M10.19 | Menus that close, snackbars with ✕ (added 2026-10-30, the feedback after M10): a menu you can type in (`ss-choice-field`) closes on a press anywhere else, though focus stays in the field as an iPhone leaves it, and when focus goes nowhere (an iPhone keyboard's Done), a choice pressed in it still picked; every snackbar is the app's own (`shared/snack`): its action, if any, and ✕ (Dismiss), Escape unless a dialog or menu above it takes the key, focus back where it came from, 5 s or 10 s with Undo counted while it isn't hovered or focused, 8 px above the home indicator (P1, P15; BLUEPRINT §14) | On a phone, a tap beside an open Country, Province or Currency list closes it; every snackbar has ✕, Escape closes it, and it sits above the home indicator; Tab reaches its Undo then ✕, and Enter on ✕ puts focus back |
 | M10.20 | The Calendar's controls and month cards (added 2026-10-30, the feedback after M10): Month and Year first, then Today, then ‹, the month, the year and › (that Tab order); Month, Year and Today never moving as the view changes, and the arrows at the row's end (the views' outlined padding a pixel less, for the border); on a phone Month and Year on Today's row, Today at its end, and the arrows on their own row; the year view's month card one target, its link over its days, with no text to select (P10; BLUEPRINT §14) | At 1280 px Month, Year and Today stay put from the month view to the year view; at 360 px Today shares their row; a click on any part of a month card opens its month, with the pointer cursor, and a double click selects nothing |
 
 #### M10 specs
@@ -737,6 +741,64 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   settings are saved any other way. Tested in `sync-service.spec.ts`, `first-run-dialog.spec.ts` and
   `check-m10-join-link.cjs`.
 
+**M10.16 — The Home Screen app fits** (the feedback after M10; P1; BLUEPRINT §8.1, §14)
+- **Why:** opened from an iPhone's Home Screen, the app was cut off at the top (the ☰ out of reach until scrolled to)
+  or at the bottom (the drawer's Settings and theme), though it fit in Safari. The viewport didn't reach the screen's
+  edges, so nothing knew the status bar's or the home indicator's size, and iOS 26.1 and later draw the status bar over
+  an installed app's top while saying no inset is there (WebKit bug 301994, reopened for 26.5 and 27).
+- **The viewport:** `viewport-fit=cover`, so `env(safe-area-inset-*)` has the edges' sizes. `_tokens.scss` names them
+  `--ss-inset-top`, `-bottom`, `-left` and `-right`. In an installed app (`display-mode: standalone`) the top is at
+  least `100vh − 100dvh`: there iOS's `vh` counts the band its status bar covers and `dvh` doesn't, and both are equal
+  where nothing covers the top. A browser tab, whose `vh` and `dvh` differ by its toolbar, never takes it.
+- **What keeps clear:** the top bar reaches the screen's top in its own colour, its ☰ below the status bar, and what
+  pages pin below it moves down with it (`--ss-top-bar-height`); from 960 px the sidebar and the page start below the
+  status bar. The sidebar's foot, the page's end, a full-screen dialog's buttons, the lock screen and the IndexedDB
+  notice stay above the home indicator, and the sides clear a landscape notch. Skip to main content shows below the
+  status bar.
+- **The bundle:** the insets' rules are in the initial bundle, so Inter's `@font-face` rules are written from
+  Fontsource's metadata in woff2 alone: every browser the app supports reads it, and the woff beside each cost 1.4 kB.
+  499.29 kB initial on `main` (499.65 before), and the fonts in `/media/` 21 files instead of 42.
+- **Acceptance**
+  - [x] With a phone's safe areas set through CDP (59 px top, 34 bottom) and the display mode standalone: the ☰, the
+        logo and the item dialog's title below the status bar; the drawer's foot, Settings' end and the dialog's
+        button above the home indicator; the drawer with nothing to scroll; Search's bar pinned below the top bar;
+        Skip to main content off-screen until it has focus
+  - [x] A browser tab as before (`check-shell.cjs`); both themes at 360 and 1280 px, axe, no horizontal scroll
+  - [ ] The owner's iPhone 17, from its Home Screen: the ☰ and the drawer's Settings and theme in reach without
+        scrolling (the preview link)
+- **As built:** `index.html`'s viewport, `_tokens.scss`' insets, the shell's, the sidebar's, the lock screen's and the
+  IndexedDB notice's styles, `styles.scss`' full-screen dialog, and `_fonts.scss`. Checked by
+  `check-home-screen-app.cjs` (CDP's `Emulation.setSafeAreaInsetsOverride` and `setEmulatedMedia`) and
+  `check-shell.cjs`.
+
+**M10.19 — Menus that close, snackbars with ✕** (the feedback after M10; P1, P15; BLUEPRINT §14)
+- **Why:** on the owner's iPhone, Country, Province and Currency's lists stayed open over the dialog after a tap
+  beside them or the keyboard's Done, and a snackbar with Undo could only go by Undo or its time.
+- **The menus (`ss-choice-field`):** Material closes an autocomplete on a click elsewhere only once focus has left its
+  field, and an iPhone leaves focus in a field when a tap lands on something that can't take it. While its list is
+  open, the field listens for presses on the page: one outside the field and the list closes the list. Focus that
+  leaves for nowhere closes it too (an iPhone keyboard's Done), unless a press in the list is under way: a mouse or a
+  finger on a choice takes focus from the field before the click that picks it. A press in the list that becomes a
+  scroll picks nothing.
+- **The snackbars (`shared/snack`):** `openSnack` in place of `MatSnackBar.open`, with the app's component: the
+  message, its action, and ✕ (Dismiss). Escape closes it from anywhere unless something above it took the key (a
+  dialog's, a menu's or a list's own Escape marks it handled, and they come first). ✕ and Escape put focus back on
+  what had it before focus came into the snackbar. Its time (`snackMillis` 5 s, `undoMillis` 10 s: Undo was 8 s,
+  but Lists' was 10) runs only while it isn't hovered or focused. "OK" and "Dismiss" actions became ✕.
+- **Placement:** 8 px above the screen's bottom, and above the home indicator in the Home Screen app
+  (`--ss-inset-bottom`, M10.16); under 600 px it spans the screen less 8 px a side, as Material has it. Its styles,
+  which place Material's container, load with it (unencapsulated), out of the initial bundle: 499.42 kB.
+- **Acceptance**
+  - [x] `check-m10-menus-snackbars.cjs`: in both themes at 360 px (as the Home Screen app with a phone's safe areas
+        and touch) and 1280 px, Province's list closed by a tap that leaves focus in it, by focus going nowhere and
+        by a tap or click on the dialog's heading; Alberta picked by a tap or click; Search's Category picked by a
+        click on the page and a tap in the drawer, and closed the same three ways; Lists' "Deleted Work Related" with
+        Undo and ✕, 8 px above the bottom (42 with the home indicator); Escape in a question over it closing only the
+        question; Tab from the page to Undo, then ✕, Enter on ✕ with focus back; Escape closing the next; hovered past
+        its 10 s it stays, and left it goes; axe and no horizontal scroll
+  - [ ] On the owner's iPhone, from its Home Screen: a tap beside an open list closes it, and a snackbar sits above the
+        home indicator with ✕
+
 ---
 
 ## 3. Core rules every page uses
@@ -964,6 +1026,7 @@ Chromium) and, where those aren't supported (Safari), `::-webkit-scrollbar` with
   - The banner is a line at the top of every page while the browser is offline or the last check couldn't reach the server: "Offline — catalog from Oct 22" (the cached catalog's build date), or "Offline — the catalog will load when you're back online" when nothing is cached yet. It's a polite live region.
   - The toast shows "Catalog updated" for 5 seconds when a new version replaces the one on screen, in every open tab. A first download, or a new country's file at the same version, isn't announced.
   - Since M10.6, "A new version of Simply Sub is ready." [Reload] (with "Reloading locks the app." when the lock is on) when the service worker has a version an open tab isn't running, and "Simply Sub needs to reload to keep working." [Reload] when the worker can't serve the app any more. It stays until used or dismissed, the page's last tab stop.
+  - Since the feedback after M10 (M10.19), every snackbar is the app's own (`shared/snack`): its message, its action if it has one ([Undo], [Reload]), then ✕, named Dismiss, which closes it without the action. Escape closes it too, unless a dialog, menu or list above it takes the key first; ✕ and Escape put focus back where it was when it was in the snackbar. A message shows 5 seconds and one with Undo 10, counted only while the pointer and focus are elsewhere; one without a time (the list editor's Removed [Undo], the reload prompts, unreadable data) stays until it's closed. It sits 8 px above the screen's bottom, above the home indicator in the Home Screen app (M10.16), and its buttons' focus ring is in its text's colour.
 - Page titles like "Lists · Simply Sub" come from each route's `title`.
 
 **First-run dialog** (shown when no settings are saved, M4.2):
@@ -992,6 +1055,10 @@ Chromium) and, where those aren't supported (Safari), `::-webkit-scrollbar` with
 - **[Import a backup instead]** (M6.9) opens Import backup (P13) as one Import, with no question, since there's
   nothing here yet. The backup's settings end the first run.
 
+**Since the feedback after M10 (M10.16):** installed on a phone's Home Screen, the shell keeps clear of its status bar
+and home indicator: the top bar reaches the screen's top in its colour, with ☰ below the status bar, and the drawer's
+foot and the page's end stay above the home indicator.
+
 **Since the feedback after M10 (M10.15):** Join with a sync code sits beside Import a backup instead: a new device
 joins a synced copy, its settings starting from the copy's with the theme on screen. A join link opened on a new
 device (M10.14) opens Join at once.
@@ -1000,6 +1067,11 @@ device (M10.14) opens Join at once.
 in (`ss-choice-field`): typing narrows the list to the names that start with it, then those that have it anywhere, or
 whose code starts with it ("al" is Alberta, "usd" US Dollar), and Enter picks the first. With nothing typed it lists
 them all and Enter submits; leaving without a pick puts the chosen one back. Settings' 📍 dialog has the same fields.
+
+**Since the feedback after M10 (M10.19):** a menu's list closes on a press anywhere else, though an iPhone leaves
+focus in the field when the tap lands on something that can't take it, and when focus goes nowhere, as an iPhone
+keyboard's Done sends it. A choice pressed in the list is still picked, though the press takes focus from the field
+first.
 
 **Acceptance**
 - [ ] Navigation works with the keyboard
