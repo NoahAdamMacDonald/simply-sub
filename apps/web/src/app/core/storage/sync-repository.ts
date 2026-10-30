@@ -1,5 +1,5 @@
 import { Service, computed, inject } from '@angular/core';
-import { rxResource } from '@angular/core/rxjs-interop';
+import { rxResource, toObservable } from '@angular/core/rxjs-interop';
 import {
   joinedSettings,
   nextUpdatedAt,
@@ -15,7 +15,7 @@ import {
   type UserRecords,
   type UserTable,
 } from '@simply-sub/core';
-import { map, merge, skip, type Observable } from 'rxjs';
+import { EMPTY, distinctUntilChanged, map, merge, skip, switchMap, type Observable } from 'rxjs';
 import { storageStatus } from './record-repository';
 import type { StorageTransaction } from './storage-engine';
 import { StorageService } from './storage-service';
@@ -38,6 +38,7 @@ export class SyncRepository {
     params: () => this.storage.access(),
     stream: () => this.storage.watch('sync'),
   });
+  private readonly access = toObservable(this.storage.access);
 
   /** Sync on this device, while it's on. */
   readonly record = computed<SyncRecord | undefined>(() =>
@@ -83,9 +84,31 @@ export class SyncRepository {
     await engine.transaction(['sync'], (transaction) => transaction.delete('sync', 'sync'));
   }
 
-  /** Emits after each change to a synced table or the settings, the ones a merge writes too. */
+  /**
+   * Emits after each change to a synced record, and to the settings only when a shared one changed (their
+   * `sharedUpdatedAt` moved, as `sharedSettings` reads it), so the theme, the Calendar's shown lists, Home's seen price changes and the app lock start
+   * no sync (M10.26). A write that moves no record's `updatedAt`, as the lock sealing them, emits nothing. The app
+   * locking ends the tables' watches, so they start again once it's unlocked.
+   */
   changes(): Observable<void> {
-    return merge(...mergedTables.map((table) => this.storage.watch(table).pipe(skip(1)))).pipe(
+    const synced = syncTables.map((table) =>
+      this.storage.watch(table).pipe(map((rows) => rows.map((row) => row.updatedAt).join())),
+    );
+    // As the copy has it: settings from before there was a sharedUpdatedAt have their updatedAt.
+    const shared = this.storage.watch('settings').pipe(
+      map((rows) => rows.find((row) => row.key === 'settings')),
+      map((settings) => settings && (settings.sharedUpdatedAt ?? settings.updatedAt)),
+    );
+    return this.access.pipe(
+      switchMap((access) =>
+        access === undefined
+          ? EMPTY
+          : merge(
+              ...[...synced, shared].map((stamps) =>
+                stamps.pipe(distinctUntilChanged<string | undefined>(), skip(1)),
+              ),
+            ),
+      ),
       map(() => undefined),
     );
   }

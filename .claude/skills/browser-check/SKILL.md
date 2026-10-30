@@ -501,7 +501,8 @@ waiting until wrangler dev serves them, and puts `apps/web/dist`'s back, so don'
 
 - M10.9, two browsers, A and B (light at 1280 px with dark at 360, then the other way round), by keyboard: A turns sync
   on (the new code, axe, a screenshot), B joins by typing four letters of each word and Tab (axe on the words and on
-  the copy to join) and merges; both then have both lists; an edit in A shows on B's open Lists page within 15 s;
+  the copy to join) and merges; both then have both lists; B left idle on its Lists page checks twice at most in 30 s
+  (M10.26), then an edit in A shows there within 15 s with B in use (a Shift every 2 s), where idle it would wait 40;
   a deletion in B reaches A; changes made offline on both survive; B's theme stays its own; A's Start over, then its
   Delete the synced copy, each leave B saying the copy was deleted (B joining the new chain in between), and B turns
   sync off. A 6th argument runs some parts only: `offline,updates,install,sync` (all by default).

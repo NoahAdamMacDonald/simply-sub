@@ -585,15 +585,16 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   - Problems in words: offline (it waits), the chain deleted from another device, a newer version of the app needed,
     a copy that won't open.
 - **`SyncService`** (lazy, started when sync is on, after unlocking): syncs on start, when back online, when a tab is
-  shown again, 10 s after a change to a synced table, every 10 s while the tab is shown, and from Sync now; one tab at
-  a time (a Web Lock, like the catalog's check); reads with `If-None-Match`, merges, writes this device's changes in
+  shown again, 10 s after a change to a synced table, every 10 s while the tab is shown (M10.26: backing off while
+  idle, and none alone), and from Sync now; one tab at a time (a Web Lock, like the catalog's check); reads with `If-None-Match`, merges, writes this device's changes in
   one transaction, then sends a new version with `If-Match`, up to three tries.
 - **Stored:** a `sync` record (Dexie v5): the seed, this device's id and name, the last version and when. The app lock
   seals it; backups leave it out. Delete all data asks whether to delete the synced copy too; Import's Replace waits
   until sync is off (Merge works).
 - **Acceptance**
   - [x] Two browsers on `wrangler dev`: turned on in one and joined in the other by keyboard, an item added, edited or
-        deleted on either shows on the other after Sync now, and within 15 s on its own
+        deleted on either shows on the other after Sync now, and within 15 s on its own (since M10.26, while the other
+        is in use; idle, within 5 minutes)
   - [x] Changes made offline on both, to different records, all survive; the theme stays per device
   - [x] Start over and Delete the synced copy leave the other browser saying what happened
   - [x] Keyboard only, both themes at 360 and 1280 px, axe with each dialog open, no horizontal scroll
@@ -602,7 +603,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   bundle); `SyncRepository` (Dexie v5); the crypto module's `sync-code.ts` (the words, apart from the keys, so only the
   dialogs load the word list); `shared/sync/` (the client, `SyncService`), `shared/qr-code/` (`@paulmillr/qr` 0.3.0,
   exact), and Settings' `ss-sync-setting` with its three dialogs (the code, Join, Rename). Polling is every 10 s, not
-  15, to keep "within 15 s" with a margin. Join takes the chain's shared settings, which a new device's first run would
+  15, to keep "within 15 s" with a margin (M10.26 made it back off while idle, and stop alone). Join takes the chain's shared settings, which a new device's first run would
   otherwise outweigh. Tested in `sync-service.spec.ts` (against a stand-in server, another device's writes sealed with
   core's functions), the card's and the join dialog's specs, and `check-m10-offline-sync.cjs`'s two browsers
   (BLUEPRINT §14).
@@ -822,11 +823,26 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   their `sharedUpdatedAt` moves, so the theme, the Calendar's shown lists, Home's seen price changes and the lock
   start nothing.
 - **M10.9's "within 15 s on its own"** now holds while the other device is in use; an idle tab catches up within
-  5 minutes, or at once when it's shown or focused.
+  5 minutes, at once when it's shown, or within 10 s of focus, a press or a key.
 - **Acceptance**
-  - [ ] Specs with fake timers: the ladder and each reset, no polling alone, polling starting when a second device
+  - [x] Specs with fake timers: the ladder and each reset, no polling alone, polling starting when a second device
         appears, a theme change making no request
-  - [ ] `check-m10-offline-sync.cjs`: an edit in one browser shows in the other, in use, within 15 s
+  - [x] `check-m10-offline-sync.cjs`: an edit in one browser shows in the other, in use, within 15 s
+- **As built:** `SyncService` keeps one timeout in place of M10.9's interval, set from the end of every sync (a sync
+  is a check, whatever started it) while the tab is shown, sync goes on by itself and the devices as last read hold
+  another; each check the timer makes doubles the next wait. A change here (settled) and the tab shown sync at once
+  with the wait back at 10 s, and a merge that took something in sets it back too. Focus, a pointer press and a key,
+  listened for on the page (capturing, passive), bring the next check to 10 s away unless it's due sooner: so however
+  often they come, they move it at most once a check, which is the "once per 10 s". `SyncRepository.changes()` compares
+  each synced table's `updatedAt`s and the settings' shared time (`sharedUpdatedAt`, or `updatedAt` for settings from
+  before it, as the copy reads them), so the app lock sealing rows starts nothing either; and it watches again after
+  the app unlocks, which since M10.9 it hadn't: its watches end when the app locks, so a change made after unlocking
+  waited for the poll. The initial bundle is unchanged (499.42 kB). Tested in `sync-service.spec.ts` with a fake
+  `setTimeout` (Dexie's live queries wait on a `setTimeout` of 0, which the specs run): the ladder to 300 s; a press,
+  a key and focus, none putting off a check due sooner; the tab shown, and none while hidden; a change here and a
+  merge; none alone, then 10 s after a second device is seen; no request for the theme, the Calendar's lists or the
+  lock, one for the budget; a change after locking and unlocking. `check-m10-offline-sync.cjs`: B, idle on its Lists
+  page, checked twice in 30 s; in use, it showed A's edit after 10.1 s and 10.2 s (the two runs).
 
 ### M11 — Catalog expansion (Phase 6)
 Planned on 2026-10-30 with the owner, from `docs/catalog-expansion-guide.md` (the owner's research list, the rules

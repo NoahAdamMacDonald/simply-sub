@@ -19,9 +19,10 @@
 //   them, then puts the first build (apps/web/dist's) back after each run.
 // - M10.9, sync between two browsers, A and B (light at 1280 px and dark at 360, then the other way round), by
 //   keyboard: A turns sync on (the new code's 24 words, axe), B joins with four letters of each word and
-//   Tab, sees what the copy holds (axe) and merges; then A's lists and B's are in both, an edit in A reaches B within
-//   15 s with B doing nothing, a deletion in B reaches A, changes made offline on both to different lists all survive,
-//   the theme stays each browser's, and A's Start over and then its Delete the synced copy each leave B saying the copy
+//   Tab, sees what the copy holds (axe) and merges; then A's lists and B's are in both; B left idle checks for A's
+//   changes at 10 s and 30 s, no more (M10.26), and an edit in A reaches B within 15 s once B is in use (a key every
+//   2 s), where idle it would wait 40 s; a deletion in B reaches A, changes made offline on both to different lists
+//   all survive, the theme stays each browser's, and A's Start over and then its Delete the synced copy each leave B saying the copy
 //   was deleted, B joining the new chain in between and turning sync off at the end.
 // With axe offline, with the prompt shown and with each sync dialog open, and no horizontal scroll.
 // Usage: node check-m10-offline-sync.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
@@ -816,26 +817,47 @@ async function syncBetween(browser, a, b) {
   await A.page.screenshot({ path: path.join(outDir, `m10-sync-on-${labelA}.png`) });
   await axeCheck(A.page, `${labelA}: Sync between devices, on`);
 
-  // An edit in A reaches B within 15 s, B doing nothing on its Lists page, opened before.
+  // B left idle on its Lists page, opened before: with A among its devices, it checks 10 s after its start's sync, then
+  // 20 s after that, its wait doubling while nothing happens (M10.26).
+  let checks = 0;
+  const counted = (request) => {
+    if (request.method() === 'GET' && /\/api\/v1\/sync\//.test(request.url())) checks++;
+  };
   await B.page.goto(`${baseUrl}lists`);
   await B.page.locator('h2.name a').first().waitFor({ timeout: 20000 });
   await sleep(2000);
+  B.page.on('request', counted);
+  await sleep(30000);
+  B.page.off('request', counted);
+  check(
+    `${labelB}: idle for 30 s, it checks twice at most (at 10 s and 30 s)`,
+    checks <= 2,
+    checks,
+  );
+
+  // An edit in A reaches B within 15 s once B is in use (a key every 2 s): idle, its next check is 40 s away.
   await changeList(A.page, FAMILY, { name: 'Family 2' });
   await syncNow(A.page, labelA);
   const sent = Date.now();
+  let used = 0;
   const arrived = await until(
     'the edit on B',
-    async () =>
-      (await B.page.locator('h2.name a').allTextContents()).some(
+    async () => {
+      if (Date.now() - used >= 2000) {
+        used = Date.now();
+        await B.page.keyboard.press('Shift');
+      }
+      return (await B.page.locator('h2.name a').allTextContents()).some(
         (name) => name.trim() === 'Family 2',
-      ),
+      );
+    },
     25000,
   ).then(
     () => Date.now() - sent,
     () => undefined,
   );
   check(
-    `${labelB}: an edit made in A shows within 15 s, B doing nothing`,
+    `${labelB}: an edit made in A shows within 15 s, B in use`,
     arrived !== undefined && arrived <= 15000,
     `${arrived} ms`,
   );
