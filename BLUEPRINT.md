@@ -3137,6 +3137,9 @@ Planned with the owner as M11 (PROJECT-PLAN §2), from `docs/catalog-expansion-g
   which would have needed a new stored record). Features stay the general list; a perk is only for what no feature
   describes.
 - **Several categories per plan,** about 18 new service categories (section 4.5).
+- **Sync that waits** (M10.26): checks for other devices' changes back off while idle and stop when a device is
+  alone, since each is a Worker request from the account's 100,000 a day; the theme and other device-own settings no
+  longer start a sync.
 - **Fewer reads and rows:** shared policy documents rated once (section 4.10) and provider-wide features stored once
   per provider (section 4.2); tests on a fixed catalog of their own, so research never changes them (M11.8).
 - **Finance** (sections 4.11, 10.6): accounts as plans with an `account` block; balances on the device only; interest
@@ -3416,6 +3419,9 @@ The user's report after M10, as M8.7 (PROJECT-PLAN's row has it as built):
   reading and merging again up to three times if another device wrote first. The poll every 10 s, not 15, keeps "an
   edit shows on the other device within 15 s" with a margin; each is a 304 costing one D1 row read. The devices'
   list is the chain's, in memory: after a reload it fills in with the first sync, a moment later.
+  **Planned (M10.26):** no polling while this device is the chain's only one; with others, polling backs off from
+  10 s to 5 minutes while nothing happens and starts again at 10 s on any activity; and only synced records and the
+  shared settings start a sync (not the theme). Each check is a Worker request from the account's 100,000 a day.
 - **The sync record** (M10.9, core's `user/sync-record.ts`, Dexie v5): the code (base64), this device's id and name
   (`defaultDeviceName` from the browser: "Edge on Windows"), the version last read or written, when it last synced,
   and what stopped sync (`gone`, `newer`, `unopenable`). The app lock seals it; backups and sync leave it out; Turn

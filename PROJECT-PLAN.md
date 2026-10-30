@@ -285,6 +285,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.23 | Budgets on the Lists overview (added 2026-10-30, the feedback after M10): every list's budget warnings above the cards, as Home's (one dismissal for both), and every list's This month and This year bars together, as Home's Budgets card has them, on the right above Types and Features from 960 px, as List view has its own, and above the cards under it (P3) | With two lists over the monthly budget together, the overview warns of it, and its bars show both lists' totals beside the cards; dismissed here, the warning is gone from Home too |
 | M10.24 | Merge tags of one name (added 2026-10-30, the feedback after M10, the owner's choice): a backup's Merge and sync join tags by id, so two devices' Family tags meet as two; Settings' Custom tags says of the later one "Another tag is called Family." with Merge into it, which asks first, then gives its subscriptions and drafts the first tag and deletes it in one transaction (core's `namesakes` and `withTagMerged`, `TagsRepository.mergeInto`). Nothing merges by itself, so no device's edit is overwritten (P13; BLUEPRINT §14) | Two tags called Family show the note on the later one; Merge into it leaves one Family on every subscription that had either |
 | M10.25 | Live calendars that go on, and notice when they're gone (added 2026-10-30, the feedback after M10): a monthly plan billed on the 29th or 30th, which no monthly rule Proton takes can describe, is a yearly series for each month, February on its last day, so it repeats with no end rather than stopping after 12 months; a live calendar keeps a year of past charges that are events of their own; the app checks its links once a start and when the Live calendar dialog opens, and marks a set gone on the server broken, offering new links (P10; BLUEPRINT §11.3, §14) | Xbox Game Pass on the 29th shows every month in Proton past October 2027, February on its last day; links deleted on the server say so in the dialog without waiting for a change |
+| M10.26 | Sync that waits (added 2026-10-30, while planning M11): no checks for other devices' changes while this device is the chain's only one; with others, a check 10 s after activity (a change here or pulled in, the tab shown, focus, a click or a key), the wait doubling to 5 minutes while nothing happens; only synced records and the shared settings start a sync, never the theme, the Calendar's shown lists, Home's seen price changes or the lock (P13; BLUEPRINT §7.1, §11.4) | An idle shown tab checks about 15 times an hour, a lone device never; an edit shows on another device in use within 15 s; a theme change sends no request |
 
 #### M10 specs
 
@@ -803,6 +804,29 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
         its 10 s it stays, and left it goes; axe and no horizontal scroll
   - [ ] On the owner's iPhone, from its Home Screen: a tap beside an open list closes it, and a snackbar sits above the
         home indicator with ✕
+
+**M10.26 — Sync that waits** (BLUEPRINT §7.1, §11.4)
+- **Why:** sync already sends a copy only when synced data changed, but it checks for the other devices' changes every
+  10 s while a tab is shown. Each check is a Worker request, and the account has 100,000 a day for all of `/api/*`:
+  about 360 an hour per open tab, 2,900 for a tab left open through a working day, so about 30 such users would spend
+  the day's quota, after which sync, rates, icons and live calendars all fail until 00:00 UTC.
+- **Alone:** while the chain's devices (as last read) are this device only, there's no polling. It still syncs on
+  start, when shown again, when back online and after its own changes, so a device that joins later is seen at the
+  first one's next start, return or change. Before the first read after a reload the devices aren't known: that read
+  happens anyway, on start.
+- **Backing off:** with other devices, the next check waits 10 s, then 20, 40, 80, 160, and 300 s at most, while
+  nothing happens. Activity starts it again at 10 s: a change here, a merge that took something in, the tab shown,
+  the window focused, a pointer press or a key (at most once per 10 s). `SYNC_TIMING` gains `pollMaxMs` (specs set
+  it).
+- **Shared changes only:** `SyncRepository.changes()` emits for the synced tables, and for the settings only when
+  their `sharedUpdatedAt` moves, so the theme, the Calendar's shown lists, Home's seen price changes and the lock
+  start nothing.
+- **M10.9's "within 15 s on its own"** now holds while the other device is in use; an idle tab catches up within
+  5 minutes, or at once when it's shown or focused.
+- **Acceptance**
+  - [ ] Specs with fake timers: the ladder and each reset, no polling alone, polling starting when a second device
+        appears, a theme change making no request
+  - [ ] `check-m10-offline-sync.cjs`: an edit in one browser shows in the other, in use, within 15 s
 
 ### M11 — Catalog expansion (Phase 6)
 Planned on 2026-10-30 with the owner, from `docs/catalog-expansion-guide.md` (the owner's research list, the rules
