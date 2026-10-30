@@ -22,7 +22,7 @@ name: Bitdefender
 website: https://www.bitdefender.com
 category: privacy-suite
 spendCategory: software
-billingCurrency: { CA: CAD }
+billingCurrency: { CA: CAD, GB: GBP }
 cancelUrl: https://www.bitdefender.com/consumer/support/answer/29081/
 sources: { pricing: https://www.bitdefender.com/en-ca/consumer/ }
 
@@ -42,6 +42,16 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-28
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/
+      - region: GB
+        currency: GBP
+        amount: 84.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Sales tax included.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-gb/consumer/
 
   - id: bitdefender.premium-security-individual
     name: Premium Security Individual
@@ -63,6 +73,16 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-28
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/premium-security
+      - region: GB
+        currency: GBP
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Sales tax included.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-gb/consumer/
 
   - id: bitdefender.premium-security-family
     name: Premium Security Family
@@ -104,6 +124,16 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-28
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/ultimate-security
+      - region: GB
+        currency: GBP
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Sales tax included.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-gb/consumer/
 
   - id: bitdefender.ultimate-security-family
     name: Ultimate Security Family
@@ -138,6 +168,16 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-28
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/digital-identity-protection
+      - region: GB
+        currency: GBP
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: Sales tax included.
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.bitdefender.com/en-gb/consumer/
 
 policies:
   links:
