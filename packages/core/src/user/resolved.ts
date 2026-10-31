@@ -1,9 +1,9 @@
 import { bundleFeatures } from '../catalog/bundle-deal';
 import { acceptedNetworksIn } from '../catalog/card-networks';
 import { isoDateSchema } from '../catalog/formats';
-import { shownFormerName } from '../catalog/former-names';
 import type { FxRates } from '../catalog/convert';
 import { pickPrice, typedPrice, type PickedPrice, type PriceContext } from '../catalog/pick-price';
+import { closestPeriod, periodLostOn, storedPrice } from '../catalog/period-change';
 import { planOf } from '../catalog/plan-lookup';
 import { planCategories } from '../catalog/plan-categories';
 import { dueRedirectMap, redirected } from '../catalog/redirects';
@@ -14,10 +14,12 @@ import { catalogIconFile, type CatalogData, type SnapshotProvider } from '../cat
 import type { IsoDate } from '../dates/iso-date';
 import { providedKeys, type RankKey } from '../ranking/rank-keys';
 import { effectiveRanks, type ProfileRanks } from '../ranking/resolve-rank';
+import { nextChargeDate } from '../schedule/charge-dates';
 import { chargedItem, nextCharge, ownPriceOn, type Charge } from '../schedule/charges';
 import { itemStatus } from '../schedule/item-status';
 import type { TaxPlace } from '../tax/sales-tax-rate';
 import { customIconUrl } from './custom-sub-form';
+import { itemFormerName } from './former-name';
 import { planTitle } from './item-text';
 import { redirectedOverrides } from './redirect-records';
 import type { CustomSubscription } from './custom-subscription';
@@ -75,7 +77,7 @@ export interface ResolvedItem {
   name: string;
   /** The plan's name: "Standard". A bundle's is its plans': "Netflix Standard + Crave Premium". */
   planName: string;
-  /** A catalog plan's former name, for six months after its rename (M10.27): "Max 20x" for Ultra. */
+  /** A catalog plan's former name until the item's renewal after the rename (M10.28): "Max 20x" for Ultra. */
   formerName?: string;
   /**
    * A catalog plan its provider no longer sells, from its `retired` date (M10.27): since when, the day it ends for its
@@ -87,6 +89,12 @@ export interface ResolvedItem {
    * from then on, and its status ends then, as if it were its end date (chargedItem).
    */
   planEnds?: IsoDate;
+  /**
+   * Its billing period isn't sold any more (M10.28), and it isn't grandfathered: since when, the renewal it switches
+   * on, and the period still sold it's billed on from then, if there's one left. Home and its card ask the user to
+   * check their billing.
+   */
+  periodChange?: PeriodChange;
   /**
    * Catalog: the relative icons/<id>.webp when the provider has a logo (the snapshot's absolute URL points at
    * production, so a preview would miss a new logo). Custom: api/v1/icon?domain= from its link. None: a letter.
@@ -146,6 +154,16 @@ export interface ResolvedItem {
  */
 export type UnresolvedReason =
   'pending' | 'plan-gone' | 'bundle-gone' | 'custom-gone' | 'add-on-gone' | 'no-price';
+
+/** A billing period no longer sold, for an item billed that way (ResolvedItem.periodChange). */
+export interface PeriodChange {
+  /** The day the provider stopped selling it. */
+  retired: IsoDate;
+  /** The item's first renewal on or after it (or its endsOn): when it switches. */
+  on: IsoDate;
+  /** The closest period still sold in its price list, picked for the user; none when that list sells nothing more. */
+  to?: PickedPrice;
+}
 
 /** An item that can't be resolved. Pages say why, and totals leave it out (M7.1). */
 export interface UnresolvedItem {
@@ -213,7 +231,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
       const plan = provider?.plans.find((candidate) => candidate.id === planId);
       if (!provider || !plan) return unresolved('plan-gone');
       const pricing = priceContext(context, region, provider);
-      const price = forPeriod(plan.prices, item, pricing);
+      const price = forPeriod(plan.prices, item, { ...pricing, withRetired: true });
       if (!price) return unresolved('no-price');
       const addOns: ResolvedAddOn[] = [];
       for (const { id: ownId, quantity, since } of source.addOns ?? []) {
@@ -232,8 +250,11 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         });
       }
       const networks = acceptedNetworksIn(provider, region);
-      const formerName = shownFormerName(plan, context.today);
+      const formerName = hasDates(item.billing)
+        ? itemFormerName(plan, item, context.today)
+        : undefined;
       const retirement = retirementOf(plan, provider);
+      const periodChange = periodChangeOf(plan.prices, price, item, pricing, retirement?.endsOn);
       parts = {
         providerId: provider.id,
         planId: plan.id,
@@ -251,6 +272,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         features: plan.features,
         categories: [...planCategories(plan, provider)],
         ...(networks && { acceptedNetworks: networks }),
+        ...(periodChange && { periodChange }),
       };
       break;
     }
@@ -259,8 +281,10 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
       const bundle = catalog.bundles.find((candidate) => candidate.id === bundleId);
       const seller = catalog.providers.find((candidate) => candidate.id === bundle?.soldBy);
       if (!bundle || !seller) return unresolved('bundle-gone');
-      const price = forPeriod(bundle.prices, item, priceContext(context, region, seller));
+      const pricing = priceContext(context, region, seller);
+      const price = forPeriod(bundle.prices, item, { ...pricing, withRetired: true });
       if (!price) return unresolved('no-price');
+      const periodChange = periodChangeOf(bundle.prices, price, item, pricing);
       const plans = bundle.includes.flatMap((planId) => {
         const provider = catalog.providers.find((candidate) =>
           candidate.plans.some((plan) => plan.id === planId),
@@ -287,6 +311,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
           ...new Set(plans.flatMap(({ provider, plan }) => planCategories(plan, provider))),
         ],
         ...(networks && { acceptedNetworks: networks }),
+        ...(periodChange && { periodChange }),
       };
       break;
     }
@@ -323,6 +348,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
     addOns: parts.addOns,
     overridePrice,
     ...(parts.planEnds !== undefined && { planEnds: parts.planEnds }),
+    ...(parts.periodChange && { periodChange: parts.periodChange }),
   };
   // The item dialog resolves its form's item while a date is still being typed: that has no charges, and no status.
   const dated = hasDates(item.billing);
@@ -356,6 +382,28 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
       ...(next && { nextCharge: next }),
     },
   };
+}
+
+/**
+ * The item's period, when the provider no longer sells it and the item isn't grandfathered (M10.28): it switches at its
+ * first renewal on or after the price's retired date (or endsOn), before the plan's own end. None when it has no
+ * renewal left by then, or dates still being typed.
+ */
+function periodChangeOf(
+  prices: readonly Price[],
+  price: PickedPrice,
+  item: ListItem,
+  context: PriceContext,
+  planEnds?: IsoDate,
+): PeriodChange | undefined {
+  if (item.grandfathered || !hasDates(item.billing)) return undefined;
+  const stored = storedPrice(prices, price, item.billing);
+  const lost = stored && periodLostOn(stored);
+  if (!stored?.retired || lost === undefined) return undefined;
+  const on = nextChargeDate(chargedItem({ item, planEnds }).billing, lost);
+  if (on === undefined) return undefined;
+  const to = closestPeriod(prices, stored, item.billing, context);
+  return { retired: stored.retired, on, ...(to && { to }) };
 }
 
 /** A retired plan's move that isn't due yet: the plan its subscribers move to, and when. */

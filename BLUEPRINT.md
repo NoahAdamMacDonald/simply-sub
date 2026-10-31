@@ -614,8 +614,9 @@ rules, in the task that first needs it.
 Lists, ranks and live calendars point at catalog ids, so an id never changes or goes once it's published (M10.27, the
 owner's choice on 2026-10-30). Ids stay readable slugs, not UUIDs: a CI guard keeps them instead.
 - **A rename keeps the id.** The provider file gets the new `name`, a YAML comment with the old one, and on a plan
-  `formerNames` (a provider has `aliases`). Search matches former names; the cards show "Ultra (formerly Max 20x)" until
-  six months after `until`; Home tells the users who have the plan, once. A rebrand is a name change, never a new plan.
+  `formerNames` (a provider has `aliases`). Search matches former names; an item shows "Ultra (formerly Max 20x)" until
+  its first renewal after `until` (M10.28), and anyone without the plan sees "Ultra"; Home tells the users who have the
+  plan, once. A rebrand is a name change, never a new plan.
   ```yaml
     - id: claude.max-20x            # was "Max 20x" until 2026-10-29
       name: Ultra
@@ -638,9 +639,20 @@ owner's choice on 2026-10-30). Ids stay readable slugs, not UUIDs: a CI guard ke
   cycles), and a `from` still sold. The build publishes them in the catalog files and `ids.json`. Resolution (M4.6)
   follows them before calling an item gone; the app rewrites stored items, ranks and drafts to the new ids once, in
   one transaction through the repositories (section 11.1); the API answers an old provider or plan id with a 301.
+- **Billing periods no longer sold** (M10.28) keep their price, with `retired: <date>` and, when existing subscribers
+  keep it longer, `endsOn`. Nothing sells a retired price (pickPrice leaves it out), but an item billed that way keeps
+  it until its next renewal on or after `retired` (or `endsOn`), from which it's billed on the closest period still
+  sold. Home and the item card ask the user to check their billing, with a link and three choices: switch the item to
+  that period, cancel it at that renewal, or keep it (`grandfathered: true` on the item, which keeps its old billing).
+  ```yaml
+      - { region: CA, currency: CAD, amount: 28, interval: month, intervalCount: 1, autoRenew: true,
+          retired: 2026-11-15, lastVerified: 2026-11-15, sourceUrl: https://claude.com/pricing }   # a sketch
+  ```
 - **The guard** (`npm run data:ids`, also run by `data:validate` and so by `ci`): every id main publishes (providers,
   plans, add-ons, bundles and rank keys, built from main's `data/` at the merge base) must still be in the branch, or
   be redirected. A missing one fails with the three fixes: keep the id under its new name, retire it, or redirect it.
+  Each plan's and bundle's billing periods per region are kept the same way: a period that goes without `retired`
+  fails (M10.28).
 
 ### 4.4 Bundle file (`data/bundles/disney-crave-premium.yaml`)
 ```yaml
@@ -3170,6 +3182,14 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-30, names and billing that follow the provider)**
+The owner's choices after M10.27 (M10.28, section 4.3):
+- **A former name is a grace period, not a label:** an item shows it until its next renewal after the rename; anyone
+  without the plan sees the new name at once.
+- **A dropped billing period switches at the next renewal** to the closest one still sold, since an existing
+  subscriber can't be assumed to keep it; the user is asked to check their billing and picks: switch, cancel, or keep
+  it (grandfathered). Whatever they pick is saved to their item, so the app never guesses twice.
 
 **Resolved (2026-10-30, ids that last)**
 Decided with the owner after Claude renamed Max 5x to Max and Max 20x to Ultra (M10.27, section 4.3):

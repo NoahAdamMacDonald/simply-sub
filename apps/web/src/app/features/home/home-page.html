@@ -58,11 +58,14 @@
     </div>
 
     <div class="hub">
-      <!-- Every list's payments against the budgets (§3.1, M7.6), once they're all priced; each can be dismissed. -->
-      <ss-budget-warnings
-        class="warnings"
-        [warnings]="pricing() ? undefined : global()?.warnings"
-      />
+      <div class="warnings">
+        <!-- Every list's payments against the budgets (§3.1, M7.6), once they're all priced; each can be dismissed. -->
+        <ss-budget-warnings [warnings]="pricing() ? undefined : global()?.warnings" />
+        <!-- Items on a billing period no longer sold (M10.28): check, then switch, cancel or keep. -->
+        @for (check of billingChecks(); track check.item.id) {
+          <ss-billing-check class="billing-check" [resolved]="check" />
+        }
+      </div>
 
       <section class="budgets card" aria-labelledby="budgets-heading">
         <h2 id="budgets-heading">Budgets</h2>

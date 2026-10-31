@@ -2,10 +2,11 @@ import { Component, ElementRef, computed, inject, input, output, viewChild } fro
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import { addOnText, planTitle, type ResolvedItem, type Tag } from '@simply-sub/core';
+import { addOnText, formerlyText, planTitle, type ResolvedItem, type Tag } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { ClockService } from '../../core/clock/clock-service';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { BillingCheck } from '../billing-check/billing-check';
 import { billingText, ownPriceText } from '../billing-text';
 import { chargeAmountText, type ShownAndSpoken } from '../charge-text';
 import { countryName } from '../country-name';
@@ -31,6 +32,7 @@ let nextId = 0;
 @Component({
   selector: 'ss-item-card',
   imports: [
+    BillingCheck,
     FeatureList,
     MatButton,
     MatIcon,
@@ -106,10 +108,10 @@ export class ItemCard {
         : ` It ends for its subscribers on ${dateText(planEnds)}.`;
     return `${name} no longer sells ${planName} to new subscribers.${then}`;
   });
-  /** "(formerly Max 20x)" beside a renamed plan's name, for six months (M10.27). */
+  /** "(formerly Max 20x)" beside a renamed plan's name, until the item's renewal after the rename (M10.28). */
   protected readonly formerly = computed(() => {
     const { formerName } = this.resolved();
-    return formerName === undefined ? undefined : `(formerly ${formerName})`;
+    return formerName === undefined ? undefined : formerlyText(formerName);
   });
   /**
    * What View in Search looks for: the plan's provider, with the plan itself shown on its card (M5.11), or the bundle's

@@ -576,6 +576,13 @@ Plan changes, Search finding "max 20x" as Ultra and offering no Netflix Standard
 with Tab to its first plan and Enter opening it in Search. In both themes at both widths, with axe, screenshots and no
 horizontal scroll.
 
+`check-m10-billing.cjs` (M10.28) checks on `ng serve` for a Canadian in Alberta (base URL ending in `/`), with Work
+Related (Claude Pro and Ultra, monthly, added Oct 20 and renewing Nov 12) and every catalog file served with Claude Pro's
+Canadian monthly price retired: List view's card and Home saying it counts as yearly from Nov 12, with Check your billing
+linking to claude.com/pricing; Ultra's "(formerly Max 20x)" until its renewal; then on Home by keyboard Keep (the item
+grandfathered in IndexedDB, the check gone, the snackbar's Undo bringing it back) and Switch (billed yearly from Nov 12).
+In both themes at both widths, with axe and no horizontal scroll.
+
 `check-m10-category.cjs` (M10.22, the feedback after M10, part 2) checks Search's Category on `ng serve` for a Canadian
 in Alberta (base URL ending in `/`), in both themes at 1280 px (the filter panel) and 360 px (the drawer): empty while
 it's All with its label in the field, then focused by Tab with its label floated and "All" its placeholder, "vp" typed

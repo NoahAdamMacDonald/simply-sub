@@ -20,6 +20,7 @@ import { MetricsService } from '../../core/metrics/metrics-service';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { ItemsRepository } from '../../core/storage/items-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
+import { BillingCheck } from '../../shared/billing-check/billing-check';
 import { BudgetTotals } from '../../shared/budget-totals/budget-totals';
 import { BudgetWarnings } from '../../shared/budget-warnings/budget-warnings';
 import { chargeAmountText, nearDateText } from '../../shared/charge-text';
@@ -44,6 +45,7 @@ const comingDays = 14;
 @Component({
   selector: 'ss-home-page',
   imports: [
+    BillingCheck,
     BudgetTotals,
     BudgetWarnings,
     EmptyState,
@@ -75,6 +77,12 @@ export class HomePage {
     if (!statuses.every((status) => status === 'ready')) return 'loading';
     return this.lists.records().length === 0 ? 'empty' : 'ready';
   });
+  /** Every item billed on a period its provider no longer sells (M10.28), whose user should check their billing. */
+  protected readonly billingChecks = computed(() =>
+    [...this.metrics.resolutions().values()].flatMap((result) =>
+      result.ok && result.resolved.periodChange ? [result.resolved] : [],
+    ),
+  );
   /** Prices still on their way: the catalog file an item needs hasn't loaded. */
   protected readonly pricing = computed(() =>
     [...this.metrics.resolutions().values()].some(

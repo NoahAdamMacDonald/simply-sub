@@ -2,18 +2,18 @@ import { describe, expect, it } from 'vitest';
 import {
   buildCatalogData,
   formatCatalogIssue,
-  formerlyText,
   planSchema,
   readCatalogSource,
   searchProviders,
-  shownFormerName,
   validateCatalog,
+  itemFormerName,
+  type ListItem,
 } from '../../src';
 import { catalogWith, today } from './catalog-files';
 import { issues } from './helpers';
 
 // A renamed plan keeps its id (BLUEPRINT §4.3, M10.27): its former names are matched by Search, and shown on its cards
-// for six months after the rename.
+// on an item until its renewal (M10.28).
 
 const netflix = 'data/providers/netflix.yaml';
 const standard = { formerNames: [{ name: 'Basic', until: '2026-05-31' }] };
@@ -70,12 +70,33 @@ describe('formerNames', () => {
   });
 });
 
-describe('shownFormerName', () => {
-  it('shows the latest former name until six months after its rename', () => {
-    expect(shownFormerName(standard, '2026-11-30')).toBe('Basic');
-    expect(formerlyText(standard, '2026-11-30')).toBe('(formerly Basic)');
-    expect(shownFormerName(standard, '2026-12-01')).toBeUndefined();
-    expect(formerlyText({}, '2026-06-01')).toBeUndefined();
+describe('itemFormerName', () => {
+  const billing: ListItem['billing'] = {
+    mode: 'recurring',
+    interval: 'month',
+    intervalCount: 1,
+    anchorDate: '2026-06-12',
+    autoRenew: true,
+  };
+  const item = { billing, createdAt: '2026-01-15T12:00:00.000Z' };
+
+  it('shows the old name until the item’s first renewal after the rename', () => {
+    expect(itemFormerName(standard, item, '2026-06-11')).toBe('Basic');
+    expect(itemFormerName(standard, item, '2026-06-12')).toBeUndefined();
+  });
+
+  it('shows nothing on an item added since, or with no charge to come', () => {
+    expect(
+      itemFormerName(standard, { ...item, createdAt: '2026-06-01T08:00:00.000Z' }, '2026-06-05'),
+    ).toBeUndefined();
+    expect(
+      itemFormerName(
+        standard,
+        { ...item, billing: { ...billing, endDate: '2026-06-01' } },
+        '2026-06-05',
+      ),
+    ).toBeUndefined();
+    expect(itemFormerName({}, item, '2026-06-05')).toBeUndefined();
   });
 });
 

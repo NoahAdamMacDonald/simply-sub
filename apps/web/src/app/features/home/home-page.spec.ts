@@ -267,7 +267,7 @@ describe('HomePage', () => {
     ]);
     expect(warnings[0].querySelector('a')?.getAttribute('href')).toBe('/calendar?month=2027-01');
     // Above the calendar and the totals.
-    expect(page().querySelector('ss-budget-warnings + .budgets')).not.toBeNull();
+    expect(page().querySelector('.warnings:has(ss-budget-warnings) + .budgets')).not.toBeNull();
   });
 
   it('has no warning when every month and the year are within budget', async () => {

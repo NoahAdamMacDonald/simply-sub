@@ -78,6 +78,21 @@
   font: var(--mat-sys-body-small);
 }
 
+// Keeps a billing period no longer sold (M10.28): a small outlined label, as the status badge's.
+.grandfathered {
+  display: inline-block;
+  margin: 6px 0 0;
+  padding: 0 8px;
+  border: 1px solid var(--ss-divider);
+  border-radius: 999px;
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-label-medium);
+}
+
+.billing-check {
+  margin-top: 12px;
+}
+
 // A plan no longer sold (M10.27): a note under the status, its icon beside the first line.
 .retired {
   display: flex;

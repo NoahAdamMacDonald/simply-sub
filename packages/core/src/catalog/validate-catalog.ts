@@ -961,7 +961,10 @@ class PriceChecks {
     this.staleBefore = addDays(context.today, -staleAfterDays);
   }
 
-  /** `path` is the prices list's own. A retired plan's are its last prices, kept as they were, so never stale (M10.27). */
+  /**
+   * `path` is the prices list's own. A retired plan's are its last prices, kept as they were, so never stale (M10.27),
+   * and so is a retired price (M10.28).
+   */
   check(prices: readonly Price[], path: CatalogIssuePath, retired = false): void {
     const { today, currencies } = this.context;
     const first = new Map<string, number>();
@@ -978,8 +981,14 @@ class PriceChecks {
           [...at, 'lastVerified'],
           `${price.lastVerified} is after today (${today}): use the date the price was checked`,
         );
-      } else if (!retired && price.lastVerified < this.staleBefore) {
+      } else if (!retired && price.retired === undefined && price.lastVerified < this.staleBefore) {
         this.stale.push({ date: price.lastVerified, path: [...at, 'lastVerified'] });
+      }
+      if (price.retired !== undefined && price.retired > today) {
+        this.report(
+          [...at, 'retired'],
+          `${price.retired} is after today (${today}): use the day the provider stopped selling it`,
+        );
       }
       this.count++;
       const key = [price.region, price.currency, price.interval, price.intervalCount].join(' ');

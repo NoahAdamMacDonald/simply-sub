@@ -287,6 +287,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.25 | Live calendars that go on, and notice when they're gone (added 2026-10-30, the feedback after M10): a monthly plan billed on the 29th or 30th, which no monthly rule Proton takes can describe, is a yearly series for each month, February on its last day, so it repeats with no end rather than stopping after 12 months; a live calendar keeps a year of past charges that are events of their own; the app checks its links once a start and when the Live calendar dialog opens, and marks a set gone on the server broken, offering new links (P10; BLUEPRINT §11.3, §14) | Xbox Game Pass on the 29th shows every month in Proton past October 2027, February on its last day; links deleted on the server say so in the dialog without waiting for a change |
 | M10.26 | Sync that waits (added 2026-10-30, while planning M11): no checks for other devices' changes while this device is the chain's only one; with others, a check 10 s after activity (a change here or pulled in, the tab shown, focus, a click or a key), the wait doubling to 5 minutes while nothing happens; only synced records and the shared settings start a sync, never the theme, the Calendar's shown lists, Home's seen price changes or the lock (P13; BLUEPRINT §7.1, §11.4) | An idle shown tab checks about 15 times an hour, a lone device never; an edit shows on another device in use within 15 s; a theme change sends no request |
 | M10.27 | Ids that last (added 2026-10-30, the owner's choice): catalog ids stay readable slugs and are permanent once published. A renamed plan keeps its id with `formerNames`: Search matches them, its cards say "Ultra (formerly Max 20x)" for six months, and Home tells those who have it, once. A plan or provider no longer sold is `retired`, never deleted: never offered, still counted, with an optional `endsOn` (Home warns ahead, Optimizations lists replacements that keep its Needed keys) or a dated move in `data/redirects.yaml`. That file maps an id that had to change to its new one: the app follows it and rewrites users' records once, and the API answers the old id with a redirect. A CI guard fails a branch where a published id disappears (P2, P4, P8, P14; BLUEPRINT §4.3, §6.2, §14) | Deleting a plan fails `data:validate` and `ci`, naming it and the three fixes; Claude's Max and Ultra keep their ids and users' items; an item on a redirected plan resolves, and its record is rewritten once |
+| M10.28 | Names and billing that follow the provider (added 2026-10-30, the owner's choice): a renamed plan's old name shows on an item only until its first renewal after the rename, and nowhere for a user who doesn't have the plan; a billing period a plan no longer sells keeps its price, `retired` (and `endsOn` when existing subscribers keep it longer), never deleted, and the ids guard covers each plan's periods per region. An item on it switches at its next renewal to the closest period still sold, and Home and the item card ask the user to check their billing, with a link and three choices saved at once with Undo: Switch, Cancel at that renewal, or Keep it (Grandfathered) (P2, P4; BLUEPRINT §4.3, §14) | Claude's Ultra shows "(formerly Max 20x)" to a subscriber until their renewal and never to anyone else; a monthly price retired moves a monthly item to yearly at its renewal in the totals, and each choice saves and undoes |
 
 #### M10 specs
 
@@ -924,6 +925,54 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
     weekly usage, no 5-hour limit for verified accounts, where Max 20x had 20 times Pro's), and both plans add monthly
     API credits: recorded as perks, nothing retired or redirected.
   - `check-m10-ids.cjs` (browser-check skill): 61 checks in both themes at both widths.
+
+**M10.28 — Names and billing that follow the provider** (BLUEPRINT §4.3)
+- **Why:** the owner wants plans, prices and billing periods as close to reality as possible, and the user told when
+  reality changes under them. M10.27 kept ids; this keeps what an item says and costs honest when a plan is renamed
+  or a billing period is dropped. A dropped period has the same bug ids had: the item has no price for its period, so
+  it's `no-price` and silently leaves the totals.
+- **A former name, per item:** "Ultra (formerly Max 20x)" on an item until its first charge after the rename's
+  `until` (its renewal), so its user has a period to get used to it; an item added after the rename, one with no
+  charge to come, and anyone without the plan see "Ultra". Search's card says "formerly" only while one of the user's
+  items on the plan does. Search still matches former names, and Home's notice is unchanged. This replaces M10.27's
+  six months.
+- **A billing period no longer sold:** its price stays, with `retired: <date>` (not sold to new subscribers from that
+  day) and optionally `endsOn` (the day existing subscribers lose it, when the provider gives one). pickPrice leaves
+  retired prices out for everything sold (Search, the item dialog, the optimizer); resolution keeps them for an item
+  billed that way. Validation: `endsOn` needs `retired`, on or after it; a retired price isn't flagged as old. The ids
+  guard also keeps each plan's and bundle's billing periods per region: one that disappears without `retired` fails.
+- **The item switches at its next renewal** (the owner's choice): its first charge on or after `retired`, or `endsOn`
+  when there is one, is billed on the closest period still sold in the same price list (by length: monthly goes to
+  yearly when that's all there is), at its price, with nothing written to the record; totals, the calendar and the
+  optimizer follow. With no period left, the item keeps its last price.
+- **Check your billing:** Home (with the budget warnings) and the item card say "Claude no longer sells Pro billed
+  monthly. From Dec 12 this counts as yearly, $280. Check your billing", with a link to the plan's page, and three
+  choices, saved to the item at once with Undo:
+  - **Switch to yearly:** the item's billing becomes that period, from that renewal;
+  - **Cancel at renewal:** its end date is that renewal;
+  - **Keep monthly:** `grandfathered: true` on the item, which keeps its billing at its last price, with a
+    "Grandfathered" chip on its card. An optional field, so no new Dexie version.
+  Any of them ends the warning; an item ending before the switch has none.
+- **Acceptance**
+  - [x] Core: a former name until the item's renewal and not for an item added since; a retired price left out of
+        pickPrice but kept by an item's resolution; the switch's charges (old period before, new one from the
+        renewal); the closest period; grandfathered keeping the old billing; the guard failing a period removed
+  - [x] The app: the warning on Home and the item card, each choice saving with Undo, and the Grandfathered chip
+  - [x] Both themes at 360 and 1280 px, keyboard only, with axe
+- **As built:**
+  - Core: `user/former-name.ts` (`itemFormerName`, `formerlyText`) in place of M10.27's six months; `retired` and
+    `endsOn` on `priceSchema`; `PriceContext.withRetired`; `catalog/period-change.ts` (`storedPrice`, `closestPeriod`
+    by length on a log scale, the shorter of two as close, and `periodLostOn`); `ResolvedItem.periodChange`
+    (`{ retired, on, to? }`); `switchedBilling` in `reanchor.ts`, which reanchors on the renewal and keeps a billing
+    day it still allows. `itemCharges` and `nextCharge` split a switching item in two: its old period ending on the
+    renewal (no "Ends" mark, since it goes on) and the new one from it, at the new price without the item's own price.
+  - The guard's periods are `<plan or bundle id> <region> <interval>/<count>`; one whose plan or bundle is gone is
+    left to that id's error. Main publishes 350 ids and periods today.
+  - The app: `shared/billing-check` on Home (in the warnings' column, after the budget warnings) and on the item
+    card, under its head; each choice is named with the item's title in hidden words ("Switch Claude Pro to yearly"),
+    since an `aria-label` that doesn't start with the visible words fails axe's `label-content-name-mismatch`. Search's
+    card reads the user's items for a former name in its grace. The initial bundle is unchanged (499.73 kB).
+  - `check-m10-billing.cjs` (browser-check skill): 49 checks in both themes at both widths.
 
 ### M11 — Catalog expansion (Phase 6)
 Planned on 2026-10-30 with the owner, from `docs/catalog-expansion-guide.md` (the owner's research list, the rules
