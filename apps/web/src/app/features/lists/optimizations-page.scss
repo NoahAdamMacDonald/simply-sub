@@ -115,6 +115,17 @@
       justify-content: space-between;
       gap: 4px 12px;
     }
+
+    // As the cards' text links (Plan ↗, Cancel ↗).
+    a {
+      border-radius: 4px;
+      color: var(--ss-accent-text);
+
+      &:focus-visible {
+        outline: 2px solid var(--ss-accent-text);
+        outline-offset: 2px;
+      }
+    }
   }
 }
 

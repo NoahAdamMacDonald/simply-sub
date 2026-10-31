@@ -892,12 +892,38 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   `claude.max-5x` named Max and `claude.max-20x` named Ultra, with `formerNames`; anything else is recorded as the page
   says, and the owner decides before anything is retired or redirected.
 - **Acceptance**
-  - [ ] Core: resolution through redirects (a plan, a bundle, an add-on), a retired plan that still counts, one with
+  - [x] Core: resolution through redirects (a plan, a bundle, an add-on), a retired plan that still counts, one with
         `endsOn` that stops counting then, a dated move, `formerNames` matched by Search and shown for six months
-  - [ ] The migration spec: items, ranks, drafts and profile ranks rewritten in one transaction, once; a move waiting
+  - [x] The migration spec: items, ranks, drafts and profile ranks rewritten in one transaction, once; a move waiting
         for its date
-  - [ ] The guard: an id removed fails with the three fixes; retired or redirected passes
-  - [ ] The item card, Search's card and Home's notices in both themes at 360 and 1280 px, with axe
+  - [x] The guard: an id removed fails with the three fixes; retired or redirected passes
+  - [x] The item card, Search's card and Home's notices in both themes at 360 and 1280 px, with axe
+- **As built:**
+  - Core: `formerNames` and `retired`/`endsOn` in `provider.ts`; `former-names.ts` (`shownFormerName`, `formerlyText`,
+    `planNames`), `retired.ts` (`retirementOf`, `isRetired`), `redirects.ts` (the schema, `dueRedirects`,
+    `dueRedirectMap`, kept per catalog and day since resolution asks once an item, `redirectedRankKey`),
+    `validate-redirects.ts`, `published-ids.ts` (the guard's lenient reading), `user/plan-notices.ts` (renamed, ends,
+    moved, kept like the price changes) and `user/redirect-records.ts` (`redirectedRecords`, `movedNotices`).
+  - `ResolvedItem` gains `formerName`, `retired` (with a move not due yet, `movesTo`) and `planEnds`; charges and the
+    status read the item through `chargedItem`, which ends a recurring item on `planEnds` without writing it to the
+    record. The optimizer's result gains `replacements`: up to three plans per item ending in the next 12 months,
+    sold where it was bought, in one of its categories, with every key it ranks Needed or above (the same provider for
+    a Critical one). Retired plans are skipped as switches, other periods, bundles' plans, suites and extra members'
+    hosts, and the nightly check leaves their prices out.
+  - The app: `CatalogStore` runs `followRedirects` (`core/storage/redirected-records.ts`, a chunk of its own) when the
+    catalog has redirects, the items are readable, and on each new day; one `StorageEngine.transaction` over items,
+    rankings, drafts and settings. The cards build the plan's line in the component ("Ultra (formerly Max 20x)"), and
+    the old name takes the plan name's style: a rule of its own put Search's card's styles over their 4 kB budget.
+    Optimizations' Plans that end links each plan to Search. The initial bundle went from 499.42 kB to 499.73 kB.
+  - The API's 301 is `movedTo` in `http.ts`, cached like the catalog's answers; the contract has an example for each
+    route, which its test serves with a redirect in `ids.json`.
+  - The guard reads main through git, not production's `ids.json` (BLUEPRINT §14), so CI's checkout fetches every
+    branch's history. 177 ids on main today.
+  - Claude (2026-10-30): the Ultra article says "The Max 20x plan is now called the Ultra plan. Existing Max 20x
+    subscribers move to Ultra automatically, with no price change." Prices unchanged; Ultra's limits are new (10x Pro's
+    weekly usage, no 5-hour limit for verified accounts, where Max 20x had 20 times Pro's), and both plans add monthly
+    API credits: recorded as perks, nothing retired or redirected.
+  - `check-m10-ids.cjs` (browser-check skill): 61 checks in both themes at both widths.
 
 ### M11 — Catalog expansion (Phase 6)
 Planned on 2026-10-30 with the owner, from `docs/catalog-expansion-guide.md` (the owner's research list, the rules

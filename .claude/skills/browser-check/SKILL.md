@@ -568,6 +568,14 @@ With axe on the open lists and the snackbar, and no horizontal scroll.
 - Since M10.19 a snackbar's text is its message, its action and ✕'s icon name ("close"): read the message from
   `ss-snack .mat-mdc-snack-bar-label` (the container's own `.mat-mdc-snack-bar-label` wraps all of it), and find a
   button by its name, since there are two.
+`check-m10-ids.cjs` (M10.27, ids that last) checks on `ng serve` for a Canadian in Alberta (base URL ending in `/`, after
+`npm run data:build` on the branch), with Work Related (Claude's `claude.max-20x`, now Ultra, and Netflix Standard with
+Ad free ranked Needed) and Home's plan notices written to IndexedDB, and every catalog file served with Netflix Standard
+retired and ending on Mar 1, 2027 (`context.route`): List view's "Ultra (formerly Max 20x)" and the retired note, Home's
+Plan changes, Search finding "max 20x" as Ultra and offering no Netflix Standard, and Optimizations' Plans that end
+with Tab to its first plan and Enter opening it in Search. In both themes at both widths, with axe, screenshots and no
+horizontal scroll.
+
 `check-m10-category.cjs` (M10.22, the feedback after M10, part 2) checks Search's Category on `ng serve` for a Canadian
 in Alberta (base URL ending in `/`), in both themes at 1280 px (the filter panel) and 360 px (the drawer): empty while
 it's All with its label in the field, then focused by Tab with its label floated and "All" its placeholder, "vp" typed

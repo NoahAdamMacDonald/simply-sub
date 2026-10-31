@@ -1549,8 +1549,13 @@ or the disk. Today is the date where the script runs, which is UTC in CI.
 Validation fails if:
 - a file isn't valid YAML (a duplicate key, more than one document), isn't one of `data/features.yaml`,
   `data/categories.yaml`, `data/resellers.yaml` (optional), `data/policy-topics.yaml` (optional until a provider
-  rates its policies), `data/queue.yaml` (optional, section 6.5), `data/providers/<id>.yaml` or
-  `data/bundles/<slug>.yaml` (always `.yaml`), or `features.yaml` or `categories.yaml` is missing
+  rates its policies), `data/queue.yaml` (optional, section 6.5), `data/redirects.yaml` (optional, section 4.3),
+  `data/providers/<id>.yaml` or `data/bundles/<slug>.yaml` (always `.yaml`), or `features.yaml` or
+  `categories.yaml` is missing
+- a redirect's target doesn't exist or is retired, points at another entry's old id (a chain), or its old id is still
+  in the catalog and isn't a retired plan or provider without `endsOn`; or `endsOn` comes without `retired`, or before
+  it (section 4.3)
+- an id main publishes is gone from the branch without being retired or redirected (the ids guard, section 4.3)
 - a file doesn't match its Zod schema (section 4.5), which already covers unknown keys, formats, negative amounts
   and the checks within one file
 - a provider's `id` isn't its file name, or a bundle's `id` isn't `bundle.<file name>`
@@ -1629,8 +1634,10 @@ write the files.
    - `catalog/features.json` and `catalog/categories.json`: the `GET /features` and `GET /categories` bodies
      (`featuresBody` and `categoriesBody`), the snapshot's features and categories in file order with the
      `catalogVersion`. The Worker streams them like the snapshots, so neither route reads D1 (M2.2);
-   - `catalog/ids.json`: every provider id with its plan ids (`catalogIds`). The Worker reads it only to suggest an
-     id after a 404 or 400 (M2.4), so a typo costs no D1 rows.
+   - `catalog/ids.json`: every provider id with its plan ids (`catalogIds`), and the provider and plan redirects. The
+     Worker reads it only after a 404 or 400: to answer an old id with a 301 (M10.27), else to suggest an id (M2.4), so
+     neither costs D1 rows. `data/redirects.yaml` is in the snapshot and every region file too, as `redirects` (left
+     out when there are none).
 4. Convert each provider's and reseller's logo in `data/logos/` to `apps/web/public/icons/<id>.webp`, published as
    `/icons/<id>.webp`: at
    most 96 pixels wide (`catalogIconSize` in core, twice the 48 px the app shows icons at, for high-density
