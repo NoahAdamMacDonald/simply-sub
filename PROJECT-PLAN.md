@@ -1015,8 +1015,14 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   opens it by keyboard with `aria-expanded`; Escape, a click outside or the button closes it, focus back on the button.
   The breakdown is worked out only when it opens.
 - **Acceptance**
-  - [ ] Core: the lines and totals of a period's charges, a converted charge's rate, and the sum equal to the total
-  - [ ] Every bar opens one, by hover, click, tap and keyboard, in both themes at 360 and 1280 px with axe
+  - [x] Core: the lines and totals of a period's charges, a converted charge's rate, and the sum equal to the total
+  - [x] Every bar opens one, by hover, click, tap and keyboard, in both themes at 360 and 1280 px with axe
+- **As built:** `shared/cost-breakdown` wraps a bar (BudgetTotals' bars and lone totals, the Calendar's bar, Payment's
+  limit bars) and puts its receipt button beside it; BudgetTotals takes `listIds` for a list's breakdowns. The bar
+  opens it on pointer events (`pointerenter`, `pointerleave`, `pointerup`), so a tap works the same and the bar stays
+  out of the tab order, which the button is for; the panel is a CDK connected overlay, a non-modal `role="dialog"`,
+  focused when the button opens it. The initial bundle is unchanged (499.73 kB). `check-m10-breakdowns.cjs`
+  (browser-check skill): 63 checks in both themes at both widths, touch at 360.
 
 ### M11 — Catalog expansion (Phase 6)
 Planned on 2026-10-30 with the owner, from `docs/catalog-expansion-guide.md` (the owner's research list, the rules
