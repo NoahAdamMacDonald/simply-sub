@@ -16,6 +16,7 @@ import { CatalogStore } from '../catalog/catalog-store';
 import { ClockService } from '../clock/clock-service';
 import { FxStore } from '../fx/fx-store';
 import { SettingsStore } from '../settings/settings-store';
+import { CardsRepository } from '../storage/cards-repository';
 import { CustomSubsRepository } from '../storage/custom-subs-repository';
 import { ItemsRepository } from '../storage/items-repository';
 import { RankingsRepository } from '../storage/rankings-repository';
@@ -32,14 +33,15 @@ const noItems: ListItems = { resolved: [], unresolved: [] };
  * The view models pages show (PROJECT-PLAN §3.4), as signals built from the repositories, CatalogStore, FxStore and
  * SettingsStore with core's resolveItem, so components never price, join or rank anything themselves. Each item is
  * priced with the catalog file of the region it was bought in, its keys ranked by its overrides over the profile's
- * ranks (M6.1), and given its status and next charge, with the user's sales tax (M7.1). Each list's totals, and every
- * list's together for Home, are core's listMetrics (M7.2).
+ * ranks (M6.1), and given its status and next charge, with the user's sales tax (M7.1) and its card's FX fee (M10.29).
+ * Each list's totals, and every list's together for Home, are core's listMetrics (M7.2).
  */
 @Service()
 export class MetricsService {
   private readonly items = inject(ItemsRepository);
   private readonly customSubs = inject(CustomSubsRepository);
   private readonly rankings = inject(RankingsRepository);
+  private readonly cards = inject(CardsRepository);
   private readonly catalog = inject(CatalogStore);
   private readonly fx = inject(FxStore);
   private readonly settings = inject(SettingsStore);
@@ -154,6 +156,8 @@ export class MetricsService {
       profileRanks: this.rankings.ranks(),
       // Where the user pays sales tax, for each item's next charge (BLUEPRINT §4.8).
       taxPlace: saved,
+      // The cards items are paid with: their FX fees count in the totals (M10.29).
+      cards: this.cards.byId(),
     };
     return items.map((item) =>
       resolveItem(item, {

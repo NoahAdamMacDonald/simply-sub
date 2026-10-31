@@ -124,6 +124,7 @@
            @defer would bring Angular's defer runtime (7.6 kB) into the initial bundle. -->
       <ss-calendar-year
         [months]="yearMonths()"
+        [cashback]="yearCashback()"
         [label]="'Months of ' + title()"
         (opened)="openMonth($event)"
       />

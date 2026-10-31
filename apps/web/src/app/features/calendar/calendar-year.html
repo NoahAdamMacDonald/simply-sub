@@ -1,3 +1,10 @@
+@if (cashback(); as cashback) {
+  <p class="cashback">
+    <mat-icon aria-hidden="true">savings</mat-icon>
+    <span aria-hidden="true">{{ cashback.shown }}</span>
+    <span class="visually-hidden">{{ cashback.spoken }}</span>
+  </p>
+}
 <ul class="months" [attr.aria-label]="label()">
   @for (card of months(); track card.month) {
     <!-- The link is the month's name, stretched over the card. Its name says all the card shows, so the rest of the

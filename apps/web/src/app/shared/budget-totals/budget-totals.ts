@@ -1,4 +1,5 @@
 import { Component, booleanAttribute, computed, inject, input } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import type { ListMetrics } from '@simply-sub/core';
 import { ClockService } from '../../core/clock/clock-service';
@@ -29,7 +30,7 @@ let nextId = 0;
  */
 @Component({
   selector: 'ss-budget-totals',
-  imports: [BudgetBar, RouterLink],
+  imports: [BudgetBar, MatIcon, RouterLink],
   templateUrl: './budget-totals.html',
   styleUrl: './budget-totals.scss',
 })
@@ -89,6 +90,21 @@ export class BudgetTotals {
         'Set an annual budget',
       ),
     ];
+  });
+  /**
+   * "≈ $4.79 cash back in 2026" (M10.29): what this year's charges earn on the cards they're paid with, which the
+   * totals don't take off. Not on a Lists card, and not when no card pays any.
+   */
+  protected readonly cashback = computed(() => {
+    const { thisYear, approx } = this.metrics().cashback;
+    if (this.compact() || thisYear <= 0) return undefined;
+    const saved = this.settings.saved();
+    const amount = amountText(thisYear, saved?.currency ?? 'USD', saved?.country);
+    const year = this.today().slice(0, 4);
+    return {
+      shown: `${approx ? '≈ ' : ''}${amount} cash back in ${year}`,
+      spoken: `${approx ? 'about ' : ''}${amount} cash back in ${year}, not taken off the totals`,
+    };
   });
   /** "1 subscription not counted": one it can't price, or priced in a currency it has no rate for. */
   protected readonly notCounted = computed(() => {

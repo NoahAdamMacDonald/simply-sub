@@ -50,6 +50,8 @@ export interface YearMonth {
 })
 export class CalendarYear {
   readonly months = input.required<readonly YearMonth[]>();
+  /** The year's cash back on the cards (M10.29), shown above the months: never taken off the totals. */
+  readonly cashback = input<{ shown: string; spoken: string }>();
   /** The list's name: "Months of 2026". */
   readonly label = input.required<string>();
   /** A month's card was chosen: the Calendar puts focus on its grid once it shows. */
