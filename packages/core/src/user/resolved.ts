@@ -1,19 +1,25 @@
 import { bundleFeatures } from '../catalog/bundle-deal';
 import { acceptedNetworksIn } from '../catalog/card-networks';
 import { isoDateSchema } from '../catalog/formats';
+import { shownFormerName } from '../catalog/former-names';
 import type { FxRates } from '../catalog/convert';
 import { pickPrice, typedPrice, type PickedPrice, type PriceContext } from '../catalog/pick-price';
+import { planOf } from '../catalog/plan-lookup';
 import { planCategories } from '../catalog/plan-categories';
+import { dueRedirectMap, redirected } from '../catalog/redirects';
+import { retirementOf, type Retirement } from '../catalog/retired';
 import type { Price } from '../catalog/price';
 import type { CardNetwork, Plan } from '../catalog/provider';
 import { catalogIconFile, type CatalogData, type SnapshotProvider } from '../catalog/snapshot';
 import type { IsoDate } from '../dates/iso-date';
 import { providedKeys, type RankKey } from '../ranking/rank-keys';
 import { effectiveRanks, type ProfileRanks } from '../ranking/resolve-rank';
-import { nextCharge, ownPriceOn, type Charge } from '../schedule/charges';
+import { chargedItem, nextCharge, ownPriceOn, type Charge } from '../schedule/charges';
 import { itemStatus } from '../schedule/item-status';
 import type { TaxPlace } from '../tax/sales-tax-rate';
 import { customIconUrl } from './custom-sub-form';
+import { planTitle } from './item-text';
+import { redirectedOverrides } from './redirect-records';
 import type { CustomSubscription } from './custom-subscription';
 import type { ListItem } from './list-item';
 import type { Rank } from './rank';
@@ -69,6 +75,18 @@ export interface ResolvedItem {
   name: string;
   /** The plan's name: "Standard". A bundle's is its plans': "Netflix Standard + Crave Premium". */
   planName: string;
+  /** A catalog plan's former name, for six months after its rename (M10.27): "Max 20x" for Ultra. */
+  formerName?: string;
+  /**
+   * A catalog plan its provider no longer sells, from its `retired` date (M10.27): since when, the day it ends for its
+   * subscribers too, if it does, or the plan they move to on a date (a redirect not due yet). The item still counts.
+   */
+  retired?: Retirement & { movesTo?: { planId: string; title: string; on: IsoDate } };
+  /**
+   * The day the plan ends for its subscribers (its `endsOn`), whether or not it's retired yet: the item has no charges
+   * from then on, and its status ends then, as if it were its end date (chargedItem).
+   */
+  planEnds?: IsoDate;
   /**
    * Catalog: the relative icons/<id>.webp when the provider has a logo (the snapshot's absolute URL points at
    * production, so a preview would miss a new logo). Custom: api/v1/icon?domain= from its link. None: a letter.
@@ -183,18 +201,23 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
     | 'status'
     | 'nextCharge'
   >;
+  // An id that changed, or a retired plan whose subscribers have moved, is followed before giving up (M10.27): the app
+  // rewrites the item to the new id soon after (redirectedRecords), but it counts meanwhile.
+  const moves = dueRedirectMap(catalog, context.today);
   switch (source.kind) {
     case 'catalog': {
+      const planId = redirected(moves, 'plan', source.planId);
       const provider = catalog.providers.find((candidate) =>
-        candidate.plans.some((plan) => plan.id === source.planId),
+        candidate.plans.some((plan) => plan.id === planId),
       );
-      const plan = provider?.plans.find((candidate) => candidate.id === source.planId);
+      const plan = provider?.plans.find((candidate) => candidate.id === planId);
       if (!provider || !plan) return unresolved('plan-gone');
       const pricing = priceContext(context, region, provider);
       const price = forPeriod(plan.prices, item, pricing);
       if (!price) return unresolved('no-price');
       const addOns: ResolvedAddOn[] = [];
-      for (const { id, quantity, since } of source.addOns ?? []) {
+      for (const { id: ownId, quantity, since } of source.addOns ?? []) {
+        const id = redirected(moves, 'add-on', ownId);
         const addOn = provider.addOns?.find((candidate) => candidate.id === id);
         if (!addOn) return unresolved('add-on-gone');
         const picked = pickPrice(addOn.prices, pricing);
@@ -209,11 +232,19 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         });
       }
       const networks = acceptedNetworksIn(provider, region);
+      const formerName = shownFormerName(plan, context.today);
+      const retirement = retirementOf(plan, provider);
       parts = {
         providerId: provider.id,
         planId: plan.id,
         name: provider.name,
         planName: plan.name,
+        ...(formerName !== undefined && { formerName }),
+        ...(retirement &&
+          retirement.since <= context.today && {
+            retired: { ...retirement, ...movesOf(catalog, plan.id, context.today) },
+          }),
+        ...(retirement?.endsOn !== undefined && { planEnds: retirement.endsOn }),
         ...providerLinks(provider, plan),
         price,
         addOns,
@@ -224,7 +255,8 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
       break;
     }
     case 'bundle': {
-      const bundle = catalog.bundles.find((candidate) => candidate.id === source.bundleId);
+      const bundleId = redirected(moves, 'bundle', source.bundleId);
+      const bundle = catalog.bundles.find((candidate) => candidate.id === bundleId);
       const seller = catalog.providers.find((candidate) => candidate.id === bundle?.soldBy);
       if (!bundle || !seller) return unresolved('bundle-gone');
       const price = forPeriod(bundle.prices, item, priceContext(context, region, seller));
@@ -290,6 +322,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
     price: parts.price,
     addOns: parts.addOns,
     overridePrice,
+    ...(parts.planEnds !== undefined && { planEnds: parts.planEnds }),
   };
   // The item dialog resolves its form's item while a date is still being typed: that has no charges, and no status.
   const dated = hasDates(item.billing);
@@ -312,11 +345,38 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
           parts.price.monthlyEquivalent,
         ),
       providedKeys: keys,
-      effectiveRanks: effectiveRanks(keys, item.rankOverrides, context.profileRanks),
-      status: dated ? itemStatus(item, context.today, next) : { kind: 'inactive', manual: false },
+      effectiveRanks: effectiveRanks(
+        keys,
+        redirectedOverrides(item.rankOverrides, moves),
+        context.profileRanks,
+      ),
+      status: dated
+        ? itemStatus(chargedItem(charged), context.today, next)
+        : { kind: 'inactive', manual: false },
       ...(next && { nextCharge: next }),
     },
   };
+}
+
+/** A retired plan's move that isn't due yet: the plan its subscribers move to, and when. */
+function movesOf(
+  catalog: CatalogData,
+  planId: string,
+  today: IsoDate,
+): { movesTo?: { planId: string; title: string; on: IsoDate } } {
+  const move = catalog.redirects?.find(
+    (redirect) => redirect.kind === 'plan' && redirect.from === planId && redirect.on > today,
+  );
+  const to = move && planOf(catalog, move.to);
+  return move && to
+    ? {
+        movesTo: {
+          planId: to.plan.id,
+          title: planTitle(to.provider.name, to.plan.name),
+          on: move.on,
+        },
+      }
+    : {};
 }
 
 /**

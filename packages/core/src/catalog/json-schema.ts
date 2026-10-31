@@ -6,6 +6,7 @@ import { policyTopicsFileSchema } from './policy-topic';
 import { automationSchema } from '../pipeline/automation';
 import { queueFileSchema } from '../pipeline/queue';
 import { providerSchema } from './provider';
+import { redirectsFileSchema } from './redirects';
 import { resellersFileSchema } from './reseller';
 
 function toJsonSchema(schema: z.ZodType) {
@@ -28,6 +29,7 @@ export function catalogJsonSchemas() {
     'policy-topics': toJsonSchema(policyTopicsFileSchema),
     queue: toJsonSchema(queueFileSchema),
     automation: toJsonSchema(automationSchema),
+    redirects: toJsonSchema(redirectsFileSchema),
   };
 }
 export type CatalogFileKind = keyof ReturnType<typeof catalogJsonSchemas>;

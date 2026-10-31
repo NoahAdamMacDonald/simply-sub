@@ -277,4 +277,70 @@ describe('HomePage', () => {
     await until(() => page().querySelector('ss-budget-totals') !== null);
     expect(page().querySelector('ss-budget-warnings .warning')).toBeNull();
   });
+
+  it('tells of plans renamed, ending and moved beside the price changes, for a month (M10.27)', async () => {
+    saved.set({
+      ...alberta,
+      planNotices: [
+        {
+          kind: 'renamed',
+          planId: 'netflix.standard',
+          title: 'Netflix Basic',
+          name: 'Standard',
+          date: '2026-10-24',
+        },
+        {
+          kind: 'ends',
+          planId: 'mullvad.vpn',
+          title: 'Mullvad VPN',
+          on: '2027-03-01',
+          date: '2026-10-20',
+        },
+        {
+          kind: 'moved',
+          planId: 'netflix.premium',
+          title: 'Netflix Ultra',
+          to: 'Netflix Premium',
+          on: '2026-10-01',
+          date: '2026-09-20',
+        },
+      ],
+      priceChanges: [
+        {
+          planId: 'netflix.standard',
+          title: 'Netflix Standard',
+          currency: 'CAD',
+          interval: 'month',
+          intervalCount: 1,
+          from: 18.99,
+          to: 19.99,
+          date: '2026-10-24',
+        },
+      ],
+    });
+    await plant();
+    await open();
+    const section = page().querySelector('.changes');
+    expect(text(section?.querySelector('h2'))).toBe('Plan and price changes');
+    expect(Array.from(section?.querySelectorAll('li') ?? []).map(text)).toEqual([
+      'Netflix Basic is now called Standard Oct 24',
+      'Mullvad VPN ends for its subscribers on Mar 1, 2027 Oct 20',
+      'Netflix Standard $18.99 → $19.99 a month Oct 24',
+    ]);
+
+    saved.set({
+      ...alberta,
+      planNotices: [
+        {
+          kind: 'renamed',
+          planId: 'netflix.standard',
+          title: 'Netflix Basic',
+          name: 'Standard',
+          date: '2026-10-24',
+        },
+      ],
+    });
+    await harness.fixture.whenStable();
+    expect(text(page().querySelector('.changes h2'))).toBe('Plan changes');
+  });
 });

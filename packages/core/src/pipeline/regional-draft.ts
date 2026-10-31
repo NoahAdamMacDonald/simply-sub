@@ -44,7 +44,13 @@ export interface RegionalContext {
   provider: {
     id: string;
     name: string;
-    plans: readonly { id: string; name: string; prices: readonly Price[] }[];
+    plans: readonly {
+      id: string;
+      name: string;
+      /** Its earlier names (M10.27): a page may still use one, or say what it's called now. */
+      formerNames?: readonly { name: string }[];
+      prices: readonly Price[];
+    }[];
   };
   /** A country, or the EU group when a provider charges every euro country the same. */
   region: string;
@@ -78,13 +84,20 @@ export function regionalPriceText(
   return `${price.amount} ${price.currency} ${period}`;
 }
 
+/** " (formerly Max 20x)" for a plan's earlier names, else nothing. */
+function formerText(formerNames: readonly { name: string }[] | undefined): string {
+  return formerNames && formerNames.length > 0
+    ? ` (formerly ${formerNames.map(({ name }) => name).join(', ')})`
+    : '';
+}
+
 /** The request for a session's model or Workers AI: the rules, the provider's plans, and each page's text. */
 export function regionalPrompt(context: RegionalContext): string {
   const where = regionWords(context.region);
   const currency = regionalCurrency(context.region) ?? 'its currency';
   const plans = context.provider.plans.map(
     (plan) =>
-      `- ${plan.id}: ${plan.name}${plan.prices.length > 0 ? ` (the catalog has ${plan.prices.map((price) => `${regionalPriceText(price)} in ${price.region}`).join('; ')})` : ''}`,
+      `- ${plan.id}: ${plan.name}${formerText(plan.formerNames)}${plan.prices.length > 0 ? ` (the catalog has ${plan.prices.map((price) => `${regionalPriceText(price)} in ${price.region}`).join('; ')})` : ''}`,
   );
   const pages = context.pages.map(
     (page) => `## Page ${page.name} (${page.kind}, ${page.url})\n\n${page.text}`,
@@ -97,6 +110,7 @@ export function regionalPrompt(context: RegionalContext): string {
     '- amount is in the major unit (12.99), currency an ISO 4217 code, interval day, week, month or year, with intervalCount: 3 months is month and 3; "every 30 days" is day and 30.',
     "- page is the page's name; quote is the page's own words that show the price, copied exactly, with the amount in them.",
     '- taxIncluded only when the page says the price includes tax (VAT), with its words.',
+    '- A plan the page calls by a new name is still the plan below with its id: renamed plans keep their ids.',
     '- Leave out a plan the page doesn’t price, and anything else.',
     '',
     'Answer as {"prices": [{"plan": "<plan id>", "amount": 0, "currency": "", "interval": "month", "intervalCount": 1, "page": "", "quote": "", "taxIncluded": {"page": "", "quote": ""}}]}, taxIncluded only when it applies.',

@@ -4,7 +4,9 @@ import { bundleSavings, type BundleSaving } from '../catalog/bundle-deal';
 import { pickPrice, type PickedPrice, type PriceContext } from '../catalog/pick-price';
 import type { Price } from '../catalog/price';
 import type { AddOn, Plan } from '../catalog/provider';
+import { isRetired } from '../catalog/retired';
 import type { CatalogData, SnapshotProvider } from '../catalog/snapshot';
+import type { IsoDate } from '../dates/iso-date';
 
 // What a Search card shows when it's expanded (PROJECT-PLAN P8, M5.2), for the plan it shows: the add-ons sold with
 // it, the bundles that include it with what they save, and for a suite plan (BLUEPRINT §4.4) the plans it includes
@@ -56,13 +58,15 @@ export interface PlanExtras {
 
 /**
  * The expanded card's extras for `provider`'s `plan`, from the catalog file for the user's country. A bundle whose
- * seller or plans the catalog doesn't have is left out, as is an entry of `includes-subscription` it doesn't know.
+ * seller or plans the catalog doesn't have is left out, as is an entry of `includes-subscription` it doesn't know, and
+ * a bundle with a plan no longer sold on `today` (M10.27).
  */
 export function planExtras(
   provider: SnapshotProvider,
   plan: Plan,
   catalog: Pick<CatalogData, 'providers' | 'bundles'>,
   context: ExtrasContext,
+  today: IsoDate,
 ): PlanExtras {
   const providerOf = (id: string) => catalog.providers.find((candidate) => candidate.id === id);
   const planOf = (planId: string) => {
@@ -84,7 +88,12 @@ export function planExtras(
       const seller = providerOf(bundle.soldBy);
       const sold = seller && priced(bundle.prices, seller, context);
       const plans = bundle.includes.flatMap((id) => planOf(id) ?? []);
-      if (!seller || !sold || plans.length < bundle.includes.length) {
+      if (
+        !seller ||
+        !sold ||
+        plans.length < bundle.includes.length ||
+        plans.some((part) => isRetired(part.plan, part.provider, today))
+      ) {
         return [];
       }
       return [

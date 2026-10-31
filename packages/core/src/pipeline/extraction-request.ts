@@ -34,6 +34,9 @@ Plans and prices
   exact words. "+ tax", "excl. VAT" or "taxes calculated at checkout" means leave it out.
 - "autoRenew": false only for prepaid time that never renews by itself.
 - An add-on is bought on top of plans (an extra member, a channel): its name, the plans it goes with, and its prices.
+- A renamed plan is the same plan, never a new one: give the name the page uses now, and when the page says what it was
+  called ("formerly Max 20x", "Max 20x is now Ultra"), say so in "notOnPages" ("Ultra was called Max 20x"), so the
+  catalog keeps the plan's id with its new name.
 
 Features
 - Only the features in the list, by id, name or alias, with a value the list allows. A plan that doesn't list a

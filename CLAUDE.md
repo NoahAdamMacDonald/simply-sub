@@ -46,6 +46,9 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 - Multi-region prices; the user's region is the default; non-native prices are FX-converted and marked with an icon.
   Regions are ISO 3166-1 codes (`GB`, not `UK`), the `EU` group or `GLOBAL`. Whether something is sold in a region
   is `availability` in core: offered, not offered or unknown (BLUEPRINT §4.7).
+- Catalog ids are permanent once published: a renamed plan keeps its id with `formerNames`, one no longer sold is
+  `retired` (never deleted), and an id that must change gets an entry in `data/redirects.yaml`. A CI guard fails a
+  branch where a published id disappears (BLUEPRINT §4.3).
 - Catalog prices are the regular (renewal) price, never a first-term offer, with the billing period the provider
   states ("every 30 days" is `interval: day, intervalCount: 30`).
 - Resellers (BLUEPRINT §4.9): only shops a provider's own site names as official resellers, quoted from that page,

@@ -3,7 +3,7 @@ import { addDays, type IsoDate } from '../dates/iso-date';
 import { salesTaxOn } from '../tax/charge-tax';
 import { buyerTaxPlace, type TaxPlace } from '../tax/sales-tax-rate';
 import { samePeriod, type Period } from '../dates/period';
-import type { PriceOverride } from '../user/list-item';
+import type { ListItem, PriceOverride } from '../user/list-item';
 import type { ResolvedItem } from '../user/resolved';
 import { chargeDates, lastChargeDate, nextChargeDate, type DateRange } from './charge-dates';
 
@@ -43,11 +43,26 @@ export interface Charged {
 /** What one charge costs: an item's (periodCost), or a part of a date's charges in one currency. */
 export type ChargeCost = Pick<Charge, 'amount' | 'tax' | 'currency' | 'converted' | 'charged'>;
 
-/** What an item's charges need: its record, its prices for its period, and its price override's. */
+/**
+ * What an item's charges need: its record, its prices for its period, its price override's, and the day its plan ends
+ * for its subscribers, if it does.
+ */
 export type Chargeable = Pick<
   ResolvedItem,
-  'item' | 'listId' | 'price' | 'addOns' | 'overridePrice'
+  'item' | 'listId' | 'price' | 'addOns' | 'overridePrice' | 'planEnds'
 >;
+
+/**
+ * The item as its charges and status see it: a plan that ends for its subscribers (its `endsOn`, M10.27) ends a
+ * recurring item that day, as an end date would, unless it ends sooner. A limited item's charges stop then too
+ * (itemCharges).
+ */
+export function chargedItem({ item, planEnds }: Pick<Chargeable, 'item' | 'planEnds'>): ListItem {
+  const { billing } = item;
+  if (planEnds === undefined || billing.mode !== 'recurring') return item;
+  if (billing.endDate !== undefined && billing.endDate <= planEnds) return item;
+  return { ...item, billing: { ...billing, endDate: planEnds } };
+}
 
 /** A price in a charge, `count` times. */
 interface Part {
@@ -63,8 +78,9 @@ interface Part {
  * window (Disney+'s monthly extra member on a yearly plan). A charge that comes to 0 (a free plan) isn't one.
  */
 export function itemCharges(resolved: Chargeable, range: DateRange, place: TaxPlace): Charge[] {
-  const { item } = resolved;
+  const item = chargedItem(resolved);
   const { billing } = item;
+  const { planEnds } = resolved;
   const overridden = overrideTest(resolved);
   const separate = resolved.addOns.filter((addOn) => !samePeriod(addOn.price, billing));
   const byDate = new Map<IsoDate, Part[]>();
@@ -91,6 +107,7 @@ export function itemCharges(resolved: Chargeable, range: DateRange, place: TaxPl
     .at(-1);
   const charges: Charge[] = [];
   for (const date of [...byDate.keys()].sort()) {
+    if (planEnds !== undefined && date >= planEnds) continue;
     for (const cost of costsOf(byDate.get(date) ?? [], taxPlace)) {
       charges.push({
         date,
@@ -142,7 +159,7 @@ export function nextCharge(
   today: IsoDate,
   place: TaxPlace,
 ): Charge | undefined {
-  const { billing } = resolved.item;
+  const { billing } = chargedItem(resolved);
   const prices = [resolved.price, ...resolved.addOns.map((addOn) => addOn.price)];
   if (resolved.overridePrice === undefined && prices.every((price) => price.amount === 0)) {
     return undefined;

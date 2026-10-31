@@ -5,8 +5,11 @@
 
     <div class="title">
       <h3 class="name" [id]="id + '-name'">{{ names().name }}</h3>
+      <!-- A renamed plan's old name, for six months (M10.27): "Ultra (formerly Max 20x)". -->
       @if (names().planName; as planName) {
-        <p class="plan-name">{{ planName }}</p>
+        <p class="plan-name">{{ formerly() ? planName + ' ' + formerly() : planName }}</p>
+      } @else if (formerly(); as formerly) {
+        <p class="plan-name">{{ formerly }}</p>
       }
       <!-- Its add-ons, each with what it adds (M6.12): the price tag on the right is the plan's. -->
       @if (addOns().length > 0) {
@@ -25,6 +28,12 @@
         [nextCharge]="resolved().nextCharge?.date"
         [replacement]="replacement()"
       />
+      @if (retiredText(); as text) {
+        <p class="retired">
+          <mat-icon aria-hidden="true">info</mat-icon>
+          <span>{{ text }}</span>
+        </p>
+      }
       @if (tags().length > 0) {
         <ul class="tags" aria-label="Tags">
           @for (tag of tags(); track tag.id) {

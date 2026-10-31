@@ -2,6 +2,7 @@ import type { PickedPrice } from '../catalog/pick-price';
 import type { IsoDate } from '../dates/iso-date';
 import type { RankKey } from '../ranking/rank-keys';
 import type { Rank } from '../user/rank';
+import type { Replacement } from './replacements';
 
 // What the optimizer suggests (BLUEPRINT §10, PROJECT-PLAN P14): ways to pay less over the next 12 months, each
 // sorted by what it gives up. optimize.ts finds them.
@@ -180,6 +181,8 @@ export interface OptimizerResult {
   next12: number;
   /** How the plans were found: every combination (with pruning), or greedy search where there were too many. */
   search: 'exhaustive' | 'greedy';
+  /** The items whose plans end for their subscribers within the next 12 months, with plans to move to (M10.27). */
+  replacements: Replacement[];
 }
 
 /** What List view's View optimizations shows (PROJECT-PLAN P4). */

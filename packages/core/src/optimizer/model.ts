@@ -2,6 +2,7 @@ import type { FxRates } from '../catalog/convert';
 import { pickPrice, type PickedPrice, type PriceContext } from '../catalog/pick-price';
 import { inclusionsOf, planOf } from '../catalog/plan-lookup';
 import type { Plan } from '../catalog/provider';
+import { isRetired } from '../catalog/retired';
 import type { CatalogData, SnapshotProvider } from '../catalog/snapshot';
 import type { IsoDate } from '../dates/iso-date';
 import { samePeriod, type Period } from '../dates/period';
@@ -324,6 +325,8 @@ class ModelBuilder {
       const currentKeys = item.parts[0].keys;
       for (const plan of provider.plans) {
         if (item.essential && plan.id !== current.id) continue;
+        // A plan no longer sold is never offered, its own other billing period included (M10.27).
+        if (isRetired(plan, provider, this.context.today)) continue;
         const keys = this.keysOf(plan, catalog);
         if (!includesAll(keys, item.critical)) continue;
         for (const price of this.periodsFor(plan.prices, provider, item)) {
@@ -459,7 +462,8 @@ class ModelBuilder {
       if (source.kind !== 'catalog' || !catalog || host.full.foreign) continue;
       if (billing.mode !== 'recurring' || billing.endDate !== undefined) continue;
       const found = planOf(catalog, source.planId);
-      if (!found) continue;
+      // A host on a plan no longer sold can't take new members (M10.27).
+      if (!found || isRetired(found.plan, found.provider, this.context.today)) continue;
       const { provider, plan } = found;
       const used = (source.addOns ?? []).reduce((total, addOn) => total + addOn.quantity, 0);
       const room = Math.min(maxGroupSize - 1, (plan.addOnLimit ?? Infinity) - used);
@@ -534,7 +538,15 @@ class ModelBuilder {
       for (const bundle of catalog.bundles) {
         const seller = catalog.providers.find(({ id }) => id === bundle.soldBy);
         const plans = bundle.includes.map((planId) => planOf(catalog, planId));
-        if (!seller || plans.some((found) => found === undefined)) continue;
+        if (
+          !seller ||
+          plans.some(
+            (found) =>
+              found === undefined || isRetired(found.plan, found.provider, this.context.today),
+          )
+        ) {
+          continue;
+        }
         const included = plans.filter((found) => found !== undefined);
         const keys = included.map(({ plan }) => this.keysOf(plan, catalog));
         const choices = included.map(({ provider, plan }, index) =>
@@ -590,7 +602,7 @@ class ModelBuilder {
       for (const provider of catalog.providers) {
         for (const plan of provider.plans) {
           const includes = inclusionsOf(plan, catalog);
-          if (includes.size === 0) continue;
+          if (includes.size === 0 || isRetired(plan, provider, this.context.today)) continue;
           const users = plan.features['account.users'];
           const copies = typeof users === 'number' ? users : 1;
           const keys = this.keysOf(plan, catalog);

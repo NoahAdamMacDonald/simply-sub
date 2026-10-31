@@ -2,6 +2,7 @@ import * as z from 'zod';
 import { budgetWarningKeyPattern, maxDismissedBudgetWarnings } from '../budget/budget-dismissals';
 import { currencySchema } from '../catalog/formats';
 import { appLockSchema } from './app-lock';
+import { maxPlanNotices, planNoticeSchema } from './plan-notices';
 import { maxPriceChanges, priceChangeSchema } from './price-changes';
 import { countrySchema, recordIdSchema, timestampSchema } from './record';
 
@@ -54,6 +55,8 @@ export const settingsSchema = z
     searchAllResellers: z.literal(true).optional(),
     /** What catalog updates changed in the lists' prices this past month, newest first, for Home (P2, M7.10). */
     priceChanges: z.array(priceChangeSchema).min(1).max(maxPriceChanges).optional(),
+    /** What catalog updates changed in the lists' plans this past month, newest first, for Home (P2, M10.27). */
+    planNotices: z.array(planNoticeSchema).min(1).max(maxPlanNotices).optional(),
     /**
      * The lists the Calendar leaves out, as last chosen on this device (P10, §3.5, M7.4), so a list made since shows.
      * Left out, it shows them all.

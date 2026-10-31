@@ -20,6 +20,7 @@ import {
   type SuiteContents,
 } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
+import { ClockService } from '../../core/clock/clock-service';
 import { FxStore } from '../../core/fx/fx-store';
 import { SettingsStore } from '../../core/settings/settings-store';
 import type { AddToListMenu } from '../add-to-list/add-to-list-menu';
@@ -64,6 +65,7 @@ export class PlanDetails {
   private readonly catalog = inject(CatalogStore);
   private readonly settings = inject(SettingsStore);
   private readonly fx = inject(FxStore);
+  private readonly today = inject(ClockService).today;
   private readonly injector = inject(Injector);
 
   readonly provider = input.required<SnapshotProvider>();
@@ -92,11 +94,13 @@ export class PlanDetails {
     const data = this.catalog.catalog();
     if (!saved || !data) return undefined;
     const fx = this.fx.rates();
-    return planExtras(this.provider(), this.plan(), data, {
-      region: saved.country,
-      currency: saved.currency,
-      ...(fx && { fx }),
-    });
+    return planExtras(
+      this.provider(),
+      this.plan(),
+      data,
+      { region: saved.country, currency: saved.currency, ...(fx && { fx }) },
+      this.today(),
+    );
   });
   /** Its terms and policies for this plan, as they apply where the user lives (core's planPolicies). */
   protected readonly policies = computed(() => {

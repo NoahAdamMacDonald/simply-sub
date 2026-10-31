@@ -231,7 +231,12 @@ async function regional(provider: string, where: string): Promise<void> {
     provider: {
       id: provider,
       name: own.name,
-      plans: own.plans.map((plan) => ({ id: plan.id, name: plan.name, prices: plan.prices })),
+      plans: own.plans.map((plan) => ({
+        id: plan.id,
+        name: plan.name,
+        ...(plan.formerNames && { formerNames: plan.formerNames }),
+        prices: plan.prices,
+      })),
     },
     region: where,
     pages: pages.filter((page) => page.kind === 'pricing'),

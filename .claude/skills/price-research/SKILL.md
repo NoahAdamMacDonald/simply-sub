@@ -51,6 +51,13 @@ API contract's prices are illustrative and never a source. This skill is how to 
   provider a `cancelUrl`: its cancel page, or its help article on cancelling (Disney+'s help centre has one for
   every country), or for a prepaid service with nothing to cancel, its page on getting unused time back
   (Mullvad's refunds guide). Say in a comment where it came from.
+- **Ids are permanent once published** (M10.27, BLUEPRINT §4.3). A plan the provider renamed is the same plan: keep
+  its `id`, change its `name`, add `formerNames: [{ name: <old name>, until: <the last day it had it> }]`, and put a
+  YAML comment with the old name beside the id (`# was "Max 20x" until 2026-10-29`). Never add a plan for the new name
+  and delete the old one: every user's item on it would drop out of their totals. A plan no longer sold gets
+  `retired: <date>` with its last prices kept, and `endsOn` when it ends for its subscribers too; one whose
+  subscribers move to another plan gets a dated entry in `data/redirects.yaml`. Ask the user before retiring or
+  redirecting anything. `npm run data:validate` fails when a published id disappears.
 - **Every interval and every price list the provider sells.** That means monthly and yearly (other periods only when the user
   asks), every region in scope (ask: usually CA and US, or GLOBAL), and every currency the buyer can pick.
 - **Read the features from the same pages:** quality, streams, downloads, devices, users, storage and limits. Map them

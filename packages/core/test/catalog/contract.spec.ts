@@ -70,8 +70,8 @@ const providers: [name: string, provider: unknown][] = [
     `GET /catalog ${provider.id}`,
     provider,
   ]),
-  ['GET /providers/netflix', providerExamples[0].response.body.data],
-  ['GET /providers/proton', providerExamples[1].response.body.data],
+  ['GET /providers/netflix', (providerExamples[0].response.body as { data: unknown }).data],
+  ['GET /providers/proton', (providerExamples[1].response.body as { data: unknown }).data],
 ];
 
 describe('the contract examples, as source files', () => {
@@ -273,8 +273,8 @@ describe('every example, against the response schemas', () => {
     "%s is its endpoint's success body",
     (_name, { endpoint, status, body }) => {
       const schema = successBodySchemas[endpoint as keyof typeof successBodySchemas];
-      // Bytes (an icon, a sealed copy) aren't shown in the examples.
-      if (status === 304 || schema === pngBody || schema === syncBody) {
+      // Bytes (an icon, a sealed copy) aren't shown in the examples, and a redirect has none (M10.27).
+      if (status === 304 || status === 301 || schema === pngBody || schema === syncBody) {
         expect(body).toBeNull();
       } else if (schema === calendarBody) {
         expect(body).toMatch(/^BEGIN:VCALENDAR\r\n[^]*\r\nEND:VCALENDAR\r\n$/);

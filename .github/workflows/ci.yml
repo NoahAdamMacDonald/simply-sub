@@ -30,6 +30,8 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+          # Every branch's history, so data:validate's ids guard can read main's data/ at the merge base (M10.27).
+          fetch-depth: 0
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
@@ -47,7 +49,8 @@ jobs:
       - run: npm run format:check
       - name: data/schema matches the Zod schemas
         run: npm run data:schema -- --check
-      # Prints each problem as an annotation on the PR (BLUEPRINT §6.2).
+      # Prints each problem as an annotation on the PR (BLUEPRINT §6.2), and fails when an id main publishes is gone
+      # without being retired or redirected (the ids guard, BLUEPRINT §4.3).
       - run: npm run data:validate
       - run: npm test
       - run: npm run build

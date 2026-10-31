@@ -161,10 +161,17 @@
         </ul>
       </section>
 
-      @if (changes().length > 0) {
+      @if (changes().length > 0 || notices().length > 0) {
         <section class="changes card" aria-labelledby="changes-heading">
-          <h2 id="changes-heading">Price changes</h2>
+          <h2 id="changes-heading">{{ changesHeading() }}</h2>
           <ul>
+            <!-- A plan renamed (M10.27), before the prices: it names the plan the prices below may call by its new name. -->
+            @for (notice of notices(); track notice.key) {
+              <li>
+                <span class="name">{{ notice.text }} </span>
+                <span class="date">{{ notice.date }}</span>
+              </li>
+            }
             @for (change of changes(); track change.key) {
               <li>
                 <span class="name">{{ change.title }} </span>

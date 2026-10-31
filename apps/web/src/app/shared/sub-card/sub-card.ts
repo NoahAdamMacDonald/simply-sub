@@ -11,6 +11,7 @@ import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import {
   countedRanks,
+  formerlyText,
   planTitle,
   type AddRequest,
   type CatalogResult,
@@ -22,6 +23,7 @@ import {
   type SubscriptionList,
 } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
+import { ClockService } from '../../core/clock/clock-service';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { AddToListMenu } from '../add-to-list/add-to-list-menu';
 import { countryName } from '../country-name';
@@ -65,6 +67,7 @@ let nextId = 0;
 export class SubCard {
   private readonly settings = inject(SettingsStore);
   private readonly catalog = inject(CatalogStore);
+  private readonly today = inject(ClockService).today;
   private readonly expandButton = viewChild<string, ElementRef<HTMLElement>>('expandButton', {
     read: ElementRef,
   });
@@ -105,6 +108,13 @@ export class SubCard {
   protected readonly plan = computed(() =>
     this.plans().find(({ plan }) => plan.id === this.selectedId()),
   );
+  /** The plan's name, with a renamed plan's old one for six months (M10.27): "Ultra (formerly Max 20x)". */
+  protected readonly planLine = computed(() => {
+    const plan = this.plan()?.plan;
+    if (!plan) return '';
+    const formerly = formerlyText(plan, this.today());
+    return formerly === undefined ? plan.name : `${plan.name} ${formerly}`;
+  });
   /** How many of the plan's features the user ranks each way, or nothing when they rank none of them. */
   protected readonly rankCounts = computed(() => {
     const counts = this.plan()?.rankCounts;

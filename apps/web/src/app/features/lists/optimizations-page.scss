@@ -90,6 +90,45 @@
   list-style: none;
 }
 
+// A plan that ends (M10.27): a card with the plans to move to, each a link to Search.
+.ending {
+  padding: 14px 16px 12px 20px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+  box-shadow: inset 4px 0 0 var(--ss-divider);
+
+  p {
+    margin: 0 0 8px;
+  }
+
+  .plans {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 4px 12px;
+    }
+
+    // As the cards' text links (Plan ↗, Cancel ↗).
+    a {
+      border-radius: 4px;
+      color: var(--ss-accent-text);
+
+      &:focus-visible {
+        outline: 2px solid var(--ss-accent-text);
+        outline-offset: 2px;
+      }
+    }
+  }
+}
+
 .show-dismissed {
   display: block;
   margin: 0 0 24px -8px;

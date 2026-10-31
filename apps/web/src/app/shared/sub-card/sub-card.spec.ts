@@ -131,6 +131,25 @@ describe('SubCard', () => {
     ]);
   });
 
+  it('says a renamed plan’s old name for six months (M10.27)', async () => {
+    const result = resultFor('netflix');
+    if (result.kind !== 'priced') throw new Error('Netflix is priced');
+    const [first, ...rest] = result.plans;
+    const renamed = (until: string): CatalogResult => ({
+      ...result,
+      plans: [
+        { ...first, plan: { ...first.plan, formerNames: [{ name: 'Basic', until }] } },
+        ...rest,
+      ],
+    });
+    await show(renamed('2026-10-20'));
+    expect(shown('.plan-name')).toBe('Standard with ads (formerly Basic)');
+    // Its chip has the name it has now.
+    expect(shown('.plans label')).toBe('Standard with ads');
+    await show(renamed('2026-04-01'));
+    expect(shown('.plan-name')).toBe('Standard with ads');
+  });
+
   describe('the Add to list menu', () => {
     /** Opens the menu of the card's price at `index`, among its triggers. */
     async function openMenu(index = 0): Promise<MatMenuHarness> {

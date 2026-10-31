@@ -286,6 +286,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.24 | Merge tags of one name (added 2026-10-30, the feedback after M10, the owner's choice): a backup's Merge and sync join tags by id, so two devices' Family tags meet as two; Settings' Custom tags says of the later one "Another tag is called Family." with Merge into it, which asks first, then gives its subscriptions and drafts the first tag and deletes it in one transaction (core's `namesakes` and `withTagMerged`, `TagsRepository.mergeInto`). Nothing merges by itself, so no device's edit is overwritten (P13; BLUEPRINT §14) | Two tags called Family show the note on the later one; Merge into it leaves one Family on every subscription that had either |
 | M10.25 | Live calendars that go on, and notice when they're gone (added 2026-10-30, the feedback after M10): a monthly plan billed on the 29th or 30th, which no monthly rule Proton takes can describe, is a yearly series for each month, February on its last day, so it repeats with no end rather than stopping after 12 months; a live calendar keeps a year of past charges that are events of their own; the app checks its links once a start and when the Live calendar dialog opens, and marks a set gone on the server broken, offering new links (P10; BLUEPRINT §11.3, §14) | Xbox Game Pass on the 29th shows every month in Proton past October 2027, February on its last day; links deleted on the server say so in the dialog without waiting for a change |
 | M10.26 | Sync that waits (added 2026-10-30, while planning M11): no checks for other devices' changes while this device is the chain's only one; with others, a check 10 s after activity (a change here or pulled in, the tab shown, focus, a click or a key), the wait doubling to 5 minutes while nothing happens; only synced records and the shared settings start a sync, never the theme, the Calendar's shown lists, Home's seen price changes or the lock (P13; BLUEPRINT §7.1, §11.4) | An idle shown tab checks about 15 times an hour, a lone device never; an edit shows on another device in use within 15 s; a theme change sends no request |
+| M10.27 | Ids that last (added 2026-10-30, the owner's choice): catalog ids stay readable slugs and are permanent once published. A renamed plan keeps its id with `formerNames`: Search matches them, its cards say "Ultra (formerly Max 20x)" for six months, and Home tells those who have it, once. A plan or provider no longer sold is `retired`, never deleted: never offered, still counted, with an optional `endsOn` (Home warns ahead, Optimizations lists replacements that keep its Needed keys) or a dated move in `data/redirects.yaml`. That file maps an id that had to change to its new one: the app follows it and rewrites users' records once, and the API answers the old id with a redirect. A CI guard fails a branch where a published id disappears (P2, P4, P8, P14; BLUEPRINT §4.3, §6.2, §14) | Deleting a plan fails `data:validate` and `ci`, naming it and the three fixes; Claude's Max and Ultra keep their ids and users' items; an item on a redirected plan resolves, and its record is rewritten once |
 
 #### M10 specs
 
@@ -844,6 +845,86 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   lock, one for the budget; a change after locking and unlocking. `check-m10-offline-sync.cjs`: B, idle on its Lists
   page, checked twice in 30 s; in use, it showed A's edit after 10.1 s and 10.2 s (the two runs).
 
+**M10.27 — Ids that last** (BLUEPRINT §4.3)
+- **Why:** lists, ranks and live calendars point at catalog ids: provider, plan, add-on, bundle, feature (rank keys)
+  and, from M11.6, perk ids. A new name on the same id is harmless, but an id that changes or a plan that's deleted
+  turns every item on it into `plan-gone`, which silently drops out of the totals. The real risk is a rebrand: the
+  pipeline, the bot or a research session sees the new name ("Ultra") and drafts a new plan while the old one goes.
+  Decided with the owner on 2026-10-30: ids stay readable slugs (no UUIDs), and a CI guard keeps them.
+- **Permanent once published:** a renamed plan or provider keeps its id, with a YAML comment giving the old name. The
+  price-research and catalog-review skills and core's `extractionRules` say so: a renamed plan is a name change on the
+  existing id, never a new plan.
+- **`formerNames: [{ name, until }]`** on a plan (a provider has `aliases`), `until` being the last day it had that
+  name. Search matches them always. Search's card and the item card show "Ultra (formerly Max 20x)" until six months
+  after `until`. A catalog update that adds one tells the users who have the plan in a list, once, in Home's section
+  beside its price changes: "Claude Max 20x is now called Ultra".
+- **Retired, never deleted:** `retired: <date>` on a plan or a provider (its plans with it) from the day it's no
+  longer sold, with its last prices kept.
+  - From that day Search, the bundle offers on a plan's card and the optimizer never offer it, and nothing warns that
+    its prices are old.
+  - Items on it still resolve and count. The item card says "Anthropic no longer sells Max to new subscribers".
+  - `endsOn` (on the plan or the provider): it ends for current subscribers too. The item counts until then, as if
+    its end date were that day; Home says so once, when the update brings it, and the item card says when.
+    Optimizations lists, above its sections, the plans sold where the item was bought that keep every key it ranks
+    Needed or above, cheapest first.
+  - A move (a dated entry in `data/redirects.yaml` from the retired plan): the item moves to the other plan on that
+    day, when the app rewrites it (below), and Home says so. A plan has a move or `endsOn`, not both.
+- **`data/redirects.yaml`:** `{ kind, from, to, on }` entries, `kind` one of `provider`, `plan`, `add-on`, `bundle`,
+  `feature` (rank keys: `streaming.ad-free` → `ad-free`) and `perk` (`perk:<provider>/<perk>` → a rank key, M11.6).
+  - Validated: `to` exists (and isn't retired), no `to` is another entry's `from` (so no chains or cycles), and a
+    `from` still in the catalog is a retired plan or provider, whose `on` is its move. A perk's target is checked once
+    perks have ids (M11.6).
+  - Published in the catalog (`redirects` in `catalog.json` and every region file, left out when empty) and in
+    `ids.json`.
+  - Resolution follows a redirect before giving up: `plan-gone` (and `bundle-gone`, `add-on-gone`) remain only for
+    what's neither in the catalog nor redirected.
+  - The app rewrites stored records once the catalog with the redirect is in and the date has come: items' plans,
+    bundles, add-ons and rank overrides, profile ranks (a new key, the old one soft-deleted), and drafts. It's a
+    Dexie-side migration through the repositories (`StorageEngine.transaction`, one transaction), checked on every
+    catalog version and day, which writes only when a record still points at an old id, so it runs once in effect.
+  - The API answers `GET /providers/:id` and `GET /plans/:id` for an old id with `301` to the new one's URL, the
+    query kept, read from `ids.json` (no D1 rows).
+- **The guard:** `npm run data:ids` (`scripts/check-ids.ts`) compares the branch's published ids (providers, plans,
+  add-ons, bundles, rank keys) with main's, built from main's `data/` at the merge base. An id that disappears without
+  `retired` or a redirect fails, naming it and the three fixes: put it back with its new name (`formerNames`), retire
+  it, or redirect it. `data:validate` runs it too and prints its result, and `ci` fetches main for it.
+- **Claude, the first use:** claude.com/pricing for Canada and the US (the price-research skill). A rename alone keeps
+  `claude.max-5x` named Max and `claude.max-20x` named Ultra, with `formerNames`; anything else is recorded as the page
+  says, and the owner decides before anything is retired or redirected.
+- **Acceptance**
+  - [x] Core: resolution through redirects (a plan, a bundle, an add-on), a retired plan that still counts, one with
+        `endsOn` that stops counting then, a dated move, `formerNames` matched by Search and shown for six months
+  - [x] The migration spec: items, ranks, drafts and profile ranks rewritten in one transaction, once; a move waiting
+        for its date
+  - [x] The guard: an id removed fails with the three fixes; retired or redirected passes
+  - [x] The item card, Search's card and Home's notices in both themes at 360 and 1280 px, with axe
+- **As built:**
+  - Core: `formerNames` and `retired`/`endsOn` in `provider.ts`; `former-names.ts` (`shownFormerName`, `formerlyText`,
+    `planNames`), `retired.ts` (`retirementOf`, `isRetired`), `redirects.ts` (the schema, `dueRedirects`,
+    `dueRedirectMap`, kept per catalog and day since resolution asks once an item, `redirectedRankKey`),
+    `validate-redirects.ts`, `published-ids.ts` (the guard's lenient reading), `user/plan-notices.ts` (renamed, ends,
+    moved, kept like the price changes) and `user/redirect-records.ts` (`redirectedRecords`, `movedNotices`).
+  - `ResolvedItem` gains `formerName`, `retired` (with a move not due yet, `movesTo`) and `planEnds`; charges and the
+    status read the item through `chargedItem`, which ends a recurring item on `planEnds` without writing it to the
+    record. The optimizer's result gains `replacements`: up to three plans per item ending in the next 12 months,
+    sold where it was bought, in one of its categories, with every key it ranks Needed or above (the same provider for
+    a Critical one). Retired plans are skipped as switches, other periods, bundles' plans, suites and extra members'
+    hosts, and the nightly check leaves their prices out.
+  - The app: `CatalogStore` runs `followRedirects` (`core/storage/redirected-records.ts`, a chunk of its own) when the
+    catalog has redirects, the items are readable, and on each new day; one `StorageEngine.transaction` over items,
+    rankings, drafts and settings. The cards build the plan's line in the component ("Ultra (formerly Max 20x)"), and
+    the old name takes the plan name's style: a rule of its own put Search's card's styles over their 4 kB budget.
+    Optimizations' Plans that end links each plan to Search. The initial bundle went from 499.42 kB to 499.73 kB.
+  - The API's 301 is `movedTo` in `http.ts`, cached like the catalog's answers; the contract has an example for each
+    route, which its test serves with a redirect in `ids.json`.
+  - The guard reads main through git, not production's `ids.json` (BLUEPRINT §14), so CI's checkout fetches every
+    branch's history. 177 ids on main today.
+  - Claude (2026-10-30): the Ultra article says "The Max 20x plan is now called the Ultra plan. Existing Max 20x
+    subscribers move to Ultra automatically, with no price change." Prices unchanged; Ultra's limits are new (10x Pro's
+    weekly usage, no 5-hour limit for verified accounts, where Max 20x had 20 times Pro's), and both plans add monthly
+    API credits: recorded as perks, nothing retired or redirected.
+  - `check-m10-ids.cjs` (browser-check skill): 61 checks in both themes at both widths.
+
 ### M11 — Catalog expansion (Phase 6)
 Planned on 2026-10-30 with the owner, from `docs/catalog-expansion-guide.md` (the owner's research list, the rules
 drafted for it, and the policy rubrics) and the decisions recorded in BLUEPRINT §14. The catalog grows from 13
@@ -862,9 +943,9 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
 | M11.1 | Policy topics v2 (BLUEPRINT §4.10): the guide's §1.4 topics and rubrics in `data/policy-topics.yaml` (privacy, billing, legal, a new security group, service and finance topics; `billing.cancel-refunds` split into `billing.cancellation` and `billing.refunds`; `service.vpn-logging` renamed `service.activity-logging`, for VPN, DNS, search and browsers); each topic's `silent` rule; a rating's `status` (not stated, not applicable); `other.notable` with a `title`, up to three; the grading procedure (§1.3) and routing table (§1.5) in the policy-research skill and core's `extractionRules` together; the card's grey Not stated line; shared policy documents (`data/policies/<set>.yaml`: a company's policy rated once, which each provider it covers names with `policies: { shared: [<set>] }` and adds its own ratings to; for a topic both rate, its own wins only when its document says it applies instead, else the worst clause); a check that a topic and a feature on the same fact agree (`service.activity-logging` Great only with `vpn.independent-audits` including no-logs) | Every topic has five rungs and a silent rule; the 13 providers' ratings move to the split and renamed topics and still validate; a card shows Not stated in grey; Disney+, Hulu and ESPN share one rated privacy policy; the skill and `extractionRules` state the same procedure |
 | M11.2 | Outside ratings and owners (the owner's choice): a provider's `ratings` (rater, subject, label, date, link) from raters in `data/raters.yaml`, each with its terms of reuse checked; at least two raters for a news provider's bias and reliability, lab results for antivirus; `owner`, quoted from the provider's own about page; both on the card after Terms and policies | A news provider shows two raters' labels with links and dates, and its owner; validation refuses a rater not in the registry and a news bias rating from one rater |
 | M11.3 | Service categories (the guide's §5): finance, social, browsers, search, email, passwords, security, dns, telecom, shopping, developer, file-sharing, calendar, maps, creative, cloud, delivery and jobs in `categories.yaml`, spend categories where card rewards differ, a Wikidata class for each in `wikidataClasses`, and the rule that a plan lists every category it fits | `data:queue` adds services in the new categories; Proton Unlimited is found under AI and email |
-| M11.4 | Features that compare (BLUEPRINT §4.2 rules 7–10): `requiredIn` on a feature (an error when a plan in that category doesn't state it, `false` and `0` included); a warning when two of a provider's plans at different prices, for the same region and period, have the same features and perks; the cross-category features (`platforms`, `software.open-source`, `account.sign-in`, `languages.audio`, `languages.subtitles`, `support.channels`); provider-wide features (a provider's own `features`, which every plan has unless it states its own value), stored once per provider in D1 (`provider_features`) rather than on each plan; `streaming.ad-free` renamed `ad-free`, with a Dexie upgrade of users' ranks and old links' `feature=streaming.ad-free` read as `ad-free` | `video.quality` is required in streaming; Claude's and Xbox Game Pass's plans warn until M11.9; a user's Ad free rank survives the rename; a provider's `platforms` set once writes its rows once |
+| M11.4 | Features that compare (BLUEPRINT §4.2 rules 7–10): `requiredIn` on a feature (an error when a plan in that category doesn't state it, `false` and `0` included); a warning when two of a provider's plans at different prices, for the same region and period, have the same features and perks; the cross-category features (`platforms`, `software.open-source`, `account.sign-in`, `languages.audio`, `languages.subtitles`, `support.channels`); provider-wide features (a provider's own `features`, which every plan has unless it states its own value), stored once per provider in D1 (`provider_features`) rather than on each plan; `streaming.ad-free` renamed `ad-free` through a `data/redirects.yaml` entry (M10.27), which rewrites users' ranks once, with old links' `feature=streaming.ad-free` read as `ad-free` | `video.quality` is required in streaming; Claude's and Xbox Game Pass's plans warn until M11.9; a user's Ad free rank survives the rename; a provider's `platforms` set once writes its rows once |
 | M11.5 | Provider facts (the guide's §3.1): `paymentMethods` (cards, PayPal, app stores, gift cards, bank transfer, cash, crypto) and `currencies` (every currency it takes), each quoted; `renewalAnchor` (the same date, every 30 days, the first of the month, the end of the month), a new item's billing day by default; `sourceRepo` for the open-source link; all on the card, and read by price-research and extraction | Mullvad shows cash and crypto with their quotes; a new item of a plan that renews on the 1st is billed on the 1st |
-| M11.6 | Ranked perks (BLUEPRINT §4.2, the owner's choice): perks with ids at the provider, plans listing theirs; `perk:<provider>/<perk>` rank keys, ranked in the item dialog only and shared with the provider's other plans in the list (M6.14); counted in rank counts, feature summaries, Search's ranks and the optimizer (§10.2, §10.4); `movedTo` on a perk that became a feature, with a Dexie upgrade moving its ranks | A perk ranked Needed on a provider's top plan stops the optimizer suggesting a plan without it; the rank is on that provider's other plans in the list; a perk moved to a feature keeps users' ranks |
+| M11.6 | Ranked perks (BLUEPRINT §4.2, the owner's choice): perks with ids at the provider, plans listing theirs; `perk:<provider>/<perk>` rank keys, ranked in the item dialog only and shared with the provider's other plans in the list (M6.14); counted in rank counts, feature summaries, Search's ranks and the optimizer (§10.2, §10.4); a perk that became a feature redirected to its rank key in `data/redirects.yaml` (M10.27), which moves its ranks | A perk ranked Needed on a provider's top plan stops the optimizer suggesting a plan without it; the rank is on that provider's other plans in the list; a perk moved to a feature keeps users' ranks |
 | M11.7 | Regional coverage (the guide's §3.2): `npm run data:coverage` (plans priced in some of a provider's regions but not others; paid plans with no price where it's sold); the region checklist in the price-research skill, each step's result in the provider file's header; a Mullvad Browser reader (`read-page-mullvad.cjs`, WebDriver BiDi, a throwaway profile) as the third browser; the browser that read each page recorded | The report flags a fixture like Claude before M10.17; the reader saves a page's text as `read-page.cjs` does |
 | M11.8 | Limits before growth (BLUEPRINT §5.3, §7.1): Terms and policies in a file per provider (`/data/policies/<id>.json`), out of the region files and D1's `json` column, loaded when a card opens them; the seed writing only the rows that changed, counting its writes first and stopping at the catalog's daily share, whole providers at a time, the rest left for the next deploy or the bot's night; a change of the tables' shape filled over days beside them, then switched; CI printing a pull request's estimated writes; search's FTS5 table, a search column without the long text, and price sorting and pages in SQL (a `seedFormat` bump); `data:build` failing at 20 MiB; the bot checking a rotating slice each night; the API's and the app's tests on a fixed catalog of their own, never `data/` | A Proton price change writes under 10 rows; 400 generated providers seed over several days with no failed deploy, and /health says how many wait; a text search reads under 50 rows; the region files hold no policy quotes; a research batch changes no test's results |
 | M11.9 | The existing 13 under the new rules: every topic regraded, with the calibration table in the pull request; each category's required features and the cross-category ones (Claude, Xbox Game Pass, Bitdefender and Proton first, through feature-discovery for AI, gaming and security); perks given ids; provider facts; the coverage report and region checklist for every region; reviewed by a second model (the guide's §7.3) | No price-differences warning and no coverage gap left without a reason in its header; every rating follows the procedure |
@@ -909,7 +990,8 @@ plans:
   in the list. Essential and Critical apply to them.
 - **The optimizer** treats them as any rank key (BLUEPRINT §10.2, §10.4): a Needed perk must stay provided in every
   month it was, a lost Wanted perk makes a suggestion yellow, and an unranked perk is Not ranked.
-- **`movedTo`:** a perk that became a feature names its rank key; a Dexie upgrade rewrites users' overrides once.
+- **A perk that became a feature:** a `perk` entry in `data/redirects.yaml` (M10.27) from its key to the feature's
+  rank key; the app rewrites users' overrides once, and validation checks the perk's id from then on.
 - **Acceptance**
   - [ ] The optimizer fixture: with the perk Needed, no suggestion drops it; unranked, the cheaper plan is suggested
   - [ ] Ranking a perk in one plan's dialog ranks it on its siblings in the list, and not with "Ranks for this plan
