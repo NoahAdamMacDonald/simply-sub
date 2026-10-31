@@ -21,7 +21,8 @@
   cdkConnectedOverlay
   [cdkConnectedOverlayOrigin]="origin"
   [cdkConnectedOverlayOpen]="open()"
-  [cdkConnectedOverlayPositions]="positions"
+  [cdkConnectedOverlayPositions]="positions()"
+  [cdkConnectedOverlayViewportMargin]="8"
   (overlayOutsideClick)="outside($event)"
   (detach)="close(false)"
 >

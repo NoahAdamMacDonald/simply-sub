@@ -595,7 +595,8 @@ $500 monthly budget (base URL ending in `/`): Mullvad on a Travel card (2.5% FX 
 none. Home's this-month bar by hover at 1280 px and a tap at 360 (a touch context) lists both, Netflix with its tax and
 Mullvad with its fee and rate, under a heading of the bar's total; hovered it goes with the pointer and a click keeps it;
 its button by Tab and Enter opens it with focus in it, and Escape puts focus back. The Calendar's month, a Lists card and
-Payment's card each open theirs. With axe on each open breakdown, screenshots and no horizontal scroll.
+Payment's card and List view (its bar by the window's right edge at 1280 px) each open theirs, every one wholly
+inside the window. With axe on each open breakdown, screenshots and no horizontal scroll.
 
 `check-m10-category.cjs` (M10.22, the feedback after M10, part 2) checks Search's Category on `ng serve` for a Canadian
 in Alberta (base URL ending in `/`), in both themes at 1280 px (the filter panel) and 360 px (the drawer): empty while
