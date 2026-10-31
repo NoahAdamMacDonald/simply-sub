@@ -80,7 +80,7 @@ describe('CostBreakdown', () => {
   it('shows each subscription with its price, tax, FX fee and rate, and the sums, on hover', async () => {
     (fixture.nativeElement as HTMLElement)
       .querySelector('.trigger')
-      ?.dispatchEvent(new MouseEvent('mouseenter'));
+      ?.dispatchEvent(new Event('pointerenter'));
     await fixture.whenStable();
     expect(text(panel()?.querySelector('h3'))).toBe('This month: ≈ $27.98');
     expect(Array.from(panel()?.querySelectorAll('li') ?? []).map(text)).toEqual([
@@ -105,15 +105,15 @@ describe('CostBreakdown', () => {
     expect(document.activeElement).toBe(button());
   });
 
-  it('stays open after a click on the bar, and a second click closes it', async () => {
+  it('stays open after a click or tap on the bar, and a second one closes it', async () => {
     const bar = (fixture.nativeElement as HTMLElement).querySelector<HTMLElement>('.trigger');
-    bar?.click();
+    bar?.dispatchEvent(new Event('pointerup'));
     await fixture.whenStable();
-    bar?.dispatchEvent(new MouseEvent('mouseleave'));
+    bar?.dispatchEvent(new Event('pointerleave'));
     await new Promise((resolve) => setTimeout(resolve, 250));
     await fixture.whenStable();
     expect(panel()).not.toBeNull();
-    bar?.click();
+    bar?.dispatchEvent(new Event('pointerup'));
     await fixture.whenStable();
     expect(panel()).toBeNull();
   });

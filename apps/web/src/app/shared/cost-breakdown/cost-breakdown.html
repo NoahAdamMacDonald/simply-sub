@@ -1,6 +1,6 @@
 <div #wrap class="wrap" cdkOverlayOrigin #origin="cdkOverlayOrigin">
   <!-- The bar: the pointer shows the breakdown, a click or tap keeps it. The button beside it is the keyboard's way. -->
-  <div class="trigger" (mouseenter)="hover()" (mouseleave)="leave()" (click)="toggle()">
+  <div class="trigger" (pointerenter)="hover()" (pointerleave)="leave()" (pointerup)="toggle()">
     <ng-content />
   </div>
   <button
