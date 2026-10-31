@@ -14,32 +14,17 @@
     </p>
     <div class="actions">
       @if (next(); as next) {
-        <button
-          matButton="outlined"
-          type="button"
-          [attr.aria-label]="'Switch ' + title() + ' to ' + next"
-          (click)="switchPeriod()"
-        >
-          Switch to {{ next }}
+        <button matButton="outlined" type="button" (click)="switchPeriod()">
+          Switch<span class="visually-hidden"> {{ title() }}</span> to {{ next }}
         </button>
       }
       @if (cancellable()) {
-        <button
-          matButton="outlined"
-          type="button"
-          [attr.aria-label]="'Cancel ' + title() + ' at renewal'"
-          (click)="cancelAtRenewal()"
-        >
-          Cancel at renewal
+        <button matButton="outlined" type="button" (click)="cancelAtRenewal()">
+          Cancel<span class="visually-hidden"> {{ title() }}</span> at renewal
         </button>
       }
-      <button
-        matButton
-        type="button"
-        [attr.aria-label]="'Keep ' + title() + ' ' + now()"
-        (click)="keep()"
-      >
-        Keep {{ now() }}
+      <button matButton type="button" (click)="keep()">
+        Keep<span class="visually-hidden"> {{ title() }}</span> {{ now() }}
       </button>
     </div>
   </div>

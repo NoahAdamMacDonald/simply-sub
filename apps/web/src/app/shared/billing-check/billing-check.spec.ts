@@ -87,8 +87,9 @@ describe('BillingCheck', () => {
 
   const text = (element: Element | null | undefined) =>
     element?.textContent?.replace(/\s+/g, ' ').trim();
+  /** A choice by its name: its words and the hidden ones naming the item. */
   const button = (element: HTMLElement, label: string) =>
-    element.querySelector<HTMLButtonElement>(`button[aria-label="${label}"]`);
+    Array.from(element.querySelectorAll('button')).find((choice) => text(choice) === label) ?? null;
   const stored = () => items.byId().get(netflix.id);
   /** The stored item's end date, if it has one. */
   const endDate = () => {
@@ -116,11 +117,7 @@ describe('BillingCheck', () => {
     expect(element.querySelector('a')?.getAttribute('href')).toBe(
       'https://www.netflix.com/signup/standard',
     );
-    expect(
-      Array.from(element.querySelectorAll('button')).map((choice) =>
-        choice.getAttribute('aria-label'),
-      ),
-    ).toEqual([
+    expect(Array.from(element.querySelectorAll('button')).map(text)).toEqual([
       'Switch Netflix Standard to yearly',
       'Cancel Netflix Standard at renewal',
       'Keep Netflix Standard monthly',

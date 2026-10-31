@@ -954,11 +954,25 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
     "Grandfathered" chip on its card. An optional field, so no new Dexie version.
   Any of them ends the warning; an item ending before the switch has none.
 - **Acceptance**
-  - [ ] Core: a former name until the item's renewal and not for an item added since; a retired price left out of
+  - [x] Core: a former name until the item's renewal and not for an item added since; a retired price left out of
         pickPrice but kept by an item's resolution; the switch's charges (old period before, new one from the
         renewal); the closest period; grandfathered keeping the old billing; the guard failing a period removed
-  - [ ] The app: the warning on Home and the item card, each choice saving with Undo, and the Grandfathered chip
-  - [ ] Both themes at 360 and 1280 px, keyboard only, with axe
+  - [x] The app: the warning on Home and the item card, each choice saving with Undo, and the Grandfathered chip
+  - [x] Both themes at 360 and 1280 px, keyboard only, with axe
+- **As built:**
+  - Core: `user/former-name.ts` (`itemFormerName`, `formerlyText`) in place of M10.27's six months; `retired` and
+    `endsOn` on `priceSchema`; `PriceContext.withRetired`; `catalog/period-change.ts` (`storedPrice`, `closestPeriod`
+    by length on a log scale, the shorter of two as close, and `periodLostOn`); `ResolvedItem.periodChange`
+    (`{ retired, on, to? }`); `switchedBilling` in `reanchor.ts`, which reanchors on the renewal and keeps a billing
+    day it still allows. `itemCharges` and `nextCharge` split a switching item in two: its old period ending on the
+    renewal (no "Ends" mark, since it goes on) and the new one from it, at the new price without the item's own price.
+  - The guard's periods are `<plan or bundle id> <region> <interval>/<count>`; one whose plan or bundle is gone is
+    left to that id's error. Main publishes 350 ids and periods today.
+  - The app: `shared/billing-check` on Home (in the warnings' column, after the budget warnings) and on the item
+    card, under its head; each choice is named with the item's title in hidden words ("Switch Claude Pro to yearly"),
+    since an `aria-label` that doesn't start with the visible words fails axe's `label-content-name-mismatch`. Search's
+    card reads the user's items for a former name in its grace. The initial bundle is unchanged (499.73 kB).
+  - `check-m10-billing.cjs` (browser-check skill): 49 checks in both themes at both widths.
 
 ### M11 — Catalog expansion (Phase 6)
 Planned on 2026-10-30 with the owner, from `docs/catalog-expansion-guide.md` (the owner's research list, the rules
