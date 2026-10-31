@@ -390,7 +390,11 @@ function trimmed<K extends 'nickname' | 'note'>(key: K, text: string): Partial<R
   return value === '' ? {} : ({ [key]: value } as Record<K, string>);
 }
 
-/** A new item's form: what Search asked for (P7), billed from today with the suggested renewal (defaultRenewal). */
+/**
+ * A new item's form: what Search asked for (P7), billed from today with the suggested renewal (defaultRenewal), and
+ * subscribed since today (M10.31), so its totals don't count months before it was added; the user can clear it or pick
+ * an earlier day.
+ */
 export function newItemForm({
   source,
   period,
@@ -409,7 +413,7 @@ export function newItemForm({
     intervalCount: period.intervalCount,
     anchorDate: renewal.anchorDate,
     billingDay: renewal.billingDay ?? 0,
-    startDate: '',
+    startDate: today,
     endDate: '',
     autoRenew: true,
     windows: [emptyWindow(today)],
