@@ -2749,6 +2749,10 @@ the item's own currency (Proton's buyer-chosen lists: pickPrice's; Mullvad: EUR)
 - The list view and the item dialog show a card dropdown (eligible cards only), plus a "Best card" suggestion
   chip that names the expected savings.
 - The list view shows **net cost after cash back and FX fees** next to the gross cost.
+- **Totals count FX fees** (M10.29, the owner's choice): a charge paid with a card includes its FX fee, so every
+  total, budget and the Calendar count what leaves the account. Cash back never lowers them, since it's paid later
+  and not always monthly: this year's shows beside the totals on List view, the Lists overview, Home and the
+  Calendar's year view.
 
 **As built (M9.4):** the card dropdown and the Best card chip are in the item dialog only, where the user's M9.4 tasks
 put them: the list view's cards change only through the editor's draft (but for pinning and Wrong date?), so it shows
@@ -3182,6 +3186,11 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-10-30, card fees in the budgets)**
+- **FX fees count, cash back shows** (M10.29, the owner's choice after reporting Mullvad's budget missing its 2.5% FX
+  fee): a card's FX fee is charged with the payment, so totals and budgets include it; cash back arrives later and
+  not always monthly, so it's shown as this year's beside them and never subtracted.
 
 **Resolved (2026-10-30, names and billing that follow the provider)**
 The owner's choices after M10.27 (M10.28, section 4.3):

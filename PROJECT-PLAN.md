@@ -288,6 +288,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.26 | Sync that waits (added 2026-10-30, while planning M11): no checks for other devices' changes while this device is the chain's only one; with others, a check 10 s after activity (a change here or pulled in, the tab shown, focus, a click or a key), the wait doubling to 5 minutes while nothing happens; only synced records and the shared settings start a sync, never the theme, the Calendar's shown lists, Home's seen price changes or the lock (P13; BLUEPRINT §7.1, §11.4) | An idle shown tab checks about 15 times an hour, a lone device never; an edit shows on another device in use within 15 s; a theme change sends no request |
 | M10.27 | Ids that last (added 2026-10-30, the owner's choice): catalog ids stay readable slugs and are permanent once published. A renamed plan keeps its id with `formerNames`: Search matches them, its cards say "Ultra (formerly Max 20x)" for six months, and Home tells those who have it, once. A plan or provider no longer sold is `retired`, never deleted: never offered, still counted, with an optional `endsOn` (Home warns ahead, Optimizations lists replacements that keep its Needed keys) or a dated move in `data/redirects.yaml`. That file maps an id that had to change to its new one: the app follows it and rewrites users' records once, and the API answers the old id with a redirect. A CI guard fails a branch where a published id disappears (P2, P4, P8, P14; BLUEPRINT §4.3, §6.2, §14) | Deleting a plan fails `data:validate` and `ci`, naming it and the three fixes; Claude's Max and Ultra keep their ids and users' items; an item on a redirected plan resolves, and its record is rewritten once |
 | M10.28 | Names and billing that follow the provider (added 2026-10-30, the owner's choice): a renamed plan's old name shows on an item only until its first renewal after the rename, and nowhere for a user who doesn't have the plan; a billing period a plan no longer sells keeps its price, `retired` (and `endsOn` when existing subscribers keep it longer), never deleted, and the ids guard covers each plan's periods per region. An item on it switches at its next renewal to the closest period still sold, and Home and the item card ask the user to check their billing, with a link and three choices saved at once with Undo: Switch, Cancel at that renewal, or Keep it (Grandfathered) (P2, P4; BLUEPRINT §4.3, §14) | Claude's Ultra shows "(formerly Max 20x)" to a subscriber until their renewal and never to anyone else; a monthly price retired moves a monthly item to yearly at its renewal in the totals, and each choice saves and undoes |
+| M10.29 | Card fees in the budgets (added 2026-10-30, the owner's report and choice): a charge paid with a card includes the card's FX fee, which leaves the account with it, so every total, budget bar and warning, the Calendar and the exports count it; cash back never lowers them, since it's paid later and not always monthly, but each charge carries it, and this year's shows as "≈ $12.40 cash back this year" on List view, the Lists overview (every list together), Home and the Calendar's year view (P2, P3, P4, P10; BLUEPRINT §9.3, §14) | Mullvad at ≈ $7.80 on a card with a 2.5% FX fee counts ≈ $8.00 in this month's budget; a 2% cash-back card shows the year's cash back in all four places and leaves the budgets as they were |
 
 #### M10 specs
 
@@ -973,6 +974,26 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
     since an `aria-label` that doesn't start with the visible words fails axe's `label-content-name-mismatch`. Search's
     card reads the user's items for a former name in its grace. The initial bundle is unchanged (499.73 kB).
   - `check-m10-billing.cjs` (browser-check skill): 49 checks in both themes at both widths.
+
+**M10.29 — Card fees in the budgets** (BLUEPRINT §9.3)
+- **Why (the owner's report):** Mullvad, ≈ $7.80 a month in euros, on a card with a 2.5% FX fee: List view said
+  "≈ $8.00 after cash back & FX fees", but the budget still counted ≈ $7.80. Since M9.4 the totals had been the
+  provider's price with tax, and a card's figure was information beside them.
+- **FX fees count:** an item paid with a card (its `cardId`) has each charge worked out on that card (core's
+  `cardCost`): its FX fee, in the user's currency, is added to the charge's `amount` and kept as `fxFee`. Every total,
+  budget bar and warning, the Calendar, Coming up and the exports follow, since they add up charges. The item's price
+  tag stays the provider's price; its card line says what it comes to on the card.
+- **Cash back shows, never subtracts** (the owner's choice): each charge also carries its `cashback`, in the user's
+  currency. Cards pay it out at different times, so it's shown for the year: `ListMetrics.cashback` is this calendar
+  year's, shown as "≈ $12.40 cash back this year" beside the totals on List view, the Lists overview (every list
+  together), Home's Budgets and the Calendar's year view. Budgets never subtract it.
+- **The card maths:** what an item would cost on another card (`itemOnCard`, the optimizer's card and currency
+  suggestions) starts from the charge without its card's fee, so a fee is never counted twice.
+- **Acceptance**
+  - [ ] Core: a charge on a card with an FX fee, in the totals and the budget checks; no fee in the card's own
+        currency; cash back carried and added up for the year; `itemOnCard`'s gross without the fee
+  - [ ] The app: Mullvad's ≈ $8.00 in this month's budget, and the cash back line in the four places, in both themes at
+        360 and 1280 px with axe
 
 ### M11 — Catalog expansion (Phase 6)
 Planned on 2026-10-30 with the owner, from `docs/catalog-expansion-guide.md` (the owner's research list, the rules
