@@ -30,7 +30,9 @@ const bundlesExamples = contract.endpoints['GET /bundles'].examples;
  * A success example's body: an endpoint's examples mix success and error bodies, and a redirect's none (M10.27), so
  * their types do too.
  */
-function bodyOf<T extends { data?: unknown }>(body: T | null): T & { data: NonNullable<T['data']> } {
+function bodyOf<T extends { data?: unknown }>(
+  body: T | null,
+): T & { data: NonNullable<T['data']> } {
   if (body?.data === undefined) {
     throw new Error('This example has no data');
   }
