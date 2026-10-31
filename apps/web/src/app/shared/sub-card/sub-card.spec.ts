@@ -131,7 +131,7 @@ describe('SubCard', () => {
     ]);
   });
 
-  it('says a renamed plan’s old name for six months (M10.27)', async () => {
+  it('says a renamed plan’s old name only while the user’s item on it hasn’t renewed (M10.28)', async () => {
     const result = resultFor('netflix');
     if (result.kind !== 'priced') throw new Error('Netflix is priced');
     const [first, ...rest] = result.plans;
@@ -142,11 +142,18 @@ describe('SubCard', () => {
         ...rest,
       ],
     });
-    await show(renamed('2026-10-20'));
+    // Without the plan in a list: the new name at once.
+    await show(renamed('2026-10-21'));
+    expect(shown('.plan-name')).toBe('Standard with ads');
+    // With it (added Oct 20, renewing Nov 10): the old name until then.
+    const records = TestBed.inject(ItemsRepository).records as WritableSignal<readonly ListItem[]>;
+    records.set([listItem('netflix.standard-ads', work)]);
+    await show(renamed('2026-10-21'));
     expect(shown('.plan-name')).toBe('Standard with ads (formerly Basic)');
     // Its chip has the name it has now.
     expect(shown('.plans label')).toBe('Standard with ads');
-    await show(renamed('2026-04-01'));
+    // Renamed before it was added: never the old name.
+    await show(renamed('2026-10-15'));
     expect(shown('.plan-name')).toBe('Standard with ads');
   });
 

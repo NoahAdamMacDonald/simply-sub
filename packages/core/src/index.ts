@@ -138,6 +138,7 @@ export * from './user/custom-sub-form';
 export * from './user/custom-subscription';
 export * from './user/dismissed-suggestion';
 export * from './user/fx-cache';
+export * from './user/former-name';
 export * from './user/item-activity';
 export * from './user/item-replacement';
 export * from './user/plan-notices';

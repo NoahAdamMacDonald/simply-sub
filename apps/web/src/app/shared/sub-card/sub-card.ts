@@ -12,6 +12,7 @@ import { MatIcon } from '@angular/material/icon';
 import {
   countedRanks,
   formerlyText,
+  itemFormerName,
   planTitle,
   type AddRequest,
   type CatalogResult,
@@ -25,6 +26,7 @@ import {
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { ClockService } from '../../core/clock/clock-service';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { ItemsRepository } from '../../core/storage/items-repository';
 import { AddToListMenu } from '../add-to-list/add-to-list-menu';
 import { countryName } from '../country-name';
 import { PriceTag } from '../price-tag/price-tag';
@@ -68,6 +70,7 @@ export class SubCard {
   private readonly settings = inject(SettingsStore);
   private readonly catalog = inject(CatalogStore);
   private readonly today = inject(ClockService).today;
+  private readonly items = inject(ItemsRepository);
   private readonly expandButton = viewChild<string, ElementRef<HTMLElement>>('expandButton', {
     read: ElementRef,
   });
@@ -108,12 +111,20 @@ export class SubCard {
   protected readonly plan = computed(() =>
     this.plans().find(({ plan }) => plan.id === this.selectedId()),
   );
-  /** The plan's name, with a renamed plan's old one for six months (M10.27): "Ultra (formerly Max 20x)". */
+  /**
+   * The plan's name, with a renamed plan's old one while one of the user's items on it shows it, until its renewal
+   * (M10.28): "Ultra (formerly Max 20x)". Anyone else sees the new name only.
+   */
   protected readonly planLine = computed(() => {
     const plan = this.plan()?.plan;
     if (!plan) return '';
-    const formerly = formerlyText(plan, this.today());
-    return formerly === undefined ? plan.name : `${plan.name} ${formerly}`;
+    const today = this.today();
+    const former = this.items
+      .records()
+      .filter(({ source }) => source.kind === 'catalog' && source.planId === plan.id)
+      .map((item) => itemFormerName(plan, item, today))
+      .find((name) => name !== undefined);
+    return former === undefined ? plan.name : `${plan.name} ${formerlyText(former)}`;
   });
   /** How many of the plan's features the user ranks each way, or nothing when they rank none of them. */
   protected readonly rankCounts = computed(() => {

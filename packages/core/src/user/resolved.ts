@@ -1,7 +1,6 @@
 import { bundleFeatures } from '../catalog/bundle-deal';
 import { acceptedNetworksIn } from '../catalog/card-networks';
 import { isoDateSchema } from '../catalog/formats';
-import { shownFormerName } from '../catalog/former-names';
 import type { FxRates } from '../catalog/convert';
 import { pickPrice, typedPrice, type PickedPrice, type PriceContext } from '../catalog/pick-price';
 import { planOf } from '../catalog/plan-lookup';
@@ -18,6 +17,7 @@ import { chargedItem, nextCharge, ownPriceOn, type Charge } from '../schedule/ch
 import { itemStatus } from '../schedule/item-status';
 import type { TaxPlace } from '../tax/sales-tax-rate';
 import { customIconUrl } from './custom-sub-form';
+import { itemFormerName } from './former-name';
 import { planTitle } from './item-text';
 import { redirectedOverrides } from './redirect-records';
 import type { CustomSubscription } from './custom-subscription';
@@ -75,7 +75,7 @@ export interface ResolvedItem {
   name: string;
   /** The plan's name: "Standard". A bundle's is its plans': "Netflix Standard + Crave Premium". */
   planName: string;
-  /** A catalog plan's former name, for six months after its rename (M10.27): "Max 20x" for Ultra. */
+  /** A catalog plan's former name until the item's renewal after the rename (M10.28): "Max 20x" for Ultra. */
   formerName?: string;
   /**
    * A catalog plan its provider no longer sells, from its `retired` date (M10.27): since when, the day it ends for its
@@ -232,7 +232,9 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         });
       }
       const networks = acceptedNetworksIn(provider, region);
-      const formerName = shownFormerName(plan, context.today);
+      const formerName = hasDates(item.billing)
+        ? itemFormerName(plan, item, context.today)
+        : undefined;
       const retirement = retirementOf(plan, provider);
       parts = {
         providerId: provider.id,
