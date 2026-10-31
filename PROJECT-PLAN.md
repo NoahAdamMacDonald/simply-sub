@@ -990,10 +990,18 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 - **The card maths:** what an item would cost on another card (`itemOnCard`, the optimizer's card and currency
   suggestions) starts from the charge without its card's fee, so a fee is never counted twice.
 - **Acceptance**
-  - [ ] Core: a charge on a card with an FX fee, in the totals and the budget checks; no fee in the card's own
+  - [x] Core: a charge on a card with an FX fee, in the totals and the budget checks; no fee in the card's own
         currency; cash back carried and added up for the year; `itemOnCard`'s gross without the fee
-  - [ ] The app: Mullvad's ≈ $8.00 in this month's budget, and the cash back line in the four places, in both themes at
+  - [x] The app: Mullvad's ≈ $8.00 in this month's budget, and the cash back line in the four places, in both themes at
         360 and 1280 px with axe
+- **As built:** `ResolveContext.cards` and `ResolvedItem.paidWith` (the card's terms, the user's currency and the
+  rates); `itemCharges` works each charge out on it with `cardCost` and adds `fxFee` to `amount` and carries
+  `cashback`, both in the user's currency (a charge it can't convert stays as it was). `ListMetrics.cashback` is this
+  calendar year's. `MetricsService` passes `CardsRepository.byId()`, so every page that adds up charges counts fees,
+  the exports and live calendar feeds included. `BudgetTotals` shows "$4.79 cash back in 2026" with a savings icon
+  (not on a Lists card); the Calendar's year view shows it above its months, in `ss-calendar-year`, since the
+  Calendar page's styles are at their 4 kB budget. The initial bundle is unchanged (499.73 kB).
+  `check-m10-card-fees.cjs` (browser-check skill): 65 checks in both themes at both widths.
 
 ### M11 — Catalog expansion (Phase 6)
 Planned on 2026-10-30 with the owner, from `docs/catalog-expansion-guide.md` (the owner's research list, the rules
