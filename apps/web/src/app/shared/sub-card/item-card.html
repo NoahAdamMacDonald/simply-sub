@@ -28,6 +28,13 @@
         [nextCharge]="resolved().nextCharge?.date"
         [replacement]="replacement()"
       />
+      <!-- Keeps a billing period no longer sold (M10.28). -->
+      @if (item().grandfathered) {
+        <p class="grandfathered">
+          <span>Grandfathered</span>
+          <span class="visually-hidden">: keeps a billing period no longer sold</span>
+        </p>
+      }
       @if (retiredText(); as text) {
         <p class="retired">
           <mat-icon aria-hidden="true">info</mat-icon>
@@ -72,6 +79,11 @@
       }
     </div>
   </div>
+
+  <!-- Its billing period isn't sold any more (M10.28): check, then switch, cancel or keep. -->
+  @if (resolved().periodChange) {
+    <ss-billing-check class="billing-check" [resolved]="resolved()" />
+  }
 
   <button
     #expandButton

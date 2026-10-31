@@ -145,6 +145,22 @@ describe('ItemCard', () => {
     );
   });
 
+  it('says Grandfathered, and shows Check your billing for a period no longer sold (M10.28)', () => {
+    const standard = resolved('netflix.standard');
+    const kept = render({ ...standard, item: { ...standard.item, grandfathered: true } })
+      .nativeElement as HTMLElement;
+    expect(text(kept.querySelector('.grandfathered'))).toBe(
+      'Grandfathered: keeps a billing period no longer sold',
+    );
+    expect(kept.querySelector('ss-billing-check')).toBeNull();
+    const changing = render({
+      ...standard,
+      periodChange: { retired: '2026-10-20', on: '2026-11-12' },
+    }).nativeElement as HTMLElement;
+    expect(changing.querySelector('.grandfathered')).toBeNull();
+    expect(changing.querySelector('ss-billing-check')).not.toBeNull();
+  });
+
   it('lists its add-ons under its names, each with its price for all it has (M6.12)', () => {
     const card = render(
       resolved('netflix.standard', {

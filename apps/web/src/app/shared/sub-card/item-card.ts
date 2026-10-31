@@ -6,6 +6,7 @@ import { addOnText, formerlyText, planTitle, type ResolvedItem, type Tag } from 
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { ClockService } from '../../core/clock/clock-service';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { BillingCheck } from '../billing-check/billing-check';
 import { billingText, ownPriceText } from '../billing-text';
 import { chargeAmountText, type ShownAndSpoken } from '../charge-text';
 import { countryName } from '../country-name';
@@ -31,6 +32,7 @@ let nextId = 0;
 @Component({
   selector: 'ss-item-card',
   imports: [
+    BillingCheck,
     FeatureList,
     MatButton,
     MatIcon,

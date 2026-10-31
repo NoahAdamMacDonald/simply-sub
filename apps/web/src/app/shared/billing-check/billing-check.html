@@ -1,0 +1,46 @@
+<!-- Spaces go inside the spans: Angular drops the whitespace between them, and screen readers need it. -->
+<div class="check" role="group" [attr.aria-labelledby]="id">
+  <mat-icon aria-hidden="true">warning</mat-icon>
+  <div class="body">
+    <p [id]="id">
+      <span>{{ text() }} </span>
+      @if (link(); as link) {
+        <a [href]="link" target="_blank" rel="noopener">
+          <span>Check your billing</span>
+          <span class="visually-hidden"> for {{ title() }}, opens in a new tab</span>
+          <mat-icon aria-hidden="true">open_in_new</mat-icon>
+        </a>
+      }
+    </p>
+    <div class="actions">
+      @if (next(); as next) {
+        <button
+          matButton="outlined"
+          type="button"
+          [attr.aria-label]="'Switch ' + title() + ' to ' + next"
+          (click)="switchPeriod()"
+        >
+          Switch to {{ next }}
+        </button>
+      }
+      @if (cancellable()) {
+        <button
+          matButton="outlined"
+          type="button"
+          [attr.aria-label]="'Cancel ' + title() + ' at renewal'"
+          (click)="cancelAtRenewal()"
+        >
+          Cancel at renewal
+        </button>
+      }
+      <button
+        matButton
+        type="button"
+        [attr.aria-label]="'Keep ' + title() + ' ' + now()"
+        (click)="keep()"
+      >
+        Keep {{ now() }}
+      </button>
+    </div>
+  </div>
+</div>
