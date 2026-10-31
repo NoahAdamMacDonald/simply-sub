@@ -1,11 +1,13 @@
+import { convert } from '../catalog/convert';
 import type { PickedPrice } from '../catalog/pick-price';
+import { cardCost } from '../rewards/card-cost';
 import { addDays, type IsoDate } from '../dates/iso-date';
 import { salesTaxOn } from '../tax/charge-tax';
 import { buyerTaxPlace, type TaxPlace } from '../tax/sales-tax-rate';
 import { samePeriod, type Period } from '../dates/period';
 import type { ListItem, PriceOverride } from '../user/list-item';
 import { switchedBilling } from '../user/reanchor';
-import type { ResolvedItem } from '../user/resolved';
+import type { PaidWith, ResolvedItem } from '../user/resolved';
 import { chargeDates, lastChargeDate, nextChargeDate, type DateRange } from './charge-dates';
 
 // An item's charges (PROJECT-PLAN §3.1): its charge dates (charge-dates.ts) priced, with sales tax. The calendar, every
@@ -14,7 +16,10 @@ import { chargeDates, lastChargeDate, nextChargeDate, type DateRange } from './c
 /** One scheduled payment. */
 export interface Charge {
   date: IsoDate;
-  /** What leaves the account, sales tax included, in `currency`, at full precision. */
+  /**
+   * What leaves the account, sales tax included, in `currency`, at full precision: with the FX fee of the card it's paid
+   * with (`fxFee`, M10.29).
+   */
   amount: number;
   /** The sales tax part of `amount`. */
   tax: number;
@@ -26,6 +31,10 @@ export interface Charge {
   converted: boolean;
   /** Renewed by hand: the calendar says "Renew manually" (`autoRenew: false`, or a prepaid plan's dates). */
   manual: boolean;
+  /** The FX fee of the card it's paid with, in `currency`, which `amount` includes (M10.29). */
+  fxFee?: number;
+  /** The cash back the card it's paid with earns on it, in `currency`: shown, never taken off a total (M10.29). */
+  cashback?: number;
   /** The last charge before the item's end date: the calendar marks it "Ends" (P10). */
   ends?: true;
   /**
@@ -50,8 +59,40 @@ export type ChargeCost = Pick<Charge, 'amount' | 'tax' | 'currency' | 'converted
  */
 export type Chargeable = Pick<
   ResolvedItem,
-  'item' | 'listId' | 'price' | 'addOns' | 'overridePrice' | 'planEnds' | 'periodChange'
+  | 'item'
+  | 'listId'
+  | 'price'
+  | 'addOns'
+  | 'overridePrice'
+  | 'planEnds'
+  | 'periodChange'
+  | 'paidWith'
 >;
+
+/**
+ * `charge` paid with `paidWith`'s card (M10.29): its FX fee added to its amount, and its cash back carried, both in the
+ * user's currency. A charge not in the user's currency, or with no rate to work it out, stays as it is.
+ */
+function onCard(charge: Charge, paidWith: PaidWith | undefined): Charge {
+  if (!paidWith || charge.currency !== paidWith.currency) return charge;
+  const { card, fx } = paidWith;
+  const cost = cardCost(charge.charged, card, fx);
+  const back = (amount: number) =>
+    card.currency === charge.currency
+      ? amount
+      : fx && convert(amount, card.currency, charge.currency, fx);
+  const fxFee = cost && back(cost.fxFee);
+  const cashback = cost && back(cost.cashback);
+  if (fxFee === undefined || cashback === undefined) return charge;
+  return {
+    ...charge,
+    amount: charge.amount + fxFee,
+    ...(fxFee > 0 && { fxFee }),
+    ...(cashback > 0 && { cashback }),
+    converted:
+      charge.converted || ((fxFee > 0 || cashback > 0) && card.currency !== charge.currency),
+  };
+}
 
 /**
  * An item whose billing period isn't sold any more (M10.28), as two: on its period until the renewal it switches on,
@@ -147,14 +188,19 @@ export function itemCharges(resolved: Chargeable, range: DateRange, place: TaxPl
   for (const date of [...byDate.keys()].sort()) {
     if (planEnds !== undefined && date >= planEnds) continue;
     for (const cost of costsOf(byDate.get(date) ?? [], taxPlace)) {
-      charges.push({
-        date,
-        ...cost,
-        itemId: item.id,
-        listId: resolved.listId,
-        manual,
-        ...(date === last && { ends: true as const }),
-      });
+      charges.push(
+        onCard(
+          {
+            date,
+            ...cost,
+            itemId: item.id,
+            listId: resolved.listId,
+            manual,
+            ...(date === last && { ends: true as const }),
+          },
+          resolved.paidWith,
+        ),
+      );
     }
   }
   return charges;

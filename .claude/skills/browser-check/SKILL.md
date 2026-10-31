@@ -583,6 +583,13 @@ linking to claude.com/pricing; Ultra's "(formerly Max 20x)" until its renewal; t
 grandfathered in IndexedDB, the check gone, the snackbar's Undo bringing it back) and Switch (billed yearly from Nov 12).
 In both themes at both widths, with axe and no horizontal scroll.
 
+`check-m10-card-fees.cjs` (M10.29) checks on `ng serve` for a Canadian in Alberta with a $500 monthly budget (base URL
+ending in `/`): Mullvad on a card with a 2.5% FX fee (VPN) and Netflix Standard on a 2% cash-back card (TV), written to
+IndexedDB. List view's this month equal to Mullvad's figure with its fee; Home's budget equal to Mullvad with its fee
+plus Netflix with tax (no cash back taken off); the year's cash back on List view, Home, the Lists overview (not on its
+cards) and the Calendar's year view, the same everywhere. In both themes at both widths, with axe and no horizontal
+scroll.
+
 `check-m10-category.cjs` (M10.22, the feedback after M10, part 2) checks Search's Category on `ng serve` for a Canadian
 in Alberta (base URL ending in `/`), in both themes at 1280 px (the filter panel) and 360 px (the drawer): empty while
 it's All with its label in the field, then focused by Tab with its label floated and "All" its placeholder, "vp" typed

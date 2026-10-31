@@ -76,9 +76,11 @@ export function itemOnCard(
       leftOut++;
       continue;
     }
+    // With no card: its own card's FX fee, which the charge includes (M10.29), is the card's, not the item's.
+    const plain = charge.amount - (charge.fxFee ?? 0);
     if (!card) {
-      gross += charge.amount;
-      net += charge.amount;
+      gross += plain;
+      net += plain;
       converted ||= charge.converted;
       continue;
     }
@@ -88,7 +90,7 @@ export function itemOnCard(
       leftOut++;
       continue;
     }
-    gross += charge.amount;
+    gross += plain;
     net += back;
     converted ||= charge.converted || cost.converted || card.currency !== context.currency;
   }

@@ -101,6 +101,11 @@ export interface ListMetrics {
   shares: ReadonlyMap<string, number>;
   rankCounts: RankCounts;
   featureSummary: FeatureSummaryRow[];
+  /**
+   * The cash back this calendar year's charges earn on the cards they're paid with (M10.29): shown beside the totals,
+   * never taken off them, since cards pay it later and not always monthly. 0 with no cash-back card.
+   */
+  cashback: { thisYear: number; approx: boolean };
   /** thisMonth ÷ the monthly budget, and thisYear ÷ the annual one, when they're set. */
   monthlyBudgetShare?: number;
   annualBudgetShare?: number;
@@ -133,6 +138,12 @@ export function listMetrics(
     charges.filter((charge) => charge.date >= from && charge.date < to);
   const thisMonth = chargeTotal(within(monthRange(month)), currency);
   const thisYear = chargeTotal(within(year), currency);
+  const cashback = { thisYear: 0, approx: false };
+  for (const charge of within(year)) {
+    if (charge.currency !== currency || charge.cashback === undefined) continue;
+    cashback.thisYear += charge.cashback;
+    cashback.approx ||= charge.converted;
+  }
   const coming = within(next12);
   const total12 = chargeTotal(coming, currency);
 
@@ -172,6 +183,7 @@ export function listMetrics(
     shares,
     rankCounts: rankCounts(resolved),
     featureSummary: featureSummary(resolved, context.registry, today),
+    cashback,
     ...(monthlyBudget !== undefined && { monthlyBudgetShare: thisMonth.amount / monthlyBudget }),
     ...(annualBudget !== undefined && { annualBudgetShare: thisYear.amount / annualBudget }),
     warnings,

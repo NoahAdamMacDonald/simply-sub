@@ -30,6 +30,14 @@
     }
   </div>
 }
+<!-- Cash back is shown, never taken off the totals: cards pay it later, and not always monthly (M10.29). -->
+@if (cashback(); as cashback) {
+  <p class="cashback">
+    <mat-icon aria-hidden="true">savings</mat-icon>
+    <span aria-hidden="true">{{ cashback.shown }}</span>
+    <span class="visually-hidden">{{ cashback.spoken }}</span>
+  </p>
+}
 @if (notCounted(); as text) {
   <p class="not-counted">{{ text }}</p>
 }

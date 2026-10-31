@@ -36,6 +36,7 @@ const metrics: ListMetrics = {
     unwanted: 0,
   },
   featureSummary: [],
+  cashback: { thisYear: 0, approx: false },
   warnings: {},
 };
 
@@ -124,6 +125,19 @@ describe('BudgetTotals', () => {
     const bar = element.querySelector('ss-budget-bar');
     expect(bar?.getAttribute('data-level')).toBe('over');
     expect(text(bar?.querySelector('.label'))).toBe('112%');
+  });
+
+  it('shows this year’s cash back beside the totals, but not on a Lists card (M10.29)', () => {
+    const withCashback = { ...metrics, cashback: { thisYear: 4.785, approx: true } };
+    const element = render({ metrics: withCashback });
+    expect(text(element.querySelector('.cashback span[aria-hidden]'))).toBe(
+      '≈ $4.79 cash back in 2026',
+    );
+    expect(text(element.querySelector('.cashback .visually-hidden'))).toBe(
+      'about $4.79 cash back in 2026, not taken off the totals',
+    );
+    expect(render({ metrics: withCashback, compact: true }).querySelector('.cashback')).toBeNull();
+    expect(render().querySelector('.cashback')).toBeNull();
   });
 
   it('says how many subscriptions it couldn’t count', () => {

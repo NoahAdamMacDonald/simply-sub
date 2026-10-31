@@ -342,12 +342,17 @@ export class CalendarPage {
     };
   });
 
+  /** The year view's charges: the shown lists' in the year of the month shown. */
+  private readonly yearCharges = computed(() => {
+    const year = Number(this.month().slice(0, 4));
+    return this.metrics.charges({ from: `${year}-01-01`, to: `${year + 1}-01-01` }, this.shown());
+  });
+
   /** The year view's year (M10.4): its payments by month for the lists shown (core's yearSummary). */
   private readonly year = computed(() => {
-    const year = Number(this.month().slice(0, 4));
     return yearSummary(
-      this.metrics.charges({ from: `${year}-01-01`, to: `${year + 1}-01-01` }, this.shown()),
-      String(year),
+      this.yearCharges(),
+      this.month().slice(0, 4),
       this.today(),
       this.settings.saved()?.currency ?? '',
     );
@@ -367,6 +372,28 @@ export class CalendarPage {
       ...(saved?.annualBudget !== undefined && { budget: saved.annualBudget }),
       totalText: `${total.approx ? '≈ ' : ''}${money(total.amount)}`,
       totalSpoken: `${total.approx ? 'about ' : ''}${money(total.amount)}`,
+    };
+  });
+
+  /**
+   * The year view's cash back (M10.29): what the year's charges for the lists shown earn on the cards they're paid
+   * with, beside the total it isn't taken off. None when no card pays any.
+   */
+  protected readonly yearCashback = computed(() => {
+    const saved = this.settings.saved();
+    const currency = saved?.currency ?? '';
+    let amount = 0;
+    let approx = false;
+    for (const charge of this.yearCharges()) {
+      if (charge.currency !== currency || charge.cashback === undefined) continue;
+      amount += charge.cashback;
+      approx ||= charge.converted;
+    }
+    if (amount <= 0) return undefined;
+    const money = amountText(amount, currency, saved?.country);
+    return {
+      shown: `${approx ? '≈ ' : ''}${money} cash back in ${this.title()}`,
+      spoken: `${approx ? 'about ' : ''}${money} cash back in ${this.title()}, not taken off the total`,
     };
   });
 
