@@ -1,0 +1,8 @@
+# Redirects (BLUEPRINT §4.3, M10.27): ids are permanent once published, so this list is for the rare id that had to
+# change, and for a retired plan's subscribers moved to another plan on a date. A renamed plan keeps its id instead
+# (formerNames), and a plan no longer sold is retired, never deleted. Each entry:
+#   - { kind: plan, from: <old id>, to: <new id>, on: <date> }
+# kind is provider, plan, add-on, bundle, feature (rank keys) or perk. `to` must exist and still be sold, and never be
+# another entry's `from`. The app follows them and rewrites users' records once; the API answers an old provider or
+# plan id with 301. Shapes: packages/core/src/catalog/redirects.ts.
+[]

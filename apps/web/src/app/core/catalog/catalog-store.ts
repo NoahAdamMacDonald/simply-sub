@@ -20,6 +20,7 @@ import { oneAtATime } from '../one-at-a-time';
 import { SettingsStore } from '../settings/settings-store';
 import { CatalogCacheRepository } from '../storage/catalog-cache-repository';
 import { ItemsRepository } from '../storage/items-repository';
+import { StorageService } from '../storage/storage-service';
 
 /** What a check for a new catalog found (P13's [Check for updates]). */
 export type CatalogCheckOutcome = 'current' | 'updated' | 'offline' | 'failed';
@@ -43,6 +44,7 @@ export class CatalogStore {
   private readonly settings = inject(SettingsStore);
   private readonly items = inject(ItemsRepository);
   private readonly clock = inject(ClockService);
+  private readonly storage = inject(StorageService);
 
   /** Files this tab downloaded. They stand in for the stored ones until the live query has them, or if saving failed. */
   private readonly downloaded = signal<ReadonlyMap<string, CatalogCache>>(new Map());
@@ -111,11 +113,31 @@ export class CatalogStore {
    */
   readonly check = oneAtATime(() => this.run());
 
+  /**
+   * Moves records on an old id to its new one (M10.27), in a chunk loaded only for a catalog with redirects. A call while
+   * one runs gets the one that follows it.
+   */
+  private readonly followRedirects = oneAtATime(async () => {
+    const data = this.catalog();
+    if (!data?.redirects) return;
+    const { followRedirects } = await import('../storage/redirected-records');
+    await followRedirects(this.storage, data, this.clock.today());
+  });
+
   constructor() {
     // A check once the settings and items have loaded, and again when the regions change: the first run, a new
     // country (📍), an item bought elsewhere, or storage moving to memory (whose repositories load again).
     effect(() => {
       if (this.regions() !== undefined) untracked(() => void this.check());
+    });
+    // Ids that changed (M10.27): with each catalog version, each day (a move on a date) and once the items are readable
+    // (loaded, or unlocked), records still on an old id move to the new one.
+    effect(() => {
+      const redirects = this.catalog()?.redirects;
+      this.clock.today();
+      if (redirects && this.items.status() === 'ready') {
+        untracked(() => void this.followRedirects().catch(() => undefined));
+      }
     });
 
     const online = () => {

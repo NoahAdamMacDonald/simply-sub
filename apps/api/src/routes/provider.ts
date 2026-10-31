@@ -3,19 +3,21 @@ import {
   providerBody,
   readPricingQuery,
   rebaseRates,
+  redirectedCatalogId,
   slugSchema,
   suggestedProviderId,
 } from '@simply-sub/core';
 import { Hono, type Context } from 'hono';
 import { catalogIdsFile } from '../catalog-files';
 import { loadProvider } from '../db/lookups';
-import { badQuery, noExchangeRates, notFound, notSeeded, shortHash } from '../http';
+import { badQuery, movedTo, noExchangeRates, notFound, notSeeded, shortHash } from '../http';
 import { lookupJson, regionRates, unchanged } from '../lookup';
 
 /**
  * GET /providers/:id (docs/api-output-examples.json): one provider as written, with every plan and add-on, and with
  * a region, the picked prices of each one sold there. It reads the catalog row and the provider's (2 rows). An
- * unknown id gets 404 with the id it looks like a typo of, from the static ids.json, so a typo costs no more rows.
+ * unknown id gets 301 to its new id when data/redirects.yaml has one (M10.27), else 404 with the id it looks like a typo
+ * of, both from the static ids.json, so neither costs more rows.
  *
  * The ETag is D1's catalog version and a hash of the id, the query as read and the rates' date.
  */
@@ -62,5 +64,7 @@ export const provider = new Hono<{ Bindings: Env }>().get('/:id', async (c) => {
 
 async function unknownProvider(c: Context<{ Bindings: Env }>, id: string): Promise<Response> {
   const ids = await catalogIdsFile(c);
+  const moved = ids && redirectedCatalogId(id, 'provider', ids);
+  if (moved !== undefined) return movedTo(c, moved);
   return notFound(c, `No provider with id '${id}'.`, ids && suggestedProviderId(id, ids));
 }

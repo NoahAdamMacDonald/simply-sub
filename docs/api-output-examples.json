@@ -8,7 +8,7 @@
       "envelope": "Success: { data, meta }. Failure: { error: { code, message, details? } }.",
       "docKeys": "Keys starting with '_' are documentation notes and never appear in real responses.",
       "optionalFields": "Optional fields are omitted when empty or unknown. For example, a provider without acceptedNetworks, or without the buyer's region (its group, or GLOBAL) in them, takes cards that are 'unknown', so every card is allowed; a provider without availableIn sells where it has prices, and elsewhere it's unknown whether it sells; and a provider without iconUrl has no logo, so the app shows its first letter.",
-      "ids": "Stable slugs: provider 'netflix', plan 'netflix.standard', add-on 'netflix.extra-member', bundle 'bundle.disney-crave-premium', feature 'video.quality'.",
+      "ids": "Readable slugs, permanent once published (a renamed plan keeps its id; an id that had to change answers with 301, BLUEPRINT §4.3): provider 'netflix', plan 'netflix.standard', add-on 'netflix.extra-member', bundle 'bundle.disney-crave-premium', feature 'video.quality'.",
       "rankKeys": "Boolean feature: '<featureId>'. Enum or set value: '<featureId>=<valueId>'. Number tier: '<featureId>=<tierId>'. A plan provides an enum key when its value is at least that value, and a tier key when its number is at least the tier's min (PROJECT-PLAN.md §3.2).",
       "money": "Amounts are decimals in the currency's major unit (18.99 = $18.99). Currencies are ISO 4217. Regions are ISO 3166-1 alpha-2 ('GB', never 'UK'), a group priced once for all its members ('EU'), or 'GLOBAL' for one price wherever the provider sells. A free plan has one price with amount 0: it creates no charges and the app shows it as Free (PROJECT-PLAN.md §3.1).",
       "pricing": "'prices' lists every stored price for every region. When a request includes region and currency, a 'pricing' array is added with one picked price per interval, all from one source region and currency (pickPrice, BLUEPRINT §4.7). 'native: false' means the amount was converted, and the app shows ≈ and the exchange icon. A free price (0) is always native, with no fx. 'taxIncluded: true' means the stored price includes sales tax wherever the buyer is (its price's taxIncluded, with the source page's words), so none is added in Canada or the US (BLUEPRINT §4.8). Whether the item is sold in that region at all is a separate check (availability, BLUEPRINT §4.7). Amounts and monthlyEquivalent are rounded to 2 decimals and fx.rate to 4, from the unrounded conversion.",
@@ -1352,7 +1352,7 @@
       ]
     },
     "GET /providers/:id": {
-      "description": "One provider as written, with all its plans, add-ons and every region's prices. With a region, picked 'pricing' is added after the prices of each plan and add-on that isn't not-offered there (availability, BLUEPRINT §4.7): one not sold there gets none, and an unknown one gets its fallback price. It reads 2 D1 rows: the catalog row and the provider's. The ETag is D1's catalog version and a hash of the id, the query as read and the exchange rates' date, and If-None-Match gets 304. An unknown id gets 404 not_found, with details[].suggestion when an id looks like a typo of it (from the static data/catalog/ids.json, so it reads no more rows).",
+      "description": "One provider as written, with all its plans, add-ons and every region's prices. With a region, picked 'pricing' is added after the prices of each plan and add-on that isn't not-offered there (availability, BLUEPRINT §4.7): one not sold there gets none, and an unknown one gets its fallback price. It reads 2 D1 rows: the catalog row and the provider's. The ETag is D1's catalog version and a hash of the id, the query as read and the exchange rates' date, and If-None-Match gets 304. An old id that data/redirects.yaml sends on (M10.27) gets 301 to the new one's URL, with the query kept. Any other unknown id gets 404 not_found, with details[].suggestion when an id looks like a typo of it. Both come from the static data/catalog/ids.json, so they read no more rows.",
       "query": {
         "region": "Optional, e.g. CA: the region to pick prices for, as on GET /providers. Without it there are no prices, and currency gets 400.",
         "currency": "Optional, e.g. CAD: the euro or a currency the ECB publishes a rate for. Defaults to the region's main currency, or USD when the ECB has no rate for it. Needs region. Any other parameter gets 400, and a region with no exchange rates at all gets 502, as on GET /providers."
@@ -1708,11 +1708,28 @@
               }
             }
           }
+        },
+        {
+          "title": "An old provider id (redirected)",
+          "_note": "Ids are permanent once published, so this is rare: only an id that had to change, listed in data/redirects.yaml (BLUEPRINT §4.3, M10.27). The query is kept.",
+          "request": {
+            "method": "GET",
+            "url": "https://sub.simplely.ca/api/v1/providers/netflix-ca?region=CA&currency=CAD"
+          },
+          "response": {
+            "status": 301,
+            "headers": {
+              "Location": "https://sub.simplely.ca/api/v1/providers/netflix?region=CA&currency=CAD",
+              "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
+            },
+            "body": null
+          }
         }
       ]
     },
     "GET /plans/:id": {
-      "description": "One plan as written, with a summary of its provider after its name, providedRankKeys after its features (every rank key of the registry it provides, in registry order, PROJECT-PLAN.md §3.2), its add-ons in place of addOnIds (expanded, in that order, each with its own pricing), and bundleIds last: every bundle that includes it, in any region. Lists that would be empty are left out. It reads the catalog row, its provider's row (which holds the plan and its add-ons) and one index entry per bundle that includes it. Region, currency, the 400s, the 404 and its suggestion work as on GET /providers/:id, and the ETag also hashes the registry's version.",
+      "description": "One plan as written, with a summary of its provider after its name, providedRankKeys after its features (every rank key of the registry it provides, in registry order, PROJECT-PLAN.md §3.2), its add-ons in place of addOnIds (expanded, in that order, each with its own pricing), and bundleIds last: every bundle that includes it, in any region. Lists that would be empty are left out. It reads the catalog row, its provider's row (which holds the plan and its add-ons) and one index entry per bundle that includes it. Region, currency, the 400s, an old id's 301, the 404 and its suggestion work as on GET /providers/:id, and the ETag also hashes the registry's version.",
       "query": {
         "region": "Optional, e.g. CA, as on GET /providers/:id.",
         "currency": "Optional, e.g. CAD, as on GET /providers/:id."
@@ -1847,6 +1864,23 @@
                 ]
               }
             }
+          }
+        },
+        {
+          "title": "An old plan id (redirected)",
+          "_note": "A plan id that had to change, or a retired plan whose subscribers have moved, listed in data/redirects.yaml (BLUEPRINT §4.3, M10.27). The query is kept.",
+          "request": {
+            "method": "GET",
+            "url": "https://sub.simplely.ca/api/v1/plans/netflix.basic?region=CA&currency=CAD"
+          },
+          "response": {
+            "status": 301,
+            "headers": {
+              "Location": "https://sub.simplely.ca/api/v1/plans/netflix.standard-ads?region=CA&currency=CAD",
+              "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+              "Access-Control-Allow-Origin": "https://sub.simplely.ca"
+            },
+            "body": null
           }
         }
       ]

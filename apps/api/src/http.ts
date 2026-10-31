@@ -96,6 +96,16 @@ export function noParams(c: Context, route: string): ParamProblem[] {
  * 404 not_found, with the id the request may have meant (docs/api-output-examples.json). Nothing may cache it: the
  * next deploy can add what's missing.
  */
+/**
+ * 301 to the same route for the id `id` is now (M10.27, data/redirects.yaml), with the query kept: an old provider or
+ * plan id. Cached like the catalog's answers, since a deploy can change it.
+ */
+export function movedTo(c: Context, id: string): Response {
+  const url = new URL(c.req.url);
+  url.pathname = url.pathname.replace(/[^/]*$/, encodeURIComponent(id));
+  return c.body(null, 301, { Location: url.toString(), 'Cache-Control': catalogCacheControl });
+}
+
 export function notFound(c: Context, message: string, suggestion?: string): Response {
   return c.json(
     {

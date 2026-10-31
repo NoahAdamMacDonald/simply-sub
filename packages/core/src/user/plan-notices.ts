@@ -9,9 +9,10 @@ import type { ListItem } from './list-item';
 import { priceChangeDays } from './price-changes';
 
 // What Home tells the users who have a plan when the catalog changes it, beside its price changes (PROJECT-PLAN P2,
-// M10.27): a plan renamed ("Claude Max 20x is now called Ultra"), or ending for its subscribers ("Claude Max ends for
-// its subscribers on Mar 1"). Kept in the settings like the price changes, for a month, and recorded once: by the
-// catalog update that brings the change.
+// M10.27): a plan renamed ("Claude Max 20x is now called Ultra"), ending for its subscribers ("Claude Max ends for its
+// subscribers on Mar 1"), or its subscribers moved to another plan ("Claude Max moved to Claude Pro on Mar 1"). Kept in
+// the settings like the price changes, for a month, and recorded once: by the catalog update that brings the change,
+// or for a move, by the rewrite that moves the items (redirectedRecords).
 
 const noticeFields = {
   planId: planIdSchema,
@@ -34,6 +35,14 @@ export const planNoticeSchema = z.discriminatedUnion('kind', [
     /** The day it ends for its subscribers (its `endsOn`). */
     on: isoDateSchema,
   }),
+  z.strictObject({
+    kind: z.literal('moved'),
+    ...noticeFields,
+    /** The plan its subscribers moved to, where planId is now: "Claude Ultra". */
+    to: textSchema,
+    /** The day they moved (the redirect's). */
+    on: isoDateSchema,
+  }),
 ]);
 export type PlanNotice = z.infer<typeof planNoticeSchema>;
 
@@ -47,6 +56,8 @@ export function planNoticeText(notice: PlanNotice, day: (date: IsoDate) => strin
       return `${notice.title} is now called ${notice.name}`;
     case 'ends':
       return `${notice.title} ends for its subscribers on ${day(notice.on)}`;
+    case 'moved':
+      return `${notice.title} moved to ${notice.to} on ${day(notice.on)}`;
   }
 }
 

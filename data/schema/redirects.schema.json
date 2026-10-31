@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "kind": {
+        "type": "string",
+        "enum": ["provider", "plan", "add-on", "bundle", "feature", "perk"],
+        "description": "What it redirects: a provider, plan, add-on or bundle id, or a feature or perk rank key (video.quality=4k, perk:xbox-game-pass/fortnite-crew)"
+      },
+      "from": {
+        "type": "string",
+        "description": "The old id: gone from the catalog, or a retired plan or provider"
+      },
+      "to": {
+        "type": "string",
+        "description": "The id it points to now, which exists and is still sold. A perk can point to a feature rank key"
+      },
+      "on": {
+        "type": "string",
+        "format": "date",
+        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+        "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+        "description": "The day the id changed, or the day a retired plan's subscribers move to the new one"
+      }
+    },
+    "required": ["kind", "from", "to", "on"],
+    "additionalProperties": false
+  },
+  "title": "Simply Sub redirects",
+  "description": "data/redirects.yaml: old id → new id, for an id that had to change or a retired plan's subscribers moved (BLUEPRINT §4.3)"
+}

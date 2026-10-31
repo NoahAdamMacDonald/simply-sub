@@ -5,12 +5,13 @@ import {
   planIdSchema,
   readPricingQuery,
   rebaseRates,
+  redirectedCatalogId,
   suggestedPlanId,
 } from '@simply-sub/core';
 import { Hono, type Context } from 'hono';
 import { catalogIdsFile, catalogJson, missingFiles } from '../catalog-files';
 import { loadPlan } from '../db/lookups';
-import { badQuery, noExchangeRates, notFound, notSeeded, shortHash } from '../http';
+import { badQuery, movedTo, noExchangeRates, notFound, notSeeded, shortHash } from '../http';
 import { lookupJson, regionRates, unchanged } from '../lookup';
 
 /**
@@ -18,7 +19,8 @@ import { lookupJson, regionRates, unchanged } from '../lookup';
  * rank keys it provides (from the static features.json) and the bundles that include it, and with a region, picked
  * prices. Plan ids start with their provider's id, and the provider's JSON holds the plan and its add-ons, so it
  * reads the catalog row, the provider's and one bundle_plans index entry per bundle (2 rows plus the bundles). An
- * unknown id gets 404 with the id it looks like a typo of, from the static ids.json.
+ * unknown id gets 301 to its new id when data/redirects.yaml has one (M10.27), else 404 with the id it looks like a typo
+ * of, both from the static ids.json.
  *
  * The ETag is D1's catalog version and a hash of the id, the query as read, the rates' date and the registry's
  * version.
@@ -80,5 +82,7 @@ export const plans = new Hono<{ Bindings: Env }>().get('/:id', async (c) => {
 
 async function unknownPlan(c: Context<{ Bindings: Env }>, id: string): Promise<Response> {
   const ids = await catalogIdsFile(c);
+  const moved = ids && redirectedCatalogId(id, 'plan', ids);
+  if (moved !== undefined) return movedTo(c, moved);
   return notFound(c, `No plan with id '${id}'.`, ids && suggestedPlanId(id, ids));
 }

@@ -14,6 +14,7 @@ import { automationSchema } from '../pipeline/automation';
 import { onSites, providerSiteKeys, queueFileSchema } from '../pipeline/queue';
 import type { Price } from './price';
 import { providerSchema, type AddOn, type Plan, type Provider } from './provider';
+import { redirectsFileSchema } from './redirects';
 import { isRetired } from './retired';
 import { globalRegion, groupsOf, isCatalogRegion, membersOf, regionProblem } from './regions';
 import {
@@ -29,6 +30,7 @@ import {
   readFeatureRegistry,
   type FeatureRegistry,
 } from './validate-features';
+import { checkRedirects } from './validate-redirects';
 
 // validateCatalog runs the checks that need more than one file or today's date (BLUEPRINT §6.2), after each
 // file's Zod schema. scripts/validate-data.ts reads data/ and prints the result. Nothing here reads the clock or
@@ -82,6 +84,7 @@ const resellersFile = 'data/resellers.yaml';
 const policyTopicsFile = 'data/policy-topics.yaml';
 const queueFile = 'data/queue.yaml';
 const automationFile = 'data/automation.yaml';
+const redirectsFile = 'data/redirects.yaml';
 const staleAfterDays = 90;
 /** Terms change less often than prices, and no nightly check reads them. */
 const policyStaleAfterDays = 365;
@@ -213,6 +216,24 @@ export function validateCatalog(
   if (located.automation) {
     parseFile(automationSchema, located.automation, reportIn(automationFile));
   }
+  // Optional: ids are permanent, so there's often nothing to redirect (BLUEPRINT §4.3).
+  if (located.redirects) {
+    const reportRedirects = reportIn(redirectsFile);
+    const redirects = parseFile(redirectsFileSchema, located.redirects, reportRedirects);
+    if (redirects) {
+      checkRedirects(
+        redirects,
+        {
+          providers: providers.map(({ value }) => value),
+          bundles: bundles.map(({ value }) => value),
+          registry,
+          unchecked,
+          today,
+        },
+        reportRedirects,
+      );
+    }
+  }
   return issues;
 }
 
@@ -237,6 +258,7 @@ interface LocatedFiles {
   policyTopics?: CatalogSourceFile;
   queue?: CatalogSourceFile;
   automation?: CatalogSourceFile;
+  redirects?: CatalogSourceFile;
   providers: NamedFile[];
   bundles: NamedFile[];
   logos: NamedFile[];
@@ -267,6 +289,9 @@ export function locateCatalogFile(
   if (file === automationFile) {
     return { kind: 'automation', name: 'automation' };
   }
+  if (file === redirectsFile) {
+    return { kind: 'redirects', name: 'redirects' };
+  }
   const named = /^data\/(providers|bundles)\/([^/]+)\.yaml$/.exec(file);
   if (named) {
     return { kind: named[1] === 'providers' ? 'provider' : 'bundle', name: named[2] };
@@ -295,6 +320,8 @@ function locateFiles(
       located.queue = source;
     } else if (where?.kind === 'automation') {
       located.automation = source;
+    } else if (where?.kind === 'redirects') {
+      located.redirects = source;
     } else if (where) {
       const list = { provider: 'providers', bundle: 'bundles', logo: 'logos' } as const;
       located[list[where.kind]].push({ source, name: where.name });
@@ -309,7 +336,7 @@ function locateFiles(
     } else {
       reportIn(file)(
         [],
-        'Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/automation.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
+        'Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/automation.yaml, data/redirects.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
       );
     }
   }

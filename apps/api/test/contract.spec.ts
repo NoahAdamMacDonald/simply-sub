@@ -7,6 +7,7 @@ import {
   successBodySchemas,
   syncBody,
   type CalendarFeed,
+  type Redirect,
 } from '@simply-sub/core';
 import { env } from 'cloudflare:workers';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -78,6 +79,8 @@ interface Setup {
   syncChain?: true;
   /** DELETE /join/:id's example's link is stored, with its sealed code, working for 10 more minutes. */
   joinLink?: true;
+  /** data/redirects.yaml has this entry (M10.27): the real catalog keeps its ids, so it has none. */
+  redirect?: Redirect;
 }
 
 /** The state an example needs, by its title. */
@@ -98,6 +101,12 @@ const setups: Record<string, Setup> = {
   'Start a chain that already exists': { syncChain: true },
   'Delete the synced copy': { syncChain: true },
   'Take the sealed code, once': { joinLink: true },
+  'An old provider id (redirected)': {
+    redirect: { kind: 'provider', from: 'netflix-ca', to: 'netflix', on: '2026-10-30' },
+  },
+  'An old plan id (redirected)': {
+    redirect: { kind: 'plan', from: 'netflix.basic', to: 'netflix.standard-ads', on: '2026-10-30' },
+  },
 };
 
 /** Stores the chain GET /sync/:chain's example reads, at version 3, with the example's sealed copy. */
@@ -164,8 +173,11 @@ async function storeExampleFeedSet(): Promise<void> {
 
 /** A header whose value is new each time: what of it can be compared. */
 const madeEachTime: Record<string, (value: string) => RegExp> = {
-  // A new feed set's id.
-  Location: (value) => new RegExp(`^${value.replace(/[A-Za-z0-9_-]{22}$/, '[A-Za-z0-9_-]{22}')}$`),
+  // A new feed set's id, at the end; anything else (a redirect's URL, M10.27) as it is.
+  Location: (value) =>
+    new RegExp(
+      `^${value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/[A-Za-z0-9_-]{22}$/, '[A-Za-z0-9_-]{22}')}$`,
+    ),
 };
 
 const snapshot = catalogSnapshot(catalogVersion);
@@ -286,7 +298,15 @@ describe('every example of a built endpoint, sent to the Worker', () => {
           body: Uint8Array.from(atob(request.bodyBase64), (char) => char.charCodeAt(0)),
         }),
       }),
-      { ...env, ASSETS: assets },
+      {
+        ...env,
+        ASSETS: setup.redirect
+          ? catalogAssets({
+              ...snapshot,
+              data: { ...snapshot.data, redirects: [setup.redirect] },
+            })
+          : assets,
+      },
     );
 
     expect(answer.status).toBe(response.status);
@@ -309,7 +329,7 @@ describe('every example of a built endpoint, sent to the Worker', () => {
     }
 
     const schema = successBodySchemas[endpoint as keyof typeof successBodySchemas];
-    if (response.status === 304 || response.status === 204 || response.status === 202) {
+    if ([301, 304, 204, 202].includes(response.status)) {
       expect(await answer.text()).toBe('');
     } else if (response.status >= 400) {
       const body = await answer.json();

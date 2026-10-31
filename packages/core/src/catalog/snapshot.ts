@@ -5,6 +5,7 @@ import { featuresFileSchema, type Feature } from './feature';
 import { httpsUrlSchema, regionSchema } from './formats';
 import { policyTopicSchema, policyTopicsFileSchema, type PolicyTopic } from './policy-topic';
 import { providerSchema, type Provider } from './provider';
+import { redirectSchema, redirectsFileSchema, type Redirect } from './redirects';
 import { resellerSchema, resellersFileSchema, type Reseller } from './reseller';
 import { locateCatalogFile, type CatalogSourceFile } from './validate-catalog';
 
@@ -54,6 +55,13 @@ export const catalogDataSchema = z.strictObject({
     .describe(
       "data/policy-topics.yaml: what providers' policies sections rate, in its order (BLUEPRINT §4.10)",
     ),
+  redirects: z
+    .array(redirectSchema)
+    .min(1)
+    .describe(
+      'data/redirects.yaml: old id → new id, which the app follows and rewrites in its records (BLUEPRINT §4.3). Left out when there are none',
+    )
+    .optional(),
 });
 export type CatalogData = z.infer<typeof catalogDataSchema>;
 
@@ -101,6 +109,8 @@ export interface CatalogSource {
   resellers: Reseller[];
   /** data/policy-topics.yaml's, in its order, or none without the file. */
   policyTopics: PolicyTopic[];
+  /** data/redirects.yaml's, in its order, or none without the file. */
+  redirects: Redirect[];
   /** Provider or reseller id → its logo, a PNG from data/logos/. */
   logos: ReadonlyMap<string, Uint8Array>;
 }
@@ -116,6 +126,7 @@ export function readCatalogSource(files: readonly CatalogSourceFile[]): CatalogS
   const bundles: Bundle[] = [];
   let resellers: Reseller[] = [];
   let policyTopics: PolicyTopic[] = [];
+  let redirects: Redirect[] = [];
   const logos = new Map<string, Uint8Array>();
   for (const source of files) {
     const where = locateCatalogFile(source.file);
@@ -143,6 +154,9 @@ export function readCatalogSource(files: readonly CatalogSourceFile[]): CatalogS
       case 'policy-topics':
         policyTopics = parsed(policyTopicsFileSchema, source);
         break;
+      case 'redirects':
+        redirects = parsed(redirectsFileSchema, source);
+        break;
     }
   }
   if (!features || !categories) {
@@ -156,6 +170,7 @@ export function readCatalogSource(files: readonly CatalogSourceFile[]): CatalogS
     bundles: bundles.sort(byId),
     resellers: resellers.sort(byId),
     policyTopics,
+    redirects,
     logos,
   };
 }
@@ -195,6 +210,7 @@ export function buildCatalogData(source: CatalogSource, iconBaseUrl: string): Ca
       ...rest,
     })),
     policyTopics: source.policyTopics,
+    ...(source.redirects.length > 0 && { redirects: source.redirects }),
   };
 }
 
