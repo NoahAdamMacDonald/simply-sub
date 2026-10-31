@@ -289,6 +289,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.27 | Ids that last (added 2026-10-30, the owner's choice): catalog ids stay readable slugs and are permanent once published. A renamed plan keeps its id with `formerNames`: Search matches them, its cards say "Ultra (formerly Max 20x)" for six months, and Home tells those who have it, once. A plan or provider no longer sold is `retired`, never deleted: never offered, still counted, with an optional `endsOn` (Home warns ahead, Optimizations lists replacements that keep its Needed keys) or a dated move in `data/redirects.yaml`. That file maps an id that had to change to its new one: the app follows it and rewrites users' records once, and the API answers the old id with a redirect. A CI guard fails a branch where a published id disappears (P2, P4, P8, P14; BLUEPRINT §4.3, §6.2, §14) | Deleting a plan fails `data:validate` and `ci`, naming it and the three fixes; Claude's Max and Ultra keep their ids and users' items; an item on a redirected plan resolves, and its record is rewritten once |
 | M10.28 | Names and billing that follow the provider (added 2026-10-30, the owner's choice): a renamed plan's old name shows on an item only until its first renewal after the rename, and nowhere for a user who doesn't have the plan; a billing period a plan no longer sells keeps its price, `retired` (and `endsOn` when existing subscribers keep it longer), never deleted, and the ids guard covers each plan's periods per region. An item on it switches at its next renewal to the closest period still sold, and Home and the item card ask the user to check their billing, with a link and three choices saved at once with Undo: Switch, Cancel at that renewal, or Keep it (Grandfathered) (P2, P4; BLUEPRINT §4.3, §14) | Claude's Ultra shows "(formerly Max 20x)" to a subscriber until their renewal and never to anyone else; a monthly price retired moves a monthly item to yearly at its renewal in the totals, and each choice saves and undoes |
 | M10.29 | Card fees in the budgets (added 2026-10-30, the owner's report and choice): a charge paid with a card includes the card's FX fee, which leaves the account with it, so every total, budget bar and warning, the Calendar and the exports count it; cash back never lowers them, since it's paid later and not always monthly, but each charge carries it, and this year's shows as "≈ $12.40 cash back this year" on List view, the Lists overview (every list together), Home and the Calendar's year view (P2, P3, P4, P10; BLUEPRINT §9.3, §14) | Mullvad at ≈ $7.80 on a card with a 2.5% FX fee counts ≈ $8.00 in this month's budget; a 2% cash-back card shows the year's cash back in all four places and leaves the budgets as they were |
+| M10.30 | Cost breakdowns on the bars (added 2026-10-30, the owner's request): every budget bar (Home, the Lists overview and its cards, List view, the Calendar's month and year, Payment's card limits) opens what it adds up: each subscription's charges in the bar's period, with its price, sales tax and FX fee, and the exchange rate of a converted one, then the totals of each. Hovering the bar shows it and a click or tap keeps it; a breakdown button beside the bar does the same by keyboard, and Escape closes it (P2, P3, P4, P10, P11) | Home's this-month bar lists Mullvad's €5.00 at its rate with its 2.5% FX fee and Netflix's tax, and their sum is the bar's total |
 
 #### M10 specs
 
@@ -1002,6 +1003,20 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   (not on a Lists card); the Calendar's year view shows it above its months, in `ss-calendar-year`, since the
   Calendar page's styles are at their 4 kB budget. The initial bundle is unchanged (499.73 kB).
   `check-m10-card-fees.cjs` (browser-check skill): 65 checks in both themes at both widths.
+
+**M10.30 — Cost breakdowns on the bars** (P2, P3, P4, P10, P11)
+- **What:** a bar's breakdown is its period's charges (this month, this year, the Calendar's month or year, a card's
+  month), by subscription: its title, how many charges, the price before tax, the sales tax, the FX fee, its total,
+  and for a converted one what the provider charges and the rate ("€5.00 at 1.5694"). Then the totals: prices, tax,
+  FX fees, and the bar's total. Core's `costBreakdown(charges, currency)` adds them up; the price is a charge's amount
+  less its tax and fee, and the rate its amount less the fee over what's charged, both tax included.
+- **How it opens:** the bar, hovered, shows it beside it (in an overlay, so a card never clips it); a click or tap
+  keeps it open, and another closes it. Beside the bar, a small button ("Breakdown of this month", a receipt icon)
+  opens it by keyboard with `aria-expanded`; Escape, a click outside or the button closes it, focus back on the button.
+  The breakdown is worked out only when it opens.
+- **Acceptance**
+  - [ ] Core: the lines and totals of a period's charges, a converted charge's rate, and the sum equal to the total
+  - [ ] Every bar opens one, by hover, click, tap and keyboard, in both themes at 360 and 1280 px with axe
 
 ### M11 — Catalog expansion (Phase 6)
 Planned on 2026-10-30 with the owner, from `docs/catalog-expansion-guide.md` (the owner's research list, the rules
