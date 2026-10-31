@@ -103,6 +103,20 @@
             "pattern": "^https://",
             "patternErrorMessage": "Use a full https:// URL",
             "description": "The page the price was read from"
+          },
+          "retired": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+            "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+            "description": "The day this billing period stopped being sold to new subscribers (M10.28): never delete a price. Items billed this way switch to the closest period still sold at their next renewal"
+          },
+          "endsOn": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+            "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+            "description": "When the provider lets existing subscribers keep this period longer: the day they lose it. Needs retired"
           }
         },
         "required": [

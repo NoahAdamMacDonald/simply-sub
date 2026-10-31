@@ -4,6 +4,7 @@ import { salesTaxOn } from '../tax/charge-tax';
 import { buyerTaxPlace, type TaxPlace } from '../tax/sales-tax-rate';
 import { samePeriod, type Period } from '../dates/period';
 import type { ListItem, PriceOverride } from '../user/list-item';
+import { switchedBilling } from '../user/reanchor';
 import type { ResolvedItem } from '../user/resolved';
 import { chargeDates, lastChargeDate, nextChargeDate, type DateRange } from './charge-dates';
 
@@ -49,8 +50,38 @@ export type ChargeCost = Pick<Charge, 'amount' | 'tax' | 'currency' | 'converted
  */
 export type Chargeable = Pick<
   ResolvedItem,
-  'item' | 'listId' | 'price' | 'addOns' | 'overridePrice' | 'planEnds'
+  'item' | 'listId' | 'price' | 'addOns' | 'overridePrice' | 'planEnds' | 'periodChange'
 >;
+
+/**
+ * An item whose billing period isn't sold any more (M10.28), as two: on its period until the renewal it switches on,
+ * and on the period it switches to from then, at that price (its own price was for the old period). Undefined when
+ * there's no switch: none, or no period left to switch to.
+ */
+function switchParts(resolved: Chargeable): { before: Chargeable; after: Chargeable } | undefined {
+  const change = resolved.periodChange;
+  if (!change?.to) return undefined;
+  const rest: Chargeable = { ...resolved };
+  delete rest.periodChange;
+  return {
+    before: { ...rest, planEnds: change.on },
+    after: {
+      ...rest,
+      price: change.to,
+      overridePrice: undefined,
+      item: { ...rest.item, billing: switchedBilling(rest.item.billing, change.to, change.on) },
+    },
+  };
+}
+
+/** `charges` without "Ends": the item goes on, on another period. */
+function goingOn(charges: readonly Charge[]): Charge[] {
+  return charges.map((charge) => {
+    const going = { ...charge };
+    delete going.ends;
+    return going;
+  });
+}
 
 /**
  * The item as its charges and status see it: a plan that ends for its subscribers (its `endsOn`, M10.27) ends a
@@ -78,6 +109,13 @@ interface Part {
  * window (Disney+'s monthly extra member on a yearly plan). A charge that comes to 0 (a free plan) isn't one.
  */
 export function itemCharges(resolved: Chargeable, range: DateRange, place: TaxPlace): Charge[] {
+  const parts = switchParts(resolved);
+  if (parts) {
+    return [
+      ...goingOn(itemCharges(parts.before, range, place)),
+      ...itemCharges(parts.after, range, place),
+    ];
+  }
   const item = chargedItem(resolved);
   const { billing } = item;
   const { planEnds } = resolved;
@@ -159,6 +197,11 @@ export function nextCharge(
   today: IsoDate,
   place: TaxPlace,
 ): Charge | undefined {
+  const parts = switchParts(resolved);
+  if (parts) {
+    const before = nextCharge(parts.before, today, place);
+    return before ? goingOn([before])[0] : nextCharge(parts.after, today, place);
+  }
   const { billing } = chargedItem(resolved);
   const prices = [resolved.price, ...resolved.addOns.map((addOn) => addOn.price)];
   if (resolved.overridePrice === undefined && prices.every((price) => price.amount === 0)) {

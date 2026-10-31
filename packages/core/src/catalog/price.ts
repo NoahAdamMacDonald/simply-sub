@@ -6,9 +6,10 @@ export type Interval = z.infer<typeof intervalSchema>;
 
 /**
  * One stored price: a plan, add-on or bundle's cost in one region for one billing period. A free plan has one
- * price of 0 (BLUEPRINT §4.3).
+ * price of 0 (BLUEPRINT §4.3). A billing period no longer sold keeps its price, `retired` (M10.28).
  */
-export const priceSchema = z.strictObject({
+export const priceSchema = z
+  .strictObject({
   region: regionSchema.describe(
     'Where this price applies: an ISO 3166-1 alpha-2 region, or GLOBAL',
   ),
@@ -37,7 +38,29 @@ export const priceSchema = z.strictObject({
     "The date someone last checked this price on the provider's site",
   ),
   sourceUrl: httpsUrlSchema.describe('The page the price was read from').optional(),
-});
+  retired: isoDateSchema
+    .describe(
+      "The day this billing period stopped being sold to new subscribers (M10.28): never delete a price. Items billed this way switch to the closest period still sold at their next renewal",
+    )
+    .optional(),
+  endsOn: isoDateSchema
+    .describe(
+      'When the provider lets existing subscribers keep this period longer: the day they lose it. Needs retired',
+    )
+    .optional(),
+  })
+  .superRefine(({ retired, endsOn }, ctx) => {
+    if (endsOn === undefined) return;
+    if (retired === undefined) {
+      ctx.addIssue({ code: 'custom', message: 'endsOn needs retired', path: ['endsOn'] });
+    } else if (endsOn < retired) {
+      ctx.addIssue({
+        code: 'custom',
+        message: `Must be on or after retired (${retired})`,
+        path: ['endsOn'],
+      });
+    }
+  });
 export type Price = z.infer<typeof priceSchema>;
 
 export const pricesSchema = z.array(priceSchema).min(1, 'List at least one price');

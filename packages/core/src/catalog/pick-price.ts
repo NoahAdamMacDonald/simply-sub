@@ -17,6 +17,11 @@ export interface PriceContext {
   billingCurrency?: Readonly<Record<string, string>>;
   /** Exchange rates (GET /fx). Without a rate, a price in another currency stays in its own. */
   fx?: FxRates;
+  /**
+   * Keep retired prices (M10.28): an item billed on a period no longer sold still costs it until it switches. Left
+   * out, they're not sold, so nothing offers them.
+   */
+  withRetired?: true;
 }
 
 /** A price as the user sees it: the API's `pricing` entries (docs/api-output-examples.json), in their key order. */
@@ -79,9 +84,11 @@ const periodOrder: Record<Interval, number> = { day: 0, week: 1, month: 2, year:
  * 4. US, GB or EU, then the first region listed, converted.
  * In a region with several currencies, the user's wins, then the one billingCurrency names, then the first listed.
  * A free price is native whatever its currency, since 0 needs no rate. No prices give an empty list. Whether the
- * item is sold in the user's region at all is availability's question (availability.ts).
+ * item is sold in the user's region at all is availability's question (availability.ts). A retired price is left out
+ * unless the context asks for it (M10.28).
  */
-export function pickPrice(prices: readonly Price[], context: PriceContext): PickedPrice[] {
+export function pickPrice(all: readonly Price[], context: PriceContext): PickedPrice[] {
+  const prices = context.withRetired ? all : all.filter((price) => price.retired === undefined);
   const source = pickSource(prices, context);
   return prices
     .filter((price) => price.region === source?.region && price.currency === source.currency)

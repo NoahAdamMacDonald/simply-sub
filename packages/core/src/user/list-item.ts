@@ -163,6 +163,11 @@ export const listItemSchema = z
      * list don't reach it, and its own don't reach them. Left out, they're shared.
      */
     ownRanks: z.literal(true).optional(),
+    /**
+     * The user keeps a billing period the provider no longer sells (P4, M10.28): it isn't switched at its renewal, and
+     * its card says Grandfathered. Left out, it switches to the closest period still sold.
+     */
+    grandfathered: z.literal(true).optional(),
     pinned: z.boolean(),
     /** The user's own name for it, which tells two of the same plan apart: "Mom's". */
     nickname: textSchema

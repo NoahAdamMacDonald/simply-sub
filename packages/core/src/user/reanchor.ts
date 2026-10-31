@@ -1,5 +1,6 @@
 import { isoDateSchema } from '../catalog/formats';
 import type { IsoDate } from '../dates/iso-date';
+import type { Period } from '../dates/period';
 import { keptBillingDay } from './item-form';
 import type { Billing } from './list-item';
 
@@ -18,6 +19,17 @@ export function reanchored(billing: Recurring, date: IsoDate): Recurring {
   const changed: Recurring = { ...billing, anchorDate: date };
   delete changed.billingDay;
   return billingDay === undefined ? changed : { ...changed, billingDay };
+}
+
+/**
+ * `billing` on another period from the renewal `on` (M10.28: a period the provider no longer sells, switched): a
+ * recurring item is billed every `period` from `on`, which becomes its anchor; a limited one keeps its windows.
+ */
+export function switchedBilling(billing: Billing, period: Period, on: IsoDate): Billing {
+  const { interval, intervalCount } = period;
+  return billing.mode === 'recurring'
+    ? reanchored({ ...billing, interval, intervalCount }, on)
+    : { ...billing, interval, intervalCount };
 }
 
 /**
