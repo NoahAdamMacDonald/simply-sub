@@ -67,10 +67,12 @@ export class CostBreakdown {
   private readonly pinned = signal(false);
   private leaving?: ReturnType<typeof setTimeout>;
 
-  protected readonly positions: ConnectedPosition[] = [
-    { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top', offsetY: 8 },
-    { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom', offsetY: -8 },
-  ];
+  /**
+   * Under the bar, else above it, lined up with its start and moved along just enough to stay 8 px inside the window:
+   * a bar by its right edge (List view's side column) or in a card on a phone, where the breakdown is nearly as wide as
+   * the window. Worked out as it opens.
+   */
+  protected readonly positions = signal<ConnectedPosition[]>([]);
 
   /** The breakdown, worked out while it's open. */
   protected readonly breakdown = computed(() => {
@@ -122,6 +124,36 @@ export class CostBreakdown {
   /** The pointer on the bar or the breakdown: show it. */
   protected hover(): void {
     clearTimeout(this.leaving);
+    this.show();
+  }
+
+  /** Opens it where it fits (positions). */
+  private show(): void {
+    if (this.open()) return;
+    const origin = this.wrap()?.nativeElement.getBoundingClientRect();
+    const margin = 8;
+    // The breakdown's width: min(360px, 100vw − 32px), as its styles have it.
+    const width = Math.min(360, innerWidth - 32);
+    const left = origin?.left ?? margin;
+    const offsetX = Math.min(Math.max(left, margin), innerWidth - margin - width) - left;
+    this.positions.set([
+      {
+        originX: 'start',
+        originY: 'bottom',
+        overlayX: 'start',
+        overlayY: 'top',
+        offsetX,
+        offsetY: 8,
+      },
+      {
+        originX: 'start',
+        originY: 'top',
+        overlayX: 'start',
+        overlayY: 'bottom',
+        offsetX,
+        offsetY: -8,
+      },
+    ]);
     this.open.set(true);
   }
 
@@ -139,7 +171,7 @@ export class CostBreakdown {
       this.close(false);
     } else {
       this.pinned.set(true);
-      this.open.set(true);
+      this.show();
     }
   }
 
@@ -150,7 +182,7 @@ export class CostBreakdown {
       return;
     }
     this.pinned.set(true);
-    this.open.set(true);
+    this.show();
     setTimeout(() => this.panel()?.nativeElement.focus());
   }
 

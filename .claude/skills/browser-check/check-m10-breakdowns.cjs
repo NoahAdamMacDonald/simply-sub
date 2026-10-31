@@ -200,6 +200,11 @@ async function plant(page) {
 
 const textOf = (locator) => locator.innerText().then((text) => text.replace(/\s+/g, ' ').trim());
 const panel = (page) => page.locator('.cdk-overlay-container .panel');
+/** Whether the open breakdown is wholly inside the window, 8 px from its edges at least. */
+async function onScreen(page, viewport) {
+  const box = await panel(page).boundingBox();
+  return box !== null && box.x >= 8 && box.x + box.width <= viewport.width - 8;
+}
 /** The lines of the open breakdown. */
 const lines = (page) =>
   panel(page)
@@ -246,6 +251,7 @@ async function run(browser, colorScheme, viewport) {
         ),
       found.join(' | '),
     );
+    check(`${label}: Home's breakdown is on screen`, await onScreen(page, viewport));
     const total = await textOf(panel(page).locator('h3'));
     check(`${label}: its heading is the bar's total`, total === 'This month: ≈ $27.98', total);
     await sleep(400);
@@ -287,6 +293,8 @@ async function run(browser, colorScheme, viewport) {
       ['the Calendar', 'calendar?month=2026-10', 'ss-cost-breakdown .trigger', 2],
       ['a Lists card', 'lists', '.lists ss-cost-breakdown .trigger', 1],
       ["Payment's card", 'payment', 'ss-cost-breakdown .trigger', 1],
+      // Its bar is in the side column at 1280 px, by the window's right edge.
+      ['List view', `lists/${TV_LIST}`, 'ss-budget-totals ss-cost-breakdown .trigger', 1],
     ]) {
       await page.goto(`${baseUrl}${url}`);
       const trigger = page.locator(selector).first();
@@ -302,6 +310,7 @@ async function run(browser, colorScheme, viewport) {
         opened.length === expected,
         opened.join(' | '),
       );
+      check(`${label}: ${where}'s breakdown is on screen`, await onScreen(page, viewport));
       await sleep(400);
       await axeCheck(page, `${label}: ${where} with the breakdown open`);
       await noSideScroll(page, viewport, `${label} ${where}`);

@@ -1021,8 +1021,11 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
   limit bars) and puts its receipt button beside it; BudgetTotals takes `listIds` for a list's breakdowns. The bar
   opens it on pointer events (`pointerenter`, `pointerleave`, `pointerup`), so a tap works the same and the bar stays
   out of the tab order, which the button is for; the panel is a CDK connected overlay, a non-modal `role="dialog"`,
-  focused when the button opens it. The initial bundle is unchanged (499.73 kB). `check-m10-breakdowns.cjs`
-  (browser-check skill): 63 checks in both themes at both widths, touch at 360.
+  focused when the button opens it. It opens under the bar (above when there's no room), lined up with its start
+  and moved along just enough to stay 8 px inside the window, worked out as it opens: the owner found it cut off by
+  the window's right edge on List view's side column at 1280 px, where CDK's own fallbacks didn't help. The initial
+  bundle is unchanged (499.73 kB). `check-m10-breakdowns.cjs` (browser-check skill): 95 checks in both themes at both
+  widths, touch at 360, each open breakdown inside the window, List view's included.
 
 ### M11 — Catalog expansion (Phase 6)
 Planned on 2026-10-30 with the owner, from `docs/catalog-expansion-guide.md` (the owner's research list, the rules
