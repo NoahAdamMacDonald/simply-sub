@@ -10,6 +10,7 @@ import { dueRedirectMap, redirected } from '../catalog/redirects';
 import { retirementOf, type Retirement } from '../catalog/retired';
 import type { Price } from '../catalog/price';
 import type { CardNetwork, Plan } from '../catalog/provider';
+import type { CardTerms } from '../rewards/card-cost';
 import { catalogIconFile, type CatalogData, type SnapshotProvider } from '../catalog/snapshot';
 import type { IsoDate } from '../dates/iso-date';
 import { providedKeys, type RankKey } from '../ranking/rank-keys';
@@ -143,6 +144,11 @@ export interface ResolvedItem {
    * §9.3, M9.3). Left out when they aren't known there, and for a custom subscription: every card is then allowed.
    */
   acceptedNetworks?: readonly CardNetwork[];
+  /**
+   * The payment card it's paid with (its cardId), with what its charges need to be worked out on it (M10.29): each
+   * charge then includes the card's FX fee and carries its cash back. Left out with no card, or one not found.
+   */
+  paidWith?: PaidWith;
 }
 
 /**
@@ -163,6 +169,14 @@ export interface PeriodChange {
   on: IsoDate;
   /** The closest period still sold in its price list, picked for the user; none when that list sells nothing more. */
   to?: PickedPrice;
+}
+
+/** A card an item is paid with, as its charges are worked out on it (ResolvedItem.paidWith). */
+export interface PaidWith {
+  card: CardTerms;
+  /** The user's currency, which a fee and cash back are added up in. */
+  currency: string;
+  fx?: FxRates;
 }
 
 /** An item that can't be resolved. Pages say why, and totals leave it out (M7.1). */
@@ -189,6 +203,8 @@ export interface ResolveContext {
   profileRanks: ProfileRanks;
   /** Where the user pays sales tax, for the next charge: Settings' country, province and rate. Left out, no tax. */
   taxPlace?: TaxPlace;
+  /** The user's payment cards by id, for the items paid with one (M10.29). */
+  cards?: ReadonlyMap<string, CardTerms>;
 }
 
 /**
@@ -338,6 +354,12 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
     }
   }
   const overridePrice = typedOverride(item, parts.price, priceContext(context, region));
+  const card = item.cardId === undefined ? undefined : context.cards?.get(item.cardId);
+  const paidWith: PaidWith | undefined = card && {
+    card,
+    currency: context.currency,
+    ...(context.fx && { fx: context.fx }),
+  };
   const override =
     item.priceOverride && ownPriceOn(item.priceOverride, context.today) ? overridePrice : undefined;
   const keys = providedKeys(parts.features, catalog.features);
@@ -347,6 +369,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
     price: parts.price,
     addOns: parts.addOns,
     overridePrice,
+    ...(paidWith && { paidWith }),
     ...(parts.planEnds !== undefined && { planEnds: parts.planEnds }),
     ...(parts.periodChange && { periodChange: parts.periodChange }),
   };
@@ -362,6 +385,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
       listId: item.listId,
       ...parts,
       region,
+      ...(paidWith && { paidWith }),
       ...(override && { override }),
       ...(overridePrice && { overridePrice }),
       monthlyEquivalent:
