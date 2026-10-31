@@ -1,0 +1,62 @@
+<div #wrap class="wrap" cdkOverlayOrigin #origin="cdkOverlayOrigin">
+  <!-- The bar: the pointer shows the breakdown, a click or tap keeps it. The button beside it is the keyboard's way. -->
+  <div class="trigger" (mouseenter)="hover()" (mouseleave)="leave()" (click)="toggle()">
+    <ng-content />
+  </div>
+  <button
+    #button
+    matIconButton
+    type="button"
+    class="open"
+    [attr.aria-expanded]="open()"
+    [attr.aria-controls]="open() ? id : null"
+    [attr.aria-label]="'Breakdown of ' + period()"
+    (click)="fromButton()"
+  >
+    <mat-icon>receipt_long</mat-icon>
+  </button>
+</div>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayOpen]="open()"
+  [cdkConnectedOverlayPositions]="positions"
+  (overlayOutsideClick)="outside($event)"
+  (detach)="close(false)"
+>
+  <!-- Spaces go inside the spans: Angular drops the whitespace between them, and screen readers need it. -->
+  <div
+    #panel
+    class="panel"
+    role="dialog"
+    tabindex="-1"
+    [id]="id"
+    [attr.aria-labelledby]="id + '-title'"
+    (keydown.escape)="close(true)"
+    (mouseenter)="hover()"
+    (mouseleave)="leave()"
+  >
+    @if (breakdown(); as breakdown) {
+      <h3 [id]="id + '-title'">
+        <span>{{ heading() }}: </span><span>{{ breakdown.total }}</span>
+      </h3>
+      @if (breakdown.lines.length === 0) {
+        <p class="none">No payments.</p>
+      } @else {
+        <ul>
+          @for (line of breakdown.lines; track line.itemId) {
+            <li>
+              <div class="row">
+                <span class="name">{{ line.name }} </span>
+                <span class="amount">{{ line.total }} </span>
+              </div>
+              <p class="parts">{{ line.parts }}</p>
+            </li>
+          }
+        </ul>
+        <p class="sums">{{ breakdown.sums }}</p>
+      }
+    }
+  </div>
+</ng-template>

@@ -1,10 +1,11 @@
 import { Component, booleanAttribute, computed, inject, input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import type { ListMetrics } from '@simply-sub/core';
+import { monthOf, monthRange, yearRange, type DateRange, type ListMetrics } from '@simply-sub/core';
 import { ClockService } from '../../core/clock/clock-service';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { BudgetBar } from '../budget-bar/budget-bar';
+import { CostBreakdown } from '../cost-breakdown/cost-breakdown';
 import { amountText } from '../price-tag/price-text';
 
 /** One budget's line: this month's or this year's total, against its budget when there's one. */
@@ -18,6 +19,10 @@ interface BudgetLine {
   spoken: string;
   /** Home's link in place of a missing budget. */
   prompt: string;
+  /** Its period, which its breakdown adds up (M10.30): this month, or this year. */
+  range: DateRange;
+  /** "this month", "2026": the breakdown's name for it. */
+  period: string;
 }
 
 let nextId = 0;
@@ -30,7 +35,7 @@ let nextId = 0;
  */
 @Component({
   selector: 'ss-budget-totals',
-  imports: [BudgetBar, MatIcon, RouterLink],
+  imports: [BudgetBar, CostBreakdown, MatIcon, RouterLink],
   templateUrl: './budget-totals.html',
   styleUrl: './budget-totals.scss',
 })
@@ -45,6 +50,8 @@ export class BudgetTotals {
   readonly prompt = input(false, { transform: booleanAttribute });
   /** What the totals are of, which a card's bars are named for: "Work Related". */
   readonly name = input('');
+  /** The lists the totals are of, which the breakdowns add up (M10.30); left out, every list. */
+  readonly listIds = input<ReadonlySet<string>>();
 
   protected readonly id = `ss-budget-totals-${nextId++}`;
   protected readonly lines = computed<BudgetLine[]>(() => {
@@ -70,6 +77,8 @@ export class BudgetTotals {
         shown: `${approx ? '≈ ' : ''}${money(amount)}${of} ${when}`,
         spoken: `${approx ? 'about ' : ''}${money(amount)}${of} ${when}`,
         prompt,
+        range: kind === 'month' ? monthRange(monthOf(this.today())) : yearRange(this.today()),
+        period: kind === 'month' ? 'this month' : year,
       };
     };
     return [

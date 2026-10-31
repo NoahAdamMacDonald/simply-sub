@@ -39,13 +39,20 @@
               <div class="limit">
                 <span class="limit-heading">This month</span>
                 <div class="line">
-                  <ss-budget-bar
+                  <!-- What the card's month adds up, on hover, a click or tap, and its button (M10.30). -->
+                  <ss-cost-breakdown
                     class="bar"
-                    [value]="limit.value"
-                    [max]="limit.max"
-                    [currency]="limit.currency"
-                    [attr.aria-label]="tile.title + ', this month against its limit'"
-                  />
+                    [range]="thisMonth()"
+                    period="this month"
+                    [cardId]="tile.card.id"
+                  >
+                    <ss-budget-bar
+                      [value]="limit.value"
+                      [max]="limit.max"
+                      [currency]="limit.currency"
+                      [attr.aria-label]="tile.title + ', this month against its limit'"
+                    />
+                  </ss-cost-breakdown>
                   <span class="limit-total">
                     <span aria-hidden="true">{{ limit.text.shown }}</span>
                     <span class="visually-hidden">{{ limit.text.spoken }}</span>

@@ -112,6 +112,7 @@ export * from './rewards/eligibility';
 export * from './rewards/monthly-on-card';
 export * from './schedule/charge-dates';
 export * from './schedule/charges';
+export * from './schedule/cost-breakdown';
 export * from './schedule/item-status';
 export * from './schedule/list-metrics';
 export * from './schedule/year-summary';

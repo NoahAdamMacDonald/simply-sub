@@ -50,7 +50,12 @@
                   <div class="cost">
                     <!-- This month and this year, against the budgets (P3, M7.2). -->
                     @if (card.count > 0 && card.metrics; as metrics) {
-                      <ss-budget-totals compact [metrics]="metrics" [name]="card.name" />
+                      <ss-budget-totals
+                        compact
+                        [metrics]="metrics"
+                        [name]="card.name"
+                        [listIds]="card.listIds"
+                      />
                     }
                     <p class="count">{{ card.countText }}</p>
                   </div>

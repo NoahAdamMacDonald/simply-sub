@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import type { ListMetrics, Settings } from '@simply-sub/core';
 import { ClockService } from '../../core/clock/clock-service';
+import { MetricsService } from '../../core/metrics/metrics-service';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { BudgetTotals } from './budget-totals';
 
@@ -50,6 +51,11 @@ describe('BudgetTotals', () => {
         provideRouter([]),
         { provide: SettingsStore, useValue: { saved } },
         { provide: ClockService, useValue: { today: signal('2026-10-28') } },
+        // The bars' breakdowns (M10.30) read it only when one opens.
+        {
+          provide: MetricsService,
+          useValue: { charges: () => [], resolutions: signal(new Map()) },
+        },
       ],
     });
   });

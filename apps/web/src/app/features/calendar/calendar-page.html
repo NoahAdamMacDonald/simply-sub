@@ -34,13 +34,16 @@
   @case ('ready') {
     <!-- The month shown: what's been paid so far of its total, against the monthly budget (P10, BLUEPRINT §8.1.1). -->
     <div class="month-bar">
-      <ss-budget-bar
-        labelMode="amount"
-        [value]="bar().spent"
-        [max]="bar().total"
-        [marker]="bar().budget"
-        [attr.aria-label]="'Paid so far in ' + title()"
-      />
+      <!-- What the month or year adds up, on hover, a click or tap, and its button (M10.30). -->
+      <ss-cost-breakdown class="bar" [range]="barRange()" [period]="title()" [listIds]="shown()">
+        <ss-budget-bar
+          labelMode="amount"
+          [value]="bar().spent"
+          [max]="bar().total"
+          [marker]="bar().budget"
+          [attr.aria-label]="'Paid so far in ' + title()"
+        />
+      </ss-cost-breakdown>
       <p class="month-total">
         <span aria-hidden="true">{{ bar().totalText }}</span>
         <span class="visually-hidden">{{ bar().totalSpoken }} in {{ title() }}</span>

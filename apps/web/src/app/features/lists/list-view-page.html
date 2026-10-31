@@ -102,7 +102,7 @@
            above the cards under it. -->
       @if (total() > 0 && totals(); as totals) {
         <div class="money">
-          <ss-budget-totals [metrics]="totals" />
+          <ss-budget-totals [metrics]="totals" [listIds]="listIds()" />
           @if (!wide()) {
             <ng-container [ngTemplateOutlet]="listCalendar" />
           }

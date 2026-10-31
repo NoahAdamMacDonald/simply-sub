@@ -15,6 +15,8 @@ import {
   cardNetworkNames,
   cardSummary,
   cardTitle,
+  monthOf,
+  monthRange,
   type PaymentCard,
   type ResolvedItem,
 } from '@simply-sub/core';
@@ -27,6 +29,7 @@ import { ItemsRepository } from '../../core/storage/items-repository';
 import { BudgetBar } from '../../shared/budget-bar/budget-bar';
 import type { ShownAndSpoken } from '../../shared/charge-text';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
+import { CostBreakdown } from '../../shared/cost-breakdown/cost-breakdown';
 import { EmptyState } from '../../shared/empty-state/empty-state';
 import { monthText } from '../../shared/date-text';
 import { PageHeader } from '../../shared/page-header/page-header';
@@ -71,7 +74,7 @@ interface PendingFocus {
  */
 @Component({
   selector: 'ss-payment-page',
-  imports: [BudgetBar, EmptyState, MatButton, MatIcon, MatIconButton, PageHeader],
+  imports: [BudgetBar, CostBreakdown, EmptyState, MatButton, MatIcon, MatIconButton, PageHeader],
   templateUrl: './payment-page.html',
   styleUrl: './payment-page.scss',
 })
@@ -84,6 +87,9 @@ export class PaymentPage {
   private readonly fx = inject(FxStore);
   private readonly editor = inject(CardEditor);
   private readonly assigner = inject(CardAssigner);
+
+  /** This month, which a card's bar's breakdown adds up (M10.30). */
+  protected readonly thisMonth = computed(() => monthRange(monthOf(this.clock.today())));
   private readonly confirmer = inject(ConfirmService);
   private readonly snackBar = inject(MatSnackBar);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
