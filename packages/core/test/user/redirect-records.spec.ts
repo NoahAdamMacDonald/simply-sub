@@ -6,7 +6,6 @@ import {
   resolveItem,
   type CatalogData,
   type ListDraft,
-  type ListItem,
   type ProfileRanking,
   type Redirect,
 } from '../../src';
