@@ -108,10 +108,12 @@ export class SubCard {
   protected readonly plan = computed(() =>
     this.plans().find(({ plan }) => plan.id === this.selectedId()),
   );
-  /** "(formerly Max 20x)" beside a renamed plan's name, for six months (M10.27). */
-  protected readonly formerly = computed(() => {
+  /** The plan's name, with a renamed plan's old one for six months (M10.27): "Ultra (formerly Max 20x)". */
+  protected readonly planLine = computed(() => {
     const plan = this.plan()?.plan;
-    return plan && formerlyText(plan, this.today());
+    if (!plan) return '';
+    const formerly = formerlyText(plan, this.today());
+    return formerly === undefined ? plan.name : `${plan.name} ${formerly}`;
   });
   /** How many of the plan's features the user ranks each way, or nothing when they rank none of them. */
   protected readonly rankCounts = computed(() => {

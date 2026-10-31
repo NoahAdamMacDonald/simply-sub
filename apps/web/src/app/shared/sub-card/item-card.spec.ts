@@ -114,6 +114,37 @@ describe('ItemCard', () => {
     expect(mullvad.querySelector('.plan-name')).toBeNull();
   });
 
+  it('says a renamed plan’s old name, and that a retired plan isn’t sold, ends or moves (M10.27)', () => {
+    const card = (item: ResolvedItem) => render(item).nativeElement as HTMLElement;
+    const standard = resolved('netflix.standard');
+    const renamed = card({ ...standard, formerName: 'Basic' });
+    expect(text(renamed.querySelector('.plan-name'))).toBe('Standard (formerly Basic)');
+    expect(renamed.querySelector('.retired')).toBeNull();
+
+    const retired = card({ ...standard, retired: { since: '2026-10-01' } });
+    expect(text(retired.querySelector('.retired span'))).toBe(
+      'Netflix no longer sells Standard to new subscribers.',
+    );
+    const ending = card({
+      ...standard,
+      retired: { since: '2026-10-01', endsOn: '2027-03-01' },
+      planEnds: '2027-03-01',
+    });
+    expect(text(ending.querySelector('.retired span'))).toBe(
+      'Netflix no longer sells Standard to new subscribers. It ends for its subscribers on Mar 1, 2027.',
+    );
+    const moving = card({
+      ...standard,
+      retired: {
+        since: '2026-10-01',
+        movesTo: { planId: 'netflix.premium', title: 'Netflix Premium', on: '2026-12-01' },
+      },
+    });
+    expect(text(moving.querySelector('.retired span'))).toBe(
+      'Netflix no longer sells Standard to new subscribers. Its subscribers move to Netflix Premium on Dec 1, 2026.',
+    );
+  });
+
   it('lists its add-ons under its names, each with its price for all it has (M6.12)', () => {
     const card = render(
       resolved('netflix.standard', {

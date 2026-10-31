@@ -7,12 +7,7 @@
       <h2 class="name" [id]="id + '-name'">{{ provider().name }}</h2>
       @if (plan(); as plan) {
         <!-- A renamed plan's old name, for six months (M10.27): "Ultra (formerly Max 20x)". -->
-        <p class="plan-name">
-          {{ plan.plan.name }}
-          @if (formerly(); as formerly) {
-            <span class="formerly"> {{ formerly }}</span>
-          }
-        </p>
+        <p class="plan-name">{{ planLine() }}</p>
       }
       <ss-status-badge
         class="status"

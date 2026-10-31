@@ -7,12 +7,7 @@
       <h3 class="name" [id]="id + '-name'">{{ names().name }}</h3>
       <!-- A renamed plan's old name, for six months (M10.27): "Ultra (formerly Max 20x)". -->
       @if (names().planName; as planName) {
-        <p class="plan-name">
-          {{ planName }}
-          @if (formerly(); as formerly) {
-            <span class="formerly"> {{ formerly }}</span>
-          }
-        </p>
+        <p class="plan-name">{{ formerly() ? planName + ' ' + formerly() : planName }}</p>
       } @else if (formerly(); as formerly) {
         <p class="plan-name">{{ formerly }}</p>
       }
