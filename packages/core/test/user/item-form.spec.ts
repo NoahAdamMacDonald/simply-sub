@@ -457,6 +457,8 @@ describe('itemFromForm', () => {
         interval: 'month',
         intervalCount: 1,
         anchorDate: '2026-11-26',
+        // Subscribed since the day it's added (M10.31).
+        startDate: today,
         autoRenew: true,
       },
       tagIds: [],
@@ -535,6 +537,7 @@ describe('itemFromForm', () => {
       interval: 'month',
       intervalCount: 1,
       anchorDate: '2027-02-27',
+      startDate: today,
       autoRenew: false,
     });
   });
@@ -588,7 +591,12 @@ describe('itemFromForm', () => {
       billingDay: 31,
       autoRenew: true,
     };
-    const fields = itemFromForm(standardForm(), { ...context, free: true, billingBefore });
+    // As its edit form has it: no start date, since it has none.
+    const fields = itemFromForm(standardForm({ startDate: '' }), {
+      ...context,
+      free: true,
+      billingBefore,
+    });
     expect(fields.billing).toEqual(billingBefore);
   });
 
