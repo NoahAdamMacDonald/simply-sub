@@ -124,6 +124,8 @@ export class ListViewPage {
   private readonly destroyRef = inject(DestroyRef);
   protected readonly customSubs = inject(CustomSubsRepository);
 
+  /** The list, as its totals' breakdowns take it (M10.30). */
+  protected readonly listIds = computed(() => new Set([this.listId() ?? '']));
   protected readonly listId = toSignal(
     this.route.paramMap.pipe(map((params) => params.get('listId') ?? undefined)),
   );

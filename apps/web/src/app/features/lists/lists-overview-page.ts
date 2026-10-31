@@ -31,6 +31,8 @@ import { openSnack, undoMillis } from '../../shared/snack/snack';
 /** One list's card (P3). */
 interface ListCard {
   id: string;
+  /** The list, as its totals' breakdowns take it (M10.30). */
+  listIds: ReadonlySet<string>;
   name: string;
   /** How many subscriptions it has, priced or not, and that in words: "12 subscriptions", "No subscriptions yet". */
   count: number;
@@ -96,6 +98,7 @@ export class ListsOverviewPage {
       const metrics = this.metrics.metrics(list.id);
       return {
         id: list.id,
+        listIds: new Set([list.id]),
         name: list.name,
         count,
         countText: count === 0 ? 'No subscriptions yet' : subscriptions(count),

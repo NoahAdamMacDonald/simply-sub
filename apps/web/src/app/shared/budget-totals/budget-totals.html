@@ -7,23 +7,32 @@
       }
       <div class="line">
         <!-- A card's bars are named for their list; a page's by their headings. -->
-        <ss-budget-bar
+        <!-- What the bar adds up, on hover, a click or tap, and its button (M10.30). -->
+        <ss-cost-breakdown
           class="bar"
-          [value]="line.amount"
-          [max]="line.budget"
-          [attr.aria-label]="compact() ? name() + ', ' + line.heading.toLowerCase() : null"
-          [attr.aria-labelledby]="compact() ? null : id + '-' + line.kind"
-        />
+          [range]="line.range"
+          [period]="line.period"
+          [listIds]="listIds()"
+        >
+          <ss-budget-bar
+            [value]="line.amount"
+            [max]="line.budget"
+            [attr.aria-label]="compact() ? name() + ', ' + line.heading.toLowerCase() : null"
+            [attr.aria-labelledby]="compact() ? null : id + '-' + line.kind"
+          />
+        </ss-cost-breakdown>
         <span class="total">
           <span aria-hidden="true">{{ line.shown }}</span>
           <span class="visually-hidden">{{ line.spoken }}</span>
         </span>
       </div>
     } @else {
-      <p class="total">
-        <span aria-hidden="true">{{ line.shown }}</span>
-        <span class="visually-hidden">{{ line.spoken }}</span>
-      </p>
+      <ss-cost-breakdown [range]="line.range" [period]="line.period" [listIds]="listIds()">
+        <p class="total">
+          <span aria-hidden="true">{{ line.shown }}</span>
+          <span class="visually-hidden">{{ line.spoken }}</span>
+        </p>
+      </ss-cost-breakdown>
       @if (prompt()) {
         <a class="prompt" routerLink="/settings">{{ line.prompt }} →</a>
       }

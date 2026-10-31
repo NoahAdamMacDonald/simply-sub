@@ -48,6 +48,7 @@ import { SettingsStore } from '../../core/settings/settings-store';
 import { CardsRepository } from '../../core/storage/cards-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
 import { BudgetBar } from '../../shared/budget-bar/budget-bar';
+import { CostBreakdown } from '../../shared/cost-breakdown/cost-breakdown';
 import { chargeAmountText, nearDateText } from '../../shared/charge-text';
 import { monthText, spokenDayText } from '../../shared/date-text';
 import { Exporter, type PaymentsExportFormat } from '../../shared/export/exporter';
@@ -101,6 +102,7 @@ const monthNames = Array.from({ length: 12 }, (_, index) =>
   selector: 'ss-calendar-page',
   imports: [
     BudgetBar,
+    CostBreakdown,
     CalendarYear,
     DayPanel,
     MatButton,
@@ -196,7 +198,7 @@ export class CalendarPage {
   /** The month's view, or its year's (M10.4). */
   protected readonly view = computed(() => this.read().query.view ?? 'month');
   protected readonly shownLists = computed(() => this.read().query.lists);
-  private readonly shown = computed(() => new Set(this.shownLists()));
+  protected readonly shown = computed(() => new Set(this.shownLists()));
   protected readonly listChoices = computed(() =>
     this.lists.records().map((list) => ({ id: list.id, name: list.name })),
   );
@@ -304,6 +306,15 @@ export class CalendarPage {
     return count === 1
       ? "1 subscription isn't shown: it can't be priced."
       : `${count} subscriptions aren't shown: they can't be priced.`;
+  });
+
+  /** The bar's period, which its breakdown adds up (M10.30): the month shown, or its year in the year view. */
+  protected readonly barRange = computed(() => {
+    const month = this.month();
+    const year = Number(month.slice(0, 4));
+    return this.view() === 'year'
+      ? { from: `${year}-01-01`, to: `${year + 1}-01-01` }
+      : monthRange(month);
   });
 
   /** The bar: the month's, or the year's in the year view. */
