@@ -15,6 +15,12 @@
 # "currency":"CAD": Pro 2800 a month and 28000 a year, Max 5x 14000 and Max 20x 28000 a month, in cents, none an
 # offer, tax not included ("show_included":false). The Pro article: "with pricing in your local currency where
 # supported". The owner's bill agrees: CA$31.64 for Pro, $28 with Ontario's 13% HST.
+# Renamed (2026-10-30, M10.27): claude.com/pricing now lists Free, Pro, Max ($140, "5x Pro usage every 5 hours and
+# every week") and Ultra ($280, "No 5-hour limit‡", "10x Pro usage every week"), in Canada. The Ultra article: "The Max
+# 20x plan is now called the Ultra plan. Existing Max 20x subscribers move to Ultra automatically, with no price
+# change." and "The Ultra plan is available for $200 per month."; the Max article: "The Max plan is available for $100
+# per month." So both keep their ids: claude.max-5x is Max and claude.max-20x is Ultra. Ultra's limits are new:
+# "Ultra gives you 10x the weekly usage of Pro, with no 5-hour limit for verified accounts" (it had 20 times Pro's).
 # Not on the pages: Max's yearly price: its help article says nothing about yearly billing; the card networks it
 # takes: its billing pages name none; the countries it sells in: its Pro article says only certain supported
 # locations; official resellers: none found.
@@ -82,11 +88,16 @@ plans:
         lastVerified: 2026-10-30
         sourceUrl: https://claude.com/pricing
 
-  - id: claude.max-5x
-    name: Max 5x
+  - id: claude.max-5x # was "Max 5x" until 2026-10-29
+    name: Max
+    formerNames: [{ name: Max 5x, until: 2026-10-29 }]
     link: https://claude.com/pricing
     features: { ai.assistant: true }
-    perks: [Claude Code, Priority access at high traffic times]
+    perks:
+      - Claude Code
+      - Priority access at high traffic times
+      - 5x Pro usage every 5 hours and every week
+      - $100 a month in API credits to build on the Claude Platform
     prices:
       - region: US
         currency: USD
@@ -94,7 +105,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-10-28
+        lastVerified: 2026-10-30
         sourceUrl: https://support.claude.com/en/articles/11049741-what-is-the-max-plan
       - region: CA
         currency: CAD
@@ -105,11 +116,17 @@ plans:
         lastVerified: 2026-10-30
         sourceUrl: https://claude.com/pricing
 
-  - id: claude.max-20x
-    name: Max 20x
+  - id: claude.max-20x # was "Max 20x" until 2026-10-29
+    name: Ultra
+    formerNames: [{ name: Max 20x, until: 2026-10-29 }]
     link: https://claude.com/pricing
     features: { ai.assistant: true }
-    perks: [Claude Code, Priority access at high traffic times]
+    perks:
+      - Claude Code
+      - Priority access at high traffic times
+      - 10x Pro usage every week
+      - No 5-hour limit for verified accounts
+      - $200 a month in API credits
     prices:
       - region: US
         currency: USD
@@ -117,8 +134,8 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-10-28
-        sourceUrl: https://support.claude.com/en/articles/11049741-what-is-the-max-plan
+        lastVerified: 2026-10-30
+        sourceUrl: https://support.claude.com/en/articles/17728952-what-is-the-ultra-plan
       - region: CA
         currency: CAD
         amount: 280
