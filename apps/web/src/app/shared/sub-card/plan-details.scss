@@ -244,7 +244,7 @@ h4 {
   }
 }
 
-// Outside ratings and the owner (M11.2): grey and plain, with no grade's colour, since they're someone else's view or
+// Outside ratings, the owner (M11.2) and the ways to pay (M11.5): grey and plain, with no grade's colour, since they're someone else's view or
 // a plain fact. The links are the accent's, and underlined like the citations (WCAG 1.4.1).
 .outside {
   display: flex;
@@ -254,7 +254,8 @@ h4 {
 }
 
 .outside,
-.owner {
+.owner,
+.payment {
   margin: 0;
   color: var(--ss-text-muted);
 }

@@ -1,5 +1,6 @@
 import * as z from 'zod';
 import { cardNetworkNames, namesNetwork } from './card-networks';
+import { namesPaymentMethod, paymentMethodNames } from './payment-methods';
 import { addDuplicateIssues, choices } from './checks';
 import { featureValueSchema } from './feature';
 import {
@@ -71,6 +72,86 @@ export const acceptedNetworksSchema = z
     });
   });
 export type AcceptedNetworks = z.infer<typeof acceptedNetworksSchema>;
+
+/** The ways a provider can be paid (M11.5): cards, wallets, app stores, gift cards, a bank, cash and crypto. */
+export const paymentMethodSchema = z.enum([
+  'card',
+  'paypal',
+  'apple-pay',
+  'google-pay',
+  'app-store',
+  'gift-card',
+  'bank-transfer',
+  'cash',
+  'crypto',
+  'provider-billing',
+  'other',
+]);
+export type PaymentMethod = z.infer<typeof paymentMethodSchema>;
+
+/** One page's list of the ways to pay, for everywhere or some regions, quoted from the provider's own page. */
+export const paymentMethodsEntrySchema = z
+  .strictObject({
+    methods: z
+      .array(paymentMethodSchema)
+      .min(1, 'List at least one method')
+      .describe(
+        'The ways to pay it names: app-store for billing through Apple, Google or another app store, provider-billing for a TV, internet or phone provider’s bill, other for one not listed here',
+      ),
+    regions: z
+      .array(regionSchema)
+      .min(1, 'Leave regions out when the page is for every buyer')
+      .describe('Only buyers here (a country’s own help page), over the entry for everywhere')
+      .optional(),
+    page: textSchema.describe('As the card links it (Payment methods)'),
+    url: httpsUrlSchema.describe(
+      "The provider's own page that lists them (payment methods, a help article, the checkout), on its own sites, its policies' or its owner's",
+    ),
+    quotes: z
+      .array(textSchema)
+      .min(1, 'Quote the words that name them')
+      .describe('Where that page names each method ("PayPal", "cash"), word for word'),
+  })
+  .superRefine((entry, ctx) => {
+    addDuplicateIssues(ctx, entry.methods, (index) => ['methods', index]);
+    addDuplicateIssues(ctx, entry.regions ?? [], (index) => ['regions', index]);
+    const quoted = entry.quotes.join(' ');
+    entry.methods.forEach((method, index) => {
+      if (method !== 'other' && !namesPaymentMethod(quoted, method)) {
+        ctx.addIssue({
+          code: 'custom',
+          message: `No quote names ${paymentMethodNames[method]}: quote the page's words for it`,
+          path: ['methods', index],
+        });
+      }
+    });
+  });
+
+export const paymentMethodsSchema = z
+  .array(paymentMethodsEntrySchema)
+  .min(1, 'Say how it can be paid')
+  .superRefine((entries, ctx) => {
+    // One entry for everywhere, and a region in one entry at most.
+    const everywhere = entries
+      .map((entry, index) => ({ entry, index }))
+      .filter(({ entry }) => !entry.regions);
+    everywhere.slice(1).forEach(({ index }) =>
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Only one entry is for everywhere: give this one its regions',
+        path: [index, 'regions'],
+      }),
+    );
+    const regions = entries.flatMap((entry, index) =>
+      (entry.regions ?? []).map((region, item) => ({ region, path: [index, 'regions', item] })),
+    );
+    addDuplicateIssues(
+      ctx,
+      regions.map(({ region }) => region),
+      (index) => regions[index].path,
+    );
+  });
+export type PaymentMethods = z.infer<typeof paymentMethodsSchema>;
 
 export const planSchema = z
   .strictObject({
@@ -224,6 +305,11 @@ export const providerSchema = z
         "Region → the card networks the provider takes there, quoted from its own page (GLOBAL: wherever it sells). A region it doesn't cover is unknown, and every card is allowed there",
       )
       .optional(),
+    paymentMethods: paymentMethodsSchema
+      .describe(
+        'How it can be paid, quoted from its own pages (M11.5): every provider says, cash and crypto included',
+      )
+      .optional(),
     billingCurrency: z
       .record(regionSchema, currencySchema)
       .describe('Region → the currency actually charged there, for FX-fee maths')
@@ -283,7 +369,7 @@ export const providerSchema = z
       .optional(),
     owner: ownerSchema
       .describe(
-        'The company behind it, quoted from its own about page (M11.2): needed for VPNs, news and finance',
+        "The company behind it (M11.2), quoted from its about page, its owner's own page about it, or its terms: every provider says",
       )
       .optional(),
   })

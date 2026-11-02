@@ -252,6 +252,22 @@ export const searchCatalogData: CatalogData = {
           url: 'https://lab.example.org/mullvad',
         },
       ],
+      // Ways to pay (M11.5): Canada's own page, and the one for everywhere.
+      paymentMethods: [
+        {
+          methods: ['card', 'paypal', 'cash', 'crypto'],
+          page: 'Payment methods',
+          url: 'https://mullvad.net/en/help/payment-methods',
+          quotes: ['Credit card', 'PayPal', 'Cash', 'Bitcoin'],
+        },
+        {
+          methods: ['card', 'gift-card'],
+          regions: ['CA'],
+          page: 'Vouchers in Canada',
+          url: 'https://mullvad.net/en/help/vouchers-ca',
+          quotes: ['credit card', 'voucher'],
+        },
+      ],
       owner: {
         name: 'Mullvad VPN AB',
         page: { name: 'About us', url: 'https://mullvad.net/en/about' },

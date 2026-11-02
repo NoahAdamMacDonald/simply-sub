@@ -6,11 +6,15 @@ import { MatTooltip } from '@angular/material/tooltip';
 import {
   outsideRatings,
   ownerCitation,
+  paymentMethodNames,
+  paymentMethodsIn,
   planExtras,
   planPolicies,
   planTitle,
+  quoteLink,
   type AddRequest,
   type BundleSaving,
+  type PaymentMethods,
   type PickedPrice,
   type PlanMatch,
   type PolicyCitation,
@@ -64,8 +68,8 @@ const groupNames: Record<PolicyGroup, string> = {
  * A Search card's expanded section (PROJECT-PLAN P8): the plan's features with the user's ranks, its add-ons, the
  * bundles that include it and what they save, what a suite includes and saves, its perks and notes, its terms and
  * policies graded with why in plain words and a citation of each page it quotes (M1.13, M1.14), outside raters' labels
- * and the company behind it, citing its own page (M11.2), and when its price was checked, with Report a wrong price
- * beside it (M10.11). Core's planExtras prices them for the user from the
+ * and the company behind it, citing its own page (M11.2), how it can be paid (M11.5), and when its price was checked,
+ * with Report a wrong price beside it (M10.11). Core's planExtras prices them for the user from the
  * catalog file for their country.
  */
 @Component({
@@ -137,6 +141,11 @@ export class PlanDetails {
     const owner = this.provider().owner;
     return owner && ownerCitation(owner);
   });
+  /** How a buyer where the user lives can pay it (M11.5), and the provider's page that says so. */
+  protected readonly payment = computed(() => {
+    const country = this.settings.saved()?.country;
+    return country ? paymentMethodsIn(this.provider(), country) : undefined;
+  });
   protected readonly tierNames = tierNames;
   protected readonly statusNames = statusNames;
   protected readonly groupNames = groupNames;
@@ -189,8 +198,19 @@ export class PlanDetails {
     return date.length === 7 ? monthText(date) : dateText(date);
   }
 
-  /** The owner's citation's tooltip: the words it quotes. */
-  protected ownerQuotes(quotes: readonly string[]): string {
+  /** "Card, PayPal and Cash". */
+  protected methodsText(methods: PaymentMethods[number]['methods']): string {
+    const names = methods.map((method) => paymentMethodNames[method]);
+    return names.length > 1 ? `${names.slice(0, -1).join(', ')} and ${names.at(-1)}` : names[0];
+  }
+
+  /** The payment page, scrolled to the words that name the methods. */
+  protected paymentHref({ url, quotes }: PaymentMethods[number]): string {
+    return quoteLink(url, quotes);
+  }
+
+  /** A citation's tooltip when it links one page: the words it quotes there. */
+  protected quotesText(quotes: readonly string[]): string {
     return quotes.map((quote) => `“${quote}”`).join(' ');
   }
 

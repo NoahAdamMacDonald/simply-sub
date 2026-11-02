@@ -198,8 +198,8 @@ describe('PlanDetails', () => {
     it('shows each rater’s label with its date and a link, after Terms and policies, then the owner', async () => {
       await show('mullvad.vpn');
 
-      expect(groups().slice(-3, -2)[0]).toMatch(/^Terms and policies /);
-      expect(groups().slice(-2)).toEqual([
+      expect(groups().slice(-4, -3)[0]).toMatch(/^Terms and policies /);
+      expect(groups().slice(-3, -1)).toEqual([
         // The rater the catalog doesn't list is left out: its name is unknown.
         'Outside ratings Protection: 6.0/6.0 from Test Lab , August 2026 (tested Mullvad VPN 2026.4, Windows 11) ' +
           'Usability: 5.5/6.0 from Test Lab , Sep 14, 2026',
@@ -236,6 +236,38 @@ describe('PlanDetails', () => {
       await show('netflix.standard');
 
       expect(groups().some((group) => /^(Outside ratings|Owner) /.test(group))).toBe(false);
+    });
+  });
+
+  describe('Ways to pay (M11.5)', () => {
+    it('lists how a buyer where the user lives can pay, citing the page, its words as the tooltip', async () => {
+      await show('mullvad.vpn');
+
+      // Alberta: Canada's own page over the one for everywhere.
+      expect(groups().at(-1)).toBe(
+        'Ways to pay Card and Gift card , according to its Vouchers in Canada',
+      );
+      const link = element().querySelector<HTMLAnchorElement>('.payment a');
+      expect([link?.href, link?.target, link?.getAttribute('aria-label')]).toEqual([
+        'https://mullvad.net/en/help/vouchers-ca#:~:text=credit%20card&text=voucher',
+        '_blank',
+        'Vouchers in Canada, opens in a new tab',
+      ]);
+      const tooltip = await TestbedHarnessEnvironment.loader(fixture).getHarness(
+        MatTooltipHarness.with({ selector: '.payment a' }),
+      );
+      await tooltip.show();
+      expect(await tooltip.getTooltipText()).toBe('“credit card” “voucher”');
+    });
+
+    it('takes the page for everywhere elsewhere', async () => {
+      const saved = TestBed.inject(SettingsStore).saved as WritableSignal<Settings | undefined>;
+      saved.set({ ...alberta, country: 'US', subdivision: undefined, currency: 'USD' });
+      await show('mullvad.vpn');
+
+      expect(groups().at(-1)).toBe(
+        'Ways to pay Card, PayPal, Cash and Cryptocurrency , according to its Payment methods',
+      );
     });
   });
   it('offers Report a wrong price beside the price’s date, and thanks the user once a report is sent', async () => {

@@ -75,6 +75,14 @@ const dailyPlanet = {
   cancelUrl: 'https://www.dailyplanet.example.com/cancel',
   category: 'news',
   spendCategory: 'software',
+  paymentMethods: [
+    {
+      methods: ['card', 'paypal'],
+      page: 'Ways to pay',
+      url: 'https://www.dailyplanet.example.com/help/payment',
+      quotes: ['We accept credit cards and PayPal.'],
+    },
+  ],
   owner: {
     name: 'Galaxy Communications',
     page: { name: 'About us', url: 'https://www.dailyplanet.example.com/about' },
@@ -259,13 +267,13 @@ describe('validateCatalog, for outside ratings', () => {
 });
 
 describe('validateCatalog, for owners', () => {
-  it('needs an owner for a provider in VPN or news', () => {
+  it('needs an owner for every provider', () => {
     expect(messages(withRaters([[['owner'], undefined]]))).toEqual([
-      `${planet}: A provider in news needs its owner: quote its own about page in owner`,
+      `${planet}: Say who owns it: quote its about page, its owner’s own page about it, or its terms, in owner`,
     ]);
-    const mullvad = edited(catalog(), 'data/providers/mullvad.yaml', ['owner'], undefined);
-    expect(messages(mullvad)).toEqual([
-      'data/providers/mullvad.yaml: A provider in vpn needs its owner: quote its own about page in owner',
+    const crave = edited(catalog(), 'data/providers/crave.yaml', ['owner'], undefined);
+    expect(messages(crave)).toEqual([
+      'data/providers/crave.yaml: Say who owns it: quote its about page, its owner’s own page about it, or its terms, in owner',
     ]);
   });
 
@@ -305,7 +313,9 @@ describe('validateCatalog, for owners', () => {
         'warning: data/raters.yaml 0.id: No provider shows this rater: add its ratings to the providers it rates, or remove it',
         'warning: data/raters.yaml 1.id: No provider shows this rater: add its ratings to the providers it rates, or remove it',
         // The test catalog's own owners, read the same day.
+        'warning: data/providers/crave.yaml owner.lastVerified: Read on 2026-10-20, over a year ago: read the page again',
         'warning: data/providers/mullvad.yaml owner.lastVerified: Read on 2026-10-20, over a year ago: read the page again',
+        'warning: data/providers/netflix.yaml owner.lastVerified: Read on 2026-10-20, over a year ago: read the page again',
         'warning: data/providers/proton.yaml owner.lastVerified: Read on 2026-10-20, over a year ago: read the page again',
       ].sort(byFile),
     );
@@ -318,7 +328,7 @@ function byFile(a: string, b: string): number {
 }
 
 function order(message: string): number {
-  return ['mullvad', 'proton', 'daily-planet', 'raters'].findIndex((name) =>
+  return ['crave', 'mullvad', 'netflix', 'proton', 'daily-planet', 'raters'].findIndex((name) =>
     message.includes(name),
   );
 }

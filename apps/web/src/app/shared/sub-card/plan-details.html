@@ -240,11 +240,34 @@
         [href]="owner.href"
         target="_blank"
         rel="noopener"
-        [matTooltip]="ownerQuotes(owner.quotes)"
+        [matTooltip]="quotesText(owner.quotes)"
         matTooltipTouchGestures="off"
         [attr.aria-label]="owner.page + ', opens in a new tab'"
       >
         <span>{{ owner.page }}</span>
+        <mat-icon aria-hidden="true">open_in_new</mat-icon>
+      </a>
+    </p>
+  </div>
+}
+
+<!-- How a buyer where the user lives can pay it (M11.5), citing the provider's page, its words as the tooltip. -->
+@if (payment(); as payment) {
+  <div class="group">
+    <h3>Ways to pay</h3>
+    <p class="payment">
+      <span>{{ methodsText(payment.methods) }}</span>
+      <span>, according to its </span>
+      <a
+        class="outside-link"
+        [href]="paymentHref(payment)"
+        target="_blank"
+        rel="noopener"
+        [matTooltip]="quotesText(payment.quotes)"
+        matTooltipTouchGestures="off"
+        [attr.aria-label]="payment.page + ', opens in a new tab'"
+      >
+        <span>{{ payment.page }}</span>
         <mat-icon aria-hidden="true">open_in_new</mat-icon>
       </a>
     </p>

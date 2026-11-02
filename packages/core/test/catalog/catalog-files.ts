@@ -123,11 +123,32 @@ const streaming = {
   spendCategory: 'streaming',
 };
 
+/** Who owns a provider and how it can be paid (M11.2, M11.5), from its own pages: every provider says. */
+function facts(owner: string, site: string, methods: Provider['paymentMethods'] = undefined) {
+  return {
+    owner: {
+      name: owner,
+      page: { name: 'About us', url: `${site}/about` },
+      quotes: [`It is owned by ${owner}.`],
+      lastVerified: '2026-10-20',
+    },
+    paymentMethods: methods ?? [
+      {
+        methods: ['card' as const, 'paypal' as const],
+        page: 'Payment methods',
+        url: `${site}/payment`,
+        quotes: ['Credit cards', 'PayPal'],
+      },
+    ],
+  };
+}
+
 const netflix = {
   id: 'netflix',
   name: 'Netflix',
   ...streaming,
   cancelUrl: 'https://www.netflix.com/cancelplan',
+  ...facts('Netflix, Inc.', 'https://example.com'),
   billingCurrency: { CA: 'CAD', US: 'USD' },
   plans: [
     {
@@ -175,6 +196,7 @@ const crave = {
   name: 'Crave',
   ...streaming,
   cancelUrl: 'https://www.crave.ca/en/account',
+  ...facts('Bell Media Inc.', 'https://example.com'),
   billingCurrency: { CA: 'CAD' },
   plans: [
     {
@@ -212,6 +234,14 @@ const mullvad = {
     quotes: ['Mullvad VPN AB is owned by parent company Amagicom AB.'],
     lastVerified: '2026-10-20',
   },
+  paymentMethods: [
+    {
+      methods: ['card', 'paypal', 'bank-transfer', 'cash', 'crypto'],
+      page: 'Payment methods',
+      url: 'https://mullvad.net/en/help/payment-methods',
+      quotes: ['Credit card', 'PayPal', 'Bank wire', 'Cash', 'Bitcoin', 'Monero'],
+    },
+  ],
   plans: [
     {
       id: 'mullvad.vpn',
@@ -236,6 +266,14 @@ const proton = {
   category: 'privacy-suite',
   spendCategory: 'software',
   billingCurrency: { GLOBAL: 'USD' },
+  paymentMethods: [
+    {
+      methods: ['card', 'paypal', 'cash', 'crypto'],
+      page: 'Payment options',
+      url: 'https://proton.me/support/payment-options',
+      quotes: ['credit card', 'PayPal', 'cash', 'Bitcoin'],
+    },
+  ],
   owner: {
     name: 'Proton AG',
     page: { name: 'About Proton', url: 'https://proton.me/about' },
