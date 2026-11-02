@@ -29,9 +29,15 @@ notes: >-
 # kill switch is always on and split tunneling is on every platform but iOS (/en/help/using-mullvad-vpn-app,
 # /en/help/split-tunneling-with-the-mullvad-app); multihop (/en/help/multihop-wireguard); the DNS content blockers
 # (/en/help/how-use-mullvad-cli); no new forwarded ports since 2023 (/en/vpn FAQ); infrastructure and app audits
-# (/en/blog/tag/audits, whose summaries don't say they tested the no-logging claim); a no-logging policy
-# (/en/help/no-logging-data-policy); unlimited traffic (/en/blog/unlimited-traffic-volume). No page states a P2P policy: P2P is
-# marked allowed because the terms block only ports 25 and 137-139/445 and change no traffic (/en/help/terms-service).
+# (/en/blog/tag/audits); a no-logging policy (/en/help/no-logging-data-policy); unlimited traffic
+# (/en/blog/unlimited-traffic-volume). No page states a P2P policy: P2P is marked allowed because the terms block only
+# ports 25 and 137-139/445 and change no traffic (/en/help/terms-service).
+# The no-logs audit, read 2026-11-02 (M11.1): Radically Open Security's 2023 infrastructure audit was asked to verify
+# "Whether or not we log customer activity", and "Radically Open Security found no information leakage or logging of
+# customer data" (/en/blog/infrastructure-audit-completed-by-radically-open-security). Cure53's (2020, 2024) were
+# security audits. Not an audit, but the same fact: in April 2023 Swedish police with a search warrant left without
+# customer data, since "such customer data did not exist"
+# (/en/blog/mullvad-vpn-was-subject-to-a-search-warrant-customer-data-not-compromised).
 plans:
   - id: mullvad.vpn
     name: Mullvad VPN
@@ -48,7 +54,7 @@ plans:
       vpn.content-blocking: [ads, trackers, malware, adult-content, gambling, social-media]
       vpn.p2p: true
       vpn.no-logs-policy: true
-      vpn.independent-audits: [servers, apps]
+      vpn.independent-audits: [no-logs, servers, apps]
       vpn.anonymous-signup: true
     prices:
       - region: GLOBAL
@@ -274,7 +280,7 @@ resellers:
             sourceUrl: https://www.webhallen.com/se/product/267706-Mullvad-VPN-12-manader-5-anvandare
 
 # Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: Mullvad's terms of service, privacy policy and
-# no-logging policy, and its post on Cure53's infrastructure audit. Not rated: free trials (it has none) and
+# no-logging policy, and (2026-11-02) its post on Radically Open Security's infrastructure audit. Not rated: free trials (it has none) and
 # closing accounts (its terms don't say).
 policies:
   links:
@@ -284,8 +290,8 @@ policies:
       url: https://mullvad.net/en/help/privacy-policy
     - name: 'No-logging policy'
       url: https://mullvad.net/en/help/no-logging-data-policy
-    - name: "Cure53's audit"
-      url: https://mullvad.net/en/blog/no-pii-or-privacy-leaks-found-cure53s-infrastructure-audit
+    - name: "Radically Open Security's audit"
+      url: https://mullvad.net/en/blog/infrastructure-audit-completed-by-radically-open-security
   ratings:
     - topic: privacy.data-collection
       tier: great
@@ -366,10 +372,10 @@ policies:
       lastVerified: 2026-10-27
     - topic: service.activity-logging
       tier: great
-      reason: "It doesn't keep records of when you connect or for how long. Security experts at Cure53 checked its servers and found no personal information."
+      reason: "It doesn't keep records of when you connect or for how long. In 2023, security experts at Radically Open Security checked its servers for logs of what customers do, and found none."
       sources:
         - url: https://mullvad.net/en/help/no-logging-data-policy
           quote: 'no logging of connections, including when one is made, when it disconnects, for how long, or any kind of timestamp'
-        - url: https://mullvad.net/en/blog/no-pii-or-privacy-leaks-found-cure53s-infrastructure-audit
-          quote: 'Cure53 did not find any Personally Identifiable Information (PII) or potentially privacy-compromising information.'
-      lastVerified: 2026-10-27
+        - url: https://mullvad.net/en/blog/infrastructure-audit-completed-by-radically-open-security
+          quote: 'Radically Open Security found no information leakage or logging of customer data'
+      lastVerified: 2026-11-02
