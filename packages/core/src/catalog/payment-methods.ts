@@ -40,7 +40,7 @@ const writtenAs: Readonly<Record<Exclude<PaymentMethod, 'other'>, RegExp>> = {
   cash: /\bcash\b|\besp[eè]ces\b/i,
   crypto: /\bcrypto|\bbitcoin\b|\bmonero\b|\bbtc\b|\bxmr\b/i,
   'provider-billing':
-    /\b(?:tv|television|internet|mobile|wireless|phone|cable)\s+(?:service\s+)?(?:provider|carrier|bill)s?\b|\bcarrier\s+billing\b|\bfournisseur\b/i,
+    /\b(?:tv|television|internet|mobile|wireless|phone|cable)\s+(?:service\s+)?(?:provider|carrier|bill)s?\b|\bcarrier\s+billing\b|\bfournisseur\b|\badd\s+\w+\s+to\s+(?:their|your)\s+bill\b/i,
 };
 
 /** Whether `text` names `method`. `other` is never named. */
