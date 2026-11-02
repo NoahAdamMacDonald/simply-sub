@@ -382,7 +382,8 @@ one canonical feature describes the same capability across every provider, whate
    features marked `providerWide: true` go there (validation refuses the rest, and a plan value the provider states
    already): a category feature stays on each plan even when every plan has the same value (Crave's video quality,
    Proton's VPN). Everything that compares plans reads them merged (core's `planFeatures`, `withProviderFeatures`):
-   validation, the app (its `CatalogStore` merges each file once) and the API (each provider as it's read from D1).
+   validation, the app (each catalog file as `catalogCacheSchema` checks it, out of the initial bundle) and the API
+   (each provider as it's read from D1).
    The catalog files and D1 keep them once per provider (`provider_features`), not once per plan, which saves about
    150 rows a provider.
 10. **Reuse first.** An existing id as it is; then a new value or alias of one; then a cross-category feature

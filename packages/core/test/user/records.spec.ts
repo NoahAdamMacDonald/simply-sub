@@ -111,6 +111,17 @@ describe('readRecords', () => {
     expect(regionKey.rejected[0]).not.toHaveProperty('key');
   });
 
+  it("reads a cached catalog file with each plan's provider-wide features added (M11.4)", () => {
+    const file = JSON.parse(JSON.stringify(catalogCache)) as typeof catalogCache;
+    const [provider] = file.snapshot.data.providers;
+    provider.features = { platforms: ['web'] };
+    const { records } = readRecords('catalogCache', [file]);
+    const plans = records[0].snapshot.data.providers[0].plans;
+    expect(plans.every((plan) => plan.features['platforms']?.toString() === 'web')).toBe(true);
+    expect(records[0].snapshot.data.providers[0].features).toEqual({ platforms: ['web'] });
+    expect(checkRecord('catalogCache', file).snapshot.data.providers[0].plans).toEqual(plans);
+  });
+
   it("keys a draft by its list's id", () => {
     const { rejected } = readRecords('drafts', [{ ...draft, startedAt: 'yesterday' }]);
     expect(rejected).toEqual([

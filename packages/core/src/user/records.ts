@@ -1,6 +1,6 @@
 import type * as z from 'zod';
 import { rankKeySchema } from '../catalog/formats';
-import { catalogCacheSchema } from './catalog-cache';
+import { catalogCacheKeySchema, catalogCacheSchema } from './catalog-cache';
 import { customSubscriptionSchema } from './custom-subscription';
 import { dismissedSuggestionSchema, suggestionFingerprintSchema } from './dismissed-suggestion';
 import { fxCacheSchema } from './fx-cache';
@@ -71,7 +71,7 @@ const keySchemas: Record<UserTable, z.ZodType<string>> = {
   cards: recordIdSchema,
   tags: recordIdSchema,
   settings: settingsSchema.shape.key,
-  catalogCache: catalogCacheSchema.shape.key,
+  catalogCache: catalogCacheKeySchema,
   drafts: recordIdSchema,
   dismissedSuggestions: suggestionFingerprintSchema,
   fxRates: fxCacheSchema.shape.key,

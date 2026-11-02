@@ -1279,8 +1279,9 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
     yet: M11.9 reads them for the 13.
   - **Provider-wide features:** `providerWide: true` on a feature (never one with a `parent`); a provider's
     `features` take only those, and a plan value the provider states already is refused. Core's `planFeatures`,
-    `withPlanFeatures` and `withProviderFeatures` merge them; the app's `CatalogStore` merges each file once (its
-    `catalog` and `catalogFor`), and the API merges each provider it reads from D1, so Search, the optimizer, cards
+    `withPlanFeatures` and `withProviderFeatures` merge them; the app merges each catalog file as `catalogCacheSchema`
+    checks it (downloaded or read from Dexie, in the chunk the checks load in: merging in `CatalogStore` put the
+    initial bundle 193 bytes over its 500 kB budget; it's 499.76 kB), and the API merges each provider it reads from D1, so Search, the optimizer, cards
     and `GET /providers`, `/providers/:id`, `/plans/:id` and `/bundles` see every plan's full features. Proton's
     nine shared values are category features, so they stay on its plans; Bitdefender's plans share none.
   - **D1:** `provider_features (feature_id, value, provider_id, rank_value)`, keyed by feature, no index (migration
@@ -1298,7 +1299,7 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
   - **Tests:** core (`requiredIn` and its warnings, the price-differences warning, provider features and their merge,
     the seed's `provider_features` rows and rank updates, the redirect in Search's URL, the API's query and
     `ids.json`), the API (the seed in workerd, the narrowing through `provider_features`' key, the old key end to end,
-    the migration), the web app (the store's merge, an Ad free rank and override moved, an old Search link).
+    the migration), the web app (the store's files merged, an Ad free rank and override moved, an old Search link).
   - **Browser:** `check-m11-features.cjs` (browser-check skill): 39 checks in both themes at both widths, by keyboard,
     with axe: Ad free from the Features suggestions, the results, Netflix's features and an old `f=streaming.ad-free`
     link. `check-features.cjs` passes with the new card (30 checks). `check-search.cjs` fails three steps from before
