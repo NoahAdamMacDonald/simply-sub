@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
+import { parse } from 'yaml';
 import policyResearchSkill from '../../../../.claude/skills/policy-research/SKILL.md?raw';
+import categoriesYaml from '../../../../data/categories.yaml?raw';
 import {
+  categoriesFileSchema,
   draftFromAnswer,
   extractionAnswerSchema,
   extractionParts,
@@ -426,6 +429,14 @@ describe('spendCategoryOf', () => {
     expect(spendCategoryOf('music')).toBe('streaming');
     expect(spendCategoryOf('vpn')).toBe('software');
     expect(spendCategoryOf('fitness')).toBe('health');
+    expect(spendCategoryOf('delivery')).toBe('delivery');
+    expect(spendCategoryOf('passwords')).toBe('software');
+  });
+
+  it("gives every service category in data/categories.yaml one of the file's spend categories", () => {
+    const { service, spend } = categoriesFileSchema.parse(parse(categoriesYaml));
+    const spendIds = spend.map(({ id }) => id);
+    for (const { id } of service) expect(spendIds).toContain(spendCategoryOf(id));
   });
 });
 
