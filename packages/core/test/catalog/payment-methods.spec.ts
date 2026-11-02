@@ -97,8 +97,13 @@ describe('paymentMethodsIn', () => {
     methods: ['card', 'gift-card'],
     quotes: ['card', 'gift card'],
     regions: ['CA'],
-  };
-  const eu = { ...everywhere, methods: ['bank-transfer'], quotes: ['SEPA'], regions: ['EU'] };
+  } satisfies PaymentMethods[number];
+  const eu = {
+    ...everywhere,
+    methods: ['bank-transfer'],
+    quotes: ['SEPA'],
+    regions: ['EU'],
+  } satisfies PaymentMethods[number];
   const provider = { paymentMethods: [everywhere, ca, eu] satisfies PaymentMethods };
 
   it('picks the region’s own entry, then its group’s, then the one for everywhere', () => {
