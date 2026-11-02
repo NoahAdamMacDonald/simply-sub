@@ -13,6 +13,7 @@
     - { id: 1080p, name: 1080p (Full HD), headline: true }
     - { id: 4k, name: 4K (Ultra HD), aliases: [uhd, 2160p], headline: true }
   aliases: [resolution, picture quality]
+  requiredIn: [streaming]
 - id: video.hdr
   name: HDR
   category: streaming
@@ -28,6 +29,7 @@
   category: streaming
   type: boolean
   aliases: [no ads, ad-free]
+  requiredIn: [streaming]
 - id: streaming.concurrent-streams
   name: Simultaneous streams
   category: streaming
@@ -38,6 +40,7 @@
     - { id: 2-4, name: 2 to 4 devices, min: 2, max: 4 }
     - { id: 5+, name: More than 4 devices, min: 5 }
   aliases: [screens, streams, devices at once]
+  requiredIn: [streaming]
 - id: streaming.download-devices
   name: Download devices
   category: streaming
@@ -73,6 +76,7 @@
   type: boolean
   aliases: [vpn, virtual private network]
   headline: true
+  requiredIn: [vpn]
 - id: vpn.devices
   parent: vpn.included
   name: VPN devices
@@ -89,6 +93,7 @@
   category: vpn
   type: boolean
   aliases: [unlimited data, unlimited bandwidth]
+  requiredIn: [vpn]
 - id: vpn.server-countries
   parent: vpn.included
   name: VPN server countries
@@ -100,6 +105,7 @@
     - { id: 11-50, name: 11 to 50 countries, min: 11, max: 50 }
     - { id: 51+, name: More than 50 countries, min: 51 }
   aliases: [server locations, vpn locations]
+  requiredIn: [vpn]
 - id: vpn.protocols
   parent: vpn.included
   name: VPN protocols
@@ -194,6 +200,7 @@
     - { id: 200+, name: 200 GB or more, min: 200 }
     - { id: 1000+, name: 1 TB or more, min: 1000 }
   aliases: [drive, online storage]
+  requiredIn: [storage]
 
 # ── Email ──────────────────────────────────────────────────────────────────────
 - id: email.addresses
@@ -205,6 +212,7 @@
     - { id: '1', name: 1 address, min: 1, max: 1 }
     - { id: 2-10, name: 2 to 10 addresses, min: 2, max: 10 }
     - { id: 11+, name: More than 10 addresses, min: 11 }
+  requiredIn: [email]
 - id: email.custom-domains
   name: Custom email domains
   category: email
@@ -233,6 +241,7 @@
   type: boolean
   aliases: [password vault, pass]
   headline: true
+  requiredIn: [passwords]
 - id: password-manager.item-types
   parent: password-manager
   name: Storable item types
@@ -316,6 +325,7 @@
   type: boolean
   aliases: [real-time protection, anti-malware, malware protection, advanced threat defense]
   headline: true
+  requiredIn: [security]
 - id: antivirus.devices
   parent: antivirus.included
   name: Devices protected
@@ -443,6 +453,7 @@
   type: boolean
   aliases: [ai, chatbot]
   headline: true
+  requiredIn: [ai]
 
 # ── Productivity ───────────────────────────────────────────────────────────────
 - id: calendar.included
@@ -450,6 +461,7 @@
   category: productivity
   type: boolean
   aliases: [online calendar]
+  requiredIn: [calendar]
 
 # ── Accounts & sharing ─────────────────────────────────────────────────────────
 # A plan that doesn't list account.users is for one person, so there's no "just you" tier: a tier is provided

@@ -32,8 +32,10 @@ import {
   type Reseller,
 } from './reseller';
 import {
+  awaitingRequiredFeatures,
   checkInclusionLoops,
   checkPlanFeatures,
+  checkRequiredFeatures,
   readFeatureRegistry,
   type FeatureRegistry,
 } from './validate-features';
@@ -108,6 +110,8 @@ export const awaitingPolicyRegrade: ReadonlySet<string> = new Set<string>();
 export interface ValidateOptions {
   /** Providers whose missing policy topics are warnings, not errors: awaitingPolicyRegrade unless a test says. */
   awaitingRegrade?: ReadonlySet<string>;
+  /** Plans whose missing required features are warnings: awaitingRequiredFeatures unless a test says. */
+  awaitingRequired?: ReadonlyMap<string, readonly string[]>;
 }
 
 /**
@@ -119,7 +123,10 @@ export interface ValidateOptions {
 export function validateCatalog(
   files: readonly CatalogSourceFile[],
   today: IsoDate,
-  { awaitingRegrade = awaitingPolicyRegrade }: ValidateOptions = {},
+  {
+    awaitingRegrade = awaitingPolicyRegrade,
+    awaitingRequired = awaitingRequiredFeatures,
+  }: ValidateOptions = {},
 ): CatalogIssue[] {
   const issues: CatalogIssue[] = [];
   const reportIn =
@@ -245,6 +252,7 @@ export function validateCatalog(
     resellersUnchecked: located.resellers !== undefined && resellers === undefined,
     policyTopics: policyTopics && new Map(policyTopics.map((topic) => [topic.id, topic])),
     awaitingRegrade,
+    awaitingRequired,
     policySets: new Map(policySets.map(({ value }) => [value.id, value])),
     policySetsUnchecked,
     raters: new Map(raters?.map((rater) => [rater.id, rater])),
@@ -558,6 +566,7 @@ interface CheckContext {
   /** data/policy-topics.yaml's, by id, or undefined when it's missing or broken: ratings' topics go unchecked. */
   policyTopics: ReadonlyMap<string, PolicyTopic> | undefined;
   awaitingRegrade: ReadonlySet<string>;
+  awaitingRequired: ReadonlyMap<string, readonly string[]>;
   /** data/policies/'s shared documents that parse, by id. */
   policySets: ReadonlyMap<string, PolicySet>;
   /** The ids of shared documents whose file is broken: what names them goes unchecked. */
@@ -628,7 +637,14 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
         `${provider.category} is the provider's category already: leave categories out`,
       );
     }
-    if (registry) checkFeatureCategories(plan, provider, path, { registry, serviceIds, report });
+    if (registry) {
+      checkFeatureCategories(plan, provider, path, { registry, serviceIds, report });
+      checkRequiredFeatures(plan, planCategories(plan, provider), plan.features, path, {
+        registry,
+        awaiting: context.awaitingRequired,
+        report,
+      });
+    }
     plan.addOnIds?.forEach((id, addOnIndex) => {
       if (!addOnIds.includes(id)) {
         report(

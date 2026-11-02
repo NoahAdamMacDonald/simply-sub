@@ -39,6 +39,16 @@
           "rankable": {
             "type": "boolean",
             "description": "false hides a helper feature from ranking UIs (default true)"
+          },
+          "requiredIn": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)"
+            },
+            "description": "Service categories from categories.yaml whose every plan states it, false and 0 included (M11.4): video.quality in streaming"
           }
         },
         "required": ["id", "name", "category", "type"],
@@ -118,6 +128,16 @@
           "rankable": {
             "type": "boolean",
             "description": "false hides a helper feature from ranking UIs (default true)"
+          },
+          "requiredIn": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)"
+            },
+            "description": "Service categories from categories.yaml whose every plan states it, false and 0 included (M11.4): video.quality in streaming"
           }
         },
         "required": ["id", "name", "category", "type"],
@@ -188,6 +208,16 @@
           "rankable": {
             "type": "boolean",
             "description": "false hides a helper feature from ranking UIs (default true)"
+          },
+          "requiredIn": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)"
+            },
+            "description": "Service categories from categories.yaml whose every plan states it, false and 0 included (M11.4): video.quality in streaming"
           }
         },
         "required": ["id", "name", "category", "type", "values"],
@@ -263,6 +293,16 @@
           "rankable": {
             "type": "boolean",
             "description": "false hides a helper feature from ranking UIs (default true)"
+          },
+          "requiredIn": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)"
+            },
+            "description": "Service categories from categories.yaml whose every plan states it, false and 0 included (M11.4): video.quality in streaming"
           }
         },
         "required": ["id", "name", "category", "type"],

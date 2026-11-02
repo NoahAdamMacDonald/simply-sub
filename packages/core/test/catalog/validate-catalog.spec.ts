@@ -436,6 +436,55 @@ describe('validateCatalog', () => {
     });
   });
 
+  describe('required features (M11.4)', () => {
+    const requiredQuality = () => edited(catalog(), featuresFile, [0, 'requiredIn'], ['streaming']);
+
+    it('needs every plan in the category to state it', () => {
+      expect(messages(requiredQuality())).toEqual([
+        "data/providers/crave.yaml plans.0.features: Needs video.quality, which every plan in streaming states (requiredIn): give its value, from the provider's own pages",
+      ]);
+      expect(
+        messages(
+          edited(requiredQuality(), crave, ['plans', 0, 'features', 'video.quality'], '720p'),
+        ),
+      ).toEqual([]);
+    });
+
+    it('takes false and 0, and leaves out plans in other categories', () => {
+      const files = edited(catalog(), featuresFile, [1, 'requiredIn'], ['streaming']);
+      const missing = (plan: string, index: number) =>
+        `data/providers/${plan}.yaml plans.${index}.features: Needs streaming.ad-free, which every plan in streaming states (requiredIn): give true or false, from the provider's own pages`;
+      expect(messages(files)).toEqual([
+        missing('crave', 0),
+        missing('crave', 1),
+        missing('netflix', 0),
+      ]);
+      expect(
+        messages(edited(files, netflix, ['plans', 0, 'features', 'streaming.ad-free'], false)),
+      ).toEqual([missing('crave', 0), missing('crave', 1)]);
+    });
+
+    it('warns instead for a plan waiting for M11.9', () => {
+      const issues = validateCatalog(requiredQuality(), today, {
+        awaitingRequired: new Map([['crave.standard', ['video.quality']]]),
+      });
+      expect(issues.map(({ severity, message }) => [severity, message])).toEqual([
+        [
+          'warning',
+          'Needs video.quality, which every plan in streaming states (requiredIn): no official page states it yet, so it waits for M11.9 (awaitingRequiredFeatures)',
+        ],
+      ]);
+    });
+
+    it('needs real service categories, each once', () => {
+      const registry = messagesWith(featuresFile, [0, 'requiredIn'], ['streming', 'vpn', 'vpn']);
+      expect(registry.filter((message) => message.startsWith(featuresFile))).toEqual([
+        'data/features.yaml 0.requiredIn.0: "streming" isn\'t a service category in data/categories.yaml (streaming, vpn, privacy-suite)',
+        'data/features.yaml 0.requiredIn.2: "vpn" is listed more than once',
+      ]);
+    });
+  });
+
   describe('featureLabels', () => {
     const labels = ['plans', 1, 'featureLabels'];
 

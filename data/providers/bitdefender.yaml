@@ -619,10 +619,13 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-02
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/ultimate-security
+  # No antivirus (M11.4, antivirus.included is required in security), read 2026-11-02: its page describes a service
+  # that "continuously monitors your personal information and alerts you in real time in case of a data breach", and
+  # names Total Security as the device protection to buy beside it.
   - id: bitdefender.digital-identity-protection
     name: Digital Identity Protection
     link: https://www.bitdefender.com/en-ca/consumer/digital-identity-protection
-    features: { security.dark-web-monitoring: true }
+    features: { antivirus.included: false, security.dark-web-monitoring: true }
     prices:
       - region: CA
         currency: CAD

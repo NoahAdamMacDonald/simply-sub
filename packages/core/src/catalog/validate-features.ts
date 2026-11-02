@@ -58,6 +58,7 @@ export function readFeatureRegistry(
   });
 
   const categoryIds = categories?.feature.map((category) => category.id);
+  const serviceIds = categories?.service.map((category) => category.id);
   const indexes = new Map(valid.map(({ feature, index }) => [feature.id, index]));
   for (const { feature, index } of valid) {
     if (categoryIds && !categoryIds.includes(feature.category)) {
@@ -66,6 +67,17 @@ export function readFeatureRegistry(
         `"${feature.category}" isn't a feature category in data/categories.yaml${choices(feature.category, categoryIds)}`,
       );
     }
+    feature.requiredIn?.forEach((id, item) => {
+      const at = [index, 'requiredIn', item];
+      if (feature.requiredIn?.indexOf(id) !== item) {
+        report(at, listedMoreThanOnce(id));
+      } else if (serviceIds && !serviceIds.includes(id)) {
+        report(
+          at,
+          `"${id}" isn't a service category in data/categories.yaml${choices(id, serviceIds)}`,
+        );
+      }
+    });
     const problem = parentProblem(feature, index, features, indexes, unchecked);
     if (problem) {
       report([index, 'parent'], problem);
@@ -285,6 +297,66 @@ function labelProblem(key: string, registry: FeatureRegistry, ids: CatalogIds): 
       return ids.kindOf(option) === 'provider' || ids.kindOf(option) === 'unchecked'
         ? undefined
         : `"${option}" isn't a provider id${didYouMean(option, ids.all('provider'))}`;
+  }
+}
+
+/**
+ * Plans whose required features no official page states yet, by plan id (M11.4): each named feature missing is a
+ * warning, not an error, until M11.9 reads them again. Their files' comments name the pages that were silent.
+ */
+export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = new Map([
+  ['espn.select', ['video.quality']],
+  ['ici-tou-tv.rdi', ['video.quality']],
+  ['rds.standard', ['video.quality']],
+  ['tsn.standard', ['video.quality']],
+  ['tsn.premium', ['video.quality']],
+]);
+
+/**
+ * Every plan in a category states the features required there (BLUEPRINT §4.2 rule 7, M11.4), `false` and `0`
+ * included, so the features buyers compare most never rest on "unlisted means no". `features` are the plan's own and
+ * its provider's. A plan in `awaiting` gets a warning for the features it names.
+ */
+export function checkRequiredFeatures(
+  plan: Plan,
+  categories: readonly string[],
+  features: Plan['features'],
+  path: CatalogIssuePath,
+  {
+    registry,
+    awaiting,
+    report,
+  }: {
+    registry: FeatureRegistry;
+    awaiting: ReadonlyMap<string, readonly string[]>;
+    report: Report;
+  },
+): void {
+  for (const feature of registry.features.values()) {
+    const required = [...new Set(feature.requiredIn)].filter((category) =>
+      categories.includes(category),
+    );
+    if (required.length === 0 || Object.hasOwn(features, feature.id)) {
+      continue;
+    }
+    const value =
+      feature.type === 'boolean'
+        ? 'true or false'
+        : feature.type === 'number'
+          ? 'its number, 0 included'
+          : feature.type === 'set'
+            ? 'its values, [] included'
+            : 'its value';
+    const waiting = awaiting.get(plan.id)?.includes(feature.id) === true;
+    report(
+      [...path, 'features'],
+      `Needs ${feature.id}, which every plan in ${required.join(' and ')} states (requiredIn): ${
+        waiting
+          ? 'no official page states it yet, so it waits for M11.9 (awaitingRequiredFeatures)'
+          : `give ${value}, from the provider's own pages`
+      }`,
+      waiting ? 'warning' : 'error',
+    );
   }
 }
 

@@ -40,6 +40,9 @@ owner:
 # TOU.TV page gives EXTRA 2 streams in the Crave bundle, against 3 on its own page and on Crave's, so this uses 3.
 # The free ICI TOU.TV catalogue with ads has no plan page, so it isn't a plan here. The Crave bundles are in
 # data/bundles.
+# Read 2026-11-02 (M11.4, the required streaming features): ICI RDI is "Chaîne en direct ICI RDI avec publicité" on
+# ici.tou.tv/abonnement, so it isn't ad free. Its video quality: that page states 1080p for EXTRA only, so RDI's waits
+# for M11.9 (awaitingRequiredFeatures in core).
 plans:
   - id: ici-tou-tv.extra
     name: EXTRA
@@ -65,6 +68,7 @@ plans:
     name: ICI RDI
     link: https://ici.tou.tv/abonnement
     features:
+      streaming.ad-free: false
       streaming.live: [tv-channels]
       streaming.concurrent-streams: 3
       streaming.french-content: true
