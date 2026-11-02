@@ -17,6 +17,15 @@ acceptedNetworks:
 billingCurrency: { GLOBAL: USD }
 cancelUrl: https://account.proton.me/dashboard
 sources: { pricing: https://proton.me/pricing }
+# Owner (M11.2), read 2026-11-02.
+owner:
+  name: Proton AG
+  page:
+    name: About Proton
+    url: https://proton.me/about
+  quotes:
+    - 'Proton services are operated by Proton AG, a Swiss corporation whose primary shareholder is the non-profit Proton Foundation based in Geneva, Switzerland.'
+  lastVerified: 2026-11-02
 notes: >-
   One Proton account holds one paid plan. Every plan keeps the free tier of the Proton apps it doesn't upgrade.
 

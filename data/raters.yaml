@@ -1,0 +1,55 @@
+# Outside raters (BLUEPRINT §4.10, M11.2): the raters whose labels a card shows, with a link to the rater's own page,
+# never its text. Each one's terms of reuse are read before it's added, and only a rater whose terms plainly allow a
+# label with a link is listed.
+#
+# Read and left out, the owner's choice (2026-11-02), until the owner has the rater's written permission:
+# - Ad Fontes Media: its terms of use (app.termly.io, linked from adfontesmedia.com) forbid it: "Reproduce, republish,
+#   redistribute, or commercially exploit our ratings, scores, charts, or other proprietary data, in whole or in part,
+#   without our express written permission."
+# - Media Bias/Fact Check: its Terms and Conditions (mediabiasfactcheck.com/terms-and-conditions/): "Reproduction,
+#   redistribution, or manipulation of this material" "is strictly prohibited, except as permitted under fair use or
+#   with explicit permission."
+# - AllSides: its terms of use (allsides.com/terms-of-use) are behind a bot check, so unread; other sites report its
+#   ratings are licensed CC BY-NC 4.0, for noncommercial use only.
+# - AV-Comparatives: its Press Center says "You are allowed to use the published test results free of charge", but each
+#   report's copyright notice says "Any use of the results, etc. in whole or in part, is ONLY permitted after the
+#   explicit written agreement of the management board of AV-Comparatives prior to any publication."
+# - SE Labs: its copyright page allows only "Fair use of quotes and illustrations is permitted for purposes such as
+#   promoting the report", its reports otherwise needing a licence.
+# No news provider is in the catalog yet, so no news rater is listed: a news outlet's bias and reliability need two.
+
+- id: av-test
+  name: AV-TEST
+  website: https://www.av-test.org
+  # Each of its home-user tests scores protection, performance and usability out of 6 points, in half points.
+  scales:
+    - subject: antivirus-protection
+      labels: &points
+        - 6.0/6.0
+        - 5.5/6.0
+        - 5.0/6.0
+        - 4.5/6.0
+        - 4.0/6.0
+        - 3.5/6.0
+        - 3.0/6.0
+        - 2.5/6.0
+        - 2.0/6.0
+        - 1.5/6.0
+        - 1.0/6.0
+        - 0.5/6.0
+        - 0.0/6.0
+    - subject: antivirus-performance
+      labels: *points
+    - subject: antivirus-usability
+      labels: *points
+  terms:
+    url: https://www.av-test.org/en/contact/faq/
+    quotes:
+      - You are also allowed to use data, charts and statistics from the AV-Test Institute for journalistic coverage,
+        for preparing overviews and statistics for research purposes, and also as the basis for your own tests.
+      - For online publications, we also expect that an active link to the website
+    note: >-
+      The card credits AV-TEST by name and links its result page on av-test.org, with the test's month. Its FAQ also
+      "kindly" asks to be told of each use (presse@av-test.com), a request rather than a condition, which the owner
+      chose not to follow (2026-11-02).
+    checked: 2026-11-02

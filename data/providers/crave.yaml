@@ -13,6 +13,15 @@ availableIn: [CA]
 # Sign in, then Account > Subscriptions > Cancel Plan (read 2026-10-26).
 cancelUrl: https://plus.crave.ca/en/faq/plans-billing-bundles/canceling-or-pausing-my-crave-subscription/
 sources: { pricing: https://www.crave.ca/en/subscribe }
+# Owner (M11.2), read 2026-11-02: no about page says so; its terms do.
+owner:
+  name: Bell Media Inc.
+  page:
+    name: Terms and conditions
+    url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+  quotes:
+    - 'which is made available to you by Bell Media Inc. and its affiliates (together, “Bell Media”)'
+  lastVerified: 2026-11-02
 notes: Live events, sports and news include ads on every plan.
 
 plans:

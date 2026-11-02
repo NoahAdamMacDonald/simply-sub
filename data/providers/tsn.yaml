@@ -14,6 +14,15 @@ availableIn: [CA]
 # The FAQ's cancellation steps: Account > Manage Subscription > Subscriptions > Cancel Subscription.
 cancelUrl: https://www.tsn.ca/help/faq/#cancellations
 sources: { pricing: https://www.tsn.ca/subscribe/ }
+# Owner (M11.2), read 2026-11-02: no about page says so; its terms do.
+owner:
+  name: Bell Media Inc.
+  page:
+    name: Terms and conditions
+    url: https://www.tsn.ca/terms-and-conditions/
+  quotes:
+    - 'which is made available to you by Bell Media Inc. and its affiliates (together, “Bell Media”)'
+  lastVerified: 2026-11-02
 notes: >-
   Plans renew for the period chosen, except in Quebec, where they renew monthly. Select NHL regular-season games
   only, with regional blackouts.

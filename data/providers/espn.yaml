@@ -23,6 +23,8 @@ billingCurrency: { US: USD }
 # only" (help.disneyplus.com/article/disneyplus-price, set to the US).
 cancelUrl: https://support.espn.com/hc/en-us/articles/40377550796308-Cancelling-Your-ESPN-Select-or-Unlimited-Subscription
 sources:
+# No owner (M11.2, read 2026-11-02): espn.com says only “Copyright: © 2026 ESPN Enterprises, LLC.”; Disney's privacy
+# policy lists ESPN among The Walt Disney Family of Companies, but only in a list of brands.
   {
     pricing: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices,
   }

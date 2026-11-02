@@ -34,6 +34,15 @@ spendCategory: software
 billingCurrency: { CA: CAD, GLOBAL: USD, US: USD }
 cancelUrl: https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription
 sources: { pricing: https://claude.com/pricing }
+# Owner (M11.2), read 2026-11-02: claude.com has no about page saying so; its terms, on anthropic.com, do.
+owner:
+  name: 'Anthropic, PBC'
+  page:
+    name: Terms of service
+    url: https://www.anthropic.com/legal/consumer-terms
+  quotes:
+    - 'These Terms are a contract between you and Anthropic, PBC (and not our Providers)'
+  lastVerified: 2026-11-02
 
 plans:
   - id: claude.free

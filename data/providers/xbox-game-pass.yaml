@@ -20,6 +20,17 @@ spendCategory: gaming
 billingCurrency: { CA: CAD, GB: GBP, US: USD, AU: AUD, NZ: NZD, EU: EUR }
 cancelUrl: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
 sources: { pricing: https://www.xbox.com/en-CA/xbox-game-pass }
+# Owner (M11.2), read 2026-11-02: no xbox.com page read says who owns Xbox in so many words; its subscription terms name
+# Microsoft as the seller.
+owner:
+  name: Microsoft
+  page:
+    name: XBOX subscription terms
+    url: https://www.xbox.com/en-US/legal/subscription-terms
+  quotes:
+    - By subscribing you are authorizing recurring payments made to Microsoft at the intervals you selected
+    - All XBOX subscriptions in the bulleted list below require acceptance of the Microsoft Services Agreement (microsoft.com/msa)
+  lastVerified: 2026-11-02
 
 plans:
   - id: xbox-game-pass.essential

@@ -21,6 +21,15 @@ billingCurrency: { US: USD }
 availableIn: [US]
 cancelUrl: https://help.hulu.com/article/hulu-cancel-hulu-subscription
 sources: { pricing: https://help.hulu.com/article/hulu-how-much-does-hulu-cost }
+# Owner (M11.2), read 2026-11-02: its press site's history, 2019.
+owner:
+  name: The Walt Disney Company
+  page:
+    name: Corporate history (Hulu press site)
+    url: https://press.hulu.com/corporate/
+  quotes:
+    - The Walt Disney Company assumes full operational control of Hulu.
+  lastVerified: 2026-11-02
 
 # Read 2026-10-26 on the plans and prices article, for new subscriptions from September 23, 2026: the standalone plans,
 # both up to 4K. The article doesn't number the streams or downloads. Not here yet: the Hulu + Live TV plans (which

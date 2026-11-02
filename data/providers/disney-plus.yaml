@@ -32,6 +32,8 @@ billingCurrency: { CA: CAD, US: USD }
 # Subscription), read 2026-10-26 with the help centre set to each country.
 cancelUrl: https://help.disneyplus.com/article/disneyplus-cancel
 sources: { pricing: https://help.disneyplus.com/article/disneyplus-en-ca-price }
+# No owner (M11.2, read 2026-11-02): its own pages say only “© 2026 Disney. All Rights Reserved.”; Disney's
+# privacy policy lists Disney+ among The Walt Disney Family of Companies, but only in a list of brands.
 
 # Canada sells Standard With Ads, Standard and Premium. The US sells With Ads (4K, unlike Canada's 1080p) and
 # Premium, so a plan sold in one country only has prices there. The US prices are on

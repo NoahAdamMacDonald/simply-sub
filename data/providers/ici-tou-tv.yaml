@@ -14,6 +14,16 @@ availableIn: [CA]
 # compte". Radio-Canada's help centre has an article too, behind a bot check this machine doesn't pass.
 cancelUrl: https://ici.tou.tv/abonnement/condition
 sources: { pricing: https://ici.tou.tv/abonnement }
+# Owner (M11.2), read 2026-11-02: no about page says so; its conditions name its operator (“provided independently by
+# their respective operators”).
+owner:
+  name: Société Radio-Canada
+  page:
+    name: "Conditions d'utilisation (in French)"
+    url: https://ici.tou.tv/abonnement/condition
+  quotes:
+    - Les services ICI TOU.TV et Crave sont fournis de manière indépendante par leurs exploitants respectifs (Société Radio-Canada et Bell Média inc.)
+  lastVerified: 2026-11-02
 
 # Read 2026-10-26 on ici.tou.tv/abonnement: EXTRA, ICI RDI and the two together, monthly only, each "3 diffusions en
 # continu à la fois". EXTRA's 1080p is from ici.tou.tv/abonnement-extra-crave and crave.ca/en/subscribe; that ICI

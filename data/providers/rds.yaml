@@ -13,6 +13,16 @@ availableIn: [CA]
 # The FAQ's steps for a direct subscription: sign in, then cancel from the account's subscriptions.
 cancelUrl: https://www.rds.ca/aide/faq/#annuler-abonnement
 sources: { pricing: https://www.rds.ca/abonnement/ }
+# Owner (M11.2), read 2026-11-02: no about page says so; its conditions do (“offered to you by Bell Media Inc. and its
+# affiliates”).
+owner:
+  name: Bell Media Inc.
+  page:
+    name: Conditions (in French)
+    url: https://www.rds.ca/conditions
+  quotes:
+    - 'qui vous est offert par Bell Média inc. et ses sociétés affiliées (collectivement, « Bell Média »)'
+  lastVerified: 2026-11-02
 notes: >-
   Plans renew for the period chosen, except in Quebec, where they renew monthly. Select Montreal Canadiens
   regular-season games only, with regional blackouts.
