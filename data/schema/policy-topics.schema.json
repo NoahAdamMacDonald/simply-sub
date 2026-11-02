@@ -74,6 +74,12 @@
         "maximum": 9007199254740991,
         "description": "It applies only to providers with at least this many paid plans (1 for billing, 2 for switching plans)"
       },
+      "actionFor": {
+        "minItems": 1,
+        "type": "array",
+        "items": { "type": "string", "enum": ["great", "good", "neutral", "poor", "bad"] },
+        "description": "The grades that mean the user has to act (opt out, ask for deletion): a rating with one links the provider's own page for it in its action"
+      },
       "titled": {
         "type": "boolean",
         "const": true,

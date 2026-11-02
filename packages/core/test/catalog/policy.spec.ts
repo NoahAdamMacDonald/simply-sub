@@ -370,6 +370,35 @@ describe('validateCatalog, for policies', () => {
     ]);
   });
 
+  it('needs a way to act on a grade that means the user has to (M11.1)', () => {
+    const optOut = edited(
+      withPolicies(),
+      'data/policy-topics.yaml',
+      [0, 'actionFor'],
+      ['neutral', 'poor'],
+    );
+    const graded = (extra: Record<string, unknown>) =>
+      edited(optOut, 'data/providers/mullvad.yaml', ['policies', 'ratings', 0], {
+        ...rating('privacy.data-collection'),
+        ...extra,
+      });
+    const missing =
+      "data/providers/mullvad.yaml policies.ratings.0.action: Data collection rated Neutral means the user has to act: link Mullvad VPN's own page for it in action";
+    const all = (files: CatalogSourceFile[], awaitingRegrade = new Set<string>()) =>
+      validateCatalog(files, today, { awaitingRegrade })
+        .filter((issue) => issue.path.at(-1) === 'action')
+        .map(
+          (issue) =>
+            `${issue.severity === 'warning' ? 'warning: ' : ''}${formatCatalogIssue(issue)}`,
+        );
+    expect(all(graded({ tier: 'neutral' }))).toEqual([missing]);
+    expect(all(graded({ tier: 'neutral' }), new Set(['mullvad']))).toEqual([`warning: ${missing}`]);
+    expect(
+      all(graded({ tier: 'neutral', action: { name: 'How to opt out', url: privacy } })),
+    ).toEqual([]);
+    expect(all(graded({ tier: 'great' }))).toEqual([]);
+  });
+
   it('reports a plan that isn’t the provider’s', () => {
     expect(
       messages(withNetflix([netflixRating('privacy.ads-tracking', { plans: ['mullvad.vpn'] })])),

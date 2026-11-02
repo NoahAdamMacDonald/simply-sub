@@ -37,11 +37,19 @@ their own.
   whether the card shows that as a grade); `status: not-applicable` when it can't apply (no free trial). Either way a
   reason ("Its terms and privacy policy don't say whether it tells you before raising the price").
 - **Notable** (`other.notable`): up to three, for something that stands out and no topic covers (a VPN that takes
-  cash), each with a short `title` and a grade on the scale at the top of `data/policy-topics.yaml`.
+  cash, an installer that removes other security apps), each with a short `title` and a grade on the scale at the
+  top of `data/policy-topics.yaml`. Read the whole terms for them: a notable term is never left out because no topic
+  fits.
+- **Audits for providers with deep access** (VPN, DNS, antivirus, email, password managers, browsers: anything that
+  sees your traffic, messages, files or passwords, or runs deep in your device): read its audits page
+  (mullvad.net/en/blog/tag/audits is the model), its bug bounty or disclosure policy and its security advisories
+  (Bitdefender's, Proton's), for `security.practices`, and for `vpn.independent-audits` an audit that tested the
+  no-logs claim (Radically Open Security's of Mullvad). A page that renders with JavaScript (Bitdefender's) is read
+  with the price-research skill's `read-page.cjs`.
 - **Quotes word for word,** from the page as it reads: curly quotes, dashes and accents included. Up to three per
   rating. Quote sentences, not pop-up definitions that a page's text runs into (Disney's policy).
 - **The reason is in plain words anyone can follow** (a sentence or two, 240 characters at most): what signing up
-  means, as you'd explain it to a child. "If you cancel, you can keep watching until the end of the time you paid
+  means, explained like you would to a five-year-old. "If you cancel, you can keep watching until the end of the time you paid
   for, but you get no money back." Use everyday words, explain a term a reader may not know (an arbitrator is "a
   private referee"), and say only what the quotes say. In English, even for a page in French.
 - **The quotes are its citations:** the card cites each page a rating quotes ("[2]") and links it to the quotes
@@ -57,13 +65,14 @@ their own.
 - **Links:** every page a rating quotes or lists in `pages` goes in `policies.links`, named as the card shows it
   ("Terms of use", "Conditions d'utilisation (in French)"), and every link is quoted or listed somewhere.
 - **Where to change it (M5.12):** when a reason says the user has to do something themselves (turn a setting off, ask
-  for their data to be deleted), give the rating an `action`: what the link does, in a few words ("How to turn off
+  for their data to be deleted), give the rating an `action`; validation requires one on the grades the topic's
+  `actionFor` lists (an opt-out's Neutral and Poor, deletion's Good to Poor): what the link does, in a few words ("How to turn off
   Behavioral Advertising", 60 characters at most), and the page the provider's own policy or help pages link for it
   (Netflix's statement links help.netflix.com/node/100637 for its choices). Copy the link from the page, never guess
   an account URL. It has to be on the provider's own sites or the site its quoted policies are on (Disney's privacy
   center, bell.ca); validation says so. A form on another company's domain (a OneTrust web form) isn't linked: link
-  the provider's page that explains it instead. None when the change is the browser's or device's own setting (ICI
-  TOU.TV) or there's nothing to change (a refund to ask for).
+  the provider's page that explains it instead. When the change is the browser's or device's own setting (ICI
+  TOU.TV), link the provider's page that explains how; none when there's nothing to change (a refund to ask for).
 - **Say what wasn't read, and why,** in the comment above `policies:` (the agreement didn't render, Access Denied),
   with the date the pages were read.
 
@@ -74,7 +83,8 @@ this file to them: change both together.
 
 1. Find the clauses for the topic in the terms, the privacy policy, and the help centre's billing and privacy pages,
    and quote up to three, word for word. A grade read from a form or a sign-up flow quotes the page that hosts it,
-   and the reason says so.
+   and the reason says so. Read the whole terms and privacy policy, not only the clauses a topic names: step 12 is
+   for what no topic covers.
 2. The default: what happens if you do nothing? Protective is Great or Good. Not protective is Neutral or worse.
 3. The control, when the default isn't protective. Self-serve (a setting in the account or app, a one-click link, a
    form that takes effect at once, for the account on every device) is Neutral. Partial (some data, apps, products or
@@ -106,10 +116,21 @@ this file to them: change both together.
 9. A topic and a feature on the same fact both stay, and must agree: activity logging is Great only when the plans'
    vpn.independent-audits includes no-logs. A topic grades only what the feature doesn't say: device limits grade
    registration caps and download expiry, never the number of devices.
-10. A rating that depends on the user changing something (Neutral or Poor through an opt-out) has an "action": the
-    provider's own page for it.
+10. A rating that depends on the user acting (an opt-out, a deletion request, an export: the grades its topic's
+    "actionFor" lists, which validation checks) has an "action": the provider's own page for it, so the user gets
+    there in one click. When the change is the browser's or the device's own setting, link the provider's page that
+    explains it.
 11. Calibrate: grade the same fact the same way for every provider. Before grading one, read the same topics for two
     providers already graded in its category.
+12. Notable: a term that stands out and that no topic covers (a VPN that takes cash, an installer that removes other
+    security apps) is an other.notable rating with a short "title", graded on the scale, up to three. Never leave a
+    notable term out because no topic fits.
+13. Security: a provider that sees your traffic, messages, files or passwords, or runs with deep access to your
+    device (VPN, DNS, antivirus, email, password managers, browsers), is read for its audits page (Mullvad's
+    "External audits" posts), its bug bounty or vulnerability disclosure policy and its security advisories. They
+    grade security.practices, and an audit that tested a no-logs claim is vpn.independent-audits' no-logs.
+14. The reason explains it like you would to a five-year-old: short sentences, everyday words, what it means for you,
+    and only what the quotes say.
 
 ### Which topic a fact belongs to (core's `policyRouting`)
 

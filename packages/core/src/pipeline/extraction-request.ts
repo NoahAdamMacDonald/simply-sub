@@ -20,7 +20,8 @@ import { excerpt, nameIndexes } from './page-text';
  */
 export const policyProcedure = `1. Find the clauses for the topic in the terms, the privacy policy, and the help centre's billing and privacy pages,
    and quote up to three, word for word. A grade read from a form or a sign-up flow quotes the page that hosts it,
-   and the reason says so.
+   and the reason says so. Read the whole terms and privacy policy, not only the clauses a topic names: step 12 is
+   for what no topic covers.
 2. The default: what happens if you do nothing? Protective is Great or Good. Not protective is Neutral or worse.
 3. The control, when the default isn't protective. Self-serve (a setting in the account or app, a one-click link, a
    form that takes effect at once, for the account on every device) is Neutral. Partial (some data, apps, products or
@@ -52,10 +53,21 @@ export const policyProcedure = `1. Find the clauses for the topic in the terms, 
 9. A topic and a feature on the same fact both stay, and must agree: activity logging is Great only when the plans'
    vpn.independent-audits includes no-logs. A topic grades only what the feature doesn't say: device limits grade
    registration caps and download expiry, never the number of devices.
-10. A rating that depends on the user changing something (Neutral or Poor through an opt-out) has an "action": the
-    provider's own page for it.
+10. A rating that depends on the user acting (an opt-out, a deletion request, an export: the grades its topic's
+    "actionFor" lists, which validation checks) has an "action": the provider's own page for it, so the user gets
+    there in one click. When the change is the browser's or the device's own setting, link the provider's page that
+    explains it.
 11. Calibrate: grade the same fact the same way for every provider. Before grading one, read the same topics for two
-    providers already graded in its category.`;
+    providers already graded in its category.
+12. Notable: a term that stands out and that no topic covers (a VPN that takes cash, an installer that removes other
+    security apps) is an other.notable rating with a short "title", graded on the scale, up to three. Never leave a
+    notable term out because no topic fits.
+13. Security: a provider that sees your traffic, messages, files or passwords, or runs with deep access to your
+    device (VPN, DNS, antivirus, email, password managers, browsers), is read for its audits page (Mullvad's
+    "External audits" posts), its bug bounty or vulnerability disclosure policy and its security advisories. They
+    grade security.practices, and an audit that tested a no-logs claim is vpn.independent-audits' no-logs.
+14. The reason explains it like you would to a five-year-old: short sentences, everyday words, what it means for you,
+    and only what the quotes say.`;
 
 /** Which topic a fact belongs to (the guide's §1.5): the skill's Rules state it word for word too. */
 export const policyRouting = `- Trains AI on your chats, files or photos: privacy.ai-training.

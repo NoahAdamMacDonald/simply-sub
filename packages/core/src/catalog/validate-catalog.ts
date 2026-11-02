@@ -701,6 +701,7 @@ function checkPolicies(
         ...(provider.domains ?? []),
         ...(policies.links ?? []).map((link) => siteDomain(link.url)),
       ],
+      waiting: context.awaitingRegrade.has(provider.id),
     },
     context,
     report,
@@ -743,13 +744,19 @@ function checkPolicies(
 
 /**
  * A provider's ratings or a shared document's: each on a topic of data/policy-topics.yaml, read on a date that isn't
- * after today, with a way to change it on its owner's sites. A titled topic's ratings (other.notable) each have a
- * title, up to three. Ratings older than a year are worth reading again.
+ * after today, with a way to change it on its owner's sites, which a grade the topic's actionFor lists must have. A
+ * titled topic's ratings (other.notable) each have a title, up to three. Ratings older than a year are worth reading
+ * again.
  */
 function checkRatingList(
   ratings: readonly PolicyRating[],
   base: CatalogIssuePath,
-  owner: { name: string; sites: readonly string[] },
+  owner: {
+    name: string;
+    sites: readonly string[];
+    /** Rated before M11.1 and waiting for M11.9's regrade: a missing action is a warning. */
+    waiting: boolean;
+  },
   { policyTopics, today }: CheckContext,
   report: Report,
 ): void {
@@ -767,6 +774,14 @@ function checkRatingList(
     }
     if (topic) {
       checkTitle(topic, rating, path, report);
+    }
+    // A grade that means the user has to act links where they do it (M5.12, M11.1).
+    if (rating.tier && topic?.actionFor?.includes(rating.tier) && !rating.action) {
+      report(
+        [...path, 'action'],
+        `${topic.name} rated ${capitalized(rating.tier)} means the user has to act: link ${owner.name}'s own page for it in action`,
+        owner.waiting ? 'warning' : 'error',
+      );
     }
     if (rating.lastVerified > today) {
       report([...path, 'lastVerified'], `${rating.lastVerified} is after today (${today})`);
@@ -815,14 +830,20 @@ function checkPolicySet(
   context: CheckContext,
   report: Report,
 ): void {
+  const naming = providers.filter((provider) => provider.policies?.shared?.includes(set.id));
   checkRatingList(
     set.ratings,
     [],
-    { name: set.name, sites: set.links.map((link) => siteDomain(link.url)) },
+    {
+      name: set.name,
+      sites: set.links.map((link) => siteDomain(link.url)),
+      waiting:
+        naming.length > 0 && naming.every((provider) => context.awaitingRegrade.has(provider.id)),
+    },
     context,
     report,
   );
-  if (!providers.some((provider) => provider.policies?.shared?.includes(set.id))) {
+  if (naming.length === 0) {
     report(
       ['id'],
       "No provider names this document in its policies' shared: add it to the providers it covers, or remove it",

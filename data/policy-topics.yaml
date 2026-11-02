@@ -13,7 +13,8 @@
 # `silent` is what it means when the pages say nothing: not-stated where silence proves nothing, or the grade it gets
 # where it means a missing protection (the owner's choice, 2026-10-30). Every provider rates or gives a status for each
 # topic that applies to it. A topic with categories applies only to providers with a plan in one of them; one with
-# paidPlans only to providers with that many paid plans.
+# paidPlans only to providers with that many paid plans. `actionFor` lists the grades that mean the user has to act
+# (an opt-out, a deletion request): a rating with one links the provider's own page for it (its `action`).
 # Shapes: packages/core/src/catalog/policy-topic.ts. Add a topic here, in its own commit, before a provider uses it.
 
 # ── Privacy ────────────────────────────────────────────────────────────────────
@@ -27,6 +28,7 @@
     collected only for ads is privacy.ads-tracking's: this grades what's left. Opting out of one use of the data isn't
     opting out of collecting it.
   silent: not-stated
+  actionFor: [neutral, poor]
   tiers:
     great: Collects only what the service needs to work.
     good: Asks before collecting anything more.
@@ -42,6 +44,7 @@
     network) even to show its own ads. Service providers and processors acting for it run the service; affiliates are
     its own group; partners with no stated purpose use the data for their own ends.
   silent: not-stated
+  actionFor: [neutral, poor]
   tiers:
     great: Shares it only with companies that run the service for it.
     good: Also shares it within its own group, never to sell or for others' advertising.
@@ -56,6 +59,7 @@
     Ads chosen from your activity, in its apps or anywhere else, and the data collected only for them. A choice set
     per device or browser, or one that resets (cookie choices), is partial.
   silent: not-stated
+  actionFor: [neutral, poor]
   tiers:
     great: No ads, and no tracking for advertising.
     good: Ads or tracking only if you agree to them.
@@ -72,6 +76,7 @@
     in other products); a model that only runs the service's own features (a spam filter, recommendations) is data
     collection. An AI provider that's silent is Poor, since training is the default in that industry.
   silent: not-stated
+  actionFor: [neutral, poor]
   silentIn: { ai: poor }
   tiers:
     great: Never trains AI models on your content.
@@ -85,6 +90,7 @@
   group: privacy
   question: Who can read what you store or send.
   silent: not-stated
+  actionFor: [good, poor]
   categories: [storage, ai, privacy-suite]
   tiers:
     great: End-to-end or zero-access encryption by default for the main content.
@@ -114,6 +120,7 @@
   question: Whether you can have your data deleted, and how.
   note: How long anything stays afterwards is privacy.data-retention's.
   silent: not-stated
+  actionFor: [good, neutral, poor]
   tiers:
     great: Keeps almost nothing, or deletes it yourself at any time, keeping only what the law requires.
     good: Deletes it when you ask, within a stated time.
@@ -128,6 +135,7 @@
     The formats themselves are features, and import never counts. Open formats: CSV, JSON, ICS, VCF, mbox, KDBX,
     otpauth. A partial export outweighs the format when both apply.
   silent: not-stated
+  actionFor: [great, good, neutral, poor]
   tiers:
     great: Self-serve export of everything, in open, documented formats.
     good: Self-serve export of the main content in an open format.
@@ -296,6 +304,7 @@
     An arbitration opt-out with a deadline, by post, or only for new accounts is narrow. Silence means courts by
     default, with no arbitration.
   silent: good
+  actionFor: [neutral, poor]
   tiers:
     great: Disputes go to the courts or a consumer board where you live, and class actions are allowed.
     good: Disputes go to a court or board, with no arbitration, but one of its choosing or with no class actions.

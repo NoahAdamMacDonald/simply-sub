@@ -85,6 +85,13 @@ export const policyTopicSchema = z
         'It applies only to providers with at least this many paid plans (1 for billing, 2 for switching plans)',
       )
       .optional(),
+    actionFor: z
+      .array(policyTierSchema)
+      .min(1, 'Leave actionFor out when no grade needs the user to act')
+      .describe(
+        "The grades that mean the user has to act (opt out, ask for deletion): a rating with one links the provider's own page for it in its action",
+      )
+      .optional(),
     titled: z
       .literal(true)
       .describe(
