@@ -20,14 +20,7 @@ import { automationSchema } from '../pipeline/automation';
 import { onSites, providerSiteKeys, queueFileSchema } from '../pipeline/queue';
 import type { Price } from './price';
 import { providerSchema, type AddOn, type Plan, type Provider } from './provider';
-import {
-  ownerRequiredIn,
-  ratersFileSchema,
-  ratingIsOld,
-  ratingDay,
-  ratingSubjects,
-  type Rater,
-} from './rater';
+import { ratersFileSchema, ratingIsOld, ratingDay, ratingSubjects, type Rater } from './rater';
 import { redirectsFileSchema } from './redirects';
 import { isRetired } from './retired';
 import { globalRegion, groupsOf, isCatalogRegion, membersOf, regionProblem } from './regions';
@@ -106,24 +99,11 @@ const staleAfterDays = 90;
 const policyStaleAfterDays = 365;
 
 /**
- * Providers rated before policy topics v2 (M11.1), whose missing topics are warnings until M11.9 regrades them under
- * the new rules and empties this list. Every other provider rates, or gives a status for, each topic that applies.
+ * Providers rated before policy topics v2 (M11.1), whose missing topics were warnings until they were regraded under
+ * the new rules. Empty since 2026-11-02, when the owner asked for every topic to be required and the 13 were rated on
+ * all of them: every provider rates, or gives a status for, each topic that applies. M11.9 still regrades them.
  */
-export const awaitingPolicyRegrade: ReadonlySet<string> = new Set([
-  'bitdefender',
-  'claude',
-  'crave',
-  'disney-plus',
-  'espn',
-  'hulu',
-  'ici-tou-tv',
-  'mullvad',
-  'netflix',
-  'proton',
-  'rds',
-  'tsn',
-  'xbox-game-pass',
-]);
+export const awaitingPolicyRegrade: ReadonlySet<string> = new Set<string>();
 
 export interface ValidateOptions {
   /** Providers whose missing policy topics are warnings, not errors: awaitingPolicyRegrade unless a test says. */
@@ -713,6 +693,50 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
     checkOutsideRatings(provider.ratings, context, report);
   }
   checkOwner(provider, own, context, report);
+  checkPaymentMethods(provider, own, report);
+}
+
+/**
+ * A provider's own sites and the sites its own pages are on: its website and domains, its policies' pages (Claude's
+ * terms on anthropic.com) and its owner's site (Microsoft's for Xbox Game Pass), where its owner and the ways to pay
+ * it may be stated.
+ */
+function ownPages(provider: Provider, own: readonly string[]): string[] {
+  return [
+    ...new Set([
+      ...own,
+      ...(provider.policies?.links ?? []).map((link) => siteDomain(link.url)),
+      ...(provider.owner?.website ? [siteDomain(provider.owner.website)] : []),
+    ]),
+  ];
+}
+
+/**
+ * How a provider can be paid (M11.5, the owner's request on 2026-11-02): every provider says, quoted from its own
+ * pages, so cash, crypto and gift cards are never missed.
+ */
+function checkPaymentMethods(provider: Provider, own: readonly string[], report: Report): void {
+  if (!provider.paymentMethods) {
+    report(
+      [],
+      'Say how it can be paid: its own page on payment methods, quoted (paymentMethods), cash and crypto included',
+    );
+    return;
+  }
+  const sites = ownPages(provider, own);
+  provider.paymentMethods.forEach((entry, index) => {
+    entry.regions?.forEach((region, item) => {
+      if (!isCatalogRegion(region)) {
+        report(['paymentMethods', index, 'regions', item], regionProblem(region));
+      }
+    });
+    if (!isOnDomain(entry.url, sites)) {
+      report(
+        ['paymentMethods', index, 'url'],
+        `Must be a page of ${provider.name}'s own sites, its policies' or its owner's (${sites.join(', ')})`,
+      );
+    }
+  });
 }
 
 /**
@@ -785,7 +809,8 @@ function checkOutsideRatings(
 
 /**
  * A provider's owner (M11.2): quoted from its own pages, on its sites or the sites of its own policies (Claude's terms
- * on anthropic.com), or from its owner's own site (Microsoft's annual report for Xbox Game Pass). A provider with a plan in a category where who owns it matters (VPNs, news, finance) needs one.
+ * on anthropic.com), or from its owner's own site (Microsoft's annual report for Xbox Game Pass). Every provider needs
+ * one (the owner's request on 2026-11-02).
  */
 function checkOwner(
   provider: Provider,
@@ -795,22 +820,13 @@ function checkOwner(
 ): void {
   const { owner } = provider;
   if (!owner) {
-    const needs = providerCategories(provider).filter((id) => ownerRequiredIn.includes(id));
-    if (needs.length > 0) {
-      report(
-        [],
-        `A provider in ${needs.join(' and ')} needs its owner: quote its own about page in owner`,
-      );
-    }
+    report(
+      [],
+      'Say who owns it: quote its about page, its owner’s own page about it, or its terms, in owner',
+    );
     return;
   }
-  const sites = [
-    ...new Set([
-      ...own,
-      ...(provider.policies?.links ?? []).map((link) => siteDomain(link.url)),
-      ...(owner.website ? [siteDomain(owner.website)] : []),
-    ]),
-  ];
+  const sites = ownPages(provider, own);
   if (!isOnDomain(owner.page.url, sites)) {
     report(
       ['owner', 'page', 'url'],

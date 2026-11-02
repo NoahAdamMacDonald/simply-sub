@@ -123,8 +123,8 @@ export interface CitedPage {
 }
 
 /**
- * Every page the catalog cites: its prices' sources, its pricing page, the pages naming its resellers and its accepted
- * cards (pricing), and the pages its policy ratings and its owner quote (policies), a shared document's for each
+ * Every page the catalog cites: its prices' sources, its pricing page, the pages naming its resellers, its accepted
+ * cards and its ways to pay (pricing), and the pages its policy ratings and its owner quote (policies), a shared document's for each
  * provider naming it (`policySets`). A page cited both ways is a pricing page.
  */
 export function citedPages(
@@ -153,6 +153,7 @@ export function citedPages(
     }
     for (const accepted of Object.values(provider.acceptedNetworks ?? {}))
       cite(accepted.url, 'pricing', id);
+    for (const entry of provider.paymentMethods ?? []) cite(entry.url, 'pricing', id);
     for (const link of provider.policies?.links ?? []) cite(link.url, 'policies', id);
     cite(provider.owner?.page.url, 'policies', id);
     for (const set of policySets.filter((set) => provider.policies?.shared?.includes(set.id)))
@@ -208,6 +209,9 @@ export function citedFacts(
     }
     for (const accepted of Object.values(provider.acceptedNetworks ?? {})) {
       if (accepted.url === url) facts.quotes.push(...accepted.quotes);
+    }
+    for (const entry of provider.paymentMethods ?? []) {
+      if (entry.url === url) facts.quotes.push(...entry.quotes);
     }
     for (const rating of provider.policies?.ratings ?? []) {
       for (const source of rating.sources ?? [])

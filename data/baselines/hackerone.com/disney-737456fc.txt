@@ -1,0 +1,193 @@
+url: https://hackerone.com/disney
+method: browser
+saved: 2026-11-02
+
+Skip to main content >
+Learn more about HackerOne
+Log in
+Security page
+Program guidelines
+Scope
+Hacktivity
+Thanks
+Updates
+Program highlights
+Signal Requirement
+1.0 or higher past-year Signal required, with use of trial reports for hackers below it.
+Managed by HackerOne
+1 hour
+Average time to first response
+1 week, 3 days
+Average time to triage
+2 months, 1 week
+Average time to resolution
+Scope exclusions
+Core Ineligible Findings are out of scope.
+Learn more
+Overview
+Last updated on October 29, 2024. View changes
+Introduction
+The Walt Disney Company’s (“TWDC,” or “we”) Global Information Security team works diligently to protect Disney’s assets, services, products, and customer information. Additionally, we recognize the valuable role the research community plays in submitting responsible disclosures that may aid our security posture, and we welcome the opportunity to partner with you.
+The HackerOne program accepts reports of potential security vulnerabilities that may provide an attacker with the ability to compromise the integrity, availability, or confidentiality of TWDC products, services, or information technology infrastructure (the “TWDC Program”). Please see below for specific submission criteria.
+If you believe you have found a qualifying security vulnerability in a Disney product or website, please submit a report in accordance with the guidelines below. We value the positive impact of your work and thank you in advance for your contribution.
+Program Rules
+To ensure a submission is acceptable under TWDC Program you must:
+Not use automated scanners/tools
+not cause harm to TWDC or TWDC customers;
+avoid compromising the privacy of our customers or employees, or disrupting the operation of our products, services or information technology infrastructure;
+test for vulnerabilities against accounts you own or accounts you have permission from the account holder to test against
+not violate any law;
+not publicly disclose or share vulnerability details without the written permission of TWDC;
+report a confirmed vulnerability in a timely manner and not exploit it further; and
+not keep any copies of any non-public TWDC information or share such information with any third party.
+Please act in good faith by conducting your activities under this policy and reporting the vulnerability with us promptly, in sufficient detail for us to determine the validity of the vulnerability, and without coercion, dishonesty, or fraudulent intent.
+Violation of any of these rules can result in ineligibility for the TWDC Program and removal from HackerOne, and may also result in TWDC taking further action, including but not limited to, bringing legal claims, against you.
+TWDC shall in its sole discretion decide what, if any, acknowledgement will be provided for any findings reported through program. You will not be reimbursed for expenses related to vulnerability research (e.g., holding domains, S3 buckets). If we conclude, in our sole discretion, that you have complied with the requirements of the TWDC Program when reporting a security vulnerability, TWDC will not pursue claims against you in response to your report.
+TWDC Program Scope
+The scope of the TWDC Program will evolve rapidly and therefore properties currently identified as in-scope or out-of-scope may change. Please return to this section often to review the new and updated entries.
+In Scope (Internet Facing Assets Only):
+The Walt Disney Company
+Sensitive Corporate info spillover including sites like Github, BitBucket, exposed shared-drives
+Walt Disney Studios
+Walt Disney Animation Studios
+Pixar
+Marvel
+Lucasfilm Ltd
+Disney+
+ESPN
+ESPN+
+Disney Parks, Entertainment and Products
+Disney Media & Entertainment Distribution
+DisneyNow (DisneyChannel, Disney XD, Disney Junior, FX, etc)
+Disney Streaming
+FXX
+ABC
+*.bamgrid.com
+Out of Scope:
+3rd party affiliates, SaaS solutions, or licensing sites
+Anything not listed above If you have any questions about what is in scope, please ask.
+Unacceptable Submissions
+The following submissions are not accepted by TWDC:
+Submissions that result in the alteration or theft of TWDC data or the interruption or degradation of TWDC systems;
+Attacks which require internal network access or are from TWDC employees or contractors;
+Social engineering attempts;
+Any activity involving TWDC physical locations, including but not limited to conducting physical attacks against assets (e.g., any equipment within TWDC facilities, ships, hotels, parks, stores, locks, Point of - - Sale (POS) systems, kiosks);
+Attacks requiring MITM or physical access to a user's device;
+Testing that requires mass creation of accounts, rate limit testing, credential stuffing, etc;
+User enumeration;
+Activity that could lead to the disruption of service (DoS), including Cache Poisoning;
+Previously known vulnerable libraries without a working Proof of Concept;
+Missing best practices in SSL/TLS configuration;
+Cross-Site Request Forgery (CSRF) with no security impact (e.g., unauthenticated/logout/login CSRF);
+Comma Separated Values (CSV) injection without demonstrating the vulnerability;
+Content spoofing and text injection issues without showing an attack vector or being able to modify HTML/CSS;
+Missing best practices in Content Security Policy;
+Missing HTTPOnly, Secure, Same-Site flags on cookies unless they are proven to control session authentication;
+Clickjacking / Tabnabbing attacks;
+Banner Exposure / Version Disclosure;
+Missing email best practices (e.g., invalid, incomplete, or missing SPF/DKIM/DMARC records);
+Open Redirects that are not chained into a more impactful vulnerability;
+Broken links in documentation; and/or
+Additional missing security controls often considered “Best practice”, such as certificate pinning or mitigating information disclosures.
+All of the aforementioned submissions are prohibited. TWDC reserves the right, in its sole discretion, to reject any submission.
+Testing
+Web traffic to and from TWDC properties produces petabytes of data every day. When testing, you can make it easier for us to identify your testing traffic against our normal data and the malicious actors out in the world.
+Please do the following when participating in the TWDC Program:
+Where possible, register accounts using your <username>+x@wearehackerone.com addresses. (see https://docs.hackerone.com/hackers/hacker-email-alias.html )
+Provide your IP address in the bug report. We will keep this data private and only use it to review logs related to your testing activity.
+Include a custom HTTP header in all your traffic. Burp and other proxies allow the easy automatic addition of headers to all outbound requests. Report to us what header you set so we can identify it easily.
+Identifier: Your Username
+Format: X-TWDC-VDP: HackerOne-<username>
+Example: X-TWDC-VDP: HackerOne- theredpill
+When testing for a bug, please also keep in mind:
+Only use authorized accounts so as not to inadvertently compromise the privacy of our users.
+When attempting to demonstrate root permissions with the following primitives in a vulnerable process please use the following commands:
+Read: cat /proc/1/maps
+Write: touch /root/<your H1 username>
+Execute: id, hostname, pwd (though, technically cat and touch also prove execution)
+Do not use automated scanners/tools. Such tools include payloads that could trigger state changes or damage production systems or data (e.g., do not execute Burp active scans).
+Before causing damage or potential damage: stop, report what you've found, and request additional testing permission.
+Crafting a Report
+To help streamline our intake process, we ask that submissions include:
+Submit one vulnerability per report, unless you need to chain vulnerabilities to provide impact.
+Description of the reported vulnerability.
+Steps to reproduce the reported vulnerability.
+Proof of exploitability (e.g. screenshot, video).
+Perceived impact to another user or the organization.
+Proposed CVSSv3 Vector & Score (without environmental and temporal modifiers).
+List of URLs and affected parameters.
+Other vulnerable URLs, additional payloads, Proof-of-Concept code.
+Browser, OS or app version used during testing.
+Do not use tiny-urls in reports.
+Please report findings in English for now, as the TWDC Program ramps up. All supporting evidence and other attachments must be stored only within the report you submit. Do not host any files on external services. Failure to adhere to these minimum requirements may result in delay. Also please note that whether a disclosure provides a positive contribution to the security community is a key factor in our evaluation.
+Response Targets
+TWDC will make a reasonable effort to meet the following Service Level Agreements for TWDC Program participants:
+Time to first response (from report submit) – Five (5) business days
+Time to triage (from report submit) – Ten (10) business days
+Legal Notice:
+You agree that by submitting such information to TWDC, you grant TWDC a worldwide, perpetual, irrevocable, exclusive, transferable, sublicenseable, fully-paid and royalty-free license under any and all intellectual property rights that you own or control to use, copy, modify, create derivative works based upon and otherwise exploit such information for any purpose.
+Any activity which involves the intentional compromise of the privacy of our customers or employees or the intentional disruption of the operation of our products, services, or information technology infrastructure will result in permanent disqualification from the TWDC Program and may result in TWDC taking action, including but not limited to, bringing legal claims, against you.
+We may collect information that could reasonably be used to identify you (e.g., IP address). TWDC may use this information for several purposes, including to evaluate a reported vulnerability and protect TWDC products, services, or information technology infrastructure.
+TWDC reserves the right to modify or terminate the TWDC Program in its sole discretion, at any time and without prior notice.
+Top hackers
+See all hackers
+1
+ivoabreu
+Reputation: 953
+2
+bbareco1
+Reputation: 900
+3
+arielrachamim
+Reputation: 784
+4
+undefinedcody
+Reputation: 683
+5
+foorw1nner
+Reputation: 386
+6
+arcane_xa72
+Reputation: 205
+7
+exploitmsf
+Reputation: 147
+8
+elgllad
+Reputation: 130
+9
+xbow
+Reputation: 126
+10
+prorok108
+Reputation: 120
+11
+krnpt0s
+Reputation: 112
+12
+afb
+Reputation: 108
+The Walt Disney Company
+https://thewaltdisneycompany.com/
+Disney was originally founded on October 16, 1923, by brothers Walt and Roy O.
+Response launched in Mar 2022
+Response efficiency: 74%
+Submit without Report Assistant
+Stats
+Reports received | 90 days 57
+Last report resolved 5 hours ago
+Reports resolved 1711
+Hackers thanked 451
+Assets In Scope 17
+© HackerOne
+Opportunities
+Security
+Leaderboard
+Blog
+Status
+Docs
+Support
+Disclosure Guidelines
+Press
+Privacy
+Terms

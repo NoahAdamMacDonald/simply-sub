@@ -84,8 +84,8 @@ their own.
   Quote the sentence that says who owns or runs it ("Mullvad VPN AB is owned by parent company Amagicom AB."), never
   a copyright line or a payment line alone, and give the shares in `name` when the page does ("ESPN is 72 percent
   owned by The Walt Disney Company, 18 percent by Hearst and 10 percent by the National Football League"). Never
-  Wikipedia or the press as the source. A provider in VPN, news or finance needs one (telecom once it's a category);
-  leave it out only when no official page says, with a comment saying where you looked.
+  Wikipedia or the press as the source. Every provider needs one (a public company is its own: "Netflix, Inc., a
+  public company (NASDAQ: NFLX)").
 - **Outside ratings** (M11.2): only from raters in `data/raters.yaml`, whose terms were read before they were added
   (its header lists those read and left out, and why: Ad Fontes, Media Bias/Fact Check, AllSides, AV-Comparatives,
   SE Labs). A new rater is read for its terms first and added only when they plainly allow showing its label with a

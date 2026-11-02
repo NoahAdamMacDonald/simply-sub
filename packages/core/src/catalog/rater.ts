@@ -146,13 +146,6 @@ export const outsideRatingsSchema = z
     ),
   );
 
-/**
- * The service categories whose providers need an owner: who stands behind a VPN, a news outlet or a bank matters to
- * the buyer (the guide's §3.1). Telecom joins once it's a category (M11.3); a category not in categories.yaml has no
- * providers, so listing it changes nothing.
- */
-export const ownerRequiredIn: readonly string[] = ['vpn', 'news', 'finance', 'telecom'];
-
 export const ownerSchema = z.strictObject({
   name: textSchema.describe(
     'The company behind it, as the page names it, with the shares when the page gives them (The Walt Disney Company (72%), Hearst (18%) and the NFL (10%))',

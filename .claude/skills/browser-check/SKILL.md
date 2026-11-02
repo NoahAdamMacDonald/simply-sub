@@ -647,7 +647,9 @@ Alberta (base URL ending in `/`, after `npm run data:build` on the branch), in b
 Outside ratings right after Terms and policies (AV-TEST's Protection, Performance and Usability, each "6.0/6.0 from
 AV-TEST, August 2026" with what it tested), each linking AV-TEST's result page in a new tab and reached by Tab after
 the Sources; Mullvad's Owner ("Mullvad VPN AB, according to its About us") with a text-fragment link and its quotes as
-the tooltip on Tab; Netflix with neither; the lines in `--ss-text-muted` and the links in `--ss-accent-text`, underlined,
+the tooltip on Tab; since the owner's feedback (2026-11-02) Bitdefender's antivirus features, Mullvad's Ways to pay
+(cash and crypto, citing its terms, reached by Tab after the owner's link) and Netflix's owner and Canada's own ways
+to pay; the lines in `--ss-text-muted` and the links in `--ss-accent-text`, underlined,
 against the tokens. With axe, screenshots and no horizontal scroll. It reads the groups' words with `innerText`, since
 `textContent` loses the spaces the layout puts between a heading and its list. Use the skill's pinned axe-core: 4.11
 flags Search's empty Features chip grid (`aria-prohibited-attr`), which 4.14 doesn't.

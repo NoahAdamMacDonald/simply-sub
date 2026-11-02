@@ -22,6 +22,15 @@ availableIn: [US]
 cancelUrl: https://help.hulu.com/article/hulu-cancel-hulu-subscription
 sources: { pricing: https://help.hulu.com/article/hulu-how-much-does-hulu-cost }
 # Owner (M11.2), read 2026-11-02: its press site's history, 2019.
+# Ways to pay (M11.5), read 2026-11-02 on its payment options article.
+paymentMethods:
+  - methods: [card, paypal, gift-card]
+    page: Your payment options
+    url: https://help.hulu.com/article/hulu-payment-options
+    quotes:
+      - 'We accept U.S. based credit or debit cards like:'
+      - 'You can also use PayPal to pay for Hulu.'
+      - 'Hulu gift cards are available at select retail outlets.'
 owner:
   name: The Walt Disney Company
   page:
@@ -81,10 +90,12 @@ plans:
 # clause on Hulu's partners. Not rated: the billing and legal topics (hulu.com sends this machine to Disney+), account
 # sharing and device limits.
 policies:
-  shared: [disney-privacy]
+  shared: [disney-privacy, disney-subscriber-agreement]
   links:
     - name: 'Privacy policy'
       url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+    - name: 'Security vulnerability reports'
+      url: https://hackerone.com/disney
   ratings:
     - topic: privacy.data-sharing
       tier: neutral
@@ -100,3 +111,10 @@ policies:
         name: 'Your privacy controls'
         url: https://privacy.thewaltdisneycompany.com/en/privacy-controls/online-tracking-and-advertising/
       lastVerified: 2026-10-27
+    - topic: security.practices
+      tier: neutral
+      reason: "Disney runs a program where security experts can report problems they find, but it doesn't say outside experts check its security or publish what they find."
+      sources:
+        - url: https://hackerone.com/disney
+          quote: 'If you believe you have found a qualifying security vulnerability in a Disney product or website, please submit a report in accordance with the guidelines below.'
+      lastVerified: 2026-11-02

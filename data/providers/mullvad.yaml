@@ -13,6 +13,13 @@ billingCurrency: { GLOBAL: EUR }
 cancelUrl: https://mullvad.net/en/help/refunds
 sources: { pricing: https://mullvad.net/en/pricing }
 # Owner (M11.2), read 2026-11-02.
+# Ways to pay (M11.5), read 2026-11-02 in its terms of service.
+paymentMethods:
+  - methods: [cash, crypto, card, bank-transfer, paypal, app-store, gift-card]
+    page: Terms of service
+    url: https://mullvad.net/en/help/terms-service
+    quotes:
+      - 'We accept payment by cash in bills (EUR, USD, GBP, SEK, NOK, CHF, CAD, AUD, NZD) sent by regular mail, Bitcoin, Bitcoin Cash, Monero, credit card, SEPA, PayPal, iOS in-app purchases, our Mullvad vouchers, and Swish.'
 owner:
   name: Mullvad VPN AB
   page:
@@ -423,4 +430,89 @@ policies:
       sources:
         - url: https://mullvad.net/en/pricing
           quote: 'Just put your cash and payment token (randomly generated on our website) in an envelope and send it to us.'
+      lastVerified: 2026-11-02
+    # M11.9's topics, pulled forward at the owner's request (2026-11-02), read that day.
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: "Its privacy pages don't mention AI. It keeps almost nothing about you to train anything on."
+      pages:
+        [
+          https://mullvad.net/en/help/privacy-policy,
+          https://mullvad.net/en/help/no-logging-data-policy,
+        ]
+      lastVerified: 2026-11-02
+    - topic: privacy.data-retention
+      tier: good
+      reason: 'It throws away what little it keeps on a timer: payment numbers after 20 days and support emails after 70. Only payment records the law requires stay longer.'
+      sources:
+        - url: https://mullvad.net/en/help/privacy-policy
+          quote: 'Transaction_id is permanently deleted after 20 days.'
+        - url: https://mullvad.net/en/help/privacy-policy
+          quote: 'After 70 days, all emails/problem reports sent to our support address are automatically, permanently erased (from inbox, deleted items, sent items, trash, and archives).'
+      lastVerified: 2026-11-02
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask by email for a copy of your data, but it keeps so little that there is usually nothing to send.'
+      sources:
+        - url: https://mullvad.net/en/help/privacy-policy
+          quote: 'You also have the right to request for a copy of your personal data and a registry extract.'
+        - url: https://mullvad.net/en/help/privacy-policy
+          quote: 'However, in most cases we will not be able to provide you with any data since we not store data except payment data'
+      action:
+        name: How to ask for your data
+        url: https://mullvad.net/en/help/privacy-policy
+      lastVerified: 2026-11-02
+    - topic: privacy.government-requests
+      status: not-stated
+      reason: "Its pages don't say what it does when police or a government ask for data."
+      pages:
+        [
+          https://mullvad.net/en/help/privacy-policy,
+          https://mullvad.net/en/help/no-logging-data-policy,
+        ]
+      lastVerified: 2026-11-02
+    - topic: privacy.data-location
+      tier: great
+      reason: 'Everything it keeps about you stays in the EU, under strong privacy law.'
+      sources:
+        - url: https://mullvad.net/en/help/privacy-policy
+          quote: 'We only store and process your personal data within the EU/EEA.'
+      lastVerified: 2026-11-02
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'You sign up with a random account number. No name, email or password.'
+      sources:
+        - url: https://mullvad.net/en/help/no-logging-data-policy
+          quote: 'When you sign up for Mullvad, we do not ask for any personal information – no username, no password, no email address.'
+      lastVerified: 2026-11-02
+    - topic: billing.renewal-notice
+      tier: great
+      reason: "It doesn't renew on its own: your time just runs out, and you pay again only if you want to."
+      sources:
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'These terms will expire at the end of the period purchased.'
+      lastVerified: 2026-11-02
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms give the price and the ways to pay, and say nothing about other fees.'
+      pages: [https://mullvad.net/en/help/terms-service]
+      lastVerified: 2026-11-02
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can update its apps and change some features.'
+      sources:
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'Mullvad VPN reserves the right to modify the service by updating the software or making changes to certain features.'
+      lastVerified: 2026-11-02
+    - topic: legal.inactivity
+      status: not-stated
+      reason: "Its terms don't say it closes accounts you haven't used."
+      pages: [https://mullvad.net/en/help/terms-service]
+      lastVerified: 2026-11-02
+    - topic: service.device-limits
+      tier: great
+      reason: 'One account works on up to five devices, with no other limits.'
+      sources:
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'An account can be used on up to 5 devices.'
       lastVerified: 2026-11-02

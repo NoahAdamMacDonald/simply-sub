@@ -1,6 +1,8 @@
 id: netflix
 name: Netflix
 website: https://www.netflix.com
+# Its investor relations site, which names it a public company.
+domains: [netflix.net]
 category: streaming
 spendCategory: streaming
 # Accepted cards, read 2026-10-28 (M9.2) on the help centre's payment options, one page per country: Canada takes
@@ -39,8 +41,36 @@ billingCurrency:
   }
 cancelUrl: https://www.netflix.com/cancelplan
 sources: { pricing: https://help.netflix.com/en/node/24926 }
-# No owner (M11.2, read 2026-11-02): about.netflix.com names no company, and its terms of use only “the service
-# provided by Netflix”.
+# Owner (M11.2), read 2026-11-02: its investor relations site's company profile; Netflix Services Canada ULC is the
+# contracting party for Canadians (help.netflix.com/legal/corpinfo).
+owner:
+  name: 'Netflix, Inc., a public company (NASDAQ: NFLX)'
+  page:
+    name: Company profile (investor relations)
+    url: https://ir.netflix.net/ir-overview/profile/default.aspx
+  quotes:
+    - 'Netflix is one of the world’s leading entertainment services offering TV series, films, games and live programming across a wide variety of genres and languages.'
+    - 'NASDAQ: NFLX'
+  lastVerified: 2026-11-02
+# Ways to pay (M11.5), read 2026-11-02 on its payment articles for the US (for everywhere) and Canada.
+paymentMethods:
+  - methods: [card, gift-card, paypal, provider-billing]
+    page: Netflix payment options
+    url: https://help.netflix.com/en/node/116380/us
+    quotes:
+      - 'We accept credit, debit, and virtual cards, as well as co-branded cards issued by local banks with the following logos:'
+      - 'Netflix gift cards: Buy a Netflix gift card at a participating retailer, then redeem the code on your account page to apply the balance to your monthly bill.'
+      - PayPal
+      - The following partners allow you to add Netflix to your bill or offer a package that includes Netflix.
+  - methods: [card, gift-card, paypal, provider-billing]
+    regions: [CA]
+    page: How to pay for Netflix
+    url: https://help.netflix.com/en/node/116380/ca
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'You can purchase Netflix gift cards at select retailers.'
+      - We accept PayPal.
+      - The following partners allow you to add Netflix to their bill or offer a package with Netflix included.
 
 plans:
   - id: netflix.standard-ads
@@ -372,6 +402,9 @@ addOns:
 # Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27 from Canada: its terms of use (the Canadian ones,
 # so the ratings from them are for Canada), privacy statement and help articles on households and downloads. Not
 # rated: free trials (none in Canada).
+# Its terms are read from Canada: Netflix serves each country its own terms by where you are, and has no country picker
+# on them, so other countries' terms (the US's) weren't read. Its billing and legal ratings, read in the Canadian
+# terms, stand for everywhere until a reader in another country (the owner's VPN) reads theirs (2026-11-02).
 policies:
   links:
     - name: 'Terms of use'
@@ -382,6 +415,8 @@ policies:
       url: https://help.netflix.com/en/node/123277
     - name: 'Downloads'
       url: https://help.netflix.com/en/node/54816
+    - name: 'Bug bounty (HackerOne)'
+      url: https://hackerone.com/netflix
   ratings:
     - topic: privacy.data-collection
       tier: poor
@@ -433,7 +468,6 @@ policies:
     - topic: billing.cancellation
       tier: neutral
       reason: "You can cancel online whenever you like, and you keep watching until the end of the time you paid for. There is no money back for days you didn't use."
-      regions: [CA]
       sources:
         - url: https://help.netflix.com/legal/termsofuse
           quote: 'You can cancel your Netflix subscription at any time.'
@@ -445,7 +479,6 @@ policies:
     - topic: billing.refunds
       tier: neutral
       reason: "You can cancel online whenever you like, and you keep watching until the end of the time you paid for. There is no money back for days you didn't use."
-      regions: [CA]
       sources:
         - url: https://help.netflix.com/legal/termsofuse
           quote: 'You can cancel your Netflix subscription at any time.'
@@ -457,7 +490,6 @@ policies:
     - topic: billing.price-changes
       tier: good
       reason: "It tells you at least a month before the price goes up, so you have time to cancel if you don't want to pay more."
-      regions: [CA]
       sources:
         - url: https://help.netflix.com/legal/termsofuse
           quote: 'We will notify you at least one month before any price changes or changes to your subscription plan will become effective.'
@@ -465,7 +497,6 @@ policies:
     - topic: legal.disputes
       tier: good
       reason: "Disagreements are handled under Canada's laws, but you can't join a group lawsuit against it unless you live in Quebec."
-      regions: [CA]
       sources:
         - url: https://help.netflix.com/legal/termsofuse
           quote: 'These Terms of Use shall be governed by and construed in accordance with the laws of Canada without regard to conflict of laws provisions.'
@@ -475,7 +506,6 @@ policies:
     - topic: legal.terms-changes
       tier: good
       reason: 'If it makes a big change to its terms, it tells you at least a month before the change starts.'
-      regions: [CA]
       sources:
         - url: https://help.netflix.com/legal/termsofuse
           quote: 'In case of material changes we will notify you at least one month before such changes apply to you.'
@@ -483,7 +513,6 @@ policies:
     - topic: legal.account-closure
       tier: neutral
       reason: "It can shut down or limit your account if you break its rules or use it for fraud, and it won't give your money back."
-      regions: [CA]
       sources:
         - url: https://help.netflix.com/legal/termsofuse
           quote: 'We may terminate or restrict your use of our service if you violate these Terms of Use or are engaged in illegal or fraudulent use of the service.'
@@ -530,3 +559,113 @@ policies:
         - url: https://help.netflix.com/en/node/54816
           quote: 'Downloads will expire after a period of time'
       lastVerified: 2026-10-27
+    # M11.9's topics, pulled forward at the owner's request (2026-11-02), read that day.
+    - topic: privacy.ads-tracking
+      tier: neutral
+      reason: 'Plans without ads have no ads, but Netflix may use your email or phone number to show you its own ads on other sites, unless you turn that off in your account.'
+      sources:
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'Some third party services allow us to reach users with online marketing about Netflix content or the Netflix service by sending privacy protective contact information to the third party.'
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'You can indicate your choices regarding the Matched Identifier Communications on third party services in the “Privacy and data settings” (for the relevant profile) within the “Account” section of our website.'
+      action:
+        name: 'Your privacy choices'
+        url: https://help.netflix.com/node/100637
+      lastVerified: 2026-11-02
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy statement doesn’t say whether what you write or upload trains AI.'
+      pages: [https://help.netflix.com/legal/privacy]
+      lastVerified: 2026-11-02
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information as long as it decides it needs it, and gives no time limits.'
+      sources:
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'Specifically, we retain personal information for as long as necessary to fulfill the following purposes:'
+      lastVerified: 2026-11-02
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can download a copy of your information yourself from your account, but it doesn’t say what kind of file you get.'
+      sources:
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'To download a copy of your personal information go to: netflix.com/account/getmyinfo.'
+      action:
+        name: 'Download your information'
+        url: https://www.netflix.com/account/getmyinfo
+      lastVerified: 2026-11-02
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over information when the law or a government request needs it, and says it pushes back on requests that go too far, but doesn’t publish how many it gets.'
+      sources:
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'We may disclose your personal information as necessary to comply with applicable law, regulation, legal process, or governmental request'
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'practices to challenge disproportionate or unlawful government authority requests'
+      lastVerified: 2026-11-02
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your information may be moved to other countries with different privacy laws, under contracts and protections it uses for those moves.'
+      sources:
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'This means that when you use or interact with Netflix, your personal information may be transferred to other countries that have different data protection laws than those where you reside.'
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'Specifically, we use a variety of contractual, technical, and organizational measures as appropriate for such transfers'
+      lastVerified: 2026-11-02
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address and password, plus payment details. Other details, like your phone number, are optional.'
+      sources:
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'When you register with the Netflix service, we collect your contact information (such as your email address) and authentication information for your login (such as a password).'
+      lastVerified: 2026-11-02
+    - topic: privacy.children
+      tier: good
+      reason: 'Kids profiles never get ads picked from what they watch, and children may only watch with a parent’s approval, who has parental controls.'
+      sources:
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'An option to opt out is not provided in a Kids profile because we do not engage in Behavioral Advertising on Kids profiles.'
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'Individuals under this age may only use the service with the involvement, supervision, and approval of a parent or legal guardian.'
+      lastVerified: 2026-11-02
+    - topic: billing.free-trials
+      status: not-stated
+      reason: 'Its terms describe no free trial.'
+      pages: [https://help.netflix.com/legal/termsofuse]
+      lastVerified: 2026-11-02
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say your plan renews every month on its own, but not that it reminds you first.'
+      pages: [https://help.netflix.com/legal/termsofuse]
+      lastVerified: 2026-11-02
+    - topic: billing.fees
+      tier: poor
+      reason: 'Besides the price and taxes, it may add “possible transaction fees” without saying what they are.'
+      sources:
+        - url: https://help.netflix.com/legal/termsofuse
+          quote: 'The subscription fee and any other charges you may incur in connection with your use of the service, such as taxes and possible transaction fees, will be charged to your Payment Method'
+      lastVerified: 2026-11-02
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its terms don’t say what happens to what you’ve paid when you change plans.'
+      pages: [https://help.netflix.com/legal/termsofuse]
+      lastVerified: 2026-11-02
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'What you can watch changes over time and from place to place, as with any streaming service.'
+      sources:
+        - url: https://help.netflix.com/legal/termsofuse
+          quote: 'The content that may be available will vary by geographic location, may be limited by law or by the rights that our third-party content providers grant to us, and will change from time to time.'
+      lastVerified: 2026-11-02
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://help.netflix.com/legal/termsofuse]
+      lastVerified: 2026-11-02
+    - topic: security.practices
+      tier: neutral
+      reason: 'It pays security experts who find problems in its website and apps, but doesn’t say outside experts regularly check it.'
+      sources:
+        - url: https://hackerone.com/netflix
+          quote: 'Secondary targets are systems that have less impact on the primary Netflix experience, and so will be paid at a lower rate than primary targets'
+      lastVerified: 2026-11-02

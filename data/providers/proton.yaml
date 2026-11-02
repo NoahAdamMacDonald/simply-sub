@@ -18,6 +18,18 @@ billingCurrency: { GLOBAL: USD }
 cancelUrl: https://account.proton.me/dashboard
 sources: { pricing: https://proton.me/pricing }
 # Owner (M11.2), read 2026-11-02.
+# Ways to pay (M11.5), read 2026-11-02 on its payment options article.
+paymentMethods:
+  - methods: [card, paypal, apple-pay, google-pay, crypto, cash, bank-transfer]
+    page: Payment options
+    url: https://proton.me/support/payment-options
+    quotes:
+      - 'You can pay for your Proton subscription with payment card, PayPal, and other popular payment methods.'
+      - Apple Pay
+      - Google Pay
+      - Bitcoin
+      - 'We accept cash payments in US dollars (USD), euros (EUR), or Swiss francs (CHF).'
+      - Bank transfer
 owner:
   name: Proton AG
   page:
@@ -945,6 +957,8 @@ policies:
       url: https://proton.me/blog/pass-open-source-security-audit
     - name: 'Bug bounty'
       url: https://proton.me/security/bug-bounty
+    - name: 'How to export emails'
+      url: https://proton.me/support/export-emails-import-export-app
   ratings:
     - topic: privacy.data-collection
       tier: neutral
@@ -1074,4 +1088,112 @@ policies:
           quote: 'That’s why we also regularly commission and publish independent security audits for all our apps.'
         - url: https://proton.me/security/bug-bounty
           quote: 'If you’re a security researcher, you can help make Proton services safer, get recognized as a security contributor, and potentially earn a reward.'
+      lastVerified: 2026-11-02
+    # M11.9's topics, pulled forward at the owner's request (2026-11-02), read that day.
+    - topic: privacy.ai-training
+      tier: great
+      reason: 'Its writing helper, Scribe, never learns from what you write.'
+      sources:
+        - url: https://proton.me/legal/privacy
+          quote: 'Proton Scribe does not use content data or any of your data to train its models.'
+      lastVerified: 2026-11-02
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Your emails, files, calendar, passwords and notes are locked so that only you can open them. Proton itself has no way to read them.'
+      sources:
+        - url: https://proton.me/legal/privacy
+          quote: 'We do not have the technical means to access the content of your encrypted emails, files, calendar events, passwords, or notes.'
+      lastVerified: 2026-11-02
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: "It doesn't keep a lasting record of where you sign in from, but it keeps some sign-up checks and anti-abuse records for as long as it decides it needs them."
+      sources:
+        - url: https://proton.me/legal/privacy
+          quote: 'By default, we do not keep permanent IP logs in relation with your Account.'
+        - url: https://proton.me/legal/privacy
+          quote: 'The period of temporary data retention is determined by our legitimate interests of protecting the service from spam, and also by any applicable Swiss legal requirements we must comply with.'
+      lastVerified: 2026-11-02
+    - topic: privacy.data-portability
+      tier: good
+      reason: 'You can download your own data from your account, and a free tool saves all your emails as files any email app can open.'
+      sources:
+        - url: https://proton.me/legal/privacy
+          quote: 'Through your Account interface, you can directly access, edit, delete, or export personal data processed by the Company in your use of the Services.'
+        - url: https://proton.me/support/export-emails-import-export-app
+          quote: 'We offer a command-line tool for Windows, macOS, and Linux that allows you to export all your emails as EML files, and their metadata as JSON files.'
+      action:
+        name: How to export your emails
+        url: https://proton.me/support/export-emails-import-export-app
+      lastVerified: 2026-11-02
+    - topic: privacy.government-requests
+      tier: good
+      reason: 'It only hands over data when a Swiss court order makes it, fights orders it doubts, and publishes how many it gets. It can never unlock your locked emails or files for anyone.'
+      sources:
+        - url: https://proton.me/legal/privacy
+          quote: 'We will only disclose the limited user data we possess if we are legally obligated to do so by a binding request coming from the competent Swiss authorities.'
+        - url: https://proton.me/legal/privacy
+          quote: 'Under no circumstances can Proton decrypt end-to-end encrypted content and disclose decrypted copies.'
+        - url: https://proton.me/legal/privacy
+          quote: 'Aggregate statistics about data requests from the competent Swiss authorities can be found in the transparency reports listed in our products-specific policies.'
+      lastVerified: 2026-11-02
+    - topic: privacy.data-location
+      tier: good
+      reason: 'It is a Swiss company under Swiss privacy law. The few helpers it uses abroad, for payments and support, must follow the EU’s standard data rules.'
+      sources:
+        - url: https://proton.me/legal/privacy
+          quote: 'It is therefore governed by the laws and regulations of Switzerland.'
+        - url: https://proton.me/legal/privacy
+          quote: 'Guarantees for international transfer: Standard Contractual Clauses, Data Processing Agreement'
+      lastVerified: 2026-11-02
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: "You don't need to give your name, phone number or another email address to sign up."
+      sources:
+        - url: https://proton.me/legal/privacy
+          quote: 'It is not necessary to provide personal information in order to create an Account.'
+      lastVerified: 2026-11-02
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say your plan renews on its own, but not that it reminds you before it does.'
+      pages: [https://proton.me/legal/terms]
+      lastVerified: 2026-11-02
+    - topic: billing.fees
+      tier: neutral
+      reason: 'The price is all you pay, unless you dispute a charge with your bank (it can pass on that cost) or ask to move your credit to another currency (at a rate it picks).'
+      sources:
+        - url: https://proton.me/legal/terms
+          quote: 'Furthermore, if the result of the dispute or chargeback mechanisms causes the Company to be liable for additional costs (e.g. dispute fee), you authorize the Company to charge that amount on your Account.'
+        - url: https://proton.me/legal/terms
+          quote: 'If you request a credit balance to be converted between different currencies which the Company supports, the Company has discretion over the exchange rate applied.'
+      lastVerified: 2026-11-02
+    - topic: billing.plan-changes
+      tier: great
+      reason: 'You can switch plans whenever you like. It changes at once, and the time you already paid for goes toward the new plan.'
+      sources:
+        - url: https://proton.me/legal/terms
+          quote: 'If you select a new paid plan, your subscription will be immediately updated, and you will receive a prorated credit for the unused portion of your previous plan that will be automatically applied to your account.'
+      lastVerified: 2026-11-02
+    - topic: legal.content-rights
+      status: not-stated
+      reason: "Its terms don't say what rights, if any, it takes over what you store. It can't read most of it anyway."
+      pages: [https://proton.me/legal/terms]
+      lastVerified: 2026-11-02
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change, pause or stop any of its apps or features, even without warning, and says it owes you nothing if it does.'
+      sources:
+        - url: https://proton.me/legal/terms
+          quote: 'The Company reserves the right, at its sole discretion, to modify, suspend, or discontinue any of our Services, or any feature or component thereof, with or without notice to you.'
+      lastVerified: 2026-11-02
+    - topic: service.account-sharing
+      tier: great
+      reason: "You can't share your own login, but plans for more than one person let you add anyone, each with their own account."
+      sources:
+        - url: https://proton.me/legal/terms
+          quote: 'Sharing your Account or login credentials with any other person or entity, except where such sharing is expressly permitted under your subscription plan or has been otherwise authorized in writing by the Company;'
+      lastVerified: 2026-11-02
+    - topic: service.device-limits
+      status: not-stated
+      reason: "Its terms don't add any limit beyond how many devices each plan's VPN can connect at once."
+      pages: [https://proton.me/legal/terms]
       lastVerified: 2026-11-02

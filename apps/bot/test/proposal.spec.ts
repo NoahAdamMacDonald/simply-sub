@@ -46,6 +46,7 @@ describe('stepPlan', () => {
       'https://help.netflix.com/legal/termsofuse',
       'https://help.netflix.com/en/node/123277',
       'https://help.netflix.com/en/node/54816',
+      'https://hackerone.com/netflix',
     ]);
     expect(index.hosts).toContain('www.amazon.ca');
     expect(index.hosts).toContain('icons.duckduckgo.com');

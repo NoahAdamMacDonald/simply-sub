@@ -1,0 +1,618 @@
+url: https://hackerone.com/netflix
+method: browser
+saved: 2026-11-02
+
+Skip to main content >
+Learn more about HackerOne
+Log in
+Security page
+Program guidelines
+Scope
+Hacktivity
+Thanks
+Updates
+Collaborators
+Safe harbor
+Program highlights
+Gold Standard Safe Harbor
+Adheres to Gold Standard Safe Harbor.
+Platform Standards
+Fully compliant with Platform Standards.
+Signal Requirement
+0.0 or higher past-year Signal required, with use of trial reports for hackers below it.
+Managed by HackerOne
+Collaboration Enabled
+Includes Retesting
+1 hour
+Average time to first response
+4 days, 3 hours
+Average time to triage
+1 week, 2 days
+Average time to bounty
+1 week, 6 days
+Average time from submission to bounty
+3 months, 1 week
+Average time to resolution
+Rewards summary
+Last updated on July 22, 2024. View changes
+Each severity lists the 90-day average bounty and the percentage of total resolved reports, if applicable.
+Asset
+Low
+Avg. bounty $513
+32.83% submissions
+Medium
+Avg. bounty $858
+43.22% submissions
+High
+Avg. bounty $2,786
+15.94% submissions
+Critical
+Avg. bounty $5,000
+8.01% submissions
+Secondary Assets
+—
+$300 – $600
+$600 – $2,000
+$2,000 – $5,000
+Mobile Targets
+—
+—
+$600 – $2,000
+$2,000 – $5,000
+Corporate Assets
+—
+—
+$500 – $2,000
+$2,000 – $10,000
+Primary Targets
+$300 – $600
+$600 – $2,000
+$2,000 – $5,000
+$5,000 – $25,000
+Content Authorization Targets
+—
+$300 – $1,000
+$1,000 – $5,000
+—
+Primary Targets:
+Primary targets make up the Netflix.com user experience.
+Mobile Targets:
+Netflix Mobile application for IOS and Android
+Corporate Targets:
+For targets listed in the "Corporate Targets Overview" section, we only reward for the bugs that are critical or High based on the CVSS.
+We do accept submissions of overly exposed Google documents (as described in Corporate Targets above), which start at Low severity.
+Submissions must meet other applicable requirements (e.g. not an Excluded Submission Type).
+Medium and Low severity reports will be accepted but will not be eligible for a bounty.
+Content Authorization Targets:
+High severity targets include methods of subverting content authorization or obtaining private keys. Medium targets include leaked private keys for content decryption. Submissions of hardware-backed private keys (i.e. from a TEE) & key exfiltration methods will have higher payouts than submissions of software-backed private keys & key exfiltration methods.
+Secondary Targets:
+Secondary targets are systems that have less impact on the primary Netflix experience, and so will be paid at a lower rate than primary targets (see “Secondary Reward Guidelines” below).
+Public Netflix web applications not related to the web browser www.netflix.com experience are secondary targets.
+In addition, valid vulnerabilities for these submissions will only be considered for risks of medium severity or higher.
+Scope exclusions
+Core Ineligible Findings are out of scope.
+Learn more
+Overview
+Last updated on September 15, 2026. View changes
+Netflix Bug Bounty Program Policy
+Netflix has been engaging with the security research community for years to help keep our members, partners, employees, data and content secure. Keep in mind, the Netflix Bug Bounty Scope is broader than just the streaming targets: member-facing web and mobile apps, content authorization, and our Enterprise/Corporate systems are also in scope too. We run under HackerOne's Gold Standard Safe Harbor and follow HackerOne's Platform Standards.
+We've paid out for subdomain takeovers, cache poisoning on prod hosts, request smuggling on one of our services, and plenty more...
+what's in scope, what actually pays, what's valid but won't earn a bounty, and what we've already seen so you don't burn time rediscovering it.
+Running an AI agent to help you parse this policy? Jump to the Machine Readable Scope Summary at the bottom: same facts, structured as data.
+Official Focus Areas
+Netflix encourages research effort in these categories:
+Cross-Site Scripting (XSS)
+Cross-Site Request Forgery (CSRF)
+SQL Injection (SQLi)
+Server Side Request Forgery (SSRF)
+Authentication related issues
+Authorization related issues
+Data Exposure
+Redirection attacks
+Remote Code Execution
+Business Logic vulnerabilities
+MSL Protocol vulnerabilities (Learn more: github.com/Netflix/msl)
+Mobile specific API vulnerabilities
+Particularly clever or unique issues that don't fall into an explicit category above
+Infrastructure misconfiguration / subdomain & DNS takeover
+Cache poisoning
+HTTP request/response smuggling, splitting & CRLF injection
+Path traversal / normalization bypass
+Insecure storage of sensitive information
+Externally controlled resource references
+Signal handler race conditions (native/low level)
+Why Hunt Here
+There's no fixed price tag per bug class. We look at the total impact of the report to Netflix, and pay accordingly based on the target type. Two reports in the same category can land differently based on the impact to Netflix.
+A few real numbers, pulled from reports we've closed and paid:
+$25,000 for one authentication/access control finding
+$10,000 for cache poisoning on a high impact host.
+$5,500 for request/response smuggling through a critical service.
+$5,000 each for subdomain takeover and for path traversal on Critical services parsing logic.
+$4,000 for a signal handler race condition in a native component.
+Possible Outcomes for a Submission
+Outcome Meaning What happens
+Rewarded Valid, in scope, meets the severity bar for its tier Paid per the reward table for that tier
+Non Rewardable Valid, in scope, but not eligible for bounty Accepted, Kudos points, no bounty
+Duplicate Valid, but already reported and tracked Closed against the original report, no bounty
+Needs More Info The report needing more context from the researcher Moved back to Researcher Queue to add more context in the report
+Informative Valid, but non impactful (the team looked at it and decided not to fix it) Closed Informative, no bounty or points loss
+Out of Scope Invalid or Incomplete Report, due to the rules of our Program or HackerOne Terms Closed Not Applicable
+Not sure where you land? First confirm the target is actually Netflix owned, then skim the Focus Areas, Out of Scope, and Excluded Submission Types sections.
+Still unsure but you think it's worth flagging? Submit through the program and explain your thinking. If we decide to not act on it, that's a good faith submission closed as Informative, not Not Applicable. No points penalty either way.
+Validate Before Submission
+Save yourself some time and check a few things before you write anything up:
+Is it a Focus Area? If not, make the case for why it's impactful to Netflix. Netflix will evaluate the report on a case by case basis.
+Does it hit Excluded Submission Types or Out of Scope? Check against those lists before you write the report.
+Have we seen it? If it matches a Known Issue we already track as a duplicate or an accepted, capped risk, it'll probably land the same way again, unless you can show an impact that's genuinely different from what's already on file.
+Exploring on these three sections will help you focus on finding and reporting novel and unique findings.
+Known Issues
+Vulnerability reports that duplicate an issue we have already received, triaged, and are actively tracking will be closed as Duplicate. Below are the vulnerability classes we most frequently receive as repeat submissions, grouped by root cause. If your finding matches one of these patterns, it is very likely already known to us, so please check carefully before submitting.
+Household Verification Check (Mobile & Web). The Household verification enforcement is actively being worked on and improved. We are aware of certain bypasses that team is actively working to mitigate and fix.
+Credentialed CORS Misconfiguration. Several internal hosts show a behaviour of reflecting an arbitrary request Origin in Access Control Allow Origin while also allowing credentials. These are not exploitable due to internal control as a defense in depth
+Profile & Session Pin Controls. Profile PIN enforcement issues are a known, actively tracked class. Also tracked: a profile creation race condition around the per account profile limit, and missing PIN verification rate limiting.
+Publicly Exposed S3 Assets & Hardcoded DRM Keys. Publicly listable/exposed S3 assets under download.opencontent.netflix.com, including reports identifying hardcoded DRM keys.
+Hardcoded Credentials in Public Sample/Test Code. "Sample TEST Private key / truststore password" committed in the public Zuul sample/test code repository.
+Public OIDC Discovery Endpoint. OIDC discovery/JWKS endpoints publicly reachable.
+Safe Harbor
+We follow HackerOne's Gold Standard Safe Harbor. To encourage responsible disclosure, Netflix will not bring a lawsuit against you or ask law enforcement to investigate you if we determine that your research and disclosure meet these requirements and guidelines. If you have questions about responsible disclosure of results for a submission, please reach out to us via the submission page
+Disclosure Stance
+This program or engagement does not allow disclosure. You may not release information about vulnerabilities found in this program or engagement to the public.
+Program Guidelines
+Here's what we expect from every researcher:
+Test only within the Scope defined below.
+Do NOT access Customer and employee personal data, pre-release content, and Netflix confidential material. If you accidentally gain access to any of it, stop testing immediately and report it.
+Please make sure your submission includes a verified, reproducible proof of concept. AI-generated or low-effort reports without confirmed reproduction steps will be closed without review.
+If you land in a non-public app or obtain non-public credentials, stop and report it right away.
+Don't degrade the experience for real users, disrupt production, or destroy data while you're testing.
+Grab only what you need to prove the vulnerability, and send it through the HackerOne report form (screenshots, recordings, requests, repro steps, POC). Do NOT use third-party file-sharing sites.
+When investigating a vulnerability, please only target your own account and do not attempt to access data from anyone else's account.
+Submit through HackerOne only.
+Note: Do NOT access personal data, confidential data, or pre-release content , and if you accidentally gain access, stop and immediately report it. If you land on a private credential or an internal/private application or data, stop and report it to us immediately.
+Data Deletion
+Once you've submitted your report, securely delete any Netflix data you downloaded, cached, or otherwise kept on your research systems.
+The same goes for anything you stored in third-party tools or services while testing. Delete that too.
+Securely delete Netflix information that may have been downloaded, cached, or otherwise stored on the systems used to perform the research
+What Netflix Will Do
+When working on bug bounty submissions, here are our commitments to you:
+We'll work with you to understand the issue and try to fix it quickly.
+We'll confirm your report within 7 days.
+If you're the first to report a unique, in-scope vulnerability through HackerOne, you will receive a reward (see Rewards under each tier below) after the submission has gone through our process.
+We'll hold up our end of Safe Harbor.
+If the same bug shows up across multiple parts of the app or view (e.g., the same injection/XSS pattern hitting several endpoints), we may pay extra on top of the ranges below, as long as your report clearly spells out each distinct vector.
+Scope & Rewards, by Target Type
+Each tier below covers what's in scope and what it pays, in one place.
+Primary Targets
+This is the core www.netflix.com member experience: the microservices, web app, and CDN that most members actually touch.
+Valid Findings here will earn the highest reward range of any tier.
+In scope:
+Asset Details
+api-.netflix.com, api.netflix.com, .prod.ftl.netflix.com, .prod.cloud.netflix.com, .prod.dradis.netflix.com The microservices layer that drives the Netflix experience is called through our API.
+www.netflix.com The primary Netflix experience (React JS + Node).
+secure.netflix.com Secure static assets.
+ichnaea.netflix.com, beacon.netflix.com Logging endpoints collect client information from members' browsers and streaming devices. customerevents.netflix.com, nmtracking.netflix.com, and presentationtracking.netflix.com are aliases of beacon.netflix.com; submissions against these variants are not treated as unique, they're duplicates of a beacon.netflix.com finding.
+*.nflxvideo.net Open Connect CDN, serving video content.
+.nflxext.com, .nflximg.net, *.nflxso.net Static content.
+help.netflix.com Help/knowledge base and customer service chat.
+meechum.netflix.com Netflix partner page.
+Rewards:
+Severity Minimum Maximum
+Critical $5,000 $25,000
+High $2,000 $5,000
+Medium $600 $2,000
+Low $300 $600
+Secondary Targets
+Public Netflix web apps that do not impact the core www.netflix.com experience have lower ranges. Only Medium and above earn a reward here; Low severity findings are accepted but are non-rewardable (Kudos only, no bounty).
+In scope: Public Netflix web applications outside the www.netflix.com browser experience, including microsites (the promo sites we publish for titles).
+One Note on Microsites: Not all of them are Netflix-hosted. Some of the sites are vendor/partner-hosted and deployed on infrastructure we don't control, and we can't authorize testing on infrastructure that isn't ours. Before performing any testing, please validate the ownership of the microsites; ask via HackerOne if you're not sure.
+Rewards:
+Severity Minimum Maximum
+Critical $2,000 $5,000
+High $600 $2,000
+Medium $300 $600
+Mobile Targets
+Vulnerabilities specific to the native iOS and Android apps, rather than the API or web layer they talk to.
+In scope: Netflix Mobile Application for iOS and Android.
+Rewards:
+Severity Minimum Maximum
+Critical $2,000 $5,000
+High $600 $2,000
+Medium and Low severity Mobile findings are accepted, but Non Rewardable (Kudos only, no bounty).
+Corporate Targets
+In scope: How Netflix uses and configures G Suite for netflix.com, netflixcontractors.com, and netflixanimation.com, not any subdomain of netflix.com, and not unrelated domains like netflixcs.com. We're interested in reports related to Netflix controlled configuration bypasses, not bugs in G Suite itself. We value knowing the root cause, not just what you saw.
+Individual Google documents that are publicly exposed can create risk, but we value root causes over reports of individual documents. Maximum payouts will come from reporting addressable root causes, not individual documents.
+Multiple documents that share a common root cause for their exposure will be paid out on the appropriate Target matrix based on the change necessary to address the root cause (payout amount may be higher or lower than simply based on the sensitivity & the number of exposed documents). Individual documents with no common root cause typically will be low severity under "Corporate Targets". We will reward only where we choose to make a change.
+For documents that contain particularly sensitive information (typically personal information or active credentials), we may choose a higher priority and associated payout range, based on impact. We expect this to be rare and on a case-by-case basis, and this determination is made by Netflix.
+Note: if an exposed doc turns out to contain customer or employee personal info, or Netflix confidential material, submit right away.
+Rewards:
+Severity Minimum Maximum
+Critical $2,000 $10,000
+High $500 $2,000
+Critical and High only (by CVSS). Medium and Low Corporate reports are accepted but non-rewardable.
+Content Authorization & Device Targets
+In scope: Getting playback on a device that shouldn't have it, whether by bypassing authorization checks or getting your hands on private keys that back the system.
+Video decryption keys are in scope, but the report needs to include actual working key material at the time you report it (a rotated or dead key doesn't count), plus specific, actionable details on how you discovered or extracted it: that's required to qualify for a reward. Submissions related to screenshots or screen recording are not in scope; you must include the actual key material.
+Keys leaked together, or pulled the same way across multiple devices, count as one finding, not one reward per key. Pulling a key from hardware (a TEE, say) pays more than pulling one from software, because it's a lot harder to do.
+Bypasses that only work in the browser player are Non Rewardable: Kudos only. Already publicly broken protocols like HDCP v1.4 don't count; see Excluded Submission Types below.
+Rewards:
+Severity Minimum Maximum
+High $1,000 $5,000
+Medium $300 $1,000
+There is no Critical tier for this category. Low-severity findings are accepted but Non-Rewardable (Kudos only, no bounty).
+Open Source Targets
+Only specific Netflix open source projects are in scope, paid on the Primary or Secondary scale as noted:
+Project Tier Repository
+Zuul Primary Target github.com/Netflix/zuul
+Atlas Secondary Target github.com/Netflix/atlas
+Spectator Secondary Target github.com/Netflix/spectator
+MSL Protocol is its own named Focus Area (see above), with its own repo at github.com/Netflix/msl. It's not in this Primary/Secondary table because MSL findings are prioritized by impact, not by a fixed tier.
+Every other Netflix open-source project, including Dispatch, Weep, and ConsoleMe, is entirely out of scope here. Check each project's README / SECURITY file before testing; that's where its own scope and process live.
+OSS Reports: Researchers must submit a working proof-of-concept script demonstrating the reported issue. Only the current major version and the immediately preceding major version of each in-scope OSS project are eligible; reports affecting older, unsupported major versions are closed as Out of Scope.
+Non Rewardable Targets (In Scope, Kudos Only)
+We still want to hear about these, and we'll award with Kudos points, but they aren't eligible for a bounty:
+Affiliates or recently acquired entities.
+Content Authorization bypasses that only work in the browser player.
+A one off exposed Google Doc/Drive link with no shared root cause and low impact.
+Netflix Gaming targets.
+Special Case: Dependency Confusion via Package Takeover
+We know about dependency confusion issues tied to package manager ownership and we're fixing it long term. Until then:
+Same root cause as something already submitted? Closed as a Duplicate of the original.
+Got evidence that a takeover package is actually running on or affecting Netflix infrastructure? Submit it; we want to know.
+Show us something new or a way around our existing controls, and you'll get paid even if the general category has been reported before.
+Out of Scope
+These aren't submittable findings here: they get closed Not Applicable.
+Third-party sites or systems we don't host (including unauthorized third-party microsites; see Secondary Targets above).
+Investor relations sites: ir.netflix.net, ir.netflix.com, netflixinvestor.com.
+Set top boxes, smart TVs, and streaming sticks.
+Open Source repos other than Zuul, Atlas, and Spectator (see Open Source Targets above), including Dispatch, Weep, and ConsoleMe, which people sometimes assume are in scope because they're ours too.
+ReadyPlayerMe assets.
+Vendor owned and operated assets.
+Anything on the Excluded Submission Types list right below, plus HackerOne's Core Ineligible Findings.
+Excluded Submission Types
+If a report's built on automated scanner output alone, or describes a theoretical attack with no proof it actually works, it's closed as Not Applicable. The classes below are excluded no matter how technically sound they are:
+Cookie valid after logout
+Cookie valid after password change/reset
+Cookie expiration
+Cookie migration/sharing
+Forgot password autologin
+Autologin token reuse
+Static content served over HTTP
+Free trials
+Home location Misdetection
+Borrower VPN bypass
+Same Site Scripting
+Physical testing
+Social engineering (e.g., attempts to steal cookies, fake login pages to collect credentials)
+Phishing
+Denial of service attacks
+Resource exhaustion attacks
+Mail server domain misconfiguration (email spoofing, missing DMARC, SPF/DKIM, etc.)
+Rate limiting issues
+Missing bruteforce protection/account lockout on login or forgot password pages
+Services listening on port 80
+Internal IP address disclosure
+Crossdomain policy issues (Flash, Silverlight, etc.) without evidence of an exploitable vulnerability
+Username/email enumeration via login page, forgot password, or registration error messages
+Weak password policies
+Weak CAPTCHA / CAPTCHA bypass
+Vulnerabilities impacting only old/end-of-life browsers or plugins: specifically, issues patched by the vendor for 6+ months, or affecting software unsupported/unpatched for 6+ months
+Vulnerabilities primarily caused by browser/plugin defects rather than a Netflix system/software defect (e.g., UXSS)
+Reports relating to Symantec root certificates
+Reports based on the reported version numbers of web servers, services, or frameworks alone
+Reports relating to sites or network devices not owned by Netflix
+Reports requiring a large amount of user cooperation, or unlikely/unreasonable actions, are more symptomatic of social engineering than an application vulnerability (e.g., disabling browser security features, sending the attacker critical information, entering attacker-supplied code themselves)
+For Content Authorization & Device Targets: vulnerabilities in already publicly broken protocols (e.g., HDCP v1.4)
+Scanner only SQL injection claims (no backing query)
+Broken access control reports without a proof of concept
+Self XSS / console paste DOM XSS
+CSRF without a working cross-site exploit
+XSS claims with no working payload
+Business logic edge cases with no demonstrated unauthorized outcome
+IDOR claims without cross-account access evidence
+Nonsensitive information disclosure
+CORS misconfiguration without a credentialed crossorigin read
+Session/cookie lifetime observations with no account access impact
+Low sensitivity infrastructure disclosure (e.g., instance ID in a response header)
+Incomplete submissions with no reproducible security claim
+Log injection with no forging or code execution outcome
+Blind SSRF without demonstrated impact
+Program Discretion
+We reserve the right to reward a report even if the target isn't explicitly listed. On rare occasions, we'll pay for an especially impactful, informative submission against an otherwise non-reward eligible target, but the types above are where the real money is. Keep in mind the bottom line: whether to pay a reward, and in what amount, is at Netflix's sole and exclusive discretion.
+Additional Terms
+Your testing must comply with all applicable laws.
+This program is not an offer of employment.
+You are solely responsible for paying taxes on any reward.
+We may modify or cancel this program at any time.
+Machine Readable Scope Summary
+Every fact below restates something stated above. This block exists so that AI research agents can parse scope deterministically rather than infer it. If this block and the prose ever disagree, the prose (and ultimately the live HackerOne scope table) is authoritative.
+Code
+•
+12.23 KiB
+1program: netflix
+2disclosure: "private program; public disclosure not permitted under any circumstance"
+3
+4disposition_types:
+5 rewarded: "valid, in scope, meets tier severity bar -> paid"
+6 non_rewardable: "valid, in scope, below tier impact bar -> Kudos only, no bounty"
+7 duplicate: "valid, already tracked -> closed against original report, no bounty"
+8 informative: "valid, but non impactful; team reviewed and chose not to fix -> closed Informative, no bounty, no points loss"
+9 needs_more_info: "report needs more context from researcher -> moved back to researcher queue"
+10 out_of_scope: "invalid or incomplete report, per program rules or HackerOne Terms -> closed Not Applicable"
+11 ambiguous_good_faith: "scope unclear but submitted with documented reasoning -> closed Informative, no penalty"
+12 multi_endpoint_bonus: "same bug pattern (e.g. same injection/XSS) hitting multiple distinct endpoints/views may be paid above the tier's range, provided the report documents each distinct vector separately"
+13
+14safe_harbor:
+15 commitment: "Netflix will not bring a lawsuit against you or ask law enforcement to investigate you if your research and disclosure meet program requirements and guidelines"
+16 uncertain_coverage: "reach out via the submission page if you have questions about responsible disclosure coverage"
+17
+18official_focus_areas:
+19 - xss
+20 - csrf
+21 - sqli
+22 - ssrf
+23 - authentication
+24 - authorization
+25 - data exposure
+26 - redirection
+27 - remote code execution
+28 - business logic
+29 - msl protocol # https://github.com/Netflix/msl (priority assigned by impact, not a fixed tier)
+30 - mobile specific api vulnerabilities
+31 - novel uncategorized but clever
+32 - infrastructure misconfiguration / subdomain and dns takeover
+33 - cache poisoning
+34 - http request/response smuggling, splitting, and crlf injection
+35 - path traversal / normalization bypass
+36 - insecure storage of sensitive information
+37 - externally controlled resource references
+38 - signal handler race conditions (native/low level)
+39
+40historical_paid_signal_not_exhaustive_scope:
+41 note: "real payouts on closed reports; signal of where impact and payout have historically landed, not a scope expansion"
+42 examples_usd:
+43 - {category: authentication access control, amount: 25000}
+44 - {category: cache poisoning high impact host, amount: 10000}
+45 - {category: request response smuggling on critical service, amount: 5500}
+46 - {category: subdomain takeover, amount: 5000}
+47 - {category: path traversal on critical service, amount: 5000}
+48 - {category: signal handler race condition native component, amount: 4000}
+49
+50in_scope_rewarded:
+51 - tier: primary
+52 assets: ["api-.netflix.com", "api.netflix.com", ".prod.ftl.netflix.com", ".prod.cloud.netflix.com", ".prod.dradis.netflix.com", "www.netflix.com", "secure.netflix.com", "ichnaea.netflix.com", "beacon.netflix.com", ".nflxvideo.net", ".nflxext.com", ".nflximg.net", ".nflxso.net", "help.netflix.com", "meechum.netflix.com"]
+53 non_unique_aliases_of_beacon: ["customerevents.netflix.com", "nmtracking.netflix.com", "presentationtracking.netflix.com"]
+54 severity_range_usd: {critical: [5000, 25000], high: [2000, 5000], medium: [600, 2000], low: [300, 600]}
+55
+56 - tier: secondary
+57 assets: ["public Netflix web applications not part of www.netflix.com", "Netflix hosted microsites"]
+58 excludes: ["vendor/partner hosted microsites on infrastructure Netflix does not control; researchers must confirm ownership via HackerOne before testing any microsite"]
+59 minimum_rewardable_severity: medium
+60 severity_range_usd: {critical: [2000, 5000], high: [600, 2000], medium: [300, 600]}
+61
+62 - tier: mobile
+63 assets: ["Netflix iOS app", "Netflix Android app"]
+64 severity_range_usd: {critical: [2000, 5000], high: [600, 2000]}
+65 medium_low_disposition: "accepted, non rewardable (Kudos only)"
+66
+67 - tier: corporate
+68 assets: ["G Suite config for netflix.com", "G Suite config for netflixcontractors.com", "G Suite config for netflixanimation.com"]
+69 excludes: ["subdomains of netflix.com", "unrelated domains e.g. netflixcs.com"]
+70 minimum_rewardable_severity: high
+71 severity_range_usd: {critical: [2000, 10000], high: [500, 2000]}
+72 google_docs_exception: "root cause linked exposed docs paid on this tier; individual documents with no common root cause are typically low severity and non rewardable; documents with particularly sensitive info (PII, live credentials) may get higher priority/payout, evaluated case by case"
+73 pii_reminder: "if an exposed doc turns out to contain customer or employee personal info, or Netflix confidential material, submit right away"
+74
+75 - tier: content_authorization
+76 assets: ["content authorization bypass enabling unauthorized device playback", "private keys enabling video decryption"]
+77 excludes: ["in browser player only bypasses (non rewardable)", "already publicly broken protocols e.g. HDCP v1.4"]
+78 key_eligibility_requirements:
+79 - "key must be live/working at time of report; a rotated or dead key does not qualify"
+80 - "screenshots or screen recordings of playback are not in scope; report must include actual working key material plus specific, actionable details on how it was discovered/extracted"
+81 - "keys leaked together, or pulled the same way across multiple devices, count as one finding, not one reward per key"
+82 - "hardware backed extraction (e.g. TEE) pays more than software backed extraction, due to higher difficulty"
+83 severity_range_usd: {high: [1000, 5000], medium: [300, 1000]}
+84 critical_and_low_disposition: "no critical tier exists for this category; low is accepted, non rewardable"
+85
+86 - tier: open_source
+87 projects:
+88 - {name: zuul, repo: "https://github.com/Netflix/zuul", paid_on_tier: primary}
+89 - {name: atlas, repo: "https://github.com/Netflix/atlas", paid_on_tier: secondary}
+90 - {name: spectator, repo: "https://github.com/Netflix/spectator", paid_on_tier: secondary}
+91 - {name: msl, repo: "https://github.com/Netflix/msl", paid_on_tier: "impact based, not a fixed tier"}
+92 oss_version_policy:
+93 supported_versions: "current major and immediately preceding major only, for Zuul, Atlas, Spectator, MSL"
+94 unsupported_major_version_reports: "Out of Scope"
+95 poc_requirement: "working proof-of-concept script required for all OSS reports"
+96 note: "every other Netflix open source project (including Dispatch, Weep, ConsoleMe) is out of scope here; each project's own README/SECURITY file governs its own scope and process"
+97
+98in_scope_not_rewarded:
+99 - affiliates or recently acquired entities
+100 - content authorization in browser player only
+101 - orphan google doc no common root cause low impact
+102 - netflix gaming targets
+103 - corporate medium or low severity findings, except root-cause-linked google docs per the corporate tier exception above
+104
+105duplicate_if_matches_known_pattern:
+106 - household verification check bypass (mobile and web) # household verification enforcement is actively being worked on and improved; team is aware of certain bypasses and is actively working to mitigate and fix them
+107 - credentialed cors misconfiguration # Several internal hosts show a behaviour of reflecting an arbitrary request Origin in Access Control Allow Origin while also allowing credentials. These are not exploitable due to internal control as a defense in depth
+108 - profile and session pin controls # profile PIN enforcement issues are a known, actively tracked class; also tracked: a profile creation race condition around the per account profile limit, and missing PIN verification rate limiting
+109 - publicly exposed s3 assets and hardcoded drm keys # publicly listable/exposed S3 assets under download.opencontent.netflix.com, including reports identifying hardcoded DRM keys
+110 - hardcoded credentials in public sample/test code # "Sample TEST Private key / truststore password" committed in the public Zuul sample/test code repository
+111 - public oidc discovery endpoint # OIDC discovery/JWKS endpoints publicly reachable
+112
+113out_of_scope:
+114 - "ir.netflix.net"
+115 - "ir.netflix.com"
+116 - "netflixinvestor.com"
+117 - "set top boxes, smart TVs, streaming sticks"
+118 - "third party hosted websites/systems, including unauthorized third party microsites"
+119 - "assets associated with ReadyPlayerMe"
+120 - "vendor owned and operated assets"
+121 - "any open source repo other than Zuul, Atlas, Spectator (see in scope rewarded > open source), e.g. Dispatch, Weep, ConsoleMe"
+122 - "anything in excluded submission types below"
+123 - "HackerOne's Core Ineligible Findings (external, incorporated by reference)"
+124
+125excluded_submission_types:
+126 - cookie valid after logout
+127 - cookie valid after password change or reset
+128 - cookie expiration
+129 - cookie migration or sharing
+130 - forgot password autologin
+131 - autologin token reuse
+132 - static content over http
+133 - free trials
+134 - home location mis detection
+135 - borrower vpn bypass
+136 - same site scripting
+137 - physical testing
+138 - social engineering
+139 - phishing
+140 - denial of service
+141 - resource exhaustion
+142 - mail server domain misconfiguration
+143 - rate limiting issues
+144 - missing brute force protection login or forgot password
+145 - services on port 80
+146 - internal ip disclosure
+147 - cross domain policy without exploit evidence
+148 - username or email enumeration
+149 - weak password policy
+150 - weak or bypassable captcha
+151 - eol browser or plugin vulnerabilities
+152 - browser or plugin defect not netflix defect
+153 - symantec root certificate reports
+154 - version number disclosure only
+155 - non netflix owned sites or devices
+156 - requires large user cooperation social engineering adjacent
+157 - hdcp v1.4 or other publicly broken protocols
+158 - scanner only sqli no backing query
+159 - broken access control without poc
+160 - self xss console paste dom xss
+161 - csrf without working exploit
+162 - xss without working payload
+163 - business logic edge case no demonstrated outcome
+164 - idor without cross account evidence
+165 - non sensitive information disclosure
+166 - cors without credentialed cross origin read
+167 - session cookie lifetime no account access impact
+168 - low sensitivity infra disclosure
+169 - incomplete submission no reproducible claim
+170 - log injection no forging or rce
+171 - blind ssrf without demonstrated impact
+172
+173special_cases:
+174 dependency_confusion_package_takeover:
+175 default_disposition: duplicate
+176 evidence_of_live_infra_effect: "clear evidence a taken-over package is actually running on or affecting Netflix infrastructure should still be submitted; Netflix wants to know, but this alone is not a guaranteed reward"
+177 novel_bypass_exception: "a genuinely new angle, or a way past existing controls, is rewarded even if the general dependency-confusion category has been reported before"
+178 ambiguous_scope_submission:
+179 disposition: "informational no penalty"
+180 requirement: "must be submitted through HackerOne with documented scope reasoning, not via another channel"
+181
+182program_guidelines_researcher_conduct:
+183 - "test only within the defined Scope"
+184 - "do not access customer or employee personal data, pre-release content, or Netflix confidential material; stop and report immediately if accidentally accessed"
+185 - "submission must include a verified, reproducible proof of concept; AI-generated or low-effort reports without confirmed reproduction steps will be closed without review"
+186 - "stop and report immediately if a non-public app or non-public credentials are encountered"
+187 - "do not degrade the experience for real users, disrupt production, or destroy data while testing"
+188 - "collect only what is needed to prove the vulnerability; submit via the HackerOne report form (screenshots, recordings, requests, repro steps, POC); do not use third-party filesharing sites"
+189 - "when investigating a vulnerability, only target your own account and do not attempt to access data from anyone else's account"
+190 - "submit through HackerOne only"
+191
+192data_deletion:
+193 scope: "securely delete Netflix data downloaded, cached, or otherwise kept on research systems, including anything stored in third-party tools or services used during testing"
+194
+195program_discretion:
+196 unlisted_target_reward: "Netflix may reward a report against a target not explicitly listed in scope, at its sole discretion, particularly for an especially impactful informative submission"
+197
+198additional_terms:
+199 - comply with applicable laws
+200 - not an offer of employment
+201 - reward amount and decision at netflix sole discretion
+202 - researcher responsible for own taxes
+203 - program may be modified or cancelled anytime
+Top hackers
+See all hackers
+1
+m0chan
+Reputation: 349
+2
+d0xing
+Reputation: 234
+3
+ragingg
+Reputation: 203
+4
+villu164
+Reputation: 192
+5
+goedix
+Reputation: 178
+6
+0xmaxhax
+Reputation: 175
+7
+gececi1
+Reputation: 169
+8
+1sequalt0
+Reputation: 164
+9
+worstwursts
+Reputation: 164
+10
+bugra
+Reputation: 158
+11
+teflon
+Reputation: 154
+12
+na-rony
+Reputation: 152
+Netflix
+http://netflix.com
+@netflix
+See What's Next
+Bounty launched in May 2024
+Response efficiency: 89%
+Submit without Report Assistant
+Rewards
+Severity
+Rewards
+Low
+Avg. bounty $513
+32.83% submissions
+$300 – $600
+Medium
+Avg. bounty $858
+43.22% submissions
+$300 – $2,000
+High
+Avg. bounty $2,786
+15.94% submissions
+$500 – $5,000
+Critical
+Avg. bounty $5,000
+8.01% submissions
+$2,000 – $25,000
+Stats
+Total bounties paid $393,838
+Average bounty $600
+Top bounty range $4,000 - $25,000
+Bounties paid | 90 days $41,850
+Reports received | 90 days 684
+Last report resolved 4 days ago
+Reports resolved 3005
+Hackers thanked 291
+Assets In Scope 30
+© HackerOne
+Opportunities
+Security
+Leaderboard
+Blog
+Status
+Docs
+Support
+Disclosure Guidelines
+Press
+Privacy
+Terms

@@ -1271,12 +1271,12 @@ M1.14, M11.1), so a buyer can see what signing up means beyond the price.
   page for it, which its policy or help pages link, so the user gets there in one click; validation takes it on the
   provider's own sites or its quoted policies' site, never another company's. A topic's `actionFor` lists the grades
   that mean the user has to act (an opt-out's Neutral and Poor, deletion's Good to Poor, every export grade but Bad,
-  an arbitration opt-out's), and validation requires the action on them: an error, a warning for the 13 waiting for
-  M11.9. When the change is the browser's or device's own setting, the action links the provider's page that
+  an arbitration opt-out's), and validation requires the action on them, an error. When the change is the browser's or device's own setting, the action links the provider's page that
   explains it.
 - **Every topic that applies has a rating or a status** for everywhere and every plan, so cards can be compared line
-  by line: validation names each one missing, an error, except for the 13 providers rated before M11.1
-  (`awaitingPolicyRegrade` in core), which get a warning until M11.9 regrades them and empties the list.
+  by line: validation names each one missing, an error for every provider. The 13 rated before M11.1 were warnings
+  (`awaitingPolicyRegrade` in core) until the owner asked, on 2026-11-02, for every topic to be required: each was
+  rated on all of them that day and the list is empty (M11.9 still regrades the older ratings).
 - **Shared policy documents** (M11.1): a company's privacy policy or terms that cover several providers are rated once
   in `data/policies/<id>.yaml` (`id`, `name`, `links`, `ratings`, no plans), Disney's privacy policy for Disney+, Hulu
   and ESPN (`disney-privacy`). A provider names the documents that cover it in `policies.shared` and adds ratings from
@@ -1338,10 +1338,19 @@ M1.14, M11.1), so a buyer can see what signing up means beyond the price.
   report, with the owner's `website`: Microsoft's for Xbox Game Pass), else its terms ("made available to you by Bell
   Media Inc."); validation takes the page on the provider's own sites, its policies' (Claude's terms on anthropic.com)
   or the owner's `website`, never a third party's. A provider with a plan in VPN, news or finance
-  needs one (core's `ownerRequiredIn`; telecom too once M11.3 adds it), and validation warns once it's a year old.
+  needs one: every provider since 2026-11-02, the owner's request (it was VPN, news and finance in M11.2), and
+  validation warns once it's a year old.
   `citedPages` counts the page as a policy page, so `data:baselines` saves it and checks its quotes; the nightly check
-  doesn't read it yet. Eleven of the 13 have one; Netflix and Bitdefender name none (ESPN's is 72% Disney's, 18%
-  Hearst's and 10% the NFL's, as its press room says).
+  doesn't read it yet. All 13 have one (ESPN's is 72% Disney's, 18% Hearst's and 10% the NFL's, as its press room
+  says; Netflix, Inc. is a public company; Bitdefender S.R.L., in Bucharest, runs Bitdefender).
+- **Ways to pay** (M11.5's `paymentMethods`, pulled forward on 2026-11-02 at the owner's request, so cash, crypto and
+  gift cards are never missed): every provider lists them, as entries of `methods` (card, PayPal, Apple Pay, Google
+  Pay, app-store billing, gift cards, bank transfer, cash, crypto, a TV, internet or phone provider's bill, other)
+  with the `page` and `url` that list them and `quotes` naming each, which validation checks (core's
+  `namesPaymentMethod`, in English and French); one entry for everywhere and others for some `regions`, the page on
+  the provider's own sites, its policies' or its owner's. The card's Ways to pay, after Owner, lists those for the
+  user's country (`paymentMethodsIn`), citing the page with its quotes as the tooltip. `citedPages` counts the page as
+  a pricing page.
 - **On the card,** after Terms and policies (M11.2): Outside ratings, each subject's labels (core's `outsideRatings`,
   in the subjects' order: "Protection: 6.0/6.0 from AV-TEST, August 2026 (tested …)"), the rater's name a link to its
   page in a new tab; then Owner ("Mullvad VPN AB, according to its About us"), the page's name a link with a text
@@ -1658,9 +1667,8 @@ Validation fails if:
   isn't its own, a shared document with no file or a `replacesShared` no named document rates, or were read after
   today (section 4.10); a warning once a rating is over a year old, and for a shared document no provider names
 - a topic that applies to a provider has no rating or status for everywhere and every plan, its own or a shared
-  document's (a warning for the 13 waiting for M11.9's regrade)
-- a rating's grade is one its topic's `actionFor` lists and it has no `action`, the user's way to act (a warning for
-  the 13 waiting for M11.9's regrade, and for a shared document only they name)
+  document's
+- a rating's grade is one its topic's `actionFor` lists and it has no `action`, the user's way to act
 - a topic and a feature on the same fact disagree: activity logging Great on a plan with the VPN whose
   `vpn.independent-audits` lacks `no-logs` (section 4.10)
 - `includes-subscription` lists the plan itself or its own provider, or makes a loop (Duo → Unlimited → Duo)
@@ -3258,6 +3266,22 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-11-02, the owner's feedback after M11.2)**
+- **Every policy topic required, now:** the owner chose to rate every topic that applies for all 13 at once (M11.9's
+  coverage, pulled forward) and make a missing one an error. Shared documents carry what several providers share:
+  Disney's privacy policy and its one US subscriber agreement (Disney+, Hulu, ESPN; Disney+'s Canadian agreement over
+  it for Canada), and the Bell Privacy Policy (Crave, TSN, RDS). Pages that only render their contents are read from
+  their PDFs (Bell's, CBC/Radio-Canada's). Netflix serves each country its own terms by where you are, with no
+  picker, so its Canadian terms stand for everywhere until a reader elsewhere (the owner's VPN) reads the US's.
+- **Ways to pay and owners required of every provider** (M11.5's payment methods pulled forward; owners beyond VPN,
+  news and finance), each quoted from an official page.
+- **Who owns a service is basic and easy to verify:** the parent's own site counts (`owner.website`), so Xbox Game
+  Pass is Microsoft Corporation's from its annual report, not a payment line.
+- **Bitdefender in full:** its other plans in Canada and the US, security features compared across suites (the
+  antivirus group, webcam protection, anti-tracker, file shredder, parental controls; Norton, Kaspersky and ESET have
+  them too), and the IPVanish rules its terms include rated as its own: its "unlimited" VPN is capped at 1 TB a month
+  (a notable, with `vpn.unlimited-traffic` kept as Bitdefender states it), IPVanish alone decides what breaks them.
 
 **Resolved (2026-11-02, outside raters' terms, M11.2)**
 Each rater's terms of reuse were read before it was added (section 4.10); the owner chose to list only those that

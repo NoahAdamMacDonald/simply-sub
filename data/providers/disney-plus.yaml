@@ -33,6 +33,15 @@ billingCurrency: { CA: CAD, US: USD }
 cancelUrl: https://help.disneyplus.com/article/disneyplus-cancel
 sources: { pricing: https://help.disneyplus.com/article/disneyplus-en-ca-price }
 # Owner (M11.2), read 2026-11-02: its press site's About page.
+# Ways to pay (M11.5), read 2026-11-02 on its payment methods article.
+paymentMethods:
+  - methods: [card, paypal, app-store]
+    page: Payment methods for Disney+
+    url: https://help.disneyplus.com/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - PayPal
+      - 'You can also choose to purchase a Disney+ subscription through a third-party billing partner (Docomo, J:COM, Apple, Google, Amazon, Hulu (Hulu | Disney+ Set Plan), or any other platform).'
 owner:
   name: The Walt Disney Company
   page:
@@ -229,4 +238,30 @@ addOns:
 # Disney+, rated once in data/policies/disney-privacy.yaml (M11.1). Not rated: the billing and legal topics, since its
 # subscriber agreement (disneyplus.com/en-ca/legal) doesn't render here, and account sharing and device limits.
 policies:
-  shared: [disney-privacy]
+  shared: [disney-privacy, disney-subscriber-agreement]
+  links:
+    - name: 'Security vulnerability reports'
+      url: https://hackerone.com/disney
+    - name: 'Subscriber agreement, Canada'
+      url: https://www.disneyplus.com/en-ca/welcome/subscriber-agreement-side-by-side
+  ratings:
+    - topic: security.practices
+      tier: neutral
+      reason: "Disney runs a program where security experts can report problems they find, but it doesn't say outside experts check its security or publish what they find."
+      sources:
+        - url: https://hackerone.com/disney
+          quote: 'If you believe you have found a qualifying security vulnerability in a Disney product or website, please submit a report in accordance with the guidelines below.'
+      lastVerified: 2026-11-02
+    # Canada's own agreement, which "governs for residents of Canada", read on its side-by-side page of amended clauses
+    # (the agreement itself renders only its footer in headless Edge). Its other clauses read as the US agreement's.
+    - topic: billing.price-changes
+      regions: [CA]
+      tier: good
+      reason: 'In Canada it says it will try to email you at least 30 days before a price goes up, so you can cancel first.'
+      sources:
+        - url: https://www.disneyplus.com/en-ca/welcome/subscriber-agreement-side-by-side
+          quote: 'In the event of a price change, we will attempt to notify you at least thirty (30) days in advance of the change by sending an email to the email address you have registered for your account.'
+        - url: https://www.disneyplus.com/en-ca/welcome/subscriber-agreement-side-by-side
+          quote: 'This Agreement governs for residents of Canada.'
+      replacesShared: true
+      lastVerified: 2026-11-02

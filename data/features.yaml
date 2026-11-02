@@ -289,6 +289,152 @@
   category: security
   type: boolean
   aliases: [breach monitoring, identity monitoring]
+- id: security.webcam-protection
+  name: Webcam and microphone protection
+  category: security
+  type: set
+  values:
+    - { id: webcam, name: Webcam, aliases: [video protection, safecam, camera] }
+    - { id: microphone, name: Microphone, aliases: [audio protection, microphone monitor] }
+- id: security.anti-tracker
+  name: Tracker blocking in the browser
+  category: security
+  type: boolean
+  aliases: [anti-tracker, antitrack, anti-tracking]
+- id: security.file-shredder
+  name: File shredder
+  category: security
+  type: boolean
+  aliases: [data shredder, secure delete]
+
+# `antivirus.included` is a group: ranking it means "I want an antivirus at all", and its children are what antivirus
+# suites are compared on (Bitdefender, Norton, Kaspersky, ESET, 2026-11-02). Behaviour-based detection ("Advanced
+# Threat Defense") is part of every real-time antivirus, so it's the group itself, not a child.
+- id: antivirus.included
+  name: Antivirus
+  category: security
+  type: boolean
+  aliases: [real-time protection, anti-malware, malware protection, advanced threat defense]
+  headline: true
+- id: antivirus.devices
+  parent: antivirus.included
+  name: Devices protected
+  category: security
+  type: number
+  unit: devices
+  tiers:
+    - { id: '1', name: One device, min: 1, max: 1 }
+    - { id: 2-5, name: 2 to 5 devices, min: 2, max: 5 }
+    - { id: 6-10, name: 6 to 10 devices, min: 6, max: 10 }
+    - { id: 11+, name: More than 10 devices, min: 11 }
+- id: antivirus.ransomware
+  parent: antivirus.included
+  name: Ransomware protection
+  category: security
+  type: set
+  values:
+    - {
+        id: blocking,
+        name: Blocks ransomware,
+        aliases: [multi-layer ransomware protection, ransomware shield],
+      }
+    - {
+        id: file-recovery,
+        name: Recovers encrypted files,
+        aliases: [ransomware remediation, file recovery],
+      }
+- id: antivirus.web-protection
+  parent: antivirus.included
+  name: Web and phishing protection
+  category: security
+  type: boolean
+  aliases: [anti-phishing, online threat prevention, safe browsing, web protection]
+- id: antivirus.scam-protection
+  parent: antivirus.included
+  name: Scam protection
+  category: security
+  type: set
+  values:
+    - { id: web, name: Scam websites, aliases: [web scam protection] }
+    - { id: email, name: Email, aliases: [email protection] }
+    - { id: sms, name: Text messages, aliases: [sms protection] }
+    - { id: chat, name: Chat apps, aliases: [chat protection, messaging] }
+    - { id: calls, name: Calls, aliases: [call filter, call blocking] }
+- id: antivirus.network
+  parent: antivirus.included
+  name: Network protection
+  category: security
+  type: set
+  values:
+    - { id: firewall, name: Firewall, aliases: [privacy firewall, smart firewall] }
+    - {
+        id: wifi-check,
+        name: Wi-Fi security check,
+        aliases: [wi-fi security advisor, wifi inspector],
+      }
+    - {
+        id: home-network-scan,
+        name: Home network scan,
+        aliases: [network inspector, smart home protection],
+      }
+- id: antivirus.secure-browser
+  parent: antivirus.included
+  name: Secure browser for banking
+  category: security
+  type: boolean
+  aliases: [safepay, safe money, banking protection, payment protection]
+- id: antivirus.cryptomining
+  parent: antivirus.included
+  name: Cryptomining protection
+  category: security
+  type: boolean
+  aliases: [cryptojacking protection]
+- id: antivirus.vulnerability-scan
+  parent: antivirus.included
+  name: Vulnerability scan
+  category: security
+  type: boolean
+  aliases: [vulnerability assessment, software updater]
+- id: antivirus.anti-spam
+  parent: antivirus.included
+  name: Spam filter for email apps
+  category: security
+  type: boolean
+  aliases: [antispam, anti-spam]
+- id: antivirus.anti-theft
+  parent: antivirus.included
+  name: Anti-theft
+  category: security
+  type: set
+  values:
+    - { id: locate, name: Locate a lost device }
+    - { id: lock, name: Lock it remotely }
+    - { id: wipe, name: Wipe it remotely }
+- id: antivirus.optimizer
+  parent: antivirus.included
+  name: Speed-up tools
+  category: security
+  type: boolean
+  aliases: [oneclick optimizer, device optimizer, performance optimisation, tune up]
+- id: antivirus.activity-modes
+  parent: antivirus.included
+  name: Game, movie and work modes
+  category: security
+  type: boolean
+  aliases: [profiles, game mode, autopilot]
+- id: parental-control
+  name: Parental controls
+  category: security
+  type: set
+  values:
+    - { id: content-filtering, name: Content filtering }
+    - {
+        id: screen-time,
+        name: Screen time limits,
+        aliases: [internet time limit, schedules, routines],
+      }
+    - { id: location, name: Child location }
+    - { id: activity-reports, name: Activity reports }
 
 # ── AI ─────────────────────────────────────────────────────────────────────────
 - id: ai.assistant

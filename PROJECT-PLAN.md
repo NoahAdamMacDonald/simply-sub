@@ -1088,7 +1088,7 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
   - **Ratings:** a `tier` with sources, or a `status` with no quotes (`not-stated` with `pages`, or
     `not-applicable`); `title` on `other.notable`, up to three. Validation names every topic that applies and has no
     rating or status for everywhere and every plan, own or shared: an error, a warning for the 13 in
-    `awaitingPolicyRegrade`, which M11.9 empties. Statuses the providers' comments already recorded went in (no free
+    `awaitingPolicyRegrade`, which emptied on 2026-11-02 once all 13 were rated (see below). Statuses the providers' comments already recorded went in (no free
     trial at Mullvad, Proton and ICI TOU.TV; Mullvad's terms silent on closing accounts; ICI TOU.TV's conditions on
     sharing and device limits); RDS's and TSN's "don't say" topics wait for M11.9, since their help centres weren't
     read.
@@ -1165,6 +1165,20 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
     (browser-check skill): 53 checks in both themes at both widths, by keyboard, with axe.
   - **Skills:** policy-research's Rules say how to read an owner and outside ratings, and price-research reads them
     with the terms.
+
+**Pulled forward on 2026-11-02 (the owner's feedback after M11.2), before M11.3–M11.8**
+- **From M11.5:** `paymentMethods` for every provider (BLUEPRINT §4.10, Ways to pay), required by validation and on
+  the card; M11.5 keeps `currencies`, `renewalAnchor` and `sourceRepo`. An `owner` is required of every provider.
+- **From M11.9:** every topic that applies rated, or given a status, for all 13 (about 250 ratings, quoted and
+  checked with `quote-check.cjs`), so `awaitingPolicyRegrade` is empty and a missing topic is an error. M11.9 still
+  regrades the ratings from before M11.1 against the procedure, with the calibration table, and its features, perks,
+  facts and coverage parts.
+- **Bitdefender:** Total Security Family, Antivirus Plus (1 and 3 devices), Premium VPN and Antivirus Free in Canada
+  and the US, the suites' 2-year prices, and its features from its support centre's per-product articles, under 17
+  new security features (the antivirus group, `security.webcam-protection`, `security.anti-tracker`,
+  `security.file-shredder`, `parental-control`), proposed to and chosen by the owner. SecurePass, Mobile Security,
+  the US Ultimate Security Plus plans and its other regions' new plans wait for its next price research.
+- **Back on plan:** the next task is M11.3, service categories.
 
 **M11.6 — Ranked perks** (BLUEPRINT §4.2)
 ```yaml

@@ -90,6 +90,67 @@
       },
       "description": "Region → the card networks the provider takes there, quoted from its own page (GLOBAL: wherever it sells). A region it doesn't cover is unknown, and every card is allowed there"
     },
+    "paymentMethods": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "methods": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "card",
+                "paypal",
+                "apple-pay",
+                "google-pay",
+                "app-store",
+                "gift-card",
+                "bank-transfer",
+                "cash",
+                "crypto",
+                "provider-billing",
+                "other"
+              ]
+            },
+            "description": "The ways to pay it names: app-store for billing through Apple, Google or another app store, provider-billing for a TV, internet or phone provider’s bill, other for one not listed here"
+          },
+          "regions": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(?:[A-Z]{2}|GLOBAL)$",
+              "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL"
+            },
+            "description": "Only buyers here (a country’s own help page), over the entry for everywhere"
+          },
+          "page": {
+            "type": "string",
+            "minLength": 1,
+            "description": "As the card links it (Payment methods)"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://",
+            "patternErrorMessage": "Use a full https:// URL",
+            "description": "The provider's own page that lists them (payment methods, a help article, the checkout), on its own sites, its policies' or its owner's"
+          },
+          "quotes": {
+            "minItems": 1,
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "description": "Where that page names each method (\"PayPal\", \"cash\"), word for word"
+          }
+        },
+        "required": ["methods", "page", "url", "quotes"],
+        "additionalProperties": false
+      },
+      "description": "How it can be paid, quoted from its own pages (M11.5): every provider says, cash and crypto included"
+    },
     "billingCurrency": {
       "type": "object",
       "propertyNames": {
@@ -950,7 +1011,7 @@
       },
       "required": ["name", "page", "quotes", "lastVerified"],
       "additionalProperties": false,
-      "description": "The company behind it, quoted from its own about page (M11.2): needed for VPNs, news and finance"
+      "description": "The company behind it (M11.2), quoted from its about page, its owner's own page about it, or its terms: every provider says"
     }
   },
   "required": ["id", "name", "website", "category", "spendCategory", "cancelUrl", "plans"],
