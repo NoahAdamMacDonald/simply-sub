@@ -207,7 +207,7 @@ export const providerSchema = z
       .array(domainSchema)
       .min(1, 'Leave domains out instead of listing none')
       .describe(
-        "Its other sites' domains, besides its website's, whose pages can name its official resellers (Proton VPN's protonvpn.com)",
+        "Its other sites' domains, besides its website's (Proton VPN's protonvpn.com, ESPN's press room): their pages can name its official resellers or its owner",
       )
       .optional(),
     category: slugSchema.describe('A service category id from categories.yaml'),

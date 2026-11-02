@@ -1332,13 +1332,16 @@ M1.14, M11.1), so a buyer can see what signing up means beyond the price.
   website"); Ad Fontes, Media Bias/Fact Check, AllSides, AV-Comparatives and SE Labs wait for written permission, the
   owner's choice, their terms quoted in the registry's header. So no news rater is listed, and the news rules are
   tested on a fixture; Bitdefender shows AV-TEST's scores.
-- **The owner** (M11.2): the company behind a provider, as its `owner`: its `name`, the provider's own `page` that
-  says so (`name`, `url`) and one to three `quotes` from it, with `lastVerified`. An about page first, else its terms
-  ("made available to you by Bell Media Inc."), on the provider's own sites or its own policies' (Claude's terms on
-  anthropic.com), which validation checks; never a third party's page. A provider with a plan in VPN, news or finance
+- **The owner** (M11.2): the company behind a provider, as its `owner`: its `name` (with the shares when the page
+  gives them), the `page` that says so (`name`, `url`) and one to three `quotes` from it, with `lastVerified`. The
+  provider's about page or press site first, else its owner's own page about it (the parent's about page or annual
+  report, with the owner's `website`: Microsoft's for Xbox Game Pass), else its terms ("made available to you by Bell
+  Media Inc."); validation takes the page on the provider's own sites, its policies' (Claude's terms on anthropic.com)
+  or the owner's `website`, never a third party's. A provider with a plan in VPN, news or finance
   needs one (core's `ownerRequiredIn`; telecom too once M11.3 adds it), and validation warns once it's a year old.
   `citedPages` counts the page as a policy page, so `data:baselines` saves it and checks its quotes; the nightly check
-  doesn't read it yet. Nine of the 13 have one; Netflix, Disney+, ESPN and Bitdefender name none on their own pages.
+  doesn't read it yet. Eleven of the 13 have one; Netflix and Bitdefender name none (ESPN's is 72% Disney's, 18%
+  Hearst's and 10% the NFL's, as its press room says).
 - **On the card,** after Terms and policies (M11.2): Outside ratings, each subject's labels (core's `outsideRatings`,
   in the subjects' order: "Protection: 6.0/6.0 from AV-TEST, August 2026 (tested …)"), the rater's name a link to its
   page in a new tab; then Owner ("Mullvad VPN AB, according to its About us"), the page's name a link with a text

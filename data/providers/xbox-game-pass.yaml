@@ -20,16 +20,16 @@ spendCategory: gaming
 billingCurrency: { CA: CAD, GB: GBP, US: USD, AU: AUD, NZ: NZD, EU: EUR }
 cancelUrl: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
 sources: { pricing: https://www.xbox.com/en-CA/xbox-game-pass }
-# Owner (M11.2), read 2026-11-02: no xbox.com page read says who owns Xbox in so many words; its subscription terms name
-# Microsoft as the seller.
+# Owner (M11.2), read 2026-11-02: Microsoft's 2025 annual report, on its own site, names Xbox Game Pass among "our
+# services".
 owner:
-  name: Microsoft
+  name: Microsoft Corporation
+  website: https://www.microsoft.com
   page:
-    name: XBOX subscription terms
-    url: https://www.xbox.com/en-US/legal/subscription-terms
+    name: Microsoft Annual Report 2025
+    url: https://www.microsoft.com/investor/reports/ar25/index.html
   quotes:
-    - By subscribing you are authorizing recurring payments made to Microsoft at the intervals you selected
-    - All XBOX subscriptions in the bulleted list below require acceptance of the Microsoft Services Agreement (microsoft.com/msa)
+    - drive increased engagement with our services like Microsoft Edge, Bing, Copilot, Microsoft Teams, Microsoft 365 Consumer, Xbox Game Pass, and more
   lastVerified: 2026-11-02
 
 plans:

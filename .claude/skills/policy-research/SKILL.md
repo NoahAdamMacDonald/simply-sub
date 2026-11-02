@@ -74,12 +74,18 @@ their own.
   the provider's page that explains it instead. When the change is the browser's or device's own setting (ICI
   TOU.TV), link the provider's page that explains how; none when there's nothing to change (a refund to ask for).
 - **The owner** (M11.2): the company behind the provider, in `owner` (`name`, `page` with its `name` and `url`, one
-  to three `quotes`, `lastVerified`), from its own about page, or its terms when that's where it says so ("made
-  available to you by Bell Media Inc."), on its own sites or its policies' (validation says so). Quote the sentence
-  that names the company and how it owns or runs the service ("Mullvad VPN AB is owned by parent company Amagicom
-  AB."), never a copyright line alone; a provider in VPN, news or finance needs one (telecom once it's a category).
-  When no page of its own says, leave `owner` out and say so in a comment ("No owner: …"). Never from Wikipedia or
-  the press, even when they're right.
+  to three `quotes`, `lastVerified`, and `website` when the page is on the owner's site). Who owns a service is basic
+  and easy to verify: use what you know to know where to look, then quote it from an official page, in this order:
+  1. the provider's about page, or its own press site's (Disney+'s "the flagship direct-to-consumer streaming
+     service from The Walt Disney Company", ESPN's press room);
+  2. the parent company's own page about it, with the parent's site in `website`: its about or brands page, or its
+     annual report (Microsoft's, whose Gaming business includes "Xbox Game Pass and other subscriptions");
+  3. the provider's terms naming the company that runs it ("made available to you by Bell Media Inc.").
+  Quote the sentence that says who owns or runs it ("Mullvad VPN AB is owned by parent company Amagicom AB."), never
+  a copyright line or a payment line alone, and give the shares in `name` when the page does ("ESPN is 72 percent
+  owned by The Walt Disney Company, 18 percent by Hearst and 10 percent by the National Football League"). Never
+  Wikipedia or the press as the source. A provider in VPN, news or finance needs one (telecom once it's a category);
+  leave it out only when no official page says, with a comment saying where you looked.
 - **Outside ratings** (M11.2): only from raters in `data/raters.yaml`, whose terms were read before they were added
   (its header lists those read and left out, and why: Ad Fontes, Media Bias/Fact Check, AllSides, AV-Comparatives,
   SE Labs). A new rater is read for its terms first and added only when they plainly allow showing its label with a

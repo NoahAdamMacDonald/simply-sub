@@ -785,7 +785,7 @@ function checkOutsideRatings(
 
 /**
  * A provider's owner (M11.2): quoted from its own pages, on its sites or the sites of its own policies (Claude's terms
- * on anthropic.com). A provider with a plan in a category where who owns it matters (VPNs, news, finance) needs one.
+ * on anthropic.com), or from its owner's own site (Microsoft's annual report for Xbox Game Pass). A provider with a plan in a category where who owns it matters (VPNs, news, finance) needs one.
  */
 function checkOwner(
   provider: Provider,
@@ -805,12 +805,16 @@ function checkOwner(
     return;
   }
   const sites = [
-    ...new Set([...own, ...(provider.policies?.links ?? []).map((link) => siteDomain(link.url))]),
+    ...new Set([
+      ...own,
+      ...(provider.policies?.links ?? []).map((link) => siteDomain(link.url)),
+      ...(owner.website ? [siteDomain(owner.website)] : []),
+    ]),
   ];
   if (!isOnDomain(owner.page.url, sites)) {
     report(
       ['owner', 'page', 'url'],
-      `Must be a page of ${provider.name}'s own sites or its policies' (${sites.join(', ')}): its own words on who owns it`,
+      `Must be a page of ${provider.name}'s own sites, its policies' or its owner's (${sites.join(', ')}): give the owner's site in website when the page is there`,
     );
   }
   if (owner.lastVerified > today) {
