@@ -1,6 +1,6 @@
 # A shared policy document (BLUEPRINT §4.10, M11.1): The Walt Disney Company's privacy policy, which covers Disney+,
 # Hulu and ESPN, rated once here. Each names it in its policies' shared and adds ratings from its own terms.
-# Read 2026-10-27 (M1.13). Only the topics M1.13 rated: the rest wait for M11.9's regrade.
+# Read 2026-10-27 (M1.13), and its other privacy topics 2026-11-02 (M11.9 pulled forward).
 # Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
 id: disney-privacy
 name: The Walt Disney Company's privacy policy
@@ -54,3 +54,51 @@ ratings:
       name: Ask to delete your data
       url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/data-subject-rights-portal/
     lastVerified: 2026-10-27
+  # M11.9's topics, pulled forward at the owner's request (2026-11-02), read that day.
+  - topic: privacy.ai-training
+    status: not-stated
+    reason: "Its privacy policy doesn't say whether what you write or upload trains AI."
+    pages: [https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/]
+    lastVerified: 2026-11-02
+  - topic: privacy.data-retention
+    tier: poor
+    reason: 'It keeps your information as long as it decides it needs it, and gives no time limits.'
+    sources:
+      - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+        quote: 'for the length of time needed to fulfill the purposes outlined in this privacy policy unless a longer retention period is required or permitted by law.'
+    lastVerified: 2026-11-02
+  - topic: privacy.data-portability
+    tier: neutral
+    reason: 'You can ask it, through a form on its privacy site, for the information it has about you.'
+    sources:
+      - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+        quote: 'access to, correction of, and deletion of your personal information'
+    action:
+      name: Ask for your data
+      url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/data-subject-rights-portal/
+    lastVerified: 2026-11-02
+  - topic: privacy.government-requests
+    tier: neutral
+    reason: 'It hands over information when the law or a court order asks for it, and says nothing about telling you or publishing how often.'
+    sources:
+      - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+        quote: 'to comply with legal process, or in other cases if we believe in good faith that disclosure is required by law.'
+    lastVerified: 2026-11-02
+  - topic: privacy.data-location
+    tier: neutral
+    reason: 'It may move your information to its companies and others anywhere in the world, with standard legal safeguards where the law recognises them.'
+    sources:
+      - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+        quote: 'or third parties in locations around the world for the purposes described in this privacy policy.'
+      - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+        quote: 'These steps may include implementing standard contractual clauses where recognized by law, obtaining your consent, or other lawful means of transferring personal information.'
+    lastVerified: 2026-11-02
+  - topic: privacy.children
+    tier: neutral
+    reason: "It asks parents before collecting a child's information and collects only what it needs, but doesn't promise to keep ads aimed at your activity away from kids."
+    sources:
+      - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+        quote: 'In accordance with applicable law, and our practices, obtaining consent from parents for the collection of personal information from their children, or for sending information about our products and services directly to their children;'
+      - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+        quote: 'Limiting our collection of personal information from children to no more than is reasonably necessary to participate in an online activity; and'
+    lastVerified: 2026-11-02
