@@ -40,6 +40,10 @@
             "type": "boolean",
             "description": "false hides a helper feature from ranking UIs (default true)"
           },
+          "providerWide": {
+            "type": "boolean",
+            "description": "true for a fact about the provider as a whole (platforms, sign-in, languages, support): a provider's own features may state it once for all its plans, and a plan only where it differs (M11.4)"
+          },
           "requiredIn": {
             "minItems": 1,
             "type": "array",
@@ -129,6 +133,10 @@
             "type": "boolean",
             "description": "false hides a helper feature from ranking UIs (default true)"
           },
+          "providerWide": {
+            "type": "boolean",
+            "description": "true for a fact about the provider as a whole (platforms, sign-in, languages, support): a provider's own features may state it once for all its plans, and a plan only where it differs (M11.4)"
+          },
           "requiredIn": {
             "minItems": 1,
             "type": "array",
@@ -208,6 +216,10 @@
           "rankable": {
             "type": "boolean",
             "description": "false hides a helper feature from ranking UIs (default true)"
+          },
+          "providerWide": {
+            "type": "boolean",
+            "description": "true for a fact about the provider as a whole (platforms, sign-in, languages, support): a provider's own features may state it once for all its plans, and a plan only where it differs (M11.4)"
           },
           "requiredIn": {
             "minItems": 1,
@@ -293,6 +305,10 @@
           "rankable": {
             "type": "boolean",
             "description": "false hides a helper feature from ranking UIs (default true)"
+          },
+          "providerWide": {
+            "type": "boolean",
+            "description": "true for a fact about the provider as a whole (platforms, sign-in, languages, support): a provider's own features may state it once for all its plans, and a plan only where it differs (M11.4)"
           },
           "requiredIn": {
             "minItems": 1,

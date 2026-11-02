@@ -79,6 +79,12 @@ export function readFeatureRegistry(
         );
       }
     });
+    if (feature.providerWide && feature.parent !== undefined) {
+      report(
+        [index, 'providerWide'],
+        `A provider-wide feature isn't in a group: a plan's ${feature.parent} decides its children, so leave out parent or providerWide`,
+      );
+    }
     const problem = parentProblem(feature, index, features, indexes, unchecked);
     if (problem) {
       report([index, 'parent'], problem);

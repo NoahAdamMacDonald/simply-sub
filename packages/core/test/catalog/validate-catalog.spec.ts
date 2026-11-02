@@ -203,6 +203,12 @@ describe('validateCatalog', () => {
       ]);
     });
 
+    it('keeps provider-wide features out of groups', () => {
+      expect(messagesWith(featuresFile, [5, 'providerWide'], true)).toEqual([
+        "data/features.yaml 5.providerWide: A provider-wide feature isn't in a group: a plan's vpn.included decides its children, so leave out parent or providerWide",
+      ]);
+    });
+
     it.each([
       [
         'a feature that exists',

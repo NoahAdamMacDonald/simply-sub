@@ -54,6 +54,12 @@ const flags = {
     .boolean()
     .describe('false hides a helper feature from ranking UIs (default true)')
     .optional(),
+  providerWide: z
+    .boolean()
+    .describe(
+      "true for a fact about the provider as a whole (platforms, sign-in, languages, support): a provider's own features may state it once for all its plans, and a plan only where it differs (M11.4)",
+    )
+    .optional(),
   requiredIn: z
     .array(slugSchema)
     .min(1, 'Leave requiredIn out instead of listing none')
