@@ -256,8 +256,13 @@ describe('GET /providers', () => {
     const body = await (await get('?category=vpn&region=CA&sort=name')).json<Body>();
 
     // Proton is a privacy suite; its VPN Plus, Free and suites are VPNs too, but Mail, Drive and Pass Plus aren't.
-    expect(body.data.map((result) => result.provider.id)).toEqual(['mullvad', 'proton']);
-    const [, proton] = body.data;
+    // Bitdefender's Premium VPN and its unlimited-VPN suites are VPNs too.
+    expect(body.data.map((result) => result.provider.id)).toEqual([
+      'bitdefender',
+      'mullvad',
+      'proton',
+    ]);
+    const [, , proton] = body.data;
     expect(proton.provider.category).toBe('privacy-suite');
     expect(proton.matchedOn).toEqual(['category:vpn']);
     expect(proton.matchedPlans.map((plan) => plan.id)).toEqual([
@@ -372,7 +377,11 @@ describe('the D1 reads', () => {
       .bind(...bindings)
       .all<{ detail: string }>();
 
-    expect(vpn.providers.map((provider) => provider.id).sort()).toEqual(['mullvad', 'proton']);
+    expect(vpn.providers.map((provider) => provider.id).sort()).toEqual([
+      'bitdefender',
+      'mullvad',
+      'proton',
+    ]);
     expect(plan.results.map((row) => row.detail)).toEqual(
       expect.arrayContaining([
         'SEARCH providers USING PRIMARY KEY (id=?)',
