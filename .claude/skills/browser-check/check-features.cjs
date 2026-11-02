@@ -35,6 +35,7 @@ const CATEGORIES = [
   'Security & passwords',
   'AI',
   'Productivity & calendar',
+  'Apps, languages & support',
   'Accounts & sharing',
 ];
 
@@ -250,9 +251,10 @@ async function axeCheck(page, label) {
       `${ranked} → ${firstToggle}`,
     );
 
-    // Rank Ad free Needed by keyboard: Enter opens the dropdown, ArrowDown moves from Not ranked to Needed.
-    const adFree = card(page, 'Streaming').getByRole('combobox', { name: 'Ad free' });
-    await tabTo(page, () => document.activeElement?.getAttribute('aria-label') === 'Ad free');
+    // Rank Kids profiles, a row of the first card (Ad free moved to Apps, languages & support in M11.4), Needed by
+    // keyboard: Enter opens the dropdown, ArrowDown moves from Not ranked to Needed.
+    const kids = card(page, 'Streaming').getByRole('combobox', { name: 'Kids profiles' });
+    await tabTo(page, () => document.activeElement?.getAttribute('aria-label') === 'Kids profiles');
     await page.keyboard.press('Enter');
     await page.locator('.ss-rank-select-panel').waitFor();
     await sleep(300);
@@ -260,27 +262,27 @@ async function axeCheck(page, label) {
     await axeCheck(page, 'light 1280, a rank dropdown open');
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
-    await until('the rank saved', async () => (await storedRanks(page))['ad-free']);
+    await until('the rank saved', async () => (await storedRanks(page))['streaming.kids-profiles']);
     const row = card(page, 'Streaming').locator('.row', {
-      has: page.getByRole('combobox', { name: 'Ad free' }),
+      has: page.getByRole('combobox', { name: 'Kids profiles' }),
     });
     check(
-      'Enter and an arrow rank Ad free Needed: saved at once, the row marked in its colour',
-      (await storedRanks(page))['ad-free'] === 'needed' &&
+      'Enter and an arrow rank Kids profiles Needed: saved at once, the row marked in its colour',
+      (await storedRanks(page))['streaming.kids-profiles'] === 'needed' &&
         (await row.getAttribute('data-rank')) === 'needed' &&
         (await row.evaluate((element) => getComputedStyle(element).borderLeftWidth)) === '4px' &&
-        (await adFree.evaluate((element) => element === document.activeElement)),
+        (await kids.evaluate((element) => element === document.activeElement)),
       JSON.stringify(await storedRanks(page)),
     );
     await page.reload();
     await page.locator('ss-ranking-card').first().waitFor({ timeout: 20000 });
     check(
       'the rank is still there after a reload',
-      /Needed/.test(await adFree.textContent()) &&
+      /Needed/.test(await kids.textContent()) &&
         /^1 of \d+ ranked$/.test(
           (await card(page, 'Streaming').locator('.count').textContent()).trim(),
         ),
-      await adFree.textContent(),
+      await kids.textContent(),
     );
 
     // Set all in VPN, by keyboard.
@@ -440,7 +442,7 @@ async function axeCheck(page, label) {
       const page = await newPage(context, label);
       await openFeatures(page);
       // Something ranked, so a row shows its colour.
-      await card(page, 'Streaming').getByRole('combobox', { name: 'Ad free' }).click();
+      await card(page, 'Streaming').getByRole('combobox', { name: 'Kids profiles' }).click();
       await page.getByRole('option', { name: 'Needed' }).click();
       await card(page, 'VPN').getByRole('combobox', { name: 'VPN', exact: true }).click();
       await page.getByRole('option', { name: 'Unwanted' }).click();

@@ -633,12 +633,14 @@ async function addItem(page, planId) {
     ).map((text) => text.trim());
     const offered = (await options.allTextContents()).map((text) => text.trim());
     check(
-      'typing "video quality" offers its values, then related keys such as HDR and Ad free',
+      // Ad free is in Apps, languages & support since M11.4, so not among Streaming's.
+      'typing "video quality" offers its values, then related keys such as HDR and Kids profiles',
       groups.join() === 'Matches,More in Streaming' &&
         offered.slice(0, 4).join() ===
           'Video quality: 480p (SD),Video quality: 720p (HD),Video quality: 1080p (Full HD),Video quality: 4K (Ultra HD)' &&
         offered.includes('HDR') &&
-        offered.includes('Ad free'),
+        offered.includes('Kids profiles') &&
+        !offered.includes('Ad free'),
       `${groups.join(' / ')}: ${offered.join(', ')}`,
     );
     await sleep(500);

@@ -364,15 +364,27 @@ one canonical feature describes the same capability across every provider, whate
 6. **Every value is an object** with an `id` and a `name` (plus optional `aliases` and `headline`), and every
    feature has a `category`, children included. There's no shorthand, so the file reads one way and the display
    names stay deliberate ("480p (SD)", not "480p").
-7. **Required features** (M11.4). A feature's `requiredIn: [streaming]` makes every plan in those categories state
-   it, `false` and `0` included, so the features buyers compare most never rest on "unlisted means no".
-8. **Price differences need feature differences** (M11.4). Two of a provider's plans at different prices, for the
-   same region and period, must differ in a feature or a perk; validation warns otherwise. The optimizer compares
-   only rank keys, so a tier whose extras were text made it suggest the cheapest tier every time (Xbox Game Pass,
-   Claude before M11.9).
+7. **Required features** (M11.4). A feature's `requiredIn: [streaming]` makes every plan in those service
+   categories (its own `categories`, else its provider's) state it, `false` and `0` included, so the features buyers
+   compare most never rest on "unlisted means no". A plan that doesn't is an error, except the plans core's
+   `awaitingRequiredFeatures` lists, whose missing values no official page states yet: warnings until M11.9. Required
+   since M11.4: `video.quality`, `streaming.concurrent-streams` and `ad-free` in streaming; each feature that names a
+   category (`vpn.included`, `antivirus.included`, `password-manager`, `email.addresses`, `calendar.included`,
+   `storage.cloud`, `ai.assistant`) in that category; `vpn.server-countries` and `vpn.unlimited-traffic` in vpn.
+8. **Price differences need feature differences** (M11.4). Two of a provider's plans still sold, at different prices
+   for the same region, currency and period, must differ in a feature, and in a perk once M11.6 gives perks ids;
+   validation warns otherwise, at the dearer plan. Unlisted reads as `false`, `0` or empty, so stating one is no
+   difference. The optimizer compares only rank keys, so a tier whose extras were text made it suggest the cheapest
+   tier every time: Claude's and Xbox Game Pass's tiers, Bitdefender's Premium and Ultimate Security and TSN's
+   Standard and Premium warn until M11.9.
 9. **Provider-wide features** (M11.4). What every plan of a provider has (platforms, sign-in, open source, languages,
-   support) is stated once in the provider's own `features`; a plan states a value only where it differs. D1 keeps
-   them once per provider (`provider_features`), not once per plan, which saves about 150 rows a provider.
+   support) is stated once in the provider's own `features`; a plan states a value only where it differs. Only
+   features marked `providerWide: true` go there (validation refuses the rest, and a plan value the provider states
+   already): a category feature stays on each plan even when every plan has the same value (Crave's video quality,
+   Proton's VPN). Everything that compares plans reads them merged (core's `planFeatures`, `withProviderFeatures`):
+   validation, the app (its `CatalogStore` merges each file once) and the API (each provider as it's read from D1).
+   The catalog files and D1 keep them once per provider (`provider_features`), not once per plan, which saves about
+   150 rows a provider.
 10. **Reuse first.** An existing id as it is; then a new value or alias of one; then a cross-category feature
    (`platforms`, `software.open-source`, `account.sign-in`…); then a new feature through feature-discovery; then a
    perk. A capability from another category uses that category's feature and puts the plan in that category
@@ -384,6 +396,12 @@ rank key, `perk:<provider>/<perk>`, ranked on the plan in the item dialog, never
 nothing to another provider), and shared with the provider's other plans in the list (M6.14). The optimizer treats it
 as any rank key. A perk a second provider comes to offer becomes a feature, and a `perk` entry in `data/redirects.yaml`
 ("Ids that last" in section 4.3) moves users' ranks to the feature's key.
+
+**Cross-category features** (M11.4, the guide's §2.3, chosen by the owner on 2026-11-02): `platforms`,
+`software.open-source` (an enum, closed source to fully open), `languages.audio` and `languages.subtitles` (eleven
+languages), `support.channels`, all in the feature category Apps, languages & support (`general`), and
+`account.sign-in` in Accounts & sharing; all provider-wide (rule 9), with `ad-free` beside them, which isn't. No plan
+states them yet: M11.9 reads them for the 13 from their own pages.
 
 ```yaml
 # data/features.yaml (an excerpt: the file is the registry)
@@ -397,11 +415,13 @@ as any rank key. A perk a second provider comes to offer becomes a feature, and 
     - { id: 1080p, name: 1080p (Full HD), headline: true }
     - { id: 4k, name: 4K (Ultra HD), aliases: [uhd, 2160p], headline: true }
   aliases: [resolution, picture quality]
-- id: streaming.ad-free
+  requiredIn: [streaming] # every streaming plan states it (rule 7)
+- id: ad-free # streaming.ad-free until M11.4 (data/redirects.yaml)
   name: Ad free
-  category: streaming
+  category: general
   type: boolean
-  aliases: [no ads, ad-free]
+  aliases: [no ads, ad free, without ads]
+  requiredIn: [streaming]
 - id: streaming.concurrent-streams
   name: Simultaneous streams
   category: streaming
@@ -484,7 +504,7 @@ security, AI) get the same detailed treatment as their providers are added. Grow
 instead of trying to finish it up front.
 
 **Rank keys.** Users rank *rank keys*, one per rankable option:
-- `streaming.ad-free` (boolean)
+- `ad-free` (boolean)
 - `video.quality=4k` (enum value; a plan provides it if its value is at least 4k)
 - `streaming.concurrent-streams=2-4` (number tier; provided if the value is at least the tier's min)
 - `password-manager.item-types=passkey` (set value)
@@ -514,7 +534,8 @@ billingCurrency: { CA: CAD }        # currency actually charged per region (driv
 cancelUrl: https://www.netflix.com/cancelplan   # required: its cancel page, or its help article on cancelling
 sources: { pricing: https://help.netflix.com/en/node/24926 }
 # Optional and left out here: aliases, domains (its other sites, section 4.9), availableIn (section 4.7), cancelFee
-# (text), notes, resellers (section 4.9).
+# (text), notes, resellers (section 4.9), features (its provider-wide ones, section 4.2 rule 9:
+# `features: { platforms: [web, android, ios, tv] }`, which every plan has unless it states its own).
 # Optional fields are
 # omitted, never empty or null.
 
@@ -529,7 +550,7 @@ plans:
     features:
       video.quality: 1080p
       video.hdr: false
-      streaming.ad-free: false
+      ad-free: false
       streaming.concurrent-streams: 2
       streaming.download-devices: 2
     prices:
@@ -548,7 +569,7 @@ plans:
     features:
       video.quality: 1080p
       video.hdr: false
-      streaming.ad-free: true
+      ad-free: true
       streaming.concurrent-streams: 2
       streaming.download-devices: 2
     prices:
@@ -562,7 +583,7 @@ plans:
     features:
       video.quality: 4k
       video.hdr: true
-      streaming.ad-free: true
+      ad-free: true
       streaming.concurrent-streams: 4
       streaming.download-devices: 6
     prices:
@@ -636,7 +657,7 @@ owner's choice on 2026-10-30). Ids stay readable slugs, not UUIDs: a CI guard ke
   ```yaml
   redirects:
     - { kind: plan, from: netflix.basic, to: netflix.standard-ads, on: 2026-12-01 }  # a sketch: a retired plan moved
-    - { kind: feature, from: streaming.ad-free, to: ad-free, on: 2026-11-15 }  # M11.4
+    - { kind: feature, from: streaming.ad-free, to: ad-free, on: 2026-11-02 }  # M11.4
   ```
   `kind` is `provider`, `plan`, `add-on`, `bundle`, `feature` (rank keys) or `perk` (M11.6). An entry whose `from` is
   gone applies at once; one whose `from` is a retired plan or provider is a move on its `on` date. Validation refuses
@@ -737,11 +758,12 @@ can't drift. Everything is exported from `@simply-sub/core`.
 | `feature.ts` | `featuresFileSchema`, `featureSchema` (`Feature`), `featureValueDefSchema`, `featureTierSchema`, `featureValueSchema` (`FeatureValue`) |
 | `category.ts` | `categoriesFileSchema` (`Categories`), `categorySchema`, `serviceCategorySchema` |
 | `provider.ts` | `providerSchema` (`Provider`), `planSchema` (`Plan`), `addOnSchema` (`AddOn`), `cardNetworkSchema` (`CardNetwork`) |
+| `provider-features.ts` | `planFeatures`, `withPlanFeatures`, `withProviderFeatures`: a plan's features with its provider's provider-wide ones (section 4.2 rule 9, M11.4) |
 | `bundle.ts` | `bundleSchema` (`Bundle`) |
 | `bundle-deal.ts` | `bundleFeatures`, `bundleSavings` (`BundleSaving`, `PricedPart`): a bundle's computed features and savings (section 4.4) |
 | `catalog-ids.ts` | `catalogIdsSchema` (`CatalogIds`), `catalogIds`, `suggestedProviderId`, `suggestedPlanId`: the static ids file behind the API's suggestions (section 6.3) |
 | `json-schema.ts` | `catalogJsonSchemas()`: the JSON Schema of each kind of file |
-| `validate-catalog.ts`, `validate-features.ts` | `validateCatalog(files, today)` (`CatalogIssue`), `formatCatalogIssue`: the cross-file checks (section 6.2) |
+| `validate-catalog.ts`, `validate-features.ts` | `validateCatalog(files, today)` (`CatalogIssue`), `formatCatalogIssue`: the cross-file checks (section 6.2), with `requiredIn`, the price-differences warning and provider-wide features (section 4.2 rules 7–9) |
 | `snapshot.ts` | Output: `catalogSnapshotSchema` (`CatalogSnapshot`), `catalogDataSchema`, `catalogMetaSchema`, `snapshotProviderSchema`; `readCatalogSource`, `buildCatalogData`, `buildCatalogMeta` (section 6.3) |
 | `region-files.ts` | `regionPrices`, `regionSnapshot`, `catalogIndexSchema` (`CatalogIndex`), `buildCatalogIndex`, `regionFileFor`: the per-region catalog files (section 6.3) |
 | `seed-sql.ts` | `buildSeedSql(snapshot, { providerHashes, current })`, `seedStateQueries`, `readSeedState` (`SeedState`), `seedFormat`: the D1 seed, which writes only what changed (sections 5.3, 6.3) |
@@ -783,6 +805,8 @@ type Feature = {
   aliases?: string[];
   headline?: boolean;        // show in feature summaries
   rankable?: boolean;        // default true
+  requiredIn?: string[];     // service categories whose every plan states it (M11.4)
+  providerWide?: boolean;    // a provider may state it once for its plans (M11.4)
 } & (
   | { type: 'boolean' }
   | { type: 'number'; unit?: string; tiers?: FeatureTier[] }    // tiers: the rankable buckets
@@ -793,7 +817,7 @@ type Feature = {
 
 // A plan's value: boolean | number | 'unlimited' | enum value id | set value ids (plan or provider ids for valuesFrom)
 type FeatureValue = boolean | number | string | string[];
-type RankKey = string;       // 'streaming.ad-free' | 'video.quality=4k' | 'streaming.concurrent-streams=2-4' …
+type RankKey = string;       // 'ad-free' | 'video.quality=4k' | 'streaming.concurrent-streams=2-4' …
 
 interface Plan {
   id: string;                // '<provider id>.<slug>' (netflix.standard)
@@ -830,6 +854,7 @@ interface Provider {
   cancelFee?: string;
   sources?: { pricing?: string };
   notes?: string;
+  features?: Record<string, FeatureValue>;   // its providerWide features, which every plan has unless it states its own (M11.4)
   plans: Plan[];             // at least one
   addOns?: AddOn[];
 }
@@ -1488,13 +1513,15 @@ Responses are JSON and versioned through the `/v1` path. Breaking changes go und
 
 ### 5.3 D1 schema (`apps/api/migrations/`)
 The database `simply-sub-catalog` (binding `DB`) lives in Eastern North America (`enam`). Columns, condensed
-(`0002_seed_what_changed.sql` and `0003_provider_categories.sql` have the full SQL). Every table is `STRICT`, so
+(`0002_seed_what_changed.sql`, `0003_provider_categories.sql` and `0004_provider_features.sql` have the full SQL). Every table is `STRICT`, so
 SQLite enforces the column types, and
 `WITHOUT ROWID` (since M2.1), so its primary key is the table itself rather than a second index next to a rowid:
 ```sql
 providers     (id PK, name, category, spend_category, hash, json)   -- category: its main one
 provider_categories (category, provider_id → providers, PK (category, provider_id))   -- every one its plans
               are in (M1.10), which GET /providers?category= reads by
+provider_features (feature_id → features, value, provider_id → providers, rank_value,
+              PK (feature_id, value, provider_id))   -- its provider-wide features (M11.4), rows as plan_features'
 plans         (id PK, provider_id → providers, name, json)
 prices        (plan_id → plans, region, currency, amount, interval, interval_count, monthly_equiv,
                PK (plan_id, region, currency, interval, interval_count))
@@ -1506,10 +1533,15 @@ catalog       (id PK = 1, version, built_at, seed_format, counts)   -- the one r
 indexes: prices (region, monthly_equiv) · plan_features (feature_id, rank_value) · plans (provider_id)
          · bundle_plans (plan_id)
 ```
-- Every `→` is a foreign key with `ON DELETE CASCADE`, so deleting a provider removes its categories, plans,
-  prices, plan features and bundle links, and emptying the parent tables leaves no orphans. D1 always enforces
-  foreign keys. `provider_categories` has no index by provider: each index entry is a row written, and the
-  cascade that would use one runs only when a provider changes.
+- Every `→` is a foreign key with `ON DELETE CASCADE`, so deleting a provider removes its categories, provider-wide
+  features, plans, prices, plan features and bundle links, and emptying the parent tables leaves no orphans. D1
+  always enforces foreign keys. `provider_categories` and `provider_features` have no index by provider: each index
+  entry is a row written, and the cascade that would use one runs only when a provider changes.
+- `provider_features` (M11.4, BLUEPRINT §4.2 rule 9) holds a provider's own `features` once, not once per plan: a
+  provider's platforms set once write a row a value, with no index entry; stated on each of 8 plans, each value
+  would write 16 (a row and an index entry a plan). Its key starts with the feature, so `GET /providers?feature=` reads it through the key: SQL lets a provider
+  through when a plan's rows or its own have each key, and core's search, on the providers' JSON with their plans'
+  features merged, applies the keys exactly. A provider-wide enum's moved values are fixed there too.
 - `rank_value` stores an enum's position (1080p = 2, 4k = 3) or the number itself, so rank-key filters like
   `feature=video.quality=1080p` ("1080p or better") become plain numeric comparisons. `unlimited` stores 1e308
   (above any number, and still a finite number in JSON) with `value` `unlimited`. A boolean stores 1 or 0, with
@@ -1678,6 +1710,11 @@ Validation fails if:
   boolean feature takes no `=value`)
 - a feature's `parent` isn't a top-level boolean feature (groups are one level deep), or is listed after the
   feature (`GET /features` keeps the file's order)
+- a plan in a category doesn't state a feature `requiredIn` it, its provider's features included (M11.4, section 4.2
+  rule 7; a warning for the plans core's `awaitingRequiredFeatures` lists, until M11.9), or a `requiredIn` names a
+  service category that isn't defined
+- a provider's own `features` hold a feature that isn't `providerWide`, or a plan states the same value its
+  provider's do (M11.4, rule 9); a `providerWide` feature has a `parent`
 - a feature's `category`, or a provider's `category` or `spendCategory`, isn't defined, or a plan's
   `categories` or `notIn` names a category that isn't, or `notIn` names one the plan is in or its features don't
   name (M11.3)
@@ -1720,7 +1757,8 @@ Validation fails if:
 
 Validation warns (but passes) when `lastVerified` is older than 90 days: one warning per file, with the count and
 the oldest price. It warns when a plan's features name a service category it isn't in and its `notIn` doesn't list
-(M11.3, section 4.5). It also warns about a provider or reseller without a logo in `data/logos/`, which the app shows as
+(M11.3, section 4.5), and when two of a provider's plans still sold cost differently for the same region, currency and
+period with the same features (M11.4, section 4.2 rule 8). It also warns about a provider or reseller without a logo in `data/logos/`, which the app shows as
 a letter, and about a reseller no provider lists.
 
 A broken file gets its own errors, and the checks that would only repeat them are skipped: a provider that fails
