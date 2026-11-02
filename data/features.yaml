@@ -463,6 +463,94 @@
   aliases: [online calendar]
   requiredIn: [calendar]
 
+# ── Apps, languages & support: every category (M11.4) ─────────────────────────
+# Facts about a provider as a whole (providerWide): a provider states them once in its own features, and a plan
+# states one only where it differs (BLUEPRINT §4.2 rule 9). Languages are what the service offers across its
+# catalogue; streaming.french-content stays, since it's about French content, not dubs.
+- id: platforms
+  name: Platforms
+  category: general
+  type: set
+  values:
+    - { id: windows, name: Windows }
+    - { id: macos, name: macOS, aliases: [mac, os x] }
+    - { id: linux, name: Linux }
+    - { id: android, name: Android }
+    - { id: ios, name: iPhone and iPad, aliases: [ios, ipados, iphone, ipad] }
+    - { id: web, name: Web browser, aliases: [web app, browser] }
+    - {
+        id: browser-extension,
+        name: Browser extension,
+        aliases: [chrome extension, firefox add-on],
+      }
+    - {
+        id: tv,
+        name: TVs and streaming devices,
+        aliases: [smart tv, apple tv, android tv, fire tv, roku],
+      }
+    - { id: console, name: Game consoles, aliases: [xbox, playstation, nintendo switch] }
+  aliases: [apps, devices, operating systems]
+  providerWide: true
+- id: software.open-source
+  name: Open source
+  category: general
+  type: enum
+  values: # worst to best, so "at least open-source apps" works
+    - { id: proprietary, name: Closed source, aliases: [proprietary] }
+    - { id: source-available, name: Source available }
+    - { id: open-clients, name: Open-source apps, aliases: [open clients, open-source clients] }
+    - { id: fully-open, name: Fully open source, aliases: [open-source servers] }
+  aliases: [open source, oss, foss, source code]
+  providerWide: true
+- id: languages.audio
+  name: Audio languages
+  category: general
+  type: set
+  values:
+    - { id: en, name: English }
+    - { id: fr, name: French, aliases: [français] }
+    - { id: es, name: Spanish, aliases: [español] }
+    - { id: de, name: German, aliases: [deutsch] }
+    - { id: it, name: Italian, aliases: [italiano] }
+    - { id: pt, name: Portuguese, aliases: [português] }
+    - { id: ja, name: Japanese }
+    - { id: ko, name: Korean }
+    - { id: zh, name: Chinese, aliases: [mandarin, cantonese] }
+    - { id: hi, name: Hindi }
+    - { id: ar, name: Arabic }
+  aliases: [dubbing, dubs, audio tracks]
+  providerWide: true
+- id: languages.subtitles
+  name: Subtitle languages
+  category: general
+  type: set
+  values:
+    - { id: en, name: English }
+    - { id: fr, name: French, aliases: [français] }
+    - { id: es, name: Spanish, aliases: [español] }
+    - { id: de, name: German, aliases: [deutsch] }
+    - { id: it, name: Italian, aliases: [italiano] }
+    - { id: pt, name: Portuguese, aliases: [português] }
+    - { id: ja, name: Japanese }
+    - { id: ko, name: Korean }
+    - { id: zh, name: Chinese, aliases: [mandarin, cantonese] }
+    - { id: hi, name: Hindi }
+    - { id: ar, name: Arabic }
+  aliases: [subtitles, captions, closed captions]
+  providerWide: true
+- id: support.channels
+  name: Support
+  category: general
+  type: set
+  values:
+    - { id: email, name: Email or web form, aliases: [support tickets, contact form] }
+    - { id: chat, name: Live chat }
+    - { id: phone, name: Phone }
+    - { id: community, name: Community forum, aliases: [forum] }
+    - { id: 24-7, name: Around the clock, aliases: [24/7, 24 hours] }
+  aliases: [customer support, help, customer service]
+  providerWide: true
+
 # ── Accounts & sharing ─────────────────────────────────────────────────────────
 # A plan that doesn't list account.users is for one person, so there's no "just you" tier: a tier is provided
 # by every plan whose value is at least its min.
@@ -475,6 +563,30 @@
     - { id: 2-5, name: 2 to 5 people, min: 2, max: 5 }
     - { id: 6+, name: 6 or more people, min: 6 }
   aliases: [family plan, duo plan, users, members]
+- id: account.sign-in
+  name: Sign-in methods
+  category: account
+  type: set
+  values:
+    - { id: password, name: Password }
+    - { id: passkey, name: Passkeys }
+    - { id: totp, name: Authenticator app codes, aliases: [totp, 2fa, two-factor, authenticator] }
+    - { id: security-key, name: Security keys, aliases: [yubikey, fido2, u2f, hardware key] }
+    - { id: sms, name: Text message codes, aliases: [sms] }
+    - { id: email-code, name: Email codes, aliases: [magic link, email link] }
+    - { id: push-approval, name: Approval on another device, aliases: [push notification] }
+    - {
+        id: trusted-device,
+        name: Trusted devices,
+        aliases: [trusted location, remember this device],
+      }
+    - {
+        id: sso,
+        name: Sign in with another account,
+        aliases: [single sign-on, sign in with apple, sign in with google, social login],
+      }
+  aliases: [login, log in, two-factor authentication, 2fa, mfa]
+  providerWide: true
 
 # ── Services that include other services (overlap detection) ───────────────────
 # Values are provider or plan ids (proton.pass-plus). A plan that lists plans here is a suite, and inclusion
