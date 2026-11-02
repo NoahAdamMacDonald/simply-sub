@@ -1,0 +1,554 @@
+url: https://www.bitdefender.com/en-ca/site/view/legal-privacy-policy-for-home-users-solutions
+method: fetch
+saved: 2026-11-02
+
+Legal-Privacy-Policy-For-Home-Users-Solutions
+Placeholder
+For Consumer
+All-in-one Plans
+Who Is It For
+Individual Plans
+Family Plans
+Security for Creators
+Choose Your Level of Protection
+Total Security
+Premium Security
+Ultimate Security
+Solutions
+Device Security
+Antivirus Plus
+Antivirus for Mac
+Mobile Security for Android
+Mobile Security for iOS
+Internet Security
+Family Pack
+Small Office Security
+View All
+Scam Protection
+Scam Protection
+RealCheck
+Web Sage
+Privacy
+Premium VPN
+SecurePass
+Identity Protection
+Digital Identity Protection
+Trials & Free Tools
+Try Bitdefender
+Antivirus Free
+Antivirus Free for Android
+Trial Downloads
+Free Tools
+Scamio - AI Scam Detector
+Digital Footprint Checker
+Password Generator
+Link Checker
+Virus Scanner for Mac
+View All
+Resources
+Join Our Community
+Smart Home Cybersecurity
+Cyberpedia
+Existing Customers
+Existing Customers
+Renew or Upgrade
+Support
+For Small Business
+For Enterprise
+Platform
+GravityZone Platform
+Packages
+Small Business Security
+Buy Online
+Business Security
+Business Security Premium
+Business Security Enterprise
+Defense XDR
+Free Trials
+View All
+Technology
+DemoZone
+TechZone
+Bitdefender Labs
+AI Advantage Enterprise Cybersecurity
+Prevention
+Dynamic Attack Surface Reduction
+NEW
+Compliance Manager
+Risk Management
+Vulnerability & Patch Management
+Cloud Security Posture Management
+External Attack Surface Management
+Full Disk Encryption
+View All
+Managed Service Providers
+GravityZone MSP Security
+Security for MSSPs
+Managed Detection and Response for MSPs
+Protection
+Email Security
+Mobile Security
+Cloud Native Security
+Cloud Workload Security
+Container Security
+View All
+Detection & Response
+Endpoint Detection & Response
+Extended Detection & Response
+Identity Threat Detection & Response
+Operational Threat Intelligence
+Managed Detection and Response
+Managed Detection and Response Plus
+Security Data Lake
+View All
+Services
+Managed Services
+Managed Detection and Response PLUS
+Managed Detection and Response
+Managed Detection and Response for MSPs
+Managed XDR
+Security Services
+Offensive Services
+Advisory Services
+Support
+Digital Forensics and Incident Response
+Cybersecurity Advisory Services
+Compliance Support
+Cybersecurity Review (CSR)
+Cybersecurity Advisory Retainer
+Incident Response Tabletop Exercises (TTX)
+Offensive Services
+Penetration Testing
+Red Teaming
+Cloud Security Assessment
+Phishing Simulation
+Why Bitdefender
+The Bitdefender Difference
+AI-Powered Cybersecurity
+New
+Fighting Cybercrime
+New
+Customer Success Stories
+Industry Recognition and Awards
+Technology Alliances
+Certifications
+Bitdefender Labs and Research
+Solutions
+Cloud Native Security
+Enable Cyber Resilience
+Improve Cybersecurity Compliance
+Provide Managed Security Services
+Secure Cloud Workloads
+Secure Datacenters
+Secure Endpoints
+Secure Small to Medium Business
+Industries
+Education
+Energy and Utilities
+Financial Services
+Healthcare
+Manufacturing
+Public Sector
+Technology
+Telecommunications
+Retail
+Resources
+Highlights
+2026 Cybersecurity Predictions
+FunkSec: Ransomware Group
+Akira Ransomware
+ShrinkLocker (+Decryptor)
+Training & Education
+InfoZone, Cybersecurity 101
+TechZone, Technical Insights & Explainers
+DemoZone, Interactive Demos
+NEW
+Masterclasses, Onboarding Sessions
+NEW
+Resource Library
+Newsroom
+Blogs
+Industry Recognition & Reports
+Webinars
+Events
+eBooks & Whitepapers
+Case Studies
+Experienced a Breach?
+View Packages and Pricing
+For Partners
+Reseller Partners
+Our network
+Reselling Partner Program Overview
+Become a Reseller
+Quick Links
+Log in to the Business Solutions Partners portal
+Find a Reseller
+Already a Partner?
+Join our Affiliates Program
+View All
+Managed Service Providers
+Our Network
+MSP Partner Program Overview
+Become a MSP Partner
+Quick Links
+Log In To PAN Portal
+Find a MSP Partner
+Already a Partner?
+Technology Licensing
+Technology Licensing Portfolio
+OEM Technology Solutions
+Endpoint Protection SDKs
+Gateway Protection SDKs
+Sandbox Services
+Reputation Threat Intelligence
+View All
+Licensing Options
+SDK Integration
+Rebranding
+Bundling
+Quick Links
+Contact Us
+Telco Partners
+Resources Center
+Subscriber Protection Platform
+Resources
+Company
+About Us
+About Us
+Overview
+Management
+Customers
+Awards
+Certifications
+Sustainability
+View All
+Latest News
+Latest News
+Newsroom
+Blogs
+Bitdefender Cyberpedia
+Resources
+Resources
+Research
+White Papers
+Industry Reports
+Threat Maps
+View All
+Brand
+Brand
+Why Trusted
+The Bitdefender Difference
+Ferrari Partnership
+Brand Portal
+Careers
+Careers
+Jobs
+Blog
+Support
+How Can We Help
+Support for Home Products
+Support for Business Products
+Login
+Your Account
+Bitdefender Central
+GravityZone CLOUD Control Center
+MDR Portal
+Privacy Policy for Bitdefender Home User Solutions Version 10.4, adopted on August 18th, 2026
+This privacy policy applies to all Bitdefender Home User Solutions and their related support services, including the creation of an individual account on Bitdefender Central. The Anti-theft, Scam Protection, Chat Protection, App Anomaly, Parental Control, VPN services, Bitdefender Box, Digital Identity Protection, Bitdefender Identity Theft Protection, Scamio, Security for Creators, Ultimate Small Business Security, Family Plan, Link Checker, Reverse Phone Lookup, AI Skills Checker, Bitdefender Agent Skill Scanner and Bitdefender RealCheck have additional or specific privacy policies specifics which are detailed in Chapter 7.
+This Bitdefender Privacy Policy applies globally and explains the personal data we process, how and where we may use it, how we protect it, who has access to it, with whom we share it, and how to exercise your privacy rights. This Privacy Policy also complies with the applicable data protection legislation, such as the EU General Data Protection Regulation (GDPR – Regulation 2016/679), as well as other data protection requirements in any of the jurisdictions where Bitdefender operates.
+1. General information
+BITDEFENDER S.R.L. (hereafter mentioned as Bitdefender), with its official headquarters in 15A Sos. Orhideelor, Orhideea Towers Building, 10-12 floors, 6th District, Bucharest, Romania, registered in the Bucharest Trade Register with number J2005020427400, fiscal code RO18189442, e-mail privacy@bitdefender.com processes personal data in agreement with the European Union legislation on data protection (GDPR – Regulation EU 2016/679). Our Data Protection Officer can be reached at dpo@bitdefender.com, Phone: +4021 -206.34.70
+Bitdefender offers data security solutions and services. Our goal is to ensure information and network security by providing quality solutions and services in these areas while also respecting privacy and personal data of customers, Internet users and business partners.
+For this purpose, we collect only that personal data absolutely necessary for the specified purposes, on a best efforts basis. We do not sell your data. For the collected information and data, we strive to apply adequate solutions to anonymize them, or at least to pseudonymize them.
+Our main principle applied to the data we collect is anonymization of all technical data that can be used by Bitdefender only for the specified purposes below. In cases where perfect anonymization of technical data is not possible, the potential identification of a user could be possible only in very limited cases and only by highly skilled IT specialists.
+Personal data according to the European Union legislation definition (GDPR - Regulation 2016/679) means:
+any information relating to an identified or identifiable natural person ('data subject'); an identifiable person is one who can be identified, directly or indirectly, in particular by reference to an identification number or to one or more factors specific to his physical, physiological, mental, economic, cultural or social identity;
+In this context, Bitdefender processes personal data for the following main purposes:
+1. To ensure network and information security by:
+· assuring correct and efficient operation of its solutions and services, according to the technical specifications, and for their improvement, including analyzing the reported IT security issues, delivering and customizing the related services to the user’s needs and developing new technologies;
+· support or counseling services for its users of Bitdefender Home User Solutions;
+2. To conclude and perform the contract with the user, including preliminary steps in this direction;
+3. To make statistical analysis and market studies;
+4. To perform marketing activities for Bitdefender's own needs.
+2. Personal data collected
+Bitdefender may collect personal information from its users from its Home User Solutions in three different ways:
+1. directly provided by a user or a Bitdefender Partner;
+2. indirectly provided by its solutions or other sources, such as:
+· technical data sent by the Bitdefender solutions installed by users
+· publicly available information from data leaks.
+2.1. Personal data directly provided by you or a partner
+a) Currently, you may buy or renew the Bitdefender Home User Solutions from an authorized partner, in which case the personal data collected with this activity is processed directly by that respective partner (which is a data controller for that data collection). When the checkout form is hosted on our website, Bitdefender also processes the information entered in the form in order to offer direct sales support (including cart abandonment reminders by email) and to streamline your experience for opening a new Bitdefender account as detailed below.
+In certain countries, you may also buy Bitdefender Home User Solutions directly from us with an online sale. In these cases, Bitdefender will collect directly from you the necessary data for contracting with you (including payment), for fiscal obligations and certain technical data from your device (IP, browser info and a device identifier) for fraud prevention purposes.
+The necessary data for payment is processed by:
+· the payment services provider Adyen.com, which is a data controller for data on your credit card payment data (which is actually encrypted in accordance with PCI DSS standards). Read their full privacy policy here - https://www.adyen.com/policies-and-disclaimer/privacy-policy. Bitdefender will never have access to your full credit card details;
+· PayPal, if you choose this method of payment, which is a data controller for all payment data, which takes place on their website. Their full privacy policy is available here https://www.paypal.com/webapps/mpp/ua/privacy-full.
+b) When you create an account or login in Bitdefender Central (which is mandatory to activate and manage your services), we might ask your name, surname and/or email address for management of your Bitdefender solutions or services, to contact you with updates, notices, feedback messages and other types or transactional communications, for improvement of the information security of your devices, or to provide support. This email address may be used for marketing purposes, as described below, unless you have opted out.
+c) In certain cases, when you download a trial version of our solutions, we will collect your email address, in order to have a contact method with you, to receive information such as updates, notices, feedback messages and other types or transactional communications or for improvement of the information security of your devices, or to provide support. This email address may be used for marketing purposes, as described below, unless you have opted out.
+d) In addition, when you access the Support Center, we may ask for a valid email address or a phone number to communicate with you in providing support. We use this data to contact you, for contractual purposes, providing a specific user with a license to use our solutions, for solving a request or complaint you addressed to us or for offering technical support. Bitdefender may also ask for other data that may be considered personal data, if those are necessary for solving the information security problem you sought help for.
+Certain chat support services are using Artificial Intelligence (AI)-powered services for providing a faster and better response to your request. In this specific case, you will always be informed before and during the conversation that you are chatting with an AI and you always have the possibility to ask to be transferred to a human support staff. Also, in this case the AI is used only to formulate an answer based on the Bitdefender support public knowledge base and, therefore, your direct personal data will not be processed by the specific AI service.
+The legal basis for processing these data is performance of a contract (Subscription Agreement and Terms of Service for Home User Solutions) to which the data subject is party or in order to take steps at the request of the data subject prior to entering into a contract. The minimum data for creating an account with Bitdefender are a name and email address; without them, it would be impossible for us to offer you our solutions and services. The minimum data for online sales are the mandatory fields in the checkout form, without providing them it would not be possible to buy Bitdefender solutions and services.
+These data used for online sale or licensing information is kept for the duration of the contract, and five years after its expiration to be able to prove or defend any legal complaints on contractual issues.
+The personal data processed in compliance with Bitdefender’s tax and accounting obligations are collected on the legal basis when processing is necessary for compliance with a legal obligation. These data will be kept for a period of 5 years from 1st January of the year following the accounting period to which they relate.
+In case you will pay online by card, this information is collected and processed directly by the payment services provider, and we do not have access to it.
+We will also collect technical data used for fraud prevention purposes for the legitimate interest of preventing fraud.
+The data used for support services is kept for different periods, depending especially if the problem has been solved and the exact method of communication with the support services, but in no case the data will be kept for more than five years after the last communication took place. This period is necessary for Bitdefender to be able to defend any legal complaints on contractual issues that may arise.
+As regards the use of these data for marketing purposes, the legal basis we use is legitimate interest for marketing communications with users of our Home User Solutions (based on Recital 47 of GDPR and Romanian law 506/2004, art 12 (2) that is implementing the EU E-privacy directive), unless those persons have opted out.
+Whenever we note that we use legitimate interest as a legal basis for a specific situation, we rely on internal legal analysis on how we have balanced out the legitimate interest to the interests or fundamental rights and freedoms of the data subject. The analysis is updated if we decide to collect more data, for another purpose or there are new developments that require a new assessment.
+We may use these data for marketing purpose for a maximum period of contractual duration, and five years after the contract is terminated, except if the data subject has opted out from these communications at any moment in time. After this period expires, the data will be deleted or anonymized.
+2.2. Technical data sent by Bitdefender Solution
+When you use Bitdefender Solutions, Bitdefender will process various technical data from the device on which it is installed, as well as from other devices that it interacts with. In most cases, all these technical data may not lead to your direct or indirect identification, but in some very specific cases, computer specialists might be able to identify a specific device or user. Therefore, we treat all such information as personal data and protect it accordingly.
+Thus, depending on the specific Bitdefender Solution used, Bitdefender will process technical data, such as direct technical data from your device (e.g. IP and/or MAC Address) and/or pseudonymized technical data for identifying a device, a user, a file or folder, an app, or a network resource (e.g. URL). We would also process various unique identifiers of alleged malicious users. If you use a Bitdefender Home User Solution that protects your email, some technical data of the email files (mostly from email headers) would be sent to us, including data such as sender, recipient, subject, or attachment.
+This technical data is solely used for the purpose of information and network security by correct and efficient operation of the solutions and services, according to the technical specifications, and their improvement, including by analyzing the reported security issues or responding to specific support questions that requires processing this type of information. This purpose includes activities such as delivering and customizing related Bitdefender solutions and services. In addition, we may use this information for statistical purposes and improving the quality of our solutions.
+The legal basis for processing these data is performance of a contract to which the data subject is part of.
+These data are being stored for limited periods of time, depending on each specific data category and its usefulness for the current information security needs. Based on the current speed of technology, even for malicious data, we will not need them for over 10 years from the day of the collection.
+2.3. Collecting Data from publicly available information (data leaks).
+In the recent years, an increasing number of companies' databases have been involved in incidents leading to user details becoming publicly available. We are constantly analyzing these situations and the public data leaks in order to identify if the exposed records can be used to improve the information security of our users.
+We use this information exclusively for ensuring information security by notifying our users that their emails, passwords or other data might have been hacked in the past, so it is not safe to use them anymore.
+The legal basis for this collection is legitimate interest of our users, of Bitdefender and of any third party to ensure network and information security, by not using credentials that have already been hacked. We do this based on Art 6 (1) f of GDPR and explanations on legitimate interest for information security in Recital 49 of GDPR. These data are being stored for a limited period, depending on its usefulness for the current information security needs. The data subject may always ask us not to collect data about him from data leaks. Based on the current speed of technology, we will not need them for over 10 years from the day of the collection.
+3. Protecting the Personal data
+As a leader in information security services, confidentiality and data protection are of vital importance for us. Access to the collected personal data is restricted only to Bitdefender employees and data processors that need access to this information. All Bitdefender information security policies are ISO 27001 and SOC2 Type2 certified.
+Bitdefender may use other companies to process the collected personal data. These companies are considered data processors and have strict contractual obligations to keep the confidentiality of the processed data and to offer at least the same level of security as Bitdefender. Data processors have the obligation not to allow third parties to process personal data on behalf of Bitdefender and to access, use and/or keep the data secure and confidential.
+Bitdefender may host or transfer personal data in the European Union (EU) or any other jurisdiction, which offers adequate level of personal data protection according to European Union standards (art 45 GDPR) or other appropriate safeguards, including Standard Contractual Clauses (art 46.2 GDPR).
+Due to confidentiality obligations and security requirements, the specific information regarding the name and details for each processor used will be provided only to competent authorities.
+We use the following types of data processors:
+· hosting services in EU and USA;
+· support channel communications in EU and USA;
+· e-commerce support providers in EU and USA;
+· marketing services (including email marketing) in EU and USA.
+Access to certain sections of Bitdefender websites is protected by a username and password. We recommend not revealing this password. Bitdefender will never ask for your account's password via any kind of messages or phone calls. We advise not to disclose your password to anyone asking you to do so. If possible, we also recommend to log out of your online services account after each session. We also advice to close the browser window after navigating or using Bitdefender services.
+Unfortunately, transferring data over the Internet cannot be 100% secure. Consequently, despite our efforts to protect personal data, Bitdefender cannot assure or guarantee the security of the information transmitted by the user until the information is on our servers. Any information you transmit is done on your own risk.
+4. Who has access to personal data
+In principle, Bitdefender will not reveal any personal data about its users to third parties without the exceptions mentioned above.
+Exceptionally, Bitdefender may reveal personal data to:
+4.1. Competent authorities, upon their legal request according to the applicable laws or when this is necessary to protect the rights and interests of our clients and Bitdefender.
+4.2. Bitdefender may allow limited access to its Partners, which are presented on Bitdefender's Partners webpage. Access will be allowed only to certain data related to its referred clients and just for fulfilling the contractual obligations between Bitdefender and its Partner for selling or for support of Bitdefender solutions. All Partners have strict contractual obligations to keep the confidentiality of data and to offer at least the same level of security as Bitdefender. These Partners have the obligation not to allow third parties to access personal data processed on behalf of Bitdefender.
+4.3. Bitdefender subsidiaries in your country may send some personal information to its main company - BITDEFENDER S.R.L, in Romania.
+In addition, when you use Bitdefender Home Solutions or access Bitdefender Central and you are asked to give information about yourself, you will reveal this information only to Bitdefender. The only exception is when the information is offered in partnership with another service (for example online payment with the payment processors mentioned above or to create a Bitdefender account with Facebook login, Google+ login, Microsoft login or Apple ID).
+Each time when such a service is offered in partnership with another provider you will be properly notified. If you wish this data not to be accessed or used you can choose not to allow data transfer via this particular service.
+If you choose to accept data sharing, it is important to mention that the service partners may have separate data collection and privacy policies. Bitdefender has no control and cannot offer guarantees regarding all the legal aspects that these independent confidentiality practices entail.
+5. How to correct personal data related errors
+When you create an account on Bitdefender websites or for one of our services, a confirmation email with your account details will be sent. The confirmation email will be sent to the email you supplied and it may describe the ways in which you can modify or delete the account you created. We advise you to keep this confirmation email since it contains useful information regarding access to our services. Any requested modification will be solved in maximum 15 days from when the written request of the user has been received.
+6. Your personal data rights
+According to European Union applicable data protection legislation (GDPR), data subjects shall have the right to access to data, rectification, erasure, restriction of processing, objection to processing and right to data portability.
+For any data processing based on consent, you have the right to withdraw the consent at any time.
+For exercising these rights or any other privacy rights that might be applicable according to your location, you may send a written request, dated and signed to the above-mentioned Bitdefender headquarters or via email to AC:G24JURecj3:E5676?56C]4@∬.
+Data subjects are not subject to decisions based solely on automated processing, including profiling, which may produce legal effects or similarly significantly affects them.
+You also have the right to lodge a complaint with a competent supervisory authority on data protection.
+7. Additional information regarding personal data collection of certain Bitdefender services and solutions
+7.1. Bitdefender mobile security features
+7.1.1. Anti-theft services of Bitdefender solutions
+This chapter complements the privacy policy with specific information regarding processing information which may be personal data and which is collected by Bitdefender for the anti-theft services.
+Part of the Bitdefender solutions include the anti-theft service option designed for both mobile phones solutions as well as for tablets and laptops. Once activated and configured, the anti-theft option can track in real time via geo-localization the lost or stolen device. This Bitdefender service offers the localization option as well as other connected options such as remote blocking of the device, deleting the entire content of the device or taking photos of the person who is accessing the phone without authorization. More details are available here.
+In case the anti-theft services are activated, Bitdefender may receive personal data such as geo-localization data either from GPS, GSM cells, Wi-Fi usage or IP address. The only purpose of processing these data is the functioning of the anti-theft service offered by Bitdefender. For identifying the precise location, we may use third party services, as mentioned in Chapter 3.
+All geo-localization information are kept for as long as the anti-theft service is active, but they will be deleted when the service is deactivated.
+Anti-theft services may be remotely activated from your Bitdefender system account (known as Bitdefender Central). For this reason, it is highly important for your privacy and personal data protection not to reveal your password to unauthorized persons. For more advice in this regard, please see Chapter 3 of this document.
+Thus, the owner of a Bitdefender account may have administration rights for Bitdefender services and solutions. Therefore, on the devices where the anti-theft services are installed, he/she can operate commands remotely. In this regard, the entire responsibility of the account owner is to ensure that he/she can fulfill these actions from a legal standpoint and that he/she has the right to know the location, to take pictures remotely, to block or delete the device' content or to interact in any way with it. Therefore, we recommend activating the anti-theft service exclusively on your own devices or on devices where you have the right to legally do so.
+7.1.2. Scam Protection, Chat Protection and App Anomaly
+Depending on the exact features used and on the device permissions allowed by the user, we may process installed application information, check for app anomalies, and analyze browser URLs or links in notifications or messages (if activated). In case of a malicious detection being identified, we may collect the infected messages in order to improve the detection and protect you and other users in a better way.
+If you activate the Scam Protection or Scam Protection Pro features, this will scan the links in newly received SMSs and in your mobile notifications (depending on your phone and personal settings) in order to warn you of phishing, scam, and fraud attempts.
+In order to use the Chat Protection feature, you must activate it and allow Bitdefender to use the Accessibility feature from your device settings. This allows us to automatically scan messages from certain chat applications (details on the Bitdefender Mobile Security for Android product page) in order to scan and identify links and indicators of possible fraudulent activities and alert you accordingly.
+The malicious links and the message containing the link are collected and kept for improving detection. In most cases the URL may not lead to your direct or indirect identification, but in some very specific cases, there is a low possibility that a specialist might be able to identify a specific user. Therefore, we treat all this collected information as personal data and protect it as such for a limited period of time.
+As part of Chat Protection, the Enhanced Scam Detection capabilities help identify both known and emerging scam patterns. These capabilities rely on advanced technologies such as machine learning models and real-time threat intelligence, enabling contextual and behavioral analysis of potentially fraudulent content. In order to use Enhanced Scam Detection, you must activate it separately; this feature requires your explicit opt-in consent. For this purpose, Bitdefender scans the messages by processing limited categories of data including: message metadata and technical attributes (such as sender identifiers, timestamps, and message structure);suspicious URLs, and embedded content; attachments or associated technical elements where relevant for detection; keywords and linguistic or structural indicators associated with scam or fraud patterns and contextual and behavioral indicators derived from message interactions.
+In addition, depending on the scam category detected, Bitdefender may process phone numbers (and names if from a business account, for unknown contacts only), financial data such as IBANs or crypto wallet identifiers (potentially used or requested by the scammer to enable fraudulent financial transactions), filenames and file sizes, ID numbers or legal names (potentially used or requested by the scammer for impersonation or enablement of services requiring official authentication), email addresses provided in the conversation, and IP addresses.
+Data about financial transactions will be pseudonymized whenever possible. Where necessary to improve detection accuracy and ensure network and information security, messages flagged as malicious and data related to suspected scam activity may be transmitted to Bitdefender infrastructure for further analysis and detection improvement, which will be kept for no more than two years. Such data is subject to appropriate safeguards, including pseudonymization.
+The data collected may be processed using AI tools and models provided by third-party providers. Anonymized collected data may also be used for AI training purposes, including detection and false positive/false negative mitigation. AI models are not trained on any personal data.
+In case you activate the App Anomaly feature, you must also allow Bitdefender to use the Accessibility feature from your phone settings in order to provide the required service of the feature. This feature will monitor events triggered by applications installed on the device, in order to detect any new malicious behavior from more advanced attackers and consequently alert you. Data will be kept for a maximum of 1 year from the moment of collection.
+7.2. Parental Control
+This chapter complements the privacy policy with specific details regarding processing information which may be personal data and which are collected by Bitdefender for the Parental Control.
+Some Bitdefender solutions include a parental control option. If you buy such solutions or activate this option, you have the possibility to monitor your child's activity and to restrict access to certain, applications, websites or Internet services. This is only possible on supported devices (for example computers or phones) for which you have installed and activated the specific Bitdefender solution.
+The parental control services option settings are managed from the web interface through which you access your Bitdefender account (known as Bitdefender Central) and from the child’s device. More details regarding the functionalities of this solution are available on our dedicated webpage.
+Before you can activate the parental control services, Bitdefender will ask certain data for creating a profile – name, birthdate and a profile image (optional). The name, as well as the profile image, will be used exclusively for device identification purposes and you do not have to give your child's full name and you may use a generic profile image as we suggest. Age and sex are necessary only for determining the default level of online protection offered by this solution, which can be also later changed or configured by the account administrator. Parental Control contains tailored features activated by default based on the age of the child’s profile, to get the recommended protection for every age group, such as: Toddler (for children aged between 0 and 6 years), Kid (for children aged between 7 and 13 years) and Teen (for children aged between 14 and 16 years).
+Where this Bitdefender parental control solution is installed and an active profile is associated with the device, Bitdefender may collect, exclusively for the purpose of providing parental control services, including for display in the parent’s account, detailed information about the use of the device such as: visited websites, used applications and software and their usage period, and the last geo-localization information.
+The collected information depends on the settings configured by the parent in Bitdefender Central and on the child’s device. The only purpose of collecting this data is reporting to you, the parent. We do not use children information for their identification or monitoring Internet access by us. We also limit more strictly the duration for which the data from the child’s device is processed – for example the geo-location is limited to the last information available (and no more than 90 days) and the visited domains are only processed for maximum 1 hour if they are not blocked or marked as malicious.
+We do not transmit to third parties the above-mentioned information for marketing purposes or any other information which could lead to identifying your children.
+When processing this data from your child's device, Bitdefender acts as a technical intermediary. Therefore, the responsibility of a notice to your children regarding the installation of this software and the way the personal data is processed is exclusively up to you. You are the only one who may activate this option and specify which type of personal information you wish to be collected.
+As the Bitdefender account owner has administration rights for Bitdefender solutions and services, which includes parental control it is the parent/legal guardian’s full responsibility for the surveillance activity legitimacy which includes the right to know the location, to block the content or applications from the child’s device. Therefore, we recommend activating Parental Control exclusively on your minor child's device or where you have the legal right to do so, based on the applicable law. You are informed that any illegal monitoring of online behavior or communications may be a crime and we do not recommend activating Parental Control on devices used by persons who are over 16 years old, or otherwise in circumstances in which use of Parental Control is illegal.
+7.3. VPN services
+This chapter completes the rest of the privacy policy with specific details regarding processing information which may be personal data and which are collected by Bitdefender through its VPN services.
+Applying the data minimization principle, we collect for this service only randomly generated or hashed user and device IDs, IP addresses and randomly generated tokens to establish VPN connection for the sole purpose of providing the VPN service. For this service, we use IPVanish as data processor who processes data on behalf of Bitdefender in accordance with Bitdefender's instructions and for the sole purpose of providing VPN services to users.
+We may process device location solely for the purpose of offering Bitdefender VPN functionalities such notifications of unsafe Wi-Fi or the auto-connect feature. We do not store any details regarding your location or online activity nor do we share them with other entities.
+7.4 Bitdefender BOX
+This chapter completes the rest of the privacy policy with specific details regarding processing information, which may be personal data that are collected by Bitdefender Box.
+If you use Bitdefender Box, the device will scan all the traffic in your network for malicious activity. This means that we will collect detailed technical data from all your smart devices that are connected to your network that will be used only for the purposes specified in Chapter 2.2. above.
+In most cases, these technical data may not lead to your direct or indirect identification, but in some very specific cases, computer specialists might be able to identify a specific user. Therefore, we treat all such information as personal data and protect it as such.
+If a new device from other users is connected to your network, Bitdefender Box will also analyze network traffic from that device. It is your responsibility as network owner to inform the other users of your network that you use Bitdefender BOX for the protection of the network traffic and therefore their traffic will also be analyzed, as described above.
+7.5 Bitdefender Digital Identity Protection
+This chapter completes the rest of the privacy policy with specific details regarding processing information, which may be personal data that are collected by Bitdefender Digital Identity Protection.
+When you are using Bitdefender Digital Identity Protection service, whether or not you are using only this service or along with a Bitdefender anti-malware Solution, we ask you to provide us your name, e-mail address as well as non-mandatory additional information such as telephone number, home address, passport number, driver’s license number, gamer-tag, partial credit and/or debit card data, partial bank account number, partial Social Security Number and/or National ID number, partial insurance and/or medical insurance number for the purpose of providing you information security by:
+1. providing you information related to breaches of your personal data and sending you instant alerts about any new breaches (you get instant alerts if your personal information shows up in a new data breach),
+2. providing you the option of Continuous Identity monitoring in order to reduce false alarms or duplicated alerts we send you.
+For any breach of your data, Bitdefender Digital Identity Protection will alert you of the findings and you will be advised on the steps to take to reduce the risks of account take-over and new account fraud. Such findings may be references regarding e-mail, password, address, phone number, SSN, credit cards, travel documents, criminal records and medical records – without displaying the full value of such data unless such data has been provided by end user for data breach monitoring service, otherwise we are displaying only the reference that the data exists in the data breach and in certain instances partial (masked) data allowing the end user a hint for a better identification of their own data.
+We provide you this service by using Constella as data processor who processes data such as name, e-mail address and phone number on behalf of Bitdefender in accordance with Bitdefender's instructions and for the sole purpose of providing you Bitdefender Digital Identity Protection services. The information that is provided to you via Bitdefender Digital Identity Protection is collected as Data Controller by Constella Inc https://constella.ai/website-privacy-policy/ and as such, you can exercise your rights regarding this personal at AC:G24JURecj4@?DE6==2:?E6==:86?46]4@∬.
+Bitdefender provides phone number verification services thought Twilio, acting as a data processor. Twilioprocesses data such as your phone number on behalf of Bitdefender in accordance with Bitdefender's instructions and for the sole purpose of verifying that the phone number provided by youbelongs toyou, by sending a one-time verification code that the you must enter to validate ownership.
+Digital Identity Protection may also provide insights into your digital footprint. To enable this functionality you have to connect to your Gmail and/or Outlook account (via Google API and Microsoft API). Bitdefender will not have access to the associated data withthese accounts without your explicitconsent.
+Based on the email data made available through these integrations, Bitdefender identifies organizations that have interacted with you by email and that may hold information related to you, in order to provide you information regarding your digital footprint and its potential impact on your online exposure.
+Specifically, Bitdefender analyzes metadata associated with incoming emails (such as sender domain) in order to identify organizations and service providers that have interacted with you and may potentially process or hold personal data relating to you.
+Bitdefender only processes the minimum amount of data necessary for this purpose and does not access or analyze the content of emails beyond what is required to identify the sender and its associated service.
+We store the received information for as long as you have the service active and for an additional two months after the service end, in order to display to you the status of your information, allow you to renew the service while retaining your data during this period and to properly notify you or give you instant alerts if a change regarding your Digital Footprint has occurred or a data breach in which you are affected. Each time new information appears, we will display it in the Digital Identity Protection section of your Bitdefender Account.
+7.6 Bitdefender password management solutions: Bitdefender Password Manager and Bitdefender SecurePass
+This chapter completes the rest of the privacy policy with specific details regarding processing information, which may be personal data that are collected by Bitdefender password management solutions.
+When you are using such solution, it helps you remember credentials (usernames, passwords, PIN etc.) so that you can safely use strong unique passwords for every service you may access, as provided in the terms and conditions of this service or in the user’s guide.
+You will have full control all the time to your personal data in the Passwords vaults which may contain usernames, emails, passwords, secret keys, notes, addresses, personal IDs and credit card data. Vaults are not accessible to anyone, except the user; Bitdefender does not have access or control of passwords. All passwords are encrypted with a key, that only the user of the service has knowledge about, in one single place, with complex master password requirements.
+The user is able to use the features of Bitdefender password management solutions after installation and sign-in in the browser extensions (Chrome, Firefox, Edge, Safari) and/or the mobile app (iOS and Android). The user will be prompted to use the account credentials stored in the password management solution whenever they browse and land on the website that requires the log-in. Bitdefender password management solutions do not store nor transmits the Master Password or the security key, which means only the user has access to the user’s vault.
+Bitdefender provides two password management solutions: Bitdefender Password Manager provided through a third-party provider and Bitdefender SecurePass, a password manager built on open-source technology.
+SecurePass is designed for easy and secure password management; it lets you create, save, autofill, and share strong passwords effortlessly. Available on both computers and smartphones, SecurePass works with Chrome, Firefox, Edge, Safari, and offers apps for Android and iOS, plus a web client for managing passwords from any browser. SecurePass uses end-to-end encryption and requires both your Bitdefender login and master password to access your data.
+7.7 Bitdefender Identity Theft Protection
+This chapter completes the rest of the privacy policy with specific details regarding processing information, which may be personal data that are collected by Bitdefender Identity Theft Protection. Important note: this service is available only for US residents who have a SSN (social security number).
+When you activate Bitdefender Identity Theft Protection service we ask you to provide us your e-mail address for the purpose of providing you a functionality that provides ongoing monitoring, rapid alerts, and recovery services for protection against theft of your identity.
+This functionality is included in the Bitdefender Solution, a subscription based service, subjected to particular terms and conditions provided to you in the Subscription Agreement. We provide you this service by virtue of a third party software (“IdentityForce – a TransUnion brand”) and it is licensed to you under the respective third party licenses mentioned herein: https://bitdefender.identityforce.com/terms-of-use. By accepting the Agreement for IdentityForce, You will have a direct relationship with Sontiq, a TransUnion brand and you will be informed about the collection and processing of personal data within their respective privacy policy: https://bitdefender.identityforce.com/privacy. Should you have any inquiries about Identity Theft Protection please email at 3:E5676?56CURecj:56?E:EJ7@C46]4@∬ or on other communication channels stated in their privacy policy.
+Bitdefender will transfer your e-mail address to Sontiq, a TransUnion brand, for the purpose of registration of the purchased service Bitdefender Identity Theft Protection. Data is transferred on a one-off basis for the purposes of creating an account for IdentityForce, identity monitoring services such as dark web monitoring for the purpose of Identity Theft Protection. This transfer of data is outside of EU for which Bitdefender is Data Exporter as Data Controller and Sontiq, a TransUnion brand is Data Importer as Data Processor. If you contact the provider before the specific registration procedure for this service, they will handle your data (e-mail address, name and surname) as Data Processors for the following purposes: (1) the handling of phone calls with proactive inquiries, enrollment problems, or fraud issues; (2) monitoring of accounts of each user that enrolls and consents to the terms of use for the provision of services; and (3) any associated assistance and fraud remediation involving your personal data.
+Once you register and accept IdentityForce terms of use and privacy policy, Sontiq, a TransUnion brand, will act as Data Controller and they may ask you to provide other personal data, including SSN which is necessary for fulfilling the registration for the services they provide according to their terms. IdentityForce may process financial data or government issued identification numbers. Bitdefender however does not have access to financial data of the users nor to government identification numbers. IdentityForce is a software that includes monitoring the dark web for data sets provided directly by data subjects, including account numbers, government issued ID numbers, and other data. In particular cases it may include the management and remediation of fraud cases related to your identity by a service specialist based in Canada or the US.
+Should you have any inquiries about your personal data please email them AC:G24JURecjD@?E:B]4@∬ or on other communication channels stated in their privacy policy.
+Personal data for this service is only retained for the duration it is needed by the user but no longer than one (1) year following the close of a case or cessation of monitoring.
+7.8 Bitdefender Scamio
+Bitdefender Scamio is a Bitdefender AI-based chatbot that aims to help users to scan for possible scams only text descriptions of potential security threats, URLs associated and screenshots that may contain information about suspicious activities, based on the data provided by the consumer. Scamio may also provide suggestions about relevant Bitdefender services, depending on the context. This purpose includes any feedback provided by the consumer that is shared with Bitdefender, when using this service or by contacting Support.
+Bitdefender Scamio focuses on an automated process of only parts of the information (some of which may be considered personal data) derived from the data provided by the consumer, to check it for potential threats included in the Bitdefender databases. In case when further analysis is needed or when providing feedback, including contacting support, the data provided by the consumer may be processed further, to ensure the information security.
+For the automated processing, the data is retained for maximum two months from sending of the message. For other types of data processing, data is retained for limited periods of time, depending on specific activities (e.g support, feedback, detailed analysis of technical data). In the case of integration of Bitdefender Scamio with other third-party chats, other terms may apply.
+Bitdefender Scamio does not demand actively for personal data from the consumer, and it is trained to notify the consumer not to share its personal information in this context. Also, it does not have access to any personal data, except those shared directly by the user, and thus is not able to monitor or scan any device or system.
+Bitdefender Scamio provides generic advice based on the input received from the consumer and does not take automated decisions that would produce legal effects that would significantly affect the consumer.
+Bitdefender Scamio was developed and is functioning based on the Azure OpenAI Service, but your data is not available to OpenAI. Bitdefender will also use other data processors for the only purpose of providing this service.
+In case when the user uses Bitdefender Scamio in a chat provided by other third party (for example Facebook Messenger, Whatsapp or Telegram), the information shared in the conversation with Bitdefender Scamio may be accessible to that specific third party. Please check the appropriate policies of these providers to understand what personal data is shared in this context and the specific retention period. If the user does not wish to use Bitdefender Scamio in such a chat, it may access Bitdefender Scamio at scamio.bitdefender.com.
+This Bitdefender AI-based chatbot has not used any personal data for its training and it is not planning to use the personal data collected via Bitdefender Scamio to train or improve its AI capabilities. Bitdefender may use anonymized information for further improvement of Bitdefender Scamio and it will not share this anonymized data with any third parties (including OpenAi).
+7.9 Bitdefender Security for Creators
+Bitdefender Security for Creators is a solution designed to safeguard Content Creators present on social media platforms, such as YouTube and META, which includes several features from other Bitdefender Home User Solutions.
+This solution includes a specific security protection of your YouTube or META account, which is based on access via the YouTube API Services. Bitdefender will have access to all information in your YouTube account (such as channel name, channel ID, provider user ID) or META account (such as username, ID and account type) in order to view them, display them in Bitdefender Central, and alert you if something suspicious appears in relation to this account. The data is updated regularly and is kept for the duration of your subscription for Bitdefender Security for Creators or for the duration of the API access, and maximum 30 days afterwards.
+This data is used by Bitdefender for ensuring information security of your account and is not shared with any third parties (except for hosting providers, which are Bitdefender’s processors).
+In addition to your privacy rights – explained in chapter 6 – you also always have the right to revoke the access of Bitdefender to your data via the Google`s security settings page, META security settings page (for Facebook or Instagram) or your Bitdefender Central account. Feel free to contact us with questions or complaints about our privacy practices.
+Please note that all YouTube’s data processing is covered by the Google Privacy Policy, whereas META’s data processing is covered by the META Privacy Policy.
+7.10 Bitdefender Ultimate Small Business Security
+This chapter completes the rest of the privacy policy with the specific details regarding processing information when you are invited or are using the Ultimate Small Business Security plan as a member. Please note that your plan also includes access to different Bitdefender Home User Solutions, so other sections of this document will also apply accordingly.
+If you have been invited to be enrolled under the Ultimate Small Business Security plan, please note that we have received your name and email from the owner or administrator of your plan. Bitdefender uses that information only to invite you to this Bitdefender solution in the name of your plan administrator.
+If you accept the invitation, please note that certain security information in your Central account (such as protected devices and status or generic information on security incidents and related technical data) will also be visible to the owner and/or administrator of Ultimate Small Business Security plan. The owner and/or administrator will also have the possibility to perform a limited set of security-related actions on the enrolled devices (activate/deactivate subscription, scan device).
+Bitdefender will only process your data for the purposes explained above in this document as an independent data controller. If you have any further questions on how your personal data might be used by the owner and/or administrator of the Ultimate Small Business Security plan, or if the invitation to enroll under this subscription plan is related to the employer-employee relationship you have with the owner of the plan, please contact them directly as they are responsible under data protection regulations as an independent data controller.
+7.11 Bitdefender Family Plan
+This chapter completes the rest of the privacy policy with the specific details regarding processing information when you are invited or are using the Bitdefender Family plan as a member. Please note that your plan also includes access to different Bitdefender Home User Solutions, so other sections of this document will also apply accordingly.
+If you have been invited to be enrolled under the Family plan, please note that we have received your name and email address from a Family Manager of your plan. Bitdefender uses that information only to invite you to this Bitdefender solution in the name of your Family Manager.
+If you accept the invitation, please note that certain security information in your Central account (such as protected devices and status or generic information on security incidents and related technical data) will also be visible to the managers of the Family plan. Any manager will also have the possibility to perform a limited set of security-related actions on the enrolled devices (such as activate/deactivate subscription, scan/remove device). If you do not accept the invitation, your e-mail address will be promptly deleted. We will collect again your e-mail address if the Family Manager sends you another invitation.
+Bitdefender will only process your data for the purposes explained above in this document as an independent data controller for the purposes explained above. If you have any further questions on how your privacy or your personal data might be used by the managers of the Family plan, please contact them directly, as this data processing would be part of your household activities.
+If you are a Family Manager and add a Child profile or a Teenager account, you will have the possibility to add different Bitdefender Home User Solutions to their devices. All these solutions are not specifically designed to be installed and managed by minors, so they will need to be installed, configured and managed by you for them, as a Family Manager.
+7.12. Bitdefender Link Checker
+This solution is made available directly on the Bitdefender website and can be used independently, without requiring the creation of or access to a Bitdefender Central account. Accordingly, the provisions of this Privacy Policy that relate specifically to creating, using, or managing a Bitdefender Central account do not apply to the use of this solution, unless the user separately chooses to create or log into such an account.
+For this solution, Bitdefender processes only the personal data and technical data explicitly described in this chapter. No other personal data is collected or processed in connection with the use of this solution unless the user has explicitly consented to such processing, in accordance with applicable data protection laws.
+In addition, when accessing this solution via the Bitdefender website, certain data may be collected and processed in accordance with the Bitdefender Privacy Policy for Websites, such as online identifiers (for example, IP address, device or browser-related information) that are automatically generated as part of standard website access and security operations. Further details on this processing are available in the Bitdefender Privacy Policy for Websites, available at:
+https://www.bitdefender.com/en-us/site/view/legal-privacy-policy-for-bitdefender-websites.
+Bitdefender Link Checker does not require you to provide identification or account-related information in order to receive an answer. When you submit a URL for verification, Bitdefender processes the submitted URL and related technical indicators to determine whether the link is associated with malware, phishing, fraud, or other security threats.
+The processed URL and related technical data are also used to improve Bitdefender’s anti-malware and threat detection technologies, including for enhancing detection models, threat intelligence databases, and security analytics used across Bitdefender solutions.
+The submitted URL and related technical data are retained in accordance with the retention period applicable to technical data, as described in this Privacy Policy, and are subject to Bitdefender’s security and privacy safeguards.
+7.13. Bitdefender Reverse Phone Lookup
+This solution is made available directly on the Bitdefender website and can be used independently, without requiring the creation of or access to a Bitdefender Central account. Accordingly, the provisions of this Privacy Policy that relate specifically to creating, using, or managing a Bitdefender Central account do not apply to the use of this solution, unless the user separately chooses to create or log into such an account.
+For this solution, Bitdefender processes only the personal data and technical data explicitly described in this chapter. No other personal data is collected or processed in connection with the use of this solution unless the user has explicitly consented to such processing, in accordance with applicable data protection laws.
+In addition, when accessing this solution via the Bitdefender website, certain data may be collected and processed in accordance with the Bitdefender Privacy Policy for Websites, such as online identifiers (for example, IP address, device or browser‑related information) that are automatically generated as part of standard website access and security operations. Further details on this processing are available in the Bitdefender Privacy Policy for Websites, available at:
+https://www.bitdefender.com/en-us/site/view/legal-privacy-policy-for-bitdefender-websites
+Bitdefender Reverse Phone Lookup allows you to submit a phone number in order to obtain information about a potential scam, fraud, or unwanted communications associated with that number. When a phone number is submitted, Bitdefender processes the number and associated technical and contextual indicators to assess risk patterns and provide a response to the user.
+The processed data and related technical data are also used to improve Bitdefender’s anti-malware and threat detection technologies, including for enhancing detection models, threat intelligence databases, and security analytics used across Bitdefender solutions.
+Any personal data or technical data processed in this context is retained in accordance with the retention period applicable to technical data under this Privacy Policy and is handled in line with Bitdefender’s security and privacy safeguards.
+7.14. Bitdefender AI Skills Checker
+This solution is made available directly on the Bitdefender website and can be used independently, without requiring the creation of or access to a Bitdefender Central account. Accordingly, the provisions of this Privacy Policy that relate specifically to creating, using, or managing a Bitdefender Central account do not apply to the use of this solution, unless the user separately chooses to create or log into such an account.
+For this solution, Bitdefender processes only the personal data and technical data explicitly described in this chapter. No other personal data is collected or processed in connection with the use of this solution unless the user has explicitly consented to such processing, in accordance with applicable data protection laws.
+In addition, when accessing this solution via the Bitdefender website, certain data may be collected and processed in accordance with the Bitdefender Privacy Policy for Websites, such as online identifiers (for example, IP address, device or browser-related information) that are automatically generated as part of standard website access and security operations. Further details on this processing are available in the Bitdefender Privacy Policy for Websites, available at:
+https://www.bitdefender.com/en-us/site/view/legal-privacy-policy-for-bitdefender-websites
+Bitdefender AI Skills Checker enables users to submit content or queries in order to receive an assessment or feedback generated using artificial-intelligence-based mechanisms. In the course of providing this functionality, Bitdefender processes the submitted input and related technical data necessary to generate a response and to ensure the security of the service.
+Such data and related technical data are also used to improve Bitdefender’s anti-malware and threat detection technologies, including for enhancing detection models, threat intelligence databases, and security analytics used across Bitdefender solutions.
+The retention of this data follows the retention rules applicable to technical data, as defined in this Privacy Policy, and is handled in line with Bitdefender’s security and privacy safeguards.
+7.15. Bitdefender Agent Skill Scanner
+Bitdefender Agent Skill Scanner allows you to submit AI skills (archives, folder, or links to public repositories) for automated security analysis and risk assessment.
+When you use the Bitdefender Agent Skill Scanner, we process data that you voluntarily submit, which may include:
+· The content of the submitted skill as archive, folder or link
+· Technical metadata generated during the analysis (such as scan date, result, severity level, or identified risk patterns)
+· Technical identifiers that may appear in the submitted content, such as IP addresses, URLs, email addresses, system paths, environment variable references, or similar technical elements
+The submitted content may occasionally contain personal data embedded by you or third parties (for example, email addresses or IP addresses, crypto wallet included in the analyzed materials). Bitdefender does not require or encourage the inclusion of personal data in the materials you submit.
+Submitted content and related analysis results are retained only for as long as necessary but no longer than 5 years to provide the service, ensure its security, comply with legal obligations, and resolve disputes. Retention periods are defined based on operational and legal requirements and are periodically reviewed.
+We process the data for the following purposes: (i) to analyze the submitted content for security risks, malicious behavior, or vulnerabilities; (ii) to generate an assessment report summarizing the analysis results, including detected issues and risk indicators; to improve Bitdefender’s threat detection models, security technologies, and analytical capabilities.
+As part of delivering certain reports, Bitdefender may use automated analysis technologies, including artificial intelligence or machine learning models, to perform in-depth analyses upon user request and to transform technical scan results into structured or natural-language summaries.
+Access to the submitted data is limited to authorized Bitdefender personnel involved in operating, maintaining, or supporting the Bitdefender Solution and trusted service providers acting on Bitdefender’s behalf (such as infrastructure or AI technology providers), strictly under contractual confidentiality and data protection obligations. Bitdefender Agent Skill Scanner operates using infrastructure located in the European Union. Where service providers or processing activities involve transfers outside the EU/EEA, Bitdefender applies appropriate safeguards, such as standard contractual clauses or equivalent mechanisms, in accordance with applicable data protection laws.
+Bitdefender does not sell the submitted data and does not permit service providers to use it for their own purposes.
+7.16. Bitdefender RealCheck
+Bitdefender RealCheck (“RealCheck”) is a mobile deepfake detection solution that allows users to upload video files from their device or submit public URLs (e.g., from social media platforms such as YouTube or X) for automated analysis. RealCheck uses AI technologies and third-party services to provide a probability-based assessment indicating the likelihood that content was generated or manipulated using AI, as well as an automated classification of apparent deceptive intent. Results are expressed as likelihood indicators and risk scores. RealCheck is provided for informational purposes only and does not include any automated decision making.
+When using RealCheck, Bitdefender collects and processes: videos uploaded by user for analysis, URLs submitted by user, usage metadata, device name, Mac address. Submitted media content by the user may contain facial images, voice recordings, of individuals appearing in the content. Bitdefender does not intentionally collect special category data under Article 9 GDPR; however, such data may be incidentally present in user-submitted content.
+Collected data is processed for the purpose of: analyzing submitted content for indicators of AI generation or manipulation, assessing deceptive intent of the media content, identifying public figures/celebrities appearing in content, generating analysis reports, and managing usage and history.
+Analysis is performed through automated AI-based pipelines, including large language models (LLMs). To deliver RealCheck, Bitdefender engages third-party service providers, including AI providers, as data processors with whom Bitdefender has concluded data processing agreements. AI models are not trained on any personal data.
+User’s uploaded media files are deleted immediately after analysis is completed, Bitdefender does not retain copies of submitted media files beyond the duration necessary to perform the analysis. The URLs will be kept for detection and solution improvement without connecting it to the user’s identity. Analysis reports are retained for the duration of the user’s active subscription and deleted upon account termination or earlier based on the user’s actions in the history page.
+Bitdefender does not monitor, validate, or report user-submitted content and does not act as a law enforcement authority. Users will make sure they have all necessary rights and permissions to upload, transmit, and submit the content for analysis and they retain any obligation to report suspected unlawful activity in submitted content to competent authorities.
+7.17. Bitdefender AI Guardian
+Bitdefender AI Guardian reviews actions that an AI agent application installed on your device attempts to perform, and if necessary, flags, or blocks them. Bitdefender AI Guardian reviews only those actions that the AI agent application makes observable through its available interfaces, together with requests passing through a local proxy for connected tool servers.
+When you use Bitdefender AI Guardian, we process data generated when an action is reviewed, which may include: the instructions given to the AI agent application and the reasoning it produces; the name and parameters of the requested operation, command-line text, and the file paths involved; the content of AI skills, plugins, or tool server catalogues that the agent attempts to install or use; names, versions, and hashes of software packages the agent attempts to install; web addresses and IP addresses the agent attempts to access; technical identifiers that may appear in the reviewed content, such as IP addresses, URLs, email addresses, system paths, or environment variable references; and technical data about your environment, such as operating system version, Bitdefender AI Guardian version, and the name and version of the AI agent application in use.
+Most analysis is performed locally on your device. To detect attempts to manipulate the AI agent application through instructions hidden in the content it processes, Bitdefender AI Guardian analyzes prompts, instructions, and the reasoning steps produced by the AI agent. This analysis is performed entirely on your device, by local components that operate offline.
+The content of your prompts and of the AI agent's reasoning is never transmitted to Bitdefender or to any third party. The content reviewed on your device may contain personal data, including access credentials that are in your prompts or in the commands, file paths, and files that the AI agent application acts upon. Bitdefender does not require, encourage, or seek the inclusion of personal data in the content reviewed and does not use it to identify you. Bitdefender does not collect special category data under Article 9 GDPR even if such data may be incidentally present in the content reviewed.
+When an action is blocked or flagged, Bitdefender AI Guardian sends a security event to Bitdefender recording the type of protection that acted, whether the action was blocked or flagged, the rule that matched, the name of the AI agent application and of the tool involved, and the specific indicator that triggered the detection; the reviewed content itself, including your prompts, the agent's reasoning, and the arguments of the tool call, is not sent to Bitdefender infrastructure. This reporting is important and useful for future flag or block actions and it is used by Bitdefender to improve its threat intelligence technology.
+Bitdefender AI Guardian keeps an encrypted record on your device of actions it blocked or flagged. This record is kept for up to 90 days, after which the oldest entries are deleted automatically. You can view it using the Bitdefender AI Guardian command-line tool, and it is deleted when you uninstall Bitdefender AI Guardian. Statistics about connected tool servers are kept on your device for up to 30 days.
+During the BETA period, Bitdefender AI Guardian records diagnostic log files on your device that may contain the content reviewed, including instructions, output, and commands. These files are stored on your device and are not transmitted to Bitdefender. They are not removed automatically and are not removed when you uninstall Bitdefender AI Guardian; you can delete them yourself at any time from your user Library folder. In the general release version, diagnostic logging will be turned off by default and you will be able to turn it on and off. Data transmitted to Bitdefender services and the related analysis results are retained in accordance with the retention rules applicable to technical data, as defined in this Privacy Policy.
+Bitdefender may use automated analysis technologies or machine learning models, to assess actions and the content of tool server catalogues. Such analysis may produce inaccurate results, including identifying a safe action as unsafe and failing to identify an unsafe action. The models used by Bitdefender AI Guardian operate on Bitdefender-operated infrastructure or locally on your device, and no third-party artificial intelligence or model provider receives the content reviewed by Bitdefender AI Guardian.
+8. Publication date
+The privacy policy has been adopted on the date mentioned in the title of the document and will be modified each time is necessary without prior or future notice of the changes. The new version will enter into force when published on the website and it will be marked accordingly. The present document is available at https://www.bitdefender.com/site/view/legal-privacy.html.
+Trusted.
+Always.
+For Consumer
+For Small Business
+For Enterprise
+For Partners
+Quick Links
+Bitdefender Central
+GravityZone Cloud Control Center
+Bitdefender Cyberpedia
+Partner Advantage Network Portal
+Brand Portal
+Support for Home Products
+Support for Business Products
+Investors
+Careers
+Infozone
+Legal Information
+Privacy Policy
+Site Map
+Company
+Contact Us
+Privacy Settings
+Copyright © 1997 - 2026 Bitdefender
+Canada - English
+Choose Your Country
+Australia - English
+België - Nederlands
+Belgique - Français
+Belize - English
+Brasil - Português
+Bulgaria - English
+Canada - English
+Chile - Español
+Colombia - Español
+Czechia - English
+Denmark - English
+Deutschland - Deutsch
+España - Español
+France - Français
+Hong Kong - China
+Hungary - English
+India - English
+Indonesia - English
+Israel - English
+Italia - Italiano
+Jamaica - English
+Latvia - English
+Malaysia - English
+Malta - English
+México - Español
+Nederland - Nederlands
+New Zealand - English
+Norway - English
+Österreich - Deutsch
+Perú - Español
+Philippines - English
+Poland - English
+Portugal - Português
+România - Română
+Saudi Arabia - English
+Schweiz - Deutsch
+Singapore - English
+South Africa - English
+South Korea - English
+Sverige - Svenska
+Taiwan - 台灣
+Thailand - English
+United Arab Emirates - English
+United Kingdom - English
+United States - English
+日本 - 日本語

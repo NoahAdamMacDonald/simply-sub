@@ -1,0 +1,369 @@
+url: https://proton.me/support/payment-options
+method: fetch
+saved: 2026-11-02
+
+Payment options | Proton Personal Personal
+Business Business
+Download
+Discover Proton Discover Proton
+Resources
+Pricing
+Encrypted emailProton Mail VPN Proton VPN(new window) Cloud storageProton Drive Password managerProton Pass AI assistantLumo AI
+Video conferencingProton Meet Private schedulingProton Calendar Collaborative documentsProton Docs Collaborative spreadsheetsProton Sheets Two-factor authenticatorProton Authenticator
+Bitcoin walletProton Wallet Encrypted notes Standard Notes(new window) Hide-my-email aliases SimpleLogin(new window)
+Discover Proton
+Personal plans
+Proton
+Choose an internet where your privacy comes first
+Create a free account
+All-in-one business suiteProton Workspace Business emailProton Mail Business VPNProton VPN Business AI assistantLumo AI Business video conferencingProton Meet Business calendarProton Calendar Business password managerProton Pass
+Business cloud storageProton Drive Business documentsProton Docs Business spreadsheetsProton Sheets
+Industries
+Tech Healthcare Nonprofits News and media
+Business resources
+Trust center HIPAA GDPR Data Breach Observatory ISO 27001 Case studies Business blog
+Switch from
+Microsoft 365 Google Workspace
+Discover Proton for Business
+Business plans
+Proton Workspace
+Your whole team, one encrypted workspace
+Explore Workspace
+Proton Mail Proton VPN Proton Drive Proton Pass Lumo AI Proton Meet Proton Calendar Proton Authenticator Proton Wallet
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+macOS Windows Linux
+Web app
+Web app(new window)
+Desktop client add-on
+Bridge
+Scan to get the mobile app
+Devices
+Windows(new window)macOS(new window)Linux(new window)Chromebook(new window)Android(new window)iOS(new window)
+Extensions
+Chrome(new window)Firefox(new window)
+Smart TV
+Android TV(new window)Apple TV(new window)Firestick(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+Windows macOS CLI
+Web app
+Web app(new window)
+Scan to get the mobile app
+Devices
+Windows macOS Linux Android iOS Command line interface(new window)
+Extensions
+Chrome Safari Firefox Edge Brave
+Web app
+Web app(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Web app
+Web app(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+macOS Windows Linux
+Web app
+Web app(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+macOS Windows Linux
+Web app
+Web app(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+macOS Windows Linux
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Web app
+Web app(new window)
+Company
+About us Impact Team CareersWe’re hiring Proton Foundation Proton blog
+Privacy
+Open source Zero-access encryption Big Tech alternatives
+Connect
+Partners and affiliates Social media Media contact
+Discover Proton
+Personal plans
+Proton
+We believe a better world starts with privacy and digital freedom
+Discover Proton
+Get started with Proton
+Beginner video guides (new window)Learn about encryption Business resources
+News
+Proton blog Product updates
+Reports and insights
+Investigative reports Proton VPN observatory (new window)Data breach observatory Tech fines tracker Europe’s tech sovereignty watch European alternatives Age verification explained Proton’s guide to AI
+Videos about privacy
+Mass surveillance explained (new window)How employers spy on you (new window)The data you leak in 24 hours (new window)How to disappear online (new window)See all videos (new window)
+Tools
+What is my IP address? (new window)Password generator Username generator PDF watermark Image watermark Flock camera map
+Support
+Help center Contact us
+EN
+Create a free account
+Sign in
+Open menu
+Support
+Proton Account
+Plans and payments
+Payments and invoices
+Support search
+Payment options
+Reading
+4 mins
+Category
+Payments and invoices
+You can pay for your Proton subscription with payment card, PayPal, and other popular payment methods. In this article, we explain how to check out using each of our accepted payment methods.
+In this article
+How to pay for a Proton subscription
+Payment card
+PayPal
+Apple Pay
+Google Pay
+Bitcoin
+Cash
+Bank transfer
+Which currencies does Proton accept?
+If you can’t see your preferred payment method at checkout
+Making payments from Russia
+How to pay for a Proton subscription
+Payment card
+We accept all major credit and debit cards.
+At checkout, select Credit/debit card from the Payment details menu.
+If you already have saved cards on your account, you can select one from the dropdown menu.
+2. Enter your card number, expiry date, and CVV (security code). You’ll also need to select a billing country. Select your country of tax residency.
+3. Review the payment summary, then click Pay now to confirm. You may be asked to complete 3DS (3D Secure) verification with your bank.
+PayPal
+At checkout, select PayPal from the Payment details menu.
+If your PayPal is already linked to your account, select it from the dropdown menu.
+Select a billing country (your country of tax residency).
+Review the payment summary, then click the PayPal button (under Amount due) to confirm.
+4. PayPal will open in a new window. Follow the steps to sign in and set up a billing agreement for recurring payments.
+Apple Pay
+Apple Pay is available on:
+macOS (Safari only). Make sure you’re on the latest version of Safari.
+iOS and iPadOS (all browsers).
+At checkout, select Apple Pay under the Select your payment method menu.
+Select your billing country (your country of tax residency).
+Review the payment summary, then click the Apple Pay button (under Billing Country) to confirm.
+Apple Pay will open in a new window. Follow the steps to complete your payment.
+Google Pay
+Select Google Pay from the payment details menu.
+Select your billing country (your country of tax residency).
+Review the payment summary, then click the GPay button (under Amount due) to confirm.
+Google Pay will open in a new window. Follow the steps to complete your payment.
+Bitcoin
+You can pay for any Proton subscription with Bitcoin — but it won’t appear as a payment option when you first create your account.
+To use Bitcoin, create a free Proton Account, then upgrade to a paid subscription in your account settings.
+More details: How to pay for Proton with Bitcoin
+Cash
+We accept cash payments in US dollars (USD), euros (EUR), or Swiss francs (CHF).
+Send your payment to:
+Proton AG
+Route de la Galaise 32
+1228 Plan-les-Ouates
+Geneva
+Switzerland
+You must include your Proton Mail username. If not, we won’t know which account to credit.
+Check you’re sending the correct amount for your plan. View plans and pricing
+Once we receive your payment, we’ll credit your account with the amount you sent. You can then use those credits to pay for your subscription. Learn how to check your credit balance
+Important information about cash payments
+We can’t issue refunds for subscriptions purchased with cash.
+We don’t accept checks, money orders, or other forms of non-cash payments.
+We are not responsible for lost shipments. We strongly recommend using a tracked or recorded delivery service. You can also let us know that you’re sending us cash in the mail, so we know to expect it.
+Bank transfer
+We accept bank transfers in Swiss Francs (CHF), US Dollars (USD), and Euros (EUR).
+Transfer your payment using the following bank details:
+Bank name
+UBS Switzerland AG
+Beneficiary (Account holder)
+Proton AG
+IBAN
+For USD payments: CH530024024083690963J
+For EUR payments: CH100024024083690962K
+For CHF payments: CH040024024083690902H
+BIC
+UBSWCHZH80A
+Description
+Your Proton Mail username
+Make sure you send the correct amount for your plan. View plans and pricing
+Submit a support form with proof of payment. Please include the following details:
+Full name shown on the transaction
+Date of the transaction
+Amount paid
+Feel free to send a screenshot if it includes the information above.
+Once we receive and verify your payment, we’ll credit your account with the amount you sent. You can then use those credits to pay for your subscription. Learn how to check your credit balance
+Important information about bank transfers
+We can’t issue refunds for subscriptions paid with bank transfer.
+We are not responsible for lost transfers. Please ensure you’ve entered our bank details correctly before sending.
+Which currencies does Proton accept?
+Our core currencies are:
+Swiss Franc (CHF)
+US Dollar (USD)
+Euro (EUR)
+These currencies are available worldwide, and are compatible with all payment methods.
+If you’re paying with Payment card, PayPal, Apple Pay, or Google Pay, you may also be able to use the local currency in these countries:
+Australia (Australian Dollar)
+Brazil (Brazilian Real)
+Canada (Canadian Dollar)
+Hong Kong (Hong Kong Dollar)
+Japan (Japanese Yen)
+Poland (Polish Złoty)
+Singapore (Singaporean Dollar)
+South Korea (Korean Won)
+United Kingdom (British Pound)
+If you can’t see your preferred payment method at checkout
+Apple Pay
+Apple Pay is only available on macOS (Safari) and iOS/iPadOS (any browser).
+If you don’t see it as an option on these platforms, check that:
+Biometrics are enabled and available on your device.
+You have at least one valid debit or credit card saved in Apple Wallet.
+Safari is updated to its latest version.
+Other payment methods
+Some payment methods won’t be available if you upgrade while creating your account. Here’s how to get around this and view all available payment methods as a new Proton user:
+Create a free Proton Account
+Open your account settings (Settings ⚙️ → All settings)
+Select Upgrade plan from the sidebar (or click Compare all plans on the homepage)
+Select a subscription from our individual, group, and business plans.
+At checkout, scroll to payment details. All payment options will appear (aside from bank transfer, which works a bit differently).
+Making payments from Russia
+Due to the ongoing conflict in Ukraine, Proton community members in Russia may experience difficulties paying for their subscription.
+If you’re having trouble, there are some workarounds which will hopefully allow you to pay. Please visit our dedicated guide for more information.
+How to use and pay for Proton services in Russia
+On this page
+How to pay for a Proton subscription
+Apple Pay
+Which currencies does Proton accept?
+If you can’t see your preferred payment method at checkout
+Making payments from Russia
+Payments and invoices
+How to add, remove, or edit a payment method
+Proton Mail or Proton VPN appeared on my payment records
+Как оплатить сервисы Proton из России
+How to pay for Proton services in Russia
+What the different invoice statuses mean
+Didn’t find what you were looking for?
+Get help
+General contactcontact@proton.me
+Media contactmedia@proton.me
+Legal contactlegal@proton.me
+Partnerships contactpartners@proton.me
+Privacy by default
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+Proton AG Route de la Galaise 32
+1228 Plan-les-Ouates
+Geneva, Switzerland
+Products Proton Mail
+Proton Calendar
+Proton Drive
+Proton VPN(new window)
+Proton Pass
+Proton Wallet
+Proton Docs
+Proton Sheets New
+Proton Authenticator
+Proton Meet New
+Lumo AI
+Standard Notes(new window)
+Simple Login(new window)
+Proton for Business
+Pricing
+Switch to Proton
+Products
+Proton Mail
+Proton Calendar
+Proton Drive
+Proton VPN(new window)
+Proton Pass
+Proton Wallet
+Proton Docs
+Proton Sheets New
+Proton Authenticator
+Proton Meet New
+Lumo AI
+Standard Notes(new window)
+Simple Login(new window)
+Proton for Business
+Pricing
+Switch to Proton
+Privacy Password generator
+Username generator
+Tor
+Open source
+Student discount
+Special reports
+Proton vs. competitors
+Privacy
+Password generator
+Username generator
+Tor
+Open source
+Student discount
+Special reports
+Proton vs. competitors
+Company About us
+Team
+Impact
+Proton Foundation
+Careers We’re hiring
+Shop(new window)
+Donate
+Blog
+Company
+About us
+Team
+Impact
+Proton Foundation
+Careers We’re hiring
+Shop(new window)
+Donate
+Blog
+Connect Social media
+Help and support
+Partners and affiliates
+Referral program
+Press and media
+Contact us
+Connect
+Social media
+Help and support
+Partners and affiliates
+Referral program
+Press and media
+Contact us
+English
+System status(new window)
+Report abuse
+Report a problem
+Report a security issue
+Request a feature(new window)
+English
+Privacy Policy
+Terms & conditions
+Transparency report
+© 2026 Proton AG. All rights reserved.

@@ -1,0 +1,176 @@
+url: https://www.microsoft.com/en-us/msrc/bounty-xbox
+method: fetch
+saved: 2026-11-02
+
+Xbox Bounty Program | MSRC
+This is the Trace Id: c828ccc93d33b60f9a5a3ec3171b5767
+MSRC
+Report Security Vulnerability
+Report Abuse
+Report Infringement
+Submission FAQs
+Reporting Vulnerability
+Security Update Guide
+Exploitability index
+Developer API documentation
+Frequently Asked Questions
+Technical Security Notifications
+Glossary
+Microsoft Bug Bounty Programs
+Microsoft Active Protections Program
+BlueHat Security Conference
+Researcher Recognition Program
+Windows Security Servicing Criteria
+Researcher Resource Center
+Microsoft Security Response Center
+Security Research & Defense
+BlueHat Conference Blog
+Security Researcher Acknowledgments
+Online Services Researcher Acknowledgments
+AI Safety Acknowledgements
+Security Researcher Leaderboard
+Secure research starts with responsible testing.
+XBOX Bounty Program
+Partner with Microsoft to strengthen our products and services by identifying and reporting security vulnerabilities that could impact our customers.
+IMPORTANT: The Microsoft Bounty Program is subject to these terms and those outlined in the Microsoft Bounty Terms and Conditions, Microsoft Bounty Legal Safe Harbor, Rules of Engagement, Coordinated Vulnerability Disclosure (CVD), Bounty Program Guidelines, and the Microsoft Bounty Program page.
+PROGRAM DESCRIPTION
+The Xbox Bounty Program invites gamers and security researchers to identify security vulnerabilities in the Xbox Live network and services and share them with the Xbox team. Qualified submissions are eligible for bounty awards of $400 to $20,000 USD. This includes third-party and open-source components included in the service. Please note that qualifying reports must demonstrate a qualifying security impact on the specified service.
+ELIGIBLE SUBMISSIONS
+The goal of the Microsoft Bug Bounty program is to uncover significant technical vulnerabilities that have a direct and demonstrable impact on the security of our customers.
+In addition to the eligibility requirements listed on the Bounty Program Guidelines page, vulnerability submissions must meet the following criteria to be eligible for bounty awards:
+Identify a previously unreported vulnerability that reproduces in our latest, fully patched version of Xbox Live network and services at the time of submission.
+We request researchers include the following information to help us quickly assess their submission:
+Submit through the MSRC Researcher Portal.
+Microsoft may accept or reject any submission at our sole discretion that we determine does not meet the above criteria.
+SCOPE
+Vulnerabilities submitted in the following products and services are eligible under this bounty program:
+Xbox Live network and services
+GETTING STARTED
+Please follow the guidance below to create a test account for security testing and probing. Additionally, please follow the Research Rules of Engagement to avoid harm to customer data, privacy, and service availability.
+Sign up for an Xbox network account. We recommend creating one or more test accounts to conduct security vulnerability research.
+Access to a Xbox 360, Xbox One, Xbox One S or Xbox One X is not required for testing but may be useful. Please note, consoles will not be provided for testing purposes.
+Access to a Xbox Gold, Project xCloud, Xbox Game Pass, Xbox Game Pass for PC or Xbox Game Pass Ultimate account is not required for testing but may be useful. Please note, paid accounts will not be provided for testing purposes.
+Follow Xbox on X, Xbox community site and forums to learn about the latest features and releases.
+BOUNTY AWARDS
+Bounty awards range from $400 up to $20,000 USD. Higher awards are possible, at Microsoft’s sole discretion, based on the severity and impact of the vulnerability and the completeness of the submission as outlined on the Requirements for Complete Vulnerability Reports page. If a single submission is eligible for multiple awards, the submission will be awarded the single highest qualifying award.
+Severity
+Security Impact Report Completeness Critical Important Moderate Low
+Remote Code Execution Complete
+Not Complete $20,000
+$2,000 $15,000
+$1,500 N/A N/A
+Elevation of Privilege Complete
+Not Complete $12,000
+$1,200 $6,000
+$600 $0 N/A
+Security Feature Bypass Complete
+Not Complete $12,000
+$1,200 $6,000
+$600 $0 N/A
+Information Disclosure Complete
+Not Complete $12,000
+$1,200 $6,000
+$600 $0 $0
+Spoofing Complete
+Not Complete $8,000
+$800 $4,000
+$400 $0 $0
+Tampering Complete
+Not Complete $8,000
+$800 $4,000
+$400 $0 $0
+Denial of Service Complete/Not Complete Out of Scope
+OUT-OF-SCOPE SUBMISSIONS AND VULNERABILITIES
+Microsoft is happy to receive and review every submission on a case-by-case basis, but some submission and vulnerability types may not qualify for bounty award.
+If your submission is evaluated as out-of-scope for this individual bounty program, it may still qualify for an award under the Standard Award Policy.
+Here are some of the common low-severity or out-of-scope issues that typically do not earn bounty awards:
+Publicly disclosed vulnerabilities which have already been reported to Microsoft or are already known to the wider security community
+Vulnerability patterns or categories for which Microsoft is actively investigating broad mitigations. As of August 2021, for example, these include, without limitation: Vulnerabilities that rely on Akamai ARL misconfiguration
+Out-of-Scope vulnerability types, including: Server-side information disclosure such as IPs, server names and most stack traces
+Low impact CSRF bugs (such as logoff)
+Denial of Service issues
+Issues relating to Fraud
+Sub-Domain Takeovers
+Cookie replay vulnerabilities
+URL Redirects (unless combined with another vulnerability to produce a more severe vulnerability)
+Vulnerabilities based on user configuration or action, for example: Vulnerabilities requiring extensive or unlikely user actions
+Vulnerabilities in user-created content or applications
+Vulnerabilities in Mixer, GamePass, xCloud, Xbox.com
+Vulnerabilities based on third parties that do not demonstrate a qualifying security impact on the specified service
+Vulnerabilities in third-party sites which are not owned by Microsoft and sites that pertain to marketing efforts
+Training, documentation, samples, and community forum sites related to Microsoft XBOX Bounty Program products and services are out-of-scope for bounty awards
+Vulnerabilities in Microsoft game studios, including but not limited to: compulsiongames.com
+doublefine.com
+inxile.net
+ninjatheory.com
+obsidian.net
+playground-games.com
+undeadlabs.com
+Microsoft reserves the right to reject any submission that we determine, at our sole discretion, falls into any of these categories of vulnerabilities even if otherwise eligible for a bounty.
+ADDITIONAL INFORMATION
+For additional information, please see our FAQ.
+REVISION HISTORY
+January 30, 2020: Launched Xbox Bounty
+August 26, 2021: Added to out of scope - vulnerabilities that rely on Akamai ARL misconfiguration.
+May 13, 2025: Updated Research Rules of Engagement section.
+April 7, 2026: Updated Getting Started section.
+October 20, 2026: Updated bounty awards section to reference the Requirements for Complete Vulnerability Reports page.
+Surface Laptop Ultra
+Surface Pro
+Surface Laptop
+Surface RTX Spark Dev Box
+Explore Copilot
+Explore Microsoft products
+Windows 11 apps
+Account profile
+Download Center
+Microsoft Store support
+Returns
+Order tracking
+Certified Refurbished
+Why buy from Microsoft Store
+Flexible Payments
+Microsoft in education
+Devices for education
+Microsoft Teams for Education
+Microsoft 365 Education
+How to buy for your school
+Educator training and development
+Deals for students and parents
+AI for education
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365
+Microsoft Power Platform
+Microsoft Teams
+Microsoft Copilot
+Small Business
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Careers
+About Microsoft
+Company news
+Privacy at Microsoft
+Investors
+Diversity and inclusion
+Accessibility
+Sustainability
+English (United States)
+Your Privacy Choices
+Consumer Health Privacy
+Sitemap
+Contact Microsoft
+Privacy
+Manage cookies
+Terms of use
+Trademarks
+Safety & eco
+Recycling
+About our ads
