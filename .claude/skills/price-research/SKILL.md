@@ -62,6 +62,14 @@ API contract's prices are illustrative and never a source. This skill is how to 
   asks), every region in scope (ask: usually CA and US, or GLOBAL), and every currency the buyer can pick.
 - **Read the features from the same pages:** quality, streams, downloads, devices, users, storage and limits. Map them
   to `data/features.yaml` ids; anything else goes in `perks`. If the registry needs a new feature, stop and ask, then follow the feature-discovery skill.
+- **Every category a plan fits** (`data/categories.yaml`, M11.3). The provider's `category` is where a buyer would
+  look first; a plan that's more than that lists every service category it fits in `categories` (YouTube Premium:
+  `[streaming, music]`; Proton Unlimited: `[privacy-suite, vpn, storage, email, passwords, calendar, ai]`). When its
+  features name a category it isn't sold as, a free tier that comes with it (Proton Mail Plus has Proton VPN Free),
+  list it in `notIn` and say why in a comment. `npm run data:validate` warns about the rest: `vpn.included`,
+  `antivirus.included`, `password-manager`, `email.addresses`, `calendar.included`, `storage.cloud` and
+  `ai.assistant` each name one. A new category puts the provider under that category's policy topics, so rate them
+  too (the policy-research skill).
 - **Every time, for every provider, check three more things** (M1.12), even when only re-verifying prices, and say
   in the provider file's header comment what each turned up ("none" counts):
   - **Bundles:** the subscribe and pricing pages (page through carousels), the help centre's bundle articles, the

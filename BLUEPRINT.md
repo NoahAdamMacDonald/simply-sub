@@ -522,8 +522,10 @@ plans:
   - id: netflix.standard-ads
     name: Standard with ads
     link: https://www.netflix.com/signup   # required: where to sign up for this plan
-    # categories: [vpn]   # optional: the service categories it's in when they aren't just the provider's
-    #                     # (Proton VPN Plus; Proton Unlimited is [privacy-suite, vpn, storage]). M1.10
+    # categories: [vpn]   # optional: every service category it fits when that isn't just the provider's
+    #                     # (Proton VPN Plus; Proton Unlimited is [privacy-suite, vpn, storage, email,
+    #                     # passwords, calendar, ai]). M1.10, M11.3
+    # notIn: [passwords]  # optional: categories its features name that it isn't sold as (VPN Plus's Pass Free)
     features:
       video.quality: 1080p
       video.hdr: false
@@ -797,6 +799,8 @@ interface Plan {
   id: string;                // '<provider id>.<slug>' (netflix.standard)
   name: string;
   link?: string;
+  categories?: string[];     // every service category it fits, when that isn't just its provider's (M1.10, M11.3)
+  notIn?: string[];          // categories its features name that it isn't sold as (M11.3)
   features: Record<string, FeatureValue>;    // feature id → value
   featureLabels?: Record<RankKey, string>;   // feature id or rank key → the provider's wording
   perks?: string[];          // provider-specific extras, shown but never compared
@@ -854,6 +858,32 @@ are built on these: `catalogSnapshotSchema` (`snapshot.ts`, M1.5) is the `GET /c
 and another core test parses the `GET /catalog` example with it. The other API responses get theirs in M2.7.
 Plans have no `providerId`: it comes
 from the file a plan is in, and flattened views add it.
+
+**Service categories** (`data/categories.yaml`, M1.10, M11.3)
+- **The list:** 29 service categories, in the order Search's Category list shows them: streaming, music, vpn,
+  privacy-suite (Privacy suites: Proton's all-in-one plans), security (antivirus and device security), passwords
+  (password managers and authenticators), email, calendar, storage, file-sharing, ai, gaming, software (the
+  catch-all), creative, developer, cloud (hosting and servers), browsers, search, dns, maps, social, news, fitness,
+  education, jobs, shopping, delivery (food delivery and rides), telecom and finance. Each has a Material Symbols
+  icon and the name Search shows. Ids are permanent once published, like the catalog's (section 4.3): rename the
+  name, never the id. The owner chose on 2026-11-02 to keep privacy-suite for privacy suites, with antivirus suites
+  in security.
+- **A provider's `category`** is its main one, where a buyer would look first. **A plan lists every category it
+  fits** in `categories` (core's `planCategories`): YouTube Premium is streaming and music, Proton Unlimited
+  privacy-suite, vpn, storage, email, passwords, calendar and ai.
+- **Features that name a category** (core's `featureCategories`): `vpn.included` (vpn), `antivirus.included`
+  (security), `password-manager` (passwords), `email.addresses` (email), `calendar.included` (calendar),
+  `storage.cloud` (storage) and `ai.assistant` (ai). Validation warns about a plan with one and not the category,
+  unless its `notIn` names it: a free tier that comes with the plan but isn't what it's sold as (every Proton plan
+  has Proton VPN Free, Pass, Calendar, 5 GB of Drive and Lumo Free; Mail Plus is email and calendar only, the
+  owner's choice, as M1.10 had decided for VPN). `notIn` takes only categories its features name and it isn't in.
+  A rule whose feature or category isn't defined is inactive.
+- **Spend categories** are what a purchase is for card rewards (section 9): streaming, software (the default),
+  gaming, telecom, news, health, education, shopping (online shopping and memberships), delivery (food delivery and
+  rides), finance (bank and account fees) and other. The pipeline's `spendCategoryOf` maps a service category to
+  one. Cash back is one flat % today, so they label rather than change the maths.
+- **Wikidata classes** (section 6.5) fill the queue for every category but privacy-suite and software.
+- **Policy topics** apply by category (section 4.10): a new category goes into the topics it fits.
 
 **What the schemas check**
 - **Strict objects:** an unknown key is an error at every level, whether it's a typo or an old name (a plan's
@@ -1245,8 +1275,8 @@ M1.14, M11.1), so a buyer can see what signing up means beyond the price.
   - legal: disputes, changes to the terms, closing your account, rights over your content, what you paid for,
     inactive accounts, who owns what it makes;
   - security: independent checks of its security;
-  - service: activity logging (VPN logging before M11.1; VPNs now, DNS, search and browsers once M11.3 adds them),
-    account sharing, device and download limits;
+  - service: activity logging (VPN logging before M11.1; VPNs, DNS, search and browsers since M11.3), account
+    sharing, device and download limits;
   - finance: what protects your money, holds and freezes (finance providers, M11.10);
   - other: `other.notable`, up to three ratings with a title, for what no topic covers (a VPN that takes cash).
   Each has a rubric for five grades, great, good, neutral, poor and bad (M1.14; M1.13 called them good, leaning good,
@@ -1648,7 +1678,9 @@ Validation fails if:
   boolean feature takes no `=value`)
 - a feature's `parent` isn't a top-level boolean feature (groups are one level deep), or is listed after the
   feature (`GET /features` keeps the file's order)
-- a feature's `category`, or a provider's `category` or `spendCategory`, isn't defined
+- a feature's `category`, or a provider's `category` or `spendCategory`, isn't defined, or a plan's
+  `categories` or `notIn` names a category that isn't, or `notIn` names one the plan is in or its features don't
+  name (M11.3)
 - ids are duplicated: across files (provider, plan, add-on, bundle and reseller ids share one namespace), in
   `features.yaml`, or within one category list
 - a reference doesn't exist: a bundle's `soldBy` (a provider) and `includes` (plans), a plan's `addOnIds`
@@ -1687,7 +1719,8 @@ Validation fails if:
   provider's entry isn't done), or queues a service on a catalog provider's site (Proton Mail on proton.me)
 
 Validation warns (but passes) when `lastVerified` is older than 90 days: one warning per file, with the count and
-the oldest price. It also warns about a provider or reseller without a logo in `data/logos/`, which the app shows as
+the oldest price. It warns when a plan's features name a service category it isn't in and its `notIn` doesn't list
+(M11.3, section 4.5). It also warns about a provider or reseller without a logo in `data/logos/`, which the app shows as
 a letter, and about a reseller no provider lists.
 
 A broken file gets its own errors, and the checks that would only repeat them are skipped: a provider that fails
@@ -1927,11 +1960,19 @@ plans and opens PRs. **Your only manual step is reviewing PRs.**
   queued, done (it has a provider file), rejected, unreadable or out-of-scope, the last three with a `note`. Your own
   services (section 6.6) are first, `source: own`: Bitdefender, Xbox Game Pass, Crunchyroll and Claude queued, and
   Proton, Netflix, Disney+ and Crave done. A batch takes the next queued ones in the file's order (`nextQueued`).
-- **Wikidata:** one SPARQL query per class in core's `wikidataClasses` (video streaming, subscription video on
-  demand, over-the-top media, music streaming, VPN, password manager, antivirus, file hosting, generative AI chatbot,
-  online and cloud gaming, MOOC and online learning, fitness app, daily newspaper, email hosting), each mapped to a
-  service category. It asks for instances with an official website (P856), an English name and at least 8 Wikipedia
-  articles, without those dissolved (P576), discontinued (P2669) or retired (P730), up to 40 a class (15 newspapers),
+- **Wikidata:** one SPARQL query per class in core's `wikidataClasses`, each mapped to a service category: video
+  streaming, subscription video on demand, over-the-top media, music streaming, VPN, password manager, authenticator,
+  antivirus, email hosting, mailbox provider, digital calendar, peer-to-peer file sharing, file hosting, generative
+  AI chatbot, online and cloud gaming, repository hosting, forge, IDE, internet hosting, platform as a service, web
+  hosting, graphics, raster and vector graphics editors, video editing, digital audio workstation, web browser,
+  search engine, DNS provider, name server, internet map service, web mapping application, employment website,
+  distributed and other social networks, MOOC and online learning, fitness app, daily newspaper, loyalty programme,
+  subscription box, food delivery, online food ordering, ridesharing, online taxi, mobile network operator, ISP,
+  neobank, direct bank, credit union, brokerage, robo-advisor and bank (M11.3: every category but privacy-suite and
+  software, each class checked on wikidata.org for what it finds). The narrower classes come first, since the first
+  gives the category (GitHub is a social network too). It asks for instances with an official website (P856), an English name and at least 8 Wikipedia
+  articles, without those dissolved (P576), discontinued (P2669) or retired (P730), up to 40 a class (15 for
+  newspapers, IDEs, creative software, telecoms, credit unions, brokerages and banks),
   one query at a time with the bot's User-Agent. Below 8 articles the classes fill with tiny apps, casinos and
   courses: 382 services at 0, 148 at 8.
 - **Merging** (`mergeCandidates`): every class's services in one list, each item once (the first class gives its
@@ -1946,6 +1987,11 @@ plans and opens PRs. **Your only manual step is reviewing PRs.**
   other classes (ExpressVPN has only a company item; Surfshark and Private Internet Access are "software"; PlayStation
   Plus is only a "subscription"), so they're added by hand (`source: manual`). Some entries aren't subscriptions
   (VK, SourceForge, Android TV): a batch marks them out-of-scope with a note.
+- **The M11.3 run** (2026-11-02) moved the queue's password managers, antivirus and email services to their new
+  categories and added 312: creative 67, social 42, browsers 40, search 30, finance 27, telecom 25, developer 23,
+  delivery 22, cloud 15, maps 5, jobs 5, DNS 5, email 2, shopping 2, calendar 1 and file sharing 1. Wikidata files
+  WeTransfer and Smash as file hosting, and shopping memberships (Walmart+, Costco) under no class, so those fill by
+  hand.
 
 **② Find URLs automatically:** `scripts/find-urls.ts` (as built in M3.2: below). For each website, it tries these
 in order and stops at the first strong match:
@@ -2037,7 +2083,8 @@ use canonical ids, and it maps provider wording through `aliases`. The output co
 - `availableIn`, only when the provider publishes the countries it sells in (section 4.7)
 - each plan's sign-up `link` and the provider's `cancelUrl` (its cancel page or help article), which the schema
   requires
-- a plan's `categories` when it's in other service categories than its provider's (a suite's VPN plan)
+- a plan's `categories`, every service category it fits when that isn't just its provider's (a suite's VPN plan),
+  and `notIn` for a free tier its features name that it isn't sold as (section 4.5, M11.3)
 - **accepted card networks** for each region the page covers (from the checkout or help page, for example "We
   accept Visa, Mastercard, Amex"), with the page's URL on the provider's own site and its words quoted, each network
   named in them (`acceptedNetworks`, M9.2); none when no page names them ("all major credit cards" names none),
@@ -3231,7 +3278,8 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 1. Create `data/providers/<id>.yaml` (copy `netflix.yaml`, or run `npm run data:draft -- <pricing-url>`). With
    the recommended Red Hat YAML extension, VS Code autocompletes and checks the file as you type (section 4.5).
 2. Use only feature ids from `features.yaml`. Add new features there first, in a separate commit. Give a plan
-   `categories` when it's in other service categories than the provider's (Proton VPN Plus is `[vpn]`).
+   `categories` listing every service category it fits when that isn't just the provider's (Proton VPN Plus is
+   `[vpn]`), and `notIn` for a category its features name that it isn't sold as (section 4.5).
 3. Fill in `lastVerified` and `sourceUrl` for every price. Store regular prices, not first-term offers, and the
    billing period the provider states (`day` × 30 for "every 30 days"), with ISO region codes (`GB`, not `UK`). Add
    `availableIn` only when the provider lists the countries it sells in (sections 4.3, 4.7): every provider sold
@@ -3266,6 +3314,13 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-11-02, service categories, M11.3)**
+- **privacy-suite stays,** as Privacy suites, for all-in-one privacy bundles (Proton); antivirus suites are security,
+  so Bitdefender's main category is security and its suites are security and passwords, Premium and Ultimate vpn too.
+- **Bundled free tiers:** a plan's features naming a category it isn't in warn, and `notIn` records a free tier that
+  comes with it but isn't what it's sold as (Mail Plus's Proton VPN Free), so M1.10's choice holds.
+- **Spend categories** shopping, delivery and finance, where card rewards differ.
 
 **Resolved (2026-11-02, the owner's feedback after M11.2)**
 - **Every policy topic required, now:** the owner chose to rate every topic that applies for all 13 at once (M11.9's
