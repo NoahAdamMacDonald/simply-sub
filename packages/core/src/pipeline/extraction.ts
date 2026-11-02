@@ -3,7 +3,7 @@ import { cardNetworkNames, networksNamedIn } from '../catalog/card-networks';
 import type { Feature, FeatureValue } from '../catalog/feature';
 import { monthlyEquivalent } from '../catalog/monthly-equivalent';
 import { policyReasonMax, type PolicyRating } from '../catalog/policy';
-import { policyTiers, type PolicyTopic } from '../catalog/policy-topic';
+import { policyStatuses, policyTiers, type PolicyTopic } from '../catalog/policy-topic';
 import type { Price } from '../catalog/price';
 import type { AcceptedNetworks, AddOn, CardNetwork, Plan, Provider } from '../catalog/provider';
 import { isCatalogRegion } from '../catalog/regions';
@@ -142,11 +142,27 @@ const extractedAnswerSchema = z.object({
     .array(
       z.object({
         topic: z.string().describe('A topic id from the list'),
-        tier: z.enum(policyTiers).describe("The rubric's grade the quotes fit"),
+        title: z
+          .string()
+          .optional()
+          .describe('other.notable only: what stands out, in a few words'),
+        tier: z
+          .enum(policyTiers)
+          .optional()
+          .describe("The rubric's grade the quotes fit; none with a status"),
+        status: z
+          .enum(policyStatuses)
+          .optional()
+          .describe(
+            "Instead of a tier: not-stated when the pages don't address the topic, not-applicable when it can't apply",
+          ),
         reason: z
           .string()
           .describe('Why, in plain words anyone can follow: 240 characters at most'),
-        sources: z.array(z.object(pageQuote)).describe('One to three quotes that show it'),
+        sources: z
+          .array(z.object(pageQuote))
+          .default([])
+          .describe('One to three quotes that show the tier; none with a status'),
         plans: z.array(z.string()).optional().describe('Only these plans, by name'),
         regions: z.array(z.string()).optional().describe("Only buyers here: a country's own terms"),
       }),
@@ -932,6 +948,9 @@ function policyDrafts(
   issues: ExtractionIssue[],
 ): Provider['policies'] {
   const topics = new Set(context.topics.map((topic) => topic.id));
+  const policyPageUrls = context.pages
+    .filter((page) => page.kind === 'terms' || page.kind === 'privacy')
+    .map((page) => page.url);
   const ratings: PolicyRating[] = [];
   for (const claim of answer.policies) {
     const subject = `Policy ${claim.topic}`;
@@ -952,27 +971,54 @@ function policyDrafts(
       });
       continue;
     }
-    const sources = claim.sources
-      .flatMap((source) => {
-        const found = verified(subject, source.page, source.quote);
-        return found ? [found] : [];
-      })
-      .slice(0, 3);
-    if (sources.length === 0) continue;
+    if ((claim.tier === undefined) === (claim.status === undefined)) {
+      issues.push({
+        kind: 'dropped',
+        subject,
+        reason: 'It needs a tier or a status, not both or neither',
+      });
+      continue;
+    }
     const plans = claim.plans?.flatMap((name) => planIds.get(normalize(name)) ?? []);
     const regions = claim.regions?.filter((region) => isCatalogRegion(region));
-    const rating: PolicyRating = {
-      topic: claim.topic,
-      tier: claim.tier,
-      reason,
-      sources,
+    const scope = {
+      ...(claim.title?.trim() && { title: claim.title.trim() }),
       ...(plans && plans.length > 0 && { plans }),
       ...(regions && regions.length > 0 && { regions }),
-      lastVerified: context.today,
     };
+    let rating: PolicyRating;
+    if (claim.status) {
+      // A status quotes nothing: it names the policy pages read, which said nothing on the topic.
+      rating = {
+        topic: claim.topic,
+        status: claim.status,
+        reason,
+        ...(claim.status === 'not-stated' && { pages: policyPageUrls }),
+        ...scope,
+        lastVerified: context.today,
+      };
+      if (claim.status === 'not-stated' && policyPageUrls.length === 0) continue;
+    } else {
+      const sources = claim.sources
+        .flatMap((source) => {
+          const found = verified(subject, source.page, source.quote);
+          return found ? [found] : [];
+        })
+        .slice(0, 3);
+      if (sources.length === 0) continue;
+      rating = {
+        topic: claim.topic,
+        tier: claim.tier,
+        reason,
+        sources,
+        ...scope,
+        lastVerified: context.today,
+      };
+    }
     const clash = ratings.find(
       (other) =>
         other.topic === rating.topic &&
+        other.title === rating.title &&
         JSON.stringify(other.plans) === JSON.stringify(rating.plans) &&
         JSON.stringify(other.regions) === JSON.stringify(rating.regions),
     );
@@ -988,7 +1034,10 @@ function policyDrafts(
   }
   if (ratings.length === 0) return undefined;
   const quoted = new Set(
-    ratings.flatMap((rating) => (rating.sources ?? []).map((source) => source.url)),
+    ratings.flatMap((rating) => [
+      ...(rating.sources ?? []).map((source) => source.url),
+      ...(rating.pages ?? []),
+    ]),
   );
   const links = [...quoted].map((url) => {
     const page = context.pages.find((candidate) => candidate.url === url);
