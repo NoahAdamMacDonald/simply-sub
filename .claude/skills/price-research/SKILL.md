@@ -76,6 +76,9 @@ API contract's prices are illustrative and never a source. This skill is how to 
     hold what pricing pages leave out, such as where it's sold (`availableIn`), the billing period and auto-renewal,
     refunds, notice of price changes, limits on streams, devices and downloads, bundles and partner billing. Use
     them for those fields, and rate them on the policy topics with the policy-research skill (M1.13).
+  - **The owner and outside ratings** (M11.2), by the policy-research skill's rules: the company behind it from its
+    own about page (needed for VPNs, news and finance), and for an antivirus or a news outlet the raters in
+    `data/raters.yaml`.
 - **Report what you couldn't verify**, each with the reason (geo-blocked, not stated, conflicting).
 
 ## Which tool

@@ -73,6 +73,22 @@ their own.
   center, bell.ca); validation says so. A form on another company's domain (a OneTrust web form) isn't linked: link
   the provider's page that explains it instead. When the change is the browser's or device's own setting (ICI
   TOU.TV), link the provider's page that explains how; none when there's nothing to change (a refund to ask for).
+- **The owner** (M11.2): the company behind the provider, in `owner` (`name`, `page` with its `name` and `url`, one
+  to three `quotes`, `lastVerified`), from its own about page, or its terms when that's where it says so ("made
+  available to you by Bell Media Inc."), on its own sites or its policies' (validation says so). Quote the sentence
+  that names the company and how it owns or runs the service ("Mullvad VPN AB is owned by parent company Amagicom
+  AB."), never a copyright line alone; a provider in VPN, news or finance needs one (telecom once it's a category).
+  When no page of its own says, leave `owner` out and say so in a comment ("No owner: …"). Never from Wikipedia or
+  the press, even when they're right.
+- **Outside ratings** (M11.2): only from raters in `data/raters.yaml`, whose terms were read before they were added
+  (its header lists those read and left out, and why: Ad Fontes, Media Bias/Fact Check, AllSides, AV-Comparatives,
+  SE Labs). A new rater is read for its terms first and added only when they plainly allow showing its label with a
+  link; ask the owner about any other. A provider's `ratings`: the `rater`, the `subject`, its `label` word for word
+  from the rater's scale, the rater's `date` (the day it published it, or a lab test's month: `2026-08`), the `url`
+  of the rater's own page for it, and `tested` when the rater tested a named product rather than the provider (Total
+  Security 27.0, Windows 11). Never the rater's text and never our own view. A news outlet's bias and reliability
+  need two raters at least; an antivirus gets the latest result of each lab listed. Validation warns once a rating is
+  a year old: look for the rater's newer one.
 - **Say what wasn't read, and why,** in the comment above `policies:` (the agreement didn't render, Access Denied),
   with the date the pages were read.
 
