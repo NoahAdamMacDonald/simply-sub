@@ -79,8 +79,9 @@ ratings:
     tested: Total Security 27.0, Windows 11
 
 # Categories (M11.3): an antivirus first (security). Every paid plan but Premium VPN has its password manager,
-# SecurePass, as its support centre's articles list it, so it's in passwords too; Antivirus Plus's own page compares
-# it with Total Security as "Password Manager no yes", which M11.9 rereads. Premium and Ultimate Security have its
+# SecurePass, as its support centre's articles list it, so it's in passwords too. "What is Bitdefender Antivirus
+# Plus?" lists "SecurePass - A password manager that securely stores and autofills your login credentials", which
+# outweighs the sales page's older comparison table ("Password Manager no yes"). Premium and Ultimate Security have its
 # Premium VPN, unlimited, so they're VPN plans as well; Total Security and Antivirus Plus have only its Standard VPN,
 # "200 MB/day traffic", so they aren't (notIn).
 plans:

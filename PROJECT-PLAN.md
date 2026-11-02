@@ -1221,8 +1221,8 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
     and ai; Mail Plus email and calendar; Drive, VPN and Pass Plus their own; each single product's `notIn` the free
     tiers every account has. Every Proton plan has `ai.assistant` for Lumo's free version, quoted in the file from
     Proton's plans and Lumo articles (Lumo Plus is an add-on, not stored). Bitdefender's main category is security,
-    its paid plans but Premium VPN are passwords too (SecurePass, from its support centre's articles; Antivirus Plus's
-    sales page says "Password Manager no", which M11.9 rereads), Premium and Ultimate Security vpn too, and Total
+    its paid plans but Premium VPN are passwords too (SecurePass, which its support centre's product articles list,
+    Antivirus Plus's included, over its sales page's older comparison table), Premium and Ultimate Security vpn too, and Total
     Security's and Antivirus Plus's 200 MB/day Standard VPN is `notIn`. The other 11 fit their one category.
   - **Topics:** activity logging for dns, search and browsers; who can read your content for email, calendar,
     passwords, social, file-sharing, cloud and developer; rights over your content for those and creative; children
