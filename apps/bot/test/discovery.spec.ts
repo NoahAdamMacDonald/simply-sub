@@ -82,7 +82,7 @@ function streamWorld(): World {
         : {
             policies: [
               {
-                topic: 'billing.cancel-refunds',
+                topic: 'billing.refunds',
                 tier: 'neutral',
                 reason:
                   'You can cancel anytime and keep watching until the period ends, but get no money back.',

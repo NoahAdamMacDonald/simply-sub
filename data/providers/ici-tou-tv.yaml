@@ -100,7 +100,14 @@ policies:
         - url: https://cbc.radio-canada.ca/fr/transparence-et-engagement/vie-privee/avis-de-confidentialite
           quote: "Si vous n'êtes pas à l'aise avec l'utilisation de ces informations, veuillez revoir les paramètres de confidentialité de votre appareil et de votre navigateur avant de poursuivre votre visite."
       lastVerified: 2026-10-27
-    - topic: billing.cancel-refunds
+    - topic: billing.cancellation
+      tier: neutral
+      reason: "It keeps renewing until you decide to end it. Its conditions don't say anything about getting money back."
+      sources:
+        - url: https://ici.tou.tv/abonnement/condition
+          quote: "Votre abonnement à un Forfait est renouvelé automatiquement à moins que vous ne décidiez d'y mettre fin."
+      lastVerified: 2026-10-27
+    - topic: billing.refunds
       tier: neutral
       reason: "It keeps renewing until you decide to end it. Its conditions don't say anything about getting money back."
       sources:

@@ -965,7 +965,16 @@ policies:
         - url: https://proton.me/legal/privacy
           quote: 'Through your Account interface, you can directly access, edit, delete, or export personal data processed by the Company in your use of the Services.'
       lastVerified: 2026-10-27
-    - topic: billing.cancel-refunds
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You cancel from your account page before it renews. If you change your mind within 30 days of first buying, you get all your money back.'
+      sources:
+        - url: https://proton.me/legal/terms
+          quote: 'You may cancel your subscription within 30 days of the initial purchase and receive a full refund for the Service.'
+        - url: https://proton.me/legal/terms
+          quote: 'you must cancel your subscription before its renewal date by visiting your Account dashboard and following the cancel subscription steps'
+      lastVerified: 2026-10-27
+    - topic: billing.refunds
       tier: good
       reason: 'You cancel from your account page before it renews. If you change your mind within 30 days of first buying, you get all your money back.'
       sources:
@@ -1014,7 +1023,7 @@ policies:
         - url: https://proton.me/legal/terms
           quote: 'Paid Accounts which are terminated due to a violation of these Terms will incur the loss of all payments and credits and are not eligible for refund.'
       lastVerified: 2026-10-27
-    - topic: service.vpn-logging
+    - topic: service.activity-logging
       tier: great
       reason: "It doesn't keep records of your VPN sessions, and outside auditors have checked that five years in a row."
       sources:

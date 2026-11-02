@@ -1,5 +1,6 @@
 import type { PolicyAction, PolicyLink, PolicyRating, PolicySource } from './policy';
 import { policyGroups, type PolicyGroup, type PolicyTier, type PolicyTopic } from './policy-topic';
+import { providerCategories } from './plan-categories';
 import type { Provider } from './provider';
 import { globalRegion, groupsOf } from './regions';
 
@@ -92,6 +93,27 @@ export function planPolicies(
     }),
     links,
   };
+}
+
+/** How many of a provider's plans cost something somewhere: the billing topics apply only when there's one. */
+export function paidPlanCount(provider: Pick<Provider, 'plans'>): number {
+  return provider.plans.filter((plan) => plan.prices.some((price) => price.amount > 0)).length;
+}
+
+/**
+ * Whether a provider has to rate `topic` (M11.1): a topic for some categories needs a plan in one, one with
+ * paidPlans that many paid plans, and a titled topic (other.notable) is never required.
+ */
+export function topicApplies(
+  topic: PolicyTopic,
+  provider: Pick<Provider, 'category' | 'plans'>,
+): boolean {
+  if (topic.titled) return false;
+  const categories = providerCategories(provider);
+  return (
+    (!topic.categories || topic.categories.some((id) => categories.includes(id))) &&
+    (topic.paidPlans === undefined || paidPlanCount(provider) >= topic.paidPlans)
+  );
 }
 
 /** Words at each end of a long quote that a link's text fragment matches it by. */

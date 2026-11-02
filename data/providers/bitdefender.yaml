@@ -489,7 +489,17 @@ policies:
     - name: Terms of service
       url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
   ratings:
-    - topic: billing.cancel-refunds
+    - topic: billing.cancellation
+      tier: good
+      reason: You can turn off renewal in your Bitdefender Central account before the next billing date, and you can ask for your money back within 30 days of buying.
+      sources:
+        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+          quote: unless You cancel Your subscription through the Bitdefender Central Account prior to Your next scheduled billing date
+        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+          quote: FOR INFORMATION ON HOW TO OBTAIN A REFUND OF THE MONEY YOU PAID FOR THE SOFTWARE AT ANY TIME DURING THE THIRTY (30) DAYS PERIOD FOLLOWING THE DATE OF PURCHASE.
+      regions: [CA]
+      lastVerified: 2026-10-28
+    - topic: billing.refunds
       tier: good
       reason: You can turn off renewal in your Bitdefender Central account before the next billing date, and you can ask for your money back within 30 days of buying.
       sources:

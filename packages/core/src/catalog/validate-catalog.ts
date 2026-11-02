@@ -8,6 +8,7 @@ import { featuresFileSchema } from './feature';
 import { slugSchema } from './formats';
 import type { CatalogFileKind } from './json-schema';
 import { providerCategories } from './plan-categories';
+import { paidPlanCount } from './plan-policies';
 import type { Policies } from './policy';
 import { policyTopicsFileSchema, type PolicyTopic } from './policy-topic';
 import { automationSchema } from '../pipeline/automation';
@@ -173,16 +174,23 @@ export function validateCatalog(
     );
   }
   const serviceIds = categories?.service.map((category) => category.id);
-  policyTopics?.forEach((topic, index) =>
-    topic.categories?.forEach((id, categoryIndex) => {
+  policyTopics?.forEach((topic, index) => {
+    const named = [
+      ...(topic.categories ?? []).map((id, categoryIndex) => ({
+        id,
+        path: [index, 'categories', categoryIndex],
+      })),
+      ...Object.keys(topic.silentIn ?? {}).map((id) => ({ id, path: [index, 'silentIn', id] })),
+    ];
+    for (const { id, path } of named) {
       if (serviceIds && !serviceIds.includes(id)) {
         reportPolicyTopics(
-          [index, 'categories', categoryIndex],
+          path,
           `"${id}" isn't a service category in ${categoriesFile}${choices(id, serviceIds)}`,
         );
       }
-    }),
-  );
+    }
+  });
 
   const ids = indexIds(providers, bundles, unchecked, resellersRead);
   const context: CheckContext = {
@@ -602,7 +610,7 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
 
 /**
  * A provider's policy ratings (BLUEPRINT §4.10): each names a topic from data/policy-topics.yaml that applies to it
- * (a topic for some categories, such as VPN logging, needs a plan in one), read on a date that isn't after today.
+ * (a topic for some categories, such as activity logging, needs a plan in one; a billing topic, a paid plan), read on a date that isn't after today.
  * Ratings older than a year are worth reading again.
  */
 function checkPolicies(
@@ -634,6 +642,11 @@ function checkPolicies(
       report(
         [...path, 'topic'],
         `${topic.name} is only for providers with a plan in ${topic.categories.join(' or ')}`,
+      );
+    } else if (topic?.paidPlans !== undefined && paidPlanCount(provider) < topic.paidPlans) {
+      report(
+        [...path, 'topic'],
+        `${topic.name} is only for providers with ${topic.paidPlans === 1 ? 'a paid plan' : `${topic.paidPlans} paid plans or more`}`,
       );
     }
     if (rating.lastVerified > today) {

@@ -156,7 +156,16 @@ policies:
     - name: Privacy policy
       url: https://www.anthropic.com/legal/privacy
   ratings:
-    - topic: billing.cancel-refunds
+    - topic: billing.cancellation
+      tier: neutral
+      reason: You can cancel online at any time and keep using it until the end of the period you paid for, but payments aren't refunded unless its terms or the law say so.
+      sources:
+        - url: https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription
+          quote: You may cancel your Pro or Max plan subscription at any time by following the cancellation instructions for the platform you signed up on.
+        - url: https://support.claude.com/en/articles/12386328-request-a-refund-for-a-paid-claude-plan
+          quote: Except as expressly provided in our Consumer Terms of Service or where required by law, all payments are non-refundable.
+      lastVerified: 2026-10-28
+    - topic: billing.refunds
       tier: neutral
       reason: You can cancel online at any time and keep using it until the end of the period you paid for, but payments aren't refunded unless its terms or the law say so.
       sources:

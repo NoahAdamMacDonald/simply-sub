@@ -253,7 +253,17 @@ policies:
     - name: Plans and pricing
       url: https://www.xbox.com/en-CA/xbox-game-pass
   ratings:
-    - topic: billing.cancel-refunds
+    - topic: billing.cancellation
+      tier: great
+      reason: You can cancel at any time, and in Canada you can cancel with immediate effect and get a prorated refund of your last charge.
+      sources:
+        - url: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
+          quote: You can cancel an XBOX subscription at any time.
+        - url: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
+          quote: 'In the following countries, you have the right to cancel a subscription that has recurring billing with immediate effect and receive a prorated refund as described in the Microsoft Consumer Subscription Prorated Refund Policy:'
+      regions: [CA]
+      lastVerified: 2026-10-28
+    - topic: billing.refunds
       tier: great
       reason: You can cancel at any time, and in Canada you can cancel with immediate effect and get a prorated refund of your last charge.
       sources:

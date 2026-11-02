@@ -14,7 +14,7 @@
       "name": { "type": "string", "minLength": 1, "description": "Display name" },
       "group": {
         "type": "string",
-        "enum": ["privacy", "billing", "legal", "service"],
+        "enum": ["privacy", "billing", "legal", "security", "service", "finance", "other"],
         "description": "Where the card lists it"
       },
       "question": { "type": "string", "minLength": 1, "description": "What it rates" },
@@ -31,6 +31,33 @@
         "additionalProperties": false,
         "description": "The rubric: what each tier means for this topic. A rating names the tier its quotes fit"
       },
+      "note": {
+        "type": "string",
+        "minLength": 1,
+        "description": "How to read the rubric: its terms, what doesn't count, and where to look when the policy is silent"
+      },
+      "silent": {
+        "anyOf": [
+          { "type": "string", "const": "not-stated" },
+          { "type": "string", "enum": ["great", "good", "neutral", "poor", "bad"] }
+        ],
+        "description": "What it means when the pages say nothing: not-stated where silence proves nothing, or the tier it gets where it means a missing protection"
+      },
+      "silentIn": {
+        "type": "object",
+        "propertyNames": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)"
+        },
+        "additionalProperties": {
+          "anyOf": [
+            { "type": "string", "const": "not-stated" },
+            { "type": "string", "enum": ["great", "good", "neutral", "poor", "bad"] }
+          ]
+        },
+        "description": "silent for providers in these service categories instead (ai: poor, where training is the industry's default)"
+      },
       "categories": {
         "minItems": 1,
         "type": "array",
@@ -40,6 +67,17 @@
           "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)"
         },
         "description": "Service categories from categories.yaml: the topic applies only to providers with a plan in one"
+      },
+      "paidPlans": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 9007199254740991,
+        "description": "It applies only to providers with at least this many paid plans (1 for billing, 2 for switching plans)"
+      },
+      "titled": {
+        "type": "boolean",
+        "const": true,
+        "description": "Each rating has a title, a provider gives up to 3, and none is required (other.notable)"
       }
     },
     "required": ["id", "name", "group", "question", "tiers"],

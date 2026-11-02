@@ -317,7 +317,18 @@ policies:
         - url: https://mullvad.net/en/help/no-logging-data-policy
           quote: '*transaction_id is deleted 20 days after payment'
       lastVerified: 2026-10-27
-    - topic: billing.cancel-refunds
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You pay ahead for the time you want, and it just stops when that runs out, so it never charges you again by surprise. You can get your money back within 14 days, but not if you paid in cash or crypto.'
+      sources:
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'These terms will expire at the end of the period purchased.'
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'We offer users a 14-day money-back guarantee.'
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'We do not offer refunds for cash and crypto payments.'
+      lastVerified: 2026-10-27
+    - topic: billing.refunds
       tier: good
       reason: 'You pay ahead for the time you want, and it just stops when that runs out, so it never charges you again by surprise. You can get your money back within 14 days, but not if you paid in cash or crypto.'
       sources:
@@ -353,7 +364,7 @@ policies:
         - url: https://mullvad.net/en/help/terms-service
           quote: 'If you wish to exercise your right to reject such changes, you should stop using the service (for refunds, see below).'
       lastVerified: 2026-10-27
-    - topic: service.vpn-logging
+    - topic: service.activity-logging
       tier: great
       reason: "It doesn't keep records of when you connect or for how long. Security experts at Cure53 checked its servers and found no personal information."
       sources:

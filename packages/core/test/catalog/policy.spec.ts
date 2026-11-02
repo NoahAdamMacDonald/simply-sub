@@ -5,6 +5,7 @@ import {
   policiesSchema,
   quoteLink,
   policyTopicsFileSchema,
+  silentMeaning,
   validateCatalog,
   type CatalogSourceFile,
   type Policies,
@@ -30,6 +31,7 @@ const topics: PolicyTopic[] = [
     group: 'privacy',
     question: 'What it collects.',
     tiers,
+    silent: 'not-stated',
   },
   {
     id: 'privacy.ads-tracking',
@@ -37,20 +39,24 @@ const topics: PolicyTopic[] = [
     group: 'privacy',
     question: 'Ads.',
     tiers,
+    silent: 'not-stated',
   },
   {
-    id: 'billing.cancel-refunds',
-    name: 'Cancelling and refunds',
+    id: 'billing.refunds',
+    name: 'Refunds',
     group: 'billing',
-    question: 'Cancel.',
+    question: 'Refunds.',
     tiers,
+    silent: 'not-stated',
+    paidPlans: 1,
   },
   {
-    id: 'service.vpn-logging',
-    name: 'VPN logging',
+    id: 'service.activity-logging',
+    name: 'Activity logging',
     group: 'service',
     question: 'Logs.',
     tiers,
+    silent: 'poor',
     categories: ['vpn'],
   },
 ];
@@ -79,12 +85,12 @@ const mullvadPolicies = {
   ],
   ratings: [
     rating('privacy.data-collection'),
-    rating('billing.cancel-refunds', {
+    rating('billing.refunds', {
       tier: 'good',
       reason: 'Prepaid, with a 14-day money-back guarantee.',
       sources: [{ url: terms, quote: 'We offer users a 14-day money-back guarantee.' }],
     }),
-    rating('service.vpn-logging', { reason: 'No connection logs.' }),
+    rating('service.activity-logging', { reason: 'No connection logs.' }),
   ],
 };
 
@@ -114,6 +120,37 @@ describe('the policy topics registry', () => {
       false,
     );
     expect(bad).toBeTruthy();
+  });
+
+  it('needs every topic to say what silence means, except a titled one, which never may', () => {
+    const issues = (topic: unknown) =>
+      policyTopicsFileSchema.safeParse([topic]).error?.issues.map((issue) => issue.message) ?? [];
+    const { silent, ...unsaid } = topics[0];
+    expect(silent).toBe('not-stated');
+    expect(issues(unsaid)).toEqual(['Say what silence means: not-stated, or the tier it gets']);
+    expect(issues({ ...unsaid, silent: 'poor' })).toEqual([]);
+    expect(issues({ ...unsaid, silent: 'maybe' }).length).toBeGreaterThan(0);
+    const notable = { ...unsaid, id: 'other.notable', group: 'other', titled: true };
+    expect(issues(notable)).toEqual([]);
+    expect(issues({ ...notable, silent: 'not-stated' })).toEqual([
+      'A titled topic is never required, so silence means nothing: leave silent out',
+    ]);
+  });
+
+  it('reads silence by the provider’s categories where a topic says so', () => {
+    const training: PolicyTopic = { ...topics[0], silentIn: { ai: 'poor' } };
+    expect(silentMeaning(training, ['streaming'])).toBe('not-stated');
+    expect(silentMeaning(training, ['storage', 'ai'])).toBe('poor');
+    expect(silentMeaning(topics[3], ['vpn'])).toBe('poor');
+  });
+
+  it('reports a category in silentIn that isn’t a service category', () => {
+    const files = edited(withPolicies(), 'data/policy-topics.yaml', [0, 'silentIn'], {
+      chatbots: 'poor',
+    });
+    expect(messages(files)).toEqual([
+      'data/policy-topics.yaml 0.silentIn.chatbots: "chatbots" isn\'t a service category in data/categories.yaml (streaming, vpn, privacy-suite)',
+    ]);
   });
 });
 
@@ -202,12 +239,19 @@ describe('validateCatalog, for policies', () => {
       messages(
         withNetflix([
           netflixRating('privacy.data-colection'),
-          netflixRating('service.vpn-logging'),
+          netflixRating('service.activity-logging'),
         ]),
       ),
     ).toEqual([
-      'data/providers/netflix.yaml policies.ratings.0.topic: "privacy.data-colection" isn\'t a topic in data/policy-topics.yaml (privacy.data-collection, privacy.ads-tracking, billing.cancel-refunds, service.vpn-logging)',
-      'data/providers/netflix.yaml policies.ratings.1.topic: VPN logging is only for providers with a plan in vpn',
+      'data/providers/netflix.yaml policies.ratings.0.topic: "privacy.data-colection" isn\'t a topic in data/policy-topics.yaml (privacy.data-collection, privacy.ads-tracking, billing.refunds, service.activity-logging)',
+      'data/providers/netflix.yaml policies.ratings.1.topic: Activity logging is only for providers with a plan in vpn',
+    ]);
+  });
+
+  it('reports a billing topic for a provider without enough paid plans', () => {
+    const twoPaid = edited(withPolicies(), 'data/policy-topics.yaml', [2, 'paidPlans'], 2);
+    expect(messages(twoPaid)).toEqual([
+      'data/providers/mullvad.yaml policies.ratings.1.topic: Refunds is only for providers with 2 paid plans or more',
     ]);
   });
 
@@ -275,8 +319,8 @@ describe('planPolicies', () => {
       ]),
     ).toEqual([
       ['privacy', ['privacy.data-collection']],
-      ['billing', ['billing.cancel-refunds']],
-      ['service', ['service.vpn-logging']],
+      ['billing', ['billing.refunds']],
+      ['service', ['service.activity-logging']],
     ]);
     expect(shown?.links.map((link) => link.name)).toEqual(['Terms of service', 'Privacy policy']);
     expect(
@@ -309,8 +353,8 @@ describe('planPolicies', () => {
     ).toEqual([
       ['privacy.data-collection', ['2 Privacy policy']],
       ['privacy.ads-tracking', ['1 Terms of service', '2 Privacy policy']],
-      ['billing.cancel-refunds', ['1 Terms of service']],
-      ['service.vpn-logging', ['2 Privacy policy']],
+      ['billing.refunds', ['1 Terms of service']],
+      ['service.activity-logging', ['2 Privacy policy']],
     ]);
     expect(shown?.groups[0].policies[1].citations[1]).toEqual({
       number: 2,

@@ -45,7 +45,10 @@ const groupNames: Record<PolicyGroup, string> = {
   privacy: 'Privacy',
   billing: 'Billing',
   legal: 'Legal',
+  security: 'Security',
   service: 'Service',
+  finance: 'Money',
+  other: 'Notable',
 };
 
 /**

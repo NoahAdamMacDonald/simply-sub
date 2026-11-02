@@ -112,7 +112,7 @@ describe('PlanDetails', () => {
 
       expect(groups().at(-1)).toBe(
         'Terms and policies Legal Disputes (Great): Swedish courts or the consumer disputes board. [1] ' +
-          'Service VPN logging (Great): No connection logs, and an audit found none. [2] ' +
+          'Service Activity logging (Great): No connection logs, and an audit found none. [2] ' +
           'Sources [1] Terms of service [2] No-logging policy',
       );
       const dots = Array.from(element().querySelectorAll('.policies .dot'));
