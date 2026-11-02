@@ -1,0 +1,508 @@
+url: https://www.bitdefender.com/en-us/site/view/bug-bounty
+method: fetch
+saved: 2026-11-02
+
+Bug Bounty
+Placeholder
+For Consumer
+All-in-one Plans
+Who Is It For
+Individual Plans
+Family Plans
+Ultimate Small Business Security
+Security for Creators
+View All
+Choose Your Level of Protection
+Total Security
+Premium Security
+Ultimate Security
+Solutions
+Device Security
+Antivirus Plus
+Antivirus for Mac
+Mobile Security for Android
+Mobile Security for iOS
+Internet Security
+Family Pack
+Small Office Security
+View All
+Scam Protection
+Scam Protection
+RealCheck
+Web Sage
+Privacy
+Premium VPN
+SecurePass
+Identity Protection
+Digital Identity Protection
+Identity Theft Protection
+Trials & Free Tools
+Try Bitdefender
+Antivirus Free
+Antivirus Free for Android
+Trial Downloads
+Free Tools
+Scamio - AI Scam Detector
+Reverse Phone Number Lookup
+Digital Footprint Checker
+Password Generator
+Link Checker
+AI Skills Checker
+Virus Scanner for Mac
+View All
+Resources
+Join Our Community
+Smart Home Cybersecurity
+Cyberpedia
+Existing Customers
+Existing Customers
+Renew or Upgrade
+Support
+AI-Powered Cybersecurity
+For Small Business
+For Enterprise
+Platform
+GravityZone Platform - Comprehensive Unified Security
+Packages
+Small Business Security
+Buy Online
+Business Security
+Business Security Premium
+Business Security Enterprise
+Defense XDR
+Free Trials
+View All
+Technology
+DemoZone
+TechZone
+Bitdefender Labs
+Cut the Complexity of AI Security
+Prevention
+Exposure Management
+NEW
+AI Visibility and Control
+NEW
+Dynamic Attack Surface Reduction
+Compliance Manager
+Risk Management
+Vulnerability & Patch Management
+Cloud Security Posture Management
+External Attack Surface Management
+Full Disk Encryption
+View All
+Managed Service Providers
+GravityZone MSP Security
+Extended Email Security for MSPs
+Advanced Security for MSSPs
+Managed Detection and Response for MSPs
+Protection
+Email Security
+Mobile Security
+Cloud Native Security
+Cloud Workload Security
+Container Security
+View All
+Detection & Response
+Endpoint Detection & Response
+Extended Detection & Response
+Identity Threat Detection & Response
+Threat Intelligence Solutions
+Managed Detection and Response
+Managed Detection and Response Plus
+Security Data Lake
+View All
+Services
+Managed Services
+Managed Detection and Response PLUS
+Managed Detection and Response
+Managed Detection and Response for MSPs
+Managed XDR
+Security Services
+Offensive Services
+Advisory Services
+Support
+Digital Forensics and Incident Response
+Cybersecurity Advisory Services
+Compliance Support
+Cybersecurity Review (CSR)
+Cybersecurity Advisory Retainer
+Incident Response Tabletop Exercises (TTX)
+Offensive Services
+Penetration Testing
+Red Teaming
+Cloud Security Assessment
+Phishing Simulation
+LLM & AI Penetration Testing
+Why Bitdefender
+The Bitdefender Difference
+Cut the Complexity of AI Security
+New
+Fighting Cybercrime
+New
+Customer Success Stories
+Industry Recognition and Awards
+Technology Alliances
+Certifications
+Bitdefender Labs and Research
+Solutions
+Cloud Native Security
+Enable Cyber Resilience
+Improve Cybersecurity Compliance
+Provide Managed Security Services
+Secure Cloud Workloads
+Secure Datacenters
+Secure Endpoints
+Secure Small to Medium Business
+Industries
+Education
+Energy and Utilities
+Financial Services
+Healthcare
+Manufacturing
+Public Sector
+Technology
+Telecommunications
+Retail
+Compare Bitdefender
+vs. Crowdstrike
+vs. Huntress
+vs. Microsoft
+vs. SentinelOne
+vs. Sophos
+Resources
+Highlights
+2026 Cybersecurity Predictions
+FunkSec: Ransomware Group
+Akira Ransomware
+ShrinkLocker (+Decryptor)
+Training & Education
+InfoZone, Cybersecurity 101
+TechZone, Technical Insights & Explainers
+DemoZone, Interactive Demos
+NEW
+Masterclasses, Onboarding Sessions
+NEW
+Resource Library
+Newsroom
+Blogs
+Industry Recognition & Reports
+Webinars
+Events
+eBooks & Whitepapers
+Case Studies
+Experienced a Breach?
+View Packages and Pricing
+For Partners
+Reseller Partners
+Our network
+Reselling Partner Program Overview
+Become a Reseller
+Quick Links
+Log in to the Business Solutions Partners portal
+Log in to the Consumer / VSB Solutions Partners portal
+Find a Reseller
+Already a Partner?
+Join our Affiliates Program
+View All
+Managed Service Providers
+MSP Partner Program
+Partner Program Overview
+Partner Benefits & Tiers
+Become an MSP Partner
+Find an MSP Partner
+View All
+Security Solutions for MSPs
+MSP Integrated Security Solutions
+Advanced Security for MSSPs
+Managed Detection and Response for MSPs
+Extended Email Security for MSPs
+Quick Links
+Log In To PAN Portal
+GravityZone Control Center
+Already a Partner?
+MSP Support Portal
+Partner Locator
+View All
+Technology Licensing
+Technology Licensing Portfolio
+OEM Technology Solutions
+Threat Intelligence Solutions
+Endpoint Protection SDKs
+Gateway Protection SDKs
+Sandbox Services
+Bundling Solutions
+View All
+Quick Links
+Contact Us
+Telco Partners
+Resources Center
+Subscriber Protection Platform
+Security MVNO
+Resources
+Technology Partners
+Technology Alliances
+Advantage Technical Partner Program
+Company
+About Us
+About Us
+Overview
+Management
+Customers
+Awards
+Certifications
+Sustainability
+View All
+Latest News
+Latest News
+Newsroom
+Blogs
+Bitdefender Cyberpedia
+Resources
+Resources
+Research
+White Papers
+Industry Reports
+Threat Maps
+View All
+Brand
+Brand
+Why Trusted
+The Bitdefender Difference
+Ferrari Partnership
+Brand Portal
+Careers
+Careers
+Jobs
+Blog
+Support
+How Can We Help
+Support for Home Products
+Support for Business Products
+Login
+Your Account
+Bitdefender Central
+GravityZone CLOUD Control Center
+MDR Portal
+Bitdefender Bug Bounty Program
+Here you can check the Bitdefender hall of fame.
+The Bug Bounty Reward program encourages security researchers to identify and submit vulnerability reports regarding virtually everything that bears the Bitdefender brand, including but not limited to the website, products and services.
+We decided to offer rewards only for the following targets:
+*.bitdefender.com
+*.bitdefender.net
+*.horangi.com
+*.meshsecurity.io
+*.emailsecurity.app
+Bitdefender Total Security
+Bitdefender GravityZone Business Security
+Bitdefender Antimalware Engines
+The following kinds of findings are specifically non-rewardable within this program:
+Self XSS or other types of self-exploitation (cookie reuse, self DoS, self-cookie-bomb, etc.)
+Descriptive error messages (e.g., stack traces, application or server errors).
+Email spoofing issues (incomplete or lack of SPF, DMARC, DKIM records)
+Out of date software versions
+Content Spoofing
+Vulnerabilities that are limited to unsupported browsers or operating systems
+Password policies not enforced on user accounts
+Clickjacking or any issue exploitable through clickjacking
+Vulnerabilities in third-party software. Please reach out to the company responsible for the code to have the issues fixed. We may contact the upstream provider, depending on the impact of the vulnerability.
+Lack of Secure and HTTPOnly cookie flags.
+Username / email enumeration
+CORS issues without a working PoC
+Login or Forgot Password page brute force and account lockout not enforced
+CSRF issues that have no security impact
+Antimalware detections bypass or undetected malware samples
+Local privilege elevation on Gravityzone On-Premises OS Recently disclosed critical vulnerabilities in third-party software where there is no patch, or a recent patch (less than one week) is available.
+Missing HTTP security headers
+TLS/SSL Issues, bad cipher suite, expired certificates, etc.
+Internal IP address disclosure
+Reports of spam (i.e., any report involving ability to send emails without rate limits).
+Pre-Authentication Account Takeover
+Mobile issues that require root access or unsupported OS versions
+Non-sensitive exposed API keys (Google Maps, etc.).
+Failure to invalidate session on password change or MFA change.
+Insufficient or non-incremental security impact:
+Findings that require administrative, root, SYSTEM, or equivalent privileges and do not demonstrate a meaningful security impact beyond the capabilities already available with those privileges.
+Abuse of intended product functionality by a user who is already authorized to perform an equivalent action.
+Reports that demonstrate only the absence of a security detection, alert, or prevention event, without identifying an underlying exploitable vulnerability or a bypass of an explicitly documented security boundary.
+Defense-in-depth or product-hardening recommendations that do not demonstrate a practical attack scenario and a meaningful security impact.
+Reports based solely on theoretical impact, without sufficient reproduction steps or a working proof of concept demonstrating the claimed security consequence.
+Findings where the reported result can be achieved through standard operating-system functionality under the same privilege level, unless the Bitdefender component enables an additional capability, crosses a separate trust boundary, or bypasses a security control.
+Out of scope targets
+lsems.gravityzone.bitdefender.com
+ssems.gravityzone.bitdefender.com
+community.bitdefender.com
+resellerportal.bitdefender.com
+stats.bitdefender.com
+sstats.bitdefender.com
+brand.bitdefender.com
+partner-marketing.bitdefender.com
+businessinsights.bitdefender.com
+businessemail.bitdefender.com
+businessresources.bitdefender.com
+oemhub.bitdefender.com
+oemresources.bitdefender.com
+crp.bitdefender.com
+telcosuccess.bitdefender.com
+demo.bitdefender.com
+Program Terms
+Participation in the Bitdefender Bug Bounty Reward program is voluntary and subject to the legal terms and conditions detailed on Terms and Conditions page. By submitting a vulnerability report to Bitdefender, you acknowledge that you have read and agreed to our program terms.
+Qualification Criteria
+The program covers any exploitable vulnerability that can compromise the integrity of our user data, crash applications (leading to compromise of data) or disclose sensitive information (for example remote code execution, SQL injection, Cross-Site Scripting, Cross-Site Request Forgery, information disclosure of sensitive data, authentication theft or bypass, clickjacking).
+Make sure your submission report includes the proof of concept and replication information.
+A finding must demonstrate a clear and meaningful security impact. The report should identify the security boundary that is crossed, the privileges or access required to exploit the issue, and the additional capability gained by a successful attacker.
+Findings that require administrative, root, or equivalent privileges are eligible only when they demonstrate a meaningful impact beyond the capabilities already available to an attacker with those privileges. Examples may include crossing a separate trust boundary, compromising another user or tenant, bypassing a security control, obtaining access to otherwise protected data, or gaining privileges in a distinct security context.
+Eligibility will be determined by the demonstrated security impact.
+Important:
+”Dear Researchers,
+To better align our bug bounty program with current industry practices and focus rewards on vulnerabilities with demonstrable security impact, we are updating our policy regarding reports affecting Bitdefender Antivirus Engine components.
+Starting on 9th June, 2026, reports affecting antivirus engine components that demonstrate only instability, crashes, denial-of-service conditions, or other non-exploitable behavior will generally be considered out of scope and will no longer qualify for bounty rewards unless they demonstrate meaningful security impact.
+The following vulnerability classes remain eligible for rewards:
+Memory Corruption
+Vulnerabilities that allow unintended modification of process memory, including:
+Heap corruption;
+Stack corruption;
+Use-after-free conditions;
+Out-of-bounds writes;
+Type confusion vulnerabilities.
+Memory Disclosure
+Vulnerabilities that allow disclosure of unintended process memory or sensitive information to an attacker.
+Exploitation Primitives
+Vulnerabilities that provide a meaningful exploitation primitive, including:
+Heap exploitation techniques;
+Reliable arbitrary read or write capabilities;
+Other conditions that may contribute to a broader exploitation chain.
+Denial-of-Service with Security Relevance
+Denial-of-Service vulnerabilities triggered through scanning of publicly available applications or samples may be considered on a case-by-case basis when they demonstrate realistic security impact.
+Code Execution
+Vulnerabilities that allow, or credibly demonstrate a path toward, arbitrary code execution are considered Priority 1 (P1) issues.
+Rewards
+Eligible reports may receive rewards ranging from $200 to $15,000, depending on the vulnerability's impact, exploitability, reliability, affected component, and overall security relevance.
+Vulnerabilities leading to, or demonstrating a credible path toward, arbitrary code execution are treated as Priority 1 (P1) issues and may qualify for rewards between $3,500 and $15,000.
+Submission Requirements
+To allow proper validation and assessment, all submissions must include:
+A technical description of the issue;
+The affected product, platform, operating system, and version information;
+Clear reproduction steps;
+Proof-of-concept files or supporting evidence.
+Any submitted files should be provided in a password-protected archive, with the password supplied separately in the report.
+Additional materials such as crash dumps, memory dumps, debugging logs, or other supporting artifacts are encouraged when available.
+For reports claiming code execution, researchers should provide either:
+A non-dangerous and reproducible proof of concept; or
+A detailed technical write-up describing the vulnerability, exploitation chain, required conditions, and expected impact.
+Please note that Bitdefender may request additional information or clarification during the validation process. Reward decisions and severity assessments may be revised if new information becomes available during the investigation.
+We appreciate the continued efforts of the security research community and thank you for helping improve the security and resilience of our products.”
+Non-qualifying vulnerabilities
+Submissions that include just the output of automated tools will be marked as invalid. You must clearly outline the attack vectors and reproduction steps to accomplish the compromise
+Submission process
+We encourage you to send your submissions in an encrypted format to 3F83@F?EJURecj3:E5676?56C]4@∬. We aim to acknowledge your report within 3 business days of receiving it. For the best results, please keep your submission concise, informative, and action-oriented. Thank you for your patience while we review your report.
+We prefer PGP and you can import our public key from here. Make sure your report includes:
+A clear and relevant title
+Affected product / service
+Vulnerability details and impact
+Reproduction steps / Proof of Concept
+Rewards
+There is no fixed price for submissions. They will all be evaluated and rewards will be issued based on impact. Obviously an XSS submission will value less than RCE.
+The minimum reward is set at $100. We’re not setting an upper limit on rewards at this time. The rewards will be issued if you are the first one to submit a specific vulnerability and your report is determined to address a valid issue by our response team.
+IMPORTANT
+This program is open to participants worldwide, excluding locations where prohibited by law, who have reached the age of majority in his/her country, province or territory of residence.
+Participants are responsible for any tax implications depending on the country of residency and citizenship. There may be additional restrictions on a participant’s ability to enter the program, depending upon local law.
+Determining the validity and value of a submission lies exclusively with our team. We trust you to tinker with our technologies and you’ll have to trust us to be fair in our evaluation.
+When does it start?
+The Bitdefender Bug Bounty Program opened on 10th December 2015.
+HotForSecurity Latest news
+Bitdefender and SFR Partner to Deliver Advanced Cybersecurity Solutions Across France
+Bitdefender Named a Strong Performer in Extended Detection and Response (XDR) Report by Leading Research Firm
+New Bitdefender Report Reveals Majority of Online Consumers Practice Risky Behavior for Data Protection, Digital Identity and Device Management
+HOTforSecurity
+How to Keep Your Devices and Personal Data Safe on Summer Vacation
+Don’t name your Wi-Fi hotspot this, unless you want to crash your iPhone
+Repairmen suspected of installing ransomware on customers’ PCs. Arrests in South Korea
+Videos
+The Mind Online Podcast: De ce suntem atât de furioși online?
+20 YEARS OF CYBERSECURITY INNOVATION | ALWAYS DEFENDING
+Update-Chamäleon
+Security Guides
+Tips and tricks on how to keep your blog and your identity safe
+Tips and tricks on how to shield your home network from intruders
+Quick Helpers
+TrafficLight
+Test the Bitdefender products
+Available Now
+Become a more cyber resilient business today
+We’re here to help you choose the solution or service that’s right for your business
+Start Free Trial
+Contact Us
+Trusted.
+Always.
+For Consumer
+For Small Business
+For Enterprise
+For Partners
+Quick Links
+Bitdefender Central
+GravityZone Cloud Control Center
+Bitdefender Cyberpedia
+Partner Advantage Network Portal
+Brand Portal
+Support for Home Products
+Support for Business Products
+Investors
+Careers
+InfoZone
+Legal Information
+Privacy Policy
+Site Map
+Company
+Contact Us
+Privacy Settings
+llms.txt
+robots.txt
+Copyright © 1997 - 2026 Bitdefender
+United States - English
+Choose Your Country
+Australia - English
+België - Nederlands
+Belgique - Français
+Belize - English
+Brasil - Português
+Bulgaria - English
+Canada - English
+Chile - Español
+Colombia - Español
+Czechia - English
+Denmark - English
+Deutschland - Deutsch
+España - Español
+France - Français
+Hong Kong - China
+Hungary - English
+India - English
+Indonesia - English
+Israel - English
+Italia - Italiano
+Jamaica - English
+Latvia - English
+Malaysia - English
+Malta - English
+México - Español
+Nederland - Nederlands
+New Zealand - English
+Norway - English
+Österreich - Deutsch
+Perú - Español
+Philippines - English
+Poland - English
+Portugal - Português
+România - Română
+Saudi Arabia - English
+Schweiz - Deutsch
+Singapore - English
+South Africa - English
+South Korea - English
+Sverige - Svenska
+Taiwan - 台灣
+Thailand - English
+United Arab Emirates - English
+United Kingdom - English
+United States - English
+日本 - 日本語

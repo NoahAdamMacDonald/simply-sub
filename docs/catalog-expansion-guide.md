@@ -6,9 +6,11 @@ developer tools, file sharing, calendars, maps, creative tools and more). Read t
 §4.10 (terms and policies) and §6.5 (the pipeline), and the skills it changes: policy-research, feature-discovery,
 price-research.
 
-Nothing here is built yet. PROJECT-PLAN's M11 builds it, a task at a time: M11.1–M11.9 are this guide's Phase 0,
-M11.10–M11.14 finance (BLUEPRINT §4.11, §10.6), M11.15 the research. The owner's decisions so far are in BLUEPRINT §14
-("Resolved (2026-10-30, catalog expansion)") and §9 below.
+PROJECT-PLAN's M11 builds it, a task at a time. §1 is built (M11.1, 2026-11-02): `data/policy-topics.yaml` is the
+source of truth for the topics, rubrics and silent rules, core's `policyProcedure` and `policyRouting` for §1.3 and
+§1.5 (the policy-research skill states them word for word), and §1 stays the reasoning. In all: M11.1–M11.9 are this
+guide's Phase 0, M11.10–M11.14 finance (BLUEPRINT §4.11, §10.6), M11.15 the research. The owner's decisions so far are
+in BLUEPRINT §14 ("Resolved (2026-10-30, catalog expansion)") and §9 below.
 
 ---
 

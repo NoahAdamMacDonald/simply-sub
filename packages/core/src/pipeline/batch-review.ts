@@ -138,7 +138,8 @@ function providerSection(entry: BatchProvider): string {
       ),
     );
   }
-  if (provider.policies) lines.push(`- **Policies:** ${provider.policies.ratings.length} rated`);
+  if (provider.policies)
+    lines.push(`- **Policies:** ${provider.policies.ratings?.length ?? 0} rated`);
   if (entry.proposedFeatures.length > 0) {
     lines.push(
       '- **Proposed features** (for your approval, through the feature-discovery skill):',

@@ -141,6 +141,10 @@ h4 {
     --policy-fill: var(--policy-bad);
   }
 
+  &[data-tier='none'] {
+    --policy-fill: var(--policy-none);
+  }
+
   // Forced colours drop backgrounds: keep the dot as a shape.
   @media (forced-colors: active) {
     border: 1px solid CanvasText;
@@ -179,6 +183,11 @@ h4 {
 .topic {
   color: var(--ss-text);
   font-weight: 600;
+}
+
+// Not stated, or not applicable (M11.1): the whole line in the muted grey, so it reads as no grade at all.
+.unrated .topic {
+  color: var(--ss-text-muted);
 }
 
 .grade {

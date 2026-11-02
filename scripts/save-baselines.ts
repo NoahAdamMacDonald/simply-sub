@@ -38,7 +38,7 @@ if (countErrors(issues) > 0) {
   fail('The catalog has errors: fix them first (npm run data:validate).');
 }
 const catalog = readCatalogSource(sources);
-const pages = citedPages(catalog.providers, catalog.bundles).filter(
+const pages = citedPages(catalog.providers, catalog.bundles, catalog.policySets).filter(
   (page) => owners.length === 0 || page.owners.some((owner) => owners.includes(owner)),
 );
 const today = toIsoDate(new Date());
@@ -59,7 +59,7 @@ try {
     }
     // The bot reads it with a plain fetch only when the HTML as served has what it shows, and every fact the catalog
     // rests on it.
-    const facts = citedFacts(catalog.providers, catalog.bundles, page.url);
+    const facts = citedFacts(catalog.providers, catalog.bundles, page.url, catalog.policySets);
     const shown = [rendered.renderedText, ...rendered.views.map((view) => view.text)].join('\n');
     const method =
       servedCovers(rendered.servedText, rendered.renderedText) &&

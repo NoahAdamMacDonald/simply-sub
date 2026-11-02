@@ -246,6 +246,9 @@ simply-sub/
 │  │  └─ …
 │  ├─ bundles/
 │  │  └─ disney-crave-premium.yaml
+│  ├─ policy-topics.yaml     # the topics Terms and policies rates, their rubrics and silent rules (section 4.10)
+│  ├─ policies/              # shared policy documents, rated once for the providers they cover (section 4.10)
+│  │  └─ disney-privacy.yaml
 │  ├─ queue.yaml             # the discovery queue: the services to add next, and what became of each (section 6.5)
 │  ├─ baselines/             # each cited page's text when its facts were read, <host>/<path>-<hash>.txt (section 6.5)
 │  ├─ automation.yaml        # the bot's settings: cadences, reviewer, batch sizes, search budgets (section 6.4)
@@ -884,8 +887,8 @@ from the file a plan is in, and flattened views add it.
   `z.toJSONSchema` from the input side of each schema.
 - The files are committed. CI runs `npm run data:schema -- --check`, which fails when they're out of date, so run
   `npm run data:schema` after changing a schema.
-- `.vscode/settings.json` maps them to `data/features.yaml`, `data/categories.yaml`, `data/providers/*.yaml` and
-  `data/bundles/*.yaml` for the Red Hat YAML extension (`redhat.vscode-yaml`, recommended in
+- `.vscode/settings.json` maps them to `data/features.yaml`, `data/categories.yaml`, `data/providers/*.yaml`,
+  `data/bundles/*.yaml`, `data/policies/*.yaml` and the other catalog files for the Red Hat YAML extension (`redhat.vscode-yaml`, recommended in
   `.vscode/extensions.json`).
 - The extension autocompletes keys and enum values, shows each field's description on hover, and flags mistakes
   as you type. It uses the same messages as Zod (through `patternErrorMessage`).
@@ -1231,59 +1234,89 @@ so its price before VAT is stored, as SerialCart's is.
 
 ### 4.10 Terms and policies
 A card's expanded section grades the provider's terms of service, privacy policy and other policies (M1.13,
-M1.14), so a buyer can see what signing up means beyond the price.
-- **Topics** come from `data/policy-topics.yaml`, in four groups: privacy (data collection, selling or sharing data,
-  ads and tracking, deleting your data), billing (cancelling and refunds, price changes, free trials), legal
-  (disputes, changes to the terms, closing your account) and service (VPN logging for VPNs; account sharing and
-  device limits for streaming services). Each has a rubric for five grades, great, good, neutral, poor and bad
-  (M1.14; M1.13 called them good, leaning good, neutral, leaning bad and bad), so a grade means the same for every
-  provider. Data collection's is the model: collecting only what the service needs is great, asking first good, an
-  opt-out neutral, a partial opt-out poor and none bad.
-- **A provider's `policies`:** its ratings and the pages they quote (`links`). A rating is a topic, a grade
-  (`tier`), a reason of a sentence or two in plain words anyone can follow (240 characters at most; M1.13 kept it to
-  one line of 100), one to three sources (a URL and the page's words, word for word) and the date they were read, optionally for some plans (an ad tier's tracking) or regions (a country's own terms), which
-  sit over a rating for every plan or everywhere. Every quoted page is linked and every link is quoted; a topic for
-  some categories applies only to a provider with a plan in one (`validateCatalog`). A rating whose reason says the
-  user has to change something themselves (a setting to turn off, a request to make) has an `action` (M5.12): what the
-  link does, in a few words, and the provider's own page for it, which its policy or help pages link; validation takes
-  it on the provider's own sites or its quoted policies' site, never another company's.
-- **On the card:** core's `planPolicies` picks, for the plan shown and the user's country, each topic's rating, by
-  group in the registry's order, and the pages those ratings quote, numbered from 1. Each rating is a dot in its
+M1.14, M11.1), so a buyer can see what signing up means beyond the price.
+- **Topics** come from `data/policy-topics.yaml` (version 2, M11.1, from `docs/catalog-expansion-guide.md` §1.4), in
+  seven groups the card shows in this order:
+  - privacy: data collection, selling or sharing data, ads and tracking, AI training, who can read your content,
+    how long it keeps your data, deleting your data, taking your data with you, government requests, where your data
+    is kept, what sign-up needs, children;
+  - billing: cancelling, refunds (the two were one topic before M11.1), price changes, free trials, renewal
+    reminders, fees, switching plans;
+  - legal: disputes, changes to the terms, closing your account, rights over your content, what you paid for,
+    inactive accounts, who owns what it makes;
+  - security: independent checks of its security;
+  - service: activity logging (VPN logging before M11.1; VPNs now, DNS, search and browsers once M11.3 adds them),
+    account sharing, device and download limits;
+  - finance: what protects your money, holds and freezes (finance providers, M11.10);
+  - other: `other.notable`, up to three ratings with a title, for what no topic covers (a VPN that takes cash).
+  Each has a rubric for five grades, great, good, neutral, poor and bad (M1.14; M1.13 called them good, leaning good,
+  neutral, leaning bad and bad), worded from one scale: Great protects you by design, Good by default with minor
+  stated limits, Neutral works against you but a full self-serve setting fixes it, Poor only a partial or hard fix,
+  Bad no way out. A topic's `note` says how to read it (what "needed to work" means, what doesn't count), and its
+  `silent` what the provider's silence means, the owner's choice: `not-stated` where silence proves nothing (data
+  sharing), or the grade it gets where it means a missing protection (no notice of price changes promised is Poor;
+  `silentIn` changes it for a category, an AI provider silent on training being Poor). A topic applies to every
+  provider, or only to providers with a plan in one of its `categories`, or with `paidPlans` paid plans (billing:
+  one, switching plans: two). Validation refuses a topic without five rungs or a `silent`; a titled one
+  (`other.notable`) is never required and has none.
+- **A provider's `policies`:** its ratings and the pages they quote (`links`), and the shared documents that cover it
+  (`shared`). A rating is a topic and either a grade (`tier`) with one to three sources (a URL and the page's words,
+  word for word), or a `status` (M11.1): `not-stated`, with the `pages` read that don't address it, or
+  `not-applicable` (no free trial), with no tier and no quotes. Either way a reason of a sentence or two in plain words
+  anyone can follow (240 characters at most; M1.13 kept it to one line of 100) and the date the pages were read,
+  optionally for some plans (an ad tier's tracking) or regions (a country's own terms), which sit over a rating for
+  every plan or everywhere. Every page quoted or read is linked and every link is quoted or read; a topic applies only
+  as above (`validateCatalog`). A rating whose reason says the user has to change something themselves (a setting
+  to turn off, a request to make) has an `action` (M5.12): what the link does, in a few words, and the provider's own
+  page for it, which its policy or help pages link, so the user gets there in one click; validation takes it on the
+  provider's own sites or its quoted policies' site, never another company's. A topic's `actionFor` lists the grades
+  that mean the user has to act (an opt-out's Neutral and Poor, deletion's Good to Poor, every export grade but Bad,
+  an arbitration opt-out's), and validation requires the action on them: an error, a warning for the 13 waiting for
+  M11.9. When the change is the browser's or device's own setting, the action links the provider's page that
+  explains it.
+- **Every topic that applies has a rating or a status** for everywhere and every plan, so cards can be compared line
+  by line: validation names each one missing, an error, except for the 13 providers rated before M11.1
+  (`awaitingPolicyRegrade` in core), which get a warning until M11.9 regrades them and empties the list.
+- **Shared policy documents** (M11.1): a company's privacy policy or terms that cover several providers are rated once
+  in `data/policies/<id>.yaml` (`id`, `name`, `links`, `ratings`, no plans), Disney's privacy policy for Disney+, Hulu
+  and ESPN (`disney-privacy`). A provider names the documents that cover it in `policies.shared` and adds ratings from
+  its own terms. For a topic both rate, the worse grade wins on the card, the provider's own on a tie; its own wins
+  outright only with `replacesShared: true`, when its document says it applies instead. Validation checks a
+  document's ratings as it does a provider's, counts them toward each naming provider's topics, refuses a name with
+  no file and a `replacesShared` where no named document rates the topic, and warns about a document no one names.
+  `data:build` publishes them with the catalog (`policySets`, section 6.3); the nightly check reads each one from the
+  repository at its commit, since D1 has no copy, and checks its pages in the step of the first provider naming it.
+- **A topic and a feature on the same fact** both stay, the feature for ranking and the topic for the card, and must
+  agree (core's `topicFeatureRules`): activity logging is Great only when every plan it covers with `vpn.included` has
+  `no-logs` in `vpn.independent-audits`, for a provider's own rating and a shared document's. A rule whose feature
+  isn't in the registry is inactive.
+- **One procedure for every grade** (core's `policyProcedure` and `policyRouting`, the guide's §1.3 and §1.5): the
+  default first, then how you change it (self-serve, partial, on request or not at all); exceptions for the law,
+  fraud, safety, security or a payment never count against a grade, and business purposes do, judged by what the data
+  is used for, not by what selects it (chats flagged for safety and then used to improve models count); the worst
+  clause wins provider-wide, a clause for some countries or plans being a rating with `regions` or `plans`; broad
+  wording read broadly; each fact in one topic, by the routing table; silence by the topic's `silent`; the whole
+  terms read, and a term that stands out and no topic covers recorded as `other.notable`, never left out; a
+  provider with deep access (VPN, DNS, antivirus, email, password managers, browsers) read for its audits page, bug
+  bounty or disclosure policy and security advisories, for `security.practices` and `vpn.independent-audits`;
+  reasons written as you'd explain them to a five-year-old. Core's `extractionRules` and the policy-research skill's
+  Rules state it in the same words, which a test checks.
+- **On the card:** core's `planPolicies` picks, for the plan shown and the user's country, each topic's rating (and
+  each notable one), the provider's own and its shared documents' as above, by group in the registry's order, and
+  the pages those ratings quote or read, numbered from 1, the provider's first. Each graded rating is a dot in its
   grade's colour, green to red (`--policy-*`, section 8.1), like the rank dots and as decorative, then the topic in
-  bold, its grade in words, muted ("Disputes (Good):", M5.9), and the reason, muted, with an inline citation of each page it quotes ("[2]", once however many
-  quotes it takes from it): a link to the page with a text fragment (`#:~:text=`, core's `quoteLink`) that scrolls
-  to its first quote and highlights each, and the quotes as its tooltip. The numbered pages follow, under Sources.
-  A topic with no rating isn't shown, and a provider with none has no
-  section. A rating's action is a link under its reason, in a new tab (M5.12).
+  bold (a notable rating's title instead), its grade in words, muted ("Disputes (Good):", M5.9), and the reason,
+  muted, with an inline citation of each page it quotes ("[2]", once however many quotes it takes from it): a link to
+  the page with a text fragment (`#:~:text=`, core's `quoteLink`) that scrolls to its first quote and highlights each,
+  and the quotes as its tooltip. A status is a grey line (M11.1): a grey dot (`--policy-none`), the topic and "(Not
+  stated)" or "(Not applicable)" in the muted text, and the reason, citing the pages read as plain links with their
+  names as tooltips; a not-stated topic whose silence gets a grade shows that grade instead. The numbered pages
+  follow, under Sources. A topic with no rating isn't shown, and a provider with none has no section. A rating's
+  action is a link under its reason, in a new tab (M5.12).
 - **Read like prices:** the policy-research skill, from the provider's own pages; a page behind a bot check stays
   unread. The quotes are in the catalog files, and the card shows them in its citations' tooltips and links (about
-  7 kB more to download, compressed, for ten providers). Nothing rereads them nightly yet: validation warns once a rating is
-  a year old.
-
-**Version 2** (M11.1–M11.2, planned 2026-10-30 with the owner; the rubrics and their reasoning are in
-`docs/catalog-expansion-guide.md` until M11.1 puts them in `data/policy-topics.yaml`):
-- **More topics,** most for every provider: AI training, who can read your content, retention, export, government
-  requests, where data is kept, what sign-up needs, children; cancellation and refunds as two topics, renewal
-  notice, fees, plan changes; content rights, what you paid for being taken away, inactive accounts, who owns an AI's
-  output; a security group (independent audits); `service.activity-logging` (VPN, DNS, search, browsers); and for
-  finance, money protection and holds.
-- **One procedure for every grade:** the default first, then how you change it (self-serve, partial, on request or
-  not at all); exceptions for the law, fraud, safety or security never count against an opt-out, and exceptions for
-  business purposes do; the worst clause wins; broad
-  wording read broadly; each fact in one topic, by a routing table. An exception is judged by what the data is used
-  for, not by what selects it (the owner's choice: chats flagged for safety and then used to improve models count
-  against an opt-out). A clause for some countries or plans is a rating with `regions` or `plans`, better or worse
-  than the provider-wide one, which takes the worst clause that applies everywhere else. A topic and a feature on the
-  same fact both stay, and validation checks they agree.
-- **Silence** (the owner's choice): each topic says what silence means. Where it means a missing protection (no
-  notice of price changes promised), it's graded; where it proves nothing (data sharing), the card says *Not stated*
-  in grey. Every topic that applies has a grade or a status, so cards can be compared line by line.
-- **Shared policy documents:** a company's privacy policy or terms that cover several providers (Disney's for Disney+,
-  Hulu and ESPN; Bell's for Crave, TSN and RDS; Microsoft's, Google's, Amazon's) are rated once in
-  `data/policies/<set>.yaml`. A provider names the sets it's covered by and adds ratings from its own terms; for a
-  topic both rate, its own wins only when its document says it applies instead, else the worst clause wins. One read,
-  one set of quotes, one re-read when the page changes.
-- **Notable:** up to three ratings of `other.notable`, with a title, for what no topic covers.
+  7 kB more to download, compressed, for ten providers; M11.8 moves them to a file per provider). Nothing rereads them
+  nightly yet: validation warns once a rating is a year old.
 - **Outside raters** (M11.2, the owner's choice): news bias and reliability from at least two named raters, and
   antivirus lab results, as a provider's `ratings`: the rater, its label, the date and a link, never the rater's text
   or our own judgement.
@@ -1562,8 +1595,8 @@ Validation fails if:
 - a file isn't valid YAML (a duplicate key, more than one document), isn't one of `data/features.yaml`,
   `data/categories.yaml`, `data/resellers.yaml` (optional), `data/policy-topics.yaml` (optional until a provider
   rates its policies), `data/queue.yaml` (optional, section 6.5), `data/redirects.yaml` (optional, section 4.3),
-  `data/providers/<id>.yaml` or `data/bundles/<slug>.yaml` (always `.yaml`), or `features.yaml` or
-  `categories.yaml` is missing
+  `data/providers/<id>.yaml`, `data/bundles/<slug>.yaml` or `data/policies/<id>.yaml` (always `.yaml`), or
+  `features.yaml` or `categories.yaml` is missing
 - a redirect's target doesn't exist or is retired, points at another entry's old id (a chain), or its old id is still
   in the catalog and isn't a retired plan or provider without `endsOn`; or `endsOn` comes without `retired`, or before
   it (section 4.3)
@@ -1589,10 +1622,20 @@ Validation fails if:
   square, is under 32 pixels or is over 100 KB
 - a provider's `resellers` name a shop that isn't in `data/resellers.yaml`, quote an approval page off the
   provider's own domain, or give a price whose `sourceUrl` isn't on the shop's website or `domains` (section 4.9)
-- a provider's `policies` rate a topic that isn't in `data/policy-topics.yaml`, or one for categories none of its
-  plans is in, quote a page its `links` don't list or list one no rating quotes, rate a topic twice for the same
-  plans and regions, name a plan that isn't its own, or were read after today (section 4.10); a warning once a
-  rating is over a year old
+- a topic has no `silent` (or a titled one has one), or names a category that isn't defined
+- a provider's `policies`, or a shared document's, rate a topic that isn't in `data/policy-topics.yaml`, or (the
+  provider's) one for categories none of its plans is in or for paid plans it hasn't, give a rating both a tier and a
+  status or neither, a status with quotes or an action, or a not-stated one without the pages read, quote or read a
+  page its `links` don't list or list one nothing quotes or reads, rate a topic twice for the same plans, regions and
+  title, give `other.notable` no title, a status or more than three ratings (or a title elsewhere), name a plan that
+  isn't its own, a shared document with no file or a `replacesShared` no named document rates, or were read after
+  today (section 4.10); a warning once a rating is over a year old, and for a shared document no provider names
+- a topic that applies to a provider has no rating or status for everywhere and every plan, its own or a shared
+  document's (a warning for the 13 waiting for M11.9's regrade)
+- a rating's grade is one its topic's `actionFor` lists and it has no `action`, the user's way to act (a warning for
+  the 13 waiting for M11.9's regrade, and for a shared document only they name)
+- a topic and a feature on the same fact disagree: activity logging Great on a plan with the VPN whose
+  `vpn.independent-audits` lacks `no-logs` (section 4.10)
 - `includes-subscription` lists the plan itself or its own provider, or makes a loop (Duo → Unlimited → Duo)
 - a provider has `billingCurrency`, and a plan or add-on is priced in a region that isn't in it, or has no price
   in the charged currency for that region
@@ -1633,7 +1676,8 @@ write the files.
    - `data` is `schemaVersion` plus the source files: features, categories, providers sorted by id (with an
      `iconUrl` when the provider has a logo; without one, the app shows its first letter), bundles sorted by id,
      `data/resellers.yaml`'s resellers sorted by id, each with an `iconUrl` the same way (section 4.9), and
-     `data/policy-topics.yaml`'s topics in its order (`policyTopics`, section 4.10). Bundles stay in their source shape: the app computes feature unions and
+     `data/policy-topics.yaml`'s topics in its order (`policyTopics`, section 4.10), and `data/policies/`'s shared
+     documents sorted by id (`policySets`, left out when there are none). Bundles stay in their source shape: the app computes feature unions and
      savings in core for the user's region, and `GET /bundles` adds them per request (M2.4).
    - `meta` is `catalogVersion` (section 5.1), `generatedAt` (the build time, UTC), every priced region, and
      counts.

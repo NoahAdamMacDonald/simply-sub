@@ -359,6 +359,7 @@
                     "name": "Data collection",
                     "group": "privacy",
                     "question": "What it collects beyond what the service needs to work, and whether you can say no.",
+                    "silent": "not-stated",
                     "tiers": {
                       "great": "Collects only what the service needs to work.",
                       "good": "Asks before collecting anything more.",
@@ -664,6 +665,7 @@
                     "name": "Data collection",
                     "group": "privacy",
                     "question": "What it collects beyond what the service needs to work, and whether you can say no.",
+                    "silent": "not-stated",
                     "tiers": {
                       "great": "Collects only what the service needs to work.",
                       "good": "Asks before collecting anything more.",

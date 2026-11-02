@@ -82,7 +82,7 @@ function streamWorld(): World {
         : {
             policies: [
               {
-                topic: 'billing.cancel-refunds',
+                topic: 'billing.refunds',
                 tier: 'neutral',
                 reason:
                   'You can cancel anytime and keep watching until the period ends, but get no money back.',
@@ -138,7 +138,7 @@ describe('the discovery', () => {
       ['Premium', 23.99],
     ]);
     expect(provider.cancelUrl).toBe(`${site}/cancel`);
-    expect(provider.policies?.ratings[0].sources[0].quote).toBe(
+    expect(provider.policies?.ratings?.[0].sources?.[0].quote).toBe(
       'you’ll keep access until the end of your billing period',
     );
     const paths = made.changes.map((change) => change.path);

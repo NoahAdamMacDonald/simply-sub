@@ -111,12 +111,14 @@ describe('PlanDetails', () => {
       await show('mullvad.vpn');
 
       expect(groups().at(-1)).toBe(
-        'Terms and policies Legal Disputes (Great): Swedish courts or the consumer disputes board. [1] ' +
-          'Service VPN logging (Great): No connection logs, and an audit found none. [2] ' +
+        'Terms and policies Privacy Data collection (Not stated): Its no-logging policy doesn’t say what else it collects. [2] ' +
+          'Legal Disputes (Great): Swedish courts or the consumer disputes board. [1] ' +
+          'Service Activity logging (Great): No connection logs, and an audit found none. [2] ' +
           'Sources [1] Terms of service [2] No-logging policy',
       );
       const dots = Array.from(element().querySelectorAll('.policies .dot'));
       expect(dots.map((dot) => [dot.getAttribute('data-tier'), dot.ariaHidden])).toEqual([
+        ['none', 'true'],
         ['great', 'true'],
         ['great', 'true'],
       ]);
@@ -129,9 +131,22 @@ describe('PlanDetails', () => {
       expect(link?.getAttribute('aria-label')).toMatch(/^\[1\] .+, opens in a new tab$/);
     });
 
+    it('shows a topic the pages don’t address as a grey Not stated line, citing the page read (M11.1)', async () => {
+      await show('mullvad.vpn');
+      const line = element().querySelector('.policies li');
+
+      expect(line?.classList.contains('unrated')).toBe(true);
+      expect(line?.querySelector('.grade')?.textContent?.trim()).toBe('(Not stated):');
+      expect(line?.querySelector<HTMLAnchorElement>('.cite')?.href).toBe(
+        'https://mullvad.net/en/help/no-logging-data-policy',
+      );
+      expect(element().querySelectorAll('.policies li.unrated')).toHaveLength(1);
+    });
+
     it('cites each page a rating quotes, linked to the words, with the quote as its tooltip', async () => {
       await show('mullvad.vpn');
-      const cite = element().querySelector<HTMLAnchorElement>('.cite');
+      // The first graded line's: the Not stated line before it cites the page it read.
+      const cite = element().querySelector<HTMLAnchorElement>('.policies li:not(.unrated) .cite');
 
       expect([cite?.href, cite?.target, cite?.rel]).toEqual([
         'https://mullvad.net/en/help/terms-service#:~:text=shall%20be%20handled%20by,or%20the%20Swedish%20courts',
@@ -143,8 +158,12 @@ describe('PlanDetails', () => {
       );
       const tooltips =
         await TestbedHarnessEnvironment.loader(fixture).getAllHarnesses(MatTooltipHarness);
+      // A page read that's silent on the topic is named alone.
       await tooltips[0].show();
-      expect(await tooltips[0].getTooltipText()).toBe(
+      expect(await tooltips[0].getTooltipText()).toBe('No-logging policy');
+      await tooltips[0].hide();
+      await tooltips[1].show();
+      expect(await tooltips[1].getTooltipText()).toBe(
         '“shall be handled by the National Board for Consumer Disputes (ARN) or the Swedish courts” ' +
           '(Terms of service)',
       );
@@ -155,7 +174,7 @@ describe('PlanDetails', () => {
       saved.set({ ...alberta, country: 'US', subdivision: undefined, currency: 'USD' });
       await show('mullvad.vpn');
 
-      expect(text('.policies .rated')).toContain(
+      expect(text('.policies li:not(.unrated) .rated')).toContain(
         'Disputes (Bad): A made-up US rule, for the test.',
       );
       // Where to change it (M5.12): the provider's own page, in a new tab, named in one piece.

@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { proposal } from '../src/proposal';
 import { stepPlan } from '../src/run';
-import { catalogIndex, providerTargets } from '../src/targets';
+import type { PolicySet, SnapshotProvider } from '@simply-sub/core';
+import { catalogIndex, policyTargets, providerTargets } from '../src/targets';
 import type { Finding } from '../src/types';
 import { files, mullvad, netflix, today } from './fakes';
 
@@ -17,6 +18,7 @@ describe('stepPlan', () => {
       },
       hosts: [],
       cited: [],
+      policySets: {},
     });
     expect(plan.withProvider).toEqual({ crave: ['bundle.a'], tsn: [] });
     expect(plan.groups).toEqual([['bundle.b', 'bundle.c'], ['bundle.d']]);
@@ -47,6 +49,48 @@ describe('stepPlan', () => {
     ]);
     expect(index.hosts).toContain('www.amazon.ca');
     expect(index.hosts).toContain('icons.duckduckgo.com');
+  });
+
+  it('checks a shared policy document once, in the step of the first provider naming it (M11.1)', () => {
+    const privacy = 'https://privacy.example.com/policy';
+    const set: PolicySet = {
+      id: 'example-privacy',
+      name: 'Example Group’s privacy policy',
+      links: [{ name: 'Privacy policy', url: privacy }],
+      ratings: [
+        {
+          topic: 'privacy.data-sharing',
+          tier: 'neutral',
+          reason: 'It shares data for ads unless you say no.',
+          sources: [{ url: privacy, quote: 'We share identifiers with advertisers' }],
+          lastVerified: '2026-10-27',
+        },
+      ],
+    };
+    const naming = (provider: SnapshotProvider): SnapshotProvider => ({
+      ...provider,
+      policies: { ...provider.policies, shared: [set.id] },
+    });
+    const index = catalogIndex([naming(netflix), naming(mullvad)], [], [set]);
+    expect(index.policySets).toEqual({ mullvad: [set] });
+    expect(index.providers['mullvad']).toContain(privacy);
+    expect(index.providers['netflix']).not.toContain(privacy);
+    expect(index.cited.find((page) => page.url === privacy)?.owners).toEqual([
+      'netflix',
+      'mullvad',
+    ]);
+    expect(policyTargets(naming(mullvad), [set]).at(-1)).toEqual({
+      file: 'data/policies/example-privacy.yaml',
+      provider: 'mullvad',
+      url: privacy,
+      ratings: [
+        {
+          topic: 'privacy.data-sharing',
+          tier: 'neutral',
+          quotes: ['We share identifiers with advertisers'],
+        },
+      ],
+    });
   });
 });
 

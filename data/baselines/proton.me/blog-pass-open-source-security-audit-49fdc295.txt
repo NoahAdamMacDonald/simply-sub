@@ -1,0 +1,295 @@
+url: https://proton.me/blog/pass-open-source-security-audit
+method: fetch
+saved: 2026-11-02
+
+Proton Pass is open source and audited for security | Proton Personal Personal
+Business Business
+Download
+Discover Proton Discover Proton
+Resources
+Pricing
+Encrypted emailProton Mail VPN Proton VPN(new window) Cloud storageProton Drive Password managerProton Pass AI assistantLumo AI
+Video conferencingProton Meet Private schedulingProton Calendar Collaborative documentsProton Docs Collaborative spreadsheetsProton Sheets Two-factor authenticatorProton Authenticator
+Bitcoin walletProton Wallet Encrypted notes Standard Notes(new window) Hide-my-email aliases SimpleLogin(new window)
+Discover Proton
+Personal plans
+Proton
+Choose an internet where your privacy comes first
+Create a free account
+All-in-one business suiteProton Workspace Business emailProton Mail Business VPNProton VPN Business AI assistantLumo AI Business video conferencingProton Meet Business calendarProton Calendar Business password managerProton Pass
+Business cloud storageProton Drive Business documentsProton Docs Business spreadsheetsProton Sheets
+Industries
+Tech Healthcare Nonprofits News and media
+Business resources
+Trust center HIPAA GDPR Data Breach Observatory ISO 27001 Case studies Business blog
+Switch from
+Microsoft 365 Google Workspace
+Discover Proton for Business
+Business plans
+Proton Workspace
+Your whole team, one encrypted workspace
+Explore Workspace
+Proton Mail Proton VPN Proton Drive Proton Pass Lumo AI Proton Meet Proton Calendar Proton Authenticator Proton Wallet
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+macOS Windows Linux
+Web app
+Web app(new window)
+Desktop client add-on
+Bridge
+Scan to get the mobile app
+Devices
+Windows(new window)macOS(new window)Linux(new window)Chromebook(new window)Android(new window)iOS(new window)
+Extensions
+Chrome(new window)Firefox(new window)
+Smart TV
+Android TV(new window)Apple TV(new window)Firestick(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+Windows macOS CLI
+Web app
+Web app(new window)
+Scan to get the mobile app
+Devices
+Windows macOS Linux Android iOS Command line interface(new window)
+Extensions
+Chrome Safari Firefox Edge Brave
+Web app
+Web app(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Web app
+Web app(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+macOS Windows Linux
+Web app
+Web app(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+macOS Windows Linux
+Web app
+Web app(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+macOS Windows Linux
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Web app
+Web app(new window)
+Company
+About us Impact Team CareersWe’re hiring Proton Foundation Proton blog
+Privacy
+Open source Zero-access encryption Big Tech alternatives
+Connect
+Partners and affiliates Social media Media contact
+Discover Proton
+Personal plans
+Proton
+We believe a better world starts with privacy and digital freedom
+Discover Proton
+Get started with Proton
+Beginner video guides (new window)Learn about encryption Business resources
+News
+Proton blog Product updates
+Reports and insights
+Investigative reports Proton VPN observatory (new window)Data breach observatory Tech fines tracker Europe’s tech sovereignty watch European alternatives Age verification explained Proton’s guide to AI
+Videos about privacy
+Mass surveillance explained (new window)How employers spy on you (new window)The data you leak in 24 hours (new window)How to disappear online (new window)See all videos (new window)
+Tools
+What is my IP address? (new window)Password generator Username generator PDF watermark Image watermark Flock camera map
+Support
+Help center Contact us
+EN
+Create a free account
+Sign in
+Open menu
+Proton updates
+Latest
+Videos
+News
+Guides
+Opinion
+For business
+Subscribe by RSS
+Search for blog posts Create account
+Proton Pass is open source and audited for security
+Proton Pass
+Proton updates
+Son Nguyen Kim
+Published on July 19, 2023
+Share this page:
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+Copy link
+At Proton, we want you to be able to choose what happens to your personal information, which is why we’ve built a suite of encrypted services that put you in control. An integral part of giving you control is explaining exactly how our services work, including how they protect your information. This is the only way you can make an informed decision about who to entrust with the details of your life.
+Given the sensitive information you protect with your password manager, it’s crucial that you know exactly what’s happening inside it. Because Proton Pass is open source, anyone can inspect our code and ensure that the apps work as described.
+You can find the source code for Proton Pass here:
+Proton Pass browser extensions(new window)
+Proton Pass iOS/iPadOS app(new window)
+Proton Pass Android app(new window)
+Review the code for all Proton apps
+Proton Pass has passed an independent security audit
+While being open source means that anybody can audit our code, not everyone has the time, technical expertise, or interest to pore over our apps’ code. That’s why we also regularly commission and publish independent security audits for all our apps.
+Proton Pass’s code underwent a security audit by the German security firm Cure53(new window) throughout May and June. We selected Cure53 to handle the Proton Pass audit because we wanted to ensure that Proton Pass received the most rigorous testing possible, and Cure53 has extensive experience investigating browser extensions and password managers. They tested all Proton Pass mobile apps, browser extensions, and our API.
+Cure53 had this to say about Proton Pass, “Proton’s extensive and thorough security assessment by Cure53 showcased their commitment to maintaining a high-level of security. With a moderate number of findings and most security vulnerabilities limited in severity, the overall state of security across Proton’s applications and platforms is commendable”.
+These results reflect Proton’s deep security DNA and help validate many of the architectural decisions we made with Proton Pass. There are also password management-specific considerations that this audit helped raise to our attention. For instance, we missed a case where an attacker might control a subdomain on a domain where the user has an account and thus trick a user who isn’t paying attention into accidentally entering their credentials.
+All issues reported in the security audit have been resolved except for the medium severity issue PRO-01-003 WP1, which unfortunately cannot be resolved at this time due to a platform limitation in Android (the Android operating system doesn’t currently provide the information that would be required to solve this issue). You can read the Proton Pass audit report(new window) for yourself. You can also find the audit reports for all Proton services.
+Security you can trust and verify
+As a company run by scientists (Proton was founded by scientists who met at CERN), we believe strongly in the scientific ethos of transparency and peer review. Proton’s security and privacy claims can be independently verified by others, and our open-source code allows our claims to be continually tested, verified, and even improved.
+Instead of hiding vulnerabilities and relying on secrecy to maintain “security” like other companies, we subject all our services to rigorous public examination, allowing us to swiftly find and resolve any issues.
+For this reason, we also actively encourage the inspection and checking of Proton’s code through our public Bug Bounty Program. If you have questions or comments about Proton Pass, its security audit, or our approach to open source, please share them with us! Join the conversation on Twitter(new window) and Reddit(new window).
+Share this page:
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+Copy link
+Son Nguyen Kim Son is the Founder of SimpleLogin, which he continues to work on, along with Proton Pass. Previously, he was the director of engineering at Workwell and CTO at Fitle. Son graduated from Ecole Polytechnique with an MSc in computer science and was a gold medalist at the International Mathematical Olympiad.
+Related articles
+Oct 22, 2026 Lumo AI
+Proton updates
+Lumo can now turn your ideas into creations
+Create documents, code, and web pages with Lumo’s canvas. Everything stays protected with zero-access encryption.
+Oct 21, 2026 Proton updates
+For business
+Manage team access easily with new Admin roles and SCIM for groups
+Proton now supports admin roles and SCIM for groups, enabling you to manage organizational access easily and more securely.
+Oct 15, 2026 Proton Pass
+Proton updates
+Folders, URL matching, and compromised password alerts are now available for Proton Pass
+We're introducing new features for Proton Pass including folders, URL matching, and compromised password alerts. Find out more.
+Oct 15, 2026 Proton updates
+Proton product roadmaps for autumn and winter 2026
+See what's coming next to Proton Mail, Drive, Pass, VPN, and Lumo this autumn and winter 2026.
+Oct 14, 2026 Proton Meet
+Proton updates
+For business
+Run more secure, organized meetings with new Proton Meet features
+Proton Meet adds new waiting rooms and chat threads features, for greater control and productivity across online calls.
+Sep 17, 2026 Lumo AI
+Proton updates
+Proton partners with Apertus, Switzerland’s sovereign AI model
+Proton has partnered with the team behind Apertus, adding their sovereign AI model to its privacy-first AI chatbot Lumo.
+Privacy by default
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+Proton AG Route de la Galaise 32
+1228 Plan-les-Ouates
+Geneva, Switzerland
+Products Proton Mail
+Proton Calendar
+Proton Drive
+Proton VPN(new window)
+Proton Pass
+Proton Wallet
+Proton Docs
+Proton Sheets New
+Proton Authenticator
+Proton Meet New
+Lumo AI
+Standard Notes(new window)
+Simple Login(new window)
+Proton for Business
+Pricing
+Switch to Proton
+Products
+Proton Mail
+Proton Calendar
+Proton Drive
+Proton VPN(new window)
+Proton Pass
+Proton Wallet
+Proton Docs
+Proton Sheets New
+Proton Authenticator
+Proton Meet New
+Lumo AI
+Standard Notes(new window)
+Simple Login(new window)
+Proton for Business
+Pricing
+Switch to Proton
+Privacy Password generator
+Username generator
+Tor
+Open source
+Student discount
+Special reports
+Proton vs. competitors
+Privacy
+Password generator
+Username generator
+Tor
+Open source
+Student discount
+Special reports
+Proton vs. competitors
+Company About us
+Team
+Impact
+Proton Foundation
+Careers We’re hiring
+Shop(new window)
+Donate
+Blog
+Company
+About us
+Team
+Impact
+Proton Foundation
+Careers We’re hiring
+Shop(new window)
+Donate
+Blog
+Connect Social media
+Help and support
+Partners and affiliates
+Referral program
+Press and media
+Contact us
+Connect
+Social media
+Help and support
+Partners and affiliates
+Referral program
+Press and media
+Contact us
+English
+System status(new window)
+Report abuse
+Report a problem
+Report a security issue
+Request a feature(new window)
+English
+Privacy Policy
+Terms & conditions
+Transparency report
+© 2026 Proton AG. All rights reserved.

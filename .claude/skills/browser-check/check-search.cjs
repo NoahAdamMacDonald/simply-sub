@@ -1633,11 +1633,11 @@ async function addItem(page, planId) {
       );
     check(
       'Mullvad’s details grade its terms by group, each a dot named by its grade, with why and citations, and number its pages',
-      groups.join() === 'Privacy,Billing,Legal,Service' &&
+      groups.join() === 'Privacy,Billing,Legal,Security,Service,Notable' &&
         rows[0] ===
           "great | Data collection (Great): To sign up you don't give your name, an email address or even a password, so it knows very little about you. [3]" &&
-        rows.some((row) => row.startsWith('good | Cancelling and refunds (Good):')) &&
-        links.length === 4 &&
+        rows.some((row) => row.startsWith('good | Refunds (Good):')) &&
+        links.length === 7 &&
         links[0][0].startsWith('[1] Terms of service') &&
         links.every(
           ([text, target, rel]) =>
@@ -1645,8 +1645,9 @@ async function addItem(page, planId) {
         ),
       `${groups.join(', ')} | ${rows[0]} | ${links.map(([text]) => text).join(', ')}`,
     );
+    // A graded line's citations: a Not stated line (M11.1) links the page it read, with no words to scroll to.
     const citations = await section
-      .locator('.cite')
+      .locator('.policies li:not(.unrated) .cite')
       .evaluateAll((anchors) =>
         anchors.map((anchor) => [
           anchor.textContent.replace(/\s+/g, ' ').trim(),
@@ -1659,14 +1660,16 @@ async function addItem(page, planId) {
       citations.length >= 9 &&
         citations.every(
           ([text, href, target]) =>
-            /^\[[1-4]\] .+, opens in a new tab$/.test(text) &&
+            /^\[[1-7]\] .+, opens in a new tab$/.test(text) &&
             href.includes('#:~:text=') &&
             target === '_blank',
         ),
       `${citations.length}: ${citations[0]?.join(' ')}`,
     );
     // Mullvad's refunds quote its terms three times: one citation, highlighting all three.
-    const refunds = section.locator('.policies li', { hasText: 'Cancelling and refunds' });
+    const refunds = section.locator('.policies li', {
+      has: page.locator('.topic', { hasText: /^Refunds$/ }),
+    });
     const refundCites = await refunds
       .locator('.cite')
       .evaluateAll((anchors) => anchors.map((anchor) => anchor.href));

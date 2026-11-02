@@ -1074,8 +1074,54 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
 - **Moving the 13:** `billing.cancel-refunds` becomes two ratings from the same quotes, regraded in M11.9;
   `service.vpn-logging` is renamed. Policy topics aren't in users' data, so there's no Dexie upgrade.
 - **Acceptance**
-  - [ ] `data:validate` refuses a topic without `silent` or five rungs, and a provider missing an applicable topic
-  - [ ] A Not stated line is grey, with the reason, in both themes, and passes axe
+  - [x] `data:validate` refuses a topic without `silent` or five rungs, and a provider missing an applicable topic
+  - [x] A Not stated line is grey, with the reason, in both themes, and passes axe
+- **As built** (the owner's choices on 2026-11-02: a missing topic is an error, except for the 13, which are warnings
+  until M11.9; `finance` added to `categories.yaml` now; Mullvad's audits reread):
+  - **Topics:** 33 in seven groups (privacy, billing, legal, security, service, finance, other), each with a `note`
+    on how to read it where the guide has one, `silent` (`silentIn: { ai: poor }` for AI training), and `categories`
+    or `paidPlans` (1 for billing, 2 for switching plans) for where it applies. The guide's new categories that don't
+    exist yet (email, DNS, search, browsers, social…) aren't in the topics' `categories`: M11.3 adds them there. The
+    guide's table gives no silent rule for the service and finance topics; chosen here, for the pull request to
+    settle: activity logging Poor (no no-logs promise is a missing protection), money protection Bad (its Bad rung
+    is "no stated protection"), the rest Not stated.
+  - **Ratings:** a `tier` with sources, or a `status` with no quotes (`not-stated` with `pages`, or
+    `not-applicable`); `title` on `other.notable`, up to three. Validation names every topic that applies and has no
+    rating or status for everywhere and every plan, own or shared: an error, a warning for the 13 in
+    `awaitingPolicyRegrade`, which M11.9 empties. Statuses the providers' comments already recorded went in (no free
+    trial at Mullvad, Proton and ICI TOU.TV; Mullvad's terms silent on closing accounts; ICI TOU.TV's conditions on
+    sharing and device limits); RDS's and TSN's "don't say" topics wait for M11.9, since their help centres weren't
+    read.
+  - **Moving the 13:** each `billing.cancel-refunds` rating became a `billing.cancellation` and a `billing.refunds`
+    with the same tier, reason and quotes, so the two lines read the same until M11.9; `service.vpn-logging` is
+    `service.activity-logging`.
+  - **Shared documents:** `data/policies/disney-privacy.yaml` holds the four ratings Disney+ and ESPN had word for
+    word; Hulu keeps its own data sharing (it quotes the policy's clause on Hulu's partners), a tie the card gives
+    Hulu. `policySetSchema`, `policies.shared`, `replacesShared`, `policySets` in the snapshot and region files, and
+    `planPolicies(…, sets)`. The nightly check has no D1 copy of a document, so it reads each from GitHub at the
+    night's commit and checks its pages in the first naming provider's step; `citedPages` and `citedFacts` count them.
+  - **Topic and feature:** `vpn.independent-audits` was in the registry already (PR #25), so no feature was proposed.
+    The check fired on Mullvad, whose audits listed no `no-logs`; reread, Radically Open Security's 2023 audit was
+    asked to verify "Whether or not we log customer activity" and found no logging of customer data, so Mullvad's
+    feature has `no-logs` and its Great stands, quoting that audit.
+  - **Procedure:** `policyProcedure` and `policyRouting` in core, in `extractionRules` and word for word in the
+    skill's Rules (a test compares them, whitespace aside). `topicsDigest` gives each topic's note and silent rule;
+    the extraction answer takes `status` (drafted with the terms and privacy pages read) and `title`.
+  - **The owner's follow-up (2026-11-02):** an opt-out must be linked, so a topic's `actionFor` lists the grades
+    that need the user's `action`, which validation requires (Claude's three, Proton's two and Disney's deletion
+    linked from their policies; ICI TOU.TV's, whose CBC notice doesn't render, waits for M11.9). Providers with deep
+    access are read for their audits, as Mullvad's External audits posts: `security.practices` for Mullvad, Proton
+    and Bitdefender, each Good by the rubric (published audits and a disclosure policy, no bounty; published audits
+    and a bug bounty; yearly SOC 2 with its report on request and a bug bounty), none with published past incidents
+    found. Notable terms are recorded, never dropped: Mullvad's cash by post (Great), Bitdefender's installer that may
+    remove other security apps (Poor) and its VPN on IPVanish's software and rules (Neutral); Proton's inactive free
+    accounts are `legal.inactivity` (Good). The procedure gained steps 12–14 (notable terms, audits, reasons for a
+    five-year-old), and `quote-check.cjs` reads statuses and shared documents. Bitdefender's certifications page
+    renders too late for `data:baselines`, so it has no baseline yet.
+  - **The card:** a status is a grey line: `--policy-none` (the unranked grey) for the dot, the topic and "(Not
+    stated)" or "(Not applicable)" in the muted text, the pages read cited as plain links; a notable rating is named by
+    its title. `check-m11-policies.cjs` (browser-check skill): 57 checks in both themes at both widths with axe;
+    `check-search.cjs` follows the split topic and Mullvad's new groups.
 
 **M11.6 — Ranked perks** (BLUEPRINT §4.2)
 ```yaml

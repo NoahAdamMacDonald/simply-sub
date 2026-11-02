@@ -1,0 +1,130 @@
+url: https://mullvad.net/en/blog/infrastructure-audit-completed-by-radically-open-security
+method: fetch
+saved: 2026-11-02
+
+Infrastructure audit completed by Radically Open Security | Mullvad VPN
+Skip to main content
+Products and services
+VPN
+Browser
+Browser extension
+Pricing
+Privacy
+Why privacy matters
+Technical resources
+Downloads
+Tech blog & news
+Open source
+Check for leaks
+Servers
+Help and support
+Guides
+FAQ
+VPN
+Browser
+Pricing
+Downloads
+Why privacy matters
+Log in Get started
+Infrastructure audit completed by Radically Open Security
+August 9, 2023 External audits Security
+We tasked the Netherlands based security firm Radically Open Security (RoS) with performing the third audit towards our VPN infrastructure.
+We asked them to focus solely on VPN servers that run from RAM, one OpenVPN and one WireGuard server.
+We invite you to read the final report of our third security audit, concluded in mid-June 2023, with many fixes deployed late June 2023. Further re-tests and a verification pass was performed during July.
+RoS discovered a number of new findings, and we would like to thank them for their thorough and detailed report. They stated , amongst other things that: that whilst they found some issues, that: “The Mullvad VPN relays which were the subject of this test showed a mature architecture…” and “During the test we found no logging of user activity data..”
+We gave RoS full SSH access to two (2) VPN servers that were running from RAM, using our latest slimmed down Linux kernel (6.3.2) and customised Ubuntu 22.04 LTS based OS. These servers were deployed as though they were to be production customer-facing servers, however these servers have never been utilised as such.
+We asked them to verify:
+Security and set up of servers internally
+Security and set up of servers externally
+Whether or not we log customer activity
+RoS also asked whether they should investigate the source code of various binaries running on our systems, or whether they should take into consideration the hardware-level security. We declined both offers, stating that this is to be considered an “after the system is running and in-use by customers” audit.
+Overview of findings
+Radically Open Security found no information leakage or logging of customer data
+RoS discovered 1 High, 6 Elevated, 4 Moderate, 10 Low and 4 info-severity issues during this penetration test.
+Key takeaway: Our VPN infrastructure has been audited for the third time.
+Miscellaneous issues of interest
+MLL-024 Production multihop traffic on test system (High)
+To quote RoS: “Impact - Production user traffic is visible to pentest users.”
+Our comments:
+RoS were given production-like servers, provisioned and deployed like all other customer facing servers. The difference between these and the rest of our fleet is that they have never been made available for customers to connect, they were not advertised in our server list, and not offered up to users. However, as these servers are connected to our WireGuard multihop functionality, any customer scanning for IPs can send traffic though them whilst connected to another VPN server using a SOCKS5 proxy, as there is nothing blocking it.
+In what RoS discovered there was only the IP from the WireGuard internal interface. This interface is only available to SOCKS5 multihop traffic, so it would be the entry WireGuard server.
+Without providing RoS with production servers the audit would not have been valid as a production server audit, and there would have been no way to prevent customer traffic from being visible on the servers.
+MLL-019 - LPE to root using systemd timers and insecure directory permissions (Elevated)
+To quote RoS: “Low-privileged system accounts can elevate their privileges to root by manipulating systemd timer script content.”
+Our comments:
+It became obvious after consulting with RoS that the primary issue here is the use of nested home directories, and the addition of administrator users being part of the mad group.
+The usage of the nested /home/mad directory structure is a legacy remnant of pre-RAM VPN servers, which is going to be removed in the upcoming updates to our infrastructure. In the short-term we have removed all administrator users from being part of the mad group, but we have also moved all related scripts to /opt/local_checks which RoS acknowledged as resolving the issue.
+MLL-045 — Administrator access to production machines (Moderate)
+To quote RoS: “VPN servers accept remote logins from administrators, who technically have the ability to tap into production users' VPN traffic”
+Our comments:
+We have been aware of this issue for some time, and conversing with RoS only confirmed our plans to implement such measures:
+Implement a method by which unauthorised logins can be auditable, and add a log of all the commands (without arguments) used on these servers. We are implementing such a system.
+Remove support for SSH entirely, this would mean that even administrators could not enable logging of customer traffic, since no access is enabled over SSH. We are investigating such a system, though this will take more time to perform correctly.
+MLL-016 - Telegraf password shared across servers (low)
+To quote RoS: “Shared Influx database credentials used by Telegraf across VPN servers allows manipulation of global server metrics, such as CPU and disk usage or network metrics.”
+Our comments:
+We deemed the best course of action here to implement client certificates for authentication using the PKI infrastructure available within Hashicorp Vault. This has now been implemented, and we will investigate the use of such certificates in other places across our infrastructure.
+---
+There are more changes to be deployed in the near future, and the listed fixes are examples of the most interesting issues that Radically Open Security found.
+For the universal right to privacy,
+Mullvad
+Mullvad
+About
+Help
+Servers
+Pricing
+Blog
+Mullvad VPN
+Mullvad Browser
+Why privacy matters
+Why Mullvad VPN?
+What is a VPN?
+Downloads
+Stop chat control
+Press
+Careers
+Policies
+Policies
+Open source
+Privacy policy
+Cookies
+Terms of service
+Partnerships and resellers
+Reviews, ads and affiliates
+Reporting a bug or vulnerability
+Address
+Mullvad VPN AB
+Box 53049
+400 14 Gothenburg
+Sweden
+support@mullvadvpn.net
+GPG key
+Onion service
+Follow us
+@mullvadnet
+@mullvadnet
+Mullvad VPN
+mullvad
+Language
+English العربيّة
+Dansk
+Deutsch
+English
+Español
+فارسی
+Suomi
+Français
+Italiano
+日本語
+한국어
+Nederlands
+Norsk
+Polski
+Português
+Русский
+Svenska
+ภาษาไทย
+Türkçe
+Українська
+简体中文
+繁體中文

@@ -28,6 +28,7 @@
 id: claude
 name: Claude
 website: https://claude.com
+domains: [claude.ai]
 category: ai
 spendCategory: software
 billingCurrency: { CA: CAD, GLOBAL: USD, US: USD }
@@ -156,7 +157,16 @@ policies:
     - name: Privacy policy
       url: https://www.anthropic.com/legal/privacy
   ratings:
-    - topic: billing.cancel-refunds
+    - topic: billing.cancellation
+      tier: neutral
+      reason: You can cancel online at any time and keep using it until the end of the period you paid for, but payments aren't refunded unless its terms or the law say so.
+      sources:
+        - url: https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription
+          quote: You may cancel your Pro or Max plan subscription at any time by following the cancellation instructions for the platform you signed up on.
+        - url: https://support.claude.com/en/articles/12386328-request-a-refund-for-a-paid-claude-plan
+          quote: Except as expressly provided in our Consumer Terms of Service or where required by law, all payments are non-refundable.
+      lastVerified: 2026-10-28
+    - topic: billing.refunds
       tier: neutral
       reason: You can cancel online at any time and keep using it until the end of the period you paid for, but payments aren't refunded unless its terms or the law say so.
       sources:
@@ -209,6 +219,9 @@ policies:
           quote: We may use your Inputs and Outputs to train and improve Anthropic AI models, unless you opt out through your account settings.
         - url: https://www.anthropic.com/legal/privacy
           quote: 'Even if you opt-out, we will use Inputs and Outputs for model improvement when:'
+      action:
+        name: Turn off training in your Privacy Settings
+        url: https://claude.ai/new#settings/data-privacy-controls
       lastVerified: 2026-10-28
     - topic: privacy.data-sharing
       tier: neutral
@@ -218,6 +231,9 @@ policies:
           quote: Anthropic does not “sell” your personal data as that term is defined by applicable laws and regulations.
         - url: https://www.anthropic.com/legal/privacy
           quote: You can opt-out of sharing your personal data for targeted advertising to promote our products and services, and we will honor global privacy controls.
+      action:
+        name: How to opt out of ad sharing
+        url: https://www.anthropic.com/legal/cookies
       lastVerified: 2026-10-28
     - topic: privacy.data-deletion
       tier: good
@@ -227,4 +243,7 @@ policies:
           quote: You also are able to delete individual conversations, which will be removed immediately from your conversation history and automatically deleted from our back-end within 30 days.
         - url: https://www.anthropic.com/legal/privacy
           quote: the right to request that we delete personal data collected from you when you use our Services, subject to certain exceptions.
+      action:
+        name: How to delete a conversation
+        url: https://support.anthropic.com/en/articles/8230524-how-can-i-delete-or-rename-a-conversation
       lastVerified: 2026-10-28

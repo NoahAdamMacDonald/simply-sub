@@ -109,7 +109,7 @@ const provider = {
     links: [{ name: 'Terms of service', url: 'https://mullvad.net/en/help/terms-service' }],
     ratings: [
       {
-        topic: 'billing.cancel-refunds',
+        topic: 'billing.refunds',
         tier: 'great',
         reason: 'You can get unused time back.',
         sources: [{ url: 'https://mullvad.net/en/help/terms-service', quote: 'refund' }],

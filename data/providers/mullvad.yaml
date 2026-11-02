@@ -29,9 +29,15 @@ notes: >-
 # kill switch is always on and split tunneling is on every platform but iOS (/en/help/using-mullvad-vpn-app,
 # /en/help/split-tunneling-with-the-mullvad-app); multihop (/en/help/multihop-wireguard); the DNS content blockers
 # (/en/help/how-use-mullvad-cli); no new forwarded ports since 2023 (/en/vpn FAQ); infrastructure and app audits
-# (/en/blog/tag/audits, whose summaries don't say they tested the no-logging claim); a no-logging policy
-# (/en/help/no-logging-data-policy); unlimited traffic (/en/blog/unlimited-traffic-volume). No page states a P2P policy: P2P is
-# marked allowed because the terms block only ports 25 and 137-139/445 and change no traffic (/en/help/terms-service).
+# (/en/blog/tag/audits); a no-logging policy (/en/help/no-logging-data-policy); unlimited traffic
+# (/en/blog/unlimited-traffic-volume). No page states a P2P policy: P2P is marked allowed because the terms block only
+# ports 25 and 137-139/445 and change no traffic (/en/help/terms-service).
+# The no-logs audit, read 2026-11-02 (M11.1): Radically Open Security's 2023 infrastructure audit was asked to verify
+# "Whether or not we log customer activity", and "Radically Open Security found no information leakage or logging of
+# customer data" (/en/blog/infrastructure-audit-completed-by-radically-open-security). Cure53's (2020, 2024) were
+# security audits. Not an audit, but the same fact: in April 2023 Swedish police with a search warrant left without
+# customer data, since "such customer data did not exist"
+# (/en/blog/mullvad-vpn-was-subject-to-a-search-warrant-customer-data-not-compromised).
 plans:
   - id: mullvad.vpn
     name: Mullvad VPN
@@ -48,7 +54,7 @@ plans:
       vpn.content-blocking: [ads, trackers, malware, adult-content, gambling, social-media]
       vpn.p2p: true
       vpn.no-logs-policy: true
-      vpn.independent-audits: [servers, apps]
+      vpn.independent-audits: [no-logs, servers, apps]
       vpn.anonymous-signup: true
     prices:
       - region: GLOBAL
@@ -274,8 +280,9 @@ resellers:
             sourceUrl: https://www.webhallen.com/se/product/267706-Mullvad-VPN-12-manader-5-anvandare
 
 # Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: Mullvad's terms of service, privacy policy and
-# no-logging policy, and its post on Cure53's infrastructure audit. Not rated: free trials (it has none) and
-# closing accounts (its terms don't say).
+# no-logging policy, and (2026-11-02) its post on Radically Open Security's infrastructure audit, its audits, its
+# bug-reporting page and its pricing page (cash). Free trials are not
+# applicable (it has none) and closing accounts not stated (its terms don't say), statuses since M11.1.
 policies:
   links:
     - name: 'Terms of service'
@@ -284,8 +291,14 @@ policies:
       url: https://mullvad.net/en/help/privacy-policy
     - name: 'No-logging policy'
       url: https://mullvad.net/en/help/no-logging-data-policy
-    - name: "Cure53's audit"
-      url: https://mullvad.net/en/blog/no-pii-or-privacy-leaks-found-cure53s-infrastructure-audit
+    - name: "Radically Open Security's audit"
+      url: https://mullvad.net/en/blog/infrastructure-audit-completed-by-radically-open-security
+    - name: 'Pricing'
+      url: https://mullvad.net/en/pricing
+    - name: 'Security audits'
+      url: https://mullvad.net/en/blog/tag/audits
+    - name: 'Reporting a bug or vulnerability'
+      url: https://mullvad.net/en/help/how-report-bug-or-vulnerability
   ratings:
     - topic: privacy.data-collection
       tier: great
@@ -317,7 +330,18 @@ policies:
         - url: https://mullvad.net/en/help/no-logging-data-policy
           quote: '*transaction_id is deleted 20 days after payment'
       lastVerified: 2026-10-27
-    - topic: billing.cancel-refunds
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You pay ahead for the time you want, and it just stops when that runs out, so it never charges you again by surprise. You can get your money back within 14 days, but not if you paid in cash or crypto.'
+      sources:
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'These terms will expire at the end of the period purchased.'
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'We offer users a 14-day money-back guarantee.'
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'We do not offer refunds for cash and crypto payments.'
+      lastVerified: 2026-10-27
+    - topic: billing.refunds
       tier: good
       reason: 'You pay ahead for the time you want, and it just stops when that runs out, so it never charges you again by surprise. You can get your money back within 14 days, but not if you paid in cash or crypto.'
       sources:
@@ -337,6 +361,10 @@ policies:
         - url: https://mullvad.net/en/help/terms-service
           quote: 'Any material changes to these terms will be notified via a prominent notice on mullvad.net/blog at least one month before the changes are applied.'
       lastVerified: 2026-10-27
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'It has no free trial: you pay ahead for the time you want.'
+      lastVerified: 2026-10-27
     - topic: legal.disputes
       tier: good
       reason: "If you have a problem with it that you can't sort out, Sweden's consumer complaints board or a Swedish court decides, not a private arbitrator."
@@ -353,12 +381,36 @@ policies:
         - url: https://mullvad.net/en/help/terms-service
           quote: 'If you wish to exercise your right to reject such changes, you should stop using the service (for refunds, see below).'
       lastVerified: 2026-10-27
-    - topic: service.vpn-logging
+    - topic: legal.account-closure
+      status: not-stated
+      reason: "Its terms don't say whether it can close your account, or what happens to time you've paid for."
+      pages: [https://mullvad.net/en/help/terms-service]
+      lastVerified: 2026-10-27
+    - topic: service.activity-logging
       tier: great
-      reason: "It doesn't keep records of when you connect or for how long. Security experts at Cure53 checked its servers and found no personal information."
+      reason: "It doesn't keep records of when you connect or for how long. In 2023, security experts at Radically Open Security checked its servers for logs of what customers do, and found none."
       sources:
         - url: https://mullvad.net/en/help/no-logging-data-policy
           quote: 'no logging of connections, including when one is made, when it disconnects, for how long, or any kind of timestamp'
-        - url: https://mullvad.net/en/blog/no-pii-or-privacy-leaks-found-cure53s-infrastructure-audit
-          quote: 'Cure53 did not find any Personally Identifiable Information (PII) or potentially privacy-compromising information.'
-      lastVerified: 2026-10-27
+        - url: https://mullvad.net/en/blog/infrastructure-audit-completed-by-radically-open-security
+          quote: 'Radically Open Security found no information leakage or logging of customer data'
+      lastVerified: 2026-11-02
+    - topic: security.practices
+      tier: good
+      reason: 'Outside security experts check its apps and servers again and again, and it posts what they found. You can tell it about a security bug and it says what happened after, but it pays no reward for finding one.'
+      sources:
+        - url: https://mullvad.net/en/blog/tag/audits
+          quote: 'this is our fourth audit in total, second with Cure53'
+        - url: https://mullvad.net/en/help/how-report-bug-or-vulnerability
+          quote: 'This page is also our coordinated vulnerability disclosure policy.'
+        - url: https://mullvad.net/en/help/how-report-bug-or-vulnerability
+          quote: "We'll tell you when it ships, and we publish what happened once it has."
+      lastVerified: 2026-11-02
+    - topic: other.notable
+      title: Pay with cash in the mail
+      tier: great
+      reason: 'You can pay by putting cash in an envelope and mailing it, so you never have to give it your name or a card.'
+      sources:
+        - url: https://mullvad.net/en/pricing
+          quote: 'Just put your cash and payment token (randomly generated on our website) in an envelope and send it to us.'
+      lastVerified: 2026-11-02

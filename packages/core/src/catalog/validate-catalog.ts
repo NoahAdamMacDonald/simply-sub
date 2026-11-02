@@ -8,8 +8,14 @@ import { featuresFileSchema } from './feature';
 import { slugSchema } from './formats';
 import type { CatalogFileKind } from './json-schema';
 import { providerCategories } from './plan-categories';
-import type { Policies } from './policy';
-import { policyTopicsFileSchema, type PolicyTopic } from './policy-topic';
+import { paidPlanCount, topicApplies } from './plan-policies';
+import { policySetSchema, type Policies, type PolicyRating, type PolicySet } from './policy';
+import {
+  policyTopicsFileSchema,
+  titledRatingsMax,
+  type PolicyTier,
+  type PolicyTopic,
+} from './policy-topic';
 import { automationSchema } from '../pipeline/automation';
 import { onSites, providerSiteKeys, queueFileSchema } from '../pipeline/queue';
 import type { Price } from './price';
@@ -85,9 +91,35 @@ const policyTopicsFile = 'data/policy-topics.yaml';
 const queueFile = 'data/queue.yaml';
 const automationFile = 'data/automation.yaml';
 const redirectsFile = 'data/redirects.yaml';
+const policySetsDir = 'data/policies/';
 const staleAfterDays = 90;
 /** Terms change less often than prices, and no nightly check reads them. */
 const policyStaleAfterDays = 365;
+
+/**
+ * Providers rated before policy topics v2 (M11.1), whose missing topics are warnings until M11.9 regrades them under
+ * the new rules and empties this list. Every other provider rates, or gives a status for, each topic that applies.
+ */
+export const awaitingPolicyRegrade: ReadonlySet<string> = new Set([
+  'bitdefender',
+  'claude',
+  'crave',
+  'disney-plus',
+  'espn',
+  'hulu',
+  'ici-tou-tv',
+  'mullvad',
+  'netflix',
+  'proton',
+  'rds',
+  'tsn',
+  'xbox-game-pass',
+]);
+
+export interface ValidateOptions {
+  /** Providers whose missing policy topics are warnings, not errors: awaitingPolicyRegrade unless a test says. */
+  awaitingRegrade?: ReadonlySet<string>;
+}
 
 /**
  * Every problem in the catalog, file by file. `files` are all the .yaml and .yml files under data/ and every file
@@ -98,6 +130,7 @@ const policyStaleAfterDays = 365;
 export function validateCatalog(
   files: readonly CatalogSourceFile[],
   today: IsoDate,
+  { awaitingRegrade = awaitingPolicyRegrade }: ValidateOptions = {},
 ): CatalogIssue[] {
   const issues: CatalogIssue[] = [];
   const reportIn =
@@ -166,23 +199,41 @@ export function validateCatalog(
   const policyTopics =
     located.policyTopics &&
     parseFile(policyTopicsFileSchema, located.policyTopics, reportPolicyTopics);
-  if (!located.policyTopics && providers.some(({ value }) => value.policies)) {
+  if (
+    !located.policyTopics &&
+    (providers.some(({ value }) => value.policies) || located.policySets.length > 0)
+  ) {
     reportPolicyTopics(
       [],
       'Missing: the topics that providers rate their policies on go here (BLUEPRINT §4.10)',
     );
   }
   const serviceIds = categories?.service.map((category) => category.id);
-  policyTopics?.forEach((topic, index) =>
-    topic.categories?.forEach((id, categoryIndex) => {
+  policyTopics?.forEach((topic, index) => {
+    const named = [
+      ...(topic.categories ?? []).map((id, categoryIndex) => ({
+        id,
+        path: [index, 'categories', categoryIndex],
+      })),
+      ...Object.keys(topic.silentIn ?? {}).map((id) => ({ id, path: [index, 'silentIn', id] })),
+    ];
+    for (const { id, path } of named) {
       if (serviceIds && !serviceIds.includes(id)) {
         reportPolicyTopics(
-          [index, 'categories', categoryIndex],
+          path,
           `"${id}" isn't a service category in ${categoriesFile}${choices(id, serviceIds)}`,
         );
       }
-    }),
-  );
+    }
+  });
+
+  // Shared policy documents (M11.1): a broken one leaves the providers naming it unchecked against it.
+  const policySetsUnchecked = new Set<string>();
+  const policySets = located.policySets.flatMap((named) => {
+    const read = readNamedFile(named, policySetSchema, named.name, reportIn(named.source.file));
+    if (!read) policySetsUnchecked.add(named.name);
+    return read ? [read] : [];
+  });
 
   const ids = indexIds(providers, bundles, unchecked, resellersRead);
   const context: CheckContext = {
@@ -194,6 +245,9 @@ export function validateCatalog(
     resellers: new Map(resellers?.map((reseller) => [reseller.id, reseller])),
     resellersUnchecked: located.resellers !== undefined && resellers === undefined,
     policyTopics: policyTopics && new Map(policyTopics.map((topic) => [topic.id, topic])),
+    awaitingRegrade,
+    policySets: new Map(policySets.map(({ value }) => [value.id, value])),
+    policySetsUnchecked,
   };
   for (const { value, report } of providers) {
     checkProvider(value, context, report);
@@ -203,6 +257,14 @@ export function validateCatalog(
   }
   for (const { value, report } of bundles) {
     checkBundle(value, context, report);
+  }
+  for (const { value, report } of policySets) {
+    checkPolicySet(
+      value,
+      providers.map((provider) => provider.value),
+      context,
+      report,
+    );
   }
   checkInclusionLoops(
     providers.flatMap(({ value, report }) =>
@@ -261,6 +323,7 @@ interface LocatedFiles {
   redirects?: CatalogSourceFile;
   providers: NamedFile[];
   bundles: NamedFile[];
+  policySets: NamedFile[];
   logos: NamedFile[];
 }
 
@@ -292,9 +355,10 @@ export function locateCatalogFile(
   if (file === redirectsFile) {
     return { kind: 'redirects', name: 'redirects' };
   }
-  const named = /^data\/(providers|bundles)\/([^/]+)\.yaml$/.exec(file);
+  const named = /^data\/(providers|bundles|policies)\/([^/]+)\.yaml$/.exec(file);
   if (named) {
-    return { kind: named[1] === 'providers' ? 'provider' : 'bundle', name: named[2] };
+    const kinds = { providers: 'provider', bundles: 'bundle', policies: 'policy-set' } as const;
+    return { kind: kinds[named[1] as keyof typeof kinds], name: named[2] };
   }
   const logo = /^data\/logos\/([^/]+)\.png$/.exec(file);
   return logo ? { kind: 'logo', name: logo[1] } : undefined;
@@ -304,7 +368,7 @@ function locateFiles(
   files: readonly CatalogSourceFile[],
   reportIn: (file: string) => Report,
 ): LocatedFiles {
-  const located: LocatedFiles = { providers: [], bundles: [], logos: [] };
+  const located: LocatedFiles = { providers: [], bundles: [], policySets: [], logos: [] };
   for (const source of files) {
     const { file } = source;
     const where = locateCatalogFile(file);
@@ -323,7 +387,12 @@ function locateFiles(
     } else if (where?.kind === 'redirects') {
       located.redirects = source;
     } else if (where) {
-      const list = { provider: 'providers', bundle: 'bundles', logo: 'logos' } as const;
+      const list = {
+        provider: 'providers',
+        bundle: 'bundles',
+        'policy-set': 'policySets',
+        logo: 'logos',
+      } as const;
       located[list[where.kind]].push({ source, name: where.name });
     } else if (file.startsWith('data/logos/')) {
       reportIn(file)(
@@ -336,7 +405,7 @@ function locateFiles(
     } else {
       reportIn(file)(
         [],
-        'Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/automation.yaml, data/redirects.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
+        'Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/automation.yaml, data/redirects.yaml, data/providers/<id>.yaml, data/bundles/<slug>.yaml or data/policies/<id>.yaml',
       );
     }
   }
@@ -477,6 +546,11 @@ interface CheckContext {
   resellersUnchecked: boolean;
   /** data/policy-topics.yaml's, by id, or undefined when it's missing or broken: ratings' topics go unchecked. */
   policyTopics: ReadonlyMap<string, PolicyTopic> | undefined;
+  awaitingRegrade: ReadonlySet<string>;
+  /** data/policies/'s shared documents that parse, by id. */
+  policySets: ReadonlyMap<string, PolicySet>;
+  /** The ids of shared documents whose file is broken: what names them goes unchecked. */
+  policySetsUnchecked: ReadonlySet<string>;
 }
 
 function checkProvider(provider: Provider, context: CheckContext, report: Report): void {
@@ -598,31 +672,99 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
   if (provider.policies) {
     checkPolicies(provider, provider.policies, context, report);
   }
+  checkPolicyCoverage(provider, context, report);
+  checkTopicFeatures(provider, context, report);
 }
 
 /**
  * A provider's policy ratings (BLUEPRINT §4.10): each names a topic from data/policy-topics.yaml that applies to it
- * (a topic for some categories, such as VPN logging, needs a plan in one), read on a date that isn't after today.
- * Ratings older than a year are worth reading again.
+ * (a topic for some categories, such as activity logging, needs a plan in one; a billing topic, a paid plan), and
+ * the shared documents it names are in data/policies/. Its own rating replaces a shared one only where one rates the
+ * topic.
  */
 function checkPolicies(
   provider: Provider,
   policies: Policies,
+  context: CheckContext,
+  report: Report,
+): void {
+  const { policyTopics, policySets } = context;
+  const categories = providerCategories(provider);
+  const ratings = policies.ratings ?? [];
+  checkRatingList(
+    ratings,
+    ['policies'],
+    {
+      name: provider.name,
+      sites: [
+        siteDomain(provider.website),
+        ...(provider.domains ?? []),
+        ...(policies.links ?? []).map((link) => siteDomain(link.url)),
+      ],
+      waiting: context.awaitingRegrade.has(provider.id),
+    },
+    context,
+    report,
+  );
+  ratings.forEach((rating, index) => {
+    const path = ['policies', 'ratings', index];
+    const topic = policyTopics?.get(rating.topic);
+    if (topic?.categories && !topic.categories.some((id) => categories.includes(id))) {
+      report(
+        [...path, 'topic'],
+        `${topic.name} is only for providers with a plan in ${topic.categories.join(' or ')}`,
+      );
+    } else if (topic?.paidPlans !== undefined && paidPlanCount(provider) < topic.paidPlans) {
+      report(
+        [...path, 'topic'],
+        `${topic.name} is only for providers with ${topic.paidPlans === 1 ? 'a paid plan' : `${topic.paidPlans} paid plans or more`}`,
+      );
+    }
+    const named = (policies.shared ?? []).flatMap((id) => policySets.get(id) ?? []);
+    if (
+      rating.replacesShared &&
+      named.length === (policies.shared ?? []).length &&
+      !named.some((set) => set.ratings.some((other) => other.topic === rating.topic))
+    ) {
+      report(
+        [...path, 'replacesShared'],
+        `No shared document it names rates ${rating.topic}: leave replacesShared out`,
+      );
+    }
+  });
+  policies.shared?.forEach((id, index) => {
+    if (!policySets.has(id) && !context.policySetsUnchecked.has(id)) {
+      report(
+        ['policies', 'shared', index],
+        `"${id}" isn't a shared document in ${policySetsDir}${didYouMean(id, [...policySets.keys()], `add data/policies/${id}.yaml`)}`,
+      );
+    }
+  });
+}
+
+/**
+ * A provider's ratings or a shared document's: each on a topic of data/policy-topics.yaml, read on a date that isn't
+ * after today, with a way to change it on its owner's sites, which a grade the topic's actionFor lists must have. A
+ * titled topic's ratings (other.notable) each have a title, up to three. Ratings older than a year are worth reading
+ * again.
+ */
+function checkRatingList(
+  ratings: readonly PolicyRating[],
+  base: CatalogIssuePath,
+  owner: {
+    name: string;
+    sites: readonly string[];
+    /** Rated before M11.1 and waiting for M11.9's regrade: a missing action is a warning. */
+    waiting: boolean;
+  },
   { policyTopics, today }: CheckContext,
   report: Report,
 ): void {
-  const categories = providerCategories(provider);
   const topicIds = [...(policyTopics?.keys() ?? [])];
-  const actionSites = [
-    ...new Set([
-      siteDomain(provider.website),
-      ...(provider.domains ?? []),
-      ...policies.links.map((link) => siteDomain(link.url)),
-    ]),
-  ];
+  const sites = [...new Set(owner.sites)];
   let oldest: IsoDate | undefined;
-  policies.ratings.forEach((rating, index) => {
-    const path = ['policies', 'ratings', index];
+  ratings.forEach((rating, index) => {
+    const path = [...base, 'ratings', index];
     const topic = policyTopics?.get(rating.topic);
     if (policyTopics && !topic) {
       report(
@@ -630,10 +772,15 @@ function checkPolicies(
         `"${rating.topic}" isn't a topic in ${policyTopicsFile}${choices(rating.topic, topicIds)}`,
       );
     }
-    if (topic?.categories && !topic.categories.some((id) => categories.includes(id))) {
+    if (topic) {
+      checkTitle(topic, rating, path, report);
+    }
+    // A grade that means the user has to act links where they do it (M5.12, M11.1).
+    if (rating.tier && topic?.actionFor?.includes(rating.tier) && !rating.action) {
       report(
-        [...path, 'topic'],
-        `${topic.name} is only for providers with a plan in ${topic.categories.join(' or ')}`,
+        [...path, 'action'],
+        `${topic.name} rated ${capitalized(rating.tier)} means the user has to act: link ${owner.name}'s own page for it in action`,
+        owner.waiting ? 'warning' : 'error',
       );
     }
     if (rating.lastVerified > today) {
@@ -641,23 +788,192 @@ function checkPolicies(
     }
     // The provider's own way to change it (M5.12): on its sites, or the site its policies are on (Disney's privacy
     // center, Bell's), never another company's.
-    if (rating.action && !isOnDomain(rating.action.url, actionSites)) {
+    if (rating.action && !isOnDomain(rating.action.url, sites)) {
       report(
         [...path, 'action', 'url'],
-        `Must be a page of ${provider.name}'s own sites or its policies' (${actionSites.join(', ')}): its own way to change it`,
+        `Must be a page of ${owner.name}'s own sites or its policies' (${sites.join(', ')}): its own way to change it`,
       );
     }
     if (oldest === undefined || rating.lastVerified < oldest) {
       oldest = rating.lastVerified;
     }
   });
+  for (const topic of policyTopics?.values() ?? []) {
+    if (!topic.titled) continue;
+    ratings
+      .map((rating, index) => ({ rating, index }))
+      .filter(({ rating }) => rating.topic === topic.id)
+      .slice(titledRatingsMax)
+      .forEach(({ index }) =>
+        report(
+          [...base, 'ratings', index, 'topic'],
+          `${topic.name} takes up to ${titledRatingsMax} ratings: keep the ones that stand out most`,
+        ),
+      );
+  }
   if (oldest !== undefined && addDays(oldest, policyStaleAfterDays) < today) {
     report(
-      ['policies'],
+      base,
       `Some ratings were read on ${oldest}, over a year ago: read the pages again`,
       'warning',
     );
   }
+}
+
+/**
+ * A shared policy document (data/policies/<id>.yaml): its ratings, checked as a provider's are, with its own pages'
+ * sites for its ways to change things; and a warning when no provider names it.
+ */
+function checkPolicySet(
+  set: PolicySet,
+  providers: readonly Provider[],
+  context: CheckContext,
+  report: Report,
+): void {
+  const naming = providers.filter((provider) => provider.policies?.shared?.includes(set.id));
+  checkRatingList(
+    set.ratings,
+    [],
+    {
+      name: set.name,
+      sites: set.links.map((link) => siteDomain(link.url)),
+      waiting:
+        naming.length > 0 && naming.every((provider) => context.awaitingRegrade.has(provider.id)),
+    },
+    context,
+    report,
+  );
+  if (naming.length === 0) {
+    report(
+      ['id'],
+      "No provider names this document in its policies' shared: add it to the providers it covers, or remove it",
+      'warning',
+    );
+  }
+}
+
+/**
+ * A topic and a feature on the same fact both stay, the feature for ranking and the topic for the card, and must agree
+ * (M11.1, the guide's §1.3 step 9): a rating of `tier` on `topic` needs `value` in `feature` on every plan it covers
+ * that has `parent`. A rule whose feature isn't in the registry yet is inactive.
+ */
+export const topicFeatureRules: readonly {
+  topic: string;
+  tier: PolicyTier;
+  feature: string;
+  value: string;
+  parent: string;
+  /** Why, after "Great needs …". */
+  needs: string;
+}[] = [
+  {
+    topic: 'service.activity-logging',
+    tier: 'great',
+    feature: 'vpn.independent-audits',
+    value: 'no-logs',
+    parent: 'vpn.included',
+    needs: 'an independent audit of the no-logs claim',
+  },
+];
+
+function checkTopicFeatures(provider: Provider, context: CheckContext, report: Report): void {
+  const { registry, policySets } = context;
+  const policies = provider.policies;
+  if (!registry || !policies) return;
+  const rated = [
+    ...(policies.ratings ?? []).map((rating, index) => ({
+      rating,
+      path: ['policies', 'ratings', index, 'tier'],
+    })),
+    ...(policies.shared ?? []).flatMap((id, index) =>
+      (policySets.get(id)?.ratings ?? []).map((rating) => ({
+        rating,
+        path: ['policies', 'shared', index],
+      })),
+    ),
+  ];
+  for (const rule of topicFeatureRules) {
+    if (!registry.features.has(rule.feature)) continue;
+    for (const { rating, path } of rated) {
+      if (rating.topic !== rule.topic || rating.tier !== rule.tier) continue;
+      const lacking = provider.plans.filter((plan) => {
+        if (rating.plans && !rating.plans.includes(plan.id)) return false;
+        const values = plan.features[rule.feature];
+        return (
+          plan.features[rule.parent] === true &&
+          !(Array.isArray(values) && values.includes(rule.value))
+        );
+      });
+      if (lacking.length > 0) {
+        report(
+          path,
+          `${capitalized(rule.tier)} needs ${rule.needs}, but ${lacking.map((plan) => plan.id).join(', ')} ${lacking.length === 1 ? 'has' : 'have'} no ${rule.value} in ${rule.feature}: grade it lower, or add the audit to the feature with its source`,
+        );
+      }
+    }
+  }
+}
+
+function capitalized(text: string): string {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+/** A titled topic's ratings have a title and a grade; no other topic's has a title. */
+function checkTitle(
+  topic: PolicyTopic,
+  rating: PolicyRating,
+  path: CatalogIssuePath,
+  report: Report,
+): void {
+  if (!topic.titled) {
+    if (rating.title !== undefined) {
+      report(
+        [...path, 'title'],
+        'Only a titled topic’s ratings (other.notable) have a title: leave it out',
+      );
+    }
+    return;
+  }
+  if (rating.title === undefined) {
+    report(
+      [...path, 'title'],
+      `Give each ${topic.name} rating a title: what stands out, in a few words`,
+    );
+  }
+  if (rating.status !== undefined) {
+    report([...path, 'status'], `${topic.name} is never required: grade it, or leave it out`);
+  }
+}
+
+/**
+ * Every topic that applies to a provider has a rating or a status for everywhere and every plan (M11.1), its own or a
+ * shared document's, so cards line up: a rating for some plans or regions sits over that one and doesn't replace it.
+ * An error, or a warning for a provider waiting for M11.9's regrade.
+ */
+function checkPolicyCoverage(provider: Provider, context: CheckContext, report: Report): void {
+  if (!context.policyTopics) return;
+  const shared = provider.policies?.shared ?? [];
+  // A shared document that's broken has its own errors: what it rates is unknown.
+  if (shared.some((id) => context.policySetsUnchecked.has(id))) return;
+  const ratings = [
+    ...(provider.policies?.ratings ?? []),
+    ...shared.flatMap((id) => context.policySets.get(id)?.ratings ?? []),
+  ];
+  const missing = [...context.policyTopics.values()]
+    .filter((topic) => topicApplies(topic, provider))
+    .flatMap((topic) => {
+      const rated = ratings.filter((rating) => rating.topic === topic.id);
+      if (rated.some((rating) => !rating.plans && !rating.regions)) return [];
+      return [rated.length > 0 ? `${topic.id} (only for some plans or regions)` : topic.id];
+    });
+  if (missing.length === 0) return;
+  const waiting = context.awaitingRegrade.has(provider.id);
+  const count = missing.length === 1 ? 'a topic' : `${missing.length} topics`;
+  report(
+    provider.policies ? ['policies'] : [],
+    `${waiting ? 'Waiting for M11.9’s regrade: no' : 'No'} rating or status for ${count} that ${missing.length === 1 ? 'applies' : 'apply'}: ${missing.join(', ')}. Rate each, or give it a status (not-stated or not-applicable)`,
+    waiting ? 'warning' : 'error',
+  );
 }
 
 /**

@@ -185,7 +185,14 @@ export const searchCatalogData: CatalogData = {
         ],
         ratings: [
           {
-            topic: 'service.vpn-logging',
+            topic: 'privacy.data-collection',
+            status: 'not-stated',
+            reason: 'Its no-logging policy doesn’t say what else it collects.',
+            pages: ['https://mullvad.net/en/help/no-logging-data-policy'],
+            lastVerified: '2026-10-22',
+          },
+          {
+            topic: 'service.activity-logging',
             tier: 'great',
             reason: 'No connection logs, and an audit found none.',
             sources: [
@@ -309,6 +316,7 @@ export const searchCatalogData: CatalogData = {
       group: 'privacy',
       question: 'What it collects beyond what the service needs to work.',
       tiers: policyTiersText,
+      silent: 'not-stated',
     },
     {
       id: 'legal.disputes',
@@ -316,13 +324,15 @@ export const searchCatalogData: CatalogData = {
       group: 'legal',
       question: 'Whether you can take a dispute to court.',
       tiers: policyTiersText,
+      silent: 'good',
     },
     {
-      id: 'service.vpn-logging',
-      name: 'VPN logging',
+      id: 'service.activity-logging',
+      name: 'Activity logging',
       group: 'service',
-      question: 'Whether the VPN keeps logs.',
+      question: 'Whether it keeps logs of what you do or when you connect.',
       tiers: policyTiersText,
+      silent: 'poor',
       categories: ['vpn'],
     },
   ],

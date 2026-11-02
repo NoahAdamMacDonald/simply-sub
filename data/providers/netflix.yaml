@@ -428,7 +428,19 @@ policies:
         name: 'How to ask it to delete your data'
         url: https://help.netflix.com/node/100625
       lastVerified: 2026-10-27
-    - topic: billing.cancel-refunds
+    - topic: billing.cancellation
+      tier: neutral
+      reason: "You can cancel online whenever you like, and you keep watching until the end of the time you paid for. There is no money back for days you didn't use."
+      regions: [CA]
+      sources:
+        - url: https://help.netflix.com/legal/termsofuse
+          quote: 'You can cancel your Netflix subscription at any time.'
+        - url: https://help.netflix.com/legal/termsofuse
+          quote: 'The cancellation will take effect at the end of the billing period.'
+        - url: https://help.netflix.com/legal/termsofuse
+          quote: 'To the extent permitted by the applicable law, payments are non-refundable and we do not provide refunds or credits for any partial subscription periods or unused Netflix content.'
+      lastVerified: 2026-10-27
+    - topic: billing.refunds
       tier: neutral
       reason: "You can cancel online whenever you like, and you keep watching until the end of the time you paid for. There is no money back for days you didn't use."
       regions: [CA]

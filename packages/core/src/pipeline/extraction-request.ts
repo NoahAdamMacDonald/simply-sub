@@ -1,5 +1,5 @@
 import type { Feature } from '../catalog/feature';
-import type { PolicyTopic } from '../catalog/policy-topic';
+import { silentMeaning, type PolicyTopic } from '../catalog/policy-topic';
 import {
   extractionAnswerJsonSchema,
   extractionAnswerSchema,
@@ -13,6 +13,82 @@ import { excerpt, nameIndexes } from './page-text';
 // policy-research skills, the feature registry and the policy topics' rubrics, the answer's JSON Schema, and the
 // saved pages. A session's model (Claude, run by the owner) reads it all at once; Workers AI reads it in parts that fit
 // its context: the plans from the pricing pages, then the policies from the terms' passages on each topic.
+
+/**
+ * How every policy rating is graded (M11.1, docs/catalog-expansion-guide.md §1.3): the policy-research skill's Rules
+ * state it word for word, which a test checks, so a rating by hand and one by the pipeline follow the same steps.
+ */
+export const policyProcedure = `1. Find the clauses for the topic in the terms, the privacy policy, and the help centre's billing and privacy pages,
+   and quote up to three, word for word. A grade read from a form or a sign-up flow quotes the page that hosts it,
+   and the reason says so. Read the whole terms and privacy policy, not only the clauses a topic names: step 12 is
+   for what no topic covers.
+2. The default: what happens if you do nothing? Protective is Great or Good. Not protective is Neutral or worse.
+3. The control, when the default isn't protective. Self-serve (a setting in the account or app, a one-click link, a
+   form that takes effect at once, for the account on every device) is Neutral. Partial (some data, apps, products or
+   devices; one use of the data while collecting it goes on; set per device or browser, or reset, like cookie choices)
+   is Poor. On request (an email, a letter, a ticket, a form that promises a reply or a review) is Poor for an
+   opt-out; deletion and export have their own rubrics. None is Bad. A topic's own rubric beats this step where both
+   name the same thing.
+4. Necessary exceptions never count against a grade, and the list is closed: a legal duty, preventing fraud and abuse
+   (enforcing its terms, protecting its rights), a safety review, security, and processing a payment. Anything else
+   is a business purpose and counts: analytics, "improving our services", marketing, training, personalisation,
+   "legitimate interests". An exception is judged by what the data is used for, not by what selects it: chats flagged
+   for a safety review and then used to improve models count. De-identified or aggregated data doesn't count, unless
+   the policy says it may re-identify it, or de-identifying is the only opt-out offered.
+5. Scope: the rating for the whole provider covers every region and plan without a rating of its own, at the worst
+   clause that applies to any of them. A clause for only some countries or plans is a rating with "regions" or
+   "plans", better or worse. A right only some countries have (California's "Do Not Sell") is a rating for them, and
+   the provider-wide rating is graded as if it didn't exist. A province's law never changes a grade: a CA rating is
+   graded for the rest of Canada, and its reason mentions Quebec.
+6. Broad wording is read broadly: "may", "such as" and "including but not limited to" reserve the right, so grade as
+   if it's used. Service providers and processors acting for it run the service; affiliates are its own group;
+   partners with no stated purpose are other companies using the data for their own ends. A denial that names the act
+   ("we do not sell your data") beats a generic reservation; otherwise the reservation wins.
+7. One fact, one topic: a fact lowers the grade of the one topic whose question it answers (the routing below). It may
+   be quoted under another topic only when that grade is the same without it. What data is used for is graded under
+   that use's topic.
+8. Silence: when nothing read addresses the topic, the topic's "silent" rule says whether it gets a grade or the
+   status not-stated, with the pages read. A topic that can't apply (no free trial) has the status not-applicable.
+   Every topic that applies gets a rating or a status, never nothing.
+9. A topic and a feature on the same fact both stay, and must agree: activity logging is Great only when the plans'
+   vpn.independent-audits includes no-logs. A topic grades only what the feature doesn't say: device limits grade
+   registration caps and download expiry, never the number of devices.
+10. A rating that depends on the user acting (an opt-out, a deletion request, an export: the grades its topic's
+    "actionFor" lists, which validation checks) has an "action": the provider's own page for it, so the user gets
+    there in one click. When the change is the browser's or the device's own setting, link the provider's page that
+    explains it.
+11. Calibrate: grade the same fact the same way for every provider. Before grading one, read the same topics for two
+    providers already graded in its category.
+12. Notable: a term that stands out and that no topic covers (a VPN that takes cash, an installer that removes other
+    security apps) is an other.notable rating with a short "title", graded on the scale, up to three. Never leave a
+    notable term out because no topic fits.
+13. Security: a provider that sees your traffic, messages, files or passwords, or runs with deep access to your
+    device (VPN, DNS, antivirus, email, password managers, browsers), is read for its audits page (Mullvad's
+    "External audits" posts), its bug bounty or vulnerability disclosure policy and its security advisories. They
+    grade security.practices, and an audit that tested a no-logs claim is vpn.independent-audits' no-logs.
+14. The reason explains it like you would to a five-year-old: short sentences, everyday words, what it means for you,
+    and only what the quotes say.`;
+
+/** Which topic a fact belongs to (the guide's §1.5): the skill's Rules state it word for word too. */
+export const policyRouting = `- Trains AI on your chats, files or photos: privacy.ai-training.
+- Recommends from what you watch or listen to; analytics, telemetry, crash reports; a spam filter or recommendations
+  trained on your content: privacy.data-collection.
+- Shows you ads chosen from your activity, in its apps or anywhere else, and data collected only for ads:
+  privacy.ads-tracking (privacy.data-collection grades what's left).
+- Data that reaches another company (a Meta or Google pixel, ad networks), even to show its own ads; selling to data
+  brokers: privacy.data-sharing.
+- A licence over your content that includes training AI: privacy.ai-training (legal.content-rights grades the rest).
+- Staff reading your messages for support or quality: privacy.content-access.
+- How you ask for deletion, and whether it happens: privacy.data-deletion.
+- How long anything stays, deleted data included ("chats are kept 30 days"): privacy.data-retention.
+- An inactive account closed and its data deleted: legal.inactivity.
+- An account closed for a breach, with no refund: legal.account-closure.
+- A free trial or an introductory price ending: billing.free-trials.
+- A renewal into a dearer plan, with no trial before it: billing.renewal-notice.
+- A fee to cancel: billing.cancellation (Bad), and the provider's cancelFee.
+- A currency markup at checkout: billing.fees.
+- A game removed from your purchased library: legal.service-changes.
+- Throttling or network management: a plan feature, not a policy.`;
 
 /** The rules every extraction follows, whoever answers. */
 export const extractionRules = `You read a subscription provider's own pages and answer in JSON, as the schema says. Only what the pages say:
@@ -58,9 +134,19 @@ Official resellers
 
 Policies
 - Grade the terms and privacy policy on the topics in the list, with the rubric's grade the quotes fit: great, good,
-  neutral, poor or bad. One to three quotes that show it, word for word; when the pages don't settle a topic, leave it out.
+  neutral, poor or bad, following the procedure below. One to three quotes that show it, word for word.
+- When the pages don't address a topic, give it "status": "not-stated" and no tier or quotes, with a reason ("Its terms
+  and privacy policy don't say"); the topic's silent rule decides what that means. When it can't apply (no free
+  trial), "status": "not-applicable".
 - The reason is a sentence or two in plain words anyone can follow, 240 characters at most, saying only what the quotes say.
 - A rating for some plans only ("plans") or a country's own terms ("regions") when the page says so.
+- other.notable is for something that stands out and no topic covers: up to three, each with a short "title".
+
+How to grade (the policy-research skill's procedure)
+${policyProcedure}
+
+Which topic a fact belongs to
+${policyRouting}
 
 Say in "notOnPages" what the pages don't say (no yearly price, no list of cards, no countries), and set "outOfScope"
 when it isn't a personal or family subscription at all.`;
@@ -96,16 +182,22 @@ export function registryDigest(features: readonly Feature[]): string {
     .join('\n');
 }
 
-/** The policy topics as a list a model reads: each topic's question and its five grades. */
+/**
+ * The policy topics as a list a model reads: each topic's question, how to read it, its five grades, and what silence
+ * means for a provider in `category`.
+ */
 export function topicsDigest(topics: readonly PolicyTopic[], category: string): string {
   return topics
     .filter((topic) => !topic.categories || topic.categories.includes(category))
-    .map(
-      (topic) =>
-        `- ${topic.id} (${topic.name}): ${topic.question}\n${Object.entries(topic.tiers)
-          .map(([tier, meaning]) => `  - ${tier}: ${meaning}`)
-          .join('\n')}`,
-    )
+    .map((topic) => {
+      const silent = topic.titled ? undefined : silentMeaning(topic, [category]);
+      return [
+        `- ${topic.id} (${topic.name}): ${topic.question}`,
+        ...(topic.note ? [`  ${topic.note}`] : []),
+        ...Object.entries(topic.tiers).map(([tier, meaning]) => `  - ${tier}: ${meaning}`),
+        ...(silent ? [`  - if the pages are silent: ${silent}`] : []),
+      ].join('\n');
+    })
     .join('\n');
 }
 
@@ -168,8 +260,36 @@ const topicWords: Readonly<Record<string, readonly string[]>> = {
   ],
   'privacy.data-sharing': ['sell', 'share', 'third part', 'partenaires', 'vend'],
   'privacy.ads-tracking': ['advertis', 'cookie', 'tracking', 'publicit'],
-  'privacy.data-deletion': ['delete', 'deletion', 'erase', 'retain', 'retention', 'supprim'],
-  'billing.cancel-refunds': ['cancel', 'refund', 'annul', 'rembours'],
+  'privacy.ai-training': [
+    'train',
+    'machine learning',
+    'artificial intelligence',
+    'model',
+    'entraîn',
+  ],
+  'privacy.content-access': [
+    'encrypt',
+    'end-to-end',
+    'zero-access',
+    'access your content',
+    'chiffr',
+  ],
+  'privacy.data-retention': ['retain', 'retention', 'keep', 'as long as', 'conserv'],
+  'privacy.data-deletion': ['delete', 'deletion', 'erase', 'supprim'],
+  'privacy.data-portability': ['export', 'download your data', 'portab', 'copy of your'],
+  'privacy.government-requests': [
+    'law enforcement',
+    'government',
+    'subpoena',
+    'court order',
+    'transparency report',
+    'autorités',
+  ],
+  'privacy.data-location': ['transfer', 'stored in', 'located', 'countr', 'standard contractual'],
+  'privacy.sign-up-data': ['sign up', 'create an account', 'phone number', 'email address'],
+  'privacy.children': ['child', 'minor', 'under the age', 'parental', 'enfant'],
+  'billing.cancellation': ['cancel', 'annul', 'résili'],
+  'billing.refunds': ['refund', 'money back', 'rembours'],
   'billing.price-changes': [
     'price change',
     'change the price',
@@ -179,6 +299,9 @@ const topicWords: Readonly<Record<string, readonly string[]>> = {
     'prix',
   ],
   'billing.free-trials': ['free trial', 'trial', 'essai'],
+  'billing.renewal-notice': ['renew', 'reminder', 'automatic', 'renouvel'],
+  'billing.fees': ['fee', 'charge', 'frais'],
+  'billing.plan-changes': ['upgrade', 'downgrade', 'switch', 'prorat', 'change your plan'],
   'legal.disputes': ['arbitrat', 'class action', 'dispute', 'court', 'litige'],
   'legal.terms-changes': [
     'change these terms',
@@ -188,9 +311,17 @@ const topicWords: Readonly<Record<string, readonly string[]>> = {
     'modifier',
   ],
   'legal.account-closure': ['terminat', 'suspend', 'close your account', 'résili'],
-  'service.vpn-logging': ['log', 'logging', 'journal'],
+  'legal.content-rights': ['licen', 'your content', 'royalty', 'sublicens'],
+  'legal.service-changes': ['discontinu', 'modify the service', 'remove', 'purchase'],
+  'legal.inactivity': ['inactiv', 'dormant', 'not used', 'inutilis'],
+  'legal.output-rights': ['output', 'generated', 'ownership', 'you own'],
+  'security.practices': ['audit', 'bug bounty', 'vulnerabilit', 'SOC 2', 'ISO 27001', 'security'],
+  'service.activity-logging': ['log', 'logging', 'journal'],
   'service.account-sharing': ['household', 'share your account', 'sharing', 'foyer'],
   'service.device-limits': ['device', 'screens', 'streams', 'download', 'appareil'],
+  'finance.money-protection': ['CDIC', 'deposit insurance', 'insured', 'in trust', 'CIPF'],
+  'finance.holds': ['hold', 'freeze', 'frozen', 'restrict'],
+  'other.notable': [],
 };
 
 /**

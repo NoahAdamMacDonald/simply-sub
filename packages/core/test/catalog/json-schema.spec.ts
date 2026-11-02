@@ -13,6 +13,7 @@ describe('catalogJsonSchemas', () => {
       'bundle',
       'resellers',
       'policy-topics',
+      'policy-set',
       'queue',
       'automation',
       'redirects',

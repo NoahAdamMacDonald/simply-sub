@@ -918,8 +918,8 @@ resellers:
             sourceUrl: https://digitalgoods.proxystore.de/en/brand/proton
 
 # Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: Proton's privacy policy and terms of service,
-# Proton VPN's privacy policy, its no-logs audit post and its page on usage statistics. Not rated: free trials (only
-# business plans have one).
+# Proton VPN's privacy policy, its no-logs audit post and its page on usage statistics. Free trials are not
+# applicable (only business plans have one), a status since M11.1.
 policies:
   links:
     - name: 'Privacy policy'
@@ -932,6 +932,10 @@ policies:
       url: https://protonvpn.com/blog/no-logs-audit
     - name: 'Usage statistics'
       url: https://protonvpn.com/support/share-usage-statistics
+    - name: 'Proton Pass audit'
+      url: https://proton.me/blog/pass-open-source-security-audit
+    - name: 'Bug bounty'
+      url: https://proton.me/security/bug-bounty
   ratings:
     - topic: privacy.data-collection
       tier: neutral
@@ -941,6 +945,9 @@ policies:
           quote: 'Our overriding policy is to collect as little user information (personal data included) as possible to ensure a private user experience when using the Services.'
         - url: https://protonvpn.com/support/share-usage-statistics
           quote: 'Usage statistic sharing is enabled by default, but you can disable it at any time (as described below).'
+      action:
+        name: How to turn off usage statistics
+        url: https://protonvpn.com/support/share-usage-statistics
       lastVerified: 2026-10-27
     - topic: privacy.data-sharing
       tier: great
@@ -965,7 +972,16 @@ policies:
         - url: https://proton.me/legal/privacy
           quote: 'Through your Account interface, you can directly access, edit, delete, or export personal data processed by the Company in your use of the Services.'
       lastVerified: 2026-10-27
-    - topic: billing.cancel-refunds
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You cancel from your account page before it renews. If you change your mind within 30 days of first buying, you get all your money back.'
+      sources:
+        - url: https://proton.me/legal/terms
+          quote: 'You may cancel your subscription within 30 days of the initial purchase and receive a full refund for the Service.'
+        - url: https://proton.me/legal/terms
+          quote: 'you must cancel your subscription before its renewal date by visiting your Account dashboard and following the cancel subscription steps'
+      lastVerified: 2026-10-27
+    - topic: billing.refunds
       tier: good
       reason: 'You cancel from your account page before it renews. If you change your mind within 30 days of first buying, you get all your money back.'
       sources:
@@ -980,6 +996,10 @@ policies:
       sources:
         - url: https://proton.me/legal/terms
           quote: 'If the renewal price has changed, you will be charged the then-current price valid at the time of the renewal of your subscription.'
+      lastVerified: 2026-10-27
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'Its personal plans have no free trial: only its business plans do.'
       lastVerified: 2026-10-27
     - topic: legal.disputes
       tier: good
@@ -997,6 +1017,9 @@ policies:
           quote: 'These Terms of Service contain a class action waiver as well as an arbitration provision'
         - url: https://proton.me/legal/terms
           quote: 'The opt-out notice must be sent to the foregoing address within 30 calendar days of your first agreeing to these Terms.'
+      action:
+        name: How to opt out of arbitration, by post
+        url: https://proton.me/legal/terms
       lastVerified: 2026-10-27
     - topic: legal.terms-changes
       tier: poor
@@ -1014,7 +1037,7 @@ policies:
         - url: https://proton.me/legal/terms
           quote: 'Paid Accounts which are terminated due to a violation of these Terms will incur the loss of all payments and credits and are not eligible for refund.'
       lastVerified: 2026-10-27
-    - topic: service.vpn-logging
+    - topic: service.activity-logging
       tier: great
       reason: "It doesn't keep records of your VPN sessions, and outside auditors have checked that five years in a row."
       sources:
@@ -1023,3 +1046,23 @@ policies:
         - url: https://protonvpn.com/blog/no-logs-audit
           quote: 'For 5th year running, Proton VPN passes external no-logs audit'
       lastVerified: 2026-10-27
+    - topic: legal.inactivity
+      tier: good
+      reason: "If you don't use a free account for a year, it may delete it and what's in it, but it tries to email you first. It never does this to a paid account."
+      sources:
+        - url: https://proton.me/legal/terms
+          quote: 'The Company reserves the right to suspend or delete free Accounts that have been inactive for a consecutive period of 12 months'
+        - url: https://proton.me/legal/terms
+          quote: 'the Company will aim to send notice to the recovery email associated with your Account 30, 15 and 7 days in advance before such action is taken'
+        - url: https://proton.me/legal/terms
+          quote: 'Accounts under an active paid subscription are always considered active'
+      lastVerified: 2026-11-02
+    - topic: security.practices
+      tier: good
+      reason: 'Outside security experts check all its apps, and it posts what they found. It may pay you a reward for finding a security bug.'
+      sources:
+        - url: https://proton.me/blog/pass-open-source-security-audit
+          quote: 'That’s why we also regularly commission and publish independent security audits for all our apps.'
+        - url: https://proton.me/security/bug-bounty
+          quote: 'If you’re a security researcher, you can help make Proton services safer, get recognized as a security contributor, and potentially earn a reward.'
+      lastVerified: 2026-11-02

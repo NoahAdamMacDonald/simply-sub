@@ -117,7 +117,16 @@ policies:
         name: 'Update your Bell preferences'
         url: https://www.bell.ca/email-updates
       lastVerified: 2026-10-27
-    - topic: billing.cancel-refunds
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can cancel whenever you like, and it stops at the end of the time you paid for. You get no money back.'
+      sources:
+        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
+          quote: 'You may terminate your subscription at any time, which termination will only be effective at the end of your subscription period.'
+        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
+          quote: 'All Fees are non-refundable.'
+      lastVerified: 2026-10-27
+    - topic: billing.refunds
       tier: neutral
       reason: 'You can cancel whenever you like, and it stops at the end of the time you paid for. You get no money back.'
       sources:

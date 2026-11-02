@@ -1,4 +1,4 @@
-// Checks every policy quote in data/providers/*.yaml against the text saved from its page (SKILL.md, step 4).
+// Checks every policy quote in data/providers/*.yaml and data/policies/*.yaml against the text saved from its page (SKILL.md, step 4).
 // Usage: node quote-check.cjs <repo root> <pages.json>, where pages.json maps each quoted URL to its saved text file
 // (paths relative to pages.json). Prints each quote that isn't on its page word for word, with the page's own wording
 // when only quotes, dashes or spaces differ, and exits non-zero if any is wrong.
@@ -38,10 +38,21 @@ function lookalike(text, quote) {
 let checked = 0;
 let wrong = 0;
 const texts = new Map();
-for (const file of fs.readdirSync(path.join(repo, 'data', 'providers')).sort()) {
-  const provider = YAML.parse(fs.readFileSync(path.join(repo, 'data', 'providers', file), 'utf8'));
-  for (const rating of provider.policies?.ratings ?? []) {
-    for (const source of rating.sources) {
+// Providers' ratings, and the shared policy documents' (data/policies/, M11.1). A status quotes nothing.
+const files = ['providers', 'policies'].flatMap((folder) => {
+  const dir = path.join(repo, 'data', folder);
+  return fs.existsSync(dir)
+    ? fs
+        .readdirSync(dir)
+        .sort()
+        .map((file) => ({ file, full: path.join(dir, file), folder }))
+    : [];
+});
+for (const { file, full, folder } of files) {
+  const data = YAML.parse(fs.readFileSync(full, 'utf8'));
+  const ratings = folder === 'policies' ? data.ratings : data.policies?.ratings;
+  for (const rating of ratings ?? []) {
+    for (const source of rating.sources ?? []) {
       checked++;
       const saved = pages[source.url];
       if (!saved) {

@@ -3,6 +3,8 @@ import {
   planTitle,
   retirementOf,
   type Bundle,
+  type PolicyRating,
+  type PolicySet,
   type Price,
   type Provider,
   type SnapshotProvider,
@@ -18,6 +20,11 @@ import type { ApprovalTarget, NetworksTarget, PolicyPageTarget, PriceTarget } fr
 
 export function providerFile(id: string): string {
   return `data/providers/${id}.yaml`;
+}
+
+/** A shared policy document's file (M11.1). */
+export function policySetFile(id: string): string {
+  return `data/policies/${id}.yaml`;
 }
 
 export function bundleFile(id: string): string {
@@ -94,23 +101,52 @@ export function networksTargets(provider: SnapshotProvider): NetworksTarget[] {
 }
 
 /** A provider's policy pages, each with the quotes its ratings take from it (BLUEPRINT §4.10, M3.9). */
-export function policyTargets(provider: SnapshotProvider): PolicyPageTarget[] {
+/**
+ * The pages a provider's graded ratings quote, and those of the shared documents its step checks (`sets`), each with
+ * the file its ratings are in. A status quotes nothing, so there's nothing on a page to look for.
+ */
+export function policyTargets(
+  provider: SnapshotProvider,
+  sets: readonly PolicySet[] = [],
+): PolicyPageTarget[] {
   const pages = new Map<string, PolicyPageTarget>();
-  for (const rating of provider.policies?.ratings ?? []) {
-    for (const source of rating.sources) {
-      const page = pages.get(source.url) ?? {
-        file: providerFile(provider.id),
-        provider: provider.id,
-        url: source.url,
-        ratings: [],
-      };
-      const own = page.ratings.find((entry) => entry.topic === rating.topic);
-      if (own) own.quotes.push(source.quote);
-      else page.ratings.push({ topic: rating.topic, tier: rating.tier, quotes: [source.quote] });
-      pages.set(source.url, page);
+  const add = (file: string, ratings: readonly PolicyRating[]) => {
+    for (const rating of ratings) {
+      if (!rating.tier) continue;
+      for (const source of rating.sources ?? []) {
+        const key = `${file} ${source.url}`;
+        const page = pages.get(key) ?? {
+          file,
+          provider: provider.id,
+          url: source.url,
+          ratings: [],
+        };
+        const own = page.ratings.find((entry) => entry.topic === rating.topic);
+        if (own) own.quotes.push(source.quote);
+        else page.ratings.push({ topic: rating.topic, tier: rating.tier, quotes: [source.quote] });
+        pages.set(key, page);
+      }
     }
-  }
+  };
+  add(providerFile(provider.id), provider.policies?.ratings ?? []);
+  for (const set of sets) add(policySetFile(set.id), set.ratings);
   return [...pages.values()];
+}
+
+/** Each shared document's step: the first provider, by id, that names it, so its pages are checked once a night. */
+function policySetOwners(
+  providers: readonly SnapshotProvider[],
+  sets: readonly PolicySet[],
+): Record<string, PolicySet[]> {
+  const owned: Record<string, PolicySet[]> = {};
+  const ids = providers.map((provider) => provider.id).sort();
+  for (const set of sets) {
+    const owner = ids.find((id) =>
+      providers.find((provider) => provider.id === id)?.policies?.shared?.includes(set.id),
+    );
+    if (owner) (owned[owner] ??= []).push(set);
+  }
+  return owned;
 }
 
 export function bundleTargets(bundle: Bundle): PriceTarget[] {
@@ -148,6 +184,7 @@ function unique(names: string[]): string[] {
 export function catalogIndex(
   providers: readonly SnapshotProvider[],
   bundles: readonly Bundle[],
+  sets: readonly PolicySet[] = [],
 ): CatalogIndex {
   const hosts = new Set<string>(iconServiceHosts);
   const pagesOf = (urls: readonly string[]) => {
@@ -161,7 +198,8 @@ export function catalogIndex(
     providers: {},
     bundles: {},
     hosts: [],
-    cited: citedPages(providers as readonly Provider[], bundles),
+    cited: citedPages(providers as readonly Provider[], bundles, sets),
+    policySets: policySetOwners(providers, sets),
   };
   for (const provider of providers) {
     pagesOf([provider.website]);
@@ -169,7 +207,7 @@ export function catalogIndex(
       ...providerTargets(provider).map((target) => target.price.sourceUrl),
       ...approvalTargets(provider).map((approval) => approval.url),
       ...networksTargets(provider).map((target) => target.url),
-      ...policyTargets(provider).map((target) => target.url),
+      ...policyTargets(provider, index.policySets[provider.id]).map((target) => target.url),
     ]);
   }
   for (const bundle of bundles) {

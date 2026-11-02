@@ -1,9 +1,13 @@
 import { describe, expect, it } from 'vitest';
+import policyResearchSkill from '../../../../.claude/skills/policy-research/SKILL.md?raw';
 import {
   draftFromAnswer,
   extractionAnswerSchema,
   extractionParts,
   extractionPrompt,
+  extractionRules,
+  policyProcedure,
+  policyRouting,
   findQuote,
   mergeAnswers,
   providerSchema,
@@ -43,13 +47,32 @@ const features: Feature[] = [
   },
 ];
 
+const tiers = { great: 'a', good: 'b', neutral: 'c', poor: 'd', bad: 'e' };
 const topics: PolicyTopic[] = [
   {
-    id: 'billing.cancel-refunds',
-    name: 'Cancelling and refunds',
+    id: 'billing.refunds',
+    name: 'Refunds',
     group: 'billing',
-    question: 'What happens when you cancel.',
-    tiers: { great: 'a', good: 'b', neutral: 'c', poor: 'd', bad: 'e' },
+    question: 'Whether you get money back.',
+    note: 'A window after the first purchase only is Neutral.',
+    tiers,
+    silent: 'not-stated',
+  },
+  {
+    id: 'billing.price-changes',
+    name: 'Price changes',
+    group: 'billing',
+    question: 'Whether it tells you first.',
+    tiers,
+    silent: 'poor',
+  },
+  {
+    id: 'other.notable',
+    name: 'Notable',
+    group: 'other',
+    question: 'What stands out.',
+    tiers,
+    titled: true,
   },
 ];
 
@@ -131,7 +154,7 @@ function answer(more: object = {}) {
     ],
     policies: [
       {
-        topic: 'billing.cancel-refunds',
+        topic: 'billing.refunds',
         tier: 'neutral',
         reason:
           'You can cancel anytime and keep watching until the period ends, but you get no money back.',
@@ -191,8 +214,56 @@ describe('draftFromAnswer', () => {
       sourceUrl: 'https://www.streamco.example/plans',
     });
     // The page's own curly apostrophe, not the answer's straight one.
-    expect(draft.provider?.policies?.ratings[0].sources[0].quote).toBe(
+    expect(draft.provider?.policies?.ratings?.[0].sources?.[0].quote).toBe(
       'you’ll keep access until the end of your billing period',
+    );
+    expect(draft.provider?.policies?.links).toEqual([
+      { name: 'Terms of service', url: 'https://www.streamco.example/terms' },
+    ]);
+  });
+
+  it('drafts a status from the policy pages read, and a notable rating with its title (M11.1)', () => {
+    const draft = draftFromAnswer(
+      answer({
+        policies: [
+          {
+            topic: 'billing.price-changes',
+            status: 'not-stated',
+            reason: 'Its terms don’t say whether it warns you before raising the price.',
+            sources: [],
+          },
+          {
+            topic: 'other.notable',
+            title: '  Takes cash  ',
+            tier: 'great',
+            reason: 'You can pay with cash.',
+            sources: [
+              { page: 'terms', quote: "you'll keep access until the end of your billing period" },
+            ],
+          },
+          {
+            topic: 'billing.refunds',
+            tier: 'neutral',
+            status: 'not-stated',
+            reason: 'Both.',
+            sources: [],
+          },
+        ],
+      }),
+      context(),
+    );
+    expect(draft.provider?.policies?.ratings).toEqual([
+      {
+        topic: 'billing.price-changes',
+        status: 'not-stated',
+        reason: 'Its terms don’t say whether it warns you before raising the price.',
+        pages: ['https://www.streamco.example/terms'],
+        lastVerified: '2026-10-28',
+      },
+      expect.objectContaining({ topic: 'other.notable', title: 'Takes cash', tier: 'great' }),
+    ]);
+    expect(draft.issues.map(({ subject, reason }) => `${subject}: ${reason}`)).toContain(
+      'Policy billing.refunds: It needs a tier or a status, not both or neither',
     );
     expect(draft.provider?.policies?.links).toEqual([
       { name: 'Terms of service', url: 'https://www.streamco.example/terms' },
@@ -359,6 +430,14 @@ describe('spendCategoryOf', () => {
 });
 
 describe('the request', () => {
+  it('grades policies by the procedure and routing the policy-research skill states, word for word (M11.1)', () => {
+    const flat = (text: string) => text.replace(/\s+/g, ' ');
+    expect(flat(policyResearchSkill)).toContain(flat(policyProcedure));
+    expect(flat(policyResearchSkill)).toContain(flat(policyRouting));
+    expect(extractionRules).toContain(policyProcedure);
+    expect(extractionRules).toContain(policyRouting);
+  });
+
   it('gives a session the rules, the registry, the topics, the schema and the pages', () => {
     const prompt = extractionPrompt(context());
     expect(prompt).toContain('# Extraction: StreamCo (streamco)');
@@ -367,7 +446,12 @@ describe('the request', () => {
     expect(prompt).toContain(
       '- vpn.devices: a number of devices, or "unlimited". VPN devices (with vpn.included: true)',
     );
-    expect(prompt).toContain('- billing.cancel-refunds (Cancelling and refunds)');
+    expect(prompt).toContain('- billing.refunds (Refunds): Whether you get money back.');
+    expect(prompt).toContain('  A window after the first purchase only is Neutral.');
+    expect(prompt).toContain('  - if the pages are silent: not-stated');
+    expect(prompt).toContain('  - if the pages are silent: poor');
+    expect(prompt).toContain(policyProcedure);
+    expect(prompt).toContain(policyRouting);
     expect(prompt).toContain(
       '=== page "pricing" (pricing): https://www.streamco.example/plans ===',
     );

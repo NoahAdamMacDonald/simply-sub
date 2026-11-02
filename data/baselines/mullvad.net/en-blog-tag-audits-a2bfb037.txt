@@ -1,0 +1,155 @@
+url: https://mullvad.net/en/blog/tag/audits
+method: fetch
+saved: 2026-11-02
+
+Mullvad VPN | Privacy is a universal right
+Skip to main content
+Products and services
+VPN
+Browser
+Browser extension
+Pricing
+Privacy
+Why privacy matters
+Technical resources
+Downloads
+Tech blog & news
+Open source
+Check for leaks
+Servers
+Help and support
+Guides
+FAQ
+VPN
+Browser
+Pricing
+Downloads
+Why privacy matters
+Log in Get started
+The Mullvad Blog
+Keep up to date on developments at Mullvad. News related to our app, security updates, job posts – find it all here.
+Search blog posts
+Results will update as you type Search
+⇤ ← 12 → ⇥
+2026 security assessment of our Android app
+June 1, 2026 External auditsApp
+Update: You can check out the official App Defense Alliance certificate here Our Android app has for the second time passed MASA, a standardized security assessment, conducted by Leviathan Security Group. Read more
+A security audit of GotaTun is now available
+March 6, 2026 NewsExternal audits
+In December we wrote about our new WireGuard implementation GotaTun, which is currently used in our Android app. An independent audit by Assured Security Consultants is now available. Read more
+New security audit of account and payment services
+January 21, 2026 External audits
+Late last year X41 D‑Sec GmbH performed a white‑box source‑code audit of the Mullvad payment and account API and its supporting backend services. Read more
+Independent security audit of our web app completed by Assured
+October 23, 2025 External audits
+Assured completed an independent security assessment of our web app. The assessment found no critical, high, or medium-severity issues. One low-severity input validation weakness was identified and promptly fixed. Read more
+Launching Mullvad VPN loader
+May 19, 2025 AppExternal audits
+Today we're launching Mullvad VPN loader - a new application for installing the Mullvad VPN desktop app on Windows and macOS which is both fast and secure. Read more
+Successful security assessment of our Android app
+March 27, 2025 External audits
+Our Android app (version 2024.9) has successfully passed MASA, a standardized security assessment, conducted by NCC Group. Read more
+The report for the 2024 security audit of the app is now available
+December 11, 2024 SecurityExternal auditsApp
+The third party security audit of the Mullvad VPN app has concluded that the app has a high security level. Some non-critical issues were found, and have been fixed to the extent possible. Read more
+Fourth Infrastructure audit completed by Cure53
+June 27, 2024 External audits
+We contracted Cure53 with performing a security audit towards our VPN infrastructure between 3rd June 2024 and 14th June 2024, this is our fourth audit in total, second with Cure53. Read more
+Infrastructure audit completed by Radically Open Security
+August 9, 2023 External auditsSecurity
+We tasked the Netherlands based security firm Radically Open Security (RoS) with performing the third audit towards our VPN infrastructure. Read more
+Security audit of our leta.mullvad.net search service
+May 16, 2023 External auditsSecurity
+Assured AB were contracted to perform a security assessment of our new Leta search service between 2023-03-27 and 2023-03-31. Read more
+⇤ ← 12 → ⇥
+RSS Feed Tags
+News
+Features
+Privacy
+Mullvad community
+System Transparency
+Inside Mullvad
+Privacy tips
+External audits
+App
+Browser
+Security
+DNS
+Archive
+2026 (13)
+2025 (29)
+2024 (29)
+2023 (27)
+2022 (31)
+2021 (52)
+2020 (54)
+2019 (58)
+2018 (59)
+2017 (52)
+2016 (24)
+2015 (24)
+2014 (6)
+2013 (9)
+2012 (5)
+2011 (7)
+2010 (11)
+Mullvad
+About
+Help
+Servers
+Pricing
+Blog
+Mullvad VPN
+Mullvad Browser
+Why privacy matters
+Why Mullvad VPN?
+What is a VPN?
+Downloads
+Stop chat control
+Press
+Careers
+Policies
+Policies
+Open source
+Privacy policy
+Cookies
+Terms of service
+Partnerships and resellers
+Reviews, ads and affiliates
+Reporting a bug or vulnerability
+Address
+Mullvad VPN AB
+Box 53049
+400 14 Gothenburg
+Sweden
+support@mullvadvpn.net
+GPG key
+Onion service
+Follow us
+@mullvadnet
+@mullvadnet
+Mullvad VPN
+mullvad
+Language
+English العربيّة
+Dansk
+Deutsch
+English
+Español
+فارسی
+Suomi
+Français
+Italiano
+日本語
+한국어
+Nederlands
+Norsk
+Polski
+Português
+Русский
+Svenska
+ภาษาไทย
+Türkçe
+Українська
+简体中文
+繁體中文
