@@ -14,6 +14,7 @@ service:
   - { id: news, name: News & magazines, icon: newspaper }
   - { id: fitness, name: Fitness & wellness, icon: fitness_center }
   - { id: education, name: Learning & education, icon: school }
+  - { id: finance, name: Banking & investing, icon: account_balance }
 
 # How the Features page groups features: a feature's `category`.
 feature:
