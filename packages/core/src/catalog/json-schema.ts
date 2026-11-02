@@ -2,6 +2,7 @@ import * as z from 'zod';
 import { bundleSchema } from './bundle';
 import { categoriesFileSchema } from './category';
 import { featuresFileSchema } from './feature';
+import { policySetSchema } from './policy';
 import { policyTopicsFileSchema } from './policy-topic';
 import { automationSchema } from '../pipeline/automation';
 import { queueFileSchema } from '../pipeline/queue';
@@ -27,6 +28,7 @@ export function catalogJsonSchemas() {
     bundle: toJsonSchema(bundleSchema),
     resellers: toJsonSchema(resellersFileSchema),
     'policy-topics': toJsonSchema(policyTopicsFileSchema),
+    'policy-set': toJsonSchema(policySetSchema),
     queue: toJsonSchema(queueFileSchema),
     automation: toJsonSchema(automationSchema),
     redirects: toJsonSchema(redirectsFileSchema),

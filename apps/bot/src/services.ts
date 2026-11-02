@@ -1,6 +1,7 @@
 import { launch } from '@cloudflare/playwright';
 import {
   automationSchema,
+  policySetSchema,
   policyTopicsFileSchema,
   workersAiModel,
   baselinePath,
@@ -25,7 +26,7 @@ import { parse } from 'yaml';
 import type { Services } from './run';
 import { botSearch } from './search';
 import { kvState, type BotState, type KvLike } from './state';
-import { catalogIndex } from './targets';
+import { catalogIndex, policySetFile } from './targets';
 
 // The night's services in the Worker: the catalog D1, the web (polite: robots.txt, one request per URL, en-CA
 // headers), Browser Rendering, Workers AI, GitHub (the settings, the baselines, the pull requests) and KV (what the bot
@@ -44,18 +45,25 @@ export function workerServices(env: Env): Services {
   });
   const state = kvState(env.KV as unknown as KvLike);
   return {
-    async readIndex() {
-      const providers = await select<{ json: string }>(
-        env.DB,
-        'SELECT json FROM providers ORDER BY id',
-      );
+    async readIndex(commit) {
+      const providers = (
+        await select<{ json: string }>(env.DB, 'SELECT json FROM providers ORDER BY id')
+      ).map((row) => JSON.parse(row.json) as SnapshotProvider);
       const bundles = await select<{ json: string }>(
         env.DB,
         'SELECT json FROM bundles ORDER BY id',
       );
+      // Shared policy documents aren't in D1 (M11.1): read from the repository, a request each.
+      const named = [...new Set(providers.flatMap((provider) => provider.policies?.shared ?? []))];
+      const sets = await Promise.all(
+        named.map(async (id) =>
+          policySetSchema.safeParse(parse(await github.text(policySetFile(id), commit))),
+        ),
+      );
       return catalogIndex(
-        providers.map((row) => JSON.parse(row.json) as SnapshotProvider),
+        providers,
         bundles.map((row) => JSON.parse(row.json) as Bundle),
+        sets.flatMap((set) => (set.success ? [set.data] : [])),
       );
     },
     async readProvider(id) {

@@ -1,4 +1,5 @@
 import type { Bundle } from '../catalog/bundle';
+import type { PolicySet } from '../catalog/policy';
 import type { Provider } from '../catalog/provider';
 import { isoDateSchema } from '../catalog/formats';
 import type { IsoDate } from '../dates/iso-date';
@@ -123,11 +124,13 @@ export interface CitedPage {
 
 /**
  * Every page the catalog cites: its prices' sources, its pricing page, the pages naming its resellers and its accepted
- * cards (pricing), and the pages its policy ratings quote (policies). A page cited both ways is a pricing page.
+ * cards (pricing), and the pages its policy ratings quote (policies), a shared document's for each provider naming it
+ * (`policySets`). A page cited both ways is a pricing page.
  */
 export function citedPages(
   providers: readonly Provider[],
   bundles: readonly Bundle[],
+  policySets: readonly PolicySet[] = [],
 ): CitedPage[] {
   const pages = new Map<string, CitedPage>();
   const cite = (url: string | undefined, type: CitedType, owner: string) => {
@@ -151,6 +154,8 @@ export function citedPages(
     for (const accepted of Object.values(provider.acceptedNetworks ?? {}))
       cite(accepted.url, 'pricing', id);
     for (const link of provider.policies?.links ?? []) cite(link.url, 'policies', id);
+    for (const set of policySets.filter((set) => provider.policies?.shared?.includes(set.id)))
+      for (const link of set.links) cite(link.url, 'policies', id);
   }
   for (const bundle of bundles)
     for (const price of bundle.prices) cite(price.sourceUrl, 'pricing', bundle.id);
@@ -168,6 +173,7 @@ export function citedFacts(
   providers: readonly Provider[],
   bundles: readonly Bundle[],
   url: string,
+  policySets: readonly PolicySet[] = [],
 ): CitedFacts {
   const facts: CitedFacts = { quotes: [], prices: [] };
   const price = (
@@ -207,6 +213,10 @@ export function citedFacts(
         if (source.url === url) facts.quotes.push(source.quote);
     }
   }
+  for (const set of policySets)
+    for (const rating of set.ratings)
+      for (const source of rating.sources ?? [])
+        if (source.url === url) facts.quotes.push(source.quote);
   for (const bundle of bundles) for (const item of bundle.prices) price(item, [bundle.name]);
   return facts;
 }

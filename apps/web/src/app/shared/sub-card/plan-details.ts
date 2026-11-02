@@ -110,7 +110,13 @@ export class PlanDetails {
     const saved = this.settings.saved();
     const data = this.catalog.catalog();
     if (!saved || !data) return undefined;
-    return planPolicies(this.provider(), this.plan().id, saved.country, data.policyTopics);
+    return planPolicies(
+      this.provider(),
+      this.plan().id,
+      saved.country,
+      data.policyTopics,
+      data.policySets,
+    );
   });
   protected readonly tierNames = tierNames;
   protected readonly groupNames = groupNames;

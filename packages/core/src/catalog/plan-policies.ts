@@ -1,6 +1,7 @@
-import type { PolicyAction, PolicyLink, PolicyRating, PolicySource } from './policy';
+import type { PolicyAction, PolicyLink, PolicyRating, PolicySet, PolicySource } from './policy';
 import {
   policyGroups,
+  policyTiers,
   silentMeaning,
   type PolicyGroup,
   type PolicyStatus,
@@ -46,46 +47,75 @@ export interface PlanPolicy {
 export interface PlanPolicies {
   /** The ratings by group (Privacy, Billing, Legal…), each in policy-topics.yaml's order. */
   groups: { group: PolicyGroup; policies: PlanPolicy[] }[];
-  /** The pages those ratings quote or read, in the provider's order, numbered from 1 as the citations number them. */
+  /**
+   * The pages those ratings quote or read, numbered from 1 as the citations number them: the provider's in its order,
+   * then its shared documents'.
+   */
   links: PolicyLink[];
 }
 
 /**
  * The provider's ratings that apply to `planId` for a buyer in `region`, on the registry's topics: for each topic,
  * a rating for the plan wins over one for every plan, then one for the region (or a group it's in, EU) over one for
- * everywhere. A titled topic (other.notable) shows each of its ratings. Undefined when none applies.
+ * everywhere. A titled topic (other.notable) shows each of its ratings. The shared documents the provider names
+ * (`sets`, data/policies/) rate topics too: the provider's own rating wins when it says it replaces theirs, and
+ * otherwise the worse grade wins, the provider's own on a tie (M11.1). Undefined when none applies.
  */
 export function planPolicies(
   provider: Pick<Provider, 'policies' | 'category' | 'plans'>,
   planId: string,
   region: string,
   topics: readonly PolicyTopic[],
+  sets: readonly PolicySet[] = [],
 ): PlanPolicies | undefined {
   const policies = provider.policies;
   if (!policies) return undefined;
+  const shared = (policies.shared ?? []).flatMap((id) => sets.filter((set) => set.id === id));
   const where = new Set([region, ...groupsOf(region), globalRegion]);
   const applies = (rating: PolicyRating) =>
     (!rating.plans || rating.plans.includes(planId)) &&
     (!rating.regions || rating.regions.some((code) => where.has(code)));
   const specificity = (rating: PolicyRating) => (rating.plans ? 2 : 0) + (rating.regions ? 1 : 0);
-
-  // By topic, and by title for a titled topic's ratings, which are each about something else.
-  const chosen = new Map<string, PolicyRating>();
-  for (const rating of policies.ratings.filter(applies)) {
-    const key = `${rating.topic}\n${rating.title ?? ''}`;
-    const current = chosen.get(key);
-    if (!current || specificity(rating) > specificity(current)) {
-      chosen.set(key, rating);
+  // Each document's rating for each topic, and for each title of a titled topic's, which are each about something else.
+  const keyOf = (rating: PolicyRating) => `${rating.topic}\n${rating.title ?? ''}`;
+  const best = (ratings: readonly PolicyRating[]) => {
+    const found = new Map<string, PolicyRating>();
+    for (const rating of ratings.filter(applies)) {
+      const current = found.get(keyOf(rating));
+      if (!current || specificity(rating) > specificity(current)) {
+        found.set(keyOf(rating), rating);
+      }
     }
+    return found;
+  };
+  const own = best(policies.ratings ?? []);
+  const theirs = shared.map((set) => best(set.ratings));
+
+  const chosen = new Map<string, PolicyRating>();
+  for (const key of new Set([...own.keys(), ...theirs.flatMap((found) => [...found.keys()])])) {
+    const mine = own.get(key);
+    const candidates = [mine, ...theirs.map((found) => found.get(key))].filter(
+      (rating) => rating !== undefined,
+    );
+    const graded = candidates.filter((rating) => rating.tier !== undefined);
+    chosen.set(
+      key,
+      mine?.replacesShared ? mine : graded.length > 0 ? graded.reduce(worse) : candidates[0],
+    );
   }
-  const shown = topics.flatMap((topic) =>
-    [...chosen.values()]
-      .filter((rating) => rating.topic === topic.id)
-      .map((rating) => ({ topic, rating })),
-  );
+  const shown = topics
+    .filter((topic) => topic.titled || topicApplies(topic, provider))
+    .flatMap((topic) =>
+      [...chosen.values()]
+        .filter((rating) => rating.topic === topic.id)
+        .map((rating) => ({ topic, rating })),
+    );
   if (shown.length === 0) return undefined;
+  const allLinks = [...(policies.links ?? []), ...shared.flatMap((set) => set.links)].filter(
+    (link, index, list) => list.findIndex((other) => other.url === link.url) === index,
+  );
   const quoted = new Set(shown.flatMap(({ rating }) => pagesOf(rating)));
-  const links = policies.links.filter((link) => quoted.has(link.url));
+  const links = allLinks.filter((link) => quoted.has(link.url));
   // One citation per page, however many times the rating quotes it, in the links' order.
   const cite = (sources: readonly PolicySource[], read: readonly string[]): PolicyCitation[] =>
     links.flatMap((link, index) => {
@@ -125,6 +155,12 @@ export function planPolicies(
     }),
     links,
   };
+}
+
+/** The worse graded rating of two, the first on a tie. */
+function worse(a: PolicyRating, b: PolicyRating): PolicyRating {
+  const rank = (rating: PolicyRating) => (rating.tier ? policyTiers.indexOf(rating.tier) : -1);
+  return rank(b) > rank(a) ? b : a;
 }
 
 /** The pages a rating quotes or read. */

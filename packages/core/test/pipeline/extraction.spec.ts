@@ -191,7 +191,7 @@ describe('draftFromAnswer', () => {
       sourceUrl: 'https://www.streamco.example/plans',
     });
     // The page's own curly apostrophe, not the answer's straight one.
-    expect(draft.provider?.policies?.ratings[0].sources?.[0].quote).toBe(
+    expect(draft.provider?.policies?.ratings?.[0].sources?.[0].quote).toBe(
       'you’ll keep access until the end of your billing period',
     );
     expect(draft.provider?.policies?.links).toEqual([

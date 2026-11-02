@@ -325,7 +325,7 @@ export const providerSchema = z
         (offerIndex) => ['resellers', index, 'offers', offerIndex, 'plan'],
       );
     });
-    provider.policies?.ratings.forEach((rating, index) => {
+    provider.policies?.ratings?.forEach((rating, index) => {
       (rating.plans ?? []).forEach((plan, planIndex) => {
         if (!planIds.includes(plan)) {
           ctx.addIssue({

@@ -1,14 +1,18 @@
 import { describe, expect, it } from 'vitest';
 import {
   formatCatalogIssue,
+  buildCatalogData,
   planPolicies,
   policiesSchema,
+  policySetSchema,
+  readCatalogSource,
   quoteLink,
   policyTopicsFileSchema,
   silentMeaning,
   validateCatalog,
   type CatalogSourceFile,
   type Policies,
+  type PolicySet,
   type PolicyTopic,
   type Provider,
 } from '../../src';
@@ -641,6 +645,242 @@ describe('planPolicies, for statuses and titles (M11.1)', () => {
       ['other.notable', 'good', undefined, 'No email needed'],
     ]);
     expect(policies?.[0].citations).toEqual([]);
+  });
+});
+
+describe('shared policy documents (M11.1)', () => {
+  const groupPrivacy = 'https://privacy.example.com/policy';
+  const groupLinks = [{ name: 'Group privacy policy', url: groupPrivacy }];
+  const groupRating = (topic: string, extra: Record<string, unknown> = {}) =>
+    rating(topic, {
+      tier: 'poor',
+      reason: 'The group’s policy.',
+      sources: [{ url: groupPrivacy, quote: 'We share with partners' }],
+      ...extra,
+    });
+  const set = {
+    id: 'group-privacy',
+    name: 'The Group’s privacy policy',
+    links: groupLinks,
+    ratings: [groupRating('privacy.data-collection'), groupRating('privacy.ads-tracking')],
+  };
+  const setFile = { file: 'data/policies/group-privacy.yaml', data: set };
+  /** The test catalog with the set, and Mullvad naming it beside `own` ratings of its own. */
+  const withSet = (
+    own: Record<string, unknown> = mullvadPolicies,
+    extra: CatalogSourceFile[] = [],
+  ) => [...withPolicies({ shared: ['group-privacy'], ...own }), setFile, ...extra];
+  const issues = (schema: typeof policySetSchema | typeof policiesSchema, value: unknown) =>
+    schema.safeParse(value).error?.issues.map((issue) => issue.message) ?? [];
+
+  it('rates a company’s document once, for every plan of each provider naming it', () => {
+    expect(issues(policySetSchema, set)).toEqual([]);
+    expect(
+      issues(policySetSchema, {
+        ...set,
+        ratings: [
+          groupRating('privacy.data-sharing', { plans: ['mullvad.vpn'], replacesShared: true }),
+        ],
+      }),
+    ).toEqual([
+      "A shared document's ratings are for every provider it covers: rate a plan in its provider's file",
+      'Only a provider’s own rating replaces a shared one: leave replacesShared out',
+    ]);
+  });
+
+  it('lets a provider name shared documents with or without ratings of its own', () => {
+    expect(issues(policiesSchema, { shared: ['group-privacy'] })).toEqual([]);
+    expect(issues(policiesSchema, {})).toEqual([
+      'Rate its policies, or name the shared documents that cover them (shared)',
+    ]);
+    expect(issues(policiesSchema, { ratings: mullvadPolicies.ratings })).toEqual([
+      'List the pages the ratings quote',
+    ]);
+    expect(
+      issues(policiesSchema, {
+        ...mullvadPolicies,
+        ratings: [rating('privacy.data-collection', { replacesShared: true })],
+      }),
+    ).toEqual([
+      'There is no shared document to replace: leave replacesShared out',
+      'No rating quotes this page or lists it in pages: leave it out',
+    ]);
+  });
+
+  it('accepts a provider naming a shared document, and counts its ratings as the provider’s', () => {
+    expect(messages(withSet())).toEqual([]);
+    // Mullvad's own ratings leave out ads and tracking, which the shared document rates.
+    expect(coverage(withSet()).filter((message) => message.includes('mullvad.yaml'))).toEqual([]);
+  });
+
+  it('reports a document no file holds, a replacement for a topic it doesn’t rate, and a document no one names', () => {
+    expect(
+      messages(
+        withSet({
+          ...mullvadPolicies,
+          shared: ['group-privacy', 'group-privcy'],
+          ratings: [
+            ...mullvadPolicies.ratings.slice(1),
+            rating('privacy.data-collection', { replacesShared: true }),
+          ],
+        }),
+      ),
+    ).toEqual([
+      'data/providers/mullvad.yaml policies.shared.1: "group-privcy" isn\'t a shared document in data/policies/ (did you mean group-privacy?)',
+    ]);
+    expect(
+      messages(
+        withSet({
+          ...mullvadPolicies,
+          ratings: [
+            mullvadPolicies.ratings[0],
+            { ...mullvadPolicies.ratings[1], replacesShared: true },
+            mullvadPolicies.ratings[2],
+          ],
+        }),
+      ),
+    ).toEqual([
+      'data/providers/mullvad.yaml policies.ratings.1.replacesShared: No shared document it names rates billing.refunds: leave replacesShared out',
+    ]);
+    expect(messages([...withPolicies(), setFile])).toEqual([
+      "warning: data/policies/group-privacy.yaml id: No provider names this document in its policies' shared: add it to the providers it covers, or remove it",
+    ]);
+  });
+
+  it('checks a document’s ratings as a provider’s: topics, dates, and a way to change it on its own sites', () => {
+    const files = withSet(mullvadPolicies, []).map((source) =>
+      source.file === setFile.file
+        ? {
+            ...source,
+            data: {
+              ...set,
+              ratings: [
+                groupRating('privacy.data-colection', { lastVerified: '2026-10-24' }),
+                groupRating('privacy.ads-tracking', {
+                  action: { name: 'Opt out', url: 'https://optout.example.org/' },
+                }),
+              ],
+            },
+          }
+        : source,
+    );
+    expect(messages(files)).toEqual([
+      expect.stringMatching(
+        /^data\/policies\/group-privacy\.yaml ratings\.0\.topic: "privacy\.data-colection" isn't a topic/,
+      ),
+      `data/policies/group-privacy.yaml ratings.0.lastVerified: 2026-10-24 is after today (${today})`,
+      "data/policies/group-privacy.yaml ratings.1.action.url: Must be a page of The Group’s privacy policy's own sites or its policies' (privacy.example.com): its own way to change it",
+    ]);
+  });
+
+  it('needs the file named after its id', () => {
+    expect(
+      messages(
+        withSet(mullvadPolicies).map((source) =>
+          source.file === setFile.file ? { ...source, data: { ...set, id: 'group' } } : source,
+        ),
+      ),
+    ).toEqual([
+      'data/policies/group-privacy.yaml id: Must be group-privacy to match the file name, or rename the file',
+    ]);
+  });
+
+  it('publishes the documents with the catalog', () => {
+    const data = buildCatalogData(readCatalogSource(withSet()), 'https://sub.simplely.ca/icons/');
+    expect(data.policySets).toEqual([set]);
+    expect(buildCatalogData(readCatalogSource(withPolicies()), '').policySets).toBeUndefined();
+  });
+
+  describe('planPolicies, with a shared document', () => {
+    const mullvad = catalog().find(({ file }) => file === 'data/providers/mullvad.yaml');
+    const { category, plans } = (mullvad && 'data' in mullvad ? mullvad.data : {}) as Provider;
+    const shown = (own: unknown[], sets = [set as PolicySet]) =>
+      planPolicies(
+        {
+          category,
+          plans,
+          policies: {
+            shared: ['group-privacy'],
+            links: mullvadPolicies.links,
+            ratings: own,
+          } as Policies,
+        },
+        'mullvad.vpn',
+        'CA',
+        topics,
+        sets,
+      );
+    const line = (own: unknown[], topic: string) =>
+      shown(own)
+        ?.groups.flatMap(({ policies }) => policies)
+        .find((policy) => policy.topic.id === topic);
+
+    it('shows the document’s rating where the provider has none, citing its page after the provider’s', () => {
+      const policies = shown([mullvadPolicies.ratings[1]]);
+      expect(
+        policies?.groups.flatMap(({ policies }) => policies.map(({ topic }) => topic.id)),
+      ).toEqual(['privacy.data-collection', 'privacy.ads-tracking', 'billing.refunds']);
+      expect(policies?.links.map(({ name }) => name)).toEqual([
+        'Terms of service',
+        'Group privacy policy',
+      ]);
+      expect(
+        line([], 'privacy.ads-tracking')?.citations.map(({ number, name }) => `${number} ${name}`),
+      ).toEqual(['1 Group privacy policy']);
+    });
+
+    it('takes the worse of the provider’s rating and the document’s, the provider’s on a tie', () => {
+      expect(line([rating('privacy.data-collection')], 'privacy.data-collection')?.reason).toBe(
+        'The group’s policy.',
+      );
+      expect(
+        line(
+          [rating('privacy.data-collection', { tier: 'bad', reason: 'Its own.' })],
+          'privacy.data-collection',
+        )?.reason,
+      ).toBe('Its own.');
+      expect(
+        line(
+          [rating('privacy.data-collection', { tier: 'poor', reason: 'Its own.' })],
+          'privacy.data-collection',
+        )?.reason,
+      ).toBe('Its own.');
+    });
+
+    it('takes the provider’s rating when its document says it applies instead', () => {
+      expect(
+        line(
+          [rating('privacy.data-collection', { reason: 'Its own.', replacesShared: true })],
+          'privacy.data-collection',
+        )?.tier,
+      ).toBe('great');
+    });
+
+    it('prefers a graded rating to a status from either side', () => {
+      const unsaid = {
+        topic: 'privacy.data-collection',
+        status: 'not-stated',
+        reason: 'Its terms don’t say.',
+        pages: [terms],
+        lastVerified: '2026-10-22',
+      };
+      expect(line([unsaid], 'privacy.data-collection')?.tier).toBe('poor');
+    });
+
+    it('leaves out a document’s rating on a topic that doesn’t apply to the provider', () => {
+      const withLogging = {
+        ...set,
+        ratings: [...set.ratings, groupRating('service.activity-logging')],
+      } as PolicySet;
+      const streaming = planPolicies(
+        { category: 'streaming', plans, policies: { shared: ['group-privacy'] } },
+        'mullvad.vpn',
+        'CA',
+        topics,
+        [withLogging],
+      );
+      expect(streaming?.groups.map(({ group }) => group)).toEqual(['privacy']);
+    });
   });
 });
 

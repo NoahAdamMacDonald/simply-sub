@@ -9,7 +9,7 @@ import { slugSchema } from './formats';
 import type { CatalogFileKind } from './json-schema';
 import { providerCategories } from './plan-categories';
 import { paidPlanCount, topicApplies } from './plan-policies';
-import type { Policies, PolicyRating } from './policy';
+import { policySetSchema, type Policies, type PolicyRating, type PolicySet } from './policy';
 import { policyTopicsFileSchema, titledRatingsMax, type PolicyTopic } from './policy-topic';
 import { automationSchema } from '../pipeline/automation';
 import { onSites, providerSiteKeys, queueFileSchema } from '../pipeline/queue';
@@ -86,6 +86,7 @@ const policyTopicsFile = 'data/policy-topics.yaml';
 const queueFile = 'data/queue.yaml';
 const automationFile = 'data/automation.yaml';
 const redirectsFile = 'data/redirects.yaml';
+const policySetsDir = 'data/policies/';
 const staleAfterDays = 90;
 /** Terms change less often than prices, and no nightly check reads them. */
 const policyStaleAfterDays = 365;
@@ -193,7 +194,10 @@ export function validateCatalog(
   const policyTopics =
     located.policyTopics &&
     parseFile(policyTopicsFileSchema, located.policyTopics, reportPolicyTopics);
-  if (!located.policyTopics && providers.some(({ value }) => value.policies)) {
+  if (
+    !located.policyTopics &&
+    (providers.some(({ value }) => value.policies) || located.policySets.length > 0)
+  ) {
     reportPolicyTopics(
       [],
       'Missing: the topics that providers rate their policies on go here (BLUEPRINT §4.10)',
@@ -218,6 +222,14 @@ export function validateCatalog(
     }
   });
 
+  // Shared policy documents (M11.1): a broken one leaves the providers naming it unchecked against it.
+  const policySetsUnchecked = new Set<string>();
+  const policySets = located.policySets.flatMap((named) => {
+    const read = readNamedFile(named, policySetSchema, named.name, reportIn(named.source.file));
+    if (!read) policySetsUnchecked.add(named.name);
+    return read ? [read] : [];
+  });
+
   const ids = indexIds(providers, bundles, unchecked, resellersRead);
   const context: CheckContext = {
     today,
@@ -229,6 +241,8 @@ export function validateCatalog(
     resellersUnchecked: located.resellers !== undefined && resellers === undefined,
     policyTopics: policyTopics && new Map(policyTopics.map((topic) => [topic.id, topic])),
     awaitingRegrade,
+    policySets: new Map(policySets.map(({ value }) => [value.id, value])),
+    policySetsUnchecked,
   };
   for (const { value, report } of providers) {
     checkProvider(value, context, report);
@@ -238,6 +252,14 @@ export function validateCatalog(
   }
   for (const { value, report } of bundles) {
     checkBundle(value, context, report);
+  }
+  for (const { value, report } of policySets) {
+    checkPolicySet(
+      value,
+      providers.map((provider) => provider.value),
+      context,
+      report,
+    );
   }
   checkInclusionLoops(
     providers.flatMap(({ value, report }) =>
@@ -296,6 +318,7 @@ interface LocatedFiles {
   redirects?: CatalogSourceFile;
   providers: NamedFile[];
   bundles: NamedFile[];
+  policySets: NamedFile[];
   logos: NamedFile[];
 }
 
@@ -327,9 +350,10 @@ export function locateCatalogFile(
   if (file === redirectsFile) {
     return { kind: 'redirects', name: 'redirects' };
   }
-  const named = /^data\/(providers|bundles)\/([^/]+)\.yaml$/.exec(file);
+  const named = /^data\/(providers|bundles|policies)\/([^/]+)\.yaml$/.exec(file);
   if (named) {
-    return { kind: named[1] === 'providers' ? 'provider' : 'bundle', name: named[2] };
+    const kinds = { providers: 'provider', bundles: 'bundle', policies: 'policy-set' } as const;
+    return { kind: kinds[named[1] as keyof typeof kinds], name: named[2] };
   }
   const logo = /^data\/logos\/([^/]+)\.png$/.exec(file);
   return logo ? { kind: 'logo', name: logo[1] } : undefined;
@@ -339,7 +363,7 @@ function locateFiles(
   files: readonly CatalogSourceFile[],
   reportIn: (file: string) => Report,
 ): LocatedFiles {
-  const located: LocatedFiles = { providers: [], bundles: [], logos: [] };
+  const located: LocatedFiles = { providers: [], bundles: [], policySets: [], logos: [] };
   for (const source of files) {
     const { file } = source;
     const where = locateCatalogFile(file);
@@ -358,7 +382,12 @@ function locateFiles(
     } else if (where?.kind === 'redirects') {
       located.redirects = source;
     } else if (where) {
-      const list = { provider: 'providers', bundle: 'bundles', logo: 'logos' } as const;
+      const list = {
+        provider: 'providers',
+        bundle: 'bundles',
+        'policy-set': 'policySets',
+        logo: 'logos',
+      } as const;
       located[list[where.kind]].push({ source, name: where.name });
     } else if (file.startsWith('data/logos/')) {
       reportIn(file)(
@@ -371,7 +400,7 @@ function locateFiles(
     } else {
       reportIn(file)(
         [],
-        'Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/automation.yaml, data/redirects.yaml, data/providers/<id>.yaml or data/bundles/<slug>.yaml',
+        'Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/automation.yaml, data/redirects.yaml, data/providers/<id>.yaml, data/bundles/<slug>.yaml or data/policies/<id>.yaml',
       );
     }
   }
@@ -513,6 +542,10 @@ interface CheckContext {
   /** data/policy-topics.yaml's, by id, or undefined when it's missing or broken: ratings' topics go unchecked. */
   policyTopics: ReadonlyMap<string, PolicyTopic> | undefined;
   awaitingRegrade: ReadonlySet<string>;
+  /** data/policies/'s shared documents that parse, by id. */
+  policySets: ReadonlyMap<string, PolicySet>;
+  /** The ids of shared documents whose file is broken: what names them goes unchecked. */
+  policySetsUnchecked: ReadonlySet<string>;
 }
 
 function checkProvider(provider: Provider, context: CheckContext, report: Report): void {
@@ -639,35 +672,36 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
 
 /**
  * A provider's policy ratings (BLUEPRINT §4.10): each names a topic from data/policy-topics.yaml that applies to it
- * (a topic for some categories, such as activity logging, needs a plan in one; a billing topic, a paid plan), read on
- * a date that isn't after today. A titled topic's ratings (other.notable) each have a title, up to three. Ratings
- * older than a year are worth reading again.
+ * (a topic for some categories, such as activity logging, needs a plan in one; a billing topic, a paid plan), and
+ * the shared documents it names are in data/policies/. Its own rating replaces a shared one only where one rates the
+ * topic.
  */
 function checkPolicies(
   provider: Provider,
   policies: Policies,
-  { policyTopics, today }: CheckContext,
+  context: CheckContext,
   report: Report,
 ): void {
+  const { policyTopics, policySets } = context;
   const categories = providerCategories(provider);
-  const topicIds = [...(policyTopics?.keys() ?? [])];
-  const actionSites = [
-    ...new Set([
-      siteDomain(provider.website),
-      ...(provider.domains ?? []),
-      ...policies.links.map((link) => siteDomain(link.url)),
-    ]),
-  ];
-  let oldest: IsoDate | undefined;
-  policies.ratings.forEach((rating, index) => {
+  const ratings = policies.ratings ?? [];
+  checkRatingList(
+    ratings,
+    ['policies'],
+    {
+      name: provider.name,
+      sites: [
+        siteDomain(provider.website),
+        ...(provider.domains ?? []),
+        ...(policies.links ?? []).map((link) => siteDomain(link.url)),
+      ],
+    },
+    context,
+    report,
+  );
+  ratings.forEach((rating, index) => {
     const path = ['policies', 'ratings', index];
     const topic = policyTopics?.get(rating.topic);
-    if (policyTopics && !topic) {
-      report(
-        [...path, 'topic'],
-        `"${rating.topic}" isn't a topic in ${policyTopicsFile}${choices(rating.topic, topicIds)}`,
-      );
-    }
     if (topic?.categories && !topic.categories.some((id) => categories.includes(id))) {
       report(
         [...path, 'topic'],
@@ -679,6 +713,52 @@ function checkPolicies(
         `${topic.name} is only for providers with ${topic.paidPlans === 1 ? 'a paid plan' : `${topic.paidPlans} paid plans or more`}`,
       );
     }
+    const named = (policies.shared ?? []).flatMap((id) => policySets.get(id) ?? []);
+    if (
+      rating.replacesShared &&
+      named.length === (policies.shared ?? []).length &&
+      !named.some((set) => set.ratings.some((other) => other.topic === rating.topic))
+    ) {
+      report(
+        [...path, 'replacesShared'],
+        `No shared document it names rates ${rating.topic}: leave replacesShared out`,
+      );
+    }
+  });
+  policies.shared?.forEach((id, index) => {
+    if (!policySets.has(id) && !context.policySetsUnchecked.has(id)) {
+      report(
+        ['policies', 'shared', index],
+        `"${id}" isn't a shared document in ${policySetsDir}${didYouMean(id, [...policySets.keys()], `add data/policies/${id}.yaml`)}`,
+      );
+    }
+  });
+}
+
+/**
+ * A provider's ratings or a shared document's: each on a topic of data/policy-topics.yaml, read on a date that isn't
+ * after today, with a way to change it on its owner's sites. A titled topic's ratings (other.notable) each have a
+ * title, up to three. Ratings older than a year are worth reading again.
+ */
+function checkRatingList(
+  ratings: readonly PolicyRating[],
+  base: CatalogIssuePath,
+  owner: { name: string; sites: readonly string[] },
+  { policyTopics, today }: CheckContext,
+  report: Report,
+): void {
+  const topicIds = [...(policyTopics?.keys() ?? [])];
+  const sites = [...new Set(owner.sites)];
+  let oldest: IsoDate | undefined;
+  ratings.forEach((rating, index) => {
+    const path = [...base, 'ratings', index];
+    const topic = policyTopics?.get(rating.topic);
+    if (policyTopics && !topic) {
+      report(
+        [...path, 'topic'],
+        `"${rating.topic}" isn't a topic in ${policyTopicsFile}${choices(rating.topic, topicIds)}`,
+      );
+    }
     if (topic) {
       checkTitle(topic, rating, path, report);
     }
@@ -687,10 +767,10 @@ function checkPolicies(
     }
     // The provider's own way to change it (M5.12): on its sites, or the site its policies are on (Disney's privacy
     // center, Bell's), never another company's.
-    if (rating.action && !isOnDomain(rating.action.url, actionSites)) {
+    if (rating.action && !isOnDomain(rating.action.url, sites)) {
       report(
         [...path, 'action', 'url'],
-        `Must be a page of ${provider.name}'s own sites or its policies' (${actionSites.join(', ')}): its own way to change it`,
+        `Must be a page of ${owner.name}'s own sites or its policies' (${sites.join(', ')}): its own way to change it`,
       );
     }
     if (oldest === undefined || rating.lastVerified < oldest) {
@@ -699,21 +779,47 @@ function checkPolicies(
   });
   for (const topic of policyTopics?.values() ?? []) {
     if (!topic.titled) continue;
-    policies.ratings
+    ratings
       .map((rating, index) => ({ rating, index }))
       .filter(({ rating }) => rating.topic === topic.id)
       .slice(titledRatingsMax)
       .forEach(({ index }) =>
         report(
-          ['policies', 'ratings', index, 'topic'],
+          [...base, 'ratings', index, 'topic'],
           `${topic.name} takes up to ${titledRatingsMax} ratings: keep the ones that stand out most`,
         ),
       );
   }
   if (oldest !== undefined && addDays(oldest, policyStaleAfterDays) < today) {
     report(
-      ['policies'],
+      base,
       `Some ratings were read on ${oldest}, over a year ago: read the pages again`,
+      'warning',
+    );
+  }
+}
+
+/**
+ * A shared policy document (data/policies/<id>.yaml): its ratings, checked as a provider's are, with its own pages'
+ * sites for its ways to change things; and a warning when no provider names it.
+ */
+function checkPolicySet(
+  set: PolicySet,
+  providers: readonly Provider[],
+  context: CheckContext,
+  report: Report,
+): void {
+  checkRatingList(
+    set.ratings,
+    [],
+    { name: set.name, sites: set.links.map((link) => siteDomain(link.url)) },
+    context,
+    report,
+  );
+  if (!providers.some((provider) => provider.policies?.shared?.includes(set.id))) {
+    report(
+      ['id'],
+      "No provider names this document in its policies' shared: add it to the providers it covers, or remove it",
       'warning',
     );
   }
@@ -747,13 +853,19 @@ function checkTitle(
 }
 
 /**
- * Every topic that applies to a provider has a rating or a status for everywhere and every plan (M11.1), so cards
- * line up: a rating for some plans or regions sits over that one and doesn't replace it. An error, or a warning for a
- * provider waiting for M11.9's regrade.
+ * Every topic that applies to a provider has a rating or a status for everywhere and every plan (M11.1), its own or a
+ * shared document's, so cards line up: a rating for some plans or regions sits over that one and doesn't replace it.
+ * An error, or a warning for a provider waiting for M11.9's regrade.
  */
 function checkPolicyCoverage(provider: Provider, context: CheckContext, report: Report): void {
   if (!context.policyTopics) return;
-  const ratings = provider.policies?.ratings ?? [];
+  const shared = provider.policies?.shared ?? [];
+  // A shared document that's broken has its own errors: what it rates is unknown.
+  if (shared.some((id) => context.policySetsUnchecked.has(id))) return;
+  const ratings = [
+    ...(provider.policies?.ratings ?? []),
+    ...shared.flatMap((id) => context.policySets.get(id)?.ratings ?? []),
+  ];
   const missing = [...context.policyTopics.values()]
     .filter((topic) => topicApplies(topic, provider))
     .flatMap((topic) => {

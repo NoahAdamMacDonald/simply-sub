@@ -674,6 +674,16 @@
     "policies": {
       "type": "object",
       "properties": {
+        "shared": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)"
+          },
+          "description": "The shared documents in data/policies/ that cover it (Disney's privacy policy), rated once there"
+        },
         "links": {
           "minItems": 1,
           "type": "array",
@@ -808,6 +818,11 @@
                 "additionalProperties": false,
                 "description": "Where to change what the reason says the user has to change themselves (M5.12)"
               },
+              "replacesShared": {
+                "type": "boolean",
+                "const": true,
+                "description": "Its own document says it applies instead of the shared one's clause (quoted in sources): it wins over a shared rating of the topic, which otherwise wins when it's worse"
+              },
               "lastVerified": {
                 "type": "string",
                 "format": "date",
@@ -818,10 +833,10 @@
             },
             "required": ["topic", "reason", "lastVerified"],
             "additionalProperties": false
-          }
+          },
+          "description": "Its own ratings, from its own documents, beside those of the shared ones"
         }
       },
-      "required": ["links", "ratings"],
       "additionalProperties": false,
       "description": "Its terms and policies rated on policy-topics.yaml's topics, quoting its own pages (BLUEPRINT §4.10)"
     }

@@ -9,6 +9,7 @@ import {
   type Bundle,
   type CitedPage,
   type IsoDate,
+  type PolicySet,
   type PolicyTopic,
   type ReportedPlan,
   type Robots,
@@ -58,11 +59,14 @@ export interface CatalogIndex {
   hosts: string[];
   /** Every page the catalog cites: pricing or policies, and who cites it (core's citedPages). */
   cited: CitedPage[];
+  /** Provider id → the shared policy documents its step checks (M11.1): each one by the first provider naming it. */
+  policySets: Record<string, PolicySet[]>;
 }
 
 /** What the night needs from the world. */
 export interface Services {
-  readIndex(): Promise<CatalogIndex>;
+  /** The catalog D1's providers and bundles, and the shared policy documents they name as the commit has them. */
+  readIndex(commit: string): Promise<CatalogIndex>;
   readProvider(id: string): Promise<SnapshotProvider | undefined>;
   readBundle(id: string): Promise<Bundle | undefined>;
   /** Each host's robots.txt, read once. */
@@ -137,7 +141,7 @@ export async function runNight(
   const repository = await step('read the repository', () => services.readRepository());
   const settings = await step('read the settings', () => services.readSettings(repository.commit));
   const checks = await step('read the check dates', () => services.state.checks());
-  const index = await step('read the catalog', () => services.readIndex());
+  const index = await step('read the catalog', () => services.readIndex(repository.commit));
   const cited = Object.fromEntries(index.cited.map((page) => [page.url, page]));
   const due = new Set(
     index.cited
@@ -229,7 +233,7 @@ export async function runNight(
           targets: [...(provider ? providerTargets(provider) : []), ...(await bundlesOf(bundles))],
           approvals: provider ? approvalTargets(provider) : [],
           networks: provider ? networksTargets(provider) : [],
-          policyPages: provider ? policyTargets(provider) : [],
+          policyPages: provider ? policyTargets(provider, index.policySets[id]) : [],
           ...(provider &&
             logoDue(id) && {
               logo: { id, website: provider.website, ...committed(repository, id) },
