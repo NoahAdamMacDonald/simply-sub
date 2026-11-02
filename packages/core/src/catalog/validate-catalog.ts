@@ -8,9 +8,9 @@ import { featuresFileSchema } from './feature';
 import { slugSchema } from './formats';
 import type { CatalogFileKind } from './json-schema';
 import { providerCategories } from './plan-categories';
-import { paidPlanCount } from './plan-policies';
-import type { Policies } from './policy';
-import { policyTopicsFileSchema, type PolicyTopic } from './policy-topic';
+import { paidPlanCount, topicApplies } from './plan-policies';
+import type { Policies, PolicyRating } from './policy';
+import { policyTopicsFileSchema, titledRatingsMax, type PolicyTopic } from './policy-topic';
 import { automationSchema } from '../pipeline/automation';
 import { onSites, providerSiteKeys, queueFileSchema } from '../pipeline/queue';
 import type { Price } from './price';
@@ -91,6 +91,31 @@ const staleAfterDays = 90;
 const policyStaleAfterDays = 365;
 
 /**
+ * Providers rated before policy topics v2 (M11.1), whose missing topics are warnings until M11.9 regrades them under
+ * the new rules and empties this list. Every other provider rates, or gives a status for, each topic that applies.
+ */
+export const awaitingPolicyRegrade: ReadonlySet<string> = new Set([
+  'bitdefender',
+  'claude',
+  'crave',
+  'disney-plus',
+  'espn',
+  'hulu',
+  'ici-tou-tv',
+  'mullvad',
+  'netflix',
+  'proton',
+  'rds',
+  'tsn',
+  'xbox-game-pass',
+]);
+
+export interface ValidateOptions {
+  /** Providers whose missing policy topics are warnings, not errors: awaitingPolicyRegrade unless a test says. */
+  awaitingRegrade?: ReadonlySet<string>;
+}
+
+/**
  * Every problem in the catalog, file by file. `files` are all the .yaml and .yml files under data/ and every file
  * in data/logos/, with paths from the repo root. A broken file gets its own errors, and the checks that would only
  * repeat them are left out: a provider that fails its schema isn't checked against the registry, and references
@@ -99,6 +124,7 @@ const policyStaleAfterDays = 365;
 export function validateCatalog(
   files: readonly CatalogSourceFile[],
   today: IsoDate,
+  { awaitingRegrade = awaitingPolicyRegrade }: ValidateOptions = {},
 ): CatalogIssue[] {
   const issues: CatalogIssue[] = [];
   const reportIn =
@@ -202,6 +228,7 @@ export function validateCatalog(
     resellers: new Map(resellers?.map((reseller) => [reseller.id, reseller])),
     resellersUnchecked: located.resellers !== undefined && resellers === undefined,
     policyTopics: policyTopics && new Map(policyTopics.map((topic) => [topic.id, topic])),
+    awaitingRegrade,
   };
   for (const { value, report } of providers) {
     checkProvider(value, context, report);
@@ -485,6 +512,7 @@ interface CheckContext {
   resellersUnchecked: boolean;
   /** data/policy-topics.yaml's, by id, or undefined when it's missing or broken: ratings' topics go unchecked. */
   policyTopics: ReadonlyMap<string, PolicyTopic> | undefined;
+  awaitingRegrade: ReadonlySet<string>;
 }
 
 function checkProvider(provider: Provider, context: CheckContext, report: Report): void {
@@ -606,12 +634,14 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
   if (provider.policies) {
     checkPolicies(provider, provider.policies, context, report);
   }
+  checkPolicyCoverage(provider, context, report);
 }
 
 /**
  * A provider's policy ratings (BLUEPRINT §4.10): each names a topic from data/policy-topics.yaml that applies to it
- * (a topic for some categories, such as activity logging, needs a plan in one; a billing topic, a paid plan), read on a date that isn't after today.
- * Ratings older than a year are worth reading again.
+ * (a topic for some categories, such as activity logging, needs a plan in one; a billing topic, a paid plan), read on
+ * a date that isn't after today. A titled topic's ratings (other.notable) each have a title, up to three. Ratings
+ * older than a year are worth reading again.
  */
 function checkPolicies(
   provider: Provider,
@@ -649,6 +679,9 @@ function checkPolicies(
         `${topic.name} is only for providers with ${topic.paidPlans === 1 ? 'a paid plan' : `${topic.paidPlans} paid plans or more`}`,
       );
     }
+    if (topic) {
+      checkTitle(topic, rating, path, report);
+    }
     if (rating.lastVerified > today) {
       report([...path, 'lastVerified'], `${rating.lastVerified} is after today (${today})`);
     }
@@ -664,6 +697,19 @@ function checkPolicies(
       oldest = rating.lastVerified;
     }
   });
+  for (const topic of policyTopics?.values() ?? []) {
+    if (!topic.titled) continue;
+    policies.ratings
+      .map((rating, index) => ({ rating, index }))
+      .filter(({ rating }) => rating.topic === topic.id)
+      .slice(titledRatingsMax)
+      .forEach(({ index }) =>
+        report(
+          ['policies', 'ratings', index, 'topic'],
+          `${topic.name} takes up to ${titledRatingsMax} ratings: keep the ones that stand out most`,
+        ),
+      );
+  }
   if (oldest !== undefined && addDays(oldest, policyStaleAfterDays) < today) {
     report(
       ['policies'],
@@ -671,6 +717,58 @@ function checkPolicies(
       'warning',
     );
   }
+}
+
+/** A titled topic's ratings have a title and a grade; no other topic's has a title. */
+function checkTitle(
+  topic: PolicyTopic,
+  rating: PolicyRating,
+  path: CatalogIssuePath,
+  report: Report,
+): void {
+  if (!topic.titled) {
+    if (rating.title !== undefined) {
+      report(
+        [...path, 'title'],
+        'Only a titled topic’s ratings (other.notable) have a title: leave it out',
+      );
+    }
+    return;
+  }
+  if (rating.title === undefined) {
+    report(
+      [...path, 'title'],
+      `Give each ${topic.name} rating a title: what stands out, in a few words`,
+    );
+  }
+  if (rating.status !== undefined) {
+    report([...path, 'status'], `${topic.name} is never required: grade it, or leave it out`);
+  }
+}
+
+/**
+ * Every topic that applies to a provider has a rating or a status for everywhere and every plan (M11.1), so cards
+ * line up: a rating for some plans or regions sits over that one and doesn't replace it. An error, or a warning for a
+ * provider waiting for M11.9's regrade.
+ */
+function checkPolicyCoverage(provider: Provider, context: CheckContext, report: Report): void {
+  if (!context.policyTopics) return;
+  const ratings = provider.policies?.ratings ?? [];
+  const missing = [...context.policyTopics.values()]
+    .filter((topic) => topicApplies(topic, provider))
+    .flatMap((topic) => {
+      const rated = ratings.filter((rating) => rating.topic === topic.id);
+      if (rated.some((rating) => !rating.plans && !rating.regions)) return [];
+      return [rated.length > 0 ? `${topic.id} (only for some plans or regions)` : topic.id];
+    });
+  if (missing.length === 0) return;
+  const waiting = context.awaitingRegrade.has(provider.id);
+  const count = missing.length === 1 ? 'a topic' : `${missing.length} topics`;
+  report(
+    provider.policies ? ['policies'] : [],
+    `${waiting ? 'Waiting for M11.9’s regrade: no' : 'No'} rating or status for ${count} that ${missing.length === 1 ? 'applies' : 'apply'}: ${missing.join(', ')}. Rate each, or give it a status (not-stated or not-applicable)`,
+    waiting ? 'warning' : 'error',
+  );
 }
 
 /**

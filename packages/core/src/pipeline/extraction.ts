@@ -987,7 +987,9 @@ function policyDrafts(
     ratings.push(rating);
   }
   if (ratings.length === 0) return undefined;
-  const quoted = new Set(ratings.flatMap((rating) => rating.sources.map((source) => source.url)));
+  const quoted = new Set(
+    ratings.flatMap((rating) => (rating.sources ?? []).map((source) => source.url)),
+  );
   const links = [...quoted].map((url) => {
     const page = context.pages.find((candidate) => candidate.url === url);
     const name = (page && linkNames[page.kind]) ?? 'Policy';

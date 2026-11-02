@@ -203,7 +203,8 @@ export function citedFacts(
       if (accepted.url === url) facts.quotes.push(...accepted.quotes);
     }
     for (const rating of provider.policies?.ratings ?? []) {
-      for (const source of rating.sources) if (source.url === url) facts.quotes.push(source.quote);
+      for (const source of rating.sources ?? [])
+        if (source.url === url) facts.quotes.push(source.quote);
     }
   }
   for (const bundle of bundles) for (const item of bundle.prices) price(item, [bundle.name]);

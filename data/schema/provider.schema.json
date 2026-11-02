@@ -709,10 +709,21 @@
                 "patternErrorMessage": "Use kebab-case segments joined by dots (video.quality, password-manager.item-types)",
                 "description": "A topic id from policy-topics.yaml"
               },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 60,
+                "description": "What stands out, in a few words: only on a titled topic (other.notable)"
+              },
               "tier": {
                 "type": "string",
                 "enum": ["great", "good", "neutral", "poor", "bad"],
                 "description": "The rubric's grade its quotes fit"
+              },
+              "status": {
+                "type": "string",
+                "enum": ["not-stated", "not-applicable"],
+                "description": "Instead of a tier: not-stated when the pages read don't address it, not-applicable when it can't apply (no free trial)"
               },
               "reason": {
                 "type": "string",
@@ -743,7 +754,18 @@
                   "required": ["url", "quote"],
                   "additionalProperties": false
                 },
-                "description": "Where it says so"
+                "description": "Where it says so: a graded rating quotes one to three"
+              },
+              "pages": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https://",
+                  "patternErrorMessage": "Use a full https:// URL"
+                },
+                "description": "With a status: the pages read that don't address it (not-stated) or show it can't apply, each one in links"
               },
               "plans": {
                 "minItems": 1,
@@ -794,7 +816,7 @@
                 "description": "When the quotes were read"
               }
             },
-            "required": ["topic", "tier", "reason", "sources", "lastVerified"],
+            "required": ["topic", "reason", "lastVerified"],
             "additionalProperties": false
           }
         }

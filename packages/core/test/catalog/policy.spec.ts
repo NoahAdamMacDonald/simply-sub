@@ -10,6 +10,7 @@ import {
   type CatalogSourceFile,
   type Policies,
   type PolicyTopic,
+  type Provider,
 } from '../../src';
 import { catalog, edited, today } from './catalog-files';
 
@@ -59,6 +60,14 @@ const topics: PolicyTopic[] = [
     silent: 'poor',
     categories: ['vpn'],
   },
+  {
+    id: 'other.notable',
+    name: 'Notable',
+    group: 'other',
+    question: 'What stands out.',
+    tiers,
+    titled: true,
+  },
 ];
 
 const terms = 'https://mullvad.net/en/help/terms-service';
@@ -102,10 +111,25 @@ function withPolicies(policies: unknown = mullvadPolicies): CatalogSourceFile[] 
   ];
 }
 
+/**
+ * Every issue, as data:validate prints it, but the missing topics of the test catalog's providers, which share ids with
+ * the 13 waiting for M11.9 (`coverage` checks those).
+ */
 function messages(files: readonly CatalogSourceFile[], on = today): string[] {
-  return validateCatalog(files, on).map(
-    (issue) => `${issue.severity === 'warning' ? 'warning: ' : ''}${formatCatalogIssue(issue)}`,
-  );
+  return validateCatalog(files, on)
+    .filter((issue) => !issue.message.startsWith('Waiting for M11.9’s regrade'))
+    .map(
+      (issue) => `${issue.severity === 'warning' ? 'warning: ' : ''}${formatCatalogIssue(issue)}`,
+    );
+}
+
+/** The missing topics, for a provider not waiting for M11.9 unless `awaitingRegrade` says. */
+function coverage(files: readonly CatalogSourceFile[], awaitingRegrade = new Set<string>()) {
+  return validateCatalog(files, today, { awaitingRegrade })
+    .filter((issue) => issue.message.includes('rating or status for'))
+    .map(
+      (issue) => `${issue.severity === 'warning' ? 'warning: ' : ''}${formatCatalogIssue(issue)}`,
+    );
 }
 
 describe('the policy topics registry', () => {
@@ -177,7 +201,7 @@ describe('a provider’s policies', () => {
           { name: 'Cookies', url: 'https://mullvad.net/en/help/cookies' },
         ],
       }),
-    ).toEqual(['No rating quotes this page: leave it out']);
+    ).toEqual(['No rating quotes this page or lists it in pages: leave it out']);
   });
 
   it('keeps a way to change it to a few words and a page (M5.12)', () => {
@@ -218,6 +242,80 @@ describe('a provider’s policies', () => {
       issues(policies([forRegion, rating('privacy.ads-tracking', { regions: ['US', 'CA'] })])),
     ).toEqual(['privacy.ads-tracking is rated already for these plans and regions']);
   });
+
+  /** A status rating, without the graded one's tier and quotes. */
+  function status(topic: string, extra: Record<string, unknown> = {}) {
+    const { tier, sources, ...rest } = rating(topic, {
+      status: 'not-stated',
+      reason: 'Its terms and privacy policy don’t say.',
+      pages: [privacy],
+      ...extra,
+    });
+    expect([tier, sources]).toHaveLength(2);
+    return rest;
+  }
+
+  it('takes a status instead of a tier: not stated with the pages read, or not applicable (M11.1)', () => {
+    const policies = (...ratings: unknown[]) => ({ links: privacyOnly, ratings });
+    expect(issues(policies(status('privacy.ads-tracking')))).toEqual([]);
+    expect(
+      issues(
+        policies(
+          rating('privacy.data-collection'),
+          status('billing.free-trials', {
+            status: 'not-applicable',
+            reason: 'It has no free trial.',
+            pages: undefined,
+          }),
+        ),
+      ),
+    ).toEqual([]);
+    expect(issues(policies(status('privacy.ads-tracking', { pages: undefined })))).toEqual([
+      "Say which pages don't address it: list them in pages",
+      'No rating quotes this page or lists it in pages: leave it out',
+    ]);
+  });
+
+  it('refuses a rating with neither a tier nor a status, both, or a status with quotes or an action', () => {
+    const policies = (...ratings: unknown[]) => ({ links: privacyOnly, ratings });
+    const { tier, ...ungraded } = rating('privacy.ads-tracking');
+    expect(tier).toBe('great');
+    expect(issues(policies(ungraded))).toEqual([
+      'Give a tier, or a status when the pages give no grade',
+    ]);
+    expect(issues(policies(rating('privacy.ads-tracking', { status: 'not-stated' })))).toEqual([
+      'Give a tier or a status, not both',
+    ]);
+    expect(
+      issues(
+        policies({
+          ...status('privacy.ads-tracking', { action: { name: 'Ask', url: privacy } }),
+          sources: [{ url: privacy, quote: 'We never sell' }],
+        }),
+      ),
+    ).toEqual([
+      'A status quotes nothing: list the pages read in pages instead',
+      'There is nothing to change without a grade: leave action out',
+    ]);
+    expect(
+      issues(policies(rating('privacy.ads-tracking', { sources: undefined, pages: [privacy] }))),
+    ).toEqual([
+      'Quote where it says so',
+      'A graded rating quotes its pages in sources: leave pages out',
+    ]);
+  });
+
+  it('lets a titled topic have ratings with different titles', () => {
+    const notable = (title: string) => rating('other.notable', { title });
+    const policies = (...ratings: unknown[]) => ({ links: privacyOnly, ratings });
+    expect(issues(policies(notable('Takes cash'), notable('Sells data on closing')))).toEqual([]);
+    expect(issues(policies(notable('Takes cash'), notable('Takes cash')))).toEqual([
+      'other.notable is rated already for these plans and regions',
+    ]);
+    expect(issues(policies(notable('x'.repeat(61))))).toEqual([
+      'Keep it to a few words (60 characters at most)',
+    ]);
+  });
 });
 
 describe('validateCatalog, for policies', () => {
@@ -243,7 +341,7 @@ describe('validateCatalog, for policies', () => {
         ]),
       ),
     ).toEqual([
-      'data/providers/netflix.yaml policies.ratings.0.topic: "privacy.data-colection" isn\'t a topic in data/policy-topics.yaml (privacy.data-collection, privacy.ads-tracking, billing.refunds, service.activity-logging)',
+      'data/providers/netflix.yaml policies.ratings.0.topic: "privacy.data-colection" isn\'t a topic in data/policy-topics.yaml (privacy.data-collection, privacy.ads-tracking, billing.refunds, service.activity-logging, other.notable)',
       'data/providers/netflix.yaml policies.ratings.1.topic: Activity logging is only for providers with a plan in vpn',
     ]);
   });
@@ -296,6 +394,80 @@ describe('validateCatalog, for policies', () => {
     );
   });
 
+  it('needs a title on each notable rating, up to three, with a grade, and no title elsewhere', () => {
+    const notable = (title?: string, extra: Record<string, unknown> = {}) =>
+      rating('other.notable', { ...(title && { title }), ...extra });
+    const withRatings = (...ratings: unknown[]) =>
+      withPolicies({ ...mullvadPolicies, ratings: [...mullvadPolicies.ratings, ...ratings] });
+    expect(messages(withRatings(notable('Takes cash'), notable('No email needed')))).toEqual([]);
+    expect(
+      messages(
+        withRatings(
+          notable(),
+          rating('privacy.ads-tracking', { title: 'Ads' }),
+          notable('Takes cash', {
+            tier: undefined,
+            status: 'not-stated',
+            sources: undefined,
+            pages: [privacy],
+          }),
+        ),
+      ),
+    ).toEqual([
+      'data/providers/mullvad.yaml policies.ratings.3.title: Give each Notable rating a title: what stands out, in a few words',
+      'data/providers/mullvad.yaml policies.ratings.4.title: Only a titled topic’s ratings (other.notable) have a title: leave it out',
+      'data/providers/mullvad.yaml policies.ratings.5.status: Notable is never required: grade it, or leave it out',
+    ]);
+    expect(
+      messages(withRatings(notable('One'), notable('Two'), notable('Three'), notable('Four'))),
+    ).toEqual([
+      'data/providers/mullvad.yaml policies.ratings.6.topic: Notable takes up to 3 ratings: keep the ones that stand out most',
+    ]);
+  });
+
+  it('names every topic that applies and has no rating or status for everywhere (M11.1)', () => {
+    const mullvad = (files: readonly CatalogSourceFile[]) =>
+      coverage(files).filter((message) => message.includes('mullvad.yaml'));
+    expect(mullvad(withPolicies())).toEqual([
+      'data/providers/mullvad.yaml policies: No rating or status for a topic that applies: privacy.ads-tracking. Rate each, or give it a status (not-stated or not-applicable)',
+    ]);
+    // The test catalog's Netflix has no policies at all; notable is never required, activity logging is for VPNs.
+    expect(coverage(withPolicies()).filter((message) => message.includes('netflix.yaml'))).toEqual([
+      'data/providers/netflix.yaml: No rating or status for 3 topics that apply: privacy.data-collection, privacy.ads-tracking, billing.refunds. Rate each, or give it a status (not-stated or not-applicable)',
+    ]);
+    const onlyInUs = withPolicies({
+      ...mullvadPolicies,
+      ratings: [...mullvadPolicies.ratings, rating('privacy.ads-tracking', { regions: ['US'] })],
+    });
+    expect(mullvad(onlyInUs)).toEqual([
+      'data/providers/mullvad.yaml policies: No rating or status for a topic that applies: privacy.ads-tracking (only for some plans or regions). Rate each, or give it a status (not-stated or not-applicable)',
+    ]);
+    const stated = withPolicies({
+      ...mullvadPolicies,
+      ratings: [
+        ...mullvadPolicies.ratings,
+        {
+          topic: 'privacy.ads-tracking',
+          status: 'not-stated',
+          reason: 'Its privacy policy doesn’t say.',
+          pages: [privacy],
+          lastVerified: '2026-10-22',
+        },
+      ],
+    });
+    expect(mullvad(stated)).toEqual([]);
+  });
+
+  it('only warns about the missing topics of a provider waiting for M11.9’s regrade', () => {
+    expect(
+      coverage(withPolicies(), new Set(['mullvad'])).filter((message) =>
+        message.includes('mullvad.yaml'),
+      ),
+    ).toEqual([
+      'warning: data/providers/mullvad.yaml policies: Waiting for M11.9’s regrade: no rating or status for a topic that applies: privacy.ads-tracking. Rate each, or give it a status (not-stated or not-applicable)',
+    ]);
+  });
+
   it('needs the topics file once a provider rates its policies', () => {
     const files = withPolicies().filter(({ file }) => file !== 'data/policy-topics.yaml');
     expect(messages(files)).toEqual([
@@ -305,8 +477,12 @@ describe('validateCatalog, for policies', () => {
 });
 
 describe('planPolicies', () => {
-  const provider = (ratings: unknown[]) => ({
-    policies: { ...mullvadPolicies, ratings } as Policies,
+  const mullvad = catalog().find(({ file }) => file === 'data/providers/mullvad.yaml');
+  const { category, plans } = (mullvad && 'data' in mullvad ? mullvad.data : {}) as Provider;
+  const provider = (ratings: unknown[], links: unknown = mullvadPolicies.links) => ({
+    category,
+    plans,
+    policies: { links, ratings } as Policies,
   });
 
   it('groups the ratings that apply, in the registry’s order, and links only the pages they quote', () => {
@@ -398,7 +574,7 @@ describe('planPolicies', () => {
   });
 
   it('shows nothing for a provider with no ratings, or none that applies', () => {
-    expect(planPolicies({}, 'mullvad.vpn', 'CA', topics)).toBeUndefined();
+    expect(planPolicies({ category, plans }, 'mullvad.vpn', 'CA', topics)).toBeUndefined();
     expect(
       planPolicies(
         provider([rating('privacy.ads-tracking', { regions: ['US'] })]),
@@ -407,6 +583,64 @@ describe('planPolicies', () => {
         topics,
       ),
     ).toBeUndefined();
+  });
+});
+
+describe('planPolicies, for statuses and titles (M11.1)', () => {
+  const mullvad = catalog().find(({ file }) => file === 'data/providers/mullvad.yaml');
+  const { category, plans } = (mullvad && 'data' in mullvad ? mullvad.data : {}) as Provider;
+  const notStated = (topic: string) => ({
+    topic,
+    status: 'not-stated',
+    reason: 'Its privacy policy doesn’t say.',
+    pages: [privacy],
+    lastVerified: '2026-10-22',
+  });
+  const shown = (ratings: unknown[], links = privacyOnly) =>
+    planPolicies(
+      { category, plans, policies: { links, ratings } as Policies },
+      'mullvad.vpn',
+      'CA',
+      topics,
+    )?.groups.flatMap(({ policies }) => policies);
+
+  it('shows Not stated without a grade where silence proves nothing, citing the pages read', () => {
+    expect(shown([notStated('privacy.ads-tracking')])).toEqual([
+      {
+        topic: topics[1],
+        status: 'not-stated',
+        reason: 'Its privacy policy doesn’t say.',
+        citations: [{ number: 1, name: 'Privacy policy', quotes: [], href: privacy }],
+      },
+    ]);
+  });
+
+  it('grades silence where the topic says it means a missing protection', () => {
+    expect(shown([notStated('service.activity-logging')])?.[0]).toMatchObject({
+      tier: 'poor',
+      status: 'not-stated',
+    });
+  });
+
+  it('shows not applicable without a grade, and each notable rating with its title', () => {
+    const policies = shown([
+      {
+        topic: 'billing.refunds',
+        status: 'not-applicable',
+        reason: 'It never charges.',
+        lastVerified: '2026-10-22',
+      },
+      rating('other.notable', { title: 'Takes cash' }),
+      rating('other.notable', { title: 'No email needed', tier: 'good' }),
+    ]);
+    expect(
+      policies?.map(({ topic, tier, status, title }) => [topic.id, tier, status, title]),
+    ).toEqual([
+      ['billing.refunds', undefined, 'not-applicable', undefined],
+      ['other.notable', 'great', undefined, 'Takes cash'],
+      ['other.notable', 'good', undefined, 'No email needed'],
+    ]);
+    expect(policies?.[0].citations).toEqual([]);
   });
 });
 

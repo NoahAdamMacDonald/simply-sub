@@ -137,7 +137,9 @@
             <div class="rating">
               <p class="rated">
                 <span class="topic">{{ policy.topic.name }}</span>
-                <span class="grade"> ({{ tierNames[policy.tier] }}): </span>
+                @if (policy.tier; as tier) {
+                  <span class="grade"> ({{ tierNames[tier] }}): </span>
+                }
                 <!-- The space before the citations is the reason's: Angular drops a span of only a space. -->
                 <span>{{ policy.reason }} </span>
                 @for (citation of policy.citations; track $index) {
