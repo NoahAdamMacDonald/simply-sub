@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+        "description": "Stable rater id (av-test)"
+      },
+      "name": {
+        "type": "string",
+        "minLength": 1,
+        "description": "As the card credits it (AV-TEST)"
+      },
+      "website": {
+        "type": "string",
+        "format": "uri",
+        "pattern": "^https://",
+        "patternErrorMessage": "Use a full https:// URL",
+        "description": "Its home page"
+      },
+      "domains": {
+        "minItems": 1,
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z]{2,63}$"
+        },
+        "description": "Other domains its rating pages are on, besides its website's"
+      },
+      "scales": {
+        "minItems": 1,
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "subject": {
+              "type": "string",
+              "enum": [
+                "news-bias",
+                "news-reliability",
+                "antivirus-protection",
+                "antivirus-performance",
+                "antivirus-usability"
+              ],
+              "description": "What it rates"
+            },
+            "labels": {
+              "minItems": 2,
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 },
+              "description": "The rater's own labels, word for word, in its own order"
+            }
+          },
+          "required": ["subject", "labels"],
+          "additionalProperties": false
+        },
+        "description": "What it rates, each with its label scale"
+      },
+      "terms": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://",
+            "patternErrorMessage": "Use a full https:// URL",
+            "description": "Its own page on reusing its ratings: terms of use, a FAQ"
+          },
+          "quotes": {
+            "minItems": 1,
+            "maxItems": 3,
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "description": "Where that page allows showing its label with a link, word for word"
+          },
+          "note": {
+            "type": "string",
+            "minLength": 1,
+            "description": "What it asks for, and how the card meets it: credit, a link, the test date"
+          },
+          "checked": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+            "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+            "description": "When the terms were read"
+          }
+        },
+        "required": ["url", "quotes", "checked"],
+        "additionalProperties": false,
+        "description": "Its terms of reuse, checked before it was added: only a rater whose terms plainly allow a label with a link is listed"
+      }
+    },
+    "required": ["id", "name", "website", "scales", "terms"],
+    "additionalProperties": false
+  },
+  "title": "Simply Sub raters",
+  "description": "data/raters.yaml: the outside raters whose labels providers show, each with its terms of reuse (BLUEPRINT §4.10)"
+}

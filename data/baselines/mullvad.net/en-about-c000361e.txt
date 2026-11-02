@@ -1,0 +1,151 @@
+url: https://mullvad.net/en/about
+method: fetch
+saved: 2026-11-02
+
+About
+Skip to main content
+Products and services
+VPN
+Browser
+Browser extension
+Pricing
+Privacy
+Why privacy matters
+Technical resources
+Downloads
+Tech blog & news
+Open source
+Check for leaks
+Servers
+Help and support
+Guides
+FAQ
+VPN
+Browser
+Pricing
+Downloads
+Why privacy matters
+Log in Get started
+About
+Mullvad VPN AB is owned by parent company Amagicom AB. The name Amagicom is
+derived from the Sumerian word ama-gi – the oldest word for “freedom” or, literally,
+“back to mother” in the context of slavery – and the abbreviation for communication. Amagicom stands
+for “free communication”.
+The founders
+Mullvad VPN AB and its parent company Amagicom AB are 100% owned by founders Fredrik Strömberg and
+Daniel Berntsson who are actively involved in the company.
+The team
+Daniel, Fredrik, Robin, Simon, Linus, Richard, Sanny, Odd, Alexander, Stefan, David L, Oskar N, Joshua, Eric, Matilda, Emil, Rui, Grégoire, Douglas, Albin, Hank, Michal, Marco, Jonatan R, Markus, Oscar, David G, Sebastian, Emma, Andrew, William, Joakim, Carl, Erik H, Nicklas, Jon, Karl, Jack, Emil S, Steffen, Tobias J, Elisabeth, Lars, Kevin, Daniel J, Tobias B, Alexander O, John, Martin, Thomas, Erik T, Lars S, Daneo, Philip and Samuel
+For the history buffs
+These are just a few of the milestones we’re particularly proud of:
+2009
+March 2009 – The Mullvad VPN service launches!
+2010
+July 2010 – We started accepting Bitcoin payments.
+September 2010 – Customers could start paying in cash!
+2014
+April 2014 – We swiftly assessed and mitigated the Heartbleed vulnerability and then proved our hypothesis of its critical impact on OpenVPN.
+September 2014 – We demonstrated that OpenVPN is vulnerable to Shellshock, resulting in admin access, and warn our competitors before general disclosure.
+September 2014 – We launched IPv6 support
+2017
+March 2017 – Our users were able to start using WireGuard
+December 2017 – We introduced a post-quantum secure VPN tunnel.
+2018
+September 2018 – The independent audit on our VPN app was completed
+2019
+June 2019 – Our new project on System Transparency was revealed, and we called upon our community to develop and encourage transparent systems.
+July 2019 – Mozilla partnered with us to utilise our global network of VPN servers for its own VPN application.
+August 2019 – We succeed in porting open-source firmware to an off-the-shelf server, a first in history and getting us one step closer to our vision of System Transparency.
+October 2019 – We added Malwarebytes as yet another partner using our server network.
+2020
+June 2020 – All five platform versions of our VPN app underwent a thorough external security audit.
+December 2020 – No personally identifiable information (PII) or privacy leaks were found during the first independent security audit of our infrastructure.
+2021
+February 2021 – We released an audited, beta version of a public DNS service.
+June 2021 – We started adding DNS content blocking to our apps, with the lists updated frequently and available here.
+August 2021 – We added Split-tunneling support to our Windows, Android and Linux apps.
+2022
+January 2022 – We added a pair of WireGuard servers running entirely from RAM, as the start of our journey towards System Transparency began.
+March 2022 – Multihop support for WireGuard was added to the desktop apps, for more privacy and to make your traffic harder to analyse.
+March 2022 – Our Firefox extension, Mullvad Privacy Companion was made open source
+May 2022 – The Monero cryptocurrency was added as a supported method of payment.
+June 2022 – Subscriptions were no longer accepted, as a way of storing even less information about customers
+July 2022 – Post-quantum WireGuard tunnel support was added in an experimental form, available in the desktop app.
+July 2022 – It became possible to purchase Mullvad VPN physical activation codes from Amazon in certain countries, with many other countries becoming available in the months that followed.
+2023
+April 2023 – We released the Mullvad Browser in collaboration with the Tor Project.
+June 2023 – We released our privacy focused search engine Leta.
+September 2023 – Partnership with Tailscale.
+September 2023 – Completed migration to RAM-only VPN infrastructure.
+2024
+February 2024 – We self-host our support email.
+May 2024 – We released DAITA (Defense against AI-guided Traffic Analysis)
+2025
+February 2025 – All apps across all platforms got WireGuard with quantum-resistance enabled by default.
+March 2025 – Our Android app was successfully audited by NCC Group.
+May 2025 – We introduced Reproducible Builds for our Android app.
+August 2025 – We added support for Bitcoin Lightning.
+August 2025 – We promptly fixed all low issues in our website audit.
+September 2025 – Addition of QUIC and LWO obfuscation methods to select WireGuard servers.
+December 2025 – Introduction of GotaTun, our fork of BoringTun; a WireGuard implementation written in Rust.
+And then? Finally, to highlight the corruption behind the Chat Control proposal we introduced our video campaign, “And then?” which we shared across many different channels.
+Mullvad
+About
+Help
+Servers
+Pricing
+Blog
+Mullvad VPN
+Mullvad Browser
+Why privacy matters
+Why Mullvad VPN?
+What is a VPN?
+Downloads
+Stop chat control
+Press
+Careers
+Policies
+Policies
+Open source
+Privacy policy
+Cookies
+Terms of service
+Partnerships and resellers
+Reviews, ads and affiliates
+Reporting a bug or vulnerability
+Address
+Mullvad VPN AB
+Box 53049
+400 14 Gothenburg
+Sweden
+support@mullvadvpn.net
+GPG key
+Onion service
+Follow us
+@mullvadnet
+@mullvadnet
+Mullvad VPN
+mullvad
+Language
+English العربيّة
+Dansk
+Deutsch
+English
+Español
+فارسی
+Suomi
+Français
+Italiano
+日本語
+한국어
+Nederlands
+Norsk
+Polski
+Português
+Русский
+Svenska
+ภาษาไทย
+Türkçe
+Українська
+简体中文
+繁體中文

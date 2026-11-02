@@ -642,6 +642,16 @@ With axe, screenshots and no horizontal scroll. Since M11.1 `check-search.cjs` f
 of Cancelling and refunds), expects its six groups and seven sources, and checks text fragments on graded lines'
 citations only.
 
+`check-m11-outside.cjs` (M11.2, outside ratings and owners) checks Search's cards on `ng serve` for a Canadian in
+Alberta (base URL ending in `/`, after `npm run data:build` on the branch), in both themes at both widths: Bitdefender's
+Outside ratings right after Terms and policies (AV-TEST's Protection, Performance and Usability, each "6.0/6.0 from
+AV-TEST, August 2026" with what it tested), each linking AV-TEST's result page in a new tab and reached by Tab after
+the Sources; Mullvad's Owner ("Mullvad VPN AB, according to its About us") with a text-fragment link and its quotes as
+the tooltip on Tab; Netflix with neither; the lines in `--ss-text-muted` and the links in `--ss-accent-text`, underlined,
+against the tokens. With axe, screenshots and no horizontal scroll. It reads the groups' words with `innerText`, since
+`textContent` loses the spaces the layout puts between a heading and its list. Use the skill's pinned axe-core: 4.11
+flags Search's empty Features chip grid (`aria-prohibited-attr`), which 4.14 doesn't.
+
 `check-after-m3.cjs` (the feedback after M3: M5.13, M6.17–M6.19, M7.11, M8.5, M8.6, M9.6) checks the batch on
 `ng serve` for a Canadian in Alberta, with Streaming (Crave Premium and Disney+ Premium) and Family (two Disney+
 Premium, Netflix Standard auto-renewing until an end date, Mullvad renewed by hand, and four more so it scrolls). In

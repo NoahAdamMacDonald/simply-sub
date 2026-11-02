@@ -206,6 +206,12 @@ const mullvad = {
   category: 'vpn',
   spendCategory: 'software',
   billingCurrency: { GLOBAL: 'EUR' },
+  owner: {
+    name: 'Mullvad VPN AB',
+    page: { name: 'About Mullvad', url: 'https://mullvad.net/en/about' },
+    quotes: ['Mullvad VPN AB is owned by parent company Amagicom AB.'],
+    lastVerified: '2026-10-20',
+  },
   plans: [
     {
       id: 'mullvad.vpn',
@@ -230,6 +236,12 @@ const proton = {
   category: 'privacy-suite',
   spendCategory: 'software',
   billingCurrency: { GLOBAL: 'USD' },
+  owner: {
+    name: 'Proton AG',
+    page: { name: 'About Proton', url: 'https://proton.me/about' },
+    quotes: ['Proton services are operated by Proton AG'],
+    lastVerified: '2026-10-20',
+  },
   plans: [
     {
       id: 'proton.free',

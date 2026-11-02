@@ -20,6 +20,14 @@ import { automationSchema } from '../pipeline/automation';
 import { onSites, providerSiteKeys, queueFileSchema } from '../pipeline/queue';
 import type { Price } from './price';
 import { providerSchema, type AddOn, type Plan, type Provider } from './provider';
+import {
+  ownerRequiredIn,
+  ratersFileSchema,
+  ratingIsOld,
+  ratingDay,
+  ratingSubjects,
+  type Rater,
+} from './rater';
 import { redirectsFileSchema } from './redirects';
 import { isRetired } from './retired';
 import { globalRegion, groupsOf, isCatalogRegion, membersOf, regionProblem } from './regions';
@@ -91,6 +99,7 @@ const policyTopicsFile = 'data/policy-topics.yaml';
 const queueFile = 'data/queue.yaml';
 const automationFile = 'data/automation.yaml';
 const redirectsFile = 'data/redirects.yaml';
+const ratersFile = 'data/raters.yaml';
 const policySetsDir = 'data/policies/';
 const staleAfterDays = 90;
 /** Terms change less often than prices, and no nightly check reads them. */
@@ -235,6 +244,16 @@ export function validateCatalog(
     return read ? [read] : [];
   });
 
+  // The raters file is optional too, until a provider shows an outside rating (M11.2).
+  const reportRaters = reportIn(ratersFile);
+  const raters = located.raters && parseFile(ratersFileSchema, located.raters, reportRaters);
+  if (!located.raters && providers.some(({ value }) => value.ratings)) {
+    reportRaters(
+      [],
+      'Missing: the outside raters whose labels providers show go here (BLUEPRINT §4.10)',
+    );
+  }
+
   const ids = indexIds(providers, bundles, unchecked, resellersRead);
   const context: CheckContext = {
     today,
@@ -248,12 +267,18 @@ export function validateCatalog(
     awaitingRegrade,
     policySets: new Map(policySets.map(({ value }) => [value.id, value])),
     policySetsUnchecked,
+    raters: new Map(raters?.map((rater) => [rater.id, rater])),
+    // Missing or broken: the file's own error says so, and the ratings naming raters go unchecked.
+    ratersUnchecked: raters === undefined,
   };
   for (const { value, report } of providers) {
     checkProvider(value, context, report);
   }
   if (resellersRead && unchecked.size === 0) {
     warnUnlisted(resellersRead, providers);
+  }
+  if (raters && unchecked.size === 0) {
+    warnUnusedRaters(raters, providers, reportRaters);
   }
   for (const { value, report } of bundles) {
     checkBundle(value, context, report);
@@ -321,6 +346,7 @@ interface LocatedFiles {
   queue?: CatalogSourceFile;
   automation?: CatalogSourceFile;
   redirects?: CatalogSourceFile;
+  raters?: CatalogSourceFile;
   providers: NamedFile[];
   bundles: NamedFile[];
   policySets: NamedFile[];
@@ -355,6 +381,9 @@ export function locateCatalogFile(
   if (file === redirectsFile) {
     return { kind: 'redirects', name: 'redirects' };
   }
+  if (file === ratersFile) {
+    return { kind: 'raters', name: 'raters' };
+  }
   const named = /^data\/(providers|bundles|policies)\/([^/]+)\.yaml$/.exec(file);
   if (named) {
     const kinds = { providers: 'provider', bundles: 'bundle', policies: 'policy-set' } as const;
@@ -386,6 +415,8 @@ function locateFiles(
       located.automation = source;
     } else if (where?.kind === 'redirects') {
       located.redirects = source;
+    } else if (where?.kind === 'raters') {
+      located.raters = source;
     } else if (where) {
       const list = {
         provider: 'providers',
@@ -405,7 +436,7 @@ function locateFiles(
     } else {
       reportIn(file)(
         [],
-        'Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/automation.yaml, data/redirects.yaml, data/providers/<id>.yaml, data/bundles/<slug>.yaml or data/policies/<id>.yaml',
+        'Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/automation.yaml, data/redirects.yaml, data/raters.yaml, data/providers/<id>.yaml, data/bundles/<slug>.yaml or data/policies/<id>.yaml',
       );
     }
   }
@@ -551,6 +582,10 @@ interface CheckContext {
   policySets: ReadonlyMap<string, PolicySet>;
   /** The ids of shared documents whose file is broken: what names them goes unchecked. */
   policySetsUnchecked: ReadonlySet<string>;
+  /** data/raters.yaml's, by id. */
+  raters: ReadonlyMap<string, Rater>;
+  /** The raters file is missing or broken, so a rater missing from it may only be unreadable. */
+  ratersUnchecked: boolean;
 }
 
 function checkProvider(provider: Provider, context: CheckContext, report: Report): void {
@@ -674,6 +709,139 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
   }
   checkPolicyCoverage(provider, context, report);
   checkTopicFeatures(provider, context, report);
+  if (provider.ratings) {
+    checkOutsideRatings(provider.ratings, context, report);
+  }
+  checkOwner(provider, own, context, report);
+}
+
+/**
+ * A provider's outside ratings (M11.2): each from a rater in data/raters.yaml that rates its subject, with a label
+ * from that rater's scale, dated no later than today, on the rater's own site; a subject that needs several raters
+ * (a news outlet's bias) has them; and a warning once one is a year old, since the rater may have rated it again.
+ */
+function checkOutsideRatings(
+  ratings: NonNullable<Provider['ratings']>,
+  { raters, ratersUnchecked, today }: CheckContext,
+  report: Report,
+): void {
+  ratings.forEach((rating, index) => {
+    const path = ['ratings', index];
+    if (ratingDay(rating.date) > today) {
+      report([...path, 'date'], `${rating.date} is after today (${today})`);
+    } else if (ratingIsOld(rating.date, today)) {
+      report(
+        [...path, 'date'],
+        `Rated ${rating.date}, over a year ago: look for ${raters.get(rating.rater)?.name ?? 'the rater'}'s newer rating`,
+        'warning',
+      );
+    }
+    const rater = raters.get(rating.rater);
+    if (!rater) {
+      if (!ratersUnchecked) {
+        report(
+          [...path, 'rater'],
+          `"${rating.rater}" isn't in ${ratersFile}${didYouMean(rating.rater, [...raters.keys()], 'add it there once its terms allow showing its labels')}`,
+        );
+      }
+      return;
+    }
+    const scale = rater.scales.find((candidate) => candidate.subject === rating.subject);
+    if (!scale) {
+      report(
+        [...path, 'subject'],
+        `${rater.name} doesn't rate ${rating.subject}${choices(
+          rating.subject,
+          rater.scales.map((candidate) => candidate.subject),
+        )}`,
+      );
+    } else if (!scale.labels.includes(rating.label)) {
+      report(
+        [...path, 'label'],
+        `"${rating.label}" isn't on ${rater.name}'s scale for ${rating.subject}${choices(rating.label, scale.labels)}`,
+      );
+    }
+    const domains = [siteDomain(rater.website), ...(rater.domains ?? [])];
+    if (!isOnDomain(rating.url, domains)) {
+      report(
+        [...path, 'url'],
+        `Must be ${rater.name}'s own page for it, on ${domains.join(' or ')}`,
+      );
+    }
+  });
+  for (const [subject, { name, minRaters }] of Object.entries(ratingSubjects)) {
+    const rated = ratings
+      .map((rating, index) => ({ rating, index }))
+      .filter(({ rating }) => rating.subject === subject);
+    const count = new Set(rated.map(({ rating }) => rating.rater)).size;
+    if (rated.length > 0 && count < minRaters) {
+      report(
+        ['ratings', rated[0].index, 'subject'],
+        `${name} (${subject}) needs ${minRaters} raters at least, so no single rater's view stands alone: add another or leave it out`,
+      );
+    }
+  }
+}
+
+/**
+ * A provider's owner (M11.2): quoted from its own pages, on its sites or the sites of its own policies (Claude's terms
+ * on anthropic.com). A provider with a plan in a category where who owns it matters (VPNs, news, finance) needs one.
+ */
+function checkOwner(
+  provider: Provider,
+  own: readonly string[],
+  { today }: CheckContext,
+  report: Report,
+): void {
+  const { owner } = provider;
+  if (!owner) {
+    const needs = providerCategories(provider).filter((id) => ownerRequiredIn.includes(id));
+    if (needs.length > 0) {
+      report(
+        [],
+        `A provider in ${needs.join(' and ')} needs its owner: quote its own about page in owner`,
+      );
+    }
+    return;
+  }
+  const sites = [
+    ...new Set([...own, ...(provider.policies?.links ?? []).map((link) => siteDomain(link.url))]),
+  ];
+  if (!isOnDomain(owner.page.url, sites)) {
+    report(
+      ['owner', 'page', 'url'],
+      `Must be a page of ${provider.name}'s own sites or its policies' (${sites.join(', ')}): its own words on who owns it`,
+    );
+  }
+  if (owner.lastVerified > today) {
+    report(['owner', 'lastVerified'], `${owner.lastVerified} is after today (${today})`);
+  } else if (addDays(owner.lastVerified, policyStaleAfterDays) < today) {
+    report(
+      ['owner', 'lastVerified'],
+      `Read on ${owner.lastVerified}, over a year ago: read the page again`,
+      'warning',
+    );
+  }
+}
+
+/** A rater no provider shows gets a warning: it's either missing from a provider file or no longer needed. */
+function warnUnusedRaters(
+  raters: readonly Rater[],
+  providers: readonly ReadFile<Provider>[],
+  report: Report,
+): void {
+  const used = new Set(
+    providers.flatMap(({ value }) => value.ratings?.map((rating) => rating.rater) ?? []),
+  );
+  raters.forEach((rater, index) => {
+    if (!used.has(rater.id)) {
+      report(
+        [index, 'id'],
+        'No provider shows this rater: add its ratings to the providers it rates, or remove it',
+        'warning',
+      );
+    }
+  });
 }
 
 /**

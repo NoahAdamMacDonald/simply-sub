@@ -39,6 +39,8 @@ billingCurrency:
   }
 cancelUrl: https://www.netflix.com/cancelplan
 sources: { pricing: https://help.netflix.com/en/node/24926 }
+# No owner (M11.2, read 2026-11-02): about.netflix.com names no company, and its terms of use only “the service
+# provided by Netflix”.
 
 plans:
   - id: netflix.standard-ads

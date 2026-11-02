@@ -4,6 +4,8 @@ import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import {
+  outsideRatings,
+  ownerCitation,
   planExtras,
   planPolicies,
   planTitle,
@@ -26,7 +28,7 @@ import { FxStore } from '../../core/fx/fx-store';
 import { SettingsStore } from '../../core/settings/settings-store';
 import type { AddToListMenu } from '../add-to-list/add-to-list-menu';
 import { countryName } from '../country-name';
-import { dateText } from '../date-text';
+import { dateText, monthText } from '../date-text';
 import { FeatureList } from '../feature-list/feature-list';
 import { PriceTag } from '../price-tag/price-tag';
 import { ProviderIcon } from '../provider-icon/provider-icon';
@@ -61,8 +63,9 @@ const groupNames: Record<PolicyGroup, string> = {
 /**
  * A Search card's expanded section (PROJECT-PLAN P8): the plan's features with the user's ranks, its add-ons, the
  * bundles that include it and what they save, what a suite includes and saves, its perks and notes, its terms and
- * policies graded with why in plain words and a citation of each page it quotes (M1.13, M1.14), and when its price
- * was checked, with Report a wrong price beside it (M10.11). Core's planExtras prices them for the user from the
+ * policies graded with why in plain words and a citation of each page it quotes (M1.13, M1.14), outside raters' labels
+ * and the company behind it, citing its own page (M11.2), and when its price was checked, with Report a wrong price
+ * beside it (M10.11). Core's planExtras prices them for the user from the
  * catalog file for their country.
  */
 @Component({
@@ -125,6 +128,15 @@ export class PlanDetails {
       data.policySets,
     );
   });
+  /** Outside raters' labels by subject (M11.2): each with its date and a link to the rater's page, never its text. */
+  protected readonly outside = computed(() =>
+    outsideRatings(this.provider(), this.catalog.catalog()?.raters),
+  );
+  /** The company behind it, and its own page that says so (M11.2). */
+  protected readonly owner = computed(() => {
+    const owner = this.provider().owner;
+    return owner && ownerCitation(owner);
+  });
   protected readonly tierNames = tierNames;
   protected readonly statusNames = statusNames;
   protected readonly groupNames = groupNames;
@@ -170,6 +182,16 @@ export class PlanDetails {
     openSnack(this.injector, `Thanks. ${provider}’s page will be checked tonight.`, undefined, {
       duration: snackMillis,
     });
+  }
+
+  /** A rater's date: "Sep 14, 2026", or a lab test's month, "August 2026". */
+  protected ratingDate(date: string): string {
+    return date.length === 7 ? monthText(date) : dateText(date);
+  }
+
+  /** The owner's citation's tooltip: the words it quotes. */
+  protected ownerQuotes(quotes: readonly string[]): string {
+    return quotes.map((quote) => `“${quote}”`).join(' ');
   }
 
   /** A citation's tooltip: the words it quotes, and the page; a page read that's silent on the topic, by name. */

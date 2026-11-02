@@ -1123,6 +1123,45 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
     its title. `check-m11-policies.cjs` (browser-check skill): 57 checks in both themes at both widths with axe;
     `check-search.cjs` follows the split topic and Mullvad's new groups.
 
+**M11.2 — Outside ratings and owners** (BLUEPRINT §4.10)
+- **Raters:** `data/raters.yaml` lists each rater once (id, name, website, `scales` of core's subjects with its labels
+  in order, and its `terms` of reuse quoted with the day they were read). A rater is listed only when its terms plainly
+  allow its label with a link; the owner is asked about any other.
+- **Ratings:** a provider's `ratings` (rater, subject, label, the rater's date, its page). Validation refuses a rater
+  not in the registry, a label off its scale, a date after today, and a news bias or reliability from one rater; it
+  warns once a rating is a year old.
+- **Owner:** a provider's `owner`, quoted from its own about page like a policy source, on its own sites.
+- **Acceptance**
+  - [x] A news provider shows two raters' labels with links and dates, and its owner (a fixture: no news provider or
+    news rater is in the catalog yet, the owner's choice)
+  - [x] Validation refuses a rater not in the registry and a news bias rating from one rater
+- **As built** (the owner's choices on 2026-11-02: no news rater and no SE Labs or AV-Comparatives until their written
+  permission; no email to AV-TEST for each use):
+  - **Terms read** (BLUEPRINT §14): AV-TEST's FAQ allows its data with "an active link to the website", so it's the one
+    rater. Ad Fontes' terms forbid reproducing its ratings; Media Bias/Fact Check's allow only fair use or explicit
+    permission; AllSides' are behind a bot check (reported as CC BY-NC 4.0); AV-Comparatives' Press Center allows free
+    use but each report requires its board's written agreement; SE Labs allows fair use to promote a report. Each is
+    quoted in `data/raters.yaml`'s header.
+  - **Schema** (core's `rater.ts`): `ratersFileSchema`, `outsideRatingSchema` (a `date` that's a day or a lab test's
+    month, and `tested` for what a lab tested), `ownerSchema` (`name`, `page`, one to three `quotes`, `lastVerified`),
+    `ratingSubjects` (two raters for news bias and reliability) and `ownerRequiredIn` (VPN, news, finance, and telecom
+    once it's a category). Validation also refuses a subject the rater doesn't rate, a link off the rater's site, an
+    owner's page off the provider's own sites or its policies', and a provider in VPN, news or finance with no owner.
+  - **Data:** Bitdefender's AV-TEST Jul–Aug 2026 Windows 11 scores (6.0/6.0 for protection, performance and usability,
+    tested on Total Security 27.0). Owners for nine: Mullvad VPN AB and Proton AG (about pages), The Walt Disney Company
+    for Hulu (its press site's history), Bell Media Inc. for Crave, TSN and RDS, Société Radio-Canada for ICI TOU.TV,
+    Anthropic, PBC for Claude and Microsoft for Xbox Game Pass (their terms, since no about page of theirs says).
+    Netflix, Disney+, ESPN and Bitdefender name none on their own pages (ESPN only "© 2026 ESPN Enterprises, LLC";
+    Disney's privacy policy lists Disney+ and ESPN only as brands), which their files say.
+  - **Published and checked:** the snapshot's `raters` (left out when there are none); `citedPages` counts the owner's
+    page as a policy page, so `data:baselines` saved the new ones and checked their quotes. The nightly check doesn't
+    read owners' pages yet.
+  - **The card:** Outside ratings, then Owner, after Terms and policies, both in the muted grey; each rater's name
+    links its page in a new tab, and the owner's page links its words, its quotes the tooltip. `check-m11-outside.cjs`
+    (browser-check skill): 53 checks in both themes at both widths, by keyboard, with axe.
+  - **Skills:** policy-research's Rules say how to read an owner and outside ratings, and price-research reads them
+    with the terms.
+
 **M11.6 — Ranked perks** (BLUEPRINT §4.2)
 ```yaml
 # data/providers/xbox-game-pass.yaml (a sketch)

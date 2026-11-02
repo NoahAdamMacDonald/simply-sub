@@ -110,7 +110,7 @@ describe('PlanDetails', () => {
     it('grades each topic with a dot and in words, says why with citations, by group, and numbers the pages', async () => {
       await show('mullvad.vpn');
 
-      expect(groups().at(-1)).toBe(
+      expect(groups().find((group) => group.startsWith('Terms and policies'))).toBe(
         'Terms and policies Privacy Data collection (Not stated): Its no-logging policy doesn’t say what else it collects. [2] ' +
           'Legal Disputes (Great): Swedish courts or the consumer disputes board. [1] ' +
           'Service Activity logging (Great): No connection logs, and an audit found none. [2] ' +
@@ -191,6 +191,51 @@ describe('PlanDetails', () => {
       await show('netflix.standard');
 
       expect(groups().some((group) => group.startsWith('Terms and policies'))).toBe(false);
+    });
+  });
+
+  describe('Outside ratings and the owner (M11.2)', () => {
+    it('shows each rater’s label with its date and a link, after Terms and policies, then the owner', async () => {
+      await show('mullvad.vpn');
+
+      expect(groups().slice(-3, -2)[0]).toMatch(/^Terms and policies /);
+      expect(groups().slice(-2)).toEqual([
+        // The rater the catalog doesn't list is left out: its name is unknown.
+        'Outside ratings Protection: 6.0/6.0 from Test Lab , August 2026 (tested Mullvad VPN 2026.4, Windows 11) ' +
+          'Usability: 5.5/6.0 from Test Lab , Sep 14, 2026',
+        'Owner Mullvad VPN AB , according to its About us',
+      ]);
+      const link = element().querySelector<HTMLAnchorElement>('.outside a');
+      expect([link?.href, link?.target, link?.rel, link?.getAttribute('aria-label')]).toEqual([
+        'https://lab.example.org/mullvad',
+        '_blank',
+        'noopener',
+        'Test Lab’s rating, opens in a new tab',
+      ]);
+    });
+
+    it('cites the owner’s own page, linked to its words, with them as the tooltip', async () => {
+      await show('mullvad.vpn');
+      const link = element().querySelector<HTMLAnchorElement>('.owner a');
+
+      expect([link?.href, link?.target, link?.getAttribute('aria-label')]).toEqual([
+        'https://mullvad.net/en/about#:~:text=Mullvad%20VPN%20AB%20is,parent%20company%20Amagicom%20AB.',
+        '_blank',
+        'About us, opens in a new tab',
+      ]);
+      const tooltip = await TestbedHarnessEnvironment.loader(fixture).getHarness(
+        MatTooltipHarness.with({ selector: '.owner a' }),
+      );
+      await tooltip.show();
+      expect(await tooltip.getTooltipText()).toBe(
+        '“Mullvad VPN AB is owned by parent company Amagicom AB.”',
+      );
+    });
+
+    it('has neither for a provider with none', async () => {
+      await show('netflix.standard');
+
+      expect(groups().some((group) => /^(Outside ratings|Owner) /.test(group))).toBe(false);
     });
   });
   it('offers Report a wrong price beside the price’s date, and thanks the user once a report is sent', async () => {

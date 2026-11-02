@@ -12,6 +12,16 @@ billingCurrency: { GLOBAL: EUR }
 # the period purchased". The refunds guide is how to get unused time back (read 2026-10-26).
 cancelUrl: https://mullvad.net/en/help/refunds
 sources: { pricing: https://mullvad.net/en/pricing }
+# Owner (M11.2), read 2026-11-02.
+owner:
+  name: Mullvad VPN AB
+  page:
+    name: About us
+    url: https://mullvad.net/en/about
+  quotes:
+    - Mullvad VPN AB is owned by parent company Amagicom AB.
+    - 'Mullvad VPN AB and its parent company Amagicom AB are 100% owned by founders Fredrik Strömberg and Daniel Berntsson who are actively involved in the company.'
+  lastVerified: 2026-11-02
 notes: >-
   Prepaid only: you add time to an account number, and nothing renews by itself. Cards can pay in many local
   currencies at a converted amount, and cryptocurrency payments get 10% off. One flat price everywhere, VAT

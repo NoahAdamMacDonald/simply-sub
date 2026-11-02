@@ -26,6 +26,28 @@ billingCurrency:
   { CA: CAD, GB: GBP, US: USD, AU: AUD, NZ: NZD, DE: EUR, FR: EUR, NL: EUR, ES: EUR, IT: EUR }
 cancelUrl: https://www.bitdefender.com/consumer/support/answer/29081/
 sources: { pricing: https://www.bitdefender.com/en-ca/consumer/ }
+# Lab results (M11.2), read 2026-11-02: AV-TEST's latest Windows test of home-user products, Jul-Aug 2026 (its page
+# for it, report 261405). AV-Comparatives' and SE Labs' results aren't listed: see data/raters.yaml. No owner: its
+# company page names its co-founder and headquarters but no company that owns it.
+ratings:
+  - rater: av-test
+    subject: antivirus-protection
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/bitdefender-total-security-27.0-261405/
+    tested: Total Security 27.0, Windows 11
+  - rater: av-test
+    subject: antivirus-performance
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/bitdefender-total-security-27.0-261405/
+    tested: Total Security 27.0, Windows 11
+  - rater: av-test
+    subject: antivirus-usability
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/bitdefender-total-security-27.0-261405/
+    tested: Total Security 27.0, Windows 11
 
 plans:
   - id: bitdefender.total-security

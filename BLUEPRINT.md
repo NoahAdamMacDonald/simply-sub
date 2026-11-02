@@ -1317,9 +1317,33 @@ M1.14, M11.1), so a buyer can see what signing up means beyond the price.
   unread. The quotes are in the catalog files, and the card shows them in its citations' tooltips and links (about
   7 kB more to download, compressed, for ten providers; M11.8 moves them to a file per provider). Nothing rereads them
   nightly yet: validation warns once a rating is a year old.
-- **Outside raters** (M11.2, the owner's choice): news bias and reliability from at least two named raters, and
-  antivirus lab results, as a provider's `ratings`: the rater, its label, the date and a link, never the rater's text
-  or our own judgement.
+- **Outside raters** (M11.2, the owner's choice): facts the provider's own pages can't give, a news outlet's bias and
+  reliability and an antivirus's lab results, as a provider's `ratings`: the rater, the subject, its label, the
+  rater's date and a link to its page, never the rater's text or our own judgement. The raters are listed once in
+  `data/raters.yaml` (`ratersFileSchema`): each one's `scales` (core's subjects, `news-bias`, `news-reliability`,
+  `antivirus-protection`, `-performance` and `-usability`, each with the rater's labels in its order) and its `terms`
+  of reuse, quoted with the day they were read; a rater is listed only when its terms plainly allow showing its label
+  with a link. A rating's `date` is a day, or a lab test's month (`2026-08`); `tested` names what the rater tested
+  when that isn't simply the provider (Total Security 27.0, Windows 11). Validation refuses a rater not in the
+  registry, a subject it doesn't rate, a label off its scale, a date after today, a link off the rater's site, and a
+  subject with fewer raters than core's `ratingSubjects` asks (two for a news outlet's bias and reliability, so no
+  single rater's view stands alone), and warns once a rating is a year old. Read on 2026-11-02, only AV-TEST's terms
+  plainly allow it (its FAQ: data "for journalistic coverage, for preparing overviews", with "an active link to the
+  website"); Ad Fontes, Media Bias/Fact Check, AllSides, AV-Comparatives and SE Labs wait for written permission, the
+  owner's choice, their terms quoted in the registry's header. So no news rater is listed, and the news rules are
+  tested on a fixture; Bitdefender shows AV-TEST's scores.
+- **The owner** (M11.2): the company behind a provider, as its `owner`: its `name`, the provider's own `page` that
+  says so (`name`, `url`) and one to three `quotes` from it, with `lastVerified`. An about page first, else its terms
+  ("made available to you by Bell Media Inc."), on the provider's own sites or its own policies' (Claude's terms on
+  anthropic.com), which validation checks; never a third party's page. A provider with a plan in VPN, news or finance
+  needs one (core's `ownerRequiredIn`; telecom too once M11.3 adds it), and validation warns once it's a year old.
+  `citedPages` counts the page as a policy page, so `data:baselines` saves it and checks its quotes; the nightly check
+  doesn't read it yet. Nine of the 13 have one; Netflix, Disney+, ESPN and Bitdefender name none on their own pages.
+- **On the card,** after Terms and policies (M11.2): Outside ratings, each subject's labels (core's `outsideRatings`,
+  in the subjects' order: "Protection: 6.0/6.0 from AV-TEST, August 2026 (tested …)"), the rater's name a link to its
+  page in a new tab; then Owner ("Mullvad VPN AB, according to its About us"), the page's name a link with a text
+  fragment to its quotes (`ownerCitation`), which are its tooltip. Both in the muted grey, with no grade's colour.
+  `data:build` publishes the registry with the catalog (`raters`, section 6.3).
 
 ### 4.11 Finance accounts (planned: M11.10–M11.14)
 Banks, credit unions, fintechs and brokerages, decided with the owner on 2026-10-30. They aren't subscriptions with a
@@ -1677,7 +1701,8 @@ write the files.
      `iconUrl` when the provider has a logo; without one, the app shows its first letter), bundles sorted by id,
      `data/resellers.yaml`'s resellers sorted by id, each with an `iconUrl` the same way (section 4.9), and
      `data/policy-topics.yaml`'s topics in its order (`policyTopics`, section 4.10), and `data/policies/`'s shared
-     documents sorted by id (`policySets`, left out when there are none). Bundles stay in their source shape: the app computes feature unions and
+     documents sorted by id (`policySets`, left out when there are none), and `data/raters.yaml`'s raters sorted by id
+     (`raters`, section 4.10, left out when there are none). Bundles stay in their source shape: the app computes feature unions and
      savings in core for the user's region, and `GET /bundles` adds them per request (M2.4).
    - `meta` is `catalogVersion` (section 5.1), `generatedAt` (the build time, UTC), every priced region, and
      counts.
@@ -3230,6 +3255,18 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-11-02, outside raters' terms, M11.2)**
+Each rater's terms of reuse were read before it was added (section 4.10); the owner chose to list only those that
+plainly allow a label with a link, and to ask for written permission before adding the rest:
+- **Listed:** AV-TEST, whose FAQ allows its data with "an active link to the website". It also "kindly" asks to be told
+  of each use by email; the owner chose not to, since it's a request rather than a condition.
+- **Left out:** Ad Fontes Media (its terms forbid reproducing its ratings without written permission), Media Bias/Fact
+  Check (reproduction "strictly prohibited, except as permitted under fair use or with explicit permission"), AllSides
+  (its terms are behind a bot check, unread; reported elsewhere as CC BY-NC 4.0), AV-Comparatives (its Press Center
+  allows free use, but each report requires "the explicit written agreement of the management board") and SE Labs
+  (fair use only, to promote a report). With no news rater, no news provider can show bias or reliability until two
+  raters are listed.
 
 **Resolved (2026-10-30, card fees in the budgets)**
 - **FX fees count, cash back shows** (M10.29, the owner's choice after reporting Mullvad's budget missing its 2.5% FX

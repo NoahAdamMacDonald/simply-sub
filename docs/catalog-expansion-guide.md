@@ -486,7 +486,7 @@ counts them.
 | Categories it fits | `category` (main) and each plan's `categories` | yes (§5) |
 | Open source, with repository link | `software.open-source` and **new** `sourceRepo` | no |
 | Sign-in security | `account.sign-in` | no |
-| Who owns it (news, finance, telecom, VPNs) | **new** `owner`, quoted from its own about page | no |
+| Who owns it (news, finance, telecom, VPNs) | `owner`, quoted from its own about page (M11.2) | yes |
 
 ### 3.2 Regional prices: never miss them again
 
