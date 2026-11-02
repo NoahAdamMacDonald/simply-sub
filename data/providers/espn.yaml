@@ -2,6 +2,7 @@ id: espn
 name: ESPN
 aliases: [espn+, espn plus]
 website: https://www.espn.com
+domains: [espnpressroom.com]
 category: streaming
 spendCategory: streaming
 # Accepted cards, read 2026-10-28 (M9.2) on ESPN Fan Support's Payment Methods for ESPN Select or Unlimited: Visa
@@ -26,8 +27,15 @@ sources:
   {
     pricing: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices,
   }
-# No owner (M11.2, read 2026-11-02): espn.com says only “Copyright: © 2026 ESPN Enterprises, LLC.”; Disney's privacy
-# policy lists ESPN among The Walt Disney Family of Companies, but only in a list of brands.
+# Owner (M11.2), read 2026-11-02: its press room's About page (espnpressroom.com, ESPN's own).
+owner:
+  name: The Walt Disney Company (72%), Hearst (18%) and the NFL (10%)
+  page:
+    name: About ESPN (press room)
+    url: https://espnpressroom.com/about/
+  quotes:
+    - ESPN is 72 percent owned by The Walt Disney Company, 18 percent by Hearst and 10 percent by the National Football League.
+  lastVerified: 2026-11-02
 
 # Read 2026-10-26 on ESPN's plans and prices article. Select is ESPN+'s content; Unlimited is every ESPN network,
 # live. Both have ads ("ESPN Select (With Ads)", "ESPN Unlimited (With Ads)" on Disney+'s bundle table).

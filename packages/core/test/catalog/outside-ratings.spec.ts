@@ -269,11 +269,21 @@ describe('validateCatalog, for owners', () => {
     ]);
   });
 
-  it('takes the quote only from its own sites or its policies’', () => {
+  it('takes the quote only from its own sites, its policies’ or its owner’s', () => {
     const elsewhere = 'https://en.wikipedia.org/wiki/Daily_Planet';
     expect(messages(withRaters([[['owner', 'page', 'url'], elsewhere]]))).toEqual([
-      `${planet} owner.page.url: Must be a page of Daily Planet's own sites or its policies' (dailyplanet.example.com): its own words on who owns it`,
+      `${planet} owner.page.url: Must be a page of Daily Planet's own sites, its policies' or its owner's (dailyplanet.example.com): give the owner's site in website when the page is there`,
     ]);
+    // Its owner's own page, with the owner's site given.
+    const annualReport = 'https://investors.galaxy.example.com/annual-report';
+    expect(
+      messages(
+        withRaters([
+          [['owner', 'page', 'url'], annualReport],
+          [['owner', 'website'], 'https://www.galaxy.example.com'],
+        ]),
+      ),
+    ).toEqual([]);
     const galaxy = 'https://www.galaxy.example.com/legal/terms';
     expect(
       messages(

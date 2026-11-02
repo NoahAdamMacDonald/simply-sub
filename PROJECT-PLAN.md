@@ -1148,11 +1148,15 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
     once it's a category). Validation also refuses a subject the rater doesn't rate, a link off the rater's site, an
     owner's page off the provider's own sites or its policies', and a provider in VPN, news or finance with no owner.
   - **Data:** Bitdefender's AV-TEST Jul–Aug 2026 Windows 11 scores (6.0/6.0 for protection, performance and usability,
-    tested on Total Security 27.0). Owners for nine: Mullvad VPN AB and Proton AG (about pages), The Walt Disney Company
+    tested on Total Security 27.0). Owners at first for eight: Mullvad VPN AB and Proton AG (about pages), The Walt Disney Company
     for Hulu (its press site's history), Bell Media Inc. for Crave, TSN and RDS, Société Radio-Canada for ICI TOU.TV,
-    Anthropic, PBC for Claude and Microsoft for Xbox Game Pass (their terms, since no about page of theirs says).
-    Netflix, Disney+, ESPN and Bitdefender name none on their own pages (ESPN only "© 2026 ESPN Enterprises, LLC";
-    Disney's privacy policy lists Disney+ and ESPN only as brands), which their files say.
+    and Anthropic, PBC for Claude (their terms). Netflix and Bitdefender name none, which their files say.
+  - **The owner's follow-up (2026-11-02):** who owns a service is basic and easy to verify, so the owner's own site
+    counts too (`owner.website`): Xbox Game Pass is Microsoft Corporation's from its 2025 annual report ("our services
+    like … Xbox Game Pass", replacing a payment line); Disney+ is The Walt Disney Company's from its press site; ESPN is
+    "72 percent owned by The Walt Disney Company, 18 percent by Hearst and 10 percent by the National Football League"
+    from its press room (`espnpressroom.com` in its `domains`). The policy-research skill's owner rule gives the
+    order to look in.
   - **Published and checked:** the snapshot's `raters` (left out when there are none); `citedPages` counts the owner's
     page as a policy page, so `data:baselines` saved the new ones and checked their quotes. The nightly check doesn't
     read owners' pages yet.

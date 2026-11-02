@@ -154,15 +154,22 @@ export const outsideRatingsSchema = z
 export const ownerRequiredIn: readonly string[] = ['vpn', 'news', 'finance', 'telecom'];
 
 export const ownerSchema = z.strictObject({
-  name: textSchema.describe('The company behind it, as its page names it (Bell Media Inc.)'),
+  name: textSchema.describe(
+    'The company behind it, as the page names it, with the shares when the page gives them (The Walt Disney Company (72%), Hearst (18%) and the NFL (10%))',
+  ),
+  website: httpsUrlSchema
+    .describe(
+      "The owner's own website, when the page quoted is there: the parent's about page or annual report (Microsoft's for Xbox Game Pass)",
+    )
+    .optional(),
   page: z
     .strictObject({
       name: textSchema.describe('As the card links it (About us)'),
       url: httpsUrlSchema.describe(
-        "Its about page, or its terms when that's where it says so: on its own sites",
+        "The provider's about page, else its owner's own page about it, else its terms when that's where it says so",
       ),
     })
-    .describe('The provider’s own page that names the company'),
+    .describe('The provider’s or its owner’s own page that names the company'),
   quotes: z
     .array(textSchema)
     .min(1, 'Quote where it says so')
