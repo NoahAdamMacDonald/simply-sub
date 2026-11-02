@@ -135,6 +135,7 @@ const source: CatalogSource = {
   policyTopics: [],
   policySets: [],
   redirects: [],
+  raters: [],
   logos: new Map(),
 };
 

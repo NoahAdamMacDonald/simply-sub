@@ -7,6 +7,7 @@ import { policyTopicsFileSchema } from './policy-topic';
 import { automationSchema } from '../pipeline/automation';
 import { queueFileSchema } from '../pipeline/queue';
 import { providerSchema } from './provider';
+import { ratersFileSchema } from './rater';
 import { redirectsFileSchema } from './redirects';
 import { resellersFileSchema } from './reseller';
 
@@ -32,6 +33,7 @@ export function catalogJsonSchemas() {
     queue: toJsonSchema(queueFileSchema),
     automation: toJsonSchema(automationSchema),
     redirects: toJsonSchema(redirectsFileSchema),
+    raters: toJsonSchema(ratersFileSchema),
   };
 }
 export type CatalogFileKind = keyof ReturnType<typeof catalogJsonSchemas>;

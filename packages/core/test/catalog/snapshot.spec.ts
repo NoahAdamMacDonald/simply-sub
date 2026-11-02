@@ -110,6 +110,7 @@ describe('buildCatalogData', () => {
       'billingCurrency',
       'cancelUrl',
       'plans',
+      'owner',
     ]);
   });
 

@@ -11,6 +11,7 @@
     "./data/schema/policy-set.schema.json": "data/policies/*.yaml",
     "./data/schema/queue.schema.json": "data/queue.yaml",
     "./data/schema/automation.schema.json": "data/automation.yaml",
-    "./data/schema/redirects.schema.json": "data/redirects.yaml"
+    "./data/schema/redirects.schema.json": "data/redirects.yaml",
+    "./data/schema/raters.schema.json": "data/raters.yaml"
   }
 }

@@ -6,6 +6,7 @@ import { httpsUrlSchema, regionSchema } from './formats';
 import { policySetSchema, type PolicySet } from './policy';
 import { policyTopicSchema, policyTopicsFileSchema, type PolicyTopic } from './policy-topic';
 import { providerSchema, type Provider } from './provider';
+import { raterSchema, ratersFileSchema, type Rater } from './rater';
 import { redirectSchema, redirectsFileSchema, type Redirect } from './redirects';
 import { resellerSchema, resellersFileSchema, type Reseller } from './reseller';
 import { locateCatalogFile, type CatalogSourceFile } from './validate-catalog';
@@ -61,6 +62,13 @@ export const catalogDataSchema = z.strictObject({
     .min(1)
     .describe(
       "data/policies/: the shared policy documents that providers' policies name in shared, by id (BLUEPRINT §4.10). Left out when there are none",
+    )
+    .optional(),
+  raters: z
+    .array(raterSchema)
+    .min(1)
+    .describe(
+      "data/raters.yaml: the outside raters that providers' ratings name, by id (BLUEPRINT §4.10). Left out when there are none",
     )
     .optional(),
   redirects: z
@@ -121,6 +129,8 @@ export interface CatalogSource {
   policySets: PolicySet[];
   /** data/redirects.yaml's, in its order, or none without the file. */
   redirects: Redirect[];
+  /** data/raters.yaml's, or none without the file. */
+  raters: Rater[];
   /** Provider or reseller id → its logo, a PNG from data/logos/. */
   logos: ReadonlyMap<string, Uint8Array>;
 }
@@ -138,6 +148,7 @@ export function readCatalogSource(files: readonly CatalogSourceFile[]): CatalogS
   let policyTopics: PolicyTopic[] = [];
   const policySets: PolicySet[] = [];
   let redirects: Redirect[] = [];
+  let raters: Rater[] = [];
   const logos = new Map<string, Uint8Array>();
   for (const source of files) {
     const where = locateCatalogFile(source.file);
@@ -171,6 +182,9 @@ export function readCatalogSource(files: readonly CatalogSourceFile[]): CatalogS
       case 'redirects':
         redirects = parsed(redirectsFileSchema, source);
         break;
+      case 'raters':
+        raters = parsed(ratersFileSchema, source);
+        break;
     }
   }
   if (!features || !categories) {
@@ -186,6 +200,7 @@ export function readCatalogSource(files: readonly CatalogSourceFile[]): CatalogS
     policyTopics,
     policySets: policySets.sort(byId),
     redirects,
+    raters: raters.sort(byId),
     logos,
   };
 }
@@ -226,6 +241,7 @@ export function buildCatalogData(source: CatalogSource, iconBaseUrl: string): Ca
     })),
     policyTopics: source.policyTopics,
     ...(source.policySets.length > 0 && { policySets: source.policySets }),
+    ...(source.raters.length > 0 && { raters: source.raters }),
     ...(source.redirects.length > 0 && { redirects: source.redirects }),
   };
 }

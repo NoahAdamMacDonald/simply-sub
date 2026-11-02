@@ -17,6 +17,7 @@ import {
 } from './formats';
 import { policiesSchema } from './policy';
 import { pricesSchema } from './price';
+import { outsideRatingsSchema, ownerSchema } from './rater';
 import { resellerListingSchema } from './reseller';
 
 // One provider file, data/providers/<id>.yaml (BLUEPRINT §4.3). The schema checks each file on its own. Feature
@@ -273,6 +274,16 @@ export const providerSchema = z
     policies: policiesSchema
       .describe(
         "Its terms and policies rated on policy-topics.yaml's topics, quoting its own pages (BLUEPRINT §4.10)",
+      )
+      .optional(),
+    ratings: outsideRatingsSchema
+      .describe(
+        "Outside raters' labels (M11.2): a news outlet's bias and reliability from two raters at least, an antivirus's lab results. Only raters in data/raters.yaml, never their text",
+      )
+      .optional(),
+    owner: ownerSchema
+      .describe(
+        'The company behind it, quoted from its own about page (M11.2): needed for VPNs, news and finance',
       )
       .optional(),
   })
