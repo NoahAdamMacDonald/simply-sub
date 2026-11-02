@@ -212,7 +212,7 @@ async function plantList(page) {
   };
   await putRecord(page, 'tags', { id: TAG, name: 'Family', color: '#1e88e5', ...stamps });
   await putRecord(page, 'lists', { id: LIST, name: 'Work Related', ...stamps });
-  const netflix = { tagIds: [TAG], rankOverrides: { 'streaming.ad-free': 'essential' } };
+  const netflix = { tagIds: [TAG], rankOverrides: { 'ad-free': 'essential' } };
   for (const [id, planId, autoRenew, extra] of [
     [NETFLIX, 'netflix.standard', true, netflix],
     [MULLVAD, 'mullvad.vpn', false, {}],
@@ -464,7 +464,7 @@ const rowsOf = (page) =>
               ['Premium', 49.99, 3],
             ]) &&
           JSON.stringify(stored.plans[0].features) ===
-            JSON.stringify({ 'streaming.ad-free': true, 'video.quality': '4k' }),
+            JSON.stringify({ 'ad-free': true, 'video.quality': '4k' }),
         `${(await rowsOf(page)).join(' | ')} / ${iconRequests.join(' ')} / ${JSON.stringify(stored.plans)}`,
       );
       await sleep(600);

@@ -260,13 +260,13 @@ async function axeCheck(page, label) {
     await axeCheck(page, 'light 1280, a rank dropdown open');
     await page.keyboard.press('ArrowDown');
     await page.keyboard.press('Enter');
-    await until('the rank saved', async () => (await storedRanks(page))['streaming.ad-free']);
+    await until('the rank saved', async () => (await storedRanks(page))['ad-free']);
     const row = card(page, 'Streaming').locator('.row', {
       has: page.getByRole('combobox', { name: 'Ad free' }),
     });
     check(
       'Enter and an arrow rank Ad free Needed: saved at once, the row marked in its colour',
-      (await storedRanks(page))['streaming.ad-free'] === 'needed' &&
+      (await storedRanks(page))['ad-free'] === 'needed' &&
         (await row.getAttribute('data-rank')) === 'needed' &&
         (await row.evaluate((element) => getComputedStyle(element).borderLeftWidth)) === '4px' &&
         (await adFree.evaluate((element) => element === document.activeElement)),

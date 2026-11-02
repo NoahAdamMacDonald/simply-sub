@@ -24,12 +24,6 @@
   category: streaming
   type: boolean
   aliases: [spatial audio]
-- id: streaming.ad-free
-  name: Ad free
-  category: streaming
-  type: boolean
-  aliases: [no ads, ad-free]
-  requiredIn: [streaming]
 - id: streaming.concurrent-streams
   name: Simultaneous streams
   category: streaming
@@ -467,6 +461,14 @@
 # Facts about a provider as a whole (providerWide): a provider states them once in its own features, and a plan
 # states one only where it differs (BLUEPRINT §4.2 rule 9). Languages are what the service offers across its
 # catalogue; streaming.french-content stays, since it's about French content, not dubs.
+# Ad free was streaming.ad-free until 2026-11-02 (data/redirects.yaml), renamed to reuse it for music, social, search
+# and news. Not provider-wide: a provider's tiers often differ by ads.
+- id: ad-free
+  name: Ad free
+  category: general
+  type: boolean
+  aliases: [no ads, ad free, without ads]
+  requiredIn: [streaming]
 - id: platforms
   name: Platforms
   category: general

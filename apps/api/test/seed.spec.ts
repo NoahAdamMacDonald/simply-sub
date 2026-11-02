@@ -405,7 +405,8 @@ describe('provider-wide features (M11.4)', () => {
     });
     const perPlan = edited((catalog) => {
       catalog.features.push(platforms);
-      for (const plan of catalog.providers[1].plans) plan.features.platforms = ['web', 'tv', 'ios'];
+      for (const plan of catalog.providers[1].plans)
+        plan.features['platforms'] = ['web', 'tv', 'ios'];
     });
     await seed(snapshotOf(source), { full: true });
     const providerWide = await seed(snapshotOf(once, 'def5678'));

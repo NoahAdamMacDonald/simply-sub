@@ -170,7 +170,7 @@ describe('ListEditPage', () => {
       ...fields('netflix.standard'),
       listId: work.id,
       tagIds: [family.id],
-      rankOverrides: { 'streaming.ad-free': 'essential' },
+      rankOverrides: { 'ad-free': 'essential' },
     });
     mullvad = await items.create({
       ...fields('mullvad.vpn'),
@@ -884,7 +884,7 @@ describe('ListEditPage', () => {
         await until(() => dialog() === null);
 
         expect((await draftItem(netflix.id))?.rankOverrides).toEqual({
-          'streaming.ad-free': 'essential',
+          'ad-free': 'essential',
           'video.quality=1080p': 'critical',
         });
         expect((await draftItem(ads.id))?.rankOverrides).toEqual({
@@ -1247,7 +1247,7 @@ describe('ListEditPage', () => {
             {
               id: planId,
               name: 'Basic',
-              features: { 'streaming.ad-free': true },
+              features: { 'ad-free': true },
               price: { amount: 29.99, currency: 'CAD', interval: 'month', intervalCount: 1 },
               autoRenewAvailable: true,
             },

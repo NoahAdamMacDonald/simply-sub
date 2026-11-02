@@ -16,7 +16,9 @@ export const catalogIdsSchema = z.strictObject({
   redirects: z
     .array(redirectSchema)
     .min(1)
-    .describe("data/redirects.yaml's provider and plan entries. Left out when there are none")
+    .describe(
+      "data/redirects.yaml's provider, plan and feature entries: the API answers an old provider or plan id with 301, and reads an old feature key as its new one. Left out when there are none",
+    )
     .optional(),
   meta: z.strictObject({ catalogVersion: catalogMetaSchema.shape.catalogVersion }),
 });
@@ -25,7 +27,8 @@ export type CatalogIds = z.infer<typeof catalogIdsSchema>;
 /** The ids file of the snapshot. */
 export function catalogIds({ data, meta }: CatalogSnapshot): CatalogIds {
   const redirects = (data.redirects ?? []).filter(
-    (redirect) => redirect.kind === 'provider' || redirect.kind === 'plan',
+    (redirect) =>
+      redirect.kind === 'provider' || redirect.kind === 'plan' || redirect.kind === 'feature',
   );
   return {
     data: Object.fromEntries(

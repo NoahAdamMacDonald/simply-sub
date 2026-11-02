@@ -126,6 +126,34 @@ describe('followRedirects', () => {
     expect(await stored()).toEqual(before);
   });
 
+  it("keeps a user's Ad free rank through the rename to ad-free (M11.4)", async () => {
+    await TestBed.inject(RankingsRepository).set('streaming.ad-free', 'needed');
+    const list = await TestBed.inject(ListsRepository).create({ name: 'Streaming' });
+    const item = await TestBed.inject(ItemsRepository).create({
+      ...itemFields('mullvad.vpn', list.id),
+      rankOverrides: { 'streaming.ad-free': 'unwanted' },
+    });
+    const renamed: CatalogData = {
+      ...catalogFile(undefined, '1234567').data,
+      redirects: [{ kind: 'feature', from: 'streaming.ad-free', to: 'ad-free', on: '2026-11-02' }],
+    };
+
+    expect(await followRedirects(service, renamed, '2026-11-02')).toBe(3);
+    const { items, rankings } = await stored();
+    expect(items.find(({ id }) => id === item.id)?.rankOverrides).toEqual({
+      'ad-free': 'unwanted',
+    });
+    expect(
+      rankings
+        .filter(({ rankKey }) => rankKey.endsWith('ad-free'))
+        .map(({ rankKey, rank, deletedAt }) => [rankKey, rank, deletedAt !== undefined]),
+    ).toEqual([
+      ['ad-free', 'needed', false],
+      ['streaming.ad-free', 'needed', true],
+    ]);
+    expect(await followRedirects(service, renamed, '2026-11-03')).toBe(0);
+  });
+
   it('waits for a move’s date', async () => {
     expect(await followRedirects(service, catalog('2026-12-01'), '2026-10-25')).toBe(5);
     const { items, settings } = await stored();

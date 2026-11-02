@@ -2,6 +2,7 @@ import {
   buildCatalogData,
   buildCatalogMeta,
   buildSeedSql,
+  catalogIds,
   categoriesBody,
   featuresBody,
   providersCursor,
@@ -51,7 +52,9 @@ const assets = {
         ? featuresBody(snapshot)
         : path === '/data/catalog/categories.json'
           ? categoriesBody(snapshot)
-          : undefined;
+          : path === '/data/catalog/ids.json'
+            ? catalogIds(snapshot)
+            : undefined;
     return body
       ? Response.json(body)
       : new Response('<!doctype html>', { headers: { 'Content-Type': 'text/html' } });
@@ -364,6 +367,17 @@ describe('GET /providers', () => {
     expect(providersCursor(2)).toMatch(/^p/);
   });
 
+  it('reads an old link’s feature=streaming.ad-free as ad-free (M11.4)', async () => {
+    const response = await get('?feature=streaming.ad-free&region=CA');
+    expect(response.status).toBe(200);
+    const body = await response.json<Body>();
+    expect(body.meta.query).toMatchObject({ feature: ['ad-free'] });
+    expect(body.data.length).toBeGreaterThan(0);
+    for (const result of body.data) {
+      expect(result.matchedPlans.every((plan) => plan.matchedKeys.includes('ad-free'))).toBe(true);
+    }
+  });
+
   it('refuses a rank key that is not in the registry', async () => {
     const response = await get('?feature=video.quality%3D8k');
 
@@ -457,13 +471,13 @@ describe('the D1 reads', () => {
 
   it('read only the providers with a plan that has every rank key, through the indexes', async () => {
     const query = {
-      feature: ['video.quality=4k', 'streaming.ad-free', 'streaming.live=sports'],
+      feature: ['video.quality=4k', 'ad-free', 'streaming.live=sports'],
       sort: 'name',
       limit: 20,
     } as const;
     const uhd = await loadProviders(
       env.DB,
-      { feature: ['video.quality=4k', 'streaming.ad-free'], sort: 'name', limit: 20 },
+      { feature: ['video.quality=4k', 'ad-free'], sort: 'name', limit: 20 },
       features,
     );
     const { sql, bindings } = providersStatement(

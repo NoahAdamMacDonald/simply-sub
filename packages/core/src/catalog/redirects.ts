@@ -149,6 +149,21 @@ export function redirectMap(redirects: readonly Redirect[]): RedirectMap {
   return map;
 }
 
+const rankKeyMaps = new WeakMap<readonly Redirect[], RedirectMap>();
+
+/**
+ * The feature and perk entries of `redirects` (M11.4): always due, since a rank key that's gone has no date to wait
+ * for. Search's f= and the API's feature= read an old key through them (`redirectedRankKey`).
+ */
+export function rankKeyRedirects(redirects: readonly Redirect[] | undefined): RedirectMap {
+  if (!redirects) return noRedirects;
+  const kept = rankKeyMaps.get(redirects);
+  if (kept) return kept;
+  const map = redirectMap(redirects.filter(({ kind }) => idSpace(kind) === 'rank key'));
+  rankKeyMaps.set(redirects, map);
+  return map;
+}
+
 /** The id `id` of `kind` is now, or itself. Entries never chain (validation), so one step is all there is. */
 export function redirected(
   map: RedirectMap,

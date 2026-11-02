@@ -47,7 +47,7 @@ plans:
     name: Standard
     link: https://www.tsn.ca/subscribe/
     features:
-      streaming.ad-free: false
+      ad-free: false
       streaming.live: [tv-channels, sports]
       streaming.concurrent-streams: 2
     perks: [TSN 1–5 live channels, Multiviewing up to 6 games at once]
@@ -65,7 +65,7 @@ plans:
     name: Premium
     link: https://www.tsn.ca/subscribe/
     features:
-      streaming.ad-free: false
+      ad-free: false
       streaming.live: [tv-channels, sports]
       streaming.concurrent-streams: 2
     perks:

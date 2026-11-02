@@ -78,7 +78,7 @@ plans:
     link: https://www.netflix.com/signup
     features:
       video.quality: 1080p
-      streaming.ad-free: false
+      ad-free: false
       streaming.concurrent-streams: 2
       streaming.download-devices: 2
       streaming.kids-profiles: true
@@ -154,7 +154,7 @@ plans:
     link: https://www.netflix.com/signup
     features:
       video.quality: 1080p
-      streaming.ad-free: true
+      ad-free: true
       streaming.concurrent-streams: 2
       streaming.download-devices: 2
       streaming.kids-profiles: true
@@ -258,7 +258,7 @@ plans:
       video.quality: 4k
       video.hdr: true
       audio.dolby-atmos: true
-      streaming.ad-free: true
+      ad-free: true
       streaming.concurrent-streams: 4
       streaming.download-devices: 6
       streaming.kids-profiles: true

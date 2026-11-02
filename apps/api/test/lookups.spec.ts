@@ -358,11 +358,13 @@ describe('GET /plans/:id', () => {
       acceptedNetworks: disney.acceptedNetworks,
     });
     expectSameOrder(body.data['provider'] as Json, example.data.provider);
-    // The example's plan lists fewer features: the real one also has kids profiles and French content.
+    // The example's plan lists fewer features: the real one also has kids profiles and French content, which come
+    // before Ad free in the registry.
     expect(body.data['providedRankKeys']).toEqual([
-      ...example.data.providedRankKeys,
+      ...example.data.providedRankKeys.filter((key) => key !== 'ad-free'),
       'streaming.kids-profiles',
       'streaming.french-content',
+      'ad-free',
     ]);
     expect(body.data['pricing']).toEqual(example.data.pricing);
     expect(body.data['addOns']).toEqual([

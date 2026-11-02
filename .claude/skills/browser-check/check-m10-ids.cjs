@@ -167,7 +167,7 @@ const item = (id, planId) => ({
     autoRenew: true,
   },
   tagIds: [],
-  rankOverrides: planId === 'netflix.standard' ? { 'streaming.ad-free': 'needed' } : {},
+  rankOverrides: planId === 'netflix.standard' ? { 'ad-free': 'needed' } : {},
   pinned: false,
   ...stamps,
 });

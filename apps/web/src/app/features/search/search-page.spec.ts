@@ -346,6 +346,19 @@ describe('SearchPage', () => {
       expect(names()).toEqual(['Crave']);
     });
 
+    it('reads an old link’s renamed key as its new one, and rewrites the URL (M11.4)', async () => {
+      await open('/search?f=streaming.ad-free', { loaded: false });
+      const from = location.urlChanges.length;
+      catalog.set({
+        ...searchCatalogData,
+        redirects: [
+          { kind: 'feature', from: 'streaming.ad-free', to: 'ad-free', on: '2026-11-02' },
+        ],
+      });
+      await settle();
+      expect(urlChanges(from)).toEqual(['replace: /search?f=ad-free']);
+    });
+
     it('keeps text typed before the catalog has loaded', async () => {
       await open('/search?native=1', { loaded: false });
       type('vpn');

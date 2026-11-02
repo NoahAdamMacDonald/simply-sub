@@ -41,7 +41,7 @@ const netflix = {
     autoRenew: true,
   },
   tagIds: [ids.family],
-  rankOverrides: { 'streaming.ad-free': 'essential' },
+  rankOverrides: { 'ad-free': 'essential' },
   pinned: true,
   nickname: 'Mom’s',
   ...stamps,

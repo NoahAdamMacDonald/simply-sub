@@ -45,6 +45,18 @@ describe('readSearchParams', () => {
     });
   });
 
+  it('reads a renamed feature’s old key as its new one, so an old link still works (M11.4)', () => {
+    const redirects = [
+      { kind: 'feature', from: 'streaming.no-ads', to: 'streaming.ad-free', on: '2026-11-02' },
+      { kind: 'feature', from: 'video.res', to: 'video.quality', on: '2026-11-02' },
+    ] as const;
+    const renamed = { ...registry, redirects: [...redirects] };
+    const query = readSearchParams({ f: 'streaming.no-ads,video.res=4k' }, renamed);
+    expect(query.features).toEqual(['streaming.ad-free', 'video.quality=4k']);
+    expect(writeSearchParams(query).f).toBe('streaming.ad-free,video.quality=4k');
+    expect(read({ f: 'streaming.no-ads' })).toEqual({});
+  });
+
   it('reads nothing from no parameters', () => {
     expect(read({})).toEqual({});
   });

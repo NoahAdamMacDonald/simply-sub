@@ -49,7 +49,7 @@ plans:
     link: https://ici.tou.tv/abonnement-extra
     features:
       video.quality: 1080p
-      streaming.ad-free: true
+      ad-free: true
       streaming.concurrent-streams: 3
       streaming.french-content: true
     perks: [Exclusive premieres every month]
@@ -68,7 +68,7 @@ plans:
     name: ICI RDI
     link: https://ici.tou.tv/abonnement
     features:
-      streaming.ad-free: false
+      ad-free: false
       streaming.live: [tv-channels]
       streaming.concurrent-streams: 3
       streaming.french-content: true
@@ -89,7 +89,7 @@ plans:
     link: https://ici.tou.tv/abonnement
     features:
       video.quality: 1080p
-      streaming.ad-free: true
+      ad-free: true
       streaming.live: [tv-channels]
       streaming.concurrent-streams: 3
       streaming.french-content: true

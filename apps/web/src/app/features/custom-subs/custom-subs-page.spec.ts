@@ -42,7 +42,7 @@ const gymFields: NewRecord<'customSubs'> = {
     {
       id: basicId,
       name: 'Basic',
-      features: { 'streaming.ad-free': true },
+      features: { 'ad-free': true },
       price: { amount: 29.99, currency: 'CAD', interval: 'month', intervalCount: 1 },
       autoRenewAvailable: true,
     },
@@ -274,7 +274,7 @@ describe('CustomSubsPage', () => {
       plans: [
         {
           name: 'Basic',
-          features: { 'streaming.ad-free': true, 'video.quality': '4k' },
+          features: { 'ad-free': true, 'video.quality': '4k' },
           price: {
             amount: 29.99,
             currency: 'CAD',

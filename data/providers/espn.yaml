@@ -61,7 +61,7 @@ plans:
     name: Select
     link: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices
     features:
-      streaming.ad-free: false
+      ad-free: false
       streaming.concurrent-streams: 3
       streaming.live: [sports]
     prices:
@@ -88,7 +88,7 @@ plans:
     features:
       video.quality: 4k
       video.hdr: true
-      streaming.ad-free: false
+      ad-free: false
       streaming.concurrent-streams: 3
       streaming.live: [tv-channels, sports]
     perks: [Every ESPN network, ESPN+ included]

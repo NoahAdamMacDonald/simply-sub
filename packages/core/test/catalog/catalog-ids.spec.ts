@@ -39,6 +39,18 @@ describe('catalogIds', () => {
     expect(issues(catalogIdsSchema, ids)).toEqual([]);
   });
 
+  it('keeps the provider, plan and feature redirects, for 301s and old rank keys (M11.4)', () => {
+    const { data, meta } = snapshot();
+    const redirects = [
+      { kind: 'plan', from: 'netflix.basic', to: 'netflix.standard', on: '2026-10-01' },
+      { kind: 'feature', from: 'streaming.no-ads', to: 'streaming.ad-free', on: '2026-11-02' },
+      { kind: 'bundle', from: 'bundle.old', to: 'bundle.disney-crave-premium', on: '2026-10-01' },
+    ] as const;
+    expect(catalogIds({ data: { ...data, redirects: [...redirects] }, meta }).redirects).toEqual(
+      redirects.slice(0, 2),
+    );
+  });
+
   it('suggests the provider or plan an unknown id looks like a typo of', () => {
     expect(suggestedProviderId('netflx', ids)).toBe('netflix');
     expect(suggestedProviderId('Proton', ids)).toBe('proton');

@@ -15,7 +15,7 @@ const features: Feature[] = [
       { id: '4k', name: '4K (Ultra HD)' },
     ],
   },
-  { id: 'streaming.ad-free', name: 'Ad free', category: 'streaming', type: 'boolean' },
+  { id: 'ad-free', name: 'Ad free', category: 'streaming', type: 'boolean' },
   { id: 'vpn.included', name: 'VPN', category: 'vpn', type: 'boolean' },
   {
     id: 'vpn.devices',
@@ -30,7 +30,7 @@ const features: Feature[] = [
 const plan = {
   features: {
     'video.quality': '4k',
-    'streaming.ad-free': true,
+    'ad-free': true,
     'vpn.included': true,
     'vpn.devices': 10,
   },
@@ -51,7 +51,7 @@ describe('FeatureList', () => {
     fixture = TestBed.createComponent(FeatureList);
     fixture.componentRef.setInput('features', plan.features);
     fixture.componentRef.setInput('ranks', {
-      'streaming.ad-free': 'essential',
+      'ad-free': 'essential',
       'video.quality=1080p': 'wanted',
       'video.quality=4k': 'not-ranked',
       'vpn.included': 'needed',

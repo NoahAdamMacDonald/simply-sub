@@ -46,7 +46,7 @@ plans:
     name: RDS
     link: https://www.rds.ca/abonnement/
     features:
-      streaming.ad-free: false
+      ad-free: false
       streaming.live: [tv-channels, sports]
       streaming.concurrent-streams: 2
       streaming.french-content: true

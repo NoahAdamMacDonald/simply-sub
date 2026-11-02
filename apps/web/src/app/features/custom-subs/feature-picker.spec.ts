@@ -11,7 +11,7 @@ import type { Feature, FeatureValue } from '@simply-sub/core';
 import { FeaturePicker } from './feature-picker';
 
 const registry: Feature[] = [
-  { id: 'streaming.ad-free', name: 'Ad free', category: 'streaming', type: 'boolean' },
+  { id: 'ad-free', name: 'Ad free', category: 'streaming', type: 'boolean' },
   {
     id: 'streaming.concurrent-streams',
     name: 'Simultaneous streams',
@@ -113,7 +113,7 @@ describe('FeaturePicker', () => {
 
   it('adds a yes-or-no feature at once, leaves it out of the suggestions after, and removes it', async () => {
     await pick('ad', 'Ad free');
-    expect(features()).toEqual({ 'streaming.ad-free': true });
+    expect(features()).toEqual({ 'ad-free': true });
     const box = await loader.getHarness(MatAutocompleteHarness);
     expect(await box.getValue()).toBe('');
     // Nothing else starts with "ad", so there's nothing to suggest.

@@ -52,7 +52,7 @@ plans:
     link: https://help.hulu.com/article/hulu-how-much-does-hulu-cost
     features:
       video.quality: 4k
-      streaming.ad-free: false
+      ad-free: false
       streaming.concurrent-streams: 2
     prices:
       - region: US
@@ -77,7 +77,7 @@ plans:
     link: https://help.hulu.com/article/hulu-how-much-does-hulu-cost
     features:
       video.quality: 4k
-      streaming.ad-free: true
+      ad-free: true
       streaming.concurrent-streams: 2
     perks: [Download select shows and movies, Hulu Watch Party]
     notes: A few shows play with ads before and after the video.

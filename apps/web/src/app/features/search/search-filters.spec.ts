@@ -202,7 +202,7 @@ describe('SearchFilters', () => {
     });
 
     it('shows each chosen key as a chip, which isn’t suggested again and can be removed', async () => {
-      await setup({ features: ['video.quality=4k', 'streaming.ad-free'] });
+      await setup({ features: ['video.quality=4k', 'ad-free'] });
       const grid = await loader.getHarness(MatChipGridHarness);
       const rows = await grid.getRows();
 
@@ -223,11 +223,11 @@ describe('SearchFilters', () => {
           'button[aria-label="Remove Video quality: 4K (Ultra HD)"]',
         )
         ?.click();
-      expect(changes).toEqual([{ features: ['streaming.ad-free'] }]);
+      expect(changes).toEqual([{ features: ['ad-free'] }]);
     });
 
     it('removes a chip clicked anywhere, once, as its X does (M5.9)', async () => {
-      await setup({ features: ['video.quality=4k', 'streaming.ad-free'] });
+      await setup({ features: ['video.quality=4k', 'ad-free'] });
       const chip = element().querySelectorAll<HTMLElement>('mat-chip-row')[1];
 
       chip.querySelector<HTMLElement>('.mdc-evolution-chip__text-label')?.click();

@@ -29,7 +29,7 @@ describe('provider-wide features (M11.4)', () => {
   it('merges every plan, keeps the provider’s own, and changes nothing a second time', () => {
     const merged = withPlanFeatures(provider);
     expect(merged.features).toBe(provider.features);
-    expect(merged.plans[0].features.platforms).toEqual(['web', 'ios']);
+    expect(merged.plans[0].features['platforms']).toEqual(['web', 'ios']);
     expect(withPlanFeatures(merged)).toEqual(merged);
     const without = { plans: provider.plans };
     expect(withPlanFeatures(without)).toBe(without);
@@ -39,7 +39,7 @@ describe('provider-wide features (M11.4)', () => {
     const catalog = { providers: [provider], version: 1 };
     const merged = withProviderFeatures(catalog);
     expect(merged.version).toBe(1);
-    expect(merged.providers[0].plans[1].features.platforms).toEqual(['web', 'ios']);
+    expect(merged.providers[0].plans[1].features['platforms']).toEqual(['web', 'ios']);
     expect(withProviderFeatures(catalog)).toBe(merged);
     expect(withProviderFeatures(merged)).toBe(merged);
     const plain = { providers: [{ plans: provider.plans }] };
