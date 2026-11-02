@@ -42,10 +42,10 @@ describe('RankingsRepository', () => {
   });
 
   it('changes a rank', async () => {
-    await rankings.set('streaming.ad-free', 'wanted');
+    await rankings.set('ad-free', 'wanted');
     storage.clock.time = '2026-10-26T08:00:00.000Z';
-    await rankings.set('streaming.ad-free', 'needed');
-    await until(() => rankings.ranks().get('streaming.ad-free') === 'needed');
+    await rankings.set('ad-free', 'needed');
+    await until(() => rankings.ranks().get('ad-free') === 'needed');
     expect(await storedRows(storage.indexedDB, 'rankings')).toEqual([
       expect.objectContaining({
         rank: 'needed',
@@ -56,10 +56,10 @@ describe('RankingsRepository', () => {
   });
 
   it('clears a rank by soft-deleting it, never storing not-ranked', async () => {
-    await rankings.set('streaming.ad-free', 'wanted');
+    await rankings.set('ad-free', 'wanted');
     await until(() => rankings.ranks().size === 1);
     storage.clock.time = '2026-10-26T08:00:00.000Z';
-    await rankings.clear('streaming.ad-free');
+    await rankings.clear('ad-free');
     await until(() => rankings.ranks().size === 0);
     expect(await storedRows(storage.indexedDB, 'rankings')).toEqual([
       expect.objectContaining({ rank: 'wanted', deletedAt: '2026-10-26T08:00:00.000Z' }),
@@ -67,14 +67,14 @@ describe('RankingsRepository', () => {
   });
 
   it('ranks a cleared key again', async () => {
-    await rankings.set('streaming.ad-free', 'wanted');
-    await rankings.clear('streaming.ad-free');
+    await rankings.set('ad-free', 'wanted');
+    await rankings.clear('ad-free');
     storage.clock.time = '2026-10-27T08:00:00.000Z';
-    await rankings.set('streaming.ad-free', 'unused');
-    await until(() => rankings.ranks().get('streaming.ad-free') === 'unused');
+    await rankings.set('ad-free', 'unused');
+    await until(() => rankings.ranks().get('ad-free') === 'unused');
     const [stored] = await storedRows(storage.indexedDB, 'rankings');
     expect(stored).toEqual({
-      rankKey: 'streaming.ad-free',
+      rankKey: 'ad-free',
       rank: 'unused',
       createdAt: '2026-10-25T12:00:00.000Z',
       updatedAt: '2026-10-27T08:00:00.000Z',
@@ -82,7 +82,7 @@ describe('RankingsRepository', () => {
   });
 
   it('ranks and clears several keys in one write (M6.2)', async () => {
-    await rankings.set('streaming.ad-free', 'wanted');
+    await rankings.set('ad-free', 'wanted');
     await rankings.set('vpn.included', 'needed');
     await until(() => rankings.ranks().size === 2);
 
@@ -90,18 +90,18 @@ describe('RankingsRepository', () => {
       new Map([
         ['vpn.included', undefined],
         ['vpn.kill-switch', 'unused'],
-        ['streaming.ad-free', 'needed'],
+        ['ad-free', 'needed'],
         // Already not ranked: nothing to write.
         ['vpn.multi-hop', undefined],
       ]),
     );
     await until(() => rankings.ranks().has('vpn.kill-switch'));
     expect([...rankings.ranks()]).toEqual([
-      ['streaming.ad-free', 'needed'],
+      ['ad-free', 'needed'],
       ['vpn.kill-switch', 'unused'],
     ]);
     expect(await storedRows(storage.indexedDB, 'rankings')).toEqual([
-      expect.objectContaining({ rankKey: 'streaming.ad-free', rank: 'needed' }),
+      expect.objectContaining({ rankKey: 'ad-free', rank: 'needed' }),
       expect.objectContaining({ rankKey: 'vpn.included', deletedAt: expect.any(String) }),
       expect.objectContaining({ rankKey: 'vpn.kill-switch', rank: 'unused' }),
     ]);
@@ -112,27 +112,27 @@ describe('RankingsRepository', () => {
       rankings.setMany(
         new Map([
           ['vpn.included', 'needed'],
-          ['streaming.ad-free', 'essential' as never],
+          ['ad-free', 'essential' as never],
         ]),
       ),
-    ).rejects.toThrow('Invalid rankings record streaming.ad-free');
+    ).rejects.toThrow('Invalid rankings record ad-free');
     expect(await storedRows(storage.indexedDB, 'rankings')).toEqual([]);
   });
 
   it('refuses a rank that only an item can have', async () => {
-    await expect(rankings.set('streaming.ad-free', 'essential' as never)).rejects.toThrow(
-      'Invalid rankings record streaming.ad-free: rank: invalid_value',
+    await expect(rankings.set('ad-free', 'essential' as never)).rejects.toThrow(
+      'Invalid rankings record ad-free: rank: invalid_value',
     );
     expect(await storedRows(storage.indexedDB, 'rankings')).toEqual([]);
   });
 
   it('hides a ranking it cannot read, and replaces it when the key is ranked again', async () => {
     vi.spyOn(console, 'warn').mockImplementation(() => undefined);
-    const broken = { rankKey: 'streaming.ad-free', rank: 'loved', createdAt: 'x', updatedAt: 'x' };
+    const broken = { rankKey: 'ad-free', rank: 'loved', createdAt: 'x', updatedAt: 'x' };
     await plantRows(storage.indexedDB, 'rankings', [broken]);
     await until(() => rankings.ranks().size === 0);
-    await rankings.set('streaming.ad-free', 'wanted');
-    await until(() => rankings.ranks().get('streaming.ad-free') === 'wanted');
+    await rankings.set('ad-free', 'wanted');
+    await until(() => rankings.ranks().get('ad-free') === 'wanted');
     expect(await storedRows(storage.indexedDB, 'rankings')).toEqual([
       expect.objectContaining({ rank: 'wanted', createdAt: '2026-10-25T12:00:00.000Z' }),
     ]);

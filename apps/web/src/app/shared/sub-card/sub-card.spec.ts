@@ -385,7 +385,7 @@ describe('SubCard', () => {
   it('counts the user’s ranks of the plan shown, and shows none when they rank none of its features', async () => {
     const ranks: ProfileRanks = new Map([
       ['video.quality=1080p', 'needed'],
-      ['streaming.ad-free', 'unwanted'],
+      ['ad-free', 'unwanted'],
       ['vpn.included', 'wanted'],
     ]);
     await show(resultFor('netflix', {}, [], alberta, ranks));

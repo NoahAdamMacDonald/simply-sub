@@ -95,6 +95,16 @@ describe('readProvidersQuery', () => {
     });
   });
 
+  it('reads a renamed feature’s old key as its new one (M11.4)', () => {
+    const redirects = [
+      { kind: 'feature', from: 'streaming.no-ads', to: 'streaming.ad-free', on: '2026-11-02' },
+    ] as const;
+    expect(
+      read('feature=streaming.no-ads,streaming.ad-free', { redirects: [...redirects] }),
+    ).toMatchObject({ query: { feature: ['streaming.ad-free'] } });
+    expect(problems('feature=streaming.no-ads')).toHaveLength(1);
+  });
+
   it('reads a cursor back as the offset it points at', () => {
     expect(read(`cursor=${providersCursor(40)}`)).toMatchObject({ offset: 40 });
   });

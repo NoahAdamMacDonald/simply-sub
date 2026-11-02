@@ -86,12 +86,25 @@ function summary(lines: string[]): string[] {
   });
 }
 
+/** A provider-wide enum (M11.4), for a provider's own features. */
+const openSource = {
+  id: 'software.open-source',
+  name: 'Open source',
+  category: 'streaming',
+  type: 'enum',
+  values: [
+    { id: 'proprietary', name: 'Closed source' },
+    { id: 'open-clients', name: 'Open-source apps' },
+  ],
+  providerWide: true,
+};
+
 const catalogRow = (version = 'abc1234') =>
   `INSERT INTO catalog (id, version, built_at, seed_format, counts) VALUES (1, '${version}', '2026-10-23T12:00:00Z', ${seedFormat}, '{"providers":4,"plans":10,"addOns":2,"bundles":1,"features":10}') ON CONFLICT (id) DO UPDATE SET version = excluded.version, built_at = excluded.built_at, seed_format = excluded.seed_format, counts = excluded.counts;`;
 
 describe('buildSeedSql, without what D1 holds', () => {
   it('empties every table first', () => {
-    expect(linesOf().slice(0, 9)).toEqual([
+    expect(linesOf().slice(0, 10)).toEqual([
       'DELETE FROM catalog;',
       'DELETE FROM bundle_plans;',
       'DELETE FROM bundles;',
@@ -99,6 +112,7 @@ describe('buildSeedSql, without what D1 holds', () => {
       'DELETE FROM features;',
       'DELETE FROM prices;',
       'DELETE FROM plans;',
+      'DELETE FROM provider_features;',
       'DELETE FROM provider_categories;',
       'DELETE FROM providers;',
     ]);
@@ -122,7 +136,7 @@ describe('buildSeedSql, without what D1 holds', () => {
   it('inserts the features before the plan features that refer to them, and the catalog row last', () => {
     const lines = summary(linesOf());
     const lastFeature = lines.lastIndexOf('insert features includes-subscription');
-    expect(lines.indexOf('insert features video.quality')).toBe(9);
+    expect(lines.indexOf('insert features video.quality')).toBe(10);
     expect(lastFeature).toBeLessThan(
       lines.findIndex((line) => line.startsWith('insert plan_features')),
     );
@@ -150,6 +164,32 @@ describe('buildSeedSql, without what D1 holds', () => {
       'insert provider_categories privacy-suite',
       'insert provider_categories vpn',
     ]);
+  });
+
+  it("writes a provider's own features once, after its categories, as plan_features rows are (M11.4)", () => {
+    const files = edited(catalog(), 'data/features.yaml', [10], openSource);
+    const lines = summary(
+      linesOf(
+        snapshotOf(
+          edited(files, netflix, ['features'], { 'software.open-source': 'open-clients' }),
+        ),
+      ),
+    );
+    const at = lines.indexOf('insert providers netflix');
+    expect(lines.slice(at + 1, at + 3)).toEqual([
+      'insert provider_categories streaming',
+      'insert provider_features software.open-source',
+    ]);
+    expect(lines.filter((line) => line.startsWith('insert provider_features'))).toHaveLength(1);
+    expect(
+      linesOf(
+        snapshotOf(
+          edited(files, netflix, ['features'], { 'software.open-source': 'open-clients' }),
+        ),
+      ),
+    ).toContain(
+      "INSERT INTO provider_features (feature_id, value, provider_id, rank_value) VALUES ('software.open-source', 'open-clients', 'netflix', 1);",
+    );
   });
 
   it('inserts providers with their hash, and plans, with their JSON as in the snapshot', () => {
@@ -319,6 +359,24 @@ describe('buildSeedSql, given what D1 holds', () => {
     expect(changesFrom(snapshotOf(), after)).toEqual([
       expect.stringMatching(/^INSERT INTO features .* VALUES \('video\.quality', /),
       "UPDATE plan_features SET rank_value = 4 WHERE feature_id = 'video.quality' AND value = '4k' AND rank_value IS NOT 4;",
+    ]);
+  });
+
+  it("updates a provider-wide enum's moved values in provider_features too", () => {
+    const files = edited(
+      edited(catalog(), 'data/features.yaml', [10], openSource),
+      netflix,
+      ['features'],
+      { 'software.open-source': 'open-clients' },
+    );
+    const values = [{ id: 'source-available', name: 'Source available' }, ...openSource.values];
+    const after = snapshotOf(edited(files, 'data/features.yaml', [10, 'values'], values));
+    expect(summary(changesFrom(snapshotOf(files), after))).toEqual([
+      'insert features software.open-source',
+      "update plan_features where feature_id = 'software.open-source' AND value = 'proprietary' AND rank_value IS NOT 1",
+      "update provider_features where feature_id = 'software.open-source' AND value = 'proprietary' AND rank_value IS NOT 1",
+      "update plan_features where feature_id = 'software.open-source' AND value = 'open-clients' AND rank_value IS NOT 2",
+      "update provider_features where feature_id = 'software.open-source' AND value = 'open-clients' AND rank_value IS NOT 2",
     ]);
   });
 

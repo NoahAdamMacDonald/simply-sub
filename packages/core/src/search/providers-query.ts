@@ -5,6 +5,7 @@ import { choices, didYouMean } from '../catalog/checks';
 import type { Feature } from '../catalog/feature';
 import { currencySchema, rankKeySchema, regionSchema, slugSchema } from '../catalog/formats';
 import { intervalSchema } from '../catalog/price';
+import { rankKeyRedirects, redirectedRankKey, type Redirect } from '../catalog/redirects';
 import { defaultCurrency } from '../catalog/region-currency';
 import { isCatalogRegion, regionProblem } from '../catalog/regions';
 import { rankKeyOptions } from '../ranking/rank-keys';
@@ -20,6 +21,8 @@ export interface QueryContext {
   categories: Categories;
   /** The currencies there are exchange rates for (ecbCurrencies), when the query has a region. */
   currencies?: readonly string[];
+  /** data/redirects.yaml's, as ids.json has them: a renamed feature's old key reads as its new one (M11.4). */
+  redirects?: readonly Redirect[];
 }
 
 const params = [
@@ -66,7 +69,7 @@ export type ProvidersQuery = z.infer<typeof providersQuerySchema>;
  */
 export function readProvidersQuery(
   queries: Readonly<Record<string, readonly string[]>>,
-  { features, categories, currencies }: QueryContext,
+  { features, categories, currencies, redirects }: QueryContext,
 ): { query: ProvidersQuery; offset: number } | { problems: QueryProblem[] } {
   const problems: QueryProblem[] = [];
   const read: Partial<ProvidersQuery> = {};
@@ -109,7 +112,10 @@ export function readProvidersQuery(
             : `"${value}" isn't a service category${choices(value, ids)}.`;
         }
         case 'feature': {
-          const keys = [...new Set(value.split(',').map((key) => key.trim()))].filter(Boolean);
+          const moves = rankKeyRedirects(redirects);
+          const keys = [
+            ...new Set(value.split(',').map((key) => redirectedRankKey(moves, key.trim()))),
+          ].filter(Boolean);
           read.feature = keys;
           if (keys.length === 0) {
             return 'List at least one rank key, such as video.quality=4k.';

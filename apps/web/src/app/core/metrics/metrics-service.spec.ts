@@ -33,7 +33,7 @@ function price(region: string, currency: string, amount: number): Price {
 const catalog: CatalogData = {
   schemaVersion: 1,
   features: [
-    { id: 'streaming.ad-free', name: 'Ad free', category: 'streaming', type: 'boolean' },
+    { id: 'ad-free', name: 'Ad free', category: 'streaming', type: 'boolean' },
     { id: 'vpn.included', name: 'VPN', category: 'vpn', type: 'boolean' },
   ],
   categories: {
@@ -55,7 +55,7 @@ const catalog: CatalogData = {
           id: 'netflix.standard',
           name: 'Standard',
           link: 'https://example.com/netflix.standard',
-          features: { 'streaming.ad-free': true },
+          features: { 'ad-free': true },
           prices: [price('CA', 'CAD', 18.99), price('US', 'USD', 19.99)],
           addOnIds: ['netflix.extra-member'],
         },
@@ -209,7 +209,7 @@ describe('MetricsService', () => {
     expect(metrics.list(family).resolved[0]).toMatchObject({
       iconUrl: 'icons/netflix.webp',
       addOns: [{ id: 'netflix.extra-member', quantity: 1 }],
-      providedKeys: ['streaming.ad-free'],
+      providedKeys: ['ad-free'],
     });
     expect(metrics.list(family).resolved[2].iconUrl).toBe('api/v1/icon?domain=localgym.ca');
     // Bought in the US: the US price, converted.

@@ -43,12 +43,17 @@ owner:
 # Read 2026-10-26 on the plans and prices article, for new subscriptions from September 23, 2026: the standalone plans,
 # both up to 4K. The article doesn't number the streams or downloads. Not here yet: the Hulu + Live TV plans (which
 # include Disney+ and ESPN, so they'd be suites) and the add-ons. The Disney+ bundles are in data/bundles.
+# Two streams at a time, read 2026-11-02 (M11.4) on hulu.com/paramount-plus-with-showtime: "While your Hulu base plan
+# allows you to watch on 2 simultaneous streams at a time" (the help centre's screens article renders no text here).
+# With Ads isn't ad free (its name, and the plans article's "Hulu (With Ads)").
 plans:
   - id: hulu.with-ads
     name: With Ads
     link: https://help.hulu.com/article/hulu-how-much-does-hulu-cost
     features:
       video.quality: 4k
+      ad-free: false
+      streaming.concurrent-streams: 2
     prices:
       - region: US
         currency: USD
@@ -72,7 +77,8 @@ plans:
     link: https://help.hulu.com/article/hulu-how-much-does-hulu-cost
     features:
       video.quality: 4k
-      streaming.ad-free: true
+      ad-free: true
+      streaming.concurrent-streams: 2
     perks: [Download select shows and movies, Hulu Watch Party]
     notes: A few shows play with ads before and after the video.
     prices:

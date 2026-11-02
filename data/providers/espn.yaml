@@ -49,11 +49,20 @@ owner:
 
 # Read 2026-10-26 on ESPN's plans and prices article. Select is ESPN+'s content; Unlimited is every ESPN network,
 # live. Both have ads ("ESPN Select (With Ads)", "ESPN Unlimited (With Ads)" on Disney+'s bundle table).
+# Read 2026-11-02 (M11.4, the required streaming features): "ESPN subscriptions allow simultaneous streaming on up to
+# three (3) devices for most content" (support.espn.com, How many devices can stream ESPN subscriptions
+# simultaneously). Unlimited's 4K HDR is from ESPN's press release of 2026-09-08 (espnpressroom.com/press-release/
+# espn-espn2-coming-to-sports-fans-in-4k-hdr-in-the-u-s/): ESPN and ESPN2 in 4K HDR in the ESPN App, "as well as on
+# Disney+ in the U.S. to ESPN Unlimited subscribers". Select's video quality: neither the plans article, the support
+# centre nor the release states it (plus.espn.com is Access Denied here), so it waits for M11.9
+# (awaitingRequiredFeatures in core).
 plans:
   - id: espn.select
     name: Select
     link: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices
     features:
+      ad-free: false
+      streaming.concurrent-streams: 3
       streaming.live: [sports]
     prices:
       - region: US
@@ -77,6 +86,10 @@ plans:
     name: Unlimited
     link: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices
     features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: false
+      streaming.concurrent-streams: 3
       streaming.live: [tv-channels, sports]
     perks: [Every ESPN network, ESPN+ included]
     prices:

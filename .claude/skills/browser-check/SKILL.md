@@ -664,6 +664,16 @@ a Material Symbols ligature (a name that isn't one lays out as wide text). With 
 screenshots and no horizontal scroll. Shoot the list after axe's wait: straight after its options appear it's still
 fading in, see-through.
 
+`check-m11-features.cjs` (M11.4, features that compare) checks Search's Features filter with Ad free on `ng serve` for
+a Canadian in Alberta (base URL ending in `/`, after `npm run data:build` on the branch), in both themes at both widths,
+keyboard only: Features reached by Tab (at 360 px in the Filters drawer), "ad free" offering Ad free first under
+Matches, ArrowDown and Enter picking it (`?f=ad-free`, its chip), the results without TSN or RDS, Netflix's details by
+Enter listing Ad free; then an old link's `?f=streaming.ad-free` rewritten in place to `?f=ad-free` (no history entry),
+with the same results and chip. With axe (the suggestions open, the details open), screenshots and no horizontal
+scroll. Wait for the suggestions to narrow before reading them: the whole list shows first. Since M11.4
+`check-features.cjs` expects the Apps, languages & support card and ranks Kids profiles where it ranked Ad free, and
+`check-search.cjs`'s "video quality" suggestions no longer include Ad free.
+
 `check-after-m3.cjs` (the feedback after M3: M5.13, M6.17–M6.19, M7.11, M8.5, M8.6, M9.6) checks the batch on
 `ng serve` for a Canadian in Alberta, with Streaming (Crave Premium and Disney+ Premium) and Family (two Disney+
 Premium, Netflix Standard auto-renewing until an end date, Mullvad renewed by hand, and four more so it scrolls). In

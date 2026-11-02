@@ -13,6 +13,7 @@
     - { id: 1080p, name: 1080p (Full HD), headline: true }
     - { id: 4k, name: 4K (Ultra HD), aliases: [uhd, 2160p], headline: true }
   aliases: [resolution, picture quality]
+  requiredIn: [streaming]
 - id: video.hdr
   name: HDR
   category: streaming
@@ -23,11 +24,6 @@
   category: streaming
   type: boolean
   aliases: [spatial audio]
-- id: streaming.ad-free
-  name: Ad free
-  category: streaming
-  type: boolean
-  aliases: [no ads, ad-free]
 - id: streaming.concurrent-streams
   name: Simultaneous streams
   category: streaming
@@ -38,6 +34,7 @@
     - { id: 2-4, name: 2 to 4 devices, min: 2, max: 4 }
     - { id: 5+, name: More than 4 devices, min: 5 }
   aliases: [screens, streams, devices at once]
+  requiredIn: [streaming]
 - id: streaming.download-devices
   name: Download devices
   category: streaming
@@ -73,6 +70,7 @@
   type: boolean
   aliases: [vpn, virtual private network]
   headline: true
+  requiredIn: [vpn]
 - id: vpn.devices
   parent: vpn.included
   name: VPN devices
@@ -89,6 +87,7 @@
   category: vpn
   type: boolean
   aliases: [unlimited data, unlimited bandwidth]
+  requiredIn: [vpn]
 - id: vpn.server-countries
   parent: vpn.included
   name: VPN server countries
@@ -100,6 +99,7 @@
     - { id: 11-50, name: 11 to 50 countries, min: 11, max: 50 }
     - { id: 51+, name: More than 50 countries, min: 51 }
   aliases: [server locations, vpn locations]
+  requiredIn: [vpn]
 - id: vpn.protocols
   parent: vpn.included
   name: VPN protocols
@@ -194,6 +194,7 @@
     - { id: 200+, name: 200 GB or more, min: 200 }
     - { id: 1000+, name: 1 TB or more, min: 1000 }
   aliases: [drive, online storage]
+  requiredIn: [storage]
 
 # ── Email ──────────────────────────────────────────────────────────────────────
 - id: email.addresses
@@ -205,6 +206,7 @@
     - { id: '1', name: 1 address, min: 1, max: 1 }
     - { id: 2-10, name: 2 to 10 addresses, min: 2, max: 10 }
     - { id: 11+, name: More than 10 addresses, min: 11 }
+  requiredIn: [email]
 - id: email.custom-domains
   name: Custom email domains
   category: email
@@ -233,6 +235,7 @@
   type: boolean
   aliases: [password vault, pass]
   headline: true
+  requiredIn: [passwords]
 - id: password-manager.item-types
   parent: password-manager
   name: Storable item types
@@ -316,6 +319,7 @@
   type: boolean
   aliases: [real-time protection, anti-malware, malware protection, advanced threat defense]
   headline: true
+  requiredIn: [security]
 - id: antivirus.devices
   parent: antivirus.included
   name: Devices protected
@@ -443,6 +447,7 @@
   type: boolean
   aliases: [ai, chatbot]
   headline: true
+  requiredIn: [ai]
 
 # ── Productivity ───────────────────────────────────────────────────────────────
 - id: calendar.included
@@ -450,6 +455,103 @@
   category: productivity
   type: boolean
   aliases: [online calendar]
+  requiredIn: [calendar]
+
+# ── Apps, languages & support: every category (M11.4) ─────────────────────────
+# Facts about a provider as a whole (providerWide): a provider states them once in its own features, and a plan
+# states one only where it differs (BLUEPRINT §4.2 rule 9). Languages are what the service offers across its
+# catalogue; streaming.french-content stays, since it's about French content, not dubs.
+# Ad free was streaming.ad-free until 2026-11-02 (data/redirects.yaml), renamed to reuse it for music, social, search
+# and news. Not provider-wide: a provider's tiers often differ by ads.
+- id: ad-free
+  name: Ad free
+  category: general
+  type: boolean
+  aliases: [no ads, ad free, without ads]
+  requiredIn: [streaming]
+- id: platforms
+  name: Platforms
+  category: general
+  type: set
+  values:
+    - { id: windows, name: Windows }
+    - { id: macos, name: macOS, aliases: [mac, os x] }
+    - { id: linux, name: Linux }
+    - { id: android, name: Android }
+    - { id: ios, name: iPhone and iPad, aliases: [ios, ipados, iphone, ipad] }
+    - { id: web, name: Web browser, aliases: [web app, browser] }
+    - {
+        id: browser-extension,
+        name: Browser extension,
+        aliases: [chrome extension, firefox add-on],
+      }
+    - {
+        id: tv,
+        name: TVs and streaming devices,
+        aliases: [smart tv, apple tv, android tv, fire tv, roku],
+      }
+    - { id: console, name: Game consoles, aliases: [xbox, playstation, nintendo switch] }
+  aliases: [apps, devices, operating systems]
+  providerWide: true
+- id: software.open-source
+  name: Open source
+  category: general
+  type: enum
+  values: # worst to best, so "at least open-source apps" works
+    - { id: proprietary, name: Closed source, aliases: [proprietary] }
+    - { id: source-available, name: Source available }
+    - { id: open-clients, name: Open-source apps, aliases: [open clients, open-source clients] }
+    - { id: fully-open, name: Fully open source, aliases: [open-source servers] }
+  aliases: [open source, oss, foss, source code]
+  providerWide: true
+- id: languages.audio
+  name: Audio languages
+  category: general
+  type: set
+  values:
+    - { id: en, name: English }
+    - { id: fr, name: French, aliases: [français] }
+    - { id: es, name: Spanish, aliases: [español] }
+    - { id: de, name: German, aliases: [deutsch] }
+    - { id: it, name: Italian, aliases: [italiano] }
+    - { id: pt, name: Portuguese, aliases: [português] }
+    - { id: ja, name: Japanese }
+    - { id: ko, name: Korean }
+    - { id: zh, name: Chinese, aliases: [mandarin, cantonese] }
+    - { id: hi, name: Hindi }
+    - { id: ar, name: Arabic }
+  aliases: [dubbing, dubs, audio tracks]
+  providerWide: true
+- id: languages.subtitles
+  name: Subtitle languages
+  category: general
+  type: set
+  values:
+    - { id: en, name: English }
+    - { id: fr, name: French, aliases: [français] }
+    - { id: es, name: Spanish, aliases: [español] }
+    - { id: de, name: German, aliases: [deutsch] }
+    - { id: it, name: Italian, aliases: [italiano] }
+    - { id: pt, name: Portuguese, aliases: [português] }
+    - { id: ja, name: Japanese }
+    - { id: ko, name: Korean }
+    - { id: zh, name: Chinese, aliases: [mandarin, cantonese] }
+    - { id: hi, name: Hindi }
+    - { id: ar, name: Arabic }
+  aliases: [subtitles, captions, closed captions]
+  providerWide: true
+- id: support.channels
+  name: Support
+  category: general
+  type: set
+  values:
+    - { id: email, name: Email or web form, aliases: [support tickets, contact form] }
+    - { id: chat, name: Live chat }
+    - { id: phone, name: Phone }
+    - { id: community, name: Community forum, aliases: [forum] }
+    - { id: 24-7, name: Around the clock, aliases: [24/7, 24 hours] }
+  aliases: [customer support, help, customer service]
+  providerWide: true
 
 # ── Accounts & sharing ─────────────────────────────────────────────────────────
 # A plan that doesn't list account.users is for one person, so there's no "just you" tier: a tier is provided
@@ -463,6 +565,30 @@
     - { id: 2-5, name: 2 to 5 people, min: 2, max: 5 }
     - { id: 6+, name: 6 or more people, min: 6 }
   aliases: [family plan, duo plan, users, members]
+- id: account.sign-in
+  name: Sign-in methods
+  category: account
+  type: set
+  values:
+    - { id: password, name: Password }
+    - { id: passkey, name: Passkeys }
+    - { id: totp, name: Authenticator app codes, aliases: [totp, 2fa, two-factor, authenticator] }
+    - { id: security-key, name: Security keys, aliases: [yubikey, fido2, u2f, hardware key] }
+    - { id: sms, name: Text message codes, aliases: [sms] }
+    - { id: email-code, name: Email codes, aliases: [magic link, email link] }
+    - { id: push-approval, name: Approval on another device, aliases: [push notification] }
+    - {
+        id: trusted-device,
+        name: Trusted devices,
+        aliases: [trusted location, remember this device],
+      }
+    - {
+        id: sso,
+        name: Sign in with another account,
+        aliases: [single sign-on, sign in with apple, sign in with google, social login],
+      }
+  aliases: [login, log in, two-factor authentication, 2fa, mfa]
+  providerWide: true
 
 # ── Services that include other services (overlap detection) ───────────────────
 # Values are provider or plan ids (proton.pass-plus). A plan that lists plans here is a suite, and inclusion

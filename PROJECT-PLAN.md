@@ -1236,6 +1236,77 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
     security and passwords, its contract examples with the new categories), and Search's Category filter (a plan's
     own categories in `categories.yaml`'s order, none with nothing sold).
 
+**M11.4 — Features that compare** (BLUEPRINT §4.2 rules 7–10, §5.3)
+- **Required features:** a feature's `requiredIn` lists service categories whose every plan (by `planCategories`)
+  states it, `false` and `0` included; a plan that doesn't is an error.
+- **Price differences:** two of a provider's plans at different prices, for the same region and period, with the same
+  features (and, once M11.6 lands, perks) get a warning.
+- **Cross-category features:** the guide's §2.3, through the feature-discovery skill (proposed, registry in its own
+  commit).
+- **Provider-wide features:** a provider's own `features`, which every plan has unless it states its own value, read
+  merged by the app and search, and stored once per provider in D1 (`provider_features`, a migration and a
+  `seedFormat` bump).
+- **The rename:** `streaming.ad-free` to `ad-free`, through `data/redirects.yaml` (M10.27).
+- **Acceptance**
+  - [x] `video.quality` is required in streaming
+  - [x] Claude's and Xbox Game Pass's plans warn until M11.9
+  - [x] A user's Ad free rank survives the rename
+  - [x] A provider's `platforms` set once writes its rows once
+- **As built** (the owner's choices on 2026-11-02: the guide's §2.3 features as proposed, provider-wide only; the
+  streaming gaps read now; the category features, the VPN basics and the streaming basics required too):
+  - **`requiredIn`** (core's `feature.ts`, `checkRequiredFeatures`): `video.quality`, `streaming.concurrent-streams`
+    and `ad-free` in streaming; `vpn.included`, `antivirus.included`, `password-manager`, `email.addresses`,
+    `calendar.included`, `storage.cloud` and `ai.assistant` each in the category it names (`featureCategories`);
+    `vpn.server-countries` and `vpn.unlimited-traffic` in vpn. A plan's provider-wide features count. The registry's
+    `requiredIn` must name defined service categories, each once.
+  - **The gaps, read from the providers' pages on 2026-11-02:** ESPN's three streams ("up to three (3) devices for
+    most content", its support centre) and Unlimited's 4K HDR (ESPN's press release of 2026-09-08), both with ads;
+    Hulu's two streams ("2 simultaneous streams", hulu.com's Paramount+ page: its help centre's article renders no
+    text); RDI "avec publicité"; TSN's and RDS's live channels not ad free, inferred, since neither says (the guide's
+    §2.2 rule 5); Bitdefender's Digital Identity Protection has no antivirus. No official page states the video
+    quality of ESPN Select, ICI RDI, RDS or TSN's two plans: core's `awaitingRequiredFeatures` makes those five
+    warnings until M11.9, each file's comment naming the silent pages.
+  - **Price differences** (`checkPriceDifferences`): plans and prices still sold, compared by region, currency and
+    period; unlisted reads as `false`, `0` or empty, sets in any order; one warning a pair, at the dearer plan. It
+    warns on Claude's Pro, Max 5x and Max 20x, Xbox Game Pass's four tiers, and two pairs more, also for M11.9:
+    Bitdefender's Premium and Ultimate Security (Individual and Family) and TSN's Standard and Premium, whose
+    differences are perks.
+  - **Cross-category features** (a registry commit of their own): `platforms` (nine values), `software.open-source`
+    (an enum: closed source, source available, open-source apps, fully open), `account.sign-in` (nine methods),
+    `languages.audio` and `languages.subtitles` (the guide's eleven languages) and `support.channels` (email or form,
+    chat, phone, community, around the clock; "community only" is community alone, so not a value). A new feature
+    category, Apps, languages & support (`general`), holds them, sign-in in Accounts & sharing. No plan states them
+    yet: M11.9 reads them for the 13.
+  - **Provider-wide features:** `providerWide: true` on a feature (never one with a `parent`); a provider's
+    `features` take only those, and a plan value the provider states already is refused. Core's `planFeatures`,
+    `withPlanFeatures` and `withProviderFeatures` merge them; the app merges each catalog file as `catalogCacheSchema`
+    checks it (downloaded or read from Dexie, in the chunk the checks load in: merging in `CatalogStore` put the
+    initial bundle 193 bytes over its 500 kB budget; it's 499.76 kB), and the API merges each provider it reads from D1, so Search, the optimizer, cards
+    and `GET /providers`, `/providers/:id`, `/plans/:id` and `/bundles` see every plan's full features. Proton's
+    nine shared values are category features, so they stay on its plans; Bitdefender's plans share none.
+  - **D1:** `provider_features (feature_id, value, provider_id, rank_value)`, keyed by feature, no index (migration
+    0004, `seedFormat` 3). The seed writes it with the provider, and a provider-wide enum's moved values are fixed
+    there too. `GET /providers?feature=` lets a provider through when a plan's rows or its own have each key (a
+    `UNION` per key, through both keys), and core's search applies the keys exactly. Measured in workerd
+    (`seed.spec.ts`): a provider's three platforms write 3 rows once, against 12 on each of its two plans.
+  - **The rename:** `ad-free` in the general feature category, still required in streaming, with
+    `{ kind: feature, from: streaming.ad-free, to: ad-free, on: 2026-11-02 }`. The app moves ranks and item
+    overrides once (M10.27's `followRedirects`; the rank records keep their shape, so no Dexie version). Search reads
+    `f=streaming.ad-free` as `ad-free` and rewrites the URL (`readSearchParams` with the catalog's redirects), and
+    `GET /providers` reads `feature=streaming.ad-free` the same way, from `ids.json`, which now keeps feature
+    entries too (core's `rankKeyRedirects`). The contract examples follow it; ESPN Unlimited, now 4K, is a fourth
+    result on the 4K example's next page, so the API test says so.
+  - **Tests:** core (`requiredIn` and its warnings, the price-differences warning, provider features and their merge,
+    the seed's `provider_features` rows and rank updates, the redirect in Search's URL, the API's query and
+    `ids.json`), the API (the seed in workerd, the narrowing through `provider_features`' key, the old key end to end,
+    the migration), the web app (the store's files merged, an Ad free rank and override moved, an old Search link).
+  - **Browser:** `check-m11-features.cjs` (browser-check skill): 39 checks in both themes at both widths, by keyboard,
+    with axe: Ad free from the Features suggestions, the results, Netflix's features and an old `f=streaming.ad-free`
+    link. `check-features.cjs` passes with the new card (30 checks). `check-search.cjs` fails three steps from before
+    this task, the same on main: Bitdefender's Antivirus Free is the first $0 result by name (it expects Claude), and
+    `cat=vpn` keeps Bitdefender too since M11.3; its step this task changed (Ad free no longer under More in
+    Streaming) is updated.
+
 **M11.6 — Ranked perks** (BLUEPRINT §4.2)
 ```yaml
 # data/providers/xbox-game-pass.yaml (a sketch)
@@ -1382,7 +1453,7 @@ Users rank **rank keys**. Each one points to one rankable option of a feature:
 
 | Feature type | Rank key example | A plan **provides** it when… |
 |---|---|---|
-| boolean | `streaming.ad-free` | the value is `true` |
+| boolean | `ad-free` | the value is `true` |
 | enum | `video.quality=1080p` | its value is **at least** 1080p in the enum order (a 4k plan provides 1080p) |
 | number with tiers | `streaming.concurrent-streams=2-4` | its value is **at least the tier's min** (or `unlimited`) |
 | set | `password-manager.item-types=passkey` | the set contains `passkey` |
@@ -2181,8 +2252,9 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
   - Clear all (keeps the text and the sort, and puts Sold in back to the user's default).
   - The panel has no scrollbar of its own (M5.9): pinned below the search bar while it fits the window, and when it's
     taller, it scrolls with the page until its foot is in view, then stays.
-- **URL state:** `?q=&sort=&min=&max=&cat=&f=video.quality%3D4k,streaming.ad-free&act=active,none&native=1&sold=1`,
-  in that order, leaving defaults out: `sold` appears only when it differs from the user's default (`sold=1` on,
+- **URL state:** `?q=&sort=&min=&max=&cat=&f=video.quality%3D4k,ad-free&act=active,none&native=1&sold=1`,
+  in that order, leaving defaults out (a renamed feature's old key reads as its new one, M11.4: an old link's
+  `f=streaming.ad-free` opens with Ad free, and the URL is rewritten): `sold` appears only when it differs from the user's default (`sold=1` on,
   `sold=0` off), and the Filters count doesn't count a default. Typing replaces the current history entry once it pauses; a run of price changes (a
   drag, or arrow keys) makes one entry; every other change adds one, so Back undoes the last filter. A value the
   catalog doesn't have (an unknown sort, category, rank key or parameter, a bad amount, a minimum above the maximum,

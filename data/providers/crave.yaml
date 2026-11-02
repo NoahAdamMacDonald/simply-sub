@@ -38,7 +38,7 @@ plans:
     link: https://www.crave.ca/en/subscribe
     features:
       video.quality: 1080p
-      streaming.ad-free: false
+      ad-free: false
       streaming.concurrent-streams: 2
       streaming.kids-profiles: true
       streaming.french-content: true
@@ -67,7 +67,7 @@ plans:
     link: https://www.crave.ca/en/subscribe
     features:
       video.quality: 4k
-      streaming.ad-free: true
+      ad-free: true
       streaming.concurrent-streams: 4
       streaming.download-devices: 5
       streaming.kids-profiles: true

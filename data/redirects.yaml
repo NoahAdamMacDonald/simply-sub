@@ -5,4 +5,6 @@
 # kind is provider, plan, add-on, bundle, feature (rank keys) or perk. `to` must exist and still be sold, and never be
 # another entry's `from`. The app follows them and rewrites users' records once; the API answers an old provider or
 # plan id with 301. Shapes: packages/core/src/catalog/redirects.ts.
-[]
+# M11.4: Ad free, renamed to reuse it beyond streaming. Users' ranks move to ad-free, and old links' f= and
+# feature= read as ad-free.
+- { kind: feature, from: streaming.ad-free, to: ad-free, on: 2026-11-02 }

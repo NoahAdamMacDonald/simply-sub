@@ -62,6 +62,20 @@ API contract's prices are illustrative and never a source. This skill is how to 
   asks), every region in scope (ask: usually CA and US, or GLOBAL), and every currency the buyer can pick.
 - **Read the features from the same pages:** quality, streams, downloads, devices, users, storage and limits. Map them
   to `data/features.yaml` ids; anything else goes in `perks`. If the registry needs a new feature, stop and ask, then follow the feature-discovery skill.
+- **Features that compare** (BLUEPRINT §4.2 rules 7–10, M11.4):
+  - **Required features:** every plan in a category states each feature whose `requiredIn` names it (`video.quality`,
+    `streaming.concurrent-streams` and `ad-free` in streaming, the VPN basics in vpn, each category's own feature),
+    `false` and `0` included. A required boolean no official page states is `false`, with a comment naming the pages
+    that were silent; a required enum or number no page states is never guessed: ask the user, who may add the plan
+    to core's `awaitingRequiredFeatures` until it's found.
+  - **Provider-wide facts once:** platforms, sign-in methods, open source, audio and subtitle languages and support
+    channels (`providerWide: true` in the registry) go in the provider's own `features` when every plan has them, and
+    a plan states one only where it differs. Category features stay on each plan, even when all are the same.
+  - **A dearer plan needs a difference:** `npm run data:validate` warns when two plans cost differently for the same
+    region and period with the same features. Read the provider's comparison table again for what the price pays
+    for, and record it as a feature value (or ask for a new feature); text in `perks` doesn't count until M11.6.
+  - **Reuse first:** an existing id; a new value or alias of one; a cross-category feature; a new feature through
+    the feature-discovery skill; then a perk. A capability from another category uses that category's feature.
 - **Every category a plan fits** (`data/categories.yaml`, M11.3). The provider's `category` is where a buyer would
   look first; a plan that's more than that lists every service category it fits in `categories` (YouTube Premium:
   `[streaming, music]`; Proton Unlimited: `[privacy-suite, vpn, storage, email, passwords, calendar, ai]`). When its

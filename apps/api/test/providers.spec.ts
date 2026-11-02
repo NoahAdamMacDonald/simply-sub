@@ -2,6 +2,7 @@ import {
   buildCatalogData,
   buildCatalogMeta,
   buildSeedSql,
+  catalogIds,
   categoriesBody,
   featuresBody,
   providersCursor,
@@ -51,7 +52,9 @@ const assets = {
         ? featuresBody(snapshot)
         : path === '/data/catalog/categories.json'
           ? categoriesBody(snapshot)
-          : undefined;
+          : path === '/data/catalog/ids.json'
+            ? catalogIds(snapshot)
+            : undefined;
     return body
       ? Response.json(body)
       : new Response('<!doctype html>', { headers: { 'Content-Type': 'text/html' } });
@@ -144,7 +147,10 @@ describe('GET /providers', () => {
       etag: expect.stringMatching(/^"abc1234-[0-9a-f]{4}"$/),
     });
     const body = await response.json<Body>();
-    expect(shape(body)).toEqual(shape(example.response.body));
+    // ESPN Unlimited is 4K since M11.4, and ESPN has no availableIn, so it's a fourth, on the next page.
+    expect(shape({ ...body, meta: { ...body.meta, nextCursor: null } })).toEqual(
+      shape(example.response.body),
+    );
     expect(body.data.map((result) => result.provider.id)).toEqual([
       'disney-plus',
       'crave',
@@ -153,7 +159,8 @@ describe('GET /providers', () => {
     expect(body.meta).toEqual({
       ...example.response.body.meta,
       catalogVersion: 'abc1234',
-      total: 3,
+      total: 4,
+      nextCursor: expect.any(String),
     });
     const best = body.data.map((result) => result.matchedPlans[0].bestMonthlyEquivalent ?? 0);
     expect(best).toEqual([...best].sort((a, b) => a - b));
@@ -360,6 +367,17 @@ describe('GET /providers', () => {
     expect(providersCursor(2)).toMatch(/^p/);
   });
 
+  it('reads an old link’s feature=streaming.ad-free as ad-free (M11.4)', async () => {
+    const response = await get('?feature=streaming.ad-free&region=CA');
+    expect(response.status).toBe(200);
+    const body = await response.json<Body>();
+    expect(body.meta.query).toMatchObject({ feature: ['ad-free'] });
+    expect(body.data.length).toBeGreaterThan(0);
+    for (const result of body.data) {
+      expect(result.matchedPlans.every((plan) => plan.matchedKeys.includes('ad-free'))).toBe(true);
+    }
+  });
+
   it('refuses a rank key that is not in the registry', async () => {
     const response = await get('?feature=video.quality%3D8k');
 
@@ -420,15 +438,46 @@ describe('the D1 reads', () => {
     expect(plan.results.some((row) => /^SCAN/.test(row.detail))).toBe(false);
   });
 
+  it("read a provider's own features too, through provider_features' key (M11.4)", async () => {
+    await env.DB.prepare(
+      "INSERT INTO provider_features (feature_id, value, provider_id, rank_value) VALUES ('platforms', 'linux', 'mullvad', NULL)",
+    ).run();
+    try {
+      const query = { feature: ['platforms=linux'], sort: 'name', limit: 20 } as const;
+      const linux = await loadProviders(
+        env.DB,
+        { ...query, feature: [...query.feature] },
+        features,
+      );
+      const { sql, bindings } = providersStatement(
+        { ...query, feature: [...query.feature] },
+        features,
+      );
+      const plan = await env.DB.prepare(`EXPLAIN QUERY PLAN ${sql}`)
+        .bind(...bindings)
+        .all<{ detail: string }>();
+
+      expect(linux.providers.map((provider) => provider.id)).toEqual(['mullvad']);
+      expect(plan.results.map((row) => row.detail)).toEqual(
+        expect.arrayContaining([
+          'SEARCH provider_features USING PRIMARY KEY (feature_id=? AND value=?)',
+        ]),
+      );
+      expect(plan.results.some((row) => /^SCAN provider_features/.test(row.detail))).toBe(false);
+    } finally {
+      await env.DB.prepare('DELETE FROM provider_features').run();
+    }
+  });
+
   it('read only the providers with a plan that has every rank key, through the indexes', async () => {
     const query = {
-      feature: ['video.quality=4k', 'streaming.ad-free', 'streaming.live=sports'],
+      feature: ['video.quality=4k', 'ad-free', 'streaming.live=sports'],
       sort: 'name',
       limit: 20,
     } as const;
     const uhd = await loadProviders(
       env.DB,
-      { feature: ['video.quality=4k', 'streaming.ad-free'], sort: 'name', limit: 20 },
+      { feature: ['video.quality=4k', 'ad-free'], sort: 'name', limit: 20 },
       features,
     );
     const { sql, bindings } = providersStatement(

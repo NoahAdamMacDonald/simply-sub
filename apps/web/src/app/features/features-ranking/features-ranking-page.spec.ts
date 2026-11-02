@@ -30,7 +30,7 @@ const catalog: CatalogData = {
         { id: '4k', name: '4K (Ultra HD)' },
       ],
     },
-    { id: 'streaming.ad-free', name: 'Ad free', category: 'streaming', type: 'boolean' },
+    { id: 'ad-free', name: 'Ad free', category: 'streaming', type: 'boolean' },
     { id: 'vpn.included', name: 'VPN', category: 'vpn', type: 'boolean' },
     {
       id: 'vpn.devices',
@@ -255,7 +255,7 @@ describe('FeaturesRankingPage', () => {
     }
 
     it('finds features by name, opening their cards, and counts them', async () => {
-      await open([providing(['streaming.ad-free'])]);
+      await open([providing(['ad-free'])]);
       find('kill');
       await fixture.whenStable();
 
@@ -276,7 +276,7 @@ describe('FeaturesRankingPage', () => {
       await fixture.whenStable();
       expect(text(element().querySelector('ss-empty-state'))).toContain('Nothing is ranked yet.');
 
-      await rankings.set('streaming.ad-free', 'needed');
+      await rankings.set('ad-free', 'needed');
       await settle(() => cards().length === 1);
       expect(rows('Streaming')).toEqual(['Ad free: Needed']);
 
@@ -301,7 +301,7 @@ describe('FeaturesRankingPage', () => {
       await rankings.setMany(
         new Map([
           ['vpn.included', 'needed'],
-          ['streaming.ad-free', 'wanted'],
+          ['ad-free', 'wanted'],
         ]),
       );
       await settle(() => button('Reset all')?.disabled === false);

@@ -37,11 +37,16 @@ notes: >-
 
 # Read 2026-10-26 on rds.ca/abonnement (Mensuel, 3 mois and Annuel tabs): one plan, French-language sports. Two
 # streams at a time (rds.ca/aide/faq/#plusieurs-appareils). RDS's bundles with Crave and TSN are in data/bundles.
+# Read 2026-11-02 (M11.4, the required streaming features): neither rds.ca/abonnement nor the FAQ says
+# anything of ads or video quality. Its live channels carry their broadcasts, so not ad free, inferred (the guide's
+# §2.2 rule 5: a required boolean no page states is false); the video quality waits for M11.9
+# (awaitingRequiredFeatures in core).
 plans:
   - id: rds.standard
     name: RDS
     link: https://www.rds.ca/abonnement/
     features:
+      ad-free: false
       streaming.live: [tv-channels, sports]
       streaming.concurrent-streams: 2
       streaming.french-content: true

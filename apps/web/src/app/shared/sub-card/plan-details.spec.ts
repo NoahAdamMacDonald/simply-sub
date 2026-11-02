@@ -60,7 +60,7 @@ describe('PlanDetails', () => {
     element().querySelector(selector)?.textContent?.replace(/\s+/g, ' ').trim();
 
   it('lists the features with the user’s ranks, the add-ons and the bundles with their savings', async () => {
-    await show('netflix.standard', { 'streaming.ad-free': 'needed' });
+    await show('netflix.standard', { 'ad-free': 'needed' });
 
     expect(groups()).toEqual([
       'Features Video quality: 1080p (Full HD) Ad free Needed',

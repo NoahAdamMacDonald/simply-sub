@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { formatCatalogIssue, validateCatalog, type CatalogSourceFile } from '../../src';
-import { catalog, catalogWith, edited, today } from './catalog-files';
+import { catalog, catalogWith, edited, price, today } from './catalog-files';
 import { asciiBytes, pngBytes } from './helpers';
 
 const bundleFile = 'data/bundles/netflix-crave.yaml';
@@ -200,6 +200,12 @@ describe('validateCatalog', () => {
     it('needs real feature categories', () => {
       expect(messagesWith(featuresFile, [0, 'category'], 'streming')).toEqual([
         'data/features.yaml 0.category: "streming" isn\'t a feature category in data/categories.yaml (streaming, vpn, storage, account, bundle)',
+      ]);
+    });
+
+    it('keeps provider-wide features out of groups', () => {
+      expect(messagesWith(featuresFile, [5, 'providerWide'], true)).toEqual([
+        "data/features.yaml 5.providerWide: A provider-wide feature isn't in a group: a plan's vpn.included decides its children, so leave out parent or providerWide",
       ]);
     });
 
@@ -433,6 +439,166 @@ describe('validateCatalog', () => {
         'data/providers/mullvad.yaml plans.0.features.vpn.devices: Needs vpn.included: true, the group this feature belongs to',
         'data/providers/mullvad.yaml plans.0.features.vpn.unlimited-traffic: Needs vpn.included: true, the group this feature belongs to',
       ]);
+    });
+  });
+
+  describe('required features (M11.4)', () => {
+    const requiredQuality = () => edited(catalog(), featuresFile, [0, 'requiredIn'], ['streaming']);
+
+    it('needs every plan in the category to state it', () => {
+      expect(messages(requiredQuality())).toEqual([
+        "data/providers/crave.yaml plans.0.features: Needs video.quality, which every plan in streaming states (requiredIn): give its value, from the provider's own pages",
+      ]);
+      expect(
+        messages(
+          edited(requiredQuality(), crave, ['plans', 0, 'features', 'video.quality'], '720p'),
+        ),
+      ).toEqual([]);
+    });
+
+    it('takes false and 0, and leaves out plans in other categories', () => {
+      const files = edited(catalog(), featuresFile, [1, 'requiredIn'], ['streaming']);
+      const missing = (plan: string, index: number) =>
+        `data/providers/${plan}.yaml plans.${index}.features: Needs streaming.ad-free, which every plan in streaming states (requiredIn): give true or false, from the provider's own pages`;
+      expect(messages(files)).toEqual([
+        missing('crave', 0),
+        missing('crave', 1),
+        missing('netflix', 0),
+      ]);
+      expect(
+        messages(edited(files, netflix, ['plans', 0, 'features', 'streaming.ad-free'], false)),
+      ).toEqual([missing('crave', 0), missing('crave', 1)]);
+    });
+
+    it('warns instead for a plan waiting for M11.9', () => {
+      const issues = validateCatalog(requiredQuality(), today, {
+        awaitingRequired: new Map([['crave.standard', ['video.quality']]]),
+      });
+      expect(issues.map(({ severity, message }) => [severity, message])).toEqual([
+        [
+          'warning',
+          'Needs video.quality, which every plan in streaming states (requiredIn): no official page states it yet, so it waits for M11.9 (awaitingRequiredFeatures)',
+        ],
+      ]);
+    });
+
+    it('needs real service categories, each once', () => {
+      const registry = messagesWith(featuresFile, [0, 'requiredIn'], ['streming', 'vpn', 'vpn']);
+      expect(registry.filter((message) => message.startsWith(featuresFile))).toEqual([
+        'data/features.yaml 0.requiredIn.0: "streming" isn\'t a service category in data/categories.yaml (streaming, vpn, privacy-suite)',
+        'data/features.yaml 0.requiredIn.2: "vpn" is listed more than once',
+      ]);
+    });
+  });
+
+  describe('provider-wide features (M11.4)', () => {
+    const platforms = {
+      id: 'platforms',
+      name: 'Platforms',
+      category: 'streaming',
+      type: 'set',
+      values: [
+        { id: 'web', name: 'Web browser' },
+        { id: 'tv', name: 'TVs and streaming devices' },
+      ],
+      providerWide: true,
+    };
+    const withPlatforms = (extra: Record<string, unknown> = {}) => {
+      const files = catalog();
+      const features = dataOf(files, featuresFile) as unknown[];
+      return withFile(files, {
+        file: featuresFile,
+        data: [...features, { ...platforms, ...extra }],
+      });
+    };
+
+    it('takes only provider-wide features at the provider, each a value of its type', () => {
+      const files = withPlatforms();
+      expect(messages(edited(files, netflix, ['features'], { platforms: ['web', 'tv'] }))).toEqual(
+        [],
+      );
+      expect(
+        messages(
+          edited(files, netflix, ['features'], {
+            'video.quality': '4k',
+            platform: ['web'],
+            platforms: ['web', 'phone'],
+          }),
+        ),
+      ).toEqual([
+        "data/providers/netflix.yaml features.video.quality: video.quality isn't provider-wide in data/features.yaml: state it on each plan, even when every plan has the same value",
+        'data/providers/netflix.yaml features.platform: Not a feature in data/features.yaml (did you mean platforms?)',
+        'data/providers/netflix.yaml features.platforms.1: "phone" isn\'t a platforms value (web, tv)',
+      ]);
+    });
+
+    it('refuses a plan value the provider states already, and takes one that differs', () => {
+      const files = edited(withPlatforms(), netflix, ['features'], { platforms: ['web', 'tv'] });
+      const plan = ['plans', 0, 'features', 'platforms'];
+      expect(messages(edited(files, netflix, plan, ['tv', 'web']))).toEqual([
+        "data/providers/netflix.yaml plans.0.features.platforms: Its provider's features say so already: leave it out, or give the value it differs by",
+      ]);
+      expect(messages(edited(files, netflix, plan, ['web']))).toEqual([]);
+    });
+
+    it('counts for required features and price differences', () => {
+      const required = withPlatforms({ requiredIn: ['vpn'] });
+      const missing = messages(required);
+      expect(missing).toContain(
+        "data/providers/mullvad.yaml plans.0.features: Needs platforms, which every plan in vpn states (requiredIn): give its values, [] included, from the provider's own pages",
+      );
+      expect(
+        messages(edited(required, mullvad, ['features'], { platforms: ['web'] })).filter(
+          (message) => message.includes('mullvad'),
+        ),
+      ).toEqual([]);
+      // Standard's ad-free is its only difference from Standard with ads: the provider's platforms don't make one.
+      const same = edited(
+        edited(withPlatforms(), netflix, ['features'], { platforms: ['web'] }),
+        netflix,
+        ['plans', 1, 'features', 'streaming.ad-free'],
+        false,
+      );
+      expect(messages(same)).toHaveLength(1);
+      expect(
+        messages(edited(same, netflix, ['plans', 1, 'features', 'platforms'], ['web', 'tv'])),
+      ).toEqual([]);
+    });
+  });
+
+  describe('price differences (M11.4)', () => {
+    const adFree = ['plans', 1, 'features', 'streaming.ad-free'];
+    const warning =
+      'warning: data/providers/netflix.yaml plans.1.features: Costs more than netflix.standard-ads (18.99 against 7.99 CAD a month in CA) with the same features: give what the price pays for a feature, or the optimizer always suggests netflix.standard-ads';
+
+    it('warns when two plans at different prices have the same features', () => {
+      expect(messagesWith(netflix, adFree, false)).toEqual([warning]);
+      expect(messagesWith(netflix, adFree, true)).toEqual([]);
+    });
+
+    it('reads an unlisted value as false, 0 or empty, and a set in any order', () => {
+      const files = edited(catalog(), netflix, ['plans', 0, 'features', 'streaming.live'], []);
+      expect(messages(edited(files, netflix, adFree, false))).toEqual([warning]);
+      const live = (index: number, value: string[]) => (files: CatalogSourceFile[]) =>
+        edited(files, netflix, ['plans', index, 'features', 'streaming.live'], value);
+      const ordered = live(1, ['sports', 'tv-channels'])(
+        live(0, ['tv-channels', 'sports'])(edited(catalog(), netflix, adFree, false)),
+      );
+      expect(messages(ordered)).toEqual([warning]);
+    });
+
+    it('compares only prices still sold, for the same region, currency and period', () => {
+      const files = edited(catalog(), netflix, adFree, false);
+      expect(messages(edited(files, netflix, ['plans', 1, 'retired'], '2026-10-01'))).toEqual([]);
+      const yearly = edited(
+        files,
+        netflix,
+        ['plans', 0, 'prices'],
+        [{ ...price('CA', 'CAD', 79.99), interval: 'year' }],
+      );
+      expect(messages(yearly)).toEqual([]);
+      const sameAmount = edited(files, netflix, ['plans', 1, 'prices'], [price('CA', 'CAD', 7.99)]);
+      expect(messages(sameAmount)).toEqual([]);
     });
   });
 

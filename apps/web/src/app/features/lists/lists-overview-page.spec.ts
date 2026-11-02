@@ -106,7 +106,7 @@ describe('ListsOverviewPage', () => {
     await items.create({
       ...fields('netflix.standard'),
       listId: work.id,
-      rankOverrides: { 'streaming.ad-free': 'essential' },
+      rankOverrides: { 'ad-free': 'essential' },
     });
     await items.create({
       ...fields('mullvad.vpn'),

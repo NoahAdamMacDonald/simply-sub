@@ -211,7 +211,7 @@ async function plantList(page) {
   };
   await putRecord(page, 'tags', { id: TAG, name: 'Family', color: '#1e88e5', ...stamps });
   await putRecord(page, 'lists', { id: LIST, name: 'Work Related', ...stamps });
-  const netflix = { tagIds: [TAG], rankOverrides: { 'streaming.ad-free': 'essential' } };
+  const netflix = { tagIds: [TAG], rankOverrides: { 'ad-free': 'essential' } };
   for (const [id, planId, autoRenew, extra] of [
     [NETFLIX, 'netflix.standard', true, netflix],
     [MULLVAD, 'mullvad.vpn', false, {}],
@@ -675,7 +675,7 @@ async function shownValue(page, selector) {
           autoRenew: false,
         },
         tagIds: [TAG],
-        rankOverrides: { 'streaming.ad-free': 'essential' },
+        rankOverrides: { 'ad-free': 'essential' },
         pinned: false,
       };
       check(

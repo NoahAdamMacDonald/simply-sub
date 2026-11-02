@@ -8,7 +8,7 @@ import {
   searchProviders,
 } from '@simply-sub/core';
 import { Hono } from 'hono';
-import { catalogJson, missingFiles } from '../catalog-files';
+import { catalogIdsFile, catalogJson, missingFiles } from '../catalog-files';
 import { catalogVersion, loadProviders } from '../db/providers';
 import { ecbRates } from '../fx';
 import {
@@ -25,16 +25,18 @@ import {
 /**
  * GET /providers (docs/api-output-examples.json): search, filters, sort and pages, from core's searchProviders on the
  * providers D1 narrows down to (db/providers.ts). The feature registry and the categories come from the static
- * features.json and categories.json, so a request reads only the catalog row and the providers that can match. With
+ * features.json and categories.json, and renamed rank keys (feature=streaming.ad-free is ad-free, M11.4) from ids.json,
+ * so a request reads only the catalog row and the providers that can match. With
  * a region, prices are picked with the ECB's rates (fx.ts): none at all gets 502.
  *
  * The ETag is D1's catalog version and a hash of everything else the body depends on: the query as read, the rates'
  * date and the static files' version.
  */
 export const providers = new Hono<{ Bindings: Env }>().get('/', async (c) => {
-  const [featuresFile, categoriesFile] = await Promise.all([
+  const [featuresFile, categoriesFile, ids] = await Promise.all([
     catalogJson(c, '/data/catalog/features.json'),
     catalogJson(c, '/data/catalog/categories.json'),
+    catalogIdsFile(c),
   ]);
   const registry = featuresBodySchema.safeParse(featuresFile);
   const categories = categoriesBodySchema.safeParse(categoriesFile);
@@ -54,6 +56,7 @@ export const providers = new Hono<{ Bindings: Env }>().get('/', async (c) => {
     features,
     categories: categories.data.data,
     ...(rates && { currencies: ecbCurrencies(rates.ecb) }),
+    ...(ids?.redirects && { redirects: ids.redirects }),
   });
   if ('problems' in read) {
     return badQuery(c, read.problems);

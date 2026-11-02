@@ -45,7 +45,9 @@ Anything provider-specific goes in a plan's `perks` instead.
 | A count with thresholds that matter | `number` with `unit` and `tiers` (`min`, optional `max`; tier ids like `1-10`, `51+`) | `vpn.server-countries` |
 | Several independent options | `set` with `values` (each is its own rank key) | `vpn.protocols`, `vpn.content-blocking` |
 
-- **Ids:** `<group>.<kebab-name>`, under the group's boolean as `parent` (`vpn.included`), listed after it.
+- **Ids:** `<group>.<kebab-name>`, under the group's boolean as `parent` (`vpn.included`), listed after it. A renamed
+  id needs a `{ kind: feature, from, to, on }` entry in `data/redirects.yaml`, which moves users' ranks and old links
+  (`streaming.ad-free` → `ad-free`, M11.4); the ids guard fails without one.
   `category` comes from `categories.yaml`'s feature categories (add one only if none fits).
 - **Names** are short and user-facing ("Kill switch", "Tor over VPN"); value names likewise ("Obfuscated
   connections"). Every value is an object with `id` and `name` (rule 6).
@@ -55,11 +57,24 @@ Anything provider-specific goes in a plan's `perks` instead.
 - **Split claims from proof:** a stated policy and an audit of it are different facts (`vpn.no-logs-policy` vs
   `vpn.independent-audits: [no-logs]`). Recording only the audit made Mullvad look like it had no no-logs policy.
 - `headline: true` only for the few keys worth a place in the feature summary (BLUEPRINT §3.2).
+- **Required in a category** (`requiredIn: [streaming]`, M11.4): propose it for the few features every plan of a
+  category must state, the ones buyers compare most (`video.quality`, `streaming.concurrent-streams`, `ad-free` in
+  streaming; a category's own feature in it). Validation then fails a plan in that category without a value, `false`
+  and `0` included, so every provider's value has to be found first, or the plan listed in core's
+  `awaitingRequiredFeatures` with the user's agreement until it is.
+- **Provider-wide** (`providerWide: true`, M11.4): a fact about the provider as a whole, which a provider states once in
+  its own `features` (`platforms`, `account.sign-in`, `software.open-source`, `languages.*`, `support.channels`). Never
+  for a category feature, which stays on each plan, and never with a `parent`.
+- **Reuse before creating** (BLUEPRINT §4.2 rule 10): an existing id as it is; then a new value or alias of one; then a
+  cross-category feature (the general category: platforms, open source, languages, support, ad-free; sign-in in
+  accounts); then a new feature; then a perk. Never a provider-named id.
+- **What tells tiers apart:** every difference a provider's comparison table shows between its tiers becomes a feature
+  value where one fits (BLUEPRINT §4.2 rule 8): validation warns when two plans cost differently with the same features.
 
 ## 4. The "unlisted means no" trap
 
 A plan that doesn't list a boolean has it as **false**, and an unlisted set is **empty**. So leaving a value out is
-a claim. For every provider in the category, either source the value or say what you inferred and from what (in the
+a claim, and for a feature `requiredIn` the plan's category it's an error (M11.4). For every provider in the category, either source the value or say what you inferred and from what (in the
 YAML comment and the PR). Mullvad's P2P was inferred from its terms, because leaving it out would have said "no P2P".
 If a provider's value can't be found or inferred, raise it with the user before adding the feature.
 
@@ -72,7 +87,8 @@ ask (AskUserQuestion: full list, a core set, or later). Renaming after merge mea
 
 1. **Registry first, in its own commit** (`features.yaml` asks for it): run `npx prettier --write data/features.yaml`
    and `npm run data:validate`.
-2. **Data:** fill in every plan of every provider in the category. Above each provider's `plans:`, a comment lists the
+2. **Data:** fill in every plan of every provider in the category (a provider-wide feature once, in the provider's
+   own `features`, when every plan has the same value). Above each provider's `plans:`, a comment lists the
    date read and the page for each fact (`sources` only holds the pricing page). Flag inferences and conflicts
    between official pages there ("/pricing says 10, /free-vs-paid still says 5").
 3. **Checks:** `npm run data:validate`, `npm test` (search tests can move), `npm run lint`, `npm run format:check`,

@@ -8,6 +8,7 @@ import { featuresFileSchema } from './feature';
 import { slugSchema } from './formats';
 import type { CatalogFileKind } from './json-schema';
 import { featureNamedCategories, planCategories, providerCategories } from './plan-categories';
+import { planFeatures } from './provider-features';
 import { paidPlanCount, topicApplies } from './plan-policies';
 import { policySetSchema, type Policies, type PolicyRating, type PolicySet } from './policy';
 import {
@@ -32,8 +33,12 @@ import {
   type Reseller,
 } from './reseller';
 import {
+  awaitingRequiredFeatures,
   checkInclusionLoops,
   checkPlanFeatures,
+  checkPriceDifferences,
+  checkProviderFeatures,
+  checkRequiredFeatures,
   readFeatureRegistry,
   type FeatureRegistry,
 } from './validate-features';
@@ -108,6 +113,8 @@ export const awaitingPolicyRegrade: ReadonlySet<string> = new Set<string>();
 export interface ValidateOptions {
   /** Providers whose missing policy topics are warnings, not errors: awaitingPolicyRegrade unless a test says. */
   awaitingRegrade?: ReadonlySet<string>;
+  /** Plans whose missing required features are warnings: awaitingRequiredFeatures unless a test says. */
+  awaitingRequired?: ReadonlyMap<string, readonly string[]>;
 }
 
 /**
@@ -119,7 +126,10 @@ export interface ValidateOptions {
 export function validateCatalog(
   files: readonly CatalogSourceFile[],
   today: IsoDate,
-  { awaitingRegrade = awaitingPolicyRegrade }: ValidateOptions = {},
+  {
+    awaitingRegrade = awaitingPolicyRegrade,
+    awaitingRequired = awaitingRequiredFeatures,
+  }: ValidateOptions = {},
 ): CatalogIssue[] {
   const issues: CatalogIssue[] = [];
   const reportIn =
@@ -245,6 +255,7 @@ export function validateCatalog(
     resellersUnchecked: located.resellers !== undefined && resellers === undefined,
     policyTopics: policyTopics && new Map(policyTopics.map((topic) => [topic.id, topic])),
     awaitingRegrade,
+    awaitingRequired,
     policySets: new Map(policySets.map(({ value }) => [value.id, value])),
     policySetsUnchecked,
     raters: new Map(raters?.map((rater) => [rater.id, rater])),
@@ -558,6 +569,7 @@ interface CheckContext {
   /** data/policy-topics.yaml's, by id, or undefined when it's missing or broken: ratings' topics go unchecked. */
   policyTopics: ReadonlyMap<string, PolicyTopic> | undefined;
   awaitingRegrade: ReadonlySet<string>;
+  awaitingRequired: ReadonlyMap<string, readonly string[]>;
   /** data/policies/'s shared documents that parse, by id. */
   policySets: ReadonlyMap<string, PolicySet>;
   /** The ids of shared documents whose file is broken: what names them goes unchecked. */
@@ -605,6 +617,9 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
     }
   }
 
+  if (registry && provider.features) {
+    checkProviderFeatures(provider.features, { registry, ids, providerId: provider.id, report });
+  }
   const planIds = provider.plans.map((plan) => plan.id);
   const addOnIds = (provider.addOns ?? []).map((addOn) => addOn.id);
   const prices = new PriceChecks(context, report);
@@ -612,7 +627,12 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
   provider.plans.forEach((plan, index) => {
     const path = ['plans', index];
     if (registry) {
-      checkPlanFeatures(plan, path, { registry, ids, providerId: provider.id, report });
+      checkPlanFeatures(
+        plan,
+        path,
+        { registry, ids, providerId: provider.id, report },
+        provider.features,
+      );
     }
     plan.categories?.forEach((id, categoryIndex) => {
       if (serviceIds && !serviceIds.includes(id)) {
@@ -628,7 +648,20 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
         `${provider.category} is the provider's category already: leave categories out`,
       );
     }
-    if (registry) checkFeatureCategories(plan, provider, path, { registry, serviceIds, report });
+    if (registry) {
+      checkFeatureCategories(plan, provider, path, { registry, serviceIds, report });
+      checkRequiredFeatures(
+        plan,
+        planCategories(plan, provider),
+        planFeatures(plan, provider),
+        path,
+        {
+          registry,
+          awaiting: context.awaitingRequired,
+          report,
+        },
+      );
+    }
     plan.addOnIds?.forEach((id, addOnIndex) => {
       if (!addOnIds.includes(id)) {
         report(
@@ -649,6 +682,18 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
     });
     prices.check(plan.prices, [...path, 'prices'], isRetired(plan, provider, context.today));
   });
+
+  if (registry) {
+    checkPriceDifferences(
+      provider.plans.map((plan, index) => ({
+        plan,
+        features: planFeatures(plan, provider),
+        sold: !isRetired(plan, provider, context.today),
+        path: ['plans', index],
+      })),
+      report,
+    );
+  }
 
   const sold = new Set(provider.plans.flatMap((plan) => plan.addOnIds ?? []));
   provider.addOns?.forEach((addOn, index) => {

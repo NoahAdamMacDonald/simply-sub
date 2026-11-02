@@ -1,6 +1,7 @@
 import type { Categories } from './category';
 import { choices, didYouMean, idOf, listedMoreThanOnce } from './checks';
 import { featureSchema, type Feature, type FeatureValue } from './feature';
+import type { Price } from './price';
 import type { Plan } from './provider';
 import type { CatalogIds, CatalogIssuePath, Report } from './validate-catalog';
 
@@ -58,12 +59,30 @@ export function readFeatureRegistry(
   });
 
   const categoryIds = categories?.feature.map((category) => category.id);
+  const serviceIds = categories?.service.map((category) => category.id);
   const indexes = new Map(valid.map(({ feature, index }) => [feature.id, index]));
   for (const { feature, index } of valid) {
     if (categoryIds && !categoryIds.includes(feature.category)) {
       report(
         [index, 'category'],
         `"${feature.category}" isn't a feature category in data/categories.yaml${choices(feature.category, categoryIds)}`,
+      );
+    }
+    feature.requiredIn?.forEach((id, item) => {
+      const at = [index, 'requiredIn', item];
+      if (feature.requiredIn?.indexOf(id) !== item) {
+        report(at, listedMoreThanOnce(id));
+      } else if (serviceIds && !serviceIds.includes(id)) {
+        report(
+          at,
+          `"${id}" isn't a service category in data/categories.yaml${choices(id, serviceIds)}`,
+        );
+      }
+    });
+    if (feature.providerWide && feature.parent !== undefined) {
+      report(
+        [index, 'providerWide'],
+        `A provider-wide feature isn't in a group: a plan's ${feature.parent} decides its children, so leave out parent or providerWide`,
       );
     }
     const problem = parentProblem(feature, index, features, indexes, unchecked);
@@ -120,12 +139,59 @@ export interface PlanContext {
   report: Report;
 }
 
-/** Checks a plan's features and featureLabels against the registry. `path` is the plan's own. */
-export function checkPlanFeatures(plan: Plan, path: CatalogIssuePath, context: PlanContext): void {
+/**
+ * Checks a provider's own features (M11.4): only provider-wide features, each with a value of its type. Its plans'
+ * values are checked with each plan (checkPlanFeatures).
+ */
+export function checkProviderFeatures(features: Plan['features'], context: PlanContext): void {
+  const { registry, report } = context;
+  for (const [featureId, value] of Object.entries(features)) {
+    const at = ['features', featureId];
+    if (registry.unchecked.has(featureId)) {
+      continue;
+    }
+    const feature = registry.features.get(featureId);
+    if (!feature) {
+      report(
+        at,
+        `Not a feature in data/features.yaml${didYouMean(featureId, [...registry.features.keys()], 'add it there first')}`,
+      );
+    } else if (!feature.providerWide) {
+      report(
+        at,
+        `${featureId} isn't provider-wide in data/features.yaml: state it on each plan, even when every plan has the same value`,
+      );
+    } else {
+      checkValue(feature, value, at, undefined, context);
+    }
+  }
+}
+
+/**
+ * Checks a plan's features and featureLabels against the registry. `path` is the plan's own. A value its provider's
+ * features state already, the same, is left out.
+ */
+export function checkPlanFeatures(
+  plan: Plan,
+  path: CatalogIssuePath,
+  context: PlanContext,
+  providerFeatures: Plan['features'] = {},
+): void {
   const { registry, report } = context;
   for (const [featureId, value] of Object.entries(plan.features)) {
     const at = [...path, 'features', featureId];
     if (registry.unchecked.has(featureId)) {
+      continue;
+    }
+    if (
+      registry.features.get(featureId)?.providerWide === true &&
+      Object.hasOwn(providerFeatures, featureId) &&
+      sameValue(providerFeatures[featureId], value)
+    ) {
+      report(
+        at,
+        "Its provider's features say so already: leave it out, or give the value it differs by",
+      );
       continue;
     }
     const feature = registry.features.get(featureId);
@@ -136,7 +202,7 @@ export function checkPlanFeatures(plan: Plan, path: CatalogIssuePath, context: P
       );
       continue;
     }
-    checkValue(feature, value, at, plan, context);
+    checkValue(feature, value, at, plan.id, context);
     const { parent } = feature;
     if (
       parent !== undefined &&
@@ -158,7 +224,7 @@ function checkValue(
   feature: Feature,
   value: FeatureValue,
   path: CatalogIssuePath,
-  plan: Plan,
+  planId: string | undefined,
   context: PlanContext,
 ): void {
   const { report } = context;
@@ -196,7 +262,7 @@ function checkValue(
         const problem =
           value.indexOf(item) < index
             ? listedMoreThanOnce(item)
-            : setItemProblem(feature, item, plan, context);
+            : setItemProblem(feature, item, planId, context);
         if (problem) {
           report([...path, index], problem);
         }
@@ -212,7 +278,7 @@ function checkValue(
 function setItemProblem(
   feature: SetFeature,
   id: string,
-  plan: Plan,
+  planId: string | undefined,
   { ids, providerId }: PlanContext,
 ): string | undefined {
   if (feature.values) {
@@ -221,7 +287,7 @@ function setItemProblem(
       ? undefined
       : `"${id}" isn't a ${feature.id} value${choices(id, valueIds)}`;
   }
-  if (feature.id === includesSubscription && id === plan.id) {
+  if (feature.id === includesSubscription && id === planId) {
     return "A plan can't include itself";
   }
   if (feature.id === includesSubscription && id === providerId) {
@@ -241,6 +307,13 @@ function setItemProblem(
     case undefined:
       return `"${id}" isn't a provider or plan id${didYouMean(id, ids.all('provider', 'plan'))}`;
   }
+}
+
+/** Two values of one feature are the same, a set's in any order. */
+function sameValue(a: FeatureValue, b: FeatureValue): boolean {
+  return Array.isArray(a) && Array.isArray(b)
+    ? a.length === b.length && a.every((item) => b.includes(item))
+    : a === b;
 }
 
 /** A featureLabels key is a feature id, or a rank key whose value or tier exists (BLUEPRINT §4.2 rule 5). */
@@ -286,6 +359,128 @@ function labelProblem(key: string, registry: FeatureRegistry, ids: CatalogIds): 
         ? undefined
         : `"${option}" isn't a provider id${didYouMean(option, ids.all('provider'))}`;
   }
+}
+
+/**
+ * Plans whose required features no official page states yet, by plan id (M11.4): each named feature missing is a
+ * warning, not an error, until M11.9 reads them again. Their files' comments name the pages that were silent.
+ */
+export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = new Map([
+  ['espn.select', ['video.quality']],
+  ['ici-tou-tv.rdi', ['video.quality']],
+  ['rds.standard', ['video.quality']],
+  ['tsn.standard', ['video.quality']],
+  ['tsn.premium', ['video.quality']],
+]);
+
+/**
+ * Every plan in a category states the features required there (BLUEPRINT §4.2 rule 7, M11.4), `false` and `0`
+ * included, so the features buyers compare most never rest on "unlisted means no". `features` are the plan's own and
+ * its provider's. A plan in `awaiting` gets a warning for the features it names.
+ */
+export function checkRequiredFeatures(
+  plan: Plan,
+  categories: readonly string[],
+  features: Plan['features'],
+  path: CatalogIssuePath,
+  {
+    registry,
+    awaiting,
+    report,
+  }: {
+    registry: FeatureRegistry;
+    awaiting: ReadonlyMap<string, readonly string[]>;
+    report: Report;
+  },
+): void {
+  for (const feature of registry.features.values()) {
+    const required = [...new Set(feature.requiredIn)].filter((category) =>
+      categories.includes(category),
+    );
+    if (required.length === 0 || Object.hasOwn(features, feature.id)) {
+      continue;
+    }
+    const value =
+      feature.type === 'boolean'
+        ? 'true or false'
+        : feature.type === 'number'
+          ? 'its number, 0 included'
+          : feature.type === 'set'
+            ? 'its values, [] included'
+            : 'its value';
+    const waiting = awaiting.get(plan.id)?.includes(feature.id) === true;
+    report(
+      [...path, 'features'],
+      `Needs ${feature.id}, which every plan in ${required.join(' and ')} states (requiredIn): ${
+        waiting
+          ? 'no official page states it yet, so it waits for M11.9 (awaitingRequiredFeatures)'
+          : `give ${value}, from the provider's own pages`
+      }`,
+      waiting ? 'warning' : 'error',
+    );
+  }
+}
+
+/**
+ * Two of a provider's plans at different prices, for the same region, currency and period, must differ in a feature
+ * (BLUEPRINT §4.2 rule 8, M11.4): the optimizer compares only rank keys, so a tier whose extras are text has it
+ * suggest the cheaper plan every time (Xbox Game Pass, Claude before M11.9). A warning, once a pair, at the dearer
+ * plan, for plans and prices still sold. Unlisted means false, 0 or empty, so stating one changes nothing. Perks
+ * count once M11.6 gives them ids.
+ */
+export function checkPriceDifferences(
+  plans: readonly {
+    plan: Plan;
+    features: Plan['features'];
+    sold: boolean;
+    path: CatalogIssuePath;
+  }[],
+  report: Report,
+): void {
+  const sold = plans.filter((entry) => entry.sold);
+  sold.forEach((entry, index) => {
+    for (const other of sold.slice(0, index)) {
+      if (featureSignature(entry.features) !== featureSignature(other.features)) continue;
+      const pair = differentPrice(entry.plan.prices, other.plan.prices);
+      if (!pair) continue;
+      const [dearer, cheaper] = pair[0].amount > pair[1].amount ? [entry, other] : [other, entry];
+      const [high, low] = pair[0].amount > pair[1].amount ? pair : [pair[1], pair[0]];
+      report(
+        [...dearer.path, 'features'],
+        `Costs more than ${cheaper.plan.id} (${high.amount} against ${low.amount} ${high.currency} ${periodText(high)} in ${high.region}) with the same features: give what the price pays for a feature, or the optimizer always suggests ${cheaper.plan.id}`,
+        'warning',
+      );
+    }
+  });
+}
+
+/** A plan's features with what unlisted means left out (false, 0, []), in a fixed order, sets sorted. */
+function featureSignature(features: Plan['features']): string {
+  const stated = Object.entries(features)
+    .filter(
+      ([, value]) =>
+        value !== false && value !== 0 && !(Array.isArray(value) && value.length === 0),
+    )
+    .map(([id, value]) => [id, Array.isArray(value) ? [...value].sort() : value] as const)
+    .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0));
+  return JSON.stringify(stated);
+}
+
+/** The first prices of the two lists still sold for the same region, currency and period, at different amounts. */
+function differentPrice(a: readonly Price[], b: readonly Price[]): [Price, Price] | undefined {
+  const key = (price: Price) =>
+    `${price.region} ${price.currency} ${price.intervalCount} ${price.interval}`;
+  const sold = (prices: readonly Price[]) => prices.filter((price) => price.retired === undefined);
+  const others = new Map(sold(b).map((price) => [key(price), price]));
+  for (const price of sold(a)) {
+    const other = others.get(key(price));
+    if (other && other.amount !== price.amount) return [price, other];
+  }
+  return undefined;
+}
+
+function periodText({ interval, intervalCount }: Price): string {
+  return intervalCount === 1 ? `a ${interval}` : `every ${intervalCount} ${interval}s`;
 }
 
 /**

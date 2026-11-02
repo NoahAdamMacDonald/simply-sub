@@ -38,11 +38,16 @@ notes: >-
 # Read 2026-10-26 on tsn.ca/subscribe: Standard is sold monthly only (the 3 Months and Annual tabs show Premium
 # alone), and "Everything in TSN Standard, plus" Premium's extras. Two streams at a time on every plan
 # (tsn.ca/help/faq/#concurrency). TSN's bundles with Crave and RDS are in data/bundles.
+# Read 2026-11-02 (M11.4, the required streaming features): neither tsn.ca/subscribe nor the FAQ says
+# anything of ads or video quality. Its live channels carry their broadcasts, so not ad free, inferred (the guide's
+# §2.2 rule 5: a required boolean no page states is false); the video quality waits for M11.9
+# (awaitingRequiredFeatures in core).
 plans:
   - id: tsn.standard
     name: Standard
     link: https://www.tsn.ca/subscribe/
     features:
+      ad-free: false
       streaming.live: [tv-channels, sports]
       streaming.concurrent-streams: 2
     perks: [TSN 1–5 live channels, Multiviewing up to 6 games at once]
@@ -60,6 +65,7 @@ plans:
     name: Premium
     link: https://www.tsn.ca/subscribe/
     features:
+      ad-free: false
       streaming.live: [tv-channels, sports]
       streaming.concurrent-streams: 2
     perks:

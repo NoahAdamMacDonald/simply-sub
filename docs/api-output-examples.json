@@ -102,7 +102,8 @@
                       { "id": "1080p", "name": "1080p (Full HD)", "headline": true },
                       { "id": "4k", "name": "4K (Ultra HD)", "aliases": ["uhd", "2160p"], "headline": true }
                     ],
-                    "aliases": ["resolution", "picture quality"]
+                    "aliases": ["resolution", "picture quality"],
+                    "requiredIn": ["streaming"]
                   },
                   {
                     "id": "video.hdr",
@@ -119,11 +120,12 @@
                     "aliases": ["spatial audio"]
                   },
                   {
-                    "id": "streaming.ad-free",
+                    "id": "ad-free",
                     "name": "Ad free",
-                    "category": "streaming",
+                    "category": "general",
                     "type": "boolean",
-                    "aliases": ["no ads", "ad-free"]
+                    "aliases": ["no ads", "ad free", "without ads"],
+                    "requiredIn": ["streaming"]
                   },
                   {
                     "id": "streaming.concurrent-streams",
@@ -136,7 +138,8 @@
                       { "id": "2-4", "name": "2 to 4 devices", "min": 2, "max": 4 },
                       { "id": "5+", "name": "More than 4 devices", "min": 5 }
                     ],
-                    "aliases": ["screens", "streams", "devices at once"]
+                    "aliases": ["screens", "streams", "devices at once"],
+                    "requiredIn": ["streaming"]
                   },
                   {
                     "id": "streaming.download-devices",
@@ -236,7 +239,7 @@
                         "features": {
                           "video.quality": "1080p",
                           "video.hdr": false,
-                          "streaming.ad-free": false,
+                          "ad-free": false,
                           "streaming.concurrent-streams": 2,
                           "streaming.download-devices": 2
                         },
@@ -252,7 +255,7 @@
                         "features": {
                           "video.quality": "1080p",
                           "video.hdr": false,
-                          "streaming.ad-free": true,
+                          "ad-free": true,
                           "streaming.concurrent-streams": 2,
                           "streaming.download-devices": 2
                         },
@@ -271,7 +274,7 @@
                           "video.quality": "4k",
                           "video.hdr": true,
                           "audio.dolby-atmos": true,
-                          "streaming.ad-free": true,
+                          "ad-free": true,
                           "streaming.concurrent-streams": 4,
                           "streaming.download-devices": 6
                         },
@@ -414,7 +417,8 @@
                       { "id": "1080p", "name": "1080p (Full HD)", "headline": true },
                       { "id": "4k", "name": "4K (Ultra HD)", "aliases": ["uhd", "2160p"], "headline": true }
                     ],
-                    "aliases": ["resolution", "picture quality"]
+                    "aliases": ["resolution", "picture quality"],
+                    "requiredIn": ["streaming"]
                   },
                   {
                     "id": "video.hdr",
@@ -431,11 +435,12 @@
                     "aliases": ["spatial audio"]
                   },
                   {
-                    "id": "streaming.ad-free",
+                    "id": "ad-free",
                     "name": "Ad free",
-                    "category": "streaming",
+                    "category": "general",
                     "type": "boolean",
-                    "aliases": ["no ads", "ad-free"]
+                    "aliases": ["no ads", "ad free", "without ads"],
+                    "requiredIn": ["streaming"]
                   },
                   {
                     "id": "streaming.concurrent-streams",
@@ -448,7 +453,8 @@
                       { "id": "2-4", "name": "2 to 4 devices", "min": 2, "max": 4 },
                       { "id": "5+", "name": "More than 4 devices", "min": 5 }
                     ],
-                    "aliases": ["screens", "streams", "devices at once"]
+                    "aliases": ["screens", "streams", "devices at once"],
+                    "requiredIn": ["streaming"]
                   },
                   {
                     "id": "streaming.download-devices",
@@ -548,7 +554,7 @@
                         "features": {
                           "video.quality": "1080p",
                           "video.hdr": false,
-                          "streaming.ad-free": false,
+                          "ad-free": false,
                           "streaming.concurrent-streams": 2,
                           "streaming.download-devices": 2
                         },
@@ -563,7 +569,7 @@
                         "features": {
                           "video.quality": "1080p",
                           "video.hdr": false,
-                          "streaming.ad-free": true,
+                          "ad-free": true,
                           "streaming.concurrent-streams": 2,
                           "streaming.download-devices": 2
                         },
@@ -581,7 +587,7 @@
                           "video.quality": "4k",
                           "video.hdr": true,
                           "audio.dolby-atmos": true,
-                          "streaming.ad-free": true,
+                          "ad-free": true,
                           "streaming.concurrent-streams": 4,
                           "streaming.download-devices": 6
                         },
@@ -762,7 +768,8 @@
                     { "id": "1080p", "name": "1080p (Full HD)", "headline": true },
                     { "id": "4k", "name": "4K (Ultra HD)", "aliases": ["uhd", "2160p"], "headline": true }
                   ],
-                  "aliases": ["resolution", "picture quality"]
+                  "aliases": ["resolution", "picture quality"],
+                  "requiredIn": ["streaming"]
                 },
                 {
                   "id": "video.hdr",
@@ -779,11 +786,12 @@
                   "aliases": ["spatial audio"]
                 },
                 {
-                  "id": "streaming.ad-free",
+                  "id": "ad-free",
                   "name": "Ad free",
-                  "category": "streaming",
+                  "category": "general",
                   "type": "boolean",
-                  "aliases": ["no ads", "ad-free"]
+                  "aliases": ["no ads", "ad free", "without ads"],
+                  "requiredIn": ["streaming"]
                 },
                 {
                   "id": "streaming.concurrent-streams",
@@ -796,7 +804,8 @@
                     { "id": "2-4", "name": "2 to 4 devices", "min": 2, "max": 4 },
                     { "id": "5+", "name": "More than 4 devices", "min": 5 }
                   ],
-                  "aliases": ["screens", "streams", "devices at once"]
+                  "aliases": ["screens", "streams", "devices at once"],
+                  "requiredIn": ["streaming"]
                 },
                 {
                   "id": "streaming.download-devices",
@@ -1123,7 +1132,7 @@
       "query": {
         "q": "Free text, 1 to 100 characters, matched term by term regardless of case, accents and extra spaces, and every term must match ('netflix 4k' is Netflix's 4k plans). A term is the longest run of words that a rank key's, feature's or service category's name or alias contains ('ultra hd'), else one word, and one whose last word looks plural also matches its singular ('vpns'). A term matches provider names and aliases, plan names, service category names, and rank-key names and aliases: a boolean feature's own name, else an enum value's, tier's or set value's ('4k' and 'uhd' mean video.quality=4k). One that names no rank key also matches a feature's own name and aliases ('video quality'), and counts with the highest value or tier each plan provides of it. Relevance, best first, is the best term's: a provider name that starts with it, one that contains it, an alias, a plan name, then a feature or category. Each term picks plans: a category it names brings the plans in it; rank keys it names bring the plans that provide one, when any does, and the plans it names; otherwise a provider matched by name or alias brings every plan, and plan names those plans. The plans every term picks are listed.",
         "category": "Service category id, e.g. 'vpn'. A plan must be in it: its own categories, else its provider's category (Proton VPN Plus is a VPN, though Proton is a privacy suite), and the provider is found by any of its plans' categories. Another id gets 400.",
-        "feature": "Comma-separated rank keys, at most 10, in one parameter. A plan must provide all of them (PROJECT-PLAN.md §3.2). Example: video.quality=4k,streaming.ad-free. A key that isn't in the registry gets 400.",
+        "feature": "Comma-separated rank keys, at most 10, in one parameter. A plan must provide all of them (PROJECT-PLAN.md §3.2). Example: video.quality=4k,ad-free. A key that isn't in the registry gets 400.",
         "minPrice": "Minimum monthly equivalent, in 'currency': the plan's lowest picked price (of 'interval', when given), compared to the cent. Needs region.",
         "maxPrice": "Maximum monthly equivalent, in 'currency', compared the same way. Needs region, and minPrice above it gets 400.",
         "interval": "Only plans that offer this interval: day | week | month | year. With a region it's among the picked prices, and bestMonthlyEquivalent counts only that interval.",
@@ -1437,7 +1446,7 @@
                     "features": {
                       "video.quality": "1080p",
                       "video.hdr": false,
-                      "streaming.ad-free": false,
+                      "ad-free": false,
                       "streaming.concurrent-streams": 2,
                       "streaming.download-devices": 2
                     },
@@ -1456,7 +1465,7 @@
                     "features": {
                       "video.quality": "1080p",
                       "video.hdr": false,
-                      "streaming.ad-free": true,
+                      "ad-free": true,
                       "streaming.concurrent-streams": 2,
                       "streaming.download-devices": 2
                     },
@@ -1478,7 +1487,7 @@
                       "video.quality": "4k",
                       "video.hdr": true,
                       "audio.dolby-atmos": true,
-                      "streaming.ad-free": true,
+                      "ad-free": true,
                       "streaming.concurrent-streams": 4,
                       "streaming.download-devices": 6
                     },
@@ -1816,7 +1825,7 @@
                   "video.quality": "4k",
                   "video.hdr": true,
                   "audio.dolby-atmos": true,
-                  "streaming.ad-free": true,
+                  "ad-free": true,
                   "streaming.concurrent-streams": 4,
                   "streaming.download-devices": 10
                 },
@@ -1827,11 +1836,11 @@
                   "video.quality=4k",
                   "video.hdr",
                   "audio.dolby-atmos",
-                  "streaming.ad-free",
                   "streaming.concurrent-streams=1",
                   "streaming.concurrent-streams=2-4",
                   "streaming.download-devices=1+",
-                  "streaming.download-devices=6+"
+                  "streaming.download-devices=6+",
+                  "ad-free"
                 ],
                 "prices": [
                   { "region": "CA", "currency": "CAD", "amount": 16.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14", "sourceUrl": "https://www.disneyplus.com/en-ca" },
@@ -1970,7 +1979,7 @@
                     "video.quality": "4k",
                     "video.hdr": true,
                     "audio.dolby-atmos": true,
-                    "streaming.ad-free": true,
+                    "ad-free": true,
                     "streaming.concurrent-streams": 4,
                     "streaming.download-devices": 10
                   },

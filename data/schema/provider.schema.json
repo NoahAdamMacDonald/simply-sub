@@ -216,6 +216,35 @@
       "patternErrorMessage": "Use a real date written YYYY-MM-DD",
       "description": "The day it ends for its current subscribers too, when it says so: needs retired. Items on its plans count until then"
     },
+    "features": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
+        "patternErrorMessage": "Use kebab-case segments joined by dots (video.quality, password-manager.item-types)"
+      },
+      "additionalProperties": {
+        "anyOf": [
+          { "type": "boolean" },
+          { "type": "number", "minimum": 0 },
+          { "type": "string", "const": "unlimited" },
+          {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
+              "patternErrorMessage": "Use kebab-case segments joined by dots (video.quality, password-manager.item-types)"
+            }
+          }
+        ]
+      },
+      "description": "Provider-wide feature id → value (M11.4): only features.yaml's providerWide ones (platforms, sign-in, languages, support), which every plan has unless it states its own"
+    },
     "plans": {
       "minItems": 1,
       "type": "array",

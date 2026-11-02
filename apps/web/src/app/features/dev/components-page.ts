@@ -127,7 +127,7 @@ const summaryRows: FeatureSummaryRow[] = [
 
 /** Ranks for the feature list, as if the user had set them. */
 const exampleRanks: Partial<Record<RankKey, Rank>> = {
-  'streaming.ad-free': 'essential',
+  'ad-free': 'essential',
   'video.quality=1080p': 'wanted',
   'video.quality=4k': 'uses',
   'streaming.concurrent-streams=2-4': 'needed',

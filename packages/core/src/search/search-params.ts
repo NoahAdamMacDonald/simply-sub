@@ -1,3 +1,4 @@
+import { rankKeyRedirects, redirectedRankKey } from '../catalog/redirects';
 import type { CatalogData } from '../catalog/snapshot';
 import { rankKeyOptions } from '../ranking/rank-keys';
 import type { SubscriptionList } from '../user/subscription-list';
@@ -57,7 +58,8 @@ export function searchText(text: string): string {
 }
 
 /**
- * The query in `params`, keeping what's valid in `catalog`: its service categories and rank keys. A repeated list
+ * The query in `params`, keeping what's valid in `catalog`: its service categories and rank keys, an old key read as
+ * the one it was redirected to (data/redirects.yaml). A repeated list
  * (f, act) keeps every value, and any other repeated parameter its first. A minimum of 0 is no minimum, and a minimum
  * above the maximum drops both. Sold in is on with sold=1, off with sold=0, and else as `defaults` say. An addTo is
  * kept only when it names one of `lists`: the user's lists that aren't deleted, and new lists' drafts
@@ -65,7 +67,7 @@ export function searchText(text: string): string {
  */
 export function readSearchParams(
   params: QueryParams,
-  catalog: Pick<CatalogData, 'features' | 'categories' | 'providers'>,
+  catalog: Pick<CatalogData, 'features' | 'categories' | 'providers' | 'redirects'>,
   defaults: SearchDefaults = {},
   lists: readonly Pick<SubscriptionList, 'id'>[] = [],
 ): SearchQuery {
@@ -84,7 +86,11 @@ export function readSearchParams(
   const categories = catalog.categories.service.map((category) => category.id);
   const category = categories.find((id) => id === one('cat'));
   const keys = new Set(catalog.features.flatMap(rankKeyOptions).map((option) => option.key));
-  const features = [...new Set(list('f'))].filter((key) => keys.has(key));
+  // A renamed feature's old key reads as its new one (M11.4: f=streaming.ad-free is ad-free).
+  const moves = rankKeyRedirects(catalog.redirects);
+  const features = [...new Set(list('f').map((key) => redirectedRankKey(moves, key)))].filter(
+    (key) => keys.has(key),
+  );
   const activity = activityParams
     .filter(([, param]) => list('act').includes(param))
     .map(([filter]) => filter);
