@@ -99,24 +99,11 @@ const staleAfterDays = 90;
 const policyStaleAfterDays = 365;
 
 /**
- * Providers rated before policy topics v2 (M11.1), whose missing topics are warnings until M11.9 regrades them under
- * the new rules and empties this list. Every other provider rates, or gives a status for, each topic that applies.
+ * Providers rated before policy topics v2 (M11.1), whose missing topics were warnings until they were regraded under
+ * the new rules. Empty since 2026-11-02, when the owner asked for every topic to be required and the 13 were rated on
+ * all of them: every provider rates, or gives a status for, each topic that applies. M11.9 still regrades them.
  */
-export const awaitingPolicyRegrade: ReadonlySet<string> = new Set([
-  'bitdefender',
-  'claude',
-  'crave',
-  'disney-plus',
-  'espn',
-  'hulu',
-  'ici-tou-tv',
-  'mullvad',
-  'netflix',
-  'proton',
-  'rds',
-  'tsn',
-  'xbox-game-pass',
-]);
+export const awaitingPolicyRegrade: ReadonlySet<string> = new Set<string>();
 
 export interface ValidateOptions {
   /** Providers whose missing policy topics are warnings, not errors: awaitingPolicyRegrade unless a test says. */

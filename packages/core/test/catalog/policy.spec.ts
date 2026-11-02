@@ -115,12 +115,15 @@ function withPolicies(policies: unknown = mullvadPolicies): CatalogSourceFile[] 
   ];
 }
 
+/** The test catalog's providers, which rate only a few topics: their missing ones are warnings here. */
+const partlyRated: ReadonlySet<string> = new Set(['crave', 'mullvad', 'netflix', 'proton']);
+
 /**
- * Every issue, as data:validate prints it, but the missing topics of the test catalog's providers, which share ids with
- * the 13 waiting for M11.9 (`coverage` checks those).
+ * Every issue, as data:validate prints it, but the missing topics of the test catalog's providers, which rate only a
+ * few (`coverage` checks those).
  */
 function messages(files: readonly CatalogSourceFile[], on = today): string[] {
-  return validateCatalog(files, on)
+  return validateCatalog(files, on, { awaitingRegrade: partlyRated })
     .filter((issue) => !issue.message.startsWith('Waiting for M11.9’s regrade'))
     .map(
       (issue) => `${issue.severity === 'warning' ? 'warning: ' : ''}${formatCatalogIssue(issue)}`,
