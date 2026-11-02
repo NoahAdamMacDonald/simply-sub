@@ -1,0 +1,68 @@
+# A shared policy document (BLUEPRINT §4.10): the Bell Privacy Policy (effective August 2, 2021), which covers the
+# Bell family of companies, Bell Media among them, so Crave, TSN and RDS. Rated once here; each names it in its
+# policies' shared and rates its own terms. Read 2026-11-02 (M11.9's topics, pulled forward at the owner's request)
+# from the PDF bell.ca/privacy offers ("Download the Privacy Policy").
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: bell-privacy
+name: The Bell Privacy Policy
+links:
+  - name: 'Bell Privacy Policy (PDF)'
+    url: https://support.bell.ca/_web/guides/Common/Legal/Bell_Privacy_Policy_Final.pdf
+  - name: 'Commitment to privacy'
+    url: https://www.bell.ca/Security_and_privacy/Commitment_to_privacy
+ratings:
+  - topic: privacy.data-collection
+    tier: poor
+    reason: 'It studies how you use its services to market to you and improve them. You can stop its marketing emails and texts, but it only lets you withdraw consent for data it doesn’t need.'
+    sources:
+      - url: https://support.bell.ca/_web/guides/Common/Legal/Bell_Privacy_Policy_Final.pdf
+        quote: 'We use market leading data analytics technologies to help us inform and improve the uses described above.'
+      - url: https://support.bell.ca/_web/guides/Common/Legal/Bell_Privacy_Policy_Final.pdf
+        quote: 'If your Personal Information isn’t necessarily required to provide the product or service, you may also be able to withdraw your consent.'
+    action:
+      name: Change which emails and texts Bell sends you
+      url: https://www.bell.ca/email-updates
+    lastVerified: 2026-11-02
+  - topic: privacy.ai-training
+    status: not-stated
+    reason: 'Its privacy policy doesn’t say whether what you write or upload trains AI.'
+    pages: [https://support.bell.ca/_web/guides/Common/Legal/Bell_Privacy_Policy_Final.pdf]
+    lastVerified: 2026-11-02
+  - topic: privacy.data-retention
+    tier: poor
+    reason: 'It keeps your information as long as it decides it needs it, even after you leave, and gives no time limits.'
+    sources:
+      - url: https://support.bell.ca/_web/guides/Common/Legal/Bell_Privacy_Policy_Final.pdf
+        quote: 'We may keep certain Personal Information for an extended period of time even when you are no longer our customer'
+    lastVerified: 2026-11-02
+  - topic: privacy.data-deletion
+    status: not-stated
+    reason: 'Its privacy policy explains how to see and correct your information, but not how to have it deleted.'
+    pages: [https://support.bell.ca/_web/guides/Common/Legal/Bell_Privacy_Policy_Final.pdf]
+    lastVerified: 2026-11-02
+  - topic: privacy.data-portability
+    tier: neutral
+    reason: 'You can ask in writing to see the information it keeps about you, and it may charge a small fee.'
+    sources:
+      - url: https://support.bell.ca/_web/guides/Common/Legal/Bell_Privacy_Policy_Final.pdf
+        quote: 'You can review the Personal Information in your file, subject to certain restrictions and exceptions (a reasonable fee may apply), within a reasonable time after receiving a request in writing from you.'
+      - url: https://www.bell.ca/Security_and_privacy/Commitment_to_privacy
+        quote: 'We will provide you with access to the personal information we hold about you upon written request, unless restricted by law.'
+    action:
+      name: Contact Bell’s privacy office
+      url: https://www.bell.ca/privacy
+    lastVerified: 2026-11-02
+  - topic: privacy.government-requests
+    tier: poor
+    reason: 'Besides court orders, it may give your information to a government office to check who you are or look into a broken law, without a court asking.'
+    sources:
+      - url: https://support.bell.ca/_web/guides/Common/Legal/Bell_Privacy_Policy_Final.pdf
+        quote: 'to a government institution or another organization if reasonably necessary to establish your identity, or to investigate the contravention of a law or an agreement'
+    lastVerified: 2026-11-02
+  - topic: privacy.data-location
+    tier: neutral
+    reason: 'Its helpers outside Canada may handle your information, with protections it says meet Canadian standards, but other countries’ laws may then apply.'
+    sources:
+      - url: https://support.bell.ca/_web/guides/Common/Legal/Bell_Privacy_Policy_Final.pdf
+        quote: 'Yes, sometimes your Personal Information is provided to our suppliers and agents who operate outside of Canada, in accordance with safeguards that meet Canadian standards.'
+    lastVerified: 2026-11-02

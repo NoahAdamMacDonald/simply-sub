@@ -14,6 +14,14 @@ availableIn: [CA]
 cancelUrl: https://plus.crave.ca/en/faq/plans-billing-bundles/canceling-or-pausing-my-crave-subscription/
 sources: { pricing: https://www.crave.ca/en/subscribe }
 # Owner (M11.2), read 2026-11-02: no about page says so; its terms do.
+# Ways to pay (M11.5), read 2026-11-02 in its terms: a card, or through an in-app purchase.
+paymentMethods:
+  - methods: [card, app-store]
+    page: 'Crave terms and conditions'
+    url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+    quotes:
+      - 'provide payment method information, such as your credit card number and billing address'
+      - 'If you subscribe or otherwise have entitlements to the Service through an authorized third party distributor of the Service (such as an authorized content provider, in-app purchase platform, or bundle distributor)'
 owner:
   name: Bell Media Inc.
   page:
@@ -101,11 +109,14 @@ addOns:
 # collects and uses data, which Crave's FAQ links. Not rated: data collection and deletion (that page doesn't
 # say), free trials, account sharing and device limits.
 policies:
+  shared: [bell-privacy]
   links:
     - name: 'Bell Media terms'
       url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
     - name: "Bell's use of data"
       url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+    - name: 'Crave terms and conditions'
+      url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
   ratings:
     - topic: privacy.data-sharing
       tier: good
@@ -176,3 +187,73 @@ policies:
         - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
           quote: 'All Fees are non-refundable.'
       lastVerified: 2026-10-27
+    # M11.9's topics, pulled forward at the owner's request (2026-11-02), read that day.
+    - topic: privacy.sign-up-data
+      tier: poor
+      reason: 'To sign up you must give it your phone number as well as an email address and payment details.'
+      sources:
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'During the registration process for an account with us, you will be asked to provide an email address and phone number, choose a password, provide payment method information, such as your credit card number and billing address, as well as other information.'
+      lastVerified: 2026-11-02
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be an adult to subscribe, and it may give you parental controls, but its terms make you responsible for what kids watch and say nothing about their data.'
+      sources:
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'You must be the age of majority in the Canadian province or territory in which you reside in order to subscribe to, register for, access or otherwise use the Service.'
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'We may offer tools that are intended to assist you in controlling the Content a minor may view through your registered account, such as parental controls.'
+      lastVerified: 2026-11-02
+    - topic: billing.free-trials
+      status: not-stated
+      reason: 'Its terms describe promotions such as gift codes, but no free trial.'
+      pages: [https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/]
+      lastVerified: 2026-11-02
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say yearly plans renew on their own, but not that it reminds you first.'
+      pages: [https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/]
+      lastVerified: 2026-11-02
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms list no fees beyond the price and taxes.'
+      pages: [https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/]
+      lastVerified: 2026-11-02
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'If you move up to a bigger plan, you pay only the difference for the rest of the month.'
+      sources:
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'The recurring amount charged may vary for reasons that may include differing amounts due to applicable Promotions or if you choose to upgrade your subscription and are charged on a prorated basis for a partial billing period.'
+      lastVerified: 2026-11-02
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change the service and what your plan includes at any time, and says it owes you nothing when it does.'
+      sources:
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'we reserve the right, in our sole and absolute discretion, to modify all or any portion of these Terms and Conditions, the Service, and your subscription including the Subscription Fees, at any time'
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'we may impose limits on certain features and functions or restrict your access to parts or all of the Software or the Service without notice or liability;'
+      lastVerified: 2026-11-02
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/]
+      lastVerified: 2026-11-02
+    - topic: security.practices
+      status: not-stated
+      reason: 'Its terms say nothing about outside security checks or how to report a security problem, and neither does Bell’s privacy policy.'
+      pages: [https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/]
+      lastVerified: 2026-11-02
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its terms make you responsible for anyone who uses your account, but don’t say who that can be.'
+      pages: [https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/]
+      lastVerified: 2026-11-02
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'It can limit how many shows you download, on how many devices, and for how long you can watch them.'
+      sources:
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'For example, such limitations may include restrictions on the number of Offline Titles per account, the maximum number of devices that can contain Offline Titles, the time period within which you will need to begin viewing Offline Titles, the number of times Offline Titles may be viewed, and how long the Offline Titles will remain accessible.'
+      lastVerified: 2026-11-02
