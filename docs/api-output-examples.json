@@ -1058,14 +1058,32 @@
                   { "id": "streaming", "name": "Streaming video", "icon": "live_tv" },
                   { "id": "music", "name": "Music & audio", "icon": "music_note" },
                   { "id": "vpn", "name": "VPN", "icon": "vpn_lock" },
-                  { "id": "privacy-suite", "name": "Privacy & security suites", "icon": "shield" },
+                  { "id": "privacy-suite", "name": "Privacy suites", "icon": "shield" },
+                  { "id": "security", "name": "Antivirus & device security", "icon": "gpp_good" },
+                  { "id": "passwords", "name": "Password managers & authenticators", "icon": "password" },
+                  { "id": "email", "name": "Email", "icon": "mail" },
+                  { "id": "calendar", "name": "Calendars", "icon": "calendar_month" },
                   { "id": "storage", "name": "Cloud storage", "icon": "cloud" },
+                  { "id": "file-sharing", "name": "File sharing", "icon": "share" },
                   { "id": "ai", "name": "AI assistants", "icon": "smart_toy" },
                   { "id": "gaming", "name": "Gaming", "icon": "sports_esports" },
                   { "id": "software", "name": "Software & apps", "icon": "apps" },
+                  { "id": "creative", "name": "Creative & design", "icon": "palette" },
+                  { "id": "developer", "name": "Developer tools", "icon": "code" },
+                  { "id": "cloud", "name": "Cloud hosting & servers", "icon": "host" },
+                  { "id": "browsers", "name": "Web browsers", "icon": "public" },
+                  { "id": "search", "name": "Search engines", "icon": "search" },
+                  { "id": "dns", "name": "DNS & content filtering", "icon": "dns" },
+                  { "id": "maps", "name": "Maps & transit", "icon": "map" },
+                  { "id": "social", "name": "Social media", "icon": "forum" },
                   { "id": "news", "name": "News & magazines", "icon": "newspaper" },
                   { "id": "fitness", "name": "Fitness & wellness", "icon": "fitness_center" },
-                  { "id": "education", "name": "Learning & education", "icon": "school" }
+                  { "id": "education", "name": "Learning & education", "icon": "school" },
+                  { "id": "jobs", "name": "Jobs & careers", "icon": "work" },
+                  { "id": "shopping", "name": "Shopping & memberships", "icon": "shopping_cart" },
+                  { "id": "delivery", "name": "Food delivery & rides", "icon": "delivery_dining" },
+                  { "id": "telecom", "name": "Phone & internet", "icon": "cell_tower" },
+                  { "id": "finance", "name": "Banking & investing", "icon": "account_balance" }
                 ],
                 "feature": [
                   { "id": "streaming", "name": "Streaming" },
@@ -1086,7 +1104,10 @@
                   { "id": "news", "name": "News & magazines" },
                   { "id": "other", "name": "Other" },
                   { "id": "health", "name": "Health & fitness" },
-                  { "id": "education", "name": "Education & learning" }
+                  { "id": "education", "name": "Education & learning" },
+                  { "id": "shopping", "name": "Online shopping & memberships" },
+                  { "id": "delivery", "name": "Food delivery & rides" },
+                  { "id": "finance", "name": "Bank & account fees" }
                 ]
               },
               "meta": {
@@ -1548,7 +1569,7 @@
                     "id": "proton.free",
                     "name": "Proton Free",
                     "link": "https://proton.me/pricing",
-                    "categories": ["privacy-suite", "vpn", "storage"],
+                    "categories": ["privacy-suite", "vpn", "storage", "email", "passwords", "calendar", "ai"],
                     "features": {
                       "storage.cloud": 1,
                       "email.addresses": 1,
@@ -1596,6 +1617,7 @@
                     "name": "VPN Plus",
                     "link": "https://protonvpn.com/pricing",
                     "categories": ["vpn"],
+                    "notIn": ["passwords", "email", "calendar", "storage", "ai"],
                     "features": {
                       "vpn.included": true,
                       "vpn.devices": 10,
@@ -1614,7 +1636,7 @@
                     "id": "proton.unlimited",
                     "name": "Proton Unlimited",
                     "link": "https://proton.me/pricing",
-                    "categories": ["privacy-suite", "vpn", "storage"],
+                    "categories": ["privacy-suite", "vpn", "storage", "email", "passwords", "calendar", "ai"],
                     "features": {
                       "storage.cloud": 500,
                       "email.addresses": 15,
@@ -1647,7 +1669,7 @@
                     "id": "proton.duo",
                     "name": "Proton Duo",
                     "link": "https://proton.me/family",
-                    "categories": ["privacy-suite", "vpn", "storage"],
+                    "categories": ["privacy-suite", "vpn", "storage", "email", "passwords", "calendar", "ai"],
                     "features": {
                       "account.users": 2,
                       "storage.cloud": 2000,

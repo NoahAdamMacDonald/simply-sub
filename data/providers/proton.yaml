@@ -54,19 +54,28 @@ notes: >-
 # plans they replace (BLUEPRINT §4.4). Prices are the regular ones, not first-term offers. Proton sells every paid
 # plan in USD, CAD, EUR and CHF: a buyer pays in the currency they pick, and billingCurrency covers everyone else.
 #
-# Categories (M1.10): VPN Plus is a VPN and Drive Plus cloud storage; Free and the suites have both, as Proton VPN
-# and Proton Drive. Mail Plus and Pass Plus stay privacy-suite, Proton's own, until there are Email and Password
-# manager categories.
+# Categories (M1.10, M11.3): a plan lists every category it fits. Free and the suites are all of Proton's products:
+# Proton VPN, Drive, Mail, Pass, Calendar and Lumo, its AI assistant. Each single product is its own category, and
+# its notIn names the free tiers that come with every Proton account (Proton VPN Free, Pass, Mail, Calendar, 5 GB of
+# Drive and Lumo Free) but aren't what it's sold as.
+#
+# Lumo (ai.assistant), read 2026-11-02 (M11.3): every plan has Lumo's free version, and Lumo Plus is an add-on (its
+# own price list, https://proton.me/lumo/pricing, not stored yet). /support/proton-plans: Unlimited "You can also
+# enjoy access to the free version of Proton Lumo, your private AI assistant"; Duo "Also includes the free version of
+# Proton Lumo"; and a "Proton Lumo Free" list under Free, Mail Plus and Family. /support/lumo-getting-started: "Yes,
+# you can use Lumo for free with guest access or signed into a Proton Account." Proton Scribe is an "Add-on with free
+# trial" on Unlimited in /pricing's table, and included in Duo and Family (their perks).
 plans:
   - id: proton.free
     name: Proton Free
     link: https://proton.me/pricing
-    categories: [privacy-suite, vpn, storage]
+    categories: [privacy-suite, vpn, storage, email, passwords, calendar, ai]
     features:
       storage.cloud: 5
       email.addresses: 1
       email.aliases: 10
       calendar.included: true
+      ai.assistant: true
       vpn.included: true
       vpn.devices: 1
       vpn.unlimited-traffic: true
@@ -95,12 +104,15 @@ plans:
   - id: proton.mail-plus
     name: Mail Plus
     link: https://proton.me/mail/pricing
+    categories: [email, calendar]
+    notIn: [vpn, passwords, storage, ai]
     features:
       storage.cloud: 15
       email.addresses: 10
       email.custom-domains: 1
       email.aliases: 10
       calendar.included: true
+      ai.assistant: true
       vpn.included: true
       vpn.devices: 1
       vpn.unlimited-traffic: true
@@ -185,11 +197,13 @@ plans:
     name: Drive Plus
     link: https://proton.me/drive/pricing
     categories: [storage]
+    notIn: [vpn, passwords, email, calendar, ai]
     features:
       storage.cloud: 200
       email.addresses: 1
       email.aliases: 10
       calendar.included: true
+      ai.assistant: true
       vpn.included: true
       vpn.devices: 1
       vpn.unlimited-traffic: true
@@ -274,11 +288,13 @@ plans:
     name: VPN Plus
     link: https://protonvpn.com/pricing
     categories: [vpn]
+    notIn: [passwords, email, calendar, storage, ai]
     features:
       storage.cloud: 5
       email.addresses: 1
       email.aliases: 10
       calendar.included: true
+      ai.assistant: true
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
@@ -368,11 +384,14 @@ plans:
   - id: proton.pass-plus
     name: Pass Plus
     link: https://proton.me/pass/pricing
+    categories: [passwords]
+    notIn: [vpn, email, calendar, storage, ai]
     features:
       storage.cloud: 5
       email.addresses: 1
       email.aliases: unlimited
       calendar.included: true
+      ai.assistant: true
       vpn.included: true
       vpn.devices: 1
       vpn.unlimited-traffic: true
@@ -481,13 +500,14 @@ plans:
   - id: proton.unlimited
     name: Proton Unlimited
     link: https://proton.me/pricing
-    categories: [privacy-suite, vpn, storage]
+    categories: [privacy-suite, vpn, storage, email, passwords, calendar, ai]
     features:
       storage.cloud: 500
       email.addresses: 15
       email.custom-domains: 3
       email.aliases: unlimited
       calendar.included: true
+      ai.assistant: true
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
@@ -605,7 +625,7 @@ plans:
   - id: proton.duo
     name: Proton Duo
     link: https://proton.me/family
-    categories: [privacy-suite, vpn, storage]
+    categories: [privacy-suite, vpn, storage, email, passwords, calendar, ai]
     features:
       account.users: 2
       storage.cloud: 2000
@@ -613,6 +633,7 @@ plans:
       email.custom-domains: 3
       email.aliases: unlimited
       calendar.included: true
+      ai.assistant: true
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
@@ -730,7 +751,7 @@ plans:
   - id: proton.family
     name: Proton Family
     link: https://proton.me/family
-    categories: [privacy-suite, vpn, storage]
+    categories: [privacy-suite, vpn, storage, email, passwords, calendar, ai]
     features:
       account.users: 6
       storage.cloud: 3000
@@ -738,6 +759,7 @@ plans:
       email.custom-domains: 3
       email.aliases: unlimited
       calendar.included: true
+      ai.assistant: true
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
@@ -940,7 +962,8 @@ resellers:
 
 # Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: Proton's privacy policy and terms of service,
 # Proton VPN's privacy policy, its no-logs audit post and its page on usage statistics. Free trials are not
-# applicable (only business plans have one), a status since M11.1.
+# applicable (only business plans have one), a status since M11.1. Lumo's terms of use, read 2026-11-02 (M11.3), once
+# Proton was in AI: who owns what it writes.
 policies:
   links:
     - name: 'Privacy policy'
@@ -959,6 +982,8 @@ policies:
       url: https://proton.me/security/bug-bounty
     - name: 'How to export emails'
       url: https://proton.me/support/export-emails-import-export-app
+    - name: 'Lumo terms of use'
+      url: https://proton.me/lumo/terms
   ratings:
     - topic: privacy.data-collection
       tier: neutral
@@ -1177,6 +1202,15 @@ policies:
       status: not-stated
       reason: "Its terms don't say what rights, if any, it takes over what you store. It can't read most of it anyway."
       pages: [https://proton.me/legal/terms]
+      lastVerified: 2026-11-02
+    - topic: legal.output-rights
+      tier: good
+      reason: 'You own what Lumo, its AI assistant, writes for you, and it never uses your chats to improve its AI. It doesn’t offer to defend you if someone claims the output copies their work.'
+      sources:
+        - url: https://proton.me/lumo/terms
+          quote: 'As between you and the Company, and to the extent permitted by applicable law, you (a) retain your ownership rights in Input and (b) own the Output.'
+        - url: https://proton.me/lumo/terms
+          quote: 'Company will not use any of your content to maintain, develop, or improve our Services.'
       lastVerified: 2026-11-02
     - topic: legal.service-changes
       tier: poor
