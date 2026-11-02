@@ -2,7 +2,7 @@ import { env } from 'cloudflare:workers';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 // The catalog tables as the migrations leave them (BLUEPRINT §5.3): the keys and cascades the seed relies on
-// (M2.1), and provider_categories (0003, M1.10).
+// (M2.1), provider_categories (0003, M1.10) and provider_features (0004, M11.4).
 const db = env.DB;
 
 /** Empties the catalog the way a full reseed does (the cascades clear the rest), then adds one plan. */
@@ -23,6 +23,11 @@ async function seedNetflix() {
        VALUES ('netflix.standard', 'netflix', 'Standard', '{}')`,
     ),
     db.prepare(`INSERT INTO features (id, json) VALUES ('video.quality', '{}')`),
+    db.prepare(`INSERT INTO features (id, json) VALUES ('platforms', '{}')`),
+    db.prepare(
+      `INSERT INTO provider_features (feature_id, value, provider_id, rank_value)
+       VALUES ('platforms', 'web', 'netflix', NULL)`,
+    ),
     db.prepare(
       `INSERT INTO prices (plan_id, region, currency, amount, interval, interval_count, monthly_equiv)
        VALUES ('netflix.standard', 'CA', 'CAD', 18.99, 'month', 1, 18.99)`,
@@ -54,6 +59,7 @@ describe('catalog schema', () => {
       '0001_init.sql',
       '0002_seed_what_changed.sql',
       '0003_provider_categories.sql',
+      '0004_provider_features.sql',
     ]);
   });
 
@@ -76,6 +82,7 @@ describe('catalog schema', () => {
         'plans',
         'prices',
         'provider_categories',
+        'provider_features',
         'providers',
       ].map((name) => ({ name, wr: 1, strict: 1 })),
     );
@@ -86,6 +93,7 @@ describe('catalog schema', () => {
 
     for (const table of [
       'provider_categories',
+      'provider_features',
       'plans',
       'prices',
       'plan_features',
@@ -94,6 +102,12 @@ describe('catalog schema', () => {
       expect(await count(table), table).toBe(0);
     }
     expect(await count('bundles')).toBe(1);
+  });
+
+  it("removes a provider's own rows of a feature with the feature", async () => {
+    await db.prepare(`DELETE FROM features WHERE id = 'platforms'`).run();
+    expect(await count('provider_features')).toBe(0);
+    expect(await count('providers')).toBe(1);
   });
 
   it('rejects a plan for a provider that does not exist', async () => {

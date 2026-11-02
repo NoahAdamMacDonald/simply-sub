@@ -144,7 +144,10 @@ describe('GET /providers', () => {
       etag: expect.stringMatching(/^"abc1234-[0-9a-f]{4}"$/),
     });
     const body = await response.json<Body>();
-    expect(shape(body)).toEqual(shape(example.response.body));
+    // ESPN Unlimited is 4K since M11.4, and ESPN has no availableIn, so it's a fourth, on the next page.
+    expect(shape({ ...body, meta: { ...body.meta, nextCursor: null } })).toEqual(
+      shape(example.response.body),
+    );
     expect(body.data.map((result) => result.provider.id)).toEqual([
       'disney-plus',
       'crave',
@@ -153,7 +156,8 @@ describe('GET /providers', () => {
     expect(body.meta).toEqual({
       ...example.response.body.meta,
       catalogVersion: 'abc1234',
-      total: 3,
+      total: 4,
+      nextCursor: expect.any(String),
     });
     const best = body.data.map((result) => result.matchedPlans[0].bestMonthlyEquivalent ?? 0);
     expect(best).toEqual([...best].sort((a, b) => a - b));
@@ -418,6 +422,37 @@ describe('the D1 reads', () => {
       ]),
     );
     expect(plan.results.some((row) => /^SCAN/.test(row.detail))).toBe(false);
+  });
+
+  it("read a provider's own features too, through provider_features' key (M11.4)", async () => {
+    await env.DB.prepare(
+      "INSERT INTO provider_features (feature_id, value, provider_id, rank_value) VALUES ('platforms', 'linux', 'mullvad', NULL)",
+    ).run();
+    try {
+      const query = { feature: ['platforms=linux'], sort: 'name', limit: 20 } as const;
+      const linux = await loadProviders(
+        env.DB,
+        { ...query, feature: [...query.feature] },
+        features,
+      );
+      const { sql, bindings } = providersStatement(
+        { ...query, feature: [...query.feature] },
+        features,
+      );
+      const plan = await env.DB.prepare(`EXPLAIN QUERY PLAN ${sql}`)
+        .bind(...bindings)
+        .all<{ detail: string }>();
+
+      expect(linux.providers.map((provider) => provider.id)).toEqual(['mullvad']);
+      expect(plan.results.map((row) => row.detail)).toEqual(
+        expect.arrayContaining([
+          'SEARCH provider_features USING PRIMARY KEY (feature_id=? AND value=?)',
+        ]),
+      );
+      expect(plan.results.some((row) => /^SCAN provider_features/.test(row.detail))).toBe(false);
+    } finally {
+      await env.DB.prepare('DELETE FROM provider_features').run();
+    }
   });
 
   it('read only the providers with a plan that has every rank key, through the indexes', async () => {

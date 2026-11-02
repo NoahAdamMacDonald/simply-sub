@@ -5,11 +5,13 @@ import {
   type RankKeyOption,
   type SnapshotProvider,
 } from '@simply-sub/core';
+import { providerOf } from './lookups';
 
 // The D1 reads behind GET /providers (BLUEPRINT §5.3, §7.1). D1 counts every row a query scans as read, 5 million a
 // day on the free plan, so SQL only narrows the providers down where an index can: a rank key through plan_features'
-// (feature_id, rank_value) index, a provider by its primary key. Every filter is applied again, exactly, by core's
-// searchProviders on the providers' JSON, so SQL may let extra providers through but never drops one.
+// (feature_id, rank_value) index or provider_features' key (M11.4), a provider by its primary key. Every filter is
+// applied again, exactly, by core's searchProviders on the providers' JSON (its plans' features merged with the
+// provider's), so SQL may let extra providers through but never drops one.
 
 export interface CatalogRows {
   /** The catalog version D1 holds: the catalog row the seed writes. Undefined before the first seed. */
@@ -42,9 +44,7 @@ export async function loadProviders(
   const version = (catalog.results[0] as { version: string } | undefined)?.version;
   return {
     ...(version !== undefined && { version }),
-    providers: providers.results.map(
-      (row) => JSON.parse((row as { json: string }).json) as SnapshotProvider,
-    ),
+    providers: providers.results.map(providerOf),
     rowsRead: catalog.meta.rows_read + providers.meta.rows_read,
   };
 }
@@ -61,15 +61,17 @@ export function providersStatement(
     (key) => options.find((option) => option.key === key) ?? [],
   );
   if (required.length > 0) {
-    const plans = required.map((option) => {
-      const { sql, values } = providingPlans(option);
-      bindings.push(...values);
-      return sql;
-    });
-    // Plan ids are <provider id>.<slug>.
-    conditions.push(
-      `id IN (SELECT substr(plan_id, 1, instr(plan_id, '.') - 1) FROM (${plans.join(' INTERSECT ')}))`,
-    );
+    // A key a plan states, or its provider for every plan (M11.4). Plans that state their own value instead are left to
+    // core: a provider passes each key on its own, so one plan needn't have them all.
+    for (const option of required) {
+      const plans = providingRows(option, 'plan_features', 'plan_id');
+      const provider = providingRows(option, 'provider_features', 'provider_id');
+      bindings.push(...plans.values, ...provider.values);
+      // Plan ids are <provider id>.<slug>.
+      conditions.push(
+        `id IN (SELECT substr(plan_id, 1, instr(plan_id, '.') - 1) FROM (${plans.sql}) UNION ${provider.sql})`,
+      );
+    }
   }
   if (query.category !== undefined) {
     // Any category its plans are in (provider_categories, M1.10), through the table's key.
@@ -81,15 +83,20 @@ export function providersStatement(
 }
 
 /**
- * The plan_features rows of plans that provide `option` (PROJECT-PLAN §3.2), through the (feature_id, rank_value)
- * index: rank_value is a boolean's 1 or 0 and a number itself, so a boolean or a tier is a range of it. An enum lists
- * the values at or above the key's, so a seed with another value order can't make it wrong; a set member is a row.
+ * The plan_features or provider_features rows that provide `option` (PROJECT-PLAN §3.2), through plan_features'
+ * (feature_id, rank_value) index or provider_features' key: rank_value is a boolean's 1 or 0 and a number itself, so
+ * a boolean or a tier is a range of it. An enum lists the values at or above the key's, so a seed with another value
+ * order can't make it wrong; a set member is a row.
  */
-function providingPlans({ feature, option }: RankKeyOption): {
+function providingRows(
+  { feature, option }: RankKeyOption,
+  table: 'plan_features' | 'provider_features',
+  column: 'plan_id' | 'provider_id',
+): {
   sql: string;
   values: (string | number)[];
 } {
-  const plans = 'SELECT plan_id FROM plan_features WHERE feature_id = ?';
+  const plans = `SELECT ${column} FROM ${table} WHERE feature_id = ?`;
   switch (feature.type) {
     case 'boolean':
       return { sql: `${plans} AND rank_value >= 1`, values: [feature.id] };

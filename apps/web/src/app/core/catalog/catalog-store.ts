@@ -11,6 +11,7 @@ import {
 import {
   catalogCheckDue,
   catalogFileKey,
+  withProviderFeatures,
   type CatalogCache,
   type CatalogData,
   type Timestamp,
@@ -94,8 +95,14 @@ export class CatalogStore {
     return country === undefined ? undefined : this.fileFor(country);
   });
 
-  /** The catalog for the user's country. Undefined before the first run, and until a file has been downloaded. */
-  readonly catalog = computed<CatalogData | undefined>(() => this.countryFile()?.snapshot.data);
+  /**
+   * The catalog for the user's country, with each plan's features merged with its provider's (M11.4). Undefined before
+   * the first run, and until a file has been downloaded.
+   */
+  readonly catalog = computed<CatalogData | undefined>(() => {
+    const data = this.countryFile()?.snapshot.data;
+    return data && withProviderFeatures(data);
+  });
 
   /** The catalog's version (`37f6573`) and when it was built, as an ISO timestamp. */
   readonly version = computed(() => this.countryFile()?.snapshot.meta.catalogVersion);
@@ -175,9 +182,13 @@ export class CatalogStore {
     );
   }
 
-  /** The catalog for a list item bought in `region`: the file that serves that region, if it's been downloaded. */
+  /**
+   * The catalog for a list item bought in `region`: the file that serves that region, if it's been downloaded, with
+   * its plans' features merged as `catalog`'s are.
+   */
   catalogFor(region: string): CatalogData | undefined {
-    return this.fileFor(region)?.snapshot.data;
+    const data = this.fileFor(region)?.snapshot.data;
+    return data && withProviderFeatures(data);
   }
 
   /** The file that serves `region`, found with the regions of the latest file, which are the current catalog's. */

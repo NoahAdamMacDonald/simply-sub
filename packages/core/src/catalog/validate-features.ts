@@ -139,12 +139,59 @@ export interface PlanContext {
   report: Report;
 }
 
-/** Checks a plan's features and featureLabels against the registry. `path` is the plan's own. */
-export function checkPlanFeatures(plan: Plan, path: CatalogIssuePath, context: PlanContext): void {
+/**
+ * Checks a provider's own features (M11.4): only provider-wide features, each with a value of its type. Its plans'
+ * values are checked with each plan (checkPlanFeatures).
+ */
+export function checkProviderFeatures(features: Plan['features'], context: PlanContext): void {
+  const { registry, report } = context;
+  for (const [featureId, value] of Object.entries(features)) {
+    const at = ['features', featureId];
+    if (registry.unchecked.has(featureId)) {
+      continue;
+    }
+    const feature = registry.features.get(featureId);
+    if (!feature) {
+      report(
+        at,
+        `Not a feature in data/features.yaml${didYouMean(featureId, [...registry.features.keys()], 'add it there first')}`,
+      );
+    } else if (!feature.providerWide) {
+      report(
+        at,
+        `${featureId} isn't provider-wide in data/features.yaml: state it on each plan, even when every plan has the same value`,
+      );
+    } else {
+      checkValue(feature, value, at, undefined, context);
+    }
+  }
+}
+
+/**
+ * Checks a plan's features and featureLabels against the registry. `path` is the plan's own. A value its provider's
+ * features state already, the same, is left out.
+ */
+export function checkPlanFeatures(
+  plan: Plan,
+  path: CatalogIssuePath,
+  context: PlanContext,
+  providerFeatures: Plan['features'] = {},
+): void {
   const { registry, report } = context;
   for (const [featureId, value] of Object.entries(plan.features)) {
     const at = [...path, 'features', featureId];
     if (registry.unchecked.has(featureId)) {
+      continue;
+    }
+    if (
+      registry.features.get(featureId)?.providerWide === true &&
+      Object.hasOwn(providerFeatures, featureId) &&
+      sameValue(providerFeatures[featureId], value)
+    ) {
+      report(
+        at,
+        "Its provider's features say so already: leave it out, or give the value it differs by",
+      );
       continue;
     }
     const feature = registry.features.get(featureId);
@@ -155,7 +202,7 @@ export function checkPlanFeatures(plan: Plan, path: CatalogIssuePath, context: P
       );
       continue;
     }
-    checkValue(feature, value, at, plan, context);
+    checkValue(feature, value, at, plan.id, context);
     const { parent } = feature;
     if (
       parent !== undefined &&
@@ -177,7 +224,7 @@ function checkValue(
   feature: Feature,
   value: FeatureValue,
   path: CatalogIssuePath,
-  plan: Plan,
+  planId: string | undefined,
   context: PlanContext,
 ): void {
   const { report } = context;
@@ -215,7 +262,7 @@ function checkValue(
         const problem =
           value.indexOf(item) < index
             ? listedMoreThanOnce(item)
-            : setItemProblem(feature, item, plan, context);
+            : setItemProblem(feature, item, planId, context);
         if (problem) {
           report([...path, index], problem);
         }
@@ -231,7 +278,7 @@ function checkValue(
 function setItemProblem(
   feature: SetFeature,
   id: string,
-  plan: Plan,
+  planId: string | undefined,
   { ids, providerId }: PlanContext,
 ): string | undefined {
   if (feature.values) {
@@ -240,7 +287,7 @@ function setItemProblem(
       ? undefined
       : `"${id}" isn't a ${feature.id} value${choices(id, valueIds)}`;
   }
-  if (feature.id === includesSubscription && id === plan.id) {
+  if (feature.id === includesSubscription && id === planId) {
     return "A plan can't include itself";
   }
   if (feature.id === includesSubscription && id === providerId) {
@@ -260,6 +307,13 @@ function setItemProblem(
     case undefined:
       return `"${id}" isn't a provider or plan id${didYouMean(id, ids.all('provider', 'plan'))}`;
   }
+}
+
+/** Two values of one feature are the same, a set's in any order. */
+function sameValue(a: FeatureValue, b: FeatureValue): boolean {
+  return Array.isArray(a) && Array.isArray(b)
+    ? a.length === b.length && a.every((item) => b.includes(item))
+    : a === b;
 }
 
 /** A featureLabels key is a feature id, or a rank key whose value or tier exists (BLUEPRINT §4.2 rule 5). */

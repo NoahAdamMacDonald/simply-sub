@@ -26,6 +26,7 @@ const tables = [
   'prices',
   'features',
   'plan_features',
+  'provider_features',
   'bundles',
   'bundle_plans',
   'catalog',
@@ -241,6 +242,7 @@ describe('a full seed', () => {
       prices: 4,
       features: 3,
       plan_features: 8,
+      provider_features: 0,
       bundles: 1,
       bundle_plans: 2,
       catalog: 1,
@@ -360,6 +362,13 @@ describe('a seed from what D1 holds', () => {
       },
     ],
     ['a changed bundle', (catalog) => (catalog.bundles[0].prices[0].amount = 33)],
+    [
+      'a provider-wide feature',
+      (catalog) => {
+        catalog.features.push(platforms);
+        catalog.providers[1].features = { platforms: ['web', 'tv'] };
+      },
+    ],
     ['a new category', (catalog) => catalog.categories.spend.push({ id: 'news', name: 'News' })],
   ])('leaves D1 as a full seed would after %s', async (_change, edit) => {
     const changed = snapshotOf(edited(edit), 'def5678');
@@ -367,6 +376,84 @@ describe('a seed from what D1 holds', () => {
     const fromChanges = await dump();
     await seed(changed, { full: true });
     expect(fromChanges).toEqual(await dump());
+  });
+});
+
+/** A provider-wide feature (M11.4), which a provider states once for its plans. */
+const platforms: CatalogSource['features'][number] = {
+  id: 'platforms',
+  name: 'Platforms',
+  category: 'streaming',
+  type: 'set',
+  values: [
+    { id: 'web', name: 'Web browser' },
+    { id: 'tv', name: 'TVs and streaming devices' },
+    { id: 'ios', name: 'iPhone and iPad' },
+  ],
+  providerWide: true,
+};
+
+describe('provider-wide features (M11.4)', () => {
+  beforeEach(async () => {
+    await db.batch(tables.map((table) => db.prepare(`DELETE FROM ${table}`)));
+  });
+
+  it("writes a provider's platforms once, not once per plan", async () => {
+    const once = edited((catalog) => {
+      catalog.features.push(platforms);
+      catalog.providers[1].features = { platforms: ['web', 'tv', 'ios'] };
+    });
+    const perPlan = edited((catalog) => {
+      catalog.features.push(platforms);
+      for (const plan of catalog.providers[1].plans) plan.features.platforms = ['web', 'tv', 'ios'];
+    });
+    await seed(snapshotOf(source), { full: true });
+    const providerWide = await seed(snapshotOf(once, 'def5678'));
+    expect(await count('provider_features')).toBe(3);
+    const { results } = await db.prepare('SELECT * FROM provider_features ORDER BY value').all();
+    expect(results).toEqual(
+      ['ios', 'tv', 'web'].map((value) => ({
+        feature_id: 'platforms',
+        value,
+        provider_id: 'netflix',
+        rank_value: null,
+      })),
+    );
+
+    await seed(snapshotOf(source), { full: true });
+    const onEachPlan = await seed(snapshotOf(perPlan, 'def5678'));
+    // Netflix's two plans: 3 rows each, and an index entry for each row.
+    expect(onEachPlan.rowsWritten - providerWide.rowsWritten).toBe(2 * 3 * 2 - 3);
+  });
+
+  it("goes with its provider: replacing or deleting it takes the provider's rows", async () => {
+    const withPlatforms = edited((catalog) => {
+      catalog.features.push(platforms);
+      catalog.providers[1].features = { platforms: ['web'] };
+    });
+    await seed(snapshotOf(withPlatforms), { full: true });
+    await seed(
+      snapshotOf(
+        edited((catalog) => {
+          catalog.features.push(platforms);
+          catalog.providers[1].features = { platforms: ['tv'] };
+        }),
+        'def5678',
+      ),
+    );
+    expect(
+      await db
+        .prepare('SELECT value FROM provider_features')
+        .all()
+        .then((r) => r.results),
+    ).toEqual([{ value: 'tv' }]);
+    await seed(
+      snapshotOf(
+        edited((catalog) => catalog.features.push(platforms)),
+        '1234567',
+      ),
+    );
+    expect(await count('provider_features')).toBe(0);
   });
 });
 
@@ -429,7 +516,8 @@ describe('rows written', () => {
     const snapshot = snapshotOf(realCatalog());
     const { rowsWritten } = await seed(snapshot, { full: true });
     const rows = (await Promise.all(tables.map(count))).reduce((sum, n) => sum + n, 0);
-    // The rows themselves, plus an entry in each of the 4 indexes on prices, plan_features, plans and bundle_plans.
+    // The rows themselves, plus an entry in each of the 4 indexes on prices, plan_features, plans and bundle_plans
+    // (provider_categories and provider_features have none).
     const indexEntries = (
       await Promise.all(['prices', 'plan_features', 'plans', 'bundle_plans'].map(count))
     ).reduce((sum, n) => sum + n, 0);

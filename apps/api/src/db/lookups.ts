@@ -1,10 +1,11 @@
-import type { Bundle, SnapshotProvider } from '@simply-sub/core';
+import { withPlanFeatures, type Bundle, type SnapshotProvider } from '@simply-sub/core';
 
 // The D1 reads behind GET /providers/:id, GET /plans/:id and GET /bundles (BLUEPRINT §5.3, §7.1). D1 counts every
 // row a query scans as read, so each lookup goes through a primary key or the bundle_plans (plan_id) index. A plan id
 // starts with its provider's id, and the provider's JSON holds its plans and add-ons, so the plans table is read only
 // to check that plans exist. Each read is one batch with the catalog row, so the version describes the rows even if
-// a seed ran in between.
+// a seed ran in between. A provider's plans are read with its provider-wide features merged in (M11.4), as the app
+// reads them.
 
 export interface ProviderRows {
   /** The catalog version D1 holds: the catalog row the seed writes. Undefined before the first seed. */
@@ -23,7 +24,7 @@ export async function loadProvider(db: D1Database, id: string): Promise<Provider
   return {
     ...versionOf(catalog),
     ...(providers.results.length > 0 && {
-      provider: parsedJson<SnapshotProvider>(providers.results[0]),
+      provider: providerOf(providers.results[0]),
     }),
     rowsRead: catalog.meta.rows_read + providers.meta.rows_read,
   };
@@ -46,7 +47,7 @@ export async function loadPlan(db: D1Database, planId: string): Promise<PlanRows
   return {
     ...versionOf(catalog),
     ...(providers.results.length > 0 && {
-      provider: parsedJson<SnapshotProvider>(providers.results[0]),
+      provider: providerOf(providers.results[0]),
     }),
     bundleIds: bundles.results.map((row) => (row as { bundle_id: string }).bundle_id),
     rowsRead: catalog.meta.rows_read + providers.meta.rows_read + bundles.meta.rows_read,
@@ -83,7 +84,7 @@ export async function loadBundles(db: D1Database, planIds: readonly string[]): P
     ...versionOf(catalog),
     plans: plans.results.map((row) => (row as { id: string }).id),
     bundles: bundleRows.map((row) => JSON.parse(row.json) as Bundle),
-    providers: [...providerJson].map((json) => JSON.parse(json) as SnapshotProvider),
+    providers: [...providerJson].map((json) => providerOf({ json })),
     rowsRead: [catalog, plans, bundles, providers].reduce(
       (sum, result) => sum + result.meta.rows_read,
       0,
@@ -134,4 +135,9 @@ function versionOf(catalog: D1Result): { version?: string } {
 /** A json column: the record exactly as the seed wrote it, key order included. */
 function parsedJson<T>(row: unknown): T {
   return JSON.parse((row as { json: string }).json) as T;
+}
+
+/** A provider's json column, its plans' features merged with its own (withPlanFeatures). */
+export function providerOf(row: unknown): SnapshotProvider {
+  return withPlanFeatures(parsedJson<SnapshotProvider>(row));
 }

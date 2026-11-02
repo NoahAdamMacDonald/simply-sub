@@ -8,6 +8,7 @@ import { featuresFileSchema } from './feature';
 import { slugSchema } from './formats';
 import type { CatalogFileKind } from './json-schema';
 import { featureNamedCategories, planCategories, providerCategories } from './plan-categories';
+import { planFeatures } from './provider-features';
 import { paidPlanCount, topicApplies } from './plan-policies';
 import { policySetSchema, type Policies, type PolicyRating, type PolicySet } from './policy';
 import {
@@ -36,6 +37,7 @@ import {
   checkInclusionLoops,
   checkPlanFeatures,
   checkPriceDifferences,
+  checkProviderFeatures,
   checkRequiredFeatures,
   readFeatureRegistry,
   type FeatureRegistry,
@@ -615,6 +617,9 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
     }
   }
 
+  if (registry && provider.features) {
+    checkProviderFeatures(provider.features, { registry, ids, providerId: provider.id, report });
+  }
   const planIds = provider.plans.map((plan) => plan.id);
   const addOnIds = (provider.addOns ?? []).map((addOn) => addOn.id);
   const prices = new PriceChecks(context, report);
@@ -622,7 +627,12 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
   provider.plans.forEach((plan, index) => {
     const path = ['plans', index];
     if (registry) {
-      checkPlanFeatures(plan, path, { registry, ids, providerId: provider.id, report });
+      checkPlanFeatures(
+        plan,
+        path,
+        { registry, ids, providerId: provider.id, report },
+        provider.features,
+      );
     }
     plan.categories?.forEach((id, categoryIndex) => {
       if (serviceIds && !serviceIds.includes(id)) {
@@ -640,11 +650,17 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
     }
     if (registry) {
       checkFeatureCategories(plan, provider, path, { registry, serviceIds, report });
-      checkRequiredFeatures(plan, planCategories(plan, provider), plan.features, path, {
-        registry,
-        awaiting: context.awaitingRequired,
-        report,
-      });
+      checkRequiredFeatures(
+        plan,
+        planCategories(plan, provider),
+        planFeatures(plan, provider),
+        path,
+        {
+          registry,
+          awaiting: context.awaitingRequired,
+          report,
+        },
+      );
     }
     plan.addOnIds?.forEach((id, addOnIndex) => {
       if (!addOnIds.includes(id)) {
@@ -671,7 +687,7 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
     checkPriceDifferences(
       provider.plans.map((plan, index) => ({
         plan,
-        features: plan.features,
+        features: planFeatures(plan, provider),
         sold: !isRetired(plan, provider, context.today),
         path: ['plans', index],
       })),

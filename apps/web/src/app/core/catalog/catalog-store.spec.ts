@@ -133,6 +133,16 @@ describe('CatalogStore', () => {
       expect(store.offline()).toBe(false);
     });
 
+    it("gives each plan its provider's features, for every region's file (M11.4)", async () => {
+      const file = cached('CA');
+      file.snapshot.data.providers[0].features = { platforms: ['linux'] };
+      file.snapshot.data.providers[0].plans[0].features = { 'vpn.included': true };
+      const store = await started({ settings: settingsIn('CA'), files: [file] });
+      const plan = store.catalog()?.providers[0].plans[0];
+      expect(plan?.features).toEqual({ platforms: ['linux'], 'vpn.included': true });
+      expect(store.catalogFor('CA')).toBe(store.catalog());
+    });
+
     it('asks only for index.json when the cached version is current', async () => {
       const store = await started({ settings: settingsIn('CA'), files: [cached('CA')] });
       expect(store.lastCheck()).toBe('current');

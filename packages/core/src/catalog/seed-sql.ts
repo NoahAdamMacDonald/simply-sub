@@ -16,9 +16,10 @@ const maxStatementBytes = 100_000;
 /**
  * The version of the rules that turn a snapshot into rows. Bump it when a migration changes the catalog tables, or
  * when a derived column (monthly_equiv, rank_value) is computed differently: rows written under another format are
- * replaced by a full reseed. 2: provider_categories (migration 0003, M1.10).
+ * replaced by a full reseed. 2: provider_categories (migration 0003, M1.10). 3: provider_features (migration 0004,
+ * M11.4).
  */
-export const seedFormat = 2;
+export const seedFormat = 3;
 
 /** rank_value for `unlimited`: above any real number, and still a finite number in JSON. */
 export const unlimitedRankValue = 1e308;
@@ -32,6 +33,7 @@ const tables = [
   'features',
   'prices',
   'plans',
+  'provider_features',
   'provider_categories',
   'providers',
 ];
@@ -87,8 +89,8 @@ type SqlValue = string | number | null;
  * The SQL that makes D1's catalog match `snapshot`, one statement per line, or '' when it already does. With no
  * `current` state, no catalog row, or one written under another seedFormat, it replaces everything. Otherwise it
  * writes only what changed:
- * - A new provider, or one whose hash changed, is deleted (the cascade takes its categories, plans, prices, plan
- *   features and bundle links) and inserted again, and unchanged bundles are linked to its plans again. A removed one
+ * - A new provider, or one whose hash changed, is deleted (the cascade takes its categories, provider-wide features,
+ *   plans, prices, plan features and bundle links) and inserted again, and unchanged bundles are linked to its plans again. A removed one
  *   is deleted.
  * - A feature whose JSON changed is upserted, never deleted and inserted, which would cascade to every plan's rows
  *   for it. When an enum's values move, the rows whose rank_value moved are updated. A removed feature is deleted.
@@ -127,6 +129,15 @@ export function buildSeedSql(
     return hash;
   };
 
+  const featureOf = (featureId: string, listedBy: string) => {
+    const feature = features.get(featureId);
+    if (!feature) {
+      throw new Error(
+        `${listedBy} lists ${featureId}, which isn't a feature: run npm run data:validate`,
+      );
+    }
+    return feature;
+  };
   const insertFeature = (feature: Feature) =>
     insert(
       'features',
@@ -145,6 +156,17 @@ export function buildSeedSql(
     // Every category its plans are in, so GET /providers?category= finds it by any of them.
     for (const category of providerCategories(provider)) {
       insert('provider_categories', { category, provider_id: provider.id });
+    }
+    // Its provider-wide features once, not once per plan (M11.4).
+    for (const [featureId, value] of Object.entries(provider.features ?? {})) {
+      for (const row of featureRows(featureOf(featureId, provider.id), value, provider.id)) {
+        insert('provider_features', {
+          feature_id: featureId,
+          value: row.value,
+          provider_id: provider.id,
+          rank_value: row.rank_value,
+        });
+      }
     }
     for (const plan of provider.plans) {
       insert('plans', {
@@ -165,13 +187,7 @@ export function buildSeedSql(
         });
       }
       for (const [featureId, value] of Object.entries(plan.features)) {
-        const feature = features.get(featureId);
-        if (!feature) {
-          throw new Error(
-            `${plan.id} lists ${featureId}, which isn't a feature: run npm run data:validate`,
-          );
-        }
-        for (const row of featureRows(feature, value, plan.id)) {
+        for (const row of featureRows(featureOf(featureId, plan.id), value, plan.id)) {
           insert('plan_features', { plan_id: plan.id, feature_id: featureId, ...row });
         }
       }
@@ -268,17 +284,17 @@ export function buildSeedSql(
 }
 
 /**
- * A plan's value as plan_features rows (BLUEPRINT §5.3): an enum's position, the number itself (unlimited is
+ * A plan's or provider's value as plan_features or provider_features rows (BLUEPRINT §5.3): an enum's position, the number itself (unlimited is
  * above every number), 1 or 0 for a boolean, and one row per member of a set, with no rank_value.
  */
 function featureRows(
   feature: Feature,
   value: FeatureValue,
-  planId: string,
+  listedBy: string,
 ): { value: string; rank_value: number | null }[] {
   const wrongType = () =>
     new Error(
-      `${planId}: ${JSON.stringify(value)} isn't a ${feature.id} value: run npm run data:validate`,
+      `${listedBy}: ${JSON.stringify(value)} isn't a ${feature.id} value: run npm run data:validate`,
     );
   switch (feature.type) {
     case 'boolean':
@@ -306,7 +322,8 @@ const storedEnumSchema = z.object({
 
 /**
  * An enum's rank_value is its value's position, so a value that moved (1440p added before 4k) leaves the rows of
- * unchanged providers stale. One UPDATE per moved value fixes them, writing only the rows whose rank is wrong. A new
+ * unchanged providers stale. One UPDATE per moved value and table (plan_features, and provider_features for a
+ * provider-wide feature) fixes them, writing only the rows whose rank is wrong. A new
  * value can't be in an unchanged provider's rows, since that provider would have failed validation. When the stored
  * JSON doesn't show the old order, every value gets an UPDATE.
  */
@@ -316,12 +333,14 @@ function rankUpdates(feature: Feature, storedJson: string | undefined): string[]
   }
   const stored = storedEnumSchema.safeParse(parsedJson(storedJson));
   const before = stored.success ? stored.data.values.map((option) => option.id) : undefined;
+  const tables = feature.providerWide ? ['plan_features', 'provider_features'] : ['plan_features'];
   return feature.values.flatMap(({ id }, position) =>
     before && (before.indexOf(id) === position || !before.includes(id))
       ? []
-      : [
-          `UPDATE plan_features SET rank_value = ${position} WHERE feature_id = ${sqlValue(feature.id)} AND value = ${sqlValue(id)} AND rank_value IS NOT ${position};`,
-        ],
+      : tables.map(
+          (table) =>
+            `UPDATE ${table} SET rank_value = ${position} WHERE feature_id = ${sqlValue(feature.id)} AND value = ${sqlValue(id)} AND rank_value IS NOT ${position};`,
+        ),
   );
 }
 

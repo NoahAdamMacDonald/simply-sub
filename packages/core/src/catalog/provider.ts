@@ -352,6 +352,16 @@ export const providerSchema = z
         'The day it ends for its current subscribers too, when it says so: needs retired. Items on its plans count until then',
       )
       .optional(),
+    features: z
+      .record(dottedSlugSchema, featureValueSchema)
+      .refine(
+        (features) => Object.keys(features).length > 0,
+        'Leave features out instead of listing none',
+      )
+      .describe(
+        "Provider-wide feature id → value (M11.4): only features.yaml's providerWide ones (platforms, sign-in, languages, support), which every plan has unless it states its own",
+      )
+      .optional(),
     plans: z.array(planSchema).min(1, 'List at least one plan'),
     addOns: z
       .array(addOnSchema)

@@ -491,6 +491,81 @@ describe('validateCatalog', () => {
     });
   });
 
+  describe('provider-wide features (M11.4)', () => {
+    const platforms = {
+      id: 'platforms',
+      name: 'Platforms',
+      category: 'streaming',
+      type: 'set',
+      values: [
+        { id: 'web', name: 'Web browser' },
+        { id: 'tv', name: 'TVs and streaming devices' },
+      ],
+      providerWide: true,
+    };
+    const withPlatforms = (extra: Record<string, unknown> = {}) => {
+      const files = catalog();
+      const features = dataOf(files, featuresFile) as unknown[];
+      return withFile(files, {
+        file: featuresFile,
+        data: [...features, { ...platforms, ...extra }],
+      });
+    };
+
+    it('takes only provider-wide features at the provider, each a value of its type', () => {
+      const files = withPlatforms();
+      expect(messages(edited(files, netflix, ['features'], { platforms: ['web', 'tv'] }))).toEqual(
+        [],
+      );
+      expect(
+        messages(
+          edited(files, netflix, ['features'], {
+            'video.quality': '4k',
+            platform: ['web'],
+            platforms: ['web', 'phone'],
+          }),
+        ),
+      ).toEqual([
+        "data/providers/netflix.yaml features.video.quality: video.quality isn't provider-wide in data/features.yaml: state it on each plan, even when every plan has the same value",
+        'data/providers/netflix.yaml features.platform: Not a feature in data/features.yaml (did you mean platforms?)',
+        'data/providers/netflix.yaml features.platforms.1: "phone" isn\'t a platforms value (web, tv)',
+      ]);
+    });
+
+    it('refuses a plan value the provider states already, and takes one that differs', () => {
+      const files = edited(withPlatforms(), netflix, ['features'], { platforms: ['web', 'tv'] });
+      const plan = ['plans', 0, 'features', 'platforms'];
+      expect(messages(edited(files, netflix, plan, ['tv', 'web']))).toEqual([
+        "data/providers/netflix.yaml plans.0.features.platforms: Its provider's features say so already: leave it out, or give the value it differs by",
+      ]);
+      expect(messages(edited(files, netflix, plan, ['web']))).toEqual([]);
+    });
+
+    it('counts for required features and price differences', () => {
+      const required = withPlatforms({ requiredIn: ['vpn'] });
+      const missing = messages(required);
+      expect(missing).toContain(
+        "data/providers/mullvad.yaml plans.0.features: Needs platforms, which every plan in vpn states (requiredIn): give its values, [] included, from the provider's own pages",
+      );
+      expect(
+        messages(edited(required, mullvad, ['features'], { platforms: ['web'] })).filter(
+          (message) => message.includes('mullvad'),
+        ),
+      ).toEqual([]);
+      // Standard's ad-free is its only difference from Standard with ads: the provider's platforms don't make one.
+      const same = edited(
+        edited(withPlatforms(), netflix, ['features'], { platforms: ['web'] }),
+        netflix,
+        ['plans', 1, 'features', 'streaming.ad-free'],
+        false,
+      );
+      expect(messages(same)).toHaveLength(1);
+      expect(
+        messages(edited(same, netflix, ['plans', 1, 'features', 'platforms'], ['web', 'tv'])),
+      ).toEqual([]);
+    });
+  });
+
   describe('price differences (M11.4)', () => {
     const adFree = ['plans', 1, 'features', 'streaming.ad-free'];
     const warning =
