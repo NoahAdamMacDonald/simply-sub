@@ -7,7 +7,7 @@ import { pngBytes, withValue } from './helpers';
 
 export const today = '2026-10-23';
 
-function price(
+export function price(
   region: string,
   currency: string,
   amount: number,

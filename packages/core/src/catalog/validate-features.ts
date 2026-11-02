@@ -1,6 +1,7 @@
 import type { Categories } from './category';
 import { choices, didYouMean, idOf, listedMoreThanOnce } from './checks';
 import { featureSchema, type Feature, type FeatureValue } from './feature';
+import type { Price } from './price';
 import type { Plan } from './provider';
 import type { CatalogIds, CatalogIssuePath, Report } from './validate-catalog';
 
@@ -358,6 +359,68 @@ export function checkRequiredFeatures(
       waiting ? 'warning' : 'error',
     );
   }
+}
+
+/**
+ * Two of a provider's plans at different prices, for the same region, currency and period, must differ in a feature
+ * (BLUEPRINT §4.2 rule 8, M11.4): the optimizer compares only rank keys, so a tier whose extras are text has it
+ * suggest the cheaper plan every time (Xbox Game Pass, Claude before M11.9). A warning, once a pair, at the dearer
+ * plan, for plans and prices still sold. Unlisted means false, 0 or empty, so stating one changes nothing. Perks
+ * count once M11.6 gives them ids.
+ */
+export function checkPriceDifferences(
+  plans: readonly {
+    plan: Plan;
+    features: Plan['features'];
+    sold: boolean;
+    path: CatalogIssuePath;
+  }[],
+  report: Report,
+): void {
+  const sold = plans.filter((entry) => entry.sold);
+  sold.forEach((entry, index) => {
+    for (const other of sold.slice(0, index)) {
+      if (featureSignature(entry.features) !== featureSignature(other.features)) continue;
+      const pair = differentPrice(entry.plan.prices, other.plan.prices);
+      if (!pair) continue;
+      const [dearer, cheaper] = pair[0].amount > pair[1].amount ? [entry, other] : [other, entry];
+      const [high, low] = pair[0].amount > pair[1].amount ? pair : [pair[1], pair[0]];
+      report(
+        [...dearer.path, 'features'],
+        `Costs more than ${cheaper.plan.id} (${high.amount} against ${low.amount} ${high.currency} ${periodText(high)} in ${high.region}) with the same features: give what the price pays for a feature, or the optimizer always suggests ${cheaper.plan.id}`,
+        'warning',
+      );
+    }
+  });
+}
+
+/** A plan's features with what unlisted means left out (false, 0, []), in a fixed order, sets sorted. */
+function featureSignature(features: Plan['features']): string {
+  const stated = Object.entries(features)
+    .filter(
+      ([, value]) =>
+        value !== false && value !== 0 && !(Array.isArray(value) && value.length === 0),
+    )
+    .map(([id, value]) => [id, Array.isArray(value) ? [...value].sort() : value] as const)
+    .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0));
+  return JSON.stringify(stated);
+}
+
+/** The first prices of the two lists still sold for the same region, currency and period, at different amounts. */
+function differentPrice(a: readonly Price[], b: readonly Price[]): [Price, Price] | undefined {
+  const key = (price: Price) =>
+    `${price.region} ${price.currency} ${price.intervalCount} ${price.interval}`;
+  const sold = (prices: readonly Price[]) => prices.filter((price) => price.retired === undefined);
+  const others = new Map(sold(b).map((price) => [key(price), price]));
+  for (const price of sold(a)) {
+    const other = others.get(key(price));
+    if (other && other.amount !== price.amount) return [price, other];
+  }
+  return undefined;
+}
+
+function periodText({ interval, intervalCount }: Price): string {
+  return intervalCount === 1 ? `a ${interval}` : `every ${intervalCount} ${interval}s`;
 }
 
 /**

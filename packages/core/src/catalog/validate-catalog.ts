@@ -35,6 +35,7 @@ import {
   awaitingRequiredFeatures,
   checkInclusionLoops,
   checkPlanFeatures,
+  checkPriceDifferences,
   checkRequiredFeatures,
   readFeatureRegistry,
   type FeatureRegistry,
@@ -665,6 +666,18 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
     });
     prices.check(plan.prices, [...path, 'prices'], isRetired(plan, provider, context.today));
   });
+
+  if (registry) {
+    checkPriceDifferences(
+      provider.plans.map((plan, index) => ({
+        plan,
+        features: plan.features,
+        sold: !isRetired(plan, provider, context.today),
+        path: ['plans', index],
+      })),
+      report,
+    );
+  }
 
   const sold = new Set(provider.plans.flatMap((plan) => plan.addOnIds ?? []));
   provider.addOns?.forEach((addOn, index) => {

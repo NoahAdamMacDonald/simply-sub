@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { formatCatalogIssue, validateCatalog, type CatalogSourceFile } from '../../src';
-import { catalog, catalogWith, edited, today } from './catalog-files';
+import { catalog, catalogWith, edited, price, today } from './catalog-files';
 import { asciiBytes, pngBytes } from './helpers';
 
 const bundleFile = 'data/bundles/netflix-crave.yaml';
@@ -482,6 +482,42 @@ describe('validateCatalog', () => {
         'data/features.yaml 0.requiredIn.0: "streming" isn\'t a service category in data/categories.yaml (streaming, vpn, privacy-suite)',
         'data/features.yaml 0.requiredIn.2: "vpn" is listed more than once',
       ]);
+    });
+  });
+
+  describe('price differences (M11.4)', () => {
+    const adFree = ['plans', 1, 'features', 'streaming.ad-free'];
+    const warning =
+      'warning: data/providers/netflix.yaml plans.1.features: Costs more than netflix.standard-ads (18.99 against 7.99 CAD a month in CA) with the same features: give what the price pays for a feature, or the optimizer always suggests netflix.standard-ads';
+
+    it('warns when two plans at different prices have the same features', () => {
+      expect(messagesWith(netflix, adFree, false)).toEqual([warning]);
+      expect(messagesWith(netflix, adFree, true)).toEqual([]);
+    });
+
+    it('reads an unlisted value as false, 0 or empty, and a set in any order', () => {
+      const files = edited(catalog(), netflix, ['plans', 0, 'features', 'streaming.live'], []);
+      expect(messages(edited(files, netflix, adFree, false))).toEqual([warning]);
+      const live = (index: number, value: string[]) => (files: CatalogSourceFile[]) =>
+        edited(files, netflix, ['plans', index, 'features', 'streaming.live'], value);
+      const ordered = live(1, ['sports', 'tv-channels'])(
+        live(0, ['tv-channels', 'sports'])(edited(catalog(), netflix, adFree, false)),
+      );
+      expect(messages(ordered)).toEqual([warning]);
+    });
+
+    it('compares only prices still sold, for the same region, currency and period', () => {
+      const files = edited(catalog(), netflix, adFree, false);
+      expect(messages(edited(files, netflix, ['plans', 1, 'retired'], '2026-10-01'))).toEqual([]);
+      const yearly = edited(
+        files,
+        netflix,
+        ['plans', 0, 'prices'],
+        [{ ...price('CA', 'CAD', 79.99), interval: 'year' }],
+      );
+      expect(messages(yearly)).toEqual([]);
+      const sameAmount = edited(files, netflix, ['plans', 1, 'prices'], [price('CA', 'CAD', 7.99)]);
+      expect(messages(sameAmount)).toEqual([]);
     });
   });
 
