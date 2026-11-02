@@ -50,4 +50,7 @@ ratings:
     sources:
       - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
         quote: 'Updating or correcting the contact information you gave us, resetting your password, or deleting your registration account'
+    action:
+      name: Ask to delete your data
+      url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/data-subject-rights-portal/
     lastVerified: 2026-10-27

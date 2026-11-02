@@ -488,6 +488,10 @@ policies:
   links:
     - name: Terms of service
       url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+    - name: 'Certifications'
+      url: https://www.bitdefender.com/en-ca/business/certifications
+    - name: 'Bug bounty'
+      url: https://www.bitdefender.com/en-us/site/view/bug-bounty
   ratings:
     - topic: billing.cancellation
       tier: good
@@ -525,3 +529,32 @@ policies:
           quote: The Subscription will terminate immediately without notice if You are in breach of any of its terms and conditions. You shall not be entitled to a refund from Bitdefender or any resellers of Bitdefender as a result of termination.
       regions: [CA]
       lastVerified: 2026-10-28
+    - topic: security.practices
+      tier: good
+      reason: 'Outside auditors check its security every year, but you have to ask for their full report. It may pay you a reward for finding a security bug in its apps or website.'
+      sources:
+        - url: https://www.bitdefender.com/en-ca/business/certifications
+          quote: 'Our security controls are audited each year, following the AICPA SSAE-16 SOC 2 guidelines for the Security, Confidentiality, and Availability principles.'
+        - url: https://www.bitdefender.com/en-ca/business/certifications
+          quote: 'The first page of the report is available here and the full report can be obtained upon request.'
+        - url: https://www.bitdefender.com/en-us/site/view/bug-bounty
+          quote: 'The Bug Bounty Reward program encourages security researchers to identify and submit vulnerability reports regarding virtually everything that bears the Bitdefender brand'
+      lastVerified: 2026-11-02
+    - topic: other.notable
+      title: Removes other security apps
+      tier: poor
+      reason: 'When you install it, it may take off or turn off other security apps already on your device if they clash with it.'
+      sources:
+        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+          quote: 'During the installation process, Bitdefender Solution may uninstall or disable other security products if such products or features are incompatible with Bitdefender Solution.'
+      lastVerified: 2026-11-02
+    - topic: other.notable
+      title: Its VPN is built on another company's
+      tier: neutral
+      reason: "Its VPN uses another company's software, and using it means you also agree to that company's (IPVanish's) rules."
+      sources:
+        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+          quote: 'The VPN functionality has a third-party software component'
+        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+          quote: 'All IPVanish customers are responsible for reviewing and complying with this Acceptable Use Policy'
+      lastVerified: 2026-11-02
