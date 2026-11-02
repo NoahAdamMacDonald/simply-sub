@@ -7,7 +7,7 @@
 - id: bitdefender
   name: Bitdefender
   website: https://www.bitdefender.com
-  category: privacy-suite
+  category: security
   source: own
   wikidata: Q854605
   status: done
@@ -266,7 +266,7 @@
 - id: avast-antivirus
   name: Avast Antivirus
   website: https://www.avast.ua/free-antivirus-download
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q1574
   sitelinks: 49
@@ -338,7 +338,7 @@
 - id: microsoft-security-essentials
   name: Microsoft Security Essentials
   website: https://support.microsoft.com/en-my/help/17150/windows-7-what-is-microsoft-security-essentials
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q51707
   sitelinks: 38
@@ -354,7 +354,7 @@
 - id: microsoft-defender-antivirus
   name: Microsoft Defender Antivirus
   website: https://www.microsoft.com/microsoft-365/microsoft-defender-for-individuals
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q243269
   sitelinks: 35
@@ -418,7 +418,7 @@
 - id: yahoo-mail
   name: Yahoo! Mail
   website: https://mail.yahoo.com
-  category: software
+  category: email
   source: wikidata
   wikidata: Q868165
   sitelinks: 31
@@ -426,7 +426,7 @@
 - id: eset-nod32-antivirus
   name: ESET NOD32 Antivirus
   website: https://www.eset.com/us/home/antivirus
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q1385867
   sitelinks: 30
@@ -434,7 +434,7 @@
 - id: avg-antivirus
   name: AVG AntiVirus
   website: https://www.avg.com
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q209691
   sitelinks: 30
@@ -442,7 +442,7 @@
 - id: clam-antivirus
   name: Clam AntiVirus
   website: https://www.clamav.net
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q852000
   sitelinks: 29
@@ -466,7 +466,7 @@
 - id: kaspersky-anti-virus
   name: Kaspersky Anti-Virus
   website: https://www.kaspersky.com/anti-virus
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q1043518
   sitelinks: 27
@@ -474,7 +474,7 @@
 - id: malwarebytes
   name: Malwarebytes
   website: https://www.malwarebytes.com
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q1783235
   sitelinks: 27
@@ -522,7 +522,7 @@
 - id: bitwarden
   name: Bitwarden
   website: https://bitwarden.com
-  category: privacy-suite
+  category: passwords
   source: wikidata
   wikidata: Q56319818
   sitelinks: 26
@@ -530,7 +530,7 @@
 - id: norton-antivirus
   name: Norton AntiVirus
   website: https://ca.norton.com
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q741128
   sitelinks: 26
@@ -554,7 +554,7 @@
 - id: keepass
   name: KeePass
   website: https://keepass.info
-  category: privacy-suite
+  category: passwords
   source: wikidata
   wikidata: Q762660
   sitelinks: 25
@@ -626,7 +626,7 @@
 - id: tuta
   name: Tuta
   website: https://tuta.com
-  category: software
+  category: email
   source: wikidata
   wikidata: Q21659489
   sitelinks: 23
@@ -690,7 +690,7 @@
 - id: zonealarm
   name: ZoneAlarm
   website: https://www.zonealarm.com
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q219866
   sitelinks: 20
@@ -714,7 +714,7 @@
 - id: 1password
   name: 1Password
   website: https://1password.com
-  category: privacy-suite
+  category: passwords
   source: wikidata
   wikidata: Q2150861
   sitelinks: 19
@@ -730,7 +730,7 @@
 - id: lastpass
   name: LastPass
   website: https://lastpass.com
-  category: privacy-suite
+  category: passwords
   source: wikidata
   wikidata: Q2418462
   sitelinks: 18
@@ -746,7 +746,7 @@
 - id: lavabit
   name: Lavabit
   website: https://lavabit.com
-  category: software
+  category: email
   source: wikidata
   wikidata: Q4042660
   sitelinks: 17
@@ -810,7 +810,7 @@
 - id: comodo-internet-security
   name: Comodo Internet Security
   website: https://www.comodo.com
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q1789196
   sitelinks: 15
@@ -842,7 +842,7 @@
 - id: gnome-keyring
   name: GNOME Keyring
   website: https://wiki.gnome.org/Projects/GnomeKeyring
-  category: privacy-suite
+  category: passwords
   source: wikidata
   wikidata: Q383474
   sitelinks: 14
@@ -850,7 +850,7 @@
 - id: kaspersky-internet-security
   name: Kaspersky Internet Security
   website: https://www.kaspersky.com/kaspersky_internet_security
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q1588112
   sitelinks: 14
@@ -858,7 +858,7 @@
 - id: norton-360
   name: Norton 360
   website: https://no.norton.com/360
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q608921
   sitelinks: 14
@@ -866,7 +866,7 @@
 - id: yandex-mail
   name: Yandex Mail
   website: https://mail.yandex.ru
-  category: software
+  category: email
   source: wikidata
   wikidata: Q4537996
   sitelinks: 14
@@ -874,7 +874,7 @@
 - id: dr-web
   name: Dr.Web
   website: https://www.drweb.com
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q1233894
   sitelinks: 13
@@ -882,7 +882,7 @@
 - id: panda-cloud-antivirus
   name: Panda Cloud Antivirus
   website: https://www.cloudantivirus.com/ru
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q2659429
   sitelinks: 13
@@ -890,7 +890,7 @@
 - id: avira-antivirus
   name: Avira Antivirus
   website: https://www.avira.com
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q791115
   sitelinks: 13
@@ -930,7 +930,7 @@
 - id: seahorse
   name: Seahorse
   website: https://wiki.gnome.org/Apps/Seahorse
-  category: privacy-suite
+  category: passwords
   source: wikidata
   wikidata: Q2314628
   sitelinks: 12
@@ -938,7 +938,7 @@
 - id: firefox-lockwise
   name: Firefox Lockwise
   website: https://lockwise.firefox.com
-  category: privacy-suite
+  category: passwords
   source: wikidata
   wikidata: Q64829394
   sitelinks: 12
@@ -946,7 +946,7 @@
 - id: mailfence
   name: Mailfence
   website: https://mailfence.com
-  category: software
+  category: email
   source: wikidata
   wikidata: Q28127375
   sitelinks: 12
@@ -970,7 +970,7 @@
 - id: keychain
   name: Keychain
   website: https://www.apple.com/osx/preview
-  category: privacy-suite
+  category: passwords
   source: wikidata
   wikidata: Q250173
   sitelinks: 10
@@ -978,7 +978,7 @@
 - id: keepassx
   name: KeePassX
   website: https://www.keepassx.org
-  category: privacy-suite
+  category: passwords
   source: wikidata
   wikidata: Q4042120
   sitelinks: 10
@@ -1010,7 +1010,7 @@
 - id: emsisoft-anti-malware
   name: Emsisoft Anti-Malware
   website: https://www.emsisoft.com/de/software/antimalware
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q2639453
   sitelinks: 9
@@ -1034,7 +1034,7 @@
 - id: aol-active-virus-shield
   name: AOL Active Virus Shield
   website: https://www.activevirusshield.com
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q2619838
   sitelinks: 8
@@ -1042,7 +1042,7 @@
 - id: immunet
   name: Immunet
   website: https://www.immunet.com
-  category: privacy-suite
+  category: security
   source: wikidata
   wikidata: Q3266644
   sitelinks: 8
@@ -1053,5 +1053,2501 @@
   category: storage
   source: wikidata
   wikidata: Q14624883
+  sitelinks: 8
+  status: queued
+- id: facebook
+  name: Facebook
+  website: https://www.facebook.com
+  category: social
+  source: wikidata
+  wikidata: Q355
+  sitelinks: 264
+  status: queued
+- id: wikimedia-commons
+  name: Wikimedia Commons
+  website: https://commons.wikimedia.org
+  category: search
+  source: wikidata
+  wikidata: Q565
+  sitelinks: 180
+  status: queued
+- id: mozilla-firefox
+  name: Mozilla Firefox
+  website: https://www.firefox.com
+  category: browsers
+  source: wikidata
+  wikidata: Q698
+  sitelinks: 162
+  status: queued
+- id: tiktok
+  name: TikTok
+  website: https://tiktok.com
+  category: social
+  source: wikidata
+  wikidata: Q48938223
+  sitelinks: 138
+  status: queued
+- id: google-search
+  name: Google Search
+  website: https://google.be
+  category: search
+  source: wikidata
+  wikidata: Q9366
+  sitelinks: 128
+  status: queued
+- id: google-chrome
+  name: Google Chrome
+  website: https://www.google.com/chrome
+  category: browsers
+  source: wikidata
+  wikidata: Q777
+  sitelinks: 127
+  status: queued
+- id: grupo-televisa
+  name: Grupo Televisa
+  website: https://www.televisa.com
+  category: telecom
+  source: wikidata
+  wikidata: Q47099
+  sitelinks: 105
+  status: queued
+- id: google-maps
+  name: Google Maps
+  website: https://www.google.com/maps
+  category: maps
+  source: wikidata
+  wikidata: Q12013
+  sitelinks: 103
+  status: queued
+- id: openstreetmap
+  name: OpenStreetMap
+  website: https://www.openstreetmap.org
+  category: maps
+  source: wikidata
+  wikidata: Q936
+  sitelinks: 98
+  status: queued
+- id: classic-visual-basic
+  name: Classic Visual Basic
+  website: https://learn.microsoft.com/en-us/previous-versions/visualstudio/visual-basic-6/visual-basic-6.0-documentation
+  category: developer
+  source: wikidata
+  wikidata: Q2378
+  sitelinks: 92
+  status: queued
+- id: gimp
+  name: GIMP
+  website: https://gimp.org
+  category: creative
+  source: wikidata
+  wikidata: Q8038
+  sitelinks: 91
+  status: queued
+- id: reddit
+  name: Reddit
+  website: https://www.reddit.com
+  category: social
+  source: wikidata
+  wikidata: Q1136
+  sitelinks: 91
+  status: queued
+- id: opera
+  name: Opera
+  website: https://www.opera.com
+  category: browsers
+  source: wikidata
+  wikidata: Q41242
+  sitelinks: 90
+  status: queued
+- id: myspace
+  name: Myspace
+  website: https://myspace.com
+  category: social
+  source: wikidata
+  wikidata: Q40629
+  sitelinks: 89
+  status: queued
+- id: linkedin
+  name: LinkedIn
+  website: https://www.linkedin.com
+  category: social
+  source: wikidata
+  wikidata: Q213660
+  sitelinks: 86
+  status: queued
+- id: github
+  name: GitHub
+  website: https://github.com
+  category: developer
+  source: wikidata
+  wikidata: Q364
+  sitelinks: 81
+  status: queued
+- id: inkscape
+  name: Inkscape
+  website: https://inkscape.org
+  category: creative
+  source: wikidata
+  wikidata: Q8041
+  sitelinks: 80
+  status: queued
+- id: safari
+  name: Safari
+  website: https://www.apple.com/safari
+  category: browsers
+  source: wikidata
+  wikidata: Q35773
+  sitelinks: 80
+  status: queued
+- id: microsoft-bing
+  name: Microsoft Bing
+  website: https://www.bing.com
+  category: search
+  source: wikidata
+  wikidata: Q182496
+  sitelinks: 80
+  status: queued
+- id: virtual-international-authority-file
+  name: Virtual International Authority File
+  website: https://viaf.org
+  category: search
+  source: wikidata
+  wikidata: Q54919
+  sitelinks: 78
+  status: queued
+- id: yandex
+  name: Yandex
+  website: https://yandex.com
+  category: search
+  source: wikidata
+  wikidata: Q5281
+  sitelinks: 74
+  status: queued
+- id: blogger
+  name: Blogger
+  website: https://www.blogger.com
+  category: social
+  source: wikidata
+  wikidata: Q171186
+  sitelinks: 74
+  status: queued
+- id: uber
+  name: Uber
+  website: https://www.uber.com
+  category: delivery
+  source: wikidata
+  wikidata: Q780442
+  sitelinks: 73
+  status: queued
+- id: microsoft-edge
+  name: Microsoft Edge
+  website: https://www.microsoft.com/en-us/edge
+  category: browsers
+  source: wikidata
+  wikidata: Q18698690
+  sitelinks: 72
+  status: queued
+- id: baidu
+  name: Baidu
+  website: https://www.baidu.com
+  category: search
+  source: wikidata
+  wikidata: Q14772
+  sitelinks: 71
+  status: queued
+- id: deutsche-bank
+  name: Deutsche Bank
+  website: https://www.db.com
+  category: finance
+  source: wikidata
+  wikidata: Q66048
+  sitelinks: 70
+  status: queued
+- id: threads
+  name: Threads
+  website: https://www.threads.com
+  category: social
+  source: wikidata
+  wikidata: Q120281745
+  sitelinks: 67
+  status: queued
+- id: duckduckgo
+  name: DuckDuckGo
+  website: https://duckduckgo.com
+  category: search
+  source: wikidata
+  wikidata: Q12805
+  sitelinks: 65
+  status: queued
+- id: wechat
+  name: WeChat
+  website: https://www.wechat.com
+  category: social
+  source: wikidata
+  wikidata: Q283233
+  sitelinks: 65
+  status: queued
+- id: visual-studio
+  name: Visual Studio
+  website: https://visualstudio.microsoft.com
+  category: developer
+  source: wikidata
+  wikidata: Q134067
+  sitelinks: 64
+  status: queued
+- id: last-fm
+  name: last.fm
+  website: https://www.last.fm
+  category: social
+  source: wikidata
+  wikidata: Q183718
+  sitelinks: 62
+  status: queued
+- id: hsbc
+  name: HSBC
+  website: https://hsbc.com
+  category: finance
+  source: wikidata
+  wikidata: Q190464
+  sitelinks: 62
+  status: queued
+- id: bank-of-america
+  name: Bank of America
+  website: https://www.bankofamerica.com
+  category: finance
+  source: wikidata
+  wikidata: Q487907
+  sitelinks: 60
+  status: queued
+- id: goldman-sachs
+  name: Goldman Sachs
+  website: https://www.goldmansachs.com
+  category: finance
+  source: wikidata
+  wikidata: Q193326
+  sitelinks: 59
+  status: queued
+- id: grameen-bank
+  name: Grameen Bank
+  website: https://grameenbank.org.bd
+  category: finance
+  source: wikidata
+  wikidata: Q188567
+  sitelinks: 58
+  status: queued
+- id: jpmorgan-chase
+  name: JPMorgan Chase
+  website: https://www.jpmorganchase.com
+  category: finance
+  source: wikidata
+  wikidata: Q192314
+  sitelinks: 58
+  status: queued
+- id: adobe-illustrator
+  name: Adobe Illustrator
+  website: https://www.adobe.com/products/illustrator.html
+  category: creative
+  source: wikidata
+  wikidata: Q215016
+  sitelinks: 56
+  status: queued
+- id: chromium
+  name: Chromium
+  website: https://www.chromium.org/Home
+  category: browsers
+  source: wikidata
+  wikidata: Q48524
+  sitelinks: 56
+  status: queued
+- id: ubs
+  name: UBS
+  website: https://www.ubs.com
+  category: finance
+  source: wikidata
+  wikidata: Q193199
+  sitelinks: 56
+  status: queued
+- id: google-news
+  name: Google News
+  website: https://news.google.com
+  category: search
+  source: wikidata
+  wikidata: Q12020
+  sitelinks: 55
+  status: queued
+- id: barclays
+  name: Barclays
+  website: https://home.barclays
+  category: finance
+  source: wikidata
+  wikidata: Q245343
+  sitelinks: 54
+  status: queued
+- id: coreldraw
+  name: CorelDRAW
+  website: https://www.coreldraw.com/de/product/coreldraw
+  category: creative
+  source: wikidata
+  wikidata: Q142371
+  sitelinks: 52
+  status: queued
+- id: brave
+  name: Brave
+  website: https://brave.com
+  category: browsers
+  source: wikidata
+  wikidata: Q22906900
+  sitelinks: 52
+  status: queued
+- id: aol
+  name: AOL
+  website: https://aol.com
+  category: search
+  source: wikidata
+  wikidata: Q27585
+  sitelinks: 52
+  status: queued
+- id: myheritage
+  name: MyHeritage
+  website: https://www.myheritage.fr
+  category: social
+  source: wikidata
+  wikidata: Q589757
+  sitelinks: 52
+  status: queued
+- id: credit-suisse
+  name: Credit Suisse
+  website: https://www.credit-suisse.com
+  category: finance
+  source: wikidata
+  wikidata: Q372657
+  sitelinks: 52
+  status: queued
+- id: canva
+  name: Canva
+  website: https://www.canva.com
+  category: creative
+  source: wikidata
+  wikidata: Q23498528
+  sitelinks: 50
+  status: queued
+- id: konqueror
+  name: Konqueror
+  website: https://apps.kde.org/konqueror
+  category: browsers
+  source: wikidata
+  wikidata: Q178565
+  sitelinks: 50
+  status: queued
+- id: truth-social
+  name: Truth Social
+  website: https://www.truthsocial.com
+  category: social
+  source: wikidata
+  wikidata: Q109001687
+  sitelinks: 50
+  status: queued
+- id: deutsche-telekom
+  name: Deutsche Telekom
+  website: https://www.telekom.com
+  category: telecom
+  source: wikidata
+  wikidata: Q9396
+  sitelinks: 50
+  status: queued
+- id: verizon
+  name: Verizon
+  website: https://www.verizon.com
+  category: telecom
+  source: wikidata
+  wikidata: Q467752
+  sitelinks: 50
+  status: queued
+- id: sberbank
+  name: Sberbank
+  website: https://www.sberbank.ru
+  category: finance
+  source: wikidata
+  wikidata: Q205012
+  sitelinks: 49
+  status: queued
+- id: microsoft-paint
+  name: Microsoft Paint
+  website: https://microsoft.com/windows/paint
+  category: creative
+  source: wikidata
+  wikidata: Q334046
+  sitelinks: 48
+  status: queued
+- id: bluesky
+  name: Bluesky
+  website: https://bsky.app
+  category: social
+  source: wikidata
+  wikidata: Q78194383
+  sitelinks: 48
+  status: queued
+- id: tinder
+  name: Tinder
+  website: https://tinder.com
+  category: social
+  source: wikidata
+  wikidata: Q15078152
+  sitelinks: 48
+  status: queued
+- id: morgan-stanley
+  name: Morgan Stanley
+  website: https://morganstanley.com
+  category: finance
+  source: wikidata
+  wikidata: Q334204
+  sitelinks: 48
+  status: queued
+- id: wells-fargo
+  name: Wells Fargo
+  website: https://www.wellsfargo.com
+  category: finance
+  source: wikidata
+  wikidata: Q744149
+  sitelinks: 48
+  status: queued
+- id: huggle
+  name: Huggle
+  website: https://en.wikipedia.org/wiki/WP:HG
+  category: browsers
+  source: wikidata
+  wikidata: Q4796687
+  sitelinks: 47
+  status: queued
+- id: odnoklassniki
+  name: Odnoklassniki
+  website: https://ok.ru
+  category: social
+  source: wikidata
+  wikidata: Q1123836
+  sitelinks: 47
+  status: queued
+- id: citibank
+  name: Citibank
+  website: https://www.citi.com
+  category: finance
+  source: wikidata
+  wikidata: Q857063
+  sitelinks: 47
+  status: queued
+- id: adobe-premiere-pro
+  name: Adobe Premiere Pro
+  website: https://adobe.com/products/premiere
+  category: creative
+  source: wikidata
+  wikidata: Q360424
+  sitelinks: 46
+  status: queued
+- id: livejournal
+  name: LiveJournal
+  website: https://www.livejournal.com
+  category: social
+  source: wikidata
+  wikidata: Q219523
+  sitelinks: 46
+  status: queued
+- id: bnp-paribas
+  name: BNP Paribas
+  website: https://group.bnpparibas
+  category: finance
+  source: wikidata
+  wikidata: Q499707
+  sitelinks: 46
+  status: queued
+- id: visual-studio-code
+  name: Visual Studio Code
+  website: https://code.visualstudio.com
+  category: developer
+  source: wikidata
+  wikidata: Q19841877
+  sitelinks: 45
+  status: queued
+- id: ing-group
+  name: ING Group
+  website: https://ing.com
+  category: finance
+  source: wikidata
+  wikidata: Q645708
+  sitelinks: 45
+  status: queued
+- id: apache-netbeans
+  name: Apache NetBeans
+  website: https://netbeans.apache.org
+  category: developer
+  source: wikidata
+  wikidata: Q264456
+  sitelinks: 44
+  status: queued
+- id: amazon-web-services
+  name: Amazon Web Services
+  website: https://aws.amazon.com
+  category: cloud
+  source: wikidata
+  wikidata: Q456157
+  sitelinks: 44
+  status: queued
+- id: phpmyadmin
+  name: phpMyAdmin
+  website: https://www.phpmyadmin.net
+  category: developer
+  source: wikidata
+  wikidata: Q188104
+  sitelinks: 43
+  status: queued
+- id: fl-studio
+  name: FL Studio
+  website: https://www.image-line.com/flstudio
+  category: creative
+  source: wikidata
+  wikidata: Q740562
+  sitelinks: 43
+  status: queued
+- id: goodreads
+  name: Goodreads
+  website: https://www.goodreads.com
+  category: social
+  source: wikidata
+  wikidata: Q2359213
+  sitelinks: 43
+  status: queued
+- id: krita
+  name: Krita
+  website: https://krita.org
+  category: creative
+  source: wikidata
+  wikidata: Q604945
+  sitelinks: 41
+  status: queued
+- id: ecosia
+  name: Ecosia
+  website: https://www.ecosia.org
+  category: browsers
+  source: wikidata
+  wikidata: Q1282139
+  sitelinks: 41
+  status: queued
+- id: vivaldi
+  name: Vivaldi
+  website: https://vivaldi.com
+  category: browsers
+  source: wikidata
+  wikidata: Q18913176
+  sitelinks: 41
+  status: queued
+- id: researchgate
+  name: ResearchGate
+  website: https://www.researchgate.net
+  category: social
+  source: wikidata
+  wikidata: Q754454
+  sitelinks: 41
+  status: queued
+- id: weibo
+  name: Weibo
+  website: https://weibo.com
+  category: social
+  source: wikidata
+  wikidata: Q92526
+  sitelinks: 41
+  status: queued
+- id: delphi
+  name: Delphi
+  website: https://www.embarcadero.com/products/delphi
+  category: developer
+  source: wikidata
+  wikidata: Q487378
+  sitelinks: 40
+  status: queued
+- id: chess-com
+  name: Chess.com
+  website: https://www.chess.com
+  category: social
+  source: wikidata
+  wikidata: Q16829376
+  sitelinks: 40
+  status: queued
+- id: seamonkey
+  name: SeaMonkey
+  website: https://www.seamonkey-project.org
+  category: browsers
+  source: wikidata
+  wikidata: Q156197
+  sitelinks: 39
+  status: queued
+- id: line
+  name: LINE
+  website: https://line.me
+  category: social
+  source: wikidata
+  wikidata: Q602471
+  sitelinks: 39
+  status: queued
+- id: china-mobile
+  name: China Mobile
+  website: https://www.10086.cn
+  category: telecom
+  source: wikidata
+  wikidata: Q741618
+  sitelinks: 39
+  status: queued
+- id: gambas
+  name: Gambas
+  website: https://gambaswiki.org/website
+  category: developer
+  source: wikidata
+  wikidata: Q648124
+  sitelinks: 38
+  status: queued
+- id: gnuplot
+  name: gnuplot
+  website: https://www.gnuplot.info
+  category: creative
+  source: wikidata
+  wikidata: Q306559
+  sitelinks: 37
+  status: queued
+- id: brave-search
+  name: Brave Search
+  website: https://search.brave.com
+  category: search
+  source: wikidata
+  wikidata: Q107355971
+  sitelinks: 37
+  status: queued
+- id: academia-edu
+  name: Academia.edu
+  website: https://www.academia.edu
+  category: social
+  source: wikidata
+  wikidata: Q2777905
+  sitelinks: 37
+  status: queued
+- id: revolut
+  name: Revolut
+  website: https://www.revolut.com
+  category: finance
+  source: wikidata
+  wikidata: Q22908307
+  sitelinks: 36
+  status: queued
+- id: 9gag
+  name: 9GAG
+  website: https://9gag.com
+  category: social
+  source: wikidata
+  wikidata: Q277421
+  sitelinks: 35
+  status: queued
+- id: tencent-qq
+  name: Tencent QQ
+  website: https://im.qq.com
+  category: social
+  source: wikidata
+  wikidata: Q857640
+  sitelinks: 35
+  status: queued
+- id: xcode
+  name: Xcode
+  website: https://developer.apple.com/xcode
+  category: developer
+  source: wikidata
+  wikidata: Q250328
+  sitelinks: 34
+  status: queued
+- id: worldwideweb
+  name: WorldWideWeb
+  website: https://www.w3.org/People/Berners-Lee/WorldWideWeb.html
+  category: browsers
+  source: wikidata
+  wikidata: Q590890
+  sitelinks: 34
+  status: queued
+- id: processing
+  name: Processing
+  website: https://processing.org
+  category: developer
+  source: wikidata
+  wikidata: Q1053535
+  sitelinks: 33
+  status: queued
+- id: kdenlive
+  name: Kdenlive
+  website: https://www.kdenlive.org
+  category: creative
+  source: wikidata
+  wikidata: Q572226
+  sitelinks: 33
+  status: queued
+- id: apple-maps
+  name: Apple Maps
+  website: https://maps.apple.com
+  category: maps
+  source: wikidata
+  wikidata: Q276101
+  sitelinks: 33
+  status: queued
+- id: adobe-photoshop-lightroom
+  name: Adobe Photoshop Lightroom
+  website: https://www.adobe.com/products/photoshop-lightroom.html
+  category: creative
+  source: wikidata
+  wikidata: Q360403
+  sitelinks: 32
+  status: queued
+- id: figma
+  name: Figma
+  website: https://www.figma.com
+  category: creative
+  source: wikidata
+  wikidata: Q96186334
+  sitelinks: 32
+  status: queued
+- id: garageband
+  name: GarageBand
+  website: https://www.apple.com/ios/garageband
+  category: creative
+  source: wikidata
+  wikidata: Q9539
+  sitelinks: 32
+  status: queued
+- id: craigslist
+  name: Craigslist
+  website: https://www.craigslist.org
+  category: jobs
+  source: wikidata
+  wikidata: Q788500
+  sitelinks: 31
+  status: queued
+- id: xiaohongshu
+  name: Xiaohongshu
+  website: https://xiaohongshu.com
+  category: social
+  source: wikidata
+  wikidata: Q55637991
+  sitelinks: 31
+  status: queued
+- id: foursquare-city-guide
+  name: Foursquare City Guide
+  website: https://foursquare.com/city-guide
+  category: social
+  source: wikidata
+  wikidata: Q62024514
+  sitelinks: 31
+  status: queued
+- id: iridium-communications
+  name: Iridium Communications
+  website: https://www.iridium.com
+  category: telecom
+  source: wikidata
+  wikidata: Q154387
+  sitelinks: 31
+  status: queued
+- id: idle
+  name: IDLE
+  website: https://python.org/idle
+  category: developer
+  source: wikidata
+  wikidata: Q427130
+  sitelinks: 30
+  status: queued
+- id: google-cloud-platform
+  name: Google Cloud Platform
+  website: https://cloud.google.com
+  category: cloud
+  source: wikidata
+  wikidata: Q17054505
+  sitelinks: 30
+  status: queued
+- id: adobe-creative-suite
+  name: Adobe Creative Suite
+  website: https://www.adobe.com/products/cs6.html
+  category: creative
+  source: wikidata
+  wikidata: Q360118
+  sitelinks: 30
+  status: queued
+- id: samsung-browser
+  name: Samsung Browser
+  website: https://browser.samsung.com
+  category: browsers
+  source: wikidata
+  wikidata: Q30589050
+  sitelinks: 30
+  status: queued
+- id: letterboxd
+  name: Letterboxd
+  website: https://letterboxd.com
+  category: social
+  source: wikidata
+  wikidata: Q18709181
+  sitelinks: 30
+  status: queued
+- id: parler
+  name: Parler
+  website: https://parler.com
+  category: social
+  source: wikidata
+  wikidata: Q64852796
+  sitelinks: 30
+  status: queued
+- id: youtube-shorts
+  name: YouTube Shorts
+  website: https://youtube.com/shorts
+  category: social
+  source: wikidata
+  wikidata: Q99438379
+  sitelinks: 30
+  status: queued
+- id: uber-eats
+  name: Uber Eats
+  website: https://www.ubereats.com
+  category: delivery
+  source: wikidata
+  wikidata: Q21462723
+  sitelinks: 30
+  status: queued
+- id: bolt
+  name: Bolt
+  website: https://bolt.eu
+  category: delivery
+  source: wikidata
+  wikidata: Q20529164
+  sitelinks: 30
+  status: queued
+- id: bitbucket
+  name: Bitbucket
+  website: https://bitbucket.org
+  category: developer
+  source: wikidata
+  wikidata: Q2493781
+  sitelinks: 29
+  status: queued
+- id: intellij-idea
+  name: IntelliJ IDEA
+  website: https://www.jetbrains.com/idea
+  category: developer
+  source: wikidata
+  wikidata: Q1206660
+  sitelinks: 29
+  status: queued
+- id: dev-c-plus-plus
+  name: Dev-C++
+  website: https://www.embarcadero.com/free-tools/dev-cpp
+  category: developer
+  source: wikidata
+  wikidata: Q640651
+  sitelinks: 29
+  status: queued
+- id: vegas-pro
+  name: Vegas Pro
+  website: https://www.vegascreativesoftware.com/vegas-pro
+  category: creative
+  source: wikidata
+  wikidata: Q28969703
+  sitelinks: 29
+  status: queued
+- id: cubase
+  name: Cubase
+  website: https://www.steinberg.net/cubase
+  category: creative
+  source: wikidata
+  wikidata: Q862505
+  sitelinks: 29
+  status: queued
+- id: yandex-browser
+  name: Yandex Browser
+  website: https://browser.yandex.com
+  category: browsers
+  source: wikidata
+  wikidata: Q1662015
+  sitelinks: 29
+  status: queued
+- id: camino
+  name: Camino
+  website: https://caminobrowser.org
+  category: browsers
+  source: wikidata
+  wikidata: Q727089
+  sitelinks: 29
+  status: queued
+- id: medium
+  name: Medium
+  website: https://medium.com
+  category: social
+  source: wikidata
+  wikidata: Q16186120
+  sitelinks: 29
+  status: queued
+- id: gab
+  name: Gab
+  website: https://gab.com
+  category: social
+  source: wikidata
+  wikidata: Q28134981
+  sitelinks: 29
+  status: queued
+- id: visual-foxpro
+  name: Visual FoxPro
+  website: https://msdn.microsoft.com/vfoxpro
+  category: developer
+  source: wikidata
+  wikidata: Q753868
+  sitelinks: 28
+  status: queued
+- id: code-blocks
+  name: Code::Blocks
+  website: https://www.codeblocks.org
+  category: developer
+  source: wikidata
+  wikidata: Q835824
+  sitelinks: 28
+  status: queued
+- id: final-cut-pro
+  name: Final Cut Pro
+  website: https://www.apple.com/finalcutpro
+  category: creative
+  source: wikidata
+  wikidata: Q9587
+  sitelinks: 28
+  status: queued
+- id: qwant
+  name: Qwant
+  website: https://www.qwant.com
+  category: browsers
+  source: wikidata
+  wikidata: Q14657870
+  sitelinks: 28
+  status: queued
+- id: midori
+  name: Midori
+  website: https://astian.org/midori-browser
+  category: browsers
+  source: wikidata
+  wikidata: Q285512
+  sitelinks: 28
+  status: queued
+- id: dillo
+  name: Dillo
+  website: https://dillo-browser.org
+  category: browsers
+  source: wikidata
+  wikidata: Q754064
+  sitelinks: 28
+  status: queued
+- id: technorati
+  name: Technorati
+  website: https://www.technorati.com
+  category: search
+  source: wikidata
+  wikidata: Q389701
+  sitelinks: 28
+  status: queued
+- id: china-unicom
+  name: China Unicom
+  website: https://www.chinaunicom.com
+  category: telecom
+  source: wikidata
+  wikidata: Q1068485
+  sitelinks: 28
+  status: queued
+- id: mobile-telesystems
+  name: Mobile TeleSystems
+  website: https://www.mts.ru
+  category: telecom
+  source: wikidata
+  wikidata: Q1368919
+  sitelinks: 28
+  status: queued
+- id: pycharm
+  name: PyCharm
+  website: https://www.jetbrains.com/pycharm
+  category: developer
+  source: wikidata
+  wikidata: Q1484375
+  sitelinks: 27
+  status: queued
+- id: adobe-fireworks
+  name: Adobe Fireworks
+  website: https://www.adobe.com/products/fireworks
+  category: creative
+  source: wikidata
+  wikidata: Q360187
+  sitelinks: 27
+  status: queued
+- id: tux-paint
+  name: Tux Paint
+  website: https://tuxpaint.org
+  category: creative
+  source: wikidata
+  wikidata: Q390406
+  sitelinks: 27
+  status: queued
+- id: openoffice-org-draw
+  name: OpenOffice.org Draw
+  website: https://www.openoffice.org/product/draw.html
+  category: creative
+  source: wikidata
+  wikidata: Q41243
+  sitelinks: 27
+  status: queued
+- id: pro-tools
+  name: Pro Tools
+  website: https://www.avid.com/pro-tools
+  category: creative
+  source: wikidata
+  wikidata: Q247670
+  sitelinks: 27
+  status: queued
+- id: startpage-com
+  name: Startpage.com
+  website: https://www.startpage.com
+  category: search
+  source: wikidata
+  wikidata: Q2333295
+  sitelinks: 27
+  status: queued
+- id: wolt
+  name: Wolt
+  website: https://wolt.com
+  category: delivery
+  source: wikidata
+  wikidata: Q30024526
+  sitelinks: 27
+  status: queued
+- id: didi
+  name: DiDi
+  website: https://www.didiglobal.com
+  category: delivery
+  source: wikidata
+  wikidata: Q21190510
+  sitelinks: 27
+  status: queued
+- id: gnu-icecat
+  name: GNU IceCat
+  website: https://www.gnu.org/software/icecat
+  category: browsers
+  source: wikidata
+  wikidata: Q2009630
+  sitelinks: 26
+  status: queued
+- id: pale-moon
+  name: Pale Moon
+  website: https://www.palemoon.org
+  category: browsers
+  source: wikidata
+  wikidata: Q4046338
+  sitelinks: 26
+  status: queued
+- id: windows-internet-explorer-9
+  name: Windows Internet Explorer 9
+  website: https://technet.microsoft.com/microsoft-edge/gg252704.aspx
+  category: browsers
+  source: wikidata
+  wikidata: Q840644
+  sitelinks: 26
+  status: queued
+- id: windows-internet-explorer-8
+  name: Windows Internet Explorer 8
+  website: https://msdn.microsoft.com/library/cc872845.aspx
+  category: browsers
+  source: wikidata
+  wikidata: Q841259
+  sitelinks: 26
+  status: queued
+- id: grab
+  name: Grab
+  website: https://www.grab.com
+  category: delivery
+  source: wikidata
+  wikidata: Q20873932
+  sitelinks: 26
+  status: queued
+- id: telmex
+  name: Telmex
+  website: https://telmex.com
+  category: telecom
+  source: wikidata
+  wikidata: Q1420164
+  sitelinks: 26
+  status: queued
+- id: saxo-bank-a-s
+  name: Saxo Bank A/S
+  website: https://www.home.saxo
+  category: finance
+  source: wikidata
+  wikidata: Q1325291
+  sitelinks: 26
+  status: queued
+- id: hyphanet
+  name: Hyphanet
+  website: https://www.hyphanet.org
+  category: file-sharing
+  source: wikidata
+  wikidata: Q540
+  sitelinks: 25
+  status: queued
+- id: launchpad
+  name: Launchpad
+  website: https://launchpad.net
+  category: developer
+  source: wikidata
+  wikidata: Q845271
+  sitelinks: 25
+  status: queued
+- id: links
+  name: Links
+  website: https://links.twibright.com
+  category: browsers
+  source: wikidata
+  wikidata: Q608910
+  sitelinks: 25
+  status: queued
+- id: bebo
+  name: Bebo
+  website: https://bebo.com
+  category: social
+  source: wikidata
+  wikidata: Q813559
+  sitelinks: 25
+  status: queued
+- id: amazon-prime
+  name: Amazon Prime
+  website: https://www.amazon.com/amazonprime
+  category: shopping
+  source: wikidata
+  wikidata: Q21086634
+  sitelinks: 25
+  status: queued
+- id: lyft
+  name: Lyft
+  website: https://www.lyft.com
+  category: delivery
+  source: wikidata
+  wikidata: Q17077936
+  sitelinks: 25
+  status: queued
+- id: kolourpaint
+  name: KolourPaint
+  website: https://apps.kde.org/kolourpaint
+  category: creative
+  source: wikidata
+  wikidata: Q1639988
+  sitelinks: 24
+  status: queued
+- id: paintshop-pro
+  name: PaintShop Pro
+  website: https://www.corel.com/paintshoppro
+  category: creative
+  source: wikidata
+  wikidata: Q24614
+  sitelinks: 24
+  status: queued
+- id: imovie
+  name: iMovie
+  website: https://www.apple.com/imovie
+  category: creative
+  source: wikidata
+  wikidata: Q9558
+  sitelinks: 24
+  status: queued
+- id: w3m
+  name: w3m
+  website: https://git.sr.ht/~rkta/w3m
+  category: browsers
+  source: wikidata
+  wikidata: Q306669
+  sitelinks: 24
+  status: queued
+- id: internet-explorer-10
+  name: Internet Explorer 10
+  website: https://technet.microsoft.com/microsoft-edge/jj715271.aspx
+  category: browsers
+  source: wikidata
+  wikidata: Q819537
+  sitelinks: 24
+  status: queued
+- id: windows-internet-explorer-7
+  name: Windows Internet Explorer 7
+  website: https://msdn.microsoft.com/library/cc872846.aspx
+  category: browsers
+  source: wikidata
+  wikidata: Q865500
+  sitelinks: 24
+  status: queued
+- id: xing
+  name: XING
+  website: https://www.xing.com
+  category: jobs
+  source: wikidata
+  wikidata: Q681849
+  sitelinks: 24
+  status: queued
+- id: diaspora
+  name: diaspora*
+  website: https://diasporafoundation.org
+  category: social
+  source: wikidata
+  wikidata: Q1973097
+  sitelinks: 24
+  status: queued
+- id: yelp
+  name: Yelp
+  website: https://www.yelp.com
+  category: social
+  source: wikidata
+  wikidata: Q2299611
+  sitelinks: 24
+  status: queued
+- id: telstra
+  name: Telstra
+  website: https://www.telstra.com.au
+  category: telecom
+  source: wikidata
+  wikidata: Q721162
+  sitelinks: 24
+  status: queued
+- id: sky-uk
+  name: Sky UK
+  website: https://www.sky.com
+  category: telecom
+  source: wikidata
+  wikidata: Q2033167
+  sitelinks: 24
+  status: queued
+- id: google-app-engine
+  name: Google App Engine
+  website: https://cloud.google.com/appengine
+  category: cloud
+  source: wikidata
+  wikidata: Q454728
+  sitelinks: 23
+  status: queued
+- id: capcut
+  name: CapCut
+  website: https://capcut.com
+  category: creative
+  source: wikidata
+  wikidata: Q117172093
+  sitelinks: 23
+  status: queued
+- id: davinci-resolve
+  name: DaVinci Resolve
+  website: https://blackmagicdesign.com/products/davinciresolve
+  category: creative
+  source: wikidata
+  wikidata: Q17628502
+  sitelinks: 23
+  status: queued
+- id: logic-pro
+  name: Logic Pro
+  website: https://www.apple.com/logic-pro
+  category: creative
+  source: wikidata
+  wikidata: Q1057445
+  sitelinks: 23
+  status: queued
+- id: ableton-live
+  name: Ableton Live
+  website: https://www.ableton.com/live
+  category: creative
+  source: wikidata
+  wikidata: Q322400
+  sitelinks: 23
+  status: queued
+- id: galeon
+  name: Galeon
+  website: https://galeon.sourceforge.net
+  category: browsers
+  source: wikidata
+  wikidata: Q174613
+  sitelinks: 23
+  status: queued
+- id: w3c-amaya
+  name: W3C Amaya
+  website: https://www.w3.org/Amaya
+  category: browsers
+  source: wikidata
+  wikidata: Q455973
+  sitelinks: 23
+  status: queued
+- id: google-public-dns
+  name: Google Public DNS
+  website: https://developers.google.com/speed/public-dns
+  category: dns
+  source: wikidata
+  wikidata: Q1012004
+  sitelinks: 23
+  status: queued
+- id: elisa
+  name: Elisa
+  website: https://elisa.fi
+  category: telecom
+  source: wikidata
+  wikidata: Q965268
+  sitelinks: 23
+  status: queued
+- id: internet-explorer-11
+  name: Internet Explorer 11
+  website: https://technet.microsoft.com/microsoft-edge/dn262703.aspx
+  category: browsers
+  source: wikidata
+  wikidata: Q13733263
+  sitelinks: 22
+  status: queued
+- id: avant-browser
+  name: Avant Browser
+  website: https://www.avantbrowser.com
+  category: browsers
+  source: wikidata
+  wikidata: Q790181
+  sitelinks: 22
+  status: queued
+- id: yahoo-search
+  name: Yahoo! Search
+  website: https://search.yahoo.com
+  category: search
+  source: wikidata
+  wikidata: Q2308171
+  sitelinks: 22
+  status: queued
+- id: alumniportal-deutschland
+  name: Alumniportal Deutschland
+  website: https://www.alumniportal-deutschland.org
+  category: social
+  source: wikidata
+  wikidata: Q255683
+  sitelinks: 22
+  status: queued
+- id: identi-ca
+  name: identi.ca
+  website: https://identi.ca
+  category: social
+  source: wikidata
+  wikidata: Q28773
+  sitelinks: 22
+  status: queued
+- id: doordash
+  name: DoorDash
+  website: https://www.doordash.com
+  category: delivery
+  source: wikidata
+  wikidata: Q20714323
+  sitelinks: 22
+  status: queued
+- id: china-telecommunications-corporation
+  name: China Telecommunications Corporation
+  website: https://www.chinatelecom.com.cn
+  category: telecom
+  source: wikidata
+  wikidata: Q1073540
+  sitelinks: 22
+  status: queued
+- id: robinhood
+  name: Robinhood
+  website: https://www.robinhood.com
+  category: finance
+  source: wikidata
+  wikidata: Q18155123
+  sitelinks: 22
+  status: queued
+- id: adobe-photoshop-elements
+  name: Adobe Photoshop Elements
+  website: https://www.adobe.com/products/photoshop-elements.html
+  category: creative
+  source: wikidata
+  wikidata: Q360357
+  sitelinks: 21
+  status: queued
+- id: ardour
+  name: Ardour
+  website: https://ardour.org
+  category: creative
+  source: wikidata
+  wikidata: Q640004
+  sitelinks: 21
+  status: queued
+- id: rambler
+  name: Rambler
+  website: https://www.rambler.ru
+  category: search
+  source: wikidata
+  wikidata: Q1758666
+  sitelinks: 21
+  status: queued
+- id: moltbook
+  name: Moltbook
+  website: https://www.moltbook.com
+  category: social
+  source: wikidata
+  wikidata: Q137946832
+  sitelinks: 21
+  status: queued
+- id: myanimelist
+  name: MyAnimeList
+  website: https://myanimelist.net
+  category: social
+  source: wikidata
+  wikidata: Q4044680
+  sitelinks: 21
+  status: queued
+- id: foodpanda
+  name: foodpanda
+  website: https://www.foodpanda.com
+  category: delivery
+  source: wikidata
+  wikidata: Q16981132
+  sitelinks: 21
+  status: queued
+- id: bell-canada
+  name: Bell Canada
+  website: https://www.bell.ca
+  category: telecom
+  source: wikidata
+  wikidata: Q815694
+  sitelinks: 21
+  status: queued
+- id: interactive-brokers
+  name: Interactive Brokers
+  website: https://www.interactivebrokers.com
+  category: finance
+  source: wikidata
+  wikidata: Q20011294
+  sitelinks: 21
+  status: queued
+- id: lightning
+  name: Lightning
+  website: https://www.thunderbird.net/en-US/calendar
+  category: calendar
+  source: wikidata
+  wikidata: Q854029
+  sitelinks: 20
+  status: queued
+- id: wordpress-com
+  name: WordPress.com
+  website: https://wordpress.com
+  category: cloud
+  source: wikidata
+  wikidata: Q2001888
+  sitelinks: 20
+  status: queued
+- id: hugin
+  name: Hugin
+  website: https://hugin.sourceforge.net
+  category: creative
+  source: wikidata
+  wikidata: Q305953
+  sitelinks: 20
+  status: queued
+- id: libreoffice-draw
+  name: LibreOffice Draw
+  website: https://www.libreoffice.org/discover/draw
+  category: creative
+  source: wikidata
+  wikidata: Q11052448
+  sitelinks: 20
+  status: queued
+- id: indeed
+  name: Indeed
+  website: https://www.indeed.com
+  category: jobs
+  source: wikidata
+  wikidata: Q1045367
+  sitelinks: 20
+  status: queued
+- id: glovo
+  name: Glovo
+  website: https://www.glovoapp.com
+  category: delivery
+  source: wikidata
+  wikidata: Q30899488
+  sitelinks: 20
+  status: queued
+- id: telus-communications
+  name: Telus Communications
+  website: https://www.telus.com/en
+  category: telecom
+  source: wikidata
+  wikidata: Q165858
+  sitelinks: 20
+  status: queued
+- id: n26
+  name: N26
+  website: https://n26.com/de-de
+  category: finance
+  source: wikidata
+  wikidata: Q27479372
+  sitelinks: 20
+  status: queued
+- id: ovhcloud
+  name: OVHcloud
+  website: https://www.ovhcloud.com/de
+  category: cloud
+  source: wikidata
+  wikidata: Q568183
+  sitelinks: 19
+  status: queued
+- id: sketch
+  name: Sketch
+  website: https://www.sketch.com
+  category: creative
+  source: wikidata
+  wikidata: Q22808097
+  sitelinks: 19
+  status: queued
+- id: idvd
+  name: iDVD
+  website: https://www.apple.com/ilife/idvd
+  category: creative
+  source: wikidata
+  wikidata: Q9572
+  sitelinks: 19
+  status: queued
+- id: omniweb
+  name: OmniWeb
+  website: https://omnigroup.com/more
+  category: browsers
+  source: wikidata
+  wikidata: Q1061519
+  sitelinks: 19
+  status: queued
+- id: nintendo-ds-browser
+  name: Nintendo DS Browser
+  website: https://www.nintendo.co.jp/ds/browser/index.html
+  category: browsers
+  source: wikidata
+  wikidata: Q1071410
+  sitelinks: 19
+  status: queued
+- id: arc
+  name: Arc
+  website: https://arc.net
+  category: browsers
+  source: wikidata
+  wikidata: Q120176610
+  sitelinks: 19
+  status: queued
+- id: dolphin-browser
+  name: Dolphin Browser
+  website: https://dolphin-browser.com
+  category: browsers
+  source: wikidata
+  wikidata: Q1236423
+  sitelinks: 19
+  status: queued
+- id: you-com
+  name: You.com
+  website: https://you.com
+  category: search
+  source: wikidata
+  wikidata: Q111598768
+  sitelinks: 19
+  status: queued
+- id: t-mobile-us
+  name: T-Mobile US
+  website: https://www.t-mobile.com
+  category: telecom
+  source: wikidata
+  wikidata: Q3511885
+  sitelinks: 19
+  status: queued
+- id: namecheap
+  name: Namecheap
+  website: https://www.namecheap.com
+  category: cloud
+  source: wikidata
+  wikidata: Q6544704
+  sitelinks: 18
+  status: queued
+- id: pixlr
+  name: Pixlr
+  website: https://pixlr.com
+  category: creative
+  source: wikidata
+  wikidata: Q3560555
+  sitelinks: 18
+  status: queued
+- id: corel-painter
+  name: Corel Painter
+  website: https://www.painterartist.com/en/product/painter
+  category: creative
+  source: wikidata
+  wikidata: Q1070296
+  sitelinks: 18
+  status: queued
+- id: photos
+  name: Photos
+  website: https://www.apple.com/macos/photos
+  category: creative
+  source: wikidata
+  wikidata: Q19788937
+  sitelinks: 18
+  status: queued
+- id: windows-dvd-maker
+  name: Windows DVD Maker
+  website: https://www.microsoft.com/windows/products/windowsvista/features/details/dvdmaker.mspx
+  category: creative
+  source: wikidata
+  wikidata: Q1076697
+  sitelinks: 18
+  status: queued
+- id: pinnacle-studio
+  name: Pinnacle Studio
+  website: https://www.pinnaclesys.com
+  category: creative
+  source: wikidata
+  wikidata: Q1538516
+  sitelinks: 18
+  status: queued
+- id: reason
+  name: Reason
+  website: https://www.reasonstudios.com/reason
+  category: creative
+  source: wikidata
+  wikidata: Q1333703
+  sitelinks: 18
+  status: queued
+- id: reaper
+  name: REAPER
+  website: https://www.reaper.fm
+  category: creative
+  source: wikidata
+  wikidata: Q1372992
+  sitelinks: 18
+  status: queued
+- id: arora
+  name: Arora
+  website: https://github.com/arora/arora
+  category: browsers
+  source: wikidata
+  wikidata: Q1061800
+  sitelinks: 18
+  status: queued
+- id: 1-1-1-1
+  name: 1.1.1.1
+  website: https://one.one.one.one
+  category: dns
+  source: wikidata
+  wikidata: Q52556170
+  sitelinks: 18
+  status: queued
+- id: pixelfed
+  name: Pixelfed
+  website: https://pixelfed.org
+  category: social
+  source: wikidata
+  wikidata: Q60691545
+  sitelinks: 18
+  status: queued
+- id: yandex-taxi
+  name: Yandex Taxi
+  website: https://taxi.yandex.ru
+  category: delivery
+  source: wikidata
+  wikidata: Q16723302
+  sitelinks: 18
+  status: queued
+- id: o2
+  name: O2
+  website: https://www.o2.cz
+  category: telecom
+  source: wikidata
+  wikidata: Q1759255
+  sitelinks: 18
+  status: queued
+- id: at-and-t-mobility
+  name: AT&T Mobility
+  website: https://www.att.com.mx
+  category: telecom
+  source: wikidata
+  wikidata: Q298594
+  sitelinks: 18
+  status: queued
+- id: rogers-communications
+  name: Rogers Communications
+  website: https://www.rogers.com
+  category: telecom
+  source: wikidata
+  wikidata: Q165684
+  sitelinks: 18
+  status: queued
+- id: charles-schwab-corporation
+  name: Charles Schwab Corporation
+  website: https://www.schwab.com
+  category: finance
+  source: wikidata
+  wikidata: Q1066028
+  sitelinks: 18
+  status: queued
+- id: microsoft-office-picture-manager
+  name: Microsoft Office Picture Manager
+  website: https://support.microsoft.com/en-us/office/where-is-picture-manager-58837c3e-34db-4904-95e8-4eca7b7c5730
+  category: creative
+  source: wikidata
+  wikidata: Q942623
+  sitelinks: 17
+  status: queued
+- id: sodipodi
+  name: Sodipodi
+  website: https://sodipodi.sourceforge.net
+  category: creative
+  source: wikidata
+  wikidata: Q939299
+  sitelinks: 17
+  status: queued
+- id: karbon
+  name: Karbon
+  website: https://calligra.org/karbon
+  category: creative
+  source: wikidata
+  wikidata: Q968557
+  sitelinks: 17
+  status: queued
+- id: rekona
+  name: rekona
+  website: https://rekonq.kde.org
+  category: browsers
+  source: wikidata
+  wikidata: Q284972
+  sitelinks: 17
+  status: queued
+- id: skyscanner
+  name: Skyscanner
+  website: https://www.skyscanner.ae
+  category: search
+  source: wikidata
+  wikidata: Q1319169
+  sitelinks: 17
+  status: queued
+- id: google-patents
+  name: Google Patents
+  website: https://patents.google.com
+  category: search
+  source: wikidata
+  wikidata: Q3235742
+  sitelinks: 17
+  status: queued
+- id: pi-hole
+  name: Pi-hole
+  website: https://pi-hole.net
+  category: dns
+  source: wikidata
+  wikidata: Q55629937
+  sitelinks: 17
+  status: queued
+- id: gitea
+  name: Gitea
+  website: https://gitea.com
+  category: developer
+  source: wikidata
+  wikidata: Q28714270
+  sitelinks: 16
+  status: queued
+- id: hostinger
+  name: Hostinger
+  website: https://www.hostinger.com
+  category: cloud
+  source: wikidata
+  wikidata: Q55613975
+  sitelinks: 16
+  status: queued
+- id: rawtherapee
+  name: RawTherapee
+  website: https://www.rawtherapee.com
+  category: creative
+  source: wikidata
+  wikidata: Q568370
+  sitelinks: 16
+  status: queued
+- id: photopea
+  name: Photopea
+  website: https://www.photopea.com
+  category: creative
+  source: wikidata
+  wikidata: Q58327261
+  sitelinks: 16
+  status: queued
+- id: affinity-designer
+  name: Affinity Designer
+  website: https://affinity.serif.com/designer
+  category: creative
+  source: wikidata
+  wikidata: Q19599369
+  sitelinks: 16
+  status: queued
+- id: cinelerra
+  name: Cinelerra
+  website: https://www.heroinewarrior.com/cinelerra.php
+  category: creative
+  source: wikidata
+  wikidata: Q1092408
+  sitelinks: 16
+  status: queued
+- id: pitivi
+  name: Pitivi
+  website: https://www.pitivi.org
+  category: creative
+  source: wikidata
+  wikidata: Q387021
+  sitelinks: 16
+  status: queued
+- id: rosegarden
+  name: Rosegarden
+  website: https://www.rosegardenmusic.com
+  category: creative
+  source: wikidata
+  wikidata: Q1500106
+  sitelinks: 16
+  status: queued
+- id: lunascape
+  name: Lunascape
+  website: https://www.lunascape.org
+  category: browsers
+  source: wikidata
+  wikidata: Q1049180
+  sitelinks: 16
+  status: queued
+- id: mixi
+  name: Mixi
+  website: https://mixi.jp
+  category: browsers
+  source: wikidata
+  wikidata: Q1051289
+  sitelinks: 16
+  status: queued
+- id: netsurf
+  name: NetSurf
+  website: https://www.netsurf-browser.org
+  category: browsers
+  source: wikidata
+  wikidata: Q1185648
+  sitelinks: 16
+  status: queued
+- id: friendica
+  name: Friendica
+  website: https://friendi.ca
+  category: social
+  source: wikidata
+  wikidata: Q1464506
+  sitelinks: 16
+  status: queued
+- id: gojek
+  name: Gojek
+  website: https://www.gojek.com
+  category: delivery
+  source: wikidata
+  wikidata: Q20426955
+  sitelinks: 16
+  status: queued
+- id: fxpro
+  name: FxPro
+  website: https://www.fxpro.com
+  category: finance
+  source: wikidata
+  wikidata: Q5511172
+  sitelinks: 16
+  status: queued
+- id: re-max
+  name: RE/MAX
+  website: https://www.remax.com
+  category: finance
+  source: wikidata
+  wikidata: Q965845
+  sitelinks: 16
+  status: queued
+- id: codeplex
+  name: CodePlex
+  website: https://www.codeplex.com
+  category: developer
+  source: wikidata
+  wikidata: Q240638
+  sitelinks: 15
+  status: queued
+- id: microsoft-photo-editor
+  name: Microsoft Photo Editor
+  website: https://support.microsoft.com/kb/169938
+  category: creative
+  source: wikidata
+  wikidata: Q429051
+  sitelinks: 15
+  status: queued
+- id: powerdirector
+  name: PowerDirector
+  website: https://www.cyberlink.com/products/powerdirector-video-editing-software/overview_en_US.html
+  category: creative
+  source: wikidata
+  wikidata: Q773388
+  sitelinks: 15
+  status: queued
+- id: deutschlandticket
+  name: Deutschlandticket
+  website: https://deutschlandticket.de
+  category: shopping
+  source: wikidata
+  wikidata: Q115017431
+  sitelinks: 15
+  status: queued
+- id: delivery-hero
+  name: Delivery Hero
+  website: https://www.deliveryhero.com
+  category: delivery
+  source: wikidata
+  wikidata: Q23384493
+  sitelinks: 15
+  status: queued
+- id: foodora
+  name: Foodora
+  website: https://www.foodora.com
+  category: delivery
+  source: wikidata
+  wikidata: Q24068412
+  sitelinks: 15
+  status: queued
+- id: neocities
+  name: Neocities
+  website: https://neocities.org
+  category: cloud
+  source: wikidata
+  wikidata: Q17071099
+  sitelinks: 14
+  status: queued
+- id: synfig
+  name: Synfig
+  website: https://synfig.org
+  category: creative
+  source: wikidata
+  wikidata: Q599608
+  sitelinks: 14
+  status: queued
+- id: vsdc-free-video-editor
+  name: VSDC Free Video Editor
+  website: https://www.videosoftdev.com
+  category: creative
+  source: wikidata
+  wikidata: Q16625750
+  sitelinks: 14
+  status: queued
+- id: adobe-encore
+  name: Adobe Encore
+  website: https://www.adobe.com/products/encore
+  category: creative
+  source: wikidata
+  wikidata: Q360144
+  sitelinks: 14
+  status: queued
+- id: chatgpt-search
+  name: ChatGPT Search
+  website: https://openai.com/index/introducing-chatgpt-search
+  category: search
+  source: wikidata
+  wikidata: Q127878612
+  sitelinks: 14
+  status: queued
+- id: google-programmable-search-engine
+  name: Google Programmable Search Engine
+  website: https://cse.google.ru
+  category: search
+  source: wikidata
+  wikidata: Q2233943
+  sitelinks: 14
+  status: queued
+- id: deliveroo
+  name: Deliveroo
+  website: https://deliveroo.co.uk
+  category: delivery
+  source: wikidata
+  wikidata: Q22000919
+  sitelinks: 14
+  status: queued
+- id: ibm-bluemix
+  name: IBM Bluemix
+  website: https://www.ibm.com/cloud
+  category: cloud
+  source: wikidata
+  wikidata: Q18378690
+  sitelinks: 13
+  status: queued
+- id: hetzner
+  name: Hetzner
+  website: https://www.hetzner.com
+  category: cloud
+  source: wikidata
+  wikidata: Q18349346
+  sitelinks: 13
+  status: queued
+- id: searx
+  name: Searx
+  website: https://searx.github.io/searx
+  category: search
+  source: wikidata
+  wikidata: Q17639196
+  sitelinks: 13
+  status: queued
+- id: blackle
+  name: Blackle
+  website: https://www.blackle.com
+  category: search
+  source: wikidata
+  wikidata: Q880870
+  sitelinks: 13
+  status: queued
+- id: glassdoor
+  name: Glassdoor
+  website: https://www.glassdoor.com
+  category: jobs
+  source: wikidata
+  wikidata: Q15954148
+  sitelinks: 13
+  status: queued
+- id: just-eat-takeaway
+  name: Just Eat Takeaway
+  website: https://www.justeattakeaway.com
+  category: delivery
+  source: wikidata
+  wikidata: Q1359435
+  sitelinks: 13
+  status: queued
+- id: grubhub
+  name: Grubhub
+  website: https://www.grubhub.com
+  category: delivery
+  source: wikidata
+  wikidata: Q17019647
+  sitelinks: 13
+  status: queued
+- id: ola-cabs
+  name: Ola Cabs
+  website: https://www.olacabs.com
+  category: delivery
+  source: wikidata
+  wikidata: Q19059388
+  sitelinks: 13
+  status: queued
+- id: telkomsel
+  name: Telkomsel
+  website: https://www.telkomsel.co.id
+  category: telecom
+  source: wikidata
+  wikidata: Q1786124
+  sitelinks: 13
+  status: queued
+- id: clip-studio-paint
+  name: Clip Studio Paint
+  website: https://www.clipstudio.net
+  category: creative
+  source: wikidata
+  wikidata: Q15120677
+  sitelinks: 12
+  status: queued
+- id: pstricks
+  name: PSTricks
+  website: https://tug.org/PSTricks/main.cgi
+  category: creative
+  source: wikidata
+  wikidata: Q2044737
+  sitelinks: 12
+  status: queued
+- id: quad9
+  name: Quad9
+  website: https://quad9.net
+  category: dns
+  source: wikidata
+  wikidata: Q52063654
+  sitelinks: 12
+  status: queued
+- id: monster-com
+  name: monster.com
+  website: https://www.monster.com
+  category: jobs
+  source: wikidata
+  wikidata: Q692041
+  sitelinks: 12
+  status: queued
+- id: pleroma
+  name: Pleroma
+  website: https://pleroma.social
+  category: social
+  source: wikidata
+  wikidata: Q60691066
+  sitelinks: 12
+  status: queued
+- id: syriatel
+  name: Syriatel
+  website: https://syriatel.sy
+  category: telecom
+  source: wikidata
+  wikidata: Q1584130
+  sitelinks: 12
+  status: queued
+- id: partner-communications-company-ltd
+  name: Partner Communications Company Ltd.
+  website: https://www.partner.co.il
+  category: telecom
+  source: wikidata
+  wikidata: Q2000500
+  sitelinks: 12
+  status: queued
+- id: digicel
+  name: Digicel
+  website: https://www.digicelgroup.com
+  category: telecom
+  source: wikidata
+  wikidata: Q2117506
+  sitelinks: 12
+  status: queued
+- id: xfinity
+  name: Xfinity
+  website: https://www.xfinity.com
+  category: telecom
+  source: wikidata
+  wikidata: Q5151002
+  sitelinks: 12
+  status: queued
+- id: ionos
+  name: Ionos
+  website: https://www.ionos.com
+  category: telecom
+  source: wikidata
+  wikidata: Q882107
+  sitelinks: 12
+  status: queued
+- id: nubank
+  name: Nubank
+  website: https://nubank.com.br
+  category: finance
+  source: wikidata
+  wikidata: Q25422888
+  sitelinks: 12
+  status: queued
+- id: riseup
+  name: Riseup
+  website: https://riseup.net
+  category: email
+  source: wikidata
+  wikidata: Q21016183
+  sitelinks: 11
+  status: queued
+- id: gnu-savannah
+  name: GNU Savannah
+  website: https://savannah.gnu.org
+  category: developer
+  source: wikidata
+  wikidata: Q1007059
+  sitelinks: 11
+  status: queued
+- id: fossil
+  name: Fossil
+  website: https://www.fossil-scm.org
+  category: developer
+  source: wikidata
+  wikidata: Q1439431
+  sitelinks: 11
+  status: queued
+- id: bluehost
+  name: Bluehost
+  website: https://bluehost.com
+  category: cloud
+  source: wikidata
+  wikidata: Q4930366
+  sitelinks: 11
+  status: queued
+- id: ulead-photoimpact
+  name: Ulead PhotoImpact
+  website: https://www.corel.com/servlet/Satellite/tw/ct/Product/1251059137269
+  category: creative
+  source: wikidata
+  wikidata: Q1887791
+  sitelinks: 11
+  status: queued
+- id: affinity-photo
+  name: Affinity Photo
+  website: https://affinity.serif.com/de/photo
+  category: creative
+  source: wikidata
+  wikidata: Q23302620
+  sitelinks: 11
+  status: queued
+- id: kagi
+  name: Kagi
+  website: https://kagi.com
+  category: search
+  source: wikidata
+  wikidata: Q123819301
+  sitelinks: 11
+  status: queued
+- id: ai-mode
+  name: AI Mode
+  website: https://www.google.com/aimode
+  category: search
+  source: wikidata
+  wikidata: Q135474941
+  sitelinks: 11
+  status: queued
+- id: tineye
+  name: TinEye
+  website: https://tineye.com
+  category: search
+  source: wikidata
+  wikidata: Q2382535
+  sitelinks: 11
+  status: queued
+- id: nsd
+  name: NSD
+  website: https://www.nlnetlabs.nl/projects/nsd/about
+  category: dns
+  source: wikidata
+  wikidata: Q1163957
+  sitelinks: 11
+  status: queued
+- id: petal-maps
+  name: Petal Maps
+  website: https://www.petalmaps.com
+  category: maps
+  source: wikidata
+  wikidata: Q109607411
+  sitelinks: 11
+  status: queued
+- id: baidu-maps
+  name: Baidu Maps
+  website: https://map.baidu.com
+  category: maps
+  source: wikidata
+  wikidata: Q2879361
+  sitelinks: 11
+  status: queued
+- id: cabify
+  name: Cabify
+  website: https://cabify.com
+  category: delivery
+  source: wikidata
+  wikidata: Q26235033
+  sitelinks: 11
+  status: queued
+- id: oracle-cloud
+  name: Oracle Cloud
+  website: https://www.oracle.com/cloud
+  category: cloud
+  source: wikidata
+  wikidata: Q43401211
+  sitelinks: 10
+  status: queued
+- id: jimdo
+  name: Jimdo
+  website: https://jimdo.com
+  category: cloud
+  source: wikidata
+  wikidata: Q2735411
+  sitelinks: 10
+  status: queued
+- id: kmplot
+  name: KmPlot
+  website: https://apps.kde.org/kmplot
+  category: creative
+  source: wikidata
+  wikidata: Q1581097
+  sitelinks: 10
+  status: queued
+- id: mojeek
+  name: Mojeek
+  website: https://www.mojeek.com
+  category: search
+  source: wikidata
+  wikidata: Q60747299
+  sitelinks: 10
+  status: queued
+- id: instashop
+  name: InstaShop
+  website: https://instashop.com
+  category: delivery
+  source: wikidata
+  wikidata: Q110609588
+  sitelinks: 10
+  status: queued
+- id: indrive
+  name: InDrive
+  website: https://indrive.com
+  category: delivery
+  source: wikidata
+  wikidata: Q29960503
+  sitelinks: 10
+  status: queued
+- id: nos
+  name: NOS
+  website: https://www.nos.pt
+  category: telecom
+  source: wikidata
+  wikidata: Q136331
+  sitelinks: 10
+  status: queued
+- id: desjardins-group
+  name: Desjardins Group
+  website: https://www.desjardins.com
+  category: finance
+  source: wikidata
+  wikidata: Q2933350
+  sitelinks: 10
+  status: queued
+- id: xtb
+  name: XTB
+  website: https://www.xtb.com
+  category: finance
+  source: wikidata
+  wikidata: Q3570310
+  sitelinks: 10
+  status: queued
+- id: gmx
+  name: GMX
+  website: https://www.gmx.es
+  category: email
+  source: wikidata
+  wikidata: Q353410
+  sitelinks: 9
+  status: queued
+- id: gitee
+  name: Gitee
+  website: https://gitee.com
+  category: developer
+  source: wikidata
+  wikidata: Q97173031
+  sitelinks: 9
+  status: queued
+- id: about-me
+  name: about.me
+  website: https://about.me
+  category: cloud
+  source: wikidata
+  wikidata: Q3595053
+  sitelinks: 9
+  status: queued
+- id: picsart
+  name: Picsart
+  website: https://picsart.com
+  category: creative
+  source: wikidata
+  wikidata: Q22907768
+  sitelinks: 9
+  status: queued
+- id: cakewalk-sonar
+  name: Cakewalk Sonar
+  website: https://www.cakewalk.com/products/sonar
+  category: creative
+  source: wikidata
+  wikidata: Q1350502
+  sitelinks: 9
+  status: queued
+- id: soso
+  name: Soso
+  website: https://www.soso.com
+  category: search
+  source: wikidata
+  wikidata: Q3491353
+  sitelinks: 9
+  status: queued
+- id: base
+  name: BASE
+  website: https://www.base-search.net
+  category: search
+  source: wikidata
+  wikidata: Q448335
+  sitelinks: 9
+  status: queued
+- id: justwatch
+  name: JustWatch
+  website: https://www.justwatch.com
+  category: search
+  source: wikidata
+  wikidata: Q59315430
+  sitelinks: 9
+  status: queued
+- id: wikiwix
+  name: Wikiwix
+  website: https://wikiwix.com
+  category: search
+  source: wikidata
+  wikidata: Q950195
+  sitelinks: 9
+  status: queued
+- id: mobilizon
+  name: Mobilizon
+  website: https://mobilizon.org
+  category: social
+  source: wikidata
+  wikidata: Q86678330
+  sitelinks: 9
+  status: queued
+- id: wikimedia-cloud-services
+  name: Wikimedia Cloud Services
+  website: https://www.wmcloud.org
+  category: cloud
+  source: wikidata
+  wikidata: Q5760083
+  sitelinks: 8
+  status: queued
+- id: nano-banana
+  name: Nano Banana
+  website: https://aistudio.google.com/models/gemini-2-5-flash-image
+  category: creative
+  source: wikidata
+  wikidata: Q136327856
+  sitelinks: 8
+  status: queued
+- id: greenshot
+  name: Greenshot
+  website: https://getgreenshot.org
+  category: creative
+  source: wikidata
+  wikidata: Q1544791
+  sitelinks: 8
+  status: queued
+- id: bandlab
+  name: BandLab
+  website: https://www.bandlab.com
+  category: creative
+  source: wikidata
+  wikidata: Q123965097
+  sitelinks: 8
+  status: queued
+- id: bitwig-studio
+  name: Bitwig Studio
+  website: https://www.bitwig.com
+  category: creative
+  source: wikidata
+  wikidata: Q21843360
+  sitelinks: 8
+  status: queued
+- id: gigablast
+  name: Gigablast
+  website: https://www.gigablast.com
+  category: search
+  source: wikidata
+  wikidata: Q3105449
+  sitelinks: 8
+  status: queued
+- id: misskey
+  name: Misskey
+  website: https://misskey-hub.net
+  category: social
+  source: wikidata
+  wikidata: Q60691273
+  sitelinks: 8
+  status: queued
+- id: freenow
+  name: Freenow
+  website: https://www.free-now.com
+  category: delivery
+  source: wikidata
+  wikidata: Q48781517
+  sitelinks: 8
+  status: queued
+- id: sony-bank
+  name: Sony Bank
+  website: https://sonybank.net
+  category: finance
+  source: wikidata
+  wikidata: Q7562429
   sitelinks: 8
   status: queued

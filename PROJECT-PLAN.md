@@ -1045,7 +1045,7 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
 |---|---|---|
 | M11.1 | Policy topics v2 (BLUEPRINT §4.10): the guide's §1.4 topics and rubrics in `data/policy-topics.yaml` (privacy, billing, legal, a new security group, service and finance topics; `billing.cancel-refunds` split into `billing.cancellation` and `billing.refunds`; `service.vpn-logging` renamed `service.activity-logging`, for VPN, DNS, search and browsers); each topic's `silent` rule; a rating's `status` (not stated, not applicable); `other.notable` with a `title`, up to three; the grading procedure (§1.3) and routing table (§1.5) in the policy-research skill and core's `extractionRules` together; the card's grey Not stated line; shared policy documents (`data/policies/<set>.yaml`: a company's policy rated once, which each provider it covers names with `policies: { shared: [<set>] }` and adds its own ratings to; for a topic both rate, its own wins only when its document says it applies instead, else the worst clause); a check that a topic and a feature on the same fact agree (`service.activity-logging` Great only with `vpn.independent-audits` including no-logs) | Every topic has five rungs and a silent rule; the 13 providers' ratings move to the split and renamed topics and still validate; a card shows Not stated in grey; Disney+, Hulu and ESPN share one rated privacy policy; the skill and `extractionRules` state the same procedure |
 | M11.2 | Outside ratings and owners (the owner's choice): a provider's `ratings` (rater, subject, label, date, link) from raters in `data/raters.yaml`, each with its terms of reuse checked; at least two raters for a news provider's bias and reliability, lab results for antivirus; `owner`, quoted from the provider's own about page; both on the card after Terms and policies | A news provider shows two raters' labels with links and dates, and its owner; validation refuses a rater not in the registry and a news bias rating from one rater |
-| M11.3 | Service categories (the guide's §5): finance, social, browsers, search, email, passwords, security, dns, telecom, shopping, developer, file-sharing, calendar, maps, creative, cloud, delivery and jobs in `categories.yaml`, spend categories where card rewards differ, a Wikidata class for each in `wikidataClasses`, and the rule that a plan lists every category it fits | `data:queue` adds services in the new categories; Proton Unlimited is found under AI and email |
+| M11.3 | Service categories (the guide's §5): finance, social, browsers, search, email, passwords, security, dns, telecom, shopping, developer, file-sharing, calendar, maps, creative, cloud, delivery and jobs in `categories.yaml`, spend categories where card rewards differ, a Wikidata class for each in `wikidataClasses`, and the rule that a plan lists every category it fits. As built: see the spec below (`notIn` for bundled free tiers; privacy-suite kept) | `data:queue` adds services in the new categories; Proton Unlimited is found under AI and email |
 | M11.4 | Features that compare (BLUEPRINT §4.2 rules 7–10): `requiredIn` on a feature (an error when a plan in that category doesn't state it, `false` and `0` included); a warning when two of a provider's plans at different prices, for the same region and period, have the same features and perks; the cross-category features (`platforms`, `software.open-source`, `account.sign-in`, `languages.audio`, `languages.subtitles`, `support.channels`); provider-wide features (a provider's own `features`, which every plan has unless it states its own value), stored once per provider in D1 (`provider_features`) rather than on each plan; `streaming.ad-free` renamed `ad-free` through a `data/redirects.yaml` entry (M10.27), which rewrites users' ranks once, with old links' `feature=streaming.ad-free` read as `ad-free` | `video.quality` is required in streaming; Claude's and Xbox Game Pass's plans warn until M11.9; a user's Ad free rank survives the rename; a provider's `platforms` set once writes its rows once |
 | M11.5 | Provider facts (the guide's §3.1): `paymentMethods` (cards, PayPal, app stores, gift cards, bank transfer, cash, crypto) and `currencies` (every currency it takes), each quoted; `renewalAnchor` (the same date, every 30 days, the first of the month, the end of the month), a new item's billing day by default, so the item dialog asks "Billed on the 30th or 31st?" only for a provider whose terms don't say (the owner's TODO, 2026-10-30); `sourceRepo` for the open-source link; all on the card, and read by price-research and extraction | Mullvad shows cash and crypto with their quotes; a new item of a plan that renews on the 1st is billed on the 1st |
 | M11.6 | Ranked perks (BLUEPRINT §4.2, the owner's choice): perks with ids at the provider, plans listing theirs; `perk:<provider>/<perk>` rank keys, ranked in the item dialog only and shared with the provider's other plans in the list (M6.14); counted in rank counts, feature summaries, Search's ranks and the optimizer (§10.2, §10.4); a perk that became a feature redirected to its rank key in `data/redirects.yaml` (M10.27), which moves its ranks | A perk ranked Needed on a provider's top plan stops the optimizer suggesting a plan without it; the rank is on that provider's other plans in the list; a perk moved to a feature keeps users' ranks |
@@ -1179,6 +1179,62 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
   `security.file-shredder`, `parental-control`), proposed to and chosen by the owner. SecurePass, Mobile Security,
   the US Ultimate Security Plus plans and its other regions' new plans wait for its next price research.
 - **Back on plan:** the next task is M11.3, service categories.
+
+**M11.3 — Service categories** (BLUEPRINT §4.5, the guide's §5)
+- **Categories:** the guide's eighteen in `data/categories.yaml` (finance was there), each with a Material Symbols
+  icon and the name Search shows, in the order Search lists them. No id is renamed or removed.
+- **Spend categories** where card rewards differ, and the pipeline's `spendCategoryOf` for them.
+- **Wikidata:** a class for each new category in `wikidataClasses`, each checked on wikidata.org, so `data:queue`
+  fills the queue.
+- **Every category a plan fits:** validation warns when a plan's features name a category it isn't in; the 13's
+  plans are put in every category they fit.
+- **Policy topics:** the new categories in the topics the guide's §1.4 applies to them, and the 13 rate each topic
+  that now applies.
+- **Acceptance**
+  - [x] `data:queue` adds services in the new categories
+  - [x] Proton Unlimited is found under AI and email
+- **As built** (the owner's choices on 2026-11-02: privacy-suite kept, as Privacy suites, with antivirus suites in
+  security; a stated opt-out for bundled free tiers; spend categories shopping, delivery and finance):
+  - **Categories:** 29 service categories (security, passwords, email, calendar, file-sharing, creative, developer,
+    cloud, browsers, search, dns, maps, social, jobs, shopping, delivery and telecom added; privacy-suite renamed
+    Privacy suites, its id kept). Spend: shopping (online shopping and memberships), delivery (food delivery and
+    rides) and finance (bank and account fees); `spendCategoryOf` maps telecom, shopping, delivery and finance to
+    their own, and a test holds every service category to a spend category that exists. Search's Category list
+    already offers only the categories something sold here is in, so the empty ones don't show.
+  - **Wikidata:** 55 classes, the narrower first (GitHub is a social network too): password manager and authenticator
+    to passwords and antivirus to security, no longer privacy-suite; email hosting and mailbox providers to email;
+    browsers, search engines, name servers and DNS providers, map services, forges, repository hosts and IDEs,
+    hosting and PaaS, graphics, video and audio software, employment sites, social networks, food delivery and
+    ridesharing, loyalty programmes and subscription boxes, mobile operators and ISPs, and neobanks, direct banks,
+    credit unions, brokerages, robo-advisors and banks; the noisy ones ask for their best-known 15. A test holds every
+    service category but privacy-suite and software to a class. The queue's 35 earlier password-manager, antivirus and
+    email entries moved to their categories, and the run added 312 (creative 67, social 42, browsers 40, search 30,
+    finance 27, telecom 25, developer 23, delivery 22, cloud 15, maps 5, jobs 5, DNS 5, email 2, shopping 2,
+    calendar 1, file sharing 1). Authenticator, DNS provider, subscription box and robo-advisor find nothing with 8
+    Wikipedia articles yet; file sharing and shopping memberships fill mostly by hand.
+  - **The rule:** core's `featureCategories` (`vpn.included`, `antivirus.included`, `password-manager`,
+    `email.addresses`, `calendar.included`, `storage.cloud`, `ai.assistant`) and `featureNamedCategories`; a plan's
+    new `notIn` lists a category its features name that it isn't sold as (Mail Plus's Proton VPN Free), and is
+    refused for a category it's in or its features don't name. Validation warns about the rest; a rule whose feature
+    or category isn't defined is inactive.
+  - **The 13:** Proton's Free, Unlimited, Duo and Family are privacy-suite, vpn, storage, email, passwords, calendar
+    and ai; Mail Plus email and calendar; Drive, VPN and Pass Plus their own; each single product's `notIn` the free
+    tiers every account has. Every Proton plan has `ai.assistant` for Lumo's free version, quoted in the file from
+    Proton's plans and Lumo articles (Lumo Plus is an add-on, not stored). Bitdefender's main category is security,
+    its paid plans but Premium VPN are passwords too (SecurePass, which its support centre's product articles list,
+    Antivirus Plus's included, over its sales page's older comparison table), Premium and Ultimate Security vpn too, and Total
+    Security's and Antivirus Plus's 200 MB/day Standard VPN is `notIn`. The other 11 fit their one category.
+  - **Topics:** activity logging for dns, search and browsers; who can read your content for email, calendar,
+    passwords, social, file-sharing, cloud and developer; rights over your content for those and creative; children
+    for social; who owns what it makes for creative; account sharing for passwords, security, creative, shopping and
+    delivery; device limits for security and creative. Two ratings were new: Bitdefender's account sharing (Good: its
+    household only, no checks beyond limiting abuse) and Proton's output rights once it was in AI (Good: "you … own
+    the Output", from Lumo's terms of use, with no defence against copyright claims), both quoted and checked with
+    `quote-check.cjs`, the Lumo terms with a baseline.
+  - **Tests:** core (the spend map, the classes against `categories.yaml`, `featureNamedCategories`, the warning and
+    `notIn`'s errors), the API's category search on the real catalog (Proton under AI and email, Bitdefender under
+    security and passwords, its contract examples with the new categories), and Search's Category filter (a plan's
+    own categories in `categories.yaml`'s order, none with nothing sold).
 
 **M11.6 — Ranked perks** (BLUEPRINT §4.2)
 ```yaml

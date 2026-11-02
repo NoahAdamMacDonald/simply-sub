@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
+import { parse } from 'yaml';
+import categoriesYaml from '../../../../data/categories.yaml?raw';
 import {
+  categoriesFileSchema,
   combineCandidates,
   pickWebsite,
   readWikidataResults,
@@ -29,6 +32,14 @@ describe('wikidataClasses', () => {
       expect(qid).toMatch(/^Q\d+$/);
       expect(category).toMatch(/^[a-z-]+$/);
     }
+  });
+
+  it('asks for every service category in data/categories.yaml but the catch-alls, and no other', () => {
+    const service = categoriesFileSchema.parse(parse(categoriesYaml)).service.map(({ id }) => id);
+    const asked = new Set(wikidataClasses.map(({ category }) => category));
+    // Privacy suites and software are what a provider is when no narrower category fits: no class says so.
+    expect([...asked].filter((id) => !service.includes(id))).toEqual([]);
+    expect(service.filter((id) => !asked.has(id))).toEqual(['privacy-suite', 'software']);
   });
 });
 

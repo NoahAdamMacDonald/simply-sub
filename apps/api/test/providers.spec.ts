@@ -274,6 +274,35 @@ describe('GET /providers', () => {
     ]);
   });
 
+  it('finds the new categories a plan fits (M11.3): Proton Unlimited under AI and email', async () => {
+    const ids = async (category: string) =>
+      Object.fromEntries(
+        (await (await get(`?category=${category}&region=CA&sort=name`)).json<Body>()).data.map(
+          (result) => [result.provider.id, result.matchedPlans.map((plan) => plan.id)],
+        ),
+      );
+
+    // Every Proton plan has Lumo's free version, but only Free and the suites are sold as it (notIn).
+    const ai = await ids('ai');
+    expect(Object.keys(ai)).toEqual(['claude', 'proton']);
+    expect(ai['proton']).toEqual([
+      'proton.free',
+      'proton.unlimited',
+      'proton.duo',
+      'proton.family',
+    ]);
+    expect((await ids('email'))['proton']).toEqual([
+      'proton.free',
+      'proton.mail-plus',
+      'proton.unlimited',
+      'proton.duo',
+      'proton.family',
+    ]);
+    // Bitdefender is an antivirus first, and its paid plans have its password manager.
+    expect(Object.keys(await ids('security'))).toEqual(['bitdefender']);
+    expect(Object.keys(await ids('passwords'))).toEqual(['bitdefender', 'proton']);
+  });
+
   it('lists every provider by name without a region, with no prices and no exchange rates', async () => {
     await env.KV.delete('fx:ecb');
 

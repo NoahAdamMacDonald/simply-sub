@@ -1,0 +1,264 @@
+url: https://proton.me/lumo/terms
+method: fetch
+saved: 2026-11-02
+
+Lumo Terms of Service | Proton Close
+Private AI chat app
+Get
+Personal Personal
+Business Business
+Download Download
+Discover Proton Discover Proton
+Pricing
+Discover Lumo AI
+Lumo AI
+AI that respects your privacy
+Start a chat(new window)
+Features
+Security Personalization Image generation
+Resources
+Security model Product news Privacy guides Proton’s guide to AI What does AI know about you?
+Pricing
+Personal plans
+Support
+Product support
+Discover Lumo AI for Business
+Lumo AI
+Confidential AI for professionals and teams
+Find your plan
+Security
+Trust center Security model HIPAA GDPR ISO 27001
+Resources
+Business blog Partners All resources
+Pricing
+Business plans
+Support
+Support for business
+Download Lumo AI
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Web app
+Web app(new window)
+Encrypted emailProton Mail VPN Proton VPN(new window) Cloud storageProton Drive Password managerProton Pass AI assistantLumo AI
+Video conferencingProton Meet Private schedulingProton Calendar Collaborative documentsProton Docs Collaborative spreadsheetsProton Sheets Two-factor authenticatorProton Authenticator
+Bitcoin walletProton Wallet Encrypted notes Standard Notes(new window) Hide-my-email aliases SimpleLogin(new window)
+Company
+About us Impact Social media Open source Team CareersWe’re hiring Proton Foundation Proton blog
+Discover Proton
+EN
+Start a chat(new window)
+Sign in
+Open menu
+Last modified: 19th August 2026
+Lumo Terms of Service
+These Terms of Use ("Terms") constitute an agreement between the customer ("you" or "user") and Proton AG, located at route de la Galaise 32, 1228 Plan-les-Ouates, Switzerland (the "Company", “We”).
+These Terms apply to access and use an account (the “Account”) on the privacy-focused artificial intelligence service “Lumo”, offered by the Company ("Service" or "Services").
+By using Services and further accepting to avail the Services, you agree to accept and comply with these Terms. You should read, understand and accept the entire Terms. If you do not accept and agree to these Terms, you should avoid accessing or using the Services.
+1. Users of the Services
+The Services are provided exclusively to individuals who are at least 13 years of age, and even then, only to minors who have obtained parental or legal guardian consent to open and maintain an Account.
+The Services are provided exclusively to persons or legal entities. Accounts registered by “bots” or automated methods are not authorized and will be terminated.
+Each user is solely responsible for all actions performed through the Services.
+2. Authorized use of the Services
+Prohibited Activities. You agree not to use your Account or the Services for any illegal or prohibited activities. Unauthorized activities include, but are not limited to:
+Disrupting the Company's networks and Servers in your use of the Services;
+Accessing/sharing/downloading/uploading illegal content, including but not limited to Child Sexual Abuse Material (CSAM) or content related to CSAM;
+Infringing upon or violating the intellectual property rights of the Company or a third party;
+Harassing, abusing, insulting, harming, defaming, slandering, disparaging, intimidating or discriminating against someone based on gender, sexual orientation, religion, ethnicity, race, age, nationality or disability;
+Trading, selling or otherwise transferring the ownership of an Account to a third party (with the exception of Lifetime Accounts, which can be sold or traded exclusively through the Company);
+Promoting illegal activities or providing instructional information to other parties to commit illegal activities;
+Having multiple free Accounts (e.g. creating bulk signups, creating and/or operating a large number of free Accounts for a single organization or individual);
+Paying for your subscription with fraudulent payment means, such as a stolen credit card;
+Attempting to access, probe, or connect to computing devices without proper authorization (i.e. any form of unauthorized "hacking").
+Sharing, disclosing, selling, or otherwise making available to any third party any API keys, access tokens, credentials, or other authentication mechanisms associated with your Account or the Services;
+Any Account found to be committing any of the listed unauthorized activities will be immediately suspended or restricted accordingly (which can include features and capabilities restrictions).
+The Company may also terminate Accounts which are being used for illegal activities that are not listed above, particularly in response to orders from the competent authorities informing of such illegal activity.
+Fair use of "unlimited" plans. For subscription plans offering "unlimited" usage (including Lumo Plus), "unlimited" means that no fixed numerical cap applies to ordinary, good-faith use of the relevant feature by an individual user. Such usage remains subject to fair and reasonable use. Usage will be considered excessive where it substantially exceeds the typical usage patterns of individual users of the same plan, where it is not consistent with normal human use of an LLM chatbot, or where it appears to result from automated, scripted, or programmatic activity, resale or sharing of the Account, or other activity that would otherwise breach these Terms.
+Where the Company determines, acting reasonably, that an Account's usage is excessive, the Company may take proportionate action, including throttling or temporarily limiting the rate or volume of usage, restricting access to the relevant feature, or, in cases of repeated or serious excessive use, suspending or restricting the Account.
+Where practicable, the Company will give the user prior notice and an opportunity to bring their usage back within fair use before taking such action, except where immediate action is necessary to protect the Services or other users.
+3. Content
+Your content. You may provide input to the Services (“Input”), and receive output from the Services based on the Input (“Output”). Input and Output are collectively “Content.” You are responsible for Content, including ensuring that it does not violate any applicable law or these Terms. You represent and warrant that you have all rights, licenses, and permissions needed to provide Input to the Services.
+Confidentiality of your content. In line with Proton’s privacy-by-design principles across its services, Lumo is designed to protect the confidentiality of your Content. The information you provide and the responses generated by the Services are secured using zero-access encryption after having been processed by Lumo, which is intended to prevent access by the Company, its staff, or third parties. Access to your conversations is limited to you through your Proton Account.
+Ownership of content. As between you and the Company, and to the extent permitted by applicable law, you (a) retain your ownership rights in Input and (b) own the Output. We hereby assign to you all our right, title, and interest, if any, in and to Output.
+Similarity of content. Due to the nature of the Services and artificial intelligence generally, output may not be unique and other users may receive similar output from our Services. Our assignment above does not extend to other users’ output or any third party output.
+No use of content. Company will not use any of your content to maintain, develop, or improve our Services. Your content is your own. All improvements done to the Services by the Company are based on development independent of the Content.
+Accuracy of output. Artificial intelligence and machine learning are rapidly evolving fields of study. The Company is constantly working to improve our Services to make them more accurate, reliable, safe, and beneficial. Given the probabilistic nature of machine learning, use of the Services may, in some situations, result in Output that does not accurately reflect real people, places, or facts.
+When you use the Services you understand and agree:
+Output may not always be accurate. You should not rely on Output from our Services as a sole source of truth or factual information, or as a substitute for professional advice.
+You must evaluate Output for accuracy and appropriateness for your use case, including using human review as appropriate, before using or sharing Output from the Services.
+You must not use any Output relating to a person for any purpose that could have a legal or material impact on that person, such as making credit, educational, employment, housing, insurance, legal, medical, or other important decisions about them.
+The Services may provide incomplete, incorrect, or offensive Output that does not represent the Company's views. If Output references any third party products or services, it doesn’t mean the third party endorses or is affiliated with the Company.
+4. Payment and Fees
+If you have subscribed to the Services by subscribing to a Proton bundle (e.g. Proton Unlimited, Proton Visionary, Proton Business), Proton AG's Payment and Fees section is applicable (see section 9).
+Subscriptions for the Services are charged on a monthly, yearly or bi-yearly billing cycle, depending on your selection. After the initial term, the subscription is renewed automatically for the same selected duration unless canceled or modified by you, or as announced at the moment of initial purchase. The price may change after the initial term as announced at the moment of initial purchase. Credit balances are automatically deducted accordingly. You are responsible for keeping payment information in relation with your Account up to date.
+You may cancel your subscription within 30 days of the initial purchase and receive a refund for any unused portion of the service period. Here, any unused portion of the service period refers to the prorated remaining full days of the subscription period. Refunds will be processed within 30 days of the request. To request a refund, please contact us using our support form. For the sake of clarity, the cancellation and the request for refund must both be addressed within the 30-day period. Payments made by cash or bank transfers are not refundable. Refunds can only be requested once per user. This refund option is only applicable to users who have subscribed to the Company's Services directly through Proton's official channels (website and apps). If you have subscribed to the Company's Services through an intermediary or a third-party, please refer to their respective refund policy.
+Past the abovementioned 30-day period, the Services provided by the Company are non-refundable and any refund or credit given will be at the sole discretion of the Company. Paid Accounts which are terminated due to a violation of these Terms will incur the loss of all payments and credits and are not eligible for refund. If you terminate your Account before its term for convenience on the basis of a specific regulation allowing you to do so (including but not limited to Chapter VI of the EU Data Act), you agree that early termination penalties apply, whereas these termination penalties correspond to the remainder of the payment that would otherwise have been due for the agreed term of your Account subscription.
+If the Company chooses to issue a refund for any reason, The Company will only refund in the original currency of payment and to the original payment method. If you request a credit balance to be converted between different currencies which the Company supports, the Company has discretion over the exchange rate applied.
+If you fail to fulfil your obligation of payment as a user of a paid Account, your account will be automatically downgraded to a Free account 14 days after the failure to proceed to payment.
+Subscriptions and credits are linked to the Account they have originally been purchased for and cannot be transferred to another account.
+If you rely on dispute or chargeback mechanisms of third-party payment processors, you waive your right to the above-mentioned refund from the Company and consent to rely upon the dispute resolution procedure of the third-party payment processor. Furthermore, if the result of the dispute or chargeback mechanisms causes the Company to be liable for additional costs (e.g. dispute fee), you authorize the Company to charge that amount on your account.
+Refunds made under this section may only concern the subscription to the Services and in no event shall the Company refund any acquisition of digital asset made by a user using the Services.
+5. Intellectual Property
+Unless otherwise specified, all materials used within the Services and on this website are the property of or licensed to the Company and are protected by copyright, trademark, and other applicable laws. You may view, print and/or download a copy of the materials from this website on any single computer solely for your personal, informational and/or non-commercial use, provided you comply with all copyright and other proprietary notices. The trademarks, service marks and logos of the Company and others used in the Services ("Trademarks") are the property of or licensed to the Company and their respective owners.
+Trademarks include (but are not limited to) the following registered trademarks:
+a. Trademark n° 99096839 in the United States
+Trademarks and other materials should not be copied, reproduced, modified, republished, uploaded, posted, transmitted, scraped, collected or distributed in any form or by any means, whether manual or automated, unless indicated otherwise by the Company.
+6. Integration with services provided by Proton AG
+Depending on how you use the Service, you may use services and features provided by Proton AG, such as a Proton account. In such cases, you also:
+a. consent to Proton AG's Terms of Service and the documents incorporated by reference.
+b. acknowledge and accept that Proton AG acts as an agent of the Company for the collection and payment of the fees relating to the Services; and
+c. acknowledge that Proton AG does not operate the Services, which are solely operated by the Company.
+7. Limited warranties and liability
+The Company does not make any warranty about the reliability of the Services or the security of user data, despite best efforts. The Service is provided “as is” and “as available,” without warranty of any kind, either express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, title, accuracy, non-infringement, or warranties that may arise from course of dealing or course of performance or usage of trade.
+To the extent not prohibited by law, you acknowledge and agree that in no event will the Company be responsible or liable to you or any third party, under any theory of responsibility or liability, for any indirect, special, exemplary, incidental, consequential, or punitive damages (including, but not limited to, procurement of substitute goods or services; loss of data, use, or profits; business interruptions; or any other damages or losses), for any multiplier on or increase to damages, or for any costs or fees (including attorneys’ fees), whether under these Terms or otherwise, arising in any way in connection with your Account, the Services, or these Terms, whether arising at law, in equity, or otherwise, and whether based in contract, strict liability, tort (including negligence or otherwise), common law, statute, equity, or otherwise, even if we have been advised of the possibility of such damage, or for any other claim, demand, or damages whatsoever, arising out of or related to your use or inability to use your Account or the Services.
+Without limitation of the foregoing, and to the extent not prohibited by law, the total liability of the Company’s parties for any reason whatsoever arising out of or related to the use of, or inability to use, your Account or the Services, or these Terms, shall not exceed $100, or the amount you paid us, if any, for use of your Account or the Services, whichever amount is greater. This liability, if any, shall be complete and exclusive. The foregoing limitations will apply even if the above stated remedy fails of its essential purpose.
+Applicable law in some locations, such as the State of New Jersey, does not allow the waiver of implied warranties, the limitation of liability of certain damages set forth above, including the provisions of this section that limit or exclude special, exemplary, consequential, or punitive damages, or limit or exclude the use of any multiplier on or increase to damages, and limit the liability of the Company or any of the Company’s parties, to the greater of either $100 or the amount paid by you for use of your Account or the Services. These limitations or exclusions may not apply to you. The provisions of this section do not apply to the extent, and only to the extent, not permitted by applicable law.
+IF YOU ARE A CALIFORNIA RESIDENT, YOU WAIVE CALIFORNIA CIVIL CODE § 1542, WHICH SAYS: A GENERAL RELEASE DOES NOT EXTEND TO CLAIMS THAT THE CREDITOR OR RELEASING PARTY DOES NOT KNOW OR SUSPECT TO EXIST IN HIS OR HER FAVOR AT THE TIME OF EXECUTING THE RELEASE AND THAT, IF KNOWN BY HIM OR HER, WOULD HAVE MATERIALLY AFFECTED HIS OR HER SETTLEMENT WITH THE DEBTOR OR RELEASED PARTY.
+8. Indemnification
+You agree that the Company, and any parents, subsidiaries, officers, directors, employees, agents, or third-party contractors (the "Indemnified Parties") cannot be held responsible for any third-party claim, demand, or damages, including reasonable attorneys’ fees, arising out of your use of your Account or the Services. You agree that the Indemnified Parties will have no liability in connection with any such third-party claim, demand, or damages, and you agree to indemnify any and all resulting loss, damages, judgments, awards, costs, expenses, and attorneys’ fees and litigation expenses of the Indemnified Parties in connection therewith. You will also indemnify and hold the Indemnified Parties harmless from and against any third-party claims, demands, or damages arising out of your use of your Account or the Services.
+9. Privacy
+Our Privacy Policy and its sub-policies explain the way we handle and protect your personal data and privacy in relation to your Account, your use of the Services, and your browsing of the Lumo website. By agreeing to the present Terms and to be able to use the Services, you also agree to our Privacy Policy and its sub-policies.
+If, in the provision of the Services, the Company processes, on the user’s behalf (where the user acts as a Data Controller), any personal data that is subject to the EU General Data Protection Regulation (GDPR), the company’s data processing agreement shall apply.
+10. Jurisdiction, Applicable Law and Language
+This section defines different rules depending on whether you use the Services for business purposes (business user) or as a consumer user, and if the latter, where you reside. Please refer to the appropriate section applying to you.
+If you are a business user (anywhere in the world) or a consumer user (residing outside of the United States of America), you agree that these Terms shall be governed in all respects by the substantive laws of Switzerland, to the maximum extent permitted by law. Any disputes, actions, claims, or other controversies arising out of or relating in any way to these Terms, your Account, the Services, your use of (or lack of use of) or access to (or lack of access to) your Account or the Services, or any advertising, promotion, or other communications between you and the Company, whether based in contract, warranty, tort, statute, regulation, ordinance, or any other legal or equitable basis, shall be subject to the jurisdiction of the competent courts of the domicile of the Company and Section 10.1 below does not apply. By using your Account or the Services, you irrevocably agree that the courts of the domicile of the Company shall have exclusive jurisdiction to settle any dispute or claim (including non-contractual disputes or claims) arising out of or relating in any way to these Terms or its subject matter or formation to the extent permitted by law.
+If you are a consumer user residing in the United States of America, you consent to the extent permitted by law to the jurisdiction of the courts of the domicile of the Company to settle any dispute or claim (including non-contractual disputes or claims) arising out of or relating in any way to these Terms or its subject matter or formation and agree that any such claim that is brought in Switzerland shall be governed in all respects by the substantive laws of Switzerland. You further agree that for any disputes, actions, claims, or other controversies arising out of or relating in any way to these Terms, your Account, the Services, your use of (or lack of use of) or access to (or lack of access to) your Account or the Services, or any advertising, promotion, or other communications between you and the Company, whether based in contract, warranty, tort, statute, regulation, ordinance, or any other legal or equitable basis, if brought in the United States and found to have jurisdiction in the United States, shall be construed and enforced in accordance with the laws of the state where you reside; provided, however, that the arbitration provisions herein shall be governed by the Federal Arbitration Act and the American Arbitration Association (“AAA”) Consumer Arbitration Rules (the “AAA Rules”), as described more fully below in Section 13.1. A printed version of these Terms and of any related notice given in electronic form shall be admissible in judicial or administrative proceedings based upon or relating to these Terms to the same extent as other documents and records originally generated and maintained in printed form.
+10.1. Binding arbitration agreement and class action waiver
+These Terms and Conditions contain a class action waiver as well as an arbitration provision, which requires you to arbitrate any claims (with certain exceptions) you may have on an individual basis. Arbitration on an individual basis means that you will not have, and that you waive, the right for a judge or jury to decide your claims, and that you may not proceed in a class, consolidated, or representative capacity in any forum, as described in more detail below. You have the right to opt out of arbitration and/or the class action waiver, as explained below. Please read this section and the class action waiver section carefully – it may significantly affect your legal rights, including your right to file a lawsuit in court and to have a jury hear your claims. It contains procedures for mandatory binding arbitration and a class action waiver.
+Informal dispute resolution. Either party asserting a dispute shall first try in good faith to resolve it by providing written notice as specified below to the other party describing the facts and circumstances (including any relevant documentation) and allowing the receiving party 30 days in which to respond. Both you and the Company agree that this dispute resolution procedure is a condition precedent which must be satisfied before initiating any arbitration against the other party.
+Binding arbitration agreement
+Scope of the arbitration agreement. Mindful of the high cost of legal disputes, not only in dollars but in time and energy, both you and the Company agree that any and all disputes, actions, claims, or other controversies arising out of or relating in any way to these Terms, your Account, the Services, your use of (or lack of use of) or access to (or lack of access to) your Account or the Services, or any advertising, promotion, or other communications between you and the Company, whether based in contract, warranty, tort, statute, regulation, ordinance, or any other legal or equitable basis, shall be resolved exclusively through final and binding individual arbitration, and the parties expressly waive any and all rights to appeal any order or judgment of the arbitrator or seek confirmation of an order or judgment of the arbitrator to the extent permitted by applicable law. “Dispute” will be given the broadest possible meaning allowable under law. All Indemnified Parties are intended beneficiaries of this binding arbitration agreement and class action waiver.
+This agreement to arbitrate covers and includes threshold questions of arbitrability. The arbitrator, and not any federal, state, or local court or agency, shall have exclusive authority to resolve any and all disputes arising out of or relating to the formation, existence, scope, validity, interpretation, applicability, or enforceability of this agreement to arbitrate, or any part of it, or of these Terms, including, but not limited to, any claim that all or any part of this agreement to arbitrate or the Terms is void or voidable. If any party disagrees about whether the foregoing provision (or any portion of this agreement to arbitrate, including without limitation the provisions relating to arbitration) can be enforced or whether it applies to the dispute, the parties agree that the arbitrator will decide that dispute. Notwithstanding the foregoing, however, the parties agree that any issue concerning the validity of the class action waiver below must be decided by a court, and an arbitrator does not have authority to consider the validity of the class action waiver. Both you and the Company understand and agree that we are waiving our right to sue or go to court to assert or defend our rights, except as set forth below.
+Exceptions. Notwithstanding the remainder of this binding arbitration agreement, you and the Company agree that the following types of disputes will be resolved in court, unless both you and the Company agree to submit the dispute to arbitration pursuant to this binding arbitration agreement: (1) disputes or claims within the jurisdiction of a small claims court consistent with the jurisdiction and dollar limits that may apply, as long as it is brought and maintained as an individual dispute and not as a class, representative, or consolidated action or proceeding; (2) disputes or claims where the sole form of relief sought is injunctive relief (including public injunctive relief); or (3) intellectual property disputes.
+For the avoidance of doubt, the waiver of the right to bring claims in or otherwise participate in a class, representative, or consolidated action or proceeding set forth in the class action waiver provision below does not prevent you from seeking public injunctive relief in an individual capacity to the extent otherwise permitted by law.
+You and the Company also agree that for disputes or claims where both injunctive relief (including public injunctive relief) and non-injunctive relief are sought, you and the Company will first submit the dispute or claim for non-injunctive relief to arbitration pursuant to this section. The arbitrator will not be permitted to grant injunctive relief (unless the parties mutually agree otherwise). Once the arbitration of the dispute or claim for non-injunctive relief has concluded, you and/or the Company may seek the injunctive relief (including the public injunctive relief) in court to the extent permitted by law.
+Any litigation in court of the foregoing types of disputes (except for small claims court actions) may be commenced only in a federal or state court located within county (or parish) and State in which you reside, and you and the Company each consent to the jurisdiction of those courts for such purposes. Regardless of whether the foregoing types of disputes in this section are resolved by a court or pursuant to arbitration, you and the Company agree that the dispute is subject to the class action waiver provision set forth below.
+How arbitration works. Either party may initiate arbitration of a dispute, which will be settled by final and binding arbitration, using the English language, administered by AAA under the AAA Rules then in effect (those rules are deemed to be incorporated by reference into this section, and as of the date of these Terms), and the parties expressly waive any and all rights to appeal any order or judgment of the arbitrator or seek confirmation of an order or judgment of the arbitrator to the extent permitted by applicable law.
+Unless you and the Company agree otherwise, including to conduct the arbitration by telephone or videoconference, any arbitration hearing shall take place in the county (or parish) and State where you reside, unless the arbitrator determines that a different location would better serve the convenience of the parties. Payment of all filing, administration, and arbitrator costs and expenses will be governed by the AAA Rules, except that if you demonstrate that any such costs and expenses owed by you under those rules would be prohibitively more expensive than a court proceeding, the Company will pay the amount of any such costs and expenses that the arbitrator determines are necessary to prevent the arbitration from being prohibitively more expensive than a court proceeding (subject to possible reimbursement as set forth below).
+Each party is responsible for his, her, their or its own attorneys’ fees and expenses, and the Company will not pay your attorneys’ fees or expenses except to the extent ordered to do so by the arbitrator. If you prevail in arbitration, however, you will be entitled to an award of reasonable attorneys’ fees and expenses to the extent allowed for under applicable law and ordered by the arbitrator. In the event the arbitrator determines the claim you asserted in the arbitration to be frivolous according to Federal Rule of Civil Procedure 11, or brought for an improper purpose, you agree to reimburse the Company for all fees associated with the arbitration paid by the Company that you otherwise would have been obligated to pay under the AAA Rules.
+In determining whether an action is frivolous, the arbitrator may consider whether the Company has offered you a full refund of the sum you paid for items you purchased from the Company or has otherwise offered full relief to you in relation to your individual claim. If the arbitrator, upon final disposition of the case, finds your dispute was not frivolous, the Company will reimburse any filing fees that you paid and were not otherwise reimbursed. Judgment on the arbitration award may be entered in any court that has jurisdiction. Any arbitration under these Terms will take place on an individual basis – class arbitrations and class actions are not permitted. You understand that by agreeing to these Terms, you and the Company are each waiving the right to trial by jury or to participate in a class action or class arbitration.
+Class action waiver. To the fullest extent permitted by applicable law, you and the Company each agree that any proceeding to resolve any dispute, claim, or controversy will be brought and conducted only in the respective party’s individual capacity and not as part of any class (or purported class), consolidated, multiple-plaintiff, or representative action or proceeding (“class action”). You and the Company agree to waive the right to participate as a plaintiff or class member in any class action. You and the Company expressly waive any ability to maintain a class action in any forum. If the dispute is subject to arbitration, the arbitrator will not have the authority to combine or aggregate claims, conduct a class action, or make an award to any person or entity not a party to the arbitration. Further, you and the Company agree that the arbitrator may not consolidate proceedings for more than one person’s claims, and it may not otherwise preside over any form of a class action. For the avoidance of doubt, however, you can seek public injunctive relief to the extent authorized by law and consistent with the exceptions clause above.
+If this class action waiver is limited, voided, or found unenforceable, then, unless the parties mutually agree otherwise, the parties’ agreement to arbitrate shall be null and void with respect to such proceeding so long as the proceeding is permitted to proceed as a class action. If a court decides that the limitations of this paragraph are deemed invalid or unenforceable, any putative class, private attorney general, or consolidated or representative action must be brought in a court of proper jurisdiction and not in arbitration.
+Opt out provision and governing law. You have the right to opt-out and not be bound by the arbitration provisions including or excluding the class action waiver set forth in these Terms by sending written notice of your decision to opt-out to:
+Proton AG
+Attn: Legal
+Route de la Galaise 32
+1228 Plan-les-Ouates
+Switzerland
+The opt-out notice must be sent to the foregoing address within 30 calendar days of your first agreeing to these Terms. Should you not opt out in accordance with this section within the 30-day period, then this agreement to arbitrate will become fully effective and binding as of the date you first agreed to these Terms. If you opt out of only the arbitration provisions, and not also the class action waiver, the class action waiver still applies. You may not opt out of only the class action waiver, but not the other arbitration provisions.
+This binding arbitration agreement and class action waiver are governed by, and interpreted, construed, and enforced in accordance with, the Federal Arbitration Act and other applicable federal law. To the extent state law applies to any aspect of this binding arbitration agreement and class action waiver, or to any disputes and claims that are covered by this binding arbitration agreement and/or class action waiver, the laws of the State in which you reside will apply. We will provide notice of any material changes to this binding arbitration agreement and/or class action waiver (which may be satisfied by updating these Terms, unless not otherwise permitted by law, in accordance with the provisions in the section “Modification to the terms of service”), in which case you will have the right to opt out of the arbitration provisions and/or class action waiver within 30 days after such change, consistent with the terms above. Except as set forth above regarding the class action waiver provision, if any portion of these arbitration provisions is deemed invalid or unenforceable, it will not invalidate the remaining portions of these arbitration provisions. Only the arbitrator is authorized to make determinations as to the scope, validity, or enforceability of this binding arbitration agreement, including whether any dispute falls within its scope, as set forth above. However, the parties agree that any issue concerning the validity of the class action waiver above must be decided by a court, as set forth above, and an arbitrator does not have authority to consider the validity of the waiver.
+11. Miscellaneous
+These Terms do not affect your statutory rights or your legal rights, if any, as a consumer.
+Headings are for reference purposes only and in no way define, limit, construe or describe the scope of such section.
+Our failure to enforce any provision of these Terms shall not constitute a waiver of that or any other provision.
+We may assign these Terms in whole or in part. Moreover, we may delegate our rights and responsibilities or use contractors or agents to fulfill its obligations under these Terms.
+These Terms (and other terms incorporated by reference herein) represent the entire agreement between you and us in connection with your use of your Account or the Services, and they supersede all prior or contemporaneous communications and proposals, whether electronic, oral, or written between you and the Company with respect to your Account or the Services.
+If any of the provisions of these Terms are held by a court or other tribunal of competent jurisdiction to be void or unenforceable, such provisions, unless they materially affect the entire intent and purpose of these Terms or unless otherwise provided herein, shall be limited or eliminated to the minimum extent necessary and replaced with a valid provision that best embodies the intent of these Terms, so that these Terms shall remain in full force and effect.
+In case of discrepancy between the English version of these Terms and any translated version, the English version shall prevail.
+Within the limits of applicable law, the Company reserves the right to review and change these Terms at any time. As long as you are using your Account or the Services, you are responsible for regularly reviewing these Terms. Continued use of your Account or the Services, including non-deletion of your Account after such changes are performed shall constitute your consent to them. The latest Terms will apply going forward and to any dispute or issue arising after the Terms have been updated.
+Privacy by default
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+Proton AG Route de la Galaise 32
+1228 Plan-les-Ouates
+Geneva, Switzerland
+Products Proton Mail
+Proton Calendar
+Proton Drive
+Proton VPN(new window)
+Proton Pass
+Proton Wallet
+Proton Docs
+Proton Sheets New
+Proton Authenticator
+Proton Meet New
+Lumo AI
+Standard Notes(new window)
+Simple Login(new window)
+Proton for Business
+Pricing
+Switch to Proton
+Products
+Proton Mail
+Proton Calendar
+Proton Drive
+Proton VPN(new window)
+Proton Pass
+Proton Wallet
+Proton Docs
+Proton Sheets New
+Proton Authenticator
+Proton Meet New
+Lumo AI
+Standard Notes(new window)
+Simple Login(new window)
+Proton for Business
+Pricing
+Switch to Proton
+Privacy Password generator
+Username generator
+Tor
+Open source
+Student discount
+Special reports
+Proton vs. competitors
+Privacy
+Password generator
+Username generator
+Tor
+Open source
+Student discount
+Special reports
+Proton vs. competitors
+Company About us
+Team
+Impact
+Proton Foundation
+Careers We’re hiring
+Shop(new window)
+Donate
+Blog
+Company
+About us
+Team
+Impact
+Proton Foundation
+Careers We’re hiring
+Shop(new window)
+Donate
+Blog
+Connect Social media
+Help and support
+Partners and affiliates
+Referral program
+Press and media
+Contact us
+Connect
+Social media
+Help and support
+Partners and affiliates
+Referral program
+Press and media
+Contact us
+English
+System status(new window)
+Report abuse
+Report a problem
+Report a security issue
+Request a feature(new window)
+English
+Privacy Policy
+Terms & conditions
+Transparency report
+© 2026 Proton AG. All rights reserved.

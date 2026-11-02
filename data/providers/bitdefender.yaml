@@ -20,7 +20,7 @@
 id: bitdefender
 name: Bitdefender
 website: https://www.bitdefender.com
-category: privacy-suite
+category: security
 spendCategory: software
 billingCurrency:
   {
@@ -78,10 +78,18 @@ ratings:
     url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/bitdefender-total-security-27.0-261405/
     tested: Total Security 27.0, Windows 11
 
+# Categories (M11.3): an antivirus first (security). Every paid plan but Premium VPN has its password manager,
+# SecurePass, as its support centre's articles list it, so it's in passwords too. "What is Bitdefender Antivirus
+# Plus?" lists "SecurePass - A password manager that securely stores and autofills your login credentials", which
+# outweighs the sales page's older comparison table ("Password Manager no yes"). Premium and Ultimate Security have its
+# Premium VPN, unlimited, so they're VPN plans as well; Total Security and Antivirus Plus have only its Standard VPN,
+# "200 MB/day traffic", so they aren't (notIn).
 plans:
   - id: bitdefender.total-security
     name: Total Security
     link: https://www.bitdefender.com/en-ca/consumer/total-security
+    categories: [security, passwords]
+    notIn: [vpn]
     features:
       antivirus.activity-modes: true
       antivirus.anti-spam: true
@@ -218,7 +226,7 @@ plans:
   - id: bitdefender.premium-security-individual
     name: Premium Security Individual
     link: https://www.bitdefender.com/en-ca/consumer/premium-security
-    categories: [privacy-suite, vpn]
+    categories: [security, passwords, vpn]
     features:
       antivirus.activity-modes: true
       antivirus.anti-spam: true
@@ -360,7 +368,7 @@ plans:
   - id: bitdefender.premium-security-family
     name: Premium Security Family
     link: https://www.bitdefender.com/en-ca/consumer/premium-security
-    categories: [privacy-suite, vpn]
+    categories: [security, passwords, vpn]
     features:
       account.users: 5
       antivirus.activity-modes: true
@@ -424,7 +432,7 @@ plans:
   - id: bitdefender.ultimate-security-individual
     name: Ultimate Security Individual
     link: https://www.bitdefender.com/en-ca/consumer/ultimate-security
-    categories: [privacy-suite, vpn]
+    categories: [security, passwords, vpn]
     features:
       antivirus.activity-modes: true
       antivirus.anti-spam: true
@@ -566,7 +574,7 @@ plans:
   - id: bitdefender.ultimate-security-family
     name: Ultimate Security Family
     link: https://www.bitdefender.com/en-ca/consumer/ultimate-security
-    categories: [privacy-suite, vpn]
+    categories: [security, passwords, vpn]
     features:
       account.users: 5
       antivirus.activity-modes: true
@@ -712,6 +720,8 @@ plans:
   - id: bitdefender.total-security-family
     name: Total Security Family
     link: https://www.bitdefender.com/en-ca/consumer/total-security
+    categories: [security, passwords]
+    notIn: [vpn]
     features:
       account.users: 5
       antivirus.activity-modes: true
@@ -770,6 +780,8 @@ plans:
   - id: bitdefender.antivirus-plus
     name: Antivirus Plus
     link: https://www.bitdefender.com/en-ca/consumer/antivirus
+    categories: [security, passwords]
+    notIn: [vpn]
     features:
       antivirus.activity-modes: true
       antivirus.devices: 1
@@ -804,6 +816,8 @@ plans:
   - id: bitdefender.antivirus-plus-3-devices
     name: Antivirus Plus, 3 devices
     link: https://www.bitdefender.com/en-ca/consumer/antivirus
+    categories: [security, passwords]
+    notIn: [vpn]
     features:
       antivirus.activity-modes: true
       antivirus.devices: 3
@@ -1126,6 +1140,15 @@ policies:
           quote: 'We do not store any details regarding your location or online activity nor do we share them with other entities.'
         - url: https://www.bitdefender.com/en-ca/site/view/legal-privacy-policy-for-home-users-solutions
           quote: "For this service, we use IPVanish as data processor who processes data on behalf of Bitdefender in accordance with Bitdefender's instructions and for the sole purpose of providing VPN services to users."
+      lastVerified: 2026-11-02
+    - topic: service.account-sharing
+      tier: good
+      reason: 'You can share it with the people you live with, and no one else. It describes no household checks, only that it can limit users it finds abusing it.'
+      sources:
+        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+          quote: 'the Bitdefender Solution may not be accessed, used, or shared with family members, non-family members, or other persons who do not reside with You.'
+        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+          quote: 'Bitdefender reserves the right to limit the users if it determines an abuse of the usage of Bitdefender Solution.'
       lastVerified: 2026-11-02
     - topic: service.device-limits
       tier: neutral

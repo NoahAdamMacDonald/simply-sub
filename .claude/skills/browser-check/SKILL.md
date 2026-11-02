@@ -654,6 +654,16 @@ against the tokens. With axe, screenshots and no horizontal scroll. It reads the
 `textContent` loses the spaces the layout puts between a heading and its list. Use the skill's pinned axe-core: 4.11
 flags Search's empty Features chip grid (`aria-prohibited-attr`), which 4.14 doesn't.
 
+`check-m11-categories.cjs` (M11.3, service categories) checks Search's Category on `ng serve` for a Canadian in
+Alberta (base URL ending in `/`, after `npm run data:build` on the branch), in both themes at both widths: Category
+reached by Tab (at 360 px in the Filters drawer, once focus is inside it), its list in `categories.yaml`'s order with
+only the categories something sold here is in, "ema" and Enter picking Email (`?cat=email`); Email keeping Proton's
+Free, Mail Plus and suites, AI assistants Claude and Proton's Free and suites, Antivirus & device security Bitdefender,
+and Password managers & authenticators Bitdefender and Proton; and, once, every service category's icon measured as
+a Material Symbols ligature (a name that isn't one lays out as wide text). With axe (the list open, and the results),
+screenshots and no horizontal scroll. Shoot the list after axe's wait: straight after its options appear it's still
+fading in, see-through.
+
 `check-after-m3.cjs` (the feedback after M3: M5.13, M6.17–M6.19, M7.11, M8.5, M8.6, M9.6) checks the batch on
 `ng serve` for a Canadian in Alberta, with Streaming (Crave Premium and Disney+ Premium) and Family (two Disney+
 Premium, Netflix Standard auto-renewing until an end date, Mullvad renewed by hand, and four more so it scrolls). In

@@ -7,19 +7,15 @@ import { MatCheckboxHarness } from '@angular/material/checkbox/testing';
 import { MatChipGridHarness } from '@angular/material/chips/testing';
 import { MATERIAL_ANIMATIONS } from '@angular/material/core';
 import { MatSliderHarness } from '@angular/material/slider/testing';
-import { searchFilterOptions, type CatalogQuery } from '@simply-sub/core';
+import { searchFilterOptions, type CatalogData, type CatalogQuery } from '@simply-sub/core';
 import { alberta, fx, searchCatalogData, today } from '../../shared/sub-card/search.testing';
 import { SearchFilters } from './search-filters';
 
 // Search's small catalog for an Albertan (search.testing.ts): Netflix and Crave (streaming, 1080p and 4K, Ad free),
 // Mullvad and Proton (VPN). Crave Premium's CA$22 a month is the priciest, so the slider goes to $25 by $1.
 
-const options = searchFilterOptions({
-  catalog: searchCatalogData,
-  settings: alberta,
-  fx,
-  today,
-});
+const optionsFor = (catalog: CatalogData) =>
+  searchFilterOptions({ catalog, settings: alberta, fx, today });
 
 describe('SearchFilters', () => {
   let fixture: ComponentFixture<SearchFilters>;
@@ -27,14 +23,17 @@ describe('SearchFilters', () => {
   let changes: CatalogQuery[];
   let prices: CatalogQuery[];
 
-  async function setup(query: CatalogQuery = {}): Promise<void> {
+  async function setup(
+    query: CatalogQuery = {},
+    catalog: CatalogData = searchCatalogData,
+  ): Promise<void> {
     TestBed.configureTestingModule({
       providers: [{ provide: MATERIAL_ANIMATIONS, useValue: { animationsDisabled: true } }],
     });
     fixture = TestBed.createComponent(SearchFilters);
     fixture.componentRef.setInput('query', query);
-    fixture.componentRef.setInput('options', options);
-    fixture.componentRef.setInput('catalog', searchCatalogData);
+    fixture.componentRef.setInput('options', optionsFor(catalog));
+    fixture.componentRef.setInput('catalog', catalog);
     fixture.componentRef.setInput('currency', 'CAD');
     fixture.componentRef.setInput('country', 'CA');
     changes = [];
@@ -131,6 +130,40 @@ describe('SearchFilters', () => {
       expect(changes[1]).toEqual({ category: undefined, nativeOnly: true });
       await show({ nativeOnly: true });
       expect(await category.getValue()).toBe('');
+    });
+
+    it('offers every category a plan fits, in categories.yaml’s order, and none with nothing sold (M11.3)', async () => {
+      const service = [
+        ...searchCatalogData.categories.service,
+        { id: 'security', name: 'Antivirus & device security', icon: 'gpp_good' },
+        { id: 'email', name: 'Email', icon: 'mail' },
+        { id: 'ai', name: 'AI assistants', icon: 'smart_toy' },
+      ];
+      const catalog: CatalogData = {
+        ...searchCatalogData,
+        categories: { ...searchCatalogData.categories, service },
+        providers: searchCatalogData.providers.map((provider) => ({
+          ...provider,
+          plans: provider.plans.map((plan) =>
+            plan.id === 'proton.unlimited' ? { ...plan, categories: ['vpn', 'email', 'ai'] } : plan,
+          ),
+        })),
+      };
+      await setup({}, catalog);
+      const category = await loader.getHarness(
+        MatAutocompleteHarness.with({ ancestor: 'ss-choice-field[data-label="Category"]' }),
+      );
+
+      await category.focus();
+      expect(await optionTexts(category)).toEqual([
+        'All',
+        'Streaming video',
+        'VPN',
+        'Email',
+        'AI assistants',
+      ]);
+      await category.selectOption({ text: 'AI assistants' });
+      expect(changes).toEqual([{ category: 'ai' }]);
     });
 
     it('selects the chosen name on a click, so what’s typed takes its place', async () => {

@@ -297,7 +297,7 @@ export interface Evidence {
   quote: string;
 }
 
-/** A provider's spend category (card rewards), from its service category. */
+/** A provider's spend category (card rewards), from its service category: software and online services if no other. */
 export function spendCategoryOf(category: string): string {
   const spend: Record<string, string> = {
     streaming: 'streaming',
@@ -306,6 +306,10 @@ export function spendCategoryOf(category: string): string {
     news: 'news',
     fitness: 'health',
     education: 'education',
+    telecom: 'telecom',
+    shopping: 'shopping',
+    delivery: 'delivery',
+    finance: 'finance',
   };
   return spend[category] ?? 'software';
 }

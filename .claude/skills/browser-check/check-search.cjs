@@ -752,7 +752,7 @@ async function addItem(page, planId) {
     check(
       'Category offers All and the categories a plan sold here is in',
       categoryOptions.join() ===
-        'All,Streaming video,VPN,Privacy & security suites,Cloud storage,AI assistants,Gaming',
+        'All,Streaming video,VPN,Privacy suites,Antivirus & device security,Password managers & authenticators,Email,Calendars,Cloud storage,AI assistants,Gaming',
       categoryOptions.join(', '),
     );
     // M1.10: Proton is a privacy suite, and its VPN Plus, Free and suites are VPNs too.
