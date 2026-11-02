@@ -153,7 +153,7 @@ async function looks(group) {
       probe.remove();
       return value;
     };
-    const text = element.querySelector('.outside, .owner');
+    const text = element.querySelector('.outside, .owner, .payment');
     const links = [...element.querySelectorAll('a')];
     return {
       muted: getComputedStyle(text).color === resolved('--ss-text-muted'),
@@ -188,9 +188,18 @@ async function focusedName(page) {
         const bitdefender = await details(page, 'Bitdefender');
         const headings = await bitdefender.locator('ss-plan-details h3').allTextContents();
         check(
-          `${label}: Outside ratings come right after Terms and policies, with no Owner for Bitdefender`,
-          headings.slice(-2).join() === 'Terms and policies,Outside ratings',
+          `${label}: Bitdefender's Outside ratings, Owner and Ways to pay come after Terms and policies`,
+          headings.slice(-4).join() === 'Terms and policies,Outside ratings,Owner,Ways to pay',
           headings.join(', '),
+        );
+        // Its security features (2026-11-02): the plan shown is listed with the antivirus group.
+        const features = await shown(groupNamed(bitdefender, page, 'Features'));
+        check(
+          `${label}: Bitdefender's plan lists its antivirus features`,
+          /Antivirus/.test(features) &&
+            /Ransomware protection/.test(features) &&
+            /Web and phishing protection/.test(features),
+          features.slice(0, 200),
         );
         const outside = groupNamed(bitdefender, page, 'Outside ratings');
         const tested = '(tested Total Security 27.0, Windows 11)';
@@ -244,8 +253,8 @@ async function focusedName(page) {
         const owner = groupNamed(mullvad, page, 'Owner');
         const ownerWords = await shown(owner);
         check(
-          `${label}: Mullvad's Owner after Terms and policies, with no Outside ratings`,
-          mullvadHeadings.slice(-2).join() === 'Terms and policies,Owner' &&
+          `${label}: Mullvad's Owner, then Ways to pay, after Terms and policies, with no Outside ratings`,
+          mullvadHeadings.slice(-3).join() === 'Terms and policies,Owner,Ways to pay' &&
             ownerWords === 'Owner Mullvad VPN AB, according to its About us',
           `${mullvadHeadings.join(', ')} / ${ownerWords}`,
         );
@@ -283,13 +292,50 @@ async function focusedName(page) {
         });
         await axeCheck(page, `${label}, Mullvad's Owner with its tooltip`);
 
-        // ── Netflix: neither ────────────────────────────────────────────────────────────────────────
+        // ── Mullvad: its ways to pay (M11.5, 2026-11-02) ────────────────────────────────────────────
+        const pay = groupNamed(mullvad, page, 'Ways to pay');
+        const payWords = await shown(pay);
+        check(
+          `${label}: Mullvad's Ways to pay names cash and crypto, citing its terms`,
+          payWords ===
+            'Ways to pay Cash, Cryptocurrency, Card, Bank transfer, PayPal, App store billing and Gift card, according to its Terms of service',
+          payWords,
+        );
+        const payLooks = await looks(pay);
+        check(
+          `${label}: the ways to pay are the muted grey, the link the accent and underlined`,
+          Object.values(payLooks).every(Boolean),
+          JSON.stringify(payLooks),
+        );
+        await page.keyboard.press('Tab');
+        const payFocus = await focusedName(page);
+        const payTip = page.locator('.mat-mdc-tooltip-show');
+        await sleep(400);
+        const payTipText =
+          (await payTip.count()) > 0 ? (await payTip.last().textContent()).trim() : '';
+        check(
+          `${label}: Tab from the owner's link reaches the payment page's, its tooltip the page's words`,
+          payFocus === '- link "Terms of service, opens in a new tab"' &&
+            payTipText.startsWith('“We accept payment by cash in bills'),
+          `${payFocus} / ${payTipText.slice(0, 60)}`,
+        );
+        await sleep(500);
+        await pay.screenshot({
+          path: path.join(outDir, `mullvad-pay-${colorScheme}-${viewport.width}.png`),
+        });
+        await axeCheck(page, `${label}, Mullvad's Ways to pay with its tooltip`);
+
+        // ── Netflix: no outside ratings; its owner and Canada's own ways to pay ──────────────────────
         const netflix = await details(page, 'Netflix');
         const netflixHeadings = await netflix.locator('ss-plan-details h3').allTextContents();
+        const netflixPay = await shown(groupNamed(netflix, page, 'Ways to pay'));
         check(
-          `${label}: Netflix has no Outside ratings or Owner`,
-          !netflixHeadings.includes('Outside ratings') && !netflixHeadings.includes('Owner'),
-          netflixHeadings.join(', '),
+          `${label}: Netflix has no Outside ratings, its Owner, and Canada's page for its ways to pay`,
+          !netflixHeadings.includes('Outside ratings') &&
+            netflixHeadings.includes('Owner') &&
+            netflixPay ===
+              'Ways to pay Card, Gift card, PayPal and Your TV, internet or phone bill, according to its How to pay for Netflix',
+          `${netflixHeadings.join(', ')} / ${netflixPay}`,
         );
         const width = await page.evaluate(() => document.documentElement.scrollWidth);
         check(`${label}: nothing scrolls sideways`, width <= viewport.width, `${width}px`);
