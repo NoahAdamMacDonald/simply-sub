@@ -1,21 +1,39 @@
 # The category lists (BLUEPRINT §4.5). Shapes: packages/core/src/catalog/category.ts.
 # Add a category here, in its own commit, before a feature or provider uses it (BLUEPRINT §13.4).
 
-# What a provider is: a provider's `category`.
+# What a provider or plan is: a provider's main `category`, where a buyer would look first, and each plan's
+# `categories`, every one it fits (BLUEPRINT §4.5). Ids are permanent once published, like the catalog's: rename the
+# name, never the id. The order is Search's Category list's.
 service:
   - { id: streaming, name: Streaming video, icon: live_tv }
   - { id: music, name: Music & audio, icon: music_note }
   - { id: vpn, name: VPN, icon: vpn_lock }
-  - { id: privacy-suite, name: Privacy & security suites, icon: shield }
+  - { id: privacy-suite, name: Privacy suites, icon: shield }
+  - { id: security, name: Antivirus & device security, icon: gpp_good }
+  - { id: passwords, name: Password managers & authenticators, icon: password }
+  - { id: email, name: Email, icon: mail }
+  - { id: calendar, name: Calendars, icon: calendar_month }
   - { id: storage, name: Cloud storage, icon: cloud }
+  - { id: file-sharing, name: File sharing, icon: share }
   - { id: ai, name: AI assistants, icon: smart_toy }
   - { id: gaming, name: Gaming, icon: sports_esports }
   - { id: software, name: Software & apps, icon: apps }
+  - { id: creative, name: Creative & design, icon: palette }
+  - { id: developer, name: Developer tools, icon: code }
+  - { id: cloud, name: Cloud hosting & servers, icon: host }
+  - { id: browsers, name: Web browsers, icon: public }
+  - { id: search, name: Search engines, icon: search }
+  - { id: dns, name: DNS & content filtering, icon: dns }
+  - { id: maps, name: Maps & transit, icon: map }
+  - { id: social, name: Social media, icon: forum }
   - { id: news, name: News & magazines, icon: newspaper }
   - { id: fitness, name: Fitness & wellness, icon: fitness_center }
   - { id: education, name: Learning & education, icon: school }
+  - { id: jobs, name: Jobs & careers, icon: work }
+  - { id: shopping, name: Shopping & memberships, icon: shopping_cart }
+  - { id: delivery, name: Food delivery & rides, icon: delivery_dining }
+  - { id: telecom, name: Phone & internet, icon: cell_tower }
   - { id: finance, name: Banking & investing, icon: account_balance }
-
 # How the Features page groups features: a feature's `category`.
 feature:
   - { id: streaming, name: Streaming }
@@ -38,3 +56,6 @@ spend:
   - { id: other, name: Other }
   - { id: health, name: Health & fitness }
   - { id: education, name: Education & learning }
+  - { id: shopping, name: Online shopping & memberships }
+  - { id: delivery, name: Food delivery & rides }
+  - { id: finance, name: Bank & account fees }
