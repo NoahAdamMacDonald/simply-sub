@@ -18,9 +18,13 @@ export interface WikidataClass {
 }
 
 /**
- * The classes asked for, in order: a service that's an instance of several gets the first one's category. Read on
+ * The classes asked for, in order: a service that's an instance of several gets the first one's category, so the
+ * narrower classes come first (GitHub is a social networking service too, and Indeed a search engine). Read on
  * 2026-10-28 from what Netflix, Spotify, Mullvad, 1Password, Dropbox, Claude, Xbox Game Pass, Coursera and others
- * are instances of. Plain "subscription" (Q322948) is left out: it says nothing about the category.
+ * are instances of, and on 2026-11-02 (M11.3) from what Firefox, DuckDuckGo, Proton Mail, Quad9, Google Maps,
+ * GitHub, AWS, Figma, Uber Eats, Indeed, Rogers, N26 and others are, each class checked for the services it finds
+ * with 8 Wikipedia articles or more. Plain "subscription" (Q322948) is left out: it says nothing about the category.
+ * Wikidata files WeTransfer and Smash as file hosting, so file sharing and calendars fill mostly by hand.
  */
 export const wikidataClasses: readonly WikidataClass[] = [
   { qid: 'Q59152282', name: 'video streaming service', category: 'streaming' },
@@ -28,18 +32,59 @@ export const wikidataClasses: readonly WikidataClass[] = [
   { qid: 'Q829548', name: 'over-the-top media service', category: 'streaming' },
   { qid: 'Q15590336', name: 'music streaming service', category: 'music' },
   { qid: 'Q56240391', name: 'virtual private network service', category: 'vpn' },
-  { qid: 'Q1281199', name: 'password manager', category: 'privacy-suite' },
-  { qid: 'Q93249', name: 'antivirus software', category: 'privacy-suite' },
+  { qid: 'Q1281199', name: 'password manager', category: 'passwords' },
+  { qid: 'Q4825890', name: 'authenticator', category: 'passwords' },
+  { qid: 'Q93249', name: 'antivirus software', category: 'security' },
+  { qid: 'Q5368818', name: 'email hosting service', category: 'email' },
+  { qid: 'Q1273203', name: 'mailbox provider', category: 'email' },
+  { qid: 'Q2933820', name: 'digital calendar', category: 'calendar' },
+  { qid: 'Q2373485', name: 'peer-to-peer file sharing', category: 'file-sharing' },
   { qid: 'Q1343205', name: 'file-hosting service', category: 'storage' },
   { qid: 'Q133284163', name: 'generative artificial intelligence chatbot', category: 'ai' },
   { qid: 'Q19967846', name: 'online gaming service', category: 'gaming' },
   { qid: 'Q85632250', name: 'cloud gaming service', category: 'gaming' },
+  { qid: 'Q115203600', name: 'repository hosting service', category: 'developer' },
+  { qid: 'Q3077240', name: 'forge', category: 'developer' },
+  { qid: 'Q13741', name: 'integrated development environment', category: 'developer', limit: 15 },
+  { qid: 'Q1210425', name: 'internet hosting service', category: 'cloud' },
+  { qid: 'Q1153767', name: 'platform as a service', category: 'cloud' },
+  { qid: 'Q5892272', name: 'web hosting service', category: 'cloud' },
+  { qid: 'Q124843345', name: 'web hosting service', category: 'cloud' },
+  // Most are desktop software sold once or free: the best-known few.
+  { qid: 'Q868410', name: 'graphics software', category: 'creative', limit: 15 },
+  { qid: 'Q2351962', name: 'raster graphics editor', category: 'creative', limit: 15 },
+  { qid: 'Q1155404', name: 'vector graphics editor', category: 'creative', limit: 15 },
+  { qid: 'Q1373429', name: 'video editing software', category: 'creative', limit: 15 },
+  { qid: 'Q1060750', name: 'digital audio workstation', category: 'creative', limit: 15 },
+  { qid: 'Q6368', name: 'web browser', category: 'browsers' },
+  { qid: 'Q4182287', name: 'search engine', category: 'search' },
+  { qid: 'Q127386655', name: 'DNS provider', category: 'dns' },
+  { qid: 'Q41494', name: 'name server', category: 'dns' },
+  { qid: 'Q124587498', name: 'internet map service', category: 'maps' },
+  { qid: 'Q128800992', name: 'web mapping application', category: 'maps' },
+  { qid: 'Q580148', name: 'employment website', category: 'jobs' },
+  { qid: 'Q5283178', name: 'distributed social network', category: 'social' },
+  { qid: 'Q3220391', name: 'social networking service', category: 'social' },
   { qid: 'Q19862851', name: 'massive open online course provider', category: 'education' },
   { qid: 'Q31725945', name: 'online learning platform', category: 'education' },
   { qid: 'Q25104632', name: 'fitness app', category: 'fitness' },
   // Hundreds have a website; the best-known few are the subscriptions people pay for.
   { qid: 'Q1110794', name: 'daily newspaper', category: 'news', limit: 15 },
-  { qid: 'Q5368818', name: 'email hosting service', category: 'software' },
+  { qid: 'Q1426546', name: 'loyalty program', category: 'shopping' },
+  { qid: 'Q24962921', name: 'subscription box', category: 'shopping' },
+  { qid: 'Q10932402', name: 'food delivery', category: 'delivery' },
+  { qid: 'Q3181044', name: 'online food ordering', category: 'delivery' },
+  { qid: 'Q27973', name: 'ridesharing company', category: 'delivery' },
+  { qid: 'Q65295049', name: 'online taxi service', category: 'delivery' },
+  // Telecom waits for a design of its own (PROJECT-PLAN M11), and finance for M11.10: the best-known few.
+  { qid: 'Q1941618', name: 'mobile network operator', category: 'telecom', limit: 15 },
+  { qid: 'Q11371', name: 'internet service provider', category: 'telecom', limit: 15 },
+  { qid: 'Q60767305', name: 'neobank', category: 'finance' },
+  { qid: 'Q1227557', name: 'direct bank', category: 'finance' },
+  { qid: 'Q745877', name: 'credit union', category: 'finance', limit: 15 },
+  { qid: 'Q2073644', name: 'brokerage firm', category: 'finance', limit: 15 },
+  { qid: 'Q21096079', name: 'robo-advisor', category: 'finance' },
+  { qid: 'Q22687', name: 'bank', category: 'finance', limit: 15 },
 ];
 
 /** The query service's address. */
