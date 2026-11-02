@@ -227,6 +227,37 @@ export const searchCatalogData: CatalogData = {
           },
         ],
       },
+      // Outside ratings (M11.2): made up for the test, one from a rater the catalog doesn't list.
+      ratings: [
+        {
+          rater: 'test-lab',
+          subject: 'antivirus-protection',
+          label: '6.0/6.0',
+          date: '2026-08',
+          url: 'https://lab.example.org/mullvad',
+          tested: 'Mullvad VPN 2026.4, Windows 11',
+        },
+        {
+          rater: 'unlisted-lab',
+          subject: 'antivirus-protection',
+          label: 'A',
+          date: '2026-08-02',
+          url: 'https://unlisted.example.org/mullvad',
+        },
+        {
+          rater: 'test-lab',
+          subject: 'antivirus-usability',
+          label: '5.5/6.0',
+          date: '2026-09-14',
+          url: 'https://lab.example.org/mullvad',
+        },
+      ],
+      owner: {
+        name: 'Mullvad VPN AB',
+        page: { name: 'About us', url: 'https://mullvad.net/en/about' },
+        quotes: ['Mullvad VPN AB is owned by parent company Amagicom AB.'],
+        lastVerified: '2026-10-22',
+      },
     },
     {
       id: 'netflix',
@@ -307,6 +338,22 @@ export const searchCatalogData: CatalogData = {
       website: 'https://www.amazon.com',
       domains: ['amazon.ca'],
       iconUrl: 'https://sub.simplely.ca/icons/amazon.webp',
+    },
+  ],
+  raters: [
+    {
+      id: 'test-lab',
+      name: 'Test Lab',
+      website: 'https://lab.example.org',
+      scales: [
+        { subject: 'antivirus-protection', labels: ['6.0/6.0', '5.5/6.0'] },
+        { subject: 'antivirus-usability', labels: ['6.0/6.0', '5.5/6.0'] },
+      ],
+      terms: {
+        url: 'https://lab.example.org/terms',
+        quotes: ['You may show our results with a link.'],
+        checked: '2026-10-22',
+      },
     },
   ],
   policyTopics: [

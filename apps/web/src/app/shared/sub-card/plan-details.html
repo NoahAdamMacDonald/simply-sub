@@ -197,6 +197,60 @@
   </div>
 }
 
+<!-- Outside raters' labels (M11.2): the label, its date and a link to the rater's own page, never its words. -->
+@if (outside().length) {
+  <div class="group">
+    <h3>Outside ratings</h3>
+    <ul class="outside">
+      @for (group of outside(); track group.subject) {
+        @for (rating of group.ratings; track $index) {
+          <li>
+            <span class="subject">{{ group.name }}: </span>
+            <span>{{ rating.label }} from </span>
+            <a
+              class="outside-link"
+              [href]="rating.url"
+              target="_blank"
+              rel="noopener"
+              [attr.aria-label]="rating.rater + '’s rating, opens in a new tab'"
+            >
+              <span>{{ rating.rater }}</span>
+              <mat-icon aria-hidden="true">open_in_new</mat-icon>
+            </a>
+            <span>, {{ ratingDate(rating.date) }}</span>
+            @if (rating.tested; as tested) {
+              <span class="tested"> (tested {{ tested }})</span>
+            }
+          </li>
+        }
+      }
+    </ul>
+  </div>
+}
+
+<!-- The company behind it (M11.2), citing its own page, with the words that say so as the link's tooltip. -->
+@if (owner(); as owner) {
+  <div class="group">
+    <h3>Owner</h3>
+    <p class="owner">
+      <span class="subject">{{ owner.name }}</span>
+      <span>, according to its </span>
+      <a
+        class="outside-link"
+        [href]="owner.href"
+        target="_blank"
+        rel="noopener"
+        [matTooltip]="ownerQuotes(owner.quotes)"
+        matTooltipTouchGestures="off"
+        [attr.aria-label]="owner.page + ', opens in a new tab'"
+      >
+        <span>{{ owner.page }}</span>
+        <mat-icon aria-hidden="true">open_in_new</mat-icon>
+      </a>
+    </p>
+  </div>
+}
+
 <div class="checked-row">
   <p class="checked">
     <span>Price checked {{ checked() }}</span>

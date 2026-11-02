@@ -243,3 +243,39 @@ h4 {
     }
   }
 }
+
+// Outside ratings and the owner (M11.2): grey and plain, with no grade's colour, since they're someone else's view or
+// a plain fact. The links are the accent's, and underlined like the citations (WCAG 1.4.1).
+.outside {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  list-style: none;
+}
+
+.outside,
+.owner {
+  margin: 0;
+  color: var(--ss-text-muted);
+}
+
+.subject {
+  font-weight: 600;
+}
+
+.outside-link {
+  border-radius: 4px;
+  color: var(--ss-accent-text);
+
+  mat-icon {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+    vertical-align: text-bottom;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 2px;
+  }
+}
