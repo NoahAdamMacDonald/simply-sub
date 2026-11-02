@@ -32,9 +32,11 @@ const writtenAs: Readonly<Record<Exclude<PaymentMethod, 'other'>, RegExp>> = {
   paypal: /\bpay\s?pal\b/i,
   'apple-pay': /\bapple\s+pay\b/i,
   'google-pay': /\bgoogle\s+pay\b/i,
-  'app-store': /\bapp\s?store\b|\bgoogle\s+play\b|\bin-app\b|\bitunes\b|\bplay\s+store\b|\bamazon\s+appstore\b/i,
+  'app-store':
+    /\bapp\s?store\b|\bgoogle\s+play\b|\bin-app\b|\bitunes\b|\bplay\s+store\b|\bamazon\s+appstore\b/i,
   'gift-card': /\bgift\s?cards?\b|\bcartes?[- ]cadeaux?\b|\bvouchers?\b|\bprepaid\s+cards?\b/i,
-  'bank-transfer': /\bbank\s+(?:transfer|wire)s?\b|\bwire\s+transfers?\b|\bdirect\s+debit\b|\bsepa\b|\bideal\b|\bvirement\b|\bswish\b/i,
+  'bank-transfer':
+    /\bbank\s+(?:transfer|wire)s?\b|\bwire\s+transfers?\b|\bdirect\s+debit\b|\bsepa\b|\bideal\b|\bvirement\b|\bswish\b/i,
   cash: /\bcash\b|\besp[eè]ces\b/i,
   crypto: /\bcrypto|\bbitcoin\b|\bmonero\b|\bbtc\b|\bxmr\b/i,
   'provider-billing':

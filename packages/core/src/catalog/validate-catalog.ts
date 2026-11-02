@@ -20,13 +20,7 @@ import { automationSchema } from '../pipeline/automation';
 import { onSites, providerSiteKeys, queueFileSchema } from '../pipeline/queue';
 import type { Price } from './price';
 import { providerSchema, type AddOn, type Plan, type Provider } from './provider';
-import {
-  ratersFileSchema,
-  ratingIsOld,
-  ratingDay,
-  ratingSubjects,
-  type Rater,
-} from './rater';
+import { ratersFileSchema, ratingIsOld, ratingDay, ratingSubjects, type Rater } from './rater';
 import { redirectsFileSchema } from './redirects';
 import { isRetired } from './retired';
 import { globalRegion, groupsOf, isCatalogRegion, membersOf, regionProblem } from './regions';
