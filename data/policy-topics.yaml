@@ -91,7 +91,8 @@
   question: Who can read what you store or send.
   silent: not-stated
   actionFor: [good, poor]
-  categories: [storage, ai, privacy-suite]
+  categories:
+    [storage, ai, privacy-suite, email, calendar, passwords, social, file-sharing, cloud, developer]
   tiers:
     great: End-to-end or zero-access encryption by default for the main content.
     good: End-to-end encryption you can turn on for the main content.
@@ -189,7 +190,7 @@
   note: >-
     A minor is under 18 for the ads rungs; a child is under the service's stated minimum age for the deletion rung.
   silent: not-stated
-  categories: [streaming, music, gaming, education]
+  categories: [streaming, music, gaming, education, social]
   tiers:
     great: Kids' profiles collect the minimum, with no ads or tracking for minors, and parental controls.
     good: No targeted ads to minors, and parental consent.
@@ -340,7 +341,22 @@
   question: What rights it takes over what you upload.
   note: A licence that includes training AI is privacy.ai-training's; this grades the rest of it.
   silent: not-stated
-  categories: [storage, ai, privacy-suite, software, gaming]
+  categories:
+    [
+      storage,
+      ai,
+      privacy-suite,
+      software,
+      gaming,
+      email,
+      calendar,
+      passwords,
+      social,
+      file-sharing,
+      creative,
+      cloud,
+      developer,
+    ]
   tiers:
     great: No rights beyond running the service, ending when you delete it.
     good: A limited licence to run and improve the service, ending when you delete it (bar backups and what others were sent).
@@ -381,7 +397,7 @@
   group: legal
   question: Who owns what its AI or creative tools make for you.
   silent: not-stated
-  categories: [ai]
+  categories: [ai, creative]
   tiers:
     great: You own the outputs, and it defends you against copyright claims over them.
     good: You own them.
@@ -414,7 +430,7 @@
     Great needs an independent audit of the no-logs claim, which the plans' vpn.independent-audits records
     (no-logs), and validation checks they agree.
   silent: poor
-  categories: [vpn]
+  categories: [vpn, dns, search, browsers]
   tiers:
     great: No activity or connection logs, and an independent audit found none.
     good: No activity or connection logs, as it states, without an independent audit.
@@ -426,7 +442,20 @@
   group: service
   question: Who you can share your account with.
   silent: not-stated
-  categories: [streaming, music, gaming, software, storage, ai]
+  categories:
+    [
+      streaming,
+      music,
+      gaming,
+      software,
+      storage,
+      ai,
+      passwords,
+      security,
+      creative,
+      shopping,
+      delivery,
+    ]
   tiers:
     great: Share it with anyone, up to the plan's limits.
     good: Share it within your household, with no checks.
@@ -441,7 +470,7 @@
     Only what the device-count features don't say: registration caps and how long downloads last, never the number
     of devices or screens.
   silent: not-stated
-  categories: [streaming, music, gaming, software, vpn]
+  categories: [streaming, music, gaming, software, vpn, security, creative]
   tiers:
     great: No limits beyond the number of screens or devices.
     good: Generous, clearly stated limits.
