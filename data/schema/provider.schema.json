@@ -272,7 +272,17 @@
               "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
               "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)"
             },
-            "description": "The service categories the plan is in, from categories.yaml, when they aren't just the provider's: Proton VPN Plus is [vpn], and Proton Unlimited is [privacy-suite, vpn, storage]"
+            "description": "Every service category the plan fits, from categories.yaml, when they aren't just the provider's: Proton VPN Plus is [vpn], and Proton Unlimited is [privacy-suite, vpn, storage, email, passwords, calendar, ai]"
+          },
+          "notIn": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)"
+            },
+            "description": "Service categories its features name that it isn't sold as (M11.3): Proton Mail Plus comes with Proton VPN Free, but it isn't a VPN plan. Validation warns about any other category its features name and it isn't in"
           },
           "features": {
             "type": "object",

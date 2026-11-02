@@ -7,7 +7,7 @@ import { choices, didYouMean, idOf, listedMoreThanOnce, repeatedIndexes } from '
 import { featuresFileSchema } from './feature';
 import { slugSchema } from './formats';
 import type { CatalogFileKind } from './json-schema';
-import { providerCategories } from './plan-categories';
+import { featureNamedCategories, planCategories, providerCategories } from './plan-categories';
 import { paidPlanCount, topicApplies } from './plan-policies';
 import { policySetSchema, type Policies, type PolicyRating, type PolicySet } from './policy';
 import {
@@ -628,6 +628,7 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
         `${provider.category} is the provider's category already: leave categories out`,
       );
     }
+    if (registry) checkFeatureCategories(plan, provider, path, { registry, serviceIds, report });
     plan.addOnIds?.forEach((id, addOnIndex) => {
       if (!addOnIds.includes(id)) {
         report(
@@ -1035,6 +1036,52 @@ function checkPolicySet(
     report(
       ['id'],
       "No provider names this document in its policies' shared: add it to the providers it covers, or remove it",
+      'warning',
+    );
+  }
+}
+
+/**
+ * A plan lists every category it fits (M11.3): one its features name (a VPN, a password manager) is in its
+ * categories, a warning, or in its notIn, when it comes with the plan but isn't what it's sold as. notIn names only
+ * service categories its features name and it isn't in. A rule whose feature or category isn't defined is inactive.
+ */
+function checkFeatureCategories(
+  plan: Plan,
+  provider: Provider,
+  path: CatalogIssuePath,
+  {
+    registry,
+    serviceIds,
+    report,
+  }: { registry: FeatureRegistry; serviceIds: readonly string[] | undefined; report: Report },
+): void {
+  const inCategories = planCategories(plan, provider);
+  const named = featureNamedCategories(plan, (id) => registry.features.has(id)).filter(
+    ({ category }) => !serviceIds || serviceIds.includes(category),
+  );
+  const notIn = plan.notIn ?? [];
+  notIn.forEach((id, index) => {
+    const at = [...path, 'notIn', index];
+    if (serviceIds && !serviceIds.includes(id)) {
+      report(
+        at,
+        `"${id}" isn't a service category in data/categories.yaml${choices(id, serviceIds)}`,
+      );
+    } else if (inCategories.includes(id)) {
+      report(at, `It's in ${id}: take ${id} out of notIn or out of its categories`);
+    } else if (!named.some(({ category }) => category === id)) {
+      report(at, `No feature of it names ${id}: leave ${id} out of notIn`);
+    }
+  });
+  const missing = named.filter(
+    ({ category }) => !inCategories.includes(category) && !notIn.includes(category),
+  );
+  if (missing.length > 0) {
+    const list = missing.map(({ category }) => category).join(', ');
+    report(
+      [...path, plan.categories ? 'categories' : 'id'],
+      `Its features say it's in ${missing.map(({ category, feature }) => `${category} (${feature})`).join(', ')}: add ${list} to its categories, or to notIn when ${missing.length === 1 ? 'it comes' : 'they come'} with the plan but ${missing.length === 1 ? "isn't" : "aren't"} what it's sold as`,
       'warning',
     );
   }

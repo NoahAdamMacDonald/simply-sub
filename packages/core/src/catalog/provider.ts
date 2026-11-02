@@ -174,7 +174,14 @@ export const planSchema = z
       .array(slugSchema)
       .min(1, "Leave categories out when the plan is in its provider's category only")
       .describe(
-        "The service categories the plan is in, from categories.yaml, when they aren't just the provider's: Proton VPN Plus is [vpn], and Proton Unlimited is [privacy-suite, vpn, storage]",
+        "Every service category the plan fits, from categories.yaml, when they aren't just the provider's: Proton VPN Plus is [vpn], and Proton Unlimited is [privacy-suite, vpn, storage, email, passwords, calendar, ai]",
+      )
+      .optional(),
+    notIn: z
+      .array(slugSchema)
+      .min(1, 'Leave notIn out instead of listing none')
+      .describe(
+        "Service categories its features name that it isn't sold as (M11.3): Proton Mail Plus comes with Proton VPN Free, but it isn't a VPN plan. Validation warns about any other category its features name and it isn't in",
       )
       .optional(),
     features: z
@@ -218,6 +225,7 @@ export const planSchema = z
   })
   .superRefine((plan, ctx) => {
     addDuplicateIssues(ctx, plan.categories ?? [], (index) => ['categories', index]);
+    addDuplicateIssues(ctx, plan.notIn ?? [], (index) => ['notIn', index]);
     const formerNames = (plan.formerNames ?? []).map(({ name }) => name);
     addDuplicateIssues(ctx, formerNames, (index) => ['formerNames', index, 'name']);
     formerNames.forEach((name, index) => {

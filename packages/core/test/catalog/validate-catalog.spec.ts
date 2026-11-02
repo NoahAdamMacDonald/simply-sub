@@ -276,6 +276,55 @@ describe('validateCatalog', () => {
         messagesWith(netflix, ['plans', 0, 'categories'], ['streaming', 'privacy-suite']),
       ).toEqual([]);
     });
+
+    describe('every category a plan fits (M11.3)', () => {
+      const storage = { id: 'storage', name: 'Cloud storage', icon: 'cloud' };
+      const withStorage = () => edited(catalog(), categoriesFile, ['service', 3], storage);
+
+      it('warns about a category its features name and it isn’t in', () => {
+        expect(messages(withStorage())).toEqual(
+          [0, 1, 2, 3].map(
+            (index) =>
+              `warning: data/providers/proton.yaml plans.${index}.categories: Its features say it's in storage (storage.cloud): add storage to its categories, or to notIn when it comes with the plan but isn't what it's sold as`,
+          ),
+        );
+        expect(messagesWith(netflix, ['plans', 0, 'features', 'vpn.included'], true)).toEqual([
+          "warning: data/providers/netflix.yaml plans.0.id: Its features say it's in vpn (vpn.included): add vpn to its categories, or to notIn when it comes with the plan but isn't what it's sold as",
+        ]);
+      });
+
+      it('takes the category, or notIn when it comes with the plan but isn’t what it’s sold as', () => {
+        let files = withStorage();
+        for (const index of [0, 2, 3]) {
+          files = edited(
+            files,
+            proton,
+            ['plans', index, 'categories'],
+            ['privacy-suite', 'vpn', 'storage'],
+          );
+        }
+        expect(messages(edited(files, proton, ['plans', 1, 'notIn'], ['storage']))).toEqual([]);
+      });
+
+      it('needs notIn to name a category its features name and it isn’t in', () => {
+        const notIn = (value: string[]) =>
+          messages(edited(withStorage(), proton, ['plans', 1, 'notIn'], value)).filter(
+            (message) => !message.startsWith('warning: '),
+          );
+        expect(notIn(['storage', 'vpns'])).toEqual([
+          'data/providers/proton.yaml plans.1.notIn.1: "vpns" isn\'t a service category in data/categories.yaml (streaming, vpn, privacy-suite, storage)',
+        ]);
+        expect(notIn(['storage', 'vpn'])).toEqual([
+          "data/providers/proton.yaml plans.1.notIn.1: It's in vpn: take vpn out of notIn or out of its categories",
+        ]);
+        expect(notIn(['storage', 'streaming'])).toEqual([
+          'data/providers/proton.yaml plans.1.notIn.1: No feature of it names streaming: leave streaming out of notIn',
+        ]);
+        expect(notIn(['storage', 'storage'])).toEqual([
+          'data/providers/proton.yaml plans.1.notIn.1: "storage" is listed more than once',
+        ]);
+      });
+    });
   });
 
   describe('plan features', () => {
