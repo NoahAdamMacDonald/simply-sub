@@ -636,9 +636,11 @@ grey lines (Free trials Not applicable, Account sharing and Device and download 
 their topic, grade and dot the muted grey against the tokens (`--policy-none`), and Mullvad's Closing your account Not
 stated, its citation the terms page with no text fragment, reached by Tab with the page's name as its tooltip; for a US
 user, Hulu's and Disney+'s ratings from Disney's shared privacy policy (`data/policies/disney-privacy.yaml`), Hulu's own
-data sharing beside them, and one Sources link. With axe, screenshots and no horizontal scroll. Since M11.1
-`check-search.cjs` finds Mullvad's Refunds line (the split of Cancelling and refunds) and checks text fragments on graded
-lines' citations only.
+data sharing beside them, and one Sources link; Mullvad's notable line named by its title ("Pay with cash in the mail"),
+its Security checks, and its groups in the registry's order (Privacy, Billing, Legal, Security, Service, Notable).
+With axe, screenshots and no horizontal scroll. Since M11.1 `check-search.cjs` finds Mullvad's Refunds line (the split
+of Cancelling and refunds), expects its six groups and seven sources, and checks text fragments on graded lines'
+citations only.
 
 `check-after-m3.cjs` (the feedback after M3: M5.13, M6.17–M6.19, M7.11, M8.5, M8.6, M9.6) checks the batch on
 `ng serve` for a Canadian in Alberta, with Streaming (Crave Premium and Disney+ Premium) and Family (two Disney+

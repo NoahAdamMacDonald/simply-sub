@@ -1268,8 +1268,12 @@ M1.14, M11.1), so a buyer can see what signing up means beyond the price.
   every plan or everywhere. Every page quoted or read is linked and every link is quoted or read; a topic applies only
   as above (`validateCatalog`). A rating whose reason says the user has to change something themselves (a setting
   to turn off, a request to make) has an `action` (M5.12): what the link does, in a few words, and the provider's own
-  page for it, which its policy or help pages link; validation takes it on the provider's own sites or its quoted
-  policies' site, never another company's.
+  page for it, which its policy or help pages link, so the user gets there in one click; validation takes it on the
+  provider's own sites or its quoted policies' site, never another company's. A topic's `actionFor` lists the grades
+  that mean the user has to act (an opt-out's Neutral and Poor, deletion's Good to Poor, every export grade but Bad,
+  an arbitration opt-out's), and validation requires the action on them: an error, a warning for the 13 waiting for
+  M11.9. When the change is the browser's or device's own setting, the action links the provider's page that
+  explains it.
 - **Every topic that applies has a rating or a status** for everywhere and every plan, so cards can be compared line
   by line: validation names each one missing, an error, except for the 13 providers rated before M11.1
   (`awaitingPolicyRegrade` in core), which get a warning until M11.9 regrades them and empties the list.
@@ -1291,8 +1295,12 @@ M1.14, M11.1), so a buyer can see what signing up means beyond the price.
   fraud, safety, security or a payment never count against a grade, and business purposes do, judged by what the data
   is used for, not by what selects it (chats flagged for safety and then used to improve models count); the worst
   clause wins provider-wide, a clause for some countries or plans being a rating with `regions` or `plans`; broad
-  wording read broadly; each fact in one topic, by the routing table; silence by the topic's `silent`. Core's
-  `extractionRules` and the policy-research skill's Rules state it in the same words, which a test checks.
+  wording read broadly; each fact in one topic, by the routing table; silence by the topic's `silent`; the whole
+  terms read, and a term that stands out and no topic covers recorded as `other.notable`, never left out; a
+  provider with deep access (VPN, DNS, antivirus, email, password managers, browsers) read for its audits page, bug
+  bounty or disclosure policy and security advisories, for `security.practices` and `vpn.independent-audits`;
+  reasons written as you'd explain them to a five-year-old. Core's `extractionRules` and the policy-research skill's
+  Rules state it in the same words, which a test checks.
 - **On the card:** core's `planPolicies` picks, for the plan shown and the user's country, each topic's rating (and
   each notable one), the provider's own and its shared documents' as above, by group in the registry's order, and
   the pages those ratings quote or read, numbered from 1, the provider's first. Each graded rating is a dot in its
@@ -1624,6 +1632,8 @@ Validation fails if:
   today (section 4.10); a warning once a rating is over a year old, and for a shared document no provider names
 - a topic that applies to a provider has no rating or status for everywhere and every plan, its own or a shared
   document's (a warning for the 13 waiting for M11.9's regrade)
+- a rating's grade is one its topic's `actionFor` lists and it has no `action`, the user's way to act (a warning for
+  the 13 waiting for M11.9's regrade, and for a shared document only they name)
 - a topic and a feature on the same fact disagree: activity logging Great on a plan with the VPN whose
   `vpn.independent-audits` lacks `no-logs` (section 4.10)
 - `includes-subscription` lists the plan itself or its own provider, or makes a loop (Duo → Unlimited → Duo)

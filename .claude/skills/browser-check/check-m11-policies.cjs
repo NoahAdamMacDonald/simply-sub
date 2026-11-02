@@ -244,6 +244,20 @@ async function greyLooks(section) {
               (await cite.getAttribute('href')) === 'https://mullvad.net/en/help/terms-service',
             closureRow,
           );
+          const mullvadRows = await rows(mullvad);
+          check(
+            `${label}: Mullvad's notable term is named by its title, and its security checks graded`,
+            mullvadRows.includes(
+              'great | Pay with cash in the mail (Great): You can pay by putting cash in an envelope and mailing it, so you never have to give it your name or a card. [5]',
+            ) && mullvadRows.some((row) => row.startsWith('good | Security checks (Good):')),
+            mullvadRows.filter((row) => /Pay with cash|Security checks/.test(row)).join(' | '),
+          );
+          const notable = await mullvad.locator('h4').allTextContents();
+          check(
+            `${label}: the Security and Notable groups follow the registry's order`,
+            notable.join() === 'Privacy,Billing,Legal,Security,Service,Notable',
+            notable.join(', '),
+          );
           // Keyboard: Tab from the citation before it lands on its own, whose tooltip names the page.
           const all = mullvad.locator('.cite');
           const hrefs = await all.evaluateAll((anchors) =>

@@ -1107,10 +1107,21 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
   - **Procedure:** `policyProcedure` and `policyRouting` in core, in `extractionRules` and word for word in the
     skill's Rules (a test compares them, whitespace aside). `topicsDigest` gives each topic's note and silent rule;
     the extraction answer takes `status` (drafted with the terms and privacy pages read) and `title`.
+  - **The owner's follow-up (2026-11-02):** an opt-out must be linked, so a topic's `actionFor` lists the grades
+    that need the user's `action`, which validation requires (Claude's three, Proton's two and Disney's deletion
+    linked from their policies; ICI TOU.TV's, whose CBC notice doesn't render, waits for M11.9). Providers with deep
+    access are read for their audits, as Mullvad's External audits posts: `security.practices` for Mullvad, Proton
+    and Bitdefender, each Good by the rubric (published audits and a disclosure policy, no bounty; published audits
+    and a bug bounty; yearly SOC 2 with its report on request and a bug bounty), none with published past incidents
+    found. Notable terms are recorded, never dropped: Mullvad's cash by post (Great), Bitdefender's installer that may
+    remove other security apps (Poor) and its VPN on IPVanish's software and rules (Neutral); Proton's inactive free
+    accounts are `legal.inactivity` (Good). The procedure gained steps 12–14 (notable terms, audits, reasons for a
+    five-year-old), and `quote-check.cjs` reads statuses and shared documents. Bitdefender's certifications page
+    renders too late for `data:baselines`, so it has no baseline yet.
   - **The card:** a status is a grey line: `--policy-none` (the unranked grey) for the dot, the topic and "(Not
     stated)" or "(Not applicable)" in the muted text, the pages read cited as plain links; a notable rating is named by
-    its title. `check-m11-policies.cjs` (browser-check skill): 49 checks in both themes at both widths with axe;
-    `check-search.cjs` follows the split topic (189 pass).
+    its title. `check-m11-policies.cjs` (browser-check skill): 57 checks in both themes at both widths with axe;
+    `check-search.cjs` follows the split topic and Mullvad's new groups.
 
 **M11.6 — Ranked perks** (BLUEPRINT §4.2)
 ```yaml
