@@ -129,16 +129,20 @@
     @for (group of policies.groups; track group.group) {
       <h4>{{ groupNames[group.group] }}</h4>
       <ul class="policies">
-        @for (policy of group.policies; track policy.topic.id) {
-          <li>
+        @for (policy of group.policies; track $index) {
+          <!-- A topic the pages don't address, or that can't apply, is a grey line without a grade (M11.1). -->
+          <li [class.unrated]="!policy.tier">
             <!-- The dot is decorative: the grade is in words beside the topic (M5.9). -->
-            <span class="dot" aria-hidden="true" [attr.data-tier]="policy.tier"></span>
+            <span class="dot" aria-hidden="true" [attr.data-tier]="policy.tier ?? 'none'"></span>
             <!-- The reason with its citations, then where to change it (M5.12). -->
             <div class="rating">
               <p class="rated">
-                <span class="topic">{{ policy.topic.name }}</span>
+                <!-- A notable rating is named by its title (other.notable). -->
+                <span class="topic">{{ policy.title ?? policy.topic.name }}</span>
                 @if (policy.tier; as tier) {
                   <span class="grade"> ({{ tierNames[tier] }}): </span>
+                } @else if (policy.status; as status) {
+                  <span class="grade"> ({{ statusNames[status] }}): </span>
                 }
                 <!-- The space before the citations is the reason's: Angular drops a span of only a space. -->
                 <span>{{ policy.reason }} </span>

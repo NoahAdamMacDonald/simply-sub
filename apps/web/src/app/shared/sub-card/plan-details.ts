@@ -13,6 +13,7 @@ import {
   type PlanMatch,
   type PolicyCitation,
   type PolicyGroup,
+  type PolicyStatus,
   type PolicyTier,
   type Rank,
   type RankKey,
@@ -39,6 +40,12 @@ const tierNames: Record<PolicyTier, string> = {
   neutral: 'Neutral',
   poor: 'Poor',
   bad: 'Bad',
+};
+
+/** What a rating without a grade says instead, in grey (M11.1). */
+const statusNames: Record<PolicyStatus, string> = {
+  'not-stated': 'Not stated',
+  'not-applicable': 'Not applicable',
 };
 
 const groupNames: Record<PolicyGroup, string> = {
@@ -119,6 +126,7 @@ export class PlanDetails {
     );
   });
   protected readonly tierNames = tierNames;
+  protected readonly statusNames = statusNames;
   protected readonly groupNames = groupNames;
   protected readonly country = computed(() => {
     const code = this.settings.saved()?.country;
@@ -164,9 +172,9 @@ export class PlanDetails {
     });
   }
 
-  /** A citation's tooltip: the words it quotes, and the page. */
+  /** A citation's tooltip: the words it quotes, and the page; a page read that's silent on the topic, by name. */
   protected quoteText({ quotes, name }: PolicyCitation): string {
-    return `${quotes.map((quote) => `“${quote}”`).join(' ')} (${name})`;
+    return quotes.length > 0 ? `${quotes.map((quote) => `“${quote}”`).join(' ')} (${name})` : name;
   }
 
   protected includedName({ provider, plan }: SuiteContents['includes'][number]): string {

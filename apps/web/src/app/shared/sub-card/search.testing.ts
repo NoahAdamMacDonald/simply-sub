@@ -185,6 +185,13 @@ export const searchCatalogData: CatalogData = {
         ],
         ratings: [
           {
+            topic: 'privacy.data-collection',
+            status: 'not-stated',
+            reason: 'Its no-logging policy doesn’t say what else it collects.',
+            pages: ['https://mullvad.net/en/help/no-logging-data-policy'],
+            lastVerified: '2026-10-22',
+          },
+          {
             topic: 'service.activity-logging',
             tier: 'great',
             reason: 'No connection logs, and an audit found none.',

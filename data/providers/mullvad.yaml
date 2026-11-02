@@ -280,8 +280,8 @@ resellers:
             sourceUrl: https://www.webhallen.com/se/product/267706-Mullvad-VPN-12-manader-5-anvandare
 
 # Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: Mullvad's terms of service, privacy policy and
-# no-logging policy, and (2026-11-02) its post on Radically Open Security's infrastructure audit. Not rated: free trials (it has none) and
-# closing accounts (its terms don't say).
+# no-logging policy, and (2026-11-02) its post on Radically Open Security's infrastructure audit. Free trials are not
+# applicable (it has none) and closing accounts not stated (its terms don't say), statuses since M11.1.
 policies:
   links:
     - name: 'Terms of service'
@@ -354,6 +354,10 @@ policies:
         - url: https://mullvad.net/en/help/terms-service
           quote: 'Any material changes to these terms will be notified via a prominent notice on mullvad.net/blog at least one month before the changes are applied.'
       lastVerified: 2026-10-27
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'It has no free trial: you pay ahead for the time you want.'
+      lastVerified: 2026-10-27
     - topic: legal.disputes
       tier: good
       reason: "If you have a problem with it that you can't sort out, Sweden's consumer complaints board or a Swedish court decides, not a private arbitrator."
@@ -369,6 +373,11 @@ policies:
           quote: 'Any material changes to these terms will be notified via a prominent notice on mullvad.net/blog at least one month before the changes are applied.'
         - url: https://mullvad.net/en/help/terms-service
           quote: 'If you wish to exercise your right to reject such changes, you should stop using the service (for refunds, see below).'
+      lastVerified: 2026-10-27
+    - topic: legal.account-closure
+      status: not-stated
+      reason: "Its terms don't say whether it can close your account, or what happens to time you've paid for."
+      pages: [https://mullvad.net/en/help/terms-service]
       lastVerified: 2026-10-27
     - topic: service.activity-logging
       tier: great

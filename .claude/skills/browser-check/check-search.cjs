@@ -1636,7 +1636,7 @@ async function addItem(page, planId) {
       groups.join() === 'Privacy,Billing,Legal,Service' &&
         rows[0] ===
           "great | Data collection (Great): To sign up you don't give your name, an email address or even a password, so it knows very little about you. [3]" &&
-        rows.some((row) => row.startsWith('good | Cancelling and refunds (Good):')) &&
+        rows.some((row) => row.startsWith('good | Refunds (Good):')) &&
         links.length === 4 &&
         links[0][0].startsWith('[1] Terms of service') &&
         links.every(
@@ -1645,8 +1645,9 @@ async function addItem(page, planId) {
         ),
       `${groups.join(', ')} | ${rows[0]} | ${links.map(([text]) => text).join(', ')}`,
     );
+    // A graded line's citations: a Not stated line (M11.1) links the page it read, with no words to scroll to.
     const citations = await section
-      .locator('.cite')
+      .locator('.policies li:not(.unrated) .cite')
       .evaluateAll((anchors) =>
         anchors.map((anchor) => [
           anchor.textContent.replace(/\s+/g, ' ').trim(),
@@ -1666,7 +1667,9 @@ async function addItem(page, planId) {
       `${citations.length}: ${citations[0]?.join(' ')}`,
     );
     // Mullvad's refunds quote its terms three times: one citation, highlighting all three.
-    const refunds = section.locator('.policies li', { hasText: 'Cancelling and refunds' });
+    const refunds = section.locator('.policies li', {
+      has: page.locator('.topic', { hasText: /^Refunds$/ }),
+    });
     const refundCites = await refunds
       .locator('.cite')
       .evaluateAll((anchors) => anchors.map((anchor) => anchor.href));

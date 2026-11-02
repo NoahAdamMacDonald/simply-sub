@@ -83,7 +83,8 @@ plans:
 
 # Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: ICI TOU.TV's subscription conditions and CBC/Radio-
 # Canada's privacy notice, in French (the notice's sections didn't render, only its cookie notice). Not rated: the
-# other privacy topics, free trials (none), account sharing and device limits (not stated).
+# other privacy topics. Free trials are not applicable (none), and account sharing and device limits not stated by its
+# conditions, statuses since M11.1.
 policies:
   links:
     - name: "Conditions d'utilisation (in French)"
@@ -123,6 +124,10 @@ policies:
         - url: https://ici.tou.tv/abonnement/condition
           quote: 'vous pourrez refuser cette modification en annulant votre abonnement.'
       lastVerified: 2026-10-27
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'It has no free trial.'
+      lastVerified: 2026-10-27
     - topic: legal.disputes
       tier: good
       reason: "Disagreements go to Quebec's regular courts in Montreal, not to a private arbitrator."
@@ -145,4 +150,14 @@ policies:
       sources:
         - url: https://ici.tou.tv/abonnement/condition
           quote: 'En cas de non-respect des Conditions d’utilisation, CBC/Radio-Canada se réserve le droit de suspendre votre accès ou de mettre fin à votre abonnement immédiatement sans aucun autre avis ou délai.'
+      lastVerified: 2026-10-27
+    - topic: service.account-sharing
+      status: not-stated
+      reason: "Its conditions don't say who you can share your account with."
+      pages: [https://ici.tou.tv/abonnement/condition]
+      lastVerified: 2026-10-27
+    - topic: service.device-limits
+      status: not-stated
+      reason: "Its conditions don't say how many devices you can use, or how long downloads last."
+      pages: [https://ici.tou.tv/abonnement/condition]
       lastVerified: 2026-10-27

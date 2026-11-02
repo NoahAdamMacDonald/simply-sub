@@ -918,8 +918,8 @@ resellers:
             sourceUrl: https://digitalgoods.proxystore.de/en/brand/proton
 
 # Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: Proton's privacy policy and terms of service,
-# Proton VPN's privacy policy, its no-logs audit post and its page on usage statistics. Not rated: free trials (only
-# business plans have one).
+# Proton VPN's privacy policy, its no-logs audit post and its page on usage statistics. Free trials are not
+# applicable (only business plans have one), a status since M11.1.
 policies:
   links:
     - name: 'Privacy policy'
@@ -989,6 +989,10 @@ policies:
       sources:
         - url: https://proton.me/legal/terms
           quote: 'If the renewal price has changed, you will be charged the then-current price valid at the time of the renewal of your subscription.'
+      lastVerified: 2026-10-27
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'Its personal plans have no free trial: only its business plans do.'
       lastVerified: 2026-10-27
     - topic: legal.disputes
       tier: good

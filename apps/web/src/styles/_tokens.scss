@@ -67,6 +67,8 @@
   --policy-neutral: var(--rank-uses);
   --policy-poor: var(--rank-unused);
   --policy-bad: var(--rank-unwanted);
+  // No grade: a topic the pages don't address, or that can't apply (M11.1), grey like an unranked dot.
+  --policy-none: var(--rank-none);
   // Destructive actions (ss-confirm's danger button): white on it is 6.3:1.
   --ss-danger: var(--rank-unwanted-text);
   --ss-on-danger: var(--ss-on-accent);
