@@ -648,6 +648,90 @@ describe('planPolicies, for statuses and titles (M11.1)', () => {
   });
 });
 
+describe('a topic and a feature on the same fact (M11.1)', () => {
+  const audits = {
+    id: 'vpn.independent-audits',
+    parent: 'vpn.included',
+    name: 'Independent audits',
+    category: 'vpn',
+    type: 'set',
+    values: [
+      { id: 'no-logs', name: 'No-logs policy' },
+      { id: 'servers', name: 'Server infrastructure' },
+    ],
+  };
+  /** The test catalog with the audits feature in the registry, Mullvad's plan auditing `values`. */
+  const withAudits = (values?: string[], files = withPolicies()) =>
+    edited(
+      files.map((source) =>
+        source.file === 'data/features.yaml' && 'data' in source
+          ? { ...source, data: [...(source.data as unknown[]), audits] }
+          : source,
+      ),
+      'data/providers/mullvad.yaml',
+      ['plans', 0, 'features', 'vpn.independent-audits'],
+      values,
+    );
+  const unaudited =
+    'data/providers/mullvad.yaml policies.ratings.2.tier: Great needs an independent audit of the no-logs claim, but mullvad.vpn has no no-logs in vpn.independent-audits: grade it lower, or add the audit to the feature with its source';
+
+  it('is inactive until the registry has the feature', () => {
+    expect(messages(withPolicies())).toEqual([]);
+  });
+
+  it('lets activity logging be Great only when the VPN plans’ audits include no-logs', () => {
+    expect(messages(withAudits())).toEqual([unaudited]);
+    expect(messages(withAudits(['servers']))).toEqual([unaudited]);
+    expect(messages(withAudits(['no-logs', 'servers']))).toEqual([]);
+  });
+
+  it('leaves a lower grade, and a plan without the VPN, alone', () => {
+    const good = withPolicies({
+      ...mullvadPolicies,
+      ratings: [
+        ...mullvadPolicies.ratings.slice(0, 2),
+        rating('service.activity-logging', { tier: 'good', reason: 'No logs, unaudited.' }),
+      ],
+    });
+    expect(messages(withAudits(undefined, good))).toEqual([]);
+    expect(
+      messages(
+        edited(
+          withAudits(),
+          'data/providers/mullvad.yaml',
+          ['plans', 0, 'features', 'vpn.included'],
+          false,
+        ),
+      ).filter((message) => message.includes('independent audit')),
+    ).toEqual([]);
+  });
+
+  it('checks a shared document’s rating against the plans of each provider naming it', () => {
+    const privacy = 'https://privacy.example.com/policy';
+    const files = withAudits(undefined, [
+      ...withPolicies({
+        ...mullvadPolicies,
+        ratings: mullvadPolicies.ratings.slice(0, 2),
+        shared: ['vpn-group'],
+      }),
+      {
+        file: 'data/policies/vpn-group.yaml',
+        data: {
+          id: 'vpn-group',
+          name: 'The VPN Group’s policy',
+          links: [{ name: 'Policy', url: privacy }],
+          ratings: [
+            rating('service.activity-logging', { sources: [{ url: privacy, quote: 'No logs' }] }),
+          ],
+        },
+      },
+    ]);
+    expect(messages(files)).toEqual([
+      'data/providers/mullvad.yaml policies.shared.0: Great needs an independent audit of the no-logs claim, but mullvad.vpn has no no-logs in vpn.independent-audits: grade it lower, or add the audit to the feature with its source',
+    ]);
+  });
+});
+
 describe('shared policy documents (M11.1)', () => {
   const groupPrivacy = 'https://privacy.example.com/policy';
   const groupLinks = [{ name: 'Group privacy policy', url: groupPrivacy }];

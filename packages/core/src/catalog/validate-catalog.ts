@@ -10,7 +10,12 @@ import type { CatalogFileKind } from './json-schema';
 import { providerCategories } from './plan-categories';
 import { paidPlanCount, topicApplies } from './plan-policies';
 import { policySetSchema, type Policies, type PolicyRating, type PolicySet } from './policy';
-import { policyTopicsFileSchema, titledRatingsMax, type PolicyTopic } from './policy-topic';
+import {
+  policyTopicsFileSchema,
+  titledRatingsMax,
+  type PolicyTier,
+  type PolicyTopic,
+} from './policy-topic';
 import { automationSchema } from '../pipeline/automation';
 import { onSites, providerSiteKeys, queueFileSchema } from '../pipeline/queue';
 import type { Price } from './price';
@@ -668,6 +673,7 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
     checkPolicies(provider, provider.policies, context, report);
   }
   checkPolicyCoverage(provider, context, report);
+  checkTopicFeatures(provider, context, report);
 }
 
 /**
@@ -823,6 +829,72 @@ function checkPolicySet(
       'warning',
     );
   }
+}
+
+/**
+ * A topic and a feature on the same fact both stay, the feature for ranking and the topic for the card, and must agree
+ * (M11.1, the guide's §1.3 step 9): a rating of `tier` on `topic` needs `value` in `feature` on every plan it covers
+ * that has `parent`. A rule whose feature isn't in the registry yet is inactive.
+ */
+export const topicFeatureRules: readonly {
+  topic: string;
+  tier: PolicyTier;
+  feature: string;
+  value: string;
+  parent: string;
+  /** Why, after "Great needs …". */
+  needs: string;
+}[] = [
+  {
+    topic: 'service.activity-logging',
+    tier: 'great',
+    feature: 'vpn.independent-audits',
+    value: 'no-logs',
+    parent: 'vpn.included',
+    needs: 'an independent audit of the no-logs claim',
+  },
+];
+
+function checkTopicFeatures(provider: Provider, context: CheckContext, report: Report): void {
+  const { registry, policySets } = context;
+  const policies = provider.policies;
+  if (!registry || !policies) return;
+  const rated = [
+    ...(policies.ratings ?? []).map((rating, index) => ({
+      rating,
+      path: ['policies', 'ratings', index, 'tier'],
+    })),
+    ...(policies.shared ?? []).flatMap((id, index) =>
+      (policySets.get(id)?.ratings ?? []).map((rating) => ({
+        rating,
+        path: ['policies', 'shared', index],
+      })),
+    ),
+  ];
+  for (const rule of topicFeatureRules) {
+    if (!registry.features.has(rule.feature)) continue;
+    for (const { rating, path } of rated) {
+      if (rating.topic !== rule.topic || rating.tier !== rule.tier) continue;
+      const lacking = provider.plans.filter((plan) => {
+        if (rating.plans && !rating.plans.includes(plan.id)) return false;
+        const values = plan.features[rule.feature];
+        return (
+          plan.features[rule.parent] === true &&
+          !(Array.isArray(values) && values.includes(rule.value))
+        );
+      });
+      if (lacking.length > 0) {
+        report(
+          path,
+          `${capitalized(rule.tier)} needs ${rule.needs}, but ${lacking.map((plan) => plan.id).join(', ')} ${lacking.length === 1 ? 'has' : 'have'} no ${rule.value} in ${rule.feature}: grade it lower, or add the audit to the feature with its source`,
+        );
+      }
+    }
+  }
+}
+
+function capitalized(text: string): string {
+  return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
 /** A titled topic's ratings have a title and a grade; no other topic's has a title. */
