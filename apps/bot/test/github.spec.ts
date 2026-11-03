@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { digestBranch as botBranch } from '../src/digest';
 import { botSignature, GitHub, resellerSites } from '../src/github';
 import type { Proposal } from '../src/proposal';
@@ -185,6 +185,23 @@ describe('GitHub', () => {
         )) as typeof fetch,
     });
     expect(await github.batchPulls()).toEqual({ open: ['streamco'], closed: ['hulu', 'max'] });
+  });
+
+  describe('without a fetch of its own', () => {
+    afterEach(() => vi.unstubAllGlobals());
+
+    it('calls the global fetch on its own, never as its method, which workerd refuses', async () => {
+      const receivers: unknown[] = [];
+      vi.stubGlobal('fetch', function (this: unknown) {
+        receivers.push(this);
+        return Promise.resolve(Response.json({ object: { sha: 'c0ffee' } }));
+      });
+      const github = new GitHub({ token: 't0ken', repository: 'owner/simply-sub', base: 'main' });
+      await github.state().catch(() => undefined);
+
+      expect(receivers.length).toBeGreaterThan(0);
+      expect(receivers.every((receiver) => receiver === undefined)).toBe(true);
+    });
   });
 
   it('reads the resellers’ websites', () => {
