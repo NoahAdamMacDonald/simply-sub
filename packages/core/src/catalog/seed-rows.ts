@@ -261,8 +261,11 @@ export function providerDiff(shape: number, wanted: ProviderRows, stored: Stored
     for (const [key, row] of after) {
       const old = before.get(key);
       if (!old) {
-        statements.push(insertStatement(shape, table, row));
-        writes += insertWrites(table);
+        const split = rowStatements(shape, table, row, Object.keys(row), (head) =>
+          insertStatement(shape, table, head),
+        );
+        statements.push(...split.statements);
+        writes += insertWrites(table) + split.writes;
         continue;
       }
       // A column D1's row wasn't read with (a provider's json) changes with the others (its hash).
@@ -271,8 +274,11 @@ export function providerDiff(shape: number, wanted: ProviderRows, stored: Stored
       );
       if (changed.length === 0) continue;
       const columns = [...changed, ...Object.keys(row).filter((column) => !(column in old))];
-      statements.push(updateStatement(shape, table, row, columns));
-      writes += updateWrites(table, columns);
+      const split = rowStatements(shape, table, row, columns, (head) =>
+        updateStatement(shape, table, head, columns),
+      );
+      statements.push(...split.statements);
+      writes += updateWrites(table, columns) + split.writes;
     }
     changes.push({ statements, writes });
   }
@@ -304,20 +310,21 @@ export function inserts(
   upsert?: 'upsert',
   kind: (row: SeedRow) => 'insert' | 'update' = () => 'insert',
 ): Change {
-  return {
-    statements: rows.map(([table, row]) => insertStatement(shape, table, row, upsert)),
-    writes: rows.reduce(
-      (sum, [table, row]) =>
-        sum +
-        (kind(row) === 'insert'
+  return combine(
+    rows.map(([table, row]) => {
+      const split = rowStatements(shape, table, row, Object.keys(row), (head) =>
+        insertStatement(shape, table, head, upsert),
+      );
+      const own =
+        kind(row) === 'insert'
           ? insertWrites(table)
           : updateWrites(
               table,
               Object.keys(row).filter((column) => !keyOfTable(table).includes(column)),
-            )),
-      0,
-    ),
-  };
+            );
+      return { statements: split.statements, writes: own + split.writes };
+    }),
+  );
 }
 
 /** A stored provider's rows in new lists, which rankUpdates replaces rows in. */
@@ -409,6 +416,70 @@ export function updateStatement(
   return `UPDATE ${sqlTable(shape, table)} SET ${columns
     .map((column) => `${column} = ${sqlValue(row[column] ?? null)}`)
     .join(', ')} WHERE ${whereKey(table, row)};`;
+}
+
+/**
+ * The longest a part of a text value is, as a SQL literal, when a row's statement is split (rowStatements): three
+ * parts and the row's short columns fit in one statement.
+ */
+export const partBytes = 30_000;
+
+/**
+ * A row's statement (`statement` of the row, which writes `columns`), and the UPDATEs that finish it when it's over
+ * D1's statement limit: each text value it writes that's longer than partBytes goes in parts, the first in the
+ * statement and the rest appended (`json = json || '…'`), so each statement is under the limit (M11.9: Bitdefender's
+ * provider row, its json and search 105 KB together). A seed's statements run in one batch, which D1 writes whole or
+ * not at all. `writes` is what the UPDATEs write: the statement's own are the caller's to count.
+ */
+export function rowStatements(
+  shape: number,
+  table: SeedTable,
+  row: SeedRow,
+  columns: readonly string[],
+  statement: (row: SeedRow) => string,
+): Change {
+  const whole = statement(row);
+  if (utf8Length(whole) <= maxStatementBytes) return { statements: [whole], writes: 0 };
+  const key: readonly string[] = seedTables[table].key;
+  const head: Record<string, SqlValue> = { ...row };
+  const appends: string[] = [];
+  let writes = 0;
+  for (const column of columns) {
+    const value = row[column];
+    if (key.includes(column) || typeof value !== 'string') continue;
+    const [first = '', ...rest] = textParts(value, partBytes);
+    head[column] = first;
+    for (const part of rest) {
+      appends.push(
+        `UPDATE ${sqlTable(shape, table)} SET ${column} = ${column} || ${sqlValue(part)} WHERE ${whereKey(table, row)};`,
+      );
+      writes += updateWrites(table, [column]);
+    }
+  }
+  return { statements: [statement(head), ...appends], writes };
+}
+
+/** `value` in parts of whole characters, each at most `bytes` long in a SQL literal (sqlValue's quotes and breaks). */
+function textParts(value: string, bytes: number): string[] {
+  const parts: string[] = [];
+  let part = '';
+  let size = 0;
+  for (const character of value) {
+    const length =
+      character === "'"
+        ? 2
+        : character === '\n' || character === '\r'
+          ? sqlValue(character).length - 2
+          : utf8Length(character);
+    if (size + length > bytes && part !== '') {
+      parts.push(part);
+      part = '';
+      size = 0;
+    }
+    part += character;
+    size += length;
+  }
+  return [...parts, part];
 }
 
 /**

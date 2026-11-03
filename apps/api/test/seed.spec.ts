@@ -341,6 +341,31 @@ describe('a full seed', () => {
     expect(JSON.parse(row?.json ?? '{}').notes).toBe(source.providers[0].notes);
   });
 
+  it('writes a provider over D1’s statement limit in parts, which D1 joins, updated or inserted (M11.9)', async () => {
+    // 60,000 characters in Crave's notes, 150,000 bytes as a SQL literal: é is 2 bytes, and a quote is doubled.
+    const notes = "é'é".repeat(20_000);
+    const big = edited((catalog) => {
+      catalog.providers[0].notes = notes;
+    });
+    const stored = async () =>
+      JSON.parse(
+        (
+          await db
+            .prepare(`SELECT json FROM providers WHERE id = 'crave'`)
+            .first<{ json: string }>()
+        )?.json ?? '{}',
+      ).notes;
+
+    const updated = await seed(snapshotOf(big, '0000002'));
+    expect(await stored()).toBe(notes);
+    await emptyCatalog();
+    const inserted = await seed(snapshotOf(big, '0000003'));
+    expect(await stored()).toBe(notes);
+    // Each part appended is a row written, which the estimate counts.
+    expect(updated.rowsWritten).toBe(updated.estimated);
+    expect(inserted.rowsWritten).toBe(inserted.estimated);
+  });
+
   it('stores rank values and monthly equivalents', async () => {
     const { results: features } = await db
       .prepare(

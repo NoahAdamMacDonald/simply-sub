@@ -26,7 +26,7 @@ import {
   type SeedState,
   type StoredProvider,
 } from '../../src';
-import { providerPriceRows } from '../../src/catalog/seed-rows';
+import { maxStatementBytes, providerPriceRows, utf8Length } from '../../src/catalog/seed-rows';
 import { catalog, catalogWith, edited } from './catalog-files';
 
 const netflix = 'data/providers/netflix.yaml';
@@ -341,10 +341,32 @@ describe('buildSeedSql, without what D1 holds', () => {
     expect(line).toContain(`'Members''' || char(10) || 'choice'`);
   });
 
-  it('refuses a statement over 100,000 bytes, counting UTF-8 bytes', () => {
-    // 60,000 characters, but 120,000 bytes.
-    const snapshot = snapshotOf(catalogWith(netflix, ['notes'], 'é'.repeat(60_000)));
-    expect(() => linesOf(snapshot)).toThrow("A seed statement is over D1's 100000-byte limit");
+  it('writes a row over 100,000 bytes in parts, each statement under the limit in UTF-8 (M11.9)', () => {
+    // 60,000 characters in Netflix's notes, 150,000 bytes as a SQL literal: é is 2 bytes, and a quote is doubled.
+    const files = catalogWith(netflix, ['notes'], "é'é".repeat(20_000));
+    const snapshot = snapshotOf(files);
+    const lines = linesOf(snapshot);
+    expect(lines.filter((line) => utf8Length(line) > maxStatementBytes)).toEqual([]);
+    // The row's statement holds its json's first part, and UPDATEs append the rest, in order.
+    const literals = (line: string) =>
+      [...line.matchAll(/'((?:[^']|'')*)'/g)].map(([, text]) => text.replaceAll("''", "'"));
+    const insert = lines.find(
+      (line) =>
+        line.startsWith(`INSERT INTO providers_s${seedShape} `) &&
+        line.includes("VALUES ('netflix'"),
+    );
+    const appended = lines.filter((line) =>
+      line.startsWith(`UPDATE providers_s${seedShape} SET json = json || `),
+    );
+    const [netflixRow] = snapshot.data.providers.filter((provider) => provider.id === 'netflix');
+    expect(appended.length).toBeGreaterThan(0);
+    expect([literals(insert ?? '')[5], ...appended.map((line) => literals(line)[0])].join('')).toBe(
+      JSON.stringify(netflixRow),
+    );
+    // Each UPDATE is a row written more.
+    const writes = (source: CatalogSnapshot) =>
+      planSeed(source, { providerHashes: providerHashes(source) }).writes;
+    expect(writes(snapshot)).toBe(writes(snapshotOf()) + appended.length);
   });
 
   it('refuses a value of the wrong type', () => {

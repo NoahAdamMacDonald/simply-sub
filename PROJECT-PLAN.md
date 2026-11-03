@@ -1695,6 +1695,14 @@ in every D1 `json` column search parses.
     - **Xbox Game Pass:** PC Game Pass in the US, $13.99 a month (the US page's "PC only"; its own page,
       `/en-US/xbox-game-pass/pc`, is a page not found). The US prices cite the page without the first read's
       experiment flag.
+    - **Rows over D1's statement limit:** Bitdefender's provider row grew to 105 KB (its `json` 54 KB, its `search`
+      51 KB), over the 100 KB a statement may be, which CI's `data:writes` caught. Core's `rowStatements` writes such
+      a row in parts: each text value over 30 KB up to 30 KB in the row's statement, and UPDATEs appending the rest,
+      each counted as a row written (BLUEPRINT §5.3).
+    - **Tests:** core (a row of 150,000 bytes in parts, each statement under the limit, joined again exactly, each
+      UPDATE counted), the API (such a provider updated and inserted into D1 comes back whole, and D1 counts what the
+      estimate says), and the bot's page check (Basic and the UK's, Australia's and New Zealand's extra members
+      confirmed on their fixtures, which gained each country's extra-member line in its page's words).
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and
