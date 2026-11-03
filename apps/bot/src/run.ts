@@ -14,6 +14,7 @@ import {
   type PolicyTopic,
   type ReportedPlan,
   type Robots,
+  type SeedStep,
   type SnapshotProvider,
 } from '@simply-sub/core';
 import { checkPages, message, type CheckInput, type PageDeps } from './check-pages';
@@ -75,6 +76,11 @@ export interface Services {
   readProvider(id: string): Promise<SnapshotProvider | undefined>;
   /** The Terms and policies in the file at `url`, a provider's policiesUrl (M11.8). */
   readPolicies(url: string): Promise<Policies>;
+  /**
+   * The next step of seeding what a deploy's seed left over the day's rows (M11.8): core's seedNext on the catalog
+   * D1, from the seed files data:build publishes.
+   */
+  seedNext(today: IsoDate): Promise<SeedStep>;
   readBundle(id: string): Promise<Bundle | undefined>;
   /** Each host's robots.txt, read once. */
   readRobots(hosts: readonly string[]): Promise<Record<string, Robots>>;
@@ -98,6 +104,9 @@ export interface Services {
 
 /** The most hosts one step reads robots.txt for: a step has 50 requests out on the free plan. */
 const robotsPerStep = 40;
+
+/** The most seed steps a night takes: a Workflow has 1,024 steps, and the checks need theirs (M11.8). */
+const seedStepsPerNight = 200;
 
 export interface NightSummary {
   findings: number;
@@ -145,6 +154,7 @@ export async function runNight(
   step: Step,
   services: Services,
 ): Promise<NightSummary> {
+  await seedWhatWaits(today, step, services);
   const repository = await step('read the repository', () => services.readRepository());
   const settings = await step('read the settings', () => services.readSettings(repository.commit));
   const checks = await step('read the check dates', () => services.state.checks());
@@ -388,6 +398,33 @@ export async function runNight(
     ...(pullRequest !== undefined && { pullRequest }),
     ...(discovery.pullRequest !== undefined && { batch: discovery.pullRequest }),
   };
+}
+
+/**
+ * What a deploy's seed left for later, over the day's rows (M11.8): a provider a step, first, so the checks read it,
+ * until nothing more fits tonight. A failure leaves the rest for tomorrow, and a person hears of it in the digest.
+ */
+async function seedWhatWaits(today: IsoDate, step: Step, services: Services): Promise<void> {
+  try {
+    for (let n = 1; n <= seedStepsPerNight; n++) {
+      const seeded = await step(`seed ${n}`, () => services.seedNext(today));
+      if (seeded.result !== 'more') return;
+    }
+  } catch (error) {
+    await step('note the seed’s failure', () =>
+      services.state.putPending({
+        key: 'failed:seed',
+        seen: today,
+        findings: [
+          {
+            kind: 'manual',
+            subject: 'the catalog seed',
+            reason: `Seeding what waits failed: ${message(error)}`,
+          },
+        ],
+      }),
+    );
+  }
 }
 
 /** Each reported plan's name and prices, from its provider's file; a plan the catalog doesn't have now is left out. */

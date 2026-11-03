@@ -210,6 +210,8 @@ export async function fakeServices(
     steps: [],
     readIndex: async () => catalogIndex(stored, [], [], policies),
     readProvider: async (id) => stored.find((provider) => provider.id === id),
+    // Nothing waits for the seed: a test that wants a step gives one of its own.
+    seedNext: async () => ({ result: 'idle', writes: 0 }),
     async readPolicies(url) {
       const found = providers.find((provider) => urlOf(provider.id) === url)?.policies;
       if (!found) throw new Error(`Nothing at ${url}`);
