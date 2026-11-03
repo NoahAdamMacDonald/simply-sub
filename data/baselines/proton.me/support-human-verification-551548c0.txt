@@ -1,0 +1,267 @@
+url: https://proton.me/support/human-verification
+method: fetch
+saved: 2026-11-03
+
+Human verification | Proton Personal Personal
+Business Business
+Download
+Discover Proton Discover Proton
+Resources
+Pricing
+Encrypted emailProton Mail VPN Proton VPN(new window) Cloud storageProton Drive Password managerProton Pass AI assistantLumo AI
+Video conferencingProton Meet Private schedulingProton Calendar Collaborative documentsProton Docs Collaborative spreadsheetsProton Sheets Two-factor authenticatorProton Authenticator
+Bitcoin walletProton Wallet Encrypted notes Standard Notes(new window) Hide-my-email aliases SimpleLogin(new window)
+Discover Proton
+Personal plans
+Proton
+Choose an internet where your privacy comes first
+Create a free account
+All-in-one business suiteProton Workspace Business emailProton Mail Business VPNProton VPN Business AI assistantLumo AI Business video conferencingProton Meet Business calendarProton Calendar Business password managerProton Pass
+Business cloud storageProton Drive Business documentsProton Docs Business spreadsheetsProton Sheets
+Industries
+Tech Healthcare Nonprofits News and media
+Business resources
+Trust center HIPAA GDPR Data Breach Observatory ISO 27001 Case studies Business blog
+Switch from
+Microsoft 365 Google Workspace
+Discover Proton for Business
+Business plans
+Proton Workspace
+Your whole team, one encrypted workspace
+Explore Workspace
+Proton Mail Proton VPN Proton Drive Proton Pass Lumo AI Proton Meet Proton Calendar Proton Authenticator Proton Wallet
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+macOS Windows Linux
+Web app
+Web app(new window)
+Desktop client add-on
+Bridge
+Scan to get the mobile app
+Devices
+Windows(new window)macOS(new window)Linux(new window)Chromebook(new window)Android(new window)iOS(new window)
+Extensions
+Chrome(new window)Firefox(new window)
+Smart TV
+Android TV(new window)Apple TV(new window)Firestick(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+Windows macOS CLI
+Web app
+Web app(new window)
+Scan to get the mobile app
+Devices
+Windows macOS Linux Android iOS Command line interface(new window)
+Extensions
+Chrome Safari Firefox Edge Brave
+Web app
+Web app(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Web app
+Web app(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+macOS Windows Linux
+Web app
+Web app(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+macOS Windows Linux
+Web app
+Web app(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+macOS Windows Linux
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Web app
+Web app(new window)
+Company
+About us Impact Team CareersWe’re hiring Proton Foundation Proton blog
+Privacy
+Open source Zero-access encryption Big Tech alternatives
+Connect
+Partners and affiliates Social media Media contact
+Discover Proton
+Personal plans
+Proton
+We believe a better world starts with privacy and digital freedom
+Discover Proton
+Get started with Proton
+Beginner video guides (new window)Learn about encryption Business resources
+News
+Proton blog Product updates
+Reports and insights
+Investigative reports Proton VPN observatory (new window)Data breach observatory Tech fines tracker Europe’s tech sovereignty watch European alternatives Age verification explained Proton’s guide to AI
+Videos about privacy
+Mass surveillance explained (new window)How employers spy on you (new window)The data you leak in 24 hours (new window)How to disappear online (new window)See all videos (new window)
+Tools
+What is my IP address? (new window)Password generator Username generator PDF watermark Image watermark Flock camera map
+Support
+Help center Contact us
+EN
+Create a free account
+Sign in
+Open menu
+Support
+Proton Account
+Create account
+Support search
+Human verification
+Reading
+2 mins
+Category
+Create account
+When you create a Proton Account, you might be asked to complete a CAPTCHA challenge or verify a phone number or email address. This is just to help prevent bots and spam — we don’t store your data.
+Verification options
+Troubleshooting
+Why can I only see email or SMS verification options?
+Why Proton uses human verification
+Verification options
+CAPTCHA
+A CAPTCHA is a short online test that confirms you’re not a bot. We don’t save CAPTCHA data.
+Email or SMS
+We’ll send a verification code to your phone number or secondary email address.
+We don’t store your email address or phone number, only a cryptographic hash.
+This means we can detect if an email or phone number is being reused repeatedly, without seeing or storing your actual details.
+Troubleshooting
+If you can’t get past CAPTCHA, try email or SMS verification instead. If that doesn’t work, or if no verification options appear, contact our support team.
+If you’re having another issue creating your Proton Account, check out our signup troubleshooting guide.
+Why can I only see email or phone verification options?
+Several factors determine which verification methods are available. You’re more likely to see only email or SMS verification if you:
+Try to create multiple accounts
+Use the Tor browser(new window)
+Why Proton uses human verification
+To protect our email reputation and prevent misuse.
+If spammers have easy access to Proton Mail addresses and use us to send emails, other email providers could start blocking messages from our IP addresses. This would make it harder for Proton Mail users to send and receive emails.
+All Proton Accounts include access to Proton Mail. So even if you’re creating an account to use Proton Drive, Proton Pass, Proton VPN(new window), or another Proton service, you might still be asked to prove you’re human.
+Create account
+Using Proton services without a Proton Mail address
+How to create a SimpleLogin account using a Proton Account
+Proton Mail security checklist for new account owners
+How to create a free email address
+Didn’t find what you were looking for?
+Get help
+General contactcontact@proton.me
+Media contactmedia@proton.me
+Legal contactlegal@proton.me
+Partnerships contactpartners@proton.me
+Privacy by default
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+Proton AG Route de la Galaise 32
+1228 Plan-les-Ouates
+Geneva, Switzerland
+Products Proton Mail
+Proton Calendar
+Proton Drive
+Proton VPN(new window)
+Proton Pass
+Proton Wallet
+Proton Docs
+Proton Sheets New
+Proton Authenticator
+Proton Meet New
+Lumo AI
+Standard Notes(new window)
+Simple Login(new window)
+Proton for Business
+Pricing
+Switch to Proton
+Products
+Proton Mail
+Proton Calendar
+Proton Drive
+Proton VPN(new window)
+Proton Pass
+Proton Wallet
+Proton Docs
+Proton Sheets New
+Proton Authenticator
+Proton Meet New
+Lumo AI
+Standard Notes(new window)
+Simple Login(new window)
+Proton for Business
+Pricing
+Switch to Proton
+Privacy Password generator
+Username generator
+Tor
+Open source
+Student discount
+Special reports
+Proton vs. competitors
+Privacy
+Password generator
+Username generator
+Tor
+Open source
+Student discount
+Special reports
+Proton vs. competitors
+Company About us
+Team
+Impact
+Proton Foundation
+Careers We’re hiring
+Shop(new window)
+Donate
+Blog
+Company
+About us
+Team
+Impact
+Proton Foundation
+Careers We’re hiring
+Shop(new window)
+Donate
+Blog
+Connect Social media
+Help and support
+Partners and affiliates
+Referral program
+Press and media
+Contact us
+Connect
+Social media
+Help and support
+Partners and affiliates
+Referral program
+Press and media
+Contact us
+English
+System status(new window)
+Report abuse
+Report a problem
+Report a security issue
+Request a feature(new window)
+English
+Privacy Policy
+Terms & conditions
+Transparency report
+© 2026 Proton AG. All rights reserved.

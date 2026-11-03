@@ -594,8 +594,9 @@ addOns:
 # so the ratings from them are for Canada), privacy statement and help articles on households and downloads. Not
 # rated: free trials (none in Canada).
 # Its terms are read from Canada: Netflix serves each country its own terms by where you are, and has no country picker
-# on them, so other countries' terms (the US's) weren't read. Its billing and legal ratings, read in the Canadian
-# terms, stand for everywhere until a reader in another country (the owner's VPN) reads theirs (2026-11-02).
+# on them. Its billing and legal ratings, read in the Canadian terms, stand for everywhere a country's own aren't read.
+# The US's, read 2026-11-03 through a US exit for the reading browser only, grade the same but for disputes: arbitration
+# with a class-action waiver and an opt-out within 30 days, a US rating (the nightly check sees one country's version).
 policies:
   links:
     - name: 'Terms of use'
@@ -695,6 +696,21 @@ policies:
           quote: 'These Terms of Use shall be governed by and construed in accordance with the laws of Canada without regard to conflict of laws provisions.'
         - url: https://help.netflix.com/legal/termsofuse
           quote: 'EXCEPT FOR CONSUMERS THAT ARE SUBJECT TO THE QUEBEC CONSUMER PROTECTION ACT AND ONLY WHERE PERMITTED UNDER THE APPLICABLE LAW, YOU AND NETFLIX AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY'
+      lastVerified: 2026-11-03
+    - topic: legal.disputes
+      regions: [US]
+      tier: poor
+      reason: "In the US, a private referee (an arbitrator) decides most disagreements instead of a court, and you can't join a group lawsuit. You can only opt out of the arbitration by email within 30 days of first agreeing."
+      sources:
+        - url: https://help.netflix.com/legal/termsofuse
+          quote: 'THESE TERMS OF USE REQUIRE YOU TO RESOLVE MOST DISPUTES WITH NETFLIX IN ARBITRATION, NOT IN COURT, UNLESS YOU EXERCISE YOUR TIME-LIMITED RIGHT TO OPT OUT OF THAT REQUIREMENT.'
+        - url: https://help.netflix.com/legal/termsofuse
+          quote: 'To opt out, you must notify Netflix in writing no later than 30 days after first becoming subject to this Arbitration Agreement'
+        - url: https://help.netflix.com/legal/termsofuse
+          quote: 'you may not opt out of the separate class action waiver'
+      action:
+        name: 'How to opt out of arbitration (section 8)'
+        url: https://help.netflix.com/legal/termsofuse
       lastVerified: 2026-11-03
     - topic: legal.terms-changes
       tier: good

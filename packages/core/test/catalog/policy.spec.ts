@@ -834,6 +834,26 @@ describe('shared policy documents (M11.1)', () => {
     expect(coverage(withSet()).filter((message) => message.includes('mullvad.yaml'))).toEqual([]);
   });
 
+  it('lets a renewal day quote a shared document the provider names (ESPN’s agreement, on hulu.com, M11.9)', () => {
+    const anchor = {
+      kind: 'same-date',
+      page: 'Subscriber agreement',
+      url: groupPrivacy,
+      quotes: [
+        'if your subscription began on a day not contained in a given month (e.g. if you have a monthly subscription and became a paying subscriber on January 31, your payment method would be billed next on February 28)',
+      ],
+      lastVerified: today,
+    };
+    const withAnchor = (files: CatalogSourceFile[]) =>
+      edited(files, 'data/providers/mullvad.yaml', ['renewalAnchor'], anchor);
+    expect(messages(withAnchor(withSet()))).toEqual([]);
+    expect(messages(withAnchor(withPolicies()))).toContainEqual(
+      expect.stringMatching(
+        /^data\/providers\/mullvad\.yaml renewalAnchor\.url: Must be a page of Mullvad VPN's own sites, its policies' or its owner's/,
+      ),
+    );
+  });
+
   it('reports a document no file holds, a replacement for a topic it doesn’t rate, and a document no one names', () => {
     expect(
       messages(

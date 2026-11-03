@@ -54,6 +54,16 @@ perks:
 # Two streams at a time, read 2026-11-02 (M11.4) on hulu.com/paramount-plus-with-showtime: "While your Hulu base plan
 # allows you to watch on 2 simultaneous streams at a time" (the help centre's screens article renders no text here).
 # With Ads isn't ad free (its name, and the plans article's "Hulu (With Ads)").
+# Renewal day (M11.5), read 2026-11-03 (M11.9) through a US exit, in the US subscriber agreement Disney+, Hulu and
+# ESPN share (hulu.com/subscriber_agreement): the date you became a paying subscriber, or a shorter month's last day.
+renewalAnchor:
+  kind: same-date
+  page: Subscriber agreement
+  url: https://www.hulu.com/subscriber_agreement
+  quotes:
+    - 'if your subscription began on a day not contained in a given month (e.g. if you have a monthly subscription and became a paying subscriber on January 31, your payment method would be billed next on February 28)'
+  lastVerified: 2026-11-03
+
 # Apps, sign-in and support (M11.9, the cross-category features), read 2026-11-03 in its help centre: web browsers, iPhone
 # and iPad, Android, Windows 10 and 11, TVs and streaming devices, PlayStation and Xbox (Supported devices); a MyDisney
 # email address and password (MyDisney login details); "live support 24 hours a day 7 days a week", by chat (How to
@@ -63,8 +73,11 @@ features:
   account.sign-in: [password]
   support.channels: [chat, 24-7]
 
-# Official resellers and billing periods (M11.9): not read yet. Its US pages send a visitor from Canada to Disney+, so
-# they wait for a US exit of the owner's VPN, asked at the batch's end.
+# Billing periods and resellers (M11.9), read 2026-11-03 through a US exit: monthly, and yearly for With Ads only
+# (hulu.com/annual-offer: "Automatically renews on annual basis for $124.99/year", its regular price; the annual billing
+# article: "annual billing is only available for the Hulu (With Ads) plan"). No official resellers: Roku, Apple and the
+# like bill it as channels ("billed by a third party (like Roku or Disney+)"). Downloads and kids profiles aren't on the
+# pages read yet.
 plans:
   - id: hulu.with-ads
     name: With Ads
