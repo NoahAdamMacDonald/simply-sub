@@ -1570,7 +1570,8 @@ of its plain name (`providers`), so a new shape's tables can fill beside the liv
 SQLite enforces the column types, and
 `WITHOUT ROWID` (since M2.1), so its primary key is the table itself rather than a second index next to a rowid:
 ```sql
-providers     (id PK, name, category, spend_category, hash, json)   -- category: its main one
+providers     (id PK, name, category, spend_category, hash, json, search)   -- category: its main one; search since shape 4
+provider_search  FTS5 (provider_id, text), trigram   -- shape 4 (M11.8): the names each provider's text can match
 provider_categories (category, provider_id → providers, PK (category, provider_id))   -- every one its plans
               are in (M1.10), which GET /providers?category= reads by
 provider_features (feature_id → features, value, provider_id → providers, rank_value,
@@ -2475,10 +2476,22 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
   through the `plan_features (feature_id, rank_value)` index for each rank key (EXPLAIN QUERY PLAN shows no table
   scan, `apps/api/test/providers.spec.ts`). Measured at 5 providers: 6 rows with no filter or a category, 17 for
   `feature=video.quality=4k`, 31 for two keys. A key costs about twice the rows of the plans that have its feature,
-  so it grows with them, not with the catalog. A text search reads every provider, which core matches in the
-  Worker: at about 200 providers that nears 10 ms of CPU and 200 rows a request, the trigger for an FTS5 table, a
-  category index and per-region price rows (a migration and a `seedFormat` bump). The edge cache (M2.8) absorbs
-  repeated searches. `GET /providers/:id`, `GET /plans/:id` and `GET /bundles` (M2.4) look up only by primary key and
+  so it grows with them, not with the catalog. A text search read every provider, which core matches in the
+  Worker: at about 200 providers that neared 10 ms of CPU and 200 rows a request. Since shape 4 (M11.8, migration
+  0007, seed format 4), the Worker parses each provider's `search` column, only what core's search reads (no notes,
+  perks, resellers or facts: `searchProviderOf`), and text goes to `provider_search` first: an FTS5 table with the
+  trigram tokenizer, a row a provider holding the names its text can match (its name and aliases, its plans' names
+  and former names, their service categories, and the names and aliases of the features they have and the rank keys
+  they provide: `providerSearchText`), so any part of a word is found, as core finds it. Core's `providerTextQuery`
+  makes each term a quoted phrase, any of its forms (a plural's singular); a form under three characters ("4k") can't
+  be found by trigrams, so that search reads every provider as before. The index only narrows: core matches what it
+  finds, and a test holds it to never missing a provider core would match, over every name and word in the catalog
+  and their parts. The plan is an FTS5 lookup ("SCAN provider_search_s4 VIRTUAL TABLE INDEX", how SQLite reports a
+  virtual table's index) and each provider by its key; the API reads the catalog row's format first to know the
+  shape, so it reads shape 3's whole json until the seed switches. The FTS rows need the registry's names too, so
+  each provider's stored hash carries a digest of them (`searchVocabularyKey`): renaming a feature compares every
+  provider again and rewrites the rows whose text changed. Sorting by price and paging in SQL are still to come.
+  The edge cache (M2.8) absorbs repeated searches. `GET /providers/:id`, `GET /plans/:id` and `GET /bundles` (M2.4) look up only by primary key and
   the `bundle_plans (plan_id)` index, so their cost doesn't grow with the catalog: 2 rows for a provider, 3 for
   Disney+ Premium's plan, 11 for the bundles of one plan (D1 counts about two rows per lookup,
   `apps/api/test/lookups.spec.ts`). A 304 reads the `catalog` row alone, and a typo's suggestion comes from the
