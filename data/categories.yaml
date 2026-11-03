@@ -47,6 +47,7 @@ feature:
   - { id: productivity, name: Productivity & calendar }
   - { id: general, name: 'Apps, languages & support' }
   - { id: account, name: Accounts & sharing }
+  - { id: finance, name: Banking & investing }
 
 # The card-reward category of a purchase: a provider's `spendCategory`.
 spend:

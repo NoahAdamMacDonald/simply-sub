@@ -1906,6 +1906,10 @@ in every D1 `json` column search parses.
       which the owner decides), TSN's and RDS's video quality.
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
+- **As built**, in parts:
+  - **The registry** (2026-11-03): a Banking & investing feature category and the 15 finance features the owner chose
+    (BLUEPRINT §14), proposed from seven providers' own pages; the two topics are M11.1's. `check-features.cjs` expects
+    the new card.
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and
   cards already work. What's new is the plan's `account` block and the finance features (§4.11).
 - **Sources:** the provider's own pages, plus regulators' registers (CDIC's members, CIRO, FCAC, provincial deposit

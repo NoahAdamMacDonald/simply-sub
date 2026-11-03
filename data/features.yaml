@@ -704,6 +704,137 @@
   aliases: [login, log in, two-factor authentication, 2fa, mfa]
   providerWide: true
 
+# ── Finance (M11.10, the owner's choice of 2026-11-03) ─────────────────────────────
+# What buyers compare between banks, credit unions, fintechs and brokerages (BLUEPRINT §4.11), from TD's, RBC's, EQ
+# Bank's, Tangerine's, KOHO's, Wealthsimple's and Questrade's own pages. An account's fee, waivers, rates, limits and
+# protection are its plan's `account` block, never features.
+- id: finance.registered-accounts
+  name: Registered accounts
+  category: finance
+  type: set
+  values:
+    - { id: tfsa, name: TFSA, aliases: [tax-free savings account] }
+    - { id: rrsp, name: RRSP, aliases: [rsp, registered retirement savings plan] }
+    - { id: fhsa, name: FHSA, aliases: [first home savings account] }
+    - { id: resp, name: RESP, aliases: [registered education savings plan] }
+    - { id: rdsp, name: RDSP, aliases: [registered disability savings plan] }
+    - { id: rrif, name: RRIF, aliases: [rif, registered retirement income fund] }
+    - { id: lira, name: LIRA, aliases: [locked-in retirement account] }
+  aliases: [registered account, tax-sheltered]
+- id: finance.usd-account
+  name: US dollar account
+  category: finance
+  type: boolean
+  aliases: [usd account, us dollars, dual currency]
+- id: finance.card
+  name: Card
+  category: finance
+  type: set
+  values:
+    - { id: interac-debit, name: Interac debit card }
+    - { id: visa-debit, name: Visa Debit }
+    - { id: mastercard-debit, name: Debit Mastercard }
+    - { id: prepaid-mastercard, name: Prepaid Mastercard }
+    - { id: prepaid-visa, name: Prepaid Visa }
+  aliases: [debit card, prepaid card]
+- id: finance.e-transfer
+  name: Free Interac e-Transfers
+  category: finance
+  type: boolean
+  aliases: [e-transfer, etransfer, interac e-transfer]
+- id: finance.unlimited-transactions
+  name: Unlimited transactions
+  category: finance
+  type: boolean
+  aliases: [unlimited debits]
+- id: finance.atm
+  name: Free ATM withdrawals
+  category: finance
+  type: set
+  values:
+    - { id: own-network, name: At its own ATMs }
+    - { id: any-atm-free, name: At any ATM in Canada }
+    - { id: fee-refunds, name: Other operators' fees refunded, aliases: [atm fee reimbursement] }
+  aliases: [abm, cash withdrawals, atm fees]
+- id: finance.cash-deposits
+  name: Cash deposits
+  category: finance
+  type: set
+  values:
+    - { id: branch, name: At a branch }
+    - { id: atm, name: At an ATM }
+    - { id: partner, name: At partner stores }
+    - { id: canada-post, name: At Canada Post }
+  aliases: [deposit cash]
+- id: finance.branches
+  name: In-person branches
+  category: finance
+  type: boolean
+  aliases: [branch banking, in person]
+- id: finance.overdraft
+  name: Overdraft protection
+  category: finance
+  type: boolean
+  aliases: [overdraft]
+- id: finance.investing
+  name: Investing
+  category: finance
+  type: set
+  values:
+    - { id: self-directed, name: Self-directed, aliases: [discount brokerage, trade yourself] }
+    - { id: managed, name: Managed portfolios, aliases: [robo-advisor] }
+  aliases: [brokerage]
+- id: finance.products
+  name: What you can invest in
+  category: finance
+  type: set
+  values:
+    - { id: stocks, name: Stocks, aliases: [shares, equities] }
+    - { id: etfs, name: ETFs }
+    - { id: options, name: Options }
+    - { id: mutual-funds, name: Mutual funds }
+    - { id: gics, name: GICs, aliases: [guaranteed investment certificates] }
+    - { id: bonds, name: Bonds }
+    - { id: crypto, name: Crypto, aliases: [cryptocurrency, bitcoin] }
+    - { id: margin, name: Margin }
+    - { id: short-selling, name: Short selling, aliases: [shorting] }
+- id: finance.commission-free
+  name: Commission-free trades
+  category: finance
+  type: set
+  values:
+    - { id: stocks, name: Stocks }
+    - { id: etfs, name: ETFs }
+    - { id: options, name: Options }
+  aliases: [zero commission, free trades]
+- id: finance.fractional-shares
+  name: Fractional shares
+  category: finance
+  type: boolean
+- id: finance.order-types
+  name: Order types
+  category: finance
+  type: set
+  values:
+    - { id: market, name: Market }
+    - { id: limit, name: Limit }
+    - { id: stop, name: Stop, aliases: [stop-loss] }
+    - { id: stop-limit, name: Stop limit }
+    - { id: trailing-stop, name: Trailing stop }
+- id: finance.markets
+  name: Markets
+  category: finance
+  type: set
+  values:
+    - { id: tsx, name: TSX, aliases: [toronto stock exchange] }
+    - { id: tsxv, name: TSX Venture }
+    - { id: cboe-canada, name: Cboe Canada, aliases: [neo exchange] }
+    - { id: cse, name: CSE, aliases: [canadian securities exchange] }
+    - { id: nyse, name: NYSE, aliases: [new york stock exchange] }
+    - { id: nasdaq, name: Nasdaq }
+    - { id: otc, name: OTC markets, aliases: [over the counter] }
+  aliases: [exchanges]
+
 # ── Services that include other services (overlap detection) ───────────────────
 # Values are provider or plan ids (proton.pass-plus). A plan that lists plans here is a suite, and inclusion
 # is transitive (BLUEPRINT §4.4). Never shown in ranking UIs.

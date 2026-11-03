@@ -39,6 +39,8 @@ const CATEGORIES = [
   'Productivity & calendar',
   'Apps, languages & support',
   'Accounts & sharing',
+  // M11.10's finance features.
+  'Banking & investing',
 ];
 
 async function waitForServer() {
