@@ -98,7 +98,9 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
   Trusted Types policy, since Angular's registration passes a plain string the CSP refuses (BLUEPRINT §14). It only calls the Worker for `/fx` and custom-subscription icons (and, from M10, what the user
   opts in to send). The catalog's D1 serves only the public API, and a deploy writes only what changed (free plan:
   100k rows written a day for the account, BLUEPRINT §5.3). A change to the catalog
-  tables or the derived columns bumps `seedFormat` in core, which makes the next deploy reseed in full.
+  tables or the derived columns bumps `seedFormat` in core: a derived column's compares every provider again through
+  the seed's daily budget, and a table's is a migration creating the next shape's tables beside the live ones, which
+  the seed fills and then points the API's views at (`seedShapes`, M11.8).
 
 ## Git workflow
 - `main` is protected (no bypass): never push to it. Work on a task branch (`feat/m5-3-search-filters`), push it,

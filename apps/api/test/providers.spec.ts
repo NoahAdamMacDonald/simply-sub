@@ -431,8 +431,8 @@ describe('the D1 reads', () => {
     ]);
     expect(plan.results.map((row) => row.detail)).toEqual(
       expect.arrayContaining([
-        'SEARCH providers USING PRIMARY KEY (id=?)',
-        'SEARCH provider_categories USING PRIMARY KEY (category=?)',
+        'SEARCH providers_s3 USING PRIMARY KEY (id=?)',
+        'SEARCH provider_categories_s3 USING PRIMARY KEY (category=?)',
       ]),
     );
     expect(plan.results.some((row) => /^SCAN/.test(row.detail))).toBe(false);
@@ -440,7 +440,7 @@ describe('the D1 reads', () => {
 
   it("read a provider's own features too, through provider_features' key (M11.4)", async () => {
     await env.DB.prepare(
-      "INSERT INTO provider_features (feature_id, value, provider_id, rank_value) VALUES ('platforms', 'linux', 'mullvad', NULL)",
+      "INSERT INTO provider_features_s3 (feature_id, value, provider_id, rank_value) VALUES ('platforms', 'linux', 'mullvad', NULL)",
     ).run();
     try {
       const query = { feature: ['platforms=linux'], sort: 'name', limit: 20 } as const;
@@ -460,12 +460,12 @@ describe('the D1 reads', () => {
       expect(linux.providers.map((provider) => provider.id)).toEqual(['mullvad']);
       expect(plan.results.map((row) => row.detail)).toEqual(
         expect.arrayContaining([
-          'SEARCH provider_features USING PRIMARY KEY (feature_id=? AND value=?)',
+          'SEARCH provider_features_s3 USING PRIMARY KEY (feature_id=? AND value=?)',
         ]),
       );
-      expect(plan.results.some((row) => /^SCAN provider_features/.test(row.detail))).toBe(false);
+      expect(plan.results.some((row) => /^SCAN provider_features_s3/.test(row.detail))).toBe(false);
     } finally {
-      await env.DB.prepare('DELETE FROM provider_features').run();
+      await env.DB.prepare('DELETE FROM provider_features_s3').run();
     }
   });
 
@@ -496,13 +496,13 @@ describe('the D1 reads', () => {
     ]);
     expect(plan.results.map((row) => row.detail)).toEqual(
       expect.arrayContaining([
-        'SEARCH providers USING PRIMARY KEY (id=?)',
-        'SEARCH plan_features USING COVERING INDEX idx_pf_feature (feature_id=?)',
-        'SEARCH plan_features USING COVERING INDEX idx_pf_feature (feature_id=? AND rank_value>?)',
-        'SEARCH plan_features USING COVERING INDEX idx_pf_feature (feature_id=? AND rank_value=?)',
+        'SEARCH providers_s3 USING PRIMARY KEY (id=?)',
+        'SEARCH plan_features_s3 USING COVERING INDEX idx_pf_feature (feature_id=?)',
+        'SEARCH plan_features_s3 USING COVERING INDEX idx_pf_feature (feature_id=? AND rank_value>?)',
+        'SEARCH plan_features_s3 USING COVERING INDEX idx_pf_feature (feature_id=? AND rank_value=?)',
       ]),
     );
-    expect(plan.results.some((row) => /^SCAN (plan_features|providers)/.test(row.detail))).toBe(
+    expect(plan.results.some((row) => /^SCAN (plan_features|providers)_s3/.test(row.detail))).toBe(
       false,
     );
   });

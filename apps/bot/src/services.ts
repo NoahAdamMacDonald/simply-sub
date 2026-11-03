@@ -183,12 +183,14 @@ async function siteJson(url: string | URL): Promise<unknown> {
 }
 
 /**
- * The catalog D1 for seeding what waits (M11.8): its reads, and writes to the catalog's own tables only, each step's in
- * one transaction.
+ * The catalog D1 for seeding what waits (M11.8): its reads, and writes to the catalog's own tables only (a shape's,
+ * providers_s3, and the catalog row), with the switch of the API's views to a new shape's tables, each step's in one
+ * transaction.
  */
 function catalogDatabase(db: D1Database): SeedDatabase {
+  const tables = Object.keys(seedTables).join('|');
   const seeded = new RegExp(
-    `^(?:INSERT INTO|UPDATE|DELETE FROM) (?:${Object.keys(seedTables).join('|')}) `,
+    `^(?:(?:INSERT INTO|UPDATE|DELETE FROM) (?:${tables})(?:_s\\d+)? |DROP VIEW IF EXISTS (?:${tables});$|CREATE VIEW (${tables}) AS SELECT \\* FROM \\1_s\\d+;$)`,
   );
   return {
     async read(queries) {

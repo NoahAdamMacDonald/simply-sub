@@ -1564,7 +1564,9 @@ Responses are JSON and versioned through the `/v1` path. Breaking changes go und
 
 ### 5.3 D1 schema (`apps/api/migrations/`)
 The database `simply-sub-catalog` (binding `DB`) lives in Eastern North America (`enam`). Columns, condensed
-(`0002_seed_what_changed.sql`, `0003_provider_categories.sql` and `0004_provider_features.sql` have the full SQL). Every table is `STRICT`, so
+(`0002_seed_what_changed.sql`, `0003_provider_categories.sql` and `0004_provider_features.sql` have the full SQL).
+Since migration 0006 (M11.8) each table but `catalog` is named for its shape (`providers_s3`), and the API reads a view
+of its plain name (`providers`), so a new shape's tables can fill beside the live ones (below). Every table is `STRICT`, so
 SQLite enforces the column types, and
 `WITHOUT ROWID` (since M2.1), so its primary key is the table itself rather than a second index next to a rowid:
 ```sql
@@ -1674,13 +1676,26 @@ day's writes. Since M11.8 (`planSeed` in core):
   in section 5.4, less a margin). The remote seed counts what the day's seeds wrote already (the catalog row's
   `written` for today's `written_on`), applies the changed providers whole, in the catalog's order, until the next
   wouldn't fit, and leaves the rest, with the bundles that include their plans, for the next seed, which compares by
-  hash and carries on. A removed feature waits until nothing else does. A full reseed isn't budgeted yet.
+  hash and carries on. A removed feature waits until nothing else does.
 - **The bot seeds what waits each night** (`seedNext` in core, its first steps, section 6.4): one Workflow step at a
   time, each in its 10 ms, the registry's changes and removals first, then a changed provider (its rows compared
   with D1's), then the bundles, the removed features and the catalog row with the build's version. It reads the
   build from the seed files `data:build` publishes (section 6.3), never the whole catalog, and checks each provider
   file's SHA-256 against the index. Each step writes the catalog row's count in the same transaction, and stops when
   the next doesn't fit the day; a moved enum value's rows are counted in D1 (`COUNT(*)`) before they're updated.
+- **A new seed format goes through the budget too** (`seedShapes` in core): each format names the shape of its
+  tables, and a provider's `hash` is its SHA-256 under the format (`3.…`), so a new format compares every provider
+  again.
+  - **A format that only computes a derived column differently** keeps its shape: the comparison updates the rows
+    whose derived columns moved, a provider at a time, and the catalog row names the new format once all are done.
+  - **A new shape** is a migration creating its tables beside the live ones (`providers_s4`…, empty). The seeds fill
+    them through the budget, deploy and bot alike, while the API reads the live shape's whole tables through the views.
+    Once the new ones hold the build, the same transaction points every view at them (`viewStatements`: D1 counts each
+    view dropped and created as a row) and names the new format in the catalog row; a later migration drops the old
+    tables. Measured on the tests' catalog at 1,100 rows a day, a new shape takes three days: Bitdefender's and Proton's
+    rows are most of a day each.
+  - Everything is replaced in place (`--full`, or a catalog row of a format from before shapes) only by hand, or when
+    D1 holds rows but no catalog row.
 - **An empty D1 fills through the budget too:** with no rows, the seed inserts (no deletes) and records
   `0000000` as the version until the whole catalog is in.
 - **Each pull request's estimate** (`npm run data:writes`, a notice in CI): the seed of the branch's catalog over
@@ -1932,7 +1947,9 @@ write the files.
    differ to `apps/api/dist/seed.sql` (one per line, with the derived columns `monthly_equiv` and `rank_value`,
    section 5.3) and runs them with `wrangler d1 execute --file`, which leaves D1 as it was if a statement fails. It
    writes nothing when D1 already holds the build's catalog, and on the remote D1 keeps to the catalog's daily rows
-   (M11.8): what doesn't fit waits for the next seed, and the script says what.
+   (M11.8): what doesn't fit waits for the next seed, and the script says what. It writes the code's shape's tables
+   (section 5.3): beside the live ones while a new shape fills. `--full` replaces the code's shape's tables and leaves
+   the views where they are, so it's not for a new shape that hasn't been switched to.
 
 **A region's file** (`regionSnapshot` in core) keeps every provider, plan, add-on and bundle, each with only the
 prices pickPrice can pick for a buyer in that region, whatever their currency: the region's own prices, or else its

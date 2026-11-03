@@ -19,20 +19,29 @@ import {
   rankStatement,
   rowCount,
   sqlValue,
+  sqlTable,
   storedLinks,
   updateStatement,
   utf8Length,
   type Change,
   type SeedRow,
   type SeedTable,
+  type StoredProvider,
 } from './seed-rows';
 import {
+  partialCatalogVersion,
   readSeedState,
   readStoredRows,
   seedDiff,
   seedFormat,
+  seedShape,
+  seedShapes,
   seedStateQueries,
+  storedHash,
   storedRowQueries,
+  viewChange,
+  type SeedDiff,
+  type SeedFormat,
   type SeedState,
   type SeedTarget,
 } from './seed-sql';
@@ -73,16 +82,17 @@ export function seedProviderPath(providerId: string): string {
   return `data/seed/providers/${providerId}.json`;
 }
 
-/** The seed index of a build, from its snapshot and each provider's hash (a SHA-256 of its JSON). */
+/** The seed index of a build, from its snapshot and each provider's hash (a SHA-256 of its JSON), for a format. */
 export function buildSeedIndex(
   { data, meta }: CatalogSnapshot,
   providerHashes: ReadonlyMap<string, string>,
+  format = seedFormat,
 ): SeedIndex {
   return {
     catalogVersion: meta.catalogVersion,
     generatedAt: meta.generatedAt,
     counts: meta.counts,
-    seedFormat,
+    seedFormat: format,
     providers: data.providers.map((provider) => {
       const hash = providerHashes.get(provider.id);
       if (hash === undefined) throw new Error(`No hash for provider ${provider.id}`);
@@ -129,23 +139,35 @@ export interface SeedStep {
  * which the catalog row counts): first the registry's changes and what the build no longer has (features upserted,
  * enum values that moved, removed providers and bundles), then each changed provider in the catalog's order, its
  * rows compared with D1's, then the changed bundles, the removed features and the catalog row with the build's
- * version. Each step writes the catalog row with what's left and the day's count in the same transaction.
+ * version. Each step writes the catalog row with what's left and the day's count in the same transaction. It works on
+ * the shape's tables (`format`: the code's, but for tests), a new shape's beside the live ones, which the last step
+ * points the API's views at.
  */
 export async function seedNext(
   db: SeedDatabase,
   source: SeedSource,
   { today, daily }: { today: IsoDate; daily: number },
+  format: SeedFormat = { seedFormat, shape: seedShape },
 ): Promise<SeedStep> {
-  const state = readSeedState(await db.read(seedStateQueries));
+  const { shape } = format;
+  const state = readSeedState(await db.read(seedStateQueries(shape)));
   const catalog = state.catalog;
-  if (!catalog || catalog.waiting === 0 || catalog.seedFormat !== seedFormat) {
-    return { result: 'idle', writes: 0 };
-  }
+  if (!catalog || catalog.waiting === 0) return { result: 'idle', writes: 0 };
+  const liveShape =
+    catalog.seedFormat === format.seedFormat ? format.shape : seedShapes[catalog.seedFormat];
+  // A format from before shapes is the deploy's to seed.
+  if (liveShape === undefined) return { result: 'idle', writes: 0 };
   const index = await source.index();
-  if (index.seedFormat !== seedFormat) return { result: 'idle', writes: 0 };
+  if (index.seedFormat !== format.seedFormat) return { result: 'idle', writes: 0 };
+  const switchViews = liveShape !== shape || catalog.version === partialCatalogVersion;
+  const providers = index.providers.map(({ id, hash }) => ({
+    id,
+    sha256: hash,
+    hash: storedHash(format.seedFormat, hash),
+  }));
   const target: SeedTarget = {
     meta: index,
-    providers: index.providers,
+    providers,
     features: index.features,
     bundles: index.bundles,
   };
@@ -153,20 +175,29 @@ export async function seedNext(
   const used = catalog.writtenOn === today ? catalog.written : 0;
   const room = daily - used;
   const waiting = diff.changedProviders.length + diff.changedBundles.length;
+  const featureDeletes: Change = {
+    statements: deleteIds(shape, 'features', diff.removedFeatures),
+    writes: diff.removedFeatures.length,
+  };
   /** Writes `change` with the catalog row's count of what's left, if they fit. */
-  const step = async (change: Change, left: number, wrote: string): Promise<SeedStep> => {
+  const step = async (rows: Change, left: number, wrote: string): Promise<SeedStep> => {
+    const done = left === 0;
+    // Whole at last: the API's views go to these tables, and the catalog row names the build.
+    const change = done && switchViews ? combine([rows, viewChange(shape)]) : rows;
     const writes = change.writes + 1;
     if (writes > room) return { result: 'budget', writes: 0 };
     const counted = { today, written: used + writes };
-    const row =
-      left === 0
-        ? insertStatement('catalog', catalogRow(index, seedFormat, counted), 'upsert')
+    const statements = [
+      ...change.statements,
+      done
+        ? insertStatement(shape, 'catalog', catalogRow(index, format.seedFormat, counted), 'upsert')
         : updateStatement(
+            shape,
             'catalog',
             { id: 1, waiting: left, written_on: today, written: counted.written },
             ['waiting', 'written_on', 'written'],
-          );
-    const statements = [...change.statements, row];
+          ),
+    ];
     for (const statement of statements) {
       if (utf8Length(statement) > maxStatementBytes) {
         throw new Error(
@@ -175,22 +206,18 @@ export async function seedNext(
       }
     }
     await db.write(statements);
-    return { result: left === 0 ? 'done' : 'more', writes, wrote };
-  };
-
-  const featureDeletes: Change = {
-    statements: deleteIds('features', diff.removedFeatures),
-    writes: diff.removedFeatures.length,
+    return { result: done ? 'done' : 'more', writes, wrote };
   };
 
   // The registry's changes and the removals, which the providers' rows may need first.
-  const fixed = await fixedChange(db, diff, state);
+  const fixed = await fixedChange(db, diff, state, shape);
   if (fixed.statements.length > 0) return step(fixed, waiting, 'the registry and removals');
 
   const [next] = diff.changedProviders;
   if (next) {
+    const sha256 = providers.find(({ id }) => id === next.id)?.sha256 ?? '';
     const text = await source.provider(next.id);
-    if ((await source.sha256(text)) !== next.hash) {
+    if ((await source.sha256(text)) !== sha256) {
       throw new Error(
         `${seedProviderPath(next.id)} isn't the file the seed index names: a deploy since?`,
       );
@@ -203,9 +230,9 @@ export async function seedNext(
       return feature;
     });
     const stored = state.providers.has(next.id)
-      ? readStoredRows([next.id], await db.read(storedRowQueries([next.id]))).get(next.id)
+      ? readStoredRows([next.id], await db.read(storedRowQueries([next.id], shape))).get(next.id)
       : undefined;
-    const change = stored ? providerDiff(rows, stored) : providerInserts(rows);
+    const change = stored ? providerDiff(shape, rows, stored) : providerInserts(shape, rows);
     // The last of what waits takes the removed features with it, and the catalog row then names the build.
     const left = waiting - 1;
     return step(left === 0 ? combine([change, featureDeletes]) : change, left, next.id);
@@ -217,6 +244,7 @@ export async function seedNext(
     combine([
       {
         statements: deleteIds(
+          shape,
           'bundles',
           replaced.map(({ id }) => id),
         ),
@@ -225,7 +253,7 @@ export async function seedNext(
           0,
         ),
       },
-      ...diff.changedBundles.map(bundleInserts),
+      ...diff.changedBundles.map((bundle) => bundleInserts(shape, bundle)),
       featureDeletes,
     ]),
     0,
@@ -239,8 +267,9 @@ export async function seedNext(
  */
 async function fixedChange(
   db: SeedDatabase,
-  diff: ReturnType<typeof seedDiff>,
+  diff: SeedDiff,
   state: SeedState,
+  shape: number,
 ): Promise<Change> {
   const moves = diff.changedFeatures.flatMap((feature) =>
     rankMoves(feature, state.features.get(feature.id)),
@@ -253,7 +282,7 @@ async function fixedChange(
             await db.read(
               moves.map(
                 (move) =>
-                  `SELECT COUNT(*) AS n FROM ${move.table} WHERE feature_id = ${sqlValue(move.featureId)} AND value = ${sqlValue(move.value)} AND rank_value IS NOT ${move.position}`,
+                  `SELECT COUNT(*) AS n FROM ${sqlTable(shape, move.table)} WHERE feature_id = ${sqlValue(move.featureId)} AND value = ${sqlValue(move.value)} AND rank_value IS NOT ${move.position}`,
               ),
             ),
           )
@@ -263,11 +292,12 @@ async function fixedChange(
     diff.removedProviders.length > 0
       ? readStoredRows(
           diff.removedProviders,
-          await db.read(storedRowQueries(diff.removedProviders)),
+          await db.read(storedRowQueries(diff.removedProviders, shape)),
         )
-      : new Map();
+      : new Map<string, StoredProvider>();
   return combine([
     inserts(
+      shape,
       diff.changedFeatures.map((feature): [SeedTable, SeedRow] => [
         'features',
         featureRow(feature),
@@ -276,15 +306,15 @@ async function fixedChange(
       (row) => (state.features.has(String(row['id'])) ? 'update' : 'insert'),
     ),
     {
-      statements: moves.map(rankStatement),
+      statements: moves.map((move) => rankStatement(shape, move)),
       writes: moves.reduce((sum, move, n) => sum + (counts[n] ?? 0) * rankRowWrites(move), 0),
     },
     {
-      statements: deleteIds('providers', diff.removedProviders),
+      statements: deleteIds(shape, 'providers', diff.removedProviders),
       writes: [...removed.values()].reduce((sum, rows) => sum + rowCount(rows), 0),
     },
     {
-      statements: deleteIds('bundles', diff.removedBundles),
+      statements: deleteIds(shape, 'bundles', diff.removedBundles),
       writes: diff.removedBundles.reduce(
         (sum, id) => sum + 1 + storedLinks(state.bundles.get(id)),
         0,

@@ -2,43 +2,44 @@ import { env } from 'cloudflare:workers';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 // The catalog tables as the migrations leave them (BLUEPRINT §5.3): the keys and cascades the seed relies on
-// (M2.1), provider_categories (0003, M1.10) and provider_features (0004, M11.4).
+// (M2.1), provider_categories (0003, M1.10) and provider_features (0004, M11.4), each named for its shape since 0006
+// (M11.8), with a view of its plain name, which the API reads. Writes go to the shape's tables; reads may use views.
 const db = env.DB;
 
 /** Empties the catalog the way a full reseed does (the cascades clear the rest), then adds one plan. */
 async function seedNetflix() {
   await db.batch([
     db.prepare('DELETE FROM catalog'),
-    db.prepare('DELETE FROM providers'),
-    db.prepare('DELETE FROM features'),
-    db.prepare('DELETE FROM bundles'),
+    db.prepare('DELETE FROM providers_s3'),
+    db.prepare('DELETE FROM features_s3'),
+    db.prepare('DELETE FROM bundles_s3'),
     db.prepare(
-      `INSERT INTO providers (id, name, hash, json) VALUES ('netflix', 'Netflix', 'f00', '{}')`,
+      `INSERT INTO providers_s3 (id, name, hash, json) VALUES ('netflix', 'Netflix', 'f00', '{}')`,
     ),
     db.prepare(
-      `INSERT INTO provider_categories (category, provider_id) VALUES ('streaming', 'netflix')`,
+      `INSERT INTO provider_categories_s3 (category, provider_id) VALUES ('streaming', 'netflix')`,
     ),
     db.prepare(
-      `INSERT INTO plans (id, provider_id, name, json)
+      `INSERT INTO plans_s3 (id, provider_id, name, json)
        VALUES ('netflix.standard', 'netflix', 'Standard', '{}')`,
     ),
-    db.prepare(`INSERT INTO features (id, json) VALUES ('video.quality', '{}')`),
-    db.prepare(`INSERT INTO features (id, json) VALUES ('platforms', '{}')`),
+    db.prepare(`INSERT INTO features_s3 (id, json) VALUES ('video.quality', '{}')`),
+    db.prepare(`INSERT INTO features_s3 (id, json) VALUES ('platforms', '{}')`),
     db.prepare(
-      `INSERT INTO provider_features (feature_id, value, provider_id, rank_value)
+      `INSERT INTO provider_features_s3 (feature_id, value, provider_id, rank_value)
        VALUES ('platforms', 'web', 'netflix', NULL)`,
     ),
     db.prepare(
-      `INSERT INTO prices (plan_id, region, currency, amount, interval, interval_count, monthly_equiv)
+      `INSERT INTO prices_s3 (plan_id, region, currency, amount, interval, interval_count, monthly_equiv)
        VALUES ('netflix.standard', 'CA', 'CAD', 18.99, 'month', 1, 18.99)`,
     ),
     db.prepare(
-      `INSERT INTO plan_features (plan_id, feature_id, value, rank_value)
+      `INSERT INTO plan_features_s3 (plan_id, feature_id, value, rank_value)
        VALUES ('netflix.standard', 'video.quality', '1080p', 2)`,
     ),
-    db.prepare(`INSERT INTO bundles (id, json) VALUES ('bundle.test', '{}')`),
+    db.prepare(`INSERT INTO bundles_s3 (id, json) VALUES ('bundle.test', '{}')`),
     db.prepare(
-      `INSERT INTO bundle_plans (bundle_id, plan_id) VALUES ('bundle.test', 'netflix.standard')`,
+      `INSERT INTO bundle_plans_s3 (bundle_id, plan_id) VALUES ('bundle.test', 'netflix.standard')`,
     ),
   ]);
 }
@@ -61,7 +62,28 @@ describe('catalog schema', () => {
       '0003_provider_categories.sql',
       '0004_provider_features.sql',
       '0005_seed_budget.sql',
+      '0006_table_shapes.sql',
     ]);
+  });
+
+  it('reads each table of the live shape through a view of its plain name (0006, M11.8)', async () => {
+    const { results } = await db
+      .prepare(`SELECT name, sql FROM sqlite_master WHERE type = 'view' ORDER BY name`)
+      .all<{ name: string; sql: string }>();
+    expect(results.map(({ name, sql }) => `${name}: ${sql}`)).toEqual(
+      [
+        'bundle_plans',
+        'bundles',
+        'features',
+        'plan_features',
+        'plans',
+        'prices',
+        'provider_categories',
+        'provider_features',
+        'providers',
+      ].map((name) => `${name}: CREATE VIEW ${name} AS SELECT * FROM ${name}_s3`),
+    );
+    expect(await count('providers')).toBe(1);
   });
 
   it('has no snapshots table, and keeps every table WITHOUT ROWID and STRICT', async () => {
@@ -75,22 +97,22 @@ describe('catalog schema', () => {
       .all<{ name: string; wr: number; strict: number }>();
     expect(results).toEqual(
       [
-        'bundle_plans',
-        'bundles',
+        'bundle_plans_s3',
+        'bundles_s3',
         'catalog',
-        'features',
-        'plan_features',
-        'plans',
-        'prices',
-        'provider_categories',
-        'provider_features',
-        'providers',
+        'features_s3',
+        'plan_features_s3',
+        'plans_s3',
+        'prices_s3',
+        'provider_categories_s3',
+        'provider_features_s3',
+        'providers_s3',
       ].map((name) => ({ name, wr: 1, strict: 1 })),
     );
   });
 
   it('removes categories, plans, prices, features and bundle links with their provider', async () => {
-    await db.prepare(`DELETE FROM providers WHERE id = 'netflix'`).run();
+    await db.prepare(`DELETE FROM providers_s3 WHERE id = 'netflix'`).run();
 
     for (const table of [
       'provider_categories',
@@ -106,21 +128,21 @@ describe('catalog schema', () => {
   });
 
   it("removes a provider's own rows of a feature with the feature", async () => {
-    await db.prepare(`DELETE FROM features WHERE id = 'platforms'`).run();
+    await db.prepare(`DELETE FROM features_s3 WHERE id = 'platforms'`).run();
     expect(await count('provider_features')).toBe(0);
     expect(await count('providers')).toBe(1);
   });
 
   it('rejects a plan for a provider that does not exist', async () => {
     const insert = db.prepare(
-      `INSERT INTO plans (id, provider_id, name, json) VALUES ('ghost.basic', 'ghost', 'Basic', '{}')`,
+      `INSERT INTO plans_s3 (id, provider_id, name, json) VALUES ('ghost.basic', 'ghost', 'Basic', '{}')`,
     );
     await expect(insert.run()).rejects.toThrow(/FOREIGN KEY/);
   });
 
   it('rejects a second price for the same plan, region, currency and interval', async () => {
     const insert = db.prepare(
-      `INSERT INTO prices (plan_id, region, currency, amount, interval, interval_count, monthly_equiv)
+      `INSERT INTO prices_s3 (plan_id, region, currency, amount, interval, interval_count, monthly_equiv)
        VALUES ('netflix.standard', 'CA', 'CAD', 20.99, 'month', 1, 20.99)`,
     );
     await expect(insert.run()).rejects.toThrow(/UNIQUE/);
@@ -128,7 +150,7 @@ describe('catalog schema', () => {
 
   it('enforces column types (STRICT)', async () => {
     const insert = db.prepare(
-      `INSERT INTO prices (plan_id, region, currency, amount, interval, interval_count, monthly_equiv)
+      `INSERT INTO prices_s3 (plan_id, region, currency, amount, interval, interval_count, monthly_equiv)
        VALUES ('netflix.standard', 'US', 'USD', 'cheap', 'month', 1, 0)`,
     );
     await expect(insert.run()).rejects.toThrow(/cannot store TEXT value in REAL column/);
@@ -136,7 +158,7 @@ describe('catalog schema', () => {
 
   it('needs a hash for every provider', async () => {
     const insert = db.prepare(
-      `INSERT INTO providers (id, name, json) VALUES ('crave', 'Crave', '{}')`,
+      `INSERT INTO providers_s3 (id, name, json) VALUES ('crave', 'Crave', '{}')`,
     );
     await expect(insert.run()).rejects.toThrow(/NOT NULL/);
   });

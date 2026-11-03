@@ -1481,7 +1481,7 @@ in every D1 `json` column search parses.
 - **Static files:** `data:build` fails at 20 MiB for any file, with the file named, before Cloudflare's 25 MiB refuses
   the deploy. Without policies, a provider is about 6–15 KB, so `catalog.json` holds well over 1,500.
 - **Acceptance**
-  - [ ] Seed tests in workerd: a price change, a feature added to 100 providers, a budget reached mid-catalog and
+  - [x] Seed tests in workerd: a price change, a feature added to 100 providers, a budget reached mid-catalog and
         resumed, a shape change over three days with the API reading only complete tables
   - [ ] EXPLAIN QUERY PLAN shows no table scan for text, category or price-sorted queries
   - [x] Opening Terms and policies offline after one visit shows them; first time offline says they need a connection
@@ -1534,8 +1534,8 @@ in every D1 `json` column search parses.
       feature renamed, full seeds, and a feature added to 100 providers; a budget reached mid-catalog and resumed
       over the next days ends as a full seed would; an empty D1 fills over two days under `0000000`; the tables'
       keys and indexes are `seedTables`'. Core's spec covers the statements, the budget's choices and the reads.
-    - **Still to come:** a full reseed through the budget (today's 13 providers write 2,113 rows into empty
-      tables), and a shape change built beside the old tables, which the last acceptance item needs.
+    - **Since then:** a new format goes through the budget too, and a new shape fills beside the live tables (part 5,
+      below).
   - **The bot seeds what waits** (2026-11-03): core's `seedNext` brings D1 a step at a time to the build that
     `data:build` describes in `/data/seed/index.json` (each provider's SHA-256 in the catalog's order, the features
     and bundles) and `/data/seed/providers/<id>.json`: the registry's changes and removals first (a moved value's rows
@@ -1550,6 +1550,19 @@ in every D1 `json` column search parses.
       ending where a full seed would, every step's count equal to D1's `rows_written`; the registry first when the deploy
       wrote nothing; nothing to do when nothing waits; a provider file that isn't the index's refused. The bot's: the
       steps come first and stop on `budget`, and a failure is in the review list.
+  - **Formats and shapes** (2026-11-03): migration 0006 renames each catalog table for its shape (`providers_s3`) and
+    puts a view of its plain name over it, which the API reads, unchanged. Core's `seedShapes` names each format's
+    shape, and a provider's hash is its SHA-256 under the format (`3.…`), so a new format compares every provider
+    again: a derived column's change is updates through the budget, and a new shape's tables (a migration creates them
+    beside the live ones) fill through it, deploy and bot alike, while the API reads the old ones whole; once the new
+    ones hold the build, one transaction points the views at them and names the format in the catalog row. The seeds'
+    SQL names each table for its shape (`sqlTable`); the bot's D1 may also switch the views. No format bump: D1's
+    hashes take the format prefix on the next deploy, a row per provider.
+    - **Tests:** in workerd, a new shape filled over three days at 1,100 rows a day (a deploy, then two nights), the API
+      reading only the old tables until the switch, then the build, with the format in the catalog row; a format that
+      keeps its shape rewriting only the hashes, through the budget; the views over the shape's tables (0006); query
+      plans through the views that still search, never scan. Core's: a new shape's statements on its own tables ending with
+      the switch, none while it fills, a format bump's hashes, the views' statements.
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and
