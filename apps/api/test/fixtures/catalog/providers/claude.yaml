@@ -1,0 +1,417 @@
+# Drafted by the discovery pipeline on 2026-10-28 (BLUEPRINT §6.5) from these pages, each quoted where it's used.
+# Pricing: https://support.claude.com/en/articles/8325606-what-is-the-pro-plan,
+# https://support.claude.com/en/articles/11049741-what-is-the-max-plan, https://claude.com/pricing.
+# Payment methods: https://support.claude.com/en/articles/8325618-paid-plan-billing-faqs.
+# Cancelling: https://support.claude.com/en/articles/12386328-request-a-refund-for-a-paid-claude-plan,
+# https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription.
+# Terms: https://www.anthropic.com/legal/consumer-terms.
+# Privacy: https://www.anthropic.com/legal/privacy.
+# Bundles: none found.
+# Official resellers: none found.
+# Canada's prices (2026-10-30, the feedback after M10): claude.com/pricing, read from Canada in Canada's English with a
+# browser's own user agent, shows "$23 Per month with annual subscription discount ($280 billed up front). $28 if
+# billed monthly." and Max "From $140 Per month", a bare $ (a headless browser's user agent gets the US prices). The
+# page's own pricing data (claude.ai/api/billing/subscription_pricing, which it loads) names "country":"CA" and
+# "currency":"CAD": Pro 2800 a month and 28000 a year, Max 5x 14000 and Max 20x 28000 a month, in cents, none an
+# offer, tax not included ("show_included":false). The Pro article: "with pricing in your local currency where
+# supported". The owner's bill agrees: CA$31.64 for Pro, $28 with Ontario's 13% HST.
+# Renamed (2026-10-30, M10.27): claude.com/pricing now lists Free, Pro, Max ($140, "5x Pro usage every 5 hours and
+# every week") and Ultra ($280, "No 5-hour limit‡", "10x Pro usage every week"), in Canada. The Ultra article: "The Max
+# 20x plan is now called the Ultra plan. Existing Max 20x subscribers move to Ultra automatically, with no price
+# change." and "The Ultra plan is available for $200 per month."; the Max article: "The Max plan is available for $100
+# per month." So both keep their ids: claude.max-5x is Max and claude.max-20x is Ultra. Ultra's limits are new:
+# "Ultra gives you 10x the weekly usage of Pro, with no 5-hour limit for verified accounts" (it had 20 times Pro's).
+# Not on the pages: Max's yearly price: its help article says nothing about yearly billing; the card networks it
+# takes: its billing pages name none; the countries it sells in: its Pro article says only certain supported
+# locations; official resellers: none found.
+
+id: claude
+name: Claude
+website: https://claude.com
+domains: [claude.ai]
+category: ai
+spendCategory: software
+billingCurrency: { CA: CAD, GLOBAL: USD, US: USD }
+cancelUrl: https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription
+sources: { pricing: https://claude.com/pricing }
+# Owner (M11.2), read 2026-11-02: claude.com has no about page saying so; its terms, on anthropic.com, do.
+# Ways to pay (M11.5), read 2026-11-02 on its pricing page: a credit card, or the App Store.
+paymentMethods:
+  - methods: [card, app-store]
+    page: Pricing
+    url: https://claude.com/pricing
+    quotes:
+      - Credit card
+      - "If you subscribed through the App Store, Apple handles the refund, so you'll request it from Apple."
+owner:
+  name: 'Anthropic, PBC'
+  page:
+    name: Terms of service
+    url: https://www.anthropic.com/legal/consumer-terms
+  quotes:
+    - 'These Terms are a contract between you and Anthropic, PBC (and not our Providers)'
+  lastVerified: 2026-11-02
+
+# Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their
+# words.
+perks:
+  - id: claude-code
+    name: Claude Code
+  - id: priority-access
+    name: Priority access at high traffic times
+  - id: usage-5x
+    name: 5x Pro usage every 5 hours and every week
+  - id: weekly-usage-10x
+    name: 10x Pro usage every week
+  - id: no-5-hour-limit
+    name: No 5-hour limit for verified accounts
+  - id: api-credits-100
+    name: $100 a month in API credits to build on the Claude Platform
+  - id: api-credits-200
+    name: $200 a month in API credits
+
+plans:
+  - id: claude.free
+    name: Free
+    link: https://claude.com/pricing
+    features: { ai.assistant: true }
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://claude.com/pricing
+
+  - id: claude.pro
+    name: Pro
+    link: https://claude.com/pricing
+    features: { ai.assistant: true }
+    perks: [claude-code]
+    prices:
+      - region: US
+        currency: USD
+        amount: 20
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://support.claude.com/en/articles/8325606-what-is-the-pro-plan
+      - region: US
+        currency: USD
+        amount: 200
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://claude.com/pricing
+      - region: CA
+        currency: CAD
+        amount: 28
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-30
+        sourceUrl: https://claude.com/pricing
+      - region: CA
+        currency: CAD
+        amount: 280
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-30
+        sourceUrl: https://claude.com/pricing
+
+  - id: claude.max-5x # was "Max 5x" until 2026-10-29
+    name: Max
+    formerNames: [{ name: Max 5x, until: 2026-10-29 }]
+    link: https://claude.com/pricing
+    features: { ai.assistant: true }
+    perks: [claude-code, priority-access, usage-5x, api-credits-100]
+    prices:
+      - region: US
+        currency: USD
+        amount: 100
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-30
+        sourceUrl: https://support.claude.com/en/articles/11049741-what-is-the-max-plan
+      - region: CA
+        currency: CAD
+        amount: 140
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-30
+        sourceUrl: https://claude.com/pricing
+
+  - id: claude.max-20x # was "Max 20x" until 2026-10-29
+    name: Ultra
+    formerNames: [{ name: Max 20x, until: 2026-10-29 }]
+    link: https://claude.com/pricing
+    features: { ai.assistant: true }
+    perks: [claude-code, priority-access, weekly-usage-10x, no-5-hour-limit, api-credits-200]
+    prices:
+      - region: US
+        currency: USD
+        amount: 200
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-30
+        sourceUrl: https://support.claude.com/en/articles/17728952-what-is-the-ultra-plan
+      - region: CA
+        currency: CAD
+        amount: 280
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-30
+        sourceUrl: https://claude.com/pricing
+
+policies:
+  links:
+    - name: Cancelling
+      url: https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription
+    - name: Cancelling (2)
+      url: https://support.claude.com/en/articles/12386328-request-a-refund-for-a-paid-claude-plan
+    - name: Terms of service
+      url: https://www.anthropic.com/legal/consumer-terms
+    - name: Privacy policy
+      url: https://www.anthropic.com/legal/privacy
+    - name: 'Pricing'
+      url: https://claude.com/pricing
+    - name: 'Exporting your data'
+      url: https://support.claude.com/en/articles/9450526-how-can-i-export-my-claude-data
+    - name: 'Responsible disclosure policy'
+      url: https://www.anthropic.com/responsible-disclosure-policy
+  ratings:
+    - topic: billing.cancellation
+      tier: neutral
+      reason: You can cancel online at any time and keep using it until the end of the period you paid for, but payments aren't refunded unless its terms or the law say so.
+      sources:
+        - url: https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription
+          quote: You may cancel your Pro or Max plan subscription at any time by following the cancellation instructions for the platform you signed up on.
+        - url: https://support.claude.com/en/articles/12386328-request-a-refund-for-a-paid-claude-plan
+          quote: Except as expressly provided in our Consumer Terms of Service or where required by law, all payments are non-refundable.
+      lastVerified: 2026-10-28
+    - topic: billing.refunds
+      tier: neutral
+      reason: You can cancel online at any time and keep using it until the end of the period you paid for, but payments aren't refunded unless its terms or the law say so.
+      sources:
+        - url: https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription
+          quote: You may cancel your Pro or Max plan subscription at any time by following the cancellation instructions for the platform you signed up on.
+        - url: https://support.claude.com/en/articles/12386328-request-a-refund-for-a-paid-claude-plan
+          quote: Except as expressly provided in our Consumer Terms of Service or where required by law, all payments are non-refundable.
+      lastVerified: 2026-10-28
+    - topic: billing.price-changes
+      tier: great
+      reason: A new price never applies to time you've already paid for, and it tells you at least 30 days before a price goes up, so you can cancel first.
+      sources:
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: we will not make any change to the fees applicable to your Subscription during the current Initial Term or Renewal Term, as applicable
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: we will inform you at least 30 days in advance of the change
+      lastVerified: 2026-10-28
+    - topic: legal.disputes
+      tier: good
+      reason: "There's no arbitration: disputes go to the courts in San Francisco, California, the ones it chose."
+      sources:
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: any disputes arising out of or relating to these Terms will be resolved exclusively in the state or federal courts located in San Francisco, California
+      lastVerified: 2026-10-28
+    - topic: legal.terms-changes
+      tier: poor
+      reason: It can change its terms when it wants, and if you keep using Claude after they're posted, you've agreed to them.
+      sources:
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: If you continue to access the Services after we post the updated Terms on Anthropic’s website or otherwise give you notice of Terms changes, then you agree to the updated Terms.
+      lastVerified: 2026-10-28
+    - topic: legal.account-closure
+      tier: neutral
+      reason: It can close your account without notice if it believes you broke its terms, with no refund; if it ends your plan for any other reason, it refunds the unused time.
+      sources:
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: If we terminate your access to the Services due to a violation of these Terms and you have a Subscription, you will not be entitled to any refund.
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: If we exercise this right, we will refund you, on a pro rata basis, the fees you paid for the remaining portion of your Subscription after termination.
+      lastVerified: 2026-10-28
+    - topic: privacy.data-collection
+      tier: poor
+      reason: It may use your chats to train its AI unless you turn that off in your settings, and even then it uses chats flagged for a safety review.
+      sources:
+        - url: https://www.anthropic.com/legal/privacy
+          quote: We may use your Inputs and Outputs to train and improve Anthropic AI models, unless you opt out through your account settings.
+        - url: https://www.anthropic.com/legal/privacy
+          quote: 'Even if you opt-out, we will use Inputs and Outputs for model improvement when:'
+      action:
+        name: Turn off training in your Privacy Settings
+        url: https://claude.ai/new#settings/data-privacy-controls
+      lastVerified: 2026-10-28
+    - topic: privacy.data-sharing
+      tier: neutral
+      reason: It doesn't sell your data, but it shares it to show you ads for its own products unless you opt out.
+      sources:
+        - url: https://www.anthropic.com/legal/privacy
+          quote: Anthropic does not “sell” your personal data as that term is defined by applicable laws and regulations.
+        - url: https://www.anthropic.com/legal/privacy
+          quote: You can opt-out of sharing your personal data for targeted advertising to promote our products and services, and we will honor global privacy controls.
+      action:
+        name: How to opt out of ad sharing
+        url: https://www.anthropic.com/legal/cookies
+      lastVerified: 2026-10-28
+    - topic: privacy.data-deletion
+      tier: good
+      reason: You can delete chats yourself, and they're gone from its systems within 30 days; you can also ask it to delete your other data, with some exceptions.
+      sources:
+        - url: https://www.anthropic.com/legal/privacy
+          quote: You also are able to delete individual conversations, which will be removed immediately from your conversation history and automatically deleted from our back-end within 30 days.
+        - url: https://www.anthropic.com/legal/privacy
+          quote: the right to request that we delete personal data collected from you when you use our Services, subject to certain exceptions.
+      action:
+        name: How to delete a conversation
+        url: https://support.anthropic.com/en/articles/8230524-how-can-i-delete-or-rename-a-conversation
+      lastVerified: 2026-10-28
+    # M11.9's topics, pulled forward at the owner's request (2026-11-02), read that day.
+    - topic: privacy.ads-tracking
+      tier: neutral
+      reason: 'Claude shows no ads, but Anthropic may use your details to show you its own ads on other sites, unless you opt out.'
+      sources:
+        - url: https://www.anthropic.com/legal/privacy
+          quote: 'You can opt-out of sharing your personal data for targeted advertising to promote our products and services, and we will honor global privacy controls.'
+      action:
+        name: 'How to opt out of ad sharing'
+        url: https://www.anthropic.com/legal/cookies
+      lastVerified: 2026-11-02
+    - topic: privacy.ai-training
+      tier: poor
+      reason: 'Your chats train its AI unless you turn that off, and even then chats flagged for a safety check, or that you rate, still can.'
+      sources:
+        - url: https://www.anthropic.com/legal/privacy
+          quote: 'We may use your Inputs and Outputs to train and improve Anthropic AI models, unless you opt out through your account settings.'
+        - url: https://www.anthropic.com/legal/privacy
+          quote: "Even if you opt-out, we will use Inputs and Outputs for model improvement when: (i) your conversations are flagged for safety review to improve our ability to detect harmful content, enforce our policies, or advance AI safety research, or (ii) you've explicitly reported the materials to us (for example via our feedback mechanisms)."
+      action:
+        name: 'Turn off training in your Privacy Settings'
+        url: https://claude.ai/new#settings/data-privacy-controls
+      lastVerified: 2026-11-02
+    - topic: privacy.content-access
+      status: not-stated
+      reason: 'Its privacy policy doesn’t say who at Anthropic can read your chats, or when.'
+      pages: [https://www.anthropic.com/legal/privacy]
+      lastVerified: 2026-11-02
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your information as long as it decides it needs it. Chats you delete are gone from its systems within 30 days.'
+      sources:
+        - url: https://www.anthropic.com/legal/privacy
+          quote: 'Anthropic retains your personal data for as long as reasonably necessary for the purposes and criteria outlined in this Privacy Policy and explained further in our privacy center.'
+        - url: https://www.anthropic.com/legal/privacy
+          quote: 'You also are able to delete individual conversations, which will be removed immediately from your conversation history and automatically deleted from our back-end within 30 days.'
+      lastVerified: 2026-11-02
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can download your chats and account details yourself from Settings, but it doesn’t say what kind of file you get.'
+      sources:
+        - url: https://support.claude.com/en/articles/9450526-how-can-i-export-my-claude-data
+          quote: 'Individual Claude users can export user information and chat history from Settings > Privacy on the web app or Claude Desktop.'
+      action:
+        name: 'How to export your data'
+        url: https://support.claude.com/en/articles/9450526-how-can-i-export-my-claude-data
+      lastVerified: 2026-11-02
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'Besides court orders, it may give your information to police or a government whenever it believes in good faith that it should, for example to stop fraud or enforce its rules.'
+      sources:
+        - url: https://www.anthropic.com/legal/privacy
+          quote: 'We may share personal data with government authorities, law enforcement, or other third parties where, based on the information available to us, we have a good-faith belief that disclosure is reasonably necessary to'
+      lastVerified: 2026-11-02
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your information goes to its servers in the US and other countries, with the EU’s standard legal safeguards for Europeans. For Canadians it warns other countries’ laws may protect it less.'
+      sources:
+        - url: https://www.anthropic.com/legal/privacy
+          quote: 'Anthropic is a global company, and when you access our Services, your personal data is transferred to our servers in the US, or to other countries outside the European Economic Area (“EEA”) and the UK for the purposes outlined in Section 2 of this Privacy Policy, for example to provide you with the Service, or to train our models, or to conduct research.'
+        - url: https://www.anthropic.com/legal/privacy
+          quote: 'Where Anthropic transfers information outside the EEA or the UK, we ensure it benefits from an adequate level of data protection by relying on:'
+      lastVerified: 2026-11-02
+    - topic: privacy.sign-up-data
+      tier: poor
+      reason: 'To make an account you give your name, email address and phone number.'
+      sources:
+        - url: https://www.anthropic.com/legal/privacy
+          quote: 'Anthropic collects identifiers, including your name, email address, and phone number when you sign up for an Anthropic account, or to receive information on our Services.'
+      lastVerified: 2026-11-02
+    - topic: billing.free-trials
+      status: not-stated
+      reason: 'Its terms describe no free trial: the free plan simply stays free.'
+      pages: [https://www.anthropic.com/legal/consumer-terms]
+      lastVerified: 2026-11-02
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say your plan renews on its own, but not that it reminds you first.'
+      pages: [https://www.anthropic.com/legal/consumer-terms]
+      lastVerified: 2026-11-02
+    - topic: billing.fees
+      tier: neutral
+      reason: 'If it adds a new charge, it asks you to accept it before charging you. Extra features may cost more.'
+      sources:
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: 'If we charge additional fees in connection with our Services, we will give you an opportunity to review and accept the additional fees before you are charged.'
+      lastVerified: 2026-11-02
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'You can switch from monthly to yearly billing in your settings, and the time you already paid for counts toward the year.'
+      sources:
+        - url: https://claude.com/pricing
+          quote: "If you're already on a monthly plan, you can switch to annual in Settings > Billing, and any unused time is credited toward your first annual invoice."
+      lastVerified: 2026-11-02
+    - topic: legal.content-rights
+      tier: neutral
+      reason: 'What you type stays yours. It may use your chats to run and improve Claude and to build other products.'
+      sources:
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: 'As between you and Anthropic, and to the extent permitted by applicable law, you retain any right, title, and interest that you have in the Inputs you submit.'
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: 'We may use Materials to provide, maintain, and improve the Services and to develop other products and services'
+      lastVerified: 2026-11-02
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change, pause or stop Claude, or features you pay for, at any time without warning, and says it owes you nothing for it.'
+      sources:
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: 'we reserve the right to modify, suspend, or discontinue the Services or your access to the Services, in whole or in part, at any time without notice to you.'
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: 'We will not be liable for any change to or any suspension or discontinuation of the Services or your access to them.'
+      lastVerified: 2026-11-02
+    - topic: legal.inactivity
+      tier: good
+      reason: 'It only closes free accounts that haven’t been used for over a year, and tells you first.'
+      sources:
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: 'We may also terminate your Account if you have been inactive for over a year and you do not have a paid Account. If we terminate your Account due to inactivity, we will provide you with notice before doing so.'
+      lastVerified: 2026-11-02
+    - topic: legal.output-rights
+      tier: good
+      reason: 'What Claude writes for you is yours.'
+      sources:
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: 'Subject to your compliance with our Terms, we assign to you all of our right, title, and interest—if any—in Outputs.'
+      lastVerified: 2026-11-02
+    - topic: security.practices
+      tier: neutral
+      reason: 'It has a page for security experts to report problems they find, but doesn’t say outside experts regularly check it.'
+      sources:
+        - url: https://www.anthropic.com/responsible-disclosure-policy
+          quote: 'If you discover a security vulnerability in an Anthropic system, please promptly report it to us'
+      lastVerified: 2026-11-02
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'You can’t share your account with anyone, even at home.'
+      sources:
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: 'You may not share your Account login information, Anthropic API key, or Account credentials with anyone else. You also may not make your Account available to anyone else.'
+      lastVerified: 2026-11-02

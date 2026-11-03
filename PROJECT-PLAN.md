@@ -1485,6 +1485,12 @@ in every D1 `json` column search parses.
         resumed, a shape change over three days with the API reading only complete tables
   - [ ] EXPLAIN QUERY PLAN shows no table scan for text, category or price-sorted queries
   - [ ] Opening Terms and policies offline after one visit shows them; first time offline says they need a connection
+- **As built**, in parts (one pull request each):
+  - **The tests' catalog** (2026-11-02): the API's tests read `apps/api/test/fixtures/catalog/`, a copy of `data/`
+    frozen that day (its logos empty files, named as `data/`'s), under `data/`'s file names, so core builds and seeds
+    it as the deploy does; nothing of `apps/api` reads `data/` now. The app's specs had their own fixtures already.
+    Core's few tests of the real files stay on them on purpose: `draftYaml` must write the catalog's own formatting,
+    and the pipeline's tests read `categories.yaml` and `automation.yaml`, which are rules rather than research.
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and

@@ -1,0 +1,543 @@
+id: mullvad
+name: Mullvad VPN
+aliases: [mullvad]
+website: https://mullvad.net
+category: vpn
+spendCategory: software
+# Accepted cards, read 2026-10-28 (M9.2): none named, so no acceptedNetworks. /en/pricing lists "credit card" among
+# its payment methods, /en/help/Invoices "Stripe: Credit/Debit card", and the card checkout needs an account.
+billingCurrency: { GLOBAL: EUR }
+# Nothing renews, so there's nothing to cancel: Mullvad ended subscriptions in 2022
+# (/en/blog/were-removing-the-option-to-create-new-subscriptions), and the terms say they "expire at the end of
+# the period purchased". The refunds guide is how to get unused time back (read 2026-10-26).
+cancelUrl: https://mullvad.net/en/help/refunds
+sources: { pricing: https://mullvad.net/en/pricing }
+# Owner (M11.2), read 2026-11-02.
+# Ways to pay (M11.5), read 2026-11-02 in its terms of service.
+paymentMethods:
+  - methods: [cash, crypto, card, bank-transfer, paypal, app-store, gift-card]
+    page: Terms of service
+    url: https://mullvad.net/en/help/terms-service
+    quotes:
+      - 'We accept payment by cash in bills (EUR, USD, GBP, SEK, NOK, CHF, CAD, AUD, NZD) sent by regular mail, Bitcoin, Bitcoin Cash, Monero, credit card, SEPA, PayPal, iOS in-app purchases, our Mullvad vouchers, and Swish.'
+# Currencies (M11.5), read 2026-11-02: cash by post in nine, in its terms (and its pricing page's FAQ). Its price is
+# in euros. A blog post of 2023-10-04 says cards are charged "directly in USD, EUR, GBP and SEK", but the checkout
+# offered about 20 on 2026-10-26 (CAD among them, BLUEPRINT §14) and no page lists them now, so cards aren't here.
+currencies:
+  - codes: [EUR, USD, GBP, SEK, NOK, CHF, CAD, AUD, NZD]
+    methods: [cash]
+    page: Terms of service
+    url: https://mullvad.net/en/help/terms-service
+    quotes:
+      - 'We accept payment by cash in bills (EUR, USD, GBP, SEK, NOK, CHF, CAD, AUD, NZD) sent by regular mail'
+# No renewalAnchor: it's prepaid, so nothing renews ("These terms will expire at the end of the period purchased").
+owner:
+  name: Mullvad VPN AB
+  page:
+    name: About us
+    url: https://mullvad.net/en/about
+  quotes:
+    - Mullvad VPN AB is owned by parent company Amagicom AB.
+    - 'Mullvad VPN AB and its parent company Amagicom AB are 100% owned by founders Fredrik Strömberg and Daniel Berntsson who are actively involved in the company.'
+  lastVerified: 2026-11-02
+notes: >-
+  Prepaid only: you add time to an account number, and nothing renews by itself. Cards can pay in many local
+  currencies at a converted amount, and cryptocurrency payments get 10% off. One flat price everywhere, VAT
+  included, so no sales tax is added in Canada or the US.
+# Open source (M11.5), read 2026-11-02: /en/why-mullvad-vpn's comparison says "Code is open source" for its app on
+# Windows, macOS, Linux, Android and iOS, and links the app's repository, as its downloads' "Our source code" does
+# (/en/download/vpn/windows). Its servers' code isn't published ("The majority of software that we use and even
+# develop ourselves is open source", /en/open-source), so its apps are open, not all of it.
+features:
+  software.open-source: open-clients
+sourceRepo:
+  url: https://github.com/mullvad/mullvadvpn-app
+  page:
+    name: Why Mullvad VPN?
+    url: https://mullvad.net/en/why-mullvad-vpn
+  quotes:
+    - Code is open source
+  lastVerified: 2026-11-02
+
+# Prices read 2026-10-26 on /en/pricing: "€5" a month for 1 month, 1 year or 1 decade ("the exact same rate"), and
+# "It's one flat monthly rate for ultimate flexibility. Including VAT." The CA$7.84 shown there is "€5 is
+# equivalent to", not a CAD price: CAD is taken for cash only. The ECB's rates of 2026-10-26 convert €5 to CA$7.85
+# and US$5.59, as the page's own figures do. The checkout also sells 2, 3 and 6 months (seen by the project owner on
+# 2026-10-26; it needs an account), at the same €5 a month.
+
+# VPN features, read 2026-10-25 on mullvad.net: devices and anonymous signup on /en/vpn; 50 server countries on
+# /en/servers; WireGuard only since OpenVPN's removal on 2026-01-15 (/en/blog/removing-openvpn-15th-january-2026),
+# with obfuscation (UDP-over-TCP, Shadowsocks: /en/help/connecting-to-mullvad-vpn-from-restrictive-locations); the
+# kill switch is always on and split tunneling is on every platform but iOS (/en/help/using-mullvad-vpn-app,
+# /en/help/split-tunneling-with-the-mullvad-app); multihop (/en/help/multihop-wireguard); the DNS content blockers
+# (/en/help/how-use-mullvad-cli); no new forwarded ports since 2023 (/en/vpn FAQ); infrastructure and app audits
+# (/en/blog/tag/audits); a no-logging policy (/en/help/no-logging-data-policy); unlimited traffic
+# (/en/blog/unlimited-traffic-volume). No page states a P2P policy: P2P is marked allowed because the terms block only
+# ports 25 and 137-139/445 and change no traffic (/en/help/terms-service).
+# The no-logs audit, read 2026-11-02 (M11.1): Radically Open Security's 2023 infrastructure audit was asked to verify
+# "Whether or not we log customer activity", and "Radically Open Security found no information leakage or logging of
+# customer data" (/en/blog/infrastructure-audit-completed-by-radically-open-security). Cure53's (2020, 2024) were
+# security audits. Not an audit, but the same fact: in April 2023 Swedish police with a search warrant left without
+# customer data, since "such customer data did not exist"
+# (/en/blog/mullvad-vpn-was-subject-to-a-search-warrant-customer-data-not-compromised).
+plans:
+  - id: mullvad.vpn
+    name: Mullvad VPN
+    link: https://mullvad.net/en/pricing
+    features:
+      vpn.included: true
+      vpn.devices: 5
+      vpn.unlimited-traffic: true
+      vpn.server-countries: 50
+      vpn.protocols: [wireguard, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers, malware, adult-content, gambling, social-media]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.anonymous-signup: true
+    prices:
+      - region: GLOBAL
+        currency: EUR
+        amount: 5
+        interval: month
+        intervalCount: 1
+        autoRenew: false
+        taxIncluded: { quote: Including VAT. }
+        lastVerified: 2026-10-26
+        sourceUrl: https://mullvad.net/en/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 10
+        interval: month
+        intervalCount: 2
+        autoRenew: false
+        taxIncluded: { quote: Including VAT. }
+        lastVerified: 2026-10-26
+        sourceUrl: https://mullvad.net/en/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 15
+        interval: month
+        intervalCount: 3
+        autoRenew: false
+        taxIncluded: { quote: Including VAT. }
+        lastVerified: 2026-10-26
+        sourceUrl: https://mullvad.net/en/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 30
+        interval: month
+        intervalCount: 6
+        autoRenew: false
+        taxIncluded: { quote: Including VAT. }
+        lastVerified: 2026-10-26
+        sourceUrl: https://mullvad.net/en/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 60
+        interval: year
+        intervalCount: 1
+        autoRenew: false
+        taxIncluded: { quote: Including VAT. }
+        lastVerified: 2026-10-26
+        sourceUrl: https://mullvad.net/en/pricing
+
+# Resellers, read 2026-10-26 and again 2026-10-27 (BLUEPRINT §4.9, M1.12). /en/help/partnerships-and-resellers names
+# Mullvad's official resellers ("With our official resellers, you can purchase Mullvad VPN scratch cards"): Amazon's
+# stores in 13 countries, Inet, Webhallen, ProxyStore, SerialCart and Laptop with Linux. Its partners (Mozilla,
+# Tailscale, Obscura) run their own products on Mullvad's servers and don't sell Mullvad, so they aren't here. Amazon's
+# 12 other stores aren't listed: each shows the price only in the basket ("To see the product details, add this item
+# to your basket", amazon.com and amazon.co.uk among them), and amazon.de answered with an error. Laptop with Linux's
+# price with VAT follows the buyer's country, so its price before VAT is stored. SerialCart's sale of the day (20-26%
+# off, no end date) isn't stored: prices are regular ones. Bundles: none on mullvad.net. Its blog, read 2026-10-27
+# (M1.15): a 2021 post names Smartech, in Selfridges in London, as a reseller, but the partnerships page no longer
+# does, so it isn't listed; the others it names are the page's.
+resellers:
+  - reseller: amazon
+    approvedBy:
+      url: https://mullvad.net/en/help/partnerships-and-resellers
+      quotes: [Amazon - CA]
+    offers:
+      - plan: mullvad.vpn
+        notes: Scratch cards in the post, sold by Mullvad VPN and shipped by Amazon.
+        prices:
+          - region: CA
+            currency: CAD
+            amount: 44
+            interval: month
+            intervalCount: 6
+            autoRenew: false
+            lastVerified: 2026-10-26
+            sourceUrl: https://www.amazon.ca/Mullvad-VPN-Devices-Protect-Security/dp/B092M5G1G7/
+          - region: CA
+            currency: CAD
+            amount: 87
+            interval: month
+            intervalCount: 12
+            autoRenew: false
+            lastVerified: 2026-10-26
+            sourceUrl: https://www.amazon.ca/Mullvad-VPN-Devices-Protect-Security/dp/B092M5G1G7/
+  - reseller: inet
+    approvedBy:
+      url: https://mullvad.net/en/help/partnerships-and-resellers
+      quotes: ['Since March 2020, we’ve partnered with Inet, a Swedish-based electronics retailer']
+    offers:
+      - plan: mullvad.vpn
+        notes: Scratch cards, online and in Inet's shops in Sweden.
+        prices:
+          - region: SE
+            currency: SEK
+            amount: 325
+            interval: month
+            intervalCount: 6
+            autoRenew: false
+            lastVerified: 2026-10-26
+            sourceUrl: https://www.inet.se/produkt/9123506/mullvad-vpn-6-manader-5-enheter
+          - region: SE
+            currency: SEK
+            amount: 649
+            interval: month
+            intervalCount: 12
+            autoRenew: false
+            lastVerified: 2026-10-26
+            sourceUrl: https://www.inet.se/produkt/9123505/mullvad-vpn-12-manader-5-enheter
+  - reseller: laptopwithlinux
+    approvedBy:
+      url: https://mullvad.net/en/help/partnerships-and-resellers
+      quotes: ['Since October 2022, we’ve partnered with Laptop with Linux']
+    offers:
+      - plan: mullvad.vpn
+        notes: >-
+          Activation codes on a scratch card, posted free anywhere ("They offer physical Mullvad VPN activation codes
+          with free delivery world-wide."). The price with VAT follows the buyer's country.
+        prices:
+          - region: GLOBAL
+            currency: EUR
+            amount: 48.76
+            interval: month
+            intervalCount: 12
+            autoRenew: false
+            taxExcluded: { quote: Excl. VAT }
+            lastVerified: 2026-10-27
+            sourceUrl: https://laptopwithlinux.com/buy-mullvad-vpn/
+  - reseller: proxystore
+    approvedBy:
+      url: https://mullvad.net/en/help/partnerships-and-resellers
+      quotes: ['Since April 2021, we’ve partnered with ProxyStore']
+    offers:
+      - plan: mullvad.vpn
+        notes: >-
+          Voucher codes, paid with Monero, Bitcoin, cash or a SEPA transfer. Listed as "(10% discount)" on Mullvad's
+          price, as its standing price rather than a sale.
+        prices:
+          - region: GLOBAL
+            currency: EUR
+            amount: 27
+            interval: month
+            intervalCount: 6
+            autoRenew: false
+            taxIncluded: { quote: It does not affect the price or the goods. }
+            lastVerified: 2026-10-26
+            sourceUrl: https://digitalgoods.proxystore.de/en
+          - region: GLOBAL
+            currency: EUR
+            amount: 54
+            interval: month
+            intervalCount: 12
+            autoRenew: false
+            taxIncluded: { quote: It does not affect the price or the goods. }
+            lastVerified: 2026-10-26
+            sourceUrl: https://digitalgoods.proxystore.de/en
+  - reseller: serialcart
+    approvedBy:
+      url: https://mullvad.net/en/help/partnerships-and-resellers
+      quotes: ['we’ve a distribution partnership with SerialCart® (MySecure Space GmbH)']
+    offers:
+      - plan: mullvad.vpn
+        notes: Voucher codes by email. Two and three years come as 1-year codes.
+        prices:
+          - region: GLOBAL
+            currency: USD
+            amount: 35.63
+            interval: month
+            intervalCount: 6
+            autoRenew: false
+            taxExcluded: { quote: excl. VAT }
+            lastVerified: 2026-10-26
+            sourceUrl: https://serialcart.com/purchase/mullvad-vpn
+          - region: GLOBAL
+            currency: USD
+            amount: 71.26
+            interval: year
+            intervalCount: 1
+            autoRenew: false
+            taxExcluded: { quote: excl. VAT }
+            lastVerified: 2026-10-26
+            sourceUrl: https://serialcart.com/purchase/mullvad-vpn
+          - region: GLOBAL
+            currency: USD
+            amount: 142.51
+            interval: year
+            intervalCount: 2
+            autoRenew: false
+            taxExcluded: { quote: excl. VAT }
+            lastVerified: 2026-10-26
+            sourceUrl: https://serialcart.com/purchase/mullvad-vpn
+          - region: GLOBAL
+            currency: USD
+            amount: 213.77
+            interval: year
+            intervalCount: 3
+            autoRenew: false
+            taxExcluded: { quote: excl. VAT }
+            lastVerified: 2026-10-26
+            sourceUrl: https://serialcart.com/purchase/mullvad-vpn
+  - reseller: webhallen
+    approvedBy:
+      url: https://mullvad.net/en/help/partnerships-and-resellers
+      quotes:
+        ['Since March 2020, we’ve partnered with Webhallen, a Swedish-based electronics retailer']
+    offers:
+      - plan: mullvad.vpn
+        notes: Scratch cards, online and in Webhallen's shops in Sweden.
+        prices:
+          - region: SE
+            currency: SEK
+            amount: 299
+            interval: month
+            intervalCount: 6
+            autoRenew: false
+            lastVerified: 2026-10-26
+            sourceUrl: https://www.webhallen.com/se/product/267703-Mullvad-VPN-6-manader-5-anvandare
+          - region: SE
+            currency: SEK
+            amount: 549
+            interval: month
+            intervalCount: 12
+            autoRenew: false
+            lastVerified: 2026-10-26
+            sourceUrl: https://www.webhallen.com/se/product/267706-Mullvad-VPN-12-manader-5-anvandare
+
+# Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: Mullvad's terms of service, privacy policy and
+# no-logging policy, and (2026-11-02) its post on Radically Open Security's infrastructure audit, its audits, its
+# bug-reporting page and its pricing page (cash). Free trials are not
+# applicable (it has none) and closing accounts not stated (its terms don't say), statuses since M11.1.
+policies:
+  links:
+    - name: 'Terms of service'
+      url: https://mullvad.net/en/help/terms-service
+    - name: 'Privacy policy'
+      url: https://mullvad.net/en/help/privacy-policy
+    - name: 'No-logging policy'
+      url: https://mullvad.net/en/help/no-logging-data-policy
+    - name: "Radically Open Security's audit"
+      url: https://mullvad.net/en/blog/infrastructure-audit-completed-by-radically-open-security
+    - name: 'Pricing'
+      url: https://mullvad.net/en/pricing
+    - name: 'Security audits'
+      url: https://mullvad.net/en/blog/tag/audits
+    - name: 'Reporting a bug or vulnerability'
+      url: https://mullvad.net/en/help/how-report-bug-or-vulnerability
+  ratings:
+    - topic: privacy.data-collection
+      tier: great
+      reason: "To sign up you don't give your name, an email address or even a password, so it knows very little about you."
+      sources:
+        - url: https://mullvad.net/en/help/no-logging-data-policy
+          quote: 'When you sign up for Mullvad, we do not ask for any personal information – no username, no password, no email address.'
+      lastVerified: 2026-10-27
+    - topic: privacy.data-sharing
+      tier: great
+      reason: 'It only shares your details with the companies it pays to do jobs for it, and only for those jobs.'
+      sources:
+        - url: https://mullvad.net/en/help/privacy-policy
+          quote: 'Your personal data will only be shared with third party suppliers who are performing services on our behalf and for the purposes stated above.'
+      lastVerified: 2026-10-27
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: "It doesn't send what you do on its site or in its app to outside companies such as Google Analytics."
+      sources:
+        - url: https://mullvad.net/en/help/no-logging-data-policy
+          quote: 'We refrain from sending usage statistics to external parties such as Google Analytics.'
+      lastVerified: 2026-10-27
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'It keeps almost nothing, and what it does keep goes away on its own: support emails after 70 days and payment numbers after 20 days.'
+      sources:
+        - url: https://mullvad.net/en/help/privacy-policy
+          quote: 'After 70 days, all emails/problem reports sent to our support address are automatically, permanently erased'
+        - url: https://mullvad.net/en/help/no-logging-data-policy
+          quote: '*transaction_id is deleted 20 days after payment'
+      lastVerified: 2026-10-27
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You pay ahead for the time you want, and it just stops when that runs out, so it never charges you again by surprise. You can get your money back within 14 days, but not if you paid in cash or crypto.'
+      sources:
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'These terms will expire at the end of the period purchased.'
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'We offer users a 14-day money-back guarantee.'
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'We do not offer refunds for cash and crypto payments.'
+      lastVerified: 2026-10-27
+    - topic: billing.refunds
+      tier: good
+      reason: 'You pay ahead for the time you want, and it just stops when that runs out, so it never charges you again by surprise. You can get your money back within 14 days, but not if you paid in cash or crypto.'
+      sources:
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'These terms will expire at the end of the period purchased.'
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'We offer users a 14-day money-back guarantee.'
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'We do not offer refunds for cash and crypto payments.'
+      lastVerified: 2026-10-27
+    - topic: billing.price-changes
+      tier: great
+      reason: "Time you've already paid for never costs more, and it posts big changes to its terms on its blog at least a month before they start."
+      sources:
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'These terms will expire at the end of the period purchased.'
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'Any material changes to these terms will be notified via a prominent notice on mullvad.net/blog at least one month before the changes are applied.'
+      lastVerified: 2026-10-27
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'It has no free trial: you pay ahead for the time you want.'
+      lastVerified: 2026-10-27
+    - topic: legal.disputes
+      tier: good
+      reason: "If you have a problem with it that you can't sort out, Sweden's consumer complaints board or a Swedish court decides, not a private arbitrator."
+      sources:
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'Any dispute, controversy, or claim arising out of or in connection with the terms shall be handled by the National Board for Consumer Disputes (ARN) or the Swedish courts'
+      lastVerified: 2026-10-27
+    - topic: legal.terms-changes
+      tier: great
+      reason: "It tells you about big changes on its blog at least a month ahead. If you don't like them, you can stop using it and ask for a refund."
+      sources:
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'Any material changes to these terms will be notified via a prominent notice on mullvad.net/blog at least one month before the changes are applied.'
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'If you wish to exercise your right to reject such changes, you should stop using the service (for refunds, see below).'
+      lastVerified: 2026-10-27
+    - topic: legal.account-closure
+      status: not-stated
+      reason: "Its terms don't say whether it can close your account, or what happens to time you've paid for."
+      pages: [https://mullvad.net/en/help/terms-service]
+      lastVerified: 2026-10-27
+    - topic: service.activity-logging
+      tier: great
+      reason: "It doesn't keep records of when you connect or for how long. In 2023, security experts at Radically Open Security checked its servers for logs of what customers do, and found none."
+      sources:
+        - url: https://mullvad.net/en/help/no-logging-data-policy
+          quote: 'no logging of connections, including when one is made, when it disconnects, for how long, or any kind of timestamp'
+        - url: https://mullvad.net/en/blog/infrastructure-audit-completed-by-radically-open-security
+          quote: 'Radically Open Security found no information leakage or logging of customer data'
+      lastVerified: 2026-11-02
+    - topic: security.practices
+      tier: good
+      reason: 'Outside security experts check its apps and servers again and again, and it posts what they found. You can tell it about a security bug and it says what happened after, but it pays no reward for finding one.'
+      sources:
+        - url: https://mullvad.net/en/blog/tag/audits
+          quote: 'this is our fourth audit in total, second with Cure53'
+        - url: https://mullvad.net/en/help/how-report-bug-or-vulnerability
+          quote: 'This page is also our coordinated vulnerability disclosure policy.'
+        - url: https://mullvad.net/en/help/how-report-bug-or-vulnerability
+          quote: "We'll tell you when it ships, and we publish what happened once it has."
+      lastVerified: 2026-11-02
+    - topic: other.notable
+      title: Pay with cash in the mail
+      tier: great
+      reason: 'You can pay by putting cash in an envelope and mailing it, so you never have to give it your name or a card.'
+      sources:
+        - url: https://mullvad.net/en/pricing
+          quote: 'Just put your cash and payment token (randomly generated on our website) in an envelope and send it to us.'
+      lastVerified: 2026-11-02
+    # M11.9's topics, pulled forward at the owner's request (2026-11-02), read that day.
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: "Its privacy pages don't mention AI. It keeps almost nothing about you to train anything on."
+      pages:
+        [
+          https://mullvad.net/en/help/privacy-policy,
+          https://mullvad.net/en/help/no-logging-data-policy,
+        ]
+      lastVerified: 2026-11-02
+    - topic: privacy.data-retention
+      tier: good
+      reason: 'It throws away what little it keeps on a timer: payment numbers after 20 days and support emails after 70. Only payment records the law requires stay longer.'
+      sources:
+        - url: https://mullvad.net/en/help/privacy-policy
+          quote: 'Transaction_id is permanently deleted after 20 days.'
+        - url: https://mullvad.net/en/help/privacy-policy
+          quote: 'After 70 days, all emails/problem reports sent to our support address are automatically, permanently erased (from inbox, deleted items, sent items, trash, and archives).'
+      lastVerified: 2026-11-02
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask by email for a copy of your data, but it keeps so little that there is usually nothing to send.'
+      sources:
+        - url: https://mullvad.net/en/help/privacy-policy
+          quote: 'You also have the right to request for a copy of your personal data and a registry extract.'
+        - url: https://mullvad.net/en/help/privacy-policy
+          quote: 'However, in most cases we will not be able to provide you with any data since we not store data except payment data'
+      action:
+        name: How to ask for your data
+        url: https://mullvad.net/en/help/privacy-policy
+      lastVerified: 2026-11-02
+    - topic: privacy.government-requests
+      status: not-stated
+      reason: "Its pages don't say what it does when police or a government ask for data."
+      pages:
+        [
+          https://mullvad.net/en/help/privacy-policy,
+          https://mullvad.net/en/help/no-logging-data-policy,
+        ]
+      lastVerified: 2026-11-02
+    - topic: privacy.data-location
+      tier: great
+      reason: 'Everything it keeps about you stays in the EU, under strong privacy law.'
+      sources:
+        - url: https://mullvad.net/en/help/privacy-policy
+          quote: 'We only store and process your personal data within the EU/EEA.'
+      lastVerified: 2026-11-02
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'You sign up with a random account number. No name, email or password.'
+      sources:
+        - url: https://mullvad.net/en/help/no-logging-data-policy
+          quote: 'When you sign up for Mullvad, we do not ask for any personal information – no username, no password, no email address.'
+      lastVerified: 2026-11-02
+    - topic: billing.renewal-notice
+      tier: great
+      reason: "It doesn't renew on its own: your time just runs out, and you pay again only if you want to."
+      sources:
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'These terms will expire at the end of the period purchased.'
+      lastVerified: 2026-11-02
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms give the price and the ways to pay, and say nothing about other fees.'
+      pages: [https://mullvad.net/en/help/terms-service]
+      lastVerified: 2026-11-02
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can update its apps and change some features.'
+      sources:
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'Mullvad VPN reserves the right to modify the service by updating the software or making changes to certain features.'
+      lastVerified: 2026-11-02
+    - topic: legal.inactivity
+      status: not-stated
+      reason: "Its terms don't say it closes accounts you haven't used."
+      pages: [https://mullvad.net/en/help/terms-service]
+      lastVerified: 2026-11-02
+    - topic: service.device-limits
+      tier: great
+      reason: 'One account works on up to five devices, with no other limits.'
+      sources:
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'An account can be used on up to 5 devices.'
+      lastVerified: 2026-11-02

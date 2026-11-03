@@ -1,0 +1,15 @@
+# RDS sells it (rds.ca/abonnement, Forfaits); Crave's bundle FAQ lists it with no price.
+id: bundle.crave-premium-rds
+name: Crave Premium and RDS
+soldBy: rds
+includes: [crave.premium, rds.standard]
+link: https://www.rds.ca/abonnement/
+prices:
+  - region: CA
+    currency: CAD
+    amount: 32.99
+    interval: month
+    intervalCount: 1
+    autoRenew: true
+    lastVerified: 2026-10-26
+    sourceUrl: https://www.rds.ca/abonnement/

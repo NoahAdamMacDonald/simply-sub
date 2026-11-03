@@ -13,7 +13,7 @@ import {
 } from '@simply-sub/core';
 import { env } from 'cloudflare:workers';
 
-// The real catalog in data/, for tests that run the Worker on it (test/contract.spec.ts, test/middleware.spec.ts):
+// The tests' own catalog (test/fixtures/catalog/, a copy of data/ frozen on 2026-11-02, M11.8), for tests that run the Worker on it (test/contract.spec.ts, test/middleware.spec.ts):
 // its snapshot, D1 seeded the way the deploy seeds it, and the static files data:build writes.
 
 /** The snapshot of data/, under `catalogVersion`. */

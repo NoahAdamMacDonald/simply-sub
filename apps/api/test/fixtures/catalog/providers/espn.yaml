@@ -1,0 +1,136 @@
+id: espn
+name: ESPN
+aliases: [espn+, espn plus]
+website: https://www.espn.com
+domains: [espnpressroom.com]
+category: streaming
+spendCategory: streaming
+# Accepted cards, read 2026-10-28 (M9.2) on ESPN Fan Support's Payment Methods for ESPN Select or Unlimited: Visa
+# (the Disney Visa too), Mastercard, Amex and Discover.
+acceptedNetworks:
+  US:
+    networks: [visa, mastercard, amex, discover]
+    url: https://support.espn.com/hc/en-us/articles/40377318634004-Payment-Methods-for-ESPN-Select-or-Unlimited
+    quotes:
+      - 'You can purchase an ESPN subscription through any of the following payment methods:'
+      - Disney Visa
+      - Visa
+      - Mastercard
+      - Amex
+      - Discover
+billingCurrency: { US: USD }
+# No availableIn: plus.espn.com, whose plans page says who can subscribe, answers this machine (in Canada) with Access
+# Denied, and the support centre states no country list. Disney+'s bundles with ESPN are for "U.S. residents, 18+
+# only" (help.disneyplus.com/article/disneyplus-price, set to the US).
+cancelUrl: https://support.espn.com/hc/en-us/articles/40377550796308-Cancelling-Your-ESPN-Select-or-Unlimited-Subscription
+sources:
+  {
+    pricing: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices,
+  }
+# Owner (M11.2), read 2026-11-02: its press room's About page (espnpressroom.com, ESPN's own).
+# Ways to pay (M11.5), read 2026-11-02 on its payment methods article.
+paymentMethods:
+  - methods: [card, paypal, provider-billing]
+    page: Payment methods for ESPN Select or Unlimited
+    url: https://support.espn.com/hc/en-us/articles/40377318634004-Payment-Methods-for-ESPN-Select-or-Unlimited
+    quotes:
+      - 'You can purchase an ESPN subscription through any of the following payment methods:'
+      - Visa
+      - PayPal (as a form of digital payment)
+      - How do I activate my ESPN Unlimited plan through my Pay-TV Provider?
+owner:
+  name: The Walt Disney Company (72%), Hearst (18%) and the NFL (10%)
+  page:
+    name: About ESPN (press room)
+    url: https://espnpressroom.com/about/
+  quotes:
+    - ESPN is 72 percent owned by The Walt Disney Company, 18 percent by Hearst and 10 percent by the National Football League.
+  lastVerified: 2026-11-02
+
+# Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their
+# words.
+perks:
+  - id: every-espn-network
+    name: Every ESPN network
+  - id: espn-plus
+    name: ESPN+ included
+
+# Read 2026-10-26 on ESPN's plans and prices article. Select is ESPN+'s content; Unlimited is every ESPN network,
+# live. Both have ads ("ESPN Select (With Ads)", "ESPN Unlimited (With Ads)" on Disney+'s bundle table).
+# Read 2026-11-02 (M11.4, the required streaming features): "ESPN subscriptions allow simultaneous streaming on up to
+# three (3) devices for most content" (support.espn.com, How many devices can stream ESPN subscriptions
+# simultaneously). Unlimited's 4K HDR is from ESPN's press release of 2026-09-08 (espnpressroom.com/press-release/
+# espn-espn2-coming-to-sports-fans-in-4k-hdr-in-the-u-s/): ESPN and ESPN2 in 4K HDR in the ESPN App, "as well as on
+# Disney+ in the U.S. to ESPN Unlimited subscribers". Select's video quality: neither the plans article, the support
+# centre nor the release states it (plus.espn.com is Access Denied here), so it waits for M11.9
+# (awaitingRequiredFeatures in core).
+plans:
+  - id: espn.select
+    name: Select
+    link: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices
+    features:
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.live: [sports]
+    prices:
+      - region: US
+        currency: USD
+        amount: 13.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices
+      - region: US
+        currency: USD
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices
+
+  - id: espn.unlimited
+    name: Unlimited
+    link: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.live: [tv-channels, sports]
+    perks: [every-espn-network, espn-plus]
+    prices:
+      - region: US
+        currency: USD
+        amount: 31.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices
+      - region: US
+        currency: USD
+        amount: 319.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices
+
+# Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: The Walt Disney Company's privacy policy, which covers
+# ESPN, rated once in data/policies/disney-privacy.yaml (M11.1). Not rated: the billing and legal topics (plus.espn.com,
+# with its subscriber agreement, is Access Denied here), account sharing and device limits.
+policies:
+  shared: [disney-privacy, disney-subscriber-agreement]
+  links:
+    - name: 'Security vulnerability reports'
+      url: https://hackerone.com/disney
+  ratings:
+    - topic: security.practices
+      tier: neutral
+      reason: "Disney runs a program where security experts can report problems they find, but it doesn't say outside experts check its security or publish what they find."
+      sources:
+        - url: https://hackerone.com/disney
+          quote: 'If you believe you have found a qualifying security vulnerability in a Disney product or website, please submit a report in accordance with the guidelines below.'
+      lastVerified: 2026-11-02

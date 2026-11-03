@@ -16,7 +16,7 @@ import contract from '../../../docs/api-output-examples.json';
 import { loadProviders, providersStatement } from '../src/db/providers';
 import app from '../src/index';
 
-// GET /providers (docs/api-output-examples.json) on the real catalog in data/: D1 is seeded with it the way the
+// GET /providers (docs/api-output-examples.json) on the tests' own catalog (test/fixtures/catalog/, M11.8): D1 is seeded with it the way the
 // deploy seeds, the static features.json and categories.json are built from it, and KV keeps fresh ECB rates, so no
 // test reaches Frankfurter.
 const BASE = 'https://sub.simplely.ca/api/v1';

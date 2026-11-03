@@ -1,0 +1,15 @@
+# Crave sells it (crave.ca/en/subscribe, Bundles), and TSN at the same price (tsn.ca/subscribe, Bundles).
+id: bundle.crave-ads-tsn
+name: Crave Standard With Ads and TSN Premium
+soldBy: crave
+includes: [crave.standard-ads, tsn.premium]
+link: https://www.crave.ca/en/subscribe
+prices:
+  - region: CA
+    currency: CAD
+    amount: 31.99
+    interval: month
+    intervalCount: 1
+    autoRenew: true
+    lastVerified: 2026-10-26
+    sourceUrl: https://www.crave.ca/en/subscribe

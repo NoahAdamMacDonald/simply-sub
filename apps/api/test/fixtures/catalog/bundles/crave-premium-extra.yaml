@@ -1,0 +1,15 @@
+# Sold through Crave ("M'abonner via Crave"); its price is on ICI TOU.TV's bundle page, not on crave.ca's.
+id: bundle.crave-premium-extra
+name: Crave Premium and ICI TOU.TV EXTRA
+soldBy: crave
+includes: [crave.premium, ici-tou-tv.extra]
+link: https://ici.tou.tv/abonnement-extra-crave
+prices:
+  - region: CA
+    currency: CAD
+    amount: 23.99
+    interval: month
+    intervalCount: 1
+    autoRenew: true
+    lastVerified: 2026-10-26
+    sourceUrl: https://ici.tou.tv/abonnement-extra-crave

@@ -1,0 +1,522 @@
+# The policy topics (BLUEPRINT §4.10): what a card's "Terms and policies" rates a provider on, from its own terms of
+# service, privacy policy and other policies. Each topic has a rubric for five grades (great, good, neutral, poor and
+# bad), so ratings mean the same thing across providers: a provider's rating names the grade whose description fits
+# what its documents say, and quotes them. The rubrics follow one scale, worded for each topic:
+#   great    protects you by design: nothing to do, and the fine print has no catch;
+#   good     protects you by default, with minor stated limits on the protection, or does more if you opt in;
+#   neutral  works against you by default, but a full, self-serve setting or right fixes it;
+#   poor     works against you by default, and the fix is partial or hard (a letter, an email, a ticket);
+#   bad      works against you, with no way out.
+# The grading procedure and the routing table (which topic a fact belongs to) are the policy-research skill's Rules,
+# which core's extractionRules state word for word. The reasoning is docs/catalog-expansion-guide.md §1.
+#
+# `silent` is what it means when the pages say nothing: not-stated where silence proves nothing, or the grade it gets
+# where it means a missing protection (the owner's choice, 2026-10-30). Every provider rates or gives a status for each
+# topic that applies to it. A topic with categories applies only to providers with a plan in one of them; one with
+# paidPlans only to providers with that many paid plans. `actionFor` lists the grades that mean the user has to act
+# (an opt-out, a deletion request): a rating with one links the provider's own page for it (its `action`).
+# Shapes: packages/core/src/catalog/policy-topic.ts. Add a topic here, in its own commit, before a provider uses it.
+
+# ── Privacy ────────────────────────────────────────────────────────────────────
+- id: privacy.data-collection
+  name: Data collection
+  group: privacy
+  question: What it collects beyond what the service needs to work, and whether you can say no.
+  note: >-
+    What the service needs: your account, payment, delivering the service, security and legal duties. Analytics,
+    telemetry, crash reports and recommendations are beyond it. AI training is privacy.ai-training's and data
+    collected only for ads is privacy.ads-tracking's: this grades what's left. Opting out of one use of the data isn't
+    opting out of collecting it.
+  silent: not-stated
+  actionFor: [neutral, poor]
+  tiers:
+    great: Collects only what the service needs to work.
+    good: Asks before collecting anything more.
+    neutral: Collects more by default, and you can opt out.
+    poor: Collects more by default, and opting out is partial or only on request.
+    bad: Collects more by default, with no way to opt out.
+- id: privacy.data-sharing
+  name: Selling or sharing data
+  group: privacy
+  question: Whether it sells your data, or shares it with other companies for their own use.
+  note: >-
+    Selling includes US law's "sharing" for cross-context ads, and data that reaches another company (a pixel, an ad
+    network) even to show its own ads. Service providers and processors acting for it run the service; affiliates are
+    its own group; partners with no stated purpose use the data for their own ends.
+  silent: not-stated
+  actionFor: [neutral, poor]
+  tiers:
+    great: Shares it only with companies that run the service for it.
+    good: Also shares it within its own group, never to sell or for others' advertising.
+    neutral: Shares it for advertising or marketing, and you can opt out.
+    poor: Shares it for advertising or marketing, and opting out is partial or only on request.
+    bad: Sells it, or shares it for others' advertising with no way to opt out.
+- id: privacy.ads-tracking
+  name: Ads and tracking
+  group: privacy
+  question: Whether it tracks what you do to target ads, in its apps or across other sites.
+  note: >-
+    Ads chosen from your activity, in its apps or anywhere else, and the data collected only for them. A choice set
+    per device or browser, or one that resets (cookie choices), is partial.
+  silent: not-stated
+  actionFor: [neutral, poor]
+  tiers:
+    great: No ads, and no tracking for advertising.
+    good: Ads or tracking only if you agree to them.
+    neutral: Ads or tracking by default, and you can turn them off.
+    poor: Ads or tracking by default, and turning them off is partial.
+    bad: Ads or tracking by default, with no way to turn them off.
+- id: privacy.ai-training
+  name: AI training
+  group: privacy
+  question: Whether what you write, upload or say trains AI models.
+  note: >-
+    Your content is what you write, upload or say: prompts, messages, files, photos, voice. What you watch, used for
+    recommendations, is data collection. AI models generate content or are used beyond the service (sold, licensed,
+    in other products); a model that only runs the service's own features (a spam filter, recommendations) is data
+    collection. An AI provider that's silent is Poor, since training is the default in that industry.
+  silent: not-stated
+  actionFor: [neutral, poor]
+  silentIn: { ai: poor }
+  tiers:
+    great: Never trains AI models on your content.
+    good: Trains on it only if you opt in, or only on what you send as feedback.
+    neutral: Trains on it by default, with a self-serve opt-out that applies from then on.
+    poor: >-
+      The opt-out is partial: some content or products, only on request, or past content still trains new models.
+    bad: No opt-out, or it licenses your content to others to train on.
+- id: privacy.content-access
+  name: Who can read your content
+  group: privacy
+  question: Who can read what you store or send.
+  silent: not-stated
+  actionFor: [good, poor]
+  categories:
+    [storage, ai, privacy-suite, email, calendar, passwords, social, file-sharing, cloud, developer]
+  tiers:
+    great: End-to-end or zero-access encryption by default for the main content.
+    good: End-to-end encryption you can turn on for the main content.
+    neutral: >-
+      Encrypted in transit and at rest; staff read it only for support with your permission, or for legal or safety
+      reasons, and automated processing serves only you.
+    poor: People or automated systems read it for its own purposes (ads, training, review), with an opt-out.
+    bad: People or automated systems read it for its own purposes, with no opt-out.
+- id: privacy.data-retention
+  name: How long it keeps your data
+  group: privacy
+  question: How long it keeps your data, while you use it and after you leave.
+  note: >-
+    Deleted data included ("chats are kept 30 days"). Records a law requires (tax, banking: often seven years) don't
+    count against it.
+  silent: poor
+  tiers:
+    great: Stated short periods, and it deletes your data within 30 days of closing the account.
+    good: Stated periods for the main kinds of data, and deleted within 90 days of closing the account.
+    neutral: Keeps it "as long as necessary", with some stated periods.
+    poor: No stated periods.
+    bad: Keeps it indefinitely, or keeps what you deleted for its own use.
+- id: privacy.data-deletion
+  name: Deleting your data
+  group: privacy
+  question: Whether you can have your data deleted, and how.
+  note: How long anything stays afterwards is privacy.data-retention's.
+  silent: not-stated
+  actionFor: [good, neutral, poor]
+  tiers:
+    great: Keeps almost nothing, or deletes it yourself at any time, keeping only what the law requires.
+    good: Deletes it when you ask, within a stated time.
+    neutral: Deletes it when you ask, with no stated time.
+    poor: Deletes only some of it, or only through a hard process.
+    bad: Gives no way to have it deleted.
+- id: privacy.data-portability
+  name: Taking your data with you
+  group: privacy
+  question: Whether you can leave with your data, in a form you can use elsewhere.
+  note: >-
+    The formats themselves are features, and import never counts. Open formats: CSV, JSON, ICS, VCF, mbox, KDBX,
+    otpauth. A partial export outweighs the format when both apply.
+  silent: not-stated
+  actionFor: [great, good, neutral, poor]
+  tiers:
+    great: Self-serve export of everything, in open, documented formats.
+    good: Self-serve export of the main content in an open format.
+    neutral: Self-serve export in its own format, or on request within the legal time limit.
+    poor: Only a partial export.
+    bad: No way to get your data.
+- id: privacy.government-requests
+  name: Government requests
+  group: privacy
+  question: What it does when police or governments ask for your data.
+  note: >-
+    Four things count: it requires valid legal process, it tells you unless a law forbids it, it publishes a
+    transparency report, and it holds little to hand over. "When required by law" is the floor everywhere.
+  silent: neutral
+  tiers:
+    great: All four.
+    good: Three of the four.
+    neutral: Fewer, or "when required by law" and nothing more.
+    poor: May disclose without legal process when it thinks it right, beyond emergencies.
+    bad: Shares with authorities voluntarily or routinely, or sells to them.
+- id: privacy.data-location
+  name: Where your data is kept
+  group: privacy
+  question: Where your data is stored and processed.
+  note: Strong privacy law means Canada, the EU and EEA, the UK or Switzerland.
+  silent: poor
+  tiers:
+    great: In a stated country with strong privacy law, and it never leaves, or you choose the region.
+    good: A stated region, with any transfer under recognised safeguards (adequacy, EU standard contractual clauses).
+    neutral: The US or several countries, with stated safeguards.
+    poor: Anywhere, with safeguards it doesn't describe.
+    bad: Anywhere, to parties it doesn't name, with no safeguards.
+- id: privacy.sign-up-data
+  name: What sign-up needs
+  group: privacy
+  question: What you must give it to sign up.
+  note: >-
+    Read it from the sign-up form, not the policy, and quote the page that hosts it. "May ask for" a phone number
+    counts as asking. Identity checks a law requires (Canadian banks' know-your-client rules) are Neutral.
+  silent: not-stated
+  tiers:
+    great: No personal information, such as an account number instead of an email.
+    good: An email address only, and an alias is accepted.
+    neutral: An email, a name you choose and payment details for paid plans; a phone number is optional.
+    poor: A phone number, or a legal or verified name no law requires.
+    bad: Government ID or a face scan no law requires.
+- id: privacy.children
+  name: Children
+  group: privacy
+  question: Its minimum age, and what it does with children's data.
+  note: >-
+    A minor is under 18 for the ads rungs; a child is under the service's stated minimum age for the deletion rung.
+  silent: not-stated
+  categories: [streaming, music, gaming, education, social]
+  tiers:
+    great: Kids' profiles collect the minimum, with no ads or tracking for minors, and parental controls.
+    good: No targeted ads to minors, and parental consent.
+    neutral: A stated minimum age, and it deletes children's data it finds.
+    poor: Minors get the same ads and tracking as adults.
+    bad: Targets minors with ads or tracking.
+
+# ── Billing ────────────────────────────────────────────────────────────────────
+- id: billing.cancellation
+  name: Cancelling
+  group: billing
+  question: How you cancel.
+  note: >-
+    Cancelling in the app store you bought through counts as online at any time. "Before it renews" isn't a
+    deadline. When the terms are silent, read the cancel page. A fee to cancel is Bad here, and the provider's
+    cancelFee.
+  silent: not-stated
+  paidPlans: 1
+  tiers:
+    great: Online in a couple of clicks, with no retention maze, and you keep what you paid for.
+    good: Online at any time, through retention offers.
+    neutral: Online, but by a stated deadline before it renews (24 hours, 7 days).
+    poor: You must contact someone, or there's a minimum term.
+    bad: A fee to leave, or only by post or in person.
+- id: billing.refunds
+  name: Refunds
+  group: billing
+  question: Whether you get money back.
+  note: >-
+    A window after the first purchase only is Neutral, and the reason says so. Access that runs to the end of the
+    period with nothing said about refunds is Neutral too.
+  silent: not-stated
+  paidPlans: 1
+  tiers:
+    great: A refund of unused time whenever you cancel.
+    good: A full refund within a stated window after buying and after each renewal.
+    neutral: No refunds but access to the end of the period, or a window after the first purchase only.
+    poor: No refunds and access ends at once, or refunds only as credit.
+    bad: No refund even for its own errors, or for charges after you cancelled.
+- id: billing.price-changes
+  name: Price changes
+  group: billing
+  question: Whether it tells you before raising the price, and lets you leave first.
+  silent: poor
+  paidPlans: 1
+  tiers:
+    great: A new price never applies to time you've paid for, and comes with notice you can act on.
+    good: Tells you ahead of time, with a stated lead, and you can cancel first.
+    neutral: Tells you ahead of time, with no stated lead.
+    poor: Changes with little notice, or only posts the new price.
+    bad: Changes at any time without notice.
+- id: billing.free-trials
+  name: Free trials
+  group: billing
+  question: Whether a free trial turns into a paid plan on its own, and whether you're warned first.
+  note: Not applicable when it has no free trial. A trial or introductory price ending is this topic's.
+  silent: not-stated
+  paidPlans: 1
+  tiers:
+    great: Its trial never turns into a paid plan without asking.
+    good: Its trial turns into a paid plan, with a reminder before it does.
+    neutral: Its trial turns into a paid plan unless you cancel, which you can do at any time during it.
+    poor: Its trial turns into a paid plan, needs a card up front, and gives no reminder.
+    bad: Its trial is hard to cancel, or charges before it ends.
+- id: billing.renewal-notice
+  name: Renewal reminders
+  group: billing
+  question: Whether it warns you before renewing automatically.
+  note: A renewal into a dearer plan with no trial before it is this topic's; a trial ending is billing.free-trials'.
+  silent: poor
+  paidPlans: 1
+  tiers:
+    great: >-
+      No automatic renewal unless you turn it on, or a reminder with a stated lead before every renewal of every
+      period it sells.
+    good: A reminder with a stated lead before yearly renewals, or before every renewal with no stated lead.
+    neutral: It "may" remind you.
+    poor: No reminder stated.
+    bad: Renews into a longer or dearer plan (monthly to yearly) without a clear warning, when there was no trial.
+- id: billing.fees
+  name: Fees
+  group: billing
+  question: Fees beyond the price.
+  note: A currency markup at checkout is a fee.
+  silent: not-stated
+  paidPlans: 1
+  tiers:
+    great: None beyond the price.
+    good: Only small, listed fees you can avoid (a paper bill).
+    neutral: Listed fees for optional things.
+    poor: Fees for ordinary use (inactivity, a payment method, an unstated currency markup).
+    bad: Fees it doesn't disclose, or sets at its discretion.
+- id: billing.plan-changes
+  name: Switching plans
+  group: billing
+  question: What happens when you switch to another plan.
+  silent: not-stated
+  paidPlans: 2
+  tiers:
+    great: Switch at any time, prorated both ways.
+    good: Upgrades at once and prorated; downgrades at renewal.
+    neutral: Changes only at renewal.
+    poor: Switching forfeits time you've paid for.
+    bad: Switching means cancelling, or a downgrade deletes data without warning.
+
+# ── Legal ──────────────────────────────────────────────────────────────────────
+- id: legal.disputes
+  name: Disputes
+  group: legal
+  question: Whether you can take a dispute to court or join a class action.
+  note: >-
+    An arbitration opt-out with a deadline, by post, or only for new accounts is narrow. Silence means courts by
+    default, with no arbitration.
+  silent: good
+  actionFor: [neutral, poor]
+  tiers:
+    great: Disputes go to the courts or a consumer board where you live, and class actions are allowed.
+    good: Disputes go to a court or board, with no arbitration, but one of its choosing or with no class actions.
+    neutral: Arbitration is required, but you can opt out of it or use small-claims court.
+    poor: Arbitration is required with a class-action waiver, and opting out is narrow.
+    bad: Arbitration is required with a class-action waiver, and you can't opt out.
+- id: legal.terms-changes
+  name: Changes to the terms
+  group: legal
+  question: Whether it tells you before changing its terms, and whether you can leave.
+  silent: bad
+  tiers:
+    great: Tells you well ahead (a month or more), and lets you leave with a refund.
+    good: Tells you well ahead, and you can leave.
+    neutral: Tells you about material changes, with no stated lead.
+    poor: Only posts the new terms, and using the service means you accept them.
+    bad: Changes them at any time, without notice.
+- id: legal.account-closure
+  name: Closing your account
+  group: legal
+  question: Whether it can close or suspend your account, and whether you'd get a refund.
+  note: An inactive account closed is legal.inactivity's.
+  silent: not-stated
+  tiers:
+    great: Only for a clear breach of its terms, with notice and a refund of time you've paid for.
+    good: Only for a breach, with notice or a refund.
+    neutral: For a breach, with no refund, or at its discretion with a refund of time you've paid for.
+    poor: At its discretion, with notice but no refund.
+    bad: At any time and for any reason, without notice or a refund.
+- id: legal.content-rights
+  name: Rights over your content
+  group: legal
+  question: What rights it takes over what you upload.
+  note: A licence that includes training AI is privacy.ai-training's; this grades the rest of it.
+  silent: not-stated
+  categories:
+    [
+      storage,
+      ai,
+      privacy-suite,
+      software,
+      gaming,
+      email,
+      calendar,
+      passwords,
+      social,
+      file-sharing,
+      creative,
+      cloud,
+      developer,
+    ]
+  tiers:
+    great: No rights beyond running the service, ending when you delete it.
+    good: A limited licence to run and improve the service, ending when you delete it (bar backups and what others were sent).
+    neutral: >-
+      A broad, worldwide, royalty-free licence limited to running or promoting the service, ending when you delete
+      it, and passed on only to companies acting for it.
+    poor: Perpetual or irrevocable, or it survives deletion.
+    bad: It may pass the licence to anyone else or sell it, or use your name or likeness in ads with no opt-out.
+- id: legal.service-changes
+  name: What you paid for
+  group: legal
+  question: Whether what you paid for can be taken away.
+  note: A game removed from your purchased library is this topic's.
+  silent: neutral
+  tiers:
+    great: Purchases are yours (DRM-free downloads), or kept even if the service ends.
+    good: Purchases stay, and a removal is rare and refunded.
+    neutral: >-
+      A licence only, and content and features may change, as a subscription's catalogue does ("we may modify or
+      discontinue features" alone).
+    poor: >-
+      It may remove purchased items or what your plan sells with no refund, or disclaims liability for removing them.
+    bad: It may revoke purchases or close libraries at will.
+- id: legal.inactivity
+  name: Inactive accounts
+  group: legal
+  question: Whether it closes accounts you haven't used.
+  note: Silence means it doesn't close them.
+  silent: great
+  tiers:
+    great: Never closes inactive accounts.
+    good: Only free accounts, after a year or more, with warnings.
+    neutral: After a stated period, with a warning.
+    poor: No stated period, under a year, or no warning.
+    bad: Deletes balances, credit or wallet funds for inactivity.
+- id: legal.output-rights
+  name: Who owns what it makes
+  group: legal
+  question: Who owns what its AI or creative tools make for you.
+  silent: not-stated
+  categories: [ai, creative]
+  tiers:
+    great: You own the outputs, and it defends you against copyright claims over them.
+    good: You own them.
+    neutral: You own them, but it may reuse them.
+    poor: It keeps broad rights over them.
+    bad: It owns them and limits your use.
+
+# ── Security ───────────────────────────────────────────────────────────────────
+- id: security.practices
+  name: Security checks
+  group: security
+  question: Whether independent experts check its security, and how it handles problems found.
+  note: '"Industry-standard security" alone is a generic claim.'
+  silent: poor
+  tiers:
+    great: Regular independent audits with published reports, a bug bounty, and published past incidents.
+    good: An independent audit or certification (SOC 2, ISO 27001) and a disclosure programme.
+    neutral: An independent audit, a certification or a disclosure programme.
+    poor: Only generic claims.
+    bad: No stated measures, and no way to report a vulnerability.
+
+# ── Service ────────────────────────────────────────────────────────────────────
+- id: service.activity-logging
+  name: Activity logging
+  group: service
+  question: >-
+    Whether it keeps logs of what you do (sites, searches, queries) or of when and where you connect, and whether
+    anyone has checked.
+  note: >-
+    Great needs an independent audit of the no-logs claim, which the plans' vpn.independent-audits records
+    (no-logs), and validation checks they agree.
+  silent: poor
+  categories: [vpn, dns, search, browsers]
+  tiers:
+    great: No activity or connection logs, and an independent audit found none.
+    good: No activity or connection logs, as it states, without an independent audit.
+    neutral: Keeps some connection data for a short time to run the service.
+    poor: Keeps connection logs (IP addresses, times) or activity for a set time.
+    bad: Logs what you do, or shares its logs.
+- id: service.account-sharing
+  name: Account sharing
+  group: service
+  question: Who you can share your account with.
+  silent: not-stated
+  categories:
+    [
+      streaming,
+      music,
+      gaming,
+      software,
+      storage,
+      ai,
+      passwords,
+      security,
+      creative,
+      shopping,
+      delivery,
+    ]
+  tiers:
+    great: Share it with anyone, up to the plan's limits.
+    good: Share it within your household, with no checks.
+    neutral: Share it within your household, with checks, and paid extra members for others.
+    poor: Share it within your household only, with checks that can lock you out.
+    bad: No sharing at all.
+- id: service.device-limits
+  name: Device and download limits
+  group: service
+  question: Limits on devices and downloads, beyond how many screens can play at once.
+  note: >-
+    Only what the device-count features don't say: registration caps and how long downloads last, never the number
+    of devices or screens.
+  silent: not-stated
+  categories: [streaming, music, gaming, software, vpn, security, creative]
+  tiers:
+    great: No limits beyond the number of screens or devices.
+    good: Generous, clearly stated limits.
+    neutral: Limits on registered devices or downloads, clearly stated.
+    poor: Tight limits, or downloads that expire quickly.
+    bad: Unstated limits that can lock you out.
+
+# ── Finance ────────────────────────────────────────────────────────────────────
+- id: finance.money-protection
+  name: What protects your money
+  group: finance
+  question: What protects your money if the company or its bank fails.
+  note: Some provinces cover credit-union deposits without limit. CIPF covers a dealer's failure, not losses.
+  silent: bad
+  categories: [finance]
+  tiers:
+    great: >-
+      In an account in your name at a member institution, fully covered by CDIC or a provincial deposit insurer, or
+      spread over several partners to raise the cover.
+    good: Held in trust at member institutions with you as beneficiary, covered to stated limits.
+    neutral: Covered, but sharing the limit with your other deposits at the same partner bank, or investor protection only.
+    poor: Prepaid or e-money held in trust, with no deposit insurance.
+    bad: No stated protection, or your money is lent or invested by the company.
+- id: finance.holds
+  name: Holds and freezes
+  group: finance
+  question: When it can hold or freeze your money.
+  silent: not-stated
+  categories: [finance]
+  tiers:
+    great: Stated reasons, notice, and a way to appeal, with a time limit on holds.
+    good: Stated reasons and notice.
+    neutral: Stated reasons.
+    poor: At its discretion, with notice.
+    bad: At its discretion, without notice or a time limit.
+
+# ── Notable ────────────────────────────────────────────────────────────────────
+- id: other.notable
+  name: Notable
+  group: other
+  question: Something that stands out and no topic covers, such as a VPN that takes cash, or selling your data when you leave.
+  note: Graded on the scale at the top of this file, each with a short title, up to three per provider.
+  titled: true
+  tiers:
+    great: Protects you by design, with nothing for you to do and no catch.
+    good: Protects you by default, with minor stated limits, or more if you opt in.
+    neutral: Works against you by default, but a full, self-serve setting or right fixes it.
+    poor: Works against you by default, and the fix is partial or hard.
+    bad: Works against you, with no way out.

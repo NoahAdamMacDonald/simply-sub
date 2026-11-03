@@ -26,7 +26,7 @@ import { catalogAssets, catalogSnapshot, seedCatalog } from './seeded-catalog';
 // the example shows). packages/core/test/catalog/contract.spec.ts holds the examples to the same schemas, so the
 // examples and the code can't drift apart. A new example is tested without a new test.
 //
-// The Worker runs on the real catalog in data/, built and seeded under the examples' catalog version, with the
+// The Worker runs on the tests' own catalog (test/fixtures/catalog/, M11.8), built and seeded under the examples' catalog version, with the
 // static files data:build writes. Frankfurter and the icon services are stand-ins; a few examples need them in a
 // particular state (setups), the live calendar's the example's feed set, sync's its chain and a join link its link. The examples' prices and
 // other values are illustrative, so a success body is held to its schema and its meta's keys, not to the example's
@@ -79,7 +79,7 @@ interface Setup {
   syncChain?: true;
   /** DELETE /join/:id's example's link is stored, with its sealed code, working for 10 more minutes. */
   joinLink?: true;
-  /** data/redirects.yaml has this entry (M10.27): the real catalog keeps its ids, so it has none. */
+  /** data/redirects.yaml has this entry (M10.27): the tests' catalog keeps its ids, so it has none. */
   redirect?: Redirect;
 }
 

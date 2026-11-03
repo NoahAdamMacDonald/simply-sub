@@ -1,0 +1,134 @@
+id: hulu
+name: Hulu
+website: https://www.hulu.com
+category: streaming
+spendCategory: streaming
+# Accepted cards, read 2026-10-28 (M9.2) on the help centre's Your payment options (/article/hulu-payment-options):
+# American Express, Visa, Mastercard and Discover, U.S. cards only.
+acceptedNetworks:
+  US:
+    networks: [amex, visa, mastercard, discover]
+    url: https://help.hulu.com/article/hulu-payment-options
+    quotes:
+      - 'We accept U.S. based credit or debit cards like:'
+      - American Express
+      - Visa
+      - Mastercard
+      - Discover
+billingCurrency: { US: USD }
+# help.hulu.com/article/hulu-how-much-does-hulu-cost, read 2026-10-26: "To subscribe to Hulu, you'll need: To be
+# located within the U.S."
+availableIn: [US]
+cancelUrl: https://help.hulu.com/article/hulu-cancel-hulu-subscription
+sources: { pricing: https://help.hulu.com/article/hulu-how-much-does-hulu-cost }
+# Owner (M11.2), read 2026-11-02: its press site's history, 2019.
+# Ways to pay (M11.5), read 2026-11-02 on its payment options article.
+paymentMethods:
+  - methods: [card, paypal, gift-card]
+    page: Your payment options
+    url: https://help.hulu.com/article/hulu-payment-options
+    quotes:
+      - 'We accept U.S. based credit or debit cards like:'
+      - 'You can also use PayPal to pay for Hulu.'
+      - 'Hulu gift cards are available at select retail outlets.'
+owner:
+  name: The Walt Disney Company
+  page:
+    name: Corporate history (Hulu press site)
+    url: https://press.hulu.com/corporate/
+  quotes:
+    - The Walt Disney Company assumes full operational control of Hulu.
+  lastVerified: 2026-11-02
+
+# Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their
+# words.
+perks:
+  - id: downloads
+    name: Download select shows and movies
+  - id: watch-party
+    name: Hulu Watch Party
+
+# Read 2026-10-26 on the plans and prices article, for new subscriptions from September 23, 2026: the standalone plans,
+# both up to 4K. The article doesn't number the streams or downloads. Not here yet: the Hulu + Live TV plans (which
+# include Disney+ and ESPN, so they'd be suites) and the add-ons. The Disney+ bundles are in data/bundles.
+# Two streams at a time, read 2026-11-02 (M11.4) on hulu.com/paramount-plus-with-showtime: "While your Hulu base plan
+# allows you to watch on 2 simultaneous streams at a time" (the help centre's screens article renders no text here).
+# With Ads isn't ad free (its name, and the plans article's "Hulu (With Ads)").
+plans:
+  - id: hulu.with-ads
+    name: With Ads
+    link: https://help.hulu.com/article/hulu-how-much-does-hulu-cost
+    features:
+      video.quality: 4k
+      ad-free: false
+      streaming.concurrent-streams: 2
+    prices:
+      - region: US
+        currency: USD
+        amount: 12.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://help.hulu.com/article/hulu-how-much-does-hulu-cost
+      - region: US
+        currency: USD
+        amount: 124.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://help.hulu.com/article/hulu-how-much-does-hulu-cost
+
+  - id: hulu.premium
+    name: Premium
+    link: https://help.hulu.com/article/hulu-how-much-does-hulu-cost
+    features:
+      video.quality: 4k
+      ad-free: true
+      streaming.concurrent-streams: 2
+    perks: [downloads, watch-party]
+    notes: A few shows play with ads before and after the video.
+    prices:
+      - region: US
+        currency: USD
+        amount: 21.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://help.hulu.com/article/hulu-how-much-does-hulu-cost
+
+# Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: The Walt Disney Company's privacy policy, which covers
+# Hulu, rated once in data/policies/disney-privacy.yaml (M11.1); its data sharing is Hulu's own, since the policy adds a
+# clause on Hulu's partners. Not rated: the billing and legal topics (hulu.com sends this machine to Disney+), account
+# sharing and device limits.
+policies:
+  shared: [disney-privacy, disney-subscriber-agreement]
+  links:
+    - name: 'Privacy policy'
+      url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+    - name: 'Security vulnerability reports'
+      url: https://hackerone.com/disney
+  ratings:
+    - topic: privacy.data-sharing
+      tier: neutral
+      reason: 'It gives some details about you, like ID codes or a scrambled email address, to ad companies, and Hulu shares data with partners such as its device makers. You can say no to the ad sharing in its privacy settings.'
+      sources:
+        - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+          quote: 'When we provide you with relevant advertising on third-party sites and applications, we may share limited personal information about you, such as certain identifiers or hashed email address, with third parties.'
+        - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+          quote: 'When you use the Hulu service, Hulu may share information with its business partners that help offer the Hulu service, including for example, its content programmers, distributors and device partners, and corporate owners'
+        - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+          quote: 'Click on “Do Not Sell or Share My Personal Information”, “Your Privacy Controls”, “Manage Your Cookies Settings”, “Modify Your Cookie Preferences” or “Manage (Privacy) Preferences” in our website footers'
+      action:
+        name: 'Your privacy controls'
+        url: https://privacy.thewaltdisneycompany.com/en/privacy-controls/online-tracking-and-advertising/
+      lastVerified: 2026-10-27
+    - topic: security.practices
+      tier: neutral
+      reason: "Disney runs a program where security experts can report problems they find, but it doesn't say outside experts check its security or publish what they find."
+      sources:
+        - url: https://hackerone.com/disney
+          quote: 'If you believe you have found a qualifying security vulnerability in a Disney product or website, please submit a report in accordance with the guidelines below.'
+      lastVerified: 2026-11-02
