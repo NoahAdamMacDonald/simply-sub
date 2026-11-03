@@ -480,11 +480,11 @@ counts them.
 | Official resellers, from the provider's own reseller, partner, blog and announcement pages | `resellers` | yes. A shop calling itself official (serialcart.com for Bitdefender) counts only if Bitdefender's own pages name it |
 | Card networks accepted | `acceptedNetworks` | yes |
 | Currency charged per region | `billingCurrency` | yes |
-| Every currency it accepts, and other ways to pay (cash, crypto, PayPal, gift cards, app stores) | **new** `paymentMethods` and `currencies` | no |
-| How a month is counted: every 30 days, the same date each month (the 31st moved to the month's last day?), the 1st, or the end of the month | **new** `renewalAnchor`; "every 30 days" stays `day` × 30 | no |
+| Every currency it accepts, and other ways to pay (cash, crypto, PayPal, gift cards, app stores) | `paymentMethods` and `currencies` (beyond its prices') | yes (M11.5) |
+| How a month is counted: every 30 days, the same date each month (a shorter month's last day, then back), the 1st, or the end of the month | `renewalAnchor`; "every 30 days" stays `day` × 30 | yes (M11.5) |
 | Where it's sold | `availableIn` | yes |
 | Categories it fits | `category` (main) and each plan's `categories` | yes (§5) |
-| Open source, with repository link | `software.open-source` and **new** `sourceRepo` | no |
+| Open source, with repository link | `software.open-source` and `sourceRepo` | yes (M11.4, M11.5) |
 | Sign-in security | `account.sign-in` | no |
 | Who owns it (news, finance, telecom, VPNs) | `owner`, quoted from its own about page (M11.2) | yes |
 

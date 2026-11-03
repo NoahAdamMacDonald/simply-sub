@@ -626,6 +626,35 @@ and they cover any period: "monthly" is `month`, "every 30 days" is `day` × 30 
 weeks" is `week` × 4, "every 2 weeks" is `week` × 2 (gyms), "quarterly" is `month` × 3. A 30-day plan isn't a
 monthly one: it's charged about 12.2 times a year, and some months get two charges (PROJECT-PLAN §3.1).
 
+**The day it renews on** (`renewalAnchor`, M11.5, the guide's §3.1): how the provider counts its months, quoted from its
+terms or billing help with the page and `lastVerified`: `same-date` (the date you signed up, a shorter month's last day
+when it has no such date: Netflix's "Your billing cycle starts on the date you sign up"), `every-30-days` (its months
+are then priced as `day` × 30, which validation holds it to), `first-of-month` or `end-of-month`; or
+`kind: not-stated` with the `pages` read that don't say. Every provider whose paid plans renew by the month or year
+gives one; the 11 from before M11.5 warn until M11.9 reads theirs (core's `awaitingRenewalAnchor`), and a prepaid
+one (Mullvad) has none to give. A new item's suggested renewal follows it (core's `defaultRenewal`: the next 1st, the
+next month's end billed on the 31st, else one period from today), and the item dialog asks "Billed on the 28th or the
+31st?" only when it doesn't settle that (`settledBillingDay`, PROJECT-PLAN P6).
+```yaml
+renewalAnchor:
+  kind: same-date
+  page: How to check your Netflix billing date
+  url: https://help.netflix.com/en/node/54896
+  quotes: [Your billing cycle starts on the date you sign up.]
+  lastVerified: 2026-11-02
+```
+
+**Currencies beyond its price lists** (`currencies`, M11.5): entries like `paymentMethods`', each with the `codes` a
+page names (ISO 4217), the ways to pay that take them (`methods`, when not every one does), its `page`, `url` and
+`quotes` naming each code by its code, name or sign (`€`, `CA$`): Mullvad's cash by post in nine currencies. Left out
+when it takes only its prices' currencies, which the prices show already.
+
+**Source code** (`sourceRepo`, M11.5): the repository, or the account holding its repositories, as the provider's own
+`page` links it, with that page's words saying its code is open and `lastVerified`. It goes with
+`software.open-source` (section 4.2): open-source apps or fully open need one, and one needs a value above closed
+source. Mullvad's app: `https://github.com/mullvad/mullvadvpn-app`, from its "Why Mullvad VPN?" page's "Code is open
+source".
+
 **Money-back features** (for example a savings-account plan paying 3.5% interest, or Xbox Rewards) will use a
 `returns` block on the plan. It's **not in the schema yet**, so the strict schema rejects it: add it, with its
 rules, in the task that first needs it.
@@ -1406,7 +1435,10 @@ M1.14, M11.1), so a buyer can see what signing up means beyond the price.
   `namesPaymentMethod`, in English and French); one entry for everywhere and others for some `regions`, the page on
   the provider's own sites, its policies' or its owner's. The card's Ways to pay, after Owner, lists those for the
   user's country (`paymentMethodsIn`), citing the page with its quotes as the tooltip. `citedPages` counts the page as
-  a pricing page.
+  a pricing page. Since M11.5 it also lists the currencies they can pay in beyond the price lists (`currenciesIn`:
+  "Cash in EUR, USD … or NZD, according to its Terms of service"), and two groups follow it: Billing day (the day it
+  renews on, citing its page, or a grey "Not stated: its pages don't say") and Source code (the repository, linked,
+  citing the page that links it), all in the muted grey (section 4.3).
 - **On the card,** after Terms and policies (M11.2): Outside ratings, each subject's labels (core's `outsideRatings`,
   in the subjects' order: "Protection: 6.0/6.0 from AV-TEST, August 2026 (tested …)"), the rater's name a link to its
   page in a new tab; then Owner ("Mullvad VPN AB, according to its About us"), the page's name a link with a text
@@ -1741,6 +1773,13 @@ Validation fails if:
 - a rating's grade is one its topic's `actionFor` lists and it has no `action`, the user's way to act
 - a topic and a feature on the same fact disagree: activity logging Great on a plan with the VPN whose
   `vpn.independent-audits` lacks `no-logs` (section 4.10)
+- a provider has no `owner` or `paymentMethods` (M11.2, M11.5), quotes them or its `currencies`, `renewalAnchor` or
+  `sourceRepo` from a page off its own sites, its policies' or its owner's, or gives a way to pay, a currency or a
+  renewal day its quotes don't name (section 4.10); a provider whose paid plans renew by the month or year has no
+  `renewalAnchor` (a warning for the 11 in core's `awaitingRenewalAnchor`, until M11.9); one that renews every 30 days
+  prices a month by the month; `currencies` name a code that isn't real or a way to pay its `paymentMethods` don't
+  list; a provider whose apps are open source (`software.open-source`) has no `sourceRepo`, or one has a `sourceRepo`
+  with no value of it, or `proprietary` (section 4.3)
 - `includes-subscription` lists the plan itself or its own provider, or makes a loop (Duo → Unlimited → Duo)
 - a provider has `billingCurrency`, and a plan or add-on is priced in a region that isn't in it, or has no price
   in the charged currency for that region
@@ -1760,7 +1799,7 @@ Validation warns (but passes) when `lastVerified` is older than 90 days: one war
 the oldest price. It warns when a plan's features name a service category it isn't in and its `notIn` doesn't list
 (M11.3, section 4.5), and when two of a provider's plans still sold cost differently for the same region, currency and
 period with the same features (M11.4, section 4.2 rule 8). It also warns about a provider or reseller without a logo in `data/logos/`, which the app shows as
-a letter, and about a reseller no provider lists.
+a letter, about a reseller no provider lists, and about an owner, renewal day or source code read over a year ago.
 
 A broken file gets its own errors, and the checks that would only repeat them are skipped: a provider that fails
 its schema isn't checked against the registry, references to it aren't flagged, and a broken feature definition
@@ -2128,6 +2167,10 @@ use canonical ids, and it maps provider wording through `aliases`. The output co
   accept Visa, Mastercard, Amex"), with the page's URL on the provider's own site and its words quoted, each network
   named in them (`acceptedNetworks`, M9.2); none when no page names them ("all major credit cards" names none),
   and the billing currency
+- **ways to pay, currencies, the renewal day and source code** (M11.5, section 4.3): every way to pay a page names
+  (`paymentMethods`: cash and crypto included), currencies it takes beyond its prices' (`currencies`), which day a
+  paid plan renews on from its terms or billing help (`renewalAnchor`, or not-stated with the billing pages read), and
+  its repository when a page says its code is open and shows the address (`sourceRepo`)
 - an **evidence quote** for every price and feature (shown in the PR, so review is fast)
 - whether the prices **include tax** for every buyer ("Including VAT", "taxes included"), as `taxIncluded` with
   the page's words as its quote; without such wording, Canadian and US prices are taken as before tax (section 4.8)
@@ -2156,7 +2199,11 @@ cents per provider. Check current pricing. One run fills hundreds of providers.
   anything else is a proposed feature, for the owner's approval through the feature-discovery skill. Card networks are
   only those their checked quotes name; `availableIn` only with its words; `taxIncluded` only when its words are on the
   price's page; policy ratings only on the registry's topics and grades, a reason of 240 characters at most, one to
-  three checked quotes.
+  three checked quotes. Since M11.5 ways to pay and currencies are only those their checked quotes name, one entry
+  for everywhere and one per region; a renewal day only when its quotes say it (`namesRenewalAnchor`); a repository
+  only when a page shows its address in its words, since the model sees no links (else it's added by hand). Workers
+  AI's plans part reads the ways to pay, currencies and repository, and its policies part the renewal day, from the
+  terms' passages around its words.
 - **The draft:** plan ids from their names (`<provider>.<slug>`), each price with today's `lastVerified` and its
   page as `sourceUrl`, `billingCurrency` when each region is priced in one currency, the cancel page find-urls found
   as `cancelUrl` (a draft without one says so), the pricing page as `sources.pricing`, the policy pages as the card's
@@ -3325,6 +3372,10 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    in certain countries only gets one, quoted in a comment.
    Every plan and bundle needs its sign-up `link`, and every provider a `cancelUrl`: its cancel page, or its help
    article on cancelling (for a prepaid service, on getting unused time back). The schema requires them (M1.9).
+   Every provider also says who owns it (`owner`) and how it can be paid (`paymentMethods`), and one whose paid plans
+   renew by the month or year which day it renews on (`renewalAnchor`, or not-stated), each quoted from its own pages;
+   add `currencies` when it takes more than its prices', and `sourceRepo` when its apps are open source (sections 4.3,
+   4.10, M11.2, M11.5).
 4. Run `npm run data:icons` to fetch its logo into `data/logos/<id>.png`, and look at it. It takes the largest
    square PNG (at least 32 px) from the site's own icon links, `/apple-touch-icon.png`, `/favicon.ico`, Google's
    favicon service and DuckDuckGo's. If none is good enough, add a PNG by hand, or leave it out and the app shows

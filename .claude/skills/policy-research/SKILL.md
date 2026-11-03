@@ -198,7 +198,8 @@ this file to them: change both together.
    ```
 
    It prints any quote that isn't on its page word for word, and the page's own wording when only quotes, dashes
-   or spaces differ.
+   or spaces differ. It checks the provider facts' quotes too (owner, ways to pay, currencies, renewal day, source
+   code, accepted cards) when their pages are in the file, and only those with a third argument, `facts` (M11.5).
 5. `npx prettier --write data/providers data/policies`, `npm run data:validate` and `npm test`.
 
 ## Gotchas

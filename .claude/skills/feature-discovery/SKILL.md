@@ -64,7 +64,8 @@ Anything provider-specific goes in a plan's `perks` instead.
   `awaitingRequiredFeatures` with the user's agreement until it is.
 - **Provider-wide** (`providerWide: true`, M11.4): a fact about the provider as a whole, which a provider states once in
   its own `features` (`platforms`, `account.sign-in`, `software.open-source`, `languages.*`, `support.channels`). Never
-  for a category feature, which stays on each plan, and never with a `parent`.
+  for a category feature, which stays on each plan, and never with a `parent`. Open-source apps or fully open
+  (`software.open-source`) need the provider's `sourceRepo`, the repository its own page links (M11.5).
 - **Reuse before creating** (BLUEPRINT §4.2 rule 10): an existing id as it is; then a new value or alias of one; then a
   cross-category feature (the general category: platforms, open source, languages, support, ad-free; sign-in in
   accounts); then a new feature; then a perk. Never a provider-named id.

@@ -253,8 +253,8 @@ async function focusedName(page) {
         const owner = groupNamed(mullvad, page, 'Owner');
         const ownerWords = await shown(owner);
         check(
-          `${label}: Mullvad's Owner, then Ways to pay, after Terms and policies, with no Outside ratings`,
-          mullvadHeadings.slice(-3).join() === 'Terms and policies,Owner,Ways to pay' &&
+          `${label}: Mullvad's Owner, then Ways to pay and Source code (M11.5), after Terms and policies, with no Outside ratings`,
+          mullvadHeadings.slice(-4).join() === 'Terms and policies,Owner,Ways to pay,Source code' &&
             ownerWords === 'Owner Mullvad VPN AB, according to its About us',
           `${mullvadHeadings.join(', ')} / ${ownerWords}`,
         );
@@ -295,10 +295,12 @@ async function focusedName(page) {
         // ── Mullvad: its ways to pay (M11.5, 2026-11-02) ────────────────────────────────────────────
         const pay = groupNamed(mullvad, page, 'Ways to pay');
         const payWords = await shown(pay);
+        // Then the currencies its cash takes (M11.5), which check-m11-facts.cjs checks further.
         check(
           `${label}: Mullvad's Ways to pay names cash and crypto, citing its terms`,
           payWords ===
-            'Ways to pay Cash, Cryptocurrency, Card, Bank transfer, PayPal, App store billing and Gift card, according to its Terms of service',
+            'Ways to pay Cash, Cryptocurrency, Card, Bank transfer, PayPal, App store billing and Gift card, according to its Terms of service ' +
+              'Cash in EUR, USD, GBP, SEK, NOK, CHF, CAD, AUD or NZD, according to its Terms of service',
           payWords,
         );
         const payLooks = await looks(pay);
