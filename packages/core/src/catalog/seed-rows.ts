@@ -51,6 +51,14 @@ export const seedTables = {
 } as const satisfies Record<string, TableShape>;
 export type SeedTable = keyof typeof seedTables;
 
+/**
+ * A table's name in D1 for the rows of a shape (M11.8): the catalog row's table is the catalog's own, and every
+ * other carries its shape's number (providers_s3), which the API reads through a view of its plain name.
+ */
+export function sqlTable(shape: number, table: SeedTable): string {
+  return table === 'catalog' ? 'catalog' : `${table}_s${shape}`;
+}
+
 /** Children first, though the ON DELETE CASCADE keys would clear them anyway. */
 export const clearOrder: readonly SeedTable[] = [
   'catalog',
@@ -151,8 +159,9 @@ export function providerRows(
 }
 
 /** Inserting a new provider's rows, parents first. */
-export function providerInserts(rows: ProviderRows): Change {
+export function providerInserts(shape: number, rows: ProviderRows): Change {
   return inserts(
+    shape,
     providerTables.flatMap((table) => rows[table].map((row) => [table, row] as const)),
   );
 }
@@ -161,7 +170,7 @@ export function providerInserts(rows: ProviderRows): Change {
  * What brings a provider's stored rows to `wanted`: deletes, inserts and updates by each table's key. A plan it no
  * longer has is deleted with its prices, features and bundle links, so their rows aren't deleted again.
  */
-export function providerDiff(wanted: ProviderRows, stored: StoredProvider): Change {
+export function providerDiff(shape: number, wanted: ProviderRows, stored: StoredProvider): Change {
   const keyOf = (table: SeedTable, row: SeedRow) =>
     seedTables[table].key.map((column) => String(row[column])).join('\u0000');
   const plansNow = new Set(wanted.plans.map((plan) => plan['id']));
@@ -171,7 +180,7 @@ export function providerDiff(wanted: ProviderRows, stored: StoredProvider): Chan
     stored[table].filter((row) => gone.has(row['plan_id'])).length;
   const changes: Change[] = [
     {
-      statements: deleteIds('plans', goneIds),
+      statements: deleteIds(shape, 'plans', goneIds),
       writes:
         goneIds.length + goneRows('prices') + goneRows('plan_features') + goneRows('bundle_plans'),
     },
@@ -187,12 +196,12 @@ export function providerDiff(wanted: ProviderRows, stored: StoredProvider): Chan
     );
     const after = new Map(wanted[table].map((row) => [keyOf(table, row), row]));
     const deletes = [...before].filter(([key]) => !after.has(key)).map(([, row]) => row);
-    const statements = deletes.map((row) => deleteStatement(table, row));
+    const statements = deletes.map((row) => deleteStatement(shape, table, row));
     let writes = deletes.length;
     for (const [key, row] of after) {
       const old = before.get(key);
       if (!old) {
-        statements.push(insertStatement(table, row));
+        statements.push(insertStatement(shape, table, row));
         writes += insertWrites(table);
         continue;
       }
@@ -202,7 +211,7 @@ export function providerDiff(wanted: ProviderRows, stored: StoredProvider): Chan
       );
       if (changed.length === 0) continue;
       const columns = [...changed, ...Object.keys(row).filter((column) => !(column in old))];
-      statements.push(updateStatement(table, row, columns));
+      statements.push(updateStatement(shape, table, row, columns));
       writes += updateWrites(table, columns);
     }
     changes.push({ statements, writes });
@@ -230,12 +239,13 @@ export function combine(changes: readonly Change[]): Change {
 }
 
 export function inserts(
+  shape: number,
   rows: readonly (readonly [SeedTable, SeedRow])[],
   upsert?: 'upsert',
   kind: (row: SeedRow) => 'insert' | 'update' = () => 'insert',
 ): Change {
   return {
-    statements: rows.map(([table, row]) => insertStatement(table, row, upsert)),
+    statements: rows.map(([table, row]) => insertStatement(shape, table, row, upsert)),
     writes: rows.reduce(
       (sum, [table, row]) =>
         sum +
@@ -278,7 +288,12 @@ export function updateWrites(table: SeedTable, columns: readonly string[]): numb
   return 1 + moved.length;
 }
 
-export function insertStatement(table: SeedTable, row: SeedRow, upsert?: 'upsert'): string {
+export function insertStatement(
+  shape: number,
+  table: SeedTable,
+  row: SeedRow,
+  upsert?: 'upsert',
+): string {
   const columns = Object.keys(row);
   const key: readonly string[] = seedTables[table].key;
   const conflict = upsert
@@ -287,7 +302,7 @@ export function insertStatement(table: SeedTable, row: SeedRow, upsert?: 'upsert
         .map((column) => `${column} = excluded.${column}`)
         .join(', ')}`
     : '';
-  return `INSERT INTO ${table} (${columns.join(', ')}) VALUES (${columns.map((column) => sqlValue(row[column] ?? null)).join(', ')})${conflict};`;
+  return `INSERT INTO ${sqlTable(shape, table)} (${columns.join(', ')}) VALUES (${columns.map((column) => sqlValue(row[column] ?? null)).join(', ')})${conflict};`;
 }
 
 export function whereKey(table: SeedTable, row: SeedRow): string {
@@ -296,25 +311,27 @@ export function whereKey(table: SeedTable, row: SeedRow): string {
     .join(' AND ');
 }
 
-export function deleteStatement(table: SeedTable, row: SeedRow): string {
-  return `DELETE FROM ${table} WHERE ${whereKey(table, row)};`;
+export function deleteStatement(shape: number, table: SeedTable, row: SeedRow): string {
+  return `DELETE FROM ${sqlTable(shape, table)} WHERE ${whereKey(table, row)};`;
 }
 
 export function deleteIds(
+  shape: number,
   table: 'providers' | 'plans' | 'features' | 'bundles',
   ids: readonly string[],
 ): string[] {
   return ids.length > 0
-    ? [`DELETE FROM ${table} WHERE id IN (${ids.map(sqlValue).join(', ')});`]
+    ? [`DELETE FROM ${sqlTable(shape, table)} WHERE id IN (${ids.map(sqlValue).join(', ')});`]
     : [];
 }
 
 export function updateStatement(
+  shape: number,
   table: SeedTable,
   row: SeedRow,
   columns: readonly string[],
 ): string {
-  return `UPDATE ${table} SET ${columns
+  return `UPDATE ${sqlTable(shape, table)} SET ${columns
     .map((column) => `${column} = ${sqlValue(row[column] ?? null)}`)
     .join(', ')} WHERE ${whereKey(table, row)};`;
 }
@@ -394,8 +411,8 @@ export function featureRow(feature: Feature): SeedRow {
 }
 
 /** Inserting a bundle and its links to its plans. */
-export function bundleInserts(bundle: Bundle): Change {
-  return inserts([
+export function bundleInserts(shape: number, bundle: Bundle): Change {
+  return inserts(shape, [
     ['bundles', { id: bundle.id, json: JSON.stringify(bundle) }],
     ...bundle.includes.map((planId): [SeedTable, SeedRow] => [
       'bundle_plans',
@@ -458,8 +475,8 @@ export function rankMoves(feature: Feature, storedJson: string | undefined): Ran
 }
 
 /** The UPDATE of a moved value's rows: only those whose rank is wrong are written. */
-export function rankStatement(move: RankMove): string {
-  return `UPDATE ${move.table} SET rank_value = ${move.position} WHERE feature_id = ${sqlValue(move.featureId)} AND value = ${sqlValue(move.value)} AND rank_value IS NOT ${move.position};`;
+export function rankStatement(shape: number, move: RankMove): string {
+  return `UPDATE ${sqlTable(shape, move.table)} SET rank_value = ${move.position} WHERE feature_id = ${sqlValue(move.featureId)} AND value = ${sqlValue(move.value)} AND rank_value IS NOT ${move.position};`;
 }
 
 /** What a rank UPDATE writes for each row it changes. */

@@ -10,9 +10,11 @@ import {
   readSeedState,
   readStoredRows,
   seedFormat,
+  seedShape,
   seedStateOf,
   storedRowQueries,
   storedRowsOf,
+  viewStatements,
   type CatalogSnapshot,
   type CatalogSourceFile,
   type SeedOptions,
@@ -97,7 +99,7 @@ function sqlText(value: string): string {
 
 /** The plan_features rows of one plan, as `feature value rank_value`. */
 function featureRows(planId: string, lines = linesOf()): string[] {
-  const prefix = `INSERT INTO plan_features (plan_id, feature_id, value, rank_value) VALUES ('${planId}', `;
+  const prefix = `INSERT INTO plan_features_s3 (plan_id, feature_id, value, rank_value) VALUES ('${planId}', `;
   return lines
     .filter((line) => line.startsWith(prefix))
     .map((line) => line.slice(prefix.length, -2).replaceAll("'", '').replaceAll(', ', ' '));
@@ -106,7 +108,9 @@ function featureRows(planId: string, lines = linesOf()): string[] {
 /** Each statement as its first words and the ids it names, for reading which rows it writes at a glance. */
 function summary(lines: string[]): string[] {
   return lines.map((line) => {
-    const [, action, table] = /^(INSERT INTO|DELETE FROM|UPDATE) (\w+)/.exec(line) ?? [];
+    const [, action, named] = /^(INSERT INTO|DELETE FROM|UPDATE) (\w+)/.exec(line) ?? [];
+    // The rows' shape (M11.8) isn't what a summary is for.
+    const table = named?.replace(/_s\d+$/, '');
     const ids = /VALUES \('([^']*)'(?:, '([^']*)')?/.exec(line);
     const where = /WHERE (.*);$/.exec(line)?.[1];
     if (action === 'INSERT INTO') {
@@ -138,15 +142,15 @@ describe('buildSeedSql, without what D1 holds', () => {
   it('empties every table first', () => {
     expect(linesOf().slice(0, 10)).toEqual([
       'DELETE FROM catalog;',
-      'DELETE FROM bundle_plans;',
-      'DELETE FROM bundles;',
-      'DELETE FROM plan_features;',
-      'DELETE FROM features;',
-      'DELETE FROM prices;',
-      'DELETE FROM plans;',
-      'DELETE FROM provider_features;',
-      'DELETE FROM provider_categories;',
-      'DELETE FROM providers;',
+      'DELETE FROM bundle_plans_s3;',
+      'DELETE FROM bundles_s3;',
+      'DELETE FROM plan_features_s3;',
+      'DELETE FROM features_s3;',
+      'DELETE FROM prices_s3;',
+      'DELETE FROM plans_s3;',
+      'DELETE FROM provider_features_s3;',
+      'DELETE FROM provider_categories_s3;',
+      'DELETE FROM providers_s3;',
     ]);
   });
 
@@ -208,7 +212,7 @@ describe('buildSeedSql, without what D1 holds', () => {
     expect(categories('proton')).toEqual(['privacy-suite', 'vpn']);
     expect(categories('netflix')).toEqual(['streaming']);
     expect(lines).toContain(
-      "INSERT INTO provider_categories (category, provider_id) VALUES ('vpn', 'proton');",
+      "INSERT INTO provider_categories_s3 (category, provider_id) VALUES ('vpn', 'proton');",
     );
     const proton = summary(lines).indexOf('insert providers proton');
     expect(summary(lines).slice(proton + 1, proton + 3)).toEqual([
@@ -239,7 +243,7 @@ describe('buildSeedSql, without what D1 holds', () => {
         ),
       ),
     ).toContain(
-      "INSERT INTO provider_features (feature_id, value, provider_id, rank_value) VALUES ('software.open-source', 'open-clients', 'netflix', 1);",
+      "INSERT INTO provider_features_s3 (feature_id, value, provider_id, rank_value) VALUES ('software.open-source', 'open-clients', 'netflix', 1);",
     );
   });
 
@@ -248,24 +252,24 @@ describe('buildSeedSql, without what D1 holds', () => {
     const crave = snapshot.data.providers[0];
     const lines = linesOf(snapshot);
     expect(lines).toContain(
-      `INSERT INTO providers (id, name, category, spend_category, hash, json) VALUES ('crave', 'Crave', 'streaming', 'streaming', '${hashOf(JSON.stringify(crave))}', ${sqlText(JSON.stringify(crave))});`,
+      `INSERT INTO providers_s3 (id, name, category, spend_category, hash, json) VALUES ('crave', 'Crave', 'streaming', 'streaming', '${seedFormat}.${hashOf(JSON.stringify(crave))}', ${sqlText(JSON.stringify(crave))});`,
     );
     expect(lines).toContain(
-      `INSERT INTO plans (id, provider_id, name, json) VALUES ('crave.premium', 'crave', 'Premium', ${sqlText(JSON.stringify(crave.plans[1]))});`,
+      `INSERT INTO plans_s3 (id, provider_id, name, json) VALUES ('crave.premium', 'crave', 'Premium', ${sqlText(JSON.stringify(crave.plans[1]))});`,
     );
   });
 
   it('upserts features, so an existing one is updated rather than deleted', () => {
     const [feature] = snapshotOf().data.features;
     expect(linesOf()).toContain(
-      `INSERT INTO features (id, category, json) VALUES ('video.quality', 'streaming', ${sqlText(JSON.stringify(feature))}) ON CONFLICT (id) DO UPDATE SET category = excluded.category, json = excluded.json;`,
+      `INSERT INTO features_s3 (id, category, json) VALUES ('video.quality', 'streaming', ${sqlText(JSON.stringify(feature))}) ON CONFLICT (id) DO UPDATE SET category = excluded.category, json = excluded.json;`,
     );
   });
 
   it('inserts each plan price with its monthly equivalent, but not add-on or bundle prices', () => {
-    const prices = linesOf().filter((line) => line.startsWith('INSERT INTO prices '));
+    const prices = linesOf().filter((line) => line.startsWith('INSERT INTO prices_s3 '));
     expect(prices).toContain(
-      `INSERT INTO prices (plan_id, region, currency, amount, interval, interval_count, monthly_equiv) VALUES ('crave.standard', 'CA', 'CAD', 119.99, 'year', 1, ${119.99 / 12});`,
+      `INSERT INTO prices_s3 (plan_id, region, currency, amount, interval, interval_count, monthly_equiv) VALUES ('crave.standard', 'CA', 'CAD', 119.99, 'year', 1, ${119.99 / 12});`,
     );
     expect(prices).toHaveLength(18);
     expect(prices.some((line) => line.includes("'crave.starz'"))).toBe(false);
@@ -310,7 +314,7 @@ describe('buildSeedSql, without what D1 holds', () => {
     const files = catalogWith(netflix, ['plans', 0, 'name'], "Members'\nchoice");
     const line = linesOf(snapshotOf(files)).find((text) =>
       text.startsWith(
-        "INSERT INTO plans (id, provider_id, name, json) VALUES ('netflix.standard-ads'",
+        "INSERT INTO plans_s3 (id, provider_id, name, json) VALUES ('netflix.standard-ads'",
       ),
     );
     expect(line).toContain(`'Members''' || char(10) || 'choice'`);
@@ -364,10 +368,10 @@ describe('buildSeedSql, given what D1 holds', () => {
     ]);
     const [mullvadAfter] = after.data.providers.filter((provider) => provider.id === 'mullvad');
     expect(lines[0]).toBe(
-      `UPDATE providers SET hash = '${hashOf(JSON.stringify(mullvadAfter))}', json = ${sqlText(JSON.stringify(mullvadAfter))} WHERE id = 'mullvad';`,
+      `UPDATE providers_s3 SET hash = '${seedFormat}.${hashOf(JSON.stringify(mullvadAfter))}', json = ${sqlText(JSON.stringify(mullvadAfter))} WHERE id = 'mullvad';`,
     );
     expect(lines[2]).toBe(
-      "UPDATE prices SET amount = 5.5, monthly_equiv = 5.5 WHERE plan_id = 'mullvad.vpn' AND region = 'GLOBAL' AND currency = 'EUR' AND interval = 'month' AND interval_count = 1;",
+      "UPDATE prices_s3 SET amount = 5.5, monthly_equiv = 5.5 WHERE plan_id = 'mullvad.vpn' AND region = 'GLOBAL' AND currency = 'EUR' AND interval = 'month' AND interval_count = 1;",
     );
     // A row each, the price's index entry, and the catalog row.
     expect(planFrom(before, after).writes).toBe(5);
@@ -437,8 +441,8 @@ describe('buildSeedSql, given what D1 holds', () => {
     ];
     const after = snapshotOf(edited(catalog(), 'data/features.yaml', [0, 'values'], values));
     expect(changesFrom(snapshotOf(), after)).toEqual([
-      expect.stringMatching(/^INSERT INTO features .* VALUES \('video\.quality', /),
-      "UPDATE plan_features SET rank_value = 4 WHERE feature_id = 'video.quality' AND value = '4k' AND rank_value IS NOT 4;",
+      expect.stringMatching(/^INSERT INTO features_s3 .* VALUES \('video\.quality', /),
+      "UPDATE plan_features_s3 SET rank_value = 4 WHERE feature_id = 'video.quality' AND value = '4k' AND rank_value IS NOT 4;",
     ]);
   });
 
@@ -480,9 +484,9 @@ describe('buildSeedSql, given what D1 holds', () => {
       providers: new Map([...before.providers, ['old-provider', '0']]),
     };
     expect(linesOf(snapshotOf(), current, new Map([['old-provider', noRows()]]))).toEqual([
-      "DELETE FROM bundles WHERE id IN ('bundle.old');",
-      "DELETE FROM providers WHERE id IN ('old-provider');",
-      "DELETE FROM features WHERE id IN ('old.feature');",
+      "DELETE FROM bundles_s3 WHERE id IN ('bundle.old');",
+      "DELETE FROM providers_s3 WHERE id IN ('old-provider');",
+      "DELETE FROM features_s3 WHERE id IN ('old.feature');",
     ]);
   });
 
@@ -570,10 +574,10 @@ describe('the rows of the providers that changed (M11.8)', () => {
   it('asks for each table’s rows of those providers, and sorts the answers by provider', () => {
     const queries = storedRowQueries(['mullvad', "o'brien"]);
     expect(queries[0]).toBe(
-      "SELECT id, name, category, spend_category, hash FROM providers WHERE id IN ('mullvad', 'o''brien')",
+      "SELECT id, name, category, spend_category, hash FROM providers_s3 WHERE id IN ('mullvad', 'o''brien')",
     );
     expect(queries[4]).toBe(
-      "SELECT plan_id, region, currency, amount, interval, interval_count, monthly_equiv FROM prices WHERE plan_id IN (SELECT id FROM plans WHERE provider_id IN ('mullvad', 'o''brien'))",
+      "SELECT plan_id, region, currency, amount, interval, interval_count, monthly_equiv FROM prices_s3 WHERE plan_id IN (SELECT id FROM plans_s3 WHERE provider_id IN ('mullvad', 'o''brien'))",
     );
     const stored = readStoredRows(
       ['mullvad'],
@@ -717,5 +721,82 @@ describe('the daily budget (M11.8)', () => {
 
   it('holds nothing back without a budget', () => {
     expect(planFrom(snapshotOf(), allPrices()).waiting).toEqual([]);
+  });
+});
+
+describe('shapes and formats (M11.8)', () => {
+  /** What a new shape's tables hold beside the live ones: nothing yet, under the live catalog row. */
+  const newShape = (): SeedState => ({
+    catalog: { version: 'abc1234', seedFormat, waiting: 0, written: 0 },
+    providers: new Map(),
+    features: new Map(),
+    bundles: new Map(),
+    rows: {
+      ...counts,
+      providers: 0,
+      provider_categories: 0,
+      plans: 0,
+      prices: 0,
+      features: 0,
+      catalog: 1,
+    },
+  });
+
+  it('fills a new shape’s tables beside the live ones, then points the views at them', () => {
+    const snapshot = snapshotOf(catalog(), 'def5678');
+    const plan = planSeed(snapshot, {
+      providerHashes: providerHashes(snapshot),
+      current: newShape(),
+      format: { seedFormat: 4, shape: 4 },
+    });
+    const lines = plan.sql.trimEnd().split('\n');
+    expect(lines.some((line) => line.includes('_s3'))).toBe(false);
+    expect(lines).toContain(
+      `INSERT INTO provider_categories_s4 (category, provider_id) VALUES ('vpn', 'proton');`,
+    );
+    expect(lines.slice(-19, -1)).toEqual(viewStatements(4));
+    expect(lines.at(-1)).toContain("VALUES (1, 'def5678', '2026-10-23T12:00:00Z', 4, ");
+  });
+
+  it('keeps the views on the live shape while the new one fills', () => {
+    const snapshot = snapshotOf(catalog(), 'def5678');
+    const plan = planSeed(snapshot, {
+      providerHashes: providerHashes(snapshot),
+      current: newShape(),
+      format: { seedFormat: 4, shape: 4 },
+      budget: { today: '2026-11-03', daily: 60 },
+    });
+    expect(plan.waiting.length).toBeGreaterThan(0);
+    expect(plan.sql).not.toContain('VIEW');
+    expect(plan.sql.trimEnd().split('\n').at(-1)).toMatch(/^UPDATE catalog SET waiting = \d+, /);
+  });
+
+  it('compares every provider again for a format that keeps its shape: only their hashes change', () => {
+    const snapshot = snapshotOf();
+    const format = { seedFormat: seedFormat + 1, shape: seedShape };
+    const current = stateOf(snapshot);
+    const hashes = providerHashes(snapshot);
+    expect(providersToRead(snapshot, { providerHashes: hashes, current, format })).toEqual(
+      snapshot.data.providers.map((provider) => provider.id),
+    );
+    const plan = planSeed(snapshot, {
+      providerHashes: hashes,
+      current,
+      rows: storedRowsOf(snapshot, hashes),
+      format,
+    });
+    expect(summary(plan.sql.trimEnd().split('\n'))).toEqual([
+      ...snapshot.data.providers.map((provider) => `update providers where id = '${provider.id}'`),
+      'insert catalog 1',
+    ]);
+    expect(plan.sql).toContain(`'${seedFormat + 1}.${hashes.get('crave')}'`);
+  });
+
+  it('points each view of a plain name at its shape’s table', () => {
+    expect(viewStatements(4).slice(0, 2)).toEqual([
+      'DROP VIEW IF EXISTS bundle_plans;',
+      'CREATE VIEW bundle_plans AS SELECT * FROM bundle_plans_s4;',
+    ]);
+    expect(viewStatements(4)).toHaveLength(18);
   });
 });

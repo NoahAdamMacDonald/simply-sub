@@ -22,6 +22,7 @@ import {
   rankStatement,
   rowCount,
   seedTables,
+  sqlTable,
   sqlValue,
   storedLinks,
   updateStatement,
@@ -36,6 +37,7 @@ import type { CatalogMeta, CatalogSnapshot, SnapshotProvider } from './snapshot'
 
 export {
   seedTables,
+  sqlTable,
   unlimitedRankValue,
   type ProviderRows,
   type SeedRow,
@@ -67,6 +69,46 @@ export const seedDailyWrites = 50_000;
 /** The catalog row's version while D1 has never held a whole catalog: an empty D1 filled over several days. */
 export const partialCatalogVersion = '0000000';
 
+/** A seed format, and the shape of the tables its rows are in. */
+export interface SeedFormat {
+  seedFormat: number;
+  shape: number;
+}
+
+/**
+ * Each seed format's table shape (M11.8). A format that only computes a derived column differently keeps its shape:
+ * every provider's rows are compared again, through the budget. A new shape is a migration that creates its tables
+ * beside the live ones (providers_s4…), which the seed fills through the budget and then points the API's views at.
+ * Migration 0006 named the first shape, 3.
+ */
+export const seedShapes: Readonly<Record<number, number>> = { 3: 3 };
+
+/** The shape of seedFormat's tables. */
+export const seedShape = 3;
+
+const thisFormat: SeedFormat = { seedFormat, shape: seedShape };
+
+/** A provider's hash as D1 keeps it: its SHA-256 under the seed format, so a new format compares every provider. */
+export function storedHash(format: number, sha256: string): string {
+  return `${format}.${sha256}`;
+}
+
+/** Pointing the API's views at a shape's tables: D1 counts each view dropped and created as a row written. */
+export function viewChange(shape: number): Change {
+  const statements = viewStatements(shape);
+  return { statements, writes: statements.length };
+}
+
+/** The statements that point the API's views at a shape's tables (M11.8). */
+export function viewStatements(shape: number): string[] {
+  return clearOrder
+    .filter((table) => table !== 'catalog')
+    .flatMap((table) => [
+      `DROP VIEW IF EXISTS ${table};`,
+      `CREATE VIEW ${table} AS SELECT * FROM ${sqlTable(shape, table)};`,
+    ]);
+}
+
 /** What D1 holds, as far as the seed needs to know. readSeedState reads it from seedStateQueries' results. */
 export interface SeedState {
   /** The catalog row, or undefined when there is none: a new database, or one a migration has just rebuilt. */
@@ -89,14 +131,20 @@ export interface SeedState {
   rows: Readonly<Record<SeedTable, number>>;
 }
 
-/** The queries that read D1's SeedState, in the order readSeedState expects their results. */
-export const seedStateQueries = [
-  'SELECT version, seed_format, waiting, written_on, written FROM catalog',
-  'SELECT id, hash FROM providers',
-  'SELECT id, json FROM features',
-  'SELECT id, json FROM bundles',
-  `SELECT ${clearOrder.map((table) => `(SELECT COUNT(*) FROM ${table}) AS ${table}`).join(', ')}`,
-];
+/**
+ * The queries that read D1's SeedState from a shape's tables (the code's, by default), in the order readSeedState
+ * expects their results. The catalog row is the catalog's own.
+ */
+export function seedStateQueries(shape = seedShape): string[] {
+  const table = (name: SeedTable) => sqlTable(shape, name);
+  return [
+    'SELECT version, seed_format, waiting, written_on, written FROM catalog',
+    `SELECT id, hash FROM ${table('providers')}`,
+    `SELECT id, json FROM ${table('features')}`,
+    `SELECT id, json FROM ${table('bundles')}`,
+    `SELECT ${clearOrder.map((name) => `(SELECT COUNT(*) FROM ${table(name)}) AS ${name}`).join(', ')}`,
+  ];
+}
 
 const countSchema = z.int().nonnegative();
 const seedStateResultsSchema = z.tuple([
@@ -143,28 +191,36 @@ export function readSeedState(results: readonly unknown[]): SeedState {
  */
 export function providersToRead(
   snapshot: CatalogSnapshot,
-  { providerHashes, current }: Pick<SeedOptions, 'providerHashes' | 'current'>,
+  {
+    providerHashes,
+    current,
+    format = thisFormat,
+  }: Pick<SeedOptions, 'providerHashes' | 'current' | 'format'>,
 ): string[] {
-  const state = comparable(current);
-  if (!state) return [];
-  const ids = new Set(snapshot.data.providers.map((provider) => provider.id));
-  return [...state.providers].flatMap(([id, hash]) =>
-    !ids.has(id) || providerHashes.get(id) !== hash ? [id] : [],
+  const mode = seedMode(current, format);
+  if (mode.kind === 'full') return [];
+  const hashes = new Map(
+    [...providerHashes].map(([id, sha]) => [id, storedHash(format.seedFormat, sha)]),
   );
+  return [...mode.state.providers].flatMap(([id, hash]) => (hashes.get(id) !== hash ? [id] : []));
 }
 
-/** The queries that read the rows of the providers `ids`, in the order readStoredRows expects their results. */
-export function storedRowQueries(ids: readonly string[]): string[] {
+/**
+ * The queries that read the rows of the providers `ids` from a shape's tables (the code's, by default), in the order
+ * readStoredRows expects their results.
+ */
+export function storedRowQueries(ids: readonly string[], shape = seedShape): string[] {
   const list = ids.map(sqlValue).join(', ');
-  const plans = `SELECT id FROM plans WHERE provider_id IN (${list})`;
+  const table = (name: SeedTable) => sqlTable(shape, name);
+  const plans = `SELECT id FROM ${table('plans')} WHERE provider_id IN (${list})`;
   return [
-    `SELECT id, name, category, spend_category, hash FROM providers WHERE id IN (${list})`,
-    `SELECT category, provider_id FROM provider_categories WHERE provider_id IN (${list})`,
-    `SELECT feature_id, value, provider_id, rank_value FROM provider_features WHERE provider_id IN (${list})`,
-    `SELECT id, provider_id, name, json FROM plans WHERE provider_id IN (${list})`,
-    `SELECT plan_id, region, currency, amount, interval, interval_count, monthly_equiv FROM prices WHERE plan_id IN (${plans})`,
-    `SELECT plan_id, feature_id, value, rank_value FROM plan_features WHERE plan_id IN (${plans})`,
-    `SELECT bundle_id, plan_id FROM bundle_plans WHERE plan_id IN (${plans})`,
+    `SELECT id, name, category, spend_category, hash FROM ${table('providers')} WHERE id IN (${list})`,
+    `SELECT category, provider_id FROM ${table('provider_categories')} WHERE provider_id IN (${list})`,
+    `SELECT feature_id, value, provider_id, rank_value FROM ${table('provider_features')} WHERE provider_id IN (${list})`,
+    `SELECT id, provider_id, name, json FROM ${table('plans')} WHERE provider_id IN (${list})`,
+    `SELECT plan_id, region, currency, amount, interval, interval_count, monthly_equiv FROM ${table('prices')} WHERE plan_id IN (${plans})`,
+    `SELECT plan_id, feature_id, value, rank_value FROM ${table('plan_features')} WHERE plan_id IN (${plans})`,
+    `SELECT bundle_id, plan_id FROM ${table('bundle_plans')} WHERE plan_id IN (${plans})`,
   ];
 }
 
@@ -215,18 +271,24 @@ export function readStoredRows(
 export function seedStateOf(
   snapshot: CatalogSnapshot,
   providerHashes: ReadonlyMap<string, string>,
+  format = thisFormat,
 ): SeedState {
-  const stored = storedRowsOf(snapshot, providerHashes);
+  const stored = storedRowsOf(snapshot, providerHashes, format);
   const byJson = (items: readonly { id: string }[]) =>
     new Map(items.map((item) => [item.id, JSON.stringify(item)]));
   const count = (table: keyof StoredProvider) =>
     [...stored.values()].reduce((sum, rows) => sum + rows[table].length, 0);
   return {
-    catalog: { version: snapshot.meta.catalogVersion, seedFormat, waiting: 0, written: 0 },
+    catalog: {
+      version: snapshot.meta.catalogVersion,
+      seedFormat: format.seedFormat,
+      waiting: 0,
+      written: 0,
+    },
     providers: new Map(
       snapshot.data.providers.map((provider) => [
         provider.id,
-        providerHashes.get(provider.id) ?? '',
+        storedHash(format.seedFormat, providerHashes.get(provider.id) ?? ''),
       ]),
     ),
     features: byJson(snapshot.data.features),
@@ -250,6 +312,7 @@ export function seedStateOf(
 export function storedRowsOf(
   snapshot: CatalogSnapshot,
   providerHashes: ReadonlyMap<string, string>,
+  format = thisFormat,
 ): Map<string, StoredProvider> {
   const features = new Map(snapshot.data.features.map((feature) => [feature.id, feature]));
   const featureOf = (featureId: string) => {
@@ -259,7 +322,11 @@ export function storedRowsOf(
   };
   return new Map(
     snapshot.data.providers.map((provider) => {
-      const rows = providerRows(provider, providerHashes.get(provider.id) ?? '', featureOf);
+      const rows = providerRows(
+        provider,
+        storedHash(format.seedFormat, providerHashes.get(provider.id) ?? ''),
+        featureOf,
+      );
       const plans = new Set(provider.plans.map((plan) => plan.id));
       return [
         provider.id,
@@ -292,6 +359,8 @@ export interface SeedOptions {
    * Without it, nothing is held back and the catalog row's daily count isn't kept.
    */
   budget?: { today: IsoDate; daily: number };
+  /** The format and shape to seed: the code's (seedFormat, seedShape), but for tests of a new one. */
+  format?: SeedFormat;
 }
 
 /** The statements that bring D1 to a snapshot, and what they cost. */
@@ -331,6 +400,8 @@ export function buildSeedSql(snapshot: CatalogSnapshot, options: SeedOptions): s
 export function planSeed(snapshot: CatalogSnapshot, options: SeedOptions): SeedPlan {
   const { data, meta } = snapshot;
   const { providerHashes, current, rows, budget } = options;
+  const format = options.format ?? thisFormat;
+  const { shape } = format;
   const features = new Map(data.features.map((feature) => [feature.id, feature]));
   const featureOf = (featureId: string, listedBy: string) => {
     const feature = features.get(featureId);
@@ -346,14 +417,14 @@ export function planSeed(snapshot: CatalogSnapshot, options: SeedOptions): SeedP
     if (hash === undefined) {
       throw new Error(`No hash for provider ${provider.id}`);
     }
-    return providerRows(provider, hash, featureOf);
+    return providerRows(provider, storedHash(format.seedFormat, hash), featureOf);
   };
-  const bundleChange = bundleInserts;
+  const bundleChange = (bundle: Bundle) => bundleInserts(shape, bundle);
   const catalogRowOf = (written: number) =>
-    catalogRow(meta, seedFormat, budget && { today: budget.today, written });
+    catalogRow(meta, format.seedFormat, budget && { today: budget.today, written });
 
-  const state = comparable(current);
-  if (!state) {
+  const mode = seedMode(current, format);
+  if (mode.kind === 'full') {
     // Everything again: what D1 holds is deleted, then the whole catalog inserted (features first: plan_features
     // rows refer to them).
     const deleted = current
@@ -361,21 +432,25 @@ export function planSeed(snapshot: CatalogSnapshot, options: SeedOptions): SeedP
       : undefined;
     const change = combine([
       {
-        statements: clearOrder.map((table) => `DELETE FROM ${table};`),
+        statements: clearOrder.map((table) => `DELETE FROM ${sqlTable(shape, table)};`),
         writes: deleted ?? 0,
       },
       inserts(
+        shape,
         data.features.map((feature): [SeedTable, SeedRow] => ['features', featureRow(feature)]),
         'upsert',
       ),
-      ...data.providers.map((provider) => providerInserts(rowsOf(provider))),
+      ...data.providers.map((provider) => providerInserts(shape, rowsOf(provider))),
       ...data.bundles.map(bundleChange),
     ]);
     const used = usedToday(current, budget);
     const writes = change.writes + 1;
-    change.statements.push(insertStatement('catalog', catalogRowOf(used + writes), 'upsert'));
+    change.statements.push(
+      insertStatement(shape, 'catalog', catalogRowOf(used + writes), 'upsert'),
+    );
     return finished(change.statements, writes, []);
   }
+  const { state } = mode;
 
   const storedOf = (id: string) => {
     const found = rows?.get(id);
@@ -397,7 +472,7 @@ export function planSeed(snapshot: CatalogSnapshot, options: SeedOptions): SeedP
       providers: data.providers.map((provider) => {
         const hash = providerHashes.get(provider.id);
         if (hash === undefined) throw new Error(`No hash for provider ${provider.id}`);
-        return { id: provider.id, hash };
+        return { id: provider.id, hash: storedHash(format.seedFormat, hash) };
       }),
       features: data.features,
       bundles: data.bundles,
@@ -416,23 +491,24 @@ export function planSeed(snapshot: CatalogSnapshot, options: SeedOptions): SeedP
   const unchanged = data.providers.filter((provider) => !changedProviders.includes(provider));
   const rankChange = combine(
     changedFeatures.map((feature) =>
-      rankUpdates(feature, state.features.get(feature.id), unchanged, stored),
+      rankUpdates(shape, feature, state.features.get(feature.id), unchanged, stored),
     ),
   );
   const fixed = combine([
     inserts(
+      shape,
       changedFeatures.map((feature): [SeedTable, SeedRow] => ['features', featureRow(feature)]),
       'upsert',
       (feature) => (state.features.has(String(feature['id'])) ? 'update' : 'insert'),
     ),
     rankChange,
     {
-      statements: deleteIds('providers', removedProviders),
+      statements: deleteIds(shape, 'providers', removedProviders),
       writes: removedProviders.reduce((sum, id) => sum + rowCount(storedOf(id)), 0),
     },
   ]);
   const bundleDeletes = (ids: readonly string[]): Change => ({
-    statements: deleteIds('bundles', ids),
+    statements: deleteIds(shape, 'bundles', ids),
     writes: ids.reduce((sum, id) => sum + 1 + storedLinks(state.bundles.get(id)), 0),
   });
   const bundleCosts =
@@ -441,14 +517,16 @@ export function planSeed(snapshot: CatalogSnapshot, options: SeedOptions): SeedP
       ...changedBundles.filter((bundle) => state.bundles.has(bundle.id)).map(({ id }) => id),
     ]).writes + changedBundles.reduce((sum, bundle) => sum + bundleChange(bundle).writes, 0);
   const featureDeletes: Change = {
-    statements: deleteIds('features', removedFeatures),
+    statements: deleteIds(shape, 'features', removedFeatures),
     writes: removedFeatures.length,
   };
 
   // Whole providers in the catalog's order, until the next one wouldn't fit in what's left of the day.
   const used = usedToday(current, budget);
   const room = budget ? budget.daily - used : Infinity;
-  let left = room - fixed.writes - bundleCosts - featureDeletes.writes - 1;
+  // What must fit with the providers: the registry's changes, the bundles, the catalog row, and a switch of views.
+  const views = mode.switchViews ? viewChange(shape).writes : 0;
+  let left = room - fixed.writes - bundleCosts - featureDeletes.writes - views - 1;
   const overBudget = left < 0;
   const applied: Change[] = [];
   const waitingProviders = new Set<string>();
@@ -458,8 +536,8 @@ export function planSeed(snapshot: CatalogSnapshot, options: SeedOptions): SeedP
     for (const provider of changedProviders) {
       const before = stored.get(provider.id);
       const change = before
-        ? providerDiff(rowsOf(provider), before)
-        : providerInserts(rowsOf(provider));
+        ? providerDiff(shape, rowsOf(provider), before)
+        : providerInserts(shape, rowsOf(provider));
       if (waitingProviders.size > 0 || change.writes > left) {
         waitingProviders.add(provider.id);
         continue;
@@ -490,11 +568,19 @@ export function planSeed(snapshot: CatalogSnapshot, options: SeedOptions): SeedP
         ...applied,
         ...readyBundles.map(bundleChange),
         waiting.length === 0 ? featureDeletes : { statements: [], writes: 0 },
+        // A new shape's tables (or an empty D1's) whole at last: the API's views go to them.
+        waiting.length === 0 && mode.switchViews
+          ? viewChange(shape)
+          : { statements: [], writes: 0 },
       ]);
 
   // The catalog row: the build's version once nothing waits, else the last whole catalog's.
   const complete = waiting.length === 0;
-  const versionChanged = complete && state.catalog?.version !== meta.catalogVersion;
+  // A new format whole names itself in the catalog row even when the catalog didn't change (a code-only shape).
+  const versionChanged =
+    complete &&
+    (state.catalog?.version !== meta.catalogVersion ||
+      state.catalog.seedFormat !== format.seedFormat);
   const waitingChanged = (state.catalog?.waiting ?? 0) !== waiting.length;
   // With a budget, the day's count goes up with every write.
   const counted = budget !== undefined && change.statements.length > 0;
@@ -509,10 +595,11 @@ export function planSeed(snapshot: CatalogSnapshot, options: SeedOptions): SeedP
             version: partialCatalogVersion,
             waiting: waiting.length,
           };
-      change.statements.push(insertStatement('catalog', row, 'upsert'));
+      change.statements.push(insertStatement(shape, 'catalog', row, 'upsert'));
     } else {
       change.statements.push(
         updateStatement(
+          shape,
           'catalog',
           {
             id: 1,
@@ -568,12 +655,31 @@ export function seedDiff(target: SeedTarget, state: SeedState): SeedDiff {
   };
 }
 
-/** What D1 holds, when the seed can compare with it: a catalog row of this seedFormat, or an empty D1. */
-function comparable(current: SeedState | undefined): SeedState | undefined {
-  if (!current) return undefined;
-  if (current.catalog) return current.catalog.seedFormat === seedFormat ? current : undefined;
-  const empty = Object.values(current.rows).every((count) => count === 0);
-  return empty ? current : undefined;
+/**
+ * How the seed brings D1 to `format` (M11.8). Row by row (`rows`) when it can compare with what the shape's tables
+ * hold: a catalog row of a format with this shape (a format that only computes a derived column differently
+ * compares every provider again, its hashes being under the old format), a catalog row of another shape (the new
+ * shape's tables, beside the live ones, then switched to), or an empty D1. Everything again (`full`) without D1's
+ * state, with rows but no catalog row, or with a format from before shapes.
+ */
+function seedMode(
+  current: SeedState | undefined,
+  format: SeedFormat,
+): { kind: 'full' } | { kind: 'rows'; state: SeedState; switchViews: boolean } {
+  if (!current) return { kind: 'full' };
+  const live = current.catalog?.seedFormat;
+  if (live === undefined) {
+    const empty = Object.values(current.rows).every((count) => count === 0);
+    return empty ? { kind: 'rows', state: current, switchViews: true } : { kind: 'full' };
+  }
+  const liveShape = live === format.seedFormat ? format.shape : seedShapes[live];
+  if (liveShape === undefined) return { kind: 'full' };
+  // An empty D1's fill names no version until it's whole, and its views may be another shape's (the migrations').
+  return {
+    kind: 'rows',
+    state: current,
+    switchViews: liveShape !== format.shape || current.catalog?.version === partialCatalogVersion,
+  };
 }
 
 /** The rows the day's seeds wrote already: the catalog row's count, when it's today's. */
@@ -607,6 +713,7 @@ function finished(statements: string[], writes: number, waiting: string[]): Seed
  * providers' values.
  */
 function rankUpdates(
+  shape: number,
   feature: Feature,
   storedJson: string | undefined,
   unchanged: readonly SnapshotProvider[],
@@ -614,7 +721,7 @@ function rankUpdates(
 ): Change {
   const change: Change = { statements: [], writes: 0 };
   for (const move of rankMoves(feature, storedJson)) {
-    change.statements.push(rankStatement(move));
+    change.statements.push(rankStatement(shape, move));
     // The unchanged providers' rows hold the value at its old rank.
     const unchangedRows = unchanged.reduce(
       (sum, provider) =>
