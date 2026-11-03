@@ -28,7 +28,7 @@ import {
   seedNext,
   seedTables,
 } from '@simply-sub/core';
-import { env } from 'cloudflare:workers';
+import { env, exports } from 'cloudflare:workers';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 // The seed that scripts/seed-d1.ts runs (BLUEPRINT §5.3, §6.3), against the real D1 schema: it reads what D1 holds
@@ -935,6 +935,68 @@ describe('the bot’s steps (M11.8)', () => {
     await seed(after, { full: true });
     expect(resumed).toEqual({ ...(await dump()), catalog: [] });
   });
+
+  it('seeds 400 generated providers over several days, /health saying how many wait', async () => {
+    // 400 providers like Netflix, each under its own id, into an empty D1, at a day's rows that fit about 50 of them.
+    const many = snapshotOf(
+      changed((catalog) => {
+        const netflix = catalog.providers.find((provider) => provider.id === 'netflix');
+        if (!netflix) throw new Error('The tests’ catalog has no Netflix');
+        catalog.bundles = [];
+        catalog.providers = Array.from({ length: 400 }, (_, n) => {
+          const id = `netflix-${String(n).padStart(3, '0')}`;
+          return {
+            ...structuredClone(netflix),
+            id,
+            plans: netflix.plans.map((plan) => ({
+              ...structuredClone(plan),
+              id: plan.id.replace('netflix', id),
+            })),
+          };
+        });
+      }),
+      'def5678',
+    );
+    const waiting = async () => {
+      const response = await exports.default.fetch('https://sub.simplely.ca/api/v1/health');
+      return (await response.json<{ data: { catalogWaiting?: number } }>()).data.catalogWaiting;
+    };
+    const daily = 6_000;
+    const deploy = await seed(many, { budget: { today: '2026-11-03', daily } });
+    expect(deploy.rowsWritten).toBeLessThanOrEqual(daily);
+    expect(await waiting()).toBe(deploy.waiting.length);
+
+    const source = await sourceOf(many);
+    const left = [deploy.waiting.length];
+    for (let day = 4; day < 30; day++) {
+      const steps = await night(source, `2026-11-${String(day).padStart(2, '0')}`, daily);
+      left.push((await waiting()) ?? -1);
+      if (steps.at(-1)?.result === 'done') break;
+    }
+    // The deploy's day and several nights, each bringing in what fits, until nothing waits.
+    expect(left.length).toBeGreaterThanOrEqual(4);
+    expect(left).toEqual([...left].sort((a, b) => b - a));
+    expect(left.at(-1)).toBe(0);
+    expect(await db.prepare('SELECT version FROM catalog').first('version')).toBe('def5678');
+
+    // Where a full seed would end, read a part at a time: the whole is more statements than a batch takes.
+    const resumed = { ...(await dump()), catalog: [] };
+    const statements = planSeed(many, {
+      providerHashes: new Map(
+        await Promise.all(
+          many.data.providers.map(
+            async (provider) => [provider.id, await sha256(JSON.stringify(provider))] as const,
+          ),
+        ),
+      ),
+    })
+      .sql.trimEnd()
+      .split('\n');
+    for (let at = 0; at < statements.length; at += 2_000) {
+      await db.batch(statements.slice(at, at + 2_000).map((statement) => db.prepare(statement)));
+    }
+    expect(resumed).toEqual({ ...(await dump()), catalog: [] });
+  }, 300_000);
 
   it('keeps the last whole catalog’s currencies while a seed waits, then names the build’s', async () => {
     await seed(snapshotOf(testCatalog(), 'abc1234'), { full: true });

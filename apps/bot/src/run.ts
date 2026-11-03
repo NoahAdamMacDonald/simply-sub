@@ -1,5 +1,6 @@
 import {
   baselineDiff,
+  daysBetween,
   digestDue,
   isDue,
   planTitle,
@@ -41,13 +42,15 @@ import {
 import type { Budget, Finding } from './types';
 
 // A night of the bot (BLUEPRINT §6.4, M3.9), as the Workflow runs it: read the repository and data/automation.yaml
-// from main, read each host's robots.txt once, then a step for each provider (with the bundles whose pages it cites
-// too), each other group of bundles that share a page, and each reseller's logo, checking only what's due by its
-// cadence. A page is compared with its baseline: unchanged, its facts hold and no model is asked; changed, the M8.3
-// checks run, and what it found waits in KV for the weekly digest, built on the digest's day; then the discovery takes
-// what's left of the night's budgets (discovery.ts). A plan visitors reported (M10.10) has its pages checked that
-// night whatever their cadence, and the digest says what they showed (reports.ts). Steps pass only small, plain data: a step's result is at most
-// 1 MiB, and on the free plan a step has 10 ms of CPU and 50 requests out.
+// from main, choose tonight's providers (a rotating slice of the catalog, M11.8, so a night's steps stay well under a
+// Workflow's 1,024 however large it grows, and each provider is checked at least weekly), read each host's robots.txt
+// once, then a step for each of them (with the bundles whose pages it cites too), each other group of their bundles
+// that share a page, and each reseller's logo, checking only what's due by its cadence. A page is compared with its
+// baseline: unchanged, its facts hold and no model is asked; changed, the M8.3 checks run, and what it found waits in
+// KV for the weekly digest, built on the digest's day; then the discovery takes what's left of the night's budgets
+// (discovery.ts). A plan visitors reported (M10.10) has its pages checked that night whatever their cadence, and the
+// digest says what they showed (reports.ts). Steps pass only small, plain data: a step's result is at most 1 MiB, and
+// on the free plan a step has 10 ms of CPU and 50 requests out.
 
 /** A Workflow step: runs once, its result kept, and retried when it throws. */
 export type Step = <T>(name: string, task: () => Promise<T>) => Promise<T>;
@@ -63,15 +66,20 @@ export interface CatalogIndex {
   cited: CitedPage[];
   /** Provider id → the shared policy documents its step checks (M11.1): each one by the first provider naming it. */
   policySets: Record<string, PolicySet[]>;
+  /** Bundle id → the provider whose night checks it (M11.8): its first plan's. */
+  bundleOwners: Record<string, string>;
 }
 
 /** What the night needs from the world. */
 export interface Services {
+  /** Every provider id in the catalog D1, sorted. */
+  readProviderIds(): Promise<string[]>;
   /**
-   * The catalog D1's providers and bundles, and from the site's static files (M11.8) the pages their policies cite
-   * and the shared policy documents they name.
+   * The catalog D1's providers `ids` and the bundles they own (bundleOwner), and from the site's static files (M11.8)
+   * the pages their policies cite and the shared policy documents they name: each document with the first of `namers`
+   * naming it, the night's providers when they're read a part at a time.
    */
-  readIndex(): Promise<CatalogIndex>;
+  readIndex(ids: readonly string[], namers: readonly string[]): Promise<CatalogIndex>;
   /** A provider as D1 has it: since M11.8 without its policies, which policiesUrl names the file of. */
   readProvider(id: string): Promise<SnapshotProvider | undefined>;
   /** The Terms and policies in the file at `url`, a provider's policiesUrl (M11.8). */
@@ -108,12 +116,67 @@ const robotsPerStep = 40;
 /** The most seed steps a night takes: a Workflow has 1,024 steps, and the checks need theirs (M11.8). */
 const seedStepsPerNight = 200;
 
+/**
+ * The fewest providers a night checks (M11.8): a catalog this small is checked whole every night, and a larger one in up
+ * to seven slices, a night each, so a night's steps stay well under a Workflow's 1,024 until about 2,000 providers.
+ */
+export const sliceSize = 100;
+
+/** The most providers a step reads for the night's index: a step has 10 ms of CPU (M11.8). */
+const indexPart = 25;
+
 export interface NightSummary {
   findings: number;
   /** The digest's pull request, opened or refreshed, on the digest's day. */
   pullRequest?: string;
   /** The discovery batch's pull request, the night its last service is done. */
   batch?: string;
+}
+
+/**
+ * Tonight's providers (M11.8): the catalog in id order, cut into at most seven slices of at least sliceSize, one a night
+ * in turn, so each is checked at least weekly; and any whose plan a visitor reported, whatever their slice.
+ */
+export function nightSlice(
+  ids: readonly string[],
+  today: IsoDate,
+  reported: ReadonlySet<string> = new Set(),
+): string[] {
+  const size = Math.max(sliceSize, Math.ceil(ids.length / 7));
+  const slices = Math.max(1, Math.ceil(ids.length / size));
+  const start = (daysBetween('1970-01-01', today) % slices) * size;
+  return [
+    ...new Set([...ids.slice(start, start + size), ...ids.filter((id) => reported.has(id))]),
+  ].sort();
+}
+
+/** The night's index from the parts its steps read (M11.8), a page cited by several merged into one. */
+export function mergeIndexes(parts: readonly CatalogIndex[]): CatalogIndex {
+  const cited = new Map<string, CitedPage>();
+  for (const page of parts.flatMap((part) => part.cited)) {
+    const found = cited.get(page.url);
+    cited.set(
+      page.url,
+      found
+        ? {
+            url: page.url,
+            // A page cited both ways is a pricing page (core's citedPages).
+            type: found.type === 'pricing' ? found.type : page.type,
+            owners: [...new Set([...found.owners, ...page.owners])],
+          }
+        : page,
+    );
+  }
+  const merged = <T>(of: (part: CatalogIndex) => Record<string, T>): Record<string, T> =>
+    Object.assign({}, ...parts.map(of)) as Record<string, T>;
+  return {
+    providers: merged((part) => part.providers),
+    bundles: merged((part) => part.bundles),
+    hosts: [...new Set(parts.flatMap((part) => part.hosts))].sort(),
+    cited: [...cited.values()],
+    policySets: merged((part) => part.policySets),
+    bundleOwners: merged((part) => part.bundleOwners),
+  };
 }
 
 /** Which bundles each provider's step checks, and the groups of the rest that share a page. */
@@ -158,7 +221,20 @@ export async function runNight(
   const repository = await step('read the repository', () => services.readRepository());
   const settings = await step('read the settings', () => services.readSettings(repository.commit));
   const checks = await step('read the check dates', () => services.state.checks());
-  const index = await step('read the catalog', () => services.readIndex());
+  const ids = new Set(await step('read the providers', () => services.readProviderIds()));
+  const reported = await step('read the reports', () => services.state.reports());
+  const slice = nightSlice([...ids], today, reportedProviders(reported, ids));
+  const parts: CatalogIndex[] = [];
+  for (let start = 0; start < slice.length; start += indexPart) {
+    const part = slice.slice(start, start + indexPart);
+    parts.push(
+      await step(`read the catalog ${start / indexPart + 1}`, () =>
+        services.readIndex(part, slice),
+      ),
+    );
+  }
+  const index = mergeIndexes(parts);
+  const tonight = new Set(slice);
   const cited = Object.fromEntries(index.cited.map((page) => [page.url, page]));
   const due = new Set(
     index.cited
@@ -166,7 +242,6 @@ export async function runNight(
       .map((page) => page.url),
   );
   const logoDue = (id: string) => isDue(settings.cadence.logos, checks[`logo:${id}`], today);
-  const reported = await step('read the reports', () => services.state.reports());
   const countries = reportedCountries(reported);
   /** What the digest needs besides what it proposes: a reported plan's price that the page still shows. */
   const alsoKept = (finding: Finding) => confirmsReported(finding, countries);
@@ -186,15 +261,23 @@ export async function runNight(
     browserPages: settings.batch.browserPages,
     neurons: settings.batch.neurons,
   };
-  /** Runs one step's checks; what it found waits in KV, a pending entry per page (or logo). */
-  const check = async (name: string, subject: string, input: () => Promise<CheckInput>) => {
+  /**
+   * Runs one step's checks; what it found waits in KV, a pending entry per page (or logo), with the provider whose night
+   * it was checked on (M11.8).
+   */
+  const check = async (
+    name: string,
+    subject: string,
+    owner: string | undefined,
+    input: () => Promise<CheckInput>,
+  ) => {
     try {
       const result = await step(name, async () => {
         const made = await input();
         const keys = keysOf(made);
         if (keys.length === 0) return { count: 0, keys, budget };
         const found = await checkPages(made, services.pages(robots), budget);
-        await keep(found.findings, keys, today, services.state, alsoKept);
+        await keep(found.findings, keys, today, services.state, alsoKept, owner);
         return { count: found.findings.length, keys, budget: found.budget };
       });
       findings += result.count;
@@ -245,8 +328,18 @@ export async function runNight(
   };
 
   const plan = stepPlan(index);
+  const reportedIds = reportedProviders(reported, ids);
+  /** Whether any of these bundles' pages is due: a step with nothing due isn't taken. */
+  const bundlesDue = (bundles: readonly string[]) =>
+    bundles.some((bundle) => (index.bundles[bundle] ?? []).some((url) => due.has(url)));
   for (const [id, bundles] of Object.entries(plan.withProvider)) {
-    await check(`check ${id}`, id, async () => {
+    const anything =
+      reportedIds.has(id) ||
+      logoDue(id) ||
+      (index.providers[id] ?? []).some((url) => due.has(url)) ||
+      bundlesDue(bundles);
+    if (!anything) continue;
+    await check(`check ${id}`, id, id, async () => {
       const provider = await withPolicies(await services.readProvider(id));
       const reportedHere = provider ? reportedPages(provider, countries) : new Set<string>();
       const made = dueOnly(
@@ -267,19 +360,26 @@ export async function runNight(
     });
   }
   for (const bundles of plan.groups) {
-    await check(`check ${bundles.join(', ')}`, bundles.join(', '), async () => {
-      const made = dueOnly({
-        subject: bundles.join(', '),
-        targets: await bundlesOf(bundles),
-        approvals: [],
-        networks: [],
-      });
-      return { ...made, baselines: await baselines(urlsOf(made), new Set()), cited };
-    });
+    if (!bundlesDue(bundles)) continue;
+    const [first = ''] = bundles;
+    await check(
+      `check ${bundles.join(', ')}`,
+      bundles.join(', '),
+      index.bundleOwners[first],
+      async () => {
+        const made = dueOnly({
+          subject: bundles.join(', '),
+          targets: await bundlesOf(bundles),
+          approvals: [],
+          networks: [],
+        });
+        return { ...made, baselines: await baselines(urlsOf(made), new Set()), cited };
+      },
+    );
   }
   for (const reseller of repository.resellers) {
     if (!logoDue(reseller.id)) continue;
-    await check(`logo ${reseller.id}`, reseller.id, async () => ({
+    await check(`logo ${reseller.id}`, reseller.id, undefined, async () => ({
       subject: reseller.id,
       targets: [],
       approvals: [],
@@ -287,6 +387,17 @@ export async function runNight(
       logo: { id: reseller.id, website: reseller.website, ...committed(repository, reseller.id) },
     }));
   }
+
+  // A page tonight's providers no longer cite, or a provider the catalog no longer has, has nothing to propose (M11.8):
+  // each provider's pending pages are tidied on its own night, as its slice comes round.
+  await step('drop what tonight’s providers no longer cite', async () => {
+    for (const entry of await services.state.pending()) {
+      if (entry.owner === undefined || /^(?:logo|failed):/.test(entry.key)) continue;
+      if (!ids.has(entry.owner) || (tonight.has(entry.owner) && cited[entry.key] === undefined)) {
+        await services.state.dropPending(entry.key);
+      }
+    }
+  });
 
   let pullRequest: string | undefined;
   if (
@@ -301,14 +412,11 @@ export async function runNight(
     const kept = await step('gather the digest', async () => {
       const found: Record<string, number[]> = {};
       for (const entry of await services.state.pending()) {
-        const standing = await stillPending(
-          entry,
-          index,
-          services,
-          repository.commit,
-          today,
+        const standing = await stillPending(entry, index, services, repository.commit, today, {
           alsoKept,
-        );
+          tonight,
+          ids,
+        });
         if (standing.length === 0) await services.state.dropPending(entry.key);
         else found[entry.key] = standing.map((finding) => entry.findings.indexOf(finding));
       }
@@ -427,6 +535,18 @@ async function seedWhatWaits(today: IsoDate, step: Step, services: Services): Pr
   }
 }
 
+/** The providers of the plans visitors reported, which tonight's slice takes whatever its turn (M10.10, M11.8). */
+function reportedProviders(
+  reported: readonly ReportedPlan[],
+  ids: ReadonlySet<string>,
+): Set<string> {
+  return new Set(
+    reported
+      .map(({ plan }) => plan.slice(0, plan.indexOf('.')))
+      .filter((provider) => ids.has(provider)),
+  );
+}
+
 /** Each reported plan's name and prices, from its provider's file; a plan the catalog doesn't have now is left out. */
 async function reportedPlans(
   reported: readonly ReportedPlan[],
@@ -479,6 +599,7 @@ async function keep(
   today: IsoDate,
   state: BotState,
   alsoKept: (finding: Finding) => boolean,
+  owner: string | undefined,
 ): Promise<void> {
   for (const key of keys) {
     const own = found.filter((finding) =>
@@ -493,14 +614,23 @@ async function keep(
       );
     }
     const worth = own.filter((finding) => worthProposing(finding, today) || alsoKept(finding));
-    if (worth.length > 0) await state.putPending({ key, seen: today, findings: worth });
-    else await state.dropPending(key);
+    if (worth.length > 0) {
+      await state.putPending({
+        key,
+        seen: today,
+        findings: worth,
+        ...(owner !== undefined && { owner }),
+      });
+    } else {
+      await state.dropPending(key);
+    }
   }
 }
 
 /**
  * What a pending entry still has to propose: nothing for a page the catalog no longer cites, and no page change once
- * main's baseline has the page's new text (the last digest merged).
+ * main's baseline has the page's new text (the last digest merged). Tonight's index has only tonight's providers
+ * (M11.8): a page another provider's night checked waits for that night's tidying, unless the provider has gone.
  */
 async function stillPending(
   entry: Pending,
@@ -508,14 +638,20 @@ async function stillPending(
   services: Services,
   commit: string,
   today: IsoDate,
-  alsoKept: (finding: Finding) => boolean,
+  night: {
+    alsoKept: (finding: Finding) => boolean;
+    tonight: ReadonlySet<string>;
+    ids: ReadonlySet<string>;
+  },
 ): Promise<Finding[]> {
-  if (
-    !entry.key.startsWith('logo:') &&
-    !entry.key.startsWith('failed:') &&
-    !index.cited.some((page) => page.url === entry.key)
-  ) {
-    return [];
+  const { alsoKept, tonight, ids } = night;
+  if (!/^(?:logo|failed):/.test(entry.key)) {
+    const elsewhere = entry.owner !== undefined && !tonight.has(entry.owner);
+    if (
+      elsewhere ? !ids.has(entry.owner ?? '') : !index.cited.some((page) => page.url === entry.key)
+    ) {
+      return [];
+    }
   }
   const kept: Finding[] = [];
   for (const finding of entry.findings) {

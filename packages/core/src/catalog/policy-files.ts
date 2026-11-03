@@ -32,6 +32,29 @@ export const policyIndexSchema = z.strictObject({
 });
 export type PolicyIndex = z.infer<typeof policyIndexSchema>;
 
+/**
+ * The part of /data/policies/index.json that the providers `ids` need (M11.8): their entries and those of the shared
+ * documents they name, each checked against the schema, so the nightly check, which reads a slice of the providers a
+ * night, parses no more of a large index than that.
+ */
+export function policyIndexPart(index: unknown, ids: readonly string[]): PolicyIndex {
+  const raw = z
+    .object({
+      providers: z.record(z.string(), z.unknown()),
+      sets: z.record(z.string(), z.unknown()),
+    })
+    .parse(index);
+  const entries = (from: Record<string, unknown>, wanted: Iterable<string>) =>
+    Object.fromEntries(
+      [...wanted].flatMap((id) =>
+        Object.hasOwn(from, id) ? [[id, policyIndexEntrySchema.parse(from[id])] as const] : [],
+      ),
+    );
+  const providers = entries(raw.providers, ids);
+  const named = new Set(Object.values(providers).flatMap((entry) => entry.shared ?? []));
+  return { providers, sets: entries(raw.sets, named) };
+}
+
 /** A provider's policies file, under the site's root. */
 export function policyFilePath(providerId: string): string {
   return `data/policies/${providerId}.json`;

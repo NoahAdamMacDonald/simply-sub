@@ -25,6 +25,11 @@ export interface Pending {
   /** The night it was last checked. */
   seen: IsoDate;
   findings: Finding[];
+  /**
+   * The provider whose night checked it (M11.8): the nights between see only their own providers, so its night tidies
+   * it. Entries from before have none.
+   */
+  owner?: string;
 }
 
 export interface BotState {

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   buildPolicyIndex,
   policyFilePath,
+  policyIndexPart,
   policyFiles,
   sharedPolicyFilePath,
   formatCatalogIssue,
@@ -920,6 +921,17 @@ describe('shared policy documents (M11.1)', () => {
     expect(index.providers['mullvad']?.shared).toEqual(['group-privacy']);
     expect(policyFilePath('mullvad')).toBe('data/policies/mullvad.json');
     expect(sharedPolicyFilePath('group-privacy')).toBe('data/policies/shared/group-privacy.json');
+    // The nightly check's slice of it (M11.8): only the providers asked for, and the documents they name.
+    const json = JSON.parse(JSON.stringify(index)) as unknown;
+    expect(policyIndexPart(json, ['mullvad', 'gone'])).toEqual({
+      providers: { mullvad: index.providers['mullvad'] },
+      sets: { 'group-privacy': index.sets['group-privacy'] },
+    });
+    const others = Object.keys(index.providers).filter((id) => id !== 'mullvad');
+    expect(policyIndexPart(json, others).sets).toEqual({});
+    expect(() =>
+      policyIndexPart({ ...index, providers: { mullvad: { links: ['not a url'] } } }, ['mullvad']),
+    ).toThrow();
   });
 
   describe('planPolicies, with a shared document', () => {

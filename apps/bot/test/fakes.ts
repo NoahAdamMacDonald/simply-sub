@@ -208,7 +208,15 @@ export async function fakeServices(
   return {
     proposals,
     steps: [],
-    readIndex: async () => catalogIndex(stored, [], [], policies),
+    readProviderIds: async () => stored.map((provider) => provider.id).sort(),
+    readIndex: async (ids, namers) =>
+      catalogIndex(
+        stored.filter((provider) => ids.includes(provider.id)),
+        [],
+        [],
+        policies,
+        namers,
+      ),
     readProvider: async (id) => stored.find((provider) => provider.id === id),
     // Nothing waits for the seed: a test that wants a step gives one of its own.
     seedNext: async () => ({ result: 'idle', writes: 0 }),
