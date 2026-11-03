@@ -13,6 +13,7 @@ export * from './catalog/catalog-ids';
 export * from './catalog/catalog-sync';
 export * from './catalog/category';
 export * from './catalog/convert';
+export * from './catalog/coverage';
 export * from './catalog/ecb-rates';
 export * from './catalog/feature';
 export * from './catalog/former-names';
