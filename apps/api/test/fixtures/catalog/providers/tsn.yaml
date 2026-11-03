@@ -1,0 +1,266 @@
+id: tsn
+name: TSN
+aliases: [the sports network]
+website: https://www.tsn.ca
+category: streaming
+spendCategory: streaming
+# Accepted cards, read 2026-10-28 (M9.2): none named, so no acceptedNetworks. The FAQ's billing answers mention only
+# a "credit card issuer" (/help/faq/), /subscribe names none, and payment details are in Bell Media's Account
+# Management portal, behind a sign-in.
+billingCurrency: { CA: CAD }
+# tsn.ca/help/faq/#not-canada, read 2026-10-26: "TSN is only available for subscription and use within Canada due to
+# licensing agreements."
+availableIn: [CA]
+# The FAQ's cancellation steps: Account > Manage Subscription > Subscriptions > Cancel Subscription.
+cancelUrl: https://www.tsn.ca/help/faq/#cancellations
+sources: { pricing: https://www.tsn.ca/subscribe/ }
+# Owner (M11.2), read 2026-11-02: no about page says so; its terms do.
+# Ways to pay (M11.5), read 2026-11-02 in its terms: a card, or through an in-app purchase.
+paymentMethods:
+  - methods: [card, app-store]
+    page: 'Terms and conditions'
+    url: https://www.tsn.ca/terms-and-conditions/
+    quotes:
+      - 'provide payment method information, such as your credit card number and billing address'
+      - 'If you subscribe or otherwise have entitlements to the Service through an authorized third party distributor of the Service (such as an authorized content provider, in-app purchase platform, or bundle distributor)'
+owner:
+  name: Bell Media Inc.
+  page:
+    name: Terms and conditions
+    url: https://www.tsn.ca/terms-and-conditions/
+  quotes:
+    - 'which is made available to you by Bell Media Inc. and its affiliates (together, “Bell Media”)'
+  lastVerified: 2026-11-02
+notes: >-
+  Plans renew for the period chosen, except in Quebec, where they renew monthly. Select NHL regular-season games
+  only, with regional blackouts.
+
+# Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their
+# words.
+perks:
+  - id: tsn-channels
+    name: TSN 1–5 live channels
+  - id: multiview
+    name: Multiviewing up to 6 games at once
+  - id: nfl-redzone
+    name: NFL RedZone
+  - id: more-nfl-nba-games
+    name: 24 more NFL and 75 more NBA games
+  - id: pga-tour-live
+    name: PGA Tour Live
+  - id: laliga
+    name: Every LaLiga match
+  - id: sports-docs
+    name: Award-winning sports docs
+
+# Read 2026-10-26 on tsn.ca/subscribe: Standard is sold monthly only (the 3 Months and Annual tabs show Premium
+# alone), and "Everything in TSN Standard, plus" Premium's extras. Two streams at a time on every plan
+# (tsn.ca/help/faq/#concurrency). TSN's bundles with Crave and RDS are in data/bundles.
+# Read 2026-11-02 (M11.4, the required streaming features): neither tsn.ca/subscribe nor the FAQ says
+# anything of ads or video quality. Its live channels carry their broadcasts, so not ad free, inferred (the guide's
+# §2.2 rule 5: a required boolean no page states is false); the video quality waits for M11.9
+# (awaitingRequiredFeatures in core).
+plans:
+  - id: tsn.standard
+    name: Standard
+    link: https://www.tsn.ca/subscribe/
+    features:
+      ad-free: false
+      streaming.live: [tv-channels, sports]
+      streaming.concurrent-streams: 2
+    perks: [tsn-channels, multiview]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 24.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://www.tsn.ca/subscribe/
+
+  - id: tsn.premium
+    name: Premium
+    link: https://www.tsn.ca/subscribe/
+    features:
+      ad-free: false
+      streaming.live: [tv-channels, sports]
+      streaming.concurrent-streams: 2
+    perks:
+      [tsn-channels, multiview, nfl-redzone, more-nfl-nba-games, pga-tour-live, laliga, sports-docs]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 29.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://www.tsn.ca/subscribe/
+      - region: CA
+        currency: CAD
+        amount: 74.99
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://www.tsn.ca/subscribe/
+      - region: CA
+        currency: CAD
+        amount: 249.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://www.tsn.ca/subscribe/
+
+# Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: TSN's terms and conditions and Bell's page on how
+# it collects and uses data, which tsn.ca links. Not rated: price and terms changes and closing accounts (its terms
+# don't say), data collection and deletion, free trials, account sharing and device limits.
+policies:
+  shared: [bell-privacy]
+  links:
+    - name: 'Terms and conditions'
+      url: https://www.tsn.ca/terms-and-conditions/
+    - name: "Bell's use of data"
+      url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+  ratings:
+    - topic: privacy.data-sharing
+      tier: good
+      reason: "It shares your information among Bell's own companies and its suppliers. Anyone else gets it only when the law says so or you agree."
+      sources:
+        - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+          quote: 'To get a better idea of your needs and how we can fulfill them, we sometimes share information between our companies.'
+        - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+          quote: 'We only disclose personal information with parties outside our family of companies and suppliers when we are required to or when you have given express consent for us to do so.'
+      lastVerified: 2026-10-27
+    - topic: privacy.ads-tracking
+      tier: neutral
+      reason: 'It picks ads for you, and you can change what kinds of ads you get in your preferences.'
+      sources:
+        - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+          quote: 'You can manage the types of ads you receive or opt out of communications by updating your preferences.'
+      action:
+        name: 'Update your Bell preferences'
+        url: https://www.bell.ca/email-updates
+      lastVerified: 2026-10-27
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'If you cancel, you can keep watching until the end of the time you paid for, but you get no money back.'
+      sources:
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'All Subscription Fees are non-refundable. Following any cancellation, you will continue to have access to the Service through the end of your current billing period, at which point your subscription will terminate.'
+      lastVerified: 2026-10-27
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'If you cancel, you can keep watching until the end of the time you paid for, but you get no money back.'
+      sources:
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'All Subscription Fees are non-refundable. Following any cancellation, you will continue to have access to the Service through the end of your current billing period, at which point your subscription will terminate.'
+      lastVerified: 2026-10-27
+    - topic: legal.disputes
+      tier: bad
+      reason: 'If you have a problem with it, a private referee called an arbitrator decides, in your city, instead of a court. You give up your right to a trial.'
+      sources:
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'shall be settled at the request of either party by binding arbitration in the city in which you reside'
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'You expressly waive the right to resolve any dispute through any other means, including by trial.'
+      lastVerified: 2026-10-27
+    # M11.9's topics, pulled forward at the owner's request (2026-11-02), read that day.
+    - topic: privacy.sign-up-data
+      tier: poor
+      reason: 'To sign up you must give it your phone number as well as an email address and payment details.'
+      sources:
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'During the registration process for an account with us, you will be asked to provide an email address and phone number, choose a password, provide payment method information, such as your credit card number and billing address, as well as other information.'
+      lastVerified: 2026-11-02
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be an adult to subscribe, and it may give you parental controls, but its terms make you responsible for what kids watch and say nothing about their data.'
+      sources:
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'You must be the age of majority in the Canadian province or territory in which you reside in order to subscribe to, register for, access or otherwise use the Service.'
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'We may offer tools that are intended to assist you in controlling the Content a minor may view through your registered account, such as parental controls.'
+      lastVerified: 2026-11-02
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It can change the price at any time. It posts the change at least 30 days ahead and tells you, but promises that 30 days’ notice only where a law requires it (Quebec does).'
+      sources:
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'we reserve the right, in our sole and absolute discretion, to modify all or any portion of these Terms and Conditions, the Service, and your subscription including the Subscription Fees, at any time'
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'Where required by law, this notice will be provided at least thirty (30) days before the change comes into effect'
+      lastVerified: 2026-11-02
+    - topic: billing.free-trials
+      status: not-stated
+      reason: 'Its terms describe promotions such as gift codes, but no free trial.'
+      pages: [https://www.tsn.ca/terms-and-conditions/]
+      lastVerified: 2026-11-02
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say yearly plans renew on their own, but not that it reminds you first.'
+      pages: [https://www.tsn.ca/terms-and-conditions/]
+      lastVerified: 2026-11-02
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms list no fees beyond the price and taxes.'
+      pages: [https://www.tsn.ca/terms-and-conditions/]
+      lastVerified: 2026-11-02
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'If you move up to a bigger plan, you pay only the difference for the rest of the month.'
+      sources:
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'The recurring amount charged may vary for reasons that may include differing amounts due to applicable Promotions or if you choose to upgrade your subscription and are charged on a prorated basis for a partial billing period.'
+      lastVerified: 2026-11-02
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It posts changes to its terms at least 30 days ahead and tells you about them, but promises that 30 days’ notice only where a law requires it.'
+      sources:
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'We will post changes to these Terms and Conditions at least thirty (30) days before the modification comes into effect'
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'Where required by law, this notice will be provided at least thirty (30) days before the change comes into effect'
+      lastVerified: 2026-11-02
+    - topic: legal.account-closure
+      tier: poor
+      reason: 'It can end your subscription for any reason with 30 days’ notice (60 in Quebec), and its terms don’t promise money back.'
+      sources:
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'Bell Media may cancel your subscription to the Service upon no less than thirty (30) days (if you are a resident of Quebec, sixty (60) days) advance written notice to you.'
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'We, in our sole discretion and without liability, reserve the right to cancel, terminate, restrict or suspend your access to the Service or to delete your registered account and any information or user profile(s) related to such account if we reasonably believe that you are or will be in violation of these Terms and Conditions and/or any applicable laws.'
+      lastVerified: 2026-11-02
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change the service and what your plan includes at any time, and says it owes you nothing when it does.'
+      sources:
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'we reserve the right, in our sole and absolute discretion, to modify all or any portion of these Terms and Conditions, the Service, and your subscription including the Subscription Fees, at any time'
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'we may impose limits on certain features and functions or restrict your access to parts or all of the Software or the Service without notice or liability;'
+      lastVerified: 2026-11-02
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://www.tsn.ca/terms-and-conditions/]
+      lastVerified: 2026-11-02
+    - topic: security.practices
+      status: not-stated
+      reason: 'Its terms say nothing about outside security checks or how to report a security problem, and neither does Bell’s privacy policy.'
+      pages: [https://www.tsn.ca/terms-and-conditions/]
+      lastVerified: 2026-11-02
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its terms make you responsible for anyone who uses your account, but don’t say who that can be.'
+      pages: [https://www.tsn.ca/terms-and-conditions/]
+      lastVerified: 2026-11-02
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'It can limit how many shows you download, on how many devices, and for how long you can watch them.'
+      sources:
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'For example, such limitations may include restrictions on the number of Offline Titles per account, the maximum number of devices that can contain Offline Titles, the time period within which you will need to begin viewing Offline Titles, the number of times Offline Titles may be viewed, and how long the Offline Titles will remain accessible.'
+      lastVerified: 2026-11-02

@@ -155,8 +155,8 @@ function snapshotOf(catalog: CatalogSource, catalogVersion = 'abc1234'): Catalog
   };
 }
 
-/** The real catalog in data/ (vitest.config.ts reads it). */
-function realCatalog(edit?: (files: CatalogSourceFile[]) => void): CatalogSource {
+/** The tests' own catalog, test/fixtures/catalog/ (vitest.config.ts reads it, M11.8). */
+function testCatalog(edit?: (files: CatalogSourceFile[]) => void): CatalogSource {
   const files: CatalogSourceFile[] = [
     ...structuredClone(env.TEST_CATALOG.files),
     ...env.TEST_CATALOG.logos.map((file) => ({ file, bytes: new Uint8Array() })),
@@ -491,9 +491,9 @@ describe('rows written', () => {
   }
 
   it('is 0 for a code-only deploy, which builds the same catalog again', async () => {
-    await seed(snapshotOf(realCatalog()), { full: true });
+    await seed(snapshotOf(testCatalog()), { full: true });
 
-    expect(await seed(snapshotOf(realCatalog()))).toEqual({ statements: 0, rowsWritten: 0 });
+    expect(await seed(snapshotOf(testCatalog()))).toEqual({ statements: 0, rowsWritten: 0 });
   });
 
   it('is only the provider’s rows for a one-provider price change', async () => {
@@ -506,15 +506,15 @@ describe('rows written', () => {
       }
       data.plans[0].prices[0].amount += 1;
     };
-    const { removed, added, replaced } = await providerCosts(realCatalog, 'netflix', netflix);
+    const { removed, added, replaced } = await providerCosts(testCatalog, 'netflix', netflix);
 
     // Deleting Netflix and inserting it again, and the catalog row once: nothing of any other provider's.
     expect(removed).toBeGreaterThan(1);
     expect(replaced).toBe(removed - 1 + (added - 1) + 1);
   });
 
-  it('counts each row and each index entry, for a full seed of the real catalog into empty tables', async () => {
-    const snapshot = snapshotOf(realCatalog());
+  it('counts each row and each index entry, for a full seed of the tests’ catalog into empty tables', async () => {
+    const snapshot = snapshotOf(testCatalog());
     const { rowsWritten } = await seed(snapshot, { full: true });
     const rows = (await Promise.all(tables.map(count))).reduce((sum, n) => sum + n, 0);
     // The rows themselves, plus an entry in each of the 4 indexes on prices, plan_features, plans and bundle_plans
@@ -527,7 +527,7 @@ describe('rows written', () => {
   });
 
   it('also counts each deleted row, but not its index entries, for a full reseed', async () => {
-    const snapshot = snapshotOf(realCatalog());
+    const snapshot = snapshotOf(testCatalog());
     const { rowsWritten: intoEmpty } = await seed(snapshot, { full: true });
     const rows = (await Promise.all(tables.map(count))).reduce((sum, n) => sum + n, 0);
 

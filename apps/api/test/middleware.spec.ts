@@ -7,7 +7,7 @@ import { catalogAssets, catalogSnapshot, seedCatalog } from './seeded-catalog';
 import { freshRateLimitWindow } from './rate-limit-window';
 
 // What every /api/* request goes through (src/middleware.ts, M2.8): the API's headers, JSON errors for unknown paths
-// and unexpected throws, the per-IP rate limits and the edge cache, on the real catalog.
+// and unexpected throws, the per-IP rate limits and the edge cache, on the tests' own catalog (M11.8).
 const BASE = 'https://sub.simplely.ca/api/v1';
 const snapshot = catalogSnapshot('abc1234');
 const assets = catalogAssets(snapshot);

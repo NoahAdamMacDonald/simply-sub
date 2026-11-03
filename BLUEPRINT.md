@@ -3375,13 +3375,16 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 ### 13.3 Testing
 - `packages/core`: high unit-test coverage, especially schedule, ranking, optimizer and rewards.
 - `apps/api`: route tests with Vitest + `@cloudflare/vitest-plugin` (the renamed `@cloudflare/vitest-pool-workers`),
-  run inside workerd.
+  run inside workerd, on a catalog of their own since M11.8: `apps/api/test/fixtures/catalog/`, a copy of `data/`
+  frozen on 2026-11-02 (its logos as empty files: the tests use only their names), read under `data/`'s file names and
+  built and seeded by the same code, so research changes no test's results. Change it only for what a test needs. The
+  app's specs had their own fixtures already (`searchCatalogData`).
 - **Contract tests** (M2.7), so `docs/api-output-examples.json` and the code can't drift apart:
   - core checks every example: an error, on any endpoint (Phase 5's too), against `errorBodySchema` and its
     code's status; a built endpoint's success body against its schema. It also checks that every built endpoint
     has a schema and that the error codes match the examples' list.
   - `apps/api/test/contract.spec.ts` sends every example of a built endpoint to the Worker as its request says, on
-    the real catalog seeded under the examples' version, and checks the status, the headers the Worker sends
+    the tests' catalog seeded under the examples' version, and checks the status, the headers the Worker sends
     (`Access-Control-Allow-Origin` waits for M2.8, and `Content-Encoding` is Cloudflare's edge's), and the body:
     errors exactly, success bodies against their schema and their meta's keys, since the examples' values are
     illustrative. A new example is tested with no new test.

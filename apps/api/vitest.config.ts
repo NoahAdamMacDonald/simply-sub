@@ -47,11 +47,13 @@ export default defineConfig(async () => {
 });
 
 /**
- * The real catalog for the seed tests (test/seed.spec.ts): data/'s YAML files, parsed as YAML 1.2,
- * and the logos' file names. workerd can't read files, and a binding has to be JSON.
+ * The tests' own catalog (M11.8): test/fixtures/catalog/, a copy of data/ frozen on 2026-11-02, so research changes no
+ * test's results (a batch moved the contract test's VPN results more than once). Its YAML files, parsed as YAML 1.2,
+ * and its logos' file names, under the names data/ gives them, so core reads it as it reads data/. workerd can't
+ * read files, and a binding has to be JSON. Change it only for what a test needs.
  */
 async function readCatalog() {
-  const root = new URL('../../data/', import.meta.url);
+  const root = new URL('./test/fixtures/catalog/', import.meta.url);
   const names = (await readdir(root, { recursive: true }))
     .map((name) => name.replaceAll('\\', '/'))
     .sort();

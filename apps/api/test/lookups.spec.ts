@@ -16,10 +16,10 @@ import contract from '../../../docs/api-output-examples.json';
 import { bundlesStatements, loadBundles, loadPlan, loadProvider } from '../src/db/lookups';
 import app from '../src/index';
 
-// GET /providers/:id, GET /plans/:id and GET /bundles (docs/api-output-examples.json) on the real catalog in data/:
+// GET /providers/:id, GET /plans/:id and GET /bundles (docs/api-output-examples.json) on the tests' own catalog (M11.8):
 // D1 is seeded with it the way the deploy seeds, the static features.json, categories.json and ids.json are built
 // from it, and KV keeps fresh ECB rates, so no test reaches Frankfurter. The examples' prices are illustrative, so
-// the tests compare their shapes and key order, and their values where the real catalog has the same prices.
+// the tests compare their shapes and key order, and their values where the tests' catalog has the same prices.
 const BASE = 'https://sub.simplely.ca/api/v1';
 const cacheControl = 'public, max-age=3600, stale-while-revalidate=86400';
 const providerExamples = contract.endpoints['GET /providers/:id'].examples;
@@ -74,7 +74,7 @@ const snapshot = snapshotOf();
 const providerOf = (id: string) => {
   const provider = snapshot.data.providers.find((candidate) => candidate.id === id);
   if (!provider) {
-    throw new Error(`No provider ${id} in data/`);
+    throw new Error(`No provider ${id} in the tests' catalog`);
   }
   return provider;
 };

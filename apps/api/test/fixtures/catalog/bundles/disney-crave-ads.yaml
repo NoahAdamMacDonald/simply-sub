@@ -1,0 +1,15 @@
+# Crave sells it (crave.ca/en/subscribe, Bundles), and Disney+ lists it at the same price (its Canadian price article).
+id: bundle.disney-crave-ads
+name: Disney+ and Crave With Ads Bundle
+soldBy: crave
+includes: [disney-plus.standard-ads, crave.standard-ads]
+link: https://www.crave.ca/en/subscribe
+prices:
+  - region: CA
+    currency: CAD
+    amount: 15.75
+    interval: month
+    intervalCount: 1
+    autoRenew: true
+    lastVerified: 2026-10-26
+    sourceUrl: https://www.crave.ca/en/subscribe

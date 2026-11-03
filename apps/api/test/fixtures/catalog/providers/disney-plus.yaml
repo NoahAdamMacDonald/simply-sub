@@ -1,0 +1,267 @@
+id: disney-plus
+name: Disney+
+aliases: [disney plus, disneyplus]
+website: https://www.disneyplus.com
+category: streaming
+spendCategory: streaming
+# Accepted cards, read 2026-10-28 (M9.2) on the help centre's Payment methods for Disney+, whose list follows the
+# country picked (Canada, then United States): Canada takes JCB, Visa, Mastercard, American Express and Diners Club
+# (other), and the US Visa, Mastercard, American Express and Discover. "International cards are not accepted".
+acceptedNetworks:
+  CA:
+    networks: [jcb, visa, mastercard, amex, other]
+    url: https://help.disneyplus.com/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - JCB
+      - Visa
+      - Mastercard
+      - American Express
+      - Diners Club
+  US:
+    networks: [visa, mastercard, amex, discover]
+    url: https://help.disneyplus.com/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - Visa, including the Disney Visa
+      - Mastercard
+      - American Express
+      - Discover
+billingCurrency: { CA: CAD, US: USD }
+# The help centre's one cancel article: the same steps in Canada and the US (Account > Subscription > Cancel
+# Subscription), read 2026-10-26 with the help centre set to each country.
+cancelUrl: https://help.disneyplus.com/article/disneyplus-cancel
+sources: { pricing: https://help.disneyplus.com/article/disneyplus-en-ca-price }
+# Owner (M11.2), read 2026-11-02: its press site's About page.
+# Ways to pay (M11.5), read 2026-11-02 on its payment methods article.
+paymentMethods:
+  - methods: [card, paypal, app-store]
+    page: Payment methods for Disney+
+    url: https://help.disneyplus.com/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - PayPal
+      - 'You can also choose to purchase a Disney+ subscription through a third-party billing partner (Docomo, J:COM, Apple, Google, Amazon, Hulu (Hulu | Disney+ Set Plan), or any other platform).'
+owner:
+  name: The Walt Disney Company
+  page:
+    name: About Disney+ (press site)
+    url: https://press.disneyplus.com/about
+  quotes:
+    - As the flagship direct-to-consumer streaming service from The Walt Disney Company
+  lastVerified: 2026-11-02
+
+# Canada sells Standard With Ads, Standard and Premium. The US sells With Ads (4K, unlike Canada's 1080p) and
+# Premium, so a plan sold in one country only has prices there. The US prices are on
+# help.disneyplus.com/article/disneyplus-price with the help centre's country set to United States.
+plans:
+  - id: disney-plus.standard-ads
+    name: Standard With Ads
+    link: https://www.disneyplus.com/en-ca
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 2
+      streaming.kids-profiles: true
+      streaming.french-content: true
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+    addOnIds: [disney-plus.extra-member-ads]
+    addOnLimit: 1
+
+  - id: disney-plus.with-ads
+    name: With Ads
+    link: https://www.disneyplus.com
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: false
+      streaming.concurrent-streams: 4
+      streaming.kids-profiles: true
+    prices:
+      - region: US
+        currency: USD
+        amount: 12.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-price
+    addOnIds: [disney-plus.extra-member-with-ads]
+    addOnLimit: 1
+
+  - id: disney-plus.standard
+    name: Standard
+    link: https://www.disneyplus.com/en-ca
+    features:
+      video.quality: 1080p
+      ad-free: true
+      streaming.concurrent-streams: 2
+      streaming.download-devices: 10
+      streaming.kids-profiles: true
+      streaming.french-content: true
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+      - region: CA
+        currency: CAD
+        amount: 159.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+    addOnIds: [disney-plus.extra-member-standard]
+    addOnLimit: 1
+
+  - id: disney-plus.premium
+    name: Premium
+    link: https://www.disneyplus.com
+    features:
+      video.quality: 4k
+      video.hdr: true
+      audio.dolby-atmos: true
+      ad-free: true
+      streaming.concurrent-streams: 4
+      streaming.download-devices: 10
+      streaming.kids-profiles: true
+      streaming.french-content: true
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 16.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+      - region: CA
+        currency: CAD
+        amount: 169.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+      - region: US
+        currency: USD
+        amount: 21.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-price
+      - region: US
+        currency: USD
+        amount: 214.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-price
+    addOnIds: [disney-plus.extra-member-premium]
+    addOnLimit: 1
+
+# One Extra Member per subscription, priced by the account holder's plan. They watch on one device at a time.
+addOns:
+  - id: disney-plus.extra-member-ads
+    name: Extra Member (Standard With Ads)
+    grantsPlan: disney-plus.standard-ads
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+  - id: disney-plus.extra-member-with-ads
+    name: Extra Member (With Ads)
+    grantsPlan: disney-plus.with-ads
+    prices:
+      - region: US
+        currency: USD
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-price
+  - id: disney-plus.extra-member-standard
+    name: Extra Member (Standard)
+    grantsPlan: disney-plus.standard
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+  - id: disney-plus.extra-member-premium
+    name: Extra Member (Premium)
+    grantsPlan: disney-plus.premium
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+      - region: US
+        currency: USD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-23
+        sourceUrl: https://help.disneyplus.com/article/disneyplus-price
+
+# Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: The Walt Disney Company's privacy policy, which covers
+# Disney+, rated once in data/policies/disney-privacy.yaml (M11.1). Not rated: the billing and legal topics, since its
+# subscriber agreement (disneyplus.com/en-ca/legal) doesn't render here, and account sharing and device limits.
+policies:
+  shared: [disney-privacy, disney-subscriber-agreement]
+  links:
+    - name: 'Security vulnerability reports'
+      url: https://hackerone.com/disney
+    - name: 'Subscriber agreement, Canada'
+      url: https://www.disneyplus.com/en-ca/welcome/subscriber-agreement-side-by-side
+  ratings:
+    - topic: security.practices
+      tier: neutral
+      reason: "Disney runs a program where security experts can report problems they find, but it doesn't say outside experts check its security or publish what they find."
+      sources:
+        - url: https://hackerone.com/disney
+          quote: 'If you believe you have found a qualifying security vulnerability in a Disney product or website, please submit a report in accordance with the guidelines below.'
+      lastVerified: 2026-11-02
+    # Canada's own agreement, which "governs for residents of Canada", read on its side-by-side page of amended clauses
+    # (the agreement itself renders only its footer in headless Edge). Its other clauses read as the US agreement's.
+    - topic: billing.price-changes
+      regions: [CA]
+      tier: good
+      reason: 'In Canada it says it will try to email you at least 30 days before a price goes up, so you can cancel first.'
+      sources:
+        - url: https://www.disneyplus.com/en-ca/welcome/subscriber-agreement-side-by-side
+          quote: 'In the event of a price change, we will attempt to notify you at least thirty (30) days in advance of the change by sending an email to the email address you have registered for your account.'
+        - url: https://www.disneyplus.com/en-ca/welcome/subscriber-agreement-side-by-side
+          quote: 'This Agreement governs for residents of Canada.'
+      replacesShared: true
+      lastVerified: 2026-11-02

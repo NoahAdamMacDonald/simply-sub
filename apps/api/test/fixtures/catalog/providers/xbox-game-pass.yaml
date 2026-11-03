@@ -1,0 +1,568 @@
+# Drafted by the discovery pipeline on 2026-10-28 (BLUEPRINT §6.5) from these pages, each quoted where it's used.
+# Pricing: https://www.xbox.com/en-CA/xbox-game-pass.
+# Payment methods: none found.
+# Cancelling:
+# https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription.
+# Terms: https://www.xbox.com/en-US/legal/subscription-terms.
+# Privacy: none found.
+# Bundles: none found.
+# Official resellers: https://www.xbox.com/en-CA/where-to-buy.
+# Not on the pages: yearly prices: the page sells monthly plans only; the card networks it takes: no page read names
+# them; the countries it sells in: the page points to xbox.com/regions, which wasn't read; the first 14 days for $1 is
+# a promotional offer for new subscribers, so it isn't stored; official resellers: none; its where-to-buy page lists
+# retailers for consoles, games and accessories and says it "does not constitute an endorsement of any retailer".
+
+id: xbox-game-pass
+name: Xbox Game Pass
+website: https://www.xbox.com/xbox-game-pass
+category: gaming
+spendCategory: gaming
+billingCurrency: { CA: CAD, GB: GBP, US: USD, AU: AUD, NZ: NZD, EU: EUR }
+cancelUrl: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
+sources: { pricing: https://www.xbox.com/en-CA/xbox-game-pass }
+# Ways to pay (M11.5), read 2026-11-02 in the Microsoft Services Agreement its subscription terms include: a card,
+# or Microsoft gift cards. No official page read lists PayPal or other methods for Game Pass.
+paymentMethods:
+  - methods: [card, gift-card]
+    page: Microsoft Services Agreement
+    url: https://www.microsoft.com/en-ca/servicesagreement
+    quotes:
+      - 'as charges to your designated account (for credit card or similar payments)'
+      - 'Redemption and use of gift cards (other than Skype gift cards) are governed by the Microsoft Gift Card Terms and Conditions'
+# Owner (M11.2), read 2026-11-02: Microsoft's 2025 annual report, on its own site, names Xbox Game Pass among "our
+# services".
+owner:
+  name: Microsoft Corporation
+  website: https://www.microsoft.com
+  page:
+    name: Microsoft Annual Report 2025
+    url: https://www.microsoft.com/investor/reports/ar25/index.html
+  quotes:
+    - drive increased engagement with our services like Microsoft Edge, Bing, Copilot, Microsoft Teams, Microsoft 365 Consumer, Xbox Game Pass, and more
+  lastVerified: 2026-11-02
+
+# Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their
+# words. Ultimate's "EA Play, Fortnite Crew and Ubisoft+ Classics" is three, since PC Game Pass has EA Play.
+perks:
+  - id: games-50
+    name: 50+ games on console, PC and more devices
+  - id: games-200
+    name: 200+ games on console, PC and more devices
+  - id: games-400
+    name: 400+ games on console, PC and more devices
+  - id: pc-games-300
+    name: 300+ games on PC only
+  - id: xbox-games-within-a-year
+    name: New Xbox-published games within a year of launch
+  - id: day-one-games
+    name: New games on day one
+  - id: ea-play
+    name: EA Play
+  - id: fortnite-crew
+    name: Fortnite Crew
+  - id: ubisoft-classics
+    name: Ubisoft+ Classics
+  - id: cloud-5-hours
+    name: Cloud playtime, 5 hours a month
+  - id: cloud-10-hours
+    name: Cloud playtime, 10 hours a month
+  - id: cloud-15-hours
+    name: Cloud playtime, 15 hours a month
+  - id: online-multiplayer
+    name: Online console multiplayer
+
+plans:
+  - id: xbox-game-pass.essential
+    name: Essential
+    link: https://www.xbox.com/en-CA/xbox-game-pass
+    features: {}
+    perks: [games-50, cloud-5-hours, online-multiplayer]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 13.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://www.xbox.com/en-CA/xbox-game-pass
+      - region: GB
+        currency: GBP
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-GB/xbox-game-pass
+      - region: US
+        currency: USD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-US/xbox-game-pass?wfExp=390B
+      - region: AU
+        currency: AUD
+        amount: 12.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-AU/xbox-game-pass
+      - region: NZ
+        currency: NZD
+        amount: 15.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-NZ/xbox-game-pass
+      - region: EU
+        currency: EUR
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-IE/xbox-game-pass
+
+  - id: xbox-game-pass.premium
+    name: Premium
+    link: https://www.xbox.com/en-CA/xbox-game-pass
+    features: {}
+    perks: [games-200, xbox-games-within-a-year, cloud-10-hours, online-multiplayer]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 17.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://www.xbox.com/en-CA/xbox-game-pass
+      - region: GB
+        currency: GBP
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-GB/xbox-game-pass
+      - region: US
+        currency: USD
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-US/xbox-game-pass?wfExp=390B
+      - region: AU
+        currency: AUD
+        amount: 17.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-AU/xbox-game-pass
+      - region: NZ
+        currency: NZD
+        amount: 21.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-NZ/xbox-game-pass
+      - region: EU
+        currency: EUR
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-IE/xbox-game-pass
+
+  - id: xbox-game-pass.ultimate
+    name: Ultimate
+    link: https://www.xbox.com/en-CA/xbox-game-pass
+    features: {}
+    perks:
+      - games-400
+      - day-one-games
+      - ea-play
+      - fortnite-crew
+      - ubisoft-classics
+      - cloud-15-hours
+      - online-multiplayer
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 25.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://www.xbox.com/en-CA/xbox-game-pass
+      - region: GB
+        currency: GBP
+        amount: 16.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-GB/xbox-game-pass
+      - region: US
+        currency: USD
+        amount: 22.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-US/xbox-game-pass?wfExp=390B
+      - region: AU
+        currency: AUD
+        amount: 25.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-AU/xbox-game-pass
+      - region: NZ
+        currency: NZD
+        amount: 32.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-NZ/xbox-game-pass
+      - region: EU
+        currency: EUR
+        amount: 20.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-IE/xbox-game-pass
+
+  - id: xbox-game-pass.pc-game-pass
+    name: PC Game Pass
+    link: https://www.xbox.com/en-CA/xbox-game-pass
+    features: {}
+    perks: [pc-games-300, day-one-games, ea-play]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 16.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-28
+        sourceUrl: https://www.xbox.com/en-CA/xbox-game-pass
+      - region: GB
+        currency: GBP
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-GB/xbox-game-pass
+      - region: AU
+        currency: AUD
+        amount: 16.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-AU/xbox-game-pass
+      - region: NZ
+        currency: NZD
+        amount: 20.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-NZ/xbox-game-pass
+      - region: EU
+        currency: EUR
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-29
+        sourceUrl: https://www.xbox.com/en-IE/xbox-game-pass
+
+policies:
+  links:
+    - name: Cancelling
+      url: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
+    - name: Plans and pricing
+      url: https://www.xbox.com/en-CA/xbox-game-pass
+    - name: 'XBOX subscription terms'
+      url: https://www.xbox.com/en-US/legal/subscription-terms
+    - name: 'Microsoft privacy statement'
+      url: https://www.microsoft.com/en-ca/privacy/privacystatement
+    - name: 'Microsoft Services Agreement'
+      url: https://www.microsoft.com/en-ca/servicesagreement
+    - name: 'Microsoft Services Agreement (US)'
+      url: https://www.microsoft.com/en-us/servicesagreement
+    - name: 'Microsoft Store terms of sale'
+      url: https://www.microsoft.com/en-ca/storedocs/terms-of-sale
+    - name: 'Xbox bug bounty'
+      url: https://www.microsoft.com/en-us/msrc/bounty-xbox
+  ratings:
+    - topic: billing.cancellation
+      tier: great
+      reason: You can cancel at any time, and in Canada you can cancel with immediate effect and get a prorated refund of your last charge.
+      sources:
+        - url: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
+          quote: You can cancel an XBOX subscription at any time.
+        - url: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
+          quote: 'In the following countries, you have the right to cancel a subscription that has recurring billing with immediate effect and receive a prorated refund as described in the Microsoft Consumer Subscription Prorated Refund Policy:'
+      regions: [CA]
+      lastVerified: 2026-10-28
+    - topic: billing.refunds
+      tier: great
+      reason: You can cancel at any time, and in Canada you can cancel with immediate effect and get a prorated refund of your last charge.
+      sources:
+        - url: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
+          quote: You can cancel an XBOX subscription at any time.
+        - url: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
+          quote: 'In the following countries, you have the right to cancel a subscription that has recurring billing with immediate effect and receive a prorated refund as described in the Microsoft Consumer Subscription Prorated Refund Policy:'
+      regions: [CA]
+      lastVerified: 2026-10-28
+    - topic: billing.price-changes
+      tier: good
+      reason: It gives at least 30 days' notice before raising the price, and you can cancel before the next billing date.
+      sources:
+        - url: https://www.xbox.com/en-CA/xbox-game-pass
+          quote: Charges may be increased on at least 30 days notice as described in the Microsoft Store Terms of Sale.
+        - url: https://www.xbox.com/en-CA/xbox-game-pass
+          quote: To stop being charged, cancel your subscription in your Microsoft account (account.microsoft.com/services) or on your XBOX console, before the next billing date.
+      lastVerified: 2026-10-28
+    # M11.9's topics, pulled forward at the owner's request (2026-11-02), read that day: Microsoft's privacy
+    # statement, Services Agreement (Canada's, and the US's for its arbitration) and Store terms of sale, which the
+    # XBOX subscription terms make part of every subscription.
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records what you play, for how long, your achievements and how your console runs. You can turn off the extra diagnostic data, but not the basic data it always collects.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+          quote: 'Which games you play and apps you use, your game progress, achievements, play time per game, and other play statistics.'
+        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+          quote: 'Products that collect diagnostic data will always collect required diagnostic data, but you can control whether to send us optional diagnostic data.'
+      action:
+        name: 'Your Microsoft privacy dashboard'
+        url: https://account.microsoft.com/privacy
+      lastVerified: 2026-11-02
+    - topic: privacy.data-sharing
+      tier: neutral
+      reason: 'It shares some of your information with ad partners for ads chosen for you. You can turn that off once in your account, for every device you sign in on.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+          quote: 'We also disclose personal data for digital advertising purposes.'
+        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+          quote: 'When you’re logged into your Microsoft account, your opt out choice will be associated with your account and applied across devices whenever you are signed in.'
+      action:
+        name: 'Turn off ad sharing in your ad settings'
+        url: https://account.microsoft.com/privacy/ad-settings
+      lastVerified: 2026-11-02
+    - topic: privacy.ads-tracking
+      tier: neutral
+      reason: 'It picks ads for you from what it knows about you over time, unless you turn that off in your Microsoft account.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+          quote: 'Ads may be shown based on your current interactions with us, as well as personalised using information about you over time.'
+        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+          quote: 'You can opt out of receiving personalised ads through our personalised ads and offers page'
+      action:
+        name: 'Turn off personalised ads'
+        url: https://account.microsoft.com/privacy/ad-settings
+      lastVerified: 2026-11-02
+    - topic: privacy.ai-training
+      tier: bad
+      reason: 'It says it may use your data to build and train its AI, and its privacy statement names no way to say no.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+          quote: 'As part of our efforts to improve and develop our products, we may use your data to develop and train our AI models.'
+      lastVerified: 2026-11-02
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information as long as it decides it needs it, and says how long varies a lot, with no limits stated.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+          quote: 'Because these needs can vary for different data types and the context of our interactions with you or your use of our products, actual retention periods can vary significantly.'
+      lastVerified: 2026-11-02
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can close your Microsoft account yourself. After a 30 or 60 day wait, in case you change your mind, it deletes your data and content.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/servicesagreement
+          quote: 'When you ask us to close your Microsoft account, you can choose to put it in a suspended state for either 30 or 60 days just in case you change your mind.'
+        - url: https://www.microsoft.com/en-ca/servicesagreement
+          quote: 'Second, we’ll delete Data or Your Content associated with your Microsoft account or will otherwise disassociate it from you and your Microsoft account'
+      action:
+        name: 'Close your Microsoft account'
+        url: https://go.microsoft.com/fwlink/p/?linkid=618278
+      lastVerified: 2026-11-02
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can see and manage your data in its privacy dashboard, or ask Microsoft for it.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+          quote: 'You can control your personal data that Microsoft has obtained and exercise your data protection rights by contacting Microsoft or using various tools we provide, such as the Microsoft privacy dashboard .'
+      action:
+        name: 'Your Microsoft privacy dashboard'
+        url: https://account.microsoft.com/privacy
+      lastVerified: 2026-11-02
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over data when the law or a valid court order asks, and publishes a report on those requests.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+          quote: 'Comply with applicable law or respond to valid legal process, including from law enforcement or other government agencies.'
+        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+          quote: 'For more information about data we disclose in response to requests from law enforcement and other government agencies, please see our Law Enforcement Requests Report .'
+      lastVerified: 2026-11-02
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your information can go to other countries with weaker privacy laws, under the EU’s standard legal safeguards.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+          quote: 'We transfer personal data from the country of origin to other countries, including those that may not offer the same level of data protection as determined by the European Commission or your local data protection authority.'
+        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+          quote: 'In such cases, we implement legal safeguards-such as standard contractual clauses approved by the European Commission – to help protect your rights and ensure your data remains protected.'
+      lastVerified: 2026-11-02
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with a Microsoft account. In some places you may have to prove your age or who you are, where the law asks.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+          quote: 'Depending on your jurisdiction, you may need to verify your age or identity to access some services or features.'
+      lastVerified: 2026-11-02
+    - topic: privacy.children
+      tier: great
+      reason: 'Children need a parent’s OK, give only what’s needed, and never get ads picked for them. Parents get controls for screen time and spending.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+          quote: 'We will not knowingly ask children under the age of consent to provide more data than is necessary to provide the product.'
+        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+          quote: 'As mentioned in the Advertising section, we do not deliver personalised advertising to children whose birthdate in their Microsoft account identifies them as under 18 years of age.'
+        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+          quote: 'Microsoft Family Safety can help parents and guardians through tools such as digital content filtering, screen time limits, spending for Microsoft and XBOX stores'
+      lastVerified: 2026-11-02
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can stop it any time in your Microsoft account or on your console, before the next bill.'
+      sources:
+        - url: https://www.xbox.com/en-US/legal/subscription-terms
+          quote: 'To stop being charged, cancel your subscription or turn off recurring billing in your Microsoft account (account.microsoft.com/services) or on your XBOX console, before the next billing date.'
+      lastVerified: 2026-11-02
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You can get your money back if you cancel within 30 days of first buying it. After that, no refunds.'
+      sources:
+        - url: https://www.xbox.com/en-US/legal/subscription-terms
+          quote: 'You can receive a refund within 30 days from your initial purchase by cancelling your subscription'
+      lastVerified: 2026-11-02
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'A trial turns into a paid plan on your card unless you cancel before it ends, and it doesn’t promise to remind you.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/storedocs/terms-of-sale
+          quote: 'If you are taking part in any trial-period offer, you must cancel the service by the end of the trial period to avoid incurring new charges unless we notify you otherwise.'
+      lastVerified: 2026-11-02
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say subscriptions renew on their own, but not that it reminds you first.'
+      pages:
+        [
+          https://www.xbox.com/en-US/legal/subscription-terms,
+          https://www.microsoft.com/en-ca/storedocs/terms-of-sale,
+        ]
+      lastVerified: 2026-11-02
+    - topic: billing.fees
+      tier: good
+      reason: 'The price is all Microsoft charges, plus tax. Your bank may add its own fee if it converts the currency.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/storedocs/terms-of-sale
+          quote: 'Your bank might charge you additional fees for conversion or processing services when you use a credit'
+      lastVerified: 2026-11-02
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up to Ultimate happens at once and turns the time you have left into Ultimate time, but you can’t switch that time back.'
+      sources:
+        - url: https://www.xbox.com/en-US/legal/subscription-terms
+          quote: 'Purchase of XBOX Game Pass Ultimate automatically (a) upgrades your existing XBOX Game Pass (Essential, Premium, PC, Console) and/or EA Play membership(s) to XBOX Game Pass Ultimate at the current conversion ratio'
+      lastVerified: 2026-11-02
+    - topic: legal.disputes
+      tier: neutral
+      reason: 'In the US, disagreements go to a private referee (an arbitrator) and you can’t join a group lawsuit, but you can use small claims court.'
+      sources:
+        - url: https://www.microsoft.com/en-us/servicesagreement
+          quote: 'You and we agree to submit disputes to a neutral arbitrator and not to sue in court in front of a judge or jury, except in small claims court.'
+      action:
+        name: 'Its arbitration terms (section 15)'
+        url: https://www.microsoft.com/en-us/servicesagreement
+      lastVerified: 2026-11-02
+    - topic: legal.disputes
+      regions: [CA]
+      tier: good
+      reason: 'In Canada, your province’s laws apply and disputes go to the courts in Ontario, with no private referee.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/servicesagreement
+          quote: 'You and we irrevocably consent to the exclusive jurisdiction and venue of the courts in Ontario for all disputes arising out of or relating to these Terms'
+      lastVerified: 2026-11-02
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It can change its terms whenever it likes and says it will tell you, but not how far ahead.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/servicesagreement
+          quote: 'We may change these Terms at any time, and we’ll tell you when we do.'
+      lastVerified: 2026-11-02
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'If you break its rules it can cut you off or close your account right away, with no refund promised.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/servicesagreement
+          quote: 'This could include limiting access to certain features or Services, stopping providing Services, closing your Microsoft account immediately or blocking delivery of a communication'
+      lastVerified: 2026-11-02
+    - topic: legal.content-rights
+      tier: bad
+      reason: 'Anything you share on Xbox, with your gamertag, Microsoft and anyone it chooses may use, change and share, for free and anywhere.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/servicesagreement
+          quote: 'As part of building the XBOX Services community, you grant to Microsoft, its affiliates and sublicensees a free and worldwide right, to use, modify, reproduce, distribute, broadcast, share and display Your Content or your name, gamertag, motto, or avatar that you posted for any XBOX Services.'
+      lastVerified: 2026-11-02
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'Games come and go from the library, as with any subscription. If one leaves, you have to buy it to keep playing.'
+      sources:
+        - url: https://www.xbox.com/en-US/legal/subscription-terms
+          quote: 'if a game leaves the catalog you must buy the game separately'
+      lastVerified: 2026-11-02
+    - topic: legal.inactivity
+      tier: poor
+      reason: 'If you don’t sign in to your Microsoft account for two years, it closes it, and its terms don’t promise a warning first.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/servicesagreement
+          quote: 'This means you must sign in at least once in a two-year period to keep your Microsoft account, and associated Services (unless specified otherwise), active'
+      lastVerified: 2026-11-02
+    - topic: security.practices
+      tier: neutral
+      reason: 'It pays security experts who find problems in Xbox, but doesn’t say outside experts check it regularly.'
+      sources:
+        - url: https://www.microsoft.com/en-us/msrc/bounty-xbox
+          quote: 'Qualified submissions are eligible for bounty awards of $400 to $20,000 USD.'
+      lastVerified: 2026-11-02
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its subscription terms don’t say who can share your Game Pass.'
+      pages: [https://www.xbox.com/en-US/legal/subscription-terms]
+      lastVerified: 2026-11-02
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Cloud gaming comes with limits on streaming, which it doesn’t spell out in its terms.'
+      sources:
+        - url: https://www.xbox.com/en-US/legal/subscription-terms
+          quote: 'Streaming limits apply.'
+      lastVerified: 2026-11-02

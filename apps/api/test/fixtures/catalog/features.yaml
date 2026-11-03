@@ -1,0 +1,601 @@
+# The feature registry (BLUEPRINT §4.2). Plans list only ids from this file.
+# Shapes: packages/core/src/catalog/feature.ts. Add a feature here, in its own commit, before a provider
+# uses it (BLUEPRINT §13.4).
+
+# ── Streaming ──────────────────────────────────────────────────────────────────
+- id: video.quality
+  name: Video quality
+  category: streaming
+  type: enum
+  values:
+    - { id: 480p, name: 480p (SD) }
+    - { id: 720p, name: 720p (HD) }
+    - { id: 1080p, name: 1080p (Full HD), headline: true }
+    - { id: 4k, name: 4K (Ultra HD), aliases: [uhd, 2160p], headline: true }
+  aliases: [resolution, picture quality]
+  requiredIn: [streaming]
+- id: video.hdr
+  name: HDR
+  category: streaming
+  type: boolean
+  aliases: [dolby vision, hdr10]
+- id: audio.dolby-atmos
+  name: Dolby Atmos
+  category: streaming
+  type: boolean
+  aliases: [spatial audio]
+- id: streaming.concurrent-streams
+  name: Simultaneous streams
+  category: streaming
+  type: number
+  unit: devices
+  tiers:
+    - { id: '1', name: Single device, min: 1, max: 1 }
+    - { id: 2-4, name: 2 to 4 devices, min: 2, max: 4 }
+    - { id: 5+, name: More than 4 devices, min: 5 }
+  aliases: [screens, streams, devices at once]
+  requiredIn: [streaming]
+- id: streaming.download-devices
+  name: Download devices
+  category: streaming
+  type: number
+  unit: devices
+  tiers:
+    - { id: 1+, name: Offline downloads, min: 1 }
+    - { id: 6+, name: Downloads on 6+ devices, min: 6 }
+  aliases: [offline viewing, downloads]
+- id: streaming.kids-profiles
+  name: Kids profiles
+  category: streaming
+  type: boolean
+  aliases: [kids mode, children's profiles]
+- id: streaming.french-content
+  name: French-language content
+  category: streaming
+  type: boolean
+  aliases: [french, french audio, french dubs]
+- id: streaming.live
+  name: Live TV and sports
+  category: streaming
+  type: set
+  values:
+    - { id: tv-channels, name: Live TV channels, aliases: [live tv, linear tv] }
+    - { id: sports, name: Live sports, aliases: [sports streaming, live games] }
+  aliases: [live broadcasts]
+
+# ── VPN ────────────────────────────────────────────────────────────────────────
+- id: vpn.included
+  name: VPN
+  category: vpn
+  type: boolean
+  aliases: [vpn, virtual private network]
+  headline: true
+  requiredIn: [vpn]
+- id: vpn.devices
+  parent: vpn.included
+  name: VPN devices
+  category: vpn
+  type: number
+  unit: devices
+  tiers:
+    - { id: 1-5, name: 1 to 5 devices, min: 1, max: 5 }
+    - { id: 6-10, name: 6 to 10 devices, min: 6, max: 10 }
+    - { id: 11+, name: More than 10 devices, min: 11 }
+- id: vpn.unlimited-traffic
+  parent: vpn.included
+  name: Unlimited VPN traffic
+  category: vpn
+  type: boolean
+  aliases: [unlimited data, unlimited bandwidth]
+  requiredIn: [vpn]
+- id: vpn.server-countries
+  parent: vpn.included
+  name: VPN server countries
+  category: vpn
+  type: number
+  unit: countries
+  tiers:
+    - { id: 1-10, name: 1 to 10 countries, min: 1, max: 10 }
+    - { id: 11-50, name: 11 to 50 countries, min: 11, max: 50 }
+    - { id: 51+, name: More than 50 countries, min: 51 }
+  aliases: [server locations, vpn locations]
+  requiredIn: [vpn]
+- id: vpn.protocols
+  parent: vpn.included
+  name: VPN protocols
+  category: vpn
+  type: set
+  values:
+    - { id: wireguard, name: WireGuard }
+    - { id: openvpn, name: OpenVPN }
+    - { id: ikev2, name: IKEv2 }
+    - id: stealth
+      name: Obfuscated connections
+      aliases: [stealth, obfuscation, censorship circumvention, udp-over-tcp, shadowsocks]
+- id: vpn.kill-switch
+  parent: vpn.included
+  name: Kill switch
+  category: vpn
+  type: boolean
+  aliases: [network lock, lockdown mode]
+- id: vpn.split-tunneling
+  parent: vpn.included
+  name: Split tunneling
+  category: vpn
+  type: boolean
+  aliases: [split tunnel, app exclusions, bypass apps]
+- id: vpn.multi-hop
+  parent: vpn.included
+  name: Multi-hop
+  category: vpn
+  type: boolean
+  aliases: [multihop, double vpn, secure core]
+- id: vpn.content-blocking
+  parent: vpn.included
+  name: DNS content blocking
+  category: vpn
+  type: set
+  values:
+    - { id: ads, name: Ads, aliases: [ad blocker] }
+    - { id: trackers, name: Trackers }
+    - { id: malware, name: Malware }
+    - { id: adult-content, name: Adult content }
+    - { id: gambling, name: Gambling }
+    - { id: social-media, name: Social media }
+  aliases: [netshield, dns filtering]
+- id: vpn.p2p
+  parent: vpn.included
+  name: P2P and torrenting
+  category: vpn
+  type: boolean
+  aliases: [torrenting, bittorrent, file sharing]
+- id: vpn.port-forwarding
+  parent: vpn.included
+  name: Port forwarding
+  category: vpn
+  type: boolean
+- id: vpn.tor
+  parent: vpn.included
+  name: Tor over VPN
+  category: vpn
+  type: boolean
+  aliases: [onion over vpn]
+- id: vpn.no-logs-policy
+  parent: vpn.included
+  name: No-logs policy
+  category: vpn
+  type: boolean
+  aliases: [no logs, zero logs, no-logging]
+- id: vpn.independent-audits
+  parent: vpn.included
+  name: Independent audits
+  category: vpn
+  type: set
+  values:
+    - { id: no-logs, name: No-logs policy, aliases: [no-logs audit] }
+    - { id: servers, name: Server infrastructure }
+    - { id: apps, name: Apps }
+  aliases: [audited vpn]
+- id: vpn.anonymous-signup
+  parent: vpn.included
+  name: Anonymous signup
+  category: vpn
+  type: boolean
+  aliases: [no email signup, account number]
+
+# ── Storage ────────────────────────────────────────────────────────────────────
+- id: storage.cloud
+  name: Cloud storage
+  category: storage
+  type: number
+  unit: GB
+  tiers:
+    - { id: 1+, name: Any cloud storage, min: 1 }
+    - { id: 200+, name: 200 GB or more, min: 200 }
+    - { id: 1000+, name: 1 TB or more, min: 1000 }
+  aliases: [drive, online storage]
+  requiredIn: [storage]
+
+# ── Email ──────────────────────────────────────────────────────────────────────
+- id: email.addresses
+  name: Email addresses
+  category: email
+  type: number
+  unit: addresses
+  tiers:
+    - { id: '1', name: 1 address, min: 1, max: 1 }
+    - { id: 2-10, name: 2 to 10 addresses, min: 2, max: 10 }
+    - { id: 11+, name: More than 10 addresses, min: 11 }
+  requiredIn: [email]
+- id: email.custom-domains
+  name: Custom email domains
+  category: email
+  type: number
+  unit: domains
+  tiers:
+    - { id: 1+, name: At least 1 custom domain, min: 1 }
+    - { id: 3+, name: 3 or more custom domains, min: 3 }
+  aliases: [own domain]
+- id: email.aliases
+  name: Email aliases
+  category: email
+  type: number
+  unit: aliases
+  tiers:
+    - { id: 1+, name: Any email aliases, min: 1 }
+    - { id: 11+, name: More than 10 aliases, min: 11 }
+  aliases: [hide-my-email, masked email, disposable email]
+
+# ── Security & passwords ───────────────────────────────────────────────────────
+# `password-manager` is a group: ranking it means "I want a password manager at all". Its children start
+# unranked, and ranks never cascade (BLUEPRINT §4.2).
+- id: password-manager
+  name: Password manager
+  category: security
+  type: boolean
+  aliases: [password vault, pass]
+  headline: true
+  requiredIn: [passwords]
+- id: password-manager.item-types
+  parent: password-manager
+  name: Storable item types
+  category: security
+  type: set
+  values:
+    - { id: login, name: Logins, aliases: [account logins, passwords] }
+    - { id: totp, name: 2FA codes, aliases: [authenticator, one-time codes, otp] }
+    - { id: passkey, name: Passkeys }
+    - { id: credit-card, name: Credit cards, aliases: [payment cards] }
+    - { id: identity, name: Identity, aliases: [personal information, personal info, identities] }
+    - { id: secure-note, name: Secure notes, aliases: [notes] }
+    - { id: email-alias, name: Email aliases, aliases: [hide-my-email, forwarding addresses] }
+    - { id: bank-account, name: Bank accounts }
+    - { id: crypto-wallet, name: Crypto wallets }
+    - { id: api-credential, name: API credentials }
+    - { id: ssh-key, name: SSH keys }
+    - { id: wifi, name: Wi-Fi networks, aliases: [wifi network] }
+    - { id: database, name: Database credentials }
+    - { id: server, name: Server credentials }
+    - { id: software-license, name: Software licenses }
+    - { id: drivers-license, name: Driver's licenses }
+    - { id: passport, name: Passports }
+    - { id: medical-record, name: Medical records }
+    - { id: membership, name: Memberships }
+    - { id: reward-program, name: Reward programs }
+    - { id: government-id, name: Government IDs, aliases: [social security, SIN] }
+    - { id: custom, name: Custom item types }
+- id: password-manager.health
+  parent: password-manager
+  name: Password health monitoring
+  category: security
+  type: set
+  values:
+    - { id: breached, name: Breached passwords, aliases: [compromised] }
+    - { id: weak, name: Weak passwords }
+    - { id: reused, name: Reused passwords, aliases: [duplicate] }
+    - { id: old, name: Old passwords }
+    - { id: suspicious, name: Suspicious logins }
+- id: password-manager.sharing
+  parent: password-manager
+  name: Password sharing
+  category: security
+  type: set
+  values:
+    - { id: share-to-user, name: Share with other users }
+    - { id: share-vault, name: Share folders or vaults, aliases: [share folders] }
+    - { id: share-link, name: Share by link }
+    - { id: link-expiry, name: Expiring links }
+    - { id: link-view-limit, name: Link view limits, aliases: [usage limits] }
+    - { id: role-permissions, name: Access roles, aliases: [viewer/editor/admin, read/write/admin] }
+- id: security.dark-web-monitoring
+  name: Dark web monitoring
+  category: security
+  type: boolean
+  aliases: [breach monitoring, identity monitoring]
+- id: security.webcam-protection
+  name: Webcam and microphone protection
+  category: security
+  type: set
+  values:
+    - { id: webcam, name: Webcam, aliases: [video protection, safecam, camera] }
+    - { id: microphone, name: Microphone, aliases: [audio protection, microphone monitor] }
+- id: security.anti-tracker
+  name: Tracker blocking in the browser
+  category: security
+  type: boolean
+  aliases: [anti-tracker, antitrack, anti-tracking]
+- id: security.file-shredder
+  name: File shredder
+  category: security
+  type: boolean
+  aliases: [data shredder, secure delete]
+
+# `antivirus.included` is a group: ranking it means "I want an antivirus at all", and its children are what antivirus
+# suites are compared on (Bitdefender, Norton, Kaspersky, ESET, 2026-11-02). Behaviour-based detection ("Advanced
+# Threat Defense") is part of every real-time antivirus, so it's the group itself, not a child.
+- id: antivirus.included
+  name: Antivirus
+  category: security
+  type: boolean
+  aliases: [real-time protection, anti-malware, malware protection, advanced threat defense]
+  headline: true
+  requiredIn: [security]
+- id: antivirus.devices
+  parent: antivirus.included
+  name: Devices protected
+  category: security
+  type: number
+  unit: devices
+  tiers:
+    - { id: '1', name: One device, min: 1, max: 1 }
+    - { id: 2-5, name: 2 to 5 devices, min: 2, max: 5 }
+    - { id: 6-10, name: 6 to 10 devices, min: 6, max: 10 }
+    - { id: 11+, name: More than 10 devices, min: 11 }
+- id: antivirus.ransomware
+  parent: antivirus.included
+  name: Ransomware protection
+  category: security
+  type: set
+  values:
+    - {
+        id: blocking,
+        name: Blocks ransomware,
+        aliases: [multi-layer ransomware protection, ransomware shield],
+      }
+    - {
+        id: file-recovery,
+        name: Recovers encrypted files,
+        aliases: [ransomware remediation, file recovery],
+      }
+- id: antivirus.web-protection
+  parent: antivirus.included
+  name: Web and phishing protection
+  category: security
+  type: boolean
+  aliases: [anti-phishing, online threat prevention, safe browsing, web protection]
+- id: antivirus.scam-protection
+  parent: antivirus.included
+  name: Scam protection
+  category: security
+  type: set
+  values:
+    - { id: web, name: Scam websites, aliases: [web scam protection] }
+    - { id: email, name: Email, aliases: [email protection] }
+    - { id: sms, name: Text messages, aliases: [sms protection] }
+    - { id: chat, name: Chat apps, aliases: [chat protection, messaging] }
+    - { id: calls, name: Calls, aliases: [call filter, call blocking] }
+- id: antivirus.network
+  parent: antivirus.included
+  name: Network protection
+  category: security
+  type: set
+  values:
+    - { id: firewall, name: Firewall, aliases: [privacy firewall, smart firewall] }
+    - {
+        id: wifi-check,
+        name: Wi-Fi security check,
+        aliases: [wi-fi security advisor, wifi inspector],
+      }
+    - {
+        id: home-network-scan,
+        name: Home network scan,
+        aliases: [network inspector, smart home protection],
+      }
+- id: antivirus.secure-browser
+  parent: antivirus.included
+  name: Secure browser for banking
+  category: security
+  type: boolean
+  aliases: [safepay, safe money, banking protection, payment protection]
+- id: antivirus.cryptomining
+  parent: antivirus.included
+  name: Cryptomining protection
+  category: security
+  type: boolean
+  aliases: [cryptojacking protection]
+- id: antivirus.vulnerability-scan
+  parent: antivirus.included
+  name: Vulnerability scan
+  category: security
+  type: boolean
+  aliases: [vulnerability assessment, software updater]
+- id: antivirus.anti-spam
+  parent: antivirus.included
+  name: Spam filter for email apps
+  category: security
+  type: boolean
+  aliases: [antispam, anti-spam]
+- id: antivirus.anti-theft
+  parent: antivirus.included
+  name: Anti-theft
+  category: security
+  type: set
+  values:
+    - { id: locate, name: Locate a lost device }
+    - { id: lock, name: Lock it remotely }
+    - { id: wipe, name: Wipe it remotely }
+- id: antivirus.optimizer
+  parent: antivirus.included
+  name: Speed-up tools
+  category: security
+  type: boolean
+  aliases: [oneclick optimizer, device optimizer, performance optimisation, tune up]
+- id: antivirus.activity-modes
+  parent: antivirus.included
+  name: Game, movie and work modes
+  category: security
+  type: boolean
+  aliases: [profiles, game mode, autopilot]
+- id: parental-control
+  name: Parental controls
+  category: security
+  type: set
+  values:
+    - { id: content-filtering, name: Content filtering }
+    - {
+        id: screen-time,
+        name: Screen time limits,
+        aliases: [internet time limit, schedules, routines],
+      }
+    - { id: location, name: Child location }
+    - { id: activity-reports, name: Activity reports }
+
+# ── AI ─────────────────────────────────────────────────────────────────────────
+- id: ai.assistant
+  name: AI assistant
+  category: ai
+  type: boolean
+  aliases: [ai, chatbot]
+  headline: true
+  requiredIn: [ai]
+
+# ── Productivity ───────────────────────────────────────────────────────────────
+- id: calendar.included
+  name: Calendar
+  category: productivity
+  type: boolean
+  aliases: [online calendar]
+  requiredIn: [calendar]
+
+# ── Apps, languages & support: every category (M11.4) ─────────────────────────
+# Facts about a provider as a whole (providerWide): a provider states them once in its own features, and a plan
+# states one only where it differs (BLUEPRINT §4.2 rule 9). Languages are what the service offers across its
+# catalogue; streaming.french-content stays, since it's about French content, not dubs.
+# Ad free was streaming.ad-free until 2026-11-02 (data/redirects.yaml), renamed to reuse it for music, social, search
+# and news. Not provider-wide: a provider's tiers often differ by ads.
+- id: ad-free
+  name: Ad free
+  category: general
+  type: boolean
+  aliases: [no ads, ad free, without ads]
+  requiredIn: [streaming]
+- id: platforms
+  name: Platforms
+  category: general
+  type: set
+  values:
+    - { id: windows, name: Windows }
+    - { id: macos, name: macOS, aliases: [mac, os x] }
+    - { id: linux, name: Linux }
+    - { id: android, name: Android }
+    - { id: ios, name: iPhone and iPad, aliases: [ios, ipados, iphone, ipad] }
+    - { id: web, name: Web browser, aliases: [web app, browser] }
+    - {
+        id: browser-extension,
+        name: Browser extension,
+        aliases: [chrome extension, firefox add-on],
+      }
+    - {
+        id: tv,
+        name: TVs and streaming devices,
+        aliases: [smart tv, apple tv, android tv, fire tv, roku],
+      }
+    - { id: console, name: Game consoles, aliases: [xbox, playstation, nintendo switch] }
+  aliases: [apps, devices, operating systems]
+  providerWide: true
+- id: software.open-source
+  name: Open source
+  category: general
+  type: enum
+  values: # worst to best, so "at least open-source apps" works
+    - { id: proprietary, name: Closed source, aliases: [proprietary] }
+    - { id: source-available, name: Source available }
+    - { id: open-clients, name: Open-source apps, aliases: [open clients, open-source clients] }
+    - { id: fully-open, name: Fully open source, aliases: [open-source servers] }
+  aliases: [open source, oss, foss, source code]
+  providerWide: true
+- id: languages.audio
+  name: Audio languages
+  category: general
+  type: set
+  values:
+    - { id: en, name: English }
+    - { id: fr, name: French, aliases: [français] }
+    - { id: es, name: Spanish, aliases: [español] }
+    - { id: de, name: German, aliases: [deutsch] }
+    - { id: it, name: Italian, aliases: [italiano] }
+    - { id: pt, name: Portuguese, aliases: [português] }
+    - { id: ja, name: Japanese }
+    - { id: ko, name: Korean }
+    - { id: zh, name: Chinese, aliases: [mandarin, cantonese] }
+    - { id: hi, name: Hindi }
+    - { id: ar, name: Arabic }
+  aliases: [dubbing, dubs, audio tracks]
+  providerWide: true
+- id: languages.subtitles
+  name: Subtitle languages
+  category: general
+  type: set
+  values:
+    - { id: en, name: English }
+    - { id: fr, name: French, aliases: [français] }
+    - { id: es, name: Spanish, aliases: [español] }
+    - { id: de, name: German, aliases: [deutsch] }
+    - { id: it, name: Italian, aliases: [italiano] }
+    - { id: pt, name: Portuguese, aliases: [português] }
+    - { id: ja, name: Japanese }
+    - { id: ko, name: Korean }
+    - { id: zh, name: Chinese, aliases: [mandarin, cantonese] }
+    - { id: hi, name: Hindi }
+    - { id: ar, name: Arabic }
+  aliases: [subtitles, captions, closed captions]
+  providerWide: true
+- id: support.channels
+  name: Support
+  category: general
+  type: set
+  values:
+    - { id: email, name: Email or web form, aliases: [support tickets, contact form] }
+    - { id: chat, name: Live chat }
+    - { id: phone, name: Phone }
+    - { id: community, name: Community forum, aliases: [forum] }
+    - { id: 24-7, name: Around the clock, aliases: [24/7, 24 hours] }
+  aliases: [customer support, help, customer service]
+  providerWide: true
+
+# ── Accounts & sharing ─────────────────────────────────────────────────────────
+# A plan that doesn't list account.users is for one person, so there's no "just you" tier: a tier is provided
+# by every plan whose value is at least its min.
+- id: account.users
+  name: People included
+  category: account
+  type: number
+  unit: people
+  tiers:
+    - { id: 2-5, name: 2 to 5 people, min: 2, max: 5 }
+    - { id: 6+, name: 6 or more people, min: 6 }
+  aliases: [family plan, duo plan, users, members]
+- id: account.sign-in
+  name: Sign-in methods
+  category: account
+  type: set
+  values:
+    - { id: password, name: Password }
+    - { id: passkey, name: Passkeys }
+    - { id: totp, name: Authenticator app codes, aliases: [totp, 2fa, two-factor, authenticator] }
+    - { id: security-key, name: Security keys, aliases: [yubikey, fido2, u2f, hardware key] }
+    - { id: sms, name: Text message codes, aliases: [sms] }
+    - { id: email-code, name: Email codes, aliases: [magic link, email link] }
+    - { id: push-approval, name: Approval on another device, aliases: [push notification] }
+    - {
+        id: trusted-device,
+        name: Trusted devices,
+        aliases: [trusted location, remember this device],
+      }
+    - {
+        id: sso,
+        name: Sign in with another account,
+        aliases: [single sign-on, sign in with apple, sign in with google, social login],
+      }
+  aliases: [login, log in, two-factor authentication, 2fa, mfa]
+  providerWide: true
+
+# ── Services that include other services (overlap detection) ───────────────────
+# Values are provider or plan ids (proton.pass-plus). A plan that lists plans here is a suite, and inclusion
+# is transitive (BLUEPRINT §4.4). Never shown in ranking UIs.
+- id: includes-subscription
+  name: Includes another subscription
+  category: bundle
+  type: set
+  valuesFrom: providers
+  rankable: false

@@ -1,0 +1,15 @@
+# TSN sells it (tsn.ca/subscribe, Bundles), and RDS at the same price (rds.ca/abonnement, Forfaits).
+id: bundle.tsn-rds
+name: TSN Premium and RDS
+soldBy: tsn
+includes: [tsn.premium, rds.standard]
+link: https://www.tsn.ca/subscribe/
+prices:
+  - region: CA
+    currency: CAD
+    amount: 30.99
+    interval: month
+    intervalCount: 1
+    autoRenew: true
+    lastVerified: 2026-10-26
+    sourceUrl: https://www.tsn.ca/subscribe/

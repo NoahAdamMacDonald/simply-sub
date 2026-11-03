@@ -7,7 +7,7 @@ declare global {
       TEST_MIGRATIONS: D1Migration[];
       /** migrations-user/'s, for USER_DB. */
       TEST_USER_MIGRATIONS: D1Migration[];
-      /** data/'s YAML files, parsed, and the logos' file names. */
+      /** The tests' own catalog (test/fixtures/catalog/, M11.8): its YAML files, parsed, and its logos' names, under data/'s names. */
       TEST_CATALOG: { files: { file: string; data: unknown }[]; logos: string[] };
       /**
        * public/_headers, and the web app's src/index.html, manifest and colour tokens, as text, with the names of

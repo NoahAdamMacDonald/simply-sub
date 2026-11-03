@@ -1,0 +1,224 @@
+id: rds
+name: RDS
+aliases: [réseau des sports, rds direct]
+website: https://www.rds.ca
+category: streaming
+spendCategory: streaming
+# Accepted cards, read 2026-10-28 (M9.2): none named, so no acceptedNetworks. The FAQ (/aide/faq/) and /abonnement/
+# name none, and payment details are in Bell Media's Account Management portal, behind a sign-in.
+billingCurrency: { CA: CAD }
+# rds.ca/aide/faq/#hors-canada-abonnement, read 2026-10-26: "En raison de droits de diffusion stricts, RDS n'est pas
+# disponible pour abonnement ou visionnement à l'extérieur du Canada."
+availableIn: [CA]
+# The FAQ's steps for a direct subscription: sign in, then cancel from the account's subscriptions.
+cancelUrl: https://www.rds.ca/aide/faq/#annuler-abonnement
+sources: { pricing: https://www.rds.ca/abonnement/ }
+# Owner (M11.2), read 2026-11-02: no about page says so; its conditions do (“offered to you by Bell Media Inc. and its
+# affiliates”).
+# Ways to pay (M11.5), read 2026-11-02 in its terms (in French): a card, or through an in-app purchase.
+paymentMethods:
+  - methods: [card, app-store]
+    page: 'Conditions (in French)'
+    url: https://www.rds.ca/conditions
+    quotes:
+      - 'fournir des renseignements sur le mode de paiement, tels que votre numéro de carte de crédit'
+      - 'une plateforme d’achat intégré'
+owner:
+  name: Bell Media Inc.
+  page:
+    name: Conditions (in French)
+    url: https://www.rds.ca/conditions
+  quotes:
+    - 'qui vous est offert par Bell Média inc. et ses sociétés affiliées (collectivement, « Bell Média »)'
+  lastVerified: 2026-11-02
+notes: >-
+  Plans renew for the period chosen, except in Quebec, where they renew monthly. Select Montreal Canadiens
+  regular-season games only, with regional blackouts.
+
+# Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their
+# words.
+perks:
+  - id: live-sport-hours
+    name: Over 4,000 hours of live sport a year
+
+# Read 2026-10-26 on rds.ca/abonnement (Mensuel, 3 mois and Annuel tabs): one plan, French-language sports. Two
+# streams at a time (rds.ca/aide/faq/#plusieurs-appareils). RDS's bundles with Crave and TSN are in data/bundles.
+# Read 2026-11-02 (M11.4, the required streaming features): neither rds.ca/abonnement nor the FAQ says
+# anything of ads or video quality. Its live channels carry their broadcasts, so not ad free, inferred (the guide's
+# §2.2 rule 5: a required boolean no page states is false); the video quality waits for M11.9
+# (awaitingRequiredFeatures in core).
+plans:
+  - id: rds.standard
+    name: RDS
+    link: https://www.rds.ca/abonnement/
+    features:
+      ad-free: false
+      streaming.live: [tv-channels, sports]
+      streaming.concurrent-streams: 2
+      streaming.french-content: true
+    perks: [live-sport-hours]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 24.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://www.rds.ca/abonnement/
+      - region: CA
+        currency: CAD
+        amount: 64.99
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://www.rds.ca/abonnement/
+      - region: CA
+        currency: CAD
+        amount: 199.90
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-10-26
+        sourceUrl: https://www.rds.ca/abonnement/
+
+# Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: RDS's conditions, in French, and Bell's page on how
+# it collects and uses data. Not rated: price and terms changes and closing accounts (its conditions don't say),
+# data collection and deletion, free trials, account sharing and device limits.
+policies:
+  shared: [bell-privacy]
+  links:
+    - name: 'Conditions (in French)'
+      url: https://www.rds.ca/conditions
+    - name: "Bell's use of data"
+      url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+  ratings:
+    - topic: privacy.data-sharing
+      tier: good
+      reason: "It shares your information among Bell's own companies and its suppliers. Anyone else gets it only when the law says so or you agree."
+      sources:
+        - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+          quote: 'To get a better idea of your needs and how we can fulfill them, we sometimes share information between our companies.'
+        - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+          quote: 'We only disclose personal information with parties outside our family of companies and suppliers when we are required to or when you have given express consent for us to do so.'
+      lastVerified: 2026-10-27
+    - topic: privacy.ads-tracking
+      tier: neutral
+      reason: 'It picks ads for you, and you can change what kinds of ads you get in your preferences.'
+      sources:
+        - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+          quote: 'You can manage the types of ads you receive or opt out of communications by updating your preferences.'
+      action:
+        name: 'Update your Bell preferences'
+        url: https://www.bell.ca/email-updates
+      lastVerified: 2026-10-27
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'If you cancel, you can keep watching until the end of the time you paid for, but you get no money back.'
+      sources:
+        - url: https://www.rds.ca/conditions
+          quote: 'Les frais d’abonnement ne sont pas remboursables. Suite à toute annulation, vous conserverez l’accès au service jusqu’à la fin de votre période de facturation en cours, après quoi votre abonnement prendra fin.'
+      lastVerified: 2026-10-27
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'If you cancel, you can keep watching until the end of the time you paid for, but you get no money back.'
+      sources:
+        - url: https://www.rds.ca/conditions
+          quote: 'Les frais d’abonnement ne sont pas remboursables. Suite à toute annulation, vous conserverez l’accès au service jusqu’à la fin de votre période de facturation en cours, après quoi votre abonnement prendra fin.'
+      lastVerified: 2026-10-27
+    - topic: legal.disputes
+      tier: bad
+      reason: 'If you have a problem with it, a private referee called an arbitrator decides, in your city, instead of a court. You give up your right to a trial.'
+      sources:
+        - url: https://www.rds.ca/conditions
+          quote: 'par voie d’arbitrage exécutoire dans votre ville de résidence'
+        - url: https://www.rds.ca/conditions
+          quote: 'Vous renoncez expressément au droit de règlement d’un différend par quelque autre moyen, y compris, notamment par un procès.'
+      lastVerified: 2026-10-27
+    # M11.9's topics, pulled forward at the owner's request (2026-11-02), read that day.
+    - topic: privacy.sign-up-data
+      tier: poor
+      reason: 'To sign up you must give it your phone number as well as an email address and payment details.'
+      sources:
+        - url: https://www.rds.ca/conditions
+          quote: 'Pendant le processus d’inscription pour un compte avec nous, il vous sera demandé de fournir une adresse courriel et un numéro de téléphone, de choisir un mot de passe, de fournir des renseignements sur le mode de paiement, tels que votre numéro de carte de crédit et votre adresse de facturation, ainsi que d’autres renseignements.'
+      lastVerified: 2026-11-02
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be an adult to subscribe, and it may give you parental controls, but its terms make you responsible for what kids watch and say nothing about their data.'
+      sources:
+        - url: https://www.rds.ca/conditions
+          quote: 'Vous devez avoir atteint l’âge de la majorité dans la province ou le territoire canadien où vous résidez pour vous abonner, vous inscrire, d’accéder au service ou l’utiliser autrement.'
+        - url: https://www.rds.ca/conditions
+          quote: 'Nous pouvons vous offrir des outils pour vous aider à contrôler le contenu que peut visualiser un mineur au moyen de votre compte enregistré, comme le contrôle parental.'
+      lastVerified: 2026-11-02
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It can change the price at any time. It posts the change at least 30 days ahead and tells you, but promises that 30 days’ notice only where a law requires it (Quebec does).'
+      sources:
+        - url: https://www.rds.ca/conditions
+          quote: 'nous nous réservons le droit, à notre seule et absolue appréciation, de modifier tout ou partie des présentes conditions, du service et de votre abonnement, y compris les frais d’abonnement, à tout moment'
+        - url: https://www.rds.ca/conditions
+          quote: 'Lorsque la législation l’exige, cet avis sera envoyé au moins trente (30) jours avant la prise d’effet de la modification'
+      lastVerified: 2026-11-02
+    - topic: billing.free-trials
+      status: not-stated
+      reason: 'Its terms (in French) describe promotions such as gift codes, but no free trial.'
+      pages: [https://www.rds.ca/conditions]
+      lastVerified: 2026-11-02
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms (in French) say yearly plans renew on their own, but not that it reminds you first.'
+      pages: [https://www.rds.ca/conditions]
+      lastVerified: 2026-11-02
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms (in French) list no fees beyond the price and taxes.'
+      pages: [https://www.rds.ca/conditions]
+      lastVerified: 2026-11-02
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It posts changes to its terms at least 30 days ahead and tells you about them, but promises that 30 days’ notice only where a law requires it.'
+      sources:
+        - url: https://www.rds.ca/conditions
+          quote: 'Nous afficherons les modifications apportées aux présentes conditions au moins trente (30) jours avant leur prise d’effet'
+        - url: https://www.rds.ca/conditions
+          quote: 'Lorsque la législation l’exige, cet avis sera envoyé au moins trente (30) jours avant la prise d’effet de la modification'
+      lastVerified: 2026-11-02
+    - topic: legal.account-closure
+      tier: poor
+      reason: 'It can end your subscription for any reason with 30 days’ notice (60 in Quebec), and its terms don’t promise money back.'
+      sources:
+        - url: https://www.rds.ca/conditions
+          quote: 'Bell Média peut annuler votre abonnement au service moyennant un préavis écrit d’au moins trente (30) jours (soixante (60) jours si vous êtes un résident du Québec).'
+      lastVerified: 2026-11-02
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change the service and what your plan includes at any time, and says it owes you nothing when it does.'
+      sources:
+        - url: https://www.rds.ca/conditions
+          quote: 'nous nous réservons le droit, à notre seule et absolue appréciation, de modifier tout ou partie des présentes conditions, du service et de votre abonnement, y compris les frais d’abonnement, à tout moment'
+      lastVerified: 2026-11-02
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms (in French) don’t say it closes accounts you haven’t used.'
+      pages: [https://www.rds.ca/conditions]
+      lastVerified: 2026-11-02
+    - topic: security.practices
+      status: not-stated
+      reason: 'Its terms (in French) say nothing about outside security checks or how to report a security problem, and neither does Bell’s privacy policy.'
+      pages: [https://www.rds.ca/conditions]
+      lastVerified: 2026-11-02
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its terms (in French) make you responsible for anyone who uses your account, but don’t say who that can be.'
+      pages: [https://www.rds.ca/conditions]
+      lastVerified: 2026-11-02
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'It can limit how many shows you download, on how many devices, and for how long you can watch them.'
+      sources:
+        - url: https://www.rds.ca/conditions
+          quote: "Par exemple, ces limitations peuvent inclure des restrictions sur le nombre de titres hors ligne par compte, le nombre maximal d'appareils pouvant contenir des titres hors ligne"
+      lastVerified: 2026-11-02
