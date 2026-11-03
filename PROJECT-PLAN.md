@@ -1819,11 +1819,12 @@ in every D1 `json` column search parses.
     - **Claude:** sharing, and its ads (2026-11-02), Neutral → **Poor**. Its opt-out is "the Privacy Choices link at
       the bottom of the page or enabling global privacy controls", each per browser. Its data collection stays Poor,
       but on its own facts, usage information and cookies: training on chats is AI training's, graded there.
-    - **ICI TOU.TV:** ads Neutral → **Poor**, "in each device's or browser's" settings, as its sharing already was.
+    - **ICI TOU.TV:** ads Neutral → **Poor**, as its sharing already was: « les paramètres de confidentialité de votre
+      appareil et de votre navigateur » are the only control.
     - **Bell (Crave, TSN, RDS):** sharing and ads are rated once in the shared Bell document, from Bell's own pages,
       instead of in each provider. Sharing Good → **Neutral**: Bell gives "Securely hashed … email addresses" to ad
       platforms for its own ads, which the rubric counts (as Disney's hashed emails). Its account preferences turn
-      that off, and with them "the ads won't be personalized" (ads Neutral).
+      that off, and with them "the ads won’t be personalized" (ads Neutral).
     - **Netflix and Proton:** data collection keeps its grade on its own facts. Netflix's ad data is ads-tracking's,
       so it's Netflix's usage information, recommendations and research, with cookie choices only (Poor). Proton's is
       its apps' analytics, turned off for "all Proton services" in the account (Neutral).
