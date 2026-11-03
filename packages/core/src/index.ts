@@ -27,6 +27,7 @@ export * from './catalog/plan-categories';
 export * from './catalog/provider-features';
 export * from './catalog/plan-policies';
 export * from './catalog/policy';
+export * from './catalog/policy-files';
 export * from './catalog/policy-topic';
 export * from './catalog/price';
 export * from './catalog/price-report';

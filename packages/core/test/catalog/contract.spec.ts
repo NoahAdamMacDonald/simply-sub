@@ -28,13 +28,16 @@ import {
 import { issues } from './helpers';
 
 // The YAML source files must stay compatible with the API contract: each catalog object in the examples, minus
-// what the build and the API add (icon URLs, picked pricing, expanded bundle plans, savings, feature unions),
-// is a valid source file. The GET /catalog body is the snapshot that scripts/build-catalog.ts writes (M1.5).
+// what the build and the API add (icon URLs, policies' URLs, picked pricing, expanded bundle plans, savings, feature
+// unions), is a valid source file. The GET /catalog body is the snapshot that scripts/build-catalog.ts writes (M1.5).
 // Every example also matches the contract's response schemas (M2.7): an error, whatever its endpoint, the error
 // envelope; a built endpoint's success body, its schema. The Worker's own answers are held to the same schemas
 // in apps/api/test/contract.spec.ts.
 
-function toSource(value: unknown, added: readonly string[] = ['iconUrl', 'pricing']): unknown {
+function toSource(
+  value: unknown,
+  added: readonly string[] = ['iconUrl', 'policiesUrl', 'pricing'],
+): unknown {
   if (Array.isArray(value)) {
     return value.map((item) => toSource(item, added));
   }

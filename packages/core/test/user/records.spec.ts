@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  isCatalogFile,
   InvalidRecordError,
   cacheTables,
   checkRecord,
@@ -116,10 +117,32 @@ describe('readRecords', () => {
     const [provider] = file.snapshot.data.providers;
     provider.features = { platforms: ['web'] };
     const { records } = readRecords('catalogCache', [file]);
-    const plans = records[0].snapshot.data.providers[0].plans;
+    const [record] = records;
+    if (!isCatalogFile(record)) throw new Error('Not a catalog file');
+    const plans = record.snapshot.data.providers[0].plans;
     expect(plans.every((plan) => plan.features['platforms']?.toString() === 'web')).toBe(true);
-    expect(records[0].snapshot.data.providers[0].features).toEqual({ platforms: ['web'] });
-    expect(checkRecord('catalogCache', file).snapshot.data.providers[0].plans).toEqual(plans);
+    expect(record.snapshot.data.providers[0].features).toEqual({ platforms: ['web'] });
+    const checked = checkRecord('catalogCache', file);
+    expect(isCatalogFile(checked) && checked.snapshot.data.providers[0].plans).toEqual(plans);
+  });
+
+  it('keeps a Terms and policies file beside them, keyed by its path (M11.8)', () => {
+    const policies = {
+      key: 'policies/mullvad',
+      file: {
+        id: 'mullvad',
+        policies: { shared: ['disney-privacy'] },
+      },
+      catalogVersion: 'c4f9a21',
+      fetchedAt: '2026-11-02T12:00:00.000Z',
+    };
+    const { records, rejected } = readRecords('catalogCache', [
+      policies,
+      { ...policies, key: 'policies/Mullvad' },
+    ]);
+    expect(records).toEqual([policies]);
+    expect(rejected.map(({ issues }) => issues.length > 0)).toEqual([true]);
+    expect(isCatalogFile(records[0])).toBe(false);
   });
 
   it("keys a draft by its list's id", () => {

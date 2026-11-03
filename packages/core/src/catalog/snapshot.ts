@@ -9,6 +9,7 @@ import { providerSchema, type Provider } from './provider';
 import { raterSchema, ratersFileSchema, type Rater } from './rater';
 import { redirectSchema, redirectsFileSchema, type Redirect } from './redirects';
 import { resellerSchema, resellersFileSchema, type Reseller } from './reseller';
+import { policyFilePath } from './policy-files';
 import { locateCatalogFile, type CatalogSourceFile } from './validate-catalog';
 
 // The catalog snapshot (BLUEPRINT §5.2, §6.3): the body of GET /catalog, which is also published byte for byte
@@ -35,7 +36,14 @@ const iconUrlSchema = httpsUrlSchema
   )
   .optional();
 
-export const snapshotProviderSchema = providerSchema.safeExtend({ iconUrl: iconUrlSchema });
+export const snapshotProviderSchema = providerSchema.safeExtend({
+  iconUrl: iconUrlSchema,
+  policiesUrl: httpsUrlSchema
+    .describe(
+      'Its Terms and policies, a file of their own under /data/policies/ (M11.8): the catalog files leave its policies out, and the card loads them when it opens them. Left out when it rates none',
+    )
+    .optional(),
+});
 export type SnapshotProvider = z.infer<typeof snapshotProviderSchema>;
 
 export const snapshotResellerSchema = resellerSchema.safeExtend({ iconUrl: iconUrlSchema });
@@ -61,7 +69,7 @@ export const catalogDataSchema = z.strictObject({
     .array(policySetSchema)
     .min(1)
     .describe(
-      "data/policies/: the shared policy documents that providers' policies name in shared, by id (BLUEPRINT §4.10). Left out when there are none",
+      'The shared policy documents, until M11.8 gave each a file of its own under /data/policies/shared/: no catalog file has them now',
     )
     .optional(),
   raters: z
@@ -215,14 +223,20 @@ function parsed<T>(schema: z.ZodType<T>, source: CatalogSourceFile): T {
 
 /**
  * The snapshot's data: the source files, in a fixed order. A provider or reseller with a logo gets its icon URL; one
- * without has none, and the app shows its first letter.
+ * without has none, and the app shows its first letter. A provider's policies and the shared documents are files of
+ * their own (M11.8, policy-files.ts): a provider that rates its policies gets the URL of its file instead.
  */
-export function buildCatalogData(source: CatalogSource, iconBaseUrl: string): CatalogData {
+export function buildCatalogData(
+  source: CatalogSource,
+  iconBaseUrl: string,
+  // The site's root, from the icons' URL (https://sub.simplely.ca/icons/ → https://sub.simplely.ca/).
+  siteUrl = iconBaseUrl.replace(/^(https?:\/\/[^/]+\/).*$/, '$1'),
+): CatalogData {
   return {
     schemaVersion: catalogSchemaVersion,
     features: source.features,
     categories: source.categories,
-    providers: source.providers.map(({ id, name, aliases, website, ...rest }) => ({
+    providers: source.providers.map(({ id, name, aliases, website, policies, ...rest }) => ({
       // iconUrl after website, where the API examples put it.
       id,
       name,
@@ -230,6 +244,7 @@ export function buildCatalogData(source: CatalogSource, iconBaseUrl: string): Ca
       website,
       ...(source.logos.has(id) && { iconUrl: `${iconBaseUrl}${catalogIconFile(id)}` }),
       ...rest,
+      ...(policies && { policiesUrl: `${siteUrl}${policyFilePath(id)}` }),
     })),
     bundles: source.bundles,
     resellers: source.resellers.map(({ id, name, website, ...rest }) => ({
@@ -240,7 +255,6 @@ export function buildCatalogData(source: CatalogSource, iconBaseUrl: string): Ca
       ...rest,
     })),
     policyTopics: source.policyTopics,
-    ...(source.policySets.length > 0 && { policySets: source.policySets }),
     ...(source.raters.length > 0 && { raters: source.raters }),
     ...(source.redirects.length > 0 && { redirects: source.redirects }),
   };
