@@ -65,6 +65,12 @@ interface CitedFact {
   quotes: readonly string[];
 }
 
+/** A line of Ways to pay: what it says, and the page that says so. */
+interface CitedLine {
+  text: string;
+  cited: CitedFact;
+}
+
 const groupNames: Record<PolicyGroup, string> = {
   privacy: 'Privacy',
   billing: 'Billing',
@@ -153,14 +159,18 @@ export class PlanDetails {
     return owner && ownerCitation(owner);
   });
   /** How a buyer where the user lives can pay it (M11.5), and the provider's page that says so. */
-  protected readonly payment = computed(() => {
+  protected readonly payment = computed((): CitedLine | undefined => {
     const country = this.settings.saved()?.country;
-    return country ? paymentMethodsIn(this.provider(), country) : undefined;
+    const entry = country && paymentMethodsIn(this.provider(), country);
+    return entry ? { text: this.methodsText(entry.methods), cited: citedFact(entry) } : undefined;
   });
   /** The currencies they can pay it in beyond its price lists (M11.5), each with its page. */
-  protected readonly currencies = computed(() => {
+  protected readonly currencies = computed((): CitedLine[] => {
     const country = this.settings.saved()?.country;
-    return country ? currenciesIn(this.provider(), country) : [];
+    return (country ? currenciesIn(this.provider(), country) : []).map((entry) => ({
+      text: this.currenciesText(entry),
+      cited: citedFact(entry),
+    }));
   });
   /** The day it renews on (M11.5), citing its page, or that its pages don't say. */
   protected readonly renewal = computed((): { text: string; cited?: CitedFact } | undefined => {
@@ -242,7 +252,7 @@ export class PlanDetails {
   }
 
   /** "Card, PayPal and Cash". */
-  protected methodsText(methods: PaymentMethods[number]['methods']): string {
+  private methodsText(methods: PaymentMethods[number]['methods']): string {
     return listText(
       methods.map((method) => paymentMethodNames[method]),
       'and',
@@ -250,14 +260,9 @@ export class PlanDetails {
   }
 
   /** "Cash in EUR, USD or CAD", or "Pay in USD or CAD" for every way to pay. */
-  protected currenciesText({ codes, methods }: CurrenciesEntry): string {
+  private currenciesText({ codes, methods }: CurrenciesEntry): string {
     const currencies = listText(codes, 'or');
     return methods ? `${this.methodsText(methods)} in ${currencies}` : `Pay in ${currencies}`;
-  }
-
-  /** The page, scrolled to the words that name the methods or currencies. */
-  protected paymentHref({ url, quotes }: { url: string; quotes: readonly string[] }): string {
-    return quoteLink(url, quotes);
   }
 
   /** A citation's tooltip when it links one page: the words it quotes there. */
@@ -273,6 +278,11 @@ export class PlanDetails {
   protected includedName({ provider, plan }: SuiteContents['includes'][number]): string {
     return plan ? planTitle(provider.name, plan.name) : provider.name;
   }
+}
+
+/** A ways-to-pay or currencies entry's page, scrolled to the words that name them. */
+function citedFact({ page, url, quotes }: CurrenciesEntry | PaymentMethods[number]): CitedFact {
+  return { page, href: quoteLink(url, quotes), quotes };
 }
 
 /** "A, B and C" (or "or"). */

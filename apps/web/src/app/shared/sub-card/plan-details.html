@@ -277,23 +277,19 @@
     <h3>Ways to pay</h3>
     @if (payment(); as payment) {
       <p class="payment">
-        <span>{{ methodsText(payment.methods) }}</span>
+        <span>{{ payment.text }}</span>
         <ng-container
           [ngTemplateOutlet]="cited"
-          [ngTemplateOutletContext]="{
-            $implicit: { page: payment.page, href: paymentHref(payment), quotes: payment.quotes },
-          }"
+          [ngTemplateOutletContext]="{ $implicit: payment.cited }"
         />
       </p>
     }
-    @for (entry of currencies(); track $index) {
+    @for (line of currencies(); track $index) {
       <p class="payment">
-        <span>{{ currenciesText(entry) }}</span>
+        <span>{{ line.text }}</span>
         <ng-container
           [ngTemplateOutlet]="cited"
-          [ngTemplateOutletContext]="{
-            $implicit: { page: entry.page, href: paymentHref(entry), quotes: entry.quotes },
-          }"
+          [ngTemplateOutletContext]="{ $implicit: line.cited }"
         />
       </p>
     }
