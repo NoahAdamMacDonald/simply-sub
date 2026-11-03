@@ -106,6 +106,7 @@ try {
       const record: PageRecord = {
         kind: page.kind,
         read: today,
+        browser: 'Edge',
         ...rendered,
         currencies: currencies([rendered.renderedText, ...rendered.views.map((view) => view.text)]),
       };

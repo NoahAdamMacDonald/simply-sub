@@ -49,6 +49,8 @@ export interface ExtractionPage {
   url: string;
   /** Its text as shown, with each Monthly/Yearly toggle's text after it. */
   text: string;
+  /** The browser that read it (M11.7), when it's known: the pipeline's is Edge. */
+  browser?: string;
 }
 
 const pageQuote = {
@@ -1410,8 +1412,9 @@ function sourceComments(context: ExtractionContext, answer: ExtractionAnswer): s
     bundles: 'Bundles',
     resellers: 'Official resellers',
   };
+  const browsers = [...new Set(context.pages.flatMap((page) => page.browser ?? []))];
   const lines = [
-    `Drafted by the discovery pipeline on ${context.today} (BLUEPRINT §6.5) from these pages, each quoted where it's used.`,
+    `Drafted by the discovery pipeline on ${context.today} (BLUEPRINT §6.5) from these pages, each quoted where it's used${browsers.length > 0 ? `, read with ${browsers.join(' and ')}` : ''}.`,
   ];
   for (const kind of kinds) {
     const read = [
