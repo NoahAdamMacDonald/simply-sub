@@ -2,6 +2,13 @@ import { launch } from '@cloudflare/playwright';
 import {
   automationSchema,
   policyFileSchema,
+  seedDailyWrites,
+  seedIndexPath,
+  seedIndexSchema,
+  seedNext,
+  seedProviderPath,
+  seedTables,
+  type SeedDatabase,
   policyIndexPath,
   policyIndexSchema,
   policyTopicsFileSchema,
@@ -90,6 +97,18 @@ export function workerServices(env: Env): Services {
     async readPolicies(url) {
       return policyFileSchema.parse(await siteJson(url)).policies;
     },
+    seedNext: (today) =>
+      seedNext(
+        catalogDatabase(env.DB),
+        {
+          index: async () =>
+            seedIndexSchema.parse(await siteJson(new URL(seedIndexPath, env.SITE_URL))),
+          provider: async (id) =>
+            (await siteResponse(new URL(seedProviderPath(id), env.SITE_URL))).text(),
+          sha256,
+        },
+        { today, daily: seedDailyWrites },
+      ),
     async readBundle(id) {
       const [row] = await select<{ json: string }>(
         env.DB,
@@ -139,7 +158,7 @@ export function workerServices(env: Env): Services {
   };
 }
 
-/** Runs a read on the catalog D1. Only SELECTs: the binding could write, and the bot never does. */
+/** Runs a read on the catalog D1. Only SELECTs: the night's checks never write (the seed writes through catalogDatabase). */
 async function select<T>(db: D1Database, sql: string, ...values: unknown[]): Promise<T[]> {
   if (!/^\s*SELECT\b/i.test(sql)) throw new Error('The bot only reads the catalog');
   const { results } = await db
@@ -149,11 +168,49 @@ async function select<T>(db: D1Database, sql: string, ...values: unknown[]): Pro
   return results;
 }
 
-/** One of the site's own static files (M11.8): the Terms and policies files data:build writes beside the catalog. */
-async function siteJson(url: string | URL): Promise<unknown> {
+/**
+ * One of the site's own static files (M11.8), which data:build writes beside the catalog: the Terms and policies
+ * files, and the seed's.
+ */
+async function siteResponse(url: string | URL): Promise<Response> {
   const response = await fetch(url, { headers, signal: AbortSignal.timeout(timeoutMs) });
   if (!response.ok) throw new Error(`${String(url)}: ${response.status} ${response.statusText}`);
-  return response.json();
+  return response;
+}
+
+async function siteJson(url: string | URL): Promise<unknown> {
+  return (await siteResponse(url)).json();
+}
+
+/**
+ * The catalog D1 for seeding what waits (M11.8): its reads, and writes to the catalog's own tables only, each step's in
+ * one transaction.
+ */
+function catalogDatabase(db: D1Database): SeedDatabase {
+  const seeded = new RegExp(
+    `^(?:INSERT INTO|UPDATE|DELETE FROM) (?:${Object.keys(seedTables).join('|')}) `,
+  );
+  return {
+    async read(queries) {
+      if (queries.some((query) => !/^\s*SELECT\b/i.test(query))) {
+        throw new Error('The seed only reads with SELECT');
+      }
+      return (await db.batch(queries.map((query) => db.prepare(query)))).map(
+        (result) => result.results,
+      );
+    },
+    async write(statements) {
+      const other = statements.find((statement) => !seeded.test(statement));
+      if (other) throw new Error(`The bot writes only the catalog's tables: ${other.slice(0, 60)}`);
+      await db.batch(statements.map((statement) => db.prepare(statement)));
+    },
+  };
+}
+
+/** A SHA-256 of `text`, in hex. */
+async function sha256(text: string): Promise<string> {
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, '0')).join('');
 }
 
 async function robotsOf(host: string): Promise<Robots> {

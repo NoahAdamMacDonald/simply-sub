@@ -22,8 +22,9 @@
   "ai": { "binding": "AI" },
   // Browser Rendering, only for pages whose text a plain fetch doesn't get (10 browser-minutes a day on the free plan).
   "browser": { "binding": "BROWSER" },
-  // The catalog as deployed (BLUEPRINT §5.3), for its prices and their sources. The bot only reads it: D1 has no
-  // read-only binding, so every query goes through src/catalog.ts, which runs SELECTs only.
+  // The catalog as deployed (BLUEPRINT §5.3), for its prices and their sources. The bot reads it with SELECTs only, and
+  // since M11.8 seeds what a deploy's seed left over the day's rows: core's seedNext, whose writes src/services.ts lets
+  // through to the catalog's own tables only.
   "d1_databases": [
     {
       "binding": "DB",

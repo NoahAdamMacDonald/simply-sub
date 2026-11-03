@@ -7,6 +7,7 @@ import {
   type Automation,
   type Baseline,
   type ReportedPlan,
+  type SeedStep,
 } from '@simply-sub/core';
 import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
@@ -83,6 +84,8 @@ describe('a quiet night', () => {
   it('reads the settings and checks each provider, with no model and no pull request', async () => {
     const { summary, steps, proposals, ai } = await night(quietWorld());
     expect(steps).toEqual([
+      // Nothing waits for the seed (M11.8): one step finds so.
+      'seed 1',
       'read the repository',
       'read the settings',
       'read the check dates',
@@ -540,5 +543,29 @@ describe('the review by Workers AI (M3.10)', () => {
     const { steps } = await night(world);
     expect(asked).toBe(0);
     expect(steps).not.toContain('review the digest');
+  });
+});
+
+describe('seeding what waits (M11.8)', () => {
+  it('takes a step each, first, until nothing more fits tonight', async () => {
+    const world = quietWorld();
+    const services = await fakeServices(world, undefined, { baselines: baselinesOf(world) });
+    const results: SeedStep['result'][] = ['more', 'more', 'budget'];
+    services.seedNext = async () => ({ result: results.shift() ?? 'idle', writes: 5 });
+    const names: string[] = [];
+    await runNight(today, stepper(names), services);
+    expect(names.slice(0, 4)).toEqual(['seed 1', 'seed 2', 'seed 3', 'read the repository']);
+  });
+
+  it('goes on with the checks when it fails, saying so in the review list', async () => {
+    const world = quietWorld();
+    const services = await fakeServices(world, undefined, { baselines: baselinesOf(world) });
+    services.seedNext = async () => {
+      throw new Error('D1 is unavailable');
+    };
+    await runNight(today, stepper([]), services);
+    const review =
+      services.proposals[0].changes.find((change) => change.path === reviewFile)?.text ?? '';
+    expect(review).toContain('**the catalog seed**: Seeding what waits failed: D1 is unavailable');
   });
 });

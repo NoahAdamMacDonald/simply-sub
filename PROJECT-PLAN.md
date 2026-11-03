@@ -1534,9 +1534,22 @@ in every D1 `json` column search parses.
       feature renamed, full seeds, and a feature added to 100 providers; a budget reached mid-catalog and resumed
       over the next days ends as a full seed would; an empty D1 fills over two days under `0000000`; the tables'
       keys and indexes are `seedTables`'. Core's spec covers the statements, the budget's choices and the reads.
-    - **Still to come:** the bot seeding what waits each night, a full reseed through the budget (today's 13
-      providers write 2,113 rows into empty tables), and a shape change built beside the old tables, which the last
-      acceptance item needs.
+    - **Still to come:** a full reseed through the budget (today's 13 providers write 2,113 rows into empty
+      tables), and a shape change built beside the old tables, which the last acceptance item needs.
+  - **The bot seeds what waits** (2026-11-03): core's `seedNext` brings D1 a step at a time to the build that
+    `data:build` describes in `/data/seed/index.json` (each provider's SHA-256 in the catalog's order, the features
+    and bundles) and `/data/seed/providers/<id>.json`: the registry's changes and removals first (a moved value's rows
+    counted in D1), then a provider each, then the bundles, the removed features and the catalog row naming the
+    build. Each step checks the provider file against its hash, fits the day's rows or stops, and writes the catalog
+    row's count with its rows. `seed-rows.ts` holds the rows and SQL both seeds share, and `seedDiff` decides what
+    changed for both.
+    - **The bot:** its first steps (`seed 1`…, at most 200 a night) until nothing more fits; a failure goes to the
+      digest (`failed:seed`) and the checks go on. Its D1 writes only the catalog's tables, through core's statements;
+      its other reads stay SELECTs.
+    - **Tests:** in workerd, a deploy's leftovers brought in over nights (two providers in a 12-row day, then the rest)
+      ending where a full seed would, every step's count equal to D1's `rows_written`; the registry first when the deploy
+      wrote nothing; nothing to do when nothing waits; a provider file that isn't the index's refused. The bot's: the
+      steps come first and stop on `budget`, and a failure is in the review list.
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and
