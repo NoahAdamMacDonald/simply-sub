@@ -14,6 +14,10 @@ import {
   type CatalogSourceFile,
   type Price,
   type SeedOptions,
+  type SeedSource,
+  type SeedStep,
+  buildSeedIndex,
+  seedNext,
   seedTables,
 } from '@simply-sub/core';
 import { env } from 'cloudflare:workers';
@@ -762,5 +766,146 @@ describe('the catalog tables', () => {
       ).results.map((column) => column.name);
       expect({ table, key, indexes }).toEqual({ table, key: shape.key, indexes: shape.indexes });
     }
+  });
+});
+
+describe('the bot’s steps (M11.8)', () => {
+  beforeEach(async () => {
+    await db.batch(tables.map((table) => db.prepare(`DELETE FROM ${table}`)));
+  });
+
+  /** D1 as the bot's seed uses it, counting what each write wrote. */
+  const written: number[] = [];
+  const database = {
+    read: async (queries: readonly string[]) =>
+      (await db.batch(queries.map((query) => db.prepare(query)))).map((result) => result.results),
+    write: async (statements: readonly string[]) => {
+      const results = await db.batch(statements.map((statement) => db.prepare(statement)));
+      written.push(results.reduce((sum, result) => sum + result.meta.rows_written, 0));
+    },
+  };
+
+  /** The build as data:build publishes it: its seed index and a file per provider. */
+  async function sourceOf(
+    snapshot: CatalogSnapshot,
+    files = new Map(
+      snapshot.data.providers.map((provider) => [provider.id, JSON.stringify(provider)]),
+    ),
+  ): Promise<SeedSource> {
+    const hashes = new Map(
+      await Promise.all(
+        snapshot.data.providers.map(
+          async (provider) => [provider.id, await sha256(JSON.stringify(provider))] as const,
+        ),
+      ),
+    );
+    const index = buildSeedIndex(snapshot, hashes);
+    return {
+      index: async () => index,
+      provider: async (id) => files.get(id) ?? '',
+      sha256,
+    };
+  }
+
+  /** One night: steps until nothing more fits, or nothing waits. */
+  async function night(source: SeedSource, today: string, daily: number): Promise<SeedStep[]> {
+    const steps: SeedStep[] = [];
+    for (;;) {
+      written.length = 0;
+      const step = await seedNext(database, source, { today, daily });
+      // What it said it wrote is what D1 counted.
+      expect(step.writes).toBe(written[0] ?? 0);
+      steps.push(step);
+      if (step.result !== 'more') return steps;
+    }
+  }
+
+  const everyPrice = () =>
+    snapshotOf(
+      changed((catalog) => {
+        for (const provider of catalog.providers) provider.plans[0].prices[0].amount += 1;
+      }),
+      'def5678',
+    );
+
+  it('brings in what a deploy left, a provider a step, and ends where a full seed would', async () => {
+    await seed(snapshotOf(testCatalog(), 'abc1234'), { full: true });
+    const after = everyPrice();
+    const deploy = await seed(after, { budget: { today: '2026-11-03', daily: 12 } });
+    expect(deploy.waiting.length).toBeGreaterThan(5);
+
+    const source = await sourceOf(after);
+    const first = await night(source, '2026-11-04', 12);
+    // Two providers of 4 rows, each with the catalog row's 1, and then the next doesn't fit.
+    expect(first.map((step) => step.result)).toEqual(['more', 'more', 'budget']);
+    expect(first.map((step) => step.wrote)).toEqual([
+      deploy.waiting[0],
+      deploy.waiting[1],
+      undefined,
+    ]);
+    expect((await db.prepare('SELECT version, waiting FROM catalog').first())?.['waiting']).toBe(
+      deploy.waiting.length - 2,
+    );
+
+    for (let day = 5; day < 10; day++) {
+      const steps = await night(source, `2026-11-0${day}`, 50_000);
+      if (steps.at(-1)?.result === 'done') break;
+    }
+    expect(await db.prepare('SELECT version, waiting FROM catalog').first()).toEqual({
+      version: 'def5678',
+      waiting: 0,
+    });
+    const resumed = { ...(await dump()), catalog: [] };
+    await seed(after, { full: true });
+    expect(resumed).toEqual({ ...(await dump()), catalog: [] });
+  });
+
+  it('writes the registry’s changes first, when the deploy could write none of it', async () => {
+    await seed(snapshotOf(testCatalog(), 'abc1234'), { full: true });
+    // 1440p goes in before 4k: every 4k row's rank moves, and a price changes.
+    const after = snapshotOf(
+      changed((catalog) => {
+        const quality = catalog.features.find((feature) => feature.id === 'video.quality');
+        if (quality?.type === 'enum') quality.values.splice(-1, 0, { id: '1440p', name: '1440p' });
+        catalog.providers[0].plans[0].prices[0].amount += 1;
+      }),
+      'def5678',
+    );
+    const deploy = await seed(after, { budget: { today: '2026-11-03', daily: 2 } });
+    // Nothing fits but the catalog row, which says what waits.
+    expect(deploy.rowsWritten).toBe(1);
+
+    const steps = await night(await sourceOf(after), '2026-11-04', 50_000);
+    // The last provider's step names the build in the catalog row.
+    expect(steps.map((step) => step.wrote)).toEqual([
+      'the registry and removals',
+      after.data.providers[0].id,
+    ]);
+    expect(steps.at(-1)?.result).toBe('done');
+    const resumed = { ...(await dump()), catalog: [] };
+    await seed(after, { full: true });
+    expect(resumed).toEqual({ ...(await dump()), catalog: [] });
+  });
+
+  it('does nothing when nothing waits', async () => {
+    const snapshot = snapshotOf(testCatalog(), 'abc1234');
+    await seed(snapshot, { full: true });
+    expect(
+      await seedNext(database, await sourceOf(snapshot), { today: '2026-11-04', daily: 50_000 }),
+    ).toEqual({
+      result: 'idle',
+      writes: 0,
+    });
+  });
+
+  it('refuses a provider file that isn’t the one the index names, writing nothing', async () => {
+    await seed(snapshotOf(testCatalog(), 'abc1234'), { full: true });
+    const after = everyPrice();
+    await seed(after, { budget: { today: '2026-11-03', daily: 2 } });
+    const source = await sourceOf(after, new Map());
+    // The registry is unchanged, so the first step is a provider's.
+    await expect(
+      seedNext(database, source, { today: '2026-11-04', daily: 50_000 }),
+    ).rejects.toThrow("isn't the file the seed index names");
   });
 });
