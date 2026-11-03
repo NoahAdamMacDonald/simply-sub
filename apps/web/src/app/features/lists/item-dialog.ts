@@ -39,7 +39,6 @@ import { MatInput } from '@angular/material/input';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { MatOption, MatSelect, MatSelectTrigger } from '@angular/material/select';
 import {
-  addPeriods,
   afterPlanChange,
   availability,
   bestCard,
@@ -47,6 +46,7 @@ import {
   cardChoices,
   cardNetworkNames,
   cardTitle,
+  defaultRenewal,
   draftItems,
   emptyWindow,
   filterRanking,
@@ -70,7 +70,9 @@ import {
   rankSiblings,
   rankingSections,
   renewalAfterPeriodChange,
+  renewalAnchorKind,
   samePeriod,
+  settledBillingDay,
   sharedRankEdits,
   sharedRanksFor,
   taxAddedRegions,
@@ -293,6 +295,23 @@ export class ItemDialog {
     }
     return undefined;
   });
+  /** The day its provider renews on, when its pages say (M11.5): the suggested renewal follows it. */
+  private readonly renewalAnchor = computed(() => renewalAnchorKind(this.provider()));
+  /**
+   * The billing day the provider's renewal day gives a new item, which then isn't asked (core's settledBillingDay):
+   * undefined when the user says, as for an item being changed.
+   */
+  private readonly settledDay = computed(() => {
+    if (this.editing) return undefined;
+    const form = this.model();
+    return settledBillingDay(form.anchorDate, form, this.today(), this.renewalAnchor());
+  });
+  /** The form with that billing day: what the item is priced and saved with. */
+  private readonly settledForm = computed(() => {
+    const day = this.settledDay();
+    const form = this.model();
+    return day === undefined ? form : { ...form, billingDay: day };
+  });
   protected readonly plan = computed(() =>
     this.provider()?.plans.find((plan) => plan.id === this.model().planId),
   );
@@ -448,7 +467,8 @@ export class ItemDialog {
   });
   protected readonly billingDayChoices = computed(() => {
     const days = this.billingDays();
-    if (days.length === 0) return [];
+    // A day the provider's renewal day settles isn't asked (M11.5).
+    if (days.length === 0 || this.settledDay() !== undefined) return [];
     // billingDayChoices offers days only for a real date.
     const own = Number(this.model().anchorDate?.slice(8));
     return [
@@ -467,7 +487,10 @@ export class ItemDialog {
   /** The next renewal is the one the dialog suggested, which the hint asks to check. */
   protected readonly renewalSuggested = computed(() => {
     const form = this.model();
-    return this.validPeriod() && form.anchorDate === addPeriods(this.today(), form);
+    return (
+      this.validPeriod() &&
+      form.anchorDate === defaultRenewal(this.today(), form, this.renewalAnchor()).anchorDate
+    );
   });
 
   /** Where tax is added on top of the price (BLUEPRINT §4.8), so "plus tax" means something. */
@@ -483,7 +506,7 @@ export class ItemDialog {
   private readonly preview = computed(() => {
     // Its own ranks don't change its price or what it provides.
     const fields = itemFromForm(
-      this.model(),
+      this.settledForm(),
       this.context(Object.keys(this.model().rankOverrides)),
     );
     const item: ListItem = {
@@ -838,6 +861,7 @@ export class ItemDialog {
       this.renewalPeriod,
       form,
       this.today(),
+      this.renewalAnchor(),
     );
     this.renewalPeriod = periodOf(form);
     this.model.update((current) => ({
@@ -874,7 +898,7 @@ export class ItemDialog {
     const { listId, listName } = this.data;
     // Ranks are kept for the keys it provides, or all of them when it can't be priced to know.
     const provided = this.preview()?.providedKeys ?? Object.keys(this.model().rankOverrides);
-    const fields = itemFromForm(this.model(), this.context(provided));
+    const fields = itemFromForm(this.settledForm(), this.context(provided));
     // A tag deleted since it was picked, in Settings or another tab, isn't saved back onto the item (M6.11).
     if (this.tags.status() === 'ready') {
       fields.tagIds = fields.tagIds.filter((id) => this.tags.byId().has(id));
@@ -986,6 +1010,11 @@ export class ItemDialog {
       catalog(region)
         ?.providers.flatMap((provider) => provider.plans)
         .find((plan) => plan.id === planId)?.addOnIds ?? [];
+    // The day its provider renews on (M11.5): a bundle's seller's.
+    const anchorOf = (find: (provider: SnapshotProvider) => boolean) => {
+      const kind = renewalAnchorKind(catalog(country)?.providers.find(find));
+      return kind && { renewalAnchor: kind };
+    };
     switch (request.kind) {
       case 'item': {
         const { item } = request;
@@ -1006,8 +1035,12 @@ export class ItemDialog {
           today,
           country,
           currency,
+          ...anchorOf((provider) => provider.plans.some((plan) => plan.id === request.planId)),
         });
-      case 'bundle':
+      case 'bundle': {
+        const seller = catalog(country)?.bundles.find(
+          (bundle) => bundle.id === request.bundleId,
+        )?.soldBy;
         return newItemForm({
           source: { kind: 'bundle', bundleId: request.bundleId },
           period: request.period,
@@ -1015,7 +1048,9 @@ export class ItemDialog {
           today,
           country,
           currency,
+          ...anchorOf((provider) => provider.id === seller),
         });
+      }
       case 'custom': {
         const sub = this.customSubs.byId().get(request.customSubId);
         const [plan] = sub?.plans ?? [];

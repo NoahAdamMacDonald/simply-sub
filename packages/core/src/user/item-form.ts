@@ -1,5 +1,6 @@
 import { isoDateSchema } from '../catalog/formats';
 import type { Interval } from '../catalog/price';
+import type { RenewalAnchorKind } from '../catalog/provider';
 import { addDays, addMonths, type IsoDate } from '../dates/iso-date';
 import { addPeriods, samePeriod, type Period } from '../dates/period';
 import type { RankKey } from '../ranking/rank-keys';
@@ -117,6 +118,8 @@ export interface NewItemOptions {
   /** Settings' country and currency: where it's bought and what an own price is in, until they're changed. */
   country: string;
   currency: string;
+  /** The day its provider renews on, when its pages say (M11.5): the suggested renewal follows it. */
+  renewalAnchor?: RenewalAnchorKind;
 }
 
 /**
@@ -184,13 +187,53 @@ export function keptBillingDay(
 }
 
 /**
- * A new Ongoing item's next renewal (P6): one period from today, the date the dialog suggests until the user enters
- * their own. Months and years keep today's day: added on Jan 31, it renews on Feb 28 with billingDay 31, then Mar 31.
+ * A new Ongoing item's next renewal (P6): the date the dialog suggests until the user enters their own. It follows the
+ * day its provider renews on (M11.5) for a period in months or years: the next 1st after today for one that bills on
+ * the 1st, and the next month's end for one that bills on the last day, with the billing day that keeps it there
+ * (Nov 30 is billed on the 31st). Otherwise it's one period from today, keeping today's day: added on Jan 31, it
+ * renews on Feb 28 with billingDay 31, then Mar 31, as a provider that bills on the date you signed up does.
  */
-export function defaultRenewal(today: IsoDate, period: Period): Renewal {
+export function defaultRenewal(
+  today: IsoDate,
+  period: Period,
+  anchor?: RenewalAnchorKind,
+): Renewal {
+  const byMonth = period.interval === 'month' || period.interval === 'year';
+  if (byMonth && anchor === 'first-of-month') {
+    return { anchorDate: addMonths(`${today.slice(0, 7)}-01`, 1) };
+  }
+  if (byMonth && anchor === 'end-of-month') {
+    const thisMonth = monthEnd(today);
+    const anchorDate = thisMonth > today ? thisMonth : monthEnd(addDays(thisMonth, 1));
+    const billingDay = billingDayChoices(anchorDate, period).at(-1);
+    return { anchorDate, ...(billingDay !== undefined && { billingDay }) };
+  }
   const anchorDate = addPeriods(today, period);
   const billingDay = keptBillingDay(anchorDate, period, dayOf(today));
   return { anchorDate, ...(billingDay !== undefined && { billingDay }) };
+}
+
+/**
+ * The billing day a new item gets from the day its provider renews on (M11.5), so the dialog doesn't ask "Billed on
+ * the 28th or the 31st?": 0 when there's nothing to ask (the date isn't a shorter month's last day), else the day the
+ * provider's terms settle, or undefined when they can't and the user says. One that bills on the last day bills every
+ * month's last day; one that renews on the date you signed up bills the suggested date's own day, today's. Any other
+ * date the user enters is theirs to say, and so is every date for a provider whose pages don't say (P6).
+ */
+export function settledBillingDay(
+  anchorDate: string | null,
+  period: Period,
+  today: IsoDate,
+  anchor: RenewalAnchorKind | undefined,
+): BillingDay | 0 | undefined {
+  const choices = billingDayChoices(anchorDate, period);
+  if (choices.length === 0) return 0;
+  if (anchor === 'end-of-month') return choices[choices.length - 1];
+  const suggested = defaultRenewal(today, period, anchor);
+  if (anchor !== undefined && anchorDate === suggested.anchorDate) {
+    return suggested.billingDay ?? 0;
+  }
+  return undefined;
 }
 
 /**
@@ -202,9 +245,13 @@ export function renewalAfterPeriodChange(
   from: Period,
   to: Period,
   today: IsoDate,
+  anchor?: RenewalAnchorKind,
 ): Renewal {
-  if (!isDate(renewal.anchorDate) || renewal.anchorDate === addPeriods(today, from)) {
-    return defaultRenewal(today, to);
+  if (
+    !isDate(renewal.anchorDate) ||
+    renewal.anchorDate === defaultRenewal(today, from, anchor).anchorDate
+  ) {
+    return defaultRenewal(today, to, anchor);
   }
   const billingDay = keptBillingDay(renewal.anchorDate, to, renewal.billingDay);
   return { anchorDate: renewal.anchorDate, ...(billingDay !== undefined && { billingDay }) };
@@ -403,8 +450,9 @@ export function newItemForm({
   today,
   country,
   currency,
+  renewalAnchor,
 }: NewItemOptions): ItemForm {
-  const renewal = defaultRenewal(today, period);
+  const renewal = defaultRenewal(today, period, renewalAnchor);
   return {
     ...sourceFields(source),
     addOns: addOnRows(addOnIds),
@@ -699,7 +747,12 @@ function isLastDay(date: IsoDate): boolean {
 
 /** How many days `date`'s month has. */
 function monthLength(date: IsoDate): number {
-  return dayOf(addDays(addMonths(`${date.slice(0, 7)}-01`, 1), -1));
+  return dayOf(monthEnd(date));
+}
+
+/** The last day of `date`'s month. */
+function monthEnd(date: IsoDate): IsoDate {
+  return addDays(addMonths(`${date.slice(0, 7)}-01`, 1), -1);
 }
 
 function compare(a: string, b: string): number {

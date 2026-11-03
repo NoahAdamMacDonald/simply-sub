@@ -72,6 +72,27 @@ const debitFields: NewRecord<'cards'> = {
   fxFeePercent: 0,
 };
 
+/** The test catalog, with Crave renewing on a day its pages state (M11.5). */
+function craveRenewing(kind: 'same-date' | 'first-of-month' | 'end-of-month'): CatalogData {
+  return {
+    ...searchCatalogData,
+    providers: searchCatalogData.providers.map((provider) =>
+      provider.id === 'crave'
+        ? {
+            ...provider,
+            renewalAnchor: {
+              kind,
+              page: 'Billing',
+              url: 'https://www.crave.ca/billing',
+              quotes: ['Billed each month.'],
+              lastVerified: '2026-10-20',
+            },
+          }
+        : provider,
+    ),
+  };
+}
+
 /** The test catalog, with Netflix taking Visa and Mastercard in Canada (M9.2). */
 const withNetworks: CatalogData = {
   ...searchCatalogData,
@@ -743,6 +764,51 @@ describe('ListEditPage', () => {
       expect((await addedItems())[0].billing).toMatchObject({
         anchorDate: '2027-02-28',
         billingDay: 31,
+      });
+    });
+
+    describe('follows the day its provider renews on (M11.5)', () => {
+      it('starts a plan that renews on the 1st on the 1st', async () => {
+        catalogData = craveRenewing('first-of-month');
+        const loader = await openDialog(`${editor()}?add=crave.basic&interval=month`);
+        const renewal = await control(loader, 'Next renewal', MatInputHarness);
+        expect(await renewal.getValue()).toBe('2026-11-01');
+        // The date it suggests, which the hint asks to check.
+        expect(dialog()?.textContent).toContain('Check your account page for the exact date');
+        await press(loader, 'Add to list');
+
+        await until(() => dialog() === null);
+        const [added] = await addedItems();
+        expect(added.billing).toMatchObject({ anchorDate: '2026-11-01' });
+        expect(added.billing).not.toHaveProperty('billingDay');
+      });
+
+      it('bills a provider that bills on the last day on every month’s last day, without asking', async () => {
+        catalogData = craveRenewing('end-of-month');
+        const loader = await openDialog(`${editor()}?add=crave.basic&interval=month`);
+        const renewal = await control(loader, 'Next renewal', MatInputHarness);
+        expect(await renewal.getValue()).toBe('2026-10-31');
+        await renewal.setValue('2027-02-28');
+        await harness.fixture.whenStable();
+        expect(dialog()?.querySelector('.billing-day')).toBeNull();
+        await press(loader, 'Add to list');
+
+        await until(() => dialog() === null);
+        expect((await addedItems())[0].billing).toMatchObject({
+          anchorDate: '2027-02-28',
+          billingDay: 31,
+        });
+      });
+
+      it('still asks of a date the user enters when it renews on the date they signed up', async () => {
+        catalogData = craveRenewing('same-date');
+        const loader = await openDialog(`${editor()}?add=crave.basic&interval=month`);
+        expect(await (await control(loader, 'Next renewal', MatInputHarness)).getValue()).toBe(
+          '2026-11-25',
+        );
+        await (await control(loader, 'Next renewal', MatInputHarness)).setValue('2027-02-28');
+        await harness.fixture.whenStable();
+        expect(dialog()?.querySelector('.billing-day')).not.toBeNull();
       });
     });
 

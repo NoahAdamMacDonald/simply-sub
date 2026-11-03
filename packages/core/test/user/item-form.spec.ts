@@ -14,6 +14,7 @@ import {
   periodAfterPlanChange,
   periodChoices,
   renewalAfterPeriodChange,
+  settledBillingDay,
   sortedWindows,
   windowIssues,
   type ItemForm,
@@ -159,6 +160,97 @@ describe('defaultRenewal', () => {
   });
 });
 
+describe('defaultRenewal, by the day its provider renews on (M11.5)', () => {
+  it('suggests the next 1st for a provider that bills on the 1st, whatever the period', () => {
+    expect(defaultRenewal(today, monthly, 'first-of-month')).toEqual({ anchorDate: '2026-11-01' });
+    expect(defaultRenewal(today, yearly, 'first-of-month')).toEqual({ anchorDate: '2026-11-01' });
+    expect(defaultRenewal('2026-11-01', monthly, 'first-of-month')).toEqual({
+      anchorDate: '2026-12-01',
+    });
+    expect(defaultRenewal('2026-12-15', monthly, 'first-of-month')).toEqual({
+      anchorDate: '2027-01-01',
+    });
+  });
+
+  it('suggests the next month’s end for one that bills on the last day, billed on the 31st', () => {
+    expect(defaultRenewal(today, monthly, 'end-of-month')).toEqual({ anchorDate: '2026-10-31' });
+    expect(defaultRenewal('2026-11-02', monthly, 'end-of-month')).toEqual({
+      anchorDate: '2026-11-30',
+      billingDay: 31,
+    });
+    expect(defaultRenewal('2026-11-30', monthly, 'end-of-month')).toEqual({
+      anchorDate: '2026-12-31',
+    });
+    // Yearly from Feb 28, the last day is the 29th in a leap year.
+    expect(defaultRenewal('2027-02-10', yearly, 'end-of-month')).toEqual({
+      anchorDate: '2027-02-28',
+      billingDay: 29,
+    });
+  });
+
+  it('keeps one period from today for the date you signed up, every 30 days, and days and weeks', () => {
+    expect(defaultRenewal('2027-01-31', monthly, 'same-date')).toEqual({
+      anchorDate: '2027-02-28',
+      billingDay: 31,
+    });
+    expect(defaultRenewal(today, yearly, 'every-30-days')).toEqual({ anchorDate: '2027-10-26' });
+    expect(defaultRenewal(today, weekly, 'first-of-month')).toEqual({ anchorDate: '2026-11-02' });
+    expect(defaultRenewal(today, { interval: 'day', intervalCount: 30 }, 'end-of-month')).toEqual({
+      anchorDate: '2026-11-25',
+    });
+  });
+
+  it('starts a new item of a plan that renews on the 1st on the 1st', () => {
+    const form = newItemForm({
+      source: { kind: 'catalog', planId: 'crave.basic' },
+      period: monthly,
+      addOnIds: [],
+      today,
+      country: 'CA',
+      currency: 'CAD',
+      renewalAnchor: 'first-of-month',
+    });
+    expect(form).toMatchObject({ anchorDate: '2026-11-01', billingDay: 0, startDate: today });
+    const { billing } = itemFromForm(form, {
+      free: false,
+      autoRenew: true,
+      country: 'CA',
+      providedKeys: [],
+      today,
+    });
+    expect(billing).toMatchObject({ anchorDate: '2026-11-01' });
+    expect(billing).not.toHaveProperty('billingDay');
+  });
+});
+
+describe('settledBillingDay (M11.5)', () => {
+  it('has nothing to settle unless the date is a shorter month’s last day', () => {
+    expect(settledBillingDay('2026-11-26', monthly, today, undefined)).toBe(0);
+    expect(settledBillingDay('2027-01-31', monthly, today, undefined)).toBe(0);
+    expect(settledBillingDay('2027-02-28', weekly, today, 'same-date')).toBe(0);
+  });
+
+  it('bills every month’s last day for a provider that bills on the last day', () => {
+    expect(settledBillingDay('2027-02-28', monthly, today, 'end-of-month')).toBe(31);
+    expect(settledBillingDay('2026-04-30', monthly, today, 'end-of-month')).toBe(31);
+    expect(settledBillingDay('2027-02-28', yearly, today, 'end-of-month')).toBe(29);
+  });
+
+  it('keeps the suggested date’s day for the date you signed up, and asks of any other date', () => {
+    // Added on Jan 31, it's billed on the 31st: Netflix bills on the date you signed up.
+    expect(settledBillingDay('2027-02-28', monthly, '2027-01-31', 'same-date')).toBe(31);
+    // Added on Jan 28, Feb 28 is the 28th.
+    expect(settledBillingDay('2027-02-28', monthly, '2027-01-28', 'same-date')).toBe(0);
+    // A date the user entered: only they know the day they signed up.
+    expect(settledBillingDay('2027-02-28', monthly, today, 'same-date')).toBeUndefined();
+    expect(settledBillingDay('2027-02-28', monthly, today, 'first-of-month')).toBeUndefined();
+  });
+
+  it('asks whenever the provider’s pages don’t say', () => {
+    expect(settledBillingDay('2027-02-28', monthly, '2027-01-31', undefined)).toBeUndefined();
+  });
+});
+
 describe('billingDayChoices', () => {
   it('offers the later days only on the last day of a month shorter than 31 days', () => {
     expect(billingDayChoices('2027-02-28', monthly)).toEqual([29, 30, 31]);
@@ -231,6 +323,29 @@ describe('renewalAfterPeriodChange', () => {
     expect(renewalAfterPeriodChange(entered, monthly, weekly, today)).toEqual({
       anchorDate: '2027-02-28',
     });
+  });
+
+  it('knows the date it suggested by the day the provider renews on (M11.5)', () => {
+    // The 1st after today, whatever the period: it stays when the period changes.
+    expect(
+      renewalAfterPeriodChange(
+        { anchorDate: '2026-11-01' },
+        monthly,
+        yearly,
+        today,
+        'first-of-month',
+      ),
+    ).toEqual({ anchorDate: '2026-11-01' });
+    // Not suggested for a provider that bills on the 1st: kept.
+    expect(
+      renewalAfterPeriodChange(
+        { anchorDate: '2026-11-26' },
+        monthly,
+        yearly,
+        today,
+        'first-of-month',
+      ),
+    ).toEqual({ anchorDate: '2026-11-26' });
   });
 });
 
