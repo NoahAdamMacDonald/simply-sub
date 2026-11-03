@@ -756,6 +756,7 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
   checkCurrencies(provider, own, context, report);
   checkSourceRepo(provider, own, context, report);
   checkInferred(provider, own, context, report);
+  checkAccounts(provider, own, context, report);
 }
 
 /**
@@ -908,6 +909,76 @@ function checkRenewalAnchor(
 }
 
 /** A page's lastVerified: not after today, and a warning once it's a year old, like a policy's. */
+/**
+ * Finance accounts (M11.10, BLUEPRINT §4.11): a finance provider's plans are accounts, each with its terms, and it says
+ * who regulates it; no other provider's plan is one. Its rates and its protection are quoted from its own pages.
+ */
+function checkAccounts(
+  provider: Provider,
+  own: readonly string[],
+  { today }: CheckContext,
+  report: Report,
+): void {
+  const finance = provider.category === 'finance';
+  const sites = ownPages(provider, own);
+  provider.plans.forEach((plan, planIndex) => {
+    const path = ['plans', planIndex, 'account'];
+    if (!plan.account) {
+      if (finance) {
+        report(
+          ['plans', planIndex],
+          "Give its account's terms (account): a finance provider's plans are accounts",
+        );
+      }
+      return;
+    }
+    if (!finance) {
+      report(path, "Only a finance provider's plans are accounts: leave account out");
+      return;
+    }
+    const pages = [
+      ...(plan.account.rates
+        ? [{ url: plan.account.rates.sourceUrl, at: [...path, 'rates', 'sourceUrl'] }]
+        : []),
+      { url: plan.account.protection.url, at: [...path, 'protection', 'url'] },
+    ];
+    for (const { url, at } of pages) {
+      if (!isOnDomain(url, sites)) {
+        report(at, `Must be a page of ${provider.name}'s own sites (${sites.join(', ')})`);
+      }
+    }
+    if (plan.account.rates) {
+      checkReadOn(
+        plan.account.rates.lastVerified,
+        [...path, 'rates', 'lastVerified'],
+        today,
+        report,
+      );
+    }
+    checkReadOn(
+      plan.account.protection.lastVerified,
+      [...path, 'protection', 'lastVerified'],
+      today,
+      report,
+    );
+  });
+  if (finance && !provider.regulators) {
+    report([], 'Say who regulates it (regulators), each with its register’s page for it');
+  }
+  if (!finance && provider.regulators) {
+    report(['regulators'], 'Only a finance provider lists regulators: leave them out');
+  }
+  provider.regulators?.forEach((regulator, index) => {
+    if (isOnDomain(regulator.url, own)) {
+      report(
+        ['regulators', index, 'url'],
+        "Must be the regulator's own register, not the provider's site",
+      );
+    }
+    checkReadOn(regulator.lastVerified, ['regulators', index, 'lastVerified'], today, report);
+  });
+}
+
 function checkReadOn(
   lastVerified: IsoDate,
   path: (string | number)[],

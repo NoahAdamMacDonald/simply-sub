@@ -1504,6 +1504,15 @@ price list, so they reuse what fits and add what doesn't:
     eligibility: { minAssets: 100000 }   # tiers decided by assets rather than a fee
   ```
 
+- **As built (M11.10):** `packages/core/src/catalog/account.ts`. The plan's `account` also names the `currency` its
+  amounts are in. A condition (each waiver, a bonus rate's `when`, `eligibility`) is any of `minBalance`,
+  `directDeposit` (`true`, or an amount a month), `monthlyDeposits`, `minAssets`, `minAge`, `maxAge`, `student` and
+  `newcomer`, one or more together. `rates` add `bonus` (a rate when a condition is met, the owner's choice), and their
+  `sourceUrl` and `lastVerified`, like prices. `limits` are `eTransfer` and `atmWithdrawal` (a transaction, a day, a
+  week, a month) and `debits` a month. `protection` adds `limit` and `lastVerified`. Validation refuses a rate tier out
+  of order or a first one above 0, a waiver with no condition, and protection with no quote; every plan of a finance
+  provider is an account and no other plan is; a finance provider names its `regulators` (each a name, its register's
+  page for the provider, and when it was read); rates and protection are quoted from the provider's own sites.
 - **Finance features** (a feature category of their own, through feature-discovery): account types and registered
   accounts (TFSA, RRSP, FHSA, RESP, RDSP, RRIF, LIRA), cards and their networks (Interac debit, Visa Debit,
   Mastercard, prepaid, credit), Interac e-Transfer, ATM network and fee refunds, cash deposits (branch, partner, Canada

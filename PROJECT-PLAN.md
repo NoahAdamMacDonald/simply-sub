@@ -1910,12 +1910,17 @@ in every D1 `json` column search parses.
   - **The registry** (2026-11-03): a Banking & investing feature category and the 15 finance features the owner chose
     (BLUEPRINT §14), proposed from seven providers' own pages; the two topics are M11.1's. `check-features.cjs` expects
     the new card.
+  - **Accounts and regulators** (2026-11-03): core's `account.ts` (the plan's `account`: kind, currency, waivers,
+    rates with tiers and a bonus, limits, protection, eligibility) and the provider's `regulators`, with
+    `validateCatalog`'s checks (BLUEPRINT §4.11 as built) and `provider.schema.json`. Two fixture providers in core's
+    tests validate: a bank whose $17.95 fee a $4,000 balance waives, and a fintech paying 2% on its free plan and 3.5% on
+    its $22 one.
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and
   cards already work. What's new is the plan's `account` block and the finance features (§4.11).
 - **Sources:** the provider's own pages, plus regulators' registers (CDIC's members, CIRO, FCAC, provincial deposit
   insurers and regulators), which count as official for finance. Rate tables on other sites only help find banks.
 - **Acceptance**
-  - [ ] Validation refuses a rate tier out of order, a waiver with no condition, and protection without a quote
+  - [x] Validation refuses a rate tier out of order, a waiver with no condition, and protection without a quote
   - [ ] An account's card shows its rates, waivers, limits and protection, with their quotes, in both themes
 
 **M11.13 — The finance optimizer** (BLUEPRINT §10.6)
