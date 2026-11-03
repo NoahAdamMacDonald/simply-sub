@@ -235,6 +235,24 @@ const providers: SnapshotProvider[] = [
     ],
     { billingCurrency: { GLOBAL: 'EUR' } },
   ),
+  // Ranked perks (M11.6): Ultimate's Fortnite Crew is a perk Essential, the cheaper, doesn't have.
+  provider(
+    'game-pass',
+    'Game Pass',
+    'gaming',
+    [
+      plan('game-pass.essential', 'Essential', {}, [price(13.99)], { perks: ['online-play'] }),
+      plan('game-pass.ultimate', 'Ultimate', {}, [price(25.99)], {
+        perks: ['online-play', 'fortnite-crew'],
+      }),
+    ],
+    {
+      perks: [
+        { id: 'online-play', name: 'Online console multiplayer' },
+        { id: 'fortnite-crew', name: 'Fortnite Crew' },
+      ],
+    },
+  ),
 ];
 
 const bundles: Bundle[] = [

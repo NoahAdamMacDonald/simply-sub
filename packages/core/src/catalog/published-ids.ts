@@ -13,7 +13,8 @@ import { locateCatalogFile, type CatalogIssue, type CatalogSourceFile } from './
 // longer sold, or redirected. scripts/check-ids.ts reads main's data/ at the merge base through git, and the branch's
 // from the working tree; both are read leniently here, since main's files follow main's schemas, which may differ.
 
-export type PublishedIdKind = 'provider' | 'plan' | 'add-on' | 'bundle' | 'feature' | 'period';
+export type PublishedIdKind =
+  'provider' | 'plan' | 'add-on' | 'bundle' | 'feature' | 'perk' | 'period';
 
 /**
  * One id the catalog publishes, and the file it's in. A feature's are its rank keys; a period is a plan's or bundle's
@@ -27,8 +28,8 @@ export interface PublishedId {
 
 /**
  * Every provider, plan, add-on and bundle id, every plan's and bundle's billing period per region, and every rank key
- * of the registry, in the files given: what lists, ranks and links point at. A file that isn't readable gives what it
- * can.
+ * of the registry and of the providers' perks (M11.6), in the files given: what lists, ranks and links point at. A
+ * file that isn't readable gives what it can.
  */
 export function publishedIds(files: readonly CatalogSourceFile[]): PublishedId[] {
   const found: PublishedId[] = [];
@@ -55,6 +56,11 @@ export function publishedIds(files: readonly CatalogSourceFile[]): PublishedId[]
         addPeriods(plan, file);
       }
       for (const addOn of records(data['addOns'])) add('add-on', addOn['id'], file);
+      for (const perk of records(data['perks'])) {
+        if (typeof data['id'] === 'string' && typeof perk['id'] === 'string') {
+          add('perk', `perk:${data['id']}/${perk['id']}`, file);
+        }
+      }
     } else if (kind === 'bundle' && isRecord(data)) {
       add('bundle', data['id'], file);
       addPeriods(data, file);
@@ -90,8 +96,8 @@ export function missingIds(
     if (kept.has(key) || redirected.has(key)) return false;
     // A period of a plan or bundle that's gone itself: that one is named, or redirected.
     if (kind === 'period') return kept.has(`${space('plan')} ${id.split(' ')[0]}`);
-    // A feature redirected by its id takes its values' keys with it.
-    return kind !== 'feature' || redirectedRankKey(map, id) === id;
+    // A feature redirected by its id takes its values' keys with it, and a provider redirected its perks' (M11.6).
+    return (kind !== 'feature' && kind !== 'perk') || redirectedRankKey(map, id) === id;
   });
 }
 
@@ -106,14 +112,22 @@ export function missingIdIssue({ kind, id, file }: PublishedId): CatalogIssue {
       message: `${owner}'s ${period} price in ${region} is published on main and gone here. Items are billed on it (BLUEPRINT §4.3): keep the price with retired: <date>, the day it stopped being sold (and endsOn when existing subscribers keep it longer), so their items switch at renewal`,
     };
   }
-  const what = kind === 'feature' ? `Rank key "${id}"` : `The ${kind} id "${id}"`;
+  const what =
+    kind === 'feature'
+      ? `Rank key "${id}"`
+      : kind === 'perk'
+        ? `Perk "${id}"`
+        : `The ${kind} id "${id}"`;
   const fixes =
     kind === 'feature'
       ? 'keep it in data/features.yaml under its new name, or redirect it in data/redirects.yaml ({ kind: feature, from: ' +
         `${id}, to: <new key>, on: <date> })`
-      : `keep the id with its new name (formerNames on a plan, aliases on a provider), retire it (retired: <date>, ` +
-        `with its last prices), or redirect it in data/redirects.yaml ({ kind: ${kind}, from: ${id}, to: <new id>, ` +
-        'on: <date> })';
+      : kind === 'perk'
+        ? "keep it in its provider's perks under its new name, or redirect it in data/redirects.yaml ({ kind: perk, " +
+          `from: ${id}, to: <its new perk key, or the feature rank key it became>, on: <date> })`
+        : `keep the id with its new name (formerNames on a plan, aliases on a provider), retire it (retired: <date>, ` +
+          `with its last prices), or redirect it in data/redirects.yaml ({ kind: ${kind}, from: ${id}, to: <new id>, ` +
+          'on: <date> })';
   return {
     severity: 'error',
     file,
@@ -123,7 +137,7 @@ export function missingIdIssue({ kind, id, file }: PublishedId): CatalogIssue {
 }
 
 function space(kind: PublishedIdKind): string {
-  return kind === 'period' ? 'period' : idSpace(kind === 'feature' ? 'feature' : 'plan');
+  return kind === 'period' ? 'period' : idSpace(kind);
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

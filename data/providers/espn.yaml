@@ -47,6 +47,14 @@ owner:
     - ESPN is 72 percent owned by The Walt Disney Company, 18 percent by Hearst and 10 percent by the National Football League.
   lastVerified: 2026-11-02
 
+# Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their
+# words.
+perks:
+  - id: every-espn-network
+    name: Every ESPN network
+  - id: espn-plus
+    name: ESPN+ included
+
 # Read 2026-10-26 on ESPN's plans and prices article. Select is ESPN+'s content; Unlimited is every ESPN network,
 # live. Both have ads ("ESPN Select (With Ads)", "ESPN Unlimited (With Ads)" on Disney+'s bundle table).
 # Read 2026-11-02 (M11.4, the required streaming features): "ESPN subscriptions allow simultaneous streaming on up to
@@ -91,7 +99,7 @@ plans:
       ad-free: false
       streaming.concurrent-streams: 3
       streaming.live: [tv-channels, sports]
-    perks: [Every ESPN network, ESPN+ included]
+    perks: [every-espn-network, espn-plus]
     prices:
       - region: US
         currency: USD

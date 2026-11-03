@@ -389,6 +389,29 @@
       },
       "description": "Provider-wide feature id → value (M11.4): only features.yaml's providerWide ones (platforms, sign-in, languages, support), which every plan has unless it states its own"
     },
+    "perks": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)",
+            "description": "Its id, permanent once published (fortnite-crew): its rank key is perk:<provider id>/<id>"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "As the card and the item dialog show it (Fortnite Crew passes)"
+          }
+        },
+        "required": ["id", "name"],
+        "additionalProperties": false
+      },
+      "description": "Its perks (M11.6): what its plans have that no feature in features.yaml describes, each with an id its plans list. A perk a second provider comes to offer becomes a feature, through data/redirects.yaml"
+    },
     "sourceRepo": {
       "type": "object",
       "properties": {
@@ -539,8 +562,8 @@
             "type": "object",
             "propertyNames": {
               "type": "string",
-              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*(?:=[a-z0-9]+(?:-[a-z0-9]+)*\\+?)?$",
-              "patternErrorMessage": "Use a feature id or <feature id>=<value or tier id> (video.quality=4k)"
+              "pattern": "^(?:[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*(?:=[a-z0-9]+(?:-[a-z0-9]+)*\\+?)?|perk:[a-z0-9]+(?:-[a-z0-9]+)*\\/[a-z0-9]+(?:-[a-z0-9]+)*)$",
+              "patternErrorMessage": "Use a feature id, <feature id>=<value or tier id> (video.quality=4k) or perk:<provider id>/<perk id>"
             },
             "additionalProperties": { "type": "string", "minLength": 1 },
             "description": "Feature id or rank key → the provider's own wording, shown instead of the registry name"
@@ -548,8 +571,12 @@
           "perks": {
             "minItems": 1,
             "type": "array",
-            "items": { "type": "string", "minLength": 1 },
-            "description": "Provider-specific extras, shown but never compared"
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "patternErrorMessage": "Use a kebab-case id: lowercase letters and digits, joined by single hyphens (disney-plus)"
+            },
+            "description": "The ids of its provider's perks this plan has (M11.6): each one a rank key, perk:<provider>/<perk>, which users rank on the plan and the optimizer counts"
           },
           "notes": { "type": "string", "minLength": 1, "description": "Shown on the plan" },
           "retired": {

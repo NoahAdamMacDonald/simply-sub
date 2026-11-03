@@ -13,6 +13,7 @@ import type {
   CurrenciesEntry,
   PaymentMethod,
   PaymentMethods,
+  Perk,
   Plan,
   Provider,
   RenewalAnchor,
@@ -547,6 +548,17 @@ export function draftFromAnswer(
   const planIds = new Map<string, string>();
   const plans: Plan[] = [];
   const proposedFeatures: ProposedFeature[] = [];
+  // Perks (M11.6): each one once at the provider, its id from its words, and the plans that have it listing the id.
+  const providerPerks: Perk[] = [];
+  const perkIdFor = (text: string): string => {
+    const known = providerPerks.find((perk) => normalize(perk.name) === normalize(text));
+    if (known) return known.id;
+    const base = perkIdFromText(text);
+    let id = base;
+    for (let n = 2; providerPerks.some((perk) => perk.id === id); n++) id = `${base}-${n}`;
+    providerPerks.push({ id, name: text });
+    return id;
+  };
   for (const extracted of answer.plans) {
     if (extracted.business) {
       issues.push({
@@ -596,9 +608,15 @@ export function draftFromAnswer(
           features[parent.id] = true;
       }
     }
-    const perks = extracted.perks.flatMap((perk) =>
-      verified(`${extracted.name}: ${perk.text}`, perk.page, perk.quote) ? [perk.text.trim()] : [],
-    );
+    const perks = [
+      ...new Set(
+        extracted.perks.flatMap((perk) =>
+          verified(`${extracted.name}: ${perk.text}`, perk.page, perk.quote)
+            ? [perkIdFor(perk.text.trim())]
+            : [],
+        ),
+      ),
+    ];
     const link =
       extracted.link &&
       /^https:\/\//.test(extracted.link) &&
@@ -837,6 +855,7 @@ export function draftFromAnswer(
     ...(availableIn && { availableIn }),
     ...(cancelUrl && { cancelUrl }),
     ...(pricing && { sources: { pricing } }),
+    ...(providerPerks.length > 0 && { perks: providerPerks }),
     ...(facts.sourceRepo && { sourceRepo: facts.sourceRepo }),
     plans,
     ...(addOns.length > 0 && { addOns }),
@@ -1189,6 +1208,14 @@ function providerFacts(
     ...(renewalAnchor && { renewalAnchor }),
     ...(sourceRepo && { sourceRepo }),
   };
+}
+
+/** A perk's id from its words: their slug, cut at a word to 40 characters ("cloud-playtime-5-hours-a-month"). */
+function perkIdFromText(text: string): string {
+  const slug = idFromName(text) || 'perk';
+  if (slug.length <= 40) return slug;
+  const cut = slug.slice(0, 41);
+  return cut.slice(0, cut.lastIndexOf('-')) || slug.slice(0, 40);
 }
 
 /** A page as the card links it, by its kind. */

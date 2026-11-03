@@ -570,7 +570,7 @@ describe('validateCatalog', () => {
   describe('price differences (M11.4)', () => {
     const adFree = ['plans', 1, 'features', 'streaming.ad-free'];
     const warning =
-      'warning: data/providers/netflix.yaml plans.1.features: Costs more than netflix.standard-ads (18.99 against 7.99 CAD a month in CA) with the same features: give what the price pays for a feature, or the optimizer always suggests netflix.standard-ads';
+      'warning: data/providers/netflix.yaml plans.1.features: Costs more than netflix.standard-ads (18.99 against 7.99 CAD a month in CA) with the same features and perks: give what the price pays for a feature or a perk, or the optimizer always suggests netflix.standard-ads';
 
     it('warns when two plans at different prices have the same features', () => {
       expect(messagesWith(netflix, adFree, false)).toEqual([warning]);
@@ -586,6 +586,23 @@ describe('validateCatalog', () => {
         live(0, ['tv-channels', 'sports'])(edited(catalog(), netflix, adFree, false)),
       );
       expect(messages(ordered)).toEqual([warning]);
+    });
+
+    it('takes a perk as a difference (M11.6)', () => {
+      const files = edited(
+        edited(catalog(), netflix, adFree, false),
+        netflix,
+        ['perks'],
+        [{ id: 'mobile-games', name: 'Mobile games' }],
+      );
+      expect(messages(edited(files, netflix, ['plans', 1, 'perks'], ['mobile-games']))).toEqual([]);
+      const both = edited(
+        edited(files, netflix, ['plans', 1, 'perks'], ['mobile-games']),
+        netflix,
+        ['plans', 0, 'perks'],
+        ['mobile-games'],
+      );
+      expect(messages(both)).toEqual([warning]);
     });
 
     it('compares only prices still sold, for the same region, currency and period', () => {

@@ -99,6 +99,8 @@ export const provider = {
   cancelUrl: 'https://www.netflix.com/cancelplan',
   sources: { pricing: 'https://help.netflix.com/en/node/24926' },
   notes: 'Prices are illustrative.',
+  // Its perks (M11.6): each with an id its plans list.
+  perks: [{ id: 'mobile-games', name: 'Mobile games' }],
   plans: [
     {
       id: 'netflix.standard-ads',
@@ -126,7 +128,7 @@ export const provider = {
         'includes-subscription': ['proton.pass-plus'],
       },
       featureLabels: { 'password-manager.item-types=email-alias': 'Hide-my-email aliases' },
-      perks: ['Mobile games'],
+      perks: ['mobile-games'],
       notes: 'Ultra HD needs a 4K screen.',
       prices: [monthly('CA', 'CAD', 23.99), { ...monthly('CA', 'CAD', 239.88), interval: 'year' }],
       addOnIds: ['netflix.extra-member'],

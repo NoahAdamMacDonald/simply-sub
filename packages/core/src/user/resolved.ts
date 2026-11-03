@@ -13,6 +13,7 @@ import type { CardNetwork, Plan } from '../catalog/provider';
 import type { CardTerms } from '../rewards/card-cost';
 import { catalogIconFile, type CatalogData, type SnapshotProvider } from '../catalog/snapshot';
 import type { IsoDate } from '../dates/iso-date';
+import { planPerkKeys } from '../ranking/perk-keys';
 import { providedKeys, type RankKey } from '../ranking/rank-keys';
 import { effectiveRanks, type ProfileRanks } from '../ranking/resolve-rank';
 import { nextChargeDate } from '../schedule/charge-dates';
@@ -238,6 +239,8 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
   // An id that changed, or a retired plan whose subscribers have moved, is followed before giving up (M10.27): the app
   // rewrites the item to the new id soon after (redirectedRecords), but it counts meanwhile.
   const moves = dueRedirectMap(catalog, context.today);
+  // The keys of its plan's perks (M11.6), a bundle's plans' all of them.
+  let perkKeys: RankKey[] = [];
   switch (source.kind) {
     case 'catalog': {
       const planId = redirected(moves, 'plan', source.planId);
@@ -271,6 +274,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         : undefined;
       const retirement = retirementOf(plan, provider);
       const periodChange = periodChangeOf(plan.prices, price, item, pricing, retirement?.endsOn);
+      perkKeys = planPerkKeys(plan);
       parts = {
         providerId: provider.id,
         planId: plan.id,
@@ -309,6 +313,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         return provider && plan ? [{ provider, plan }] : [];
       });
       const networks = acceptedNetworksIn(seller, region);
+      perkKeys = [...new Set(plans.flatMap(({ plan }) => planPerkKeys(plan)))];
       parts = {
         providerId: seller.id,
         bundleId: bundle.id,
@@ -362,7 +367,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
   };
   const override =
     item.priceOverride && ownPriceOn(item.priceOverride, context.today) ? overridePrice : undefined;
-  const keys = providedKeys(parts.features, catalog.features);
+  const keys = [...providedKeys(parts.features, catalog.features), ...perkKeys];
   const charged = {
     item,
     listId: item.listId,

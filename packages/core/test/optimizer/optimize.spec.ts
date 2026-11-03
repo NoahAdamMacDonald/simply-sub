@@ -160,6 +160,30 @@ describe('optimize: hard constraints (BLUEPRINT §10.2)', () => {
   });
 });
 
+describe('optimize: ranked perks (M11.6)', () => {
+  const ultimate = (rankOverrides: ListItem['rankOverrides'] = {}) =>
+    item('game-pass.ultimate', {}, { rankOverrides });
+
+  it('suggests the cheaper plan when its perk is unranked', () => {
+    expect(cards(run([ultimate()]))).toMatchInlineSnapshot(`
+      [
+        "red | Downgrade Game Pass Ultimate → Essential | save 151.20 | lose perk:game-pass/fortnite-crew (not-ranked)",
+      ]
+    `);
+  });
+
+  it('never drops a perk ranked Needed, a lost Wanted one is yellow, and names it', () => {
+    expect(cards(run([ultimate({ 'perk:game-pass/fortnite-crew': 'needed' })]))).toEqual([]);
+    expect(cards(run([ultimate({ 'perk:game-pass/fortnite-crew': 'wanted' })]))).toMatchInlineSnapshot(`
+      [
+        "yellow | Downgrade Game Pass Ultimate → Essential | save 151.20 | lose perk:game-pass/fortnite-crew (wanted)",
+      ]
+    `);
+    const result = run([ultimate({ 'perk:game-pass/fortnite-crew': 'wanted' })]);
+    expect(result.suggestions[0]?.lost.map((change) => change.label)).toContain('Fortnite Crew');
+  });
+});
+
 describe('optimize: duplicates, family members and extra members', () => {
   it('never removes one of two accounts of the same provider, and suggests an extra member instead', () => {
     const mine = item('netflix.standard', {}, { nickname: 'Mine' });

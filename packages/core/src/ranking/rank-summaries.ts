@@ -3,6 +3,7 @@ import type { IsoDate } from '../dates/iso-date';
 import { itemActivity } from '../user/item-activity';
 import { countedRanks, rankSchema, type Rank, type RankCounts } from '../user/rank';
 import type { FeatureSummaryRow, ResolvedItem } from '../user/resolved';
+import { isPerkKey } from './perk-keys';
 import { rankKeyLabel, rankKeyOptions, type RankKey, type RankKeyOption } from './rank-keys';
 
 // What a list's ranks add up to (PROJECT-PLAN §3.2, M6.1): rank counts for the list cards (P3) and the feature
@@ -35,7 +36,9 @@ const summaryRanks: readonly Rank[] = ['essential', 'critical', 'needed', 'wante
  * - what each item has itself (its own keys): a boolean it has, and of a ladder (an enum's values, a number's tiers)
  *   only its own rung, not the lower ones it provides too. A 4K plan shows 4K, not 1080p, though it counts toward
  *   1080p's row when another item shows that. A set's values (DNS blocking's ads, malware…) show only when ranked
- *   or marked headline: a set can have many.
+ *   or marked headline: a set can have many. So do perks (M11.6): a plan can have many too.
+ *
+ * `registry` names the keys: the catalog's rankFeatures, so a perk's row is named as its provider names it.
  *
  * A key no item provides isn't shown. Rows go by the key's highest rank among the items that provide it, in Rank's
  * order (Not ranked after Sometimes), then headlines first, then by name: "Video quality: 4K (Ultra HD)", as Search
@@ -85,7 +88,7 @@ export function featureSummary(
 
 /**
  * The keys an item has itself, of the keys it provides: its booleans, and the top rung of each ladder (an enum's
- * values, a number's tiers), not the lower rungs that one provides too. Not a set's values.
+ * values, a number's tiers), not the lower rungs that one provides too. Not a set's values, nor its perks.
  */
 function ownKeys(
   providedKeys: readonly RankKey[],
@@ -95,7 +98,7 @@ function ownKeys(
   const top = new Map<string, { key: RankKey; position: number }>();
   for (const key of providedKeys) {
     const option = options.get(key);
-    if (!option) continue;
+    if (!option || isPerkKey(key)) continue;
     const { feature } = option;
     if (feature.type === 'set') continue;
     const rungs =

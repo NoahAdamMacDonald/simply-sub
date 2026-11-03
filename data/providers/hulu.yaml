@@ -40,6 +40,14 @@ owner:
     - The Walt Disney Company assumes full operational control of Hulu.
   lastVerified: 2026-11-02
 
+# Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their
+# words.
+perks:
+  - id: downloads
+    name: Download select shows and movies
+  - id: watch-party
+    name: Hulu Watch Party
+
 # Read 2026-10-26 on the plans and prices article, for new subscriptions from September 23, 2026: the standalone plans,
 # both up to 4K. The article doesn't number the streams or downloads. Not here yet: the Hulu + Live TV plans (which
 # include Disney+ and ESPN, so they'd be suites) and the add-ons. The Disney+ bundles are in data/bundles.
@@ -79,7 +87,7 @@ plans:
       video.quality: 4k
       ad-free: true
       streaming.concurrent-streams: 2
-    perks: [Download select shows and movies, Hulu Watch Party]
+    perks: [downloads, watch-party]
     notes: A few shows play with ads before and after the video.
     prices:
       - region: US

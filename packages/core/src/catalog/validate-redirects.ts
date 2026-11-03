@@ -1,4 +1,5 @@
 import type { IsoDate } from '../dates/iso-date';
+import { perkKey } from '../ranking/perk-keys';
 import { rankKeyOptions } from '../ranking/rank-keys';
 import type { Bundle } from './bundle';
 import { didYouMean } from './checks';
@@ -36,6 +37,11 @@ export function checkRedirects(
   const rankKeys =
     registry &&
     new Set([...registry.features.values()].flatMap(rankKeyOptions).map((option) => option.key));
+  const perkKeys = new Set(
+    providers.flatMap((provider) =>
+      (provider.perks ?? []).map((perk) => perkKey(provider.id, perk.id)),
+    ),
+  );
   const froms = new Set(redirects.map(({ kind, from }) => `${idSpace(kind)} ${from}`));
   const skipped = (id: string) =>
     unchecked.has(id.startsWith('perk:') ? id.slice(5, id.indexOf('/')) : id.split('.')[0]);
@@ -83,15 +89,20 @@ export function checkRedirects(
           ? undefined
           : `"${to}" isn't a bundle${didYouMean(to, bundleIds)}`;
       case 'perk':
-        // Perks get ids with M11.6; until then a perk's target is checked for its provider only.
-        if (to.startsWith('perk:')) {
-          const provider = to.slice(5, to.indexOf('/'));
-          return providerById.has(provider) ? undefined : `"${provider}" isn't a provider`;
-        }
-        return rankKeyProblem(to);
+        // Another perk (one renamed), or the feature rank key it became (M11.6).
+        return to.startsWith('perk:') ? perkProblem(to) : rankKeyProblem(to);
       case 'feature':
         return rankKeyProblem(to);
     }
+  }
+
+  /** Why a perk key isn't one: its provider has no such perk. */
+  function perkProblem(key: string): string | undefined {
+    if (perkKeys.has(key)) return undefined;
+    const provider = key.slice(5, key.indexOf('/'));
+    return providerById.has(provider)
+      ? `"${key}" isn't one of ${provider}'s perks${didYouMean(key, [...perkKeys])}`
+      : `"${provider}" isn't a provider`;
   }
 
   function rankKeyProblem(key: string): string | undefined {
@@ -132,7 +143,9 @@ export function checkRedirects(
           ? `"${from}" is still a rank key of data/features.yaml: a redirect is for a key that's gone`
           : undefined;
       case 'perk':
-        return undefined;
+        return perkKeys.has(from)
+          ? `"${from}" is still a perk of its provider: a redirect is for a perk that's gone`
+          : undefined;
     }
   }
 }

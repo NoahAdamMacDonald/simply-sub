@@ -52,6 +52,24 @@ owner:
     - 'These Terms are a contract between you and Anthropic, PBC (and not our Providers)'
   lastVerified: 2026-11-02
 
+# Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their
+# words.
+perks:
+  - id: claude-code
+    name: Claude Code
+  - id: priority-access
+    name: Priority access at high traffic times
+  - id: usage-5x
+    name: 5x Pro usage every 5 hours and every week
+  - id: weekly-usage-10x
+    name: 10x Pro usage every week
+  - id: no-5-hour-limit
+    name: No 5-hour limit for verified accounts
+  - id: api-credits-100
+    name: $100 a month in API credits to build on the Claude Platform
+  - id: api-credits-200
+    name: $200 a month in API credits
+
 plans:
   - id: claude.free
     name: Free
@@ -71,7 +89,7 @@ plans:
     name: Pro
     link: https://claude.com/pricing
     features: { ai.assistant: true }
-    perks: [Claude Code]
+    perks: [claude-code]
     prices:
       - region: US
         currency: USD
@@ -111,11 +129,7 @@ plans:
     formerNames: [{ name: Max 5x, until: 2026-10-29 }]
     link: https://claude.com/pricing
     features: { ai.assistant: true }
-    perks:
-      - Claude Code
-      - Priority access at high traffic times
-      - 5x Pro usage every 5 hours and every week
-      - $100 a month in API credits to build on the Claude Platform
+    perks: [claude-code, priority-access, usage-5x, api-credits-100]
     prices:
       - region: US
         currency: USD
@@ -139,12 +153,7 @@ plans:
     formerNames: [{ name: Max 20x, until: 2026-10-29 }]
     link: https://claude.com/pricing
     features: { ai.assistant: true }
-    perks:
-      - Claude Code
-      - Priority access at high traffic times
-      - 10x Pro usage every week
-      - No 5-hour limit for verified accounts
-      - $200 a month in API credits
+    perks: [claude-code, priority-access, weekly-usage-10x, no-5-hour-limit, api-credits-200]
     prices:
       - region: US
         currency: USD

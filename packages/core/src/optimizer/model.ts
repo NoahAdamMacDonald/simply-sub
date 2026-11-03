@@ -6,7 +6,8 @@ import { isRetired } from '../catalog/retired';
 import type { CatalogData, SnapshotProvider } from '../catalog/snapshot';
 import type { IsoDate } from '../dates/iso-date';
 import { samePeriod, type Period } from '../dates/period';
-import { providedKeys, rankKeyLabel, rankKeyOptions, type RankKey } from '../ranking/rank-keys';
+import { planKeys, rankFeatures } from '../ranking/perk-keys';
+import { rankKeyLabel, rankKeyOptions, type RankKey } from '../ranking/rank-keys';
 import type { ProfileRanks } from '../ranking/resolve-rank';
 import type { DateRange } from '../schedule/charge-dates';
 import { itemCharges, type Chargeable } from '../schedule/charges';
@@ -793,8 +794,9 @@ class ModelBuilder {
     });
   }
 
-  private keysOf(plan: Pick<Plan, 'features'>, catalog: CatalogData): number[] {
-    return providedKeys(plan.features, catalog.features).map((key) => this.key(key, catalog));
+  /** A plan's keys as numbers: its features' and its perks' (M11.6). */
+  private keysOf(plan: Pick<Plan, 'id' | 'features' | 'perks'>, catalog: CatalogData): number[] {
+    return planKeys(plan, catalog.features).map((key) => this.key(key, catalog));
   }
 
   private key(key: RankKey, catalog: CatalogData | undefined): number {
@@ -803,9 +805,11 @@ class ModelBuilder {
       number = this.keyIds.length;
       this.keyNumbers.set(key, number);
       this.keyIds.push(key);
-      const option = catalog?.features
-        .flatMap(rankKeyOptions)
-        .find((candidate) => candidate.key === key);
+      const option =
+        catalog &&
+        rankFeatures(catalog)
+          .flatMap(rankKeyOptions)
+          .find((candidate) => candidate.key === key);
       this.labels.push(option ? rankKeyLabel(option) : key);
     }
     return number;

@@ -35,6 +35,12 @@ notes: >-
   Plans renew for the period chosen, except in Quebec, where they renew monthly. Select Montreal Canadiens
   regular-season games only, with regional blackouts.
 
+# Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their
+# words.
+perks:
+  - id: live-sport-hours
+    name: Over 4,000 hours of live sport a year
+
 # Read 2026-10-26 on rds.ca/abonnement (Mensuel, 3 mois and Annuel tabs): one plan, French-language sports. Two
 # streams at a time (rds.ca/aide/faq/#plusieurs-appareils). RDS's bundles with Crave and TSN are in data/bundles.
 # Read 2026-11-02 (M11.4, the required streaming features): neither rds.ca/abonnement nor the FAQ says
@@ -50,7 +56,7 @@ plans:
       streaming.live: [tv-channels, sports]
       streaming.concurrent-streams: 2
       streaming.french-content: true
-    perks: ['Over 4,000 hours of live sport a year']
+    perks: [live-sport-hours]
     prices:
       - region: CA
         currency: CAD

@@ -438,16 +438,19 @@ export function checkPriceDifferences(
   report: Report,
 ): void {
   const sold = plans.filter((entry) => entry.sold);
+  // A perk tells plans apart as a feature does (M11.6).
+  const signature = ({ plan, features }: (typeof plans)[number]) =>
+    `${featureSignature(features)} ${JSON.stringify([...(plan.perks ?? [])].sort())}`;
   sold.forEach((entry, index) => {
     for (const other of sold.slice(0, index)) {
-      if (featureSignature(entry.features) !== featureSignature(other.features)) continue;
+      if (signature(entry) !== signature(other)) continue;
       const pair = differentPrice(entry.plan.prices, other.plan.prices);
       if (!pair) continue;
       const [dearer, cheaper] = pair[0].amount > pair[1].amount ? [entry, other] : [other, entry];
       const [high, low] = pair[0].amount > pair[1].amount ? pair : [pair[1], pair[0]];
       report(
         [...dearer.path, 'features'],
-        `Costs more than ${cheaper.plan.id} (${high.amount} against ${low.amount} ${high.currency} ${periodText(high)} in ${high.region}) with the same features: give what the price pays for a feature, or the optimizer always suggests ${cheaper.plan.id}`,
+        `Costs more than ${cheaper.plan.id} (${high.amount} against ${low.amount} ${high.currency} ${periodText(high)} in ${high.region}) with the same features and perks: give what the price pays for a feature or a perk, or the optimizer always suggests ${cheaper.plan.id}`,
         'warning',
       );
     }

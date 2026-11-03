@@ -104,6 +104,7 @@ export * from './pipeline/wikidata';
 export * from './ranking/feature-ranking';
 export * from './ranking/plan-features';
 export * from './ranking/rank-fit';
+export * from './ranking/perk-keys';
 export * from './ranking/rank-keys';
 export * from './ranking/rank-summaries';
 export * from './ranking/resolve-rank';

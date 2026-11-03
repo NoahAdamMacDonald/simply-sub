@@ -204,8 +204,10 @@ describe('draftFromAnswer', () => {
       id: 'streamco.premium',
       link: 'https://www.streamco.example/plans',
       features: { 'video.quality': '4k', 'streaming.ad-free': true },
-      perks: ['Family Watch'],
+      perks: ['family-watch'],
     });
+    // The provider lists the perk once, named in the page's words (M11.6).
+    expect(draft.provider?.perks).toEqual([{ id: 'family-watch', name: 'Family Watch' }]);
     expect(premium?.prices[1]).toEqual({
       region: 'CA',
       currency: 'CAD',
