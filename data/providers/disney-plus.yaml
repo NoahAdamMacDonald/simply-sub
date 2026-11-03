@@ -54,6 +54,16 @@ owner:
 # Canada sells Standard With Ads, Standard and Premium. The US sells With Ads (4K, unlike Canada's 1080p) and
 # Premium, so a plan sold in one country only has prices there. The US prices are on
 # help.disneyplus.com/article/disneyplus-price with the help centre's country set to United States.
+# Renewal day (M11.5), read 2026-11-03 (M11.9) in its Canadian subscriber agreement: the date you became a paying
+# subscriber, or a shorter month's last day. Its help centre's billing articles only point to the Account page.
+renewalAnchor:
+  kind: same-date
+  page: Subscriber agreement
+  url: https://www.disneyplus.com/en-ca/welcome/subscriber-agreement-side-by-side
+  quotes:
+    - 'if your subscription began on a day not contained in a given month (e.g., if you have a monthly payment plan and became a paying subscriber on January 31, your payment method would be billed next on February 28)'
+  lastVerified: 2026-11-03
+
 plans:
   - id: disney-plus.standard-ads
     name: Standard With Ads

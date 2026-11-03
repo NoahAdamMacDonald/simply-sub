@@ -1,0 +1,90 @@
+url: https://support.claude.com/en/articles/8325618-paid-plan-billing-faqs
+method: fetch
+saved: 2026-11-03
+
+Paid plan billing FAQs | Claude Help Center Skip to main content
+API docsRelease notesHow to get support English Français Deutsch Bahasa Indonesia Italiano 日本語 한국어 Português Pусский 简体中文 Español 繁體中文 English
+Search⌘K
+Claude
+Pro and Max plans
+Team and Enterprise plans
+Identity management (SSO, JIT, SCIM)
+Claude Cowork
+Claude Code
+Claude Desktop
+Claude Mobile apps
+Claude API and Console
+Connectors
+Claude in Chrome
+Claude for Education
+Privacy and legal
+Safeguards
+Amazon Bedrock
+All Collections Pro and Max plans General Paid plan billing FAQs Paid plan billing FAQs
+Updated over 3 weeks ago
+Copy for LLM
+This article covers Pro and Max subscriptions purchased on the web. If you subscribed through Claude for iOS or Claude for Android, your payment is handled by the Apple App Store or Google Play, and you'll manage your payment method and receipts through your app store account. To cancel or manage an app store subscription, see Cancel your Pro or Max subscription.
+Where can I find the invoice or receipt for my Pro or Max plan payment?
+If you are subscribed to a paid plan (Pro or Max), follow these steps to access your invoices:
+Click on your initials or name in the lower left corner and select “Settings” from the menu.
+Navigate to Settings > Billing.
+Find the Invoices section.
+Click the "View" button next to the invoice you want to open.
+Additionally, all invoices are automatically emailed to your billing email address. To find previously emailed invoices in your inbox, search by the subject line "Your receipt from Anthropic."
+How can I edit the billing details for my existing paid Claude subscription?
+Click on your initials or name in the lower left corner and select “Settings” from the menu.
+Navigate to Settings > Billing.
+Click the "Update" button next to your payment method.
+Enter your new billing details in the payment update form.
+Click "Update" to save your changes.
+Your updated payment method will be charged the next time your subscription renews.
+How can I change or remove the card on my Pro or Max subscription?
+To change the card on your Pro or Max subscription:
+Navigate to Settings > Billing.
+Click the “Update” button next to your payment method.
+Enter your new card details.
+Click “Update” to save your changes.
+The new card becomes your default payment method, and all future subscription renewals are charged to it. Your previous card is no longer billed.
+There's no separate option to remove a card, and updating to a new card replaces the old one for billing purposes. The billing page only shows your current default card. Previously used cards are no longer charged, but they may remain stored with our payment processor. If you need a previous card fully removed from your account, please contact our support team.
+How can I use a different name on my invoices?
+If you want to use a name other than the one tied to your payment method, check the "Use a different name on invoices" box when adding or updating your payment method in Settings > Billing.
+How can I edit a paid invoice?
+Once an invoice is paid, there isn't a way to edit the information on the finalized invoice. Additionally, our internal teams cannot reissue paid invoices or modify information on previous invoices.
+Can I change the date I'm charged for my Pro or Max subscription?
+No, there isn't a direct way to change your subscription billing date. However, you can unsubscribe from your current plan, then resubscribe on your preferred billing date to establish your new monthly billing cycle on a different date.
+What alternate payment methods are available?
+For subscriptions purchased on the web, we only accept credit or debit cards. If you subscribed through Claude for iOS or Claude for Android, available payment options are determined by the Apple App Store or Google Play.
+I have a paid plan, but my account is showing as free; how can I access my paid account?
+If you've paid for a Pro or Max plan but are not seeing this reflected in your account, there are two things you should check:
+You've logged in with a different email. We recommend trying to sign in with any alternative emails you may have used to create your paid account.
+Your payment method failed and your account was downgraded. To check this, navigate to Settings > Billing to confirm your recent payment status and update your payment method or billing details if needed.
+Where can I see my monthly API credits?
+In the Claude Console. All credits appear under Settings > Billing in your linked Console organization, with their amount and expiry date. Usage is never charged to your Claude plan. Learn more about monthly API credits for Max and Team plans.
+Did this answer your question? Disappointed Reaction Neutral Reaction Smiley Reaction
+Related Articles
+Add or update your paid Claude account’s tax or VAT ID
+How do I sign up for the Max plan?
+Understanding your billing address and tax calculation
+Team plan billing FAQs
+Understanding your Pro or Max plan invoices
+On this page
+Where can I find the invoice or receipt for my Pro or Max plan payment?
+How can I edit the billing details for my existing paid Claude subscription?
+How can I change or remove the card on my Pro or Max subscription?
+How can I use a different name on my invoices?
+How can I edit a paid invoice?
+Can I change the date I'm charged for my Pro or Max subscription?
+What alternate payment methods are available?
+I have a paid plan, but my account is showing as free; how can I access my paid account?
+Where can I see my monthly API credits?
+Product
+Research
+Company
+News
+Careers
+Terms of Service - Consumer
+Terms of Service - Commercial
+Privacy Policy
+Usage Policy
+Responsible Disclosure Policy
+Compliance

@@ -32,6 +32,18 @@ owner:
   lastVerified: 2026-11-02
 notes: Live events, sports and news include ads on every plan.
 
+# Renewal day (M11.5), read 2026-11-03 (M11.9) in its terms (6(b)): charged at the start of each billing period, which
+# moves only when the subscription "began on a date not contained in a given month", so the date you signed up. Its
+# renewal FAQ says only that it renews at the end of the billing cycle.
+renewalAnchor:
+  kind: same-date
+  page: Crave terms and conditions
+  url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+  quotes:
+    - 'By purchasing a subscription to the Service, you authorize us to charge your payment method the subscription fees, taxes, and any other charges you may incur in connection with the Service (“Subscription Fees”) at the commencement of your billing period, and on a recurring basis at the commencement of each subsequent billing period until the subscription is cancelled in accordance with these Terms and Conditions.'
+    - 'In some cases, the timing of a recurring charge may change, such as if your payment method does not settle as expected or if your subscription began on a date not contained in a given month.'
+  lastVerified: 2026-11-03
+
 plans:
   - id: crave.standard-ads
     name: Standard With Ads

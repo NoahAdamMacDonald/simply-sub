@@ -114,7 +114,10 @@ API contract's prices are illustrative and never a source. This skill is how to 
   - **The day it renews on** (`renewalAnchor`, M11.5), for a provider whose paid plans renew by the month or year:
     its terms and billing help (a "billing date" article), quoted: `same-date` (the date you signed up, a shorter
     month's last day when it has no such date), `every-30-days` (then its months are priced `day` × 30),
-    `first-of-month` or `end-of-month`; `kind: not-stated` with the `pages` read when none says. The item dialog
+    `first-of-month` or `end-of-month`; `kind: not-stated` with the `pages` read when none says. Terms often say the
+    date you signed up by what it implies: a charge whose timing changes only "if your subscription began on a date
+    not contained in a given month" (Disney's and Bell Media's terms) is billed on that date each month, and core reads
+    that wording as `same-date`; "renews at the end of the billing period" alone says no day. The item dialog
     suggests a new item's renewal from it and asks "Billed on…" only when it doesn't settle that.
   - **Source code** (`sourceRepo`, M11.5): when its own pages say its code is open (an "Open source" page, its
     downloads' "Source code" link), the repository that page links, quoted, with `software.open-source` provider-wide

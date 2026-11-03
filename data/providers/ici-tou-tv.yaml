@@ -51,6 +51,13 @@ perks:
 # Read 2026-11-02 (M11.4, the required streaming features): ICI RDI is "Chaîne en direct ICI RDI avec publicité" on
 # ici.tou.tv/abonnement, so it isn't ad free. Its video quality: that page states 1080p for EXTRA only, so RDI's waits
 # for M11.9 (awaitingRequiredFeatures in core).
+# Renewal day (M11.5), read 2026-11-03 (M11.9): its conditions say it renews automatically and that a plan change keeps
+# the billing cycle of the first subscription, not which day the cycle renews on.
+renewalAnchor:
+  kind: not-stated
+  pages: [https://ici.tou.tv/abonnement/condition]
+  lastVerified: 2026-11-03
+
 plans:
   - id: ici-tou-tv.extra
     name: EXTRA

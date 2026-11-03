@@ -71,6 +71,17 @@ perks:
   - id: online-multiplayer
     name: Online console multiplayer
 
+# Renewal day (M11.5), read 2026-11-03 (M11.9): its subscription terms, Microsoft's terms of sale and Xbox's billing
+# articles say only that it renews and changes on "your next renewal date", not which day that is.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.xbox.com/en-US/legal/subscription-terms
+    - https://www.microsoft.com/en-ca/storedocs/terms-of-sale
+    - https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/change-xbox-subscription
+    - https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/turn-on-recurring-billing
+  lastVerified: 2026-11-03
+
 plans:
   - id: xbox-game-pass.essential
     name: Essential
