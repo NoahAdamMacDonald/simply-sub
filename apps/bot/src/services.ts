@@ -9,8 +9,8 @@ import {
   seedProviderPath,
   seedTables,
   type SeedDatabase,
+  policyIndexPart,
   policyIndexPath,
-  policyIndexSchema,
   policyTopicsFileSchema,
   sharedPolicyFilePath,
   sharedPolicyFileSchema,
@@ -37,7 +37,7 @@ import { parse } from 'yaml';
 import type { Services } from './run';
 import { botSearch } from './search';
 import { kvState, type BotState, type KvLike } from './state';
-import { catalogIndex } from './targets';
+import { bundleOwner, catalogIndex } from './targets';
 
 // The night's services in the Worker: the catalog D1, the web (polite: robots.txt, one request per URL, en-CA
 // headers), Browser Rendering, Workers AI, GitHub (the settings, the baselines, the pull requests) and KV (what the bot
@@ -56,24 +56,38 @@ export function workerServices(env: Env): Services {
   });
   const state = kvState(env.KV as unknown as KvLike);
   return {
-    async readIndex() {
+    async readProviderIds() {
+      return (await select<{ id: string }>(env.DB, 'SELECT id FROM providers ORDER BY id')).map(
+        (row) => row.id,
+      );
+    },
+    async readIndex(ids, namers) {
       const providers = (
-        await select<{ json: string }>(env.DB, 'SELECT json FROM providers ORDER BY id')
+        await select<{ json: string }>(
+          env.DB,
+          `SELECT json FROM providers WHERE id IN (${ids.map(() => '?').join(', ')}) ORDER BY id`,
+          ...ids,
+        )
       ).map((row) => JSON.parse(row.json) as SnapshotProvider);
-      const bundles = await select<{ json: string }>(
-        env.DB,
-        'SELECT json FROM bundles ORDER BY id',
-      );
+      const here = new Set(ids);
+      const bundles = (
+        await select<{ json: string }>(env.DB, 'SELECT json FROM bundles ORDER BY id')
+      )
+        .map((row) => JSON.parse(row.json) as Bundle)
+        .filter((bundle) => here.has(bundleOwner(bundle)));
       // Policies aren't in D1 (M11.8): the site's index of their files says which pages each cites, and the shared
-      // documents the providers name are read from their files, a request each.
-      const policies = policyIndexSchema.parse(
+      // documents these providers check (each by the first of the night's providers naming it) are read from their
+      // files, a request each.
+      const policies = policyIndexPart(
         await siteJson(new URL(policyIndexPath, env.SITE_URL)),
+        namers,
       );
-      const named = [
-        ...new Set(Object.values(policies.providers).flatMap((entry) => entry.shared ?? [])),
-      ];
+      const firsts = [...namers].sort();
+      const checked = Object.keys(policies.sets).filter((set) =>
+        here.has(firsts.find((id) => policies.providers[id]?.shared?.includes(set)) ?? ''),
+      );
       const sets = await Promise.all(
-        named.map(async (id) =>
+        checked.map(async (id) =>
           sharedPolicyFileSchema.safeParse(
             await siteJson(new URL(sharedPolicyFilePath(id), env.SITE_URL)),
           ),
@@ -81,9 +95,10 @@ export function workerServices(env: Env): Services {
       );
       return catalogIndex(
         providers,
-        bundles.map((row) => JSON.parse(row.json) as Bundle),
+        bundles,
         sets.flatMap((set) => (set.success ? [set.data] : [])),
         policies,
+        namers,
       );
     },
     async readProvider(id) {

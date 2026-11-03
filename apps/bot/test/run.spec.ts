@@ -1,4 +1,5 @@
 import {
+  addDays,
   baselineLines,
   baselinePath,
   pageText,
@@ -12,7 +13,7 @@ import {
 import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
 import { digestBranch, reviewFile } from '../src/digest';
-import { runNight } from '../src/run';
+import { nightSlice, runNight, sliceSize } from '../src/run';
 import { memoryState } from '../src/state';
 import { catalogIndex } from '../src/targets';
 import {
@@ -89,11 +90,14 @@ describe('a quiet night', () => {
       'read the repository',
       'read the settings',
       'read the check dates',
-      'read the catalog',
+      'read the providers',
       'read the reports',
+      // Tonight's slice is the whole catalog, read in one part (M11.8).
+      'read the catalog 1',
       'read robots.txt 1',
       'check mullvad',
       'check netflix',
+      'drop what tonight’s providers no longer cite',
       'read the last digest',
       'gather the digest',
       'read the discovery batch',
@@ -110,11 +114,16 @@ describe('a quiet night', () => {
     });
     const { steps } = await night(quietWorld(), { settings: off });
     expect(steps).not.toContain('read robots.txt 2');
+    // A provider with nothing due takes no step.
+    expect(steps.filter((name) => name.startsWith('check '))).toEqual([]);
     const state = memoryState();
     await night(quietWorld(), { state });
     const checks = await state.checks();
     expect(checks['https://help.netflix.com/en/node/24926/ca']).toBe(today);
     expect(checks['https://help.netflix.com/legal/termsofuse']).toBe(today);
+    // The same night again: everything was checked since its cadence began.
+    const again = await night(quietWorld(), { state });
+    expect(again.steps.filter((name) => name.startsWith('check '))).toEqual([]);
   });
 });
 
@@ -543,6 +552,159 @@ describe('the review by Workers AI (M3.10)', () => {
     const { steps } = await night(world);
     expect(asked).toBe(0);
     expect(steps).not.toContain('review the digest');
+  });
+});
+
+describe('a rotating slice of the catalog each night (M11.8)', () => {
+  const ids = (n: number) =>
+    Array.from({ length: n }, (_, at) => `p${String(at).padStart(4, '0')}`);
+
+  it('checks a catalog of up to sliceSize providers whole every night', () => {
+    expect(nightSlice(ids(13), '2026-10-29')).toEqual(ids(13));
+    expect(nightSlice(ids(sliceSize), '2026-10-30')).toEqual(ids(sliceSize));
+  });
+
+  it('checks a larger one a slice a night, every provider within a week', () => {
+    for (const n of [sliceSize + 1, 350, 1000, 2500]) {
+      const all = ids(n);
+      const seen = new Set<string>();
+      let most = 0;
+      for (let day = 0; day < 7; day++) {
+        const tonight = nightSlice(all, addDays('2026-10-29', day));
+        most = Math.max(most, tonight.length);
+        for (const id of tonight) seen.add(id);
+      }
+      expect({ n, missed: all.filter((id) => !seen.has(id)) }).toEqual({ n, missed: [] });
+      expect({ n, most }).toEqual({ n, most: Math.max(sliceSize, Math.ceil(n / 7)) });
+    }
+  });
+
+  it('takes a provider with a reported plan whatever its turn', () => {
+    const all = ids(1000);
+    const tonight = nightSlice(all, '2026-10-29');
+    const elsewhere = all.find((id) => !tonight.includes(id)) ?? '';
+    expect(nightSlice(all, '2026-10-29', new Set([elsewhere]))).toEqual(
+      [...tonight, elsewhere].sort(),
+    );
+  });
+
+  it('reads and checks only tonight’s providers, the index 25 a step', async () => {
+    const copies = Array.from({ length: 250 }, (_, at) => {
+      const id = `mullvad-${String(at).padStart(3, '0')}`;
+      return {
+        ...mullvad,
+        id,
+        plans: mullvad.plans.map((plan) => ({ ...plan, id: plan.id.replace('mullvad', id) })),
+      };
+    });
+    const world = quietWorld();
+    const checked: string[] = [];
+    const parts: number[] = [];
+    for (const date of ['2026-10-29', '2026-10-30', '2026-10-31']) {
+      const services = await fakeServices(world, copies, {
+        baselines: baselinesOf(world),
+        settings: settings({ cadence: { ...settings().cadence, logos: 'off' } }),
+      });
+      const names: string[] = [];
+      await runNight(date, stepper(names), services);
+      parts.push(names.filter((name) => name.startsWith('read the catalog ')).length);
+      checked.push(...names.flatMap((name) => /^check (.+)$/.exec(name)?.[1] ?? []));
+    }
+    // 250 providers in three slices of at most 100.
+    expect(parts.sort()).toEqual([2, 4, 4]);
+    expect(checked.sort()).toEqual(copies.map((copy) => copy.id));
+  });
+
+  describe('what a night finds, kept until the digest', () => {
+    // Mullvad and Netflix first, then 200 providers the catalog has but these fakes don't: three slices, the first
+    // with Mullvad and Netflix.
+    const others = Array.from({ length: 200 }, (_, at) => `zz-${String(at).padStart(3, '0')}`);
+    const all = ['mullvad', 'netflix', ...others];
+    const nightWith = (wanted: boolean) =>
+      Array.from({ length: 7 }, (_, day) => addDays('2026-10-26', day)).find(
+        (date) => nightSlice(all, date).includes('mullvad') === wanted,
+      ) ?? '';
+    const weekday = (date: string) =>
+      (['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'] as const)[
+        new Date(`${date}T00:00:00Z`).getUTCDay()
+      ];
+    const nightOn = async (
+      world: World,
+      date: string,
+      state: ReturnType<typeof memoryState>,
+      catalog: readonly string[] = all,
+    ) => {
+      const services = await fakeServices(world, undefined, {
+        baselines: baselinesOf(quietWorld()),
+        settings: settings({ digest: { day: weekday(date) } }),
+        state,
+      });
+      services.readProviderIds = async () => [...catalog];
+      await runNight(date, stepper([]), services);
+      return services.proposals;
+    };
+    const tidy = (date: string) => settings({ digest: { day: weekday(addDays(date, 1)) } });
+
+    it('proposes on the digest’s day a page whose provider isn’t in that night’s slice', async () => {
+      const found = nightWith(true);
+      const digestDay = addDays(found, 1);
+      expect(nightSlice(all, digestDay)).not.toContain('mullvad');
+      const world = quietWorld();
+      world.pages['https://mullvad.net/en/pricing'] = mullvadTaxGone;
+      const state = memoryState();
+      const services = await fakeServices(world, undefined, {
+        baselines: baselinesOf(quietWorld()),
+        settings: tidy(found),
+        state,
+      });
+      services.readProviderIds = async () => [...all];
+      await runNight(found, stepper([]), services);
+      expect(await state.pending()).toMatchObject([
+        { key: 'https://mullvad.net/en/pricing', owner: 'mullvad' },
+      ]);
+      const [made] = await nightOn(world, digestDay, state);
+      const review = made?.changes.find((change) => change.path === reviewFile)?.text ?? '';
+      expect(review).toContain('its "tax included" words are gone from');
+    });
+
+    it('drops it once the provider is gone from the catalog', async () => {
+      const state = memoryState();
+      await state.putPending({
+        key: 'https://mullvad.net/en/pricing',
+        seen: today,
+        owner: 'mullvad',
+        findings: [{ kind: 'manual', subject: 'mullvad', reason: 'A test finding.' }],
+      });
+      await nightOn(
+        quietWorld(),
+        nightWith(false),
+        state,
+        all.filter((id) => id !== 'mullvad'),
+      );
+      expect(await state.pending()).toEqual([]);
+    });
+
+    it('drops, on its provider’s night, a page it no longer cites', async () => {
+      const gone = {
+        key: 'https://mullvad.net/en/old-pricing',
+        seen: today,
+        owner: 'mullvad',
+        findings: [{ kind: 'manual' as const, subject: 'mullvad', reason: 'A test finding.' }],
+      };
+      const state = memoryState();
+      await state.putPending(gone);
+      const elsewhere = nightWith(false);
+      const services = await fakeServices(quietWorld(), undefined, {
+        baselines: baselinesOf(quietWorld()),
+        settings: tidy(elsewhere),
+        state,
+      });
+      services.readProviderIds = async () => [...all];
+      await runNight(elsewhere, stepper([]), services);
+      expect(await state.pending()).toEqual([gone]);
+      await nightOn(quietWorld(), nightWith(true), state);
+      expect(await state.pending()).toEqual([]);
+    });
   });
 });
 

@@ -136,19 +136,30 @@ export function policyTargets(
   return [...pages.values()];
 }
 
-/** Each shared document's step: the first provider, by id, that names it, so its pages are checked once a night. */
+/**
+ * Each shared document's step: the first of `namers`, by id, that names it, so its pages are checked once a night. Only
+ * `providers`' are kept: the night reads its providers a part at a time (M11.8), and `namers` are all of them.
+ */
 function policySetOwners(
   providers: readonly SnapshotProvider[],
   sets: readonly PolicySet[],
   policies: PolicyIndex,
+  namers: readonly string[],
 ): Record<string, PolicySet[]> {
   const owned: Record<string, PolicySet[]> = {};
-  const ids = providers.map((provider) => provider.id).sort();
+  const here = new Set(providers.map((provider) => provider.id));
+  const ids = [...namers].sort();
   for (const set of sets) {
     const owner = ids.find((id) => policies.providers[id]?.shared?.includes(set.id));
-    if (owner) (owned[owner] ??= []).push(set);
+    if (owner !== undefined && here.has(owner)) (owned[owner] ??= []).push(set);
   }
   return owned;
+}
+
+/** The provider a bundle's pages are checked with: its first plan's (M11.8: the night's slice takes it with them). */
+export function bundleOwner(bundle: Pick<Bundle, 'includes'>): string {
+  const [plan = ''] = bundle.includes;
+  return plan.slice(0, plan.indexOf('.'));
 }
 
 export function bundleTargets(bundle: Bundle): PriceTarget[] {
@@ -185,13 +196,15 @@ function unique(names: string[]): string[] {
 /**
  * The night's index: each provider's and bundle's pages, and every host they and the websites are on. Its policies'
  * pages are `policies`' (M11.8): /data/policies/index.json's, since D1's providers leave their policies out, or by
- * default those the providers hold.
+ * default those the providers hold. A shared document is checked with the first of `namers` naming it: the night's
+ * providers, when it reads them a part at a time.
  */
 export function catalogIndex(
   providers: readonly SnapshotProvider[],
   bundles: readonly Bundle[],
   sets: readonly PolicySet[] = [],
   policies: PolicyIndex = buildPolicyIndex(policyFiles({ providers, policySets: sets })),
+  namers: readonly string[] = providers.map((provider) => provider.id),
 ): CatalogIndex {
   const hosts = new Set<string>(iconServiceHosts);
   const pagesOf = (urls: readonly string[]) => {
@@ -206,7 +219,8 @@ export function catalogIndex(
     bundles: {},
     hosts: [],
     cited: citedPages(providers as readonly Provider[], bundles, policies),
-    policySets: policySetOwners(providers, sets, policies),
+    policySets: policySetOwners(providers, sets, policies, namers),
+    bundleOwners: Object.fromEntries(bundles.map((bundle) => [bundle.id, bundleOwner(bundle)])),
   };
   for (const provider of providers) {
     pagesOf([provider.website]);

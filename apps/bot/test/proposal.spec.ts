@@ -1,7 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { proposal } from '../src/proposal';
-import { stepPlan } from '../src/run';
-import type { PolicySet, SnapshotProvider } from '@simply-sub/core';
+import { mergeIndexes, stepPlan } from '../src/run';
+import {
+  buildPolicyIndex,
+  policyFiles,
+  type PolicySet,
+  type SnapshotProvider,
+} from '@simply-sub/core';
 import { catalogIndex, policyTargets, providerTargets } from '../src/targets';
 import type { Finding } from '../src/types';
 import { files, mullvad, netflix, today } from './fakes';
@@ -19,9 +24,26 @@ describe('stepPlan', () => {
       hosts: [],
       cited: [],
       policySets: {},
+      bundleOwners: {},
     });
     expect(plan.withProvider).toEqual({ crave: ['bundle.a'], tsn: [] });
     expect(plan.groups).toEqual([['bundle.b', 'bundle.c'], ['bundle.d']]);
+  });
+
+  it('merges the parts a night reads into the index of them all, a page cited by several once (M11.8)', () => {
+    const merged = mergeIndexes([catalogIndex([netflix], []), catalogIndex([mullvad], [])]);
+    const whole = catalogIndex([netflix, mullvad], []);
+    const byUrl = (pages: typeof whole.cited) =>
+      [...pages]
+        .sort((a, b) => (a.url < b.url ? -1 : 1))
+        .map((page) => ({
+          ...page,
+          owners: [...page.owners].sort(),
+        }));
+    expect({ ...merged, cited: byUrl(merged.cited) }).toEqual({
+      ...whole,
+      cited: byUrl(whole.cited),
+    });
   });
 
   it('indexes every page once, with every host', () => {
@@ -80,6 +102,16 @@ describe('stepPlan', () => {
       'netflix',
       'mullvad',
     ]);
+    // A night reads its providers a part at a time (M11.8): the document is still checked once, with the first of
+    // all the night's providers naming it, whichever part that is.
+    const policies = buildPolicyIndex(
+      policyFiles({ providers: [naming(netflix), naming(mullvad)], policySets: [set] }),
+    );
+    const parts = [netflix, mullvad].map((provider) =>
+      catalogIndex([naming(provider)], [], [set], policies, ['mullvad', 'netflix']),
+    );
+    expect(parts.map((part) => part.policySets)).toEqual([{}, { mullvad: [set] }]);
+    expect(mergeIndexes(parts).providers['netflix']).not.toContain(privacy);
     expect(policyTargets(naming(mullvad), [set]).at(-1)).toEqual({
       file: 'data/policies/example-privacy.yaml',
       provider: 'mullvad',

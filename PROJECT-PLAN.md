@@ -1609,6 +1609,23 @@ in every D1 `json` column search parses.
       the dearest. Core's: the rows' lowest prices and names, the catalog row's currencies while a seed waits and once
       it's done, a provider's lowest moving to a key of its own. The seeds' counts with the new rows, the bot's steps
       keeping both builds' currencies until the last.
+  - **The bot's slice, and 400 providers over days** (2026-11-03): the row's last two. A night checks the whole catalog
+    up to 100 providers, else a slice of at least a seventh, the catalog in id order and one slice a night in turn, so
+    each provider is checked at least weekly and a night's steps stay well under a Workflow's 1,024 to about 2,000
+    providers (`nightSlice`); a provider with a reported plan comes whatever its slice. The night reads D1's provider ids
+    (`readProviderIds`), then its slice's index 25 providers a step (`readIndex(ids, namers)`, merged by
+    `mergeIndexes`), with the bundles whose first plan is its providers' (`bundleOwner`), only their entries of the
+    site's policy index (core's `policyIndexPart`), and each shared document with the first of the night's providers
+    naming it. A provider or group of bundles with nothing due takes no step, as BLUEPRINT §6.4 said already. Pending
+    findings name the provider whose night found them (`owner`), so the digest keeps what another night found, and
+    each provider's night drops the pages it no longer cites, or a removed provider's.
+    - **Tests:** the bot's: the slice (small catalogs whole, every provider within a week up to 2,500, a reported
+      provider added); 250 providers checked over three nights, the index two to four parts a night; parts merging to
+      the whole index, and a shared document checked once across parts; a digest proposing what another night found, a
+      removed provider's page dropped, a page no longer cited dropped on its provider's night only; no step with
+      nothing due. The API's: 400 Netflix-like providers into an empty D1 at 6,000 rows a day: the deploy and seven
+      nights (about 50 providers a night), `/health`'s `catalogWaiting` going 349, 298… to 0, ending as a full seed
+      would.
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and

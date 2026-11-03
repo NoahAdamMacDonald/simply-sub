@@ -2026,7 +2026,7 @@ The catalog will be small (hundreds of plans), so even a full reseed takes secon
 ### 6.4 Automated price monitoring (nightly)
 Runs on the Cloudflare Cron Worker by default, with GitHub Actions as a fallback (section 7.7). The steps are the same either way:
 ```
-Cron trigger (03:00 UTC) → Workflow (one step per provider, automatic retries)
+Cron trigger (03:00 UTC) → Workflow (a step per provider of the night's slice, automatic retries)
   └─ for each price with a sourceUrl
        ├─ fetch the page (plain fetch first; Browser Rendering only for JS-rendered pages, since the free tier is ~10 browser-min/day)
        ├─ extract the price
@@ -2057,6 +2057,14 @@ compares each page with its baseline (`data/baselines/`, section 6.5) before any
 - **What's due:** every page the catalog cites (core's `citedPages`: pricing pages daily, the policy pages its ratings
   quote weekly) whose last check, kept in KV (`bot:checks`, one key written once a night), is a cadence ago, and each
   logo weekly; a provider with nothing due has no step.
+- **A rotating slice** (M11.8): a night checks the whole catalog up to 100 providers (`sliceSize`), and a larger one in
+  at most seven slices, the catalog in id order, one a night in turn (`nightSlice`), so each provider is checked at
+  least weekly and a night's steps stay well under a Workflow's 1,024 until about 2,000 providers (with the seed's 200).
+  A provider whose plan a visitor reported comes that night whatever its slice. The night reads only its slice's
+  index, 25 providers a step (each step has 10 ms of CPU), with the bundles whose first plan is theirs
+  (`bundleOwner`), only those providers' entries of the policy index (`policyIndexPart`), and each shared document
+  with the first of the night's providers naming it. On the generated catalog of 250, three nights check every
+  provider once.
 - **Seeding what waits first** (M11.8, section 5.3): a step each (`seed 1`, `seed 2`…, at most 200 a night) until
   nothing waits or the next doesn't fit the day's rows, so the checks read the newest catalog. A step that fails its
   retries leaves the rest for the next night, and the digest's review list says so (`failed:seed`).
@@ -2072,7 +2080,10 @@ compares each page with its baseline (`data/baselines/`, section 6.5) before any
   carries the page's words for each price, which must be on the page word for word and show the amount, else the price
   goes to review ("failed quotes"). Each page's new lines are kept as a `page` finding.
 - **Pending:** what a page found waits in KV (`bot:pending:<hash of its URL>`), replaced each time it's checked and
-  dropped once nothing on it is worth proposing (unchanged again, every price confirmed and recently verified).
+  dropped once nothing on it is worth proposing (unchanged again, every price confirmed and recently verified). Since
+  M11.8 it names the provider whose night checked it (`owner`): a night sees only its slice, so each provider's night
+  drops the pages it no longer cites, and those of a provider gone from the catalog, while the digest keeps what
+  another night's provider found.
 - **The digest** (`digest.ts`), on `digest.day` (Monday by default), in steps that pass each other only small data
   (which pending findings stand, the review's notes): every pending entry still live (one for a page the catalog no
   longer cites, or whose new text main's baseline already has, is dropped), the provider files'
@@ -2527,7 +2538,7 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
 | Workers Builds | ~3,000 build minutes/month, 1 concurrent build | A few minutes per deploy |
 | Browser Rendering | 10 browser-minutes a day, 3 concurrent browsers, a new one every 20 s, 60 s timeout (confirmed 2026-10-28) | Only pages a plain fetch gets nothing from, at most 5 a night (M8.3) |
 | Workers AI | 10,000 Neurons a day, reset at 00:00 UTC (confirmed 2026-10-28) | Prices whose stored amount isn't on their page: Llama 3.3 70B in JSON mode, at most 8,000 Neurons a night (M8.3) |
-| Cron Triggers / Workflows | Included in Workers free. Workflows on the free plan (confirmed 2026-10-28): 10 ms of CPU and 50 requests out per step, 1,024 steps, 100 concurrent instances, 100,000 executions a day shared with Workers, 1 MiB per step result, 3 days' retention | One nightly run, a step per provider (M8.3) |
+| Cron Triggers / Workflows | Included in Workers free. Workflows on the free plan (confirmed 2026-10-28): 10 ms of CPU and 50 requests out per step, 1,024 steps, 100 concurrent instances, 100,000 executions a day shared with Workers, 1 MiB per step result, 3 days' retention | One nightly run, a step per provider of the night's slice with anything due: the whole catalog up to 100 providers, then a seventh of it or 100, whichever is more, so each is checked weekly (M11.8) |
 | If you outgrow it | Workers Paid at $5/mo for 10M requests | Still under the $10/mo goal |
 
 > **Free-tier gotcha:** requests that invoke the Worker get an HTTP 429 once the daily limit is used up. That's why
@@ -4424,8 +4435,9 @@ The user's sixteen fixes and improvements after M9, as M5.11–M5.12, M6.12–M6
   D1 has no read-only binding). No public URL. It's built and type-checked by `npm run build` (a dry-run bundle:
   3.3 MB, 679 KB gzipped, within the free plan's 3 MB), and deployed by hand: the owner deployed it on 2026-10-28
   with its token (section 7.2).
-- **A night:** read the catalog's index from D1 (each provider's and bundle's pages, and every host); read the base
-  branch (its commit, its logos' Git blob hashes, `data/resellers.yaml`); read each host's robots.txt once, 40 hosts a
+- **A night:** read the base branch (its commit, its logos' Git blob hashes, `data/resellers.yaml`); choose the
+  night's slice from D1's provider ids and read its index (each provider's and bundle's pages, and every host; since
+  M11.8, a slice of the catalog, 25 providers a step, section 6.4); read each host's robots.txt once, 40 hosts a
   step; then a step per provider, with the bundles whose every page it cites, a step per group of the other bundles
   that share a page, and a step per reseller's logo, each retried twice, a failed one listed and the night going on;
   then one step for the pull request. A page is read in one step only, so it's requested once a night.
