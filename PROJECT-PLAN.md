@@ -1381,9 +1381,34 @@ plans:
 - **A perk that became a feature:** a `perk` entry in `data/redirects.yaml` (M10.27) from its key to the feature's
   rank key; the app rewrites users' overrides once, and validation checks the perk's id from then on.
 - **Acceptance**
-  - [ ] The optimizer fixture: with the perk Needed, no suggestion drops it; unranked, the cheaper plan is suggested
-  - [ ] Ranking a perk in one plan's dialog ranks it on its siblings in the list, and not with "Ranks for this plan
-        only" ticked
+  - [x] The optimizer fixture: with the perk Needed, no suggestion drops it; unranked, the cheaper plan is suggested
+  - [x] Ranking a perk in one plan's dialog ranks it on its siblings in the list, and not with "Ranks for this plan
+        only" ticked (the siblings that have it, as M6.14 shares any key)
+  - [x] A perk moved to a feature keeps users' ranks (resolution and the one-time rewrite, through a `perk` redirect)
+- **As built** (2026-11-02):
+  - **Catalog:** a provider's `perks` (`{ id, name }`, each listed once and each listed by a plan) and a plan's `perks`
+    (ids of its provider's: text before). The 13's perks got ids, one per line of their text, names unchanged
+    (Claude 7, Xbox Game Pass 13, TSN 7, ESPN 2, Hulu 2, ICI TOU.TV 2, Proton 1, RDS 1); Ultimate's "EA Play,
+    Fortnite Crew and Ubisoft+ Classics" became three, since PC Game Pass has EA Play. Lines that may be features in
+    M11.9 (cloud hours, library size, day-one games, Hulu's downloads) stay perks until then: a later move is a
+    `perk` redirect, asked first. ICI TOU.TV's EXTRA + RDI suite doesn't list its plans' perks yet, for M11.9.
+  - **Keys:** core's `perk-keys.ts` (`perkKey`, `planPerkKeys`, `planKeys`, `perkFeatures`, `rankFeatures`,
+    `perksCategory`); resolution, the optimizer, the retired-plan replacements and `GET /plans/:id`'s `providedKeys`
+    take a plan's perks; `rankKeySchema` takes `perk:<provider>/<perk>`. The feature summary shows a perk only when
+    ranked, named by its provider; Search's counts take `perkRanks` from the user's items.
+  - **Validation:** the schema's perk checks; `checkPriceDifferences` counts perks (Claude's, Xbox Game Pass's and
+    TSN's warnings went; Bitdefender's two pairs wait for M11.9); the ids guard publishes perk keys (kind `perk`, in
+    the rank keys' space, with their own message), and a `perk` redirect is checked against the perks.
+  - **The app:** the item dialog's Perks group after the features' groups, its rows Profile default (Not ranked)
+    until ranked; the card's Perks the provider's names for the plan's ids; the list view's summary and Features
+    filter and MetricsService take `rankFeatures`.
+  - **Pipeline:** the extraction drafts a provider's perks with ids from their words (cut at 40 characters) and its
+    plans listing them; the API's Proton example lists its perks with ids.
+  - **Tests:** core (`perk-keys.spec.ts`: keys, the provider file, users' data, the ids guard, redirects, resolution,
+    a bundle's perks, the summary, Search's counts, sharing; the optimizer fixture; a perk that became a feature), the
+    editor's spec (the Perks group, sharing, Ranks for this plan only).
+  - **Browser:** `check-m11-perks.cjs` (browser-check skill): 49 checks in both themes at both widths, keyboard only,
+    with axe.
 
 **M11.8 — Limits before growth** (BLUEPRINT §5.3, §7.1)
 Measured on 2026-10-30: 13 providers make 125 KB of catalog, about 9.6 KB each, 41% of it policy quotes. Policies v2
@@ -1512,6 +1537,7 @@ Users rank **rank keys**. Each one points to one rankable option of a feature:
 | enum | `video.quality=1080p` | its value is **at least** 1080p in the enum order (a 4k plan provides 1080p) |
 | number with tiers | `streaming.concurrent-streams=2-4` | its value is **at least the tier's min** (or `unlimited`) |
 | set | `password-manager.item-types=passkey` | the set contains `passkey` |
+| perk (M11.6) | `perk:xbox-game-pass/fortnite-crew` | the plan lists the perk (a bundle: one of its plans does) |
 
 - **Groups:** a boolean feature with children (e.g. `password-manager`) is a group. Its rank applies only to the
   group itself ("I want a password manager"). Children start as Not ranked, and ranks never cascade (BLUEPRINT §4.2
@@ -1523,6 +1549,8 @@ Users rank **rank keys**. Each one points to one rankable option of a feature:
 - "Not ranked" is never stored. Removing a rank soft-deletes its record (`deletedAt`), so a sync can pass the removal
   on (BLUEPRINT §4.6).
 - Features with `rankable: false` (e.g. `includes-subscription`) never appear in ranking UIs.
+- **Perks** (M11.6) are ranked in the item dialog only, never on the Features page, so they have no profile rank:
+  an item's override, or Not ranked. Search counts them by the ranks the user's lists give them.
 
 **Counts and summaries**
 - **Rank counts** (list cards): for each item, and each key its plan provides, count the key's effective rank.
@@ -1532,7 +1560,8 @@ Users rank **rank keys**. Each one points to one rankable option of a feature:
   - the keys marked `headline: true` in the registry;
   - any key the user ranked Essential, Critical, Needed or Wanted;
   - since the feedback after M6.8, what each item has itself: its booleans, and its own rung of a ladder (not the
-    lower rungs that rung provides too). A set's values count only when ranked or headline.
+    lower rungs that rung provides too). A set's values count only when ranked or headline, and so do perks (M11.6),
+    named as their provider names them ("Fortnite Crew: 1 / 1").
 
   Only keys with a total of at least 1 are shown, sorted by rank, then headlines first, then by name. A key's rank
   there is its highest among the items that provide it (each item's override, else the profile's), and a row is
@@ -2170,6 +2199,7 @@ BLUEPRINT §14 has the rest.
 - **Plan:** plans of the same provider (or of the custom subscription), with their prices. Changing the plan keeps the interval if the new plan offers it; otherwise the first available interval is picked.
 - **Extra members:** add-ons of the selected plan, with quantity up to `addOnLimit`.
 - **Billed:** only intervals the plan has prices for (custom plans: any interval and count).
+- **Ranks:** since M11.6 the plan's perks are a Perks group after its features' groups, ranked here and nowhere else.
 - **Next renewal** (= `anchorDate`): required for Ongoing. Defaults to one interval from today, with the hint "Check your account page for the exact date". For month and year intervals, when the date is the last day of a month shorter than 31 days, a choice appears: "Billed on the 28th" or "the 29th / 30th / 31st (the last day in shorter months)", which sets `billingDay` (§3.1). The default from today keeps today's day (added on Jan 31 → Feb 28 with `billingDay: 31`).
   Since M11.5 the default follows the day its provider renews on (`renewalAnchor`): the next 1st for one that bills on the 1st, the next month's end (billed on the 31st) for one that bills on the last day. A new item isn't asked "Billed on…" when that settles it: every month's last day, or the suggested date's own day for a provider that bills on the date you signed up. A date the user enters is still theirs to say, and so is every date for a provider whose pages don't say, or an item being changed.
 - **Auto-renews:** shown only when the price's `autoRenew` is true. Otherwise a note says "This plan renews manually — we'll remind you".

@@ -2,6 +2,7 @@ import { Service, computed, inject } from '@angular/core';
 import {
   chargesIn,
   listMetrics,
+  rankFeatures,
   resolveItem,
   type Charge,
   type DateRange,
@@ -81,7 +82,8 @@ export class MetricsService {
       today: this.clock.today(),
       currency: saved.currency,
       place: saved,
-      registry: this.catalog.catalog()?.features ?? [],
+      // The registry and the providers' perks (M11.6): the feature summary counts both.
+      registry: rankFeatures(this.catalog.catalog()),
       ...(saved.monthlyBudget !== undefined && { monthlyBudget: saved.monthlyBudget }),
       ...(saved.annualBudget !== undefined && { annualBudget: saved.annualBudget }),
     };

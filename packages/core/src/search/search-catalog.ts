@@ -4,7 +4,7 @@ import type { PickedPrice } from '../catalog/pick-price';
 import { resellerDeals, type DealContext, type ResellerDeal } from '../catalog/reseller-deals';
 import type { CatalogData, SnapshotProvider } from '../catalog/snapshot';
 import type { IsoDate } from '../dates/iso-date';
-import { planRankCounts, rankScore } from '../ranking/rank-fit';
+import { perkRanks, planRankCounts, rankScore } from '../ranking/rank-fit';
 import type { RankKey } from '../ranking/rank-keys';
 import type { ProfileRanks } from '../ranking/resolve-rank';
 import type { ListItem } from '../user/list-item';
@@ -136,6 +136,8 @@ const namedRelevance = 3;
  */
 export function searchCatalog(query: CatalogQuery, context: CatalogSearchContext): CatalogResult[] {
   const { catalog, settings, fx, items, today, profileRanks = new Map() } = context;
+  // The ranks the user's lists give perks (M11.6), which the profile never has.
+  const ranksOfPerks = perkRanks(items);
   const q = query.q?.trim() || undefined;
   const sort = query.sort ?? (q !== undefined ? 'relevance' : 'price_asc');
   // searchProviders sorts the API's way; the ranks sort orders the results below.
@@ -197,7 +199,7 @@ export function searchCatalog(query: CatalogQuery, context: CatalogSearchContext
           buyer,
           context.settings.searchAllResellers === true,
         ),
-        planRankCounts(match.plan.features, catalog.features, profileRanks),
+        planRankCounts(match.plan, catalog.features, profileRanks, ranksOfPerks),
       ),
     );
     if (!first) {

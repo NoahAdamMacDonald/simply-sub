@@ -419,9 +419,10 @@ async function axeCheck(page, label) {
       .locator('.row', { hasText: 'Kill switch' })
       .locator('.usage')
       .textContent();
+    // Since M11.5 Mullvad's open-source value is in Apps, languages & support.
     check(
-      'with Mullvad listed, only VPN starts open, and its rows say "in 1 subscription"',
-      open.join() === 'VPN' && usage.trim() === 'in 1 subscription',
+      'with Mullvad listed, only the categories it provides keys in start open, and its rows say "in 1 subscription"',
+      open.join() === 'VPN,Apps, languages & support' && usage.trim() === 'in 1 subscription',
       `${open.join(', ')} | ${usage}`,
     );
     await card(page, 'Streaming').locator('button.toggle').focus();

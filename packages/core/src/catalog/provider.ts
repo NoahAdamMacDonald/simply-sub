@@ -331,9 +331,11 @@ export const planSchema = z
       )
       .optional(),
     perks: z
-      .array(textSchema)
+      .array(slugSchema)
       .min(1, 'Leave perks out instead of listing none')
-      .describe('Provider-specific extras, shown but never compared')
+      .describe(
+        "The ids of its provider's perks this plan has (M11.6): each one a rank key, perk:<provider>/<perk>, which users rank on the plan and the optimizer counts",
+      )
       .optional(),
     notes: textSchema.describe('Shown on the plan').optional(),
     retired: isoDateSchema
@@ -361,6 +363,7 @@ export const planSchema = z
   .superRefine((plan, ctx) => {
     addDuplicateIssues(ctx, plan.categories ?? [], (index) => ['categories', index]);
     addDuplicateIssues(ctx, plan.notIn ?? [], (index) => ['notIn', index]);
+    addDuplicateIssues(ctx, plan.perks ?? [], (index) => ['perks', index]);
     const formerNames = (plan.formerNames ?? []).map(({ name }) => name);
     addDuplicateIssues(ctx, formerNames, (index) => ['formerNames', index, 'name']);
     formerNames.forEach((name, index) => {
@@ -410,6 +413,19 @@ function addRetirementIssues(
   }
 }
 export type Plan = z.infer<typeof planSchema>;
+
+/**
+ * A provider's perk (M11.6, BLUEPRINT §4.2): something of its own that no feature describes, listed once with an id
+ * and its plans naming the ids they have. Its rank key, perk:<provider>/<perk>, is ranked on the plan in the item
+ * dialog and counted like a feature's; the id is as permanent as a feature's.
+ */
+export const perkSchema = z.strictObject({
+  id: slugSchema.describe(
+    'Its id, permanent once published (fortnite-crew): its rank key is perk:<provider id>/<id>',
+  ),
+  name: textSchema.describe('As the card and the item dialog show it (Fortnite Crew passes)'),
+});
+export type Perk = z.infer<typeof perkSchema>;
 
 export const addOnSchema = z.strictObject({
   id: planIdSchema.describe('<provider id>.<slug> (netflix.extra-member)'),
@@ -507,6 +523,13 @@ export const providerSchema = z
         "Provider-wide feature id → value (M11.4): only features.yaml's providerWide ones (platforms, sign-in, languages, support), which every plan has unless it states its own",
       )
       .optional(),
+    perks: z
+      .array(perkSchema)
+      .min(1, 'Leave perks out instead of listing none')
+      .describe(
+        'Its perks (M11.6): what its plans have that no feature in features.yaml describes, each with an id its plans list. A perk a second provider comes to offer becomes a feature, through data/redirects.yaml',
+      )
+      .optional(),
     sourceRepo: sourceRepoSchema
       .describe(
         'Where its source code is (M11.5), as its own page links it: needed when software.open-source says its apps or all of it are open',
@@ -589,6 +612,30 @@ export const providerSchema = z
         listing.offers.map((offer) => offer.plan),
         (offerIndex) => ['resellers', index, 'offers', offerIndex, 'plan'],
       );
+    });
+    // Perks: each listed once, each a plan lists, and each a plan lists one of the provider's.
+    const perkIds = (provider.perks ?? []).map((perk) => perk.id);
+    addDuplicateIssues(ctx, perkIds, (index) => ['perks', index, 'id']);
+    const listed = new Set(provider.plans.flatMap((plan) => plan.perks ?? []));
+    perkIds.forEach((id, index) => {
+      if (provider.plans.length > 0 && !listed.has(id)) {
+        ctx.addIssue({
+          code: 'custom',
+          message: `No plan lists "${id}": list it on the plans that have it, or remove it`,
+          path: ['perks', index, 'id'],
+        });
+      }
+    });
+    provider.plans.forEach((plan, planIndex) => {
+      (plan.perks ?? []).forEach((id, index) => {
+        if (!perkIds.includes(id)) {
+          ctx.addIssue({
+            code: 'custom',
+            message: `"${id}" isn't one of ${provider.id}'s perks${choices(id, perkIds)}: add it to the provider's perks with its name`,
+            path: ['plans', planIndex, 'perks', index],
+          });
+        }
+      });
     });
     provider.policies?.ratings?.forEach((rating, index) => {
       (rating.plans ?? []).forEach((plan, planIndex) => {

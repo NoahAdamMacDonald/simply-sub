@@ -432,6 +432,9 @@ async function openView(page, listId = LIST) {
         'link "Lists"',
         'link "Edit list"',
         'button "Export"',
+        // The totals' breakdowns (M10), this month's and this year's.
+        'button "Breakdown of this month"',
+        `button "Breakdown of ${new Date().getFullYear()}"`,
         ...(viewport === NARROW ? ['button "Calendar"'] : []),
         'textbox "Search this list"',
         ...(viewport === NARROW

@@ -4,7 +4,8 @@ import { pickPrice, type PickedPrice } from '../catalog/pick-price';
 import { isRetired } from '../catalog/retired';
 import type { IsoDate } from '../dates/iso-date';
 import { samePeriod } from '../dates/period';
-import { providedKeys, type RankKey } from '../ranking/rank-keys';
+import { planKeys } from '../ranking/perk-keys';
+import type { RankKey } from '../ranking/rank-keys';
 import { next12Range } from '../schedule/list-metrics';
 import { itemTitle } from '../user/item-text';
 import type { OptimizerInput } from './model';
@@ -63,7 +64,7 @@ export function replacements(
           if (availability(plan.prices, provider, resolved.region) === 'not-offered') return [];
           const categories = planCategories(plan, provider);
           if (!resolved.categories.some((id) => categories.includes(id))) return [];
-          const provided = providedKeys(plan.features, catalog.features);
+          const provided = planKeys(plan, catalog.features);
           if (!keys.every((key) => provided.includes(key))) return [];
           const picked = pickPrice(plan.prices, {
             region: resolved.region,

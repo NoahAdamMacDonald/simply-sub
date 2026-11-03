@@ -28,7 +28,7 @@ import {
   snapshotProviderSchema,
   type SnapshotProvider,
 } from '../catalog/snapshot';
-import { providedKeys } from '../ranking/rank-keys';
+import { planKeys } from '../ranking/perk-keys';
 import { apiPickedPrice } from '../search/providers-body';
 import type { PricingQuery } from './lookup-query';
 
@@ -171,7 +171,7 @@ export function planBody(
   plan: Plan,
   { registry, bundleIds, ...context }: PlanContext,
 ): PlanBody {
-  const keys = providedKeys(plan.features, registry);
+  const keys = planKeys(plan, registry);
   const addOns = (plan.addOnIds ?? [])
     .flatMap((id) => provider.addOns?.find((addOn) => addOn.id === id) ?? [])
     .map((addOn) => priced(addOn, provider, context));

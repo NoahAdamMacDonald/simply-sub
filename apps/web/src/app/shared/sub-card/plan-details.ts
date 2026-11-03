@@ -122,6 +122,11 @@ export class PlanDetails {
   }
 
   protected readonly plan = computed(() => this.match().plan);
+  /** The plan's perks as its provider names them (M11.6). */
+  protected readonly perks = computed(() => {
+    const perks = this.provider().perks ?? [];
+    return (this.plan().perks ?? []).flatMap((id) => perks.find((perk) => perk.id === id) ?? []);
+  });
   protected readonly hasFeatures = computed(() => Object.keys(this.plan().features).length > 0);
   protected readonly extras = computed(() => {
     const saved = this.settings.saved();

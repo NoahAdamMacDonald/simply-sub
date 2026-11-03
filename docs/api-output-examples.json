@@ -1573,6 +1573,10 @@
                 "billingCurrency": { "GLOBAL": "USD" },
                 "cancelUrl": "https://account.proton.me/dashboard",
                 "sources": { "pricing": "https://proton.me/pricing" },
+                "perks": [
+                  { "id": "sentinel", "name": "Proton Sentinel account protection" },
+                  { "id": "docs-and-sheets", "name": "Proton Docs and Sheets" }
+                ],
                 "plans": [
                   {
                     "id": "proton.free",
@@ -1662,7 +1666,7 @@
                       "security.dark-web-monitoring": true,
                       "includes-subscription": ["proton.pass-plus", "proton.vpn-plus"]
                     },
-                    "perks": ["Proton Sentinel account protection", "Proton Docs and Sheets"],
+                    "perks": ["sentinel", "docs-and-sheets"],
                     "notes": "Storage is shared across Proton services.",
                     "prices": [
                       { "region": "GLOBAL", "currency": "USD", "amount": 12.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-12", "sourceUrl": "https://proton.me/pricing" },

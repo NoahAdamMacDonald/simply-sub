@@ -47,10 +47,13 @@ export const tierIdSchema = pattern(
   'Use a tier id such as 1, 2-4 or 5+ (in YAML, quote ids that are plain numbers: "1")',
 );
 
-/** `<featureId>` or `<featureId>=<value or tier id>` (PROJECT-PLAN.md §3.2). */
+/**
+ * `<featureId>`, `<featureId>=<value or tier id>` (PROJECT-PLAN.md §3.2), or a perk's `perk:<provider id>/<perk id>`
+ * (M11.6).
+ */
 export const rankKeySchema = pattern(
-  new RegExp(`^${slug}(?:\\.${slug})*(?:=${slug}\\+?)?$`),
-  'Use a feature id or <feature id>=<value or tier id> (video.quality=4k)',
+  new RegExp(`^(?:${slug}(?:\\.${slug})*(?:=${slug}\\+?)?|perk:${slug}/${slug})$`),
+  'Use a feature id, <feature id>=<value or tier id> (video.quality=4k) or perk:<provider id>/<perk id>',
 );
 
 /** ISO 3166-1 alpha-2, or `GLOBAL` for one worldwide price. */

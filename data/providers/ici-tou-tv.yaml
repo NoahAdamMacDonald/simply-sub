@@ -35,6 +35,14 @@ owner:
     - Les services ICI TOU.TV et Crave sont fournis de manière indépendante par leurs exploitants respectifs (Société Radio-Canada et Bell Média inc.)
   lastVerified: 2026-11-02
 
+# Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their
+# words.
+perks:
+  - id: exclusive-premieres
+    name: Exclusive premieres every month
+  - id: rdi-channel
+    name: The ICI RDI live news channel
+
 # Read 2026-10-26 on ici.tou.tv/abonnement: EXTRA, ICI RDI and the two together, monthly only, each "3 diffusions en
 # continu à la fois". EXTRA's 1080p is from ici.tou.tv/abonnement-extra-crave and crave.ca/en/subscribe; that ICI
 # TOU.TV page gives EXTRA 2 streams in the Crave bundle, against 3 on its own page and on Crave's, so this uses 3.
@@ -52,7 +60,7 @@ plans:
       ad-free: true
       streaming.concurrent-streams: 3
       streaming.french-content: true
-    perks: [Exclusive premieres every month]
+    perks: [exclusive-premieres]
     notes: Ads play in some live and linear content.
     prices:
       - region: CA
@@ -72,7 +80,7 @@ plans:
       streaming.live: [tv-channels]
       streaming.concurrent-streams: 3
       streaming.french-content: true
-    perks: [The ICI RDI live news channel]
+    perks: [rdi-channel]
     prices:
       - region: CA
         currency: CAD

@@ -207,11 +207,18 @@ async function closeFilters(page, viewport) {
         );
         await axeCheck(page, `${label}, the Features suggestions open`);
         await page.screenshot({ path: shot('features-ad-free') });
-        await page.keyboard.press('ArrowDown');
+        // The list opens with its first option active, Ad free: Enter picks it. ArrowDown would move past it, since
+        // M11.5 put Mullvad's open-source values after it, in More in Apps, languages & support.
+        const active = page.locator('.mat-mdc-autocomplete-panel mat-option.mat-mdc-option-active');
+        await until(
+          'Ad free active',
+          async () =>
+            (await active.count()) === 1 && (await active.textContent()).trim() === 'Ad free',
+        );
         await page.keyboard.press('Enter');
         await until('f=ad-free', () => search(page) === '?f=ad-free');
         await until('the Ad free chip', async () => (await chipNames(page)).join() === 'Ad free');
-        check(`${label}: ArrowDown and Enter pick Ad free: f=ad-free and its chip`, true);
+        check(`${label}: Enter picks Ad free, the active option: f=ad-free and its chip`, true);
         await closeFilters(page, viewport);
         await until('fewer results', async () => (await names(page)).length < all.length, 15000);
         const adFree = await names(page);

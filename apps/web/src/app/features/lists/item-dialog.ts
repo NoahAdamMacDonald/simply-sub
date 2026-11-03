@@ -64,9 +64,11 @@ import {
   periodChoices,
   periodOf,
   periodText,
+  perksCategory,
   pickPrice,
   planTitle,
   rankChanges,
+  rankFeatures,
   rankSiblings,
   rankingSections,
   renewalAfterPeriodChange,
@@ -546,10 +548,11 @@ export class ItemDialog {
     const keys = this.preview()?.providedKeys;
     if (!catalog || !keys) return [];
     const ranks = this.rankings.ranks();
-    const sections = filterRanking(rankingSections(catalog.features, catalog.categories.feature), {
-      ranks,
-      keys: new Set(keys),
-    });
+    // Its plan's perks are ranked here, and only here, in a Perks group after the features' (M11.6).
+    const sections = filterRanking(
+      rankingSections(rankFeatures(catalog), [...catalog.categories.feature, perksCategory]),
+      { ranks, keys: new Set(keys) },
+    );
     const overrides = this.model().rankOverrides;
     const toggled = this.toggledGroups();
     return sections.map((section) => {

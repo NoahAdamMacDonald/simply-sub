@@ -93,6 +93,24 @@ function craveRenewing(kind: 'same-date' | 'first-of-month' | 'end-of-month'): C
   };
 }
 
+/** The test catalog, with a Netflix perk both its Canadian plans have (M11.6). */
+const netflixWithPerk: CatalogData = {
+  ...searchCatalogData,
+  providers: searchCatalogData.providers.map((provider) =>
+    provider.id === 'netflix'
+      ? {
+          ...provider,
+          perks: [{ id: 'mobile-games', name: 'Mobile games' }],
+          plans: provider.plans.map((plan) =>
+            plan.id === 'netflix.standard' || plan.id === 'netflix.standard-ads'
+              ? { ...plan, perks: ['mobile-games'] }
+              : plan,
+          ),
+        }
+      : provider,
+  ),
+};
+
 /** The test catalog, with Netflix taking Visa and Mastercard in Canada (M9.2). */
 const withNetworks: CatalogData = {
   ...searchCatalogData,
@@ -982,6 +1000,67 @@ describe('ListEditPage', () => {
         expect((await draftItem(netflix.id))?.ownRanks).toBe(true);
         expect((await draftItem(ads.id))?.rankOverrides).toEqual({
           'video.quality=1080p': 'wanted',
+        });
+      });
+
+      describe('a perk, ranked on the plan (M11.6)', () => {
+        /** Opens a group of the dialog's ranks by its toggle, as a click does. */
+        const openGroup = async (name: string) => {
+          const toggle = Array.from(
+            dialog()?.querySelectorAll<HTMLButtonElement>('.group-toggle') ?? [],
+          ).find((button) => button.querySelector('.group-name')?.textContent?.trim() === name);
+          if (!toggle) throw new Error(`No group ${name}`);
+          toggle.click();
+          await harness.fixture.whenStable();
+        };
+
+        beforeEach(() => {
+          catalogData = netflixWithPerk;
+        });
+
+        it('ranks it in a Perks group after the features’, and gives it to the plans of its provider that have it', async () => {
+          await open(editor());
+          await click('Edit Netflix Standard');
+          const loader = await dialogLoader();
+          expect(
+            Array.from(dialog()?.querySelectorAll('.ranks .group-name') ?? []).map((name) =>
+              name.textContent?.trim(),
+            ),
+          ).toEqual(['Streaming', 'Perks']);
+          await openGroup('Perks');
+          await (await rankSelect(loader, 'Mobile games')).clickOptions({ text: /^Needed/ });
+          await press(loader, 'Save');
+          await until(() => dialog() === null);
+
+          expect((await draftItem(netflix.id))?.rankOverrides).toEqual({
+            'ad-free': 'essential',
+            'perk:netflix/mobile-games': 'needed',
+          });
+          expect((await draftItem(ads.id))?.rankOverrides).toEqual({
+            'video.quality=1080p': 'wanted',
+            'perk:netflix/mobile-games': 'needed',
+          });
+        });
+
+        it('keeps it to the one plan with Ranks for this plan only', async () => {
+          await open(editor());
+          await click('Edit Netflix Standard');
+          const loader = await dialogLoader();
+          await (
+            await loader.getHarness(MatCheckboxHarness.with({ label: 'Ranks for this plan only' }))
+          ).check();
+          await openGroup('Perks');
+          await (await rankSelect(loader, 'Mobile games')).clickOptions({ text: /^Needed/ });
+          await press(loader, 'Save');
+          await until(() => dialog() === null);
+
+          expect((await draftItem(netflix.id))?.rankOverrides).toEqual({
+            'ad-free': 'essential',
+            'perk:netflix/mobile-games': 'needed',
+          });
+          expect((await draftItem(ads.id))?.rankOverrides).toEqual({
+            'video.quality=1080p': 'wanted',
+          });
         });
       });
 
