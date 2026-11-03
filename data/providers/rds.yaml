@@ -115,6 +115,8 @@ policies:
       url: https://www.rds.ca/conditions
     - name: "Bell's use of data"
       url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+    - name: 'Aide : annulation et remboursements (in French)'
+      url: https://www.rds.ca/aide/faq/
   ratings:
     - topic: privacy.data-sharing
       tier: good
@@ -136,19 +138,23 @@ policies:
         url: https://www.bell.ca/email-updates
       lastVerified: 2026-10-27
     - topic: billing.cancellation
-      tier: neutral
-      reason: 'If you cancel, you can keep watching until the end of the time you paid for, but you get no money back.'
+      tier: good
+      reason: 'You can cancel online in your account at any time, in a few steps, and keep watching until the end of the time you paid for.'
       sources:
+        - url: https://www.rds.ca/aide/faq/
+          quote: "Faites défiler vers le bas et sélectionnez Annuler l'abonnement."
         - url: https://www.rds.ca/conditions
-          quote: 'Les frais d’abonnement ne sont pas remboursables. Suite à toute annulation, vous conserverez l’accès au service jusqu’à la fin de votre période de facturation en cours, après quoi votre abonnement prendra fin.'
-      lastVerified: 2026-10-27
+          quote: 'Suite à toute annulation, vous conserverez l’accès au service jusqu’à la fin de votre période de facturation en cours, après quoi votre abonnement prendra fin.'
+      lastVerified: 2026-11-03
     - topic: billing.refunds
       tier: neutral
-      reason: 'If you cancel, you can keep watching until the end of the time you paid for, but you get no money back.'
+      reason: 'You get no money back, but you keep watching until the end of the time you paid for.'
       sources:
         - url: https://www.rds.ca/conditions
-          quote: 'Les frais d’abonnement ne sont pas remboursables. Suite à toute annulation, vous conserverez l’accès au service jusqu’à la fin de votre période de facturation en cours, après quoi votre abonnement prendra fin.'
-      lastVerified: 2026-10-27
+          quote: 'Les frais d’abonnement ne sont pas remboursables.'
+        - url: https://www.rds.ca/conditions
+          quote: 'Suite à toute annulation, vous conserverez l’accès au service jusqu’à la fin de votre période de facturation en cours, après quoi votre abonnement prendra fin.'
+      lastVerified: 2026-11-03
     - topic: legal.disputes
       tier: bad
       reason: 'If you have a problem with it, a private referee called an arbitrator decides, in your city, instead of a court. You give up your right to a trial.'

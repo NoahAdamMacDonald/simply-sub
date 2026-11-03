@@ -378,27 +378,21 @@ policies:
           quote: '*transaction_id is deleted 20 days after payment'
       lastVerified: 2026-10-27
     - topic: billing.cancellation
-      tier: good
-      reason: 'You pay ahead for the time you want, and it just stops when that runs out, so it never charges you again by surprise. You can get your money back within 14 days, but not if you paid in cash or crypto.'
+      tier: great
+      reason: "There's nothing to cancel: you pay ahead for the time you want, and it just stops when that runs out."
       sources:
         - url: https://mullvad.net/en/help/terms-service
           quote: 'These terms will expire at the end of the period purchased.'
-        - url: https://mullvad.net/en/help/terms-service
-          quote: 'We offer users a 14-day money-back guarantee.'
-        - url: https://mullvad.net/en/help/terms-service
-          quote: 'We do not offer refunds for cash and crypto payments.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: billing.refunds
       tier: good
-      reason: 'You pay ahead for the time you want, and it just stops when that runs out, so it never charges you again by surprise. You can get your money back within 14 days, but not if you paid in cash or crypto.'
+      reason: 'You can get your money back within 14 days of paying, but not if you paid in cash or crypto.'
       sources:
-        - url: https://mullvad.net/en/help/terms-service
-          quote: 'These terms will expire at the end of the period purchased.'
         - url: https://mullvad.net/en/help/terms-service
           quote: 'We offer users a 14-day money-back guarantee.'
         - url: https://mullvad.net/en/help/terms-service
           quote: 'We do not offer refunds for cash and crypto payments.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: billing.price-changes
       tier: great
       reason: "Time you've already paid for never costs more, and it posts big changes to its terms on its blog at least a month before they start."
@@ -407,11 +401,11 @@ policies:
           quote: 'These terms will expire at the end of the period purchased.'
         - url: https://mullvad.net/en/help/terms-service
           quote: 'Any material changes to these terms will be notified via a prominent notice on mullvad.net/blog at least one month before the changes are applied.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: billing.free-trials
       status: not-applicable
       reason: 'It has no free trial: you pay ahead for the time you want.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: legal.disputes
       tier: good
       reason: "If you have a problem with it that you can't sort out, Sweden's consumer complaints board or a Swedish court decides, not a private arbitrator."

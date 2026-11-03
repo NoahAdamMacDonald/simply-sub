@@ -145,6 +145,8 @@ policies:
       url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
     - name: 'Crave terms and conditions'
       url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+    - name: 'Cancelling'
+      url: https://plus.crave.ca/en/faq/plans-billing-bundles/canceling-or-pausing-my-crave-subscription/
   ratings:
     - topic: privacy.data-sharing
       tier: good
@@ -167,29 +169,33 @@ policies:
       lastVerified: 2026-10-27
     - topic: billing.cancellation
       tier: neutral
-      reason: 'You can cancel whenever you like, and it stops at the end of the time you paid for. You get no money back.'
+      reason: 'You can cancel online whenever you like, but by the day before it renews at the latest, or you pay for the next period. You keep watching until the end of the time you paid for.'
       sources:
-        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
-          quote: 'You may terminate your subscription at any time, which termination will only be effective at the end of your subscription period.'
-        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
-          quote: 'All Fees are non-refundable.'
-      lastVerified: 2026-10-27
+        - url: https://plus.crave.ca/en/faq/plans-billing-bundles/canceling-or-pausing-my-crave-subscription/
+          quote: 'To avoid being charged again, you must cancel before your renewal date — if your renewal is on the 15th, cancel by the 14th.'
+        - url: https://plus.crave.ca/en/faq/plans-billing-bundles/canceling-or-pausing-my-crave-subscription/
+          quote: 'There’s no option to pause a Crave subscription, but you can cancel at any time and continue watching until the end of your current billing period.'
+      lastVerified: 2026-11-03
     - topic: billing.refunds
       tier: neutral
-      reason: 'You can cancel whenever you like, and it stops at the end of the time you paid for. You get no money back.'
+      reason: 'You get no money back, but you keep watching until the end of the time you paid for.'
       sources:
-        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
-          quote: 'You may terminate your subscription at any time, which termination will only be effective at the end of your subscription period.'
-        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
-          quote: 'All Fees are non-refundable.'
-      lastVerified: 2026-10-27
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'All Subscription Fees are non-refundable.'
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'Following any cancellation, you will continue to have access to the Service through the end of your current billing period, at which point your subscription will terminate.'
+      lastVerified: 2026-11-03
     - topic: billing.price-changes
-      tier: poor
-      reason: 'It can raise the price whenever it wants, and just posting the new price on its website can count as telling you.'
+      tier: neutral
+      reason: 'It can change the price at any time. It posts the change at least 30 days ahead and tells you, but promises that 30 days’ notice only where a law requires it (Quebec does).'
       sources:
-        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
-          quote: 'Bell Media reserves the right to change the amount of, or basis for determining, any Fees for a Pay Service, and to institute new Fees or terms at any time effective upon notice to you, which notice may for certainty include the posting of any such changes on the relevant pages related to the use of the Pay Service.'
-      lastVerified: 2026-10-27
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'we reserve the right, in our sole and absolute discretion, to modify all or any portion of these Terms and Conditions, the Service, and your subscription including the Subscription Fees, at any time'
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'In addition, if you have registered for the Service, we will provide you notice as required using your email and/or mailing address, or any other contact information we have for you in our discretion.'
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'Where required by law, this notice will be provided at least thirty (30) days before the change comes into effect'
+      lastVerified: 2026-11-03
     - topic: legal.disputes
       tier: bad
       reason: "If you have a problem with it, you can't go to court: a private referee called an arbitrator decides, in Toronto and behind closed doors, and you can't join a group lawsuit."

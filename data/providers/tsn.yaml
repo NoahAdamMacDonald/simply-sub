@@ -148,6 +148,8 @@ policies:
       url: https://www.tsn.ca/terms-and-conditions/
     - name: "Bell's use of data"
       url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+    - name: 'Help: cancelling and refunds'
+      url: https://www.tsn.ca/help/faq/
   ratings:
     - topic: privacy.data-sharing
       tier: good
@@ -169,19 +171,21 @@ policies:
         url: https://www.bell.ca/email-updates
       lastVerified: 2026-10-27
     - topic: billing.cancellation
-      tier: neutral
-      reason: 'If you cancel, you can keep watching until the end of the time you paid for, but you get no money back.'
+      tier: good
+      reason: 'You can cancel online in your account at any time, in a few steps, and keep watching until the end of the time you paid for.'
       sources:
-        - url: https://www.tsn.ca/terms-and-conditions/
-          quote: 'All Subscription Fees are non-refundable. Following any cancellation, you will continue to have access to the Service through the end of your current billing period, at which point your subscription will terminate.'
-      lastVerified: 2026-10-27
+        - url: https://www.tsn.ca/help/faq/
+          quote: 'Scroll down and select Cancel Subscription.'
+        - url: https://www.tsn.ca/help/faq/
+          quote: 'You will continue to enjoy TSN until the end of the billing period in which you cancel.'
+      lastVerified: 2026-11-03
     - topic: billing.refunds
       tier: neutral
-      reason: 'If you cancel, you can keep watching until the end of the time you paid for, but you get no money back.'
+      reason: 'You get no money back, but you keep watching until the end of the time you paid for.'
       sources:
-        - url: https://www.tsn.ca/terms-and-conditions/
-          quote: 'All Subscription Fees are non-refundable. Following any cancellation, you will continue to have access to the Service through the end of your current billing period, at which point your subscription will terminate.'
-      lastVerified: 2026-10-27
+        - url: https://www.tsn.ca/help/faq/
+          quote: 'No, TSN does not offer refunds. However, you will keep full access to TSN until the end of your current billing cycle.'
+      lastVerified: 2026-11-03
     - topic: legal.disputes
       tier: bad
       reason: 'If you have a problem with it, a private referee called an arbitrator decides, in your city, instead of a court. You give up your right to a trial.'

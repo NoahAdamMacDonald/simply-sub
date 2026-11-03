@@ -1786,6 +1786,29 @@ in every D1 `json` column search parses.
       features when Norton is read (M11.15).
     - **Coverage:** a "Coverage:" note explains the nine other regions: sold in the US only, needing "a valid Social
       Security Number".
+  - **The regrade, billing** (2026-11-03): the billing ratings from before M11.1, graded again by the procedure and
+    each topic's own rubric, with the calibration table in the pull request.
+    - **The split:** M11.1 split `billing.cancel-refunds` into Cancelling and Refunds with the same quotes; each now
+      has its own facts, read again that day.
+    - **Cancelling** goes by how you cancel:
+      - Great: Netflix (Cancel, Finish Cancellation), ICI TOU.TV (one click, « Annuler mon abonnement ») and Mullvad
+        (prepaid, nothing renews).
+      - Good: TSN and RDS (online, no deadline), like Bitdefender and Proton.
+      - Neutral: Claude (24 hours before) and Crave (the day before), like Disney+'s midnight deadline.
+      - Xbox's Canadian cancellation rating went: Canada's prorated refund is a refunds fact.
+    - **Refunds** go by money back:
+      - Proton Good → Neutral: its 30 days are after the first purchase only, like Xbox's.
+      - Bitdefender stays Good: its plans page gives 30 days "of your initial purchase or of the automatic renewal
+        date".
+    - **Calibrated:**
+      - Crave's price changes, Poor from Bell Media's general website terms, are Neutral from its own subscription
+        terms, the same clauses as TSN's and RDS's. Its refunds quote them too.
+      - Bitdefender's renewal reminders, Neutral, are Good: its plans page promises "an email notification before you
+        will be billed", and its cancel page 45 days ahead.
+      - ICI TOU.TV's free trial, "not applicable", is Neutral: its plans page offers 7 free days on the first
+        subscription, which then renews unless you end it.
+    - **Checks:** every quote checked word for word with `quote-check.cjs` against the pages saved that day, and five
+      new pages baselined. Privacy, legal and service follow.
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and

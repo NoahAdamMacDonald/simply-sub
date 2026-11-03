@@ -156,6 +156,8 @@ policies:
       url: https://cbc.radio-canada.ca/fr/transparence-et-engagement/vie-privee/avis-de-confidentialite
     - name: 'Avis de confidentialité, plateformes numériques (PDF, in French)'
       url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/avis-de-confidentialite-plateformes-numeriques.pdf
+    - name: 'Abonnements (in French)'
+      url: https://ici.tou.tv/abonnement
   ratings:
     - topic: privacy.ads-tracking
       tier: neutral
@@ -170,19 +172,21 @@ policies:
         url: https://cbc.radio-canada.ca/fr/transparence-et-engagement/vie-privee/avis-de-confidentialite/options-de-confidentialite
       lastVerified: 2026-10-27
     - topic: billing.cancellation
-      tier: neutral
-      reason: "It keeps renewing until you decide to end it. Its conditions don't say anything about getting money back."
+      tier: great
+      reason: 'You cancel online with one click on your account page, whenever you like, and keep watching until the end of the month you paid for.'
       sources:
         - url: https://ici.tou.tv/abonnement/condition
-          quote: "Votre abonnement à un Forfait est renouvelé automatiquement à moins que vous ne décidiez d'y mettre fin."
-      lastVerified: 2026-10-27
+          quote: 'Pour annuler votre abonnement, rendez-vous sur la page de votre compte et cliquez « Annuler mon abonnement ».'
+        - url: https://ici.tou.tv/abonnement/condition
+          quote: 'Vous continuerez d’avoir accès au contenu disponible via le Forfait jusqu’à la fin de votre période de facturation mensuelle.'
+      lastVerified: 2026-11-03
     - topic: billing.refunds
       tier: neutral
-      reason: "It keeps renewing until you decide to end it. Its conditions don't say anything about getting money back."
+      reason: 'Its conditions say nothing about getting money back, but you keep watching until the end of the month you paid for.'
       sources:
         - url: https://ici.tou.tv/abonnement/condition
-          quote: "Votre abonnement à un Forfait est renouvelé automatiquement à moins que vous ne décidiez d'y mettre fin."
-      lastVerified: 2026-10-27
+          quote: 'Vous continuerez d’avoir accès au contenu disponible via le Forfait jusqu’à la fin de votre période de facturation mensuelle.'
+      lastVerified: 2026-11-03
     - topic: billing.price-changes
       tier: good
       reason: 'It warns you 30 days before a price change, and you can say no by cancelling.'
@@ -191,11 +195,18 @@ policies:
           quote: 'Une telle modification entrera en vigueur automatiquement, sous réserve d’un préavis de 30 jours aux abonnés concernés'
         - url: https://ici.tou.tv/abonnement/condition
           quote: 'vous pourrez refuser cette modification en annulant votre abonnement.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: billing.free-trials
-      status: not-applicable
-      reason: 'It has no free trial.'
-      lastVerified: 2026-10-27
+      tier: neutral
+      reason: 'It starts with 7 free days, then keeps renewing as a paid plan unless you end it, which you can do at any time.'
+      sources:
+        - url: https://ici.tou.tv/abonnement
+          quote: 'ESSAI GRATUIT DE 7 JOURS*'
+        - url: https://ici.tou.tv/abonnement/condition
+          quote: "Votre abonnement à un Forfait est renouvelé automatiquement à moins que vous ne décidiez d'y mettre fin."
+        - url: https://ici.tou.tv/abonnement/condition
+          quote: 'Vous pouvez mettre fin à votre abonnement à un Forfait en tout temps.'
+      lastVerified: 2026-11-03
     - topic: legal.disputes
       tier: good
       reason: "Disagreements go to Quebec's regular courts in Montreal, not to a private arbitrator."

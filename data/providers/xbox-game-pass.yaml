@@ -335,26 +335,14 @@ policies:
     - name: 'Xbox bug bounty'
       url: https://www.microsoft.com/en-us/msrc/bounty-xbox
   ratings:
-    - topic: billing.cancellation
-      tier: great
-      reason: You can cancel at any time, and in Canada you can cancel with immediate effect and get a prorated refund of your last charge.
-      sources:
-        - url: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
-          quote: You can cancel an XBOX subscription at any time.
-        - url: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
-          quote: 'In the following countries, you have the right to cancel a subscription that has recurring billing with immediate effect and receive a prorated refund as described in the Microsoft Consumer Subscription Prorated Refund Policy:'
-      regions: [CA]
-      lastVerified: 2026-10-28
     - topic: billing.refunds
       tier: great
-      reason: You can cancel at any time, and in Canada you can cancel with immediate effect and get a prorated refund of your last charge.
+      reason: "In Canada, you can cancel with immediate effect and get back the part of your last charge you didn't use."
       sources:
-        - url: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
-          quote: You can cancel an XBOX subscription at any time.
         - url: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
           quote: 'In the following countries, you have the right to cancel a subscription that has recurring billing with immediate effect and receive a prorated refund as described in the Microsoft Consumer Subscription Prorated Refund Policy:'
       regions: [CA]
-      lastVerified: 2026-10-28
+      lastVerified: 2026-11-03
     - topic: billing.price-changes
       tier: good
       reason: It gives at least 30 days' notice before raising the price, and you can cancel before the next billing date.
@@ -363,7 +351,7 @@ policies:
           quote: Charges may be increased on at least 30 days notice as described in the Microsoft Store Terms of Sale.
         - url: https://www.xbox.com/en-CA/xbox-game-pass
           quote: To stop being charged, cancel your subscription in your Microsoft account (account.microsoft.com/services) or on your XBOX console, before the next billing date.
-      lastVerified: 2026-10-28
+      lastVerified: 2026-11-03
     # M11.9's topics, pulled forward at the owner's request (2026-11-02), read that day: Microsoft's privacy
     # statement, Services Agreement (Canada's, and the US's for its arbitration) and Store terms of sale, which the
     # XBOX subscription terms make part of every subscription.

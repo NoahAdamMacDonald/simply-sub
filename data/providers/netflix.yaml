@@ -608,6 +608,8 @@ policies:
       url: https://help.netflix.com/en/node/54816
     - name: 'Bug bounty (HackerOne)'
       url: https://hackerone.com/netflix
+    - name: 'Cancelling'
+      url: https://help.netflix.com/en/node/407
   ratings:
     - topic: privacy.data-collection
       tier: poor
@@ -657,34 +659,32 @@ policies:
         url: https://help.netflix.com/node/100625
       lastVerified: 2026-10-27
     - topic: billing.cancellation
-      tier: neutral
-      reason: "You can cancel online whenever you like, and you keep watching until the end of the time you paid for. There is no money back for days you didn't use."
+      tier: great
+      reason: 'You cancel online in a couple of clicks, whenever you like, and keep watching until the end of the time you paid for.'
       sources:
-        - url: https://help.netflix.com/legal/termsofuse
-          quote: 'You can cancel your Netflix subscription at any time.'
-        - url: https://help.netflix.com/legal/termsofuse
-          quote: 'The cancellation will take effect at the end of the billing period.'
-        - url: https://help.netflix.com/legal/termsofuse
-          quote: 'To the extent permitted by the applicable law, payments are non-refundable and we do not provide refunds or credits for any partial subscription periods or unused Netflix content.'
-      lastVerified: 2026-10-27
+        - url: https://help.netflix.com/en/node/407
+          quote: 'You can cancel your Netflix account at any time.'
+        - url: https://help.netflix.com/en/node/407
+          quote: 'tap or click Finish Cancellation'
+        - url: https://help.netflix.com/en/node/407
+          quote: 'If you cancel with time left in your billing period, you can use Netflix until the end of the billing period.'
+      lastVerified: 2026-11-03
     - topic: billing.refunds
       tier: neutral
-      reason: "You can cancel online whenever you like, and you keep watching until the end of the time you paid for. There is no money back for days you didn't use."
+      reason: "You get no money back for days you didn't use, but you keep watching until the end of the time you paid for."
       sources:
-        - url: https://help.netflix.com/legal/termsofuse
-          quote: 'You can cancel your Netflix subscription at any time.'
         - url: https://help.netflix.com/legal/termsofuse
           quote: 'The cancellation will take effect at the end of the billing period.'
         - url: https://help.netflix.com/legal/termsofuse
           quote: 'To the extent permitted by the applicable law, payments are non-refundable and we do not provide refunds or credits for any partial subscription periods or unused Netflix content.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: billing.price-changes
       tier: good
       reason: "It tells you at least a month before the price goes up, so you have time to cancel if you don't want to pay more."
       sources:
         - url: https://help.netflix.com/legal/termsofuse
           quote: 'We will notify you at least one month before any price changes or changes to your subscription plan will become effective.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: legal.disputes
       tier: good
       reason: "Disagreements are handled under Canada's laws, but you can't join a group lawsuit against it unless you live in Quebec."

@@ -1080,33 +1080,29 @@ policies:
       lastVerified: 2026-10-27
     - topic: billing.cancellation
       tier: good
-      reason: 'You cancel from your account page before it renews. If you change your mind within 30 days of first buying, you get all your money back.'
+      reason: 'You cancel from your account dashboard at any time before it renews.'
       sources:
         - url: https://proton.me/legal/terms
-          quote: 'You may cancel your subscription within 30 days of the initial purchase and receive a full refund for the Service.'
-        - url: https://proton.me/legal/terms
           quote: 'you must cancel your subscription before its renewal date by visiting your Account dashboard and following the cancel subscription steps'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: billing.refunds
-      tier: good
-      reason: 'You cancel from your account page before it renews. If you change your mind within 30 days of first buying, you get all your money back.'
+      tier: neutral
+      reason: 'You get all your money back only if you cancel within 30 days of first buying it.'
       sources:
         - url: https://proton.me/legal/terms
           quote: 'You may cancel your subscription within 30 days of the initial purchase and receive a full refund for the Service.'
-        - url: https://proton.me/legal/terms
-          quote: 'you must cancel your subscription before its renewal date by visiting your Account dashboard and following the cancel subscription steps'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: billing.price-changes
       tier: poor
       reason: "When your plan renews, you pay whatever the price is then, and it doesn't promise to warn you first if it went up."
       sources:
         - url: https://proton.me/legal/terms
           quote: 'If the renewal price has changed, you will be charged the then-current price valid at the time of the renewal of your subscription.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: billing.free-trials
       status: not-applicable
       reason: 'Its personal plans have no free trial: only its business plans do.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: legal.disputes
       tier: good
       reason: 'Disagreements go to the regular courts in Geneva, Switzerland, not to a private arbitrator.'
