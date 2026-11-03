@@ -1776,6 +1776,16 @@ in every D1 `json` column search parses.
         `gaming.online-multiplayer`;
       - `check-features.cjs`: the Gaming card (30 checks);
       - `check-m11-facts.cjs`: Bitdefender's Billing day from part 1, stale until now (93 checks).
+  - **Bitdefender's Ultimate Security Plus** (2026-11-03, the owner's choice that day): the US's four plans,
+    Standard and Extended, each Individual and Family, monthly or yearly ($189.99 and $18.99, $249.99 and $24.99,
+    $269.99 and $26.99, $349.99 and $34.99), read with Mullvad Browser.
+    - **Features:** each is Ultimate's, plus `security.identity-restoration` and identity theft insurance and credit
+      monitoring: $1 million and 1 bureau on Standard, $2 million and 3 bureaus on Extended.
+    - **Perks:** the stolen wallet and SSN lines on both. Extended adds the refunds for social engineering and
+      ransomware, and investment, address and court-record alerts. Norton names most of them too, so they may become
+      features when Norton is read (M11.15).
+    - **Coverage:** a "Coverage:" note explains the nine other regions: sold in the US only, needing "a valid Social
+      Security Number".
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and

@@ -103,6 +103,34 @@ features:
   account.sign-in: [password, email-code, totp, trusted-device]
   support.channels: [chat, phone, community]
 
+# Perks (M11.6): the US Ultimate Security Plus plans' lines that no feature describes (M11.9), named in their words.
+# Norton 360 with LifeLock names most of them too, so they may become features when Norton is read (M11.15).
+perks:
+  - id: stolen-wallet
+    name: Stolen Wallet Protection
+  - id: ssn-tracker
+    name: Smart SSN Tracker
+  - id: social-engineering-refund
+    name: Social Engineering Resolution & Refund
+  - id: ransomware-refund
+    name: Ransomware Resolution & refund
+  - id: investment-alerts
+    name: Investment account alerts
+  - id: address-change
+    name: Change of address
+  - id: court-records
+    name: Court records monitoring
+
+# The US's Ultimate Security Plus (M11.9, the owner's choice of 2026-11-03), read 2026-11-03 with Mullvad Browser on
+# /en-us/consumer/ultimate-security: Standard and Extended, each Individual ("1 member - up to 5 devices") and Family
+# ("5 members & 25 devices"), monthly or yearly. Everything in Ultimate, plus identity theft protection: "Identity
+# Theft Insurance (up to $1.000.000)" and "Credit Reports & Monitoring (1 bureau)" on Standard, "(up to $2.000.000 per
+# household)" and "(3 bureau)" on Extended, with its restoration services (the US Digital Identity Protection page:
+# "Identity Theft Restoration Services"); Extended adds the refunds and alerts its perks name. "This service is
+# available with Bitdefender Ultimate Security Plus and requires a valid Social Security Number".
+# Coverage: bitdefender.ultimate-security-plus-standard-individual, bitdefender.ultimate-security-plus-extended-individual, bitdefender.ultimate-security-plus-standard-family and bitdefender.ultimate-security-plus-extended-family in CA, GB, AU, NZ, DE, FR, NL,
+# ES and IT: sold in the US only, its identity theft protection needing a US Social Security Number.
+
 # Identity protection (M11.9, the owner's choice of 2026-11-03), read 2026-11-03: Ultimate's cards add "Digital Identity
 # Protection 1x" (5x on Family), with "Digital Footprint Visualization" and "Real Time Breach Notifications", which
 # Premium's don't ("Data Breach Detection" only); the US Digital Identity Protection page says Ultimate "Includes Digital
@@ -118,8 +146,6 @@ features:
 # The five euro countries' prices are the same. Each region's pages say tax is included, beside each price ("Sales tax
 # included.", "Inklusive MwSt.", "TVA incluse.", "Inclusief BTW.", "IVA incluido.", "IVA inclusa."), Canada's as well
 # (taxIncluded, missing from its prices until now); the US's say "Plus applicable sales tax."
-# Not in the catalog yet: the US's Ultimate Security Plus (Standard and Extended, each individual and family), which add
-# identity theft insurance, restoration and credit monitoring, which no feature describes (M11.9's feature proposals).
 plans:
   - id: bitdefender.total-security
     name: Total Security
@@ -1454,6 +1480,236 @@ plans:
   # No antivirus (M11.4, antivirus.included is required in security), read 2026-11-02: its page describes a service
   # that "continuously monitors your personal information and alerts you in real time in case of a data breach", and
   # names Total Security as the device protection to buy beside it.
+  - id: bitdefender.ultimate-security-plus-standard-individual
+    name: Ultimate Security Plus Standard Individual
+    link: https://www.bitdefender.com/en-us/consumer/ultimate-security
+    categories: [security, passwords, vpn]
+    features:
+      includes-subscription: [bitdefender.digital-identity-protection]
+      security.data-exposure: [footprint]
+      antivirus.activity-modes: true
+      antivirus.anti-spam: true
+      antivirus.anti-theft: [locate, lock, wipe]
+      antivirus.cryptomining: true
+      antivirus.devices: 5
+      antivirus.included: true
+      antivirus.network: [firewall]
+      antivirus.optimizer: true
+      antivirus.ransomware: [blocking, file-recovery]
+      antivirus.scam-protection: [web, email, sms, chat]
+      antivirus.secure-browser: true
+      antivirus.vulnerability-scan: true
+      antivirus.web-protection: true
+      password-manager: true
+      security.anti-tracker: true
+      security.dark-web-monitoring: true
+      security.file-shredder: true
+      security.webcam-protection: [webcam, microphone]
+      vpn.content-blocking: [ads, trackers]
+      vpn.included: true
+      vpn.server-countries: 100
+      vpn.unlimited-traffic: true
+      security.identity-restoration: true
+      security.credit-monitoring: 1
+      security.identity-theft-insurance: 1
+    featureLabels:
+      antivirus.scam-protection: 'Scam Protection Pro'
+    perks: [stolen-wallet, ssn-tracker]
+    prices:
+      - region: US
+        currency: USD
+        amount: 189.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
+      - region: US
+        currency: USD
+        amount: 18.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
+  - id: bitdefender.ultimate-security-plus-extended-individual
+    name: Ultimate Security Plus Extended Individual
+    link: https://www.bitdefender.com/en-us/consumer/ultimate-security
+    categories: [security, passwords, vpn]
+    features:
+      includes-subscription: [bitdefender.digital-identity-protection]
+      security.data-exposure: [footprint]
+      antivirus.activity-modes: true
+      antivirus.anti-spam: true
+      antivirus.anti-theft: [locate, lock, wipe]
+      antivirus.cryptomining: true
+      antivirus.devices: 5
+      antivirus.included: true
+      antivirus.network: [firewall]
+      antivirus.optimizer: true
+      antivirus.ransomware: [blocking, file-recovery]
+      antivirus.scam-protection: [web, email, sms, chat]
+      antivirus.secure-browser: true
+      antivirus.vulnerability-scan: true
+      antivirus.web-protection: true
+      password-manager: true
+      security.anti-tracker: true
+      security.dark-web-monitoring: true
+      security.file-shredder: true
+      security.webcam-protection: [webcam, microphone]
+      vpn.content-blocking: [ads, trackers]
+      vpn.included: true
+      vpn.server-countries: 100
+      vpn.unlimited-traffic: true
+      security.identity-restoration: true
+      security.credit-monitoring: 3
+      security.identity-theft-insurance: 2
+    featureLabels:
+      antivirus.scam-protection: 'Scam Protection Pro'
+    perks:
+      [
+        stolen-wallet,
+        ssn-tracker,
+        social-engineering-refund,
+        ransomware-refund,
+        investment-alerts,
+        address-change,
+        court-records,
+      ]
+    prices:
+      - region: US
+        currency: USD
+        amount: 249.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
+      - region: US
+        currency: USD
+        amount: 24.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
+  - id: bitdefender.ultimate-security-plus-standard-family
+    name: Ultimate Security Plus Standard Family
+    link: https://www.bitdefender.com/en-us/consumer/ultimate-security
+    categories: [security, passwords, vpn]
+    features:
+      includes-subscription: [bitdefender.digital-identity-protection]
+      security.data-exposure: [footprint]
+      account.users: 5
+      antivirus.activity-modes: true
+      antivirus.anti-spam: true
+      antivirus.anti-theft: [locate, lock, wipe]
+      antivirus.cryptomining: true
+      antivirus.devices: 25
+      antivirus.included: true
+      antivirus.network: [firewall]
+      antivirus.optimizer: true
+      antivirus.ransomware: [blocking, file-recovery]
+      antivirus.scam-protection: [web, email, sms, chat]
+      antivirus.secure-browser: true
+      antivirus.vulnerability-scan: true
+      antivirus.web-protection: true
+      parental-control: [content-filtering, screen-time, location, activity-reports]
+      password-manager: true
+      security.anti-tracker: true
+      security.dark-web-monitoring: true
+      security.file-shredder: true
+      security.webcam-protection: [webcam, microphone]
+      vpn.content-blocking: [ads, trackers]
+      vpn.included: true
+      vpn.server-countries: 100
+      vpn.unlimited-traffic: true
+      security.identity-restoration: true
+      security.credit-monitoring: 1
+      security.identity-theft-insurance: 1
+    featureLabels:
+      antivirus.scam-protection: 'Scam Protection Pro'
+    perks: [stolen-wallet, ssn-tracker]
+    prices:
+      - region: US
+        currency: USD
+        amount: 269.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
+      - region: US
+        currency: USD
+        amount: 26.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
+  - id: bitdefender.ultimate-security-plus-extended-family
+    name: Ultimate Security Plus Extended Family
+    link: https://www.bitdefender.com/en-us/consumer/ultimate-security
+    categories: [security, passwords, vpn]
+    features:
+      includes-subscription: [bitdefender.digital-identity-protection]
+      security.data-exposure: [footprint]
+      account.users: 5
+      antivirus.activity-modes: true
+      antivirus.anti-spam: true
+      antivirus.anti-theft: [locate, lock, wipe]
+      antivirus.cryptomining: true
+      antivirus.devices: 25
+      antivirus.included: true
+      antivirus.network: [firewall]
+      antivirus.optimizer: true
+      antivirus.ransomware: [blocking, file-recovery]
+      antivirus.scam-protection: [web, email, sms, chat]
+      antivirus.secure-browser: true
+      antivirus.vulnerability-scan: true
+      antivirus.web-protection: true
+      parental-control: [content-filtering, screen-time, location, activity-reports]
+      password-manager: true
+      security.anti-tracker: true
+      security.dark-web-monitoring: true
+      security.file-shredder: true
+      security.webcam-protection: [webcam, microphone]
+      vpn.content-blocking: [ads, trackers]
+      vpn.included: true
+      vpn.server-countries: 100
+      vpn.unlimited-traffic: true
+      security.identity-restoration: true
+      security.credit-monitoring: 3
+      security.identity-theft-insurance: 2
+    featureLabels:
+      antivirus.scam-protection: 'Scam Protection Pro'
+    perks:
+      [
+        stolen-wallet,
+        ssn-tracker,
+        social-engineering-refund,
+        ransomware-refund,
+        investment-alerts,
+        address-change,
+        court-records,
+      ]
+    prices:
+      - region: US
+        currency: USD
+        amount: 349.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
+      - region: US
+        currency: USD
+        amount: 34.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
   - id: bitdefender.digital-identity-protection
     name: Digital Identity Protection
     link: https://www.bitdefender.com/en-ca/consumer/digital-identity-protection
