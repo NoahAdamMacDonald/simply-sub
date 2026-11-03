@@ -1746,6 +1746,36 @@ in every D1 `json` column search parses.
       Hulu and ESPN wait for a US exit.
     - **Tests:** the bot (a page two regions cite confirms the prices it shows and sends the others to a person, with
       no model); `check-search.cjs`'s UK steps use ESPN, which has no UK price (189 checks).
+  - **AI, gaming and identity features** (2026-11-03, the owner's answers that day to the feature-discovery proposals:
+    all of each):
+    - **The registry, in its own commit:** six AI features under `ai.assistant`, four gaming features in a new
+      Gaming feature category, and four identity features in security. Each is offered by at least two providers,
+      on their own pages: Claude, ChatGPT and Gemini; Xbox Game Pass and PlayStation Plus; Bitdefender and Norton.
+      Core's units gain "hour a month" for one.
+    - **Claude:** Claude Code, Research and scheduled tasks on Pro and up; early access and monthly API credits on
+      Max and Ultra, the amounts kept as `featureLabels` ($100 and $200). Its claude-code and api-credits perks moved
+      to the features.
+    - **Proton:** Lumo's free version has "Limited image generations", so every plan has `ai.image-generation`.
+    - **Xbox Game Pass:**
+      - the library (50, 200, 400 and PC's 300 games);
+      - day one games (Ultimate and PC);
+      - cloud playtime (5, 10 and 15 hours a month, none on PC);
+      - online console multiplayer.
+
+      Nine perks moved to those features. EA Play, Fortnite Crew, Ubisoft+ Classics and the within-a-year games stay
+      perks.
+    - **Bitdefender:** Ultimate shows where your data is exposed (`security.data-exposure: [footprint]`, Digital
+      Identity Protection's footprint), as Digital Identity Protection does, and includes that plan. That clears
+      Ultimate's two price-differences warnings against Premium, leaving 5 warnings.
+    - **Redirects:** 12 `perk` entries in `data/redirects.yaml`, each to a feature's rank key, a number's to its tier
+      (`gaming.game-library=400+`, `gaming.cloud-gaming=15+`). The app moves a user's rank on its next start.
+    - **Tests:**
+      - core: the new unit's singular;
+      - `check-m11-perks.cjs` (53 checks): its list is now Ultimate, PC Game Pass and Premium, so EA Play shares to
+        PC Game Pass, and Premium's planted rank of the moved Online console multiplayer perk comes back on
+        `gaming.online-multiplayer`;
+      - `check-features.cjs`: the Gaming card (30 checks);
+      - `check-m11-facts.cjs`: Bitdefender's Billing day from part 1, stale until now (93 checks).
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and

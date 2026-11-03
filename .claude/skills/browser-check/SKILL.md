@@ -702,14 +702,15 @@ billed on the 31st; Netflix (the date you signed up) suggests a month from today
 expected dates come from the machine's date. With axe, screenshots and no horizontal scroll. Since M11.5
 `check-m11-outside.cjs` expects Mullvad's Source code after Ways to pay, and its currencies line.
 
-`check-m11-perks.cjs` (M11.6, ranked perks) checks a list, Games (Xbox Game Pass Ultimate and Premium, written to
-IndexedDB), on `ng serve` for a Canadian in Alberta (base URL ending in `/`, after `npm run data:build` on the branch),
-in both themes at both widths, keyboard only: Ultimate's ✎ by Enter, its dialog's rank groups ending with Perks,
-closed; Tab to its toggle and Enter open it, its rows Ultimate's perks in its order; typeahead ranks Fortnite Crew
-Needed ("N") and Online console multiplayer Wanted ("W"); Save gives Premium only the perk it has; the list saved,
-its summary reads "Fortnite Crew: 1 / 1" and "Online console multiplayer: 2 / 2"; Optimizations suggests nothing that
-drops Ultimate; Search's Ultimate chip counts "1 Needed 1 Wanted". With axe (the Perks group open, the list view,
-Optimizations), screenshots and no horizontal scroll.
+`check-m11-perks.cjs` (M11.6, ranked perks) checks a list, Games (Xbox Game Pass Ultimate, PC Game Pass and Premium,
+written to IndexedDB, Premium ranking Online console multiplayer, a perk until M11.9), on `ng serve` for a Canadian in
+Alberta (base URL ending in `/`, after `npm run data:build` on the branch), in both themes at both widths, keyboard
+only: Ultimate's ✎ by Enter, its dialog's rank groups ending with Perks, closed; Tab to its toggle and Enter open it,
+its rows Ultimate's perks in its order; typeahead ranks Fortnite Crew Needed ("N") and EA Play Wanted ("W"); Save
+gives PC Game Pass only the perk it has; Premium's rank of the moved perk is on `gaming.online-multiplayer` (its
+redirect); the list saved, its summary reads "Fortnite Crew: 1 / 1" and "EA Play: 2 / 2"; Optimizations suggests
+nothing that drops Ultimate; Search's Ultimate chip counts "1 Needed 1 Wanted". With axe (the Perks group open, the
+list view, Optimizations), screenshots and no horizontal scroll: 53 checks.
 
 `check-m11-policies-out.cjs` (M11.8, Terms and policies in a file per provider) checks the files and Search's cards on
 `ng serve` for a Canadian in Alberta (base URL ending in `/`, after `npm run data:build` on the branch): `CA.json`

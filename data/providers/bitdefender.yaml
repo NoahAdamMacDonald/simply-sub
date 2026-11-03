@@ -103,6 +103,12 @@ features:
   account.sign-in: [password, email-code, totp, trusted-device]
   support.channels: [chat, phone, community]
 
+# Identity protection (M11.9, the owner's choice of 2026-11-03), read 2026-11-03: Ultimate's cards add "Digital Identity
+# Protection 1x" (5x on Family), with "Digital Footprint Visualization" and "Real Time Breach Notifications", which
+# Premium's don't ("Data Breach Detection" only); the US Digital Identity Protection page says Ultimate "Includes Digital
+# Identity Protection". So Ultimate includes that plan and shows where your data is exposed (security.data-exposure:
+# footprint), as Digital Identity Protection does.
+
 # Every region's plans and billing periods (M11.9, the region checklist), read 2026-11-03 with Mullvad Browser. Edge
 # shows no price on any of its pages now, Canada's too: the owner's DNS filter blocks a script they wait for, and Mullvad
 # Browser's own DNS gets past it. Each page in a region's locale (/en-gb/, /en-au/, /en-nz/, /de-de/, /fr-fr/, /nl-nl/,
@@ -796,6 +802,8 @@ plans:
     link: https://www.bitdefender.com/en-ca/consumer/ultimate-security
     categories: [security, passwords, vpn]
     features:
+      includes-subscription: [bitdefender.digital-identity-protection]
+      security.data-exposure: [footprint]
       antivirus.activity-modes: true
       antivirus.anti-spam: true
       antivirus.anti-theft: [locate, lock, wipe]
@@ -1120,6 +1128,8 @@ plans:
     link: https://www.bitdefender.com/en-ca/consumer/ultimate-security
     categories: [security, passwords, vpn]
     features:
+      includes-subscription: [bitdefender.digital-identity-protection]
+      security.data-exposure: [footprint]
       account.users: 5
       antivirus.activity-modes: true
       antivirus.anti-spam: true
@@ -1447,7 +1457,10 @@ plans:
   - id: bitdefender.digital-identity-protection
     name: Digital Identity Protection
     link: https://www.bitdefender.com/en-ca/consumer/digital-identity-protection
-    features: { antivirus.included: false, security.dark-web-monitoring: true }
+    features:
+      antivirus.included: false
+      security.dark-web-monitoring: true
+      security.data-exposure: [footprint]
     prices:
       - region: CA
         currency: CAD
