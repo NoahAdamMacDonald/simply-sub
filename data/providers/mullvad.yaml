@@ -20,6 +20,17 @@ paymentMethods:
     url: https://mullvad.net/en/help/terms-service
     quotes:
       - 'We accept payment by cash in bills (EUR, USD, GBP, SEK, NOK, CHF, CAD, AUD, NZD) sent by regular mail, Bitcoin, Bitcoin Cash, Monero, credit card, SEPA, PayPal, iOS in-app purchases, our Mullvad vouchers, and Swish.'
+# Currencies (M11.5), read 2026-11-02: cash by post in nine, in its terms (and its pricing page's FAQ). Its price is
+# in euros. A blog post of 2023-10-04 says cards are charged "directly in USD, EUR, GBP and SEK", but the checkout
+# offered about 20 on 2026-10-26 (CAD among them, BLUEPRINT §14) and no page lists them now, so cards aren't here.
+currencies:
+  - codes: [EUR, USD, GBP, SEK, NOK, CHF, CAD, AUD, NZD]
+    methods: [cash]
+    page: Terms of service
+    url: https://mullvad.net/en/help/terms-service
+    quotes:
+      - 'We accept payment by cash in bills (EUR, USD, GBP, SEK, NOK, CHF, CAD, AUD, NZD) sent by regular mail'
+# No renewalAnchor: it's prepaid, so nothing renews ("These terms will expire at the end of the period purchased").
 owner:
   name: Mullvad VPN AB
   page:
@@ -33,6 +44,20 @@ notes: >-
   Prepaid only: you add time to an account number, and nothing renews by itself. Cards can pay in many local
   currencies at a converted amount, and cryptocurrency payments get 10% off. One flat price everywhere, VAT
   included, so no sales tax is added in Canada or the US.
+# Open source (M11.5), read 2026-11-02: /en/why-mullvad-vpn's comparison says "Code is open source" for its app on
+# Windows, macOS, Linux, Android and iOS, and links the app's repository, as its downloads' "Our source code" does
+# (/en/download/vpn/windows). Its servers' code isn't published ("The majority of software that we use and even
+# develop ourselves is open source", /en/open-source), so its apps are open, not all of it.
+features:
+  software.open-source: open-clients
+sourceRepo:
+  url: https://github.com/mullvad/mullvadvpn-app
+  page:
+    name: Why Mullvad VPN?
+    url: https://mullvad.net/en/why-mullvad-vpn
+  quotes:
+    - Code is open source
+  lastVerified: 2026-11-02
 
 # Prices read 2026-10-26 on /en/pricing: "€5" a month for 1 month, 1 year or 1 decade ("the exact same rate"), and
 # "It's one flat monthly rate for ultimate flexibility. Including VAT." The CA$7.84 shown there is "€5 is

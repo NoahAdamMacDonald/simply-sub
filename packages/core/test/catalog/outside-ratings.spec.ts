@@ -89,6 +89,11 @@ const dailyPlanet = {
     quotes: ['The Daily Planet is owned by Galaxy Communications.'],
     lastVerified: '2026-10-20',
   },
+  renewalAnchor: {
+    kind: 'not-stated',
+    pages: ['https://www.dailyplanet.example.com/terms'],
+    lastVerified: '2026-10-20',
+  },
   ratings: [
     {
       rater: 'bias-check',
@@ -307,7 +312,11 @@ describe('validateCatalog, for owners', () => {
     expect(messages(withRaters([[['owner', 'lastVerified'], '2026-10-24']]))).toEqual([
       `${planet} owner.lastVerified: 2026-10-24 is after today (2026-10-23)`,
     ]);
-    expect(messages(withRaters([[['ratings'], undefined]]), '2027-10-21')).toEqual(
+    // The renewal days read the same day warn too (M11.5): the owners' are what this test is about.
+    const owners = messages(withRaters([[['ratings'], undefined]]), '2027-10-21').filter(
+      (message) => !message.includes('renewalAnchor.lastVerified'),
+    );
+    expect(owners).toEqual(
       [
         `warning: ${planet} owner.lastVerified: Read on 2026-10-20, over a year ago: read the page again`,
         'warning: data/raters.yaml 0.id: No provider shows this rater: add its ratings to the providers it rates, or remove it',

@@ -1,6 +1,12 @@
 import * as z from 'zod';
 import { cardNetworkNames, namesNetwork } from './card-networks';
 import { namesPaymentMethod, paymentMethodNames } from './payment-methods';
+import {
+  namesCurrency,
+  namesRenewalAnchor,
+  renewalAnchorKinds,
+  renewalAnchorNames,
+} from './provider-facts';
 import { addDuplicateIssues, choices } from './checks';
 import { featureValueSchema } from './feature';
 import {
@@ -152,6 +158,135 @@ export const paymentMethodsSchema = z
     );
   });
 export type PaymentMethods = z.infer<typeof paymentMethodsSchema>;
+
+/**
+ * Currencies a provider takes beyond its price lists (M11.5): cash in nine currencies by post, a checkout that charges
+ * in the buyer's own at its rate. One page's list, for every way to pay or some, quoted from the provider's own page.
+ */
+export const currenciesEntrySchema = z
+  .strictObject({
+    codes: z
+      .array(currencySchema)
+      .min(1, 'List at least one currency')
+      .describe('The ISO 4217 codes of the currencies it takes this way (EUR, USD)'),
+    methods: z
+      .array(paymentMethodSchema)
+      .min(1, 'Leave methods out when every way to pay takes them')
+      .describe('Only these ways to pay take them (cash by post): each one its paymentMethods list')
+      .optional(),
+    regions: z
+      .array(regionSchema)
+      .min(1, 'Leave regions out when the page is for every buyer')
+      .describe('Only buyers here (a country’s own help page)')
+      .optional(),
+    page: textSchema.describe('As the card links it (Terms of service)'),
+    url: httpsUrlSchema.describe(
+      "The provider's own page that names them, on its own sites, its policies' or its owner's",
+    ),
+    quotes: z
+      .array(textSchema)
+      .min(1, 'Quote the words that name them')
+      .describe(
+        'Where that page names each currency (its code, name or sign: €, CA$), word for word',
+      ),
+  })
+  .superRefine((entry, ctx) => {
+    addDuplicateIssues(ctx, entry.codes, (index) => ['codes', index]);
+    addDuplicateIssues(ctx, entry.methods ?? [], (index) => ['methods', index]);
+    addDuplicateIssues(ctx, entry.regions ?? [], (index) => ['regions', index]);
+    const quoted = entry.quotes.join(' ');
+    entry.codes.forEach((code, index) => {
+      if (!namesCurrency(quoted, code)) {
+        ctx.addIssue({
+          code: 'custom',
+          message: `No quote names ${code}: quote the page's words for it (its code, name or sign)`,
+          path: ['codes', index],
+        });
+      }
+    });
+  });
+export type CurrenciesEntry = z.infer<typeof currenciesEntrySchema>;
+
+export const currenciesSchema = z
+  .array(currenciesEntrySchema)
+  .min(1, 'Leave currencies out when it takes only its prices’ currencies');
+
+export const renewalAnchorKindSchema = z.enum(renewalAnchorKinds);
+export type RenewalAnchorKind = z.infer<typeof renewalAnchorKindSchema>;
+
+/**
+ * The day a provider renews on (M11.5, the guide's §3.1): the date you signed up (a shorter month's last day when it
+ * has no such date), every 30 days, the 1st or the last day of each month, quoted from its terms or billing help; or
+ * not-stated, with the pages read that don't say. A new item's next renewal follows it, and the item dialog asks
+ * which day it's billed on only when it doesn't settle that (PROJECT-PLAN P6).
+ */
+export const renewalAnchorSchema = z
+  .discriminatedUnion('kind', [
+    z.strictObject({
+      kind: renewalAnchorKindSchema.describe(
+        'same-date: the date you signed up, each month or year; every-30-days (its prices are then day × 30); first-of-month; end-of-month',
+      ),
+      page: textSchema.describe('As the card links it (Help Center)'),
+      url: httpsUrlSchema.describe(
+        "The provider's own page that says so (its terms, a billing help article), on its own sites, its policies' or its owner's",
+      ),
+      quotes: z
+        .array(textSchema)
+        .min(1, 'Quote where it says so')
+        .max(3, 'Quote at most three passages')
+        .describe('Its words there that say which day it renews on, word for word'),
+      lastVerified: isoDateSchema.describe('When the page was read'),
+    }),
+    z.strictObject({
+      kind: z
+        .literal('not-stated')
+        .describe("Its terms and billing help don't say which day it renews on"),
+      pages: z
+        .array(httpsUrlSchema)
+        .min(1, 'List the pages read')
+        .describe("The pages read that don't say: its terms, its billing help"),
+      lastVerified: isoDateSchema.describe('When the pages were read'),
+    }),
+  ])
+  .superRefine((anchor, ctx) => {
+    if (anchor.kind === 'not-stated') {
+      addDuplicateIssues(ctx, anchor.pages, (index) => ['pages', index]);
+      return;
+    }
+    if (!namesRenewalAnchor(anchor.quotes.join(' '), anchor.kind)) {
+      ctx.addIssue({
+        code: 'custom',
+        message: `No quote says it renews on ${renewalAnchorNames[anchor.kind].toLowerCase()}: quote the words that do`,
+        path: ['quotes'],
+      });
+    }
+  });
+export type RenewalAnchor = z.infer<typeof renewalAnchorSchema>;
+
+/**
+ * Where a provider's source code is (M11.5, with software.open-source): the repository, or the account holding its
+ * repositories, as the provider's own page links it, with that page's words saying the code is open.
+ */
+export const sourceRepoSchema = z.strictObject({
+  url: httpsUrlSchema.describe(
+    'The repository, or the account that holds its repositories (https://github.com/mullvad)',
+  ),
+  page: z
+    .strictObject({
+      name: textSchema.describe('As the card links it (Open source)'),
+      url: httpsUrlSchema.describe(
+        "The provider's own page that links the repository, on its own sites, its policies' or its owner's",
+      ),
+    })
+    .describe("The provider's own page that links it"),
+  quotes: z
+    .array(textSchema)
+    .min(1, 'Quote where it says so')
+    .max(3, 'Quote at most three passages')
+    .describe('Its words there that say its code is open, word for word'),
+  lastVerified: isoDateSchema.describe('When the page was read'),
+});
+export type SourceRepo = z.infer<typeof sourceRepoSchema>;
 
 export const planSchema = z
   .strictObject({
@@ -318,6 +453,16 @@ export const providerSchema = z
         'How it can be paid, quoted from its own pages (M11.5): every provider says, cash and crypto included',
       )
       .optional(),
+    currencies: currenciesSchema
+      .describe(
+        "Currencies it takes beyond its price lists' (M11.5): cash by post, a checkout that charges in the buyer's own. Left out when it takes only its prices' currencies",
+      )
+      .optional(),
+    renewalAnchor: renewalAnchorSchema
+      .describe(
+        'The day it renews on (M11.5), quoted from its terms or billing help, or not-stated: every provider whose paid plans renew by the month or year says',
+      )
+      .optional(),
     billingCurrency: z
       .record(regionSchema, currencySchema)
       .describe('Region → the currency actually charged there, for FX-fee maths')
@@ -360,6 +505,11 @@ export const providerSchema = z
       )
       .describe(
         "Provider-wide feature id → value (M11.4): only features.yaml's providerWide ones (platforms, sign-in, languages, support), which every plan has unless it states its own",
+      )
+      .optional(),
+    sourceRepo: sourceRepoSchema
+      .describe(
+        'Where its source code is (M11.5), as its own page links it: needed when software.open-source says its apps or all of it are open',
       )
       .optional(),
     plans: z.array(planSchema).min(1, 'List at least one plan'),

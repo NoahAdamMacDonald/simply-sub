@@ -30,6 +30,7 @@ export * from './catalog/policy-topic';
 export * from './catalog/price';
 export * from './catalog/price-report';
 export * from './catalog/provider';
+export * from './catalog/provider-facts';
 export * from './catalog/published-ids';
 export * from './catalog/rater';
 export * from './catalog/region-files';

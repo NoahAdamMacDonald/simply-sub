@@ -151,6 +151,150 @@
       },
       "description": "How it can be paid, quoted from its own pages (M11.5): every provider says, cash and crypto included"
     },
+    "currencies": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "codes": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z]{3}$",
+              "patternErrorMessage": "Use a three-letter ISO 4217 currency code in capitals (CAD)"
+            },
+            "description": "The ISO 4217 codes of the currencies it takes this way (EUR, USD)"
+          },
+          "methods": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "card",
+                "paypal",
+                "apple-pay",
+                "google-pay",
+                "app-store",
+                "gift-card",
+                "bank-transfer",
+                "cash",
+                "crypto",
+                "provider-billing",
+                "other"
+              ]
+            },
+            "description": "Only these ways to pay take them (cash by post): each one its paymentMethods list"
+          },
+          "regions": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(?:[A-Z]{2}|GLOBAL)$",
+              "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL"
+            },
+            "description": "Only buyers here (a country’s own help page)"
+          },
+          "page": {
+            "type": "string",
+            "minLength": 1,
+            "description": "As the card links it (Terms of service)"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://",
+            "patternErrorMessage": "Use a full https:// URL",
+            "description": "The provider's own page that names them, on its own sites, its policies' or its owner's"
+          },
+          "quotes": {
+            "minItems": 1,
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "description": "Where that page names each currency (its code, name or sign: €, CA$), word for word"
+          }
+        },
+        "required": ["codes", "page", "url", "quotes"],
+        "additionalProperties": false
+      },
+      "description": "Currencies it takes beyond its price lists' (M11.5): cash by post, a checkout that charges in the buyer's own. Left out when it takes only its prices' currencies"
+    },
+    "renewalAnchor": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": ["same-date", "every-30-days", "first-of-month", "end-of-month"],
+              "description": "same-date: the date you signed up, each month or year; every-30-days (its prices are then day × 30); first-of-month; end-of-month"
+            },
+            "page": {
+              "type": "string",
+              "minLength": 1,
+              "description": "As the card links it (Help Center)"
+            },
+            "url": {
+              "type": "string",
+              "format": "uri",
+              "pattern": "^https://",
+              "patternErrorMessage": "Use a full https:// URL",
+              "description": "The provider's own page that says so (its terms, a billing help article), on its own sites, its policies' or its owner's"
+            },
+            "quotes": {
+              "minItems": 1,
+              "maxItems": 3,
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 },
+              "description": "Its words there that say which day it renews on, word for word"
+            },
+            "lastVerified": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+              "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+              "description": "When the page was read"
+            }
+          },
+          "required": ["kind", "page", "url", "quotes", "lastVerified"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "not-stated",
+              "description": "Its terms and billing help don't say which day it renews on"
+            },
+            "pages": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://",
+                "patternErrorMessage": "Use a full https:// URL"
+              },
+              "description": "The pages read that don't say: its terms, its billing help"
+            },
+            "lastVerified": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+              "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+              "description": "When the pages were read"
+            }
+          },
+          "required": ["kind", "pages", "lastVerified"],
+          "additionalProperties": false
+        }
+      ],
+      "description": "The day it renews on (M11.5), quoted from its terms or billing help, or not-stated: every provider whose paid plans renew by the month or year says"
+    },
     "billingCurrency": {
       "type": "object",
       "propertyNames": {
@@ -244,6 +388,55 @@
         ]
       },
       "description": "Provider-wide feature id → value (M11.4): only features.yaml's providerWide ones (platforms, sign-in, languages, support), which every plan has unless it states its own"
+    },
+    "sourceRepo": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "patternErrorMessage": "Use a full https:// URL",
+          "description": "The repository, or the account that holds its repositories (https://github.com/mullvad)"
+        },
+        "page": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "description": "As the card links it (Open source)"
+            },
+            "url": {
+              "type": "string",
+              "format": "uri",
+              "pattern": "^https://",
+              "patternErrorMessage": "Use a full https:// URL",
+              "description": "The provider's own page that links the repository, on its own sites, its policies' or its owner's"
+            }
+          },
+          "required": ["name", "url"],
+          "additionalProperties": false,
+          "description": "The provider's own page that links it"
+        },
+        "quotes": {
+          "minItems": 1,
+          "maxItems": 3,
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "description": "Its words there that say its code is open, word for word"
+        },
+        "lastVerified": {
+          "type": "string",
+          "format": "date",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+          "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+          "description": "When the page was read"
+        }
+      },
+      "required": ["url", "page", "quotes", "lastVerified"],
+      "additionalProperties": false,
+      "description": "Where its source code is (M11.5), as its own page links it: needed when software.open-source says its apps or all of it are open"
     },
     "plans": {
       "minItems": 1,

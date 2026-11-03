@@ -71,6 +71,16 @@ paymentMethods:
       - 'You can purchase Netflix gift cards at select retailers.'
       - We accept PayPal.
       - The following partners allow you to add Netflix to their bill or offer a package with Netflix included.
+# Renewal day (M11.5), read 2026-11-02 in its help centre's billing date article: the date you signed up, or a shorter
+# month's last day. A plan change, a failed payment or a partner's billing can move it, which the article lists too.
+renewalAnchor:
+  kind: same-date
+  page: How to check your Netflix billing date
+  url: https://help.netflix.com/en/node/54896
+  quotes:
+    - Your billing cycle starts on the date you sign up.
+    - 'If your billing date does not occur on the last day of each month (for example, the 31st), you will be billed on the last day of that month instead.'
+  lastVerified: 2026-11-02
 
 plans:
   - id: netflix.standard-ads
