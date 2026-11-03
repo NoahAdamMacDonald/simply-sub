@@ -1674,7 +1674,13 @@ day's writes. Since M11.8 (`planSeed` in core):
   in section 5.4, less a margin). The remote seed counts what the day's seeds wrote already (the catalog row's
   `written` for today's `written_on`), applies the changed providers whole, in the catalog's order, until the next
   wouldn't fit, and leaves the rest, with the bundles that include their plans, for the next seed, which compares by
-  hash and carries on. A removed feature waits until nothing else does. A full reseed isn't budgeted yet (part 4).
+  hash and carries on. A removed feature waits until nothing else does. A full reseed isn't budgeted yet.
+- **The bot seeds what waits each night** (`seedNext` in core, its first steps, section 6.4): one Workflow step at a
+  time, each in its 10 ms, the registry's changes and removals first, then a changed provider (its rows compared
+  with D1's), then the bundles, the removed features and the catalog row with the build's version. It reads the
+  build from the seed files `data:build` publishes (section 6.3), never the whole catalog, and checks each provider
+  file's SHA-256 against the index. Each step writes the catalog row's count in the same transaction, and stops when
+  the next doesn't fit the day; a moved enum value's rows are counted in D1 (`COUNT(*)`) before they're updated.
 - **An empty D1 fills through the budget too:** with no rows, the seed inserts (no deletes) and records
   `0000000` as the version until the whole catalog is in.
 - **Each pull request's estimate** (`npm run data:writes`, a notice in CI): the seed of the branch's catalog over
@@ -1907,7 +1913,11 @@ write the files.
    - `policies/<id>.json` for each provider that rates its policies (`{ id, policies }`, core's `policyFileSchema`),
      `policies/shared/<id>.json` for each shared document (a folder of its own, so a document's id never meets a
      provider's), and `policies/index.json`, the pages each one cites and each provider's shared documents
-     (`policyIndexSchema`), which the nightly check reads instead of every file (M11.8).
+     (`policyIndexSchema`), which the nightly check reads instead of every file (M11.8);
+   - `seed/index.json` (core's `seedIndexSchema`: the version, build time and counts, the seed format, each
+     provider's id and the SHA-256 of its file in the catalog's order, the features and the bundles) and
+     `seed/providers/<id>.json`, each provider as `catalog.json` has it: what the bot seeds what waits from, a provider
+     a step (M11.8, section 5.3).
 
    A file over 20 MiB fails the build, naming it, before Cloudflare's 25 MiB refuses the deploy (M11.8).
 4. Convert each provider's and reseller's logo in `data/logos/` to `apps/web/public/icons/<id>.webp`, published as
@@ -2017,6 +2027,9 @@ compares each page with its baseline (`data/baselines/`, section 6.5) before any
 - **What's due:** every page the catalog cites (core's `citedPages`: pricing pages daily, the policy pages its ratings
   quote weekly) whose last check, kept in KV (`bot:checks`, one key written once a night), is a cadence ago, and each
   logo weekly; a provider with nothing due has no step.
+- **Seeding what waits first** (M11.8, section 5.3): a step each (`seed 1`, `seed 2`…, at most 200 a night) until
+  nothing waits or the next doesn't fit the day's rows, so the checks read the newest catalog. A step that fails its
+  retries leaves the rest for the next night, and the digest's review list says so (`failed:seed`).
 - **Policies from the site** (M11.8): D1's providers leave their policies out, so the night reads the site's
   `/data/policies/index.json` (`SITE_URL`) for the pages they cite and each shared document's file, and in a
   provider's step its own file, at its `policiesUrl`, for the quotes.
