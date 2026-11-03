@@ -180,6 +180,11 @@ describe('featureValueText', () => {
     { feature: { ...storage, unit: 'addresses' }, value: 1, expected: '1 address' },
     { feature: { ...storage, unit: 'people' }, value: 1, expected: '1 person' },
     { feature: { ...storage, unit: 'people' }, value: 6, expected: '6 people' },
+    // M11.9's cloud gaming, credit monitoring and identity theft insurance.
+    { feature: { ...storage, unit: 'hours a month' }, value: 1, expected: '1 hour a month' },
+    { feature: { ...storage, unit: 'hours a month' }, value: 15, expected: '15 hours a month' },
+    { feature: { ...storage, unit: 'credit bureaus' }, value: 1, expected: '1 credit bureau' },
+    { feature: { ...storage, unit: 'million USD' }, value: 2, expected: '2 million USD' },
     { feature: { ...storage, id: 'account.users', unit: 'users' }, value: 3, expected: '3 users' },
     { feature: profiles, value: 3, expected: '3' },
     { feature: quality, value: '1080p', expected: '1080p (Full HD)' },

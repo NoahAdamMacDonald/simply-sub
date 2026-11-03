@@ -292,6 +292,46 @@
   category: security
   type: boolean
   aliases: [breach monitoring, identity monitoring]
+# Identity protection (M11.9, the owner's choice of 2026-11-03), as Bitdefender's and Norton's pages state it.
+- id: security.data-exposure
+  name: Personal data exposure
+  category: security
+  type: set
+  values:
+    - {
+        id: footprint,
+        name: Shows where your data is exposed,
+        aliases: [digital footprint, privacy monitor],
+      }
+    - {
+        id: removal,
+        name: Asks data brokers to delete it,
+        aliases: [data broker removal, personal data cleanup],
+      }
+  aliases: [data brokers, people search sites]
+- id: security.identity-restoration
+  name: Identity theft restoration
+  category: security
+  type: boolean
+  aliases: [identity restoration, restoration specialists]
+- id: security.credit-monitoring
+  name: Credit monitoring
+  category: security
+  type: number
+  unit: credit bureaus
+  tiers:
+    - { id: 1+, name: Any credit monitoring, min: 1 }
+    - { id: 3+, name: All three credit bureaus, min: 3 }
+  aliases: [credit report, credit score]
+- id: security.identity-theft-insurance
+  name: Identity theft insurance
+  category: security
+  type: number
+  unit: million USD
+  tiers:
+    - { id: 1+, name: Up to $1 million or more, min: 1 }
+    - { id: 2+, name: Up to $2 million or more, min: 2 }
+  aliases: [identity theft coverage, stolen funds reimbursement]
 - id: security.webcam-protection
   name: Webcam and microphone protection
   category: security
@@ -448,6 +488,79 @@
   aliases: [ai, chatbot]
   headline: true
   requiredIn: [ai]
+# M11.9 (the owner's choice of 2026-11-03): what Claude's, ChatGPT's and Gemini's plans compare on, each offered by at
+# least two of them on their own pricing pages. Usage multiples and priority access stay perks: no two state them alike.
+- id: ai.coding-agent
+  parent: ai.assistant
+  name: Coding agent
+  category: ai
+  type: boolean
+  aliases: [agentic coding, code agent, coding assistant]
+- id: ai.deep-research
+  parent: ai.assistant
+  name: Deep research
+  category: ai
+  type: boolean
+  aliases: [research mode, in-depth research]
+- id: ai.scheduled-tasks
+  parent: ai.assistant
+  name: Scheduled tasks
+  category: ai
+  type: boolean
+  aliases: [hand off tasks, recurring tasks]
+- id: ai.early-access
+  parent: ai.assistant
+  name: Early access to new features
+  category: ai
+  type: boolean
+  aliases: [research preview, beta features]
+- id: ai.api-credits
+  parent: ai.assistant
+  name: Monthly API credits
+  category: ai
+  type: boolean
+  aliases: [developer credits, platform credits]
+- id: ai.image-generation
+  parent: ai.assistant
+  name: Image generation
+  category: ai
+  type: boolean
+  aliases: [image creation, text to image]
+
+# ── Gaming (M11.9) ─────────────────────────────────────────────────────────────
+# What game subscriptions compare on, as Xbox Game Pass's and PlayStation Plus's pages state them (the owner's choice of
+# 2026-11-03). Xbox's perks for the same moved here (data/redirects.yaml); EA Play and the like stay perks.
+- id: gaming.game-library
+  name: Game library
+  category: gaming
+  type: number
+  unit: games
+  tiers:
+    - { id: 50+, name: 50 or more games, min: 50 }
+    - { id: 200+, name: 200 or more games, min: 200 }
+    - { id: 300+, name: 300 or more games, min: 300 }
+    - { id: 400+, name: 400 or more games, min: 400 }
+  aliases: [game catalog, game catalogue, games included]
+- id: gaming.day-one
+  name: New games on day one
+  category: gaming
+  type: boolean
+  aliases: [day one releases, day-one games]
+- id: gaming.cloud-gaming
+  name: Cloud gaming
+  category: gaming
+  type: number
+  unit: hours a month
+  tiers:
+    - { id: 1+, name: Any cloud gaming, min: 1 }
+    - { id: 10+, name: 10 or more hours a month, min: 10 }
+    - { id: 15+, name: 15 or more hours a month, min: 15 }
+  aliases: [cloud streaming, game streaming, cloud play]
+- id: gaming.online-multiplayer
+  name: Online multiplayer
+  category: gaming
+  type: boolean
+  aliases: [online play, multiplayer]
 
 # ── Productivity ───────────────────────────────────────────────────────────────
 - id: calendar.included

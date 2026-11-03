@@ -3598,6 +3598,16 @@ None.
   several regions cite doesn't show to a person rather than proposing a change (section 6.4).
 - **Channels aren't resellers:** TV and mobility providers, app stores, Prime Video's channels and telecom plans that
   include a subscription are noted in the provider's file, never listed (section 4.9).
+- **AI, gaming and identity features** (feature-discovery, from Claude's, ChatGPT's, Gemini's, Xbox Game Pass's,
+  PlayStation Plus's, Bitdefender's and Norton's own pages):
+  - **AI:** `ai.coding-agent`, `ai.deep-research`, `ai.scheduled-tasks`, `ai.early-access`, `ai.api-credits` and
+    `ai.image-generation`.
+  - **Gaming**, a feature category of its own: `gaming.game-library`, `gaming.day-one`, `gaming.cloud-gaming` and
+    `gaming.online-multiplayer`.
+  - **Security:** `security.data-exposure`, `security.identity-restoration`, `security.credit-monitoring` and
+    `security.identity-theft-insurance`, with Bitdefender's US-only Ultimate Security Plus plans to add.
+  - **Perks moved:** Claude's and Xbox's perks for the same things became these features through `perk` redirects,
+    which move users' ranks. Usage multiples, priority access, EA Play and the like stay perks.
 
 **Resolved (2026-11-02, regional coverage, M11.7)**
 - **Mullvad VPN exits for regional prices** (the guide's §9, item 5): when a site shows this machine only Canada's

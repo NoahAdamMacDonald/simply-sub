@@ -71,6 +71,9 @@ perks:
 # Proton Lumo"; and a "Proton Lumo Free" list under Free, Mail Plus and Family. /support/lumo-getting-started: "Yes,
 # you can use Lumo for free with guest access or signed into a Proton Account." Proton Scribe is an "Add-on with free
 # trial" on Unlimited in /pricing's table, and included in Duo and Family (their perks).
+# Lumo's own price list (proton.me/lumo/pricing, read 2026-11-03, M11.9's AI features): Free has "Limited image
+# generations", so every plan has image generation. Free names no coding agent, research, scheduled tasks, early
+# access or API credits, and neither does Plus.
 # Renewal day (M11.5), read 2026-11-03 (M11.9): its terms and its subscription and invoices articles say only that a plan
 # renews at the end of its billing period, with the date on the Subscription page.
 renewalAnchor:
@@ -115,6 +118,7 @@ plans:
       email.aliases: 10
       calendar.included: true
       ai.assistant: true
+      ai.image-generation: true
       vpn.included: true
       vpn.devices: 1
       vpn.unlimited-traffic: true
@@ -153,6 +157,7 @@ plans:
       email.aliases: 10
       calendar.included: true
       ai.assistant: true
+      ai.image-generation: true
       vpn.included: true
       vpn.devices: 1
       vpn.unlimited-traffic: true
@@ -245,6 +250,7 @@ plans:
       email.aliases: 10
       calendar.included: true
       ai.assistant: true
+      ai.image-generation: true
       vpn.included: true
       vpn.devices: 1
       vpn.unlimited-traffic: true
@@ -338,6 +344,7 @@ plans:
       email.aliases: 10
       calendar.included: true
       ai.assistant: true
+      ai.image-generation: true
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
@@ -436,6 +443,7 @@ plans:
       email.aliases: unlimited
       calendar.included: true
       ai.assistant: true
+      ai.image-generation: true
       vpn.included: true
       vpn.devices: 1
       vpn.unlimited-traffic: true
@@ -553,6 +561,7 @@ plans:
       email.aliases: unlimited
       calendar.included: true
       ai.assistant: true
+      ai.image-generation: true
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
@@ -680,6 +689,7 @@ plans:
       email.aliases: unlimited
       calendar.included: true
       ai.assistant: true
+      ai.image-generation: true
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
@@ -807,6 +817,7 @@ plans:
       email.aliases: unlimited
       calendar.included: true
       ai.assistant: true
+      ai.image-generation: true
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true

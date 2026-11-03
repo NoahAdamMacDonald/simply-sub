@@ -1,9 +1,10 @@
 // M11.6 in the system Edge: ranked perks on the real catalog (data:build's files), for a Canadian in Alberta, with a
-// list, Games (Xbox Game Pass Ultimate and Premium), written to IndexedDB. In both themes at 1280 and 360 px, keyboard
-// only: Ultimate's ✎ → the dialog's rank groups end with Perks, closed → Enter opens it, its rows Ultimate's perks in
-// its order → Fortnite Crew Needed and Online console multiplayer Wanted by typeahead → Save → the draft: both on
-// Ultimate, only Online console multiplayer shared to Premium, which hasn't Fortnite Crew → Save the list → the list
-// view's summary names them ("Fortnite Crew: 1 / 1", "Online console multiplayer: 2 / 2") → Optimizations suggests
+// list, Games (Xbox Game Pass Ultimate, PC Game Pass and Premium), written to IndexedDB. Premium ranks Online console
+// multiplayer, a perk until M11.9 moved it to gaming.online-multiplayer, so the app moves the rank to the feature (its
+// redirect). In both themes at 1280 and 360 px, keyboard only: Ultimate's ✎ → the dialog's rank groups end with Perks,
+// closed → Enter opens it, its rows Ultimate's perks in its order → Fortnite Crew Needed and EA Play Wanted by
+// typeahead → Save → the draft: both on Ultimate, only EA Play shared to PC Game Pass, which hasn't Fortnite Crew → Save
+// the list → the list view's summary names them ("Fortnite Crew: 1 / 1", "EA Play: 2 / 2") → Optimizations suggests
 // nothing that drops Ultimate → Search's Ultimate counts them. With axe (the Perks group open, the list view,
 // Optimizations), screenshots and no horizontal scroll. GET /fx is answered with fixed rates.
 // Usage: node check-m11-perks.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
@@ -32,8 +33,12 @@ const LIST = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4e';
 const ULTIMATE = '0192f1c5-1c2d-7e3f-8a4b-5c6d7e8f9a1b';
 const PREMIUM = '0192f1c5-1c2d-7e3f-8a4b-5c6d7e8f9a1c';
 const stamps = { createdAt: '2026-10-20T12:00:00.000Z', updatedAt: '2026-10-20T12:00:00.000Z' };
+const PC = '0192f1c5-1c2d-7e3f-8a4b-5c6d7e8f9a1d';
 const CREW = 'perk:xbox-game-pass/fortnite-crew';
+const EA = 'perk:xbox-game-pass/ea-play';
+// A perk until M11.9, which moved it to a feature (data/redirects.yaml).
 const ONLINE = 'perk:xbox-game-pass/online-multiplayer';
+const MULTIPLAYER = 'gaming.online-multiplayer';
 
 const cadRates = { CHF: 0.581, EUR: 0.6372, GBP: 0.5571, SEK: 7.097, USD: 0.7243 };
 function fxBody(base) {
@@ -121,12 +126,13 @@ function idb(page, store, mode, value) {
 const readTable = (page, table) => idb(page, table, 'readonly');
 const putRecord = (page, table, record) => idb(page, table, 'readwrite', record);
 
-/** Games: Xbox Game Pass Ultimate and Premium, billed monthly, ranking nothing yet. */
+/** Games: Xbox Game Pass Ultimate, PC Game Pass and Premium, billed monthly; Premium ranks the moved perk. */
 async function plantList(page) {
   await putRecord(page, 'lists', { id: LIST, name: 'Games', ...stamps });
-  for (const [id, planId] of [
-    [ULTIMATE, 'xbox-game-pass.ultimate'],
-    [PREMIUM, 'xbox-game-pass.premium'],
+  for (const [id, planId, rankOverrides] of [
+    [ULTIMATE, 'xbox-game-pass.ultimate', {}],
+    [PC, 'xbox-game-pass.pc-game-pass', {}],
+    [PREMIUM, 'xbox-game-pass.premium', { [ONLINE]: 'wanted' }],
   ]) {
     await putRecord(page, 'items', {
       id,
@@ -140,7 +146,7 @@ async function plantList(page) {
         autoRenew: true,
       },
       tagIds: [],
-      rankOverrides: {},
+      rankOverrides,
       pinned: false,
       ...stamps,
     });
@@ -243,21 +249,20 @@ async function rankValue(page, name) {
           `${label}: Tab and Enter open it, listing Ultimate's perks in its order`,
           toPerks >= 0 &&
             (await toggle.getAttribute('aria-expanded')) === 'true' &&
-            rows.join(' | ') ===
-              '400+ games on console, PC and more devices | New games on day one | EA Play | Fortnite Crew | Ubisoft+ Classics | Cloud playtime, 15 hours a month | Online console multiplayer',
+            rows.join(' | ') === 'EA Play | Fortnite Crew | Ubisoft+ Classics',
           rows.join(' | '),
         );
         await keyTo(page, onRank('Fortnite Crew'));
         await page.keyboard.type('N');
         await sleep(400);
-        await keyTo(page, onRank('Online console multiplayer'));
+        await keyTo(page, onRank('EA Play'));
         await page.keyboard.type('W');
         await sleep(400);
         check(
-          `${label}: typeahead ranks Fortnite Crew Needed and Online console multiplayer Wanted`,
+          `${label}: typeahead ranks Fortnite Crew Needed and EA Play Wanted`,
           (await rankValue(page, 'Fortnite Crew')) === 'Needed' &&
-            (await rankValue(page, 'Online console multiplayer')) === 'Wanted',
-          `${await rankValue(page, 'Fortnite Crew')} / ${await rankValue(page, 'Online console multiplayer')}`,
+            (await rankValue(page, 'EA Play')) === 'Wanted',
+          `${await rankValue(page, 'Fortnite Crew')} / ${await rankValue(page, 'EA Play')}`,
         );
         await page.screenshot({
           path: path.join(outDir, `dialog-perks-${colorScheme}-${viewport.width}.png`),
@@ -279,14 +284,26 @@ async function rankValue(page, name) {
         await itemDialog(page).waitFor({ state: 'detached' });
         await sleep(500);
         const draft = (await readTable(page, 'drafts')).find((entry) => entry.listId === LIST);
+        // Ranks as sorted entries: what an item ranks, whatever order they were set in.
         const ranksOf = (id) =>
-          draft?.items.find((entry) => entry.item.id === id)?.item.rankOverrides;
+          JSON.stringify(
+            Object.entries(
+              draft?.items.find((entry) => entry.item.id === id)?.item.rankOverrides ?? {},
+            ).sort(),
+          );
         check(
-          `${label}: Ultimate keeps both; Premium gets Online console multiplayer, not Fortnite Crew it hasn't`,
-          JSON.stringify(ranksOf(ULTIMATE)) ===
-            JSON.stringify({ [CREW]: 'needed', [ONLINE]: 'wanted' }) &&
-            JSON.stringify(ranksOf(PREMIUM)) === JSON.stringify({ [ONLINE]: 'wanted' }),
-          `${JSON.stringify(ranksOf(ULTIMATE))} / ${JSON.stringify(ranksOf(PREMIUM))}`,
+          `${label}: Ultimate keeps both; PC Game Pass gets EA Play, not Fortnite Crew it hasn't`,
+          ranksOf(ULTIMATE) ===
+            JSON.stringify([
+              [EA, 'wanted'],
+              [CREW, 'needed'],
+            ]) && ranksOf(PC) === JSON.stringify([[EA, 'wanted']]),
+          `${ranksOf(ULTIMATE)} / ${ranksOf(PC)}`,
+        );
+        check(
+          `${label}: Premium's rank of Online console multiplayer, a perk until M11.9, is on the feature now`,
+          ranksOf(PREMIUM) === JSON.stringify([[MULTIPLAYER, 'wanted']]),
+          ranksOf(PREMIUM),
         );
 
         // ── Save, then the list view's summary ─────────────────────────────────────────────────────────
@@ -303,8 +320,7 @@ async function rankValue(page, name) {
           );
         check(
           `${label}: the list's summary names the ranked perks, as many items as have them`,
-          summary.includes('Fortnite Crew: 1 / 1') &&
-            summary.includes('Online console multiplayer: 2 / 2'),
+          summary.includes('Fortnite Crew: 1 / 1') && summary.includes('EA Play: 2 / 2'),
           summary.join(' | '),
         );
         await page.screenshot({

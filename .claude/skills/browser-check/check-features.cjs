@@ -34,6 +34,8 @@ const CATEGORIES = [
   'Email',
   'Security & passwords',
   'AI',
+  // M11.9's gaming features.
+  'Gaming',
   'Productivity & calendar',
   'Apps, languages & support',
   'Accounts & sharing',

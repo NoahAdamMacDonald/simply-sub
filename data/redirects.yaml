@@ -8,3 +8,41 @@
 # M11.4: Ad free, renamed to reuse it beyond streaming. Users' ranks move to ad-free, and old links' f= and
 # feature= read as ad-free.
 - { kind: feature, from: streaming.ad-free, to: ad-free, on: 2026-11-02 }
+# M11.9 (the owner's choices of 2026-11-03): perks that features now describe. Users' ranks move to the features'.
+- { kind: perk, from: perk:claude/claude-code, to: ai.coding-agent, on: 2026-11-03 }
+- { kind: perk, from: perk:claude/api-credits-100, to: ai.api-credits, on: 2026-11-03 }
+- { kind: perk, from: perk:claude/api-credits-200, to: ai.api-credits, on: 2026-11-03 }
+- { kind: perk, from: perk:xbox-game-pass/games-50, to: gaming.game-library=50+, on: 2026-11-03 }
+- { kind: perk, from: perk:xbox-game-pass/games-200, to: gaming.game-library=200+, on: 2026-11-03 }
+- { kind: perk, from: perk:xbox-game-pass/games-400, to: gaming.game-library=400+, on: 2026-11-03 }
+- {
+    kind: perk,
+    from: perk:xbox-game-pass/pc-games-300,
+    to: gaming.game-library=300+,
+    on: 2026-11-03,
+  }
+- { kind: perk, from: perk:xbox-game-pass/day-one-games, to: gaming.day-one, on: 2026-11-03 }
+- {
+    kind: perk,
+    from: perk:xbox-game-pass/cloud-5-hours,
+    to: gaming.cloud-gaming=1+,
+    on: 2026-11-03,
+  }
+- {
+    kind: perk,
+    from: perk:xbox-game-pass/cloud-10-hours,
+    to: gaming.cloud-gaming=10+,
+    on: 2026-11-03,
+  }
+- {
+    kind: perk,
+    from: perk:xbox-game-pass/cloud-15-hours,
+    to: gaming.cloud-gaming=15+,
+    on: 2026-11-03,
+  }
+- {
+    kind: perk,
+    from: perk:xbox-game-pass/online-multiplayer,
+    to: gaming.online-multiplayer,
+    on: 2026-11-03,
+  }

@@ -406,16 +406,15 @@ async function typeRenewal(page, date) {
         });
         await axeCheck(page, `${label}, Netflix's Billing day with its tooltip`);
 
-        // ── Bitdefender: its renewal day waits for M11.9, and it has no source code ─────────────────
+        // ── Bitdefender: a Billing day since M11.9 (each anniversary), and no source code ────────────
         const bitdefender = await details(page, 'Bitdefender');
         const bitdefenderHeadings = await bitdefender
           .locator('ss-plan-details h3')
           .allTextContents();
         check(
-          `${label}: Bitdefender has neither a Billing day nor Source code`,
-          !bitdefenderHeadings.includes('Billing day') &&
-            !bitdefenderHeadings.includes('Source code') &&
-            bitdefenderHeadings.at(-1) === 'Ways to pay',
+          `${label}: Bitdefender has a Billing day but no Source code`,
+          bitdefenderHeadings.at(-1) === 'Billing day' &&
+            !bitdefenderHeadings.includes('Source code'),
           bitdefenderHeadings.join(', '),
         );
         const width = await page.evaluate(() => document.documentElement.scrollWidth);

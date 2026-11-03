@@ -47,33 +47,20 @@ owner:
 
 # Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their
 # words. Ultimate's "EA Play, Fortnite Crew and Ubisoft+ Classics" is three, since PC Game Pass has EA Play.
+# The library's size, day one games, cloud playtime and online multiplayer are features since M11.9
+# (data/redirects.yaml), read 2026-11-03 on xbox.com/en-CA/xbox-game-pass: "50+ games", "200+ games", "400+ games"
+# ("500+" on the US page) and PC's "300+ games playable on PC only"; "New games on day one" on Ultimate and PC; "Cloud
+# playtime (5 hours/month)", 10 and 15, "Not included with PC Game Pass"; "Online console multiplayer" on the three
+# console plans.
 perks:
-  - id: games-50
-    name: 50+ games on console, PC and more devices
-  - id: games-200
-    name: 200+ games on console, PC and more devices
-  - id: games-400
-    name: 400+ games on console, PC and more devices
-  - id: pc-games-300
-    name: 300+ games on PC only
   - id: xbox-games-within-a-year
     name: New Xbox-published games within a year of launch
-  - id: day-one-games
-    name: New games on day one
   - id: ea-play
     name: EA Play
   - id: fortnite-crew
     name: Fortnite Crew
   - id: ubisoft-classics
     name: Ubisoft+ Classics
-  - id: cloud-5-hours
-    name: Cloud playtime, 5 hours a month
-  - id: cloud-10-hours
-    name: Cloud playtime, 10 hours a month
-  - id: cloud-15-hours
-    name: Cloud playtime, 15 hours a month
-  - id: online-multiplayer
-    name: Online console multiplayer
 
 # Renewal day (M11.5), read 2026-11-03 (M11.9): its subscription terms, Microsoft's terms of sale and Xbox's billing
 # articles say only that it renews and changes on "your next renewal date", not which day that is.
@@ -100,8 +87,10 @@ plans:
   - id: xbox-game-pass.essential
     name: Essential
     link: https://www.xbox.com/en-CA/xbox-game-pass
-    features: {}
-    perks: [games-50, cloud-5-hours, online-multiplayer]
+    features:
+      gaming.game-library: 50
+      gaming.cloud-gaming: 5
+      gaming.online-multiplayer: true
     prices:
       - region: CA
         currency: CAD
@@ -155,8 +144,11 @@ plans:
   - id: xbox-game-pass.premium
     name: Premium
     link: https://www.xbox.com/en-CA/xbox-game-pass
-    features: {}
-    perks: [games-200, xbox-games-within-a-year, cloud-10-hours, online-multiplayer]
+    features:
+      gaming.game-library: 200
+      gaming.cloud-gaming: 10
+      gaming.online-multiplayer: true
+    perks: [xbox-games-within-a-year]
     prices:
       - region: CA
         currency: CAD
@@ -210,15 +202,12 @@ plans:
   - id: xbox-game-pass.ultimate
     name: Ultimate
     link: https://www.xbox.com/en-CA/xbox-game-pass
-    features: {}
-    perks:
-      - games-400
-      - day-one-games
-      - ea-play
-      - fortnite-crew
-      - ubisoft-classics
-      - cloud-15-hours
-      - online-multiplayer
+    features:
+      gaming.game-library: 400
+      gaming.day-one: true
+      gaming.cloud-gaming: 15
+      gaming.online-multiplayer: true
+    perks: [ea-play, fortnite-crew, ubisoft-classics]
     prices:
       - region: CA
         currency: CAD
@@ -272,8 +261,11 @@ plans:
   - id: xbox-game-pass.pc-game-pass
     name: PC Game Pass
     link: https://www.xbox.com/en-CA/xbox-game-pass
-    features: { platforms: [windows] }
-    perks: [pc-games-300, day-one-games, ea-play]
+    features:
+      platforms: [windows]
+      gaming.game-library: 300
+      gaming.day-one: true
+    perks: [ea-play]
     prices:
       - region: CA
         currency: CAD
