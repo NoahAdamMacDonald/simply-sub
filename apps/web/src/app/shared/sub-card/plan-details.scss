@@ -260,6 +260,11 @@ h4 {
   color: var(--ss-text-muted);
 }
 
+// A group's next line (the currencies after the ways to pay, M11.5), spaced like Outside ratings' lines.
+.payment + .payment {
+  margin-top: 4px;
+}
+
 .subject {
   font-weight: 600;
 }

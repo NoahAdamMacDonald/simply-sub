@@ -104,6 +104,18 @@ API contract's prices are illustrative and never a source. This skill is how to 
     page or terms, for cards, PayPal, Apple and Google Pay, app stores, gift cards, a bank, cash, crypto and a TV,
     internet or phone provider's bill, each named in a quote; an entry per country page when they differ (Netflix's
     Canada and US). Look for the alternatives (cash by post, crypto, vouchers): a provider that takes them says so.
+  - **Currencies beyond its prices** (`currencies`, M11.5): when a page says it takes currencies its price lists
+    don't show (Mullvad's cash by post in nine, a checkout that charges in the buyer's own), each code named in a
+    quote (its code, name or sign: `€`, `CA$`; a bare `$` names none), with the ways to pay that take them. Leave it
+    out when it takes only its prices' currencies. A dated post a newer checkout contradicts isn't used.
+  - **The day it renews on** (`renewalAnchor`, M11.5), for a provider whose paid plans renew by the month or year:
+    its terms and billing help (a "billing date" article), quoted: `same-date` (the date you signed up, a shorter
+    month's last day when it has no such date), `every-30-days` (then its months are priced `day` × 30),
+    `first-of-month` or `end-of-month`; `kind: not-stated` with the `pages` read when none says. The item dialog
+    suggests a new item's renewal from it and asks "Billed on…" only when it doesn't settle that.
+  - **Source code** (`sourceRepo`, M11.5): when its own pages say its code is open (an "Open source" page, its
+    downloads' "Source code" link), the repository that page links, quoted, with `software.open-source` provider-wide
+    (open-source apps when the apps are; fully open only when the servers' code is published too).
 - **Report what you couldn't verify**, each with the reason (geo-blocked, not stated, conflicting).
 
 ## Which tool

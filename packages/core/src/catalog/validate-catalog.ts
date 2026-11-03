@@ -110,11 +110,32 @@ const policyStaleAfterDays = 365;
  */
 export const awaitingPolicyRegrade: ReadonlySet<string> = new Set<string>();
 
+/**
+ * Providers from before M11.5 whose renewal day isn't read yet: a missing renewalAnchor is a warning for them until
+ * M11.9 reads their terms and billing help, and an error for every other provider whose paid plans renew by the month
+ * or year. Netflix's was read with M11.5; Mullvad is prepaid, so it has none to give.
+ */
+export const awaitingRenewalAnchor: ReadonlySet<string> = new Set([
+  'bitdefender',
+  'claude',
+  'crave',
+  'disney-plus',
+  'espn',
+  'hulu',
+  'ici-tou-tv',
+  'proton',
+  'rds',
+  'tsn',
+  'xbox-game-pass',
+]);
+
 export interface ValidateOptions {
   /** Providers whose missing policy topics are warnings, not errors: awaitingPolicyRegrade unless a test says. */
   awaitingRegrade?: ReadonlySet<string>;
   /** Plans whose missing required features are warnings: awaitingRequiredFeatures unless a test says. */
   awaitingRequired?: ReadonlyMap<string, readonly string[]>;
+  /** Providers whose missing renewalAnchor is a warning: awaitingRenewalAnchor unless a test says. */
+  awaitingRenewal?: ReadonlySet<string>;
 }
 
 /**
@@ -129,6 +150,7 @@ export function validateCatalog(
   {
     awaitingRegrade = awaitingPolicyRegrade,
     awaitingRequired = awaitingRequiredFeatures,
+    awaitingRenewal = awaitingRenewalAnchor,
   }: ValidateOptions = {},
 ): CatalogIssue[] {
   const issues: CatalogIssue[] = [];
@@ -256,6 +278,7 @@ export function validateCatalog(
     policyTopics: policyTopics && new Map(policyTopics.map((topic) => [topic.id, topic])),
     awaitingRegrade,
     awaitingRequired,
+    awaitingRenewal,
     policySets: new Map(policySets.map(({ value }) => [value.id, value])),
     policySetsUnchecked,
     raters: new Map(raters?.map((rater) => [rater.id, rater])),
@@ -570,6 +593,7 @@ interface CheckContext {
   policyTopics: ReadonlyMap<string, PolicyTopic> | undefined;
   awaitingRegrade: ReadonlySet<string>;
   awaitingRequired: ReadonlyMap<string, readonly string[]>;
+  awaitingRenewal: ReadonlySet<string>;
   /** data/policies/'s shared documents that parse, by id. */
   policySets: ReadonlyMap<string, PolicySet>;
   /** The ids of shared documents whose file is broken: what names them goes unchecked. */
@@ -740,6 +764,9 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
   }
   checkOwner(provider, own, context, report);
   checkPaymentMethods(provider, own, report);
+  checkRenewalAnchor(provider, own, context, report);
+  checkCurrencies(provider, own, context, report);
+  checkSourceRepo(provider, own, context, report);
 }
 
 /**
@@ -783,6 +810,176 @@ function checkPaymentMethods(provider: Provider, own: readonly string[], report:
       );
     }
   });
+}
+
+/**
+ * Whether a provider has a paid plan still sold that renews by itself by the month or year, so the day it renews on
+ * decides its item's charges (M11.5): a prepaid service and a free one don't.
+ */
+function renewsMonthly(provider: Provider): boolean {
+  return provider.plans.some(
+    (plan) =>
+      plan.retired === undefined &&
+      plan.prices.some(
+        (price) =>
+          price.retired === undefined &&
+          price.autoRenew &&
+          price.amount > 0 &&
+          (price.interval === 'month' || price.interval === 'year'),
+      ),
+  );
+}
+
+/**
+ * The day a provider renews on (M11.5): every provider whose paid plans renew by the month or year says, from its own
+ * pages (or that they don't say), the 13 from before M11.5 warning until M11.9 reads theirs. A provider that renews
+ * every 30 days prices its months as 30 days.
+ */
+function checkRenewalAnchor(
+  provider: Provider,
+  own: readonly string[],
+  { today, awaitingRenewal }: CheckContext,
+  report: Report,
+): void {
+  const anchor = provider.renewalAnchor;
+  if (!anchor) {
+    if (provider.retired === undefined && renewsMonthly(provider)) {
+      report(
+        [],
+        'Say which day it renews on, quoted from its terms or billing help (renewalAnchor), or that they don’t say (kind: not-stated)',
+        awaitingRenewal.has(provider.id) ? 'warning' : 'error',
+      );
+    }
+    return;
+  }
+  const sites = ownPages(provider, own);
+  const pages =
+    anchor.kind === 'not-stated'
+      ? anchor.pages.map((url, index) => ({ url, path: ['renewalAnchor', 'pages', index] }))
+      : [{ url: anchor.url, path: ['renewalAnchor', 'url'] }];
+  for (const { url, path } of pages) {
+    if (!isOnDomain(url, sites)) {
+      report(
+        path,
+        `Must be a page of ${provider.name}'s own sites, its policies' or its owner's (${sites.join(', ')})`,
+      );
+    }
+  }
+  checkReadOn(anchor.lastVerified, ['renewalAnchor', 'lastVerified'], today, report);
+  if (anchor.kind !== 'every-30-days') return;
+  provider.plans.forEach((plan, planIndex) =>
+    plan.prices.forEach((price, index) => {
+      if (price.autoRenew && price.interval === 'month' && price.intervalCount === 1) {
+        report(
+          ['plans', planIndex, 'prices', index, 'interval'],
+          'It renews every 30 days (renewalAnchor): price its months as interval day, intervalCount 30',
+        );
+      }
+    }),
+  );
+}
+
+/** A page's lastVerified: not after today, and a warning once it's a year old, like a policy's. */
+function checkReadOn(
+  lastVerified: IsoDate,
+  path: (string | number)[],
+  today: IsoDate,
+  report: Report,
+): void {
+  if (lastVerified > today) {
+    report(path, `${lastVerified} is after today (${today})`);
+  } else if (addDays(lastVerified, policyStaleAfterDays) < today) {
+    report(path, `Read on ${lastVerified}, over a year ago: read the page again`, 'warning');
+  }
+}
+
+/**
+ * The currencies a provider takes beyond its price lists (M11.5): quoted from its own pages, for the ways to pay it
+ * lists.
+ */
+function checkCurrencies(
+  provider: Provider,
+  own: readonly string[],
+  { currencies }: CheckContext,
+  report: Report,
+): void {
+  if (!provider.currencies) return;
+  const sites = ownPages(provider, own);
+  const methods = new Set(provider.paymentMethods?.flatMap((entry) => entry.methods) ?? []);
+  provider.currencies.forEach((entry, index) => {
+    entry.regions?.forEach((region, item) => {
+      if (!isCatalogRegion(region)) {
+        report(['currencies', index, 'regions', item], regionProblem(region));
+      }
+    });
+    entry.codes.forEach((code, item) => {
+      if (!currencies.has(code)) {
+        report(
+          ['currencies', index, 'codes', item],
+          `"${code}" isn't a real ISO 4217 currency code`,
+        );
+      }
+    });
+    entry.methods?.forEach((method, item) => {
+      if (provider.paymentMethods && !methods.has(method)) {
+        report(
+          ['currencies', index, 'methods', item],
+          `${provider.name}'s paymentMethods don't list ${method}: list it there, quoted, or leave it out here`,
+        );
+      }
+    });
+    if (!isOnDomain(entry.url, sites)) {
+      report(
+        ['currencies', index, 'url'],
+        `Must be a page of ${provider.name}'s own sites, its policies' or its owner's (${sites.join(', ')})`,
+      );
+    }
+  });
+}
+
+/** software.open-source's values from which a provider's apps' code is open: a repository link is then needed. */
+const openSourceValues: ReadonlySet<string> = new Set(['open-clients', 'fully-open']);
+
+/**
+ * Where a provider's source code is (M11.5): its own page links it, and it goes with software.open-source, a provider
+ * whose apps are open (open-source apps or fully open) linking it, and one that links it saying how open it is.
+ */
+function checkSourceRepo(
+  provider: Provider,
+  own: readonly string[],
+  { today }: CheckContext,
+  report: Report,
+): void {
+  const values = new Set(
+    provider.plans.flatMap((plan) => {
+      const value = planFeatures(plan, provider)['software.open-source'];
+      return typeof value === 'string' ? [value] : [];
+    }),
+  );
+  const repo = provider.sourceRepo;
+  if (!repo) {
+    if ([...values].some((value) => openSourceValues.has(value))) {
+      report(
+        [],
+        'Its apps are open source (software.open-source): link the repository its own page links, in sourceRepo',
+      );
+    }
+    return;
+  }
+  if (values.size === 0 || [...values].every((value) => value === 'proprietary')) {
+    report(
+      ['sourceRepo'],
+      'A repository link needs software.open-source saying how open its code is (source-available or more)',
+    );
+  }
+  const sites = ownPages(provider, own);
+  if (!isOnDomain(repo.page.url, sites)) {
+    report(
+      ['sourceRepo', 'page', 'url'],
+      `Must be a page of ${provider.name}'s own sites, its policies' or its owner's (${sites.join(', ')})`,
+    );
+  }
+  checkReadOn(repo.lastVerified, ['sourceRepo', 'lastVerified'], today, report);
 }
 
 /**
@@ -879,15 +1076,7 @@ function checkOwner(
       `Must be a page of ${provider.name}'s own sites, its policies' or its owner's (${sites.join(', ')}): give the owner's site in website when the page is there`,
     );
   }
-  if (owner.lastVerified > today) {
-    report(['owner', 'lastVerified'], `${owner.lastVerified} is after today (${today})`);
-  } else if (addDays(owner.lastVerified, policyStaleAfterDays) < today) {
-    report(
-      ['owner', 'lastVerified'],
-      `Read on ${owner.lastVerified}, over a year ago: read the page again`,
-      'warning',
-    );
-  }
+  checkReadOn(owner.lastVerified, ['owner', 'lastVerified'], today, report);
 }
 
 /** A rater no provider shows gets a warning: it's either missing from a provider file or no longer needed. */

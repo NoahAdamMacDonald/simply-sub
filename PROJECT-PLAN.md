@@ -1307,6 +1307,61 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
     `cat=vpn` keeps Bitdefender too since M11.3; its step this task changed (Ad free no longer under More in
     Streaming) is updated.
 
+**M11.5 — Provider facts** (BLUEPRINT §4.3, §4.10, the guide's §3.1)
+- **`renewalAnchor`:** the day a provider renews on (the date you signed up, every 30 days, the 1st or the last day of
+  each month), quoted from its terms or billing help, or `not-stated` with the pages read; required of a provider
+  whose paid plans renew by the month or year.
+- **`currencies`:** currencies it takes beyond its price lists, each named in its quotes, for the ways to pay that
+  take them.
+- **`sourceRepo`:** where its source code is, as its own page links it, with `software.open-source`.
+- **The item dialog** suggests a new item's renewal by the provider's day and asks "Billed on the 30th or 31st?" only
+  when its terms don't settle it (the owner's TODO, 2026-10-30).
+- **All on the card,** and read by price-research and the pipeline's extraction.
+- **Acceptance**
+  - [x] Mullvad shows cash and crypto with their quotes (its Ways to pay, since 2026-11-02; its cash currencies too)
+  - [x] A new item of a plan that renews on the 1st is billed on the 1st (core's `newItemForm` and the item dialog's
+        spec on a fixture: no catalog provider bills on the 1st)
+- **As built** (2026-11-02; `paymentMethods` was pulled forward with the owners, so this task kept the other three):
+  - **Schema** (core's `provider.ts` and the Zod-free `provider-facts.ts`): `renewalAnchorSchema`, a discriminated
+    union on `kind` (a kind with `page`, `url`, one to three `quotes` and `lastVerified`, or `not-stated` with
+    `pages`), whose quotes must say the kind (`namesRenewalAnchor`, English and French); `currenciesEntrySchema`
+    (`codes`, optional `methods` and `regions`, `page`, `url`, `quotes` naming each code by its code, name or sign,
+    `namesCurrency`; "$" and "kr" name none); `sourceRepoSchema` (`url`, `page` with its `name` and `url`, `quotes`,
+    `lastVerified`). `data/schema/` regenerated.
+  - **Validation:** a missing `renewalAnchor` is an error for a provider not retired with a paid, auto-renewing price
+    still sold in months or years, a warning for the 11 in core's `awaitingRenewalAnchor` until M11.9; every fact's
+    page on the provider's own sites, its policies' or its owner's; `every-30-days` refuses a monthly price that
+    auto-renews; `currencies` refuses an unreal code and a way to pay `paymentMethods` don't list; open-source apps or
+    fully open (`software.open-source`) need a `sourceRepo`, and a `sourceRepo` needs a value above closed source;
+    a read date after today fails, and a year-old one warns (the owner's check now shares it).
+  - **Decided while building it:** the kinds are the guide's four, `every-30-days` kept as a quoted fact that holds
+    the prices to `day` × 30. The defaults: the next 1st, and the next month's end, whatever the period (billing on a
+    calendar day prorates the first part); for the date you signed up, one period from today as before. The question
+    stays for a date the user enters (only they know the day they signed up) and for an item being changed; an
+    end-of-month provider settles any date. `currencies` is optional: most providers take only their prices'
+    currencies, which the prices show. Mullvad's 2023 post naming four card currencies is out of date (its checkout
+    offered about 20 on 2026-10-26, BLUEPRINT §14) and no page lists them now, so only its cash currencies are in.
+  - **Data:** Netflix's renewal day (`same-date`, its help centre's billing date article); Mullvad's cash currencies
+    (its terms), `software.open-source: open-clients` (its "Code is open source" for the app on every platform; the
+    servers' code isn't published) and its app's repository. The other 11 wait for M11.9.
+  - **The card:** Ways to pay adds each currencies entry for the user's country, then Billing day and Source code, each
+    citing its page with the quotes as the tooltip; a not-stated day is "Not stated: its pages don't say". Its lines
+    are built in the component: an object literal of three in the template needed Angular's `ɵɵpureFunction3`, which
+    no template used, and its export from the initial chunk put the initial bundle 81 bytes over its 500 kB budget
+    (no module moved); it's 499.76 kB.
+  - **The pipeline:** the extraction answer takes `paymentMethods`, `currencies`, `renewalAnchor` and `sourceRepo`, kept
+    only as far as their checked quotes go (a repository only when a page shows its address); the rules ask for them,
+    and Workers AI's policies part reads the renewal day. `citedPages` and `citedFacts` cite the new pages (currencies
+    as pricing, the rest as policies), and `quote-check.cjs` checks the provider facts' quotes, `facts` for only those.
+  - **Skills:** price-research's every-time checks read the three; policy-research's quote check covers the facts;
+    feature-discovery's open-source value needs a repository.
+  - **Tests:** core (the schemas, the words for each kind and currency, the validation, `defaultRenewal`,
+    `settledBillingDay` and `renewalAfterPeriodChange` by the provider's day, the extraction and the baselines), the
+    item dialog (the 1st, a month's end without asking, a typed date still asked) and the card's three groups.
+  - **Browser:** `check-m11-facts.cjs` (browser-check skill): 93 checks in both themes at both widths, by keyboard, with
+    axe: the card's three groups, and the dialog with `CA.json` answered so Crave bills on the 1st and TSN on the last
+    day. `check-m11-outside.cjs` (73) follows Mullvad's new groups; `check-item-dialog.cjs` (97) passes as it was.
+
 **M11.6 — Ranked perks** (BLUEPRINT §4.2)
 ```yaml
 # data/providers/xbox-game-pass.yaml (a sketch)
@@ -2116,6 +2171,7 @@ BLUEPRINT §14 has the rest.
 - **Extra members:** add-ons of the selected plan, with quantity up to `addOnLimit`.
 - **Billed:** only intervals the plan has prices for (custom plans: any interval and count).
 - **Next renewal** (= `anchorDate`): required for Ongoing. Defaults to one interval from today, with the hint "Check your account page for the exact date". For month and year intervals, when the date is the last day of a month shorter than 31 days, a choice appears: "Billed on the 28th" or "the 29th / 30th / 31st (the last day in shorter months)", which sets `billingDay` (§3.1). The default from today keeps today's day (added on Jan 31 → Feb 28 with `billingDay: 31`).
+  Since M11.5 the default follows the day its provider renews on (`renewalAnchor`): the next 1st for one that bills on the 1st, the next month's end (billed on the 31st) for one that bills on the last day. A new item isn't asked "Billed on…" when that settles it: every month's last day, or the suggested date's own day for a provider that bills on the date you signed up. A date the user enters is still theirs to say, and so is every date for a provider whose pages don't say, or an item being changed.
 - **Auto-renews:** shown only when the price's `autoRenew` is true. Otherwise a note says "This plan renews manually — we'll remind you".
 - **Free plans:** when the picked price is 0, Billed, Next renewal, Auto-renews and the price override are hidden, and so is the Ongoing / Specific dates choice. The item is saved as Ongoing, with today as the anchor date (an item being changed keeps its own).
 - **Specific dates:** at least one window; each end must be after its start; windows can't overlap. Two that share a

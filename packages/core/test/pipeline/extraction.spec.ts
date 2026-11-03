@@ -478,6 +478,195 @@ describe('the request', () => {
     expect(merged.plans).toHaveLength(2);
     expect(merged.policies).toHaveLength(1);
   });
+
+  it('asks the plans for the ways to pay and the policies for the renewal day, and merges them (M11.5)', () => {
+    const [plans, policies] = extractionParts(context(), 1_000);
+    expect(plans.user).toContain('paymentMethods, currencies, sourceRepo');
+    expect(policies.user).toContain('Fill in policies and renewalAnchor only');
+    expect(extractionRules).toContain('"renewalAnchor": which day a paid plan renews on');
+    const anchor = { kind: 'not-stated' as const, quotes: [] };
+    const merged = mergeAnswers([
+      answer({ paymentMethods: [{ methods: ['card'], page: 'pricing', quotes: ['Visa'] }] }),
+      answer({ renewalAnchor: anchor }),
+    ]);
+    expect(merged.paymentMethods).toHaveLength(1);
+    expect(merged.renewalAnchor).toEqual(anchor);
+  });
+});
+
+describe('draftFromAnswer: provider facts (M11.5)', () => {
+  const paymentText =
+    'Ways to pay. Pay by credit card, PayPal or cash in an envelope in EUR, USD or CAD. ' +
+    'Your plan renews on the date you signed up, each month. ' +
+    'Our apps are open source: github.com/streamco/apps';
+  const factsContext = (): ExtractionContext => ({
+    ...context(),
+    pages: [
+      ...context().pages,
+      {
+        name: 'payment',
+        kind: 'payment',
+        url: 'https://help.streamco.example/payment',
+        text: paymentText,
+      },
+    ],
+  });
+  const ways = {
+    methods: ['card', 'paypal', 'crypto'],
+    page: 'payment',
+    quotes: ['Pay by credit card, PayPal or cash in an envelope'],
+  };
+
+  it('keeps the ways to pay, currencies, renewal day and repository its checked quotes show', () => {
+    const draft = draftFromAnswer(
+      answer({
+        paymentMethods: [{ ...ways, methods: [...ways.methods, 'cash'] }],
+        currencies: [
+          {
+            codes: ['eur', 'USD', 'CAD', 'GBP'],
+            methods: ['cash'],
+            page: 'payment',
+            quotes: ['cash in an envelope in EUR, USD or CAD'],
+          },
+        ],
+        renewalAnchor: {
+          kind: 'same-date',
+          page: 'payment',
+          quotes: ['Your plan renews on the date you signed up, each month.'],
+        },
+        sourceRepo: {
+          url: 'https://github.com/streamco/apps',
+          page: 'payment',
+          quote: 'Our apps are open source',
+        },
+      }),
+      factsContext(),
+    );
+
+    const provider = draft.provider;
+    // Crypto isn't named, and GBP isn't either.
+    expect(provider?.paymentMethods).toEqual([
+      {
+        methods: ['card', 'paypal', 'cash'],
+        page: 'Payment methods',
+        url: 'https://help.streamco.example/payment',
+        quotes: ['Pay by credit card, PayPal or cash in an envelope'],
+      },
+    ]);
+    expect(provider?.currencies).toEqual([
+      {
+        codes: ['EUR', 'USD', 'CAD'],
+        methods: ['cash'],
+        page: 'Payment methods',
+        url: 'https://help.streamco.example/payment',
+        quotes: ['cash in an envelope in EUR, USD or CAD'],
+      },
+    ]);
+    expect(provider?.renewalAnchor).toEqual({
+      kind: 'same-date',
+      page: 'Payment methods',
+      url: 'https://help.streamco.example/payment',
+      quotes: ['Your plan renews on the date you signed up, each month.'],
+      lastVerified: '2026-10-28',
+    });
+    expect(provider?.sourceRepo).toEqual({
+      url: 'https://github.com/streamco/apps',
+      page: { name: 'Payment methods', url: 'https://help.streamco.example/payment' },
+      quotes: ['Our apps are open source'],
+      lastVerified: '2026-10-28',
+    });
+    expect(providerSchema.safeParse({ ...provider, cancelUrl: provider?.cancelUrl }).success).toBe(
+      true,
+    );
+  });
+
+  it('drops a renewal day its quotes don’t say, and a repository no page shows', () => {
+    const draft = draftFromAnswer(
+      answer({
+        renewalAnchor: {
+          kind: 'first-of-month',
+          page: 'payment',
+          quotes: ['Your plan renews on the date you signed up, each month.'],
+        },
+        sourceRepo: {
+          url: 'https://gitlab.com/streamco/apps',
+          page: 'payment',
+          quote: 'Our apps are open source',
+        },
+      }),
+      factsContext(),
+    );
+
+    expect(draft.provider?.renewalAnchor).toBeUndefined();
+    expect(draft.provider?.sourceRepo).toBeUndefined();
+    expect(draft.issues).toEqual(
+      expect.arrayContaining([
+        {
+          kind: 'dropped',
+          subject: 'Billing day',
+          reason: 'Its checked quotes don’t say which day it renews on',
+        },
+        {
+          kind: 'dropped',
+          subject: 'Source code',
+          reason: 'No page shows its address in its words: add sourceRepo by hand from its link',
+        },
+      ]),
+    );
+  });
+
+  it('records not-stated with the billing pages read', () => {
+    const draft = draftFromAnswer(
+      answer({ renewalAnchor: { kind: 'not-stated' } }),
+      factsContext(),
+    );
+
+    expect(draft.provider?.renewalAnchor).toEqual({
+      kind: 'not-stated',
+      pages: [
+        'https://www.streamco.example/plans',
+        'https://help.streamco.example/cancel',
+        'https://www.streamco.example/terms',
+        'https://help.streamco.example/payment',
+      ],
+      lastVerified: '2026-10-28',
+    });
+  });
+
+  it('keeps one entry for everywhere and one per region, and currencies only for ways it takes', () => {
+    const draft = draftFromAnswer(
+      answer({
+        paymentMethods: [ways, ways, { ...ways, regions: ['UK'] }],
+        currencies: [
+          {
+            codes: ['EUR'],
+            methods: ['bank-transfer'],
+            page: 'payment',
+            quotes: ['in EUR, USD or CAD'],
+          },
+        ],
+      }),
+      factsContext(),
+    );
+
+    expect(draft.provider?.paymentMethods).toHaveLength(1);
+    expect(draft.provider?.currencies).toBeUndefined();
+    expect(draft.issues).toEqual(
+      expect.arrayContaining([
+        {
+          kind: 'dropped',
+          subject: 'Ways to pay',
+          reason: 'One entry for everywhere and one per region: the first is kept',
+        },
+        { kind: 'dropped', subject: 'Ways to pay in UK', reason: '"UK" isn\'t a region code' },
+        {
+          kind: 'dropped',
+          subject: 'Currencies EUR',
+          reason: 'Its ways to pay aren’t among those drafted',
+        },
+      ]),
+    );
+  });
 });
 
 describe('draftFromAnswer: official resellers', () => {

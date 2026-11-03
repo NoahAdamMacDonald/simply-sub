@@ -674,6 +674,19 @@ scroll. Wait for the suggestions to narrow before reading them: the whole list s
 `check-features.cjs` expects the Apps, languages & support card and ranks Kids profiles where it ranked Ad free, and
 `check-search.cjs`'s "video quality" suggestions no longer include Ad free.
 
+`check-m11-facts.cjs` (M11.5, provider facts) checks Search's cards and the item dialog on `ng serve` for a Canadian in
+Alberta (base URL ending in `/`, after `npm run data:build` on the branch), in both themes at both widths: Mullvad's
+Ways to pay with the currencies its cash takes ("Cash in EUR, USD … or NZD, according to its Terms of service"), then
+its Source code (the app's repository and the page that links it, each in a new tab, the page at its words), reached
+by Tab from the ways to pay's link with the pages' words as tooltips; Netflix's Billing day ("The date you signed up,
+according to its How to check your Netflix billing date"), reached by Tab after Ways to pay; Bitdefender with neither,
+its renewal day waiting for M11.9; the lines muted and the links the accent, underlined. Then the dialog, with
+`CA.json` answered so Crave bills on the 1st and TSN on the last day (no catalog provider does): Crave's suggested
+renewal is the next 1st, TSN's this month's end, neither asking "Billed on", nor TSN's typed Feb 28, which is saved
+billed on the 31st; Netflix (the date you signed up) suggests a month from today and still asks of a typed Feb 28. The
+expected dates come from the machine's date. With axe, screenshots and no horizontal scroll. Since M11.5
+`check-m11-outside.cjs` expects Mullvad's Source code after Ways to pay, and its currencies line.
+
 `check-after-m3.cjs` (the feedback after M3: M5.13, M6.17–M6.19, M7.11, M8.5, M8.6, M9.6) checks the batch on
 `ng serve` for a Canadian in Alberta, with Streaming (Crave Premium and Disney+ Premium) and Family (two Disney+
 Premium, Netflix Standard auto-renewing until an end date, Mullvad renewed by hand, and four more so it scrolls). In

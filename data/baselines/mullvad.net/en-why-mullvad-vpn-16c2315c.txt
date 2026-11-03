@@ -1,0 +1,188 @@
+url: https://mullvad.net/en/why-mullvad-vpn
+method: fetch
+saved: 2026-11-02
+
+Why Mullvad VPN?
+Skip to main content
+Products and services
+VPN
+Browser
+Browser extension
+Pricing
+Privacy
+Why privacy matters
+Technical resources
+Downloads
+Tech blog & news
+Open source
+Check for leaks
+Servers
+Help and support
+Guides
+FAQ
+VPN
+Browser
+Pricing
+Downloads
+Why privacy matters
+Log in Get started
+Why Mullvad VPN?
+We have put your privacy first since 2009. Let us present what you get with Mullvad VPN.
+What sets us apart
+Anonymous account
+We don’t ask for any personal info – not even your email – and we encourage anonymous payments with cash or cryptocurrency.
+No logging
+Your data is nobody else's business. That’s why we don’t log your activity. Learn more about our no-logging policy
+Externally audited
+We request independent audits of our app and infrastructure to provide transparency and improve our security practices.
+Safe jurisdiction
+The laws relevant to us as a VPN provider based in Sweden make our location a safe place for us and your privacy.
+Integrated kill switch
+If you have connectivity issues while Mullvad VPN is on, the built-in kill switch will automatically stop all network traffic.
+No paid reviews
+We steer clear of paid reviews and affiliates and instead let our track record speak for itself.
+In-house support team
+We don’t outsource our support. Our dedicated support team works together with our developers to give answers to your questions.
+Trailblazers
+We have pioneered many technologies and security features that are today regarded as standard practice. We also work in close collaboration with universities.
+Combats traffic analysis
+Even if you encrypt your traffic with a VPN, there is still a risk that your traffic can be analyzed. That's why we've developed DAITA (Defense Against AI-guided Traffic Analysis).
+Quantum-resistant VPN tunnels
+You can choose quantum resistant VPN tunnels on all our supported platforms. In case future quantum computers succeed in breaking today’s encryption.
+DNS queries through encrypted tunnel
+When you use Mullvad VPN, all your DNS queries (where website addresses are converted to IP addresses) will pass through the encrypted VPN tunnel.
+Multihop
+With our multihop feature you can route your traffic through two or more servers in different locations and separate jurisdictions.
+Features
+Windows
+macOS
+Linux
+Android
+iOS
+Externally audited
+✔ ✔ ✔ ✔ ✔
+Code is open source
+✔ ✔ ✔ ✔ ✔
+Split tunneling
+✔ ✔ ✔ ✔
+Custom DNS server
+✔ ✔ ✔ ✔ ✔
+Multihop
+✔ ✔ ✔ ✔ ✔
+WireGuard over QUIC
+✔ ✔ ✔ ✔ ✔
+Lightweight WireGuard Obfuscation (LWO)
+✔ ✔ ✔ ✔ ✔
+WireGuard over Shadowsocks
+✔ ✔ ✔ ✔ ✔
+WireGuard over TCP
+✔ ✔ ✔ ✔ ✔
+Automatic WireGuard key rotation
+✔ ✔ ✔ ✔ ✔
+In-app problem reporting
+✔ ✔ ✔ ✔ ✔
+DNS content blockers
+✔ ✔ ✔ ✔ ✔
+Quantum-resistant tunnels
+✔ ✔ ✔ ✔ ✔
+DAITA
+✔ ✔ ✔ ✔ ✔
+Split tunneling is only available on macOS 13 and later
+The technical stuff
+Curious about the protocols, primitives, and other details that Mullvad VPN is built on? Here you go!
+WireGuard implementations in the app
+We use different implementations of the WireGuard protocol depending on the platform and features used:
+Android: GotaTun
+iOS: wireguard-go*
+Linux: GotaTun or Linux kernel wireguard**
+macOS: GotaTun
+Windows: GotaTun or WireguardNT**
+* GotaTun will be released for iOS later this year.
+** The kernel implementation is used by default for performance. When features like DAITA or multihop are enabled, GotaTun is used instead.
+Read more about GotaTun here
+App API connection
+The app uses TLS 1.3, implemented in Rustls, to encrypt the communication with the API.
+This provides two features:
+The connection uses certificate pinning to prevent MitM attacks.
+To circumvent DNS spoofing, the app doesn’t use DNS to get the IP for the API.
+App firewall and security
+The app prevents leaks and enables the kill switch functionality by integrating with the system firewall (WFP on Windows, nftables on Linux, and PF on macOS). Learn more on our GitHub page
+App architecture
+To limit the amount of code running as a privileged user, the app is split into two parts:
+unprivileged frontends (including a CLI )
+a privileged system service which runs in the background and oversees tunnels and device security.
+Learn more on our GitHub page
+Servers
+In all of our servers, we have specified default configurations and orders of priority for encryption to provide the strongest encryption available for each tunnel protocol.
+WireGuard servers
+WireGuard is opinionated and offers only one set of cryptographic primitives.
+See the WireGuard website for details.
+Bridge servers
+Our bridges facilitate connecting to our website, API, and WireGuard servers in locations where access to them is blocked.
+Our configurations make it difficult or impossible to access anything unencrypted through them, so the type of encryption used is of little importance.
+Server blocking
+To protect ourselves, our customers, and the quality of our service, we reserve the right to block any IP address or ports.
+We block outbound traffic to the following ports at all times:
+port 25 – to prevent spam
+ports 137, 138, 139, 445 – to protect customers from a Microsoft SMB/CIFS security issue
+ports 1900 and 2869 – to protect customers from malicious UPnP configuration.
+Mullvad
+About
+Help
+Servers
+Pricing
+Blog
+Mullvad VPN
+Mullvad Browser
+Why privacy matters
+Why Mullvad VPN?
+What is a VPN?
+Downloads
+Stop chat control
+Press
+Careers
+Policies
+Policies
+Open source
+Privacy policy
+Cookies
+Terms of service
+Partnerships and resellers
+Reviews, ads and affiliates
+Reporting a bug or vulnerability
+Address
+Mullvad VPN AB
+Box 53049
+400 14 Gothenburg
+Sweden
+support@mullvadvpn.net
+GPG key
+Onion service
+Follow us
+@mullvadnet
+@mullvadnet
+Mullvad VPN
+mullvad
+Language
+English العربيّة
+Dansk
+Deutsch
+English
+Español
+فارسی
+Suomi
+Français
+Italiano
+日本語
+한국어
+Nederlands
+Norsk
+Polski
+Português
+Русский
+Svenska
+ภาษาไทย
+Türkçe
+Українська
+简体中文
+繁體中文

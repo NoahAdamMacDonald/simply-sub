@@ -274,6 +274,22 @@ export const searchCatalogData: CatalogData = {
         quotes: ['Mullvad VPN AB is owned by parent company Amagicom AB.'],
         lastVerified: '2026-10-22',
       },
+      // Currencies beyond its price lists, and where its source code is (M11.5).
+      currencies: [
+        {
+          codes: ['EUR', 'USD', 'CAD'],
+          methods: ['cash'],
+          page: 'Terms of service',
+          url: 'https://mullvad.net/en/help/terms-service',
+          quotes: ['cash in bills (EUR, USD, CAD)'],
+        },
+      ],
+      sourceRepo: {
+        url: 'https://github.com/mullvad/mullvadvpn-app',
+        page: { name: 'Why Mullvad VPN?', url: 'https://mullvad.net/en/why-mullvad-vpn' },
+        quotes: ['Code is open source'],
+        lastVerified: '2026-10-22',
+      },
     },
     {
       id: 'netflix',
@@ -282,6 +298,14 @@ export const searchCatalogData: CatalogData = {
       cancelUrl: 'https://www.netflix.com/cancelplan',
       iconUrl: 'https://sub.simplely.ca/icons/netflix.webp',
       ...streaming,
+      // The day it renews on (M11.5).
+      renewalAnchor: {
+        kind: 'same-date',
+        page: 'Billing date',
+        url: 'https://help.netflix.com/en/node/54896',
+        quotes: ['Your billing cycle starts on the date you sign up.'],
+        lastVerified: '2026-10-22',
+      },
       plans: [
         {
           id: 'netflix.standard-ads',

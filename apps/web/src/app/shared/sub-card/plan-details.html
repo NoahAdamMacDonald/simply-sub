@@ -251,25 +251,80 @@
   </div>
 }
 
-<!-- How a buyer where the user lives can pay it (M11.5), citing the provider's page, its words as the tooltip. -->
-@if (payment(); as payment) {
+<!-- A provider's page cited for a fact, linked to its words, which are its tooltip. -->
+<ng-template #cited let-fact>
+  <span>, according to its </span>
+  <a
+    class="outside-link"
+    [href]="fact.href"
+    target="_blank"
+    rel="noopener"
+    [matTooltip]="quotesText(fact.quotes)"
+    matTooltipTouchGestures="off"
+    [attr.aria-label]="fact.page + ', opens in a new tab'"
+  >
+    <span>{{ fact.page }}</span>
+    <mat-icon aria-hidden="true">open_in_new</mat-icon>
+  </a>
+</ng-template>
+
+<!--
+  How a buyer where the user lives can pay it, and in which currencies beyond its price lists (M11.5), citing the
+  provider's pages, their words as the tooltips.
+-->
+@if (payment() || currencies().length) {
   <div class="group">
     <h3>Ways to pay</h3>
-    <p class="payment">
-      <span>{{ methodsText(payment.methods) }}</span>
-      <span>, according to its </span>
+    @if (payment(); as payment) {
+      <p class="payment">
+        <span>{{ payment.text }}</span>
+        <ng-container
+          [ngTemplateOutlet]="cited"
+          [ngTemplateOutletContext]="{ $implicit: payment.cited }"
+        />
+      </p>
+    }
+    @for (line of currencies(); track $index) {
+      <p class="payment">
+        <span>{{ line.text }}</span>
+        <ng-container
+          [ngTemplateOutlet]="cited"
+          [ngTemplateOutletContext]="{ $implicit: line.cited }"
+        />
+      </p>
+    }
+  </div>
+}
+
+<!-- The day it renews on (M11.5), citing its page; a grey line when its pages don't say. -->
+@if (renewal(); as renewal) {
+  <div class="group">
+    <h3>Billing day</h3>
+    <p class="payment renewal">
+      <span>{{ renewal.text }}</span>
+      @if (renewal.cited; as fact) {
+        <ng-container [ngTemplateOutlet]="cited" [ngTemplateOutletContext]="{ $implicit: fact }" />
+      }
+    </p>
+  </div>
+}
+
+<!-- Where its source code is (M11.5), as its own page links it. -->
+@if (repo(); as repo) {
+  <div class="group">
+    <h3>Source code</h3>
+    <p class="payment repo">
       <a
         class="outside-link"
-        [href]="paymentHref(payment)"
+        [href]="repo.url"
         target="_blank"
         rel="noopener"
-        [matTooltip]="quotesText(payment.quotes)"
-        matTooltipTouchGestures="off"
-        [attr.aria-label]="payment.page + ', opens in a new tab'"
+        [attr.aria-label]="'Source code on ' + repo.label + ', opens in a new tab'"
       >
-        <span>{{ payment.page }}</span>
+        <span>{{ repo.label }}</span>
         <mat-icon aria-hidden="true">open_in_new</mat-icon>
       </a>
+      <ng-container [ngTemplateOutlet]="cited" [ngTemplateOutletContext]="{ $implicit: repo }" />
     </p>
   </div>
 }

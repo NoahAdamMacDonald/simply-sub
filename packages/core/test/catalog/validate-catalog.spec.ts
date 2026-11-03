@@ -161,9 +161,10 @@ describe('validateCatalog', () => {
         category: 'streaming',
         spendCategory: 'streaming',
         cancelUrl: 'https://example.com/cancel',
-        // Netflix's owner and ways to pay, so only the id is wrong.
+        // Netflix's owner, ways to pay and renewal day, so only the id is wrong.
         owner: (dataOf(catalog(), netflix) as { owner: unknown }).owner,
         paymentMethods: (dataOf(catalog(), netflix) as { paymentMethods: unknown }).paymentMethods,
+        renewalAnchor: (dataOf(catalog(), netflix) as { renewalAnchor: unknown }).renewalAnchor,
         plans: [
           {
             id: 'bundle.netflix-crave',

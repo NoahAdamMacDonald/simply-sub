@@ -124,8 +124,9 @@ export interface CitedPage {
 
 /**
  * Every page the catalog cites: its prices' sources, its pricing page, the pages naming its resellers, its accepted
- * cards and its ways to pay (pricing), and the pages its policy ratings and its owner quote (policies), a shared document's for each
- * provider naming it (`policySets`). A page cited both ways is a pricing page.
+ * cards, its ways to pay and its currencies (pricing), and the pages its policy ratings, its owner, its renewal day and
+ * its source code quote or read (policies, M11.5), a shared document's for each provider naming it (`policySets`). A
+ * page cited both ways is a pricing page.
  */
 export function citedPages(
   providers: readonly Provider[],
@@ -154,8 +155,13 @@ export function citedPages(
     for (const accepted of Object.values(provider.acceptedNetworks ?? {}))
       cite(accepted.url, 'pricing', id);
     for (const entry of provider.paymentMethods ?? []) cite(entry.url, 'pricing', id);
+    for (const entry of provider.currencies ?? []) cite(entry.url, 'pricing', id);
     for (const link of provider.policies?.links ?? []) cite(link.url, 'policies', id);
     cite(provider.owner?.page.url, 'policies', id);
+    const anchor = provider.renewalAnchor;
+    if (anchor?.kind === 'not-stated') for (const url of anchor.pages) cite(url, 'policies', id);
+    else cite(anchor?.url, 'policies', id);
+    cite(provider.sourceRepo?.page.url, 'policies', id);
     for (const set of policySets.filter((set) => provider.policies?.shared?.includes(set.id)))
       for (const link of set.links) cite(link.url, 'policies', id);
   }
@@ -210,9 +216,13 @@ export function citedFacts(
     for (const accepted of Object.values(provider.acceptedNetworks ?? {})) {
       if (accepted.url === url) facts.quotes.push(...accepted.quotes);
     }
-    for (const entry of provider.paymentMethods ?? []) {
+    for (const entry of [...(provider.paymentMethods ?? []), ...(provider.currencies ?? [])]) {
       if (entry.url === url) facts.quotes.push(...entry.quotes);
     }
+    const anchor = provider.renewalAnchor;
+    if (anchor && anchor.kind !== 'not-stated' && anchor.url === url)
+      facts.quotes.push(...anchor.quotes);
+    if (provider.sourceRepo?.page.url === url) facts.quotes.push(...provider.sourceRepo.quotes);
     for (const rating of provider.policies?.ratings ?? []) {
       for (const source of rating.sources ?? [])
         if (source.url === url) facts.quotes.push(source.quote);

@@ -4,6 +4,7 @@ import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import {
+  currenciesIn,
   outsideRatings,
   ownerCitation,
   paymentMethodNames,
@@ -12,8 +13,11 @@ import {
   planPolicies,
   planTitle,
   quoteLink,
+  renewalAnchorNames,
+  repositoryLabel,
   type AddRequest,
   type BundleSaving,
+  type CurrenciesEntry,
   type PaymentMethods,
   type PickedPrice,
   type PlanMatch,
@@ -54,6 +58,19 @@ const statusNames: Record<PolicyStatus, string> = {
   'not-applicable': 'Not applicable',
 };
 
+/** A fact's citation (M11.5): the provider's page by name, linked to its words, which are its tooltip. */
+interface CitedFact {
+  page: string;
+  href: string;
+  quotes: readonly string[];
+}
+
+/** A line of Ways to pay: what it says, and the page that says so. */
+interface CitedLine {
+  text: string;
+  cited: CitedFact;
+}
+
 const groupNames: Record<PolicyGroup, string> = {
   privacy: 'Privacy',
   billing: 'Billing',
@@ -68,9 +85,9 @@ const groupNames: Record<PolicyGroup, string> = {
  * A Search card's expanded section (PROJECT-PLAN P8): the plan's features with the user's ranks, its add-ons, the
  * bundles that include it and what they save, what a suite includes and saves, its perks and notes, its terms and
  * policies graded with why in plain words and a citation of each page it quotes (M1.13, M1.14), outside raters' labels
- * and the company behind it, citing its own page (M11.2), how it can be paid (M11.5), and when its price was checked,
- * with Report a wrong price beside it (M10.11). Core's planExtras prices them for the user from the
- * catalog file for their country.
+ * and the company behind it, citing its own page (M11.2), how it can be paid, in which currencies, on which day it
+ * renews and where its source code is (M11.5), and when its price was checked, with Report a wrong price beside it
+ * (M10.11). Core's planExtras prices them for the user from the catalog file for their country.
  */
 @Component({
   selector: 'ss-plan-details',
@@ -142,9 +159,45 @@ export class PlanDetails {
     return owner && ownerCitation(owner);
   });
   /** How a buyer where the user lives can pay it (M11.5), and the provider's page that says so. */
-  protected readonly payment = computed(() => {
+  protected readonly payment = computed((): CitedLine | undefined => {
     const country = this.settings.saved()?.country;
-    return country ? paymentMethodsIn(this.provider(), country) : undefined;
+    const entry = country && paymentMethodsIn(this.provider(), country);
+    return entry ? { text: this.methodsText(entry.methods), cited: citedFact(entry) } : undefined;
+  });
+  /** The currencies they can pay it in beyond its price lists (M11.5), each with its page. */
+  protected readonly currencies = computed((): CitedLine[] => {
+    const country = this.settings.saved()?.country;
+    return (country ? currenciesIn(this.provider(), country) : []).map((entry) => ({
+      text: this.currenciesText(entry),
+      cited: citedFact(entry),
+    }));
+  });
+  /** The day it renews on (M11.5), citing its page, or that its pages don't say. */
+  protected readonly renewal = computed((): { text: string; cited?: CitedFact } | undefined => {
+    const anchor = this.provider().renewalAnchor;
+    if (!anchor) return undefined;
+    if (anchor.kind === 'not-stated') return { text: 'Not stated: its pages don’t say' };
+    return {
+      text: renewalAnchorNames[anchor.kind],
+      cited: {
+        page: anchor.page,
+        href: quoteLink(anchor.url, anchor.quotes),
+        quotes: anchor.quotes,
+      },
+    };
+  });
+  /** Where its source code is (M11.5), and its own page that links it. */
+  protected readonly repo = computed(() => {
+    const repo = this.provider().sourceRepo;
+    return (
+      repo && {
+        url: repo.url,
+        label: repositoryLabel(repo.url),
+        page: repo.page.name,
+        href: quoteLink(repo.page.url, repo.quotes),
+        quotes: repo.quotes,
+      }
+    );
   });
   protected readonly tierNames = tierNames;
   protected readonly statusNames = statusNames;
@@ -199,14 +252,17 @@ export class PlanDetails {
   }
 
   /** "Card, PayPal and Cash". */
-  protected methodsText(methods: PaymentMethods[number]['methods']): string {
-    const names = methods.map((method) => paymentMethodNames[method]);
-    return names.length > 1 ? `${names.slice(0, -1).join(', ')} and ${names.at(-1)}` : names[0];
+  private methodsText(methods: PaymentMethods[number]['methods']): string {
+    return listText(
+      methods.map((method) => paymentMethodNames[method]),
+      'and',
+    );
   }
 
-  /** The payment page, scrolled to the words that name the methods. */
-  protected paymentHref({ url, quotes }: PaymentMethods[number]): string {
-    return quoteLink(url, quotes);
+  /** "Cash in EUR, USD or CAD", or "Pay in USD or CAD" for every way to pay. */
+  private currenciesText({ codes, methods }: CurrenciesEntry): string {
+    const currencies = listText(codes, 'or');
+    return methods ? `${this.methodsText(methods)} in ${currencies}` : `Pay in ${currencies}`;
   }
 
   /** A citation's tooltip when it links one page: the words it quotes there. */
@@ -222,4 +278,16 @@ export class PlanDetails {
   protected includedName({ provider, plan }: SuiteContents['includes'][number]): string {
     return plan ? planTitle(provider.name, plan.name) : provider.name;
   }
+}
+
+/** A ways-to-pay or currencies entry's page, scrolled to the words that name them. */
+function citedFact({ page, url, quotes }: CurrenciesEntry | PaymentMethods[number]): CitedFact {
+  return { page, href: quoteLink(url, quotes), quotes };
+}
+
+/** "A, B and C" (or "or"). */
+function listText(items: readonly string[], conjunction: 'and' | 'or'): string {
+  return items.length > 1
+    ? `${items.slice(0, -1).join(', ')} ${conjunction} ${items[items.length - 1]}`
+    : (items[0] ?? '');
 }

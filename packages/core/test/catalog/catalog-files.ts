@@ -123,7 +123,10 @@ const streaming = {
   spendCategory: 'streaming',
 };
 
-/** Who owns a provider and how it can be paid (M11.2, M11.5), from its own pages: every provider says. */
+/**
+ * Who owns a provider, how it can be paid and the day it renews on (M11.2, M11.5), from its own pages: every provider
+ * says, and every one whose paid plans renew by the month or year.
+ */
 function facts(owner: string, site: string, methods: Provider['paymentMethods'] = undefined) {
   return {
     owner: {
@@ -140,6 +143,18 @@ function facts(owner: string, site: string, methods: Provider['paymentMethods'] 
         quotes: ['Credit cards', 'PayPal'],
       },
     ],
+    renewalAnchor: renewsOnSignUp(site),
+  };
+}
+
+/** A renewal day on the date the buyer signed up, as most providers say (M11.5). */
+function renewsOnSignUp(site: string): NonNullable<Provider['renewalAnchor']> {
+  return {
+    kind: 'same-date',
+    page: 'Billing',
+    url: `${site}/billing`,
+    quotes: ['You are billed each month on the date you signed up.'],
+    lastVerified: '2026-10-20',
   };
 }
 
@@ -280,6 +295,7 @@ const proton = {
     quotes: ['Proton services are operated by Proton AG'],
     lastVerified: '2026-10-20',
   },
+  renewalAnchor: renewsOnSignUp('https://proton.me'),
   plans: [
     {
       id: 'proton.free',
