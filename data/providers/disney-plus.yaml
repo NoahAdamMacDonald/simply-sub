@@ -27,7 +27,20 @@ acceptedNetworks:
       - Mastercard
       - American Express
       - Discover
-billingCurrency: { CA: CAD, US: USD }
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    AU: AUD,
+    NZ: NZD,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+  }
 # The help centre's one cancel article: the same steps in Canada and the US (Account > Subscription > Cancel
 # Subscription), read 2026-10-26 with the help centre set to each country.
 cancelUrl: https://help.disneyplus.com/article/disneyplus-cancel
@@ -51,11 +64,19 @@ owner:
     - As the flagship direct-to-consumer streaming service from The Walt Disney Company
   lastVerified: 2026-11-02
 
-# Coverage: disney-plus.standard-ads and disney-plus.standard in US, and disney-plus.with-ads in CA (read 2026-11-03):
-# each country sells its own plans. Canada's plans and prices article lists "Disney+ Standard With Ads", "Disney+
+# Coverage: disney-plus.standard-ads and disney-plus.standard in US, and disney-plus.with-ads in CA, GB, AU, NZ, IE, DE,
+# FR, NL, ES and IT (read 2026-11-03): each country sells its own plans. Canada's plans and prices article lists "Disney+ Standard With Ads", "Disney+
 # Standard" and "Disney+ Premium"; the US's lists two plans of Disney+ alone, "Disney+ (With Ads)" (4K, unlike Canada's
 # 1080p) and "Disney+ Premium", beside its bundles. The US's is help.disneyplus.com/article/disneyplus-price with the
 # help centre's country set to United States on its home page (set on the article, it goes to a page not found).
+
+# Other countries (M11.9, the owner's choice of 2026-11-03), read 2026-11-03 on the same article with the help centre's
+# country set to each on its home page ("United Kingdom (English)", "Australia (English)", "New Zealand (English)",
+# "Ireland (English)", then Germany, France, the Netherlands, Spain and Italy, each "(English)"): each sells Canada's
+# three plans, with the same features, in its own currency (Australia's and New Zealand's "$" their own dollars), and
+# its Extra Members; Australia and New Zealand have one Extra Member price, "Not available with a Disney+ Standard with
+# Ads plan". The article is help.disneyplus.com/en-GB/article/disneyplus-price for every one of them, whichever country
+# is picked, so the nightly check can't tell them apart: a price it doesn't find there goes to a person.
 
 # Renewal day (M11.5), read 2026-11-03 (M11.9) in its Canadian subscriber agreement: the date you became a paying
 # subscriber, or a shorter month's last day. Its help centre's billing articles only point to the Account page.
@@ -76,6 +97,8 @@ features:
   account.sign-in: [password]
   support.channels: [chat, 24-7]
 
+# Official resellers: none (M11.9, read 2026-11-03). Its third-party billing partners ("Docomo, J:COM, Apple, Google,
+# Amazon, Hulu (Hulu | Disney+ Set Plan), or any other platform") are ways to pay (paymentMethods).
 plans:
   - id: disney-plus.standard-ads
     name: Standard With Ads
@@ -95,6 +118,78 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+      - region: GB
+        currency: GBP
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: AU
+        currency: AUD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: NZ
+        currency: NZD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: IE
+        currency: EUR
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: DE
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: FR
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: NL
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: ES
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: IT
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
     addOnIds: [disney-plus.extra-member-ads]
     addOnLimit: 1
 
@@ -146,6 +241,150 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+      - region: GB
+        currency: GBP
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: GB
+        currency: GBP
+        amount: 119.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: AU
+        currency: AUD
+        amount: 17.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: AU
+        currency: AUD
+        amount: 179.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: NZ
+        currency: NZD
+        amount: 18.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: NZ
+        currency: NZD
+        amount: 189.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: IE
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: IE
+        currency: EUR
+        amount: 119.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: DE
+        currency: EUR
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: DE
+        currency: EUR
+        amount: 109.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: FR
+        currency: EUR
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: FR
+        currency: EUR
+        amount: 109.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: NL
+        currency: EUR
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: NL
+        currency: EUR
+        amount: 109.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: ES
+        currency: EUR
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: ES
+        currency: EUR
+        amount: 109.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: IT
+        currency: EUR
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: IT
+        currency: EUR
+        amount: 109.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
     addOnIds: [disney-plus.extra-member-standard]
     addOnLimit: 1
 
@@ -194,6 +433,150 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://help.disneyplus.com/article/disneyplus-price
+      - region: GB
+        currency: GBP
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: GB
+        currency: GBP
+        amount: 159.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: AU
+        currency: AUD
+        amount: 24.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: AU
+        currency: AUD
+        amount: 249.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: NZ
+        currency: NZD
+        amount: 25.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: NZ
+        currency: NZD
+        amount: 259.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: IE
+        currency: EUR
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: IE
+        currency: EUR
+        amount: 159.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: DE
+        currency: EUR
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: DE
+        currency: EUR
+        amount: 159.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: FR
+        currency: EUR
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: FR
+        currency: EUR
+        amount: 159.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: NL
+        currency: EUR
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: NL
+        currency: EUR
+        amount: 159.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: ES
+        currency: EUR
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: ES
+        currency: EUR
+        amount: 159.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: IT
+        currency: EUR
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: IT
+        currency: EUR
+        amount: 159.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
     addOnIds: [disney-plus.extra-member-premium]
     addOnLimit: 1
 
@@ -211,6 +594,62 @@ addOns:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+      - region: GB
+        currency: GBP
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: IE
+        currency: EUR
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: DE
+        currency: EUR
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: FR
+        currency: EUR
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: NL
+        currency: EUR
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: ES
+        currency: EUR
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: IT
+        currency: EUR
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
   - id: disney-plus.extra-member-with-ads
     name: Extra Member (With Ads)
     grantsPlan: disney-plus.with-ads
@@ -235,6 +674,78 @@ addOns:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://help.disneyplus.com/article/disneyplus-en-ca-price
+      - region: GB
+        currency: GBP
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: AU
+        currency: AUD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: NZ
+        currency: NZD
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: IE
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: DE
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: FR
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: NL
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: ES
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: IT
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
   - id: disney-plus.extra-member-premium
     name: Extra Member (Premium)
     grantsPlan: disney-plus.premium
@@ -255,6 +766,78 @@ addOns:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://help.disneyplus.com/article/disneyplus-price
+      - region: GB
+        currency: GBP
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: AU
+        currency: AUD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: NZ
+        currency: NZD
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: IE
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: DE
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: FR
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: NL
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: ES
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
+      - region: IT
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.disneyplus.com/en-GB/article/disneyplus-price
 
 # Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: The Walt Disney Company's privacy policy, which covers
 # Disney+, rated once in data/policies/disney-privacy.yaml (M11.1). Not rated: the billing and legal topics, since its

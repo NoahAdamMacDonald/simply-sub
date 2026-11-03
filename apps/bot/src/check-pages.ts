@@ -141,8 +141,11 @@ export async function checkPages(
       findings.push({ kind: 'manual', subject: label(targets), url, reason: page.error });
       continue;
     }
+    // A page several regions' prices cite shows the reader's country's (Disney+'s help article, whose country is a
+    // picker's, and Claude's pricing, M11.9): a price it doesn't show may be another country's, for a person.
+    const oneCountry = new Set(targets.map((target) => target.price.region)).size > 1;
     // Unchanged since its facts were read: every price on it holds, with no model.
-    if (unchanged(url, page, methodOf(url))) {
+    if (unchanged(url, page, methodOf(url)) && !oneCountry) {
       for (const target of targets) findings.push({ kind: 'confirmed', target });
       continue;
     }
@@ -169,7 +172,18 @@ export async function checkPages(
         }
       }
     }
-    if (unconfirmed.length > 0) {
+    if (unconfirmed.length > 0 && oneCountry) {
+      findings.push(
+        ...unconfirmed.map((target): Finding => ({
+          kind: 'manual',
+          subject: `${target.label} (${priceText(target.price)})`,
+          url,
+          reason:
+            'The page shows one country’s prices at a time, and other regions’ prices cite it too',
+          target,
+        })),
+      );
+    } else if (unconfirmed.length > 0) {
       findings.push(...(await extracted(url, page.text, around, unconfirmed, deps, budget)));
     }
   }

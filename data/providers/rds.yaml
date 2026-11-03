@@ -66,6 +66,9 @@ features:
   account.sign-in: [password]
   support.channels: [phone, chat]
 
+# Official resellers: none listed (M11.9, read 2026-11-03; the owner's choice that day: noted, not listed). Its FAQ asks
+# « Puis-je obtenir un forfait via mon fournisseur télé, mobile ou un fournisseur tiers d'achats intégrés ? »: TV and
+# mobile providers and app stores bill it on their own services, as Crave's FAQ says of Bell Media's other services.
 plans:
   - id: rds.standard
     name: RDS

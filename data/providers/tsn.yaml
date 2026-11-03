@@ -79,6 +79,11 @@ features:
   account.sign-in: [password]
   support.channels: [phone, chat]
 
+# Official resellers: none listed (M11.9, read 2026-11-03; the owner's choice that day: noted, not listed). Its FAQ asks
+# "Can I get a bundle if I pay through a third-party TV or mobile provider?": TV and mobile providers bill it on their
+# own services, as Crave's FAQ says of Bell Media's other services.
+# Billing periods (tsn.ca/subscribe): Monthly, 3 Months and Annual, but the 3 Months and Annual tabs show Premium alone
+# ($74.99 /3 mo, $249.99 /yr), so Standard is monthly only.
 plans:
   - id: tsn.standard
     name: Standard

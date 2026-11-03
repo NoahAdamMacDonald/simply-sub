@@ -680,7 +680,8 @@ Since M11.9 `check-search.cjs` runs to its end again (it stopped at the VPN cate
 Antivirus Free is the first free plan by name, Bitdefender is in VPN before Mullvad (Premium VPN is cheaper a month),
 ESPN Unlimited is among the 4K results without Native pricing only, a US user sees Netflix's ratings from its Canadian
 terms (they stand for everywhere), and a line a silent rule grades cites its pages with no words to scroll to. It reads
-the Features suggestions once they show what was typed. 189 checks.
+the Features suggestions once they show what was typed. Disney+ has UK prices since then, so a UK user's fallback price
+and Sold in United Kingdom are ESPN's (no UK price, no availableIn). 189 checks.
 
 `check-m11-inferred.cjs` (M11.9, inferred values) checks a Search card on `ng serve` for a Canadian in Alberta (base URL
 ending in `/`, after `npm run data:build` on the branch), in both themes at both widths: ICI TOU.TV's details show ICI

@@ -1835,11 +1835,12 @@ async function addItem(page, planId) {
     await axeCheck(page, 'US, not offered');
     await context.close();
 
-    // Disney+ has no UK price (its UK page needs a visitor there, M10.13) and no availableIn, so it's unknown there.
+    // ESPN has no UK price (it's sold in the US) and no availableIn, so it's unknown there. Disney+ was, until M11.9
+    // priced it in the UK.
     const british = await newContext(browser, { locale: 'en-GB' });
     const second = await newPage(british, 'GB');
     await openSearch(second);
-    const prices = await shown(card(second, 'Disney+').locator('.prices'));
+    const prices = await shown(card(second, 'ESPN').locator('.prices'));
     check(
       'with no UK price and no availableIn, the fallback price shows "No price for United Kingdom yet"',
       /^≈ £\d+\.\d\d \/ mo .*No price for United Kingdom yet$/.test(prices),
@@ -1850,11 +1851,11 @@ async function addItem(page, planId) {
     await sold.focus();
     await second.keyboard.press('Space');
     await until('sold=1', () => search(second) === '?sold=1');
-    await until('Disney+ to go', async () => !(await names(second)).includes('Disney+'));
+    await until('ESPN to go', async () => !(await names(second)).includes('ESPN'));
     check(
       '"Sold in United Kingdom" hides the providers with no UK price, in the URL as sold=1',
       (await names(second)).join() ===
-        'Bitdefender,Claude,Proton,Mullvad VPN,Xbox Game Pass,Netflix',
+        'Bitdefender,Claude,Proton,Mullvad VPN,Disney+,Xbox Game Pass,Netflix',
       (await names(second)).join(', '),
     );
     await second.goto(`${baseUrl}settings`);
@@ -1871,7 +1872,7 @@ async function addItem(page, planId) {
     await axeCheck(second, 'GB, Settings with the Search option');
     await second.goto(`${baseUrl}search`);
     await second.locator('ss-sub-card').first().waitFor({ timeout: 20000 });
-    await until('the default', async () => !(await names(second)).includes('Disney+'));
+    await until('the default', async () => !(await names(second)).includes('ESPN'));
     check(
       "Settings' option starts Search with Sold in on, and no sold in the URL",
       search(second) === '' && (await sold.isChecked()),

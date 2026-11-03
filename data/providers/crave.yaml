@@ -53,6 +53,13 @@ features:
   account.sign-in: [password]
   support.channels: [chat, phone]
 
+# Official resellers: none listed (M11.9, read 2026-11-03; the owner's choice that day: noted, not listed). Its FAQ
+# (plus.crave.ca/en/faq/plans-billing-bundles/how-can-i-subscribe-to-crave/) names "four ways you can subscribe":
+# crave.ca, in-app purchases ("You will be billed by the app partner"), "most TV providers (Bell, Cogeco, Rogers, Shaw,
+# Telus, Videotron etc.)" and "some mobility providers (e.g. Bell Mobility)", each billing it, and Amazon Prime Video's
+# and Bell's Streaming's add-on channels. Each bills it on its own service, mostly to its own customers.
+# Billing periods: monthly and annual (crave.ca/en/subscribe). Premium's annual "$149.99 for your first year;
+# $220.00/yr thereafter" is a first-year offer, so $220.00 is its price.
 plans:
   - id: crave.standard-ads
     name: Standard With Ads

@@ -40,6 +40,33 @@ describe('checkPages', () => {
     expect(new Set(calls.pages).size).toBe(calls.pages.length);
   });
 
+  it('sends a price that a page several regions cite doesn’t show to a person, with no model (M11.9)', async () => {
+    // Disney+'s help article is one page for nine countries, showing the one picked: here, the UK's prices.
+    const gb = 'https://help.netflix.com/en/node/24926/gb';
+    const targets = providerTargets(netflix)
+      .filter((target) => ['GB', 'AU'].includes(target.price.region))
+      .map((target) => ({ ...target, price: { ...target.price, sourceUrl: gb } }));
+    const calls: Calls = { pages: [], browser: [], ai: [] };
+    const { findings } = await checkPages(
+      { subject: 'netflix', targets, approvals: [], networks: [] },
+      fakeDeps(storedWorld(), calls),
+      budget,
+    );
+    expect(
+      findings
+        .map((finding) =>
+          'target' in finding && finding.target && 'price' in finding.target
+            ? `${finding.kind} ${finding.target.price.region}`
+            : finding.kind,
+        )
+        .sort(),
+    ).toEqual([
+      ...Array.from({ length: 5 }, () => 'confirmed GB'),
+      ...Array.from({ length: 5 }, () => 'manual AU'),
+    ]);
+    expect(calls.ai).toEqual([]);
+  });
+
   it('opens a page that a fetch gets nothing from in the browser, within the night’s budget', async () => {
     const world = storedWorld();
     world.pages['https://mullvad.net/en/pricing'] = '<div id="app"></div>';

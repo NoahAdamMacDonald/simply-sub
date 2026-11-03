@@ -7,7 +7,8 @@
 # Terms: https://www.anthropic.com/legal/consumer-terms.
 # Privacy: https://www.anthropic.com/legal/privacy.
 # Bundles: none found.
-# Official resellers: none found.
+# Official resellers: none (M11.9, read 2026-11-03). Its pages sell its plans on claude.com and in its apps, whose app
+# stores bill them (a way to pay, below), and name no shop.
 # Canada's prices (2026-10-30, the feedback after M10): claude.com/pricing, read from Canada in Canada's English with a
 # browser's own user agent, shows "$23 Per month with annual subscription discount ($280 billed up front). $28 if
 # billed monthly." and Max "From $140 Per month", a bare $ (a headless browser's user agent gets the US prices). The
