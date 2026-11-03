@@ -3605,7 +3605,8 @@ None.
   - **Gaming**, a feature category of its own: `gaming.game-library`, `gaming.day-one`, `gaming.cloud-gaming` and
     `gaming.online-multiplayer`.
   - **Security:** `security.data-exposure`, `security.identity-restoration`, `security.credit-monitoring` and
-    `security.identity-theft-insurance`, with Bitdefender's US-only Ultimate Security Plus plans to add.
+    `security.identity-theft-insurance`, with Bitdefender's US-only Ultimate Security Plus plans (four, added in
+    M11.9's part 8).
   - **Perks moved:** Claude's and Xbox's perks for the same things became these features through `perk` redirects,
     which move users' ranks. Usage multiples, priority access, EA Play and the like stay perks.
 
