@@ -58,6 +58,8 @@ describe('PlanDetails', () => {
     });
   const text = (selector: string) =>
     element().querySelector(selector)?.textContent?.replace(/\s+/g, ' ').trim();
+  /** The group whose heading is `heading`, as groups() gives it. */
+  const group = (heading: string) => groups().find((shown) => shown.startsWith(`${heading} `));
 
   it('lists the features with the user’s ranks, the add-ons and the bundles with their savings', async () => {
     await show('netflix.standard', { 'ad-free': 'needed' });
@@ -67,6 +69,7 @@ describe('PlanDetails', () => {
       'Add-ons Extra member $7.99 / mo + tax',
       // CA$18.99 and CA$22 separately. Crave has no logo: its letter shows.
       'Bundles C Netflix and Crave $35.00 / mo + tax Save $5.99 / mo',
+      'Billing day The date you signed up , according to its Billing date',
     ]);
     expect(text('.checked')).toBe('Price checked Oct 20, 2026');
   });
@@ -102,7 +105,10 @@ describe('PlanDetails', () => {
   it('leaves out what a plan doesn’t have', async () => {
     await show('netflix.standard-ads');
 
-    expect(groups()).toEqual(['Features Video quality: 1080p (Full HD)']);
+    expect(groups()).toEqual([
+      'Features Video quality: 1080p (Full HD)',
+      'Billing day The date you signed up , according to its Billing date',
+    ]);
     expect(element().querySelector('.badge')).toBeNull();
   });
 
@@ -198,8 +204,9 @@ describe('PlanDetails', () => {
     it('shows each rater’s label with its date and a link, after Terms and policies, then the owner', async () => {
       await show('mullvad.vpn');
 
-      expect(groups().slice(-4, -3)[0]).toMatch(/^Terms and policies /);
-      expect(groups().slice(-3, -1)).toEqual([
+      const terms = groups().findIndex((shown) => shown.startsWith('Terms and policies '));
+      expect(terms).toBeGreaterThan(0);
+      expect(groups().slice(terms + 1, terms + 3)).toEqual([
         // The rater the catalog doesn't list is left out: its name is unknown.
         'Outside ratings Protection: 6.0/6.0 from Test Lab , August 2026 (tested Mullvad VPN 2026.4, Windows 11) ' +
           'Usability: 5.5/6.0 from Test Lab , Sep 14, 2026',
@@ -243,9 +250,10 @@ describe('PlanDetails', () => {
     it('lists how a buyer where the user lives can pay, citing the page, its words as the tooltip', async () => {
       await show('mullvad.vpn');
 
-      // Alberta: Canada's own page over the one for everywhere.
-      expect(groups().at(-1)).toBe(
-        'Ways to pay Card and Gift card , according to its Vouchers in Canada',
+      // Alberta: Canada's own page over the one for everywhere, then the currencies cash takes (M11.5).
+      expect(group('Ways to pay')).toBe(
+        'Ways to pay Card and Gift card , according to its Vouchers in Canada ' +
+          'Cash in EUR, USD or CAD , according to its Terms of service',
       );
       const link = element().querySelector<HTMLAnchorElement>('.payment a');
       expect([link?.href, link?.target, link?.getAttribute('aria-label')]).toEqual([
@@ -265,9 +273,85 @@ describe('PlanDetails', () => {
       saved.set({ ...alberta, country: 'US', subdivision: undefined, currency: 'USD' });
       await show('mullvad.vpn');
 
-      expect(groups().at(-1)).toBe(
-        'Ways to pay Card, PayPal, Cash and Cryptocurrency , according to its Payment methods',
+      expect(group('Ways to pay')).toBe(
+        'Ways to pay Card, PayPal, Cash and Cryptocurrency , according to its Payment methods ' +
+          'Cash in EUR, USD or CAD , according to its Terms of service',
       );
+    });
+
+    it('cites the page naming the currencies, linked to its words', async () => {
+      await show('mullvad.vpn');
+      const link = element().querySelectorAll<HTMLAnchorElement>('.payment a')[1];
+
+      expect([link?.href, link?.getAttribute('aria-label')]).toEqual([
+        'https://mullvad.net/en/help/terms-service#:~:text=cash%20in%20bills%20(EUR%2C%20USD%2C%20CAD)',
+        'Terms of service, opens in a new tab',
+      ]);
+    });
+  });
+
+  describe('Billing day and source code (M11.5)', () => {
+    it('says which day it renews on, citing its page with its words as the tooltip', async () => {
+      await show('netflix.standard');
+
+      expect(group('Billing day')).toBe(
+        'Billing day The date you signed up , according to its Billing date',
+      );
+      const link = element().querySelector<HTMLAnchorElement>('.renewal a');
+      expect([link?.href, link?.target, link?.getAttribute('aria-label')]).toEqual([
+        'https://help.netflix.com/en/node/54896#:~:text=Your%20billing%20cycle%20starts,date%20you%20sign%20up.',
+        '_blank',
+        'Billing date, opens in a new tab',
+      ]);
+      const tooltip = await TestbedHarnessEnvironment.loader(fixture).getHarness(
+        MatTooltipHarness.with({ selector: '.renewal a' }),
+      );
+      await tooltip.show();
+      expect(await tooltip.getTooltipText()).toBe(
+        '“Your billing cycle starts on the date you sign up.”',
+      );
+    });
+
+    it('says when its pages don’t say, with nothing to cite', async () => {
+      await show('netflix.standard');
+      const netflix = searchCatalogData.providers.find(({ id }) => id === 'netflix');
+      fixture.componentRef.setInput('provider', {
+        ...netflix,
+        renewalAnchor: {
+          kind: 'not-stated',
+          pages: ['https://help.netflix.com/en/node/41049'],
+          lastVerified: '2026-10-22',
+        },
+      });
+      await fixture.whenStable();
+
+      expect(group('Billing day')).toBe('Billing day Not stated: its pages don’t say');
+      expect(element().querySelector('.renewal a')).toBeNull();
+    });
+
+    it('links the repository its own page links, and that page', async () => {
+      await show('mullvad.vpn');
+
+      expect(groups().at(-1)).toBe(
+        'Source code github.com/mullvad/mullvadvpn-app , according to its Why Mullvad VPN?',
+      );
+      const [repo, page] = Array.from(element().querySelectorAll<HTMLAnchorElement>('.repo a'));
+      expect([repo?.href, repo?.target, repo?.getAttribute('aria-label')]).toEqual([
+        'https://github.com/mullvad/mullvadvpn-app',
+        '_blank',
+        'Source code on github.com/mullvad/mullvadvpn-app, opens in a new tab',
+      ]);
+      expect([page?.href, page?.getAttribute('aria-label')]).toEqual([
+        'https://mullvad.net/en/why-mullvad-vpn#:~:text=Code%20is%20open%20source',
+        'Why Mullvad VPN?, opens in a new tab',
+      ]);
+    });
+
+    it('has neither for a provider with none', async () => {
+      await show('crave.basic');
+
+      expect(group('Billing day')).toBeUndefined();
+      expect(group('Source code')).toBeUndefined();
     });
   });
   it('offers Report a wrong price beside the price’s date, and thanks the user once a report is sent', async () => {
