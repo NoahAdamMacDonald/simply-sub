@@ -1,5 +1,6 @@
 import * as z from 'zod';
 import { providerSearchText, searchProviderOf } from '../search/search-index';
+import { normalized } from '../search/search-providers';
 import type { Bundle } from './bundle';
 import type { Categories } from './category';
 import type { Feature, FeatureValue } from './feature';
@@ -37,6 +38,9 @@ export const seedTables = {
   providers: { key: ['id'], indexes: [] },
   // An FTS5 table (M11.8, shape 4): no key or index of its own; D1 counts each row written to it as one.
   provider_search: { key: ['provider_id'], indexes: [] },
+  // Each provider's lowest monthly equivalent in each currency (M11.8, shape 5), which GET /providers walks for a page
+  // sorted from the cheapest: its key orders them by it, ties by name as core sorts them.
+  provider_prices: { key: ['currency', 'low', 'name', 'provider_id'], indexes: [] },
   provider_categories: { key: ['category', 'provider_id'], indexes: [] },
   provider_features: { key: ['feature_id', 'value', 'provider_id'], indexes: [] },
   plans: { key: ['id'], indexes: [['provider_id']] },
@@ -75,6 +79,7 @@ export const clearOrder: readonly SeedTable[] = [
   'plans',
   'provider_features',
   'provider_categories',
+  'provider_prices',
   'providers',
 ];
 
@@ -82,6 +87,7 @@ export const clearOrder: readonly SeedTable[] = [
 export const providerTables = [
   'providers',
   'provider_search',
+  'provider_prices',
   'provider_categories',
   'provider_features',
   'plans',
@@ -145,6 +151,7 @@ export function providerRows(
         text: providerSearchText(provider, registry.features, registry.categories),
       },
     ],
+    provider_prices: providerPriceRows(provider),
     // Every category its plans are in, so GET /providers?category= finds it by any of them.
     provider_categories: providerCategories(provider).map((category) => ({
       category,
@@ -188,6 +195,27 @@ export function providerRows(
     }
   }
   return rows;
+}
+
+/**
+ * A provider's lowest monthly equivalent in each currency its plans are priced in, of every stored price, so whichever
+ * core's pickPrice picks, converted, is at or above it (M11.8). With its name as searchProviders compares names,
+ * which breaks a tie in price: every free plan's 0.
+ */
+export function providerPriceRows(provider: SnapshotProvider): SeedRow[] {
+  const lowest = new Map<string, number>();
+  for (const plan of provider.plans) {
+    for (const price of plan.prices) {
+      const monthly = monthlyEquivalent(price);
+      lowest.set(price.currency, Math.min(lowest.get(price.currency) ?? monthly, monthly));
+    }
+  }
+  return [...lowest].map(([currency, low]) => ({
+    currency,
+    low,
+    name: normalized(provider.name),
+    provider_id: provider.id,
+  }));
 }
 
 /** Inserting a new provider's rows, parents first. */
@@ -297,6 +325,7 @@ export function copyOf(stored: StoredProvider): StoredProvider {
   return {
     providers: [...stored.providers],
     provider_search: [...stored.provider_search],
+    provider_prices: [...stored.provider_prices],
     provider_categories: [...stored.provider_categories],
     provider_features: [...stored.provider_features],
     plans: [...stored.plans],
@@ -472,6 +501,7 @@ export function catalogRow(
   meta: Pick<CatalogMeta, 'catalogVersion' | 'generatedAt' | 'counts'>,
   seedFormat: number,
   counted?: { today: string; written: number },
+  currencies: readonly string[] = [],
 ): SeedRow {
   return {
     id: 1,
@@ -480,6 +510,8 @@ export function catalogRow(
     seed_format: seedFormat,
     counts: JSON.stringify(meta.counts),
     waiting: 0,
+    // What provider_prices holds, for GET /providers' price pages (M11.8, migration 0008).
+    currencies: JSON.stringify(currencies),
     ...(counted && { written_on: counted.today, written: counted.written }),
   };
 }

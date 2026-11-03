@@ -1572,6 +1572,8 @@ SQLite enforces the column types, and
 ```sql
 providers     (id PK, name, category, spend_category, hash, json, search)   -- category: its main one; search since shape 4
 provider_search  FTS5 (provider_id, text), trigram   -- shape 4 (M11.8): the names each provider's text can match
+provider_prices  (currency, low, name, provider_id → providers, PK (currency, low, name, provider_id))   -- shape 5
+              (M11.8): a provider's lowest monthly equivalent in each currency, and its name as search compares names
 provider_categories (category, provider_id → providers, PK (category, provider_id))   -- every one its plans
               are in (M1.10), which GET /providers?category= reads by
 provider_features (feature_id → features, value, provider_id → providers, rank_value,
@@ -1583,7 +1585,8 @@ features      (id PK, category, json)
 plan_features (plan_id → plans, feature_id → features, value, rank_value, PK (plan_id, feature_id, value))
 bundles       (id PK, json)
 bundle_plans  (bundle_id → bundles, plan_id → plans, PK (bundle_id, plan_id))
-catalog       (id PK = 1, version, built_at, seed_format, counts, waiting, written_on, written)   -- the one row: what D1 holds
+catalog       (id PK = 1, version, built_at, seed_format, counts, waiting, written_on, written, currencies)   -- the one
+              row: what D1 holds
 indexes: prices (region, monthly_equiv) · plan_features (feature_id, rank_value) · plans (provider_id)
          · bundle_plans (plan_id)
 ```
@@ -1697,6 +1700,15 @@ day's writes. Since M11.8 (`planSeed` in core):
     rows are most of a day each.
   - Everything is replaced in place (`--full`, or a catalog row of a format from before shapes) only by hand, or when
     D1 holds rows but no catalog row.
+  - **Shape 5** (migration 0008, seed format 5) is shape 4's tables with `provider_prices`, which `GET /providers`
+    walks for a page sorted from the cheapest (section 7.1): a row for each currency a provider's plans are priced in,
+    with its lowest monthly equivalent of every stored price there (retired ones too, so whatever `pickPrice` picks,
+    converted, is at or above it) and its name normalized as search compares names, which breaks ties (every free
+    plan's 0) as core does. Its key is the walk's order, with no other index, so a provider costs a row a currency, and
+    a price change writes two more only when it moves the provider's lowest (a key of its own). The catalog row's
+    `currencies` names every currency the table may hold, for the API to walk each: the build's once the seed is done,
+    and while one waits the last whole catalog's too (`waitingCurrencies`), since rows of both are there. 0008 also
+    points a new database's views at shape 4 and drops shape 3's tables.
 - **An empty D1 fills through the budget too:** with no rows, the seed inserts (no deletes) and records
   `0000000` as the version until the whole catalog is in.
 - **Each pull request's estimate** (`npm run data:writes`, a notice in CI): the seed of the branch's catalog over
@@ -2490,7 +2502,21 @@ values and static files have the same 25 MiB cap, and KV allows far fewer writes
   virtual table's index) and each provider by its key; the API reads the catalog row's format first to know the
   shape, so it reads shape 3's whole json until the seed switches. The FTS rows need the registry's names too, so
   each provider's stored hash carries a digest of them (`searchVocabularyKey`): renaming a feature compares every
-  provider again and rewrites the rows whose text changed. Sorting by price and paging in SQL are still to come.
+  provider again and rewrites the rows whose text changed. Since shape 5 (migration 0008, seed format 5), a page
+  sorted from the cheapest (`price_asc`, the default with a region) with no text, category or feature walks
+  `provider_prices` instead (`apps/api/src/db/price-pages.ts`): each currency's first n rows through its key (n twice
+  the matches the page needs, from its start to the next one after it, and at least 32), then the n providers whose
+  bounds, converted at today's rates, come first, read by their keys. A provider not read can't come before the next
+  one's bound, so the matches before it are exactly the ones reading every provider gives, in order, and so is the
+  next cursor; the page has no `meta.total` (the contract's fourth example). When they're too few, the walks go four
+  times as far, and after three rounds, or once n passes the catalog's size, every provider is read. Each currency's
+  walk is a statement of its own in one batch: D1 refuses a compound SELECT of more than 5 terms, and counts a batch
+  as one of the 50 queries a request may make. A page then parses about twice the matches it needs and reads n rows
+  of each currency, whatever the catalog's size. Measured on 240 generated providers in 9 currencies: the first page
+  of 20 parses 42 providers where reading them all parses 240, but reads 425 rows to their 241, so rows read break
+  even near 460 providers; the CPU of parsing, the free plan's 10 ms, is what it saves first. A page from the dearest
+  still reads every provider and keeps its total: core sorts it on the shown plan, the cheapest, so a provider's
+  highest price would be a bound far above it, which ends no walk early.
   The edge cache (M2.8) absorbs repeated searches. `GET /providers/:id`, `GET /plans/:id` and `GET /bundles` (M2.4) look up only by primary key and
   the `bundle_plans (plan_id)` index, so their cost doesn't grow with the catalog: 2 rows for a provider, 3 for
   Disney+ Premium's plan, 11 for the bundles of one plan (D1 counts about two rows per lookup,

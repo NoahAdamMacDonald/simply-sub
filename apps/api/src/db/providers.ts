@@ -28,17 +28,32 @@ export async function catalogVersion(db: D1Database): Promise<string | undefined
   return (await catalogRow(db))?.version;
 }
 
-/**
- * The catalog row (1 row read): the version D1 holds, and the shape of the tables the views show, which says how
- * GET /providers reads them (M11.8). Undefined before the first seed.
- */
-export async function catalogRow(
-  db: D1Database,
-): Promise<{ version: string; shape: number } | undefined> {
+/** What GET /providers reads of the catalog row first (M11.8). */
+export interface CatalogRow {
+  version: string;
+  /** The shape of the tables the views show, which says how to read them. */
+  shape: number;
+  /** The currencies provider_prices may hold (shape 5), which a price page walks. */
+  currencies: string[];
+  /** How many providers the build has. */
+  providers: number;
+}
+
+/** The catalog row (1 row read), or undefined before the first seed. */
+export async function catalogRow(db: D1Database): Promise<CatalogRow | undefined> {
   const row = await db
-    .prepare('SELECT version, seed_format FROM catalog')
-    .first<{ version: string; seed_format: number }>();
-  return row ? { version: row.version, shape: seedShapes[row.seed_format] ?? 3 } : undefined;
+    .prepare(
+      "SELECT version, seed_format, currencies, json_extract(counts, '$.providers') AS providers FROM catalog",
+    )
+    .first<{ version: string; seed_format: number; currencies: string; providers: number }>();
+  return row
+    ? {
+        version: row.version,
+        shape: seedShapes[row.seed_format] ?? 3,
+        currencies: JSON.parse(row.currencies) as string[],
+        providers: row.providers,
+      }
+    : undefined;
 }
 
 /**

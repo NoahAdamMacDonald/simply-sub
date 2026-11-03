@@ -141,6 +141,21 @@ describe('providersBody', () => {
     expect(second.meta).toMatchObject({ total: 4, nextCursor: null });
   });
 
+  it('leaves the total out of a partial list, whose next match still gives the cursor (M11.8)', () => {
+    const paged: ProvidersQuery = { sort: 'price_asc', region: 'CA', currency: 'CAD', limit: 3 };
+    const matches = matchesFor(paged);
+    const options = { query: paged, catalogVersion: 'abc1234', partial: true } as const;
+
+    expect(providersBody(matches.slice(0, 4), { ...options, offset: 0 }).meta).toEqual({
+      catalogVersion: 'abc1234',
+      query: paged,
+      nextCursor: providersCursor(3),
+    });
+    expect(
+      providersBody(matches.slice(0, 3), { ...options, offset: 0 }).meta.nextCursor,
+    ).toBeNull();
+  });
+
   it('gives an empty page past the end', () => {
     const paged: ProvidersQuery = { sort: 'name', limit: 3 };
 

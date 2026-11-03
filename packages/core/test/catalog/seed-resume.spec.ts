@@ -32,6 +32,8 @@ describe('the seed index (M11.8)', () => {
       seedFormat,
       features: data.features,
       bundles: data.bundles,
+      // What provider_prices holds, for the catalog row (M11.8, shape 5).
+      currencies: ['CAD', 'CHF', 'EUR', 'USD'],
     });
     expect(seedProviderPath('netflix')).toBe('data/seed/providers/netflix.json');
   });

@@ -1,6 +1,7 @@
 import {
   buildCatalogData,
   buildCatalogMeta,
+  catalogCurrencies,
   planSeed,
   providersToRead,
   readCatalogSource,
@@ -40,6 +41,8 @@ const tables: SeedTable[] = [
   'providers',
   // The FTS5 table of what each provider's text can match (M11.8, shape 4).
   'provider_search',
+  // Each provider's lowest and highest monthly equivalent in each currency (M11.8, shape 5).
+  'provider_prices',
   'provider_categories',
   'plans',
   'prices',
@@ -293,6 +296,8 @@ describe('a full seed', () => {
       catalog: 1,
       // A row a provider in the FTS5 table (M11.8).
       provider_search: 2,
+      // A row a provider and currency: each is priced in one (M11.8, shape 5).
+      provider_prices: 2,
     });
   });
 
@@ -310,6 +315,8 @@ describe('a full seed', () => {
       waiting: 0,
       written_on: null,
       written: 0,
+      // What provider_prices holds, for GET /providers' price pages (M11.8, shape 5).
+      currencies: JSON.stringify(catalogCurrencies(snapshot.data.providers)),
     });
   });
 
@@ -571,8 +578,9 @@ describe('rows written', () => {
     const { removed, added, replaced } = await providerCosts(testCatalog, 'netflix', netflix);
 
     // Since M11.8 only the rows that changed (the price with its index entry, its plan's json, Netflix's json and
-    // hash) and the catalog row, not deleting Netflix and inserting it again.
-    expect(replaced).toBe(5);
+    // hash, and its lowest price in that currency, deleted and inserted under its new key in provider_prices) and the
+    // catalog row, not deleting Netflix and inserting it again.
+    expect(replaced).toBe(7);
     expect(removed + added).toBeGreaterThan(20 * replaced);
   });
 
@@ -581,7 +589,7 @@ describe('rows written', () => {
     const { rowsWritten } = await seed(snapshot, { full: true });
     const rows = (await Promise.all(tables.map(count))).reduce((sum, n) => sum + n, 0);
     // The rows themselves, plus an entry in each of the 4 indexes on prices, plan_features, plans and bundle_plans
-    // (provider_categories and provider_features have none).
+    // (provider_categories, provider_features and provider_prices have none).
     const indexEntries = (
       await Promise.all(['prices', 'plan_features', 'plans', 'bundle_plans'].map(count))
     ).reduce((sum, n) => sum + n, 0);
@@ -874,8 +882,9 @@ describe('the bot’s steps (M11.8)', () => {
     expect(deploy.waiting.length).toBeGreaterThan(5);
 
     const source = await sourceOf(after);
-    const first = await night(source, '2026-11-04', 12);
-    // Two providers of 4 rows, each with the catalog row's 1, and then the next doesn't fit.
+    const first = await night(source, '2026-11-04', 16);
+    // Crave's 4 rows and Disney+'s 6 (its lowest price under a new key in provider_prices), each step with the
+    // catalog row's 1, and then ESPN's 5 don't fit.
     expect(first.map((step) => step.result)).toEqual(['more', 'more', 'budget']);
     expect(first.map((step) => step.wrote)).toEqual([
       deploy.waiting[0],
@@ -925,6 +934,31 @@ describe('the bot’s steps (M11.8)', () => {
     const resumed = { ...(await dump()), catalog: [] };
     await seed(after, { full: true });
     expect(resumed).toEqual({ ...(await dump()), catalog: [] });
+  });
+
+  it('keeps the last whole catalog’s currencies while a seed waits, then names the build’s', async () => {
+    await seed(snapshotOf(testCatalog(), 'abc1234'), { full: true });
+    // As if the last whole catalog had a currency this build no longer has: its rows stay until their providers'
+    // steps, and a price page walks every currency provider_prices may hold.
+    await db.prepare(`UPDATE catalog SET currencies = '["SEK"]'`).run();
+    const currencies = async () =>
+      JSON.parse(
+        (await db.prepare('SELECT currencies FROM catalog').first<{ currencies: string }>())
+          ?.currencies ?? 'null',
+      ) as unknown;
+    const after = everyPrice();
+    const build = catalogCurrencies(after.data.providers);
+    await seed(after, { budget: { today: '2026-11-03', daily: 12 } });
+    expect(await currencies()).toEqual([...build, 'SEK'].sort());
+
+    const source = await sourceOf(after);
+    expect((await night(source, '2026-11-04', 16)).at(-1)?.result).toBe('budget');
+    expect(await currencies()).toEqual([...build, 'SEK'].sort());
+    for (let day = 5; day < 10; day++) {
+      const steps = await night(source, `2026-11-0${day}`, 50_000);
+      if (steps.at(-1)?.result === 'done') break;
+    }
+    expect(await currencies()).toEqual(build);
   });
 
   it('does nothing when nothing waits', async () => {

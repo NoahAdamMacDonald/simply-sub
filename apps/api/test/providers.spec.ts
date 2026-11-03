@@ -434,8 +434,8 @@ describe('the D1 reads', () => {
     ]);
     expect(plan.results.map((row) => row.detail)).toEqual(
       expect.arrayContaining([
-        'SEARCH providers_s4 USING PRIMARY KEY (id=?)',
-        'SEARCH provider_categories_s4 USING PRIMARY KEY (category=?)',
+        `SEARCH providers_s${seedShape} USING PRIMARY KEY (id=?)`,
+        `SEARCH provider_categories_s${seedShape} USING PRIMARY KEY (category=?)`,
       ]),
     );
     expect(plan.results.some((row) => /^SCAN/.test(row.detail))).toBe(false);
@@ -443,7 +443,7 @@ describe('the D1 reads', () => {
 
   it("read a provider's own features too, through provider_features' key (M11.4)", async () => {
     await env.DB.prepare(
-      "INSERT INTO provider_features_s4 (feature_id, value, provider_id, rank_value) VALUES ('platforms', 'linux', 'mullvad', NULL)",
+      `INSERT INTO provider_features_s${seedShape} (feature_id, value, provider_id, rank_value) VALUES ('platforms', 'linux', 'mullvad', NULL)`,
     ).run();
     try {
       const query = { feature: ['platforms=linux'], sort: 'name', limit: 20 } as const;
@@ -463,12 +463,16 @@ describe('the D1 reads', () => {
       expect(linux.providers.map((provider) => provider.id)).toEqual(['mullvad']);
       expect(plan.results.map((row) => row.detail)).toEqual(
         expect.arrayContaining([
-          'SEARCH provider_features_s4 USING PRIMARY KEY (feature_id=? AND value=?)',
+          `SEARCH provider_features_s${seedShape} USING PRIMARY KEY (feature_id=? AND value=?)`,
         ]),
       );
-      expect(plan.results.some((row) => /^SCAN provider_features_s4/.test(row.detail))).toBe(false);
+      expect(
+        plan.results.some((row) =>
+          new RegExp(`^SCAN provider_features_s${seedShape}`).test(row.detail),
+        ),
+      ).toBe(false);
     } finally {
-      await env.DB.prepare('DELETE FROM provider_features_s4').run();
+      await env.DB.prepare(`DELETE FROM provider_features_s${seedShape}`).run();
     }
   });
 
@@ -499,15 +503,17 @@ describe('the D1 reads', () => {
     ]);
     expect(plan.results.map((row) => row.detail)).toEqual(
       expect.arrayContaining([
-        'SEARCH providers_s4 USING PRIMARY KEY (id=?)',
-        'SEARCH plan_features_s4 USING COVERING INDEX idx_pf_feature_s4 (feature_id=?)',
-        'SEARCH plan_features_s4 USING COVERING INDEX idx_pf_feature_s4 (feature_id=? AND rank_value>?)',
-        'SEARCH plan_features_s4 USING COVERING INDEX idx_pf_feature_s4 (feature_id=? AND rank_value=?)',
+        `SEARCH providers_s${seedShape} USING PRIMARY KEY (id=?)`,
+        `SEARCH plan_features_s${seedShape} USING COVERING INDEX idx_pf_feature_s${seedShape} (feature_id=?)`,
+        `SEARCH plan_features_s${seedShape} USING COVERING INDEX idx_pf_feature_s${seedShape} (feature_id=? AND rank_value>?)`,
+        `SEARCH plan_features_s${seedShape} USING COVERING INDEX idx_pf_feature_s${seedShape} (feature_id=? AND rank_value=?)`,
       ]),
     );
-    expect(plan.results.some((row) => /^SCAN (plan_features|providers)_s4/.test(row.detail))).toBe(
-      false,
-    );
+    expect(
+      plan.results.some((row) =>
+        new RegExp(`^SCAN (plan_features|providers)_s${seedShape}`).test(row.detail),
+      ),
+    ).toBe(false);
   });
 
   describe('text, through the FTS5 index (M11.8, shape 4)', () => {

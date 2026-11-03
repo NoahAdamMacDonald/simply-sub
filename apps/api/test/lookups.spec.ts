@@ -9,6 +9,7 @@ import {
   readCatalogSource,
   type CatalogSnapshot,
   type CatalogSourceFile,
+  seedShape,
 } from '@simply-sub/core';
 import { env } from 'cloudflare:workers';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -680,12 +681,12 @@ describe('the D1 reads', () => {
     // Through the views of the live shape's tables (M11.8), the plan names the tables rather than the query's aliases.
     expect(details).toEqual(
       expect.arrayContaining([
-        'SEARCH plans_s4 USING PRIMARY KEY (id=?)',
-        'SEARCH bundles_s4 USING PRIMARY KEY (id=?)',
-        'SEARCH bundle_plans_s4 USING COVERING INDEX idx_bundle_plans_plan_s4 (plan_id=?)',
-        'SEARCH providers_s4 USING PRIMARY KEY (id=?) LEFT-JOIN',
-        'SEARCH bundle_plans_s4 USING PRIMARY KEY (bundle_id=?)',
-        'SEARCH providers_s4 USING PRIMARY KEY (id=?)',
+        `SEARCH plans_s${seedShape} USING PRIMARY KEY (id=?)`,
+        `SEARCH bundles_s${seedShape} USING PRIMARY KEY (id=?)`,
+        `SEARCH bundle_plans_s${seedShape} USING COVERING INDEX idx_bundle_plans_plan_s${seedShape} (plan_id=?)`,
+        `SEARCH providers_s${seedShape} USING PRIMARY KEY (id=?) LEFT-JOIN`,
+        `SEARCH bundle_plans_s${seedShape} USING PRIMARY KEY (bundle_id=?)`,
+        `SEARCH providers_s${seedShape} USING PRIMARY KEY (id=?)`,
       ]),
     );
     expect(details.filter((detail) => detail.startsWith('SCAN'))).toEqual([]);

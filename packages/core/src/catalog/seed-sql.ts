@@ -60,9 +60,10 @@ export {
  * or when a derived column (monthly_equiv, rank_value) is computed differently, and say its shape in seedShapes: a new
  * format goes through the seed's budget (M11.8). 2: provider_categories (migration 0003, M1.10). 3: provider_features
  * (migration 0004, M11.4). Migration 0005's bookkeeping columns on the catalog row changed no row, so no bump. 4:
- * shape 4, providers' search column and provider_search (migration 0007, M11.8).
+ * shape 4, providers' search column and provider_search (migration 0007, M11.8). 5: shape 5, provider_prices
+ * (migration 0008, M11.8).
  */
-export const seedFormat = 4;
+export const seedFormat = 5;
 
 /**
  * The rows the catalog may write in a UTC day (M11.8): D1's 100,000 for the account, less the user database's 41,000
@@ -85,10 +86,13 @@ export interface SeedFormat {
  * beside the live ones (providers_s4…), which the seed fills through the budget and then points the API's views at.
  * Migration 0006 named the first shape, 3.
  */
-export const seedShapes: Readonly<Record<number, number>> = { 3: 3, 4: 4 };
+export const seedShapes: Readonly<Record<number, number>> = { 3: 3, 4: 4, 5: 5 };
 
-/** The shape of seedFormat's tables: 4, providers' search column and provider_search (migration 0007, M11.8). */
-export const seedShape = 4;
+/**
+ * The shape of seedFormat's tables: 5, provider_prices (migration 0008, M11.8), after 4's search column and
+ * provider_search (0007).
+ */
+export const seedShape = 5;
 
 const thisFormat: SeedFormat = { seedFormat, shape: seedShape };
 
@@ -134,6 +138,8 @@ export interface SeedState {
     /** The UTC day of the last seed that counted its writes, and how many rows the seeds wrote that day. */
     writtenOn?: IsoDate;
     written: number;
+    /** The currencies provider_prices may hold (M11.8, shape 5): GET /providers walks each for a price page. */
+    currencies: string[];
   };
   /** Provider id → the hash it was written with. */
   providers: ReadonlyMap<string, string>;
@@ -152,7 +158,7 @@ export interface SeedState {
 export function seedStateQueries(shape = seedShape): string[] {
   const table = (name: SeedTable) => sqlTable(shape, name);
   return [
-    'SELECT version, seed_format, waiting, written_on, written FROM catalog',
+    'SELECT version, seed_format, waiting, written_on, written, currencies FROM catalog',
     `SELECT id, hash FROM ${table('providers')}`,
     `SELECT id, json FROM ${table('features')}`,
     `SELECT id, json FROM ${table('bundles')}`,
@@ -170,6 +176,7 @@ const seedStateResultsSchema = z.tuple([
         waiting: countSchema,
         written_on: isoDateSchema.nullable(),
         written: countSchema,
+        currencies: z.string(),
       }),
     )
     .max(1),
@@ -190,6 +197,7 @@ export function readSeedState(results: readonly unknown[]): SeedState {
         waiting: catalog.waiting,
         ...(catalog.written_on !== null && { writtenOn: catalog.written_on }),
         written: catalog.written,
+        currencies: z.array(z.string()).parse(JSON.parse(catalog.currencies)),
       },
     }),
     providers: new Map(providers.map((row) => [row.id, row.hash])),
@@ -229,6 +237,7 @@ export function storedRowQueries(ids: readonly string[], shape = seedShape): str
   return [
     `SELECT id, name, category, spend_category, hash FROM ${table('providers')} WHERE id IN (${list})`,
     `SELECT provider_id, text FROM ${table('provider_search')} WHERE provider_id IN (${list})`,
+    `SELECT currency, low, name, provider_id FROM ${table('provider_prices')} WHERE provider_id IN (${list})`,
     `SELECT category, provider_id FROM ${table('provider_categories')} WHERE provider_id IN (${list})`,
     `SELECT feature_id, value, provider_id, rank_value FROM ${table('provider_features')} WHERE provider_id IN (${list})`,
     `SELECT id, provider_id, name, json FROM ${table('plans')} WHERE provider_id IN (${list})`,
@@ -245,8 +254,9 @@ export function readStoredRows(
   ids: readonly string[],
   results: readonly unknown[],
 ): Map<string, StoredProvider> {
-  const [providers, search, categories, features, plans, prices, planFeatures, links] = z
+  const [providers, search, lowest, categories, features, plans, prices, planFeatures, links] = z
     .tuple([
+      rowsSchema,
       rowsSchema,
       rowsSchema,
       rowsSchema,
@@ -263,6 +273,7 @@ export function readStoredRows(
       {
         providers: [],
         provider_search: [],
+        provider_prices: [],
         provider_categories: [],
         provider_features: [],
         plans: [],
@@ -280,6 +291,7 @@ export function readStoredRows(
   };
   for (const row of providers) put('providers', row['id'], row);
   for (const row of search) put('provider_search', row['provider_id'], row);
+  for (const row of lowest) put('provider_prices', row['provider_id'], row);
   for (const row of categories) put('provider_categories', row['provider_id'], row);
   for (const row of features) put('provider_features', row['provider_id'], row);
   for (const row of plans) put('plans', row['provider_id'], row);
@@ -309,6 +321,7 @@ export function seedStateOf(
       seedFormat: format.seedFormat,
       waiting: 0,
       written: 0,
+      currencies: catalogCurrencies(snapshot.data.providers),
     },
     providers: new Map(
       snapshot.data.providers.map((provider) => [
@@ -324,6 +337,7 @@ export function seedStateOf(
     rows: {
       providers: count('providers'),
       provider_search: count('provider_search'),
+      provider_prices: count('provider_prices'),
       provider_categories: count('provider_categories'),
       provider_features: count('provider_features'),
       plans: count('plans'),
@@ -441,7 +455,12 @@ export function planSeed(snapshot: CatalogSnapshot, options: SeedOptions): SeedP
   };
   const bundleChange = (bundle: Bundle) => bundleInserts(shape, bundle);
   const catalogRowOf = (written: number) =>
-    catalogRow(meta, format.seedFormat, budget && { today: budget.today, written });
+    catalogRow(
+      meta,
+      format.seedFormat,
+      budget && { today: budget.today, written },
+      catalogCurrencies(data.providers),
+    );
 
   const mode = seedMode(current, format);
   if (mode.kind === 'full') {
@@ -627,14 +646,36 @@ export function planSeed(snapshot: CatalogSnapshot, options: SeedOptions): SeedP
             id: 1,
             waiting: waiting.length,
             ...(budget && { written_on: budget.today, written }),
+            currencies: JSON.stringify(
+              waitingCurrencies(state.catalog.currencies, catalogCurrencies(data.providers)),
+            ),
           },
-          ['waiting', ...(budget ? ['written_on', 'written'] : [])],
+          ['waiting', ...(budget ? ['written_on', 'written'] : []), 'currencies'],
         ),
       );
     }
     return finished(change.statements, writes, waiting);
   }
   return finished(change.statements, change.writes, waiting);
+}
+
+/** Every currency the providers' plans are priced in, sorted: the catalog row's, for GET /providers' price pages. */
+export function catalogCurrencies(providers: readonly SnapshotProvider[]): string[] {
+  return [
+    ...new Set(
+      providers.flatMap((provider) =>
+        provider.plans.flatMap((plan) => plan.prices.map((price) => price.currency)),
+      ),
+    ),
+  ].sort();
+}
+
+/**
+ * The catalog row's currencies while a seed waits: the last whole catalog's and the build's, since provider_prices
+ * holds rows of both until the seed is done, and a price page walks every currency it may hold (M11.8).
+ */
+export function waitingCurrencies(stored: readonly string[], build: readonly string[]): string[] {
+  return [...new Set([...stored, ...build])].sort();
 }
 
 /** What the seed brings D1 to: the build, from its snapshot (planSeed) or the seed index (seedNext, M11.8). */
