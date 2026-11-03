@@ -1,7 +1,9 @@
 # A shared policy document (BLUEPRINT §4.10): the Disney+, ESPN, and Hulu Subscriber Agreement (updated February 5,
 # 2026), one agreement for the three in the US, rated once here. Hulu and ESPN are sold in the US only; Disney+
 # names it too and adds its Canadian agreement's ratings for Canada (regions: [CA]), where that agreement governs.
-# Read 2026-11-02 (M11.9's topics, pulled forward at the owner's request) at hulu.com, which serves it as plain HTML.
+# Read 2026-11-02 (M11.9's topics, pulled forward at the owner's request) at hulu.com, which serves it as plain HTML;
+# read again 2026-11-03 through a US exit (M11.9, part 14): three clauses reworded (a plan is a "Service Tier"), the
+# same grades.
 # Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
 id: disney-subscriber-agreement
 name: The Disney+, ESPN, and Hulu Subscriber Agreement
@@ -15,7 +17,7 @@ ratings:
     sources:
       - url: https://www.hulu.com/subscriber_agreement
         quote: 'The Services are integrated with “MyDisney”, which allows you to use a single email and password to sign in to a range of products and experiences across The Walt Disney Family of Companies.'
-    lastVerified: 2026-11-02
+    lastVerified: 2026-11-03
   - topic: billing.cancellation
     tier: neutral
     reason: 'You can cancel online any time, but you have to do it by midnight the night before it renews, or you pay for the next period.'
@@ -24,7 +26,7 @@ ratings:
         quote: 'YOU CAN CANCEL YOUR SUBSCRIPTION AT ANY TIME BEFORE THE END OF THE CURRENT BILLING PERIOD, FREE TRIAL OR PROMOTION.'
       - url: https://www.hulu.com/subscriber_agreement
         quote: 'YOU MUST CANCEL YOUR SUBSCRIPTION PRIOR TO 11:59 P.M. EASTERN TIME ON THE DAY BEFORE YOUR SUBSCRIPTION TERM ENDS IN ORDER TO AVOID BEING CHARGED FOR THE NEXT SUBSCRIPTION TERM.'
-    lastVerified: 2026-11-02
+    lastVerified: 2026-11-03
   - topic: billing.refunds
     tier: neutral
     reason: "If you cancel, you keep watching until the time you paid for runs out, but you don't get money back for the part you didn't use."
@@ -33,14 +35,14 @@ ratings:
         quote: 'CANCELLATION WILL TAKE EFFECT AT THE END OF THE CURRENT SUBSCRIPTION TERM, FREE TRIAL OR PROMOTION UNLESS OTHERWISE DISCLOSED'
       - url: https://www.hulu.com/subscriber_agreement
         quote: 'EXCEPT AS REQUIRED BY APPLICABLE LAW, WE DO NOT REFUND OR CREDIT FOR PARTIALLY USED SUBSCRIPTION TERMS AND/OR BILLING PERIODS'
-    lastVerified: 2026-11-02
+    lastVerified: 2026-11-03
   - topic: billing.price-changes
     tier: neutral
     reason: "It says it will try to email you before a price goes up, but not how long before. If you don't cancel, you pay the new price."
     sources:
       - url: https://www.hulu.com/subscriber_agreement
         quote: 'In the event of a price change, we will attempt to notify you in advance of the change by sending an email to the email address you have registered for your account.'
-    lastVerified: 2026-11-02
+    lastVerified: 2026-11-03
   - topic: billing.free-trials
     tier: poor
     reason: "A free trial needs your payment details and turns into a paid plan on its own, and it won't warn you before it does."
@@ -49,26 +51,26 @@ ratings:
         quote: 'Your first payment will be charged to your chosen payment method immediately following the free trial, unless cancelled in accordance with the instructions for cancellation below.'
       - url: https://www.hulu.com/subscriber_agreement
         quote: 'We provide notice of the terms of the free trial at the time you register and you will not receive a separate notice that your free trial is about to end or has ended, or that your paid subscription has begun'
-    lastVerified: 2026-11-02
+    lastVerified: 2026-11-03
   - topic: billing.renewal-notice
     status: not-stated
     reason: 'It says your plan renews on its own, but not that it reminds you before it does.'
     pages: [https://www.hulu.com/subscriber_agreement]
-    lastVerified: 2026-11-02
+    lastVerified: 2026-11-03
   - topic: billing.fees
     status: not-stated
     reason: 'It mentions no fees beyond the price, taxes and what your internet provider charges you.'
     pages: [https://www.hulu.com/subscriber_agreement]
-    lastVerified: 2026-11-02
+    lastVerified: 2026-11-03
   - topic: billing.plan-changes
     tier: poor
-    reason: 'If you switch from one of its services to another partway through, you may lose the rest of what you paid for on the first one.'
+    reason: 'If you switch plans partway through a billing period, you may lose the rest of what you paid for on the first one.'
     sources:
       - url: https://www.hulu.com/subscriber_agreement
-        quote: 'IF YOU MODIFY YOUR SUBSCRIPTION TO SWITCH FROM ONE SERVICE TO ANOTHER SERVICE DURING YOUR BILLING PERIOD, YOU MAY NOT HAVE CONTINUED ACCESS TO YOUR ORIGINAL SERVICE.'
+        quote: 'IF YOU MODIFY YOUR SUBSCRIPTION TO SWITCH FROM ONE SERVICE TIER TO ANOTHER DURING YOUR BILLING PERIOD, YOU MAY NOT HAVE CONTINUED ACCESS TO YOUR ORIGINAL SERVICE TIER.'
       - url: https://www.hulu.com/subscriber_agreement
-        quote: 'If you change your Service Tier or obtain certain other offerings, such as add-ons, we may prorate your charges accordingly during the applicable billing period.'
-    lastVerified: 2026-11-02
+        quote: 'If you change your Service Tier or obtain certain other offerings, we may prorate your charges accordingly during the applicable billing period.'
+    lastVerified: 2026-11-03
   - topic: legal.disputes
     tier: poor
     reason: "Disagreements go to a private referee (an arbitrator), not a court, and you can't join a group lawsuit. You can only opt out by mailing a letter within 30 days of signing up."
@@ -80,35 +82,35 @@ ratings:
     action:
       name: How to opt out of arbitration (section 7)
       url: https://www.hulu.com/subscriber_agreement
-    lastVerified: 2026-11-02
+    lastVerified: 2026-11-03
   - topic: legal.terms-changes
     tier: neutral
     reason: 'Changes start 30 days after it emails you or just posts them in the app. If you disagree, your only choice is to stop using it.'
     sources:
       - url: https://www.hulu.com/subscriber_agreement
         quote: 'We may amend this Agreement, effective thirty (30) days after we send you notice or post the amendment on the Services.'
-    lastVerified: 2026-11-02
+    lastVerified: 2026-11-03
   - topic: legal.account-closure
     tier: neutral
     reason: 'It can cut you off without warning if it thinks you broke its rules, and it owes you nothing for it.'
     sources:
       - url: https://www.hulu.com/subscriber_agreement
         quote: 'You agree that we may, in our sole discretion and without notice or liability to you, restrict, suspend, or terminate your access to part or all of the Services, and to any Content if we believe you are using or have used the Services in violation of this Agreement or applicable law or regulations'
-    lastVerified: 2026-11-02
+    lastVerified: 2026-11-03
   - topic: legal.service-changes
     tier: neutral
     reason: 'What you can watch changes over time, as with any streaming service.'
     sources:
       - url: https://www.hulu.com/subscriber_agreement
-        quote: 'The Content that we make available via any Service Tier is not guaranteed and may be limited and vary over time'
-    lastVerified: 2026-11-02
+        quote: 'The Content that we make available via any Service is not guaranteed and may be limited and vary over time'
+    lastVerified: 2026-11-03
   - topic: legal.inactivity
     tier: poor
     reason: "It can end a subscription you haven't signed in to for about a year, and doesn't promise to warn you first."
     sources:
       - url: https://www.hulu.com/subscriber_agreement
         quote: 'We also reserve the right, but are not required, to terminate any subscription to the Services that remains inactive for an extended period of time, e.g., more than one year'
-    lastVerified: 2026-11-02
+    lastVerified: 2026-11-03
   - topic: service.account-sharing
     tier: poor
     reason: 'Only the people who live with you can use your account, and it watches how the account is used and can cut it off if it thinks you shared it.'
@@ -117,11 +119,11 @@ ratings:
         quote: 'Unless otherwise permitted by your Service Tier, you may not share your subscription outside of your household.'
       - url: https://www.hulu.com/subscriber_agreement
         quote: 'We may, in our sole discretion, analyze the use of your account to determine compliance with this Agreement.'
-    lastVerified: 2026-11-02
+    lastVerified: 2026-11-03
   - topic: service.device-limits
     tier: neutral
     reason: 'How many shows you can download, and for how long, depends on your plan and can change.'
     sources:
       - url: https://www.hulu.com/subscriber_agreement
         quote: 'The number of temporary downloads available for Compatible Devices, and the length of time that certain temporary downloads remain available to you for offline viewing, may be subject to limitations by Service Tier, and such limitations may change from time to time at our discretion.'
-    lastVerified: 2026-11-02
+    lastVerified: 2026-11-03

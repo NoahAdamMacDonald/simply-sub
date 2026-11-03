@@ -112,10 +112,10 @@ export const awaitingPolicyRegrade: ReadonlySet<string> = new Set<string>();
 
 /**
  * Providers from before M11.5 whose renewal day isn't read yet: a missing renewalAnchor is a warning for them, and an
- * error for every other provider whose paid plans renew by the month or year. M11.9 read the others; Hulu's and ESPN's
- * US pages send a visitor from Canada to Disney+, so they wait for a US exit. Mullvad is prepaid, with none to give.
+ * error for every other provider whose paid plans renew by the month or year. None now: M11.9 read them all, Hulu's
+ * and ESPN's through a US exit. Mullvad is prepaid, with none to give.
  */
-export const awaitingRenewalAnchor: ReadonlySet<string> = new Set(['espn', 'hulu']);
+export const awaitingRenewalAnchor: ReadonlySet<string> = new Set();
 
 export interface ValidateOptions {
   /** Providers whose missing policy topics are warnings, not errors: awaitingPolicyRegrade unless a test says. */
@@ -791,14 +791,22 @@ function checkInferred(
 
 /**
  * A provider's own sites and the sites its own pages are on: its website and domains, its policies' pages (Claude's
- * terms on anthropic.com) and its owner's site (Microsoft's for Xbox Game Pass), where its owner and the ways to pay
- * it may be stated.
+ * terms on anthropic.com), the shared documents' it names when they're given (ESPN's subscriber agreement, on
+ * hulu.com, M11.9) and its owner's site (Microsoft's for Xbox Game Pass), where its owner and the ways to pay it may be
+ * stated.
  */
-function ownPages(provider: Provider, own: readonly string[]): string[] {
+function ownPages(
+  provider: Provider,
+  own: readonly string[],
+  sets: ReadonlyMap<string, PolicySet> = new Map(),
+): string[] {
   return [
     ...new Set([
       ...own,
       ...(provider.policies?.links ?? []).map((link) => siteDomain(link.url)),
+      ...(provider.policies?.shared ?? []).flatMap((id) =>
+        (sets.get(id)?.links ?? []).map((link) => siteDomain(link.url)),
+      ),
       ...(provider.owner?.website ? [siteDomain(provider.owner.website)] : []),
     ]),
   ];
@@ -858,7 +866,7 @@ function renewsMonthly(provider: Provider): boolean {
 function checkRenewalAnchor(
   provider: Provider,
   own: readonly string[],
-  { today, awaitingRenewal }: CheckContext,
+  { today, awaitingRenewal, policySets }: CheckContext,
   report: Report,
 ): void {
   const anchor = provider.renewalAnchor;
@@ -872,7 +880,7 @@ function checkRenewalAnchor(
     }
     return;
   }
-  const sites = ownPages(provider, own);
+  const sites = ownPages(provider, own, policySets);
   const pages =
     anchor.kind === 'not-stated'
       ? anchor.pages.map((url, index) => ({ url, path: ['renewalAnchor', 'pages', index] }))

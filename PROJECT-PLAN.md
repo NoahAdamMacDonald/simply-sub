@@ -1890,6 +1890,20 @@ in every D1 `json` column search parses.
       monthly renewal), and seven low findings left as rubric gaps for the owner: upgrade-only plan changes, a parent
       company's transfer, named countries with no safeguard, PCI DSS as a certification, reserved download limits, an
       age-of-majority rule for children, and a reminder longer than a period.
+  - **The US pages, through the reading browser alone** (2026-11-03): the owner would rather not switch the VPN, so
+    `read-page.cjs` gained `PROXY`, and read them through the SOCKS5 proxy of a Mullvad relay in Atlanta, inside the
+    owner's tunnel, with nothing else changed.
+    - **Hulu's and ESPN's renewal days** from the US subscriber agreement the three share (a subscriber from January 31
+    is "billed next on February 28"): their warnings are gone, and core's list of providers awaiting one is empty. The
+    validator counts the shared documents a provider names as its policies' sites, since ESPN's is on hulu.com.
+    - **Billing periods** confirmed (Hulu's yearly With Ads, "Automatically renews on annual basis for $124.99/year";
+      ESPN's four), and their channels noted, not resellers.
+    - **Netflix's US terms** grade as Canada's but for disputes: arbitration with a class-action waiver and an opt-out
+      by email within 30 days, a US rating, Poor.
+    - **The agreement again:** three clauses reworded since 2026-11-02 (a plan is a "Service Tier"), the same grades;
+      its quotes now date from this read.
+    - **Waiting still:** Hulu's and ESPN's downloads and kids profiles (Hulu's downloads perk would become a feature,
+      which the owner decides), TSN's and RDS's video quality.
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and

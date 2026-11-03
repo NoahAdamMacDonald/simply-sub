@@ -65,6 +65,16 @@ perks:
 # centre nor the release states it (plus.espn.com is Access Denied here). M11.9 infers HD (720p), marked on the card
 # with its page (the owner's choice of 2026-11-03): its connection speed article, for Select or Unlimited, recommends
 # 5.0 Mbps "for HD content" and 25.0 for 4K, and only Unlimited is said to stream in 4K.
+# Renewal day (M11.5), read 2026-11-03 (M11.9) through a US exit, in the US subscriber agreement Disney+, Hulu and
+# ESPN share (hulu.com/subscriber_agreement): the date you became a paying subscriber, or a shorter month's last day.
+renewalAnchor:
+  kind: same-date
+  page: Subscriber agreement
+  url: https://www.hulu.com/subscriber_agreement
+  quotes:
+    - 'if your subscription began on a day not contained in a given month (e.g. if you have a monthly subscription and became a paying subscriber on January 31, your payment method would be billed next on February 28)'
+  lastVerified: 2026-11-03
+
 # Apps, sign-in and support (M11.9, the cross-category features), read 2026-11-03 in its fan support centre: web browsers,
 # iPhone and iPad, Android, Windows 10 and 11, TVs and streaming devices, PlayStation and Xbox (Supported Devices); a
 # MyDisney email address and password (Disney+'s MyDisney article names ESPN); chat ("contact us by clicking the Chat
@@ -74,8 +84,10 @@ features:
   account.sign-in: [password]
   support.channels: [chat]
 
-# Official resellers and billing periods (M11.9): not read yet. Its US pages send a visitor from Canada to Disney+, so
-# they wait for a US exit of the owner's VPN, asked at the batch's end.
+# Billing periods and resellers (M11.9), read 2026-11-03 through a US exit: monthly and annual for both plans, as
+# stored (its plans and prices article: "ESPN Select Annual Subscription $139.99/Year", "ESPN Unlimited Annual
+# Subscription $319.99/Year"). No official resellers: pay-TV providers and app stores bill it as channels ("billed
+# through a third party, such as Apple or Google"). Downloads and kids profiles aren't on the pages read yet.
 plans:
   - id: espn.select
     name: Select

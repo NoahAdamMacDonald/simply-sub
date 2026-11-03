@@ -16,7 +16,9 @@
 //   snap:<name>                   save <name>.txt (visible text, URL first) and <name>.png (full-page screenshot)
 // With no snap step, the page is saved as page.txt / page.png at the end.
 //
-// Environment: LOCALE (browser locale, default en-CA), LOAD_WAIT (ms after each load, default 6000).
+// Environment: LOCALE (browser locale, default en-CA), LOAD_WAIT (ms after each load, default 6000), PROXY (a
+// SOCKS5 or HTTP proxy for this browser only: one of Mullvad's relays' socks5 proxies, reachable inside the owner's
+// Mullvad tunnel, reads another country's pages without switching the VPN; see SKILL.md).
 const fs = require('fs');
 const path = require('path');
 
@@ -38,7 +40,11 @@ async function snap(page, name) {
 
 (async () => {
   fs.mkdirSync(outDir, { recursive: true });
-  const browser = await chromium.launch({ channel: 'msedge', headless: true });
+  const browser = await chromium.launch({
+    channel: 'msedge',
+    headless: true,
+    ...(process.env.PROXY ? { proxy: { server: process.env.PROXY } } : {}),
+  });
   // The browser's own user agent, as the discovery pipeline's (scripts/lib/browser.ts): a site that prices by where the
   // visitor is can show a headless one another country's prices (claude.com/pricing showed Canada the US's).
   const probe = await browser.newPage();
