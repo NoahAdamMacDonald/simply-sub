@@ -10,6 +10,9 @@
 //   apps/web/public/data/policies/<id>.json        a provider's Terms and policies (M11.8), out of every other file
 //   apps/web/public/data/policies/shared/<id>.json a shared policy document
 //   apps/web/public/data/policies/index.json       the pages each of those cites, for the nightly check
+//   apps/web/public/data/seed/index.json           what the bot seeds what waits from (M11.8): each provider's hash
+//                                                  in the catalog's order, the features and the bundles
+//   apps/web/public/data/seed/providers/<id>.json  each provider as catalog.json has it
 //   apps/web/public/icons/<id>.webp                each provider's logo from data/logos/, as a WebP of at most 96 px,
 //                                                  published as /icons/<id>.webp
 // It refuses to build a catalog with validation errors, and fails on a file over 20 MiB, naming it, before Cloudflare's
@@ -21,12 +24,15 @@ import {
   catalogIconSize,
   catalogIds,
   buildPolicyIndex,
+  buildSeedIndex,
   categoriesBody,
   featuresBody,
   policyFilePath,
   policyFiles,
   policyIndexPath,
   regionSnapshot,
+  seedIndexPath,
+  seedProviderPath,
   sharedPolicyFilePath,
 } from '@simply-sub/core';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
@@ -41,11 +47,12 @@ import {
   printIssues,
   repoRoot,
 } from './lib/catalog-files';
-import { buildSnapshot } from './lib/snapshot';
+import { buildSnapshot, providerHashes } from './lib/snapshot';
 
 const publicDir = 'apps/web/public/';
 const catalogDir = 'apps/web/public/data/catalog/';
 const policiesDir = 'apps/web/public/data/policies/';
+const seedDir = 'apps/web/public/data/seed/';
 const iconsDir = 'apps/web/public/icons/';
 /** Cloudflare refuses a static file over 25 MiB: the build stops first, at 20 (M11.8). */
 const maxFileBytes = 20 * 1024 * 1024;
@@ -95,6 +102,17 @@ if (errors > 0) {
   }
   await write(`${publicDir}${policyIndexPath}`, JSON.stringify(buildPolicyIndex(policies)));
 
+  // What the bot seeds from, a provider a step, when a deploy's seed went over the day's rows (M11.8): the seed index
+  // and each provider as catalog.json has it, whose SHA-256 the index names.
+  await clear(seedDir);
+  for (const provider of data.providers) {
+    await write(`${publicDir}${seedProviderPath(provider.id)}`, JSON.stringify(provider));
+  }
+  await write(
+    `${publicDir}${seedIndexPath}`,
+    JSON.stringify(buildSeedIndex(snapshot, providerHashes(snapshot))),
+  );
+
   await clear(iconsDir);
   const icons = [...data.providers, ...data.resellers].filter(({ iconUrl }) => iconUrl);
   let iconBytes = 0;
@@ -113,7 +131,8 @@ if (errors > 0) {
       `Catalog ${catalogVersion}: wrote ${catalogFile} (${kilobytes(json)}),`,
       ` ${plural(index.regions.length, 'region file')} in ${catalogDir} (${sizes.join(', ')}),`,
       ' features.json, categories.json, ids.json,',
-      ` ${plural(policies.providers.length + policies.sets.length, 'policies file')} (${Math.ceil(policyBytes / 1024)} KB in all)`,
+      ` ${plural(policies.providers.length + policies.sets.length, 'policies file')} (${Math.ceil(policyBytes / 1024)} KB in all),`,
+      ` the seed's index and ${plural(data.providers.length, 'provider file')}`,
       ` and ${plural(icons.length, 'WebP icon')} (${Math.ceil(iconBytes / 1024)} KB in all).`,
       warnings > 0 ? ` ${plural(warnings, 'warning')}: run npm run data:validate.` : '',
     ].join(''),
