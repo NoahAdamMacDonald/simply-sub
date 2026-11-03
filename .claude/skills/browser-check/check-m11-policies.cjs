@@ -210,7 +210,8 @@ async function greyLooks(section) {
           const looks = await greyLooks(tou);
           check(
             `${label}: a grey line's topic, grade and dot are the muted grey, hidden dot; a graded topic isn't`,
-            looks.lines === 3 &&
+            // Its three, and the topics rated since (#113).
+            looks.lines >= 3 &&
               looks.topicMuted &&
               looks.gradeMuted &&
               looks.dotGrey &&
@@ -309,7 +310,8 @@ async function greyLooks(section) {
               ) &&
               huluRows.some((row) => row.startsWith('neutral | Ads and tracking (Neutral):')) &&
               huluRows.some((row) => row.startsWith('neutral | Deleting your data (Neutral):')) &&
-              links.length === 1 &&
+              // Disney's privacy policy listed once, its own pages after it.
+              links.filter((link) => link.includes('Privacy policy')).length === 1 &&
               links[0].replace(/\s+/g, ' ').includes('[1] Privacy policy'),
             `${huluRows.join(' | ')} / ${links.join(', ')}`,
           );
@@ -321,7 +323,7 @@ async function greyLooks(section) {
               row.startsWith(
                 'neutral | Selling or sharing data (Neutral): It gives some details about you, like ID codes or a scrambled copy of your email address',
               ),
-            ) && disneyRows.length === 4,
+            ) && disneyRows.length >= 4,
             disneyRows.join(' | '),
           );
           await hulu.screenshot({

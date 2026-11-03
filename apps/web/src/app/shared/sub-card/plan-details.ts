@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, Injector, computed, inject, input } from '@angular/core';
+import { Component, Injector, computed, inject, input, resource } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
@@ -31,6 +31,7 @@ import {
   type SuiteContents,
 } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
+import { PolicyFiles } from '../../core/catalog/policy-files';
 import { ClockService } from '../../core/clock/clock-service';
 import { FxStore } from '../../core/fx/fx-store';
 import { SettingsStore } from '../../core/settings/settings-store';
@@ -94,9 +95,11 @@ const groupNames: Record<PolicyGroup, string> = {
   imports: [FeatureList, MatButton, MatIcon, MatTooltip, NgTemplateOutlet, PriceTag, ProviderIcon],
   templateUrl: './plan-details.html',
   styleUrl: './plan-details.scss',
+  host: { '(window:online)': 'retryPolicies()' },
 })
 export class PlanDetails {
   private readonly catalog = inject(CatalogStore);
+  private readonly policyFiles = inject(PolicyFiles);
   private readonly settings = inject(SettingsStore);
   private readonly fx = inject(FxStore);
   private readonly today = inject(ClockService).today;
@@ -141,19 +144,52 @@ export class PlanDetails {
       this.today(),
     );
   });
+  /**
+   * Its Terms and policies' file, loaded as the card opens (M11.8): only for a provider whose catalog file points to
+   * one instead of holding them, as files from before M11.8 did.
+   */
+  private readonly policyLoad = resource({
+    params: () => {
+      const provider = this.provider();
+      return provider.policiesUrl && !provider.policies ? provider.id : undefined;
+    },
+    loader: ({ params }) => this.policyFiles.load(params),
+  });
   /** Its terms and policies for this plan, as they apply where the user lives (core's planPolicies). */
   protected readonly policies = computed(() => {
     const saved = this.settings.saved();
     const data = this.catalog.catalog();
     if (!saved || !data) return undefined;
-    return planPolicies(
-      this.provider(),
-      this.plan().id,
-      saved.country,
-      data.policyTopics,
-      data.policySets,
+    const provider = this.provider();
+    const load = this.policyLoad.hasValue() ? this.policyLoad.value() : undefined;
+    const [policies, sets] =
+      load?.status === 'ready' ? [load.policies, load.sets] : [provider.policies, data.policySets];
+    return (
+      policies &&
+      planPolicies(
+        { ...provider, policies },
+        this.plan().id,
+        saved.country,
+        data.policyTopics,
+        sets,
+      )
     );
   });
+  /** Why its Terms and policies aren't shown yet: they're loading, or out of reach the first time (M11.8). */
+  protected readonly policyNote = computed(() => {
+    if (this.policyLoad.isLoading()) return 'Loading its terms and policies…';
+    const load = this.policyLoad.hasValue() ? this.policyLoad.value() : undefined;
+    if (load?.status === 'offline') {
+      return 'Its terms and policies need a connection the first time: they’ll show once you’re online.';
+    }
+    if (load?.status === 'failed') return 'Its terms and policies couldn’t be loaded.';
+    return undefined;
+  });
+  /** Back online, Terms and policies that were out of reach load. */
+  protected retryPolicies(): void {
+    const load = this.policyLoad.hasValue() ? this.policyLoad.value() : undefined;
+    if (load?.status === 'offline') this.policyLoad.reload();
+  }
   /** Outside raters' labels by subject (M11.2): each with its date and a link to the rater's page, never its text. */
   protected readonly outside = computed(() =>
     outsideRatings(this.provider(), this.catalog.catalog()?.raters),

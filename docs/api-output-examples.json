@@ -63,7 +63,7 @@
       ]
     },
     "GET /catalog": {
-      "description": "The full catalog snapshot: features, categories, providers (with plans, add-ons and every region's prices) and bundles. Served from the static files the build writes, byte for byte: /data/catalog.json, or a region's /data/catalog/<region>.json. The ETag is the catalog version, the same for every region.",
+      "description": "The full catalog snapshot: features, categories, providers (with plans, add-ons and every region's prices) and bundles. A provider's Terms and policies are a static file of their own at its policiesUrl, under /data/policies/, which the app loads when a card opens them (M11.8). Served from the static files the build writes, byte for byte: /data/catalog.json, or a region's /data/catalog/<region>.json. The ETag is the catalog version, the same for every region.",
       "query": {
         "region": "Optional. An ISO 3166-1 region code, a group (EU) or GLOBAL. Keeps only the prices pickPrice can pick for a buyer there, whatever their currency: for each plan, add-on and bundle, the region's own prices, or else its group's (EU for a Swede). An item priced in neither keeps every price, since any of them can be the fallback. Every item stays, and meta.region names the region. The response is the static file /data/catalog/<region>.json, or the group's file for a country without one of its own; a region with neither gets the full snapshot, without meta.region (BLUEPRINT §6.3)."
       },
@@ -305,7 +305,8 @@
                           { "region": "US", "currency": "USD", "amount": 8.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14" }
                         ]
                       }
-                    ]
+                    ],
+                    "policiesUrl": "https://sub.simplely.ca/data/policies/netflix.json"
                   },
                   {
                     "_note": "No acceptedNetworks: unknown, so the app allows every card with an 'acceptance not confirmed' hint. Only a GLOBAL EUR price exists, so Canadian users see a converted price. It includes VAT (taxIncluded), so no sales tax is added in Canada or the US.",
@@ -349,7 +350,8 @@
                           }
                         ]
                       }
-                    ]
+                    ],
+                    "policiesUrl": "https://sub.simplely.ca/data/policies/mullvad.json"
                   }
                 ],
                 "bundles": [],
@@ -615,10 +617,11 @@
                           { "region": "CA", "currency": "CAD", "amount": 7.99, "interval": "month", "intervalCount": 1, "autoRenew": true, "lastVerified": "2026-10-14" }
                         ]
                       }
-                    ]
+                    ],
+                    "policiesUrl": "https://sub.simplely.ca/data/policies/netflix.json"
                   },
                   {
-                                        "id": "mullvad",
+                    "id": "mullvad",
                     "name": "Mullvad VPN",
                     "aliases": ["mullvad"],
                     "website": "https://mullvad.net",
@@ -658,7 +661,8 @@
                           }
                         ]
                       }
-                    ]
+                    ],
+                    "policiesUrl": "https://sub.simplely.ca/data/policies/mullvad.json"
                   }
                 ],
                 "bundles": [],
@@ -1384,7 +1388,7 @@
       ]
     },
     "GET /providers/:id": {
-      "description": "One provider as written, with all its plans, add-ons and every region's prices. With a region, picked 'pricing' is added after the prices of each plan and add-on that isn't not-offered there (availability, BLUEPRINT §4.7): one not sold there gets none, and an unknown one gets its fallback price. It reads 2 D1 rows: the catalog row and the provider's. The ETag is D1's catalog version and a hash of the id, the query as read and the exchange rates' date, and If-None-Match gets 304. An old id that data/redirects.yaml sends on (M10.27) gets 301 to the new one's URL, with the query kept. Any other unknown id gets 404 not_found, with details[].suggestion when an id looks like a typo of it. Both come from the static data/catalog/ids.json, so they read no more rows.",
+      "description": "One provider as written, with all its plans, add-ons and every region's prices, and its Terms and policies' policiesUrl (M11.8) in place of them. With a region, picked 'pricing' is added after the prices of each plan and add-on that isn't not-offered there (availability, BLUEPRINT §4.7): one not sold there gets none, and an unknown one gets its fallback price. It reads 2 D1 rows: the catalog row and the provider's. The ETag is D1's catalog version and a hash of the id, the query as read and the exchange rates' date, and If-None-Match gets 304. An old id that data/redirects.yaml sends on (M10.27) gets 301 to the new one's URL, with the query kept. Any other unknown id gets 404 not_found, with details[].suggestion when an id looks like a typo of it. Both come from the static data/catalog/ids.json, so they read no more rows.",
       "query": {
         "region": "Optional, e.g. CA: the region to pick prices for, as on GET /providers. Without it there are no prices, and currency gets 400.",
         "currency": "Optional, e.g. CAD: the euro or a currency the ECB publishes a rate for. Defaults to the region's main currency, or USD when the ECB has no rate for it. Needs region. Any other parameter gets 400, and a region with no exchange rates at all gets 502, as on GET /providers."
@@ -1527,7 +1531,8 @@
                       { "interval": "month", "intervalCount": 1, "amount": 7.99, "currency": "CAD", "monthlyEquivalent": 7.99, "autoRenew": true, "native": true, "source": { "region": "CA", "amount": 7.99, "currency": "CAD" } }
                     ]
                   }
-                ]
+                ],
+                "policiesUrl": "https://sub.simplely.ca/data/policies/netflix.json"
               },
               "meta": {
                 "catalogVersion": "c4f9a21",
@@ -1711,7 +1716,8 @@
                     ],
                     "_note": "A suite for two people (account.users: 2). It includes Unlimited, and inclusion is transitive, so it also covers the plans Unlimited includes. It costs more than one Unlimited, so no savings line is shown; the optimizer can still use it to replace two people's Unlimited plans in one list."
                   }
-                ]
+                ],
+                "policiesUrl": "https://sub.simplely.ca/data/policies/proton.json"
               },
               "meta": {
                 "catalogVersion": "c4f9a21",

@@ -280,6 +280,22 @@ describe('the weekly digest', () => {
       services.proposals[0].changes.find((change) => change.path === reviewFile)?.text ?? '';
     expect(review).toContain('**mullvad**: The check failed: D1 is unavailable');
   });
+
+  it('reads each provider’s Terms and policies from their file, which D1 leaves out (M11.8)', async () => {
+    const world = quietWorld();
+    const services = await fakeServices(world, undefined, { baselines: baselinesOf(world) });
+    const asked: string[] = [];
+    const read = services.readPolicies;
+    services.readPolicies = async (url) => {
+      asked.push(url);
+      return read(url);
+    };
+    await runNight(today, stepper([]), services);
+    expect(asked).toEqual([
+      'https://sub.simplely.ca/data/policies/mullvad.json',
+      'https://sub.simplely.ca/data/policies/netflix.json',
+    ]);
+  });
 });
 
 describe('price reports (M10.10)', () => {

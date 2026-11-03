@@ -123,6 +123,13 @@
   <p class="notes">{{ notes }}</p>
 }
 
+<!-- A provider's Terms and policies load as the card opens (M11.8): a note while they can't show. -->
+@if (policyNote(); as note) {
+  <div class="group">
+    <h3>Terms and policies</h3>
+    <p class="policy-note" role="status">{{ note }}</p>
+  </div>
+}
 @if (policies(); as policies) {
   <div class="group">
     <h3>Terms and policies</h3>

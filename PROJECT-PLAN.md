@@ -1484,13 +1484,39 @@ in every D1 `json` column search parses.
   - [ ] Seed tests in workerd: a price change, a feature added to 100 providers, a budget reached mid-catalog and
         resumed, a shape change over three days with the API reading only complete tables
   - [ ] EXPLAIN QUERY PLAN shows no table scan for text, category or price-sorted queries
-  - [ ] Opening Terms and policies offline after one visit shows them; first time offline says they need a connection
+  - [x] Opening Terms and policies offline after one visit shows them; first time offline says they need a connection
 - **As built**, in parts (one pull request each):
   - **The tests' catalog** (2026-11-02): the API's tests read `apps/api/test/fixtures/catalog/`, a copy of `data/`
     frozen that day (its logos empty files, named as `data/`'s), under `data/`'s file names, so core builds and seeds
     it as the deploy does; nothing of `apps/api` reads `data/` now. The app's specs had their own fixtures already.
     Core's few tests of the real files stay on them on purpose: `draftYaml` must write the catalog's own formatting,
     and the pipeline's tests read `categories.yaml` and `automation.yaml`, which are rules rather than research.
+  - **Policies out** (2026-11-02): `data:build` writes `/data/policies/<id>.json` per provider that rates its
+    policies, `/data/policies/shared/<id>.json` per shared document (a folder of its own, so a document's id never
+    meets a provider's) and `/data/policies/index.json` (each file's pages, and each provider's shared documents, for
+    the bot), and fails on any file over 20 MiB, naming it. The snapshot leaves `policies` and `policySets` out, and a
+    provider that rates its policies gets `policiesUrl`, which D1's `json` keeps, so `GET /providers/:id` points to
+    the file (the contract's examples show it). The region files halved: `CA.json` is 130 KB for the 13 providers,
+    about 285 KB with the quotes (a provider about 6 KB, 17 with its policies; `data:build`'s KB are 1,024 bytes). Instead of a hash per file in
+    `index.json`, the app keeps each file with the catalog version it was read under: after a new version, opening it
+    again is a 304 when it's unchanged.
+    - **Core:** `policy-files.ts` (`policyFileSchema`, `policyIndexSchema`, `policyFiles`, `buildPolicyIndex`, the
+      paths); `catalogCacheSchema` takes a Terms and policies file beside a catalog file (`isCatalogFile`), with no
+      new Dexie version; `citedPages` takes the policies' pages from a `PolicyIndex`, by default the providers' own.
+    - **The app:** `PolicyFiles` loads a provider's file and its shared documents when the card opens (a kept file
+      under the catalog's version as it is; offline, any kept one), through `PolicyCacheRepository`, which keeps them
+      out of the initial bundle (499.92 kB with this change), and the card says "Loading its terms and policies…",
+      that they need a connection the first time (loading them on `online`), or that they couldn't be loaded. Files
+      from before M11.8, with the policies inside, still show them.
+    - **The bot:** the night reads the site's `index.json` and shared documents (`SITE_URL`, a new var), and in each
+      provider's step its file at `policiesUrl`; it's deployed by hand, so it reads no policies until it's deployed
+      again after this merges.
+    - **Tests:** core (the files, the index, the snapshot without the quotes, the cache's two kinds of record,
+      `citedPages` from an index, the contract's examples as source files), the app (`PolicyFiles`: downloaded and
+      kept, kept under the version, read again after a new one, offline with and without kept files, a file that
+      isn't one; the card's loading, offline, back online and failed notes), the bot (its files read in each step),
+      and a browser check (`check-m11-policies-out.cjs`: Proton's card loads its file, then offline after a reload
+      shows it, and a provider never opened says it needs a connection).
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and

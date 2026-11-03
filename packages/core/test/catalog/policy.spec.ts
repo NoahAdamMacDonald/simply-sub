@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import {
+  buildPolicyIndex,
+  policyFilePath,
+  policyFiles,
+  sharedPolicyFilePath,
   formatCatalogIssue,
   buildCatalogData,
   planPolicies,
@@ -901,10 +905,21 @@ describe('shared policy documents (M11.1)', () => {
     ]);
   });
 
-  it('publishes the documents with the catalog', () => {
-    const data = buildCatalogData(readCatalogSource(withSet()), 'https://sub.simplely.ca/icons/');
-    expect(data.policySets).toEqual([set]);
-    expect(buildCatalogData(readCatalogSource(withPolicies()), '').policySets).toBeUndefined();
+  it('publishes each document and each provider’s policies in a file of its own, out of the catalog (M11.8)', () => {
+    const source = readCatalogSource(withSet());
+    const data = buildCatalogData(source, 'https://sub.simplely.ca/icons/');
+    expect(data.policySets).toBeUndefined();
+    const mullvad = data.providers.find((provider) => provider.id === 'mullvad');
+    expect(mullvad?.policies).toBeUndefined();
+    expect(mullvad?.policiesUrl).toBe('https://sub.simplely.ca/data/policies/mullvad.json');
+    const files = policyFiles(source);
+    expect(files.sets).toEqual([set]);
+    expect(files.providers.map((file) => file.id)).toContain('mullvad');
+    const index = buildPolicyIndex(files);
+    expect(index.sets['group-privacy']).toEqual({ links: set.links.map((link) => link.url) });
+    expect(index.providers['mullvad']?.shared).toEqual(['group-privacy']);
+    expect(policyFilePath('mullvad')).toBe('data/policies/mullvad.json');
+    expect(sharedPolicyFilePath('group-privacy')).toBe('data/policies/shared/group-privacy.json');
   });
 
   describe('planPolicies, with a shared document', () => {

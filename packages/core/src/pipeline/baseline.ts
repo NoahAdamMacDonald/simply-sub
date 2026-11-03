@@ -1,5 +1,6 @@
 import type { Bundle } from '../catalog/bundle';
 import type { PolicySet } from '../catalog/policy';
+import { buildPolicyIndex, policyFiles, type PolicyIndex } from '../catalog/policy-files';
 import type { Provider } from '../catalog/provider';
 import { isoDateSchema } from '../catalog/formats';
 import type { IsoDate } from '../dates/iso-date';
@@ -125,13 +126,14 @@ export interface CitedPage {
 /**
  * Every page the catalog cites: its prices' sources, its pricing page, the pages naming its resellers, its accepted
  * cards, its ways to pay and its currencies (pricing), and the pages its policy ratings, its owner, its renewal day and
- * its source code quote or read (policies, M11.5), a shared document's for each provider naming it (`policySets`). A
- * page cited both ways is a pricing page.
+ * its source code quote or read (policies, M11.5), a shared document's for each provider naming it. A page cited both
+ * ways is a pricing page. The policies' pages are `policies`' (M11.8): by default the providers' own policies', and
+ * the index data:build writes for the nightly bot, whose providers (D1's) leave them out.
  */
 export function citedPages(
   providers: readonly Provider[],
   bundles: readonly Bundle[],
-  policySets: readonly PolicySet[] = [],
+  policies: PolicyIndex = buildPolicyIndex(policyFiles({ providers, policySets: [] })),
 ): CitedPage[] {
   const pages = new Map<string, CitedPage>();
   const cite = (url: string | undefined, type: CitedType, owner: string) => {
@@ -156,14 +158,15 @@ export function citedPages(
       cite(accepted.url, 'pricing', id);
     for (const entry of provider.paymentMethods ?? []) cite(entry.url, 'pricing', id);
     for (const entry of provider.currencies ?? []) cite(entry.url, 'pricing', id);
-    for (const link of provider.policies?.links ?? []) cite(link.url, 'policies', id);
+    const policyPages = policies.providers[id];
+    for (const url of policyPages?.links ?? []) cite(url, 'policies', id);
     cite(provider.owner?.page.url, 'policies', id);
     const anchor = provider.renewalAnchor;
     if (anchor?.kind === 'not-stated') for (const url of anchor.pages) cite(url, 'policies', id);
     else cite(anchor?.url, 'policies', id);
     cite(provider.sourceRepo?.page.url, 'policies', id);
-    for (const set of policySets.filter((set) => provider.policies?.shared?.includes(set.id)))
-      for (const link of set.links) cite(link.url, 'policies', id);
+    for (const set of policyPages?.shared ?? [])
+      for (const url of policies.sets[set]?.links ?? []) cite(url, 'policies', id);
   }
   for (const bundle of bundles)
     for (const price of bundle.prices) cite(price.sourceUrl, 'pricing', bundle.id);

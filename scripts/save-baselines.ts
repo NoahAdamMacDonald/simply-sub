@@ -10,10 +10,12 @@
 import {
   baselineLines,
   baselinePath,
+  buildPolicyIndex,
   citedFacts,
   citedPages,
   missingQuotes,
   pageShows,
+  policyFiles,
   readCatalogSource,
   servedCovers,
   toIsoDate,
@@ -38,9 +40,11 @@ if (countErrors(issues) > 0) {
   fail('The catalog has errors: fix them first (npm run data:validate).');
 }
 const catalog = readCatalogSource(sources);
-const pages = citedPages(catalog.providers, catalog.bundles, catalog.policySets).filter(
-  (page) => owners.length === 0 || page.owners.some((owner) => owners.includes(owner)),
-);
+const pages = citedPages(
+  catalog.providers,
+  catalog.bundles,
+  buildPolicyIndex(policyFiles(catalog)),
+).filter((page) => owners.length === 0 || page.owners.some((owner) => owners.includes(owner)));
 const today = toIsoDate(new Date());
 const renderer = new Renderer(new PoliteWeb());
 let saved = 0;

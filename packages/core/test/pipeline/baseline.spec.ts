@@ -151,6 +151,23 @@ describe('citedPages', () => {
       },
     ]);
   });
+
+  it('takes the policies’ pages from their index, as the nightly bot does with D1’s providers (M11.8)', () => {
+    const asStored = { ...provider, policies: undefined };
+    const shared = 'https://example.com/group-privacy';
+    expect(
+      citedPages([asStored], [], {
+        providers: {
+          mullvad: { links: ['https://mullvad.net/en/help/terms-service'], shared: ['group'] },
+        },
+        sets: { group: { links: [shared] } },
+      }).filter(({ type }) => type === 'policies'),
+    ).toEqual([
+      { url: shared, type: 'policies', owners: ['mullvad'] },
+      { url: 'https://mullvad.net/en/help/terms-service', type: 'policies', owners: ['mullvad'] },
+    ]);
+    expect(citedPages([asStored], []).filter(({ type }) => type === 'policies')).toEqual([]);
+  });
 });
 
 describe('citedFacts', () => {

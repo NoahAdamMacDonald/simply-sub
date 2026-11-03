@@ -1,8 +1,11 @@
 import {
+  buildPolicyIndex,
   citedPages,
   planTitle,
+  policyFiles,
   retirementOf,
   type Bundle,
+  type PolicyIndex,
   type PolicyRating,
   type PolicySet,
   type Price,
@@ -137,13 +140,12 @@ export function policyTargets(
 function policySetOwners(
   providers: readonly SnapshotProvider[],
   sets: readonly PolicySet[],
+  policies: PolicyIndex,
 ): Record<string, PolicySet[]> {
   const owned: Record<string, PolicySet[]> = {};
   const ids = providers.map((provider) => provider.id).sort();
   for (const set of sets) {
-    const owner = ids.find((id) =>
-      providers.find((provider) => provider.id === id)?.policies?.shared?.includes(set.id),
-    );
+    const owner = ids.find((id) => policies.providers[id]?.shared?.includes(set.id));
     if (owner) (owned[owner] ??= []).push(set);
   }
   return owned;
@@ -180,11 +182,16 @@ function unique(names: string[]): string[] {
   return [...new Set(names)];
 }
 
-/** The night's index: each provider's and bundle's pages, and every host they and the websites are on. */
+/**
+ * The night's index: each provider's and bundle's pages, and every host they and the websites are on. Its policies'
+ * pages are `policies`' (M11.8): /data/policies/index.json's, since D1's providers leave their policies out, or by
+ * default those the providers hold.
+ */
 export function catalogIndex(
   providers: readonly SnapshotProvider[],
   bundles: readonly Bundle[],
   sets: readonly PolicySet[] = [],
+  policies: PolicyIndex = buildPolicyIndex(policyFiles({ providers, policySets: sets })),
 ): CatalogIndex {
   const hosts = new Set<string>(iconServiceHosts);
   const pagesOf = (urls: readonly string[]) => {
@@ -198,8 +205,8 @@ export function catalogIndex(
     providers: {},
     bundles: {},
     hosts: [],
-    cited: citedPages(providers as readonly Provider[], bundles, sets),
-    policySets: policySetOwners(providers, sets),
+    cited: citedPages(providers as readonly Provider[], bundles, policies),
+    policySets: policySetOwners(providers, sets, policies),
   };
   for (const provider of providers) {
     pagesOf([provider.website]);
@@ -207,7 +214,9 @@ export function catalogIndex(
       ...providerTargets(provider).map((target) => target.price.sourceUrl),
       ...approvalTargets(provider).map((approval) => approval.url),
       ...networksTargets(provider).map((target) => target.url),
-      ...policyTargets(provider, index.policySets[provider.id]).map((target) => target.url),
+      // The pages its policies cite, and those of the shared documents its step checks.
+      ...(policies.providers[provider.id]?.links ?? []),
+      ...(index.policySets[provider.id] ?? []).flatMap((set) => set.links.map((link) => link.url)),
     ]);
   }
   for (const bundle of bundles) {

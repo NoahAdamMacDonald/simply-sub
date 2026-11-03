@@ -1,6 +1,9 @@
 import {
   automationSchema,
   baselineLines,
+  buildPolicyIndex,
+  policyFilePath,
+  policyFiles,
   policyTopicsFileSchema,
   pageText,
   type Automation,
@@ -194,11 +197,24 @@ export async function fakeServices(
     proposals.push({ ...made, branch });
     return `https://github.com/NoahAdamMacDonald/simply-sub/pull/${proposals.length}`;
   };
+  // D1's providers leave their policies out (M11.8): the site's files hold them, at each one's policiesUrl.
+  const urlOf = (id: string) => `https://sub.simplely.ca/${policyFilePath(id)}`;
+  const stored = providers.map((provider) =>
+    provider.policies
+      ? { ...provider, policies: undefined, policiesUrl: urlOf(provider.id) }
+      : provider,
+  );
+  const policies = buildPolicyIndex(policyFiles({ providers, policySets: [] }));
   return {
     proposals,
     steps: [],
-    readIndex: async () => catalogIndex(providers, []),
-    readProvider: async (id) => providers.find((provider) => provider.id === id),
+    readIndex: async () => catalogIndex(stored, [], [], policies),
+    readProvider: async (id) => stored.find((provider) => provider.id === id),
+    async readPolicies(url) {
+      const found = providers.find((provider) => urlOf(provider.id) === url)?.policies;
+      if (!found) throw new Error(`Nothing at ${url}`);
+      return found;
+    },
     readBundle: async () => undefined,
     readRobots: async (hosts) =>
       Object.fromEntries(hosts.map((host) => [host, 'allow-all' as const])),

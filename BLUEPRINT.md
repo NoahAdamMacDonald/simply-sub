@@ -1145,7 +1145,9 @@ with M4.3 and `drafts` with M6.3, which needed no new version since nothing had 
 repository with M9.1 (its schema is in core already, since backups carry cards). v2 (M4.4) adds `fxRates`. v3 (M8.2)
 gives `dismissedSuggestions` its record schema and an index of its list, with an upgrade that empties it: nothing wrote
 to it before, so a row there wasn't the app's. The cache tables (`cacheTables` in core: `catalogCache` and `fxRates`) are left out of
-backups and left plain by the app lock, and their records are replaced and deleted outright. Drafts are deleted
+backups and left plain by the app lock, and their records are replaced and deleted outright. M11.8's Terms and
+policies files are a second kind of `catalogCache` record (`catalogCacheSchema` tells them apart), with no new
+version: the records before them are unchanged. Drafts are deleted
 outright too, on Save or Cancel: they're edits not saved yet, with no deletion for a sync to pass on.
 ```ts
 db.version(1).stores({
@@ -1156,7 +1158,7 @@ db.version(1).stores({
   cards: 'id',
   tags: 'id',
   settings: 'key',
-  catalogCache: 'key',         // one record per downloaded catalog file (M4.3)
+  catalogCache: 'key',         // one record per downloaded catalog file (M4.3), and per Terms and policies file (M11.8)
   drafts: 'listId',            // unsaved list edits (PROJECT-PLAN.md P5)
   dismissedSuggestions: 'fingerprint'
 });
@@ -1383,8 +1385,9 @@ M1.14, M11.1), so a buyer can see what signing up means beyond the price.
   outright only with `replacesShared: true`, when its document says it applies instead. Validation checks a
   document's ratings as it does a provider's, counts them toward each naming provider's topics, refuses a name with
   no file and a `replacesShared` where no named document rates the topic, and warns about a document no one names.
-  `data:build` publishes them with the catalog (`policySets`, section 6.3); the nightly check reads each one from the
-  repository at its commit, since D1 has no copy, and checks its pages in the step of the first provider naming it.
+  `data:build` publishes each in a file of its own, `/data/policies/shared/<id>.json` (section 6.3, M11.8), which the
+  card downloads with the provider's and the nightly check reads, checking its pages in the step of the first
+  provider naming it.
 - **A topic and a feature on the same fact** both stay, the feature for ranking and the topic for the card, and must
   agree (core's `topicFeatureRules`): activity logging is Great only when every plan it covers with `vpn.included` has
   `no-logs` in `vpn.independent-audits`, for a provider's own rating and a shared document's. A rule whose feature
@@ -1413,9 +1416,10 @@ M1.14, M11.1), so a buyer can see what signing up means beyond the price.
   follow, under Sources. A topic with no rating isn't shown, and a provider with none has no section. A rating's
   action is a link under its reason, in a new tab (M5.12).
 - **Read like prices:** the policy-research skill, from the provider's own pages; a page behind a bot check stays
-  unread. The quotes are in the catalog files, and the card shows them in its citations' tooltips and links (about
-  7 kB more to download, compressed, for ten providers; M11.8 moves them to a file per provider). Nothing rereads them
-  nightly yet: validation warns once a rating is a year old.
+  unread. The card shows the quotes in its citations' tooltips and links. They were about half the catalog by M11.8,
+  so since then they're in a file per provider, out of the catalog files and D1 (section 6.3): the card downloads it
+  when it opens, saying "Loading its terms and policies…" meanwhile, and keeps it for offline use. The nightly check
+  looks for the quotes on their pages weekly (section 6.4), and validation warns once a rating is a year old.
 - **Outside raters** (M11.2, the owner's choice): facts the provider's own pages can't give, a news outlet's bias and
   reliability and an antivirus's lab results, as a provider's `ratings`: the rater, the subject, its label, the
   rater's date and a link to its page, never the rater's text or our own judgement. The raters are listed once in
@@ -1846,10 +1850,12 @@ write the files.
    - `data` is `schemaVersion` plus the source files: features, categories, providers sorted by id (with an
      `iconUrl` when the provider has a logo; without one, the app shows its first letter), bundles sorted by id,
      `data/resellers.yaml`'s resellers sorted by id, each with an `iconUrl` the same way (section 4.9), and
-     `data/policy-topics.yaml`'s topics in its order (`policyTopics`, section 4.10), and `data/policies/`'s shared
-     documents sorted by id (`policySets`, left out when there are none), and `data/raters.yaml`'s raters sorted by id
-     (`raters`, section 4.10, left out when there are none). Bundles stay in their source shape: the app computes feature unions and
-     savings in core for the user's region, and `GET /bundles` adds them per request (M2.4).
+     `data/policy-topics.yaml`'s topics in its order (`policyTopics`, section 4.10), and `data/raters.yaml`'s raters
+     sorted by id (`raters`, section 4.10, left out when there are none). Bundles stay in their source shape: the app computes feature unions and
+     savings in core for the user's region, and `GET /bundles` adds them per request (M2.4). A provider's `policies`
+     and `data/policies/`'s shared documents aren't in it (M11.8): a provider that rates its policies has their
+     file's address instead, `policiesUrl`, so the region files, `catalog.json`, D1 and `GET /providers/:id` leave the
+     quotes out.
    - `meta` is `catalogVersion` (section 5.1), `generatedAt` (the build time, UTC), every priced region, and
      counts.
 3. Write the snapshot files into `apps/web/public/data/` (gitignored), which the Angular build publishes under
@@ -1864,7 +1870,13 @@ write the files.
    - `catalog/ids.json`: every provider id with its plan ids (`catalogIds`), and the provider and plan redirects. The
      Worker reads it only after a 404 or 400: to answer an old id with a 301 (M10.27), else to suggest an id (M2.4), so
      neither costs D1 rows. `data/redirects.yaml` is in the snapshot and every region file too, as `redirects` (left
-     out when there are none).
+     out when there are none);
+   - `policies/<id>.json` for each provider that rates its policies (`{ id, policies }`, core's `policyFileSchema`),
+     `policies/shared/<id>.json` for each shared document (a folder of its own, so a document's id never meets a
+     provider's), and `policies/index.json`, the pages each one cites and each provider's shared documents
+     (`policyIndexSchema`), which the nightly check reads instead of every file (M11.8).
+
+   A file over 20 MiB fails the build, naming it, before Cloudflare's 25 MiB refuses the deploy (M11.8).
 4. Convert each provider's and reseller's logo in `data/logos/` to `apps/web/public/icons/<id>.webp`, published as
    `/icons/<id>.webp`: at
    most 96 pixels wide (`catalogIconSize` in core, twice the 48 px the app shows icons at, for high-density
@@ -1907,6 +1919,13 @@ never downloads every region's prices.
   (`planCatalogSync`), all at the index's version, saved in one transaction that also drops the files no region
   needs any more. A file of another version (a deploy between the two requests), one that fails its schema, or the
   SPA fallback in its place isn't kept, and the cached files stay.
+- **Terms and policies** (M11.8, `PolicyFiles`): a card downloads its provider's file and the shared documents it
+  names when it opens, each a `catalogCache` record of its own (keyed `policies/<id>` and `policies/shared/<id>`)
+  with the catalog version it was read under. Under that version it's used as it is; after a new one, opening it asks
+  again, and the browser revalidates it with its ETag, so an unchanged file costs a 304 and `index.json` needs no hash
+  per file. Offline, the card shows what it kept, of any version; with nothing kept it says they need a connection
+  the first time, and loads them on the browser's `online` event. The catalog's checks leave them alone: a file stays
+  until it's read again, a few KB each.
 - **Unsaved items' regions:** a page asks for the files its items not saved yet need with `need(regions)`, for as long
   as the page lives (its `DestroyRef`): the list editor for its draft's items, and the item dialog for its Bought in
   (M6.5). Without it a region chosen in the dialog would have no prices until Save, and a check would drop its file.
@@ -1964,6 +1983,9 @@ compares each page with its baseline (`data/baselines/`, section 6.5) before any
 - **What's due:** every page the catalog cites (core's `citedPages`: pricing pages daily, the policy pages its ratings
   quote weekly) whose last check, kept in KV (`bot:checks`, one key written once a night), is a cadence ago, and each
   logo weekly; a provider with nothing due has no step.
+- **Policies from the site** (M11.8): D1's providers leave their policies out, so the night reads the site's
+  `/data/policies/index.json` (`SITE_URL`) for the pages they cite and each shared document's file, and in a
+  provider's step its own file, at its `policiesUrl`, for the quotes.
 - **Unchanged:** a page read the way its baseline was (`fetch`, or a browser when the baseline says so and tonight's
   browser pages allow) whose lines are its baseline's (`baselineDiff`, which ignores order) confirms every price on it
   and keeps its quotes, with no model and no money matching. A page read another way (no browser left) is checked as
