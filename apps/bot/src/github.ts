@@ -33,7 +33,9 @@ export class GitHub {
   private readonly fetcher: typeof fetch;
 
   constructor(private readonly options: GitHubOptions) {
-    this.fetcher = options.fetch ?? fetch;
+    // The global fetch called on its own: workerd refuses it as this object's method ("Illegal invocation"), which
+    // stopped every night at its first step until 2026-11-03.
+    this.fetcher = options.fetch ?? ((input, init) => fetch(input, init));
   }
 
   /** The base branch's head, its logos and its resellers. */
