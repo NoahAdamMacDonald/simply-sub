@@ -1,22 +1,28 @@
 import {
   buildCatalogData,
   buildCatalogMeta,
-  buildSeedSql,
+  planSeed,
+  providersToRead,
   readCatalogSource,
   readSeedState,
+  readStoredRows,
   seedFormat,
   seedStateQueries,
+  storedRowQueries,
   type CatalogSnapshot,
   type CatalogSource,
   type CatalogSourceFile,
   type Price,
+  type SeedOptions,
+  seedTables,
 } from '@simply-sub/core';
 import { env } from 'cloudflare:workers';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 // The seed that scripts/seed-d1.ts runs (BLUEPRINT §5.3, §6.3), against the real D1 schema: it reads what D1 holds
-// with seedStateQueries, then runs only what changed. db.batch reports rows_written as D1 bills them (each index
-// entry and each deleted row is a row written), which is what the free plan's 100,000 a day counts.
+// with seedStateQueries and the changed providers' rows with storedRowQueries, then writes only the rows that changed
+// (M11.8). db.batch reports rows_written as D1 bills them (each index entry and each deleted row is a row written),
+// which is what the free plan's 100,000 a day counts, and what core's estimate must match.
 const db = env.DB;
 
 const tables = [
@@ -173,10 +179,17 @@ async function sha256(text: string): Promise<string> {
 interface SeedRun {
   statements: number;
   rowsWritten: number;
+  /** What core said it would write. */
+  estimated: number;
+  /** What it left for the next seed. */
+  waiting: string[];
 }
 
-/** Seeds D1 the way scripts/seed-d1.ts does: from what it holds, or in full. */
-async function seed(snapshot: CatalogSnapshot, { full = false } = {}): Promise<SeedRun> {
+/** Seeds D1 the way scripts/seed-d1.ts does: from what it holds, or in full, within `budget` when there's one. */
+async function seed(
+  snapshot: CatalogSnapshot,
+  { full = false, budget }: { full?: boolean; budget?: SeedOptions['budget'] } = {},
+): Promise<SeedRun> {
   const providerHashes = new Map(
     await Promise.all(
       snapshot.data.providers.map(
@@ -191,15 +204,27 @@ async function seed(snapshot: CatalogSnapshot, { full = false } = {}): Promise<S
           (result) => result.results,
         ),
       );
-  const sql = buildSeedSql(snapshot, { providerHashes, current });
-  const statements = sql === '' ? [] : sql.trimEnd().split('\n');
+  const ids = current ? providersToRead(snapshot, { providerHashes, current }) : [];
+  const rows =
+    ids.length > 0
+      ? readStoredRows(
+          ids,
+          (await db.batch(storedRowQueries(ids).map((query) => db.prepare(query)))).map(
+            (result) => result.results,
+          ),
+        )
+      : undefined;
+  const plan = planSeed(snapshot, { providerHashes, current, rows, budget });
+  const statements = plan.sql === '' ? [] : plan.sql.trimEnd().split('\n');
   if (statements.length === 0) {
-    return { statements: 0, rowsWritten: 0 };
+    return { statements: 0, rowsWritten: 0, estimated: plan.writes, waiting: plan.waiting };
   }
   const results = await db.batch(statements.map((statement) => db.prepare(statement)));
   return {
     statements: statements.length,
     rowsWritten: results.reduce((sum, result) => sum + result.meta.rows_written, 0),
+    estimated: plan.writes,
+    waiting: plan.waiting,
   };
 }
 
@@ -259,6 +284,10 @@ describe('a full seed', () => {
       built_at: snapshot.meta.generatedAt,
       seed_format: seedFormat,
       counts: JSON.stringify(snapshot.meta.counts),
+      // Nothing waits, and without a budget (a test's, a local D1's) no day's count is kept (M11.8).
+      waiting: 0,
+      written_on: null,
+      written: 0,
     });
   });
 
@@ -423,8 +452,8 @@ describe('provider-wide features (M11.4)', () => {
 
     await seed(snapshotOf(source), { full: true });
     const onEachPlan = await seed(snapshotOf(perPlan, 'def5678'));
-    // Netflix's two plans: 3 rows each, and an index entry for each row.
-    expect(onEachPlan.rowsWritten - providerWide.rowsWritten).toBe(2 * 3 * 2 - 3);
+    // Netflix's two plans: 3 rows each with an index entry, and each plan's json (M11.8), against 3 rows once.
+    expect(onEachPlan.rowsWritten - providerWide.rowsWritten).toBe(2 * 3 * 2 + 2 - 3);
   });
 
   it("goes with its provider: replacing or deleting it takes the provider's rows", async () => {
@@ -493,7 +522,12 @@ describe('rows written', () => {
   it('is 0 for a code-only deploy, which builds the same catalog again', async () => {
     await seed(snapshotOf(testCatalog()), { full: true });
 
-    expect(await seed(snapshotOf(testCatalog()))).toEqual({ statements: 0, rowsWritten: 0 });
+    expect(await seed(snapshotOf(testCatalog()))).toEqual({
+      statements: 0,
+      rowsWritten: 0,
+      estimated: 0,
+      waiting: [],
+    });
   });
 
   it('is only the provider’s rows for a one-provider price change', async () => {
@@ -508,9 +542,10 @@ describe('rows written', () => {
     };
     const { removed, added, replaced } = await providerCosts(testCatalog, 'netflix', netflix);
 
-    // Deleting Netflix and inserting it again, and the catalog row once: nothing of any other provider's.
-    expect(removed).toBeGreaterThan(1);
-    expect(replaced).toBe(removed - 1 + (added - 1) + 1);
+    // Since M11.8 only the rows that changed (the price with its index entry, its plan's json, Netflix's json and
+    // hash) and the catalog row, not deleting Netflix and inserting it again.
+    expect(replaced).toBe(5);
+    expect(removed + added).toBeGreaterThan(20 * replaced);
   });
 
   it('counts each row and each index entry, for a full seed of the tests’ catalog into empty tables', async () => {
@@ -532,5 +567,200 @@ describe('rows written', () => {
     const rows = (await Promise.all(tables.map(count))).reduce((sum, n) => sum + n, 0);
 
     expect((await seed(snapshot, { full: true })).rowsWritten).toBe(rows + intoEmpty);
+  });
+});
+
+/** The tests' catalog with `edit` applied to its source. */
+function changed(edit: (catalog: CatalogSource) => void): CatalogSource {
+  const catalog = testCatalog();
+  edit(catalog);
+  return catalog;
+}
+
+describe('the estimate (M11.8)', () => {
+  beforeEach(async () => {
+    await db.batch(tables.map((table) => db.prepare(`DELETE FROM ${table}`)));
+  });
+
+  it.each<[string, (catalog: CatalogSource) => void]>([
+    ['a price', (catalog) => (catalog.providers[0].plans[0].prices[0].amount += 1)],
+    [
+      'a plan gone',
+      (catalog) => {
+        const proton = catalog.providers.find((provider) => provider.id === 'proton');
+        proton?.plans.splice(1, 1);
+      },
+    ],
+    ['a provider gone', (catalog) => catalog.providers.splice(1, 1)],
+    [
+      'a provider new',
+      (catalog) =>
+        catalog.providers.push({
+          ...structuredClone(catalog.providers[0]),
+          id: 'zz',
+          plans: catalog.providers[0].plans.map((plan) => ({
+            ...structuredClone(plan),
+            id: plan.id.replace(/^[^.]+/, 'zz'),
+          })),
+        }),
+    ],
+    [
+      'an enum value moved',
+      (catalog) => {
+        const quality = catalog.features.find((feature) => feature.id === 'video.quality');
+        if (quality?.type === 'enum') quality.values.splice(1, 0, { id: '1440p', name: '1440p' });
+      },
+    ],
+    ['a feature renamed', (catalog) => (catalog.features[0].name = 'Something else')],
+  ])('is what D1 counts, for %s', async (_change, edit) => {
+    await seed(snapshotOf(testCatalog()), { full: true });
+    const run = await seed(snapshotOf(changed(edit), 'def5678'));
+
+    expect(run.rowsWritten).toBeGreaterThan(0);
+    expect(run.estimated).toBe(run.rowsWritten);
+  });
+
+  it('is what D1 counts, for a full seed into empty tables and over full ones', async () => {
+    const first = await seed(snapshotOf(testCatalog()));
+    expect(first.estimated).toBe(first.rowsWritten);
+    const current = readSeedState(
+      (await db.batch(seedStateQueries.map((query) => db.prepare(query)))).map(
+        (result) => result.results,
+      ),
+    );
+    // Another seed format: everything again, the deletes counted from D1's row counts.
+    const snapshot = snapshotOf(testCatalog(), 'def5678');
+    const hashes = new Map(snapshot.data.providers.map((provider) => [provider.id, 'x']));
+    const plan = planSeed(snapshot, {
+      providerHashes: hashes,
+      current: {
+        ...current,
+        ...(current.catalog && { catalog: { ...current.catalog, seedFormat: seedFormat - 1 } }),
+      },
+    });
+    const results = await db.batch(
+      plan.sql
+        .trimEnd()
+        .split('\n')
+        .map((statement) => db.prepare(statement)),
+    );
+    expect(plan.writes).toBe(results.reduce((sum, result) => sum + result.meta.rows_written, 0));
+  });
+
+  it('is each provider’s few rows for a feature added to 100 providers', async () => {
+    // 100 providers like Netflix, each with its two plans.
+    const hundred = (withFeature: boolean) =>
+      edited((catalog) => {
+        if (withFeature) catalog.features.push(platforms);
+        const [netflix] = catalog.providers.splice(1, 1);
+        catalog.bundles = [];
+        for (let n = 0; n < 100; n++) {
+          const id = `netflix-${n}`;
+          catalog.providers.push({
+            ...structuredClone(netflix),
+            id,
+            ...(withFeature && { features: { platforms: ['web', 'tv'] } }),
+            plans: netflix.plans.map((plan) => ({
+              ...structuredClone(plan),
+              id: plan.id.replace('netflix', id),
+            })),
+          });
+        }
+      });
+    await seed(snapshotOf(hundred(false)), { full: true });
+    const run = await seed(snapshotOf(hundred(true), 'def5678'));
+
+    // Each provider's json and 2 provider_features rows, the feature, and the catalog row.
+    expect(run.rowsWritten).toBe(100 * 3 + 1 + 1);
+    expect(run.estimated).toBe(run.rowsWritten);
+  });
+});
+
+describe('the daily budget (M11.8)', () => {
+  beforeEach(async () => {
+    await db.batch(tables.map((table) => db.prepare(`DELETE FROM ${table}`)));
+  });
+
+  const today = '2026-11-03';
+  const catalogRow = () =>
+    db
+      .prepare('SELECT version, waiting, written_on, written FROM catalog')
+      .first<{ version: string; waiting: number; written_on: string | null; written: number }>();
+
+  it('applies whole providers until the next wouldn’t fit, and the next seeds carry on', async () => {
+    const before = snapshotOf(testCatalog(), 'abc1234');
+    await seed(before, { full: true });
+    // Every provider's price up: each costs its few rows.
+    const after = snapshotOf(
+      changed((catalog) => {
+        for (const provider of catalog.providers) provider.plans[0].prices[0].amount += 1;
+      }),
+      'def5678',
+    );
+    const providers = after.data.providers.map((provider) => provider.id);
+
+    const first = await seed(after, { budget: { today, daily: 12 } });
+    expect(first.rowsWritten).toBeLessThanOrEqual(12);
+    expect(first.estimated).toBe(first.rowsWritten);
+    expect(first.waiting.length).toBeGreaterThan(0);
+    // The ones that wait are the last in the catalog's order.
+    expect(first.waiting).toEqual(providers.slice(providers.length - first.waiting.length));
+    expect(await catalogRow()).toEqual({
+      version: 'abc1234',
+      waiting: first.waiting.length,
+      written_on: today,
+      written: first.rowsWritten,
+    });
+
+    // The same day: nothing left, nothing written.
+    expect((await seed(after, { budget: { today, daily: 12 } })).statements).toBe(0);
+
+    // The next days, until nothing waits; then the catalog row names the new version.
+    let day = 4;
+    for (let left = first.waiting.length; left > 0; day++) {
+      const next = await seed(after, { budget: { today: `2026-11-0${day}`, daily: 12 } });
+      expect(next.waiting.length).toBeLessThan(left);
+      left = next.waiting.length;
+    }
+    expect(await catalogRow()).toMatchObject({ version: 'def5678', waiting: 0 });
+    // The rows a full seed writes, but for the catalog row's count of the day's writes, which a full seed restarts.
+    const resumed = { ...(await dump()), catalog: [] };
+    await seed(after, { full: true });
+    expect(resumed).toEqual({ ...(await dump()), catalog: [] });
+  });
+
+  it('fills an empty D1 over several days, naming no version until it holds the whole catalog', async () => {
+    const snapshot = snapshotOf(source, 'def5678');
+    const first = await seed(snapshot, { budget: { today, daily: 30 } });
+    expect(first.waiting).toEqual(['netflix', 'bundle.netflix-crave']);
+    expect(await catalogRow()).toMatchObject({ version: '0000000', waiting: 2 });
+
+    await seed(snapshot, { budget: { today: '2026-11-04', daily: 50_000 } });
+    expect(await catalogRow()).toMatchObject({ version: 'def5678', waiting: 0 });
+  });
+});
+
+describe('the catalog tables', () => {
+  it('have the keys and indexes core counts writes with', async () => {
+    for (const [table, shape] of Object.entries(seedTables)) {
+      const { results } = await db
+        .prepare(`SELECT name, origin FROM pragma_index_list('${table}') WHERE origin = 'c'`)
+        .all<{ name: string }>();
+      const indexes = await Promise.all(
+        results.map(async ({ name }) =>
+          (
+            await db
+              .prepare(`SELECT name FROM pragma_index_info('${name}') ORDER BY seqno`)
+              .all<{ name: string }>()
+          ).results.map((column) => column.name),
+        ),
+      );
+      const key = (
+        await db
+          .prepare(`SELECT name FROM pragma_table_info('${table}') WHERE pk > 0 ORDER BY pk`)
+          .all<{ name: string }>()
+      ).results.map((column) => column.name);
+      expect({ table, key, indexes }).toEqual({ table, key: shape.key, indexes: shape.indexes });
+    }
   });
 });

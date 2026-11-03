@@ -22,10 +22,10 @@ describe('GET /health', () => {
     expect(body.meta.generatedAt).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/);
   });
 
-  it('reports the catalog version, build time and counts that the seed recorded', async () => {
+  it('reports the catalog version, build time, counts and what waits, as the seed recorded them', async () => {
     await env.DB.prepare(
-      `INSERT INTO catalog (id, version, built_at, seed_format, counts)
-       VALUES (1, 'c4f9a21', '2026-10-22T03:12:45Z', 1, ?)`,
+      `INSERT INTO catalog (id, version, built_at, seed_format, counts, waiting)
+       VALUES (1, 'c4f9a21', '2026-10-22T03:12:45Z', 1, ?, 3)`,
     )
       .bind(JSON.stringify(counts))
       .run();
@@ -38,6 +38,8 @@ describe('GET /health', () => {
       catalogVersion: 'c4f9a21',
       catalogUpdatedAt: '2026-10-22T03:12:45Z',
       counts,
+      // Over a day's budget, the seed left 3 providers or bundles for the next one (M11.8).
+      catalogWaiting: 3,
     });
   });
 

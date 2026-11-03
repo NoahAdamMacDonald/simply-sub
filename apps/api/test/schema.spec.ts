@@ -60,6 +60,7 @@ describe('catalog schema', () => {
       '0002_seed_what_changed.sql',
       '0003_provider_categories.sql',
       '0004_provider_features.sql',
+      '0005_seed_budget.sql',
     ]);
   });
 
@@ -152,5 +153,19 @@ describe('catalog schema', () => {
     await insert(1);
     await expect(insert(2)).rejects.toThrow(/CHECK/);
     await expect(insert(1)).rejects.toThrow(/UNIQUE/);
+  });
+
+  it('starts a catalog row with nothing waiting and no day counted (migration 0005, M11.8)', async () => {
+    await db
+      .prepare(
+        `INSERT INTO catalog (id, version, built_at, seed_format, counts)
+         VALUES (1, 'abc1234', '2026-10-23T12:00:00Z', 1, '{}')`,
+      )
+      .run();
+    expect(await db.prepare('SELECT waiting, written_on, written FROM catalog').first()).toEqual({
+      waiting: 0,
+      written_on: null,
+      written: 0,
+    });
   });
 });
