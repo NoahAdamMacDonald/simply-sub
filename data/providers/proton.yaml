@@ -101,6 +101,9 @@ sourceRepo:
     - 'All Proton apps are open source and have been independently audited and verified by third-party experts.'
   lastVerified: 2026-11-03
 
+# Billing periods (M11.9, read 2026-11-03): monthly and yearly, every plan. Proton VPN's page also sells 2 years, but
+# as a first term ("Billed at CA$105.36 for the first 24 months, then renews at CA$104.88 every 12 months"), so it isn't
+# a price of its own.
 plans:
   - id: proton.free
     name: Proton Free

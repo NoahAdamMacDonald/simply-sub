@@ -95,6 +95,12 @@ features:
 # Standard and Premium, and no plan with ads.
 # Coverage: netflix.basic in CA, US, GB, AU, DE, FR, ES and IT, read 2026-11-03: each country's Plans and Pricing page
 # lists Standard with ads ("with adverts" in GB), Standard and Premium, and no Basic.
+
+# Official resellers: none (M11.9, read 2026-11-03). Its gift cards, which retailers sell ("Buy a Netflix gift card at a
+# participating retailer"), and the partners that "add Netflix to your bill" are ways to pay (paymentMethods), not shops
+# selling its plans at their own prices.
+# Billing periods: every country's Plans and Pricing page, "We do not offer annual, multi-month, or lifetime
+# membership plans", so monthly only.
 plans:
   - id: netflix.standard-ads
     name: Standard with ads

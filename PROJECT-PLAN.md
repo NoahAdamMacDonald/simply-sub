@@ -1724,6 +1724,28 @@ in every D1 `json` column search parses.
 
       It also reads the Features suggestions only once they show what was typed (the panel opens with every key):
       189 checks pass.
+  - **Disney+'s other countries, resellers and billing periods** (2026-11-03, the owner's answers that day: add the
+    countries with the bot deferring; channels noted, not listed):
+    - **Disney+** in the UK, Australia, New Zealand, Ireland, Germany, France, the Netherlands, Spain and Italy: 70
+      prices from its help centre's plans article with the country picked on its home page. Each country sells
+      Canada's three plans with the same features, in its own currency, with Extra Members; Australia and New Zealand
+      have one Extra Member price, not for Standard with Ads. Germany, France, the Netherlands, Spain and Italy share
+      prices and Ireland's differ, so each country keeps its own. The Coverage note adds With Ads, the US's own, in the
+      nine.
+    - **The bot defers on a page several regions cite:** the article is one address for all nine, so the nightly check
+      confirms only the prices the page shows and sends the rest to a person, with no model (`check-pages.ts`). The same
+      now holds for Claude's pricing page, which shows the reader's country.
+    - **Resellers (the owner's item):** every provider's file says what the check found. Bitdefender names none for
+      its home plans: its partner pages are for business. Claude, Netflix and Disney+ sell through app stores, gift
+      cards or billing partners, which are ways to pay. Crave, TSN and RDS are sold by TV and mobility providers, app
+      stores and Prime Video's channels, noted but not listed. ICI TOU.TV's EXTRA with ads is included with TELUS and
+      Koodo plans. Hulu and ESPN wait for a US exit.
+    - **Billing periods (the owner's item):** every plan's periods were read in every region. Those added since part 4:
+      none (TSN Standard is monthly only; Proton VPN's 2 years is a first term, renewing yearly; Crave's annual
+      Premium price is the regular $220.00, not the first-year $149.99). Netflix, ICI TOU.TV and Xbox sell monthly only.
+      Hulu and ESPN wait for a US exit.
+    - **Tests:** the bot (a page two regions cite confirms the prices it shows and sends the others to a person, with
+      no model); `check-search.cjs`'s UK steps use ESPN, which has no UK price (189 checks).
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and

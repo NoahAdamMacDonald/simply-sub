@@ -74,6 +74,8 @@ features:
   account.sign-in: [password]
   support.channels: [chat]
 
+# Official resellers and billing periods (M11.9): not read yet. Its US pages send a visitor from Canada to Disney+, so
+# they wait for a US exit of the owner's VPN, asked at the batch's end.
 plans:
   - id: espn.select
     name: Select

@@ -1310,6 +1310,10 @@ and Search shows one next to a plan's prices when it's cheaper for the buyer (M5
   `domains`, such as Proton VPN's protonvpn.com, which validation checks). Partners that
   run their own product on the provider's service (Mozilla VPN, Tailscale and Obscura on Mullvad's servers) don't
   sell the provider's subscription, so they're never listed. The same goes for every other provider.
+- **Channels aren't resellers** (the owner's choice of 2026-11-03, M11.9): a company that bills a subscription on its
+  own service is noted in the provider's file with its page's words, not listed. That covers TV and mobility providers
+  (Crave's FAQ names Bell, Cogeco, Rogers, Shaw, Telus and Videotron), app stores (a way to pay, `paymentMethods`),
+  Amazon Prime Video's channels, and a telecom's plans that include it (ICI TOU.TV's EXTRA with TELUS and Koodo).
 - **`data/resellers.yaml`** lists each shop once: `id`, `name`, `website`, and any other `domains` its pages are on
   (Amazon's country stores). Its logo is `data/logos/<id>.png`, fetched by `npm run data:icons` and published as
   `/icons/<id>.webp` like a provider's, so reseller and provider ids share one namespace. A shop can sell many
@@ -2086,6 +2090,10 @@ compares each page with its baseline (`data/baselines/`, section 6.5) before any
   browser pages allow) whose lines are its baseline's (`baselineDiff`, which ignores order) confirms every price on it
   and keeps its quotes, with no model and no money matching. A page read another way (no browser left) is checked as
   before, without the comparison.
+- **One country at a time** (M11.9): a page that several regions' prices cite shows the reader's country's, as
+  Disney+'s help article does for nine countries (its country a picker's) and Claude's pricing does by where the
+  reader is. Its baseline confirms none of them, and a price it doesn't show goes to a person rather than Workers AI,
+  since the page may be showing another country's.
 - **Changed, or no baseline yet:** the M8.3 checks run on it (prices on the page, then Workers AI for the rest; the
   `taxIncluded`, reseller and card quotes), and a policy page's ratings' quotes are looked for. Workers AI's answer now
   carries the page's words for each price, which must be on the page word for word and show the amount, else the price
@@ -3582,6 +3590,14 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-11-03, M11.9)**
+- **Disney+'s other countries:** its help centre's country picker shows each country's plans, so the UK, Australia, New
+  Zealand, Ireland, Germany, France, the Netherlands, Spain and Italy are priced (M10.13 had left Disney+ out, its
+  article going to Canada's). Every one of them is the same address, so the nightly check sends a price that a page
+  several regions cite doesn't show to a person rather than proposing a change (section 6.4).
+- **Channels aren't resellers:** TV and mobility providers, app stores, Prime Video's channels and telecom plans that
+  include a subscription are noted in the provider's file, never listed (section 4.9).
 
 **Resolved (2026-11-02, regional coverage, M11.7)**
 - **Mullvad VPN exits for regional prices** (the guide's §9, item 5): when a site shows this machine only Canada's

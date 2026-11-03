@@ -68,6 +68,9 @@ features:
   account.sign-in: [password]
   support.channels: [email]
 
+# Official resellers: none (M11.9, read 2026-11-03; the owner's choice that day: noted, not listed). The TELUS et Koodo
+# tab of ici.tou.tv/abonnement: "ICI TOU.TV EXTRA avec pubs", "Inclus", "AVEC UN FORFAIT TELUS" (and Koodo), which is
+# EXTRA with ads included in those companies' own plans. Billing periods: monthly only ("Mensuel").
 plans:
   - id: ici-tou-tv.extra
     name: EXTRA
