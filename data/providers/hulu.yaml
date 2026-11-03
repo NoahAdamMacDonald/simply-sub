@@ -54,6 +54,15 @@ perks:
 # Two streams at a time, read 2026-11-02 (M11.4) on hulu.com/paramount-plus-with-showtime: "While your Hulu base plan
 # allows you to watch on 2 simultaneous streams at a time" (the help centre's screens article renders no text here).
 # With Ads isn't ad free (its name, and the plans article's "Hulu (With Ads)").
+# Apps, sign-in and support (M11.9, the cross-category features), read 2026-11-03 in its help centre: web browsers, iPhone
+# and iPad, Android, Windows 10 and 11, TVs and streaming devices, PlayStation and Xbox (Supported devices); a MyDisney
+# email address and password (MyDisney login details); "live support 24 hours a day 7 days a week", by chat (How to
+# contact Hulu).
+features:
+  platforms: [windows, android, ios, web, tv, console]
+  account.sign-in: [password]
+  support.channels: [chat, 24-7]
+
 plans:
   - id: hulu.with-ads
     name: With Ads

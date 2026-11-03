@@ -58,6 +58,14 @@ renewalAnchor:
   pages: [https://ici.tou.tv/abonnement/condition]
   lastVerified: 2026-11-03
 
+# Apps and sign-in (M11.9, the cross-category features), read 2026-11-03: browsers on Windows and Mac, Android, iOS, TVs and
+# streaming devices, and Xbox One and Series X|S (ici.tou.tv/nos-plateformes, its help centre's platforms article); a
+# Radio-Canada account's email address and password (its help centre's sign-in article). Its pages name no support
+# channel, so support.channels is left out.
+features:
+  platforms: [web, android, ios, tv, console]
+  account.sign-in: [password]
+
 plans:
   - id: ici-tou-tv.extra
     name: EXTRA

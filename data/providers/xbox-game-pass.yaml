@@ -82,6 +82,16 @@ renewalAnchor:
     - https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/turn-on-recurring-billing
   lastVerified: 2026-11-03
 
+# Apps and sign-in (M11.9, the cross-category features), read 2026-11-03: Essential, Premium and Ultimate play on Xbox
+# consoles and PCs, and stream to phones, tablets and PCs through the Xbox app or a browser and to select LG, Samsung and
+# VIDAA TVs and Fire TV (xbox.com/en-CA/cloud-gaming); PC Game Pass is for Windows, cloud gaming "Not included with PC
+# Game Pass". A Microsoft account: a password, passkeys, approval in Microsoft Authenticator, security keys, an
+# authenticator app's codes, or codes by email or text (Microsoft's account security articles). Its contact page offers
+# only an automated agent ("Chat with our support virtual agent"), so support.channels is left out.
+features:
+  platforms: [windows, android, ios, web, tv, console]
+  account.sign-in: [password, passkey, push-approval, security-key, totp, email-code, sms]
+
 plans:
   - id: xbox-game-pass.essential
     name: Essential
@@ -258,7 +268,7 @@ plans:
   - id: xbox-game-pass.pc-game-pass
     name: PC Game Pass
     link: https://www.xbox.com/en-CA/xbox-game-pass
-    features: {}
+    features: { platforms: [windows] }
     perks: [pc-games-300, day-one-games, ea-play]
     prices:
       - region: CA

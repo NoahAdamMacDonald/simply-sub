@@ -44,6 +44,14 @@ renewalAnchor:
     - 'In some cases, the timing of a recurring charge may change, such as if your payment method does not settle as expected or if your subscription began on a date not contained in a given month.'
   lastVerified: 2026-11-03
 
+# Apps and sign-in (M11.9, the cross-category features), read 2026-11-03: smart TVs and streaming devices, PlayStation and
+# Xbox, PC and Mac computers in a web browser, and Apple and Android phones and tablets (its device compatibility FAQ); a
+# Bell Media account's password ("How to sign in to Crave"). Its help centre names no way to reach support
+# (crave.ca/en/contact-us goes to a page not found), so support.channels is left out.
+features:
+  platforms: [web, ios, android, tv, console]
+  account.sign-in: [password]
+
 plans:
   - id: crave.standard-ads
     name: Standard With Ads

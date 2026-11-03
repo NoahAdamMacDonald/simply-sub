@@ -81,6 +81,26 @@ renewalAnchor:
     - https://proton.me/support/account/plans/payments-invoices
   lastVerified: 2026-11-03
 
+# Apps, sign-in, support and open source (M11.9, the cross-category features), read 2026-11-03: its apps on Windows, macOS,
+# Linux, Android and iOS, Mail and Drive on the web, Pass and VPN as browser extensions and VPN on Apple TV, Android TV
+# and Fire TV (each product's download page; each product's plan lists its own, Drive's Linux being a command-line tool);
+# a password, then an authenticator app's code or a U2F or FIDO2 security key (its 2FA articles); its support form or
+# email (/support/contact), and live chat for Proton VPN's customers (protonvpn.com's "Live chat"), on the plans with
+# VPN Plus; "All Proton apps are open source" (/community/open-source), which links its code on GitHub.
+features:
+  platforms: [windows, macos, linux, android, ios, web, browser-extension, tv]
+  account.sign-in: [password, totp, security-key]
+  support.channels: [email]
+  software.open-source: open-clients
+sourceRepo:
+  url: https://github.com/ProtonMail
+  page:
+    name: Open source
+    url: https://proton.me/community/open-source
+  quotes:
+    - 'All Proton apps are open source and have been independently audited and verified by third-party experts.'
+  lastVerified: 2026-11-03
+
 plans:
   - id: proton.free
     name: Proton Free
@@ -123,6 +143,7 @@ plans:
     categories: [email, calendar]
     notIn: [vpn, passwords, storage, ai]
     features:
+      platforms: [windows, macos, linux, android, ios, web]
       storage.cloud: 15
       email.addresses: 10
       email.custom-domains: 1
@@ -215,6 +236,7 @@ plans:
     categories: [storage]
     notIn: [vpn, passwords, email, calendar, ai]
     features:
+      platforms: [windows, macos, android, ios, web]
       storage.cloud: 200
       email.addresses: 1
       email.aliases: 10
@@ -306,6 +328,8 @@ plans:
     categories: [vpn]
     notIn: [passwords, email, calendar, storage, ai]
     features:
+      support.channels: [email, chat]
+      platforms: [windows, macos, linux, android, ios, browser-extension, tv]
       storage.cloud: 5
       email.addresses: 1
       email.aliases: 10
@@ -403,6 +427,7 @@ plans:
     categories: [passwords]
     notIn: [vpn, email, calendar, storage, ai]
     features:
+      platforms: [windows, macos, linux, android, ios, browser-extension]
       storage.cloud: 5
       email.addresses: 1
       email.aliases: unlimited
@@ -518,6 +543,7 @@ plans:
     link: https://proton.me/pricing
     categories: [privacy-suite, vpn, storage, email, passwords, calendar, ai]
     features:
+      support.channels: [email, chat]
       storage.cloud: 500
       email.addresses: 15
       email.custom-domains: 3
@@ -643,6 +669,7 @@ plans:
     link: https://proton.me/family
     categories: [privacy-suite, vpn, storage, email, passwords, calendar, ai]
     features:
+      support.channels: [email, chat]
       account.users: 2
       storage.cloud: 2000
       email.addresses: 30
@@ -769,6 +796,7 @@ plans:
     link: https://proton.me/family
     categories: [privacy-suite, vpn, storage, email, passwords, calendar, ai]
     features:
+      support.channels: [email, chat]
       account.users: 6
       storage.cloud: 3000
       email.addresses: 90

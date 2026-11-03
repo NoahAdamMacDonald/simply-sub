@@ -70,6 +70,13 @@ renewalAnchor:
     - 'In some cases, the timing of a recurring charge may change, such as if your payment method does not settle as expected or if your subscription began on a date not contained in a given month.'
   lastVerified: 2026-11-03
 
+# Apps and sign-in (M11.9, the cross-category features), read 2026-11-03 on its subscribe page ("Stream on Your Favourite
+# Devices"): TVs and streaming devices, TSN.ca on computers, Android, iPhone and iPad, PlayStation 5 and Xbox; a Bell
+# Media account's password (its FAQ). Its pages name no support channel, so support.channels is left out.
+features:
+  platforms: [web, ios, android, tv, console]
+  account.sign-in: [password]
+
 plans:
   - id: tsn.standard
     name: Standard

@@ -82,6 +82,15 @@ renewalAnchor:
     - 'If your billing date does not occur on the last day of each month (for example, the 31st), you will be billed on the last day of that month instead.'
   lastVerified: 2026-11-02
 
+# Apps, sign-in and support (M11.9, the cross-category features), read 2026-11-03 in its help centre: smart TVs and
+# streaming players, Android, iPhone and iPad, the Netflix app for Windows, netflix.com in a browser (a Mac's way),
+# PlayStation and Xbox (node 14361); a password, or the sign-in codes and links it sends "to your email address or phone
+# number"; calling or chatting from its app (node 33335).
+features:
+  platforms: [windows, android, ios, web, tv, console]
+  account.sign-in: [password, email-code, sms]
+  support.channels: [phone, chat]
+
 plans:
   - id: netflix.standard-ads
     name: Standard with ads

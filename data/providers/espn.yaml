@@ -64,6 +64,15 @@ perks:
 # Disney+ in the U.S. to ESPN Unlimited subscribers". Select's video quality: neither the plans article, the support
 # centre nor the release states it (plus.espn.com is Access Denied here), so it waits for M11.9
 # (awaitingRequiredFeatures in core).
+# Apps, sign-in and support (M11.9, the cross-category features), read 2026-11-03 in its fan support centre: web browsers,
+# iPhone and iPad, Android, Windows 10 and 11, TVs and streaming devices, PlayStation and Xbox (Supported Devices); a
+# MyDisney email address and password (Disney+'s MyDisney article names ESPN); chat ("contact us by clicking the Chat
+# icon below").
+features:
+  platforms: [windows, android, ios, web, tv, console]
+  account.sign-in: [password]
+  support.channels: [chat]
+
 plans:
   - id: espn.select
     name: Select

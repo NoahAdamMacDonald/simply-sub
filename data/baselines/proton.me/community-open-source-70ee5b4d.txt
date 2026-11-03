@@ -1,0 +1,277 @@
+url: https://proton.me/community/open-source
+method: fetch
+saved: 2026-11-03
+
+An open source privacy company | Proton Personal Personal
+Business Business
+Download
+Discover Proton Discover Proton
+Resources
+Pricing
+Encrypted emailProton Mail VPN Proton VPN(new window) Cloud storageProton Drive Password managerProton Pass AI assistantLumo AI
+Video conferencingProton Meet Private schedulingProton Calendar Collaborative documentsProton Docs Collaborative spreadsheetsProton Sheets Two-factor authenticatorProton Authenticator
+Bitcoin walletProton Wallet Encrypted notes Standard Notes(new window) Hide-my-email aliases SimpleLogin(new window)
+Discover Proton
+Personal plans
+Proton
+Choose an internet where your privacy comes first
+Create a free account
+All-in-one business suiteProton Workspace Business emailProton Mail Business VPNProton VPN Business AI assistantLumo AI Business video conferencingProton Meet Business calendarProton Calendar Business password managerProton Pass
+Business cloud storageProton Drive Business documentsProton Docs Business spreadsheetsProton Sheets
+Industries
+Tech Healthcare Nonprofits News and media
+Business resources
+Trust center HIPAA GDPR Data Breach Observatory ISO 27001 Case studies Business blog
+Switch from
+Microsoft 365 Google Workspace
+Discover Proton for Business
+Business plans
+Proton Workspace
+Your whole team, one encrypted workspace
+Explore Workspace
+Proton Mail Proton VPN Proton Drive Proton Pass Lumo AI Proton Meet Proton Calendar Proton Authenticator Proton Wallet
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+macOS Windows Linux
+Web app
+Web app(new window)
+Desktop client add-on
+Bridge
+Scan to get the mobile app
+Devices
+Windows(new window)macOS(new window)Linux(new window)Chromebook(new window)Android(new window)iOS(new window)
+Extensions
+Chrome(new window)Firefox(new window)
+Smart TV
+Android TV(new window)Apple TV(new window)Firestick(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+Windows macOS CLI
+Web app
+Web app(new window)
+Scan to get the mobile app
+Devices
+Windows macOS Linux Android iOS Command line interface(new window)
+Extensions
+Chrome Safari Firefox Edge Brave
+Web app
+Web app(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Web app
+Web app(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+macOS Windows Linux
+Web app
+Web app(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+macOS Windows Linux
+Web app
+Web app(new window)
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Desktop apps
+macOS Windows Linux
+Scan to get the mobile app
+Mobile apps
+iOS(new window)Android(new window)
+Web app
+Web app(new window)
+Company
+About us Impact Team CareersWe’re hiring Proton Foundation Proton blog
+Privacy
+Open source Zero-access encryption Big Tech alternatives
+Connect
+Partners and affiliates Social media Media contact
+Discover Proton
+Personal plans
+Proton
+We believe a better world starts with privacy and digital freedom
+Discover Proton
+Get started with Proton
+Beginner video guides (new window)Learn about encryption Business resources
+News
+Proton blog Product updates
+Reports and insights
+Investigative reports Proton VPN observatory (new window)Data breach observatory Tech fines tracker Europe’s tech sovereignty watch European alternatives Age verification explained Proton’s guide to AI
+Videos about privacy
+Mass surveillance explained (new window)How employers spy on you (new window)The data you leak in 24 hours (new window)How to disappear online (new window)See all videos (new window)
+Tools
+What is my IP address? (new window)Password generator Username generator PDF watermark Image watermark Flock camera map
+Support
+Help center Contact us
+EN
+Create a free account
+Sign in
+Open menu
+We believe in the power of open source
+Transparency is the only way to earn the trust of our community.
+All Proton apps are open source and have been independently audited and verified by third-party experts. Anyone can see and verify that our apps do what we claim.
+Open source enhances the security of our products
+Proton's software has been independently audited for security by thousands of experts around the world. You can view the audit reports, inspect the code yourself, or even contribute improvements.
+Proton Mail
+GitHub(new window)
+Audit report (web)(new window)
+Audit report (desktop)(new window)
+Proton Calendar
+GitHub(new window)
+Audit report(new window)
+Proton Drive
+GitHub(new window)
+Audit report(new window)
+Proton Meet
+GitHub
+Proton VPN
+GitHub(new window)
+Audit report(new window)
+All audits(new window)
+Proton Pass
+GitHub (web)(new window)
+GitHub (apps)(new window)
+Audit report(new window)
+Proton Authenticator
+GitHub(new window)(new window)
+Proton Wallet
+GitHub(new window)
+Lumo
+GitHub (web)(new window)
+GitHub (iOS)(new window)
+GitHub (Android)(new window)
+Our contributions to the open-source community
+We are the primary maintainers of widely used open-source cryptographic libraries for the JavaScript and Go programming languages.
+OpenPGPjs
+JavaScript encryption library
+Learn more(new window)
+Contribute on GitHub(new window)
+Security audit(new window)
+GopenPGP
+Golang encryption library
+Learn more(new window)
+Contribute on GitHub(new window)
+Security audit(new window)
+Making our code freely accessible to developers encourages innovation in privacy tech and helps solve real-world privacy challenges.
+Help Proton build an internet where privacy is the default
+You can directly contribute to Proton by committing code improvements to our repositories or participating in our bug bounty program.
+Contribute to GitHub(new window)
+Bug Bounty Program
+Proton community
+Community contributions have always been important to Proton’s growth. You can join the conversation with Proton on social media, become a beta tester, join the Proton localization project, and give us feedback that helps us develop our services.
+Explore the community
+Privacy by default
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+Proton AG Route de la Galaise 32
+1228 Plan-les-Ouates
+Geneva, Switzerland
+Products Proton Mail
+Proton Calendar
+Proton Drive
+Proton VPN(new window)
+Proton Pass
+Proton Wallet
+Proton Docs
+Proton Sheets New
+Proton Authenticator
+Proton Meet New
+Lumo AI
+Standard Notes(new window)
+Simple Login(new window)
+Proton for Business
+Pricing
+Switch to Proton
+Products
+Proton Mail
+Proton Calendar
+Proton Drive
+Proton VPN(new window)
+Proton Pass
+Proton Wallet
+Proton Docs
+Proton Sheets New
+Proton Authenticator
+Proton Meet New
+Lumo AI
+Standard Notes(new window)
+Simple Login(new window)
+Proton for Business
+Pricing
+Switch to Proton
+Privacy Password generator
+Username generator
+Tor
+Open source
+Student discount
+Special reports
+Proton vs. competitors
+Privacy
+Password generator
+Username generator
+Tor
+Open source
+Student discount
+Special reports
+Proton vs. competitors
+Company About us
+Team
+Impact
+Proton Foundation
+Careers We’re hiring
+Shop(new window)
+Donate
+Blog
+Company
+About us
+Team
+Impact
+Proton Foundation
+Careers We’re hiring
+Shop(new window)
+Donate
+Blog
+Connect Social media
+Help and support
+Partners and affiliates
+Referral program
+Press and media
+Contact us
+Connect
+Social media
+Help and support
+Partners and affiliates
+Referral program
+Press and media
+Contact us
+English
+System status(new window)
+Report abuse
+Report a problem
+Report a security issue
+Request a feature(new window)
+English
+Privacy Policy
+Terms & conditions
+Transparency report
+© 2026 Proton AG. All rights reserved.
