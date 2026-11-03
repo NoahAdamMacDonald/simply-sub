@@ -141,32 +141,11 @@ policies:
   links:
     - name: 'Bell Media terms'
       url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
-    - name: "Bell's use of data"
-      url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
     - name: 'Crave terms and conditions'
       url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
     - name: 'Cancelling'
       url: https://plus.crave.ca/en/faq/plans-billing-bundles/canceling-or-pausing-my-crave-subscription/
   ratings:
-    - topic: privacy.data-sharing
-      tier: good
-      reason: "It shares your information among Bell's own companies and its suppliers. Anyone else gets it only when the law says so or you agree."
-      sources:
-        - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
-          quote: 'To get a better idea of your needs and how we can fulfill them, we sometimes share information between our companies.'
-        - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
-          quote: 'We only disclose personal information with parties outside our family of companies and suppliers when we are required to or when you have given express consent for us to do so.'
-      lastVerified: 2026-10-27
-    - topic: privacy.ads-tracking
-      tier: neutral
-      reason: 'It picks ads for you, and you can change what kinds of ads you get in your preferences.'
-      sources:
-        - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
-          quote: 'You can manage the types of ads you receive or opt out of communications by updating your preferences.'
-      action:
-        name: 'Update your Bell preferences'
-        url: https://www.bell.ca/email-updates
-      lastVerified: 2026-10-27
     - topic: billing.cancellation
       tier: neutral
       reason: 'You can cancel online whenever you like, but by the day before it renews at the latest, or you pay for the next period. You keep watching until the end of the time you paid for.'

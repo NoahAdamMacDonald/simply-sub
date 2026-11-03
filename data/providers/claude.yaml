@@ -229,6 +229,8 @@ policies:
       url: https://support.claude.com/en/articles/9450526-how-can-i-export-my-claude-data
     - name: 'Responsible disclosure policy'
       url: https://www.anthropic.com/responsible-disclosure-policy
+    - name: 'Cookie policy'
+      url: https://www.anthropic.com/legal/cookies
   ratings:
     - topic: billing.cancellation
       tier: neutral
@@ -282,28 +284,32 @@ policies:
       lastVerified: 2026-10-28
     - topic: privacy.data-collection
       tier: poor
-      reason: It may use your chats to train its AI unless you turn that off in your settings, and even then it uses chats flagged for a safety review.
+      reason: 'It records how you use it, like when you use it, what you search for and what you click, and uses cookies to study and market to you. You can only limit the cookies, browser by browser. (Training on your chats is graded under AI training.)'
       sources:
         - url: https://www.anthropic.com/legal/privacy
-          quote: We may use your Inputs and Outputs to train and improve Anthropic AI models, unless you opt out through your account settings.
+          quote: 'Usage Information: We collect information about your use of the Services, such as the dates and times of access, browsing history, search, information about the links you click and about third-party applications, services, and content you integrate or interact with, pages you view, and other information about how you use the Services, and technology on the devices you use to access the Services.'
         - url: https://www.anthropic.com/legal/privacy
-          quote: 'Even if you opt-out, we will use Inputs and Outputs for model improvement when:'
+          quote: 'These technologies help us to recognize you, customize or personalize your experience, market additional products or services to you, and analyze the use of our Services to make them safer and more useful to you.'
+        - url: https://www.anthropic.com/legal/cookies
+          quote: 'You can control how and when your personal data is shared or used for purposes of advertising about Anthropic’s AI services by clicking on the Privacy Choices link at the bottom of the page or enabling global privacy controls.'
       action:
-        name: Turn off training in your Privacy Settings
-        url: https://claude.ai/new#settings/data-privacy-controls
-      lastVerified: 2026-10-28
-    - topic: privacy.data-sharing
-      tier: neutral
-      reason: It doesn't sell your data, but it shares it to show you ads for its own products unless you opt out.
-      sources:
-        - url: https://www.anthropic.com/legal/privacy
-          quote: Anthropic does not “sell” your personal data as that term is defined by applicable laws and regulations.
-        - url: https://www.anthropic.com/legal/privacy
-          quote: You can opt-out of sharing your personal data for targeted advertising to promote our products and services, and we will honor global privacy controls.
-      action:
-        name: How to opt out of ad sharing
+        name: 'How to opt out of ad sharing'
         url: https://www.anthropic.com/legal/cookies
-      lastVerified: 2026-10-28
+      lastVerified: 2026-11-03
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: "It doesn't sell your data, but it shares it to show you ads for its own products. You can only say no in each browser, with its Privacy Choices link or your browser's privacy signal."
+      sources:
+        - url: https://www.anthropic.com/legal/privacy
+          quote: 'Anthropic does not “sell” your personal data as that term is defined by applicable laws and regulations.'
+        - url: https://www.anthropic.com/legal/privacy
+          quote: 'You can opt-out of sharing your personal data for targeted advertising to promote our products and services, and we will honor global privacy controls.'
+        - url: https://www.anthropic.com/legal/cookies
+          quote: 'You can control how and when your personal data is shared or used for purposes of advertising about Anthropic’s AI services by clicking on the Privacy Choices link at the bottom of the page or enabling global privacy controls.'
+      action:
+        name: 'How to opt out of ad sharing'
+        url: https://www.anthropic.com/legal/cookies
+      lastVerified: 2026-11-03
     - topic: privacy.data-deletion
       tier: good
       reason: You can delete chats yourself, and they're gone from its systems within 30 days; you can also ask it to delete your other data, with some exceptions.
@@ -315,18 +321,20 @@ policies:
       action:
         name: How to delete a conversation
         url: https://support.anthropic.com/en/articles/8230524-how-can-i-delete-or-rename-a-conversation
-      lastVerified: 2026-10-28
+      lastVerified: 2026-11-03
     # M11.9's topics, pulled forward at the owner's request (2026-11-02), read that day.
     - topic: privacy.ads-tracking
-      tier: neutral
-      reason: 'Claude shows no ads, but Anthropic may use your details to show you its own ads on other sites, unless you opt out.'
+      tier: poor
+      reason: "Claude shows no ads, but Anthropic uses cookies to market its products to you. You can only say no in each browser, with its Privacy Choices link or your browser's privacy signal."
       sources:
         - url: https://www.anthropic.com/legal/privacy
-          quote: 'You can opt-out of sharing your personal data for targeted advertising to promote our products and services, and we will honor global privacy controls.'
+          quote: 'These technologies help us to recognize you, customize or personalize your experience, market additional products or services to you, and analyze the use of our Services to make them safer and more useful to you.'
+        - url: https://www.anthropic.com/legal/cookies
+          quote: 'You can control how and when your personal data is shared or used for purposes of advertising about Anthropic’s AI services by clicking on the Privacy Choices link at the bottom of the page or enabling global privacy controls.'
       action:
         name: 'How to opt out of ad sharing'
         url: https://www.anthropic.com/legal/cookies
-      lastVerified: 2026-11-02
+      lastVerified: 2026-11-03
     - topic: privacy.ai-training
       tier: poor
       reason: 'Your chats train its AI unless you turn that off, and even then chats flagged for a safety check, or that you rate, still can.'

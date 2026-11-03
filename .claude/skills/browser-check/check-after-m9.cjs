@@ -497,7 +497,10 @@ async function checkSearch(page, label, viewport, shot) {
     );
   });
   await page.keyboard.press('Enter');
-  const action = card.locator('.policies .action').first();
+  // Its data collection's cookie choices come first since M11.9: the setting's own link, by its address.
+  const action = card
+    .locator('.policies .action[href="https://help.netflix.com/node/100637"]')
+    .first();
   await action.waitFor();
   check(
     `${label}: a rating that needs the user to change a setting links Netflix's own page for it (M5.12)`,

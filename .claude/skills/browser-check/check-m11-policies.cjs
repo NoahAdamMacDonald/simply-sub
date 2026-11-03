@@ -1,9 +1,10 @@
 // M11.1 in the system Edge: policy topics v2 on a Search card's Terms and policies, on the real catalog (data:build's
-// files), in both themes at 1280 and 360 px. For a Canadian in Alberta, ICI TOU.TV's grey lines (Free trials Not
-// applicable, Account sharing and Device and download limits Not stated) and Mullvad's Closing your account Not stated,
-// its citation the page read, reached by Tab with the page's name as its tooltip; for a US user, Hulu's ratings from
-// Disney's shared privacy policy beside its own data sharing, with one Sources link. With axe, screenshots and no
-// horizontal scroll. GET /fx is answered with fixed rates.
+// files), in both themes at 1280 and 360 px. For a Canadian in Alberta, ICI TOU.TV's grey lines (Account sharing and
+// Device and download limits Not stated; its free trial graded since M11.9) and Mullvad's Closing your account Not
+// stated, its citation the page read, reached by Tab with the page's name as its tooltip, and Disney+'s sharing and ads Poor
+// (Disney's shared privacy policy outside the US, M11.9); for a US user, Hulu's ratings from that policy beside its
+// own data sharing, with one Sources link, and Disney+'s US ratings over the policy's others. With axe, screenshots
+// and no horizontal scroll. GET /fx is answered with fixed rates.
 // Usage: node check-m11-policies.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
 const fs = require('fs');
 const path = require('path');
@@ -197,8 +198,12 @@ async function greyLooks(section) {
           const tou = await policies(page, 'ICI TOU.TV');
           const touRows = await rows(tou);
           check(
-            `${label}: ICI TOU.TV's free trials Not applicable, sharing and device limits Not stated, each grey with its reason`,
-            touRows.includes('grey none | Free trials (Not applicable): It has no free trial.') &&
+            `${label}: ICI TOU.TV's sharing and device limits Not stated, each grey with its reason; its free trial graded (M11.9)`,
+            touRows.some((row) =>
+              row.startsWith(
+                'neutral | Free trials (Neutral): It starts with 7 free days, then keeps renewing',
+              ),
+            ) &&
               touRows.includes(
                 "grey none | Account sharing (Not stated): Its conditions don't say who you can share your account with. [1]",
               ) &&
@@ -283,6 +288,29 @@ async function greyLooks(section) {
             page,
             `${label}, Mullvad's Terms and policies, a Not stated citation's tooltip`,
           );
+
+          // Outside the US, Disney's only controls are each service's cookie settings: Poor (M11.9).
+          const disneyCa = await policies(page, 'Disney+');
+          const disneyCaRows = await rows(disneyCa);
+          check(
+            `${label}: Disney+ in Canada shows the shared policy's Poor sharing and ads, its cookie settings the only control`,
+            disneyCaRows.some(
+              (row) =>
+                row.startsWith(
+                  'poor | Selling or sharing data (Poor): It gives some details about you, like ID codes or a scrambled copy of your email address',
+                ) && row.includes('Outside the US'),
+            ) &&
+              disneyCaRows.some(
+                (row) =>
+                  row.startsWith('poor | Ads and tracking (Poor): It picks the ads you see') &&
+                  row.includes('Outside the US'),
+              ),
+            disneyCaRows.filter((row) => /sharing data|Ads and tracking/.test(row)).join(' | '),
+          );
+          await disneyCa.screenshot({
+            path: path.join(outDir, `disney-ca-${colorScheme}-${viewport.width}.png`),
+          });
+          await axeCheck(page, `${label}, Disney+'s Terms and policies in Canada`);
           const width = await page.evaluate(() => document.documentElement.scrollWidth);
           check(`${label}: nothing scrolls sideways`, width <= viewport.width, `${width}px`);
           await context.close();
@@ -303,12 +331,17 @@ async function greyLooks(section) {
             huluRows.some((row) =>
               row.startsWith('poor | Data collection (Poor): It follows what you do'),
             ) &&
+              // Its own sharing and the policy's US rating tie: its own shows (M11.1).
               huluRows.some((row) =>
                 row.startsWith(
-                  'neutral | Selling or sharing data (Neutral): It gives some details about you, like ID codes or a scrambled email address, to ad companies, and Hulu shares',
+                  'neutral | Selling or sharing data (Neutral): It gives ID codes or a scrambled email address to ad companies, and data to partners',
                 ),
               ) &&
-              huluRows.some((row) => row.startsWith('neutral | Ads and tracking (Neutral):')) &&
+              huluRows.some((row) =>
+                row.startsWith(
+                  'neutral | Ads and tracking (Neutral): In the US, you can turn off ads',
+                ),
+              ) &&
               huluRows.some((row) => row.startsWith('neutral | Deleting your data (Neutral):')) &&
               // Disney's privacy policy listed once, its own pages after it.
               links.filter((link) => link.includes('Privacy policy')).length === 1 &&
@@ -318,10 +351,10 @@ async function greyLooks(section) {
           const disney = await policies(page, 'Disney+');
           const disneyRows = await rows(disney);
           check(
-            `${label}: Disney+ shows the same shared ratings, with Disney's own data sharing reason`,
+            `${label}: Disney+ shows the same shared ratings, with the policy's US data sharing over its Poor one`,
             disneyRows.some((row) =>
               row.startsWith(
-                'neutral | Selling or sharing data (Neutral): It gives some details about you, like ID codes or a scrambled copy of your email address',
+                'neutral | Selling or sharing data (Neutral): In the US, you can say no to it giving your details to ad companies',
               ),
             ) && disneyRows.length >= 4,
             disneyRows.join(' | '),
