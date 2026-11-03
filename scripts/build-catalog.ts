@@ -16,9 +16,7 @@
 // 25 MiB refuses the deploy (M11.8). The catalog version is a hash of the snapshot's data, so it changes only when the
 // catalog does. The deploy seeds D1 from catalog.json (scripts/seed-d1.ts).
 import {
-  buildCatalogData,
   buildCatalogIndex,
-  buildCatalogMeta,
   catalogIconFile,
   catalogIconSize,
   catalogIds,
@@ -28,12 +26,9 @@ import {
   policyFilePath,
   policyFiles,
   policyIndexPath,
-  readCatalogSource,
   regionSnapshot,
   sharedPolicyFilePath,
-  type CatalogSnapshot,
 } from '@simply-sub/core';
-import { createHash } from 'node:crypto';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -46,8 +41,8 @@ import {
   printIssues,
   repoRoot,
 } from './lib/catalog-files';
+import { buildSnapshot } from './lib/snapshot';
 
-const iconBaseUrl = 'https://sub.simplely.ca/icons/';
 const publicDir = 'apps/web/public/';
 const catalogDir = 'apps/web/public/data/catalog/';
 const policiesDir = 'apps/web/public/data/policies/';
@@ -62,17 +57,10 @@ if (errors > 0) {
   console.error(`Not building the catalog: data/ has ${plural(errors, 'error')}.`);
   process.exitCode = 1;
 } else {
-  const source = readCatalogSource(sources);
-  const data = buildCatalogData(source, iconBaseUrl);
-  const catalogVersion = createHash('sha256')
-    .update(JSON.stringify(data))
-    .digest('hex')
-    .slice(0, 7);
   const generatedAt = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
-  const snapshot: CatalogSnapshot = {
-    data,
-    meta: buildCatalogMeta(data, { catalogVersion, generatedAt }),
-  };
+  const { source, snapshot } = buildSnapshot(sources, generatedAt);
+  const { data } = snapshot;
+  const { catalogVersion } = snapshot.meta;
   const json = JSON.stringify(snapshot);
   await write(catalogFile, json);
 

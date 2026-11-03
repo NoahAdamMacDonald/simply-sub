@@ -19,6 +19,7 @@
     "data:schema": "tsx scripts/generate-json-schema.ts",
     "data:validate": "tsx scripts/validate-data.ts",
     "data:coverage": "tsx scripts/coverage.ts",
+    "data:writes": "tsx scripts/seed-writes.ts",
     "data:ids": "tsx scripts/check-ids.ts",
     "data:build": "tsx scripts/build-catalog.ts",
     "data:icons": "tsx scripts/fetch-icons.ts",

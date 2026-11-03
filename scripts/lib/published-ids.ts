@@ -38,7 +38,7 @@ export async function checkIds(): Promise<IdsCheck> {
 }
 
 /** The commit where the branch left main: origin/main's (CI fetches it), else a local main's. */
-function mergeBase(): { commit: string } | { skipped: string } {
+export function mergeBase(): { commit: string } | { skipped: string } {
   for (const ref of ['origin/main', 'main']) {
     try {
       return { commit: git('merge-base', 'HEAD', ref).trim() };
@@ -49,12 +49,16 @@ function mergeBase(): { commit: string } | { skipped: string } {
   return { skipped: 'no main branch to compare with: run git fetch origin main' };
 }
 
-/** data/'s YAML files at `commit`, parsed; one that doesn't parse is left out. */
-function filesAt(commit: string): CatalogSourceFile[] {
+/**
+ * data/'s YAML files at `commit`, parsed; one that doesn't parse is left out. With `logos`, its logos too, without
+ * their bytes: a catalog built from them gives each provider with one its icon URL (seed-writes.ts, M11.8).
+ */
+export function filesAt(commit: string, { logos = false } = {}): CatalogSourceFile[] {
   return git('ls-tree', '-r', '--name-only', commit, '--', 'data/')
     .split('\n')
-    .filter((file) => /\.ya?ml$/.test(file))
-    .flatMap((file) => {
+    .flatMap((file): CatalogSourceFile[] => {
+      if (logos && file.startsWith('data/logos/')) return [{ file, bytes: new Uint8Array() }];
+      if (!/\.ya?ml$/.test(file)) return [];
       try {
         return [{ file, data: parse(git('show', `${commit}:${file}`)) as unknown }];
       } catch {
