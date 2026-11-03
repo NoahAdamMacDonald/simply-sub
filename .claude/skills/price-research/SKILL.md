@@ -127,6 +127,7 @@ API contract's prices are illustrative and never a source. This skill is how to 
 |---|---|---|
 | WebFetch | Static pages (help articles, FAQs) | It fetches from this machine, so geo-located pages show **Canada**. Its summary can misread tables, so confirm the numbers in Edge when they matter. JS-rendered pages come back empty. |
 | `read-page.cjs` (Edge) | JS pages, tabs, currency menus, country pickers, accordions, carousels, image-only labels (screenshots) | Needs the deps below. Look at the screenshots when text is missing. |
+| `read-page-mullvad.cjs` (Mullvad Browser, M11.7) | A page Edge and curl can't read (the owner's DNS filter blocks it, a script fails), and policy pages | The same steps but `country:`, and the same `snap:` files. It tells every site it's en-US in UTC: a price it shows counts only once the page's currency is the region's. |
 | WebSearch | Finding the right official URL | Runs from the US, server side. Results are often stale or third-party: never a source. |
 | curl | Rarely | Server-rendered HTML can hold **placeholder** prices filled in later by JS (Proton's do). Don't trust them. |
 
@@ -182,6 +183,47 @@ node .claude/skills/price-research/read-page.cjs "$DEPS" "$OUT" https://proton.m
 | **Add-ons priced by a third party** (STARZ on Crave) | "Starting at $7.99" on the seller's page isn't enough. Find the add-on's own page (`starz.ca` FAQ: `click:How much does STARZ cost?`, one question at a time, because the accordion closes the others). Check which plans allow it. | An add-on with no `grantsPlan` when it doesn't grant a plan, listed in the `addOnIds` of the plans that allow it. |
 | **Extra members** (Netflix, Disney+) | The price usually depends on the account holder's plan. Read the limit from the help article ("can have one Extra Member"). | One add-on per price and plan, with `grantsPlan` set to the plan whose features the member gets, and `addOnLimit`. |
 | **Suites** (Proton Unlimited, Duo, Family) | Read their own limits (storage, addresses, users). Don't add up the parts. | Normal plans with their own features, `includes-subscription` and `account.users` (BLUEPRINT §4.4). |
+
+## Every region, and the browser that read it (M11.7)
+
+**The coverage report** (`npm run data:coverage`) lists each region a provider is sold in where a paid plan of it has
+no price: plans priced in some of its regions and not others, plans with no price where its `availableIn` sells, and,
+for a provider with a plan priced for everywhere (GLOBAL), Canada and the US. Claude's paid plans had US prices only
+until M10.17, so a Canadian saw only Free: the report flags that now. Run it after every provider and every batch.
+
+**Before writing "none found" for a region,** go through the checklist, and put each step's result in the provider
+file's header ("# Region checklist for CA, 2026-11-03: 1. … 7. …", "none" counts):
+1. locale URLs and `hreflang` links (`/en-ca/`, `/ca/`, `?country=CA`), as M10.12's pipeline does;
+2. the page's country, language and currency pickers;
+3. pricing data in the page's code (Next.js `__NEXT_DATA__`, JSON in script tags: Claude's named CAD);
+4. the checkout or plan picker, up to the payment form and never into it;
+5. the help centre's "prices in your country" and tax articles;
+6. each browser, in order: Edge (`read-page.cjs`, its real user agent, `en-CA`), a plain fetch (curl), then Mullvad
+   Browser (`read-page-mullvad.cjs`, below);
+7. the owner's own bill or account page, only when the owner offers it.
+
+**A region the pages won't show from Canada** (a site that prices by where the visitor is): the owner's Mullvad VPN can
+exit in that country. The owner's choice (2026-11-02): collect those countries over a batch and ask once, at its end,
+listing them; the owner switches the exit and says when, or says skip. Never switch the VPN yourself. A region skipped
+stays unread, with why.
+
+**A gap that stays** (a plan the provider doesn't sell somewhere, a region not read yet) is explained in the provider
+file by a comment block of its own, which the report reads: it names the plan's id, or `<provider>.*` for every plan,
+and each region's code:
+```yaml
+# Coverage: netflix.standard-ads isn't sold in NZ, IE or NL: each country's page lists no ads plan
+# (help.netflix.com/en/node/24926/nz, read 2026-11-03).
+```
+A gap no note explains fails the report, but for the providers core's `awaitingCoverage` lists (warnings until M11.9).
+
+**Record the browser that read each page** in the header beside its date ("read 2026-11-03 with Mullvad Browser"):
+Edge unless it says otherwise. The pipeline's page records name theirs (`browser`), and its drafts' header says it.
+
+**Mullvad Browser** (`read-page-mullvad.cjs`): `node .claude/skills/price-research/read-page-mullvad.cjs <out dir> <url>
+[step ...]`, with no deps: it speaks WebDriver BiDi to the browser's own debugging port on Node's WebSocket, headless,
+with a throwaway profile it deletes after, never the owner's (whose uBlock Origin and history stay theirs). It's at
+`%LOCALAPPDATA%\Mullvad\MullvadBrowser\Release\mullvadbrowser.exe` (`MULLVAD_BROWSER` to change it). Use it for pages
+Edge can't reach and for policy pages; for a price, only once the page's currency is the region's.
 
 ## Reading a region (M10.12)
 

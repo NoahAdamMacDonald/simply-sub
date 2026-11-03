@@ -25,6 +25,8 @@ export interface PageRecord extends RenderedPage {
   kind: PageKind;
   /** When it was read. */
   read: string;
+  /** The browser that read it (M11.7): the pipeline's is Edge (scripts/lib/browser.ts). */
+  browser: string;
   /** How many prices it shows in each currency (a bare $ is `dollar`), to spot a page priced for another country. */
   currencies: Record<string, number>;
   /**

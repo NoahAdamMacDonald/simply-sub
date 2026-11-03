@@ -186,6 +186,8 @@ async function pagesIn(
       name: name.slice(0, -'.json'.length),
       kind: record.kind as PageKind,
       url: record.finalUrl,
+      // Records from before M11.7 don't say: the pipeline read them with Edge too.
+      browser: record.browser ?? 'Edge',
       text: [
         record.renderedText,
         ...record.views.map((view) => `--- after clicking "${view.label}" ---\n${view.text}`),
