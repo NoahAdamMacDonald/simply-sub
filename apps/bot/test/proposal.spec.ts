@@ -41,9 +41,9 @@ describe('stepPlan', () => {
       // Its accepted cards in each country (M9.2).
       'https://help.netflix.com/en/node/116380/ca',
       'https://help.netflix.com/en/node/116380/us',
-      // The pages its policy ratings quote (M3.9).
-      'https://help.netflix.com/legal/privacy',
+      // The pages its policies cite (M3.9), in its links' order (M11.8).
       'https://help.netflix.com/legal/termsofuse',
+      'https://help.netflix.com/legal/privacy',
       'https://help.netflix.com/en/node/123277',
       'https://help.netflix.com/en/node/54816',
       'https://hackerone.com/netflix',

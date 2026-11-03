@@ -9,6 +9,7 @@ import {
   type Bundle,
   type CitedPage,
   type IsoDate,
+  type Policies,
   type PolicySet,
   type PolicyTopic,
   type ReportedPlan,
@@ -65,9 +66,15 @@ export interface CatalogIndex {
 
 /** What the night needs from the world. */
 export interface Services {
-  /** The catalog D1's providers and bundles, and the shared policy documents they name as the commit has them. */
-  readIndex(commit: string): Promise<CatalogIndex>;
+  /**
+   * The catalog D1's providers and bundles, and from the site's static files (M11.8) the pages their policies cite
+   * and the shared policy documents they name.
+   */
+  readIndex(): Promise<CatalogIndex>;
+  /** A provider as D1 has it: since M11.8 without its policies, which policiesUrl names the file of. */
   readProvider(id: string): Promise<SnapshotProvider | undefined>;
+  /** The Terms and policies in the file at `url`, a provider's policiesUrl (M11.8). */
+  readPolicies(url: string): Promise<Policies>;
   readBundle(id: string): Promise<Bundle | undefined>;
   /** Each host's robots.txt, read once. */
   readRobots(hosts: readonly string[]): Promise<Record<string, Robots>>;
@@ -141,7 +148,7 @@ export async function runNight(
   const repository = await step('read the repository', () => services.readRepository());
   const settings = await step('read the settings', () => services.readSettings(repository.commit));
   const checks = await step('read the check dates', () => services.state.checks());
-  const index = await step('read the catalog', () => services.readIndex(repository.commit));
+  const index = await step('read the catalog', () => services.readIndex());
   const cited = Object.fromEntries(index.cited.map((page) => [page.url, page]));
   const due = new Set(
     index.cited
@@ -204,6 +211,11 @@ export async function runNight(
     }
     return found;
   };
+  /** A provider with its Terms and policies (M11.8): D1's leaves them out, and its policiesUrl names their file. */
+  const withPolicies = async (provider: SnapshotProvider | undefined) =>
+    provider?.policiesUrl && !provider.policies
+      ? { ...provider, policies: await services.readPolicies(provider.policiesUrl) }
+      : provider;
   const bundlesOf = async (ids: readonly string[]) => {
     const found = await Promise.all(ids.map((id) => services.readBundle(id)));
     return found.flatMap((bundle) => (bundle ? bundleTargets(bundle) : []));
@@ -225,7 +237,7 @@ export async function runNight(
   const plan = stepPlan(index);
   for (const [id, bundles] of Object.entries(plan.withProvider)) {
     await check(`check ${id}`, id, async () => {
-      const provider = await services.readProvider(id);
+      const provider = await withPolicies(await services.readProvider(id));
       const reportedHere = provider ? reportedPages(provider, countries) : new Set<string>();
       const made = dueOnly(
         {

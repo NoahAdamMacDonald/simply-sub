@@ -35,8 +35,13 @@
   // with bot:, in the API's namespace (simply-sub-kv), so no new resource is needed. A few writes a night of 1,000 a day.
   "kv_namespaces": [{ "binding": "KV", "id": "a1507dd46d40411d8af62a85614db96c" }],
   // The repository the pull request goes to. GITHUB_TOKEN is a secret: a fine-grained token for this repository only,
-  // with Contents and Pull requests read and write (`wrangler secret put GITHUB_TOKEN`).
-  "vars": { "GITHUB_REPOSITORY": "NoahAdamMacDonald/simply-sub", "GITHUB_BASE": "main" },
+  // with Contents and Pull requests read and write (`wrangler secret put GITHUB_TOKEN`). SITE_URL is the site, whose
+  // static files under /data/policies/ hold the catalog's Terms and policies, which D1 leaves out (M11.8).
+  "vars": {
+    "GITHUB_REPOSITORY": "NoahAdamMacDonald/simply-sub",
+    "GITHUB_BASE": "main",
+    "SITE_URL": "https://sub.simplely.ca/",
+  },
   // No public URL: it has nothing to serve.
   "workers_dev": false,
   "preview_urls": false,

@@ -1,8 +1,12 @@
 import { launch } from '@cloudflare/playwright';
 import {
   automationSchema,
-  policySetSchema,
+  policyFileSchema,
+  policyIndexPath,
+  policyIndexSchema,
   policyTopicsFileSchema,
+  sharedPolicyFilePath,
+  sharedPolicyFileSchema,
   workersAiModel,
   baselinePath,
   maxPageChars,
@@ -26,7 +30,7 @@ import { parse } from 'yaml';
 import type { Services } from './run';
 import { botSearch } from './search';
 import { kvState, type BotState, type KvLike } from './state';
-import { catalogIndex, policySetFile } from './targets';
+import { catalogIndex } from './targets';
 
 // The night's services in the Worker: the catalog D1, the web (polite: robots.txt, one request per URL, en-CA
 // headers), Browser Rendering, Workers AI, GitHub (the settings, the baselines, the pull requests) and KV (what the bot
@@ -45,7 +49,7 @@ export function workerServices(env: Env): Services {
   });
   const state = kvState(env.KV as unknown as KvLike);
   return {
-    async readIndex(commit) {
+    async readIndex() {
       const providers = (
         await select<{ json: string }>(env.DB, 'SELECT json FROM providers ORDER BY id')
       ).map((row) => JSON.parse(row.json) as SnapshotProvider);
@@ -53,17 +57,26 @@ export function workerServices(env: Env): Services {
         env.DB,
         'SELECT json FROM bundles ORDER BY id',
       );
-      // Shared policy documents aren't in D1 (M11.1): read from the repository, a request each.
-      const named = [...new Set(providers.flatMap((provider) => provider.policies?.shared ?? []))];
+      // Policies aren't in D1 (M11.8): the site's index of their files says which pages each cites, and the shared
+      // documents the providers name are read from their files, a request each.
+      const policies = policyIndexSchema.parse(
+        await siteJson(new URL(policyIndexPath, env.SITE_URL)),
+      );
+      const named = [
+        ...new Set(Object.values(policies.providers).flatMap((entry) => entry.shared ?? [])),
+      ];
       const sets = await Promise.all(
         named.map(async (id) =>
-          policySetSchema.safeParse(parse(await github.text(policySetFile(id), commit))),
+          sharedPolicyFileSchema.safeParse(
+            await siteJson(new URL(sharedPolicyFilePath(id), env.SITE_URL)),
+          ),
         ),
       );
       return catalogIndex(
         providers,
         bundles.map((row) => JSON.parse(row.json) as Bundle),
         sets.flatMap((set) => (set.success ? [set.data] : [])),
+        policies,
       );
     },
     async readProvider(id) {
@@ -73,6 +86,9 @@ export function workerServices(env: Env): Services {
         id,
       );
       return row && (JSON.parse(row.json) as SnapshotProvider);
+    },
+    async readPolicies(url) {
+      return policyFileSchema.parse(await siteJson(url)).policies;
     },
     async readBundle(id) {
       const [row] = await select<{ json: string }>(
@@ -131,6 +147,13 @@ async function select<T>(db: D1Database, sql: string, ...values: unknown[]): Pro
     .bind(...values)
     .all<T>();
   return results;
+}
+
+/** One of the site's own static files (M11.8): the Terms and policies files data:build writes beside the catalog. */
+async function siteJson(url: string | URL): Promise<unknown> {
+  const response = await fetch(url, { headers, signal: AbortSignal.timeout(timeoutMs) });
+  if (!response.ok) throw new Error(`${String(url)}: ${response.status} ${response.statusText}`);
+  return response.json();
 }
 
 async function robotsOf(host: string): Promise<Robots> {
