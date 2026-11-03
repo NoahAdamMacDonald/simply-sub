@@ -43,7 +43,7 @@ const full = args.includes('--full');
 
 const snapshot = await readSnapshot();
 const providerHashes = hashesOf(snapshot);
-const current = full ? undefined : readSeedState(queryD1(seedStateQueries.join('; ')));
+const current = full ? undefined : readSeedState(queryD1(seedStateQueries().join('; ')));
 // The rows of the providers that changed or went, which the seed compares with the build's.
 const ids = current ? providersToRead(snapshot, { providerHashes, current }) : [];
 const rows =
