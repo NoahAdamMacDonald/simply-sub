@@ -2,10 +2,23 @@ import * as z from 'zod';
 import { cardNetworkNames, networksNamedIn } from '../catalog/card-networks';
 import type { Feature, FeatureValue } from '../catalog/feature';
 import { monthlyEquivalent } from '../catalog/monthly-equivalent';
+import { namesPaymentMethod, paymentMethods as paymentMethodIds } from '../catalog/payment-methods';
 import { policyReasonMax, type PolicyRating } from '../catalog/policy';
 import { policyStatuses, policyTiers, type PolicyTopic } from '../catalog/policy-topic';
 import type { Price } from '../catalog/price';
-import type { AcceptedNetworks, AddOn, CardNetwork, Plan, Provider } from '../catalog/provider';
+import type {
+  AcceptedNetworks,
+  AddOn,
+  CardNetwork,
+  CurrenciesEntry,
+  PaymentMethod,
+  PaymentMethods,
+  Plan,
+  Provider,
+  RenewalAnchor,
+  SourceRepo,
+} from '../catalog/provider';
+import { namesCurrency, namesRenewalAnchor, renewalAnchorKinds } from '../catalog/provider-facts';
 import { isCatalogRegion } from '../catalog/regions';
 import type { Reseller, ResellerListing, ResellerOffer, ResellerPrice } from '../catalog/reseller';
 import type { IsoDate } from '../dates/iso-date';
@@ -14,7 +27,7 @@ import type { PageKind } from './find-pages';
 import { onProviderSite } from './find-pages';
 import { idFromName } from './queue';
 import { findQuote } from './quotes';
-import { parseWebAddress } from './web-address';
+import { httpsAddress, parseWebAddress } from './web-address';
 
 // Extraction (BLUEPRINT §6.5 ④, M3.4): a model reads a provider's saved pages and answers in the shape below, every
 // fact with the page's own words; then the pipeline checks the answer against the pages and the catalog's rules and
@@ -23,8 +36,9 @@ import { parseWebAddress } from './web-address';
 // - features only from features.yaml, by id, name or alias, with a value the registry allows; anything else becomes a
 //   proposed feature for the owner's approval;
 // - regular prices only, the billing period as stated, plausible amounts, a currency the region can use;
-// - availableIn only from the provider's own country list, taxIncluded only with its words, card networks only those
-//   their quotes name, policy ratings only on the registry's topics and grades;
+// - availableIn only from the provider's own country list, taxIncluded only with its words, card networks, ways to pay
+//   and currencies only those their quotes name, a renewal day only when its quotes say it (M11.5), a repository
+//   only when a page shows its address, policy ratings only on the registry's topics and grades;
 // - personal and family plans only: business and per-seat plans are left out.
 
 /** A saved page the model reads: its name in the answer (pricing, terms, pricing-2), its kind, URL and words. */
@@ -138,6 +152,67 @@ const extractedAnswerSchema = z.object({
       }),
     )
     .default([]),
+  paymentMethods: z
+    .array(
+      z.object({
+        methods: z
+          .array(z.string())
+          .describe(
+            'card, paypal, apple-pay, google-pay, app-store, gift-card, bank-transfer, cash, crypto, provider-billing (a TV, internet or phone bill), other',
+          ),
+        regions: z
+          .array(z.string())
+          .optional()
+          .describe("Only buyers here: a country's own page. Left out for every buyer"),
+        page: pageQuote.page,
+        quotes: z.array(z.string()).describe("The page's words that name each way to pay, exactly"),
+      }),
+    )
+    .default([]),
+  currencies: z
+    .array(
+      z.object({
+        codes: z
+          .array(z.string())
+          .describe(
+            "ISO 4217 codes of currencies it takes beyond its prices' (cash by post in EUR, USD, CAD)",
+          ),
+        methods: z
+          .array(z.string())
+          .optional()
+          .describe('Only these ways to pay take them (cash). Left out when every way does'),
+        page: pageQuote.page,
+        quotes: z.array(z.string()).describe("The page's words that name each currency, exactly"),
+      }),
+    )
+    .default([]),
+  renewalAnchor: z
+    .object({
+      kind: z
+        .enum(['same-date', 'every-30-days', 'first-of-month', 'end-of-month', 'not-stated'])
+        .describe(
+          'same-date: the date you signed up; every-30-days; first-of-month; end-of-month; not-stated when its terms and billing help don’t say',
+        ),
+      page: z
+        .string()
+        .optional()
+        .describe('The page that says so, by its name. None with not-stated'),
+      quotes: z
+        .array(z.string())
+        .default([])
+        .describe('Its words saying which day it renews on, exactly. None with not-stated'),
+    })
+    .optional()
+    .describe('Which day a paid plan renews on, from its terms or billing help'),
+  sourceRepo: z
+    .object({
+      url: z
+        .string()
+        .describe("The repository's address as the page shows it (https://github.com/…)"),
+      ...pageQuote,
+    })
+    .optional()
+    .describe('Where its source code is, when a page says its code is open and shows the address'),
   policies: z
     .array(
       z.object({
@@ -609,6 +684,8 @@ export function draftFromAnswer(
     };
   }
 
+  const facts = providerFacts(answer, context, pages, verified, issues);
+
   let availableIn: string[] | undefined;
   if (answer.availableIn) {
     const regions = answer.availableIn.regions.filter(
@@ -753,10 +830,14 @@ export function draftFromAnswer(
     category: context.provider.category,
     spendCategory: spendCategoryOf(context.provider.category),
     ...(Object.keys(acceptedNetworks).length > 0 && { acceptedNetworks }),
+    ...(facts.paymentMethods.length > 0 && { paymentMethods: facts.paymentMethods }),
+    ...(facts.currencies.length > 0 && { currencies: facts.currencies }),
+    ...(facts.renewalAnchor && { renewalAnchor: facts.renewalAnchor }),
     ...billingCurrencyOf([...plans, ...addOns]),
     ...(availableIn && { availableIn }),
     ...(cancelUrl && { cancelUrl }),
     ...(pricing && { sources: { pricing } }),
+    ...(facts.sourceRepo && { sourceRepo: facts.sourceRepo }),
     plans,
     ...(addOns.length > 0 && { addOns }),
     ...(listings.length > 0 && { resellers: listings }),
@@ -908,6 +989,230 @@ function ordered(
   for (const feature of registry)
     if (features[feature.id] !== undefined) out[feature.id] = features[feature.id];
   return out;
+}
+
+/** A drafted provider's facts beside its ways to pay (M11.5), each only as far as its checked quotes go. */
+interface ProviderFacts {
+  paymentMethods: PaymentMethods;
+  currencies: CurrenciesEntry[];
+  renewalAnchor?: RenewalAnchor;
+  sourceRepo?: SourceRepo;
+}
+
+/** A quote checked on its page: the page's own words, or undefined (and an issue). */
+type Verify = (
+  subject: string,
+  page: string,
+  quote: string,
+) => { url: string; quote: string } | undefined;
+
+/**
+ * How it can be paid, in which currencies beyond its prices, on which day it renews and where its source code is
+ * (M11.5): ways to pay and currencies only as their checked quotes name them, one entry for everywhere and one per
+ * region; a renewal day only when its quotes say it, or not-stated with the billing pages read; a repository only
+ * when a page shows its address in its words, since the model sees no links.
+ */
+function providerFacts(
+  answer: ExtractionAnswer,
+  context: ExtractionContext,
+  pages: ReadonlyMap<string, ExtractionPage>,
+  verified: Verify,
+  issues: ExtractionIssue[],
+): ProviderFacts {
+  const quoted = (subject: string, page: string, quotes: readonly string[]) => [
+    ...new Set(quotes.flatMap((quote) => verified(subject, page, quote)?.quote ?? [])),
+  ];
+  const offSite = (subject: string, url: string) => {
+    if (!onProviderSite(url, context.provider)) {
+      issues.push({
+        kind: 'warning',
+        subject,
+        reason: 'Its page isn’t on the provider’s own sites',
+      });
+    }
+  };
+
+  const paymentMethods: PaymentMethods = [];
+  for (const claim of answer.paymentMethods) {
+    const regions = claim.regions?.filter((region) => region !== 'GLOBAL');
+    const subject = `Ways to pay${regions?.length ? ` in ${regions.join(', ')}` : ''}`;
+    const page = pages.get(claim.page);
+    const quotes = quoted(subject, claim.page, claim.quotes);
+    const named = quotes.join(' ');
+    const methods = [
+      ...new Set(
+        claim.methods
+          .map((name) => toPaymentMethod(name))
+          .filter(
+            (method): method is PaymentMethod =>
+              method !== undefined && (method === 'other' || namesPaymentMethod(named, method)),
+          ),
+      ),
+    ];
+    if (!page || methods.length === 0) {
+      issues.push({
+        kind: 'dropped',
+        subject,
+        reason: 'No way to pay named in its checked quotes',
+      });
+      continue;
+    }
+    const badRegion = regions?.find((region) => !isCatalogRegion(region));
+    const taken = regions?.length
+      ? regions.some((region) => paymentMethods.some((entry) => entry.regions?.includes(region)))
+      : paymentMethods.some((entry) => !entry.regions);
+    if (badRegion || taken) {
+      issues.push({
+        kind: 'dropped',
+        subject,
+        reason: badRegion
+          ? `"${badRegion}" isn't a region code`
+          : 'One entry for everywhere and one per region: the first is kept',
+      });
+      continue;
+    }
+    offSite(subject, page.url);
+    paymentMethods.push({
+      methods,
+      ...(regions?.length && { regions }),
+      page: pageName(page),
+      url: page.url,
+      quotes,
+    });
+  }
+
+  const known = new Set(Intl.supportedValuesOf('currency'));
+  const ways = new Set(paymentMethods.flatMap((entry) => entry.methods));
+  const currencies: CurrenciesEntry[] = [];
+  for (const claim of answer.currencies) {
+    const subject = `Currencies ${claim.codes.join(', ')}`;
+    const page = pages.get(claim.page);
+    const quotes = quoted(subject, claim.page, claim.quotes);
+    const named = quotes.join(' ');
+    const codes = [...new Set(claim.codes.map((code) => code.trim().toUpperCase()))].filter(
+      (code) => known.has(code) && namesCurrency(named, code),
+    );
+    const methods = claim.methods
+      ?.map((name) => toPaymentMethod(name))
+      .filter((method): method is PaymentMethod => method !== undefined && ways.has(method));
+    if (!page || codes.length === 0) {
+      issues.push({ kind: 'dropped', subject, reason: 'No currency named in its checked quotes' });
+      continue;
+    }
+    if (claim.methods && !methods?.length) {
+      issues.push({
+        kind: 'dropped',
+        subject,
+        reason: 'Its ways to pay aren’t among those drafted',
+      });
+      continue;
+    }
+    offSite(subject, page.url);
+    currencies.push({
+      codes,
+      ...(methods?.length && { methods: [...new Set(methods)] }),
+      page: pageName(page),
+      url: page.url,
+      quotes,
+    });
+  }
+
+  let renewalAnchor: RenewalAnchor | undefined;
+  const anchor = answer.renewalAnchor;
+  if (anchor?.kind === 'not-stated') {
+    // The pages a billing day would be on, read and silent.
+    const read = context.pages
+      .filter((page) => ['terms', 'cancel', 'payment', 'pricing'].includes(page.kind))
+      .map((page) => page.url);
+    if (read.length > 0) {
+      renewalAnchor = {
+        kind: 'not-stated',
+        pages: [...new Set(read)],
+        lastVerified: context.today,
+      };
+    }
+  } else if (anchor) {
+    const subject = 'Billing day';
+    const page = anchor.page === undefined ? undefined : pages.get(anchor.page);
+    const quotes = page ? quoted(subject, page.name, anchor.quotes).slice(0, 3) : [];
+    const kind = renewalAnchorKinds.find((known) => known === anchor.kind);
+    if (page && kind && quotes.length > 0 && namesRenewalAnchor(quotes.join(' '), kind)) {
+      offSite(subject, page.url);
+      renewalAnchor = {
+        kind,
+        page: pageName(page),
+        url: page.url,
+        quotes,
+        lastVerified: context.today,
+      };
+    } else {
+      issues.push({
+        kind: 'dropped',
+        subject,
+        reason: 'Its checked quotes don’t say which day it renews on',
+      });
+    }
+  }
+
+  let sourceRepo: SourceRepo | undefined;
+  if (answer.sourceRepo) {
+    const subject = 'Source code';
+    const claim = answer.sourceRepo;
+    const source = verified(subject, claim.page, claim.quote);
+    const address = parseWebAddress(claim.url);
+    const shown =
+      address &&
+      context.pages.some((page) =>
+        page.text.includes(`${address.host}${address.path === '/' ? '' : address.path}`),
+      );
+    const page = pages.get(claim.page);
+    if (source && page && address && shown) {
+      offSite(subject, page.url);
+      sourceRepo = {
+        url: httpsAddress(address),
+        page: { name: pageName(page), url: page.url },
+        quotes: [source.quote],
+        lastVerified: context.today,
+      };
+    } else if (source) {
+      issues.push({
+        kind: 'dropped',
+        subject,
+        reason: 'No page shows its address in its words: add sourceRepo by hand from its link',
+      });
+    }
+  }
+
+  return {
+    paymentMethods,
+    currencies,
+    ...(renewalAnchor && { renewalAnchor }),
+    ...(sourceRepo && { sourceRepo }),
+  };
+}
+
+/** A page as the card links it, by its kind. */
+function pageName(page: ExtractionPage): string {
+  return linkNames[page.kind] ?? 'Its website';
+}
+
+/** A way to pay as a model may name it rather than by its id. */
+const paymentMethodAliases: Readonly<Record<string, PaymentMethod>> = {
+  'credit-card': 'card',
+  'debit-card': 'card',
+  cards: 'card',
+  bitcoin: 'crypto',
+  cryptocurrency: 'crypto',
+  voucher: 'gift-card',
+  vouchers: 'gift-card',
+  'gift-cards': 'gift-card',
+  'bank-wire': 'bank-transfer',
+  'wire-transfer': 'bank-transfer',
+};
+
+function toPaymentMethod(name: string): PaymentMethod | undefined {
+  const wanted = normalize(name).replace(/\s+/g, '-');
+  return paymentMethodIds.find((method) => method === wanted) ?? paymentMethodAliases[wanted];
 }
 
 function toNetwork(name: string): CardNetwork | undefined {

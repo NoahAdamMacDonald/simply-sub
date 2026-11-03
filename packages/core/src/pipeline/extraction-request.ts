@@ -124,6 +124,16 @@ Where it's sold and how it's paid
 - "availableIn": only when the provider lists the countries it sells in, with the words that list them.
 - "acceptedNetworks": for each region a page covers, the card networks its words name ("We accept Visa, Mastercard"),
   quoting the words for each. "All major credit cards" names none: leave the region out.
+- "paymentMethods": every way to pay a page names (cards, PayPal, Apple Pay, Google Pay, app stores, gift cards or
+  vouchers, a bank, cash, crypto, a TV, internet or phone bill), quoting the words for each: one entry for every
+  buyer, and one for a country whose own page differs. Look for the alternatives: a provider that takes cash or crypto
+  says so.
+- "currencies": currencies it takes beyond its prices' (cash by post in nine currencies, a checkout that charges in
+  the buyer's own), with the words naming each, and the ways to pay that take them.
+- "renewalAnchor": which day a paid plan renews on, from its terms or billing help: the date you signed up
+  ("same-date", with a shorter month's last day when it has no such date), "every-30-days", the 1st of each month
+  ("first-of-month") or its last day ("end-of-month"), quoting the words that say so; "not-stated" when they don't.
+- "sourceRepo": when a page says its code is open source and shows the repository's address in its words.
 
 Official resellers
 - Only shops the provider's own page names as selling its own subscription ("Where to buy", its resellers page, a blog
@@ -250,6 +260,17 @@ export interface ExtractionPart {
   user: string;
 }
 
+/** The words a renewal day's passage is found by (M11.5), in English and French. */
+const renewalWords: readonly string[] = [
+  'billing date',
+  'billing cycle',
+  'billed on',
+  'same day',
+  '30 days',
+  'of each month',
+  'date de facturation',
+];
+
 /** The words each policy topic's passages are found by, in English and French. */
 const topicWords: Readonly<Record<string, readonly string[]>> = {
   'privacy.data-collection': [
@@ -346,7 +367,7 @@ export function extractionParts(context: ExtractionContext, maxChars = 30_000): 
     parts.push({
       part: 'plans',
       system,
-      user: `${header} Fill in plans, addOns, acceptedNetworks, availableIn, resellers, proposedFeatures and notOnPages; leave policies empty.\n\nFeatures:\n${registryDigest(context.features)}\n\n${pagesText(planPages.map((page) => ({ ...page, text: page.text.slice(0, share) })))}`,
+      user: `${header} Fill in plans, addOns, acceptedNetworks, paymentMethods, currencies, sourceRepo, availableIn, resellers, proposedFeatures and notOnPages; leave policies empty.\n\nFeatures:\n${registryDigest(context.features)}\n\n${pagesText(planPages.map((page) => ({ ...page, text: page.text.slice(0, share) })))}`,
     });
   }
   const topics = context.topics.filter(
@@ -355,15 +376,16 @@ export function extractionParts(context: ExtractionContext, maxChars = 30_000): 
   if (policyPages.length > 0 && topics.length > 0) {
     const share = Math.floor(maxChars / policyPages.length);
     const passages = policyPages.map((page) => {
-      const words = topics.flatMap(
-        (topic) => topicWords[topic.id] ?? topic.name.toLowerCase().split(' '),
-      );
+      const words = [
+        ...topics.flatMap((topic) => topicWords[topic.id] ?? topic.name.toLowerCase().split(' ')),
+        ...renewalWords,
+      ];
       return { ...page, text: excerpt(page.text, nameIndexes(page.text, words), 500, share) };
     });
     parts.push({
       part: 'policies',
       system,
-      user: `${header} Fill in policies only; leave plans empty. Quote the passages exactly.\n\nPolicy topics:\n${topicsDigest(context.topics, provider.category)}\n\n${pagesText(passages)}`,
+      user: `${header} Fill in policies and renewalAnchor only; leave plans empty. Quote the passages exactly.\n\nPolicy topics:\n${topicsDigest(context.topics, provider.category)}\n\n${pagesText(passages)}`,
     });
   }
   return parts;
@@ -399,6 +421,8 @@ export function mergeAnswers(answers: readonly ExtractionAnswer[]): ExtractionAn
     plans: [],
     addOns: [],
     acceptedNetworks: [],
+    paymentMethods: [],
+    currencies: [],
     policies: [],
     resellers: [],
     proposedFeatures: [],
@@ -408,11 +432,15 @@ export function mergeAnswers(answers: readonly ExtractionAnswer[]): ExtractionAn
     merged.plans.push(...answer.plans);
     merged.addOns.push(...answer.addOns);
     merged.acceptedNetworks.push(...answer.acceptedNetworks);
+    merged.paymentMethods.push(...answer.paymentMethods);
+    merged.currencies.push(...answer.currencies);
     merged.policies.push(...answer.policies);
     merged.resellers.push(...answer.resellers);
     merged.proposedFeatures.push(...answer.proposedFeatures);
     merged.notOnPages.push(...answer.notOnPages);
     merged.availableIn ??= answer.availableIn;
+    merged.renewalAnchor ??= answer.renewalAnchor;
+    merged.sourceRepo ??= answer.sourceRepo;
     merged.outOfScope ??= answer.outOfScope;
   }
   return merged;

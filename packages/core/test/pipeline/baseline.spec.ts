@@ -172,3 +172,61 @@ describe('citedFacts', () => {
     ]);
   });
 });
+
+describe('the provider facts’ pages (M11.5)', () => {
+  const withFacts = {
+    ...provider,
+    currencies: [
+      {
+        codes: ['EUR', 'CAD'],
+        methods: ['cash'],
+        page: 'Terms of service',
+        url: 'https://mullvad.net/en/help/terms-service',
+        quotes: ['cash in bills (EUR, CAD)'],
+      },
+    ],
+    renewalAnchor: {
+      kind: 'not-stated',
+      pages: ['https://mullvad.net/en/help/billing'],
+      lastVerified: '2026-10-27',
+    },
+    sourceRepo: {
+      url: 'https://github.com/mullvad/mullvadvpn-app',
+      page: { name: 'Open source', url: 'https://mullvad.net/en/open-source' },
+      quotes: ['Code is open source'],
+      lastVerified: '2026-10-27',
+    },
+  } as Provider;
+
+  it('cites the currencies’ page as pricing, and the renewal day’s and source code’s as policies', () => {
+    expect(citedPages([withFacts], []).map(({ url, type }) => `${type} ${url}`)).toEqual([
+      'policies https://mullvad.net/en/help/billing',
+      'pricing https://mullvad.net/en/help/payment',
+      'pricing https://mullvad.net/en/help/terms-service',
+      'policies https://mullvad.net/en/open-source',
+      'pricing https://mullvad.net/en/pricing',
+    ]);
+  });
+
+  it('checks their quotes on their pages', () => {
+    expect(citedFacts([withFacts], [], 'https://mullvad.net/en/help/terms-service').quotes).toEqual(
+      ['cash in bills (EUR, CAD)', 'refund'],
+    );
+    expect(citedFacts([withFacts], [], 'https://mullvad.net/en/open-source').quotes).toEqual([
+      'Code is open source',
+    ]);
+    const stated = {
+      ...withFacts,
+      renewalAnchor: {
+        kind: 'same-date',
+        page: 'Billing',
+        url: 'https://mullvad.net/en/help/billing',
+        quotes: ['the date you signed up'],
+        lastVerified: '2026-10-27',
+      },
+    } as Provider;
+    expect(citedFacts([stated], [], 'https://mullvad.net/en/help/billing').quotes).toEqual([
+      'the date you signed up',
+    ]);
+  });
+});
