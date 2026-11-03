@@ -132,6 +132,57 @@ describe('resolveItem through redirects', () => {
   });
 });
 
+describe('a perk that became a feature (M11.6)', () => {
+  /** Game Pass's Fortnite Crew perk made the feature gaming.battle-pass, which Ultimate has. */
+  const battlePass: CatalogData = {
+    ...catalog,
+    features: [
+      ...catalog.features,
+      { id: 'gaming.battle-pass', name: 'Battle pass', category: 'gaming', type: 'boolean' },
+    ],
+    providers: catalog.providers.map((provider) =>
+      provider.id === 'game-pass'
+        ? {
+            ...provider,
+            perks: provider.perks?.filter((perk) => perk.id !== 'fortnite-crew'),
+            plans: provider.plans.map((plan) =>
+              plan.id === 'game-pass.ultimate'
+                ? { ...plan, features: { 'gaming.battle-pass': true }, perks: ['online-play'] }
+                : plan,
+            ),
+          }
+        : provider,
+    ),
+    redirects: [
+      {
+        kind: 'perk',
+        from: 'perk:game-pass/fortnite-crew',
+        to: 'gaming.battle-pass',
+        on: '2026-10-20',
+      },
+    ],
+  };
+  const ranked = item(
+    'game-pass.ultimate',
+    {},
+    { rankOverrides: { 'perk:game-pass/fortnite-crew': 'needed' } },
+  );
+
+  it('keeps the rank its items gave the perk, on the feature’s key', () => {
+    const result = resolveItem(ranked, { ...context, catalog: battlePass });
+    expect(result.ok && result.resolved.effectiveRanks['gaming.battle-pass']).toBe('needed');
+  });
+
+  it('moves the item’s own rank to the feature’s key once', () => {
+    const { items } = redirectedRecords(
+      dueRedirectMap(battlePass, today),
+      { items: [ranked], rankings: [], drafts: [] },
+      now,
+    );
+    expect(items.map((moved) => moved.rankOverrides)).toEqual([{ 'gaming.battle-pass': 'needed' }]);
+  });
+});
+
 describe('redirectedRecords', () => {
   const ranking = (rankKey: string, rank: ProfileRanking['rank'], extra = {}): ProfileRanking => ({
     rankKey,

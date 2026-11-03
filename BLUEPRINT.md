@@ -354,8 +354,9 @@ one canonical feature describes the same capability across every provider, whate
    optimizer could never suggest a simpler password manager.
 3. **Reusable or nothing.** A feature goes in the registry if it is comparable and exists at **two or more
    providers** (in the catalog or queued for research; before M11, also when it mattered for ranking). Anything else
-   that is truly provider-specific (the Fortnite Crew passes in Game Pass Ultimate) goes in a plan's `perks` list
-   (free text, shown but not compared until M11.6 makes perks rankable: Ranked perks, below). How to find, model and
+   that is truly provider-specific (the Fortnite Crew passes in Game Pass Ultimate) is a perk: listed once by its
+   provider with an id, and by id on the plans that have it, ranked and counted like a feature (M11.6: Ranked perks,
+   below). How to find, model and
    add features from providers' pages: `.claude/skills/feature-discovery/SKILL.md`.
 4. **Prefer structured types:** `boolean`, `number` (with `unlimited`), `enum` (ordered) and `set` (a
    multi-select of canonical values, for example the item types a password manager can store).
@@ -372,7 +373,7 @@ one canonical feature describes the same capability across every provider, whate
    category (`vpn.included`, `antivirus.included`, `password-manager`, `email.addresses`, `calendar.included`,
    `storage.cloud`, `ai.assistant`) in that category; `vpn.server-countries` and `vpn.unlimited-traffic` in vpn.
 8. **Price differences need feature differences** (M11.4). Two of a provider's plans still sold, at different prices
-   for the same region, currency and period, must differ in a feature, and in a perk once M11.6 gives perks ids;
+   for the same region, currency and period, must differ in a feature or a perk (M11.6);
    validation warns otherwise, at the dearer plan. Unlisted reads as `false`, `0` or empty, so stating one is no
    difference. The optimizer compares only rank keys, so a tier whose extras were text made it suggest the cheapest
    tier every time: Claude's and Xbox Game Pass's tiers, Bitdefender's Premium and Ultimate Security and TSN's
@@ -397,6 +398,18 @@ rank key, `perk:<provider>/<perk>`, ranked on the plan in the item dialog, never
 nothing to another provider), and shared with the provider's other plans in the list (M6.14). The optimizer treats it
 as any rank key. A perk a second provider comes to offer becomes a feature, and a `perk` entry in `data/redirects.yaml`
 ("Ids that last" in section 4.3) moves users' ranks to the feature's key.
+- **As built (M11.6):** core's `perk-keys.ts`. A plan's keys are its features' then its perks' (`planKeys`; the
+  provider's id comes from the plan's); a bundle provides its plans' perks. For naming and grouping, each perk is also
+  a boolean feature of a Perks category named as its provider names it (`rankFeatures`: the registry, then the
+  perks), which the item dialog's ranks (a Perks group after the features'), the feature summary, the list view's
+  Features filter and the optimizer's labels take; the Features page and Search's filters keep the registry.
+- **Counted:** an item's effective ranks, so rank counts, the optimizer's constraints and severities (section 10), and
+  the feature summary, where a perk shows only when ranked, as a set's values do (a plan can have many). Search's
+  counts take the ranks the user's lists give each perk (`perkRanks`: the most important where items differ), since
+  the profile never ranks one. M6.14's sharing gives a perk's rank to the provider's other plans in the list that
+  have it.
+- **Kept:** users' data takes perk keys (`rankKeySchema`); the ids guard keeps every published perk key, and a
+  `perk` redirect needs its perk gone and a target that exists (another perk, or a feature's rank key).
 
 **Cross-category features** (M11.4, the guide's §2.3, chosen by the owner on 2026-11-02): `platforms`,
 `software.open-source` (an enum, closed source to fully open), `languages.audio` and `languages.subtitles` (eleven
@@ -606,7 +619,8 @@ addOns:
 ```
 > These prices come from the draft JSON. Verify them before seeding.
 
-Plans can also have `featureLabels` (rule 5 in section 4.2), `perks` (provider-specific extras, shown but not
+Plans can also have `featureLabels` (rule 5 in section 4.2), `perks` (the ids of their provider's `perks`, each
+`{ id, name }`, ranked and counted since M11.6; before it they were text, shown but not
 compared) and `notes`. The Proton example in `docs/api-output-examples.json` uses all three.
 
 **Free plans** have one price with `amount: 0` (Proton Free, Bitdefender's free plan). A $0 price creates no
@@ -857,7 +871,7 @@ interface Plan {
   notIn?: string[];          // categories its features name that it isn't sold as (M11.3)
   features: Record<string, FeatureValue>;    // feature id → value
   featureLabels?: Record<RankKey, string>;   // feature id or rank key → the provider's wording
-  perks?: string[];          // provider-specific extras, shown but never compared
+  perks?: string[];          // ids of its provider's perks ({ id, name }), each a rank key (M11.6)
   notes?: string;
   prices: Price[];           // at least one
   addOnIds?: string[];       // ids from the provider's addOns
@@ -1743,6 +1757,8 @@ Validation fails if:
   boolean feature takes no `=value`)
 - a feature's `parent` isn't a top-level boolean feature (groups are one level deep), or is listed after the
   feature (`GET /features` keeps the file's order)
+- a provider lists a perk twice or one no plan lists, or a plan lists a perk its provider doesn't (M11.6); a `perk`
+  redirect's perk is still offered, or its target is neither a perk nor a rank key of the registry
 - a plan in a category doesn't state a feature `requiredIn` it, its provider's features included (M11.4, section 4.2
   rule 7; a warning for the plans core's `awaitingRequiredFeatures` lists, until M11.9), or a `requiredIn` names a
   service category that isn't defined
@@ -1798,7 +1814,7 @@ Validation fails if:
 Validation warns (but passes) when `lastVerified` is older than 90 days: one warning per file, with the count and
 the oldest price. It warns when a plan's features name a service category it isn't in and its `notIn` doesn't list
 (M11.3, section 4.5), and when two of a provider's plans still sold cost differently for the same region, currency and
-period with the same features (M11.4, section 4.2 rule 8). It also warns about a provider or reseller without a logo in `data/logos/`, which the app shows as
+period with the same features and perks (M11.4, M11.6, section 4.2 rule 8). It also warns about a provider or reseller without a logo in `data/logos/`, which the app shows as
 a letter, about a reseller no provider lists, and about an owner, renewal day or source code read over a year ago.
 
 A broken file gets its own errors, and the checks that would only repeat them are skipped: a provider that fails
@@ -2154,8 +2170,9 @@ in the browser too (as the nightly bot does with Browser Rendering), which is ho
 **④ AI extraction:** `scripts/extract-plans.ts` sends the cleaned page text to an LLM with **structured
 output** constrained to the provider schema. The prompt includes the feature registry, so the model can only
 use canonical ids, and it maps provider wording through `aliases`. The output contains:
-- plans, prices (amount, currency, interval), add-ons, perks. Personal and family plans only, free tiers
-  included as $0 prices; business and per-seat plans are skipped (section 1.3)
+- plans, prices (amount, currency, interval), add-ons, perks (drafted as the provider's perks with ids from their
+  words, M11.6). Personal and family plans only, free tiers included as $0 prices; business and per-seat plans are
+  skipped (section 1.3)
 - the **regular** price, not a first-term offer, and the billing period as stated ("every 30 days" is `day` × 30,
   not `month`), both from the terms or checkout wording (section 4.3)
 - `availableIn`, only when the provider publishes the countries it sells in (section 4.7)
@@ -2996,6 +3013,9 @@ Lives in `packages/core/src/optimizer/`. It's a **pure function**:
   plan of the same provider that keeps that feature at the same or a higher level.
 - **Needed:** after any change, every Needed feature must still be provided by at least one item **in every
   month it was provided before**.
+- **Perks** (M11.6) are rank keys like features': a Needed perk keeps a plan of its provider that has it, and a lost
+  Wanted one makes a suggestion yellow. An unranked perk is Not ranked, so a dearer plan that differs only in perks is
+  downgraded in red unless they're ranked.
 
 ### 10.3 Candidate actions per item
 1. Keep.

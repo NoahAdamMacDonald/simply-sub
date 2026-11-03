@@ -218,7 +218,6 @@ describe('an item’s keys, summary and Search’s counts', () => {
       today,
       country: 'CA',
       currency: 'CAD',
-      place,
       taxPlace: place,
       profileRanks: new Map(),
     });

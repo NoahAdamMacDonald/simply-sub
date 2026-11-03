@@ -34,7 +34,10 @@ A feature belongs in the registry when it is (BLUEPRINT §4.2 rule 3):
 - **objective:** "unblocks streaming" is marketing; leave it out;
 - **in scope:** personal and family plans, not business features (dedicated IPs, admin consoles).
 
-Anything provider-specific goes in a plan's `perks` instead.
+Anything provider-specific is a perk instead (M11.6): listed once in its provider's `perks` with an id, and by id on
+its plans, ranked and counted like a feature. When a second provider comes to offer a perk, it becomes a feature:
+propose it, and once the owner agrees, add a `perk` entry to `data/redirects.yaml` from its rank key to the feature's,
+which moves users' ranks.
 
 ## 3. Model each feature
 

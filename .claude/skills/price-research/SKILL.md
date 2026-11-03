@@ -61,7 +61,10 @@ API contract's prices are illustrative and never a source. This skill is how to 
 - **Every interval and every price list the provider sells.** That means monthly and yearly (other periods only when the user
   asks), every region in scope (ask: usually CA and US, or GLOBAL), and every currency the buyer can pick.
 - **Read the features from the same pages:** quality, streams, downloads, devices, users, storage and limits. Map them
-  to `data/features.yaml` ids; anything else goes in `perks`. If the registry needs a new feature, stop and ask, then follow the feature-discovery skill.
+  to `data/features.yaml` ids; anything else is a perk (M11.6): listed once in the provider's `perks` with an id and
+  its words as the name (`{ id: fortnite-crew, name: Fortnite Crew }`), and by id on the plans that have it. A perk's
+  id is as permanent as a feature's (its rank key, `perk:<provider>/<perk>`, is in users' ranks): keep it when the
+  wording changes, and ask before retiring or redirecting one. If the registry needs a new feature, stop and ask, then follow the feature-discovery skill.
 - **Features that compare** (BLUEPRINT §4.2 rules 7–10, M11.4):
   - **Required features:** every plan in a category states each feature whose `requiredIn` names it (`video.quality`,
     `streaming.concurrent-streams` and `ad-free` in streaming, the VPN basics in vpn, each category's own feature),
@@ -73,7 +76,7 @@ API contract's prices are illustrative and never a source. This skill is how to 
     a plan states one only where it differs. Category features stay on each plan, even when all are the same.
   - **A dearer plan needs a difference:** `npm run data:validate` warns when two plans cost differently for the same
     region and period with the same features. Read the provider's comparison table again for what the price pays
-    for, and record it as a feature value (or ask for a new feature); text in `perks` doesn't count until M11.6.
+    for, and record it as a feature value (or ask for a new feature), else a perk, which counts too (M11.6).
   - **Reuse first:** an existing id; a new value or alias of one; a cross-category feature; a new feature through
     the feature-discovery skill; then a perk. A capability from another category uses that category's feature.
 - **Every category a plan fits** (`data/categories.yaml`, M11.3). The provider's `category` is where a buyer would

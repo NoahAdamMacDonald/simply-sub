@@ -667,12 +667,15 @@ fading in, see-through.
 `check-m11-features.cjs` (M11.4, features that compare) checks Search's Features filter with Ad free on `ng serve` for
 a Canadian in Alberta (base URL ending in `/`, after `npm run data:build` on the branch), in both themes at both widths,
 keyboard only: Features reached by Tab (at 360 px in the Filters drawer), "ad free" offering Ad free first under
-Matches, ArrowDown and Enter picking it (`?f=ad-free`, its chip), the results without TSN or RDS, Netflix's details by
+Matches, Enter picking it, the list's active first option (`?f=ad-free`, its chip; ArrowDown would move past it since
+M11.5 put Mullvad's open-source values after it), the results without TSN or RDS, Netflix's details by
 Enter listing Ad free; then an old link's `?f=streaming.ad-free` rewritten in place to `?f=ad-free` (no history entry),
 with the same results and chip. With axe (the suggestions open, the details open), screenshots and no horizontal
 scroll. Wait for the suggestions to narrow before reading them: the whole list shows first. Since M11.4
 `check-features.cjs` expects the Apps, languages & support card and ranks Kids profiles where it ranked Ad free, and
-`check-search.cjs`'s "video quality" suggestions no longer include Ad free.
+`check-search.cjs`'s "video quality" suggestions no longer include Ad free. Since M11.5 `check-features.cjs` opens
+Apps, languages & support beside VPN with Mullvad listed (its open-source value), and since M11.6
+`check-list-view.cjs`'s Tab order has the totals' two breakdown buttons after Export (M10's, missed until then).
 
 `check-m11-facts.cjs` (M11.5, provider facts) checks Search's cards and the item dialog on `ng serve` for a Canadian in
 Alberta (base URL ending in `/`, after `npm run data:build` on the branch), in both themes at both widths: Mullvad's
@@ -686,6 +689,15 @@ renewal is the next 1st, TSN's this month's end, neither asking "Billed on", nor
 billed on the 31st; Netflix (the date you signed up) suggests a month from today and still asks of a typed Feb 28. The
 expected dates come from the machine's date. With axe, screenshots and no horizontal scroll. Since M11.5
 `check-m11-outside.cjs` expects Mullvad's Source code after Ways to pay, and its currencies line.
+
+`check-m11-perks.cjs` (M11.6, ranked perks) checks a list, Games (Xbox Game Pass Ultimate and Premium, written to
+IndexedDB), on `ng serve` for a Canadian in Alberta (base URL ending in `/`, after `npm run data:build` on the branch),
+in both themes at both widths, keyboard only: Ultimate's ✎ by Enter, its dialog's rank groups ending with Perks,
+closed; Tab to its toggle and Enter open it, its rows Ultimate's perks in its order; typeahead ranks Fortnite Crew
+Needed ("N") and Online console multiplayer Wanted ("W"); Save gives Premium only the perk it has; the list saved,
+its summary reads "Fortnite Crew: 1 / 1" and "Online console multiplayer: 2 / 2"; Optimizations suggests nothing that
+drops Ultimate; Search's Ultimate chip counts "1 Needed 1 Wanted". With axe (the Perks group open, the list view,
+Optimizations), screenshots and no horizontal scroll.
 
 `check-after-m3.cjs` (the feedback after M3: M5.13, M6.17–M6.19, M7.11, M8.5, M8.6, M9.6) checks the batch on
 `ng serve` for a Canadian in Alberta, with Streaming (Crave Premium and Disney+ Premium) and Family (two Disney+

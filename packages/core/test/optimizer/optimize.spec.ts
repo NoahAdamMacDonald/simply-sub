@@ -174,7 +174,8 @@ describe('optimize: ranked perks (M11.6)', () => {
 
   it('never drops a perk ranked Needed, a lost Wanted one is yellow, and names it', () => {
     expect(cards(run([ultimate({ 'perk:game-pass/fortnite-crew': 'needed' })]))).toEqual([]);
-    expect(cards(run([ultimate({ 'perk:game-pass/fortnite-crew': 'wanted' })]))).toMatchInlineSnapshot(`
+    expect(cards(run([ultimate({ 'perk:game-pass/fortnite-crew': 'wanted' })])))
+      .toMatchInlineSnapshot(`
       [
         "yellow | Downgrade Game Pass Ultimate → Essential | save 151.20 | lose perk:game-pass/fortnite-crew (wanted)",
       ]
