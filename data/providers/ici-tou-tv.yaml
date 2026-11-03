@@ -71,6 +71,9 @@ features:
 # Official resellers: none (M11.9, read 2026-11-03; the owner's choice that day: noted, not listed). The TELUS et Koodo
 # tab of ici.tou.tv/abonnement: "ICI TOU.TV EXTRA avec pubs", "Inclus", "AVEC UN FORFAIT TELUS" (and Koodo), which is
 # EXTRA with ads included in those companies' own plans. Billing periods: monthly only ("Mensuel").
+# Downloads, profiles and HDR (M11.9, the owner's item 3), read 2026-11-03: its help centre lists « Pourquoi le
+# téléchargement hors connexion n'est pas disponible? » among ICI TOU.TV's limitations (assistance.radio-canada.ca), so
+# no downloads; its plans offer a « zone Jeunesse », not kids profiles, and no page names HDR, so none (inferred).
 plans:
   - id: ici-tou-tv.extra
     name: EXTRA

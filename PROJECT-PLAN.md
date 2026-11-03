@@ -1858,6 +1858,19 @@ in every D1 `json` column search parses.
       its help centre lists offline downloads as unavailable (device limits not stated).
     - **Kept, read again:** Netflix's (all seven), Claude's, ICI TOU.TV's and Proton's legal ratings, Proton's
       activity logging, Mullvad's disputes and closure, and Bitdefender's closure.
+  - **Features in the same depth** (2026-11-03, the owner's item 3): each category's child features, from each
+    provider's own pages, so plans in one category are described alike.
+    - **Registry, the owner's choices:** `password-manager.sharing` gains `link-password`, "Password-protected links";
+      health's `suspicious` is named "Suspicious sites" ("suspicious logins" an alias, its id kept).
+    - **Password managers:** Bitdefender SecurePass, on its 12 plans, from its support centre: logins, 2FA codes, cards,
+      identities and notes; a security report of breached, weak, reused and old passwords and suspicious sites; sharing
+      with other users and groups ("read, write, grant") and by links that expire, limit views and take a password.
+      Proton Pass's sharing gains its secure links' view limits and its vaults' access levels.
+    - **VPNs:** Bitdefender's Premium VPN, on its 9 plans: kill switch, split tunneling, double-hop, WireGuard, OpenVPN
+      and IKEv2, and P2P (inferred: it auto-connects for P2P apps, and its terms ban none).
+    - **Streaming:** the values that stay "no" say what was read: TSN's and RDS's FAQs name no downloads or profiles,
+      ICI TOU.TV's help centre lists offline downloads as unavailable, and Crave names 4K but not HDR. Hulu's and ESPN's
+      wait for a US reader (the owner's VPN).
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and

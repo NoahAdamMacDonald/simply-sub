@@ -60,6 +60,8 @@ features:
 # and Bell's Streaming's add-on channels. Each bills it on its own service, mostly to its own customers.
 # Billing periods: monthly and annual (crave.ca/en/subscribe). Premium's annual "$149.99 for your first year;
 # $220.00/yr thereafter" is a first-year offer, so $220.00 is its price.
+# HDR (M11.9, the owner's item 3), read 2026-11-03: its plans and devices pages name 4K on Premium but not HDR, so
+# none (inferred).
 plans:
   - id: crave.standard-ads
     name: Standard With Ads

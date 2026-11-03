@@ -146,6 +146,22 @@ perks:
 # The five euro countries' prices are the same. Each region's pages say tax is included, beside each price ("Sales tax
 # included.", "Inklusive MwSt.", "TVA incluse.", "Inclusief BTW.", "IVA incluido.", "IVA inclusa."), Canada's as well
 # (taxIncluded, missing from its prices until now); the US's say "Plus applicable sales tax."
+
+# SecurePass and the VPN in depth (M11.9, the owner's item 3), read 2026-11-03 in its support centre:
+# - SecurePass, every plan with it. Its FAQ (/consumer/support/answer/107798/): "To add an item like an account, credit
+#   card, identity or note", and "How do I use Bitdefender SecurePass as a 2FA app?" (scan a site's QR code into the
+#   vault); its security report flags "Breached passwords", "Weak passwords", "Old passwords (used for more than 6
+#   months)", "Duplicate passwords" and "Suspicious websites that could expose your login data"; a share link has
+#   "options like expiration dates, usage limits, and password protection", and Groups share "by setting specific rights
+#   (read, write, grant)". Its features table (/answer/109218/): sharing with other users, groups and links on every app.
+#   No passkeys, and no shared folders.
+# - Premium VPN, every plan with it (Total Security's and Antivirus Plus's Standard VPN, 200 MB a day, isn't sold as a
+#   VPN). Its Windows settings (/answer/131733/): "Internet Kill-Switch – Stops all Internet traffic if the VPN connection
+#   is briefly lost.", "Split tunneling – Select apps and websites to bypass the VPN", and auto-connect for "Peer-to-peer
+#   apps – Connect VPN when starting a peer-to-peer file sharing app."; its terms ban no P2P, so P2P is allowed
+#   (inferred). Its protocols "(e.g. Wireguard, OpenVPN, IKEv2)" (/answer/11311/), and "Double-hop" (/answer/96952/,
+#   which some protocols don't offer). No port forwarding, Tor or obfuscation on any of these pages, no published audit,
+#   and a Bitdefender account to sign up, so none of those.
 plans:
   - id: bitdefender.total-security
     name: Total Security
@@ -167,6 +183,10 @@ plans:
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
       password-manager: true
+      password-manager.item-types: [login, totp, credit-card, identity, secure-note]
+      password-manager.health: [breached, weak, reused, old, suspicious]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
@@ -388,13 +408,22 @@ plans:
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
       password-manager: true
+      password-manager.item-types: [login, totp, credit-card, identity, secure-note]
+      password-manager.health: [breached, weak, reused, old, suspicious]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
       vpn.included: true
+      vpn.kill-switch: true
+      vpn.multi-hop: true
+      vpn.p2p: true
+      vpn.protocols: [wireguard, openvpn, ikev2]
       vpn.server-countries: 100
+      vpn.split-tunneling: true
       vpn.unlimited-traffic: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
@@ -616,13 +645,22 @@ plans:
       antivirus.web-protection: true
       parental-control: [content-filtering, screen-time, location, activity-reports]
       password-manager: true
+      password-manager.item-types: [login, totp, credit-card, identity, secure-note]
+      password-manager.health: [breached, weak, reused, old, suspicious]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
       vpn.included: true
+      vpn.kill-switch: true
+      vpn.multi-hop: true
+      vpn.p2p: true
+      vpn.protocols: [wireguard, openvpn, ikev2]
       vpn.server-countries: 100
+      vpn.split-tunneling: true
       vpn.unlimited-traffic: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
@@ -844,13 +882,22 @@ plans:
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
       password-manager: true
+      password-manager.item-types: [login, totp, credit-card, identity, secure-note]
+      password-manager.health: [breached, weak, reused, old, suspicious]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
       vpn.included: true
+      vpn.kill-switch: true
+      vpn.multi-hop: true
+      vpn.p2p: true
+      vpn.protocols: [wireguard, openvpn, ikev2]
       vpn.server-countries: 100
+      vpn.split-tunneling: true
       vpn.unlimited-traffic: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
@@ -1172,13 +1219,22 @@ plans:
       antivirus.web-protection: true
       parental-control: [content-filtering, screen-time, location, activity-reports]
       password-manager: true
+      password-manager.item-types: [login, totp, credit-card, identity, secure-note]
+      password-manager.health: [breached, weak, reused, old, suspicious]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
       vpn.included: true
+      vpn.kill-switch: true
+      vpn.multi-hop: true
+      vpn.p2p: true
+      vpn.protocols: [wireguard, openvpn, ikev2]
       vpn.server-countries: 100
+      vpn.split-tunneling: true
       vpn.unlimited-traffic: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
@@ -1501,13 +1557,22 @@ plans:
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
       password-manager: true
+      password-manager.item-types: [login, totp, credit-card, identity, secure-note]
+      password-manager.health: [breached, weak, reused, old, suspicious]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
       vpn.included: true
+      vpn.kill-switch: true
+      vpn.multi-hop: true
+      vpn.p2p: true
+      vpn.protocols: [wireguard, openvpn, ikev2]
       vpn.server-countries: 100
+      vpn.split-tunneling: true
       vpn.unlimited-traffic: true
       security.identity-restoration: true
       security.credit-monitoring: 1
@@ -1553,13 +1618,22 @@ plans:
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
       password-manager: true
+      password-manager.item-types: [login, totp, credit-card, identity, secure-note]
+      password-manager.health: [breached, weak, reused, old, suspicious]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
       vpn.included: true
+      vpn.kill-switch: true
+      vpn.multi-hop: true
+      vpn.p2p: true
+      vpn.protocols: [wireguard, openvpn, ikev2]
       vpn.server-countries: 100
+      vpn.split-tunneling: true
       vpn.unlimited-traffic: true
       security.identity-restoration: true
       security.credit-monitoring: 3
@@ -1616,13 +1690,22 @@ plans:
       antivirus.web-protection: true
       parental-control: [content-filtering, screen-time, location, activity-reports]
       password-manager: true
+      password-manager.item-types: [login, totp, credit-card, identity, secure-note]
+      password-manager.health: [breached, weak, reused, old, suspicious]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
       vpn.included: true
+      vpn.kill-switch: true
+      vpn.multi-hop: true
+      vpn.p2p: true
+      vpn.protocols: [wireguard, openvpn, ikev2]
       vpn.server-countries: 100
+      vpn.split-tunneling: true
       vpn.unlimited-traffic: true
       security.identity-restoration: true
       security.credit-monitoring: 1
@@ -1670,13 +1753,22 @@ plans:
       antivirus.web-protection: true
       parental-control: [content-filtering, screen-time, location, activity-reports]
       password-manager: true
+      password-manager.item-types: [login, totp, credit-card, identity, secure-note]
+      password-manager.health: [breached, weak, reused, old, suspicious]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
       vpn.included: true
+      vpn.kill-switch: true
+      vpn.multi-hop: true
+      vpn.p2p: true
+      vpn.protocols: [wireguard, openvpn, ikev2]
       vpn.server-countries: 100
+      vpn.split-tunneling: true
       vpn.unlimited-traffic: true
       security.identity-restoration: true
       security.credit-monitoring: 3
@@ -1843,6 +1935,10 @@ plans:
       antivirus.web-protection: true
       parental-control: [content-filtering, screen-time, location, activity-reports]
       password-manager: true
+      password-manager.item-types: [login, totp, credit-card, identity, secure-note]
+      password-manager.health: [breached, weak, reused, old, suspicious]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
@@ -2060,6 +2156,10 @@ plans:
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
       password-manager: true
+      password-manager.item-types: [login, totp, credit-card, identity, secure-note]
+      password-manager.health: [breached, weak, reused, old, suspicious]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
@@ -2178,6 +2278,10 @@ plans:
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
       password-manager: true
+      password-manager.item-types: [login, totp, credit-card, identity, secure-note]
+      password-manager.health: [breached, weak, reused, old, suspicious]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
@@ -2289,8 +2393,13 @@ plans:
       vpn.content-blocking: [ads, trackers]
       vpn.devices: 10
       vpn.included: true
+      vpn.kill-switch: true
+      vpn.multi-hop: true
       vpn.no-logs-policy: true
+      vpn.p2p: true
+      vpn.protocols: [wireguard, openvpn, ikev2]
       vpn.server-countries: 100
+      vpn.split-tunneling: true
       vpn.unlimited-traffic: true
     prices:
       - region: CA

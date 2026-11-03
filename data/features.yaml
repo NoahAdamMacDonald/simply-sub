@@ -274,7 +274,7 @@
     - { id: weak, name: Weak passwords }
     - { id: reused, name: Reused passwords, aliases: [duplicate] }
     - { id: old, name: Old passwords }
-    - { id: suspicious, name: Suspicious logins }
+    - { id: suspicious, name: Suspicious sites, aliases: [suspicious logins, unsafe websites] }
 - id: password-manager.sharing
   parent: password-manager
   name: Password sharing
@@ -286,6 +286,7 @@
     - { id: share-link, name: Share by link }
     - { id: link-expiry, name: Expiring links }
     - { id: link-view-limit, name: Link view limits, aliases: [usage limits] }
+    - { id: link-password, name: Password-protected links, aliases: [link password] }
     - { id: role-permissions, name: Access roles, aliases: [viewer/editor/admin, read/write/admin] }
 - id: security.dark-web-monitoring
   name: Dark web monitoring
