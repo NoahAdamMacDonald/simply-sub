@@ -1471,7 +1471,8 @@ in every D1 `json` column search parses.
   - A `search` column holds what `searchProviders` needs (no policies, notes, perks' text or resellers' listings), so
     every parse is smaller; `GET /providers/:id` keeps the full `json`.
   - Sorting by price and paging run in SQL on `prices (region, monthly_equiv)` with `LIMIT`, so a query with no text
-    reads a page of providers, not all of them.
+    reads a page of providers, not all of them. (As built: a walk of each provider's lowest price in each currency,
+    for pages from the cheapest, part 6b below.)
   - The FTS table's rows count as writes too: a few per provider, only when its names change.
 - **Shared policies** (M11.1) are files of their own too, `/data/policies/<set>.json`, fetched once for every provider
   that names them.
@@ -1483,7 +1484,8 @@ in every D1 `json` column search parses.
 - **Acceptance**
   - [x] Seed tests in workerd: a price change, a feature added to 100 providers, a budget reached mid-catalog and
         resumed, a shape change over three days with the API reading only complete tables
-  - [ ] EXPLAIN QUERY PLAN shows no table scan for text, category or price-sorted queries
+  - [x] EXPLAIN QUERY PLAN shows no table scan for text, category or price-sorted queries (price-sorted from the
+        cheapest, the default; a page from the dearest reads every provider, as the name sort does: part 6b)
   - [x] Opening Terms and policies offline after one visit shows them; first time offline says they need a connection
 - **As built**, in parts (one pull request each):
   - **The tests' catalog** (2026-11-02): the API's tests read `apps/api/test/fixtures/catalog/`, a copy of `data/`
@@ -1577,8 +1579,36 @@ in every D1 `json` column search parses.
       pairs of words. The API's: the narrowed read matches what reading every provider matches; its plan is the FTS5
       lookup and primary keys, never a scan of providers; a two-character term reads them all; the seeds' counts with
       the FTS rows; a renamed feature's providers follow.
-    - **Still to come:** sorting by price and paging in SQL, the last of the EXPLAIN acceptance (text and category
-      queries meet it now).
+    - **Since then:** pages sorted by price (part 6b, below).
+  - **Search, price pages** (2026-11-03): shape 5 (migration 0008, seed format 5) adds `provider_prices`, a row for
+    each currency a provider's plans are priced in: its lowest monthly equivalent there, of every stored price, and its
+    name as core compares names, keyed `(currency, low, name, provider_id)`. The catalog row gets `currencies`, every
+    currency the table may hold: the build's, and while a seed waits the last whole catalog's too
+    (`waitingCurrencies`). 0008 also points the views at shape 4 for a new database and drops shape 3's tables. A page
+    sorted from the cheapest with no text, category or feature (`loadPricePage`) walks each currency's first n rows
+    through the key, n twice the matches the page needs and at least 32, in one batch of a statement each (D1 takes 5
+    terms at most in a compound SELECT); converted at the query's rates, the lowest of a provider's rows is a bound
+    its price can't be below. It reads the n providers whose bounds come first and keeps the matches before the next
+    one's bound, by name at 0 as the key orders free plans (a name past U+D7FF never decides one), with a margin for
+    rounding elsewhere: exactly the matches reading every provider gives, in order. Past `maxPrice` it stops. Too few,
+    and the walks go four times as far; after three rounds, or once n passes the catalog, every provider is read, as
+    it is when a seed writes between its reads (the catalog row's count is checked). The page has no `meta.total`
+    (the owner's choice, 2026-11-03: `total` is optional in the contract, a fourth example shows a page without it),
+    and its next cursor is exact. 240 generated providers in 9 currencies: a first page of 20 parses 42 providers,
+    not 240, though it reads 425 rows to their 241 (rows read break even near 460 providers; parsing's CPU is what
+    the free plan limits first).
+    - **From the dearest:** core sorts on the shown plan, the cheapest, so a provider's highest price is no bound that
+      ends a walk early: on the generated catalog it read every provider after two rounds. Such a page reads every
+      provider at once and keeps its total; a tighter bound would need each region's shown plan.
+    - **Tests:** the API's, on 240 copies of the tests' catalog with other names (some tying once normalized), prices
+      and currencies: for 13 queries (regions, a currency of another region, an interval, native only, price limits)
+      and 7 pages each, the page, what comes before it and whether another follows are what reading every provider
+      gives; a first page parses at most n providers and reads at most n rows a currency; a seed between the reads
+      reads every provider; the walk is the key's, with no sort, and each provider a key lookup; paging through
+      `GET /providers` with the cursor gives every match in order, without a total from the cheapest and with one from
+      the dearest. Core's: the rows' lowest prices and names, the catalog row's currencies while a seed waits and once
+      it's done, a provider's lowest moving to a key of its own. The seeds' counts with the new rows, the bot's steps
+      keeping both builds' currencies until the last.
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and

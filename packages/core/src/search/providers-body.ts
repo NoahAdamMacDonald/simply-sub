@@ -56,7 +56,13 @@ export const providersBodySchema = z.strictObject({
   meta: z.strictObject({
     catalogVersion: catalogMetaSchema.shape.catalogVersion,
     query: providersQuerySchema,
-    total: z.int().nonnegative(),
+    total: z
+      .int()
+      .nonnegative()
+      .describe(
+        'How many providers match: left out of a page sorted from the cheapest (price_asc) with no q, category or feature, which reads only the providers it needs (M11.8)',
+      )
+      .optional(),
     nextCursor: z.string().min(1).nullable(),
     fxDate: isoDateSchema.optional(),
   }),
@@ -101,12 +107,20 @@ export interface ProvidersBodyOptions {
   catalogVersion: string;
   /** The date of the exchange rates the prices were picked with, when there's a region. */
   fxDate?: IsoDate;
+  /**
+   * The matches may end after the page's next one (M11.8's price pages): no total, and a next cursor only when
+   * there's a match after the page.
+   */
+  partial?: true;
 }
 
-/** The page of `matches` that starts at `offset`, and meta: the query as read, the total and the next cursor. */
+/**
+ * The page of `matches` that starts at `offset`, and meta: the query as read, the total (but for a partial list of
+ * matches) and the next cursor.
+ */
 export function providersBody(
   matches: readonly ProviderMatch[],
-  { query, offset, catalogVersion, fxDate }: ProvidersBodyOptions,
+  { query, offset, catalogVersion, fxDate, partial }: ProvidersBodyOptions,
 ): ProvidersBody {
   const end = offset + query.limit;
   return {
@@ -114,7 +128,7 @@ export function providersBody(
     meta: {
       catalogVersion,
       query,
-      total: matches.length,
+      ...(!partial && { total: matches.length }),
       nextCursor: end < matches.length ? providersCursor(end) : null,
       ...(fxDate !== undefined && { fxDate }),
     },

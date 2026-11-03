@@ -31,6 +31,7 @@ import {
   type StoredProvider,
 } from './seed-rows';
 import {
+  catalogCurrencies,
   partialCatalogVersion,
   readSeedState,
   readStoredRows,
@@ -43,6 +44,7 @@ import {
   storedHash,
   storedRowQueries,
   viewChange,
+  waitingCurrencies,
   type SeedDiff,
   type SeedFormat,
   type SeedState,
@@ -75,6 +77,9 @@ export const seedIndexSchema = z.strictObject({
   features: featuresFileSchema,
   categories: categoriesFileSchema,
   bundles: z.array(bundleSchema),
+  currencies: z
+    .array(z.string())
+    .describe("Every currency the plans are priced in: the catalog row's"),
 });
 export type SeedIndex = z.infer<typeof seedIndexSchema>;
 
@@ -105,6 +110,7 @@ export function buildSeedIndex(
     features: data.features,
     categories: data.categories,
     bundles: data.bundles,
+    currencies: catalogCurrencies(data.providers),
   };
 }
 
@@ -196,12 +202,23 @@ export async function seedNext(
     const statements = [
       ...change.statements,
       done
-        ? insertStatement(shape, 'catalog', catalogRow(index, format.seedFormat, counted), 'upsert')
+        ? insertStatement(
+            shape,
+            'catalog',
+            catalogRow(index, format.seedFormat, counted, index.currencies),
+            'upsert',
+          )
         : updateStatement(
             shape,
             'catalog',
-            { id: 1, waiting: left, written_on: today, written: counted.written },
-            ['waiting', 'written_on', 'written'],
+            {
+              id: 1,
+              waiting: left,
+              written_on: today,
+              written: counted.written,
+              currencies: JSON.stringify(waitingCurrencies(catalog.currencies, index.currencies)),
+            },
+            ['waiting', 'written_on', 'written', 'currencies'],
           ),
     ];
     for (const statement of statements) {
