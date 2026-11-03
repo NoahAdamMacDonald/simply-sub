@@ -363,11 +363,10 @@ function labelProblem(key: string, registry: FeatureRegistry, ids: CatalogIds): 
 
 /**
  * Plans whose required features no official page states yet, by plan id (M11.4): each named feature missing is a
- * warning, not an error, until M11.9 reads them again. Their files' comments name the pages that were silent.
+ * warning, not an error. Their files' comments name the pages that were silent. M11.9 inferred ESPN Select's and ICI
+ * RDI's from pages that bear on them (`inferred`); RDS's and TSN's pages give no reason to infer any.
  */
 export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = new Map([
-  ['espn.select', ['video.quality']],
-  ['ici-tou-tv.rdi', ['video.quality']],
   ['rds.standard', ['video.quality']],
   ['tsn.standard', ['video.quality']],
   ['tsn.premium', ['video.quality']],
@@ -413,7 +412,7 @@ export function checkRequiredFeatures(
       [...path, 'features'],
       `Needs ${feature.id}, which every plan in ${required.join(' and ')} states (requiredIn): ${
         waiting
-          ? 'no official page states it yet, so it waits for M11.9 (awaitingRequiredFeatures)'
+          ? 'no official page states it, or gives a reason to infer it, yet (awaitingRequiredFeatures)'
           : `give ${value}, from the provider's own pages`
       }`,
       waiting ? 'warning' : 'error',

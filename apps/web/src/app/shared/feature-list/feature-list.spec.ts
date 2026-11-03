@@ -76,4 +76,26 @@ describe('FeatureList', () => {
     )[2];
     expect(vpn.querySelector('ss-feature-lines.children')?.textContent).toContain('VPN devices');
   });
+
+  it('marks a value inferred, linking the page it was inferred from (M11.9)', async () => {
+    fixture.componentRef.setInput('inferred', {
+      'video.quality': {
+        reason: 'Its help recommends a speed for 4K content.',
+        page: { name: 'Help Center', url: 'https://example.com/help/306' },
+        lastVerified: '2026-11-03',
+      },
+    });
+    await fixture.whenStable();
+
+    expect(lines()[0]).toBe('Video quality: 4K (Ultra HD) inferred Wanted · 1080p (Full HD)');
+    const links = (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLAnchorElement>(
+      'a.inferred',
+    );
+    expect(links).toHaveLength(1);
+    expect(links[0].href).toBe('https://example.com/help/306');
+    expect(links[0].target).toBe('_blank');
+    expect(links[0].getAttribute('aria-label')).toBe(
+      'Inferred from Help Center (opens in a new tab): Its help recommends a speed for 4K content.',
+    );
+  });
 });

@@ -62,8 +62,9 @@ perks:
 # simultaneously). Unlimited's 4K HDR is from ESPN's press release of 2026-09-08 (espnpressroom.com/press-release/
 # espn-espn2-coming-to-sports-fans-in-4k-hdr-in-the-u-s/): ESPN and ESPN2 in 4K HDR in the ESPN App, "as well as on
 # Disney+ in the U.S. to ESPN Unlimited subscribers". Select's video quality: neither the plans article, the support
-# centre nor the release states it (plus.espn.com is Access Denied here), so it waits for M11.9
-# (awaitingRequiredFeatures in core).
+# centre nor the release states it (plus.espn.com is Access Denied here). M11.9 infers HD (720p), marked on the card
+# with its page (the owner's choice of 2026-11-03): its connection speed article, for Select or Unlimited, recommends
+# 5.0 Mbps "for HD content" and 25.0 for 4K, and only Unlimited is said to stream in 4K.
 # Apps, sign-in and support (M11.9, the cross-category features), read 2026-11-03 in its fan support centre: web browsers,
 # iPhone and iPad, Android, Windows 10 and 11, TVs and streaming devices, PlayStation and Xbox (Supported Devices); a
 # MyDisney email address and password (Disney+'s MyDisney article names ESPN); chat ("contact us by clicking the Chat
@@ -78,9 +79,17 @@ plans:
     name: Select
     link: https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices
     features:
+      video.quality: 720p
       ad-free: false
       streaming.concurrent-streams: 3
       streaming.live: [sports]
+    inferred:
+      video.quality:
+        reason: "No page says Select's quality. ESPN recommends 5.0 Mbps for HD content on Select or Unlimited, and only Unlimited is said to stream in 4K, so Select is taken as HD."
+        page:
+          name: Connection speed recommendations
+          url: https://support.espn.com/hc/en-us/articles/40379040324116-ESPN-Select-or-Unlimited-Internal-Connection-Speed-Recommendations
+        lastVerified: 2026-11-03
     prices:
       - region: US
         currency: USD

@@ -72,10 +72,12 @@ renewalAnchor:
 
 # Apps and sign-in (M11.9, the cross-category features), read 2026-11-03 on its subscribe page ("Stream on Your Favourite
 # Devices"): TVs and streaming devices, TSN.ca on computers, Android, iPhone and iPad, PlayStation 5 and Xbox; a Bell
-# Media account's password (its FAQ). Its pages name no support channel, so support.channels is left out.
+# Media account's password (its FAQ); a phone line and chat (tsn.ca/help/contact-us: "Call: 1-833-TSN-HELP", "Chat
+# with us below").
 features:
   platforms: [web, ios, android, tv, console]
   account.sign-in: [password]
+  support.channels: [phone, chat]
 
 plans:
   - id: tsn.standard

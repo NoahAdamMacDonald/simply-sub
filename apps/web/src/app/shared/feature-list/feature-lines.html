@@ -7,6 +7,21 @@
         @if (line.value) {
           <span class="value"> {{ line.value }}</span>
         }
+        @if (line.inferred; as inferred) {
+          <!-- Its own page, so the user judges: the reason is the tooltip, and the link's name says where. -->
+          &ngsp;<a
+            class="inferred"
+            [href]="inferred.url"
+            target="_blank"
+            rel="noopener"
+            [matTooltip]="inferred.reason"
+            matTooltipTouchGestures="off"
+            [attr.aria-label]="
+              'Inferred from ' + inferred.page + ' (opens in a new tab): ' + inferred.reason
+            "
+            >inferred</a
+          >
+        }
         @for (ranked of line.ranks; track ranked.key) {
           <span class="rank">
             <ss-rank-chip [rank]="ranked.rank" />

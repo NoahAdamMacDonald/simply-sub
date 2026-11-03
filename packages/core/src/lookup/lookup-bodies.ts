@@ -134,6 +134,7 @@ export const planBodySchema = z.strictObject({
       .describe('Every rank key the plan provides, in registry order')
       .optional(),
     featureLabels: planShape.featureLabels,
+    inferred: planShape.inferred,
     perks: planShape.perks,
     notes: planShape.notes,
     prices: planShape.prices,

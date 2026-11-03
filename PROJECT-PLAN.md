@@ -1660,6 +1660,20 @@ in every D1 `json` column search parses.
     and ICI TOU.TV's support (their pages name none) and Xbox's (an automated agent only). Proton's apps are open source
     ("All Proton apps are open source"), with its GitHub as `sourceRepo`. `languages.audio` and `.subtitles` wait for
     the owner: Netflix, Disney+ and Hulu publish no list (languages vary by title and region).
+  - **Inferred values, and support corrected** (2026-11-03, the owner's answers that day: inferred values shown with
+    an indicator linking where they came from, so the user decides; languages left out for now). A plan's `inferred`
+    (feature id → `reason`, `page`, `lastVerified`; BLUEPRINT §4.2 rule 11) marks a value no official page states but
+    one gives a reason for: validation holds it to a value the plan states and a page of the provider's own sites, the
+    feature list shows an "inferred" link to the page (`&ngsp;` keeps a space before it for screen readers), the item
+    card too (`ResolvedItem.inferred`), and `GET /plans/:id` returns it. ESPN Select is HD (720p) from its connection
+    speed article ("HD content", for Select or Unlimited, only Unlimited said to be 4K) and ICI RDI 1080p from the
+    app's highest setting ("Qualité élevée : maximum 1080p"); TSN's and RDS's pages give no reason for any quality
+    (the only figure, TSN GO's bitrates, is an app since replaced), so their three plans still wait. Part 2's support
+    channels missed four contact pages: Crave's live chat and phone (9 a.m. to 11 p.m. every day), TSN's and RDS's
+    phone and chat, ICI TOU.TV's request form.
+    - **Tests:** core (the schema, validation's three refusals, the plan body), the app (`FeatureList`'s mark, its
+      link and name), and a browser check (`check-m11-inferred.cjs`: 29 checks in both themes at both widths, by
+      keyboard, with axe).
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and

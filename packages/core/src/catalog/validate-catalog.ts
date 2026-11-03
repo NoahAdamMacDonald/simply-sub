@@ -755,6 +755,38 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
   checkRenewalAnchor(provider, own, context, report);
   checkCurrencies(provider, own, context, report);
   checkSourceRepo(provider, own, context, report);
+  checkInferred(provider, own, context, report);
+}
+
+/**
+ * Inferred feature values (M11.9): each names a value the plan states, its own or its provider's, from a page of the
+ * provider's own sites, its policies' or its owner's, read no later than today.
+ */
+function checkInferred(
+  provider: Provider,
+  own: readonly string[],
+  { today }: CheckContext,
+  report: Report,
+): void {
+  const sites = ownPages(provider, own);
+  provider.plans.forEach((plan, planIndex) => {
+    for (const [featureId, inferred] of Object.entries(plan.inferred ?? {})) {
+      const path = ['plans', planIndex, 'inferred', featureId];
+      if (
+        !Object.hasOwn(plan.features, featureId) &&
+        !Object.hasOwn(provider.features ?? {}, featureId)
+      ) {
+        report(path, 'Names a feature the plan doesn’t state: give its value in features first');
+      }
+      if (!isOnDomain(inferred.page.url, sites)) {
+        report(
+          [...path, 'page', 'url'],
+          `Must be a page of ${provider.name}'s own sites, its policies' or its owner's (${sites.join(', ')})`,
+        );
+      }
+      checkReadOn(inferred.lastVerified, [...path, 'lastVerified'], today, report);
+    }
+  });
 }
 
 /**

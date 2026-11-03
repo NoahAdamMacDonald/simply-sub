@@ -677,6 +677,12 @@ scroll. Wait for the suggestions to narrow before reading them: the whole list s
 Apps, languages & support beside VPN with Mullvad listed (its open-source value), and since M11.6
 `check-list-view.cjs`'s Tab order has the totals' two breakdown buttons after Export (M10's, missed until then).
 
+`check-m11-inferred.cjs` (M11.9, inferred values) checks a Search card on `ng serve` for a Canadian in Alberta (base URL
+ending in `/`, after `npm run data:build` on the branch), in both themes at both widths: ICI TOU.TV's details show ICI
+RDI's "Video quality: 1080p (Full HD)" with an "inferred" link to the help article it's inferred from, in a new tab,
+named "Inferred from <page> (opens in a new tab): <reason>"; Tab from the card's expand button reaches it, and its
+tooltip gives the reason. With axe, screenshots and no horizontal scroll: 29 checks.
+
 `check-m11-facts.cjs` (M11.5, provider facts) checks Search's cards and the item dialog on `ng serve` for a Canadian in
 Alberta (base URL ending in `/`, after `npm run data:build` on the branch), in both themes at both widths: Mullvad's
 Ways to pay with the currencies its cash takes ("Cash in EUR, USD … or NZD, according to its Terms of service"), then

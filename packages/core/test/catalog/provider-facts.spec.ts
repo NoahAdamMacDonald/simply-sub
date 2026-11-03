@@ -316,6 +316,35 @@ describe('validateCatalog, for the renewal day', () => {
   });
 });
 
+describe('validateCatalog, for inferred feature values (M11.9)', () => {
+  const inferred = {
+    reason: 'No page states it, but its help recommends a speed for HD content.',
+    page: { name: 'Help Center', url: 'https://example.com/help/306' },
+    lastVerified: today,
+  };
+
+  it('marks a value the plan states, inferred from its own pages', () => {
+    expect(
+      messages(catalogWith(netflix, ['plans', 0, 'inferred'], { 'video.quality': inferred })),
+    ).toEqual([]);
+  });
+
+  it('refuses a feature the plan doesn’t state, a page off its sites and a page not read yet', () => {
+    const wrong = {
+      ...inferred,
+      page: { ...inferred.page, url: 'https://www.reddit.com/r/netflix' },
+      lastVerified: '2099-01-01',
+    };
+    expect(
+      messages(catalogWith(netflix, ['plans', 0, 'inferred'], { 'vpn.kill-switch': wrong })),
+    ).toEqual([
+      `${netflix} plans.0.inferred.vpn.kill-switch: Names a feature the plan doesn’t state: give its value in features first`,
+      `${netflix} plans.0.inferred.vpn.kill-switch.page.url: Must be a page of Netflix's own sites, its policies' or its owner's (example.com)`,
+      `${netflix} plans.0.inferred.vpn.kill-switch.lastVerified: 2099-01-01 is after today (${today})`,
+    ]);
+  });
+});
+
 describe('validateCatalog, for currencies', () => {
   it('takes them from its own sites, for the ways to pay it lists', () => {
     expect(messages(catalogWith(mullvad, ['currencies'], [cash]))).toEqual([]);

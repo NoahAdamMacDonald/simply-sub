@@ -128,6 +128,8 @@ export interface ResolvedItem {
   monthlyEquivalent: number;
   /** What it gives: the plan's features, a bundle's plans' together, or the custom plan's. */
   features: Plan['features'];
+  /** Which of a catalog plan's feature values are inferred, and from which page (M11.9). */
+  inferred?: Plan['inferred'];
   /**
    * Its service categories (data/categories.yaml): a catalog plan's (planCategories), a bundle's plans' together, and
    * none for a custom plan.
@@ -290,6 +292,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         price,
         addOns,
         features: plan.features,
+        ...(plan.inferred && { inferred: plan.inferred }),
         categories: [...planCategories(plan, provider)],
         ...(networks && { acceptedNetworks: networks }),
         ...(periodChange && { periodChange }),

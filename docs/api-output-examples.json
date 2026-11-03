@@ -1917,7 +1917,7 @@
       ]
     },
     "GET /plans/:id": {
-      "description": "One plan as written, with a summary of its provider after its name, providedRankKeys after its features (every rank key of the registry it provides, in registry order, PROJECT-PLAN.md §3.2), its add-ons in place of addOnIds (expanded, in that order, each with its own pricing), and bundleIds last: every bundle that includes it, in any region. Lists that would be empty are left out. It reads the catalog row, its provider's row (which holds the plan and its add-ons) and one index entry per bundle that includes it. Region, currency, the 400s, an old id's 301, the 404 and its suggestion work as on GET /providers/:id, and the ETag also hashes the registry's version.",
+      "description": "One plan as written, with a summary of its provider after its name, providedRankKeys after its features (every rank key of the registry it provides, in registry order, PROJECT-PLAN.md §3.2), inferred when a value no official page states is inferred from one (the reason and the page, M11.9), its add-ons in place of addOnIds (expanded, in that order, each with its own pricing), and bundleIds last: every bundle that includes it, in any region. Lists that would be empty are left out. It reads the catalog row, its provider's row (which holds the plan and its add-ons) and one index entry per bundle that includes it. Region, currency, the 400s, an old id's 301, the 404 and its suggestion work as on GET /providers/:id, and the ETag also hashes the registry's version.",
       "query": {
         "region": "Optional, e.g. CA, as on GET /providers/:id.",
         "currency": "Optional, e.g. CAD, as on GET /providers/:id."
