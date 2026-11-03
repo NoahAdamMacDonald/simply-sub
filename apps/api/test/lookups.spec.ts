@@ -677,15 +677,15 @@ describe('the D1 reads', () => {
     // D1 counts about two rows for each primary-key or index lookup (measured on this catalog; the query plans below
     // are what keeps it from growing with the tables).
     expect([one.rowsRead, rows.rowsRead]).toEqual([14, 21]);
+    // Through the views of the live shape's tables (M11.8), the plan names the tables rather than the query's aliases.
     expect(details).toEqual(
       expect.arrayContaining([
-        'SEARCH plans USING PRIMARY KEY (id=?)',
-        'SEARCH b USING PRIMARY KEY (id=?)',
-        'SEARCH bundle_plans USING COVERING INDEX idx_bundle_plans_plan (plan_id=?)',
-        'SEARCH s USING PRIMARY KEY (id=?) LEFT-JOIN',
-        'SEARCH m USING COVERING INDEX idx_bundle_plans_plan (plan_id=?)',
-        'SEARCH bp USING PRIMARY KEY (bundle_id=?)',
-        'SEARCH p USING PRIMARY KEY (id=?)',
+        'SEARCH plans_s3 USING PRIMARY KEY (id=?)',
+        'SEARCH bundles_s3 USING PRIMARY KEY (id=?)',
+        'SEARCH bundle_plans_s3 USING COVERING INDEX idx_bundle_plans_plan (plan_id=?)',
+        'SEARCH providers_s3 USING PRIMARY KEY (id=?) LEFT-JOIN',
+        'SEARCH bundle_plans_s3 USING PRIMARY KEY (bundle_id=?)',
+        'SEARCH providers_s3 USING PRIMARY KEY (id=?)',
       ]),
     );
     expect(details.filter((detail) => detail.startsWith('SCAN'))).toEqual([]);

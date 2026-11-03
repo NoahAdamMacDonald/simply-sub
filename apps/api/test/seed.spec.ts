@@ -13,8 +13,13 @@ import {
   type CatalogSource,
   type CatalogSourceFile,
   type Price,
+  type SeedFormat,
   type SeedOptions,
   type SeedSource,
+  type SeedTable,
+  seedShape,
+  sqlTable,
+  storedHash,
   type SeedStep,
   buildSeedIndex,
   seedNext,
@@ -29,7 +34,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 // which is what the free plan's 100,000 a day counts, and what core's estimate must match.
 const db = env.DB;
 
-const tables = [
+const tables: SeedTable[] = [
   'providers',
   'provider_categories',
   'plans',
@@ -204,7 +209,7 @@ async function seed(
   const current = full
     ? undefined
     : readSeedState(
-        (await db.batch(seedStateQueries.map((query) => db.prepare(query)))).map(
+        (await db.batch(seedStateQueries().map((query) => db.prepare(query)))).map(
           (result) => result.results,
         ),
       );
@@ -230,6 +235,11 @@ async function seed(
     estimated: plan.writes,
     waiting: plan.waiting,
   };
+}
+
+/** Empties the catalog's tables: the live shape's, which the API reads through views (M11.8). */
+async function emptyCatalog(): Promise<void> {
+  await db.batch(tables.map((table) => db.prepare(`DELETE FROM ${sqlTable(seedShape, table)}`)));
 }
 
 async function count(table: string): Promise<number> {
@@ -300,7 +310,8 @@ describe('a full seed', () => {
       .prepare(`SELECT hash FROM providers WHERE id = 'crave'`)
       .first<{ hash: string }>();
     const crave = snapshotOf(source).data.providers[0];
-    expect(row?.hash).toBe(await sha256(JSON.stringify(crave)));
+    // Under the seed format, so a new format compares every provider again (M11.8).
+    expect(row?.hash).toBe(storedHash(seedFormat, await sha256(JSON.stringify(crave))));
   });
 
   it('keeps quotes and line breaks', async () => {
@@ -350,7 +361,7 @@ describe('a seed from what D1 holds', () => {
 
   it('fills an empty D1 in full: the first deploy after migration 0002', async () => {
     const snapshot = snapshotOf(source);
-    await db.batch(tables.map((table) => db.prepare(`DELETE FROM ${table}`)));
+    await emptyCatalog();
     await seed(snapshot);
     const fromEmpty = await dump();
     await seed(snapshot, { full: true });
@@ -428,7 +439,7 @@ const platforms: CatalogSource['features'][number] = {
 
 describe('provider-wide features (M11.4)', () => {
   beforeEach(async () => {
-    await db.batch(tables.map((table) => db.prepare(`DELETE FROM ${table}`)));
+    await emptyCatalog();
   });
 
   it("writes a provider's platforms once, not once per plan", async () => {
@@ -493,7 +504,7 @@ describe('provider-wide features (M11.4)', () => {
 
 describe('rows written', () => {
   beforeEach(async () => {
-    await db.batch(tables.map((table) => db.prepare(`DELETE FROM ${table}`)));
+    await emptyCatalog();
   });
 
   /**
@@ -583,7 +594,7 @@ function changed(edit: (catalog: CatalogSource) => void): CatalogSource {
 
 describe('the estimate (M11.8)', () => {
   beforeEach(async () => {
-    await db.batch(tables.map((table) => db.prepare(`DELETE FROM ${table}`)));
+    await emptyCatalog();
   });
 
   it.each<[string, (catalog: CatalogSource) => void]>([
@@ -628,7 +639,7 @@ describe('the estimate (M11.8)', () => {
     const first = await seed(snapshotOf(testCatalog()));
     expect(first.estimated).toBe(first.rowsWritten);
     const current = readSeedState(
-      (await db.batch(seedStateQueries.map((query) => db.prepare(query)))).map(
+      (await db.batch(seedStateQueries().map((query) => db.prepare(query)))).map(
         (result) => result.results,
       ),
     );
@@ -682,7 +693,7 @@ describe('the estimate (M11.8)', () => {
 
 describe('the daily budget (M11.8)', () => {
   beforeEach(async () => {
-    await db.batch(tables.map((table) => db.prepare(`DELETE FROM ${table}`)));
+    await emptyCatalog();
   });
 
   const today = '2026-11-03';
@@ -735,7 +746,8 @@ describe('the daily budget (M11.8)', () => {
 
   it('fills an empty D1 over several days, naming no version until it holds the whole catalog', async () => {
     const snapshot = snapshotOf(source, 'def5678');
-    const first = await seed(snapshot, { budget: { today, daily: 30 } });
+    // Its features, Crave and the catalog row, with room kept for the bundle and the switch of views.
+    const first = await seed(snapshot, { budget: { today, daily: 48 } });
     expect(first.waiting).toEqual(['netflix', 'bundle.netflix-crave']);
     expect(await catalogRow()).toMatchObject({ version: '0000000', waiting: 2 });
 
@@ -748,7 +760,9 @@ describe('the catalog tables', () => {
   it('have the keys and indexes core counts writes with', async () => {
     for (const [table, shape] of Object.entries(seedTables)) {
       const { results } = await db
-        .prepare(`SELECT name, origin FROM pragma_index_list('${table}') WHERE origin = 'c'`)
+        .prepare(
+          `SELECT name, origin FROM pragma_index_list('${sqlTable(seedShape, table as SeedTable)}') WHERE origin = 'c'`,
+        )
         .all<{ name: string }>();
       const indexes = await Promise.all(
         results.map(async ({ name }) =>
@@ -761,7 +775,9 @@ describe('the catalog tables', () => {
       );
       const key = (
         await db
-          .prepare(`SELECT name FROM pragma_table_info('${table}') WHERE pk > 0 ORDER BY pk`)
+          .prepare(
+            `SELECT name FROM pragma_table_info('${sqlTable(seedShape, table as SeedTable)}') WHERE pk > 0 ORDER BY pk`,
+          )
           .all<{ name: string }>()
       ).results.map((column) => column.name);
       expect({ table, key, indexes }).toEqual({ table, key: shape.key, indexes: shape.indexes });
@@ -771,7 +787,7 @@ describe('the catalog tables', () => {
 
 describe('the bot’s steps (M11.8)', () => {
   beforeEach(async () => {
-    await db.batch(tables.map((table) => db.prepare(`DELETE FROM ${table}`)));
+    await emptyCatalog();
   });
 
   /** D1 as the bot's seed uses it, counting what each write wrote. */
@@ -791,6 +807,7 @@ describe('the bot’s steps (M11.8)', () => {
     files = new Map(
       snapshot.data.providers.map((provider) => [provider.id, JSON.stringify(provider)]),
     ),
+    format = seedFormat,
   ): Promise<SeedSource> {
     const hashes = new Map(
       await Promise.all(
@@ -799,7 +816,7 @@ describe('the bot’s steps (M11.8)', () => {
         ),
       ),
     );
-    const index = buildSeedIndex(snapshot, hashes);
+    const index = buildSeedIndex(snapshot, hashes, format);
     return {
       index: async () => index,
       provider: async (id) => files.get(id) ?? '',
@@ -808,11 +825,16 @@ describe('the bot’s steps (M11.8)', () => {
   }
 
   /** One night: steps until nothing more fits, or nothing waits. */
-  async function night(source: SeedSource, today: string, daily: number): Promise<SeedStep[]> {
+  async function night(
+    source: SeedSource,
+    today: string,
+    daily: number,
+    format?: SeedFormat,
+  ): Promise<SeedStep[]> {
     const steps: SeedStep[] = [];
     for (;;) {
       written.length = 0;
-      const step = await seedNext(database, source, { today, daily });
+      const step = await seedNext(database, source, { today, daily }, format);
       // What it said it wrote is what D1 counted.
       expect(step.writes).toBe(written[0] ?? 0);
       steps.push(step);
@@ -907,5 +929,123 @@ describe('the bot’s steps (M11.8)', () => {
     await expect(
       seedNext(database, source, { today: '2026-11-04', daily: 50_000 }),
     ).rejects.toThrow("isn't the file the seed index names");
+  });
+
+  /** A new shape's tables as its migration would make them: the live shape's, under the new number (M11.8). */
+  async function createShape(shape: number): Promise<void> {
+    const { results } = await db
+      .prepare(
+        `SELECT type, name, sql FROM sqlite_master
+         WHERE sql IS NOT NULL AND (name LIKE '%\\_s${seedShape}' ESCAPE '\\'
+           OR (type = 'index' AND tbl_name LIKE '%\\_s${seedShape}' ESCAPE '\\'))`,
+      )
+      .all<{ type: string; name: string; sql: string }>();
+    const renamed = (sql: string) => sql.replaceAll(`_s${seedShape}`, `_s${shape}`);
+    await db.batch(
+      [
+        ...results.filter(({ type }) => type === 'table').map(({ sql }) => renamed(sql)),
+        ...results
+          .filter(({ type }) => type === 'index')
+          .map(({ name, sql }) => renamed(sql).replace(name, `${name}_s${shape}`)),
+      ].map((sql) => db.prepare(sql)),
+    );
+  }
+
+  /** The deploy's seed of `snapshot` in `format`, from what that format's tables hold. */
+  async function deploy(
+    snapshot: CatalogSnapshot,
+    format: SeedFormat,
+    budget: SeedOptions['budget'],
+  ): Promise<string[]> {
+    const providerHashes = new Map(
+      await Promise.all(
+        snapshot.data.providers.map(
+          async (provider) => [provider.id, await sha256(JSON.stringify(provider))] as const,
+        ),
+      ),
+    );
+    const current = readSeedState(
+      (await db.batch(seedStateQueries(format.shape).map((query) => db.prepare(query)))).map(
+        (result) => result.results,
+      ),
+    );
+    const ids = providersToRead(snapshot, { providerHashes, current, format });
+    const rows =
+      ids.length > 0
+        ? readStoredRows(
+            ids,
+            (
+              await db.batch(storedRowQueries(ids, format.shape).map((query) => db.prepare(query)))
+            ).map((result) => result.results),
+          )
+        : undefined;
+    const plan = planSeed(snapshot, { providerHashes, current, rows, budget, format });
+    const statements = plan.sql.trimEnd().split('\n');
+    const results = await db.batch(statements.map((statement) => db.prepare(statement)));
+    expect(plan.writes).toBe(results.reduce((sum, result) => sum + result.meta.rows_written, 0));
+    return plan.waiting;
+  }
+
+  /** What the API reads: the catalog row, and a plan's first price through the views. */
+  async function served(planId: string) {
+    const plan = await db
+      .prepare('SELECT json FROM plans WHERE id = ?')
+      .bind(planId)
+      .first<{ json: string }>();
+    return {
+      catalog: await db.prepare('SELECT version, seed_format FROM catalog').first(),
+      amount: plan && (JSON.parse(plan.json) as { prices: { amount: number }[] }).prices[0].amount,
+    };
+  }
+
+  it('fills a new shape’s tables over three days, the API reading the whole live ones until it switches', async () => {
+    await seed(snapshotOf(testCatalog(), 'abc1234'), { full: true });
+    await createShape(4);
+    const after = everyPrice();
+    const shape4 = { seedFormat: 4, shape: 4 };
+    const planId = after.data.providers[0].plans[0].id;
+    const before = await served(planId);
+
+    // Day 1, a deploy: what fits of the new shape's tables, while the API reads the old ones, whole.
+    const daily = 1_100;
+    const waiting = await deploy(after, shape4, { today: '2026-11-03', daily });
+    expect(waiting.length).toBeGreaterThan(0);
+    expect(await served(planId)).toEqual(before);
+    expect(before.catalog).toEqual({ version: 'abc1234', seed_format: seedFormat });
+
+    // The next days, the bot, until the new tables are whole: the API reads only the old ones meanwhile.
+    const source = await sourceOf(after, undefined, 4);
+    const nights: (string | undefined)[] = [];
+    for (let day = 4; day < 9 && nights.at(-1) !== 'done'; day++) {
+      expect(await served(planId)).toEqual(before);
+      nights.push((await night(source, `2026-11-0${day}`, daily, shape4)).at(-1)?.result);
+    }
+    // Three days in all: this catalog's Bitdefender and Proton are most of a day each.
+    expect(nights).toEqual(['budget', 'done']);
+
+    // Whole: the views go to the new tables, and the catalog row names the build and its format.
+    expect(await served(planId)).toEqual({
+      catalog: { version: 'def5678', seed_format: 4 },
+      amount: (before.amount ?? 0) + 1,
+    });
+    expect(
+      (await db.prepare(`SELECT sql FROM sqlite_master WHERE name = 'providers'`).first())?.['sql'],
+    ).toBe('CREATE VIEW providers AS SELECT * FROM providers_s4');
+  });
+
+  it('compares every provider again for a new format that keeps its shape, through the budget', async () => {
+    const snapshot = snapshotOf(testCatalog(), 'abc1234');
+    await seed(snapshot, { full: true });
+    const format = { seedFormat: 4, shape: seedShape };
+    // Only each provider's hash (and json) is new: 1 row each, 4 in a day of 5 with the catalog row.
+    const waiting = await deploy(snapshot, format, { today: '2026-11-03', daily: 5 });
+    expect(waiting).toHaveLength(snapshot.data.providers.length - 4);
+    expect(
+      (await night(await sourceOf(snapshot, undefined, 4), '2026-11-04', 50_000, format)).at(-1)
+        ?.result,
+    ).toBe('done');
+    const { results } = await db.prepare('SELECT hash FROM providers').all<{ hash: string }>();
+    expect(results.every(({ hash }) => hash.startsWith('4.'))).toBe(true);
+    expect(await db.prepare('SELECT seed_format FROM catalog').first()).toEqual({ seed_format: 4 });
   });
 });
