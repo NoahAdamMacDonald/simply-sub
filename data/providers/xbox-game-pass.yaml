@@ -4,7 +4,6 @@
 # Cancelling:
 # https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription.
 # Terms: https://www.xbox.com/en-US/legal/subscription-terms.
-# Privacy: none found.
 # Bundles: none found.
 # Official resellers: https://www.xbox.com/en-CA/where-to-buy.
 # Not on the pages: yearly prices: the page sells monthly plans only; the card networks it takes: no page read names
@@ -508,15 +507,17 @@ policies:
           quote: 'Purchase of XBOX Game Pass Ultimate automatically (a) upgrades your existing XBOX Game Pass (Essential, Premium, PC, Console) and/or EA Play membership(s) to XBOX Game Pass Ultimate at the current conversion ratio'
       lastVerified: 2026-11-02
     - topic: legal.disputes
-      tier: neutral
-      reason: 'In the US, disagreements go to a private referee (an arbitrator) and you can’t join a group lawsuit, but you can use small claims court.'
+      tier: bad
+      reason: "In the US, a private referee (an arbitrator) decides disagreements instead of a court, you can't join a group lawsuit, and there's no way to opt out. Only small claims court stays open."
       sources:
+        - url: https://www.microsoft.com/en-us/servicesagreement
+          quote: 'The Microsoft Services Agreement contains binding arbitration and class action waiver terms that apply to U.S. residents.'
         - url: https://www.microsoft.com/en-us/servicesagreement
           quote: 'You and we agree to submit disputes to a neutral arbitrator and not to sue in court in front of a judge or jury, except in small claims court.'
       action:
         name: 'Its arbitration terms (section 15)'
         url: https://www.microsoft.com/en-us/servicesagreement
-      lastVerified: 2026-11-02
+      lastVerified: 2026-11-03
     - topic: legal.disputes
       regions: [CA]
       tier: good

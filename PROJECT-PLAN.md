@@ -1871,6 +1871,25 @@ in every D1 `json` column search parses.
     - **Streaming:** the values that stay "no" say what was read: TSN's and RDS's FAQs name no downloads or profiles,
       ICI TOU.TV's help centre lists offline downloads as unavailable, and Crave names 4K but not HDR. Hulu's and ESPN's
       wait for a US reader (the owner's VPN).
+  - **The second model's review** (2026-11-03, the guide's §7.3): Fable 5.1 at high effort read all 290 ratings, every
+    M11.9 feature mapping and status, and one region's prices for 12 providers (Hulu's and ESPN's pages don't open
+    here) against the saved page text. 17 findings; everything else matched.
+    - **The owner's four readings**, each now a sentence in its rubric: a small-claims exception never moves a disputes
+      grade (Disney's agreement and Proton's US clause Neutral → **Poor**, Xbox's US agreement Neutral → **Bad**); a
+      posting on its own site isn't telling you (Mullvad's terms changes Good → **Neutral**, as Bell's and Disney's);
+      the procedure's necessary exceptions never make government requests Poor (Claude and Bell Poor → **Neutral**,
+      Bitdefender stays Poor for "the interests of our clients and Bitdefender"); a check by one of several methods
+      isn't a required field (Proton's sign-up Great → **Good**).
+    - **Fixed:** Bitdefender's eight suites with Premium VPN state its no-logs policy; its and Mullvad's P2P are
+      `inferred`, marked on the card; ICI TOU.TV's free trial Neutral → **Poor** ("Le paiement sera débité au moment
+      de la confirmation de l'achat", no reminder, as Disney's and Xbox's); Claude's content access not stated →
+      **Neutral** (flagged chats looked at to enforce its rules); Claude's sign-up quotes its phone-verification
+      article; Bitdefender's device limits are its VPN's, on the plans with it; a stale comment went.
+    - **Kept:** Netflix's fees Poor ("possible transaction fees" charged to your payment method, read broadly by
+      step 6; the issuer's fees are another clause), Bitdefender's renewal reminders Good (45 days can't come before a
+      monthly renewal), and seven low findings left as rubric gaps for the owner: upgrade-only plan changes, a parent
+      company's transfer, named countries with no safeguard, PCI DSS as a certification, reserved download limits, an
+      age-of-majority rule for children, and a reminder longer than a period.
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and

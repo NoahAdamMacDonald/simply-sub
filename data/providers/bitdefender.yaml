@@ -420,6 +420,7 @@ plans:
       vpn.included: true
       vpn.kill-switch: true
       vpn.multi-hop: true
+      vpn.no-logs-policy: true
       vpn.p2p: true
       vpn.protocols: [wireguard, openvpn, ikev2]
       vpn.server-countries: 100
@@ -427,6 +428,13 @@ plans:
       vpn.unlimited-traffic: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
+    inferred:
+      vpn.p2p:
+        reason: "No page says whether P2P is allowed. Its app connects the VPN when a peer-to-peer file sharing app starts, and its terms don't ban P2P, so it's taken as allowed."
+        page:
+          name: VPN settings (Windows)
+          url: https://www.bitdefender.com/consumer/support/answer/131733/
+        lastVerified: 2026-11-03
     prices:
       - region: CA
         currency: CAD
@@ -657,6 +665,7 @@ plans:
       vpn.included: true
       vpn.kill-switch: true
       vpn.multi-hop: true
+      vpn.no-logs-policy: true
       vpn.p2p: true
       vpn.protocols: [wireguard, openvpn, ikev2]
       vpn.server-countries: 100
@@ -664,6 +673,13 @@ plans:
       vpn.unlimited-traffic: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
+    inferred:
+      vpn.p2p:
+        reason: "No page says whether P2P is allowed. Its app connects the VPN when a peer-to-peer file sharing app starts, and its terms don't ban P2P, so it's taken as allowed."
+        page:
+          name: VPN settings (Windows)
+          url: https://www.bitdefender.com/consumer/support/answer/131733/
+        lastVerified: 2026-11-03
     prices:
       - region: CA
         currency: CAD
@@ -894,6 +910,7 @@ plans:
       vpn.included: true
       vpn.kill-switch: true
       vpn.multi-hop: true
+      vpn.no-logs-policy: true
       vpn.p2p: true
       vpn.protocols: [wireguard, openvpn, ikev2]
       vpn.server-countries: 100
@@ -901,6 +918,13 @@ plans:
       vpn.unlimited-traffic: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
+    inferred:
+      vpn.p2p:
+        reason: "No page says whether P2P is allowed. Its app connects the VPN when a peer-to-peer file sharing app starts, and its terms don't ban P2P, so it's taken as allowed."
+        page:
+          name: VPN settings (Windows)
+          url: https://www.bitdefender.com/consumer/support/answer/131733/
+        lastVerified: 2026-11-03
     prices:
       - region: CA
         currency: CAD
@@ -1231,6 +1255,7 @@ plans:
       vpn.included: true
       vpn.kill-switch: true
       vpn.multi-hop: true
+      vpn.no-logs-policy: true
       vpn.p2p: true
       vpn.protocols: [wireguard, openvpn, ikev2]
       vpn.server-countries: 100
@@ -1238,6 +1263,13 @@ plans:
       vpn.unlimited-traffic: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
+    inferred:
+      vpn.p2p:
+        reason: "No page says whether P2P is allowed. Its app connects the VPN when a peer-to-peer file sharing app starts, and its terms don't ban P2P, so it's taken as allowed."
+        page:
+          name: VPN settings (Windows)
+          url: https://www.bitdefender.com/consumer/support/answer/131733/
+        lastVerified: 2026-11-03
     prices:
       - region: CA
         currency: CAD
@@ -1569,6 +1601,7 @@ plans:
       vpn.included: true
       vpn.kill-switch: true
       vpn.multi-hop: true
+      vpn.no-logs-policy: true
       vpn.p2p: true
       vpn.protocols: [wireguard, openvpn, ikev2]
       vpn.server-countries: 100
@@ -1580,6 +1613,13 @@ plans:
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
     perks: [stolen-wallet, ssn-tracker]
+    inferred:
+      vpn.p2p:
+        reason: "No page says whether P2P is allowed. Its app connects the VPN when a peer-to-peer file sharing app starts, and its terms don't ban P2P, so it's taken as allowed."
+        page:
+          name: VPN settings (Windows)
+          url: https://www.bitdefender.com/consumer/support/answer/131733/
+        lastVerified: 2026-11-03
     prices:
       - region: US
         currency: USD
@@ -1630,6 +1670,7 @@ plans:
       vpn.included: true
       vpn.kill-switch: true
       vpn.multi-hop: true
+      vpn.no-logs-policy: true
       vpn.p2p: true
       vpn.protocols: [wireguard, openvpn, ikev2]
       vpn.server-countries: 100
@@ -1650,6 +1691,13 @@ plans:
         address-change,
         court-records,
       ]
+    inferred:
+      vpn.p2p:
+        reason: "No page says whether P2P is allowed. Its app connects the VPN when a peer-to-peer file sharing app starts, and its terms don't ban P2P, so it's taken as allowed."
+        page:
+          name: VPN settings (Windows)
+          url: https://www.bitdefender.com/consumer/support/answer/131733/
+        lastVerified: 2026-11-03
     prices:
       - region: US
         currency: USD
@@ -1702,6 +1750,7 @@ plans:
       vpn.included: true
       vpn.kill-switch: true
       vpn.multi-hop: true
+      vpn.no-logs-policy: true
       vpn.p2p: true
       vpn.protocols: [wireguard, openvpn, ikev2]
       vpn.server-countries: 100
@@ -1713,6 +1762,13 @@ plans:
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
     perks: [stolen-wallet, ssn-tracker]
+    inferred:
+      vpn.p2p:
+        reason: "No page says whether P2P is allowed. Its app connects the VPN when a peer-to-peer file sharing app starts, and its terms don't ban P2P, so it's taken as allowed."
+        page:
+          name: VPN settings (Windows)
+          url: https://www.bitdefender.com/consumer/support/answer/131733/
+        lastVerified: 2026-11-03
     prices:
       - region: US
         currency: USD
@@ -1765,6 +1821,7 @@ plans:
       vpn.included: true
       vpn.kill-switch: true
       vpn.multi-hop: true
+      vpn.no-logs-policy: true
       vpn.p2p: true
       vpn.protocols: [wireguard, openvpn, ikev2]
       vpn.server-countries: 100
@@ -1785,6 +1842,13 @@ plans:
         address-change,
         court-records,
       ]
+    inferred:
+      vpn.p2p:
+        reason: "No page says whether P2P is allowed. Its app connects the VPN when a peer-to-peer file sharing app starts, and its terms don't ban P2P, so it's taken as allowed."
+        page:
+          name: VPN settings (Windows)
+          url: https://www.bitdefender.com/consumer/support/answer/131733/
+        lastVerified: 2026-11-03
     prices:
       - region: US
         currency: USD
@@ -2401,6 +2465,13 @@ plans:
       vpn.server-countries: 100
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
+    inferred:
+      vpn.p2p:
+        reason: "No page says whether P2P is allowed. Its app connects the VPN when a peer-to-peer file sharing app starts, and its terms don't ban P2P, so it's taken as allowed."
+        page:
+          name: VPN settings (Windows)
+          url: https://www.bitdefender.com/consumer/support/answer/131733/
+        lastVerified: 2026-11-03
     prices:
       - region: CA
         currency: CAD
@@ -2788,6 +2859,31 @@ policies:
           quote: 'Bitdefender reserves the right to limit the users if it determines an abuse of the usage of Bitdefender Solution.'
       lastVerified: 2026-11-02
     - topic: service.device-limits
+      status: not-stated
+      reason: 'Outside its VPN, its terms name no limit beyond the number of devices each plan covers.'
+      pages:
+        [
+          https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions,
+        ]
+      lastVerified: 2026-11-03
+    - topic: service.device-limits
+      plans:
+        [
+          bitdefender.total-security,
+          bitdefender.total-security-family,
+          bitdefender.antivirus-plus,
+          bitdefender.antivirus-plus-3-devices,
+          bitdefender.antivirus-free,
+          bitdefender.premium-security-individual,
+          bitdefender.premium-security-family,
+          bitdefender.ultimate-security-individual,
+          bitdefender.ultimate-security-family,
+          bitdefender.ultimate-security-plus-standard-individual,
+          bitdefender.ultimate-security-plus-extended-individual,
+          bitdefender.ultimate-security-plus-standard-family,
+          bitdefender.ultimate-security-plus-extended-family,
+          bitdefender.premium-vpn,
+        ]
       tier: neutral
       reason: 'Its VPN can’t be used from more than 20 internet addresses a day, and Bitdefender can slow it if you use much more than most people.'
       sources:
@@ -2795,7 +2891,7 @@ policies:
           quote: 'xxiv. accessing IPVanish’s services through more than twenty (20) IP addresses in a single day;'
         - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
           quote: 'Bitdefender reserves the right to temporarily suspend or limit your use of the VPN if the usage level exceeds our average customer use level'
-      lastVerified: 2026-11-02
+      lastVerified: 2026-11-03
     - topic: legal.account-closure
       plans:
         [

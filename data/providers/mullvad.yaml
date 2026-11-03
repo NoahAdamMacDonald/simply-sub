@@ -103,6 +103,13 @@ plans:
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, servers, apps]
       vpn.anonymous-signup: true
+    inferred:
+      vpn.p2p:
+        reason: 'No page states a P2P policy. Its terms block only ports 25, 137, 138, 139 and 445, so P2P is taken as allowed.'
+        page:
+          name: Terms of service
+          url: https://mullvad.net/en/help/terms-service
+        lastVerified: 2026-11-03
     prices:
       - region: GLOBAL
         currency: EUR
@@ -414,8 +421,8 @@ policies:
           quote: 'Any dispute, controversy, or claim arising out of or in connection with the terms shall be handled by the National Board for Consumer Disputes (ARN) or the Swedish courts'
       lastVerified: 2026-11-03
     - topic: legal.terms-changes
-      tier: good
-      reason: 'It tells you about big changes on its blog at least a month ahead, and you can say no by no longer using it, though it only refunds time you have left under some conditions.'
+      tier: neutral
+      reason: 'It posts big changes on its blog at least a month ahead, and you can say no by no longer using it, though it only refunds time you have left under some conditions.'
       sources:
         - url: https://mullvad.net/en/help/terms-service
           quote: 'Any material changes to these terms will be notified via a prominent notice on mullvad.net/blog at least one month before the changes are applied.'
@@ -537,6 +544,6 @@ policies:
       lastVerified: 2026-11-02
     - topic: service.device-limits
       status: not-stated
-      reason: 'Its terms only say how many devices an account works on, which its plan shows, and nothing else about device limits.'
+      reason: 'Its terms name no limit beyond the number of devices an account works on, which its plan shows.'
       pages: [https://mullvad.net/en/help/terms-service]
       lastVerified: 2026-11-03

@@ -1,6 +1,6 @@
 // M11.1 in the system Edge: policy topics v2 on a Search card's Terms and policies, on the real catalog (data:build's
 // files), in both themes at 1280 and 360 px. For a Canadian in Alberta, ICI TOU.TV's grey lines (Account sharing and
-// Device and download limits Not stated; its free trial graded since M11.9) and Mullvad's Closing your account Not
+// Device and download limits Not stated; its free trial graded since M11.9, Poor since its review) and Mullvad's Closing your account Not
 // stated, its citation the page read, reached by Tab with the page's name as its tooltip, and Disney+'s sharing and ads Poor
 // (Disney's shared privacy policy outside the US, M11.9); for a US user, Hulu's ratings from that policy beside its
 // own data sharing, with one Sources link, and Disney+'s US ratings over the policy's others. With axe, screenshots
@@ -198,17 +198,17 @@ async function greyLooks(section) {
           const tou = await policies(page, 'ICI TOU.TV');
           const touRows = await rows(tou);
           check(
-            `${label}: ICI TOU.TV's sharing and device limits Not stated, each grey with its reason; its free trial graded (M11.9)`,
+            `${label}: ICI TOU.TV's sharing and device limits Not stated, each grey with its reason; its free trial graded Poor (M11.9's review)`,
             touRows.some((row) =>
               row.startsWith(
-                'neutral | Free trials (Neutral): It starts with 7 free days, then keeps renewing',
+                'poor | Free trials (Poor): Your first subscription starts with 7 free days, but you give your payment details',
               ),
             ) &&
               touRows.includes(
                 'grey none | Account sharing (Not stated): Its conditions say your username and password are for your personal use, but not whether the people you live with may use your account. [1]',
               ) &&
               touRows.includes(
-                'grey none | Device and download limits (Not stated): Its conditions only give how many screens can play at once, which its plan shows, and nothing else about device limits. [1]',
+                'grey none | Device and download limits (Not stated): Its conditions name no limit beyond how many screens can play at once, which its plan shows. [1]',
               ),
             touRows.filter((row) => row.startsWith('grey')).join(' | '),
           );

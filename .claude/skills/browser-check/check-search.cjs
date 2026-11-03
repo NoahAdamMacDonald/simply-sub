@@ -1815,8 +1815,8 @@ async function addItem(page, planId) {
     // Netflix's ratings from its Canadian terms stand for everywhere since 2026-11-02, until its US terms are read.
     check(
       "a US user sees Proton's US disputes rating, and Netflix's from its Canadian terms",
-      // Neutral since M11.9: small claims court stays open, by the rubric's words.
-      disputes.startsWith('neutral | Disputes (Neutral): In the US, a private arbitrator') &&
+      // Poor: a class-action waiver with an opt-out only by letter within 30 days (the owner's reading, M11.9).
+      disputes.startsWith('poor | Disputes (Poor): In the US, a private arbitrator') &&
         (await card(page, 'Netflix')
           .locator('.policies li', { hasText: 'Price changes' })
           .count()) === 1,

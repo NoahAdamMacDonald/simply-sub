@@ -727,8 +727,9 @@ provider-wide ratings), Disney+'s US sharing rating for the US user, Hulu's own 
 ICI TOU.TV's free trial graded Neutral instead of grey. `check-after-m9.cjs` finds Netflix's Behavioral Advertising
 link by its address, since its data collection's cookie choices come first. Since the legal and service regrade it
 checks Disney+'s own Account sharing (Neutral, its Extra Member) replacing the shared agreement's Poor, and ICI
-TOU.TV's two grey lines in their new words; `check-search.cjs` expects Proton's US disputes line Neutral, and
-Mullvad's Refunds citation highlighting its two quotes (the billing regrade's).
+TOU.TV's two grey lines in their new words; `check-search.cjs` expects Mullvad's Refunds citation highlighting its
+two quotes (the billing regrade's). After the review, Proton's US disputes line is Poor again and ICI TOU.TV's free
+trial Poor, as both scripts expect.
 
 `check-after-m3.cjs` (the feedback after M3: M5.13, M6.17–M6.19, M7.11, M8.5, M8.6, M9.6) checks the batch on
 `ng serve` for a Canadian in Alberta, with Streaming (Crave Premium and Disney+ Premium) and Family (two Disney+

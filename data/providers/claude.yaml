@@ -215,6 +215,8 @@ plans:
 
 policies:
   links:
+    - name: 'Verify your phone number'
+      url: https://support.claude.com/en/articles/8287232-verify-your-phone-number
     - name: Cancelling
       url: https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription
     - name: Cancelling (2)
@@ -348,10 +350,14 @@ policies:
         url: https://claude.ai/new#settings/data-privacy-controls
       lastVerified: 2026-11-02
     - topic: privacy.content-access
-      status: not-stated
-      reason: 'Its privacy policy doesn’t say who at Anthropic can read your chats, or when.'
-      pages: [https://www.anthropic.com/legal/privacy]
-      lastVerified: 2026-11-02
+      tier: neutral
+      reason: 'Its systems check your chats for harmful content, and it may look at flagged ones with your account to enforce its rules. (Training on your chats is graded under AI training.)'
+      sources:
+        - url: https://www.anthropic.com/legal/privacy
+          quote: 'If our systems flag Inputs or Outputs for harmful content or for potentially violating our policies, we disassociate the content from your user ID to train our trust and safety internal classification and generative models.'
+        - url: https://www.anthropic.com/legal/privacy
+          quote: 'However, we may re-identify the Inputs or Outputs to enforce our Terms of Service or Usage Policy with the responsible user if necessary.'
+      lastVerified: 2026-11-03
     - topic: privacy.data-retention
       tier: neutral
       reason: 'It keeps your information as long as it decides it needs it. Chats you delete are gone from its systems within 30 days.'
@@ -372,12 +378,12 @@ policies:
         url: https://support.claude.com/en/articles/9450526-how-can-i-export-my-claude-data
       lastVerified: 2026-11-02
     - topic: privacy.government-requests
-      tier: poor
-      reason: 'Besides court orders, it may give your information to police or a government whenever it believes in good faith that it should, for example to stop fraud or enforce its rules.'
+      tier: neutral
+      reason: "It hands over information when the law requires it, and otherwise only to stop harm or fraud, or to enforce its rules. It doesn't say it tells you, or publish how often."
       sources:
         - url: https://www.anthropic.com/legal/privacy
           quote: 'We may share personal data with government authorities, law enforcement, or other third parties where, based on the information available to us, we have a good-faith belief that disclosure is reasonably necessary to'
-      lastVerified: 2026-11-02
+      lastVerified: 2026-11-03
     - topic: privacy.data-location
       tier: neutral
       reason: 'Your information goes to its servers in the US and other countries, with the EU’s standard legal safeguards for Europeans. For Canadians it warns other countries’ laws may protect it less.'
@@ -389,11 +395,13 @@ policies:
       lastVerified: 2026-11-02
     - topic: privacy.sign-up-data
       tier: poor
-      reason: 'To make an account you give your name, email address and phone number.'
+      reason: 'To make an account you give your name and email address, and a phone number that can get text messages, with no way to skip it.'
       sources:
+        - url: https://support.claude.com/en/articles/8287232-verify-your-phone-number
+          quote: 'We also require a phone number from a supported location to create an account, and there isn’t a way to skip this step.'
         - url: https://www.anthropic.com/legal/privacy
           quote: 'Anthropic collects identifiers, including your name, email address, and phone number when you sign up for an Anthropic account, or to receive information on our Services.'
-      lastVerified: 2026-11-02
+      lastVerified: 2026-11-03
     - topic: billing.free-trials
       status: not-stated
       reason: 'Its terms describe no free trial: the free plan simply stays free.'
