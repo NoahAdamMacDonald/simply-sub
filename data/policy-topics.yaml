@@ -150,6 +150,9 @@
   note: >-
     Four things count: it requires valid legal process, it tells you unless a law forbids it, it publishes a
     transparency report, and it holds little to hand over. "When required by law" is the floor everywhere.
+    Disclosing to enforce its terms, protect rights, property or safety, stop fraud, or in an emergency is a
+    necessary exception (the procedure's step 4) and never makes it Poor; Poor is disclosure for wider reasons, such
+    as its own interests.
   silent: neutral
   tiers:
     great: All four.
@@ -175,7 +178,8 @@
   question: What you must give it to sign up.
   note: >-
     Read it from the sign-up form, not the policy, and quote the page that hosts it. "May ask for" a phone number
-    counts as asking. Identity checks a law requires (Canadian banks' know-your-client rules) are Neutral.
+    counts as asking, but a check it may make by one of several methods (a captcha, an email or a text message)
+    isn't a required field. Identity checks a law requires (Canadian banks' know-your-client rules) are Neutral.
   silent: not-stated
   tiers:
     great: No personal information, such as an account number instead of an email.
@@ -302,20 +306,25 @@
   group: legal
   question: Whether you can take a dispute to court or join a class action.
   note: >-
-    An arbitration opt-out with a deadline, by post, or only for new accounts is narrow. Silence means courts by
-    default, with no arbitration.
+    An arbitration opt-out with a deadline, by post, or only for new accounts is narrow. A small-claims exception
+    never moves a grade: nearly every arbitration clause has one. Silence means courts by default, with no
+    arbitration.
   silent: good
   actionFor: [neutral, poor]
   tiers:
     great: Disputes go to the courts or a consumer board where you live, and class actions are allowed.
     good: Disputes go to a court or board, with no arbitration, but one of its choosing or with no class actions.
-    neutral: Arbitration is required, but you can opt out of it or use small-claims court.
+    neutral: Arbitration is required, but you can opt out of it at any time, or class actions stay open.
     poor: Arbitration is required with a class-action waiver, and opting out is narrow.
     bad: Arbitration is required with a class-action waiver, and you can't opt out.
 - id: legal.terms-changes
   name: Changes to the terms
   group: legal
   question: Whether it tells you before changing its terms, and whether you can leave.
+  note: >-
+    Telling you is a notice sent to you, by email or in its app. A posting on its own site or blog, however
+    prominent, is Neutral when it comes ahead of the change and you can leave first, and Poor when it takes effect as
+    it's posted.
   silent: bad
   tiers:
     great: Tells you well ahead (a month or more), and lets you leave with a refund.
