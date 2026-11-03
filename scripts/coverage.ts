@@ -1,11 +1,9 @@
 // The coverage report (M11.7, the guide's §3.2): `npm run data:coverage` lists, for each provider, the regions it's
 // sold in where a paid plan of it has no price, so a region left unread shows before a buyer there sees only the free
-// plan (Claude's before M10.17). A gap its provider file explains in a "Coverage:" note passes; the rest are errors,
-// except for the providers core's awaitingCoverage lists, warnings until M11.9 explains theirs. Exits with 1 on any
-// error.
+// plan (Claude's before M10.17). A gap its provider file explains in a "Coverage:" note passes; the rest are errors.
+// Exits with 1 on any error.
 import { readFile } from 'node:fs/promises';
 import {
-  awaitingCoverage,
   coverageGaps,
   coverageNotes,
   explains,
@@ -33,7 +31,6 @@ const why: Record<CoverageGap['why'], string> = {
 };
 
 let errors = 0;
-let warnings = 0;
 let covered = 0;
 for (const { provider, file } of providers) {
   const gaps = coverageGaps([provider]);
@@ -43,13 +40,8 @@ for (const { provider, file } of providers) {
     covered++;
     continue;
   }
-  const waiting = awaitingCoverage.has(provider.id);
-  const label = waiting ? 'Warning' : 'Error';
-  if (waiting) warnings += open.length;
-  else errors += open.length;
-  console.log(
-    `${label}: ${file}: ${plural(open.length, 'gap')} no "Coverage:" note explains${waiting ? ' (waiting for M11.9)' : ''}`,
-  );
+  errors += open.length;
+  console.log(`Error: ${file}: ${plural(open.length, 'gap')} no "Coverage:" note explains`);
   // One line a plan and reason: its regions with no price.
   const lines = new Map<string, string[]>();
   for (const gap of open) {
@@ -62,7 +54,7 @@ for (const { provider, file } of providers) {
 
 console.log(
   `Checked ${plural(providers.length, 'provider')}: ${covered} covered, ${providers.length - covered} with gaps` +
-    `${errors > 0 ? `, ${plural(errors, 'error')}` : ''}${warnings > 0 ? `, ${plural(warnings, 'warning')}` : ''}.`,
+    `${errors > 0 ? `, ${plural(errors, 'error')}` : ''}.`,
 );
 console.log(
   'Explain a gap in the provider file with a comment block of its own: "# Coverage: <plan id> (or <provider>.*) in <REGION>: <why>".',

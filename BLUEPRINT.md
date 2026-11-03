@@ -1619,7 +1619,10 @@ indexes: prices (region, monthly_equiv) · plan_features (feature_id, rank_value
   count of rows the seeds wrote (`written_on`, the UTC day, and `written`). While anything waits, `version`,
   `built_at` and `counts` stay the last whole catalog's (`0000000` before D1 has held one), so the API's ETags change
   once the last of it is written.
-- D1 rejects a statement over 100 KB, so the seed checks every statement's size.
+- D1 rejects a statement over 100 KB, so the seed checks every statement's size. A row over it (a provider whose
+  `json` and `search` grew past it with every region's prices, M11.9) is written in parts: each text value over 30 KB
+  goes in the row's statement up to 30 KB, and UPDATEs append the rest (`json = json || '…'`), each a row written.
+  A seed's statements run in one batch, which D1 writes whole or not at all, so no one reads a row half written.
 - Only plan prices go in `prices`. Add-on prices stay in the provider's `json`, and bundle prices in the bundle's.
 - Add-ons stay inside each provider's `json`; they get their own table only if an endpoint needs to filter on them.
 - Schema changes are new numbered migrations, never edits to an applied one: `npm -w apps/api run
@@ -1904,9 +1907,9 @@ isn't used to check plans.
 a provider is sold in (its plans' price regions, its `availableIn`, and Canada and the US when a plan is priced for
 everywhere) where a paid plan still sold has no price (core's `coverageGaps`). A gap passes when the provider file
 explains it in a comment block of its own, "# Coverage: <plan id> (or <provider>.*) in <REGION>: <why>"
-(`coverageNotes`, `explains`); the rest fail it, but for the providers core's `awaitingCoverage` lists, warnings until
-M11.9 (Bitdefender's other regions, Disney+'s and Netflix's country plans, Xbox's PC Game Pass in the US). It isn't in
-CI: a research batch runs it before its pull request.
+(`coverageNotes`, `explains`); the rest fail it. The 13 providers from before it had warnings instead until M11.9 filled
+or explained their gaps (core's `awaitingCoverage`, removed then). It isn't in CI: a research batch runs it before its
+pull request.
 
 Each message is `file:line path: what's wrong and what to write`, for example
 `data/providers/netflix.yaml:73 plans.2.features.video.quality: "8k" isn't a video.quality value (480p, 720p,

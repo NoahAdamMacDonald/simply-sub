@@ -9,6 +9,8 @@
 //   wait:<ms>                     pause (every page load already waits LOAD_WAIT ms for scripts to render)
 //   click:<text>                  click the first visible element whose whole visible text is <text>
 //   click?:<text>                 the same, but carry on if it isn't there (cookie banners: "click?:Reject All")
+//   nth:<n>:<text>                click the nth (from 1) element whose whole visible text is <text>, in page order:
+//                                 one card's own tab where each card has one (Bitdefender's "nth:1:2 Years")
 //   tab:<text>                    click the first role="tab" element whose visible text is <text>
 //   select:<aria-label>=<value>   pick an option in a <select> by its aria-label
 //   goto:<url>                    load another page in the same tab (keeps cookies and choices)
@@ -132,13 +134,29 @@ async function connect() {
     fs.writeFileSync(path.join(outDir, `${name}.png`), Buffer.from(data, 'base64'));
     console.log(`snap ${name}: ${text.length} chars, ${where} (Mullvad Browser)`);
   };
-  /** Clicks the first visible element (of `selector`) whose whole visible text is `text`; false when there's none. */
+  /** Clicks the last visible element (of `selector`) whose whole visible text is `text`; false when there's none. */
   const clickText = (text, selector = '*') =>
     evaluate(`(() => {
       const wanted = ${JSON.stringify(text)};
       const found = [...document.querySelectorAll(${JSON.stringify(selector)})]
         .reverse()
         .find((element) => element.offsetParent !== null && element.innerText?.trim() === wanted);
+      if (!found) return false;
+      found.scrollIntoView({ block: 'center' });
+      found.click();
+      return true;
+    })()`);
+  /**
+   * Clicks the nth (from 1, in document order) innermost visible element whose whole visible text is `text`, one
+   * holding no element with the same text; false when there's no such element.
+   */
+  const clickNth = (n, text) =>
+    evaluate(`(() => {
+      const wanted = ${JSON.stringify(text)};
+      const shows = (element) => element.offsetParent !== null && element.innerText?.trim() === wanted;
+      const found = [...document.querySelectorAll('*')].filter(
+        (element) => shows(element) && ![...element.children].some(shows),
+      )[${Number(n) - 1}];
       if (!found) return false;
       found.scrollIntoView({ block: 'center' });
       found.click();
@@ -172,6 +190,13 @@ async function connect() {
           if (await clickText(arg)) await sleep(1500);
           else console.log(`skip ${step}: not found`);
           break;
+        case 'nth': {
+          const [n, ...words] = arg.split(':');
+          const text = words.join(':');
+          if (!(await clickNth(n, text))) throw new Error(`No element ${n} showing "${text}"`);
+          await sleep(1500);
+          break;
+        }
         case 'tab':
           if (!(await clickText(arg, '[role="tab"]'))) throw new Error(`No tab "${arg}"`);
           await sleep(2000);

@@ -11,6 +11,10 @@
 # them; the countries it sells in: the page points to xbox.com/regions, which wasn't read; the first 14 days for $1 is
 # a promotional offer for new subscribers, so it isn't stored; official resellers: none; its where-to-buy page lists
 # retailers for consoles, games and accessories and says it "does not constitute an endorsement of any retailer".
+# US prices, read again 2026-11-03 on xbox.com/en-US/xbox-game-pass (the first read's URL had an experiment flag,
+# ?wfExp=390B): its four plans, PC Game Pass the fourth, "PC only", "then $13.99/month" (its own page,
+# xbox.com/en-US/xbox-game-pass/pc, is a page not found). The US page gives Ultimate "500+ games", Canada's "400+", which
+# its perk is named for.
 
 id: xbox-game-pass
 name: Xbox Game Pass
@@ -121,8 +125,8 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-10-29
-        sourceUrl: https://www.xbox.com/en-US/xbox-game-pass?wfExp=390B
+        lastVerified: 2026-11-03
+        sourceUrl: https://www.xbox.com/en-US/xbox-game-pass
       - region: AU
         currency: AUD
         amount: 12.95
@@ -176,8 +180,8 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-10-29
-        sourceUrl: https://www.xbox.com/en-US/xbox-game-pass?wfExp=390B
+        lastVerified: 2026-11-03
+        sourceUrl: https://www.xbox.com/en-US/xbox-game-pass
       - region: AU
         currency: AUD
         amount: 17.95
@@ -238,8 +242,8 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-10-29
-        sourceUrl: https://www.xbox.com/en-US/xbox-game-pass?wfExp=390B
+        lastVerified: 2026-11-03
+        sourceUrl: https://www.xbox.com/en-US/xbox-game-pass
       - region: AU
         currency: AUD
         amount: 25.95
@@ -287,6 +291,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-29
         sourceUrl: https://www.xbox.com/en-GB/xbox-game-pass
+      - region: US
+        currency: USD
+        amount: 13.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://www.xbox.com/en-US/xbox-game-pass
       - region: AU
         currency: AUD
         amount: 16.95
