@@ -2120,14 +2120,23 @@ plans:
           quote: IVA inclusa.
         lastVerified: 2026-11-03
         sourceUrl: https://www.bitdefender.com/it-it/consumer/vpn
+  # Antivirus Free (M11.9, the owner's item), read 2026-11-03 on its own pages (/en-us/ and /en-ca/consumer/free-antivirus,
+  # in the same words): its comparison with Antivirus Plus gives it "Basic ransomware protection", and Antivirus Plus
+  # "Ransomware remediation: blocks threats, automatically restores your files", so it blocks ransomware but recovers
+  # no files (support answer 2027, on its 2022 rebuild, names only "real-time malware protection and customizable
+  # scanning scheduling options"). Its FAQ: it "includes a basic version of Bitdefender VPN, which offers up to 200 MB of
+  # encrypted traffic per device, per day", so it isn't sold as a VPN (notIn), as Antivirus Plus isn't. It shields from
+  # "Phishing" and "Malicious Websites".
   - id: bitdefender.antivirus-free
     name: Antivirus Free
     link: https://www.bitdefender.com/en-ca/consumer/free-antivirus
+    notIn: [vpn]
     features:
       platforms: [windows]
       antivirus.included: true
-      antivirus.ransomware: [blocking, file-recovery]
+      antivirus.ransomware: [blocking]
       antivirus.web-protection: true
+      vpn.included: true
     prices:
       - region: GLOBAL
         currency: USD

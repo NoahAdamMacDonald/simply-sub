@@ -116,7 +116,9 @@ plans:
         lastVerified: 2026-10-26
         sourceUrl: https://ici.tou.tv/abonnement
 
-  # A suite: EXTRA and ICI RDI in one plan (BLUEPRINT §4.4).
+  # A suite: EXTRA and ICI RDI in one plan (BLUEPRINT §4.4). Its perks are both plans' (M11.9), read 2026-11-03 on its
+  # card at ici.tou.tv/abonnement: "Accès illimité aux contenus EXTRA", whose premieres are EXTRA's, and "Chaîne en
+  # direct ICI RDI avec publicité".
   - id: ici-tou-tv.extra-rdi
     name: EXTRA and ICI RDI
     link: https://ici.tou.tv/abonnement
@@ -127,6 +129,7 @@ plans:
       streaming.concurrent-streams: 3
       streaming.french-content: true
       includes-subscription: [ici-tou-tv.extra, ici-tou-tv.rdi]
+    perks: [exclusive-premieres, rdi-channel]
     notes: ICI RDI's live channel has ads.
     prices:
       - region: CA

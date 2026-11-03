@@ -577,8 +577,9 @@ async function addItem(page, planId) {
       /^checkbox "Native pricing only"/,
       /^checkbox "Sold in Canada"/,
       /^button "Clear all" \[disabled\]/,
-      // The first card's chips, right below its names (M5.7): Claude's, free like Proton's.
-      /^radio "Free" \[checked\]/,
+      // The first card's chips, right below its names (M5.7): Bitdefender's Antivirus Free, free like Claude's and
+      // Proton's plans, and first of them by name.
+      /^radio "Antivirus Free" \[checked\]/,
     ];
     check(
       'Tab goes Sort → the price’s two thumbs → Category → Features → Activity → Native → Sold in → Clear all → the results',
@@ -618,7 +619,7 @@ async function addItem(page, planId) {
     check(
       '"Native pricing only" hides converted prices, in the URL as native=1',
       (await names(page)).join() ===
-        'Claude,Proton,ICI TOU.TV,Bitdefender,Netflix,Disney+,Crave,Xbox Game Pass,RDS,TSN' &&
+        'Bitdefender,Claude,Proton,ICI TOU.TV,Netflix,Disney+,Crave,Xbox Game Pass,RDS,TSN' &&
         (await entries(page)) === base + 1,
       `${(await names(page)).join(', ')} / ${search(page)}`,
     );
@@ -627,7 +628,11 @@ async function addItem(page, planId) {
     const options = page.locator('.mat-mdc-autocomplete-panel mat-option');
     await panel.getByRole('combobox', { name: 'Features' }).focus();
     await page.keyboard.type('video quality');
-    await options.first().waitFor();
+    // The panel opens on focus with every category's keys: read it once it shows what was typed.
+    await until('the video quality suggestions', async () =>
+      ((await options.first().textContent()) ?? '').trim().startsWith('Video quality'),
+    );
+    await sleep(300);
     const groups = (
       await page.locator('.mat-mdc-autocomplete-panel .mat-mdc-optgroup-label').allTextContents()
     ).map((text) => text.trim());
@@ -747,9 +752,11 @@ async function addItem(page, planId) {
     check('Typing "vp" in Category narrows its list to VPN', true);
     await page.keyboard.press('Enter');
     await until('cat=vpn', () => search(page) === '?cat=vpn');
+    // Bitdefender's Premium VPN and its Premium and Ultimate suites are VPN plans too (M11.3): Premium VPN, at $69.99
+    // a year, is cheaper a month than Mullvad's €5.
     await until(
-      'Mullvad and Proton',
-      async () => (await names(page)).join() === 'Proton,Mullvad VPN',
+      'Proton, Bitdefender and Mullvad',
+      async () => (await names(page)).join() === 'Proton,Bitdefender,Mullvad VPN',
     );
     check(
       'Category offers All and the categories a plan sold here is in',
@@ -767,7 +774,10 @@ async function addItem(page, planId) {
     await panel.getByRole('checkbox', { name: 'Not listed' }).focus();
     await page.keyboard.press('Space');
     await until('act=none', () => search(page) === '?cat=vpn&act=none');
-    check('Space on Not listed adds act=none', (await names(page)).join() === 'Proton,Mullvad VPN');
+    check(
+      'Space on Not listed adds act=none',
+      (await names(page)).join() === 'Proton,Bitdefender,Mullvad VPN',
+    );
     await page.screenshot({ path: path.join(outDir, 'filters-1280.png'), fullPage: true });
     // With a mouse, a click on Category selects its name, so what's typed takes its place too.
     await panel.getByRole('combobox', { name: 'Category' }).click();
@@ -784,10 +794,11 @@ async function addItem(page, planId) {
     const previous = page.url();
     await page.goto(`${baseUrl}search?f=nope,video.quality%3D4k&cat=zzz&sort=relevance&utm=1`);
     await until('the rewrite', () => search(page) === '?f=video.quality=4k', 15000);
-    await until('the 4k results', async () => (await names(page)).length === 3);
+    // Without Native pricing only, ESPN Unlimited's US price shows too, converted.
+    await until('the 4k results', async () => (await names(page)).length === 4);
     check(
       'unknown values and parameters are dropped from the URL',
-      (await names(page)).join() === 'Disney+,Crave,Netflix',
+      (await names(page)).join() === 'Disney+,Crave,Netflix,ESPN',
       search(page),
     );
     await go(page, 'back');
@@ -1647,26 +1658,33 @@ async function addItem(page, planId) {
         ),
       `${groups.join(', ')} | ${rows[0]} | ${links.map(([text]) => text).join(', ')}`,
     );
-    // A graded line's citations: a Not stated line (M11.1) links the page it read, with no words to scroll to.
+    // A graded line's citations: a Not stated line (M11.1) links the page it read, with no words to scroll to, and so
+    // does a line a silent rule grades (policy-topics.yaml): Mullvad's pages are silent on government requests and on
+    // closing inactive accounts.
+    const silent = ['Government requests', 'Inactive accounts'];
     const citations = await section
-      .locator('.policies li:not(.unrated) .cite')
-      .evaluateAll((anchors) =>
-        anchors.map((anchor) => [
-          anchor.textContent.replace(/\s+/g, ' ').trim(),
-          anchor.href,
-          anchor.target,
-        ]),
+      .locator('.policies li:not(.unrated)')
+      .evaluateAll((items) =>
+        items.flatMap((item) =>
+          [...item.querySelectorAll('.cite')].map((anchor) => [
+            item.querySelector('.topic')?.textContent.trim(),
+            anchor.textContent.replace(/\s+/g, ' ').trim(),
+            anchor.href,
+            anchor.target,
+          ]),
+        ),
       );
+    const unscrolled = citations.filter(([, , href]) => !href.includes('#:~:text='));
     check(
-      'each citation links its page, scrolled to the words it quotes, in a new tab',
+      'each citation links its page, scrolled to the words it quotes but where a silent rule grades it, in a new tab',
       citations.length >= 9 &&
         citations.every(
-          ([text, href, target]) =>
-            /^\[[1-7]\] .+, opens in a new tab$/.test(text) &&
-            href.includes('#:~:text=') &&
-            target === '_blank',
-        ),
-      `${citations.length}: ${citations[0]?.join(' ')}`,
+          ([, text, , target]) =>
+            /^\[[1-7]\] .+, opens in a new tab$/.test(text) && target === '_blank',
+        ) &&
+        unscrolled.length > 0 &&
+        unscrolled.every(([topic]) => silent.includes(topic)),
+      `${citations.length}: ${unscrolled.map(([topic, text]) => `${topic} ${text}`).join(', ')}`,
     );
     // Mullvad's refunds quote its terms three times: one citation, highlighting all three.
     const refunds = section.locator('.policies li', {
@@ -1794,12 +1812,13 @@ async function addItem(page, planId) {
     const disputes = (await policyRows(card(page, 'Proton'))).find((row) =>
       row.includes('| Disputes ('),
     );
+    // Netflix's ratings from its Canadian terms stand for everywhere since 2026-11-02, until its US terms are read.
     check(
-      "a US user sees Proton's US disputes rating, and none from Netflix's Canadian terms",
+      "a US user sees Proton's US disputes rating, and Netflix's from its Canadian terms",
       disputes.startsWith('poor | Disputes (Poor): In the US, a private arbitrator') &&
         (await card(page, 'Netflix')
           .locator('.policies li', { hasText: 'Price changes' })
-          .count()) === 0,
+          .count()) === 1,
       disputes,
     );
     check(
@@ -1835,7 +1854,7 @@ async function addItem(page, planId) {
     check(
       '"Sold in United Kingdom" hides the providers with no UK price, in the URL as sold=1',
       (await names(second)).join() ===
-        'Claude,Proton,Mullvad VPN,Bitdefender,Xbox Game Pass,Netflix',
+        'Bitdefender,Claude,Proton,Mullvad VPN,Xbox Game Pass,Netflix',
       (await names(second)).join(', '),
     );
     await second.goto(`${baseUrl}settings`);

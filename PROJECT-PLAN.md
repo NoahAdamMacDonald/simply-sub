@@ -1703,6 +1703,27 @@ in every D1 `json` column search parses.
       UPDATE counted), the API (such a provider updated and inserted into D1 comes back whole, and D1 counts what the
       estimate says), and the bot's page check (Basic and the UK's, Australia's and New Zealand's extra members
       confirmed on their fixtures, which gained each country's extra-member line in its page's words).
+  - **Antivirus Free, the suite's perks and check-search.cjs** (2026-11-03):
+    - **Bitdefender Antivirus Free** (the owner's item), from Bitdefender's own pages only. PCMag's review was to point
+      at what to check, but it can't be fetched from here, so it pointed at nothing. Antivirus Free's page compares it
+      with Antivirus Plus: "Basic ransomware protection" against "Ransomware remediation: blocks threats,
+      automatically restores your files". So it blocks ransomware but recovers no files, and `file-recovery` comes
+      off. Its FAQ's basic VPN, "up to 200 MB of encrypted traffic per device, per day", is `vpn.included`, but it
+      isn't sold as a VPN (`notIn`), as Antivirus Plus isn't. Its web protection stands, since the page names
+      "Phishing" and "Malicious Websites" among what it shields from.
+    - **ICI TOU.TV's EXTRA and ICI RDI suite** lists both plans' perks: its card gives "Accès illimité aux contenus
+      EXTRA" (whose premieres are EXTRA's perk) and "Chaîne en direct ICI RDI avec publicité".
+    - **`check-search.cjs`** hadn't run to its end since M11.3, when it stopped at the VPN category. Seven steps were
+      stale, now updated to the catalog as it is:
+      - Bitdefender's Antivirus Free is the first free plan by name, in the Tab order, in Native pricing only and in
+        Sold in United Kingdom.
+      - Bitdefender is in VPN, twice, before Mullvad.
+      - ESPN Unlimited is among the 4K results without Native pricing only.
+      - Netflix's ratings from its Canadian terms show for a US user.
+      - A line a silent rule grades cites its pages with no words to scroll to.
+
+      It also reads the Features suggestions only once they show what was typed (the panel opens with every key):
+      189 checks pass.
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and

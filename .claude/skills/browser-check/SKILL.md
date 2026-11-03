@@ -676,6 +676,11 @@ scroll. Wait for the suggestions to narrow before reading them: the whole list s
 `check-search.cjs`'s "video quality" suggestions no longer include Ad free. Since M11.5 `check-features.cjs` opens
 Apps, languages & support beside VPN with Mullvad listed (its open-source value), and since M11.6
 `check-list-view.cjs`'s Tab order has the totals' two breakdown buttons after Export (M10's, missed until then).
+Since M11.9 `check-search.cjs` runs to its end again (it stopped at the VPN category from M11.3 on): Bitdefender's
+Antivirus Free is the first free plan by name, Bitdefender is in VPN before Mullvad (Premium VPN is cheaper a month),
+ESPN Unlimited is among the 4K results without Native pricing only, a US user sees Netflix's ratings from its Canadian
+terms (they stand for everywhere), and a line a silent rule grades cites its pages with no words to scroll to. It reads
+the Features suggestions once they show what was typed. 189 checks.
 
 `check-m11-inferred.cjs` (M11.9, inferred values) checks a Search card on `ng serve` for a Canadian in Alberta (base URL
 ending in `/`, after `npm run data:build` on the branch), in both themes at both widths: ICI TOU.TV's details show ICI
