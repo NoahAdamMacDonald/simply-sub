@@ -699,6 +699,18 @@ its summary reads "Fortnite Crew: 1 / 1" and "Online console multiplayer: 2 / 2"
 drops Ultimate; Search's Ultimate chip counts "1 Needed 1 Wanted". With axe (the Perks group open, the list view,
 Optimizations), screenshots and no horizontal scroll.
 
+`check-m11-policies-out.cjs` (M11.8, Terms and policies in a file per provider) checks the files and Search's cards on
+`ng serve` for a Canadian in Alberta (base URL ending in `/`, after `npm run data:build` on the branch): `CA.json`
+without policies and Proton's `policiesUrl`, `policies/index.json`'s pages and shared documents; a first visit (light)
+whose Proton card says "Loading its terms and policies…" as a status while its file is held back 1.5 s, then shows
+them (and Netflix's note at 360 px); a second visit in the same Edge profile (`launchPersistentContext`, dark),
+offline before any card opens, showing Proton's from what the first kept without asking for the file, and Mullvad's,
+never opened, saying they need a connection, then loading once the browser is back online. With axe on each note at
+both widths, screenshots and no horizontal scroll. Read a card's note and lines in one `evaluate`: between two
+locator calls the note can go. Since M11.8 `check-m11-policies.cjs` expects at least ICI TOU.TV's three grey lines and
+Disney+'s four rows, and Disney's privacy policy listed once among Hulu's sources: #113 rated every topic, so there
+are more.
+
 `check-after-m3.cjs` (the feedback after M3: M5.13, M6.17–M6.19, M7.11, M8.5, M8.6, M9.6) checks the batch on
 `ng serve` for a Canadian in Alberta, with Streaming (Crave Premium and Disney+ Premium) and Family (two Disney+
 Premium, Netflix Standard auto-renewing until an end date, Mullvad renewed by hand, and four more so it scrolls). In
