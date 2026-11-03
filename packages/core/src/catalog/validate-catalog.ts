@@ -111,23 +111,11 @@ const policyStaleAfterDays = 365;
 export const awaitingPolicyRegrade: ReadonlySet<string> = new Set<string>();
 
 /**
- * Providers from before M11.5 whose renewal day isn't read yet: a missing renewalAnchor is a warning for them until
- * M11.9 reads their terms and billing help, and an error for every other provider whose paid plans renew by the month
- * or year. Netflix's was read with M11.5; Mullvad is prepaid, so it has none to give.
+ * Providers from before M11.5 whose renewal day isn't read yet: a missing renewalAnchor is a warning for them, and an
+ * error for every other provider whose paid plans renew by the month or year. M11.9 read the others; Hulu's and ESPN's
+ * US pages send a visitor from Canada to Disney+, so they wait for a US exit. Mullvad is prepaid, with none to give.
  */
-export const awaitingRenewalAnchor: ReadonlySet<string> = new Set([
-  'bitdefender',
-  'claude',
-  'crave',
-  'disney-plus',
-  'espn',
-  'hulu',
-  'ici-tou-tv',
-  'proton',
-  'rds',
-  'tsn',
-  'xbox-game-pass',
-]);
+export const awaitingRenewalAnchor: ReadonlySet<string> = new Set(['espn', 'hulu']);
 
 export interface ValidateOptions {
   /** Providers whose missing policy topics are warnings, not errors: awaitingPolicyRegrade unless a test says. */

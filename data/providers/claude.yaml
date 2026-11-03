@@ -70,6 +70,16 @@ perks:
   - id: api-credits-200
     name: $200 a month in API credits
 
+# Renewal day (M11.5), read 2026-11-03 (M11.9) in its paid plans' billing FAQs: the day you subscribe sets the billing date,
+# which you move only by subscribing again on the day you want. Its consumer terms and invoices article don't say.
+renewalAnchor:
+  kind: same-date
+  page: Paid plan billing FAQs
+  url: https://support.claude.com/en/articles/8325618-paid-plan-billing-faqs
+  quotes:
+    - "No, there isn't a direct way to change your subscription billing date. However, you can unsubscribe from your current plan, then resubscribe on your preferred billing date to establish your new monthly billing cycle on a different date."
+  lastVerified: 2026-11-03
+
 plans:
   - id: claude.free
     name: Free

@@ -60,6 +60,16 @@ perks:
 # anything of ads or video quality. Its live channels carry their broadcasts, so not ad free, inferred (the guide's
 # §2.2 rule 5: a required boolean no page states is false); the video quality waits for M11.9
 # (awaitingRequiredFeatures in core).
+# Renewal day (M11.5), read 2026-11-03 (M11.9) in its terms (6(b)), Bell Media's as Crave's and RDS's: charged at the start
+# of each billing period, which moves only when the subscription "began on a date not contained in a given month".
+renewalAnchor:
+  kind: same-date
+  page: 'Terms and conditions'
+  url: https://www.tsn.ca/terms-and-conditions/
+  quotes:
+    - 'In some cases, the timing of a recurring charge may change, such as if your payment method does not settle as expected or if your subscription began on a date not contained in a given month.'
+  lastVerified: 2026-11-03
+
 plans:
   - id: tsn.standard
     name: Standard

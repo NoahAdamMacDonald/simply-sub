@@ -84,6 +84,16 @@ ratings:
 # outweighs the sales page's older comparison table ("Password Manager no yes"). Premium and Ultimate Security have its
 # Premium VPN, unlimited, so they're VPN plans as well; Total Security and Antivirus Plus have only its Standard VPN,
 # "200 MB/day traffic", so they aren't (notIn).
+# Renewal day (M11.5), read 2026-11-03 (M11.9) in its subscription agreement for home users: each anniversary of the
+# purchase.
+renewalAnchor:
+  kind: same-date
+  page: Subscription agreement
+  url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+  quotes:
+    - "Your subscription will be automatically renewed prior to the expiration of the term and each anniversary thereafter for a fee at Bitdefender's then-current price and any applicable taxes, excluding promotional and discount pricing offered at the renewal time."
+  lastVerified: 2026-11-03
+
 plans:
   - id: bitdefender.total-security
     name: Total Security

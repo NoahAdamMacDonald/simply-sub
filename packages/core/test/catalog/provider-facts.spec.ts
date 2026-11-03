@@ -164,6 +164,24 @@ describe('namesRenewalAnchor', () => {
     ['Netflix membership plans are billed monthly on the date you signed up.', 'same-date', true],
     ['Your billing cycle starts on the date you sign up.', 'same-date', true],
     ['Renews on the same day each month', 'same-date', true],
+    // What implies it (M11.9): Disney's and Bell Media's terms, in English and French, and Claude's billing help.
+    [
+      'the timing of a recurring charge may change, such as if your subscription began on a date not contained in a given month.',
+      'same-date',
+      true,
+    ],
+    ['if your subscription began on a day not contained in a given month', 'same-date', true],
+    [
+      'si votre abonnement a commencé à une date non comprise dans un mois donné.',
+      'same-date',
+      true,
+    ],
+    [
+      'resubscribe on your preferred billing date to establish your new monthly billing cycle on a different date.',
+      'same-date',
+      true,
+    ],
+    ['Your subscription began on a Tuesday.', 'same-date', false],
     ['Your plan renews every 30 days.', 'every-30-days', true],
     ['Un forfait de 30 jours', 'every-30-days', true],
     ['You’re billed on the 1st of each month.', 'first-of-month', true],

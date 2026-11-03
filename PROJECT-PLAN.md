@@ -1627,6 +1627,29 @@ in every D1 `json` column search parses.
       nights (about 50 providers a night), `/health`'s `catalogWaiting` going 349, 298… to 0, ending as a full seed
       would.
 
+**M11.9 — The existing 13 under the new rules** (the guide's §7.1, Phase 0 step 7)
+- **What it covers:** every topic regraded by the procedure, with the calibration table in the pull request; each
+  category's required features and the cross-category ones (Claude, Xbox Game Pass, Bitdefender and Proton first,
+  through feature-discovery for AI, gaming and security); perks given ids and the lines that may be features; the
+  provider facts (renewal days, currencies, source code); the coverage report and the region checklist for every
+  region; reviewed by a second model (the guide's §7.3). The owner's items: Bitdefender Antivirus Free's ransomware
+  protection from its own pages only, billing periods still missing, sub-features unified through feature-discovery,
+  and resellers.
+- **Acceptance** (the M11 table's): no price-differences warning and no coverage gap left without a reason in its
+  header; every rating follows the procedure.
+- **As built**, in parts (one pull request each):
+  - **Renewal days** (2026-11-03): read in each provider's terms and billing help. The date you signed up for
+    Bitdefender ("each anniversary"), Claude (the billing FAQs: you "resubscribe on your preferred billing date" to move
+    it), Crave, TSN and RDS (Bell Media's terms, 6(b): a recurring charge's timing changes only if "your subscription
+    began on a date not contained in a given month", in French « a commencé à une date non comprise dans un mois
+    donné ») and Disney+ (its Canadian agreement: a subscriber from January 31 is billed next on February 28). Not
+    stated for Proton, Xbox Game Pass and ICI TOU.TV, whose pages say only that it renews. Core's `namesRenewalAnchor`
+    reads those implied wordings as the date you signed up. Hulu's and ESPN's US pages (their shared agreement on
+    hulu.com, their help centres' billing articles) send a visitor from Canada to Disney+, so they stay in
+    `awaitingRenewalAnchor` for a US exit, asked at the batch's end. Five new pages got baselines (Claude's billing
+    FAQs, Proton's subscription and invoices articles, Xbox's two billing articles); every new quote checked with
+    `quote-check.cjs`.
+
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and
   cards already work. What's new is the plan's `account` block and the finance features (§4.11).

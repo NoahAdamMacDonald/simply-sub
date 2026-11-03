@@ -71,6 +71,16 @@ perks:
 # Proton Lumo"; and a "Proton Lumo Free" list under Free, Mail Plus and Family. /support/lumo-getting-started: "Yes,
 # you can use Lumo for free with guest access or signed into a Proton Account." Proton Scribe is an "Add-on with free
 # trial" on Unlimited in /pricing's table, and included in Duo and Family (their perks).
+# Renewal day (M11.5), read 2026-11-03 (M11.9): its terms and its subscription and invoices articles say only that a plan
+# renews at the end of its billing period, with the date on the Subscription page.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://proton.me/legal/terms
+    - https://proton.me/support/manage-subscription
+    - https://proton.me/support/account/plans/payments-invoices
+  lastVerified: 2026-11-03
+
 plans:
   - id: proton.free
     name: Proton Free
