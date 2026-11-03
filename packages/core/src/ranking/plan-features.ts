@@ -87,5 +87,6 @@ function unitText(unit: string, count: number): string {
 const singulars: Record<string, string> = {
   addresses: 'address',
   aliases: 'alias',
+  'hours a month': 'hour a month',
   people: 'person',
 };

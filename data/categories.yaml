@@ -42,6 +42,7 @@ feature:
   - { id: email, name: Email }
   - { id: security, name: Security & passwords }
   - { id: ai, name: AI }
+  - { id: gaming, name: Gaming }
   - { id: bundle, name: Included services }
   - { id: productivity, name: Productivity & calendar }
   - { id: general, name: 'Apps, languages & support' }
