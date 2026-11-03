@@ -391,6 +391,14 @@ one canonical feature describes the same capability across every provider, whate
    (`platforms`, `software.open-source`, `account.sign-in`…); then a new feature through feature-discovery; then a
    perk. A capability from another category uses that category's feature and puts the plan in that category
    (Proton's Lumo is `ai.assistant`, and its plans list `ai`).
+11. **Inferred values are marked** (M11.9, the owner's choice of 2026-11-03). A value no official page states, but one
+   gives a reason for, goes in `features` as usual, and the plan's `inferred` names it with the reason and that page
+   (`{ reason, page: { name, url }, lastVerified }`, the page on the provider's own sites, its policies' or its
+   owner's). The plan's feature list then shows a small "inferred" link to the page beside the value, the reason as
+   its tooltip and in its name, so the user judges; `GET /plans/:id` returns it too. A required feature no page states
+   and none gives a reason for still waits in core's `awaitingRequiredFeatures` (TSN's and RDS's video quality).
+   ESPN Select's (HD, from its connection speed article's "HD content") and ICI RDI's (1080p, the app's highest
+   setting) are the first.
 
 **Ranked perks** (M11.6, the owner's choice on 2026-10-30). A provider lists its perks once, with ids
 (`perks: [{ id: fortnite-crew, name: Fortnite Crew passes }]`), and each plan lists the ids it has. Each perk is a

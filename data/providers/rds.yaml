@@ -59,10 +59,12 @@ renewalAnchor:
 
 # Apps and sign-in (M11.9, the cross-category features), read 2026-11-03 on its subscribe page ("Regardez sur vos appareils
 # préférés"): TVs and streaming devices, RDS.ca on computers, Android, and iPhone and iPad, with no consoles; a Bell
-# Media account's password (its FAQ). Its pages name no support channel, so support.channels is left out.
+# Media account's password (its FAQ); a phone line and chat (rds.ca/aide/contactez-nous: "Appelez le 1-833-RDS-AIDE",
+# "Chat: Cliquez pour ouvrir").
 features:
   platforms: [web, ios, android, tv]
   account.sign-in: [password]
+  support.channels: [phone, chat]
 
 plans:
   - id: rds.standard

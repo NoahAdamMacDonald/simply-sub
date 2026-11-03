@@ -49,8 +49,9 @@ perks:
 # The free ICI TOU.TV catalogue with ads has no plan page, so it isn't a plan here. The Crave bundles are in
 # data/bundles.
 # Read 2026-11-02 (M11.4, the required streaming features): ICI RDI is "Chaîne en direct ICI RDI avec publicité" on
-# ici.tou.tv/abonnement, so it isn't ad free. Its video quality: that page states 1080p for EXTRA only, so RDI's waits
-# for M11.9 (awaitingRequiredFeatures in core).
+# ici.tou.tv/abonnement, so it isn't ad free. Its video quality: that page states 1080p for EXTRA only. M11.9 infers
+# 1080p, marked on the card with its page (the owner's choice of 2026-11-03): the help centre's mobile data article
+# gives the app's highest setting as "Qualité élevée : maximum 1080p", for whatever it plays.
 # Renewal day (M11.5), read 2026-11-03 (M11.9): its conditions say it renews automatically and that a plan change keeps
 # the billing cycle of the first subscription, not which day the cycle renews on.
 renewalAnchor:
@@ -60,11 +61,12 @@ renewalAnchor:
 
 # Apps and sign-in (M11.9, the cross-category features), read 2026-11-03: browsers on Windows and Mac, Android, iOS, TVs and
 # streaming devices, and Xbox One and Series X|S (ici.tou.tv/nos-plateformes, its help centre's platforms article); a
-# Radio-Canada account's email address and password (its help centre's sign-in article). Its pages name no support
-# channel, so support.channels is left out.
+# Radio-Canada account's email address and password (its help centre's sign-in article); a request form
+# (assistance.radio-canada.ca: "Envoyer une demande", "Ma demande concerne ICI TOU.TV").
 features:
   platforms: [web, android, ios, tv, console]
   account.sign-in: [password]
+  support.channels: [email]
 
 plans:
   - id: ici-tou-tv.extra
@@ -91,10 +93,18 @@ plans:
     name: ICI RDI
     link: https://ici.tou.tv/abonnement
     features:
+      video.quality: 1080p
       ad-free: false
       streaming.live: [tv-channels]
       streaming.concurrent-streams: 3
       streaming.french-content: true
+    inferred:
+      video.quality:
+        reason: "Its plan page states 1080p for EXTRA only. The app's highest quality setting is up to 1080p, so RDI's live channel is taken as 1080p."
+        page:
+          name: Données mobiles (in French)
+          url: https://assistance.radio-canada.ca/hc/fr/articles/360035562791-Quelle-est-ma-consommation-de-donn%C3%A9es-mobiles
+        lastVerified: 2026-11-03
     perks: [rdi-channel]
     prices:
       - region: CA

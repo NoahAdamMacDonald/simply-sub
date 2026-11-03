@@ -478,7 +478,7 @@ describe('validateCatalog', () => {
       expect(issues.map(({ severity, message }) => [severity, message])).toEqual([
         [
           'warning',
-          'Needs video.quality, which every plan in streaming states (requiredIn): no official page states it yet, so it waits for M11.9 (awaitingRequiredFeatures)',
+          'Needs video.quality, which every plan in streaming states (requiredIn): no official page states it, or gives a reason to infer it, yet (awaitingRequiredFeatures)',
         ],
       ]);
     });

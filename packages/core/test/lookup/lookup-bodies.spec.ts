@@ -115,6 +115,23 @@ describe('providerBody', () => {
 describe('planBody', () => {
   const standard = planOf(netflix, 'netflix.standard');
 
+  it('says which values are inferred, and from which page (M11.9)', () => {
+    const inferred = {
+      'video.quality': {
+        reason: 'Its help recommends a speed for HD content.',
+        page: { name: 'Help Center', url: 'https://help.netflix.com/en/node/306' },
+        lastVerified: '2026-11-03',
+      },
+    };
+    const body = planBody(
+      netflix,
+      { ...standard, inferred },
+      { ...canada, registry, bundleIds: [] },
+    );
+    expect(issues(planBodySchema, body)).toEqual([]);
+    expect(body.data.inferred).toEqual(inferred);
+  });
+
   it('adds its provider, rank keys, add-ons and bundles where the contract puts them', () => {
     const body = planBody(netflix, standard, {
       ...canada,

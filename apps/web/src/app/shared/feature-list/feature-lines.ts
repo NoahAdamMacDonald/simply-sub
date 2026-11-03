@@ -1,4 +1,5 @@
 import { Component, input } from '@angular/core';
+import { MatTooltip } from '@angular/material/tooltip';
 import type { Rank, RankKey } from '@simply-sub/core';
 import { RankChip } from '../rank/rank-chip';
 
@@ -7,6 +8,8 @@ export interface FeatureLine {
   id: string;
   name: string;
   value?: string;
+  /** A value no official page states (M11.9): why it's inferred, and the page it's inferred from. */
+  inferred?: { reason: string; page: string; url: string };
   ranks: { key: RankKey; rank: Rank; option?: string }[];
   children: FeatureLine[];
 }
@@ -14,7 +17,7 @@ export interface FeatureLine {
 /** One level of ss-feature-list, with each group's features in a nested level of its own. */
 @Component({
   selector: 'ss-feature-lines',
-  imports: [RankChip],
+  imports: [MatTooltip, RankChip],
   templateUrl: './feature-lines.html',
   styleUrl: './feature-lines.scss',
 })

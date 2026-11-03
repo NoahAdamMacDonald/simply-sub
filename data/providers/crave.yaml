@@ -46,11 +46,12 @@ renewalAnchor:
 
 # Apps and sign-in (M11.9, the cross-category features), read 2026-11-03: smart TVs and streaming devices, PlayStation and
 # Xbox, PC and Mac computers in a web browser, and Apple and Android phones and tablets (its device compatibility FAQ); a
-# Bell Media account's password ("How to sign in to Crave"). Its help centre names no way to reach support
-# (crave.ca/en/contact-us goes to a page not found), so support.channels is left out.
+# Bell Media account's password ("How to sign in to Crave"); live chat and a phone line, every day from 9 a.m. to 11
+# p.m. Eastern (crave.ca/en/contact: "You can chat live Monday to Sunday", "1-888-CRAVE88").
 features:
   platforms: [web, ios, android, tv, console]
   account.sign-in: [password]
+  support.channels: [chat, phone]
 
 plans:
   - id: crave.standard-ads

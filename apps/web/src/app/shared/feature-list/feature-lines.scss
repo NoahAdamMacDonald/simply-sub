@@ -30,6 +30,13 @@ li {
   color: var(--ss-text-muted);
 }
 
+// An inferred value's mark (M11.9): small and muted, a link to the page it's inferred from.
+.inferred {
+  color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+  font-style: italic;
+}
+
 .rank {
   display: inline-flex;
   align-items: center;

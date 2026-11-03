@@ -288,6 +288,25 @@ export const sourceRepoSchema = z.strictObject({
 });
 export type SourceRepo = z.infer<typeof sourceRepoSchema>;
 
+/**
+ * A feature value no official page states, inferred from a page that bears on it (M11.9, the owner's choice of
+ * 2026-11-03): the card marks it and links the page, so the user judges. A required feature no page states is
+ * inferred this way when a page gives a reason to, rather than left out of the catalog's comparisons.
+ */
+export const inferredFeatureSchema = z.strictObject({
+  reason: textSchema.describe(
+    'Why the value follows from the page, in a sentence the card shows (its tooltip)',
+  ),
+  page: z.strictObject({
+    name: textSchema.describe('As the card links it'),
+    url: httpsUrlSchema.describe(
+      "The provider's own page it's inferred from, on its own sites, its policies' or its owner's",
+    ),
+  }),
+  lastVerified: isoDateSchema.describe('When the page was read'),
+});
+export type InferredFeature = z.infer<typeof inferredFeatureSchema>;
+
 export const planSchema = z
   .strictObject({
     id: planIdSchema.describe('<provider id>.<slug> (netflix.standard)'),
@@ -328,6 +347,12 @@ export const planSchema = z
       .record(rankKeySchema, textSchema)
       .describe(
         "Feature id or rank key → the provider's own wording, shown instead of the registry name",
+      )
+      .optional(),
+    inferred: z
+      .record(dottedSlugSchema, inferredFeatureSchema)
+      .describe(
+        'Feature id → why its value is inferred and from which page (M11.9): a value no official page states, which the card marks',
       )
       .optional(),
     perks: z
