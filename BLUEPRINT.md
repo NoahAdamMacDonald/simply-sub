@@ -1904,9 +1904,9 @@ isn't used to check plans.
 a provider is sold in (its plans' price regions, its `availableIn`, and Canada and the US when a plan is priced for
 everywhere) where a paid plan still sold has no price (core's `coverageGaps`). A gap passes when the provider file
 explains it in a comment block of its own, "# Coverage: <plan id> (or <provider>.*) in <REGION>: <why>"
-(`coverageNotes`, `explains`); the rest fail it, but for the providers core's `awaitingCoverage` lists, warnings until
-M11.9 (Bitdefender's other regions, Disney+'s and Netflix's country plans, Xbox's PC Game Pass in the US). It isn't in
-CI: a research batch runs it before its pull request.
+(`coverageNotes`, `explains`); the rest fail it. The 13 providers from before it had warnings instead until M11.9 filled
+or explained their gaps (core's `awaitingCoverage`, removed then). It isn't in CI: a research batch runs it before its
+pull request.
 
 Each message is `file:line path: what's wrong and what to write`, for example
 `data/providers/netflix.yaml:73 plans.2.features.video.quality: "8k" isn't a video.quality value (480p, 720p,

@@ -91,6 +91,10 @@ features:
   account.sign-in: [password, email-code, sms]
   support.channels: [phone, chat]
 
+# Coverage: netflix.standard-ads in NZ, IE and NL, read 2026-11-03: each country's Plans and Pricing page lists Basic,
+# Standard and Premium, and no plan with ads.
+# Coverage: netflix.basic in CA, US, GB, AU, DE, FR, ES and IT, read 2026-11-03: each country's Plans and Pricing page
+# lists Standard with ads ("with adverts" in GB), Standard and Premium, and no Basic.
 plans:
   - id: netflix.standard-ads
     name: Standard with ads
@@ -167,6 +171,45 @@ plans:
         autoRenew: true
         lastVerified: 2026-10-29
         sourceUrl: https://help.netflix.com/en/node/24926/it
+
+  # Basic, sold in NZ, IE and NL of the catalog's regions (each country's Plans and Pricing page, read 2026-11-03):
+  # "Unlimited ad-free movies, TV shows, and games", "Watch on 1 supported device at a time", "Watch in 720p (HD)",
+  # "Download on 1 supported device at a time", and no extra member.
+  - id: netflix.basic
+    name: Basic
+    link: https://www.netflix.com/signup
+    features:
+      video.quality: 720p
+      ad-free: true
+      streaming.concurrent-streams: 1
+      streaming.download-devices: 1
+      streaming.kids-profiles: true
+      streaming.french-content: true
+    prices:
+      - region: NZ
+        currency: NZD
+        amount: 17.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.netflix.com/en/node/24926/nz
+      - region: IE
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.netflix.com/en/node/24926/ie
+      - region: NL
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.netflix.com/en/node/24926/nl
 
   - id: netflix.standard
     name: Standard
@@ -376,6 +419,9 @@ plans:
     addOnIds: [netflix.extra-member-ads, netflix.extra-member]
     addOnLimit: 2
 
+# Extra members, read 2026-11-03 on each country's Plans and Pricing page ("Add 1 extra member for £5.99 / month with
+# adverts or £6.99 / month without adverts"): one on Standard, up to two on Premium, at the same price; none on Basic,
+# and none with ads where no plan has ads (NZ, IE, NL).
 addOns:
   - id: netflix.extra-member-ads
     name: Extra member (with ads)
@@ -397,6 +443,54 @@ addOns:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://help.netflix.com/en/node/24926/us
+      - region: GB
+        currency: GBP
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.netflix.com/en/node/24926/gb
+      - region: AU
+        currency: AUD
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.netflix.com/en/node/24926/au
+      - region: DE
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.netflix.com/en/node/24926/de
+      - region: FR
+        currency: EUR
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.netflix.com/en/node/24926/fr
+      - region: ES
+        currency: EUR
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.netflix.com/en/node/24926/es
+      - region: IT
+        currency: EUR
+        amount: 3.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.netflix.com/en/node/24926/it
   - id: netflix.extra-member
     name: Extra member
     grantsPlan: netflix.standard
@@ -417,6 +511,78 @@ addOns:
         autoRenew: true
         lastVerified: 2026-10-23
         sourceUrl: https://help.netflix.com/en/node/24926/us
+      - region: GB
+        currency: GBP
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.netflix.com/en/node/24926/gb
+      - region: AU
+        currency: AUD
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.netflix.com/en/node/24926/au
+      - region: NZ
+        currency: NZD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.netflix.com/en/node/24926/nz
+      - region: DE
+        currency: EUR
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.netflix.com/en/node/24926/de
+      - region: FR
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.netflix.com/en/node/24926/fr
+      - region: IE
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.netflix.com/en/node/24926/ie
+      - region: NL
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.netflix.com/en/node/24926/nl
+      - region: ES
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.netflix.com/en/node/24926/es
+      - region: IT
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-03
+        sourceUrl: https://help.netflix.com/en/node/24926/it
 
 # Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27 from Canada: its terms of use (the Canadian ones,
 # so the ratings from them are for Canada), privacy statement and help articles on households and downloads. Not

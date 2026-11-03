@@ -12,18 +12,6 @@ import { globalRegion, groupsOf } from './regions';
  */
 export const researchRegions: readonly string[] = ['CA', 'US'];
 
-/**
- * Providers from before M11.7 whose gaps aren't explained yet: warnings until M11.9 runs the region checklist for
- * every region and gives each its reason (Bitdefender's other regions' plans, Disney+'s and Netflix's country plans,
- * Xbox's PC Game Pass in the US).
- */
-export const awaitingCoverage: ReadonlySet<string> = new Set([
-  'bitdefender',
-  'disney-plus',
-  'netflix',
-  'xbox-game-pass',
-]);
-
 /** Why a region counts for a provider: its plans are priced there, its availableIn lists it, or it sells everywhere. */
 export type CoverageReason = 'priced' | 'available' | 'global';
 

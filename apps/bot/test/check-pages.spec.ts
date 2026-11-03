@@ -25,20 +25,15 @@ describe('checkPages', () => {
       budget,
     );
     const confirmed = findings.filter((finding) => finding.kind === 'confirmed');
-    // The Canadian, British, Australian and New Zealand prices are on their fixture pages; the US and the six euro
-    // countries' pages aren't there.
+    // The Canadian, British, Australian and New Zealand prices are on their fixture pages, the extra members' with
+    // them (New Zealand has Basic and no plan with ads); the US and the six euro countries' pages aren't there.
     expect(
       confirmed.map((finding) => 'target' in finding && finding.target.price.region).sort(),
     ).toEqual([
-      'AU',
-      'AU',
-      'AU',
+      ...Array.from({ length: 5 }, () => 'AU'),
       ...Array.from({ length: 5 }, () => 'CA'),
-      'GB',
-      'GB',
-      'GB',
-      'NZ',
-      'NZ',
+      ...Array.from({ length: 5 }, () => 'GB'),
+      ...Array.from({ length: 4 }, () => 'NZ'),
     ]);
     expect(findings.filter((finding) => finding.kind === 'manual')).toHaveLength(7);
     expect(calls.ai).toEqual([]);

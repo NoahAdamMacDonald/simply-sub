@@ -6,6 +6,8 @@
 //   click:<text>                  click the first element whose whole visible text is <text> (buttons, links, FAQ
 //                                 questions)
 //   click?:<text>                 the same, but carry on if it isn't there (cookie banners: "click?:Reject All")
+//   nth:<n>:<text>                click the nth (from 1) element whose whole visible text is <text>, in page order:
+//                                 one card's own tab where each card has one (Bitdefender's "nth:1:2 Years")
 //   tab:<text>                    click the first role="tab" button whose visible text is <text> (Proton's
 //                                 Mail/VPN/… and Monthly/Yearly; their accessible names don't match the text)
 //   select:<aria-label>=<value>   pick an option in a <select> (Proton: "select:Change currency=CAD")
@@ -73,6 +75,16 @@ async function snap(page, name) {
             .then(() => page.waitForTimeout(1500))
             .catch(() => console.log(`skip ${step}: not found`));
           break;
+        case 'nth': {
+          const [n, ...words] = arg.split(':');
+          await page
+            .getByText(words.join(':'), { exact: true })
+            .filter({ visible: true })
+            .nth(Number(n) - 1)
+            .click({ timeout: 10000 });
+          await page.waitForTimeout(1500);
+          break;
+        }
         case 'tab':
           await page
             .locator('[role="tab"]')

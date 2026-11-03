@@ -1674,6 +1674,27 @@ in every D1 `json` column search parses.
     - **Tests:** core (the schema, validation's three refusals, the plan body), the app (`FeatureList`'s mark, its
       link and name), and a browser check (`check-m11-inferred.cjs`: 29 checks in both themes at both widths, by
       keyboard, with axe).
+  - **Every region's prices** (2026-11-03): the coverage report's 57 gaps filled or explained, so core's
+    `awaitingCoverage` is gone and a gap no note explains is an error.
+    - **Bitdefender** (50 gaps): Edge shows no price on any of its pages now, Canada's too, since the owner's DNS
+      filter blocks a script they wait for; Mullvad Browser's own DNS gets past it (the guide's §3.2: a DNS filter
+      isn't the site's defence). Each locale's pages price in that region's currency, whoever reads them. Read there:
+      the family suites, Antivirus Plus at 1 and 3 devices and Premium VPN for the UK, Australia, New Zealand and the
+      five euro countries (the same prices in all five), and the US's Ultimate Security Family and Digital Identity
+      Protection. The billing periods still missing came with them: each suite's 2 years in those regions, and
+      Ultimate's monthly price in all ten ("Monthly price."), 119 prices in all. Canada's prices gained `taxIncluded`:
+      its pages say "Sales tax included" beside each, so a Canadian's total no longer adds tax on top. The readers
+      gained `nth:<n>:<text>`, for one card's own tab where each card has one. Left out, for the feature proposals:
+      the US's Ultimate Security Plus plans (identity theft insurance, restoration, credit monitoring).
+    - **Netflix:** Basic (720p, one screen, downloads on one device, no ads, no extra member) is sold in New Zealand,
+      Ireland and the Netherlands, which sell no plan with ads, and nowhere else the catalog prices it. Its extra
+      members gained the nine other countries' prices.
+    - **Disney+:** each country sells its own plans, so a "Coverage:" note explains them: the US's help article
+      lists only With Ads and Premium of Disney+ alone, and Canada's no With Ads. The US's article opens only once
+      the help centre's country is picked on its home page (picked on the article, it goes to a page not found).
+    - **Xbox Game Pass:** PC Game Pass in the US, $13.99 a month (the US page's "PC only"; its own page,
+      `/en-US/xbox-game-pass/pc`, is a page not found). The US prices cite the page without the first read's
+      experiment flag.
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and

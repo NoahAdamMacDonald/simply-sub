@@ -51,9 +51,12 @@ owner:
     - As the flagship direct-to-consumer streaming service from The Walt Disney Company
   lastVerified: 2026-11-02
 
-# Canada sells Standard With Ads, Standard and Premium. The US sells With Ads (4K, unlike Canada's 1080p) and
-# Premium, so a plan sold in one country only has prices there. The US prices are on
-# help.disneyplus.com/article/disneyplus-price with the help centre's country set to United States.
+# Coverage: disney-plus.standard-ads and disney-plus.standard in US, and disney-plus.with-ads in CA (read 2026-11-03):
+# each country sells its own plans. Canada's plans and prices article lists "Disney+ Standard With Ads", "Disney+
+# Standard" and "Disney+ Premium"; the US's lists two plans of Disney+ alone, "Disney+ (With Ads)" (4K, unlike Canada's
+# 1080p) and "Disney+ Premium", beside its bundles. The US's is help.disneyplus.com/article/disneyplus-price with the
+# help centre's country set to United States on its home page (set on the article, it goes to a page not found).
+
 # Renewal day (M11.5), read 2026-11-03 (M11.9) in its Canadian subscriber agreement: the date you became a paying
 # subscriber, or a shorter month's last day. Its help centre's billing articles only point to the Account page.
 renewalAnchor:
