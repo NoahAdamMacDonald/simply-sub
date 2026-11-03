@@ -200,15 +200,15 @@ policies:
           quote: 'vous pourrez refuser cette modification en annulant votre abonnement.'
       lastVerified: 2026-11-03
     - topic: billing.free-trials
-      tier: neutral
-      reason: 'It starts with 7 free days, then keeps renewing as a paid plan unless you end it, which you can do at any time.'
+      tier: poor
+      reason: "Your first subscription starts with 7 free days, but you give your payment details when you subscribe, it turns into a paid plan on its own, and it doesn't promise to remind you first."
       sources:
         - url: https://ici.tou.tv/abonnement
           quote: 'ESSAI GRATUIT DE 7 JOURS*'
         - url: https://ici.tou.tv/abonnement/condition
-          quote: "Votre abonnement à un Forfait est renouvelé automatiquement à moins que vous ne décidiez d'y mettre fin."
+          quote: "Abonnement à un Forfait disponible sur ICI.TOU.TV en cliquant sur le bouton d'abonnement applicable. Le paiement sera débité au moment de la confirmation de l'achat."
         - url: https://ici.tou.tv/abonnement/condition
-          quote: 'Vous pouvez mettre fin à votre abonnement à un Forfait en tout temps.'
+          quote: "Votre abonnement à un Forfait est renouvelé automatiquement à moins que vous ne décidiez d'y mettre fin."
       lastVerified: 2026-11-03
     - topic: legal.disputes
       tier: good
@@ -240,7 +240,7 @@ policies:
       lastVerified: 2026-11-03
     - topic: service.device-limits
       status: not-stated
-      reason: 'Its conditions only give how many screens can play at once, which its plan shows, and nothing else about device limits.'
+      reason: 'Its conditions name no limit beyond how many screens can play at once, which its plan shows.'
       pages: [https://ici.tou.tv/abonnement/condition]
       lastVerified: 2026-11-03
     # M11.9's topics, pulled forward at the owner's request (2026-11-02), read that day: the conditions, and CBC/

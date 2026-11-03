@@ -3609,6 +3609,13 @@ None.
     M11.9's part 8).
   - **Perks moved:** Claude's and Xbox's perks for the same things became these features through `perk` redirects,
     which move users' ranks. Usage multiples, priority access, EA Play and the like stay perks.
+- **Password-protected share links and Suspicious sites** (feature-discovery for SecurePass): a sharing value
+  `link-password`, and health's `suspicious` named "Suspicious sites".
+- **Four rubric readings, after the second model's review:** a small-claims exception never moves a disputes grade;
+  a posting on the provider's own site or blog isn't telling you about new terms (Neutral when it comes ahead and you
+  can leave); the procedure's necessary exceptions (enforcing terms, rights, safety, fraud, emergencies) never make
+  government requests Poor; a sign-up check by one of several methods (captcha, email, text message) isn't a required
+  field. Each is a sentence in its rubric's note.
 
 **Resolved (2026-11-02, regional coverage, M11.7)**
 - **Mullvad VPN exits for regional prices** (the guide's §9, item 5): when a site shows this machine only Canada's

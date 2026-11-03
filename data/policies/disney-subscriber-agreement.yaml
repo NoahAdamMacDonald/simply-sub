@@ -70,8 +70,8 @@ ratings:
         quote: 'If you change your Service Tier or obtain certain other offerings, such as add-ons, we may prorate your charges accordingly during the applicable billing period.'
     lastVerified: 2026-11-02
   - topic: legal.disputes
-    tier: neutral
-    reason: "Disagreements go to a private referee (an arbitrator), not a court, and you can't join a group lawsuit, but small claims court stays open to you. You can also opt out by mailing a letter within 30 days of signing up."
+    tier: poor
+    reason: "Disagreements go to a private referee (an arbitrator), not a court, and you can't join a group lawsuit. You can only opt out by mailing a letter within 30 days of signing up."
     sources:
       - url: https://www.hulu.com/subscriber_agreement
         quote: 'ANY DISPUTE BETWEEN YOU AND US, EXCEPT FOR SMALL CLAIMS, IS SUBJECT TO A CLASS ACTION WAIVER AND MUST BE RESOLVED BY INDIVIDUAL BINDING ARBITRATION.'

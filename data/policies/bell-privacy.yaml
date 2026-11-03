@@ -81,12 +81,12 @@ ratings:
       url: https://www.bell.ca/privacy
     lastVerified: 2026-11-02
   - topic: privacy.government-requests
-    tier: poor
-    reason: 'Besides court orders, it may give your information to a government office to check who you are or look into a broken law, without a court asking.'
+    tier: neutral
+    reason: "It hands over information when the law requires it, and otherwise only to check who you are, look into a broken law or agreement, or stop fraud. It doesn't say it tells you, or publish how often."
     sources:
       - url: https://support.bell.ca/_web/guides/Common/Legal/Bell_Privacy_Policy_Final.pdf
         quote: 'to a government institution or another organization if reasonably necessary to establish your identity, or to investigate the contravention of a law or an agreement'
-    lastVerified: 2026-11-02
+    lastVerified: 2026-11-03
   - topic: privacy.data-location
     tier: neutral
     reason: 'Its helpers outside Canada may handle your information, with protections it says meet Canadian standards, but other countries’ laws may then apply.'
