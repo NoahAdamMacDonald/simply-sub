@@ -100,6 +100,8 @@ export const searchCatalogData: CatalogData = {
       website: 'https://www.crave.ca',
       cancelUrl: 'https://www.crave.ca/cancel',
       ...streaming,
+      // Its perks (M11.6), each with an id its plans list.
+      perks: [{ id: 'hbo-max-originals', name: 'HBO Max originals' }],
       plans: [
         {
           id: 'crave.basic',
@@ -113,7 +115,7 @@ export const searchCatalogData: CatalogData = {
           name: 'Premium',
           link: 'https://example.com/crave.premium',
           features: { 'video.quality': '4k', 'ad-free': true },
-          perks: ['HBO Max originals'],
+          perks: ['hbo-max-originals'],
           prices: [price('CA', 'CAD', 22)],
         },
       ],

@@ -30,6 +30,7 @@ import {
   monthOf,
   monthRange,
   monthlyOnCard,
+  rankFeatures,
   typeCounts,
   type IsoDate,
   type IsoMonth,
@@ -249,7 +250,8 @@ export class ListViewPage {
   protected readonly filterCount = computed(() => listFilterCount(this.query()));
   protected readonly context = computed(() => ({
     tags: this.tags.byId(),
-    registry: this.catalog.catalog()?.features ?? [],
+    // The registry and the providers' perks (M11.6): the Features filter and its names take both.
+    registry: rankFeatures(this.catalog.catalog()),
     currency: this.settings.saved()?.currency ?? '',
     today: this.today(),
   }));

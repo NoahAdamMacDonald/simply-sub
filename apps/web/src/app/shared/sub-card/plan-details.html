@@ -105,12 +105,12 @@
   }
 }
 
-@if (plan().perks?.length) {
+@if (perks().length) {
   <div class="group">
     <h3>Perks</h3>
     <ul class="bullets">
-      @for (perk of plan().perks; track $index) {
-        <li>{{ perk }}</li>
+      @for (perk of perks(); track perk.id) {
+        <li>{{ perk.name }}</li>
       }
     </ul>
   </div>
