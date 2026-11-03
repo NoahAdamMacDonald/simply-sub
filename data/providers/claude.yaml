@@ -265,14 +265,14 @@ policies:
       sources:
         - url: https://www.anthropic.com/legal/consumer-terms
           quote: any disputes arising out of or relating to these Terms will be resolved exclusively in the state or federal courts located in San Francisco, California
-      lastVerified: 2026-10-28
+      lastVerified: 2026-11-03
     - topic: legal.terms-changes
       tier: poor
       reason: It can change its terms when it wants, and if you keep using Claude after they're posted, you've agreed to them.
       sources:
         - url: https://www.anthropic.com/legal/consumer-terms
           quote: If you continue to access the Services after we post the updated Terms on Anthropic’s website or otherwise give you notice of Terms changes, then you agree to the updated Terms.
-      lastVerified: 2026-10-28
+      lastVerified: 2026-11-03
     - topic: legal.account-closure
       tier: neutral
       reason: It can close your account without notice if it believes you broke its terms, with no refund; if it ends your plan for any other reason, it refunds the unused time.
@@ -281,7 +281,7 @@ policies:
           quote: If we terminate your access to the Services due to a violation of these Terms and you have a Subscription, you will not be entitled to any refund.
         - url: https://www.anthropic.com/legal/consumer-terms
           quote: If we exercise this right, we will refund you, on a pro rata basis, the fees you paid for the remaining portion of your Subscription after termination.
-      lastVerified: 2026-10-28
+      lastVerified: 2026-11-03
     - topic: privacy.data-collection
       tier: poor
       reason: 'It records how you use it, like when you use it, what you search for and what you click, and uses cookies to study and market to you. You can only limit the cookies, browser by browser. (Training on your chats is graded under AI training.)'

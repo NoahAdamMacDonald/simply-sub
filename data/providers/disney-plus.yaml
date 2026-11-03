@@ -849,6 +849,8 @@ policies:
       url: https://hackerone.com/disney
     - name: 'Subscriber agreement, Canada'
       url: https://www.disneyplus.com/en-ca/welcome/subscriber-agreement-side-by-side
+    - name: 'Plans and prices (Extra Member)'
+      url: https://help.disneyplus.com/article/disneyplus-en-ca-price
   ratings:
     - topic: security.practices
       tier: neutral
@@ -859,6 +861,18 @@ policies:
       lastVerified: 2026-11-02
     # Canada's own agreement, which "governs for residents of Canada", read on its side-by-side page of amended clauses
     # (the agreement itself renders only its footer in headless Edge). Its other clauses read as the US agreement's.
+    - topic: service.account-sharing
+      tier: neutral
+      reason: 'Only the people who live with you can use your account, and it can check, but you can pay to add an Extra Member who lives elsewhere.'
+      sources:
+        - url: https://www.disneyplus.com/en-ca/welcome/subscriber-agreement-side-by-side
+          quote: 'Unless otherwise permitted by your Service Tier, you may not share your subscription outside of your household.'
+        - url: https://help.disneyplus.com/article/disneyplus-en-ca-price
+          quote: 'A way to enjoy Disney+ with your family and friends even if they are not in the same Household'
+        - url: https://www.disneyplus.com/en-ca/welcome/subscriber-agreement-side-by-side
+          quote: 'We may, in our sole discretion, analyze the use of your account to determine compliance with this Agreement.'
+      replacesShared: true
+      lastVerified: 2026-11-03
     - topic: billing.price-changes
       regions: [CA]
       tier: good

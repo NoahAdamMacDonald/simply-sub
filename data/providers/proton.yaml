@@ -1109,20 +1109,22 @@ policies:
       sources:
         - url: https://proton.me/legal/terms
           quote: 'shall be subject to the jurisdiction of the competent courts of the Canton of Geneva'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: legal.disputes
-      tier: poor
-      reason: "In the US, a private arbitrator decides disagreements instead of a court, and you can't join a group lawsuit, unless you mail it a letter saying no within 30 days of first agreeing to its terms."
       regions: [US]
+      tier: neutral
+      reason: "In the US, a private arbitrator decides disagreements instead of a court, and you can't join a group lawsuit, but small claims court stays open, and you can opt out by mailing a letter within 30 days of first agreeing."
       sources:
         - url: https://proton.me/legal/terms
           quote: 'These Terms of Service contain a class action waiver as well as an arbitration provision'
         - url: https://proton.me/legal/terms
+          quote: 'disputes or claims within the jurisdiction of a small claims court consistent with the jurisdiction and dollar limits that may apply'
+        - url: https://proton.me/legal/terms
           quote: 'The opt-out notice must be sent to the foregoing address within 30 calendar days of your first agreeing to these Terms.'
       action:
-        name: How to opt out of arbitration, by post
+        name: 'How to opt out of arbitration, by post'
         url: https://proton.me/legal/terms
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: legal.terms-changes
       tier: poor
       reason: "It can change its terms whenever it wants, and if you keep using it (or don't delete your account) that counts as saying yes."
@@ -1131,14 +1133,14 @@ policies:
           quote: 'Within the limits of applicable law, the Company reserves the right to review and change these Terms at any time.'
         - url: https://proton.me/legal/terms
           quote: 'Continued use of your Account or the Services, including non-deletion of your Account after such changes are performed shall constitute your consent to them.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: legal.account-closure
       tier: neutral
       reason: "If it closes your account for breaking its rules, you lose what you paid and don't get a refund."
       sources:
         - url: https://proton.me/legal/terms
           quote: 'Paid Accounts which are terminated due to a violation of these Terms will incur the loss of all payments and credits and are not eligible for refund.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: service.activity-logging
       tier: great
       reason: "It doesn't keep records of your VPN sessions, and outside auditors have checked that five years in a row."
@@ -1147,7 +1149,7 @@ policies:
           quote: 'All Proton VPN servers are encrypted and we do not log VPN session data.'
         - url: https://protonvpn.com/blog/no-logs-audit
           quote: 'For 5th year running, Proton VPN passes external no-logs audit'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: legal.inactivity
       tier: good
       reason: "If you don't use a free account for a year, it may delete it and what's in it, but it tries to email you first. It never does this to a paid account."

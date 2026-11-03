@@ -1833,6 +1833,31 @@ in every D1 `json` column search parses.
     - **Checks:** every quote checked word for word against the pages saved that day; no page is cited for the first
       time. `check-m11-policies.cjs` checks Disney+'s Poor sharing and ads in Canada, and its US ratings for a US
       user (65 checks); it and `check-after-m9.cjs` (189) follow the new ratings, and ICI TOU.TV's free trial (part 9).
+  - **The regrade, legal and service** (2026-11-03): the 29 legal and service ratings from before M11.1, graded again by
+    the procedure, and calibrated with those graded since, with the calibration table in the pull request.
+    - **Crave from its own terms:** its closure, disputes and terms-changes ratings quoted Bell Media's website terms;
+      its subscription terms have TSN's and RDS's clauses, so they're graded as theirs. Closure Bad → **Poor** (30
+      days' notice, "All Subscription Fees are non-refundable"), terms changes Poor → **Neutral** (posted 30 days
+      ahead, notice where the law requires), disputes stay Bad. The website terms' link and baseline went.
+    - **Arbitration, by the rubric's words:** "Arbitration is required, but you can opt out of it or use small-claims
+      court" is Neutral, as Xbox's was. Disney's agreement ("EXCEPT FOR SMALL CLAIMS") and Proton's US terms (small
+      claims court among its exceptions) Poor → **Neutral**. Crave's, TSN's and RDS's leave no court ("You expressly
+      waive the right to resolve any dispute through any other means, including by trial"): Bad, and their reasons
+      say it doesn't apply in Quebec, Ontario, Saskatchewan, Alberta or BC.
+    - **Disney+'s Extra Members:** the agreement allows sharing outside the household where "otherwise permitted by
+      your Service Tier", and Disney+ sells an Extra Member "even if they are not in the same Household". Its own
+      rating, **Neutral** as Netflix's, replaces the agreement's Poor (`replacesShared`); Hulu and ESPN keep Poor.
+    - **Mullvad:** terms changes Great → **Good**: a month's notice on its blog, but no refund promised for leaving
+      ("remaining time can under some conditions be refunded"). Device limits Great → **not stated**: its terms give
+      only the number of devices, which is its plan's `vpn.devices`, and the procedure's step 9 never grades it (as
+      Proton's and ICI TOU.TV's).
+    - **Bitdefender's VPN:** the four Ultimate Security Plus plans (part 8) and Antivirus Free join its VPN-only
+      closure rating (IPVanish's "absolute discretion"), and the Plus plans its 1 TB notable.
+    - **ICI TOU.TV's statuses said precisely:** its login is "à votre usage personnel", which doesn't say whether the
+      people you live with may use it (sharing not stated); its conditions give only the screen count, its plan's, and
+      its help centre lists offline downloads as unavailable (device limits not stated).
+    - **Kept, read again:** Netflix's (all seven), Claude's, ICI TOU.TV's and Proton's legal ratings, Proton's
+      activity logging, Mullvad's disputes and closure, and Bitdefender's closure.
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and

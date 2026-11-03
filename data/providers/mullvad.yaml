@@ -412,21 +412,23 @@ policies:
       sources:
         - url: https://mullvad.net/en/help/terms-service
           quote: 'Any dispute, controversy, or claim arising out of or in connection with the terms shall be handled by the National Board for Consumer Disputes (ARN) or the Swedish courts'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: legal.terms-changes
-      tier: great
-      reason: "It tells you about big changes on its blog at least a month ahead. If you don't like them, you can stop using it and ask for a refund."
+      tier: good
+      reason: 'It tells you about big changes on its blog at least a month ahead, and you can say no by no longer using it, though it only refunds time you have left under some conditions.'
       sources:
         - url: https://mullvad.net/en/help/terms-service
           quote: 'Any material changes to these terms will be notified via a prominent notice on mullvad.net/blog at least one month before the changes are applied.'
         - url: https://mullvad.net/en/help/terms-service
           quote: 'If you wish to exercise your right to reject such changes, you should stop using the service (for refunds, see below).'
-      lastVerified: 2026-10-27
+        - url: https://mullvad.net/en/help/terms-service
+          quote: 'If you have complaints on the service after this period, remaining time can under some conditions be refunded.'
+      lastVerified: 2026-11-03
     - topic: legal.account-closure
       status: not-stated
       reason: "Its terms don't say whether it can close your account, or what happens to time you've paid for."
       pages: [https://mullvad.net/en/help/terms-service]
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: service.activity-logging
       tier: great
       reason: "It doesn't keep records of when you connect or for how long. In 2023, security experts at Radically Open Security checked its servers for logs of what customers do, and found none."
@@ -534,9 +536,7 @@ policies:
       pages: [https://mullvad.net/en/help/terms-service]
       lastVerified: 2026-11-02
     - topic: service.device-limits
-      tier: great
-      reason: 'One account works on up to five devices, with no other limits.'
-      sources:
-        - url: https://mullvad.net/en/help/terms-service
-          quote: 'An account can be used on up to 5 devices.'
-      lastVerified: 2026-11-02
+      status: not-stated
+      reason: 'Its terms only say how many devices an account works on, which its plan shows, and nothing else about device limits.'
+      pages: [https://mullvad.net/en/help/terms-service]
+      lastVerified: 2026-11-03

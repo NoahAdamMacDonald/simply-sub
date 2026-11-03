@@ -2462,7 +2462,7 @@ policies:
       sources:
         - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
           quote: The Subscription will terminate immediately without notice if You are in breach of any of its terms and conditions. You shall not be entitled to a refund from Bitdefender or any resellers of Bitdefender as a result of termination.
-      lastVerified: 2026-10-28
+      lastVerified: 2026-11-03
     - topic: security.practices
       tier: good
       reason: 'Outside auditors check its security every year, but you have to ask for their full report. It may pay you a reward for finding a security bug in its apps or website.'
@@ -2698,14 +2698,19 @@ policies:
           bitdefender.premium-security-family,
           bitdefender.ultimate-security-individual,
           bitdefender.ultimate-security-family,
+          bitdefender.ultimate-security-plus-standard-individual,
+          bitdefender.ultimate-security-plus-extended-individual,
+          bitdefender.ultimate-security-plus-standard-family,
+          bitdefender.ultimate-security-plus-extended-family,
           bitdefender.premium-vpn,
+          bitdefender.antivirus-free,
         ]
       tier: poor
       reason: 'On plans with a VPN, IPVanish alone decides whether you broke its rules, and can cut you off.'
       sources:
         - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
           quote: "IPVanish has absolute discretion in determining whether a Customer's activities or use of IPVanish's services are in violation of this Policy."
-      lastVerified: 2026-11-02
+      lastVerified: 2026-11-03
     - topic: other.notable
       title: 'Unlimited VPN capped at 1 TB a month'
       plans:
@@ -2714,6 +2719,10 @@ policies:
           bitdefender.premium-security-family,
           bitdefender.ultimate-security-individual,
           bitdefender.ultimate-security-family,
+          bitdefender.ultimate-security-plus-standard-individual,
+          bitdefender.ultimate-security-plus-extended-individual,
+          bitdefender.ultimate-security-plus-standard-family,
+          bitdefender.ultimate-security-plus-extended-family,
           bitdefender.premium-vpn,
         ]
       tier: poor
@@ -2723,4 +2732,4 @@ policies:
           quote: 'The actions described below are defined by IPVanish as “network abuse” and are strictly prohibited under this Policy.'
         - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
           quote: 'xxv. consuming more than one (1) terabyte (TB) of data in any single month while using IPVanish’s services.'
-      lastVerified: 2026-11-02
+      lastVerified: 2026-11-03

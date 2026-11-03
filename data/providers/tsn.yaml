@@ -167,13 +167,15 @@ policies:
       lastVerified: 2026-11-03
     - topic: legal.disputes
       tier: bad
-      reason: 'If you have a problem with it, a private referee called an arbitrator decides, in your city, instead of a court. You give up your right to a trial.'
+      reason: 'Unless you live in Quebec, Ontario, Saskatchewan, Alberta or BC, a private referee (an arbitrator) in your city decides any disagreement instead of a court, and you give up your right to a trial.'
       sources:
+        - url: https://www.tsn.ca/terms-and-conditions/
+          quote: 'This Section does not apply to individuals who reside in Quebec, Ontario, Saskatchewan, Alberta or British Columbia.'
         - url: https://www.tsn.ca/terms-and-conditions/
           quote: 'shall be settled at the request of either party by binding arbitration in the city in which you reside'
         - url: https://www.tsn.ca/terms-and-conditions/
           quote: 'You expressly waive the right to resolve any dispute through any other means, including by trial.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     # M11.9's topics, pulled forward at the owner's request (2026-11-02), read that day.
     - topic: privacy.sign-up-data
       tier: poor
