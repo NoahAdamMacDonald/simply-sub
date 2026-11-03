@@ -132,6 +132,7 @@ export * from './search/providers-body';
 export * from './search/providers-query';
 export * from './search/search-catalog';
 export * from './search/search-filters';
+export * from './search/search-index';
 export * from './search/search-params';
 export * from './search/search-providers';
 export * from './tax/charge-tax';

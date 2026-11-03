@@ -6,7 +6,10 @@ import {
   categoriesBody,
   featuresBody,
   providersCursor,
+  providerTextQuery,
   readCatalogSource,
+  seedShape,
+  searchProviders,
   type CatalogSnapshot,
   type CatalogSourceFile,
 } from '@simply-sub/core';
@@ -431,8 +434,8 @@ describe('the D1 reads', () => {
     ]);
     expect(plan.results.map((row) => row.detail)).toEqual(
       expect.arrayContaining([
-        'SEARCH providers_s3 USING PRIMARY KEY (id=?)',
-        'SEARCH provider_categories_s3 USING PRIMARY KEY (category=?)',
+        'SEARCH providers_s4 USING PRIMARY KEY (id=?)',
+        'SEARCH provider_categories_s4 USING PRIMARY KEY (category=?)',
       ]),
     );
     expect(plan.results.some((row) => /^SCAN/.test(row.detail))).toBe(false);
@@ -440,7 +443,7 @@ describe('the D1 reads', () => {
 
   it("read a provider's own features too, through provider_features' key (M11.4)", async () => {
     await env.DB.prepare(
-      "INSERT INTO provider_features_s3 (feature_id, value, provider_id, rank_value) VALUES ('platforms', 'linux', 'mullvad', NULL)",
+      "INSERT INTO provider_features_s4 (feature_id, value, provider_id, rank_value) VALUES ('platforms', 'linux', 'mullvad', NULL)",
     ).run();
     try {
       const query = { feature: ['platforms=linux'], sort: 'name', limit: 20 } as const;
@@ -460,12 +463,12 @@ describe('the D1 reads', () => {
       expect(linux.providers.map((provider) => provider.id)).toEqual(['mullvad']);
       expect(plan.results.map((row) => row.detail)).toEqual(
         expect.arrayContaining([
-          'SEARCH provider_features_s3 USING PRIMARY KEY (feature_id=? AND value=?)',
+          'SEARCH provider_features_s4 USING PRIMARY KEY (feature_id=? AND value=?)',
         ]),
       );
-      expect(plan.results.some((row) => /^SCAN provider_features_s3/.test(row.detail))).toBe(false);
+      expect(plan.results.some((row) => /^SCAN provider_features_s4/.test(row.detail))).toBe(false);
     } finally {
-      await env.DB.prepare('DELETE FROM provider_features_s3').run();
+      await env.DB.prepare('DELETE FROM provider_features_s4').run();
     }
   });
 
@@ -496,14 +499,82 @@ describe('the D1 reads', () => {
     ]);
     expect(plan.results.map((row) => row.detail)).toEqual(
       expect.arrayContaining([
-        'SEARCH providers_s3 USING PRIMARY KEY (id=?)',
-        'SEARCH plan_features_s3 USING COVERING INDEX idx_pf_feature (feature_id=?)',
-        'SEARCH plan_features_s3 USING COVERING INDEX idx_pf_feature (feature_id=? AND rank_value>?)',
-        'SEARCH plan_features_s3 USING COVERING INDEX idx_pf_feature (feature_id=? AND rank_value=?)',
+        'SEARCH providers_s4 USING PRIMARY KEY (id=?)',
+        'SEARCH plan_features_s4 USING COVERING INDEX idx_pf_feature_s4 (feature_id=?)',
+        'SEARCH plan_features_s4 USING COVERING INDEX idx_pf_feature_s4 (feature_id=? AND rank_value>?)',
+        'SEARCH plan_features_s4 USING COVERING INDEX idx_pf_feature_s4 (feature_id=? AND rank_value=?)',
       ]),
     );
-    expect(plan.results.some((row) => /^SCAN (plan_features|providers)_s3/.test(row.detail))).toBe(
+    expect(plan.results.some((row) => /^SCAN (plan_features|providers)_s4/.test(row.detail))).toBe(
       false,
     );
+  });
+
+  describe('text, through the FTS5 index (M11.8, shape 4)', () => {
+    const { categories } = snapshot.data;
+    const read = (q: string) => {
+      const text = providerTextQuery(q, { features, categories });
+      return { shape: seedShape, ...(text !== undefined && { text }) };
+    };
+    const ids = (providers: { id: string }[]) => providers.map((provider) => provider.id).sort();
+
+    it('reads only the providers its text can match, and finds what reading them all finds', async () => {
+      for (const q of ['netflix', 'vpn', 'password manager', 'ultra hd', 'flix', 'protn']) {
+        const query = { q, sort: 'relevance', limit: 20 } as const;
+        const narrowed = await loadProviders(env.DB, query, features, read(q));
+        const everyone = await loadProviders(env.DB, query, features);
+        const matched = (rows: typeof narrowed) =>
+          searchProviders(rows.providers, query, { features, categories, today: '2026-11-03' }).map(
+            (match) => match.provider.id,
+          );
+        expect({ q, matched: matched(narrowed) }).toEqual({ q, matched: matched(everyone) });
+        // Fewer to parse. (At 13 providers the index's own pages can cost more rows read than it saves.)
+        expect(narrowed.providers.length).toBeLessThan(everyone.providers.length);
+      }
+    });
+
+    it('looks the text up in the index and each provider by its key, never scanning providers', async () => {
+      const query = { q: 'netflix', sort: 'relevance', limit: 20 } as const;
+      const { sql, bindings } = providersStatement(query, features, read('netflix'));
+      const plan = await env.DB.prepare(`EXPLAIN QUERY PLAN ${sql}`)
+        .bind(...bindings)
+        .all<{ detail: string }>();
+      const details = plan.results.map((row) => row.detail);
+
+      // A virtual table's index is how SQLite reports the FTS5 lookup.
+      expect(details).toEqual(
+        expect.arrayContaining([
+          `SEARCH providers_s${seedShape} USING PRIMARY KEY (id=?)`,
+          expect.stringMatching(
+            new RegExp(`^SCAN provider_search_s${seedShape} VIRTUAL TABLE INDEX `),
+          ),
+        ]),
+      );
+      expect(details.some((detail) => /^SCAN providers_s/.test(detail))).toBe(false);
+    });
+
+    it('parses the search column, smaller than the json', async () => {
+      const row = await env.DB.prepare(
+        'SELECT length(json) AS whole, length(search) AS searched FROM providers WHERE id = ?',
+      )
+        .bind('proton')
+        .first<{ whole: number; searched: number }>();
+      expect(row && row.searched < row.whole).toBe(true);
+      const narrowed = await loadProviders(
+        env.DB,
+        { q: 'proton', sort: 'relevance', limit: 20 },
+        features,
+        read('proton'),
+      );
+      expect(ids(narrowed.providers)).toEqual(['proton']);
+      expect(narrowed.providers[0]).not.toHaveProperty('owner');
+    });
+
+    it('reads every provider for a term the trigram index can’t find', async () => {
+      expect(providerTextQuery('4k', { features, categories })).toBeUndefined();
+      const query = { q: '4k', sort: 'relevance', limit: 20 } as const;
+      const rows = await loadProviders(env.DB, query, features, read('4k'));
+      expect(rows.rowsRead).toBe(1 + snapshot.data.providers.length);
+    });
   });
 });

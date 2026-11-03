@@ -3,13 +3,14 @@ import {
   ecbCurrencies,
   featuresBodySchema,
   providersBody,
+  providerTextQuery,
   readProvidersQuery,
   rebaseRates,
   searchProviders,
 } from '@simply-sub/core';
 import { Hono } from 'hono';
 import { catalogIdsFile, catalogJson, missingFiles } from '../catalog-files';
-import { catalogVersion, loadProviders } from '../db/providers';
+import { catalogRow, loadProviders } from '../db/providers';
 import { ecbRates } from '../fx';
 import {
   badQuery,
@@ -73,13 +74,24 @@ export const providers = new Hono<{ Bindings: Env }>().get('/', async (c) => {
     ]),
   );
 
-  // 1 row read, so a client that has this answer already costs nothing more.
-  const held = await catalogVersion(c.env.DB);
-  if (held !== undefined && notModified(c, `"${held}-${inputs}"`)) {
-    return c.body(null, 304, { ETag: `"${held}-${inputs}"`, 'Cache-Control': catalogCacheControl });
+  // 1 row read, so a client that has this answer already costs nothing more. It says how to read the providers too.
+  const held = await catalogRow(c.env.DB);
+  if (held !== undefined && notModified(c, `"${held.version}-${inputs}"`)) {
+    return c.body(null, 304, {
+      ETag: `"${held.version}-${inputs}"`,
+      'Cache-Control': catalogCacheControl,
+    });
   }
+  const shape = held?.shape ?? 3;
+  const text =
+    query.q === undefined
+      ? undefined
+      : providerTextQuery(query.q, { features, categories: categories.data.data });
   // Read in one batch with the providers, so it describes them even if a seed ran in between.
-  const { version, providers: candidates } = await loadProviders(c.env.DB, query, features);
+  const { version, providers: candidates } = await loadProviders(c.env.DB, query, features, {
+    shape,
+    ...(text !== undefined && { text }),
+  });
   if (version === undefined) {
     return notSeeded(c);
   }

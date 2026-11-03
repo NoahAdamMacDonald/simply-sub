@@ -1,5 +1,7 @@
 import {
   rankKeyOptions,
+  seedShapes,
+  sqlTable,
   type Feature,
   type ProvidersQuery,
   type RankKeyOption,
@@ -23,7 +25,30 @@ export interface CatalogRows {
 
 /** The catalog version D1 holds, from its one catalog row (1 row read), or undefined before the first seed. */
 export async function catalogVersion(db: D1Database): Promise<string | undefined> {
-  return (await db.prepare('SELECT version FROM catalog').first<{ version: string }>())?.version;
+  return (await catalogRow(db))?.version;
+}
+
+/**
+ * The catalog row (1 row read): the version D1 holds, and the shape of the tables the views show, which says how
+ * GET /providers reads them (M11.8). Undefined before the first seed.
+ */
+export async function catalogRow(
+  db: D1Database,
+): Promise<{ version: string; shape: number } | undefined> {
+  const row = await db
+    .prepare('SELECT version, seed_format FROM catalog')
+    .first<{ version: string; seed_format: number }>();
+  return row ? { version: row.version, shape: seedShapes[row.seed_format] ?? 3 } : undefined;
+}
+
+/**
+ * How GET /providers reads the providers: their whole json before shape 4, then their search column, and with text
+ * that core's providerTextQuery makes an FTS5 expression of, only the providers provider_search finds (M11.8).
+ */
+export interface ProvidersRead {
+  shape: number;
+  /** The FTS5 MATCH expression for the query's text, when it has one and the shape has the table. */
+  text?: string;
 }
 
 /**
@@ -35,8 +60,9 @@ export async function loadProviders(
   db: D1Database,
   query: ProvidersQuery,
   features: readonly Feature[],
+  read: ProvidersRead = { shape: 3 },
 ): Promise<CatalogRows> {
-  const { sql, bindings } = providersStatement(query, features);
+  const { sql, bindings } = providersStatement(query, features, read);
   const [catalog, providers] = await db.batch([
     db.prepare('SELECT version FROM catalog'),
     db.prepare(sql).bind(...bindings),
@@ -53,6 +79,7 @@ export async function loadProviders(
 export function providersStatement(
   query: ProvidersQuery,
   features: readonly Feature[],
+  read: ProvidersRead = { shape: 3 },
 ): { sql: string; bindings: (string | number)[] } {
   const conditions: string[] = [];
   const bindings: (string | number)[] = [];
@@ -78,8 +105,16 @@ export function providersStatement(
     conditions.push('id IN (SELECT provider_id FROM provider_categories WHERE category = ?)');
     bindings.push(query.category);
   }
+  if (read.shape >= 4 && read.text !== undefined) {
+    // The providers the text can match, through the FTS5 index (its expression is core's, from the registry's names).
+    const search = sqlTable(read.shape, 'provider_search');
+    conditions.push(`id IN (SELECT provider_id FROM ${search} WHERE ${search} MATCH ?)`);
+    bindings.push(read.text);
+  }
   const where = conditions.length > 0 ? ` WHERE ${conditions.join(' AND ')}` : '';
-  return { sql: `SELECT json FROM providers${where}`, bindings };
+  // Since shape 4, what search reads of each provider rather than its whole json.
+  const column = read.shape >= 4 ? 'search AS json' : 'json';
+  return { sql: `SELECT ${column} FROM providers${where}`, bindings };
 }
 
 /**

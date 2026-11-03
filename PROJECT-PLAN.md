@@ -1563,6 +1563,22 @@ in every D1 `json` column search parses.
       keeps its shape rewriting only the hashes, through the budget; the views over the shape's tables (0006); query
       plans through the views that still search, never scan. Core's: a new shape's statements on its own tables ending with
       the switch, none while it fills, a format bump's hashes, the views' statements.
+  - **Search, text** (2026-11-03): shape 4 (migration 0007, seed format 4) adds providers' `search` column, what core's
+    search reads (`searchProviderOf`: no notes, perks, resellers or facts), and `provider_search`, an FTS5 table with
+    the trigram tokenizer of the names each provider's text can match (`providerSearchText`). GET /providers reads the
+    catalog row's format to know the shape: from shape 4 it parses `search`, and a text goes through the index first
+    (`providerTextQuery`: each term a quoted phrase, any of its forms; a form under three characters reads every
+    provider). The FTS rows depend on the registry's names, so a provider's stored hash carries their digest
+    (`searchVocabularyKey`), and a renamed feature compares every provider again. D1 counts each FTS row written as
+    one. The deploy fills shape 4 beside shape 3 in one seed (about 2,144 rows), then switches the views; a later
+    migration drops shape 3's tables.
+    - **Tests:** core's: the search JSON gives the same API body as the full one for eleven kinds of query; the index
+      finds every provider core matches, for every name, word, part of a word and plural in the catalog, and for
+      pairs of words. The API's: the narrowed read matches what reading every provider matches; its plan is the FTS5
+      lookup and primary keys, never a scan of providers; a two-character term reads them all; the seeds' counts with
+      the FTS rows; a renamed feature's providers follow.
+    - **Still to come:** sorting by price and paging in SQL, the last of the EXPLAIN acceptance (text and category
+      queries meet it now).
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and

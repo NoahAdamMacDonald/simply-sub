@@ -63,6 +63,7 @@ describe('catalog schema', () => {
       '0004_provider_features.sql',
       '0005_seed_budget.sql',
       '0006_table_shapes.sql',
+      '0007_search_shape.sql',
     ]);
   });
 
@@ -92,21 +93,31 @@ describe('catalog schema', () => {
         `SELECT name, wr, strict FROM pragma_table_list
          WHERE schema = 'main' AND type = 'table' AND name NOT LIKE '\\_%' ESCAPE '\\'
            AND name NOT LIKE 'sqlite%' AND name <> 'd1_migrations'
+           AND name NOT LIKE 'provider_search%'
          ORDER BY name`,
       )
       .all<{ name: string; wr: number; strict: number }>();
     expect(results).toEqual(
       [
         'bundle_plans_s3',
+        'bundle_plans_s4',
         'bundles_s3',
+        'bundles_s4',
         'catalog',
         'features_s3',
+        'features_s4',
         'plan_features_s3',
+        'plan_features_s4',
         'plans_s3',
+        'plans_s4',
         'prices_s3',
+        'prices_s4',
         'provider_categories_s3',
+        'provider_categories_s4',
         'provider_features_s3',
+        'provider_features_s4',
         'providers_s3',
+        'providers_s4',
       ].map((name) => ({ name, wr: 1, strict: 1 })),
     );
   });
