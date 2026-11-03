@@ -19,7 +19,9 @@ import {
   type SeedTable,
   seedShape,
   sqlTable,
+  hashPrefix,
   storedHash,
+  viewStatements,
   type SeedStep,
   buildSeedIndex,
   seedNext,
@@ -36,6 +38,8 @@ const db = env.DB;
 
 const tables: SeedTable[] = [
   'providers',
+  // The FTS5 table of what each provider's text can match (M11.8, shape 4).
+  'provider_search',
   'provider_categories',
   'plans',
   'prices',
@@ -243,7 +247,9 @@ async function emptyCatalog(): Promise<void> {
 }
 
 async function count(table: string): Promise<number> {
-  const row = await db.prepare(`SELECT COUNT(*) AS n FROM ${table}`).first<{ n: number }>();
+  const row = await db
+    .prepare(`SELECT COUNT(*) AS n FROM ${sqlTable(seedShape, table as SeedTable)}`)
+    .first<{ n: number }>();
   return row?.n ?? -1;
 }
 
@@ -251,7 +257,7 @@ async function count(table: string): Promise<number> {
 async function dump(): Promise<Record<string, unknown[]>> {
   const rows = await Promise.all(
     tables.map(async (table) => {
-      const { results } = await db.prepare(`SELECT * FROM ${table}`).all();
+      const { results } = await db.prepare(`SELECT * FROM ${sqlTable(seedShape, table)}`).all();
       return [table, results.map((row) => JSON.stringify(row)).sort()] as const;
     }),
   );
@@ -285,6 +291,8 @@ describe('a full seed', () => {
       bundles: 1,
       bundle_plans: 2,
       catalog: 1,
+      // A row a provider in the FTS5 table (M11.8).
+      provider_search: 2,
     });
   });
 
@@ -311,7 +319,12 @@ describe('a full seed', () => {
       .first<{ hash: string }>();
     const crave = snapshotOf(source).data.providers[0];
     // Under the seed format, so a new format compares every provider again (M11.8).
-    expect(row?.hash).toBe(storedHash(seedFormat, await sha256(JSON.stringify(crave))));
+    expect(row?.hash).toBe(
+      storedHash(
+        hashPrefix(seedFormat, snapshotOf(source).data),
+        await sha256(JSON.stringify(crave)),
+      ),
+    );
   });
 
   it('keeps quotes and line breaks', async () => {
@@ -573,7 +586,8 @@ describe('rows written', () => {
       await Promise.all(['prices', 'plan_features', 'plans', 'bundle_plans'].map(count))
     ).reduce((sum, n) => sum + n, 0);
 
-    expect(rowsWritten).toBe(rows + indexEntries);
+    // And the views pointed at what was written (M11.8): each dropped and created.
+    expect(rowsWritten).toBe(rows + indexEntries + viewStatements(seedShape).length);
   });
 
   it('also counts each deleted row, but not its index entries, for a full reseed', async () => {
@@ -650,7 +664,8 @@ describe('the estimate (M11.8)', () => {
       providerHashes: hashes,
       current: {
         ...current,
-        ...(current.catalog && { catalog: { ...current.catalog, seedFormat: seedFormat - 1 } }),
+        // A format from before shapes (M11.8): everything again.
+        ...(current.catalog && { catalog: { ...current.catalog, seedFormat: 0 } }),
       },
     });
     const results = await db.batch(
@@ -685,8 +700,9 @@ describe('the estimate (M11.8)', () => {
     await seed(snapshotOf(hundred(false)), { full: true });
     const run = await seed(snapshotOf(hundred(true), 'def5678'));
 
-    // Each provider's json and 2 provider_features rows, the feature, and the catalog row.
-    expect(run.rowsWritten).toBe(100 * 3 + 1 + 1);
+    // Each provider's json (and search), its FTS row and 2 provider_features rows, the feature, the catalog row, and
+    // Crave's hash: a new feature's names are in what every provider's text is compared under (M11.8).
+    expect(run.rowsWritten).toBe(100 * 4 + 1 + 1 + 1);
     expect(run.estimated).toBe(run.rowsWritten);
   });
 });
@@ -759,6 +775,7 @@ describe('the daily budget (M11.8)', () => {
 describe('the catalog tables', () => {
   it('have the keys and indexes core counts writes with', async () => {
     for (const [table, shape] of Object.entries(seedTables)) {
+      if (table === 'provider_search') continue;
       const { results } = await db
         .prepare(
           `SELECT name, origin FROM pragma_index_list('${sqlTable(seedShape, table as SeedTable)}') WHERE origin = 'c'`,
@@ -898,10 +915,11 @@ describe('the bot’s steps (M11.8)', () => {
     expect(deploy.rowsWritten).toBe(1);
 
     const steps = await night(await sourceOf(after), '2026-11-04', 50_000);
-    // The last provider's step names the build in the catalog row.
+    // Then every provider, in the catalog's order: a new value's name is in what their search text is compared under
+    // (M11.8). The last provider's step names the build in the catalog row.
     expect(steps.map((step) => step.wrote)).toEqual([
       'the registry and removals',
-      after.data.providers[0].id,
+      ...after.data.providers.map((provider) => provider.id),
     ]);
     expect(steps.at(-1)?.result).toBe('done');
     const resumed = { ...(await dump()), catalog: [] };
@@ -941,10 +959,12 @@ describe('the bot’s steps (M11.8)', () => {
       )
       .all<{ type: string; name: string; sql: string }>();
     const renamed = (sql: string) => sql.replaceAll(`_s${seedShape}`, `_s${shape}`);
+    // An FTS5 table makes its own shadow tables.
+    const own = results.filter(({ name }) => !name.startsWith(`provider_search_s${seedShape}_`));
     await db.batch(
       [
-        ...results.filter(({ type }) => type === 'table').map(({ sql }) => renamed(sql)),
-        ...results
+        ...own.filter(({ type }) => type === 'table').map(({ sql }) => renamed(sql)),
+        ...own
           .filter(({ type }) => type === 'index')
           .map(({ name, sql }) => renamed(sql).replace(name, `${name}_s${shape}`)),
       ].map((sql) => db.prepare(sql)),
@@ -1000,9 +1020,10 @@ describe('the bot’s steps (M11.8)', () => {
 
   it('fills a new shape’s tables over three days, the API reading the whole live ones until it switches', async () => {
     await seed(snapshotOf(testCatalog(), 'abc1234'), { full: true });
-    await createShape(4);
+    const next = { seedFormat: seedFormat + 1, shape: seedShape + 1 };
+    await createShape(next.shape);
     const after = everyPrice();
-    const shape4 = { seedFormat: 4, shape: 4 };
+    const shape4 = next;
     const planId = after.data.providers[0].plans[0].id;
     const before = await served(planId);
 
@@ -1014,7 +1035,7 @@ describe('the bot’s steps (M11.8)', () => {
     expect(before.catalog).toEqual({ version: 'abc1234', seed_format: seedFormat });
 
     // The next days, the bot, until the new tables are whole: the API reads only the old ones meanwhile.
-    const source = await sourceOf(after, undefined, 4);
+    const source = await sourceOf(after, undefined, next.seedFormat);
     const nights: (string | undefined)[] = [];
     for (let day = 4; day < 9 && nights.at(-1) !== 'done'; day++) {
       expect(await served(planId)).toEqual(before);
@@ -1025,27 +1046,35 @@ describe('the bot’s steps (M11.8)', () => {
 
     // Whole: the views go to the new tables, and the catalog row names the build and its format.
     expect(await served(planId)).toEqual({
-      catalog: { version: 'def5678', seed_format: 4 },
+      catalog: { version: 'def5678', seed_format: next.seedFormat },
       amount: (before.amount ?? 0) + 1,
     });
     expect(
       (await db.prepare(`SELECT sql FROM sqlite_master WHERE name = 'providers'`).first())?.['sql'],
-    ).toBe('CREATE VIEW providers AS SELECT * FROM providers_s4');
+    ).toBe(`CREATE VIEW providers AS SELECT * FROM providers_s${next.shape}`);
   });
 
   it('compares every provider again for a new format that keeps its shape, through the budget', async () => {
     const snapshot = snapshotOf(testCatalog(), 'abc1234');
     await seed(snapshot, { full: true });
-    const format = { seedFormat: 4, shape: seedShape };
+    const format = { seedFormat: seedFormat + 1, shape: seedShape };
     // Only each provider's hash (and json) is new: 1 row each, 4 in a day of 5 with the catalog row.
     const waiting = await deploy(snapshot, format, { today: '2026-11-03', daily: 5 });
     expect(waiting).toHaveLength(snapshot.data.providers.length - 4);
     expect(
-      (await night(await sourceOf(snapshot, undefined, 4), '2026-11-04', 50_000, format)).at(-1)
-        ?.result,
+      (
+        await night(
+          await sourceOf(snapshot, undefined, format.seedFormat),
+          '2026-11-04',
+          50_000,
+          format,
+        )
+      ).at(-1)?.result,
     ).toBe('done');
     const { results } = await db.prepare('SELECT hash FROM providers').all<{ hash: string }>();
-    expect(results.every(({ hash }) => hash.startsWith('4.'))).toBe(true);
-    expect(await db.prepare('SELECT seed_format FROM catalog').first()).toEqual({ seed_format: 4 });
+    expect(results.every(({ hash }) => hash.startsWith(`${format.seedFormat}.`))).toBe(true);
+    expect(await db.prepare('SELECT seed_format FROM catalog').first()).toEqual({
+      seed_format: format.seedFormat,
+    });
   });
 });
