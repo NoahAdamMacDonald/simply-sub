@@ -7,10 +7,14 @@
 //   apps/web/public/data/catalog/features.json     the GET /features body
 //   apps/web/public/data/catalog/categories.json   the GET /categories body
 //   apps/web/public/data/catalog/ids.json          every provider id with its plan ids, for the API's suggestions
+//   apps/web/public/data/policies/<id>.json        a provider's Terms and policies (M11.8), out of every other file
+//   apps/web/public/data/policies/shared/<id>.json a shared policy document
+//   apps/web/public/data/policies/index.json       the pages each of those cites, for the nightly check
 //   apps/web/public/icons/<id>.webp                each provider's logo from data/logos/, as a WebP of at most 96 px,
 //                                                  published as /icons/<id>.webp
-// It refuses to build a catalog with validation errors. The catalog version is a hash of the snapshot's data, so it
-// changes only when the catalog does. The deploy seeds D1 from catalog.json (scripts/seed-d1.ts).
+// It refuses to build a catalog with validation errors, and fails on a file over 20 MiB, naming it, before Cloudflare's
+// 25 MiB refuses the deploy (M11.8). The catalog version is a hash of the snapshot's data, so it changes only when the
+// catalog does. The deploy seeds D1 from catalog.json (scripts/seed-d1.ts).
 import {
   buildCatalogData,
   buildCatalogIndex,
@@ -18,10 +22,15 @@ import {
   catalogIconFile,
   catalogIconSize,
   catalogIds,
+  buildPolicyIndex,
   categoriesBody,
   featuresBody,
+  policyFilePath,
+  policyFiles,
+  policyIndexPath,
   readCatalogSource,
   regionSnapshot,
+  sharedPolicyFilePath,
   type CatalogSnapshot,
 } from '@simply-sub/core';
 import { createHash } from 'node:crypto';
@@ -39,8 +48,12 @@ import {
 } from './lib/catalog-files';
 
 const iconBaseUrl = 'https://sub.simplely.ca/icons/';
+const publicDir = 'apps/web/public/';
 const catalogDir = 'apps/web/public/data/catalog/';
+const policiesDir = 'apps/web/public/data/policies/';
 const iconsDir = 'apps/web/public/icons/';
+/** Cloudflare refuses a static file over 25 MiB: the build stops first, at 20 (M11.8). */
+const maxFileBytes = 20 * 1024 * 1024;
 
 const { sources, issues } = await checkCatalog();
 const errors = countErrors(issues);
@@ -78,6 +91,22 @@ if (errors > 0) {
   await write(`${catalogDir}categories.json`, JSON.stringify(categoriesBody(snapshot)));
   await write(`${catalogDir}ids.json`, JSON.stringify(catalogIds(snapshot)));
 
+  // Terms and policies: a file per provider and shared document, and their index (M11.8).
+  await clear(policiesDir);
+  const policies = policyFiles(source);
+  let policyBytes = 0;
+  for (const file of policies.providers) {
+    const json = JSON.stringify(file);
+    await write(`${publicDir}${policyFilePath(file.id)}`, json);
+    policyBytes += Buffer.byteLength(json);
+  }
+  for (const set of policies.sets) {
+    const json = JSON.stringify(set);
+    await write(`${publicDir}${sharedPolicyFilePath(set.id)}`, json);
+    policyBytes += Buffer.byteLength(json);
+  }
+  await write(`${publicDir}${policyIndexPath}`, JSON.stringify(buildPolicyIndex(policies)));
+
   await clear(iconsDir);
   const icons = [...data.providers, ...data.resellers].filter(({ iconUrl }) => iconUrl);
   let iconBytes = 0;
@@ -95,7 +124,8 @@ if (errors > 0) {
     [
       `Catalog ${catalogVersion}: wrote ${catalogFile} (${kilobytes(json)}),`,
       ` ${plural(index.regions.length, 'region file')} in ${catalogDir} (${sizes.join(', ')}),`,
-      ' features.json, categories.json, ids.json',
+      ' features.json, categories.json, ids.json,',
+      ` ${plural(policies.providers.length + policies.sets.length, 'policies file')} (${Math.ceil(policyBytes / 1024)} KB in all)`,
       ` and ${plural(icons.length, 'WebP icon')} (${Math.ceil(iconBytes / 1024)} KB in all).`,
       warnings > 0 ? ` ${plural(warnings, 'warning')}: run npm run data:validate.` : '',
     ].join(''),
@@ -114,6 +144,12 @@ async function webpIcon(png: Uint8Array): Promise<Buffer> {
 }
 
 async function write(file: string, contents: string | Uint8Array): Promise<void> {
+  const bytes = typeof contents === 'string' ? Buffer.byteLength(contents) : contents.length;
+  if (bytes > maxFileBytes) {
+    throw new Error(
+      `${file} would be ${Math.ceil(bytes / 1024 / 1024)} MiB, over the 20 MiB a static file may have here (Cloudflare refuses 25): split it`,
+    );
+  }
   const path = fileURLToPath(new URL(file, repoRoot));
   await mkdir(dirname(path), { recursive: true });
   await writeFile(path, contents);
