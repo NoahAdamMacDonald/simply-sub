@@ -1410,6 +1410,36 @@ plans:
   - **Browser:** `check-m11-perks.cjs` (browser-check skill): 49 checks in both themes at both widths, keyboard only,
     with axe.
 
+**M11.7 — Regional coverage** (the guide's §3.2)
+- **`npm run data:coverage`:** plans priced in some of a provider's regions but not others, and paid plans with no
+  price where it's sold.
+- **The region checklist** in the price-research skill, each step's result in the provider file's header.
+- **A Mullvad Browser reader** (`read-page-mullvad.cjs`, WebDriver BiDi, a throwaway profile) as the third browser,
+  and the browser that read each page recorded.
+- **Acceptance**
+  - [x] The report flags a fixture like Claude before M10.17 (core's coverage spec: "no CA" for its paid plans)
+  - [x] The reader saves a page's text as `read-page.cjs` does (the URL, a blank line, the visible text, and the
+        screenshot; mullvad.net/en/pricing and Bitdefender's Canadian Premium Security page, read 2026-11-02)
+- **As built** (the owner's choice on 2026-11-02: ask about VPN exits once per batch):
+  - **Core** (`catalog/coverage.ts`): `coverageRegions` (its plans' price regions, its `availableIn`, and
+    `researchRegions`, Canada and the US, when a plan is priced for everywhere), `coverageGaps` (each paid plan still
+    sold without a price there, its own, a group's or everywhere's; free plans and retired ones and prices left
+    out), and the "Coverage:" notes that explain a gap (`coverageNotes`: a comment block of its own; `explains`: the
+    plan's id or `<provider>.*`, and the region's code, each as a word).
+  - **The report** (`scripts/coverage.ts`): a line per plan and reason, an error per gap no note explains, a warning
+    for the four in `awaitingCoverage` until M11.9: Bitdefender (50 gaps: its plans read in Canada and the US only),
+    Disney+ (3: each country's own plans), Netflix (3: no ads plan in NZ, IE and NL) and Xbox Game Pass (1: PC Game
+    Pass in the US). The other nine are covered.
+  - **The checklist** (price-research's "Every region, and the browser that read it"): the guide's seven steps, the
+    browser order (Edge, curl, Mullvad Browser), the owner's VPN asked once per batch, a "Coverage:" note for a gap that
+    stays, and the browser named beside each page's date in the header.
+  - **The reader:** WebDriver BiDi on Node's WebSocket, no deps, `read-page.cjs`'s steps but `country:`; the browser's
+    process tree ended and the profile deleted after. Reading from this machine on the owner's Mullvad VPN shows its
+    exit (Montreal on 2026-11-02).
+  - **The pipeline:** a page record's `browser` (Edge), and its draft's header says "read with Edge".
+  - **Tests:** core (the regions, the gaps, groups and everywhere's prices, what's left out, the notes and what they
+    explain); the reader by hand on two pages.
+
 **M11.8 — Limits before growth** (BLUEPRINT §5.3, §7.1)
 Measured on 2026-10-30: 13 providers make 125 KB of catalog, about 9.6 KB each, 41% of it policy quotes. Policies v2
 about doubles the topics, so 20–30 KB a provider is likely. The quotes are in every region file the app downloads and

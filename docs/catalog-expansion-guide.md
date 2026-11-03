@@ -720,4 +720,4 @@ Still open (each one blocks only the task named):
 2. Renaming `streaming.ad-free` to `ad-free`, with its migration (§2.3, M11.4).
 3. Ad blocking and Morphe: list neutrally, or leave out (§3.4, M11.15).
 4. Free-only software, and when (§6, M11.15).
-5. Mullvad VPN exits for regional prices: whether the owner wants to be asked during research (§3.2, M11.7).
+5. Mullvad VPN exits for regional prices: decided 2026-11-02, asked once per batch, listing the countries (M11.7).

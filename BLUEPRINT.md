@@ -1821,6 +1821,14 @@ A broken file gets its own errors, and the checks that would only repeat them ar
 its schema isn't checked against the registry, references to it aren't flagged, and a broken feature definition
 isn't used to check plans.
 
+**Coverage** (`npm run data:coverage`, M11.7, the guide's §3.2) is a report of its own, beside validation: each region
+a provider is sold in (its plans' price regions, its `availableIn`, and Canada and the US when a plan is priced for
+everywhere) where a paid plan still sold has no price (core's `coverageGaps`). A gap passes when the provider file
+explains it in a comment block of its own, "# Coverage: <plan id> (or <provider>.*) in <REGION>: <why>"
+(`coverageNotes`, `explains`); the rest fail it, but for the providers core's `awaitingCoverage` lists, warnings until
+M11.9 (Bitdefender's other regions, Disney+'s and Netflix's country plans, Xbox's PC Game Pass in the US). It isn't in
+CI: a research batch runs it before its pull request.
+
 Each message is `file:line path: what's wrong and what to write`, for example
 `data/providers/netflix.yaml:73 plans.2.features.video.quality: "8k" isn't a video.quality value (480p, 720p,
 1080p, 4k)`. In GitHub Actions each one is also a workflow command (`::error file=…,line=…::`), so it shows as
@@ -3424,6 +3432,12 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-11-02, regional coverage, M11.7)**
+- **Mullvad VPN exits for regional prices** (the guide's §9, item 5): when a site shows this machine only Canada's
+  prices, research collects those countries over a batch and asks the owner once, at its end, listing them; the owner
+  switches the exit and says when, or says skip. The VPN is never switched by Claude, and a region skipped stays
+  unread, with why.
 
 **Resolved (2026-11-02, service categories, M11.3)**
 - **privacy-suite stays,** as Privacy suites, for all-in-one privacy bundles (Proton); antivirus suites are security,
