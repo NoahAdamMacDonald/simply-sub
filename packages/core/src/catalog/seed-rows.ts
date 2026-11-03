@@ -1,5 +1,7 @@
 import * as z from 'zod';
+import { providerSearchText, searchProviderOf } from '../search/search-index';
 import type { Bundle } from './bundle';
+import type { Categories } from './category';
 import type { Feature, FeatureValue } from './feature';
 import { monthlyEquivalent } from './monthly-equivalent';
 import { providerCategories } from './plan-categories';
@@ -33,6 +35,8 @@ export interface TableShape {
  */
 export const seedTables = {
   providers: { key: ['id'], indexes: [] },
+  // An FTS5 table (M11.8, shape 4): no key or index of its own; D1 counts each row written to it as one.
+  provider_search: { key: ['provider_id'], indexes: [] },
   provider_categories: { key: ['category', 'provider_id'], indexes: [] },
   provider_features: { key: ['feature_id', 'value', 'provider_id'], indexes: [] },
   plans: { key: ['id'], indexes: [['provider_id']] },
@@ -62,6 +66,7 @@ export function sqlTable(shape: number, table: SeedTable): string {
 /** Children first, though the ON DELETE CASCADE keys would clear them anyway. */
 export const clearOrder: readonly SeedTable[] = [
   'catalog',
+  'provider_search',
   'bundle_plans',
   'bundles',
   'plan_features',
@@ -76,6 +81,7 @@ export const clearOrder: readonly SeedTable[] = [
 /** The tables a provider's rows are in, parents first. */
 export const providerTables = [
   'providers',
+  'provider_search',
   'provider_categories',
   'provider_features',
   'plans',
@@ -96,12 +102,31 @@ export interface Change {
   writes: number;
 }
 
-/** A provider's rows, as the seed writes them. */
+/** The registry the rows need: features for their rank values, both for what a provider can be found by. */
+export interface SeedRegistry {
+  features: readonly Feature[];
+  categories: Categories;
+}
+
+/**
+ * A provider's rows, as the seed writes them: since shape 4 (M11.8) its search JSON beside its json, and its names
+ * in provider_search, the FTS5 table GET /providers finds text in (search-index.ts).
+ */
 export function providerRows(
   provider: SnapshotProvider,
   hash: string,
-  featureOf: (featureId: string, listedBy: string) => Feature,
+  registry: SeedRegistry,
 ): ProviderRows {
+  const features = new Map(registry.features.map((feature) => [feature.id, feature]));
+  const featureOf = (featureId: string, listedBy: string) => {
+    const feature = features.get(featureId);
+    if (!feature) {
+      throw new Error(
+        `${listedBy} lists ${featureId}, which isn't a feature: run npm run data:validate`,
+      );
+    }
+    return feature;
+  };
   const rows: ProviderRows = {
     providers: [
       {
@@ -111,6 +136,13 @@ export function providerRows(
         spend_category: provider.spendCategory,
         hash,
         json: JSON.stringify(provider),
+        search: JSON.stringify(searchProviderOf(provider)),
+      },
+    ],
+    provider_search: [
+      {
+        provider_id: provider.id,
+        text: providerSearchText(provider, registry.features, registry.categories),
       },
     ],
     // Every category its plans are in, so GET /providers?category= finds it by any of them.
@@ -264,6 +296,7 @@ export function inserts(
 export function copyOf(stored: StoredProvider): StoredProvider {
   return {
     providers: [...stored.providers],
+    provider_search: [...stored.provider_search],
     provider_categories: [...stored.provider_categories],
     provider_features: [...stored.provider_features],
     plans: [...stored.plans],
@@ -309,6 +342,19 @@ export function whereKey(table: SeedTable, row: SeedRow): string {
   return seedTables[table].key
     .map((column) => `${column} = ${sqlValue(row[column] ?? null)}`)
     .join(' AND ');
+}
+
+/**
+ * Deleting providers: the cascade takes their rows in the other tables, but for provider_search's, an FTS5 table's,
+ * which has no foreign key.
+ */
+export function providerDeletes(shape: number, ids: readonly string[]): string[] {
+  return ids.length > 0
+    ? [
+        ...deleteIds(shape, 'providers', ids),
+        `DELETE FROM ${sqlTable(shape, 'provider_search')} WHERE provider_id IN (${ids.map(sqlValue).join(', ')});`,
+      ]
+    : [];
 }
 
 export function deleteStatement(shape: number, table: SeedTable, row: SeedRow): string {

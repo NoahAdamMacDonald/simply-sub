@@ -11,6 +11,7 @@ import {
   copyOf,
   deleteIds,
   featureRow,
+  providerDeletes,
   insertStatement,
   inserts,
   maxStatementBytes,
@@ -28,11 +29,13 @@ import {
   updateStatement,
   utf8Length,
   type Change,
+  type SeedRegistry,
   type SeedRow,
   type SeedTable,
   type SqlValue,
   type StoredProvider,
 } from './seed-rows';
+import { searchVocabularyKey } from '../search/search-index';
 import type { CatalogMeta, CatalogSnapshot, SnapshotProvider } from './snapshot';
 
 export {
@@ -54,11 +57,12 @@ export {
 
 /**
  * The version of the rules that turn a snapshot into rows. Bump it when a migration changes the catalog tables' rows,
- * or when a derived column (monthly_equiv, rank_value) is computed differently: rows written under another format are
- * replaced by a full reseed. 2: provider_categories (migration 0003, M1.10). 3: provider_features (migration 0004,
- * M11.4). Migration 0005's bookkeeping columns on the catalog row (M11.8) changed no row, so no bump.
+ * or when a derived column (monthly_equiv, rank_value) is computed differently, and say its shape in seedShapes: a new
+ * format goes through the seed's budget (M11.8). 2: provider_categories (migration 0003, M1.10). 3: provider_features
+ * (migration 0004, M11.4). Migration 0005's bookkeeping columns on the catalog row changed no row, so no bump. 4:
+ * shape 4, providers' search column and provider_search (migration 0007, M11.8).
  */
-export const seedFormat = 3;
+export const seedFormat = 4;
 
 /**
  * The rows the catalog may write in a UTC day (M11.8): D1's 100,000 for the account, less the user database's 41,000
@@ -81,16 +85,24 @@ export interface SeedFormat {
  * beside the live ones (providers_s4…), which the seed fills through the budget and then points the API's views at.
  * Migration 0006 named the first shape, 3.
  */
-export const seedShapes: Readonly<Record<number, number>> = { 3: 3 };
+export const seedShapes: Readonly<Record<number, number>> = { 3: 3, 4: 4 };
 
-/** The shape of seedFormat's tables. */
-export const seedShape = 3;
+/** The shape of seedFormat's tables: 4, providers' search column and provider_search (migration 0007, M11.8). */
+export const seedShape = 4;
 
 const thisFormat: SeedFormat = { seedFormat, shape: seedShape };
 
-/** A provider's hash as D1 keeps it: its SHA-256 under the seed format, so a new format compares every provider. */
-export function storedHash(format: number, sha256: string): string {
-  return `${format}.${sha256}`;
+/**
+ * What a provider's stored hash starts with: the seed format and a digest of the registry's names its search text holds
+ * (searchVocabularyKey), so a new format, or a feature or service category renamed, compares every provider again.
+ */
+export function hashPrefix(format: number, registry: SeedRegistry): string {
+  return `${format}.${searchVocabularyKey(registry.features, registry.categories)}`;
+}
+
+/** A provider's hash as D1 keeps it: its SHA-256 after hashPrefix's. */
+export function storedHash(prefix: string, sha256: string): string {
+  return `${prefix}.${sha256}`;
 }
 
 /** Pointing the API's views at a shape's tables: D1 counts each view dropped and created as a row written. */
@@ -101,8 +113,10 @@ export function viewChange(shape: number): Change {
 
 /** The statements that point the API's views at a shape's tables (M11.8). */
 export function viewStatements(shape: number): string[] {
+  // The catalog row is a table of its own, and the API finds provider_search's text by its shape's name (MATCH can't
+  // go through a view).
   return clearOrder
-    .filter((table) => table !== 'catalog')
+    .filter((table) => table !== 'catalog' && table !== 'provider_search')
     .flatMap((table) => [
       `DROP VIEW IF EXISTS ${table};`,
       `CREATE VIEW ${table} AS SELECT * FROM ${sqlTable(shape, table)};`,
@@ -199,9 +213,8 @@ export function providersToRead(
 ): string[] {
   const mode = seedMode(current, format);
   if (mode.kind === 'full') return [];
-  const hashes = new Map(
-    [...providerHashes].map(([id, sha]) => [id, storedHash(format.seedFormat, sha)]),
-  );
+  const prefix = hashPrefix(format.seedFormat, snapshot.data);
+  const hashes = new Map([...providerHashes].map(([id, sha]) => [id, storedHash(prefix, sha)]));
   return [...mode.state.providers].flatMap(([id, hash]) => (hashes.get(id) !== hash ? [id] : []));
 }
 
@@ -215,6 +228,7 @@ export function storedRowQueries(ids: readonly string[], shape = seedShape): str
   const plans = `SELECT id FROM ${table('plans')} WHERE provider_id IN (${list})`;
   return [
     `SELECT id, name, category, spend_category, hash FROM ${table('providers')} WHERE id IN (${list})`,
+    `SELECT provider_id, text FROM ${table('provider_search')} WHERE provider_id IN (${list})`,
     `SELECT category, provider_id FROM ${table('provider_categories')} WHERE provider_id IN (${list})`,
     `SELECT feature_id, value, provider_id, rank_value FROM ${table('provider_features')} WHERE provider_id IN (${list})`,
     `SELECT id, provider_id, name, json FROM ${table('plans')} WHERE provider_id IN (${list})`,
@@ -231,14 +245,24 @@ export function readStoredRows(
   ids: readonly string[],
   results: readonly unknown[],
 ): Map<string, StoredProvider> {
-  const [providers, categories, features, plans, prices, planFeatures, links] = z
-    .tuple([rowsSchema, rowsSchema, rowsSchema, rowsSchema, rowsSchema, rowsSchema, rowsSchema])
+  const [providers, search, categories, features, plans, prices, planFeatures, links] = z
+    .tuple([
+      rowsSchema,
+      rowsSchema,
+      rowsSchema,
+      rowsSchema,
+      rowsSchema,
+      rowsSchema,
+      rowsSchema,
+      rowsSchema,
+    ])
     .parse(results);
   const stored = new Map<string, StoredProvider>(
     ids.map((id) => [
       id,
       {
         providers: [],
+        provider_search: [],
         provider_categories: [],
         provider_features: [],
         plans: [],
@@ -255,6 +279,7 @@ export function readStoredRows(
     found[table].push(row);
   };
   for (const row of providers) put('providers', row['id'], row);
+  for (const row of search) put('provider_search', row['provider_id'], row);
   for (const row of categories) put('provider_categories', row['provider_id'], row);
   for (const row of features) put('provider_features', row['provider_id'], row);
   for (const row of plans) put('plans', row['provider_id'], row);
@@ -288,13 +313,17 @@ export function seedStateOf(
     providers: new Map(
       snapshot.data.providers.map((provider) => [
         provider.id,
-        storedHash(format.seedFormat, providerHashes.get(provider.id) ?? ''),
+        storedHash(
+          hashPrefix(format.seedFormat, snapshot.data),
+          providerHashes.get(provider.id) ?? '',
+        ),
       ]),
     ),
     features: byJson(snapshot.data.features),
     bundles: byJson(snapshot.data.bundles),
     rows: {
       providers: count('providers'),
+      provider_search: count('provider_search'),
       provider_categories: count('provider_categories'),
       provider_features: count('provider_features'),
       plans: count('plans'),
@@ -314,27 +343,27 @@ export function storedRowsOf(
   providerHashes: ReadonlyMap<string, string>,
   format = thisFormat,
 ): Map<string, StoredProvider> {
-  const features = new Map(snapshot.data.features.map((feature) => [feature.id, feature]));
-  const featureOf = (featureId: string) => {
-    const feature = features.get(featureId);
-    if (!feature) throw new Error(`${featureId} isn't a feature`);
-    return feature;
-  };
+  const registry = { features: snapshot.data.features, categories: snapshot.data.categories };
   return new Map(
     snapshot.data.providers.map((provider) => {
       const rows = providerRows(
         provider,
-        storedHash(format.seedFormat, providerHashes.get(provider.id) ?? ''),
-        featureOf,
+        storedHash(
+          hashPrefix(format.seedFormat, snapshot.data),
+          providerHashes.get(provider.id) ?? '',
+        ),
+        registry,
       );
       const plans = new Set(provider.plans.map((plan) => plan.id));
       return [
         provider.id,
         {
           ...rows,
-          // D1's row is read without its json, which the hash stands for.
+          // D1's row is read without its json and search, which the hash stands for.
           providers: rows.providers.map((row) =>
-            Object.fromEntries(Object.entries(row).filter(([column]) => column !== 'json')),
+            Object.fromEntries(
+              Object.entries(row).filter(([column]) => column !== 'json' && column !== 'search'),
+            ),
           ),
           bundle_plans: snapshot.data.bundles.flatMap((bundle) =>
             bundle.includes
@@ -402,22 +431,13 @@ export function planSeed(snapshot: CatalogSnapshot, options: SeedOptions): SeedP
   const { providerHashes, current, rows, budget } = options;
   const format = options.format ?? thisFormat;
   const { shape } = format;
-  const features = new Map(data.features.map((feature) => [feature.id, feature]));
-  const featureOf = (featureId: string, listedBy: string) => {
-    const feature = features.get(featureId);
-    if (!feature) {
-      throw new Error(
-        `${listedBy} lists ${featureId}, which isn't a feature: run npm run data:validate`,
-      );
-    }
-    return feature;
-  };
+  const prefix = hashPrefix(format.seedFormat, data);
   const rowsOf = (provider: SnapshotProvider) => {
     const hash = providerHashes.get(provider.id);
     if (hash === undefined) {
       throw new Error(`No hash for provider ${provider.id}`);
     }
-    return providerRows(provider, storedHash(format.seedFormat, hash), featureOf);
+    return providerRows(provider, storedHash(prefix, hash), data);
   };
   const bundleChange = (bundle: Bundle) => bundleInserts(shape, bundle);
   const catalogRowOf = (written: number) =>
@@ -442,6 +462,8 @@ export function planSeed(snapshot: CatalogSnapshot, options: SeedOptions): SeedP
       ),
       ...data.providers.map((provider) => providerInserts(shape, rowsOf(provider))),
       ...data.bundles.map(bundleChange),
+      // The API reads what was just written, whichever shape the views were on.
+      viewChange(shape),
     ]);
     const used = usedToday(current, budget);
     const writes = change.writes + 1;
@@ -472,7 +494,7 @@ export function planSeed(snapshot: CatalogSnapshot, options: SeedOptions): SeedP
       providers: data.providers.map((provider) => {
         const hash = providerHashes.get(provider.id);
         if (hash === undefined) throw new Error(`No hash for provider ${provider.id}`);
-        return { id: provider.id, hash: storedHash(format.seedFormat, hash) };
+        return { id: provider.id, hash: storedHash(prefix, hash) };
       }),
       features: data.features,
       bundles: data.bundles,
@@ -503,7 +525,7 @@ export function planSeed(snapshot: CatalogSnapshot, options: SeedOptions): SeedP
     ),
     rankChange,
     {
-      statements: deleteIds(shape, 'providers', removedProviders),
+      statements: providerDeletes(shape, removedProviders),
       writes: removedProviders.reduce((sum, id) => sum + rowCount(storedOf(id)), 0),
     },
   ]);

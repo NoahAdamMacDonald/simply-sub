@@ -1,6 +1,7 @@
 import * as z from 'zod';
 import type { IsoDate } from '../dates/iso-date';
 import { bundleSchema } from './bundle';
+import { categoriesFileSchema } from './category';
 import { featuresFileSchema } from './feature';
 import {
   bundleInserts,
@@ -8,6 +9,7 @@ import {
   combine,
   deleteIds,
   featureRow,
+  providerDeletes,
   insertStatement,
   inserts,
   maxStatementBytes,
@@ -37,6 +39,7 @@ import {
   seedShape,
   seedShapes,
   seedStateQueries,
+  hashPrefix,
   storedHash,
   storedRowQueries,
   viewChange,
@@ -70,6 +73,7 @@ export const seedIndexSchema = z.strictObject({
     )
     .describe("Each provider's id and the SHA-256 of its file, in the catalog's order"),
   features: featuresFileSchema,
+  categories: categoriesFileSchema,
   bundles: z.array(bundleSchema),
 });
 export type SeedIndex = z.infer<typeof seedIndexSchema>;
@@ -99,6 +103,7 @@ export function buildSeedIndex(
       return { id: provider.id, hash };
     }),
     features: data.features,
+    categories: data.categories,
     bundles: data.bundles,
   };
 }
@@ -160,10 +165,11 @@ export async function seedNext(
   const index = await source.index();
   if (index.seedFormat !== format.seedFormat) return { result: 'idle', writes: 0 };
   const switchViews = liveShape !== shape || catalog.version === partialCatalogVersion;
+  const prefix = hashPrefix(format.seedFormat, index);
   const providers = index.providers.map(({ id, hash }) => ({
     id,
     sha256: hash,
-    hash: storedHash(format.seedFormat, hash),
+    hash: storedHash(prefix, hash),
   }));
   const target: SeedTarget = {
     meta: index,
@@ -223,12 +229,7 @@ export async function seedNext(
       );
     }
     const provider = JSON.parse(text) as SnapshotProvider;
-    const features = new Map(index.features.map((feature) => [feature.id, feature]));
-    const rows = providerRows(provider, next.hash, (featureId, listedBy) => {
-      const feature = features.get(featureId);
-      if (!feature) throw new Error(`${listedBy} lists ${featureId}, which isn't a feature`);
-      return feature;
-    });
+    const rows = providerRows(provider, next.hash, index);
     const stored = state.providers.has(next.id)
       ? readStoredRows([next.id], await db.read(storedRowQueries([next.id], shape))).get(next.id)
       : undefined;
@@ -310,7 +311,7 @@ async function fixedChange(
       writes: moves.reduce((sum, move, n) => sum + (counts[n] ?? 0) * rankRowWrites(move), 0),
     },
     {
-      statements: deleteIds(shape, 'providers', diff.removedProviders),
+      statements: providerDeletes(shape, diff.removedProviders),
       writes: [...removed.values()].reduce((sum, rows) => sum + rowCount(rows), 0),
     },
     {
