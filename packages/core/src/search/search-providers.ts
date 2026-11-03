@@ -181,6 +181,18 @@ export function providerOrder<T extends { provider: SnapshotProvider; relevance?
   }
 }
 
+/**
+ * Each term of `text` as searchProviders reads it, as the normalized forms it matches (the term, and its singular when
+ * its last word looks plural): what an index must find for a provider to be a candidate (M11.8, search-index.ts).
+ */
+export function searchTermForms(
+  text: string,
+  context: Pick<SearchContext, 'features' | 'categories'>,
+): string[][] {
+  const options = context.features.flatMap(rankKeyOptions);
+  return textTerms(text, options, context).map((term) => term.forms);
+}
+
 /** One term of the text, a word or a run of words, with what it names in the registry. */
 interface TextTerm {
   /** The term, normalized, and its singular when its last word looks plural. */
@@ -207,7 +219,7 @@ const maxTermWords = 6;
 function textTerms(
   text: string,
   options: readonly RankKeyOption[],
-  { features, categories }: SearchContext,
+  { features, categories }: Pick<SearchContext, 'features' | 'categories'>,
 ): TextTerm[] {
   const keyNames = options.map((option) => ({
     option,
@@ -456,7 +468,7 @@ function contains(name: string, forms: readonly string[]): boolean {
 }
 
 /** Lower case, without accents, with single spaces: "Crème  Brûlée" → "creme brulee". */
-function normalized(text: string): string {
+export function normalized(text: string): string {
   return text.normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase().replace(/\s+/g, ' ').trim();
 }
 
