@@ -205,10 +205,10 @@ async function greyLooks(section) {
               ),
             ) &&
               touRows.includes(
-                "grey none | Account sharing (Not stated): Its conditions don't say who you can share your account with. [1]",
+                'grey none | Account sharing (Not stated): Its conditions say your username and password are for your personal use, but not whether the people you live with may use your account. [1]',
               ) &&
               touRows.includes(
-                "grey none | Device and download limits (Not stated): Its conditions don't say how many devices you can use, or how long downloads last. [1]",
+                'grey none | Device and download limits (Not stated): Its conditions only give how many screens can play at once, which its plan shows, and nothing else about device limits. [1]',
               ),
             touRows.filter((row) => row.startsWith('grey')).join(' | '),
           );
@@ -306,6 +306,16 @@ async function greyLooks(section) {
                   row.includes('Outside the US'),
               ),
             disneyCaRows.filter((row) => /sharing data|Ads and tracking/.test(row)).join(' | '),
+          );
+          // Its own rating over the shared agreement's: the agreement allows what the plan's tier permits (M11.9).
+          check(
+            `${label}: Disney+'s own Account sharing (Neutral, Extra Members) replaces the agreement's Poor`,
+            disneyCaRows.some((row) =>
+              row.startsWith(
+                'neutral | Account sharing (Neutral): Only the people who live with you can use your account, and it can check, but you can pay to add an Extra Member',
+              ),
+            ) && !disneyCaRows.some((row) => row.startsWith('poor | Account sharing')),
+            disneyCaRows.filter((row) => row.includes('Account sharing')).join(' | '),
           );
           await disneyCa.screenshot({
             path: path.join(outDir, `disney-ca-${colorScheme}-${viewport.width}.png`),

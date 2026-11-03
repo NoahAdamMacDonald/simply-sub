@@ -695,14 +695,14 @@ policies:
           quote: 'These Terms of Use shall be governed by and construed in accordance with the laws of Canada without regard to conflict of laws provisions.'
         - url: https://help.netflix.com/legal/termsofuse
           quote: 'EXCEPT FOR CONSUMERS THAT ARE SUBJECT TO THE QUEBEC CONSUMER PROTECTION ACT AND ONLY WHERE PERMITTED UNDER THE APPLICABLE LAW, YOU AND NETFLIX AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: legal.terms-changes
       tier: good
       reason: 'If it makes a big change to its terms, it tells you at least a month before the change starts.'
       sources:
         - url: https://help.netflix.com/legal/termsofuse
           quote: 'In case of material changes we will notify you at least one month before such changes apply to you.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: legal.account-closure
       tier: neutral
       reason: "It can shut down or limit your account if you break its rules or use it for fraud, and it won't give your money back."
@@ -711,7 +711,7 @@ policies:
           quote: 'We may terminate or restrict your use of our service if you violate these Terms of Use or are engaged in illegal or fraudulent use of the service.'
         - url: https://help.netflix.com/legal/termsofuse
           quote: 'To the extent permitted by the applicable law, payments are non-refundable'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: service.account-sharing
       tier: neutral
       reason: 'Only people who live with you can use your account, and it checks devices to make sure. To share with someone who lives elsewhere, you pay for an extra member.'
@@ -722,7 +722,7 @@ policies:
           quote: "Account owners on a Standard or Premium plan in many countries can share Netflix with someone who doesn't live with them by adding an extra member to their account."
         - url: https://help.netflix.com/legal/privacy
           quote: 'This also includes determining whether a particular device is permitted to use the account consistent with the Netflix Terms of Use.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: service.account-sharing
       tier: poor
       reason: "Only people who live with you can use your account, and on this plan you can't pay to add someone who lives elsewhere."
@@ -732,7 +732,7 @@ policies:
           quote: 'You may not share your Netflix account outside of your household.'
         - url: https://help.netflix.com/en/node/123277
           quote: 'Extra members cannot be added to ad-supported plans.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: service.device-limits
       tier: neutral
       reason: 'You can download up to 100 shows or movies on each device, on as many devices as your plan allows, but downloads stop working after a while.'
@@ -741,7 +741,7 @@ policies:
           quote: 'Ad-free plans can have up to 100 active downloads at a time per device based on the number of devices included in your Netflix plan'
         - url: https://help.netflix.com/en/node/54816
           quote: 'Downloads will expire after a period of time'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: service.device-limits
       tier: poor
       reason: 'You can only download 15 shows or movies per device each month, and they stop working after a while.'
@@ -751,7 +751,7 @@ policies:
           quote: 'Ad-supported plans are limited to 15 total downloads per device per calendar month.'
         - url: https://help.netflix.com/en/node/54816
           quote: 'Downloads will expire after a period of time'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     # M11.9's topics, pulled forward at the owner's request (2026-11-02), read that day.
     - topic: privacy.ads-tracking
       tier: neutral

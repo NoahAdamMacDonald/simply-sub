@@ -1686,7 +1686,7 @@ async function addItem(page, planId) {
         unscrolled.every(([topic]) => silent.includes(topic)),
       `${citations.length}: ${unscrolled.map(([topic, text]) => `${topic} ${text}`).join(', ')}`,
     );
-    // Mullvad's refunds quote its terms three times: one citation, highlighting all three.
+    // Mullvad's refunds quote its terms twice (since M11.9's billing regrade): one citation, highlighting both.
     const refunds = section.locator('.policies li', {
       has: page.locator('.topic', { hasText: /^Refunds$/ }),
     });
@@ -1704,7 +1704,7 @@ async function addItem(page, planId) {
     );
     check(
       'a rating cites each page once, its link highlighting every quote from it',
-      refundCites.length === 1 && refundCites[0].split('text=').length === 4 && repeats === 0,
+      refundCites.length === 1 && refundCites[0].split('text=').length === 3 && repeats === 0,
       `${refundCites.join(' ')} / ${repeats} with a page twice`,
     );
     const looks = await section.evaluate((group) => {
@@ -1815,7 +1815,8 @@ async function addItem(page, planId) {
     // Netflix's ratings from its Canadian terms stand for everywhere since 2026-11-02, until its US terms are read.
     check(
       "a US user sees Proton's US disputes rating, and Netflix's from its Canadian terms",
-      disputes.startsWith('poor | Disputes (Poor): In the US, a private arbitrator') &&
+      // Neutral since M11.9: small claims court stays open, by the rubric's words.
+      disputes.startsWith('neutral | Disputes (Neutral): In the US, a private arbitrator') &&
         (await card(page, 'Netflix')
           .locator('.policies li', { hasText: 'Price changes' })
           .count()) === 1,

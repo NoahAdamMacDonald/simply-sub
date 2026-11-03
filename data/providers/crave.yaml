@@ -139,8 +139,6 @@ addOns:
 policies:
   shared: [bell-privacy]
   links:
-    - name: 'Bell Media terms'
-      url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
     - name: 'Crave terms and conditions'
       url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
     - name: 'Cancelling'
@@ -177,29 +175,35 @@ policies:
       lastVerified: 2026-11-03
     - topic: legal.disputes
       tier: bad
-      reason: "If you have a problem with it, you can't go to court: a private referee called an arbitrator decides, in Toronto and behind closed doors, and you can't join a group lawsuit."
+      reason: 'Unless you live in Quebec, Ontario, Saskatchewan, Alberta or BC, a private referee (an arbitrator) in your city decides any disagreement instead of a court, and you give up your right to a trial.'
       sources:
-        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
-          quote: 'will be referred to and finally settled (to the exclusion of the courts) by private and confidential binding arbitration before a single arbitrator held in Toronto, Ontario'
-        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
-          quote: 'You agree to waive any right you may have to commence or participate in any class action against us related to any Claim'
-      lastVerified: 2026-10-27
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'This Section does not apply to individuals who reside in Quebec, Ontario, Saskatchewan, Alberta or British Columbia.'
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'shall be settled at the request of either party by binding arbitration in the city in which you reside'
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'You expressly waive the right to resolve any dispute through any other means, including by trial.'
+      lastVerified: 2026-11-03
     - topic: legal.terms-changes
-      tier: poor
-      reason: 'It can change its terms at any time, and if you keep using its sites afterwards, that means you agree.'
+      tier: neutral
+      reason: 'It posts changes to its terms at least 30 days ahead and tells you about them, but promises that 30 days’ notice only where a law requires it.'
       sources:
-        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
-          quote: 'Your continued use of a Bell Media Site following the posting of any changes to these Terms and Conditions will mean you accept those changes.'
-      lastVerified: 2026-10-27
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'We will post changes to these Terms and Conditions at least thirty (30) days before the modification comes into effect'
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'Where required by law, this notice will be provided at least thirty (30) days before the change comes into effect'
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'Before the change comes into effect, you may cancel the Service rather than accept the change.'
+      lastVerified: 2026-11-03
     - topic: legal.account-closure
-      tier: bad
-      reason: "It can close your account whenever it decides, without warning you, and you don't get your money back."
+      tier: poor
+      reason: 'It can end your subscription for any reason with 30 days’ notice (60 in Quebec), and its terms don’t promise money back.'
       sources:
-        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
-          quote: 'Bell Media, in its sole and absolute discretion, may, without notice to you, suspend or terminate your account or your use of, or access to, a Bell Media Site or any of the Services'
-        - url: https://www.bellmedia.ca/bell-media-website-terms-conditions/
-          quote: 'All Fees are non-refundable.'
-      lastVerified: 2026-10-27
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'Bell Media may cancel your subscription to the Service upon no less than thirty (30) days (if you are a resident of Quebec, sixty (60) days) advance written notice to you.'
+        - url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+          quote: 'All Subscription Fees are non-refundable.'
+      lastVerified: 2026-11-03
     # M11.9's topics, pulled forward at the owner's request (2026-11-02), read that day.
     - topic: privacy.sign-up-data
       tier: poor
