@@ -84,6 +84,8 @@ features:
 # own services, as Crave's FAQ says of Bell Media's other services.
 # Billing periods (tsn.ca/subscribe): Monthly, 3 Months and Annual, but the 3 Months and Annual tabs show Premium alone
 # ($74.99 /3 mo, $249.99 /yr), so Standard is monthly only.
+# Downloads, profiles and French (M11.9, the owner's item 3), read 2026-11-03: its help FAQ (tsn.ca/help/faq) covers
+# its app, streams and devices but names no downloads or profiles, so none (inferred), and it streams in English.
 plans:
   - id: tsn.standard
     name: Standard
