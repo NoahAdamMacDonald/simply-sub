@@ -613,16 +613,18 @@ policies:
   ratings:
     - topic: privacy.data-collection
       tier: poor
-      reason: 'It records the ads you see, details about your devices and your IP address, and makes guesses about you and your household. You can only stop it using this to pick ads.'
+      reason: 'It records how you use Netflix, like what you play and pause, to recommend shows and to study how people use it. You can only limit the cookies on its website, browser by browser.'
       sources:
         - url: https://help.netflix.com/legal/privacy
-          quote: 'We collect information about the advertisements on the Netflix service that you view or interact with, device information (such as resettable device identifiers), IP addresses, inferences we make about you or your household based on data we collect from or about you'
+          quote: 'Usage information: We collect information about your interaction with the Netflix service (including playback events, such as play, pause, etc.);'
         - url: https://help.netflix.com/legal/privacy
-          quote: 'If your Behavioral Advertisements setting is off, you will still see advertisements, but they will be non-behavioral advertisements.'
+          quote: 'To research, analyze, and improve our services such as analyzing and understanding how users interact with the Netflix service'
+        - url: https://help.netflix.com/legal/privacy
+          quote: 'For more information about cookies set through our service and to exercise choices regarding cookies, click here .'
       action:
-        name: 'How to turn off Behavioral Advertising'
-        url: https://help.netflix.com/node/100637
-      lastVerified: 2026-10-27
+        name: 'Its cookie choices'
+        url: https://help.netflix.com/legal/privacy#cookies
+      lastVerified: 2026-11-03
     - topic: privacy.data-sharing
       tier: neutral
       reason: 'It shares some of your information with advertising companies to choose the ads you see. You can turn that off with its "Behavioral Advertising" setting.'
@@ -634,7 +636,7 @@ policies:
       action:
         name: 'How to turn off Behavioral Advertising'
         url: https://help.netflix.com/node/100637
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: privacy.ads-tracking
       tier: neutral
       reason: "On this plan, it can pick ads from what you do, unless you turn off its Behavioral Advertising setting. You'll still see ads, just not ones picked for you."
@@ -647,7 +649,7 @@ policies:
       action:
         name: 'How to turn off Behavioral Advertising'
         url: https://help.netflix.com/node/100637
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: privacy.data-deletion
       tier: neutral
       reason: 'You can ask it to correct your information or delete what it holds about you, but you have to ask.'
@@ -657,7 +659,7 @@ policies:
       action:
         name: 'How to ask it to delete your data'
         url: https://help.netflix.com/node/100625
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: billing.cancellation
       tier: great
       reason: 'You cancel online in a couple of clicks, whenever you like, and keep watching until the end of the time you paid for.'

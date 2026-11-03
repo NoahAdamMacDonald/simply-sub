@@ -353,21 +353,21 @@ policies:
       sources:
         - url: https://mullvad.net/en/help/no-logging-data-policy
           quote: 'When you sign up for Mullvad, we do not ask for any personal information – no username, no password, no email address.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: privacy.data-sharing
       tier: great
       reason: 'It only shares your details with the companies it pays to do jobs for it, and only for those jobs.'
       sources:
         - url: https://mullvad.net/en/help/privacy-policy
           quote: 'Your personal data will only be shared with third party suppliers who are performing services on our behalf and for the purposes stated above.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: privacy.ads-tracking
       tier: great
       reason: "It doesn't send what you do on its site or in its app to outside companies such as Google Analytics."
       sources:
         - url: https://mullvad.net/en/help/no-logging-data-policy
           quote: 'We refrain from sending usage statistics to external parties such as Google Analytics.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: privacy.data-deletion
       tier: great
       reason: 'It keeps almost nothing, and what it does keep goes away on its own: support emails after 70 days and payment numbers after 20 days.'
@@ -376,7 +376,7 @@ policies:
           quote: 'After 70 days, all emails/problem reports sent to our support address are automatically, permanently erased'
         - url: https://mullvad.net/en/help/no-logging-data-policy
           quote: '*transaction_id is deleted 20 days after payment'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: billing.cancellation
       tier: great
       reason: "There's nothing to cancel: you pay ahead for the time you want, and it just stops when that runs out."

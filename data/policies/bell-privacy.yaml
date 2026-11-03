@@ -10,6 +10,8 @@ links:
     url: https://support.bell.ca/_web/guides/Common/Legal/Bell_Privacy_Policy_Final.pdf
   - name: 'Commitment to privacy'
     url: https://www.bell.ca/Security_and_privacy/Commitment_to_privacy
+  - name: 'How Bell collects and uses data'
+    url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
 ratings:
   - topic: privacy.data-collection
     tier: poor
@@ -18,11 +20,37 @@ ratings:
       - url: https://support.bell.ca/_web/guides/Common/Legal/Bell_Privacy_Policy_Final.pdf
         quote: 'We use market leading data analytics technologies to help us inform and improve the uses described above.'
       - url: https://support.bell.ca/_web/guides/Common/Legal/Bell_Privacy_Policy_Final.pdf
-        quote: 'If your Personal Information isn’t necessarily required to provide the product or service, you may also be able to withdraw your consent.'
+        quote: "If your Personal Information isn't necessarily required to provide the product or service, you may also be able to withdraw your consent."
     action:
       name: Change which emails and texts Bell sends you
       url: https://www.bell.ca/email-updates
     lastVerified: 2026-11-02
+  - topic: privacy.data-sharing
+    tier: neutral
+    reason: "It shares your details among Bell's own companies, and gives a scrambled copy of your email address to ad platforms such as Facebook and Google, to show you Bell's ads there. You can turn that off in your communication preferences."
+    sources:
+      - url: https://support.bell.ca/_web/guides/Common/Legal/Bell_Privacy_Policy_Final.pdf
+        quote: 'We use your Personal Information, including sharing information between our Companies so that we may:'
+      - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+        quote: 'Securely hashed and de-identified information shared with our partners in industry standard formats (e.g., email addresses or other non-sensitive information that is matched with information the partner already has in your online profile)'
+      - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+        quote: 'If you choose to opt out or make adjustments to the ads you see in your preferences, please know you may still see Bell advertising. However, the ads won’t be personalized.'
+    action:
+      name: 'Update your communication preferences'
+      url: https://www.bell.ca/email-updates
+    lastVerified: 2026-11-03
+  - topic: privacy.ads-tracking
+    tier: neutral
+    reason: "Its ad partners use cookies to show you ads picked for you. You can turn that off in your communication preferences, and you'll still see Bell's ads, just not picked for you."
+    sources:
+      - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+        quote: 'Cookies are also used by our advertising partners to display ads that are relevant to you.'
+      - url: https://www.bell.ca/Security_and_privacy/How_we_collect_and_use_data
+        quote: 'If you choose to opt out or make adjustments to the ads you see in your preferences, please know you may still see Bell advertising. However, the ads won’t be personalized.'
+    action:
+      name: 'Update your communication preferences'
+      url: https://www.bell.ca/email-updates
+    lastVerified: 2026-11-03
   - topic: privacy.ai-training
     status: not-stated
     reason: 'Its privacy policy doesn’t say whether what you write or upload trains AI.'

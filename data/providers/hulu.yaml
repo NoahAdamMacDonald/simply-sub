@@ -121,21 +121,23 @@ policies:
       url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
     - name: 'Security vulnerability reports'
       url: https://hackerone.com/disney
+    - name: 'Privacy controls: online tracking and advertising'
+      url: https://privacy.thewaltdisneycompany.com/en/privacy-controls/online-tracking-and-advertising/
   ratings:
     - topic: privacy.data-sharing
       tier: neutral
-      reason: 'It gives some details about you, like ID codes or a scrambled email address, to ad companies, and Hulu shares data with partners such as its device makers. You can say no to the ad sharing in its privacy settings.'
+      reason: 'It gives ID codes or a scrambled email address to ad companies, and data to partners such as device makers. You can say no to the ad sharing with “Do Not Sell or Share” in its footers or app settings.'
       sources:
         - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
           quote: 'When we provide you with relevant advertising on third-party sites and applications, we may share limited personal information about you, such as certain identifiers or hashed email address, with third parties.'
         - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
           quote: 'When you use the Hulu service, Hulu may share information with its business partners that help offer the Hulu service, including for example, its content programmers, distributors and device partners, and corporate owners'
-        - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
-          quote: 'Click on “Do Not Sell or Share My Personal Information”, “Your Privacy Controls”, “Manage Your Cookies Settings”, “Modify Your Cookie Preferences” or “Manage (Privacy) Preferences” in our website footers'
+        - url: https://privacy.thewaltdisneycompany.com/en/privacy-controls/online-tracking-and-advertising/
+          quote: 'Click on “Do Not Sell or Share My Personal Information” or “Your Privacy Controls” in our website footers or application settings to make or update your election.'
       action:
         name: 'Your privacy controls'
         url: https://privacy.thewaltdisneycompany.com/en/privacy-controls/online-tracking-and-advertising/
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: security.practices
       tier: neutral
       reason: "Disney runs a program where security experts can report problems they find, but it doesn't say outside experts check its security or publish what they find."

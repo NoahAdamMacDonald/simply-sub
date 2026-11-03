@@ -722,7 +722,10 @@ never opened, saying they need a connection, then loading once the browser is ba
 both widths, screenshots and no horizontal scroll. Read a card's note and lines in one `evaluate`: between two
 locator calls the note can go. Since M11.8 `check-m11-policies.cjs` expects at least ICI TOU.TV's three grey lines and
 Disney+'s four rows, and Disney's privacy policy listed once among Hulu's sources: #113 rated every topic, so there
-are more.
+are more. Since M11.9's privacy regrade it checks Disney+'s sharing and ads Poor for the Canadian (the policy's
+provider-wide ratings), Disney+'s US sharing rating for the US user, Hulu's own sharing winning the tie with it, and
+ICI TOU.TV's free trial graded Neutral instead of grey. `check-after-m9.cjs` finds Netflix's Behavioral Advertising
+link by its address, since its data collection's cookie choices come first.
 
 `check-after-m3.cjs` (the feedback after M3: M5.13, M6.17–M6.19, M7.11, M8.5, M8.6, M9.6) checks the batch on
 `ng serve` for a Canadian in Alberta, with Streaming (Crave Premium and Disney+ Premium) and Family (two Disney+

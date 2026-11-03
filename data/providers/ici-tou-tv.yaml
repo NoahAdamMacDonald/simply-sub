@@ -160,8 +160,8 @@ policies:
       url: https://ici.tou.tv/abonnement
   ratings:
     - topic: privacy.ads-tracking
-      tier: neutral
-      reason: "It and a few ad partners use cookies to learn about you and show you ads picked for you. To avoid that, you have to change your device's or browser's privacy settings."
+      tier: poor
+      reason: "It and a few ad partners use cookies to learn about you and show you ads picked for you. You can only limit it in each device's or browser's privacy settings."
       sources:
         - url: https://cbc.radio-canada.ca/fr/transparence-et-engagement/vie-privee/avis-de-confidentialite
           quote: 'Nous et un nombre restreint de nos partenaires publicitaires utilisons des témoins pour recueillir certaines de vos données et les utilisons afin d’améliorer votre expérience et de vous présenter des contenus et des publicités personnalisés.'
@@ -170,7 +170,7 @@ policies:
       action:
         name: 'Its privacy choices: your browser and the DAAC (in French)'
         url: https://cbc.radio-canada.ca/fr/transparence-et-engagement/vie-privee/avis-de-confidentialite/options-de-confidentialite
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: billing.cancellation
       tier: great
       reason: 'You cancel online with one click on your account page, whenever you like, and keep watching until the end of the month you paid for.'

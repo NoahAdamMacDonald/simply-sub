@@ -7,6 +7,8 @@ name: The Walt Disney Company's privacy policy
 links:
   - name: 'Privacy policy'
     url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+  - name: 'Privacy controls: online tracking and advertising'
+    url: https://privacy.thewaltdisneycompany.com/en/privacy-controls/online-tracking-and-advertising/
 ratings:
   - topic: privacy.data-collection
     tier: poor
@@ -19,31 +21,57 @@ ratings:
     action:
       name: 'Your privacy controls'
       url: https://privacy.thewaltdisneycompany.com/en/privacy-controls/online-tracking-and-advertising/
-    lastVerified: 2026-10-27
+    lastVerified: 2026-11-03
   - topic: privacy.data-sharing
-    tier: neutral
-    reason: 'It gives some details about you, like ID codes or a scrambled copy of your email address, to other companies so it can show you ads on their sites. You can say no in its privacy settings.'
+    tier: poor
+    reason: "It gives some details about you, like ID codes or a scrambled copy of your email address, to other companies so it can show you ads on their sites. Outside the US, you can only limit it in each service's cookie settings."
     sources:
       - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
         quote: 'When we provide you with relevant advertising on third-party sites and applications, we may share limited personal information about you, such as certain identifiers or hashed email address, with third parties.'
-      - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
-        quote: 'Click on “Do Not Sell or Share My Personal Information”, “Your Privacy Controls”, “Manage Your Cookies Settings”, “Modify Your Cookie Preferences” or “Manage (Privacy) Preferences” in our website footers'
+      - url: https://privacy.thewaltdisneycompany.com/en/privacy-controls/online-tracking-and-advertising/
+        quote: 'Where available, please check the cookie consent management platform settings on our online services accessible to you for further details on cookie categorization and your controls and choices.'
     action:
       name: 'Your privacy controls'
       url: https://privacy.thewaltdisneycompany.com/en/privacy-controls/online-tracking-and-advertising/
-    lastVerified: 2026-10-27
-  - topic: privacy.ads-tracking
+    lastVerified: 2026-11-03
+  - topic: privacy.data-sharing
     tier: neutral
-    reason: "It picks the ads you see from what you do on its sites and apps, and on other companies' too, unless you turn that off in its privacy settings."
+    reason: 'In the US, you can say no to it giving your details to ad companies, with “Do Not Sell or Share” in its website footers or app settings.'
+    sources:
+      - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+        quote: 'When we provide you with relevant advertising on third-party sites and applications, we may share limited personal information about you, such as certain identifiers or hashed email address, with third parties.'
+      - url: https://privacy.thewaltdisneycompany.com/en/privacy-controls/online-tracking-and-advertising/
+        quote: 'Click on “Do Not Sell or Share My Personal Information” or “Your Privacy Controls” in our website footers or application settings to make or update your election.'
+    action:
+      name: 'Your privacy controls'
+      url: https://privacy.thewaltdisneycompany.com/en/privacy-controls/online-tracking-and-advertising/
+    regions: [US]
+    lastVerified: 2026-11-03
+  - topic: privacy.ads-tracking
+    tier: poor
+    reason: "It picks the ads you see from what you do on its sites and apps, and on other companies' too. Outside the US, you can only limit it in each service's cookie settings."
     sources:
       - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
         quote: 'Provide you with targeted advertising based on your activity on our sites and applications and on third-party sites and applications;'
-      - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
-        quote: 'Click on “Do Not Sell or Share My Personal Information”, “Your Privacy Controls”, “Manage Your Cookies Settings”, “Modify Your Cookie Preferences” or “Manage (Privacy) Preferences” in our website footers'
+      - url: https://privacy.thewaltdisneycompany.com/en/privacy-controls/online-tracking-and-advertising/
+        quote: 'Where available, please check the cookie consent management platform settings on our online services accessible to you for further details on cookie categorization and your controls and choices.'
     action:
       name: 'Your privacy controls'
       url: https://privacy.thewaltdisneycompany.com/en/privacy-controls/online-tracking-and-advertising/
-    lastVerified: 2026-10-27
+    lastVerified: 2026-11-03
+  - topic: privacy.ads-tracking
+    tier: neutral
+    reason: 'In the US, you can turn off ads picked from what you do, with “Do Not Sell or Share” or “Your Privacy Controls” in its website footers or app settings.'
+    sources:
+      - url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/
+        quote: 'Provide you with targeted advertising based on your activity on our sites and applications and on third-party sites and applications;'
+      - url: https://privacy.thewaltdisneycompany.com/en/privacy-controls/online-tracking-and-advertising/
+        quote: 'Click on “Do Not Sell or Share My Personal Information” or “Your Privacy Controls” in our website footers or application settings to make or update your election.'
+    action:
+      name: 'Your privacy controls'
+      url: https://privacy.thewaltdisneycompany.com/en/privacy-controls/online-tracking-and-advertising/
+    regions: [US]
+    lastVerified: 2026-11-03
   - topic: privacy.data-deletion
     tier: neutral
     reason: "You can delete your account, but it doesn't say how long it keeps your information after that."
@@ -53,7 +81,7 @@ ratings:
     action:
       name: Ask to delete your data
       url: https://privacy.thewaltdisneycompany.com/en/current-privacy-policy/data-subject-rights-portal/
-    lastVerified: 2026-10-27
+    lastVerified: 2026-11-03
   # M11.9's topics, pulled forward at the owner's request (2026-11-02), read that day.
   - topic: privacy.ai-training
     status: not-stated

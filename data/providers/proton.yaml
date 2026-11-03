@@ -1045,23 +1045,23 @@ policies:
   ratings:
     - topic: privacy.data-collection
       tier: neutral
-      reason: 'It tries to collect as little about you as it can, but its VPN apps send usage statistics until you switch that off.'
+      reason: 'It collects as little as it can, but its apps send statistics and crash reports to improve them until you switch that off, once for all its services in your account settings.'
       sources:
         - url: https://proton.me/legal/privacy
-          quote: 'Our overriding policy is to collect as little user information (personal data included) as possible to ensure a private user experience when using the Services.'
+          quote: 'We may use analytics software, app statistics and crash reporting, or other tools to help diagnose problems, send information to our developers in order to rapidly fix bugs and improve our services.'
         - url: https://protonvpn.com/support/share-usage-statistics
-          quote: 'Usage statistic sharing is enabled by default, but you can disable it at any time (as described below).'
+          quote: 'By turning this switch off, you will stop sharing your usage statistics from all Proton services.'
       action:
-        name: How to turn off usage statistics
+        name: 'How to turn off usage statistics'
         url: https://protonvpn.com/support/share-usage-statistics
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: privacy.data-sharing
       tier: great
       reason: 'Only companies that help run its services, such as taking payments, get any of your data, and they may only use it for that job.'
       sources:
         - url: https://proton.me/legal/privacy
           quote: 'Processors never store data outside of the scope of their specific purpose.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: privacy.ads-tracking
       tier: great
       reason: 'No ads. It counts visits to its website with its own tools on its own servers, not with outside tracking companies.'
@@ -1070,14 +1070,14 @@ policies:
           quote: 'No logs, no ads, open-source and independently audited.'
         - url: https://proton.me/legal/privacy
           quote: 'We employ a local installation of self-developed analytics tools.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: privacy.data-deletion
       tier: great
       reason: 'You can see, change, download or delete your data yourself, right from your account.'
       sources:
         - url: https://proton.me/legal/privacy
           quote: 'Through your Account interface, you can directly access, edit, delete, or export personal data processed by the Company in your use of the Services.'
-      lastVerified: 2026-10-27
+      lastVerified: 2026-11-03
     - topic: billing.cancellation
       tier: good
       reason: 'You cancel from your account dashboard at any time before it renews.'

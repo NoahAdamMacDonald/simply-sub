@@ -1809,6 +1809,30 @@ in every D1 `json` column search parses.
         subscription, which then renews unless you end it.
     - **Checks:** every quote checked word for word with `quote-check.cjs` against the pages saved that day, and five
       new pages baselined. Privacy, legal and service follow.
+  - **The regrade, privacy** (2026-11-03): the privacy ratings from before M11.1, graded again by the procedure, with
+    the calibration table in the pull request. The deciding fact for sharing and ads is how the opt-out works: one
+    for the account is Neutral, one set browser by browser (cookie choices) is Poor (the procedure's step 3).
+    - **Disney's privacy policy:** sharing and ads Neutral → **Poor** provider-wide, since its controls page gives
+      Canada "the cookie consent management platform settings" only. A US rating of each stays Neutral: "Do Not Sell or
+      Share" or "Your Privacy Controls" in its footers or app settings (step 5: a right only some countries have is
+      their own rating). Hulu and ESPN sell in the US only, so their buyers see Neutral.
+    - **Claude:** sharing, and its ads (2026-11-02), Neutral → **Poor**. Its opt-out is "the Privacy Choices link at
+      the bottom of the page or enabling global privacy controls", each per browser. Its data collection stays Poor,
+      but on its own facts, usage information and cookies: training on chats is AI training's, graded there.
+    - **ICI TOU.TV:** ads Neutral → **Poor**, as its sharing already was: « les paramètres de confidentialité de votre
+      appareil et de votre navigateur » are the only control.
+    - **Bell (Crave, TSN, RDS):** sharing and ads are rated once in the shared Bell document, from Bell's own pages,
+      instead of in each provider. Sharing Good → **Neutral**: Bell gives "Securely hashed … email addresses" to ad
+      platforms for its own ads, which the rubric counts (as Disney's hashed emails). Its account preferences turn
+      that off, and with them "the ads won’t be personalized" (ads Neutral).
+    - **Netflix and Proton:** data collection keeps its grade on its own facts. Netflix's ad data is ads-tracking's,
+      so it's Netflix's usage information, recommendations and research, with cookie choices only (Poor). Proton's is
+      its apps' analytics, turned off for "all Proton services" in the account (Neutral).
+    - **Kept, checked again:** deletion for Claude, Disney, Mullvad, Netflix and Proton; Mullvad's, Proton's and
+      Netflix's other privacy ratings. Netflix's data collection links its privacy statement's cookie section.
+    - **Checks:** every quote checked word for word against the pages saved that day; no page is cited for the first
+      time. `check-m11-policies.cjs` checks Disney+'s Poor sharing and ads in Canada, and its US ratings for a US
+      user (65 checks); it and `check-after-m9.cjs` (189) follow the new ratings, and ICI TOU.TV's free trial (part 9).
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and
