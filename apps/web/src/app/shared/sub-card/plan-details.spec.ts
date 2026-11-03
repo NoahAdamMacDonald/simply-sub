@@ -6,8 +6,15 @@ import { MATERIAL_ANIMATIONS } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipHarness } from '@angular/material/tooltip/testing';
-import { searchCatalog, type CatalogPlan, type Settings } from '@simply-sub/core';
+import {
+  searchCatalog,
+  type CatalogPlan,
+  type Settings,
+  type SnapshotProvider,
+} from '@simply-sub/core';
+import { PolicyFiles, type PoliciesLoad } from '../../core/catalog/policy-files';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { until } from '../../core/storage/storage.testing';
 import { PlanDetails } from './plan-details';
 import { alberta, fx, searchCatalogData, searchStores, today } from './search.testing';
 
@@ -23,22 +30,38 @@ function matchFor(planId: string): CatalogPlan {
   throw new Error(`No plan ${planId}`);
 }
 
+/** The provider of the plan `planId`, as the test catalog has it. */
+function providerOf(planId: string): SnapshotProvider {
+  const providerId = planId.slice(0, planId.indexOf('.'));
+  const provider = searchCatalogData.providers.find(({ id }) => id === providerId);
+  if (!provider) throw new Error(`No provider ${providerId}`);
+  return provider;
+}
+
 describe('PlanDetails', () => {
   let fixture: ComponentFixture<PlanDetails>;
+  /** The Terms and policies files the card asked for (M11.8), each answered when a spec says. */
+  let policyLoads: { providerId: string; answer: (load: PoliciesLoad) => void }[];
 
   beforeEach(() => {
+    policyLoads = [];
     TestBed.configureTestingModule({
       providers: [
         ...searchStores(),
+        {
+          provide: PolicyFiles,
+          useValue: {
+            load: (providerId: string) =>
+              new Promise<PoliciesLoad>((answer) => policyLoads.push({ providerId, answer })),
+          },
+        },
         { provide: MATERIAL_ANIMATIONS, useValue: { animationsDisabled: true } },
       ],
     });
     fixture = TestBed.createComponent(PlanDetails);
   });
 
-  async function show(planId: string, ranks = {}): Promise<void> {
-    const providerId = planId.slice(0, planId.indexOf('.'));
-    const provider = searchCatalogData.providers.find(({ id }) => id === providerId);
+  async function show(planId: string, ranks = {}, provider = providerOf(planId)): Promise<void> {
     fixture.componentRef.setInput('provider', provider);
     fixture.componentRef.setInput('match', matchFor(planId));
     fixture.componentRef.setInput('ranks', ranks);
@@ -197,6 +220,76 @@ describe('PlanDetails', () => {
       await show('netflix.standard');
 
       expect(groups().some((group) => group.startsWith('Terms and policies'))).toBe(false);
+    });
+
+    describe('in a file of their own (M11.8)', () => {
+      const mullvad = providerOf('mullvad.vpn');
+      const shown =
+        'Terms and policies Privacy Data collection (Not stated): Its no-logging policy doesn’t say what else it collects. [2] ' +
+        'Legal Disputes (Great): Swedish courts or the consumer disputes board. [1] ' +
+        'Service Activity logging (Great): No connection logs, and an audit found none. [2] ' +
+        'Sources [1] Terms of service [2] No-logging policy';
+      const policyGroups = () =>
+        groups().filter((shown) => shown.startsWith('Terms and policies '));
+
+      /** Opens Mullvad's card as data:build writes it since M11.8, a link in place of its policies, until it asks. */
+      async function open(): Promise<void> {
+        fixture.componentRef.setInput('provider', {
+          ...mullvad,
+          policies: undefined,
+          policiesUrl: 'https://sub.simplely.ca/data/policies/mullvad.json',
+        });
+        fixture.componentRef.setInput('match', matchFor('mullvad.vpn'));
+        fixture.componentRef.setInput('ranks', {});
+        await until(() => policyLoads.length === 1);
+      }
+
+      it('loads them as the card opens, saying so meanwhile', async () => {
+        await open();
+
+        expect(policyLoads[0].providerId).toBe('mullvad');
+        expect(policyGroups()).toEqual(['Terms and policies Loading its terms and policies…']);
+        expect(element().querySelector('.policy-note')?.getAttribute('role')).toBe('status');
+
+        policyLoads[0].answer({ status: 'ready', policies: mullvad.policies!, sets: [] });
+        await fixture.whenStable();
+        expect(policyGroups()).toEqual([shown]);
+      });
+
+      it('says they need a connection the first time, and loads them once it’s back', async () => {
+        await open();
+        policyLoads[0].answer({ status: 'offline' });
+        await fixture.whenStable();
+
+        expect(policyGroups()).toEqual([
+          'Terms and policies Its terms and policies need a connection the first time: they’ll show once you’re online.',
+        ]);
+
+        window.dispatchEvent(new Event('online'));
+        await until(() => policyLoads.length === 2);
+        policyLoads[1].answer({ status: 'ready', policies: mullvad.policies!, sets: [] });
+        await fixture.whenStable();
+        expect(policyGroups()).toEqual([shown]);
+      });
+
+      it('says when they couldn’t be loaded', async () => {
+        await open();
+        policyLoads[0].answer({ status: 'failed' });
+        await fixture.whenStable();
+
+        expect(policyGroups()).toEqual([
+          'Terms and policies Its terms and policies couldn’t be loaded.',
+        ]);
+        window.dispatchEvent(new Event('online'));
+        expect(policyLoads).toHaveLength(1);
+      });
+
+      it('shows a provider’s that its catalog file holds, as files from before M11.8 do, without asking', async () => {
+        await show('mullvad.vpn');
+
+        expect(policyGroups()).toEqual([shown]);
+        expect(policyLoads).toEqual([]);
+      });
     });
   });
 

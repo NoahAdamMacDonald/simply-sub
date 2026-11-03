@@ -3,6 +3,7 @@ import {
   catalogIndexPath,
   catalogIndexSchema,
   checkRecord,
+  isCatalogFile,
   planCatalogSync,
   type CatalogCache,
   type Timestamp,
@@ -48,6 +49,7 @@ export async function downloadCatalog(
           snapshot: await getJson(path),
           fetchedAt: now,
         });
+        if (!isCatalogFile(file)) throw new Error(`${path} isn't a catalog file`);
         if (file.snapshot.meta.catalogVersion !== index.catalogVersion) {
           // A deploy between the two requests. The next check gets the new index and files.
           throw new Error(
@@ -65,13 +67,14 @@ export async function downloadCatalog(
   }
 }
 
-class Unreachable extends Error {}
+/** The server couldn't be reached: the browser is offline, or a request timed out. */
+export class Unreachable extends Error {}
 
 /**
  * The JSON at `path`, revalidated with the server (`no-cache`: the browser sends the ETag it has). A missing file is
  * answered with the app's index.html, which fails to parse here, so files are looked up in index.json first.
  */
-async function getJson(path: string): Promise<unknown> {
+export async function getJson(path: string): Promise<unknown> {
   let response: Response;
   try {
     response = await fetch(path, {
