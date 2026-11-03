@@ -1496,8 +1496,8 @@ in every D1 `json` column search parses.
     meets a provider's) and `/data/policies/index.json` (each file's pages, and each provider's shared documents, for
     the bot), and fails on any file over 20 MiB, naming it. The snapshot leaves `policies` and `policySets` out, and a
     provider that rates its policies gets `policiesUrl`, which D1's `json` keeps, so `GET /providers/:id` points to
-    the file (the contract's examples show it). The region files halved: `CA.json` is 132 KB for the 13 providers,
-    about 290 KB with the quotes (a provider about 6 KB, 17 with its policies). Instead of a hash per file in
+    the file (the contract's examples show it). The region files halved: `CA.json` is 130 KB for the 13 providers,
+    about 285 KB with the quotes (a provider about 6 KB, 17 with its policies; `data:build`'s KB are 1,024 bytes). Instead of a hash per file in
     `index.json`, the app keeps each file with the catalog version it was read under: after a new version, opening it
     again is a 304 when it's unchanged.
     - **Core:** `policy-files.ts` (`policyFileSchema`, `policyIndexSchema`, `policyFiles`, `buildPolicyIndex`, the
