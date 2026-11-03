@@ -8,16 +8,18 @@ interface CatalogRow {
   version: string;
   built_at: string;
   counts: string;
+  waiting: number;
 }
 
 /**
  * GET /health: liveness and version (docs/api-output-examples.json), plus the catalog D1 holds, from
- * the catalog row the seed writes (BLUEPRINT §5.3). Before the first seed there is no row, and only
- * the status and API version are reported.
+ * the catalog row the seed writes (BLUEPRINT §5.3), and how many providers and bundles wait for the
+ * next seed (M11.8). Before the first seed there is no row, and only the status and API version are
+ * reported.
  */
 export const health = new Hono<{ Bindings: Env }>().get('/', async (c) => {
   const catalog = await c.env.DB.prepare(
-    'SELECT version, built_at, counts FROM catalog',
+    'SELECT version, built_at, counts, waiting FROM catalog',
   ).first<CatalogRow>();
   return c.json(
     {
@@ -29,6 +31,7 @@ export const health = new Hono<{ Bindings: Env }>().get('/', async (c) => {
           catalogUpdatedAt: catalog.built_at,
           // The seed wrote it from the snapshot's meta.counts.
           counts: JSON.parse(catalog.counts) as HealthBody['data']['counts'],
+          catalogWaiting: catalog.waiting,
         }),
       },
       // Timestamps are ISO 8601 in UTC, to the second, as in the examples.

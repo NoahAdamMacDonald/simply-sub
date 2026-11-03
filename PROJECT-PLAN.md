@@ -1517,6 +1517,26 @@ in every D1 `json` column search parses.
       isn't one; the card's loading, offline, back online and failed notes), the bot (its files read in each step),
       and a browser check (`check-m11-policies-out.cjs`: Proton's card loads its file, then offline after a reload
       shows it, and a provider never opened says it needs a connection).
+  - **Rows that changed, under a daily budget** (2026-11-03): core's `planSeed` compares a changed provider's rows
+    with what D1 holds (`providersToRead`, `storedRowQueries`, `readStoredRows`) and writes only the difference: a
+    price change is 5 rows (the price and its index entry, its plan's and provider's json, the catalog row), and a
+    feature on 100 providers 302. It counts every statement's writes as D1 does (`seedTables`, its keys and indexes,
+    which a test reads back from D1), and on the remote D1 keeps to `seedDailyWrites` (50,000): whole providers in
+    the catalog's order until the next wouldn't fit, the rest (and the bundles with their plans) left for the next
+    seed. Migration 0005 gives the catalog row `waiting` (`/health`'s `catalogWaiting`, in the contract) and the day's
+    count (`written_on`, `written`); while anything waits its version stays the last whole catalog's (`0000000`
+    while an empty D1 fills), so ETags change once it's all in. No `seedFormat` bump: no row changed shape.
+    - **CI's estimate:** `npm run data:writes` seeds the branch's catalog over main's at the merge base, built from
+      git as `data:build` builds it (`scripts/lib/snapshot.ts`, `seedStateOf`, `storedRowsOf`), and prints a notice;
+      it never fails.
+    - **Tests in workerd** (`apps/api/test/seed.spec.ts`): every change kind leaves D1 as a full seed would; the
+      estimate equals `rows_written` for a price, a plan gone, a provider gone and new, an enum value moved, a
+      feature renamed, full seeds, and a feature added to 100 providers; a budget reached mid-catalog and resumed
+      over the next days ends as a full seed would; an empty D1 fills over two days under `0000000`; the tables'
+      keys and indexes are `seedTables`'. Core's spec covers the statements, the budget's choices and the reads.
+    - **Still to come:** the bot seeding what waits each night, a full reseed through the budget (today's 13
+      providers write 2,113 rows into empty tables), and a shape change built beside the old tables, which the last
+      acceptance item needs.
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and

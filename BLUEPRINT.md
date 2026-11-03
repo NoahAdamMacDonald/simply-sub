@@ -1580,7 +1580,7 @@ features      (id PK, category, json)
 plan_features (plan_id → plans, feature_id → features, value, rank_value, PK (plan_id, feature_id, value))
 bundles       (id PK, json)
 bundle_plans  (bundle_id → bundles, plan_id → plans, PK (bundle_id, plan_id))
-catalog       (id PK = 1, version, built_at, seed_format, counts)   -- the one row: what D1 holds
+catalog       (id PK = 1, version, built_at, seed_format, counts, waiting, written_on, written)   -- the one row: what D1 holds
 indexes: prices (region, monthly_equiv) · plan_features (feature_id, rank_value) · plans (provider_id)
          · bundle_plans (plan_id)
 ```
@@ -1600,7 +1600,11 @@ indexes: prices (region, monthly_equiv) · plan_features (feature_id, rank_value
 - The `catalog` row is the catalog D1 holds: `version` and `built_at` are the snapshot's `catalogVersion` and
   `generatedAt`, `counts` is its `meta.counts` as JSON, and `seed_format` is the `seedFormat` in core that it was
   written with. `/health` reports it. `providers.hash` is a SHA-256 of the provider's `json`. Until M2.1 a
-  `snapshots` table held the full snapshot in D1 as well.
+  `snapshots` table held the full snapshot in D1 as well. Since M11.8 (migration 0005) it also keeps `waiting`, how
+  many providers and bundles of a newer catalog wait for the next seed (`/health`'s `catalogWaiting`), and the day's
+  count of rows the seeds wrote (`written_on`, the UTC day, and `written`). While anything waits, `version`,
+  `built_at` and `counts` stay the last whole catalog's (`0000000` before D1 has held one), so the API's ETags change
+  once the last of it is written.
 - D1 rejects a statement over 100 KB, so the seed checks every statement's size.
 - Only plan prices go in `prices`. Add-on prices stay in the provider's `json`, and bundle prices in the bundle's.
 - Add-ons stay inside each provider's `json`; they get their own table only if an endpoint needs to filter on them.
@@ -1652,6 +1656,35 @@ run). An insert writes its row plus one per index entry, and a delete writes one
 Proton is the outlier: its suite plans each list many features, and `plan_features` holds most of every
 provider's rows. If price PRs for providers that size ever matter, a hash per plan would replace one plan instead
 of the whole provider.
+
+**What M11.8 changed: rows, not providers, under a daily budget.** Deleting and inserting a changed provider wrote
+every one of its rows again (Proton's 882 for one price), so a regrade or a feature for many providers could pass a
+day's writes. Since M11.8 (`planSeed` in core):
+- **The changed providers' rows are compared** with what D1 holds, which the seed reads first (`providersToRead`,
+  `storedRowQueries`: rows read are plentiful, 5 million a day). A row a provider no longer has is deleted, a new one
+  inserted, and one whose other columns changed updated (`providers` is read without its `json`, which changes with
+  its `hash`). A plan that goes is deleted with its prices, features and bundle links; the bundles' links to plans
+  that stay are kept, so nothing is linked again. New and removed providers, features, enum moves and bundles work as
+  before.
+- **Every statement's writes are counted** the way D1 counts them (`seedTables` holds each table's key and indexes,
+  which a test reads back from D1): an insert is its row and an entry in each of the table's indexes, a delete one per
+  row (a cascade's rows too, without index entries), an update its row and an entry for each index it moves. The
+  tests run each kind of change in workerd and hold the count to `rows_written`.
+- **A daily budget** (`seedDailyWrites`, 50,000: D1's 100,000 for the account, less the user database's 41,000 cap
+  in section 5.4, less a margin). The remote seed counts what the day's seeds wrote already (the catalog row's
+  `written` for today's `written_on`), applies the changed providers whole, in the catalog's order, until the next
+  wouldn't fit, and leaves the rest, with the bundles that include their plans, for the next seed, which compares by
+  hash and carries on. A removed feature waits until nothing else does. A full reseed isn't budgeted yet (part 4).
+- **An empty D1 fills through the budget too:** with no rows, the seed inserts (no deletes) and records
+  `0000000` as the version until the whole catalog is in.
+- **Each pull request's estimate** (`npm run data:writes`, a notice in CI): the seed of the branch's catalog over
+  main's at the merge base, built from git the way `data:build` builds it (`seedStateOf`, `storedRowsOf`), without
+  D1. It never fails a pull request: the budget makes a large batch only slower to reach D1.
+
+Measured in workerd on the tests' catalog (13 providers): a price change writes 5 rows (the price and its index
+entry, its plan's and its provider's json, and the catalog row) where deleting and inserting Netflix wrote over a
+hundred; a feature on each of 100 providers writes 302 (each provider's json and its 2 values, the feature and the
+catalog row).
 
 ### 5.4 Abuse protection
 The API is public and read-only on purpose: it serves public catalog data, and no user data ever reaches the
@@ -1885,10 +1918,11 @@ write the files.
    validation's rules. The build never fetches icons: `npm run data:icons` does that once per provider (section
    13.4).
 5. The deploy applies the migrations, then runs `seed-d1.ts` (section 7.6). It reads what D1 holds with
-   `wrangler d1 execute --json`, writes the statements for what changed to `apps/api/dist/seed.sql` (one per line,
-   with the derived columns `monthly_equiv` and `rank_value`, section 5.3) and runs them with
-   `wrangler d1 execute --file`, which leaves D1 as it was if a statement fails. It writes nothing when D1 already
-   holds the build's catalog.
+   `wrangler d1 execute --json`, then the rows of the providers that changed, writes the statements for the rows that
+   differ to `apps/api/dist/seed.sql` (one per line, with the derived columns `monthly_equiv` and `rank_value`,
+   section 5.3) and runs them with `wrangler d1 execute --file`, which leaves D1 as it was if a statement fails. It
+   writes nothing when D1 already holds the build's catalog, and on the remote D1 keeps to the catalog's daily rows
+   (M11.8): what doesn't fit waits for the next seed, and the script says what.
 
 **A region's file** (`regionSnapshot` in core) keeps every provider, plan, add-on and bundle, each with only the
 prices pickPrice can pick for a buyer in that region, whatever their currency: the region's own prices, or else its

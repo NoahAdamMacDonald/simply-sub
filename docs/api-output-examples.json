@@ -25,7 +25,7 @@
   "endpoints": {
     "GET /health": {
       "description": "Liveness and version information.",
-      "_note": "catalogVersion, catalogUpdatedAt and counts describe the catalog D1 holds: the seed writes them when the catalog version changes (BLUEPRINT §5.3), so catalogUpdatedAt is the build time of the first deploy with that version. A D1 that hasn't been seeded yet has none of them, and /health returns only status and apiVersion.",
+      "_note": "catalogVersion, catalogUpdatedAt and counts describe the catalog D1 holds: the seed writes them when the catalog version changes (BLUEPRINT §5.3), so catalogUpdatedAt is the build time of the first deploy with that version. catalogWaiting is how many providers and bundles of a newer catalog wait for the next seed, over the day's rows written (M11.8): while any wait, the version is the last whole catalog's. A D1 that hasn't been seeded yet has none of them, and /health returns only status and apiVersion.",
       "examples": [
         {
           "title": "Healthy",
@@ -52,7 +52,8 @@
                   "addOns": 3,
                   "bundles": 1,
                   "features": 19
-                }
+                },
+                "catalogWaiting": 0
               },
               "meta": {
                 "generatedAt": "2026-10-22T18:04:11Z"

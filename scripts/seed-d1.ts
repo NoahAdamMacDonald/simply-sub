@@ -1,24 +1,31 @@
-// Brings the D1 catalog cache up to date with the build, writing only what changed (BLUEPRINT §5.3, §6.3):
+// Brings the D1 catalog cache up to date with the build, writing only the rows that changed (BLUEPRINT §5.3, §6.3):
 //   tsx scripts/seed-d1.ts --remote | --local [--full]
-// It reads what D1 holds with `wrangler d1 execute --json`, writes the statements for what differs to
-// apps/api/dist/seed.sql, and runs them with `wrangler d1 execute --file`, which leaves D1 as it was if a statement
-// fails. A code-only deploy finds nothing to change and writes no rows; --full replaces everything. It seeds from the
-// catalog.json that `npm run data:build` wrote, once the migrations are applied: apps/api's `npm run db:seed:remote`
-// (part of `npm run deploy`, BLUEPRINT §7.6) and `npm run db:seed:local` (§7.5) run both.
+// It reads what D1 holds with `wrangler d1 execute --json`, then the rows of the providers that changed, writes the
+// statements for what differs to apps/api/dist/seed.sql, and runs them with `wrangler d1 execute --file`, which leaves
+// D1 as it was if a statement fails. A code-only deploy finds nothing to change and writes no rows; --full replaces
+// everything. On the remote D1 it keeps to the catalog's daily share of rows written (core's seedDailyWrites, M11.8):
+// over it, whole providers wait for the next seed, and the catalog row says how many. It seeds from the catalog.json
+// that `npm run data:build` wrote, once the migrations are applied: apps/api's `npm run db:seed:remote` (part of
+// `npm run deploy`, BLUEPRINT §7.6) and `npm run db:seed:local` (§7.5) run both.
 import {
-  buildSeedSql,
   catalogSnapshotSchema,
+  planSeed,
+  providersToRead,
   readSeedState,
+  readStoredRows,
+  seedDailyWrites,
   seedStateQueries,
+  storedRowQueries,
+  toIsoDate,
   type CatalogSnapshot,
 } from '@simply-sub/core';
 import { spawnSync } from 'node:child_process';
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { catalogFile, plural, repoRoot } from './lib/catalog-files';
+import { providerHashes as hashesOf } from './lib/snapshot';
 
 const database = 'simply-sub-catalog';
 const seedFile = 'apps/api/dist/seed.sql';
@@ -35,33 +42,43 @@ const where = target.slice(2);
 const full = args.includes('--full');
 
 const snapshot = await readSnapshot();
-const providerHashes = new Map(
-  snapshot.data.providers.map((provider) => [
-    provider.id,
-    createHash('sha256').update(JSON.stringify(provider)).digest('hex'),
-  ]),
-);
+const providerHashes = hashesOf(snapshot);
 const current = full ? undefined : readSeedState(queryD1(seedStateQueries.join('; ')));
-const sql = buildSeedSql(snapshot, { providerHashes, current });
+// The rows of the providers that changed or went, which the seed compares with the build's.
+const ids = current ? providersToRead(snapshot, { providerHashes, current }) : [];
+const rows =
+  ids.length > 0 ? readStoredRows(ids, queryD1(storedRowQueries(ids).join('; '))) : undefined;
+// The account's daily rows are the remote D1's; a local one has no limit.
+const budget =
+  target === '--remote' ? { today: toIsoDate(new Date()), daily: seedDailyWrites } : undefined;
+const { sql, writes, waiting } = planSeed(snapshot, { providerHashes, current, rows, budget });
 const path = fileURLToPath(new URL(seedFile, repoRoot));
 await mkdir(dirname(path), { recursive: true });
 await writeFile(path, sql);
 
 const version = snapshot.meta.catalogVersion;
+const left =
+  waiting.length > 0
+    ? ` ${plural(waiting.length, 'provider or bundle')} wait for the next seed: ${waiting.join(', ')}.`
+    : '';
 if (sql === '') {
-  console.log(`The ${where} D1 already holds catalog ${version}: nothing to write.`);
+  console.log(
+    waiting.length > 0
+      ? `The ${where} D1's rows for today are spent.${left}`
+      : `The ${where} D1 already holds catalog ${version}: nothing to write.`,
+  );
 } else {
   const statements = sql.trimEnd().split('\n').length;
   const from = current?.catalog
     ? `the changes from catalog ${current.catalog.version}`
     : 'everything (a full seed)';
   console.log(
-    `Seeding the ${where} D1 with catalog ${version}: ${from}, ${plural(statements, 'statement')} in ${seedFile}.`,
+    `Seeding the ${where} D1 with catalog ${version}: ${from}, ${plural(statements, 'statement')} in ${seedFile}, about ${plural(writes, 'row')} written.${left}`,
   );
   const [result] = wranglerJson(['--file', 'dist/seed.sql', '--yes']);
   // A remote import reports what D1 bills; a local run reports no counts.
-  const rows = (result as { meta?: { rows_written?: number } } | undefined)?.meta?.rows_written;
-  console.log(rows === undefined ? 'Done.' : `Done: ${plural(rows, 'row')} written.`);
+  const written = (result as { meta?: { rows_written?: number } } | undefined)?.meta?.rows_written;
+  console.log(written === undefined ? 'Done.' : `Done: ${plural(written, 'row')} written.`);
 }
 
 /** The catalog snapshot the build wrote, as written: parsing it would reorder its keys, which the json columns keep. */

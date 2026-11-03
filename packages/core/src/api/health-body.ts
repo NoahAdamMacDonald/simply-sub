@@ -2,8 +2,8 @@ import * as z from 'zod';
 import { catalogMetaSchema } from '../catalog/snapshot';
 
 // GET /health's body (docs/api-output-examples.json): liveness, the API's version, and the catalog D1 holds, from the
-// catalog row the seed writes (BLUEPRINT §5.3). Before the first seed there is no row, and only the status and the
-// version are there.
+// catalog row the seed writes (BLUEPRINT §5.3), with how many providers and bundles wait for the next seed over the
+// day's budget (M11.8). Before the first seed there is no row, and only the status and the version are there.
 
 export const healthBodySchema = z.strictObject({
   data: z.strictObject({
@@ -12,6 +12,13 @@ export const healthBodySchema = z.strictObject({
     catalogVersion: catalogMetaSchema.shape.catalogVersion.optional(),
     catalogUpdatedAt: z.iso.datetime().describe('The catalog build time, in UTC').optional(),
     counts: catalogMetaSchema.shape.counts.optional(),
+    catalogWaiting: z
+      .int()
+      .nonnegative()
+      .describe(
+        'How many providers and bundles of a newer catalog wait for the next seed, over the day’s rows written (M11.8): 0 when D1 holds the whole catalog',
+      )
+      .optional(),
   }),
   meta: z.strictObject({ generatedAt: z.iso.datetime() }),
 });
