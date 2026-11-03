@@ -64,6 +64,15 @@ renewalAnchor:
     - 'if your subscription began on a day not contained in a given month (e.g., if you have a monthly payment plan and became a paying subscriber on January 31, your payment method would be billed next on February 28)'
   lastVerified: 2026-11-03
 
+# Apps, sign-in and support (M11.9, the cross-category features), read 2026-11-03 in its Canadian help centre: web browsers,
+# iPhone and iPad, Android, Windows 10 and 11, TVs and streaming devices, PlayStation and Xbox (Supported devices); a
+# MyDisney email address and password (MyDisney login details); "live support from 24 hours a day seven days a week",
+# by chat.
+features:
+  platforms: [windows, android, ios, web, tv, console]
+  account.sign-in: [password]
+  support.channels: [chat, 24-7]
+
 plans:
   - id: disney-plus.standard-ads
     name: Standard With Ads

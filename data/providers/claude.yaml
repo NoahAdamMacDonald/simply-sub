@@ -80,6 +80,15 @@ renewalAnchor:
     - "No, there isn't a direct way to change your subscription billing date. However, you can unsubscribe from your current plan, then resubscribe on your preferred billing date to establish your new monthly billing cycle on a different date."
   lastVerified: 2026-11-03
 
+# Apps and sign-in (M11.9, the cross-category features), read 2026-11-03: claude.ai on the web, its desktop app for Windows,
+# macOS and Linux (in beta), iOS and Android, and Claude in Chrome (claude.com/download, "Get started with Claude", the
+# Android install article); a login link or code by email, or "Continue with Google" ("Log in to your Claude account").
+# Support ("How to get support"): its messenger reaches the Product Support team on Pro and Max, and only Fin, "an AI
+# support agent", on Free; "We don't offer phone support".
+features:
+  platforms: [windows, macos, linux, android, ios, web, browser-extension]
+  account.sign-in: [email-code, sso]
+
 plans:
   - id: claude.free
     name: Free
@@ -98,7 +107,7 @@ plans:
   - id: claude.pro
     name: Pro
     link: https://claude.com/pricing
-    features: { ai.assistant: true }
+    features: { ai.assistant: true, support.channels: [chat] }
     perks: [claude-code]
     prices:
       - region: US
@@ -138,7 +147,7 @@ plans:
     name: Max
     formerNames: [{ name: Max 5x, until: 2026-10-29 }]
     link: https://claude.com/pricing
-    features: { ai.assistant: true }
+    features: { ai.assistant: true, support.channels: [chat] }
     perks: [claude-code, priority-access, usage-5x, api-credits-100]
     prices:
       - region: US
@@ -162,7 +171,7 @@ plans:
     name: Ultra
     formerNames: [{ name: Max 20x, until: 2026-10-29 }]
     link: https://claude.com/pricing
-    features: { ai.assistant: true }
+    features: { ai.assistant: true, support.channels: [chat] }
     perks: [claude-code, priority-access, weekly-usage-10x, no-5-hour-limit, api-credits-200]
     prices:
       - region: US

@@ -48,8 +48,13 @@ notes: >-
 # Windows, macOS, Linux, Android and iOS, and links the app's repository, as its downloads' "Our source code" does
 # (/en/download/vpn/windows). Its servers' code isn't published ("The majority of software that we use and even
 # develop ourselves is open source", /en/open-source), so its apps are open, not all of it.
+# Apps and support (M11.9, the cross-category features), read 2026-11-03: Windows, macOS, Linux, iOS, Android and a
+# browser extension (/en/download); support by email (support@mullvadvpn.net, /en/help). It signs in with an account
+# number, none of account.sign-in's ways, so that's left out.
 features:
   software.open-source: open-clients
+  platforms: [windows, macos, linux, android, ios, browser-extension]
+  support.channels: [email]
 sourceRepo:
   url: https://github.com/mullvad/mullvadvpn-app
   page:

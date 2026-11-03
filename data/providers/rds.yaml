@@ -57,6 +57,13 @@ renewalAnchor:
     - "Dans certains cas, la date d'un frais récurrent peut changer, par exemple si votre mode de paiement n'est pas réglé comme prévu ou si votre abonnement a commencé à une date non comprise dans un mois donné."
   lastVerified: 2026-11-03
 
+# Apps and sign-in (M11.9, the cross-category features), read 2026-11-03 on its subscribe page ("Regardez sur vos appareils
+# préférés"): TVs and streaming devices, RDS.ca on computers, Android, and iPhone and iPad, with no consoles; a Bell
+# Media account's password (its FAQ). Its pages name no support channel, so support.channels is left out.
+features:
+  platforms: [web, ios, android, tv]
+  account.sign-in: [password]
+
 plans:
   - id: rds.standard
     name: RDS

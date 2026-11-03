@@ -1649,6 +1649,17 @@ in every D1 `json` column search parses.
     `awaitingRenewalAnchor` for a US exit, asked at the batch's end. Five new pages got baselines (Claude's billing
     FAQs, Proton's subscription and invoices articles, Xbox's two billing articles); every new quote checked with
     `quote-check.cjs`.
+  - **The cross-category features** (2026-11-03): `platforms`, `account.sign-in`, `support.channels` and
+    `software.open-source` for the 13, each provider's once (`features`), a plan's own only where it differs, each with
+    the pages read in a comment. Apps from each provider's devices or download pages: a Mac or PC that only opens the
+    website is `web`, not an app. Plans that differ: Proton's single products list their own apps (Drive's Linux is a
+    command-line tool, so not listed), Bitdefender's Antivirus Free is Windows only, PC Game Pass is Windows only. Sign-in
+    from each account's help: Microsoft's account (Xbox) the most ways, Mullvad none (an account number). Support from
+    each contact page: Disney+ and Hulu "24 hours a day", Claude's messenger a person only on its paid plans and an AI
+    agent on Free, Proton's live chat for Proton VPN's customers. Left out, with why in the file: Crave's, TSN's, RDS's
+    and ICI TOU.TV's support (their pages name none) and Xbox's (an automated agent only). Proton's apps are open source
+    ("All Proton apps are open source"), with its GitHub as `sourceRepo`. `languages.audio` and `.subtitles` wait for
+    the owner: Netflix, Disney+ and Hulu publish no list (languages vary by title and region).
 
 **M11.10 — Finance in the catalog** (BLUEPRINT §4.11)
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and

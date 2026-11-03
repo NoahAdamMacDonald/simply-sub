@@ -94,6 +94,15 @@ renewalAnchor:
     - "Your subscription will be automatically renewed prior to the expiration of the term and each anniversary thereafter for a fee at Bitdefender's then-current price and any applicable taxes, excluding promotional and discount pricing offered at the renewal time."
   lastVerified: 2026-11-03
 
+# Apps, sign-in and support (M11.9, the cross-category features), read 2026-11-03: Windows, macOS, Android and iOS on its
+# product and VPN pages ("Windows®, macOS®, Android™, iOS®"), but Antivirus Free, "Windows only"; Bitdefender Central's
+# password, with two-factor codes by email or an authenticator app and trusted devices (support answer 1581); chat or
+# phone once signed in, and its forum (bitdefender.com/site/Main/contactus).
+features:
+  platforms: [windows, macos, android, ios]
+  account.sign-in: [password, email-code, totp, trusted-device]
+  support.channels: [chat, phone, community]
+
 plans:
   - id: bitdefender.total-security
     name: Total Security
@@ -894,6 +903,7 @@ plans:
     name: Antivirus Free
     link: https://www.bitdefender.com/en-ca/consumer/free-antivirus
     features:
+      platforms: [windows]
       antivirus.included: true
       antivirus.ransomware: [blocking, file-recovery]
       antivirus.web-protection: true
