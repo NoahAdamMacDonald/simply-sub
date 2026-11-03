@@ -3591,6 +3591,16 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 **Still open**
 None.
 
+**Resolved (2026-11-03, M11.10's proposals)**
+- **The finance features, all 15** (feature-discovery from TD's, RBC's, EQ Bank's, Tangerine's, KOHO's, Wealthsimple's
+  and Questrade's own pages), a feature category of their own, Banking & investing: registered accounts, a US dollar
+  account, the card and its network, free Interac e-Transfers, unlimited transactions, free ATM withdrawals, cash
+  deposits, branches and overdraft protection; for investing, self-directed or managed, what you can invest in,
+  commission-free trades, fractional shares, order types and markets.
+- **A rate that depends on a condition** (EQ Bank's 3.00% with $2,000 a month of direct deposits, 1.50% without) is
+  `account.rates.bonus`, with the same conditions as fee waivers; the user says whether they meet it (M11.11).
+- **The two finance topics stay M11.1's** rubrics (`finance.money-protection`, `finance.holds`).
+
 **Resolved (2026-11-03, M11.9)**
 - **Disney+'s other countries:** its help centre's country picker shows each country's plans, so the UK, Australia, New
   Zealand, Ireland, Germany, France, the Netherlands, Spain and Italy are priced (M10.13 had left Disney+ out, its

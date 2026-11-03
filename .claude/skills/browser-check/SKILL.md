@@ -672,7 +672,7 @@ M11.5 put Mullvad's open-source values after it), the results without TSN or RDS
 Enter listing Ad free; then an old link's `?f=streaming.ad-free` rewritten in place to `?f=ad-free` (no history entry),
 with the same results and chip. With axe (the suggestions open, the details open), screenshots and no horizontal
 scroll. Wait for the suggestions to narrow before reading them: the whole list shows first. Since M11.4
-`check-features.cjs` expects the Apps, languages & support card and ranks Kids profiles where it ranked Ad free, and
+`check-features.cjs` expects the Banking & investing card since M11.10, and the Apps, languages & support card and ranks Kids profiles where it ranked Ad free, and
 `check-search.cjs`'s "video quality" suggestions no longer include Ad free. Since M11.5 `check-features.cjs` opens
 Apps, languages & support beside VPN with Mullvad listed (its open-source value), and since M11.6
 `check-list-view.cjs`'s Tab order has the totals' two breakdown buttons after Export (M10's, missed until then).
