@@ -232,22 +232,22 @@ policies:
   ratings:
     - topic: billing.cancellation
       tier: neutral
-      reason: You can cancel online at any time and keep using it until the end of the period you paid for, but payments aren't refunded unless its terms or the law say so.
+      reason: 'You can cancel online whenever you like, but at least a day before it renews, or you pay for the next period. You keep it until the end of the time you paid for.'
       sources:
         - url: https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription
-          quote: You may cancel your Pro or Max plan subscription at any time by following the cancellation instructions for the platform you signed up on.
-        - url: https://support.claude.com/en/articles/12386328-request-a-refund-for-a-paid-claude-plan
-          quote: Except as expressly provided in our Consumer Terms of Service or where required by law, all payments are non-refundable.
-      lastVerified: 2026-10-28
+          quote: 'To avoid being charged for your next billing period, cancel your subscription at least 24 hours before your next billing date.'
+        - url: https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription
+          quote: 'Your cancellation will take effect at the end of your current billing period and you can continue using your paid plan until then.'
+      lastVerified: 2026-11-03
     - topic: billing.refunds
       tier: neutral
-      reason: You can cancel online at any time and keep using it until the end of the period you paid for, but payments aren't refunded unless its terms or the law say so.
+      reason: 'You get no money back unless its terms or the law say so, but you keep using it until the end of the time you paid for.'
       sources:
-        - url: https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription
-          quote: You may cancel your Pro or Max plan subscription at any time by following the cancellation instructions for the platform you signed up on.
         - url: https://support.claude.com/en/articles/12386328-request-a-refund-for-a-paid-claude-plan
-          quote: Except as expressly provided in our Consumer Terms of Service or where required by law, all payments are non-refundable.
-      lastVerified: 2026-10-28
+          quote: 'Except as expressly provided in our Consumer Terms of Service or where required by law, all payments are non-refundable.'
+        - url: https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription
+          quote: 'Your cancellation will take effect at the end of your current billing period and you can continue using your paid plan until then.'
+      lastVerified: 2026-11-03
     - topic: billing.price-changes
       tier: great
       reason: A new price never applies to time you've already paid for, and it tells you at least 30 days before a price goes up, so you can cancel first.
@@ -256,7 +256,7 @@ policies:
           quote: we will not make any change to the fees applicable to your Subscription during the current Initial Term or Renewal Term, as applicable
         - url: https://www.anthropic.com/legal/consumer-terms
           quote: we will inform you at least 30 days in advance of the change
-      lastVerified: 2026-10-28
+      lastVerified: 2026-11-03
     - topic: legal.disputes
       tier: good
       reason: "There's no arbitration: disputes go to the courts in San Francisco, California, the ones it chose."

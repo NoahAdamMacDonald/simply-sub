@@ -1,0 +1,321 @@
+url: https://www.bitdefender.com/consumer/support/answer/29081/
+method: fetch
+saved: 2026-11-03
+
+How to Turn Off Auto-Renewal for Bitdefender Subscriptions
+Skip to content
+For Consumer
+All-in-one plans
+All-in-one plans
+Individual Plans
+Family Plans
+Ultimate Small Business Security
+Security for Creators
+Most Popular Plans
+Total Security
+Premium Security
+Ultimate Security
+Device Security
+Device Security
+Antivirus Plus
+Antivirus for Mac
+Mobile Security for Android
+Mobile Security for iOS
+Internet Security
+Family Pack
+Small Office Security
+Privacy & Identity
+Privacy
+Premium VPN
+SecurePass
+Identity Protection
+Digital Identity Protection
+Identity Theft Protection
+Trials & Free Tools
+Try Bitdefender
+Antivirus Free
+Antivirus Free for Android
+Trial Downloads
+Free Tools
+Scamio – AI Scam Detector
+Reverse Phone Number Lookup
+Digital Footprint Checker
+Password Generator
+Link Checker
+AI Skills Checker
+Virus Scanner for Mac
+Resources
+Join Our Community
+Smart Home Cybersecurity
+Cyberpedia
+Existing Customers
+Existing Customers
+Renew or Upgrade
+Support
+AI-Powered Cybersecurity
+For Small Business
+For Enterprise
+Platform
+Packages
+Small Business SecurityBuy Online
+Business Security
+Business Security Premium
+Business Security Enterprise
+Defense XDR
+Free Trials
+Technology
+DemoZone
+TechZone
+Bitdefender Labs
+AI Advantage Enterprise Cybersecurity
+Prevention
+Dynamic Attack Surface ReductionNEW
+Compliance Manager
+Risk Management
+Vulnerability & Patch Management
+Cloud Security Posture Management
+External Attack Surface Management
+Full Disk Encryption
+Managed Service Providers
+GravityZone MSP Security
+Extended Email Security for MSPs
+Advanced Security for MSSPs
+Managed Detection and Response for MSPs
+Protection
+Email Security
+Mobile Security
+Cloud Native Security
+Cloud Workload Security
+Container Security
+Detection & Response
+Endpoint Detection & Response
+Extended Detection & Response
+Identity Threat Detection & Response
+Threat Intelligence Solutions
+Managed Detection and Response
+Managed Detection and Response Plus
+Security Data Lake
+GravityZone Platform – Comprehensive Unified Security
+Services
+Managed Services
+Managed Detection and Response PLUS
+Managed Detection and Response
+Managed Detection and Response for MSPs
+Managed XDR
+Security Services
+Offensive Services
+Advisory Services
+Support
+Digital Forensics and Incident Response
+Cybersecurity Advisory Services
+Compliance Support
+Cybersecurity Review (CSR)
+Cybersecurity Advisory Retainer
+Incident Response Tabletop Exercises (TXT)
+Offensive Services
+Penetration Testing
+Red Teaming
+Cloud Security Assessment
+Phishing Simulation
+Why Bitdefender
+The Bitdefender Difference
+AI-Powered CybersecurityNew
+Fighting CybercrimeNew
+Customer Success Stories
+Industry Recognition and Awards
+Technology Alliances
+Certifications
+Bitdefender Labs and Research
+Solutions
+Cloud Native Security
+Enable Cyber Resilience
+Improve Cybersecurity Compliance
+Provide Managed Security Services
+Secure Cloud Workloads
+Secure Datacenters
+Secure Endpoints
+Secure Small to Medium Business
+Industries
+Education
+Energy and Utilities
+Financial Services
+Healthcare
+Manufacturing
+Public Sector
+Technology
+Telecommunications
+Retail
+Compare Bitdefender
+vs. Crowdstrike
+vs. Huntress
+vs. Microsoft
+vs. SentinelOne
+vs. Sophos
+Resources
+Highlights
+2026 Cybersecurity Predictions
+FunkSec: Ransomware Group
+Akira Ransomware
+ShrinkLocker (+Decryptor)
+Training & Education
+InfoZone, Cybersecurity 101
+TechZone, Technical Insights & Explainers
+DemoZone, Interactive DemosNEW
+Masterclasses, Onboarding SessionsNEW
+Resource Library
+Newsroom
+Blogs
+Industry Recognition & Reports
+Webinars
+Events
+eBooks & Whitepapers
+Case Studies
+Experienced a Breach?
+View Packages and Pricing
+For Partners
+Reseller Partners
+Our network
+Reselling Partner Program Overview
+Become a Reseller
+Quick Links
+Log in to the Business Solutions Partners portal
+Log in to the Consumer / VSB Solutions Partners portal
+Find a Reseller
+Already a Partner?
+Join our Affiliates Program
+Managed Service Providers
+Our Network
+MSP Partner Program Overview
+Become a MSP Partner
+Quick Links
+Log In To PAN Portal
+Find a MSP Partner
+Already a Partner?
+Technology Licensing
+Technology Licensing Portfolio
+OEM Technology Solutions
+Threat Intelligence Solutions
+Bundling Solutions
+Endpoint Protection SDKs
+Gateway Protection SDKs
+Sandbox Services
+Quick Links
+Contact Us
+Telco Partners
+Resources Center
+Subscriber Protection Platform
+Resources
+Technology Partners
+Technology Alliances
+Advantage Technical Partner Program
+Company
+Support for Business
+My Account
+Bitdefender Central
+GravityZone CLOUD Control
+English ( US ) English (UK) English (AU) Italia Brasil Portugal 中文 (香港) 中文 (台灣) France Deutschland România España Nederland Sverige
+","children":[{"title":"English (UK)","url":"https:\/\/www.bitdefender.co.uk\/consumer\/support\/answer\/88573\/","description":"","classes":"lang-item lang-item-102846 lang-item-uk","flag":" "},{"title":"English (AU)","url":"https:\/\/www.bitdefender.com.au\/consumer\/support\/answer\/88572\/","description":"","classes":"lang-item lang-item-102870 lang-item-au","flag":" "},{"title":"Italia","url":"https:\/\/www.bitdefender.it\/consumer\/support\/answer\/38977\/","description":"","classes":"lang-item lang-item-71259 lang-item-it","flag":" "},{"title":"Brasil","url":"https:\/\/www.bitdefender.com.br\/consumer\/support\/answer\/39154\/","description":"","classes":"lang-item lang-item-71263 lang-item-br","flag":" "},{"title":"Portugal","url":"https:\/\/www.bitdefender.pt\/consumer\/support\/answer\/39155\/","description":"","classes":"lang-item lang-item-71268 lang-item-pt","flag":" "},{"title":"\u4e2d\u6587 (\u9999\u6e2f)","url":"https:\/\/www.bitdefender.com.hk\/consumer\/support\/answer\/95088\/","description":"","classes":"lang-item lang-item-105928 lang-item-zh-hk","flag":" "},{"title":"\u4e2d\u6587 (\u53f0\u7063)","url":"https:\/\/www.bitdefender.com.tw\/consumer\/support\/answer\/95089\/","description":"","classes":"lang-item lang-item-105933 lang-item-zh-tw","flag":" "},{"title":"France","url":"https:\/\/www.bitdefender.fr\/consumer\/support\/answer\/31406\/","description":"","classes":"lang-item lang-item-96 lang-item-fr","flag":" "},{"title":"Deutschland","url":"https:\/\/www.bitdefender.de\/consumer\/support\/answer\/31474\/","description":"","classes":"lang-item lang-item-1477 lang-item-de","flag":" "},{"title":"Rom\u00e2nia","url":"https:\/\/www.bitdefender.ro\/consumer\/support\/answer\/33641\/","description":"","classes":"lang-item lang-item-2657 lang-item-ro","flag":" "},{"title":"Espa\u00f1a","url":"https:\/\/www.bitdefender.es\/consumer\/support\/answer\/32070\/","description":"","classes":"lang-item lang-item-27242 lang-item-es","flag":" "},{"title":"Nederland","url":"https:\/\/www.bitdefender.nl\/consumer\/support\/answer\/37248\/","description":"","classes":"lang-item lang-item-27246 lang-item-nl","flag":" "},{"title":"Sverige","url":"https:\/\/www.bitdefender.se\/consumer\/support\/answer\/35727\/","description":"","classes":"lang-item lang-item-42632 lang-item-se","flag":" "}]}],"showMenu":false}' x-on:toggle.window="showMenu = !showMenu">
+Consumer Support » Bitdefender Subscription Auto-Renewal: Configure your preferences
+Bitdefender Support Center
+Navigate to
+Bitdefender Subscription Auto-Renewal: Configure your preferences
+Auto-renewal allows you to conveniently retain your protection when your Bitdefender subscription expires, without having to go through all the motions of manually renewing your cyber-security solution. We take care of all the nitty-gritty, so you can relax knowing that your devices will benefit from continued ironclad protection from the most advanced and easiest-to-use cyber-security solution on the market.
+Benefits of Auto-Renewal
+Peace of mind. You’ll enjoy continuous protection against all online threats. Auto-renewal keeps your defenses activated without interruption for all devices covered by your current subscription.
+Time-saving. You won’t have to go through all the steps of manually renewing your subscription. This is why 90% of Bitdefender customers choose to keep the Auto-Renewal plan.
+Free upgrades. You will automatically get the most advanced versions of your security solution once they become available, at no extra cost.
+Opt out at any time. You can cancel your automatic renewal service at any time. Once canceled, you will have to manually renew your Bitdefender product.
+How does it work?
+You will be notified by e-mail 45 days prior to the expiration date. This e-mail will provide you with all the details about automatic renewal, including a link for easy cancellation of the service. If the auto-renewal option remains active, your Bitdefender subscription will be automatically extended. No further action is required from you. This way, you will avoid even brief exposure to online threats.
+How to Turn off Auto-Renewal
+You can turn off auto-renewal in your Bitdefender Central account under the ‘My Payments’ or ‘Subscriptions’ tab within the My Subscriptions section. The process varies depending on the payment processor. Please follow the relevant steps below.
+Turning off auto-renewal via My Payments
+1. Go to https://central.bitdefender.com/ and sign in with the e-mail and password associated with your Bitdefender Central account.
+2. Click My Subscriptions in the left menu, then open the My Payments tab at the top (direct link).
+If you see a “Billing” tab instead, follow the instructions for “Turning off auto-renewal via Subscriptions”.
+3. Click the View details button next to the Bitdefender product for which you want to turn off auto-renewal.
+ⓘ If the email used to buy Bitdefender is not the same as your Bitdefender Central account, a verification code will be sent to the purchase email. To proceed, click “Continue with verification”, enter the code from the purchase email and click “Confirm code”, then click “View payment details”.
+4. In the new tab, click Manage your subscription renewal options.
+If your Bitdefender subscription is not set to auto-renew, instead of “Manage your subscription renewal options” you’ll have an option called Reactivate Subscription. Click it if you want to turn on automatic renewal.
+5. In the pop-up window, click the End Auto-Renewal button.
+6. Select a reason for stopping auto-renewal, then click End Auto-Renewal twice.
+The auto-renewal status updates immediately in your Bitdefender Central account, and you’ll receive a confirmation email shortly.
+Alternative: Turning off auto-renewal via Verifone (2Checkout)
+If you are unable to stop automatic renewal from the My Payments tab in Bitdefender Central, you can use 2Checkout (Verifone):
+1. Go to https://store.bitdefender.com/myaccount/
+2. Enter the email address used for your Bitdefender purchase, then click on SEND ACCESS LINK.
+3. You should receive shortly an email from 2Checkout (now Verifone). Check your email and click the link inside within 1 hour.
+4. The link will open 2Checkout MyAccount in your web browser. Click Continue to log in.
+5. Open the My Products tab at the top, then click Stop automatic subscription renewal next to the Bitdefender product for which you want to turn off auto-renewal.
+If your Bitdefender subscription is not set to auto-renew, instead of “Stop automatic subscription renewal” you’ll have an option called Enable auto-renewal. Click it if you want to turn on automatic renewal.
+6. In the pop-up window, click the Stop auto-renewal button.
+7. Select a reason for stopping auto-renewal, then click Stop auto-renewal twice.
+The auto-renewal status updates immediately and you’ll receive a confirmation email shortly.
+Turning off auto-renewal via Subscriptions
+1. Go to https://central.bitdefender.com/ and sign in with the e-mail and password associated with your Bitdefender Central account.
+2. Click My Subscriptions in the left menu, then open the Subscriptions tab at the top (direct link).
+If you see “My Payments” instead of the “Billing” tab next to Subscriptions, follow the instructions for “Turning off auto-renewal via My Payments”.
+3. Next, click the [ ••• ] button on the subscription you don’t want to auto-renew, then choose Subscription & Continuous Protection from the menu.
+4. A window will appear showing your subscription benefits and renewal date. Click Cancel Subscription.
+5. Choose your preferred option, then click Cancel Subscription.
+Cancel at the end of subscription term
+Cancel immediately (available only 30 days after purchase). If selected, you’ll receive a refund, auto-renewal will be disabled, and your Bitdefender subscription will expire.
+6. Select a reason for stopping auto-renewal, then click Cancel Subscription.
+The auto-renewal status updates immediately in your Bitdefender Central account, and you’ll receive a confirmation email shortly.
+If your credit card was charged for a Bitdefender renewal that you simply do not want, to learn more about the refund process, see – How do I get a refund? Cancel a subscription from Bitdefender.
+Was this article helpful?
+Yes
+No
+Thank you for your feedback!
+Help us improve for you.
+Article is too long
+The steps are complicated
+The solution didn't work
+The article doesn't address my issue
+Submit
+Please select one option!
+Related Articles
+How do I get a refund? Cancel a subscription from Bitdefender
+How to Disable Bitdefender Promotional Notifications and Emails
+Trusted.
+Always.
+For Consumer
+For Small Business
+For Enterprise
+For Partners
+Quick Links
+Bitdefender Central
+GravityZone Cloud Control Center
+Bitdefender Cyberpedia
+Partner Advantage Network Portal
+Brand Portal
+Support for Home Products
+Support for Business Products
+Investors
+Careers
+InfoZone
+Legal Information
+Privacy Policy
+Site Map
+Company
+Contact Us
+Privacy Settings
+llms.txt
+robots.txt
+Copyright © 1997 - 2026 Bitdefender
+United States - English
+Choose Your Country
+United States - English
+United Kingdom - English
+Australia - English
+Italia - Italiano
+Brasil - Português
+Portugal - Português
+Hong Kong - China
+Taiwan - 台灣
+France - Français
+Deutschland - Deutsch
+România - Română
+España - Español
+Nederland - Nederlands
+Sverige - Svenska

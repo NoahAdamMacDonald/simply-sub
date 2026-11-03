@@ -2428,32 +2428,34 @@ policies:
       url: https://www.bitdefender.com/en-us/site/view/bug-bounty
     - name: 'Privacy policy'
       url: https://www.bitdefender.com/en-ca/site/view/legal-privacy-policy-for-home-users-solutions
+    - name: 'Cancelling (turning off renewal)'
+      url: https://www.bitdefender.com/consumer/support/answer/29081/
+    - name: 'Refunds and renewal terms (plans page)'
+      url: https://www.bitdefender.com/en-ca/consumer/
   ratings:
     - topic: billing.cancellation
       tier: good
-      reason: You can turn off renewal in your Bitdefender Central account before the next billing date, and you can ask for your money back within 30 days of buying.
+      reason: 'You can turn off renewal in your Bitdefender Central account at any time before it renews, in a few steps.'
       sources:
+        - url: https://www.bitdefender.com/consumer/support/answer/29081/
+          quote: 'You can cancel your automatic renewal service at any time.'
         - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
-          quote: unless You cancel Your subscription through the Bitdefender Central Account prior to Your next scheduled billing date
-        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
-          quote: FOR INFORMATION ON HOW TO OBTAIN A REFUND OF THE MONEY YOU PAID FOR THE SOFTWARE AT ANY TIME DURING THE THIRTY (30) DAYS PERIOD FOLLOWING THE DATE OF PURCHASE.
-      lastVerified: 2026-10-28
+          quote: 'unless You cancel Your subscription through the Bitdefender Central Account prior to Your next scheduled billing date'
+      lastVerified: 2026-11-03
     - topic: billing.refunds
       tier: good
-      reason: You can turn off renewal in your Bitdefender Central account before the next billing date, and you can ask for your money back within 30 days of buying.
+      reason: 'You can get your money back within 30 days of buying it, and again within 30 days of each time it renews, by writing to its refunds address.'
       sources:
-        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
-          quote: unless You cancel Your subscription through the Bitdefender Central Account prior to Your next scheduled billing date
-        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
-          quote: FOR INFORMATION ON HOW TO OBTAIN A REFUND OF THE MONEY YOU PAID FOR THE SOFTWARE AT ANY TIME DURING THE THIRTY (30) DAYS PERIOD FOLLOWING THE DATE OF PURCHASE.
-      lastVerified: 2026-10-28
+        - url: https://www.bitdefender.com/en-ca/consumer/
+          quote: 'You can refund by contacting refunds@bitdefender.com within 30 days of your initial purchase or of the automatic renewal date.'
+      lastVerified: 2026-11-03
     - topic: billing.price-changes
       tier: great
       reason: A new price only applies from your next renewal, and it tells you ahead of time, so you can cancel first.
       sources:
         - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
           quote: Any price change will take effect at the next subscription renewal date, and we will notify you in advance.
-      lastVerified: 2026-10-28
+      lastVerified: 2026-11-03
     - topic: legal.account-closure
       tier: neutral
       reason: If you break its terms, your subscription ends right away without notice, and you get no refund.
@@ -2591,12 +2593,14 @@ policies:
           quote: '6.6. Bitdefender free, trial or beta subscriptions are free of charge and can be used by: accessing the Bitdefender website, adding them to Your browser or installing them on Your devices, depending on the solution.'
       lastVerified: 2026-11-02
     - topic: billing.renewal-notice
-      tier: neutral
-      reason: 'Plans renew on their own. It needs your email for renewal notices, but doesn’t promise to warn you before every renewal.'
+      tier: good
+      reason: 'It emails you before every automatic renewal, with the price, and 45 days before a subscription runs out.'
       sources:
-        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
-          quote: '2.4. Registration requires a valid Bitdefender Account that includes a valid email address for renewal and other notices and a valid Bitdefender Solution subscription.'
-      lastVerified: 2026-11-02
+        - url: https://www.bitdefender.com/en-ca/consumer/
+          quote: 'You will receive an email notification before you will be billed, along with information regarding pricing and the extension of your subscription duration.'
+        - url: https://www.bitdefender.com/consumer/support/answer/29081/
+          quote: 'You will be notified by e-mail 45 days prior to the expiration date.'
+      lastVerified: 2026-11-03
     - topic: billing.fees
       status: not-stated
       reason: 'Its terms list no fees beyond the price and taxes.'

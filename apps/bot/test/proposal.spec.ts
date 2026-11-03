@@ -69,6 +69,8 @@ describe('stepPlan', () => {
       'https://help.netflix.com/en/node/123277',
       'https://help.netflix.com/en/node/54816',
       'https://hackerone.com/netflix',
+      // Its cancel page, which its Cancelling rating quotes since M11.9.
+      'https://help.netflix.com/en/node/407',
     ]);
     expect(index.hosts).toContain('www.amazon.ca');
     expect(index.hosts).toContain('icons.duckduckgo.com');
