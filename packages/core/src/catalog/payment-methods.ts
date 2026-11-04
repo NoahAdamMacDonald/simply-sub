@@ -31,6 +31,7 @@ export const paymentMethods = Object.keys(paymentMethodNames) as PaymentMethod[]
  * follow "gift", and Cash App isn't cash. `other` stands for any method not listed, so no page names it. A bank's own
  * payments (iDEAL | Wero, Swish, Eps, Bancontact, Przelewy24) and a direct debit (GoCardless) are bank transfers, and
  * an app store includes a platform that bills for the provider (Roku's Channel Store, Amazon's Prime Video channels).
+ * A bank debit (ChatGPT's "Bank debit via Link") is a bank transfer too.
  */
 const writtenAs: Readonly<Record<Exclude<PaymentMethod, 'other'>, RegExp>> = {
   card: /(?<!gift\s)\bcards?\b|\bcartes?\s+(?:de\s+)?(?:cr[ée]dit|d[ée]bit)|\bvisa\b|\bmaster\s?card\b|\bamerican\s+express\b|\bamex\b/i,
@@ -44,7 +45,7 @@ const writtenAs: Readonly<Record<Exclude<PaymentMethod, 'other'>, RegExp>> = {
     /\bapp\s?store\b|\bgoogle\s+play\b|\bin-app\b|\bitunes\b|\bplay\s+store\b|\bamazon\s+appstore\b|\bthird[- ]party\s+billing\b|\bachats?\s+intégrés?|\bchannel\s+store\b|\bamazon\s+prime\b|\bprime\s+video\b/i,
   'gift-card': /\bgift\s?cards?\b|\bcartes?[- ]cadeaux?\b|\bvouchers?\b|\bprepaid\s+cards?\b/i,
   'bank-transfer':
-    /\bbank\s+(?:transfer|wire|account)s?\b|\bwire\s+transfers?\b|\bdirect\s+debit\b|\bsepa\b|\bideal\b|\bwero\b|\bvirement\b|\bswish\b|\beps\s+(?:transfer|überweisung)\b|\bbancontact\b|\bprzelewy24\b|\bgocardless\b/i,
+    /\bbank\s+(?:transfer|wire|account|debit)s?\b|\bwire\s+transfers?\b|\bdirect\s+debit\b|\bsepa\b|\bideal\b|\bwero\b|\bvirement\b|\bswish\b|\beps\s+(?:transfer|überweisung)\b|\bbancontact\b|\bprzelewy24\b|\bgocardless\b/i,
   cash: /\bcash\b(?!\s?app\b)|\besp[eè]ces\b/i,
   crypto: /\bcrypto|\bbitcoin\b|\bmonero\b|\bbtc\b|\bxmr\b/i,
   'provider-billing':
