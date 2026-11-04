@@ -135,7 +135,11 @@ const groupNamed = (scope, page, name) =>
 async function shown(locator) {
   return locator.evaluate((element) =>
     element.innerText
-      .replace(/open_in_new/g, '')
+      // Material Symbols' ligatures: the link glyph and the ways to pay's (Task 6).
+      .replace(
+        /open_in_new|credit_card|card_giftcard|currency_bitcoin|account_balance|payments|storefront|live_tv/g,
+        '',
+      )
       .replace(/\s+/g, ' ')
       .replace(/ ([,)])/g, '$1')
       .trim(),
@@ -327,9 +331,10 @@ async function focusedName(page) {
         // Then the currencies its cash takes (M11.5), which check-m11-facts.cjs checks further.
         check(
           `${label}: Mullvad's Ways to pay names cash and crypto, citing its pricing page and its terms`,
+          // Each way to pay a chip of glyphs, named as its tooltip (Task 6), which check-m11-facts.cjs checks.
           payWords ===
-            'Ways to pay Cash, Cryptocurrency, Bank transfer or direct debit, Card (networks not verified) and PayPal, according to its Pricing ' +
-              'App store or platform billing and Gift card, according to its Terms of service ' +
+            'Ways to pay networks not verified according to its Pricing ' +
+              'according to its Terms of service ' +
               'Cash in EUR, USD, GBP, SEK, NOK, CHF, CAD, AUD or NZD, according to its Terms of service',
           payWords,
         );
@@ -339,6 +344,19 @@ async function focusedName(page) {
           Object.values(payLooks).every(Boolean),
           JSON.stringify(payLooks),
         );
+        // Tab from the owner's link: the chips first, each named, then the page they come from.
+        await page.keyboard.press('Tab');
+        const chipFocus = await focusedName(page);
+        await sleep(400);
+        const chipTip = page.locator('.mat-mdc-tooltip-show');
+        const chipTipText =
+          (await chipTip.count()) > 0 ? (await chipTip.last().textContent()).trim() : '';
+        check(
+          `${label}: Tab from the owner's link reaches the first way to pay's chip, named as its tooltip`,
+          chipFocus === '- img "Cash"' && chipTipText === 'Cash',
+          `${chipFocus} / ${chipTipText}`,
+        );
+        for (let chip = 1; chip < 5; chip++) await page.keyboard.press('Tab');
         await page.keyboard.press('Tab');
         const payFocus = await focusedName(page);
         const payTip = page.locator('.mat-mdc-tooltip-show');
@@ -346,7 +364,7 @@ async function focusedName(page) {
         const payTipText =
           (await payTip.count()) > 0 ? (await payTip.last().textContent()).trim() : '';
         check(
-          `${label}: Tab from the owner's link reaches the payment page's, its tooltip the page's words`,
+          `${label}: then, past its five chips, the payment page's link, its tooltip the page's words`,
           payFocus === '- link "Pricing, opens in a new tab"' &&
             payTipText.startsWith('“We accept cash, Bitcoin, Bitcoin Cash, Monero'),
           `${payFocus} / ${payTipText.slice(0, 60)}`,
@@ -365,9 +383,17 @@ async function focusedName(page) {
           `${label}: Netflix has no Outside ratings, its Owner, and Canada's page for its ways to pay`,
           !netflixHeadings.includes('Outside ratings') &&
             netflixHeadings.includes('Owner') &&
-            netflixPay ===
-              'Ways to pay Card, Gift card, PayPal and Your TV, internet or phone bill, according to its How to pay for Netflix',
+            netflixPay === 'Ways to pay according to its How to pay for Netflix',
           `${netflixHeadings.join(', ')} / ${netflixPay}`,
+        );
+        const netflixChips = await groupNamed(netflix, page, 'Ways to pay')
+          .locator('.pay-chip')
+          .evaluateAll((chips) => chips.map((chip) => chip.getAttribute('aria-label')));
+        check(
+          `${label}: Netflix's card chip names the networks Canada's page names, by their marks`,
+          netflixChips.join(' | ') ===
+            'Card: Visa, Mastercard or American Express | Gift card | PayPal | Your TV, internet or phone bill',
+          netflixChips.join(' | '),
         );
         const width = await page.evaluate(() => document.documentElement.scrollWidth);
         check(`${label}: nothing scrolls sideways`, width <= viewport.width, `${width}px`);
