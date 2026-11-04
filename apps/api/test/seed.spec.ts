@@ -159,6 +159,7 @@ const source: CatalogSource = {
   policySets: [],
   redirects: [],
   raters: [],
+  bankOfCanada: [],
   logos: new Map(),
 };
 
