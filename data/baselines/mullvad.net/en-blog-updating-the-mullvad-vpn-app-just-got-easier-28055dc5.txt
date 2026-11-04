@@ -1,0 +1,96 @@
+url: https://mullvad.net/en/blog/updating-the-mullvad-vpn-app-just-got-easier
+method: fetch
+saved: 2026-11-03
+
+Updating the Mullvad VPN app just got easier! | Mullvad VPN
+Skip to main content
+Products and services
+VPN
+Browser
+Browser extension
+Pricing
+Privacy
+Why privacy matters
+Technical resources
+Downloads
+Tech blog & news
+Open source
+Check for leaks
+Servers
+Help and support
+Guides
+FAQ
+VPN
+Browser
+Pricing
+Downloads
+Why privacy matters
+Log in Get started
+Updating the Mullvad VPN app just got easier!
+August 14, 2025 Features
+For Windows and macOS users, you can now update from within the Mullvad VPN app instead of going to our website.
+Updating the Mullvad VPN app previously required you to go to our website to download the update and install it. That is now a thing of the past with in-app updates! Windows and macOS users can now see what new updates contain and download them through the app directly.
+We know this has been a long time coming. We hope that this will not only provide a smoother way of updating, but also result in faster downloads and easier verification of updates.
+Just like the Mullvad VPN loader, the app downloads the updates from various Content Delivery Networks (CDNs) and automatically verifies the installer/application for authenticity. This makes faster downloads possible by downloading the updates from servers closer to our users, while also making sure only verified Mullvad software is downloaded.
+If you want to know more on how to use it, follow the instructions over in the Using the Mullvad VPN app guide.
+If you use one of our supported Linux distributions, we already offer automatic upgrades via our Linux app repositories, with instructions found on our downloads page.
+Mullvad
+About
+Help
+Servers
+Pricing
+Blog
+Mullvad VPN
+Mullvad Browser
+Why privacy matters
+Why Mullvad VPN?
+What is a VPN?
+Downloads
+Stop chat control
+Press
+Careers
+Policies
+Policies
+Open source
+Privacy policy
+Cookies
+Terms of service
+Partnerships and resellers
+Reviews, ads and affiliates
+Reporting a bug or vulnerability
+Address
+Mullvad VPN AB
+Box 53049
+400 14 Gothenburg
+Sweden
+support@mullvadvpn.net
+GPG key
+Onion service
+Follow us
+@mullvadnet
+@mullvadnet
+Mullvad VPN
+mullvad
+Language
+English العربيّة
+Dansk
+Deutsch
+English
+Español
+فارسی
+Suomi
+Français
+Italiano
+日本語
+한국어
+Nederlands
+Norsk
+Polski
+Português
+Русский
+Svenska
+ภาษาไทย
+Türkçe
+Українська
+简体中文
+繁體中文

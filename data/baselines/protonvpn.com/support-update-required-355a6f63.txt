@@ -1,0 +1,244 @@
+url: https://protonvpn.com/support/update-required
+method: fetch
+saved: 2026-11-03
+
+Required updates | Proton VPN Why Proton VPN What is a VPN?
+Find out what a VPN is, how it works, and when to use one.
+Why Proton VPN?
+No logs, no ads, open-source and independently audited.
+All features
+Learn how our advanced security and privacy features allow you to browse the web with peace of mind.
+VPN servers
+Servers in 140+ countries for truly global connectivity.
+VPN for Streaming
+Watch what you want, when you want, from wherever you want with Proton VPN.
+Countries
+United States
+United Kingdom
+France
+All countries
+Services
+Netflix
+Amazon Prime Video
+Disney+
+All services
+Devices
+Android TV
+Fire Stick
+Apple TV
+All devices
+Pricing
+Download Devices
+Windows
+macOS
+Linux
+Chromebook
+Android
+iPhone / iPad
+VPN extensions
+Chrome
+Firefox
+Smart TV
+Android TV
+Apple TV
+Firestick
+Auto-detect the right version for your device
+Resources Resources
+What is my IP address?
+Find your public IP address using our safe, free IP scanner.
+Proton VPN Observatory
+Documenting spikes in Proton VPN use as people fight for online freedom.
+Censorship simulator
+See what a VPN unblocks with our interactive tool
+Help and support
+Proton VPN support
+Blog
+Proton VPN blog
+Company news
+(new window) Privacy guides
+(new window)
+Business VPN(new window)
+Discover Proton Proton ecosystem
+Proton Mail
+Secure your communications with encrypted email.
+(new window) Proton Calendar
+Organize your schedule privately.
+(new window) Proton Meet New
+Talk in private with confidential video conferencing.
+(new window) Proton VPN
+Keep your online activity secure and private.
+Proton Pass
+Protect your online identity with an encrypted password manager.
+(new window) Proton Authenticator
+Secure your online accounts with 2FA across devices.
+(new window) Proton Drive
+Organize your photos and files with secure cloud storage.
+(new window) Proton Docs
+Draft and edit secure online documents.
+(new window) Proton Sheets New
+Collaborate on sensitive spreadsheets in real time.
+(new window)
+More from Proton
+Lumo AI
+Ask and ideate with a privacy-first AI assistant.
+(new window) Simple Login
+Shield your inbox from spam and phishing with an email alias service.
+(new window) Standard Notes
+Write and store private notes across your devices.
+(new window)
+Proton for Business
+Protect your business with end-to-end encryption and compliance-ready security.
+(new window)
+Proton
+A better internet starts with privacy and freedom.
+(new window) About us
+(new window) Impact
+(new window) Community
+(new window) Open source
+(new window) Team
+(new window) Careers We’re hiring
+(new window) Proton Foundation
+(new window)
+Get Proton VPN
+Sign in
+Open menu
+Support
+Get started
+Proton VPN apps
+Support search
+Required updates
+Reading
+2 mins
+Category
+Proton VPN apps
+We regularly release software updates that improve Proton VPN’s security, reliability, and user experience.
+Most of these new versions are recommended but not strictly required. However, sometimes we release updates that are required for all users. A required update means that you must update the Proton VPN app to the latest version available to continue using our service. Any older versions of our apps will no longer work.
+In this article, we explain why required updates are necessary and how to perform an update.
+Why do we have required updates?
+At Proton VPN, we’re constantly improving our apps by adding new features and fixing bugs from previous versions.
+You might notice some of these improvements right away, while others are “behind-the-scenes” upgrades that are only apparent if you examine our open-source code. Your operating system is also being continually updated and improved, so we need to update our apps in line with these changes.
+Over time, the cumulative effect of many small updates can affect the Proton VPN software. This can sometimes mean that our app becomes slower or features no longer work as expected.
+This is why we must occasionally release a version of Proton VPN that contains all available features and fixes up to that time. We make this comprehensive version a required update so that everyone who uses Proton VPN gets access to the new features, improvements, and critical security patches.
+How do I update Proton VPN?
+We recommend you always use the latest version of our apps.
+On some platforms (such as Android, iOS, and iPadOS), you can have our app update itself automatically using the Google Play Store or Apple App Store (the open-source F-Droid will notify you when updates are available).
+On Linux, your package manager should alert you when updates are available. On Windows and macOS, you’ll see an in-app notification prompting you to update the app.
+On all platforms, you can also manually check to see if new updates are available.
+Learn how to check for new updates
+We’ll email you to let you know when a required update is available and inform you that you must update your app if you wish to continue using Proton VPN.
+When you receive such an email, please be sure to verify that it is a genuine email from Proton VPN. You can do this by checking that the From email address matches one of our verified email accounts.
+If you use Proton Mail, all emails sent from legitimate Proton domains belonging to Proton have an Official badge(new window), making it easy to know that an email is genuinely from us.
+Learn more about how avoid phishing scams
+On this page
+Why do we have required updates?
+How do I update Proton VPN?
+Proton VPN apps
+How to use Proton VPN on a Vega OS Fire TV Stick
+How to install Proton VPN on Arch Linux
+How to use the Proton VPN Linux GUI app
+How to use Shortcuts with Proton VPN for iOS
+How to install macOS network extensions
+Didn’t find what you were looking for?
+Get help
+General contactcontact@proton.me
+Media contactmedia@proton.me
+Legal contactlegal@proton.me
+Partnerships contactpartners@proton.me
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+(new window)
+Proton AG Route de la Galaise 32
+1228 Plan-les-Ouates
+Geneva, Switzerland
+Features Free VPN
+VPN servers
+VPN for streaming
+Netflix VPN
+Secure Core VPN
+VPN for Business(new window)
+Getting started
+Features
+Free VPN
+VPN servers
+VPN for streaming
+Netflix VPN
+Secure Core VPN
+VPN for Business(new window)
+Getting started
+Platforms Download VPN
+VPN for Windows
+VPN for macOS
+VPN for Android
+VPN for iOS
+VPN for Linux
+VPN for Chrome
+VPN for Firefox
+VPN for Chromebook
+VPN for Android TV
+VPN for Apple TV
+Amazon Fire TV
+Platforms
+Download VPN
+VPN for Windows
+VPN for macOS
+VPN for Android
+VPN for iOS
+VPN for Linux
+VPN for Chrome
+VPN for Firefox
+VPN for Chromebook
+VPN for Android TV
+VPN for Apple TV
+Amazon Fire TV
+Company About us
+Proton Foundation(new window)
+Blog
+Careers(new window) We’re hiring
+Threat model
+Open source
+Company
+About us
+Proton Foundation(new window)
+Blog
+Careers(new window) We’re hiring
+Threat model
+Open source
+Connect Help and support
+Business sales(new window)
+Partners and affiliates(new window)
+Press and media(new window)
+Contact us
+Donate(new window)
+Live chat For customers
+Student discount(new window)
+Connect
+Help and support
+Business sales(new window)
+Partners and affiliates(new window)
+Press and media(new window)
+Contact us
+Donate(new window)
+Live chat For customers
+Student discount(new window)
+English
+System status(new window)
+Report abuse
+Report a problem
+Report a security issue(new window)
+Request a feature(new window)
+English
+Privacy Policy
+Terms & conditions(new window)
+Transparency report
+© 2026 Proton AG. All rights reserved.
