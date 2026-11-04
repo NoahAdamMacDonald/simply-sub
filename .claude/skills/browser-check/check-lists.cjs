@@ -415,29 +415,37 @@ async function plantLists(page) {
         async () => (await page.locator('ss-lists-overview-page ss-budget-bar').count()) === 0,
       );
 
-      // The Tab order: Custom subscriptions and New list, then each card's name, 🗑 and View, then the tile.
+      // The Tab order: Custom subscriptions and New list, the totals' breakdowns (M10.30), then each card's name, 🗑,
+      // its breakdowns when it has totals, and View, then the tile.
       await page.locator('ss-lists-overview-page h1').click();
       const stops = [];
-      for (let i = 0; i < 9; i++) {
+      for (let i = 0; i < 13; i++) {
         await page.keyboard.press('Tab');
         // A link's line ends in a colon, before its URL.
         stops.push((await stop(page)).replace(/:$/, ''));
       }
       const order = stops.slice(stops.indexOf('link "Custom subscriptions"'));
+      const breakdowns = [
+        'button "Breakdown of this month"',
+        `button "Breakdown of ${new Date().getFullYear()}"`,
+      ];
+      const expected = [
+        'link "Custom subscriptions"',
+        'link "New list"',
+        ...breakdowns,
+        'link "Work Related"',
+        'button "Delete Work Related"',
+        ...breakdowns,
+        'link "View Work Related"',
+        // Family has no subscriptions, so no totals to break down.
+        'link "Family"',
+        'button "Delete Family"',
+        'link "View Family"',
+        'link "New Subscription List"',
+      ];
       check(
-        `${label}: Tab goes Custom subscriptions, New list, each card's name, 🗑 and View, then the tile`,
-        order.slice(0, 9).join(' | ') ===
-          [
-            'link "Custom subscriptions"',
-            'link "New list"',
-            'link "Work Related"',
-            'button "Delete Work Related"',
-            'link "View Work Related"',
-            'link "Family"',
-            'button "Delete Family"',
-            'link "View Family"',
-            'link "New Subscription List"',
-          ].join(' | '),
+        `${label}: Tab goes Custom subscriptions, New list, the breakdowns, each card's name, 🗑, breakdowns and View, then the tile`,
+        order.slice(0, expected.length).join(' | ') === expected.join(' | '),
         stops.join(' | '),
       );
 

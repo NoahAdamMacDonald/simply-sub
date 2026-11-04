@@ -1288,6 +1288,11 @@ The rules live in `packages/core/src/tax/`: the rates and subdivision lists sinc
     Settings forms clear it when the country changes.
 - **Amounts the user types** (a custom plan's price, a price override) are what they pay, tax included. A "plus
   tax" checkbox (`plusTax`) marks an amount copied from an ad, and tax is then added like on catalog prices.
+- **A finance account's fee is never taxed** (M11.12, the owner's choice of 2026-11-04): the CRA lists "most services
+  provided by financial institutions such as lending money or operating deposit accounts" as exempt from GST/HST, and
+  US states generally don't tax bank fees. pickPrice's context takes `taxFree` for a plan with an `account` (section
+  4.11): its prices are `taxIncluded`, so nothing is added to them, and `taxFree`, so price tags say nothing of tax.
+  resolveItem, Search's results and the optimizer's alternatives pass it.
 - **A reseller's price** can say it leaves VAT to be added everywhere (`taxExcluded`, section 4.9), and is then
   compared only in Canada and the US.
 - **Where it shows:**
@@ -1572,6 +1577,14 @@ price list, so they reuse what fits and add what doesn't:
 - **Money terms** (PROJECT-PLAN §3.1, M11.12): *interest a year* is the balance at its tiers (`applies`), before tax;
   *fee after waivers* is $0 when a waiver is met; *net cost* is the fee after waivers less interest. Interest is shown
   beside spending, never inside subscription totals.
+- **As built (M11.12):** core's `account-money.ts` (`waiverMet`, `interestAYear`) and resolveItem: a waiver the item's
+  facts meet makes its price 0, so it has no charges, as a free plan has none, and its `feeWaived` keeps the fee and
+  the waiver for its card; a price the user typed doesn't count then. While the item is active, its `interest` is the
+  balance at the tiers as they apply, or the bonus rate its facts earn, converted like a price. `listMetrics` adds it
+  up beside the totals (`interest`), and `netCostAYear` is an account's next 12 months of charges less its interest.
+  The budget totals show "$285.00 interest a year", as they show cash back, on Home, List view and the Lists page; an
+  account's card in List view shows its fee with Waived under it, which waiver, its interest and its net cost. Its fee
+  has no sales tax (section 4.8).
 - **Rates change** (M11.14): the bot reads them as it reads prices, and keeps each change with its date, so a rate
   that follows the Bank of Canada's shows how many days it took to follow its last changes.
 - **Information, not advice:** the app says so wherever it suggests a finance change.
@@ -3704,6 +3717,11 @@ None.
   streamed workbook writes and reads back, as archiver's zip and `glob()` do. glob 7's own wildcard matching throws with
   it (minimatch 11 matches with its own matcher, not RegExps), which only archiver-utils' `file.expand` and rimraf 2's
   wildcard fallback reach; exceljs calls neither, and the app bundles exceljs's browser file, which loads none of them.
+
+**Resolved (2026-11-04, M11.12)**
+- **Sales tax on account fees:** never added. The CRA lists operating deposit accounts among exempt financial
+  services, and US states generally don't tax bank fees, so a plan with an `account` is tax-free everywhere: no
+  "+ tax" on its price, none in its charges or totals (section 4.8).
 
 **Resolved (2026-11-03, M11.11's shape)**
 - **What an account item holds:** its balance (amount and currency) and the day it's from, and the user's facts for the

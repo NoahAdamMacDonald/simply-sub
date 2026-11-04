@@ -609,7 +609,8 @@ Standard) and Family (Crave Premium), both due this month, in both themes at bot
 same as Home's, its This month and This year bars the same amounts as Home's Budgets card, on the right above Types at
 1280 px and above the cards at 360 px, and a warning's ✕ by keyboard hiding it there and on Home, with axe and no
 horizontal scroll. Since M10.23 `check-lists.cjs` counts each card's bars (`li.card ss-budget-bar`), apart from every
-list's together in `.money`.
+list's together in `.money`. Since M11.12 its Tab order includes the totals' breakdown buttons (M10.30), every list's
+and each card's that has totals: 13 stops, as an empty list's card has none.
 
 `check-m10-join-link.cjs` (M10.14 and M10.15, the feedback after M10, part 2: sync's one-time join link and joining on
 the first visit) needs wrangler dev answering the API, with its user database migrated (`npm -w apps/api run
@@ -659,6 +660,15 @@ the year) and Student with Space. Saved with the list, List view's Export starts
 checkbox that Space ticks with the menu still open: the CSV has no balance before, and ends with it after. Axe on the
 dialog and the open menu, screenshots and no horizontal scroll. Wait for focus on the dialog's title before tabbing:
 keys pressed while it opens land elsewhere.
+
+`check-m11-interest.cjs` (M11.12, interest and net cost) checks a list of a fixture bank's accounts on `ng serve` for
+a Canadian in Ontario, in both themes at both widths, keyboard only. The CA file is answered with the bank added (its
+$17.95 chequing pays 0.50% and a $4,000 balance waives its fee; its free savings pay 2%, and 2.50% over $10,000), and
+Banking is written to IndexedDB: the chequing with $2,000 (billed on the 1st of each month), Joint with $5,000 (its fee
+waived) and the savings with $12,000. Home's Budgets show "$285.00 interest a year", read "not counted in the totals",
+beside $17.95 this month (an account's fee has no sales tax); Banking's card (Tab, Enter) leads to List view, whose
+totals have the same line and whose cards say each account's interest, Joint's fee waived (Waived under its price) and
+the chequing's net cost; the Lists page has the line once. Axe on each page, screenshots and no horizontal scroll.
 
 `check-m11-outside.cjs` (M11.2, outside ratings and owners) checks Search's cards on `ng serve` for a Canadian in
 Alberta (base URL ending in `/`, after `npm run data:build` on the branch), in both themes at both widths: Bitdefender's
