@@ -155,11 +155,14 @@ perks:
 # Identity Protection in the US): all five products in Canada, the US and the UK; Premium and Total Security in
 # Australia, New Zealand, Germany and Italy; Total Security and Antivirus Plus in France; Total Security in Spain; Total
 # Security, Antivirus Plus, Premium VPN and Digital Identity Protection in the Netherlands; Digital Identity Protection
-# in New Zealand and Germany. Bitdefender's site then rate-limited the reader twice (Cloudflare's error 1015), so these
-# 18 stay unread: Antivirus Plus, Premium VPN and Digital Identity Protection in Australia and Italy, Antivirus Plus and
-# Premium VPN in New Zealand and Germany, Premium Security, Premium VPN and Digital Identity Protection in France,
-# Premium Security in the Netherlands, and Premium Security, Antivirus Plus, Premium VPN and Digital Identity Protection
-# in Spain.
+# in New Zealand and Germany. Bitdefender's site then rate-limited the reader twice (Cloudflare's error 1015), so 18
+# pages waited until 2026-11-04, read then with Mullvad Browser a minute apart: Antivirus Plus, Premium VPN and Digital
+# Identity Protection in Australia and Italy, Antivirus Plus and Premium VPN in New Zealand and Germany, Premium
+# Security, Premium VPN and Digital Identity Protection in France, Premium Security in the Netherlands, and Premium
+# Security, Antivirus Plus, Premium VPN and Digital Identity Protection in Spain. None sells monthly billing at a regular
+# price: Premium VPN's "Per month" is "billed yearly", and Digital Identity Protection's 1-month plan in Australia,
+# Italy, France and Spain states only its first month ("Billed A$12.99 for the first month", "Addebito €6.99 per il
+# primo mese"), as in Canada. Every yearly price stored for them is on its page.
 
 # SecurePass and the VPN in depth (M11.9, the owner's item 3), read 2026-11-03 in its support centre:
 # - SecurePass, every plan with it. Its FAQ (/consumer/support/answer/107798/): "To add an item like an account, credit
@@ -2615,12 +2618,19 @@ plans:
 # Every agreement a user accepts (the owner's rule, 2026-11-03), read that day: its subscription agreement is also its
 # apps' licence and includes IPVanish's acceptable use policy for the VPN, all on one page (so its link is now
 # "Licence and terms of service"). Ultimate Security Plus's identity theft protection is licensed under IdentityForce's
-# terms (bitdefender.identityforce.com/terms-of-use, a TransUnion brand), which blocked this machine ("Sorry, you have
-# been blocked"): unread. The checkout's agreement line wasn't read: bitdefender.com rate-limits this machine.
+# terms (bitdefender.identityforce.com/terms-of-use, Sontiq's, a TransUnion brand), which blocked this machine on
+# 2026-11-03 and read in Edge on 2026-11-04 (revised December 1, 2021): four of its clauses are worse than Bitdefender's
+# own, rated for the four Ultimate Security Plus plans (closing an account, rights over what you post, ending the
+# service, what sign-up needs); its arbitration, terms changes and refunds are no worse. Its Privacy Notice, which the
+# terms include, wasn't found: the terms page's link names no address, and /privacy-policy on its site and on
+# identityforce.com answer "page not found". The checkout's agreement line wasn't read: bitdefender.com rate-limits this
+# machine.
 policies:
   links:
     - name: Licence and terms of service
       url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+    - name: 'IdentityForce terms of use (identity theft protection)'
+      url: https://bitdefender.identityforce.com/terms-of-use
     - name: 'Certifications'
       url: https://www.bitdefender.com/en-ca/business/certifications
     - name: 'Bug bounty'
@@ -2932,10 +2942,6 @@ policies:
           bitdefender.premium-security-family,
           bitdefender.ultimate-security-individual,
           bitdefender.ultimate-security-family,
-          bitdefender.ultimate-security-plus-standard-individual,
-          bitdefender.ultimate-security-plus-extended-individual,
-          bitdefender.ultimate-security-plus-standard-family,
-          bitdefender.ultimate-security-plus-extended-family,
           bitdefender.premium-vpn,
           bitdefender.antivirus-free,
         ]
@@ -2967,3 +2973,61 @@ policies:
         - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
           quote: 'xxv. consuming more than one (1) terabyte (TB) of data in any single month while using IPVanish’s services.'
       lastVerified: 2026-11-03
+    - topic: legal.account-closure
+      plans:
+        [
+          bitdefender.ultimate-security-plus-standard-individual,
+          bitdefender.ultimate-security-plus-extended-individual,
+          bitdefender.ultimate-security-plus-standard-family,
+          bitdefender.ultimate-security-plus-extended-family,
+        ]
+      tier: bad
+      reason: 'IdentityForce, whose terms its identity theft protection runs on, can close your account for any reason without notice, and IPVanish alone decides whether you broke the VPN’s rules.'
+      sources:
+        - url: https://bitdefender.identityforce.com/terms-of-use
+          quote: 'We also reserve the more general and broad right to terminate your account or suspend or otherwise deny you access to it or its benefits – all in our sole discretion, for any reason, and without advance notice or liability.'
+        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+          quote: "IPVanish has absolute discretion in determining whether a Customer's activities or use of IPVanish's services are in violation of this Policy."
+      lastVerified: 2026-11-04
+    - topic: legal.content-rights
+      plans:
+        [
+          bitdefender.ultimate-security-plus-standard-individual,
+          bitdefender.ultimate-security-plus-extended-individual,
+          bitdefender.ultimate-security-plus-standard-family,
+          bitdefender.ultimate-security-plus-extended-family,
+        ]
+      tier: bad
+      reason: 'Anything you post on IdentityForce’s site, which runs its identity theft protection, comes with a licence forever that lets IdentityForce sell or pass on what you posted.'
+      sources:
+        - url: https://bitdefender.identityforce.com/terms-of-use
+          quote: 'the non-exclusive, unrestricted, unconditional, unlimited, worldwide, irrevocable, perpetual, and cost-free right and license to use, copy, record, distribute, reproduce, disclose, sell, re-sell, sublicense (through multiple levels)'
+      lastVerified: 2026-11-04
+    - topic: legal.service-changes
+      plans:
+        [
+          bitdefender.ultimate-security-plus-standard-individual,
+          bitdefender.ultimate-security-plus-extended-individual,
+          bitdefender.ultimate-security-plus-standard-family,
+          bitdefender.ultimate-security-plus-extended-family,
+        ]
+      tier: poor
+      reason: 'IdentityForce, which runs its identity theft protection, can stop its service at any time without notice and says it owes you nothing for it.'
+      sources:
+        - url: https://bitdefender.identityforce.com/terms-of-use
+          quote: 'Sontiq reserves the right to discontinue the Site, in whole or in part, or, except as may be expressly set forth in any Additional Terms, suspend or terminate your access to it, in whole or in part, including any user accounts or registrations, at any time, without notice, for any reason and without any obligation to you or any third party.'
+      lastVerified: 2026-11-04
+    - topic: privacy.sign-up-data
+      plans:
+        [
+          bitdefender.ultimate-security-plus-standard-individual,
+          bitdefender.ultimate-security-plus-extended-individual,
+          bitdefender.ultimate-security-plus-standard-family,
+          bitdefender.ultimate-security-plus-extended-family,
+        ]
+      tier: bad
+      reason: 'Its identity theft protection needs your Social Security number to watch for misuse, and IdentityForce may also ask for your driver’s licence number and date of birth.'
+      sources:
+        - url: https://bitdefender.identityforce.com/terms-of-use
+          quote: 'you must provide us with the full and accurate personal information that we require for the applicable services, which may include without limitation, your name, address, telephone number, email address, date of birth, driver’s license number, Social Security Number/Social Insurance Number'
+      lastVerified: 2026-11-04
