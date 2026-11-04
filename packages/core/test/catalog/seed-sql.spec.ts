@@ -174,6 +174,15 @@ describe('buildSeedSql, without what D1 holds', () => {
         catalog: { version: 'abc1234', seedFormat: 0, waiting: 0, written: 0, currencies: [] },
       }),
     ).toEqual(full);
+    // Shapes 3 and 4's tables are gone (migrations 0008 and 0009), so their formats can't be compared row by row.
+    for (const old of [3, 4]) {
+      expect(
+        linesOf(snapshotOf(), {
+          ...current,
+          catalog: { version: 'abc1234', seedFormat: old, waiting: 0, written: 0, currencies: [] },
+        }),
+      ).toEqual(full);
+    }
   });
 
   it('fills an empty D1 with inserts only, which a budget can spread (M11.8)', () => {
