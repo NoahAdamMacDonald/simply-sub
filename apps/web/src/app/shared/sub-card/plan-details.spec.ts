@@ -83,6 +83,13 @@ describe('PlanDetails', () => {
     element().querySelector(selector)?.textContent?.replace(/\s+/g, ' ').trim();
   /** The group whose heading is `heading`, as groups() gives it. */
   const group = (heading: string) => groups().find((shown) => shown.startsWith(`${heading} `));
+  /** Each Ways to pay line's chips by name: a chip of glyphs by its image's name, one with none by its words. */
+  const payLines = () =>
+    Array.from(element().querySelectorAll('.pay-chips:not(.repo)')).map((line) =>
+      Array.from(line.querySelectorAll('.pay-chip')).map(
+        (chip) => chip.getAttribute('aria-label') ?? chip.textContent?.trim(),
+      ),
+    );
 
   it('lists the features with the user’s ranks, the add-ons and the bundles with their savings', async () => {
     await show('netflix.standard', { 'ad-free': 'needed' });
@@ -374,9 +381,10 @@ describe('PlanDetails', () => {
       await show('mullvad.vpn');
 
       // Alberta: Canada's own page over the one for everywhere, then the currencies cash takes (M11.5).
-      // No page names the networks its card takes there (the owner's wording, 2026-11-03).
+      // No page names the networks its card takes there (the owner's wording, 2026-11-03): its chip says so.
+      expect(payLines()).toEqual([['Card (networks not verified)', 'Gift card']]);
       expect(group('Ways to pay')).toBe(
-        'Ways to pay Card (networks not verified) and Gift card , according to its Vouchers in Canada ' +
+        'Ways to pay networks not verified according to its Vouchers in Canada ' +
           'Cash in EUR, USD or CAD , according to its Terms of service',
       );
       const link = element().querySelector<HTMLAnchorElement>('.payment a');
@@ -397,49 +405,85 @@ describe('PlanDetails', () => {
       saved.set({ ...alberta, country: 'US', subdivision: undefined, currency: 'USD' });
       await show('mullvad.vpn');
 
-      expect(group('Ways to pay')).toBe(
-        'Ways to pay Card (networks not verified), PayPal, Cash and Cryptocurrency , according to its Payment methods ' +
-          'Cash in EUR, USD or CAD , according to its Terms of service',
-      );
+      expect(payLines()).toEqual([
+        ['Card (networks not verified)', 'PayPal', 'Cash', 'Cryptocurrency'],
+      ]);
     });
 
-    it('says Card alone where a page names the networks it takes', async () => {
+    it('shows each way to pay as a chip of its glyphs, its name the tooltip, reached by Tab', async () => {
+      await show('mullvad.vpn');
+      const chips = element().querySelectorAll<HTMLElement>('.pay-chips .pay-chip');
+
+      // A Material Symbol, hidden from screen readers, which read the chip's name instead.
+      const gift = chips[1];
+      expect([gift?.getAttribute('role'), gift?.tabIndex]).toEqual(['img', 0]);
+      expect(gift?.querySelector('mat-icon')?.textContent?.trim()).toBe('card_giftcard');
+      expect(gift?.querySelector('mat-icon')?.getAttribute('aria-hidden')).toBe('true');
+      const tooltip = await TestbedHarnessEnvironment.loader(fixture).getHarness(
+        MatTooltipHarness.with({ selector: '.pay-chip:nth-of-type(2)' }),
+      );
+      await tooltip.show();
+      expect(await tooltip.getTooltipText()).toBe('Gift card');
+    });
+
+    it('shows the networks a page names by their marks, and one with none by its name', async () => {
       const mullvad = providerOf('mullvad.vpn');
       const networks = {
-        networks: ['visa' as const, 'mastercard' as const],
+        networks: ['visa' as const, 'interac' as const, 'mastercard' as const],
         url: 'https://mullvad.net/en/help/vouchers-ca',
-        quotes: ['Visa', 'Mastercard'],
+        quotes: ['Visa', 'Interac', 'Mastercard'],
       };
       await show('mullvad.vpn', {}, { ...mullvad, acceptedNetworks: { CA: networks } });
+      const card = element().querySelector('.pay-chip');
 
-      expect(group('Ways to pay')).toMatch(
-        /^Ways to pay Card and Gift card , according to its Vouchers in Canada /,
-      );
+      expect(payLines()).toEqual([['Card: Visa, Interac or Mastercard', 'Gift card']]);
+      // The card's symbol, then Visa's and Mastercard's marks (Simple Icons, in the text's colour), then Interac,
+      // which has none, by name.
+      expect(card?.querySelectorAll('mat-icon')).toHaveLength(1);
+      expect(
+        Array.from(card?.querySelectorAll('svg') ?? []).map((svg) => [
+          svg.getAttribute('aria-hidden'),
+          svg.querySelector('path')?.getAttribute('fill'),
+        ]),
+      ).toEqual([
+        ['true', 'currentColor'],
+        ['true', 'currentColor'],
+      ]);
+      expect(card?.querySelector(':scope > span')?.textContent).toBe('Interac');
     });
 
     it('lists each page for the same place, a line each (the owner’s tasks, 2026-11-03)', async () => {
       const mullvad = providerOf('mullvad.vpn');
-      const klarna = {
-        methods: ['klarna' as const],
+      const wallets = {
+        methods: ['klarna' as const, 'satispay' as const],
         regions: ['CA'],
-        page: 'Klarna in Canada',
-        url: 'https://mullvad.net/en/help/klarna-ca',
-        quotes: ['Klarna'],
+        page: 'Wallets in Canada',
+        url: 'https://mullvad.net/en/help/wallets-ca',
+        quotes: ['Klarna', 'Satispay'],
       };
       await show(
         'mullvad.vpn',
         {},
         {
           ...mullvad,
-          paymentMethods: [...(mullvad.paymentMethods ?? []), klarna],
+          paymentMethods: [...(mullvad.paymentMethods ?? []), wallets],
         },
       );
 
+      expect(payLines()).toEqual([
+        ['Card (networks not verified)', 'Gift card'],
+        ['Klarna', 'Satispay'],
+      ]);
+      // Satispay has no glyph: its chip shows its name, with no tooltip, and isn't a stop for Tab.
       expect(group('Ways to pay')).toBe(
-        'Ways to pay Card (networks not verified) and Gift card , according to its Vouchers in Canada ' +
-          'Klarna , according to its Klarna in Canada ' +
+        'Ways to pay networks not verified according to its Vouchers in Canada ' +
+          'Satispay according to its Wallets in Canada ' +
           'Cash in EUR, USD or CAD , according to its Terms of service',
       );
+      const satispay = Array.from(element().querySelectorAll<HTMLElement>('.pay-chip')).find(
+        (chip) => chip.textContent?.trim() === 'Satispay',
+      );
+      expect([satispay?.getAttribute('role'), satispay?.tabIndex]).toEqual([null, -1]);
     });
 
     it('cites the page naming the currencies, linked to its words', async () => {
@@ -508,6 +552,29 @@ describe('PlanDetails', () => {
         'https://mullvad.net/en/why-mullvad-vpn#:~:text=Code%20is%20open%20source',
         'Why Mullvad VPN?, opens in a new tab',
       ]);
+      // Its host's chip: GitHub's mark, named GitHub.
+      const host = element().querySelector<HTMLElement>('.repo .pay-chip');
+      expect([
+        host?.getAttribute('aria-label'),
+        host?.getAttribute('role'),
+        host?.tabIndex,
+      ]).toEqual(['GitHub', 'img', 0]);
+      expect(host?.querySelector('svg path')?.getAttribute('fill')).toBe('currentColor');
+    });
+
+    it('names a host it has no mark for, with the code glyph', async () => {
+      const mullvad = providerOf('mullvad.vpn');
+      const sourceRepo = mullvad.sourceRepo && {
+        ...mullvad.sourceRepo,
+        url: 'https://git.example.org/mullvad/app',
+      };
+      await show('mullvad.vpn', {}, { ...mullvad, sourceRepo });
+      const host = element().querySelector<HTMLElement>('.repo .pay-chip');
+
+      expect([
+        host?.getAttribute('aria-label'),
+        host?.querySelector('mat-icon')?.textContent,
+      ]).toEqual(['git.example.org', 'code']);
     });
 
     it('has neither for a provider with none', async () => {
