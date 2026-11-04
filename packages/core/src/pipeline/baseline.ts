@@ -9,11 +9,12 @@ import { bareHost, parseWebAddress } from './web-address';
 
 // Baselines (BLUEPRINT §6.4, §6.5, M3.6): each page the catalog cites, as its text when its facts were read, in
 // data/baselines/, so the nightly bot can tell a page that changed from one that didn't without asking a model. A
-// baseline says how the bot reads the page: a plain fetch, when the HTML as served has what the page shows, or a
-// browser, when its scripts fill it in. A change is reviewed in a pull request that also updates the baseline, so
+// baseline says how the bot reads the page: a plain fetch, when the HTML as served has what the page shows, a
+// browser, when its scripts fill it in, or the Internet Archive's newest copy, for a site that turns bots away
+// (archive.ts, M11.15). A change is reviewed in a pull request that also updates the baseline, so
 // the baseline is always the text the catalog's facts were last checked against.
 
-export type BaselineMethod = 'fetch' | 'browser';
+export type BaselineMethod = 'fetch' | 'browser' | 'archive';
 
 /** What a page's facts are: prices and what they rest on (checked daily), or its policies (checked weekly). */
 export type CitedType = 'pricing' | 'policies';
@@ -74,7 +75,7 @@ export function readBaseline(text: string): Baseline | undefined {
   const method = fields['method'];
   if (
     !fields['url'] ||
-    (method !== 'fetch' && method !== 'browser') ||
+    (method !== 'fetch' && method !== 'browser' && method !== 'archive') ||
     !isoDateSchema.safeParse(fields['saved']).success
   )
     return undefined;
