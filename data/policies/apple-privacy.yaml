@@ -1,0 +1,117 @@
+# A shared policy document (BLUEPRINT §4.10, M11.1): Apple's Privacy Policy, which covers every Apple service an
+# Apple Account uses (Apple TV, and Apple Music, Apple Arcade and the rest when they join the catalog), rated once here
+# with Apple Support's article on creating an Apple Account. Each provider names it in its policies' shared and adds
+# ratings from its own privacy notice (Apple TV's: "Apple TV & Privacy").
+# Read 2026-11-04 (M11.15), from Canada. Updated July 30, 2025.
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: apple-privacy
+name: Apple's Privacy Policy
+links:
+  - name: 'Privacy policy'
+    url: https://www.apple.com/legal/privacy/en-ww/
+  - name: 'Create an Apple Account'
+    url: https://support.apple.com/en-ca/108647
+ratings:
+  - topic: privacy.data-collection
+    tier: poor
+    reason: 'It records how you use its services, like what you search for and browse, and uses it to improve them. You can limit that only by asking it to restrict what it does with your data.'
+    sources:
+      - url: https://www.apple.com/legal/privacy/en-ww/
+        quote: 'Usage Data. Data about your activity on and use of our offerings, such as app launches within our services, including browsing history; search history; product interaction; crash data, performance and other diagnostic data; and other usage data'
+      - url: https://www.apple.com/legal/privacy/en-ww/
+        quote: 'Apple collects personal data necessary to power our services, which may include personal data collected to improve our offerings, for internal purposes such as auditing or data analysis, or for troubleshooting.'
+      - url: https://www.apple.com/legal/privacy/en-ww/
+        quote: 'At Apple, we respect your ability to know, access, correct, transfer, restrict the processing of, and delete your personal data.'
+    action:
+      name: 'Apple Data and Privacy'
+      url: https://privacy.apple.com
+    lastVerified: 2026-11-04
+  - topic: privacy.data-sharing
+    tier: good
+    reason: "It shares your information with its own companies and the companies that run its services for it, but doesn't sell it or share it for other companies' marketing."
+    sources:
+      - url: https://www.apple.com/legal/privacy/en-ww/
+        quote: 'Further, Apple does not share personal data with third parties for their own marketing purposes.'
+      - url: https://www.apple.com/legal/privacy/en-ww/
+        quote: 'Apple does not sell your personal data including as “sale” is defined in Nevada and California.'
+    lastVerified: 2026-11-04
+  - topic: privacy.ads-tracking
+    tier: neutral
+    reason: 'Its own ads in its apps can be picked from what you do there, unless you turn off Personalized Ads, once for your whole account. It says its ads don’t track you across other companies’ apps.'
+    sources:
+      - url: https://www.apple.com/legal/privacy/en-ww/
+        quote: 'Apple’s advertising platform does not track you'
+      - url: https://www.apple.com/legal/privacy/en-ww/
+        quote: 'you can choose to disable Personalized Ads, which will opt your Apple Account out of receiving such ads regardless of what device you are using'
+    action:
+      name: 'Turn off Personalized Ads'
+      url: https://support.apple.com/105131
+    lastVerified: 2026-11-04
+  - topic: privacy.ai-training
+    tier: great
+    reason: "It doesn't train its AI models on your private information. They learn from public websites."
+    sources:
+      - url: https://www.apple.com/legal/privacy/en-ww/
+        quote: 'Your private personal data is not used to train our foundational AI models.'
+    lastVerified: 2026-11-04
+  - topic: privacy.data-retention
+    tier: neutral
+    reason: 'It keeps your information as long as it needs it, and leaves the periods to each service’s own privacy notice.'
+    sources:
+      - url: https://www.apple.com/legal/privacy/en-ww/
+        quote: 'Apple retains personal data only for so long as necessary to fulfill the purposes for which it was collected'
+    lastVerified: 2026-11-04
+  - topic: privacy.data-deletion
+    tier: neutral
+    reason: "You can ask it to delete your information on its Data and Privacy page, but it doesn't say how long that takes."
+    sources:
+      - url: https://www.apple.com/legal/privacy/en-ww/
+        quote: 'At Apple, we respect your ability to know, access, correct, transfer, restrict the processing of, and delete your personal data.'
+    action:
+      name: 'Apple Data and Privacy'
+      url: https://privacy.apple.com
+    lastVerified: 2026-11-04
+  - topic: privacy.data-portability
+    tier: neutral
+    reason: "You can get a copy of your information yourself on its Data and Privacy page, but it doesn't say in what format."
+    sources:
+      - url: https://www.apple.com/legal/privacy/en-ww/
+        quote: 'At Apple, we respect your ability to know, access, correct, transfer, restrict the processing of, and delete your personal data.'
+    action:
+      name: 'Get a copy of your data'
+      url: https://privacy.apple.com
+    lastVerified: 2026-11-04
+  - topic: privacy.government-requests
+    tier: poor
+    reason: 'Besides legal requests, it may hand over your information whenever it decides national security, law enforcement or the public interest makes that necessary.'
+    sources:
+      - url: https://www.apple.com/legal/privacy/en-ww/
+        quote: 'We may also disclose information about you if we determine that for purposes of national security, law enforcement, or other issues of public importance, disclosure is necessary or appropriate.'
+    lastVerified: 2026-11-04
+  - topic: privacy.data-location
+    tier: neutral
+    reason: "Your information is mostly kept in the US. What comes from the EU, the UK and Switzerland moves under the EU's standard contracts."
+    sources:
+      - url: https://www.apple.com/legal/privacy/en-ww/
+        quote: 'Personal data collected by Apple or an Apple-affiliated company worldwide is generally stored by Apple Inc. in the United States.'
+      - url: https://www.apple.com/legal/privacy/en-ww/
+        quote: 'is governed by Standard Contractual Clauses'
+    lastVerified: 2026-11-04
+  - topic: privacy.sign-up-data
+    tier: poor
+    reason: 'An Apple Account needs your name, birthday and email address, and it may ask for your phone number.'
+    sources:
+      - url: https://support.apple.com/en-ca/108647
+        quote: 'Select your birthday and enter your name.'
+      - url: https://support.apple.com/en-ca/108647
+        quote: 'As you use your new device, you might be asked to enter your phone number'
+    lastVerified: 2026-11-04
+  - topic: privacy.children
+    tier: neutral
+    reason: "A child's account needs a parent's verified consent, and it deletes a child's information collected without it. Its policy says nothing about ads for minors."
+    sources:
+      - url: https://www.apple.com/legal/privacy/en-ww/
+        quote: 'the parent must provide Apple with a verifiable parental consent'
+      - url: https://www.apple.com/legal/privacy/en-ww/
+        quote: 'If we learn that a child’s personal data was collected without appropriate authorization, it will be deleted as soon as possible.'
+    lastVerified: 2026-11-04

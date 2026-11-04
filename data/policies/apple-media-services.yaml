@@ -1,0 +1,144 @@
+# A shared policy document (BLUEPRINT §4.10, M11.1): Apple's Media Services Terms and Conditions, which cover every
+# service Apple sells through an Apple Account (Apple TV, and Apple Music, Apple Arcade, Apple Fitness+ and the App
+# Store's subscriptions when they join the catalog), rated once here with Apple Support's articles on cancelling,
+# refunds and its security programmes. Each provider names it in its policies' shared and adds ratings from its own
+# notices.
+# Read 2026-11-04 (M11.15) from Canada: each country's version (apple.com/legal/internet-services/itunes/<country>/
+# terms.html), Canada's and the US's alike, and Ireland's for the EU's and the UK's own rules (the UK's says the same) (14 days to
+# withdraw, changes communicated to you, your own courts).
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: apple-media-services
+name: Apple Media Services Terms and Conditions
+links:
+  - name: 'Media Services Terms and Conditions'
+    url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+  - name: 'Media Services Terms and Conditions (Ireland)'
+    url: https://www.apple.com/legal/internet-services/itunes/ie/terms.html
+  - name: 'Request a refund'
+    url: https://support.apple.com/en-ca/118223
+  - name: 'Apple Security Bounty'
+    url: https://security.apple.com/bounty/
+ratings:
+  - topic: billing.cancellation
+    tier: neutral
+    reason: 'You cancel online in your account settings, but at least 24 hours before it renews: it charges you up to a day ahead.'
+    sources:
+      - url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+        quote: 'Subscriptions automatically renew until cancelled in the Manage Subscriptions section of your account settings.'
+      - url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+        quote: 'You will be charged no more than twenty-four (24) hours prior to the start of the latest Subscription period.'
+    action:
+      name: 'Cancel a subscription'
+      url: https://support.apple.com/en-ca/118428
+    lastVerified: 2026-11-04
+  - topic: billing.refunds
+    tier: neutral
+    reason: 'Its terms say every purchase is final, though Apple Support says some purchases may be refunded if you ask. In the EU and the UK you can withdraw within 14 days, but only from your first subscription.'
+    sources:
+      - url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+        quote: 'All Transactions are final.'
+      - url: https://support.apple.com/en-ca/118223
+        quote: 'Some purchases from the App Store, iTunes Store, Apple Books, or other Apple services might be eligible for a refund.'
+      - url: https://www.apple.com/legal/internet-services/itunes/ie/terms.html
+        quote: 'Subscription services can only be cancelled following the initial subscription.'
+    lastVerified: 2026-11-04
+  - topic: billing.price-changes
+    tier: neutral
+    reason: "It tells you when a subscription's price goes up, and asks for your consent where the law requires, but doesn't say how far ahead."
+    sources:
+      - url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+        quote: 'You will be notified if the price of a Subscription increases and, if required, your consent will be required to continue.'
+    lastVerified: 2026-11-04
+  - topic: billing.free-trials
+    tier: poor
+    reason: 'A free trial turns into a paid subscription unless you cancel at least 24 hours before it ends, on the payment method in your account, and its terms name no reminder.'
+    sources:
+      - url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+        quote: 'If you decide to unsubscribe from a Subscription before we start charging your payment method, cancel the Subscription at least twenty-four (24) hours before the free trial ends.'
+    lastVerified: 2026-11-04
+  - topic: billing.renewal-notice
+    status: not-stated
+    reason: 'Its terms say subscriptions renew on their own until you cancel, but not that it reminds you first.'
+    pages: [https://www.apple.com/legal/internet-services/itunes/ca/terms.html]
+    lastVerified: 2026-11-04
+  - topic: billing.fees
+    tier: great
+    reason: 'It charges the price and any taxes, and its terms name no other fees.'
+    sources:
+      - url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+        quote: 'Apple will charge your selected payment method for any paid Transactions, including any applicable taxes.'
+    lastVerified: 2026-11-04
+  - topic: legal.disputes
+    tier: good
+    reason: 'Disputes go to the courts of Santa Clara County, California, under California law, with no arbitration.'
+    sources:
+      - url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+        quote: 'You and Apple agree to submit to the personal and exclusive jurisdiction of the courts located within the county of Santa Clara, California, to resolve any dispute or claim arising from this Agreement.'
+    lastVerified: 2026-11-04
+  - topic: legal.disputes
+    regions: [GB, IE, DE, FR, NL, ES, IT]
+    tier: great
+    reason: 'In the EU and the UK, disputes go to the courts where you live, under its law, and it names no arbitration or class action ban.'
+    sources:
+      - url: https://www.apple.com/legal/internet-services/itunes/ie/terms.html
+        quote: 'the governing law and forum shall be the laws and courts of your usual place of residence'
+    lastVerified: 2026-11-04
+  - topic: legal.terms-changes
+    tier: bad
+    reason: 'It can change its terms at any time, and the changes take effect at once: using its services means you accept them.'
+    sources:
+      - url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+        quote: 'Such modifications and additional terms and conditions will be effective immediately and incorporated into this Agreement. Your continued use of the Services will be deemed acceptance thereof.'
+    lastVerified: 2026-11-04
+  - topic: legal.terms-changes
+    regions: [GB, IE, DE, FR, NL, ES, IT]
+    tier: neutral
+    reason: "In the EU and the UK, it tells you about changes and asks you to accept them, but doesn't say how far ahead. If you refuse, it can end your agreement."
+    sources:
+      - url: https://www.apple.com/legal/internet-services/itunes/ie/terms.html
+        quote: 'Such modifications and additional terms and conditions will be communicated to you and if accepted, will be effective immediately and will be incorporated into this Agreement.'
+    lastVerified: 2026-11-04
+  - topic: legal.account-closure
+    tier: poor
+    reason: 'It can close your account if it only suspects you broke its terms, without telling you first, and you still owe what you were charged.'
+    sources:
+      - url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+        quote: 'If you fail, or Apple suspects that you have failed, to comply with any of the provisions of this Agreement, Apple may, without notice to you: (i) terminate this Agreement and/or your Apple Account, and you will remain liable for all amounts due'
+    lastVerified: 2026-11-04
+  - topic: legal.service-changes
+    tier: poor
+    reason: 'It can change or stop any of its services or what they offer at any time, even without telling you, and says it owes you nothing when it does.'
+    sources:
+      - url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+        quote: 'Apple further reserves the right to modify, suspend, or discontinue the Services (or any part or Content thereof) at any time with or without notice to you, and Apple will not be liable to you or to any third party should it exercise such rights.'
+    lastVerified: 2026-11-04
+  - topic: legal.inactivity
+    status: not-stated
+    reason: 'Its terms don’t say it closes accounts you haven’t used.'
+    pages: [https://www.apple.com/legal/internet-services/itunes/ca/terms.html]
+    lastVerified: 2026-11-04
+  - topic: service.account-sharing
+    tier: great
+    reason: 'With Family Sharing, up to six people in your country share a subscription, each with their own Apple Account. It doesn’t ask that they live with you.'
+    sources:
+      - url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+        quote: 'Family Sharing’s Purchase Sharing feature allows eligible Content to be shared among up to six (6) members of a Family.'
+      - url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+        quote: 'All Family members must share the same Home Country.'
+    lastVerified: 2026-11-04
+  - topic: service.device-limits
+    tier: neutral
+    reason: 'Up to 10 devices can be signed in to your Apple Account at once, no more than 5 of them computers, and downloads can be limited or expire.'
+    sources:
+      - url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+        quote: 'For any Service, you can have up to ten (10) devices (but only a maximum of five (5) computers) signed in with your Apple Account at one time'
+      - url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+        quote: 'You may be limited in the amount of Content you may download, and some downloaded Content may expire after a given amount of time after downloaded or first played.'
+    lastVerified: 2026-11-04
+  - topic: security.practices
+    tier: neutral
+    reason: "It pays security researchers who find and report problems in its devices and services, but doesn't say outside experts regularly check its services or publish what they find."
+    sources:
+      - url: https://security.apple.com/bounty/
+        quote: 'The Apple Security Bounty program is designed to recognize your work helping us to protect our users.'
+    lastVerified: 2026-11-04

@@ -1,0 +1,38 @@
+url: https://security.apple.com/bounty/
+method: fetch
+saved: 2026-11-04
+
+Bounty - Apple Security Research
+Local Nav Open Menu
+Overview
+Blog
+Bounty
+Research Device
+Submit a Report
+Apple Security Bounty
+Rewards reaching
+$2 million For exploit chains similar to those used in sophisticated, real-world attacks. And with bonuses, potential maximum rewards of over $5M.
+Remote attacks
+Wireless proximity attacks
+Physical device access
+App sandbox escape
+The Apple Security Bounty program is designed to recognize your work helping us to protect our users. If you've discovered a security or privacy vulnerability that affects Apple devices, software, or services, please report it directly to us. We review all eligible research for Apple Security Bounty rewards.
+Apple Security Bounty Categories and Rewards
+Easy to report
+Submit and track your research using our online tools. Include a thorough technical description and proof of concept.
+Learn more about program guidelines
+Easy to confirm
+Target Flags are a new objective way to confirm exploitability — and qualify to receive your reward more quickly.
+Learn more about Target Flags
+Submit a report
+Apple Security Bounty Categories
+Learn more
+Terms and
+Conditions
+Learn more
+Apple Footer
+Apple Security Research Bounty
+Report
+Copyright © 2026 Apple Inc. All rights reserved.
+SupportApple Platform SecurityPrivacy PolicyLegal
+Copyright © 2026 Apple Inc. All rights reserved.
