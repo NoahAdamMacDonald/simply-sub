@@ -245,7 +245,7 @@
 - id: vimeo
   name: Vimeo
   website: https://vimeo.com
-  category: streaming
+  category: creative
   source: wikidata
   wikidata: Q156376
   sitelinks: 56
@@ -301,7 +301,7 @@
 - id: youtube-music
   name: YouTube Music
   website: https://music.youtube.com
-  category: streaming
+  category: music
   source: wikidata
   wikidata: Q28404534
   sitelinks: 43
@@ -353,7 +353,9 @@
   source: wikidata
   wikidata: Q17298682
   sitelinks: 36
-  status: queued
+  status: out-of-scope
+  date: 2026-11-04
+  note: "Google's operating system for TVs, not a subscription"
 - id: microsoft-defender-antivirus
   name: Microsoft Defender Antivirus
   website: https://www.microsoft.com/microsoft-365/microsoft-defender-for-individuals
@@ -401,7 +403,9 @@
   source: wikidata
   wikidata: Q151135
   sitelinks: 32
-  status: queued
+  status: rejected
+  date: 2026-11-04
+  note: "The owner's choice of 2026-11-04: sold only in China, outside the catalog's regions"
 - id: nordvpn
   name: NordVPN
   website: https://nordvpn.com
@@ -413,7 +417,7 @@
 - id: tidal
   name: Tidal
   website: https://www.tidal.com
-  category: streaming
+  category: music
   source: wikidata
   wikidata: Q19711013
   sitelinks: 31
@@ -457,7 +461,9 @@
   source: wikidata
   wikidata: Q117084855
   sitelinks: 27
-  status: queued
+  status: out-of-scope
+  date: 2026-11-04
+  note: 'Free to watch; its subscriptions go to individual streamers'
 - id: hamachi
   name: Hamachi
   website: https://www.vpn.net
@@ -497,7 +503,9 @@
   source: wikidata
   wikidata: Q19758675
   sitelinks: 26
-  status: queued
+  status: rejected
+  date: 2026-11-04
+  note: "The owner's choice of 2026-11-04: sold only in India, outside the catalog's regions"
 - id: kinopoisk
   name: Kinopoisk
   website: https://www.kinopoisk.ru
@@ -505,7 +513,9 @@
   source: wikidata
   wikidata: Q2389071
   sitelinks: 26
-  status: queued
+  status: rejected
+  date: 2026-11-04
+  note: "The owner's choice of 2026-11-04: sold only in Russia, outside the catalog's regions"
 - id: rutube
   name: Rutube
   website: https://rutube.ru
@@ -513,7 +523,9 @@
   source: wikidata
   wikidata: Q372827
   sitelinks: 26
-  status: queued
+  status: out-of-scope
+  date: 2026-11-04
+  note: 'A free video site'
 - id: iqiyi
   name: iQIYI
   website: https://tw.iqiyi.com
@@ -545,7 +557,9 @@
   source: wikidata
   wikidata: Q15614041
   sitelinks: 25
-  status: queued
+  status: out-of-scope
+  date: 2026-11-04
+  note: 'Closed: merged into PlayStation Plus in 2022'
 - id: pandora
   name: Pandora
   website: https://pandora.com
@@ -585,7 +599,9 @@
   source: wikidata
   wikidata: Q2557489
   sitelinks: 24
-  status: queued
+  status: out-of-scope
+  date: 2026-11-04
+  note: 'Free to watch with a UK TV licence, which is a legal fee rather than a subscription'
 - id: mediafire
   name: MediaFire
   website: https://www.mediafire.com
@@ -613,7 +629,7 @@
 - id: amazon-luna
   name: Amazon Luna
   website: https://www.amazon.com/luna
-  category: streaming
+  category: gaming
   source: wikidata
   wikidata: Q99582374
   sitelinks: 23
@@ -649,7 +665,9 @@
   source: wikidata
   wikidata: Q64487188
   sitelinks: 21
-  status: queued
+  status: out-of-scope
+  date: 2026-11-04
+  note: 'Not sold on its own: Xbox Game Pass plans include it (xbox-game-pass)'
 - id: melon
   name: Melon
   website: https://www.melon.com
@@ -673,7 +691,9 @@
   source: wikidata
   wikidata: Q28136991
   sitelinks: 20
-  status: queued
+  status: rejected
+  date: 2026-11-04
+  note: "The owner's choice of 2026-11-04: sold only in China, outside the catalog's regions"
 - id: youtube-tv
   name: YouTube TV
   website: https://tv.youtube.com
@@ -801,7 +821,9 @@
   source: wikidata
   wikidata: Q12621401
   sitelinks: 15
-  status: queued
+  status: rejected
+  date: 2026-11-04
+  note: "The owner's choice of 2026-11-04: sold only in South Korea, outside the catalog's regions"
 - id: qq-music
   name: QQ Music
   website: https://qqmusic.com
@@ -825,7 +847,9 @@
   source: wikidata
   wikidata: Q16045816
   sitelinks: 14
-  status: queued
+  status: out-of-scope
+  date: 2026-11-04
+  note: 'A free video site'
 - id: viaplay
   name: Viaplay
   website: https://www.viaplay.com
@@ -841,7 +865,9 @@
   source: wikidata
   wikidata: Q25022235
   sitelinks: 14
-  status: queued
+  status: out-of-scope
+  date: 2026-11-04
+  note: 'Free, with ads'
 - id: gnome-keyring
   name: GNOME Keyring
   website: https://wiki.gnome.org/Projects/GnomeKeyring
@@ -905,7 +931,9 @@
   source: wikidata
   wikidata: Q104146224
   sitelinks: 12
-  status: queued
+  status: out-of-scope
+  date: 2026-11-04
+  note: 'Closed: merged into Disney+ in 2024'
 - id: tubi
   name: Tubi
   website: https://tubitv.com
@@ -913,7 +941,9 @@
   source: wikidata
   wikidata: Q21189826
   sitelinks: 12
-  status: queued
+  status: out-of-scope
+  date: 2026-11-04
+  note: 'Free, with ads'
 - id: plex
   name: Plex
   website: https://plex.tv
@@ -993,7 +1023,9 @@
   source: wikidata
   wikidata: Q19744919
   sitelinks: 9
-  status: queued
+  status: rejected
+  date: 2026-11-04
+  note: "The owner's choice of 2026-11-04: sold only in Indonesia, outside the catalog's regions"
 - id: jiocinema
   name: JioCinema
   website: https://www.jiocinema.com
@@ -1001,7 +1033,9 @@
   source: wikidata
   wikidata: Q97168124
   sitelinks: 9
-  status: queued
+  status: out-of-scope
+  date: 2026-11-04
+  note: 'Closed: merged into JioHotstar in 2025'
 - id: anghami
   name: Anghami
   website: https://www.anghami.com
