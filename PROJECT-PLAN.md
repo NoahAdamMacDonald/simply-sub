@@ -2838,7 +2838,17 @@ Search card ── click "$18.99 / mo" ──► menu ┌ Add to list ───�
 - **Availability** (`availability` in core, BLUEPRINT §4.7): plans and bundles not offered in the user's region are left out. A provider with nothing offered there shows "Not offered in Canada" instead of prices, and only when the search text names it. An unknown item shows its fallback price with "No price for Canada yet" (a country's name, since English has no table of demonyms).
 - **Links:** Plan ↗ and Cancel ↗ open in a new tab (`rel="noopener"`).
 - **Status:** follows §3.3, at provider level.
-- **Expanded section:**
+- **Expanded section,** in four tabs since the owner's design of 2026-11-03 (WAI-ARIA's tabs pattern: a tab list
+  named "<plan> details", arrows, Home and End choosing a tab as they move, each panel named by its tab and
+  focusable, rendered the first time its tab is chosen; a tab with nothing to show is left out):
+  - **Overview,** what the card opens on: Highlights (the plan's features the user ranks Essential, Critical,
+    Needed or Wanted first, then the registry's headlines, five in a line), a finance account's terms, what a
+    suite includes and saves in a line, Terms and policies at a glance (the grades as a bar, decorative, and
+    counted in words, "9 Great 10 Good …", with See all, which opens Terms and focuses its tab), the owner and the
+    first four ways to pay ("and 3 more"), and when the price was checked with Report a wrong price.
+  - **Features** ("Features 30", its count hidden on a phone), **Terms** (the ratings, their grades counted with
+    their dots, and outside ratings) and **Facts** (what a suite includes, the owner, ways to pay, billing day,
+    source code and notes) hold what follows.
   - The plan's features grouped by registry parent, with the user's rank dot next to each.
   - Add-ons with prices, and bundles containing the plan with their savings (a bundle price click → F4).
   - For a suite plan (BLUEPRINT §4.4): the plans it includes, and its savings against buying them separately when there are any.
