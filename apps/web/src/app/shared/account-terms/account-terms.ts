@@ -5,6 +5,7 @@ import { quoteLink, type Account } from '@simply-sub/core';
 import {
   accountKindNames,
   conditionText,
+  followedText,
   limitLines,
   protectionText,
   ratesText,
@@ -12,8 +13,9 @@ import {
 } from './account-text';
 
 /**
- * A finance account's terms on its card (M11.10, BLUEPRINT §4.11): what it is, its posted interest, what waives its
- * fee, its limits, what protects the money (linked to the provider's words), and who may open it.
+ * A finance account's terms on its card (M11.10, BLUEPRINT §4.11): what it is, its posted interest, how soon it
+ * followed the Bank of Canada's last changes (M11.14), what waives its fee, its limits, what protects the money (linked
+ * to the provider's words), and who may open it.
  */
 @Component({
   selector: 'ss-account-terms',
@@ -30,6 +32,11 @@ export class AccountTerms {
   protected readonly rates = computed(() => {
     const { rates, currency } = this.account();
     return rates && { text: ratesText(rates, currency, this.country()), url: rates.sourceUrl };
+  });
+  /** How soon a rate that moves with the Bank of Canada's followed its last changes, as data:build worked it out. */
+  protected readonly followed = computed(() => {
+    const followed = this.account().rates?.followed;
+    return followed && followed.length > 0 ? followedText(followed) : undefined;
   });
   protected readonly waivers = computed(() => {
     const { waivers, currency } = this.account();

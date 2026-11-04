@@ -1,8 +1,9 @@
-import type { Price } from '@simply-sub/core';
+import type { BankOfCanadaChange, Price, RateTier } from '@simply-sub/core';
 import type { PriceOwner } from './types';
 
 // Changes to the catalog's YAML files (BLUEPRINT §6.4), as the pull request makes them: a price's amount and
-// lastVerified, a taxIncluded quote taken out, a reseller's listing or a region's accepted networks removed. Each finds its lines by their indentation
+// lastVerified, a taxIncluded quote taken out, a reseller's listing or a region's accepted networks removed, an
+// account's new posted rates with the old ones put in its history, and the Bank of Canada's new changes (M11.14). Each finds its lines by their indentation
 // and keys and changes only those, so comments and layout stay as people wrote them; Prettier formats every file the
 // same way (two spaces, a list's items under their key). CI's data:validate checks the result.
 
@@ -86,6 +87,107 @@ export function withoutAcceptedNetworks(text: string, region: string): string | 
   const removed = regions.length === 1 ? accepted : entry;
   lines.splice(removed.start, trimmedEnd(lines, removed) - removed.start);
   return lines.join('\n');
+}
+
+/**
+ * `text` with an account plan's posted rates replaced by `tiers` from `today` (M11.14): the rates before, with their
+ * since and bonus, go first in its history, until today; its since and lastVerified become today. Undefined when the
+ * plan's rates aren't there.
+ */
+export function withRates(
+  text: string,
+  planId: string,
+  tiers: readonly RateTier[],
+  today: string,
+): string | undefined {
+  const lines = text.split('\n');
+  const rates = ratesBlock(lines, planId);
+  if (!rates) return undefined;
+  const inner = rates.indent + 2;
+  const tiersBlock = keyBlock(lines, rates, inner, 'tiers');
+  const verified = keyBlock(lines, rates, inner, 'lastVerified');
+  const source = keyBlock(lines, rates, inner, 'sourceUrl');
+  if (!tiersBlock || !verified || !source) return undefined;
+  const bonus = keyBlock(lines, rates, inner, 'bonus');
+  const since = keyBlock(lines, rates, inner, 'since');
+  const history = keyBlock(lines, rates, inner, 'history');
+  const pad = (count: number) => ' '.repeat(count);
+  const shifted = (block: Block | undefined, from: number) =>
+    block ? lines.slice(from, trimmedEnd(lines, block)).map((line) => `${pad(4)}${line}`) : [];
+  const was = since && keyValue(lines[since.start], 'since');
+  // The rates before, as a history entry: its keys at inner + 4, its tiers' items at inner + 6.
+  const entry = [
+    `${pad(inner + 2)}- ${was ? `since: ${was}` : `until: ${today}`}`,
+    ...(was ? [`${pad(inner + 4)}until: ${today}`] : []),
+    `${pad(inner + 4)}tiers:`,
+    ...shifted(tiersBlock, tiersBlock.start + 1),
+    ...shifted(bonus, bonus?.start ?? 0),
+  ];
+  // From the bottom up, so the lines above each change stay where they are.
+  if (history) lines.splice(history.start + 1, 0, ...entry);
+  else lines.splice(trimmedEnd(lines, rates), 0, `${pad(inner)}history:`, ...entry);
+  lines[verified.start] = `${pad(inner)}lastVerified: ${today}`;
+  if (since) lines[since.start] = `${pad(inner)}since: ${today}`;
+  else lines.splice(source.start, 0, `${pad(inner)}since: ${today}`);
+  lines.splice(
+    tiersBlock.start + 1,
+    trimmedEnd(lines, tiersBlock) - tiersBlock.start - 1,
+    ...tiers.map((tier) => `${pad(inner + 2)}- { from: ${tier.from}, rate: ${tier.rate} }`),
+  );
+  return lines.join('\n');
+}
+
+/** `text` with an account plan's rates' lastVerified set. */
+export function withRatesLastVerified(
+  text: string,
+  planId: string,
+  lastVerified: string,
+): string | undefined {
+  const lines = text.split('\n');
+  const rates = ratesBlock(lines, planId);
+  const verified = rates && keyBlock(lines, rates, rates.indent + 2, 'lastVerified');
+  if (!verified) return undefined;
+  lines[verified.start] = `${' '.repeat(verified.indent)}lastVerified: ${lastVerified}`;
+  return lines.join('\n');
+}
+
+/** data/bank-of-canada.yaml's `text` with the Bank's new `changes` first, and its lastVerified set (M11.14). */
+export function withBankChanges(
+  text: string,
+  changes: readonly BankOfCanadaChange[],
+  lastVerified: string,
+): string | undefined {
+  const lines = text.split('\n');
+  const top = whole(lines);
+  const list = keyBlock(lines, top, 0, 'changes');
+  const verified = keyBlock(lines, top, 0, 'lastVerified');
+  if (!list || !verified) return undefined;
+  lines.splice(
+    list.start + 1,
+    0,
+    ...[...changes]
+      .sort((a, b) => (a.on < b.on ? 1 : -1))
+      .map((change) => `  - { on: ${change.on}, rate: ${change.rate} }`),
+  );
+  lines[verified.start] = `lastVerified: ${lastVerified}`;
+  return lines.join('\n');
+}
+
+/** The `rates` block of an account plan's `account`. */
+function ratesBlock(lines: string[], planId: string): Block | undefined {
+  const plans = keyBlock(lines, whole(lines), 0, 'plans');
+  const plan =
+    plans &&
+    items(lines, plans, 2).find((candidate) => fieldValue(lines, candidate, 'id') === planId);
+  const account = plan && keyBlock(lines, plan, plan.indent + 2, 'account');
+  return account && keyBlock(lines, account, account.indent + 2, 'rates');
+}
+
+/** A `key: value` line's value, without its quotes. */
+function keyValue(line: string, key: string): string {
+  const value = line.slice(line.indexOf(`${key}:`) + key.length + 1).trim();
+  const unquoted = /^(['"])(.*)\1$/.exec(value);
+  return unquoted ? unquoted[2] : value.replace(/\s+#.*$/, '');
 }
 
 function editPrice(

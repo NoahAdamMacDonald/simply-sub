@@ -22,6 +22,7 @@ import { onSites, providerSiteKeys, queueFileSchema } from '../pipeline/queue';
 import type { Price } from './price';
 import { providerSchema, type AddOn, type Plan, type Provider } from './provider';
 import { ratersFileSchema, ratingIsOld, ratingDay, ratingSubjects, type Rater } from './rater';
+import { bankOfCanadaFileSchema } from './bank-of-canada';
 import { redirectsFileSchema } from './redirects';
 import { isRetired } from './retired';
 import {
@@ -105,6 +106,7 @@ const queueFile = 'data/queue.yaml';
 const automationFile = 'data/automation.yaml';
 const redirectsFile = 'data/redirects.yaml';
 const ratersFile = 'data/raters.yaml';
+const bankOfCanadaFile = 'data/bank-of-canada.yaml';
 const policySetsDir = 'data/policies/';
 const staleAfterDays = 90;
 /** Terms change less often than prices, and no nightly check reads them. */
@@ -261,6 +263,21 @@ export function validateCatalog(
     );
   }
 
+  // The Bank of Canada's changes (M11.14): needed once an account's rates follow its rate or the prime rate.
+  const reportBank = reportIn(bankOfCanadaFile);
+  if (located.bankOfCanada) {
+    parseFile(bankOfCanadaFileSchema, located.bankOfCanada, reportBank);
+  } else if (
+    providers.some(({ value }) =>
+      value.plans.some((plan) => plan.account?.rates && plan.account.rates.follows !== 'none'),
+    )
+  ) {
+    reportBank(
+      [],
+      "Missing: the Bank of Canada's changes, which an account's rates follow, go here (M11.14)",
+    );
+  }
+
   const ids = indexIds(providers, bundles, unchecked, resellersRead);
   const context: CheckContext = {
     today,
@@ -356,6 +373,7 @@ interface LocatedFiles {
   automation?: CatalogSourceFile;
   redirects?: CatalogSourceFile;
   raters?: CatalogSourceFile;
+  bankOfCanada?: CatalogSourceFile;
   providers: NamedFile[];
   bundles: NamedFile[];
   policySets: NamedFile[];
@@ -393,6 +411,9 @@ export function locateCatalogFile(
   if (file === ratersFile) {
     return { kind: 'raters', name: 'raters' };
   }
+  if (file === bankOfCanadaFile) {
+    return { kind: 'bank-of-canada', name: 'bank-of-canada' };
+  }
   const named = /^data\/(providers|bundles|policies)\/([^/]+)\.yaml$/.exec(file);
   if (named) {
     const kinds = { providers: 'provider', bundles: 'bundle', policies: 'policy-set' } as const;
@@ -426,6 +447,8 @@ function locateFiles(
       located.redirects = source;
     } else if (where?.kind === 'raters') {
       located.raters = source;
+    } else if (where?.kind === 'bank-of-canada') {
+      located.bankOfCanada = source;
     } else if (where) {
       const list = {
         provider: 'providers',
@@ -445,7 +468,7 @@ function locateFiles(
     } else {
       reportIn(file)(
         [],
-        'Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/automation.yaml, data/redirects.yaml, data/raters.yaml, data/providers/<id>.yaml, data/bundles/<slug>.yaml or data/policies/<id>.yaml',
+        'Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/automation.yaml, data/redirects.yaml, data/raters.yaml, data/bank-of-canada.yaml, data/providers/<id>.yaml, data/bundles/<slug>.yaml or data/policies/<id>.yaml',
       );
     }
   }
@@ -961,6 +984,12 @@ function checkAccounts(
         today,
         report,
       );
+      if (plan.account.rates.followed) {
+        report(
+          [...path, 'rates', 'followed'],
+          'data:build works it out from the history and data/bank-of-canada.yaml: leave followed out (M11.14)',
+        );
+      }
     }
     checkReadOn(
       plan.account.protection.lastVerified,

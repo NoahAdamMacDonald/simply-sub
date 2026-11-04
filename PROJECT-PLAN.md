@@ -2063,6 +2063,24 @@ in every D1 `json` column search parses.
         balance over its insurer's limit
   - [x] Every finance suggestion says it's information, not financial advice
 
+**M11.14 — Rate history** (BLUEPRINT §4.11, §6.4)
+- **As built** (2026-11-04):
+  - **Where it lives** (the owner's choice): in the provider file, the account's `rates.since` and `rates.history`
+    (the rates before, newest first, each until the day the next took over). `data/bank-of-canada.yaml`: each change of
+    the Bank's target for the overnight rate since June 2024, from its own Valet series.
+  - **The lag:** core's `followedChanges`, put on the account by data:build as `followed` (the history stays in data/);
+    the card's "Following the Bank of Canada" line: days after each of the Bank's last three changes, the same day,
+    not after, or not yet.
+  - **The bot:** rates read like prices (`rateTargets`, `pageShowsRate`, Workers AI's tiers with the page's words);
+    a change is a digest edit that moves the old rates into the history; a step reads the Bank's series and proposes
+    a new change. It's redeployed from main once this merges.
+  - **Checks:** core's and the bot's specs; `check-m11-accounts.cjs` reads the gallery fintech's line. The initial
+    bundle stays 499.92 kB.
+- **Acceptance**
+  - [x] After a fixture change of the Bank of Canada's rate, a linked rate's lag shows on its card (core's snapshot
+        test and the card's spec)
+  - [x] Changed rates become a pull request's edits, the old ones in the account's history
+
 ---
 
 ## 3. Core rules every page uses

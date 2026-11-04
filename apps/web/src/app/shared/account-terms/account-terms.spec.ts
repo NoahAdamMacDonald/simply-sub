@@ -61,6 +61,26 @@ describe('AccountTerms (M11.10)', () => {
     ]);
   });
 
+  it('says how soon a rate that moves with the Bank of Canada’s followed its last changes (M11.14)', () => {
+    const element = render({
+      ...account,
+      rates: {
+        ...account.rates!,
+        follows: 'boc-overnight',
+        followed: [
+          { change: '2026-06-04', rate: 2.25, pending: true },
+          { change: '2026-03-12', rate: 2.5, on: '2026-03-13' },
+          { change: '2026-01-29', rate: 2.75, on: '2026-01-29' },
+          { change: '2025-10-30', rate: 3 },
+        ],
+      },
+    });
+    expect(element.querySelector('li.followed')?.textContent?.replace(/\s+/g, ' ').trim()).toBe(
+      'Following the Bank of Canada: not yet after Jun 4, 2026 (to 2.25%); 1 day after Mar 12, 2026 (to 2.50%); the same day as Jan 29, 2026 (to 2.75%); not after Oct 30, 2025 (to 3.00%)',
+    );
+    expect(render(account).querySelector('li.followed')).toBeNull();
+  });
+
   it('leaves out what an account doesn’t have', () => {
     const lines = render({
       ...account,

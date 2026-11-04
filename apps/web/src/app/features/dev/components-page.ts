@@ -196,7 +196,10 @@ const presetTags: Tag[] = tagColorPresets.map(({ name, color }, index) => ({
   styleUrl: './components-page.scss',
 })
 export class ComponentsPage {
-  /** M11.10's two fixture accounts, as core's tests have them: a bank's fee a balance waives, a fintech's paid rate. */
+  /**
+   * M11.10's two fixture accounts, as core's tests have them: a bank's fee a balance waives, a fintech's paid rate, which
+   * follows the Bank of Canada's (M11.14).
+   */
   protected readonly accounts: { name: string; account: Account }[] = [
     {
       name: 'Example Bank Unlimited Chequing',
@@ -230,6 +233,12 @@ export class ComponentsPage {
           bonus: { rate: 4, when: { directDeposit: 2000 } },
           sourceUrl: 'https://example.com/rates',
           lastVerified: '2026-11-03',
+          // As data:build works it out from the history and the Bank of Canada's changes (M11.14).
+          followed: [
+            { change: '2026-10-29', rate: 2.5, pending: true },
+            { change: '2025-10-30', rate: 2.25, on: '2025-11-01' },
+            { change: '2025-09-18', rate: 2.5, on: '2025-09-18' },
+          ],
         },
         protection: {
           insurer: 'cdic',

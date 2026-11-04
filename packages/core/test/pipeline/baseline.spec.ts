@@ -5,6 +5,8 @@ import {
   baselinePath,
   citedFacts,
   citedPages,
+  pageShowsRate,
+  ratesIn,
   readBaseline,
   servedCovers,
   writeBaseline,
@@ -167,6 +169,65 @@ describe('citedPages', () => {
       { url: 'https://mullvad.net/en/help/terms-service', type: 'policies', owners: ['mullvad'] },
     ]);
     expect(citedPages([asStored], []).filter(({ type }) => type === 'policies')).toEqual([]);
+  });
+});
+
+describe('citedPages, for finance accounts (M11.14)', () => {
+  it('cites an account’s posted rates as pricing, and its protection’s page as policies', () => {
+    const bank = {
+      ...provider,
+      id: 'example-bank',
+      plans: [
+        {
+          ...provider.plans[0],
+          account: {
+            kind: 'savings',
+            currency: 'CAD',
+            rates: {
+              follows: 'none',
+              applies: 'whole',
+              tiers: [{ from: 0, rate: 2 }],
+              sourceUrl: 'https://example.com/rates',
+              lastVerified: '2026-10-20',
+            },
+            protection: {
+              insurer: 'cdic',
+              held: 'own-name',
+              url: 'https://example.com/cdic',
+              quotes: ['Protected by CDIC.'],
+              lastVerified: '2026-10-20',
+            },
+          },
+        },
+      ],
+    } as Provider;
+    const pages = citedPages([bank], []);
+    expect(pages).toContainEqual({
+      url: 'https://example.com/rates',
+      type: 'pricing',
+      owners: ['example-bank'],
+    });
+    expect(pages).toContainEqual({
+      url: 'https://example.com/cdic',
+      type: 'policies',
+      owners: ['example-bank'],
+    });
+  });
+});
+
+describe('ratesIn and pageShowsRate (M11.14)', () => {
+  it('reads every rate a page writes, in percent', () => {
+    const text = 'Earn 2.25% on savings, 2,5 % in Quebec, up to 4% bonus, 12.5% on cards';
+    expect(ratesIn(text).map((mention) => mention.rate)).toEqual([2.25, 2.5, 4, 12.5]);
+    expect(text.slice(ratesIn(text)[3].index)).toBe('12.5% on cards');
+  });
+
+  it('finds a rate near what the page calls the account, written any way', () => {
+    const text = 'High Interest Savings: 2.250% a year. Chequing: 0.05%.';
+    expect(pageShowsRate(text, 2.25, ['High Interest Savings'])).toBe(true);
+    expect(pageShowsRate(text, 2.5, ['High Interest Savings'])).toBe(false);
+    // 2.25 inside 12.25% isn't it.
+    expect(pageShowsRate('Card rate 12.25%', 2.25, [])).toBe(false);
   });
 });
 

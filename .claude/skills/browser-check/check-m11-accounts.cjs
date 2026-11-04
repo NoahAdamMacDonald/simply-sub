@@ -1,7 +1,8 @@
 // M11.10 in the system Edge: ss-account-terms, a finance account's terms on a card, on the /dev/components gallery
 // (dev builds only: no real finance provider is in the catalog before M11.15), for a Canadian in Ontario, in both
 // themes at 1280 and 360 px: the two fixture accounts' lines (interest by tier with its bonus, the waivers, the limits,
-// the protection, who may open it), the posted-rates and protection links (the second scrolled to its words), reached
+// the protection, who may open it, and since M11.14 how soon the fintech's rate followed the Bank of Canada's last
+// changes), the posted-rates and protection links (the second scrolled to its words), reached
 // by Tab with the protection's quote as its tooltip, the muted text against the tokens, axe, screenshots and no
 // horizontal scroll.
 // Usage: node check-m11-accounts.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
@@ -136,11 +137,13 @@ async function lines(section) {
           JSON.stringify(shown[0]),
         );
         check(
-          `${label}: the fintech's: its interest by tier, what it moves with and its bonus, held in trust, who may open it`,
+          `${label}: the fintech's: its interest by tier, what it moves with and its bonus, how soon it followed the Bank of Canada, held in trust, who may open it`,
           JSON.stringify(shown[1]) ===
             JSON.stringify([
               'Savings account, in CAD',
               'Interest: 3.50% a year, 2.00% from $50,000, on each part of the balance. It moves with the Bank of Canada’s rate. 4.00% instead if you have $2,000 of direct deposits a month posted rates',
+              // How soon it followed the Bank's last changes (M11.14).
+              'Following the Bank of Canada: not yet after Oct 29, 2026 (to 2.50%); 2 days after Oct 30, 2025 (to 2.25%); the same day as Sep 18, 2025 (to 2.50%)',
               'Protection: CDIC, held in trust for you, according to its page',
               'Open to you if you hold $100,000 with it',
             ]),

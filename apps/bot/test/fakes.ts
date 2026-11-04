@@ -12,12 +12,14 @@ import {
   type SnapshotProvider,
 } from '@simply-sub/core';
 import automationYaml from '../../../data/automation.yaml?raw';
+import bankOfCanadaYaml from '../../../data/bank-of-canada.yaml?raw';
 import featuresYaml from '../../../data/features.yaml?raw';
 import policyTopicsYaml from '../../../data/policy-topics.yaml?raw';
 import resellersYaml from '../../../data/resellers.yaml?raw';
 import { parse } from 'yaml';
 import mullvadYaml from '../../../data/providers/mullvad.yaml?raw';
 import netflixYaml from '../../../data/providers/netflix.yaml?raw';
+import type { BankSeries } from '../src/bank-of-canada';
 import type { PageDeps, PageResult } from '../src/check-pages';
 import type { DiscoveryServices, DiscoveryWeb } from '../src/discovery';
 import type { ExtractionRequest } from '../src/extraction';
@@ -47,6 +49,7 @@ export const mullvad = parse(mullvadYaml) as SnapshotProvider;
 export const files: Record<string, string> = {
   'data/providers/netflix.yaml': netflixYaml,
   'data/providers/mullvad.yaml': mullvadYaml,
+  'data/bank-of-canada.yaml': bankOfCanadaYaml,
 };
 
 /** A PNG's first bytes, which is all the icon search reads: the signature and the IHDR chunk. */
@@ -81,6 +84,8 @@ export interface World {
   batchPulls?: { open: string[]; closed: string[] };
   /** A web search's results. */
   search?: (query: string) => SearchResult[] | undefined;
+  /** The Bank of Canada's series (M11.14): no day after the file's newest change unless a test gives some. */
+  bankOfCanada?: BankSeries;
 }
 
 /** The logos as committed. */
@@ -236,6 +241,10 @@ export async function fakeServices(
       world.review?.(system, user) ?? { response: { decision: 'unsure', quotes: [] } },
     state,
     pages: () => fakeDeps(world),
+    async bankOfCanada(start) {
+      const series = world.bankOfCanada ?? [];
+      return 'error' in series ? series : series.filter((day) => day.on >= start);
+    },
     readFiles: async (paths) => Object.fromEntries(paths.map((path) => [path, files[path] ?? ''])),
     propose,
     discovery: fakeDiscovery(world, state, propose),

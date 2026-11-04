@@ -929,6 +929,13 @@
                     "additionalProperties": false,
                     "description": "A rate in place of the tiers when the user meets a condition (the owner’s choice of 2026-11-03, M11.10)"
                   },
+                  "since": {
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+                    "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+                    "description": "The day these rates took over, when known: the page’s effective date, or the night the bot read a change (M11.14)"
+                  },
                   "sourceUrl": {
                     "type": "string",
                     "format": "uri",
@@ -942,6 +949,160 @@
                     "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
                     "patternErrorMessage": "Use a real date written YYYY-MM-DD",
                     "description": "When the rates were read"
+                  },
+                  "history": {
+                    "minItems": 1,
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "since": {
+                          "type": "string",
+                          "format": "date",
+                          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+                          "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+                          "description": "The day these rates took over, when the catalog knows"
+                        },
+                        "until": {
+                          "type": "string",
+                          "format": "date",
+                          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+                          "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+                          "description": "The day the next rates took over"
+                        },
+                        "tiers": {
+                          "minItems": 1,
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "from": {
+                                "type": "number",
+                                "minimum": 0,
+                                "description": "The balance this rate starts at; the first tier starts at 0"
+                              },
+                              "rate": {
+                                "type": "number",
+                                "minimum": 0,
+                                "maximum": 100,
+                                "description": "A year, in percent: 2.25 means 2.25%"
+                              }
+                            },
+                            "required": ["from", "rate"],
+                            "additionalProperties": false
+                          },
+                          "description": "% a year by balance, from the lowest up: the first from 0"
+                        },
+                        "bonus": {
+                          "type": "object",
+                          "properties": {
+                            "rate": {
+                              "type": "number",
+                              "minimum": 0,
+                              "maximum": 100,
+                              "description": "A year, in percent: 2.25 means 2.25%"
+                            },
+                            "when": {
+                              "type": "object",
+                              "properties": {
+                                "minBalance": {
+                                  "type": "number",
+                                  "exclusiveMinimum": 0,
+                                  "description": "Keep at least this much in the account, as the page counts it (a daily or a monthly minimum)"
+                                },
+                                "directDeposit": {
+                                  "anyOf": [
+                                    { "type": "boolean", "const": true },
+                                    {
+                                      "type": "number",
+                                      "exclusiveMinimum": 0,
+                                      "description": "In the account's currency's major unit: 3000 means $3,000"
+                                    }
+                                  ],
+                                  "description": "A recurring direct deposit, such as a pay cheque: true for any, or at least this much a month"
+                                },
+                                "monthlyDeposits": {
+                                  "type": "number",
+                                  "exclusiveMinimum": 0,
+                                  "description": "Deposits of at least this much a month, from anywhere (KOHO’s \"add $1,000 each month\")"
+                                },
+                                "minAssets": {
+                                  "type": "number",
+                                  "exclusiveMinimum": 0,
+                                  "description": "At least this much held with the provider, in all accounts"
+                                },
+                                "maxAge": {
+                                  "type": "integer",
+                                  "exclusiveMinimum": 0,
+                                  "maximum": 9007199254740991,
+                                  "description": "This age or under"
+                                },
+                                "minAge": {
+                                  "type": "integer",
+                                  "exclusiveMinimum": 0,
+                                  "maximum": 9007199254740991,
+                                  "description": "This age or over"
+                                },
+                                "student": {
+                                  "type": "boolean",
+                                  "const": true,
+                                  "description": "A full-time student, as the page defines it"
+                                },
+                                "newcomer": {
+                                  "type": "boolean",
+                                  "const": true,
+                                  "description": "New to Canada, as the page defines it"
+                                }
+                              },
+                              "additionalProperties": false,
+                              "description": "What earns it (EQ Bank: $2,000 of direct deposits a month)"
+                            }
+                          },
+                          "required": ["rate", "when"],
+                          "additionalProperties": false,
+                          "description": "A rate in place of the tiers when the user meets a condition (the owner’s choice of 2026-11-03, M11.10)"
+                        }
+                      },
+                      "required": ["until", "tiers"],
+                      "additionalProperties": false
+                    },
+                    "description": "The rates it paid before, newest first, each until the day the next took over: the bot adds one when it reads a change (M11.14, the owner’s choice: kept in the provider file)"
+                  },
+                  "followed": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "change": {
+                          "type": "string",
+                          "format": "date",
+                          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+                          "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+                          "description": "The day a change of the Bank of Canada’s target for the overnight rate took effect"
+                        },
+                        "rate": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100,
+                          "description": "The Bank’s rate from then"
+                        },
+                        "on": {
+                          "type": "string",
+                          "format": "date",
+                          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+                          "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+                          "description": "The day the account's rates next changed, before the Bank's next change. Left out when they didn't, or haven't yet"
+                        },
+                        "pending": {
+                          "type": "boolean",
+                          "const": true,
+                          "description": "They haven't changed since, and the Bank hasn't changed its rate again: they may yet"
+                        }
+                      },
+                      "required": ["change", "rate"],
+                      "additionalProperties": false
+                    },
+                    "description": "Written by data:build, never in data/: how soon a rate that follows the Bank of Canada's followed its last changes, newest first, from history and data/bank-of-canada.yaml (M11.14)"
                   }
                 },
                 "required": ["follows", "applies", "tiers", "sourceUrl", "lastVerified"],

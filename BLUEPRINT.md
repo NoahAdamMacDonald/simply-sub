@@ -1587,6 +1587,16 @@ price list, so they reuse what fits and add what doesn't:
   has no sales tax (section 4.8).
 - **Rates change** (M11.14): the bot reads them as it reads prices, and keeps each change with its date, so a rate
   that follows the Bank of Canada's shows how many days it took to follow its last changes.
+- **As built (M11.14):** the history is in the provider file, the owner's choice: `rates.since` (the day the rates
+  took over: a page's effective date, or the night the bot read the change) and `rates.history` (the rates before,
+  newest first, each with its `since` when known and `until`, the day the next took over), which validation keeps in
+  order. `data/bank-of-canada.yaml` lists each change of the Bank's target for the overnight rate, the day it took
+  effect and the rate, from its Valet series V39079 (since June 2024, read on 2026-11-04). Core's `followedChanges`
+  gives, for the Bank's last three changes, the day an account's rates next changed before the Bank's next change, or
+  that they didn't, or haven't yet (`pending`); a change before the account's record begins counts only when the
+  change that begins it followed it. data:build puts it on rates that follow the Bank's or the prime rate as
+  `followed`, which validation refuses in data/, and leaves the history out of the app's files; the card says
+  "Following the Bank of Canada: 1 day after Jun 4, 2026 (to 2.25%); …".
 - **Information, not advice:** the app says so wherever it suggests a finance change.
 
 ---
@@ -2127,6 +2137,14 @@ Cron trigger (03:00 UTC) → Workflow (a step per provider of the night's slice,
      on no change → bump lastVerified (batched into the same PR, or skipped to avoid noise)
      on failure  → list it in the PR body as "needs manual check"
 ```
+**Rates and the Bank of Canada (M11.14):** a finance account's posted rates are checked on their page like prices:
+still there (core's `pageShowsRate`), they hold with no model; else Workers AI reads the tiers, taken only with the
+page's own words for each rate and in tiers from 0 up, and a bonus rate gone from the page is for a person. A change is
+an edit in the digest: the new tiers from that day, and the old ones, with their `since` and bonus, first in the
+account's history. A step reads the Bank of Canada's Valet series (robots.txt allows it) from
+`data/bank-of-canada.yaml`'s newest change on, as often as pricing pages, and a new rate is a change in the file, each
+on its first day. `citedPages` cites an account's rates page as pricing and its protection page as policies.
+
 **Logos** ride along (M8.3): the run fetches each provider's best icon the way `npm run data:icons` does, and when
 it differs from the committed `data/logos/<id>.png` (a rebrand), the same PR proposes the new one.
 
@@ -3736,6 +3754,12 @@ None.
   streamed workbook writes and reads back, as archiver's zip and `glob()` do. glob 7's own wildcard matching throws with
   it (minimatch 11 matches with its own matcher, not RegExps), which only archiver-utils' `file.expand` and rimraf 2's
   wildcard fallback reach; exceljs calls neither, and the app bundles exceljs's browser file, which loads none of them.
+
+**Resolved (2026-11-04, M11.14)**
+- **Where rate history lives:** in the provider file, under the account's `rates` (`since`, `history`), appended by
+  the bot's pull requests; data:build works out each account's lag for its card, so the history itself isn't in the
+  app's files (section 4.11 as built). The Bank of Canada's changes are `data/bank-of-canada.yaml`, from its Valet
+  series.
 
 **Resolved (2026-11-04, M11.12)**
 - **Sales tax on account fees:** never added. The CRA lists operating deposit accounts among exempt financial

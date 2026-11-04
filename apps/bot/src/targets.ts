@@ -13,7 +13,13 @@ import {
   type SnapshotProvider,
 } from '@simply-sub/core';
 import type { CatalogIndex } from './run';
-import type { ApprovalTarget, NetworksTarget, PolicyPageTarget, PriceTarget } from './types';
+import type {
+  ApprovalTarget,
+  NetworksTarget,
+  PolicyPageTarget,
+  PriceTarget,
+  RateTarget,
+} from './types';
 
 // What the check looks at for each provider and bundle (BLUEPRINT §6.4): every price with a sourceUrl (its plans', its
 // add-ons', its resellers' offers'), every reseller's approval, and each region's accepted card networks (§9.3). A price
@@ -78,6 +84,36 @@ export function providerTargets(provider: SnapshotProvider): PriceTarget[] {
     }
   }
   return targets;
+}
+
+/** A provider's finance accounts' posted rates (M11.14), but a retired plan's, which its page no longer has. */
+export function rateTargets(provider: SnapshotProvider): RateTarget[] {
+  return provider.plans.flatMap((plan) => {
+    const rates = plan.account?.rates;
+    if (!rates || retirementOf(plan, provider)) return [];
+    const title = planTitle(provider.name, plan.name);
+    return [
+      {
+        file: providerFile(provider.id),
+        planId: plan.id,
+        label: title,
+        names: unique([plan.name, title]),
+        rates: {
+          tiers: rates.tiers,
+          ...(rates.bonus && { bonus: rates.bonus }),
+          sourceUrl: rates.sourceUrl,
+          lastVerified: rates.lastVerified,
+        },
+      },
+    ];
+  });
+}
+
+/** "2.25%, 2.50% from 10000": a target's tiers in the pull request. */
+export function tiersText(tiers: readonly { from: number; rate: number }[]): string {
+  return tiers
+    .map((tier) => `${tier.rate.toFixed(2)}%${tier.from === 0 ? '' : ` from ${tier.from}`}`)
+    .join(', ');
 }
 
 /** A provider's resellers' approvals. */

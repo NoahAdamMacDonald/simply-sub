@@ -9,6 +9,8 @@ import {
   nameIndexes,
   networksNamedIn,
   pageShows,
+  pageShowsRate,
+  sameRate,
   readIconImage,
   sameAmount,
   sameCurrency,
@@ -19,12 +21,15 @@ import {
 import {
   extractionRequest,
   neuronEstimate,
+  rateExtractionRequest,
   readExtraction,
+  readRateExtraction,
   type ExtractionRequest,
   type ExtractedPrice,
+  type ExtractedRates,
 } from './extraction';
 import { findIcon, gitBlobSha, toBase64, type Download } from './icons';
-import { priceText } from './targets';
+import { priceText, tiersText } from './targets';
 import type {
   ApprovalTarget,
   Budget,
@@ -32,11 +37,12 @@ import type {
   NetworksTarget,
   PolicyPageTarget,
   PriceTarget,
+  RateTarget,
 } from './types';
 
 // One provider's (or bundle's, or reseller's) part of the nightly check (BLUEPRINT §6.4), a Workflow step: each of its
-// pages read once, its prices looked for on them, its taxIncluded quotes, resellers' approvals and accepted card
-// networks checked, and its logo compared. A price whose stored amount is still on its page is confirmed without Workers AI; for the rest, the
+// pages read once, its prices and its accounts' posted rates (M11.14) looked for on them, its taxIncluded quotes,
+// resellers' approvals and accepted card networks checked, and its logo compared. A price whose stored amount is still on its page is confirmed without Workers AI; for the rest, the
 // model reads the page around the plans' names. Anything that can't be checked is for a person, never a guess.
 
 /** A page's text, or why there's none: robots.txt, an error status, a timeout. */
@@ -63,6 +69,8 @@ export interface CheckInput {
   approvals: ApprovalTarget[];
   /** Each region's accepted card networks (BLUEPRINT §9.3). */
   networks: NetworksTarget[];
+  /** Its finance accounts' posted rates (M11.14). */
+  rates?: RateTarget[];
   /** The provider's or reseller's website, and its committed logo's Git blob hash (none without one). */
   logo?: { id: string; website: string; committed?: string };
   /** The pages policy ratings quote, when they're due (M3.9). */
@@ -185,6 +193,47 @@ export async function checkPages(
       );
     } else if (unconfirmed.length > 0) {
       findings.push(...(await extracted(url, page.text, around, unconfirmed, deps, budget)));
+    }
+  }
+
+  // Accounts' posted rates (M11.14), read as prices are: each still on its page holds, with no model; Workers AI reads
+  // the rest. A bonus rate gone from the page is for a person, who reads its condition too.
+  const ratesByUrl = new Map<string, RateTarget[]>();
+  for (const target of input.rates ?? []) {
+    const url = target.rates.sourceUrl;
+    ratesByUrl.set(url, [...(ratesByUrl.get(url) ?? []), target]);
+  }
+  for (const [url, targets] of ratesByUrl) {
+    const names = targets.flatMap((target) => target.names);
+    const page = await read(url, names);
+    if ('error' in page) {
+      findings.push({ kind: 'manual', subject: rateLabel(targets), url, reason: page.error });
+      continue;
+    }
+    if (unchanged(url, page, methodOf(url))) {
+      for (const target of targets) findings.push({ kind: 'rates-confirmed', target });
+      continue;
+    }
+    const unconfirmed: RateTarget[] = [];
+    for (const target of targets) {
+      const { tiers, bonus } = target.rates;
+      const shown = (rate: number) => pageShowsRate(page.text, rate, target.names);
+      if (bonus && !shown(bonus.rate)) {
+        findings.push({
+          kind: 'manual',
+          subject: `${target.label} (bonus ${bonus.rate.toFixed(2)}%)`,
+          url,
+          reason: 'Its bonus rate isn’t on the page: a person reads the new one, and what earns it',
+        });
+      } else if (tiers.every((tier) => shown(tier.rate))) {
+        findings.push({ kind: 'rates-confirmed', target });
+      } else {
+        unconfirmed.push(target);
+      }
+    }
+    if (unconfirmed.length > 0) {
+      const around = excerpt(page.text, nameIndexes(page.text, names));
+      findings.push(...(await extractedRates(url, page.text, around, unconfirmed, deps, budget)));
     }
   }
 
@@ -413,6 +462,88 @@ async function extracted(
   });
 }
 
+/** Workers AI's reading of the accounts whose posted rates aren't on their page any more (M11.14), each judged. */
+async function extractedRates(
+  url: string,
+  text: string,
+  around: string,
+  targets: readonly RateTarget[],
+  deps: PageDeps,
+  budget: Budget,
+): Promise<Finding[]> {
+  const request = rateExtractionRequest(around || text.slice(0, 12_000), targets);
+  const cost = neuronEstimate(request);
+  if (cost > budget.neurons) {
+    return [
+      {
+        kind: 'manual',
+        subject: rateLabel(targets),
+        url,
+        reason: 'Not enough Workers AI left tonight to read it',
+      },
+    ];
+  }
+  budget.neurons -= cost;
+  let answers: (ExtractedRates | undefined)[];
+  try {
+    answers = readRateExtraction(await deps.extract(request), targets.length);
+  } catch (error) {
+    return [
+      {
+        kind: 'manual',
+        subject: rateLabel(targets),
+        url,
+        reason: `Workers AI failed: ${message(error)}`,
+      },
+    ];
+  }
+  return targets.map((target, index) => judgedRates(target, answers[index], text));
+}
+
+/**
+ * What an answer means for an account's posted rates: taken only with the page's own words for each rate, word for
+ * word, in tiers that start at 0 and go up; the same rates confirm them.
+ */
+export function judgedRates(
+  target: RateTarget,
+  answer: ExtractedRates | undefined,
+  text: string,
+): Finding {
+  const subject = `${target.label} (${tiersText(target.rates.tiers)})`;
+  const url = target.rates.sourceUrl;
+  if (!answer?.found) {
+    return { kind: 'manual', subject, url, reason: 'Its posted rates aren’t on the page' };
+  }
+  const quoted = answer.tiers.every((tier) => {
+    const words = findQuote(tier.quote, text);
+    return words !== undefined && pageShowsRate(words, tier.rate, []);
+  });
+  if (!quoted) {
+    return {
+      kind: 'manual',
+      subject,
+      url,
+      reason: 'Workers AI’s quote for its rates isn’t on the page word for word',
+    };
+  }
+  const tiers = answer.tiers.map(({ from, rate }) => ({ from, rate }));
+  const ordered =
+    tiers[0]?.from === 0 && tiers.every((tier, at) => at === 0 || tier.from > tiers[at - 1].from);
+  if (!ordered) {
+    return {
+      kind: 'manual',
+      subject,
+      url,
+      reason: 'Workers AI’s tiers don’t start at 0 and go up: a person reads them',
+    };
+  }
+  const was = target.rates.tiers;
+  const same =
+    tiers.length === was.length &&
+    tiers.every((tier, at) => tier.from === was[at].from && sameRate(tier.rate, was[at].rate));
+  return same ? { kind: 'rates-confirmed', target } : { kind: 'rates-changed', target, tiers };
+}
+
 /** What an answer means for a stored price (§6.4's guardrails). */
 export function judged(target: PriceTarget, answer: ExtractedPrice | undefined): Finding {
   const { currency, sourceUrl } = target.price;
@@ -460,6 +591,10 @@ export function readPrice(target: PriceTarget, amount: number): Finding {
 
 function label(targets: readonly PriceTarget[]): string {
   return [...new Set(targets.map((target) => target.label))].join(', ');
+}
+
+function rateLabel(targets: readonly RateTarget[]): string {
+  return `${[...new Set(targets.map((target) => target.label))].join(', ')}'s rates`;
 }
 
 export function message(error: unknown): string {

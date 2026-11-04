@@ -1,4 +1,11 @@
-import type { Account, AccountCondition, AccountKind } from '@simply-sub/core';
+import {
+  daysBetween,
+  type Account,
+  type AccountCondition,
+  type AccountKind,
+  type FollowedChange,
+} from '@simply-sub/core';
+import { dateText } from '../date-text';
 import { wholeAmountText } from '../price-tag/price-text';
 
 // How a finance account's terms read on a card (M11.10, BLUEPRINT §4.11): plain sentences built from its account
@@ -96,6 +103,23 @@ export function ratesText(
     ? `. ${rateText(rates.bonus.rate)} instead if ${conditionText(rates.bonus.when, currency, country)}`
     : '';
   return `${tiers}${applies}${follows}${bonus}`;
+}
+
+/**
+ * How soon the rate followed the Bank of Canada's last changes (M11.14), newest first: "1 day after Jun 4, 2026; the
+ * same day as Mar 12, 2026; not after Jan 29, 2026". Each change is the Bank's, to the rate it names.
+ */
+export function followedText(followed: readonly FollowedChange[]): string {
+  return followed
+    .map(({ change, rate, on, pending }) => {
+      const when = `${dateText(change)} (to ${rateText(rate)})`;
+      if (on === undefined) return pending ? `not yet after ${when}` : `not after ${when}`;
+      const days = daysBetween(change, on);
+      return days === 0
+        ? `the same day as ${when}`
+        : `${days === 1 ? '1 day' : `${days} days`} after ${when}`;
+    })
+    .join('; ');
 }
 
 /** "No monthly fee if you keep $4,000 in it, or you’re a student". */

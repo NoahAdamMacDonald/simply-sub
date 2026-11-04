@@ -1,0 +1,17 @@
+# The Bank of Canada's target for the overnight rate (M11.14): each change, newest first, with the day it took effect, its
+# first observation in the Bank's own Valet series V39079 ("Target for the overnight rate (business daily)"). The bot
+# reads the series each night and proposes a new change by pull request; data:build works out from it how soon each
+# account whose rates follow the Bank's rate or the prime rate followed its last changes, for the account's card.
+source: https://www.bankofcanada.ca/valet/observations/V39079/json
+lastVerified: 2026-11-04
+changes:
+  - { on: 2026-10-29, rate: 2.5 }
+  - { on: 2025-10-30, rate: 2.25 }
+  - { on: 2025-09-18, rate: 2.5 }
+  - { on: 2025-03-13, rate: 2.75 }
+  - { on: 2025-01-30, rate: 3 }
+  - { on: 2024-12-12, rate: 3.25 }
+  - { on: 2024-10-24, rate: 3.75 }
+  - { on: 2024-09-05, rate: 4.25 }
+  - { on: 2024-07-25, rate: 4.5 }
+  - { on: 2024-06-06, rate: 4.75 }

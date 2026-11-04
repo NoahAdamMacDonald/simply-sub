@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { bankOfCanadaFileSchema } from './bank-of-canada';
 import { bundleSchema } from './bundle';
 import { categoriesFileSchema } from './category';
 import { featuresFileSchema } from './feature';
@@ -34,6 +35,7 @@ export function catalogJsonSchemas() {
     automation: toJsonSchema(automationSchema),
     redirects: toJsonSchema(redirectsFileSchema),
     raters: toJsonSchema(ratersFileSchema),
+    'bank-of-canada': toJsonSchema(bankOfCanadaFileSchema),
   };
 }
 export type CatalogFileKind = keyof ReturnType<typeof catalogJsonSchemas>;
