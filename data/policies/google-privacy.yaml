@@ -1,0 +1,136 @@
+# A shared policy document (BLUEPRINT §4.10, M11.1): Google's Privacy Policy, which covers every Google service a
+# Google Account uses (Google AI, and Google One, YouTube and the rest when they join the catalog), rated once here with
+# the pages it sends you to: how long Google keeps data, how it answers government requests, the frameworks for moving
+# data abroad, Google Takeout's help, and the help on creating a Google Account. Each provider names it in its
+# policies' shared and adds ratings from its own notices (Google AI's: the Gemini Apps Privacy Hub).
+# Read 2026-11-04 (M11.15), from Canada. Effective October 16, 2026. The sign-up form shows each step only after the one
+# before it is filled in, so its fields are quoted from Google's help article that walks through them.
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: google-privacy
+name: Google's Privacy Policy
+links:
+  - name: 'Privacy policy'
+    url: https://policies.google.com/privacy
+  - name: 'How Google retains data'
+    url: https://policies.google.com/technologies/retention
+  - name: 'How Google handles government requests'
+    url: https://policies.google.com/terms/information-requests
+  - name: 'Data transfer frameworks'
+    url: https://policies.google.com/privacy/frameworks
+  - name: 'How to download your Google data'
+    url: https://support.google.com/accounts/answer/3024190
+  - name: 'Create a Google Account'
+    url: https://support.google.com/accounts/answer/27441
+ratings:
+  - topic: privacy.data-collection
+    tier: poor
+    reason: "It records what you do across its services and studies how they're used. Its settings stop it saving some kinds of activity to your account, but not collecting it."
+    sources:
+      - url: https://policies.google.com/privacy
+        quote: 'We collect information about your activity in our services, which we use to do things like recommend a YouTube video you might like.'
+      - url: https://policies.google.com/privacy
+        quote: 'We use data for analytics and measurement to understand how our services are used.'
+      - url: https://policies.google.com/privacy
+        quote: 'Across many of our services, you can adjust history and personalization controls to make choices about whether we save some types of data in your Google Account and how we use it to personalize your experience.'
+    action:
+      name: 'Your privacy controls'
+      url: https://policies.google.com/privacy#infochoices
+    lastVerified: 2026-11-04
+  - topic: privacy.data-sharing
+    tier: poor
+    reason: 'It shares your personal details outside Google only to run its services, by law or if you agree, but it lets partner companies collect data from your browser or device for ads. You can only block that browser by browser.'
+    sources:
+      - url: https://policies.google.com/privacy
+        quote: 'We do not share your personal information with companies, organizations, or individuals outside of Google except in the following cases:'
+      - url: https://policies.google.com/privacy
+        quote: 'We also allow specific partners to collect information from your browser or device for advertising and measurement purposes using their own cookies or similar technologies.'
+      - url: https://policies.google.com/privacy
+        quote: 'You can also configure your browser to block all cookies from a specific domain or all domains.'
+    action:
+      name: 'Your privacy controls'
+      url: https://policies.google.com/privacy#infochoices
+    lastVerified: 2026-11-04
+  - topic: privacy.ads-tracking
+    tier: neutral
+    reason: 'It picks the ads you see from what you do with Google, on its services and other sites. You can turn that off for your whole account in My Ad Center.'
+    sources:
+      - url: https://policies.google.com/privacy
+        quote: 'Depending on your settings, we may also show you personalized ads based on your interests, activity, or personalized content from Google services.'
+      - url: https://policies.google.com/privacy
+        quote: 'You can control what information we use to show you ads by visiting your ad settings in My Ad Center'
+    action:
+      name: 'Your privacy controls'
+      url: https://policies.google.com/privacy#infochoices
+    lastVerified: 2026-11-04
+  - topic: privacy.data-deletion
+    tier: good
+    reason: 'You can delete your activity, your content or your whole account yourself at any time, and it takes about two months to be gone. It keeps some data longer for business or legal reasons.'
+    sources:
+      - url: https://policies.google.com/privacy
+        quote: 'You can export a copy of your information or delete it from your Google Account at any time'
+      - url: https://policies.google.com/technologies/retention
+        quote: 'This process generally takes around 2 months from the time of deletion.'
+      - url: https://policies.google.com/privacy
+        quote: 'And some data we retain for longer periods of time when necessary for legitimate business or legal purposes, such as security, fraud and abuse prevention, or financial record-keeping.'
+    action:
+      name: 'How to export or delete your information'
+      url: https://policies.google.com/privacy#infodelete
+    lastVerified: 2026-11-04
+  - topic: privacy.data-retention
+    tier: neutral
+    reason: 'How long it keeps your data depends on what it is and your settings: some until you delete it or your account, some longer for business or legal reasons. Backups can hold deleted data for up to 6 months.'
+    sources:
+      - url: https://policies.google.com/privacy
+        quote: 'We retain the data we collect for different periods of time depending on what it is, how we use it, and how you configure your settings:'
+      - url: https://policies.google.com/privacy
+        quote: 'We keep some data until you delete your Google Account, such as information about how often you use our services.'
+      - url: https://policies.google.com/technologies/retention
+        quote: 'Data can remain on these systems for up to 6 months.'
+    lastVerified: 2026-11-04
+  - topic: privacy.data-portability
+    tier: great
+    reason: 'You can download everything in your Google Account yourself with Google Takeout, in common formats like vCard, with a guide to the files in every download.'
+    sources:
+      - url: https://policies.google.com/privacy
+        quote: 'You can export a copy of content in your Google Account if you want to back it up or use it with a service outside of Google.'
+      - url: https://support.google.com/accounts/answer/3024190
+        quote: 'We have chosen types that we believe are the most useful and portable. For example, we export contacts as vCard, which is a very common format for email providers.'
+      - url: https://support.google.com/accounts/answer/3024190
+        quote: 'Within your archive will be a file named archive_browser.html that will have additional information about the file formats, how to open the file, and view the data.'
+    action:
+      name: 'How to download your Google data'
+      url: https://support.google.com/accounts/answer/3024190
+    lastVerified: 2026-11-04
+  - topic: privacy.government-requests
+    tier: good
+    reason: 'It checks that each request follows the law, emails you before handing anything over unless a law forbids it, and publishes how many requests it gets. It holds a lot that could be asked for.'
+    sources:
+      - url: https://policies.google.com/terms/information-requests
+        quote: 'We carefully review each request to make sure it satisfies applicable laws.'
+      - url: https://policies.google.com/terms/information-requests
+        quote: 'When we receive a request from a government agency, we send an email to the user account before disclosing information.'
+      - url: https://policies.google.com/terms/information-requests
+        quote: 'We share the number and types of requests we receive in our Transparency Report'
+    lastVerified: 2026-11-04
+  - topic: privacy.data-location
+    tier: neutral
+    reason: 'Your information may be processed on its servers anywhere in the world, under recognised legal safeguards for moving data between countries, like the EU’s standard contract clauses.'
+    sources:
+      - url: https://policies.google.com/privacy
+        quote: 'We maintain servers around the world and your information may be processed on servers located outside of the country where you live.'
+      - url: https://policies.google.com/privacy/frameworks
+        quote: 'We also comply with certain legal frameworks relating to the transfer of data, such as the frameworks described below.'
+      - url: https://policies.google.com/privacy/frameworks
+        quote: 'Standard contractual clauses (SCCs) are written commitments between parties that can be used as a ground for data transfers from certain countries to third countries by providing appropriate data protection safeguards.'
+    lastVerified: 2026-11-04
+  - topic: privacy.sign-up-data
+    tier: neutral
+    reason: 'To make a Google Account you give a name, a password, your birthday and gender, and an email address (a new Gmail address or one you have). A phone number is optional.'
+    sources:
+      - url: https://policies.google.com/privacy
+        quote: 'When you create a Google Account, you provide us with personal information that includes your name and a password.'
+      - url: https://support.google.com/accounts/answer/27441
+        quote: 'You’ll be asked to add your birthday and gender.'
+      - url: https://support.google.com/accounts/answer/27441
+        quote: 'Optional: Add and verify a phone number for your account.'
+    lastVerified: 2026-11-04

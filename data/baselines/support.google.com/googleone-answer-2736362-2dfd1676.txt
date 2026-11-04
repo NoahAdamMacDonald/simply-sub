@@ -1,0 +1,194 @@
+url: https://support.google.com/googleone/answer/2736362
+method: fetch
+saved: 2026-11-04
+
+Purchase, cancellation & refund policies - Google One Help Skip to main content
+Google One Help
+Sign in
+Google Help
+Help Center
+Community
+Google One
+Privacy Policy
+Terms of Service
+Submit feedback
+Send feedback on...
+This help content & information
+General Help Center experience
+Close Next
+Help Center
+Community
+Google One
+Purchase, cancellation & refund policies
+Automatic renewals
+By default, your storage purchase is set to automatically renew at the end of your subscription. At any point during your subscription, you can upgrade to a larger storage plan. You'll upgrade to your new storage level immediately, and your credit card will be charged when you run out of credit.
+If you purchased a storage subscription under the old pricing plan, you can renew your subscription until you choose to upgrade or until your payment information expires.
+If the auto-renewal fails, a seven-day grace period will be added to your subscription so that you're able to update your payment information. During this grace period, you won't lose access to anything in your Google Account or your current storage plan.
+If you use Gmail and the auto-renewal fails, your storage plan will be extended for seven days so you can update your payment information. You can use those extra seven days to clear space in your account or buy a new storage plan.
+If your storage plan is canceled or expires
+If you cancel your storage plan, you’ll lose all additional storage for your account. At the end of your billing cycle, you may be over quota.
+If you’re over your storage quota for 2 years or longer, all of your content may be deleted from your Google account.
+Once you reach or exceed the no charge storage quota:
+Gmail: You can't send or receive messages. Messages sent to you are returned to the sender.
+Google Drive:
+You can't sync or upload new files.
+Syncs stop between your computer's Google Drive folder and My Drive.
+You can’t create new files in:
+Google Docs
+Sheets
+Slides
+Drawings
+Forms
+Vids
+Until you reduce the amount of storage you use, no one can edit or copy your files.
+Google Photos: You can't back up any photos or videos.
+Tip: To avoid these restrictions, you can clean up Google storage space. You can also buy more Google storage.
+Clean up storage space
+Cancel your subscription
+You can cancel your storage subscription at any time.
+Cancel a Drive storage plan
+Go to www.google.com/settings/storage.
+Sign into the Google Account where you purchased storage.
+Under your plan, click Cancel.
+Review changes to storage that will take place after cancellation. Confirm by clicking Cancel plan.
+You'll receive a confirmation email of your subscription cancellation. At the start of the next month of your plan, you'll be downgraded to the personal storage of up to 15 GB for Google Drive, Google Photos, and Gmail.
+Cancel storage on your Google One membership
+Learn how to cancel your Google One membership.
+Tip: If your Google One membership is billed through a third-party partner, learn how to make changes to your Google One plan.
+Refund policy
+In most countries or regions, Google storage plan purchases are non-refundable. The amount of storage you purchased is yours for the length of the subscription, even if you decide to cancel it.
+For Play Store purchases, go to Learn about Google Play refund policies.
+For Apple App Store purchases, request a refund from Apple support.
+Refunds for Google One purchases in Israel
+Google One Memberships:
+If you’re based in Israel, you may have the option to cancel your Google One membership with immediate effect and request a partial refund.
+If you made your purchase through Google Play, follow the cancellation instructions. Then select the option to cancel immediately and request a partial refund. Your partial refund is prorated based on the days left on the subscription.
+If you made your purchase through Apple’s App Store, you must contact Apple support.
+One Time Purchases (Top-Up AI Credits):
+If you’re based in Israel, you may have the option to cancel your Top-Up AI Credits purchase within 14 days.
+If you cancel your purchase of Top-Up AI credits within 14 days and you've used them during the 14-day cancellation period, you'll receive a pro-rated refund.
+If you made your purchase through Google Play, please contact support to exercise your right to cancel.
+If you made your purchase through Apple’s App Store, you must contact Apple support.
+Need more help?
+Try these next steps:
+Post to the help community Get answers from community members
+true
+Help
+1 of 12
+Change your card & fix payment issues
+2 of 12
+Claim Google One benefits
+3 of 12
+Use a family payment method on Google Play
+4 of 12
+Cancel your Google One membership
+5 of 12
+Learn about Google One trials
+6 of 12
+Purchase, cancellation & refund policies
+7 of 12
+Dispute, report, or cancel a payment
+8 of 12
+Learn about third-party Google One subscriptions
+9 of 12
+Get help with payment issues for Google One storage
+10 of 12
+Find your Google purchase history
+11 of 12
+Find your purchases, reservations & subscriptions
+12 of 12
+Change your credit card
+©2026 Google Privacy Policy
+Terms of Service
+Language català&lrm; dansk&lrm; Deutsch&lrm; eesti&lrm; English (United Kingdom)&lrm; español&lrm; español (Latinoamérica)&lrm; Filipino&lrm; français&lrm; hrvatski&lrm; Indonesia&lrm; italiano&lrm; latviešu&lrm; lietuvių&lrm; magyar&lrm; Melayu&lrm; Nederlands&lrm; norsk&lrm; polski&lrm; português&lrm; português (Brasil)&lrm; română&lrm; slovenčina&lrm; slovenščina&lrm; suomi&lrm; svenska&lrm; Tiếng Việt&lrm; Türkçe&lrm; čeština&lrm; Ελληνικά&lrm; български&lrm; русский&lrm; српски&lrm; українська&lrm; &rlm;עברית &rlm;العربية &rlm;فارسی मराठी&lrm; हिन्दी&lrm; తెలుగు&lrm; ไทย&lrm; 中文（简体）&lrm; 中文（繁體）&lrm; 中文（香港）&lrm; 日本語&lrm; 한국어&lrm; English&lrm; Enable Dark Mode
+Send feedback on...
+This help content & information General Help Center experience
+Search
+Clear search
+Close search
+Google apps
+Main menu
+8461275543674987686
+true
+Search Help Center
+false
+true
+true
+true
+true
+true
+5044059
+function RLa(a){a.o=!0;a.Ja()}
+function SLa(a,b){a.filled=b;a.Ja()}
+function TLa(a){if(!a.description)throw Error("Description is required for making a headless API submission.");return new ua.Promise(function(b){Rw(Pa({},a,{flow:"submit",disableSubmit:!1,onClose:b}))})}
+function ULa(a){return new ua.Promise(function(b){Rw(Pa({},a,{flow:"submit",disableSubmit:!0,reportDataCallback:b}))})}
+;var GJ=new um,VLa="By continuing, you agree Google uses your answers, "+wm(GJ,"a",{"class":"info-link",tabindex:"0"})+"account & system info"+ym(GJ,"a")+" to improve services, per our "+wm(GJ,"a",{"class":"privacy-link",tabindex:"0"})+"Privacy"+ym(GJ,"a")+" & "+wm(GJ,"a",{"class":"tos-link",tabindex:"0"})+"Terms"+ym(GJ,"a")+".",WLa=GJ.format(VLa);var HJ=[{id:"inaccurate",value:"Inaccurate - doesn't match what I see in the product"},{id:"hard_to_understand",value:"Hard to understand - unclear or translation is wrong"},{id:"information_gaps",value:"Missing info - relevant but not comprehensive"},{id:"irrelevant",value:"Irrelevant - doesn\u2019t match the title and / or my expectations"},{id:"minor_errors",value:"Minor errors - formatting issues, typos, and / or broken links"},{id:"other_suggestions",value:"Other suggestions - ideas to improve the content",
+jP:!0}];function IJ(a,b,d){var e=a.getBoundingClientRect(),f=e.left,h=e.width;d=XLa(d).map(function(k){return Math.round(f+h*k)}).map(function(k){return document.elementFromPoint(k,b)}).filter(function(k){return k!==null&&k!==a}).filter(function(k){return JJ(k)});
+return YLa(new ua.Set(d))}
+function XLa(a){a =b&&f>=0&&e<=window.innerHeight&&h<=window.innerWidth||a.scrollIntoView(!1)}
+;function KJ(a){var b=a.model;var d=a.zD;var e=a.Wo;var f=a.Hr;var h=a.Uj;var k=a.OH;var l=a.QH;a=a.track;E.call(this,"sc.client.feedback.inline.a11y_navigator.HiddenMenu");this.menuItems=[];this.ma=new ua.Map;this.o=0;this.model=b;this.zD=d;this.Wo=e;this.Hr=f;this.Uj=h;this.OH=k;this.QH=l;this.track=a}
+v(KJ,E);function LJ(a){a.o=0;var b;(b=a.menuItems[a.o])==null||b.button.focus()}
+function eMa(a){a.o=a.menuItems.length-1;var b;(b=a.menuItems[a.o])==null||b.button.focus()}
+KJ.prototype.wx=function(){var a=this.menuItems[this.o];a&&a.button.focus()};
+KJ.prototype.content=function(){var a=this;this.element.apply(this,["div","role","menu","aria-labelledby",this.zD,"class","hidden-menu"].concat(Ha(MJ(this.model)?[]:["onkeydown",function(b){a:{switch(b.key){case "ArrowUp":if(a.o===0)eMa(a);else{a.o--;var d;(d=a.menuItems[a.o])==null||d.button.focus()}if(a.model.Pf.o){var e;(e=a.track)==null||NJ(e)}break;case "ArrowDown":if(a.o===a.menuItems.length-1)LJ(a);else{a.o++;var f;(f=a.menuItems[a.o])==null||f.button.focus()}if(a.model.Pf.o){var h;(h=a.track)==
+null||NJ(h)}break;case "End":eMa(a);break;case "Home":LJ(a);break;default:break a}b.preventDefault();b.stopPropagation()}}]),[function(){var b=a.Uj.getBoundingClientRect();
+a.menuItems.length=0;var d=x(a.Wo.elements),e=d.next();try{for(;!e.done;e=d.next()){var f=e.value;if(f instanceof HTMLElement){var h=a.Hr.get(f);h&&fMa(a,b,f,h)}}}finally{Ma(d,e)}}]))};
+function fMa(a,b,d,e){var f=gMa(b,d);b=f.offsetTop;f=f.offsetLeft;var h=d.getBoundingClientRect();b=a.element("button","class","feedback-button","role","menu-item","tabIndex","-1","aria-description","Give feedback on the selected section.","aria-expanded","false","style",{top:b+"px",left:f+"px",width:h.width+"px",height:h.height+"px"},"onclick",function(k){a.OH(d,k.target)},"onfocus",function(k){var l;
+(l=a.QH)==null||l.call(a,d,k.target)});
+e.tagName==="IMG"?b.appendChild(e):b.textContent=e.textContent;a.menuItems.push({button:b,aya:d});a.ma.set(d,b)}
+function gMa(a,b){var d=a.top;a=a.left;b=b.getBoundingClientRect();return{offsetTop:b.top-d,offsetLeft:b.left-a}}
+;function OJ(a){this.tb=a;this.elements=new ua.Set;this.rows=[]}
+OJ.prototype.add=function(a){this.elements.add(a)};
+function hMa(a){var b=a.tb.getBoundingClientRect().top,d=x(a.elements),e=d.next();try{for(;!e.done;e=d.next()){var f=e.value,h=f.getBoundingClientRect().top-b,k=Math.floor(h/4);a.rows[k]=a.rows[k]||new ua.Set;a.rows[k].add(f)}}finally{Ma(d,e)}a.clear();b=x(a.rows);d=b.next();try{for(;!d.done;d=b.next()){var l=d.value;if(l){var p=x(YLa(l)),r=p.next();try{for(;!r.done;r=p.next())a.elements.add(r.value)}finally{Ma(p,r)}}}}finally{Ma(b,d)}}
+OJ.prototype.clear=function(){this.elements.clear()};var iMa={yB:function(a){return a}};var jMa=new ua.Map([[1,"inline_feedback_event_submitted"],[2,"inline_feedback_event_failed_submit"]]);function PJ(a){a=(a===void 0?{}:a).categories;a=a===void 0?HJ:a;No.call(this);this.oa=[];this.text="";this.o=this.ma=!1;this.categories=a}
+v(PJ,No);n=PJ.prototype;n.getCategories=function(){return this.categories};
+function kMa(a){return{category:a.Lc(),text:a.getText().trim()}}
+n.getText=function(){return this.text};
+n.setText=function(a){a!==this.text&&(this.text=a,this.Fa(0))};
+n.Lc=function(){return this.category};
+function lMa(a,b){a.oa=b;a.Fa(2)}
+function QJ(a,b){b!==a.ma&&(a.ma=b,a.Fa(3))}
+function RJ(a,b){b!==a.o&&(a.o=b,a.Fa(4))}
+n.submit=function(){this.Fa(5)};
+n.cancel=function(){this.Fa(6)};function SJ(){No.call(this);this.visibility=!1;this.cornerPosition={x:0,y:0}}
+v(SJ,No);SJ.prototype.getVisibility=function(){return this.visibility};
+SJ.prototype.setVisibility=function(a){this.visibility!==a&&(this.visibility=a,this.Fa(0))};function mMa(a){var b=a.kh;var d=a.lk;a=a.jk;No.call(this);this.ma=!1;this.oa=0;this.o=!1;this.kh=b;this.lk=d;this.jk=a}
+v(mMa,No);function TJ(a,b){a.ma!==b&&(a.ma=b,a.Fa(0))}
+function UJ(a,b){a.oa!==b&&(a.oa=b,a.Fa(1))}
+;function VJ(a,b){switch(a){case "ABANDON_DEFAULT_FLOW":var d=84;var e=9;break;case "ABANDON_CATEGORY_SELECTOR":d=83;e=9;break;case "ABANDON_KEYBOARD_MODE":d=92;e=9;break;case "COMPLETE_FLOW":d=84;e=15;break;case "FAB_IMPRESSION":d=85;e=4;break;case "OPEN_CATEGORY_SELECTOR":d=83;e=18;break;case "OPEN_CATEGORY_SELECTOR_KEYBOARD_MODE":d=91;e=18;break;case "OPEN_DEFAULT_FLOW":d=84;e=18;break;case "OPEN_KEYBOARD_MODE":d=92;e=18;break;case "SELECT_CATEGORY":d=83;e=8;break;case "MOBILE_FAB_IMPRESSION":d=
+120;e=4;break;case "MOBILE_ELEMENT_SELECTION":d=121;e=18;break;case "MOBILE_ELEMENT_SELECTED":d=121;e=6;break;case "MOBILE_CATEGORY_SELECTION_BACK":d=122;e=7;break;case "MOBILE_CATEGORY_SELECTION_EXIT":d=122;e=9;break;case "MOBILE_CATEGORY_SELECTION":d=122;e=8;break;case "MOBILE_TEXT_INPUT":d=123;e=18;break;case "MOBILE_FORM_SUBMIT":d=122;e=15;break;case "TEXT_SELECTION_FAB_ABANDON_CATEGORY_SELECTOR":d=125;e=9;break;case "TEXT_SELECTION_FAB_COMPLETE_FLOW":d=126;e=15;break;case "TEXT_SELECTION_FAB_IMPRESSION":d=
+127;e=4;break;case "TEXT_SELECTION_FAB_OPEN_CATEGORY_SELECTOR":d=125;e=18;break;case "TEXT_SELECTION_FAB_SELECT_CATEGORY":d=125,e=8}if(d&&e){var f,h;(h=(f=window).sc_trackStatsEvent)==null||h.call(f,d,e,b!=null?b:a)}}
+;function WJ(a){var b=a.productId;var d=a.bucket;var e=a.ds;var f=a.Gi;var h=a.oi;var k=a.Bg;var l=a.Si;var p=a.Ri;var r=a.Fk;var t=a.hq;var u=a.Dk;var w=a.ji;var y=a.Ek;var na=a.Ol;var pa=a.Iv;var va=a.ni;var ya=a.Pl;var Ba=a.um;var Ia=a.Cq;var Oa=a.rH;Oa=Oa===void 0?3E3:Oa;var La=a.Ow;var Ta=a.Ej;Ta=Ta===void 0?!1:Ta;var ab=a.categories;var kb=a.mw;kb=kb===void 0?{}:kb;var tb=a.kh;var lb=a.lk;var hb=a.jk;var Hb=a.Zc;Hb=Hb===void 0?!1:Hb;var Gb=a.Ks;Gb=Gb===void 0?"Give feedback about this article":
+Gb;a=a.Mv;a=a===void 0?"":a;No.call(this);var Cb=this;this.ma=new ua.Set;this.ua="";this.va=null;this.Da=!1;this.oa=this.ya=this.o=0;this.productId=b;this.bucket=d;this.ds=e;this.Gi=f;this.oi=h;this.Bg=k;this.Si=l;this.Ri=p;this.Fk=r;this.hq=t;this.Dk=u;this.ji=w;this.Ek=y;this.Ol=na;this.Iv=pa;this.ni=va;this.Pl=ya;this.um=Ba;this.Cq=Ia;this.rH=Oa;this.Ow=La;this.Ej=Ta;this.Mv=a;this.experimentArm=bMa({oi:h,Bg:k,Si:l,Dk:u});this.Zc=Hb;this.Ks=Gb;this.ef=MJ(this)&&Hu();this.formModel=new PJ({categories:ab});
+this.Rh=new SJ;this.Pf=new mMa({kh:tb,lk:lb,jk:hb});this.mw=Pa({},iMa,kb);this.Aa=Jn(function(){XJ(Cb)},300);
+this.onChange(2,function(){switch(Cb.o){case 2:XJ(Cb)}});
+this.formModel.onChange(5,function(){var fc={category:Cb.formModel.Lc(),text:Cb.formModel.getText()};fc.category&&nMa(Cb,fc)});
+this.formModel.onChange(6,function(){YJ(Cb,0);if(Cb.Bg){var fc;(fc=window.getSelection())==null||fc.removeAllRanges()}});
+this.formModel.onChange(0,this.Aa);this.formModel.onChange(1,function(){if(MJ(Cb))VJ("MOBILE_CATEGORY_SELECTION");else switch(Cb.oa){case 1:case 2:VJ("SELECT_CATEGORY");break;case 3:VJ("TEXT_SELECTION_FAB_SELECT_CATEGORY")}XJ(Cb)})}
+v(WJ,No);WJ.prototype.Tc=function(){return this.productId};
+function ZJ(a){return a.Bg&&a.Si}
+function $J(a){return ZJ(a)||!a.um&&a.Ri||A().is_render_api&&a.hq}
+function oMa(a){return!a.um&&a.Ri&&a.Fk}
+function MJ(a){return a.ni||a.Pl}
+WJ.prototype.ui=function(){return this.formModel};
+WJ.prototype.isDarkMode=function(){return this.Zc};
+function aK(a,b,d){var e=a.ma;if(!(d=d===void 0?!1:d)){a:{d=x(xa(e,"values").call(e));var f=d.next();try{for(;!f.done;f=d.next())if(!b.has(f.value)){var h=!1;break a}}finally{Ma(d,f)}h=e.size===b.size}d=!h}d&&(a.Fa(0),a.ma=b,a.Fa(1))}
+function bK(a){a.Fa(0);a.ma.clear();a.Fa(1)}
+function YJ(a,b){b!==a.o&&(a.ya=a.o,a.o=b,a.Fa(2))}
+function cK(a,b,d){d=d===void 0?!1:d;var e=new ua.Map(xa(Object,"entries").call(Object,a.ds||{}));Sw().forEach(function(f,h){e.set(h,f)});
+return{productId:a.Tc(),bucket:a.bucket,payload:pMa(a,e,d,b),description:b.text.trim()||"EMPTY"}}
+function pMa(a,b,d,e){b.set("inline_selected_text",qMa(a));b.set("inline_experiment_arm",a.experimentArm);if(e){var f,h;b.set("inline_category",(h=(f=e.category)==null?void 0:f.id)!=null?h:"[Your selection]")}return a.mw.yB(b,d)}
+function qMa(a){return a.Bg||$J(a)?a.ua:ZLa(a.ma)}
+function XJ(a){a.Da?rMa(a):(a.Da=!0,sMa(a))}
+function nMa(a,b){var d;Ya(function(e){if(e.o==1)return YJ(a,3),e.va(2),e.yield(TLa(cK(a,b,!0)),4);if(e.o!=2)return d=e.ma,e.return(tMa(a,d));e.ua();return e.return(tMa(a,!1))})}
+function tMa(a,b){return Ya(function(d){b?(YJ(a,4),uMa(1),Cn("inline_feedback_submitted_"+Tw())):(YJ(a,0),uMa(2),Cn("inline_feedback_failed_submit_"+Tw()));d.oa()})}
+function uMa(a){a=jMa.get(a);a=new CustomEvent(a,{bubbles:!0,cancelable:!0});window.document.body.dispatchEvent(a)}
+function rMa(a){if(a.va){var b=xa(a.va,"find").call(a.va,function(l){return l.title==="Product Information"});
+if(b&&typeof b.data!=="string"){var d=new ua.Map([].concat(Ha(xa(b.data,"entries").call(b.data)))),e=cK(a,kMa(a.formModel)).payload,f=x(e),h=f.next();try{for(;!h.done;h=f.next()){var k=x(h.value).next().value;d.set(k,e.get(k))}}finally{Ma(f,h)}b.data=d;lMa(a.formModel,a.va)}}}
+function sMa(a){var b;Ya(function(d){if(d.o==1)return d.yield(ULa(cK(a,kMa(a.formModel))),2);b=d.ma;var e=[],f=x(xa(Object,"entries").call(Object,b)),h=f.next();try{for(;!h.done;h=f.next()){var k=x(h.value),l=k.next().value,p=k.next().value;e.push({title:cMa(l),data:p})}}finally{Ma(f,h)}a.va=e;lMa(a.formModel,a.va);d.oa()})}
+;function dK(a){var b=this;var d=a.tb;var e=a.Jd;var f=a.Uc;var h=a.Se;var k=a.onFocus;var l=a.VH;l=l===void 0?function(){}:l;
+var p=a.fI;a=a.track;this.Da="keyboard-navigator-hidden-title-"+Ao();this.ya=new ua.Map;this.Hr=new ua.Map;this.va=function(r){switch(r.key){case "Esc":case "Escape":vMa(b);break;case "Tab":vMa(b)}};
+this.ua=function(){var r=x(b.model.ma),t=r.next();try{for(;!t.done;t=r.next()){var u=t.value,w=void 0;if((w=b.ma)==null)var y=0;else{var na=w.ma.get(u);na?(na.focus(),y=!0):y=!1}if(y)break}}finally{Ma(r,t)}};
+this.oa=!1;this.Uj=d;this.Jd=e;this.model=f;this.Se=h;this.onFocus=k;this.VH=l;this.fI=p;this.track=a;this.Wo=new OJ(d);wMa(this)}
+n=dK.prototype;
+n.init=function(){this.o=this.Uj.cloneNode(!0);this.o.style.position="absolute";this.o.classList.add("keyboard-navigator__navigable-element");var a=this.Uj.getBoundingClientRect(),b=a.height;this.o.style.width=a.width+"px";this.o.style.height=b+"px";

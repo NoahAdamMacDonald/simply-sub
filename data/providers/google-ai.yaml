@@ -1,0 +1,1169 @@
+# Researched by hand on 2026-11-04 (M11.15, the AI category), read with Edge or a plain fetch from Canada. The owner
+# chose the id and name (2026-11-04): Google sells Gemini's paid plans as Google AI plans, which are Google One
+# memberships. Pages, each quoted where it's used:
+# Pricing: each country's Gemini plans page (gemini.google/<country>/subscriptions, in its own language), Google One's
+# AI plans page and its comparison table (one.google.com/about/google-ai-plans), and Google One's plans page
+# (one.google.com/about/plans), whose Monthly and Annual tabs sell Google AI Plus (2 TB) and yearly billing: read
+# 2026-11-04 from Canada, and through a US, UK, Australian, German, French, Spanish and Italian exit (the owner's choice
+# of 2026-11-04), each page in that country's currency, its Pro price the Gemini page's. France's page shows Basic,
+# Standard and Plus (2 TB) only, so Pro has no yearly price there.
+# Payment methods: Google One's "Change your card & fix payment issues", its trials and cancelling articles, and Google
+# Play's "Accepted payment methods" for each country, since Google One bills through Google Play.
+# Cancelling: support.google.com/googleone/answer/9056360.
+# Terms: Google's Terms of Service (data/policies/google-terms.yaml) and the Google One Additional Terms of Service.
+# Privacy: Google's Privacy Policy (data/policies/google-privacy.yaml) and the Gemini Apps Privacy Hub.
+# Bundles: none to add. Google One sells eligible members a YouTube Premium add-on "at a discounted price"
+# (support.google.com/googleone/answer/15808277), and Pro "can be upgraded to Advanced" Google Home Premium for $12.99
+# CAD a month (one.google.com/about/google-ai-plans): neither service is in the catalog yet.
+# Official resellers: none. Google One's "Learn about third-party Google One subscriptions" says plans can come "from
+# third-party service providers, such as a mobile phone carrier, as part of a bundle or billed separately by that
+# provider": partners that bill for it, not shops (a way to pay, below).
+# Where it's sold: Google AI Plus in more than 160 countries and Pro and Ultra in more than 150 (each card's line on
+# the Gemini pages), listed in the Gemini Apps help's "Where Google AI Plus is available" and "Where Google AI Pro &
+# Google AI Ultra are available" (support.google.com/gemini/answer/16275805), every catalog region on both. No
+# availableIn: as for Netflix and Disney+, its lists run to most of the world.
+# Region checklist, 2026-11-04: 1. the Gemini pages' country paths gave each region's prices in its own currency;
+# 2. Google One's AI plans page shows a country picker, but its cards have no yearly price and no Plus (2 TB); 3. not
+# looked for; 4. checkout not opened; 5. Google One's help has no price list by country; 6. Google One's plans page
+# prices by where the visitor is (an address with gl=US still showed CA$ in Edge), so it was read through each
+# country's exit: New Zealand's and Ireland's showed Australia's and the UK's prices, and the Netherlands' no plans, so
+# those three stay unread; 7. no bill offered.
+# Not on the pages: Plus (400 GB)'s and Ultra's yearly prices (no page offers them); the networks of cards Google
+# One takes outside Google Play's lists.
+
+# Coverage: google-ai.plus-2tb isn't priced in NZ, IE or NL yet: only Google One's plans page sells it, which prices by
+# where the visitor is, and those three countries' exits showed Australia's prices, the UK's and no plans
+# (one.google.com/about/plans, 2026-11-04).
+
+id: google-ai
+name: Google AI
+website: https://gemini.google.com
+# The Gemini plans pages; Google's help centres (Gemini Apps Help, Google One Help and Google Play Help, whose card
+# lists are Google One's) and its legal pages, where its terms name the company behind it.
+domains: [gemini.google, support.google.com, policies.google.com]
+category: ai
+spendCategory: software
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    AU: AUD,
+    NZ: NZD,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+cancelUrl: https://support.google.com/googleone/answer/9056360
+sources: { pricing: https://gemini.google/subscriptions/ }
+# Accepted cards (M9.2), read 2026-11-04 on Google Play's "Accepted payment methods on Google Play", one address per
+# country: American Express, Mastercard and Visa in each, and Discover and JCB too in the US.
+acceptedNetworks:
+  CA:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/googleplay/answer/2651410?hl=en&co=GENIE.CountryCode%3DCA
+    quotes:
+      - 'You can add the following credit/debit cards to your account:'
+      - 'American Express'
+      - 'Mastercard'
+      - 'Visa'
+  US:
+    networks: [visa, mastercard, amex, discover, jcb]
+    url: https://support.google.com/googleplay/answer/2651410?hl=en&co=GENIE.CountryCode%3DUS
+    quotes:
+      - 'You can add the following credit/debit cards to your account:'
+      - 'American Express'
+      - 'Discover'
+      - 'JCB'
+      - 'Mastercard'
+      - 'Visa'
+  GB:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/googleplay/answer/2651410?hl=en&co=GENIE.CountryCode%3DGB
+    quotes:
+      - 'You can add the following credit/debit cards to your account:'
+      - 'American Express'
+      - 'Mastercard'
+      - 'Visa'
+  AU:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/googleplay/answer/2651410?hl=en&co=GENIE.CountryCode%3DAU
+    quotes:
+      - 'You can add the following credit/debit cards to your account:'
+      - 'American Express'
+      - 'Mastercard'
+      - 'Visa'
+  NZ:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/googleplay/answer/2651410?hl=en&co=GENIE.CountryCode%3DNZ
+    quotes:
+      - 'You can add the following credit/debit cards to your account:'
+      - 'American Express'
+      - 'Mastercard'
+      - 'Visa'
+  IE:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/googleplay/answer/2651410?hl=en&co=GENIE.CountryCode%3DIE
+    quotes:
+      - 'You can add the following credit/debit cards to your account:'
+      - 'American Express'
+      - 'Mastercard'
+      - 'Visa'
+  DE:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/googleplay/answer/2651410?hl=en&co=GENIE.CountryCode%3DDE
+    quotes:
+      - 'You can add the following credit/debit cards to your account:'
+      - 'American Express'
+      - 'Mastercard'
+      - 'Visa'
+  FR:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/googleplay/answer/2651410?hl=en&co=GENIE.CountryCode%3DFR
+    quotes:
+      - 'You can add the following credit/debit cards to your account:'
+      - 'American Express'
+      - 'Mastercard'
+      - 'Visa'
+  NL:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/googleplay/answer/2651410?hl=en&co=GENIE.CountryCode%3DNL
+    quotes:
+      - 'You can add the following credit/debit cards to your account:'
+      - 'American Express'
+      - 'Mastercard'
+      - 'Visa'
+  ES:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/googleplay/answer/2651410?hl=en&co=GENIE.CountryCode%3DES
+    quotes:
+      - 'You can add the following credit/debit cards to your account:'
+      - 'American Express'
+      - 'Mastercard'
+      - 'Visa'
+  IT:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/googleplay/answer/2651410?hl=en&co=GENIE.CountryCode%3DIT
+    quotes:
+      - 'You can add the following credit/debit cards to your account:'
+      - 'American Express'
+      - 'Mastercard'
+      - 'Visa'
+# Ways to pay (M11.5), read 2026-11-04: a card, PayPal or Google Play balance (Google One's payment article) and the App
+# Store on an iPhone or iPad (its cancelling article) everywhere; a bank account in the US only; and Direct Carrier
+# Billing (its trials article) where Google Play's own country page lists mobile phone billing: Canada, the UK, Ireland,
+# Germany, France, the Netherlands, Spain and Italy, not Australia, New Zealand or the US. Google Play's lists add more
+# by country (Klarna in Germany, Cash App Pay and Venmo in the US), but not for Google One subscriptions, so they're left
+# out.
+paymentMethods:
+  - methods: [card, paypal, app-store]
+    page: 'Change your card & fix payment issues'
+    url: https://support.google.com/googleone/answer/9003634
+    quotes:
+      - 'Credit card'
+      - 'PayPal'
+      - 'Google Play balance (Selected countries/regions only)'
+  - methods: [app-store]
+    page: 'Cancel your Google One membership'
+    url: https://support.google.com/googleone/answer/9056360
+    quotes:
+      - "If you sign up for Google One through the App Store on an iPhone or iPad and later switch to an Android device: You can't adjust your membership or change your payment method in the app."
+  - methods: [card, paypal, app-store]
+    regions: [CA, GB, IE, DE, FR, NL, ES, IT]
+    page: 'Change your card & fix payment issues'
+    url: https://support.google.com/googleone/answer/9003634
+    quotes:
+      - 'Credit card'
+      - 'PayPal'
+      - 'Google Play balance (Selected countries/regions only)'
+  - methods: [app-store]
+    regions: [CA, GB, IE, DE, FR, NL, ES, IT]
+    page: 'Cancel your Google One membership'
+    url: https://support.google.com/googleone/answer/9056360
+    quotes:
+      - "If you sign up for Google One through the App Store on an iPhone or iPad and later switch to an Android device: You can't adjust your membership or change your payment method in the app."
+  - methods: [provider-billing]
+    regions: [CA, GB, IE, DE, FR, NL, ES, IT]
+    page: 'Learn about Google One trials'
+    url: https://support.google.com/googleone/answer/9155746
+    quotes:
+      - 'Change the Payment method to Direct Carrier Billing.'
+  - methods: [card, bank-transfer, paypal, app-store]
+    regions: [US]
+    page: 'Change your card & fix payment issues'
+    url: https://support.google.com/googleone/answer/9003634
+    quotes:
+      - 'Credit card'
+      - 'Bank account (US only)'
+      - 'PayPal'
+      - 'Google Play balance (Selected countries/regions only)'
+  - methods: [app-store]
+    regions: [US]
+    page: 'Cancel your Google One membership'
+    url: https://support.google.com/googleone/answer/9056360
+    quotes:
+      - "If you sign up for Google One through the App Store on an iPhone or iPad and later switch to an Android device: You can't adjust your membership or change your payment method in the app."
+# Owner (M11.2), read 2026-11-04: the founders' letter on Alphabet's home page (abc.xyz, under "more"); the Gemini
+# Apps Privacy Hub names Google LLC as the company providing Gemini outside the EEA and Switzerland.
+owner:
+  name: 'Google LLC, owned by Alphabet Inc., a public company (NASDAQ: GOOGL, GOOG)'
+  website: https://abc.xyz
+  page:
+    name: "Alphabet's founders' letter"
+    url: https://abc.xyz/
+  quotes:
+    - 'What is Alphabet? Alphabet is mostly a collection of companies. The largest of which, of course, is Google.'
+    - 'Google will become a wholly-owned subsidiary of Alphabet. Our two classes of shares will continue to trade on Nasdaq as GOOGL and GOOG.'
+  country:
+    code: US
+    page:
+      name: Terms of service
+      url: https://policies.google.com/terms
+    quotes:
+      - 'organized under the laws of the State of Delaware, USA, and operating under the laws of the USA'
+    lastVerified: 2026-11-04
+  lastVerified: 2026-11-04
+
+# Renewal day (M11.5), read 2026-11-04: Google One's terms say "you’ll be charged at the beginning of each billing
+# cycle", and Google Play's subscriptions article and Google One's billing articles don't say which day that is.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://one.google.com/terms-of-service
+    - https://support.google.com/googleplay/answer/7018481
+    - https://support.google.com/googleone/answer/2736362
+  lastVerified: 2026-11-04
+
+# Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their words.
+# Read 2026-11-04 on the Gemini pages and Google One's comparison table. Project Genie: the Gemini pages say "Only
+# available with a Google AI Ultra plan" and the table ticks both Ultras, though the Google One page's footnote says
+# "Only available with a Google AI Ultra 20x plan". Google Meet's "Premium video calling features" are "Only with 2 TB
+# plan" for Plus. YouTube Premium is "available in over 40 countries", and Lite's availability "varies by country".
+perks:
+  - id: usage-2x
+    name: Double the usage limits of the free plan
+  - id: usage-4x
+    name: Four times the usage limits of the free plan
+  - id: usage-5x
+    name: 5x the usage limits of AI Pro
+  - id: usage-20x
+    name: 20x the usage limits of AI Pro
+  - id: youtube-premium-lite
+    name: YouTube Premium Lite plan
+  - id: youtube-premium
+    name: YouTube Premium individual plan
+  - id: home-premium-standard
+    name: Google Home Premium (Standard plan)
+  - id: home-premium-advanced
+    name: Google Home Premium (Advanced plan)
+  - id: health-premium
+    name: Google Health Premium
+  - id: project-genie
+    name: Project Genie
+  - id: meet-premium
+    name: Premium video calling features in Google Meet
+  - id: calendar-scheduling
+    name: Enhanced appointment scheduling in Google Calendar
+
+# AI features (M11.9 and M11.15), read 2026-11-04 on the Gemini pages (each card's list) and Google One's comparison
+# table, which ticks Plus, Pro, Ultra 5x and Ultra 20x (it has no free column):
+# - Image generation and Deep Research on every plan: the free card lists "Image generation and editing" and "Deep
+#   Research", and the table ticks both for every paid plan.
+# - Video generation on the paid plans: Plus "access to more features like video generation", and the table's "Video
+#   generation model access: Omni Flash" for each. The free card has none: its Google Flow gives "limited access to
+#   Nano Banana Pro", an image model.
+# - Office apps on the paid plans: Plus "Gemini in Gmail, Vids and more" ("help you proofread in Gmail"), Pro and Ultra
+#   "Gemini in Gmail, Docs, Vids and more".
+# - Coding agent on every plan: Google Antigravity's own pricing page (antigravity.google/pricing) has a "$0/month" plan
+#   "For Individuals" with "Basic weekly rate limits"; the table gives Plus "Limited" agent requests, and Pro and Ultra
+#   more ("Entry", "Higher" and "Highest rate limits to agent model in Google Antigravity" on the Gemini pages).
+# - Scheduled tasks on every plan: the Gemini help's "Schedule actions in Gemini Apps" (answer 16316416) needs "A
+#   personal Google Account" and Keep Activity on, and says "We’re gradually making this feature available to all
+#   personal Google Accounts".
+# - Early access on the paid plans: the table's "Priority access to new features" ticks all four in Gemini, and Ultra
+#   adds "first access to advanced features like Tasks in Gemini".
+# - API credits: "Google Cloud credits" of US$10 a month on Pro, US$40 on Ultra 5x and US$100 on Ultra 20x (the table;
+#   Plus has none).
+# Storage, the Google Account's 15 GB included (one.google.com/about/plans: "All Google accounts come with up to 15 GB
+# of storage, which is included as part of the total storage offered in other Google One plans"): 15 GB, 400 GB, 2 TB,
+# 5 TB, 20 TB and 30 TB. People included: the paid plans share with a family group of "up to five others" (Google One's
+# AI plans page), "Access to AI benefits such as Gemini App" among what they share (its family sharing article).
+
+# Apps and sign-in (the cross-category features), read 2026-11-04: the web, Android, iOS, macOS, and Google TV (the
+# Gemini Apps Privacy Hub's "What are Gemini Apps?"), and Windows ("Gemini for desktop: download the AI app for Windows
+# and macOS", gemini.google/ca/desktop); a Google Account's password or passkey, with Google prompts, an authenticator
+# app, a security key or a text message as the second step (Google's 2-Step Verification help). Support: Google One
+# members reach "Google One support for help via chat, a phone call, or email" (Google One's support article); every
+# help page has its community.
+features:
+  platforms: [windows, macos, android, ios, web, tv]
+  account.sign-in: [password, passkey, push-approval, totp, security-key, sms]
+  support.channels: [community]
+
+plans:
+  - id: google-ai.free
+    name: Free
+    link: https://gemini.google/subscriptions/
+    categories: [ai, storage]
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.deep-research: true
+      ai.coding-agent: true
+      ai.scheduled-tasks: true
+      storage.cloud: 15
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/us/subscriptions/?hl=en
+
+  - id: google-ai.plus
+    name: Plus
+    link: https://gemini.google/subscriptions/
+    categories: [ai, storage]
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.deep-research: true
+      ai.coding-agent: true
+      ai.scheduled-tasks: true
+      ai.office-apps: true
+      ai.early-access: true
+      storage.cloud: 400
+      account.users: 6
+      support.channels: [chat, phone, email, community]
+    perks: [usage-2x]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/ca/subscriptions/?hl=en-CA
+      - region: US
+        currency: USD
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/us/subscriptions/?hl=en
+      - region: GB
+        currency: GBP
+        amount: 4.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/gb/subscriptions/?hl=en-GB
+      - region: AU
+        currency: AUD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/au/subscriptions/?hl=en-AU
+      - region: NZ
+        currency: NZD
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/nz/subscriptions/?hl=en-GB
+      - region: IE
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/ie/subscriptions/?hl=en-GB
+      - region: DE
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/de/subscriptions/?hl=de
+      - region: FR
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/fr/subscriptions/?hl=fr
+      - region: NL
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/nl/subscriptions/?hl=nl
+      - region: ES
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/es/subscriptions/?hl=es
+      - region: IT
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/it/subscriptions/?hl=it
+
+  - id: google-ai.plus-2tb
+    name: Plus (2 TB)
+    link: https://one.google.com/about/plans
+    categories: [ai, storage]
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.deep-research: true
+      ai.coding-agent: true
+      ai.scheduled-tasks: true
+      ai.office-apps: true
+      ai.early-access: true
+      storage.cloud: 2000
+      account.users: 6
+      support.channels: [chat, phone, email, community]
+    perks: [usage-2x, meet-premium]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 13.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: CA
+        currency: CAD
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: US
+        currency: USD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: US
+        currency: USD
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: GB
+        currency: GBP
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: GB
+        currency: GBP
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: AU
+        currency: AUD
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: AU
+        currency: AUD
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: DE
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: DE
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: FR
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: FR
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: ES
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: ES
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: IT
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: IT
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+
+  - id: google-ai.pro
+    name: Pro
+    link: https://gemini.google/subscriptions/
+    categories: [ai, storage]
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.deep-research: true
+      ai.coding-agent: true
+      ai.scheduled-tasks: true
+      ai.office-apps: true
+      ai.early-access: true
+      ai.api-credits: true
+      storage.cloud: 5000
+      account.users: 6
+      support.channels: [chat, phone, email, community]
+    featureLabels:
+      ai.api-credits: US$10 a month in Google Cloud credits from the Google Developer Programme
+    perks:
+      [
+        usage-4x,
+        youtube-premium-lite,
+        home-premium-standard,
+        health-premium,
+        meet-premium,
+        calendar-scheduling,
+      ]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 26.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/ca/subscriptions/?hl=en-CA
+      - region: CA
+        currency: CAD
+        amount: 269.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: US
+        currency: USD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/us/subscriptions/?hl=en
+      - region: US
+        currency: USD
+        amount: 199.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: GB
+        currency: GBP
+        amount: 18.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/gb/subscriptions/?hl=en-GB
+      - region: GB
+        currency: GBP
+        amount: 189.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: AU
+        currency: AUD
+        amount: 32.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/au/subscriptions/?hl=en-AU
+      - region: AU
+        currency: AUD
+        amount: 329.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: NZ
+        currency: NZD
+        amount: 36.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/nz/subscriptions/?hl=en-GB
+      - region: IE
+        currency: EUR
+        amount: 21.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/ie/subscriptions/?hl=en-GB
+      - region: DE
+        currency: EUR
+        amount: 21.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/de/subscriptions/?hl=de
+      - region: DE
+        currency: EUR
+        amount: 219.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: FR
+        currency: EUR
+        amount: 21.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/fr/subscriptions/?hl=fr
+      - region: NL
+        currency: EUR
+        amount: 21.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/nl/subscriptions/?hl=nl
+      - region: ES
+        currency: EUR
+        amount: 21.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/es/subscriptions/?hl=es
+      - region: ES
+        currency: EUR
+        amount: 219.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+      - region: IT
+        currency: EUR
+        amount: 21.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/it/subscriptions/?hl=it
+      - region: IT
+        currency: EUR
+        amount: 219.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://one.google.com/about/plans
+
+  - id: google-ai.ultra-5x
+    name: Ultra 5x
+    link: https://gemini.google/subscriptions/
+    categories: [ai, storage]
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.deep-research: true
+      ai.coding-agent: true
+      ai.scheduled-tasks: true
+      ai.office-apps: true
+      ai.early-access: true
+      ai.api-credits: true
+      storage.cloud: 20000
+      account.users: 6
+      support.channels: [chat, phone, email, community]
+    featureLabels:
+      ai.api-credits: US$40 a month in Google Cloud credits from the Google Developer Programme
+    perks:
+      [
+        usage-5x,
+        youtube-premium,
+        home-premium-advanced,
+        health-premium,
+        project-genie,
+        meet-premium,
+        calendar-scheduling,
+      ]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 139.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/ca/subscriptions/?hl=en-CA
+      - region: US
+        currency: USD
+        amount: 99.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/us/subscriptions/?hl=en
+      - region: GB
+        currency: GBP
+        amount: 79.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/gb/subscriptions/?hl=en-GB
+      - region: AU
+        currency: AUD
+        amount: 149.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/au/subscriptions/?hl=en-AU
+      - region: NZ
+        currency: NZD
+        amount: 169.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/nz/subscriptions/?hl=en-GB
+      - region: IE
+        currency: EUR
+        amount: 99.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/ie/subscriptions/?hl=en-GB
+      - region: DE
+        currency: EUR
+        amount: 99.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/de/subscriptions/?hl=de
+      - region: FR
+        currency: EUR
+        amount: 99.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/fr/subscriptions/?hl=fr
+      - region: NL
+        currency: EUR
+        amount: 99.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/nl/subscriptions/?hl=nl
+      - region: ES
+        currency: EUR
+        amount: 99.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/es/subscriptions/?hl=es
+      - region: IT
+        currency: EUR
+        amount: 99.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/it/subscriptions/?hl=it
+
+  - id: google-ai.ultra-20x
+    name: Ultra 20x
+    link: https://gemini.google/subscriptions/
+    categories: [ai, storage]
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.deep-research: true
+      ai.coding-agent: true
+      ai.scheduled-tasks: true
+      ai.office-apps: true
+      ai.early-access: true
+      ai.api-credits: true
+      storage.cloud: 30000
+      account.users: 6
+      support.channels: [chat, phone, email, community]
+    featureLabels:
+      ai.api-credits: US$100 a month in Google Cloud credits from the Google Developer Programme
+    perks:
+      [
+        usage-20x,
+        youtube-premium,
+        home-premium-advanced,
+        health-premium,
+        project-genie,
+        meet-premium,
+        calendar-scheduling,
+      ]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 279.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/ca/subscriptions/?hl=en-CA
+      - region: US
+        currency: USD
+        amount: 199.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/us/subscriptions/?hl=en
+      - region: GB
+        currency: GBP
+        amount: 189.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/gb/subscriptions/?hl=en-GB
+      - region: AU
+        currency: AUD
+        amount: 329.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/au/subscriptions/?hl=en-AU
+      - region: NZ
+        currency: NZD
+        amount: 369.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/nz/subscriptions/?hl=en-GB
+      - region: IE
+        currency: EUR
+        amount: 219.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/ie/subscriptions/?hl=en-GB
+      - region: DE
+        currency: EUR
+        amount: 219.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/de/subscriptions/?hl=de
+      - region: FR
+        currency: EUR
+        amount: 219.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/fr/subscriptions/?hl=fr
+      - region: NL
+        currency: EUR
+        amount: 219.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/nl/subscriptions/?hl=nl
+      - region: ES
+        currency: EUR
+        amount: 219.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/es/subscriptions/?hl=es
+      - region: IT
+        currency: EUR
+        amount: 219.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://gemini.google/it/subscriptions/?hl=it
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-04: the Gemini pages' "By subscribing, you
+# agree to terms for Google One, Google and offers" links the Google One Additional Terms of Service, which take in
+# Google's Terms of Service (shared), and the Generative AI Additional Terms, which say they "no longer apply" since
+# Google's terms covered AI on May 22, 2024; Google's terms include its Generative AI Prohibited Use Policy (the
+# conduct it forbids, no topic's); Google One's plans page adds YouTube's terms for the YouTube benefit, not read (no
+# plan's own clause). Google Play's refund article says partial refunds for subscriptions are for France, Germany,
+# Israel and New York, but shows the details only to an account there: left unread, so no rating for FR or DE.
+policies:
+  shared: [google-terms, google-privacy]
+  links:
+    - name: 'Gemini Apps Privacy Hub'
+      url: https://support.google.com/gemini/answer/13594961
+    - name: 'Manage your Gemini Apps activity'
+      url: https://support.google.com/gemini/answer/13278892
+    - name: 'Google One terms of service'
+      url: https://one.google.com/terms-of-service
+    - name: 'Cancelling'
+      url: https://support.google.com/googleone/answer/9056360
+    - name: 'Purchase, cancellation and refund policies'
+      url: https://support.google.com/googleone/answer/2736362
+    - name: 'Google One trials'
+      url: https://support.google.com/googleone/answer/9155746
+    - name: 'Changing plans'
+      url: https://support.google.com/googleone/answer/9003633
+    - name: 'Family sharing'
+      url: https://support.google.com/googleone/answer/9004015
+    - name: 'Pricing'
+      url: https://gemini.google/ca/subscriptions/?hl=en-CA
+    - name: 'Google Play subscriptions'
+      url: https://support.google.com/googleplay/answer/7018481
+    - name: 'Vulnerability Reward Program'
+      url: https://bughunters.google.com/about/rules/google-friends/google-and-alphabet-vulnerability-reward-program-vrp-rules
+  ratings:
+    - topic: privacy.ai-training
+      tier: poor
+      reason: "If you're 18 or over, your Gemini chats train Google's AI unless you turn off Keep Activity, and turning it off stops that for new chats only."
+      sources:
+        - url: https://support.google.com/gemini/answer/13278892
+          quote: 'If you’re 18 or over, Keep Activity is on by default.'
+        - url: https://support.google.com/gemini/answer/13594961
+          quote: 'Google uses your activity to provide, develop, and improve its services (including training generative AI models), as well as to protect Google, its users, and the public with the help of human reviewers.'
+        - url: https://support.google.com/gemini/answer/13594961
+          quote: 'Your future chats won’t appear in your Activity, and won’t be used to train our AI models, unless you choose to send Google feedback.'
+      action:
+        name: 'How to turn off Keep Activity'
+        url: https://support.google.com/gemini/answer/13278892
+      lastVerified: 2026-11-04
+    - topic: privacy.content-access
+      tier: poor
+      reason: 'People, its contractors among them, read some of your Gemini chats to improve its AI. Turning off Keep Activity stops that for new chats, though chats can still be read to keep people safe.'
+      sources:
+        - url: https://support.google.com/gemini/answer/13594961
+          quote: 'A subset of chats are reviewed by human reviewers (including Google’s trained service providers) to help improve Google services.'
+        - url: https://support.google.com/gemini/answer/13594961
+          quote: 'To stop your future chats from being reviewed to improve Google services, turn off your Keep Activity setting.'
+        - url: https://support.google.com/gemini/answer/13594961
+          quote: 'Even if your Keep Activity setting is off or you use temporary chats, Google still uses your chats to respond to you and help protect Google, our users, and the public, including with help from human reviewers.'
+      action:
+        name: 'How to turn off Keep Activity'
+        url: https://support.google.com/gemini/answer/13278892
+      lastVerified: 2026-11-04
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'Gemini deletes your chats after 18 months unless you pick 3 or 36 months or never, and keeps them 72 hours with Keep Activity off. Chats people reviewed stay up to 3 years, apart from your account, even if you delete them.'
+      sources:
+        - url: https://support.google.com/gemini/answer/13594961
+          quote: 'Your activity is auto-deleted after 18 months. You can change this to 3 or 36 months, or choose not to auto-delete.'
+        - url: https://support.google.com/gemini/answer/13594961
+          quote: 'Temporary chats and chats you have when Keep Activity is off are retained with your account for 72 hours'
+        - url: https://support.google.com/gemini/answer/13594961
+          quote: 'Chats reviewed by human reviewers (and related data like your language, device type, location info, or feedback) are not deleted when you delete your activity. Instead, they are retained for up to three years.'
+      lastVerified: 2026-11-04
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel online whenever you like, in a few taps, and keep your plan until the end of the time you paid for.'
+      sources:
+        - url: https://support.google.com/googleone/answer/9056360
+          quote: 'You can cancel your Google One membership plan at any time.'
+        - url: https://support.google.com/googleone/answer/9056360
+          quote: 'When you cancel your membership, your Google One storage and benefits won’t go away immediately. You have until the end of the billing cycle to use them.'
+      lastVerified: 2026-11-04
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back for part of a month or year unless the law says so, but you keep your plan until the end of the time you paid for.'
+      sources:
+        - url: https://gemini.google/ca/subscriptions/?hl=en-CA
+          quote: 'No refunds for partial billing periods, except as required by applicable law.'
+        - url: https://support.google.com/googleone/answer/9056360
+          quote: 'When you cancel your membership, your Google One storage and benefits won’t go away immediately. You have until the end of the billing cycle to use them.'
+      lastVerified: 2026-11-04
+    - topic: billing.price-changes
+      tier: great
+      reason: "A new price never applies to time you've paid for, and it tells you at least 30 days before charging more, so you can cancel first."
+      sources:
+        - url: https://one.google.com/terms-of-service
+          quote: 'For changes to pricing for Google One subscriptions, these changes will apply after your current payment period is complete and when the next payment is due from you after the notice.'
+        - url: https://one.google.com/terms-of-service
+          quote: 'We will give you at least 30 days’ prior notice of a price increase before you are charged.'
+      lastVerified: 2026-11-04
+    - topic: billing.free-trials
+      tier: poor
+      reason: "Its trials need a card up front and turn into a paid plan on their own unless you cancel before the trial's last day. It doesn't promise to remind you first."
+      sources:
+        - url: https://support.google.com/googleone/answer/9155746
+          quote: "Tip: A form of payment is required so that your membership can continue at the end of your trial. You won't be charged until your trial ends."
+        - url: https://support.google.com/googleone/answer/9155746
+          quote: "You'll be automatically charged using the form of payment you entered when you signed up."
+        - url: https://support.google.com/googleone/answer/9155746
+          quote: "If you don't want to be charged, cancel your membership before the last day of your trial."
+      lastVerified: 2026-11-04
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say your plan renews on its own until you cancel, but not that it reminds you first.'
+      pages:
+        - https://one.google.com/terms-of-service
+        - https://support.google.com/googleone/answer/2736362
+        - https://support.google.com/googleplay/answer/7018481
+      lastVerified: 2026-11-04
+    - topic: billing.fees
+      status: not-stated
+      reason: "Its terms list no fees beyond the plan's price. AI credits for more use are sold on their own."
+      pages:
+        - https://one.google.com/terms-of-service
+        - https://support.google.com/googleone/answer/2736362
+      lastVerified: 2026-11-04
+    - topic: billing.plan-changes
+      tier: good
+      reason: "Moving up starts at once, and what's left of your old plan turns into extra days on the new one. Moving down waits until your next bill."
+      sources:
+        - url: https://support.google.com/googleone/answer/9003633
+          quote: 'When you upgrade your plan purchased through Google Play, you pay the full price of your upgraded plan and the change takes place immediately.'
+        - url: https://support.google.com/googleone/answer/9003633
+          quote: 'Add more storage: If you stay on a Standard or AI plan but increase your storage amount, the remaining value of your original plan becomes one-time extra days of service on your new plan.'
+        - url: https://support.google.com/googleone/answer/9003633
+          quote: 'If you downgrade your plan, your current plan remains active until the end of your billing cycle. The downgrade takes effect at the start of your next billing cycle.'
+      lastVerified: 2026-11-04
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'AI credits you buy may be lost when your plan ends, and Google can change how many credits each use costs whenever it likes.'
+      sources:
+        - url: https://one.google.com/terms-of-service
+          quote: 'Google reserves the right to modify the credit cost for using AI features.'
+        - url: https://one.google.com/terms-of-service
+          quote: 'Any unused AI credits may be forfeited upon termination or cancellation of your Google One plan, subject to any applicable refund policies.'
+      lastVerified: 2026-11-04
+    - topic: service.account-sharing
+      tier: great
+      reason: 'On a paid plan you can share Gemini and your storage with up to 5 people in a family group, each with their own Google Account, as long as they live in your country.'
+      sources:
+        - url: https://support.google.com/googleone/answer/9004015
+          quote: 'Access to AI benefits such as Gemini App, Google Antigravity, Gemini Notebook, and other AI features.'
+        - url: https://support.google.com/googleone/answer/9004015
+          quote: 'To set up a family group, you must be 18 years or older. The people you invite need to live in the same country as you.'
+        - url: https://support.google.com/googleone/answer/9004015
+          quote: 'You can share Google One with up to 5 family members.'
+      lastVerified: 2026-11-04
+    - topic: security.practices
+      tier: neutral
+      reason: "It pays security experts who find and report problems in its services, but doesn't say outside experts regularly check Gemini's security or publish what they find."
+      sources:
+        - url: https://bughunters.google.com/about/rules/google-friends/google-and-alphabet-vulnerability-reward-program-vrp-rules
+          quote: 'we maintain a Vulnerability Reward Program for Google-owned and Alphabet (Bet) subsidiary web properties, running continuously since November 2010.'
+        - url: https://bughunters.google.com/about/rules/google-friends/google-and-alphabet-vulnerability-reward-program-vrp-rules
+          quote: 'In principle, any Google-owned or Alphabet (Bet) subsidiary web service that handles reasonably sensitive user data is intended to be in scope.'
+      lastVerified: 2026-11-04
+    - topic: other.notable
+      title: Tasks Gemini does for you
+      tier: neutral
+      reason: 'Gemini can act for you, and Google warns it may make purchases or share your data with others by mistake. You choose how often it asks before it acts.'
+      sources:
+        - url: https://support.google.com/gemini/answer/13594961
+          quote: 'Take care since Gemini can make mistakes, like making purchases or sharing your data with third parties unexpectedly.'
+        - url: https://support.google.com/gemini/answer/13594961
+          quote: 'You can control how often Gemini asks for your permission before taking actions.'
+      lastVerified: 2026-11-04

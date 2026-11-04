@@ -1,0 +1,151 @@
+url: https://policies.google.com/terms/information-requests
+method: fetch
+saved: 2026-11-04
+
+How Google handles government requests for user information – Privacy & Terms – Google Skip to main content
+Privacy & Terms Privacy & Terms
+Sign in
+Privacy & Terms Privacy & Terms
+Privacy & Terms
+Overview
+Privacy Policy
+Terms of Service
+Technologies
+FAQ
+Google Account
+Overview
+Privacy Policy
+Terms of Service
+Technologies
+FAQ
+Privacy & Terms
+close
+Overview
+Privacy Policy
+Terms of Service Updates
+Definitions
+List of services & service-specific additional terms
+How Google handles government requests for user information
+Technologies
+FAQ
+Terms
+Updates
+Definitions
+List of services & service-specific additional terms
+How Google handles government requests for user information
+How Google handles government requests for user information
+Government agencies from around the world ask Google to disclose user information. We carefully review each request to make sure it satisfies applicable laws. If a request asks for too much information, we try to narrow it, and in some cases we object to producing any information at all. We share the number and types of requests we receive in our Transparency Report.
+The way we respond to a request depends on your Google service provider — for most of our services that’s either Google LLC, a US company operating under US law, or Google Ireland Limited, an Irish company operating under Irish law. To find which is your service provider, review Google’s Terms of Service or check with your account administrator if your Google Account is managed by an organization.
+Notifying users of requests for information
+
+When we receive a request from a government agency, we send an email to the user account before disclosing information. If the account is managed by an organization, we’ll give notice to the account administrator.
+We won’t give notice when legally prohibited under the terms of the request. We’ll provide notice after a legal prohibition is lifted, such as when a statutory or court-ordered gag period has expired.
+We might not give notice if the account has been disabled or hijacked. And we might not give notice in the case of emergencies, such as threats to a child’s safety or threats to someone’s life, in which case we’ll provide notice if we learn that the emergency has passed.
+Requests for information made to Google LLC
+
+Requests from US government agencies in civil, administrative, and criminal cases
+The Fourth Amendment to the US Constitution and the Electronic Communications Privacy Act (ECPA) restrict the government’s ability to force a provider to disclose user information. US authorities must at least do the following:
+In all cases: Issue a subpoena to compel disclosure of basic subscriber registration information and certain IP addresses
+In criminal cases Get a court order to compel disclosure of non-content records, such as the To, From, CC, BCC, and Timestamp fields in emails
+Get a search warrant to compel disclosure of the content of communications, such as email messages, documents, and photos
+Requests from US government agencies in cases that involve national security
+In investigations related to national security, the US government may use a National Security Letter (NSL) or one of the authorities granted under the Foreign Intelligence Surveillance Act (FISA) to compel Google to provide user information.
+An NSL doesn’t require judicial authorization and can only be used to compel us to provide limited subscriber information.
+FISA orders and authorizations can be used to compel electronic surveillance and the disclosure of stored data, including content from services like Gmail, Drive, and Photos.
+Requests from government authorities outside the US
+Google LLC sometimes receives data disclosure requests from government authorities outside of the US. When we receive one of these requests, we may provide user information if doing so is consistent with all of the following:
+US law, which means that the access and disclosure is permitted under applicable US law, such as the Electronic Communications Privacy Act (ECPA)
+Law of the requesting country which means that we require the authority to follow the same due process and legal requirements that would apply if the request were made to a local provider of a similar service
+International norms which means we only provide data in response to requests that satisfy the Global Network Initiative’s Principles on Freedom of Expression and Privacy and its associated implementation guidelines
+Google’s policies which include any applicable terms of service and privacy policies, as well as policies related to the protection of freedom of expression
+Requests for information made to Google Ireland Limited (applies if your Google service provider is Google Ireland Limited)
+
+Because Google Ireland is responsible for providing the majority of Google services in the European Economic Area and Switzerland, it also receives requests for user information.
+Requests from Irish government agencies
+Google Ireland considers Irish law when evaluating requests for user information by an Irish agency. Irish law requires that Irish law enforcement authorities obtain a judicially-authorized order to compel Google Ireland to provide user information.
+Requests from government authorities outside Ireland
+Google Ireland offers services to users located throughout the European Economic Area and Switzerland, and we sometimes receive data disclosure requests from government authorities outside of Ireland. In this case, we may provide user data if doing so is consistent with all of the following:
+Irish law, which means that the access and disclosure is permitted under applicable Irish law, such as the Irish Criminal Justice Act
+European Union (EU) law applicable in Ireland, which means any EU laws applicable in Ireland including the General Data Protection Regulation (GDPR)
+Law of the requesting country which means that we require the authority to follow the same due process and legal requirements that would apply if the request were made to a local provider of a similar service
+International norms which means we only provide data in response to requests that satisfy the Global Network Initiative’s Principles on Freedom of Expression and Privacy and its associated implementation guidelines
+Google’s policies which include any applicable terms of service and privacy policies, as well as policies related to the protection of freedom of expression
+Requests for information in emergencies
+
+If we reasonably believe that we can prevent someone from dying or from suffering serious physical harm, we may provide information to a government agency — for example, in the case of bomb threats, school shootings, kidnappings, suicide prevention, and missing persons cases. We still consider these requests in light of applicable laws and our policies.
+Opens in a new tab(opens a footnote)
+Google
+About Google
+Privacy
+Terms
+Transparency Center
+English
+Afrikaans
+Bahasa Indonesia
+Bahasa Melayu
+Català
+Čeština
+Dansk
+Deutsch
+Eesti
+English
+English (India)
+English (United Kingdom)
+Español
+Español (Latinoamérica)
+Euskara
+Filipino
+Français
+Français (Canada)
+Gaeilge
+Galego
+Hrvatski
+Isizulu
+Íslenska
+Italiano
+Kiswahili
+Latviešu
+Lietuvių
+Magyar
+Malti
+Nederlands
+Norsk
+Polski
+Português (Brasil)
+Português (Portugal)
+Română
+Slovenčina
+Slovenščina
+Srpski
+Suomi
+Svenska
+Tiếng Việt
+Türkçe
+অসমীয়া
+Ελληνικά
+Български
+ଓଡିଆ
+Русский
+Српски
+Українська
+‫עברית‬
+‫اردو‬
+‫العربية‬
+‫فارسی‬
+አማርኛ
+मराठी
+हिन्दी
+বাংলা
+ગુજરાતી
+தமிழ்
+తెలుగు
+ಕನ್ನಡ
+മലയാളം
+ไทย
+한국어
+中文 (香港)
+中文（简体中文）
+中文（繁體中文）
+日本語
+Google apps
+Main menu

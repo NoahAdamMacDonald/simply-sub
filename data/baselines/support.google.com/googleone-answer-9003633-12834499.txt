@@ -1,0 +1,234 @@
+url: https://support.google.com/googleone/answer/9003633
+method: fetch
+saved: 2026-11-04
+
+Update your Google One plan & fix upgrade issues - Computer - Google One Help Skip to main content
+Google One Help
+Sign in
+Google Help
+Help Center
+Community
+Google One
+Privacy Policy
+Terms of Service
+Submit feedback
+Send feedback on...
+This help content & information
+General Help Center experience
+Close Next
+Help Center
+Community
+Google One
+Update your Google One plan & fix upgrade issues
+You can use Google One storage space for Google Drive, Gmail, and Google Photos. Check if Google One is available for your account.
+If you're ever locked out of your Google Account, recovery options can help you get back in. Learn more about account recovery.
+If you use an iPhone or iPad and pay for a Google One plan through Google Drive, Gmail or Google Photos, learn how to manage your membership in other apps.
+Update your Google One membership
+Important:
+Benefit eligibility depends on your current billing location. If you change your billing location, there are changes about the benefits you're eligible for.
+It may take up to 24 hours for new storage to become available after you purchase an upgraded storage plan.
+Quarterly billing is currently only available in India for the following Google One plans:
+30 GB
+100 GB
+200 GB
+Google AI Plus (400 GB and 2 TB)
+Google AI Pro (5 TB)
+You can select a storage plan that has more or less storage space. You can also switch your storage plan to a monthly, quarterly (India only), or annual subscription.
+Change your plan
+To switch to a different Google One plan:
+On your computer, go to Google One.
+Click Manage membership Change membership plan.
+Choose your new plan.
+To upgrade: Select a plan under "Upgrade options."
+To downgrade: Select a plan under "Downgrade options."
+If there’s no downgrade option, you're on the lowest plan.
+To review the membership details, click See all benefits.
+To confirm the new plan price and details, click Yes, continue.
+Select your payment method.
+Click Subscribe.
+Change your storage plan
+Learn when your plan changes will take effect
+When you upgrade your plan purchased through Google Play, you pay the full price of your upgraded plan and the change takes place immediately. How remaining credit on your previous plan applies depends on your new plan:
+Add more storage: If you stay on a Standard or AI plan but increase your storage amount, the remaining value of your original plan becomes one-time extra days of service on your new plan.
+Upgrade plan type: If you switch from a Standard plan to an AI plan, you will usually receive a partial refund for the the remaining value of your original plan
+If you downgrade your plan, your current plan remains active until the end of your billing cycle. The downgrade takes effect at the start of your next billing cycle.
+Tip:
+When you upgrade to a new plan type, sometimes your old plan’s remaining time is applied as extra time on your new plan instead of as a refund.
+Change your billing cadence
+When you upgrade or downgrade a plan, you can also switch to monthly or annual plans. Annual plans usually cost less overall.
+On your computer, go to one.google.com.
+Click Settings Change membership plan.
+Select a subscription plan:
+Monthly
+Quarterly (India only)
+Annual
+Confirm the new plan price and details. Then, click Next.
+Select your payment method and click Subscribe.
+When your new payment schedule will take effect:
+If you switch from monthly to annual: The change takes effect immediately. Your remaining monthly time is credited toward the new annual cost.
+If you switch from annual to monthly: The change takes effect at the end of your current annual term.
+Cancel your Google One plan
+If you don't want to pay for extra storage, you can end your Google One plan. When you cancel your plan, your Google Account still has up to 15 GB of personal storage at no charge. To get more storage space, you can rejoin Google One.
+Learn how to cancel your Google One membership.
+If you sign up through the App Store
+If you sign up for Google One through the App Store on an iPhone or iPad and later switch to an Android device: You can't adjust your membership or change your payment method in the app. To update your account and other info, use the App Store on another device.
+If you sign up through a third party or affiliate
+If you start a Google One subscription from a third-party service provider, such as a mobile phone carrier, you must go to your service provider’s website or app to:
+Change to a different bundled plan that includes Google One.
+Change to a different Google One plan.
+Cancel the Google One plan.
+Learn about third-party Google One subscriptions.
+Use Google One with Workspace Individual
+Your Workspace Individual plan comes with 1 TB of storage. You can buy more storage with Google One. Learn about Workspace Individual.
+If you're a Google One plan member:
+Your Google One plan storage is in addition to your Workspace Individual storage.
+There's no change to your Google One membership or Family Plan and Membership Sharing.
+You stay enrolled unless you choose to cancel.
+Issues with your storage space
+Check your storage space
+You can check your available storage from the Google One app.
+On your computer, go to one.google.com.
+On the left, click Storage.
+To check storage that each family member uses, next to "Family storage," click the Down arrow .
+Family members use too much shared storage
+By default, family members can use any amount of the available storage. If a member uses too much storage, ask them to clear some of their storage.
+If you don't want to share your storage with your family, learn how to stop sharing Google One.
+Storage space doesn’t increase after upgrade
+It may take up to 24 hours for your new storage to become available after you purchase a new storage plan.
+If your storage is still incorrect after 24 hours, sign into your Google Account to check if your payment went through.
+If your payment went through, it’s been 24 hours since you upgraded, and your storage is still incorrect, try these troubleshooting steps.
+If a charge is applied to your payment card, but you don’t find a payment reflected on your Google Account, check if you’re signed into multiple Google Accounts. If so, Google One may be purchased on a different account. You can cancel the purchase on that account and repurchase Google One on the desired account. Learn how to cancel purchases on Google One.
+Available storage doesn't go up as much as expected
+Tip: If you change your storage limit, it can take up to 24 hours for the changes to apply to your account.
+A Google One membership replaces your current storage plan. The storage from your Google One membership becomes your new storage limit and isn't added on top of your existing storage.
+If you got storage as part of a promotion, you keep the extra storage.
+Learn more about how Google One works with existing storage.
+Available storage doesn't increase after you delete files
+After you delete a large number of files, it normally takes up to 48–72 hours for Google's systems to accurately update the storage space
+If after 48-72 hours you still are at quota, you might have files, such as photos and videos, set to back up automatically. When you delete a large number of files, unless automatic back up is turned off, files queued for back up are added to fill the free space. Learn more about Google Photos back ups.
+In addition, some files don't count against your storage space. Different products and files are stored differently and have varying file sizes. Learn more about what files take up space.
+Other issues
+Change or update your browser for a better experience
+To use Google One’s features and benefits from your computer, you need the most up-to-date version of your web browser. For the best experience, update your browser or switch to another one.
+Supported browsers
+Google One no longer supports Internet Explorer. To use Google One, update your computer to use Chrome or switch to a different browser.
+Google One supports Google Chrome, Firefox, MS Edge, Safari, and Opera.
+Update your browser
+For instructions on how to upgrade, visit your browser's help resources:
+Google Chrome
+Firefox
+MS Edge
+Safari
+You can’t send or receive emails after the upgrade
+If you change your storage limit, it can take up to 24 hours for the changes to apply to your account. In these 24 hours, messages you send or receive through Gmail can be affected. Try these troubleshooting steps:
+Sign out of your Google Account, then sign back in.
+Send a test email to yourself.
+If that doesn’t work:
+Open an incognito window and log into your Gmail account. Then, try to send an email.
+Use a different browser like Microsoft Edge or Firefox to open your Google Account. Try to send an email.
+If you still can’t send messages, wait 24 hours and try again.
+Learn what happens if you run out of space
+All your files stay safe, but you can’t store anything new. For example:
+Gmail: You can't send or receive messages. Messages sent to you are returned to the sender.
+Google Drive:
+You can't sync or upload new files.
+Syncs stop between your computer's Google Drive folder and My Drive.
+You can’t create new files in:
+Google Docs
+Sheets
+Slides
+Drawings
+Forms
+Vids
+Until you reduce the amount of storage you use, no one can edit or copy your files.
+Google Photos: You can't back up any photos or videos.
+Tip: To avoid these restrictions, you can clean up Google storage space. You can also buy more Google storage.
+Clean up storage space
+Learn how to manage space on Google Drive.
+Manage subscriptions that were not purchased on the Play or App Store
+If you purchased your subscription through the Google One website, you can manage your plan on the web.
+At the top right, select Settings Change membership plan.
+Choose your new storage limit. You can choose a monthly, quarterly, or annual subscription.
+Currently, quarterly subscription is only available in India for Android and web.
+If you have Google One on an Android device, you can change your membership plan in Settings.
+Tip: You can also manage your payment method or manage your subscriptions with Google Play.
+You can link your Apple account to only one Google Account
+To make changes to your Google One membership plan on your iPhone or iPad, you must make those changes in the Google app used to purchase the plan.
+Google One
+Gmail
+Google Drive
+Google Photos
+Learn how to manage your membership in other apps.
+Related resources
+Cancel your Google One membership
+Upgrade to Google One from Gmail, Drive, or Photos
+Set up recovery options for your Google Account & get sign-in help
+Computer Android phone & tabletiPhone & iPad More
+Need more help?
+Try these next steps:
+Post to the help community Get answers from community members
+true
+Help
+1 of 12
+Update your Google One plan & fix upgrade issues
+2 of 12
+How your existing storage works with Google One
+3 of 12
+Fix issues with Google Drive
+4 of 12
+Fix issues with Google Photos
+5 of 12
+Back up your device
+6 of 12
+Clean up & fix issues with your Google storage
+7 of 12
+Buy more Google storage
+8 of 12
+Use Google Drive for desktop
+9 of 12
+Upgrade to Google One from Gmail, Drive, or Photos
+10 of 12
+Manage Google Drive for desktop: Advanced guide
+11 of 12
+Google One price update: February 2025
+12 of 12
+Google One price update: July 2026
+©2026 Google Privacy Policy
+Terms of Service
+Language català&lrm; dansk&lrm; Deutsch&lrm; eesti&lrm; English (United Kingdom)&lrm; español&lrm; español (Latinoamérica)&lrm; Filipino&lrm; français&lrm; hrvatski&lrm; Indonesia&lrm; italiano&lrm; latviešu&lrm; lietuvių&lrm; magyar&lrm; Melayu&lrm; Nederlands&lrm; norsk&lrm; polski&lrm; português&lrm; português (Brasil)&lrm; română&lrm; slovenčina&lrm; slovenščina&lrm; suomi&lrm; svenska&lrm; Tiếng Việt&lrm; Türkçe&lrm; čeština&lrm; Ελληνικά&lrm; български&lrm; русский&lrm; српски&lrm; українська&lrm; &rlm;עברית &rlm;العربية &rlm;فارسی मराठी&lrm; हिन्दी&lrm; తెలుగు&lrm; ไทย&lrm; 中文（简体）&lrm; 中文（繁體）&lrm; 中文（香港）&lrm; 日本語&lrm; 한국어&lrm; English&lrm; Enable Dark Mode
+Send feedback on...
+This help content & information General Help Center experience
+Search
+Clear search
+Close search
+Google apps
+Main menu
+8461275543674987686
+true
+Search Help Center
+false
+true
+true
+true
+true
+true
+5044059
+function zI(a){this.Ba=Be(a)}
+v(zI,uh);zI.prototype.Ca=Ri([0,ri,xi]);function AI(a){this.Ba=Be(a)}
+v(AI,uh);AI.prototype.getCaseId=function(){return Of(this,1)};var NJa=[0,xi,Li,-1,xi,Hj,Li,xi,-1];AI.prototype.Ca=Ri(NJa);function BI(a){this.Ba=Be(a)}
+v(BI,uh);BI.prototype.Ca=Ri([0,zi,NJa]);function OJa(){var a=a===void 0?$q():a;var b;return Ya(function(d){try{return b=new zI,d.return(a.post({endpoint:"caseslist",queryParams:{v:"1"},request:b,response:BI}))}catch(e){return d.return(new BI)}})}
+;var PJa=new ua.Map([[1,"gm/chat"],[2,"gm/email"],[3,"gm/account_circle"],[4,"gm/phone"],[5,"gm/play_arrow"]]);function CI(a){var b=a.cases;var d=a.caseHistoryTextSnippets;a=a.enableFeedbackButton;E.call(this,"sc.case_history.CaseHistory");this.isCollapsed=!0;this.cases=b.filter(function(e){return Pf(e,6)===2});
+this.caseHistoryTextSnippets=d;this.enableFeedbackButton=a}
+v(CI,E);CI.prototype.content=function(){var a=this;this.cases.length&&(this.element("div","class","root",function(){a.element("div","class","title-container",function(){a.element("div","class","title","role","heading",(new Ap("{NUM_CASES, plural, =1 {Recent case}other {Recent cases}}")).format({NUM_CASES:a.cases.length}));a.cases.some(function(b){return Pf(b,6)===2})&&a.element("div","class","subtitle",(new Ap("{NUM_CASES, plural, =1 {We're working on this support case for you}other {We're working on these support cases for you}}")).format({NUM_CASES:a.cases.length}))});
+QJa(a);RJa(a)}),Fp(4,this.cases.map(function(b){return b.getCaseId()}).join(","),150))};
+function QJa(a){a.ma=a.element("div","tabindex","0","class","card",function(){var b=a.cases.slice(0,a.isCollapsed?1:5);b=x(b);var d=b.next();try{for(var e={};!d.done;e={Qw:void 0},d=b.next())e.Qw=d.value,a.element("div","class","container",function(f){return function(){SJa(a,{channel:Pf(f.Qw,3),DX:Of(f.Qw,8),productName:Of(f.Qw,7)});TJa(a,f.Qw)}}(e))}finally{Ma(b,d)}})}
+function SJa(a,b){var d=b.channel;var e=b.DX;var f;b=(f=PJa.get(d))!=null?f:"gm/announcement";var h=new So({icon:b});a.element("div","class","icon-container",function(){a.element("div","class","icon-background",function(){a.element("div","class","icon",h)});
+a.element("div","class","product-icon-container",function(){a.element("img","class","product-icon","aria-hidden","true","src",e)})})}
+function TJa(a,b){var d=gp(tf(b,Dj,5).getSeconds())*1E3,e=a.caseHistoryTextSnippets.lastUpdated+" "+vu({LJ:d});a.element("div","class","info",function(){a.element("div","class","details",function(){a.element("span","class","product",Of(b,7));Of(b,4)&&a.element("span","class","aria-hidden","true","separator"," \u22c5 ");a.element("span","class","symptom",Of(b,4));a.element("div","class","case-id",a.caseHistoryTextSnippets.caseId+" "+b.getCaseId());a.element("div","class","update-time-mobile",e)});
+var f=Pf(b,6)===2?a.caseHistoryTextSnippets.inProgress:a.caseHistoryTextSnippets.finished;a.element("div","class","status",function(){a.element("div","class","state",f);a.element("div","class","update-time",e)});
+a.element("div","class","state-mobile",f)})}
+function RJa(a){a.element("div","class","button-container",function(){a.cases.length>1&&UJa(a);a.enableFeedbackButton&&VJa(a)})}
+function UJa(a){var b=new Wo({text:a.isCollapsed?a.caseHistoryTextSnippets.viewMore:a.caseHistoryTextSnippets.showLess,style:1,Qc:!0,trigger:function(){Fp(35,"case_history_view_more_button_click",150);a.isCollapsed=!a.isCollapsed;a.Ja();a.ma.focus()},
+ariaLabel:a.isCollapsed?"View more recent cases":"Show less recent cases",ariaExpanded:!a.isCollapsed});a.element("div","class","expansion-toggle-button",b)}
+function VJa(a){if(A().lang==="en"){var b={surveyPositioning:function(f,h){return{anchor:4,verticalMargin:a.o.getBoundingClientRect().top+a.o.getBoundingClientRect().height,horizontalMargin:a.o.getBoundingClientRect().left-h.width+a.o.getBoundingClientRect().width}}},d={surveyPositioning:function(){return{anchor:5}}},e=new Wo({text:"Give feedback",
+style:1,Rb:"color-label",icon:"gm/announcement",trigger:function(){hv(new gv,{triggerId:"bRbSQMyPF0mgoFgKhno0NUKWpCY4",Ox:Hu()?d:b
