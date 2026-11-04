@@ -18,8 +18,9 @@ their own.
 
 ## Rules
 
-- **Official pages only:** the provider's terms of service (or subscriber agreement), privacy policy, cookie notice,
-  refund or cancellation help, household or sharing rules, download limits, sign-up form, and its own posts on audits.
+- **Official pages only:** the provider's terms of service (or subscriber agreement), privacy policy, its apps'
+  licence, the agreements those include, cookie notice, refund or cancellation help, household or sharing rules,
+  download limits, sign-up form, and its own posts on audits.
   Search and third-party summaries only to *find* a page. A page behind a bot check is left out and reported: never
   try to get past one.
 - **Shared documents first** (M11.1): one company's policy often covers several providers (Disney's privacy policy:
@@ -36,9 +37,22 @@ their own.
   with the pages read in `pages` and no tier or sources, when nothing read addresses it (the topic's `silent` says
   whether the card shows that as a grade); `status: not-applicable` when it can't apply (no free trial). Either way a
   reason ("Its terms and privacy policy don't say whether it tells you before raising the price").
+- **Every agreement a user accepts** (the owner's rule, 2026-11-03): not only the terms and the privacy policy. Look
+  for each of these, on the provider's own sites, and read every one whole by the procedure below:
+  - its apps' licence (EULA, end user licence agreement, software licence terms): on the download page, in the
+    installer's first screen (the page it links), or in the legal centre;
+  - a subscription or subscriber agreement, when it's a document of its own;
+  - what the sign-up form's checkbox or "By signing up, you agree to…" line names: open the sign-up page and read
+    the line, without signing up;
+  - what any of them includes by reference ("These Terms incorporate…", "Your use is also subject to…", "together
+    with our … Policy"): an acceptable-use or usage policy, community standards or a code of conduct, content or
+    technical requirements, another company's terms (an app store's, a parent company's services agreement).
+  Each one read goes in `policies.links`, quoted or listed in a rating's `pages`; one that only restates another (a
+  translation, a print view) is left out. Name in the comment above `policies:` each document read and any that
+  wasn't (behind a sign-in, not on its sites).
 - **Notable** (`other.notable`): up to three, for something that stands out and no topic covers (a VPN that takes
-  cash, an installer that removes other security apps), each with a short `title` and a grade on the scale at the
-  top of `data/policy-topics.yaml`. Read the whole terms for them: a notable term is never left out because no topic
+  cash, a VPN built on another company's network), each with a short `title` and a grade on the scale at the top of
+  `data/policy-topics.yaml`. Read every agreement whole for them: a notable term is never left out because no topic
   fits.
 - **Audits for providers with deep access** (VPN, DNS, antivirus, email, password managers, browsers: anything that
   sees your traffic, messages, files or passwords, or runs deep in your device): read its audits page
@@ -108,10 +122,12 @@ their own.
 The pipeline's `extractionRules` state these steps and the routing below in the same words, and a test in core holds
 this file to them: change both together.
 
-1. Find the clauses for the topic in the terms, the privacy policy, and the help centre's billing and privacy pages,
-   and quote up to three, word for word. A grade read from a form or a sign-up flow quotes the page that hosts it,
-   and the reason says so. Read the whole terms and privacy policy, not only the clauses a topic names: step 12 is
-   for what no topic covers.
+1. Find the clauses for the topic in every document a user agrees to: the terms (or subscriber agreement), the
+   privacy policy, its apps' licence (EULA), what the sign-up form's checkbox names, and what any of them includes by
+   reference (an acceptable-use policy, community rules, another company's terms); then the help centre's billing and
+   privacy pages. Quote up to three, word for word. A grade read from a form or a sign-up flow quotes the page that
+   hosts it, and the reason says so. Read each of those documents whole, not only the clauses a topic names: step 12
+   is for what no topic covers.
 2. The default: what happens if you do nothing? Protective is Great or Good. Not protective is Neutral or worse.
 3. The control, when the default isn't protective. Self-serve (a setting in the account or app, a one-click link, a
    form that takes effect at once, for the account on every device) is Neutral. Partial (some data, apps, products or
@@ -149,9 +165,9 @@ this file to them: change both together.
     explains it.
 11. Calibrate: grade the same fact the same way for every provider. Before grading one, read the same topics for two
     providers already graded in its category.
-12. Notable: a term that stands out and that no topic covers (a VPN that takes cash, an installer that removes other
-    security apps) is an other.notable rating with a short "title", graded on the scale, up to three. Never leave a
-    notable term out because no topic fits.
+12. Notable: a term that stands out and that no topic covers (a VPN that takes cash, a VPN built on another company's
+    network) is an other.notable rating with a short "title", graded on the scale, up to three. Never leave a notable
+    term out because no topic fits.
 13. Security: a provider that sees your traffic, messages, files or passwords, or runs with deep access to your
     device (VPN, DNS, antivirus, email, password managers, browsers), is read for its audits page (Mullvad's
     "External audits" posts), its bug bounty or vulnerability disclosure policy and its security advisories. They
@@ -179,6 +195,9 @@ this file to them: change both together.
 - A fee to cancel: billing.cancellation (Bad), and the provider's cancelFee.
 - A currency markup at checkout: billing.fees.
 - A game removed from your purchased library: legal.service-changes.
+- What its apps' licence lets you do (personal or non-commercial use only, one person per copy, no reviews or
+  benchmarks): legal.licence.
+- Apps that update themselves, change your settings or remove other software: service.software-control.
 - Throttling or network management: a plan feature, not a policy.
 
 ## How

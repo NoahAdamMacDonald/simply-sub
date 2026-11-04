@@ -18,10 +18,12 @@ import { excerpt, nameIndexes } from './page-text';
  * How every policy rating is graded (M11.1, docs/catalog-expansion-guide.md §1.3): the policy-research skill's Rules
  * state it word for word, which a test checks, so a rating by hand and one by the pipeline follow the same steps.
  */
-export const policyProcedure = `1. Find the clauses for the topic in the terms, the privacy policy, and the help centre's billing and privacy pages,
-   and quote up to three, word for word. A grade read from a form or a sign-up flow quotes the page that hosts it,
-   and the reason says so. Read the whole terms and privacy policy, not only the clauses a topic names: step 12 is
-   for what no topic covers.
+export const policyProcedure = `1. Find the clauses for the topic in every document a user agrees to: the terms (or subscriber agreement), the
+   privacy policy, its apps' licence (EULA), what the sign-up form's checkbox names, and what any of them includes by
+   reference (an acceptable-use policy, community rules, another company's terms); then the help centre's billing and
+   privacy pages. Quote up to three, word for word. A grade read from a form or a sign-up flow quotes the page that
+   hosts it, and the reason says so. Read each of those documents whole, not only the clauses a topic names: step 12
+   is for what no topic covers.
 2. The default: what happens if you do nothing? Protective is Great or Good. Not protective is Neutral or worse.
 3. The control, when the default isn't protective. Self-serve (a setting in the account or app, a one-click link, a
    form that takes effect at once, for the account on every device) is Neutral. Partial (some data, apps, products or
@@ -59,9 +61,9 @@ export const policyProcedure = `1. Find the clauses for the topic in the terms, 
     explains it.
 11. Calibrate: grade the same fact the same way for every provider. Before grading one, read the same topics for two
     providers already graded in its category.
-12. Notable: a term that stands out and that no topic covers (a VPN that takes cash, an installer that removes other
-    security apps) is an other.notable rating with a short "title", graded on the scale, up to three. Never leave a
-    notable term out because no topic fits.
+12. Notable: a term that stands out and that no topic covers (a VPN that takes cash, a VPN built on another company's
+    network) is an other.notable rating with a short "title", graded on the scale, up to three. Never leave a notable
+    term out because no topic fits.
 13. Security: a provider that sees your traffic, messages, files or passwords, or runs with deep access to your
     device (VPN, DNS, antivirus, email, password managers, browsers), is read for its audits page (Mullvad's
     "External audits" posts), its bug bounty or vulnerability disclosure policy and its security advisories. They
@@ -88,6 +90,9 @@ export const policyRouting = `- Trains AI on your chats, files or photos: privac
 - A fee to cancel: billing.cancellation (Bad), and the provider's cancelFee.
 - A currency markup at checkout: billing.fees.
 - A game removed from your purchased library: legal.service-changes.
+- What its apps' licence lets you do (personal or non-commercial use only, one person per copy, no reviews or
+  benchmarks): legal.licence.
+- Apps that update themselves, change your settings or remove other software: service.software-control.
 - Throttling or network management: a plan feature, not a policy.`;
 
 /** The rules every extraction follows, whoever answers. */
@@ -337,10 +342,19 @@ const topicWords: Readonly<Record<string, readonly string[]>> = {
   'legal.service-changes': ['discontinu', 'modify the service', 'remove', 'purchase'],
   'legal.inactivity': ['inactiv', 'dormant', 'not used', 'inutilis'],
   'legal.output-rights': ['output', 'generated', 'ownership', 'you own'],
+  'legal.licence': [
+    'licen',
+    'personal use',
+    'non-commercial',
+    'reverse engineer',
+    'benchmark',
+    'open source',
+  ],
   'security.practices': ['audit', 'bug bounty', 'vulnerabilit', 'SOC 2', 'ISO 27001', 'security'],
   'service.activity-logging': ['log', 'logging', 'journal'],
   'service.account-sharing': ['household', 'share your account', 'sharing', 'foyer'],
   'service.device-limits': ['device', 'screens', 'streams', 'download', 'appareil'],
+  'service.software-control': ['update', 'uninstall', 'disable', 'remove', 'mise à jour'],
   'finance.money-protection': ['CDIC', 'deposit insurance', 'insured', 'in trust', 'CIPF'],
   'finance.holds': ['hold', 'freeze', 'frozen', 'restrict'],
   'other.notable': [],

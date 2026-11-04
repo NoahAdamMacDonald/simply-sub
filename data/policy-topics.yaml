@@ -413,6 +413,41 @@
     neutral: You own them, but it may reuse them.
     poor: It keeps broad rights over them.
     bad: It owns them and limits your use.
+- id: legal.licence
+  name: Using its apps
+  group: legal
+  question: What the licence for its apps lets you do with them.
+  note: >-
+    Its apps' licence (EULA), or the terms' licence when they give one. The number of devices is the plan's features'
+    and service.device-limits' to grade; this grades the rest: who may use the apps, for what, and what the licence
+    forbids beyond what the law already does. Open-source apps are graded by their own licence. Added with
+    service.software-control on 2026-11-03 (the owner's choice).
+  silent: not-stated
+  categories:
+    [
+      security,
+      vpn,
+      passwords,
+      privacy-suite,
+      browsers,
+      storage,
+      email,
+      ai,
+      gaming,
+      creative,
+      developer,
+      software,
+    ]
+  tiers:
+    great: Open source, so you may read, change and share its apps.
+    good: >-
+      Yours to use, with only the limits the law already sets (no copying or reselling, no reverse engineering where
+      the law forbids it).
+    neutral: For personal or non-commercial use only, or one person per copy, stated plainly.
+    poor: >-
+      It may change or end the licence at will, or it forbids reviews, benchmarks or reverse engineering even where
+      the law allows them.
+    bad: It may stop your copy working at any time, for any reason.
 
 # ── Security ───────────────────────────────────────────────────────────────────
 - id: security.practices
@@ -486,6 +521,37 @@
     neutral: Limits on registered devices or downloads, clearly stated.
     poor: Tight limits, or downloads that expire quickly.
     bad: Unstated limits that can lock you out.
+- id: service.software-control
+  name: Changes to your device
+  group: service
+  question: Whether its apps update themselves, change your settings or remove other software without asking.
+  note: >-
+    What its installed apps change on your device, and whether you can stop it; their telemetry is
+    privacy.data-collection's. An update to its own app that its terms or licence say it makes is expected.
+  silent: not-stated
+  categories:
+    [
+      security,
+      vpn,
+      passwords,
+      privacy-suite,
+      browsers,
+      storage,
+      email,
+      ai,
+      gaming,
+      creative,
+      developer,
+      software,
+    ]
+  tiers:
+    great: Asks before changing anything on your device, updates included.
+    good: Updates only its own app, and says so; nothing else changes.
+    neutral: Also changes its own settings or features from afar, and you can turn automatic updates off.
+    poor: >-
+      Changes its own settings or features with no way to turn that off, or changes other software or your settings
+      (removing other security apps as it installs).
+    bad: May change or remove anything on your device at any time, with no way to stop it.
 
 # ── Finance ────────────────────────────────────────────────────────────────────
 - id: finance.money-protection
