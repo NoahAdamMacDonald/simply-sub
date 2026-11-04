@@ -288,8 +288,9 @@ which reads each page as a visitor there would, before any hand reading:
   address says (`gl=US` still showed CA$): another country's prices there are another country's pages, so ask the
   owner. A page in the wrong country's currency doesn't count.
 - **OpenAI's pages** (ChatGPT, M11.15): chatgpt.com, openai.com and help.openai.com answer a plain fetch (curl,
-  WebFetch) with 403, and read in Edge with no bot check. `data:baselines`, which names the bot in its user agent, meets
-  a bot check on most of them and gets the pricing page without its prices, so the nightly check sends them to a person. chatgpt.com/pricing prices by where the visitor is, and its
+  WebFetch) with 403, and read in Edge with no bot check. The bot, which names itself in its user agent, meets a bot
+  check on most of them, so they're in `data/automation.yaml`'s `archived` (the owner's choice of 2026-11-04): the bot
+  and `data:baselines` read the Internet Archive's newest copy instead, for a change only, never as a source. chatgpt.com/pricing prices by where the visitor is, and its
   Pro card shows only the cheapest tier's local price ("From"); its comparison table's ticks are images (read the
   screenshot). Its help articles' links come from the page, not its text.
 
