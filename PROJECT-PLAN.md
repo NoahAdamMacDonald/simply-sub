@@ -1122,6 +1122,26 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
     stated)" or "(Not applicable)" in the muted text, the pages read cited as plain links; a notable rating is named by
     its title. `check-m11-policies.cjs` (browser-check skill): 57 checks in both themes at both widths with axe;
     `check-search.cjs` follows the split topic and Mullvad's new groups.
+  - **The owner's follow-up: every agreement a user accepts** (2026-11-03, BLUEPRINT §14): the procedure's step 1
+    reads every document a user agrees to (the terms, the privacy policy, its apps' licence, what the sign-up
+    checkbox names and what any of them includes by reference), in core and the skill alike, with the skill's rule
+    on finding them. Two topics, the owner's: `legal.licence` (Using its apps) and `service.software-control`
+    (Changes to your device), for the twelve categories that install software, silence being not-stated; the
+    routing table names both, and `topicFeatureRules` lets the licence be Great only with open-source apps in
+    `software.open-source`. The five in those categories: Mullvad Great and Great (open source; updates you choose),
+    Proton Great and Good (open source; Bridge updates itself unless turned off), Claude Neutral and Good (no
+    competing products; updates without notice), Bitdefender Neutral and Poor (personal use only; its installer may
+    remove other security apps, a notable until now) and Xbox Game Pass Poor and Poor (its store may change the
+    usage rules at any time; configuration changes pushed, stopped only by uninstalling). Read for all 13, in
+    `policies.links` where quoted: Claude's usage policy, Proton Wallet's terms, Xbox's Community Standards and
+    Ultimate's EA Play, Fortnite Crew and Ubisoft+ terms, Netflix's games guidelines, Disney's Terms of Use (the US's
+    in the shared agreement, Canada's for Disney+), CBC/Radio-Canada's digital terms for ICI TOU.TV. Grades they
+    changed: ICI TOU.TV's closing accounts Neutral to Bad (an account blocked "à son entière discrétion") and changes
+    to the terms Good to Neutral (an email, no lead time); Xbox's what you paid for Neutral to Poor ("no obligation
+    to provide a re-download"), and Ultimate's changes to the terms Bad (Ubisoft's "at any time and for any
+    reason"); Disney+ gains a Canadian disputes rating (Poor, opt-out by post, linked). Not read: IdentityForce's
+    terms for Bitdefender's Plus plans (blocked), sign-up lines that show only after an email address, and EA's,
+    Epic's and Ubisoft's own general terms.
 
 **M11.2 — Outside ratings and owners** (BLUEPRINT §4.10)
 - **Raters:** `data/raters.yaml` lists each rater once (id, name, website, `scales` of core's subjects with its labels

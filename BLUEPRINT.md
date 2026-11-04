@@ -1402,15 +1402,18 @@ M1.14, M11.1), so a buyer can see what signing up means beyond the price.
   provider naming it.
 - **A topic and a feature on the same fact** both stay, the feature for ranking and the topic for the card, and must
   agree (core's `topicFeatureRules`): activity logging is Great only when every plan it covers with `vpn.included` has
-  `no-logs` in `vpn.independent-audits`, for a provider's own rating and a shared document's. A rule whose feature
-  isn't in the registry is inactive.
+  `no-logs` in `vpn.independent-audits`, and its apps' licence (`legal.licence`) only when every plan it covers has
+  open-source apps in `software.open-source` (provider-wide or its own), for a provider's own rating and a shared
+  document's. A rule whose feature isn't in the registry is inactive.
 - **One procedure for every grade** (core's `policyProcedure` and `policyRouting`, the guide's §1.3 and §1.5): the
   default first, then how you change it (self-serve, partial, on request or not at all); exceptions for the law,
   fraud, safety, security or a payment never count against a grade, and business purposes do, judged by what the data
   is used for, not by what selects it (chats flagged for safety and then used to improve models count); the worst
   clause wins provider-wide, a clause for some countries or plans being a rating with `regions` or `plans`; broad
-  wording read broadly; each fact in one topic, by the routing table; silence by the topic's `silent`; the whole
-  terms read, and a term that stands out and no topic covers recorded as `other.notable`, never left out; a
+  wording read broadly; each fact in one topic, by the routing table; silence by the topic's `silent`; every
+  document a user agrees to read whole (the terms, the privacy policy, its apps' licence, what the sign-up checkbox
+  names and what any of them includes by reference, the owner's rule of 2026-11-03), and a term that stands out and
+  no topic covers recorded as `other.notable`, never left out; a
   provider with deep access (VPN, DNS, antivirus, email, password managers, browsers) read for its audits page, bug
   bounty or disclosure policy and security advisories, for `security.practices` and `vpn.independent-audits`;
   reasons written as you'd explain them to a five-year-old. Core's `extractionRules` and the policy-research skill's
@@ -3614,6 +3617,18 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-11-03, every agreement a user accepts)**
+- **What's read:** every document a user agrees to, not only the terms and privacy policy: its apps' licence (EULA),
+  a subscription agreement, what the sign-up checkbox names and what any of them includes by reference (a usage
+  policy, community standards, the account's terms, another company's terms). Each is in `policies.links` when a
+  rating quotes it, and named in the comment above `policies:` when not.
+- **Two topics, the owner's choice:** `legal.licence` "Using its apps" (open source is Great; personal use only, or
+  one person per copy, Neutral; a licence it may change or end at will, or no reviews or benchmarks, Poor) and
+  `service.software-control` "Changes to your device" (asks first is Great; updates itself Good; settings changed
+  from afar with updates you can turn off Neutral; no way to turn that off, or other software removed, Poor), for
+  security, VPN, passwords, privacy suites, browsers, storage, email, AI, gaming, creative, developer and software.
+  An installer that removes other security apps is software-control's Poor, no longer a notable.
 
 **Resolved (2026-11-03, provider facts for the 13)**
 - **Where each provider is from:** the owner's `country` (an ISO 3166-1 code), quoted like the owner's name: from the

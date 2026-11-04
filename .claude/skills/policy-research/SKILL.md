@@ -37,19 +37,26 @@ their own.
   with the pages read in `pages` and no tier or sources, when nothing read addresses it (the topic's `silent` says
   whether the card shows that as a grade); `status: not-applicable` when it can't apply (no free trial). Either way a
   reason ("Its terms and privacy policy don't say whether it tells you before raising the price").
-- **Every agreement a user accepts** (the owner's rule, 2026-11-03): not only the terms and the privacy policy. Look
-  for each of these, on the provider's own sites, and read every one whole by the procedure below:
+- **Every agreement a user accepts** (the owner's rule, 2026-11-03): not only the terms and the privacy policy. Find
+  each of these from the provider's own pages, and read every one whole by the procedure below:
   - its apps' licence (EULA, end user licence agreement, software licence terms): on the download page, in the
-    installer's first screen (the page it links), or in the legal centre;
+    installer's first screen (the page it links), or in the legal centre. Open-source apps have no other: their own
+    page saying so is the licence (Proton's "All Proton apps are open source"). Terms that are the licence too
+    (Bitdefender's subscription agreement) say so in the link's name ("Licence and terms of service");
   - a subscription or subscriber agreement, when it's a document of its own;
-  - what the sign-up form's checkbox or "By signing up, you agree to…" line names: open the sign-up page and read
-    the line, without signing up;
-  - what any of them includes by reference ("These Terms incorporate…", "Your use is also subject to…", "together
-    with our … Policy"): an acceptable-use or usage policy, community standards or a code of conduct, content or
-    technical requirements, another company's terms (an app store's, a parent company's services agreement).
-  Each one read goes in `policies.links`, quoted or listed in a rating's `pages`; one that only restates another (a
-  translation, a print view) is left out. Name in the comment above `policies:` each document read and any that
-  wasn't (behind a sign-in, not on its sites).
+  - what the sign-up form's checkbox or "By continuing, you agree to…" line names: open the sign-up page and read the
+    line, typing nothing. A line that shows only after an email address is entered stays unread;
+  - what any of them includes by reference ("These Terms incorporate…", "they include our Acceptable Use Policy",
+    "Your use is also subject to…"): an acceptable-use or usage policy, community standards or a code of conduct,
+    content or technical requirements, the account's terms (Disney's Terms of Use for a MyDisney account), another
+    company's terms (an app store's, a parent company's services agreement).
+  A benefit another company runs (Game Pass Ultimate's EA Play, Fortnite Crew and Ubisoft+ Classics) or an optional
+  feature with terms of its own (Proton Wallet) is read too: a clause worse than the provider's own is a rating for the
+  plans that include it (every plan when every plan can use it), its reason naming the benefit. The general terms and
+  privacy policies those include in turn (EA's user agreement) are those services' own, to rate if they join the
+  catalog. Each document a rating quotes or lists in `pages` goes in `policies.links`; name the rest in the comment
+  above `policies:`, with what they held ("the same grades", "no topic"), and any not read, with why (it shows only
+  after signing in, it blocked this machine).
 - **Notable** (`other.notable`): up to three, for something that stands out and no topic covers (a VPN that takes
   cash, a VPN built on another company's network), each with a short `title` and a grade on the scale at the top of
   `data/policy-topics.yaml`. Read every agreement whole for them: a notable term is never left out because no topic
@@ -235,3 +242,8 @@ this file to them: change both together.
   Bell's "How we collect and use data" covers Crave, TSN and RDS, which can share a document of their own the same
   way. Rate each provider's own terms for the rest.
 - Netflix's help articles ask for a country; their text still loads.
+- CBC/Radio-Canada's general terms for its digital services (which ICI TOU.TV's subscription includes) load each
+  answer only when its question is clicked: open each in Edge (`read-page.cjs`, `click:` by the question's text).
+- Microsoft's Standard Application License Terms (games and apps from its store) are at the end of the services
+  agreement's own page; Xbox's Community Standards are on xbox.com/en-US/legal/community-standards.
+- IdentityForce's terms (Bitdefender's identity theft protection, US plans) block this machine: unread, as a block is.
