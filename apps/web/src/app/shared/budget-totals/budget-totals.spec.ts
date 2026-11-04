@@ -38,6 +38,7 @@ const metrics: ListMetrics = {
   },
   featureSummary: [],
   cashback: { thisYear: 0, approx: false },
+  interest: { amount: 0, approx: false },
   warnings: {},
 };
 
@@ -144,6 +145,19 @@ describe('BudgetTotals', () => {
     );
     expect(render({ metrics: withCashback, compact: true }).querySelector('.cashback')).toBeNull();
     expect(render().querySelector('.cashback')).toBeNull();
+  });
+
+  it('shows the accounts’ interest a year beside the totals, but not on a Lists card (M11.12)', () => {
+    const earning = { ...metrics, interest: { amount: 450, approx: true } };
+    const element = render({ metrics: earning });
+    expect(text(element.querySelector('.interest span[aria-hidden]'))).toBe(
+      '≈ $450.00 interest a year',
+    );
+    expect(text(element.querySelector('.interest .visually-hidden'))).toBe(
+      'about $450.00 interest a year, not counted in the totals',
+    );
+    expect(render({ metrics: earning, compact: true }).querySelector('.interest')).toBeNull();
+    expect(render().querySelector('.interest')).toBeNull();
   });
 
   it('says how many subscriptions it couldn’t count', () => {

@@ -2,10 +2,18 @@ import { Component, ElementRef, computed, inject, input, output, viewChild } fro
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import { addOnText, formerlyText, planTitle, type ResolvedItem, type Tag } from '@simply-sub/core';
+import {
+  addOnText,
+  formerlyText,
+  netCostAYear,
+  planTitle,
+  type ResolvedItem,
+  type Tag,
+} from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { ClockService } from '../../core/clock/clock-service';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { conditionText, rateText } from '../account-terms/account-text';
 import { BillingCheck } from '../billing-check/billing-check';
 import { billingText, ownPriceText } from '../billing-text';
 import { chargeAmountText, type ShownAndSpoken } from '../charge-text';
@@ -13,6 +21,7 @@ import { countryName } from '../country-name';
 import { dateText, joinsText } from '../date-text';
 import { FeatureList } from '../feature-list/feature-list';
 import { PriceTag } from '../price-tag/price-tag';
+import { amountText } from '../price-tag/price-text';
 import { ProviderIcon } from '../provider-icon/provider-icon';
 import { StatusBadge, type BadgeStatus } from '../status-badge/status-badge';
 import { TagChip } from '../tags/tag-chip';
@@ -133,8 +142,56 @@ export class ItemCard {
     const percent = Math.round(share * 100);
     return percent === 0 ? '<1% of list' : `${percent}% of list`;
   });
-  /** What it costs: the price override while it applies, else the plan's price. */
-  protected readonly price = computed(() => this.resolved().override ?? this.resolved().price);
+  /** What it costs: the price override while it applies, else the plan's price, or the fee its account waives. */
+  protected readonly price = computed(
+    () => this.resolved().feeWaived?.fee ?? this.resolved().override ?? this.resolved().price,
+  );
+  /**
+   * A finance account's money (M11.12, PROJECT-PLAN §3.1): the waiver its facts meet, its interest a year, and its net
+   * cost a year when it has a fee to net against. Nothing for another plan.
+   */
+  protected readonly accountLines = computed(() => {
+    const resolved = this.resolved();
+    const { account, feeWaived, interest, monthlyEquivalent } = resolved;
+    const saved = this.settings.saved();
+    if (!account || !saved) return [];
+    const { country } = saved;
+    const lines: (ShownAndSpoken & { kind: string })[] = [];
+    if (feeWaived) {
+      const text = `Fee waived: ${conditionText(feeWaived.by, account.currency, country)}`;
+      lines.push({ kind: 'waived', shown: text, spoken: text });
+    }
+    if (interest) {
+      const money = amountText(interest.amount, interest.currency, country);
+      const rate = rateText(interest.rate);
+      lines.push({
+        kind: 'interest',
+        shown: `Interest: ${interest.converted ? '≈ ' : ''}${money} a year at ${rate}`,
+        spoken: `Interest: ${interest.converted ? 'about ' : ''}${money} a year at ${rate}`,
+      });
+    }
+    const net =
+      monthlyEquivalent > 0
+        ? netCostAYear(resolved, {
+            today: this.clock.today(),
+            currency: saved.currency,
+            place: saved,
+          })
+        : undefined;
+    if (net) {
+      const money = amountText(Math.abs(net.amount), saved.currency, country);
+      const what =
+        net.amount < 0
+          ? `earns ${money} a year, after fees`
+          : `costs ${money} a year, after interest`;
+      lines.push({
+        kind: 'net',
+        shown: `Net: ${net.approx ? '≈ ' : ''}${what}`,
+        spoken: `Net: ${net.approx ? 'about ' : ''}${what}`,
+      });
+    }
+    return lines;
+  });
   /**
    * Its add-ons under its names (M6.12), each with what it adds: "+ Extra member × 2" and its price for both. The
    * totals and its share of the list count them already; the price tag on the right is the plan's.

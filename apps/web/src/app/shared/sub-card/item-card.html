@@ -48,6 +48,17 @@
           }
         </ul>
       }
+      <!-- A finance account's fee waived, its interest a year and its net cost (M11.12): interest isn't in the totals. -->
+      @if (accountLines().length > 0) {
+        <ul class="account-lines" aria-label="Account">
+          @for (line of accountLines(); track line.kind) {
+            <li>
+              <span aria-hidden="true">{{ line.shown }}</span>
+              <span class="visually-hidden">{{ line.spoken }}</span>
+            </li>
+          }
+        </ul>
+      }
       <!-- The net beside the gross (P4, M9.4): with tax, and after its card's cash back and FX fees. -->
       @if (onCard(); as paid) {
         <p class="on-card">
@@ -73,6 +84,9 @@
 
     <div class="price">
       <ss-price [price]="price()" [region]="item().region" />
+      @if (resolved().feeWaived) {
+        <p class="waived">Waived</p>
+      }
       <!-- Its share of what the list costs in the next 12 months (P4). -->
       @if (shareText(); as text) {
         <p class="share">{{ text }}<span class="visually-hidden"> over the next 12 months</span></p>

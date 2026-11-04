@@ -39,7 +39,8 @@
 }
 
 // This year's cash back (M10.29), beside the totals it isn't taken off.
-.cashback {
+.cashback,
+.interest {
   display: flex;
   align-items: center;
   gap: 6px;

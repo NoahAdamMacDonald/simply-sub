@@ -40,7 +40,8 @@
   grid-area: price;
 }
 
-.share {
+.share,
+.waived {
   margin: 2px 0 0;
   color: var(--ss-text-muted);
   font: var(--mat-sys-body-small);
@@ -75,6 +76,14 @@
 .on-card {
   margin: 6px 0 0;
   color: var(--ss-text-muted);
+  font: var(--mat-sys-body-small);
+}
+
+// A finance account's fee waived, interest and net cost (M11.12).
+.account-lines {
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
   font: var(--mat-sys-body-small);
 }
 
