@@ -10,7 +10,7 @@ export const followedCount = 3;
 
 /**
  * For the Bank's last changes, newest first: the day the account's rates next changed, before the Bank's next change;
- * none when they didn't, or haven't yet as of the rates' lastVerified. Only for rates that follow the Bank's or the
+ * none when they didn't, or `pending` when they haven't yet as of the rates' lastVerified. Only for rates that follow the Bank's or the
  * prime rate. A change before the account's record begins is judged only when the change that begins it followed it;
  * older ones are unknown, and so is one since the rates were last read.
  */
@@ -45,7 +45,8 @@ export function followedChanges(
       break;
     }
     if (day !== undefined) followed.push({ change, rate, on: day });
-    else if (next !== undefined || rates.lastVerified >= change) followed.push({ change, rate });
+    else if (next !== undefined) followed.push({ change, rate });
+    else if (rates.lastVerified >= change) followed.push({ change, rate, pending: true });
   }
   return followed;
 }

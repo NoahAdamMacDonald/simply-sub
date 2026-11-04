@@ -124,6 +124,12 @@ export const followedChangeSchema = z.strictObject({
       "The day the account's rates next changed, before the Bank's next change. Left out when they didn't, or haven't yet",
     )
     .optional(),
+  pending: z
+    .literal(true)
+    .describe(
+      "They haven't changed since, and the Bank hasn't changed its rate again: they may yet",
+    )
+    .optional(),
 });
 export type FollowedChange = z.infer<typeof followedChangeSchema>;
 

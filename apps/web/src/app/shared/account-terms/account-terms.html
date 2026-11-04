@@ -19,6 +19,12 @@
       </a>
     </li>
   }
+  @if (followed(); as followed) {
+    <li class="followed">
+      <span class="subject">Following the Bank of Canada: </span>
+      <span>{{ followed }}</span>
+    </li>
+  }
   @if (waivers(); as waivers) {
     <li>{{ waivers }}</li>
   }

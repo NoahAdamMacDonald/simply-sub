@@ -126,7 +126,7 @@ describe('followedChanges', () => {
 
   it('says when they didn’t follow a change before the next, or haven’t yet', () => {
     expect(followedChanges(following({ since: '2026-01-31' }), bankChanges)).toEqual([
-      { change: '2026-06-04', rate: 2.25 },
+      { change: '2026-06-04', rate: 2.25, pending: true },
       { change: '2026-03-12', rate: 2.5 },
       { change: '2026-01-29', rate: 2.75, on: '2026-01-31' },
     ]);
@@ -139,7 +139,7 @@ describe('followedChanges', () => {
     ]);
     // The record begins with rates that took over on Mar 20: what came before Mar 12 is unknown.
     expect(followedChanges(following({ since: '2026-03-20' }), bankChanges)).toEqual([
-      { change: '2026-06-04', rate: 2.25 },
+      { change: '2026-06-04', rate: 2.25, pending: true },
       { change: '2026-03-12', rate: 2.5, on: '2026-03-20' },
     ]);
   });

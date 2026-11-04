@@ -1092,6 +1092,11 @@
                           "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
                           "patternErrorMessage": "Use a real date written YYYY-MM-DD",
                           "description": "The day the account's rates next changed, before the Bank's next change. Left out when they didn't, or haven't yet"
+                        },
+                        "pending": {
+                          "type": "boolean",
+                          "const": true,
+                          "description": "They haven't changed since, and the Bank hasn't changed its rate again: they may yet"
                         }
                       },
                       "required": ["change", "rate"],
