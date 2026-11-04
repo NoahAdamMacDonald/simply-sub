@@ -1139,9 +1139,14 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
     changed: ICI TOU.TV's closing accounts Neutral to Bad (an account blocked "à son entière discrétion") and changes
     to the terms Good to Neutral (an email, no lead time); Xbox's what you paid for Neutral to Poor ("no obligation
     to provide a re-download"), and Ultimate's changes to the terms Bad (Ubisoft's "at any time and for any
-    reason"); Disney+ gains a Canadian disputes rating (Poor, opt-out by post, linked). Not read: IdentityForce's
-    terms for Bitdefender's Plus plans (blocked), sign-up lines that show only after an email address, and EA's,
-    Epic's and Ubisoft's own general terms.
+    reason"); Disney+ gains a Canadian disputes rating (Poor, opt-out by post, linked). The benefits' companies' own
+    terms, privacy policies and game licence, read at the owner's choice (Canada's versions), add ratings for the plans
+    with them: Ultimate's closing your account and using its apps Bad (Ubisoft's sole discretion; its licence ended "at
+    any time, for any reason"), and Ultimate's and PC Game Pass's Canadian disputes Bad (EA's arbitration, no opt-out)
+    and deleting your data Neutral (EA's on request, its help linked); re-reading Microsoft's agreement whole makes
+    Xbox's inactive accounts Bad ("you may lose access to products you've acquired"). Not read: IdentityForce's terms
+    for Bitdefender's Plus plans (blocked), sign-up lines that show only after an email address, EA's terms of sale and
+    the games' community rules.
 
 **M11.2 — Outside ratings and owners** (BLUEPRINT §4.10)
 - **Raters:** `data/raters.yaml` lists each rater once (id, name, website, `scales` of core's subjects with its labels

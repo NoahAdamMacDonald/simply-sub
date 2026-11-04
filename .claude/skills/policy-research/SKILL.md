@@ -51,12 +51,13 @@ their own.
     content or technical requirements, the account's terms (Disney's Terms of Use for a MyDisney account), another
     company's terms (an app store's, a parent company's services agreement).
   A benefit another company runs (Game Pass Ultimate's EA Play, Fortnite Crew and Ubisoft+ Classics) or an optional
-  feature with terms of its own (Proton Wallet) is read too: a clause worse than the provider's own is a rating for the
-  plans that include it (every plan when every plan can use it), its reason naming the benefit. The general terms and
-  privacy policies those include in turn (EA's user agreement) are those services' own, to rate if they join the
-  catalog. Each document a rating quotes or lists in `pages` goes in `policies.links`; name the rest in the comment
-  above `policies:`, with what they held ("the same grades", "no topic"), and any not read, with why (it shows only
-  after signing in, it blocked this machine).
+  feature with terms of its own (Proton Wallet) is read too, with the general terms, privacy policy and game licence
+  those include in turn (EA's user agreement, Ubisoft's licence for its games: the owner's choice, 2026-11-03), in
+  this machine's country's versions: a clause worse than the provider's own is a rating for the plans that include it
+  (every plan when every plan can use it), its reason naming the benefit and what the provider's own terms say. Each
+  document a rating quotes or lists in `pages` goes in `policies.links`; name the rest in the comment above
+  `policies:`, with what they held ("the same grades", "no topic"), and any not read, with why (it shows only after
+  signing in, it blocked this machine).
 - **Notable** (`other.notable`): up to three, for something that stands out and no topic covers (a VPN that takes
   cash, a VPN built on another company's network), each with a short `title` and a grade on the scale at the top of
   `data/policy-topics.yaml`. Read every agreement whole for them: a notable term is never left out because no topic
