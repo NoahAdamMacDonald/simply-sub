@@ -374,6 +374,75 @@
       </div>
     }
 
+    <!-- A finance account's balance and the facts its plan's conditions ask about (M11.11), in its own currency. -->
+    @if (account(); as account) {
+      <section class="account" [attr.aria-labelledby]="ids + '-account'">
+        <h3 [id]="ids + '-account'">Account</h3>
+        <p class="note" [id]="ids + '-account-note'">
+          Optional: what {{ subject().name }}’s fees and rates depend on. Only your devices can read
+          it: App lock seals it, and exports leave it out unless you tick Include balances.
+        </p>
+        <div class="row">
+          <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Balance</mat-label>
+            <input
+              matInput
+              type="number"
+              step="any"
+              [formField]="form.account.balance"
+              [attr.aria-describedby]="ids + '-account-note'"
+            />
+            <span matTextSuffix>{{ account.currency }}</span>
+            @if (balanceDate(); as date) {
+              <mat-hint>{{ date }}</mat-hint>
+            }
+            <mat-error>{{ firstError(form.account.balance) }}</mat-error>
+          </mat-form-field>
+          @if (asked().has('directDeposit')) {
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+              <mat-label>Direct deposits a month</mat-label>
+              <input matInput type="number" step="any" [formField]="form.account.directDeposit" />
+              <span matTextSuffix>{{ account.currency }}</span>
+              <mat-hint>Such as your pay</mat-hint>
+              <mat-error>{{ firstError(form.account.directDeposit) }}</mat-error>
+            </mat-form-field>
+          }
+          @if (asked().has('monthlyDeposits')) {
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+              <mat-label>Deposits a month</mat-label>
+              <input matInput type="number" step="any" [formField]="form.account.monthlyDeposits" />
+              <span matTextSuffix>{{ account.currency }}</span>
+              <mat-hint>From anywhere</mat-hint>
+              <mat-error>{{ firstError(form.account.monthlyDeposits) }}</mat-error>
+            </mat-form-field>
+          }
+          @if (asked().has('assetsHeld')) {
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+              <mat-label>Assets held</mat-label>
+              <input matInput type="number" step="any" [formField]="form.account.assetsHeld" />
+              <span matTextSuffix>{{ account.currency }}</span>
+              <mat-hint>In all your accounts with {{ subject().name }}</mat-hint>
+              <mat-error>{{ firstError(form.account.assetsHeld) }}</mat-error>
+            </mat-form-field>
+          }
+          @if (asked().has('born')) {
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+              <mat-label>Month of birth</mat-label>
+              <input matInput type="month" placeholder="YYYY-MM" [formField]="form.account.born" />
+              <mat-hint>For its age limits</mat-hint>
+              <mat-error>{{ firstError(form.account.born) }}</mat-error>
+            </mat-form-field>
+          }
+        </div>
+        @if (asked().has('student')) {
+          <mat-checkbox [formField]="form.account.student">I’m a full-time student</mat-checkbox>
+        }
+        @if (asked().has('newcomer')) {
+          <mat-checkbox [formField]="form.account.newcomer">I’m new to Canada</mat-checkbox>
+        }
+      </section>
+    }
+
     <details class="advanced" [open]="model().region !== country()">
       <summary>Advanced</summary>
       <!-- A long list: a menu you can type in, like Settings' Country (M4.8). -->

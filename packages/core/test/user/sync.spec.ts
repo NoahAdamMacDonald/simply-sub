@@ -21,6 +21,7 @@ import {
   customSub,
   dismissedSuggestion,
   item,
+  itemAccount,
   list,
   ranking,
   settings,
@@ -277,6 +278,13 @@ describe('readSyncCopy', () => {
       copy: sent,
       rejected: [],
     });
+  });
+
+  it('carries an account item’s balance and facts (M11.11)', () => {
+    const banked = { ...allData, items: [{ ...item, account: itemAccount }] };
+    const sent = mergeSync(local(banked), undefined, device, now).copy;
+    const reading = readSyncCopy(JSON.parse(JSON.stringify(sent)));
+    expect(reading.kind === 'copy' && reading.copy.data.items[0].account).toEqual(itemAccount);
   });
 
   it('leaves out a record that fails its schema, described by its table, key and issues, never its values', () => {

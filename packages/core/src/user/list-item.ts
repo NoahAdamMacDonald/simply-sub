@@ -145,6 +145,38 @@ export const priceOverrideSchema = z
   });
 export type PriceOverride = z.infer<typeof priceOverrideSchema>;
 
+/** An amount of money the user says, in the account's currency: 0 or more. */
+const ownAmount = z.number().nonnegative('Must be 0 or more');
+
+/**
+ * An account item's own figures (M11.11, BLUEPRINT §4.11, the owner's shape of 2026-11-03): its balance on a day, and
+ * what the user says about the conditions its plan's waivers, bonus rate and eligibility ask about, as facts, never as
+ * the waivers they meet (core's conditionMet works that out). Sensitive: never indexed, so the app lock seals it; in
+ * backups and sync; in exports only when the user ticks Include balances.
+ */
+export const itemAccountSchema = z.strictObject({
+  /** What the account holds, in its currency. */
+  balance: z.strictObject({ amount: ownAmount, currency: currencySchema }),
+  /** The day the balance is from. */
+  asOf: isoDateSchema,
+  /** Paid in by direct deposit a month, a pay cheque: above 0 meets a condition of any direct deposit. */
+  directDeposit: ownAmount.optional(),
+  /** Deposited a month, from anywhere. */
+  monthlyDeposits: ownAmount.optional(),
+  /** Held with the provider in all its accounts. */
+  assetsHeld: ownAmount.optional(),
+  /** The user's month of birth, YYYY-MM: their age for a condition's minAge or maxAge. */
+  born: z
+    .string()
+    .regex(/^\d{4}-(0[1-9]|1[0-2])$/, 'Use the year and month, YYYY-MM')
+    .optional(),
+  /** A full-time student, as the provider defines it. */
+  student: z.literal(true).optional(),
+  /** New to Canada, as the provider defines it. */
+  newcomer: z.literal(true).optional(),
+});
+export type ItemAccount = z.infer<typeof itemAccountSchema>;
+
 export const listItemSchema = z
   .strictObject({
     ...recordMetaShape,
@@ -175,6 +207,8 @@ export const listItemSchema = z
       .optional(),
     /** A note of the user's own. */
     note: textSchema.max(maxNoteLength, `Use at most ${maxNoteLength} characters`).optional(),
+    /** A finance account's balance and the user's facts (M11.11): only on an item whose plan is an account. */
+    account: itemAccountSchema.optional(),
   })
   .superRefine((item, ctx) => {
     addDuplicateIssues(ctx, item.tagIds, (index) => ['tagIds', index]);

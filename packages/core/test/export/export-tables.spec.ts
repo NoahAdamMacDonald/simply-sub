@@ -9,7 +9,16 @@ import {
   sheetNames,
   summaryTable,
 } from '../../src';
-import { context, crave, disney, familyList, mullvad, netflix, workList } from './fixtures';
+import {
+  context,
+  crave,
+  disney,
+  familyList,
+  mullvad,
+  netflix,
+  oldPlan,
+  workList,
+} from './fixtures';
 
 // The CSV files' and the workbook's tables (BLUEPRINT §11.2, M7.5), on Oct 28, 2026 for an Albertan.
 
@@ -43,6 +52,34 @@ describe('itemTable', () => {
       // What's known of an item that can't be priced, and why.
       ['Family', 'netflix.basic', null, 'Old plan', null, null, null, null, 'Monthly', 'Automatically', null, null, 'This plan is no longer in the catalog', 'Family'],
     ]);
+  });
+
+  it('adds each account’s balance, its currency and its date only with Include balances (M11.11)', () => {
+    const account = { balance: { amount: 4250.5, currency: 'USD' }, asOf: '2026-10-20' };
+    const lists = [
+      { ...workList, resolved: [{ ...netflix, item: { ...netflix.item, account } }, crave] },
+      { ...familyList, unresolved: [{ ...oldPlan, item: { ...oldPlan.item, account } }] },
+    ];
+    const without = itemTable(lists, context);
+    expect(without.columns.at(-1)?.header).toBe('Tags');
+    expect(without.rows.every((row) => row.length === 14)).toBe(true);
+
+    const table = itemTable(lists, context, { includeBalances: true });
+    expect(table.columns.slice(-3)).toEqual([
+      { header: 'Balance', kind: 'money' },
+      { header: 'Balance currency', kind: 'currency' },
+      { header: 'Balance as of', kind: 'date' },
+    ]);
+    expect(table.rows.map((row) => row.slice(-3))).toEqual([
+      [4250.5, 'USD', '2026-10-20'],
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
+      [4250.5, 'USD', '2026-10-20'],
+    ]);
+    const sheets = exportWorkbook(lists, context, { includeBalances: true });
+    expect(sheets[1].columns.at(-1)?.header).toBe('Balance as of');
+    expect(exportWorkbook(lists, context)[1].columns.at(-1)?.header).toBe('Tags');
   });
 
   it('leaves the List column out of a list’s own sheet', () => {

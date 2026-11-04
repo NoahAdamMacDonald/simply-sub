@@ -4,6 +4,7 @@ import {
   afterPlanChange,
   billingDayChoices,
   defaultRenewal,
+  emptyAccountForm,
   isDuplicate,
   itemFormFor,
   itemFormIssues,
@@ -17,6 +18,7 @@ import {
   settledBillingDay,
   sortedWindows,
   windowIssues,
+  type ItemAccount,
   type ItemForm,
   type ItemFormContext,
   type ListItem,
@@ -744,6 +746,49 @@ describe('itemFromForm', () => {
     const fields = itemFromForm(custom, { ...context, periods: undefined });
     expect(fields.source).toEqual(source);
     expect(fields.billing).toMatchObject({ interval: 'week', intervalCount: 2 });
+  });
+});
+
+describe('an account plan’s item (M11.11)', () => {
+  const account: ItemFormContext = {
+    ...context,
+    account: { currency: 'CAD', asked: ['directDeposit'] },
+  };
+  const options = { addOnIds: [], today, country: 'CA', currency: 'CAD' };
+
+  it('checks the Account section only for an account plan', () => {
+    const form = standardForm({ account: { ...emptyAccountForm(), balance: -1 } });
+    expect(itemFormIssues(form, context)).toEqual([]);
+    expect(itemFormIssues(form, account)).toEqual([
+      { path: ['account', 'balance'], message: 'Enter an amount of 0 or more' },
+    ]);
+  });
+
+  it('saves the balance and the facts asked for an account plan, and none for another plan', () => {
+    const form = standardForm({
+      account: { ...emptyAccountForm(), balance: 1500, directDeposit: 2000, student: true },
+    });
+    expect(itemFromForm(form, account).account).toEqual({
+      balance: { amount: 1500, currency: 'CAD' },
+      asOf: today,
+      directDeposit: 2000,
+    });
+    expect(itemFromForm(form, context)).not.toHaveProperty('account');
+  });
+
+  it('gives back the item it was made from, its balance’s date too', () => {
+    const before: ItemAccount = {
+      balance: { amount: 1500, currency: 'CAD' },
+      asOf: '2026-09-30',
+      directDeposit: 2000,
+    };
+    const item = stored(itemFromForm(standardForm(), context), { account: before });
+    const form = itemFormFor(item, options);
+    expect(form.account).toMatchObject({ balance: 1500, directDeposit: 2000 });
+    expect(stored(itemFromForm(form, { ...account, accountBefore: before }))).toEqual(item);
+    expect(newItemForm({ ...options, source: item.source, period: monthly }).account).toEqual(
+      emptyAccountForm(),
+    );
   });
 });
 

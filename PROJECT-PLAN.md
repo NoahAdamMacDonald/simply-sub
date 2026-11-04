@@ -1053,7 +1053,7 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
 | M11.8 | Limits before growth (BLUEPRINT §5.3, §7.1): Terms and policies in a file per provider (`/data/policies/<id>.json`), out of the region files and D1's `json` column, loaded when a card opens them; the seed writing only the rows that changed, counting its writes first and stopping at the catalog's daily share, whole providers at a time, the rest left for the next deploy or the bot's night; a change of the tables' shape filled over days beside them, then switched; CI printing a pull request's estimated writes; search's FTS5 table, a search column without the long text, and price sorting and pages in SQL (a `seedFormat` bump); `data:build` failing at 20 MiB; the bot checking a rotating slice each night; the API's and the app's tests on a fixed catalog of their own, never `data/` | A Proton price change writes under 10 rows; 400 generated providers seed over several days with no failed deploy, and /health says how many wait; a text search reads under 50 rows; the region files hold no policy quotes; a research batch changes no test's results |
 | M11.9 | The existing 13 under the new rules: every topic regraded, with the calibration table in the pull request; each category's required features and the cross-category ones (Claude, Xbox Game Pass, Bitdefender and Proton first, through feature-discovery for AI, gaming and security); perks given ids; provider facts; the coverage report and region checklist for every region; reviewed by a second model (the guide's §7.3) | No price-differences warning and no coverage gap left without a reason in its header; every rating follows the procedure |
 | M11.10 | Finance in the catalog (BLUEPRINT §4.11): a plan's `account` (kind, fee waivers, interest tiers and how they apply, what the rate follows, limits, protection, eligibility), the finance feature group, `regulators` from regulators' registers, the `finance.money-protection` and `finance.holds` topics; posted rates only, never promotional ones | Two fixture providers (a bank with a waivable fee, a fintech whose better rate is a paid tier) validate; Search filters for a TFSA and fractional shares |
-| M11.11 | Balances (BLUEPRINT §4.6, §11.5): an account item's balance and the waivers the user meets, never indexed, sealed by the app lock, in backups and sync; entered in the item dialog; left out of exports unless chosen | A balance survives a backup and a sync, is in no Dexie index, and is encrypted at rest with the lock on |
+| M11.11 | Balances (BLUEPRINT §4.6, §11.5): an account item's balance and the facts its plan's conditions ask about (the owner's shape: facts, not the waivers they meet), never indexed, sealed by the app lock, in backups and sync; entered in the item dialog; left out of exports unless chosen | A balance survives a backup and a sync, is in no Dexie index, and is encrypted at rest with the lock on |
 | M11.12 | Interest and net cost (§3.1, core): interest a year from the tiers and the balance, the fee after waivers, and net cost; Home and the lists show interest earned beside spending, never inside subscription totals | A fixture's balance gives the interest its tiers state; a fee the balance waives counts $0 |
 | M11.13 | The finance optimizer (BLUEPRINT §10.6): the balance where a paid rate pays for itself, the cost of holding a waiver's minimum against paying the fee, moving savings to a better account the user has or one sold in their region, and a warning when a balance passes its insurer's limit; worded as information, not advice | A $10 monthly fee for 1.5 points more is worth it above $8,000; a balance over its insurer's limit warns |
 | M11.14 | Rate history (the bot): rates read like prices, each change kept with its date; for a rate that follows the Bank of Canada's, how many days it took to follow its last changes | After a fixture change of the Bank of Canada's rate, a linked rate's lag shows on its card |
@@ -2000,6 +2000,30 @@ in every D1 `json` column search parses.
 - **Acceptance**
   - [x] Validation refuses a rate tier out of order, a waiver with no condition, and protection without a quote
   - [x] An account's card shows its rates, waivers, limits and protection, with their quotes, in both themes
+
+**M11.11 — Balances** (BLUEPRINT §4.6, §4.11)
+- **As built** (2026-11-04):
+  - **The record:** a list item's optional `account` (core's `itemAccountSchema`): its balance and `asOf`, and the
+    user's facts (`directDeposit` and `monthlyDeposits` a month, `assetsHeld`, `born` as YYYY-MM, `student`,
+    `newcomer`). An optional field, so no Dexie version: stored items read as they were.
+  - **Facts against conditions** (`account-facts.ts`): `accountFactsAsked` lists the facts a plan's waivers, bonus rate
+    and eligibility need; `conditionMet` says whether a condition is met, not met, or can't be told without a fact.
+    M11.12 and M11.13 build on these.
+  - **The item dialog:** an Account section for a plan with `account` only: Balance in the account's currency, "As of"
+    the day it was entered (kept while it's unchanged), then only the facts asked, and a note on who can read it.
+    Facts need a balance, amounts can't be below 0, and a month of birth must be one. Clearing the balance, or choosing
+    a plan that isn't an account, removes it (core's `account-form.ts`).
+  - **Exports:** List view's Export has an "Include balances" menu checkbox (off each time the page opens) when the list
+    holds a balance. Ticked, CSV and the workbook end each row with Balance, Balance currency and Balance as of, and
+    JSON keeps the balance and its date. Text and Calendar files never have one, and the facts are in no export.
+  - **Checks:** the storage specs plant an account and find none of it on disk with the lock on, and no index on it;
+    core's backup and sync tests carry it whole. `check-m11-balances.cjs` answers the CA file with a fixture bank (no
+    real finance provider is in the catalog before M11.15) and goes through the dialog and Export by keyboard. The
+    initial bundle stays 499.92 kB.
+- **Acceptance**
+  - [x] A balance survives a backup and a sync
+  - [x] It's in no Dexie index, and with the lock on the raw row holds no plaintext
+  - [x] Entered in the item dialog for account plans only; left out of exports unless "Include balances" is ticked
 
 **M11.13 — The finance optimizer** (BLUEPRINT §10.6)
 - **Acceptance**

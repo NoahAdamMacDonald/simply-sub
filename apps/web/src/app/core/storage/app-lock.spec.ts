@@ -44,6 +44,14 @@ const netflix = {
   rankOverrides: { 'ad-free': 'essential' },
   pinned: true,
   nickname: 'Mom’s',
+  // A finance account's balance and facts (M11.11), on any item the schema allows.
+  account: {
+    balance: { amount: 8765.43, currency: 'CAD' },
+    asOf: '2026-10-19',
+    directDeposit: 3141,
+    born: '1987-04',
+    newcomer: true,
+  },
   ...stamps,
 };
 
@@ -158,6 +166,12 @@ const secrets = [
   'Work Draft Name',
   '271',
   'CA-AB',
+  // An account's balance, its date and the user's facts (M11.11).
+  '8765.43',
+  '2026-10-19',
+  '3141',
+  '1987-04',
+  'newcomer',
   // The live calendar's manage key and link (M10.3).
   'Jd8f2LqP0zXn5Vt7Bc3HyA',
   // Sync's code and this device's name (M10.9).

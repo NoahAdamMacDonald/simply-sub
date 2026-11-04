@@ -52,26 +52,37 @@ const types = {
 /** What the calendars' importers list the file's events under. */
 const productId = '-//sub.simplely.ca//Simply Sub//EN';
 
+/** What List view's Export adds when it's ticked: the accounts' balances (M11.11), in a CSV, the workbook and JSON. */
+export interface ListExportOptions {
+  includeBalances?: boolean;
+}
+
 /**
  * One list's file (List view's Export, P4): its items as a CSV; the workbook; the list, its items and what they name
- * as JSON; a summary as text; or its next 12 months' charges as a calendar.
+ * as JSON; a summary as text; or its next 12 months' charges as a calendar. Text and the calendar never hold a balance.
  */
 export async function listExport(
   { lists, context, format }: ExportRequest,
   kind: ListExportFormat,
   customSubs: ReadonlyMap<string, CustomSubscription>,
+  { includeBalances = false }: ListExportOptions = {},
 ): Promise<ExportFile> {
   const [one] = lists;
   const name = exportFileName(one.list.name, context.today, kind);
   const file = (content: BlobPart) => ({ name, content, type: types[kind] });
   switch (kind) {
     case 'csv':
-      return file(await csvText(itemTable(lists, context)));
+      return file(await csvText(itemTable(lists, context, { includeBalances })));
     case 'xlsx':
-      return file(await workbookBytes(exportWorkbook(lists, context)));
+      return file(await workbookBytes(exportWorkbook(lists, context, { includeBalances })));
     case 'json': {
       const items = [...one.resolved, ...one.unresolved].map(({ item }) => item);
-      const json = listFile(one.list, items, { tags: context.tags, customSubs }, context.today);
+      const json = listFile(
+        one.list,
+        items,
+        { tags: context.tags, customSubs, includeBalances },
+        context.today,
+      );
       return file(JSON.stringify(json, null, 2));
     }
     case 'txt':
@@ -139,7 +150,7 @@ async function icsText(events: readonly CalendarEvent[], calName: string): Promi
 
 /**
  * An Excel workbook of `sheets`: a bold header row that stays put, columns as wide as what they hold, amounts with
- * their currency's decimals and dates as dates.
+ * their currency's decimals (the next currency column's: a balance's can differ from its cost's) and dates as dates.
  */
 async function workbookBytes(sheets: readonly ExportSheet[]): Promise<ArrayBuffer> {
   const { Workbook } = commonJs(await import('exceljs'));
@@ -155,7 +166,9 @@ async function workbookBytes(sheets: readonly ExportSheet[]): Promise<ArrayBuffe
       ),
     }));
     sheet.getRow(1).font = { bold: true };
-    const currencyColumn = columns.findIndex((column) => column.kind === 'currency');
+    const currencyColumns = columns.map((_, index) =>
+      columns.findIndex((column, at) => at > index && column.kind === 'currency'),
+    );
     for (const row of rows) {
       const added = sheet.addRow(
         row.map((cell, index) =>
@@ -165,7 +178,7 @@ async function workbookBytes(sheets: readonly ExportSheet[]): Promise<ArrayBuffe
       columns.forEach((column, index) => {
         if (column.kind === 'date') added.getCell(index + 1).numFmt = 'yyyy-mm-dd';
         if (column.kind === 'money') {
-          const currency = row[currencyColumn];
+          const currency = row[currencyColumns[index]];
           const digits = typeof currency === 'string' ? currencyDigits(currency) : 2;
           added.getCell(index + 1).numFmt = digits === 0 ? '#,##0' : `#,##0.${'0'.repeat(digits)}`;
         }

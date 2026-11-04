@@ -5,9 +5,10 @@ import {
   listFile,
   readBackupText,
   type CustomSubscription,
+  type ItemAccount,
   type ListItem,
 } from '../../src';
-import { customSub } from '../user/fixtures';
+import { customSub, itemAccount } from '../user/fixtures';
 import { context, familyTag, netflix, today, work } from './fixtures';
 
 // List view's JSON export and the exports' file names (M7.5).
@@ -38,6 +39,17 @@ describe('listFile', () => {
   it('holds the custom subscriptions and tags its items name', () => {
     expect(file.customSubs).toEqual([custom]);
     expect(file.tags).toEqual([familyTag]);
+  });
+
+  it('has an account’s balance only with Include balances, and its facts never (M11.11)', () => {
+    const banked = { ...netflix.item, account: itemAccount as ItemAccount };
+    const options = { tags: context.tags, customSubs: new Map() };
+    expect(listFile(work, [banked], options, today).items[0]).not.toHaveProperty('account');
+    const included = listFile(work, [banked], { ...options, includeBalances: true }, today);
+    expect(included.items[0].account).toEqual({
+      balance: itemAccount.balance,
+      asOf: itemAccount.asOf,
+    });
   });
 
   it('isn’t a backup: Import refuses it', () => {

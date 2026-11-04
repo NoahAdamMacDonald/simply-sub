@@ -1054,6 +1054,14 @@ export interface ListItem {
   rankOverrides: Record<RankKey, Rank>;  // subscription-level ranks (PROJECT-PLAN.md §3.2)
   ownRanks?: true;                       // not shared with its provider's other plans in the list (M6.14)
   pinned: boolean;
+  account?: {                            // a finance account plan's (M11.11, section 4.11): never indexed
+    balance: { amount: number; currency: string };   // amount ≥ 0, in the account's currency
+    asOf: string;                        // the day the balance is from
+    directDeposit?: number;              // the user's facts, only those its plan's conditions ask about:
+    monthlyDeposits?: number;            //   amounts a month, and assets held with the provider (all ≥ 0),
+    assetsHeld?: number;
+    born?: string;                       //   the month of birth, YYYY-MM, for an age limit,
+    student?: true; newcomer?: true };   //   and being a student or new to Canada
   createdAt: string; updatedAt: string; deletedAt?: string;
 }
 
@@ -1511,7 +1519,7 @@ price list, so they reuse what fits and add what doesn't:
   ```yaml
   account:
     kind: savings                 # chequing, savings, usd, tfsa, rrsp, fhsa, resp, rdsp, rrif, lira, gic, investing
-    waivers:                      # any one waives the fee; the user says which they meet (M11.11)
+    waivers:                      # any one waives the fee; the user's facts say which they meet (M11.11)
       - { minBalance: 3000 }
       - { directDeposit: true }
     rates:
@@ -1551,6 +1559,16 @@ price list, so they reuse what fits and add what doesn't:
 - **The user's side** (section 4.6, M11.11): an account item has a `balance` (amount and currency) and the waivers the
   user meets. Balances are sensitive: never indexed, sealed by the app lock, in backups and sync, and in exports only
   when chosen.
+- **As built (M11.11, the owner's shape of 2026-11-03):** an item's optional `account` holds its balance and the day
+  it's from (`asOf`), and the user's *facts* for the conditions its plan names, never the waivers they meet: direct
+  deposits a month (any amount above 0 meets `directDeposit: true`), deposits a month, assets held with the provider, a
+  month of birth (an age counts from the first of it), and `student` or `newcomer` when the user says so. Core's
+  `conditionMet` judges each condition from them (met, not met, or unknown when a fact it needs isn't given), so a plan
+  whose terms change is judged again from the same facts. The item dialog asks only for the facts its plan's waivers,
+  bonus rate and eligibility need (`accountFactsAsked`); a balance is dated the day it's entered or changed. `account`
+  isn't indexed, so the app lock seals it (section 11.5); backups and sync carry it whole; List view's Export has it only
+  with "Include balances" ticked: the balance, its currency and its date in CSV, Excel and JSON, never in text or a
+  calendar, and the facts in no export.
 - **Money terms** (PROJECT-PLAN §3.1, M11.12): *interest a year* is the balance at its tiers (`applies`), before tax;
   *fee after waivers* is $0 when a waiver is met; *net cost* is the fee after waivers less interest. Interest is shown
   beside spending, never inside subscription totals.
@@ -3348,10 +3366,10 @@ prompted after each big change, or weekly).
 | Format | Library | Notes |
 |---|---|---|
 | JSON | native | **Full backup**: all tables plus `schemaVersion`. The only format that can be re-imported. An optional passphrase encrypts it (section 11.5), since backups sit in Downloads unencrypted. Imports are validated with Zod before anything is written |
-| CSV | papaparse | List view: one row per item (list, service, plan, cost as charged with tax, interval, next charge, live tags). The Calendar: one row per charge in the next 12 months |
-| XLSX | exceljs (lazy-loaded) | Summary, one sheet per list of its items, then Payments, the next 12 months' charges |
+| CSV | papaparse | List view: one row per item (list, service, plan, cost as charged with tax, interval, next charge, live tags), and with "Include balances" ticked, an account's balance, its currency and its date (M11.11). The Calendar: one row per charge in the next 12 months |
+| XLSX | exceljs (lazy-loaded) | Summary, one sheet per list of its items (with the balances when List view's "Include balances" is ticked), then Payments, the next 12 months' charges. Each amount takes the decimals of the currency column after it |
 | TXT | native | A readable summary of one list; the Calendar's, its next 12 months by month (M7.9) |
-| JSON (one list) | native | List view's: the list, its items and what they name, as stored. Not a backup, so not importable (M7.5) |
+| JSON (one list) | native | List view's: the list, its items and what they name, as stored, but an account's balance and date only with "Include balances" ticked, and its facts never (M11.11). Not a backup, so not importable (M7.5) |
 | JSON (payments) | native | The Calendar's: the lists shown and each charge in the next 12 months as charged, with its tax, renewal and live tags (core's `paymentsFile`, M7.9). Not a backup either |
 | ICS | `ics` npm package | All-day events (`VALUE=DATE`, so no time zone can move it), titled with what each costs as charged and `X-WR-CALNAME` naming the calendar. Since M7.12 an ongoing subscription is one repeating event (`RRULE`) for each run of charges at one amount, written from the schedule's own rule: a month's or year's day, `INTERVAL` for every 3 months or every 30 days, and `UNTIL` the day before the plan ends or a price of the user's own does, when the next run starts. So it goes on past the first year. Since M10.2 the rules keep to the forms Proton Calendar takes (one day of the month; it drops other events): a plan billed on the 31st is `BYMONTHDAY=-1`, each month's last day, and a yearly Feb 29 `BYMONTH=2;BYMONTHDAY=-1`, where M7.12 had the 28th up to the day with `BYSETPOS=-1`. Specific dates, add-ons billed on a period of their own and a monthly plan billed on the 29th or 30th, which February keeps from following one rule, stay an event per charge in the next 12 months |
 
@@ -3687,6 +3705,13 @@ None.
   it (minimatch 11 matches with its own matcher, not RegExps), which only archiver-utils' `file.expand` and rimraf 2's
   wildcard fallback reach; exceljs calls neither, and the app bundles exceljs's browser file, which loads none of them.
 
+**Resolved (2026-11-03, M11.11's shape)**
+- **What an account item holds:** its balance (amount and currency) and the day it's from, and the user's facts for the
+  conditions its plan names (direct deposits a month, deposits a month, assets held, month of birth, student,
+  newcomer), only those its conditions ask about. Facts, not the ids of the waivers they meet, so changed terms are
+  judged again. Never indexed, sealed by the app lock, in backups and sync, and in exports only when "Include balances"
+  is ticked (section 4.11 as built).
+
 **Resolved (2026-11-03, M11.10's proposals)**
 - **The finance features, all 15** (feature-discovery from TD's, RBC's, EQ Bank's, Tangerine's, KOHO's, Wealthsimple's
   and Questrade's own pages), a feature category of their own, Banking & investing: registered accounts, a US dollar
@@ -3694,7 +3719,7 @@ None.
   deposits, branches and overdraft protection; for investing, self-directed or managed, what you can invest in,
   commission-free trades, fractional shares, order types and markets.
 - **A rate that depends on a condition** (EQ Bank's 3.00% with $2,000 a month of direct deposits, 1.50% without) is
-  `account.rates.bonus`, with the same conditions as fee waivers; the user says whether they meet it (M11.11).
+  `account.rates.bonus`, with the same conditions as fee waivers; the user's facts say whether they meet it (M11.11).
 - **The two finance topics stay M11.1's** rubrics (`finance.money-protection`, `finance.holds`).
 
 **Resolved (2026-11-03, M11.9)**

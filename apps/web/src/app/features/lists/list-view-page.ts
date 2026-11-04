@@ -149,6 +149,13 @@ export class ListViewPage {
   protected readonly total = computed(
     () => this.listItems().resolved.length + this.listItems().unresolved.length,
   );
+  /** An item holds an account's balance (M11.11): Export then offers to include them. */
+  protected readonly hasBalances = computed(() => {
+    const { resolved, unresolved } = this.listItems();
+    return [...resolved, ...unresolved].some(({ item }) => item.account !== undefined);
+  });
+  /** Export's Include balances: off each time the page opens. */
+  protected readonly includeBalances = signal(false);
   /** "≈ $62 / mo average · 12 subscriptions", until M7.2's bars. */
   protected readonly summary = computed(() => {
     const saved = this.settings.saved();
@@ -373,7 +380,14 @@ export class ListViewPage {
   /** One of Export's formats: the file downloads, and a snackbar names it. */
   protected export(kind: ListExportFormat): void {
     const listId = this.listId();
-    if (listId !== undefined) void this.exporter.exportList(listId, kind);
+    const includeBalances = this.hasBalances() && this.includeBalances();
+    if (listId !== undefined) void this.exporter.exportList(listId, kind, { includeBalances });
+  }
+
+  /** Include balances, ticked or not: the menu stays open for a format. */
+  protected toggleBalances(event: Event): void {
+    event.stopPropagation();
+    this.includeBalances.update((included) => !included);
   }
 
   protected tagsOf({ item }: ResolvedItem): Tag[] {

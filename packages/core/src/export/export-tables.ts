@@ -23,7 +23,10 @@ export interface ExportContext extends MoneyContext {
   tags: ReadonlyMap<string, Tag>;
 }
 
-/** What a column holds: words, an amount in the row's currency, that currency's code, a date, or a count. */
+/**
+ * What a column holds: words, an amount, a currency's code (the amounts before it are in it: Cost and Tax in Currency's,
+ * Balance in Balance currency's), a date, or a count.
+ */
 export type ExportColumnKind = 'text' | 'money' | 'currency' | 'date' | 'count';
 
 export interface ExportColumn {
@@ -62,6 +65,13 @@ const itemColumns: readonly ExportColumn[] = [
   { header: 'Tags', kind: 'text' },
 ];
 
+/** An account's balance, its currency and its date (M11.11): only when the user ticks Include balances. */
+const balanceColumns: readonly ExportColumn[] = [
+  { header: 'Balance', kind: 'money' },
+  { header: 'Balance currency', kind: 'currency' },
+  { header: 'Balance as of', kind: 'date' },
+];
+
 const paymentColumns: readonly ExportColumn[] = [
   { header: 'Date', kind: 'date' },
   { header: 'List', kind: 'text' },
@@ -86,23 +96,34 @@ const summaryColumns: readonly ExportColumn[] = [
   { header: 'Not counted', kind: 'count' },
 ];
 
+/** What a table of items holds besides them. */
+export interface ItemTableOptions {
+  /** The List column: left out of a list's own sheet. */
+  withList?: boolean;
+  /** Each account's balance, its currency and its date (M11.11), which only Include balances puts in. */
+  includeBalances?: boolean;
+}
+
 /**
  * A row for each item of `lists` (List view's CSV, and each list's sheet of the workbook, without its List column):
  * what it is, what a charge of its billing period costs today as charged, sales tax included, how it's billed and
  * renews, its next charge, its end date, its status and its live tags. One that can't be priced says why in Status.
+ * With Include balances, an account's balance follows, with its currency and date.
  */
 export function itemTable(
   lists: readonly ExportList[],
   context: ExportContext,
-  { withList = true } = {},
+  { withList = true, includeBalances = false }: ItemTableOptions = {},
 ): ExportTable {
+  const balance = (item: ListItem) => (includeBalances ? balanceCells(item) : []);
   const rows = lists.flatMap(({ list, resolved, unresolved }) => [
-    ...resolved.map((one) => [list.name, ...resolvedCells(one, context)]),
-    ...unresolved.map((one) => [list.name, ...unresolvedCells(one, context)]),
+    ...resolved.map((one) => [list.name, ...resolvedCells(one, context), ...balance(one.item)]),
+    ...unresolved.map((one) => [list.name, ...unresolvedCells(one, context), ...balance(one.item)]),
   ]);
+  const columns = includeBalances ? [...itemColumns, ...balanceColumns] : itemColumns;
   return withList
-    ? { columns: itemColumns, rows }
-    : { columns: itemColumns.slice(1), rows: rows.map((row) => row.slice(1)) };
+    ? { columns, rows }
+    : { columns: columns.slice(1), rows: rows.map((row) => row.slice(1)) };
 }
 
 /** A charge, with its item and its list's name. */
@@ -187,11 +208,12 @@ export function summaryTable(lists: readonly ExportList[], context: ExportContex
 
 /**
  * The Excel workbook (BLUEPRINT §11.2): Summary, a sheet of each list's items, then Payments, the next 12 months'
- * charges.
+ * charges. The items' sheets have the accounts' balances only with Include balances.
  */
 export function exportWorkbook(
   lists: readonly ExportList[],
   context: ExportContext,
+  { includeBalances = false } = {},
 ): ExportSheet[] {
   const names = sheetNames(
     lists.map(({ list }) => list.name),
@@ -201,7 +223,7 @@ export function exportWorkbook(
     { name: 'Summary', ...summaryTable(lists, context) },
     ...lists.map((list, index) => ({
       name: names[index],
-      ...itemTable([list], context, { withList: false }),
+      ...itemTable([list], context, { withList: false, includeBalances }),
     })),
     { name: 'Payments', ...paymentTable(lists, context) },
   ];
@@ -277,6 +299,13 @@ function resolvedCells(
     resolved.status.kind === 'active' ? 'Active' : 'Inactive',
     tagNames(item, tags),
   ];
+}
+
+/** An account's balance, rounded as the app shows it, its currency and the day it's from; nothing for another item. */
+function balanceCells({ account }: ListItem): ExportCell[] {
+  if (!account) return [null, null, null];
+  const { amount, currency } = account.balance;
+  return [roundMoney(amount, currency), currency, account.asOf];
 }
 
 /** What's known of an item that can't be priced: its source, how it's billed, its tags, and why. */

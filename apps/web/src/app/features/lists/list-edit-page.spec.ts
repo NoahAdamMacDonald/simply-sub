@@ -1,6 +1,6 @@
 import type { ComponentHarnessConstructor, HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { Component, signal } from '@angular/core';
+import { Component, signal, type WritableSignal } from '@angular/core';
 import { Location } from '@angular/common';
 import { provideLocationMocks, SpyLocation } from '@angular/common/testing';
 import { TestBed } from '@angular/core/testing';
@@ -128,6 +128,57 @@ const withNetworks: CatalogData = {
         }
       : provider,
   ),
+};
+
+/**
+ * The test catalog with a bank (M11.11): a balance of $4,000 or a direct deposit waives its fee, as does being a
+ * student of 24 or under. Its categories don't matter here.
+ */
+const withBank: CatalogData = {
+  ...searchCatalogData,
+  providers: [
+    ...searchCatalogData.providers,
+    {
+      id: 'example-bank',
+      name: 'Example Bank',
+      website: 'https://example.com',
+      cancelUrl: 'https://example.com/close',
+      category: 'streaming',
+      spendCategory: 'streaming',
+      plans: [
+        {
+          id: 'example-bank.unlimited',
+          name: 'Unlimited Chequing',
+          link: 'https://example.com/chequing',
+          features: {},
+          prices: [
+            {
+              region: 'CA',
+              currency: 'CAD',
+              amount: 17.95,
+              interval: 'month',
+              intervalCount: 1,
+              autoRenew: true,
+              lastVerified: '2026-10-20',
+            },
+          ],
+          account: {
+            kind: 'chequing',
+            currency: 'CAD',
+            waivers: [{ minBalance: 4000 }, { directDeposit: true }, { maxAge: 24, student: true }],
+            protection: {
+              insurer: 'cdic',
+              held: 'own-name',
+              limit: 100_000,
+              url: 'https://example.com/cdic',
+              quotes: ['Protected by CDIC.'],
+              lastVerified: '2026-10-20',
+            },
+          },
+        },
+      ],
+    },
+  ],
 };
 
 function fields(planId: string, extra: Partial<NewRecord<'items'>> = {}): NewRecord<'items'> {
@@ -1295,6 +1346,106 @@ describe('ListEditPage', () => {
       const cleared = await draftItem(netflix.id);
       expect(cleared).not.toHaveProperty('nickname');
       expect(cleared).not.toHaveProperty('note');
+    });
+
+    describe('an account plan’s balance and facts (M11.11)', () => {
+      const account = () => dialog()?.querySelector('section.account');
+      const labels = () =>
+        Array.from(account()?.querySelectorAll('mat-label, mat-checkbox label') ?? []).map(
+          (label) => label.textContent?.trim(),
+        );
+      const balanceHints = async (loader: HarnessLoader) =>
+        (
+          await loader.getHarness(MatFormFieldHarness.with({ floatingLabelText: 'Balance' }))
+        ).getTextHints();
+
+      beforeEach(() => {
+        catalogData = withBank;
+        (TestBed.inject(CatalogStore).catalog as WritableSignal<CatalogData | undefined>).set(
+          withBank,
+        );
+      });
+
+      it('asks for the balance in its currency, and only the facts its conditions need', async () => {
+        const loader = await openDialog(`${editor()}?add=example-bank.unlimited&interval=month`);
+
+        expect(account()?.querySelector('h3')?.textContent).toBe('Account');
+        expect(labels()).toEqual([
+          'Balance',
+          'Direct deposits a month',
+          'Month of birth',
+          'I’m a full-time student',
+        ]);
+        expect(account()?.querySelector('.mat-mdc-form-field-text-suffix')?.textContent).toBe(
+          'CAD',
+        );
+        await (await control(loader, 'Balance', MatInputHarness)).setValue('2500');
+        expect(await balanceHints(loader)).toEqual(['As of today']);
+        await (await control(loader, 'Direct deposits a month', MatInputHarness)).setValue('1800');
+        await (await control(loader, 'Month of birth', MatInputHarness)).setValue('2003-05');
+        await (
+          await loader.getHarness(MatCheckboxHarness.with({ label: 'I’m a full-time student' }))
+        ).check();
+        await press(loader, 'Add to list');
+
+        await until(() => dialog() === null);
+        expect((await addedItems())[0]?.account).toEqual({
+          balance: { amount: 2500, currency: 'CAD' },
+          asOf: '2026-10-25',
+          directDeposit: 1800,
+          born: '2003-05',
+          student: true,
+        });
+      });
+
+      it('won’t save facts without a balance, or an amount below 0, and says why at the field', async () => {
+        const loader = await openDialog(`${editor()}?add=example-bank.unlimited&interval=month`);
+        await (await control(loader, 'Direct deposits a month', MatInputHarness)).setValue('1800');
+        await press(loader, 'Add to list');
+        const balance = await loader.getHarness(
+          MatFormFieldHarness.with({ floatingLabelText: 'Balance' }),
+        );
+        expect(await balance.getTextErrors()).toEqual([
+          'Enter the balance too, which these are kept with',
+        ]);
+
+        await (await control(loader, 'Balance', MatInputHarness)).setValue('-5');
+        await harness.fixture.whenStable();
+        expect(await balance.getTextErrors()).toEqual(['Enter an amount of 0 or more']);
+        expect(dialog()).not.toBeNull();
+      });
+
+      it('keeps a balance’s date until it changes, and clears the account with the balance', async () => {
+        await TestBed.inject(ItemsRepository).create({
+          ...fields('example-bank.unlimited'),
+          listId: work.id,
+          account: { balance: { amount: 2500, currency: 'CAD' }, asOf: '2026-09-30' },
+        });
+        await open(editor());
+        await click('Edit Netflix Standard');
+        let loader = await dialogLoader();
+        expect(account()).toBeNull();
+        await press(loader, 'Cancel');
+        await until(() => dialog() === null);
+
+        await click('Edit Example Bank Unlimited Chequing');
+        loader = await dialogLoader();
+        const balance = await control(loader, 'Balance', MatInputHarness);
+        expect(await balance.getValue()).toBe('2500');
+        expect(await balanceHints(loader)).toEqual(['As of Sep 30, 2026']);
+        await balance.setValue('3000');
+        expect(await balanceHints(loader)).toEqual(['As of today']);
+        await balance.setValue('');
+        expect(await balanceHints(loader)).toEqual([]);
+        await press(loader, 'Save');
+
+        await until(() => dialog() === null);
+        const saved = (await drafts())[0]?.items.find(
+          ({ item }) => item.source.kind === 'catalog' && item.source.planId.startsWith('example'),
+        )?.item;
+        expect(saved).toBeDefined();
+        expect(saved).not.toHaveProperty('account');
+      });
     });
 
     it('refuses a nickname over 60 characters, at its field', async () => {

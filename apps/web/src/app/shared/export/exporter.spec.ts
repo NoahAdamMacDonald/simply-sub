@@ -197,6 +197,45 @@ describe('Exporter', () => {
     expect(text).not.toContain('Old');
   });
 
+  it('puts an account’s balance in the CSV, the workbook and JSON only when asked, and never in text (M11.11)', async () => {
+    const account = {
+      balance: { amount: 425_000, currency: 'JPY' },
+      asOf: '2026-10-20',
+      born: '1990-06',
+    };
+    await TestBed.inject(ItemsRepository).update(netflix.id, { account });
+    const metrics = TestBed.inject(MetricsService);
+    await until(() => metrics.list(work.id).resolved[0]?.item.account !== undefined);
+
+    await exporter().exportList(work.id, 'csv');
+    expect((await csvText(downloads[0])).split('\r\n')[0]).not.toContain('Balance');
+    await exporter().exportList(work.id, 'csv', { includeBalances: true });
+    const [header, netflixRow, craveRow] = (await csvText(downloads[1])).split('\r\n');
+    expect(header.endsWith(',Tags,Balance,Balance currency,Balance as of')).toBe(true);
+    expect(netflixRow.endsWith(',Family,425000,JPY,2026-10-20')).toBe(true);
+    expect(craveRow.endsWith(',,,,')).toBe(true);
+
+    // Each amount with its own currency's decimals: the cost's in CAD, the balance's in yen.
+    await exporter().exportList(work.id, 'xlsx', { includeBalances: true });
+    const workbook = new Workbook();
+    await workbook.xlsx.load(await downloads[2].blob.arrayBuffer());
+    const row = workbook.getWorksheet('Work Related')?.getRow(2);
+    expect([row?.getCell(4).value, row?.getCell(4).numFmt]).toEqual([19.94, '#,##0.00']);
+    expect([row?.getCell(14).value, row?.getCell(14).numFmt]).toEqual([425_000, '#,##0']);
+    expect(row?.getCell(16).value).toEqual(new Date('2026-10-20T00:00:00Z'));
+
+    await exporter().exportList(work.id, 'json');
+    expect(JSON.parse(await downloads[3].blob.text()).items[0].account).toBeUndefined();
+    await exporter().exportList(work.id, 'json', { includeBalances: true });
+    expect(JSON.parse(await downloads[4].blob.text()).items[0].account).toEqual({
+      balance: account.balance,
+      asOf: account.asOf,
+    });
+
+    await exporter().exportList(work.id, 'txt', { includeBalances: true });
+    expect(await downloads[5].blob.text()).not.toMatch(/425|1990/);
+  });
+
   it('saves each subscription as a repeating all-day event, a plan billed on the 31st on each month’s last day (M7.12, M10.2)', async () => {
     await exporter().exportPayments([work.id, family.id], 'ics');
     const [file] = downloads;
