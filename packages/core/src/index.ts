@@ -74,6 +74,7 @@ export * from './icons/icon-sources';
 export * from './lookup/lookup-bodies';
 export * from './lookup/lookup-query';
 export * from './optimizer/apply-suggestion';
+export * from './optimizer/finance-suggestions';
 export * from './optimizer/fingerprint';
 export {
   buildModel,

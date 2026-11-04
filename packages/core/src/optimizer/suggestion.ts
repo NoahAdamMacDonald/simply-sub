@@ -2,6 +2,7 @@ import type { PickedPrice } from '../catalog/pick-price';
 import type { IsoDate } from '../dates/iso-date';
 import type { RankKey } from '../ranking/rank-keys';
 import type { Rank } from '../user/rank';
+import type { FinanceSuggestion } from './finance-suggestions';
 import type { Replacement } from './replacements';
 
 // What the optimizer suggests (BLUEPRINT §10, PROJECT-PLAN P14): ways to pay less over the next 12 months, each
@@ -183,6 +184,8 @@ export interface OptimizerResult {
   search: 'exhaustive' | 'greedy';
   /** The items whose plans end for their subscribers within the next 12 months, with plans to move to (M10.27). */
   replacements: Replacement[];
+  /** What the list's finance accounts could earn or cover better (M11.13): information, not financial advice. */
+  finance: FinanceSuggestion[];
 }
 
 /** What List view's View optimizations shows (PROJECT-PLAN P4). */
