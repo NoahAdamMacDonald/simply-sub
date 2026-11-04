@@ -29,3 +29,10 @@ search:
   - { engine: tavily, bot: 500, local: 500 }
   - { engine: brave, bot: 450, local: 450 }
   - { engine: searxng }
+
+# Sites that turn bots away (the owner's choice of 2026-11-04, M11.15): the bot never reads their pages (or their
+# robots.txt and icons). It compares the Internet Archive's newest copy of each with its baseline instead, so a changed
+# page still reaches the weekly review, which reads the live page with the standard reader; prices there are confirmed
+# only by that review, and a page read only from the archive for over 90 days goes to it too. A subdomain is included
+# (help.openai.com).
+archived: [chatgpt.com, openai.com]

@@ -718,7 +718,7 @@ policies:
         - url: https://openai.com/policies/cookie-policy/
           quote: 'These cookies help us support and understand the efficacy of our marketing efforts, such as measuring the performance of marketing campaigns to enhance the Services’ visibility.'
         - url: https://openai.com/policies/cookie-policy/
-          quote: 'Visit Manage Cookies to change preferences anytime.'
+          quote: 'Cookie settings are device- and browser-specific, so you will need to set cookie preferences for each device’s browser.'
       action:
         name: 'Its cookie policy'
         url: https://openai.com/policies/cookie-policy/
@@ -747,7 +747,7 @@ policies:
         - url: https://openai.com/policies/cookie-policy/
           quote: 'These cookies help us support and understand the efficacy of our marketing efforts, such as measuring the performance of marketing campaigns to enhance the Services’ visibility.'
         - url: https://openai.com/policies/cookie-policy/
-          quote: 'Visit Manage Cookies to change preferences anytime.'
+          quote: 'Cookie settings are device- and browser-specific, so you will need to set cookie preferences for each device’s browser.'
       action:
         name: 'Its cookie policy'
         url: https://openai.com/policies/cookie-policy/

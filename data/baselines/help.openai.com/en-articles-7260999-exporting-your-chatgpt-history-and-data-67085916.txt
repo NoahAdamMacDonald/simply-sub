@@ -1,0 +1,72 @@
+url: https://help.openai.com/en/articles/7260999-exporting-your-chatgpt-history-and-data
+method: archive
+saved: 2026-11-04
+
+Exporting your ChatGPT history and data | OpenAI Help Center
+All Collections
+ChatGPT
+Data Controls
+Exporting your ChatGPT history and data
+Exporting your ChatGPT history and data
+Learn how to request a copy of your ChatGPT data through the Privacy Portal or available account settings.
+Overview
+You can request a copy of eligible ChatGPT account data using available export or privacy-request options.
+Downloaded data can include sensitive account information. Keep your download link and exported files secure.
+ChatGPT provides two ways to request a copy of your data:
+Use the Privacy Portal to submit a data request or exercise other privacy rights.
+Use ChatGPT settings to request an export from an eligible signed-in account or workspace.
+Before you begin, make sure you can access the email inbox or phone number associated with your account. You may need to verify account ownership.
+If you use a ChatGPT Business, Enterprise, or ChatGPT for Healthcare workspace, contact your workspace owner about organization-managed data access. Self-service export is not available in these workspaces.
+Availability
+The following availability rules apply to exports requested from ChatGPT settings:
+Available for ChatGPT Free, Go, Plus, Pro, and eligible ChatGPT Edu workspaces.
+Not available while you are logged out.
+Not available for ChatGPT Business, Enterprise, or ChatGPT for Healthcare workspaces.
+For ChatGPT Edu eligibility and admin setup, see: Exporting data from a ChatGPT Edu workspace.
+For ChatGPT Edu, data export depends on your assigned role, workspace settings, and whether data residency is enabled. If you do not see an export option, ask your workspace administrator.
+Save your data before moving to a managed workspace
+If you plan to move or merge a personal workspace into a ChatGPT Business, Enterprise, Edu, or ChatGPT for Healthcare workspace, request, download, and check your data export before the personal workspace is removed.
+After a personal workspace is removed, you may no longer be able to open an earlier export link or request another export from that workspace.
+Request your data through the Privacy Portal
+Use the Privacy Portal to request a copy of your data or exercise other privacy rights.
+Go to the Privacy Portal.
+Select Make a Privacy Request.
+Select I have a consumer ChatGPT account.
+Select Download my data, then follow the instructions.
+Export data from ChatGPT settings
+Web
+Sign in to ChatGPT.
+Open your profile menu.
+Select Settings.
+Select Data controls.
+Under Export data, select Export.
+On the confirmation screen, select Confirm export.
+iOS
+Open the ChatGPT app and open your account settings.
+Select Data controls.
+Select Export data.
+Select Confirm export. If the app instead offers Open ChatGPT on web, select it, sign in to the same account, and complete the web export steps above.
+Android
+Open the ChatGPT app and open Settings from your profile menu.
+Select Data controls.
+Select Export Data.
+Review the confirmation and select Export Data. If the app instead offers Open ChatGPT on web, select it, sign in to the same account, and complete the web export steps above.
+Download your export
+ChatGPT sends an email or SMS message when the export is ready. Exports can take up to 7 days to arrive.
+Open the message and select Download data export. The download link expires 24 hours after you receive it.
+Download the export while you are signed in to the same account that requested it.
+The downloaded ZIP file includes your chat history and other relevant account data.
+Open the ZIP file and check that it contains the conversations you need. An export cannot restore chats that have already been deleted.
+Troubleshooting data exports
+If your export has not arrived
+Exports can take up to 7 days to arrive. Check the inbox, spam, and promotions folders for the email address associated with your account. If your account uses only a phone number, check your SMS messages. If your export has not arrived after 7 days, contact OpenAI Support.
+If you already requested an export
+Wait for the existing request to finish before submitting another request. While it is processing, ChatGPT may show that an export has already been requested.
+If the download link expired or does not open
+Make sure you are signed in to the same account that requested the export. If the link has expired, request a new export through ChatGPT settings or the Privacy Portal.
+If a recent export link does not open on your phone, try opening the same link on a computer while signed in to the account that requested the export.
+If you cannot sign in
+If you cannot sign in to ChatGPT, request your data through the Privacy Portal. For help resetting or changing your password, see: Resetting or changing your ChatGPT password.
+Was this article helpful?
+Submit
+ChatGPTAPIService Status Cookie Preferences

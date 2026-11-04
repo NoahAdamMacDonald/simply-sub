@@ -1,0 +1,342 @@
+url: https://openai.com/policies/cookie-policy/
+method: archive
+saved: 2026-11-04
+
+Cookie policy | OpenAI
+Skip to main content Research
+Products
+Business
+Developers
+Company
+Foundation(opens in a new window)
+Log in Try ChatGPT (opens in a new window)
+Research
+Products
+Business
+Developers
+Company
+Foundation (opens in a new window)
+Try ChatGPT (opens in a new window) Login
+OpenAI Select language
+…
+Last updated: October 22, 2026
+Cookie policy
+This Cookie Policy describes what kinds of cookies and similar technologies OpenAI uses in connection with our Services (as defined in our Privacy Policy⁠⁠), and how you can manage them. This Cookie Policy does not address how we process your personal information outside of our usage of cookies. To learn more about how we process your personal information, please read our Privacy Policy⁠⁠.
+Types of cookies
+Cookies are small text files that may be placed on your device when you interact with online services. They can help websites remember details about your visit, such as your preferred language or when you logged in, which can enhance your experience on subsequent visits. Cookies can also be used for other purposes, such as troubleshooting errors, better understanding service usage, and supporting marketing efforts. Cookies set directly by us are called first-party cookies. We also use third-party cookies, which originate from a domain different from the one you are currently visiting. Similar technologies, such as pixels, web beacons, sharing of device IDs and other identifiers via APIs or local storage, can also be used for these purposes. For simplicity, we also refer to these technologies as “cookies” in this Cookie Policy.
+Necessary cookies
+These cookies are required to operate our Services. For example, they allow us to authenticate users or enable specific features within the Services, including for security purposes.
+Source Cookie name Duration Purpose Domain
+OpenAI _puid 7 days Service functionality chatgpt.com
+OpenAI _uasid 1 day Service functionality chatgpt.com
+OpenAI _account Session Service functionality chatgpt.com
+OpenAI oai_disallow_onboarding 12 hours Onboarding platform.openai.com
+OpenAI oai_age_verification_token 12 hours Onboarding platform.openai.com
+OpenAI oai-allow-ne 6 months Cookie consent chatgpt.com
+OpenAI oai-sc 1 year Security chatgpt.com
+OpenAI _account_residency_region 90 days Service functionality chatgpt.com
+OpenAI oai-did 2 years Service functionality chatgpt.com
+openai.com
+deploymentsafety.openai.com
+ads.openai.com
+help.openai.com
+OpenAI country 1 year Service functionality openai.com
+OpenAI analytics_consent 1 year Cookie consent openai.com
+ads.openai.com
+OpenAI marketing_consent 1 year Cookie consent openai.com
+ads.openai.com
+OpenAI marketing_consent_source 180 days Cookie consent ads.openai.com
+OpenAI oai-asli 6 hours Service functionality chatgpt.com
+OpenAI oai-av-seen 1 day Onboarding chatgpt.com
+OpenAI oai-cbi Session Service functionality chatgpt.com
+OpenAI oai-cbs Session Service functionality chatgpt.com
+OpenAI oai-downgrade-account-enabled 1 day Service functionality chatgpt.com
+OpenAI oai-gn Session Service functionality chatgpt.com
+OpenAI oai-hlib 1 year Service functionality chatgpt.com
+OpenAI oai-hm Session Service functionality chatgpt.com
+OpenAI oai-internal-search-settings 2 years Service functionality chatgpt.com
+OpenAI oai-ip-city Session Service functionality chatgpt.com
+OpenAI oai-ip-country Session Service functionality chatgpt.com
+OpenAI oai-is-specific-model Session Service functionality chatgpt.com
+OpenAI oai-last-effort-mode 30 days Service functionality chatgpt.com
+OpenAI oai-last-model 30 days Service functionality chatgpt.com
+OpenAI oai-last-selected-github-repo Session Service functionality chatgpt.com
+OpenAI oai-ll 30 days Service functionality chatgpt.com
+OpenAI oai-locale 1 year Service functionality chatgpt.com
+OpenAI oai-nav-state 2 years Service functionality chatgpt.com
+OpenAI oai-po-a2a 1 year Service functionality chatgpt.com
+OpenAI oai-thread-sidebar 2 years Service functionality chatgpt.com
+OpenAI signup_redirect_url 3 hours Service functionality chatgpt.com
+OpenAI sonic_desktop_results_tab Session Service functionality chatgpt.com
+OpenAI temp-oai-compliance 1 month Service functionality chatgpt.com
+OpenAI ui-show-payment-modal Session Service functionality chatgpt.com
+OpenAI oai-model-sticky-for-new-chats 1 month Service functionality chatgpt.com
+OpenAI locale Session Service functionality openai.com
+OpenAI oai_consent_analytics 6 months Cookie consent chatgpt.com
+OpenAI oai_consent_marketing 6 months Cookie consent chatgpt.com
+OpenAI auth_provider 10 minutes User authentication auth.openai.com
+OpenAI auth_session_minimized 10 minutes User authentication auth.openai.com
+OpenAI login_session 10 minutes User authentication auth.openai.com
+OpenAI consent 10 minutes User authentication auth.openai.com
+OpenAI oai-client-auth-session 10 minutes User authentication auth.openai.com
+OpenAI oai-disallowed-signup 12 hours User authentication auth.openai.com
+OpenAI next-auth.csrf-token Session User authentication chatgpt.com
+OpenAI next-auth.callback-url Session User authentication chatgpt.com
+OpenAI next-auth.session-token Session User authentication chatgpt.com
+OpenAI _umsid 1 day Service functionality chatgpt.com
+OpenAI oai-consent-csrf_dev_* 30 minutes User authentication auth.openai.com
+OpenAI oai-login-csrf_dev_* 30 minutes User authentication auth.openai.com
+OpenAI rg_context 10 minutes User authentication auth.openai.com
+OpenAI iss_context 10 minutes User authentication auth.openai.com
+OpenAI oai_client_auth_info 30 days Service functionality chatgpt.com
+auth.openai.com
+OpenAI dotcom-did 1 year Service functionality openai.com
+OpenAI oai-sidebar-closed-applied 30 days Service functionality chatgpt.com
+OpenAI oai-sidebar-expanded 30 days Service functionality chatgpt.com
+OpenAI oai_consent_personalization 6 months Personalized marketing consent* chatgpt.com
+OpenAI personalized_marketing_consent 6 months Personalized marketing consent* openai.com
+ads.openai.com
+OpenAI sofaLastAdAccountId 2 years Service functionality ads.openai.com
+OpenAI tapestry-theme 1 year Service functionality ads.openai.com
+OpenAI oai-form-submissions 180 days Service functionality openai.com
+OpenAI __oailb 1 hour Service functionality chatgpt.com
+OpenAI oai-anon-id 2 years Service functionality ads.openai.com
+OpenAI oai-logged-out-consent-chosen 180 days Cookie consent chatgpt.com
+OpenAI oai_pl_permission_state Session Service functionality chatgpt.com
+OpenAI __Host-oai-sib 365 days Service functionality .chatgpt.site
+OpenAI chatgpt_sites_siwc_login_<state> 10 minutes User authentication .chatgpt.site
+OpenAI chatgpt_sites_siwc_session 400 days User authentication .chatgpt.site
+OpenAI __Host-chatgpt_sites_session 400 days User authentication .chatgpt.site
+OpenAI sites_preview_token Session Security .chatgpt.site
+OpenAI appgen_admin_review_token Session Security .chatgpt.site
+Auth0(opens in a new window) did 1 year User authentication platform.openai.com
+Auth0(opens in a new window) did_compat 1 year User authentication platform.openai.com
+Auth0(opens in a new window) auth0 14 days User authentication platform.openai.com
+Auth0(opens in a new window) auth0_compat 14 days User authentication platform.openai.com
+Auth0(opens in a new window) _legacy_auth0.*.is.authenticated 1 day User authentication platform.openai.com
+Auth0(opens in a new window) auth0.*.is.authenticated 1 day User authentication platform.openai.com
+Auth0(opens in a new window) _legacy_auth0.app_*.is.authenticated 1 day User authentication platform.openai.com
+Auth0(opens in a new window) auth0.app_*.is.authenticated 1 day User authentication platform.openai.com
+Cloudflare⁠⁠(opens in a new window) CF_Authorization 1 month Security chatgpt.com
+Cloudflare⁠⁠(opens in a new window) __cf_bm 30 min Security auth.openai.com
+chatgpt.com
+openai.com
+platform.openai.com
+devday.openai.com
+ads.openai.com
+developers.openai.com
+help.openai.com
+Cloudflare⁠⁠(opens in a new window) cf_clearance 1 year Security openai.com
+chatgpt.com
+platform.openai.com
+auth.openai.com
+ads.openai.com
+help.openai.com
+Cloudflare⁠⁠(opens in a new window) _cfuvid Session Security openai.com
+chatgpt.com
+auth.openai.com
+platform.openai.com
+ads.openai.com
+developers.openai.com
+help.openai.com
+Cloudflare⁠⁠(opens in a new window) __cflb 60 minutes Security chatgpt.com
+auth.openai.com
+help.openai.com
+Stripe⁠⁠⁠(opens in a new window) __stripe_mid 1 year Payment platform.openai.com
+Stripe⁠⁠⁠(opens in a new window) __stripe_sid 30 min Payment platform.openai.com
+Intercom⁠⁠⁠(opens in a new window) intercom-device-id-dgkjq2bp 270 days Customer support chatgpt.com
+openai.com
+platform.openai.com
+Intercom⁠⁠(opens in a new window) intercom-device-id-izw1u7l7 1 year Customer support chatgpt.com
+Intercom⁠⁠(opens in a new window) intercom-id-dgkjq2bp 9 months Customer support openai.com
+Datadog⁠⁠⁠(opens in a new window) _dd_s 4 hours Error reporting chatgpt.com
+openai.com
+platform.openai.com
+ads.openai.com
+Swoogo⁠⁠(opens in a new window) cookieconsent_status 1 year Cookie consent events.openai.com
+Swoogo⁠⁠(opens in a new window) PHPSESSID Session Service functionality events.openai.com
+Swoogo⁠⁠(opens in a new window) _csrf Session Security events.openai.com
+Swoogo⁠⁠(opens in a new window) AWSALB 7 days Security events.openai.com
+Google(opens in a new window) g_state 6 months Service functionality chatgpt.com
+*Please note that the specific cookies and similar technologies we use may vary depending on your region, the Services you use, and your privacy choices.
+Analytics cookies
+These cookies help us understand how our Services perform and are used, such as the number of users, and how they interact with our Services.
+Source Cookie name Duration Purpose Domain
+OpenAI __obi 1 year Analytics chatgpt.com
+openai.com
+OpenAI __Host-appgarden-visitor 90 days Analytics .chatgpt.site
+Marketing Performance cookies
+These cookies help us support and understand the efficacy of our marketing efforts, such as measuring the performance of marketing campaigns to enhance the Services’ visibility.
+Source Cookie name Duration Purpose Domain
+LinkedIn⁠⁠(opens in a new window) li_fat_id 30 days Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+LinkedIn⁠⁠(opens in a new window) lidc 24 hours Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+LinkedIn⁠⁠(opens in a new window) li_gc 6 months Marketing measurement openai.com
+LinkedIn⁠⁠(opens in a new window) bcookie 2 years Marketing measurement openai.com
+LinkedIn⁠⁠(opens in a new window) UserMatchHistory 30 days Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Linkedin⁠⁠(opens in a new window) AnalyticsSyncHistory 30 days Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+LinkedIn⁠⁠(opens in a new window) li_sugr 90 days Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Google(opens in a new window)⁠⁠⁠ _gcl_au 90 days Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Google(opens in a new window)⁠⁠⁠ _gcl_aw 90 days Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Google(opens in a new window)⁠⁠⁠ IDE 24 months Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Google(opens in a new window)⁠⁠⁠ ANID 13 months Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Google(opens in a new window)⁠⁠⁠ NID 6 months Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Google(opens in a new window)⁠⁠⁠ gclid 24 hours Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Google(opens in a new window)⁠⁠⁠ GBRAID 24 hours Marketing measurement chatgpt.com
+ads.openai.com
+Google(opens in a new window)⁠⁠⁠ WBRAID 24 hours Marketing measurement chatgpt.com
+ads.openai.com
+Google(opens in a new window)⁠⁠ _glc_de 90 days Marketing measurement openai.com
+Google(opens in a new window)⁠⁠ _glc_dc 90 days Marketing measurement openai.com
+Reddit⁠⁠(opens in a new window) rdt_cid 24 hours Marketing measurement chatgpt.com
+ads.openai.com
+Reddit⁠⁠(opens in a new window) _rdt_uuid 90 days Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Reddit⁠⁠(opens in a new window) rdt_insight 90 days Marketing measurement chatgpt.com
+Reddit⁠⁠(opens in a new window) rdt_id 90 days Marketing measurement openai.com
+chatgpt.com
+Reddit⁠⁠(opens in a new window) lidc 24 hours Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Reddit⁠⁠(opens in a new window) _reddit_ads_sync 30 days Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Reddit⁠⁠(opens in a new window) _reddit_s_event 90 days Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Reddit⁠⁠(opens in a new window) _rdt_cid 90 days Marketing measurement openai.com
+TikTok⁠⁠(opens in a new window) _ttp 13 months Marketing measurement chatgpt.com
+TikTok⁠⁠(opens in a new window) ttcsid_<pixelID> 30 minutes Marketing measurement chatgpt.com
+TikTok⁠⁠(opens in a new window) ttclid 13 months Marketing measurement chatgpt.com
+Meta⁠(opens in a new window) API 24 months Marketing measurement openai.com
+chatgpt.com
+Meta⁠(opens in a new window) fbclid 24 hours Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Meta(opens in a new window) _fbp 90 days Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Meta(opens in a new window) _fbc 90 days Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Meta(opens in a new window) fr 90 days Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Meta(opens in a new window) datr 400 days Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Meta(opens in a new window) wd 7 days Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Meta(opens in a new window) sb 400 days Marketing measurement openai.com
+chatgpt.com
+ads.openai.com
+Bing(opens in a new window) MR 7 days Marketing measurement openai.com
+chatgpt.com
+Bing(opens in a new window) MSPTC 180 days Marketing measurement openai.com
+chatgpt.com
+Bing(opens in a new window) MUID 13 months Marketing measurement openai.com
+chatgpt.com
+Bing(opens in a new window) _uetmsclkid 24 hours Marketing measurement openai.com
+chatgpt.com
+Bing(opens in a new window) _uetvid 13 months Marketing measurement openai.com
+chatgpt.com
+Bing(opens in a new window) _uetsid 24 hours Marketing measurement openai.com
+chatgpt.com
+Bing(opens in a new window) msclkid 24 hours Marketing measurement openai.com
+chatgpt.com
+Snapchat(opens in a new window) ScCid 24 hours Marketing measurement chatgpt.com
+Snapchat(opens in a new window) _scid 13 months Marketing measurement chatgpt.com
+Snapchat(opens in a new window) _scid_r 13 months Marketing measurement chatgpt.com
+Snapchat(opens in a new window) _sctr 13 months Marketing measurement chatgpt.com
+Snapchat(opens in a new window) sc_at 390 days Marketing measurement chatgpt.com
+Snapchat(opens in a new window) u_sclid 13 months Marketing measurement chatgpt.com
+Snapchat(opens in a new window) u_sclid_r 13 months Marketing measurement chatgpt.com
+Snapchat(opens in a new window) u_scsid Session Marketing measurement chatgpt.com
+Snapchat(opens in a new window) u_scsid_r Session Marketing measurement chatgpt.com
+Impact(opens in a new window) im_ref 7 days Marketing measurement chatgpt.com
+Managing cookies
+Depending on applicable law, you may be able to choose which cookies are used when using our Services. If you are in a jurisdiction that allows for that control, you can access your cookie settings directly on our various sites. Your web browser may also allow you to manage your cookie preferences, including to delete and disable cookies. You can take a look at the help section of your web browser or follow the links below to understand your options.
+Chrome⁠(opens in a new window)
+Edge⁠(opens in a new window)
+Safari⁠(opens in a new window)
+Firefox⁠(opens in a new window)
+Opera⁠(opens in a new window)
+Please note that changes you make to your cookie settings may affect the availability or functionality of the Services. Cookies listed as “Necessary” are required for the Services to function and cannot be disabled.
+Cookie settings are device- and browser-specific, so you will need to set cookie preferences for each device’s browser.
+Additional information
+For additional information about cookies, including how to see what cookies have been set on your device and how to manage and delete them, please visit www.allaboutcookies.org⁠⁠(opens in a new window) and www.youronlinechoices.eu⁠⁠⁠(opens in a new window).
+You can send any questions to privacy@openai.com⁠⁠.
+Research Research Index
+Research Overview
+Economic Research
+Latest Advancements GPT-6.1 Sol
+GPT-6 Astra
+GPT-5.6
+GPT-5.5
+Safety Safety Approach
+Deployment Safety (opens in a new window)
+Security & Privacy
+Trust & Transparency
+Products ChatGPT (opens in a new window)
+ChatGPT Business (opens in a new window)
+ChatGPT Enterprise (opens in a new window)
+ChatGPT for Education (opens in a new window)
+Codex
+Dots (opens in a new window)
+Release Notes
+API Platform Overview
+API Log In (opens in a new window)
+Docs (opens in a new window)
+Business Overview
+Solutions
+Resources
+Plugins
+Customer Stories
+Partner Network
+Contact Sales
+Developers Plugins (opens in a new window)
+Models (opens in a new window)
+Docs (opens in a new window)
+Resources (opens in a new window)
+Developer Forum (opens in a new window)
+Company About Us
+Our Charter
+Careers
+News
+Support Help Center (opens in a new window)
+OpenAI Status (opens in a new window)
+More Stories
+Academy
+Supply Co.
+Livestreams
+Podcast
+RSS
+Terms & Policies Terms of Use
+Privacy Policy
+Other Policies
+(opens in a new window) (opens in a new window) (opens in a new window) (opens in a new window) (opens in a new window) (opens in a new window) (opens in a new window)
+OpenAI © 2015–2026 Manage Cookies
+EnglishUnited States

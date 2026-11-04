@@ -1,0 +1,118 @@
+url: https://openai.com/security-and-privacy/
+method: archive
+saved: 2026-11-04
+
+Security and privacy at OpenAI | OpenAI
+Skip to main content Research
+Products
+Business
+Developers
+Company
+Foundation(opens in a new window)
+Log in Try ChatGPT (opens in a new window)
+Research
+Products
+Business
+Developers
+Company
+Foundation (opens in a new window)
+Try ChatGPT (opens in a new window) Login
+OpenAI Security & privacy
+OpenAI is committed to protecting our customer and user data, models, and products. Our platforms are built with your security and privacy in mind and tested by a team of security experts.
+Keeping your data secure
+For individuals
+You choose how your data is used.
+Customizable security and privacy settings are designed to protect your conversations.
+Advanced Account Security adds stronger protections against unauthorized access, with enhanced sign-in and recovery safeguards.
+You decide whether your data is used for training and model improvement.
+Your memories, conversations, and account data can be deleted when you choose.
+We monitor for suspicious activity before it can impact your data.
+Your content is encrypted at rest and in transit between you and OpenAI, and between OpenAI and its service providers.
+Learn more about your data privacy controls on our Consumer privacy⁠ page⁠.
+For businesses
+Layered protections for your business data.
+We don’t train our models on your organization’s data by default.
+Enhanced data retention controls help you stay compliant.
+We protect your data with thorough testing and monitoring validated by independent auditors.
+Your content is encrypted at rest and in transit between you and OpenAI, and between OpenAI and its service providers.
+Learn more about how we secure enterprise data at our Business data security page⁠ and Enterprise privacy page⁠.
+Security compliance & accreditation
+OpenAI supports our customers’ compliance with privacy laws, including the GDPR, CCPA, HIPAA, and FERPA, and offers a Data Processing Addendum and Business Associate Agreement for customers. The infrastructure supporting API and ChatGPT Enterprise, Business, Edu, for Teachers and for Healthcare products has been evaluated by an independent third-party auditor to confirm that our controls align with industry standards for security and confidentiality.
+Visit OpenAI trust portal to learn more about our security controls, and product compliance page to view compliance status by products.
+Visit Trust Portal (opens in a new window)
+View product compliance status
+Our accreditations
+SOC 2 Type 2
+OpenAI has undergone an independent SOC 2 Type 2 examination of controls relevant to Security, Availability, Confidentiality, and Privacy for its API and ChatGPT business product services.
+ISO 27001, 27017, 27018, and 27701
+OpenAI maintains ISO/IEC 27001:2022 and ISO/IEC 27701:2019 certifications for the information security and privacy management systems supporting the OpenAI API, ChatGPT Enterprise, and ChatGPT Edu services.
+ISO 42001
+OpenAI maintains an ISO/IEC 42001:2023 AI Management System covering OpenAI’s consumer and business AI products and models in its role as an AI producer and AI provider.
+PCI-DSS
+OpenAI maintains PCI-DSS compliance for the components of ChatGPT that support delegated payment processing.
+CSA Star Level 1
+ChatGPT business product services and the API Platform have been evaluated by the Cloud Security Alliance Security Trust Assurance and Risk (STAR) registry for key principles of transparency and cloud security best practices.
+Security at every step
+Defense in depth
+Infrastructure serving our products runs on trusted cloud providers using industry best practices, including encryption in transit and at rest, change management, and strict access controls. Read our ChatGPT Security Whitepaper⁠(opens in a new window).
+Responsible model development
+Our models and systems are regularly evaluated through evaluations against industry benchmarks, adversarial testing and ongoing safety monitoring. Learn more about OpenAI’s approach to model safety⁠.
+Enterprise security controls
+OpenAI business products also support a range of compliance and administrative features⁠ ⁠ such as audit logs⁠(opens in a new window), data residency for ChatGPT⁠(opens in a new window) and API⁠(opens in a new window), account security⁠(opens in a new window) and fine grained controls⁠(opens in a new window).
+Reporting security issues
+OpenAI invites security researchers and ethical hackers to help us keep our systems safe. Our Bug Bounty Program provides safe harbor for good-faith testing and offers cash rewards based on the severity and impact of reported issues. Learn more and participate.⁠
+Resources
+ChatGPT privacy settings
+Business data privacy, security, and compliance
+Enterprise privacy at OpenAI
+Research Research Index
+Research Overview
+Economic Research
+Latest Advancements GPT-6.1 Sol
+GPT-6 Astra
+GPT-5.6
+GPT-5.5
+Safety Safety Approach
+Deployment Safety (opens in a new window)
+Security & Privacy
+Trust & Transparency
+Products ChatGPT (opens in a new window)
+ChatGPT Business (opens in a new window)
+ChatGPT Enterprise (opens in a new window)
+ChatGPT for Education (opens in a new window)
+Codex
+Dots (opens in a new window)
+Release Notes
+API Platform Overview
+API Log In (opens in a new window)
+Docs (opens in a new window)
+Business Overview
+Solutions
+Resources
+Plugins
+Customer Stories
+Partner Network
+Contact Sales
+Developers Plugins (opens in a new window)
+Models (opens in a new window)
+Docs (opens in a new window)
+Resources (opens in a new window)
+Developer Forum (opens in a new window)
+Company About Us
+Our Charter
+Careers
+News
+Support Help Center (opens in a new window)
+OpenAI Status (opens in a new window)
+More Stories
+Academy
+Supply Co.
+Livestreams
+Podcast
+RSS
+Terms & Policies Terms of Use
+Privacy Policy
+Other Policies
+(opens in a new window) (opens in a new window) (opens in a new window) (opens in a new window) (opens in a new window) (opens in a new window) (opens in a new window)
+OpenAI © 2015–2026 Your privacy choices
+EnglishUnited States

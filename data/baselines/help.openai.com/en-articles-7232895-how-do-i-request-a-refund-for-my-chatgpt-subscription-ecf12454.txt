@@ -1,0 +1,56 @@
+url: https://help.openai.com/en/articles/7232895-how-do-i-request-a-refund-for-my-chatgpt-subscription
+method: archive
+saved: 2026-11-04
+
+How do I request a refund for my ChatGPT subscription? | OpenAI Help Center
+All Collections
+Account, login and billing
+Billing questions
+How do I request a refund for my ChatGPT subscription?
+How do I request a refund for my ChatGPT subscription?
+Refund eligibility and request steps for ChatGPT subscriptions.
+Request a refund
+How you request a refund depends on your ChatGPT plan and where you purchased the subscription. To help us verify your account and process your request quickly, please contact us while logged in to the OpenAI account tied to the subscription or from the email address associated with the relevant charge.
+Our refund policies are subject to compliance with our Terms of Use.
+Refund eligibility
+Payments are generally non-refundable. Your applicable legal and contractual rights still apply, including the regional rights described below. We may also approve refunds for a verified OpenAI billing error, validated unauthorized charges, or a documented OpenAI service or access failure.
+For an unused individual subscription purchase, a discretionary refund may be available if you contact us within seven days of the charge. The request must concern your current billing period and meet our eligibility requirements, including limits on repeat refunds, no substantial use, no active payment dispute, and no confirmed abuse. Include the reason for your request and confirm that you understand refunded subscription access will end.
+There is no automatic prorated discretionary refund after seven days. An accidental purchase, forgetting to cancel, dissatisfaction, or a plan change does not by itself qualify outside an applicable exception.
+If a subscription refund is granted, access covered by the refunded charge normally ends, subject to applicable law. Canceling a subscription by itself stops future renewals and does not establish refund eligibility.
+Payment disputes
+We cannot issue a separate refund while a payment dispute is active or after the funds have already been returned through the dispute process. If a dispute was resolved in OpenAI's favor and the funds were not returned, you can ask us to review refund eligibility under the policy above. This does not limit your ability to contact your bank or card issuer.
+ChatGPT Business
+Unused seats in a self-serve ChatGPT Business workspace are generally non-refundable for the billing period you’ve committed to, except where applicable law or an approved refund exception applies. A workspace owner can schedule a seat reduction for the next billing cycle.
+If you plan to continue using ChatGPT Business, Support can review a verified seat-count error, mistaken annual renewal, or accidental workspace deactivation for a possible remedy. These situations do not automatically qualify for a refund.
+To ask about an incorrect Business charge or request a refund, contact Support through the Help Center chat. Include your account email, workspace name or ID, invoice number, charge date and amount, and the reason for your request.
+For seat and cancellation rules, see: Managing billing and seats in ChatGPT Business.
+Individual ChatGPT subscriptions purchased on the web
+If you want to request a refund, first go to ChatGPT and log in with the account for which you would like a refund. Next, go to the Help Center and select the chat widget. Request a refund through the chat. Our system will automatically show you a quick summary of your refund eligibility before you are connected with an agent.
+Important: Make sure you are logged into help.openai.com with the same OpenAI account that was charged. If the chat widget displays a 'requires_login' or 'login required' message, or can't locate your subscription, select Log in, sign in to the correct account, then reopen the chat widget and submit your refund request again.
+Our team will reply back to you as soon as possible. If you are eligible for a refund, we will process it within 5-7 business days. This estimate covers OpenAI's refund processing. For refunds returned to a bank or card account, completion of that processing does not mean the funds are already available; the time for funds to appear also depends on your bank's processing. Refund eligibility is described above; the regional rights below still apply.
+Upon processing your refund, we will send a receipt to the email associated with your account. If you do not find the receipt in your inbox, kindly check your spam folder.
+For an approved refund, funds originally paid from your ChatGPT wallet may be returned to your wallet balance. If you paid with both wallet funds and another payment method, your refund may be split between those funding sources. The refund eligibility requirements in this article still apply.
+If you'd like to cancel your subscription, follow the steps outlined in this article: How do I cancel my ChatGPT subscription? Deleting your OpenAI account cancels subscriptions billed directly by ChatGPT. For subscriptions managed by Apple or Google Play, check and cancel the subscription through that store before deleting your account.
+You subscribed via Apple Subscriptions
+For subscriptions made through Apple Subscriptions, cancellations and refunds must be requested directly from Apple. See How to cancel your Apple subscription for ChatGPT Plus in the ChatGPT iOS app for details.
+You subscribed via Google Play Store
+If you want to request a refund, first go to ChatGPT and log in with the account for which you would like a refund. Next, go to the Help Center and select the chat widget. Request a refund through the chat. Our system will automatically show you a quick summary of your refund eligibility before you are connected with an agent.
+Important: Make sure you are logged into help.openai.com with the same OpenAI account that was charged. If the chat widget displays a 'requires_login' or 'login required' message, or can't locate your subscription, select Log in, sign in to the correct account, then reopen the chat widget and submit your refund request again.
+Our team will reply back to you as soon as possible. If you are eligible for a refund, we will process it within 10 business days. This estimate covers OpenAI's refund processing. For refunds returned to a bank or card account, completion of that processing does not mean the funds are already available; the time for funds to appear also depends on your bank's processing. Refund eligibility is described above; the regional rights below still apply.
+Note for EU, UK, and Turkey residents
+If you live in the EU, UK, or Turkey, you are eligible for a prorated refund if you cancel your subscription within 14 days of purchase.
+Note for Korea residents
+If you live in the Republic of Korea, you will receive a full refund if you request a refund within 7 days of the date of your purchase and have not used our service during that time.
+Otherwise, you will receive a pro-rated refund based on the period from the date you requested a refund to the end of the subscription period you have paid for.
+Once you request a refund, the cancellation of your subscription will take effect immediately, and you will no longer have access to the subscription service. If you are eligible for a refund, we will take necessary steps to process it without delay. Please contact us if you believe there was a delay subject to compensation under the applicable laws.
+If you have questions about compensation for damages, how complaints are handled, or how disputes are resolved, please contact us.
+Note for Brazil residents
+If your account is registered in Brazil and the payment card used for your subscription was issued in Brazil, the following regional refund rules apply:
+First refund: You’re eligible for a full refund if you request it within 7 days of the charge. After 7 days, you’re eligible for a prorated refund for the unused portion of your paid subscription period.
+Second refund: You’re eligible for a full refund if you request it within 7 days of the charge, whether or not you’ve used the subscription. After 7 days, a second refund is not available under these regional rules.
+Third or later refund: Your request requires additional review. If approved, a prorated refund may be available when you request it within 14 days of the charge.
+OpenAI will review your refund history, including any applicable exclusions, to determine which rule applies. These categories refer to refunds you’ve received, rather than subscription purchases or renewals. Other applicable refund rights and exceptions still apply.
+To request a refund, follow the instructions above for your purchase method. Eligible Google Play refunds are currently issued in full. Refunds for subscriptions purchased through Apple must be requested directly from Apple.
+Was this article helpful?
+Submit
+ChatGPTAPIService Status Cookie Preferences
