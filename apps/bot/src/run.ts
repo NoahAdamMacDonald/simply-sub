@@ -4,6 +4,7 @@ import {
   daysBetween,
   digestDue,
   isDue,
+  onArchivedHost,
   planTitle,
   searchBudgets,
   type Automation,
@@ -252,8 +253,11 @@ export async function runNight(
   const alsoKept = (finding: Finding) => confirmsReported(finding, countries);
 
   const robots: Record<string, Robots> = {};
-  for (let start = 0; start < index.hosts.length; start += robotsPerStep) {
-    const hosts = index.hosts.slice(start, start + robotsPerStep);
+  // A site that turns bots away isn't asked for its robots.txt either: its pages come from the archive (M11.15).
+  const archived = settings.archived ?? [];
+  const asked = index.hosts.filter((host) => !onArchivedHost(`https://${host}/`, archived));
+  for (let start = 0; start < asked.length; start += robotsPerStep) {
+    const hosts = asked.slice(start, start + robotsPerStep);
     Object.assign(
       robots,
       await step(`read robots.txt ${start / robotsPerStep + 1}`, () => services.readRobots(hosts)),
@@ -363,7 +367,13 @@ export async function runNight(
         },
         reportedHere,
       );
-      return { ...made, baselines: await baselines(urlsOf(made), reportedHere), cited };
+      return {
+        ...made,
+        baselines: await baselines(urlsOf(made), reportedHere),
+        cited,
+        archived,
+        today,
+      };
     });
   }
   for (const bundles of plan.groups) {
@@ -380,7 +390,13 @@ export async function runNight(
           approvals: [],
           networks: [],
         });
-        return { ...made, baselines: await baselines(urlsOf(made), new Set()), cited };
+        return {
+          ...made,
+          baselines: await baselines(urlsOf(made), new Set()),
+          cited,
+          archived,
+          today,
+        };
       },
     );
   }

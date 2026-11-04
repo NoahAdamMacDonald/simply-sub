@@ -2,12 +2,14 @@ import {
   baselineDiff,
   baselineLines,
   comparable,
+  daysBetween,
   excerpt,
   findQuote,
   missingQuotes,
   moneyIn,
   nameIndexes,
   networksNamedIn,
+  onArchivedHost,
   pageShows,
   pageShowsRate,
   sameRate,
@@ -16,7 +18,9 @@ import {
   sameCurrency,
   taxWording,
   type Baseline,
+  type BaselineMethod,
   type CitedType,
+  type IsoDate,
 } from '@simply-sub/core';
 import {
   extractionRequest,
@@ -54,6 +58,11 @@ export interface PageDeps {
   page(url: string): Promise<PageResult>;
   /** A page's text in a browser, for one a fetch gets nothing from. */
   browser(url: string): Promise<PageResult>;
+  /**
+   * The Internet Archive's newest copy of a page on a site that turns bots away (M11.15), as its text: the bot never
+   * reads such a site itself.
+   */
+  archived(url: string): Promise<PageResult>;
   /** Workers AI's answer to a request. */
   extract(request: ExtractionRequest): Promise<unknown>;
   /** A file for the logo search, as robots.txt allows. */
@@ -83,6 +92,13 @@ export interface CheckInput {
   baselines?: Readonly<Record<string, Baseline | null>>;
   /** What each page is, and who cites it, for its page finding. */
   cited?: Readonly<Record<string, { type: CitedType; owners: string[] }>>;
+  /**
+   * Sites that turn bots away (data/automation.yaml's archived, M11.15): their pages are read from the Internet
+   * Archive's newest copy, compared with their baselines, and their prices neither confirmed nor guessed.
+   */
+  archived?: readonly string[];
+  /** Tonight's date, for a page read only from the archive for too long (M11.15). */
+  today?: IsoDate;
 }
 
 export interface CheckResult {
@@ -102,6 +118,12 @@ export async function checkPages(
   const read = async (url: string, names: readonly string[]): Promise<PageResult> => {
     const known = pages.get(url);
     if (known) return known;
+    if (archivedSite(url)) {
+      const copy = await deps.archived(url);
+      archived.add(url);
+      pages.set(url, copy);
+      return copy;
+    }
     let result: PageResult;
     // A page whose baseline was read in a browser is opened in one again, when tonight's budget allows (M3.9).
     if (input.baselines?.[url]?.method === 'browser' && budget.browserPages > 0) {
@@ -124,19 +146,34 @@ export async function checkPages(
   };
   /** Whether a page still reads as its baseline: `same`, else undefined (changed, new, or not checked against one). */
   const statuses = new Map<string, { lines: string[]; baseline: Baseline | null }>();
-  const unchanged = (url: string, page: PageResult, read: 'fetch' | 'browser'): boolean => {
+  const unchanged = (url: string, page: PageResult, read: BaselineMethod): boolean => {
     if (!input.baselines || !(url in input.baselines) || 'error' in page) return false;
     const baseline = input.baselines[url];
-    // Read another way than its baseline (no browser left tonight): not compared, and checked as before M3.9.
-    if (baseline && baseline.method !== read) return false;
+    // Read another way than its baseline (no browser left tonight): not compared, and checked as before M3.9. A copy
+    // from the archive is compared with any baseline, so a page that came to turn bots away gets an archive baseline.
+    if (baseline && baseline.method !== read && read !== 'archive') return false;
     const lines = baselineLines(page.text);
     statuses.set(url, { lines, baseline });
     if (!baseline) return false;
     const diff = baselineDiff(baseline.lines, lines);
     return diff.added.length === 0 && diff.removed.length === 0;
   };
-  const methodOf = (url: string): 'fetch' | 'browser' => (browsed.has(url) ? 'browser' : 'fetch');
+  const methodOf = (url: string): BaselineMethod =>
+    archived.has(url) ? 'archive' : browsed.has(url) ? 'browser' : 'fetch';
   const browsed = new Set<string>();
+  /** Pages read from the Internet Archive's copy (M11.15), whose site turns bots away. */
+  const archived = new Set<string>();
+  const archivedSite = (url: string) => onArchivedHost(url, input.archived ?? []);
+  /**
+   * A page read only from the archive's copy, whose baseline is over 90 days old: its prices may have changed with no
+   * change to its text (a page whose scripts fill them in), so a person reads the live page and saves it again.
+   */
+  const staleCopy = (url: string): string | undefined => {
+    const baseline = input.baselines?.[url];
+    if (!baseline || !input.today || daysBetween(baseline.saved, input.today) <= archiveRereadDays)
+      return undefined;
+    return `Read only through the Internet Archive's copy since ${baseline.saved}: read the live page with the standard reader, then save its baseline again`;
+  };
 
   const byUrl = new Map<string, PriceTarget[]>();
   for (const target of input.targets) {
@@ -145,6 +182,14 @@ export async function checkPages(
   for (const [url, targets] of byUrl) {
     const names = targets.flatMap((target) => target.names);
     const page = await read(url, names);
+    // A page only the archive's copy shows (M11.15): its prices are neither confirmed nor guessed. A copy whose text
+    // changed is a page finding (below), and one read only from the archive for too long is for a person.
+    if (archived.has(url)) {
+      unchanged(url, page, 'archive');
+      const stale = staleCopy(url);
+      if (stale) findings.push({ kind: 'manual', subject: label(targets), url, reason: stale });
+      continue;
+    }
     if ('error' in page) {
       findings.push({ kind: 'manual', subject: label(targets), url, reason: page.error });
       continue;
@@ -206,6 +251,10 @@ export async function checkPages(
   for (const [url, targets] of ratesByUrl) {
     const names = targets.flatMap((target) => target.names);
     const page = await read(url, names);
+    if (archived.has(url)) {
+      unchanged(url, page, 'archive');
+      continue;
+    }
     if ('error' in page) {
       findings.push({ kind: 'manual', subject: rateLabel(targets), url, reason: page.error });
       continue;
@@ -239,6 +288,8 @@ export async function checkPages(
 
   for (const approval of input.approvals) {
     const page = await read(approval.url, [approval.reseller]);
+    // The archive's copy may be missing tonight (no capture, the archive offline): nothing to tell a person.
+    if ('error' in page && archived.has(approval.url)) continue;
     if ('error' in page) {
       findings.push({
         kind: 'manual',
@@ -263,6 +314,7 @@ export async function checkPages(
       url,
       targets.flatMap((target) => target.quotes),
     );
+    if ('error' in page && archived.has(url)) continue;
     if ('error' in page) {
       findings.push({
         kind: 'manual',
@@ -279,6 +331,7 @@ export async function checkPages(
   // Policy pages (M3.9): a changed one is for a reviewer to grade again, with the ratings' quotes it lost.
   for (const target of input.policyPages ?? []) {
     const page = await read(target.url, []);
+    if ('error' in page && archived.has(target.url)) continue;
     if ('error' in page) {
       findings.push({
         kind: 'manual',
@@ -316,7 +369,8 @@ export async function checkPages(
     });
   }
 
-  if (input.logo) {
+  // A site that turns bots away isn't asked for its icon either (M11.15).
+  if (input.logo && !archivedSite(input.logo.website)) {
     const icon = await findIcon(input.logo.website, deps.download);
     if (icon && (await gitBlobSha(icon.png)) !== input.logo.committed) {
       // Only an icon at least as big as the committed one: a site that keeps the bot from its own icons leaves only the
@@ -348,6 +402,9 @@ export async function checkPages(
 }
 
 /** How the pull request names a region's accepted networks: "netflix's cards in CA". */
+/** Days a page may be read only from the archive's copy before a person reads the live page again (M11.15). */
+export const archiveRereadDays = 90;
+
 function networksSubject(target: NetworksTarget): string {
   return `${target.provider}'s cards in ${target.region}`;
 }

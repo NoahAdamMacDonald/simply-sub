@@ -1,4 +1,5 @@
 import {
+  archivedText,
   automationSchema,
   baselineLines,
   buildPolicyIndex,
@@ -72,6 +73,8 @@ export interface World {
   ai?: (request: ExtractionRequest) => unknown;
   /** URLs only a browser gets the text of. */
   browserOnly?: Record<string, string>;
+  /** URL → the HTML of the Internet Archive's newest copy, for a site that turns bots away (M11.15). */
+  archived?: Record<string, string>;
   /** Workers AI's answer to a review's messages (M3.10). */
   review?: (system: string, user: string) => unknown;
   /** The discovery's world (M3.11): data/queue.yaml as main has it (one with no services by default). */
@@ -117,6 +120,8 @@ export interface Calls {
   pages: string[];
   browser: string[];
   ai: ExtractionRequest[];
+  /** Pages read from the archive's copy (M11.15). */
+  archived?: string[];
 }
 
 export function fakeDeps(
@@ -133,6 +138,13 @@ export function fakeDeps(
       calls.browser.push(url);
       const text = world.browserOnly?.[url];
       return text === undefined ? { error: 'Browser Rendering couldn’t read the page' } : { text };
+    },
+    async archived(url): Promise<PageResult> {
+      calls.archived?.push(url);
+      const html = world.archived?.[url];
+      return html === undefined
+        ? { error: 'The Internet Archive has no copy of the page' }
+        : { text: archivedText(html) };
     },
     async extract(request) {
       calls.ai.push(request);
