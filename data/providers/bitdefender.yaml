@@ -148,6 +148,19 @@ perks:
 # included.", "Inklusive MwSt.", "TVA incluse.", "Inclusief BTW.", "IVA incluido.", "IVA inclusa."), Canada's as well
 # (taxIncluded, missing from its prices until now); the US's say "Plus applicable sales tax."
 
+# Monthly billing (the owner's tasks), read 2026-11-03 with Mullvad Browser: only Ultimate's cards sell it (stored,
+# every region), and Digital Identity Protection's "1- Month Plan" in Canada, the UK and New Zealand, whose pages say
+# only "Billed CA$7.99 for the first month" (£7.99, NZ$12.99) with no regular price, so it isn't stored. Every other
+# page read offers "Yearly" and "2 Years" (the suites) or a yearly price alone (Antivirus Plus, Premium VPN, Digital
+# Identity Protection in the US): all five products in Canada, the US and the UK; Premium and Total Security in
+# Australia, New Zealand, Germany and Italy; Total Security and Antivirus Plus in France; Total Security in Spain; Total
+# Security, Antivirus Plus, Premium VPN and Digital Identity Protection in the Netherlands; Digital Identity Protection
+# in New Zealand and Germany. Bitdefender's site then rate-limited the reader twice (Cloudflare's error 1015), so these
+# 18 stay unread: Antivirus Plus, Premium VPN and Digital Identity Protection in Australia and Italy, Antivirus Plus and
+# Premium VPN in New Zealand and Germany, Premium Security, Premium VPN and Digital Identity Protection in France,
+# Premium Security in the Netherlands, and Premium Security, Antivirus Plus, Premium VPN and Digital Identity Protection
+# in Spain.
+
 # SecurePass and the VPN in depth (M11.9, the owner's item 3), read 2026-11-03 in its support centre:
 # - SecurePass, every plan with it. Its FAQ (/consumer/support/answer/107798/): "To add an item like an account, credit
 #   card, identity or note", and "How do I use Bitdefender SecurePass as a 2FA app?" (scan a site's QR code into the

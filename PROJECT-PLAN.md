@@ -1361,6 +1361,33 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
   - **Browser:** `check-m11-facts.cjs` (browser-check skill): 93 checks in both themes at both widths, by keyboard, with
     axe: the card's three groups, and the dialog with `CA.json` answered so Crave bills on the 1st and TSN on the last
     day. `check-m11-outside.cjs` (73) follows Mullvad's new groups; `check-item-dialog.cjs` (97) passes as it was.
+  - **The owner's follow-up: provider facts for the 13** (2026-11-03, the owner's choices that day, BLUEPRINT §14):
+    - **Where each provider is from:** `owner.country` (`ownerCountrySchema` in core's `rater.ts`), an ISO 3166-1
+      code quoted from the owner's quotes or a page of its own (`page`, `quotes`, `lastVerified` together). Core's
+      `namesCountry` (`provider-facts.ts`) checks the words name the country in English or French (ICU's names), its
+      people, or in an address a US state or Canadian province, never a code; validation requires one of every
+      provider, a real country (UK and EU refused) and its page on the provider's, its policies' or the owner's sites
+      (Bell Media's and CBC/Radio-Canada's about pages through their `website`). The card: "Proton AG · Switzerland",
+      read "Proton AG, from Switzerland", the country a link to its own page when it has one.
+    - **Ways to pay, complete:** every provider's own payment pages read again, Netflix's and Disney+'s per country
+      (eleven each). New ids `klarna`, `satispay` and `cash-app`; `bank-transfer` shown as "Bank transfer or direct
+      debit" and `app-store` as "App store or platform billing", their words learning Wero, Eps, Bancontact,
+      Przelewy24, GoCardless, a bank account, mobile operator billing, Bell's billing and Prime Video. Entries for the
+      same place add up (`paymentMethodsIn` returns each page's entry; the schema and the extraction no longer keep one
+      per place), so Crave's gift cards, Mullvad's terms and TSN's and RDS's FAQs are entries of their own, and Xbox
+      Game Pass's mobile billing is an entry for the six regions Microsoft's operator table names. The card shows a
+      line per page, and "Card (networks not verified)" where no page names the networks (Claude, Crave, TSN, RDS,
+      Mullvad, Bitdefender, Xbox Game Pass).
+    - **Card networks** for Netflix's and Disney+'s other nine countries and ICI TOU.TV ("Les cartes de crédit Visa et
+      Mastercard", and no American Express, Interac debit or PayPal).
+    - **Bitdefender's monthly prices:** none beyond Ultimate's (stored) on every page read; Digital Identity
+      Protection's "1- Month Plan" gives only its first month's price, so it isn't stored. Its site rate-limited the
+      reader twice (error 1015) and 18 pages stay unread, listed in its file.
+    - **Checks:** every new quote word for word (`quote-check.cjs`, which now reads the country's quotes too: 161, and
+      Disney+'s 81 against each country's own text, since one address serves every country's list); core (the words
+      for each country and way to pay, the schema's and validation's refusals, the citation, entries adding up), the
+      card's spec, the bot's tests on Netflix's eleven countries; `check-m11-outside.cjs` (81, Bitdefender's Billing day
+      after Ways to pay, stale since M11.9) and `check-m11-facts.cjs` (93) with the new lines.
 
 **M11.6 — Ranked perks** (BLUEPRINT §4.2)
 ```yaml

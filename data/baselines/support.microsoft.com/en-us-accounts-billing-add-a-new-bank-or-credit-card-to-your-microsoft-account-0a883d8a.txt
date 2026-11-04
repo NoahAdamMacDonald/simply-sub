@@ -1,0 +1,409 @@
+url: https://support.microsoft.com/en-us/accounts-billing/add-a-new-bank-or-credit-card-to-your-microsoft-account
+method: fetch
+saved: 2026-11-03
+
+Add a new bank or credit card to your Microsoft account | Microsoft Support
+Skip to main content
+Microsoft
+Support
+Support
+Support
+Home
+Microsoft 365
+Office
+Products
+Microsoft 365
+Outlook
+Microsoft Teams
+OneDrive
+Microsoft Copilot
+OneNote
+Windows
+more ...
+Devices
+Surface
+PC Accessories
+Xbox
+PC Gaming
+HoloLens
+Surface Hub
+Hardware warranties
+Account & billing
+Resources
+Community forums
+Microsoft 365 Admins
+Developer
+Education
+Report a support scam
+Product safety
+More
+Buy Microsoft 365
+All Microsoft
+Global
+Microsoft 365
+Azure
+Copilot
+Windows
+Surface
+XBOX
+Deals
+Small Business
+Support
+Software
+Software
+Windows Apps
+Outlook
+OneDrive
+Microsoft Teams
+OneNote
+Microsoft Edge
+Moving from Skype to Teams
+PCs & Devices
+PCs & Devices
+Computers
+Shop XBOX
+Accessories
+VR & mixed reality
+Certified Refurbished
+Trade-in for cash
+Entertainment
+Entertainment
+XBOX Game Pass Ultimate
+PC Game Pass
+XBOX games
+PC games
+Business
+Business
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365 for business
+Microsoft Power Platform
+Windows 365
+Small Business
+Digital Sovereignty
+Developer & IT
+Developer & IT
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Other
+Other
+Microsoft Rewards
+Free downloads & security
+Education
+Gift cards
+Licensing
+Unlocked stories
+View Sitemap
+Search
+Search for help
+No results
+Cancel
+Sign in
+Sign in with Microsoft
+Sign in or create an account.
+Hello,
+Select a different account.
+You have multiple accounts
+Choose the account you want to sign in with.
+Related topics
+Related topics
+×
+Purchases and downloads
+Order history
+Download, install or activate Office
+Returns & exchanges
+Find tax invoices
+Pre-orders
+Find downloads and product keys
+Track your order
+Shipping, costs, and delivery times
+Guest checkout
+Create a free business work account
+How to start shopping with your work account at the Microsoft Store
+How to spot a fake order scam
+Manage your billing
+Add a new payment method
+Update a payment method
+Remove a payment method
+Change shipping or billing address
+Change Store country or region
+Turn recurring billing on or off
+Investigate unknown charges
+Authorize a purchase
+Consent to tokenization
+Prevent unauthorized purchases
+Change purchase sign-in settings
+Help with purchases
+How to complete a purchase from the Microsoft Digital Store
+Get trusted apps and games
+Get updates for apps and games
+Make an in-app purchase
+Microsoft store promo codes
+Rate and review apps & games
+Store assistant FAQs
+In-app purchases through a 3rd party
+Gift cards and account balance
+Redeem a gift card or code
+Check a Microsoft account balance
+Add money to a Microsoft account
+Spend money in a Microsoft account
+Limits on money in a Microsoft account
+Spend all Microsoft gift card money
+Cancel a Microsoft Store gift card
+Refunds and exchanges
+Games and apps
+Hardware
+Refund or cancel a subscription
+Cancel an order or pre-order
+Status of a return and refund
+Can't get a refund on apps and games
+Errors & troubleshooting
+Troubleshoot buying from Microsoft Store
+Troubleshoot payment options
+Troubleshoot unknown charges
+I've been charged twice
+Can't find or install an app
+Can't push an app or game to a device
+Fix problems with apps
+Can't find Microsoft Store app in Windows
+Microsoft Store app doesn't open
+“Unable to Complete this transaction” error
+Error 0x80131500
+Consumer and Regulatory Information
+Consumer and Regulatory Information
+Manage your Microsoft account
+Manage your Microsoft account
+Help with subscriptions
+Help with subscriptions
+Add a new bank or credit card to your Microsoft account
+Applies To Microsoft account Microsoft Store Microsoft account dashboard
+Get help with Copilot
+What are the steps to add or change a payment method?
+How do I edit payment information in my Microsoft work?
+How can I add a mobile phone as payment method?
+You can add your credit card, debit card, bank account, PayPal account, or mobile phone as a new payment method. Select 'Personal account' or 'Work account' tab below for your account type.
+Personal account
+Work account
+Note
+To add a Microsoft gift card to your account, go to redeem.microsoft.com. Learn more about how to Redeem a gift card or code to your Microsoft account.
+If you want to edit an existing payment method, read Update a Microsoft account payment method.
+Not all payment methods are supported in all regions.
+How to add a new payment method to your Microsoft personal account
+To add a new credit card, bank card or other payment method to your Microsoft account, follow the steps below:
+Select Sign in below to go to the Payment options page of your Microsoft account dashboard.
+Sign in
+Add the new details by selecting
+Add a new payment method.
+Note
+Make sure you enter all details correctly. If your card is not accepted, try adding the postal code with and without spaces.
+The payment method will show up as an option during the checkout step for your next online purchase.
+Add a new payment method for a different country
+To add a payment method for another country, you must change your country before adding the card.
+Important
+We recommend you change your region only if you're moving to a new country or region for a long time. This is important because items you get in one region might not work in another. Learn more.
+Change your account's country or region first, by selecting Your info then Edit profile info.
+Sign in
+Once updated, go to the Payment options page of your Microsoft account dashboard.
+Add the new details by selecting
+Add a new payment method.
+Add a mobile phone as payment method
+In Microsoft Store, select Buy. If asked, sign in with your Microsoft account.
+Select Get Started! Add a way to pay or Change > Add a new payment method.
+Select Mobile phone.
+Select your mobile operator from the list, enter your phone number, and then hit Next.
+To make sure its really you, well send you a code via text message. Enter the code and hit Next.
+Check the terms and payment details, and then hit Buy.
+Mobile operator billing
+The Microsoft Store offers mobile operator billing as a payment method in various countries/regions. If a customer's mobile operator supports this capability, the customer can add mobile operator billing as a payment method and use it to make Store purchases using their mobile account. The table below lists mobile operators that currently support mobile operator billing with Microsoft:
+Country/region
+Mobile operators
+Austria
+A1 Telekom, Hutchison 3G Austria, T-Mobile / tele.ring
+Belgium
+Base, Proximus
+Canada
+Telus
+Czechia
+O2, T-Mobile, Vodafone
+Denmark
+3, TDC / YouSee, Telenor, Telia
+Finland
+DNA, Elisa
+France
+Bouygues Telecom, Orange, SFR
+Germany
+O2, Telekom Deutschland, Vodafone
+Hungary
+Magyar Telekom, Telenor
+Italy
+Wind Tre
+Korea
+Korea Telecom, LG U+, SK Telecom
+Malaysia
+Celcom, Digi
+Netherlands
+KPN / Telfort, Vodafone
+Norway
+Telenor / Talk more, Telia / OneCall
+Poland
+Orange, Play, T-Mobile
+Singapore
+M1 Limited
+Slovakia
+Slovak Telekom
+South Africa
+Vodacom
+Sweden
+3, Tele2, Telenor
+Switzerland
+Sunrise, Swisscom
+Taiwan
+FarEasTone
+Turkey
+Turk cell
+United Arab Emirates
+Du, Etisalat
+United Kingdom
+EE, O2, Three UK, Vodafone
+See also
+Update an existing payment method
+Remove a payment method
+Change your subscription payment method
+Redeem a gift card or code to your Microsoft account
+Need more help?
+How to investigate a billing charge from Microsoft
+Troubleshoot payment option issues
+Contact Support
+For pre-sales support, or issues with purchasing, contact Sales support.
+How to add a new payment method to your Microsoft work account
+Note
+If you want to edit an existing payment method, read Update an account payment method.
+Not all payment methods are supported in all regions.
+About payment methods
+Payment methods for business purchases are linked to your billing profile in Microsoft 365 admin center, not to a personal Microsoft account. You need a Work account with billing permissions to manage payment methods.
+Add or change a payment method
+During checkout
+The easiest way to add a payment method is during your first purchase:
+Proceed to checkout.
+In the Payment section, select Add or Change a payment method. If this option isn’t available, check with your administrator to request changes or access to billing permissions.
+Enter your payment details and billing address.
+Save your changes.
+Update an existing payment method in Microsoft 365 admin center
+Authorized users can update details like the expiration date, billing address, or name on an existing payment method.
+Open Microsoft 365 admin center.
+Go to Billing, then Payment methods.
+If you have access, you can update your payment methods and Save your changes.
+Troubleshooting
+My payment was declined
+Verify your payment details are correct.
+Confirm your billing address matches your payment provider's records.
+Check that your bank or payment provider isn't blocking the transaction.
+Make sure you have sufficient funds or credit.
+I don't see the option to add or edit payment methods
+You may not have billing permission. Contact your IT administrator for billing access.
+If you want to use a different payment method, call customer support.
+I don't see an option to to finance my purchase
+If you would like information about business financing, go to the business financing page.
+Need more help?
+Make a purchase with your work account
+View your order history
+Shopping with your work account at the Microsoft Store
+Call Microsoft Sales Support at 1-800-642-7676 (Monday–Friday, 6 AM–6 PM PT)
+Was this information helpful?
+Yes
+No
+Thank you! Any more feedback for Microsoft?
+Can you help us improve? (Send feedback to Microsoft so we can help.)
+What affected your experience?
+Resolved my issue
+Clear instructions
+Easy to follow
+No jargon
+Pictures helped
+Other
+Didn't match my screen
+Incorrect instructions
+Too technical
+Not enough information
+Not enough pictures
+Other
+Any additional feedback? (Optional)
+Submit feedback
+By pressing submit, your feedback will be used to improve Microsoft products and services.
+Your IT admin will be able to collect this data.
+Privacy Statement.
+Thank you for your feedback!
+×
+What's new
+Surface Laptop Ultra
+Surface Pro
+Surface Laptop
+Surface RTX Spark Dev Box
+Explore Copilot
+Explore Microsoft products
+Windows 11 apps
+Microsoft Store
+Account profile
+Download Center
+Microsoft Store support
+Returns
+Order tracking
+Certified Refurbished
+Why buy from Microsoft Store
+Flexible Payments
+Education
+Microsoft in education
+Devices for education
+Microsoft Teams for Education
+Microsoft 365 Education
+How to buy for your school
+Educator training and development
+Deals for students and parents
+AI for education
+Business
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365
+Microsoft Power Platform
+Microsoft Teams
+Microsoft Copilot
+Small Business
+Developer & IT
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Company
+Careers
+About Microsoft
+Company news
+Privacy at Microsoft
+Investors
+Diversity and inclusion
+Accessibility
+Sustainability
+English (United States)
+Your Privacy Choices
+Consumer Health Privacy
+Sitemap
+Contact Microsoft
+Privacy
+Manage cookies
+Terms of use
+Trademarks
+Safety & eco
+Recycling
+About our ads
+© Microsoft 2026
