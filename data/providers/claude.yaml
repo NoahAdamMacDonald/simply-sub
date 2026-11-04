@@ -78,6 +78,9 @@ perks:
 # plans": Claude Code, Research and "Hand off and schedule tasks" on Pro, Max and Ultra, not Free; "Early access to
 # advanced Claude features" on Max (and Ultra, "Everything in Max"); "Monthly API credits" of $100 on Max and $200 on
 # Ultra. No plan lists image generation.
+# Office apps (M11.15, the owner's choice of 2026-11-04), read 2026-11-04 in claude.com/pricing: Pro's "Claude in Chrome and
+# Microsoft 365", and in its comparison "Claude for Microsoft 365" on Pro, Max and Ultra, not Free. No plan lists video
+# generation.
 
 # Renewal day (M11.5), read 2026-11-03 (M11.9) in its paid plans' billing FAQs: the day you subscribe sets the billing date,
 # which you move only by subscribing again on the day you want. Its consumer terms and invoices article don't say.
@@ -121,6 +124,7 @@ plans:
       ai.coding-agent: true
       ai.deep-research: true
       ai.scheduled-tasks: true
+      ai.office-apps: true
       support.channels: [chat]
     prices:
       - region: US
@@ -167,6 +171,7 @@ plans:
       ai.scheduled-tasks: true
       ai.early-access: true
       ai.api-credits: true
+      ai.office-apps: true
       support.channels: [chat]
     featureLabels:
       ai.api-credits: $100 a month in API credits to build on the Claude Platform
@@ -200,6 +205,7 @@ plans:
       ai.scheduled-tasks: true
       ai.early-access: true
       ai.api-credits: true
+      ai.office-apps: true
       support.channels: [chat]
     featureLabels:
       ai.api-credits: $200 a month in API credits
