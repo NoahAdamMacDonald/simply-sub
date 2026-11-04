@@ -39,6 +39,8 @@ import { MatInput } from '@angular/material/input';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { MatOption, MatSelect, MatSelectTrigger } from '@angular/material/select';
 import {
+  accountFactsAsked,
+  accountFromForm,
   afterPlanChange,
   availability,
   bestCard,
@@ -111,6 +113,7 @@ import { TagsRepository } from '../../core/storage/tags-repository';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
 import { CalendarHeader } from '../../shared/calendar-header';
 import { nearDateText } from '../../shared/charge-text';
+import { dateText } from '../../shared/date-text';
 import { focusFirstError } from '../../shared/focus-first-error';
 import { isoDateProviders } from '../../shared/iso-date-adapter';
 import { issueErrors } from '../../shared/form-issues';
@@ -498,10 +501,31 @@ export class ItemDialog {
   /** Where tax is added on top of the price (BLUEPRINT §4.8), so "plus tax" means something. */
   protected readonly taxAdded = computed(() => taxAddedRegions.has(this.model().region));
 
+  /** A finance account plan's terms (M11.11): the dialog asks for its balance and the facts its conditions need. */
+  protected readonly account = computed(() => this.plan()?.account);
+  /** Those facts, besides the balance (core's accountFactsAsked). */
+  protected readonly asked = computed(() => {
+    const account = this.account();
+    return new Set(account ? accountFactsAsked(account) : []);
+  });
+  private readonly accountRules = computed(() => {
+    const account = this.account();
+    return account && { currency: account.currency, asked: [...this.asked()] };
+  });
+  /** "As of today", or the day of the balance the item has kept. */
+  protected readonly balanceDate = computed(() => {
+    const rules = this.accountRules();
+    const saved =
+      rules && accountFromForm(this.model().account, rules, this.today(), this.editing?.account);
+    if (!saved) return undefined;
+    return saved.asOf === this.today() ? 'As of today' : `As of ${dateText(saved.asOf)}`;
+  });
+
   private readonly rules = computed(() => ({
     ...(this.periods() && { periods: this.periods() }),
     free: this.free(),
     ...(this.plan()?.addOnLimit !== undefined && { addOnLimit: this.plan()?.addOnLimit }),
+    ...(this.accountRules() && { account: this.accountRules() }),
   }));
 
   /** The item as the form has it now, priced as the list's are, for its monthly price and the keys it provides. */
@@ -883,6 +907,7 @@ export class ItemDialog {
       providedKeys,
       today: this.today(),
       ...(this.editing && { billingBefore: this.editing.billing }),
+      ...(this.editing?.account && { accountBefore: this.editing.account }),
     };
   }
 
@@ -936,6 +961,7 @@ export class ItemDialog {
           note: undefined,
           cardId: undefined,
           ownRanks: undefined,
+          account: undefined,
           ...fields,
         },
         this.catalogStore.catalog(),
