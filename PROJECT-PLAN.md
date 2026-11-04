@@ -2088,10 +2088,11 @@ in every D1 `json` column search parses.
     Ultra 5x and Ultra 20x, every catalog region), with Google's Terms of Service and Privacy Policy rated once as
     shared documents (`data/policies/google-terms.yaml`, `google-privacy.yaml`) for the Google services that follow.
     Claude's paid plans work in office apps; Proton Scribe moved from a perk to `ai.office-apps` (data/redirects.yaml).
-    ChatGPT follows in a pull request of its own, from pages the owner saves by hand.
+    ChatGPT (`chatgpt`): Free, Go, Plus and Pro's three tiers, read with Edge (a plain fetch gets 403 from OpenAI's
+    pages), its other regions' prices through each country's exit; a bank debit now counts as a bank transfer.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
-        (AI: Google AI and Claude; ChatGPT to come)
+        (AI: Claude, Google AI and ChatGPT, done)
 
 ---
 

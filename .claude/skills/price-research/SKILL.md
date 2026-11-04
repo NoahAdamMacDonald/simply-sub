@@ -287,6 +287,10 @@ which reads each page as a visitor there would, before any hand reading:
   with Plus (2 TB) and the Annual tab (`click:Annual`, not a role="tab"), prices by where the visitor is, whatever its
   address says (`gl=US` still showed CA$): another country's prices there are another country's pages, so ask the
   owner. A page in the wrong country's currency doesn't count.
+- **OpenAI's pages** (ChatGPT, M11.15): chatgpt.com, openai.com and help.openai.com answer a plain fetch (curl,
+  WebFetch) with 403, and read in Edge with no bot check. chatgpt.com/pricing prices by where the visitor is, and its
+  Pro card shows only the cheapest tier's local price ("From"); its comparison table's ticks are images (read the
+  screenshot). Its help articles' links come from the page, not its text.
 
 - **Element-screenshot overlap:** sticky headers and skip links can overlap an element screenshot. Trust the
   full-page snap.
