@@ -22,6 +22,7 @@ import {
   slugSchema,
   textSchema,
 } from './formats';
+import { accountSchema, regulatorSchema } from './account';
 import { policiesSchema } from './policy';
 import { pricesSchema } from './price';
 import { outsideRatingsSchema, ownerSchema } from './rater';
@@ -374,6 +375,11 @@ export const planSchema = z
       )
       .optional(),
     prices: pricesSchema,
+    account: accountSchema
+      .describe(
+        "A finance account's terms (M11.10): its kind, what waives its fee, its posted rates, limits and protection. Only a finance provider's plans, and every one of them",
+      )
+      .optional(),
     addOnIds: z
       .array(planIdSchema)
       .min(1, 'Leave addOnIds out instead of listing none')
@@ -586,6 +592,13 @@ export const providerSchema = z
     owner: ownerSchema
       .describe(
         "The company behind it (M11.2), quoted from its about page, its owner's own page about it, or its terms: every provider says",
+      )
+      .optional(),
+    regulators: z
+      .array(regulatorSchema)
+      .min(1, 'Leave regulators out instead of listing none')
+      .describe(
+        "The regulators that list it (M11.10: CIRO, OSFI, FCAC, a province's), each with its register's page for it: every finance provider says",
       )
       .optional(),
   })

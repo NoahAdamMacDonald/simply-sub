@@ -732,6 +732,384 @@
               "additionalProperties": false
             }
           },
+          "account": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "chequing",
+                  "savings",
+                  "usd",
+                  "tfsa",
+                  "rrsp",
+                  "fhsa",
+                  "resp",
+                  "rdsp",
+                  "rrif",
+                  "lira",
+                  "gic",
+                  "investing"
+                ],
+                "description": "What the account is"
+              },
+              "currency": {
+                "type": "string",
+                "pattern": "^[A-Z]{3}$",
+                "patternErrorMessage": "Use a three-letter ISO 4217 currency code in capitals (CAD)",
+                "description": "The currency it holds, which its amounts are in"
+              },
+              "waivers": {
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "minBalance": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "Keep at least this much in the account, as the page counts it (a daily or a monthly minimum)"
+                    },
+                    "directDeposit": {
+                      "anyOf": [
+                        { "type": "boolean", "const": true },
+                        {
+                          "type": "number",
+                          "exclusiveMinimum": 0,
+                          "description": "In the account's currency's major unit: 3000 means $3,000"
+                        }
+                      ],
+                      "description": "A recurring direct deposit, such as a pay cheque: true for any, or at least this much a month"
+                    },
+                    "monthlyDeposits": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "Deposits of at least this much a month, from anywhere (KOHO’s \"add $1,000 each month\")"
+                    },
+                    "minAssets": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "description": "At least this much held with the provider, in all accounts"
+                    },
+                    "maxAge": {
+                      "type": "integer",
+                      "exclusiveMinimum": 0,
+                      "maximum": 9007199254740991,
+                      "description": "This age or under"
+                    },
+                    "minAge": {
+                      "type": "integer",
+                      "exclusiveMinimum": 0,
+                      "maximum": 9007199254740991,
+                      "description": "This age or over"
+                    },
+                    "student": {
+                      "type": "boolean",
+                      "const": true,
+                      "description": "A full-time student, as the page defines it"
+                    },
+                    "newcomer": {
+                      "type": "boolean",
+                      "const": true,
+                      "description": "New to Canada, as the page defines it"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "description": "Any one of these waives the fee: the user says which they meet (M11.11)"
+              },
+              "rates": {
+                "type": "object",
+                "properties": {
+                  "follows": {
+                    "type": "string",
+                    "enum": ["prime", "boc-overnight", "none"],
+                    "description": "What it moves with: the banks' prime rate, the Bank of Canada's overnight rate, or none (the provider sets it)"
+                  },
+                  "applies": {
+                    "type": "string",
+                    "enum": ["whole", "portion"],
+                    "description": "How the tiers apply: whole pays the whole balance its tier's rate; portion pays each part of the balance its own tier's"
+                  },
+                  "tiers": {
+                    "minItems": 1,
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "from": {
+                          "type": "number",
+                          "minimum": 0,
+                          "description": "The balance this rate starts at; the first tier starts at 0"
+                        },
+                        "rate": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100,
+                          "description": "A year, in percent: 2.25 means 2.25%"
+                        }
+                      },
+                      "required": ["from", "rate"],
+                      "additionalProperties": false
+                    },
+                    "description": "% a year by balance, from the lowest up: the first from 0"
+                  },
+                  "bonus": {
+                    "type": "object",
+                    "properties": {
+                      "rate": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 100,
+                        "description": "A year, in percent: 2.25 means 2.25%"
+                      },
+                      "when": {
+                        "type": "object",
+                        "properties": {
+                          "minBalance": {
+                            "type": "number",
+                            "exclusiveMinimum": 0,
+                            "description": "Keep at least this much in the account, as the page counts it (a daily or a monthly minimum)"
+                          },
+                          "directDeposit": {
+                            "anyOf": [
+                              { "type": "boolean", "const": true },
+                              {
+                                "type": "number",
+                                "exclusiveMinimum": 0,
+                                "description": "In the account's currency's major unit: 3000 means $3,000"
+                              }
+                            ],
+                            "description": "A recurring direct deposit, such as a pay cheque: true for any, or at least this much a month"
+                          },
+                          "monthlyDeposits": {
+                            "type": "number",
+                            "exclusiveMinimum": 0,
+                            "description": "Deposits of at least this much a month, from anywhere (KOHO’s \"add $1,000 each month\")"
+                          },
+                          "minAssets": {
+                            "type": "number",
+                            "exclusiveMinimum": 0,
+                            "description": "At least this much held with the provider, in all accounts"
+                          },
+                          "maxAge": {
+                            "type": "integer",
+                            "exclusiveMinimum": 0,
+                            "maximum": 9007199254740991,
+                            "description": "This age or under"
+                          },
+                          "minAge": {
+                            "type": "integer",
+                            "exclusiveMinimum": 0,
+                            "maximum": 9007199254740991,
+                            "description": "This age or over"
+                          },
+                          "student": {
+                            "type": "boolean",
+                            "const": true,
+                            "description": "A full-time student, as the page defines it"
+                          },
+                          "newcomer": {
+                            "type": "boolean",
+                            "const": true,
+                            "description": "New to Canada, as the page defines it"
+                          }
+                        },
+                        "additionalProperties": false,
+                        "description": "What earns it (EQ Bank: $2,000 of direct deposits a month)"
+                      }
+                    },
+                    "required": ["rate", "when"],
+                    "additionalProperties": false,
+                    "description": "A rate in place of the tiers when the user meets a condition (the owner’s choice of 2026-11-03, M11.10)"
+                  },
+                  "sourceUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https://",
+                    "patternErrorMessage": "Use a full https:// URL",
+                    "description": "The provider's own page that posts the rates"
+                  },
+                  "lastVerified": {
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+                    "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+                    "description": "When the rates were read"
+                  }
+                },
+                "required": ["follows", "applies", "tiers", "sourceUrl", "lastVerified"],
+                "additionalProperties": false,
+                "description": "Its interest, when it pays any"
+              },
+              "limits": {
+                "type": "object",
+                "properties": {
+                  "eTransfer": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "description": "At most this much at once"
+                      },
+                      "day": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "description": "In the account's currency's major unit: 3000 means $3,000"
+                      },
+                      "week": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "description": "In the account's currency's major unit: 3000 means $3,000"
+                      },
+                      "month": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "description": "In the account's currency's major unit: 3000 means $3,000"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "description": "Interac e-Transfers sent"
+                  },
+                  "atmWithdrawal": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "description": "At most this much at once"
+                      },
+                      "day": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "description": "In the account's currency's major unit: 3000 means $3,000"
+                      },
+                      "week": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "description": "In the account's currency's major unit: 3000 means $3,000"
+                      },
+                      "month": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "description": "In the account's currency's major unit: 3000 means $3,000"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "description": "Cash from ATMs"
+                  },
+                  "debits": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0,
+                    "maximum": 9007199254740991,
+                    "description": "Transactions a month the fee includes, when they aren’t unlimited (TD Every Day: 25)"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "protection": {
+                "type": "object",
+                "properties": {
+                  "insurer": {
+                    "type": "string",
+                    "enum": ["cdic", "provincial", "cipf", "none"],
+                    "description": "CDIC, a provincial deposit insurer (credit unions), CIPF (investments, if the dealer fails), or none"
+                  },
+                  "held": {
+                    "type": "string",
+                    "enum": ["own-name", "trust", "company"],
+                    "description": "In your name at a member, in trust for you (you're the beneficiary), or in the company's own name"
+                  },
+                  "limit": {
+                    "type": "number",
+                    "exclusiveMinimum": 0,
+                    "description": "The cover, when the page states it (spread over several members: their total)"
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https://",
+                    "patternErrorMessage": "Use a full https:// URL",
+                    "description": "The provider's own page that says it"
+                  },
+                  "quotes": {
+                    "minItems": 1,
+                    "type": "array",
+                    "items": { "type": "string", "minLength": 1 },
+                    "description": "The provider's own words, word for word"
+                  },
+                  "lastVerified": {
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+                    "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+                    "description": "When the page was read"
+                  }
+                },
+                "required": ["insurer", "held", "url", "quotes", "lastVerified"],
+                "additionalProperties": false
+              },
+              "eligibility": {
+                "type": "object",
+                "properties": {
+                  "minBalance": {
+                    "type": "number",
+                    "exclusiveMinimum": 0,
+                    "description": "Keep at least this much in the account, as the page counts it (a daily or a monthly minimum)"
+                  },
+                  "directDeposit": {
+                    "anyOf": [
+                      { "type": "boolean", "const": true },
+                      {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "description": "In the account's currency's major unit: 3000 means $3,000"
+                      }
+                    ],
+                    "description": "A recurring direct deposit, such as a pay cheque: true for any, or at least this much a month"
+                  },
+                  "monthlyDeposits": {
+                    "type": "number",
+                    "exclusiveMinimum": 0,
+                    "description": "Deposits of at least this much a month, from anywhere (KOHO’s \"add $1,000 each month\")"
+                  },
+                  "minAssets": {
+                    "type": "number",
+                    "exclusiveMinimum": 0,
+                    "description": "At least this much held with the provider, in all accounts"
+                  },
+                  "maxAge": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0,
+                    "maximum": 9007199254740991,
+                    "description": "This age or under"
+                  },
+                  "minAge": {
+                    "type": "integer",
+                    "exclusiveMinimum": 0,
+                    "maximum": 9007199254740991,
+                    "description": "This age or over"
+                  },
+                  "student": {
+                    "type": "boolean",
+                    "const": true,
+                    "description": "A full-time student, as the page defines it"
+                  },
+                  "newcomer": {
+                    "type": "boolean",
+                    "const": true,
+                    "description": "New to Canada, as the page defines it"
+                  }
+                },
+                "additionalProperties": false,
+                "description": "Who may open it, when a tier is decided by assets rather than a fee (Wealthsimple’s Premium)"
+              }
+            },
+            "required": ["kind", "currency", "protection"],
+            "additionalProperties": false,
+            "description": "A finance account's terms (M11.10): its kind, what waives its fee, its posted rates, limits and protection. Only a finance provider's plans, and every one of them"
+          },
           "addOnIds": {
             "minItems": 1,
             "type": "array",
@@ -1318,6 +1696,37 @@
       "required": ["name", "page", "quotes", "lastVerified"],
       "additionalProperties": false,
       "description": "The company behind it (M11.2), quoted from its about page, its owner's own page about it, or its terms: every provider says"
+    },
+    "regulators": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "As the regulator calls itself (CIRO, OSFI, FCAC, the AMF)"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://",
+            "patternErrorMessage": "Use a full https:// URL",
+            "description": "The register's page for this provider, on the regulator's own site"
+          },
+          "lastVerified": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+            "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+            "description": "When the page was read"
+          }
+        },
+        "required": ["name", "url", "lastVerified"],
+        "additionalProperties": false
+      },
+      "description": "The regulators that list it (M11.10: CIRO, OSFI, FCAC, a province's), each with its register's page for it: every finance provider says"
     }
   },
   "required": ["id", "name", "website", "category", "spendCategory", "cancelUrl", "plans"],
