@@ -1,0 +1,257 @@
+url: https://chatgpt.com/pricing/
+method: browser
+saved: 2026-11-04
+
+About
+Features
+Learn
+Codex
+Business
+Pricing
+Download
+Log in
+Sign up for free
+ChatGPT
+Pricing
+See pricing for our individual, business, and enterprise plans.
+For life sciences research, explore the Rosalind Academic Plan.
+Learn more
+Individual
+Business & Enterprise
+Free
+Best for trying out ChatGPT
+/ month
+Get Free
+Unlimited text chats with GPT-6
+Limited messages with uploads
+Limited image creation
+Limited voice chats
+Limited deep research
+Limited memory and context
+Limited Codex access
+Limited ChatGPT Work access on desktop
+Have an existing plan? See billing help⁠
+Unlimited text chats subject to abuse guardrails. Learn more⁠
+Go
+Best for longer conversations
+/ month
+Get Go
+Everything in Free and:
+More messages with tools
+More uploads
+More image creation
+More voice chats
+Longer memory
+This plan may include ads. Learn more⁠
+Unlimited text chats subject to abuse guardrails. Learn more⁠
+Plus
+Best for advanced work and productivity
+/ month
+Get Plus
+Everything in Go and:
+Advanced reasoning models with GPT-6
+Expanded messages and uploads
+More complex and accurate image creation
+Expanded deep research
+Expanded memory and context
+Projects, scheduled tasks, and custom GPTs
+Expanded Codex usage
+Expanded access to ChatGPT Work on desktop, web, and mobile
+Early access to new features
+Limits apply⁠
+Pro
+Best for research and coding
+From
+/ month
+Get Pro
+Everything in Plus and:
+Your choice of 3 usage tiers
+Pro reasoning powered by GPT-6 Astra
+Longer Codex and ChatGPT Work sessions
+Dot, your always-on agent
+Unlimited and faster image creation
+Maximum deep research
+Maximum memory and context
+Expanded projects, tasks, and custom GPTs
+Research preview of new features
+Up to in monthly API credits to build your own apps and agents.****
+Unlimited subject to abuse guardrails. Learn more⁠
+Trusted by teams at
+Compare features across plans
+Free
+Get Free
+Go
+Get Go
+Plus
+Get Plus
+Pro
+Get Pro
+Essentials
+Everyday text chats
+Unlimited*
+Unlimited*
+Unlimited*
+Unlimited*
+Chat history
+Unlimited*
+Unlimited*
+Unlimited*
+Unlimited*
+Access on web, iOS, Android
+Models
+GPT-6.1 Sol
+Expanded
+GPT-6 Astra
+Expanded
+GPT-6 Sol
+Expanded
+GPT-6 Luna
+Expanded
+GPT-5.6 Sol
+Unlimited*
+GPT-5.6 Sol Pro
+GPT-5.6 Terra
+Limited access in Work and Codex on desktop
+Limited access in Work and Codex on desktop
+Unlimited*
+GPT-5.6 Luna
+Unlimited*
+GPT-5 Thinking Mini
+Expanded
+Unlimited*
+Legacy models
+Response times
+Limited on bandwidth & availability
+Limited on bandwidth & availability
+Fast
+Ultrafast (on eligible tiers)
+GPT Instant total context window
+27K
+54K
+54K
+128K
+GPT Instant input maximum***
+~12 pages of text
+~40 pages of text
+~40 pages of text
+~250 pages of text
+GPT Reasoning total context window
+Varies
+256K
+256K
+400K
+GPT Reasoning input maximum***
+Varies
+~320 pages of text
+~320 pages of text
+~680 pages of text
+Regular quality & speed updates as models improve
+Features
+ChatGPT Work
+Limited (desktop app)
+Limited (desktop app)
+Desktop, web, and mobile
+Desktop, web, and mobile
+Codex
+Limited
+Limited
+Expanded
+Dots
+Plugins
+ChatGPT Space
+Health
+Finances
+Voice
+Expanded
+Expanded
+Unlimited*
+Voice with video
+Skills
+Memory
+Limited
+Expanded
+Expanded
+Search
+Code edits on macOS
+File uploads
+Limited
+Projects
+Scheduled tasks
+Sites
+Built-in browser
+Data analysis
+Limited
+Vision
+Limited
+Excel, Word, PowerPoint, and Google Sheets extensions
+Limited
+Limited
+Expanded
+Developer mode (beta)
+Discover & use Plugins
+Create & share Plugins
+Share Plugins with your workspace
+Opportunities to test new features
+Image generation
+Limited
+Image generation with Thinking
+Interactive tables and charts
+Deep research
+Limited
+Limited
+Apps for deep research
+Limited
+Limited
+Study mode
+Memory with past chats
+Limited
+Expanded
+Expanded
+Memory sources
+Monthly API credits
+with Pro 100, with Pro 200, or with Pro 500.****
+Privacy
+Content is used to train our models
+Opt-out available
+Learn more
+Opt-out available
+Learn more
+Opt-out available
+Learn more
+Opt-out available
+Learn more
+*Usage must be reasonable and comply with our policies⁠. Usage refers to Chat limits.
+**Enterprise and Business can purchase credits for more access
+***ChatGPT manages a shared context window to understand your request, track the conversation, retrieve relevant information, and generate responses. The portion available for user input is smaller than the total window, as space is also used for system instructions (including tools and personality), memories (if enabled), and internal processing (reviewing information, reasoning, and response generation). The reported space for user input is an approximation and may change dynamically based on features in use and any memory content.
+****Activation and eligibility requirements apply. First grant is prorated. Unused credits expire at the end of the applicable billing cycle. Annual Business plans receive credits annually. The API credit benefit is subject to change or discontinuation, including credit amounts and future renewals. More information available here⁠.
+FAQ
+How does ChatGPT’s pricing work?
+The free version of ChatGPT is available to everyone. Paid plans (Go, Plus, Business, and Enterprise) are priced per user per month. We offer monthly plans for Go, Plus and Business and annual plans for Business and Enterprise.
+Is ChatGPT free to use?
+The free version of ChatGPT is available to everyone. Upgrading to Go, Plus, Business, or Enterprise offers a more powerful experience through more access to additional models and features.
+Does OpenAI offer a ChatGPT plan for educational institutions?
+Yes. We offer ChatGPT for Teachers⁠, a free plan for verified U.S. K–12 educators through June 2027, and ChatGPT Edu⁠, an affordable plan that lets universities deploy AI across their campus communities. Both plans include enhanced security and privacy controls, with additional administrative features available for schools, districts, and universities. Contact our team⁠ to learn more.
+Does OpenAI offer a discount for nonprofits?
+Yes. Through OpenAI for Nonprofits, nonprofits can now access up to a 75% discount on ChatGPT Business or ChatGPT Enterprise. Contact our sales team⁠ to get started.
+How many users are supported on each subscription plan?
+Go, Free, and Plus plans are designed to be used by individuals. Business and Enterprise are for businesses. Business plans are available starting at 2 users. Please contact sales⁠ to learn more about our Enterprise plan.
+What are my payment options?
+You can purchase ChatGPT Go, Plus, Pro, or Business with any major credit card. For ChatGPT Enterprise, please contact sales⁠ for alternative payment options such as invoicing.
+How secure is ChatGPT?
+All data is encrypted in transit (TLS 1.2). Data at rest is encrypted at rest (AES-256), and strict access controls are used to limit who can access data. Our security team has an on-call rotation that has 24/7/365 coverage and is paged in case of any potential security incident. We offer a Bug Bounty Program⁠ for responsible disclosure of vulnerabilities discovered on our platform and products. Please visit our Trust Portal⁠ for more details.
+How does ChatGPT use my data?
+We give you control over your data. Read more about how your data is used⁠ and our Enterprise privacy⁠.
+OpenAI
+Research
+Safety
+API
+News
+Terms & Policies
+Terms of Use
+Privacy Policy
+Usage Policy
+Other policies
+OpenAI © 2015–2026
+Manage cookies
+English
+United States

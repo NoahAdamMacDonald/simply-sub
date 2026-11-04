@@ -78,7 +78,8 @@
   source: wikidata
   wikidata: Q115564437
   sitelinks: 140
-  status: queued
+  status: done
+  date: 2026-11-04
 - id: the-new-york-times
   name: The New York Times
   website: https://nytimes.com

@@ -67,6 +67,10 @@ describe('namesPaymentMethod', () => {
     ['Apple Pay, Cash App, PayPal', 'cash', false],
     ['Swish, Eps transfer, Bancontact, iDEAL | Wero, and Przelewy24', 'bank-transfer', true],
     ['GoCardless (Direct Debit)', 'bank-transfer', true],
+    // ChatGPT's in the UK and the EEA (M11.15).
+    ['Bank debit via Link (where supported)', 'bank-transfer', true],
+    ['Bank debit via Link (where supported)', 'card', false],
+    ['credit cards and bank debit cards', 'bank-transfer', false],
     [
       'credit card, debit card, bank account, PayPal account, or mobile phone',
       'bank-transfer',
