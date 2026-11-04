@@ -17,6 +17,13 @@ what the `scheduled-claude` reviewer runs each week (setup below), and it works 
   week. `git diff origin/main -- <baseline>` shows what changed. Never fetch a provider's site: the scheduled task's
   network reaches GitHub and package registries only, and a fetch from elsewhere can read another country's page. An
   item the committed text can't settle is left for the owner, with the reason.
+- **An archived site's page** (its baseline's `method: archive`; the sites in `data/automation.yaml`'s `archived`,
+  OpenAI's, which turn bots away, M11.15): its committed text is the Internet Archive's copy. It shows that the page
+  changed, never what the catalog should say, and its prices are often missing (scripts fill them in). The scheduled
+  run leaves such an item unticked for the owner, with what the diff shows. A local session settles it from the live
+  page, read with the price-research skill's `read-page.cjs` (the standard reader), quoting that text, then saves the
+  page's baseline again (`npm run data:baselines -- <provider>`). The same goes for the bot's item "Read only through
+  the Internet Archive's copy since …", which it raises after 90 days without a change.
 - **The page's words, word for word.** A change needs words on the page that show it, quoted exactly as the baseline
   has them. Regular (renewal) prices only, never a sale, introductory or first-term price; the billing period as the
   page states it (price-research skill). Policies follow the policy-research skill's rules; features use existing ids

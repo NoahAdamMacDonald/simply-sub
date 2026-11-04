@@ -2148,6 +2148,16 @@ on its first day. `citedPages` cites an account's rates page as pricing and its 
 **Logos** ride along (M8.3): the run fetches each provider's best icon the way `npm run data:icons` does, and when
 it differs from the committed `data/logos/<id>.png` (a rebrand), the same PR proposes the new one.
 
+**Sites that turn bots away (M11.15, the owner's choice of 2026-11-04):** OpenAI's sites answer the bot with a bot
+check, which it never tries to get past. `data/automation.yaml`'s `archived` lists them, and the bot never asks them for
+a page, a robots.txt or an icon. It reads the Internet Archive's newest copy of each cited page instead (core's
+`archive.ts`: the Wayback Machine's CDX query, then the copy as served, `id_`), compares that text with the page's
+baseline (`method: archive`, saved the same way by `data:baselines`), and a change is the usual page item, with the
+policy quotes looked for in the copy. The copy tells that a page changed, never what it says: prices on it are neither
+confirmed nor guessed, the weekly scheduled review leaves its items for the owner, and a local session reads the live
+page with the standard reader. A page read only from the archive for over 90 days goes to a person too, since a price
+its scripts fill in can change without its text.
+
 **As built (M8.3)** in `apps/bot`, with section 14 (M8.3) for the details: a step per provider, with the bundles that
 cite its pages; Workers AI only for a price whose stored amount isn't on its page; no per-provider `extract:` selectors
 (the schema has none); the YAML edited line by line, which CI's `data:validate` then checks; `lastVerified` bumped

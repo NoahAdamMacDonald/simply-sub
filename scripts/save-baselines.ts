@@ -8,12 +8,19 @@
 //   npm run data:baselines -- netflix mullvad    these providers' and bundles' pages, saved again
 //   npm run data:baselines -- --all              every cited page, saved again
 import {
+  archivedText,
+  automationSchema,
   baselineLines,
   baselinePath,
   buildPolicyIndex,
   citedFacts,
+  captureDate,
+  captureUrl,
   citedPages,
   missingQuotes,
+  newestCapture,
+  newestCaptureQuery,
+  onArchivedHost,
   pageShows,
   policyFiles,
   readCatalogSource,
@@ -25,8 +32,9 @@ import {
 } from '@simply-sub/core';
 import { access, mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
+import { parse } from 'yaml';
 import { Renderer } from './lib/browser';
-import { checkCatalog, countErrors, plural, printIssues } from './lib/catalog-files';
+import { checkCatalog, countErrors, plural, printIssues, repoRoot } from './lib/catalog-files';
 import { absolute, workFile, type PageRecord } from './lib/pipeline-files';
 import { PoliteWeb } from './lib/web';
 
@@ -46,7 +54,12 @@ const pages = citedPages(
   buildPolicyIndex(policyFiles(catalog)),
 ).filter((page) => owners.length === 0 || page.owners.some((owner) => owners.includes(owner)));
 const today = toIsoDate(new Date());
-const renderer = new Renderer(new PoliteWeb());
+const web = new PoliteWeb();
+const renderer = new Renderer(web);
+/** Sites that turn bots away (data/automation.yaml's archived, M11.15): their pages come from the archive's copy. */
+const archived =
+  automationSchema.parse(parse(await readFile(new URL('data/automation.yaml', repoRoot), 'utf8')))
+    .archived ?? [];
 let saved = 0;
 const unread: string[] = [];
 /** Pages where a fact the catalog rests on isn't to be seen today: read again before trusting their baseline. */
@@ -55,6 +68,34 @@ try {
   for (const page of pages) {
     const path = baselinePath(page.url);
     if (!all && owners.length === 0 && (await exists(path))) continue;
+    // A site that turns bots away is never asked: its baseline is the Internet Archive's newest copy (M11.15), the text
+    // the nightly bot compares, and the facts it can't show (prices its scripts fill in) aren't looked for.
+    if (onArchivedHost(page.url, archived)) {
+      const copy = await archivedCopy(page.url);
+      if ('error' in copy) {
+        unread.push(`${page.url} (${page.owners.join(', ')}): ${copy.error}`);
+        continue;
+      }
+      const facts = citedFacts(catalog.providers, catalog.bundles, page.url, catalog.policySets);
+      const gone = missingQuotes(copy.text, facts.quotes);
+      if (gone.length > 0)
+        unconfirmed.push(
+          `${page.url} (${page.owners.join(', ')}): ${gone.map((quote) => `"${quote.slice(0, 60)}"`).join('; ')}`,
+        );
+      const baseline: Baseline = {
+        url: page.url,
+        method: 'archive',
+        saved: today,
+        lines: baselineLines(copy.text),
+      };
+      await mkdir(dirname(absolute(path)), { recursive: true });
+      await writeFile(absolute(path), writeBaseline(baseline));
+      saved++;
+      console.log(
+        `${path}: archive (copy of ${copy.date}), ${plural(baseline.lines.length, 'line')} (${page.type}, ${page.owners.join(', ')})`,
+      );
+      continue;
+    }
     // A page the pipeline read this run (render-pages) isn't requested again.
     const rendered = (await readPage(page.url, page.owners)) ?? (await renderer.render(page.url));
     if ('error' in rendered) {
@@ -109,6 +150,18 @@ function missing(text: string, facts: CitedFacts): string[] {
     )
     .map((price) => `${price.amount} ${price.currency}`);
   return [...quotes, ...prices];
+}
+
+/** The Internet Archive's newest copy of a page, as its text, with the copy's date. */
+async function archivedCopy(
+  url: string,
+): Promise<{ text: string; date: string } | { error: string }> {
+  const answer = await web.file(newestCaptureQuery(url));
+  const timestamp = answer === undefined ? undefined : newestCapture(answer);
+  if (!timestamp) return { error: 'The Internet Archive has no copy of it, or didn’t answer' };
+  const copy = await web.page(captureUrl(url, timestamp));
+  if ('error' in copy) return { error: `The Internet Archive’s copy: ${copy.error}` };
+  return { text: archivedText(copy.html), date: captureDate(timestamp) };
 }
 
 /** The page as render-pages saved it for one of its owners, if it did. */

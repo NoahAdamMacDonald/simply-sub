@@ -1,7 +1,11 @@
 import { launch } from '@cloudflare/playwright';
 import {
+  archivedText,
   automationSchema,
   bankOfCanadaSeriesUrl,
+  captureUrl,
+  newestCapture,
+  newestCaptureQuery,
   policyFileSchema,
   seedDailyWrites,
   seedIndexPath,
@@ -344,6 +348,19 @@ function pageDeps(env: Env, known: Readonly<Record<string, Robots>>, github: Git
       if (!url || !(await allowed(url)))
         return { error: 'robots.txt doesn’t allow the bot to read it' };
       return browserText(env, url.href);
+    },
+    async archived(address): Promise<PageResult> {
+      const asked = await get(newestCaptureQuery(address), 'application/json', 100_000);
+      if ('error' in asked) return { error: `The Internet Archive didn’t answer: ${asked.error}` };
+      const timestamp = newestCapture(new TextDecoder().decode(asked.bytes));
+      if (!timestamp) return { error: 'The Internet Archive has no copy of the page' };
+      const copy = await get(
+        captureUrl(address, timestamp),
+        'text/html,application/xhtml+xml',
+        4_000_000,
+      );
+      if ('error' in copy) return { error: `The Internet Archive’s copy: ${copy.error}` };
+      return { text: archivedText(new TextDecoder().decode(copy.bytes)) };
     },
     extract: (request) =>
       (env.AI as unknown as { run(model: string, input: unknown): Promise<unknown> }).run(

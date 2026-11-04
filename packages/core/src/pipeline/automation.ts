@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { domainSchema } from '../catalog/formats';
 import { daysBetween, weekdayOf, type IsoDate } from '../dates/iso-date';
 import { searchEngineSchema, type SearchBudget } from './search';
 
@@ -72,6 +73,13 @@ export const automationSchema = z
       .describe(
         'Web search engines, tried in this order, each until its monthly budget is spent; no budget is no limit (your own SearXNG)',
       ),
+    archived: z
+      .array(domainSchema)
+      .min(1, 'Leave archived out instead of listing none')
+      .describe(
+        'Sites that turn bots away (OpenAI’s): the bot never reads their pages, and checks the Internet Archive’s newest copy of each for a change instead (M11.15)',
+      )
+      .optional(),
   })
   .superRefine((automation, ctx) => {
     const engines = automation.search.map((entry) => entry.engine);

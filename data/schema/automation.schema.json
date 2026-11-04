@@ -104,6 +104,15 @@
         "additionalProperties": false
       },
       "description": "Web search engines, tried in this order, each until its monthly budget is spent; no budget is no limit (your own SearXNG)"
+    },
+    "archived": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\\.)+[a-z]{2,63}$"
+      },
+      "description": "Sites that turn bots away (OpenAI’s): the bot never reads their pages, and checks the Internet Archive’s newest copy of each for a change instead (M11.15)"
     }
   },
   "required": ["cadence", "digest", "reviewer", "batch", "search"],

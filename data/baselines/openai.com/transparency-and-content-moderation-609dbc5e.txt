@@ -1,0 +1,146 @@
+url: https://openai.com/transparency-and-content-moderation/
+method: archive
+saved: 2026-11-04
+
+Transparency & content moderation | OpenAI
+Skip to main content Research
+Products
+Business
+Developers
+Company
+Foundation(opens in a new window)
+Log in Try ChatGPT (opens in a new window)
+Research
+Products
+Business
+Developers
+Company
+Foundation (opens in a new window)
+Try ChatGPT (opens in a new window) Login
+OpenAI Last updated: July 29, 2026
+Transparency & content moderation
+How we monitor and enforce How we monitor and enforce
+Enforcement actions
+Appeals process
+Continuous improvement
+Explore feed prioritization
+ChatGPT search functionality How search results are determined
+Safety standards
+Shopping results in ChatGPT search How products are selected
+UK Online Safety Act
+Australia Online Safety Act
+The Brazilian Digital Statute for Children and Adolescents
+How we monitor and enforce
+Enforcement actions
+Appeals process
+Continuous improvement
+Explore feed prioritization
+ChatGPT search functionality How search results are determined
+Safety standards
+Shopping results in ChatGPT search How products are selected
+UK Online Safety Act
+Australia Online Safety Act
+The Brazilian Digital Statute for Children and Adolescents
+To promote safe and responsible use of our products, we use a range of procedures and tools to address content that may violate the law or our terms and policies.
+How we monitor and enforce
+We use a combination of automated technologies and human review to monitor activity on our services, in line with our Privacy Policy⁠. Our methods include:
+Proactive detection: We use classifiers, reasoning models, hash-matching, blocklists, and other automated systems to identify content that may violate our terms or policies.
+User reports: We respond to external notices and user reports about content violations. Information on how to report a violation is available here⁠(opens in a new window). We aim to review external notices and user reports as quickly as possible. We will let you know whether we apply enforcement action as a result of your report, as appropriate.
+Human review: Our team may review flagged content to determine appropriate actions.
+Enforcement actions
+When we identify content that violates our terms or policies, we may take actions such as:
+Account restrictions: Terminating or limiting access to our products.
+Warnings: Informing users about potential violations and potential consequences.
+Content sharing restrictions: Preventing or disabling the sharing of specific content.
+Search results: Blocking certain search results from appearing.
+GPT visibility controls: Restricting access to specific GPTs, including their presence in the GPT Store.
+Forum moderation: Removing posts or restricting access to OpenAI forums.
+We consider factors like legal requirements, the severity of the violation, and past or repeat violations, when determining enforcement actions.
+Appeals process
+If we take enforcement action based on your content or activity, we may notify you with details and reasons for our decision. If you think we have made a mistake, you can appeal our decision via our appeals form⁠.
+If you are in the UK, Australia or Brazil, you may also submit appeals that relate to actions subject to regulations in your jurisdiction. Please see the relevant webpages linked below for details on how you can appeal such actions.
+We may reassess, considering any additional information you provide. If your appeal is successful, we will reverse the enforcement action.
+Please note that misuse of the complaints process may also result in action.
+Continuous improvement
+Our integrity and safety teams continuously monitor and refine our policies, processes, and tools to enhance our approach as our products evolve globally.
+Explore feed prioritization
+Content in the Explore feed is prioritized based on a number of factors, including:
+Chronology: How recent the post is.
+Popularity: Number of likes.
+Compliance: Avoiding content that violates laws or our terms and policies.
+We use automated technology and human review to determine what appears in the Explore feed. Users can choose not to publish their content in the Explore feed through their data controls⁠⁠(opens in a new window).
+ChatGPT search functionality
+Search results may be displayed in a conversation when users ask ChatGPT to search the web, or when ChatGPT decides to search the web to provide a relevant response.
+How search results are determined
+Search results are displayed using the following measures:
+Advanced language models: Used to evaluate content based on meaning, intent, and relevance. Search responses are meant to follow our terms and policies.
+Automated systems: Determine which results to present, considering factors like user intent, relevance, and recency.
+In-line citations: Links to relevant sources are included directly in responses.
+Sidebar sources: Additional related resources provide further context, even if not directly cited. When using third-party search providers, the ordering of sidebar sources is influenced by the provider’s own ranking systems.
+Safety standards
+We aim to deliver helpful information while upholding our safety standards. We may not link to or surface certain websites containing illegal, harmful, or sensitive content, such as explicit material involving minors, exposed personal data, or instructions for violence.
+Shopping results in ChatGPT search
+When a user’s query suggests shopping intent (e.g., “I’m looking to buy a dog costume”), ChatGPT search may display relevant product options with links to learn more or make a purchase.
+How products are selected
+Products are displayed based on:
+Structured Metadata: From third-party providers (e.g., price, product description) and other third-party content (e.g., reviews).
+Model Responses: Generated by ChatGPT before considering new web content.
+Our safety standards: Ensuring content aligns with our policies.
+For more information on how product results are selected, accompanying descriptions, pricing, and how merchants are selected, visit shopping results from ChatGPT search⁠⁠(opens in a new window).
+UK Online Safety Act
+For more information about how we comply with the UK Online Safety Act⁠(opens in a new window), please see here.
+Australia Online Safety Act
+For more information about how we comply with the Australia Online Safety Act⁠(opens in a new window), please see here.
+The Brazilian Digital Statute for Children and Adolescents
+For more information about how we comply with the The Brazilian Digital Statute for Children and Adolescents⁠(opens in a new window), please see here⁠.
+Research Research Index
+Research Overview
+Economic Research
+Latest Advancements GPT-6.1 Sol
+GPT-6 Astra
+GPT-5.6
+GPT-5.5
+Safety Safety Approach
+Deployment Safety (opens in a new window)
+Security & Privacy
+Trust & Transparency
+Products ChatGPT (opens in a new window)
+ChatGPT Business (opens in a new window)
+ChatGPT Enterprise (opens in a new window)
+ChatGPT for Education (opens in a new window)
+Codex
+Dots (opens in a new window)
+Release Notes
+API Platform Overview
+API Log In (opens in a new window)
+Docs (opens in a new window)
+Business Overview
+Solutions
+Resources
+Plugins
+Customer Stories
+Partner Network
+Contact Sales
+Developers Apps SDK (opens in a new window)
+Open Models
+Docs (opens in a new window)
+Resources (opens in a new window)
+Developer Forum (opens in a new window)
+Company About Us
+Our Charter
+Careers
+News
+Support Help Center (opens in a new window)
+OpenAI Status (opens in a new window)
+More Stories
+Academy
+Supply Co.
+Livestreams
+Podcast
+RSS
+Terms & Policies Terms of Use
+Privacy Policy
+Other Policies
+(opens in a new window) (opens in a new window) (opens in a new window) (opens in a new window) (opens in a new window) (opens in a new window) (opens in a new window)
+OpenAI © 2015–2026 Manage Cookies
+EnglishUnited States
