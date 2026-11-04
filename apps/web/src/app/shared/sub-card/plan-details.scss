@@ -267,6 +267,48 @@ h4 {
   margin-top: 4px;
 }
 
+// Ways to pay and a code host as chips (the owner's design, 2026-11-03): each one's glyphs in the muted text's
+// colour, outlined with no fill, so the words some show keep AA contrast in both themes. A chip's name is its tooltip,
+// and what a screen reader says.
+.pay-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.pay-chips + .payment {
+  margin-top: 6px;
+}
+
+.pay-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 28px;
+  padding: 0 8px;
+  border: 1px solid var(--ss-divider);
+  border-radius: 14px;
+  box-sizing: border-box;
+  font-size: 13px;
+  line-height: 1.2;
+
+  mat-icon {
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+  }
+
+  svg {
+    flex: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 2px;
+  }
+}
+
 .subject {
   font-weight: 600;
 }

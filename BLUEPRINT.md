@@ -1478,12 +1478,22 @@ M1.14, M11.1), so a buyer can see what signing up means beyond the price.
   page on the provider's own sites, its policies' or its owner's. Entries for the same place add up (the owner's
   tasks, 2026-11-03): Crave's cards on one page and its gift cards on another, and a region's own entries over
   everywhere's. The card's Ways to pay, after Owner, lists those for the user's country (`paymentMethodsIn`), a line
-  per page citing it with its quotes as the tooltip, and says "Card (networks not verified)" where no page names the
-  networks its card takes there (no `acceptedNetworks`, the owner's wording). `citedPages` counts the page as
+  per page citing it with its quotes as the tooltip ("according to its Payment options"). Each way to pay is a chip of
+  its glyphs (the owner's design, 2026-11-03): a Material Symbol for the generic ones (card, gift card, bank transfer
+  or direct debit, cash, crypto, app store, a provider's bill), a brand's mark for PayPal, Apple Pay, Google Pay,
+  Klarna and Cash App, and on the card chip the marks of the networks a page names there (Visa, Mastercard, American
+  Express, Discover, JCB), or "networks not verified" where none does (no `acceptedNetworks`, the owner's wording).
+  A chip is focusable, its name ("Card: Visa, Mastercard or American Express") its tooltip and, as an image's name,
+  what a screen reader says; a way or network with no glyph (Satispay, Interac, UnionPay) shows its name. The marks
+  are Simple Icons 16.35.0's paths (CC0 1.0; Codeberg's and SourceHut's marks CC0 themselves, the others their
+  owners' trademarks, shown only to name a way to pay or a host), in `apps/web/src/app/shared/sub-card/pay-glyphs.ts`,
+  which only the card's lazy details import; all are drawn in the muted text's colour on an outlined chip with no
+  fill, for AA contrast in both themes. `citedPages` counts the page as
   a pricing page. Since M11.5 it also lists the currencies they can pay in beyond the price lists (`currenciesIn`:
   "Cash in EUR, USD … or NZD, according to its Terms of service"), and two groups follow it: Billing day (the day it
-  renews on, citing its page, or a grey "Not stated: its pages don't say") and Source code (the repository, linked,
-  citing the page that links it), all in the muted grey (section 4.3).
+  renews on, citing its page, or a grey "Not stated: its pages don't say") and Source code (its host's chip, by its
+  mark for GitHub, GitLab, Codeberg, Bitbucket and SourceHut or the `code` symbol named for its host, then the
+  repository, linked, citing the page that links it), all in the muted grey (section 4.3).
 - **On the card,** after Terms and policies (M11.2): Outside ratings, each subject's labels (core's `outsideRatings`,
   in the subjects' order: "Protection: 6.0/6.0 from AV-TEST, August 2026 (tested …)"), the rater's name a link to its
   page in a new tab; then Owner ("Mullvad VPN AB · Sweden, according to its About us", read as "Mullvad VPN AB, from
@@ -3617,6 +3627,12 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-11-03, icons for ways to pay and code hosts)**
+- **Built as shown** (the owner's choice of the mockup): each way to pay a chip of its glyphs, named by its tooltip and
+  for screen readers; brands' marks from Simple Icons (CC0), generic ones from Material Symbols, the rest by name; a
+  code host's chip before its repository (section 4.10, Ways to pay). The chips are outlined with no fill, unlike the
+  mockup's tinted ones, whose muted words measured 4.2:1 in dark mode, below AA.
 
 **Resolved (2026-11-03, every agreement a user accepts)**
 - **What's read:** every document a user agrees to, not only the terms and privacy policy: its apps' licence (EULA),

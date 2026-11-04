@@ -1,6 +1,7 @@
 // M11.5 in the system Edge: a Search card's provider facts and the item dialog's renewal day, on the real catalog
 // (data:build's files), in both themes at 1280 and 360 px, for a Canadian in Alberta. Mullvad's Ways to pay with the
-// currencies its cash takes, then its Source code; Netflix's Billing day; Crave with neither. The item dialog, with
+// currencies its cash takes, each way a chip of glyphs named for screen readers and as its tooltip (Task 6), then its
+// Source code after its host's chip; Netflix's Billing day; Crave with neither. The item dialog, with
 // CA.json answered so Crave bills on the 1st and TSN on the last day: Crave's suggested renewal is the next 1st and
 // TSN's this month's end, neither asking "Billed on"; TSN's typed Feb 28 isn't asked either and saves the 31st, while
 // Netflix (the date you signed up) still asks of a typed Feb 28. Keyboard: Tab through the links, their tooltips the
@@ -180,7 +181,11 @@ const groupNamed = (scope, page, name) =>
 async function shown(locator) {
   return locator.evaluate((element) =>
     element.innerText
-      .replace(/open_in_new/g, '')
+      // Material Symbols' ligatures: the link glyph and the ways to pay's (Task 6).
+      .replace(
+        /open_in_new|credit_card|card_giftcard|currency_bitcoin|account_balance|payments|storefront|live_tv/g,
+        '',
+      )
       .replace(/\s+/g, ' ')
       .replace(/ ([,)])/g, '$1')
       .trim(),
@@ -300,11 +305,53 @@ async function typeRenewal(page, date) {
         check(
           `${label}: Ways to pay names the currencies cash takes, citing its terms`,
           payWords ===
-            'Ways to pay Cash, Cryptocurrency, Bank transfer or direct debit, Card (networks not verified) and PayPal, according to its Pricing ' +
-              'App store or platform billing and Gift card, according to its Terms of service ' +
+            'Ways to pay networks not verified according to its Pricing ' +
+              'according to its Terms of service ' +
               'Cash in EUR, USD, GBP, SEK, NOK, CHF, CAD, AUD or NZD, according to its Terms of service',
           payWords,
         );
+        // Each way to pay a chip of its glyphs (Task 6): an image named for screen readers, its name the tooltip.
+        const chips = await pay
+          .locator('.pay-chips')
+          .evaluateAll((lines) =>
+            lines.map((line) =>
+              [...line.querySelectorAll('.pay-chip')].map((chip) =>
+                [chip.getAttribute('role'), chip.getAttribute('aria-label'), chip.tabIndex].join(
+                  ' ',
+                ),
+              ),
+            ),
+          );
+        check(
+          `${label}: Ways to pay shows each way as a chip of glyphs, named and reached by Tab`,
+          JSON.stringify(chips) ===
+            JSON.stringify([
+              [
+                'img Cash 0',
+                'img Cryptocurrency 0',
+                'img Bank transfer or direct debit 0',
+                'img Card (networks not verified) 0',
+                'img PayPal 0',
+              ],
+              ['img App store or platform billing 0', 'img Gift card 0'],
+            ]),
+          JSON.stringify(chips),
+        );
+        // By Tab from the chip before: a tooltip opens on keyboard focus, not on focus() alone.
+        await pay.locator('.pay-chip').nth(1).focus();
+        await page.keyboard.press('Tab');
+        const chipFocus = await focusedName(page);
+        const chipTip = await tooltipText(page);
+        check(
+          `${label}: a chip focused shows its name as the tooltip`,
+          chipFocus === '- img "Bank transfer or direct debit"' &&
+            chipTip === 'Bank transfer or direct debit',
+          `${chipFocus} / ${chipTip}`,
+        );
+        await page.screenshot({
+          path: path.join(outDir, `mullvad-chip-${colorScheme}-${viewport.width}.png`),
+        });
+        await axeCheck(page, `${label}, Mullvad's Ways to pay, a chip's tooltip open`);
         const code = groupNamed(mullvad, page, 'Source code');
         const codeWords = await shown(code);
         check(
@@ -350,17 +397,22 @@ async function typeRenewal(page, date) {
           `${currenciesFocus} / ${currenciesTip.slice(0, 60)}`,
         );
         await page.keyboard.press('Tab');
+        const hostFocus = await focusedName(page);
+        const hostTip = await tooltipText(page);
+        await page.keyboard.press('Tab');
         const repoFocus = await focusedName(page);
         await page.keyboard.press('Tab');
         const pageFocus = await focusedName(page);
         const pageTip = await tooltipText(page);
         check(
-          `${label}: then the repository, named for screen readers, and its page with its words`,
-          repoFocus ===
-            '- link "Source code on github.com/mullvad/mullvadvpn-app, opens in a new tab"' &&
+          `${label}: then its host's chip, the repository, named for screen readers, and its page with its words`,
+          hostFocus === '- img "GitHub"' &&
+            hostTip === 'GitHub' &&
+            repoFocus ===
+              '- link "Source code on github.com/mullvad/mullvadvpn-app, opens in a new tab"' &&
             pageFocus === '- link "Why Mullvad VPN?, opens in a new tab"' &&
             pageTip === '“Code is open source”',
-          `${repoFocus} / ${pageFocus} / ${pageTip}`,
+          `${hostFocus} / ${hostTip} / ${repoFocus} / ${pageFocus} / ${pageTip}`,
         );
         await sleep(500);
         await page.screenshot({

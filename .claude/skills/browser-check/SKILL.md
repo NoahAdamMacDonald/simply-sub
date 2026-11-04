@@ -707,7 +707,11 @@ its renewal day waiting for M11.9; the lines muted and the links the accent, und
 renewal is the next 1st, TSN's this month's end, neither asking "Billed on", nor TSN's typed Feb 28, which is saved
 billed on the 31st; Netflix (the date you signed up) suggests a month from today and still asks of a typed Feb 28. The
 expected dates come from the machine's date. With axe, screenshots and no horizontal scroll. Since M11.5
-`check-m11-outside.cjs` expects Mullvad's Source code after Ways to pay, and its currencies line.
+`check-m11-outside.cjs` expects Mullvad's Source code after Ways to pay, and its currencies line. Since the ways to
+pay became chips of glyphs (2026-11-03), both scripts read each chip by its image's name (`aria-label`), drop Material
+Symbols' ligature words from `innerText`, and reach a chip's tooltip by Tab (a tooltip opens on keyboard focus, not on
+`focus()` alone): Mullvad's five chips sit between its owner's link and its pricing page's, and Source code's host
+chip ("GitHub") before the repository's link. 105 and 89 checks.
 
 `check-m11-perks.cjs` (M11.6, ranked perks) checks a list, Games (Xbox Game Pass Ultimate, PC Game Pass and Premium,
 written to IndexedDB, Premium ranking Online console multiplayer, a perk until M11.9), on `ng serve` for a Canadian in

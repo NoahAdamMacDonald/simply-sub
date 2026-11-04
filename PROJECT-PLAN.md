@@ -1413,6 +1413,17 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
       for each country and way to pay, the schema's and validation's refusals, the citation, entries adding up), the
       card's spec, the bot's tests on Netflix's eleven countries; `check-m11-outside.cjs` (81, Bitdefender's Billing day
       after Ways to pay, stale since M11.9) and `check-m11-facts.cjs` (93) with the new lines.
+  - **The owner's follow-up: icons for ways to pay and code hosts** (2026-11-03, the mockup built as shown, BLUEPRINT
+    §4.10 and §14): each way to pay is a chip of its glyphs, focusable, its name the tooltip and, as an image's name,
+    what a screen reader says (the price tag's currency pattern); the card's carries the networks a page names there,
+    by their marks, or "networks not verified"; a way or network with no glyph shows its name. Source code puts its
+    host's chip before the repository. The marks are 15 Simple Icons 16.35.0 paths (CC0) in `pay-glyphs.ts`, generated
+    from the package with each path checked to be plain path data, in the cards' lazy chunk: the initial bundle is
+    unchanged at 499.92 kB. Outlined chips with no fill keep the muted words at AA in dark mode (4.8:1; the mockup's
+    tint gave 4.2:1). Checks: the card's spec (30: the chips by name, a symbol's and a mark's glyphs, a network and a
+    way with none, an unknown host), `check-m11-facts.cjs` (105: the chips' names, a chip's tooltip by Tab, the host's
+    chip in the Tab order) and `check-m11-outside.cjs` (89: Tab from the owner through Mullvad's five chips, Netflix's
+    card chip naming Canada's networks), in both themes at both widths with axe.
 
 **M11.6 — Ranked perks** (BLUEPRINT §4.2)
 ```yaml

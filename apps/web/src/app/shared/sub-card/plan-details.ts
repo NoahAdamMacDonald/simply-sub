@@ -5,6 +5,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import {
   acceptedNetworksIn,
+  cardNetworkNames,
   currenciesIn,
   outsideRatings,
   ownerCitation,
@@ -18,7 +19,9 @@ import {
   repositoryLabel,
   type AddRequest,
   type BundleSaving,
+  type CardNetwork,
   type CurrenciesEntry,
+  type PaymentMethod,
   type PaymentMethods,
   type PickedPrice,
   type PlanMatch,
@@ -45,6 +48,7 @@ import { PriceTag } from '../price-tag/price-tag';
 import { ProviderIcon } from '../provider-icon/provider-icon';
 import type { ReportPriceData } from '../report-price/report-price-dialog';
 import { catalogIcon, savingText, type SavingText } from './card-text';
+import { hostGlyph, methodGlyphs, networkGlyphs, type Glyph } from './pay-glyphs';
 
 /** The grades' names, in muted text beside each rating's topic (BLUEPRINT §4.10). */
 const tierNames: Record<PolicyTier, string> = {
@@ -66,6 +70,25 @@ interface CitedFact {
   page: string;
   href: string;
   quotes: readonly string[];
+  /** The words before the page's name, when not ", according to its " (after a line of chips). */
+  lead?: string;
+}
+
+/**
+ * A way to pay as a chip (the owner's design, 2026-11-03): its glyphs, and its name, which is its tooltip and what a
+ * screen reader says, with any words it shows too (a network with no glyph, "networks not verified"). One with no
+ * glyph shows its name.
+ */
+interface PayChip {
+  name: string;
+  glyphs: readonly Glyph[];
+  words?: string;
+}
+
+/** A line of Ways to pay: its chips, and the page that names them. */
+interface PayLine {
+  chips: readonly PayChip[];
+  cited: CitedFact;
 }
 
 /** A line of Ways to pay: what it says, and the page that says so. */
@@ -216,16 +239,16 @@ export class PlanDetails {
     return country && { name: countryName(country.code), cited: country.cited };
   });
   /**
-   * How a buyer where the user lives can pay it (M11.5), a line per page that says so. A card whose networks no page
-   * names says so (the owner's wording, 2026-11-03).
+   * How a buyer where the user lives can pay it (M11.5), a line of chips per page that says so. A card shows the
+   * networks a page names there, or says no page names them (the owner's wording, 2026-11-03).
    */
-  protected readonly payment = computed((): CitedLine[] => {
+  protected readonly payment = computed((): PayLine[] => {
     const country = this.settings.saved()?.country;
     if (!country) return [];
-    const verified = acceptedNetworksIn(this.provider(), country) !== undefined;
+    const networks = acceptedNetworksIn(this.provider(), country);
     return paymentMethodsIn(this.provider(), country).map((entry) => ({
-      text: this.methodsText(entry.methods, verified),
-      cited: citedFact(entry),
+      chips: entry.methods.map((method) => payChip(method, networks)),
+      cited: { ...citedFact(entry), lead: 'according to its ' },
     }));
   });
   /** The currencies they can pay it in beyond its price lists (M11.5), each with its page. */
@@ -252,13 +275,14 @@ export class PlanDetails {
       },
     };
   });
-  /** Where its source code is (M11.5), and its own page that links it. */
+  /** Where its source code is (M11.5), its host's chip, and its own page that links it. */
   protected readonly repo = computed(() => {
     const repo = this.provider().sourceRepo;
     return (
       repo && {
         url: repo.url,
         label: repositoryLabel(repo.url),
+        host: hostChip(repo.url),
         page: repo.page.name,
         href: quoteLink(repo.page.url, repo.quotes),
         quotes: repo.quotes,
@@ -317,14 +341,10 @@ export class PlanDetails {
     return date.length === 7 ? monthText(date) : dateText(date);
   }
 
-  /** "Card, PayPal and Cash", or "Card (networks not verified)" when no page names the networks it takes there. */
-  private methodsText(methods: PaymentMethods[number]['methods'], verified = true): string {
+  /** "Card, PayPal and Cash". */
+  private methodsText(methods: PaymentMethods[number]['methods']): string {
     return listText(
-      methods.map((method) =>
-        method === 'card' && !verified
-          ? `${paymentMethodNames.card} (networks not verified)`
-          : paymentMethodNames[method],
-      ),
+      methods.map((method) => paymentMethodNames[method]),
       'and',
     );
   }
@@ -353,6 +373,44 @@ export class PlanDetails {
 /** A ways-to-pay or currencies entry's page, scrolled to the words that name them. */
 function citedFact({ page, url, quotes }: CurrenciesEntry | PaymentMethods[number]): CitedFact {
   return { page, href: quoteLink(url, quotes), quotes };
+}
+
+/** A repository's host as a chip: GitHub's mark, say, named GitHub. */
+function hostChip(url: string): PayChip {
+  const { name, glyph } = hostGlyph(url);
+  return { name, glyphs: [glyph] };
+}
+
+/**
+ * A way to pay's chip. A card's carries the networks a page names where the user lives ("Card: Visa or Interac", each
+ * by its mark, or by name when it has none), or "networks not verified" when no page names them.
+ */
+function payChip(method: PaymentMethod, networks: readonly CardNetwork[] | undefined): PayChip {
+  const glyph = methodGlyphs[method];
+  const own = glyph ? [glyph] : [];
+  if (method !== 'card') return { name: paymentMethodNames[method], glyphs: own };
+  if (!networks) {
+    return {
+      name: `${paymentMethodNames.card} (networks not verified)`,
+      glyphs: own,
+      words: 'networks not verified',
+    };
+  }
+  const marks = networks.flatMap((network) => {
+    const mark = networkGlyphs[network];
+    return mark ? [mark] : [];
+  });
+  const unmarked = networks
+    .filter((network) => !networkGlyphs[network])
+    .map((network) => cardNetworkNames[network]);
+  return {
+    name: `${paymentMethodNames.card}: ${listText(
+      networks.map((network) => cardNetworkNames[network]),
+      'or',
+    )}`,
+    glyphs: [...own, ...marks],
+    ...(unmarked.length > 0 ? { words: unmarked.join(', ') } : {}),
+  };
 }
 
 /** "A, B and C" (or "or"). */

@@ -291,7 +291,7 @@
 
 <!-- A provider's page cited for a fact, linked to its words, which are its tooltip. -->
 <ng-template #cited let-fact>
-  <span>, according to its </span>
+  <span>{{ fact.lead ?? ', according to its ' }}</span>
   <a
     class="outside-link"
     [href]="fact.href"
@@ -306,20 +306,63 @@
   </a>
 </ng-template>
 
+<!-- A chip's glyphs (the owner's design, 2026-11-03): a Material Symbol, or a brand's mark in the text's colour. -->
+<ng-template #glyphs let-chip>
+  @for (glyph of chip.glyphs; track $index) {
+    @if (glyph.kind === 'symbol') {
+      <mat-icon aria-hidden="true">{{ glyph.name }}</mat-icon>
+    } @else {
+      <svg
+        viewBox="0 0 24 24"
+        [attr.width]="glyph.size"
+        [attr.height]="glyph.size"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path fill="currentColor" [attr.d]="glyph.path" />
+      </svg>
+    }
+  }
+</ng-template>
+
 <!--
   How a buyer where the user lives can pay it, and in which currencies beyond its price lists (M11.5), citing the
-  provider's pages, their words as the tooltips.
+  provider's pages, their words as the tooltips. Each way to pay is a chip of its glyphs: focusable, so keyboard users
+  get its name as the tooltip, which screen readers read as an image's name; one with no glyph shows its name.
 -->
 @if (payment().length || currencies().length) {
   <div class="group">
     <h3>Ways to pay</h3>
     @for (line of payment(); track $index) {
-      <p class="payment">
-        <span>{{ line.text }}</span>
-        <ng-container
-          [ngTemplateOutlet]="cited"
-          [ngTemplateOutletContext]="{ $implicit: line.cited }"
-        />
+      <p class="payment pay-chips">
+        @for (chip of line.chips; track chip.name) {
+          @if (chip.glyphs.length) {
+            <span
+              class="pay-chip"
+              tabindex="0"
+              role="img"
+              [attr.aria-label]="chip.name"
+              [matTooltip]="chip.name"
+              matTooltipTouchGestures="off"
+            >
+              <ng-container
+                [ngTemplateOutlet]="glyphs"
+                [ngTemplateOutletContext]="{ $implicit: chip }"
+              />
+              @if (chip.words) {
+                <span>{{ chip.words }}</span>
+              }
+            </span>
+          } @else {
+            <span class="pay-chip">{{ chip.name }}</span>
+          }
+        }
+        <span>
+          <ng-container
+            [ngTemplateOutlet]="cited"
+            [ngTemplateOutletContext]="{ $implicit: line.cited }"
+          />
+        </span>
       </p>
     }
     @for (line of currencies(); track $index) {
@@ -347,22 +390,37 @@
   </div>
 }
 
-<!-- Where its source code is (M11.5), as its own page links it. -->
+<!-- Where its source code is (M11.5), as its own page links it, after its host's chip. -->
 @if (repo(); as repo) {
   <div class="group">
     <h3>Source code</h3>
-    <p class="payment repo">
-      <a
-        class="outside-link"
-        [href]="repo.url"
-        target="_blank"
-        rel="noopener"
-        [attr.aria-label]="'Source code on ' + repo.label + ', opens in a new tab'"
+    <p class="payment pay-chips repo">
+      <span
+        class="pay-chip"
+        tabindex="0"
+        role="img"
+        [attr.aria-label]="repo.host.name"
+        [matTooltip]="repo.host.name"
+        matTooltipTouchGestures="off"
       >
-        <span>{{ repo.label }}</span>
-        <mat-icon aria-hidden="true">open_in_new</mat-icon>
-      </a>
-      <ng-container [ngTemplateOutlet]="cited" [ngTemplateOutletContext]="{ $implicit: repo }" />
+        <ng-container
+          [ngTemplateOutlet]="glyphs"
+          [ngTemplateOutletContext]="{ $implicit: repo.host }"
+        />
+      </span>
+      <span>
+        <a
+          class="outside-link"
+          [href]="repo.url"
+          target="_blank"
+          rel="noopener"
+          [attr.aria-label]="'Source code on ' + repo.label + ', opens in a new tab'"
+        >
+          <span>{{ repo.label }}</span>
+          <mat-icon aria-hidden="true">open_in_new</mat-icon>
+        </a>
+        <ng-container [ngTemplateOutlet]="cited" [ngTemplateOutletContext]="{ $implicit: repo }" />
+      </span>
     </p>
   </div>
 }
