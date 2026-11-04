@@ -111,17 +111,24 @@ describe('YAML edits', () => {
   });
 
   it('remove a region’s accepted networks, and the acceptedNetworks key with the last one', () => {
+    const regions = Object.keys(providerSchema.parse(parse(netflixYaml)).acceptedNetworks ?? {});
     const withoutUs = withoutAcceptedNetworks(netflixYaml, 'US') ?? '';
     const provider = providerSchema.parse(parse(withoutUs));
-    expect(Object.keys(provider.acceptedNetworks ?? {})).toEqual(['CA']);
+    expect(Object.keys(provider.acceptedNetworks ?? {})).toEqual(
+      regions.filter((region) => region !== 'US'),
+    );
     // Only the US block's lines: "  US:" and what's under it.
     expect(withoutUs).toBe(netflixYaml.replace(/^ {2}US:\n(?: {4}.*\n)+/m, ''));
     expect(differing(netflixYaml, withoutUs)).toBeGreaterThan(0);
-    const neither = withoutAcceptedNetworks(withoutUs, 'CA') ?? '';
-    expect(providerSchema.parse(parse(neither)).acceptedNetworks).toBeUndefined();
-    expect(neither).not.toContain('acceptedNetworks:');
-    expect(withoutAcceptedNetworks(neither, 'CA')).toBeUndefined();
-    expect(withoutAcceptedNetworks(netflixYaml, 'GB')).toBeUndefined();
+    // Every other country's, one at a time (all eleven since the owner's tasks, 2026-11-03): the key goes with the last.
+    let rest = withoutUs;
+    for (const region of regions.filter((region) => region !== 'US')) {
+      rest = withoutAcceptedNetworks(rest, region) ?? '';
+    }
+    expect(providerSchema.parse(parse(rest)).acceptedNetworks).toBeUndefined();
+    expect(rest).not.toContain('acceptedNetworks:');
+    expect(withoutAcceptedNetworks(rest, 'CA')).toBeUndefined();
+    expect(withoutAcceptedNetworks(netflixYaml, 'JP')).toBeUndefined();
   });
 
   it('give undefined for a price or reseller the file doesn’t have', () => {

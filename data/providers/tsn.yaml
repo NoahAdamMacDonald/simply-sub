@@ -15,7 +15,8 @@ availableIn: [CA]
 cancelUrl: https://www.tsn.ca/help/faq/#cancellations
 sources: { pricing: https://www.tsn.ca/subscribe/ }
 # Owner (M11.2), read 2026-11-02: no about page says so; its terms do.
-# Ways to pay (M11.5), read 2026-11-02 in its terms: a card, or through an in-app purchase.
+# Ways to pay (M11.5), read 2026-11-02 in its terms: a card, or through an in-app purchase; and 2026-11-03 (the
+# owner's tasks) in its help centre: a TV or mobile provider's bill, Bell's too. No page names the card networks.
 paymentMethods:
   - methods: [card, app-store]
     page: 'Terms and conditions'
@@ -23,13 +24,28 @@ paymentMethods:
     quotes:
       - 'provide payment method information, such as your credit card number and billing address'
       - 'If you subscribe or otherwise have entitlements to the Service through an authorized third party distributor of the Service (such as an authorized content provider, in-app purchase platform, or bundle distributor)'
+  - methods: [provider-billing]
+    page: 'Help Centre FAQ'
+    url: https://www.tsn.ca/help/faq/
+    quotes:
+      - 'Can I get a bundle if I pay through a third-party TV or mobile provider?'
+      - 'Where do I get support for a Bell-billed TSN subscription?'
 owner:
   name: Bell Media Inc.
+  website: https://www.bellmedia.ca
   page:
     name: Terms and conditions
     url: https://www.tsn.ca/terms-and-conditions/
   quotes:
     - 'which is made available to you by Bell Media Inc. and its affiliates (together, “Bell Media”)'
+  country:
+    code: CA
+    page:
+      name: 'About Bell Media'
+      url: https://www.bellmedia.ca/about-us/
+    quotes:
+      - 'Bell Media is Canada’s leading media and entertainment company with premier assets in video, audio, out-of-home advertising, and digital media.'
+    lastVerified: 2026-11-03
   lastVerified: 2026-11-02
 notes: >-
   Plans renew for the period chosen, except in Quebec, where they renew monthly. Select NHL regular-season games

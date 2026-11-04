@@ -24,7 +24,14 @@ import { providerSchema, type AddOn, type Plan, type Provider } from './provider
 import { ratersFileSchema, ratingIsOld, ratingDay, ratingSubjects, type Rater } from './rater';
 import { redirectsFileSchema } from './redirects';
 import { isRetired } from './retired';
-import { globalRegion, groupsOf, isCatalogRegion, membersOf, regionProblem } from './regions';
+import {
+  globalRegion,
+  groupsOf,
+  isCatalogRegion,
+  isoRegions,
+  membersOf,
+  regionProblem,
+} from './regions';
 import {
   isOnDomain,
   resellerDomains,
@@ -1169,11 +1176,30 @@ function checkOwner(
     return;
   }
   const sites = ownPages(provider, own);
-  if (!isOnDomain(owner.page.url, sites)) {
+  const offSite = `Must be a page of ${provider.name}'s own sites, its policies' or its owner's (${sites.join(', ')}): give the owner's site in website when the page is there`;
+  if (!isOnDomain(owner.page.url, sites)) report(['owner', 'page', 'url'], offSite);
+  // Where the company is from (the owner's choice, 2026-11-03), quoted like its name.
+  const { country } = owner;
+  if (!country) {
     report(
-      ['owner', 'page', 'url'],
-      `Must be a page of ${provider.name}'s own sites, its policies' or its owner's (${sites.join(', ')}): give the owner's site in website when the page is there`,
+      ['owner'],
+      'Say where the company is from: owner.country, an ISO 3166-1 code, quoted from its own pages or its owner’s',
     );
+  } else {
+    if (!isoRegions.has(country.code)) {
+      report(
+        ['owner', 'country', 'code'],
+        country.code === 'UK'
+          ? regionProblem(country.code)
+          : `"${country.code}" isn't an ISO 3166-1 country code (US, CA, CH)`,
+      );
+    }
+    if (country.page && !isOnDomain(country.page.url, sites)) {
+      report(['owner', 'country', 'page', 'url'], offSite);
+    }
+    if (country.lastVerified) {
+      checkReadOn(country.lastVerified, ['owner', 'country', 'lastVerified'], today, report);
+    }
   }
   checkReadOn(owner.lastVerified, ['owner', 'lastVerified'], today, report);
 }

@@ -1078,18 +1078,10 @@ function providerFacts(
       });
       continue;
     }
+    // Entries for the same place add up (a page for cards, another for gift cards).
     const badRegion = regions?.find((region) => !isCatalogRegion(region));
-    const taken = regions?.length
-      ? regions.some((region) => paymentMethods.some((entry) => entry.regions?.includes(region)))
-      : paymentMethods.some((entry) => !entry.regions);
-    if (badRegion || taken) {
-      issues.push({
-        kind: 'dropped',
-        subject,
-        reason: badRegion
-          ? `"${badRegion}" isn't a region code`
-          : 'One entry for everywhere and one per region: the first is kept',
-      });
+    if (badRegion) {
+      issues.push({ kind: 'dropped', subject, reason: `"${badRegion}" isn't a region code` });
       continue;
     }
     offSite(subject, page.url);
@@ -1237,6 +1229,10 @@ const paymentMethodAliases: Readonly<Record<string, PaymentMethod>> = {
   'gift-cards': 'gift-card',
   'bank-wire': 'bank-transfer',
   'wire-transfer': 'bank-transfer',
+  'direct-debit': 'bank-transfer',
+  ideal: 'bank-transfer',
+  swish: 'bank-transfer',
+  'cash-app-pay': 'cash-app',
 };
 
 function toPaymentMethod(name: string): PaymentMethod | undefined {

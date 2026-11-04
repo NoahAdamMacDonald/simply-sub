@@ -274,6 +274,13 @@ export const searchCatalogData: CatalogData = {
         name: 'Mullvad VPN AB',
         page: { name: 'About us', url: 'https://mullvad.net/en/about' },
         quotes: ['Mullvad VPN AB is owned by parent company Amagicom AB.'],
+        // Where it's from, quoted from a page of its own (the owner's choice, 2026-11-03).
+        country: {
+          code: 'SE',
+          page: { name: 'Why Mullvad VPN?', url: 'https://mullvad.net/en/why-mullvad-vpn' },
+          quotes: ['a VPN provider based in Sweden'],
+          lastVerified: '2026-10-22',
+        },
         lastVerified: '2026-10-22',
       },
       // Currencies beyond its price lists, and where its source code is (M11.5).

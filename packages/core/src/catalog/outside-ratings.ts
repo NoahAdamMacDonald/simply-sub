@@ -64,14 +64,33 @@ export interface OwnerCitation {
   /** The page with a text fragment that scrolls to the quotes (core's quoteLink). */
   href: string;
   quotes: string[];
+  /**
+   * Where the company is from (the owner's choice, 2026-11-03): its ISO code, and its own page when the owner's page
+   * doesn't say it, linked to its words.
+   */
+  country?: { code: string; cited?: { page: string; href: string; quotes: string[] } };
 }
 
 /** The company behind a provider, and a link to its own words that say so. */
 export function ownerCitation(owner: Owner): OwnerCitation {
+  const { country } = owner;
   return {
     name: owner.name,
     page: owner.page.name,
     href: quoteLink(owner.page.url, owner.quotes),
     quotes: owner.quotes,
+    ...(country && {
+      country: {
+        code: country.code,
+        ...(country.page &&
+          country.quotes && {
+            cited: {
+              page: country.page.name,
+              href: quoteLink(country.page.url, country.quotes),
+              quotes: country.quotes,
+            },
+          }),
+      },
+    }),
   };
 }

@@ -124,9 +124,10 @@ Where it's sold and how it's paid
 - "availableIn": only when the provider lists the countries it sells in, with the words that list them.
 - "acceptedNetworks": for each region a page covers, the card networks its words name ("We accept Visa, Mastercard"),
   quoting the words for each. "All major credit cards" names none: leave the region out.
-- "paymentMethods": every way to pay a page names (cards, PayPal, Apple Pay, Google Pay, app stores, gift cards or
-  vouchers, a bank, cash, crypto, a TV, internet or phone bill), quoting the words for each: one entry for every
-  buyer, and one for a country whose own page differs. Look for the alternatives: a provider that takes cash or crypto
+- "paymentMethods": every way to pay a page names (cards, PayPal, Apple Pay, Google Pay, Klarna, Satispay, Cash App,
+  app stores and platforms that bill for it, gift cards or vouchers, a bank transfer or direct debit (iDEAL | Wero,
+  Swish), cash, crypto, a TV, internet or phone bill), quoting the words for each: an entry per page, for every buyer,
+  and others for a country whose own pages differ. Look for the alternatives: a provider that takes cash or crypto
   says so.
 - "currencies": currencies it takes beyond its prices' (cash by post in nine currencies, a checkout that charges in
   the buyer's own), with the words naming each, and the ways to pay that take them.

@@ -189,7 +189,9 @@ async function focusedName(page) {
         const headings = await bitdefender.locator('ss-plan-details h3').allTextContents();
         check(
           `${label}: Bitdefender's Outside ratings, Owner and Ways to pay come after Terms and policies`,
-          headings.slice(-4).join() === 'Terms and policies,Outside ratings,Owner,Ways to pay',
+          // Then its Billing day (M11.9's renewal days).
+          headings.slice(-5).join() ===
+            'Terms and policies,Outside ratings,Owner,Ways to pay,Billing day',
           headings.join(', '),
         );
         // Its security features (2026-11-02): the plan shown is listed with the antivirus group.
@@ -255,10 +257,22 @@ async function focusedName(page) {
         check(
           `${label}: Mullvad's Owner, then Ways to pay and Source code (M11.5), after Terms and policies, with no Outside ratings`,
           mullvadHeadings.slice(-4).join() === 'Terms and policies,Owner,Ways to pay,Source code' &&
-            ownerWords === 'Owner Mullvad VPN AB, according to its About us',
+            // Shown "Mullvad VPN AB · Sweden", read "Mullvad VPN AB, from Sweden": innerText has both.
+            ownerWords === 'Owner Mullvad VPN AB ·, from Sweden, according to its About us',
           `${mullvadHeadings.join(', ')} / ${ownerWords}`,
         );
-        const ownerLink = owner.locator('a');
+        // Where the company is from (the owner's choice, 2026-11-03): its own page, linked first.
+        const countryLink = owner.locator('a').first();
+        const countryHref = await countryLink.getAttribute('href');
+        check(
+          `${label}: Sweden links to its words on Mullvad's page saying so, in a new tab, named for screen readers`,
+          countryHref.startsWith('https://mullvad.net/en/why-mullvad-vpn#:~:text=') &&
+            (await countryLink.getAttribute('target')) === '_blank' &&
+            (await countryLink.getAttribute('aria-label')) ===
+              'Sweden, according to its Why Mullvad VPN?, opens in a new tab',
+          countryHref,
+        );
+        const ownerLink = owner.locator('a').last();
         const ownerHref = await ownerLink.getAttribute('href');
         check(
           `${label}: the owner's link scrolls to its words on Mullvad's about page, in a new tab`,
@@ -274,12 +288,27 @@ async function focusedName(page) {
         );
         await mullvad.locator('.policy-links a').last().focus();
         await page.keyboard.press('Tab');
+        const countryFocus = await focusedName(page);
+        const countryTip = page.locator('.mat-mdc-tooltip-show');
+        await countryTip.waitFor({ timeout: 5000 }).catch(() => undefined);
+        await sleep(400);
+        const countryWords =
+          (await countryTip.count()) > 0 ? (await countryTip.last().textContent()).trim() : '';
+        check(
+          `${label}: Tab from Sources reaches where the company is from, its tooltip the page's words`,
+          countryFocus ===
+            '- link "Sweden, according to its Why Mullvad VPN?, opens in a new tab"' &&
+            countryWords.startsWith('“The laws relevant to us as a VPN provider based in Sweden'),
+          `${countryFocus} / ${countryWords}`,
+        );
+        await page.keyboard.press('Tab');
         const ownerFocus = await focusedName(page);
         const tooltip = page.locator('.mat-mdc-tooltip-show');
         await tooltip.waitFor({ timeout: 5000 }).catch(() => undefined);
-        const tip = (await tooltip.count()) > 0 ? (await tooltip.textContent()).trim() : '';
+        await sleep(400);
+        const tip = (await tooltip.count()) > 0 ? (await tooltip.last().textContent()).trim() : '';
         check(
-          `${label}: Tab from Sources reaches the owner's link, its tooltip the page's words`,
+          `${label}: then the owner's link, its tooltip the page's words`,
           ownerFocus === '- link "About us, opens in a new tab"' &&
             tip.startsWith(
               '“Mullvad VPN AB is owned by parent company Amagicom AB.” “Mullvad VPN AB and its parent',
@@ -297,9 +326,10 @@ async function focusedName(page) {
         const payWords = await shown(pay);
         // Then the currencies its cash takes (M11.5), which check-m11-facts.cjs checks further.
         check(
-          `${label}: Mullvad's Ways to pay names cash and crypto, citing its terms`,
+          `${label}: Mullvad's Ways to pay names cash and crypto, citing its pricing page and its terms`,
           payWords ===
-            'Ways to pay Cash, Cryptocurrency, Card, Bank transfer, PayPal, App store billing and Gift card, according to its Terms of service ' +
+            'Ways to pay Cash, Cryptocurrency, Bank transfer or direct debit, Card (networks not verified) and PayPal, according to its Pricing ' +
+              'App store or platform billing and Gift card, according to its Terms of service ' +
               'Cash in EUR, USD, GBP, SEK, NOK, CHF, CAD, AUD or NZD, according to its Terms of service',
           payWords,
         );
@@ -317,8 +347,8 @@ async function focusedName(page) {
           (await payTip.count()) > 0 ? (await payTip.last().textContent()).trim() : '';
         check(
           `${label}: Tab from the owner's link reaches the payment page's, its tooltip the page's words`,
-          payFocus === '- link "Terms of service, opens in a new tab"' &&
-            payTipText.startsWith('“We accept payment by cash in bills'),
+          payFocus === '- link "Pricing, opens in a new tab"' &&
+            payTipText.startsWith('“We accept cash, Bitcoin, Bitcoin Cash, Monero'),
           `${payFocus} / ${payTipText.slice(0, 60)}`,
         );
         await sleep(500);

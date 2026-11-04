@@ -106,9 +106,16 @@ API contract's prices are illustrative and never a source. This skill is how to 
   - **The owner and outside ratings** (M11.2), by the policy-research skill's rules: the company behind it (every
     provider needs one), and for an antivirus or a news outlet the raters in `data/raters.yaml`.
   - **Every way to pay** (`paymentMethods`, required of every provider): its payment methods help article, pricing
-    page or terms, for cards, PayPal, Apple and Google Pay, app stores, gift cards, a bank, cash, crypto and a TV,
-    internet or phone provider's bill, each named in a quote; an entry per country page when they differ (Netflix's
-    Canada and US). Look for the alternatives (cash by post, crypto, vouchers): a provider that takes them says so.
+    page or terms, for cards, PayPal, Apple and Google Pay, Klarna, Satispay, Cash App, app stores and platforms that
+    bill for it (Amazon's Prime Video channels), gift cards, a bank transfer or direct debit (iDEAL | Wero, Swish,
+    Bancontact, GoCardless), cash, crypto and a TV, internet or phone provider's bill, each named in a quote. Read
+    every country's own page when they can differ (Netflix's eleven, Disney+'s with the help centre's country picked):
+    an entry per page and country. Entries for the same place add up, so a second page (Crave's gift cards) is a second
+    entry, and a region's own entries replace everywhere's, so they list all its ways (Xbox Game Pass's mobile
+    billing, only where Microsoft's operators are). Look for the alternatives (cash by post, crypto, vouchers): a
+    provider that takes them says so. A wallet or processor no id names is `other`, quoted, and asked about as a new
+    id. Its card's networks go in `acceptedNetworks` (above); with none named, the card says "Card (networks not
+    verified)".
   - **Currencies beyond its prices** (`currencies`, M11.5): when a page says it takes currencies its price lists
     don't show (Mullvad's cash by post in nine, a checkout that charges in the buyer's own), each code named in a
     quote (its code, name or sign: `€`, `CA$`; a bare `$` names none), with the ways to pay that take them. Leave it

@@ -86,6 +86,11 @@ their own.
   owned by The Walt Disney Company, 18 percent by Hearst and 10 percent by the National Football League"). Never
   Wikipedia or the press as the source. Every provider needs one (a public company is its own: "Netflix, Inc., a
   public company (NASDAQ: NFLX)").
+- **Where it's from** (the owner's choice, 2026-11-03): `owner.country`, the company's ISO 3166-1 code. When the
+  owner's quotes say it ("a Swiss corporation"), the code alone; else a `page` of its own with one to three `quotes`
+  and `lastVerified`, in the same order of pages, or an address in its terms or corporate information ("Los Gatos, CA
+  95032, USA"). Its words name the country, its people, or in an address a state or province ("Bristol,
+  Connecticut"): validation checks it (core's `namesCountry`), and a code alone ("CA") names none.
 - **Outside ratings** (M11.2): only from raters in `data/raters.yaml`, whose terms were read before they were added
   (its header lists those read and left out, and why: Ad Fontes, Media Bias/Fact Check, AllSides, AV-Comparatives,
   SE Labs). A new rater is read for its terms first and added only when they plainly allow showing its label with a

@@ -1,6 +1,6 @@
 # Drafted by the discovery pipeline on 2026-10-28 (BLUEPRINT §6.5) from these pages, each quoted where it's used.
 # Pricing: https://www.xbox.com/en-CA/xbox-game-pass.
-# Payment methods: none found.
+# Payment methods: https://support.microsoft.com/en-us/accounts-billing/add-a-new-bank-or-credit-card-to-your-microsoft-account.
 # Cancelling:
 # https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription.
 # Terms: https://www.xbox.com/en-US/legal/subscription-terms.
@@ -23,15 +23,27 @@ spendCategory: gaming
 billingCurrency: { CA: CAD, GB: GBP, US: USD, AU: AUD, NZ: NZD, EU: EUR }
 cancelUrl: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
 sources: { pricing: https://www.xbox.com/en-CA/xbox-game-pass }
-# Ways to pay (M11.5), read 2026-11-02 in the Microsoft Services Agreement its subscription terms include: a card,
-# or Microsoft gift cards. No official page read lists PayPal or other methods for Game Pass.
+# Ways to pay (M11.5), read 2026-11-03 (the owner's tasks) in Microsoft's support article on the account Game Pass
+# bills: a credit or debit card, a bank account, PayPal, a mobile phone or Microsoft gift cards, though "Not all
+# payment methods are supported in all regions". Its mobile operator billing lists Canada (Telus), the UK, Germany,
+# France, Italy and the Netherlands among the regions here, so only those have it. No page names the card networks.
 paymentMethods:
-  - methods: [card, gift-card]
-    page: Microsoft Services Agreement
-    url: https://www.microsoft.com/en-ca/servicesagreement
+  - methods: [card, bank-transfer, paypal, gift-card]
+    page: 'Add a payment method to your Microsoft account'
+    url: https://support.microsoft.com/en-us/accounts-billing/add-a-new-bank-or-credit-card-to-your-microsoft-account
     quotes:
-      - 'as charges to your designated account (for credit card or similar payments)'
-      - 'Redemption and use of gift cards (other than Skype gift cards) are governed by the Microsoft Gift Card Terms and Conditions'
+      - 'You can add your credit card, debit card, bank account, PayPal account, or mobile phone as a new payment method.'
+      - 'To add a Microsoft gift card to your account, go to redeem.microsoft.com.'
+      - 'Not all payment methods are supported in all regions.'
+  - methods: [card, bank-transfer, paypal, gift-card, provider-billing]
+    regions: [CA, GB, DE, FR, IT, NL]
+    page: 'Add a payment method to your Microsoft account'
+    url: https://support.microsoft.com/en-us/accounts-billing/add-a-new-bank-or-credit-card-to-your-microsoft-account
+    quotes:
+      - 'You can add your credit card, debit card, bank account, PayPal account, or mobile phone as a new payment method.'
+      - 'To add a Microsoft gift card to your account, go to redeem.microsoft.com.'
+      - 'Not all payment methods are supported in all regions.'
+      - 'The Microsoft Store offers mobile operator billing as a payment method in various countries/regions.'
 # Owner (M11.2), read 2026-11-02: Microsoft's 2025 annual report, on its own site, names Xbox Game Pass among "our
 # services".
 owner:
@@ -42,6 +54,14 @@ owner:
     url: https://www.microsoft.com/investor/reports/ar25/index.html
   quotes:
     - drive increased engagement with our services like Microsoft Edge, Bing, Copilot, Microsoft Teams, Microsoft 365 Consumer, Xbox Game Pass, and more
+  country:
+    code: US
+    page:
+      name: 'Microsoft Services Agreement'
+      url: https://www.microsoft.com/en-ca/servicesagreement
+    quotes:
+      - 'For all other free and paid consumer Services, you are contracting with Microsoft Corporation, One Microsoft Way, Redmond, WA 98052, U.S.A.'
+    lastVerified: 2026-11-03
   lastVerified: 2026-11-02
 
 # Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their

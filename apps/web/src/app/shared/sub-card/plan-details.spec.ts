@@ -303,7 +303,7 @@ describe('PlanDetails', () => {
         // The rater the catalog doesn't list is left out: its name is unknown.
         'Outside ratings Protection: 6.0/6.0 from Test Lab , August 2026 (tested Mullvad VPN 2026.4, Windows 11) ' +
           'Usability: 5.5/6.0 from Test Lab , Sep 14, 2026',
-        'Owner Mullvad VPN AB , according to its About us',
+        'Owner Mullvad VPN AB · Sweden , according to its About us',
       ]);
       const link = element().querySelector<HTMLAnchorElement>('.outside a');
       expect([link?.href, link?.target, link?.rel, link?.getAttribute('aria-label')]).toEqual([
@@ -316,7 +316,7 @@ describe('PlanDetails', () => {
 
     it('cites the owner’s own page, linked to its words, with them as the tooltip', async () => {
       await show('mullvad.vpn');
-      const link = element().querySelector<HTMLAnchorElement>('.owner a');
+      const link = element().querySelectorAll<HTMLAnchorElement>('.owner a')[1];
 
       expect([link?.href, link?.target, link?.getAttribute('aria-label')]).toEqual([
         'https://mullvad.net/en/about#:~:text=Mullvad%20VPN%20AB%20is,parent%20company%20Amagicom%20AB.',
@@ -324,12 +324,42 @@ describe('PlanDetails', () => {
         'About us, opens in a new tab',
       ]);
       const tooltip = await TestbedHarnessEnvironment.loader(fixture).getHarness(
-        MatTooltipHarness.with({ selector: '.owner a' }),
+        MatTooltipHarness.with({ selector: '.owner a:last-of-type' }),
       );
       await tooltip.show();
       expect(await tooltip.getTooltipText()).toBe(
         '“Mullvad VPN AB is owned by parent company Amagicom AB.”',
       );
+    });
+
+    it('says where the company is from, linked to its own page, with its words as the tooltip', async () => {
+      await show('mullvad.vpn');
+      const link = element().querySelector<HTMLAnchorElement>('.owner a');
+
+      // Shown as "Mullvad VPN AB · Sweden", read as "Mullvad VPN AB, from Sweden": the dot is hidden from screen
+      // readers, and the words that replace it are hidden from view.
+      expect(element().querySelector('.owner [aria-hidden="true"]')?.textContent).toBe(' · ');
+      expect(element().querySelector('.owner .visually-hidden')?.textContent).toBe(', from ');
+      const name = link?.querySelector('span')?.textContent;
+      expect([name, link?.href, link?.getAttribute('aria-label')]).toEqual([
+        'Sweden',
+        'https://mullvad.net/en/why-mullvad-vpn#:~:text=a%20VPN%20provider%20based%20in%20Sweden',
+        'Sweden, according to its Why Mullvad VPN?, opens in a new tab',
+      ]);
+      const tooltip = await TestbedHarnessEnvironment.loader(fixture).getHarness(
+        MatTooltipHarness.with({ selector: '.owner a:first-of-type' }),
+      );
+      await tooltip.show();
+      expect(await tooltip.getTooltipText()).toBe('“a VPN provider based in Sweden”');
+    });
+
+    it('names the country without a link when the owner’s own words say it', async () => {
+      const mullvad = providerOf('mullvad.vpn');
+      const owner = mullvad.owner && { ...mullvad.owner, country: { code: 'SE' } };
+      await show('mullvad.vpn', {}, { ...mullvad, owner });
+
+      expect(group('Owner')).toBe('Owner Mullvad VPN AB · Sweden , according to its About us');
+      expect(element().querySelectorAll('.owner a')).toHaveLength(1);
     });
 
     it('has neither for a provider with none', async () => {
@@ -344,8 +374,9 @@ describe('PlanDetails', () => {
       await show('mullvad.vpn');
 
       // Alberta: Canada's own page over the one for everywhere, then the currencies cash takes (M11.5).
+      // No page names the networks its card takes there (the owner's wording, 2026-11-03).
       expect(group('Ways to pay')).toBe(
-        'Ways to pay Card and Gift card , according to its Vouchers in Canada ' +
+        'Ways to pay Card (networks not verified) and Gift card , according to its Vouchers in Canada ' +
           'Cash in EUR, USD or CAD , according to its Terms of service',
       );
       const link = element().querySelector<HTMLAnchorElement>('.payment a');
@@ -367,7 +398,46 @@ describe('PlanDetails', () => {
       await show('mullvad.vpn');
 
       expect(group('Ways to pay')).toBe(
-        'Ways to pay Card, PayPal, Cash and Cryptocurrency , according to its Payment methods ' +
+        'Ways to pay Card (networks not verified), PayPal, Cash and Cryptocurrency , according to its Payment methods ' +
+          'Cash in EUR, USD or CAD , according to its Terms of service',
+      );
+    });
+
+    it('says Card alone where a page names the networks it takes', async () => {
+      const mullvad = providerOf('mullvad.vpn');
+      const networks = {
+        networks: ['visa' as const, 'mastercard' as const],
+        url: 'https://mullvad.net/en/help/vouchers-ca',
+        quotes: ['Visa', 'Mastercard'],
+      };
+      await show('mullvad.vpn', {}, { ...mullvad, acceptedNetworks: { CA: networks } });
+
+      expect(group('Ways to pay')).toMatch(
+        /^Ways to pay Card and Gift card , according to its Vouchers in Canada /,
+      );
+    });
+
+    it('lists each page for the same place, a line each (the owner’s tasks, 2026-11-03)', async () => {
+      const mullvad = providerOf('mullvad.vpn');
+      const klarna = {
+        methods: ['klarna' as const],
+        regions: ['CA'],
+        page: 'Klarna in Canada',
+        url: 'https://mullvad.net/en/help/klarna-ca',
+        quotes: ['Klarna'],
+      };
+      await show(
+        'mullvad.vpn',
+        {},
+        {
+          ...mullvad,
+          paymentMethods: [...(mullvad.paymentMethods ?? []), klarna],
+        },
+      );
+
+      expect(group('Ways to pay')).toBe(
+        'Ways to pay Card (networks not verified) and Gift card , according to its Vouchers in Canada ' +
+          'Klarna , according to its Klarna in Canada ' +
           'Cash in EUR, USD or CAD , according to its Terms of service',
       );
     });

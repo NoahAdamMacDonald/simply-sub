@@ -635,7 +635,7 @@ describe('draftFromAnswer: provider facts (M11.5)', () => {
     });
   });
 
-  it('keeps one entry for everywhere and one per region, and currencies only for ways it takes', () => {
+  it('keeps every page’s entry for the same place, and currencies only for ways it takes', () => {
     const draft = draftFromAnswer(
       answer({
         paymentMethods: [ways, ways, { ...ways, regions: ['UK'] }],
@@ -651,15 +651,11 @@ describe('draftFromAnswer: provider facts (M11.5)', () => {
       factsContext(),
     );
 
-    expect(draft.provider?.paymentMethods).toHaveLength(1);
+    // Entries for the same place add up (the owner's tasks, 2026-11-03): each is one page's list.
+    expect(draft.provider?.paymentMethods).toHaveLength(2);
     expect(draft.provider?.currencies).toBeUndefined();
     expect(draft.issues).toEqual(
       expect.arrayContaining([
-        {
-          kind: 'dropped',
-          subject: 'Ways to pay',
-          reason: 'One entry for everywhere and one per region: the first is kept',
-        },
         { kind: 'dropped', subject: 'Ways to pay in UK', reason: '"UK" isn\'t a region code' },
         {
           kind: 'dropped',

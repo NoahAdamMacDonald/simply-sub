@@ -95,6 +95,126 @@ export function currenciesIn(
   );
 }
 
+/**
+ * How a page writes where a company is (owner.country, the owner's choice of 2026-11-03), beyond the country's English
+ * and French names: its short forms and its people's ("Swiss", "Canada’s"), and the states and provinces an address
+ * names instead of the country ("Bristol, Connecticut", "Toronto, Ontario"). American Express isn't American.
+ */
+const countryWrittenAs: Readonly<Record<string, string>> = {
+  US: [
+    'U\\.S\\.(?:A\\.)?',
+    'USA',
+    'United States of America',
+    'American(?! Express)',
+    'Américaine?s?',
+    'Alabama',
+    'Alaska',
+    'Arizona',
+    'Arkansas',
+    'California',
+    'Californie',
+    'Colorado',
+    'Connecticut',
+    'Delaware',
+    'District of Columbia',
+    'Florida',
+    'Floride',
+    'Georgia',
+    'Hawaii',
+    'Idaho',
+    'Illinois',
+    'Indiana',
+    'Iowa',
+    'Kansas',
+    'Kentucky',
+    'Louisiana',
+    'Maine',
+    'Maryland',
+    'Massachusetts',
+    'Michigan',
+    'Minnesota',
+    'Mississippi',
+    'Missouri',
+    'Montana',
+    'Nebraska',
+    'Nevada',
+    'New Hampshire',
+    'New Jersey',
+    'New Mexico',
+    'New York',
+    'North Carolina',
+    'North Dakota',
+    'Ohio',
+    'Oklahoma',
+    'Oregon',
+    'Pennsylvania',
+    'Rhode Island',
+    'South Carolina',
+    'South Dakota',
+    'Tennessee',
+    'Texas',
+    'Utah',
+    'Vermont',
+    'Virginia',
+    'Washington',
+    'West Virginia',
+    'Wisconsin',
+    'Wyoming',
+  ].join('|'),
+  CA: [
+    'Canadian',
+    'Canadiens?',
+    'Canadiennes?',
+    'Alberta',
+    'British Columbia',
+    'Colombie-Britannique',
+    'Manitoba',
+    'New Brunswick',
+    'Nouveau-Brunswick',
+    'Newfoundland and Labrador',
+    'Terre-Neuve-et-Labrador',
+    'Nova Scotia',
+    'Nouvelle-Écosse',
+    'Ontario',
+    'Prince Edward Island',
+    'Île-du-Prince-Édouard',
+    'Qu[ée]bec',
+    'Saskatchewan',
+    'Northwest Territories',
+    'Territoires du Nord-Ouest',
+    'Nunavut',
+    'Yukon',
+  ].join('|'),
+  CH: 'Swiss|Suisses?',
+  SE: 'Swedish|Suédois(?:es?)?',
+  RO: 'Romanian|Roumaine?s?',
+  GB: 'UK|U\\.K\\.|British|Britannique',
+};
+
+/** A country's names in English and French (ICU's), escaped for a pattern; none where the runtime has no ICU names. */
+function countryNames(code: string): string[] {
+  return ['en', 'fr'].flatMap((locale) => {
+    try {
+      const name = new Intl.DisplayNames([locale], { type: 'region', fallback: 'none' }).of(code);
+      return name ? [name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')] : [];
+    } catch {
+      return [];
+    }
+  });
+}
+
+/**
+ * Whether `text` names `code` (an ISO 3166-1 country) as where a company is: its name in English or French, a short
+ * form or its people's, or one of its states or provinces. Not its code alone: "CA" is California's too.
+ */
+export function namesCountry(text: string, code: string): boolean {
+  const names = [...countryNames(code), countryWrittenAs[code]].filter(Boolean).join('|');
+  return (
+    names.length > 0 &&
+    new RegExp(`(?<![\\p{L}\\p{N}])(?:${names})(?![\\p{L}\\p{N}])`, 'iu').test(text)
+  );
+}
+
 /** A repository's address as the card shows it: its host and path, with no https:// or trailing slash. */
 export function repositoryLabel(url: string): string {
   return url.replace(/^https:\/\//, '').replace(/\/+$/, '');

@@ -80,12 +80,18 @@ export const acceptedNetworksSchema = z
   });
 export type AcceptedNetworks = z.infer<typeof acceptedNetworksSchema>;
 
-/** The ways a provider can be paid (M11.5): cards, wallets, app stores, gift cards, a bank, cash and crypto. */
+/**
+ * The ways a provider can be paid (M11.5): cards, wallets, app stores, gift cards, a bank, cash and crypto. Klarna,
+ * Satispay and Cash App are the wallets the 13's pages named beyond those (the owner's choice, 2026-11-03).
+ */
 export const paymentMethodSchema = z.enum([
   'card',
   'paypal',
   'apple-pay',
   'google-pay',
+  'klarna',
+  'satispay',
+  'cash-app',
   'app-store',
   'gift-card',
   'bank-transfer',
@@ -103,12 +109,14 @@ export const paymentMethodsEntrySchema = z
       .array(paymentMethodSchema)
       .min(1, 'List at least one method')
       .describe(
-        'The ways to pay it names: app-store for billing through Apple, Google or another app store, provider-billing for a TV, internet or phone provider’s bill, other for one not listed here',
+        'The ways to pay it names: app-store for billing through Apple, Google or another app store or platform (Amazon’s Prime Video channels), provider-billing for a TV, internet or phone provider’s bill, bank-transfer for a wire, a direct debit or a bank’s own payment (iDEAL | Wero, Swish), other for one not listed here',
       ),
     regions: z
       .array(regionSchema)
       .min(1, 'Leave regions out when the page is for every buyer')
-      .describe('Only buyers here (a country’s own help page), over the entry for everywhere')
+      .describe(
+        'Only buyers here (a country’s own help page), over the entries for everywhere; entries for the same place add up',
+      )
       .optional(),
     page: textSchema.describe('As the card links it (Payment methods)'),
     url: httpsUrlSchema.describe(
@@ -134,30 +142,13 @@ export const paymentMethodsEntrySchema = z
     });
   });
 
+/**
+ * Every page's list (M11.5). Entries for the same place add up (the owner's tasks, 2026-11-03): one page for the cards
+ * and another for gift cards, both for everywhere, or a region's own pages over everywhere's.
+ */
 export const paymentMethodsSchema = z
   .array(paymentMethodsEntrySchema)
-  .min(1, 'Say how it can be paid')
-  .superRefine((entries, ctx) => {
-    // One entry for everywhere, and a region in one entry at most.
-    const everywhere = entries
-      .map((entry, index) => ({ entry, index }))
-      .filter(({ entry }) => !entry.regions);
-    everywhere.slice(1).forEach(({ index }) =>
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Only one entry is for everywhere: give this one its regions',
-        path: [index, 'regions'],
-      }),
-    );
-    const regions = entries.flatMap((entry, index) =>
-      (entry.regions ?? []).map((region, item) => ({ region, path: [index, 'regions', item] })),
-    );
-    addDuplicateIssues(
-      ctx,
-      regions.map(({ region }) => region),
-      (index) => regions[index].path,
-    );
-  });
+  .min(1, 'Say how it can be paid');
 export type PaymentMethods = z.infer<typeof paymentMethodsSchema>;
 
 /**

@@ -132,7 +132,8 @@ function facts(owner: string, site: string, methods: Provider['paymentMethods'] 
     owner: {
       name: owner,
       page: { name: 'About us', url: `${site}/about` },
-      quotes: [`It is owned by ${owner}.`],
+      quotes: [`It is owned by ${owner}, in the United States.`],
+      country: { code: 'US' },
       lastVerified: '2026-10-20',
     },
     paymentMethods: methods ?? [
@@ -247,6 +248,12 @@ const mullvad = {
     name: 'Mullvad VPN AB',
     page: { name: 'About Mullvad', url: 'https://mullvad.net/en/about' },
     quotes: ['Mullvad VPN AB is owned by parent company Amagicom AB.'],
+    country: {
+      code: 'SE',
+      page: { name: 'Why Mullvad VPN?', url: 'https://mullvad.net/en/why-mullvad-vpn' },
+      quotes: ['a VPN provider based in Sweden'],
+      lastVerified: '2026-10-20',
+    },
     lastVerified: '2026-10-20',
   },
   paymentMethods: [
@@ -292,7 +299,8 @@ const proton = {
   owner: {
     name: 'Proton AG',
     page: { name: 'About Proton', url: 'https://proton.me/about' },
-    quotes: ['Proton services are operated by Proton AG'],
+    quotes: ['Proton services are operated by Proton AG, a Swiss corporation'],
+    country: { code: 'CH' },
     lastVerified: '2026-10-20',
   },
   renewalAnchor: renewsOnSignUp('https://proton.me'),

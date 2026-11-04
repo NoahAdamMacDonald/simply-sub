@@ -60,9 +60,18 @@ describe('stepPlan', () => {
       'https://help.netflix.com/en/node/24926/nz',
       'https://help.netflix.com/en/node/24926/ie',
       'https://help.netflix.com/en/node/24926/nl',
-      // Its accepted cards in each country (M9.2).
+      // Its accepted cards in each country (M9.2; all eleven since the owner's tasks, 2026-11-03).
       'https://help.netflix.com/en/node/116380/ca',
       'https://help.netflix.com/en/node/116380/us',
+      'https://help.netflix.com/en/node/116380/gb',
+      'https://help.netflix.com/en/node/116380/au',
+      'https://help.netflix.com/en/node/116380/nz',
+      'https://help.netflix.com/en/node/116380/ie',
+      'https://help.netflix.com/en/node/116380/de',
+      'https://help.netflix.com/en/node/116380/fr',
+      'https://help.netflix.com/en/node/116380/nl',
+      'https://help.netflix.com/en/node/116380/es',
+      'https://help.netflix.com/en/node/116380/it',
       // The pages its policies cite (M3.9), in its links' order (M11.8).
       'https://help.netflix.com/legal/termsofuse',
       'https://help.netflix.com/legal/privacy',

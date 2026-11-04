@@ -37,6 +37,8 @@ owner:
     url: https://proton.me/about
   quotes:
     - 'Proton services are operated by Proton AG, a Swiss corporation whose primary shareholder is the non-profit Proton Foundation based in Geneva, Switzerland.'
+  country:
+    code: CH
   lastVerified: 2026-11-02
 notes: >-
   One Proton account holds one paid plan. Every plan keeps the free tier of the Proton apps it doesn't upgrade.

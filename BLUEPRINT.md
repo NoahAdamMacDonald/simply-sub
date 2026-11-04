@@ -1457,22 +1457,35 @@ M1.14, M11.1), so a buyer can see what signing up means beyond the price.
   validation warns once it's a year old.
   `citedPages` counts the page as a policy page, so `data:baselines` saves it and checks its quotes; the nightly check
   doesn't read it yet. All 13 have one (ESPN's is 72% Disney's, 18% Hearst's and 10% the NFL's, as its press room
-  says; Netflix, Inc. is a public company; Bitdefender S.R.L., in Bucharest, runs Bitdefender).
+  says; Netflix, Inc. is a public company; Bitdefender S.R.L. runs Bitdefender).
+- **Where it's from** (the owner's choice, 2026-11-03): the owner's `country`, an ISO 3166-1 `code`, required of every
+  provider. Its words are the owner's quotes when they say it (Proton's "a Swiss corporation", Bitdefender's
+  "Bucharest, Romania"), else a `page` of its own with `quotes` and `lastVerified` (Netflix's corporate information,
+  "Los Gatos, CA 95032, USA"; Bell Media's about page, "Canada’s leading media and entertainment company"), on the
+  provider's sites, its policies' or the owner's `website`. Core's `namesCountry` checks the words name the country in
+  English or French, its people ("Swiss") or, in an address, one of its states or provinces ("Bristol, Connecticut",
+  "Burbank, California"), never its code alone ("CA" is California's too). The 13: the US (Netflix, Claude, Xbox Game
+  Pass, Disney+, Hulu, ESPN), Canada (Crave, TSN, RDS, ICI TOU.TV), Switzerland, Sweden and Romania.
 - **Ways to pay** (M11.5's `paymentMethods`, pulled forward on 2026-11-02 at the owner's request, so cash, crypto and
   gift cards are never missed): every provider lists them, as entries of `methods` (card, PayPal, Apple Pay, Google
-  Pay, app-store billing, gift cards, bank transfer, cash, crypto, a TV, internet or phone provider's bill, other)
-  with the `page` and `url` that list them and `quotes` naming each, which validation checks (core's
-  `namesPaymentMethod`, in English and French); one entry for everywhere and others for some `regions`, the page on
-  the provider's own sites, its policies' or its owner's. The card's Ways to pay, after Owner, lists those for the
-  user's country (`paymentMethodsIn`), citing the page with its quotes as the tooltip. `citedPages` counts the page as
+  Pay, Klarna, Satispay, Cash App, app store or platform billing (Amazon's Prime Video channels too), gift cards, a
+  bank transfer or direct debit (iDEAL | Wero, Swish, Bancontact, GoCardless), cash, crypto, a TV, internet or phone
+  provider's bill, other) with the `page` and `url` that list them and `quotes` naming each, which validation checks
+  (core's `namesPaymentMethod`, in English and French); an entry per page, for everywhere or for some `regions`, the
+  page on the provider's own sites, its policies' or its owner's. Entries for the same place add up (the owner's
+  tasks, 2026-11-03): Crave's cards on one page and its gift cards on another, and a region's own entries over
+  everywhere's. The card's Ways to pay, after Owner, lists those for the user's country (`paymentMethodsIn`), a line
+  per page citing it with its quotes as the tooltip, and says "Card (networks not verified)" where no page names the
+  networks its card takes there (no `acceptedNetworks`, the owner's wording). `citedPages` counts the page as
   a pricing page. Since M11.5 it also lists the currencies they can pay in beyond the price lists (`currenciesIn`:
   "Cash in EUR, USD … or NZD, according to its Terms of service"), and two groups follow it: Billing day (the day it
   renews on, citing its page, or a grey "Not stated: its pages don't say") and Source code (the repository, linked,
   citing the page that links it), all in the muted grey (section 4.3).
 - **On the card,** after Terms and policies (M11.2): Outside ratings, each subject's labels (core's `outsideRatings`,
   in the subjects' order: "Protection: 6.0/6.0 from AV-TEST, August 2026 (tested …)"), the rater's name a link to its
-  page in a new tab; then Owner ("Mullvad VPN AB, according to its About us"), the page's name a link with a text
-  fragment to its quotes (`ownerCitation`), which are its tooltip. Both in the muted grey, with no grade's colour.
+  page in a new tab; then Owner ("Mullvad VPN AB · Sweden, according to its About us", read as "Mullvad VPN AB, from
+  Sweden"), the page's name a link with a text fragment to its quotes (`ownerCitation`), which are its tooltip, and
+  the country a link to its own page the same way when it has one. Both in the muted grey, with no grade's colour.
   `data:build` publishes the registry with the catalog (`raters`, section 6.3).
 
 ### 4.11 Finance accounts (planned: M11.10–M11.14)
@@ -3601,6 +3614,18 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-11-03, provider facts for the 13)**
+- **Where each provider is from:** the owner's `country` (an ISO 3166-1 code), quoted like the owner's name: from the
+  owner's quotes when they say it, else from a page of its own (section 4.10). Its words name the country, its people,
+  or in an address a state or province. On the card: "Proton AG · Switzerland".
+- **Ways to pay, complete:** each provider's own payment pages read again, every country's where it differs (Netflix's
+  and Disney+'s eleven). Three wallets became ids: `klarna` (Disney+ in Germany), `satispay` (Netflix and Disney+ in
+  Italy) and `cash-app` (Disney+ in the US). A bank's own payments and direct debits are `bank-transfer`, shown as
+  "Bank transfer or direct debit"; a platform that bills for the provider (Amazon's Prime Video channels) is
+  `app-store`, shown as "App store or platform billing". Entries for the same place add up, a page each.
+- **A card whose networks no page names** says "Card (networks not verified)": Claude, Crave, TSN, RDS, Mullvad,
+  Bitdefender and Xbox Game Pass. Netflix, Disney+, ICI TOU.TV, Hulu, ESPN and Proton name theirs.
 
 **Resolved (2026-11-03, Dependabot alert #2)**
 - **minimatch before 11.0.1** (GHSA-g3hv-75wg-m249, a pattern that amplifies its glob parts): ESLint 10.13,

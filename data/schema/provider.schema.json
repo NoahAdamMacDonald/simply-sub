@@ -106,6 +106,9 @@
                 "paypal",
                 "apple-pay",
                 "google-pay",
+                "klarna",
+                "satispay",
+                "cash-app",
                 "app-store",
                 "gift-card",
                 "bank-transfer",
@@ -115,7 +118,7 @@
                 "other"
               ]
             },
-            "description": "The ways to pay it names: app-store for billing through Apple, Google or another app store, provider-billing for a TV, internet or phone provider’s bill, other for one not listed here"
+            "description": "The ways to pay it names: app-store for billing through Apple, Google or another app store or platform (Amazon’s Prime Video channels), provider-billing for a TV, internet or phone provider’s bill, bank-transfer for a wire, a direct debit or a bank’s own payment (iDEAL | Wero, Swish), other for one not listed here"
           },
           "regions": {
             "minItems": 1,
@@ -125,7 +128,7 @@
               "pattern": "^(?:[A-Z]{2}|GLOBAL)$",
               "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL"
             },
-            "description": "Only buyers here (a country’s own help page), over the entry for everywhere"
+            "description": "Only buyers here (a country’s own help page), over the entries for everywhere; entries for the same place add up"
           },
           "page": {
             "type": "string",
@@ -177,6 +180,9 @@
                 "paypal",
                 "apple-pay",
                 "google-pay",
+                "klarna",
+                "satispay",
+                "cash-app",
                 "app-store",
                 "gift-card",
                 "bank-transfer",
@@ -1656,7 +1662,7 @@
           "format": "uri",
           "pattern": "^https://",
           "patternErrorMessage": "Use a full https:// URL",
-          "description": "The owner's own website, when the page quoted is there: the parent's about page or annual report (Microsoft's for Xbox Game Pass)"
+          "description": "The owner's own website, when a page quoted is there: the parent's about page or annual report (Microsoft's for Xbox Game Pass)"
         },
         "page": {
           "type": "object",
@@ -1685,12 +1691,59 @@
           "items": { "type": "string", "minLength": 1 },
           "description": "Its words there that name the company, word for word"
         },
+        "country": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string",
+              "pattern": "^[A-Z]{2}$",
+              "description": "The country, as an ISO 3166-1 alpha-2 code (GB, not UK)"
+            },
+            "page": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "As the card links it (Corporate information)"
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https://",
+                  "patternErrorMessage": "Use a full https:// URL",
+                  "description": "The provider's own page, its owner's or its policies' that says where the company is"
+                }
+              },
+              "required": ["name", "url"],
+              "additionalProperties": false,
+              "description": "Its page, when the owner’s page doesn’t say where the company is"
+            },
+            "quotes": {
+              "minItems": 1,
+              "maxItems": 3,
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 },
+              "description": "Its words there that name the country, its people (Swiss) or, in an address, a state or province (Ontario)"
+            },
+            "lastVerified": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+              "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+              "description": "When its page was read"
+            }
+          },
+          "required": ["code"],
+          "additionalProperties": false,
+          "description": "Where the company is from (the owner’s choice, 2026-11-03): every provider says"
+        },
         "lastVerified": {
           "type": "string",
           "format": "date",
           "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
           "patternErrorMessage": "Use a real date written YYYY-MM-DD",
-          "description": "When the page was read"
+          "description": "When the pages were read"
         }
       },
       "required": ["name", "page", "quotes", "lastVerified"],

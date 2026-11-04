@@ -41,14 +41,10 @@ describe('paymentMethodsSchema', () => {
     ]);
   });
 
-  it('has one entry for everywhere, and each region in one entry', () => {
+  it('takes several pages for the same place, which add up (the owner’s tasks, 2026-11-03)', () => {
+    const gifts = { ...everywhere, methods: ['gift-card'], quotes: ['Gift cards'] };
     const ca = { ...everywhere, regions: ['CA'] };
-    expect(issues(paymentMethodsSchema, [everywhere, everywhere])).toEqual([
-      '1.regions: Only one entry is for everywhere: give this one its regions',
-    ]);
-    expect(issues(paymentMethodsSchema, [everywhere, ca, ca])).toEqual([
-      '2.regions.0: "CA" is listed more than once',
-    ]);
+    expect(issues(paymentMethodsSchema, [everywhere, gifts, ca, ca])).toEqual([]);
   });
 });
 
@@ -64,6 +60,29 @@ describe('namesPaymentMethod', () => {
     ['Billed by your TV provider', 'provider-billing', true],
     ['Apple App Store', 'app-store', true],
     ['Bank wire', 'bank-transfer', true],
+    // The ways the 13's own pages wrote on 2026-11-03 (the owner's tasks).
+    ['Klarna', 'klarna', true],
+    ['Mobile Wallets: Satispay', 'satispay', true],
+    ['Apple Pay, Cash App, PayPal', 'cash-app', true],
+    ['Apple Pay, Cash App, PayPal', 'cash', false],
+    ['Swish, Eps transfer, Bancontact, iDEAL | Wero, and Przelewy24', 'bank-transfer', true],
+    ['GoCardless (Direct Debit)', 'bank-transfer', true],
+    [
+      'credit card, debit card, bank account, PayPal account, or mobile phone',
+      'bank-transfer',
+      true,
+    ],
+    [
+      'credit card, debit card, bank account, PayPal account, or mobile phone',
+      'provider-billing',
+      true,
+    ],
+    ['mobile operator billing as a payment method', 'provider-billing', true],
+    ['You will be billed by your mobility provider.', 'provider-billing', true],
+    ['Where do I get support for a Bell-billed TSN subscription?', 'provider-billing', true],
+    ['Où obtenir du soutien pour un abonnement facturé par Bell ?', 'provider-billing', true],
+    ['through Amazon Prime Video as an add-on channel', 'app-store', true],
+    ['Apple App Store, Google Play Store and Roku Channel Store', 'app-store', true],
   ] as const)('reads "%s" as %s: %s', (text, method, named) => {
     expect(namesPaymentMethod(text, method)).toBe(named);
   });
@@ -106,10 +125,29 @@ describe('paymentMethodsIn', () => {
   } satisfies PaymentMethods[number];
   const provider = { paymentMethods: [everywhere, ca, eu] satisfies PaymentMethods };
 
-  it('picks the region’s own entry, then its group’s, then the one for everywhere', () => {
-    expect(paymentMethodsIn(provider, 'CA')?.methods).toEqual(['card', 'gift-card']);
-    expect(paymentMethodsIn(provider, 'FR')?.methods).toEqual(['bank-transfer']);
-    expect(paymentMethodsIn(provider, 'US')?.methods).toEqual(['card', 'paypal', 'cash', 'crypto']);
-    expect(paymentMethodsIn({}, 'US')).toBeUndefined();
+  const methodsIn = (where: Parameters<typeof paymentMethodsIn>[0], region: string) =>
+    paymentMethodsIn(where, region).map((entry) => entry.methods);
+
+  it('picks the region’s own entries, then its group’s, then the ones for everywhere', () => {
+    expect(methodsIn(provider, 'CA')).toEqual([['card', 'gift-card']]);
+    expect(methodsIn(provider, 'FR')).toEqual([['bank-transfer']]);
+    expect(methodsIn(provider, 'US')).toEqual([['card', 'paypal', 'cash', 'crypto']]);
+    expect(paymentMethodsIn({}, 'US')).toEqual([]);
+  });
+
+  it('adds up the pages for the same place, in the file’s order (the owner’s tasks, 2026-11-03)', () => {
+    const gifts = {
+      ...everywhere,
+      methods: ['gift-card'],
+      quotes: ['Gift cards'],
+    } satisfies PaymentMethods[number];
+    const mobile = {
+      ...ca,
+      methods: ['provider-billing'],
+      quotes: ['mobile operator billing'],
+    } satisfies PaymentMethods[number];
+    const added = { paymentMethods: [everywhere, ca, gifts, eu, mobile] satisfies PaymentMethods };
+    expect(methodsIn(added, 'US')).toEqual([['card', 'paypal', 'cash', 'crypto'], ['gift-card']]);
+    expect(methodsIn(added, 'CA')).toEqual([['card', 'gift-card'], ['provider-billing']]);
   });
 });

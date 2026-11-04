@@ -300,7 +300,8 @@ async function typeRenewal(page, date) {
         check(
           `${label}: Ways to pay names the currencies cash takes, citing its terms`,
           payWords ===
-            'Ways to pay Cash, Cryptocurrency, Card, Bank transfer, PayPal, App store billing and Gift card, according to its Terms of service ' +
+            'Ways to pay Cash, Cryptocurrency, Bank transfer or direct debit, Card (networks not verified) and PayPal, according to its Pricing ' +
+              'App store or platform billing and Gift card, according to its Terms of service ' +
               'Cash in EUR, USD, GBP, SEK, NOK, CHF, CAD, AUD or NZD, according to its Terms of service',
           payWords,
         );
@@ -337,7 +338,8 @@ async function typeRenewal(page, date) {
           );
         }
         // Keyboard: from the ways to pay's link, Tab reaches the currencies', then the repository and its page.
-        await pay.locator('a').first().focus();
+        // Its two pages' links (the pricing page, then its terms: the owner's tasks, 2026-11-03), then the currencies'.
+        await pay.locator('a').nth(1).focus();
         await page.keyboard.press('Tab');
         const currenciesFocus = await focusedName(page);
         const currenciesTip = await tooltipText(page);
