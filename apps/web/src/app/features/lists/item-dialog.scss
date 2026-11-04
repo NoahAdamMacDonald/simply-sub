@@ -46,8 +46,13 @@ h4 {
   text-align: start;
   cursor: pointer;
 
+  // Hovered, its count goes to the text's full colour: the muted grey on the tint is below AA in dark mode.
   &:hover {
     background-color: var(--ss-state-hover);
+
+    .count {
+      color: var(--ss-text);
+    }
   }
 
   &:focus-visible {

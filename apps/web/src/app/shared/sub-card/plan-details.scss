@@ -24,8 +24,10 @@
   white-space: nowrap;
   cursor: pointer;
 
+  // Hovered, an unchosen tab's name goes to the text's full colour: a tint behind it would take its muted grey
+  // below AA in dark mode.
   &:hover {
-    background: var(--ss-state-hover);
+    color: var(--ss-text);
   }
 
   &[aria-selected='true'] {
