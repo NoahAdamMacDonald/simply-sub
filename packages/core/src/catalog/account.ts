@@ -87,6 +87,72 @@ export const rateTierSchema = z.strictObject({
 });
 export type RateTier = z.infer<typeof rateTierSchema>;
 
+/** A rate in place of the tiers when the user meets a condition (EQ Bank: $2,000 of direct deposits a month). */
+const rateBonusSchema = z
+  .strictObject({
+    rate: percentSchema,
+    when: accountConditionSchema.describe(
+      'What earns it (EQ Bank: $2,000 of direct deposits a month)',
+    ),
+  })
+  .describe(
+    'A rate in place of the tiers when the user meets a condition (the owner’s choice of 2026-11-03, M11.10)',
+  );
+
+const rateTiersSchema = z
+  .array(rateTierSchema)
+  .min(1, 'Give at least one rate')
+  .describe('% a year by balance, from the lowest up: the first from 0');
+
+/** Rates an account paid before: until the day the next took over, and since when, when the catalog knows (M11.14). */
+export const rateHistoryEntrySchema = z.strictObject({
+  since: isoDateSchema.describe('The day these rates took over, when the catalog knows').optional(),
+  until: isoDateSchema.describe('The day the next rates took over'),
+  tiers: rateTiersSchema,
+  bonus: rateBonusSchema.optional(),
+});
+export type RateHistoryEntry = z.infer<typeof rateHistoryEntrySchema>;
+
+/** How soon an account's rates followed one of the Bank of Canada's changes (M11.14). */
+export const followedChangeSchema = z.strictObject({
+  change: isoDateSchema.describe(
+    'The day a change of the Bank of Canada’s target for the overnight rate took effect',
+  ),
+  rate: percentSchema.describe('The Bank’s rate from then'),
+  on: isoDateSchema
+    .describe(
+      "The day the account's rates next changed, before the Bank's next change. Left out when they didn't, or haven't yet",
+    )
+    .optional(),
+});
+export type FollowedChange = z.infer<typeof followedChangeSchema>;
+
+/** Each tier's order rules: the first from 0, then each from a higher balance. */
+function checkTiers(
+  tiers: readonly RateTier[],
+  ctx: z.RefinementCtx,
+  path: readonly (string | number)[],
+): void {
+  if (tiers[0] && tiers[0].from !== 0) {
+    ctx.addIssue({
+      code: 'custom',
+      message: 'Start the first tier at a balance of 0',
+      path: [...path, 0, 'from'],
+    });
+  }
+  tiers.forEach((tier, index) => {
+    const lower = tiers[index - 1];
+    if (lower && tier.from <= lower.from) {
+      ctx.addIssue({
+        code: 'custom',
+        message:
+          'List the tiers from the lowest balance up, each from a higher balance than the one before',
+        path: [...path, index, 'from'],
+      });
+    }
+  });
+}
+
 /** Posted rates only, never a promotional one (as prices are regular prices): the bot reads them as it reads prices. */
 export const accountRatesSchema = z
   .strictObject({
@@ -100,43 +166,64 @@ export const accountRatesSchema = z
       .describe(
         "How the tiers apply: whole pays the whole balance its tier's rate; portion pays each part of the balance its own tier's",
       ),
-    tiers: z
-      .array(rateTierSchema)
-      .min(1, 'Give at least one rate')
-      .describe('% a year by balance, from the lowest up: the first from 0'),
-    bonus: z
-      .strictObject({
-        rate: percentSchema,
-        when: accountConditionSchema.describe(
-          'What earns it (EQ Bank: $2,000 of direct deposits a month)',
-        ),
-      })
+    tiers: rateTiersSchema,
+    bonus: rateBonusSchema.optional(),
+    since: isoDateSchema
       .describe(
-        'A rate in place of the tiers when the user meets a condition (the owner’s choice of 2026-11-03, M11.10)',
+        'The day these rates took over, when known: the page’s effective date, or the night the bot read a change (M11.14)',
       )
       .optional(),
     sourceUrl: httpsUrlSchema.describe("The provider's own page that posts the rates"),
     lastVerified: isoDateSchema.describe('When the rates were read'),
+    history: z
+      .array(rateHistoryEntrySchema)
+      .min(1, 'Leave history out instead of listing none')
+      .describe(
+        'The rates it paid before, newest first, each until the day the next took over: the bot adds one when it reads a change (M11.14, the owner’s choice: kept in the provider file)',
+      )
+      .optional(),
+    followed: z
+      .array(followedChangeSchema)
+      .describe(
+        "Written by data:build, never in data/: how soon a rate that follows the Bank of Canada's followed its last changes, newest first, from history and data/bank-of-canada.yaml (M11.14)",
+      )
+      .optional(),
   })
   .superRefine((rates, ctx) => {
-    if (rates.tiers[0] && rates.tiers[0].from !== 0) {
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Start the first tier at a balance of 0',
-        path: ['tiers', 0, 'from'],
-      });
-    }
-    rates.tiers.forEach((tier, index) => {
-      const lower = rates.tiers[index - 1];
-      if (lower && tier.from <= lower.from) {
+    checkTiers(rates.tiers, ctx, ['tiers']);
+    const history = rates.history ?? [];
+    history.forEach((entry, index) => {
+      checkTiers(entry.tiers, ctx, ['history', index, 'tiers']);
+      const newer = history[index - 1];
+      const until = newer?.since ?? (index === 0 ? rates.since : undefined);
+      if (newer && entry.until >= newer.until) {
         ctx.addIssue({
           code: 'custom',
-          message:
-            'List the tiers from the lowest balance up, each from a higher balance than the one before',
-          path: ['tiers', index, 'from'],
+          message: 'List the history newest first, each ending before the one above it',
+          path: ['history', index, 'until'],
+        });
+      } else if (until !== undefined && entry.until > until) {
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Must be no later than the day the rates after it took over',
+          path: ['history', index, 'until'],
+        });
+      }
+      if (entry.since !== undefined && entry.since >= entry.until) {
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Must be before its until',
+          path: ['history', index, 'since'],
         });
       }
     });
+    if (rates.since !== undefined && rates.since > rates.lastVerified) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Must be no later than lastVerified',
+        path: ['since'],
+      });
+    }
   });
 export type AccountRates = z.infer<typeof accountRatesSchema>;
 

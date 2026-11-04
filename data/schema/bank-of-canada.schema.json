@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "source": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "patternErrorMessage": "Use a full https:// URL",
+      "description": "The Bank's own series of the target for the overnight rate: Valet's V39079"
+    },
+    "lastVerified": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+      "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+      "description": "When the series was last read"
+    },
+    "changes": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "on": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+            "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+            "description": "The day the new rate took effect: its first observation in the series"
+          },
+          "rate": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "The target for the overnight rate from then, in percent: 2.25 means 2.25%"
+          }
+        },
+        "required": ["on", "rate"],
+        "additionalProperties": false
+      },
+      "description": "Each change, newest first"
+    }
+  },
+  "required": ["source", "lastVerified", "changes"],
+  "additionalProperties": false,
+  "title": "Simply Sub Bank of Canada rate",
+  "description": "data/bank-of-canada.yaml: the Bank of Canada's target for the overnight rate, each change from the Bank's own Valet series (M11.14)"
+}

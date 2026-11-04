@@ -45,11 +45,11 @@ describe('validateCatalog', () => {
     it.each([
       [
         'data/notes.yaml',
-        'data/notes.yaml: Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/automation.yaml, data/redirects.yaml, data/raters.yaml, data/providers/<id>.yaml, data/bundles/<slug>.yaml or data/policies/<id>.yaml',
+        'data/notes.yaml: Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/automation.yaml, data/redirects.yaml, data/raters.yaml, data/bank-of-canada.yaml, data/providers/<id>.yaml, data/bundles/<slug>.yaml or data/policies/<id>.yaml',
       ],
       [
         'data/providers/old/netflix.yaml',
-        'data/providers/old/netflix.yaml: Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/automation.yaml, data/redirects.yaml, data/raters.yaml, data/providers/<id>.yaml, data/bundles/<slug>.yaml or data/policies/<id>.yaml',
+        'data/providers/old/netflix.yaml: Not a catalog file: use data/features.yaml, data/categories.yaml, data/resellers.yaml, data/policy-topics.yaml, data/queue.yaml, data/automation.yaml, data/redirects.yaml, data/raters.yaml, data/bank-of-canada.yaml, data/providers/<id>.yaml, data/bundles/<slug>.yaml or data/policies/<id>.yaml',
       ],
       [
         'data/providers/hulu.yml',

@@ -1,4 +1,6 @@
 import * as z from 'zod';
+import type { AccountRates } from './account';
+import { bankOfCanadaFileSchema, type BankOfCanadaChange } from './bank-of-canada';
 import { bundleSchema, type Bundle } from './bundle';
 import { categoriesFileSchema, type Categories } from './category';
 import { featuresFileSchema, type Feature } from './feature';
@@ -10,6 +12,7 @@ import { raterSchema, ratersFileSchema, type Rater } from './rater';
 import { redirectSchema, redirectsFileSchema, type Redirect } from './redirects';
 import { resellerSchema, resellersFileSchema, type Reseller } from './reseller';
 import { policyFilePath } from './policy-files';
+import { followedChanges } from './rate-follow';
 import { locateCatalogFile, type CatalogSourceFile } from './validate-catalog';
 
 // The catalog snapshot (BLUEPRINT §5.2, §6.3): the body of GET /catalog, which is also published byte for byte
@@ -139,6 +142,8 @@ export interface CatalogSource {
   redirects: Redirect[];
   /** data/raters.yaml's, or none without the file. */
   raters: Rater[];
+  /** data/bank-of-canada.yaml's changes, newest first, or none without the file (M11.14). */
+  bankOfCanada: BankOfCanadaChange[];
   /** Provider or reseller id → its logo, a PNG from data/logos/. */
   logos: ReadonlyMap<string, Uint8Array>;
 }
@@ -157,6 +162,7 @@ export function readCatalogSource(files: readonly CatalogSourceFile[]): CatalogS
   const policySets: PolicySet[] = [];
   let redirects: Redirect[] = [];
   let raters: Rater[] = [];
+  let bankOfCanada: BankOfCanadaChange[] = [];
   const logos = new Map<string, Uint8Array>();
   for (const source of files) {
     const where = locateCatalogFile(source.file);
@@ -193,6 +199,9 @@ export function readCatalogSource(files: readonly CatalogSourceFile[]): CatalogS
       case 'raters':
         raters = parsed(ratersFileSchema, source);
         break;
+      case 'bank-of-canada':
+        bankOfCanada = parsed(bankOfCanadaFileSchema, source).changes;
+        break;
     }
   }
   if (!features || !categories) {
@@ -209,6 +218,7 @@ export function readCatalogSource(files: readonly CatalogSourceFile[]): CatalogS
     policySets: policySets.sort(byId),
     redirects,
     raters: raters.sort(byId),
+    bankOfCanada,
     logos,
   };
 }
@@ -224,7 +234,9 @@ function parsed<T>(schema: z.ZodType<T>, source: CatalogSourceFile): T {
 /**
  * The snapshot's data: the source files, in a fixed order. A provider or reseller with a logo gets its icon URL; one
  * without has none, and the app shows its first letter. A provider's policies and the shared documents are files of
- * their own (M11.8, policy-files.ts): a provider that rates its policies gets the URL of its file instead.
+ * their own (M11.8, policy-files.ts): a provider that rates its policies gets the URL of its file instead. An account's
+ * rate history stays in data/, and its rates say how soon they followed the Bank of Canada's last changes instead
+ * (M11.14, rate-follow.ts).
  */
 export function buildCatalogData(
   source: CatalogSource,
@@ -244,6 +256,17 @@ export function buildCatalogData(
       website,
       ...(source.logos.has(id) && { iconUrl: `${iconBaseUrl}${catalogIconFile(id)}` }),
       ...rest,
+      plans: rest.plans.map((plan) =>
+        plan.account?.rates
+          ? {
+              ...plan,
+              account: {
+                ...plan.account,
+                rates: snapshotRates(plan.account.rates, source.bankOfCanada),
+              },
+            }
+          : plan,
+      ),
       ...(policies && { policiesUrl: `${siteUrl}${policyFilePath(id)}` }),
     })),
     bundles: source.bundles,
@@ -258,6 +281,15 @@ export function buildCatalogData(
     ...(source.raters.length > 0 && { raters: source.raters }),
     ...(source.redirects.length > 0 && { redirects: source.redirects }),
   };
+}
+
+/** An account's rates as the app has them: without their history, with how soon they followed the Bank of Canada. */
+function snapshotRates(
+  { history, ...rates }: AccountRates,
+  changes: readonly BankOfCanadaChange[],
+): AccountRates {
+  const followed = followedChanges({ ...rates, ...(history && { history }) }, changes);
+  return { ...rates, ...(followed.length > 0 && { followed }) };
 }
 
 /** The snapshot's meta. `catalogVersion` is a hash of data's JSON, which the caller computes. */
