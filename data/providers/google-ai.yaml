@@ -783,6 +783,7 @@ plans:
         meet-premium,
         calendar-scheduling,
       ]
+    notes: Project Genie comes with every Ultra plan on the Gemini pages, but Google One's page says Ultra 20x only.
     prices:
       - region: CA
         currency: CAD
@@ -999,6 +1000,8 @@ plans:
 # conduct it forbids, no topic's); Google One's plans page adds YouTube's terms for the YouTube benefit, not read (no
 # plan's own clause). Google Play's refund article says partial refunds for subscriptions are for France, Germany,
 # Israel and New York, but shows the details only to an account there: left unread, so no rating for FR or DE.
+# Retention is Bad, the review's grade (2026-11-04): chats people reviewed outlive their deletion, and they aren't
+# anonymized, since Google's own retention page calls queries "disconnected from users’ Google Accounts" pseudonymized.
 policies:
   shared: [google-terms, google-privacy]
   links:
@@ -1054,15 +1057,15 @@ policies:
         url: https://support.google.com/gemini/answer/13278892
       lastVerified: 2026-11-04
     - topic: privacy.data-retention
-      tier: neutral
-      reason: 'Gemini deletes your chats after 18 months unless you pick 3 or 36 months or never, and keeps them 72 hours with Keep Activity off. Chats people reviewed stay up to 3 years, apart from your account, even if you delete them.'
+      tier: bad
+      reason: 'Chats people review are kept up to 3 years even after you delete them, and help train its AI. Turning off Keep Activity stops new chats being reviewed.'
       sources:
         - url: https://support.google.com/gemini/answer/13594961
-          quote: 'Your activity is auto-deleted after 18 months. You can change this to 3 or 36 months, or choose not to auto-delete.'
-        - url: https://support.google.com/gemini/answer/13594961
-          quote: 'Temporary chats and chats you have when Keep Activity is off are retained with your account for 72 hours'
-        - url: https://support.google.com/gemini/answer/13594961
           quote: 'Chats reviewed by human reviewers (and related data like your language, device type, location info, or feedback) are not deleted when you delete your activity. Instead, they are retained for up to three years.'
+        - url: https://support.google.com/gemini/answer/13594961
+          quote: 'We use their suggestions to help our models respond better in the future.'
+        - url: https://support.google.com/gemini/answer/13594961
+          quote: 'To stop your future chats from being reviewed to improve Google services, turn off your Keep Activity setting.'
       lastVerified: 2026-11-04
     - topic: billing.cancellation
       tier: great
@@ -1130,7 +1133,7 @@ policies:
       lastVerified: 2026-11-04
     - topic: legal.service-changes
       tier: poor
-      reason: 'AI credits you buy may be lost when your plan ends, and Google can change how many credits each use costs whenever it likes.'
+      reason: 'AI credits you buy may be lost when your plan ends, and Google can change how many credits each use costs.'
       sources:
         - url: https://one.google.com/terms-of-service
           quote: 'Google reserves the right to modify the credit cost for using AI features.'
@@ -1166,4 +1169,16 @@ policies:
           quote: 'Take care since Gemini can make mistakes, like making purchases or sharing your data with third parties unexpectedly.'
         - url: https://support.google.com/gemini/answer/13594961
           quote: 'You can control how often Gemini asks for your permission before taking actions.'
+      lastVerified: 2026-11-04
+    - topic: other.notable
+      title: Opting out disconnects Workspace
+      tier: poor
+      reason: "If you turn off Keep Activity so people don't review your chats to improve its AI, Gemini can't reach your Google Workspace apps until you turn it back on."
+      sources:
+        - url: https://support.google.com/gemini/answer/13594961
+          quote: 'To stop your future chats from being reviewed to improve Google services, turn off your Keep Activity setting.'
+        - url: https://support.google.com/gemini/answer/13594961
+          quote: 'At this time, other Connected Apps like Google Workspace are unavailable if you turn off Keep Activity'
+        - url: https://support.google.com/gemini/answer/13594961
+          quote: "Turning Keep Activity back on restores Gemini's access to apps that were previously connected."
       lastVerified: 2026-11-04

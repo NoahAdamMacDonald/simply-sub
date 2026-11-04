@@ -41,12 +41,14 @@ ratings:
     lastVerified: 2026-11-04
   - topic: legal.content-rights
     tier: poor
-    reason: 'What you upload stays yours, but Google gets a worldwide licence to copy and change it to run and improve its services, and the licence lasts as long as copyright does, even after you delete it.'
+    reason: 'Google may copy and change what you upload, and its licence lasts as long as copyright does: deleting something only stops Google making it public.'
     sources:
       - url: https://policies.google.com/terms
         quote: 'modify and create derivative works based on your content, such as reformatting or translating it'
       - url: https://policies.google.com/terms
         quote: 'This license lasts for as long as your content is protected by intellectual property rights.'
+      - url: https://policies.google.com/terms
+        quote: 'If you remove from our services any content that’s covered by this license, then our systems will stop making that content publicly available in a reasonable amount of time.'
     lastVerified: 2026-11-04
   - topic: legal.service-changes
     tier: neutral

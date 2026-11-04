@@ -52,12 +52,14 @@ ratings:
     lastVerified: 2026-11-04
   - topic: privacy.ads-tracking
     tier: neutral
-    reason: 'It picks the ads you see from what you do with Google, on its services and other sites. You can turn that off for your whole account in My Ad Center.'
+    reason: 'It picks the ads you see from what you do with Google. In your ad settings you can choose whether your personal information is used for them, on Google and on its partners’ sites and apps.'
     sources:
       - url: https://policies.google.com/privacy
         quote: 'Depending on your settings, we may also show you personalized ads based on your interests, activity, or personalized content from Google services.'
       - url: https://policies.google.com/privacy
         quote: 'You can control what information we use to show you ads by visiting your ad settings in My Ad Center'
+      - url: https://policies.google.com/privacy
+        quote: 'Manage your preferences about the ads shown to you on Google and on sites and apps that partner with Google to show ads. You can modify your interests, choose whether your personal information is used to make ads more relevant to you, and turn on or off certain advertising services.'
     action:
       name: 'Your privacy controls'
       url: https://policies.google.com/privacy#infochoices
@@ -88,8 +90,8 @@ ratings:
         quote: 'Data can remain on these systems for up to 6 months.'
     lastVerified: 2026-11-04
   - topic: privacy.data-portability
-    tier: great
-    reason: 'You can download everything in your Google Account yourself with Google Takeout, in common formats like vCard, with a guide to the files in every download.'
+    tier: good
+    reason: 'You can download the content in your Google Account yourself with Google Takeout, in common formats like vCard, with a guide to the files in every download.'
     sources:
       - url: https://policies.google.com/privacy
         quote: 'You can export a copy of content in your Google Account if you want to back it up or use it with a service outside of Google.'
@@ -103,7 +105,7 @@ ratings:
     lastVerified: 2026-11-04
   - topic: privacy.government-requests
     tier: good
-    reason: 'It checks that each request follows the law, emails you before handing anything over unless a law forbids it, and publishes how many requests it gets. It holds a lot that could be asked for.'
+    reason: 'It checks that each request follows the law, emails you before handing anything over unless a law forbids it, and publishes how many requests it gets.'
     sources:
       - url: https://policies.google.com/terms/information-requests
         quote: 'We carefully review each request to make sure it satisfies applicable laws.'
