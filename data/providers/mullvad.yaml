@@ -353,6 +353,9 @@ resellers:
 # no-logging policy, and (2026-11-02) its post on Radically Open Security's infrastructure audit, its audits, its
 # bug-reporting page and its pricing page (cash). Free trials are not
 # applicable (it has none) and closing accounts not stated (its terms don't say), statuses since M11.1.
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read that day: its terms include no other document,
+# its apps have no licence of their own beyond being open source (/en/open-source, /en/why-mullvad-vpn), and there's
+# no sign-up form to agree to (the app makes an account number). Its post on in-app updates says how they arrive.
 policies:
   links:
     - name: 'Terms of service'
@@ -369,6 +372,12 @@ policies:
       url: https://mullvad.net/en/blog/tag/audits
     - name: 'Reporting a bug or vulnerability'
       url: https://mullvad.net/en/help/how-report-bug-or-vulnerability
+    - name: 'Open source'
+      url: https://mullvad.net/en/open-source
+    - name: 'Why Mullvad VPN?'
+      url: https://mullvad.net/en/why-mullvad-vpn
+    - name: 'Updating the app'
+      url: https://mullvad.net/en/blog/updating-the-mullvad-vpn-app-just-got-easier
   ratings:
     - topic: privacy.data-collection
       tier: great
@@ -562,4 +571,20 @@ policies:
       status: not-stated
       reason: 'Its terms name no limit beyond the number of devices an account works on, which its plan shows.'
       pages: [https://mullvad.net/en/help/terms-service]
+      lastVerified: 2026-11-03
+    - topic: legal.licence
+      tier: great
+      reason: 'Its apps are open source: their code is open for anyone to read and use.'
+      sources:
+        - url: https://mullvad.net/en/why-mullvad-vpn
+          quote: 'Code is open source'
+        - url: https://mullvad.net/en/open-source
+          quote: "At Mullvad, we believe in the open-source model in which a program's source code is made available, or open, to anyone for viewing and using."
+      lastVerified: 2026-11-03
+    - topic: service.software-control
+      tier: great
+      reason: 'On Windows and Mac, its app shows you what a new version contains, and you choose to download it from inside the app.'
+      sources:
+        - url: https://mullvad.net/en/blog/updating-the-mullvad-vpn-app-just-got-easier
+          quote: 'Windows and macOS users can now see what new updates contain and download them through the app directly.'
       lastVerified: 2026-11-03

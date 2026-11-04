@@ -54,9 +54,10 @@ back to this scale:
 
 ### 1.3 How to grade (in this order, every time)
 
-1. **Find the clause(s)** for the topic and quote them (as today: word for word, up to three). Read the terms, the
-   privacy policy, and the help centre's billing and privacy sections. A grade read from a form or a sign-up flow
-   quotes the page that hosts it, and the reason says so.
+1. **Find the clause(s)** for the topic and quote them (as today: word for word, up to three). Read every document a
+   user agrees to (the owner's rule, 2026-11-03): the terms, the privacy policy, its apps' licence, what the sign-up
+   checkbox names and what any of them includes by reference; then the help centre's billing and privacy sections. A
+   grade read from a form or a sign-up flow quotes the page that hosts it, and the reason says so.
 2. **Default:** what happens if you do nothing? Protective → Great or Good. Not protective → Neutral or worse (§1.2).
 3. **Control:** if the default isn't protective, how do you change it?
    - **Self-serve:** the change takes effect without a person acting on it, for the account on every device: a
@@ -310,6 +311,8 @@ change: a `title` on ratings of this topic.
 | A fee to cancel | cancellation (Bad), and `cancelFee` |
 | A currency markup at checkout | fees |
 | A game removed from your purchased library | service-changes |
+| What its apps' licence lets you do (personal or non-commercial use only, one person per copy, no reviews or benchmarks) | licence |
+| Apps that update themselves, change your settings or remove other software | software-control |
 
 ### 1.6 What changes outside the topic file
 

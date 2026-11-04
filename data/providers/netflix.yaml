@@ -765,6 +765,9 @@ addOns:
 # on them. Its billing and legal ratings, read in the Canadian terms, stand for everywhere a country's own aren't read.
 # The US's, read 2026-11-03 through a US exit, grade the same but for disputes: arbitration
 # with a class-action waiver and an opt-out within 30 days, a US rating (the nightly check sees one country's version).
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read that day: its terms put games and live votes
+# (Interactive Features) under its Netflix Games Community Guidelines too, whose bans for breaking them grade as its
+# terms' do. The sign-up form's agreement line shows only after an email address is entered, so it wasn't read.
 policies:
   links:
     - name: 'Terms of use'
@@ -779,6 +782,8 @@ policies:
       url: https://hackerone.com/netflix
     - name: 'Cancelling'
       url: https://help.netflix.com/en/node/407
+    - name: 'Games community guidelines'
+      url: https://help.netflix.com/legal/gamescommunityguidelines
   ratings:
     - topic: privacy.data-collection
       tier: poor
@@ -889,12 +894,14 @@ policies:
       lastVerified: 2026-11-03
     - topic: legal.account-closure
       tier: neutral
-      reason: "It can shut down or limit your account if you break its rules or use it for fraud, and it won't give your money back."
+      reason: "It can shut down or limit your account if you break its rules or use it for fraud, and it won't give your money back. Breaking its games' rules can get your whole account banned too."
       sources:
         - url: https://help.netflix.com/legal/termsofuse
           quote: 'We may terminate or restrict your use of our service if you violate these Terms of Use or are engaged in illegal or fraudulent use of the service.'
         - url: https://help.netflix.com/legal/termsofuse
           quote: 'To the extent permitted by the applicable law, payments are non-refundable'
+        - url: https://help.netflix.com/legal/gamescommunityguidelines
+          quote: 'temporarily or permanently suspending your access to a game or game feature, and potentially permanently banning your Netflix account'
       lastVerified: 2026-11-03
     - topic: service.account-sharing
       tier: neutral

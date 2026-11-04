@@ -156,6 +156,10 @@ addOns:
 # Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: the Bell Media terms and Bell's page on how it
 # collects and uses data, which Crave's FAQ links. Not rated: data collection and deletion (that page doesn't
 # say), free trials, account sharing and device limits.
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read that day: its terms include "Technical
+# Requirements" and "Content Security Requirements" set out in its FAQ, which no FAQ page names as such (its
+# answers on devices and video quality are features'), and a subscription through a TV provider (an "Authorized
+# Distributor") adds that provider's terms, not read. The subscribe form comes after signing in: not read.
 policies:
   shared: [bell-privacy]
   links:

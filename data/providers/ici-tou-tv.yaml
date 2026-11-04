@@ -172,6 +172,11 @@ plans:
 # Canada's privacy notice, in French (the notice's sections didn't render, only its cookie notice). Not rated: the
 # other privacy topics. Free trials are not applicable (none), and account sharing and device limits not stated by its
 # conditions, statuses since M11.1.
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read that day: subscribing accepts CBC/Radio-Canada's
+# general terms for its digital services too ("aux conditions d’utilisation générales de l’espace numérique"), whose
+# answers open one by one (read in Edge, each opened). Their account blocking "à son entière discrétion" makes closing
+# your account Bad, and their changes, told by email with no lead time, make changes to the terms Neutral. The
+# subscription itself starts after signing in, so its form's agreement line wasn't read.
 policies:
   links:
     - name: "Conditions d'utilisation (in French)"
@@ -182,6 +187,8 @@ policies:
       url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/avis-de-confidentialite-plateformes-numeriques.pdf
     - name: 'Abonnements (in French)'
       url: https://ici.tou.tv/abonnement
+    - name: "Conditions d'utilisation de l'espace numérique (in French)"
+      url: https://cbc.radio-canada.ca/fr/vision/gouvernance/conditions-dutilisations-espace-numerique
   ratings:
     - topic: privacy.ads-tracking
       tier: poor
@@ -239,20 +246,24 @@ policies:
           quote: 'Les parties conviennent de reconnaître la compétence exclusive des tribunaux du Québec du district judiciaire de Montréal'
       lastVerified: 2026-11-03
     - topic: legal.terms-changes
-      tier: good
-      reason: 'It warns you 30 days before its conditions change, and you can say no by cancelling.'
+      tier: neutral
+      reason: 'Its subscription conditions promise 30 days’ warning, but CBC/Radio-Canada’s general terms, which you accept too, only promise an email about big changes, with no time given. You can say no by cancelling.'
       sources:
         - url: https://ici.tou.tv/abonnement/condition
           quote: 'Une telle modification entrera en vigueur automatiquement, sous réserve d’un préavis de 30 jours aux abonnés concernés'
         - url: https://ici.tou.tv/abonnement/condition
           quote: 'vous pourrez refuser cette modification en annulant votre abonnement.'
+        - url: https://cbc.radio-canada.ca/fr/vision/gouvernance/conditions-dutilisations-espace-numerique
+          quote: 'Quand nous y apportons d’importants changements, nous vous informons par courriel si vous avez un compte CBC/Radio-Canada.'
       lastVerified: 2026-11-03
     - topic: legal.account-closure
-      tier: neutral
-      reason: 'If you break its rules, it can cut off your access or end your subscription right away, without warning.'
+      tier: bad
+      reason: 'If you break its rules, it can end your subscription right away, without warning. CBC/Radio-Canada’s general terms also let it ban or block your account whenever it decides to, with no refund promised.'
       sources:
         - url: https://ici.tou.tv/abonnement/condition
           quote: 'En cas de non-respect des Conditions d’utilisation, CBC/Radio-Canada se réserve le droit de suspendre votre accès ou de mettre fin à votre abonnement immédiatement sans aucun autre avis ou délai.'
+        - url: https://cbc.radio-canada.ca/fr/vision/gouvernance/conditions-dutilisations-espace-numerique
+          quote: "CBC/Radio-Canada peut également vous retirer l'autorisation de publier des commentaires, ou encore bannir ou bloquer votre compte, à son entière discrétion."
       lastVerified: 2026-11-03
     - topic: service.account-sharing
       status: not-stated

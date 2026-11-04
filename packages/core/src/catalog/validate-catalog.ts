@@ -1448,25 +1448,37 @@ function checkFeatureCategories(
 
 /**
  * A topic and a feature on the same fact both stay, the feature for ranking and the topic for the card, and must agree
- * (M11.1, the guide's §1.3 step 9): a rating of `tier` on `topic` needs `value` in `feature` on every plan it covers
- * that has `parent`. A rule whose feature isn't in the registry yet is inactive.
+ * (M11.1, the guide's §1.3 step 9): a rating of `tier` on `topic` needs one of `values` in `feature` (provider-wide
+ * features included) on every plan it covers, or only those that have `parent` when it names one. A rule whose
+ * feature isn't in the registry yet is inactive.
  */
 export const topicFeatureRules: readonly {
   topic: string;
   tier: PolicyTier;
   feature: string;
-  value: string;
-  parent: string;
+  values: readonly string[];
+  parent?: string;
   /** Why, after "Great needs …". */
   needs: string;
+  /** The other way out, after "grade it lower, or …". */
+  fix: string;
 }[] = [
   {
     topic: 'service.activity-logging',
     tier: 'great',
     feature: 'vpn.independent-audits',
-    value: 'no-logs',
+    values: ['no-logs'],
     parent: 'vpn.included',
     needs: 'an independent audit of the no-logs claim',
+    fix: 'add the audit to the feature with its source',
+  },
+  {
+    topic: 'legal.licence',
+    tier: 'great',
+    feature: 'software.open-source',
+    values: [...openSourceValues],
+    needs: 'open-source apps',
+    fix: 'state software.open-source from its own page',
   },
 ];
 
@@ -1492,16 +1504,17 @@ function checkTopicFeatures(provider: Provider, context: CheckContext, report: R
       if (rating.topic !== rule.topic || rating.tier !== rule.tier) continue;
       const lacking = provider.plans.filter((plan) => {
         if (rating.plans && !rating.plans.includes(plan.id)) return false;
-        const values = plan.features[rule.feature];
-        return (
-          plan.features[rule.parent] === true &&
-          !(Array.isArray(values) && values.includes(rule.value))
+        const features = planFeatures(plan, provider);
+        if (rule.parent !== undefined && features[rule.parent] !== true) return false;
+        const value = features[rule.feature];
+        return !(Array.isArray(value) ? value : [value]).some(
+          (one) => typeof one === 'string' && rule.values.includes(one),
         );
       });
       if (lacking.length > 0) {
         report(
           path,
-          `${capitalized(rule.tier)} needs ${rule.needs}, but ${lacking.map((plan) => plan.id).join(', ')} ${lacking.length === 1 ? 'has' : 'have'} no ${rule.value} in ${rule.feature}: grade it lower, or add the audit to the feature with its source`,
+          `${capitalized(rule.tier)} needs ${rule.needs}, but ${lacking.map((plan) => plan.id).join(', ')} ${lacking.length === 1 ? 'has' : 'have'} no ${rule.values.join(' or ')} in ${rule.feature}: grade it lower, or ${rule.fix}`,
         );
       }
     }

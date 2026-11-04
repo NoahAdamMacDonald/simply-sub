@@ -1,0 +1,126 @@
+url: https://mullvad.net/en/open-source
+method: fetch
+saved: 2026-11-03
+
+Mullvad VPN | Privacy is a universal right
+Skip to main content
+Products and services
+VPN
+Browser
+Browser extension
+Pricing
+Privacy
+Why privacy matters
+Technical resources
+Downloads
+Tech blog & news
+Open source
+Check for leaks
+Servers
+Help and support
+Guides
+FAQ
+VPN
+Browser
+Pricing
+Downloads
+Why privacy matters
+Log in Get started
+We value open source
+At Mullvad, we believe in the open-source model in which a program's source code is made
+available, or open, to anyone for viewing and using. In a broader perspective, we believe that
+this sharing of knowledge will advance the world more quickly and help it to become a better
+place.
+The majority of software that we use and even develop ourselves is open source.
+Access our open-source projects
+All of Mullvad's open-source projects are available on
+GitHub.
+Code signing keys
+Download our code signing key.
+Our guide explains how to verify our signatures.
+Developer keys
+In Git, we sign all of our tags and every commit that merges features into the master branch
+of the repositories. Feel free to download the signing keys for our developers:
+Albin
+David G
+David L (old)
+David L (current)
+Emils (old)
+Emils (current)
+Hank
+Joakim
+Jonatan
+Jonathan
+Karl
+Linus (old)
+Linus (current)
+Marco
+Markus
+Odd
+Oskar (old)
+Oskar (current)
+Richard
+Robin
+Sebastian
+Simon
+Tobias
+Mullvad
+About
+Help
+Servers
+Pricing
+Blog
+Mullvad VPN
+Mullvad Browser
+Why privacy matters
+Why Mullvad VPN?
+What is a VPN?
+Downloads
+Stop chat control
+Press
+Careers
+Policies
+Policies
+Open source
+Privacy policy
+Cookies
+Terms of service
+Partnerships and resellers
+Reviews, ads and affiliates
+Reporting a bug or vulnerability
+Address
+Mullvad VPN AB
+Box 53049
+400 14 Gothenburg
+Sweden
+support@mullvadvpn.net
+GPG key
+Onion service
+Follow us
+@mullvadnet
+@mullvadnet
+Mullvad VPN
+mullvad
+Language
+English العربيّة
+Dansk
+Deutsch
+English
+Español
+فارسی
+Suomi
+Français
+Italiano
+日本語
+한국어
+Nederlands
+Norsk
+Polski
+Português
+Русский
+Svenska
+ภาษาไทย
+Türkçe
+Українська
+简体中文
+繁體中文

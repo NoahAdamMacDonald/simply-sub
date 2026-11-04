@@ -1010,6 +1010,9 @@ addOns:
 # Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: The Walt Disney Company's privacy policy, which covers
 # Disney+, rated once in data/policies/disney-privacy.yaml (M11.1). Not rated: the billing and legal topics, since its
 # subscriber agreement (disneyplus.com/en-ca/legal) doesn't render here, and account sharing and device limits.
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read that day: Canada's agreement says a MyDisney
+# account agrees to the Disney Terms of Use – Canada (disneytermsofuse.com/english-canada/), whose arbitration (not in
+# Quebec) is the Canadian agreement's too. The sign-up form wasn't read: it starts with an email address.
 policies:
   shared: [disney-privacy, disney-subscriber-agreement]
   links:
@@ -1019,6 +1022,8 @@ policies:
       url: https://www.disneyplus.com/en-ca/welcome/subscriber-agreement-side-by-side
     - name: 'Plans and prices (Extra Member)'
       url: https://help.disneyplus.com/article/disneyplus-en-ca-price
+    - name: 'Disney Terms of Use, Canada'
+      url: https://disneytermsofuse.com/english-canada/
   ratings:
     - topic: security.practices
       tier: neutral
@@ -1052,3 +1057,18 @@ policies:
           quote: 'This Agreement governs for residents of Canada.'
       replacesShared: true
       lastVerified: 2026-11-02
+    - topic: legal.disputes
+      regions: [CA]
+      tier: poor
+      reason: "In Canada, except in Quebec, disagreements go to a private referee (an arbitrator), not a court, and you can't join a group lawsuit. Disney's terms for your MyDisney account let you opt out only by mailing a letter within 30 days."
+      sources:
+        - url: https://www.disneyplus.com/en-ca/welcome/subscriber-agreement-side-by-side
+          quote: '(Not applicable to Quebec residents or where excluded by applicable law) Any dispute between you and us, except for small claims, is subject to a class action waiver and must be resolved by individual binding arbitration.'
+        - url: https://www.disneyplus.com/en-ca/welcome/subscriber-agreement-side-by-side
+          quote: 'When you sign up for a MyDisney account, you agree to the Disney Terms of Use – Canada'
+        - url: https://disneytermsofuse.com/english-canada/
+          quote: 'To opt out, you must notify us in writing no later than thirty (30) calendar days after first becoming subject to this arbitration agreement'
+      action:
+        name: How to opt out of arbitration (section 8.G)
+        url: https://disneytermsofuse.com/english-canada/
+      lastVerified: 2026-11-03

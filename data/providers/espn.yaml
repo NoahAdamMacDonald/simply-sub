@@ -161,6 +161,8 @@ plans:
 # Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: The Walt Disney Company's privacy policy, which covers
 # ESPN, rated once in data/policies/disney-privacy.yaml (M11.1). Not rated: the billing and legal topics (plus.espn.com,
 # with its subscriber agreement, is Access Denied here), account sharing and device limits.
+# Every agreement a user accepts (the owner's rule, 2026-11-03): a MyDisney account's Disney Terms of Use, read in
+# data/policies/disney-subscriber-agreement.yaml.
 policies:
   shared: [disney-privacy, disney-subscriber-agreement]
   links:

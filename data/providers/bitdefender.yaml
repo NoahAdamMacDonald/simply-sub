@@ -2612,9 +2612,14 @@ plans:
         lastVerified: 2026-11-02
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/free-antivirus
 
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read that day: its subscription agreement is also its
+# apps' licence and includes IPVanish's acceptable use policy for the VPN, all on one page (so its link is now
+# "Licence and terms of service"). Ultimate Security Plus's identity theft protection is licensed under IdentityForce's
+# terms (bitdefender.identityforce.com/terms-of-use, a TransUnion brand), which blocked this machine ("Sorry, you have
+# been blocked"): unread. The checkout's agreement line wasn't read: bitdefender.com rate-limits this machine.
 policies:
   links:
-    - name: Terms of service
+    - name: Licence and terms of service
       url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
     - name: 'Certifications'
       url: https://www.bitdefender.com/en-ca/business/certifications
@@ -2668,14 +2673,24 @@ policies:
         - url: https://www.bitdefender.com/en-us/site/view/bug-bounty
           quote: 'The Bug Bounty Reward program encourages security researchers to identify and submit vulnerability reports regarding virtually everything that bears the Bitdefender brand'
       lastVerified: 2026-11-02
-    - topic: other.notable
-      title: Removes other security apps
+    - topic: service.software-control
       tier: poor
-      reason: 'When you install it, it may take off or turn off other security apps already on your device if they clash with it.'
+      reason: 'It updates itself, and when you install it, it may take off or turn off other security apps already on your device if they clash with it.'
       sources:
         - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
           quote: 'During the installation process, Bitdefender Solution may uninstall or disable other security products if such products or features are incompatible with Bitdefender Solution.'
-      lastVerified: 2026-11-02
+        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+          quote: 'By using Bitdefender Solution and accepting this Agreement You consent to receive, install, and use any updates and upgrades to the software that will be automatically transmitted by Bitdefender.'
+      lastVerified: 2026-11-03
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You may use its apps only for your own personal use, not to make money with, and you may not take them apart unless the law lets you.'
+      sources:
+        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+          quote: 'Bitdefender hereby grants You and only You the following non-exclusive, limited, non-sublicensable, non-commercial right to use Bitdefender Solution for Your personal use only without the right to redistribute.'
+        - url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
+          quote: 'You may not reverse engineer, decompile, disassemble, modify, or create derivative works from the Bitdefender Solution, except and only to the extent that applicable law expressly permits.'
+      lastVerified: 2026-11-03
     - topic: other.notable
       title: Its VPN is built on another company's
       tier: neutral

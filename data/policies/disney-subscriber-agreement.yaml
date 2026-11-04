@@ -4,12 +4,17 @@
 # Read 2026-11-02 (M11.9's topics, pulled forward at the owner's request) at hulu.com, which serves it as plain HTML;
 # read again 2026-11-03 through a US exit (M11.9, part 14): three clauses reworded (a plan is a "Service Tier"), the
 # same grades.
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read that day: signing in uses a MyDisney account,
+# under Disney's Terms of Use for all its brands (disneytermsofuse.com/english/, the US's). Its arbitration, changes
+# (30 days after notice or posting) and closing accounts (for a breach) grade as this agreement's do.
 # Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
 id: disney-subscriber-agreement
 name: The Disney+, ESPN, and Hulu Subscriber Agreement
 links:
   - name: 'Subscriber agreement'
     url: https://www.hulu.com/subscriber_agreement
+  - name: 'Disney Terms of Use (US)'
+    url: https://disneytermsofuse.com/english/
 ratings:
   - topic: privacy.sign-up-data
     tier: neutral
@@ -73,12 +78,14 @@ ratings:
     lastVerified: 2026-11-03
   - topic: legal.disputes
     tier: poor
-    reason: "Disagreements go to a private referee (an arbitrator), not a court, and you can't join a group lawsuit. You can only opt out by mailing a letter within 30 days of signing up."
+    reason: "Disagreements go to a private referee (an arbitrator), not a court, and you can't join a group lawsuit; Disney's general terms of use say the same. You can only opt out by mailing a letter within 30 days of signing up."
     sources:
       - url: https://www.hulu.com/subscriber_agreement
         quote: 'ANY DISPUTE BETWEEN YOU AND US, EXCEPT FOR SMALL CLAIMS, IS SUBJECT TO A CLASS ACTION WAIVER AND MUST BE RESOLVED BY INDIVIDUAL BINDING ARBITRATION.'
       - url: https://www.hulu.com/subscriber_agreement
         quote: 'To opt out, you must notify us in writing no later than thirty (30) calendar days after first becoming subject to this arbitration agreement'
+      - url: https://disneytermsofuse.com/english/
+        quote: 'ANY DISPUTES BETWEEN YOU AND US, EXCEPT DISPUTES RESOLVED IN SMALL CLAIMS COURT OR RELATING TO THE OWNERSHIP OR ENFORCEMENT OF INTELLECTUAL PROPERTY RIGHTS, ARE SUBJECT TO A CLASS ACTION WAIVER AND MUST BE RESOLVED BY INDIVIDUAL BINDING ARBITRATION.'
     action:
       name: How to opt out of arbitration (section 7)
       url: https://www.hulu.com/subscriber_agreement

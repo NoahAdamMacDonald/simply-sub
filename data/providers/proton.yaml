@@ -1034,6 +1034,12 @@ resellers:
 # Proton VPN's privacy policy, its no-logs audit post and its page on usage statistics. Free trials are not
 # applicable (only business plans have one), a status since M11.1. Lumo's terms of use, read 2026-11-02 (M11.3), once
 # Proton was in AI: who owns what it writes.
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read that day: the terms include Proton Wallet's
+# terms of use (Proton Financial AG's, for anyone who uses the wallet, which every plan can) and Lumo's, and point to
+# the inactive account policy (/support/inactive-accounts: reminders 30, 15 and 7 days before, the terms' grade
+# stands). Its apps have no licence of their own beyond being open source (/community/open-source). The sign-up form
+# says "By continuing, you agree to our terms and conditions and privacy policy." How its apps update: Bridge's and
+# Proton VPN's help pages.
 policies:
   links:
     - name: 'Human verification'
@@ -1056,6 +1062,14 @@ policies:
       url: https://proton.me/support/export-emails-import-export-app
     - name: 'Lumo terms of use'
       url: https://proton.me/lumo/terms
+    - name: 'Proton Wallet terms of use'
+      url: https://proton.me/wallet/terms
+    - name: 'Open source'
+      url: https://proton.me/community/open-source
+    - name: 'Automatic updates (Proton Mail Bridge)'
+      url: https://proton.me/support/bridge-automatic-update
+    - name: 'Updating Proton VPN'
+      url: https://protonvpn.com/support/update-required
   ratings:
     - topic: privacy.data-collection
       tier: neutral
@@ -1148,10 +1162,12 @@ policies:
       lastVerified: 2026-11-03
     - topic: legal.account-closure
       tier: neutral
-      reason: "If it closes your account for breaking its rules, you lose what you paid and don't get a refund."
+      reason: "If it closes your account for breaking its rules, you lose what you paid and don't get a refund. Proton Wallet, run by a sister company, may also close your wallet for other reasons."
       sources:
         - url: https://proton.me/legal/terms
           quote: 'Paid Accounts which are terminated due to a violation of these Terms will incur the loss of all payments and credits and are not eligible for refund.'
+        - url: https://proton.me/wallet/terms
+          quote: 'You agree that Company may terminate the agreement with you and suspend or cancel your Account in case of, but not limited to:'
       lastVerified: 2026-11-03
     - topic: service.activity-logging
       tier: great
@@ -1301,3 +1317,23 @@ policies:
       reason: "Its terms don't add any limit beyond how many devices each plan's VPN can connect at once."
       pages: [https://proton.me/legal/terms]
       lastVerified: 2026-11-02
+    - topic: legal.licence
+      tier: great
+      reason: 'All its apps are open source: anyone can read their code, and even help improve it.'
+      sources:
+        - url: https://proton.me/community/open-source
+          quote: 'All Proton apps are open source and have been independently audited and verified by third-party experts.'
+        - url: https://proton.me/community/open-source
+          quote: 'You can view the audit reports, inspect the code yourself, or even contribute improvements.'
+      lastVerified: 2026-11-03
+    - topic: service.software-control
+      tier: good
+      reason: 'Its Mail Bridge app downloads its own updates unless you turn that off, and on Windows and Mac its VPN app asks you to update. Its pages don’t say they change anything else on your device.'
+      sources:
+        - url: https://proton.me/support/bridge-automatic-update
+          quote: 'The app will automatically detect and download any updates in the background.'
+        - url: https://proton.me/support/bridge-automatic-update
+          quote: 'After you have selected this option, Bridge will let you know a new update is available, but the app won’t download or install it for you.'
+        - url: https://protonvpn.com/support/update-required
+          quote: 'On Windows and macOS, you’ll see an in-app notification prompting you to update the app.'
+      lastVerified: 2026-11-03

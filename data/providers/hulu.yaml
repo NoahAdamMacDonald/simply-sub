@@ -136,6 +136,8 @@ plans:
 # Hulu, rated once in data/policies/disney-privacy.yaml (M11.1); its data sharing is Hulu's own, since the policy adds a
 # clause on Hulu's partners. Not rated: the billing and legal topics (hulu.com sends this machine to Disney+), account
 # sharing and device limits.
+# Every agreement a user accepts (the owner's rule, 2026-11-03): a MyDisney account's Disney Terms of Use, read in
+# data/policies/disney-subscriber-agreement.yaml.
 policies:
   shared: [disney-privacy, disney-subscriber-agreement]
   links:
