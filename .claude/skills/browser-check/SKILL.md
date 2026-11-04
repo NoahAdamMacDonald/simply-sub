@@ -648,7 +648,8 @@ citations only.
 at both widths: the two fixture accounts' lines, their posted-rates and protection links (the second scrolled to its
 words), Tab to the protection link with the provider's words as its tooltip, the lines muted with bold subjects, axe
 on the section, screenshots and no horizontal scroll. GET /fx is answered with fixed rates, as `check-components.cjs`
-does.
+does. Since M11.14 the gallery's fintech has a `followed`, as data:build would give it, and the check reads its
+"Following the Bank of Canada" line.
 
 `check-m11-balances.cjs` (M11.11, balances) checks an account plan's item on `ng serve` for a Canadian in Ontario, in
 both themes at both widths, keyboard only. No real finance provider is in the catalog before M11.15, so it answers the
