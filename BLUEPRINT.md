@@ -3600,6 +3600,16 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 **Still open**
 None.
 
+**Resolved (2026-11-03, Dependabot alert #2)**
+- **minimatch before 11.0.1** (GHSA-g3hv-75wg-m249, a pattern that amplifies its glob parts): ESLint 10.13,
+  typescript-eslint 8.72 and exceljs 4.4.0's archiver 5 (glob 7's 3.1.5, readdir-glob 1's 5.1.9) ask for versions in
+  its range, and no newer parent fixes it: ESLint 10.14, typescript-eslint 8.72.1 and readdir-glob 3 ask for 10.x, and
+  archiver 8 is ESM-only with no default export, so exceljs's `require('archiver')('zip')` would throw. The owner chose
+  a root override to 11.0.4 (CLAUDE.md's overrides). ESLint's results are the same on all 897 files, and exceljs's
+  streamed workbook writes and reads back, as archiver's zip and `glob()` do. glob 7's own wildcard matching throws with
+  it (minimatch 11 matches with its own matcher, not RegExps), which only archiver-utils' `file.expand` and rimraf 2's
+  wildcard fallback reach; exceljs calls neither, and the app bundles exceljs's browser file, which loads none of them.
+
 **Resolved (2026-11-03, M11.10's proposals)**
 - **The finance features, all 15** (feature-discovery from TD's, RBC's, EQ Bank's, Tangerine's, KOHO's, Wealthsimple's
   and Questrade's own pages), a feature category of their own, Banking & investing: registered accounts, a US dollar
