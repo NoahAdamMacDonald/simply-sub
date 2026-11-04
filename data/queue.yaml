@@ -70,7 +70,9 @@
   source: wikidata
   wikidata: Q866
   sitelinks: 245
-  status: queued
+  status: done
+  date: 2026-11-04
+  note: "The owner's choice of 2026-11-04: YouTube's paid memberships, with YouTube Premium's entry (Wikidata Q18643737) folded in"
 - id: chatgpt
   name: ChatGPT
   website: https://chatgpt.com
@@ -305,14 +307,6 @@
   source: wikidata
   wikidata: Q28404534
   sitelinks: 43
-  status: queued
-- id: youtube-premium
-  name: YouTube Premium
-  website: https://www.youtube.com/premium
-  category: streaming
-  source: wikidata
-  wikidata: Q18643737
-  sitelinks: 42
   status: queued
 - id: paramount-plus
   name: Paramount+
@@ -1939,7 +1933,9 @@
   source: wikidata
   wikidata: Q99438379
   sitelinks: 30
-  status: queued
+  status: out-of-scope
+  date: 2026-11-04
+  note: "YouTube's short videos, a free part of YouTube (youtube)"
 - id: uber-eats
   name: Uber Eats
   website: https://www.ubereats.com
