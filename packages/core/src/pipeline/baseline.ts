@@ -161,6 +161,7 @@ export function citedPages(
     const policyPages = policies.providers[id];
     for (const url of policyPages?.links ?? []) cite(url, 'policies', id);
     cite(provider.owner?.page.url, 'policies', id);
+    cite(provider.owner?.country?.page?.url, 'policies', id);
     const anchor = provider.renewalAnchor;
     if (anchor?.kind === 'not-stated') for (const url of anchor.pages) cite(url, 'policies', id);
     else cite(anchor?.url, 'policies', id);
@@ -231,6 +232,8 @@ export function citedFacts(
         if (source.url === url) facts.quotes.push(source.quote);
     }
     if (provider.owner?.page.url === url) facts.quotes.push(...provider.owner.quotes);
+    const country = provider.owner?.country;
+    if (country?.page?.url === url) facts.quotes.push(...(country.quotes ?? []));
   }
   for (const set of policySets)
     for (const rating of set.ratings)

@@ -4,8 +4,10 @@ import {
   citedFacts,
   citedPages,
   formatCatalogIssue,
+  namesCountry,
   outsideRatings,
   ownerCitation,
+  ownerSchema,
   quoteLink,
   ratersFileSchema,
   readCatalogSource,
@@ -86,7 +88,8 @@ const dailyPlanet = {
   owner: {
     name: 'Galaxy Communications',
     page: { name: 'About us', url: 'https://www.dailyplanet.example.com/about' },
-    quotes: ['The Daily Planet is owned by Galaxy Communications.'],
+    quotes: ['The Daily Planet is owned by Galaxy Communications, of Metropolis, New York.'],
+    country: { code: 'US' },
     lastVerified: '2026-10-20',
   },
   renewalAnchor: {
@@ -308,6 +311,39 @@ describe('validateCatalog, for owners', () => {
     ).toEqual([]);
   });
 
+  it('needs where the company is from, a real country, on its own sites or its owner’s (2026-11-03)', () => {
+    expect(messages(withRaters([[['owner', 'country'], undefined]]))).toEqual([
+      `${planet} owner: Say where the company is from: owner.country, an ISO 3166-1 code, quoted from its own pages or its owner’s`,
+    ]);
+    // "XX" has no names, so its words fail first; "UK" and "EU" have names, so the code itself is refused.
+    expect(messages(withRaters([[['owner', 'country', 'code'], 'XX']]))).toEqual([
+      `${planet} owner.country.code: The owner's quotes don't name XX: give the country a page and quotes of its own`,
+    ]);
+    const named = (code: string, quote: string) => ({
+      code,
+      page: { name: 'Contact us', url: 'https://www.dailyplanet.example.com/contact' },
+      quotes: [quote],
+      lastVerified: '2026-10-20',
+    });
+    expect(
+      messages(withRaters([[['owner', 'country'], named('UK', 'London, United Kingdom')]])),
+    ).toEqual([
+      `${planet} owner.country.code: "UK" isn't an ISO 3166-1 region code: use GB for the United Kingdom`,
+    ]);
+    expect(
+      messages(withRaters([[['owner', 'country'], named('EU', 'within the European Union')]])),
+    ).toEqual([`${planet} owner.country.code: "EU" isn't an ISO 3166-1 country code (US, CA, CH)`]);
+    const elsewhere = {
+      code: 'US',
+      page: { name: 'Profile', url: 'https://en.wikipedia.org/wiki/Daily_Planet' },
+      quotes: ['Metropolis, New York'],
+      lastVerified: '2026-10-20',
+    };
+    expect(messages(withRaters([[['owner', 'country'], elsewhere]]))).toEqual([
+      `${planet} owner.country.page.url: Must be a page of Daily Planet's own sites, its policies' or its owner's (dailyplanet.example.com): give the owner's site in website when the page is there`,
+    ]);
+  });
+
   it('refuses a read date after today, and warns once it’s a year old', () => {
     expect(messages(withRaters([[['owner', 'lastVerified'], '2026-10-24']]))).toEqual([
       `${planet} owner.lastVerified: 2026-10-24 is after today (2026-10-23)`,
@@ -323,6 +359,8 @@ describe('validateCatalog, for owners', () => {
         'warning: data/raters.yaml 1.id: No provider shows this rater: add its ratings to the providers it rates, or remove it',
         // The test catalog's own owners, read the same day.
         'warning: data/providers/crave.yaml owner.lastVerified: Read on 2026-10-20, over a year ago: read the page again',
+        // Its country, from a page of its own (the owner's choice, 2026-11-03), in the file's order.
+        'warning: data/providers/mullvad.yaml owner.country.lastVerified: Read on 2026-10-20, over a year ago: read the page again',
         'warning: data/providers/mullvad.yaml owner.lastVerified: Read on 2026-10-20, over a year ago: read the page again',
         'warning: data/providers/netflix.yaml owner.lastVerified: Read on 2026-10-20, over a year ago: read the page again',
         'warning: data/providers/proton.yaml owner.lastVerified: Read on 2026-10-20, over a year ago: read the page again',
@@ -393,12 +431,72 @@ describe('outsideRatings', () => {
 });
 
 describe('ownerCitation', () => {
-  it('links the owner’s page to its quotes', () => {
+  it('checks that the country’s words name it: its own quotes, else the owner’s', () => {
+    const owner = dailyPlanet.owner;
+    const page = { name: 'Contact us', url: 'https://www.dailyplanet.example.com/contact' };
+    const own = (quotes: string[]) => ({ code: 'US', page, quotes, lastVerified: '2026-10-20' });
+    expect(issues(ownerSchema, owner)).toEqual([]);
+    expect(issues(ownerSchema, { ...owner, country: { code: 'CA' } })).toEqual([
+      "country.code: The owner's quotes don't name CA: give the country a page and quotes of its own",
+    ]);
+    expect(
+      issues(ownerSchema, { ...owner, country: own(['355 Main Street, Metropolis']) }),
+    ).toEqual([
+      'country.quotes: No quote names US: quote the words that name the country, its people or, in an address, a state or province',
+    ]);
+    expect(issues(ownerSchema, { ...owner, country: { code: 'US', page } })).toEqual([
+      'country.quotes: Give its page, quotes and lastVerified together, or none when the owner’s quotes say it',
+    ]);
+    expect(issues(ownerSchema, { ...owner, country: { code: 'us' } })[0]).toMatch(
+      /^country\.code:/,
+    );
+  });
+
+  it.each([
+    ['Los Gatos, CA 95032, USA', 'US', true],
+    ['One Microsoft Way, Redmond, WA 98052, U.S.A.', 'US', true],
+    ['a company based and headquartered in the United States', 'US', true],
+    ['ESPN Headquarters in Bristol, Connecticut', 'US', true],
+    ['500 South Buena Vista Street, Burbank, California 91521', 'US', true],
+    ['siège social aux États-Unis', 'US', true],
+    ['Visa, Mastercard, American Express', 'US', false],
+    ['San Francisco, CA 94104', 'US', false],
+    ['Bell Media is Canada’s leading media and entertainment company', 'CA', true],
+    ['299 Queen Street West, Toronto, Ontario M5V 2Z5', 'CA', true],
+    ['Montréal (Québec)', 'CA', true],
+    ['une société canadienne', 'CA', true],
+    ['Proton AG, a Swiss corporation', 'CH', true],
+    ['Plan-les-Ouates, Genève, Suisse', 'CH', true],
+    ['a VPN provider based in Sweden', 'SE', true],
+    ['Bucharest, Romania', 'RO', true],
+    ['Minato-ku, Tokyo, Japan', 'JP', true],
+    ['Bucharest, Romania', 'SE', false],
+  ] as const)('reads "%s" as naming %s: %s', (text, code, named) => {
+    expect(namesCountry(text, code)).toBe(named);
+  });
+
+  it('links the owner’s page to its quotes, with where it’s from', () => {
     expect(ownerCitation(dailyPlanet.owner)).toEqual({
       name: 'Galaxy Communications',
       page: 'About us',
       href: quoteLink('https://www.dailyplanet.example.com/about', dailyPlanet.owner.quotes),
-      quotes: ['The Daily Planet is owned by Galaxy Communications.'],
+      quotes: ['The Daily Planet is owned by Galaxy Communications, of Metropolis, New York.'],
+      // The owner's quotes say it, so the country has no page of its own.
+      country: { code: 'US' },
+    });
+  });
+
+  it('links a country quoted from a page of its own (the owner’s choice, 2026-11-03)', () => {
+    const contact = { name: 'Contact us', url: 'https://www.dailyplanet.example.com/contact' };
+    const quotes = ['355 Main Street, Metropolis, New York, USA'];
+    expect(
+      ownerCitation({
+        ...dailyPlanet.owner,
+        country: { code: 'US', page: contact, quotes, lastVerified: '2026-10-20' },
+      }).country,
+    ).toEqual({
+      code: 'US',
+      cited: { page: 'Contact us', href: quoteLink(contact.url, quotes), quotes },
     });
   });
 });

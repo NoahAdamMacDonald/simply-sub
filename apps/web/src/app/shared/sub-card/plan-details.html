@@ -249,6 +249,29 @@
     <h3>Owner</h3>
     <p class="owner">
       <span class="subject">{{ owner.name }}</span>
+      <!-- Where it's from (the owner's choice, 2026-11-03), linked to its own page when the owner's doesn't say it. -->
+      @if (ownerCountry(); as country) {
+        <span aria-hidden="true"> · </span>
+        <span class="visually-hidden">, from </span>
+        @if (country.cited; as cited) {
+          <a
+            class="outside-link"
+            [href]="cited.href"
+            target="_blank"
+            rel="noopener"
+            [matTooltip]="quotesText(cited.quotes)"
+            matTooltipTouchGestures="off"
+            [attr.aria-label]="
+              country.name + ', according to its ' + cited.page + ', opens in a new tab'
+            "
+          >
+            <span>{{ country.name }}</span>
+            <mat-icon aria-hidden="true">open_in_new</mat-icon>
+          </a>
+        } @else {
+          <span>{{ country.name }}</span>
+        }
+      }
       <span>, according to its </span>
       <a
         class="outside-link"
@@ -287,15 +310,15 @@
   How a buyer where the user lives can pay it, and in which currencies beyond its price lists (M11.5), citing the
   provider's pages, their words as the tooltips.
 -->
-@if (payment() || currencies().length) {
+@if (payment().length || currencies().length) {
   <div class="group">
     <h3>Ways to pay</h3>
-    @if (payment(); as payment) {
+    @for (line of payment(); track $index) {
       <p class="payment">
-        <span>{{ payment.text }}</span>
+        <span>{{ line.text }}</span>
         <ng-container
           [ngTemplateOutlet]="cited"
-          [ngTemplateOutletContext]="{ $implicit: payment.cited }"
+          [ngTemplateOutletContext]="{ $implicit: line.cited }"
         />
       </p>
     }

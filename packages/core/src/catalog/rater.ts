@@ -2,6 +2,7 @@ import * as z from 'zod';
 import { addDays, type IsoDate } from '../dates/iso-date';
 import { addDuplicateIssues } from './checks';
 import { domainSchema, httpsUrlSchema, isoDateSchema, slugSchema, textSchema } from './formats';
+import { namesCountry } from './provider-facts';
 
 // Outside ratings and owners (BLUEPRINT §4.10, M11.2). Some facts a buyer needs can't come from the provider's own
 // pages: a news outlet's bias and reliability, an antivirus's lab results. data/raters.yaml lists the raters whose
@@ -146,28 +147,89 @@ export const outsideRatingsSchema = z
     ),
   );
 
-export const ownerSchema = z.strictObject({
-  name: textSchema.describe(
-    'The company behind it, as the page names it, with the shares when the page gives them (The Walt Disney Company (72%), Hearst (18%) and the NFL (10%))',
-  ),
-  website: httpsUrlSchema
-    .describe(
-      "The owner's own website, when the page quoted is there: the parent's about page or annual report (Microsoft's for Xbox Game Pass)",
-    )
-    .optional(),
-  page: z
-    .strictObject({
-      name: textSchema.describe('As the card links it (About us)'),
-      url: httpsUrlSchema.describe(
-        "The provider's about page, else its owner's own page about it, else its terms when that's where it says so",
-      ),
-    })
-    .describe('The provider’s or its owner’s own page that names the company'),
-  quotes: z
-    .array(textSchema)
-    .min(1, 'Quote where it says so')
-    .max(3, 'Quote at most three passages')
-    .describe('Its words there that name the company, word for word'),
-  lastVerified: isoDateSchema.describe('When the page was read'),
-});
+/**
+ * Where the company behind a provider is from (the owner's choice, 2026-11-03): an ISO 3166-1 code, and the words that
+ * say so. Its own page and quotes when the owner's page doesn't say it (an address in the terms, the parent's about
+ * page); without them, the owner's quotes must.
+ */
+export const ownerCountrySchema = z
+  .strictObject({
+    code: z
+      .string()
+      .regex(/^[A-Z]{2}$/, 'Use a two-letter ISO 3166-1 country code in capitals (US, CA, CH)')
+      .describe('The country, as an ISO 3166-1 alpha-2 code (GB, not UK)'),
+    page: z
+      .strictObject({
+        name: textSchema.describe('As the card links it (Corporate information)'),
+        url: httpsUrlSchema.describe(
+          "The provider's own page, its owner's or its policies' that says where the company is",
+        ),
+      })
+      .describe('Its page, when the owner’s page doesn’t say where the company is')
+      .optional(),
+    quotes: z
+      .array(textSchema)
+      .min(1, 'Quote where it says so')
+      .max(3, 'Quote at most three passages')
+      .describe(
+        'Its words there that name the country, its people (Swiss) or, in an address, a state or province (Ontario)',
+      )
+      .optional(),
+    lastVerified: isoDateSchema.describe('When its page was read').optional(),
+  })
+  .superRefine((country, ctx) => {
+    const given = [country.page, country.quotes, country.lastVerified].filter(Boolean).length;
+    if (given !== 0 && given !== 3) {
+      ctx.addIssue({
+        code: 'custom',
+        message:
+          'Give its page, quotes and lastVerified together, or none when the owner’s quotes say it',
+        path: [!country.page ? 'page' : !country.quotes ? 'quotes' : 'lastVerified'],
+      });
+    }
+  });
+export type OwnerCountry = z.infer<typeof ownerCountrySchema>;
+
+export const ownerSchema = z
+  .strictObject({
+    name: textSchema.describe(
+      'The company behind it, as the page names it, with the shares when the page gives them (The Walt Disney Company (72%), Hearst (18%) and the NFL (10%))',
+    ),
+    website: httpsUrlSchema
+      .describe(
+        "The owner's own website, when a page quoted is there: the parent's about page or annual report (Microsoft's for Xbox Game Pass)",
+      )
+      .optional(),
+    page: z
+      .strictObject({
+        name: textSchema.describe('As the card links it (About us)'),
+        url: httpsUrlSchema.describe(
+          "The provider's about page, else its owner's own page about it, else its terms when that's where it says so",
+        ),
+      })
+      .describe('The provider’s or its owner’s own page that names the company'),
+    quotes: z
+      .array(textSchema)
+      .min(1, 'Quote where it says so')
+      .max(3, 'Quote at most three passages')
+      .describe('Its words there that name the company, word for word'),
+    country: ownerCountrySchema
+      .describe('Where the company is from (the owner’s choice, 2026-11-03): every provider says')
+      .optional(),
+    lastVerified: isoDateSchema.describe('When the pages were read'),
+  })
+  .superRefine((owner, ctx) => {
+    const { country } = owner;
+    if (!country || !/^[A-Z]{2}$/.test(country.code)) return;
+    const quotes = country.quotes ?? owner.quotes;
+    if (!namesCountry(quotes.join('\n'), country.code)) {
+      ctx.addIssue({
+        code: 'custom',
+        message: country.quotes
+          ? `No quote names ${country.code}: quote the words that name the country, its people or, in an address, a state or province`
+          : `The owner's quotes don't name ${country.code}: give the country a page and quotes of its own`,
+        path: ['country', country.quotes ? 'quotes' : 'code'],
+      });
+    }
+  });
 export type Owner = z.infer<typeof ownerSchema>;

@@ -4,6 +4,7 @@ import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import {
+  acceptedNetworksIn,
   currenciesIn,
   outsideRatings,
   ownerCitation,
@@ -209,11 +210,23 @@ export class PlanDetails {
     const owner = this.provider().owner;
     return owner && ownerCitation(owner);
   });
-  /** How a buyer where the user lives can pay it (M11.5), and the provider's page that says so. */
-  protected readonly payment = computed((): CitedLine | undefined => {
+  /** Where that company is from (the owner's choice, 2026-11-03), by name, and its own page when it has one. */
+  protected readonly ownerCountry = computed(() => {
+    const country = this.owner()?.country;
+    return country && { name: countryName(country.code), cited: country.cited };
+  });
+  /**
+   * How a buyer where the user lives can pay it (M11.5), a line per page that says so. A card whose networks no page
+   * names says so (the owner's wording, 2026-11-03).
+   */
+  protected readonly payment = computed((): CitedLine[] => {
     const country = this.settings.saved()?.country;
-    const entry = country && paymentMethodsIn(this.provider(), country);
-    return entry ? { text: this.methodsText(entry.methods), cited: citedFact(entry) } : undefined;
+    if (!country) return [];
+    const verified = acceptedNetworksIn(this.provider(), country) !== undefined;
+    return paymentMethodsIn(this.provider(), country).map((entry) => ({
+      text: this.methodsText(entry.methods, verified),
+      cited: citedFact(entry),
+    }));
   });
   /** The currencies they can pay it in beyond its price lists (M11.5), each with its page. */
   protected readonly currencies = computed((): CitedLine[] => {
@@ -304,10 +317,14 @@ export class PlanDetails {
     return date.length === 7 ? monthText(date) : dateText(date);
   }
 
-  /** "Card, PayPal and Cash". */
-  private methodsText(methods: PaymentMethods[number]['methods']): string {
+  /** "Card, PayPal and Cash", or "Card (networks not verified)" when no page names the networks it takes there. */
+  private methodsText(methods: PaymentMethods[number]['methods'], verified = true): string {
     return listText(
-      methods.map((method) => paymentMethodNames[method]),
+      methods.map((method) =>
+        method === 'card' && !verified
+          ? `${paymentMethodNames.card} (networks not verified)`
+          : paymentMethodNames[method],
+      ),
       'and',
     );
   }
