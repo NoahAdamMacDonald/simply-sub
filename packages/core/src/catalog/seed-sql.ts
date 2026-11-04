@@ -83,10 +83,11 @@ export interface SeedFormat {
 /**
  * Each seed format's table shape (M11.8). A format that only computes a derived column differently keeps its shape:
  * every provider's rows are compared again, through the budget. A new shape is a migration that creates its tables
- * beside the live ones (providers_s4…), which the seed fills through the budget and then points the API's views at.
- * Migration 0006 named the first shape, 3.
+ * beside the live ones (providers_s5…), which the seed fills through the budget and then points the API's views at.
+ * Migration 0006 named the first shape, 3. Shapes 3 and 4's tables are gone (migrations 0008 and 0009), so their
+ * formats aren't here: a database still at one is seeded again in full, into this format's shape.
  */
-export const seedShapes: Readonly<Record<number, number>> = { 3: 3, 4: 4, 5: 5 };
+export const seedShapes: Readonly<Record<number, number>> = { 5: 5 };
 
 /**
  * The shape of seedFormat's tables: 5, provider_prices (migration 0008, M11.8), after 4's search column and

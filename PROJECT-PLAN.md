@@ -1626,6 +1626,18 @@ in every D1 `json` column search parses.
       nothing due. The API's: 400 Netflix-like providers into an empty D1 at 6,000 rows a day: the deploy and seven
       nights (about 50 providers a night), `/health`'s `catalogWaiting` going 349, 298… to 0, ending as a full seed
       would.
+  - **Shape 4 dropped** (2026-11-03, after a read-only look at both databases): the catalog D1
+    held 33 tables (1.75 MB), shapes 4 and 5 side by side, since the deploy of 0008 filled shape 5 and pointed the
+    views at it while 0008 itself only dropped shape 3's. Shape 4's held the catalog as it was at that switch (13
+    providers, 47 plans, 215 prices, 60 features, about 1,100 rows and 300 KB of JSON, plus its FTS5 table's six).
+    Migration 0009 points the views at shape 5 (`provider_prices` too, so a new database reads as production does) and
+    drops shape 4's tables, children first. Nothing recreates them: only migrations create tables, and core's
+    `seedShapes` names only shape 5 now, so a database still at format 3 or 4 is seeded again in full. The user
+    database (`simply-sub-user`, 7 tables, 73.7 kB) had nothing duplicated.
+    - **Tests:** the API's schema spec (the migrations, the views at shape 5, only shape 5's tables, indexes and FTS
+      tables), core's (formats 3 and 4 seeded in full); a dry run on a local D1 brought to production's state (0001 to
+      0008, seeded at format 5, shape 4's tables filled), where 0009 applied cleanly and the next seed had nothing to
+      write.
 
 **M11.9 — The existing 13 under the new rules** (the guide's §7.1, Phase 0 step 7)
 - **What it covers:** every topic regraded by the procedure, with the calibration table in the pull request; each

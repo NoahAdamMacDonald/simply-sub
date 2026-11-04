@@ -1722,8 +1722,9 @@ day's writes. Since M11.8 (`planSeed` in core):
     view dropped and created as a row) and names the new format in the catalog row; a later migration drops the old
     tables. Measured on the tests' catalog at 1,100 rows a day, a new shape takes three days: Bitdefender's and Proton's
     rows are most of a day each.
-  - Everything is replaced in place (`--full`, or a catalog row of a format from before shapes) only by hand, or when
-    D1 holds rows but no catalog row.
+  - Everything is replaced in place (`--full`, or a catalog row of a format from before shapes, or of a shape whose
+    tables are gone) only by hand, or when D1 holds rows but no catalog row. `seedShapes` names only the shapes whose
+    tables exist (5 since 0009).
   - **Shape 5** (migration 0008, seed format 5) is shape 4's tables with `provider_prices`, which `GET /providers`
     walks for a page sorted from the cheapest (section 7.1): a row for each currency a provider's plans are priced in,
     with its lowest monthly equivalent of every stored price there (retired ones too, so whatever `pickPrice` picks,
@@ -1732,7 +1733,8 @@ day's writes. Since M11.8 (`planSeed` in core):
     a price change writes two more only when it moves the provider's lowest (a key of its own). The catalog row's
     `currencies` names every currency the table may hold, for the API to walk each: the build's once the seed is done,
     and while one waits the last whole catalog's too (`waitingCurrencies`), since rows of both are there. 0008 also
-    points a new database's views at shape 4 and drops shape 3's tables.
+    points a new database's views at shape 4 and drops shape 3's tables; 0009 points them at shape 5, as the seed
+    left them in production on 2026-11-03, and drops shape 4's (its FTS5 table with its shadow tables).
 - **An empty D1 fills through the budget too:** with no rows, the seed inserts (no deletes) and records
   `0000000` as the version until the whole catalog is in.
 - **Each pull request's estimate** (`npm run data:writes`, a notice in CI): the seed of the branch's catalog over
