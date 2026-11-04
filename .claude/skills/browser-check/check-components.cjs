@@ -648,8 +648,9 @@ async function behaviour(browser) {
   const { context, page } = await newPage(browser);
   check(
     'the gallery has a heading per component',
-    // ss-price's (check-prices.cjs) and ss-sub-card's (M5.2, check-search.cjs) included.
-    (await page.locator('section > h2').count()) === 15,
+    // ss-price's (check-prices.cjs), ss-sub-card's (M5.2, check-search.cjs) and ss-account-terms' (M11.10,
+    // check-m11-accounts.cjs) included.
+    (await page.locator('section > h2').count()) === 16,
   );
   await budgetBars(page);
   await icons(page);
