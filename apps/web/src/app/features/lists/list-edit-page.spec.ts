@@ -40,7 +40,7 @@ import {
 } from '../../core/storage/storage.testing';
 import { TagsRepository } from '../../core/storage/tags-repository';
 import { ConfirmService, type ConfirmOptions } from '../../shared/confirm/confirm-service';
-import { alberta, fx, searchCatalogData } from '../../shared/sub-card/search.testing';
+import { alberta, fx, searchCatalogData, withBank } from '../../shared/sub-card/search.testing';
 import { ListEditPage } from './list-edit-page';
 
 // The list editor (P5) and its item dialog (P6) on a real draft in a fake IndexedDB, with Search's small catalog
@@ -128,57 +128,6 @@ const withNetworks: CatalogData = {
         }
       : provider,
   ),
-};
-
-/**
- * The test catalog with a bank (M11.11): a balance of $4,000 or a direct deposit waives its fee, as does being a
- * student of 24 or under. Its categories don't matter here.
- */
-const withBank: CatalogData = {
-  ...searchCatalogData,
-  providers: [
-    ...searchCatalogData.providers,
-    {
-      id: 'example-bank',
-      name: 'Example Bank',
-      website: 'https://example.com',
-      cancelUrl: 'https://example.com/close',
-      category: 'streaming',
-      spendCategory: 'streaming',
-      plans: [
-        {
-          id: 'example-bank.unlimited',
-          name: 'Unlimited Chequing',
-          link: 'https://example.com/chequing',
-          features: {},
-          prices: [
-            {
-              region: 'CA',
-              currency: 'CAD',
-              amount: 17.95,
-              interval: 'month',
-              intervalCount: 1,
-              autoRenew: true,
-              lastVerified: '2026-10-20',
-            },
-          ],
-          account: {
-            kind: 'chequing',
-            currency: 'CAD',
-            waivers: [{ minBalance: 4000 }, { directDeposit: true }, { maxAge: 24, student: true }],
-            protection: {
-              insurer: 'cdic',
-              held: 'own-name',
-              limit: 100_000,
-              url: 'https://example.com/cdic',
-              quotes: ['Protected by CDIC.'],
-              lastVerified: '2026-10-20',
-            },
-          },
-        },
-      ],
-    },
-  ],
 };
 
 function fields(planId: string, extra: Partial<NewRecord<'items'>> = {}): NewRecord<'items'> {

@@ -47,6 +47,14 @@
     <span class="visually-hidden">{{ cashback.spoken }}</span>
   </p>
 }
+<!-- Interest is never a charge: it shows beside the totals, as cash back does (M11.12). -->
+@if (interest(); as interest) {
+  <p class="interest">
+    <mat-icon aria-hidden="true">percent</mat-icon>
+    <span aria-hidden="true">{{ interest.shown }}</span>
+    <span class="visually-hidden">{{ interest.spoken }}</span>
+  </p>
+}
 @if (notCounted(); as text) {
   <p class="not-counted">{{ text }}</p>
 }

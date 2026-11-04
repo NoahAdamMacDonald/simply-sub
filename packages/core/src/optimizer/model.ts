@@ -330,7 +330,7 @@ class ModelBuilder {
         if (isRetired(plan, provider, this.context.today)) continue;
         const keys = this.keysOf(plan, catalog);
         if (!includesAll(keys, item.critical)) continue;
-        for (const price of this.periodsFor(plan.prices, provider, item)) {
+        for (const price of this.periodsFor(plan.prices, provider, item, plan)) {
           if (plan.id === current.id && samePeriod(price, listItem.billing)) continue;
           const changed = changedItem(
             listItem,
@@ -436,9 +436,10 @@ class ModelBuilder {
     prices: Plan['prices'],
     seller: SnapshotProvider,
     item: ItemModel,
+    plan?: Plan,
   ): PickedPrice[] {
     const { billing } = item.resolved.item;
-    return pickPrice(prices, this.priceContext(item.resolved.region, seller)).filter(
+    return pickPrice(prices, this.priceContext(item.resolved.region, seller, plan)).filter(
       (price) =>
         samePeriod(price, billing) ||
         (billing.mode === 'recurring' &&
@@ -776,12 +777,14 @@ class ModelBuilder {
     return resolveChanged(item, catalog, this.context);
   }
 
-  private priceContext(region: string, seller: SnapshotProvider): PriceContext {
+  /** Where `seller`'s prices are picked; a finance account `plan`'s fee has no sales tax (M11.12). */
+  private priceContext(region: string, seller: SnapshotProvider, plan?: Plan): PriceContext {
     return {
       region,
       currency: this.context.currency,
       ...(seller.billingCurrency && { billingCurrency: seller.billingCurrency }),
       ...(this.context.fx && { fx: this.context.fx }),
+      ...(plan?.account && { taxFree: true as const }),
     };
   }
 

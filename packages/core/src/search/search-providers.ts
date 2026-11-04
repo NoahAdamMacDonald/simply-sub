@@ -414,6 +414,8 @@ function planMatch(
       currency,
       billingCurrency: provider.billingCurrency,
       fx,
+      // A finance account's fee has no sales tax (M11.12).
+      ...(plan.account && { taxFree: true as const }),
     });
     const counted = pricing.filter(
       (price) => interval === undefined || price.interval === interval,

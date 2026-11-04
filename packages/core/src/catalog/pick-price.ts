@@ -22,6 +22,11 @@ export interface PriceContext {
    * out, they're not sold, so nothing offers them.
    */
   withRetired?: true;
+  /**
+   * A finance account plan's prices (M11.12, the owner's choice): its fee has no sales tax anywhere, as the CRA exempts
+   * operating deposit accounts. Each picked price is then `taxIncluded`, so no tax is added to it, and `taxFree`.
+   */
+  taxFree?: true;
 }
 
 /** A price as the user sees it: the API's `pricing` entries (docs/api-output-examples.json), in their key order. */
@@ -46,6 +51,12 @@ export const pickedPriceSchema = z.strictObject({
     .literal(true)
     .describe(
       "The source price includes sales tax wherever the buyer is (its catalog price's taxIncluded)",
+    )
+    .optional(),
+  taxFree: z
+    .literal(true)
+    .describe(
+      "A finance account's fee, which has no sales tax (M11.12): price tags say nothing of tax",
     )
     .optional(),
   source: z
@@ -159,7 +170,7 @@ type PriceToPick = Pick<
   'region' | 'currency' | 'amount' | 'interval' | 'intervalCount' | 'autoRenew'
 > & { taxIncluded?: object | true };
 
-function toPicked(price: PriceToPick, { currency, fx }: PriceContext): PickedPrice {
+function toPicked(price: PriceToPick, { currency, fx, taxFree }: PriceContext): PickedPrice {
   const native = price.currency === currency || price.amount === 0;
   const rate = native || !fx ? undefined : exchangeRate(price.currency, currency, fx);
   const amount = rate === undefined ? price.amount : price.amount * rate;
@@ -171,7 +182,8 @@ function toPicked(price: PriceToPick, { currency, fx }: PriceContext): PickedPri
     monthlyEquivalent: monthlyEquivalent({ ...price, amount }),
     autoRenew: price.autoRenew,
     native,
-    ...(price.taxIncluded && { taxIncluded: true as const }),
+    ...((price.taxIncluded || taxFree) && { taxIncluded: true as const }),
+    ...(taxFree && { taxFree: true as const }),
     source: { region: price.region, amount: price.amount, currency: price.currency },
     ...(fx && rate !== undefined && { fx: { rate, date: fx.date, source: fx.source } }),
   };

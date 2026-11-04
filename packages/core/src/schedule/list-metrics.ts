@@ -10,6 +10,7 @@ import { itemCharges, type Charge } from './charges';
 
 // Totals and budget checks (PROJECT-PLAN §3.1, M7.1): this month, this year and the next 12 months, each the sum of
 // charges dated in it, sales tax included, in the user's currency; and the checks behind the budget warnings (M7.6).
+// Interest on account balances shows beside the totals, never in them, and an account's net cost a year (M11.12).
 
 /** What every total needs: the date, the user's currency, and where they pay tax. */
 export interface MoneyContext {
@@ -106,6 +107,11 @@ export interface ListMetrics {
    * never taken off them, since cards pay it later and not always monthly. 0 with no cash-back card.
    */
   cashback: { thisYear: number; approx: boolean };
+  /**
+   * The items' interest a year on their balances (§3.1, M11.12), in the user's currency: shown beside the totals, never
+   * added to them. 0 with no account earning any; one with no rate to convert it isn't in it.
+   */
+  interest: ChargeTotal;
   /** thisMonth ÷ the monthly budget, and thisYear ÷ the annual one, when they're set. */
   monthlyBudgetShare?: number;
   annualBudgetShare?: number;
@@ -146,6 +152,12 @@ export function listMetrics(
   }
   const coming = within(next12);
   const total12 = chargeTotal(coming, currency);
+  const interest = { amount: 0, approx: false };
+  for (const { interest: earned } of resolved) {
+    if (earned?.currency !== currency) continue;
+    interest.amount += earned.amount;
+    interest.approx ||= earned.converted;
+  }
 
   const shares = new Map<string, number>();
   if (total12.amount > 0) {
@@ -184,8 +196,26 @@ export function listMetrics(
     rankCounts: rankCounts(resolved),
     featureSummary: featureSummary(resolved, context.registry, today),
     cashback,
+    interest,
     ...(monthlyBudget !== undefined && { monthlyBudgetShare: thisMonth.amount / monthlyBudget }),
     ...(annualBudget !== undefined && { annualBudgetShare: thisYear.amount / annualBudget }),
     warnings,
   };
+}
+
+/**
+ * An account item's net cost a year (§3.1, M11.12): its charges in the next 12 months, its fee after waivers as
+ * charged, less its interest a year; below 0 when it earns more than it costs. None for an item that earns no interest,
+ * or with an amount in another currency, for want of an exchange rate.
+ */
+export function netCostAYear(
+  resolved: ResolvedItem,
+  context: MoneyContext,
+): ChargeTotal | undefined {
+  const { interest } = resolved;
+  if (interest?.currency !== context.currency) return undefined;
+  const charges = itemCharges(resolved, next12Range(context.today), context.place);
+  if (charges.some((charge) => charge.currency !== context.currency)) return undefined;
+  const fees = chargeTotal(charges, context.currency);
+  return { amount: fees.amount - interest.amount, approx: fees.approx || interest.converted };
 }

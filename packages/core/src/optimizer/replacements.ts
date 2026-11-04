@@ -71,6 +71,8 @@ export function replacements(
             currency: context.currency,
             ...(provider.billingCurrency && { billingCurrency: provider.billingCurrency }),
             ...(context.fx && { fx: context.fx }),
+            // A finance account's fee has no sales tax (M11.12).
+            ...(plan.account && { taxFree: true as const }),
           });
           const price = picked.find((own) => samePeriod(own, resolved.item.billing)) ?? picked[0];
           return price

@@ -143,6 +143,7 @@ export * from './tax/sales-tax-rate';
 export * from './tax/subdivisions';
 export * from './user/account-facts';
 export * from './user/account-form';
+export * from './user/account-money';
 export * from './user/add-request';
 export * from './user/app-lock';
 export * from './user/backup';

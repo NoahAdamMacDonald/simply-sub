@@ -115,6 +115,20 @@ export class BudgetTotals {
       spoken: `${approx ? 'about ' : ''}${amount} cash back in ${year}, not taken off the totals`,
     };
   });
+  /**
+   * "$450 interest a year" (M11.12, PROJECT-PLAN §3.1): what the accounts' balances earn at their posted rates, which
+   * the totals don't count. Not on a Lists card, and not when no account earns any.
+   */
+  protected readonly interest = computed(() => {
+    const { amount, approx } = this.metrics().interest;
+    if (this.compact() || amount <= 0) return undefined;
+    const saved = this.settings.saved();
+    const money = amountText(amount, saved?.currency ?? 'USD', saved?.country);
+    return {
+      shown: `${approx ? '≈ ' : ''}${money} interest a year`,
+      spoken: `${approx ? 'about ' : ''}${money} interest a year, not counted in the totals`,
+    };
+  });
   /** "1 subscription not counted": one it can't price, or priced in a currency it has no rate for. */
   protected readonly notCounted = computed(() => {
     const count = this.metrics().notCounted;

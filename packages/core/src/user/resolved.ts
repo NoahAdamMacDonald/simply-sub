@@ -1,7 +1,8 @@
+import type { Account, AccountCondition } from '../catalog/account';
 import { bundleFeatures } from '../catalog/bundle-deal';
 import { acceptedNetworksIn } from '../catalog/card-networks';
 import { isoDateSchema } from '../catalog/formats';
-import type { FxRates } from '../catalog/convert';
+import { convert, type FxRates } from '../catalog/convert';
 import { pickPrice, typedPrice, type PickedPrice, type PriceContext } from '../catalog/pick-price';
 import { closestPeriod, periodLostOn, storedPrice } from '../catalog/period-change';
 import { planOf } from '../catalog/plan-lookup';
@@ -20,6 +21,7 @@ import { nextChargeDate } from '../schedule/charge-dates';
 import { chargedItem, nextCharge, ownPriceOn, type Charge } from '../schedule/charges';
 import { itemStatus } from '../schedule/item-status';
 import type { TaxPlace } from '../tax/sales-tax-rate';
+import { interestAYear, waiverMet, type AccountInterest } from './account-money';
 import { customIconUrl } from './custom-sub-form';
 import { itemFormerName } from './former-name';
 import { planTitle } from './item-text';
@@ -67,6 +69,14 @@ export interface ResolvedAddOn {
   since?: IsoDate;
 }
 
+/**
+ * Interest a year on an account item's balance (PROJECT-PLAN §3.1, M11.12): in the user's currency, converted when it
+ * needed to be, or in its own when there's no rate for it.
+ */
+export interface ItemInterest extends AccountInterest {
+  converted: boolean;
+}
+
 /** A list item joined to what it is, priced for the user. */
 export interface ResolvedItem {
   item: ListItem;
@@ -110,8 +120,17 @@ export interface ResolvedItem {
   cancelUrl?: string;
   /** The region it's priced for: where the item was bought, else the user's country. */
   region: string;
-  /** The plan's, bundle's or custom plan's price for the item's billing period. */
+  /** The plan's, bundle's or custom plan's price for the item's billing period: 0 while its fee is waived. */
   price: PickedPrice;
+  /** A finance account plan's terms (M11.10): its waivers, rates and protection. */
+  account?: Account;
+  /**
+   * The waiver its facts meet (§3.1's fee after waivers, M11.12), and the fee it waives, as its card shows it: `price`
+   * is then 0, so it has no charges, as a free plan has none.
+   */
+  feeWaived?: { by: AccountCondition; fee: PickedPrice };
+  /** Interest a year on its balance (§3.1, M11.12) while it's active, which no total counts. */
+  interest?: ItemInterest;
   addOns: ResolvedAddOn[];
   /** The price override, with the item's billing period, while it applies today (from its `since`, before its `until`). */
   override?: PickedPrice;
@@ -237,6 +256,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
     | 'effectiveRanks'
     | 'status'
     | 'nextCharge'
+    | 'interest'
   >;
   // An id that changed, or a retired plan whose subscribers have moved, is followed before giving up (M10.27): the app
   // rewrites the item to the new id soon after (redirectedRecords), but it counts meanwhile.
@@ -251,7 +271,11 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
       );
       const plan = provider?.plans.find((candidate) => candidate.id === planId);
       if (!provider || !plan) return unresolved('plan-gone');
-      const pricing = priceContext(context, region, provider);
+      const pricing = {
+        ...priceContext(context, region, provider),
+        // A finance account's fee has no sales tax (M11.12).
+        ...(plan.account && { taxFree: true as const }),
+      };
       const price = forPeriod(plan.prices, item, { ...pricing, withRetired: true });
       if (!price) return unresolved('no-price');
       const addOns: ResolvedAddOn[] = [];
@@ -277,6 +301,9 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
       const retirement = retirementOf(plan, provider);
       const periodChange = periodChangeOf(plan.prices, price, item, pricing, retirement?.endsOn);
       perkKeys = planPerkKeys(plan);
+      // A finance account's fee after waivers (§3.1, M11.12): $0 while the item's facts meet one of its waivers.
+      const waiver =
+        plan.account && item.account && waiverMet(plan.account, item.account, context.today);
       parts = {
         providerId: provider.id,
         planId: plan.id,
@@ -289,7 +316,9 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
           }),
         ...(retirement?.endsOn !== undefined && { planEnds: retirement.endsOn }),
         ...providerLinks(provider, plan),
-        price,
+        price: waiver ? waivedPrice(price) : price,
+        ...(plan.account && { account: plan.account }),
+        ...(waiver && { feeWaived: { by: waiver, fee: price } }),
         addOns,
         features: plan.features,
         ...(plan.inferred && { inferred: plan.inferred }),
@@ -361,7 +390,10 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
       break;
     }
   }
-  const overridePrice = typedOverride(item, parts.price, priceContext(context, region));
+  // A waived fee is $0, whatever price the user typed (§3.1).
+  const overridePrice = parts.feeWaived
+    ? undefined
+    : typedOverride(item, parts.price, priceContext(context, region));
   const card = item.cardId === undefined ? undefined : context.cards?.get(item.cardId);
   const paidWith: PaidWith | undefined = card && {
     card,
@@ -386,6 +418,11 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
   const next = dated
     ? nextCharge(charged, context.today, context.taxPlace ?? { country: context.country })
     : undefined;
+  const status: ItemStatus = dated
+    ? itemStatus(chargedItem(charged), context.today, next)
+    : { kind: 'inactive', manual: false };
+  const interest =
+    status.kind === 'active' ? itemInterest(parts.account, item, context) : undefined;
   return {
     ok: true,
     resolved: {
@@ -408,12 +445,39 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         redirectedOverrides(item.rankOverrides, moves),
         context.profileRanks,
       ),
-      status: dated
-        ? itemStatus(chargedItem(charged), context.today, next)
-        : { kind: 'inactive', manual: false },
+      status,
       ...(next && { nextCharge: next }),
+      ...(interest && { interest }),
     },
   };
+}
+
+/** A waived fee as a price (§3.1): 0, native, so the item has no charges, as a free plan has none. */
+function waivedPrice(price: PickedPrice): PickedPrice {
+  const waived: PickedPrice = {
+    ...price,
+    amount: 0,
+    monthlyEquivalent: 0,
+    native: true,
+    source: { ...price.source, amount: 0 },
+  };
+  delete waived.fx;
+  return waived;
+}
+
+/** Interest a year on an account item's balance (§3.1), in the user's currency when there's a rate for it. */
+function itemInterest(
+  account: Account | undefined,
+  item: ListItem,
+  { today, currency, fx }: ResolveContext,
+): ItemInterest | undefined {
+  const interest = account && item.account && interestAYear(account, item.account, today);
+  if (!interest) return undefined;
+  if (interest.currency === currency) return { ...interest, converted: false };
+  const amount = fx && convert(interest.amount, interest.currency, currency, fx);
+  return amount === undefined
+    ? { ...interest, converted: false }
+    : { ...interest, amount, currency, converted: true };
 }
 
 /**

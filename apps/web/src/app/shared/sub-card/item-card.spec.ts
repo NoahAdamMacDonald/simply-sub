@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import {
   resolveItem,
+  type CatalogData,
   type CustomSubscription,
   type ListItem,
   type ResolvedItem,
@@ -12,7 +13,7 @@ import { ClockService } from '../../core/clock/clock-service';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { WrongDate } from '../wrong-date/wrong-date';
 import { ItemCard } from './item-card';
-import { alberta, fx, listItem, searchCatalogData, today } from './search.testing';
+import { alberta, fx, listItem, searchCatalogData, today, withBank } from './search.testing';
 
 // List view's card (P4) on Search's small catalog, for an Albertan.
 
@@ -34,11 +35,15 @@ const gym: CustomSubscription = {
   updatedAt: '2026-10-20T12:00:00.000Z',
 };
 
-function resolved(planId: string, extra: Partial<ListItem> = {}): ResolvedItem {
+function resolved(
+  planId: string,
+  extra: Partial<ListItem> = {},
+  catalog: CatalogData = searchCatalogData,
+): ResolvedItem {
   const result = resolveItem(
     { ...listItem(planId, '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d'), ...extra },
     {
-      catalog: searchCatalogData,
+      catalog,
       customSubs: new Map([[gymId, gym]]),
       country: alberta.country,
       currency: alberta.currency,
@@ -293,6 +298,59 @@ describe('ItemCard', () => {
     expect(shareOf(0.003)).toBe('<1% of list over the next 12 months');
     expect(shareOf(0)).toBeUndefined();
     expect(shareOf(undefined)).toBeUndefined();
+  });
+
+  describe('a finance account (M11.12)', () => {
+    const banked = (planId: string, amount: number) =>
+      resolved(
+        planId,
+        { account: { balance: { amount, currency: 'CAD' }, asOf: '2026-10-20' } },
+        withBank,
+      );
+    const lines = (item: ResolvedItem) =>
+      Array.from(
+        (render(item).nativeElement as HTMLElement).querySelectorAll('.account-lines li'),
+      ).map((line) => [
+        text(line.querySelector('[aria-hidden]')),
+        text(line.querySelector('.visually-hidden')),
+      ]);
+
+    it('shows a waived fee as its price with Waived under it, says which waiver, and its interest', () => {
+      const waived = banked('example-bank.unlimited', 4000);
+      const element = render(waived).nativeElement as HTMLElement;
+      // An account's fee has no sales tax, so no "+ tax".
+      expect(text(element.querySelector('.price ss-price'))).toContain('$17.95 / mo');
+      expect(text(element.querySelector('.price ss-price'))).not.toContain('tax');
+      expect(text(element.querySelector('.price .waived'))).toBe('Waived');
+      expect(lines(waived)).toEqual([
+        ['Fee waived: you keep $4,000 in it', 'Fee waived: you keep $4,000 in it'],
+        ['Interest: $20.00 a year at 0.50%', 'Interest: $20.00 a year at 0.50%'],
+      ]);
+    });
+
+    it('nets the interest against a fee it pays, which has no sales tax', () => {
+      // $17.95 a month, less 0.50% on $2,000.
+      expect(lines(banked('example-bank.unlimited', 2000))).toEqual([
+        ['Interest: $10.00 a year at 0.50%', 'Interest: $10.00 a year at 0.50%'],
+        ['Net: costs $205.40 a year, after interest', 'Net: costs $205.40 a year, after interest'],
+      ]);
+      expect(
+        (render(banked('example-bank.unlimited', 2000)).nativeElement as HTMLElement).querySelector(
+          '.waived',
+        ),
+      ).toBeNull();
+    });
+
+    it('averages a portion account’s tiers, and has no net line without a fee', () => {
+      // 2% on $10,000 and 2.50% on $2,000.
+      expect(lines(banked('example-bank.savings', 12_000))).toEqual([
+        ['Interest: $250.00 a year at 2.08%', 'Interest: $250.00 a year at 2.08%'],
+      ]);
+    });
+
+    it('has no account lines for another plan', () => {
+      expect(lines(resolved('netflix.standard'))).toEqual([]);
+    });
   });
 
   describe('its next charge (M7.1)', () => {

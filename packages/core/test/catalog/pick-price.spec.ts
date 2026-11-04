@@ -248,6 +248,12 @@ describe('pickPrice', () => {
     expect(pickPrice([price('GLOBAL', 'EUR', 5)], canada)[0]).not.toHaveProperty('taxIncluded');
   });
 
+  it('marks a finance account’s prices tax-free, so no sales tax is added to them (M11.12)', () => {
+    const [picked] = pickPrice([price('CA', 'CAD', 17.95)], { ...canada, taxFree: true });
+    expect(picked).toMatchObject({ amount: 17.95, taxIncluded: true, taxFree: true });
+    expect(pickPrice([price('CA', 'CAD', 17.95)], canada)[0]).not.toHaveProperty('taxFree');
+  });
+
   it('gives nothing for no prices', () => {
     expect(pickPrice([], canada)).toEqual([]);
   });

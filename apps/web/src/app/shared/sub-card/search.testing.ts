@@ -1,6 +1,6 @@
 import { signal } from '@angular/core';
 import type { Provider } from '@angular/core';
-import type { CatalogData, FxRates, ListItem, Price, Settings } from '@simply-sub/core';
+import type { Account, CatalogData, FxRates, ListItem, Price, Settings } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { FxStore } from '../../core/fx/fx-store';
 import { SettingsStore } from '../../core/settings/settings-store';
@@ -47,6 +47,29 @@ function price(
 }
 
 const streaming = { category: 'streaming', spendCategory: 'streaming' };
+
+/** The fixture bank's posted rates (withBank). */
+function bankRates(
+  applies: 'whole' | 'portion',
+  tiers: { from: number; rate: number }[],
+): NonNullable<Account['rates']> {
+  return {
+    follows: 'none',
+    applies,
+    tiers,
+    sourceUrl: 'https://example.com/rates',
+    lastVerified: '2026-10-20',
+  };
+}
+
+const bankProtection: Account['protection'] = {
+  insurer: 'cdic',
+  held: 'own-name',
+  limit: 100_000,
+  url: 'https://example.com/cdic',
+  quotes: ['Protected by CDIC.'],
+  lastVerified: '2026-10-20',
+};
 
 /** One rubric for every test topic: the card shows a tier's name, not its rubric. */
 const policyTiersText = {
@@ -430,6 +453,58 @@ export const searchCatalogData: CatalogData = {
       tiers: policyTiersText,
       silent: 'poor',
       categories: ['vpn'],
+    },
+  ],
+};
+
+/**
+ * A bank for the finance specs (M11.11, M11.12), in the catalog above: its $17.95 chequing pays 0.50% and is free with
+ * a balance of $4,000, any direct deposit, or for a student of 24 or under; its free savings pay 2%, and 2.50% on what's
+ * over $10,000. Its categories don't matter here.
+ */
+export const withBank: CatalogData = {
+  ...searchCatalogData,
+  providers: [
+    ...searchCatalogData.providers,
+    {
+      id: 'example-bank',
+      name: 'Example Bank',
+      website: 'https://example.com',
+      cancelUrl: 'https://example.com/close',
+      category: 'streaming',
+      spendCategory: 'streaming',
+      plans: [
+        {
+          id: 'example-bank.unlimited',
+          name: 'Unlimited Chequing',
+          link: 'https://example.com/chequing',
+          features: {},
+          prices: [price('CA', 'CAD', 17.95)],
+          account: {
+            kind: 'chequing',
+            currency: 'CAD',
+            waivers: [{ minBalance: 4000 }, { directDeposit: true }, { maxAge: 24, student: true }],
+            rates: bankRates('whole', [{ from: 0, rate: 0.5 }]),
+            protection: bankProtection,
+          },
+        },
+        {
+          id: 'example-bank.savings',
+          name: 'High Interest Savings',
+          link: 'https://example.com/savings',
+          features: {},
+          prices: [price('CA', 'CAD', 0)],
+          account: {
+            kind: 'savings',
+            currency: 'CAD',
+            rates: bankRates('portion', [
+              { from: 0, rate: 2 },
+              { from: 10_000, rate: 2.5 },
+            ]),
+            protection: bankProtection,
+          },
+        },
+      ],
     },
   ],
 };

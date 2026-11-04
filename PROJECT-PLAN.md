@@ -2025,6 +2025,27 @@ in every D1 `json` column search parses.
   - [x] It's in no Dexie index, and with the lock on the raw row holds no plaintext
   - [x] Entered in the item dialog for account plans only; left out of exports unless "Include balances" is ticked
 
+**M11.12 — Interest and net cost** (§3.1, BLUEPRINT §4.11)
+- **As built** (2026-11-04):
+  - **The terms** first, in §3.1: fee after waivers, interest a year, net cost a year, and that interest is never a
+    charge.
+  - **Core:** `account-money.ts` (`waiverMet`, `interestAYear`); resolveItem's `account`, `feeWaived` and `interest`
+    (a waived fee's price is 0, and a price the user typed doesn't count then); `listMetrics`' `interest` and
+    `netCostAYear`. All take `today`.
+  - **No sales tax on an account's fee** (the owner's choice, BLUEPRINT §14): pickPrice's `taxFree`, passed for a plan
+    with an account, so charges add none and price tags say nothing of tax. `sales-tax-rate.ts`, in the initial
+    bundle, is unchanged.
+  - **The pages:** the budget totals' "$285.00 interest a year" beside the totals, as cash back (Home, List view, the
+    Lists page; not a Lists card); an account's card in List view: its fee with Waived under it and which waiver, its
+    interest a year and rate (a portion account's tiers averaged), and its net cost a year when it has a fee.
+  - **Checks:** `check-m11-interest.cjs` (a fixture bank's three accounts on Home, List view and the Lists page, both
+    themes, both widths, with axe). `check-lists.cjs`' Tab order now has the totals' breakdown buttons (M10.30), which
+    it predated. The initial bundle stays 499.92 kB.
+- **Acceptance**
+  - [x] A fixture's balance gives the interest its tiers state (whole and by portion, and a bonus its facts earn)
+  - [x] A fee the balance waives counts $0: no charges, so no total counts it
+  - [x] Home and the lists show interest beside spending, never in the totals
+
 **M11.13 — The finance optimizer** (BLUEPRINT §10.6)
 - **Acceptance**
   - [ ] Fixtures: paying for a better rate (worth it above the break-even, not below); holding a waiver's minimum
@@ -2042,12 +2063,15 @@ These live in `packages/core` as pure functions, so every page computes them the
 |---|---|---|
 | **Picked price** | The price `pickPrice` chooses for the user's region and currency: one source region and currency per plan, add-on or bundle, with every interval priced there, converted if it isn't in the user's currency. Native means no conversion was needed (BLUEPRINT §4.7) | Everywhere a price appears |
 | **Item price** | The price override if one is set and the charge is dated on or after its `since` (if any, M9.6) and before its `until` (if any); otherwise the picked plan price plus each picked add-on price × its quantity. Bundle items use the bundle price. An add-on not sold for the item's billing period is billed on its own (M4.6: Disney+'s monthly extra member on a yearly plan), so its charges follow its period | Charges |
-| **Sales tax** | Added to the item price for a buyer in a tax-added region (Canada, US) at their rate: the built-in rate for their province, or their own `salesTaxPercent`. Typed amounts (a custom plan, a price override) already include it unless marked `plusTax` (BLUEPRINT §4.8) | Charges |
+| **Sales tax** | Added to the item price for a buyer in a tax-added region (Canada, US) at their rate: the built-in rate for their province, or their own `salesTaxPercent`. Typed amounts (a custom plan, a price override) already include it unless marked `plusTax`. A finance account's fee has none (M11.12, the owner's choice) (BLUEPRINT §4.8) | Charges |
 | **Monthly equivalent** | Price per month: year ÷ 12, week × 52 ÷ 12, day × 365 ÷ 12, each ÷ `intervalCount`. Before tax, like the price tags | Sorting, the price filter, "≈ $x/mo" hints |
 | **Charge** | One scheduled payment: `{ date, amount, tax, currency, itemId, listId, converted, manual, charged }`. `amount` includes `tax`, the sales tax part; `charged` is the same in the currency the provider charges it in, before any conversion, which a payment card's FX fee is judged against (M9.3) | Calendar and all totals |
 | **This month** | Sum of the charges dated in the current calendar month | Monthly budget bars, list cards |
 | **This year** | Sum of the charges dated in the current calendar year (Jan 1 – Dec 31) | Annual budget bars, list cards |
 | **Next 12 months** | Sum of the charges from today up to, but not including, the same day next year (so a yearly plan renewing today counts once) | An item's "% of list", optimizer savings |
+| **Fee after waivers** | A finance account item's plan price, or $0 when the item's facts (M11.11) meet one of its plan's `waivers`; one that can't be told without a fact isn't met. It's judged from the facts as they are now, for every charge: a waived item has no charges, as a free plan has none, so no total counts it (M11.12) | Charges, so every total |
+| **Interest a year** | A finance account item's balance (M11.11) at its plan's posted rates, as simple interest for a year, before tax. `whole` pays the whole balance the rate of the highest tier it reaches; `portion` pays each part of it its own tier's rate ($5,000 at 1.25%, the rest at 2%); a `bonus` rate replaces the tiers, on the whole balance, when the item's facts meet its condition (one that can't be told isn't met). In the balance's currency, converted into the user's like a price (≈). None without a balance or posted rates, or while the item isn't active (M11.12) | Interest beside the totals, net cost, the finance optimizer (M11.13) |
+| **Net cost a year** | A finance account item's charges in the next 12 months (its fee after waivers, as charged) less its interest a year: below 0 when it earns more than it costs (M11.12) | Its card in List view, the finance optimizer |
 
 **Charge rules**
 - **Ongoing billing:** charges fall on `anchorDate` plus or minus whole intervals. Each date is computed from the
@@ -2083,6 +2107,8 @@ These live in `packages/core` as pure functions, so every page computes them the
   of Sep 2 – Nov 2 gives the same charges, since none falls on the end date.
 - **Currency:** everything is totalled in the user's currency. A total that includes a converted amount shows "≈".
 - **Rounding:** keep full precision internally and round to 2 decimals only for display.
+- **Interest is never a charge:** totals count what's paid. Interest a year shows beside them, as cash back does
+  (M10.29), on Home, List view and the Lists page: the sum of the items' interest in the user's currency (M11.12).
 
 **Budget checks** (warning banners on Home and List view)
 - Monthly: if *any* of the next 12 calendar months has more charges than the monthly budget, warn and name the first one.
