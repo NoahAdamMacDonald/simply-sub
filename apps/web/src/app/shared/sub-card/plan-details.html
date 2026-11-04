@@ -11,284 +11,6 @@
   </span>
 </ng-template>
 
-@if (hasFeatures()) {
-  <div class="group">
-    <h3>Features</h3>
-    <ss-feature-list [features]="plan().features" [ranks]="ranks()" [inferred]="plan().inferred" />
-  </div>
-}
-
-<!-- A finance account's terms (M11.10): its interest, what waives its fee, its limits and who protects the money. -->
-@if (plan().account; as account) {
-  <div class="group">
-    <h3>Account</h3>
-    <ss-account-terms [account]="account" [country]="countryCode()" />
-  </div>
-}
-
-@if (extras(); as extras) {
-  @if (extras.addOns.length) {
-    <div class="group">
-      <h3>Add-ons</h3>
-      <ul class="rows">
-        @for (entry of extras.addOns; track entry.addOn.id) {
-          <li>
-            <span class="row-name">{{ entry.addOn.name }}</span>
-            @for (price of entry.pricing; track $index) {
-              <ss-price [price]="price" />
-            }
-            @if (entry.availability === 'unknown') {
-              <span class="note">No price for {{ country() }} yet</span>
-            }
-          </li>
-        }
-      </ul>
-    </div>
-  }
-
-  @if (extras.bundles.length) {
-    <div class="group">
-      <h3>Bundles</h3>
-      <ul class="rows">
-        @for (offer of extras.bundles; track offer.bundle.id) {
-          <li>
-            <span class="row-name">
-              <span class="icons">
-                @for (part of offer.plans; track part.plan.id) {
-                  <ss-provider-icon
-                    [src]="icon(part.provider)"
-                    [name]="part.provider.name"
-                    size="24"
-                  />
-                }
-              </span>
-              {{ offer.bundle.name }}
-            </span>
-            @for (price of offer.pricing; track $index) {
-              @if (addMenu(); as menu) {
-                <ss-price
-                  clickable
-                  [action]="menu.action()"
-                  [price]="price"
-                  [menu]="menu.panel()"
-                  (priceSelect)="menu.add(bundleRequest(offer.bundle.id, $event))"
-                />
-              } @else {
-                <ss-price [price]="price" />
-              }
-            }
-            @for (saving of offer.savings; track $index) {
-              <ng-container
-                [ngTemplateOutlet]="saved"
-                [ngTemplateOutletContext]="{ $implicit: savingParts(saving, offer.pricing) }"
-              />
-            }
-            @if (offer.availability === 'unknown') {
-              <span class="note">No price for {{ country() }} yet</span>
-            }
-          </li>
-        }
-      </ul>
-    </div>
-  }
-
-  @if (extras.suite; as suite) {
-    <div class="group">
-      <h3>Includes</h3>
-      <ul class="bullets">
-        @for (entry of suite.includes; track $index) {
-          <li>{{ includedName(entry) }}</li>
-        }
-      </ul>
-      @for (saving of suite.savings; track $index) {
-        <p class="suite-saving">
-          <ng-container
-            [ngTemplateOutlet]="saved"
-            [ngTemplateOutletContext]="{ $implicit: savingParts(saving, match().pricing ?? []) }"
-          />
-          <span> against buying them separately</span>
-        </p>
-      }
-    </div>
-  }
-}
-
-@if (perks().length) {
-  <div class="group">
-    <h3>Perks</h3>
-    <ul class="bullets">
-      @for (perk of perks(); track perk.id) {
-        <li>{{ perk.name }}</li>
-      }
-    </ul>
-  </div>
-}
-
-@if (plan().notes; as notes) {
-  <p class="notes">{{ notes }}</p>
-}
-@if (provider().notes; as notes) {
-  <p class="notes">{{ notes }}</p>
-}
-
-<!-- A provider's Terms and policies load as the card opens (M11.8): a note while they can't show. -->
-@if (policyNote(); as note) {
-  <div class="group">
-    <h3>Terms and policies</h3>
-    <p class="policy-note" role="status">{{ note }}</p>
-  </div>
-}
-@if (policies(); as policies) {
-  <div class="group">
-    <h3>Terms and policies</h3>
-    @for (group of policies.groups; track group.group) {
-      <h4>{{ groupNames[group.group] }}</h4>
-      <ul class="policies">
-        @for (policy of group.policies; track $index) {
-          <!-- A topic the pages don't address, or that can't apply, is a grey line without a grade (M11.1). -->
-          <li [class.unrated]="!policy.tier">
-            <!-- The dot is decorative: the grade is in words beside the topic (M5.9). -->
-            <span class="dot" aria-hidden="true" [attr.data-tier]="policy.tier ?? 'none'"></span>
-            <!-- The reason with its citations, then where to change it (M5.12). -->
-            <div class="rating">
-              <p class="rated">
-                <!-- A notable rating is named by its title (other.notable). -->
-                <span class="topic">{{ policy.title ?? policy.topic.name }}</span>
-                @if (policy.tier; as tier) {
-                  <span class="grade"> ({{ tierNames[tier] }}): </span>
-                } @else if (policy.status; as status) {
-                  <span class="grade"> ({{ statusNames[status] }}): </span>
-                }
-                <!-- The space before the citations is the reason's: Angular drops a span of only a space. -->
-                <span>{{ policy.reason }} </span>
-                @for (citation of policy.citations; track $index) {
-                  <a
-                    class="cite"
-                    [href]="citation.href"
-                    target="_blank"
-                    rel="noopener"
-                    [matTooltip]="quoteText(citation)"
-                    matTooltipTouchGestures="off"
-                  >
-                    <span>[{{ citation.number }}]</span>
-                    <span class="visually-hidden"> {{ citation.name }}, opens in a new tab</span>
-                  </a>
-                }
-              </p>
-              <!-- Where to change it, when the user has to (M5.12): the provider's own page. -->
-              @if (policy.action; as action) {
-                <a
-                  class="action"
-                  [href]="action.url"
-                  target="_blank"
-                  rel="noopener"
-                  [attr.aria-label]="action.name + ', opens in a new tab'"
-                >
-                  <span>{{ action.name }}</span>
-                  <mat-icon aria-hidden="true">open_in_new</mat-icon>
-                </a>
-              }
-            </div>
-          </li>
-        }
-      </ul>
-    }
-    <p class="sources-label">Sources</p>
-    <ol class="policy-links">
-      @for (link of policies.links; track link.url) {
-        <li>
-          <a
-            [href]="link.url"
-            target="_blank"
-            rel="noopener"
-            [attr.aria-label]="'[' + ($index + 1) + '] ' + link.name + ', opens in a new tab'"
-          >
-            <span>[{{ $index + 1 }}] {{ link.name }}</span>
-            <mat-icon aria-hidden="true">open_in_new</mat-icon>
-          </a>
-        </li>
-      }
-    </ol>
-  </div>
-}
-
-<!-- Outside raters' labels (M11.2): the label, its date and a link to the rater's own page, never its words. -->
-@if (outside().length) {
-  <div class="group">
-    <h3>Outside ratings</h3>
-    <ul class="outside">
-      @for (group of outside(); track group.subject) {
-        @for (rating of group.ratings; track $index) {
-          <li>
-            <span class="subject">{{ group.name }}: </span>
-            <span>{{ rating.label }} from </span>
-            <a
-              class="outside-link"
-              [href]="rating.url"
-              target="_blank"
-              rel="noopener"
-              [attr.aria-label]="rating.rater + '’s rating, opens in a new tab'"
-            >
-              <span>{{ rating.rater }}</span>
-              <mat-icon aria-hidden="true">open_in_new</mat-icon>
-            </a>
-            <span>, {{ ratingDate(rating.date) }}</span>
-            @if (rating.tested; as tested) {
-              <span class="tested"> (tested {{ tested }})</span>
-            }
-          </li>
-        }
-      }
-    </ul>
-  </div>
-}
-
-<!-- The company behind it (M11.2), citing its own page, with the words that say so as the link's tooltip. -->
-@if (owner(); as owner) {
-  <div class="group">
-    <h3>Owner</h3>
-    <p class="owner">
-      <span class="subject">{{ owner.name }}</span>
-      <!-- Where it's from (the owner's choice, 2026-11-03), linked to its own page when the owner's doesn't say it. -->
-      @if (ownerCountry(); as country) {
-        <span aria-hidden="true"> · </span>
-        <span class="visually-hidden">, from </span>
-        @if (country.cited; as cited) {
-          <a
-            class="outside-link"
-            [href]="cited.href"
-            target="_blank"
-            rel="noopener"
-            [matTooltip]="quotesText(cited.quotes)"
-            matTooltipTouchGestures="off"
-            [attr.aria-label]="
-              country.name + ', according to its ' + cited.page + ', opens in a new tab'
-            "
-          >
-            <span>{{ country.name }}</span>
-            <mat-icon aria-hidden="true">open_in_new</mat-icon>
-          </a>
-        } @else {
-          <span>{{ country.name }}</span>
-        }
-      }
-      <span>, according to its </span>
-      <a
-        class="outside-link"
-        [href]="owner.href"
-        target="_blank"
-        rel="noopener"
-        [matTooltip]="quotesText(owner.quotes)"
-        matTooltipTouchGestures="off"
-        [attr.aria-label]="owner.page + ', opens in a new tab'"
-      >
-        <span>{{ owner.page }}</span>
-        <mat-icon aria-hidden="true">open_in_new</mat-icon>
-      </a>
-    </p>
-  </div>
-}
-
 <!-- A provider's page cited for a fact, linked to its words, which are its tooltip. -->
 <ng-template #cited let-fact>
   <span>{{ fact.lead ?? ', according to its ' }}</span>
@@ -326,111 +48,475 @@
 </ng-template>
 
 <!--
-  How a buyer where the user lives can pay it, and in which currencies beyond its price lists (M11.5), citing the
-  provider's pages, their words as the tooltips. Each way to pay is a chip of its glyphs: focusable, so keyboard users
-  get its name as the tooltip, which screen readers read as an image's name; one with no glyph shows its name.
+  A way to pay as a chip (the owner's design, 2026-11-03): focusable, so keyboard users get its name as the tooltip,
+  which screen readers read as an image's name; one with no glyph shows its name.
 -->
-@if (payment().length || currencies().length) {
-  <div class="group">
-    <h3>Ways to pay</h3>
-    @for (line of payment(); track $index) {
+<ng-template #payChip let-chip>
+  @if (chip.glyphs.length) {
+    <span
+      class="pay-chip"
+      tabindex="0"
+      role="img"
+      [attr.aria-label]="chip.name"
+      [matTooltip]="chip.name"
+      matTooltipTouchGestures="off"
+    >
+      <ng-container [ngTemplateOutlet]="glyphs" [ngTemplateOutletContext]="{ $implicit: chip }" />
+      @if (chip.words) {
+        <span>{{ chip.words }}</span>
+      }
+    </span>
+  } @else {
+    <span class="pay-chip">{{ chip.name }}</span>
+  }
+</ng-template>
+
+<!--
+  The details' tabs (the owner's design, 2026-11-03), WAI-ARIA's tabs pattern with selection following focus: arrows,
+  Home and End move between them. Each panel renders the first time its tab is chosen, and stays.
+-->
+<div class="tabs" role="tablist" [attr.aria-label]="tabsLabel()">
+  @for (tab of tabs(); track tab.id; let index = $index) {
+    <button
+      type="button"
+      role="tab"
+      class="tab"
+      [id]="id + '-tab-' + tab.id"
+      [attr.aria-selected]="tab.id === current()"
+      [attr.aria-controls]="id + '-' + tab.id"
+      [tabindex]="tab.id === current() ? 0 : -1"
+      (click)="select(tab.id)"
+      (keydown)="tabKey($event, index)"
+    >
+      <span>{{ tab.name }}</span>
+      @if (tab.count) {
+        <span class="count"> {{ tab.count }}</span>
+      }
+    </button>
+  }
+</div>
+@for (tab of tabs(); track tab.id) {
+  <div
+    class="panel"
+    role="tabpanel"
+    tabindex="0"
+    [id]="id + '-' + tab.id"
+    [attr.aria-labelledby]="id + '-tab-' + tab.id"
+    [hidden]="tab.id !== current()"
+  >
+    @if (visited().has(tab.id)) {
+      @switch (tab.id) {
+        @case ('overview') {
+          <ng-container [ngTemplateOutlet]="overview" />
+        }
+        @case ('features') {
+          <ng-container [ngTemplateOutlet]="featuresPanel" />
+        }
+        @case ('terms') {
+          <ng-container [ngTemplateOutlet]="termsPanel" />
+        }
+        @case ('facts') {
+          <ng-container [ngTemplateOutlet]="factsPanel" />
+        }
+      }
+    }
+  </div>
+}
+
+<!--
+  Overview: the plan at a glance. Its highlights, a finance account's terms, what a suite includes, its Terms and
+  policies' grades (See all opens Terms), its owner and ways to pay, and when its price was checked.
+-->
+<ng-template #overview>
+  @if (highlights(); as highlights) {
+    <div class="group">
+      <h3>Highlights</h3>
+      <p class="line">{{ highlights }}</p>
+    </div>
+  }
+  <!-- A finance account's terms (M11.10): its interest, what waives its fee, its limits and who protects the money. -->
+  @if (plan().account; as account) {
+    <div class="group">
+      <h3>Account</h3>
+      <ss-account-terms [account]="account" [country]="countryCode()" />
+    </div>
+  }
+  @if (extras()?.suite; as suite) {
+    <div class="group">
+      <h3>Includes</h3>
+      <p class="line">
+        <span>{{ includedList(suite) }}</span>
+        @if (suite.savings[0]; as saving) {
+          <span aria-hidden="true"> · </span>
+          <ng-container
+            [ngTemplateOutlet]="saved"
+            [ngTemplateOutletContext]="{ $implicit: savingParts(saving, match().pricing ?? []) }"
+          />
+        }
+      </p>
+    </div>
+  }
+  @if (grades(); as grades) {
+    <div class="group">
+      <h3>Terms and policies</h3>
+      <!-- The grades' share, as a bar: decorative, since the counts say it in words. -->
+      <div class="grade-bar" aria-hidden="true">
+        @for (tier of grades.slices; track $index) {
+          <span [attr.data-tier]="tier"></span>
+        }
+      </div>
+      <p class="grades">
+        @for (grade of grades.counts; track grade.tier) {
+          <span>{{ grade.words }}</span>
+        }
+      </p>
+      <button matButton type="button" class="see-all" (click)="select('terms', true)">
+        <span>See all {{ grades.total }}</span>
+        <span class="visually-hidden"> ratings</span>
+        <mat-icon aria-hidden="true" iconPositionEnd>chevron_right</mat-icon>
+      </button>
+    </div>
+  } @else if (policyNote(); as note) {
+    <div class="group">
+      <h3>Terms and policies</h3>
+      <p class="policy-note" role="status">{{ note }}</p>
+    </div>
+  }
+  @if (owner() || glance().chips.length) {
+    <div class="group">
+      <h3>{{ glance().heading }}</h3>
       <p class="payment pay-chips">
-        @for (chip of line.chips; track chip.name) {
-          @if (chip.glyphs.length) {
-            <span
-              class="pay-chip"
-              tabindex="0"
-              role="img"
-              [attr.aria-label]="chip.name"
-              [matTooltip]="chip.name"
-              matTooltipTouchGestures="off"
-            >
-              <ng-container
-                [ngTemplateOutlet]="glyphs"
-                [ngTemplateOutletContext]="{ $implicit: chip }"
-              />
-              @if (chip.words) {
-                <span>{{ chip.words }}</span>
+        @if (owner(); as owner) {
+          <span class="glance-owner">
+            <span class="subject">{{ owner.name }}</span>
+            @if (ownerCountry(); as country) {
+              <span aria-hidden="true"> · </span>
+              <span class="visually-hidden">, from </span>
+              <span>{{ country.name }}</span>
+            }
+          </span>
+        }
+        @for (chip of glance().chips; track chip.name) {
+          <ng-container
+            [ngTemplateOutlet]="payChip"
+            [ngTemplateOutletContext]="{ $implicit: chip }"
+          />
+        }
+        @if (glance().more) {
+          <span>and {{ glance().more }} more</span>
+        }
+      </p>
+    </div>
+  }
+  <div class="checked-row">
+    <p class="checked">
+      <span>Price checked {{ checked() }}</span>
+      @if (match().stale) {
+        <span class="badge"> May be out of date</span>
+      }
+    </p>
+    <button matButton type="button" class="report" (click)="report()">Report a wrong price</button>
+  </div>
+</ng-template>
+
+<!-- Features: the plan's features with the user's ranks, its perks, add-ons and the bundles that include it. -->
+<ng-template #featuresPanel>
+  @if (featureCount()) {
+    <div class="group">
+      <h3>Features</h3>
+      <ss-feature-list
+        [features]="plan().features"
+        [ranks]="ranks()"
+        [inferred]="plan().inferred"
+      />
+    </div>
+  }
+  @if (perks().length) {
+    <div class="group">
+      <h3>Perks</h3>
+      <ul class="bullets">
+        @for (perk of perks(); track perk.id) {
+          <li>{{ perk.name }}</li>
+        }
+      </ul>
+    </div>
+  }
+  @if (extras(); as extras) {
+    @if (extras.addOns.length) {
+      <div class="group">
+        <h3>Add-ons</h3>
+        <ul class="rows">
+          @for (entry of extras.addOns; track entry.addOn.id) {
+            <li>
+              <span class="row-name">{{ entry.addOn.name }}</span>
+              @for (price of entry.pricing; track $index) {
+                <ss-price [price]="price" />
               }
-            </span>
-          } @else {
-            <span class="pay-chip">{{ chip.name }}</span>
+              @if (entry.availability === 'unknown') {
+                <span class="note">No price for {{ country() }} yet</span>
+              }
+            </li>
+          }
+        </ul>
+      </div>
+    }
+    @if (extras.bundles.length) {
+      <div class="group">
+        <h3>Bundles</h3>
+        <ul class="rows">
+          @for (offer of extras.bundles; track offer.bundle.id) {
+            <li>
+              <span class="row-name">
+                <span class="icons">
+                  @for (part of offer.plans; track part.plan.id) {
+                    <ss-provider-icon
+                      [src]="icon(part.provider)"
+                      [name]="part.provider.name"
+                      size="24"
+                    />
+                  }
+                </span>
+                {{ offer.bundle.name }}
+              </span>
+              @for (price of offer.pricing; track $index) {
+                @if (addMenu(); as menu) {
+                  <ss-price
+                    clickable
+                    [action]="menu.action()"
+                    [price]="price"
+                    [menu]="menu.panel()"
+                    (priceSelect)="menu.add(bundleRequest(offer.bundle.id, $event))"
+                  />
+                } @else {
+                  <ss-price [price]="price" />
+                }
+              }
+              @for (saving of offer.savings; track $index) {
+                <ng-container
+                  [ngTemplateOutlet]="saved"
+                  [ngTemplateOutletContext]="{ $implicit: savingParts(saving, offer.pricing) }"
+                />
+              }
+              @if (offer.availability === 'unknown') {
+                <span class="note">No price for {{ country() }} yet</span>
+              }
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  }
+</ng-template>
+
+<!-- Terms: its Terms and policies, their grades counted first, then outside raters' labels. -->
+<ng-template #termsPanel>
+  <!-- A provider's Terms and policies load as the card opens (M11.8): a note while they can't show. -->
+  @if (policyNote(); as note) {
+    <div class="group">
+      <h3>Terms and policies</h3>
+      <p class="policy-note" role="status">{{ note }}</p>
+    </div>
+  }
+  @if (policies(); as policies) {
+    <div class="group">
+      <h3>Terms and policies</h3>
+      <ss-policy-ratings [policies]="policies" />
+    </div>
+  }
+
+  <!-- Outside raters' labels (M11.2): the label, its date and a link to the rater's own page, never its words. -->
+  @if (outside().length) {
+    <div class="group">
+      <h3>Outside ratings</h3>
+      <ul class="outside">
+        @for (group of outside(); track group.subject) {
+          @for (rating of group.ratings; track $index) {
+            <li>
+              <span class="subject">{{ group.name }}: </span>
+              <span>{{ rating.label }} from </span>
+              <a
+                class="outside-link"
+                [href]="rating.url"
+                target="_blank"
+                rel="noopener"
+                [attr.aria-label]="rating.rater + '’s rating, opens in a new tab'"
+              >
+                <span>{{ rating.rater }}</span>
+                <mat-icon aria-hidden="true">open_in_new</mat-icon>
+              </a>
+              <span>, {{ ratingDate(rating.date) }}</span>
+              @if (rating.tested; as tested) {
+                <span class="tested"> (tested {{ tested }})</span>
+              }
+            </li>
           }
         }
-        <span>
+      </ul>
+    </div>
+  }
+</ng-template>
+
+<!-- Facts: what a suite includes, its owner, ways to pay, billing day, source code and notes. -->
+<ng-template #factsPanel>
+  @if (extras()?.suite; as suite) {
+    <div class="group">
+      <h3>Includes</h3>
+      <ul class="bullets">
+        @for (entry of suite.includes; track $index) {
+          <li>{{ includedName(entry) }}</li>
+        }
+      </ul>
+      @for (saving of suite.savings; track $index) {
+        <p class="suite-saving">
+          <ng-container
+            [ngTemplateOutlet]="saved"
+            [ngTemplateOutletContext]="{ $implicit: savingParts(saving, match().pricing ?? []) }"
+          />
+          <span> against buying them separately</span>
+        </p>
+      }
+    </div>
+  }
+
+  <!-- The company behind it (M11.2), citing its own page, with the words that say so as the link's tooltip. -->
+  @if (owner(); as owner) {
+    <div class="group">
+      <h3>Owner</h3>
+      <p class="owner">
+        <span class="subject">{{ owner.name }}</span>
+        <!-- Where it's from (the owner's choice, 2026-11-03), linked to its own page when the owner's doesn't say it. -->
+        @if (ownerCountry(); as country) {
+          <span aria-hidden="true"> · </span>
+          <span class="visually-hidden">, from </span>
+          @if (country.cited; as cited) {
+            <a
+              class="outside-link"
+              [href]="cited.href"
+              target="_blank"
+              rel="noopener"
+              [matTooltip]="quotesText(cited.quotes)"
+              matTooltipTouchGestures="off"
+              [attr.aria-label]="
+                country.name + ', according to its ' + cited.page + ', opens in a new tab'
+              "
+            >
+              <span>{{ country.name }}</span>
+              <mat-icon aria-hidden="true">open_in_new</mat-icon>
+            </a>
+          } @else {
+            <span>{{ country.name }}</span>
+          }
+        }
+        <span>, according to its </span>
+        <a
+          class="outside-link"
+          [href]="owner.href"
+          target="_blank"
+          rel="noopener"
+          [matTooltip]="quotesText(owner.quotes)"
+          matTooltipTouchGestures="off"
+          [attr.aria-label]="owner.page + ', opens in a new tab'"
+        >
+          <span>{{ owner.page }}</span>
+          <mat-icon aria-hidden="true">open_in_new</mat-icon>
+        </a>
+      </p>
+    </div>
+  }
+
+  <!--
+    How a buyer where the user lives can pay it, and in which currencies beyond its price lists (M11.5), citing the
+    provider's pages, their words as the tooltips; each way to pay a chip.
+  -->
+  @if (payment().length || currencies().length) {
+    <div class="group">
+      <h3>Ways to pay</h3>
+      @for (line of payment(); track $index) {
+        <p class="payment pay-chips">
+          @for (chip of line.chips; track chip.name) {
+            <ng-container
+              [ngTemplateOutlet]="payChip"
+              [ngTemplateOutletContext]="{ $implicit: chip }"
+            />
+          }
+          <span>
+            <ng-container
+              [ngTemplateOutlet]="cited"
+              [ngTemplateOutletContext]="{ $implicit: line.cited }"
+            />
+          </span>
+        </p>
+      }
+      @for (line of currencies(); track $index) {
+        <p class="payment">
+          <span>{{ line.text }}</span>
           <ng-container
             [ngTemplateOutlet]="cited"
             [ngTemplateOutletContext]="{ $implicit: line.cited }"
           />
+        </p>
+      }
+    </div>
+  }
+
+  <!-- The day it renews on (M11.5), citing its page; a grey line when its pages don't say. -->
+  @if (renewal(); as renewal) {
+    <div class="group">
+      <h3>Billing day</h3>
+      <p class="payment renewal">
+        <span>{{ renewal.text }}</span>
+        @if (renewal.cited; as fact) {
+          <ng-container
+            [ngTemplateOutlet]="cited"
+            [ngTemplateOutletContext]="{ $implicit: fact }"
+          />
+        }
+      </p>
+    </div>
+  }
+
+  <!-- Where its source code is (M11.5), as its own page links it, after its host's chip. -->
+  @if (repo(); as repo) {
+    <div class="group">
+      <h3>Source code</h3>
+      <p class="payment pay-chips repo">
+        <span
+          class="pay-chip"
+          tabindex="0"
+          role="img"
+          [attr.aria-label]="repo.host.name"
+          [matTooltip]="repo.host.name"
+          matTooltipTouchGestures="off"
+        >
+          <ng-container
+            [ngTemplateOutlet]="glyphs"
+            [ngTemplateOutletContext]="{ $implicit: repo.host }"
+          />
+        </span>
+        <span>
+          <a
+            class="outside-link"
+            [href]="repo.url"
+            target="_blank"
+            rel="noopener"
+            [attr.aria-label]="'Source code on ' + repo.label + ', opens in a new tab'"
+          >
+            <span>{{ repo.label }}</span>
+            <mat-icon aria-hidden="true">open_in_new</mat-icon>
+          </a>
+          <ng-container
+            [ngTemplateOutlet]="cited"
+            [ngTemplateOutletContext]="{ $implicit: repo }"
+          />
         </span>
       </p>
-    }
-    @for (line of currencies(); track $index) {
-      <p class="payment">
-        <span>{{ line.text }}</span>
-        <ng-container
-          [ngTemplateOutlet]="cited"
-          [ngTemplateOutletContext]="{ $implicit: line.cited }"
-        />
-      </p>
-    }
-  </div>
-}
+    </div>
+  }
 
-<!-- The day it renews on (M11.5), citing its page; a grey line when its pages don't say. -->
-@if (renewal(); as renewal) {
-  <div class="group">
-    <h3>Billing day</h3>
-    <p class="payment renewal">
-      <span>{{ renewal.text }}</span>
-      @if (renewal.cited; as fact) {
-        <ng-container [ngTemplateOutlet]="cited" [ngTemplateOutletContext]="{ $implicit: fact }" />
-      }
-    </p>
-  </div>
-}
-
-<!-- Where its source code is (M11.5), as its own page links it, after its host's chip. -->
-@if (repo(); as repo) {
-  <div class="group">
-    <h3>Source code</h3>
-    <p class="payment pay-chips repo">
-      <span
-        class="pay-chip"
-        tabindex="0"
-        role="img"
-        [attr.aria-label]="repo.host.name"
-        [matTooltip]="repo.host.name"
-        matTooltipTouchGestures="off"
-      >
-        <ng-container
-          [ngTemplateOutlet]="glyphs"
-          [ngTemplateOutletContext]="{ $implicit: repo.host }"
-        />
-      </span>
-      <span>
-        <a
-          class="outside-link"
-          [href]="repo.url"
-          target="_blank"
-          rel="noopener"
-          [attr.aria-label]="'Source code on ' + repo.label + ', opens in a new tab'"
-        >
-          <span>{{ repo.label }}</span>
-          <mat-icon aria-hidden="true">open_in_new</mat-icon>
-        </a>
-        <ng-container [ngTemplateOutlet]="cited" [ngTemplateOutletContext]="{ $implicit: repo }" />
-      </span>
-    </p>
-  </div>
-}
-
-<div class="checked-row">
-  <p class="checked">
-    <span>Price checked {{ checked() }}</span>
-    @if (match().stale) {
-      <span class="badge"> May be out of date</span>
-    }
-  </p>
-  <button matButton type="button" class="report" (click)="report()">Report a wrong price</button>
-</div>
+  @if (plan().notes; as notes) {
+    <p class="notes">{{ notes }}</p>
+  }
+  @if (provider().notes; as notes) {
+    <p class="notes">{{ notes }}</p>
+  }
+</ng-template>

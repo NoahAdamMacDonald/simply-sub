@@ -124,7 +124,9 @@ async function policies(page, name) {
   const found = card(page, name);
   await found.scrollIntoViewIfNeeded();
   await found.locator('button.expand').click();
-  const section = found.locator('.group', {
+  // On the details' Terms tab (the owner's design, 2026-11-03): Overview has a Terms and policies group too.
+  await found.getByRole('tab', { name: /^Terms/ }).click();
+  const section = found.locator('[role="tabpanel"]:not([hidden]) .group', {
     has: page.getByRole('heading', { name: 'Terms and policies' }),
   });
   await section.waitFor();

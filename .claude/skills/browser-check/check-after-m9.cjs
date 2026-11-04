@@ -497,6 +497,17 @@ async function checkSearch(page, label, viewport, shot) {
     );
   });
   await page.keyboard.press('Enter');
+  // On the details' Terms tab (the owner's design, 2026-11-03): Tab to the tab list, then the arrows.
+  await card.locator('[role="tablist"]').waitFor();
+  await page.keyboard.press('Tab');
+  await keyTo(
+    page,
+    () =>
+      document.activeElement?.getAttribute('role') === 'tab' &&
+      document.activeElement.textContent.trim() === 'Terms',
+    'ArrowRight',
+    4,
+  );
   // Its data collection's cookie choices come first since M11.9: the setting's own link, by its address.
   const action = card
     .locator('.policies .action[href="https://help.netflix.com/node/100637"]')

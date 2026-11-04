@@ -234,9 +234,26 @@ async function closeFilters(page, viewport) {
         const netflix = card(page, 'Netflix');
         await netflix.getByRole('button', { name: /^Details: / }).focus();
         await page.keyboard.press('Enter');
-        const lines = netflix.locator('.details ss-feature-lines li');
+        // On the details' Features tab (the owner's design, 2026-11-03): Tab to the tab list, then the right arrow.
+        await netflix.getByRole('tab', { name: 'Overview' }).waitFor();
+        await sleep(600);
+        await page.keyboard.press('Tab');
+        await page.keyboard.press('ArrowRight');
+        const lines = netflix.locator('[role="tabpanel"]:not([hidden]) ss-feature-lines li');
         await lines.first().waitFor();
         await sleep(600);
+        const featuresTab = await page.evaluate(() => [
+          document.activeElement?.getAttribute('role'),
+          document.activeElement?.getAttribute('aria-selected'),
+          document.activeElement?.textContent?.trim().replace(/\s+/g, ' '),
+        ]);
+        check(
+          `${label}: Tab from the details button reaches the tabs, and the right arrow chooses Features`,
+          featuresTab[0] === 'tab' &&
+            featuresTab[1] === 'true' &&
+            /^Features \d+$/.test(featuresTab[2]),
+          featuresTab.join(' / '),
+        );
         const features = (await lines.allInnerTexts()).map((text) =>
           text.replace(/\s+/g, ' ').trim(),
         );

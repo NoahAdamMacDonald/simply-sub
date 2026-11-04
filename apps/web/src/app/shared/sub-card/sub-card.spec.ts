@@ -217,6 +217,9 @@ describe('SubCard', () => {
       await fixture.whenStable();
       query<HTMLButtonElement>('button.expand')?.click();
       await fixture.whenStable();
+      // Bundles are on the details' Features tab (the owner's design, 2026-11-03).
+      query<HTMLButtonElement>('[role="tab"]:nth-child(2)')?.click();
+      await fixture.whenStable();
       // Crave Premium's own price, then the Netflix and Crave bundle's.
       const menu = await openMenu(1);
       await menu.clickItem({ text: /^Work/ });
@@ -280,6 +283,9 @@ describe('SubCard', () => {
       radios()[1].click();
       await fixture.whenStable();
       query<HTMLButtonElement>('button.expand')?.click();
+      await fixture.whenStable();
+      // Bundles are on the details' Features tab (the owner's design, 2026-11-03).
+      query<HTMLButtonElement>('[role="tab"]:nth-child(2)')?.click();
       await fixture.whenStable();
       // Crave Premium's own price, then the Netflix and Crave bundle's.
       const price = prices()[1];

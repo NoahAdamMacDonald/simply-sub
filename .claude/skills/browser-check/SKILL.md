@@ -713,6 +713,17 @@ Symbols' ligature words from `innerText`, and reach a chip's tooltip by Tab (a t
 `focus()` alone): Mullvad's five chips sit between its owner's link and its pricing page's, and Source code's host
 chip ("GitHub") before the repository's link. 105 and 89 checks.
 
+Since a Search card's details became tabs (Overview, Features, Terms, Facts: 2026-11-04), a script chooses the tab
+before reading what's on it (`getByRole('tab', { name })`), and reads groups in the shown panel
+(`[role="tabpanel"]:not([hidden])`), since Overview has a Terms and policies group and a line of pay chips of its
+own. Panels render the first time their tab is chosen and then stay, hidden. By keyboard: Tab from the details button
+reaches the chosen tab, the arrows choose another, and Tab goes on into its panel (a stop of its own) and its links.
+Tooltips in a long panel: scroll the next target to the middle before Tab, since a tooltip that opens while focus
+scrolls its trigger into view is closed as clipped, and wait for a tooltip by its words, since a still pointer can
+hover another. `check-m10-reports.cjs` sends its report only under `wrangler dev` (on `ng serve` the send fails with
+a 502); `check-components.cjs` fails two checks from before the tabs (its section count since M11.10's
+ss-account-terms, and the gallery's tag picker, which shows no options there though the app's works).
+
 `check-m11-perks.cjs` (M11.6, ranked perks) checks a list, Games (Xbox Game Pass Ultimate, PC Game Pass and Premium,
 written to IndexedDB, Premium ranking Online console multiplayer, a perk until M11.9), on `ng serve` for a Canadian in
 Alberta (base URL ending in `/`, after `npm run data:build` on the branch), in both themes at both widths, keyboard

@@ -69,43 +69,132 @@ describe('PlanDetails', () => {
   }
 
   const element = () => fixture.nativeElement as HTMLElement;
-  /** Each group's heading with what's on screen under it, texts joined with spaces as the layout spaces them. */
+  /**
+   * Each group's heading with what's on screen under it in the tab shown, texts joined with spaces as the layout spaces
+   * them.
+   */
   const groups = () =>
-    Array.from(element().querySelectorAll('.group')).map((group) => {
-      const copy = group.cloneNode(true) as HTMLElement;
-      copy.querySelectorAll('mat-icon, .visually-hidden').forEach((node) => node.remove());
-      const walker = document.createTreeWalker(copy, NodeFilter.SHOW_TEXT);
-      const texts: string[] = [];
-      while (walker.nextNode()) texts.push(walker.currentNode.textContent?.trim() ?? '');
-      return texts.filter(Boolean).join(' ');
-    });
+    Array.from(element().querySelectorAll('[role="tabpanel"]:not([hidden]) .group')).map(
+      (group) => {
+        const copy = group.cloneNode(true) as HTMLElement;
+        copy.querySelectorAll('mat-icon, .visually-hidden').forEach((node) => node.remove());
+        const walker = document.createTreeWalker(copy, NodeFilter.SHOW_TEXT);
+        const texts: string[] = [];
+        while (walker.nextNode()) texts.push(walker.currentNode.textContent?.trim() ?? '');
+        return texts.filter(Boolean).join(' ');
+      },
+    );
   const text = (selector: string) =>
     element().querySelector(selector)?.textContent?.replace(/\s+/g, ' ').trim();
+  /** The panel of the tab shown. */
+  const panel = () => element().querySelector<HTMLElement>('[role="tabpanel"]:not([hidden])');
+  const tabButtons = () =>
+    Array.from(element().querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+  /** The tabs as the tab list names them: "Features 2". */
+  const tabNames = () =>
+    tabButtons().map((button) => button.textContent?.replace(/\s+/g, ' ').trim());
+  /** Chooses the tab whose name starts with `name`, as a click does. */
+  async function tab(name: string): Promise<void> {
+    const button = tabButtons().find((candidate) => candidate.textContent?.trim().startsWith(name));
+    expect(button, `the ${name} tab`).toBeDefined();
+    button?.click();
+    await fixture.whenStable();
+  }
   /** The group whose heading is `heading`, as groups() gives it. */
   const group = (heading: string) => groups().find((shown) => shown.startsWith(`${heading} `));
   /** Each Ways to pay line's chips by name: a chip of glyphs by its image's name, one with none by its words. */
   const payLines = () =>
-    Array.from(element().querySelectorAll('.pay-chips:not(.repo)')).map((line) =>
+    Array.from(panel()?.querySelectorAll('.pay-chips:not(.repo)') ?? []).map((line) =>
       Array.from(line.querySelectorAll('.pay-chip')).map(
         (chip) => chip.getAttribute('aria-label') ?? chip.textContent?.trim(),
       ),
     );
 
+  it('opens on Overview, its highlights those the user ranks first, with a tab for each part that has something', async () => {
+    await show('netflix.standard', { 'ad-free': 'needed' });
+
+    expect(tabNames()).toEqual(['Overview', 'Features 2', 'Facts']);
+    expect(groups()).toEqual(['Highlights Ad free · Video quality: 1080p (Full HD)']);
+    expect(text('.checked')).toBe('Price checked Oct 20, 2026');
+  });
+
   it('lists the features with the user’s ranks, the add-ons and the bundles with their savings', async () => {
     await show('netflix.standard', { 'ad-free': 'needed' });
+    await tab('Features');
 
     expect(groups()).toEqual([
       'Features Video quality: 1080p (Full HD) Ad free Needed',
       'Add-ons Extra member $7.99 / mo + tax',
       // CA$18.99 and CA$22 separately. Crave has no logo: its letter shows.
       'Bundles C Netflix and Crave $35.00 / mo + tax Save $5.99 / mo',
+    ]);
+    await tab('Facts');
+    expect(groups()).toEqual([
       'Billing day The date you signed up , according to its Billing date',
     ]);
-    expect(text('.checked')).toBe('Price checked Oct 20, 2026');
+  });
+
+  it('moves between its tabs by arrow keys, Home and End, choosing each (WAI-ARIA’s tabs pattern)', async () => {
+    await show('mullvad.vpn');
+    const press = async (key: string) => {
+      document.activeElement?.dispatchEvent(new KeyboardEvent('keydown', { key, bubbles: true }));
+      await fixture.whenStable();
+    };
+    const state = () => [
+      tabButtons().indexOf(document.activeElement as HTMLButtonElement),
+      tabButtons().map((button) => [button.getAttribute('aria-selected'), button.tabIndex].join()),
+    ];
+
+    expect(element().querySelector('[role="tablist"]')?.getAttribute('aria-label')).toBe(
+      'Mullvad VPN details',
+    );
+    expect(tabNames()).toEqual(['Overview', 'Features 1', 'Terms', 'Facts']);
+    tabButtons()[0].focus();
+    await press('ArrowRight');
+    expect(state()).toEqual([1, ['false,-1', 'true,0', 'false,-1', 'false,-1']]);
+    // Its panel shows, named by its tab; the others are hidden.
+    const panel = element().querySelector(`#${tabButtons()[1].getAttribute('aria-controls')}`);
+    expect([panel?.getAttribute('role'), panel?.getAttribute('aria-labelledby')]).toEqual([
+      'tabpanel',
+      tabButtons()[1].id,
+    ]);
+    expect(
+      Array.from(element().querySelectorAll('[role="tabpanel"]')).map((each) =>
+        each.hasAttribute('hidden'),
+      ),
+    ).toEqual([true, false, true, true]);
+    await press('End');
+    expect(state()[0]).toBe(3);
+    await press('ArrowRight');
+    expect(state()[0]).toBe(0);
+    await press('ArrowLeft');
+    expect(state()[0]).toBe(3);
+    await press('Home');
+    expect(state()).toEqual([0, ['true,0', 'false,-1', 'false,-1', 'false,-1']]);
+  });
+
+  it('sums up its terms on Overview, and See all opens Terms with its tab focused', async () => {
+    await show('mullvad.vpn');
+
+    // The visually hidden " ratings" finishes See all's name for screen readers.
+    expect(group('Terms and policies')).toBe('Terms and policies 2 Great 1 not graded See all 3');
+    expect(
+      Array.from(element().querySelectorAll('.grade-bar span')).map((slice) =>
+        slice.getAttribute('data-tier'),
+      ),
+    ).toEqual(['great', 'great', 'none']);
+    expect(element().querySelector('.grade-bar')?.getAttribute('aria-hidden')).toBe('true');
+    element().querySelector<HTMLButtonElement>('.see-all')?.click();
+    await fixture.whenStable();
+
+    expect(document.activeElement?.textContent?.trim()).toBe('Terms');
+    expect(document.activeElement?.getAttribute('aria-selected')).toBe('true');
+    expect(groups()[0]).toMatch(/^Terms and policies 2 Great 1 not graded Privacy /);
   });
 
   it('shows the bundle’s plans by their icons, and its saving to screen readers', async () => {
     await show('crave.premium');
+    await tab('Features');
     const bundle = element().querySelector('.rows li');
 
     expect(
@@ -122,37 +211,45 @@ describe('PlanDetails', () => {
   it('lists what a suite includes and what it saves, its notes, and a price that may be out of date', async () => {
     await show('proton.unlimited');
 
+    expect(groups()).toEqual(['Highlights VPN', 'Includes Proton VPN Plus · Save $2.49 / mo']);
+    expect(text('.checked')).toBe('Price checked Jun 1, 2026 May be out of date');
+    await tab('Features');
+    expect(groups()).toEqual(['Features VPN']);
+    await tab('Facts');
     expect(groups()).toEqual([
-      'Features VPN',
       'Includes Proton VPN Plus Save $2.49 / mo against buying them separately',
     ]);
     expect(
       Array.from(element().querySelectorAll('.notes')).map((note) => note.textContent),
     ).toEqual(['Every Proton app, at its paid tier.', 'One Proton account holds one paid plan.']);
-    expect(text('.checked')).toBe('Price checked Jun 1, 2026 May be out of date');
   });
 
   it('leaves out what a plan doesn’t have', async () => {
     await show('netflix.standard-ads');
 
-    expect(groups()).toEqual([
-      'Features Video quality: 1080p (Full HD)',
-      'Billing day The date you signed up , according to its Billing date',
-    ]);
+    expect(tabNames()).toEqual(['Overview', 'Features 1', 'Facts']);
+    await tab('Features');
+    expect(groups()).toEqual(['Features Video quality: 1080p (Full HD)']);
     expect(element().querySelector('.badge')).toBeNull();
   });
 
   describe('Terms and policies (M1.13, M1.14, M5.9)', () => {
     it('grades each topic with a dot and in words, says why with citations, by group, and numbers the pages', async () => {
       await show('mullvad.vpn');
+      await tab('Terms');
 
       expect(groups().find((group) => group.startsWith('Terms and policies'))).toBe(
-        'Terms and policies Privacy Data collection (Not stated): Its no-logging policy doesn’t say what else it collects. [2] ' +
+        'Terms and policies 2 Great 1 not graded Privacy Data collection (Not stated): Its no-logging policy doesn’t say what else it collects. [2] ' +
           'Legal Disputes (Great): Swedish courts or the consumer disputes board. [1] ' +
           'Service Activity logging (Great): No connection logs, and an audit found none. [2] ' +
           'Sources [1] Terms of service [2] No-logging policy',
       );
       const dots = Array.from(element().querySelectorAll('.policies .dot'));
+      expect(
+        Array.from(element().querySelectorAll('.counted .dot')).map((dot) =>
+          dot.getAttribute('data-tier'),
+        ),
+      ).toEqual(['great', 'none']);
       expect(dots.map((dot) => [dot.getAttribute('data-tier'), dot.ariaHidden])).toEqual([
         ['none', 'true'],
         ['great', 'true'],
@@ -169,6 +266,7 @@ describe('PlanDetails', () => {
 
     it('shows a topic the pages don’t address as a grey Not stated line, citing the page read (M11.1)', async () => {
       await show('mullvad.vpn');
+      await tab('Terms');
       const line = element().querySelector('.policies li');
 
       expect(line?.classList.contains('unrated')).toBe(true);
@@ -181,6 +279,7 @@ describe('PlanDetails', () => {
 
     it('cites each page a rating quotes, linked to the words, with the quote as its tooltip', async () => {
       await show('mullvad.vpn');
+      await tab('Terms');
       // The first graded line's: the Not stated line before it cites the page it read.
       const cite = element().querySelector<HTMLAnchorElement>('.policies li:not(.unrated) .cite');
 
@@ -192,8 +291,9 @@ describe('PlanDetails', () => {
       expect(cite?.querySelector('.visually-hidden')?.textContent).toBe(
         ' Terms of service, opens in a new tab',
       );
-      const tooltips =
-        await TestbedHarnessEnvironment.loader(fixture).getAllHarnesses(MatTooltipHarness);
+      const tooltips = await TestbedHarnessEnvironment.loader(fixture).getAllHarnesses(
+        MatTooltipHarness.with({ selector: '.policies .cite' }),
+      );
       // A page read that's silent on the topic is named alone.
       await tooltips[0].show();
       expect(await tooltips[0].getTooltipText()).toBe('No-logging policy');
@@ -209,6 +309,7 @@ describe('PlanDetails', () => {
       const saved = TestBed.inject(SettingsStore).saved as WritableSignal<Settings | undefined>;
       saved.set({ ...alberta, country: 'US', subdivision: undefined, currency: 'USD' });
       await show('mullvad.vpn');
+      await tab('Terms');
 
       expect(text('.policies li:not(.unrated) .rated')).toContain(
         'Disputes (Bad): A made-up US rule, for the test.',
@@ -223,16 +324,17 @@ describe('PlanDetails', () => {
       expect(action?.getAttribute('aria-label')).toBe('How to opt out, opens in a new tab');
     });
 
-    it('has no such group for a provider with no ratings', async () => {
+    it('has no such group, and no Terms tab, for a provider with no ratings', async () => {
       await show('netflix.standard');
 
       expect(groups().some((group) => group.startsWith('Terms and policies'))).toBe(false);
+      expect(tabNames()).not.toContain('Terms');
     });
 
     describe('in a file of their own (M11.8)', () => {
       const mullvad = providerOf('mullvad.vpn');
       const shown =
-        'Terms and policies Privacy Data collection (Not stated): Its no-logging policy doesn’t say what else it collects. [2] ' +
+        'Terms and policies 2 Great 1 not graded Privacy Data collection (Not stated): Its no-logging policy doesn’t say what else it collects. [2] ' +
         'Legal Disputes (Great): Swedish courts or the consumer disputes board. [1] ' +
         'Service Activity logging (Great): No connection logs, and an audit found none. [2] ' +
         'Sources [1] Terms of service [2] No-logging policy';
@@ -249,6 +351,10 @@ describe('PlanDetails', () => {
         fixture.componentRef.setInput('match', matchFor('mullvad.vpn'));
         fixture.componentRef.setInput('ranks', {});
         await until(() => policyLoads.length === 1);
+        tabButtons()
+          .find((button) => button.textContent?.trim() === 'Terms')
+          ?.click();
+        fixture.detectChanges();
       }
 
       it('loads them as the card opens, saying so meanwhile', async () => {
@@ -293,6 +399,7 @@ describe('PlanDetails', () => {
 
       it('shows a provider’s that its catalog file holds, as files from before M11.8 do, without asking', async () => {
         await show('mullvad.vpn');
+        await tab('Terms');
 
         expect(policyGroups()).toEqual([shown]);
         expect(policyLoads).toEqual([]);
@@ -303,15 +410,17 @@ describe('PlanDetails', () => {
   describe('Outside ratings and the owner (M11.2)', () => {
     it('shows each rater’s label with its date and a link, after Terms and policies, then the owner', async () => {
       await show('mullvad.vpn');
+      await tab('Terms');
 
       const terms = groups().findIndex((shown) => shown.startsWith('Terms and policies '));
-      expect(terms).toBeGreaterThan(0);
-      expect(groups().slice(terms + 1, terms + 3)).toEqual([
+      expect(terms).toBe(0);
+      expect(groups().slice(terms + 1)).toEqual([
         // The rater the catalog doesn't list is left out: its name is unknown.
         'Outside ratings Protection: 6.0/6.0 from Test Lab , August 2026 (tested Mullvad VPN 2026.4, Windows 11) ' +
           'Usability: 5.5/6.0 from Test Lab , Sep 14, 2026',
-        'Owner Mullvad VPN AB · Sweden , according to its About us',
       ]);
+      await tab('Facts');
+      expect(groups()[0]).toBe('Owner Mullvad VPN AB · Sweden , according to its About us');
       const link = element().querySelector<HTMLAnchorElement>('.outside a');
       expect([link?.href, link?.target, link?.rel, link?.getAttribute('aria-label')]).toEqual([
         'https://lab.example.org/mullvad',
@@ -323,6 +432,7 @@ describe('PlanDetails', () => {
 
     it('cites the owner’s own page, linked to its words, with them as the tooltip', async () => {
       await show('mullvad.vpn');
+      await tab('Facts');
       const link = element().querySelectorAll<HTMLAnchorElement>('.owner a')[1];
 
       expect([link?.href, link?.target, link?.getAttribute('aria-label')]).toEqual([
@@ -341,6 +451,7 @@ describe('PlanDetails', () => {
 
     it('says where the company is from, linked to its own page, with its words as the tooltip', async () => {
       await show('mullvad.vpn');
+      await tab('Facts');
       const link = element().querySelector<HTMLAnchorElement>('.owner a');
 
       // Shown as "Mullvad VPN AB · Sweden", read as "Mullvad VPN AB, from Sweden": the dot is hidden from screen
@@ -364,6 +475,7 @@ describe('PlanDetails', () => {
       const mullvad = providerOf('mullvad.vpn');
       const owner = mullvad.owner && { ...mullvad.owner, country: { code: 'SE' } };
       await show('mullvad.vpn', {}, { ...mullvad, owner });
+      await tab('Facts');
 
       expect(group('Owner')).toBe('Owner Mullvad VPN AB · Sweden , according to its About us');
       expect(element().querySelectorAll('.owner a')).toHaveLength(1);
@@ -371,14 +483,17 @@ describe('PlanDetails', () => {
 
     it('has neither for a provider with none', async () => {
       await show('netflix.standard');
+      await tab('Facts');
 
       expect(groups().some((group) => /^(Outside ratings|Owner) /.test(group))).toBe(false);
+      expect(tabNames()).not.toContain('Terms');
     });
   });
 
   describe('Ways to pay (M11.5)', () => {
     it('lists how a buyer where the user lives can pay, citing the page, its words as the tooltip', async () => {
       await show('mullvad.vpn');
+      await tab('Facts');
 
       // Alberta: Canada's own page over the one for everywhere, then the currencies cash takes (M11.5).
       // No page names the networks its card takes there (the owner's wording, 2026-11-03): its chip says so.
@@ -404,6 +519,7 @@ describe('PlanDetails', () => {
       const saved = TestBed.inject(SettingsStore).saved as WritableSignal<Settings | undefined>;
       saved.set({ ...alberta, country: 'US', subdivision: undefined, currency: 'USD' });
       await show('mullvad.vpn');
+      await tab('Facts');
 
       expect(payLines()).toEqual([
         ['Card (networks not verified)', 'PayPal', 'Cash', 'Cryptocurrency'],
@@ -412,7 +528,8 @@ describe('PlanDetails', () => {
 
     it('shows each way to pay as a chip of its glyphs, its name the tooltip, reached by Tab', async () => {
       await show('mullvad.vpn');
-      const chips = element().querySelectorAll<HTMLElement>('.pay-chips .pay-chip');
+      await tab('Facts');
+      const chips = panel()?.querySelectorAll<HTMLElement>('.pay-chips .pay-chip') ?? [];
 
       // A Material Symbol, hidden from screen readers, which read the chip's name instead.
       const gift = chips[1];
@@ -420,7 +537,9 @@ describe('PlanDetails', () => {
       expect(gift?.querySelector('mat-icon')?.textContent?.trim()).toBe('card_giftcard');
       expect(gift?.querySelector('mat-icon')?.getAttribute('aria-hidden')).toBe('true');
       const tooltip = await TestbedHarnessEnvironment.loader(fixture).getHarness(
-        MatTooltipHarness.with({ selector: '.pay-chip:nth-of-type(2)' }),
+        MatTooltipHarness.with({
+          selector: '[role="tabpanel"]:not([hidden]) .pay-chip:nth-of-type(2)',
+        }),
       );
       await tooltip.show();
       expect(await tooltip.getTooltipText()).toBe('Gift card');
@@ -434,7 +553,8 @@ describe('PlanDetails', () => {
         quotes: ['Visa', 'Interac', 'Mastercard'],
       };
       await show('mullvad.vpn', {}, { ...mullvad, acceptedNetworks: { CA: networks } });
-      const card = element().querySelector('.pay-chip');
+      await tab('Facts');
+      const card = panel()?.querySelector('.pay-chip');
 
       expect(payLines()).toEqual([['Card: Visa, Interac or Mastercard', 'Gift card']]);
       // The card's symbol, then Visa's and Mastercard's marks (Simple Icons, in the text's colour), then Interac,
@@ -469,6 +589,7 @@ describe('PlanDetails', () => {
           paymentMethods: [...(mullvad.paymentMethods ?? []), wallets],
         },
       );
+      await tab('Facts');
 
       expect(payLines()).toEqual([
         ['Card (networks not verified)', 'Gift card'],
@@ -480,7 +601,7 @@ describe('PlanDetails', () => {
           'Satispay according to its Wallets in Canada ' +
           'Cash in EUR, USD or CAD , according to its Terms of service',
       );
-      const satispay = Array.from(element().querySelectorAll<HTMLElement>('.pay-chip')).find(
+      const satispay = Array.from(panel()?.querySelectorAll<HTMLElement>('.pay-chip') ?? []).find(
         (chip) => chip.textContent?.trim() === 'Satispay',
       );
       expect([satispay?.getAttribute('role'), satispay?.tabIndex]).toEqual([null, -1]);
@@ -488,6 +609,7 @@ describe('PlanDetails', () => {
 
     it('cites the page naming the currencies, linked to its words', async () => {
       await show('mullvad.vpn');
+      await tab('Facts');
       const link = element().querySelectorAll<HTMLAnchorElement>('.payment a')[1];
 
       expect([link?.href, link?.getAttribute('aria-label')]).toEqual([
@@ -500,6 +622,7 @@ describe('PlanDetails', () => {
   describe('Billing day and source code (M11.5)', () => {
     it('says which day it renews on, citing its page with its words as the tooltip', async () => {
       await show('netflix.standard');
+      await tab('Facts');
 
       expect(group('Billing day')).toBe(
         'Billing day The date you signed up , according to its Billing date',
@@ -521,6 +644,7 @@ describe('PlanDetails', () => {
 
     it('says when its pages don’t say, with nothing to cite', async () => {
       await show('netflix.standard');
+      await tab('Facts');
       const netflix = searchCatalogData.providers.find(({ id }) => id === 'netflix');
       fixture.componentRef.setInput('provider', {
         ...netflix,
@@ -538,6 +662,7 @@ describe('PlanDetails', () => {
 
     it('links the repository its own page links, and that page', async () => {
       await show('mullvad.vpn');
+      await tab('Facts');
 
       expect(groups().at(-1)).toBe(
         'Source code github.com/mullvad/mullvadvpn-app , according to its Why Mullvad VPN?',
@@ -569,6 +694,7 @@ describe('PlanDetails', () => {
         url: 'https://git.example.org/mullvad/app',
       };
       await show('mullvad.vpn', {}, { ...mullvad, sourceRepo });
+      await tab('Facts');
       const host = element().querySelector<HTMLElement>('.repo .pay-chip');
 
       expect([
@@ -579,6 +705,8 @@ describe('PlanDetails', () => {
 
     it('has neither for a provider with none', async () => {
       await show('crave.basic');
+
+      expect(tabNames()).not.toContain('Facts');
 
       expect(group('Billing day')).toBeUndefined();
       expect(group('Source code')).toBeUndefined();

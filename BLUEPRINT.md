@@ -3628,6 +3628,18 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 **Still open**
 None.
 
+**Resolved (2026-11-04, compact expanded cards)**
+- **Tabs** (the owner's pick of three designs, B): a Search card's details open on Overview, the plan at a glance
+  (highlights, a finance account's terms, what a suite includes, the Terms and policies' grades as a bar and in
+  words with See all, the owner and the first ways to pay, the price's date with Report a wrong price), with
+  Features, Terms and Facts for the rest (PROJECT-PLAN P8). Proton Unlimited's card opens 719 px tall at 1280 px,
+  where its Terms alone take 2,343 px.
+- **As built:** the tab list follows WAI-ARIA's tabs pattern, written in `ss-plan-details` (no new dependency);
+  `planHighlights` and `policyGradeCounts` are core modules of their own and the ratings a component of their own,
+  `ss-policy-ratings`, so the initial bundle stays at 499.92 kB and the details' styles in their budget. A hovered
+  tab's name, and the item dialog's group counts, brighten instead of sitting on a tint, which took muted text below
+  AA in dark mode.
+
 **Resolved (2026-11-03, icons for ways to pay and code hosts)**
 - **Built as shown** (the owner's choice of the mockup): each way to pay a chip of its glyphs, named by its tooltip and
   for screen readers; brands' marks from Simple Icons (CC0), generic ones from Material Symbols, the rest by name; a
