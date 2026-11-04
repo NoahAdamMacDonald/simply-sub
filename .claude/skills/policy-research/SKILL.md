@@ -242,6 +242,11 @@ this file to them: change both together.
 - The Walt Disney Company's privacy policy covers Disney+, Hulu and ESPN: it's `data/policies/disney-privacy.yaml`.
   Bell's "How we collect and use data" covers Crave, TSN and RDS, which can share a document of their own the same
   way. Rate each provider's own terms for the rest.
+- Google's Terms of Service and Privacy Policy cover every Google service: `data/policies/google-terms.yaml` and
+  `google-privacy.yaml` (M11.15, Google AI first). Rate each service's own notices and additional terms beside them
+  (Google AI's Gemini Apps Privacy Hub and Google One Additional Terms). Their pages and Google's help centres read
+  with a plain fetch; the bug bounty's rules (bughunters.google.com) and Alphabet's founders' letter (abc.xyz, under
+  "more") need Edge.
 - Netflix's help articles ask for a country; their text still loads.
 - CBC/Radio-Canada's general terms for its digital services (which ICI TOU.TV's subscription includes) load each
   answer only when its question is clicked: open each in Edge (`read-page.cjs`, `click:` by the question's text).
