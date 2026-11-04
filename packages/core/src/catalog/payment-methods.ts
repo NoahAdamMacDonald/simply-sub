@@ -45,7 +45,7 @@ const writtenAs: Readonly<Record<Exclude<PaymentMethod, 'other'>, RegExp>> = {
     /\bapp\s?store\b|\bgoogle\s+play\b|\bin-app\b|\bitunes\b|\bplay\s+store\b|\bamazon\s+appstore\b|\bthird[- ]party\s+billing\b|\bachats?\s+intégrés?|\bchannel\s+store\b|\bamazon\s+prime\b|\bprime\s+video\b/i,
   'gift-card': /\bgift\s?cards?\b|\bcartes?[- ]cadeaux?\b|\bvouchers?\b|\bprepaid\s+cards?\b/i,
   'bank-transfer':
-    /\bbank\s+(?:transfer|wire|account|debit)s?\b|\bwire\s+transfers?\b|\bdirect\s+debit\b|\bsepa\b|\bideal\b|\bwero\b|\bvirement\b|\bswish\b|\beps\s+(?:transfer|überweisung)\b|\bbancontact\b|\bprzelewy24\b|\bgocardless\b/i,
+    /\bbank\s+(?:transfer|wire|account)s?\b|\bbank\s+debit\b(?!\s+cards?\b)|\bwire\s+transfers?\b|\bdirect\s+debit\b|\bsepa\b|\bideal\b|\bwero\b|\bvirement\b|\bswish\b|\beps\s+(?:transfer|überweisung)\b|\bbancontact\b|\bprzelewy24\b|\bgocardless\b/i,
   cash: /\bcash\b(?!\s?app\b)|\besp[eè]ces\b/i,
   crypto: /\bcrypto|\bbitcoin\b|\bmonero\b|\bbtc\b|\bxmr\b/i,
   'provider-billing':

@@ -116,7 +116,8 @@ perks:
 #   features").
 # - "Monthly API credits" on Pro only: "CA$136 with Pro 100, CA$250 with Pro 200, or CA$680 with Pro 500", and on the US
 #   page "$100 with Pro 100, $200 with Pro 200, or $500 with Pro 500".
-# - No row or card names video generation.
+# - No row or card names video generation. The release notes mention Sora's "included limits" and buying "more video
+#   generations in the Sora app", but no plan page says which plans include it, so none has it here.
 # Apps and sign-in, read 2026-11-04: the table's "Access on web, iOS, Android" and "Code edits on macOS", and the
 # download page's Windows app and Chrome extension; a password, or Google, Microsoft or Apple ("Changing your account
 # sign-in method"). Support: "contact OpenAI Support using the chat widget in the Help Center" (its billing article).
@@ -501,9 +502,16 @@ plans:
         lastVerified: 2026-11-04
         sourceUrl: https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers
 
-# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-04: its Terms of Use, which "include our
-# Service Terms" and require following its Usage Policies (the conduct they forbid, no topic's), and its Privacy
-# Policy. Users in the EEA, Switzerland and the UK have terms of their own, not read: no rating has regions.
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-04 with Edge: its Terms of Use, which
+# "include our Service Terms" (feature rules: beta services, apps, voice, Sites; no topic's) and require following its
+# Usage Policies and Sharing & Publication Policy (the conduct they forbid, no topic's); its Service Credit Terms (credits
+# expire, no refund: graded under what you paid for); its Privacy Policy and Cookie Policy (marketing cookies, set per
+# browser); and the Terms of Use and Privacy Policy for the EEA, Switzerland and the UK, whose disputes go to local courts
+# (a rating for those regions) and whose other clauses grade the same. Help articles read for their facts: Plus, Pro
+# tiers, refunds, cancelling, billing, renewals, declined cards, gift cards, wallet, sign-in, models, release notes, data
+# controls, model improvement, ads, deletion and export, and its content moderation page. Not read: the sign-up form,
+# which shows its fields only after an email address, and the "ChatGPT Plus promotions and referrals" and "ChatGPT Go
+# promotions and referrals" articles, which pages name but none links in a way the reader could follow.
 policies:
   links:
     - name: 'Terms of use'
@@ -526,8 +534,20 @@ policies:
       url: https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers
     - name: 'Security and privacy'
       url: https://openai.com/security-and-privacy/
-    - name: 'Bug bounty program'
-      url: https://openai.com/index/bug-bounty-program/
+    - name: 'Coordinated vulnerability disclosure policy'
+      url: https://openai.com/policies/coordinated-vulnerability-disclosure-policy/
+    - name: 'Cookie policy'
+      url: https://openai.com/policies/cookie-policy/
+    - name: 'Service credit terms'
+      url: https://openai.com/policies/service-credit-terms/
+    - name: 'Terms of use (EEA, Switzerland and UK)'
+      url: https://openai.com/policies/eu-terms-of-use/
+    - name: 'Refunds'
+      url: https://help.openai.com/en/articles/7232895-how-do-i-request-a-refund-for-my-chatgpt-subscription
+    - name: 'Pricing'
+      url: https://chatgpt.com/pricing/
+    - name: 'Transparency and content moderation'
+      url: https://openai.com/transparency-and-content-moderation/
   ratings:
     - topic: legal.disputes
       tier: poor
@@ -540,6 +560,14 @@ policies:
       action:
         name: 'How to opt out of arbitration'
         url: https://openai.com/form/arbitration-opt-out/
+      lastVerified: 2026-11-04
+    - topic: legal.disputes
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: great
+      reason: 'In the EU and the UK, disputes go to the courts where you live, and it names no arbitration or class action ban.'
+      sources:
+        - url: https://openai.com/policies/eu-terms-of-use/
+          quote: 'If we cannot resolve our dispute, you or we can go to your local courts.'
       lastVerified: 2026-11-04
     - topic: legal.terms-changes
       tier: good
@@ -576,11 +604,15 @@ policies:
           quote: 'you (a) retain your ownership rights in Input and (b) own the Output.'
       lastVerified: 2026-11-04
     - topic: legal.service-changes
-      tier: good
-      reason: 'If it stops a service, it tells you first and refunds what you paid ahead and didn’t use.'
+      tier: poor
+      reason: 'If it stops a service it refunds what you paid ahead, but credits you buy expire after a year with no refund, and Pro’s monthly API credits can be changed or ended.'
       sources:
         - url: https://openai.com/policies/row-terms-of-use/
           quote: 'We may decide to discontinue our Services, but if we do, we will give you advance notice and a refund for any prepaid, unused Services.'
+        - url: https://openai.com/policies/service-credit-terms/
+          quote: 'Service Credits are not refundable except where required by law, and expire one year after the date of purchase or issuance if not used, unless otherwise specified at the time of purchase.'
+        - url: https://chatgpt.com/pricing/
+          quote: 'The API credit benefit is subject to change or discontinuation, including credit amounts and future renewals.'
       lastVerified: 2026-11-04
     - topic: legal.inactivity
       tier: good
@@ -623,12 +655,14 @@ policies:
       lastVerified: 2026-11-04
     - topic: billing.refunds
       tier: neutral
-      reason: 'You get no money back unless the law says so, but you keep your plan until the end of the time you paid for.'
+      reason: 'You usually get no money back, though it may refund an unused plan within 7 days of a charge, and in the EU and UK you can cancel within 14 days of buying for part of your money back.'
       sources:
         - url: https://openai.com/policies/row-terms-of-use/
           quote: 'Payments are non-refundable, except where required by law.'
-        - url: https://help.openai.com/en/articles/7232927-canceling-your-chatgpt-subscription
-          quote: 'After an ordinary cancellation, paid features remain available until the end of the current billing period.'
+        - url: https://help.openai.com/en/articles/7232895-how-do-i-request-a-refund-for-my-chatgpt-subscription
+          quote: 'For an unused individual subscription purchase, a discretionary refund may be available if you contact us within seven days of the charge.'
+        - url: https://help.openai.com/en/articles/7232895-how-do-i-request-a-refund-for-my-chatgpt-subscription
+          quote: 'If you live in the EU, UK, or Turkey, you are eligible for a prorated refund if you cancel your subscription within 14 days of purchase.'
       lastVerified: 2026-11-04
     - topic: billing.price-changes
       tier: great
@@ -676,13 +710,18 @@ policies:
         url: https://openai.com/policies/row-privacy-policy/
       lastVerified: 2026-11-04
     - topic: privacy.data-sharing
-      tier: good
-      reason: 'It shares your data with companies that run its services and its own group, and never sells it or gives your chats to advertisers.'
+      tier: poor
+      reason: "It never sells your data or gives your chats to advertisers, but its sites use other companies' marketing cookies, which you can only refuse browser by browser."
       sources:
-        - url: https://openai.com/policies/row-privacy-policy/
-          quote: 'We disclose Personal Data to our affiliates'
         - url: https://help.openai.com/en/articles/20001047-ads-in-chatgpt
           quote: 'We do not share your conversations with ChatGPT with advertisers, and we never sell your data to advertisers.'
+        - url: https://openai.com/policies/cookie-policy/
+          quote: 'These cookies help us support and understand the efficacy of our marketing efforts, such as measuring the performance of marketing campaigns to enhance the Services’ visibility.'
+        - url: https://openai.com/policies/cookie-policy/
+          quote: 'Visit Manage Cookies to change preferences anytime.'
+      action:
+        name: 'Its cookie policy'
+        url: https://openai.com/policies/cookie-policy/
       lastVerified: 2026-11-04
     - topic: privacy.ads-tracking
       tier: poor
@@ -700,11 +739,18 @@ policies:
       lastVerified: 2026-11-04
     - topic: privacy.ads-tracking
       plans: [chatgpt.plus, chatgpt.pro-100, chatgpt.pro-200, chatgpt.pro-500]
-      tier: great
-      reason: 'Plus and Pro show no ads.'
+      tier: poor
+      reason: 'Plus and Pro show no ads, but its marketing cookies still measure its campaigns, and you can only refuse them browser by browser.'
       sources:
         - url: https://help.openai.com/en/articles/20001047-ads-in-chatgpt
           quote: 'Plus, Pro, Business, Enterprise, and Edu accounts will not have ads.'
+        - url: https://openai.com/policies/cookie-policy/
+          quote: 'These cookies help us support and understand the efficacy of our marketing efforts, such as measuring the performance of marketing campaigns to enhance the Services’ visibility.'
+        - url: https://openai.com/policies/cookie-policy/
+          quote: 'Visit Manage Cookies to change preferences anytime.'
+      action:
+        name: 'Its cookie policy'
+        url: https://openai.com/policies/cookie-policy/
       lastVerified: 2026-11-04
     - topic: privacy.ai-training
       tier: poor
@@ -722,10 +768,12 @@ policies:
       lastVerified: 2026-11-04
     - topic: privacy.content-access
       tier: neutral
-      reason: 'Its systems check your chats to stop fraud and misuse and keep its services safe. (Training on your chats is graded under AI training.)'
+      reason: 'Its systems check your chats to stop fraud and misuse, and its staff may review chats flagged for breaking its rules. (Training on your chats is graded under AI training.)'
       sources:
         - url: https://openai.com/policies/row-privacy-policy/
           quote: 'To prevent fraud, illegal activity, or misuses of our Services, and to protect the security of our systems and Services, including by monitoring any Content submitted or exchanged on our platforms'
+        - url: https://openai.com/transparency-and-content-moderation/
+          quote: 'Human review: Our team may review flagged content to determine appropriate actions.'
       lastVerified: 2026-11-04
     - topic: privacy.data-retention
       tier: neutral
@@ -789,6 +837,16 @@ policies:
       sources:
         - url: https://openai.com/security-and-privacy/
           quote: 'OpenAI maintains an ISO/IEC 42001:2023 AI Management System covering OpenAI’s consumer and business AI products and models in its role as an AI producer and AI provider.'
-        - url: https://openai.com/index/bug-bounty-program/
+        - url: https://openai.com/policies/coordinated-vulnerability-disclosure-policy/
           quote: 'The OpenAI Bug Bounty Program is a way for us to recognize and reward the valuable insights of security researchers who contribute to keeping our technology and company secure.'
+      lastVerified: 2026-11-04
+    - topic: other.notable
+      title: Work email accounts
+      tier: poor
+      reason: 'If you sign up with a work email, your employer can take the account over and read your chats. It tells you first, unless your employer already has.'
+      sources:
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: "If you create an account using an email address owned by an organization (for example, your employer), that account may be added to the organization's business account with us"
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: 'Once your account is transferred, the organization’s administrator will be able to control your account, including being able to access Content (defined below) and restrict or remove your access to the account.'
       lastVerified: 2026-11-04

@@ -70,6 +70,7 @@ describe('namesPaymentMethod', () => {
     // ChatGPT's in the UK and the EEA (M11.15).
     ['Bank debit via Link (where supported)', 'bank-transfer', true],
     ['Bank debit via Link (where supported)', 'card', false],
+    ['credit cards and bank debit cards', 'bank-transfer', false],
     [
       'credit card, debit card, bank account, PayPal account, or mobile phone',
       'bank-transfer',
