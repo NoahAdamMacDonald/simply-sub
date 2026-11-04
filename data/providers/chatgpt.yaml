@@ -1,0 +1,794 @@
+# Researched by hand on 2026-11-04 (M11.15, the AI category), read with Edge from Canada. A plain fetch gets 403 from
+# every OpenAI page; the browser reads them all, with no bot check. Pages, each quoted where it's used:
+# Pricing: chatgpt.com/pricing, read from Canada and through a US, UK, Australian, New Zealand, Irish, German, French,
+# Dutch, Spanish and Italian exit (the owner's choice of 2026-11-04), each page in that country's currency; its
+# comparison table's ticks read from the screenshot. Pro's three tiers: "About ChatGPT Pro tiers" (US dollars).
+# Payment methods: "Multi-currency billing". Cancelling: "Canceling your ChatGPT subscription".
+# Terms: the Terms of Use for everyone outside the EEA, Switzerland and the UK (openai.com/policies/row-terms-of-use).
+# Privacy: its Privacy Policy (row-privacy-policy), "Data Controls", "How your data is used to improve model
+# performance", "Ads in ChatGPT", and its deletion and export articles.
+# Bundles: none found. Official resellers: none: OpenAI sells its plans on chatgpt.com and in its apps, whose app
+# stores bill them (a way to pay, below); its gift cards are its own (US only).
+# Prices: the pricing page's FAQ says "We offer monthly plans for Go, Plus and Business", and the Pro article "Pro is
+# billed monthly. Annual billing and payment for multiple months in advance are not available." No page says the
+# prices include tax.
+# Region checklist, 2026-11-04: 1. chatgpt.com/pricing has no country path; 2. its footer's picker is the language;
+# 3. not looked for; 4. checkout needs an account; 5. "Multi-currency billing" lists the currencies, not the prices;
+# 6. each country's prices read through its exit; 7. no bill offered.
+
+# Coverage: chatgpt.pro-200 and chatgpt.pro-500 aren't priced in CA, GB, AU, NZ, IE, DE, FR, NL, ES or IT: the pricing
+# page shows only Pro 100's local price ("From CA$136"), and the other tiers' local prices only after signing in. Their
+# US prices are the Pro article's.
+
+id: chatgpt
+name: ChatGPT
+website: https://chatgpt.com
+category: ai
+spendCategory: software
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    AU: AUD,
+    NZ: NZD,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+cancelUrl: https://help.openai.com/en/articles/7232927-canceling-your-chatgpt-subscription
+sources: { pricing: https://chatgpt.com/pricing/ }
+# Ways to pay (M11.5), read 2026-11-04 in "Multi-currency billing": cards in every country, the App Store and Google
+# Play in its apps, ChatGPT wallet balance (from its gift cards) in the US, and "Bank debit via Link (where supported)"
+# in the UK and the EEA. No page names the card networks: the pricing page's FAQ says "any major credit card".
+paymentMethods:
+  - methods: [card, app-store]
+    page: 'Multi-currency billing'
+    url: https://help.openai.com/en/articles/10421635-multicurrency-billing
+    quotes:
+      - 'Credit and debit cards'
+      - 'If you subscribe via the ChatGPT app on iOS or Android, your subscription is managed by the Apple App Store or Google Play and charges will appear in your local currency.'
+  - methods: [card, app-store, gift-card]
+    regions: [US]
+    page: 'Multi-currency billing'
+    url: https://help.openai.com/en/articles/10421635-multicurrency-billing
+    quotes:
+      - 'Credit and debit cards'
+      - 'If you subscribe via the ChatGPT app on iOS or Android, your subscription is managed by the Apple App Store or Google Play and charges will appear in your local currency.'
+      - 'Note that gift card purchases and redemptions are currently available in the US only, and denominated in USD.'
+  - methods: [card, app-store, bank-transfer]
+    regions: [GB, IE, DE, FR, NL, ES, IT]
+    page: 'Multi-currency billing'
+    url: https://help.openai.com/en/articles/10421635-multicurrency-billing
+    quotes:
+      - 'Credit and debit cards'
+      - 'If you subscribe via the ChatGPT app on iOS or Android, your subscription is managed by the Apple App Store or Google Play and charges will appear in your local currency.'
+      - 'Bank debit via Link (where supported)'
+# Owner (M11.2), read 2026-11-04: OpenAI's structure page; its terms are with OpenAI OpCo, LLC.
+owner:
+  name: 'OpenAI Group PBC, controlled by the OpenAI Foundation, a nonprofit'
+  page:
+    name: Our structure
+    url: https://openai.com/our-structure/
+  quotes:
+    - 'The for-profit is now a public benefit corporation, called OpenAI Group PBC'
+    - 'The OpenAI Foundation continues to control the OpenAI Group.'
+  country:
+    code: US
+    page:
+      name: Terms of use
+      url: https://openai.com/policies/row-terms-of-use/
+    quotes:
+      - 'These Terms form an agreement between you and OpenAI OpCo, LLC, a Delaware company'
+    lastVerified: 2026-11-04
+  lastVerified: 2026-11-04
+
+# Renewal day (M11.5), read 2026-11-04: its terms say "we will automatically charge your payment method on each
+# agreed-upon periodic renewal until you cancel", and its cancelling article names a "next billing date", not which day.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://openai.com/policies/row-terms-of-use/
+    - https://help.openai.com/en/articles/7232927-canceling-your-chatgpt-subscription
+  lastVerified: 2026-11-04
+
+# Perks (M11.6), read 2026-11-04 on the pricing page and the Pro article: "Pro 200 includes more usage than Pro 100. Pro
+# 500 offers the highest included usage of the three plans", "Ultrafast is available only on Pro 500", and Pro's card's
+# "Dot, your always-on agent".
+perks:
+  - id: dot-agent
+    name: Dot, your always-on agent
+  - id: usage-more-than-pro-100
+    name: More usage than Pro 100
+  - id: usage-highest
+    name: The highest included usage of the three Pro plans
+  - id: ultrafast
+    name: Ultrafast with GPT-6 Astra and GPT-6.1 Sol
+
+# AI features (M11.9 and M11.15), read 2026-11-04 in the pricing page's comparison table (ticks from its screenshot):
+# - Image generation ("Limited" on Free), deep research ("Limited" on Free and Go), Codex ("Limited" on Free and Go) and
+#   "Excel, Word, PowerPoint, and Google Sheets extensions" ("Limited" on Free and Go) on every plan.
+# - "Scheduled tasks" from Go; "Opportunities to test new features" on Plus and Pro (Plus's card: "Early access to new
+#   features").
+# - "Monthly API credits" on Pro only: "CA$136 with Pro 100, CA$250 with Pro 200, or CA$680 with Pro 500", and on the US
+#   page "$100 with Pro 100, $200 with Pro 200, or $500 with Pro 500".
+# - No row or card names video generation.
+# Apps and sign-in, read 2026-11-04: the table's "Access on web, iOS, Android" and "Code edits on macOS", and the
+# download page's Windows app and Chrome extension; a password, or Google, Microsoft or Apple ("Changing your account
+# sign-in method"). Support: "contact OpenAI Support using the chat widget in the Help Center" (its billing article).
+features:
+  platforms: [windows, macos, android, ios, web, browser-extension]
+  account.sign-in: [password, sso]
+  support.channels: [chat]
+
+plans:
+  - id: chatgpt.free
+    name: Free
+    link: https://chatgpt.com/pricing/
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.deep-research: true
+      ai.coding-agent: true
+      ai.office-apps: true
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+
+  - id: chatgpt.go
+    name: Go
+    link: https://chatgpt.com/pricing/
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.deep-research: true
+      ai.coding-agent: true
+      ai.office-apps: true
+      ai.scheduled-tasks: true
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 11
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: US
+        currency: USD
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: GB
+        currency: GBP
+        amount: 7
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: AU
+        currency: AUD
+        amount: 13
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: NZ
+        currency: NZD
+        amount: 14
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: IE
+        currency: EUR
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: DE
+        currency: EUR
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: FR
+        currency: EUR
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: NL
+        currency: EUR
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: ES
+        currency: EUR
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: IT
+        currency: EUR
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+
+  - id: chatgpt.plus
+    name: Plus
+    link: https://chatgpt.com/pricing/
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.deep-research: true
+      ai.coding-agent: true
+      ai.office-apps: true
+      ai.scheduled-tasks: true
+      ai.early-access: true
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 25
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: US
+        currency: USD
+        amount: 20
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: GB
+        currency: GBP
+        amount: 20
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: AU
+        currency: AUD
+        amount: 30
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: NZ
+        currency: NZD
+        amount: 40
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: IE
+        currency: EUR
+        amount: 23
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: DE
+        currency: EUR
+        amount: 23
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: FR
+        currency: EUR
+        amount: 23
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: NL
+        currency: EUR
+        amount: 23
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: ES
+        currency: EUR
+        amount: 23
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: IT
+        currency: EUR
+        amount: 23
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+
+  - id: chatgpt.pro-100
+    name: Pro 100
+    link: https://chatgpt.com/pricing/
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.deep-research: true
+      ai.coding-agent: true
+      ai.office-apps: true
+      ai.scheduled-tasks: true
+      ai.early-access: true
+      ai.api-credits: true
+    featureLabels:
+      ai.api-credits: Monthly API credits, US$100 in the US
+    perks: [dot-agent]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 136
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: US
+        currency: USD
+        amount: 100
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: GB
+        currency: GBP
+        amount: 89
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: AU
+        currency: AUD
+        amount: 155
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: NZ
+        currency: NZD
+        amount: 190
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: IE
+        currency: EUR
+        amount: 103
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: DE
+        currency: EUR
+        amount: 103
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: FR
+        currency: EUR
+        amount: 103
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: NL
+        currency: EUR
+        amount: 103
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: ES
+        currency: EUR
+        amount: 103
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+      - region: IT
+        currency: EUR
+        amount: 103
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://chatgpt.com/pricing/
+
+  - id: chatgpt.pro-200
+    name: Pro 200
+    link: https://chatgpt.com/pricing/
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.deep-research: true
+      ai.coding-agent: true
+      ai.office-apps: true
+      ai.scheduled-tasks: true
+      ai.early-access: true
+      ai.api-credits: true
+    featureLabels:
+      ai.api-credits: Monthly API credits, US$200 in the US
+    perks: [dot-agent, usage-more-than-pro-100]
+    prices:
+      - region: US
+        currency: USD
+        amount: 200
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers
+
+  - id: chatgpt.pro-500
+    name: Pro 500
+    link: https://chatgpt.com/pricing/
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.deep-research: true
+      ai.coding-agent: true
+      ai.office-apps: true
+      ai.scheduled-tasks: true
+      ai.early-access: true
+      ai.api-credits: true
+    featureLabels:
+      ai.api-credits: Monthly API credits, US$500 in the US
+    perks: [dot-agent, usage-highest, ultrafast]
+    prices:
+      - region: US
+        currency: USD
+        amount: 500
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-04
+        sourceUrl: https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-04: its Terms of Use, which "include our
+# Service Terms" and require following its Usage Policies (the conduct they forbid, no topic's), and its Privacy
+# Policy. Users in the EEA, Switzerland and the UK have terms of their own, not read: no rating has regions.
+policies:
+  links:
+    - name: 'Terms of use'
+      url: https://openai.com/policies/row-terms-of-use/
+    - name: 'Privacy policy'
+      url: https://openai.com/policies/row-privacy-policy/
+    - name: 'Cancelling'
+      url: https://help.openai.com/en/articles/7232927-canceling-your-chatgpt-subscription
+    - name: 'Data controls'
+      url: https://help.openai.com/en/articles/7730893-data-controls-in-chatgpt
+    - name: 'How your data improves its models'
+      url: https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance
+    - name: 'Ads in ChatGPT'
+      url: https://help.openai.com/en/articles/20001047-ads-in-chatgpt
+    - name: 'Deleting your account'
+      url: https://help.openai.com/en/articles/6378407-deleting-your-chatgpt-account
+    - name: 'Exporting your data'
+      url: https://help.openai.com/en/articles/7260999-exporting-your-chatgpt-history-and-data
+    - name: 'About ChatGPT Pro tiers'
+      url: https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers
+    - name: 'Security and privacy'
+      url: https://openai.com/security-and-privacy/
+    - name: 'Bug bounty program'
+      url: https://openai.com/index/bug-bounty-program/
+  ratings:
+    - topic: legal.disputes
+      tier: poor
+      reason: "Disputes go to a private referee (arbitration), not a court, and you can't join a class action. You can opt out only within 30 days of signing up or of a change to these rules."
+      sources:
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: 'You may opt out of arbitration within 30 days of account creation or of any updates to these arbitration terms within 30 days after the update has taken effect by filling out this form'
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: 'Class arbitrations, class actions, and representative actions are prohibited.'
+      action:
+        name: 'How to opt out of arbitration'
+        url: https://openai.com/form/arbitration-opt-out/
+      lastVerified: 2026-11-04
+    - topic: legal.terms-changes
+      tier: good
+      reason: 'It tells you at least 30 days ahead, by email or in the app, of a change to its terms that hurts you, and you can stop using it.'
+      sources:
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: 'We will give you at least 30 days advance notice of changes to these Terms that materially adversely impact you either via email or an in-product notification.'
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: 'If you do not agree to the changes, you must stop using our Services.'
+      lastVerified: 2026-11-04
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can close your account if you break its rules, the law makes it, or you put others at risk, with no refund promised. You can appeal.'
+      sources:
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: 'We reserve the right to suspend or terminate your access to our Services or delete your account if we determine:'
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: 'You breached these Terms or our Usage Policies'
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: 'If you believe we have suspended or terminated your account in error, you can file an appeal with us by contacting our Support team'
+      lastVerified: 2026-11-04
+    - topic: legal.content-rights
+      tier: neutral
+      reason: 'What you type stays yours. It may use your chats to run, build and improve its services and keep them safe.'
+      sources:
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: 'We may use Content to provide, maintain, develop, and improve our Services, comply with applicable law, enforce our terms and policies, and keep our Services safe.'
+      lastVerified: 2026-11-04
+    - topic: legal.output-rights
+      tier: good
+      reason: 'What ChatGPT makes for you is yours, though others may get similar answers.'
+      sources:
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: 'you (a) retain your ownership rights in Input and (b) own the Output.'
+      lastVerified: 2026-11-04
+    - topic: legal.service-changes
+      tier: good
+      reason: 'If it stops a service, it tells you first and refunds what you paid ahead and didn’t use.'
+      sources:
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: 'We may decide to discontinue our Services, but if we do, we will give you advance notice and a refund for any prepaid, unused Services.'
+      lastVerified: 2026-11-04
+    - topic: legal.inactivity
+      tier: good
+      reason: 'It only closes free accounts that haven’t been used for over a year, and tells you first.'
+      sources:
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: 'We also may terminate your account if it has been inactive for over a year and you do not have a paid account. If we do, we will provide you with advance notice.'
+      lastVerified: 2026-11-04
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You may not copy, change, sell or share its services, take its apps apart unless the law lets you, or use what it writes to build a competing AI.'
+      sources:
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: 'Modify, copy, lease, sell or distribute any of our Services.'
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: 'Use Output to develop models that compete with OpenAI.'
+      lastVerified: 2026-11-04
+    - topic: service.software-control
+      tier: good
+      reason: "Its apps may update themselves to the latest version. Its terms don't say they change anything else on your device."
+      sources:
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: 'Our Services may allow you to download software, such as mobile applications, which may update automatically to ensure you’re using the latest version.'
+      lastVerified: 2026-11-04
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'You can’t share your account with anyone, even at home.'
+      sources:
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: 'You may not share your account credentials or make your account available to anyone else and are responsible for all activities that occur under your account.'
+      lastVerified: 2026-11-04
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can cancel online whenever you like, but at least a day before it renews, or you pay for the next period. You keep it until the end of the time you paid for.'
+      sources:
+        - url: https://help.openai.com/en/articles/7232927-canceling-your-chatgpt-subscription
+          quote: 'Cancel at least 24 hours before your next billing date to avoid being charged for the next subscription period.'
+        - url: https://help.openai.com/en/articles/7232927-canceling-your-chatgpt-subscription
+          quote: 'After an ordinary cancellation, paid features remain available until the end of the current billing period.'
+      lastVerified: 2026-11-04
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back unless the law says so, but you keep your plan until the end of the time you paid for.'
+      sources:
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: 'Payments are non-refundable, except where required by law.'
+        - url: https://help.openai.com/en/articles/7232927-canceling-your-chatgpt-subscription
+          quote: 'After an ordinary cancellation, paid features remain available until the end of the current billing period.'
+      lastVerified: 2026-11-04
+    - topic: billing.price-changes
+      tier: great
+      reason: 'A new price starts only at your next renewal, and it tells you at least 30 days ahead, so you can cancel first.'
+      sources:
+        - url: https://openai.com/policies/row-terms-of-use/
+          quote: 'If we increase our subscription prices, we will give you at least 30 days’ notice and any price increase will take effect on your next renewal so that you can cancel if you do not agree to the price increase.'
+      lastVerified: 2026-11-04
+    - topic: billing.free-trials
+      status: not-stated
+      reason: 'Its terms describe no free trial: the free plan simply stays free.'
+      pages: [https://openai.com/policies/row-terms-of-use/]
+      lastVerified: 2026-11-04
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say your plan renews on its own until you cancel, but not that it reminds you first.'
+      pages:
+        - https://openai.com/policies/row-terms-of-use/
+        - https://help.openai.com/en/articles/7232927-canceling-your-chatgpt-subscription
+      lastVerified: 2026-11-04
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms list no fees beyond the price and taxes.'
+      pages: [https://openai.com/policies/row-terms-of-use/]
+      lastVerified: 2026-11-04
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its terms and Pro article don’t say what happens to what you’ve paid when you change plans.'
+      pages:
+        - https://openai.com/policies/row-terms-of-use/
+        - https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers
+      lastVerified: 2026-11-04
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records how you use it, like what you look at and the features you use, to improve and build its services. You can only limit cookies, where the law lets you.'
+      sources:
+        - url: https://openai.com/policies/row-privacy-policy/
+          quote: 'We collect information about your use and activity across the Services, such as the types of content that you view or engage with, the features you use and the actions you take'
+        - url: https://openai.com/policies/row-privacy-policy/
+          quote: 'To improve and develop our Services and conduct research, for example to develop new features;'
+        - url: https://openai.com/policies/row-privacy-policy/
+          quote: 'Depending on applicable law, you may be able to choose which cookies are used when you use our Services.'
+      action:
+        name: 'Its privacy policy’s choices'
+        url: https://openai.com/policies/row-privacy-policy/
+      lastVerified: 2026-11-04
+    - topic: privacy.data-sharing
+      tier: good
+      reason: 'It shares your data with companies that run its services and its own group, and never sells it or gives your chats to advertisers.'
+      sources:
+        - url: https://openai.com/policies/row-privacy-policy/
+          quote: 'We disclose Personal Data to our affiliates'
+        - url: https://help.openai.com/en/articles/20001047-ads-in-chatgpt
+          quote: 'We do not share your conversations with ChatGPT with advertisers, and we never sell your data to advertisers.'
+      lastVerified: 2026-11-04
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: "Free and Go may show ads picked from your chats and memories. You can turn off personalized ads, but ads still follow the chat you're in."
+      sources:
+        - url: https://help.openai.com/en/articles/20001047-ads-in-chatgpt
+          quote: 'Ads may appear for users on the Free and Go plans.'
+        - url: https://help.openai.com/en/articles/20001047-ads-in-chatgpt
+          quote: 'If ads personalization is turned on, ChatGPT may use select signals from your broader ChatGPT experience to make ads more relevant to you.'
+        - url: https://help.openai.com/en/articles/20001047-ads-in-chatgpt
+          quote: "If you turn off ads personalization, you will still see ads based on the context of your current chat thread, but we won't use other chat threads, ads history or topics to inform the ads we show you."
+      action:
+        name: 'How to turn off ad personalization'
+        url: https://help.openai.com/en/articles/20001047-ads-in-chatgpt
+      lastVerified: 2026-11-04
+    - topic: privacy.ads-tracking
+      plans: [chatgpt.plus, chatgpt.pro-100, chatgpt.pro-200, chatgpt.pro-500]
+      tier: great
+      reason: 'Plus and Pro show no ads.'
+      sources:
+        - url: https://help.openai.com/en/articles/20001047-ads-in-chatgpt
+          quote: 'Plus, Pro, Business, Enterprise, and Edu accounts will not have ads.'
+      lastVerified: 2026-11-04
+    - topic: privacy.ai-training
+      tier: poor
+      reason: 'Your chats train its AI unless you turn that off, which stops it for new chats only. Codex environments have a setting of their own, and feedback you send still trains it.'
+      sources:
+        - url: https://help.openai.com/en/articles/7730893-data-controls-in-chatgpt
+          quote: 'On personal workspaces with ChatGPT Free, Plus, or Pro, data sharing is enabled by default.'
+        - url: https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance
+          quote: 'After you opt out, we won’t use your new conversations to improve our models.'
+        - url: https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance
+          quote: 'Codex has a separate Include environments setting in Codex settings for allowing training on full environments.'
+      action:
+        name: 'How to turn off model training'
+        url: https://help.openai.com/en/articles/7730893-data-controls-in-chatgpt
+      lastVerified: 2026-11-04
+    - topic: privacy.content-access
+      tier: neutral
+      reason: 'Its systems check your chats to stop fraud and misuse and keep its services safe. (Training on your chats is graded under AI training.)'
+      sources:
+        - url: https://openai.com/policies/row-privacy-policy/
+          quote: 'To prevent fraud, illegal activity, or misuses of our Services, and to protect the security of our systems and Services, including by monitoring any Content submitted or exchanged on our platforms'
+      lastVerified: 2026-11-04
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it needs it, or for business, safety or legal reasons. What you delete is gone from its systems within 30 days, unless it has to keep it longer.'
+      sources:
+        - url: https://openai.com/policies/row-privacy-policy/
+          quote: 'We’ll retain your Personal Data for only as long as we need in order to provide our Services to you, or for other legitimate business purposes such as resolving disputes, safety and security reasons, or complying with our legal obligations.'
+        - url: https://openai.com/policies/row-privacy-policy/
+          quote: 'Once you choose to delete Personal Data, we will remove it from our systems within 30 days unless we need to retain it for longer as described below'
+      lastVerified: 2026-11-04
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your account yourself in ChatGPT, and your data is deleted within 30 days, bar a little the law makes it keep.'
+      sources:
+        - url: https://help.openai.com/en/articles/6378407-deleting-your-chatgpt-account
+          quote: 'If you delete your account, we will delete your data within 30 days, except we may retain a limited set of data for longer where required or permitted by law.'
+        - url: https://help.openai.com/en/articles/6378407-deleting-your-chatgpt-account
+          quote: 'Delete your account directly in ChatGPT.'
+      action:
+        name: 'How to delete your account'
+        url: https://help.openai.com/en/articles/6378407-deleting-your-chatgpt-account
+      lastVerified: 2026-11-04
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask for a copy of your data yourself in ChatGPT’s settings, but it doesn’t say what kind of file you get.'
+      sources:
+        - url: https://help.openai.com/en/articles/7260999-exporting-your-chatgpt-history-and-data
+          quote: 'Use ChatGPT settings to request an export from an eligible signed-in account or workspace.'
+      action:
+        name: 'How to export your data'
+        url: https://help.openai.com/en/articles/7260999-exporting-your-chatgpt-history-and-data
+      lastVerified: 2026-11-04
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It may hand your data to governments when the law requires it, and also to protect itself from legal liability.'
+      sources:
+        - url: https://openai.com/policies/row-privacy-policy/
+          quote: 'We may share your Personal Data, including information about your interaction with our Services, with government authorities, industry peers, or other third parties in compliance with the law'
+        - url: https://openai.com/policies/row-privacy-policy/
+          quote: 'or (vi) to protect against legal liability.'
+      lastVerified: 2026-11-04
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data is kept in the US and wherever its partners are, moved only under legal safeguards.'
+      sources:
+        - url: https://openai.com/policies/row-privacy-policy/
+          quote: 'including processing and storing your Personal Data in our facilities and servers in the United States, or in countries or territories where our affiliates and partners or our vendors and service providers are located'
+        - url: https://openai.com/policies/row-privacy-policy/
+          quote: 'only transfer that data pursuant to legally valid transfer mechanisms.'
+      lastVerified: 2026-11-04
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'To make an account you give your name, contact details and date of birth, and payment details for a paid plan.'
+      sources:
+        - url: https://openai.com/policies/row-privacy-policy/
+          quote: 'When you create an account with us, we will collect information associated with your account, including your name, contact information, account credentials, date of birth, payment information, and transaction history'
+      lastVerified: 2026-11-04
+    - topic: security.practices
+      tier: good
+      reason: 'An outside certification covers its consumer AI products, and it pays security experts who report problems through its bug bounty.'
+      sources:
+        - url: https://openai.com/security-and-privacy/
+          quote: 'OpenAI maintains an ISO/IEC 42001:2023 AI Management System covering OpenAI’s consumer and business AI products and models in its role as an AI producer and AI provider.'
+        - url: https://openai.com/index/bug-bounty-program/
+          quote: 'The OpenAI Bug Bounty Program is a way for us to recognize and reward the valuable insights of security researchers who contribute to keeping our technology and company secure.'
+      lastVerified: 2026-11-04
