@@ -109,6 +109,17 @@ describe('PriceTag', () => {
     expect(shown()).toBe('≈ $7.53 / mo incl. tax');
   });
 
+  it('says nothing of tax on a finance account’s fee, which has none (M11.12)', async () => {
+    const [fee] = pickPrice([listed('CA', 'CAD', 17.95)], {
+      region: 'CA',
+      currency: 'CAD',
+      taxFree: true,
+    });
+    await show(fee);
+    expect(shown()).toBe('$17.95 / mo');
+    expect(spoken()).toBe('$17.95 a month');
+  });
+
   it('shows a price with no rate to convert it in its own currency, with the icon but no ≈', async () => {
     await show(picked(listed('GLOBAL', 'USD', 9.99), null));
     expect(shown()).toBe('US$9.99 / mo + tax');

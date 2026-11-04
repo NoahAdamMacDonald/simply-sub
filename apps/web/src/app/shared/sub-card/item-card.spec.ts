@@ -318,7 +318,9 @@ describe('ItemCard', () => {
     it('shows a waived fee as its price with Waived under it, says which waiver, and its interest', () => {
       const waived = banked('example-bank.unlimited', 4000);
       const element = render(waived).nativeElement as HTMLElement;
-      expect(text(element.querySelector('.price ss-price'))).toContain('$17.95');
+      // An account's fee has no sales tax, so no "+ tax".
+      expect(text(element.querySelector('.price ss-price'))).toContain('$17.95 / mo');
+      expect(text(element.querySelector('.price ss-price'))).not.toContain('tax');
       expect(text(element.querySelector('.price .waived'))).toBe('Waived');
       expect(lines(waived)).toEqual([
         ['Fee waived: you keep $4,000 in it', 'Fee waived: you keep $4,000 in it'],
@@ -326,11 +328,11 @@ describe('ItemCard', () => {
       ]);
     });
 
-    it('nets the interest against a fee it pays, with the province’s tax', () => {
-      // $17.95 a month with 5% GST, less 0.50% on $2,000.
+    it('nets the interest against a fee it pays, which has no sales tax', () => {
+      // $17.95 a month, less 0.50% on $2,000.
       expect(lines(banked('example-bank.unlimited', 2000))).toEqual([
         ['Interest: $10.00 a year at 0.50%', 'Interest: $10.00 a year at 0.50%'],
-        ['Net: costs $216.17 a year, after interest', 'Net: costs $216.17 a year, after interest'],
+        ['Net: costs $205.40 a year, after interest', 'Net: costs $205.40 a year, after interest'],
       ]);
       expect(
         (render(banked('example-bank.unlimited', 2000)).nativeElement as HTMLElement).querySelector(

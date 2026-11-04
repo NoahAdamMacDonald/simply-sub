@@ -49,10 +49,10 @@ export class PriceTag {
     intervalSpoken(this.price().interval, this.price().intervalCount),
   );
   protected readonly tooltip = computed(() => priceTooltip(this.price()) ?? '');
-  /** None on a free price: there's no tax on nothing. */
+  /** None on a free price, there's no tax on nothing, or on a finance account's fee, which has none (M11.12). */
   protected readonly taxNote = computed(() => {
     const saved = this.settings.saved();
-    if (!saved || this.free()) return undefined;
+    if (!saved || this.free() || this.price().taxFree) return undefined;
     return priceTaxNote(this.price(), buyerTaxPlace(saved, this.region()));
   });
 }

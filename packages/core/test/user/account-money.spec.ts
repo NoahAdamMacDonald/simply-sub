@@ -153,6 +153,14 @@ describe('an account item, resolved (M11.12)', () => {
     expect(waived.status.kind).toBe('active');
   });
 
+  it('adds no sales tax to an account’s fee, which its price says (the owner’s choice)', () => {
+    const fee = account('example-bank.unlimited', { account: facts(100) });
+    expect(fee.price).toMatchObject({ amount: 17.95, taxIncluded: true, taxFree: true });
+    expect(chargesIn([fee], year, place).map(({ amount, tax }) => [amount, tax])[0]).toEqual([
+      17.95, 0,
+    ]);
+  });
+
   it('charges the fee when the facts meet no waiver, or there are none', () => {
     for (const charged of [
       account('example-bank.unlimited', { account: facts(3999) }),
@@ -211,13 +219,13 @@ describe('an account item, resolved (M11.12)', () => {
       { resolved: [essential, everything], unresolved: [] },
       { today, currency: 'CAD', place, registry: [] },
     );
-    // $100 at 2% and $350 at 3.5%; only Everything's $22 a month, with 13% HST, is spent.
+    // $100 at 2% and $350 at 3.5%; only Everything's $22 a month is spent, with no sales tax on an account's fee.
     expect(metrics.interest).toEqual({ amount: 450, approx: false });
-    expect(metrics.next12).toBeCloseTo(22 * 1.13 * 12, 10);
+    expect(metrics.next12).toBeCloseTo(22 * 12, 10);
 
     const money = { today, currency: 'CAD', place };
     expect(netCostAYear(essential, money)).toEqual({ amount: -100, approx: false });
-    expect(netCostAYear(everything, money)?.amount).toBeCloseTo(22 * 1.13 * 12 - 350, 10);
+    expect(netCostAYear(everything, money)?.amount).toBeCloseTo(22 * 12 - 350, 10);
     expect(netCostAYear(account('example-bank.unlimited', { account: facts(4000) }), money)).toBe(
       undefined,
     );

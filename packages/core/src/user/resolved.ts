@@ -271,7 +271,11 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
       );
       const plan = provider?.plans.find((candidate) => candidate.id === planId);
       if (!provider || !plan) return unresolved('plan-gone');
-      const pricing = priceContext(context, region, provider);
+      const pricing = {
+        ...priceContext(context, region, provider),
+        // A finance account's fee has no sales tax (M11.12).
+        ...(plan.account && { taxFree: true as const }),
+      };
       const price = forPeriod(plan.prices, item, { ...pricing, withRetired: true });
       if (!price) return unresolved('no-price');
       const addOns: ResolvedAddOn[] = [];
