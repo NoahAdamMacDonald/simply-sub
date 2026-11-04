@@ -338,9 +338,13 @@ plans:
 # Every agreement a user accepts (the owner's rule, 2026-11-03), read that day: the Microsoft Services Agreement
 # includes the Standard Application License Terms (games and apps from its store, on the same page) and the Xbox
 # Community Standards, and the subscription terms put Ultimate's EA Play, Fortnite Crew and Ubisoft+ Classics (and PC
-# Game Pass's EA Play) under those companies' own terms, read for every topic. Those terms include EA's, Epic's and
-# Ubisoft's own user agreements and privacy policies, which are those services' to rate: not read. The Microsoft
-# account sign-up's agreement line shows only after an email address is entered, so it wasn't read.
+# Game Pass's EA Play) under those companies' own terms, read for every topic. Those include, and the owner chose to
+# read too, each company's own terms and privacy policy, in Canada's versions: EA's user agreement and privacy and
+# cookie policy, Epic's terms of service and privacy policy, and Ubisoft's terms of use, privacy policy and licence for
+# its games. Where they're worse than Microsoft's, the plans with that benefit have a rating of their own; Epic's
+# (arbitration with an opt-out, no targeted ads) and Ubisoft's privacy policy (self-serve deletion) aren't, so they're
+# not quoted. EA's terms of sale, for buying from EA itself, and the community rules the games' terms name, weren't
+# read. The Microsoft account sign-up's agreement line shows only after an email address is entered: not read.
 policies:
   links:
     - name: Cancelling
@@ -367,6 +371,14 @@ policies:
       url: https://legal.epicgames.com/en-US/fortnite/crew-terms
     - name: 'Ubisoft+ terms'
       url: https://www.ubisoft.com/legal/documents/ubisoftplusterms
+    - name: 'EA user agreement (Canada)'
+      url: https://tos.ea.com/legalapp/WEBTERMS/CA/en/PC/
+    - name: 'EA privacy and cookie policy (Canada)'
+      url: https://tos.ea.com/legalapp/WEBPRIVACY/CA/en/PC/
+    - name: 'Ubisoft terms of use (Canada)'
+      url: https://www.ubisoft.com/legal/documents/termsofuse/en-CA
+    - name: "Ubisoft's licence for its games (Canada)"
+      url: https://www.ubisoft.com/legal/documents/eula/en-CA
   ratings:
     - topic: billing.refunds
       tier: great
@@ -595,12 +607,14 @@ policies:
           quote: 'When your EA Play subscription or any trial ends, you will no longer have access to the membership benefits, including Play List titles, game upgrades, or in-game purchases made in a Play List title, unless you separately have access to that Play List title for the applicable Platform.'
       lastVerified: 2026-11-03
     - topic: legal.inactivity
-      tier: poor
-      reason: 'If you don’t sign in to your Microsoft account for two years, it closes it, and its terms don’t promise a warning first.'
+      tier: bad
+      reason: 'If you don’t sign in to your Microsoft account for two years, it closes it, without promising a warning first, and you may lose the games and apps you bought.'
       sources:
         - url: https://www.microsoft.com/en-ca/servicesagreement
           quote: 'This means you must sign in at least once in a two-year period to keep your Microsoft account, and associated Services (unless specified otherwise), active'
-      lastVerified: 2026-11-02
+        - url: https://www.microsoft.com/en-ca/servicesagreement
+          quote: 'Third, you may lose access to products you’ve acquired.'
+      lastVerified: 2026-11-03
     - topic: security.practices
       tier: neutral
       reason: 'It pays security experts who find problems in Xbox, but doesn’t say outside experts check it regularly.'
@@ -631,6 +645,56 @@ policies:
           quote: 'Ubisoft may revise these UBISOFT+ Terms at any time and for any reason in its sole discretion, changes to be effective as indicated.'
         - url: https://legal.epicgames.com/en-US/fortnite/crew-terms
           quote: 'Epic reserves the right to change the Fortnite Crew Subscription Terms from time to time and will post the most current version of the Fortnite Crew Subscription Terms'
+      lastVerified: 2026-11-03
+    # The benefits' companies' own terms (the owner's choice, 2026-11-03): ratings for the plans with the benefit, where
+    # they're worse than Microsoft's.
+    - topic: legal.disputes
+      plans: [xbox-game-pass.ultimate, xbox-game-pass.pc-game-pass]
+      regions: [CA]
+      tier: bad
+      reason: "In Canada, Microsoft's terms keep disagreements in court, but EA Play's EA account sends disagreements with EA to a private referee (an arbitrator) outside Quebec, with no group lawsuits and no way to opt out."
+      sources:
+        - url: https://www.xbox.com/en-US/legal/subscription-terms
+          quote: 'EA Play subject to terms: EA Play Terms'
+        - url: https://tos.ea.com/legalapp/WEBTERMS/CA/en/PC/
+          quote: 'IT EXCLUDES RESIDENTS OF QUEBEC, RUSSIA, SWITZERLAND, BRAZIL, MEXICO, THE MEMBER STATES OF THE EEA, UNITED KINGDOM AND THE REPUBLIC OF KOREA.'
+        - url: https://tos.ea.com/legalapp/WEBTERMS/CA/en/PC/
+          quote: 'YOU AND EA EXPRESSLY WAIVE THE RIGHT TO A TRIAL BY JURY AND AGREE TO RESOLVE YOUR DISPUTES IN MANDATORY, FINAL AND BINDING ARBITRATION.'
+      lastVerified: 2026-11-03
+    - topic: privacy.data-deletion
+      plans: [xbox-game-pass.ultimate, xbox-game-pass.pc-game-pass]
+      tier: neutral
+      reason: 'You can close your Microsoft account yourself, but the EA account that EA Play needs is deleted only when you ask EA’s support, with no time given.'
+      sources:
+        - url: https://www.xbox.com/en-US/legal/subscription-terms
+          quote: 'EA Play subject to terms: EA Play Terms'
+        - url: https://tos.ea.com/legalapp/WEBPRIVACY/CA/en/PC/
+          quote: 'You may deactivate your EA Account or delete the personal information associated with your account by contacting us at EA Help'
+      action:
+        name: Ask EA Help to delete your EA account
+        url: https://help.ea.com
+      lastVerified: 2026-11-03
+    - topic: legal.account-closure
+      plans: [xbox-game-pass.ultimate]
+      tier: bad
+      reason: 'Microsoft closes accounts for breaking its rules, but Ubisoft+ Classics needs a Ubisoft account, which Ubisoft may close at its sole discretion over anything you do, in its games or not, with no money back.'
+      sources:
+        - url: https://www.ubisoft.com/legal/documents/termsofuse/en-CA
+          quote: 'We may suspend or close your Account and your ability to use one or more Services or part of the Services, at any time, automatically and at our sole discretion where:'
+        - url: https://www.ubisoft.com/legal/documents/termsofuse/en-CA
+          quote: 'For any other reason in relation to your actions in or outside of the Services,'
+        - url: https://www.ubisoft.com/legal/documents/termsofuse/en-CA
+          quote: 'no credit (such as for unused Services, unused subscription period, unused points or Ubisoft Virtual Currency) will be credited to you'
+      lastVerified: 2026-11-03
+    - topic: legal.licence
+      plans: [xbox-game-pass.ultimate]
+      tier: bad
+      reason: 'Microsoft lets you use its apps on one device each, but Ubisoft’s licence for its games, Ubisoft+ Classics included, says Ubisoft may end it at any time, for any reason.'
+      sources:
+        - url: https://www.xbox.com/en-US/legal/subscription-terms
+          quote: 'Ubisoft+ Classics subject to terms: Ubisoft+ Subscription Terms'
+        - url: https://www.ubisoft.com/legal/documents/eula/en-CA
+          quote: 'You and UBISOFT (or its licensors) may terminate this EULA, at any time, for any reason.'
       lastVerified: 2026-11-03
     - topic: legal.licence
       tier: poor

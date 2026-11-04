@@ -3629,6 +3629,13 @@ None.
   from afar with updates you can turn off Neutral; no way to turn that off, or other software removed, Poor), for
   security, VPN, passwords, privacy suites, browsers, storage, email, AI, gaming, creative, developer and software.
   An installer that removes other security apps is software-control's Poor, no longer a notable.
+- **Other companies' benefits, read to the bottom** (the owner's choice): a benefit another company runs inside a plan
+  (Game Pass Ultimate's EA Play, Fortnite Crew and Ubisoft+ Classics) is read with its own terms and the general
+  terms, privacy policy and game licence those include (EA's, Epic's, Ubisoft's). Where one is worse than the
+  provider's own, the plans with the benefit get a rating of their own, its reason naming the benefit: Ultimate's
+  Ubisoft account may be closed at Ubisoft's sole discretion (Bad), and its licence ended "at any time, for any
+  reason" (Bad); EA Play's arbitration has no opt-out in Canada (Bad) and its account is deleted only on request
+  (Neutral).
 
 **Resolved (2026-11-03, provider facts for the 13)**
 - **Where each provider is from:** the owner's `country` (an ISO 3166-1 code), quoted like the owner's name: from the
