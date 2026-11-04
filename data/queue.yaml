@@ -695,7 +695,8 @@
   source: wikidata
   wikidata: Q53720737
   sitelinks: 20
-  status: queued
+  status: done
+  date: 2026-11-04
 - id: viki
   name: Viki
   website: https://www.viki.com

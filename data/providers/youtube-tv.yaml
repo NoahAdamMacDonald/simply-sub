@@ -1,0 +1,599 @@
+# Researched by hand on 2026-11-04 (M11.15, the streaming category), read through a US exit (the owner's choice of
+# 2026-11-04) for its sign-up pages, and from Canada for YouTube TV Help, which is the same everywhere. Pages, each
+# quoted where it's used:
+# Pricing: tv.youtube.com/welcome and its plans page (tv.youtube.com/learn/explore-plans), whose footnote gives every
+# plan's regular price after its offer: "Main Plan ($82.99/mo), Sports Plan ($64.99/mo), Sports + News ($71.99/mo),
+# Sports + Entertainment ($71.99/mo), Sports + News + Family ($77.99/mo), Sports + Entertainment + Family ($77.99/mo),
+# Entertainment ($54.99/mo), News + Entertainment ($62.99/mo), News + Entertainment + Family ($69.99/mo)". The offers
+# ($49.99 for five months of Sports + News, $59.99 for two of the Main Plan) are first-term prices, so not stored.
+# Add-ons, on the welcome page: 4K Plus ($9.99/mo), NFL RedZone with Sports Plus ($10.99/mo) and Spanish networks
+# ($14.99/mo), "Add-ons for everyone"; not listed: single premium networks ("From $1.99/mo") and the Entertainment Plus
+# bundle of HBO Max, Paramount+ with Showtime and STARZ ($29.99/mo), which sells other services' channels.
+# Where it's sold: the US only (YouTube TV Help's family groups article: the family manager must "Live in the United
+# States").
+# Region checklist, 2026-11-04: a US-only service, so no other region to read.
+# Its additional terms are in the Paid Service Terms only as served in the US (an address with gl=US still shows
+# Canada's), so the ratings quote YouTube TV Help and the parts of the Paid Service Terms every country's version
+# shares.
+
+id: youtube-tv
+name: YouTube TV
+website: https://tv.youtube.com
+# Google's help centres (YouTube TV Help, and the accounts help the shared privacy document cites) and its legal pages.
+domains: [support.google.com, policies.google.com]
+category: streaming
+spendCategory: streaming
+billingCurrency: { US: USD }
+cancelUrl: https://support.google.com/youtubetv/answer/7129668
+sources: { pricing: https://tv.youtube.com/learn/explore-plans/ }
+# Payment methods, read 2026-11-04: cards (its refunds article: "Credit card refunds typically take 3-5 business days"),
+# a YouTube gift card's Google Play balance ("You can then use the balance to pay for: ... YouTube TV", YouTube Help),
+# and billing by "a mobile carrier or internet provider" (its billing article). No page lists the card networks, so
+# no acceptedNetworks.
+paymentMethods:
+  - methods: [card]
+    page: 'Request a refund for YouTube TV'
+    url: https://support.google.com/youtubetv/answer/7298539
+    quotes:
+      - 'Credit card refunds typically take 3-5 business days.'
+  - methods: [gift-card]
+    page: 'Redeem a YouTube gift card or code'
+    url: https://support.google.com/youtube/answer/7259382
+    quotes:
+      - 'Use a YouTube gift card or code to make purchases on YouTube.'
+  - methods: [provider-billing]
+    page: 'Update billing & payments for YouTube TV'
+    url: https://support.google.com/youtubetv/answer/7129667
+    quotes:
+      - 'If you signed up for YouTube TV through a mobile carrier or internet provider, you’ll be billed by them.'
+
+# Owner: Google LLC, as for YouTube (its paid services' provider), part of Alphabet.
+owner:
+  name: 'Google LLC, owned by Alphabet Inc., a public company (NASDAQ: GOOGL, GOOG)'
+  website: https://abc.xyz
+  page:
+    name: "Alphabet's founders' letter"
+    url: https://abc.xyz/
+  quotes:
+    - 'What is Alphabet? Alphabet is mostly a collection of companies. The largest of which, of course, is Google.'
+    - 'Google will become a wholly-owned subsidiary of Alphabet. Our two classes of shares will continue to trade on Nasdaq as GOOGL and GOOG.'
+  country:
+    code: US
+    page:
+      name: Terms of Service
+      url: https://www.youtube.com/t/terms
+    quotes:
+      - 'The entity providing the Service is Google LLC, a company operating under the laws of Delaware'
+    lastVerified: 2026-11-04
+  lastVerified: 2026-11-04
+
+# Renewal day (M11.5), read 2026-11-04 in its free trial article: the day you're first charged recurs each month. It
+# doesn't say what happens in a shorter month.
+renewalAnchor:
+  kind: same-date
+  page: Start a YouTube TV free trial
+  url: https://support.google.com/youtubetv/answer/11020997
+  quotes:
+    - 'The date of this charge will become your monthly billing date going forward.'
+  lastVerified: 2026-11-04
+
+# Perks (M11.6): what tells its plans apart that no feature describes, in their words: the channel genres each plan
+# carries besides sports (the plans page's tabs: "Sports", "News", "Entertainment", "Family"), and "Unlimited DVR
+# space" on every plan.
+perks:
+  - id: news-channels
+    name: News channels
+  - id: entertainment-channels
+    name: Entertainment channels
+  - id: family-channels
+    name: Family channels
+  - id: unlimited-dvr
+    name: Unlimited DVR space
+
+# Apps and support, read 2026-11-04: "Your smart TV", "Your phone or tablet", "Your game console" and tv.youtube.com,
+# with iOS and Android apps (the welcome page); a Google Account's sign-in, as for YouTube; "We’re here to help 24/7",
+# by phone and live chat (the plans page: "Call us to speak to an agent", "Start a live chat with an agent").
+features:
+  platforms: [android, ios, web, tv, console]
+  account.sign-in: [password, passkey, push-approval, totp, security-key, sms]
+  support.channels: [phone, chat, 24-7]
+
+# Features, read 2026-11-04: "6 household accounts and 3 streams" and "Unlimited DVR space" on every plan (the welcome
+# page), shared with "up to 5 other members" who "Live in the same household as the family manager" (YouTube TV Help's
+# family groups); live channels, with sports on the plans named for them and on the Main Plan; 4K, downloads of
+# recordings and unlimited streams at home only with 4K Plus ("With 4K Plus, unlock unlimited simultaneous streams at
+# home, the ability to watch recordings offline, and a 4K viewing experience on select content"), which an add-on
+# can't add to a plan's features here, so the plans have 3 streams and no downloads. Video quality: its streaming help
+# says it streams "HD video", which YouTube Help defines as 720 to 1080 lines, so 720p, the least that allows
+# (inferred). Live TV carries ads. No profiles beyond the 6 accounts, no Kids profiles (members must be 13 or older),
+# and no French.
+plans:
+  - id: youtube-tv.main
+    name: Main Plan
+    link: https://tv.youtube.com/learn/explore-plans/
+    features:
+      video.quality: 720p
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.live: [tv-channels, sports]
+      account.users: 6
+    inferred:
+      video.quality:
+        reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
+        page:
+          name: Troubleshoot YouTube TV streaming issues
+          url: https://support.google.com/youtubetv/answer/7129766
+        lastVerified: 2026-11-04
+    perks: [news-channels, entertainment-channels, family-channels, unlimited-dvr]
+    addOnIds: [youtube-tv.4k-plus, youtube-tv.sports-plus, youtube-tv.spanish-plus]
+    notes: 100+ channels, including local channels.
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 82.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.youtube.com/learn/explore-plans/,
+        }
+
+  - id: youtube-tv.sports
+    name: Sports Plan
+    link: https://tv.youtube.com/learn/explore-plans/
+    features:
+      video.quality: 720p
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.live: [tv-channels, sports]
+      account.users: 6
+    inferred:
+      video.quality:
+        reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
+        page:
+          name: Troubleshoot YouTube TV streaming issues
+          url: https://support.google.com/youtubetv/answer/7129766
+        lastVerified: 2026-11-04
+    perks: [unlimited-dvr]
+    addOnIds: [youtube-tv.4k-plus, youtube-tv.sports-plus, youtube-tv.spanish-plus]
+    notes: 30+ channels of live games, sports analysis and news coverage.
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 64.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.youtube.com/learn/explore-plans/,
+        }
+
+  - id: youtube-tv.sports-news
+    name: 'Sports + News'
+    link: https://tv.youtube.com/learn/explore-plans/
+    features:
+      video.quality: 720p
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.live: [tv-channels, sports]
+      account.users: 6
+    inferred:
+      video.quality:
+        reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
+        page:
+          name: Troubleshoot YouTube TV streaming issues
+          url: https://support.google.com/youtubetv/answer/7129766
+        lastVerified: 2026-11-04
+    perks: [news-channels, unlimited-dvr]
+    addOnIds: [youtube-tv.4k-plus, youtube-tv.sports-plus, youtube-tv.spanish-plus]
+    notes: 50+ channels, including local channels.
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 71.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.youtube.com/learn/explore-plans/,
+        }
+
+  - id: youtube-tv.sports-entertainment
+    name: 'Sports + Entertainment'
+    link: https://tv.youtube.com/learn/explore-plans/
+    features:
+      video.quality: 720p
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.live: [tv-channels, sports]
+      account.users: 6
+    inferred:
+      video.quality:
+        reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
+        page:
+          name: Troubleshoot YouTube TV streaming issues
+          url: https://support.google.com/youtubetv/answer/7129766
+        lastVerified: 2026-11-04
+    perks: [entertainment-channels, unlimited-dvr]
+    addOnIds: [youtube-tv.4k-plus, youtube-tv.sports-plus, youtube-tv.spanish-plus]
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 71.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.youtube.com/learn/explore-plans/,
+        }
+
+  - id: youtube-tv.sports-news-family
+    name: 'Sports + News + Family'
+    link: https://tv.youtube.com/learn/explore-plans/
+    features:
+      video.quality: 720p
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.live: [tv-channels, sports]
+      account.users: 6
+    inferred:
+      video.quality:
+        reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
+        page:
+          name: Troubleshoot YouTube TV streaming issues
+          url: https://support.google.com/youtubetv/answer/7129766
+        lastVerified: 2026-11-04
+    perks: [news-channels, family-channels, unlimited-dvr]
+    addOnIds: [youtube-tv.4k-plus, youtube-tv.sports-plus, youtube-tv.spanish-plus]
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 77.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.youtube.com/learn/explore-plans/,
+        }
+
+  - id: youtube-tv.sports-entertainment-family
+    name: 'Sports + Entertainment + Family'
+    link: https://tv.youtube.com/learn/explore-plans/
+    features:
+      video.quality: 720p
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.live: [tv-channels, sports]
+      account.users: 6
+    inferred:
+      video.quality:
+        reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
+        page:
+          name: Troubleshoot YouTube TV streaming issues
+          url: https://support.google.com/youtubetv/answer/7129766
+        lastVerified: 2026-11-04
+    perks: [entertainment-channels, family-channels, unlimited-dvr]
+    addOnIds: [youtube-tv.4k-plus, youtube-tv.sports-plus, youtube-tv.spanish-plus]
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 77.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.youtube.com/learn/explore-plans/,
+        }
+
+  - id: youtube-tv.entertainment
+    name: Entertainment
+    link: https://tv.youtube.com/learn/explore-plans/
+    features:
+      video.quality: 720p
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.live: [tv-channels]
+      account.users: 6
+    inferred:
+      video.quality:
+        reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
+        page:
+          name: Troubleshoot YouTube TV streaming issues
+          url: https://support.google.com/youtubetv/answer/7129766
+        lastVerified: 2026-11-04
+    perks: [entertainment-channels, unlimited-dvr]
+    addOnIds: [youtube-tv.4k-plus, youtube-tv.sports-plus, youtube-tv.spanish-plus]
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 54.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.youtube.com/learn/explore-plans/,
+        }
+
+  - id: youtube-tv.news-entertainment
+    name: 'News + Entertainment'
+    link: https://tv.youtube.com/learn/explore-plans/
+    features:
+      video.quality: 720p
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.live: [tv-channels]
+      account.users: 6
+    inferred:
+      video.quality:
+        reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
+        page:
+          name: Troubleshoot YouTube TV streaming issues
+          url: https://support.google.com/youtubetv/answer/7129766
+        lastVerified: 2026-11-04
+    perks: [news-channels, entertainment-channels, unlimited-dvr]
+    addOnIds: [youtube-tv.4k-plus, youtube-tv.sports-plus, youtube-tv.spanish-plus]
+    notes: 70+ channels, including local channels.
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 62.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.youtube.com/learn/explore-plans/,
+        }
+
+  - id: youtube-tv.news-entertainment-family
+    name: 'News + Entertainment + Family'
+    link: https://tv.youtube.com/learn/explore-plans/
+    features:
+      video.quality: 720p
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.live: [tv-channels]
+      account.users: 6
+    inferred:
+      video.quality:
+        reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
+        page:
+          name: Troubleshoot YouTube TV streaming issues
+          url: https://support.google.com/youtubetv/answer/7129766
+        lastVerified: 2026-11-04
+    perks: [news-channels, entertainment-channels, family-channels, unlimited-dvr]
+    addOnIds: [youtube-tv.4k-plus, youtube-tv.sports-plus, youtube-tv.spanish-plus]
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 69.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.youtube.com/learn/explore-plans/,
+        }
+
+addOns:
+  - id: youtube-tv.4k-plus
+    name: 4K Plus
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.youtube.com/welcome/,
+        }
+  - id: youtube-tv.sports-plus
+    name: NFL RedZone with Sports Plus
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 10.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.youtube.com/welcome/,
+        }
+  - id: youtube-tv.spanish-plus
+    name: Spanish networks
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 14.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.youtube.com/welcome/,
+        }
+
+# Terms and policies, read 2026-11-04 (M11.15): the YouTube Terms of Service, the Paid Service Terms (the clauses every
+# country's version shares, from Canada, and YouTube TV's additional terms, through a US exit: they're in the US
+# version only), YouTube TV Help's articles on cancelling, refunds, trials, family groups and home areas, and Google's
+# Privacy Policy (data/policies/google-privacy.yaml), which YouTube TV's terms say "controls the use, collection and
+# sharing of data". Inactivity and security are Google's account and Vulnerability Reward Program pages, as for
+# YouTube.
+policies:
+  shared: [google-privacy]
+  links:
+    - name: 'Terms of Service'
+      url: https://www.youtube.com/t/terms
+    - name: 'Paid Service Terms of Service'
+      url: https://www.youtube.com/t/terms_paidservice
+    - name: 'Paid Service Terms, with YouTube TV’s (US)'
+      url: https://www.youtube.com/t/terms_paidservice?gl=US&hl=en
+    - name: 'Cancel or pause'
+      url: https://support.google.com/youtubetv/answer/7129668
+    - name: 'Refunds'
+      url: https://support.google.com/youtubetv/answer/7298539
+    - name: 'Free trials'
+      url: https://support.google.com/youtubetv/answer/11020997
+    - name: 'Family groups'
+      url: https://support.google.com/youtubetv/answer/7251139
+    - name: 'Home area'
+      url: https://support.google.com/youtubetv/answer/7129768
+    - name: 'Inactive Google Accounts'
+      url: https://support.google.com/accounts/answer/12418290
+    - name: 'Vulnerability Reward Program'
+      url: https://bughunters.google.com/about/rules/google-friends/google-and-alphabet-vulnerability-reward-program-vrp-rules
+  ratings:
+    - topic: privacy.ai-training
+      status: not-applicable
+      reason: 'You only watch and record on YouTube TV; you post nothing an AI could train on.'
+      pages: [https://www.youtube.com/t/terms_paidservice?gl=US&hl=en]
+      lastVerified: 2026-11-04
+    - topic: privacy.children
+      tier: neutral
+      reason: "Everyone in a family group must be 13 or older. Its pages say nothing more about children's data."
+      sources:
+        - url: https://support.google.com/youtubetv/answer/7251139
+          quote: 'You can invite family members (13 or older) to join your family group.'
+      lastVerified: 2026-11-04
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can cancel online at any time, past an offer to pause, and keep watching until the end of the period you paid for.'
+      sources:
+        - url: https://support.google.com/youtubetv/answer/7129668
+          quote: 'You can cancel or pause your YouTube TV membership at any time.'
+        - url: https://support.google.com/youtubetv/answer/7129668
+          quote: "When you cancel or pause your membership, you'll still have access to YouTube TV until the end of your payment period."
+        - url: https://support.google.com/youtubetv/answer/7129668
+          quote: 'Chat with us to explore options to pause or customize your plan.'
+      action:
+        name: 'Cancel or pause'
+        url: https://support.google.com/youtubetv/answer/7129668
+      lastVerified: 2026-11-04
+    - topic: billing.refunds
+      tier: neutral
+      reason: "You don't get money back when you cancel, but you keep watching to the end of the period. It refunds when its features don't work."
+      sources:
+        - url: https://support.google.com/youtubetv/answer/7129668
+          quote: "When you cancel or pause your membership, you'll still have access to YouTube TV until the end of your payment period."
+        - url: https://support.google.com/youtubetv/answer/7298539
+          quote: 'If features included with your YouTube TV membership are defective, or do not perform as stated, click the button below to request a refund.'
+      lastVerified: 2026-11-04
+    - topic: billing.price-changes
+      tier: neutral
+      reason: "It tells you before a new price applies, and you can cancel first, but it doesn't say how far ahead."
+      sources:
+        - url: https://www.youtube.com/t/terms_paidservice
+          quote: 'Any changes to pricing for Paid Services with recurring payments will only apply following reasonable notice to you.'
+        - url: https://www.youtube.com/t/terms_paidservice
+          quote: 'you can cancel the Paid Service before the start of the next subscription period in which the new price applies'
+      lastVerified: 2026-11-04
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'Its trial turns into a paid plan unless you cancel, which you can do at any time during it; it names no reminder.'
+      sources:
+        - url: https://support.google.com/youtubetv/answer/11020997
+          quote: 'When your account switches from a free trial to a paid membership, you’ll be charged the standard price for the plan you signed up for (plus any add-on networks you’ve subscribed to).'
+        - url: https://support.google.com/youtubetv/answer/11020997
+          quote: "If you cancel your subscription during your free trial, you'll still retain access to YouTube TV features until the end of the trial period."
+      lastVerified: 2026-11-04
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its pages say your plan renews every month on its own, but not that it reminds you first.'
+      pages:
+        - https://support.google.com/youtubetv/answer/11020997
+        - https://www.youtube.com/t/terms_paidservice
+      lastVerified: 2026-11-04
+    - topic: billing.fees
+      tier: poor
+      reason: 'Besides the price and taxes, it can add bank fees and the cost of currency changes, without saying how much.'
+      sources:
+        - url: https://www.youtube.com/t/terms_paidservice
+          quote: 'Google will charge your payment method for the price listed for the relevant Paid Service along with any additional amounts relating to applicable taxes, bank fees and currency fluctuations.'
+      lastVerified: 2026-11-04
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its pages don’t say what happens to what you’ve paid when you switch plans.'
+      pages: [https://support.google.com/youtubetv/answer/7129668]
+      lastVerified: 2026-11-04
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to the courts of Santa Clara County, California, under California law, with no arbitration.'
+      sources:
+        - url: https://www.youtube.com/t/terms
+          quote: 'will be litigated exclusively in the federal or state courts of Santa Clara County, California, USA'
+      lastVerified: 2026-11-04
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: "It tells you about big changes to its terms ahead of time, but doesn't say how far ahead. If you don't agree, you stop using it."
+      sources:
+        - url: https://www.youtube.com/t/terms
+          quote: 'If we materially change this Agreement, we’ll provide you with reasonable advance notice and the opportunity to review the changes'
+        - url: https://www.youtube.com/t/terms_paidservice
+          quote: 'If we materially change the Paid Service Terms, we’ll provide you with reasonable advance notice'
+      lastVerified: 2026-11-04
+    - topic: legal.account-closure
+      tier: good
+      reason: 'It closes or suspends an account only if you seriously or repeatedly break its rules, the law makes it, or you cause harm, and it tells you why when it can. You can appeal.'
+      sources:
+        - url: https://www.youtube.com/t/terms
+          quote: 'you materially or repeatedly breach this Agreement'
+        - url: https://www.youtube.com/t/terms
+          quote: 'We will notify you with the reason for termination or suspension by YouTube unless we reasonably believe that to do so'
+        - url: https://www.youtube.com/t/terms
+          quote: 'If you believe the termination or suspension has been made in error, you can appeal using this form.'
+      lastVerified: 2026-11-04
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'Its channels and shows can change at any time, as the networks decide.'
+      sources:
+        - url: https://www.youtube.com/t/terms_paidservice?gl=US&hl=en
+          quote: 'The content in YouTube TV is unique, subject to all the content restrictions listed here and may change at any time.'
+        - url: https://www.youtube.com/t/terms_paidservice?gl=US&hl=en
+          quote: 'Google’s content partners have discretion over the programming they include in YouTube TV and may modify programs, program elements, promotional or other materials at any time.'
+      lastVerified: 2026-11-04
+    - topic: legal.inactivity
+      tier: good
+      reason: 'Google may delete an account no one has used for two years, after emailing you first. An account with a subscription that is still running counts as in use.'
+      sources:
+        - url: https://support.google.com/accounts/answer/12418290
+          quote: 'Google reserves the right to delete an inactive Google Account and its activity and data if you are inactive across Google for at least two years.'
+        - url: https://support.google.com/accounts/answer/12418290
+          quote: 'Your Google Account was used to make a purchase of a Google product, app, service, or subscription that is current or ongoing.'
+        - url: https://support.google.com/accounts/answer/12418290
+          quote: 'Email notifications to your Google Account'
+      lastVerified: 2026-11-04
+    - topic: security.practices
+      tier: neutral
+      reason: "It pays security experts who find and report problems in Google's services, but doesn't say outside experts regularly check YouTube TV's security or publish what they find."
+      sources:
+        - url: https://bughunters.google.com/about/rules/google-friends/google-and-alphabet-vulnerability-reward-program-vrp-rules
+          quote: 'we maintain a Vulnerability Reward Program for Google-owned and Alphabet (Bet) subsidiary web properties, running continuously since November 2010.'
+        - url: https://bughunters.google.com/about/rules/google-friends/google-and-alphabet-vulnerability-reward-program-vrp-rules
+          quote: 'In principle, any Google-owned or Alphabet (Bet) subsidiary web service that handles reasonably sensitive user data is intended to be in scope.'
+      lastVerified: 2026-11-04
+    - topic: service.account-sharing
+      tier: poor
+      reason: 'You share it with up to 5 people who live with you, and it checks electronically every 30 to 90 days that they do. Away from your home area you lose your local channels.'
+      sources:
+        - url: https://www.youtube.com/t/terms_paidservice?gl=US&hl=en
+          quote: 'All shared accounts must be from the same household or family living together, as determined by electronic check-ins every 30-90 days.'
+        - url: https://support.google.com/youtubetv/answer/7129768
+          quote: 'To make sure you get the correct local networks, use YouTube TV at least once every 3 months in your home area.'
+      lastVerified: 2026-11-04
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Each account can add up to 10 new devices a month and 30 a year.'
+      sources:
+        - url: https://www.youtube.com/t/terms_paidservice?gl=US&hl=en
+          quote: 'a given subscriber may only register 10 devices in a given calendar month to an account, and no more than 30 devices to an account in a given calendar year'
+      lastVerified: 2026-11-04

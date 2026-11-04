@@ -181,6 +181,12 @@ describe('namesRenewalAnchor', () => {
       'same-date',
       true,
     ],
+    // YouTube TV's trial article (M11.15): the first charge's date recurs each month.
+    [
+      'The date of this charge will become your monthly billing date going forward.',
+      'same-date',
+      true,
+    ],
     ['Your subscription began on a Tuesday.', 'same-date', false],
     ['Your plan renews every 30 days.', 'every-30-days', true],
     ['Un forfait de 30 jours', 'every-30-days', true],
