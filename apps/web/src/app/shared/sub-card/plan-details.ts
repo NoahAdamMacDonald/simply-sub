@@ -1,5 +1,14 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, Injector, computed, inject, input, resource } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Injector,
+  computed,
+  inject,
+  input,
+  resource,
+  signal,
+} from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
@@ -12,8 +21,11 @@ import {
   paymentMethodNames,
   paymentMethodsIn,
   planExtras,
+  planFeatureRows,
+  planHighlights,
   planPolicies,
   planTitle,
+  policyGradeCounts,
   quoteLink,
   renewalAnchorNames,
   repositoryLabel,
@@ -25,10 +37,6 @@ import {
   type PaymentMethods,
   type PickedPrice,
   type PlanMatch,
-  type PolicyCitation,
-  type PolicyGroup,
-  type PolicyStatus,
-  type PolicyTier,
   type Rank,
   type RankKey,
   type SnapshotProvider,
@@ -49,21 +57,7 @@ import { ProviderIcon } from '../provider-icon/provider-icon';
 import type { ReportPriceData } from '../report-price/report-price-dialog';
 import { catalogIcon, savingText, type SavingText } from './card-text';
 import { hostGlyph, methodGlyphs, networkGlyphs, type Glyph } from './pay-glyphs';
-
-/** The grades' names, in muted text beside each rating's topic (BLUEPRINT §4.10). */
-const tierNames: Record<PolicyTier, string> = {
-  great: 'Great',
-  good: 'Good',
-  neutral: 'Neutral',
-  poor: 'Poor',
-  bad: 'Bad',
-};
-
-/** What a rating without a grade says instead, in grey (M11.1). */
-const statusNames: Record<PolicyStatus, string> = {
-  'not-stated': 'Not stated',
-  'not-applicable': 'Not applicable',
-};
+import { PolicyRatings, tierNames } from './policy-ratings';
 
 /** A fact's citation (M11.5): the provider's page by name, linked to its words, which are its tooltip. */
 interface CitedFact {
@@ -97,23 +91,32 @@ interface CitedLine {
   cited: CitedFact;
 }
 
-const groupNames: Record<PolicyGroup, string> = {
-  privacy: 'Privacy',
-  billing: 'Billing',
-  legal: 'Legal',
-  security: 'Security',
-  service: 'Service',
-  finance: 'Money',
-  other: 'Notable',
+/** The details' tabs (the owner's design, 2026-11-03), in this order. */
+type DetailsTab = 'overview' | 'features' | 'terms' | 'facts';
+
+const tabNames: Record<DetailsTab, string> = {
+  overview: 'Overview',
+  features: 'Features',
+  terms: 'Terms',
+  facts: 'Facts',
 };
 
+/** How many ways to pay the Overview shows before "and 3 more". */
+const glancedChips = 4;
+
+/** Each card's details get their own ids for their tabs and panels. */
+let nextId = 0;
+
 /**
- * A Search card's expanded section (PROJECT-PLAN P8): the plan's features with the user's ranks, its add-ons, the
- * bundles that include it and what they save, what a suite includes and saves, its perks and notes, its terms and
- * policies graded with why in plain words and a citation of each page it quotes (M1.13, M1.14), outside raters' labels
- * and the company behind it, citing its own page (M11.2), how it can be paid, in which currencies, on which day it
- * renews and where its source code is (M11.5), and when its price was checked, with Report a wrong price beside it
- * (M10.11). Core's planExtras prices them for the user from the catalog file for their country.
+ * A Search card's expanded section (PROJECT-PLAN P8), in tabs (the owner's design, 2026-11-03, WAI-ARIA's tabs
+ * pattern): Overview, at a glance (its highlights, a finance account's terms, what a suite includes, its Terms and
+ * policies' grades, its owner and ways to pay, and when its price was checked, with Report a wrong price beside it,
+ * M10.11); Features (the plan's features with the user's ranks, its perks, add-ons and the bundles that include it);
+ * Terms (its terms and policies graded with why in plain words and a citation of each page it quotes, M1.13, M1.14,
+ * and outside raters' labels, M11.2); and Facts (what a suite includes and saves, the company behind it, citing its own
+ * page, how it can be paid, in which currencies, on which day it renews, where its source code is, M11.5, and its
+ * notes). A tab with nothing to show is left out, and a panel renders the first time its tab is chosen. Core's
+ * planExtras prices them for the user from the catalog file for their country.
  */
 @Component({
   selector: 'ss-plan-details',
@@ -124,6 +127,7 @@ const groupNames: Record<PolicyGroup, string> = {
     MatIcon,
     MatTooltip,
     NgTemplateOutlet,
+    PolicyRatings,
     PriceTag,
     ProviderIcon,
   ],
@@ -148,6 +152,14 @@ export class PlanDetails {
    */
   readonly addMenu = input<AddToListMenu>();
 
+  /** The id its tabs and panels are named by. */
+  protected readonly id = `plan-details-${nextId++}`;
+  /** The tab chosen: Overview as the card opens. */
+  private readonly selected = signal<DetailsTab>('overview');
+  /** The tabs chosen so far: a panel renders the first time its tab is, and stays. */
+  protected readonly visited = signal<ReadonlySet<DetailsTab>>(new Set(['overview']));
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+
   /** What a bundle's price adds to a list: the bundle, at that price's period. */
   protected bundleRequest(bundleId: string, price: PickedPrice): AddRequest {
     return {
@@ -164,7 +176,18 @@ export class PlanDetails {
     const perks = this.provider().perks ?? [];
     return (this.plan().perks ?? []).flatMap((id) => perks.find((perk) => perk.id === id) ?? []);
   });
-  protected readonly hasFeatures = computed(() => Object.keys(this.plan().features).length > 0);
+  /** How many features its feature list shows, groups' members included. */
+  protected readonly featureCount = computed(() => {
+    const count = (rows: ReturnType<typeof planFeatureRows>): number =>
+      rows.reduce((total, row) => total + 1 + count(row.children), 0);
+    return count(planFeatureRows(this.plan().features, this.catalog.catalog()?.features ?? []));
+  });
+  /** Its features at a glance (Overview): those the user ranks highest, then the headlines. */
+  protected readonly highlights = computed(() =>
+    planHighlights(this.plan().features, this.catalog.catalog()?.features ?? [], this.ranks()).join(
+      ' · ',
+    ),
+  );
   protected readonly extras = computed(() => {
     const saved = this.settings.saved();
     const data = this.catalog.catalog();
@@ -289,9 +312,103 @@ export class PlanDetails {
       }
     );
   });
-  protected readonly tierNames = tierNames;
-  protected readonly statusNames = statusNames;
-  protected readonly groupNames = groupNames;
+  /**
+   * Its Terms and policies' grades at a glance (Overview and Terms): how many ratings have each, "7 Great", then how
+   * many have none, "3 not graded", and how many there are in all.
+   */
+  protected readonly grades = computed(() => {
+    const policies = this.policies();
+    if (!policies) return undefined;
+    const counts = policyGradeCounts(policies).map(({ tier, count }) => ({
+      tier,
+      count,
+      words: `${count} ${tier === 'none' ? 'not graded' : tierNames[tier]}`,
+    }));
+    return {
+      counts,
+      total: counts.reduce((total, { count }) => total + count, 0),
+      /** The bar's slices, one a rating, in the counts' order. */
+      slices: counts.flatMap(({ tier, count }) => Array.from({ length: count }, () => tier)),
+    };
+  });
+  /** Its owner and ways to pay at a glance (Overview): the first few chips, and how many more Facts shows. */
+  protected readonly glance = computed(() => {
+    const chips = this.payment()
+      .flatMap((line) => line.chips)
+      .filter((chip, index, all) => all.findIndex((other) => other.name === chip.name) === index);
+    const owner = this.owner();
+    return {
+      heading:
+        owner && chips.length > 0 ? 'Owner and ways to pay' : owner ? 'Owner' : 'Ways to pay',
+      chips: chips.slice(0, glancedChips),
+      more: Math.max(0, chips.length - glancedChips),
+    };
+  });
+  /** The tabs with something to show, Overview always; Features with how many it lists. */
+  protected readonly tabs = computed(() => {
+    const extras = this.extras();
+    const shows: Record<DetailsTab, boolean> = {
+      overview: true,
+      features:
+        this.featureCount() > 0 ||
+        this.perks().length > 0 ||
+        (extras?.addOns.length ?? 0) > 0 ||
+        (extras?.bundles.length ?? 0) > 0,
+      terms: !!this.policies() || !!this.policyNote() || this.outside().length > 0,
+      facts:
+        !!extras?.suite ||
+        !!this.owner() ||
+        this.payment().length > 0 ||
+        this.currencies().length > 0 ||
+        !!this.renewal() ||
+        !!this.repo() ||
+        !!this.plan().notes ||
+        !!this.provider().notes,
+    };
+    return (Object.keys(tabNames) as DetailsTab[])
+      .filter((tab) => shows[tab])
+      .map((tab) => ({
+        id: tab,
+        name: tabNames[tab],
+        count: tab === 'features' ? this.featureCount() : 0,
+      }));
+  });
+  /** The tab shown: the one chosen, or Overview when that one has nothing to show any more. */
+  protected readonly current = computed(() => {
+    const chosen = this.selected();
+    return this.tabs().some(({ id }) => id === chosen) ? chosen : 'overview';
+  });
+  /** What the tab list is called: "Proton Unlimited details". */
+  protected readonly tabsLabel = computed(
+    () => `${planTitle(this.provider().name, this.plan().name)} details`,
+  );
+
+  /** Shows a tab's panel, rendering it the first time; `focus` moves to its tab, as arrow keys and See all do. */
+  protected select(tab: DetailsTab, focus = false): void {
+    this.selected.set(tab);
+    this.visited.update((seen) => (seen.has(tab) ? seen : new Set([...seen, tab])));
+    // By the DOM, not viewChildren: that would put its code in the initial bundle, which nothing else uses it in.
+    if (focus)
+      this.host.nativeElement.querySelector<HTMLElement>(`#${this.id}-tab-${tab}`)?.focus();
+  }
+
+  /**
+   * The tab list's keys (WAI-ARIA's tabs pattern, selection following focus): an arrow moves to the next or previous
+   * tab, wrapping round, and Home and End to the first and last.
+   */
+  protected tabKey(event: KeyboardEvent, index: number): void {
+    const tabs = this.tabs();
+    const moves: Partial<Record<string, number>> = {
+      ArrowRight: index + 1,
+      ArrowLeft: index - 1,
+      Home: 0,
+      End: tabs.length - 1,
+    };
+    const next = moves[event.key];
+    if (next === undefined) return;
+    event.preventDefault();
+    this.select(tabs[(next + tabs.length) % tabs.length].id, true);
+  }
   protected readonly country = computed(() => {
     const code = this.settings.saved()?.country;
     return code && countryName(code);
@@ -360,9 +477,12 @@ export class PlanDetails {
     return quotes.map((quote) => `“${quote}”`).join(' ');
   }
 
-  /** A citation's tooltip: the words it quotes, and the page; a page read that's silent on the topic, by name. */
-  protected quoteText({ quotes, name }: PolicyCitation): string {
-    return quotes.length > 0 ? `${quotes.map((quote) => `“${quote}”`).join(' ')} (${name})` : name;
+  /** What a suite includes, in a line (Overview): "Mail Plus, Drive Plus, VPN Plus and Pass Plus". */
+  protected includedList({ includes }: SuiteContents): string {
+    return listText(
+      includes.map((entry) => this.includedName(entry)),
+      'and',
+    );
   }
 
   protected includedName({ provider, plan }: SuiteContents['includes'][number]): string {

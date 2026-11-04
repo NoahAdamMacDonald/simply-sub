@@ -577,6 +577,9 @@ describe('SearchPage', () => {
       await settle();
       crave()?.querySelector<HTMLButtonElement>('button.expand')?.click();
       await settle();
+      // Bundles are on the details' Features tab (the owner's design, 2026-11-03).
+      crave()?.querySelector<HTMLButtonElement>('[role="tab"]:nth-child(2)')?.click();
+      await settle();
       // Crave Premium's own price, then the Netflix and Crave bundle's.
       prices('Crave')[1].click();
       await settle();
