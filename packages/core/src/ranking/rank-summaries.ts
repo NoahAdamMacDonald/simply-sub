@@ -120,7 +120,7 @@ function ownKeys(
 }
 
 /** Whether a key's feature, value or tier is marked headline in the registry (BLUEPRINT §4.2). */
-function isHeadline({ feature, option }: RankKeyOption): boolean {
+export function isHeadline({ feature, option }: RankKeyOption): boolean {
   if (feature.headline === true) return true;
   const options =
     feature.type === 'number' ? feature.tiers : feature.type === 'boolean' ? [] : feature.values;

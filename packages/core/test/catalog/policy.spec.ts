@@ -9,6 +9,7 @@ import {
   buildCatalogData,
   planPolicies,
   policiesSchema,
+  policyGradeCounts,
   policySetSchema,
   readCatalogSource,
   quoteLink,
@@ -545,6 +546,42 @@ describe('planPolicies', () => {
         (link) => link.name,
       ),
     ).toEqual(['Privacy policy']);
+  });
+
+  it('counts the ratings by grade, Great to Bad, then those with none, leaving out a count of none', () => {
+    const ratings = [
+      ...mullvadPolicies.ratings,
+      rating('privacy.ads-tracking', { tier: 'poor', reason: 'Some tracking.' }),
+      {
+        topic: 'other.notable',
+        title: 'Cash by post',
+        tier: 'great',
+        reason: 'Cash.',
+        sources: [{ url: terms, quote: 'cash' }],
+        lastVerified: '2026-10-22',
+      },
+    ];
+    const shown = planPolicies(provider(ratings), 'mullvad.vpn', 'CA', topics);
+
+    // Data collection, activity logging and the notable term Great; refunds Good; ads Poor.
+    expect(shown && policyGradeCounts(shown)).toEqual([
+      { tier: 'great', count: 3 },
+      { tier: 'good', count: 1 },
+      { tier: 'poor', count: 1 },
+    ]);
+    expect(
+      policyGradeCounts({
+        groups: [
+          {
+            group: 'service',
+            policies: [
+              { topic: topics[3], status: 'not-stated', reason: 'Silent.', citations: [] },
+            ],
+          },
+        ],
+        links: [],
+      }),
+    ).toEqual([{ tier: 'none', count: 1 }]);
   });
 
   it('cites each page a rating quotes once, by its number in the links, linked to its words', () => {

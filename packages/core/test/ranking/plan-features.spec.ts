@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { featureValueText, planFeatureRows, type Feature } from '../../src';
+import { featureValueText, planFeatureRows, planHighlights, type Feature } from '../../src';
 
 const quality = {
   id: 'video.quality',
@@ -192,5 +192,58 @@ describe('featureValueText', () => {
     { feature: adFree, value: true, expected: 'Yes' },
   ])('$feature.id $value: $expected', ({ feature, value, expected }) => {
     expect(featureValueText(feature, value)).toBe(expected);
+  });
+});
+
+describe('planHighlights', () => {
+  const registry: Feature[] = [
+    adFree,
+    { ...quality, values: [quality.values[0], { ...quality.values[1], headline: true }] },
+    streams,
+    vpn,
+    protocols,
+    countries,
+    storage,
+  ];
+  const features = {
+    'streaming.ad-free': true,
+    'video.quality': '4k',
+    'streaming.concurrent-streams': 4,
+    'vpn.included': true,
+    'vpn.protocols': ['wireguard'],
+    'vpn.server-countries': 140,
+    'storage.cloud': 500,
+  };
+
+  it('puts a headline value first, then the rest in registry order, children with them', () => {
+    expect(planHighlights(features, registry, {})).toEqual([
+      'Video quality: 4K (Ultra HD)',
+      'Ad free',
+      'Simultaneous streams: 4 devices',
+      'VPN',
+      'VPN protocols: WireGuard',
+    ]);
+  });
+
+  it('puts what the user ranks first, Essential before Wanted, and stops at the limit', () => {
+    const ranks = {
+      'storage.cloud': 'wanted',
+      'vpn.server-countries': 'not-ranked',
+      'streaming.concurrent-streams=2-4': 'essential',
+    } as const;
+    expect(planHighlights(features, registry, ranks, 3)).toEqual([
+      'Simultaneous streams: 4 devices',
+      'Video quality: 4K (Ultra HD)',
+      'Ad free',
+    ]);
+    // Cloud storage has no tiers, so no key to rank: its Wanted names nothing.
+    expect(planHighlights(features, registry, { 'streaming.ad-free': 'wanted' }, 2)).toEqual([
+      'Ad free',
+      'Video quality: 4K (Ultra HD)',
+    ]);
+  });
+
+  it('has none for a plan with no features', () => {
+    expect(planHighlights({}, registry, {})).toEqual([]);
   });
 });
