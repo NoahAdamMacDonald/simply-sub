@@ -11,6 +11,7 @@ import {
 import { fingerprintOf, itemSignature } from './fingerprint';
 import { cardRoom, cardSuggestions } from './card-suggestions';
 import { currencySuggestions } from './currency-suggestions';
+import { financeSuggestions } from './finance-suggestions';
 import { buildModel, savingEpsilon, type OptimizerInput, type OptimizerModel } from './model';
 import { replacements } from './replacements';
 import { searchPlans } from './search';
@@ -110,6 +111,7 @@ export function optimize(input: OptimizerInput): OptimizerResult {
     next12: model.baseline,
     search: exhaustive ? 'exhaustive' : 'greedy',
     replacements: replacements(input),
+    finance: financeSuggestions(input),
   };
 }
 

@@ -16,7 +16,7 @@ import {
   until,
   type TestStorage,
 } from '../../core/storage/storage.testing';
-import { alberta, fx, searchCatalogData } from '../../shared/sub-card/search.testing';
+import { alberta, fx, searchCatalogData, withBank } from '../../shared/sub-card/search.testing';
 import { OptimizationsPage } from './optimizations-page';
 
 // Optimizations (P14) on a fake IndexedDB, with Search's small catalog for an Albertan, on Oct 25, 2026: Work Related
@@ -243,6 +243,45 @@ describe('OptimizationsPage', () => {
     });
     await until(() => shown().length === 4);
     expect(page().querySelector('.show-dismissed')).toBeNull();
+  });
+
+  it('shows what the list’s accounts could earn in Accounts, each information only, and no cost-only card (M11.13)', async () => {
+    TestBed.overrideProvider(CatalogStore, {
+      useValue: { catalog: signal<CatalogData | undefined>(withBank), catalogFor: () => withBank },
+    });
+    work = await TestBed.inject(ListsRepository).create({ name: 'Banking' });
+    const account = (planId: string, amount: number) =>
+      TestBed.inject(ItemsRepository).create({
+        listId: work.id,
+        source: { kind: 'catalog', planId },
+        billing: {
+          mode: 'recurring',
+          interval: 'month',
+          intervalCount: 1,
+          anchorDate: '2026-11-12',
+          autoRenew: true,
+        },
+        tagIds: [],
+        rankOverrides: {},
+        pinned: false,
+        account: { balance: { amount, currency: 'CAD' }, asOf: '2026-10-25' },
+      });
+    await account('example-bank.unlimited', 1000);
+    await account('example-bank.savings', 20_000);
+    await open(work.id);
+    await until(() => page().querySelector('section.accounts li.card') !== null);
+
+    expect(text(page().querySelector('section.accounts h2'))).toBe('Accounts');
+    // $3,000 more meets the $4,000 minimum: it gives up $52.50 at the savings' 2.25%, against $17.95 a month.
+    expect(
+      Array.from(page().querySelectorAll('section.accounts li.card p')).map((line) => text(line)),
+    ).toEqual([
+      'Moving $3,000 to Example Bank Unlimited Chequing would save $162.90 a year',
+      'With $4,000 in it, its fee of $215.40 a year is waived, and that $3,000 earns $52.50 a year in Example Bank High Interest Savings.',
+      'Information, not financial advice.',
+    ]);
+    expect(page().querySelector('ss-suggestion-card')).toBeNull();
+    expect(page().querySelector('ss-empty-state')).toBeNull();
   });
 
   it('says a list that isn’t there doesn’t exist', async () => {

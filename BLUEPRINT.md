@@ -3302,6 +3302,25 @@ information, not financial advice.
   whose money isn't insured (section 4.10's `finance.money-protection`).
 - **Tax:** before tax at first. An optional marginal rate in Settings can come later; registered accounts are
   tax-free either way.
+- **As built (M11.13):** core's `finance-suggestions.ts`, which `optimize` returns as `finance`, for the list's account
+  items in the user's currency (another currency's are left out, but for their insurer's limit):
+  - **A paid rate** compares the account with its provider's other plans of the same kind sold where it was bought,
+    which the user's facts let them open: the one that earns most after fees, a dollar a year more at least, with the
+    break-even `12F / (r₁ − r₀)` from the rates at the user's balance, when the fees and rates differ the same way.
+  - **A waiver's minimum** is judged only for a waiver of a balance alone. Waived by it, paying the fee is suggested
+    when the minimum at this rate gives up more a year, against the best of the user's savings accounts, than the fee
+    costs, and nothing else would waive it. Paying it, moving the shortfall in is suggested from the savings account
+    that loses least for it, keeping its own waiver, when the fee costs more than that interest.
+  - **Moving savings** is for savings accounts only, never a registered account, a GIC or an investing one: into
+    another the user has when the two earn more together after fees; else to the best savings plan of another provider
+    sold where they live that the user may open, with a link to Search.
+  - **Protection** adds up the balances at one provider in one insured category (each registered kind apart, the
+    other deposits together, investments apart) against the smallest limit their plans state, and warns past it, or
+    of an account with no insurer.
+  - The cost-only suggestions leave accounts alone, since a fee can't be judged without the interest it earns, and
+    card suggestions skip their fees, which come out of the account. Optimizations shows the finance cards in an
+    Accounts section, warnings first, then the most a year first, each with "Information, not financial advice.";
+    nothing is applied from them.
 
 ---
 

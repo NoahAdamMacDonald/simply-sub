@@ -1,0 +1,56 @@
+.cards {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// A finance card (M11.13): an icon, what would earn more or isn't covered, why, and that it's information only. A
+// warning's edge is the danger colour, the others the divider's, as Plans that end.
+.card {
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px 12px 20px;
+  border-radius: var(--ss-radius-card);
+  background-color: var(--ss-card-bg);
+  box-shadow: inset 4px 0 0 var(--ss-divider);
+
+  &.warning {
+    box-shadow: inset 4px 0 0 var(--ss-danger);
+  }
+
+  mat-icon {
+    flex: none;
+    color: var(--ss-text-muted);
+  }
+
+  p {
+    margin: 0 0 6px;
+  }
+
+  .heading {
+    font: var(--mat-sys-title-small);
+  }
+
+  .advice {
+    margin: 8px 0 0;
+    color: var(--ss-text-muted);
+    font: var(--mat-sys-body-small);
+  }
+
+  // As the cards' text links (Plan ↗, Cancel ↗).
+  a {
+    border-radius: 4px;
+    color: var(--ss-accent-text);
+
+    &:focus-visible {
+      outline: 2px solid var(--ss-accent-text);
+      outline-offset: 2px;
+    }
+  }
+}
+
+.text {
+  min-width: 0;
+}

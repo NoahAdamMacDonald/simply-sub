@@ -60,6 +60,8 @@ export function cardSuggestions(
 ): Suggestion[] {
   const moves = model.items
     .flatMap((item, index) => {
+      // A finance account's fee comes out of the account, not on a card.
+      if (item.resolved.account) return [];
       const ledger = ledgers[index];
       const current = byId.get(item.resolved.item.cardId ?? '');
       const now = itemOnCard(ledger, current, context);

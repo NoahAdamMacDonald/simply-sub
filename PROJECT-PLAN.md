@@ -2047,10 +2047,21 @@ in every D1 `json` column search parses.
   - [x] Home and the lists show interest beside spending, never in the totals
 
 **M11.13 — The finance optimizer** (BLUEPRINT §10.6)
+- **As built** (2026-11-04):
+  - **Core:** `finance-suggestions.ts` (a paid rate with its break-even, paying a fee or topping up to a waiver's
+    minimum, moving savings to an account the user has or one sold where they live, an institution's deposits over
+    their insurer's limit or uninsured), returned by `optimize` as `finance`. The cost-only suggestions leave accounts
+    alone and card suggestions skip their fees.
+  - **Optimizations:** an Accounts section after Plans that end (`ss-finance-suggestions`): warnings first, then the
+    most a year first, each with why and "Information, not financial advice."; an account sold elsewhere links to
+    Search. They're information: nothing is applied from them, and they don't count in View optimizations' number.
+  - **Checks:** `check-m11-finance.cjs` (a fixture bank and savings provider's three accounts: every kind but an
+    uninsured one, both themes, both widths, with axe). The initial bundle stays 499.92 kB.
 - **Acceptance**
-  - [ ] Fixtures: paying for a better rate (worth it above the break-even, not below); holding a waiver's minimum
-        against paying the fee; moving savings to a better account; a balance over its insurer's limit
-  - [ ] Every finance suggestion says it's information, not financial advice
+  - [x] Fixtures: paying for a better rate (worth it above the break-even, not below: $10 a month for 1.5 points more
+        above $8,000); holding a waiver's minimum against paying the fee; moving savings to a better account; a
+        balance over its insurer's limit
+  - [x] Every finance suggestion says it's information, not financial advice
 
 ---
 

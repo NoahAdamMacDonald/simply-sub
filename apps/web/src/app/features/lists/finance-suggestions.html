@@ -1,0 +1,15 @@
+<ul class="cards">
+  @for (card of cards(); track card.key) {
+    <li class="card" [class.warning]="card.warning">
+      <mat-icon aria-hidden="true">{{ card.warning ? 'gpp_maybe' : 'savings' }}</mat-icon>
+      <div class="text">
+        <p class="heading">{{ card.heading }}</p>
+        <p>{{ card.detail }}</p>
+        @if (card.search; as search) {
+          <a routerLink="/search" [queryParams]="search">See it in Search</a>
+        }
+        <p class="advice">Information, not financial advice.</p>
+      </div>
+    </li>
+  }
+</ul>

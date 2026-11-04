@@ -31,6 +31,7 @@ import { SettingsStore } from '../../core/settings/settings-store';
 import { DismissedSuggestionsRepository } from '../../core/storage/dismissed-suggestions-repository';
 import { ListsRepository } from '../../core/storage/lists-repository';
 import { EmptyState } from '../../shared/empty-state/empty-state';
+import { FinanceSuggestions } from './finance-suggestions';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { dateText } from '../../shared/date-text';
 import { PriceTag } from '../../shared/price-tag/price-tag';
@@ -51,6 +52,7 @@ import { openSnack, undoMillis, type Snack } from '../../shared/snack/snack';
   selector: 'ss-optimizations-page',
   imports: [
     EmptyState,
+    FinanceSuggestions,
     MatButton,
     MatCheckbox,
     MatIcon,
@@ -118,6 +120,8 @@ export class OptimizationsPage {
   protected readonly appliedCount = computed(
     () => this.drafts.byList().get(this.listId())?.applied?.length ?? 0,
   );
+  /** What the list's accounts could earn after fees, and balances no insurer covers (M11.13): information only. */
+  protected readonly finance = computed(() => this.found()?.finance ?? []);
   /** The suggestions are being worked out again (after an Apply): no card can be applied till they're back (M8.6). */
   protected readonly updating = computed(() => this.result.isLoading());
 

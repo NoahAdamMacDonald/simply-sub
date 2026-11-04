@@ -55,7 +55,7 @@
           Looking for savings…
         } @else if (updating()) {
           Updating the suggestions…
-        } @else if (sections().length === 0) {
+        } @else if (sections().length === 0 && finance().length === 0) {
           No suggestions.
         }
       </p>
@@ -112,7 +112,18 @@
           </section>
         }
 
-        @if (sections().length === 0 && dismissedCount() === 0) {
+        <!-- What the accounts could earn after fees, or balances no insurer covers (M11.13): not applied here. -->
+        @if (finance().length > 0) {
+          <section class="section accounts" aria-labelledby="section-accounts">
+            <h2 id="section-accounts">Accounts</h2>
+            <p class="note">
+              From your balances and the accounts' posted rates and fees: a year, before tax.
+            </p>
+            <ss-finance-suggestions [suggestions]="finance()" [currency]="found.currency" />
+          </section>
+        }
+
+        @if (sections().length === 0 && dismissedCount() === 0 && finance().length === 0) {
           <ss-empty-state icon="savings" heading="No suggestions">
             Nothing in this list can cost less without losing what you rank. Rank the features you
             care about, and the ones you don't, on the <a routerLink="/features">Features</a> page.

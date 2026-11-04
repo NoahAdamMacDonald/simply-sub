@@ -227,7 +227,13 @@ class ModelBuilder {
       changeSlot: next === undefined ? 12 : slotOf(next, this.bounds),
       full,
       before,
-      changeable: catalog !== undefined && next !== undefined && !full.foreign && full.amount > 0,
+      // A finance account's fee can't be judged without the interest it earns: finance-suggestions.ts weighs both.
+      changeable:
+        catalog !== undefined &&
+        next !== undefined &&
+        !full.foreign &&
+        full.amount > 0 &&
+        resolved.account === undefined,
       hosted: this.hostedOf(resolved, catalog),
       essential: provided.includes('essential'),
       critical: [...ranks].filter(([, rank]) => rank === 'critical').map(([key]) => key),
