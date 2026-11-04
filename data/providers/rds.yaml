@@ -15,7 +15,8 @@ cancelUrl: https://www.rds.ca/aide/faq/#annuler-abonnement
 sources: { pricing: https://www.rds.ca/abonnement/ }
 # Owner (M11.2), read 2026-11-02: no about page says so; its conditions do (“offered to you by Bell Media Inc. and its
 # affiliates”).
-# Ways to pay (M11.5), read 2026-11-02 in its terms (in French): a card, or through an in-app purchase.
+# Ways to pay (M11.5), read 2026-11-02 in its terms (in French): a card, or through an in-app purchase; and 2026-11-03
+# (the owner's tasks) in its FAQ: a TV or mobile provider's bill, Bell's too. No page names the card networks.
 paymentMethods:
   - methods: [card, app-store]
     page: 'Conditions (in French)'
@@ -23,13 +24,28 @@ paymentMethods:
     quotes:
       - 'fournir des renseignements sur le mode de paiement, tels que votre numéro de carte de crédit'
       - 'une plateforme d’achat intégré'
+  - methods: [provider-billing]
+    page: 'FAQ (in French)'
+    url: https://www.rds.ca/aide/faq/
+    quotes:
+      - 'Où obtenir du soutien pour un abonnement facturé par Bell ?'
+      - "Puis-je obtenir un forfait via mon fournisseur télé, mobile ou un fournisseur tiers d'achats intégrés ?"
 owner:
   name: Bell Media Inc.
+  website: https://www.bellmedia.ca
   page:
     name: Conditions (in French)
     url: https://www.rds.ca/conditions
   quotes:
     - 'qui vous est offert par Bell Média inc. et ses sociétés affiliées (collectivement, « Bell Média »)'
+  country:
+    code: CA
+    page:
+      name: 'About Bell Media'
+      url: https://www.bellmedia.ca/about-us/
+    quotes:
+      - 'Bell Media is Canada’s leading media and entertainment company with premier assets in video, audio, out-of-home advertising, and digital media.'
+    lastVerified: 2026-11-03
   lastVerified: 2026-11-02
 notes: >-
   Plans renew for the period chosen, except in Quebec, where they renew monthly. Select Montreal Canadiens

@@ -13,10 +13,18 @@ billingCurrency: { GLOBAL: EUR }
 cancelUrl: https://mullvad.net/en/help/refunds
 sources: { pricing: https://mullvad.net/en/pricing }
 # Owner (M11.2), read 2026-11-02.
-# Ways to pay (M11.5), read 2026-11-02 in its terms of service.
+# Ways to pay (M11.5), read 2026-11-02 in its terms of service and 2026-11-03 (the owner's tasks) on its pricing page,
+# whose list is longer: cash, Bitcoin, Bitcoin Cash, Monero, a bank wire, a credit card, PayPal, and Swish, Eps
+# transfer, Bancontact, iDEAL | Wero and Przelewy24 (bank-transfer); its terms add iOS in-app purchases and its
+# vouchers. No page names the card networks.
 paymentMethods:
-  - methods: [cash, crypto, card, bank-transfer, paypal, app-store, gift-card]
-    page: Terms of service
+  - methods: [cash, crypto, bank-transfer, card, paypal]
+    page: 'Pricing'
+    url: https://mullvad.net/en/pricing
+    quotes:
+      - 'We accept cash, Bitcoin, Bitcoin Cash, Monero, bank wire, credit card, PayPal, Swish, Eps transfer, Bancontact, iDEAL | Wero, and Przelewy24.'
+  - methods: [app-store, gift-card]
+    page: 'Terms of service'
     url: https://mullvad.net/en/help/terms-service
     quotes:
       - 'We accept payment by cash in bills (EUR, USD, GBP, SEK, NOK, CHF, CAD, AUD, NZD) sent by regular mail, Bitcoin, Bitcoin Cash, Monero, credit card, SEPA, PayPal, iOS in-app purchases, our Mullvad vouchers, and Swish.'
@@ -39,6 +47,14 @@ owner:
   quotes:
     - Mullvad VPN AB is owned by parent company Amagicom AB.
     - 'Mullvad VPN AB and its parent company Amagicom AB are 100% owned by founders Fredrik Strömberg and Daniel Berntsson who are actively involved in the company.'
+  country:
+    code: SE
+    page:
+      name: 'Why Mullvad VPN?'
+      url: https://mullvad.net/en/why-mullvad-vpn
+    quotes:
+      - 'The laws relevant to us as a VPN provider based in Sweden make our location a safe place for us and your privacy.'
+    lastVerified: 2026-11-03
   lastVerified: 2026-11-02
 notes: >-
   Prepaid only: you add time to an account number, and nothing renews by itself. Cards can pay in many local

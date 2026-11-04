@@ -3,7 +3,7 @@
 # https://www.bitdefender.com/en-ca/consumer/total-security,
 # https://www.bitdefender.com/en-ca/consumer/ultimate-security,
 # https://www.bitdefender.com/en-ca/consumer/digital-identity-protection, https://www.bitdefender.com/en-ca/consumer/.
-# Payment methods: none found.
+# Payment methods: https://www.bitdefender.com/consumer/support/answer/29437/.
 # Cancelling: https://www.bitdefender.com/consumer/support/answer/29081/.
 # Terms:
 # https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions.
@@ -40,22 +40,23 @@ cancelUrl: https://www.bitdefender.com/consumer/support/answer/29081/
 sources: { pricing: https://www.bitdefender.com/en-ca/consumer/ }
 # Owner (M11.2), read 2026-11-02: its privacy policy names the company that runs it, a private company in Romania.
 owner:
-  name: Bitdefender S.R.L. (Bucharest, Romania)
+  name: Bitdefender S.R.L.
   page:
     name: Privacy policy
     url: https://www.bitdefender.com/en-ca/site/view/legal-privacy-policy-for-home-users-solutions
   quotes:
     - 'BITDEFENDER S.R.L. (hereafter mentioned as Bitdefender), with its official headquarters in 15A Sos. Orhideelor, Orhideea Towers Building, 10-12 floors, 6th District, Bucharest, Romania'
+  country:
+    code: RO
   lastVerified: 2026-11-02
-# Ways to pay (M11.5), read 2026-11-02 in its privacy policy, which names its payment processors: a card (through Adyen) or
-# PayPal.
+# Ways to pay (M11.5), read 2026-11-03 (the owner's tasks) in its support centre's guide to buying, where 2026-11-02's
+# read was its privacy policy's payment processors: a card or PayPal. No page names the card networks.
 paymentMethods:
   - methods: [card, paypal]
-    page: Privacy policy
-    url: https://www.bitdefender.com/en-ca/site/view/legal-privacy-policy-for-home-users-solutions
+    page: 'How to buy and activate a subscription'
+    url: https://www.bitdefender.com/consumer/support/answer/29437/
     quotes:
-      - 'the payment services provider Adyen.com, which is a data controller for data on your credit card payment data'
-      - 'PayPal, if you choose this method of payment'
+      - 'Then select a payment method (card, PayPal, etc.) and complete the order.'
 # Lab results (M11.2), read 2026-11-02: AV-TEST's latest Windows test of home-user products, Jul-Aug 2026 (its page
 # for it, report 261405). AV-Comparatives' and SE Labs' results aren't listed: see data/raters.yaml.
 ratings:

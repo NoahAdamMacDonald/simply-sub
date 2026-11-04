@@ -14,21 +14,39 @@ availableIn: [CA]
 cancelUrl: https://plus.crave.ca/en/faq/plans-billing-bundles/canceling-or-pausing-my-crave-subscription/
 sources: { pricing: https://www.crave.ca/en/subscribe }
 # Owner (M11.2), read 2026-11-02: no about page says so; its terms do.
-# Ways to pay (M11.5), read 2026-11-02 in its terms: a card, or through an in-app purchase.
+# Ways to pay (M11.5), read 2026-11-03 (the owner's tasks) in its help centre: a Canadian credit card, in-app
+# purchases and Amazon's Prime Video channel (app-store), a TV or mobility provider's bill (Bell's Streaming too), and
+# Crave gift cards, only for a subscription Crave bills. No page names the card networks.
 paymentMethods:
-  - methods: [card, app-store]
-    page: 'Crave terms and conditions'
-    url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
+  - methods: [card, app-store, provider-billing]
+    page: 'How can I subscribe to Crave?'
+    url: https://plus.crave.ca/en/faq/plans-billing-bundles/how-can-i-subscribe-to-crave/
     quotes:
-      - 'provide payment method information, such as your credit card number and billing address'
-      - 'If you subscribe or otherwise have entitlements to the Service through an authorized third party distributor of the Service (such as an authorized content provider, in-app purchase platform, or bundle distributor)'
+      - 'When you subscribe to Crave directly through Crave.ca you will be able to create a Crave account and purchase a subscription using a valid Canadian credit card.'
+      - 'You can subscribe to select Crave plans from within our apps in the Apple App Store, Google Play Store and Roku Channel Store.'
+      - 'Amazon Prime: You can subscribe to Crave through Amazon Prime Video as an add-on channel. You will be billed through Amazon Prime.'
+      - 'You can subscribe to Crave through most TV providers (Bell, Cogeco, Rogers, Shaw, Telus, Videotron etc.). You will be billed by your TV provider.'
+  - methods: [gift-card]
+    page: 'Crave gift cards: how to buy, redeem, and manage them'
+    url: https://plus.crave.ca/en/faq/crave-gift-cards-how-to-buy-redeem-and-manage-them/
+    quotes:
+      - 'Usage restrictions: Gift cards are exclusively for subscriptions billed directly through Crave.'
 owner:
   name: Bell Media Inc.
+  website: https://www.bellmedia.ca
   page:
     name: Terms and conditions
     url: https://plus.crave.ca/en/faq/account-profiles/terms-and-conditions/
   quotes:
     - 'which is made available to you by Bell Media Inc. and its affiliates (together, “Bell Media”)'
+  country:
+    code: CA
+    page:
+      name: 'About Bell Media'
+      url: https://www.bellmedia.ca/about-us/
+    quotes:
+      - 'Bell Media is Canada’s leading media and entertainment company with premier assets in video, audio, out-of-home advertising, and digital media.'
+    lastVerified: 2026-11-03
   lastVerified: 2026-11-02
 notes: Live events, sports and news include ads on every plan.
 

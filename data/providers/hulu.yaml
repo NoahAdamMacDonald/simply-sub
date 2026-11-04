@@ -33,11 +33,20 @@ paymentMethods:
       - 'Hulu gift cards are available at select retail outlets.'
 owner:
   name: The Walt Disney Company
+  website: https://thewaltdisneycompany.com
   page:
     name: Corporate history (Hulu press site)
     url: https://press.hulu.com/corporate/
   quotes:
     - The Walt Disney Company assumes full operational control of Hulu.
+  country:
+    code: US
+    page:
+      name: '2025 annual report'
+      url: https://investors.thewaltdisneycompany.com/files/doc_financials/2025/ar/2025-Annual-Report.pdf
+    quotes:
+      - 'Burbank, California 91521'
+    lastVerified: 2026-11-03
   lastVerified: 2026-11-02
 
 # Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their

@@ -45,6 +45,14 @@ owner:
     url: https://espnpressroom.com/about/
   quotes:
     - ESPN is 72 percent owned by The Walt Disney Company, 18 percent by Hearst and 10 percent by the National Football League.
+  country:
+    code: US
+    page:
+      name: 'About ESPN (press room)'
+      url: https://espnpressroom.com/about/
+    quotes:
+      - 'ESPN Headquarters in Bristol, Connecticut, is home to one of the world’s largest and most technologically advanced TV production facilities.'
+    lastVerified: 2026-11-03
   lastVerified: 2026-11-02
 
 # Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their

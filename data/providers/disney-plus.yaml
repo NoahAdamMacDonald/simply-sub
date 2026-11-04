@@ -5,28 +5,105 @@ website: https://www.disneyplus.com
 category: streaming
 spendCategory: streaming
 # Accepted cards, read 2026-10-28 (M9.2) on the help centre's Payment methods for Disney+, whose list follows the
-# country picked (Canada, then United States): Canada takes JCB, Visa, Mastercard, American Express and Diners Club
-# (other), and the US Visa, Mastercard, American Express and Discover. "International cards are not accepted".
+# country picked on its home page: Canada takes JCB, Visa, Mastercard, American Express and Diners Club (other), and
+# the US Visa, Mastercard, American Express and Discover. The other nine countries read 2026-11-03 (the owner's
+# tasks), on help.disneyplus.com/en-GB/article/disneyplus-payment-methods whichever is picked: Visa, Mastercard and
+# American Express, Discover too in the UK, France and Spain.
 acceptedNetworks:
   CA:
     networks: [jcb, visa, mastercard, amex, other]
     url: https://help.disneyplus.com/article/disneyplus-payment-methods
     quotes:
       - 'We accept the following credit or debit cards*:'
-      - JCB
-      - Visa
-      - Mastercard
-      - American Express
-      - Diners Club
+      - 'JCB'
+      - 'Visa'
+      - 'Mastercard'
+      - 'American Express'
+      - 'Diners Club'
   US:
     networks: [visa, mastercard, amex, discover]
     url: https://help.disneyplus.com/article/disneyplus-payment-methods
     quotes:
       - 'We accept the following credit or debit cards*:'
-      - Visa, including the Disney Visa
-      - Mastercard
-      - American Express
-      - Discover
+      - 'Visa, including the Disney Visa'
+      - 'Mastercard'
+      - 'American Express'
+      - 'Discover'
+  GB:
+    networks: [visa, mastercard, amex, discover]
+    url: https://help.disneyplus.com/en-GB/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'Visa'
+      - 'Mastercard'
+      - 'American Express'
+      - 'Discover'
+  AU:
+    networks: [visa, mastercard, amex]
+    url: https://help.disneyplus.com/en-GB/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'Visa'
+      - 'Mastercard'
+      - 'American Express'
+  NZ:
+    networks: [visa, mastercard, amex]
+    url: https://help.disneyplus.com/en-GB/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'Visa'
+      - 'Mastercard'
+      - 'American Express'
+  IE:
+    networks: [visa, mastercard, amex]
+    url: https://help.disneyplus.com/en-GB/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'Visa'
+      - 'Mastercard'
+      - 'American Express'
+  DE:
+    networks: [visa, mastercard, amex]
+    url: https://help.disneyplus.com/en-GB/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'Visa'
+      - 'Mastercard'
+      - 'American Express'
+  FR:
+    networks: [visa, mastercard, amex, discover]
+    url: https://help.disneyplus.com/en-GB/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'Visa'
+      - 'Mastercard'
+      - 'American Express'
+      - 'Discover'
+  NL:
+    networks: [visa, mastercard, amex]
+    url: https://help.disneyplus.com/en-GB/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'Visa'
+      - 'Mastercard'
+      - 'American Express'
+  ES:
+    networks: [visa, mastercard, amex, discover]
+    url: https://help.disneyplus.com/en-GB/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'Visa'
+      - 'Mastercard'
+      - 'American Express'
+      - 'Discover'
+  IT:
+    networks: [visa, mastercard, amex]
+    url: https://help.disneyplus.com/en-GB/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'Visa'
+      - 'Mastercard'
+      - 'American Express'
 billingCurrency:
   {
     CA: CAD,
@@ -46,22 +123,113 @@ billingCurrency:
 cancelUrl: https://help.disneyplus.com/article/disneyplus-cancel
 sources: { pricing: https://help.disneyplus.com/article/disneyplus-en-ca-price }
 # Owner (M11.2), read 2026-11-02: its press site's About page.
-# Ways to pay (M11.5), read 2026-11-02 on its payment methods article.
+# Ways to pay (M11.5), read 2026-11-02 for Canada and 2026-11-03 (the owner's tasks) for every other country, on the
+# same article: cards and PayPal everywhere, Apple Pay in the US, the UK, Australia and New Zealand, Cash App in the
+# US, Klarna in Germany, Satispay in Italy, and third-party billing partners in Canada and the US (the others'
+# "third-party partner" names none).
 paymentMethods:
   - methods: [card, paypal, app-store]
-    page: Payment methods for Disney+
+    regions: [CA]
+    page: 'Payment methods for Disney+'
     url: https://help.disneyplus.com/article/disneyplus-payment-methods
     quotes:
       - 'We accept the following credit or debit cards*:'
-      - PayPal
+      - 'PayPal'
       - 'You can also choose to purchase a Disney+ subscription through a third-party billing partner (Docomo, J:COM, Apple, Google, Amazon, Hulu (Hulu | Disney+ Set Plan), or any other platform).'
+  - methods: [card, apple-pay, cash-app, paypal, app-store]
+    regions: [US]
+    page: 'Payment methods for Disney+'
+    url: https://help.disneyplus.com/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'Apple Pay'
+      - 'Cash App'
+      - 'PayPal'
+      - 'third-party billing partner. To manage your payment method, please visit the partner’s site or contact them directly.'
+  - methods: [card, apple-pay, paypal]
+    regions: [GB]
+    page: 'Payment methods for Disney+'
+    url: https://help.disneyplus.com/en-GB/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'Apple Pay'
+      - 'PayPal'
+  - methods: [card, apple-pay, paypal]
+    regions: [AU]
+    page: 'Payment methods for Disney+'
+    url: https://help.disneyplus.com/en-GB/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'Apple Pay'
+      - 'PayPal'
+  - methods: [card, apple-pay, paypal]
+    regions: [NZ]
+    page: 'Payment methods for Disney+'
+    url: https://help.disneyplus.com/en-GB/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'Apple Pay'
+      - 'PayPal'
+  - methods: [card, paypal]
+    regions: [IE]
+    page: 'Payment methods for Disney+'
+    url: https://help.disneyplus.com/en-GB/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'PayPal'
+  - methods: [card, klarna, paypal]
+    regions: [DE]
+    page: 'Payment methods for Disney+'
+    url: https://help.disneyplus.com/en-GB/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'Klarna'
+      - 'PayPal'
+  - methods: [card, paypal]
+    regions: [FR]
+    page: 'Payment methods for Disney+'
+    url: https://help.disneyplus.com/en-GB/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'PayPal'
+  - methods: [card, paypal]
+    regions: [NL]
+    page: 'Payment methods for Disney+'
+    url: https://help.disneyplus.com/en-GB/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'PayPal'
+  - methods: [card, paypal]
+    regions: [ES]
+    page: 'Payment methods for Disney+'
+    url: https://help.disneyplus.com/en-GB/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'PayPal'
+  - methods: [card, paypal, satispay]
+    regions: [IT]
+    page: 'Payment methods for Disney+'
+    url: https://help.disneyplus.com/en-GB/article/disneyplus-payment-methods
+    quotes:
+      - 'We accept the following credit or debit cards*:'
+      - 'PayPal'
+      - 'Satispay'
 owner:
   name: The Walt Disney Company
+  website: https://thewaltdisneycompany.com
   page:
     name: About Disney+ (press site)
     url: https://press.disneyplus.com/about
   quotes:
     - As the flagship direct-to-consumer streaming service from The Walt Disney Company
+  country:
+    code: US
+    page:
+      name: '2025 annual report'
+      url: https://investors.thewaltdisneycompany.com/files/doc_financials/2025/ar/2025-Annual-Report.pdf
+    quotes:
+      - 'Burbank, California 91521'
+    lastVerified: 2026-11-03
   lastVerified: 2026-11-02
 
 # Coverage: disney-plus.standard-ads and disney-plus.standard in US, and disney-plus.with-ads in CA, GB, AU, NZ, IE, DE,

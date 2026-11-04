@@ -36,14 +36,15 @@ billingCurrency: { CA: CAD, GLOBAL: USD, US: USD }
 cancelUrl: https://support.claude.com/en/articles/8325617-cancel-your-pro-or-max-subscription
 sources: { pricing: https://claude.com/pricing }
 # Owner (M11.2), read 2026-11-02: claude.com has no about page saying so; its terms, on anthropic.com, do.
-# Ways to pay (M11.5), read 2026-11-02 on its pricing page: a credit card, or the App Store.
+# Ways to pay (M11.5), read 2026-11-03 (the owner's tasks) in its billing FAQs: a credit or debit card on the web, or
+# the Apple App Store or Google Play in its apps. No page names the card networks.
 paymentMethods:
   - methods: [card, app-store]
-    page: Pricing
-    url: https://claude.com/pricing
+    page: 'Paid plan billing FAQs'
+    url: https://support.claude.com/en/articles/8325618-paid-plan-billing-faqs
     quotes:
-      - Credit card
-      - "If you subscribed through the App Store, Apple handles the refund, so you'll request it from Apple."
+      - 'For subscriptions purchased on the web, we only accept credit or debit cards.'
+      - 'If you subscribed through Claude for iOS or Claude for Android, available payment options are determined by the Apple App Store or Google Play.'
 owner:
   name: 'Anthropic, PBC'
   page:
@@ -51,6 +52,14 @@ owner:
     url: https://www.anthropic.com/legal/consumer-terms
   quotes:
     - 'These Terms are a contract between you and Anthropic, PBC (and not our Providers)'
+  country:
+    code: US
+    page:
+      name: 'Privacy policy'
+      url: https://www.anthropic.com/legal/privacy
+    quotes:
+      - 'You acknowledge that Anthropic is a company based and headquartered in the United States.'
+    lastVerified: 2026-11-03
   lastVerified: 2026-11-02
 
 # Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their

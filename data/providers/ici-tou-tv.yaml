@@ -18,13 +18,26 @@ cancelUrl: https://ici.tou.tv/abonnement/condition
 sources: { pricing: https://ici.tou.tv/abonnement }
 # Owner (M11.2), read 2026-11-02: no about page says so; its conditions name its operator (“provided independently by
 # their respective operators”).
-# Ways to pay (M11.5), read 2026-11-02 in its conditions (in French): a credit card, or an app store.
+# Accepted cards and ways to pay (M11.5), read 2026-11-02 in its conditions (in French) and 2026-11-03 (the owner's
+# tasks) in its help centre's payment article: Visa and Mastercard, credit, debit or prepaid, and app stores. It says
+# it takes no American Express, Interac debit or PayPal.
+acceptedNetworks:
+  CA:
+    networks: [visa, mastercard]
+    url: https://assistance.radio-canada.ca/hc/fr/articles/360035329252-Quels-modes-de-paiement-acceptez-vous
+    quotes:
+      - 'Les cartes de crédit Visa et Mastercard.'
 paymentMethods:
-  - methods: [card, app-store]
-    page: Conditions d'utilisation (in French)
+  - methods: [card]
+    page: 'Quels modes de paiement acceptez-vous? (in French)'
+    url: https://assistance.radio-canada.ca/hc/fr/articles/360035329252-Quels-modes-de-paiement-acceptez-vous
+    quotes:
+      - 'Les cartes de crédit Visa et Mastercard.'
+      - 'Les cartes de débit permettant les achats en ligne (Débit Visa et Débit Mastercard) ;'
+  - methods: [app-store]
+    page: "Conditions d'utilisation (in French)"
     url: https://ici.tou.tv/abonnement/condition
     quotes:
-      - 'Vos paiements doivent être effectués par carte de crédit.'
       - 'App Store (Apple), Google Play, Roku ou Amazon Appstore'
 owner:
   name: Société Radio-Canada
@@ -33,6 +46,14 @@ owner:
     url: https://ici.tou.tv/abonnement/condition
   quotes:
     - Les services ICI TOU.TV et Crave sont fournis de manière indépendante par leurs exploitants respectifs (Société Radio-Canada et Bell Média inc.)
+  country:
+    code: CA
+    page:
+      name: 'Who we are (CBC/Radio-Canada)'
+      url: https://cbc.radio-canada.ca/en/impact-and-accountability/finance/annual-reports/ar-2021-2022/about-us/who-we-are
+    quotes:
+      - 'We are Canada’s national public broadcaster and we are guided by the Broadcasting Act.'
+    lastVerified: 2026-11-03
   lastVerified: 2026-11-02
 
 # Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their

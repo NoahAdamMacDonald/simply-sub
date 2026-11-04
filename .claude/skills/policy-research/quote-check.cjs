@@ -69,6 +69,11 @@ function facts(data) {
   const anchor = data.renewalAnchor;
   return [
     data.owner && ['owner', data.owner.page.url, data.owner.quotes],
+    data.owner?.country?.page && [
+      'owner.country',
+      data.owner.country.page.url,
+      data.owner.country.quotes ?? [],
+    ],
     ...(data.paymentMethods ?? []).map((entry) => ['paymentMethods', entry.url, entry.quotes]),
     ...(data.currencies ?? []).map((entry) => ['currencies', entry.url, entry.quotes]),
     anchor && anchor.kind !== 'not-stated' && ['renewalAnchor', anchor.url, anchor.quotes],

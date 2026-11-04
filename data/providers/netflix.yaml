@@ -25,6 +25,79 @@ acceptedNetworks:
       - MasterCard
       - American Express
       - Discover
+  GB:
+    networks: [visa, mastercard, amex]
+    url: https://help.netflix.com/en/node/116380/gb
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'Visa'
+      - 'MasterCard'
+      - 'American Express'
+  AU:
+    networks: [visa, mastercard, amex]
+    url: https://help.netflix.com/en/node/116380/au
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'Visa'
+      - 'MasterCard'
+      - 'American Express'
+  NZ:
+    networks: [visa, mastercard, amex]
+    url: https://help.netflix.com/en/node/116380/nz
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'Visa'
+      - 'MasterCard'
+      - 'American Express'
+  IE:
+    networks: [visa, mastercard, amex]
+    url: https://help.netflix.com/en/node/116380/ie
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'Visa'
+      - 'MasterCard'
+      - 'American Express'
+  DE:
+    networks: [visa, mastercard, amex]
+    url: https://help.netflix.com/en/node/116380/de
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'Visa'
+      - 'MasterCard'
+      - 'American Express'
+  FR:
+    networks: [visa, mastercard, amex]
+    url: https://help.netflix.com/en/node/116380/fr
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'Visa'
+      - 'MasterCard'
+      - 'American Express'
+  NL:
+    networks: [visa, mastercard, amex]
+    url: https://help.netflix.com/en/node/116380/nl
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'Visa'
+      - 'MasterCard'
+      - 'American Express'
+  ES:
+    networks: [visa, mastercard, amex]
+    url: https://help.netflix.com/en/node/116380/es
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'Visa'
+      - 'MasterCard'
+      - 'American Express'
+  IT:
+    networks: [visa, mastercard, amex, other]
+    url: https://help.netflix.com/en/node/116380/it
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'Visa'
+      - 'MasterCard'
+      - 'American Express'
+      - 'Postepay'
 billingCurrency:
   {
     CA: CAD,
@@ -51,10 +124,23 @@ owner:
   quotes:
     - 'Netflix is one of the world’s leading entertainment services offering TV series, films, games and live programming across a wide variety of genres and languages.'
     - 'NASDAQ: NFLX'
+  country:
+    code: US
+    page:
+      name: 'Corporate information'
+      url: https://help.netflix.com/en/node/134094/us
+    quotes:
+      - 'Netflix, Inc.'
+      - 'Los Gatos, CA 95032, USA'
+    lastVerified: 2026-11-03
   lastVerified: 2026-11-02
-# Ways to pay (M11.5), read 2026-11-02 on its payment articles for the US (for everywhere) and Canada.
+# Ways to pay (M11.5), read 2026-11-02 on its payment articles for the US and Canada, and every country's own read
+# 2026-11-03 (the owner's tasks): cards, gift cards and PayPal but in New Zealand, a direct debit in the UK
+# (GoCardless), Germany and the Netherlands (iDeal | Wero), Satispay in Italy, and partners that add it to their
+# bill but in Ireland, whose partner only sells a package with it. Italy's cards include Postepay (other).
 paymentMethods:
   - methods: [card, gift-card, paypal, provider-billing]
+    regions: [US]
     page: Netflix payment options
     url: https://help.netflix.com/en/node/116380/us
     quotes:
@@ -69,8 +155,90 @@ paymentMethods:
     quotes:
       - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
       - 'You can purchase Netflix gift cards at select retailers.'
-      - We accept PayPal.
-      - The following partners allow you to add Netflix to their bill or offer a package with Netflix included.
+      - 'We accept PayPal.'
+      - 'The following partners allow you to add Netflix to their bill or offer a package with Netflix included.'
+  - methods: [card, bank-transfer, gift-card, paypal, provider-billing]
+    regions: [GB]
+    page: How to pay for Netflix
+    url: https://help.netflix.com/en/node/116380/gb
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'You can pay directly from your bank account with GoCardless when you sign up from a web or mobile browser.'
+      - 'You can purchase Netflix gift cards at select retailers.'
+      - 'We accept PayPal.'
+      - 'The following partners allow you to add Netflix to their bill or offer a package with Netflix included.'
+  - methods: [card, gift-card, paypal, provider-billing]
+    regions: [AU]
+    page: How to pay for Netflix
+    url: https://help.netflix.com/en/node/116380/au
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'You can purchase Netflix gift cards at select retailers.'
+      - 'We accept PayPal.'
+      - 'The following partners allow you to add Netflix to their bill or offer a package with Netflix included.'
+  - methods: [card, provider-billing]
+    regions: [NZ]
+    page: How to pay for Netflix
+    url: https://help.netflix.com/en/node/116380/nz
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'The following partners allow you to add Netflix to their bill or offer a package with Netflix included.'
+  - methods: [card, gift-card, paypal]
+    regions: [IE]
+    page: How to pay for Netflix
+    url: https://help.netflix.com/en/node/116380/ie
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'You can purchase Netflix gift cards at select retailers.'
+      - 'We accept PayPal.'
+  - methods: [card, bank-transfer, gift-card, paypal, provider-billing]
+    regions: [DE]
+    page: How to pay for Netflix
+    url: https://help.netflix.com/en/node/116380/de
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'You can pay directly from your bank account.'
+      - 'You can purchase Netflix gift cards at select retailers.'
+      - 'We accept PayPal.'
+      - 'The following partners allow you to add Netflix to their bill or offer a package with Netflix included.'
+  - methods: [card, gift-card, paypal, provider-billing]
+    regions: [FR]
+    page: How to pay for Netflix
+    url: https://help.netflix.com/en/node/116380/fr
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'You can purchase Netflix gift cards at select retailers.'
+      - 'We accept PayPal.'
+      - 'The following partners allow you to add Netflix to their bill or offer a package with Netflix included.'
+  - methods: [card, bank-transfer, gift-card, paypal, provider-billing]
+    regions: [NL]
+    page: How to pay for Netflix
+    url: https://help.netflix.com/en/node/116380/nl
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'You can pay directly from your bank account with iDeal | Wero when you sign up from a web or mobile browser.'
+      - 'You can purchase Netflix gift cards at select retailers.'
+      - 'We accept PayPal.'
+      - 'The following partners allow you to add Netflix to their bill or offer a package with Netflix included.'
+  - methods: [card, gift-card, paypal, provider-billing]
+    regions: [ES]
+    page: How to pay for Netflix
+    url: https://help.netflix.com/en/node/116380/es
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'You can purchase Netflix gift cards at select retailers.'
+      - 'We accept PayPal.'
+      - 'The following partners allow you to add Netflix to their bill or offer a package with Netflix included.'
+  - methods: [card, gift-card, paypal, satispay, provider-billing]
+    regions: [IT]
+    page: How to pay for Netflix
+    url: https://help.netflix.com/en/node/116380/it
+    quotes:
+      - 'We accept the following cards, which must be enabled for recurring e-commerce transactions.'
+      - 'You can purchase Netflix gift cards at select retailers.'
+      - 'We accept PayPal.'
+      - 'Satispay'
+      - 'The following partners allow you to add Netflix to their bill or offer a package with Netflix included.'
 # Renewal day (M11.5), read 2026-11-02 in its help centre's billing date article: the date you signed up, or a shorter
 # month's last day. A plan change, a failed payment or a partner's billing can move it, which the article lists too.
 renewalAnchor:
