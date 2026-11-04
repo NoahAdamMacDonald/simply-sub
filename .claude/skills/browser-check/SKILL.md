@@ -670,6 +670,16 @@ beside $17.95 this month (an account's fee has no sales tax); Banking's card (Ta
 totals have the same line and whose cards say each account's interest, Joint's fee waived (Waived under its price) and
 the chequing's net cost; the Lists page has the line once. Axe on each page, screenshots and no horizontal scroll.
 
+`check-m11-finance.cjs` (M11.13, the finance optimizer) checks Optimizations' Accounts section on `ng serve` for a
+Canadian in Ontario, in both themes at both widths, keyboard only. The CA file is answered with two fixture providers
+(Example Bank's $17.95 chequing that $4,000 waives and its free savings at 2%, 2.50% over $10,000; Example Savings'
+free Basic at 2% and $10 Plus at 3.50%), and Banking is written to IndexedDB: the chequing with $1,000, the bank's
+savings with $100,000 and Basic with $9,000. Home's Banking card and List view's View optimizations open Optimizations
+(Tab, Enter): no cost-only card, and five finance cards in order (the bank's $101,000 over CDIC's limit, Plus earning
+$930.00 more than the bank's savings, a $3,000 top-up saving $170.40, Basic's money earning $45.00 more in the bank's
+savings, Plus paying for itself above $8,000), each "Information, not financial advice."; See it in Search opens
+Search on Plus. Axe, screenshots and no horizontal scroll.
+
 `check-m11-outside.cjs` (M11.2, outside ratings and owners) checks Search's cards on `ng serve` for a Canadian in
 Alberta (base URL ending in `/`, after `npm run data:build` on the branch), in both themes at both widths: Bitdefender's
 Outside ratings right after Terms and policies (AV-TEST's Protection, Performance and Usability, each "6.0/6.0 from
