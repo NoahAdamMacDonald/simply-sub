@@ -19,6 +19,7 @@ import {
 } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { FxStore } from '../../core/fx/fx-store';
+import { MetricsService } from '../../core/metrics/metrics-service';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { OptimizerService } from '../../core/optimizer/optimizer-service';
 import { DismissedSuggestionsRepository } from '../../core/storage/dismissed-suggestions-repository';
@@ -573,6 +574,42 @@ describe('ListViewPage', () => {
         document.querySelector('ss-snack .mat-mdc-snack-bar-label')?.textContent?.trim() ===
         'Saved simply-sub-work-related-2026-10-25.csv',
     );
+  });
+
+  it('offers Include balances once an item holds one, keeping the menu open, and exports them when ticked (M11.11)', async () => {
+    const downloads = captureDownloads();
+    await plant();
+    const items = TestBed.inject(ItemsRepository);
+    await items.update(netflix.id, {
+      account: { balance: { amount: 2500, currency: 'CAD' }, asOf: '2026-10-20' },
+    });
+    await open(work.id);
+    await until(() => groups().length === 4);
+    page().querySelector<HTMLElement>('.export')?.click();
+    await harness.fixture.whenStable();
+    const include = () =>
+      document.querySelector<HTMLElement>('.mat-mdc-menu-panel .include-balances');
+    expect(include()?.getAttribute('role')).toBe('menuitemcheckbox');
+    expect(include()?.getAttribute('aria-checked')).toBe('false');
+    expect(spoken(include())).toBe('Include balances');
+
+    include()?.click();
+    await harness.fixture.whenStable();
+    expect(include()?.getAttribute('aria-checked')).toBe('true');
+    document
+      .querySelector<HTMLElement>('.mat-mdc-menu-panel [mat-menu-item]:not(.include-balances)')
+      ?.click();
+    await until(() => downloads.length === 1, 5000);
+    const [header, netflixRow] = (await csvText(downloads[0])).split('\r\n');
+    expect(header.endsWith(',Balance,Balance currency,Balance as of')).toBe(true);
+    expect(netflixRow.endsWith(',2500,CAD,2026-10-20')).toBe(true);
+
+    // Without a balance in the list, there's nothing to include.
+    await items.update(netflix.id, { account: undefined });
+    await until(() => !TestBed.inject(MetricsService).list(work.id).resolved[0]?.item.account);
+    page().querySelector<HTMLElement>('.export')?.click();
+    await harness.fixture.whenStable();
+    expect(include()).toBeNull();
   });
 
   it('warns when the list alone goes over the monthly budget, with its month in the Calendar (M7.6)', async () => {

@@ -15,6 +15,7 @@ import type {
   ExportFile,
   ExportRequest,
   ListExportFormat,
+  ListExportOptions,
   PaymentsExportFormat,
 } from './export-files';
 
@@ -42,12 +43,19 @@ export class Exporter {
     import('../snack/snack').catch(() => undefined);
   }
 
-  /** One list's file (P4). Resolves with its name, or nothing when it couldn't be made. */
-  exportList(listId: string, kind: ListExportFormat): Promise<string | undefined> {
+  /**
+   * One list's file (P4), with its accounts' balances when they're asked for (M11.11). Resolves with its name, or
+   * nothing when it couldn't be made.
+   */
+  exportList(
+    listId: string,
+    kind: ListExportFormat,
+    options: ListExportOptions = {},
+  ): Promise<string | undefined> {
     return this.save(
       async (request) => {
         const { listExport } = await import('./export-files');
-        return listExport(request, kind, this.customSubs.byId());
+        return listExport(request, kind, this.customSubs.byId(), options);
       },
       [listId],
     );
