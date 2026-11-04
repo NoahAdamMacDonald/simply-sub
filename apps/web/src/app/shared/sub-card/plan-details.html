@@ -18,6 +18,14 @@
   </div>
 }
 
+<!-- A finance account's terms (M11.10): its interest, what waives its fee, its limits and who protects the money. -->
+@if (plan().account; as account) {
+  <div class="group">
+    <h3>Account</h3>
+    <ss-account-terms [account]="account" [country]="countryCode()" />
+  </div>
+}
+
 @if (extras(); as extras) {
   @if (extras.addOns.length) {
     <div class="group">

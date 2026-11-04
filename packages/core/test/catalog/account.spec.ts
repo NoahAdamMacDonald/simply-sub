@@ -3,41 +3,23 @@ import {
   accountSchema,
   formatCatalogIssue,
   validateCatalog,
-  type Account,
   type CatalogSourceFile,
-  type Provider,
 } from '../../src';
-import { catalog, edited, price, today } from './catalog-files';
-import { issues, pngBytes } from './helpers';
+import { edited, today } from './catalog-files';
+import {
+  bank,
+  chequing,
+  fintech,
+  netflixFile,
+  protection,
+  rates,
+  withFinance,
+} from './finance-files';
+import { issues } from './helpers';
 
 // M11.10's acceptance: the account block refuses a rate tier out of order, a waiver with no condition and protection
 // without a quote, and two fixture providers validate: a bank whose fee a balance waives, and a fintech whose better
 // rate is a paid tier.
-
-const protection: Account['protection'] = {
-  insurer: 'cdic',
-  held: 'own-name',
-  limit: 100_000,
-  url: 'https://example.com/deposit-insurance',
-  quotes: ['Your eligible deposits are protected by CDIC.'],
-  lastVerified: today,
-};
-
-const chequing: Account = {
-  kind: 'chequing',
-  currency: 'CAD',
-  waivers: [{ minBalance: 4000 }],
-  limits: { eTransfer: { day: 3000, week: 10_000 }, debits: 25 },
-  protection,
-};
-
-const rates = (...tiers: { from: number; rate: number }[]): NonNullable<Account['rates']> => ({
-  follows: 'none',
-  applies: 'whole',
-  tiers,
-  sourceUrl: 'https://example.com/rates',
-  lastVerified: today,
-});
 
 describe('accountSchema', () => {
   it('takes an account’s kind, waivers, rates, limits and protection', () => {
@@ -79,148 +61,6 @@ describe('accountSchema', () => {
     expect(issues(accountSchema, { ...chequing, protection: undefined })).toHaveLength(1);
   });
 });
-
-// ── Two fixture providers in the test catalog, with finance categories and features of their own ─────────────────
-
-const netflixFile = 'data/providers/netflix.yaml';
-const netflixData = catalog().find((source) => source.file === netflixFile) as {
-  data: Pick<Provider, 'owner' | 'paymentMethods' | 'renewalAnchor'>;
-};
-const facts = {
-  owner: netflixData.data.owner,
-  paymentMethods: netflixData.data.paymentMethods,
-  renewalAnchor: netflixData.data.renewalAnchor,
-};
-const finance = {
-  website: 'https://example.com',
-  category: 'finance',
-  spendCategory: 'finance',
-  cancelUrl: 'https://example.com/close',
-  ...facts,
-  regulators: [
-    {
-      name: 'OSFI',
-      url: 'https://www.osfi-bsif.gc.ca/en/supervision/financial-institutions',
-      lastVerified: today,
-    },
-  ],
-};
-
-/** A bank whose monthly fee a balance waives (TD's Unlimited Chequing, simplified). */
-const bank = {
-  id: 'example-bank',
-  name: 'Example Bank',
-  ...finance,
-  plans: [
-    {
-      id: 'example-bank.unlimited',
-      name: 'Unlimited Chequing',
-      link: 'https://example.com/chequing',
-      features: { 'finance.e-transfer': true, 'finance.card': ['interac-debit', 'visa-debit'] },
-      prices: [price('CA', 'CAD', 17.95)],
-      account: chequing,
-    },
-  ],
-} satisfies Provider;
-
-/** A fintech whose better rate is a paid tier (KOHO's Essential and Everything, simplified). */
-const fintech = {
-  id: 'example-fintech',
-  name: 'Example Fintech',
-  ...finance,
-  plans: [
-    {
-      id: 'example-fintech.essential',
-      name: 'Essential',
-      link: 'https://example.com/plans',
-      features: { 'finance.card': ['prepaid-mastercard'] },
-      prices: [price('CA', 'CAD', 0)],
-      account: {
-        kind: 'savings',
-        currency: 'CAD',
-        rates: rates({ from: 0, rate: 2 }),
-        protection: { ...protection, held: 'trust' },
-      },
-    },
-    {
-      id: 'example-fintech.everything',
-      name: 'Everything',
-      link: 'https://example.com/plans',
-      features: { 'finance.card': ['prepaid-mastercard'], 'finance.registered-accounts': ['tfsa'] },
-      prices: [price('CA', 'CAD', 22)],
-      account: {
-        kind: 'savings',
-        currency: 'CAD',
-        rates: rates({ from: 0, rate: 3.5 }),
-        protection: { ...protection, held: 'trust' },
-      },
-    },
-  ],
-} satisfies Provider;
-
-/** The catalog with a file's data replaced whole. */
-function replaced(
-  files: readonly CatalogSourceFile[],
-  file: string,
-  data: unknown,
-): CatalogSourceFile[] {
-  return files.map((source) => (source.file === file ? { file, data } : source));
-}
-
-function withFinance(providers: readonly object[]): CatalogSourceFile[] {
-  const files = catalog();
-  const categories = files.find((source) => source.file === 'data/categories.yaml') as {
-    data: { service: object[]; feature: object[]; spend: object[] };
-  };
-  const features = files.find((source) => source.file === 'data/features.yaml') as {
-    data: object[];
-  };
-  const withCategories = replaced(files, 'data/categories.yaml', {
-    service: [
-      ...categories.data.service,
-      { id: 'finance', name: 'Banking & investing', icon: 'account_balance' },
-    ],
-    feature: [...categories.data.feature, { id: 'finance', name: 'Banking & investing' }],
-    spend: [...categories.data.spend, { id: 'finance', name: 'Bank & account fees' }],
-  });
-  return [
-    ...replaced(withCategories, 'data/features.yaml', [
-      ...features.data,
-      {
-        id: 'finance.e-transfer',
-        name: 'Free Interac e-Transfers',
-        category: 'finance',
-        type: 'boolean',
-      },
-      {
-        id: 'finance.card',
-        name: 'Card',
-        category: 'finance',
-        type: 'set',
-        values: [
-          { id: 'interac-debit', name: 'Interac debit card' },
-          { id: 'visa-debit', name: 'Visa Debit' },
-          { id: 'prepaid-mastercard', name: 'Prepaid Mastercard' },
-        ],
-      },
-      {
-        id: 'finance.registered-accounts',
-        name: 'Registered accounts',
-        category: 'finance',
-        type: 'set',
-        values: [{ id: 'tfsa', name: 'TFSA' }],
-      },
-    ]),
-    ...providers.map((data) => ({
-      file: `data/providers/${(data as { id: string }).id}.yaml`,
-      data: JSON.parse(JSON.stringify(data)) as unknown,
-    })),
-    ...providers.map((data) => ({
-      file: `data/logos/${(data as { id: string }).id}.png`,
-      bytes: pngBytes(64, 64),
-    })),
-  ];
-}
 
 /** The errors, leaving out the topics the test catalog's providers and the fixtures don't rate. */
 function errors(files: readonly CatalogSourceFile[]): string[] {

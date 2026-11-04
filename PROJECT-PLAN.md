@@ -1915,13 +1915,18 @@ in every D1 `json` column search parses.
     `validateCatalog`'s checks (BLUEPRINT §4.11 as built) and `provider.schema.json`. Two fixture providers in core's
     tests validate: a bank whose $17.95 fee a $4,000 balance waives, and a fintech paying 2% on its free plan and 3.5% on
     its $22 one.
+  - **The card, and Search's filters** (2026-11-03): `ss-account-terms`, an Account group after Features on a finance
+    plan's details: what it is, its interest by tier with what it moves with and its bonus, what waives its fee, its
+    limits, what protects the money (linked to the provider's words, its quotes the tooltip) and who may open it. Core's
+    search finds the fixtures' TFSA and fractional shares. No real finance provider is in the catalog before M11.15, so
+    `check-m11-accounts.cjs` checks it on the dev gallery; the initial bundle stays 499.92 kB.
 - **Accounts are plans:** the monthly fee is the plan's price (a free account is $0), so totals, the schedule and
   cards already work. What's new is the plan's `account` block and the finance features (§4.11).
 - **Sources:** the provider's own pages, plus regulators' registers (CDIC's members, CIRO, FCAC, provincial deposit
   insurers and regulators), which count as official for finance. Rate tables on other sites only help find banks.
 - **Acceptance**
   - [x] Validation refuses a rate tier out of order, a waiver with no condition, and protection without a quote
-  - [ ] An account's card shows its rates, waivers, limits and protection, with their quotes, in both themes
+  - [x] An account's card shows its rates, waivers, limits and protection, with their quotes, in both themes
 
 **M11.13 — The finance optimizer** (BLUEPRINT §10.6)
 - **Acceptance**

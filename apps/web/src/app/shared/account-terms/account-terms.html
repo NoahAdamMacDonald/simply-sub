@@ -1,0 +1,47 @@
+<ul class="terms">
+  <li>
+    <span class="subject">{{ kind() }}</span>
+    <span>, in {{ account().currency }}</span>
+  </li>
+  @if (rates(); as rates) {
+    <li>
+      <span class="subject">Interest: </span>
+      <span>{{ rates.text }} </span>
+      <a
+        class="outside-link"
+        [href]="rates.url"
+        target="_blank"
+        rel="noopener"
+        aria-label="Its posted rates, opens in a new tab"
+      >
+        <span>posted rates</span>
+        <mat-icon aria-hidden="true">open_in_new</mat-icon>
+      </a>
+    </li>
+  }
+  @if (waivers(); as waivers) {
+    <li>{{ waivers }}</li>
+  }
+  @for (line of limits(); track line) {
+    <li>{{ line }}</li>
+  }
+  <li>
+    <span class="subject">Protection: </span>
+    <span>{{ protection().text }}, according to its </span>
+    <a
+      class="outside-link"
+      [href]="protection().href"
+      target="_blank"
+      rel="noopener"
+      [matTooltip]="protection().tooltip"
+      matTooltipTouchGestures="off"
+      aria-label="Page on who protects the money, opens in a new tab"
+    >
+      <span>page</span>
+      <mat-icon aria-hidden="true">open_in_new</mat-icon>
+    </a>
+  </li>
+  @if (eligibility(); as eligibility) {
+    <li>{{ eligibility }}</li>
+  }
+</ul>
