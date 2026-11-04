@@ -4,11 +4,20 @@ import type { RenewalAnchorKind } from '../catalog/provider';
 import { addDays, addMonths, type IsoDate } from '../dates/iso-date';
 import { addPeriods, samePeriod, type Period } from '../dates/period';
 import type { RankKey } from '../ranking/rank-keys';
+import {
+  accountFormFor,
+  accountFormIssues,
+  accountFromForm,
+  emptyAccountForm,
+  type AccountForm,
+  type AccountRules,
+} from './account-form';
 import { maxIntervalCount } from './add-request';
 import {
   maxNicknameLength,
   maxNoteLength,
   type Billing,
+  type ItemAccount,
   type ItemSource,
   type ListItem,
   type PriceOverride,
@@ -98,6 +107,8 @@ export interface ItemForm {
   cardId: string;
   /** Its ranks are its own, not shared with its provider's other plans in the list (M6.14). */
   ownRanks: boolean;
+  /** An account plan's balance and the facts its conditions ask about (M11.11): kept, unsaved, for any other plan. */
+  account: AccountForm;
 }
 
 /** A rule the form breaks, at the field it's about: `['windows', 0, 'end']`. */
@@ -324,13 +335,15 @@ export interface ItemFormRules {
   free: boolean;
   /** The most add-ons the plan allows in all (Plan.addOnLimit). */
   addOnLimit?: number;
+  /** The plan's account (M11.11): its currency and the facts it asks for. Undefined for a plan that isn't one. */
+  account?: AccountRules;
 }
 
 /**
  * Everything that stops the form from being saved, at the field it's about (P6): a period the plan isn't priced for,
  * add-ons past the plan's limit, an Ongoing item with no next renewal or that ends before it started, Specific dates'
- * window rules (windowIssues), and an own price that isn't above 0 or has no currency. A free plan bills nothing, so
- * only its dates are checked.
+ * window rules (windowIssues), an own price that isn't above 0 or has no currency, and an account's figures
+ * (accountFormIssues). A free plan bills nothing, so only its dates are checked.
  */
 export function itemFormIssues(form: ItemForm, rules: ItemFormRules): FormIssue[] {
   const issues: FormIssue[] = [];
@@ -383,12 +396,18 @@ export function itemFormIssues(form: ItemForm, rules: ItemFormRules): FormIssue[
   if (form.note.trim().length > maxNoteLength) {
     add(['note'], `Use at most ${maxNoteLength} characters`);
   }
+  if (rules.account) issues.push(...accountFormIssues(form.account, rules.account));
   return issues;
 }
 
 /** What the form saves: all of a list item but its id, list, pinning and timestamps. */
 export type ItemFields = Pick<ListItem, 'source' | 'billing' | 'tagIds' | 'rankOverrides'> &
-  Partial<Pick<ListItem, 'region' | 'priceOverride' | 'nickname' | 'note' | 'cardId' | 'ownRanks'>>;
+  Partial<
+    Pick<
+      ListItem,
+      'region' | 'priceOverride' | 'nickname' | 'note' | 'cardId' | 'ownRanks' | 'account'
+    >
+  >;
 
 export interface ItemFormContext extends ItemFormRules {
   /** The chosen price's autoRenew: a plan that's renewed by hand never auto-renews. */
@@ -400,6 +419,8 @@ export interface ItemFormContext extends ItemFormRules {
   today: IsoDate;
   /** The item's billing before this change, when it's an item being changed: a free plan keeps its anchor. */
   billingBefore?: Billing;
+  /** Its account block before this change: a balance it keeps keeps its date. */
+  accountBefore?: ItemAccount;
 }
 
 /**
@@ -407,7 +428,7 @@ export interface ItemFormContext extends ItemFormRules {
  * plan is saved as Ongoing with today as its anchor (P6), or the anchor it had, so opening and saving an item changes
  * nothing; it has no own price or card, since there's nothing to pay. Windows are saved in date order, a billing day
  * only while it applies, and ranks only for the keys the item provides. An item bought in Settings' country has no
- * region.
+ * region. An account plan's item keeps its balance and facts (accountFromForm); any other plan's, none.
  */
 export function itemFromForm(form: ItemForm, context: ItemFormContext): ItemFields {
   const period: Period = { interval: form.interval, intervalCount: form.intervalCount };
@@ -417,6 +438,9 @@ export function itemFromForm(form: ItemForm, context: ItemFormContext): ItemFiel
   const rankOverrides = Object.fromEntries(
     Object.entries(form.rankOverrides).filter(([key]) => provided.has(key)),
   );
+  const account =
+    context.account &&
+    accountFromForm(form.account, context.account, context.today, context.accountBefore);
   return {
     source: itemSource(form),
     ...(form.region !== context.country && { region: form.region }),
@@ -428,6 +452,7 @@ export function itemFromForm(form: ItemForm, context: ItemFormContext): ItemFiel
     ...trimmed('note', form.note),
     ...(!free && form.cardId !== '' && { cardId: form.cardId }),
     ...(form.ownRanks && { ownRanks: true as const }),
+    ...(account && { account }),
   };
 }
 
@@ -478,6 +503,7 @@ export function newItemForm({
     note: '',
     cardId: '',
     ownRanks: false,
+    account: emptyAccountForm(),
   };
 }
 
@@ -520,6 +546,7 @@ export function itemFormFor(
     note: item.note ?? '',
     cardId: item.cardId ?? '',
     ownRanks: item.ownRanks === true,
+    account: accountFormFor(item.account),
   };
 }
 

@@ -22,6 +22,7 @@ import {
   customSub,
   dismissedSuggestion,
   item,
+  itemAccount,
   list,
   listId,
   ranking,
@@ -69,6 +70,12 @@ describe('plainBackup and readBackupText', () => {
     expect(reading.kind === 'backup' && reading.backup.data.lists[0].deletedAt).toBe(
       '2026-10-21T08:00:00.000Z',
     );
+  });
+
+  it('keeps an account item’s balance and facts (M11.11)', () => {
+    const banked = { ...data, items: [{ ...item, account: itemAccount }] } as BackupData;
+    const reading = readBackupText(JSON.stringify(plainBackup({ ...payload, data: banked })));
+    expect(reading.kind === 'backup' && reading.backup.data.items[0].account).toEqual(itemAccount);
   });
 
   it('reads a file without a catalog version', () => {
