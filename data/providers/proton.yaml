@@ -43,11 +43,8 @@ owner:
 notes: >-
   One Proton account holds one paid plan. Every plan keeps the free tier of the Proton apps it doesn't upgrade.
 
-# Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their
-# words.
-perks:
-  - id: scribe
-    name: Proton Scribe writing assistant
+# Perks (M11.6): none. Proton Scribe, its writing assistant in Proton Mail, is ai.office-apps since M11.15
+# (data/redirects.yaml, the owner's choice of 2026-11-04).
 
 # VPN features, read 2026-10-25 on protonvpn.com. Free, Mail Plus, Drive Plus and Pass Plus have VPN Free; VPN Plus,
 # Unlimited, Duo and Family have VPN Plus (/pricing). Countries: 10 on Free and 140+ on Plus (/pricing; /free-vpn/
@@ -72,7 +69,7 @@ perks:
 # enjoy access to the free version of Proton Lumo, your private AI assistant"; Duo "Also includes the free version of
 # Proton Lumo"; and a "Proton Lumo Free" list under Free, Mail Plus and Family. /support/lumo-getting-started: "Yes,
 # you can use Lumo for free with guest access or signed into a Proton Account." Proton Scribe is an "Add-on with free
-# trial" on Unlimited in /pricing's table, and included in Duo and Family (their perks).
+# trial" on Unlimited in /pricing's table, and included in Duo and Family (ai.office-apps since M11.15).
 # Lumo's own price list (proton.me/lumo/pricing, read 2026-11-03, M11.9's AI features): Free has "Limited image
 # generations", so every plan has image generation. Free names no coding agent, research, scheduled tasks, early
 # access or API credits, and neither does Plus.
@@ -700,6 +697,7 @@ plans:
       calendar.included: true
       ai.assistant: true
       ai.image-generation: true
+      ai.office-apps: true
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
@@ -747,7 +745,6 @@ plans:
       includes-subscription: [proton.unlimited]
     featureLabels:
       email.aliases: Hide-my-email aliases
-    perks: [scribe]
     notes: Storage is shared between the 2 users. Each user gets 10 VPN devices.
     prices:
       - region: GLOBAL
@@ -829,6 +826,7 @@ plans:
       calendar.included: true
       ai.assistant: true
       ai.image-generation: true
+      ai.office-apps: true
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
@@ -876,7 +874,6 @@ plans:
       includes-subscription: [proton.unlimited]
     featureLabels:
       email.aliases: Hide-my-email aliases
-    perks: [scribe]
     notes: Storage is shared between up to 6 users. Each user gets 10 VPN devices.
     prices:
       - region: GLOBAL
