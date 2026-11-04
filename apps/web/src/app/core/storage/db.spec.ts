@@ -39,4 +39,20 @@ describe('createUserDatabase', () => {
     expect(await db.table('liveCalendar').count()).toBe(1);
     db.close();
   });
+
+  it('indexes no account’s balance or facts (M11.11), so the app lock seals them', async () => {
+    const db = createUserDatabase({ indexedDB: new IDBFactory(), IDBKeyRange });
+    await db.open();
+    const { primKey, indexes } = db.table('items').schema;
+    expect([primKey, ...indexes].map((index) => index.keyPath)).toEqual([
+      'id',
+      'listId',
+      'updatedAt',
+    ]);
+    const keyPaths = db.tables.flatMap(({ schema }) =>
+      [schema.primKey, ...schema.indexes].map((index) => index.keyPath),
+    );
+    expect(JSON.stringify(keyPaths)).not.toMatch(/account|balance|born/i);
+    db.close();
+  });
 });
