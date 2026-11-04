@@ -52,8 +52,6 @@ owner:
 # Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their
 # words.
 perks:
-  - id: downloads
-    name: Download select shows and movies
   - id: watch-party
     name: Hulu Watch Party
 
@@ -62,6 +60,10 @@ perks:
 # include Disney+ and ESPN, so they'd be suites) and the add-ons. The Disney+ bundles are in data/bundles.
 # Two streams at a time, read 2026-11-02 (M11.4) on hulu.com/paramount-plus-with-showtime: "While your Hulu base plan
 # allows you to watch on 2 simultaneous streams at a time" (the help centre's screens article renders no text here).
+# Downloads, profiles and Kids profiles (M11.15), read 2026-11-04 through a US exit in its help centre: Premium only ("If
+# you subscribe to one of the Hulu Premium (No Ads) plans, you can download"), "up to 25 downloads on five supported
+# mobile devices at one time" (hulu-downloads); "you can create up to six additional Profiles (seven in total)", and a
+# Kids switch on a new profile (hulu-manage-profiles). The downloads perk became the feature (data/redirects.yaml).
 # With Ads isn't ad free (its name, and the plans article's "Hulu (With Ads)").
 # Renewal day (M11.5), read 2026-11-03 (M11.9) through a US exit, in the US subscriber agreement Disney+, Hulu and
 # ESPN share (hulu.com/subscriber_agreement): the date you became a paying subscriber, or a shorter month's last day.
@@ -85,8 +87,7 @@ features:
 # Billing periods and resellers (M11.9), read 2026-11-03 through a US exit: monthly, and yearly for With Ads only
 # (hulu.com/annual-offer: "Automatically renews on annual basis for $124.99/year", its regular price; the annual billing
 # article: "annual billing is only available for the Hulu (With Ads) plan"). No official resellers: Roku, Apple and the
-# like bill it as channels ("billed by a third party (like Roku or Disney+)"). Downloads and kids profiles aren't on the
-# pages read yet.
+# like bill it as channels ("billed by a third party (like Roku or Disney+)").
 plans:
   - id: hulu.with-ads
     name: With Ads
@@ -95,6 +96,8 @@ plans:
       video.quality: 4k
       ad-free: false
       streaming.concurrent-streams: 2
+      streaming.profiles: 7
+      streaming.kids-profiles: true
     prices:
       - region: US
         currency: USD
@@ -120,7 +123,10 @@ plans:
       video.quality: 4k
       ad-free: true
       streaming.concurrent-streams: 2
-    perks: [downloads, watch-party]
+      streaming.download-devices: 5
+      streaming.profiles: 7
+      streaming.kids-profiles: true
+    perks: [watch-party]
     notes: A few shows play with ads before and after the video.
     prices:
       - region: US

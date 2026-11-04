@@ -95,6 +95,8 @@ features:
 # Downloads, profiles and HDR (M11.9, the owner's item 3), read 2026-11-03: its help centre lists « Pourquoi le
 # téléchargement hors connexion n'est pas disponible? » among ICI TOU.TV's limitations (assistance.radio-canada.ca), so
 # no downloads; its plans offer a « zone Jeunesse », not kids profiles, and no page names HDR, so none (inferred).
+# Profiles (M11.15), searched 2026-11-04: its help centre has no article on profiles or parental controls, and an
+# account is a Radio-Canada account, one person's, so none (inferred).
 plans:
   - id: ici-tou-tv.extra
     name: EXTRA

@@ -95,7 +95,10 @@ features:
 # Billing periods and resellers (M11.9), read 2026-11-03 through a US exit: monthly and annual for both plans, as
 # stored (its plans and prices article: "ESPN Select Annual Subscription $139.99/Year", "ESPN Unlimited Annual
 # Subscription $319.99/Year"). No official resellers: pay-TV providers and app stores bill it as channels ("billed
-# through a third party, such as Apple or Google"). Downloads and kids profiles aren't on the pages read yet.
+# through a third party, such as Apple or Google").
+# Downloads, profiles and Kids profiles (M11.15), searched 2026-11-04 through a US exit: its help centre
+# (support.espn.com) has no article on any of them, and an ESPN account is one person's ("How do I personalize my account
+# on ESPN.com?"), so none (inferred).
 plans:
   - id: espn.select
     name: Select

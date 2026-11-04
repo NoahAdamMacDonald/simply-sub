@@ -86,7 +86,8 @@ features:
 # « Puis-je obtenir un forfait via mon fournisseur télé, mobile ou un fournisseur tiers d'achats intégrés ? »: TV and
 # mobile providers and app stores bill it on their own services, as Crave's FAQ says of Bell Media's other services.
 # Downloads and profiles (M11.9, the owner's item 3), read 2026-11-03: its FAQ (rds.ca/aide/faq) covers its app,
-# streams and devices but names no downloads or profiles, so none (inferred).
+# streams and devices but names no downloads or profiles, so none (inferred). Reread 2026-11-04 for the profile count
+# (M11.15): still none.
 plans:
   - id: rds.standard
     name: RDS
