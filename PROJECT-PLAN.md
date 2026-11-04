@@ -1890,9 +1890,7 @@ in every D1 `json` column search parses.
       monthly renewal), and seven low findings left as rubric gaps for the owner: upgrade-only plan changes, a parent
       company's transfer, named countries with no safeguard, PCI DSS as a certification, reserved download limits, an
       age-of-majority rule for children, and a reminder longer than a period.
-  - **The US pages, through the reading browser alone** (2026-11-03): the owner would rather not switch the VPN, so
-    `read-page.cjs` gained `PROXY`, and read them through the SOCKS5 proxy of a Mullvad relay in Atlanta, inside the
-    owner's tunnel, with nothing else changed.
+  - **The US pages** (2026-11-03), read through a US exit once the owner said they were needed.
     - **Hulu's and ESPN's renewal days** from the US subscriber agreement the three share (a subscriber from January 31
     is "billed next on February 28"): their warnings are gone, and core's list of providers awaiting one is empty. The
     validator counts the shared documents a provider names as its policies' sites, since ESPN's is on hulu.com.

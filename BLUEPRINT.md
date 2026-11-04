@@ -3630,9 +3630,8 @@ None.
     which move users' ranks. Usage multiples, priority access, EA Play and the like stay perks.
 - **Password-protected share links and Suspicious sites** (feature-discovery for SecurePass): a sharing value
   `link-password`, and health's `suspicious` named "Suspicious sites".
-- **A country's pages through the reading browser alone:** when the owner would rather not switch the VPN, research
-  reads another country's pages through the SOCKS5 proxy of a Mullvad relay there, inside the owner's tunnel, for the
-  reading browser only (`read-page.cjs`'s `PROXY`). Hulu's and ESPN's renewal days and Netflix's US terms were read so.
+- **Another country's pages:** research asks the owner, once per batch, listing the countries, and reads them only once
+  the owner says they're needed.
 - **Four rubric readings, after the second model's review:** a small-claims exception never moves a disputes grade;
   a posting on the provider's own site or blog isn't telling you about new terms (Neutral when it comes ahead and you
   can leave); the procedure's necessary exceptions (enforcing terms, rights, safety, fraud, emergencies) never make

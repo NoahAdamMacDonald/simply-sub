@@ -595,7 +595,7 @@ addOns:
 # rated: free trials (none in Canada).
 # Its terms are read from Canada: Netflix serves each country its own terms by where you are, and has no country picker
 # on them. Its billing and legal ratings, read in the Canadian terms, stand for everywhere a country's own aren't read.
-# The US's, read 2026-11-03 through a US exit for the reading browser only, grade the same but for disputes: arbitration
+# The US's, read 2026-11-03 through a US exit, grade the same but for disputes: arbitration
 # with a class-action waiver and an opt-out within 30 days, a US rating (the nightly check sees one country's version).
 policies:
   links:

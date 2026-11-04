@@ -209,18 +209,10 @@ file's header ("# Region checklist for CA, 2026-11-03: 1. … 7. …", "none" co
    Browser (`read-page-mullvad.cjs`, below);
 7. the owner's own bill or account page, only when the owner offers it.
 
-**A region the pages won't show from Canada** (a site that prices by where the visitor is): the owner's Mullvad VPN can
-exit in that country. The owner's choice (2026-11-02): collect those countries over a batch and ask once, at its end,
-listing them; the owner switches the exit and says when, or says skip. Never switch the VPN yourself. A region skipped
-stays unread, with why.
-
-**Or the reading browser alone** (the owner's choice, 2026-11-03), when the owner would rather not switch: while this
-machine is on Mullvad (`curl https://am.i.mullvad.net/json` says `"mullvad_exit_ip":true`), each Mullvad relay has a
-SOCKS5 proxy reachable inside the tunnel, so `read-page.cjs` can exit in another country with nothing else changed. Pick
-an active relay's `socks_name` from `https://api.mullvad.net/www/relays/wireguard/` (its `country_code`), check it
-(`curl --socks5-hostname <socks_name>:1080 https://am.i.mullvad.net/json` names the country), then read with
-`PROXY=socks5://<socks_name>:1080 LOCALE=en-US node read-page.cjs …`. It's the same exit the owner would switch to, so
-the same rules hold: a site's bot check or block still means stop. Note "read through a US exit" beside the date.
+**Another country's pages** (a site that prices by where the visitor is, and shows this machine only Canada's): ask the
+owner. Collect those countries over a batch and ask once, at its end, listing them; the owner says when they can be
+read, or says skip. Never switch the owner's VPN yourself. A region skipped stays unread, with why, and a site's bot
+check or block still means stop.
 
 **A gap that stays** (a plan the provider doesn't sell somewhere, a region not read yet) is explained in the provider
 file by a comment block of its own, which the report reads: it names the plan's id, or `<provider>.*` for every plan,
