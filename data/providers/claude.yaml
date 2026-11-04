@@ -222,6 +222,10 @@ plans:
         lastVerified: 2026-10-30
         sourceUrl: https://claude.com/pricing
 
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read that day: the consumer terms "include our
+# Acceptable Use Policy" (anthropic.com/legal/aup, its Usage Policy) and name a Supported Regions Policy (where it's
+# sold, which no topic grades) and supplemental terms that some features post. The sign-up form's agreement line
+# shows only after an email address is entered, so it wasn't read.
 policies:
   links:
     - name: 'Verify your phone number'
@@ -242,6 +246,8 @@ policies:
       url: https://www.anthropic.com/responsible-disclosure-policy
     - name: 'Cookie policy'
       url: https://www.anthropic.com/legal/cookies
+    - name: 'Usage policy'
+      url: https://www.anthropic.com/legal/aup
   ratings:
     - topic: billing.cancellation
       tier: neutral
@@ -286,12 +292,14 @@ policies:
       lastVerified: 2026-11-03
     - topic: legal.account-closure
       tier: neutral
-      reason: It can close your account without notice if it believes you broke its terms, with no refund; if it ends your plan for any other reason, it refunds the unused time.
+      reason: It can close your account without notice if it believes you broke its terms or usage policy, with no refund; if it ends your plan for any other reason, it refunds the unused time.
       sources:
         - url: https://www.anthropic.com/legal/consumer-terms
           quote: If we terminate your access to the Services due to a violation of these Terms and you have a Subscription, you will not be entitled to any refund.
         - url: https://www.anthropic.com/legal/consumer-terms
           quote: If we exercise this right, we will refund you, on a pro rata basis, the fees you paid for the remaining portion of your Subscription after termination.
+        - url: https://www.anthropic.com/legal/aup
+          quote: 'If we suspect that you may have violated our Usage Policy, we may warn you or throttle, limit, suspend, or terminate your access to our products and services.'
       lastVerified: 2026-11-03
     - topic: privacy.data-collection
       tier: poor
@@ -481,3 +489,19 @@ policies:
         - url: https://www.anthropic.com/legal/consumer-terms
           quote: 'You may not share your Account login information, Anthropic API key, or Account credentials with anyone else. You also may not make your Account available to anyone else.'
       lastVerified: 2026-11-02
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You may use Claude for anything its rules allow except building a product that competes with it or training another AI, and you may not take its apps apart unless the law lets you.'
+      sources:
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: 'To develop any products or services that compete with our Services, including to develop or train any artificial intelligence or machine learning algorithms or models or resell the Services.'
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: 'To decompile, reverse engineer, disassemble, or otherwise reduce our Services to human-readable form, except when these restrictions are prohibited by applicable law.'
+      lastVerified: 2026-11-03
+    - topic: service.software-control
+      tier: good
+      reason: 'Its apps may update themselves without warning you first. Its terms don’t say they change anything else on your device.'
+      sources:
+        - url: https://www.anthropic.com/legal/consumer-terms
+          quote: 'We may offer manual or automatic updates to our software including our apps (“Anthropic Software”), without advance notice to you.'
+      lastVerified: 2026-11-03

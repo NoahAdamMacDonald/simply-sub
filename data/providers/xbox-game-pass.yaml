@@ -335,6 +335,12 @@ plans:
         lastVerified: 2026-10-29
         sourceUrl: https://www.xbox.com/en-IE/xbox-game-pass
 
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read that day: the Microsoft Services Agreement
+# includes the Standard Application License Terms (games and apps from its store, on the same page) and the Xbox
+# Community Standards, and the subscription terms put Ultimate's EA Play, Fortnite Crew and Ubisoft+ Classics (and PC
+# Game Pass's EA Play) under those companies' own terms, read for every topic. Those terms include EA's, Epic's and
+# Ubisoft's own user agreements and privacy policies, which are those services' to rate: not read. The Microsoft
+# account sign-up's agreement line shows only after an email address is entered, so it wasn't read.
 policies:
   links:
     - name: Cancelling
@@ -353,6 +359,14 @@ policies:
       url: https://www.microsoft.com/en-ca/storedocs/terms-of-sale
     - name: 'Xbox bug bounty'
       url: https://www.microsoft.com/en-us/msrc/bounty-xbox
+    - name: 'XBOX community standards'
+      url: https://www.xbox.com/en-US/legal/community-standards
+    - name: 'EA Play terms'
+      url: https://www.ea.com/ea-play/terms
+    - name: 'Fortnite Crew terms'
+      url: https://legal.epicgames.com/en-US/fortnite/crew-terms
+    - name: 'Ubisoft+ terms'
+      url: https://www.ubisoft.com/legal/documents/ubisoftplusterms
   ratings:
     - topic: billing.refunds
       tier: great
@@ -555,11 +569,13 @@ policies:
       lastVerified: 2026-11-02
     - topic: legal.account-closure
       tier: neutral
-      reason: 'If you break its rules it can cut you off or close your account right away, with no refund promised.'
+      reason: 'If you break its rules it can cut you off or close your account right away, with no refund promised. A permanent ban also takes away the games you bought, your membership time and any money in your account.'
       sources:
         - url: https://www.microsoft.com/en-ca/servicesagreement
           quote: 'This could include limiting access to certain features or Services, stopping providing Services, closing your Microsoft account immediately or blocking delivery of a communication'
-      lastVerified: 2026-11-02
+        - url: https://www.xbox.com/en-US/legal/community-standards
+          quote: 'Under permanent suspension, the owner of the suspended profile forfeits all licenses for games and other content, XBOX subscriptions membership time, and Microsoft account balances.'
+      lastVerified: 2026-11-03
     - topic: legal.content-rights
       tier: bad
       reason: 'Anything you share on Xbox, with your gamertag, Microsoft and anyone it chooses may use, change and share, for free and anywhere.'
@@ -568,12 +584,16 @@ policies:
           quote: 'As part of building the XBOX Services community, you grant to Microsoft, its affiliates and sublicensees a free and worldwide right, to use, modify, reproduce, distribute, broadcast, share and display Your Content or your name, gamertag, motto, or avatar that you posted for any XBOX Services.'
       lastVerified: 2026-11-02
     - topic: legal.service-changes
-      tier: neutral
-      reason: 'Games come and go from the library, as with any subscription. If one leaves, you have to buy it to keep playing.'
+      tier: poor
+      reason: "It doesn't promise you can download again games or apps you bought if it stops offering them. Games leave the library over time: you must buy one to keep playing it, and with EA Play, to keep what you bought in it."
       sources:
+        - url: https://www.microsoft.com/en-ca/servicesagreement
+          quote: 'Except to the extent required by applicable law, we have no obligation to provide a re-download or replacement of any material, Digital Goods (defined in section 13.i), or applications previously purchased.'
         - url: https://www.xbox.com/en-US/legal/subscription-terms
           quote: 'if a game leaves the catalog you must buy the game separately'
-      lastVerified: 2026-11-02
+        - url: https://www.ea.com/ea-play/terms
+          quote: 'When your EA Play subscription or any trial ends, you will no longer have access to the membership benefits, including Play List titles, game upgrades, or in-game purchases made in a Play List title, unless you separately have access to that Play List title for the applicable Platform.'
+      lastVerified: 2026-11-03
     - topic: legal.inactivity
       tier: poor
       reason: 'If you don’t sign in to your Microsoft account for two years, it closes it, and its terms don’t promise a warning first.'
@@ -600,3 +620,35 @@ policies:
         - url: https://www.xbox.com/en-US/legal/subscription-terms
           quote: 'Streaming limits apply.'
       lastVerified: 2026-11-02
+    - topic: legal.terms-changes
+      plans: [xbox-game-pass.ultimate]
+      tier: bad
+      reason: 'Microsoft says it tells you when its terms change. But Ultimate’s Ubisoft+ Classics games come with Ubisoft’s terms, which it can change at any time and for any reason, without saying it will tell you.'
+      sources:
+        - url: https://www.xbox.com/en-US/legal/subscription-terms
+          quote: 'Ubisoft+ Classics subject to terms: Ubisoft+ Subscription Terms'
+        - url: https://www.ubisoft.com/legal/documents/ubisoftplusterms
+          quote: 'Ubisoft may revise these UBISOFT+ Terms at any time and for any reason in its sole discretion, changes to be effective as indicated.'
+        - url: https://legal.epicgames.com/en-US/fortnite/crew-terms
+          quote: 'Epic reserves the right to change the Fortnite Crew Subscription Terms from time to time and will post the most current version of the Fortnite Crew Subscription Terms'
+      lastVerified: 2026-11-03
+    - topic: legal.licence
+      tier: poor
+      reason: 'You may use its apps on one device each, by one person at a time. For games and apps from its store, Microsoft can change the rules for using them at any time.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/servicesagreement
+          quote: 'we grant you the right to install and use one copy of the software per device on a worldwide basis for use by only one person at a time as part of your use of the Services.'
+        - url: https://www.microsoft.com/en-ca/servicesagreement
+          quote: "Microsoft reserves the right to modify Microsoft's Usage Rules"
+      lastVerified: 2026-11-03
+    - topic: service.software-control
+      tier: poor
+      reason: 'Your Xbox and its app update themselves and can have their settings changed from afar, and it checks your device for cheating software. The only way it names to stop updates is to uninstall.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/servicesagreement
+          quote: 'we may automatically check your version of XBOX console software or the XBOX app software and download XBOX console or XBOX app software updates or configuration changes'
+        - url: https://www.microsoft.com/en-ca/servicesagreement
+          quote: 'we may automatically check your device for unauthorized hardware or software that enables cheating or tampering'
+        - url: https://www.microsoft.com/en-ca/servicesagreement
+          quote: 'You may withdraw your consent to future software updates at any time by uninstalling the software.'
+      lastVerified: 2026-11-03

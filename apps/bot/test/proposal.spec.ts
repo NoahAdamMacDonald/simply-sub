@@ -80,6 +80,8 @@ describe('stepPlan', () => {
       'https://hackerone.com/netflix',
       // Its cancel page, which its Cancelling rating quotes since M11.9.
       'https://help.netflix.com/en/node/407',
+      // Its games' community guidelines, which its terms include (every agreement a user accepts, 2026-11-03).
+      'https://help.netflix.com/legal/gamescommunityguidelines',
     ]);
     expect(index.hosts).toContain('www.amazon.ca');
     expect(index.hosts).toContain('icons.duckduckgo.com');
