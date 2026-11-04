@@ -743,6 +743,54 @@ describe('a topic and a feature on the same fact (M11.1)', () => {
     ).toEqual([]);
   });
 
+  it('lets its apps’ licence be Great only when they are open source, provider-wide too', () => {
+    const licence: PolicyTopic = {
+      id: 'legal.licence',
+      name: 'Using its apps',
+      group: 'legal',
+      question: 'Its licence.',
+      tiers,
+      silent: 'not-stated',
+      categories: ['vpn'],
+    };
+    const openSource = {
+      id: 'software.open-source',
+      name: 'Open source',
+      category: 'general',
+      type: 'enum',
+      values: [
+        { id: 'proprietary', name: 'Closed source' },
+        { id: 'open-clients', name: 'Open-source apps' },
+        { id: 'fully-open', name: 'Fully open source' },
+      ],
+      providerWide: true,
+    };
+    const files = withPolicies({
+      ...mullvadPolicies,
+      ratings: [...mullvadPolicies.ratings, rating('legal.licence', { reason: 'Open source.' })],
+    }).map((source) =>
+      source.file === 'data/policy-topics.yaml'
+        ? { ...source, data: [...topics, licence] }
+        : source.file === 'data/features.yaml' && 'data' in source
+          ? { ...source, data: [...(source.data as unknown[]), openSource] }
+          : source,
+    );
+    const licenceMessages = (open?: string) =>
+      messages(
+        edited(
+          files,
+          'data/providers/mullvad.yaml',
+          ['features'],
+          open ? { 'software.open-source': open } : undefined,
+        ),
+      ).filter((message) => message.includes('open-source apps'));
+    const closed =
+      'data/providers/mullvad.yaml policies.ratings.3.tier: Great needs open-source apps, but mullvad.vpn has no open-clients or fully-open in software.open-source: grade it lower, or state software.open-source from its own page';
+    expect(licenceMessages()).toEqual([closed]);
+    expect(licenceMessages('proprietary')).toEqual([closed]);
+    expect(licenceMessages('open-clients')).toEqual([]);
+  });
+
   it('checks a shared document’s rating against the plans of each provider naming it', () => {
     const privacy = 'https://privacy.example.com/policy';
     const files = withAudits(undefined, [
