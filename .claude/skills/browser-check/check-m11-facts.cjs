@@ -170,6 +170,8 @@ async function details(page, name) {
   await found.scrollIntoViewIfNeeded();
   await found.locator('button.expand').click();
   await found.locator('ss-plan-details').waitFor();
+  // The facts are on the details' Facts tab (the owner's design, 2026-11-03).
+  await found.getByRole('tab', { name: 'Facts' }).click();
   await sleep(1000);
   return found;
 }
@@ -220,6 +222,17 @@ async function looks(group) {
 /** The focused element's role and name, from the accessibility tree: a link's line ends in a colon, before its URL. */
 async function focusedName(page) {
   return (await page.locator(':focus').ariaSnapshot()).split('\n')[0].replace(/:$/, '');
+}
+
+/** Whether a tooltip with these words shows within 3 s. */
+function tipShown(page, words) {
+  return page
+    .locator('.mat-mdc-tooltip-show', { hasText: words })
+    .waitFor({ timeout: 3000 })
+    .then(
+      () => true,
+      () => false,
+    );
 }
 
 /** The tooltip showing now, if one is. */
@@ -386,32 +399,39 @@ async function typeRenewal(page, date) {
         }
         // Keyboard: from the ways to pay's link, Tab reaches the currencies', then the repository and its page.
         // Its two pages' links (the pricing page, then its terms: the owner's tasks, 2026-11-03), then the currencies'.
+        // Each target is scrolled to the middle first, so focus doesn't scroll the page as it moves there: a tooltip that
+        // opens while its trigger scrolls is closed as clipped. Each tooltip is waited for by its words, since one a
+        // still pointer hovers can show too.
+        const centred = (target) =>
+          target.evaluate((element) => element.scrollIntoView({ block: 'center' }));
+        await centred(pay.locator('.payment:not(.pay-chips)'));
         await pay.locator('a').nth(1).focus();
         await page.keyboard.press('Tab');
         const currenciesFocus = await focusedName(page);
-        const currenciesTip = await tooltipText(page);
+        const currenciesTip = await tipShown(page, 'We accept payment by cash in bills (EUR, USD');
         check(
           `${label}: Tab reaches the currencies' page, its tooltip the page's words`,
-          currenciesFocus === '- link "Terms of service, opens in a new tab"' &&
-            currenciesTip.startsWith('“We accept payment by cash in bills (EUR, USD'),
-          `${currenciesFocus} / ${currenciesTip.slice(0, 60)}`,
+          currenciesFocus === '- link "Terms of service, opens in a new tab"' && currenciesTip,
+          `${currenciesFocus} / ${currenciesTip}`,
         );
+        await centred(code);
+        await sleep(300);
         await page.keyboard.press('Tab');
         const hostFocus = await focusedName(page);
-        const hostTip = await tooltipText(page);
+        const hostTip = await tipShown(page, 'GitHub');
         await page.keyboard.press('Tab');
         const repoFocus = await focusedName(page);
         await page.keyboard.press('Tab');
         const pageFocus = await focusedName(page);
-        const pageTip = await tooltipText(page);
+        const pageTip = await tipShown(page, '“Code is open source”');
         check(
           `${label}: then its host's chip, the repository, named for screen readers, and its page with its words`,
           hostFocus === '- img "GitHub"' &&
-            hostTip === 'GitHub' &&
+            hostTip &&
             repoFocus ===
               '- link "Source code on github.com/mullvad/mullvadvpn-app, opens in a new tab"' &&
             pageFocus === '- link "Why Mullvad VPN?, opens in a new tab"' &&
-            pageTip === '“Code is open source”',
+            pageTip,
           `${hostFocus} / ${hostTip} / ${repoFocus} / ${pageFocus} / ${pageTip}`,
         );
         await sleep(500);

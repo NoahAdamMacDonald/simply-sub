@@ -131,6 +131,16 @@ async function details(page, name) {
 const groupNamed = (scope, page, name) =>
   scope.locator('.group', { has: page.getByRole('heading', { name, exact: true }) });
 
+/** Chooses one of a card's details' tabs (the owner's design, 2026-11-03). */
+async function showTab(found, name) {
+  await found.getByRole('tab', { name: new RegExp(`^${name}`) }).click();
+  await sleep(500);
+}
+
+/** The headings of the tab shown. */
+const shownHeadings = (found) =>
+  found.locator('[role="tabpanel"]:not([hidden]) h3').allTextContents();
+
 /** A group's words as laid out (innerText), the links' icons left out and spaces collapsed. */
 async function shown(locator) {
   return locator.evaluate((element) =>
@@ -190,15 +200,20 @@ async function focusedName(page) {
 
         // ── Bitdefender: AV-TEST's lab results ────────────────────────────────────────────────────
         const bitdefender = await details(page, 'Bitdefender');
-        const headings = await bitdefender.locator('ss-plan-details h3').allTextContents();
+        // In the details' tabs: Outside ratings after Terms and policies on Terms; its owner, ways to pay and billing
+        // day (M11.9's renewal days) on Facts, after what its suite includes.
+        await showTab(bitdefender, 'Terms');
+        const termsHeadings = await shownHeadings(bitdefender);
+        await showTab(bitdefender, 'Facts');
+        const factsHeadings = await shownHeadings(bitdefender);
         check(
-          `${label}: Bitdefender's Outside ratings, Owner and Ways to pay come after Terms and policies`,
-          // Then its Billing day (M11.9's renewal days).
-          headings.slice(-5).join() ===
-            'Terms and policies,Outside ratings,Owner,Ways to pay,Billing day',
-          headings.join(', '),
+          `${label}: Bitdefender's Outside ratings come after Terms and policies, and Facts has its Owner, Ways to pay and Billing day`,
+          termsHeadings.join() === 'Terms and policies,Outside ratings' &&
+            factsHeadings.slice(-3).join() === 'Owner,Ways to pay,Billing day',
+          `${termsHeadings.join(', ')} / ${factsHeadings.join(', ')}`,
         );
-        // Its security features (2026-11-02): the plan shown is listed with the antivirus group.
+        // Its security features (2026-11-02): the plan shown is listed with the antivirus group, on Features.
+        await showTab(bitdefender, 'Features');
         const features = await shown(groupNamed(bitdefender, page, 'Features'));
         check(
           `${label}: Bitdefender's plan lists its antivirus features`,
@@ -207,6 +222,7 @@ async function focusedName(page) {
             /Web and phishing protection/.test(features),
           features.slice(0, 200),
         );
+        await showTab(bitdefender, 'Terms');
         const outside = groupNamed(bitdefender, page, 'Outside ratings');
         const tested = '(tested Total Security 27.0, Windows 11)';
         const words = await shown(outside);
@@ -255,15 +271,19 @@ async function focusedName(page) {
 
         // ── Mullvad: its owner, citing its about page ───────────────────────────────────────────────
         const mullvad = await details(page, 'Mullvad VPN');
-        const mullvadHeadings = await mullvad.locator('ss-plan-details h3').allTextContents();
+        await showTab(mullvad, 'Terms');
+        const mullvadTerms = await shownHeadings(mullvad);
+        await showTab(mullvad, 'Facts');
+        const mullvadHeadings = await shownHeadings(mullvad);
         const owner = groupNamed(mullvad, page, 'Owner');
         const ownerWords = await shown(owner);
         check(
-          `${label}: Mullvad's Owner, then Ways to pay and Source code (M11.5), after Terms and policies, with no Outside ratings`,
-          mullvadHeadings.slice(-4).join() === 'Terms and policies,Owner,Ways to pay,Source code' &&
+          `${label}: Mullvad's Terms has no Outside ratings, and Facts its Owner, then Ways to pay and Source code (M11.5)`,
+          mullvadTerms.join() === 'Terms and policies' &&
+            mullvadHeadings.join() === 'Owner,Ways to pay,Source code' &&
             // Shown "Mullvad VPN AB · Sweden", read "Mullvad VPN AB, from Sweden": innerText has both.
             ownerWords === 'Owner Mullvad VPN AB ·, from Sweden, according to its About us',
-          `${mullvadHeadings.join(', ')} / ${ownerWords}`,
+          `${mullvadTerms.join(', ')} / ${mullvadHeadings.join(', ')} / ${ownerWords}`,
         );
         // Where the company is from (the owner's choice, 2026-11-03): its own page, linked first.
         const countryLink = owner.locator('a').first();
@@ -290,7 +310,10 @@ async function focusedName(page) {
           Object.values(ownerLooks).every(Boolean),
           JSON.stringify(ownerLooks),
         );
-        await mullvad.locator('.policy-links a').last().focus();
+        // Keyboard: from the Facts tab, Tab reaches its panel, then where the company is from.
+        await mullvad.getByRole('tab', { name: 'Facts' }).focus();
+        await page.keyboard.press('Tab');
+        const panelFocus = await focusedName(page);
         await page.keyboard.press('Tab');
         const countryFocus = await focusedName(page);
         const countryTip = page.locator('.mat-mdc-tooltip-show');
@@ -299,11 +322,12 @@ async function focusedName(page) {
         const countryWords =
           (await countryTip.count()) > 0 ? (await countryTip.last().textContent()).trim() : '';
         check(
-          `${label}: Tab from Sources reaches where the company is from, its tooltip the page's words`,
-          countryFocus ===
-            '- link "Sweden, according to its Why Mullvad VPN?, opens in a new tab"' &&
+          `${label}: Tab from the Facts tab reaches its panel, then where the company is from, its tooltip the page's words`,
+          panelFocus === '- tabpanel "Facts"' &&
+            countryFocus ===
+              '- link "Sweden, according to its Why Mullvad VPN?, opens in a new tab"' &&
             countryWords.startsWith('“The laws relevant to us as a VPN provider based in Sweden'),
-          `${countryFocus} / ${countryWords}`,
+          `${panelFocus} / ${countryFocus} / ${countryWords}`,
         );
         await page.keyboard.press('Tab');
         const ownerFocus = await focusedName(page);
@@ -377,7 +401,10 @@ async function focusedName(page) {
 
         // ── Netflix: no outside ratings; its owner and Canada's own ways to pay ──────────────────────
         const netflix = await details(page, 'Netflix');
-        const netflixHeadings = await netflix.locator('ss-plan-details h3').allTextContents();
+        await showTab(netflix, 'Terms');
+        const netflixTerms = await shownHeadings(netflix);
+        await showTab(netflix, 'Facts');
+        const netflixHeadings = [...netflixTerms, ...(await shownHeadings(netflix))];
         const netflixPay = await shown(groupNamed(netflix, page, 'Ways to pay'));
         check(
           `${label}: Netflix has no Outside ratings, its Owner, and Canada's page for its ways to pay`,

@@ -124,6 +124,8 @@ async function details(page, name) {
   await found.scrollIntoViewIfNeeded();
   await found.locator('button.expand').click();
   await found.locator('ss-plan-details').waitFor();
+  // Its features are on the details' Features tab (the owner's design, 2026-11-03).
+  await found.getByRole('tab', { name: /^Features/ }).click();
   await sleep(1000);
   return found;
 }
@@ -153,7 +155,8 @@ async function run(browser, colorScheme, viewport) {
       /^Inferred from Données mobiles \(in French\) \(opens in a new tab\): /.test(name ?? ''),
       name ?? '',
     );
-    // Keyboard: Tab from the card's expand button until the mark is focused, then its tooltip says why.
+    // Keyboard: Tab from the card's expand button (through the chosen tab and its panel) until the mark is focused,
+    // then its tooltip says why.
     await ici.locator('button.expand').focus();
     let reached = false;
     for (let presses = 0; presses < 40 && !reached; presses++) {

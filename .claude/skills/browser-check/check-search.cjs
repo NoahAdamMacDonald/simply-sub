@@ -984,6 +984,10 @@ async function addItem(page, planId) {
     // A bundle's price, in Crave's details, and New list….
     await go(page, 'back');
     await card(page, 'Crave').locator('button.expand').click();
+    // On the details' Features tab (the owner's design, 2026-11-03).
+    await card(page, 'Crave')
+      .getByRole('tab', { name: /^Features/ })
+      .click();
     const bundlePrice = card(page, 'Crave').locator('ss-plan-details ss-price button').first();
     await bundlePrice.waitFor();
     await bundlePrice.click();
@@ -1064,6 +1068,10 @@ async function addItem(page, planId) {
     await page.goto(`${baseUrl}search?addTo=${LIST_ID}`);
     await banner.waitFor({ timeout: 20000 });
     await card(page, 'Crave').locator('button.expand').click();
+    // On the details' Features tab (the owner's design, 2026-11-03).
+    await card(page, 'Crave')
+      .getByRole('tab', { name: /^Features/ })
+      .click();
     const bundlePrice = card(page, 'Crave').locator('ss-plan-details ss-price button').first();
     await bundlePrice.waitFor();
     const bundleName = (await bundlePrice.ariaSnapshot()).split('\n')[0];
@@ -1569,6 +1577,9 @@ async function addItem(page, planId) {
       await until('the suite', () =>
         card(page, 'Proton').getByRole('heading', { name: 'Includes' }).isVisible(),
       );
+      await card(page, 'Disney+')
+        .getByRole('tab', { name: /^Features/ })
+        .click();
       await until('the bundle', () =>
         card(page, 'Disney+').getByRole('heading', { name: 'Bundles' }).isVisible(),
       );
@@ -1627,7 +1638,9 @@ async function addItem(page, planId) {
     await openSearch(page, 'Alberta');
     const mullvad = card(page, 'Mullvad VPN');
     await mullvad.locator('button.expand').click();
-    const section = mullvad.locator('.group', {
+    // On the details' Terms tab: Overview has a Terms and policies group of its own, its grades at a glance.
+    await mullvad.getByRole('tab', { name: 'Terms' }).click();
+    const section = mullvad.locator('[role="tabpanel"]:not([hidden]) .group', {
       has: page.getByRole('heading', { name: 'Terms and policies' }),
     });
     await section.waitFor();
@@ -1650,7 +1663,9 @@ async function addItem(page, planId) {
         rows[0] ===
           "great | Data collection (Great): To sign up you don't give your name, an email address or even a password, so it knows very little about you. [3]" &&
         rows.some((row) => row.startsWith('good | Refunds (Good):')) &&
-        links.length === 7 &&
+        // Since its licence and its app's updates were rated (2026-11-03): its open-source page, Why Mullvad VPN? and
+        // its post on updates.
+        links.length === 10 &&
         links[0][0].startsWith('[1] Terms of service') &&
         links.every(
           ([text, target, rel]) =>
@@ -1680,7 +1695,7 @@ async function addItem(page, planId) {
       citations.length >= 9 &&
         citations.every(
           ([, text, , target]) =>
-            /^\[[1-7]\] .+, opens in a new tab$/.test(text) && target === '_blank',
+            /^\[(?:[1-9]|10)\] .+, opens in a new tab$/.test(text) && target === '_blank',
         ) &&
         unscrolled.length > 0 &&
         unscrolled.every(([topic]) => silent.includes(topic)),
@@ -1755,6 +1770,7 @@ async function addItem(page, planId) {
     // Netflix's ratings from its Canadian terms show here, and its ad plan's own ratings on that plan.
     const netflix = card(page, 'Netflix');
     await netflix.locator('button.expand').click();
+    await netflix.getByRole('tab', { name: 'Terms' }).click();
     await netflix.locator('.policies li').first().waitFor();
     const netflixRows = await policyRows(netflix);
     check(
@@ -1781,7 +1797,9 @@ async function addItem(page, planId) {
     await openSearch(page, 'Alberta');
     const mullvad = card(page, 'Mullvad VPN');
     await mullvad.locator('button.expand').click();
-    const section = mullvad.locator('.group', {
+    // On the details' Terms tab: Overview has a Terms and policies group of its own, its grades at a glance.
+    await mullvad.getByRole('tab', { name: 'Terms' }).click();
+    const section = mullvad.locator('[role="tabpanel"]:not([hidden]) .group', {
       has: page.getByRole('heading', { name: 'Terms and policies' }),
     });
     await section.waitFor();
@@ -1807,7 +1825,9 @@ async function addItem(page, planId) {
     check('a US user sees Disney+ With Ads', disney.includes('With Ads'), disney.join(', '));
     // M1.13: a rating for the buyer's country over the one for everywhere.
     await card(page, 'Proton').locator('button.expand').click();
+    await card(page, 'Proton').getByRole('tab', { name: 'Terms' }).click();
     await card(page, 'Netflix').locator('button.expand').click();
+    await card(page, 'Netflix').getByRole('tab', { name: 'Terms' }).click();
     await card(page, 'Netflix').locator('.policies li').first().waitFor();
     const disputes = (await policyRows(card(page, 'Proton'))).find((row) =>
       row.includes('| Disputes ('),

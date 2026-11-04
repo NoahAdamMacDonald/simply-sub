@@ -208,6 +208,8 @@ async function shoot(page, found, file) {
         );
         await shoot(page, found, 'policies-out-loading-light-1280.png');
         await axeCheck(page, 'light 1280, loading');
+        // The note shows on Overview while they load; the rated lines are on Terms (the owner's design, 2026-11-03).
+        await found.getByRole('tab', { name: 'Terms' }).click();
         await found.locator('.policies li').first().waitFor();
         const loaded = await terms(found);
         check(
@@ -232,6 +234,7 @@ async function shoot(page, found, file) {
         );
         await shoot(page, netflix, 'policies-out-loading-light-360.png');
         await axeCheck(page, 'light 360, loading');
+        await netflix.getByRole('tab', { name: 'Terms' }).click();
         await netflix.locator('.policies li').first().waitFor();
       } finally {
         await context.close();
@@ -250,6 +253,7 @@ async function shoot(page, found, file) {
         await sleep(2000);
         await context.setOffline(true);
         const found = await open(page, 'Proton');
+        await found.getByRole('tab', { name: 'Terms' }).click();
         await found.locator('.policies li').first().waitFor({ timeout: 10000 });
         const kept = await terms(found);
         check(
@@ -281,6 +285,7 @@ async function shoot(page, found, file) {
         await axeCheck(page, 'dark 360, offline');
 
         await context.setOffline(false);
+        await mullvad.getByRole('tab', { name: 'Terms' }).click();
         await mullvad.locator('.policies li').first().waitFor({ timeout: 10000 });
         await mullvad.locator('.policy-note').waitFor({ state: 'detached', timeout: 10000 });
         const back = await terms(mullvad);
