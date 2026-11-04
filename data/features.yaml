@@ -527,6 +527,22 @@
   category: ai
   type: boolean
   aliases: [image creation, text to image]
+# M11.15 (the owner's choice of 2026-11-04): the assistant in Gmail, Docs, Microsoft 365, Excel and the like, which
+# Claude's, ChatGPT's and Google AI's pages each state; and video generation, Google AI's paid plans' now, which the
+# creative category's providers fill in later.
+- id: ai.office-apps
+  parent: ai.assistant
+  name: Works in email and office apps
+  category: ai
+  type: boolean
+  aliases:
+    [office apps, gmail, google docs, google workspace, microsoft 365, excel, word, powerpoint]
+- id: ai.video-generation
+  parent: ai.assistant
+  name: Video generation
+  category: ai
+  type: boolean
+  aliases: [video creation, text to video]
 
 # ── Gaming (M11.9) ─────────────────────────────────────────────────────────────
 # What game subscriptions compare on, as Xbox Game Pass's and PlayStation Plus's pages state them (the owner's choice of

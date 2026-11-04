@@ -2081,6 +2081,18 @@ in every D1 `json` column search parses.
         test and the card's spec)
   - [x] Changed rates become a pull request's edits, the old ones in the account's history
 
+**M11.15 — The research** (the guide's §7)
+- **As built**, a category at a time:
+  - **AI** (2026-11-04): two features the owner chose, `ai.office-apps` (the assistant in email and office apps) and
+    `ai.video-generation`. Google AI (`google-ai`, Gemini's plans as Google sells them: Free, Plus, Plus (2 TB), Pro,
+    Ultra 5x and Ultra 20x, every catalog region), with Google's Terms of Service and Privacy Policy rated once as
+    shared documents (`data/policies/google-terms.yaml`, `google-privacy.yaml`) for the Google services that follow.
+    Claude's paid plans work in office apps; Proton Scribe moved from a perk to `ai.office-apps` (data/redirects.yaml).
+    ChatGPT follows in a pull request of its own, from pages the owner saves by hand.
+- **Acceptance**
+  - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
+        (AI: Google AI and Claude; ChatGPT to come)
+
 ---
 
 ## 3. Core rules every page uses

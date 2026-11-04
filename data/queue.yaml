@@ -135,14 +135,16 @@
   wikidata: Q116933
   sitelinks: 85
   status: queued
-- id: gemini
-  name: Gemini
+- id: google-ai
+  name: Google AI
   website: https://gemini.google.com
   category: ai
   source: wikidata
   wikidata: Q116698014
   sitelinks: 77
-  status: queued
+  status: done
+  date: 2026-11-04
+  note: Wikidata's Gemini, added as google-ai (the owner's choice of 2026-11-04), since Google sells Gemini's paid plans as Google AI plans
 - id: le-monde
   name: Le Monde
   website: https://www.lemonde.fr

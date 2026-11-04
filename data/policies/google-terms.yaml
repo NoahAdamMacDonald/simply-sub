@@ -1,0 +1,97 @@
+# A shared policy document (BLUEPRINT §4.10, M11.1): Google's Terms of Service, which cover every Google service a
+# Google Account uses (Google AI, and Google One, YouTube and the rest when they join the catalog), rated once here,
+# with Google's inactive account policy, which is Google-wide too. Each provider names it in its policies' shared and
+# adds ratings from its own additional terms (Google AI's: the Google One Additional Terms of Service).
+# Read 2026-11-04 (M11.15), from Canada: the terms' "Country version: Canada" (Google LLC). Effective July 30, 2026.
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: google-terms
+name: Google's Terms of Service
+links:
+  - name: 'Terms of service'
+    url: https://policies.google.com/terms
+  - name: 'Inactive account policy'
+    url: https://support.google.com/accounts/answer/12418290
+ratings:
+  - topic: legal.disputes
+    tier: good
+    reason: "There's no arbitration: disputes go to the courts of Santa Clara County, California, the ones it chose, unless your own country's law lets you use its courts."
+    sources:
+      - url: https://policies.google.com/terms
+        quote: 'These disputes will be resolved exclusively in the federal or state courts of Santa Clara County, California, USA, and you and Google consent to personal jurisdiction in those courts.'
+      - url: https://policies.google.com/terms
+        quote: 'To the extent that applicable local law prevents certain disputes from being resolved in a California court, then you can file those disputes in your local courts.'
+    lastVerified: 2026-11-04
+  - topic: legal.terms-changes
+    tier: neutral
+    reason: "It tells you ahead of a big change to its terms, but doesn't say how long ahead. If you don't agree, you can only stop using it."
+    sources:
+      - url: https://policies.google.com/terms
+        quote: 'we’ll provide you with reasonable advance notice and the opportunity to review the changes'
+      - url: https://policies.google.com/terms
+        quote: 'If you don’t agree to the new terms, you should remove your content and stop using the services.'
+    lastVerified: 2026-11-04
+  - topic: legal.account-closure
+    tier: good
+    reason: 'It closes or suspends an account only if you seriously or repeatedly break its rules, the law makes it, or you cause harm, and it warns you first when it can. You can appeal.'
+    sources:
+      - url: https://policies.google.com/terms
+        quote: 'you materially or repeatedly breach these terms, service-specific additional terms, or policies'
+      - url: https://policies.google.com/terms
+        quote: 'Before taking action as described below, we’ll provide you with advance notice when reasonably possible'
+    lastVerified: 2026-11-04
+  - topic: legal.content-rights
+    tier: poor
+    reason: 'Google may copy and change what you upload, and its licence lasts as long as copyright does: deleting something only stops Google making it public.'
+    sources:
+      - url: https://policies.google.com/terms
+        quote: 'modify and create derivative works based on your content, such as reformatting or translating it'
+      - url: https://policies.google.com/terms
+        quote: 'This license lasts for as long as your content is protected by intellectual property rights.'
+      - url: https://policies.google.com/terms
+        quote: 'If you remove from our services any content that’s covered by this license, then our systems will stop making that content publicly available in a reasonable amount of time.'
+    lastVerified: 2026-11-04
+  - topic: legal.service-changes
+    tier: neutral
+    reason: 'It can add or remove features and change its limits, and gives reasonable notice before a change that hurts you or before it stops a service, with time to save your content.'
+    sources:
+      - url: https://policies.google.com/terms
+        quote: 'we sometimes add or remove features and functionalities, increase or decrease limits to our services, and start offering new services or stop offering old ones.'
+      - url: https://policies.google.com/terms
+        quote: 'If we make material changes that negatively impact your use of our services or if we stop offering a service, we’ll provide you with reasonable advance notice'
+    lastVerified: 2026-11-04
+  - topic: legal.inactivity
+    tier: good
+    reason: 'It may delete an account no one has used for two years, after emailing you first. An account with a subscription that is still running counts as in use.'
+    sources:
+      - url: https://support.google.com/accounts/answer/12418290
+        quote: 'Google reserves the right to delete an inactive Google Account and its activity and data if you are inactive across Google for at least two years.'
+      - url: https://support.google.com/accounts/answer/12418290
+        quote: 'Your Google Account was used to make a purchase of a Google product, app, service, or subscription that is current or ongoing.'
+      - url: https://support.google.com/accounts/answer/12418290
+        quote: 'Email notifications to your Google Account'
+    lastVerified: 2026-11-04
+  - topic: legal.output-rights
+    tier: good
+    reason: "What its AI makes for you is yours: Google won't claim to own it."
+    sources:
+      - url: https://policies.google.com/terms
+        quote: 'Some of our services allow you to generate original content. Google won’t claim ownership over that content.'
+    lastVerified: 2026-11-04
+  - topic: legal.licence
+    tier: neutral
+    reason: 'Its apps are licensed to you alone. You may not copy, change, sell or lease them, or use what its AI makes to build another AI.'
+    sources:
+      - url: https://policies.google.com/terms
+        quote: 'personal, which means it doesn’t extend to anyone else'
+      - url: https://policies.google.com/terms
+        quote: 'You may not copy, modify, distribute, sell, or lease any part of our services or software.'
+      - url: https://policies.google.com/terms
+        quote: 'using AI-generated content from our services to develop machine learning models or related AI technology'
+    lastVerified: 2026-11-04
+  - topic: service.software-control
+    tier: good
+    reason: "Its apps may update themselves when a new version is out, and some let you turn that off. Its terms don't say they change anything else on your device."
+    sources:
+      - url: https://policies.google.com/terms
+        quote: 'When a service requires or includes downloadable or preloaded software, that software sometimes updates automatically on your device once a new version or feature is available. Some services let you adjust your automatic update settings.'
+    lastVerified: 2026-11-04

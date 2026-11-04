@@ -282,6 +282,11 @@ which reads each page as a visitor there would, before any hand reading:
   report the page as unread.
 - **Plan tabs** (TSN, RDS): Monthly, 3 Months, Annual and Bundles are tabs (`click:3 Months`); a plan missing
   from a tab isn't sold for that period. Their terms renew every period except in Quebec, monthly there: a note.
+- **Google's plans** (Google AI, M11.15): each country's Gemini page (`gemini.google/<country>/subscriptions/?hl=<lang>`)
+  shows that country's monthly prices to anyone. Google One's plans page (`one.google.com/about/plans`), the only one
+  with Plus (2 TB) and the Annual tab (`click:Annual`, not a role="tab"), prices by where the visitor is, whatever its
+  address says (`gl=US` still showed CA$): another country's prices there are another country's pages, so ask the
+  owner. A page in the wrong country's currency doesn't count.
 
 - **Element-screenshot overlap:** sticky headers and skip links can overlap an element screenshot. Trust the
   full-page snap.

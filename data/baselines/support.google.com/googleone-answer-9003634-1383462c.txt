@@ -1,0 +1,177 @@
+url: https://support.google.com/googleone/answer/9003634
+method: fetch
+saved: 2026-11-04
+
+Change your card & fix payment issues - Computer - Google One Help Skip to main content
+Google One Help
+Sign in
+Google Help
+Help Center
+Community
+Google One
+Privacy Policy
+Terms of Service
+Submit feedback
+Send feedback on...
+This help content & information
+General Help Center experience
+Close Next
+Help Center
+Community
+Google One
+Change your card & fix payment issues
+If you have issues with Google One payments, try these solutions. You can also update your Google One payment methods.
+If you're ever locked out of your Google Account, recovery options can help you get back in. Learn more about account recovery.
+Change the card you use
+You can edit the credit card you use for your Google One membership. If you want to change how much you pay, change your storage plan.
+On your computer, go to Google One.
+Click Settings .
+Click Change payment method.
+In Google Play, on the left, click My subscriptions.
+Next to "Google One," click Manage.
+Next to "Primary payment method," click Update.
+Select an option and follow the steps on the screen.
+Learn how it works
+How to update your payment method on Google One | Computer
+For this same video with audio descriptions: How to update your payment method on Google One.
+Get help buying a Google One subscription
+If you had difficulty signing up for Google One for the first time, you can ask a Google Expert to help you.
+Fix issues with payments
+If you find errors when you make transactions, try these troubleshooting steps.
+Fix a declined payment
+Sign in to Google Pay.
+Click Update payment method information.
+Choose a payment method.
+Click Continue.
+Fill out new payment method.
+Tip: Declined payments are sometimes caused by expired cards. If your card has expired, you can update the expiration date or add a new payment method.
+Change, update, or add payment method
+If you recently added a new credit card, you may have to update the information on your account.
+Go to Google Pay.
+Click Payment methods.
+Next to the card you want to edit, click Edit.
+Enter the expiration date and CVC found on the card.
+Make sure your billing address is correct.
+Click Save.
+Add another payment method
+Sign in to Google Pay.
+Click Payment methods.
+Click Add payment method.
+Choose a payment method:
+Add new credit or debit card
+Add a bank account
+Follow the steps to add your payment method.
+If your Google One membership is billed through a third-party partner, learn how to make changes to your Google One plan.
+Make sure your payment method is supported
+Credit card
+Bank account (US only)
+PayPal
+Google Play balance (Selected countries/regions only)
+Check the list of countries that supports Play balance as a payment method for subscriptions.
+Contact your credit card provider
+If your credit card information is correct but your payment won't go through, contact your credit card provider.
+They may have more information on why your credit card can't be charged.
+Unauthorized charge
+Learn how to report unauthorized charges.
+If someone in your family made an unauthorized charge, you can also limit what they can buy.
+Can't get into your account
+Sometimes, to finish transactions, you need to verify your identity.
+If you can't sign in to your Google Account, get help.
+Regional restrictions
+If you can’t pay for Google One because of regional restrictions or other banking issues in your country/region, learn what to do.
+Find purchases by family members
+The family manager can find all the purchases made with the family payment method. Learn how to find your family's purchases.
+The Google One plan manager can be a different person than your family manager. If so, the Google One plan manager can't find purchases made with the family payment method.
+Related resources
+Purchase, cancellation & refund policies
+Dispute, report, or cancel a payment
+Cancel your Google One membership
+Set up recovery options for your Google Account & get sign-in help
+Computer Android phone & tabletiPhone & iPad More
+Need more help?
+Try these next steps:
+Post to the help community Get answers from community members
+true
+Help
+1 of 12
+Change your card & fix payment issues
+2 of 12
+Claim Google One benefits
+3 of 12
+Use a family payment method on Google Play
+4 of 12
+Cancel your Google One membership
+5 of 12
+Learn about Google One trials
+6 of 12
+Purchase, cancellation & refund policies
+7 of 12
+Dispute, report, or cancel a payment
+8 of 12
+Learn about third-party Google One subscriptions
+9 of 12
+Get help with payment issues for Google One storage
+10 of 12
+Find your Google purchase history
+11 of 12
+Find your purchases, reservations & subscriptions
+12 of 12
+Change your credit card
+©2026 Google Privacy Policy
+Terms of Service
+Language català&lrm; dansk&lrm; Deutsch&lrm; eesti&lrm; English (United Kingdom)&lrm; español&lrm; español (Latinoamérica)&lrm; Filipino&lrm; français&lrm; hrvatski&lrm; Indonesia&lrm; italiano&lrm; latviešu&lrm; lietuvių&lrm; magyar&lrm; Melayu&lrm; Nederlands&lrm; norsk&lrm; polski&lrm; português&lrm; português (Brasil)&lrm; română&lrm; slovenčina&lrm; slovenščina&lrm; suomi&lrm; svenska&lrm; Tiếng Việt&lrm; Türkçe&lrm; čeština&lrm; Ελληνικά&lrm; български&lrm; русский&lrm; српски&lrm; українська&lrm; &rlm;עברית &rlm;العربية &rlm;فارسی मराठी&lrm; हिन्दी&lrm; తెలుగు&lrm; ไทย&lrm; 中文（简体）&lrm; 中文（繁體）&lrm; 中文（香港）&lrm; 日本語&lrm; 한국어&lrm; English&lrm; Enable Dark Mode
+Send feedback on...
+This help content & information General Help Center experience
+Search
+Clear search
+Close search
+Google apps
+Main menu
+8461275543674987686
+true
+Search Help Center
+false
+true
+true
+true
+true
+true
+5044059
+function RLa(a){a.o=!0;a.Ja()}
+function SLa(a,b){a.filled=b;a.Ja()}
+function TLa(a){if(!a.description)throw Error("Description is required for making a headless API submission.");return new ua.Promise(function(b){Rw(Pa({},a,{flow:"submit",disableSubmit:!1,onClose:b}))})}
+function ULa(a){return new ua.Promise(function(b){Rw(Pa({},a,{flow:"submit",disableSubmit:!0,reportDataCallback:b}))})}
+;var GJ=new um,VLa="By continuing, you agree Google uses your answers, "+wm(GJ,"a",{"class":"info-link",tabindex:"0"})+"account & system info"+ym(GJ,"a")+" to improve services, per our "+wm(GJ,"a",{"class":"privacy-link",tabindex:"0"})+"Privacy"+ym(GJ,"a")+" & "+wm(GJ,"a",{"class":"tos-link",tabindex:"0"})+"Terms"+ym(GJ,"a")+".",WLa=GJ.format(VLa);var HJ=[{id:"inaccurate",value:"Inaccurate - doesn't match what I see in the product"},{id:"hard_to_understand",value:"Hard to understand - unclear or translation is wrong"},{id:"information_gaps",value:"Missing info - relevant but not comprehensive"},{id:"irrelevant",value:"Irrelevant - doesn\u2019t match the title and / or my expectations"},{id:"minor_errors",value:"Minor errors - formatting issues, typos, and / or broken links"},{id:"other_suggestions",value:"Other suggestions - ideas to improve the content",
+jP:!0}];function IJ(a,b,d){var e=a.getBoundingClientRect(),f=e.left,h=e.width;d=XLa(d).map(function(k){return Math.round(f+h*k)}).map(function(k){return document.elementFromPoint(k,b)}).filter(function(k){return k!==null&&k!==a}).filter(function(k){return JJ(k)});
+return YLa(new ua.Set(d))}
+function XLa(a){a =b&&f>=0&&e<=window.innerHeight&&h<=window.innerWidth||a.scrollIntoView(!1)}
+;function KJ(a){var b=a.model;var d=a.zD;var e=a.Wo;var f=a.Hr;var h=a.Uj;var k=a.OH;var l=a.QH;a=a.track;E.call(this,"sc.client.feedback.inline.a11y_navigator.HiddenMenu");this.menuItems=[];this.ma=new ua.Map;this.o=0;this.model=b;this.zD=d;this.Wo=e;this.Hr=f;this.Uj=h;this.OH=k;this.QH=l;this.track=a}
+v(KJ,E);function LJ(a){a.o=0;var b;(b=a.menuItems[a.o])==null||b.button.focus()}
+function eMa(a){a.o=a.menuItems.length-1;var b;(b=a.menuItems[a.o])==null||b.button.focus()}
+KJ.prototype.wx=function(){var a=this.menuItems[this.o];a&&a.button.focus()};
+KJ.prototype.content=function(){var a=this;this.element.apply(this,["div","role","menu","aria-labelledby",this.zD,"class","hidden-menu"].concat(Ha(MJ(this.model)?[]:["onkeydown",function(b){a:{switch(b.key){case "ArrowUp":if(a.o===0)eMa(a);else{a.o--;var d;(d=a.menuItems[a.o])==null||d.button.focus()}if(a.model.Pf.o){var e;(e=a.track)==null||NJ(e)}break;case "ArrowDown":if(a.o===a.menuItems.length-1)LJ(a);else{a.o++;var f;(f=a.menuItems[a.o])==null||f.button.focus()}if(a.model.Pf.o){var h;(h=a.track)==
+null||NJ(h)}break;case "End":eMa(a);break;case "Home":LJ(a);break;default:break a}b.preventDefault();b.stopPropagation()}}]),[function(){var b=a.Uj.getBoundingClientRect();
+a.menuItems.length=0;var d=x(a.Wo.elements),e=d.next();try{for(;!e.done;e=d.next()){var f=e.value;if(f instanceof HTMLElement){var h=a.Hr.get(f);h&&fMa(a,b,f,h)}}}finally{Ma(d,e)}}]))};
+function fMa(a,b,d,e){var f=gMa(b,d);b=f.offsetTop;f=f.offsetLeft;var h=d.getBoundingClientRect();b=a.element("button","class","feedback-button","role","menu-item","tabIndex","-1","aria-description","Give feedback on the selected section.","aria-expanded","false","style",{top:b+"px",left:f+"px",width:h.width+"px",height:h.height+"px"},"onclick",function(k){a.OH(d,k.target)},"onfocus",function(k){var l;
+(l=a.QH)==null||l.call(a,d,k.target)});
+e.tagName==="IMG"?b.appendChild(e):b.textContent=e.textContent;a.menuItems.push({button:b,aya:d});a.ma.set(d,b)}
+function gMa(a,b){var d=a.top;a=a.left;b=b.getBoundingClientRect();return{offsetTop:b.top-d,offsetLeft:b.left-a}}
+;function OJ(a){this.tb=a;this.elements=new ua.Set;this.rows=[]}
+OJ.prototype.add=function(a){this.elements.add(a)};
+function hMa(a){var b=a.tb.getBoundingClientRect().top,d=x(a.elements),e=d.next();try{for(;!e.done;e=d.next()){var f=e.value,h=f.getBoundingClientRect().top-b,k=Math.floor(h/4);a.rows[k]=a.rows[k]||new ua.Set;a.rows[k].add(f)}}finally{Ma(d,e)}a.clear();b=x(a.rows);d=b.next();try{for(;!d.done;d=b.next()){var l=d.value;if(l){var p=x(YLa(l)),r=p.next();try{for(;!r.done;r=p.next())a.elements.add(r.value)}finally{Ma(p,r)}}}}finally{Ma(b,d)}}
+OJ.prototype.clear=function(){this.elements.clear()};var iMa={yB:function(a){return a}};var jMa=new ua.Map([[1,"inline_feedback_event_submitted"],[2,"inline_feedback_event_failed_submit"]]);function PJ(a){a=(a===void 0?{}:a).categories;a=a===void 0?HJ:a;No.call(this);this.oa=[];this.text="";this.o=this.ma=!1;this.categories=a}
+v(PJ,No);n=PJ.prototype;n.getCategories=function(){return this.categories};
+function kMa(a){return{category:a.Lc(),text:a.getText().trim()}}
+n.getText=function(){return this.text};
+n.setText=function(a){a!==this.text&&(this.text=a,this.Fa(0))};
+n.Lc=function(){return this.category};
+function lMa(a,b){a.oa=b;a.Fa(2)}
+function QJ(a,b){b!==a.ma&&(a.ma=b,a.Fa(3))}
+function RJ(a,b){b!==a.o&&(a.o=b,a.Fa(4))}
+n.submit=function(){this.Fa(5)};
+n.cancel=function(){this.Fa(6)};function SJ(){No.call(this);this.visibility=!1;this.cornerPosition={x:0,y:0}}
+v(SJ,No);SJ.prototype.getVisibility=function(){return this.visibility};
+SJ.prototype.setVisibility=function(a){this.visibility!==a&&(this.visibility=a,this.Fa(0))};function mMa(a){var b=a.kh;var d=a.lk;a=a.jk;No.call(this);this.ma=!1;this.oa=0;this.o=!1;this.kh=b;this.lk=d;this.jk=a}
+v(mMa,No);function TJ(a,b){a.ma!==b&&(a.ma=b,a.Fa(0))}
+function UJ(a,b){a.oa!==b&&(a.oa=b,a.Fa(1))}
+;function VJ(a,b){switch(a){case "ABANDON_DEFAULT_FLOW":var d=84;var e=9;break;case "ABANDON_CATEGORY_SELECTOR":d=83;e=9;break;case "ABANDON_KEYBOARD_MODE":d=92;e=9;break;case "COMPLETE_FLOW":d=84;e=15;break;case "FAB_IMPRESSION":d=85;e=4;break;case "OPEN_CATEGORY_SELECTOR":d=83;e=18;break;case "OPEN_CATEGORY_SELECTOR_KEYBOARD_MODE":d=91;e=18;break;case "OPEN_DEFAULT_FLOW":d=84;e=18;break;case "OPEN_KEYBOARD_MODE":d=92;e=18;break;case "SELECT_CATEGORY":d=83;e=8
