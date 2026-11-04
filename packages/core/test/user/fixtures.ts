@@ -64,6 +64,18 @@ export const draft = {
   startedAt: '2026-10-21T08:00:00.000Z',
 };
 
+/** A finance account item's own figures (M11.11), with every fact. */
+export const itemAccount = {
+  balance: { amount: 4250.5, currency: 'CAD' },
+  asOf: '2026-11-01',
+  directDeposit: 2000,
+  monthlyDeposits: 2500,
+  assetsHeld: 12_000,
+  born: '1990-06',
+  student: true,
+  newcomer: true,
+};
+
 export const limitedBilling = {
   mode: 'limited',
   windows: [{ start: '2026-09-02', end: '2026-11-01', repeatYearly: true }],

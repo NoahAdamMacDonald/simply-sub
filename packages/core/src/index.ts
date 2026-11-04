@@ -141,6 +141,7 @@ export * from './search/search-providers';
 export * from './tax/charge-tax';
 export * from './tax/sales-tax-rate';
 export * from './tax/subdivisions';
+export * from './user/account-facts';
 export * from './user/add-request';
 export * from './user/app-lock';
 export * from './user/backup';

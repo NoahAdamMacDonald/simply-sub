@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { listItemSchema } from '../../src';
 import { issues, withValue } from '../catalog/helpers';
-import { customPlanId, customSubId, item, limitedBilling } from './fixtures';
+import { customPlanId, customSubId, item, itemAccount, limitedBilling } from './fixtures';
 
 const recurring = (changes: Record<string, unknown>) =>
   withValue(item, ['billing'], { ...item.billing, ...changes });
@@ -50,9 +50,12 @@ describe('listItemSchema', () => {
       ['on an add-on', ['source', 'addOns', 0, 'price']],
       ['on the billing', ['billing', 'nextDate']],
       ['on the price override', ['priceOverride', 'from']],
+      ['on the account', ['account', 'waiverIds']],
+      ['on the balance', ['account', 'balance', 'asOf']],
     ])('are rejected %s', (_where, path) => {
       const prefix = path.slice(0, -1).join('.');
-      expect(issues(listItemSchema, withValue(item, path, 'x'))).toEqual([
+      const withAccount = { ...item, account: itemAccount };
+      expect(issues(listItemSchema, withValue(withAccount, path, 'x'))).toEqual([
         `${prefix}: Unrecognized key: "${path.at(-1)}"`,
       ]);
     });
@@ -237,6 +240,44 @@ describe('listItemSchema', () => {
       const key = withValue(item, ['rankOverrides', 'Video Quality'], 'wanted');
       expect(issues(listItemSchema, key)).toHaveLength(1);
     });
+  });
+});
+
+describe('listItemSchema: account (M11.11)', () => {
+  const account = (changes: Record<string, unknown>) => ({
+    ...item,
+    account: { ...itemAccount, ...changes },
+  });
+
+  it('accepts a balance with every fact and returns it unchanged', () => {
+    expect(listItemSchema.parse(account({}))).toEqual(account({}));
+  });
+
+  it('accepts a balance of 0 without facts', () => {
+    const balance = { balance: { amount: 0, currency: 'USD' }, asOf: '2026-11-01' };
+    expect(issues(listItemSchema, { ...item, account: balance })).toEqual([]);
+  });
+
+  it.each([
+    [{ balance: { amount: -1, currency: 'CAD' } }, 'account.balance.amount: Must be 0 or more'],
+    [{ directDeposit: -0.01 }, 'account.directDeposit: Must be 0 or more'],
+    [{ monthlyDeposits: -5 }, 'account.monthlyDeposits: Must be 0 or more'],
+    [{ assetsHeld: -5 }, 'account.assetsHeld: Must be 0 or more'],
+    [{ born: '1990-13' }, 'account.born: Use the year and month, YYYY-MM'],
+    [{ born: '1990-06-15' }, 'account.born: Use the year and month, YYYY-MM'],
+    [{ asOf: '2026-11-31' }, 'account.asOf: Use a real date written YYYY-MM-DD'],
+  ])('refuses %j', (changes, issue) => {
+    expect(issues(listItemSchema, account(changes))).toEqual([issue]);
+  });
+
+  it.each([
+    ['without a balance', { balance: undefined }],
+    ['without its date', { asOf: undefined }],
+    ['in a currency that isn’t ISO 4217', { balance: { amount: 10, currency: '$' } }],
+    ['with student false', { student: false }],
+    ['with newcomer false', { newcomer: false }],
+  ])('refuses one %s', (_name, changes) => {
+    expect(issues(listItemSchema, account(changes))).toHaveLength(1);
   });
 });
 
