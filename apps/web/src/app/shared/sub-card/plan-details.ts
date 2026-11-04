@@ -35,6 +35,7 @@ import { PolicyFiles } from '../../core/catalog/policy-files';
 import { ClockService } from '../../core/clock/clock-service';
 import { FxStore } from '../../core/fx/fx-store';
 import { SettingsStore } from '../../core/settings/settings-store';
+import { AccountTerms } from '../account-terms/account-terms';
 import type { AddToListMenu } from '../add-to-list/add-to-list-menu';
 import { countryName } from '../country-name';
 import { dateText, monthText } from '../date-text';
@@ -92,7 +93,16 @@ const groupNames: Record<PolicyGroup, string> = {
  */
 @Component({
   selector: 'ss-plan-details',
-  imports: [FeatureList, MatButton, MatIcon, MatTooltip, NgTemplateOutlet, PriceTag, ProviderIcon],
+  imports: [
+    AccountTerms,
+    FeatureList,
+    MatButton,
+    MatIcon,
+    MatTooltip,
+    NgTemplateOutlet,
+    PriceTag,
+    ProviderIcon,
+  ],
   templateUrl: './plan-details.html',
   styleUrl: './plan-details.scss',
   host: { '(window:online)': 'retryPolicies()' },
@@ -213,6 +223,8 @@ export class PlanDetails {
       cited: citedFact(entry),
     }));
   });
+  /** The user's country, for how an account's money is written (M11.10). */
+  protected readonly countryCode = computed(() => this.settings.saved()?.country);
   /** The day it renews on (M11.5), citing its page, or that its pages don't say. */
   protected readonly renewal = computed((): { text: string; cited?: CitedFact } | undefined => {
     const anchor = this.provider().renewalAnchor;

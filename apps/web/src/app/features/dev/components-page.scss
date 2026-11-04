@@ -187,3 +187,20 @@ th[scope='row'] {
     border-radius: var(--ss-radius-card);
   }
 }
+
+// ss-account-terms (M11.10): each fixture account in a box, as a card's group.
+.account-card {
+  max-width: 480px;
+  padding: 12px 16px;
+  border: 1px solid var(--ss-divider);
+  border-radius: 12px;
+
+  & + .account-card {
+    margin-top: 12px;
+  }
+
+  h3 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+  }
+}

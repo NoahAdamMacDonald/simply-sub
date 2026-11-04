@@ -282,3 +282,13 @@
     <button matButton="outlined" type="button" (click)="confirm(true)">Ask before deleting</button>
   </div>
 </section>
+
+<section aria-labelledby="account-heading">
+  <h2 id="account-heading">ss-account-terms</h2>
+  @for (entry of accounts; track entry.name) {
+    <div class="account-card">
+      <h3>{{ entry.name }}</h3>
+      <ss-account-terms [account]="entry.account" country="CA" />
+    </div>
+  }
+</section>

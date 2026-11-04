@@ -14,6 +14,7 @@ import {
   type ListItem,
 } from '../../src';
 import { catalog, edited } from '../catalog/catalog-files';
+import { bank, fintech, withFinance } from '../catalog/finance-files';
 
 // The fixture catalog (catalog-files.ts): Netflix (CA and US prices, Premium in the US only), Crave (CA only), Mullvad
 // VPN (one GLOBAL EUR price) and Proton (GLOBAL prices, a free plan, Duo in USD only), as the app reads it: the file
@@ -460,5 +461,22 @@ describe('searchCatalog', () => {
         cards(search({})).map(([id]) => id),
       );
     });
+  });
+});
+
+describe('searchCatalog, for finance accounts (M11.10)', () => {
+  const finance = { ...ontario, catalog: regionData('CA', withFinance([bank, fintech])) };
+
+  it('filters for a TFSA and for fractional shares, showing the plan that has them', () => {
+    expect(
+      cards(searchCatalog({ features: ['finance.registered-accounts=tfsa'] }, finance)),
+    ).toEqual([['example-fintech', 'example-fintech.everything', ['example-fintech.everything']]]);
+    expect(cards(searchCatalog({ features: ['finance.fractional-shares'] }, finance))).toEqual([
+      ['example-fintech', 'example-fintech.everything', ['example-fintech.everything']],
+    ]);
+    // The bank's free e-Transfers find it, and no other provider.
+    expect(
+      cards(searchCatalog({ features: ['finance.e-transfer'] }, finance)).map(([id]) => id),
+    ).toEqual(['example-bank']);
   });
 });

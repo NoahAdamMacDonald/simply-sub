@@ -19,6 +19,7 @@ import {
   type RankCounts as Counts,
   type RankKey,
   type Tag,
+  type Account,
 } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
 import { ClockService } from '../../core/clock/clock-service';
@@ -26,6 +27,7 @@ import { FxStore } from '../../core/fx/fx-store';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { ItemsRepository } from '../../core/storage/items-repository';
 import { TagsRepository } from '../../core/storage/tags-repository';
+import { AccountTerms } from '../../shared/account-terms/account-terms';
 import { BudgetBar } from '../../shared/budget-bar/budget-bar';
 import { ConfirmService } from '../../shared/confirm/confirm-service';
 import { EmptyState } from '../../shared/empty-state/empty-state';
@@ -166,6 +168,7 @@ const presetTags: Tag[] = tagColorPresets.map(({ name, color }, index) => ({
 @Component({
   selector: 'ss-components-page',
   imports: [
+    AccountTerms,
     BudgetBar,
     EmptyState,
     FeatureList,
@@ -193,6 +196,53 @@ const presetTags: Tag[] = tagColorPresets.map(({ name, color }, index) => ({
   styleUrl: './components-page.scss',
 })
 export class ComponentsPage {
+  /** M11.10's two fixture accounts, as core's tests have them: a bank's fee a balance waives, a fintech's paid rate. */
+  protected readonly accounts: { name: string; account: Account }[] = [
+    {
+      name: 'Example Bank Unlimited Chequing',
+      account: {
+        kind: 'chequing',
+        currency: 'CAD',
+        waivers: [{ minBalance: 4000 }, { student: true }],
+        limits: { eTransfer: { day: 3000, week: 10_000 }, debits: 25 },
+        protection: {
+          insurer: 'cdic',
+          held: 'own-name',
+          limit: 100_000,
+          url: 'https://example.com/deposit-insurance',
+          quotes: ['Your eligible deposits are protected by CDIC.'],
+          lastVerified: '2026-11-03',
+        },
+      },
+    },
+    {
+      name: 'Example Fintech Everything',
+      account: {
+        kind: 'savings',
+        currency: 'CAD',
+        rates: {
+          follows: 'boc-overnight',
+          applies: 'portion',
+          tiers: [
+            { from: 0, rate: 3.5 },
+            { from: 50_000, rate: 2 },
+          ],
+          bonus: { rate: 4, when: { directDeposit: 2000 } },
+          sourceUrl: 'https://example.com/rates',
+          lastVerified: '2026-11-03',
+        },
+        protection: {
+          insurer: 'cdic',
+          held: 'trust',
+          url: 'https://example.com/protection',
+          quotes: ['Your money is held in trust at CDIC member institutions.'],
+          lastVerified: '2026-11-03',
+        },
+        eligibility: { minAssets: 100_000 },
+      },
+    },
+  ];
+
   private readonly settings = inject(SettingsStore);
   private readonly catalog = inject(CatalogStore);
   private readonly fx = inject(FxStore);

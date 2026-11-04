@@ -1,0 +1,36 @@
+// A finance account's terms (M11.10): a card group's lines, as its facts' (Owner, Billing day) look.
+:host {
+  display: block;
+}
+
+.terms {
+  margin: 0;
+  padding: 0;
+  color: var(--ss-text-muted);
+  list-style: none;
+
+  li + li {
+    margin-top: 4px;
+  }
+}
+
+.subject {
+  font-weight: 600;
+}
+
+.outside-link {
+  border-radius: 4px;
+  color: var(--ss-accent-text);
+
+  mat-icon {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+    vertical-align: text-bottom;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 2px;
+  }
+}

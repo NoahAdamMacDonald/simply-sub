@@ -642,6 +642,13 @@ With axe, screenshots and no horizontal scroll. Since M11.1 `check-search.cjs` f
 of Cancelling and refunds), expects its six groups and seven sources, and checks text fragments on graded lines'
 citations only.
 
+`check-m11-accounts.cjs` (M11.10, finance accounts) checks `ss-account-terms` on the `/dev/components` gallery
+(`ng serve` only: no real finance provider is in the catalog before M11.15) for a Canadian in Ontario, in both themes
+at both widths: the two fixture accounts' lines, their posted-rates and protection links (the second scrolled to its
+words), Tab to the protection link with the provider's words as its tooltip, the lines muted with bold subjects, axe
+on the section, screenshots and no horizontal scroll. GET /fx is answered with fixed rates, as `check-components.cjs`
+does.
+
 `check-m11-outside.cjs` (M11.2, outside ratings and owners) checks Search's cards on `ng serve` for a Canadian in
 Alberta (base URL ending in `/`, after `npm run data:build` on the branch), in both themes at both widths: Bitdefender's
 Outside ratings right after Terms and policies (AV-TEST's Protection, Performance and Usability, each "6.0/6.0 from
