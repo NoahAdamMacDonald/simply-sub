@@ -649,6 +649,17 @@ words), Tab to the protection link with the provider's words as its tooltip, the
 on the section, screenshots and no horizontal scroll. GET /fx is answered with fixed rates, as `check-components.cjs`
 does.
 
+`check-m11-balances.cjs` (M11.11, balances) checks an account plan's item on `ng serve` for a Canadian in Ontario, in
+both themes at both widths, keyboard only. No real finance provider is in the catalog before M11.15, so it answers the
+CA file with a fixture bank added (and the finance categories), whose waivers need a direct deposit, a month of birth
+and being a student. `/lists/new?add=example-bank.unlimited` opens the item dialog: its Account section's note, Balance
+in CAD and only those facts; Add with a direct deposit and no balance says why at Balance, with focus there; then a
+balance ("As of today"), the month of birth (Edge's month field takes 5, → and 2003: typing "05" doesn't move on to
+the year) and Student with Space. Saved with the list, List view's Export starts with "Include balances", a menu
+checkbox that Space ticks with the menu still open: the CSV has no balance before, and ends with it after. Axe on the
+dialog and the open menu, screenshots and no horizontal scroll. Wait for focus on the dialog's title before tabbing:
+keys pressed while it opens land elsewhere.
+
 `check-m11-outside.cjs` (M11.2, outside ratings and owners) checks Search's cards on `ng serve` for a Canadian in
 Alberta (base URL ending in `/`, after `npm run data:build` on the branch), in both themes at both widths: Bitdefender's
 Outside ratings right after Terms and policies (AV-TEST's Protection, Performance and Usability, each "6.0/6.0 from
