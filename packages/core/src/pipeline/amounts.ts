@@ -66,6 +66,44 @@ export function sameCurrency(written: string | undefined, wanted: string): boole
   return written === 'dollar' && /^(?:CAD|USD|AUD|NZD|SGD|HKD|MXN)$/.test(wanted);
 }
 
+/** A rate on a page (M11.14): a number with % after it, "2.25%" or "2,25 %", in percent. */
+export interface RateMention {
+  rate: number;
+  index: number;
+}
+
+/** Every rate the text writes, in order. */
+export function ratesIn(text: string): RateMention[] {
+  return [...text.matchAll(/(?<![\d.,])(\d{1,2}(?:[.,]\d{1,4})?)\s?%/g)].map((match) => ({
+    rate: Number(match[1].replace(',', '.')),
+    index: match.index,
+  }));
+}
+
+/** Whether two rates are the same to the thousandth of a point. */
+export function sameRate(a: number, b: number): boolean {
+  return Math.round(a * 1000) === Math.round(b * 1000);
+}
+
+/**
+ * Whether the page still shows `rate` percent for something it names `names`, as pageShows does a price: within
+ * `radius` characters of one of the names, or anywhere when the page names none of them.
+ */
+export function pageShowsRate(
+  text: string,
+  rate: number,
+  names: readonly string[],
+  radius = 500,
+): boolean {
+  const mentions = ratesIn(text).filter((mention) => sameRate(mention.rate, rate));
+  if (mentions.length === 0) return false;
+  const named = nameIndexes(text, names);
+  if (named.length === 0) return true;
+  return mentions.some((mention) =>
+    named.some((index) => Math.abs(index - mention.index) <= radius),
+  );
+}
+
 /** Whether two amounts are the same to the cent. */
 export function sameAmount(a: number, b: number): boolean {
   return Math.round(a * 100) === Math.round(b * 100);

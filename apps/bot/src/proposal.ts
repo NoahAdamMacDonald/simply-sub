@@ -1,9 +1,12 @@
-import { daysBetween } from '@simply-sub/core';
-import { priceText } from './targets';
-import type { Finding, PriceTarget } from './types';
+import { bankOfCanadaSeriesUrl, daysBetween } from '@simply-sub/core';
+import { priceText, tiersText } from './targets';
+import type { Finding, PriceTarget, RateTarget } from './types';
 import {
+  withBankChanges,
   withLastVerified,
   withPrice,
+  withRates,
+  withRatesLastVerified,
   withoutAcceptedNetworks,
   withoutReseller,
   withoutTaxIncluded,
@@ -15,6 +18,9 @@ import {
 
 /** A price confirmed this long after it was last verified gets today's date (the user's choice in M8.3). */
 export const confirmAfterDays = 30;
+
+/** The Bank of Canada's changes, in the repository (M11.14). */
+export const bankOfCanadaFile = 'data/bank-of-canada.yaml';
 
 export interface FileChange {
   path: string;
@@ -39,6 +45,10 @@ export function filesToRead(findings: readonly Finding[], today: string): string
       paths.add(finding.target.file);
     if (finding.kind === 'reseller') paths.add(finding.approval.file);
     if (finding.kind === 'networks' && finding.missing.length > 0) paths.add(finding.target.file);
+    if (finding.kind === 'rates-changed') paths.add(finding.target.file);
+    if (finding.kind === 'rates-confirmed' && ratesStale(finding.target, today))
+      paths.add(finding.target.file);
+    if (finding.kind === 'bank-of-canada') paths.add(bankOfCanadaFile);
   }
   return [...paths].sort();
 }
@@ -63,6 +73,8 @@ export function proposal(
   };
   const changes: FileChange[] = [];
   const rows: string[] = [];
+  const rateRows: string[] = [];
+  const bank: string[] = [];
   const review: string[] = [];
   const logos: string[] = [];
   const manual: string[] = [];
@@ -138,6 +150,44 @@ export function proposal(
         }
         break;
       }
+      case 'rates-changed': {
+        const { target } = finding;
+        if (
+          edit(target.file, (text) => withRates(text, target.planId, finding.tiers, today), finding)
+        ) {
+          rateRows.push(
+            `| ${cell(target.label)} | ${tiersText(target.rates.tiers)} | ${tiersText(finding.tiers)} | ${link(target.rates.sourceUrl)} |`,
+          );
+        }
+        break;
+      }
+      case 'rates-confirmed':
+        confirmed++;
+        if (
+          ratesStale(finding.target, today) &&
+          edit(
+            finding.target.file,
+            (text) => withRatesLastVerified(text, finding.target.planId, today),
+            finding,
+          )
+        ) {
+          bumped++;
+        }
+        break;
+      case 'bank-of-canada':
+        if (
+          edit(bankOfCanadaFile, (text) => withBankChanges(text, finding.changes, today), finding)
+        ) {
+          bank.push(
+            ...[...finding.changes]
+              .sort((a, b) => (a.on < b.on ? -1 : 1))
+              .map(
+                (change) =>
+                  `- From ${change.on}: ${change.rate.toFixed(2)}%, its first day in ${link(bankOfCanadaSeriesUrl)}.`,
+              ),
+          );
+        }
+        break;
       case 'logo':
         changes.push({ path: `data/logos/${finding.id}.png`, base64: finding.png });
         logos.push(
@@ -172,9 +222,11 @@ export function proposal(
         ? `${finding.approval.provider}’s reseller ${finding.approval.reseller}`
         : finding.kind === 'networks'
           ? `${finding.target.provider}’s cards in ${finding.target.region}`
-          : 'target' in finding && finding.target && 'label' in finding.target
-            ? finding.target.label
-            : 'A change';
+          : finding.kind === 'bank-of-canada'
+            ? 'The Bank of Canada’s rate'
+            : 'target' in finding && finding.target && 'label' in finding.target
+              ? finding.target.label
+              : 'A change';
     manual.push(
       `- **${cell(subject)}**: its entry couldn’t be found in the file, so it wasn’t changed`,
     );
@@ -195,11 +247,29 @@ export function proposal(
         '|---|---|---|---|---|',
         ...rows,
       ].join('\n'),
+    rateRows.length > 0 &&
+      [
+        '### Rate changes',
+        '',
+        'Posted rates, never a promotional one (M11.14): the rates before go into each account’s history.',
+        '',
+        '| Account | Was | Now | Source |',
+        '|---|---|---|---|',
+        ...rateRows,
+      ].join('\n'),
+    bank.length > 0 &&
+      [
+        '### The Bank of Canada',
+        '',
+        'Its target for the overnight rate changed (M11.14): accounts that follow it show how soon they did.',
+        '',
+        ...bank,
+      ].join('\n'),
     review.length > 0 && ['### For review', '', ...review].join('\n'),
     logos.length > 0 && ['### Logos', '', ...logos].join('\n'),
     manual.length > 0 && ['### Needs manual check', '', ...manual].join('\n'),
     confirmed > 0 &&
-      `### Confirmed\n\n${confirmed === 1 ? '1 price is' : `${confirmed} prices are`} still on ${confirmed === 1 ? 'its page' : 'their pages'}${bumped > 0 ? `; ${bumped} last verified ${confirmAfterDays} or more days ago ${bumped === 1 ? 'gets' : 'get'} today’s \`lastVerified\`` : ''}.`,
+      `### Confirmed\n\n${confirmed === 1 ? '1 price or rate is' : `${confirmed} prices and rates are`} still on ${confirmed === 1 ? 'its page' : 'their pages'}${bumped > 0 ? `; ${bumped} last verified ${confirmAfterDays} or more days ago ${bumped === 1 ? 'gets' : 'get'} today’s \`lastVerified\`` : ''}.`,
   ].filter((section) => typeof section === 'string');
   return { title: `Price updates ${today}`, body: sections.join('\n\n'), changes };
 }
@@ -213,7 +283,22 @@ function at(target: PriceTarget): PriceLocation {
  * its lastVerified is old enough to be bumped.
  */
 export function worthProposing(finding: Finding, today: string): boolean {
-  return finding.kind !== 'confirmed' || stale(finding.target, today);
+  switch (finding.kind) {
+    case 'confirmed':
+      return stale(finding.target, today);
+    case 'rates-confirmed':
+      return ratesStale(finding.target, today);
+    case 'bank-of-canada':
+      return (
+        finding.changes.length > 0 || daysBetween(finding.lastVerified, today) >= confirmAfterDays
+      );
+    default:
+      return true;
+  }
+}
+
+function ratesStale(target: RateTarget, today: string): boolean {
+  return daysBetween(target.rates.lastVerified, today) >= confirmAfterDays;
 }
 
 function stale(target: PriceTarget, today: string): boolean {

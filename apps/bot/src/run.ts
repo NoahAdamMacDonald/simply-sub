@@ -1,4 +1,5 @@
 import {
+  bankOfCanadaSeriesUrl,
   baselineDiff,
   daysBetween,
   digestDue,
@@ -18,11 +19,12 @@ import {
   type SeedStep,
   type SnapshotProvider,
 } from '@simply-sub/core';
+import { checkBankOfCanada, type BankSeries } from './bank-of-canada';
 import { checkPages, message, type CheckInput, type PageDeps } from './check-pages';
 import { digest, digestBranch, urlOf } from './digest';
 import { discover, type DiscoveryServices } from './discovery';
 import type { RepositoryState } from './github';
-import { filesToRead, worthProposing, type Proposal } from './proposal';
+import { bankOfCanadaFile, filesToRead, worthProposing, type Proposal } from './proposal';
 import {
   confirmsReported,
   reportedCountries,
@@ -38,6 +40,7 @@ import {
   networksTargets,
   policyTargets,
   providerTargets,
+  rateTargets,
 } from './targets';
 import type { Budget, Finding } from './types';
 
@@ -103,6 +106,8 @@ export interface Services {
   ask(system: string, user: string): Promise<unknown>;
   /** The page readers, minding `robots`. */
   pages(robots: Readonly<Record<string, Robots>>): PageDeps;
+  /** The Bank of Canada's Valet series of the target for the overnight rate from `start` on (M11.14). */
+  bankOfCanada(start: IsoDate): Promise<BankSeries>;
   readFiles(paths: readonly string[], commit: string): Promise<Record<string, string>>;
   propose(state: RepositoryState, proposal: Proposal, branch: string): Promise<string>;
   state: BotState;
@@ -321,6 +326,7 @@ export async function runNight(
     return {
       ...input,
       targets: input.targets.filter((target) => checked(target.price.sourceUrl)),
+      rates: (input.rates ?? []).filter((target) => checked(target.rates.sourceUrl)),
       approvals: input.approvals.filter((approval) => checked(approval.url)),
       networks: input.networks.filter((target) => checked(target.url)),
       policyPages: (input.policyPages ?? []).filter((target) => checked(target.url)),
@@ -346,6 +352,7 @@ export async function runNight(
         {
           subject: id,
           targets: [...(provider ? providerTargets(provider) : []), ...(await bundlesOf(bundles))],
+          rates: provider ? rateTargets(provider) : [],
           approvals: provider ? approvalTargets(provider) : [],
           networks: provider ? networksTargets(provider) : [],
           policyPages: provider ? policyTargets(provider, index.policySets[id]) : [],
@@ -386,6 +393,28 @@ export async function runNight(
       networks: [],
       logo: { id: reseller.id, website: reseller.website, ...committed(repository, reseller.id) },
     }));
+  }
+
+  // The Bank of Canada's series (M11.14), as often as pricing pages: a change the file doesn't have waits for the digest.
+  if (isDue(settings.cadence.pricing, checks[bankOfCanadaKey], today)) {
+    const kept = await step('read the Bank of Canada’s rate', async () => {
+      const files = await services.readFiles([bankOfCanadaFile], repository.commit);
+      const finding = await checkBankOfCanada(files[bankOfCanadaFile], (start) =>
+        services.bankOfCanada(start),
+      );
+      if (worthProposing(finding, today)) {
+        await services.state.putPending({
+          key: bankOfCanadaSeriesUrl,
+          seen: today,
+          findings: [finding],
+        });
+        return 1;
+      }
+      await services.state.dropPending(bankOfCanadaSeriesUrl);
+      return 0;
+    });
+    findings += kept;
+    checked[bankOfCanadaKey] = today;
   }
 
   // A page tonight's providers no longer cite, or a provider the catalog no longer has, has nothing to propose (M11.8):
@@ -571,6 +600,9 @@ async function reportedPlans(
 /** The check dates' key for the discovery's last batch. */
 const discoveryKey = 'discovery';
 
+/** The Bank of Canada's series' last check, among the pages' (M11.14). */
+const bankOfCanadaKey = 'bank-of-canada';
+
 /** The pages (and logo) a step checks, as check-date keys. */
 function keysOf(input: Omit<CheckInput, 'baselines' | 'cited'>): string[] {
   const keys = new Set(urlsOf(input));
@@ -582,6 +614,7 @@ function urlsOf(input: Omit<CheckInput, 'baselines' | 'cited'>): string[] {
   return [
     ...new Set([
       ...input.targets.map((target) => target.price.sourceUrl),
+      ...(input.rates ?? []).map((target) => target.rates.sourceUrl),
       ...input.approvals.map((approval) => approval.url),
       ...input.networks.map((target) => target.url),
       ...(input.policyPages ?? []).map((target) => target.url),
@@ -645,7 +678,8 @@ async function stillPending(
   },
 ): Promise<Finding[]> {
   const { alsoKept, tonight, ids } = night;
-  if (!/^(?:logo|failed):/.test(entry.key)) {
+  // The Bank of Canada's entry is the catalog's, not a page's (M11.14).
+  if (!/^(?:logo|failed):/.test(entry.key) && entry.key !== bankOfCanadaSeriesUrl) {
     const elsewhere = entry.owner !== undefined && !tonight.has(entry.owner);
     if (
       elsewhere ? !ids.has(entry.owner ?? '') : !index.cited.some((page) => page.url === entry.key)

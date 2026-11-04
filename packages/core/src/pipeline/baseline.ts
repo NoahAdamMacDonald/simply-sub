@@ -149,6 +149,11 @@ export function citedPages(
     for (const item of [...provider.plans, ...(provider.addOns ?? [])]) {
       for (const price of item.prices) cite(price.sourceUrl, 'pricing', id);
     }
+    // A finance account's posted rates, read like prices, and the page on what protects the money (M11.14).
+    for (const plan of provider.plans) {
+      cite(plan.account?.rates?.sourceUrl, 'pricing', id);
+      cite(plan.account?.protection.url, 'policies', id);
+    }
     for (const listing of provider.resellers ?? []) {
       cite(listing.approvedBy.url, 'pricing', id);
       for (const offer of listing.offers)

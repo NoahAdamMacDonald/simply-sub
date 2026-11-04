@@ -1,4 +1,4 @@
-import { baselinePath, writeBaseline, type IsoDate } from '@simply-sub/core';
+import { bankOfCanadaSeriesUrl, baselinePath, writeBaseline, type IsoDate } from '@simply-sub/core';
 import { proposal, type FileChange, type Proposal } from './proposal';
 import type { ReportOutcome, ReportOutcomes } from './reports';
 import { priceText } from './targets';
@@ -156,6 +156,9 @@ function reviewItems(
         break;
       case 'page':
       case 'confirmed':
+      case 'rates-confirmed':
+      case 'rates-changed':
+      case 'bank-of-canada':
       case 'logo':
         break;
     }
@@ -240,6 +243,11 @@ export function urlOf(finding: Finding): string | undefined {
       return finding.url;
     case 'manual':
       return finding.url;
+    case 'rates-confirmed':
+    case 'rates-changed':
+      return finding.target.rates.sourceUrl;
+    case 'bank-of-canada':
+      return bankOfCanadaSeriesUrl;
     case 'logo':
       return undefined;
   }

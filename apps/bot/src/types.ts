@@ -1,4 +1,11 @@
-import type { BaselineMethod, CitedType, Price } from '@simply-sub/core';
+import type {
+  AccountRates,
+  BankOfCanadaChange,
+  BaselineMethod,
+  CitedType,
+  Price,
+  RateTier,
+} from '@simply-sub/core';
 
 // What the nightly check reads and what it finds (BLUEPRINT §6.4). Everything here passes between Workflow steps, so
 // it's plain data.
@@ -20,6 +27,18 @@ export interface PriceTarget {
   label: string;
   /** What the page may call it: the plan's name, with and without the provider's. */
   names: string[];
+}
+
+/** A finance account's posted rates (M11.14), which the check looks for on their page as it does prices. */
+export interface RateTarget {
+  /** data/providers/<id>.yaml. */
+  file: string;
+  planId: string;
+  /** What it's called in the pull request: "Example Bank High Interest Savings". */
+  label: string;
+  /** What the page may call it: the plan's name, with and without the provider's. */
+  names: string[];
+  rates: Pick<AccountRates, 'tiers' | 'bonus' | 'sourceUrl' | 'lastVerified'>;
 }
 
 /** A reseller's approval: the provider's page that names it, and the words it's named with (BLUEPRINT §4.9). */
@@ -95,7 +114,16 @@ export type Finding =
       had: boolean;
     }
   /** A policy page that changed: the ratings' quotes it lost, for a reviewer to grade again. */
-  | { kind: 'policy'; target: PolicyPageTarget; missing: { topic: string; quote: string }[] };
+  | { kind: 'policy'; target: PolicyPageTarget; missing: { topic: string; quote: string }[] }
+  /** An account's posted rates are still on their page (M11.14). */
+  | { kind: 'rates-confirmed'; target: RateTarget }
+  /** Its page posts other rates: they replace its tiers from today, and the old ones go into its history (M11.14). */
+  | { kind: 'rates-changed'; target: RateTarget; tiers: RateTier[] }
+  /**
+   * The Bank of Canada's series (M11.14): its changes since data/bank-of-canada.yaml's newest, newest first, and the
+   * file's lastVerified, which the pull request moves to today.
+   */
+  | { kind: 'bank-of-canada'; changes: BankOfCanadaChange[]; lastVerified: string };
 
 /** What a night may still spend, passed from step to step. */
 export interface Budget {

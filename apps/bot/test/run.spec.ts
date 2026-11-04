@@ -97,6 +97,8 @@ describe('a quiet night', () => {
       'read robots.txt 1',
       'check mullvad',
       'check netflix',
+      // The Bank of Canada's series (M11.14), with the pricing pages.
+      'read the Bank of Canada’s rate',
       'drop what tonight’s providers no longer cite',
       'read the last digest',
       'gather the digest',

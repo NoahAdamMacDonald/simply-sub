@@ -1,6 +1,7 @@
 import { launch } from '@cloudflare/playwright';
 import {
   automationSchema,
+  bankOfCanadaSeriesUrl,
   policyFileSchema,
   seedDailyWrites,
   seedIndexPath,
@@ -29,6 +30,7 @@ import {
   type SearchBudget,
   type SnapshotProvider,
 } from '@simply-sub/core';
+import { readSeries } from './bank-of-canada';
 import type { PageDeps, PageResult } from './check-pages';
 import { extractionAnswerTokens, type DiscoveryServices, type DiscoveryWeb } from './discovery';
 import { extractionModel } from './extraction';
@@ -163,6 +165,21 @@ export function workerServices(env: Env): Services {
       ),
     state,
     pages: (robots) => pageDeps(env, robots, github),
+    async bankOfCanada(start) {
+      const { get } = politeWeb({});
+      const got = await get(
+        `${bankOfCanadaSeriesUrl}?start_date=${start}`,
+        'application/json',
+        2_000_000,
+      );
+      if ('error' in got) return got;
+      try {
+        const series = readSeries(JSON.parse(new TextDecoder().decode(got.bytes)));
+        return series ?? { error: 'The series isn’t in the shape the bot reads' };
+      } catch {
+        return { error: 'The series isn’t JSON' };
+      }
+    },
     discovery: discoveryServices(env, github, state),
     async readFiles(paths, commit) {
       const files: Record<string, string> = {};
