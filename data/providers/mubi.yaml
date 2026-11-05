@@ -1,0 +1,662 @@
+# Researched by hand on 2026-11-04 (M11.15, the streaming category), read with Edge from Canada and through each
+# country's exit (the owner's choice of 2026-11-04). Pages, each quoted where it's used:
+# Pricing: mubi.com/en/<country>/memberships, which prices by where the visitor is (every country's path showed
+# C$16.99 from Canada), so each region was read through its exit, monthly and with "Show yearly" ("Billed in one
+# payment"). MUBI Classic everywhere; MUBI GO, with "A hand-picked cinema ticket, every single week", in the US, the UK,
+# Ireland and Germany. Its help centre bills "every 30 days" monthly and "every 360 days" yearly ("When will my
+# subscription fee be charged?"), so the prices are per 30 and 360 days.
+# Where it's sold: every catalog region (each exit showed its own currency). No availableIn.
+# Region checklist, 2026-11-04: 1. the country paths don't change the price; 6. read through each country's exit, each
+# in its own currency; the rest not needed.
+# Not listed: the student discount (an eligibility-only offer, as for YouTube's).
+
+id: mubi
+name: MUBI
+website: https://mubi.com
+# Its help centre.
+domains: [help.mubi.com]
+category: streaming
+spendCategory: streaming
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    AU: AUD,
+    NZ: NZD,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+  }
+cancelUrl: https://help.mubi.com/article/68-how-do-i-cancel-my-subscription-if-i-purchased-it-online-through-the-web
+sources: { pricing: https://mubi.com/en/ca/memberships }
+# Accepted cards and ways to pay, read 2026-11-04 in its help centre ("How can I pay for a MUBI subscription?"), which
+# adds "some payment methods may not be supported in some countries"; Apple's and Google Play's billing from its
+# cancelling articles. Maestro is a Mastercard brand.
+acceptedNetworks:
+  GLOBAL:
+    networks: [amex, mastercard, visa]
+    url: https://help.mubi.com/article/38-how-can-i-pay-for-a-mubi-subscription
+    quotes:
+      - 'the following credit and debit cards: American Express, Master Card, Maestro and VISA'
+paymentMethods:
+  - methods: [card, paypal, apple-pay, google-pay]
+    page: 'How can I pay for a MUBI subscription?'
+    url: https://help.mubi.com/article/38-how-can-i-pay-for-a-mubi-subscription
+    quotes:
+      - 'MUBI currently supports payment via PayPal, Apple Pay, Google Pay and the following credit and debit cards: American Express, Master Card, Maestro and VISA.'
+  - methods: [app-store]
+    page: 'How do I cancel my subscription if I purchased it online through the web?'
+    url: https://help.mubi.com/article/68-how-do-i-cancel-my-subscription-if-i-purchased-it-online-through-the-web
+    quotes:
+      - 'I have subscribed through the Google Play Store. How can I cancel or change my subscription?'
+
+# Owner: MUBI Inc., which its privacy policy names as providing the service. No page read says who owns it or where
+# it's from; its terms' California law, and the jobs page's "established entities" in London, New York, Berlin and
+# Istanbul, point to the US (the owner's choice of 2026-11-04).
+owner:
+  name: 'MUBI Inc.'
+  page:
+    name: Privacy policy
+    url: https://mubi.com/en/privacy_policy
+  quotes:
+    - 'by MUBI Inc. ("MUBI") in the course of our provision of the MUBI and MUBI GO services'
+  country:
+    code: US
+    page:
+      name: Terms & Conditions
+      url: https://mubi.com/en/terms_of_service
+    quotes:
+      - 'governed by and construed in accordance with the laws of the State of California'
+    lastVerified: 2026-11-04
+  lastVerified: 2026-11-04
+
+# Renewal day (M11.5), read 2026-11-04 in its help centre: every 30 days, or every 360 on a yearly plan.
+renewalAnchor:
+  kind: every-30-days
+  page: When will my subscription fee be charged?
+  url: https://help.mubi.com/article/1243-when-will-my-subscription-fee-be-charged
+  quotes:
+    - 'If you are on our monthly plan, you will be charged every 30 days, and if you are on our yearly plan, you will be charged every 360 days.'
+  lastVerified: 2026-11-04
+
+# Perks (M11.6): MUBI GO's line that no feature describes, in its words.
+perks:
+  - id: weekly-cinema-ticket
+    name: A hand-picked cinema ticket, every single week
+
+# Features, read 2026-11-04: "Each account can be logged in to 5 devices with 2 of these watching films
+# simultaneously" ("How many screens can I watch on?"); "we make our films available in HD and 4K when we can" ("Are
+# movies available to watch in HD and 4K?"); "Download films with iOS or Android" and "No ads" (the memberships page),
+# with no number of download devices, so 1 (inferred); no profiles, Kids profiles or live programmes named.
+plans:
+  - id: mubi.classic
+    name: Classic
+    link: https://mubi.com/en/ca/memberships
+    features:
+      video.quality: 4k
+      ad-free: true
+      streaming.concurrent-streams: 2
+      streaming.download-devices: 1
+      streaming.french-content: true
+    inferred:
+      streaming.download-devices:
+        reason: 'You can download films with its iPhone and Android apps, but it doesn’t say on how many devices, so 1 is the least it can be.'
+        page:
+          name: Memberships
+          url: https://mubi.com/en/ca/memberships
+        lastVerified: 2026-11-04
+      streaming.french-content:
+        reason: 'It shows films from around the world, French ones among them, and its site comes in French, but no page counts them.'
+        page:
+          name: What is MUBI
+          url: https://mubi.com/en/ca/about
+        lastVerified: 2026-11-04
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 16.99,
+          interval: day,
+          intervalCount: 30,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/ca/memberships,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 131.88,
+          interval: day,
+          intervalCount: 360,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/ca/memberships,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 14.99,
+          interval: day,
+          intervalCount: 30,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/us/memberships,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 119.88,
+          interval: day,
+          intervalCount: 360,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/us/memberships,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 11.99,
+          interval: day,
+          intervalCount: 30,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/gb/memberships,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 95.88,
+          interval: day,
+          intervalCount: 360,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/gb/memberships,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 14.99,
+          interval: day,
+          intervalCount: 30,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/au/memberships,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 119.88,
+          interval: day,
+          intervalCount: 360,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/au/memberships,
+        }
+      - {
+          region: NZ,
+          currency: NZD,
+          amount: 14.99,
+          interval: day,
+          intervalCount: 30,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/nz/memberships,
+        }
+      - {
+          region: NZ,
+          currency: NZD,
+          amount: 119.88,
+          interval: day,
+          intervalCount: 360,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/nz/memberships,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 13.99,
+          interval: day,
+          intervalCount: 30,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/ie/memberships,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 107.88,
+          interval: day,
+          intervalCount: 360,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/ie/memberships,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 15.99,
+          interval: day,
+          intervalCount: 30,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/de/memberships,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 119.88,
+          interval: day,
+          intervalCount: 360,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/de/memberships,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 11.99,
+          interval: day,
+          intervalCount: 30,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/fr/memberships,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 95.88,
+          interval: day,
+          intervalCount: 360,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/fr/memberships,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 13.99,
+          interval: day,
+          intervalCount: 30,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/nl/memberships,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 107.88,
+          interval: day,
+          intervalCount: 360,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/nl/memberships,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 11.99,
+          interval: day,
+          intervalCount: 30,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/es/memberships,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 95.88,
+          interval: day,
+          intervalCount: 360,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/es/memberships,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 11.99,
+          interval: day,
+          intervalCount: 30,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/it/memberships,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 95.88,
+          interval: day,
+          intervalCount: 360,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/it/memberships,
+        }
+
+  - id: mubi.go
+    name: GO
+    link: https://mubi.com/en/us/memberships
+    features:
+      video.quality: 4k
+      ad-free: true
+      streaming.concurrent-streams: 2
+      streaming.download-devices: 1
+      streaming.french-content: true
+    inferred:
+      streaming.download-devices:
+        reason: 'You can download films with its iPhone and Android apps, but it doesn’t say on how many devices, so 1 is the least it can be.'
+        page:
+          name: Memberships
+          url: https://mubi.com/en/ca/memberships
+        lastVerified: 2026-11-04
+      streaming.french-content:
+        reason: 'It shows films from around the world, French ones among them, and its site comes in French, but no page counts them.'
+        page:
+          name: What is MUBI
+          url: https://mubi.com/en/ca/about
+        lastVerified: 2026-11-04
+    perks: [weekly-cinema-ticket]
+    notes: A hand-picked cinema ticket every week, in select cities.
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 19.99,
+          interval: day,
+          intervalCount: 30,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/us/memberships,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 167.88,
+          interval: day,
+          intervalCount: 360,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/us/memberships,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 18.99,
+          interval: day,
+          intervalCount: 30,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/gb/memberships,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 167.88,
+          interval: day,
+          intervalCount: 360,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/gb/memberships,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 18.99,
+          interval: day,
+          intervalCount: 30,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/ie/memberships,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 167.88,
+          interval: day,
+          intervalCount: 360,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/ie/memberships,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 19.99,
+          interval: day,
+          intervalCount: 30,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/de/memberships,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 179.88,
+          interval: day,
+          intervalCount: 360,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://mubi.com/en/de/memberships,
+        }
+
+# Terms and policies, read 2026-11-04 (M11.15): MUBI's Terms & Conditions, its Privacy Policy and its help centre's
+# articles on cancelling, refunds, plans, taxes and screens.
+policies:
+  links:
+    - name: 'Terms & Conditions'
+      url: https://mubi.com/en/terms_of_service
+    - name: 'Privacy policy'
+      url: https://mubi.com/en/privacy_policy
+    - name: 'Changing plans'
+      url: https://help.mubi.com/article/67-can-i-change-my-plan
+    - name: 'Taxes and fees'
+      url: https://help.mubi.com/article/1287-do-membership-prices-include-tax-or-other-fees
+    - name: 'Screens'
+      url: https://help.mubi.com/article/260-how-many-screens-can-i-watch-on
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It studies how you use MUBI, for itself and its business partners. You can only object to that by asking it.'
+      sources:
+        - url: https://mubi.com/en/privacy_policy
+          quote: 'use data analytics to provide insight and analysis of our customers for ourselves and our business partners'
+        - url: https://mubi.com/en/privacy_policy
+          quote: '(iv) Object to processing of your personal data where we are relying on a legitimate interest'
+      action:
+        name: 'Its privacy policy'
+        url: https://mubi.com/en/privacy_policy
+      lastVerified: 2026-11-04
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares information about you with advertising networks such as Google and Facebook, to aim ads at you on its site and elsewhere. You can only refuse their cookies, browser by browser.'
+      sources:
+        - url: https://mubi.com/en/privacy_policy
+          quote: 'We share your information with advertisers, ad servers, and ad networks (including but not limited to Google Analytics, Facebook Pixel, and Facebook Offline Events) to select and deliver advertising and content, and target and personalise advertising and content both on our sites and on selected partner sites.'
+      action:
+        name: 'Cookie preferences'
+        url: https://mubi.com/en/privacy_policy
+      lastVerified: 2026-11-04
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'MUBI has no ads, but advertising companies place cookies on its site to show you ads elsewhere. You can refuse them only browser by browser.'
+      sources:
+        - url: https://mubi.com/en/privacy_policy
+          quote: 'We partner with advertisers, ad network providers and ad serving companies to place cookies on our sites to allow them to show you advertisements both on and off our sites'
+      action:
+        name: 'Cookie preferences'
+        url: https://mubi.com/en/privacy_policy
+      lastVerified: 2026-11-04
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy doesn’t say whether it trains AI on your ratings, lists or reviews.'
+      pages: [https://mubi.com/en/privacy_policy]
+      lastVerified: 2026-11-04
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information for as long as you have an account, and some of it after, for as long as it decides.'
+      sources:
+        - url: https://mubi.com/en/privacy_policy
+          quote: 'We keep your personal information for as long you maintain a MUBI account or subscription.'
+        - url: https://mubi.com/en/privacy_policy
+          quote: 'When your account has been deleted or your subscription is over, we may retain certain personal information for purposes such as complying with our legal obligations, resolving disputes, preventing fraud or misuse of promotions, and protecting our rights and interests.'
+      lastVerified: 2026-11-04
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: "You can ask it to delete your information, but it doesn't say how long that takes."
+      sources:
+        - url: https://mubi.com/en/privacy_policy
+          quote: '(iii) Request erasure of your personal data.'
+      action:
+        name: 'Its privacy policy'
+        url: https://mubi.com/en/privacy_policy
+      lastVerified: 2026-11-04
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask for a copy of your information in a common format, but there’s no way to get it yourself.'
+      sources:
+        - url: https://mubi.com/en/privacy_policy
+          quote: 'We will provide to you, or a third party you have chosen, your personal data in a structured, commonly used, machine-readable format.'
+      action:
+        name: 'Its privacy policy'
+        url: https://mubi.com/en/privacy_policy
+      lastVerified: 2026-11-04
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over information to comply with the law and government requests, and says nothing more about how.'
+      sources:
+        - url: https://mubi.com/en/privacy_policy
+          quote: 'We reserve the right to disclose your personal data in order to comply with the law, applicable regulations and government requests'
+      lastVerified: 2026-11-04
+    - topic: privacy.data-location
+      tier: poor
+      reason: "Your information can go to other countries, including outside Europe, and it doesn't say what protects it there beyond following the law."
+      sources:
+        - url: https://mubi.com/en/privacy_policy
+          quote: 'we will ensure that the information is transferred in accordance with this Privacy Policy and as permitted by the applicable laws on data protection'
+      lastVerified: 2026-11-04
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'An account takes an email address and a password, and a subscription your payment details.'
+      sources:
+        - url: https://mubi.com/en/terms_of_service
+          quote: 'To become a User, submit your email address to MUBI and create a password.'
+      lastVerified: 2026-11-04
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 18 to subscribe; younger viewers may watch only with a parent involved. It says nothing more about children’s data.'
+      sources:
+        - url: https://mubi.com/en/privacy_policy
+          quote: 'You must be 18 years of age or older to subscribe to the MUBI service or have a MUBI membership.'
+        - url: https://mubi.com/en/privacy_policy
+          quote: 'While individuals under the age of 18 may utilize the Services, they may do so only with the involvement, supervision, and approval of a parent or legal guardian.'
+      lastVerified: 2026-11-04
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You cancel in your account settings at any time, and keep watching until the end of the period you paid for.'
+      sources:
+        - url: https://mubi.com/en/terms_of_service
+          quote: 'You may cancel your MUBI subscription at any time, and you will continue to have access to the MUBI service through the end of your billing period.'
+      action:
+        name: 'How to cancel'
+        url: https://help.mubi.com/article/68-how-do-i-cancel-my-subscription-if-i-purchased-it-online-through-the-web
+      lastVerified: 2026-11-04
+    - topic: billing.refunds
+      tier: neutral
+      reason: "You don't get money back, but you keep watching until the end of the period you paid for."
+      sources:
+        - url: https://mubi.com/en/terms_of_service
+          quote: 'Payments are nonrefundable and there are no refunds or credits for partially used periods.'
+        - url: https://mubi.com/en/terms_of_service
+          quote: 'Following any cancellation, however, you will continue to have access to the service through the end of your current billing period.'
+      lastVerified: 2026-11-04
+    - topic: billing.price-changes
+      tier: neutral
+      reason: "It emails you before a new price applies, but doesn't say how far ahead."
+      sources:
+        - url: https://mubi.com/en/terms_of_service
+          quote: 'any price changes to your service will take effect following email notice to you.'
+      lastVerified: 2026-11-04
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Its 7-day trial turns into a paid subscription on the payment method you gave, and it says outright that it won’t remind you.'
+      sources:
+        - url: https://mubi.com/en/terms_of_service
+          quote: 'You will not receive a notice from us that your free trial period has ended or that the paying portion of your subscription has begun.'
+      lastVerified: 2026-11-04
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say monthly and yearly plans renew on their own, but not that it reminds you first.'
+      pages: [https://mubi.com/en/terms_of_service]
+      lastVerified: 2026-11-04
+    - topic: billing.fees
+      tier: great
+      reason: 'It charges the price and any taxes where you live, and names no other fees.'
+      sources:
+        - url: https://help.mubi.com/article/1287-do-membership-prices-include-tax-or-other-fees
+          quote: 'Depending on your location, applicable taxes may be applied to your membership fee in accordance with local regulations.'
+      lastVerified: 2026-11-04
+    - topic: billing.plan-changes
+      tier: neutral
+      reason: 'A change of plan starts when your current period ends.'
+      sources:
+        - url: https://help.mubi.com/article/67-can-i-change-my-plan
+          quote: 'Any changes made to your subscription plan will be reflected at the end of your existing renewal period.'
+      lastVerified: 2026-11-04
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to the courts of Santa Clara County, California, under California law, with no arbitration, and it keeps the consumer rights your own law gives you.'
+      sources:
+        - url: https://mubi.com/en/terms_of_service
+          quote: 'submitted to the exclusive jurisdiction of the federal and state courts located in Santa Clara County, California'
+        - url: https://mubi.com/en/terms_of_service
+          quote: 'These terms will not limit any consumer protection rights that you may be entitled to under the mandatory laws of your local jurisdiction.'
+      lastVerified: 2026-11-04
+    - topic: legal.terms-changes
+      status: not-stated
+      reason: 'Its terms don’t say how it changes them or whether it tells you.'
+      pages: [https://mubi.com/en/terms_of_service]
+      lastVerified: 2026-11-04
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'Its terms name one reason to close an account: repeatedly breaking others’ copyright. They don’t mention notice or a refund.'
+      sources:
+        - url: https://mubi.com/en/terms_of_service
+          quote: 'can, in appropriate circumstances, suspend or terminate the accounts'
+      lastVerified: 2026-11-04
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'Its films come and go: the library is regularly updated.'
+      sources:
+        - url: https://mubi.com/en/terms_of_service
+          quote: 'The MUBI service, including the content library, is regularly updated.'
+      lastVerified: 2026-11-04
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://mubi.com/en/terms_of_service]
+      lastVerified: 2026-11-04
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it uses reasonable measures, with no audits or way to report a security problem named.'
+      sources:
+        - url: https://mubi.com/en/privacy_policy
+          quote: 'We use reasonable technical, administrative, logical, physical and managerial measures to safeguard your personal information'
+      lastVerified: 2026-11-04
+    - topic: service.account-sharing
+      tier: good
+      reason: 'You can share it with the people you live with. It names no checks.'
+      sources:
+        - url: https://mubi.com/en/terms_of_service
+          quote: 'may not be shared with individuals beyond your household'
+      lastVerified: 2026-11-04
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Up to 5 devices can be signed in to an account at once.'
+      sources:
+        - url: https://help.mubi.com/article/260-how-many-screens-can-i-watch-on
+          quote: 'Each account can be logged in to 5 devices with 2 of these watching films simultaneously.'
+      lastVerified: 2026-11-04

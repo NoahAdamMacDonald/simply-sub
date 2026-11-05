@@ -620,7 +620,8 @@
   source: wikidata
   wikidata: Q693730
   sitelinks: 23
-  status: queued
+  status: done
+  date: 2026-11-04
 - id: amazon-luna
   name: Amazon Luna
   website: https://www.amazon.com/luna
