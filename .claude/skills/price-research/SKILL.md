@@ -299,6 +299,13 @@ which reads each page as a visitor there would, before any hand reading:
   and elsewhere hands off to the store. The US's `amazon.com/gp/video/offers` answered with Amazon's "continue
   shopping" page, a bot check: never click past it. Help articles belong to one store: an amazon.com `nodeId` can be
   missing on amazon.ca ("We can't find the page"), so quote the store's own article.
+- **discovery+'s pages** (M11.15): its European help centre uses the same article number in every country
+  (`support.discoveryplus.com/<country>/Answer/Detail/000004067` is each one's plans and prices), and from Canada those
+  pages and `discoveryplus.com/<country>` show North America's instead: read them through the country's exit and delete
+  the baselines that saved the wrong page, as for HBO Max. Its terms for each country are listed on
+  wbd.com/discoveryplus/legal/terms-of-use, Europe's as PDFs: read them with `pdftotext -enc UTF-8 -layout` (curly
+  apostrophes and accents come through), check quotes against that text, and delete the empty baselines the baseline
+  run saves for them. Canada's discovery+ is Rogers Sports & Media's (discoveryplus.ca), its own provider.
 
 - **Element-screenshot overlap:** sticky headers and skip links can overlap an element screenshot. Trust the
   full-page snap.

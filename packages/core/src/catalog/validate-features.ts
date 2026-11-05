@@ -364,14 +364,18 @@ function labelProblem(key: string, registry: FeatureRegistry, ids: CatalogIds): 
 /**
  * Plans whose required features no official page states yet, by plan id (M11.4): each named feature missing is a
  * warning, not an error. Their files' comments name the pages that were silent. M11.9 inferred ESPN Select's and ICI
- * RDI's from pages that bear on them (`inferred`); RDS's and TSN's pages give no reason to infer any, and no Rumble page
- * says how many streams Premium plays at once (M11.15, the owner's choice of 2026-11-04).
+ * RDI's from pages that bear on them (`inferred`); RDS's and TSN's pages give no reason to infer any, no Rumble page
+ * says how many streams Premium plays at once, and no Italian page names the video quality of discovery+'s Italian plans
+ * (M11.15, the owner's choices of 2026-11-04).
  */
 export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = new Map([
   ['rds.standard', ['video.quality']],
   ['tsn.standard', ['video.quality']],
   ['tsn.premium', ['video.quality']],
   ['rumble.premium', ['streaming.concurrent-streams']],
+  ['discovery-plus.intrattenimento-con-pubblicita', ['video.quality']],
+  ['discovery-plus.intrattenimento', ['video.quality']],
+  ['discovery-plus.intrattenimento-sport', ['video.quality']],
 ]);
 
 /**

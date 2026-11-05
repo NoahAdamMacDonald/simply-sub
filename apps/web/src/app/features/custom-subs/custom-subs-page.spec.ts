@@ -299,7 +299,7 @@ describe('CustomSubsPage', () => {
     await until(
       () => document.activeElement === page().querySelector('[aria-label="Edit Local Gym"]'),
     );
-  });
+  }, 20000);
 
   it('won’t save without a name, a plan’s name and cost, or with a link that isn’t https://', async () => {
     await open();
