@@ -1,0 +1,310 @@
+# Researched by hand on 2026-11-04 (M11.15, the streaming category, batch 2), read with Edge from Canada, and the price
+# again through a UK exit (the owner's choice of 2026-11-04). Pages, each quoted where it's used:
+# Pricing: rumble.com/premium ("$9.99/month", "$99/year", "Savings for bundle are calculated based on USD prices"), the
+# same through the UK exit, and its help centre's "What is Rumble Premium" ("Pay just $9.99 a month or save money with a
+# $99 yearly subscription"): one US-dollar price for everywhere.
+# Region checklist, 2026-11-04: one price in US dollars for every country (the page shows the same price through a UK
+# exit), so no regional prices to find.
+# Bundles: Rumble Premium with Perplexity Pro ($23.99 a month), whose other service isn't in the catalog. Mug Club
+# members get Premium with their membership, a creator's own offer.
+
+id: rumble
+name: Rumble
+website: https://rumble.com
+# Its help centre and its parent's site.
+domains: [rumble.support, rum.group]
+category: streaming
+spendCategory: streaming
+billingCurrency: { GLOBAL: USD }
+cancelUrl: https://rumble.support/help/access-cancel-premium-subscription-refund
+sources: { pricing: https://rumble.com/premium }
+# Payment methods, read 2026-11-04: Apple's and Google Play's billing in its apps (its cancelling article). No page read
+# lists the ways to pay on its website.
+paymentMethods:
+  - methods: [app-store]
+    page: 'How to Access or Cancel Your Rumble Premium Subscription (and Refund Policy)'
+    url: https://rumble.support/help/access-cancel-premium-subscription-refund
+    quotes:
+      - 'If you subscribed via iOS or Google Play, you must cancel through your Apple or Google account.'
+
+# Owner: RUM Group Inc., the holding company of Rumble and Quake (rum.group, where corp.rumble.com now goes), in
+# Longboat Key, Florida. Its terms are with Rumble Canada Inc., under Ontario law.
+owner:
+  name: 'RUM Group Inc.'
+  website: https://www.rum.group
+  page:
+    name: 'RUM Group'
+    url: https://www.rum.group/
+  quotes:
+    - 'RUM Group Inc.'
+    - 'Rumble gives that imagination a voice.'
+  country:
+    code: US
+    quotes:
+      - 'Longboat Key, FL 34228, USA'
+    page:
+      name: 'RUM Group'
+      url: https://www.rum.group/
+    lastVerified: 2026-11-04
+  lastVerified: 2026-11-04
+
+# Renewal day (M11.5), read 2026-11-04: its terms say Premium "will automatically renew unless you cancel prior to the
+# renewal date", and its cancelling article shows "renewal dates" in your account, without saying which day.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://rumble.com/s/terms
+    - https://rumble.support/help/access-cancel-premium-subscription-refund
+  lastVerified: 2026-11-04
+
+# Perks (M11.6): what Premium adds that no feature describes, in its page's words.
+perks:
+  - id: exclusive-content
+    name: Exclusive Premium content from creators
+
+# Apps (the cross-category features), read 2026-11-04: Premium "covers Rumble on web, iOS, Android, Apple TV, Amazon
+# Fire TV, Roku, LG Smart TVs, and Samsung Smart TVs" (its help centre).
+features:
+  platforms: [web, ios, android, tv]
+
+# Features, read 2026-11-04: no ads ("No video pre-rolls, no banner ads", its help centre; its terms define it as no
+# "programmatic" pre-roll and mid-roll ads); offline downloads "on the Rumble app on iOS and Android", with no number of
+# devices, so 1 (inferred); video quality: creators upload "with up to 4K quality", so 4K (inferred). No page says how
+# many streams play at once: the plan is in core's awaitingRequiredFeatures (the owner's choice of 2026-11-04). No
+# profiles or Kids profiles (no one under 18 may use it).
+plans:
+  - id: rumble.premium
+    name: Premium
+    link: https://rumble.com/premium
+    features:
+      video.quality: 4k
+      ad-free: true
+      streaming.download-devices: 1
+    inferred:
+      video.quality:
+        reason: 'Its Premium creators can upload videos "with up to 4K quality", so it plays up to 4K; no page says so for viewers.'
+        page:
+          name: What is Rumble Premium
+          url: https://rumble.support/help/ad-free-videos-exclusively-on-rumble-premium
+        lastVerified: 2026-11-04
+      streaming.download-devices:
+        reason: 'You can download videos in its iPhone and Android apps, but it doesn’t say on how many devices, so 1 is the least it can be.'
+        page:
+          name: Offline Downloads
+          url: https://rumble.support/help/offline-downloads
+        lastVerified: 2026-11-04
+    perks: [exclusive-content]
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://rumble.com/premium,
+        }
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://rumble.com/premium,
+        }
+
+# Terms and policies, read 2026-11-04 (M11.15): its Terms and Conditions ("Last modified September 1, 2026"), its
+# Privacy Policy, its Bug Bounty page and its help centre's Premium articles.
+policies:
+  links:
+    - name: 'Terms and conditions'
+      url: https://rumble.com/s/terms
+    - name: 'Privacy policy'
+      url: https://rumble.com/s/privacy
+    - name: 'Bug bounty'
+      url: https://rumble.com/s/bug-bounty
+    - name: 'Cancelling and refunds'
+      url: https://rumble.support/help/access-cancel-premium-subscription-refund
+    - name: 'Rumble Premium'
+      url: https://rumble.com/premium
+    - name: 'Offline downloads'
+      url: https://rumble.support/help/offline-downloads
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It and its advertising partners collect what you do on its sites, your device identifiers and IP address. You can only limit that by asking, or browser by browser with cookies.'
+      sources:
+        - url: https://rumble.com/s/privacy
+          quote: 'We and our third-party advertising partners collect information from visitors to our websites, including usage activity, device identifiers, cookies, unique identifiers, and IP addresses.'
+      action:
+        name: 'Its privacy policy'
+        url: https://rumble.com/s/privacy
+      lastVerified: 2026-11-04
+    - topic: privacy.data-sharing
+      tier: bad
+      reason: 'It says it may sell your personal information. You can ask it not to.'
+      sources:
+        - url: https://rumble.com/s/privacy
+          quote: 'Rumble may sell Personal Information, as such terms are defined under the applicable state privacy laws.'
+      action:
+        name: 'Its privacy policy'
+        url: https://rumble.com/s/privacy
+      lastVerified: 2026-11-04
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It and advertising partners track what you do on its sites to aim ads at you. You can opt out by request, or block cookies browser by browser.'
+      sources:
+        - url: https://rumble.com/s/privacy
+          quote: 'You may opt out of the sale of your Personal Information or for targeted advertising purposes by submitting a request'
+      action:
+        name: 'Its privacy policy'
+        url: https://rumble.com/s/privacy
+      lastVerified: 2026-11-04
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy doesn’t say whether it trains AI on what you post.'
+      pages: [https://rumble.com/s/privacy]
+      lastVerified: 2026-11-04
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information as long as it decides it needs it, and names no periods.'
+      sources:
+        - url: https://rumble.com/s/privacy
+          quote: 'We may retain your Personal Information for as long as reasonably necessary for the purposes for which it was originally collected'
+      lastVerified: 2026-11-04
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: "You can ask it to delete your information, but it doesn't say how long that takes."
+      sources:
+        - url: https://rumble.com/s/privacy
+          quote: 'you have the right to request that we delete the Personal Information that we have collected or maintain about you'
+      action:
+        name: 'Its privacy policy'
+        url: https://rumble.com/s/privacy
+      lastVerified: 2026-11-04
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask for a copy of the information you gave it, in a format you can use, but there’s no way to get it yourself.'
+      sources:
+        - url: https://rumble.com/s/privacy
+          quote: 'You have the right to obtain a copy of the specific Personal Information that you have previously provided to us in a portable, secure, and readily-usable format'
+      action:
+        name: 'Its privacy policy'
+        url: https://rumble.com/s/privacy
+      lastVerified: 2026-11-04
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over information when it believes the law requires it, and says nothing more about how.'
+      sources:
+        - url: https://rumble.com/s/privacy
+          quote: 'We may disclose your Personal Information if we believe in good faith that such disclosure is necessary to satisfy our legal obligations.'
+      lastVerified: 2026-11-04
+    - topic: privacy.data-location
+      tier: poor
+      reason: "Your information is kept in the US and Canada, whose law may protect it less than yours, and it doesn't say what safeguards it uses."
+      sources:
+        - url: https://rumble.com/s/privacy
+          quote: 'Our Services are based, controlled, operated, and administered by us in the United States and Canada, where Rumble’s servers are located.'
+      lastVerified: 2026-11-04
+    - topic: privacy.sign-up-data
+      status: not-stated
+      reason: 'Its privacy policy doesn’t list what an account asks for, and its sign-up form wasn’t read.'
+      pages: [https://rumble.com/s/privacy]
+      lastVerified: 2026-11-04
+    - topic: privacy.children
+      tier: neutral
+      reason: 'No one under 18 may use it, and it deletes a child’s information it finds was given without a parent’s consent.'
+      sources:
+        - url: https://rumble.com/s/privacy
+          quote: 'children under the age of 18 are not permitted to use our Services'
+        - url: https://rumble.com/s/privacy
+          quote: 'we will delete the Personal Information from our systems'
+      lastVerified: 2026-11-04
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You cancel on its website, following its prompts, and keep Premium until your billing period ends.'
+      sources:
+        - url: https://rumble.support/help/access-cancel-premium-subscription-refund
+          quote: 'You’ll keep Premium access until your billing period ends.'
+      action:
+        name: 'Cancel Premium'
+        url: https://rumble.support/help/access-cancel-premium-subscription-refund
+      lastVerified: 2026-11-04
+    - topic: billing.refunds
+      tier: neutral
+      reason: "You don't get money back, but you keep Premium until the end of the period you paid for."
+      sources:
+        - url: https://rumble.support/help/access-cancel-premium-subscription-refund
+          quote: 'Rumble Premium subscriptions are non-refundable.'
+        - url: https://rumble.support/help/access-cancel-premium-subscription-refund
+          quote: 'You’ll keep Premium access until your billing period ends.'
+      lastVerified: 2026-11-04
+    - topic: billing.price-changes
+      status: not-stated
+      reason: 'Its terms don’t say how it changes Premium’s price or whether it tells you first.'
+      pages: [https://rumble.com/s/terms]
+      lastVerified: 2026-11-04
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'Premium has no free trial on its page.'
+      pages: [https://rumble.com/premium]
+      lastVerified: 2026-11-04
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say Premium renews on its own unless you cancel before the renewal date, but not that it reminds you first.'
+      pages: [https://rumble.com/s/terms]
+      lastVerified: 2026-11-04
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms and Premium pages don’t say whether anything is added to the price.'
+      pages: [https://rumble.com/s/terms, https://rumble.com/premium]
+      lastVerified: 2026-11-04
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to the Ontario Superior Court of Justice in Toronto, under Ontario law, or a court it chooses, with no arbitration.'
+      sources:
+        - url: https://rumble.com/s/terms
+          quote: 'shall lie only in the Ontario Superior Court of Justice at Toronto'
+      lastVerified: 2026-11-04
+    - topic: legal.terms-changes
+      status: not-stated
+      reason: 'Its terms don’t say how it changes them or whether it tells you.'
+      pages: [https://rumble.com/s/terms]
+      lastVerified: 2026-11-04
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can end your access at its own discretion, for any reason, with or without telling you.'
+      sources:
+        - url: https://rumble.com/s/terms
+          quote: 'Rumble reserves the right, in its sole discretion, to terminate your access to the Rumble Service, with or without notice, for any reason'
+      lastVerified: 2026-11-04
+    - topic: legal.service-changes
+      status: not-stated
+      reason: 'Its terms don’t say how it may change Premium or what it includes.'
+      pages: [https://rumble.com/s/terms]
+      lastVerified: 2026-11-04
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://rumble.com/s/terms]
+      lastVerified: 2026-11-04
+    - topic: security.practices
+      tier: neutral
+      reason: "It runs a bug bounty with security researchers, but doesn't say outside experts check its security or publish what they find."
+      sources:
+        - url: https://rumble.com/s/bug-bounty
+          quote: 'Through our Bug Bounty Program, we collaborate with security researchers who share this commitment and help us keep Rumble safe and secure.'
+      lastVerified: 2026-11-04
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its terms and Premium pages don’t say who can use your Premium.'
+      pages: [https://rumble.com/s/terms, https://rumble.com/premium]
+      lastVerified: 2026-11-04
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its pages name no limits on devices or downloads.'
+      pages: [https://rumble.support/help/offline-downloads]
+      lastVerified: 2026-11-04
