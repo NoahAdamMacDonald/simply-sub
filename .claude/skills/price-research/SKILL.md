@@ -300,6 +300,18 @@ which reads each page as a visitor there would, before any hand reading:
   visible text.
 - **Cookie banners** can intercept clicks: start with `click?:Reject All` (or `click?:Accept All Cookies`).
 - **Accordions** often close the others: open one question per `click:`.
+- **Pages that price by where the visitor is** (youtube.com/premium, mubi.com/<country>/memberships, Google One):
+  a country path or `gl=` changes the country a page names, not its prices. Read each region through its exit, and
+  keep a page only in that region's currency: Google's pages placed New Zealand's exits in Australia, Ireland's in the
+  UK and the Netherlands' nowhere (2026-11-04). Their baselines, read from Canada, show Canada's prices, so the bot
+  sends the other regions' to a person.
+- **"Every 30 days"** (MUBI's help centre): store `interval: day, intervalCount: 30` (and 360 for its yearly plan),
+  with a renewalAnchor of `every-30-days`.
+- **Help centres that turn Canada away** (HBO Max's sends a Canadian visitor to its geo-availability page): read
+  them through a country's exit; YouTube TV's additional terms appear only in the US version of YouTube's Paid
+  Service Terms, which `gl=US` doesn't change from Canada, so its ratings quote YouTube TV Help where it can.
+- **robots.txt can disallow a terms page** (YouTube's `/t/terms`, which also covers `/t/terms_paidservice`): the
+  baseline run skips it and the bot checks it by its facts alone; check its quotes against the saved page instead.
 - **Image-only labels** don't appear in `innerText` (Crave's bundle cards): look at the `.png`.
 - **Git Bash quirks:** `node -e` prints nothing in this Git Bash, so write a script file instead. Heredocs keep
   backslashes, but `sed` replacements mangle them.
