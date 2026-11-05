@@ -1,0 +1,674 @@
+# Researched by hand on 2026-11-04 (M11.15, the streaming category), read with Edge from Canada and through each
+# country's exit (the owner's choice of 2026-11-04), as two plans under Prime Video (the owner's choice of 2026-11-04):
+# Amazon Prime, a suite of Prime Video and Amazon's other benefits, and Prime Video sold alone. Pages, each quoted
+# where it's used:
+# Pricing: each country's Amazon Prime page (amazon.ca/amazonprime from Canada; amazon.com/amazonprime,
+# amazon.co.uk/amazonprime, amazon.com.au/prime, amazon.de/amazonprime, amazon.fr/amazonprime, amazon.it/amazonprime,
+# amazon.es/amazonprime and amazon.nl/prime through each country's exit): "Prime Monthly" "per month after trial" and
+# "Prime Annual" "per year after trial" (Canada's $9.99 and $99, the US's $14.99 and $139, the UK's £8.99 and £95,
+# Australia's $12.99 and $99, Germany's €8.99 and €89.90, France's €6.99 and €69.90, and Italy's, Spain's and the
+# Netherlands' €4.99 and €49.90). Ireland's is primevideo.com/offers through an Irish exit, "Join Amazon Prime for €6.99
+# per month", with no yearly price. New Zealand's (primevideo.com/offers through its exit) sells Prime Video alone:
+# "Prime Video is just NZ$10.99/month". Ad free, an add-on: "Watch ad free for an extra A$2.99/month" (Australia's
+# offers page), "€2,99/ month" (the Netherlands') and "NZ$2.99/month" (New Zealand's); in the US it's Prime Video
+# Ultra, "priced at $4.99 a month" (Amazon's "Everything you need to know about Prime Video", updated April 10, 2026:
+# its Ultra help articles name no price).
+# Not listed: Prime for students and young adults and Prime Access, which need proof of eligibility, and Prime Video
+# Channels and the other add-on subscriptions, which are other companies' services.
+# Region checklist, 2026-11-04: 1. each country's Amazon store and primevideo.com/offers; 4. the plan cards, never past
+# them; 6. Edge, from Canada and through each country's exit. The US offers page for Prime Video alone showed Amazon's
+# "continue shopping" check, which counts as a bot check, so the reader stopped there; Canada's, the UK's, Germany's,
+# France's, Italy's and Spain's offers pages hand off to the Amazon store without Ad free's price.
+
+# Coverage: amazon-prime-video.amazon-prime in NZ: New Zealand's offers page sells Prime Video alone, not Amazon Prime
+# (2026-11-04).
+
+# Coverage: amazon-prime-video.prime-video in US: sold alone there, but its offers page showed Amazon's "continue
+# shopping" check, a bot check, so its price is unread (2026-11-04).
+
+# Coverage: amazon-prime-video.prime-video in CA, GB, AU, IE, DE, FR, NL, ES and IT: their pages sell Amazon Prime,
+# not Prime Video alone (2026-11-04).
+
+id: amazon-prime-video
+name: Prime Video
+aliases: [amazon prime video, amazon prime]
+website: https://www.primevideo.com
+# Amazon Canada's store and help centre.
+domains: [amazon.ca]
+category: streaming
+spendCategory: streaming
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    AU: AUD,
+    NZ: NZD,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+  }
+cancelUrl: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GTJQ7QZY7QL2HK4Y
+sources: { pricing: https://www.amazon.ca/amazonprime }
+# Accepted cards and ways to pay, read 2026-11-04 from Canada: Amazon.ca's "Accepted Payment Methods" (Visa,
+# Mastercard, American Express and their prepaid cards, and Amazon.ca Gift Cards) and "End your Amazon Prime
+# Membership" (memberships bought in its Android apps are managed "through Google Subscription services"). Other
+# countries' lists aren't read yet.
+acceptedNetworks:
+  CA:
+    networks: [visa, mastercard, amex]
+    url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GFBWMNXEPYVJAY9A
+    quotes: ['Visa', 'Mastercard', 'American Express']
+paymentMethods:
+  - methods: [card, gift-card]
+    regions: [CA]
+    page: 'Accepted Payment Methods'
+    url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GFBWMNXEPYVJAY9A
+    quotes:
+      - 'Visa, Mastercard or American Express prepaid credit or gift cards'
+      - 'You can also use Amazon.ca Gift Cards to pay for your order.'
+  - methods: [app-store]
+    regions: [CA]
+    page: 'End your Amazon Prime Membership'
+    url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GTJQ7QZY7QL2HK4Y
+    quotes:
+      - 'Customers who sign up for Amazon Prime using the Android mobile shopping app or Prime Video Android app must manage their subscription through Google Subscription services.'
+
+# Owner: Amazon.com, Inc., whose own site lists Prime Video among its entertainment businesses. Amazon.com's Conditions
+# of Use give its address, "Amazon.com, Inc. P.O. Box 81226 Seattle, WA", under Washington State's laws.
+owner:
+  name: 'Amazon.com, Inc.'
+  website: https://www.aboutamazon.com
+  page:
+    name: 'Amazon entertainment'
+    url: https://www.aboutamazon.com/what-we-do/entertainment
+  quotes:
+    - 'Amazon produces and delivers to customers world-class entertainment via Prime Video'
+  country:
+    code: US
+    page:
+      name: Amazon.com Conditions of Use
+      url: https://www.amazon.com/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+    quotes:
+      - 'Seattle, WA 98108-1226'
+      - 'the laws of the state of Washington'
+    lastVerified: 2026-11-04
+  lastVerified: 2026-11-04
+
+# Renewal day (M11.5), read 2026-11-04: its Prime terms renew the membership automatically, and a payment made late
+# keeps "the original renewal date", without saying which day of the month that is.
+renewalAnchor:
+  kind: not-stated
+  pages: [https://www.amazon.ca/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP]
+  lastVerified: 2026-11-04
+
+# Perks (M11.6): Amazon Prime's other benefits, in Canada's Prime page's words ("Same-Day, One-Day, and Two-Day
+# Delivery on millions of items", "Amazon Music Prime", "unlimited, full-resolution photo storage" in Amazon Photos,
+# "Prime Reading", "a curated selection of games on Amazon Luna" and "free DashPass"). They vary by country.
+perks:
+  - id: fast-delivery
+    name: Same-Day, One-Day and Two-Day Delivery
+  - id: music-prime
+    name: Amazon Music Prime
+  - id: photos
+    name: Unlimited photo storage in Amazon Photos
+  - id: prime-reading
+    name: Prime Reading
+  - id: luna
+    name: Games on Amazon Luna
+  - id: dashpass
+    name: DoorDash's DashPass
+
+# Apps (the cross-category features), read 2026-11-04 in Prime Video's help: apps "for mobile devices running
+# Android, iOS, and Windows", for Fire TV, smart TVs, set-top boxes and game consoles, and the web ("through your web
+# browser", its usage rules).
+features:
+  platforms: [windows, android, ios, web, tv, console]
+
+# Features, read 2026-11-04 from Canada in Prime Video's help: its usage rules ("You can stream up to three titles at
+# the same time using the same Amazon account"; downloads: "You can download available titles to only two devices at
+# one time", a limit for each title, "If you have already downloaded a title to two devices"); "up to six user
+# profiles ... which can be either adult or Kids profiles" (its profiles article); "up to Ultra HD" and "Dolby Atmos"
+# on Fire TV, smart TVs and Android (its device articles); HDR only on Amazon's US help on Prime Video Ultra ("Dolby
+# Vision" for customers without it), so inferred elsewhere; live sports ("Stream Prime Originals, live sports",
+# Canada's offers page); French: "French-language Prime Originals" in Canada (Amazon Canada's news on its 2026 slate).
+# Its free ad-supported channels are open to "All customers, regardless of whether they have a Prime membership"
+# (Amazon's "Everything you need to know about Prime Video"), so they aren't counted as either plan's live TV. Ads on
+# most titles ("Watch ad free for an extra NZ$2.99/month"), which Ad free removes except on "live TV, and sports
+# events" (its Ad Free article): an add-on can't add to a plan's features here. The US differs: "up to four different
+# titles" at once, and 4K and Dolby Atmos only with Prime Video Ultra, which streams "up to five" (Amazon's US help),
+# as the notes say. Amazon Prime includes Prime Video sold alone.
+plans:
+  - id: amazon-prime-video.amazon-prime
+    name: Amazon Prime
+    link: https://www.amazon.ca/amazonprime
+    categories: [streaming, shopping]
+    features:
+      video.quality: 4k
+      video.hdr: true
+      audio.dolby-atmos: true
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.download-devices: 2
+      streaming.profiles: 6
+      streaming.kids-profiles: true
+      streaming.french-content: true
+      streaming.live: [sports]
+      includes-subscription: [amazon-prime-video.prime-video]
+    inferred:
+      video.hdr:
+        reason: 'Amazon’s US help says members stream in Dolby Vision, an HDR format; other countries’ pages don’t name HDR.'
+        page:
+          name: What Is Prime Video Ultra?
+          url: https://www.amazon.com/gp/help/customer/display.html?nodeId=TY4VVa4DCmK331KhLS
+        lastVerified: 2026-11-04
+    perks: [fast-delivery, music-prime, photos, prime-reading, luna, dashpass]
+    addOnIds: [amazon-prime-video.ad-free, amazon-prime-video.ultra]
+    notes: Prime Video, with ads on most titles, and Amazon's shopping benefits, which vary by country. Ad free (Prime Video Ultra in the US) removes the ads, except on live TV and sports. In the US, 4K and Dolby Atmos need Ultra, and it streams 4 titles at once (5 with Ultra).
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.amazon.ca/amazonprime,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.amazon.ca/amazonprime,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 14.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.amazon.com/amazonprime,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 139,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.amazon.com/amazonprime,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.amazon.co.uk/amazonprime,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 95,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.amazon.co.uk/amazonprime,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 12.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.amazon.com.au/prime,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.amazon.com.au/prime,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 6.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.primevideo.com/offers,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.amazon.de/amazonprime,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 89.9,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.amazon.de/amazonprime,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 6.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.amazon.fr/amazonprime,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 69.9,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.amazon.fr/amazonprime,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 4.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.amazon.nl/prime,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 49.9,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.amazon.nl/prime,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 4.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.amazon.es/amazonprime,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 49.9,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.amazon.es/amazonprime,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 4.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.amazon.it/amazonprime,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 49.9,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.amazon.it/amazonprime,
+        }
+  - id: amazon-prime-video.prime-video
+    name: Prime Video
+    link: https://www.primevideo.com/offers
+    features:
+      video.quality: 4k
+      video.hdr: true
+      audio.dolby-atmos: true
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.download-devices: 2
+      streaming.profiles: 6
+      streaming.kids-profiles: true
+      streaming.french-content: true
+      streaming.live: [sports]
+    inferred:
+      video.hdr:
+        reason: 'Amazon’s US help says members stream in Dolby Vision, an HDR format; other countries’ pages don’t name HDR.'
+        page:
+          name: What Is Prime Video Ultra?
+          url: https://www.amazon.com/gp/help/customer/display.html?nodeId=TY4VVa4DCmK331KhLS
+        lastVerified: 2026-11-04
+    addOnIds: [amazon-prime-video.ad-free]
+    notes: Prime Video on its own, without Amazon's shopping benefits, with ads on most titles. Ad free removes them, except on live TV and sports.
+    prices:
+      - {
+          region: NZ,
+          currency: NZD,
+          amount: 10.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.primevideo.com/offers,
+        }
+
+# Ad free is sold in Canada, the UK, Germany, France, Italy and Spain too ("Ad Free" article's list), but their offers
+# pages hand off to the Amazon store without its price, so it's priced only where a page showed one.
+addOns:
+  - id: amazon-prime-video.ad-free
+    name: Ad free
+    prices:
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.primevideo.com/offers,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.primevideo.com/offers,
+        }
+      - {
+          region: NZ,
+          currency: NZD,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.primevideo.com/offers,
+        }
+  - id: amazon-prime-video.ultra
+    name: Prime Video Ultra
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 4.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.aboutamazon.com/news/entertainment/what-you-need-to-know-about-prime-video,
+        }
+
+# Terms and policies, read 2026-11-04 (M11.15) from Canada: the Prime Video Terms of Use (one document for every
+# country, with Germany's price clause and video-only subscriptions' refunds), amazon.ca's and amazon.com's Amazon
+# Prime Terms and Conditions of Use (the US's as US ratings), Amazon Canada's help on ending Prime, Prime Video's usage
+# rules and profiles articles, Amazon's articles on Kids profiles and Prime Video Ultra (amazon.com's: amazon.ca and
+# primevideo.com have no Kids profiles article), Amazon's guide to Prime Video, and Amazon's Privacy Notice, rated once
+# as a shared document (data/policies/amazon-privacy.yaml). Other countries' Prime terms aren't read. Its help on
+# switching plans is about moving Prime to another country, so plan changes stay unrated.
+policies:
+  shared: [amazon-privacy]
+  links:
+    - name: 'Prime Video terms of use'
+      url: https://www.primevideo.com/help?nodeId=202095490
+    - name: 'Amazon Prime terms (Canada)'
+      url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP
+    - name: 'Amazon Prime terms (US)'
+      url: https://www.amazon.com/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP
+    - name: 'Conditions of use (Canada)'
+      url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+    - name: 'Conditions of use (US)'
+      url: https://www.amazon.com/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+    - name: 'End your Prime membership'
+      url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GTJQ7QZY7QL2HK4Y
+    - name: 'Usage rules'
+      url: https://www.primevideo.com/help?nodeId=202095500
+    - name: 'Profiles'
+      url: https://www.primevideo.com/help?nodeId=GD8VJD2EDJ2GSNEC
+    - name: 'Kids profiles'
+      url: https://www.amazon.com/gp/help/customer/display.html?nodeId=GTYL2UYVAAPUD6WE
+    - name: 'Prime Video Ultra'
+      url: https://www.amazon.com/gp/help/customer/display.html?nodeId=TY4VVa4DCmK331KhLS
+    - name: 'Everything you need to know about Prime Video'
+      url: https://www.aboutamazon.com/news/entertainment/what-you-need-to-know-about-prime-video
+  ratings:
+    - topic: privacy.children
+      tier: neutral
+      reason: 'Under-18s may use it only with a parent or guardian, and Kids profiles have parental controls, but they can show promotional breaks, and it doesn’t say whether ads to children are targeted.'
+      sources:
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'If you are under 18 years of age, or the age of majority in your location, you may use the Service only with involvement of a parent or guardian.'
+        - url: https://www.amazon.com/gp/help/customer/display.html?nodeId=GTYL2UYVAAPUD6WE
+          quote: 'To prevent kids from switching to an adult profile and accessing inappropriate content, you can PIN-lock adult profiles.'
+        - url: https://www.amazon.com/gp/help/customer/display.html?nodeId=GTYL2UYVAAPUD6WE
+          quote: 'Some video content may contain promotional breaks.'
+      lastVerified: 2026-11-04
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can end Prime online at any time in your account settings.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GTJQ7QZY7QL2HK4Y
+          quote: 'You can turn off this automatic renewal at any time.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP
+          quote: 'You may cancel your Prime membership any time by visiting Your Account and adjusting your membership settings.'
+      lastVerified: 2026-11-04
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get a full refund within 14 days of signing up, less what you used. After that, only if you haven’t used Prime since your last payment.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP
+          quote: 'If you cancel within 14 days of signing up for or converting from a free trial to a paid membership, we will refund your full membership fee'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GTJQ7QZY7QL2HK4Y
+          quote: "Paid members who don't use their benefits are eligible for a full refund of the current membership period."
+      lastVerified: 2026-11-04
+    - topic: billing.refunds
+      regions: [US]
+      tier: neutral
+      reason: 'In the US you get a full refund within 3 business days of signing up, less what you used. After that, only if you haven’t used Prime since your last payment.'
+      sources:
+        - url: https://www.amazon.com/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP
+          quote: 'If you cancel within 3 business days of signing up for or converting from a free trial to a paid membership, we will refund your full membership fee'
+      lastVerified: 2026-11-04
+    - topic: billing.refunds
+      plans: [amazon-prime-video.prime-video]
+      tier: neutral
+      reason: 'Prime Video alone refunds you in full within 3 business days of signing up (14 days in the UK and the EU), less what you watched. After that, only if you haven’t watched since your last payment.'
+      sources:
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'If you cancel within 3 business days of signing up for, or converting from a free trial to, a paid membership (or, for customers in the UK and European Union, within 14 days of receiving confirmation of your subscription or membership service), we will refund your full membership fee'
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'If you cancel at any other time, we will refund your full membership fee only if Digital Content available as part of your video-only membership has not been accessed through your account since your latest membership charge.'
+      lastVerified: 2026-11-04
+    - topic: billing.price-changes
+      tier: poor
+      reason: 'A new price starts only when you renew, but it promises notice only where the law requires it, as Quebec’s does (30 days).'
+      sources:
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'may change over time and by location without notice (except as may be required by applicable law)'
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'However, any increase in subscription fee will not apply until your subscription is renewed.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP
+          quote: 'If required by applicable law (including applicable Quebec law), we will give you notice of the change in writing, at least 30 days before the effective date.'
+      lastVerified: 2026-11-04
+    - topic: billing.price-changes
+      regions: [DE]
+      tier: good
+      reason: 'In Germany it emails you about a new price at least 30 days ahead, with the reason, and you can reject it or cancel; if you do neither within 30 days, you’ve accepted it.'
+      sources:
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'we will inform you in text form (for example by e-mail) about the change, the reason(s) for the change, and the effective date of the change within a reasonable period of at least 30 days before the change takes effect'
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'You may reject the change or cancel your subscription or membership.'
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'Your consent to the change will be deemed to have been given if you have not rejected the change within 30 days after receipt of the information.'
+      lastVerified: 2026-11-04
+    - topic: billing.price-changes
+      regions: [US]
+      tier: neutral
+      reason: 'In the US it tells you about a higher fee before your membership renews, without saying how far ahead, and you can cancel before the renewal.'
+      sources:
+        - url: https://www.amazon.com/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP
+          quote: 'IF THE MEMBERSHIP FEE INCREASES, WE WILL NOTIFY YOU IN ADVANCE OF THE RENEWAL OF THE NEW FEE. YOU MAY CANCEL AT ANY TIME BEFORE THE RENEWAL TAKES EFFECT.'
+      lastVerified: 2026-11-04
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'A trial needs your payment details and turns into a paid membership on its own, without a reminder unless the law requires one.'
+      sources:
+        - url: https://www.aboutamazon.com/news/entertainment/what-you-need-to-know-about-prime-video
+          quote: 'Enter payment information'
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'If you purchase a subscription or start a free trial for a subscription, your subscription will automatically continue, and you authorize us (without further notice, unless required by applicable law) to collect the then-applicable periodic subscription fee'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GTJQ7QZY7QL2HK4Y
+          quote: 'At the end of the free trial period, you will automatically upgrade to a paid membership.'
+      lastVerified: 2026-11-04
+    - topic: billing.renewal-notice
+      tier: poor
+      reason: 'It renews your membership without telling you first, unless the law requires it.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP
+          quote: 'YOU AUTHORIZE US (WITHOUT NOTICE TO YOU, UNLESS REQUIRED BY APPLICABLE LAW) TO COLLECT THE THEN-APPLICABLE MEMBERSHIP FEE AND ANY TAXES'
+      lastVerified: 2026-11-04
+    - topic: billing.fees
+      tier: great
+      reason: 'It names no fees beyond the price, only taxes.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP
+          quote: 'Taxes may apply on either or both of the membership fee and the reduced shipping charges for Prime.'
+      lastVerified: 2026-11-04
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its terms and help don’t say what happens to what you’ve paid when you switch between monthly and yearly.'
+      pages:
+        - https://www.amazon.ca/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP
+        - https://www.amazon.ca/gp/help/customer/display.html?nodeId=GTJQ7QZY7QL2HK4Y
+      lastVerified: 2026-11-04
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Disputes go to private arbitration, one person at a time, with no class actions and no way to opt out, unless your province’s law lets you go to court.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+          quote: 'Any dispute or claim relating in any way to your use of any Amazon Service, or to any products or services sold or distributed by Amazon or through Amazon Services will be resolved by binding arbitration, rather than in court'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+          quote: 'We each agree that any dispute resolution proceedings will be conducted only on an individual basis and not in a class, consolidated or representative action.'
+      lastVerified: 2026-11-04
+    - topic: legal.disputes
+      regions: [US]
+      tier: bad
+      reason: 'In the US too, disputes go to private arbitration, one person at a time, with no class actions and no way to opt out.'
+      sources:
+        - url: https://www.amazon.com/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+          quote: 'YOU AND WE AGREE THAT ANY DISPUTE OR CLAIM RELATING IN ANY WAY TO YOUR USE OF ANY AMAZON SERVICE, OR TO ANY PRODUCTS OR SERVICES SOLD OR DISTRIBUTED BY AMAZON OR THROUGH AMAZON.COM, WILL BE RESOLVED BY BINDING ARBITRATION RATHER THAN IN COURT.'
+        - url: https://www.amazon.com/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+          quote: 'YOU AND WE AGREE THAT ANY ARBITRATION PROCEEDING WILL BE CONDUCTED ONLY ON AN INDIVIDUAL BASIS AND NOT IN A CLASS OR REPRESENTATIVE ACTION.'
+      lastVerified: 2026-11-04
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms at any time by posting them, with written notice 30 days ahead only where the law requires it. Staying a member means you accept them.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP
+          quote: "We may in our discretion change these Terms, Amazon.ca's Conditions of Use and Privacy Notice, or any aspect of Prime membership, at any time by posting the revised terms on the Amazon.ca website."
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP
+          quote: 'YOUR CONTINUED MEMBERSHIP AFTER WE CHANGE THESE TERMS CONSTITUTES YOUR ACCEPTANCE OF THE CHANGES.'
+      lastVerified: 2026-11-04
+    - topic: legal.terms-changes
+      regions: [US]
+      tier: bad
+      reason: 'In the US it can change its terms, or anything about Prime, without telling you. Staying a member means you accept them.'
+      sources:
+        - url: https://www.amazon.com/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP
+          quote: 'We may in our discretion change these Terms or any aspect of Prime membership, without notice to you.'
+        - url: https://www.amazon.com/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP
+          quote: 'YOUR CONTINUED MEMBERSHIP AFTER WE CHANGE THESE TERMS CONSTITUTES YOUR ACCEPTANCE OF THE CHANGES.'
+      lastVerified: 2026-11-04
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can end your membership at its discretion without notice, refunding the full months left (none on a monthly plan), and nothing if it decides your conduct broke its terms or harmed its interests.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP
+          quote: 'We may terminate your Prime membership at our discretion without notice. If we do so, we will give you a prorated refund based on the number of full months remaining in your membership.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP
+          quote: 'However, we will not give any refund for termination related to conduct that we determine, in our discretion, violates these Terms or any applicable law, involves fraud or misuse of the Prime membership, or is harmful to our interests or another user.'
+      lastVerified: 2026-11-04
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can remove Prime benefits or stop any part of Prime Video without notice and owes you nothing, and videos you bought can become unavailable.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP
+          quote: 'From time to time, Amazon may choose in its sole discretion to add or remove Prime membership benefits.'
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'Amazon reserves the right to suspend, or discontinue the Service, or any part of the Service, at any time and without notice (except as required by applicable law or set out above), and Amazon will not be liable to you should it exercise such rights, even if your ability to use Digital Content is impacted by the change.'
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'may become unavailable due to potential content provider licensing restrictions or for other reasons, and Amazon will not be liable to you if Purchased Digital Content becomes unavailable for further download or streaming'
+      lastVerified: 2026-11-04
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://www.amazon.ca/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+        - https://www.amazon.ca/gp/help/customer/display.html?nodeId=G2B9L3YR7LR8J4XP
+      lastVerified: 2026-11-04
+    - topic: service.account-sharing
+      tier: good
+      reason: 'Its terms expect your household to watch under your account, on up to six profiles, and name no checks on who does.'
+      sources:
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'you accept this Agreement on behalf of yourself and all members of your household and others who use the Service under your account'
+        - url: https://www.primevideo.com/help?nodeId=GD8VJD2EDJ2GSNEC
+          quote: 'You can have up to six user profiles'
+      lastVerified: 2026-11-04
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Downloads last 30 days, and 48 hours once you start watching. It caps how many titles you can download at a time, 50 in the US, a number that varies by country.'
+      sources:
+        - url: https://www.primevideo.com/help?nodeId=202095500
+          quote: "you'll typically have 30 days to begin watching the video after you download it and once you start watching it, you'll typically have 48 hours to finish watching it"
+        - url: https://www.primevideo.com/help?nodeId=202095500
+          quote: 'We set a maximum number of titles that can be downloaded at a time across Prime or Prime Video and third-party add-on subscriptions titles across all devices associated with your Amazon account which may vary based on your location and other factors.'
+        - url: https://www.amazon.com/gp/help/customer/display.html?nodeId=TY4VVa4DCmK331KhLS
+          quote: 'download up to 50 titles on the Prime Video app for offline viewing'
+      lastVerified: 2026-11-04

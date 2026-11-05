@@ -267,7 +267,8 @@
   source: wikidata
   wikidata: Q4740856
   sitelinks: 53
-  status: queued
+  status: done
+  date: 2026-11-04
 - id: avast-antivirus
   name: Avast Antivirus
   website: https://www.avast.ua/free-antivirus-download
@@ -2265,7 +2266,9 @@
   source: wikidata
   wikidata: Q21086634
   sitelinks: 25
-  status: queued
+  status: rejected
+  date: 2026-11-04
+  note: "The owner's choice of 2026-11-04: a plan of Prime Video (amazon-prime-video.amazon-prime), not a provider of its own"
 - id: lyft
   name: Lyft
   website: https://www.lyft.com
