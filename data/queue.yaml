@@ -712,7 +712,8 @@
   source: wikidata
   wikidata: Q7929430
   sitelinks: 20
-  status: queued
+  status: done
+  date: 2026-11-04
 - id: zonealarm
   name: ZoneAlarm
   website: https://www.zonealarm.com
