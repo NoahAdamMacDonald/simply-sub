@@ -1,0 +1,149 @@
+url: https://rumble.com/s/bug-bounty
+method: fetch
+saved: 2026-11-04
+
+Bug Bounty
+Rumble Bug Bounty Program
+Rumble is committed to maintaining the highest security standards. Through our Bug Bounty Program, we collaborate with security researchers who share this commitment and help us keep Rumble safe and secure.
+How to Report
+Please send your vulnerability reports to this email address . To ensure timely triage, include all the details listed in the Report Quality section below. One email address must represent only a single person. Each participant may submit up to four (4) reports per month per email address. We trust participants will not create multiple addresses to bypass this limit — our goal is to encourage higher-quality submissions. Once a report is submitted, it becomes the property of Rumble and may not be disclosed publicly. Any threats of exposure will result in immediate removal from the program.
+Scope
+The following domains are in scope for this program:
+*.rumble.com
+*.quake.ai
+*.locals.com
+Out of Scope
+The following activities are strictly out of scope and will not be rewarded:
+Social engineering (phishing, vishing, etc.)
+Denial of Service (DoS / DDoS) attacks
+Automated vulnerability scanning or brute force attacks without a clear PoC exploit
+Rewards
+Rewards are based on severity, impact, and report quality
+Typical maximum bounty: $1,000 USD
+Exceptionally critical issues may be rewarded above this amount
+Low-quality, incomplete, or duplicate reports may not qualify for rewards
+Report Quality
+To maximize eligibility and reward, reports must include:
+Vulnerability Description – what the bug is
+Severity – e.g., critical, high, medium, low
+Impact – what an attacker could achieve
+Steps to Reproduce – detailed instructions with URLs, commands, screenshots, or video
+Recommendation – how you suggest fixing the issue
+Payments
+Rewards are paid to your Rumble account, after which you can initiate a transfer to PayPal.
+Approximate Review Timelines
+Initial Response: Within 5 business days
+Triage: Within 10 business days after initial response
+Business Day Definition: Monday–Friday, 9:00 a.m.–5:00 p.m. Eastern Time (excluding holidays)
+Timelines are approximate and may shift with or without notice
+Responsible Research
+We ask all researchers to:
+Respect user privacy and do not access, modify, or delete customer data
+Avoid service disruption during testing
+Use test accounts where possible
+Give us a reasonable time to fix issues before public disclosure
+Triage Process Includes
+Validation & Reproduction: Confirm that the reported issue is real, reproducible, and within program scope
+Duplicate Detection: Determine if the issue has already been reported to avoid duplicate payouts
+Severity Assessment: Collaborate with Development and Operations to assess risk and impact
+Resolution Planning: Work with Product Management to prioritize fixes or accept risk, and determine the payout value. Please note that fixes may take time to appear in production
+Communication: Updates will be provided through the bug bounty program’s official email or another authorized communication channel. Using unapproved channels may result in removal from the program
+Thank you for helping secure Rumble!
+We note that participation in the program has been and remains voluntary. Rumble has never guaranteed, and continues not to guarantee, payouts or action on any report. As always, Rumble may cancel the program at any time with or without notice.
+Sign In
+Sign Up
+Appearance:
+Language: English
+Sign In
+Appearance
+Setting is applied to this browser only
+System Default
+Light Theme
+Dark Theme
+Change Language
+English
+Español
+Deutsch
+Français
+Português
+Home
+Shorts
+Browse
+Editor Picks
+Trending
+Shop
+Latest
+Library
+Watch History
+Watch Later
+Featured Channels
+Featured
+TimcastIRL
+12.9K
+Badlands Media
+638
+Tectone
+613
+Lofi Girl
+107
+Donald J. Trump
+VSiNLive
+Alex Zedra
+The Charlie Kirk Show
+Adam Carolla
+Breaking Points
+OutdoorChannelTV
+Sport Fishing Championship
+Pikabooirl
+Scammer Payback
+Roseanne Barr
+WWE
+Bannons War Room
+Bitcoin Magazine
+Cash Jordan
+SB Mowing
+Buddy Brown
+Akademiks
+Geeks + Gamers
+Rebel News
+Donald Trump Jr.
+Danny Polishchuk
+Demons Row
+CAMELOT331
+Tim Pool Show
+Tommy G
+AlyB0ba
+Ann Coulter
+Shawn Ryan Show
+President Donald J. Trump
+Dr Disrespect
+Real Talk With Marissa Streit
+MattMorseTV
+X22 Report
+Asmongold
+tether
+Nikko Ortiz
+Warren Smith - Secret Scholar Society
+Redacted News
+Comedy Dynamics
+Nerdrotic
+Julie Green Ministries
+The Why Files
+World Jai Alai League
+Dr. Drew
+The White House
+FAQ
+About Us
+Careers
+Our Apps
+Advertising
+Store
+Cloud
+Terms & Conditions
+Privacy Policy
+Your Privacy Choices
+Take it Down Act
+Copyright / DMCA
+Accessibility
+Bug Bounty
+Copyright © 2026 Rumble®. All Rights Reserved.

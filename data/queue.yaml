@@ -317,7 +317,9 @@
   source: wikidata
   wikidata: Q27903045
   sitelinks: 40
-  status: queued
+  status: unreadable
+  date: 2026-11-04
+  note: 'Read 2026-11-04: its plans and features are in its help centre, but its sign-up page shows the reader no plans or prices from Canada (only "Plans start from $7.99 CAD" on its home page), and its site answers "406 Not Acceptable" through other countries'' exits, so its prices need reading from an ordinary connection'
 - id: deezer
   name: Deezer
   website: https://www.deezer.com
@@ -613,7 +615,9 @@
   source: wikidata
   wikidata: Q30133334
   sitelinks: 23
-  status: queued
+  status: unreadable
+  date: 2026-11-04
+  note: 'Read 2026-11-04: its site tells this machine''s connection "Disable your VPN to continue", shows "There''s a problem opening DAZN just now" through a UK exit, and its help pages render empty, so it needs reading from an ordinary connection'
 - id: mubi
   name: Mubi
   website: https://mubi.com
@@ -680,7 +684,8 @@
   source: wikidata
   wikidata: Q104765127
   sitelinks: 20
-  status: queued
+  status: done
+  date: 2026-11-04
 - id: tencent-video
   name: Tencent Video
   website: https://v.qq.com
@@ -707,7 +712,8 @@
   source: wikidata
   wikidata: Q7929430
   sitelinks: 20
-  status: queued
+  status: done
+  date: 2026-11-04
 - id: zonealarm
   name: ZoneAlarm
   website: https://www.zonealarm.com

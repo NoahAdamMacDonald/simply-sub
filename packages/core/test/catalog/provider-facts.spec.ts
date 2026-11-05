@@ -187,6 +187,13 @@ describe('namesRenewalAnchor', () => {
       'same-date',
       true,
     ],
+    // Viki's help centre (M11.15): the day bought recurs, by example.
+    [
+      "if you purchased a monthly Viki Pass plan on the 1st of the month, you'll continue to be billed on the 1st of each month.",
+      'same-date',
+      true,
+    ],
+    ['If you purchased on the 3rd, you are billed on the 1st of each month.', 'same-date', false],
     ['Your subscription began on a Tuesday.', 'same-date', false],
     ['Your plan renews every 30 days.', 'every-30-days', true],
     ['Un forfait de 30 jours', 'every-30-days', true],

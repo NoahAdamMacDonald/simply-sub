@@ -1,0 +1,587 @@
+# Researched by hand on 2026-11-04 (M11.15, the streaming category, batch 2), read with Edge from Canada and through each
+# country's exit (the owner's choice of 2026-11-04). Pages, each quoted where it's used:
+# Pricing: viki.com/pass, which prices by where the visitor is: Canada's from Canada, the others through each
+# country's exit, monthly and annual ("Save 17%"). Standard ("720p (HD)", "Stream on 1 device") and Plus ("1080p (Full
+# HD)", "Stream on 4 devices", "Watch offline"), both "Ad-free streaming"; "All prices are subject to applicable
+# taxes."
+# Region checklist, 2026-11-04: 6. read through each country's exit: New Zealand's showed Australia's prices in
+# Australian dollars, so New Zealand stays unread; on the UK's and the euro countries' pages the reader couldn't select
+# Standard's card (its clicks were caught by another layer), so only Plus is priced there.
+
+# Coverage: viki.standard in GB, IE, DE, FR, NL, ES and IT: their pages list Standard, but its card wouldn't open in
+# the reader, so its prices there are unread (2026-11-04).
+
+id: viki
+name: Viki
+website: https://www.viki.com
+# Its help centre.
+domains: [support.viki.com]
+category: streaming
+spendCategory: streaming
+billingCurrency:
+  { CA: CAD, US: USD, AU: AUD, GB: GBP, IE: EUR, DE: EUR, FR: EUR, NL: EUR, ES: EUR, IT: EUR }
+cancelUrl: https://support.viki.com/hc/articles/200138904
+sources: { pricing: https://www.viki.com/pass }
+# Accepted cards and ways to pay, read 2026-11-04 in its help centre ("How can I pay for Viki Pass and Rentals?"):
+# cards on Viki.com, Apple Pay and Google Pay "only ... in select countries" (not named, so not listed), and Apple's,
+# Google Play's and Roku's billing in its apps. Diners Club is in its list too.
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex, jcb, discover]
+    url: https://support.viki.com/hc/articles/200138854
+    quotes:
+      - 'Debit Cards, Credit Cards, Prepaid Cards, and Gift Cards by Visa, MasterCard, American Express, JCB, Discover, and Diners Club'
+paymentMethods:
+  - methods: [card]
+    page: 'How can I pay for Viki Pass and Rentals?'
+    url: https://support.viki.com/hc/articles/200138854
+    quotes:
+      - 'Debit Cards, Credit Cards, Prepaid Cards, and Gift Cards by Visa, MasterCard, American Express, JCB, Discover, and Diners Club'
+  - methods: [app-store]
+    page: 'How can I pay for Viki Pass and Rentals?'
+    url: https://support.viki.com/hc/articles/200138854
+    quotes:
+      - 'you can rent/subscribe via Apple, Google Play Store, or Roku Pay'
+
+# Owner: Rakuten Group, Inc., in Tokyo: Viki, Inc. ("Rakuten Viki", San Mateo, California) is its subsidiary (its terms).
+owner:
+  name: 'Rakuten Group, Inc., through Viki, Inc.'
+  page:
+    name: Terms of use
+    url: https://www.viki.com/legal/terms_of_use
+  quotes:
+    - 'We are a subsidiary of Rakuten Group, Inc., based in Tokyo, Japan'
+  country:
+    code: JP
+  lastVerified: 2026-11-04
+
+# Renewal day (M11.5), read 2026-11-04 in its help centre: the day you bought it recurs, as its example of the 1st says.
+renewalAnchor:
+  kind: same-date
+  page: How Can I Upgrade, Downgrade or Manage My Subscription?
+  url: https://support.viki.com/hc/articles/360000054748
+  quotes:
+    - "if you purchased a monthly Viki Pass plan on the 1st of the month, you'll continue to be billed on the 1st of each month."
+  lastVerified: 2026-11-04
+
+# Features, read 2026-11-04 on viki.com/pass (above): Plus's offline viewing names no number of devices, so 1
+# (inferred). No profiles or Kids profiles (no one under 18 may use it), no live programmes, and no French audio named:
+# its shows come with subtitles in many languages, which the French-content feature doesn't count.
+plans:
+  - id: viki.standard
+    name: Standard
+    link: https://www.viki.com/pass
+    features:
+      video.quality: 720p
+      ad-free: true
+      streaming.concurrent-streams: 1
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 99.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 7.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 79.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 99.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+
+  - id: viki.plus
+    name: Plus
+    link: https://www.viki.com/pass
+    features:
+      video.quality: 1080p
+      ad-free: true
+      streaming.concurrent-streams: 4
+      streaming.download-devices: 1
+    inferred:
+      streaming.download-devices:
+        reason: 'Plus lets you "Watch offline", but no page says on how many devices, so 1 is the least it can be.'
+        page:
+          name: Viki Pass
+          url: https://www.viki.com/pass
+        lastVerified: 2026-11-04
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 13.49,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 134.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 119.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 12.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 129.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 7.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 79.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 89.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 89.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 89.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 89.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 89.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 89.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.viki.com/pass,
+        }
+
+# Terms and policies, read 2026-11-04 (M11.15): its Terms of Use and Privacy Policy, and its help centre's articles on
+# paying and cancelling. Its plan-change article opens per billing platform, which the reader didn't open.
+policies:
+  links:
+    - name: 'Terms of use'
+      url: https://www.viki.com/legal/terms_of_use
+    - name: 'Privacy policy'
+      url: https://www.viki.com/legal/privacy
+    - name: 'Cancelling'
+      url: https://support.viki.com/hc/articles/200138904
+    - name: 'Changing plans'
+      url: https://support.viki.com/hc/articles/115011290247
+    - name: 'Create an account'
+      url: https://www.viki.com/sign-up
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records what you watch and how you use Viki, and uses it to work out your preferences. You can limit some of it only with cookie choices or a request.'
+      sources:
+        - url: https://www.viki.com/legal/privacy
+          quote: 'Internet and other electronic network activity information, such as how and when you use or access the Rakuten Viki Service'
+        - url: https://www.viki.com/legal/privacy
+          quote: 'Infer your potential preferences'
+      action:
+        name: 'Its privacy policy'
+        url: https://www.viki.com/legal/privacy
+      lastVerified: 2026-11-04
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares your information with partners for marketing and with advertisers. Whether you can opt out depends on where you live.'
+      sources:
+        - url: https://www.viki.com/legal/privacy
+          quote: 'We share your Personal Information with our Partners to carry out marketing activities'
+        - url: https://www.viki.com/legal/privacy
+          quote: 'We, and our third-party advertisers, use your Personal Information to serve you with advertisements that may interest you, subject to your consent or opt-out, depending on your jurisdiction'
+      action:
+        name: 'Its privacy policy'
+        url: https://www.viki.com/legal/privacy
+      lastVerified: 2026-11-04
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Viki Pass has no ads, but its advertisers can use your information to pick ads for you, and whether you can say no depends on where you live.'
+      sources:
+        - url: https://www.viki.com/legal/privacy
+          quote: 'We, and our third-party advertisers, use your Personal Information to serve you with advertisements that may interest you, subject to your consent or opt-out, depending on your jurisdiction'
+      action:
+        name: 'Its privacy policy'
+        url: https://www.viki.com/legal/privacy
+      lastVerified: 2026-11-04
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy uses machine learning to guess your preferences, but doesn’t say whether it trains AI on your comments or subtitles.'
+      pages: [https://www.viki.com/legal/privacy]
+      lastVerified: 2026-11-04
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information while you have an account, and names no period for after.'
+      sources:
+        - url: https://www.viki.com/legal/privacy
+          quote: 'Unless otherwise specified, we will keep your Personal Information for as long as we have a relationship with you, e.g., while you have an active account with us.'
+      lastVerified: 2026-11-04
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your account yourself in its settings; it keeps only what the law requires.'
+      sources:
+        - url: https://www.viki.com/legal/privacy
+          quote: 'You can delete your Rakuten Viki Service account within your account settings'
+      lastVerified: 2026-11-04
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask for a copy of the information you gave it, electronically, but there’s no way to get it yourself.'
+      sources:
+        - url: https://www.viki.com/legal/privacy
+          quote: 'Port your data – Receive a copy of Personal Information you provided us in an electronic format'
+      action:
+        name: 'Its privacy policy'
+        url: https://www.viki.com/legal/privacy
+      lastVerified: 2026-11-04
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over information when the law or a court requires, and says nothing more about how.'
+      sources:
+        - url: https://www.viki.com/legal/privacy
+          quote: 'We may share your Personal Information with these parties to comply with any statutory or regulatory requirement, or the order of a court'
+      lastVerified: 2026-11-04
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your information can go to countries with weaker privacy law, under the Rakuten Group’s binding corporate rules for the EU and the UK.'
+      sources:
+        - url: https://www.viki.com/legal/privacy
+          quote: 'As part of the Rakuten Group, we rely on Rakuten’s EU Binding Corporate Rules'
+      lastVerified: 2026-11-04
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address, or a Facebook, Apple or Rakuten sign-in, and confirm you’re 18 or older; a Pass takes your payment details.'
+      sources:
+        - url: https://www.viki.com/sign-up
+          quote: 'Continue with Email'
+        - url: https://www.viki.com/sign-up
+          quote: 'I am at least 18 years old and above the age of majority in my home territory.'
+      lastVerified: 2026-11-04
+    - topic: privacy.children
+      tier: neutral
+      reason: 'No one under 18 may register or use it. It says nothing more about children’s data.'
+      sources:
+        - url: https://www.viki.com/legal/privacy
+          quote: 'anyone under 18 years of age or under the age of majority in their state, territory or country of residence as applicable, may not register for an account or use the Rakuten Viki Service'
+      lastVerified: 2026-11-04
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You cancel in your account settings at any time, and keep your Pass until the end of the period you paid for.'
+      sources:
+        - url: https://www.viki.com/legal/terms_of_use
+          quote: 'You can cancel your Viki Pass Subscription Plan at any time by visiting the “Account Settings” page on the Site'
+        - url: https://support.viki.com/hc/articles/200138904
+          quote: "When you cancel your subscription, you'll still have access to your benefits for the remaining time left in your billing cycle."
+      action:
+        name: 'How to cancel'
+        url: https://support.viki.com/hc/articles/200138904
+      lastVerified: 2026-11-04
+    - topic: billing.refunds
+      tier: neutral
+      reason: "You don't get money back, but you keep your Pass until the end of the period you paid for."
+      sources:
+        - url: https://support.viki.com/hc/articles/200138904
+          quote: 'Refunds will not be provided for unused subscriptions or late cancellations.'
+        - url: https://support.viki.com/hc/articles/200138904
+          quote: "When you cancel your subscription, you'll still have access to your benefits for the remaining time left in your billing cycle."
+      lastVerified: 2026-11-04
+    - topic: billing.price-changes
+      tier: great
+      reason: 'A higher price starts only at your next period after a notice period, never on time you’ve paid for, and you can cancel instead.'
+      sources:
+        - url: https://www.viki.com/legal/terms_of_use
+          quote: 'Any price increase applicable to a Viki Pass Subscription Plan will take effect no earlier than the start of the next subscription period following the applicable notice period.'
+      lastVerified: 2026-11-04
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'A trial may need your payment details up front and turns into a paid Pass when it ends; it names no reminder.'
+      sources:
+        - url: https://www.viki.com/legal/terms_of_use
+          quote: 'You may be required to provide your payment details to start the Trial'
+        - url: https://www.viki.com/legal/terms_of_use
+          quote: 'we may offer it to you for free or at a reduced rate for a specified duration'
+      lastVerified: 2026-11-04
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say monthly and yearly plans renew on their own, but not that it reminds you first.'
+      pages: [https://www.viki.com/legal/terms_of_use]
+      lastVerified: 2026-11-04
+    - topic: billing.fees
+      tier: poor
+      reason: 'Besides the price and taxes, it can charge "any applicable fees" without saying what they are.'
+      sources:
+        - url: https://www.viki.com/legal/terms_of_use
+          quote: 'a periodic subscription fee (and any applicable fees and taxes)'
+      lastVerified: 2026-11-04
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'On its website, a move up starts at once and your unused time counts towards it; a move down starts when your current plan ends.'
+      sources:
+        - url: https://support.viki.com/hc/articles/115011290247
+          quote: 'You will be charged the price of the new plan, minus the credits remaining'
+        - url: https://support.viki.com/hc/articles/115011290247
+          quote: 'Only after the current plan expires'
+      lastVerified: 2026-11-04
+    - topic: legal.disputes
+      tier: bad
+      reason: 'You must take any dispute to private arbitration, one person at a time, with no class actions, and you can’t opt out.'
+      sources:
+        - url: https://www.viki.com/legal/terms_of_use
+          quote: 'we will resolve any controversies, claims, counterclaims, or other disputes between you and us or you and a third-party agent of ours (a “Claim”) through binding and final arbitration instead of through court proceedings'
+        - url: https://www.viki.com/legal/terms_of_use
+          quote: 'Neither you nor we may act as a class representative or private attorney general, nor participate as a member of a class of claimants'
+      action:
+        name: 'Its terms'
+        url: https://www.viki.com/legal/terms_of_use
+      lastVerified: 2026-11-04
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms at any time, and they take effect when posted; if you disagree, you can only stop using it.'
+      sources:
+        - url: https://www.viki.com/legal/terms_of_use
+          quote: 'We may unilaterally revise and amend these Terms at any time.'
+        - url: https://www.viki.com/legal/terms_of_use
+          quote: 'The revised Terms are effective upon posting.'
+      lastVerified: 2026-11-04
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can suspend or bar your access at its own discretion, at any time and without notice, and won’t refund what you paid.'
+      sources:
+        - url: https://www.viki.com/legal/terms_of_use
+          quote: 'may suspend, restrict, discontinue or bar your access to the Rakuten Viki Service'
+        - url: https://www.viki.com/legal/terms_of_use
+          quote: 'we will not refund any amounts that you have already paid'
+      lastVerified: 2026-11-04
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or stop any part of Viki, with or without telling you, and says it owes you nothing when it does.'
+      sources:
+        - url: https://www.viki.com/legal/terms_of_use
+          quote: 'We may modify or discontinue any part of or all the Rakuten Viki Service in our sole discretion (including but not limited to any Service Options or Content), temporarily or permanently, and with or without notice to you'
+      lastVerified: 2026-11-04
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://www.viki.com/legal/terms_of_use]
+      lastVerified: 2026-11-04
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it uses technical and organisational measures, with no audits or way to report a security problem named.'
+      sources:
+        - url: https://www.viki.com/legal/privacy
+          quote: 'We implement technical and organizational measures designed to ensure a level of security'
+      lastVerified: 2026-11-04
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'An account is for one person: using anyone else’s login or account is against its terms.'
+      sources:
+        - url: https://www.viki.com/legal/terms_of_use
+          quote: 'An individual may only create one Account.'
+        - url: https://www.viki.com/legal/terms_of_use
+          quote: 'any other person’s Account login, password and/or Account'
+      lastVerified: 2026-11-04
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Downloads for offline viewing come with limits it can change; it doesn’t say what they are.'
+      sources:
+        - url: https://www.viki.com/legal/terms_of_use
+          quote: 'you may have the option to temporarily download certain Content on certain Compatible Devices for offline viewing'
+      lastVerified: 2026-11-04
