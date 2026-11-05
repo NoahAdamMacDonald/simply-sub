@@ -571,9 +571,11 @@ policies:
       pages: [https://www.hbomax.com/terms-of-use/en-us]
       lastVerified: 2026-11-04
     - topic: billing.fees
-      tier: good
-      reason: 'Besides the price and taxes, you pay only the costs of collecting money you owe if you don’t pay.'
+      tier: poor
+      reason: 'Its subscription fee includes "service fees" it doesn’t describe, besides taxes, and you pay the costs of collecting money you owe.'
       sources:
+        - url: https://www.hbomax.com/terms-of-use/en-us
+          quote: 'the applicable rate together with any applicable taxes and service fees (collectively, the “Subscription Fee”)'
         - url: https://www.hbomax.com/terms-of-use/en-us
           quote: 'costs incurred to collect any unpaid amounts, such as bank overdraft fees, collection agency fees'
       lastVerified: 2026-11-04
@@ -625,11 +627,13 @@ policies:
       pages: [https://www.hbomax.com/terms-of-use/en-us]
       lastVerified: 2026-11-04
     - topic: service.account-sharing
-      tier: good
-      reason: 'Up to five people who live with you can each have a profile. It names no checks in its terms.'
+      tier: poor
+      reason: 'Up to five people who live with you can each have a profile, and it can block or disable features to stop sharing outside your household.'
       sources:
         - url: https://www.hbomax.com/terms-of-use/en-us
           quote: 'You will have the option to create up to five (5) authorized user profiles on your HBO Max Account for people who live with you (the people in your household)'
+        - url: https://www.hbomax.com/terms-of-use/en-us
+          quote: 'We may also block or modify access or disable features, including for security reasons, to limit the impact of account sharing outside of your household'
       lastVerified: 2026-11-04
     - topic: service.device-limits
       tier: neutral
