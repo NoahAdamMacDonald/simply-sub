@@ -2110,6 +2110,15 @@ in every D1 `json` column search parses.
     add-ons: Ad free and the US's Prime Video Ultra. The queue's Amazon Prime entry is rejected, a plan of Prime Video
     now (the owner's choice). Amazon's Privacy Notice is a shared document (`data/policies/amazon-privacy.yaml`) for
     the Amazon services that follow.
+  - **Streaming, batch 3, part 1** (2026-11-04): the queue's last streaming entries triaged with the owner: Plex moves
+    to the software category (its passes stream your own media), Bilibili is rejected (its Premium isn't sold in the
+    catalog's regions), SkyShowtime and Viaplay are added for their catalog regions only, and Odysee waits for its
+    missing features. discovery+ (`discovery-plus`, Warner Bros. Discovery's: With ads and Ad-Free in the US,
+    Entertainment in the UK and Ireland, and Italy's three plans, which wait in core's `awaitingRequiredFeatures` for
+    their video quality, the owner's choice), with its UK, Irish and Italian terms rated for those countries; Canada's
+    is Rogers Sports & Media's, its own provider in part 2 (the owner's choice). HBO Max's fees and account sharing
+    drop to Poor: its terms have discovery+'s "service fees" and household-sharing clauses. Core's same-date renewal
+    wording reads "the date when you signed up".
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
         (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 and 2 and Prime Video done)
