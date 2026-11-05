@@ -613,7 +613,9 @@
   source: wikidata
   wikidata: Q30133334
   sitelinks: 23
-  status: queued
+  status: unreadable
+  date: 2026-11-04
+  note: 'Read 2026-11-04: its site tells this machine''s connection "Disable your VPN to continue", shows "There''s a problem opening DAZN just now" through a UK exit, and its help pages render empty, so it needs reading from an ordinary connection'
 - id: mubi
   name: Mubi
   website: https://mubi.com
