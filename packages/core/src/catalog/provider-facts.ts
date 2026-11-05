@@ -30,7 +30,7 @@ export const renewalAnchorNames: Readonly<Record<RenewalAnchorKind, string>> = {
  */
 const renewalWrittenAs: Readonly<Record<RenewalAnchorKind, RegExp>> = {
   'same-date':
-    /\b(?:date|day) (?:that )?you (?:sign(?:ed)? up|subscribed?|joined|purchased|started|bought)\b|\bsame (?:day|date)\b|\banniversary\b|\bmême (?:jour|date)\b|\bdate (?:de|d['’]) ?(?:votre )?(?:abonnement|inscription|achat)\b|\bbegan on a (?:day|date) not contained in a given month\b|\bcommencé à une date non comprise dans un mois donné|\b(?:re)?subscribe on your preferred billing date\b|\bthis charge will become your monthly billing date\b/i,
+    /\b(?:date|day) (?:that )?you (?:sign(?:ed)? up|subscribed?|joined|purchased|started|bought)\b|\bsame (?:day|date)\b|\banniversary\b|\bmême (?:jour|date)\b|\bdate (?:de|d['’]) ?(?:votre )?(?:abonnement|inscription|achat)\b|\bbegan on a (?:day|date) not contained in a given month\b|\bcommencé à une date non comprise dans un mois donné|\b(?:re)?subscribe on your preferred billing date\b|\bthis charge will become your monthly billing date\b|\bpurchased\b[^.]{0,60}\bon the (\d{1,2})(?:st|nd|rd|th)\b[^.]{0,80}\bbilled on the \1(?:st|nd|rd|th) of each month\b/i,
   'every-30-days': /\b(?:30|thirty)[- ]days?\b|\b30 jours\b/i,
   'first-of-month':
     /\b(?:1st|first(?: day)?) of (?:each|every|the|the following|the next) (?:calendar )?month\b|\bpremier (?:jour )?(?:de|du) (?:chaque )?mois\b|\b1er (?:de|du) (?:chaque )?mois\b/i,

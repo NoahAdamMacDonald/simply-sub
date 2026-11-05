@@ -36,8 +36,8 @@ owner:
     name: 'RUM Group'
     url: https://www.rum.group/
   quotes:
-    - 'RUM Group Inc.'
-    - 'Rumble gives that imagination a voice.'
+    - 'We’re a holding company with assets designed to foster creativity'
+    - 'Rumble gives that imagination a voice. Quake gives it a foundation.'
   country:
     code: US
     quotes:
@@ -132,21 +132,27 @@ policies:
       url: https://rumble.com/premium
     - name: 'Offline downloads'
       url: https://rumble.support/help/offline-downloads
+    - name: 'A free month through Comet'
+      url: https://rumble.support/help/how-do-i-get-1-month-of-rumble-premium-free-by-downloading-the-comet-browser
+    - name: 'Create a Rumble account'
+      url: https://auth.rumble.com/signup
   ratings:
     - topic: privacy.data-collection
       tier: poor
-      reason: 'It and its advertising partners collect what you do on its sites, your device identifiers and IP address. You can only limit that by asking, or browser by browser with cookies.'
+      reason: 'It studies how its services are used, beyond what it needs to run them. You can only limit that by asking, or browser by browser with cookies.'
       sources:
         - url: https://rumble.com/s/privacy
-          quote: 'We and our third-party advertising partners collect information from visitors to our websites, including usage activity, device identifiers, cookies, unique identifiers, and IP addresses.'
+          quote: 'to analyze and understand how our Services are used'
       action:
         name: 'Its privacy policy'
         url: https://rumble.com/s/privacy
       lastVerified: 2026-11-04
     - topic: privacy.data-sharing
-      tier: bad
-      reason: 'It says it may sell your personal information. You can ask it not to.'
+      tier: poor
+      reason: 'It shares your information with advertising partners to aim ads at you, which US state laws count as selling it. You can opt out only by request, or browser by browser.'
       sources:
+        - url: https://rumble.com/s/privacy
+          quote: 'We may disclose your aggregated, anonymized information and Personal Information to our third-party partners, including our connected device platform business partners, for the purpose of targeting advertisements that may be of interest to you'
         - url: https://rumble.com/s/privacy
           quote: 'Rumble may sell Personal Information, as such terms are defined under the applicable state privacy laws.'
       action:
@@ -158,15 +164,17 @@ policies:
       reason: 'It and advertising partners track what you do on its sites to aim ads at you. You can opt out by request, or block cookies browser by browser.'
       sources:
         - url: https://rumble.com/s/privacy
-          quote: 'You may opt out of the sale of your Personal Information or for targeted advertising purposes by submitting a request'
+          quote: 'We and our third-party advertising partners collect information from visitors to our websites, including usage activity, device identifiers, cookies, unique identifiers, and IP addresses.'
       action:
         name: 'Its privacy policy'
         url: https://rumble.com/s/privacy
       lastVerified: 2026-11-04
     - topic: privacy.ai-training
-      status: not-stated
-      reason: 'Its privacy policy doesn’t say whether it trains AI on what you post.'
-      pages: [https://rumble.com/s/privacy]
+      tier: bad
+      reason: 'Anything you upload may be used to train AI, and Rumble may license it to other companies to train on; there’s no way to say no.'
+      sources:
+        - url: https://rumble.com/s/terms
+          quote: 'you grant to Rumble the right to use the Content to train AI and machine learning models and/or to sub-license the Content to third parties for such purposes'
       lastVerified: 2026-11-04
     - topic: privacy.data-retention
       tier: poor
@@ -177,10 +185,10 @@ policies:
       lastVerified: 2026-11-04
     - topic: privacy.data-deletion
       tier: neutral
-      reason: "You can ask it to delete your information, but it doesn't say how long that takes."
+      reason: "You can delete what's in your profile yourself, or ask it to delete the rest, but it doesn't say how long that takes."
       sources:
         - url: https://rumble.com/s/privacy
-          quote: 'you have the right to request that we delete the Personal Information that we have collected or maintain about you'
+          quote: 'You may review, update, correct or delete the Personal Information in your account by editing your profile'
       action:
         name: 'Its privacy policy'
         url: https://rumble.com/s/privacy
@@ -196,23 +204,31 @@ policies:
         url: https://rumble.com/s/privacy
       lastVerified: 2026-11-04
     - topic: privacy.government-requests
-      tier: neutral
-      reason: 'It hands over information when it believes the law requires it, and says nothing more about how.'
+      tier: poor
+      reason: 'Besides what the law requires, it may hand over your information to protect its own interests, or whenever it believes in good faith that it should.'
       sources:
         - url: https://rumble.com/s/privacy
-          quote: 'We may disclose your Personal Information if we believe in good faith that such disclosure is necessary to satisfy our legal obligations.'
+          quote: 'to protect the interests, rights, safety, or property of us'
+        - url: https://rumble.com/s/privacy
+          quote: 'if we believe in good faith that a disclosure is necessary'
       lastVerified: 2026-11-04
     - topic: privacy.data-location
-      tier: poor
-      reason: "Your information is kept in the US and Canada, whose law may protect it less than yours, and it doesn't say what safeguards it uses."
+      tier: neutral
+      reason: 'Your information is kept in the US and Canada; what moves there from elsewhere goes under standard contract clauses.'
       sources:
         - url: https://rumble.com/s/privacy
           quote: 'Our Services are based, controlled, operated, and administered by us in the United States and Canada, where Rumble’s servers are located.'
+        - url: https://rumble.com/s/privacy
+          quote: 'transferring Personal Information pursuant to agreements that incorporate standard contractual clauses approved by applicable data protection authorities'
       lastVerified: 2026-11-04
     - topic: privacy.sign-up-data
-      status: not-stated
-      reason: 'Its privacy policy doesn’t list what an account asks for, and its sign-up form wasn’t read.'
-      pages: [https://rumble.com/s/privacy]
+      tier: neutral
+      reason: 'An account asks for your email address and your birthday, and Premium for your payment details.'
+      sources:
+        - url: https://auth.rumble.com/signup
+          quote: 'Enter your account details to get started.'
+        - url: https://auth.rumble.com/signup
+          quote: 'Birthday'
       lastVerified: 2026-11-04
     - topic: privacy.children
       tier: neutral
@@ -224,8 +240,8 @@ policies:
           quote: 'we will delete the Personal Information from our systems'
       lastVerified: 2026-11-04
     - topic: billing.cancellation
-      tier: good
-      reason: 'You cancel on its website, following its prompts, and keep Premium until your billing period ends.'
+      tier: great
+      reason: 'You cancel on its website in a couple of clicks and keep Premium until your billing period ends.'
       sources:
         - url: https://rumble.support/help/access-cancel-premium-subscription-refund
           quote: 'You’ll keep Premium access until your billing period ends.'
@@ -248,9 +264,12 @@ policies:
       pages: [https://rumble.com/s/terms]
       lastVerified: 2026-11-04
     - topic: billing.free-trials
-      status: not-applicable
-      reason: 'Premium has no free trial on its page.'
-      pages: [https://rumble.com/premium]
+      status: not-stated
+      reason: 'Its only free month comes through Perplexity’s Comet browser, on a payment page; its pages don’t say what happens when the month ends or whether it reminds you.'
+      pages:
+        [
+          https://rumble.support/help/how-do-i-get-1-month-of-rumble-premium-free-by-downloading-the-comet-browser,
+        ]
       lastVerified: 2026-11-04
     - topic: billing.renewal-notice
       status: not-stated
@@ -270,9 +289,13 @@ policies:
           quote: 'shall lie only in the Ontario Superior Court of Justice at Toronto'
       lastVerified: 2026-11-04
     - topic: legal.terms-changes
-      status: not-stated
-      reason: 'Its terms don’t say how it changes them or whether it tells you.'
-      pages: [https://rumble.com/s/terms]
+      tier: poor
+      reason: 'It changes its terms by posting them, and using Rumble afterwards means you accept them.'
+      sources:
+        - url: https://rumble.com/s/terms
+          quote: 'Rumble reserves the right, in its discretion, to update or revise the Terms of Use.'
+        - url: https://rumble.com/s/terms
+          quote: 'Your use of the Rumble Service subsequent to the posting of any change(s) to the Terms of Use will be deemed your acceptance of such change(s).'
       lastVerified: 2026-11-04
     - topic: legal.account-closure
       tier: bad
