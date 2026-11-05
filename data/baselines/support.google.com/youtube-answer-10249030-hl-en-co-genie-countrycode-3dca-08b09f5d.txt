@@ -1,0 +1,150 @@
+url: https://support.google.com/youtube/answer/10249030?hl=en&co=GENIE.CountryCode%3DCA
+method: fetch
+saved: 2026-11-04
+
+Accepted payment methods on YouTube: North America - Canada - YouTube Help Skip to main content
+YouTube Help
+Sign in
+Google Help
+Help Center
+Fix a problem
+Watch videos
+Manage your account & settings
+Supervised experiences on YouTube
+YouTube Premium
+Create & grow your channel
+Monetize your content
+Policy, safety, & copyright
+Community
+YouTube
+Privacy Policy
+YouTube Terms of Service
+Submit feedback
+Send feedback on...
+This help content & information
+General Help Center experience
+Close Next
+Help Center
+Community
+Creator Tips
+YouTube
+Fix a problem Troubleshoot problems playing videosTroubleshoot account issuesFix upload problemsGet help with the YouTube Partner ProgramLearn about recent updates on YouTubeGet help with YouTube
+Watch videos Find videos to watchChange video settingsWatch videos on different devicesComment, subscribe, & connect with creatorsSave or share videos & playlistsTroubleshoot problems playing videosPurchase & manage movies, TV shows & products on YouTube
+Manage your account & settings Sign up and manage your accountManage account settingsManage privacy settingsManage ad settingsManage accessibility settingsTroubleshoot account issuesYouTube updates
+Supervised experiences on YouTube Supervised accounts for kidsSupervised accounts for teens
+YouTube Premium Join YouTube PremiumYouTube Premium benefitsManage your Premium membershipManage Premium billing & paymentsFix YouTube Premium issues
+Create & grow your channel Upload videosEdit videos & video settingsCreate ShortsEdit videos with YouTube CreateCustomize & manage your channelAnalyze performance with analyticsTranslate videos, subtitles, & captionsManage your posts & commentsLive stream on YouTubeYouTube Creator CommunityBecome a podcast creator on YouTubeCreator and Studio App updates
+Monetize your content YouTube Partner ProgramMake money on YouTubeGet paidUnderstand ads and related policiesGet help with the YouTube Partner ProgramYouTube for Content Managers
+Policy, safety, & copyright YouTube policiesReporting and enforcementPrivacy and safety centerCopyright and rights management
+Accepted payment methods on YouTube: North America
+As of January 24, 2023 Rogers Communications will no longer be an accepted payment method for recurring paid memberships in Canada. If you signed up for YouTube Premium, YouTube Music Premium, or a channel membership through Rogers Communications, update your payment method to one of the accepted payment methods.
+American Express
+Google Play Balance
+MasterCard
+PayPal
+Telus Communications
+Visa
+Note: You must use a form of payment issued in Canada.
+Was this helpful?
+How can we improve it?
+Yes No
+Submit
+Aruba Canada Cayman Islands U.S. Virgin Islands United States
+Need more help?
+Try these next steps:
+Post to the help community Get answers from community members
+true
+Make a payment
+1 of 5
+Manage your payment methods
+2 of 5
+Accepted payment methods for YouTube Premium
+3 of 5
+Redeem a YouTube gift card or code
+4 of 5
+Sign up for YouTube Premium through a YouTube partner provider
+5 of 5
+Currency change in Bulgaria
+©2026 Google Privacy Policy
+YouTube Terms of Service
+Language Afrikaans&lrm; azərbaycan&lrm; bosanski&lrm; català&lrm; dansk&lrm; Deutsch&lrm; eesti&lrm; English (United Kingdom)&lrm; español&lrm; español (Latinoamérica)&lrm; euskara&lrm; Filipino&lrm; français&lrm; français (Canada)&lrm; Gaeilge&lrm; galego&lrm; hrvatski&lrm; Indonesia&lrm; isiZulu&lrm; italiano&lrm; Kiswahili&lrm; latviešu&lrm; lietuvių&lrm; magyar&lrm; Malti&lrm; Melayu&lrm; Nederlands&lrm; norsk&lrm; o‘zbek&lrm; polski&lrm; português&lrm; português (Brasil)&lrm; română&lrm; shqip&lrm; slovenčina&lrm; slovenščina&lrm; suomi&lrm; svenska&lrm; Tiếng Việt&lrm; Türkçe&lrm; íslenska&lrm; čeština&lrm; Ελληνικά&lrm; беларуская&lrm; български&lrm; кыргызча&lrm; македонски&lrm; монгол&lrm; русский&lrm; српски&lrm; українська&lrm; қазақ тілі&lrm; հայերեն&lrm; &rlm;עברית &rlm;اردو &rlm;العربية &rlm;فارسی नेपाली&lrm; मराठी&lrm; हिन्दी&lrm; অসমীয়া&lrm; বাংলা&lrm; ਪੰਜਾਬੀ&lrm; ગુજરાતી&lrm; ଓଡ଼ିଆ&lrm; தமிழ்&lrm; తెలుగు&lrm; ಕನ್ನಡ&lrm; മലയാളം&lrm; සිංහල&lrm; ไทย&lrm; ລາວ&lrm; မြန်မာ&lrm; ქართული&lrm; አማርኛ&lrm; ខ្មែរ&lrm; 中文（简体）&lrm; 中文（繁體）&lrm; 中文（香港）&lrm; 日本語&lrm; 한국어&lrm; English&lrm; Enable Dark Mode
+Send feedback on...
+This help content & information General Help Center experience
+Search
+Clear search
+Close search
+Google apps
+Main menu
+1584276372982343120
+true
+Search Help Center
+false
+true
+true
+true
+true
+true
+59
+false
+false
+fv.prototype.tK=oa(22,function(a){dv(this.o,"startFeedback",arguments)});
+function G6a(a){var b=a.scrollingElement?a.scrollingElement:dc||a.compatMode!="CSS1Compat"?a.body||a.documentElement:a.documentElement;a=a.defaultView;return new Ip((a==null?void 0:a.pageXOffset)||b.scrollLeft,(a==null?void 0:a.pageYOffset)||b.scrollTop)}
+function H6a(a,b){return lg(a,4,b)}
+function I6a(a,b){return lg(a,5,b)}
+function J6a(a,b){return lg(a,6,b)}
+function K6a(a,b){return lg(a,7,b)}
+function L6a(a,b){return lg(a,8,b)}
+function M6a(){var a=new Fq;return pg(a,18,2)}
+function N6a(a){typeof a=="number"&&(a+="px");return a}
+function O6a(a,b,d){if(b instanceof Ip){var e=b.x;b=b.y}else e=b,b=d;a.style.left=N6a(e);a.style.top=N6a(b)}
+;function uZ(a){this.Ba=Be(a)}
+v(uZ,uh);function P6a(a,b){return pg(a,1,b)}
+uZ.prototype.setOrigin=function(a){return pg(this,2,a)};var Q6a=[0,Li,-1];uZ.prototype.Ca=Ri(Q6a);function vZ(a){this.Ba=Be(a)}
+v(vZ,uh);function R6a(a,b){return hg(a,5,b)}
+;function wZ(a){this.Ba=Be(a)}
+v(wZ,uh);function S6a(a,b){return wf(a,Fq,1,b)}
+function T6a(a,b){return wf(a,vZ,3,b)}
+function U6a(a,b){return wf(a,uZ,5,b)}
+;var V6a=[0,xi,qi,xi,-1,ui];vZ.prototype.Ca=Ri(V6a);wZ.prototype.Ca=Ri([0,Rq,ui,V6a,ui,Q6a]);var xZ={},yZ=(xZ[0]="",xZ[1]="Hi, I\u2019m a digital support assistant. Chat with me to find answers and solve account issues.",xZ[2]="Hi, I\u2019m a new AI support assistant. Chat with me to find answers and solve account issues.",xZ[3]="I\u2019m still here if you need me.",xZ[4]="Let\u2019s chat",xZ[5]="Let\u2019s go!",xZ[6]="Hi, I\u2019m a new AI support assistant. I\u2019m here to help answer questions or solve your support issues.",xZ[7]='Hi, I\u2019m a new AI support assistant. Chat with me to find answers and solve issues with Gemini Apps.
+To get started with the Gemini Apps, please go to gemini.google.com or open the Gemini mobile app on your phone or tablet.',
+xZ[8]="Hi there! I\u2019m a new AI support assistant for Google Chrome. I can help with questions about Chrome features, settings, and more.",xZ[9]="Hi, I\u2019m an AI support assistant. I can help you set up, troubleshoot, or learn about your devices.",xZ[10]="Hi, I\u2019m an AI support assistant. I can help you set up, troubleshoot, or learn about your devices.",xZ[11]="Hi, I\u2019m YouTube Help, designed to answer your questions. How can I help?",xZ);function zZ(a){this.Ba=Be(a)}
+v(zZ,uh);zZ.prototype.getPageType=function(){return Of(this,2)};var W6a=[0,z,-2,Ii,-1];zZ.prototype.Ca=Ri(W6a);var X6a=new Pi(1024,pq,zZ);qq[1024]=W6a;var Y6a=Ja(["https://www.google.com/tools/feedback/"]),Z6a=Ja(["http://localhost.corp.google.com/inapp/"]),$6a=Ja(["http://localhost.proxy.googlers.com/inapp/"]),a7a=Ja(["https://asx-frontend-autopush.corp.google.com/inapp/"]),b7a=Ja(["https://asx-frontend-autopush.corp.google.com/tools/feedback/"]),c7a=Ja(["https://asx-frontend-autopush.corp.google.co.uk/inapp/"]),d7a=Ja(["https://asx-frontend-autopush.corp.google.co.uk/tools/feedback/"]),e7a=Ja(["https://asx-frontend-autopush.corp.google.de/inapp/"]),
+f7a=Ja(["https://asx-frontend-autopush.corp.google.de/tools/feedback/"]),g7a=Ja(["https://asx-frontend-autopush.corp.youtube.com/tools/feedback/"]),h7a=Ja(["https://asx-frontend-autopush.corp.youtube.com/inapp/"]),i7a=Ja(["https://asx-help-frontend-autopush.corp.youtube.com/tools/feedback/"]),j7a=Ja(["https://asx-help-frontend-autopush.corp.youtube.com/inapp/"]),k7a=Ja(["https://asx-frontend-staging.corp.google.com/inapp/"]),l7a=Ja(["https://asx-frontend-staging.corp.google.com/tools/feedback/"]),
+m7a=Ja(["https://support.google.com/inapp/"]),n7a=Ja(["https://sandbox.google.com/inapp/"]),o7a=Ja(["https://sandbox.google.com/tools/feedback/"]),p7a=Ja(["https://www.google.cn/tools/feedback/"]),q7a=Ja(["https://help.youtube.com/tools/feedback/"]),r7a=Ja(["https://asx-frontend-staging.corp.google.com/inapp/"]),s7a=Ja(["https://asx-frontend-staging.corp.google.com/tools/feedback/"]),t7a=Ja(["https://localhost.corp.google.com/inapp/"]),u7a=Ja(["https://localhost.proxy.googlers.com/inapp/"]),v7a=Mm(Y6a),
+w7a=[Mm(Z6a),Mm($6a)],x7a=[Mm(a7a),Mm(b7a),Mm(c7a),Mm(d7a),Mm(e7a),Mm(f7a),Mm(g7a),Mm(h7a),Mm(i7a),Mm(j7a)],y7a=[Mm(k7a),Mm(l7a)],z7a=[v7a,Mm(m7a),Mm(n7a),Mm(o7a),Mm(p7a),Mm(q7a),Mm(r7a),Mm(s7a),Mm(t7a),Mm(u7a)];[].concat(Ha(w7a),Ha(x7a),Ha(y7a),Ha(z7a));function AZ(){return location.ancestorOrigins&&location.ancestorOrigins[0]?[location.origin].concat(Ha([].concat(Ha(new ua.Set(location.ancestorOrigins))))):[location.origin]}
+function BZ(a){return Number(a.slice(0,-2))}
+;function CZ(a,b){var d;try{a?d=uc(encodeURIComponent(a.serialize()),2):b&&(d=uc(encodeURIComponent(b),2))}catch(e){console.log("Failed to serialize and encode proto: ",e)}return d}
+function DZ(a){if(a){var b=a.style.width;a.style.width="0";a.style.display="none";a.style.width=b!=null?b:"360px";a.replaceChildren()}else Vp(document.getElementById("help_panel_main_frame"))}
+function EZ(a){var b=Za.apply(1,arguments),d=jb("gapi.rpc");d&&d.setup&&d.sendHandshake&&d.call&&(d.setup(""),d.sendHandshake("help_panel_main_frame/help_panel_content_frame",""),d.call.apply(d,["help_panel_main_frame/help_panel_content_frame",a,null].concat(Ha(b))))}
+;function A7a(a){this.o=a}
+n=A7a.prototype;n.reloadWithOptions=function(a){var b=CZ(void 0,a.startingFlowSerializedJspb),d=CZ(void 0,a.frdProductDataSerializedJspb);a=CZ(void 0,a.gseSessionOptionsSerializedJspb);var e;this.o&&((e=document.getElementById("help_panel_main_frame"))==null?void 0:e.tagName)==="DIV"?this.o.qO({frdProductDataSerializedJspb:d,gseSessionOptionsSerializedJspb:a,startingFlowSerializedJspb:b}):EZ("newGseSession",d,a,b)};
+n.sendUiBidirCommsRequest=function(a){EZ("gseUiBidirCommsRequest",a.requestId,a.requestData)};
+n.sendUiBidirCommsResponse=function(a){EZ("gseUiBidirCommsResponse",a.requestId,a.responseData)};
+n.updateProductData=function(a){EZ("gseAdaptiveContext",CZ(void 0,a.frdProductDataSerializedJspb),CZ(void 0,a.productCustomDataSerializedJspb),a.productSpecificData)};
+n.requestNewChat=function(){var a;this.o&&((a=document.getElementById("help_panel_main_frame"))==null?void 0:a.tagName)==="DIV"&&this.o.requestNewChat()};function B7a(a){function b(){if(a.isConnected&&!a.contains(document.activeElement)){var f;a:{for(f=a;f;f=f.parentElement){if(f.getAttribute("aria-hidden")==="true"||f.hasAttribute("inert")){f=!1;break a}var h=getComputedStyle(f);if(h.display==="none"||h.visibility==="hidden"||h.opacity!=="1"){f=!1;break a}}f=!0}f||performance.now()-e>=d?a.focus():requestAnimationFrame(b)}}
+var d=d===void 0?1E3:d;var e=performance.now();requestAnimationFrame(b)}
+;function FZ(a,b,d){this.helpFlowSessionId=b;this.loggingFlow=d;this.internalHelpCenterName=this.context=this.locale="";"helpApiData"in a?(a.helpApiData.helpApiConfig.productId&&(this.productId=Number(a.helpApiData.helpApiConfig.productId)),this.authUser=a.helpApiData.helpApiConfig.authuser):"productId"in a&&(this.productId=Number(a.productId),this.authUser=a.authuser);this.locale=a.locale;this.context=a.context;this.internalHelpCenterName=a.internalHelpCenter||a.helpcenter;this.init()}
+v(FZ,jHa);FZ.prototype.init=function(){this.transport=this.Il(1638,this.authUser?this.authUser:"0")};
+FZ.prototype.Il=function(a,b){return RA(QA(new NA(a,b))).build()};
+FZ.prototype.report=function(a){var b=this;return new ua.Promise(function(d){var e=kHa(b,a);if(e){var f;(f=b.transport)==null||f.dispatch(e);var h;if(((h=Zf(e,WG,3,YG))==null?void 0:Pf(h,1))===33){var k;(k=b.transport)==null||k.flush()}}else console.error("Invalid request. Either userActionType or interactionType must be set in loggingParams");d(null)})};
+FZ.prototype.oF=function(a){var b=new VG;b=lg(b,1,this.helpFlowSessionId);b=lg(b,3,this.context);b=lg(b,5,this.loggingFlow||"help");b=lg(b,11,this.locale);b=lg(b,13,this.internalHelpCenterName);b=og(b,4,4);this.productId&&ig(b,14,this.productId);wf(a,VG,1,b)};function C7a(a,b,d){this.helpFlowSessionId=b;this.loggingFlow=d;b=void 0;"helpApiData"in a?(a.helpApiData.helpApiConfig.productId&&(this.productId=Number(a.helpApiData.helpApiConfig.productId)),b=a.helpApiData.helpApiConfig.authuser):"productId"in a&&(this.productId=Number(a.productId),b=a.authuser);this.locale=a.locale;this.context=a.context;this.transport=this.Il(865,b?b:"0")}
+C7a.prototype.Il=function(a,b){return RA(QA(new NA(a,b))).build()};
+function GZ(a,b){return new ua.Promise(function(d){var e=new nB;e=lg(e,42,a.locale);e=lg(e,33,a.loggingFlow||"help");e=lg(e,4,a.context);e=lg(e,5,a.helpFlowSessionId);e=og(e,25,b.userAction);a.productId&&ig(e,45,a.productId);b.subUserAction&&og(e,26,b.subUserAction);b.url&&e.setUrl(b.url);b.gseChatSessionId&&lg(e,46,b.gseChatSessionId);b.Bs&&jg(e,14,b.Bs);b.viewId&&e.Kd(b.viewId);b.internalHelpCenterName&&lg(e,44,b.internalHelpCenterName);a.transport.dispatch(e);b.userAction===1&&a.transport.flush();
+d(null)})}
+;function D7a(a){this.helpApiData=a;this.o=null}
+function E7a(a){var b=a.helpApiData.productData,d={serverUri:a.helpApiData.helpApiConfig.serverUri||"//www.google.com/tools/feedback",hl:a.helpApiData.helpApiConfig.locale||"en",url:(a.helpApiData.productWindow||top).location.href,productData:b,feedbackServerUri:a.helpApiData.helpApiConfig.feedbackServerUri};a.o||(b=b===void 0?a.helpApiData.productData:b,b=Ysa(a.helpApiData.helpApiConfig.productId,{environment:a.helpApiData.helpApiConfig.apiaryEnvironment,renderApiUri:a.helpApiData.helpApiConfig.renderApiUri,
+helpCenterPath:a.helpApiData.helpApiConfig.helpCenterPath,locale:a.helpApiData.helpApiConfig.locale,window:a.helpApiData.productWindow||top,productData:b}),a.o=b);xa(Object,"assign").call(Object,a.helpApiData.helpApiConfig,d);a.helpApiData.helpApiConfig.flow="";a.o.tK(a.helpApiData.helpApiConfig)}
+;function HZ(a,b,d){dw.call(this);this.target=a;this.handle=b||a;this.Qa=d||new wz(NaN,NaN,NaN,NaN);this.Ea=Op(a);this.va=new iA(this);Nv(this,qb(Lv,this.va));this.deltaY=this.deltaX=this.Ji=this.Ph=this.screenY=this.screenX=this.clientY=this.clientX=0;this.Ka=!0;this.ya=!1;this.La=0;Xv(this.handle,["touchstart","mousedown"],this.Ay,!1,this);this.Ia=F7a}
+vb(HZ,dw);var F7a=gb.document&&gb.document.documentElement&&!!gb.document.documentElement.setCapture&&!!gb.document.releaseCapture;n=HZ.prototype;n.setEnabled=function(a){this.Ka=a};
+n.Ne=function(){HZ.Li.Ne.call(this);aw(this.handle,["touchstart","mousedown"],this.Ay,!1,this);this.va.removeAll();this.Ia&&this.Ea.releaseCapture();this.handle=this.target=null};
+n.Ay=function(a){var b=a.type=="mousedown";if(!this.Ka||this.ya||b&&(a.o.button!=0||ec&&a.ctrlKey))this.dispatchEvent("earlycancel");else{if(this.La==0)if(this.dispatchEvent(new IZ("start",this,a.clientX,a.clientY,a)))this.ya=!0,b&&a.preventDefault();else return;else b&&a.preventDefault();b=this.Ea;var d=b.documentElement,e=!this.Ia;this.va.listen(b,["touchmove","mousemove"],this.gV,{capture:e,passive:!1});this.va.listen(b,["touchend","mouseup"],this.Mr,e);this.Ia?(d.setCapture(!1),this.va.listen(d,
+"losecapture",this.Mr)):this.va.listen(Rp(b),"blur",this.Mr);this.Wa&&this.va.listen(this.Wa,"scroll",this.gX,e);this.clientX=this.Ph=a.clientX;this.clientY=this.Ji=a.clientY;this.screenX=a.screenX;this.screenY=a.screenY;this.deltaX=this.target.offsetLeft;this.deltaY=this.target.offsetTop;a=Mp(this.Ea);this.Na=G6a(a.o)}};
+n.Mr=function(a,b){this.va.removeAll();this.Ia&&this.Ea.releaseCapture();this.ya?(this.ya=!1,this.dispatchEvent(new IZ("end",this,a.clientX,a.clientY,a,G7a(this,this.deltaX),H7a(this,this.deltaY),b||a.type=="touchcancel"))):this.dispatchEvent("earlycancel")};
+n.gV=function(a){if(this.Ka){var b=a.clientX-this.clientX,d=a.clientY-this.clientY;this.clientX=a.clientX;this.clientY=a.clientY;this.screenX=a.screenX;this.screenY=a.screenY;if(!this.ya){var e=this.Ph-this.clientX,f=this.Ji-this.clientY;if(e*e+f*f>this.La)if(this.dispatchEvent(new IZ("start",this,a.clientX,a.clientY,a)))this.ya=!0;else{this.isDisposed()||this.Mr(a);return}}d=I7a(this,b,d);b=d.x;d=d.y;this.ya&&this.dispatchEvent(new IZ("beforedrag",this,a.clientX,a.clientY,a,b,d))&&(J7a(this,a,b,
+d),a.preventDefault())}};
+function I7a(a,b,d){var e=Mp(a.Ea);e=G6a(e.o);b+=e.x-a.Na.x;d+=e.y-a.Na.y;a.Na=e;a.deltaX+=b;a.deltaY+=d;return new Ip(G7a(a,a.deltaX),H7a(a,a.deltaY))}
+n.gX=function(a){var b=I7a(this,0,0);a.clientX=this.clientX;a.clientY=this.clientY;J7a(this,a,b.x,b.y)};
+function J7a(a,b,d,e){a.target.style.left=d+"px";a.target.style.top=e+"px";a.dispatchEvent(new IZ("drag",a,b.clientX,b.clientY,b,d,e))}
+function G7a(a,b){var d=a.Qa;a=isNaN(d.left)?null:d.left;d=isNaN(d.width)?0:d.width;return Math.min(a!=null?a+d:Infinity,Math.max(a!=null?a:-Infinity,b))}
+function H7a(a,b){var d=a.Qa;a=isNaN(d.top)?null:d.top;d=isNaN(d.height)?0:d.height;return Math.min(a!=null?a+d:Infinity,Math.max(a!=null?a:-Infinity,b))}
+function IZ(a,b,d,e,f,h,k){Ov.call(this,a);this.clientX=d;this.clientY=e;this.left=h!==void 0?h:b.deltaX;this.top=k!==voi

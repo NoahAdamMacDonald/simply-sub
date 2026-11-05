@@ -1,0 +1,273 @@
+# Researched by hand on 2026-11-04 (M11.15, the streaming category), read with Edge or a plain fetch from Canada, and the
+# US price confirmed through a US exit (the owner's choice of 2026-11-04). Pages, each quoted where it's used:
+# Pricing: tv.apple.com/<country>, one page per country, each in its currency whoever reads it: "7 days free, then
+# $14.99/month" (Canada and the US), £9.99 (the UK), $15.99 (Australia), $17.99 (New Zealand) and €9.99 (Ireland,
+# Germany, France, the Netherlands, Spain and Italy). Monthly only.
+# Where it's sold: every catalog region (each country's page). No availableIn: Apple sells it in most of the world.
+# Region checklist, 2026-11-04: 1. tv.apple.com's country paths gave each region's price; 2.–7. not needed.
+# Bundles: Apple One ("bundle up to six services", $22.95, $30.95 or $46.95 a month in Canada) includes it, with
+# Apple Music, Apple Arcade and iCloud+, which aren't in the catalog yet.
+
+id: apple-tv
+name: Apple TV
+website: https://tv.apple.com
+# Apple Support, where its payment methods are (Apple's other services have their own pages on apple.com).
+domains: [support.apple.com]
+category: streaming
+spendCategory: streaming
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    AU: AUD,
+    NZ: NZD,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+  }
+cancelUrl: https://support.apple.com/en-ca/118428
+sources: { pricing: https://tv.apple.com/ca }
+# Payment methods, read 2026-11-04 on Apple Support's "Payment methods that you can use with your Apple Account", one
+# list per country: most credit and debit cards, PayPal, Apple Pay and an Apple Account balance from an Apple Gift
+# Card in Canada, the US and Australia; those and mobile phone billing in the UK, Ireland, Germany, France, the
+# Netherlands, Spain and Italy; cards in New Zealand (its balance comes from an "App Store Card"). The page names no
+# card networks ("Most credit and debit cards"), so no acceptedNetworks.
+paymentMethods:
+  - methods: [card, paypal, apple-pay, gift-card]
+    regions: [CA, US, AU]
+    page: 'Payment methods that you can use with your Apple Account'
+    url: https://support.apple.com/en-ca/111741
+    quotes:
+      [
+        'Most credit and debit cards',
+        'PayPal',
+        'Apple Pay',
+        'from redeeming Apple Gift Card or adding funds',
+      ]
+  - methods: [card, paypal, apple-pay, gift-card, provider-billing]
+    regions: [GB, IE, DE, FR, NL, ES, IT]
+    page: 'Payment methods that you can use with your Apple Account'
+    url: https://support.apple.com/en-ca/111741
+    quotes:
+      [
+        'Most credit and debit cards',
+        'PayPal',
+        'Apple Pay',
+        'from redeeming Apple Gift Card or adding funds',
+        'Mobile phone billing',
+      ]
+  - methods: [card]
+    regions: [NZ]
+    page: 'Payment methods that you can use with your Apple Account'
+    url: https://support.apple.com/en-ca/111741
+    quotes: ['Most credit and debit cards']
+
+# Owner: Apple Inc., a public company; Apple Canada Inc. sells it in Canada, and Apple Inc. in the US (its terms'
+# "Definition of Apple").
+owner:
+  name: 'Apple Inc., a public company (NASDAQ: AAPL)'
+  website: https://investor.apple.com
+  page:
+    name: "Apple's investor FAQ"
+    url: https://investor.apple.com/faq/default.aspx
+  quotes:
+    - 'Apple stock is traded on The Nasdaq Stock Market LLC under the ticker symbol AAPL.'
+  country:
+    code: US
+    page:
+      name: Media Services Terms and Conditions
+      url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+    quotes:
+      - 'Apple Inc., located at One Apple Park Way, Cupertino, California'
+    lastVerified: 2026-11-04
+  lastVerified: 2026-11-04
+
+# Renewal day (M11.5), read 2026-11-04: its terms charge "no more than twenty-four (24) hours prior to the start of the
+# latest Subscription period", and Apple Support's cancelling article doesn't say which day that is.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+    - https://support.apple.com/en-ca/118428
+  lastVerified: 2026-11-04
+
+# Apps and sign-in (the cross-category features), read 2026-11-04: the Apple TV app "on your Apple devices, smart TVs,
+# web and more" (tv.apple.com/ca: iPhone, iPad, Mac & Windows, Apple Vision Pro, Android and the web, and Samsung, LG,
+# Roku, Fire TV, Google TV, PlayStation, Xbox and others); an Apple Account's password, with a "six-digit verification
+# code that’s automatically displayed on your trusted devices or sent to your trusted phone number" (Apple Support's
+# two-factor article).
+features:
+  platforms: [ios, macos, windows, android, web, tv, console]
+  account.sign-in: [password, push-approval, sms]
+
+# Features, read 2026-11-04: "For most content, one subscription allows you to enjoy 6 simultaneous streams" (Apple
+# Support's download and stream article); "With Family Sharing, one subscription works for up to six people"
+# (apple.com/ca/apple-tv) and "Experience in 4K HDR and Dolby Atmos sound" (tv.apple.com/us);
+# downloads to "your Apple device" without a stated number of devices, so 1, the least that allows (inferred); "Watch
+# MLS matches and Friday Night Baseball games live — no extra cost" (Canada's page) and Formula 1 in the US (the US
+# app page), which the UK's, Australia's and Germany's pages don't name, so sports, with a note. No viewers' profiles
+# or Kids profiles named: each member of a family group uses their own Apple Account. French: its Canadian pages come
+# in French ("Français (Canada)"), and the dubbed shows aren't listed, so inferred.
+plans:
+  - id: apple-tv.standard
+    name: Apple TV
+    link: https://tv.apple.com/ca
+    features:
+      video.quality: 4k
+      video.hdr: true
+      audio.dolby-atmos: true
+      ad-free: true
+      streaming.concurrent-streams: 6
+      streaming.download-devices: 1
+      streaming.french-content: true
+      streaming.live: [sports]
+      account.users: 6
+    inferred:
+      streaming.download-devices:
+        reason: 'You can download its shows to your Apple devices, but it doesn’t say on how many at once, so 1 is the least it can be.'
+        page:
+          name: Apple TV
+          url: https://www.apple.com/ca/apple-tv/
+        lastVerified: 2026-11-04
+      streaming.french-content:
+        reason: 'Its Canadian site comes in French, but no page lists which shows are dubbed or made in French.'
+        page:
+          name: Apple TV (Canada)
+          url: https://tv.apple.com/ca
+        lastVerified: 2026-11-04
+    notes: Live MLS matches and Friday Night Baseball in Canada and the US, and Formula 1 in the US; Apple's other countries' pages name no sports.
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 14.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.apple.com/ca,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 14.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.apple.com/us,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.apple.com/gb,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 15.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.apple.com/au,
+        }
+      - {
+          region: NZ,
+          currency: NZD,
+          amount: 17.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.apple.com/nz,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.apple.com/ie,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.apple.com/de,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.apple.com/fr,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.apple.com/nl,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.apple.com/es,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://tv.apple.com/it,
+        }
+
+# Terms and policies, read 2026-11-04 (M11.15): Apple's Media Services Terms and Conditions and its Privacy Policy, rated
+# once as shared documents (data/policies/apple-media-services.yaml, apple-privacy.yaml), and "Apple TV & Privacy",
+# the app's own notice, for how long it keeps what you watch. Apple TV has one paid plan, so switching plans doesn't
+# apply.
+policies:
+  shared: [apple-media-services, apple-privacy]
+  links:
+    - name: 'Apple TV & Privacy'
+      url: https://www.apple.com/legal/privacy/data/en/apple-tv-app/
+  ratings:
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps what you browse and search in the app for up to two years, and your purchases for 10 years or more.'
+      sources:
+        - url: https://www.apple.com/legal/privacy/data/en/apple-tv-app/
+          quote: 'We retain other information such as browsing activity and searches for up to two years.'
+        - url: https://www.apple.com/legal/privacy/data/en/apple-tv-app/
+          quote: 'For purchases and downloads, that often requires at least a 10-year retention period'
+      lastVerified: 2026-11-04

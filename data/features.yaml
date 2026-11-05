@@ -44,6 +44,17 @@
     - { id: 1+, name: Offline downloads, min: 1 }
     - { id: 6+, name: Downloads on 6+ devices, min: 6 }
   aliases: [offline viewing, downloads]
+# Profiles (M11.15, the owner's choice of 2026-11-04): how many viewers' profiles an account has, Kids profiles
+# included. A plan that doesn't list it has none, one person's viewing.
+- id: streaming.profiles
+  name: Profiles
+  category: streaming
+  type: number
+  unit: profiles
+  tiers:
+    - { id: 2-5, name: 2 to 5 profiles, min: 2, max: 5 }
+    - { id: 6+, name: 6 or more profiles, min: 6 }
+  aliases: [user profiles, viewer profiles]
 - id: streaming.kids-profiles
   name: Kids profiles
   category: streaming

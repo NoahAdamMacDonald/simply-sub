@@ -267,6 +267,9 @@ features:
 
 # Official resellers: none (M11.9, read 2026-11-03). Its third-party billing partners ("Docomo, J:COM, Apple, Google,
 # Amazon, Hulu (Hulu | Disney+ Set Plan), or any other platform") are ways to pay (paymentMethods).
+# Profiles (M11.15), read 2026-11-04 in its help centre: "Disney+ allows you to create six additional profiles (seven in
+# total) per subscription" (disneyplus-profiles). An Extra Member gets "A unique profile with their own login and
+# password" (disneyplus-extra-member); its add-on gives its plan's features, so its card shows the plan's 7.
 plans:
   - id: disney-plus.standard-ads
     name: Standard With Ads
@@ -275,6 +278,7 @@ plans:
       video.quality: 1080p
       ad-free: false
       streaming.concurrent-streams: 2
+      streaming.profiles: 7
       streaming.kids-profiles: true
       streaming.french-content: true
     prices:
@@ -369,6 +373,7 @@ plans:
       video.hdr: true
       ad-free: false
       streaming.concurrent-streams: 4
+      streaming.profiles: 7
       streaming.kids-profiles: true
     prices:
       - region: US
@@ -390,6 +395,7 @@ plans:
       ad-free: true
       streaming.concurrent-streams: 2
       streaming.download-devices: 10
+      streaming.profiles: 7
       streaming.kids-profiles: true
       streaming.french-content: true
     prices:
@@ -566,6 +572,7 @@ plans:
       ad-free: true
       streaming.concurrent-streams: 4
       streaming.download-devices: 10
+      streaming.profiles: 7
       streaming.kids-profiles: true
       streaming.french-content: true
     prices:

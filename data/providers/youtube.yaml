@@ -1,0 +1,839 @@
+# Researched by hand on 2026-11-04 (M11.15, the streaming category), read with Edge from Canada and through each
+# country's exit (the owner's choice of 2026-11-04). The owner chose the id (2026-11-04): YouTube's paid memberships,
+# with the queue's youtube-premium folded in; YouTube Music Premium joins it in the music category. Pages, each quoted
+# where it's used:
+# Pricing: youtube.com/premium, which prices by where the visitor is: read from Canada, and through a US, UK,
+# Australian, German, French, Spanish and Italian exit, each page in that country's currency. Annual plans are
+# prepaid ("12 months for CA$129.99", "Doesn't automatically renew"), sold in Canada, Germany and the US among the
+# catalog's regions (the annual plan article: "Brazil, Canada, Germany, India, Japan, Mexico, Thailand, Turkey, and the
+# United States"). The Two-person plan is sold in Australia and France among them (its article's list).
+# Where it's sold: Premium and Premium Lite in every catalog region (the available locations article's two lists; Lite's
+# says "Great Britain"). No availableIn: both lists run to most of the world.
+# Region checklist, 2026-11-04: 1. youtube.com/premium has no country paths, and gl= changes the country it names but
+# not its prices (gl=NZ from Canada still showed CA$); 2. no picker; 3. not looked for; 4. checkout not opened; 5. the
+# help centre has no price list by country; 6. read through each country's exit: New Zealand's three showed
+# Australia's prices, Ireland's three the UK's, and the Netherlands' three "YouTube Premium is not available in your
+# country", as Google One's page did, so those three stay unread; the first US and UK exits showed the same misplacement
+# and the second or third read; 7. no bill offered.
+# Not listed: the Student plans (CA$7.99, $8.99, £7.99, A$10.49, €7.99 to €10.49 a month), which "are only available
+# to full-time students at approved higher education institutions" (the Premium terms): the catalog has no way to
+# mark who may buy a plan yet, as with ChatGPT's and Google AI's student offers. Premium Lite's family plan (CA$12.99
+# a month) is offered to a "randomly selected group of users in Canada" (the family plan article), so it isn't
+# listed either.
+
+# Coverage: youtube.* in NZ, IE and NL: youtube.com/premium prices by where the visitor is, and each of those
+# countries' exits showed Australia's prices, the UK's, or "YouTube Premium is not available in your country"
+# (2026-11-04), so their prices stay unread.
+
+# Coverage: youtube.premium-two-person in CA, US, GB, DE, ES and IT: the Two-person plan "is currently only available
+# in" a list of countries that has Australia and France and none of these (its article, 2026-11-04).
+
+id: youtube
+name: YouTube
+website: https://www.youtube.com
+# Google's help centres (YouTube Help, and the accounts help the shared privacy document cites) and its legal pages.
+domains: [support.google.com, policies.google.com]
+category: streaming
+spendCategory: streaming
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    AU: AUD,
+    NZ: NZD,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+  }
+cancelUrl: https://support.google.com/youtube/answer/6308278
+sources: { pricing: https://www.youtube.com/premium }
+# Accepted cards (M9.2), read 2026-11-04 on "Accepted payment methods for YouTube Premium", one address per country:
+# American Express, Mastercard and Visa, Discover too in the US, and no American Express in France.
+acceptedNetworks:
+  CA:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/youtube/answer/10249030?hl=en&co=GENIE.CountryCode%3DCA
+    quotes: ['American Express', 'MasterCard', 'Visa']
+  US:
+    networks: [visa, mastercard, amex, discover]
+    url: https://support.google.com/youtube/answer/10249030?hl=en&co=GENIE.CountryCode%3DUS
+    quotes: ['American Express', 'Discover', 'MasterCard', 'Visa']
+  GB:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/youtube/answer/10243158?hl=en&co=GENIE.CountryCode%3DGB
+    quotes: ['American Express', 'MasterCard', 'Visa']
+  AU:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/youtube/answer/10248619?hl=en&co=GENIE.CountryCode%3DAU
+    quotes: ['American Express', 'MasterCard', 'Visa']
+  NZ:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/youtube/answer/10248619?hl=en&co=GENIE.CountryCode%3DNZ
+    quotes: ['American Express', 'MasterCard', 'Visa']
+  IE:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/youtube/answer/10243158?hl=en&co=GENIE.CountryCode%3DIE
+    quotes: ['American Express', 'MasterCard', 'Visa']
+  DE:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/youtube/answer/10243158?hl=en&co=GENIE.CountryCode%3DDE
+    quotes: ['American Express', 'MasterCard', 'Visa']
+  FR:
+    networks: [visa, mastercard]
+    url: https://support.google.com/youtube/answer/10243158?hl=en&co=GENIE.CountryCode%3DFR
+    quotes: ['MasterCard', 'Visa']
+  NL:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/youtube/answer/10243158?hl=en&co=GENIE.CountryCode%3DNL
+    quotes: ['American Express', 'MasterCard', 'Visa']
+  ES:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/youtube/answer/10243158?hl=en&co=GENIE.CountryCode%3DES
+    quotes: ['American Express', 'MasterCard', 'Visa']
+  IT:
+    networks: [visa, mastercard, amex]
+    url: https://support.google.com/youtube/answer/10243158?hl=en&co=GENIE.CountryCode%3DIT
+    quotes: ['American Express', 'MasterCard', 'Visa']
+# Payment methods, read 2026-11-04 on the same country pages: cards and PayPal everywhere; a Google Play balance
+# everywhere but the US and France; Cash App in the US; Klarna in Germany; and Apple or Google Play billing in the
+# app (the Paid Service Terms). The pages also list mobile carriers (Telus in Canada, EE, O2 and Three in the UK, most
+# of Europe's) and Paysafecard in Europe without calling them a way to pay by phone bill or a gift card, so they
+# aren't named here.
+paymentMethods:
+  - methods: [card, paypal, app-store]
+    regions: [CA]
+    page: 'Accepted payment methods: Canada'
+    url: https://support.google.com/youtube/answer/10249030?hl=en&co=GENIE.CountryCode%3DCA
+    quotes: ['American Express', 'Google Play Balance', 'MasterCard', 'PayPal', 'Visa']
+  - methods: [card, paypal, cash-app]
+    regions: [US]
+    page: 'Accepted payment methods: United States'
+    url: https://support.google.com/youtube/answer/10249030?hl=en&co=GENIE.CountryCode%3DUS
+    quotes: ['American Express', 'Discover', 'MasterCard', 'PayPal', 'Visa', 'Cash App']
+  - methods: [card, paypal, app-store]
+    regions: [GB]
+    page: 'Accepted payment methods: United Kingdom'
+    url: https://support.google.com/youtube/answer/10243158?hl=en&co=GENIE.CountryCode%3DGB
+    quotes: ['American Express', 'Google Play Balance', 'MasterCard', 'PayPal', 'Visa']
+  - methods: [card, paypal, app-store]
+    regions: [AU]
+    page: 'Accepted payment methods: Australia'
+    url: https://support.google.com/youtube/answer/10248619?hl=en&co=GENIE.CountryCode%3DAU
+    quotes: ['American Express', 'Google Play Balance', 'MasterCard', 'PayPal', 'Visa']
+  - methods: [card, paypal, app-store]
+    regions: [NZ]
+    page: 'Accepted payment methods: New Zealand'
+    url: https://support.google.com/youtube/answer/10248619?hl=en&co=GENIE.CountryCode%3DNZ
+    quotes: ['American Express', 'Google Play Balance', 'MasterCard', 'PayPal', 'Visa']
+  - methods: [card, paypal, app-store]
+    regions: [IE]
+    page: 'Accepted payment methods: Ireland'
+    url: https://support.google.com/youtube/answer/10243158?hl=en&co=GENIE.CountryCode%3DIE
+    quotes: ['American Express', 'Google Play Balance', 'MasterCard', 'PayPal', 'Visa']
+  - methods: [card, paypal, app-store, klarna]
+    regions: [DE]
+    page: 'Accepted payment methods: Germany'
+    url: https://support.google.com/youtube/answer/10243158?hl=en&co=GENIE.CountryCode%3DDE
+    quotes:
+      ['American Express', 'Google Play Balance', 'Klarna eWallet', 'MasterCard', 'PayPal', 'Visa']
+  - methods: [card, paypal]
+    regions: [FR]
+    page: 'Accepted payment methods: France'
+    url: https://support.google.com/youtube/answer/10243158?hl=en&co=GENIE.CountryCode%3DFR
+    quotes: ['MasterCard', 'PayPal', 'Visa']
+  - methods: [card, paypal, app-store]
+    regions: [NL]
+    page: 'Accepted payment methods: Netherlands'
+    url: https://support.google.com/youtube/answer/10243158?hl=en&co=GENIE.CountryCode%3DNL
+    quotes: ['American Express', 'Google Play Balance', 'MasterCard', 'PayPal', 'Visa']
+  - methods: [card, paypal, app-store]
+    regions: [ES]
+    page: 'Accepted payment methods: Spain'
+    url: https://support.google.com/youtube/answer/10243158?hl=en&co=GENIE.CountryCode%3DES
+    quotes: ['American Express', 'Google Play Balance', 'MasterCard', 'PayPal', 'Visa']
+  - methods: [card, paypal, app-store]
+    regions: [IT]
+    page: 'Accepted payment methods: Italy'
+    url: https://support.google.com/youtube/answer/10243158?hl=en&co=GENIE.CountryCode%3DIT
+    quotes: ['American Express', 'Google Play Balance', 'MasterCard', 'PayPal', 'Visa']
+  - methods: [app-store]
+    regions: [CA, US, GB, AU, NZ, IE, DE, FR, NL, ES, IT]
+    page: 'Paid Service Terms of Service'
+    url: https://www.youtube.com/t/terms_paidservice
+    quotes:
+      - 'e.g., if you subscribe to YouTube Premium using another platform like Apple or Google Play'
+
+# Owner: Google LLC, which provides YouTube's paid services (the Paid Service Terms: "The entity providing the Paid
+# Services is Google LLC"), part of Alphabet, as for Google AI.
+owner:
+  name: 'Google LLC, owned by Alphabet Inc., a public company (NASDAQ: GOOGL, GOOG)'
+  website: https://abc.xyz
+  page:
+    name: "Alphabet's founders' letter"
+    url: https://abc.xyz/
+  quotes:
+    - 'What is Alphabet? Alphabet is mostly a collection of companies. The largest of which, of course, is Google.'
+    - 'Google will become a wholly-owned subsidiary of Alphabet. Our two classes of shares will continue to trade on Nasdaq as GOOGL and GOOG.'
+  country:
+    code: US
+    page:
+      name: Terms of Service
+      url: https://www.youtube.com/t/terms
+    quotes:
+      - 'The entity providing the Service is Google LLC, a company operating under the laws of Delaware'
+    lastVerified: 2026-11-04
+  lastVerified: 2026-11-04
+
+# Renewal day (M11.5), read 2026-11-04: the Paid Service Terms charge "on the first day of each billing period", and
+# the Premium terms "every billing period starting on the first billing date", without saying which day of the month
+# that is; the cancelling article says no more.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.youtube.com/t/terms_paidservice
+    - https://support.google.com/youtube/answer/6308278
+  lastVerified: 2026-11-04
+
+# Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their words
+# (youtube.com/premium: "Background play", and Lite's "Background play most videos").
+perks:
+  - id: background-play
+    name: Background play
+  - id: background-play-most
+    name: Background play on most videos
+
+# Apps, sign-in and support (the cross-category features), read 2026-11-04: YouTube's apps on Android and iPhone, the
+# web, and "most smart TVs, game consoles, and streaming devices" ("Download the YouTube app on your smart TV or game
+# console"); a Google Account's password or passkey with Google's second steps, as for Google AI; the help centre's
+# community on every article ("Post to the help community"). Its contact page for paid products needs a sign-in, so
+# its channels stay unread.
+features:
+  platforms: [android, ios, web, tv, console]
+  account.sign-in: [password, passkey, push-approval, totp, security-key, sms]
+  support.channels: [community]
+
+# Features, read 2026-11-04 in YouTube Help: one stream at a time on Premium and Premium Lite, six on a family plan and
+# two on a Two-person plan ("YouTube Premium & streaming limits"); offline viewing "on up to 10 devices at a time" for
+# Premium members ("Premium memberships & device limits"), which doesn't name Premium Lite, though its own article
+# calls it "a new, lower-priced YouTube Premium membership", so Lite's 10 is inferred; 4K among its formats ("Some
+# high-quality formats (for example, 1080p, 4K)", Change video quality) and HDR ("Viewers can watch HDR videos on
+# compatible mobile devices and HDR TVs", Upload HDR videos), and no page names Dolby Atmos, so none; no viewers'
+# profiles (each member of a family plan uses "their own Google account"), and the YouTube Kids app's "limited
+# profiles for your child" (its privacy notice). People included: "up to 5 other members of your household" (the
+# family plan article) and "one other member of your household" (the Two-person plan article). Premium includes
+# YouTube Music Premium (youtube.com/premium), so its plans are music plans too. Premium Lite isn't ad free: "Ads,
+# however, may still appear on music content, Shorts, and when you search or browse" (its article).
+# Official resellers: none. Google Play and Apple bill it in their apps (above), and YouTube's "partner provider"
+# article covers companies that sell it with their own plans: ways to pay, not shops.
+plans:
+  - id: youtube.premium
+    name: Premium
+    link: https://www.youtube.com/premium
+    categories: [streaming, music]
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: true
+      streaming.concurrent-streams: 1
+      streaming.download-devices: 10
+      streaming.kids-profiles: true
+      streaming.french-content: true
+    inferred:
+      streaming.french-content:
+        reason: "YouTube's videos come from people across the globe, in French among many languages; no page counts them."
+        page:
+          name: Terms of Service
+          url: https://www.youtube.com/t/terms
+        lastVerified: 2026-11-04
+    perks: [background-play]
+    notes: Includes YouTube Music Premium. Ads or promotions can still appear during live events, such as sports.
+    prices:
+      # Read 2026-11-04: Canada from Canada; the others through each country's exit.
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 12.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 129.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: false,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 15.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 159.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: false,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 12.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 16.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 14.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 149.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: false,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 12.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 15.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 15.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+
+  - id: youtube.premium-family
+    name: Premium Family
+    link: https://www.youtube.com/premium
+    categories: [streaming, music]
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: true
+      streaming.concurrent-streams: 6
+      streaming.download-devices: 10
+      streaming.kids-profiles: true
+      streaming.french-content: true
+      account.users: 6
+    inferred:
+      streaming.french-content:
+        reason: "YouTube's videos come from people across the globe, in French among many languages; no page counts them."
+        page:
+          name: Terms of Service
+          url: https://www.youtube.com/t/terms
+        lastVerified: 2026-11-04
+    perks: [background-play]
+    notes: Includes YouTube Music Premium. Shared with up to 5 others in your household, each with their own Google account.
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 22.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 26.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 39.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 27.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 29.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 29.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 29.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+
+  - id: youtube.premium-two-person
+    name: Premium Two-person
+    link: https://www.youtube.com/premium
+    categories: [streaming, music]
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: true
+      streaming.concurrent-streams: 2
+      streaming.download-devices: 10
+      streaming.kids-profiles: true
+      streaming.french-content: true
+      account.users: 2
+    inferred:
+      streaming.french-content:
+        reason: "YouTube's videos come from people across the globe, in French among many languages; no page counts them."
+        page:
+          name: Terms of Service
+          url: https://www.youtube.com/t/terms
+        lastVerified: 2026-11-04
+    perks: [background-play]
+    notes: Includes YouTube Music Premium. Shared with one other person in your household, with their own Google account.
+    prices:
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 25.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+
+  - id: youtube.premium-lite
+    name: Premium Lite
+    link: https://www.youtube.com/premium
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: false
+      streaming.concurrent-streams: 1
+      streaming.download-devices: 10
+      streaming.kids-profiles: true
+      streaming.french-content: true
+    inferred:
+      streaming.download-devices:
+        reason: 'Its article calls Premium Lite "a new, lower-priced YouTube Premium membership", and YouTube Premium members can download on up to 10 devices at a time.'
+        page:
+          name: Premium memberships & device limits
+          url: https://support.google.com/youtube/answer/6308288
+        lastVerified: 2026-11-04
+      streaming.french-content:
+        reason: "YouTube's videos come from people across the globe, in French among many languages; no page counts them."
+        page:
+          name: Terms of Service
+          url: https://www.youtube.com/t/terms
+        lastVerified: 2026-11-04
+    perks: [background-play-most]
+    notes: Most videos play without ads, offline and in the background, but not music, Shorts, or search and browsing. No YouTube Music Premium.
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 7.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 7.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 7.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 7.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.youtube.com/premium,
+        }
+
+# Terms and policies, read 2026-11-04 (M11.15): the YouTube Terms of Service (effective January 5, 2022, as served in
+# Canada; the UK's of March 17, 2025, and the EEA's through gl=), the Paid Service Terms with their Premium terms
+# (effective November 3, 2026), YouTube Help's articles on cancelling, refunds, plans and limits, the YouTube Kids
+# privacy notice, and Google's Privacy Policy (data/policies/google-privacy.yaml), which YouTube's terms point to.
+# Google's own Terms of Service don't apply: YouTube's say "Your use of any Paid Service is governed only by the
+# Terms, and not the terms of any other Google product". Inactivity and security are Google's account and
+# Vulnerability Reward Program pages, as for Google AI.
+policies:
+  shared: [google-privacy]
+  links:
+    - name: 'Terms of Service'
+      url: https://www.youtube.com/t/terms
+    - name: 'Paid Service Terms of Service'
+      url: https://www.youtube.com/t/terms_paidservice
+    - name: 'YouTube Kids privacy notice'
+      url: https://kids.youtube.com/t/privacynotice
+    - name: 'Cancelling'
+      url: https://support.google.com/youtube/answer/6308278
+    - name: 'Refunds'
+      url: https://support.google.com/youtube/answer/12014038?hl=en#zippy=%2Cyoutube-premium-music-premium-refund-policies
+    - name: 'Device limits'
+      url: https://support.google.com/youtube/answer/6308288
+    - name: 'Family plans'
+      url: https://support.google.com/youtube/answer/7507349
+    - name: 'Premium Lite'
+      url: https://support.google.com/youtube/answer/15968883
+    - name: 'YouTube Premium'
+      url: https://www.youtube.com/premium
+    - name: 'Terms of Service (UK)'
+      url: https://www.youtube.com/t/terms?gl=GB&hl=en
+    - name: 'Terms of Service (EEA)'
+      url: https://www.youtube.com/t/terms?gl=IE&hl=en
+    - name: 'Your content and third-party training'
+      url: https://support.google.com/youtube/answer/15509945
+    - name: "Google's privacy policy"
+      url: https://policies.google.com/privacy
+    - name: 'Inactive Google Accounts'
+      url: https://support.google.com/accounts/answer/12418290
+    - name: 'Vulnerability Reward Program'
+      url: https://bughunters.google.com/about/rules/google-friends/google-and-alphabet-vulnerability-reward-program-vrp-rules
+  ratings:
+    - topic: privacy.ai-training
+      tier: bad
+      reason: "Google says it may use public information to train its AI models, and YouTube's terms let Google's companies use what you upload in their business: you can't opt out. Other AI companies can train on your videos only if you turn that on."
+      sources:
+        - url: https://policies.google.com/privacy
+          quote: 'we may collect information that’s publicly available online or from other public sources to help train Google’s AI models'
+        - url: https://www.youtube.com/t/terms
+          quote: "in connection with the Service and YouTube’s (and its successors' and Affiliates') business"
+        - url: https://support.google.com/youtube/answer/15509945
+          quote: 'By default, the third-party training setting is turned off.'
+      lastVerified: 2026-11-04
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 13, or younger with a parent’s setup. Its kids app shows no ads picked from what children do, but nothing says what teenagers get on YouTube.'
+      sources:
+        - url: https://www.youtube.com/t/terms
+          quote: 'You must be at least 13 years old to use the Service'
+        - url: https://www.youtube.com/t/terms
+          quote: 'children of all ages may use the Service and YouTube Kids (where available) if enabled by a parent or legal guardian'
+        - url: https://kids.youtube.com/t/privacynotice
+          quote: 'The app does not allow interest-based advertising or remarketing.'
+      lastVerified: 2026-11-04
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can cancel online at any time, past an offer to pause, and keep Premium until the end of the period you paid for.'
+      sources:
+        - url: https://support.google.com/youtube/answer/6308278
+          quote: 'You can cancel, pause, or resume your paid membership at any time as a YouTube Premium and YouTube Music Premium subscriber.'
+        - url: https://support.google.com/youtube/answer/6308278
+          quote: 'Click Continue to cancel.'
+        - url: https://support.google.com/youtube/answer/6308278
+          quote: 'Your YouTube paid membership benefits will continue until the end of the billing period.'
+      action:
+        name: 'Cancel your membership'
+        url: https://www.youtube.com/paid_memberships
+      lastVerified: 2026-11-04
+    - topic: billing.refunds
+      tier: neutral
+      reason: "You don't get money back when you cancel, but you keep Premium to the end of the period. It refunds when its features don't work, and never part of a prepaid year."
+      sources:
+        - url: https://support.google.com/youtube/answer/12014038?hl=en#zippy=%2Cyoutube-premium-music-premium-refund-policies
+          quote: "You won't be refunded for the period between when you cancel and when your membership ends."
+        - url: https://support.google.com/youtube/answer/12014038?hl=en#zippy=%2Cyoutube-premium-music-premium-refund-policies
+          quote: 'If videos or features related to your YouTube purchase don’t work, you may be eligible for a refund.'
+        - url: https://support.google.com/youtube/answer/12014038?hl=en#zippy=%2Cyoutube-premium-music-premium-refund-policies
+          quote: 'Refunds are not available for partially used prepaid plans.'
+      lastVerified: 2026-11-04
+    - topic: billing.price-changes
+      tier: neutral
+      reason: "It tells you before a new price applies, and you can cancel first, but it doesn't say how far ahead."
+      sources:
+        - url: https://www.youtube.com/t/terms_paidservice
+          quote: 'Any changes to pricing for Paid Services with recurring payments will only apply following reasonable notice to you.'
+        - url: https://www.youtube.com/t/terms_paidservice
+          quote: 'you can cancel the Paid Service before the start of the next subscription period in which the new price applies'
+      lastVerified: 2026-11-04
+    - topic: billing.free-trials
+      tier: good
+      reason: 'Its trial turns into a paid plan unless you cancel, and it reminds you 7 days before the trial ends.'
+      sources:
+        - url: https://www.youtube.com/t/terms_paidservice
+          quote: 'At the end of the trial period, you will be automatically charged the price of the subscription and will continue to be charged until you cancel your subscription.'
+        - url: https://www.youtube.com/premium
+          quote: "You'll be reminded 7 days before your trial ends."
+      lastVerified: 2026-11-04
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: "Its terms say a monthly plan renews on its own, but not that it reminds you first. Its yearly plans are paid ahead and don't renew."
+      pages: [https://www.youtube.com/t/terms_paidservice]
+      lastVerified: 2026-11-04
+    - topic: billing.fees
+      tier: poor
+      reason: 'Besides the price and taxes, it can add bank fees and the cost of currency changes, without saying how much.'
+      sources:
+        - url: https://www.youtube.com/t/terms_paidservice
+          quote: 'Google will charge your payment method for the price listed for the relevant Paid Service along with any additional amounts relating to applicable taxes, bank fees and currency fluctuations.'
+      lastVerified: 2026-11-04
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its pages say how to move up from Premium Lite or to a family plan, but not what happens to what you’ve paid.'
+      pages:
+        - https://support.google.com/youtube/answer/15968883
+        - https://support.google.com/youtube/answer/6308278
+      lastVerified: 2026-11-04
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to the courts of Santa Clara County, California, under California law, with no arbitration.'
+      sources:
+        - url: https://www.youtube.com/t/terms
+          quote: 'will be litigated exclusively in the federal or state courts of Santa Clara County, California, USA'
+      lastVerified: 2026-11-04
+    - topic: legal.disputes
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: great
+      reason: 'In the EU and the UK, disputes go to the courts where you live, under its law, and it names no arbitration or class action ban.'
+      sources:
+        - url: https://www.youtube.com/t/terms?gl=GB&hl=en
+          quote: 'either party may bring legal proceedings (including for breaches of these terms) in your local courts'
+        - url: https://www.youtube.com/t/terms?gl=IE&hl=en
+          quote: 'will be governed by the laws of your country of residence, and legal proceedings may be brought in your local courts'
+      lastVerified: 2026-11-04
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: "It tells you about big changes to its terms ahead of time, but doesn't say how far ahead. If you don't agree, you stop using it."
+      sources:
+        - url: https://www.youtube.com/t/terms
+          quote: 'If we materially change this Agreement, we’ll provide you with reasonable advance notice and the opportunity to review the changes'
+        - url: https://www.youtube.com/t/terms_paidservice
+          quote: 'If we materially change the Paid Service Terms, we’ll provide you with reasonable advance notice'
+      lastVerified: 2026-11-04
+    - topic: legal.account-closure
+      tier: good
+      reason: 'It closes or suspends an account only if you seriously or repeatedly break its rules, the law makes it, or you cause harm, and it tells you why when it can. You can appeal.'
+      sources:
+        - url: https://www.youtube.com/t/terms
+          quote: 'you materially or repeatedly breach this Agreement'
+        - url: https://www.youtube.com/t/terms
+          quote: 'We will notify you with the reason for termination or suspension by YouTube unless we reasonably believe that to do so'
+        - url: https://www.youtube.com/t/terms
+          quote: 'If you believe the termination or suspension has been made in error, you can appeal using this form.'
+      lastVerified: 2026-11-04
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can add or remove features and what you can watch, and tells you ahead of big changes that make it worse for you.'
+      sources:
+        - url: https://www.youtube.com/t/terms
+          quote: 'we may make modifications or changes (to all or part of the Service) such as adding or removing features and functionalities, offering new digital content or services or discontinuing old ones'
+        - url: https://www.youtube.com/t/terms_paidservice
+          quote: 'The availability of content on a Paid Service may change from time to time'
+      lastVerified: 2026-11-04
+    - topic: legal.inactivity
+      tier: good
+      reason: 'Google may delete an account no one has used for two years, after emailing you first. An account with a subscription that is still running counts as in use.'
+      sources:
+        - url: https://support.google.com/accounts/answer/12418290
+          quote: 'Google reserves the right to delete an inactive Google Account and its activity and data if you are inactive across Google for at least two years.'
+        - url: https://support.google.com/accounts/answer/12418290
+          quote: 'Your Google Account was used to make a purchase of a Google product, app, service, or subscription that is current or ongoing.'
+        - url: https://support.google.com/accounts/answer/12418290
+          quote: 'Email notifications to your Google Account'
+      lastVerified: 2026-11-04
+    - topic: security.practices
+      tier: neutral
+      reason: "It pays security experts who find and report problems in Google's and YouTube's services, but doesn't say outside experts regularly check YouTube's security or publish what they find."
+      sources:
+        - url: https://bughunters.google.com/about/rules/google-friends/google-and-alphabet-vulnerability-reward-program-vrp-rules
+          quote: 'we maintain a Vulnerability Reward Program for Google-owned and Alphabet (Bet) subsidiary web properties, running continuously since November 2010.'
+        - url: https://bughunters.google.com/about/rules/google-friends/google-and-alphabet-vulnerability-reward-program-vrp-rules
+          quote: 'In principle, any Google-owned or Alphabet (Bet) subsidiary web service that handles reasonably sensitive user data is intended to be in scope.'
+      lastVerified: 2026-11-04
+    - topic: service.account-sharing
+      tier: bad
+      reason: "An individual plan is for one person: you can't share it, not even at home."
+      sources:
+        - url: https://www.youtube.com/t/terms_paidservice
+          quote: 'This plan is designed to be used by one user and may not be used by multiple users sharing the same account.'
+      lastVerified: 2026-11-04
+    - topic: service.account-sharing
+      tier: poor
+      reason: 'You share it with up to 5 people at your address, each with their own Google account, and YouTube checks: it can pause their Premium when it can’t confirm they live with you.'
+      plans: [youtube.premium-family, youtube.premium-two-person]
+      sources:
+        - url: https://support.google.com/youtube/answer/7507349
+          quote: 'Live within the same residential address as the family manager.'
+        - url: https://support.google.com/youtube/answer/7507349
+          quote: 'it is because we cannot confirm that you are in the same household as your family manager'
+      lastVerified: 2026-11-04
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Downloads work on up to 10 devices at a time. Swapping in a new device takes the oldest off the list, and only 4 swaps are allowed a year.'
+      sources:
+        - url: https://support.google.com/youtube/answer/6308288
+          quote: 'you can use the offline features of your paid membership on up to 10 devices at a time'
+        - url: https://support.google.com/youtube/answer/6308288
+          quote: 'You can do this up to 4 times in one year.'
+      lastVerified: 2026-11-04

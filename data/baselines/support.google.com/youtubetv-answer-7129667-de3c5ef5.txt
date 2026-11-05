@@ -1,0 +1,102 @@
+url: https://support.google.com/youtubetv/answer/7129667
+method: fetch
+saved: 2026-11-04
+
+Update billing & payments for YouTube TV - Computer - YouTube TV Help Skip to main content
+YouTube TV Help
+Sign in
+Google Help
+Help Center
+Community
+YouTube TV
+Privacy Policy
+Terms of Service
+Submit feedback
+Send feedback on...
+This help content & information
+General Help Center experience
+Close Next
+Help Center
+Community
+YouTube TV Contact us
+Make a payment
+Update billing & payments for YouTube TV
+Update billing & payments for YouTube TV
+You can update your billing and payment info for your YouTube TV subscription and any add-ons you’ve purchased. As a YouTube TV member, you’ll automatically be charged at the start of each new billing cycle until you cancel. Your payment gives you access to YouTube TV for the next month.
+Notes:
+If you signed up for YouTube TV through a mobile carrier or internet provider, you’ll be billed by them. Learn more about how integrated billing works.
+To review your payment history, follow these instructions to find your purchases, reservations & subscriptions.
+Learn more about NFL Sunday Ticket pricing, billing, and purchase options.
+About YouTube TV Payments
+A YouTube TV plan costs $82.99 + tax/month.
+Your charge date is the same within each month. If that date doesn’t occur in a given month (for example, the 31st), you'll be charged on the last date of that month.
+Add-on networks are prorated for the period before your next charge date, and then added to your monthly charge. Learn more about add-on networks.
+Learn more about how taxes are calculated on YouTube TV.
+Troubleshoot a YouTube charge
+Click the button below to troubleshoot or learn about your YouTube bill.
+TROUBLESHOOT A YOUTUBE CHARGE
+Add or update payment method
+Go to tv.youtube.com.
+Select your profile picture .
+Select Settings Billing .
+Select Update next to your form of payment details.
+Add a backup payment method
+If your payment method expires, your charge won’t go through. Keep your payment method up to date, or add a backup payment method, to ensure your viewing experience isn’t interrupted.
+Go to tv.youtube.com.
+Select your profile picture .
+Select Settings Billing .
+Select Update next to your form of payment details.
+Under “YouTube TV,” select Manage.
+Under “How you pay,” select Change payment method Continue Add backup.
+Select an available payment method or add a new one.
+Need a break? Pause your membership and keep your DVR library. Learn how to pause your membership.
+Was this helpful?
+How can we improve it?
+Yes No
+Submit
+Computer Android phone & tabletiPhone & iPad More
+Need more help?
+Try these next steps:
+Post to the help community Get answers from community members
+Contact us Tell us more and we’ll help you get there
+true
+Make a payment
+1 of 3
+Update billing & payments for YouTube TV
+2 of 3
+Pay for YouTube TV using your mobile carrier or internet provider
+3 of 3
+Taxes on YouTube TV
+©2026 Google Privacy Policy
+Terms of Service
+Language Afrikaans&lrm; azərbaycan&lrm; bosanski&lrm; català&lrm; dansk&lrm; Deutsch&lrm; eesti&lrm; español&lrm; español (Latinoamérica)&lrm; euskara&lrm; Filipino&lrm; français&lrm; français (Canada)&lrm; galego&lrm; hrvatski&lrm; Indonesia&lrm; isiZulu&lrm; italiano&lrm; Kiswahili&lrm; latviešu&lrm; lietuvių&lrm; magyar&lrm; Melayu&lrm; Nederlands&lrm; norsk&lrm; o‘zbek&lrm; polski&lrm; português&lrm; português (Brasil)&lrm; română&lrm; shqip&lrm; slovenčina&lrm; slovenščina&lrm; suomi&lrm; svenska&lrm; Tiếng Việt&lrm; Türkçe&lrm; íslenska&lrm; čeština&lrm; Ελληνικά&lrm; български&lrm; кыргызча&lrm; македонски&lrm; монгол&lrm; русский&lrm; српски&lrm; українська&lrm; қазақ тілі&lrm; հայերեն&lrm; &rlm;עברית &rlm;اردو &rlm;العربية &rlm;فارسی नेपाली&lrm; मराठी&lrm; हिन्दी&lrm; অসমীয়া&lrm; বাংলা&lrm; ਪੰਜਾਬੀ&lrm; ગુજરાતી&lrm; ଓଡ଼ିଆ&lrm; தமிழ்&lrm; తెలుగు&lrm; ಕನ್ನಡ&lrm; മലയാളം&lrm; සිංහල&lrm; ไทย&lrm; ລາວ&lrm; မြန်မာ&lrm; ქართული&lrm; አማርኛ&lrm; ខ្មែរ&lrm; 中文（简体）&lrm; 中文（繁體）&lrm; 中文（香港）&lrm; 日本語&lrm; 한국어&lrm; English&lrm; Enable Dark Mode
+Send feedback on...
+This help content & information General Help Center experience
+Search
+Clear search
+Close search
+Google apps
+Main menu
+1584276372982343120
+true
+Search Help Center
+false
+true
+true
+true
+true
+true
+1025958
+false
+false
+var UK={},xOa=(UK[0]="Play GIF",UK[1]="Stop GIF",UK[3]="Stop GIF",UK[2]="Play GIF",UK);function VK(a){E.call(this,"sc.gif_player.PlaybackButton");this.o=a;this.oa=new Xp;this.ma=new Iu({icon:11});this.ua=new Iu({icon:12})}
+v(VK,E);function yOa(a){a.element("div","class","spinner-container",function(){a.oa.render()})}
+VK.prototype.Bb=function(a){return a===0||a===1};
+VK.prototype.content=function(a){var b=this;var d=a.Xg;this.element("button","class",Pa({},a.rT,{"playback-button":!0,"playback-button--play":d===3}),"role","button","aria-pressed",d===3||d===0,"aria-label",xOa[d],"onkeydown",this.o,function(){b.element("span","class",b.Bb(d)?"playback-button__span--loading":"playback-button__span",xOa[d]);switch(d){case 3:b.ua.render();break;case 2:b.ma.render();break;default:yOa(b)}})};var zOa=Bo("sc.gif_player.GifPlayer"),AOa=["float-right","float-left","shadow"],BOa={},COa=(BOa["^"+zOa+"playback-button"]=!0,BOa);
+function WK(a){var b=a.src;var d=a.CJ;var e=a.alt;var f=a.className;var h=a.height;var k=a.width;var l=a.top;var p=a.left;var r=a.bottom;a=a.right;E.call(this,"sc.gif_player.GifPlayer");var t=this;this.Xg=0;this.o=!1;this.src=b;this.CJ=d?d:"";this.alt=e?e:"";this.class=f?DOa(f):{};this.height=h;this.width=k;this.top=l?l:"";this.left=p?p:"";this.bottom=r?r:"";this.right=a?a:"";this.ma=new VK(function(u){t.Bb()||t.o||u.code!=="Enter"||(EOa(t),t.Ja())})}
+v(WK,E);function DOa(a){return a.split(/\s+/).filter(function(b){return xa(AOa,"includes").call(AOa,b)}).reduce(function(b,d){b[d]=!0;
+return b},{})}
+WK.prototype.getUrl=function(){switch(this.Xg){case 0:case 3:return this.src;case 1:case 2:return this.CJ;default:return this.src}};
+function EOa(a){switch(a.Xg){case 2:Fp(25,"gif_player_playback_button",137);a.Xg=0;break;case 3:Fp(43,"gif_player_playback_button",137),a.Xg=1}}
+WK.prototype.Bb=function(){return this.Xg===0||this.Xg===1};
+WK.prototype.content=function(){var a=this;this.class.container=!0;this.element("div","class",this.class,"style",{height:this.height,width:this.width},"onclick",function(){a.Bb()||a.o||(EOa(a),a.Ja())},function(){

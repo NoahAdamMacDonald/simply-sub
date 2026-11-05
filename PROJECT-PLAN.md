@@ -2090,9 +2090,19 @@ in every D1 `json` column search parses.
     Claude's paid plans work in office apps; Proton Scribe moved from a perk to `ai.office-apps` (data/redirects.yaml).
     ChatGPT (`chatgpt`): Free, Go, Plus and Pro's three tiers, read with Edge (a plain fetch gets 403 from OpenAI's
     pages), its other regions' prices through each country's exit; a bank debit now counts as a bank transfer.
+  - **Streaming, batch 1** (2026-11-04): one feature the owner chose, `streaming.profiles` (viewers' profiles, Kids
+    profiles included), filled in for every streaming provider; Hulu Premium's downloads perk became Download devices
+    (data/redirects.yaml) once its help centre gave five devices. The queue's streaming entries triaged: free, closed
+    or not subscriptions out of scope, those sold only outside the catalog's regions rejected (the owner's choice),
+    music, creative and gaming ones moved to their categories. YouTube (`youtube`: Premium, Premium Family, Two-person
+    and Premium Lite), YouTube TV (`youtube-tv`: nine plans by channel genre, three add-ons), Apple TV (`apple-tv`),
+    MUBI (`mubi`: Classic and GO, billed every 30 or 360 days) and HBO Max (`hbo-max`, read through exits: it isn't
+    sold in Canada). Apple's Media Services Terms and Privacy Policy and Warner Bros. Discovery's privacy policies are
+    shared documents (`data/policies/apple-media-services.yaml`, `apple-privacy.yaml`, `wbd-privacy.yaml`). Batch 2:
+    Paramount+, Prime Video, Rumble, Viki and DAZN.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
-        (AI: Claude, Google AI and ChatGPT, done)
+        (AI: Claude, Google AI and ChatGPT, done; streaming: batch 1 done)
 
 ---
 

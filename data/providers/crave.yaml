@@ -80,6 +80,9 @@ features:
 # $220.00/yr thereafter" is a first-year offer, so $220.00 is its price.
 # HDR (M11.9, the owner's item 3), read 2026-11-03: its plans and devices pages name 4K on Premium but not HDR, so
 # none (inferred).
+# Profiles (M11.15), read 2026-11-04: its parental controls FAQ sets "individual viewing levels for each profile on your
+# account" for different family members, but no page numbers them (its help centre's search finds no article), so 2,
+# the least that allows (inferred).
 plans:
   - id: crave.standard-ads
     name: Standard With Ads
@@ -88,9 +91,17 @@ plans:
       video.quality: 1080p
       ad-free: false
       streaming.concurrent-streams: 2
+      streaming.profiles: 2
       streaming.kids-profiles: true
       streaming.french-content: true
       streaming.live: [sports]
+    inferred:
+      streaming.profiles:
+        reason: 'Crave''s parental controls set "individual viewing levels for each profile on your account" for different family members, and no page gives the number, so 2 is the least it can be.'
+        page:
+          name: Parental controls
+          url: https://plus.crave.ca/en/faq/how-do-i-set-up-parental-controls-on-crave/
+        lastVerified: 2026-11-04
     prices:
       - region: CA
         currency: CAD
@@ -118,9 +129,17 @@ plans:
       ad-free: true
       streaming.concurrent-streams: 4
       streaming.download-devices: 5
+      streaming.profiles: 2
       streaming.kids-profiles: true
       streaming.french-content: true
       streaming.live: [sports]
+    inferred:
+      streaming.profiles:
+        reason: 'Crave''s parental controls set "individual viewing levels for each profile on your account" for different family members, and no page gives the number, so 2 is the least it can be.'
+        page:
+          name: Parental controls
+          url: https://plus.crave.ca/en/faq/how-do-i-set-up-parental-controls-on-crave/
+        lastVerified: 2026-11-04
     prices:
       - region: CA
         currency: CAD

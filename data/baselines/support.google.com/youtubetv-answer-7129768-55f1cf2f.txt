@@ -1,0 +1,115 @@
+url: https://support.google.com/youtubetv/answer/7129768
+method: fetch
+saved: 2026-11-04
+
+Manage your home area or current location for YouTube TV - Computer - YouTube TV Help Skip to main content
+YouTube TV Help
+Sign in
+Google Help
+Help Center
+Community
+YouTube TV
+Privacy Policy
+Terms of Service
+Submit feedback
+Send feedback on...
+This help content & information
+General Help Center experience
+Close Next
+Help Center
+Community
+YouTube TV Contact us
+Manage your home area or current location for YouTube TV
+What you can watch and record on YouTube TV is based on your home area. When you sign up for YouTube TV, we'll ask you to share your home zip code. We may also ask you to verify your area via your device location permissions. This is to make sure you get the right networks in your location.
+YouTube TV outside of your home area
+While outside of your home area, you can watch programming local to where you are, but you can’t record or watch networks local to your home area.
+Frequent travellers:
+To make sure you get the correct local networks, use YouTube TV at least once every 3 months in your home area.
+How to reset your location in your YouTube TV settings
+Learn how to change or update your current location below.
+Change your home area
+Go to tv.youtube.com.
+Select your profile photo Location.
+Select Update next to "Home area."
+CHANGE HOME AREA
+You cannot change your home area if:
+You already changed your home area twice in the last 12 months
+You aren’t currently located in your new home area
+Update your current location
+On a smart TV
+If you're watching with our TV app, you can update your current playback area (for example, if you're traveling).
+Open the YouTube TV app on your TV.
+Select your profile photo .
+Select Location Current Playback Area.
+Follow the prompts to update your location on a mobile app, or web browser.
+​​To update on a mobile device, go to tv.youtube.com/verify.
+Allow the website to access your device’s location to update your current playback area.
+On a web browser
+Open YouTube TV.
+Select your profile photo Location.
+Select Update next to "Current playback area."
+If we can't correctly identify your location, you'll be asked to go to tv.youtube.com/verify. Allow the website to access your device’s location (if you haven't already) to verify the current playback area.
+Watch this video to learn how to update your current location.
+Troubleshoot location permissions
+Still having trouble? Location permissions might be turned off on your device. You can check by following these steps.
+Open Chrome.
+In the top right, click either More .
+Click Settings "Privacy and security" section.
+Click Site settings.
+Select Location and change your location settings.
+Clearing your cache and cookies may also help resolve location issues.
+Using a Chrome device at work or school? Your network administrator might manage location settings for you, in which case you may not be able to can't change them via these directions. Learn about using a managed Chrome device.
+If you're using a web browser other than Chrome, check your browser settings to change location permissions. Learn more about location permissions on the following internet browsers:
+Firefox
+Safari
+Microsoft Edge
+Internet Explorer
+While connected to a VPN or proxy, you won't be able to stream content from YouTube TV, Primetime channels, and YouTube Channels who have chosen to restrict playback. To address associated playback errors, disable your VPN/proxy.
+Was this helpful?
+How can we improve it?
+Yes No
+Submit
+Computer Android phone & tabletiPhone & iPad More
+Need more help?
+Try these next steps:
+Post to the help community Get answers from community members
+Contact us Tell us more and we’ll help you get there
+true
+Help
+1 of 7
+Sign up for YouTube TV
+2 of 7
+Cancel or pause your YouTube TV membership
+3 of 7
+Switch accounts or remove an account in YouTube TV
+4 of 7
+Manage your home area or current location for YouTube TV
+5 of 7
+Create & manage a shared YouTube TV membership, or family group
+6 of 7
+Buy add-ons for YouTube TV
+7 of 7
+Troubleshoot YouTube TV account login issues
+©2026 Google Privacy Policy
+Terms of Service
+Language Afrikaans&lrm; azərbaycan&lrm; bosanski&lrm; català&lrm; dansk&lrm; Deutsch&lrm; eesti&lrm; español&lrm; español (Latinoamérica)&lrm; euskara&lrm; Filipino&lrm; français&lrm; français (Canada)&lrm; galego&lrm; hrvatski&lrm; Indonesia&lrm; isiZulu&lrm; italiano&lrm; Kiswahili&lrm; latviešu&lrm; lietuvių&lrm; magyar&lrm; Melayu&lrm; Nederlands&lrm; norsk&lrm; o‘zbek&lrm; polski&lrm; português&lrm; português (Brasil)&lrm; română&lrm; shqip&lrm; slovenčina&lrm; slovenščina&lrm; suomi&lrm; svenska&lrm; Tiếng Việt&lrm; Türkçe&lrm; íslenska&lrm; čeština&lrm; Ελληνικά&lrm; български&lrm; кыргызча&lrm; македонски&lrm; монгол&lrm; русский&lrm; српски&lrm; українська&lrm; қазақ тілі&lrm; հայերեն&lrm; &rlm;עברית &rlm;اردو &rlm;العربية &rlm;فارسی नेपाली&lrm; मराठी&lrm; हिन्दी&lrm; অসমীয়া&lrm; বাংলা&lrm; ਪੰਜਾਬੀ&lrm; ગુજરાતી&lrm; ଓଡ଼ିଆ&lrm; தமிழ்&lrm; తెలుగు&lrm; ಕನ್ನಡ&lrm; മലയാളം&lrm; සිංහල&lrm; ไทย&lrm; ລາວ&lrm; မြန်မာ&lrm; ქართული&lrm; አማርኛ&lrm; ខ្មែរ&lrm; 中文（简体）&lrm; 中文（繁體）&lrm; 中文（香港）&lrm; 日本語&lrm; 한국어&lrm; English&lrm; Enable Dark Mode
+Send feedback on...
+This help content & information General Help Center experience
+Search
+Clear search
+Close search
+Google apps
+Main menu
+1584276372982343120
+true
+Search Help Center
+false
+true
+true
+true
+true
+true
+1025958
+false
+false
+(function(){var rid='default';var enable_track=true;var enable_narrow_screen=false;var enable_keyboard_navigation_on_narrow_screen=false;var enable_keyboard_navigation_embedded=false;var enable_text_selection=false;var enable_text_selection_fab=false;var enable_fab_on_scroll_stop=false;var e

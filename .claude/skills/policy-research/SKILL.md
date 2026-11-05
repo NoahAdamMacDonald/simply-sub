@@ -247,6 +247,15 @@ this file to them: change both together.
   (Google AI's Gemini Apps Privacy Hub and Google One Additional Terms). Their pages and Google's help centres read
   with a plain fetch; the bug bounty's rules (bughunters.google.com) and Alphabet's founders' letter (abc.xyz, under
   "more") need Edge.
+- YouTube has Terms of Service of its own, not Google's: YouTube and YouTube TV share only `google-privacy.yaml`. Its
+  terms differ by country (the UK's and the EEA's send disputes to your local courts): `youtube.com/t/terms?gl=GB&hl=en`
+  serves a country's version from Canada.
+- Apple's Media Services Terms and Privacy Policy cover every Apple service: `data/policies/apple-media-services.yaml`
+  and `apple-privacy.yaml` (M11.15, Apple TV first). Each country has its own copy of the terms
+  (`apple.com/legal/internet-services/itunes/<country>/terms.html`); Ireland's and the UK's add a 14-day withdrawal,
+  changes communicated to you and your own courts. Apple's privacy policy reads in full with a plain fetch.
+- Warner Bros. Discovery's privacy policies cover HBO Max and discovery+: `data/policies/wbd-privacy.yaml`, with its
+  Children's Privacy Policy for kids' profiles. Its privacy centre needs Edge.
 - Netflix's help articles ask for a country; their text still loads.
 - CBC/Radio-Canada's general terms for its digital services (which ICI TOU.TV's subscription includes) load each
   answer only when its question is clicked: open each in Edge (`read-page.cjs`, `click:` by the question's text).
