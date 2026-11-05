@@ -2104,9 +2104,15 @@ in every D1 `json` column search parses.
     Plus). DAZN and Paramount+ are `unreadable` in the queue: DAZN's site turns this machine's connection away, and
     Paramount+'s sign-up shows no plans from Canada and answers 406 through other countries' exits. Prime Video
     follows in its own pull request (the owner chose a Prime Video plan and an Amazon Prime plan in one provider).
+  - **Prime Video** (2026-11-04): `amazon-prime-video`, with Amazon Prime (a suite of Prime Video and Amazon's other
+    benefits as perks, in every catalog region but New Zealand, where Amazon has no store) and Prime Video sold alone
+    (New Zealand's price; the US offers page shows Amazon's shopping check, a bot check, so it's unread), and two
+    add-ons: Ad free and the US's Prime Video Ultra. The queue's Amazon Prime entry is rejected, a plan of Prime Video
+    now (the owner's choice). Amazon's Privacy Notice is a shared document (`data/policies/amazon-privacy.yaml`) for
+    the Amazon services that follow.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
-        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 and 2 done)
+        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 and 2 and Prime Video done)
 
 ---
 
