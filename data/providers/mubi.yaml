@@ -10,6 +10,9 @@
 # in its own currency; the rest not needed.
 # Not listed: the student discount (an eligibility-only offer, as for YouTube's).
 
+# Coverage: mubi.go in CA, AU, NZ, FR, NL, ES and IT: those countries' memberships pages, read through each country's
+# exit (Canada's from Canada) on 2026-11-04, show MUBI Classic only.
+
 id: mubi
 name: MUBI
 website: https://mubi.com
