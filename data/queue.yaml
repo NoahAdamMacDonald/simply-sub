@@ -386,7 +386,9 @@
   source: wikidata
   wikidata: Q3077586
   sitelinks: 33
-  status: queued
+  status: rejected
+  date: 2026-11-04
+  note: "The owner's choice of 2026-11-04: bilibili.com is China's site, and bilibili.tv's Premium isn't offered in Canada or the US"
 - id: mega-io
   name: Mega.io
   website: https://mega.io
@@ -952,7 +954,7 @@
 - id: plex
   name: Plex
   website: https://plex.tv
-  category: streaming
+  category: software
   source: wikidata
   wikidata: Q7204887
   sitelinks: 12
