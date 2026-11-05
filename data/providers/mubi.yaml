@@ -619,9 +619,11 @@ policies:
           quote: 'These terms will not limit any consumer protection rights that you may be entitled to under the mandatory laws of your local jurisdiction.'
       lastVerified: 2026-11-04
     - topic: legal.terms-changes
-      status: not-stated
-      reason: 'Its terms don’t say how it changes them or whether it tells you.'
-      pages: [https://mubi.com/en/terms_of_service]
+      tier: bad
+      reason: 'It can change its terms at any time without telling you first; the new terms apply to anything you buy after they’re posted.'
+      sources:
+        - url: https://mubi.com/en/terms_of_service
+          quote: 'These Terms & Conditions are subject to change without prior written notice at any time, at MUBI’s sole discretion, and such changes shall apply to any purchases made after such changes are posted.'
       lastVerified: 2026-11-04
     - topic: legal.account-closure
       tier: neutral

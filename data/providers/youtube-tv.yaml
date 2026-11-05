@@ -498,13 +498,15 @@ policies:
           quote: 'you can cancel the Paid Service before the start of the next subscription period in which the new price applies'
       lastVerified: 2026-11-04
     - topic: billing.free-trials
-      tier: neutral
-      reason: 'Its trial turns into a paid plan unless you cancel, which you can do at any time during it; it names no reminder.'
+      tier: poor
+      reason: 'Its trial needs a payment method up front and turns into a paid plan unless you cancel, which you can do at any time during it; it names no reminder.'
       sources:
         - url: https://support.google.com/youtubetv/answer/11020997
           quote: 'When your account switches from a free trial to a paid membership, you’ll be charged the standard price for the plan you signed up for (plus any add-on networks you’ve subscribed to).'
         - url: https://support.google.com/youtubetv/answer/11020997
           quote: "If you cancel your subscription during your free trial, you'll still retain access to YouTube TV features until the end of the trial period."
+        - url: https://www.youtube.com/t/terms_paidservice
+          quote: 'You must have a valid, accepted payment method on file in order to purchase Paid Services, or to participate in no-cost trial offers or other no-cost offers related to the Paid Services.'
       lastVerified: 2026-11-04
     - topic: billing.renewal-notice
       status: not-stated

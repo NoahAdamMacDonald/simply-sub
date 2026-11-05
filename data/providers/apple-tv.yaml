@@ -105,8 +105,8 @@ features:
   account.sign-in: [password, push-approval, sms]
 
 # Features, read 2026-11-04: "For most content, one subscription allows you to enjoy 6 simultaneous streams" (Apple
-# Support's download and stream article); "With Family Sharing, one subscription works for up to six people" and
-# "Apple TV 4K — with 4K HDR and Dolby Atmos sound — is the ultimate way to experience Apple TV" (apple.com/ca/apple-tv);
+# Support's download and stream article); "With Family Sharing, one subscription works for up to six people"
+# (apple.com/ca/apple-tv) and "Experience in 4K HDR and Dolby Atmos sound" (tv.apple.com/us);
 # downloads to "your Apple device" without a stated number of devices, so 1, the least that allows (inferred); "Watch
 # MLS matches and Friday Night Baseball games live — no extra cost" (Canada's page) and Formula 1 in the US (the US
 # app page), which the UK's, Australia's and Germany's pages don't name, so sports, with a note. No viewers' profiles

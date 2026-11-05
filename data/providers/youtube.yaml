@@ -673,9 +673,11 @@ policies:
           quote: 'By default, the third-party training setting is turned off.'
       lastVerified: 2026-11-04
     - topic: privacy.children
-      tier: good
-      reason: 'Children under 13 can use YouTube only when a parent sets it up, and its kids app shows no ads picked from what they do.'
+      tier: neutral
+      reason: 'You must be 13, or younger with a parent’s setup. Its kids app shows no ads picked from what children do, but nothing says what teenagers get on YouTube.'
       sources:
+        - url: https://www.youtube.com/t/terms
+          quote: 'You must be at least 13 years old to use the Service'
         - url: https://www.youtube.com/t/terms
           quote: 'children of all ages may use the Service and YouTube Kids (where available) if enabled by a parent or legal guardian'
         - url: https://kids.youtube.com/t/privacynotice
@@ -817,14 +819,14 @@ policies:
           quote: 'This plan is designed to be used by one user and may not be used by multiple users sharing the same account.'
       lastVerified: 2026-11-04
     - topic: service.account-sharing
-      tier: good
-      reason: 'You share it with people who live at your address, each with their own Google account. It names no checks.'
+      tier: poor
+      reason: 'You share it with up to 5 people at your address, each with their own Google account, and YouTube checks: it can pause their Premium when it can’t confirm they live with you.'
       plans: [youtube.premium-family, youtube.premium-two-person]
       sources:
         - url: https://support.google.com/youtube/answer/7507349
-          quote: 'YouTube family plans allow you to share membership benefits with up to 5 family members who live within the same residential address.'
-        - url: https://www.youtube.com/t/terms_paidservice
-          quote: 'We may offer multi-person plans (such as a two person or a six person plan) for family group members residing in the same household as the family manager.'
+          quote: 'Live within the same residential address as the family manager.'
+        - url: https://support.google.com/youtube/answer/7507349
+          quote: 'it is because we cannot confirm that you are in the same household as your family manager'
       lastVerified: 2026-11-04
     - topic: service.device-limits
       tier: neutral

@@ -3,7 +3,7 @@
 # Store's subscriptions when they join the catalog), rated once here with Apple Support's articles on cancelling,
 # refunds and its security programmes. Each provider names it in its policies' shared and adds ratings from its own
 # notices.
-# Read 2026-11-04 (M11.15) from Canada: each country's version (apple.com/legal/internet-services/itunes/<country>/
+# Read 2026-11-04 (M11.15) from Canada, with Apple's security certifications guide: each country's version (apple.com/legal/internet-services/itunes/<country>/
 # terms.html), Canada's and the US's alike, and Ireland's for the EU's and the UK's own rules (the UK's says the same) (14 days to
 # withdraw, changes communicated to you, your own courts).
 # Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
@@ -18,15 +18,17 @@ links:
     url: https://support.apple.com/en-ca/118223
   - name: 'Apple Security Bounty'
     url: https://security.apple.com/bounty/
+  - name: 'Apple security certifications'
+    url: https://support.apple.com/en-ca/guide/certifications/welcome/web
 ratings:
   - topic: billing.cancellation
-    tier: neutral
-    reason: 'You cancel online in your account settings, but at least 24 hours before it renews: it charges you up to a day ahead.'
+    tier: good
+    reason: 'You cancel online in your account settings, at any time.'
     sources:
       - url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
         quote: 'Subscriptions automatically renew until cancelled in the Manage Subscriptions section of your account settings.'
       - url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
-        quote: 'You will be charged no more than twenty-four (24) hours prior to the start of the latest Subscription period.'
+        quote: 'you may cancel your subscription in your account settings at any time without additional charge.'
     action:
       name: 'Cancel a subscription'
       url: https://support.apple.com/en-ca/118428
@@ -136,9 +138,11 @@ ratings:
         quote: 'You may be limited in the amount of Content you may download, and some downloaded Content may expire after a given amount of time after downloaded or first played.'
     lastVerified: 2026-11-04
   - topic: security.practices
-    tier: neutral
-    reason: "It pays security researchers who find and report problems in its devices and services, but doesn't say outside experts regularly check its services or publish what they find."
+    tier: good
+    reason: "It pays security researchers who find and report problems, and keeps security certifications for many of its services; it doesn't publish outside audits of them."
     sources:
       - url: https://security.apple.com/bounty/
         quote: 'The Apple Security Bounty program is designed to recognize your work helping us to protect our users.'
+      - url: https://support.apple.com/en-ca/guide/certifications/welcome/web
+        quote: 'Apple maintains security certifications over a number of its service offerings to provide security assurance to others.'
     lastVerified: 2026-11-04

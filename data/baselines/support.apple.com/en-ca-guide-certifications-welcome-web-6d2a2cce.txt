@@ -1,0 +1,84 @@
+url: https://support.apple.com/en-ca/guide/certifications/welcome/web
+method: fetch
+saved: 2026-11-04
+
+Apple platform certifications - Apple Support (CA)
+Apple
+Store
+Mac
+iPad
+iPhone
+Watch
+Vision
+AirPods
+Home
+Entertainment
+Accessories
+Support
+0+
+Apple platform certifications
+Search this guide
+Clear Search
+Apple platform certifications
+July 2026
+Table of Contents
+Hardware
+Secure Apple products begin with a secure hardware foundation. That’s why Apple devices—using iOS, iPadOS, macOS, tvOS, visionOS or watchOS—have security capabilities designed into silicon.
+Learn more about Apple hardware certifications
+Operating Systems
+Building on the capabilities of Apple hardware, Apple operating systems are designed to take full advantage of these security capabilities. Operating system certifications encompass the boot–up process, software updates and the ongoing operation of the operating systems.
+Learn more about operating system certifications
+Services
+Apple maintains security certifications over a number of its service offerings to provide security assurance to others. The certifications cover security controls used in the data centre environment and controls that are part of the security life cycle of these services at Apple.
+Learn more about services certifications
+To explore Apple platform certifications, select Table of contents at the top of the page or enter a word or phrase in the search field.
+Apple platform certifications
+Welcome
+Introduction
+Intro to Apple security assurance
+About Apple security certifications
+Cryptographic module validation status information
+Common Criteria (CC) certification status information
+Hardware Security Certifications
+Secure Enclave Processor security certifications
+Apple T2 Security Chip security certifications
+Operating system security certifications
+iOS security certifications
+iPadOS security certifications
+macOS security certifications
+tvOS security certifications
+visionOS Security Certifications
+watchOS security certifications
+Apple Internet services security certifications
+Apple Pay security certifications
+National Regulations Security Certifications
+Apple Private Cloud Compute SOC 3 audit reports
+Security Compliance Projects
+macOS Security Compliance Project
+iOS and iPadOS Security Compliance Project
+visionOS Security Compliance Project
+Glossary
+Document Revision History
+Copyright and trademarks
+Next
+Intro to Apple security assurance
+Helpful?
+Yes
+No
+Character limit:
+250
+Please don’t include any personal information in your comment.
+Maximum character limit is 250.
+Submit
+Thanks for your feedback.
+Apple Footer
+
+Apple
+Support
+Apple platform certifications
+Canada (English)
+Copyright © 2026 Apple Inc. All rights reserved.
+Privacy Policy
+Terms of Use
+Sales and Refunds
+Site Map
