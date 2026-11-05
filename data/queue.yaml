@@ -283,7 +283,8 @@
   source: wikidata
   wikidata: Q65359104
   sitelinks: 47
-  status: queued
+  status: done
+  date: 2026-11-04
 - id: dropbox
   name: Dropbox
   website: https://www.dropbox.com

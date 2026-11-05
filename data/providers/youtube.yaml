@@ -668,7 +668,7 @@ policies:
         - url: https://policies.google.com/privacy
           quote: 'we may collect information that’s publicly available online or from other public sources to help train Google’s AI models'
         - url: https://www.youtube.com/t/terms
-          quote: 'in connection with the Service and YouTube’s (and its successors'' and Affiliates'') business'
+          quote: "in connection with the Service and YouTube’s (and its successors' and Affiliates') business"
         - url: https://support.google.com/youtube/answer/15509945
           quote: 'By default, the third-party training setting is turned off.'
       lastVerified: 2026-11-04

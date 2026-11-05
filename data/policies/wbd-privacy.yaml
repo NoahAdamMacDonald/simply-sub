@@ -1,0 +1,112 @@
+# A shared policy document (BLUEPRINT §4.10, M11.1): Warner Bros. Discovery's Consumer Privacy Policy, which covers its
+# services (HBO Max, and discovery+ when it joins the catalog), rated once here with its Children's Privacy Policy, for
+# children's profiles on its streaming services. Each provider names it in its policies' shared.
+# Read 2026-11-04 (M11.15), from Canada: the US English versions (wbdprivacy.com/policycenter/b2c/en-us, "Last updated:
+# 22 September 2026", and /policycenter/children/en-us).
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: wbd-privacy
+name: Warner Bros. Discovery's Privacy Policy
+links:
+  - name: 'Privacy policy'
+    url: https://www.wbdprivacy.com/policycenter/b2c/en-us/
+  - name: "Children's privacy policy"
+    url: https://www.wbdprivacy.com/policycenter/children/en-us/
+ratings:
+  - topic: privacy.data-collection
+    tier: poor
+    reason: 'It analyses what you do to develop and measure its services. You can only limit that by asking it to restrict what it does with your data.'
+    sources:
+      - url: https://www.wbdprivacy.com/policycenter/b2c/en-us/
+        quote: 'We may analyze your information (and create aggregated data derived from your Information) to develop, maintain, analyze, optimize, improve, measure, and report on our Services'
+    action:
+      name: 'Its privacy centre'
+      url: https://www.wbdprivacy.com/policycenter/b2c/en-us/
+    lastVerified: 2026-11-04
+  - topic: privacy.data-sharing
+    tier: poor
+    reason: 'It shares your information with business partners, social networks and other companies, and for advertising. Opting out of advertising stops only some of it: it keeps using your data for research and analytics.'
+    sources:
+      - url: https://www.wbdprivacy.com/policycenter/b2c/en-us/
+        quote: 'We may disclose Information to business partners and third parties (e.g., other companies, retailers, distributors, social media networks, research organizations, publishers'
+      - url: https://www.wbdprivacy.com/policycenter/b2c/en-us/
+        quote: 'Please note that if you opt out, WBD will continue to collect and use data for other purposes, including research, analytics, and internal operations.'
+    action:
+      name: 'Its privacy centre'
+      url: https://www.wbdprivacy.com/policycenter/b2c/en-us/
+    lastVerified: 2026-11-04
+  - topic: privacy.ads-tracking
+    tier: poor
+    reason: 'Its ads can be picked from what you do. You can opt out of its targeted advertising, but you may still get ads based on what you do on its services.'
+    sources:
+      - url: https://www.wbdprivacy.com/policycenter/b2c/en-us/
+        quote: 'To opt-out of WBD’s use and sharing of Information for targeted advertising purposes'
+      - url: https://www.wbdprivacy.com/policycenter/b2c/en-us/
+        quote: 'You may continue to receive advertising on our Services based on your activities there.'
+    action:
+      name: 'Its privacy centre'
+      url: https://www.wbdprivacy.com/policycenter/b2c/en-us/
+    lastVerified: 2026-11-04
+  - topic: privacy.ai-training
+    status: not-stated
+    reason: 'Its privacy policy doesn’t say whether it trains AI on your information.'
+    pages: [https://www.wbdprivacy.com/policycenter/b2c/en-us/]
+    lastVerified: 2026-11-04
+  - topic: privacy.data-retention
+    tier: poor
+    reason: 'It keeps your information as long as it needs it, and names no periods.'
+    sources:
+      - url: https://www.wbdprivacy.com/policycenter/b2c/en-us/
+        quote: 'We only keep Information for as long as we need it to fulfil the purpose we are using it for, as permitted by law.'
+    lastVerified: 2026-11-04
+  - topic: privacy.data-deletion
+    tier: neutral
+    reason: "You can ask it to delete your information, but it doesn't say how long that takes."
+    sources:
+      - url: https://www.wbdprivacy.com/policycenter/b2c/en-us/
+        quote: 'Right to erasure/deletion: the right, in certain circumstances, to ask for your Information to be deleted.'
+    action:
+      name: 'Its privacy centre'
+      url: https://www.wbdprivacy.com/policycenter/b2c/en-us/
+    lastVerified: 2026-11-04
+  - topic: privacy.data-portability
+    tier: neutral
+    reason: 'You can ask for a copy of your information in a digital format, but there’s no way to get it yourself.'
+    sources:
+      - url: https://www.wbdprivacy.com/policycenter/b2c/en-us/
+        quote: 'Right to portability: the right in some cases to receive your Information in a digital format'
+    action:
+      name: 'Its privacy centre'
+      url: https://www.wbdprivacy.com/policycenter/b2c/en-us/
+    lastVerified: 2026-11-04
+  - topic: privacy.government-requests
+    tier: poor
+    reason: 'Besides court orders and subpoenas, it may hand over your information when the police simply ask.'
+    sources:
+      - url: https://www.wbdprivacy.com/policycenter/b2c/en-us/
+        quote: "or in response to a law enforcement agency's request"
+    lastVerified: 2026-11-04
+  - topic: privacy.data-location
+    tier: poor
+    reason: "Your information can go to other countries, the US in particular, where the law may protect it less, and its policy doesn't say what safeguards it uses."
+    sources:
+      - url: https://www.wbdprivacy.com/policycenter/b2c/en-us/
+        quote: 'including countries where the level of legal protection for your Information may be different'
+      - url: https://www.wbdprivacy.com/policycenter/b2c/en-us/
+        quote: 'In particular, your Information may be transferred to, and processed in the United States'
+    lastVerified: 2026-11-04
+  - topic: privacy.children
+    tier: bad
+    reason: 'On its services and profiles for children, it may show them ads picked from what they watch and browse, and share their information with advertising companies to do so.'
+    sources:
+      - url: https://www.wbdprivacy.com/policycenter/children/en-us/
+        quote: 'We may share your information with companies that help us with providing advertisements to you on the Service based on what you are watching or browsing.'
+      - url: https://www.wbdprivacy.com/policycenter/children/en-us/
+        quote: 'On streaming services that are meant for you, you should have your own profile.'
+    lastVerified: 2026-11-04
+  - topic: security.practices
+    tier: poor
+    reason: 'It says only that it has safeguards, and that no security is perfect: no audits, certifications or way to report a security problem are named.'
+    sources:
+      - url: https://www.wbdprivacy.com/policycenter/b2c/en-us/
+        quote: 'Unfortunately, no security measures are perfect'
+    lastVerified: 2026-11-04

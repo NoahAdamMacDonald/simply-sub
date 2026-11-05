@@ -1,0 +1,636 @@
+# Researched by hand on 2026-11-04 (M11.15, the streaming category). HBO Max isn't sold in Canada (its help centre
+# sends a Canadian visitor to its "geo-availability" page), so every page was read through a country's exit (the
+# owner's choice of 2026-11-04). Pages, each quoted where it's used:
+# Pricing: its help centre's "HBO Max plans and prices" for each country (help.hbomax.com/<country>-en/Answer/Detail/
+# 000002547): the US's ("Basic with Ads - $10.99/month or $109.99/year", Standard $18.49 or $184.99, Premium $22.99 or
+# $229.99, "Prices don't include applicable taxes"), the UK's (Basic with Ads £4.99, Standard with Ads £5.99, Standard
+# £9.99, Premium £14.99) and Ireland's (€5.99, €6.99, €10.99, €15.99). For Germany, France, Spain and Italy it says
+# "go to HBOMax.com": hbomax.com/<country>/en, Germany's in its plan picker (€5.99, €11.99, €16.99), France's and Spain's
+# monthly or yearly (Basic with Ads €6.99 or €69.90, Standard €10.99 or €109.00, Premium €15.99 or €159.00) and Italy's
+# monthly (€6.99, €11.99, €16.99).
+# Not listed: the UK's TNT Sports plans and bundles and its 12-month "Saver" plans; the US's Extra Member add-on and its
+# Disney+ and Hulu bundle, not read yet; Germany's and the Netherlands' bundles with RTL+ and Videoland.
+# Region checklist, 2026-11-04: 1. the help centre's and hbomax.com's country paths; 4. the plan pickers, never past
+# them: the Netherlands' shows only its Videoland bundles ("From €5.99/month" for HBO Max alone, unnamed), and
+# Australia's and New Zealand's pages show no prices and no picker opened, so those three aren't priced or listed as
+# sold; Canada isn't sold.
+
+# Coverage: hbo-max.standard-ads in US, DE, FR, ES and IT: Standard with Ads is in the UK's and Ireland's plan lists
+# only (2026-11-04).
+
+id: hbo-max
+name: HBO Max
+website: https://www.hbomax.com
+# Its help centre, its parent's privacy centre and investor site.
+domains: [help.hbomax.com, wbdprivacy.com, ir.wbd.com]
+category: streaming
+spendCategory: streaming
+billingCurrency: { US: USD, GB: GBP, IE: EUR, DE: EUR, FR: EUR, ES: EUR, IT: EUR }
+cancelUrl: https://help.hbomax.com/us-en/Answer/Detail/000002526
+sources: { pricing: https://help.hbomax.com/us-en/Answer/Detail/000002547 }
+# Accepted cards and ways to pay, read 2026-11-04 through a US exit: a payment method that is "issued by a US-based
+# bank" and "one of these: American Express, Apple Pay, Discover, JCB, MasterCard, PayPal, or Visa" ("Change a
+# WarnerMedia-billed subscription"); app stores and "your internet, mobile, or TV provider" ("Change your payment
+# method"). Other countries' lists aren't read yet.
+acceptedNetworks:
+  US:
+    networks: [amex, discover, jcb, mastercard, visa]
+    url: https://help.hbomax.com/us-en/Answer/Detail/000002528
+    quotes:
+      - 'Be one of these: American Express, Apple Pay, Discover, JCB, MasterCard, PayPal, or Visa'
+paymentMethods:
+  - methods: [card, apple-pay, paypal]
+    regions: [US]
+    page: 'Change a WarnerMedia-billed subscription'
+    url: https://help.hbomax.com/us-en/Answer/Detail/000002528
+    quotes:
+      - 'Be one of these: American Express, Apple Pay, Discover, JCB, MasterCard, PayPal, or Visa'
+  - methods: [app-store, provider-billing]
+    regions: [US]
+    page: 'Change your payment method'
+    url: https://help.hbomax.com/us-en/Answer/Detail/000002525
+    quotes:
+      - 'Google Play'
+      - 'You can also check your bank statements or ask your internet, mobile, or TV provider if they bill you for HBO Max.'
+
+# Owner: Paramount Skydance Corporation, since it acquired Warner Bros. Discovery (Warner Bros. Discovery's investor
+# site, 2026-11-04). Its US terms give WarnerMedia Direct, LLC's New York address.
+owner:
+  name: 'Paramount Skydance Corporation, which acquired Warner Bros. Discovery'
+  website: https://ir.wbd.com
+  page:
+    name: 'Warner Bros. Discovery investor relations'
+    url: https://ir.wbd.com/investor-relations/default.aspx
+  quotes:
+    - 'Following the acquisition of Warner Bros. Discovery by Paramount Skydance Corporation'
+  country:
+    code: US
+    page:
+      name: Terms of use
+      url: https://www.hbomax.com/terms-of-use/en-us
+    quotes:
+      - 'New York, NY 10003'
+    lastVerified: 2026-11-04
+  lastVerified: 2026-11-04
+
+# Renewal day (M11.5), read 2026-11-04: "Your HBO Max subscription automatically renews until you cancel it" (its plans
+# and billing page) and its terms bill "at the intervals specified when you complete your Subscription purchase",
+# without saying which day.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.hbomax.com/terms-of-use/en-us
+    - https://help.hbomax.com/us-en/Answer/Detail/000002556
+  lastVerified: 2026-11-04
+
+# Features, read 2026-11-04 through a US exit ("What's included with each plan?"): Basic with Ads and Standard "Stream
+# on 2 devices at once" in "Full HD 1080p"; Premium "Stream on 4 devices at once (only 2 for sports)", "4K Ultra HD
+# video quality (as available)" and "Dolby Atmos immersive audio (as available)"; downloads "30" on Standard and 100 on
+# Premium, counted in titles, with no number of devices, so 1 (inferred); Standard with Ads "supports up to 30
+# downloads" (the UK's). "Your account can have up to 5 profiles. You can create a Kids profile" (its profiles
+# article). "Live Sports is included with the Standard and Premium plans" in the US (NHL and MLB games); Europe's pages
+# sell sports as an add-on or a bundle, so the sports carry a note. HDR is named only for sports broadcasts, so no HDR.
+# French: its French site includes "Warner TV, TCM Cinéma & more", so inferred.
+plans:
+  - id: hbo-max.basic-ads
+    name: Basic with Ads
+    link: https://www.hbomax.com
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 2
+      streaming.profiles: 5
+      streaming.kids-profiles: true
+      streaming.french-content: true
+    inferred:
+      streaming.french-content:
+        reason: 'In France it includes French channels such as TCM Cinéma, but no page lists its French programmes.'
+        page:
+          name: HBO Max France
+          url: https://www.hbomax.com/fr/en
+        lastVerified: 2026-11-04
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 10.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://help.hbomax.com/us-en/Answer/Detail/000002547,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 109.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://help.hbomax.com/us-en/Answer/Detail/000002547,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 4.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://help.hbomax.com/gb-en/Answer/Detail/000002547,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://help.hbomax.com/ie-en/Answer/Detail/000002547,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.hbomax.com/de/en,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 6.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.hbomax.com/fr/en,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 69.90,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.hbomax.com/fr/en,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 6.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.hbomax.com/es/en,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 69.90,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.hbomax.com/es/en,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 6.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.hbomax.com/it/en,
+        }
+
+  - id: hbo-max.standard-ads
+    name: Standard with Ads
+    link: https://www.hbomax.com
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 2
+      streaming.download-devices: 1
+      streaming.profiles: 5
+      streaming.kids-profiles: true
+      streaming.french-content: true
+    inferred:
+      streaming.download-devices:
+        reason: 'It allows up to 30 downloads, but no page says on how many devices, so 1 is the least it can be.'
+        page:
+          name: All about HBO Max plans (UK)
+          url: https://help.hbomax.com/gb-en/Answer/Detail/000002547
+        lastVerified: 2026-11-04
+      streaming.french-content:
+        reason: 'In France it includes French channels such as TCM Cinéma, but no page lists its French programmes.'
+        page:
+          name: HBO Max France
+          url: https://www.hbomax.com/fr/en
+        lastVerified: 2026-11-04
+    prices:
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://help.hbomax.com/gb-en/Answer/Detail/000002547,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 6.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://help.hbomax.com/ie-en/Answer/Detail/000002547,
+        }
+
+  - id: hbo-max.standard
+    name: Standard
+    link: https://www.hbomax.com
+    features:
+      video.quality: 1080p
+      ad-free: true
+      streaming.concurrent-streams: 2
+      streaming.download-devices: 1
+      streaming.profiles: 5
+      streaming.kids-profiles: true
+      streaming.french-content: true
+      streaming.live: [sports]
+    inferred:
+      streaming.download-devices:
+        reason: 'It allows 30 downloads, but no page says on how many devices, so 1 is the least it can be.'
+        page:
+          name: HBO Max plans and prices
+          url: https://help.hbomax.com/us-en/Answer/Detail/000002547
+        lastVerified: 2026-11-04
+      streaming.french-content:
+        reason: 'In France it includes French channels such as TCM Cinéma, but no page lists its French programmes.'
+        page:
+          name: HBO Max France
+          url: https://www.hbomax.com/fr/en
+        lastVerified: 2026-11-04
+    notes: Live sports (NHL and MLB games) are included in the US; elsewhere they're an add-on or a bundle.
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 18.49,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://help.hbomax.com/us-en/Answer/Detail/000002547,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 184.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://help.hbomax.com/us-en/Answer/Detail/000002547,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://help.hbomax.com/gb-en/Answer/Detail/000002547,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 10.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://help.hbomax.com/ie-en/Answer/Detail/000002547,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.hbomax.com/de/en,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 10.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.hbomax.com/fr/en,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 109.00,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.hbomax.com/fr/en,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 10.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.hbomax.com/es/en,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 109.00,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.hbomax.com/es/en,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.hbomax.com/it/en,
+        }
+
+  - id: hbo-max.premium
+    name: Premium
+    link: https://www.hbomax.com
+    features:
+      video.quality: 4k
+      audio.dolby-atmos: true
+      ad-free: true
+      streaming.concurrent-streams: 4
+      streaming.download-devices: 1
+      streaming.profiles: 5
+      streaming.kids-profiles: true
+      streaming.french-content: true
+      streaming.live: [sports]
+    inferred:
+      streaming.download-devices:
+        reason: 'It allows 100 downloads, but no page says on how many devices, so 1 is the least it can be.'
+        page:
+          name: HBO Max plans and prices
+          url: https://help.hbomax.com/us-en/Answer/Detail/000002547
+        lastVerified: 2026-11-04
+      streaming.french-content:
+        reason: 'In France it includes French channels such as TCM Cinéma, but no page lists its French programmes.'
+        page:
+          name: HBO Max France
+          url: https://www.hbomax.com/fr/en
+        lastVerified: 2026-11-04
+    notes: Only 2 streams at once for sports. Live sports (NHL and MLB games) are included in the US; elsewhere they're an add-on or a bundle.
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 22.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://help.hbomax.com/us-en/Answer/Detail/000002547,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 229.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://help.hbomax.com/us-en/Answer/Detail/000002547,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 14.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://help.hbomax.com/gb-en/Answer/Detail/000002547,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 15.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://help.hbomax.com/ie-en/Answer/Detail/000002547,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 16.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.hbomax.com/de/en,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 15.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.hbomax.com/fr/en,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 159.00,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.hbomax.com/fr/en,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 15.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.hbomax.com/es/en,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 159.00,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.hbomax.com/es/en,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 16.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.hbomax.com/it/en,
+        }
+
+# Terms and policies, read 2026-11-04 (M11.15) through a US exit: HBO Max's US Terms of Use, its help centre's plans and
+# profiles articles, and Warner Bros. Discovery's privacy policies, rated once as a shared document
+# (data/policies/wbd-privacy.yaml). Its sign-up form opens only after a plan is picked, which the reader didn't reach,
+# and its terms don't say what an account needs, so sign-up data stays unrated.
+policies:
+  shared: [wbd-privacy]
+  links:
+    - name: 'Terms of use'
+      url: https://www.hbomax.com/terms-of-use/en-us
+    - name: 'Plans and prices'
+      url: https://help.hbomax.com/us-en/Answer/Detail/000002547
+  ratings:
+    - topic: privacy.sign-up-data
+      status: not-stated
+      reason: 'Its terms don’t say what an account asks for; its sign-up form opens only after you pick a plan.'
+      pages: [https://www.hbomax.com/terms-of-use/en-us]
+      lastVerified: 2026-11-04
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can cancel at any time and keep watching until the end of the period you paid for.'
+      sources:
+        - url: https://www.hbomax.com/terms-of-use/en-us
+          quote: 'YOU CAN CANCEL YOUR SUBSCRIPTION AT ANY TIME AND YOU WILL CONTINUE TO HAVE ACCESS TO THE HBO MAX PLATFORM THROUGH THE END OF THE THEN-CURRENT BILLING PERIOD'
+      lastVerified: 2026-11-04
+    - topic: billing.refunds
+      tier: neutral
+      reason: "You don't get money back when you cancel, but you keep watching until the end of the period."
+      sources:
+        - url: https://www.hbomax.com/terms-of-use/en-us
+          quote: 'WE DO NOT PROVIDE REFUNDS, CREDIT, OR PRORATED BILLING FOR CANCELED SUBSCRIPTIONS.'
+      lastVerified: 2026-11-04
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It tells you about a new price as the law requires, without saying how far ahead.'
+      sources:
+        - url: https://www.hbomax.com/terms-of-use/en-us
+          quote: 'Your Subscription Provider may change the amount of the Subscription Fee and will communicate price changes to you in accordance with applicable law.'
+      lastVerified: 2026-11-04
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'A trial turns into a paid subscription unless you cancel before it ends, needs a payment method up front, and names no reminder.'
+      sources:
+        - url: https://www.hbomax.com/terms-of-use/en-us
+          quote: 'UNLESS YOU TIMELY CANCEL YOUR TRIAL SUBSCRIPTION BEFORE THE END OF YOUR FREE TRIAL PERIOD, YOUR TRIAL SUBSCRIPTION WILL CONVERT TO A PAID SUBSCRIPTION'
+        - url: https://www.hbomax.com/terms-of-use/en-us
+          quote: 'At the time of signing up for a Trial Subscription, you must provide a valid Payment Method to use the Platform during the Free Trial Period.'
+      lastVerified: 2026-11-04
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say monthly and yearly plans renew on their own, but not that it reminds you first.'
+      pages: [https://www.hbomax.com/terms-of-use/en-us]
+      lastVerified: 2026-11-04
+    - topic: billing.fees
+      tier: good
+      reason: 'Besides the price and taxes, you pay only the costs of collecting money you owe if you don’t pay.'
+      sources:
+        - url: https://www.hbomax.com/terms-of-use/en-us
+          quote: 'costs incurred to collect any unpaid amounts, such as bank overdraft fees, collection agency fees'
+      lastVerified: 2026-11-04
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its terms and plans pages don’t say what happens to what you’ve paid when you change plans.'
+      pages:
+        - https://www.hbomax.com/terms-of-use/en-us
+        - https://help.hbomax.com/us-en/Answer/Detail/000002547
+      lastVerified: 2026-11-04
+    - topic: legal.disputes
+      tier: poor
+      reason: 'You must take any dispute to private arbitration, one person at a time, with no class actions or jury. You can opt out of arbitration only if a mass arbitration leaves your claim unresolved.'
+      sources:
+        - url: https://www.hbomax.com/terms-of-use/en-us
+          quote: 'THESE TERMS REQUIRE THE USE OF ARBITRATION ON AN INDIVIDUAL BASIS TO RESOLVE DISPUTES, RATHER THAN COURTS OR JURY TRIALS'
+        - url: https://www.hbomax.com/terms-of-use/en-us
+          quote: 'If your claim is not resolved as part of the staged process identified above, either:'
+      action:
+        name: 'Its arbitration terms'
+        url: https://www.hbomax.com/terms-of-use/en-us
+      lastVerified: 2026-11-04
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It changes its terms by posting them, and using HBO Max afterwards, or not cancelling before you renew, means you accept them.'
+      sources:
+        - url: https://www.hbomax.com/terms-of-use/en-us
+          quote: 'We will communicate material changes to this Agreement by making the revised Terms available for your review on the Platform.'
+        - url: https://www.hbomax.com/terms-of-use/en-us
+          quote: 'By continuing to use the Platform after any revised Terms come into effect'
+      lastVerified: 2026-11-04
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can suspend or end your subscription and account at once, for any reason or none.'
+      sources:
+        - url: https://www.hbomax.com/terms-of-use/en-us
+          quote: 'Any Subscription Provider may suspend or terminate your Subscription and access to the Platform and/or your HBO Max Account immediately for any reason or for no reason whatsoever'
+      lastVerified: 2026-11-04
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change the price, what your plan includes or any part of HBO Max at any time.'
+      sources:
+        - url: https://www.hbomax.com/terms-of-use/en-us
+          quote: 'We reserve the right to modify this Agreement, the Subscription Fee, the benefits associated with any Subscription plan, additional conditions of your Subscription or change any part of the Platform at any time.'
+      lastVerified: 2026-11-04
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://www.hbomax.com/terms-of-use/en-us]
+      lastVerified: 2026-11-04
+    - topic: service.account-sharing
+      tier: good
+      reason: 'Up to five people who live with you can each have a profile. It names no checks in its terms.'
+      sources:
+        - url: https://www.hbomax.com/terms-of-use/en-us
+          quote: 'You will have the option to create up to five (5) authorized user profiles on your HBO Max Account for people who live with you (the people in your household)'
+      lastVerified: 2026-11-04
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Downloads are capped at 30 on Standard and 100 on Premium, and other download limits apply.'
+      sources:
+        - url: https://help.hbomax.com/us-en/Answer/Detail/000002547
+          quote: '*Download limits apply'
+      lastVerified: 2026-11-04
