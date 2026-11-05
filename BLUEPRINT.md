@@ -4142,13 +4142,16 @@ The user's report after M10, as M8.7 (PROJECT-PLAN's row has it as built):
   initial bundle. Settings' Install shows the browser's dialog once; other browsers get their steps. Edge offers no
   install to a private window (CDP's `in-incognito`), which every new Playwright context is, so the check installs in a
   profile of its own.
-- **The icon** (M10.6): `scripts/app-icons.ts` (`npm run app:icons`) draws the mark, an S of two bowls with round ends,
-  white on the accent, reading both colours from `_tokens.scss`, and writes `app-icons/icon.svg`, PNGs of 192 and
-  512 px, a maskable 512 (the S at 82%, inside the safe zone), a 180 px `apple-touch-icon.png` (square: iOS rounds the
-  corners) and `favicon.ico` (16, 32 and 48 px PNGs in an ICO the script assembles; Angular's 15 kB default is gone).
-  `index.html` links the ICO for 32 px and the SVG, as browsers prefer. The owner chose it on 2026-10-29 from a review
-  sheet (the tile at 160 to 16 px, the maskable icon in a circle and a squircle, the iOS icon, on light and dark), over
-  the same S in burgundy on a white tile.
+- **The icon** (M10.6, redrawn 2026-11-04): `scripts/app-icons.ts` (`npm run app:icons`) draws the mark, a coin with a
+  dollar sign inside a renewal arrow, in the accent with the sign and a thin outline in the on-accent colour, reading
+  both from `_tokens.scss`. It has no tile: the Simply apps share one style, a plain glyph in each app's accent (Simply
+  Files' is a blue folder), and the outline keeps it visible on dark backgrounds. The script writes
+  `app-icons/icon.svg`, PNGs of 192 and 512 px, a maskable 512 and a 180 px `apple-touch-icon.png` (the mark on an
+  on-accent square, which those need opaque; the maskable one at 68%, inside the safe zone) and `favicon.ico` (16, 32
+  and 48 px PNGs in an ICO the script assembles; Angular's 15 kB default is gone). `index.html` links the ICO for 32 px
+  and the SVG, as browsers prefer. The owner chose it on 2026-11-04 from review sheets (a brighter red and the old tile
+  were the others), keeping the app's own accent so another Simply app can have another red; it replaced 2026-10-29's
+  white S on an accent tile.
 - **The title bar's colour** (M10.6): `index.html` has a `theme-color` meta per OS scheme with the top bar's colour
   (`--ss-sidebar-bg`), which an API test compares with the tokens, as it does the manifest's colours. From the
   background chunk both take the theme on screen (`core/theme/title-bar.ts`), so an installed app chosen dark on a
