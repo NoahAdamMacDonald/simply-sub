@@ -1,0 +1,121 @@
+# A shared policy document (BLUEPRINT §4.10, M11.1): Amazon's Privacy Notice, which covers every Amazon service an
+# Amazon account uses (Prime Video and Amazon Prime, and Amazon Music, Amazon Luna and the rest when they join the
+# catalog), rated once here with its sign-in page, where an account starts, and its Generative AI Development
+# Disclosure. Each provider names it in its policies' shared.
+# Read 2026-11-04 (M11.15), from Canada: amazon.ca's versions (the Privacy Notice "Last Updated: September 1, 2026").
+# Other countries' notices aren't read yet.
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: amazon-privacy
+name: Amazon's Privacy Notice
+links:
+  - name: 'Privacy notice'
+    url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+  - name: 'Sign in or create an account'
+    url: https://www.amazon.ca/signup
+  - name: 'Generative AI Development Disclosure'
+    url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=TmGoGN3UbFaQ1CAph7
+ratings:
+  - topic: privacy.data-collection
+    tier: poor
+    reason: 'It records what you stream and how, and uses what you do to recommend things. Its settings let you opt out of only some of it.'
+    sources:
+      - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+        quote: 'content interaction information, such as content downloads, streams, and playback details, including duration and number of simultaneous streams and downloads'
+      - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+        quote: 'We use your personal information to recommend features, products, and services that might be of interest to you, identify your preferences, and personalize your experience with Amazon Services.'
+      - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+        quote: 'You will also be able to opt out of certain other types of data usage by updating your settings'
+    action:
+      name: 'Its privacy notice'
+      url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+    lastVerified: 2026-11-04
+  - topic: privacy.data-sharing
+    tier: poor
+    reason: 'It doesn’t sell your information, but gives ad companies an advertising identifier, which some also use for other advertisers’ ads. You can opt out of interest-based advertising, but it doesn’t say that stops the sharing.'
+    sources:
+      - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+        quote: 'we may share an advertising identifier and an estimate of the value of the ads they show you on our behalf so they can serve you with more effective Amazon ads'
+      - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+        quote: 'Some ad companies also use this information to serve you relevant ads from other advertisers.'
+      - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+        quote: 'You can learn more about how to opt-out of interest-based advertising by visiting Advertising Preferences.'
+    action:
+      name: 'Its privacy notice'
+      url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+    lastVerified: 2026-11-04
+  - topic: privacy.ads-tracking
+    tier: neutral
+    reason: 'It picks the ads you see from what you do unless you turn interest-based ads off in its Advertising Preferences.'
+    sources:
+      - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+        quote: 'We use your personal information to display interest-based ads for features, products, and services that might be of interest to you.'
+      - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+        quote: 'If you do not want to see interest-based ads, please adjust your Advertising Preferences.'
+    action:
+      name: 'Its privacy notice'
+      url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+    lastVerified: 2026-11-04
+  - topic: privacy.ai-training
+    status: not-stated
+    reason: 'Its AI disclosure says the data it trains on can include personal information, but neither page says whether what you write or say trains its models, or how to opt out.'
+    pages:
+      - https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+      - https://www.amazon.ca/gp/help/customer/display.html?nodeId=TmGoGN3UbFaQ1CAph7
+    lastVerified: 2026-11-04
+  - topic: privacy.data-retention
+    tier: poor
+    reason: 'It names no periods for keeping your information, and keeps copies of what you change.'
+    sources:
+      - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+        quote: 'When you update information, we usually keep a copy of the prior version for our records.'
+    lastVerified: 2026-11-04
+  - topic: privacy.data-deletion
+    tier: neutral
+    reason: 'You can ask it to delete your data, on its Request My Personal Information page or through customer service, with no stated time.'
+    sources:
+      - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+        quote: 'to the extent required by applicable law, you have the right to request access to, correct, and delete your personal data'
+    action:
+      name: 'Its privacy notice'
+      url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+    lastVerified: 2026-11-04
+  - topic: privacy.data-portability
+    tier: neutral
+    reason: 'You can ask for a copy of your data on its Request My Personal Information page; it doesn’t say in what format.'
+    sources:
+      - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+        quote: 'If you wish to do any of these things, please go to Request My Personal Information or contact Customer Service.'
+    action:
+      name: 'Its privacy notice'
+      url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+    lastVerified: 2026-11-04
+  - topic: privacy.government-requests
+    tier: neutral
+    reason: 'It hands over information when it believes the law requires it, or to enforce its terms and protect people, and says nothing more.'
+    sources:
+      - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+        quote: 'We disclose account and other personal information when we believe disclosing is appropriate to comply with the law'
+    lastVerified: 2026-11-04
+  - topic: privacy.data-location
+    tier: poor
+    reason: 'Your information can leave Canada, under safeguards it doesn’t describe beyond following the law.'
+    sources:
+      - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+        quote: 'Whenever we transfer personal information outside of your province or territory, or outside of Canada, we ensure that the information is transferred in accordance with this Privacy Notice and as permitted by applicable laws on data protection.'
+    lastVerified: 2026-11-04
+  - topic: privacy.sign-up-data
+    tier: neutral
+    reason: 'An account starts with your email address or a mobile number, as you choose, and a paid membership adds your payment details.'
+    sources:
+      - url: https://www.amazon.ca/signup
+        quote: 'Enter mobile number or email'
+    lastVerified: 2026-11-04
+  - topic: security.practices
+    tier: poor
+    reason: 'It describes its safeguards in general terms and follows the card industry’s standard for card data, but names no independent audit or way to report a security flaw.'
+    sources:
+      - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+        quote: 'We maintain physical, electronic, and procedural safeguards in connection with the collection, storage, and disclosure of personal customer information.'
+      - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ
+        quote: 'We follow the Payment Card Industry Data Security Standard (PCI DSS) when handling credit card data.'
+    lastVerified: 2026-11-04

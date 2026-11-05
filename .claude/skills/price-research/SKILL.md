@@ -293,6 +293,12 @@ which reads each page as a visitor there would, before any hand reading:
   and `data:baselines` read the Internet Archive's newest copy instead, for a change only, never as a source. chatgpt.com/pricing prices by where the visitor is, and its
   Pro card shows only the cheapest tier's local price ("From"); its comparison table's ticks are images (read the
   screenshot). Its help articles' links come from the page, not its text.
+- **Amazon's pages** (Prime Video, M11.15): each store's Prime page (`amazon.<tld>/amazonprime`, Australia's and the
+  Netherlands' `/prime`) shows its monthly and annual cards through that country's exit. primevideo.com/offers prices
+  by where the visitor is: it prices Prime (or Prime Video alone, in New Zealand) only where there's no Amazon store,
+  and elsewhere hands off to the store. The US's `amazon.com/gp/video/offers` answered with Amazon's "continue
+  shopping" page, a bot check: never click past it. Help articles belong to one store: an amazon.com `nodeId` can be
+  missing on amazon.ca ("We can't find the page"), so quote the store's own article.
 
 - **Element-screenshot overlap:** sticky headers and skip links can overlap an element screenshot. Trust the
   full-page snap.

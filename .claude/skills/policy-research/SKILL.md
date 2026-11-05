@@ -256,6 +256,10 @@ this file to them: change both together.
   changes communicated to you and your own courts. Apple's privacy policy reads in full with a plain fetch.
 - Warner Bros. Discovery's privacy policies cover HBO Max and discovery+: `data/policies/wbd-privacy.yaml`, with its
   Children's Privacy Policy for kids' profiles. Its privacy centre needs Edge.
+- Amazon's Privacy Notice covers every Amazon service: `data/policies/amazon-privacy.yaml` (M11.15, Prime Video
+  first), amazon.ca's version, with its sign-in page for sign-up data. Rate each service's own terms beside it: Prime
+  Video's Terms of Use are one document for every country (with Germany's price clause), and the Amazon Prime Terms
+  and Conditions of Use are each store's (amazon.ca's send disputes to arbitration). Its help pages read in Edge.
 - Netflix's help articles ask for a country; their text still loads.
 - CBC/Radio-Canada's general terms for its digital services (which ICI TOU.TV's subscription includes) load each
   answer only when its question is clicked: open each in Edge (`read-page.cjs`, `click:` by the question's text).
