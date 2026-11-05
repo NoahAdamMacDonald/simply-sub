@@ -2098,11 +2098,15 @@ in every D1 `json` column search parses.
     and Premium Lite), YouTube TV (`youtube-tv`: nine plans by channel genre, three add-ons), Apple TV (`apple-tv`),
     MUBI (`mubi`: Classic and GO, billed every 30 or 360 days) and HBO Max (`hbo-max`, read through exits: it isn't
     sold in Canada). Apple's Media Services Terms and Privacy Policy and Warner Bros. Discovery's privacy policies are
-    shared documents (`data/policies/apple-media-services.yaml`, `apple-privacy.yaml`, `wbd-privacy.yaml`). Batch 2:
-    Paramount+, Prime Video, Rumble, Viki and DAZN.
+    shared documents (`data/policies/apple-media-services.yaml`, `apple-privacy.yaml`, `wbd-privacy.yaml`).
+  - **Streaming, batch 2** (2026-11-04): Rumble (`rumble`: Premium, one US-dollar price everywhere; no page states its
+    stream limit, so it waits in core's `awaitingRequiredFeatures`, the owner's choice) and Viki (`viki`: Standard and
+    Plus). DAZN and Paramount+ are `unreadable` in the queue: DAZN's site turns this machine's connection away, and
+    Paramount+'s sign-up shows no plans from Canada and answers 406 through other countries' exits. Prime Video
+    follows in its own pull request (the owner chose a Prime Video plan and an Amazon Prime plan in one provider).
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
-        (AI: Claude, Google AI and ChatGPT, done; streaming: batch 1 done)
+        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 and 2 done)
 
 ---
 
