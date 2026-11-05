@@ -194,6 +194,12 @@ describe('namesRenewalAnchor', () => {
       true,
     ],
     ['If you purchased on the 3rd, you are billed on the 1st of each month.', 'same-date', false],
+    // discovery+'s help centre (M11.15): the sign-up date sets each month's.
+    [
+      'You will be billed in monthly intervals, based on the date when you signed up.',
+      'same-date',
+      true,
+    ],
     ['Your subscription began on a Tuesday.', 'same-date', false],
     ['Your plan renews every 30 days.', 'every-30-days', true],
     ['Un forfait de 30 jours', 'every-30-days', true],
