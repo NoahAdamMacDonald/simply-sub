@@ -740,7 +740,8 @@
   source: wikidata
   wikidata: Q103813557
   sitelinks: 19
-  status: queued
+  status: done
+  date: 2026-11-04
 - id: 1password
   name: 1Password
   website: https://1password.com

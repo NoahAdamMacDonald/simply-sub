@@ -1,0 +1,314 @@
+# Researched by hand on 2026-11-04 (M11.15, the streaming category, batch 3), read through each country's exit (the
+# owner's choice of 2026-11-04). Canada's discovery+ is Rogers Sports & Media's, its own provider (discovery-plus-canada,
+# the owner's choice of 2026-11-04): Warner Bros. Discovery's "discovery+ service in Canada closed on 2/17/26" (its
+# help centre). Pages, each quoted where it's used:
+# Pricing: the US's discoveryplus.com through a US exit ("discovery+ $6.99/month" and "discovery+ (Ad-Free)
+# $11.99/month"; "Your subscription automatically renews every month"; its help centre: prices "increased for new
+# subscriptions in the U.S. on October 13, 2026"); the UK's help centre ("Entertainment - ￡3.99/month (including
+# VAT)"), Ireland's ("Basic (Entertainment) - €4.99/month (includes VAT)", "previously called Entertainment") and
+# Italy's discoveryplus.com/it/it ("Intrattenimento (con pubblicità) 2,89 €/mese"), each through its country's exit.
+# Annual plans are no longer sold in Europe.
+# Not listed: Italy's Intrattenimento (5,49 €/mese) and Intrattenimento + Sport (7,99 €/mese, with Eurosport): no page
+# states their video quality, which every streaming plan states.
+# Region checklist, 2026-11-04: 1. discoveryplus.com's country paths (/gb/en, /ie/en, /it/it) and its help centres'
+# country versions; 4. the plan cards, never past them; 6. Edge through each country's exit. The Netherlands' and
+# Spain's paths answer "Looks like this link isn't working", so discovery+ isn't sold there; Australia, New Zealand,
+# Germany and France aren't in its country lists.
+
+# Coverage: discovery-plus.with-ads and discovery-plus.ad-free in GB, IE and IT: Europe's discovery+ sells its own
+# plans, Entertainment among them (2026-11-04).
+
+# Coverage: discovery-plus.entertainment in US: the US sells its own two plans (2026-11-04).
+
+id: discovery-plus
+name: discovery+
+aliases: [discovery plus, discoveryplus]
+website: https://www.discoveryplus.com
+category: streaming
+spendCategory: streaming
+billingCurrency: { US: USD, GB: GBP, IE: EUR, IT: EUR }
+cancelUrl: https://help.discoveryplus.com/hc/en-us/articles/44215516756119-Cancel-discovery
+sources: { pricing: https://www.discoveryplus.com/ }
+# Ways to pay, read 2026-11-04 through a US exit: "any major credit card or PayPal" on discoveryplus.com, but "We
+# currently do not accept prepaid credit cards" (its help centre's "Methods of payment"), and app stores and internet,
+# mobile or TV providers (its terms). No card networks are named. Europe's lists aren't read yet.
+paymentMethods:
+  - methods: [card, paypal]
+    regions: [US]
+    page: 'Methods of payment'
+    url: https://help.discoveryplus.com/hc/en-us/articles/32717615053207-Methods-of-payment
+    quotes:
+      - 'you can pay for your subscription using any major credit card or PayPal'
+  - methods: [app-store, provider-billing]
+    regions: [US]
+    page: 'Terms of use'
+    url: https://www.wbd.com/dplus-us-visitor-agreement
+    quotes:
+      - 'through a third party (e.g., an app store or your internet, mobile or TV provider)'
+
+# Owner: Paramount Skydance Corporation, since it acquired Warner Bros. Discovery (Warner Bros. Discovery's investor
+# site, as for HBO Max; discovery+'s help centre: "Warner Bros. Discovery and Paramount Skydance are coming together as
+# Skydance"). Its US terms give Discovery Digital Ventures, LLC's New York address.
+owner:
+  name: 'Paramount Skydance Corporation, which acquired Warner Bros. Discovery'
+  website: https://ir.wbd.com
+  page:
+    name: 'Warner Bros. Discovery investor relations'
+    url: https://ir.wbd.com/investor-relations/default.aspx
+  quotes:
+    - 'Following the acquisition of Warner Bros. Discovery by Paramount Skydance Corporation'
+  country:
+    code: US
+    page:
+      name: Terms of use
+      url: https://www.wbd.com/dplus-us-visitor-agreement
+    quotes:
+      - 'New York, NY 10003'
+    lastVerified: 2026-11-04
+  lastVerified: 2026-11-04
+
+# Renewal day (M11.5), read 2026-11-04 through a US exit in its help centre.
+renewalAnchor:
+  kind: same-date
+  page: Automatic subscription renewal
+  url: https://help.discoveryplus.com/hc/en-us/articles/32717623996951-Automatic-subscription-renewal
+  quotes:
+    - 'You will be billed in monthly intervals, based on the date when you signed up.'
+  lastVerified: 2026-11-04
+
+# Apps (the cross-category features), read 2026-11-04: "Stream on your mobile device, tablet, computer, game console
+# and connected TV" (the US home page), with downloads "on iOS and Android mobile devices".
+features:
+  platforms: [ios, android, web, tv, console]
+
+# Features, read 2026-11-04: the US's plan cards ("Stream on 4 devices at once", "Full HD video resolution", Ad-Free's
+# "100 downloads to watch on the go", counted in titles with no number of devices, so 1, inferred; its help centre:
+# "on up to 4 devices at once"); Europe's help centres ("Up to two people can watch discovery+ at the same time from
+# any one account", the UK's, Ireland's and Italy's; the UK's Entertainment plan has "Ads in on-demand content" and "4K
+# UHD for select shows (not including live content)", and each country's plan includes live channels). Profiles: "up
+# to five unique, personalized profiles" (the US's help centre), "up to 5 profiles for everyone in your household"
+# (the UK's), and Family Profiles with parental controls in both. No French programmes are named.
+plans:
+  - id: discovery-plus.with-ads
+    name: With ads
+    link: https://www.discoveryplus.com/
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 4
+      streaming.profiles: 5
+      streaming.kids-profiles: true
+    notes: The US's discovery+ plan, with limited ads.
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 6.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.discoveryplus.com/,
+        }
+  - id: discovery-plus.ad-free
+    name: Ad-Free
+    link: https://www.discoveryplus.com/
+    features:
+      video.quality: 1080p
+      ad-free: true
+      streaming.concurrent-streams: 4
+      streaming.download-devices: 1
+      streaming.profiles: 5
+      streaming.kids-profiles: true
+    inferred:
+      streaming.download-devices:
+        reason: 'It allows 100 downloads on iOS and Android devices without saying how many devices, so at least one.'
+        page:
+          name: discovery+
+          url: https://www.discoveryplus.com/
+        lastVerified: 2026-11-04
+    notes: Some shows can still carry ads or promotions, its terms say.
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.discoveryplus.com/,
+        }
+  - id: discovery-plus.entertainment
+    name: Entertainment
+    link: https://www.discoveryplus.com/gb/en
+    features:
+      video.quality: 4k
+      ad-free: false
+      streaming.concurrent-streams: 2
+      streaming.profiles: 5
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels]
+    notes: Europe's discovery+ plan (Ireland's Basic, Italy's Intrattenimento con pubblicità), with live channels. 4K is for select shows in the UK; Ireland's and Italy's pages don't say.
+    prices:
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 3.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://support.discoveryplus.com/gb/Answer/Detail/000004067,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 4.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://support.discoveryplus.com/ie-en/Answer/Detail/000004067,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 2.89,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-04,
+          sourceUrl: https://www.discoveryplus.com/it/it,
+        }
+
+# Terms and policies, read 2026-11-04 (M11.15) through a US exit: discovery+'s US Terms of Use (Warner Bros. Discovery's,
+# "Last updated: June 23, 2025", much like HBO Max's), its US help centre's articles on cancelling and renewing, and
+# Warner Bros. Discovery's privacy policies, rated once as a shared document (data/policies/wbd-privacy.yaml). Europe's
+# terms (an English PDF for the UK and Ireland, an Italian one) aren't rated yet. Its sign-up form asks for an email
+# address first and opens the rest only after one is entered, so sign-up data stays unrated.
+policies:
+  shared: [wbd-privacy]
+  links:
+    - name: 'Terms of use'
+      url: https://www.wbd.com/dplus-us-visitor-agreement
+    - name: 'Cancel discovery+'
+      url: https://help.discoveryplus.com/hc/en-us/articles/44215516756119-Cancel-discovery
+  ratings:
+    - topic: privacy.sign-up-data
+      status: not-stated
+      reason: 'Its terms say an account needs a payment method but not what else it asks for; its sign-up form opens past the email address only once you enter one.'
+      pages: [https://www.wbd.com/dplus-us-visitor-agreement]
+      lastVerified: 2026-11-04
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can cancel online at any time and keep watching until the period ends, but at least 24 hours before it renews.'
+      sources:
+        - url: https://www.wbd.com/dplus-us-visitor-agreement
+          quote: 'YOU CAN CANCEL YOUR SUBSCRIPTION AT ANY TIME AND YOU WILL CONTINUE TO HAVE ACCESS TO THE DISCOVERY+ PLATFORM THROUGH THE END OF THE THEN-CURRENT BILLING PERIOD'
+        - url: https://www.wbd.com/dplus-us-visitor-agreement
+          quote: 'YOU MUST CANCEL YOUR SUBSCRIPTION AT LEAST 24 HOURS BEFORE IT RENEWS IN ORDER TO AVOID BEING CHARGED FOR THE NEXT CYCLE’S SUBSCRIPTION FEE.'
+        - url: https://help.discoveryplus.com/hc/en-us/articles/44215516756119-Cancel-discovery
+          quote: 'Cancel your subscription a day before your next billing date to avoid further charges.'
+      action:
+        name: 'Cancel discovery+'
+        url: https://help.discoveryplus.com/hc/en-us/articles/44215516756119-Cancel-discovery
+      lastVerified: 2026-11-04
+    - topic: billing.refunds
+      tier: neutral
+      reason: "You don't get money back when you cancel, but you keep watching until the end of the period."
+      sources:
+        - url: https://www.wbd.com/dplus-us-visitor-agreement
+          quote: 'WE DO NOT PROVIDE REFUNDS, CREDIT OR PRO RATED BILLING FOR CANCELLED SUBSCRIPTIONS.'
+      lastVerified: 2026-11-04
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It tells you about a new price as the law requires, without saying how far ahead.'
+      sources:
+        - url: https://www.wbd.com/dplus-us-visitor-agreement
+          quote: 'Your Subscription Provider may change the amount of the Subscription Fee and will communicate price changes to you in accordance with applicable law.'
+      lastVerified: 2026-11-04
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'A trial needs a payment method and turns into a paid subscription unless you cancel before it ends, and it won’t remind you unless the law requires.'
+      sources:
+        - url: https://www.wbd.com/dplus-us-visitor-agreement
+          quote: 'At the time you sign up for a Trial Subscription, you must provide a valid Payment Method in order to use the Platform during the Free Trial Period.'
+        - url: https://www.wbd.com/dplus-us-visitor-agreement
+          quote: 'You will not be notified that your Free Trial Period is about to end unless such notice is required by applicable law.'
+      lastVerified: 2026-11-04
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say a subscription renews on its own at the then-current rate, but not that it reminds you first.'
+      pages: [https://www.wbd.com/dplus-us-visitor-agreement]
+      lastVerified: 2026-11-04
+    - topic: billing.fees
+      tier: poor
+      reason: 'Its subscription fee includes "service fees" it doesn’t describe, besides taxes.'
+      sources:
+        - url: https://www.wbd.com/dplus-us-visitor-agreement
+          quote: 'the applicable Subscription fee together with any applicable taxes and service fees (collectively, the “Subscription Fee”)'
+      lastVerified: 2026-11-04
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its terms leave what switching plans costs to whoever bills you, and its help article gives only the steps.'
+      pages: [https://www.wbd.com/dplus-us-visitor-agreement]
+      lastVerified: 2026-11-04
+    - topic: legal.disputes
+      tier: poor
+      reason: 'You must take any dispute to private arbitration, one person at a time, with no class actions or jury. You can opt out of arbitration only if a mass arbitration leaves your claim unresolved.'
+      sources:
+        - url: https://www.wbd.com/dplus-us-visitor-agreement
+          quote: 'THESE TERMS REQUIRE THE USE OF ARBITRATION ON AN INDIVIDUAL BASIS TO RESOLVE DISPUTES, RATHER THAN COURTS OR JURY TRIALS'
+        - url: https://www.wbd.com/dplus-us-visitor-agreement
+          quote: 'If your claim is not resolved as part of the staged process identified above, either:'
+      action:
+        name: 'Its terms'
+        url: https://www.wbd.com/dplus-us-visitor-agreement
+      lastVerified: 2026-11-04
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It changes its terms by posting them, and using discovery+ afterwards, or not cancelling before you renew, means you accept them.'
+      sources:
+        - url: https://www.wbd.com/dplus-us-visitor-agreement
+          quote: 'We will communicate material changes to this Agreement by making the revised Terms available for your review on the Platform.'
+        - url: https://www.wbd.com/dplus-us-visitor-agreement
+          quote: 'By continuing to use the Platform after any revised Terms come into effect'
+      lastVerified: 2026-11-04
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can suspend or end your subscription and account at once, for any reason or none.'
+      sources:
+        - url: https://www.wbd.com/dplus-us-visitor-agreement
+          quote: 'Any Subscription Provider may suspend or terminate your Subscription and access to the Platform and/or your discovery+ Account immediately for any reason or for no reason whatsoever'
+      lastVerified: 2026-11-04
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change the price, what your plan includes or any part of discovery+ at any time, and remove shows without owing you anything.'
+      sources:
+        - url: https://www.wbd.com/dplus-us-visitor-agreement
+          quote: 'We reserve the right to modify this Agreement, the Subscription Fee, the benefits associated with any Subscription plan, additional conditions of your Subscription or change any part of the Platform at any time.'
+        - url: https://www.wbd.com/dplus-us-visitor-agreement
+          quote: 'in no event will we be liable for any claims, costs, or damages caused by or arising out of such actions'
+      lastVerified: 2026-11-04
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://www.wbd.com/dplus-us-visitor-agreement]
+      lastVerified: 2026-11-04
+    - topic: service.account-sharing
+      tier: poor
+      reason: 'Profiles are for your household only, as it decides, and it can limit or disable features to stop sharing outside it.'
+      sources:
+        - url: https://www.wbd.com/dplus-us-visitor-agreement
+          quote: 'Authorized Profiles are limited to members of your household, as determined by us in our discretion.'
+        - url: https://www.wbd.com/dplus-us-visitor-agreement
+          quote: 'we can modify access or disable features, including for security reasons, to limit the impact of account sharing outside of your household'
+      lastVerified: 2026-11-04
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Ad-Free allows 100 downloads; it sets how long they last in its apps, and may limit the devices you use.'
+      sources:
+        - url: https://www.wbd.com/dplus-us-visitor-agreement
+          quote: 'We may control the amount of Downloadable Content permissible for each discovery+ Account (across all Authorized Profiles and devices) and each Subscription Plan, and the expiration rules for each piece of Downloadable Content.'
+      lastVerified: 2026-11-04
