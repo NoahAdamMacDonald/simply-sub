@@ -24,8 +24,7 @@ category: streaming
 spendCategory: streaming
 billingCurrency: { CA: CAD, US: USD }
 cancelUrl: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
-sources:
-  { pricing: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing }
+sources: { pricing: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing }
 notes: Canada's and the US's prices; its other countries' pages couldn't be read.
 # Payment methods, read 2026-11-09 in its terms. Its pages name no card networks.
 paymentMethods:
@@ -316,7 +315,8 @@ policies:
     - topic: privacy.ai-training
       status: not-stated
       reason: 'Its privacy notice doesn’t say whether what you write or say to it trains AI.'
-      pages: [https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice]
+      pages:
+        [https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice]
       lastVerified: 2026-11-09
     - topic: privacy.data-retention
       tier: neutral
