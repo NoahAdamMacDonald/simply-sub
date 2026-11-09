@@ -99,8 +99,9 @@ export function currenciesIn(
 
 /**
  * How a page writes where a company is (owner.country, the owner's choice of 2026-11-03), beyond the country's English
- * and French names: its short forms and its people's ("Swiss", "Canada’s"), and the states and provinces an address
- * names instead of the country ("Bristol, Connecticut", "Toronto, Ontario"). American Express isn't American.
+ * and French names: its short forms and its people's ("Swiss", "Canada’s"), the states and provinces an address names
+ * instead of the country ("Bristol, Connecticut", "Toronto, Ontario"), and a country's own name where its pages use it
+ * ("Nederland"). American Express isn't American.
  */
 const countryWrittenAs: Readonly<Record<string, string>> = {
   US: [
@@ -191,6 +192,8 @@ const countryWrittenAs: Readonly<Record<string, string>> = {
   SE: 'Swedish|Suédois(?:es?)?',
   RO: 'Romanian|Roumaine?s?',
   GB: 'UK|U\\.K\\.|British|Britannique',
+  // Its own name too: Viaplay's Dutch help centre names Videoland's country only in Dutch (M11.15).
+  NL: 'Dutch|Néerlandaise?s?|Nederland(?:se)?',
 };
 
 /** A country's names in English and French (ICU's), escaped for a pattern; none where the runtime has no ICU names. */
